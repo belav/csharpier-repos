@@ -1126,8 +1126,7 @@ namespace System.Web.UI.WebControls
 
             if (authenticateEventArgs.Authenticated)
             {
-                System
-                    .Web
+                System.Web
                     .Security
                     .FormsAuthentication
                     .SetAuthCookie(UserNameInternal, RememberMeSet);
@@ -1142,8 +1141,7 @@ namespace System.Web.UI.WebControls
 
                 if (FailureAction == LoginFailureAction.RedirectToLoginPage)
                 {
-                    System
-                        .Web
+                    System.Web
                         .Security
                         .FormsAuthentication
                         .RedirectToLoginPage(_failureParameterName + "=1");

@@ -113,8 +113,7 @@ namespace Microsoft.CodeAnalysis
 
                 failureReason = null;
                 return new SymbolKeyResolution(
-                    reader
-                        .Compilation
+                    reader.Compilation
                         .CreateFunctionPointerTypeSymbol(
                             returnTypeSymbol,
                             returnRefKind,

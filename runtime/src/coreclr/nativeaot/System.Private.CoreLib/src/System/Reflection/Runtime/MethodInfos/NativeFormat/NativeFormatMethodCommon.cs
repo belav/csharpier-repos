@@ -32,8 +32,7 @@ namespace System.Reflection.Runtime.MethodInfos.NativeFormat
             out Exception exception
         )
         {
-            return ReflectionCoreExecution
-                .ExecutionEnvironment
+            return ReflectionCoreExecution.ExecutionEnvironment
                 .GetMethodInvoker(
                     DeclaringType,
                     new QMethodDefinition(Reader, MethodHandle),
@@ -229,12 +228,10 @@ namespace System.Reflection.Runtime.MethodInfos.NativeFormat
                 genericArgHandles = null;
             }
 
-            TypeManagerHandle typeManager = RuntimeAugments
-                .TypeLoaderCallbacks
+            TypeManagerHandle typeManager = RuntimeAugments.TypeLoaderCallbacks
                 .GetModuleForMetadataReader(Reader);
 
-            return RuntimeAugments
-                .TypeLoaderCallbacks
+            return RuntimeAugments.TypeLoaderCallbacks
                 .GetRuntimeMethodHandleForComponents(
                     DeclaringType.TypeHandle,
                     Name,

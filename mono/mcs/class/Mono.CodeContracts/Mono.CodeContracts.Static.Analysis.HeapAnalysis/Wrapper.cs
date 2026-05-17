@@ -141,10 +141,11 @@ namespace Mono.CodeContracts.Static.Analysis.HeapAnalysis
             if (this.Item is Method)
                 this.MetaDataProvider.IsVisibleFrom((Method)(object)this.Item, declaringType);
             if (this.Item is Parameter)
-                this.MetaDataProvider.Equal(
-                    this.MetaDataProvider.DeclaringMethod((Parameter)(object)this.Item),
-                    method
-                );
+                this.MetaDataProvider
+                    .Equal(
+                        this.MetaDataProvider.DeclaringMethod((Parameter)(object)this.Item),
+                        method
+                    );
             if (this.Item is Local)
             {
                 var local = (Local)(object)this.Item;
@@ -162,9 +163,8 @@ namespace Mono.CodeContracts.Static.Analysis.HeapAnalysis
         public override TypeNode FieldAddressType()
         {
             if (this.Item is Field)
-                return this.MetaDataProvider.ManagedPointer(
-                    this.MetaDataProvider.FieldType((Field)(object)this.Item)
-                );
+                return this.MetaDataProvider
+                    .ManagedPointer(this.MetaDataProvider.FieldType((Field)(object)this.Item));
 
             throw new InvalidOperationException();
         }

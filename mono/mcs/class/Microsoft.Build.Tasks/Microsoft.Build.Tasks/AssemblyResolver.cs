@@ -104,8 +104,7 @@ namespace Microsoft.Build.Tasks
                     {
                         version_info = new DirectoryInfo(version_token);
                         version = new Version(
-                            version_info
-                                .Name
+                            version_info.Name
                                 .Split(new char[] { '_' }, StringSplitOptions.RemoveEmptyEntries)[0]
                         );
 

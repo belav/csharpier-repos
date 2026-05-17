@@ -63,8 +63,7 @@ namespace System.ServiceModel.Channels
         public virtual Message Receive(TimeSpan timeout)
         {
             if (timeout < TimeSpan.Zero)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentOutOfRangeException(
                             "timeout",
@@ -91,8 +90,7 @@ namespace System.ServiceModel.Channels
         {
             if (timeout < TimeSpan.Zero)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentOutOfRangeException(
                             "timeout",
@@ -116,8 +114,7 @@ namespace System.ServiceModel.Channels
         {
             if (timeout < TimeSpan.Zero)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentOutOfRangeException(
                             "timeout",
@@ -139,8 +136,7 @@ namespace System.ServiceModel.Channels
         {
             if (timeout < TimeSpan.Zero)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentOutOfRangeException(
                             "timeout",
@@ -163,8 +159,7 @@ namespace System.ServiceModel.Channels
         {
             if (timeout < TimeSpan.Zero)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentOutOfRangeException(
                             "timeout",
@@ -185,8 +180,7 @@ namespace System.ServiceModel.Channels
         )
         {
             if (timeout < TimeSpan.Zero)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentOutOfRangeException(
                             "timeout",
@@ -214,8 +208,7 @@ namespace System.ServiceModel.Channels
             }
             else
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(CreateReceiveTimedOutException(channel, timeout));
             }
         }
@@ -273,8 +266,7 @@ namespace System.ServiceModel.Channels
             {
                 if (!this.channel.EndTryReceive(result, out this.message))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             InputChannel.CreateReceiveTimedOutException(this.channel, this.timeout)
                         );

@@ -22,8 +22,7 @@ namespace System.Net
             try
             {
                 if (
-                    UnsafeNclNativeMethods
-                        .WinHttp
+                    UnsafeNclNativeMethods.WinHttp
                         .WinHttpGetIEProxyConfigForCurrentUser(ref ieProxyConfig)
                 )
                 {

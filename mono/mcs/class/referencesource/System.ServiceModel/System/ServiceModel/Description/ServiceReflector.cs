@@ -156,8 +156,7 @@ namespace System.ServiceModel.Description
                 }
             }
             Fx.Assert("Too Many Names");
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(
                     new InvalidOperationException(
                         String.Format(
@@ -173,8 +172,7 @@ namespace System.ServiceModel.Description
         {
             Uri uri;
             if (!Uri.TryCreate(ns, UriKind.RelativeOrAbsolute, out uri))
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(SR.GetString(SR.SFXUnvalidNamespaceValue, ns, propName));
         }
 
@@ -182,8 +180,7 @@ namespace System.ServiceModel.Description
         {
             Uri uri;
             if (!Uri.TryCreate(ns, UriKind.RelativeOrAbsolute, out uri))
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(paramName, SR.GetString(SR.SFXUnvalidNamespaceParam, ns));
         }
 
@@ -297,8 +294,7 @@ namespace System.ServiceModel.Description
             }
             catch (XmlException e)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentException(e.Message, "name"));
             }
         }
@@ -418,8 +414,7 @@ namespace System.ServiceModel.Description
                 Type t = GetAncestorImplicitContractClass(service);
                 if (t != null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(
@@ -435,8 +430,7 @@ namespace System.ServiceModel.Description
                     Type operationContractProviderType = GetOperationContractProviderType(method);
                     if (operationContractProviderType == OperationContractAttributeType)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(
                                     SR.GetString(
@@ -456,8 +450,7 @@ namespace System.ServiceModel.Description
                 {
                     if (implicitContract)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(
                                     SR.GetString(
@@ -549,8 +542,7 @@ namespace System.ServiceModel.Description
                 // there is no good way to know if this is a return type attribute
                 if (type != null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(
@@ -564,8 +556,7 @@ namespace System.ServiceModel.Description
                 }
                 else if (method != null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(
@@ -583,8 +574,7 @@ namespace System.ServiceModel.Description
                     method = param.Member as MethodInfo;
                     if (method != null)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(
                                     SR.GetString(
@@ -599,8 +589,7 @@ namespace System.ServiceModel.Description
                             );
                     }
                 }
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(SR.SFxErrorReflectionOnUnknown1, attrType.Name),
@@ -637,8 +626,7 @@ namespace System.ServiceModel.Description
             }
             else if (attrs.Length > 1)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(
@@ -667,8 +655,7 @@ namespace System.ServiceModel.Description
             }
             else if (attrs.Length > 1)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(
@@ -692,8 +679,7 @@ namespace System.ServiceModel.Description
             T result = GetSingleAttribute<T>(attrProvider);
             if (result == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(
@@ -715,8 +701,7 @@ namespace System.ServiceModel.Description
             object result = GetSingleAttribute(attrType, attrProvider);
             if (result == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(
@@ -750,8 +735,7 @@ namespace System.ServiceModel.Description
                     object[] attrs = GetCustomAttributes(attrProvider, otherType);
                     if (attrs != null && attrs.Length > 0)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(
                                     SR.GetString(
@@ -786,8 +770,7 @@ namespace System.ServiceModel.Description
                     object[] attrs = GetCustomAttributes(attrProvider, otherType);
                     if (attrs != null && attrs.Length > 0)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(
                                     SR.GetString(
@@ -814,8 +797,7 @@ namespace System.ServiceModel.Description
             T result = GetSingleAttribute<T>(attrProvider, attrTypeGroup);
             if (result == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(
@@ -838,8 +820,7 @@ namespace System.ServiceModel.Description
             object result = GetSingleAttribute(attrType, attrProvider, attrTypeGroup);
             if (result == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(
@@ -874,8 +855,7 @@ namespace System.ServiceModel.Description
             List<Type> types = new List<Type>(GetInheritedContractTypes(interfaceType));
             if (types.Count == 0)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(
@@ -904,8 +884,7 @@ namespace System.ServiceModel.Description
                     return potentialContractRoot;
                 }
             }
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(
                     new InvalidOperationException(
                         SR.GetString(SR.SFxNoMostDerivedContract, interfaceType.Name)
@@ -951,8 +930,7 @@ namespace System.ServiceModel.Description
                 {
                     if (parameter.IsOut)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(
                                     SR.GetString(
@@ -968,8 +946,7 @@ namespace System.ServiceModel.Description
                 {
                     if (parameter.IsIn && !parameter.IsOut)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(
                                     SR.GetString(
@@ -1093,13 +1070,11 @@ namespace System.ServiceModel.Description
         {
             string logicalName = GetLogicalName(beginMethod);
             string endMethodName = EndMethodNamePrefix + logicalName;
-            MemberInfo[] endMethods = beginMethod
-                .DeclaringType
+            MemberInfo[] endMethods = beginMethod.DeclaringType
                 .GetMember(endMethodName, ServiceModelBindingFlags);
             if (endMethods.Length == 0)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(
@@ -1113,8 +1088,7 @@ namespace System.ServiceModel.Description
             }
             if (endMethods.Length > 1)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(
@@ -1135,8 +1109,7 @@ namespace System.ServiceModel.Description
 
             if (!HasEndMethodShape(endMethod))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(
@@ -1179,8 +1152,7 @@ namespace System.ServiceModel.Description
             {
                 if (!HasBeginMethodShape(method))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(

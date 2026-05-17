@@ -21,8 +21,7 @@ namespace System.ServiceModel
             }
 
             if (xmlLang == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new XmlException(SR.GetString(SR.XmlLangAttributeMissing)));
 
             return xmlLang;
@@ -120,8 +119,7 @@ namespace System.ServiceModel
             else
             {
                 if (index == qname.Length - 1)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new XmlException(SR.GetString(SR.InvalidXmlQualifiedName, qname))
                         );
@@ -130,8 +128,7 @@ namespace System.ServiceModel
             }
             ns = reader.LookupNamespace(prefix);
             if (ns == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new XmlException(SR.GetString(SR.UnboundPrefixInQName, qname))
                     );

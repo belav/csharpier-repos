@@ -740,8 +740,7 @@ namespace System.Web.UI.MobileControls
                     if (InDesigner)
                     {
                         // Indicate to the designer that it needs to add a prefix.
-                        System
-                            .Web
+                        System.Web
                             .UI
                             .Design
                             .MobileControls

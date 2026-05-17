@@ -55,8 +55,7 @@ public struct EventDescriptor
                             "System.Security.Permissions",
                             "HostProtectionAttribute"
                         );
-                        NamedTypeSymbol hostProtectionAttr = sourceAssembly
-                            .CorLibrary
+                        NamedTypeSymbol hostProtectionAttr = sourceAssembly.CorLibrary
                             .LookupDeclaredTopLevelMetadataType(ref emittedName);
                         Assert.NotNull(hostProtectionAttr);
 
@@ -2409,8 +2408,7 @@ public class MyClass
                     GetUniqueName(),
                     new[] { syntaxTree },
                     new[] { MscorlibRef },
-                    TestOptions
-                        .ReleaseDll
+                    TestOptions.ReleaseDll
                         .WithXmlReferenceResolver(new XmlFileResolver(tempDir.Path))
                 );
 
@@ -2429,8 +2427,7 @@ public class MyClass
                     var emitResult = comp.Emit(output);
 
                     Assert.False(emitResult.Success);
-                    emitResult
-                        .Diagnostics
+                    emitResult.Diagnostics
                         .VerifyErrorCodes(
                             Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr),
                             Diagnostic(ErrorCode.ERR_PermissionSetAttributeFileReadError)

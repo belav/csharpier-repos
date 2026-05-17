@@ -235,8 +235,7 @@ public abstract class JsonOutputFormatterTestBase
         Encoding encoding = null;
         if (isDefaultEncoding)
         {
-            encoding = formatter
-                .SupportedEncodings
+            encoding = formatter.SupportedEncodings
                 .First(
                     (e) => e.WebName.Equals(encodingAsString, StringComparison.OrdinalIgnoreCase)
                 );

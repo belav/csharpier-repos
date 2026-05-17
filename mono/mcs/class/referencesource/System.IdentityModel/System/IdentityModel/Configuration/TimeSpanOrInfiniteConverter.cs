@@ -26,8 +26,7 @@ namespace System.IdentityModel.Configuration
 
             if (!(value is TimeSpan))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(
                         "value",
                         SR.GetString(SR.ID8028, typeof(TimeSpan), value.GetType())

@@ -114,8 +114,7 @@ namespace Microsoft.VisualBasic.Tests
 
             for (int i = 0; i < n; i++)
             {
-                System
-                    .IO
+                System.IO
                     .File
                     .WriteAllText(
                         System.IO.Path.Combine(TestDirectory, fileNames[i]),
@@ -639,8 +638,7 @@ namespace Microsoft.VisualBasic.Tests
                         (fileName, text) =>
                         {
                             using (
-                                var stream = System
-                                    .IO
+                                var stream = System.IO
                                     .File
                                     .Open(
                                         fileName,

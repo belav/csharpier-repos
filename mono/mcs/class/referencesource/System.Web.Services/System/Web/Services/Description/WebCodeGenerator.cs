@@ -56,17 +56,21 @@ namespace System.Web.Services.Description
                         }
                     }
                     AssemblyName assemblyName = a.GetName();
-                    decl.Arguments.Add(
-                        new CodeAttributeArgument(new CodePrimitiveExpression(assemblyName.Name))
-                    );
-                    string version = GetProductVersion(a);
-                    decl.Arguments.Add(
-                        new CodeAttributeArgument(
-                            new CodePrimitiveExpression(
-                                version == null ? assemblyName.Version.ToString() : version
+                    decl.Arguments
+                        .Add(
+                            new CodeAttributeArgument(
+                                new CodePrimitiveExpression(assemblyName.Name)
                             )
-                        )
-                    );
+                        );
+                    string version = GetProductVersion(a);
+                    decl.Arguments
+                        .Add(
+                            new CodeAttributeArgument(
+                                new CodePrimitiveExpression(
+                                    version == null ? assemblyName.Version.ToString() : version
+                                )
+                            )
+                        );
                     generatedCodeAttribute = decl;
                 }
                 return generatedCodeAttribute;
@@ -425,8 +429,7 @@ namespace System.Web.Services.Description
             eventCompleted.Attributes =
                 (eventCompleted.Attributes & ~MemberAttributes.AccessMask)
                 | MemberAttributes.Public;
-            eventCompleted
-                .Comments
+            eventCompleted.Comments
                 .Add(new CodeCommentStatement(Res.GetString(Res.CodeRemarks), true));
             members.Add(eventCompleted);
         }
@@ -440,8 +443,7 @@ namespace System.Web.Services.Description
         {
             CodeTypeDelegate handler = new CodeTypeDelegate(handlerType);
             handler.CustomAttributes.Add(GeneratedCodeAttribute);
-            handler
-                .Parameters
+            handler.Parameters
                 .Add(new CodeParameterDeclarationExpression(typeof(object), "sender"));
             handler.Parameters.Add(new CodeParameterDeclarationExpression(handlerArgs, "e"));
             handler.Comments.Add(new CodeCommentStatement(Res.GetString(Res.CodeRemarks), true));
@@ -526,8 +528,7 @@ namespace System.Web.Services.Description
                 )
             );
 
-            asyncCompleted
-                .Statements
+            asyncCompleted.Statements
                 .Add(new CodeConditionStatement(checkIfNull, trueStatements, new CodeStatement[0]));
         }
 
@@ -552,8 +553,7 @@ namespace System.Web.Services.Description
                 CodeFlags.IsPublic
             );
 
-            asyncCodeMethod
-                .Comments
+            asyncCodeMethod.Comments
                 .Add(new CodeCommentStatement(Res.GetString(Res.CodeRemarks), true));
             CodeMethodInvokeExpression invoke = new CodeMethodInvokeExpression(
                 new CodeThisReferenceExpression(),
@@ -578,12 +578,10 @@ namespace System.Web.Services.Description
                 CodeFlags.IsPublic
             );
 
-            asyncCodeMethod
-                .Comments
+            asyncCodeMethod.Comments
                 .Add(new CodeCommentStatement(Res.GetString(Res.CodeRemarks), true));
 
-            asyncCodeMethod
-                .Parameters
+            asyncCodeMethod.Parameters
                 .Add(new CodeParameterDeclarationExpression(typeof(object), userState));
 
             CodeFieldReferenceExpression member = new CodeFieldReferenceExpression(
@@ -604,8 +602,7 @@ namespace System.Web.Services.Description
             {
                 new CodeAssignStatement(member, createDelegate),
             };
-            asyncCodeMethod
-                .Statements
+            asyncCodeMethod.Statements
                 .Add(new CodeConditionStatement(checkIfNull, trueStatements, new CodeStatement[0]));
 
             return asyncCodeMethod;
@@ -622,12 +619,10 @@ namespace System.Web.Services.Description
             codeClass.CustomAttributes.Add(GeneratedCodeAttribute);
 
             // Add [DebuggerStepThrough]
-            codeClass
-                .CustomAttributes
+            codeClass.CustomAttributes
                 .Add(new CodeAttributeDeclaration(typeof(DebuggerStepThroughAttribute).FullName));
             // Add [DesignerCategory("code")]
-            codeClass
-                .CustomAttributes
+            codeClass.CustomAttributes
                 .Add(
                     new CodeAttributeDeclaration(
                         typeof(DesignerCategoryAttribute).FullName,
@@ -666,24 +661,26 @@ namespace System.Web.Services.Description
                 results
             );
             ctor.Parameters.Add(param);
-            ctor.Parameters.Add(
-                new CodeParameterDeclarationExpression(typeof(Exception), "exception")
-            );
+            ctor.Parameters
+                .Add(new CodeParameterDeclarationExpression(typeof(Exception), "exception"));
             ctor.Parameters.Add(new CodeParameterDeclarationExpression(typeof(bool), "cancelled"));
-            ctor.Parameters.Add(
-                new CodeParameterDeclarationExpression(typeof(object), "userState")
-            );
+            ctor.Parameters
+                .Add(new CodeParameterDeclarationExpression(typeof(object), "userState"));
 
             ctor.BaseConstructorArgs.Add(new CodeArgumentReferenceExpression("exception"));
             ctor.BaseConstructorArgs.Add(new CodeArgumentReferenceExpression("cancelled"));
             ctor.BaseConstructorArgs.Add(new CodeArgumentReferenceExpression("userState"));
 
-            ctor.Statements.Add(
-                new CodeAssignStatement(
-                    new CodeFieldReferenceExpression(new CodeThisReferenceExpression(), data.Name),
-                    new CodeArgumentReferenceExpression(results)
-                )
-            );
+            ctor.Statements
+                .Add(
+                    new CodeAssignStatement(
+                        new CodeFieldReferenceExpression(
+                            new CodeThisReferenceExpression(),
+                            data.Name
+                        ),
+                        new CodeArgumentReferenceExpression(results)
+                    )
+                );
 
             codeClass.Members.Add(ctor);
 
@@ -692,8 +689,7 @@ namespace System.Web.Services.Description
             {
                 if (paramNames[i] != null)
                 {
-                    codeClass
-                        .Members
+                    codeClass.Members
                         .Add(
                             CreatePropertyDeclaration(data, paramNames[i], paramTypes[i], index++)
                         );
@@ -716,13 +712,14 @@ namespace System.Web.Services.Description
             prop.Attributes =
                 (prop.Attributes & ~MemberAttributes.AccessMask) | MemberAttributes.Public;
             //add get
-            prop.GetStatements.Add(
-                new CodeMethodInvokeExpression(
-                    new CodeThisReferenceExpression(),
-                    "RaiseExceptionIfNecessary",
-                    new CodeExpression[0]
-                )
-            );
+            prop.GetStatements
+                .Add(
+                    new CodeMethodInvokeExpression(
+                        new CodeThisReferenceExpression(),
+                        "RaiseExceptionIfNecessary",
+                        new CodeExpression[0]
+                    )
+                );
             CodeArrayIndexerExpression valueRef = new CodeArrayIndexerExpression();
             valueRef.TargetObject = new CodeFieldReferenceExpression(
                 new CodeThisReferenceExpression(),

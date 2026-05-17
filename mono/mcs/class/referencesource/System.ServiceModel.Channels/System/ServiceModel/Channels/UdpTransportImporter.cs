@@ -42,8 +42,7 @@ namespace System.ServiceModel.Channels
                                     )
                                 )
                                 {
-                                    WsdlImporter
-                                        .SoapInPolicyWorkaroundHelper
+                                    WsdlImporter.SoapInPolicyWorkaroundHelper
                                         .InsertAdHocPolicy(
                                             wsdlBinding,
                                             soapBinding.Transport,
@@ -60,8 +59,7 @@ namespace System.ServiceModel.Channels
         public void ImportPolicy(MetadataImporter importer, PolicyConversionContext context)
         {
             XmlQualifiedName wsdlBindingQName;
-            string transportUri = WsdlImporter
-                .SoapInPolicyWorkaroundHelper
+            string transportUri = WsdlImporter.SoapInPolicyWorkaroundHelper
                 .FindAdHocPolicy(context, this.udpTransportUriKey, out wsdlBindingQName);
 
             if (
@@ -95,8 +93,7 @@ namespace System.ServiceModel.Channels
                 throw FxTrace.Exception.ArgumentNull("context.Endpoint.Binding");
             }
 
-            BindingElementCollection bindingElements = context
-                .Endpoint
+            BindingElementCollection bindingElements = context.Endpoint
                 .Binding
                 .CreateBindingElements();
             TransportBindingElement transportBindingElement =
@@ -133,8 +130,7 @@ namespace System.ServiceModel.Channels
 
             if (context.WsdlPort != null)
             {
-                address = context.Endpoint.Address = WsdlImporter
-                    .WSAddressingHelper
+                address = context.Endpoint.Address = WsdlImporter.WSAddressingHelper
                     .ImportAddress(context.WsdlPort);
             }
 

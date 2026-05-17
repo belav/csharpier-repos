@@ -100,8 +100,7 @@ namespace Internal.IL
             {
                 MethodSignatureBuilder builder = new MethodSignatureBuilder(template);
 
-                builder.ReturnType = template
-                    .ReturnType
+                builder.ReturnType = template.ReturnType
                     .InstantiateSignature(_typeInstantiation, _methodInstantiation);
                 for (int i = 0; i < template.Length; i++)
                     builder[i] = template[i]

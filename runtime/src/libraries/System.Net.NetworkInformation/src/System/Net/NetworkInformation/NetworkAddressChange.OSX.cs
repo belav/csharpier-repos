@@ -138,13 +138,11 @@ namespace System.Net.NetworkInformation
 
             Interop.SystemConfiguration.SCDynamicStoreContext storeContext = default;
             using (
-                SafeCreateHandle storeName = Interop
-                    .CoreFoundation
+                SafeCreateHandle storeName = Interop.CoreFoundation
                     .CFStringCreateWithCString("NetworkAddressChange.OSX")
             )
             {
-                s_dynamicStoreRef = Interop
-                    .SystemConfiguration
+                s_dynamicStoreRef = Interop.SystemConfiguration
                     .SCDynamicStoreCreate(
                         storeName.DangerousGetHandle(),
                         &OnAddressChanged,
@@ -155,23 +153,19 @@ namespace System.Net.NetworkInformation
             // Notification key string parts. We want to match notification keys
             // for any kind of IP address change, addition, or removal.
             using (
-                SafeCreateHandle dynamicStoreDomainStateString = Interop
-                    .CoreFoundation
+                SafeCreateHandle dynamicStoreDomainStateString = Interop.CoreFoundation
                     .CFStringCreateWithCString("State:")
             )
             using (
-                SafeCreateHandle compAnyRegexString = Interop
-                    .CoreFoundation
+                SafeCreateHandle compAnyRegexString = Interop.CoreFoundation
                     .CFStringCreateWithCString("[^/]+")
             )
             using (
-                SafeCreateHandle entNetIpv4String = Interop
-                    .CoreFoundation
+                SafeCreateHandle entNetIpv4String = Interop.CoreFoundation
                     .CFStringCreateWithCString("IPv4")
             )
             using (
-                SafeCreateHandle entNetIpv6String = Interop
-                    .CoreFoundation
+                SafeCreateHandle entNetIpv6String = Interop.CoreFoundation
                     .CFStringCreateWithCString("IPv6")
             )
             {
@@ -188,8 +182,7 @@ namespace System.Net.NetworkInformation
                 }
 
                 using (
-                    SafeCreateHandle ipv4Pattern = Interop
-                        .SystemConfiguration
+                    SafeCreateHandle ipv4Pattern = Interop.SystemConfiguration
                         .SCDynamicStoreKeyCreateNetworkServiceEntity(
                             dynamicStoreDomainStateString.DangerousGetHandle(),
                             compAnyRegexString.DangerousGetHandle(),
@@ -197,8 +190,7 @@ namespace System.Net.NetworkInformation
                         )
                 )
                 using (
-                    SafeCreateHandle ipv6Pattern = Interop
-                        .SystemConfiguration
+                    SafeCreateHandle ipv6Pattern = Interop.SystemConfiguration
                         .SCDynamicStoreKeyCreateNetworkServiceEntity(
                             dynamicStoreDomainStateString.DangerousGetHandle(),
                             compAnyRegexString.DangerousGetHandle(),
@@ -206,8 +198,7 @@ namespace System.Net.NetworkInformation
                         )
                 )
                 using (
-                    SafeCreateHandle patterns = Interop
-                        .CoreFoundation
+                    SafeCreateHandle patterns = Interop.CoreFoundation
                         .CFArrayCreate(
                             new CFStringRef[2]
                             {
@@ -221,8 +212,7 @@ namespace System.Net.NetworkInformation
                     // Try to register our pattern strings with the dynamic store instance.
                     if (
                         patterns.IsInvalid
-                        || !Interop
-                            .SystemConfiguration
+                        || !Interop.SystemConfiguration
                             .SCDynamicStoreSetNotificationKeys(
                                 s_dynamicStoreRef.DangerousGetHandle(),
                                 IntPtr.Zero,
@@ -236,8 +226,7 @@ namespace System.Net.NetworkInformation
                     }
 
                     // Create a "RunLoopSource" that can be added to our listener thread's RunLoop.
-                    s_runLoopSource = Interop
-                        .SystemConfiguration
+                    s_runLoopSource = Interop.SystemConfiguration
                         .SCDynamicStoreCreateRunLoopSource(
                             s_dynamicStoreRef.DangerousGetHandle(),
                             IntPtr.Zero
@@ -258,8 +247,7 @@ namespace System.Net.NetworkInformation
             Debug.Assert(s_runLoop == IntPtr.Zero);
 
             s_runLoop = Interop.RunLoop.CFRunLoopGetCurrent();
-            Interop
-                .RunLoop
+            Interop.RunLoop
                 .CFRunLoopAddSource(
                     s_runLoop,
                     s_runLoopSource!.DangerousGetHandle(),
@@ -269,8 +257,7 @@ namespace System.Net.NetworkInformation
             s_runLoopStartedEvent.Set();
             Interop.RunLoop.CFRunLoopRun();
 
-            Interop
-                .RunLoop
+            Interop.RunLoop
                 .CFRunLoopRemoveSource(
                     s_runLoop,
                     s_runLoopSource.DangerousGetHandle(),

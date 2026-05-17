@@ -74,8 +74,7 @@ namespace System.Data.SqlClient
         private CommandBehavior _commandBehavior;
 
         private static int _objectTypeCount; // Bid counter
-        internal readonly int ObjectID = System
-            .Threading
+        internal readonly int ObjectID = System.Threading
             .Interlocked
             .Increment(ref _objectTypeCount);
 
@@ -953,8 +952,7 @@ namespace System.Data.SqlClient
                 // iib.
                 // now read the remaining values off the wire for this row
                 if (
-                    !_stateObj
-                        .Parser
+                    !_stateObj.Parser
                         .TrySkipRow(_metaData, _sharedState._nextColumnHeaderToRead, _stateObj)
                 )
                 {
@@ -1061,8 +1059,7 @@ namespace System.Data.SqlClient
                     try
                     {
                         // Wait for the task to complete
-                        ((IAsyncResult)currentTask)
-                            .AsyncWaitHandle
+                        ((IAsyncResult)currentTask).AsyncWaitHandle
                             .WaitOne();
 
                         // Ensure that we've finished reading any pending data
@@ -4965,8 +4962,7 @@ namespace System.Data.SqlClient
                     {
                         ulong ignored;
                         if (
-                            !_stateObj
-                                .Parser
+                            !_stateObj.Parser
                                 .TrySkipPlpValue(UInt64.MaxValue, _stateObj, out ignored)
                         )
                         {
@@ -6346,8 +6342,7 @@ namespace System.Data.SqlClient
             }
             else
             {
-                return completionSource
-                    .Task
+                return completionSource.Task
                     .ContinueWith(
                         (retryTask) =>
                         {

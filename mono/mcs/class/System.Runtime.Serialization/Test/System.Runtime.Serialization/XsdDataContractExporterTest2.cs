@@ -131,8 +131,7 @@ namespace MonoTests.System.Runtime.Serialization
             var customEQN = customElement.QualifiedName;
             Assert.That(customEQN.Namespace, Is.EqualTo(typeName.Namespace), "#10d");
             Assert.That(
-                customEQN
-                    .Name
+                customEQN.Name
                     .StartsWith(
                         "XsdDataContractExporterTest2.MyCollectionOfstring",
                         StringComparison.InvariantCultureIgnoreCase

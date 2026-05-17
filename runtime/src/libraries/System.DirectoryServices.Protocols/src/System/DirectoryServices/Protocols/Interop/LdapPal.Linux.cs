@@ -20,8 +20,7 @@ namespace System.DirectoryServices.Protocols
             IntPtr clientcontrol,
             ref int messageNumber
         ) =>
-            Interop
-                .Ldap
+            Interop.Ldap
                 .ldap_add(ldapHandle, dn, attrs, servercontrol, clientcontrol, ref messageNumber);
 
         internal static int CompareDirectoryEntries(
@@ -35,8 +34,7 @@ namespace System.DirectoryServices.Protocols
             IntPtr clientcontrol,
             ref int messageNumber
         ) =>
-            Interop
-                .Ldap
+            Interop.Ldap
                 .ldap_compare(
                     ldapHandle,
                     dn,
@@ -67,8 +65,7 @@ namespace System.DirectoryServices.Protocols
             IntPtr clientcontrol,
             ref int messageNumber
         ) =>
-            Interop
-                .Ldap
+            Interop.Ldap
                 .ldap_delete_ext(ldapHandle, dn, servercontrol, clientcontrol, ref messageNumber);
 
         internal static int ExtendedDirectoryOperation(
@@ -79,8 +76,7 @@ namespace System.DirectoryServices.Protocols
             IntPtr clientcontrol,
             ref int messageNumber
         ) =>
-            Interop
-                .Ldap
+            Interop.Ldap
                 .ldap_extended_operation(
                     ldapHandle,
                     oid,
@@ -112,8 +108,7 @@ namespace System.DirectoryServices.Protocols
         internal static int GetLastErrorFromConnection(ConnectionHandle ldapHandle)
         {
             int result = 0;
-            Interop
-                .Ldap
+            Interop.Ldap
                 .ldap_get_option_int(ldapHandle, LdapOption.LDAP_OPT_ERROR_NUMBER, ref result);
             return result;
         }
@@ -173,8 +168,7 @@ namespace System.DirectoryServices.Protocols
             IntPtr clientcontrol,
             ref int messageNumber
         ) =>
-            Interop
-                .Ldap
+            Interop.Ldap
                 .ldap_modify(
                     ldapHandle,
                     dn,
@@ -222,8 +216,7 @@ namespace System.DirectoryServices.Protocols
             ref IntPtr control,
             byte freeIt
         ) =>
-            Interop
-                .Ldap
+            Interop.Ldap
                 .ldap_parse_result(
                     ldapHandle,
                     result,
@@ -245,8 +238,7 @@ namespace System.DirectoryServices.Protocols
             IntPtr control,
             byte freeIt
         ) =>
-            Interop
-                .Ldap
+            Interop.Ldap
                 .ldap_parse_result_referral(
                     ldapHandle,
                     result,
@@ -268,8 +260,7 @@ namespace System.DirectoryServices.Protocols
             IntPtr clientcontrol,
             ref int messageNumber
         ) =>
-            Interop
-                .Ldap
+            Interop.Ldap
                 .ldap_rename(
                     ldapHandle,
                     dn,
@@ -316,8 +307,7 @@ namespace System.DirectoryServices.Protocols
                 //-1 means no time limit
                 searchTimeout.tv_sec = -1;
 
-            return Interop
-                .Ldap
+            return Interop.Ldap
                 .ldap_search(
                     ldapHandle,
                     dn,
@@ -385,8 +375,7 @@ namespace System.DirectoryServices.Protocols
                     bv_val = passwordPtr,
                 };
 
-                return Interop
-                    .Ldap
+                return Interop.Ldap
                     .ldap_sasl_bind(
                         ld,
                         who,

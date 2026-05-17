@@ -103,8 +103,7 @@ public abstract class Http2ConnectionBenchmarkBase
         );
 
         _connectionPair.Application.Output.Write(Http2Connection.ClientPreface);
-        _connectionPair
-            .Application
+        _connectionPair.Application
             .Output
             .WriteSettings(new Http2PeerSettings { InitialWindowSize = 2147483647 });
         _connectionPair.Application.Output.FlushAsync().GetAwaiter().GetResult();
@@ -123,8 +122,7 @@ public abstract class Http2ConnectionBenchmarkBase
     {
         _requestHeadersEnumerator.Initialize(_httpRequestHeaders);
         _requestHeadersEnumerator.MoveNext();
-        _connectionPair
-            .Application
+        _connectionPair.Application
             .Output
             .WriteStartStream(
                 streamId: _currentStreamId,
@@ -152,8 +150,7 @@ public abstract class Http2ConnectionBenchmarkBase
 
             if (_dataWritten > 1024 * 32)
             {
-                _connectionPair
-                    .Application
+                _connectionPair.Application
                     .Output
                     .WriteWindowUpdateAsync(streamId: 0, _dataWritten, _sendHttpFrame);
                 await _connectionPair.Application.Output.FlushAsync();

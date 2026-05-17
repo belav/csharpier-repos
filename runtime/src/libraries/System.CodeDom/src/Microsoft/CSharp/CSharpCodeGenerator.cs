@@ -2694,8 +2694,7 @@ namespace Microsoft.CSharp
                 // other attributes.
 
                 if (
-                    current
-                        .Name
+                    current.Name
                         .Equals("system.paramarrayattribute", StringComparison.OrdinalIgnoreCase)
                 )
                 {

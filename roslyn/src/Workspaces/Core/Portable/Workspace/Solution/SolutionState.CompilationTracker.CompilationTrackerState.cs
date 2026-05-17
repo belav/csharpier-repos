@@ -158,8 +158,7 @@ namespace Microsoft.CodeAnalysis
                         foreach (var generatedDocument in generatorInfo.Documents.States.Values)
                         {
                             Contract.ThrowIfTrue(
-                                compilation
-                                    .SyntaxTrees
+                                compilation.SyntaxTrees
                                     .Contains(
                                         generatedDocument.GetSyntaxTree(CancellationToken.None)
                                     )

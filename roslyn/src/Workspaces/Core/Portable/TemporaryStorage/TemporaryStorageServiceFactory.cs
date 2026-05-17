@@ -260,8 +260,7 @@ namespace Microsoft.CodeAnalysis.Host
                     using var reader = CreateTextReaderFromTemporaryStorage(stream);
 
                     // we pass in encoding we got from original source text even if it is null.
-                    return _service
-                        ._textFactory
+                    return _service._textFactory
                         .CreateText(reader, _encoding, _checksumAlgorithm, cancellationToken);
                 }
             }
@@ -409,12 +408,13 @@ namespace Microsoft.CodeAnalysis.Host
             public Task<Stream> ReadStreamAsync(CancellationToken cancellationToken = default)
             {
                 // See commentary in ReadTextAsync for why this is implemented this way.
-                return Task.Factory.StartNew<Stream>(
-                    () => ReadStream(cancellationToken),
-                    cancellationToken,
-                    TaskCreationOptions.None,
-                    TaskScheduler.Default
-                );
+                return Task.Factory
+                    .StartNew<Stream>(
+                        () => ReadStream(cancellationToken),
+                        cancellationToken,
+                        TaskCreationOptions.None,
+                        TaskScheduler.Default
+                    );
             }
 
             public void WriteStream(Stream stream, CancellationToken cancellationToken = default)

@@ -167,8 +167,7 @@ namespace System.Data.SqlTypes.Tests
             // Some of Windows versions have a regression, so ignore last entry in the s_specialMatchingString if this is the case.
             if (
                 PlatformDetection.IsWindows10Version1903OrGreater
-                && CultureInfo
-                    .InvariantCulture
+                && CultureInfo.InvariantCulture
                     .CompareInfo
                     .Compare(
                         "\u3060",

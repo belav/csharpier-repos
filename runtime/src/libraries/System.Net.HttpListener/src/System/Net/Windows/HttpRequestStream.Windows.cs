@@ -43,8 +43,7 @@ namespace System.Net
 
             if (_dataChunkIndex != -1)
             {
-                dataRead = Interop
-                    .HttpApi
+                dataRead = Interop.HttpApi
                     .GetChunks(
                         _httpContext.Request.RequestBuffer,
                         _httpContext.Request.OriginalBlobAddress,
@@ -88,8 +87,7 @@ namespace System.Net
                             Interop.HttpApi.HTTP_FLAGS.HTTP_RECEIVE_REQUEST_FLAG_COPY_BODY;
                     }
 
-                    statusCode = Interop
-                        .HttpApi
+                    statusCode = Interop.HttpApi
                         .HttpReceiveRequestEntityBody(
                             _httpContext.RequestQueueHandle,
                             _httpContext.RequestId,
@@ -166,8 +164,7 @@ namespace System.Net
             uint dataRead = 0;
             if (_dataChunkIndex != -1)
             {
-                dataRead = Interop
-                    .HttpApi
+                dataRead = Interop.HttpApi
                     .GetChunks(
                         _httpContext.Request.RequestBuffer,
                         _httpContext.Request.OriginalBlobAddress,
@@ -236,8 +233,7 @@ namespace System.Net
                                 Interop.HttpApi.HTTP_FLAGS.HTTP_RECEIVE_REQUEST_FLAG_COPY_BODY;
                         }
 
-                        statusCode = Interop
-                            .HttpApi
+                        statusCode = Interop.HttpApi
                             .HttpReceiveRequestEntityBody(
                                 _httpContext.RequestQueueHandle,
                                 _httpContext.RequestId,
@@ -354,8 +350,7 @@ namespace System.Net
         // is currenlty the only consumer of this API
         internal uint GetChunks(byte[] buffer, int offset, int size)
         {
-            return Interop
-                .HttpApi
+            return Interop.HttpApi
                 .GetChunks(
                     _httpContext.Request.RequestBuffer,
                     _httpContext.Request.OriginalBlobAddress,

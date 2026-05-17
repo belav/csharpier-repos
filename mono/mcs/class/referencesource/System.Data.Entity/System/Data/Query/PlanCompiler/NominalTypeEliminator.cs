@@ -205,8 +205,7 @@ namespace System.Data.Query.PlanCompiler
             // Replace command enum parameters with a counterpart whose type is the underlying enum type of the original parameter
             // Replace command strongly typed spatial parameters with a counterpart whose type is the underlying spatial union type of the original parameter
             foreach (
-                var paramVar in m_command
-                    .Vars
+                var paramVar in m_command.Vars
                     .OfType<ParameterVar>()
                     .Where(v =>
                         md.TypeSemantics.IsEnumerationType(v.Type)
@@ -449,9 +448,8 @@ namespace System.Data.Query.PlanCompiler
             md.TypeUsage typeIdType;
             if (typeInfo.RootType.DiscriminatorMap != null)
             {
-                typeIdType = md.Helper.GetModelTypeUsage(
-                    typeInfo.RootType.DiscriminatorMap.DiscriminatorProperty
-                );
+                typeIdType = md.Helper
+                    .GetModelTypeUsage(typeInfo.RootType.DiscriminatorMap.DiscriminatorProperty);
             }
             else
             {
@@ -1790,8 +1788,7 @@ namespace System.Data.Query.PlanCompiler
                     }
                     else
                     { // structured type
-                        System
-                            .Diagnostics
+                        System.Diagnostics
                             .Debug
                             .Assert(
                                 outerVarInfo.Kind == VarInfoKind.StructuredTypeVarInfo,
@@ -2074,14 +2071,10 @@ namespace System.Data.Query.PlanCompiler
             {
                 // We visited subtree so the result type of the cast argument should now be a union spatial type even if it was originally strong).
                 PlanCompiler.Assert(
-                    md.TypeSemantics.IsPrimitiveType(
-                        n.Child0.Op.Type,
-                        md.PrimitiveTypeKind.Geography
-                    )
-                        || md.TypeSemantics.IsPrimitiveType(
-                            n.Child0.Op.Type,
-                            md.PrimitiveTypeKind.Geometry
-                        ),
+                    md.TypeSemantics
+                        .IsPrimitiveType(n.Child0.Op.Type, md.PrimitiveTypeKind.Geography)
+                        || md.TypeSemantics
+                            .IsPrimitiveType(n.Child0.Op.Type, md.PrimitiveTypeKind.Geometry),
                     "Union spatial type expected."
                 );
                 var underlyingType = md.Helper.GetSpatialNormalizedPrimitiveType(op.Type.EdmType);
@@ -3063,9 +3056,8 @@ namespace System.Data.Query.PlanCompiler
                 {
                     // WHEN discriminator = discriminatorValue THEN normalizedDiscriminatorValue
                     ConstantBaseOp discriminatorValueOp = m_command.CreateConstantOp(
-                        md.Helper.GetModelTypeUsage(
-                            op.DiscriminatorMap.DiscriminatorProperty.TypeUsage
-                        ),
+                        md.Helper
+                            .GetModelTypeUsage(op.DiscriminatorMap.DiscriminatorProperty.TypeUsage),
                         discriminatorValue
                     );
                     Node discriminatorConstant = m_command.CreateNode(discriminatorValueOp);
@@ -3252,8 +3244,7 @@ namespace System.Data.Query.PlanCompiler
                         .FlattenedType;
 
                     // Find offset of opField in top-level flat type
-                    int nestedPropertyOffset = typeInfo
-                        .RootType
+                    int nestedPropertyOffset = typeInfo.RootType
                         .GetNestedStructureOffset(new SimplePropertyRef(opField));
 
                     foreach (md.EdmProperty nestedProperty in nestedFlatType.Properties)
@@ -3297,8 +3288,7 @@ namespace System.Data.Query.PlanCompiler
                         .FlattenedType;
 
                     // Find offset of opField in top-level flat type
-                    int nestedPropertyOffset = typeInfo
-                        .RootType
+                    int nestedPropertyOffset = typeInfo.RootType
                         .GetNestedStructureOffset(new RelPropertyRef(relProp));
 
                     foreach (md.EdmProperty nestedProperty in nestedFlatType.Properties)

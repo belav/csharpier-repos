@@ -45,14 +45,15 @@ namespace System.Activities.Statements
         public void ResumeBookmark(Bookmark bookmark)
         {
             // This method is necessary due to CSDMain 223257.
-            IAsyncResult asyncResult = this.instance.BeginResumeBookmark(
-                bookmark,
-                null,
-                Fx.ThunkCallback(
-                    new AsyncCallback(StateMachineExtension.OnResumeBookmarkCompleted)
-                ),
-                this.instance
-            );
+            IAsyncResult asyncResult = this.instance
+                .BeginResumeBookmark(
+                    bookmark,
+                    null,
+                    Fx.ThunkCallback(
+                        new AsyncCallback(StateMachineExtension.OnResumeBookmarkCompleted)
+                    ),
+                    this.instance
+                );
             if (asyncResult.CompletedSynchronously)
             {
                 this.instance.EndResumeBookmark(asyncResult);

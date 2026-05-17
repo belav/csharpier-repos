@@ -37,14 +37,12 @@ namespace System.IdentityModel
         {
             if (signedInfo == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("signedInfo"));
             }
             if (dictionaryManager == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("dictionaryManager");
             }
             if (tokenSerializer == null)
@@ -133,8 +131,7 @@ namespace System.IdentityModel
                 {
                     if (algorithm == null)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(
                                     SR.GetString(
@@ -153,8 +150,7 @@ namespace System.IdentityModel
                 AsymmetricSecurityKey asymmetricKey = signingKey as AsymmetricSecurityKey;
                 if (asymmetricKey == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(SR.UnknownICryptoType, signingKey)
@@ -167,8 +163,7 @@ namespace System.IdentityModel
                 {
                     if (hash == null)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(
                                     SR.GetString(
@@ -185,8 +180,7 @@ namespace System.IdentityModel
                     );
                     if (formatter == null)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(
                                     SR.GetString(
@@ -237,8 +231,7 @@ namespace System.IdentityModel
             this.Signature.SignedInfo.ComputeHash(hash);
             if (!CryptoHelper.IsEqual(hash.Hash, GetSignatureValue()))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new CryptographicException(SR.GetString(SR.SignatureVerificationFailed))
                     );
@@ -272,8 +265,7 @@ namespace System.IdentityModel
 
             if (!result)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new CryptographicException(SR.GetString(SR.SignatureVerificationFailed))
                     );
@@ -292,8 +284,7 @@ namespace System.IdentityModel
                 {
                     if (hash == null)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new CryptographicException(
                                     SR.GetString(
@@ -312,8 +303,7 @@ namespace System.IdentityModel
                 AsymmetricSecurityKey asymmetricKey = verificationKey as AsymmetricSecurityKey;
                 if (asymmetricKey == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(SR.UnknownICryptoType, verificationKey)
@@ -326,8 +316,7 @@ namespace System.IdentityModel
                 {
                     if (hash == null)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new CryptographicException(
                                     SR.GetString(
@@ -342,8 +331,7 @@ namespace System.IdentityModel
                         asymmetricKey.GetSignatureDeformatter(signatureMethod);
                     if (deformatter == null)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new CryptographicException(
                                     SR.GetString(
@@ -562,8 +550,7 @@ namespace System.IdentityModel
         protected SignedInfo(DictionaryManager dictionaryManager)
         {
             if (dictionaryManager == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("dictionaryManager");
 
             this.signatureMethodElement = new ElementWithAlgorithmAttribute(
@@ -608,8 +595,7 @@ namespace System.IdentityModel
             {
                 if (value != this.canonicalizationMethodElement.Algorithm)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new NotSupportedException(
                                 SR.GetString(SR.UnsupportedTransformAlgorithm)
@@ -625,8 +611,7 @@ namespace System.IdentityModel
             {
                 if (value != null && value.Value != this.canonicalizationMethodElement.Algorithm)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new NotSupportedException(
                                 SR.GetString(SR.UnsupportedTransformAlgorithm)
@@ -681,8 +666,7 @@ namespace System.IdentityModel
                 && (this.CanonicalizationMethod != SecurityAlgorithms.ExclusiveC14nWithComments)
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new CryptographicException(SR.GetString(SR.UnsupportedTransformAlgorithm))
                     );
@@ -708,17 +692,15 @@ namespace System.IdentityModel
             else
             {
                 if (this.readerProvider == null)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new CryptographicException(
                                 SR.GetString(SR.InclusiveNamespacePrefixRequiresSignatureReader)
                             )
                         );
 
-                XmlDictionaryReader signatureReader = this.readerProvider.GetReader(
-                    this.signatureReaderProviderCallbackContext
-                );
+                XmlDictionaryReader signatureReader = this.readerProvider
+                    .GetReader(this.signatureReaderProviderCallbackContext);
 
                 DiagnosticUtility.DebugAssert(
                     signatureReader != null,
@@ -800,8 +782,7 @@ namespace System.IdentityModel
         {
             if (!EnsureDigestValidityIfIdMatches(id, resolvedXmlSource))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new CryptographicException(SR.GetString(SR.RequiredTargetNotSigned, id))
                     );
@@ -895,8 +876,7 @@ namespace System.IdentityModel
             {
                 if (!this.references[i].Verified)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new CryptographicException(
                                 SR.GetString(
@@ -937,8 +917,7 @@ namespace System.IdentityModel
         {
             if (this.references.Count == 0)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new CryptographicException(SR.GetString(SR.AtLeastOneReferenceRequired))
                     );
@@ -997,10 +976,8 @@ namespace System.IdentityModel
                 this.context = new Dictionary<string, string>(inclusivePrefixes.Length);
                 for (int i = 0; i < inclusivePrefixes.Length; i++)
                 {
-                    this.context.Add(
-                        inclusivePrefixes[i],
-                        reader.LookupNamespace(inclusivePrefixes[i])
-                    );
+                    this.context
+                        .Add(inclusivePrefixes[i], reader.LookupNamespace(inclusivePrefixes[i]));
                 }
             }
         }
@@ -1035,8 +1012,7 @@ namespace System.IdentityModel
         protected override string GetNamespaceForInclusivePrefix(string prefix)
         {
             if (this.context == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new InvalidOperationException());
 
             if (prefix == null)
@@ -1273,8 +1249,7 @@ namespace System.IdentityModel
         public Reference(DictionaryManager dictionaryManager, string uri, object resolvedXmlSource)
         {
             if (dictionaryManager == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("dictionaryManager");
 
             this.dictionaryManager = dictionaryManager;
@@ -1345,8 +1320,7 @@ namespace System.IdentityModel
         {
             if (!EnsureDigestValidityIfIdMatches(id, computedDigest))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new CryptographicException(SR.GetString(SR.RequiredTargetNotSigned, id))
                     );
@@ -1357,8 +1331,7 @@ namespace System.IdentityModel
         {
             if (!EnsureDigestValidityIfIdMatches(id, resolvedXmlSource))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new CryptographicException(SR.GetString(SR.RequiredTargetNotSigned, id))
                     );
@@ -1373,8 +1346,7 @@ namespace System.IdentityModel
             }
             if (!CryptoHelper.IsEqual(computedDigest, GetDigestValue()))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new CryptographicException(
                             SR.GetString(SR.DigestVerificationFailedForReference, this.uri)
@@ -1402,8 +1374,7 @@ namespace System.IdentityModel
             this.resolvedXmlSource = resolvedXmlSource;
             if (!CheckDigest())
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new CryptographicException(
                             SR.GetString(SR.DigestVerificationFailedForReference, this.uri)
@@ -1431,8 +1402,7 @@ namespace System.IdentityModel
 
                 if (this.uri == null || this.uri.Length < 2 || this.uri[0] != '#')
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new CryptographicException(
                                 SR.GetString(SR.UnableToResolveReferenceUriForSignature, this.uri)
@@ -1498,8 +1468,7 @@ namespace System.IdentityModel
         {
             if (this.transformChain.TransformCount == 0)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new NotSupportedException(SR.GetString(SR.EmptyTransformChainNotSupported))
                     );
@@ -1507,20 +1476,20 @@ namespace System.IdentityModel
 
             if (this.resolvedXmlSource == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new CryptographicException(
                             SR.GetString(SR.UnableToResolveReferenceUriForSignature, this.uri)
                         )
                     );
             }
-            return this.transformChain.TransformToDigest(
-                this.resolvedXmlSource,
-                this.ResourcePool,
-                this.DigestMethod,
-                this.dictionaryManager
-            );
+            return this.transformChain
+                .TransformToDigest(
+                    this.resolvedXmlSource,
+                    this.ResourcePool,
+                    this.DigestMethod,
+                    this.dictionaryManager
+                );
         }
 
         public byte[] GetDigestValue()
@@ -1551,12 +1520,13 @@ namespace System.IdentityModel
                 )
             )
             {
-                this.transformChain.ReadFrom(
-                    reader,
-                    transformFactory,
-                    dictionaryManager,
-                    ShouldPreserveComments(this.Uri)
-                );
+                this.transformChain
+                    .ReadFrom(
+                        reader,
+                        transformFactory,
+                        dictionaryManager,
+                        ShouldPreserveComments(this.Uri)
+                    );
             }
 
             this.digestMethodElement.ReadFrom(reader, dictionaryManager);
@@ -1737,8 +1707,7 @@ namespace System.IdentityModel
             reader.ReadEndElement(); // Transforms
             if (this.TransformCount == 0)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new CryptographicException(SR.GetString(SR.AtLeastOneTransformRequired))
                     );
@@ -1787,8 +1756,7 @@ namespace System.IdentityModel
         {
             if (elementName == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("elementName"));
             }
             this.elementName = elementName;
@@ -1823,8 +1791,7 @@ namespace System.IdentityModel
             );
             if (this.algorithm == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new CryptographicException(
                             SR.GetString(

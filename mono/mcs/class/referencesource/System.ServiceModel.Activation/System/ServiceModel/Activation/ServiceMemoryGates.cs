@@ -61,8 +61,7 @@ namespace System.ServiceModel.Activation
             {
                 if (throwOnLowMemory)
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(
                             new InsufficientMemoryException(
                                 SR.Hosting_MemoryGatesCheckFailed(
@@ -94,8 +93,7 @@ namespace System.ServiceModel.Activation
             {
                 int error = Marshal.GetLastWin32Error();
                 // Treat as the worst case.
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new InvalidOperationException(
                             SR.Hosting_GetGlobalMemoryFailed,

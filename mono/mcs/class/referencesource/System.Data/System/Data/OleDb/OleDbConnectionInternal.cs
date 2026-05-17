@@ -90,8 +90,7 @@ namespace System.Data.OleDb
             }
             catch (System.Security.SecurityException)
             {
-                System
-                    .Diagnostics
+                System.Diagnostics
                     .Debug
                     .Assert(false, "unexpected SecurityException for current codepath");
                 throw;
@@ -396,8 +395,7 @@ namespace System.Data.OleDb
                     {
                         throw ODB.TransactionsNotSupported(Provider, (Exception)null);
                     }
-                    transactionJoin
-                        .Value
+                    transactionJoin.Value
                         .JoinTransaction(
                             oleTxTransaction,
                             (int)IsolationLevel.Unspecified,

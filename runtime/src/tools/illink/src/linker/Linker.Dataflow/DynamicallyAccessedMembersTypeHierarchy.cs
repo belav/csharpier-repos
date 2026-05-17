@@ -60,8 +60,7 @@ namespace Mono.Linker.Dataflow
             )
                 return existingValue;
 
-            DynamicallyAccessedMemberTypes annotation = _context
-                .Annotations
+            DynamicallyAccessedMemberTypes annotation = _context.Annotations
                 .FlowAnnotations
                 .GetTypeAnnotation(type);
             bool apply = false;

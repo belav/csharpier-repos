@@ -1839,8 +1839,7 @@ namespace System.Management
             {
                 try
                 {
-                    return System
-                        .Runtime
+                    return System.Runtime
                         .InteropServices
                         .Marshal
                         .SecureStringToBSTR(securePassword);

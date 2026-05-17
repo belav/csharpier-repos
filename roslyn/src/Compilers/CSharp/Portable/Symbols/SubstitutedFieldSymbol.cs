@@ -31,8 +31,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             if (_lazyType == null)
             {
-                var type = _containingType
-                    .TypeSubstitution
+                var type = _containingType.TypeSubstitution
                     .SubstituteType(OriginalDefinition.GetFieldType(fieldsBeingBound));
                 Interlocked.CompareExchange(
                     ref _lazyType,
@@ -101,8 +100,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             // benefit to "optimizing" the performance of this by caching the
             // translated implementation type.
             return (NamedTypeSymbol)
-                _containingType
-                    .TypeSubstitution
+                _containingType.TypeSubstitution
                     .SubstituteType(OriginalDefinition.FixedImplementationType(emitModule))
                     .Type;
         }
@@ -110,8 +108,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         public override RefKind RefKind => _underlyingField.RefKind;
 
         public override ImmutableArray<CustomModifier> RefCustomModifiers =>
-            _containingType
-                .TypeSubstitution
+            _containingType.TypeSubstitution
                 .SubstituteCustomModifiers(_underlyingField.RefCustomModifiers);
 
         public override bool Equals(Symbol obj, TypeCompareKind compareKind)

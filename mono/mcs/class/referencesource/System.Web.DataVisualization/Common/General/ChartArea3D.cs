@@ -658,14 +658,15 @@ namespace System.Web.UI.DataVisualization.Charting
             //***********************************************************
             //** Initialize coordinate transformation matrix
             //***********************************************************
-            this.matrix3D.Initialize(
-                position,
-                areaSceneDepth,
-                this.Area3DStyle.Inclination,
-                this.Area3DStyle.Rotation,
-                this.Area3DStyle.Perspective,
-                this.Area3DStyle.IsRightAngleAxes
-            );
+            this.matrix3D
+                .Initialize(
+                    position,
+                    areaSceneDepth,
+                    this.Area3DStyle.Inclination,
+                    this.Area3DStyle.Rotation,
+                    this.Area3DStyle.Perspective,
+                    this.Area3DStyle.IsRightAngleAxes
+                );
 
             //***********************************************************
             //** Initialize Lighting
@@ -904,8 +905,7 @@ namespace System.Web.UI.DataVisualization.Charting
             bool drawSideBySide = false;
             if (smallestIntervalSeries != null)
             {
-                drawSideBySide = Common
-                    .ChartTypeRegistry
+                drawSideBySide = Common.ChartTypeRegistry
                     .GetChartType(smallestIntervalSeries.ChartTypeName)
                     .SideBySideSeries;
                 foreach (string seriesName in this._series)
@@ -1008,8 +1008,7 @@ namespace System.Web.UI.DataVisualization.Charting
             {
                 // Check series support stack groups
                 if (
-                    Common
-                        .ChartTypeRegistry
+                    Common.ChartTypeRegistry
                         .GetChartType(smallestIntervalSeries.ChartTypeName)
                         .SupportStackedGroups
                 )
@@ -1135,8 +1134,7 @@ namespace System.Web.UI.DataVisualization.Charting
                     // can be displayed in individual clusters
                     if (
                         !this.Area3DStyle.IsClustered
-                        && Common
-                            .ChartTypeRegistry
+                        && Common.ChartTypeRegistry
                             .GetChartType(curSeries.ChartTypeName)
                             .SupportStackedGroups
                     )
@@ -1186,8 +1184,7 @@ namespace System.Web.UI.DataVisualization.Charting
                         Common.ChartTypeRegistry.GetChartType(curSeries.ChartTypeName).Stacked
                         || (
                             this.Area3DStyle.IsClustered
-                            && Common
-                                .ChartTypeRegistry
+                            && Common.ChartTypeRegistry
                                 .GetChartType(curSeries.ChartTypeName)
                                 .SideBySideSeries
                         )
@@ -1196,8 +1193,7 @@ namespace System.Web.UI.DataVisualization.Charting
                         // Check if this chart type is already in the list
                         if (
                             processedChartTypes.Contains(
-                                curSeries
-                                    .ChartTypeName
+                                curSeries.ChartTypeName
                                     .ToUpper(System.Globalization.CultureInfo.InvariantCulture)
                             )
                         )
@@ -1215,11 +1211,11 @@ namespace System.Web.UI.DataVisualization.Charting
                                     // Get series object by name
                                     Series ser = this.Common.DataManager.Series[name];
                                     if (
-                                        ser.ChartTypeName.ToUpper(
-                                            System.Globalization.CultureInfo.InvariantCulture
-                                        )
-                                        == curSeries
-                                            .ChartTypeName
+                                        ser.ChartTypeName
+                                            .ToUpper(
+                                                System.Globalization.CultureInfo.InvariantCulture
+                                            )
+                                        == curSeries.ChartTypeName
                                             .ToUpper(
                                                 System.Globalization.CultureInfo.InvariantCulture
                                             )
@@ -1238,8 +1234,7 @@ namespace System.Web.UI.DataVisualization.Charting
 
                             // Add new chart type into the collection
                             processedChartTypes.Add(
-                                curSeries
-                                    .ChartTypeName
+                                curSeries.ChartTypeName
                                     .ToUpper(System.Globalization.CultureInfo.InvariantCulture)
                             );
                         }

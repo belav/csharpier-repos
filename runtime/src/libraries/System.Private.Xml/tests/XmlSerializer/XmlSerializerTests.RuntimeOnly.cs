@@ -3843,8 +3843,7 @@ public static partial class XmlSerializerTests
             TextColor = System.Drawing.Color.FromArgb(3, 4, 5, 6),
         };
         value.LocalReadingPositionState = new List<LocalReadingPosition>();
-        value
-            .LocalReadingPositionState
+        value.LocalReadingPositionState
             .Add(
                 new LocalReadingPosition()
                 {

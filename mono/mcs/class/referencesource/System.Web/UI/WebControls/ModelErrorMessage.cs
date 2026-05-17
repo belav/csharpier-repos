@@ -87,8 +87,7 @@ namespace System.Web.UI.WebControls
             ModelState modelState;
             if (Page != null && Page.ModelState.TryGetValue(ModelStateKey, out modelState))
             {
-                ModelError error = modelState
-                    .Errors
+                ModelError error = modelState.Errors
                     .FirstOrDefault(modelError => !String.IsNullOrEmpty(modelError.ErrorMessage));
                 if (error != null)
                 {

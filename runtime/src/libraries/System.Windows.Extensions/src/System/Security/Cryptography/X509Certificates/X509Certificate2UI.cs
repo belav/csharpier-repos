@@ -166,8 +166,7 @@ namespace System.Security.Cryptography.X509Certificates
         {
             int dwErrorCode = ERROR_SUCCESS;
 
-            SafeCertStoreHandle safeCertStoreHandle = Interop
-                .Crypt32
+            SafeCertStoreHandle safeCertStoreHandle = Interop.Crypt32
                 .CertOpenStore(
                     (IntPtr)Interop.Crypt32.CERT_STORE_PROV_MEMORY,
                     Interop.Crypt32.X509_ASN_ENCODING | Interop.Crypt32.PKCS_7_ASN_ENCODING,
@@ -223,8 +222,7 @@ namespace System.Security.Cryptography.X509Certificates
             csc.rgPropSheetPages = IntPtr.Zero;
             csc.hSelectedCertStore = safeCertStoreHandle.DangerousGetHandle();
 
-            SafeCertContextHandle safeCertContextHandle = Interop
-                .CryptUI
+            SafeCertContextHandle safeCertContextHandle = Interop.CryptUI
                 .CryptUIDlgSelectCertificateW(ref csc);
 
             if (safeCertContextHandle != null && !safeCertContextHandle.IsInvalid)
@@ -232,8 +230,7 @@ namespace System.Security.Cryptography.X509Certificates
                 // Single select, so add it to our hCertStore
                 SafeCertContextHandle ppStoreContext = SafeCertContextHandle.InvalidHandle;
                 if (
-                    !Interop
-                        .Crypt32
+                    !Interop.Crypt32
                         .CertAddCertificateLinkToStore(
                             safeCertStoreHandle,
                             safeCertContextHandle,

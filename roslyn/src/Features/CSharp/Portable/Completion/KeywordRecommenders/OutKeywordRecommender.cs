@@ -34,8 +34,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
 
         private static bool IsOutParameterModifierContext(int position, CSharpSyntaxContext context)
         {
-            return context
-                    .SyntaxTree
+            return context.SyntaxTree
                     .IsParameterModifierContext(
                         position,
                         context.LeftToken,

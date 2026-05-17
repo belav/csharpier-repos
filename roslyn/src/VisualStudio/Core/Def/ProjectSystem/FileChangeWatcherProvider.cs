@@ -30,8 +30,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 .StartNew(
                     async () =>
                     {
-                        await threadingContext
-                            .JoinableTaskFactory
+                        await threadingContext.JoinableTaskFactory
                             .SwitchToMainThreadAsync(threadingContext.DisposalToken);
 
                         var fileChangeService = (IVsAsyncFileChangeEx?)

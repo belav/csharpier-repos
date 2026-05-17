@@ -79,8 +79,7 @@ internal sealed class TransportConnectionManager
         {
             if (kvp.Value.TryGetConnection(out var connection))
             {
-                connection
-                    .TransportConnection
+                connection.TransportConnection
                     .Abort(
                         new ConnectionAbortedException(
                             CoreStrings.ConnectionAbortedDuringServerShutdown

@@ -1282,8 +1282,7 @@ namespace System.Reflection.Emit
             if (m_methodBuilder is not RuntimeMethodBuilder methodBuilder)
                 throw new NotSupportedException();
 
-            int index = ((RuntimeILGenerator)methodBuilder.GetILGenerator())
-                .m_ScopeTree
+            int index = ((RuntimeILGenerator)methodBuilder.GetILGenerator()).m_ScopeTree
                 .GetCurrentActiveScopeIndex();
             if (index == -1)
             {

@@ -107,8 +107,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
 
             var arguments = new List<AttributeArgumentSyntax>();
             arguments.AddRange(
-                attribute
-                    .ConstructorArguments
+                attribute.ConstructorArguments
                     .Select(c =>
                         SyntaxFactory.AttributeArgument(
                             ExpressionGenerator.GenerateExpression(generator, c)
@@ -117,8 +116,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             );
 
             arguments.AddRange(
-                attribute
-                    .NamedArguments
+                attribute.NamedArguments
                     .Select(kvp =>
                         SyntaxFactory.AttributeArgument(
                             SyntaxFactory.NameEquals(SyntaxFactory.IdentifierName(kvp.Key)),

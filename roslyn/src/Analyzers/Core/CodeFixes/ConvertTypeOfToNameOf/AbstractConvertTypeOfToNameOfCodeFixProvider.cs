@@ -49,8 +49,7 @@ namespace Microsoft.CodeAnalysis.ConvertTypeOfToNameOf
             foreach (var diagnostic in diagnostics)
             {
                 if (
-                    editor
-                        .OriginalRoot
+                    editor.OriginalRoot
                         .FindNode(diagnostic.Location.SourceSpan, getInnermostNodeForTie: true)
                     is not TMemberAccessExpressionSyntax node
                 )

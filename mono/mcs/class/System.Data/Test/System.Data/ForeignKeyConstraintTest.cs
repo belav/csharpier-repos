@@ -552,8 +552,7 @@ namespace MonoTests.System.Data
 
             try
             {
-                child
-                    .Constraints
+                child.Constraints
                     .Add(new ForeignKeyConstraint(parent.Columns[0], child.Columns[0]));
             }
             finally
@@ -575,8 +574,7 @@ namespace MonoTests.System.Data
             try
             {
                 _ds.EnforceConstraints = false;
-                child
-                    .Constraints
+                child.Constraints
                     .Add(new ForeignKeyConstraint(parent.Columns[0], child.Columns[0]));
             }
             finally

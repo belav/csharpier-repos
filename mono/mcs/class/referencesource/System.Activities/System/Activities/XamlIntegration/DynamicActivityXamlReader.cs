@@ -22,8 +22,7 @@ namespace System.Activities.XamlIntegration
     {
         internal static readonly XamlMember xPropertyType = XamlLanguage.Property.GetMember("Type");
         internal static readonly XamlMember xPropertyName = XamlLanguage.Property.GetMember("Name");
-        internal static readonly XamlMember xPropertyAttributes = XamlLanguage
-            .Property
+        internal static readonly XamlMember xPropertyAttributes = XamlLanguage.Property
             .GetMember("Attributes");
 
         // These may be a closed generic types in the Activity<T> case, so we compute them dynamically
@@ -96,9 +95,8 @@ namespace System.Activities.XamlIntegration
             this.typeXamlType = this.schemaContext.GetXamlType(typeof(Type));
 
             this.baseActivityXamlType = this.schemaContext.GetXamlType(typeof(Activity));
-            this.activityPropertyXamlType = this.schemaContext.GetXamlType(
-                typeof(DynamicActivityProperty)
-            );
+            this.activityPropertyXamlType = this.schemaContext
+                .GetXamlType(typeof(DynamicActivityProperty));
             this.activityPropertyType = this.activityPropertyXamlType.GetMember("Type");
             this.activityPropertyName = this.activityPropertyXamlType.GetMember("Name");
             this.activityPropertyValue = this.activityPropertyXamlType.GetMember("Value");
@@ -282,12 +280,13 @@ namespace System.Activities.XamlIntegration
                         {
                             this.bufferedProperties = new BufferedPropertyList(this);
                         }
-                        this.bufferedProperties.BufferDefaultValue(
-                            currentMember.Name,
-                            this.activityPropertyValue,
-                            this.innerReader,
-                            this.innerReaderLineInfo
-                        );
+                        this.bufferedProperties
+                            .BufferDefaultValue(
+                                currentMember.Name,
+                                this.activityPropertyValue,
+                                this.innerReader,
+                                this.innerReaderLineInfo
+                            );
                         return true; // output cursor didn't move forward
                     }
                     else if (
@@ -309,13 +308,11 @@ namespace System.Activities.XamlIntegration
                             )
                             {
                                 // Rewrite "<Activity.XXX>" to "<DynamicActivity.XXX>"
-                                XamlMember member = this.activityReplacementXamlType.GetMember(
-                                    currentMember.Name
-                                );
+                                XamlMember member = this.activityReplacementXamlType
+                                    .GetMember(currentMember.Name);
                                 if (member == null)
                                 {
-                                    throw FxTrace
-                                        .Exception
+                                    throw FxTrace.Exception
                                         .AsError(
                                             CreateXamlException(
                                                 SR.MemberNotSupportedByActivityXamlServices(
@@ -492,12 +489,13 @@ namespace System.Activities.XamlIntegration
                 if (this.builderStack != null)
                 {
                     bool writeNode = true;
-                    this.builderStack.ProcessNode(
-                        this.innerReader,
-                        this.innerReaderLineInfo,
-                        this.nodeQueue.Writer,
-                        out writeNode
-                    );
+                    this.builderStack
+                        .ProcessNode(
+                            this.innerReader,
+                            this.innerReaderLineInfo,
+                            this.nodeQueue.Writer,
+                            out writeNode
+                        );
                     if (!writeNode)
                     {
                         this.innerReader.Read();
@@ -676,15 +674,13 @@ namespace System.Activities.XamlIntegration
             {
                 this.parent = parent;
                 this.stack = new Stack<Frame>();
-                this.activityPropertyReferenceXamlType = parent
-                    .schemaContext
+                this.activityPropertyReferenceXamlType = parent.schemaContext
                     .GetXamlType(typeof(ActivityPropertyReference));
                 this.activityPropertyReferenceSourceProperty =
                     this.activityPropertyReferenceXamlType.GetMember("SourceProperty");
                 this.activityPropertyReferenceTargetProperty =
                     this.activityPropertyReferenceXamlType.GetMember("TargetProperty");
-                XamlType typeOfActivityBuilder = parent
-                    .schemaContext
+                XamlType typeOfActivityBuilder = parent.schemaContext
                     .GetXamlType(typeof(ActivityBuilder));
                 this.activityBuilderPropertyReferencesMember =
                     typeOfActivityBuilder.GetAttachableMember("PropertyReferences");
@@ -1137,8 +1133,7 @@ namespace System.Activities.XamlIntegration
                 ActivityPropertyHolder propertyHolder;
                 if (!this.PropertyHolders.TryGetValue(propertyName, out propertyHolder))
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(CreateXamlException(SR.InvalidProperty(propertyName), lineInfo));
                 }
 
@@ -1258,8 +1253,7 @@ namespace System.Activities.XamlIntegration
                                     }
                                     else
                                     {
-                                        throw FxTrace
-                                            .Exception
+                                        throw FxTrace.Exception
                                             .AsError(
                                                 CreateXamlException(
                                                     SR.PropertyMemberNotSupportedByActivityXamlServices(
@@ -1290,13 +1284,11 @@ namespace System.Activities.XamlIntegration
                                         reader.Value as string,
                                         parent.namespaceTable
                                     );
-                                    XamlType xamlType = parent
-                                        .SchemaContext
+                                    XamlType xamlType = parent.SchemaContext
                                         .GetXamlType(xamlTypeName);
                                     if (xamlType == null)
                                     {
-                                        throw FxTrace
-                                            .Exception
+                                        throw FxTrace.Exception
                                             .AsError(
                                                 CreateXamlException(
                                                     SR.InvalidPropertyType(
@@ -1378,8 +1370,7 @@ namespace System.Activities.XamlIntegration
                     subReader.Read();
                     if (!subReader.Member.IsNameValid)
                     {
-                        throw FxTrace
-                            .Exception
+                        throw FxTrace.Exception
                             .AsError(
                                 CreateXamlException(
                                     SR.InvalidXamlMember(subReader.Member.Name),

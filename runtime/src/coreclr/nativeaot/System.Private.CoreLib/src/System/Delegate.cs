@@ -310,8 +310,7 @@ namespace System
             }
             else
             {
-                DynamicInvokeInfo dynamicInvokeInfo = ReflectionAugments
-                    .ReflectionCoreCallbacks
+                DynamicInvokeInfo dynamicInvokeInfo = ReflectionAugments.ReflectionCoreCallbacks
                     .GetDelegateDynamicInvokeInfo(GetType());
 
                 object? result = dynamicInvokeInfo.Invoke(
@@ -377,8 +376,7 @@ namespace System
             MethodInfo method,
             bool throwOnBindFailure
         ) =>
-            ReflectionAugments
-                .ReflectionCoreCallbacks
+            ReflectionAugments.ReflectionCoreCallbacks
                 .CreateDelegate(type, firstArgument, method, throwOnBindFailure);
 
         // V1 api: Creates open delegates to static or instance methods - relaxed signature checking allowed.
@@ -387,8 +385,7 @@ namespace System
             MethodInfo method,
             bool throwOnBindFailure
         ) =>
-            ReflectionAugments
-                .ReflectionCoreCallbacks
+            ReflectionAugments.ReflectionCoreCallbacks
                 .CreateDelegate(type, method, throwOnBindFailure);
 
         // V1 api: Creates closed delegates to instance methods only, relaxed signature checking disallowed.
@@ -400,8 +397,7 @@ namespace System
             bool ignoreCase,
             bool throwOnBindFailure
         ) =>
-            ReflectionAugments
-                .ReflectionCoreCallbacks
+            ReflectionAugments.ReflectionCoreCallbacks
                 .CreateDelegate(type, target, method, ignoreCase, throwOnBindFailure);
 
         // V1 api: Creates open delegates to static methods only, relaxed signature checking disallowed.
@@ -412,8 +408,7 @@ namespace System
             bool ignoreCase,
             bool throwOnBindFailure
         ) =>
-            ReflectionAugments
-                .ReflectionCoreCallbacks
+            ReflectionAugments.ReflectionCoreCallbacks
                 .CreateDelegate(type, target, method, ignoreCase, throwOnBindFailure);
 
         internal bool IsOpenStatic

@@ -941,8 +941,7 @@ class C
                     var dummyComp = CreateCompilation(
                         "",
                         new[] { comp.EmitToImageReference() },
-                        options: TestOptions
-                            .DebugDll
+                        options: TestOptions.DebugDll
                             .WithMetadataImportOptions(MetadataImportOptions.All)
                     );
                     var typeC = dummyComp.GlobalNamespace.GetMember<NamedTypeSymbol>("C");
@@ -1033,8 +1032,7 @@ class C
                     var dummyComp = CreateCompilation(
                         "",
                         new[] { comp.EmitToImageReference() },
-                        options: TestOptions
-                            .DebugDll
+                        options: TestOptions.DebugDll
                             .WithMetadataImportOptions(MetadataImportOptions.All)
                     );
                     var typeC = dummyComp.GlobalNamespace.GetMember<NamedTypeSymbol>("C");
@@ -1713,8 +1711,7 @@ public class C
             );
             Assert.Equal(
                 iteratorMethod,
-                ((EECompilationContextMethod)guessedIterator.OriginalDefinition)
-                    .UnderlyingMethod
+                ((EECompilationContextMethod)guessedIterator.OriginalDefinition).UnderlyingMethod
                     .OriginalDefinition
             );
         }

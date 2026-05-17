@@ -125,8 +125,7 @@ namespace System.Workflow.Runtime
 
             if (errors.HasErrors)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new WorkflowValidationFailedException(SR2.WorkflowValidationFailed, errors)
                     );

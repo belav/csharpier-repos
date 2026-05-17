@@ -31,16 +31,14 @@ namespace System.IdentityModel.Selectors
         )
         {
             if (servicePrincipalName == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("servicePrincipalName");
             if (
                 tokenImpersonationLevel != TokenImpersonationLevel.Identification
                 && tokenImpersonationLevel != TokenImpersonationLevel.Impersonation
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentOutOfRangeException(
                             "tokenImpersonationLevel",

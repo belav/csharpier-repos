@@ -126,8 +126,7 @@ namespace System.Web.Configuration
                     }
                     else
                     {
-                        capabilities = capsbuilder
-                            .BrowserCapabilitiesProvider
+                        capabilities = capsbuilder.BrowserCapabilitiesProvider
                             .GetBrowserCapabilities(request);
                     }
                 }
@@ -169,8 +168,7 @@ namespace System.Web.Configuration
                 }
                 else
                 {
-                    capabilities = capsbuilder
-                        .BrowserCapabilitiesProvider
+                    capabilities = capsbuilder.BrowserCapabilitiesProvider
                         .GetBrowserCapabilities(request);
                 }
             }
@@ -2688,8 +2686,7 @@ namespace System.Web.Configuration
         /// <internalonly/>
         int IFilterResolutionService.CompareFilters(string filter1, string filter2)
         {
-            return BrowserCapabilitiesCompiler
-                .BrowserCapabilitiesFactory
+            return BrowserCapabilitiesCompiler.BrowserCapabilitiesFactory
                 .CompareFilters(filter1, filter2);
         }
         #endregion

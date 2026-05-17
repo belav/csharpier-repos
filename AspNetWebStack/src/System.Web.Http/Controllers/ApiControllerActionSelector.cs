@@ -133,8 +133,7 @@ namespace System.Web.Http.Controllers
                 // Initialize the cache entirely in the ctor on a single thread.
                 _controllerDescriptor = controllerDescriptor;
 
-                MethodInfo[] allMethods = _controllerDescriptor
-                    .ControllerType
+                MethodInfo[] allMethods = _controllerDescriptor.ControllerType
                     .GetMethods(BindingFlags.Instance | BindingFlags.Public);
                 MethodInfo[] validMethods = Array.FindAll(allMethods, IsValidActionMethod);
 
@@ -153,8 +152,7 @@ namespace System.Web.Http.Controllers
                     // Building an action parameter name mapping to compare against the URI parameters coming from the request. Here we only take into account required parameters that are simple types and come from URI.
                     _actionParameterNames.Add(
                         actionDescriptor,
-                        actionBinding
-                            .ParameterBindings
+                        actionBinding.ParameterBindings
                             .Where(binding =>
                                 !binding.Descriptor.IsOptional
                                 && TypeHelper.CanConvertFromString(binding.Descriptor.ParameterType)
@@ -224,8 +222,7 @@ namespace System.Web.Http.Controllers
                     standardActions.StandardCandidateActions = standardCandidateActions.ToArray();
                 }
 
-                standardActions.StandardActionNameMapping = standardActions
-                    .StandardCandidateActions
+                standardActions.StandardActionNameMapping = standardActions.StandardCandidateActions
                     .Select(c => c.ActionDescriptor)
                     .ToLookup(
                         actionDesc => actionDesc.ActionName,
@@ -360,8 +357,7 @@ namespace System.Web.Http.Controllers
             )
             {
                 HttpMethod incomingMethod = controllerContext.Request.Method;
-                HttpResponseMessage response = controllerContext
-                    .Request
+                HttpResponseMessage response = controllerContext.Request
                     .CreateErrorResponse(
                         HttpStatusCode.MethodNotAllowed,
                         Error.Format(
@@ -390,8 +386,7 @@ namespace System.Web.Http.Controllers
                 HttpControllerContext controllerContext
             )
             {
-                return controllerContext
-                    .Request
+                return controllerContext.Request
                     .CreateErrorResponse(
                         HttpStatusCode.NotFound,
                         Error.Format(
@@ -412,8 +407,7 @@ namespace System.Web.Http.Controllers
                 string actionName
             )
             {
-                return controllerContext
-                    .Request
+                return controllerContext.Request
                     .CreateErrorResponse(
                         HttpStatusCode.NotFound,
                         Error.Format(
@@ -794,8 +788,7 @@ namespace System.Web.Http.Controllers
                         && descriptor.ControllerDescriptor.ControllerType != null
                     )
                     {
-                        controllerTypeName = descriptor
-                            .ControllerDescriptor
+                        controllerTypeName = descriptor.ControllerDescriptor
                             .ControllerType
                             .FullName;
                     }

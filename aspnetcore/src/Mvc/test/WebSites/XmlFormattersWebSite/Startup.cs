@@ -68,43 +68,33 @@ public class Startup
             }
 
             xmlSerializerInputFormatter.SupportedMediaTypes.Clear();
-            xmlSerializerInputFormatter
-                .SupportedMediaTypes
+            xmlSerializerInputFormatter.SupportedMediaTypes
                 .Add(new MediaTypeHeaderValue("application/xml-xmlser"));
-            xmlSerializerInputFormatter
-                .SupportedMediaTypes
+            xmlSerializerInputFormatter.SupportedMediaTypes
                 .Add(new MediaTypeHeaderValue("text/xml-xmlser"));
-            xmlSerializerInputFormatter
-                .SupportedMediaTypes
+            xmlSerializerInputFormatter.SupportedMediaTypes
                 .Add(new MediaTypeHeaderValue("application/problem+xml"));
 
             xmlSerializerOutputFormatter.SupportedMediaTypes.Clear();
-            xmlSerializerOutputFormatter
-                .SupportedMediaTypes
+            xmlSerializerOutputFormatter.SupportedMediaTypes
                 .Add(new MediaTypeHeaderValue("application/xml-xmlser"));
-            xmlSerializerOutputFormatter
-                .SupportedMediaTypes
+            xmlSerializerOutputFormatter.SupportedMediaTypes
                 .Add(new MediaTypeHeaderValue("text/xml-xmlser"));
-            xmlSerializerOutputFormatter
-                .SupportedMediaTypes
+            xmlSerializerOutputFormatter.SupportedMediaTypes
                 .Add(new MediaTypeHeaderValue("application/problem+xml"));
 
             dcsInputFormatter.SupportedMediaTypes.Clear();
-            dcsInputFormatter
-                .SupportedMediaTypes
+            dcsInputFormatter.SupportedMediaTypes
                 .Add(new MediaTypeHeaderValue("application/xml-dcs"));
             dcsInputFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/xml-dcs"));
-            dcsInputFormatter
-                .SupportedMediaTypes
+            dcsInputFormatter.SupportedMediaTypes
                 .Add(new MediaTypeHeaderValue("application/problem+xml"));
 
             dcsOutputFormatter.SupportedMediaTypes.Clear();
-            dcsOutputFormatter
-                .SupportedMediaTypes
+            dcsOutputFormatter.SupportedMediaTypes
                 .Add(new MediaTypeHeaderValue("application/xml-dcs"));
             dcsOutputFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/xml-dcs"));
-            dcsOutputFormatter
-                .SupportedMediaTypes
+            dcsOutputFormatter.SupportedMediaTypes
                 .Add(new MediaTypeHeaderValue("application/problem+xml"));
 
             options.InputFormatters.Add(dcsInputFormatter);
@@ -112,11 +102,9 @@ public class Startup
             options.OutputFormatters.Add(dcsOutputFormatter);
             options.OutputFormatters.Add(xmlSerializerOutputFormatter);
 
-            xmlSerializerInputFormatter
-                .WrapperProviderFactories
+            xmlSerializerInputFormatter.WrapperProviderFactories
                 .Add(new PersonWrapperProviderFactory());
-            xmlSerializerOutputFormatter
-                .WrapperProviderFactories
+            xmlSerializerOutputFormatter.WrapperProviderFactories
                 .Add(new PersonWrapperProviderFactory());
             dcsInputFormatter.WrapperProviderFactories.Add(new PersonWrapperProviderFactory());
             dcsOutputFormatter.WrapperProviderFactories.Add(new PersonWrapperProviderFactory());

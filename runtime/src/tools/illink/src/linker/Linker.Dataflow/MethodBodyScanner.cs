@@ -307,8 +307,7 @@ namespace Mono.Linker.Dataflow
             // Validate that the compiler-generated callees tracked by the compiler-generated state
             // are the same set of methods that we discovered and scanned above.
             if (
-                _context
-                    .CompilerGeneratedState
+                _context.CompilerGeneratedState
                     .TryGetCompilerGeneratedCalleesForUserMethod(
                         startingMethod,
                         out List<IMemberDefinition>? compilerGeneratedCallees
@@ -1114,8 +1113,7 @@ namespace Mono.Linker.Dataflow
                     case IValueWithStaticType valueWithStaticType:
                         if (
                             valueWithStaticType.StaticType is not null
-                            && _context
-                                .Annotations
+                            && _context.Annotations
                                 .FlowAnnotations
                                 .IsTypeInterestingForDataflow(
                                     valueWithStaticType.StaticType.Value.Type
@@ -1371,8 +1369,7 @@ namespace Mono.Linker.Dataflow
                         parameter.GetReferenceKind() is not (ReferenceKind.Ref or ReferenceKind.Out)
                     )
                         continue;
-                    var newByRefValue = _context
-                        .Annotations
+                    var newByRefValue = _context.Annotations
                         .FlowAnnotations
                         .GetMethodParameterValue(parameter);
                     StoreInReference(

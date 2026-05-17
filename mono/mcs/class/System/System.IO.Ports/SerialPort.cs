@@ -582,8 +582,7 @@ namespace System.IO.Ports
             else
             {
                 using (
-                    RegistryKey subkey = Registry
-                        .LocalMachine
+                    RegistryKey subkey = Registry.LocalMachine
                         .OpenSubKey("HARDWARE\\DEVICEMAP\\SERIALCOMM")
                 )
                 {

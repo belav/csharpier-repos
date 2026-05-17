@@ -200,8 +200,7 @@ namespace System.Runtime.Remoting.Channels
 
             try
             {
-                AppDomain
-                    .CurrentDomain
+                AppDomain.CurrentDomain
                     .ProcessMessageInDomain(
                         arrRequest,
                         cadMsg,

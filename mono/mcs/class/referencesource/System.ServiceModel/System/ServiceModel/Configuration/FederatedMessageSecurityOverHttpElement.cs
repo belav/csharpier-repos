@@ -160,8 +160,7 @@ namespace System.ServiceModel.Configuration
             }
             foreach (ClaimTypeElement claimType in this.ClaimTypeRequirements)
             {
-                security
-                    .ClaimTypeRequirements
+                security.ClaimTypeRequirements
                     .Add(new ClaimTypeRequirement(claimType.ClaimType, claimType.IsOptional));
             }
         }
@@ -205,8 +204,7 @@ namespace System.ServiceModel.Configuration
             {
                 if (null == this.Issuer.Address)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ConfigurationErrorsException(
                                 SR.GetString(SR.ConfigNullIssuerAddress)

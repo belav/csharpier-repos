@@ -109,27 +109,22 @@ namespace System.Data.Metadata.Edm
             // From ClrPerspective, we should not allow anything from SSpace. So make sure that the CSpace type does not
             // have the Target attribute
             if (
-                this.MetadataWorkspace.TryGetMap(
-                    fullName,
-                    DataSpace.OSpace,
-                    ignoreCase,
-                    DataSpace.OCSpace,
-                    out map
-                )
+                this.MetadataWorkspace
+                    .TryGetMap(fullName, DataSpace.OSpace, ignoreCase, DataSpace.OCSpace, out map)
             )
             {
                 // Check if it's primitive type, if so, then use the MetadataWorkspace to get the mapped primitive type
                 if (map.EdmItem.BuiltInTypeKind == BuiltInTypeKind.PrimitiveType)
                 {
                     // Reassign the variable with the provider primitive type, then create the type usage
-                    PrimitiveType primitiveType = this.MetadataWorkspace.GetMappedPrimitiveType(
-                        ((PrimitiveType)map.EdmItem).PrimitiveTypeKind,
-                        DataSpace.CSpace
-                    );
+                    PrimitiveType primitiveType = this.MetadataWorkspace
+                        .GetMappedPrimitiveType(
+                            ((PrimitiveType)map.EdmItem).PrimitiveTypeKind,
+                            DataSpace.CSpace
+                        );
                     if (primitiveType != null)
                     {
-                        typeUsage = EdmProviderManifest
-                            .Instance
+                        typeUsage = EdmProviderManifest.Instance
                             .GetCanonicalModelTypeUsage(primitiveType.PrimitiveTypeKind);
                     }
                 }

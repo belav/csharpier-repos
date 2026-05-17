@@ -42,8 +42,7 @@ namespace Microsoft.Extensions.Http
         {
             // Arrange
             var count = 0;
-            Options
-                .CurrentValue
+            Options.CurrentValue
                 .HttpClientActions
                 .Add(c =>
                 {
@@ -68,8 +67,7 @@ namespace Microsoft.Extensions.Http
         {
             // Arrange
             var count = 0;
-            Options
-                .CurrentValue
+            Options.CurrentValue
                 .HttpMessageHandlerBuilderActions
                 .Add(b =>
                 {
@@ -97,8 +95,7 @@ namespace Microsoft.Extensions.Http
         public void Factory_DisposeClient_DoesNotDisposeHandler()
         {
             // Arrange
-            Options
-                .CurrentValue
+            Options.CurrentValue
                 .HttpMessageHandlerBuilderActions
                 .Add(b =>
                 {
@@ -127,8 +124,7 @@ namespace Microsoft.Extensions.Http
         public void Factory_DisposeHandler_DoesNotDisposeInnerHandler()
         {
             // Arrange
-            Options
-                .CurrentValue
+            Options.CurrentValue
                 .HttpMessageHandlerBuilderActions
                 .Add(b =>
                 {
@@ -154,8 +150,7 @@ namespace Microsoft.Extensions.Http
         {
             // Arrange
             var count = 0;
-            Options
-                .CurrentValue
+            Options.CurrentValue
                 .HttpClientActions
                 .Add(b =>
                 {
@@ -633,8 +628,7 @@ namespace Microsoft.Extensions.Http
                         // Rather than using the actual timer on the actual entry, let's fake it with async.
                         var completionSource =
                             new TaskCompletionSource<ActiveHandlerTrackingEntry>();
-                        var expiryTask = completionSource
-                            .Task
+                        var expiryTask = completionSource.Task
                             .ContinueWith(t =>
                             {
                                 var e = t.Result;

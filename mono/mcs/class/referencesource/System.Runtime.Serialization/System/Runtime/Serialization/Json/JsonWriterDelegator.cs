@@ -257,8 +257,7 @@ namespace System.Runtime.Serialization.Json
                 }
                 if ((tickCount > DateTime.MaxValue.Ticks) || (tickCount < DateTime.MinValue.Ticks))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             XmlObjectSerializer.CreateSerializationException(
                                 SR.GetString(SR.JsonDateTimeOutOfRange),

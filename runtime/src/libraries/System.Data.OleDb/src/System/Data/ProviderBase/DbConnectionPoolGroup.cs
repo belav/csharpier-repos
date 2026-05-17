@@ -140,8 +140,7 @@ namespace System.Data.ProviderBase
                         //  no connections attempting to be created for the pool).
 
                         DbConnectionFactory connectionFactory = pool.ConnectionFactory;
-                        connectionFactory
-                            .PerformanceCounters
+                        connectionFactory.PerformanceCounters
                             .NumberOfActiveConnectionPools
                             .Decrement();
                         connectionFactory.QueuePoolForRelease(pool, true);
@@ -213,8 +212,7 @@ namespace System.Data.ProviderBase
                                         addResult,
                                         "No other pool with current identity should exist at this point"
                                     );
-                                    connectionFactory
-                                        .PerformanceCounters
+                                    connectionFactory.PerformanceCounters
                                         .NumberOfActiveConnectionPools
                                         .Increment();
                                     pool = newPool;
@@ -306,8 +304,7 @@ namespace System.Data.ProviderBase
                                 // are completely empty.
                                 DbConnectionFactory connectionFactory = pool.ConnectionFactory;
 
-                                connectionFactory
-                                    .PerformanceCounters
+                                connectionFactory.PerformanceCounters
                                     .NumberOfActiveConnectionPools
                                     .Decrement();
                                 connectionFactory.QueuePoolForRelease(pool, false);

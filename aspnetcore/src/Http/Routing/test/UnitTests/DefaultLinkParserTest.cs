@@ -257,8 +257,7 @@ public class DefaultLinkParserTest : LinkParserTestBase
 
         public IEnumerable<Endpoint> FindEndpoints(int address)
         {
-            return _dataSource
-                .Endpoints
+            return _dataSource.Endpoints
                 .Where(e => e.Metadata.GetMetadata<IntMetadata>().Value == address);
         }
     }

@@ -97,8 +97,7 @@ namespace System.Xml
                     CleanupCharBreak();
                     int count = _encoding.GetChars(_bytes, _byteOffset, _byteCount, _chars, 0);
                     _byteOffset = 0;
-                    _byteCount = DataContractSerializer
-                        .ValidatingUTF8
+                    _byteCount = DataContractSerializer.ValidatingUTF8
                         .GetBytes(_chars, 0, count, _bytes, 0);
 
                     // Check for declaration
@@ -449,8 +448,7 @@ namespace System.Xml
                 if (e == SupportedEncoding.UTF8)
                     ThrowEncodingMismatch(
                         DataContractSerializer.UTF8NoBom.GetString(buffer, encStart, encCount),
-                        DataContractSerializer
-                            .UTF8NoBom
+                        DataContractSerializer.UTF8NoBom
                             .GetString(s_encodingUTF8, 0, s_encodingUTF8.Length)
                     );
             }
@@ -541,8 +539,7 @@ namespace System.Xml
                 chars = new char[localEnc.GetMaxCharCount(inputCount)];
                 int ccount = localEnc.GetChars(buffer, offset, inputCount, chars, 0);
                 bytes = new byte[DataContractSerializer.ValidatingUTF8.GetMaxByteCount(ccount)];
-                int bcount = DataContractSerializer
-                    .ValidatingUTF8
+                int bcount = DataContractSerializer.ValidatingUTF8
                     .GetBytes(chars, 0, ccount, bytes, 0);
 
                 // Check for declaration
@@ -558,8 +555,7 @@ namespace System.Xml
                 }
 
                 seg = new ArraySegment<byte>(
-                    DataContractSerializer
-                        .ValidatingUTF8
+                    DataContractSerializer.ValidatingUTF8
                         .GetBytes(GetEncoding(declEnc).GetChars(buffer, offset, count))
                 );
                 return seg;

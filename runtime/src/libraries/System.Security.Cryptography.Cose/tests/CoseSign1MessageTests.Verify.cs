@@ -79,10 +79,8 @@ namespace System.Security.Cryptography.Cose.Tests
                 }
 
                 Assert.True(
-                    msg.ProtectedHeaders.TryGetValue(
-                        CoseHeaderLabel.Algorithm,
-                        out CoseHeaderValue value
-                    ),
+                    msg.ProtectedHeaders
+                        .TryGetValue(CoseHeaderLabel.Algorithm, out CoseHeaderValue value),
                     "Algorithm header must be protected"
                 );
 

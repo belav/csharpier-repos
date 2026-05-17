@@ -5130,13 +5130,11 @@ namespace System.Xml.Schema
                     return value;
 
                 XsdSimpleValue simpleValue = (XsdSimpleValue)
-                    SchemaType
-                        .Datatype
+                    SchemaType.Datatype
                         .ParseValue((string)value, new NameTable(), nsResolver, true);
 
                 // Allow the member type to perform the conversion
-                return simpleValue
-                    .XmlType
+                return simpleValue.XmlType
                     .ValueConverter
                     .ChangeType((string)value, destinationType, nsResolver);
             }

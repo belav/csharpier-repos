@@ -1824,8 +1824,7 @@ namespace MonoTests.System.Security.Cryptography.X509Certificates
                 0x0D,
                 0x0A,
             };
-            string tsa = Encoding
-                .Default
+            string tsa = Encoding.Default
                 .GetString(ToStringArray)
                 .Replace("\r\n", Environment.NewLine);
             //Assert.AreEqual (tsa, x509.ToString (true), "ToString(true)");
@@ -3075,8 +3074,7 @@ namespace MonoTests.System.Security.Cryptography.X509Certificates
                 0x0D,
                 0x0A,
             };
-            string tsa = Encoding
-                .Default
+            string tsa = Encoding.Default
                 .GetString(ToStringArray)
                 .Replace("\r\n", Environment.NewLine);
             //Assert.AreEqual (tsa, x509.ToString (true), "ToString(true)");
@@ -4661,8 +4659,7 @@ namespace MonoTests.System.Security.Cryptography.X509Certificates
                 0x0D,
                 0x0A,
             };
-            string tsa = Encoding
-                .Default
+            string tsa = Encoding.Default
                 .GetString(ToStringArray)
                 .Replace("\r\n", Environment.NewLine);
             //Assert.AreEqual (tsa, x509.ToString (true), "ToString(true)");
@@ -6072,8 +6069,7 @@ namespace MonoTests.System.Security.Cryptography.X509Certificates
                 0x0D,
                 0x0A,
             };
-            string tsa = Encoding
-                .Default
+            string tsa = Encoding.Default
                 .GetString(ToStringArray)
                 .Replace("\r\n", Environment.NewLine);
             //Assert.AreEqual (tsa, x509.ToString (true), "ToString(true)");
@@ -8780,8 +8776,7 @@ namespace MonoTests.System.Security.Cryptography.X509Certificates
                 0x0D,
                 0x0A,
             };
-            string tsa = Encoding
-                .Default
+            string tsa = Encoding.Default
                 .GetString(ToStringArray)
                 .Replace("\r\n", Environment.NewLine);
             //Assert.AreEqual (tsa, x509.ToString (true), "ToString(true)");
@@ -10022,8 +10017,7 @@ namespace MonoTests.System.Security.Cryptography.X509Certificates
                 0x0D,
                 0x0A,
             };
-            string tsa = Encoding
-                .Default
+            string tsa = Encoding.Default
                 .GetString(ToStringArray)
                 .Replace("\r\n", Environment.NewLine);
             //Assert.AreEqual (tsa, x509.ToString (true), "ToString(true)");
@@ -13847,8 +13841,7 @@ namespace MonoTests.System.Security.Cryptography.X509Certificates
                 0x0D,
                 0x0A,
             };
-            string tsa = Encoding
-                .Default
+            string tsa = Encoding.Default
                 .GetString(ToStringArray)
                 .Replace("\r\n", Environment.NewLine);
             //Assert.AreEqual (tsa, x509.ToString (true), "ToString(true)");
@@ -17197,8 +17190,7 @@ namespace MonoTests.System.Security.Cryptography.X509Certificates
                 0x0D,
                 0x0A,
             };
-            string tsa = Encoding
-                .Default
+            string tsa = Encoding.Default
                 .GetString(ToStringArray)
                 .Replace("\r\n", Environment.NewLine);
             //Assert.AreEqual (tsa, x509.ToString (true), "ToString(true)");
@@ -18614,8 +18606,7 @@ namespace MonoTests.System.Security.Cryptography.X509Certificates
                 0x0D,
                 0x0A,
             };
-            string tsa = Encoding
-                .Default
+            string tsa = Encoding.Default
                 .GetString(ToStringArray)
                 .Replace("\r\n", Environment.NewLine);
             //Assert.AreEqual (tsa, x509.ToString (true), "ToString(true)");
@@ -21274,8 +21265,7 @@ namespace MonoTests.System.Security.Cryptography.X509Certificates
                 0x0D,
                 0x0A,
             };
-            string tsa = Encoding
-                .Default
+            string tsa = Encoding.Default
                 .GetString(ToStringArray)
                 .Replace("\r\n", Environment.NewLine);
             //Assert.AreEqual (tsa, x509.ToString (true), "ToString(true)");

@@ -635,11 +635,12 @@ namespace System.Workflow.ComponentModel.Design
             //Draw the canvas and the strip
             if (ShowPreview)
             {
-                e.Graphics.DrawLine(
-                    e.DesignerTheme.ForegroundPen,
-                    this.separatorLine[0],
-                    this.separatorLine[1]
-                );
+                e.Graphics
+                    .DrawLine(
+                        e.DesignerTheme.ForegroundPen,
+                        this.separatorLine[0],
+                        this.separatorLine[1]
+                    );
                 this.previewWindow.Draw(e.Graphics, e.ViewPort);
             }
         }
@@ -1232,8 +1233,7 @@ namespace System.Workflow.ComponentModel.Design
                     && activityCollectionDesigner.ActiveDesigner == activityCollectionDesigner
                 )
                 {
-                    childCount += activityCollectionDesigner
-                        .previewStrip
+                    childCount += activityCollectionDesigner.previewStrip
                         .AccessibilityObjects
                         .Length;
 
@@ -1268,9 +1268,8 @@ namespace System.Workflow.ComponentModel.Design
                     if (activityCollectionDesigner.ShowPreview && index == 0)
                         return activityCollectionDesigner.previewWindow.AccessibilityObject;
 
-                    AccessibleObject accessibilityObject = activityCollectionDesigner
-                        .PreviewedDesigner
-                        .AccessibilityObject;
+                    AccessibleObject accessibilityObject =
+                        activityCollectionDesigner.PreviewedDesigner.AccessibilityObject;
                     while (
                         accessibilityObject.Bounds.Size.IsEmpty
                         && accessibilityObject.GetChildCount() > 0

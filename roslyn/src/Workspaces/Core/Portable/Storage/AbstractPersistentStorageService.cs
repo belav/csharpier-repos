@@ -363,8 +363,7 @@ namespace Microsoft.CodeAnalysis.Storage
                 Checksum? checksum,
                 CancellationToken cancellationToken
             ) =>
-                _storage
-                    .Target
+                _storage.Target
                     .WriteStreamAsync(project, name, stream, checksum, cancellationToken);
 
             public Task<bool> WriteStreamAsync(
@@ -374,8 +373,7 @@ namespace Microsoft.CodeAnalysis.Storage
                 Checksum? checksum,
                 CancellationToken cancellationToken
             ) =>
-                _storage
-                    .Target
+                _storage.Target
                     .WriteStreamAsync(document, name, stream, checksum, cancellationToken);
 
             public Task<bool> WriteStreamAsync(
@@ -385,8 +383,7 @@ namespace Microsoft.CodeAnalysis.Storage
                 Checksum? checksum,
                 CancellationToken cancellationToken
             ) =>
-                _storage
-                    .Target
+                _storage.Target
                     .WriteStreamAsync(projectKey, name, stream, checksum, cancellationToken);
 
             public Task<bool> WriteStreamAsync(
@@ -396,8 +393,7 @@ namespace Microsoft.CodeAnalysis.Storage
                 Checksum? checksum,
                 CancellationToken cancellationToken
             ) =>
-                _storage
-                    .Target
+                _storage.Target
                     .WriteStreamAsync(documentKey, name, stream, checksum, cancellationToken);
         }
     }

@@ -534,9 +534,11 @@ public class GoogleTests : RemoteAuthenticationTests<GoogleOptions>
                     Assert.Equal("whyitfailed", ex.Data["error_description"]);
                     Assert.Equal("https://example.com/fail", ex.Data["error_uri"]);
                     remoteFailureCalled = true;
-                    ctx.Response.Redirect(
-                        "/error?FailureMessage=" + UrlEncoder.Default.Encode(ctx.Failure.Message)
-                    );
+                    ctx.Response
+                        .Redirect(
+                            "/error?FailureMessage="
+                                + UrlEncoder.Default.Encode(ctx.Failure.Message)
+                        );
                     ctx.HandleResponse();
                     return Task.FromResult(0);
                 },
@@ -578,10 +580,11 @@ public class GoogleTests : RemoteAuthenticationTests<GoogleOptions>
                         Assert.Equal("itfailed", ex.Data["error"]);
                         Assert.Equal("whyitfailed", ex.Data["error_description"]);
                         Assert.Equal("https://example.com/fail", ex.Data["error_uri"]);
-                        ctx.Response.Redirect(
-                            "/error?FailureMessage="
-                                + UrlEncoder.Default.Encode(ctx.Failure.Message)
-                        );
+                        ctx.Response
+                            .Redirect(
+                                "/error?FailureMessage="
+                                    + UrlEncoder.Default.Encode(ctx.Failure.Message)
+                            );
                         ctx.HandleResponse();
                         return Task.FromResult(0);
                     },
@@ -599,8 +602,7 @@ public class GoogleTests : RemoteAuthenticationTests<GoogleOptions>
             Assert.Equal(HttpStatusCode.Redirect, transaction.Response.StatusCode);
             Assert.Equal(
                 "/error?FailureMessage=itfailed"
-                    + UrlEncoder
-                        .Default
+                    + UrlEncoder.Default
                         .Encode(";Description=whyitfailed;Uri=https://example.com/fail"),
                 transaction.Response.Headers.GetValues("Location").First()
             );
@@ -716,10 +718,11 @@ public class GoogleTests : RemoteAuthenticationTests<GoogleOptions>
                 {
                     OnRemoteFailure = ctx =>
                     {
-                        ctx.Response.Redirect(
-                            "/error?FailureMessage="
-                                + UrlEncoder.Default.Encode(ctx.Failure.Message)
-                        );
+                        ctx.Response
+                            .Redirect(
+                                "/error?FailureMessage="
+                                    + UrlEncoder.Default.Encode(ctx.Failure.Message)
+                            );
                         ctx.HandleResponse();
                         return Task.FromResult(0);
                     },
@@ -745,8 +748,7 @@ public class GoogleTests : RemoteAuthenticationTests<GoogleOptions>
             Assert.Equal(HttpStatusCode.Redirect, transaction.Response.StatusCode);
             Assert.Equal(
                 "/error?FailureMessage="
-                    + UrlEncoder
-                        .Default
+                    + UrlEncoder.Default
                         .Encode(
                             "OAuth token endpoint failure: Status: BadRequest;Headers: ;Body: {\"Error\":\"Error\"};"
                         ),
@@ -790,10 +792,11 @@ public class GoogleTests : RemoteAuthenticationTests<GoogleOptions>
                 {
                     OnRemoteFailure = ctx =>
                     {
-                        ctx.Response.Redirect(
-                            "/error?FailureMessage="
-                                + UrlEncoder.Default.Encode(ctx.Failure.Message)
-                        );
+                        ctx.Response
+                            .Redirect(
+                                "/error?FailureMessage="
+                                    + UrlEncoder.Default.Encode(ctx.Failure.Message)
+                            );
                         ctx.HandleResponse();
                         return Task.FromResult(0);
                     },
@@ -848,8 +851,7 @@ public class GoogleTests : RemoteAuthenticationTests<GoogleOptions>
                 OnCreatingTicket = context =>
                 {
                     var refreshToken = context.RefreshToken;
-                    context
-                        .Principal
+                    context.Principal
                         .AddIdentity(
                             new ClaimsIdentity(
                                 new Claim[]
@@ -1032,9 +1034,11 @@ public class GoogleTests : RemoteAuthenticationTests<GoogleOptions>
             {
                 OnRemoteFailure = ctx =>
                 {
-                    ctx.Response.Redirect(
-                        "/error?FailureMessage=" + UrlEncoder.Default.Encode(ctx.Failure.Message)
-                    );
+                    ctx.Response
+                        .Redirect(
+                            "/error?FailureMessage="
+                                + UrlEncoder.Default.Encode(ctx.Failure.Message)
+                        );
                     ctx.HandleResponse();
                     return Task.FromResult(0);
                 },
@@ -1290,10 +1294,11 @@ public class GoogleTests : RemoteAuthenticationTests<GoogleOptions>
                         );
                     }
                     else if (
-                        req.RequestUri.GetComponents(
-                            UriComponents.SchemeAndServer | UriComponents.Path,
-                            UriFormat.UriEscaped
-                        ) == "https://www.googleapis.com/oauth2/v3/userinfo"
+                        req.RequestUri
+                            .GetComponents(
+                                UriComponents.SchemeAndServer | UriComponents.Path,
+                                UriFormat.UriEscaped
+                            ) == "https://www.googleapis.com/oauth2/v3/userinfo"
                     )
                     {
                         return ReturnJsonResponse(
@@ -1358,10 +1363,11 @@ public class GoogleTests : RemoteAuthenticationTests<GoogleOptions>
                     );
                 }
                 else if (
-                    req.RequestUri.GetComponents(
-                        UriComponents.SchemeAndServer | UriComponents.Path,
-                        UriFormat.UriEscaped
-                    ) == "https://www.googleapis.com/oauth2/v3/userinfo"
+                    req.RequestUri
+                        .GetComponents(
+                            UriComponents.SchemeAndServer | UriComponents.Path,
+                            UriFormat.UriEscaped
+                        ) == "https://www.googleapis.com/oauth2/v3/userinfo"
                 )
                 {
                     return ReturnJsonResponse(

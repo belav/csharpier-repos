@@ -17,8 +17,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertAnonymousType
     [Trait(Traits.Feature, Traits.Features.CodeActionsConvertAnonymousTypeToClass)]
     public class ConvertAnonymousTypeToClassTests : AbstractCSharpCodeActionTest
     {
-        private static readonly ParseOptions CSharp8 = CSharpParseOptions
-            .Default
+        private static readonly ParseOptions CSharp8 = CSharpParseOptions.Default
             .WithLanguageVersion(LanguageVersion.CSharp8);
 
         protected override CodeRefactoringProvider CreateCodeRefactoringProvider(

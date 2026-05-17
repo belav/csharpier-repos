@@ -67,8 +67,7 @@ public static class HtmlHelperComponentExtensions
             : ParameterView.FromDictionary(HtmlHelper.ObjectToDictionary(parameters));
 
         var httpContext = htmlHelper.ViewContext.HttpContext;
-        var componentRenderer = httpContext
-            .RequestServices
+        var componentRenderer = httpContext.RequestServices
             .GetRequiredService<IComponentPrerenderer>();
         return await componentRenderer.PrerenderComponentAsync(
             httpContext,

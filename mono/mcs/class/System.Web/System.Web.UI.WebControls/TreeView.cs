@@ -1403,21 +1403,14 @@ namespace System.Web.UI.WebControls
 
                 if (
                     EnableClientScript
-                    && !page.ClientScript.IsClientScriptIncludeRegistered(
-                        typeof(TreeView),
-                        "TreeView.js"
-                    )
+                    && !page.ClientScript
+                        .IsClientScriptIncludeRegistered(typeof(TreeView), "TreeView.js")
                 )
                 {
-                    string url = page.ClientScript.GetWebResourceUrl(
-                        typeof(TreeView),
-                        "TreeView.js"
-                    );
-                    page.ClientScript.RegisterClientScriptInclude(
-                        typeof(TreeView),
-                        "TreeView.js",
-                        url
-                    );
+                    string url = page.ClientScript
+                        .GetWebResourceUrl(typeof(TreeView), "TreeView.js");
+                    page.ClientScript
+                        .RegisterClientScriptInclude(typeof(TreeView), "TreeView.js", url);
                 }
             }
 
@@ -1479,10 +1472,8 @@ namespace System.Web.UI.WebControls
                 bool enableClientScript = EnableClientScript;
                 if (enableClientScript)
                 {
-                    page.ClientScript.RegisterHiddenField(
-                        ClientID + "_ExpandStates",
-                        GetExpandStates()
-                    );
+                    page.ClientScript
+                        .RegisterHiddenField(ClientID + "_ExpandStates", GetExpandStates());
 
                     // Make sure the basic script infrastructure is rendered
                     page.ClientScript.RegisterWebFormClientScript();
@@ -1508,12 +1499,13 @@ namespace System.Web.UI.WebControls
                     );
                 }
 
-                page.ClientScript.RegisterStartupScript(
-                    typeof(TreeView),
-                    this.UniqueID,
-                    script.ToString(),
-                    true
-                );
+                page.ClientScript
+                    .RegisterStartupScript(
+                        typeof(TreeView),
+                        this.UniqueID,
+                        script.ToString(),
+                        true
+                    );
                 script = null;
             }
         }
@@ -2380,10 +2372,8 @@ namespace System.Web.UI.WebControls
                 if (!String.IsNullOrEmpty(LineImagesFolder))
                     return ResolveClientUrl(LineImagesFolder + "/" + shape + ".gif");
             }
-            return Page.ClientScript.GetWebResourceUrl(
-                typeof(TreeView),
-                "TreeView_" + shape + ".gif"
-            );
+            return Page.ClientScript
+                .GetWebResourceUrl(typeof(TreeView), "TreeView_" + shape + ".gif");
         }
 
         string GetNodeIconUrl(string icon)

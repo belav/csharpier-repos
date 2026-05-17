@@ -58,8 +58,7 @@ namespace System.IO.MemoryMappedFiles
 
             // Query the view for its size and allocation type
             Interop.Kernel32.MEMORY_BASIC_INFORMATION viewInfo = default;
-            Interop
-                .Kernel32
+            Interop.Kernel32
                 .VirtualQuery(viewHandle, ref viewInfo, (UIntPtr)Marshal.SizeOf(viewInfo));
             ulong viewSize = (ulong)viewInfo.RegionSize;
 
@@ -92,8 +91,7 @@ namespace System.IO.MemoryMappedFiles
                 }
                 // again query the view for its new size
                 viewInfo = default;
-                Interop
-                    .Kernel32
+                Interop.Kernel32
                     .VirtualQuery(viewHandle, ref viewInfo, (UIntPtr)Marshal.SizeOf(viewInfo));
                 viewSize = (ulong)viewInfo.RegionSize;
             }

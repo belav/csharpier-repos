@@ -101,8 +101,7 @@ public class InterlockedDecrement1
     {
         if (exValue != nwValue)
         {
-            TestLibrary
-                .TestFramework
+            TestLibrary.TestFramework
                 .LogError(
                     "003",
                     "Interlocked.Decrement() returned wrong value. Expected("
@@ -115,8 +114,7 @@ public class InterlockedDecrement1
         }
         if (exValue != value)
         {
-            TestLibrary
-                .TestFramework
+            TestLibrary.TestFramework
                 .LogError(
                     "003",
                     "Interlocked.Decrement() did not update value. Expected("

@@ -84,8 +84,7 @@ namespace Microsoft.CodeAnalysis.Tools.Tests.Analyzers
         }
 
         private IEnumerable<AnalyzerReference> GetAnalyzerReferences(string prefix) =>
-            _analyzerReferencesProject
-                .AnalyzerReferences
+            _analyzerReferencesProject.AnalyzerReferences
                 .Where(reference => reference.Display.StartsWith(prefix));
 
         [MSBuildFact]

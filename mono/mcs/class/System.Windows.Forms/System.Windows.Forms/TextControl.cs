@@ -2301,8 +2301,7 @@ namespace System.Windows.Forms
                     {
                         // lets draw some selection baby!!  (non multiline selection is drawn outside the loop)
                         g.FillRectangle(
-                            ThemeEngine
-                                .Current
+                            ThemeEngine.Current
                                 .ResPool
                                 .GetSolidBrush(ThemeEngine.Current.ColorHighlight),
                             offset_x + line.widths[line_selection_start - 1] + line.X - viewport_x,
@@ -3639,8 +3638,7 @@ namespace System.Windows.Forms
                         {
                             selection_start.line = selection_anchor.line;
                             selection_start.pos = selection_anchor.height;
-                            selection_start.tag = selection_anchor
-                                .line
+                            selection_start.tag = selection_anchor.line
                                 .FindTag(selection_anchor.height + 1);
 
                             selection_end.line = caret.line;
@@ -3703,8 +3701,7 @@ namespace System.Windows.Forms
                         {
                             selection_start.line = selection_anchor.line;
                             selection_start.pos = selection_anchor.height;
-                            selection_start.tag = selection_anchor
-                                .line
+                            selection_start.tag = selection_anchor.line
                                 .FindTag(selection_anchor.height + 1);
 
                             selection_end.line = caret.line;
@@ -4116,8 +4113,7 @@ namespace System.Windows.Forms
 
             if (selection_start.line == selection_end.line)
             {
-                return selection_start
-                    .line
+                return selection_start.line
                     .text
                     .ToString(selection_start.pos, selection_end.pos - selection_start.pos);
             }
@@ -4133,8 +4129,7 @@ namespace System.Windows.Forms
                 end = selection_end.line.line_no;
 
                 sb.Append(
-                    selection_start
-                        .line
+                    selection_start.line
                         .text
                         .ToString(
                             selection_start.pos,

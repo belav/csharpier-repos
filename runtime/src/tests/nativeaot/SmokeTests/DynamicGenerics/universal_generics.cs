@@ -973,8 +973,7 @@ namespace UniversalGen
         public T compareExchangeTest(T val)
         {
             T ret;
-            ret = System
-                .Threading
+            ret = System.Threading
                 .Interlocked
                 .CompareExchange<T>(ref this.member, val, this.member);
             Assert.IsTrue(this.member.Equals(val));
@@ -1201,8 +1200,7 @@ namespace UniversalGen
             Assert.AreEqual(o.GetVal3(), 6);
 
             // Test with valuetypes as field types
-            t = TypeOf
-                .UG_UCGStaticFields
+            t = TypeOf.UG_UCGStaticFields
                 .MakeGenericType(TypeOf.UG_UCGWrapperStruct, TypeOf.UG_UCGWrapperStruct);
             o = (TestFieldsBase)Activator.CreateInstance(t);
             o.SetVal1(new UCGWrapperStruct(7));
@@ -1227,8 +1225,7 @@ namespace UniversalGen
             Assert.AreEqual(o.GetVal3(), 18);
 
             // Test with valuetypes as field types
-            t = TypeOf
-                .UG_UCGThreadStaticFields
+            t = TypeOf.UG_UCGThreadStaticFields
                 .MakeGenericType(TypeOf.UG_UCGWrapperStruct, TypeOf.UG_UCGWrapperStruct);
             o = (TestFieldsBase)Activator.CreateInstance(t);
             o.SetVal1(new UCGWrapperStruct(19));
@@ -1251,8 +1248,7 @@ namespace UniversalGen
             o.SetVal1(10);
             o.SetVal2(11);
             o.SetVal3(12);
-            var t = TypeOf
-                .UG_UCGStaticFieldsLayoutCompatDynamic
+            var t = TypeOf.UG_UCGStaticFieldsLayoutCompatDynamic
                 .MakeGenericType(TypeOf.Int32, TypeOf.Int32);
             o = (TestFieldsBase)Activator.CreateInstance(t);
             Assert.AreEqual(o.GetVal1(), 10);
@@ -1264,8 +1260,7 @@ namespace UniversalGen
             o.SetVal1(new UCGWrapperStruct(13));
             o.SetVal2(new UCGWrapperStruct(14));
             o.SetVal3(15);
-            t = TypeOf
-                .UG_UCGStaticFieldsLayoutCompatDynamic
+            t = TypeOf.UG_UCGStaticFieldsLayoutCompatDynamic
                 .MakeGenericType(TypeOf.UG_UCGWrapperStruct, TypeOf.UG_UCGWrapperStruct);
             o = (TestFieldsBase)Activator.CreateInstance(t);
             Assert.AreEqual(((UCGWrapperStruct)o.GetVal1())._WrappedValue, 13);
@@ -1666,8 +1661,7 @@ namespace PartialUSC
                     }
 
                     {
-                        var t = TypeOf
-                            .PCT_UCGTestVirtualCalls
+                        var t = TypeOf.PCT_UCGTestVirtualCalls
                             .MakeGenericType(typeArg, TypeOf.Int32);
                         TestVirtualCallsBase caller = (TestVirtualCallsBase)
                             Activator.CreateInstance(t);
@@ -1700,11 +1694,9 @@ namespace PartialUSC
                     }
 
                     {
-                        var t_int = TypeOf
-                            .PCT_UCGTestVirtualCalls
+                        var t_int = TypeOf.PCT_UCGTestVirtualCalls
                             .MakeGenericType(typeArg, TypeOf.Int32);
-                        var t_type = TypeOf
-                            .PCT_UCGTestVirtualCalls
+                        var t_type = TypeOf.PCT_UCGTestVirtualCalls
                             .MakeGenericType(typeArg, TypeOf.Type);
                         TestVirtualCallsBase caller_int = (TestVirtualCallsBase)
                             Activator.CreateInstance(t_int);
@@ -4578,8 +4570,7 @@ namespace DynamicInvoke
             string argParam1Str = argParam1.ToString();
             string argParam2Str = argParam2.ToString();
 
-            var t = TypeOf
-                .DI_TestType
+            var t = TypeOf.DI_TestType
                 .MakeGenericType(
                     typeof(T),
                     TypeOf.String, /* Use int32 here to force usage of the universal template*/
@@ -4770,13 +4761,11 @@ namespace TypeLayout
                 alignmentRight;
             RuntimeTypeHandle rthLeft = left.TypeHandle;
             RuntimeTypeHandle rthRight = right.TypeHandle;
-            Internal
-                .Runtime
+            Internal.Runtime
                 .TypeLoader
                 .TypeLoaderEnvironment
                 .GetFieldAlignmentAndSize(rthLeft, out alignmentLeft, out sizeLeft);
-            Internal
-                .Runtime
+            Internal.Runtime
                 .TypeLoader
                 .TypeLoaderEnvironment
                 .GetFieldAlignmentAndSize(rthRight, out alignmentRight, out sizeRight);
@@ -7527,8 +7516,7 @@ namespace HFATest
             );
 
             {
-                TypeOf
-                    .HFA_TestClass
+                TypeOf.HFA_TestClass
                     .MakeGenericType(genStructInst)
                     .GetTypeInfo()
                     .GetDeclaredMethod("TestStruct")
@@ -7537,8 +7525,7 @@ namespace HFATest
 
             {
                 Type genStructWrapper = TypeOf.HFA_GenStructWrapper.MakeGenericType(genStructInst);
-                TypeOf
-                    .HFA_TestClass
+                TypeOf.HFA_TestClass
                     .MakeGenericType(genStructWrapper)
                     .GetTypeInfo()
                     .GetDeclaredMethod("TestStruct")

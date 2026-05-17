@@ -62,8 +62,7 @@ namespace Mono.CodeContracts.Static.Analysis.Drivers
             if (DebugOptions.Debug)
             {
                 Console.WriteLine("-----APC based CFG-----");
-                RawLayer
-                    .ILDecoder
+                RawLayer.ILDecoder
                     .ContextProvider
                     .MethodContext
                     .CFG
@@ -81,8 +80,7 @@ namespace Mono.CodeContracts.Static.Analysis.Drivers
             if (DebugOptions.Debug)
             {
                 Console.WriteLine("-----Stack based CFG-----");
-                StackLayer
-                    .ILDecoder
+                StackLayer.ILDecoder
                     .ContextProvider
                     .MethodContext
                     .CFG

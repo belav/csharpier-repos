@@ -21,15 +21,13 @@ public class Startup
                 options.Filters.AddService(typeof(ApiExplorerDataFilter));
 
                 options.Conventions.Add(new ApiExplorerVisibilityEnabledConvention());
-                options
-                    .Conventions
+                options.Conventions
                     .Add(
                         new ApiExplorerVisibilityDisabledConvention(
                             typeof(ApiExplorerVisibilityDisabledByConventionController)
                         )
                     );
-                options
-                    .Conventions
+                options.Conventions
                     .Add(
                         new ApiExplorerInboundOutboundConvention(
                             typeof(ApiExplorerInboundOutBoundController)

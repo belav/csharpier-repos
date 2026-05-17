@@ -416,10 +416,11 @@ namespace System.Data.Services.Client
                 "this.reader.NodeType == XmlNodeType.Element"
             );
 
-            string propertyValue = this.reader.GetAttributeEx(
-                XmlConstants.AtomContentSrcAttributeName,
-                XmlConstants.AtomNamespace
-            );
+            string propertyValue = this.reader
+                .GetAttributeEx(
+                    XmlConstants.AtomContentSrcAttributeName,
+                    XmlConstants.AtomNamespace
+                );
             if (propertyValue != null)
             {
                 if (!this.reader.IsEmptyElement)
@@ -443,10 +444,8 @@ namespace System.Data.Services.Client
 
                 targetEntry.MediaLinkEntry = false;
 
-                propertyValue = this.reader.GetAttributeEx(
-                    XmlConstants.AtomTypeAttributeName,
-                    XmlConstants.AtomNamespace
-                );
+                propertyValue = this.reader
+                    .GetAttributeEx(XmlConstants.AtomTypeAttributeName, XmlConstants.AtomNamespace);
                 if (AtomParser.IsAllowedContentType(propertyValue))
                 {
                     if (this.reader.IsEmptyElement)
@@ -530,10 +529,11 @@ namespace System.Data.Services.Client
                 }
 
                 targetEntry.MediaEditUri = this.ConvertHRefAttributeValueIntoURI(href);
-                targetEntry.StreamETagText = this.reader.GetAttribute(
-                    XmlConstants.AtomETagAttributeName,
-                    XmlConstants.DataWebMetadataNamespace
-                );
+                targetEntry.StreamETagText = this.reader
+                    .GetAttribute(
+                        XmlConstants.AtomETagAttributeName,
+                        XmlConstants.DataWebMetadataNamespace
+                    );
             }
 
             if (!this.reader.IsEmptyElement)
@@ -544,9 +544,8 @@ namespace System.Data.Services.Client
                     return;
                 }
 
-                string propertyValueText = this.reader.GetAttribute(
-                    XmlConstants.AtomTypeAttributeName
-                );
+                string propertyValueText = this.reader
+                    .GetAttribute(XmlConstants.AtomTypeAttributeName);
                 bool isFeed;
 
                 if (!IsAllowedLinkType(propertyValueText, out isFeed))
@@ -579,10 +578,8 @@ namespace System.Data.Services.Client
                         "reader must be a instance of XmlWrappingReader"
                     );
                     string readerBaseUri = this.reader.BaseURI;
-                    XmlReader nestedReader = Xml.XmlWrappingReader.CreateReader(
-                        readerBaseUri,
-                        this.reader.ReadSubtree()
-                    );
+                    XmlReader nestedReader = Xml.XmlWrappingReader
+                        .CreateReader(readerBaseUri, this.reader.ReadSubtree());
                     nestedReader.Read();
                     Debug.Assert(
                         nestedReader.LocalName == "inline",
@@ -723,10 +720,11 @@ namespace System.Data.Services.Client
 
             AtomContentProperty result = new AtomContentProperty();
             result.Name = this.reader.LocalName;
-            result.TypeName = this.reader.GetAttributeEx(
-                XmlConstants.AtomTypeAttributeName,
-                XmlConstants.DataWebMetadataNamespace
-            );
+            result.TypeName = this.reader
+                .GetAttributeEx(
+                    XmlConstants.AtomTypeAttributeName,
+                    XmlConstants.DataWebMetadataNamespace
+                );
             result.IsNull = Util.DoesNullAttributeSayTrue(this.reader);
             result.Text = result.IsNull ? null : String.Empty;
 
@@ -800,10 +798,11 @@ namespace System.Data.Services.Client
             targetEntry = new AtomEntry();
             targetEntry.DataValues = new List<AtomContentProperty>();
             targetEntry.Tag = callbackResult.Value;
-            targetEntry.ETagText = this.reader.GetAttribute(
-                XmlConstants.AtomETagAttributeName,
-                XmlConstants.DataWebMetadataNamespace
-            );
+            targetEntry.ETagText = this.reader
+                .GetAttribute(
+                    XmlConstants.AtomETagAttributeName,
+                    XmlConstants.DataWebMetadataNamespace
+                );
 
             while (this.reader.Read())
             {
@@ -824,16 +823,18 @@ namespace System.Data.Services.Client
                             && targetEntry.TypeName == null
                         )
                         {
-                            string text = this.reader.GetAttributeEx(
-                                XmlConstants.AtomCategorySchemeAttributeName,
-                                XmlConstants.AtomNamespace
-                            );
-                            if (text == this.typeScheme)
-                            {
-                                targetEntry.TypeName = this.reader.GetAttributeEx(
-                                    XmlConstants.AtomCategoryTermAttributeName,
+                            string text = this.reader
+                                .GetAttributeEx(
+                                    XmlConstants.AtomCategorySchemeAttributeName,
                                     XmlConstants.AtomNamespace
                                 );
+                            if (text == this.typeScheme)
+                            {
+                                targetEntry.TypeName = this.reader
+                                    .GetAttributeEx(
+                                        XmlConstants.AtomCategoryTermAttributeName,
+                                        XmlConstants.AtomNamespace
+                                    );
                             }
                         }
                         else if (elementName == XmlConstants.AtomContentElementName)

@@ -1881,8 +1881,7 @@ namespace System.Xml.XmlConvertTests
                     23,
                     15,
                     55,
-                    TimeZoneInfo
-                        .Local
+                    TimeZoneInfo.Local
                         .GetUtcOffset(
                             new DateTime(
                                 DateTime.Now.Year,

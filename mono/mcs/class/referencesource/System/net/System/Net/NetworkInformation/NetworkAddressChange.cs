@@ -275,8 +275,7 @@ namespace System.Net.NetworkInformation
                                 true,
                                 false
                             );
-                            UnsafeNclNativeMethods
-                                .OSSOCK
+                            UnsafeNclNativeMethods.OSSOCK
                                 .ioctlsocket(
                                     s_ipv4Socket,
                                     IoctlSocketConstants.FIONBIO,
@@ -295,8 +294,7 @@ namespace System.Net.NetworkInformation
                                 true,
                                 false
                             );
-                            UnsafeNclNativeMethods
-                                .OSSOCK
+                            UnsafeNclNativeMethods.OSSOCK
                                 .ioctlsocket(
                                     s_ipv6Socket,
                                     IoctlSocketConstants.FIONBIO,
@@ -339,8 +337,7 @@ namespace System.Net.NetworkInformation
                             );
 
                             errorCode = (SocketError)
-                                UnsafeNclNativeMethods
-                                    .OSSOCK
+                                UnsafeNclNativeMethods.OSSOCK
                                     .WSAIoctl_Blocking(
                                         s_ipv4Socket.DangerousGetHandle(),
                                         (int)IOControlCode.AddressListChange,
@@ -364,8 +361,7 @@ namespace System.Net.NetworkInformation
                             }
 
                             errorCode = (SocketError)
-                                UnsafeNclNativeMethods
-                                    .OSSOCK
+                                UnsafeNclNativeMethods.OSSOCK
                                     .WSAEventSelect(
                                         s_ipv4Socket,
                                         s_ipv4Socket.GetEventHandle().SafeWaitHandle,
@@ -391,8 +387,7 @@ namespace System.Net.NetworkInformation
                             );
 
                             errorCode = (SocketError)
-                                UnsafeNclNativeMethods
-                                    .OSSOCK
+                                UnsafeNclNativeMethods.OSSOCK
                                     .WSAIoctl_Blocking(
                                         s_ipv6Socket.DangerousGetHandle(),
                                         (int)IOControlCode.AddressListChange,
@@ -416,8 +411,7 @@ namespace System.Net.NetworkInformation
                             }
 
                             errorCode = (SocketError)
-                                UnsafeNclNativeMethods
-                                    .OSSOCK
+                                UnsafeNclNativeMethods.OSSOCK
                                     .WSAEventSelect(
                                         s_ipv6Socket,
                                         s_ipv6Socket.GetEventHandle().SafeWaitHandle,

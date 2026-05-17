@@ -26,8 +26,7 @@ namespace System.ServiceModel
         public FaultContractAttribute(Type detailType)
         {
             if (detailType == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("detailType"));
 
             this.type = detailType;
@@ -57,8 +56,7 @@ namespace System.ServiceModel
                 if (value == null)
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("value");
                 if (value == string.Empty)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentOutOfRangeException(
                                 "value",
@@ -87,8 +85,7 @@ namespace System.ServiceModel
             set
             {
                 if (!ProtectionLevelHelper.IsDefined(value))
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new ArgumentOutOfRangeException("value"));
                 this.protectionLevel = value;
                 this.hasProtectionLevel = true;

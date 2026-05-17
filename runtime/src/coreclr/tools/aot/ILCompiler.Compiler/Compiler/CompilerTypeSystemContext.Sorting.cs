@@ -62,8 +62,7 @@ namespace ILCompiler
             {
                 var otherMethod = (DefaultInterfaceMethodImplementationInstantiationThunk)other;
 
-                int result = System
-                    .Collections
+                int result = System.Collections
                     .Generic
                     .Comparer<int>
                     .Default

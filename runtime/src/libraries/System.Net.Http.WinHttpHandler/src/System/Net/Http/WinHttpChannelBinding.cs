@@ -19,8 +19,7 @@ namespace System.Net.Http
             uint dataSize = 0;
 
             if (
-                !Interop
-                    .WinHttp
+                !Interop.WinHttp
                     .WinHttpQueryOption(
                         requestHandle,
                         Interop.WinHttp.WINHTTP_OPTION_SERVER_CBT,
@@ -34,8 +33,7 @@ namespace System.Net.Http
                     IntPtr data = Marshal.AllocHGlobal((int)dataSize);
 
                     if (
-                        Interop
-                            .WinHttp
+                        Interop.WinHttp
                             .WinHttpQueryOption(
                                 requestHandle,
                                 Interop.WinHttp.WINHTTP_OPTION_SERVER_CBT,

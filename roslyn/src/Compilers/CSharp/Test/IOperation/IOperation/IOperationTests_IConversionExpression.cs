@@ -216,8 +216,7 @@ IVariableDeclaratorOperation (Symbol: System.Int32 i1) (OperationKind.VariableDe
                     Assert.Null(typeInfo.Type);
                     Assert.Null(typeInfo.ConvertedType);
 
-                    var initializerOperation = ((IVariableDeclaratorOperation)operation)
-                        .Initializer
+                    var initializerOperation = ((IVariableDeclaratorOperation)operation).Initializer
                         .Value;
                     Assert.Null(initializerOperation.Type);
                     Assert.Equal(OperationKind.Invalid, initializerOperation.Kind);
@@ -461,8 +460,7 @@ IVariableDeclaratorOperation (Symbol: System.Object o) (OperationKind.VariableDe
                     },
                     OperationSelector = (operation) =>
                     {
-                        var initializer = ((IVariableDeclaratorOperation)operation)
-                            .Initializer
+                        var initializer = ((IVariableDeclaratorOperation)operation).Initializer
                             .Value;
                         return (IConversionOperation)((ICoalesceOperation)initializer).WhenNull;
                     },

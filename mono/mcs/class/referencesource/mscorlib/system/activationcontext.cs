@@ -155,8 +155,7 @@ namespace System
                     );
 
                 if (
-                    IsolationInterop
-                        .IdentityAuthority
+                    IsolationInterop.IdentityAuthority
                         .AreDefinitionsEqual(0, cms.Identity, asbId[0])
                 )
                 {
@@ -529,8 +528,7 @@ namespace System
             if (applicationIdentityFullName == null)
                 throw new ArgumentNullException("applicationIdentityFullName");
             Contract.EndContractBlock();
-            _appId = IsolationInterop
-                .AppIdAuthority
+            _appId = IsolationInterop.AppIdAuthority
                 .TextToDefinition(0, applicationIdentityFullName);
         }
 

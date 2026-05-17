@@ -37,16 +37,14 @@ internal sealed class DefaultValidationMetadataProvider : IValidationMetadataPro
         // that type. Thus, we ignore context.TypeAttributes for properties and not check at all for types.
         if (context.Key.MetadataKind == ModelMetadataKind.Property)
         {
-            var validationFilter = context
-                .PropertyAttributes!
+            var validationFilter = context.PropertyAttributes!
                 .OfType<IPropertyValidationFilter>()
                 .FirstOrDefault();
             if (validationFilter == null)
             {
                 // No IPropertyValidationFilter attributes on the property.
                 // Check if container has such an attribute.
-                validationFilter = context
-                    .Key
+                validationFilter = context.Key
                     .ContainerType!
                     .GetCustomAttributes(inherit: true)
                     .OfType<IPropertyValidationFilter>()
@@ -57,8 +55,7 @@ internal sealed class DefaultValidationMetadataProvider : IValidationMetadataPro
         }
         else if (context.Key.MetadataKind == ModelMetadataKind.Parameter)
         {
-            var validationFilter = context
-                .ParameterAttributes!
+            var validationFilter = context.ParameterAttributes!
                 .OfType<IPropertyValidationFilter>()
                 .FirstOrDefault();
             context.ValidationMetadata.PropertyValidationFilter = validationFilter;

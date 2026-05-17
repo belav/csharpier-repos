@@ -74,8 +74,7 @@ namespace System.CommandLine.Tests
                 $"@{responseFile}"
             );
 
-            result
-                .CommandResult
+            result.CommandResult
                 .Tokens
                 .Select(t => t.Value)
                 .Should()
@@ -92,8 +91,7 @@ namespace System.CommandLine.Tests
                 new CliCommand("subcommand") { new CliArgument<string[]>("arg") },
             }.Parse($"subcommand @{responseFile}");
 
-            result
-                .CommandResult
+            result.CommandResult
                 .Tokens
                 .Select(t => t.Value)
                 .Should()
@@ -110,8 +108,7 @@ namespace System.CommandLine.Tests
                 new CliCommand("subcommand") { new CliArgument<string[]>("arg") },
             }.Parse($"@{responseFile} one two three");
 
-            result
-                .CommandResult
+            result.CommandResult
                 .Tokens
                 .Select(t => t.Value)
                 .Should()
@@ -128,8 +125,7 @@ namespace System.CommandLine.Tests
                 new CliCommand("subcommand") { new CliArgument<string[]>("arg") },
             }.Parse($"subcommand @{responseFile}");
 
-            result
-                .CommandResult
+            result.CommandResult
                 .Tokens
                 .Select(t => t.Value)
                 .Should()
@@ -182,8 +178,7 @@ namespace System.CommandLine.Tests
             result.GetResult(optionOne).Should().BeNull();
             result.GetResult(optionTwo).Should().BeNull();
             result.Errors.Should().HaveCount(1);
-            result
-                .Errors
+            result.Errors
                 .Single()
                 .Message
                 .Should()
@@ -218,8 +213,7 @@ namespace System.CommandLine.Tests
                 result.GetResult(optionOne).Should().BeNull();
                 result.GetResult(optionTwo).Should().BeNull();
                 result.Errors.Should().HaveCount(1);
-                result
-                    .Errors
+                result.Errors
                     .Single()
                     .Message
                     .Should()
@@ -257,8 +251,7 @@ namespace System.CommandLine.Tests
 
             var result = CliParser.Parse(command, "@file.rsp", configuration);
 
-            result
-                .Tokens
+            result.Tokens
                 .Should()
                 .Contain(t => t.Value == "@file.rsp" && t.Type == CliTokenType.Argument);
             result.Errors.Should().HaveCount(0);

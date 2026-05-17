@@ -115,8 +115,7 @@ namespace System.Runtime
                 (IntPtr)obj.GetMethodTable(),
                 RuntimeMethodHandle.ToIntPtr(slot),
                 (IntPtr context, IntPtr signature, object contextObject, ref IntPtr auxResult) =>
-                    RuntimeAugments
-                        .TypeLoaderCallbacks
+                    RuntimeAugments.TypeLoaderCallbacks
                         .ResolveGenericVirtualMethodTarget(
                             new RuntimeTypeHandle(new EETypePtr(context)),
                             *(RuntimeMethodHandle*)&signature
@@ -140,8 +139,7 @@ namespace System.Runtime
                         object contextObject,
                         ref IntPtr auxResult
                     ) =>
-                        Internal
-                            .Runtime
+                        Internal.Runtime
                             .CompilerServices
                             .OpenMethodResolver
                             .ResolveMethodWorker(signature, contextObject),
@@ -165,8 +163,7 @@ namespace System.Runtime
                 ctx,
                 sig,
                 (IntPtr context, IntPtr signature, object contextObject, ref IntPtr auxResult) =>
-                    RuntimeAugments
-                        .TypeLoaderCallbacks
+                    RuntimeAugments.TypeLoaderCallbacks
                         .GenericLookupFromContextAndSignature(context, signature, out auxResult)
             );
         }

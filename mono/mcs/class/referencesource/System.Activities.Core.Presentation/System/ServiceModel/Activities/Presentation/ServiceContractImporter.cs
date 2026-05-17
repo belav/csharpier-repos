@@ -201,8 +201,7 @@ namespace System.ServiceModel.Activities.Presentation
                 {
                     Name = "__handle",
                 };
-                receive
-                    .CorrelationInitializers
+                receive.CorrelationInitializers
                     .Add(
                         new RequestReplyCorrelationInitializer
                         {
@@ -223,8 +222,7 @@ namespace System.ServiceModel.Activities.Presentation
                     }
 
                     faultReply.Request = receive;
-                    string faultName = faultReply
-                        .DisplayName
+                    string faultName = faultReply.DisplayName
                         .Substring(0, faultReply.DisplayName.Length - SendFaultReply.Length);
                     faultReply.DisplayName = receive.OperationName + SendFaultReplySuffix;
                     replySelector.Cases.Add(faultName, faultReply);

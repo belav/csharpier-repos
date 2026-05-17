@@ -84,8 +84,7 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.InProcess
         }
 
         public async Task InvokeAsync(CancellationToken cancellationToken) =>
-            await TestServices
-                .Input
+            await TestServices.Input
                 .SendAsync(
                     [
                         (VirtualKeyCode.VK_R, VirtualKeyCode.CONTROL),
@@ -97,16 +96,14 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.InProcess
         public async Task ClickOKAsync(CancellationToken cancellationToken)
         {
             await ClickAsync(dialog => dialog.GetTestAccessor().OKButton, cancellationToken);
-            await TestServices
-                .Workspace
+            await TestServices.Workspace
                 .WaitForAsyncOperationsAsync(FeatureAttribute.LightBulb, cancellationToken);
         }
 
         public async Task ClickCancelAsync(CancellationToken cancellationToken)
         {
             await ClickAsync(dialog => dialog.GetTestAccessor().CancelButton, cancellationToken);
-            await TestServices
-                .Workspace
+            await TestServices.Workspace
                 .WaitForAsyncOperationsAsync(FeatureAttribute.LightBulb, cancellationToken);
         }
 

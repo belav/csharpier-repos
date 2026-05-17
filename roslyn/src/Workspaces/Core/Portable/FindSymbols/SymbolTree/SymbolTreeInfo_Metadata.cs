@@ -71,8 +71,7 @@ namespace Microsoft.CodeAnalysis.FindSymbols
 
             unsafe
             {
-                return MetadataStringDecoder
-                    .DefaultUTF8
+                return MetadataStringDecoder.DefaultUTF8
                     .GetString(blobReader.CurrentPointer, backtickIndex);
             }
         }
@@ -793,8 +792,7 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                         if (dotIndex == -1)
                         {
                             simpleNames.Add(
-                                MetadataStringDecoder
-                                    .DefaultUTF8
+                                MetadataStringDecoder.DefaultUTF8
                                     .GetString(blobReader.CurrentPointer, blobReader.RemainingBytes)
                             );
                             return;
@@ -802,8 +800,7 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                         else
                         {
                             simpleNames.Add(
-                                MetadataStringDecoder
-                                    .DefaultUTF8
+                                MetadataStringDecoder.DefaultUTF8
                                     .GetString(blobReader.CurrentPointer, dotIndex)
                             );
                             blobReader.Offset += dotIndex + 1;
@@ -852,8 +849,7 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                     case HandleKind.TypeReference:
                         return baseTypeOrInterfaceHandle;
                     case HandleKind.TypeSpecification:
-                        return FirstEntityHandleProvider
-                            .Instance
+                        return FirstEntityHandleProvider.Instance
                             .GetTypeFromSpecification(
                                 metadataReader,
                                 (TypeSpecificationHandle)baseTypeOrInterfaceHandle

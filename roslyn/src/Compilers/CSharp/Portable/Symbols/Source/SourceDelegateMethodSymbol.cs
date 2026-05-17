@@ -187,8 +187,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             {
                 var parameterSymbol = invoke.Parameters[i];
                 if (
-                    !parameterSymbol
-                        .TypeWithAnnotations
+                    !parameterSymbol.TypeWithAnnotations
                         .IsAtLeastAsVisibleAs(delegateType, ref useSiteInfo)
                 )
                 {

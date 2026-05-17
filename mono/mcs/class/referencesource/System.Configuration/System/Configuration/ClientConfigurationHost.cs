@@ -86,8 +86,7 @@ namespace System.Configuration
             {
                 if (s_machineConfigFilePath == null)
                 {
-                    string directory = System
-                        .Runtime
+                    string directory = System.Runtime
                         .InteropServices
                         .RuntimeEnvironment
                         .GetRuntimeDirectory();

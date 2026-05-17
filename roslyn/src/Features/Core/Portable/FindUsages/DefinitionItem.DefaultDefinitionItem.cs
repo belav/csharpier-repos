@@ -62,8 +62,7 @@ namespace Microsoft.CodeAnalysis.FindUsages
                     {
                         Contract.ThrowIfNull(project);
 
-                        var navigationService = workspace
-                            .Services
+                        var navigationService = workspace.Services
                             .GetRequiredService<ISymbolNavigationService>();
                         return await navigationService
                             .GetNavigableLocationAsync(symbol, project, cancellationToken)

@@ -774,8 +774,7 @@ namespace System.Threading.Tasks
                     // to run this task, in effect temporarily taking that task's count allocation.
                     ProcessingMode currentThreadMode;
                     if (
-                        m_pair
-                            .m_threadProcessingMapping
+                        m_pair.m_threadProcessingMapping
                             .TryGetValue(
                                 Thread.CurrentThread.ManagedThreadId,
                                 out currentThreadMode

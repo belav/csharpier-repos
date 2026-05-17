@@ -77,8 +77,7 @@ namespace Microsoft.CodeAnalysis.Interactive
         )
         {
             Debug.Assert(
-                languageInfo
-                    .InteractiveResponseFileName
+                languageInfo.InteractiveResponseFileName
                     .IndexOfAny([Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar]) == -1
             );
 
@@ -127,8 +126,7 @@ namespace Microsoft.CodeAnalysis.Interactive
         )
         {
             // Capture and clear exising submission buffers. Independent of other operations that occur on restart.
-            _ = _threadingContext
-                .JoinableTaskFactory
+            _ = _threadingContext.JoinableTaskFactory
                 .RunAsync(async () =>
                 {
                     await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync();

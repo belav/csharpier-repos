@@ -28,8 +28,7 @@ public static class GCInfoHealthCheckBuilderExtensions
         // Configure named options to pass the threshold into the check.
         if (thresholdInBytes.HasValue)
         {
-            builder
-                .Services
+            builder.Services
                 .Configure<GCInfoOptions>(
                     name,
                     options =>

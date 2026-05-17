@@ -93,8 +93,7 @@ public abstract class DiagnosticVerifier
             var options = compilation.Options;
             if (additionalEnabledDiagnostics.Length > 0)
             {
-                options = compilation
-                    .Options
+                options = compilation.Options
                     .WithSpecificDiagnosticOptions(
                         additionalEnabledDiagnostics.ToDictionary(
                             s => s,

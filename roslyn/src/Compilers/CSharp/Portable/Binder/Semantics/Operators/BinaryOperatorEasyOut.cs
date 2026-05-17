@@ -5630,8 +5630,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             Debug.Assert(leftConversion.Exists && leftConversion.IsImplicit);
             Debug.Assert(rightConversion.Exists && rightConversion.IsImplicit);
 
-            result
-                .Results
+            result.Results
                 .Add(
                     BinaryOperatorAnalysisResult.Applicable(
                         signature,

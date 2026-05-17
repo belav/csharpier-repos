@@ -68,8 +68,7 @@ namespace System.Web.Http.ApiExplorer
                 new Dictionary<string, HttpControllerDescriptor>();
             foreach (Type controllerType in controllerTypes)
             {
-                string controllerName = controllerType
-                    .Name
+                string controllerName = controllerType.Name
                     .Substring(
                         0,
                         controllerType.Name.Length

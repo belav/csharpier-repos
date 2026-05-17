@@ -150,13 +150,14 @@ internal abstract class AbstractEmbeddedLanguageFeatureService<TService>
         // First, see if this is a string annotated with either a comment or [StringSyntax] attribute. If
         // so, delegate to the first feature provider we have registered for whatever language ID we find.
         if (
-            this._detector.IsEmbeddedLanguageToken(
-                token,
-                semanticModel,
-                cancellationToken,
-                out var identifier,
-                out _
-            ) && _identifierToServices.TryGetValue(identifier, out var services)
+            this._detector
+                .IsEmbeddedLanguageToken(
+                    token,
+                    semanticModel,
+                    cancellationToken,
+                    out var identifier,
+                    out _
+                ) && _identifierToServices.TryGetValue(identifier, out var services)
         )
         {
             Contract.ThrowIfTrue(services.IsDefaultOrEmpty);

@@ -1316,10 +1316,11 @@ namespace System.Data.Linq.Mapping
             this.memberMap = map;
             if (this.memberMap != null && this.memberMap.StorageMemberName != null)
             {
-                MemberInfo[] mis = mi.DeclaringType.GetMember(
-                    this.memberMap.StorageMemberName,
-                    BindingFlags.Instance | BindingFlags.NonPublic
-                );
+                MemberInfo[] mis = mi.DeclaringType
+                    .GetMember(
+                        this.memberMap.StorageMemberName,
+                        BindingFlags.Instance | BindingFlags.NonPublic
+                    );
                 if (mis == null || mis.Length != 1)
                 {
                     throw Error.BadStorageProperty(
@@ -2107,8 +2108,7 @@ namespace System.Data.Linq.Mapping
             for (int i = 0; i < names.Length; i++)
             {
                 names[i] = names[i].Trim();
-                MemberInfo[] rmis = mtype
-                    .Type
+                MemberInfo[] rmis = mtype.Type
                     .GetMember(
                         names[i],
                         BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic

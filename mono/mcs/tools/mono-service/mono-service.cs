@@ -43,8 +43,7 @@ class MonoServiceRunner : MarshalByRefObject
 
     static void Usage()
     {
-        Console
-            .Error
+        Console.Error
             .WriteLine(
                 "Usage is:\n"
                     + "mono-service [-d:DIRECTORY] [-l:LOCKFILE] [-n:NAME] [-m:LOGNAME] service.exe\n"
@@ -279,8 +278,7 @@ class MonoServiceRunner : MarshalByRefObject
 
             // And run its Main. Our RunService handler is invoked from
             // ServiceBase.Run.
-            return AppDomain
-                .CurrentDomain
+            return AppDomain.CurrentDomain
                 .ExecuteAssembly(assembly, AppDomain.CurrentDomain.Evidence, args);
         }
         catch (Exception ex)

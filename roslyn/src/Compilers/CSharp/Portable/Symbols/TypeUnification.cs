@@ -37,8 +37,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 );
 
                 Debug.Assert(
-                    substituted1
-                        .Type
+                    substituted1.Type
                         .Equals(substituted2.Type, TypeCompareKind.CLRSignatureCompareOptions)
                 );
                 Debug.Assert(
@@ -263,9 +262,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                     if (
                         t1.CustomModifiers.Length < t2.CustomModifiers.Length
-                        && t1.CustomModifiers.SequenceEqual(
-                            t2.CustomModifiers.Take(t1.CustomModifiers.Length)
-                        )
+                        && t1.CustomModifiers
+                            .SequenceEqual(t2.CustomModifiers.Take(t1.CustomModifiers.Length))
                     )
                     {
                         AddSubstitution(
@@ -295,9 +293,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                         if (
                             t2.CustomModifiers.Length < t1.CustomModifiers.Length
-                            && t2.CustomModifiers.SequenceEqual(
-                                t1.CustomModifiers.Take(t2.CustomModifiers.Length)
-                            )
+                            && t2.CustomModifiers
+                                .SequenceEqual(t1.CustomModifiers.Take(t2.CustomModifiers.Length))
                         )
                         {
                             AddSubstitution(

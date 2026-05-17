@@ -92,14 +92,11 @@ namespace System.Management
 
             int status = qualifierSetType switch
             {
-                QualifierType.ObjectQualifier => parent
-                    .wbemObject
+                QualifierType.ObjectQualifier => parent.wbemObject
                     .GetQualifierSet_(out qualifierSet),
-                QualifierType.PropertyQualifier => parent
-                    .wbemObject
+                QualifierType.PropertyQualifier => parent.wbemObject
                     .GetPropertyQualifierSet_(propertyOrMethodName, out qualifierSet),
-                QualifierType.MethodQualifier => parent
-                    .wbemObject
+                QualifierType.MethodQualifier => parent.wbemObject
                     .GetMethodQualifierSet_(propertyOrMethodName, out qualifierSet),
                 _ => throw new ManagementException(ManagementStatus.Unexpected, null, null), // Is this the best fit error ??
             };
@@ -351,14 +348,11 @@ namespace System.Management
 
                 status = qualifierType switch
                 {
-                    QualifierType.ObjectQualifier => parent
-                        .wbemObject
+                    QualifierType.ObjectQualifier => parent.wbemObject
                         .GetQualifierSet_(out qualifierSet),
-                    QualifierType.PropertyQualifier => parent
-                        .wbemObject
+                    QualifierType.PropertyQualifier => parent.wbemObject
                         .GetPropertyQualifierSet_(propertyOrMethodName, out qualifierSet),
-                    QualifierType.MethodQualifier => parent
-                        .wbemObject
+                    QualifierType.MethodQualifier => parent.wbemObject
                         .GetMethodQualifierSet_(propertyOrMethodName, out qualifierSet),
                     _ => throw new ManagementException(ManagementStatus.Unexpected, null, null), // Is this the best fit error ??
                 };

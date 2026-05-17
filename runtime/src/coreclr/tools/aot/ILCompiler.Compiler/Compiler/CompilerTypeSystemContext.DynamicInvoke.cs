@@ -31,8 +31,7 @@ namespace ILCompiler
             protected override DynamicInvokeMethodThunk CreateValueFromKey(MethodSignature key)
             {
                 return new DynamicInvokeMethodThunk(
-                    ((CompilerTypeSystemContext)key.Context)
-                        .GeneratedAssembly
+                    ((CompilerTypeSystemContext)key.Context).GeneratedAssembly
                         .GetGlobalModuleType(),
                     key
                 );

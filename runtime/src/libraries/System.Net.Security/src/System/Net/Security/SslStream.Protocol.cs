@@ -280,8 +280,7 @@ namespace System.Net.Security
                 // private key, so we don't have to do any further processing.
                 //
 
-                _selectedClientCertificate = _sslAuthenticationOptions
-                    .CertificateContext
+                _selectedClientCertificate = _sslAuthenticationOptions.CertificateContext
                     .TargetCertificate;
                 if (NetEventSource.Log.IsEnabled())
                     NetEventSource.Info(this, $"Selected cert = {_selectedClientCertificate}");
@@ -454,8 +453,7 @@ namespace System.Net.Security
                     }
 
                     if (NetEventSource.Log.IsEnabled())
-                        NetEventSource
-                            .Log
+                        NetEventSource.Log
                             .SelectedCert(_sslAuthenticationOptions.ClientCertificates[i], this);
 
                     EnsureInitialized(ref filteredCerts)
@@ -930,8 +928,7 @@ namespace System.Net.Security
                     if (_sslAuthenticationOptions.IsServer)
                     {
                         sendTrustList =
-                            _sslAuthenticationOptions
-                                .CertificateContext
+                            _sslAuthenticationOptions.CertificateContext
                                 ?.Trust
                                 ?._sendTrustInHandshake
                             ?? false;
@@ -1183,8 +1180,7 @@ namespace System.Net.Security
                 if (
                     _remoteCertificate != null
                     && certificate != null
-                    && certificate
-                        .RawDataMemory
+                    && certificate.RawDataMemory
                         .Span
                         .SequenceEqual(_remoteCertificate.RawDataMemory.Span)
                 )
@@ -1224,8 +1220,7 @@ namespace System.Net.Security
                             chain.ChainPolicy.TrustMode = X509ChainTrustMode.CustomRootTrust;
                             if (trust._store != null)
                             {
-                                chain
-                                    .ChainPolicy
+                                chain.ChainPolicy
                                     .CustomTrustStore
                                     .AddRange(trust._store.Certificates);
                             }
@@ -1240,8 +1235,7 @@ namespace System.Net.Security
                     if (chain.ChainPolicy.ApplicationPolicy.Count == 0)
                     {
                         // Authenticate the remote party: (e.g. when operating in server mode, authenticate the client).
-                        chain
-                            .ChainPolicy
+                        chain.ChainPolicy
                             .ApplicationPolicy
                             .Add(
                                 _sslAuthenticationOptions.IsServer
@@ -1498,15 +1492,13 @@ namespace System.Net.Security
                 NetEventSource.Log.RemoteCertificateError(this, SR.net_log_remote_cert_has_errors);
                 if ((sslPolicyErrors & SslPolicyErrors.RemoteCertificateNotAvailable) != 0)
                 {
-                    NetEventSource
-                        .Log
+                    NetEventSource.Log
                         .RemoteCertificateError(this, SR.net_log_remote_cert_not_available);
                 }
 
                 if ((sslPolicyErrors & SslPolicyErrors.RemoteCertificateNameMismatch) != 0)
                 {
-                    NetEventSource
-                        .Log
+                    NetEventSource.Log
                         .RemoteCertificateError(this, SR.net_log_remote_cert_name_mismatch);
                 }
 

@@ -36,8 +36,7 @@ public static class ObservableExtensions
         var abortRegistration = connectionAborted.Register(() => channel.Writer.TryComplete());
 
         // Complete the subscription on the reader completing
-        channel
-            .Reader
+        channel.Reader
             .Completion
             .ContinueWith(task =>
             {

@@ -81,8 +81,7 @@ namespace System.Linq.Parallel
                         cancelEx != null
                         && cancelEx.CancellationToken
                             == SpecifiedQuerySettings.CancellationState.ExternalCancellationToken
-                        && SpecifiedQuerySettings
-                            .CancellationState
+                        && SpecifiedQuerySettings.CancellationState
                             .ExternalCancellationToken
                             .IsCancellationRequested
                     )

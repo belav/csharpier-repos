@@ -51,8 +51,7 @@ namespace System.IdentityModel.Tokens
                 {
                     if (value.Value >= this.notOnOrAfter.Value)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperArgument("value", SR.GetString(SR.ID4116));
                     }
                 }
@@ -77,8 +76,7 @@ namespace System.IdentityModel.Tokens
                 {
                     if (value.Value <= this.notBefore.Value)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperArgument("value", SR.GetString(SR.ID4116));
                     }
                 }

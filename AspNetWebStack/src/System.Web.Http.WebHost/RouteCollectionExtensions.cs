@@ -112,8 +112,7 @@ namespace System.Web.Http
                 constraints
             );
             HostedHttpRoute httpRoute = (HostedHttpRoute)
-                GlobalConfiguration
-                    .Configuration
+                GlobalConfiguration.Configuration
                     .Routes
                     .CreateRoute(
                         routeTemplate,

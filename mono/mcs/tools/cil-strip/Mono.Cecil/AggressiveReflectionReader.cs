@@ -73,9 +73,8 @@ namespace Mono.Cecil
                 GenericParamConstraintRow gpcRow = gpcTable[i];
                 GenericParameter gp = GetGenericParameterAt(gpcRow.Owner);
 
-                gp.Constraints.Add(
-                    GetTypeDefOrRef(gpcRow.Constraint, new GenericContext(gp.Owner))
-                );
+                gp.Constraints
+                    .Add(GetTypeDefOrRef(gpcRow.Constraint, new GenericContext(gp.Owner)));
             }
         }
 
@@ -275,8 +274,7 @@ namespace Mono.Cecil
             {
                 InterfaceImplRow intfsRow = intfsTable[i];
                 TypeDefinition owner = GetTypeDefAt(intfsRow.Class);
-                owner
-                    .Interfaces
+                owner.Interfaces
                     .Add(GetTypeDefOrRef(intfsRow.Interface, new GenericContext(owner)));
             }
         }
@@ -299,8 +297,7 @@ namespace Mono.Cecil
                             owner.Overrides.Add(GetMethodDefAt(implRow.MethodDeclaration.RID));
                             break;
                         case TokenType.MemberRef:
-                            owner
-                                .Overrides
+                            owner.Overrides
                                 .Add(
                                     (MethodReference)GetMemberRefAt(
                                         implRow.MethodDeclaration.RID,

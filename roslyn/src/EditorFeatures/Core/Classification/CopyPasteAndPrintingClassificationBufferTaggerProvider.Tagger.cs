@@ -151,8 +151,7 @@ namespace Microsoft.CodeAnalysis.Classification
                         document.Project.Language
                     );
 
-                    _owner
-                        ._threadingContext
+                    _owner._threadingContext
                         .JoinableTaskFactory
                         .Run(async () =>
                         {

@@ -134,8 +134,7 @@ namespace System.Web.Compilation
 
                     //
 
-                    string fileName = System
-                        .IO
+                    string fileName = System.IO
                         .Path
                         .ChangeExtension(UrlPath.GetFileName(child.VirtualPath), null);
                     string appSetttingUrlKey = ns + "." + fileName;

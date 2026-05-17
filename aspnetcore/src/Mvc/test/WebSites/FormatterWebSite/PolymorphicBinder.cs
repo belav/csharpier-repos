@@ -12,8 +12,7 @@ public class PolymorphicBinder : IModelBinder
     {
         var model = new DerivedModel
         {
-            DerivedProperty = bindingContext
-                .ValueProvider
+            DerivedProperty = bindingContext.ValueProvider
                 .GetValue(nameof(DerivedModel.DerivedProperty))
                 .FirstValue,
         };

@@ -2276,10 +2276,11 @@ namespace System.Web.UI
             )
                 return;
             _hasEnabledControlArray = true;
-            Page.ClientScript.RegisterArrayDeclaration(
-                EnabledControlArrayID,
-                String.Concat("'", control.ClientID, "'")
-            );
+            Page.ClientScript
+                .RegisterArrayDeclaration(
+                    EnabledControlArrayID,
+                    String.Concat("'", control.ClientID, "'")
+                );
         }
 
         protected virtual void OnSaveStateComplete(EventArgs e)
@@ -2929,9 +2930,8 @@ namespace System.Web.UI
                 Control ctl = (Control)requireStateControls[n];
                 ctl.LoadControlState(_savedControlState != null ? _savedControlState[n] : null);
                 if (ctl.Adapter != null)
-                    ctl.Adapter.LoadAdapterControlState(
-                        adapterState != null ? adapterState[n] : null
-                    );
+                    ctl.Adapter
+                        .LoadAdapterControlState(adapterState != null ? adapterState[n] : null);
             }
         }
 

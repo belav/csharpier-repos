@@ -163,8 +163,7 @@ namespace System.Workflow.ComponentModel.Serialization
                 }
 
                 foreach (
-                    WorkflowMarkupSerializerMapping mapping in markupSerializationManager
-                        .ClrNamespaceBasedMappings
+                    WorkflowMarkupSerializerMapping mapping in markupSerializationManager.ClrNamespaceBasedMappings
                         .Values
                 )
                     clrMappings.Add(mapping.ClrNamespace);
@@ -335,8 +334,7 @@ namespace System.Workflow.ComponentModel.Serialization
                         reader.LookupNamespace(reader.Prefix)
                     );
                     if (
-                        xmlQualifiedName
-                            .Namespace
+                        xmlQualifiedName.Namespace
                             .Equals(StandardXomlKeys.Definitions_XmlNs, StringComparison.Ordinal)
                         && !IsMarkupExtension(xmlQualifiedName)
                         && !ExtendedPropertyInfo.IsExtendedProperty(
@@ -495,8 +493,7 @@ namespace System.Workflow.ComponentModel.Serialization
                         reader.LookupNamespace(reader.Prefix)
                     );
                     if (
-                        xmlQualifiedName
-                            .Namespace
+                        xmlQualifiedName.Namespace
                             .Equals(StandardXomlKeys.Definitions_XmlNs, StringComparison.Ordinal)
                         && !IsMarkupExtension(xmlQualifiedName)
                         && !ExtendedPropertyInfo.IsExtendedProperty(
@@ -723,8 +720,7 @@ namespace System.Workflow.ComponentModel.Serialization
                                 )
                             )
                             {
-                                string propertyName = reader
-                                    .LocalName
+                                string propertyName = reader.LocalName
                                     .Substring(reader.LocalName.IndexOf('.') + 1);
                                 PropertyInfo property = WorkflowMarkupSerializer.LookupProperty(
                                     props,
@@ -1123,8 +1119,7 @@ namespace System.Workflow.ComponentModel.Serialization
                 {
                     if (
                         obj is DependencyObject
-                        && ((DependencyObject)obj)
-                            .UserData
+                        && ((DependencyObject)obj).UserData
                             .Contains(UserDataKeys.DesignTimeTypeNames)
                     )
                         designTimeTypeNames =
@@ -1734,8 +1729,7 @@ namespace System.Workflow.ComponentModel.Serialization
                                             {
                                                 if (dictionaryEntry)
                                                 {
-                                                    serializationManager
-                                                        .WorkflowMarkupStack
+                                                    serializationManager.WorkflowMarkupStack
                                                         .Push(childObj);
                                                     childObj2 = ((DictionaryEntry)childObj2).Value;
                                                 }
@@ -2295,8 +2289,7 @@ namespace System.Workflow.ComponentModel.Serialization
                     DependencyProperty dependencyProperty in dependencyObject.MetaDependencyProperties
                 )
                 {
-                    Attribute[] visibilityAttrs = dependencyProperty
-                        .DefaultMetadata
+                    Attribute[] visibilityAttrs = dependencyProperty.DefaultMetadata
                         .GetAttributes(typeof(DesignerSerializationVisibilityAttribute));
                     if (
                         visibilityAttrs.Length > 0
@@ -2314,9 +2307,9 @@ namespace System.Workflow.ComponentModel.Serialization
                         ) == DependencyPropertyOptions.ReadOnly
                     )
                     {
-                        object[] serializationVisibilityAttribute = dependencyProperty
-                            .DefaultMetadata
-                            .GetAttributes(typeof(DesignerSerializationVisibilityAttribute));
+                        object[] serializationVisibilityAttribute =
+                            dependencyProperty.DefaultMetadata
+                                .GetAttributes(typeof(DesignerSerializationVisibilityAttribute));
                         if (
                             serializationVisibilityAttribute == null
                             || serializationVisibilityAttribute.Length == 0
@@ -2390,13 +2383,11 @@ namespace System.Workflow.ComponentModel.Serialization
                     }
                 }
                 foreach (
-                    DependencyProperty dependencyProperty in dependencyObject
-                        .DependencyPropertyValues
+                    DependencyProperty dependencyProperty in dependencyObject.DependencyPropertyValues
                         .Keys
                 )
                 {
-                    Attribute[] visibilityAttrs = dependencyProperty
-                        .DefaultMetadata
+                    Attribute[] visibilityAttrs = dependencyProperty.DefaultMetadata
                         .GetAttributes(typeof(DesignerSerializationVisibilityAttribute));
                     if (
                         visibilityAttrs.Length > 0
@@ -2424,16 +2415,14 @@ namespace System.Workflow.ComponentModel.Serialization
             if (dependencyProperty.IsEvent)
             {
                 if (
-                    dependencyProperty
-                        .OwnerType
+                    dependencyProperty.OwnerType
                         .GetField(
                             dependencyProperty.Name + "Event",
                             BindingFlags.Static | BindingFlags.Public | BindingFlags.DeclaredOnly
                         ) == null
                 )
                     return false;
-                MethodInfo methodInfo = dependencyProperty
-                    .OwnerType
+                MethodInfo methodInfo = dependencyProperty.OwnerType
                     .GetMethod(
                         "Add" + dependencyProperty.Name + "Handler",
                         BindingFlags.Public | BindingFlags.Static | BindingFlags.DeclaredOnly
@@ -2452,16 +2441,14 @@ namespace System.Workflow.ComponentModel.Serialization
             else
             {
                 if (
-                    dependencyProperty
-                        .OwnerType
+                    dependencyProperty.OwnerType
                         .GetField(
                             dependencyProperty.Name + "Property",
                             BindingFlags.Static | BindingFlags.Public | BindingFlags.DeclaredOnly
                         ) == null
                 )
                     return false;
-                MethodInfo methodInfo = dependencyProperty
-                    .OwnerType
+                MethodInfo methodInfo = dependencyProperty.OwnerType
                     .GetMethod(
                         "Set" + dependencyProperty.Name,
                         BindingFlags.Public | BindingFlags.Static | BindingFlags.DeclaredOnly
@@ -2502,8 +2489,7 @@ namespace System.Workflow.ComponentModel.Serialization
                     dependencyObject.SetBinding(dependencyProperty, value as ActivityBind);
                 else if (dependencyProperty.IsAttached)
                 {
-                    MethodInfo methodInfo = dependencyProperty
-                        .OwnerType
+                    MethodInfo methodInfo = dependencyProperty.OwnerType
                         .GetMethod(
                             "Add" + dependencyProperty.Name + "Handler",
                             BindingFlags.Public | BindingFlags.Static | BindingFlags.DeclaredOnly
@@ -2554,8 +2540,7 @@ namespace System.Workflow.ComponentModel.Serialization
                     Helpers.SetDesignTimeTypeName(obj, dependencyProperty, value as string);
                 else if (dependencyProperty.IsAttached)
                 {
-                    MethodInfo methodInfo = dependencyProperty
-                        .OwnerType
+                    MethodInfo methodInfo = dependencyProperty.OwnerType
                         .GetMethod(
                             "Set" + dependencyProperty.Name,
                             BindingFlags.Public | BindingFlags.Static | BindingFlags.DeclaredOnly
@@ -2687,8 +2672,7 @@ namespace System.Workflow.ComponentModel.Serialization
 
             List<WorkflowMarkupSerializerMapping> xmlnsMappings = null;
             if (
-                !serializationManager
-                    .XmlNamespaceBasedMappings
+                !serializationManager.XmlNamespaceBasedMappings
                     .TryGetValue(xmlns, out xmlnsMappings)
                 || xmlnsMappings.Count == 0
             )
@@ -3412,8 +3396,7 @@ namespace System.Workflow.ComponentModel.Serialization
                 dependencyProperty = fieldInfo.GetValue(attachedObj) as DependencyProperty;
                 if (dependencyProperty != null)
                 {
-                    object[] attributes = dependencyProperty
-                        .DefaultMetadata
+                    object[] attributes = dependencyProperty.DefaultMetadata
                         .GetAttributes(typeof(DesignerSerializationVisibilityAttribute));
                     if (attributes.Length > 0)
                     {
@@ -3469,11 +3452,8 @@ namespace System.Workflow.ComponentModel.Serialization
                     }
                     else
                     {
-                        XmlQualifiedName qualifiedName =
-                            this.serializationManager.GetXmlQualifiedName(
-                                dependencyProperty.OwnerType,
-                                out prefix
-                            );
+                        XmlQualifiedName qualifiedName = this.serializationManager
+                            .GetXmlQualifiedName(dependencyProperty.OwnerType, out prefix);
                         tagName = qualifiedName.Name + "." + dependencyProperty.Name;
                         xmlns = qualifiedName.Namespace;
                     }
@@ -3492,11 +3472,8 @@ namespace System.Workflow.ComponentModel.Serialization
                     }
                     else if (this.xmlNodeType == XmlNodeType.Element)
                     {
-                        XmlQualifiedName qualifiedName =
-                            this.serializationManager.GetXmlQualifiedName(
-                                owner.GetType(),
-                                out prefix
-                            );
+                        XmlQualifiedName qualifiedName = this.serializationManager
+                            .GetXmlQualifiedName(owner.GetType(), out prefix);
                         tagName = qualifiedName.Name + "." + ((MemberInfo)property).Name;
                         xmlns = qualifiedName.Namespace;
                     }
@@ -3508,10 +3485,8 @@ namespace System.Workflow.ComponentModel.Serialization
                 }
                 else
                 {
-                    XmlQualifiedName qualifiedName = this.serializationManager.GetXmlQualifiedName(
-                        owner.GetType(),
-                        out prefix
-                    );
+                    XmlQualifiedName qualifiedName = this.serializationManager
+                        .GetXmlQualifiedName(owner.GetType(), out prefix);
                     tagName = qualifiedName.Name;
                     xmlns = qualifiedName.Namespace;
                 }
@@ -4100,10 +4075,11 @@ namespace System.Workflow.ComponentModel.Serialization
                 if (this.contentProperty != null)
                 {
                     this.contentPropertySerializer =
-                        this.serializationManager.GetSerializer(
-                            this.contentProperty.PropertyType,
-                            typeof(WorkflowMarkupSerializer)
-                        ) as WorkflowMarkupSerializer;
+                        this.serializationManager
+                            .GetSerializer(
+                                this.contentProperty.PropertyType,
+                                typeof(WorkflowMarkupSerializer)
+                            ) as WorkflowMarkupSerializer;
                     if (this.contentPropertySerializer != null)
                     {
                         try
@@ -4114,10 +4090,8 @@ namespace System.Workflow.ComponentModel.Serialization
                             object contentPropertyValue = null;
                             if (reader == null)
                             {
-                                contentPropertyValue = this.contentProperty.GetValue(
-                                    this.parentObject,
-                                    null
-                                );
+                                contentPropertyValue = this.contentProperty
+                                    .GetValue(this.parentObject, null);
                             }
                             else if (
                                 !this.contentProperty.PropertyType.IsValueType
@@ -4166,52 +4140,53 @@ namespace System.Workflow.ComponentModel.Serialization
                                     );
                                     return;
                                 }
-                                this.contentProperty.SetValue(
-                                    this.parentObject,
-                                    contentPropertyValue,
-                                    null
-                                );
+                                this.contentProperty
+                                    .SetValue(this.parentObject, contentPropertyValue, null);
                             }
 
                             if (contentPropertyValue != null)
                             {
                                 if (reader != null)
                                 {
-                                    this.contentPropertySerializer.OnBeforeDeserialize(
-                                        this.serializationManager,
-                                        contentPropertyValue
-                                    );
-                                    this.contentPropertySerializer.OnBeforeDeserializeContents(
-                                        this.serializationManager,
-                                        contentPropertyValue
-                                    );
+                                    this.contentPropertySerializer
+                                        .OnBeforeDeserialize(
+                                            this.serializationManager,
+                                            contentPropertyValue
+                                        );
+                                    this.contentPropertySerializer
+                                        .OnBeforeDeserializeContents(
+                                            this.serializationManager,
+                                            contentPropertyValue
+                                        );
                                 }
                             }
                         }
                         catch (Exception e)
                         {
-                            this.serializationManager.ReportError(
-                                new WorkflowMarkupSerializationException(
-                                    SR.GetString(
-                                        SR.Error_SerializerThrewException,
-                                        this.parentObject.GetType(),
-                                        e.Message
-                                    ),
-                                    e
-                                )
-                            );
+                            this.serializationManager
+                                .ReportError(
+                                    new WorkflowMarkupSerializationException(
+                                        SR.GetString(
+                                            SR.Error_SerializerThrewException,
+                                            this.parentObject.GetType(),
+                                            e.Message
+                                        ),
+                                        e
+                                    )
+                                );
                         }
                     }
                     else
                     {
-                        this.serializationManager.ReportError(
-                            new WorkflowMarkupSerializationException(
-                                SR.GetString(
-                                    SR.Error_SerializerNotAvailableForSerialize,
-                                    this.contentProperty.PropertyType.FullName
+                        this.serializationManager
+                            .ReportError(
+                                new WorkflowMarkupSerializationException(
+                                    SR.GetString(
+                                        SR.Error_SerializerNotAvailableForSerialize,
+                                        this.contentProperty.PropertyType.FullName
+                                    )
                                 )
-                            )
-                        );
+                            );
                     }
                 }
             }
@@ -4228,28 +4203,28 @@ namespace System.Workflow.ComponentModel.Serialization
                 {
                     try
                     {
-                        object contentPropertyValue = this.contentProperty.GetValue(
-                            this.parentObject,
-                            null
-                        );
+                        object contentPropertyValue = this.contentProperty
+                            .GetValue(this.parentObject, null);
                         if (contentPropertyValue != null)
-                            this.contentPropertySerializer.OnAfterDeserialize(
-                                this.serializationManager,
-                                contentPropertyValue
-                            );
+                            this.contentPropertySerializer
+                                .OnAfterDeserialize(
+                                    this.serializationManager,
+                                    contentPropertyValue
+                                );
                     }
                     catch (Exception e)
                     {
-                        this.serializationManager.ReportError(
-                            new WorkflowMarkupSerializationException(
-                                SR.GetString(
-                                    SR.Error_SerializerThrewException,
-                                    this.parentObject.GetType(),
-                                    e.Message
-                                ),
-                                e
-                            )
-                        );
+                        this.serializationManager
+                            .ReportError(
+                                new WorkflowMarkupSerializationException(
+                                    SR.GetString(
+                                        SR.Error_SerializerThrewException,
+                                        this.parentObject.GetType(),
+                                        e.Message
+                                    ),
+                                    e
+                                )
+                            );
                     }
                 }
             }
@@ -4265,10 +4240,8 @@ namespace System.Workflow.ComponentModel.Serialization
                 if (this.contentProperty != null)
                     value = this.contentProperty.GetValue(this.parentObject, null);
                 else
-                    value = this.parentObjectSerializer.GetChildren(
-                        this.serializationManager,
-                        this.parentObject
-                    );
+                    value = this.parentObjectSerializer
+                        .GetChildren(this.serializationManager, this.parentObject);
                 return value;
             }
 
@@ -4284,28 +4257,30 @@ namespace System.Workflow.ComponentModel.Serialization
                     {
                         foreach (ContentInfo contentInfo in contents)
                         {
-                            this.parentObjectSerializer.AddChild(
-                                this.serializationManager,
-                                this.parentObject,
-                                contentInfo.Content
-                            );
+                            this.parentObjectSerializer
+                                .AddChild(
+                                    this.serializationManager,
+                                    this.parentObject,
+                                    contentInfo.Content
+                                );
                             i += 1;
                         }
                     }
                     catch (Exception e)
                     {
-                        this.serializationManager.ReportError(
-                            new WorkflowMarkupSerializationException(
-                                SR.GetString(
-                                    SR.Error_SerializerThrewException,
-                                    this.parentObject.GetType(),
-                                    e.Message
-                                ),
-                                e,
-                                contents[i].LineNumber,
-                                contents[i].LinePosition
-                            )
-                        );
+                        this.serializationManager
+                            .ReportError(
+                                new WorkflowMarkupSerializationException(
+                                    SR.GetString(
+                                        SR.Error_SerializerThrewException,
+                                        this.parentObject.GetType(),
+                                        e.Message
+                                    ),
+                                    e,
+                                    contents[i].LineNumber,
+                                    contents[i].LinePosition
+                                )
+                            );
                     }
                 }
                 else if (this.contentPropertySerializer != null)
@@ -4319,15 +4294,16 @@ namespace System.Workflow.ComponentModel.Serialization
                     {
                         if (propertyValue == null)
                         {
-                            this.serializationManager.ReportError(
-                                new WorkflowMarkupSerializationException(
-                                    SR.GetString(
-                                        SR.Error_ContentPropertyCanNotBeNull,
-                                        this.contentProperty.Name,
-                                        this.parentObject.GetType().FullName
+                            this.serializationManager
+                                .ReportError(
+                                    new WorkflowMarkupSerializationException(
+                                        SR.GetString(
+                                            SR.Error_ContentPropertyCanNotBeNull,
+                                            this.contentProperty.Name,
+                                            this.parentObject.GetType().FullName
+                                        )
                                     )
-                                )
-                            );
+                                );
                             return;
                         }
 
@@ -4337,60 +4313,64 @@ namespace System.Workflow.ComponentModel.Serialization
                         {
                             foreach (ContentInfo contentInfo in contents)
                             {
-                                this.contentPropertySerializer.AddChild(
-                                    this.serializationManager,
-                                    propertyValue,
-                                    contentInfo.Content
-                                );
+                                this.contentPropertySerializer
+                                    .AddChild(
+                                        this.serializationManager,
+                                        propertyValue,
+                                        contentInfo.Content
+                                    );
                                 i = i + 1;
                             }
                         }
                         catch (Exception e)
                         {
-                            this.serializationManager.ReportError(
-                                new WorkflowMarkupSerializationException(
-                                    SR.GetString(
-                                        SR.Error_SerializerThrewException,
-                                        this.parentObject.GetType(),
-                                        e.Message
-                                    ),
-                                    e,
-                                    contents[i].LineNumber,
-                                    contents[i].LinePosition
-                                )
-                            );
+                            this.serializationManager
+                                .ReportError(
+                                    new WorkflowMarkupSerializationException(
+                                        SR.GetString(
+                                            SR.Error_SerializerThrewException,
+                                            this.parentObject.GetType(),
+                                            e.Message
+                                        ),
+                                        e,
+                                        contents[i].LineNumber,
+                                        contents[i].LinePosition
+                                    )
+                                );
                         }
                     }
                     else
                     {
                         if (!this.contentProperty.CanWrite)
                         {
-                            this.serializationManager.ReportError(
-                                new WorkflowMarkupSerializationException(
-                                    SR.GetString(
-                                        SR.Error_ContentPropertyNoSetter,
-                                        this.contentProperty.Name,
-                                        this.parentObject.GetType()
-                                    ),
-                                    contents[0].LineNumber,
-                                    contents[0].LinePosition
-                                )
-                            );
+                            this.serializationManager
+                                .ReportError(
+                                    new WorkflowMarkupSerializationException(
+                                        SR.GetString(
+                                            SR.Error_ContentPropertyNoSetter,
+                                            this.contentProperty.Name,
+                                            this.parentObject.GetType()
+                                        ),
+                                        contents[0].LineNumber,
+                                        contents[0].LinePosition
+                                    )
+                                );
                             return;
                         }
 
                         if (contents.Count > 1)
-                            this.serializationManager.ReportError(
-                                new WorkflowMarkupSerializationException(
-                                    SR.GetString(
-                                        SR.Error_ContentPropertyNoMultipleContents,
-                                        this.contentProperty.Name,
-                                        this.parentObject.GetType()
-                                    ),
-                                    contents[1].LineNumber,
-                                    contents[1].LinePosition
-                                )
-                            );
+                            this.serializationManager
+                                .ReportError(
+                                    new WorkflowMarkupSerializationException(
+                                        SR.GetString(
+                                            SR.Error_ContentPropertyNoMultipleContents,
+                                            this.contentProperty.Name,
+                                            this.parentObject.GetType()
+                                        ),
+                                        contents[1].LineNumber,
+                                        contents[1].LinePosition
+                                    )
+                                );
 
                         object content = contents[0].Content;
                         if (
@@ -4400,11 +4380,12 @@ namespace System.Workflow.ComponentModel.Serialization
                         {
                             try
                             {
-                                content = this.contentPropertySerializer.DeserializeFromString(
-                                    this.serializationManager,
-                                    this.contentProperty.PropertyType,
-                                    content as string
-                                );
+                                content = this.contentPropertySerializer
+                                    .DeserializeFromString(
+                                        this.serializationManager,
+                                        this.contentProperty.PropertyType,
+                                        content as string
+                                    );
                                 content = WorkflowMarkupSerializer.GetValueFromMarkupExtension(
                                     this.serializationManager,
                                     content
@@ -4412,52 +4393,55 @@ namespace System.Workflow.ComponentModel.Serialization
                             }
                             catch (Exception e)
                             {
-                                this.serializationManager.ReportError(
-                                    new WorkflowMarkupSerializationException(
-                                        SR.GetString(
-                                            SR.Error_SerializerThrewException,
-                                            this.parentObject.GetType(),
-                                            e.Message
-                                        ),
-                                        e,
-                                        contents[0].LineNumber,
-                                        contents[0].LinePosition
-                                    )
-                                );
+                                this.serializationManager
+                                    .ReportError(
+                                        new WorkflowMarkupSerializationException(
+                                            SR.GetString(
+                                                SR.Error_SerializerThrewException,
+                                                this.parentObject.GetType(),
+                                                e.Message
+                                            ),
+                                            e,
+                                            contents[0].LineNumber,
+                                            contents[0].LinePosition
+                                        )
+                                    );
                                 return;
                             }
                         }
 
                         if (content == null)
                         {
-                            this.serializationManager.ReportError(
-                                new WorkflowMarkupSerializationException(
-                                    SR.GetString(
-                                        SR.Error_ContentCanNotBeConverted,
-                                        content as string,
-                                        contentProperty.Name,
-                                        this.parentObject.GetType().FullName,
-                                        this.contentProperty.PropertyType.FullName
-                                    ),
-                                    contents[0].LineNumber,
-                                    contents[0].LinePosition
-                                )
-                            );
+                            this.serializationManager
+                                .ReportError(
+                                    new WorkflowMarkupSerializationException(
+                                        SR.GetString(
+                                            SR.Error_ContentCanNotBeConverted,
+                                            content as string,
+                                            contentProperty.Name,
+                                            this.parentObject.GetType().FullName,
+                                            this.contentProperty.PropertyType.FullName
+                                        ),
+                                        contents[0].LineNumber,
+                                        contents[0].LinePosition
+                                    )
+                                );
                         }
                         else if (!contentProperty.PropertyType.IsAssignableFrom(content.GetType()))
                         {
-                            this.serializationManager.ReportError(
-                                new WorkflowMarkupSerializationException(
-                                    SR.GetString(
-                                        SR.Error_ContentPropertyValueInvalid,
-                                        content.GetType(),
-                                        this.contentProperty.Name,
-                                        this.contentProperty.PropertyType.FullName
-                                    ),
-                                    contents[0].LineNumber,
-                                    contents[0].LinePosition
-                                )
-                            );
+                            this.serializationManager
+                                .ReportError(
+                                    new WorkflowMarkupSerializationException(
+                                        SR.GetString(
+                                            SR.Error_ContentPropertyValueInvalid,
+                                            content.GetType(),
+                                            this.contentProperty.Name,
+                                            this.contentProperty.PropertyType.FullName
+                                        ),
+                                        contents[0].LineNumber,
+                                        contents[0].LinePosition
+                                    )
+                                );
                         }
                         else
                         {
@@ -4479,18 +4463,19 @@ namespace System.Workflow.ComponentModel.Serialization
                             }
                             catch (Exception e)
                             {
-                                this.serializationManager.ReportError(
-                                    new WorkflowMarkupSerializationException(
-                                        SR.GetString(
-                                            SR.Error_SerializerThrewException,
-                                            this.parentObject.GetType(),
-                                            e.Message
-                                        ),
-                                        e,
-                                        contents[0].LineNumber,
-                                        contents[0].LinePosition
-                                    )
-                                );
+                                this.serializationManager
+                                    .ReportError(
+                                        new WorkflowMarkupSerializationException(
+                                            SR.GetString(
+                                                SR.Error_SerializerThrewException,
+                                                this.parentObject.GetType(),
+                                                e.Message
+                                            ),
+                                            e,
+                                            contents[0].LineNumber,
+                                            contents[0].LinePosition
+                                        )
+                                    );
                             }
                         }
                     }
@@ -4575,8 +4560,7 @@ namespace System.Workflow.ComponentModel.Serialization
         {
             string typeName = xmlQualifiedName.Name;
             if (
-                xmlQualifiedName
-                    .Namespace
+                xmlQualifiedName.Namespace
                     .Equals(StandardXomlKeys.Definitions_XmlNs, StringComparison.Ordinal)
             )
             {
@@ -4599,8 +4583,7 @@ namespace System.Workflow.ComponentModel.Serialization
         {
             bool markupExtension = false;
             if (
-                xmlQualifiedName
-                    .Namespace
+                xmlQualifiedName.Namespace
                     .Equals(StandardXomlKeys.Definitions_XmlNs, StringComparison.Ordinal)
             )
             {

@@ -42,8 +42,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
 
             var text = await document.GetValueTextAsync(cancellationToken).ConfigureAwait(false);
             var span = ProtocolConversions.RangeToTextSpan(request.Range, text);
-            var breakpointService = document
-                .Project
+            var breakpointService = document.Project
                 .Services
                 .GetRequiredService<IBreakpointResolutionService>();
 

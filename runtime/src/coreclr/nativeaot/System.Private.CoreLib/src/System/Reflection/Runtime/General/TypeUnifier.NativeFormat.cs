@@ -86,8 +86,7 @@ namespace System.Reflection.Runtime.TypeInfos.NativeFormat
             if (typeHandle.IsNull())
             {
                 if (
-                    !ReflectionCoreExecution
-                        .ExecutionEnvironment
+                    !ReflectionCoreExecution.ExecutionEnvironment
                         .TryGetNamedTypeForMetadata(
                             new QTypeDefinition(metadataReader, typeDefHandle),
                             out typeHandle
@@ -154,9 +153,8 @@ namespace System.Reflection.Runtime.TypeInfos.NativeFormat
                 UnificationKey key
             )
             {
-                RuntimeTypeDefinitionTypeInfo typeOwner = key.TypeDefinitionHandle.GetNamedType(
-                    key.Reader
-                );
+                RuntimeTypeDefinitionTypeInfo typeOwner = key.TypeDefinitionHandle
+                    .GetNamedType(key.Reader);
                 return new NativeFormatRuntimeGenericParameterTypeInfoForTypes(
                     key.Reader,
                     key.GenericParameterHandle,

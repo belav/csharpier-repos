@@ -150,11 +150,12 @@ namespace System.Activities.Debugger
         [SecurityCritical]
         internal MethodInfo GetMethodInfo(bool withPriming)
         {
-            MethodInfo methodInfo = this.type.GetMethod(
-                withPriming
-                    ? StateManager.MethodWithPrimingPrefix + this.methodName
-                    : this.methodName
-            );
+            MethodInfo methodInfo = this.type
+                .GetMethod(
+                    withPriming
+                        ? StateManager.MethodWithPrimingPrefix + this.methodName
+                        : this.methodName
+                );
             return methodInfo;
         }
 

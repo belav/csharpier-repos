@@ -203,8 +203,7 @@ namespace System.Net.Http
             int requestId,
             [CallerMemberName] string? memberName = null
         ) =>
-            NetEventSource
-                .Log
+            NetEventSource.Log
                 .HandlerMessage(0, 0, requestId, memberName, ToString() + ": " + message);
 
         internal void TraceError(
@@ -212,8 +211,7 @@ namespace System.Net.Http
             int requestId,
             [CallerMemberName] string? memberName = null
         ) =>
-            NetEventSource
-                .Log
+            NetEventSource.Log
                 .HandlerMessageError(0, 0, requestId, memberName, ToString() + ": " + message);
     }
 }

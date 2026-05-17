@@ -969,8 +969,7 @@ namespace Microsoft.CSharp.RuntimeBinder
         private static void CheckForConditionalMethodError(ExprCall call)
         {
             MethodSymbol method = call.MethWithInst.Meth();
-            object[] conditions = method
-                .AssociatedMemberInfo
+            object[] conditions = method.AssociatedMemberInfo
                 .GetCustomAttributes(typeof(ConditionalAttribute), true);
             if (conditions.Length > 0)
             {
@@ -1011,11 +1010,9 @@ namespace Microsoft.CSharp.RuntimeBinder
             // we're binding against the base method, and the derived method may change the
             // generic arguments.
             TypeArray parameters = TypeManager.SubstTypeArray(methprop.Params, type, typeArgs);
-            methprop = ExpressionBinder
-                .GroupToArgsBinder
+            methprop = ExpressionBinder.GroupToArgsBinder
                 .FindMostDerivedMethod(methprop, callingObject.Type);
-            ExpressionBinder
-                .GroupToArgsBinder
+            ExpressionBinder.GroupToArgsBinder
                 .ReOrderArgsForNamedArguments(methprop, parameters, type, memgroup, argInfo);
             Expr pList = null;
 

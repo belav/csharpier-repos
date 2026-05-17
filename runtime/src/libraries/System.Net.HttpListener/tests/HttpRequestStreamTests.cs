@@ -280,8 +280,7 @@ namespace System.Net.Tests
                 int totalRead = 0;
                 while (totalRead < expected.Length)
                 {
-                    int bytesRead = await context
-                        .Request
+                    int bytesRead = await context.Request
                         .InputStream
                         .ReadAsync(buffer, totalRead, expected.Length - totalRead);
                     Assert.InRange(bytesRead, 1, expected.Length - totalRead);
@@ -326,8 +325,7 @@ namespace System.Net.Tests
                 int totalRead = 0;
                 while (totalRead < expected.Length)
                 {
-                    int bytesRead = context
-                        .Request
+                    int bytesRead = context.Request
                         .InputStream
                         .Read(buffer, totalRead, expected.Length - totalRead);
                     Assert.InRange(bytesRead, 1, expected.Length - totalRead);
@@ -462,8 +460,7 @@ namespace System.Net.Tests
                 Assert.Equal(0, context.Request.InputStream.Read(buffer, 0, buffer.Length));
                 Assert.Equal(new byte[bufferSize], buffer);
 
-                IAsyncResult result = context
-                    .Request
+                IAsyncResult result = context.Request
                     .InputStream
                     .BeginRead(buffer, 0, buffer.Length, null, null);
                 Assert.Equal(0, context.Request.InputStream.EndRead(result));

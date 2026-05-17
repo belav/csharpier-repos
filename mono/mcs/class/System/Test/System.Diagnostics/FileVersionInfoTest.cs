@@ -123,8 +123,7 @@ namespace MonoTests.System.Diagnostics
             aname.Name = "lib";
             aname.Version = new Version(3, 5, 7, 9);
 
-            AssemblyBuilder ab = AppDomain
-                .CurrentDomain
+            AssemblyBuilder ab = AppDomain.CurrentDomain
                 .DefineDynamicAssembly(aname, AssemblyBuilderAccess.RunAndSave, tempDir);
 
             // CompanyName
@@ -233,8 +232,7 @@ namespace MonoTests.System.Diagnostics
             aname.Name = "lib3a";
             aname.Version = new Version(8, 5, 4, 2);
 
-            AssemblyBuilder ab = AppDomain
-                .CurrentDomain
+            AssemblyBuilder ab = AppDomain.CurrentDomain
                 .DefineDynamicAssembly(aname, AssemblyBuilderAccess.RunAndSave, tempDir);
 
             ab.DefineUnmanagedResource(resFile);
@@ -287,8 +285,7 @@ namespace MonoTests.System.Diagnostics
             aname.Name = "lib3b";
             aname.Version = new Version(9, 0, 3, 0);
 
-            AssemblyBuilder ab = AppDomain
-                .CurrentDomain
+            AssemblyBuilder ab = AppDomain.CurrentDomain
                 .DefineDynamicAssembly(aname, AssemblyBuilderAccess.RunAndSave, tempDir);
 
             // CompanyName
@@ -398,8 +395,7 @@ namespace MonoTests.System.Diagnostics
             aname.Name = "lib3c";
             aname.Version = new Version(3, 5, 7, 9);
 
-            AssemblyBuilder ab = AppDomain
-                .CurrentDomain
+            AssemblyBuilder ab = AppDomain.CurrentDomain
                 .DefineDynamicAssembly(aname, AssemblyBuilderAccess.RunAndSave, tempDir);
 
             ab.DefineUnmanagedResource(resFile);
@@ -452,8 +448,7 @@ namespace MonoTests.System.Diagnostics
             aname.Name = "lib3d";
             aname.Version = new Version(3, 5, 7, 9);
 
-            AssemblyBuilder ab = AppDomain
-                .CurrentDomain
+            AssemblyBuilder ab = AppDomain.CurrentDomain
                 .DefineDynamicAssembly(aname, AssemblyBuilderAccess.RunAndSave, tempDir);
 
             // CompanyName
@@ -563,8 +558,7 @@ namespace MonoTests.System.Diagnostics
             aname.Name = "lib3e";
             aname.Version = new Version(3, 5, 7, 9);
 
-            AssemblyBuilder ab = AppDomain
-                .CurrentDomain
+            AssemblyBuilder ab = AppDomain.CurrentDomain
                 .DefineDynamicAssembly(aname, AssemblyBuilderAccess.RunAndSave, tempDir);
 
             ab.DefineUnmanagedResource(resFile);
@@ -617,8 +611,7 @@ namespace MonoTests.System.Diagnostics
             aname.Name = "lib3f";
             aname.Version = new Version(3, 5, 7, 9);
 
-            AssemblyBuilder ab = AppDomain
-                .CurrentDomain
+            AssemblyBuilder ab = AppDomain.CurrentDomain
                 .DefineDynamicAssembly(aname, AssemblyBuilderAccess.RunAndSave, tempDir);
 
             // CompanyName
@@ -728,8 +721,7 @@ namespace MonoTests.System.Diagnostics
             aname.Name = "lib3g";
             aname.Version = new Version(3, 5, 7, 9);
 
-            AssemblyBuilder ab = AppDomain
-                .CurrentDomain
+            AssemblyBuilder ab = AppDomain.CurrentDomain
                 .DefineDynamicAssembly(aname, AssemblyBuilderAccess.RunAndSave, tempDir);
 
             ab.DefineUnmanagedResource(resFile);
@@ -782,8 +774,7 @@ namespace MonoTests.System.Diagnostics
             aname.Name = "lib3h";
             aname.Version = new Version(3, 5, 7, 9);
 
-            AssemblyBuilder ab = AppDomain
-                .CurrentDomain
+            AssemblyBuilder ab = AppDomain.CurrentDomain
                 .DefineDynamicAssembly(aname, AssemblyBuilderAccess.RunAndSave, tempDir);
 
             // CompanyName
@@ -884,8 +875,7 @@ namespace MonoTests.System.Diagnostics
             AssemblyName aname = new AssemblyName();
             aname.Name = "lib1a";
 
-            AssemblyBuilder ab = AppDomain
-                .CurrentDomain
+            AssemblyBuilder ab = AppDomain.CurrentDomain
                 .DefineDynamicAssembly(aname, AssemblyBuilderAccess.RunAndSave, tempDir);
             ab.DefineVersionInfoResource("BBB", "1.3.2.4", "CCC", "DDD", "EEE");
             ab.Save("lib1a.dll");
@@ -928,8 +918,7 @@ namespace MonoTests.System.Diagnostics
             AssemblyName aname = new AssemblyName();
             aname.Name = "lib1b";
 
-            AssemblyBuilder ab = AppDomain
-                .CurrentDomain
+            AssemblyBuilder ab = AppDomain.CurrentDomain
                 .DefineDynamicAssembly(aname, AssemblyBuilderAccess.RunAndSave, tempDir);
             ab.DefineVersionInfoResource(null, null, null, null, null);
             ab.Save("lib1b.dll");
@@ -972,8 +961,7 @@ namespace MonoTests.System.Diagnostics
             AssemblyName aname = new AssemblyName();
             aname.Name = "lib1c";
 
-            AssemblyBuilder ab = AppDomain
-                .CurrentDomain
+            AssemblyBuilder ab = AppDomain.CurrentDomain
                 .DefineDynamicAssembly(aname, AssemblyBuilderAccess.RunAndSave, tempDir);
 
             // CompanyName
@@ -1074,8 +1062,7 @@ namespace MonoTests.System.Diagnostics
             AssemblyName aname = new AssemblyName();
             aname.Name = "lib1d";
 
-            AssemblyBuilder ab = AppDomain
-                .CurrentDomain
+            AssemblyBuilder ab = AppDomain.CurrentDomain
                 .DefineDynamicAssembly(aname, AssemblyBuilderAccess.RunAndSave, tempDir);
 
             // CompanyName
@@ -1178,8 +1165,7 @@ namespace MonoTests.System.Diagnostics
             aname.Name = "lib1e";
             aname.Version = new Version(5, 4, 7, 8);
 
-            AssemblyBuilder ab = AppDomain
-                .CurrentDomain
+            AssemblyBuilder ab = AppDomain.CurrentDomain
                 .DefineDynamicAssembly(aname, AssemblyBuilderAccess.RunAndSave, tempDir);
             ab.DefineVersionInfoResource("BBB", "1.3.2.4", "CCC", "DDD", "EEE");
             ab.Save("lib1e.dll");
@@ -1224,8 +1210,7 @@ namespace MonoTests.System.Diagnostics
             aname.Name = "lib1f";
             aname.Version = new Version(5, 4, 7, 8);
 
-            AssemblyBuilder ab = AppDomain
-                .CurrentDomain
+            AssemblyBuilder ab = AppDomain.CurrentDomain
                 .DefineDynamicAssembly(aname, AssemblyBuilderAccess.RunAndSave, tempDir);
             ab.DefineVersionInfoResource(null, null, null, null, null);
             ab.Save("lib1f.dll");
@@ -1270,8 +1255,7 @@ namespace MonoTests.System.Diagnostics
             aname.Name = "lib1g";
             aname.Version = new Version(5, 4, 7);
 
-            AssemblyBuilder ab = AppDomain
-                .CurrentDomain
+            AssemblyBuilder ab = AppDomain.CurrentDomain
                 .DefineDynamicAssembly(aname, AssemblyBuilderAccess.RunAndSave, tempDir);
 
             // CompanyName
@@ -1374,8 +1358,7 @@ namespace MonoTests.System.Diagnostics
             aname.Name = "lib1h";
             aname.Version = new Version(5, 4);
 
-            AssemblyBuilder ab = AppDomain
-                .CurrentDomain
+            AssemblyBuilder ab = AppDomain.CurrentDomain
                 .DefineDynamicAssembly(aname, AssemblyBuilderAccess.RunAndSave, tempDir);
 
             // CompanyName
@@ -1477,8 +1460,7 @@ namespace MonoTests.System.Diagnostics
             aname.Name = "lib1i";
             aname.Version = new Version(5, 4, 8, 2);
 
-            AssemblyBuilder ab = AppDomain
-                .CurrentDomain
+            AssemblyBuilder ab = AppDomain.CurrentDomain
                 .DefineDynamicAssembly(aname, AssemblyBuilderAccess.RunAndSave, tempDir);
 
             // CompanyName
@@ -1574,8 +1556,7 @@ namespace MonoTests.System.Diagnostics
             aname.Name = "lib1j";
             aname.Version = new Version(5, 4, 8, 2);
 
-            AssemblyBuilder ab = AppDomain
-                .CurrentDomain
+            AssemblyBuilder ab = AppDomain.CurrentDomain
                 .DefineDynamicAssembly(aname, AssemblyBuilderAccess.RunAndSave, tempDir);
 
             // CompanyName
@@ -1678,8 +1659,7 @@ namespace MonoTests.System.Diagnostics
             aname.Name = "lib1k";
             aname.Version = new Version(5, 4, 7, 8);
 
-            AssemblyBuilder ab = AppDomain
-                .CurrentDomain
+            AssemblyBuilder ab = AppDomain.CurrentDomain
                 .DefineDynamicAssembly(aname, AssemblyBuilderAccess.RunAndSave, tempDir);
 
             // AssemblyCulture
@@ -1734,8 +1714,7 @@ namespace MonoTests.System.Diagnostics
             aname.Name = "lib1l";
             aname.Version = new Version(5, 4, 7, 8);
 
-            AssemblyBuilder ab = AppDomain
-                .CurrentDomain
+            AssemblyBuilder ab = AppDomain.CurrentDomain
                 .DefineDynamicAssembly(aname, AssemblyBuilderAccess.RunAndSave, tempDir);
             ab.DefineVersionInfoResource("AAA", "3.9.2", "BBB", "CCC", "DDD");
 
@@ -1838,8 +1817,7 @@ namespace MonoTests.System.Diagnostics
             aname.Name = "lib1m";
             aname.Version = new Version(5, 4, 7, 8);
 
-            AssemblyBuilder ab = AppDomain
-                .CurrentDomain
+            AssemblyBuilder ab = AppDomain.CurrentDomain
                 .DefineDynamicAssembly(aname, AssemblyBuilderAccess.RunAndSave, tempDir);
             ab.DefineVersionInfoResource(
                 string.Empty,
@@ -1946,8 +1924,7 @@ namespace MonoTests.System.Diagnostics
             AssemblyName aname = new AssemblyName();
             aname.Name = "lib2a";
 
-            AssemblyBuilder ab = AppDomain
-                .CurrentDomain
+            AssemblyBuilder ab = AppDomain.CurrentDomain
                 .DefineDynamicAssembly(aname, AssemblyBuilderAccess.RunAndSave, tempDir);
             ab.DefineVersionInfoResource();
             ab.Save("lib2a.dll");
@@ -1991,8 +1968,7 @@ namespace MonoTests.System.Diagnostics
             aname.Name = "lib2b";
             aname.Version = new Version(3, 5, 7, 9);
 
-            AssemblyBuilder ab = AppDomain
-                .CurrentDomain
+            AssemblyBuilder ab = AppDomain.CurrentDomain
                 .DefineDynamicAssembly(aname, AssemblyBuilderAccess.RunAndSave, tempDir);
 
             // CompanyName
@@ -2094,8 +2070,7 @@ namespace MonoTests.System.Diagnostics
             aname.Name = "lib2c";
             aname.Version = new Version(3, 5, 7, 9);
 
-            AssemblyBuilder ab = AppDomain
-                .CurrentDomain
+            AssemblyBuilder ab = AppDomain.CurrentDomain
                 .DefineDynamicAssembly(aname, AssemblyBuilderAccess.RunAndSave, tempDir);
 
             // AssemblyVersion
@@ -2155,8 +2130,7 @@ namespace MonoTests.System.Diagnostics
             aname.Name = "lib2d";
             aname.Version = new Version(3, 5, 7, 9);
 
-            AssemblyBuilder ab = AppDomain
-                .CurrentDomain
+            AssemblyBuilder ab = AppDomain.CurrentDomain
                 .DefineDynamicAssembly(aname, AssemblyBuilderAccess.RunAndSave, tempDir);
 
             // AssemblyVersion
@@ -2222,8 +2196,7 @@ namespace MonoTests.System.Diagnostics
             aname.Name = "lib2e";
             aname.Version = new Version(3, 5, 7, 9);
 
-            AssemblyBuilder ab = AppDomain
-                .CurrentDomain
+            AssemblyBuilder ab = AppDomain.CurrentDomain
                 .DefineDynamicAssembly(aname, AssemblyBuilderAccess.RunAndSave, tempDir);
 
             // AssemblyVersion
@@ -2290,8 +2263,7 @@ namespace MonoTests.System.Diagnostics
             aname.Name = "lib2f";
             aname.Version = new Version(3, 5, 7);
 
-            AssemblyBuilder ab = AppDomain
-                .CurrentDomain
+            AssemblyBuilder ab = AppDomain.CurrentDomain
                 .DefineDynamicAssembly(aname, AssemblyBuilderAccess.RunAndSave, tempDir);
 
             ab.DefineVersionInfoResource();
@@ -2337,8 +2309,7 @@ namespace MonoTests.System.Diagnostics
             aname.Name = "lib2g";
             aname.Version = new Version(3, 5, 7, 9);
 
-            AssemblyBuilder ab = AppDomain
-                .CurrentDomain
+            AssemblyBuilder ab = AppDomain.CurrentDomain
                 .DefineDynamicAssembly(aname, AssemblyBuilderAccess.RunAndSave, tempDir);
 
             // CompanyName
@@ -2441,8 +2412,7 @@ namespace MonoTests.System.Diagnostics
             aname.Name = "lib2h";
             aname.Version = new Version(3, 5, 7);
 
-            AssemblyBuilder ab = AppDomain
-                .CurrentDomain
+            AssemblyBuilder ab = AppDomain.CurrentDomain
                 .DefineDynamicAssembly(aname, AssemblyBuilderAccess.RunAndSave, tempDir);
 
             // CompanyName
@@ -2539,8 +2509,7 @@ namespace MonoTests.System.Diagnostics
             aname.Name = "lib2i";
             aname.Version = new Version(3, 5, 7);
 
-            AssemblyBuilder ab = AppDomain
-                .CurrentDomain
+            AssemblyBuilder ab = AppDomain.CurrentDomain
                 .DefineDynamicAssembly(aname, AssemblyBuilderAccess.RunAndSave, tempDir);
 
             // CompanyName
@@ -2643,8 +2612,7 @@ namespace MonoTests.System.Diagnostics
             aname.Name = "lib2j";
             aname.Version = new Version(3, 5, 7, 9);
 
-            AssemblyBuilder ab = AppDomain
-                .CurrentDomain
+            AssemblyBuilder ab = AppDomain.CurrentDomain
                 .DefineDynamicAssembly(aname, AssemblyBuilderAccess.RunAndSave, tempDir);
             ab.DefineVersionInfoResource();
 
@@ -2747,8 +2715,7 @@ namespace MonoTests.System.Diagnostics
             aname.Name = "lib2k";
             aname.Version = new Version(3, 5, 7);
 
-            AssemblyBuilder ab = AppDomain
-                .CurrentDomain
+            AssemblyBuilder ab = AppDomain.CurrentDomain
                 .DefineDynamicAssembly(aname, AssemblyBuilderAccess.RunAndSave, tempDir);
 
             // CompanyName
@@ -2845,8 +2812,7 @@ namespace MonoTests.System.Diagnostics
             aname.Name = "lib2l";
             aname.Version = new Version(3, 5, 7);
 
-            AssemblyBuilder ab = AppDomain
-                .CurrentDomain
+            AssemblyBuilder ab = AppDomain.CurrentDomain
                 .DefineDynamicAssembly(aname, AssemblyBuilderAccess.RunAndSave, tempDir);
 
             // CompanyName

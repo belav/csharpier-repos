@@ -60,8 +60,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                 {
                     if (
                         member is PEMethodSymbol candidateMethod
-                        && metadataDecoder
-                            .Module
+                        && metadataDecoder.Module
                             .HasStateMachineAttribute(
                                 candidateMethod.Handle,
                                 out var stateMachineTypeName
@@ -184,8 +183,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
         )
         {
             var builder = ArrayBuilder<bool>.GetInstance();
-            CSharpCompilation
-                .DynamicTransformsEncoder
+            CSharpCompilation.DynamicTransformsEncoder
                 .Encode(type, customModifiersCount, refKind, builder, addCustomModifierFlags: true);
             var bytes =
                 builder.Count > 0

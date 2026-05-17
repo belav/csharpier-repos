@@ -92,8 +92,7 @@ namespace System.Net.Http
                         CultureInfo.InvariantCulture,
                         $"{authority.IdnHost}:{authority.Port}"
                     );
-                _altUsedEncodedHeader = QPack
-                    .QPackEncoder
+                _altUsedEncodedHeader = QPack.QPackEncoder
                     .EncodeLiteralHeaderFieldWithoutNameReferenceToArray(
                         KnownHeaders.AltUsed.Name,
                         altUsedValue
@@ -235,8 +234,7 @@ namespace System.Net.Http
                     {
                         TimeSpan duration = Stopwatch.GetElapsedTime(queueStartingTimestamp);
 
-                        _pool
-                            .Settings
+                        _pool.Settings
                             ._metrics!
                             .RequestLeftQueue(request, Pool, duration, versionMajor: 3);
 
@@ -439,8 +437,7 @@ namespace System.Net.Http
             string message,
             [CallerMemberName] string? memberName = null
         ) =>
-            NetEventSource
-                .Log
+            NetEventSource.Log
                 .HandlerMessage(
                     _pool?.GetHashCode() ?? 0, // pool ID
                     GetHashCode(), // connection ID
@@ -458,8 +455,7 @@ namespace System.Net.Http
                     .ConfigureAwait(false);
 
                 // Server MUST NOT abort our control stream, setup a continuation which will react accordingly
-                _ = _clientControl
-                    .WritesClosed
+                _ = _clientControl.WritesClosed
                     .ContinueWith(
                         t =>
                         {

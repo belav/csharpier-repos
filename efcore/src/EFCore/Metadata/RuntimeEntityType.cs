@@ -336,8 +336,7 @@ public class RuntimeEntityType : RuntimeTypeBase, IRuntimeEntityType
         foreach (var fk in FindDeclaredForeignKeys(properties))
         {
             if (
-                PropertyListComparer
-                    .Instance
+                PropertyListComparer.Instance
                     .Equals(fk.PrincipalKey.Properties, principalKey.Properties)
                 && fk.PrincipalEntityType == principalEntityType
             )

@@ -82,11 +82,9 @@ namespace Castle.DynamicProxy.Contributors
             var genericTypeParameters = invocation.GenericTypeParams.AsTypeArray();
             var closedDelegateType = delegateType.MakeGenericType(genericTypeParameters);
             var localReference = invokeMethodOnTarget.CodeBuilder.DeclareLocal(closedDelegateType);
-            var closedMethodOnTarget = method
-                .MethodOnTarget
+            var closedMethodOnTarget = method.MethodOnTarget
                 .MakeGenericMethod(genericTypeParameters);
-            invokeMethodOnTarget
-                .CodeBuilder
+            invokeMethodOnTarget.CodeBuilder
                 .AddStatement(
                     SetDelegate(
                         localReference,

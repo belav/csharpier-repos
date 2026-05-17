@@ -38,8 +38,7 @@ namespace System.Web.Mvc.Html.Test
         {
             // Arrange
             MetadataHelper metadataHelper = new MetadataHelper();
-            metadataHelper
-                .Metadata
+            metadataHelper.Metadata
                 .Setup(m => m.DisplayName)
                 .Returns("Custom display name from metadata");
 
@@ -78,8 +77,7 @@ namespace System.Web.Mvc.Html.Test
 
             MetadataHelper metadataHelper = new MetadataHelper();
 
-            metadataHelper
-                .MetadataProvider
+            metadataHelper.MetadataProvider
                 .Setup(p =>
                     p.GetMetadataForProperty(
                         It.IsAny<Func<object>>(),
@@ -110,8 +108,7 @@ namespace System.Web.Mvc.Html.Test
                 typeof(object),
                 "Custom property name from metadata"
             );
-            metadataHelper
-                .MetadataProvider
+            metadataHelper.MetadataProvider
                 .Setup(p => p.GetMetadataForType(It.IsAny<Func<object>>(), It.IsAny<Type>()))
                 .Returns(metadataHelper.Metadata.Object);
 
@@ -185,8 +182,7 @@ namespace System.Web.Mvc.Html.Test
             // Arrange
             MetadataHelper metadataHelper = new MetadataHelper();
 
-            metadataHelper
-                .Metadata
+            metadataHelper.Metadata
                 .Setup(m => m.DisplayName)
                 .Returns("Custom display name from metadata");
             string unknownKey = "this is a dummy parameter value";

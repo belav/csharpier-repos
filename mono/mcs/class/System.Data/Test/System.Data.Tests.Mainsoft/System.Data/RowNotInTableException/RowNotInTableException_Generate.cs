@@ -76,9 +76,10 @@ namespace tests.system_data_dll.System_Data
             DataSet ds = new DataSet();
             ds.Tables.Add(GHTUtils.DataProvider.CreateParentDataTable());
             ds.Tables.Add(GHTUtils.DataProvider.CreateChildDataTable());
-            ds.Relations.Add(
-                new DataRelation("myRelation", ds.Tables[0].Columns[0], ds.Tables[1].Columns[0])
-            );
+            ds.Relations
+                .Add(
+                    new DataRelation("myRelation", ds.Tables[0].Columns[0], ds.Tables[1].Columns[0])
+                );
 
             DataRow drParent = ds.Tables[0].Rows[0];
             DataRow drChild = ds.Tables[1].Rows[0];

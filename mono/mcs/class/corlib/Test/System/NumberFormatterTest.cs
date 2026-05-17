@@ -2267,8 +2267,7 @@ namespace MonoTests.System
             Assert.AreEqual("0000000000", Int32.MinValue.ToString("0000000000,,,,", _nfi), "#04");
             Assert.AreEqual(
                 "0000000000",
-                Int32
-                    .MinValue
+                Int32.MinValue
                     .ToString(
                         "0000000000,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,",
                         _nfi

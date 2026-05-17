@@ -1002,8 +1002,7 @@ public abstract class UrlHelperTestBase
         routeData.Values.Add("controller", "Store");
         routeData.Values.Add("action", "Buy");
 
-        urlHelper
-            .ActionContext
+        urlHelper.ActionContext
             .HttpContext
             .Features
             .Set<IRouteValuesFeature>(new RouteValuesFeature { RouteValues = routeData.Values });
@@ -1052,8 +1051,7 @@ public abstract class UrlHelperTestBase
         routeData.Values.Add("controller", "Store");
         routeData.Values.Add("action", "Buy");
 
-        urlHelper
-            .ActionContext
+        urlHelper.ActionContext
             .HttpContext
             .Features
             .Set<IRouteValuesFeature>(new RouteValuesFeature { RouteValues = routeData.Values });
@@ -1103,8 +1101,7 @@ public abstract class UrlHelperTestBase
         routeData.Values.Add("controller", "Store");
         routeData.Values.Add("action", "Buy");
 
-        urlHelper
-            .ActionContext
+        urlHelper.ActionContext
             .HttpContext
             .Features
             .Set<IRouteValuesFeature>(new RouteValuesFeature { RouteValues = routeData.Values });

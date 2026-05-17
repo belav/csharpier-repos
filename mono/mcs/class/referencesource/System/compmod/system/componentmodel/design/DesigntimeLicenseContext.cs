@@ -86,8 +86,7 @@ namespace System.ComponentModel.Design
         /// </devdoc>
         private string GetLocalPath(string fileName)
         {
-            System
-                .Diagnostics
+            System.Diagnostics
                 .Debug
                 .Assert(
                     fileName != null && fileName.Length > 0,

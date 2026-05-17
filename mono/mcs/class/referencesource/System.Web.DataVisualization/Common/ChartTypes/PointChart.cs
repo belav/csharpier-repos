@@ -422,8 +422,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                 //************************************************************
                 if (!selection)
                 {
-                    common
-                        .Chart
+                    common.Chart
                         .CallOnPrePaint(
                             new ChartPaintEventArgs(ser, graph, common, area.PlotAreaPosition)
                         );
@@ -625,8 +624,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                 // Call Paint event
                 if (!selection)
                 {
-                    common
-                        .Chart
+                    common.Chart
                         .CallOnPostPaint(
                             new ChartPaintEventArgs(ser, graph, common, area.PlotAreaPosition)
                         );
@@ -721,8 +719,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             // Insert circle area
             if (pointMarkerStyle == MarkerStyle.Circle)
             {
-                common
-                    .HotRegionsList
+                common.HotRegionsList
                     .AddHotRegion(
                         insertIndex,
                         graph,
@@ -738,8 +735,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             else
             {
                 // Insert area
-                common
-                    .HotRegionsList
+                common.HotRegionsList
                     .AddHotRegion(
                         new RectangleF(
                             markerPosition.X - relativeMarkerSize.Width / 2f,
@@ -999,18 +995,19 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                         if (ser.SmartLabelStyle.Enabled)
                         {
                             // Adjust label position using SmartLabelStyle algorithm
-                            position = area.smartLabels.AdjustSmartLabelPosition(
-                                common,
-                                graph,
-                                area,
-                                ser.SmartLabelStyle,
-                                position,
-                                sizeFont,
-                                format,
-                                markerPosition,
-                                sizeMarker,
-                                this.labelPosition
-                            );
+                            position = area.smartLabels
+                                .AdjustSmartLabelPosition(
+                                    common,
+                                    graph,
+                                    area,
+                                    ser.SmartLabelStyle,
+                                    position,
+                                    sizeFont,
+                                    format,
+                                    markerPosition,
+                                    sizeMarker,
+                                    this.labelPosition
+                                );
 
                             // Smart labels always use 0 degrees text angle
                             textAngle = 0;
@@ -1440,8 +1437,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             if (
                 this.label3DInfoList != null
                 && this.label3DInfoList.Count > 0
-                && ((Label3DInfo)this.label3DInfoList[this.label3DInfoList.Count - 1])
-                    .PointEx
+                && ((Label3DInfo)this.label3DInfoList[this.label3DInfoList.Count - 1]).PointEx
                     .zPosition != pointEx.zPosition
             )
             {
@@ -1478,8 +1474,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                     circCoord[1] = markerRotatedPosition.Y;
                     circCoord[2] = relativeMarkerSize.Width / 2f;
 
-                    common
-                        .HotRegionsList
+                    common.HotRegionsList
                         .AddHotRegion(
                             insertIndex,
                             graph,
@@ -1495,15 +1490,13 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                 // Insert path for 3D bar
                 if (pointMarkerStyle == MarkerStyle.Square)
                 {
-                    common
-                        .HotRegionsList
+                    common.HotRegionsList
                         .AddHotRegion(rectPath, false, graph, point, ser.Name, pointEx.index - 1);
                 }
                 // All other markers represented as rectangles
                 else
                 {
-                    common
-                        .HotRegionsList
+                    common.HotRegionsList
                         .AddHotRegion(
                             new RectangleF(
                                 markerRotatedPosition.X - relativeMarkerSize.Width / 2f,

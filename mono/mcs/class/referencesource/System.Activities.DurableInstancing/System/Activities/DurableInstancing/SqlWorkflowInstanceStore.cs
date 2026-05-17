@@ -99,8 +99,7 @@ namespace System.Activities.DurableInstancing
             {
                 if (value.CompareTo(SqlWorkflowInstanceStore.minimumTimeSpanAllowed) < 0)
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .ArgumentOutOfRange(
                             "lockRenewalPeriod",
                             value,
@@ -152,8 +151,7 @@ namespace System.Activities.DurableInstancing
             {
                 if (value.CompareTo(SqlWorkflowInstanceStore.minimumTimeSpanAllowed) < 0)
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .ArgumentOutOfRange(
                             "instancePersistenceEventDetectionPeriod",
                             value,
@@ -251,8 +249,7 @@ namespace System.Activities.DurableInstancing
 
             if (promoteAsVariant == null && promoteAsBinary == null)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(new InvalidOperationException(SR.NoPromotionsDefined(name)));
             }
 
@@ -262,8 +259,7 @@ namespace System.Activities.DurableInstancing
                     > SqlWorkflowInstanceStoreConstants.MaximumPropertiesPerPromotion
             )
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .Argument(
                         "promoteAsVariant",
                         SR.PromotionTooManyDefined(
@@ -281,8 +277,7 @@ namespace System.Activities.DurableInstancing
                     > SqlWorkflowInstanceStoreConstants.MaximumPropertiesPerPromotion
             )
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .Argument(
                         "promoteAsVariant",
                         SR.PromotionTooManyDefined(
@@ -303,8 +298,7 @@ namespace System.Activities.DurableInstancing
                 {
                     if (xname == null)
                     {
-                        throw FxTrace
-                            .Exception
+                        throw FxTrace.Exception
                             .AsError(
                                 new InvalidOperationException(
                                     SR.CanNotDefineNullForAPromotion("variant", name)
@@ -314,8 +308,7 @@ namespace System.Activities.DurableInstancing
 
                     if (promotedXNames.Contains(xname))
                     {
-                        throw FxTrace
-                            .Exception
+                        throw FxTrace.Exception
                             .AsError(
                                 new InvalidOperationException(
                                     SR.CannotPromoteXNameTwiceInPromotion(xname.ToString(), name)
@@ -336,8 +329,7 @@ namespace System.Activities.DurableInstancing
                 {
                     if (name == null)
                     {
-                        throw FxTrace
-                            .Exception
+                        throw FxTrace.Exception
                             .AsError(
                                 new InvalidOperationException(
                                     SR.CanNotDefineNullForAPromotion("binary", xname)
@@ -347,8 +339,7 @@ namespace System.Activities.DurableInstancing
 
                     if (promotedXNames.Contains(xname))
                     {
-                        throw FxTrace
-                            .Exception
+                        throw FxTrace.Exception
                             .AsError(
                                 new InvalidOperationException(
                                     SR.CannotPromoteXNameTwiceInPromotion(xname.ToString(), name)
@@ -388,8 +379,7 @@ namespace System.Activities.DurableInstancing
                 && !(command is CreateWorkflowOwnerWithIdentityCommand)
             )
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(new InstanceOwnerException(command.Name, this.storeLock.LockOwnerId));
             }
 
@@ -901,8 +891,7 @@ namespace System.Activities.DurableInstancing
                     TD.UnlockInstanceException(e.Message);
                 }
                 // Keep on going - if problems are severe the host will be faulted and we'll give up then.
-                unlockInstanceState
-                    .BackoffTimeoutHelper
+                unlockInstanceState.BackoffTimeoutHelper
                     .WaitAndBackoff(this.scheduledUnlockInstance, unlockInstanceState);
             }
         }
@@ -918,8 +907,7 @@ namespace System.Activities.DurableInstancing
         {
             if (this.isReadOnly)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(new InvalidOperationException(SR.InstanceStoreReadOnly));
             }
         }
@@ -948,8 +936,7 @@ namespace System.Activities.DurableInstancing
                     BackoffTimeoutHelper = new BackoffTimeoutHelper(TimeSpan.MaxValue),
                 };
 
-                unlockInstanceState
-                    .BackoffTimeoutHelper
+                unlockInstanceState.BackoffTimeoutHelper
                     .WaitAndBackoff(this.scheduledUnlockInstance, unlockInstanceState);
             }
         }

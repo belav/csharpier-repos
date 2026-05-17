@@ -16,8 +16,7 @@ namespace System.Web.Mvc.Test
         public void GetValidatorsGuardClauses()
         {
             // Arrange
-            ModelMetadata metadata = ModelMetadataProviders
-                .Current
+            ModelMetadata metadata = ModelMetadataProviders.Current
                 .GetMetadataForType(null, typeof(object));
             Mock<AssociatedValidatorProvider> provider = new Mock<AssociatedValidatorProvider>
             {
@@ -41,8 +40,7 @@ namespace System.Web.Mvc.Test
             // Arrange
             IEnumerable<Attribute> callbackAttributes = null;
             ControllerContext context = new ControllerContext();
-            ModelMetadata metadata = ModelMetadataProviders
-                .Current
+            ModelMetadata metadata = ModelMetadataProviders.Current
                 .GetMetadataForProperty(null, typeof(PropertyModel), "LocalAttributes");
             Mock<TestableAssociatedValidatorProvider> provider =
                 new Mock<TestableAssociatedValidatorProvider> { CallBase = true };
@@ -70,8 +68,7 @@ namespace System.Web.Mvc.Test
             // Arrange
             IEnumerable<Attribute> callbackAttributes = null;
             ControllerContext context = new ControllerContext();
-            ModelMetadata metadata = ModelMetadataProviders
-                .Current
+            ModelMetadata metadata = ModelMetadataProviders.Current
                 .GetMetadataForProperty(null, typeof(PropertyModel), "MetadataAttributes");
             Mock<TestableAssociatedValidatorProvider> provider =
                 new Mock<TestableAssociatedValidatorProvider> { CallBase = true };
@@ -99,8 +96,7 @@ namespace System.Web.Mvc.Test
             // Arrange
             IEnumerable<Attribute> callbackAttributes = null;
             ControllerContext context = new ControllerContext();
-            ModelMetadata metadata = ModelMetadataProviders
-                .Current
+            ModelMetadata metadata = ModelMetadataProviders.Current
                 .GetMetadataForProperty(null, typeof(PropertyModel), "MixedAttributes");
             Mock<TestableAssociatedValidatorProvider> provider =
                 new Mock<TestableAssociatedValidatorProvider> { CallBase = true };

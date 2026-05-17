@@ -237,8 +237,7 @@ namespace System.Configuration
                         _lockedElementsList.Add(key, ConfigurationValueFlags.Inherited); // Mark entry as from the parent - read only
                         if (collection != null)
                         {
-                            collection
-                                ._lockedElementsList
+                            collection._lockedElementsList
                                 .Add(key, ConfigurationValueFlags.Inherited); // add the local copy
                         }
                     }
@@ -1445,8 +1444,7 @@ namespace System.Configuration
                             if (!props.Contains(key)) // this is for optional provider models keys
                             {
                                 // _values[key] = value;
-                                ConfigurationValueFlags valueFlags = sourceElement
-                                    .Values
+                                ConfigurationValueFlags valueFlags = sourceElement.Values
                                     .RetrieveFlags(key);
                                 _values.SetValue(key, value, valueFlags, null);
 
@@ -1516,8 +1514,7 @@ namespace System.Configuration
                                 case ConfigurationSaveMode.Modified:
                                     {
                                         bool modified = sourceElement.Values.IsModified(prop.Name);
-                                        bool inherited = sourceElement
-                                            .Values
+                                        bool inherited = sourceElement.Values
                                             .IsInherited(prop.Name);
 
                                         // update the value if the property is required, modified or it was not inherited

@@ -48,8 +48,7 @@ namespace System.ServiceModel.ComIntegration
                 int error = Marshal.GetLastWin32Error();
                 if (error != (int)Win32Error.ERROR_INSUFFICIENT_BUFFER)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new Win32Exception(error, SR.GetString(SR.GetTokenInfoFailed, error))
                         );
@@ -69,8 +68,7 @@ namespace System.ServiceModel.ComIntegration
                 )
                 {
                     int error = Marshal.GetLastWin32Error();
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new Win32Exception(error, SR.GetString(SR.GetTokenInfoFailed, error))
                         );
@@ -147,8 +145,7 @@ namespace System.ServiceModel.ComIntegration
                             )
                             {
                                 int error = Marshal.GetLastWin32Error();
-                                throw DiagnosticUtility
-                                    .ExceptionUtility
+                                throw DiagnosticUtility.ExceptionUtility
                                     .ThrowHelperError(
                                         new Win32Exception(
                                             error,
@@ -181,8 +178,7 @@ namespace System.ServiceModel.ComIntegration
                                 isImpersonating = false;
 
                                 Utility.CloseInvalidOutSafeHandle(tokenHandle);
-                                throw DiagnosticUtility
-                                    .ExceptionUtility
+                                throw DiagnosticUtility.ExceptionUtility
                                     .ThrowHelperError(
                                         new Win32Exception(
                                             error,
@@ -251,8 +247,7 @@ namespace System.ServiceModel.ComIntegration
                     {
                         int error = Marshal.GetLastWin32Error();
                         Utility.CloseInvalidOutSafeHandle(tokenHandle);
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new Win32Exception(
                                     error,
@@ -429,8 +424,7 @@ namespace System.ServiceModel.ComIntegration
                     {
                         int error = Marshal.GetLastWin32Error();
                         Utility.CloseInvalidOutSafeHandle(ImpersonationToken);
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new Win32Exception(
                                     error,
@@ -457,8 +451,7 @@ namespace System.ServiceModel.ComIntegration
                 )
                 {
                     int error = Marshal.GetLastWin32Error();
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new Win32Exception(error, SR.GetString(SR.AccessCheckFailed, error))
                         );

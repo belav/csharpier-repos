@@ -301,8 +301,7 @@ namespace System.Web.DynamicData
                     MetaTable table = CreateTable(tableProvider);
                     table.CreateColumns();
 
-                    var tableNameAttribute = tableProvider
-                        .Attributes
+                    var tableNameAttribute = tableProvider.Attributes
                         .OfType<TableNameAttribute>()
                         .SingleOrDefault();
                     string nameOverride =

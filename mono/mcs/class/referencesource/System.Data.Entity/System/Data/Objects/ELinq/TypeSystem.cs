@@ -184,8 +184,7 @@ namespace System.Data.Objects.ELinq
                 {
                     // try to find a property with the given getter
                     foreach (
-                        PropertyInfo property in method
-                            .DeclaringType
+                        PropertyInfo property in method.DeclaringType
                             .GetProperties(
                                 BindingFlags.Static
                                     | BindingFlags.Instance
@@ -351,8 +350,7 @@ namespace System.Data.Objects.ELinq
             MethodInfo getInterfaceProp = interfaceProp.GetGetMethod();
 
             // Retrieve the interface mapping for the interface on the candidate property's declaring type.
-            InterfaceMapping interfaceMap = propertyInfo
-                .DeclaringType
+            InterfaceMapping interfaceMap = propertyInfo.DeclaringType
                 .GetInterfaceMap(interfaceType);
 
             // Find the index of the interface's get_<Property> method in the interface methods of the interface map

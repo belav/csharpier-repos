@@ -134,8 +134,7 @@ namespace Microsoft.Interop
             StubCodeContext context,
             out GeneratorDiagnostic? diagnostic
         ) =>
-            ByValueMarshalKindSupportDescriptor
-                .Default
+            ByValueMarshalKindSupportDescriptor.Default
                 .GetSupport(marshalKind, info, context, out diagnostic);
     }
 }

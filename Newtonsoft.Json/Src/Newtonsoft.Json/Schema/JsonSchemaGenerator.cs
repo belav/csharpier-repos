@@ -322,8 +322,7 @@ namespace Newtonsoft.Json.Schema
                         if (collectionItemType != null)
                         {
                             CurrentSchema.Items = new List<JsonSchema>();
-                            CurrentSchema
-                                .Items
+                            CurrentSchema.Items
                                 .Add(
                                     GenerateInternal(
                                         collectionItemType,

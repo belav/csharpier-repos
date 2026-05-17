@@ -216,8 +216,7 @@ namespace System.Web.Http.Routing
                 );
             }
 
-            IHttpVirtualPathData vpd = configuration
-                .Routes
+            IHttpVirtualPathData vpd = configuration.Routes
                 .GetVirtualPath(request: request, name: routeName, values: routeValues);
             if (vpd == null)
             {

@@ -43,8 +43,7 @@
             ValidationContext validationContext
         )
         {
-            PropertyInfo otherPropertyInfo = validationContext
-                .ObjectType
+            PropertyInfo otherPropertyInfo = validationContext.ObjectType
                 .GetProperty(OtherProperty);
             if (otherPropertyInfo == null)
             {

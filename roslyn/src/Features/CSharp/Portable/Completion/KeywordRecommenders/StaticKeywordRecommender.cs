@@ -96,15 +96,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
                 )
                 || IsValidContextForType(context, cancellationToken)
                 || IsValidContextForMember(context, cancellationToken)
-                || context
-                    .SyntaxTree
+                || context.SyntaxTree
                     .IsLambdaDeclarationContext(
                         position,
                         otherModifier: SyntaxKind.AsyncKeyword,
                         cancellationToken
                     )
-                || context
-                    .SyntaxTree
+                || context.SyntaxTree
                     .IsLocalFunctionDeclarationContext(
                         position,
                         s_validLocalFunctionModifiers,
@@ -117,8 +115,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             CancellationToken cancellationToken
         )
         {
-            return context
-                    .SyntaxTree
+            return context.SyntaxTree
                     .IsGlobalMemberDeclarationContext(
                         context.Position,
                         s_validGlobalMemberModifiers,

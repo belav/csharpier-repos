@@ -69,9 +69,8 @@ namespace System.Workflow.ComponentModel
                     if (CanHandleException(exceptionHandler, exceptionType))
                     {
                         // remove exception from here, I ate it
-                        this.Parent.RemoveProperty(
-                            ActivityExecutionContext.CurrentExceptionProperty
-                        );
+                        this.Parent
+                            .RemoveProperty(ActivityExecutionContext.CurrentExceptionProperty);
                         exceptionHandler.SetException(excep);
                         exceptionHandler.RegisterForStatusChange(Activity.ClosedEvent, this);
                         executionContext.ExecuteActivity(exceptionHandler);

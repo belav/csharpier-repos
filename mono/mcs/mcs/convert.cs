@@ -949,14 +949,15 @@ namespace Mono.CSharp
                         var elementSrcName = tupleLiteral.Elements[i].Name;
                         if (elementSrcName != null && elementSrcName != namedTarget.Elements[i])
                         {
-                            rc.Report.Warning(
-                                8123,
-                                1,
-                                loc,
-                                "The tuple element name `{0}' is ignored because a different name or no name is specified by the target type `{1}'",
-                                elementSrcName,
-                                namedTarget.GetSignatureForErrorWithNames()
-                            );
+                            rc.Report
+                                .Warning(
+                                    8123,
+                                    1,
+                                    loc,
+                                    "The tuple element name `{0}' is ignored because a different name or no name is specified by the target type `{1}'",
+                                    elementSrcName,
+                                    namedTarget.GetSignatureForErrorWithNames()
+                                );
                         }
                     }
                 }
@@ -1772,15 +1773,16 @@ namespace Mono.CSharp
                                 ambig_arg = candidate;
                         }
                         */
-                        rc.Report.Error(
-                            457,
-                            loc,
-                            "Ambiguous user defined operators `{0}' and `{1}' when converting from `{2}' to `{3}'",
-                            ambig_arg.GetSignatureForError(),
-                            most_specific_operator.GetSignatureForError(),
-                            source.Type.GetSignatureForError(),
-                            target.GetSignatureForError()
-                        );
+                        rc.Report
+                            .Error(
+                                457,
+                                loc,
+                                "Ambiguous user defined operators `{0}' and `{1}' when converting from `{2}' to `{3}'",
+                                ambig_arg.GetSignatureForError(),
+                                most_specific_operator.GetSignatureForError(),
+                                source.Type.GetSignatureForError(),
+                                target.GetSignatureForError()
+                            );
                     }
 
                     return ErrorExpression.Instance;

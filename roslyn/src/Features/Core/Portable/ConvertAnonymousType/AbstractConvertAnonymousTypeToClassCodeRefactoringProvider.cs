@@ -195,12 +195,8 @@ namespace Microsoft.CodeAnalysis.ConvertAnonymousType
             editor.ReplaceNode(
                 container,
                 (currentContainer, _) =>
-                    info.Service.AddNamedType(
-                        currentContainer,
-                        namedTypeSymbol,
-                        info,
-                        cancellationToken
-                    )
+                    info.Service
+                        .AddNamedType(currentContainer, namedTypeSymbol, info, cancellationToken)
             );
 
             var updatedDocument = document.WithSyntaxRoot(editor.GetChangedRoot());
@@ -330,8 +326,7 @@ namespace Microsoft.CodeAnalysis.ConvertAnonymousType
                             : (TNameSyntax)
                                 g.GenericName(
                                     classNameToken,
-                                    classSymbol
-                                        .TypeParameters
+                                    classSymbol.TypeParameters
                                         .Select(tp => g.IdentifierName(tp.Name))
                                 );
 

@@ -159,8 +159,7 @@ public class SqlServerSqlTranslatingExpressionVisitor : RelationalSqlTranslating
             var isBinaryMaxDataType =
                 GetProviderType(sqlExpression) == "varbinary(max)"
                 || sqlExpression is SqlParameterExpression;
-            var dataLengthSqlFunction = Dependencies
-                .SqlExpressionFactory
+            var dataLengthSqlFunction = Dependencies.SqlExpressionFactory
                 .Function(
                     "DATALENGTH",
                     new[] { sqlExpression },
@@ -340,8 +339,7 @@ public class SqlServerSqlTranslatingExpressionVisitor : RelationalSqlTranslating
                 }
 
                 case SqlParameterExpression patternParameter
-                    when patternParameter
-                        .Name
+                    when patternParameter.Name
                         .StartsWith(
                             QueryCompilationContext.QueryParameterPrefix,
                             StringComparison.Ordinal
@@ -542,21 +540,17 @@ public class SqlServerSqlTranslatingExpressionVisitor : RelationalSqlTranslating
         var visitedIndex = Visit(index);
 
         return visitedArray is SqlExpression sqlArray && visitedIndex is SqlExpression sqlIndex
-            ? Dependencies
-                .SqlExpressionFactory
+            ? Dependencies.SqlExpressionFactory
                 .Convert(
-                    Dependencies
-                        .SqlExpressionFactory
+                    Dependencies.SqlExpressionFactory
                         .Function(
                             "SUBSTRING",
                             new[]
                             {
                                 sqlArray,
-                                Dependencies
-                                    .SqlExpressionFactory
+                                Dependencies.SqlExpressionFactory
                                     .Add(
-                                        Dependencies
-                                            .SqlExpressionFactory
+                                        Dependencies.SqlExpressionFactory
                                             .ApplyDefaultTypeMapping(sqlIndex),
                                         Dependencies.SqlExpressionFactory.Constant(1)
                                     ),

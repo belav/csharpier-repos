@@ -58,8 +58,7 @@ namespace System.IdentityModel.Selectors
 #pragma warning suppress 56503
             get
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new NotSupportedException());
             }
         }
@@ -86,8 +85,7 @@ namespace System.IdentityModel.Selectors
             if (certificate == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("certificate");
             if (certificate.Handle == IntPtr.Zero)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(
                         "certificate",
                         SR.GetString(SR.ArgumentInvalidCertificate)
@@ -150,16 +148,14 @@ namespace System.IdentityModel.Selectors
             )
             {
                 int error = Marshal.GetLastWin32Error();
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new CryptographicException(error));
             }
 
             if (PolicyStatus.dwError != CAPI.S_OK)
             {
                 int error = (int)PolicyStatus.dwError;
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new SecurityTokenValidationException(
                             SR.GetString(
@@ -240,8 +236,7 @@ namespace System.IdentityModel.Selectors
                 )
                 {
                     int error = Marshal.GetLastWin32Error();
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new CryptographicException(error));
                 }
             }
@@ -290,8 +285,7 @@ namespace System.IdentityModel.Selectors
             if (certStoreHandle == null || certStoreHandle.IsInvalid)
             {
                 int error = Marshal.GetLastWin32Error();
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new CryptographicException(error));
             }
 
@@ -315,8 +309,7 @@ namespace System.IdentityModel.Selectors
                     )
                     {
                         int error = Marshal.GetLastWin32Error();
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(new CryptographicException(error));
                     }
                 }
@@ -372,8 +365,7 @@ namespace System.IdentityModel.Selectors
                             )
                             {
                                 int error = Marshal.GetLastWin32Error();
-                                throw DiagnosticUtility
-                                    .ExceptionUtility
+                                throw DiagnosticUtility.ExceptionUtility
                                     .ThrowHelperError(new CryptographicException(error));
                             }
                         }
@@ -439,8 +431,7 @@ namespace System.IdentityModel.Selectors
                 if (ansiOid.Length != oidStrs[index].Length)
                 {
                     // We assumed single byte characters, fail if this is not the case.  The exception is not ideal.
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(SR.GetString(SR.CollectionWasModified))
                         );

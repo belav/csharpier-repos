@@ -460,8 +460,7 @@ namespace System.Net
                     | ((uint)addressAsInt >> 24)
                 );
 #endif
-                IntPtr nativePointer = UnsafeNclNativeMethods
-                    .OSSOCK
+                IntPtr nativePointer = UnsafeNclNativeMethods.OSSOCK
                     .gethostbyaddr(
                         ref addressAsInt,
                         Marshal.SizeOf(typeof(int)),
@@ -512,8 +511,7 @@ namespace System.Net
 
             Socket.InitializeSockets();
             StringBuilder sb = new StringBuilder(HostNameBufferLength);
-            SocketError errorCode = UnsafeNclNativeMethods
-                .OSSOCK
+            SocketError errorCode = UnsafeNclNativeMethods.OSSOCK
                 .gethostname(sb, HostNameBufferLength);
 
             //
@@ -1306,24 +1304,21 @@ namespace System.Net
         [HostProtection(ExternalThreading = true)]
         public static Task<IPAddress[]> GetHostAddressesAsync(string hostNameOrAddress)
         {
-            return Task<IPAddress[]>
-                .Factory
+            return Task<IPAddress[]>.Factory
                 .FromAsync(BeginGetHostAddresses, EndGetHostAddresses, hostNameOrAddress, null);
         }
 
         [HostProtection(ExternalThreading = true)]
         public static Task<IPHostEntry> GetHostEntryAsync(IPAddress address)
         {
-            return Task<IPHostEntry>
-                .Factory
+            return Task<IPHostEntry>.Factory
                 .FromAsync(BeginGetHostEntry, EndGetHostEntry, address, null);
         }
 
         [HostProtection(ExternalThreading = true)]
         public static Task<IPHostEntry> GetHostEntryAsync(string hostNameOrAddress)
         {
-            return Task<IPHostEntry>
-                .Factory
+            return Task<IPHostEntry>.Factory
                 .FromAsync(BeginGetHostEntry, EndGetHostEntry, hostNameOrAddress, null);
         }
 
@@ -1484,8 +1479,7 @@ namespace System.Net
             int flags = (int)NameInfoFlags.NI_NAMEREQD;
 
             Socket.InitializeSockets();
-            errorCode = UnsafeNclNativeMethods
-                .OSSOCK
+            errorCode = UnsafeNclNativeMethods.OSSOCK
                 .GetNameInfoW(
                     address.m_Buffer,
                     address.m_Size,

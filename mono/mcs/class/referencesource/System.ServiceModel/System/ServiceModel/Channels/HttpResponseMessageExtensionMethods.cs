@@ -109,8 +109,7 @@ namespace System.ServiceModel.Channels
 
             if (httpResponseMessage.RequestMessage != null)
             {
-                bufferedHttpResponseMessage.RequestMessage = httpResponseMessage
-                    .RequestMessage
+                bufferedHttpResponseMessage.RequestMessage = httpResponseMessage.RequestMessage
                     .CreateBufferedCopy();
             }
 
@@ -155,8 +154,7 @@ namespace System.ServiceModel.Channels
                 && headerInfo.IsResponseHeader
             )
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new InvalidOperationException(
                             SR.GetString(

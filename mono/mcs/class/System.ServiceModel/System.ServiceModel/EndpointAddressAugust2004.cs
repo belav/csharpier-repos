@@ -64,8 +64,7 @@ namespace System.ServiceModel
                 throw new ArgumentNullException("xmlSchemaSet");
             xmlSchemaSet.Add(
                 XmlSchema.Read(
-                    typeof(EndpointAddress10)
-                        .Assembly
+                    typeof(EndpointAddress10).Assembly
                         .GetManifestResourceStream("WS-Addressing.schema"),
                     null
                 )

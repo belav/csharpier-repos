@@ -115,8 +115,7 @@ public class SqlServerQueryTriggersTest
         {
             context.Database.EnsureCreatedResiliently();
 
-            context
-                .Database
+            context.Database
                 .ExecuteSqlRaw(
                     @"
 CREATE TRIGGER TRG_InsertUpdateProduct

@@ -121,12 +121,10 @@ namespace Microsoft.CodeAnalysis.CSharp.BraceCompletion
                 return null;
             }
 
-            var openingPointLine = originalDocumentText
-                .Lines
+            var openingPointLine = originalDocumentText.Lines
                 .GetLineFromPosition(openingPoint)
                 .LineNumber;
-            var closingPointLine = originalDocumentText
-                .Lines
+            var closingPointLine = originalDocumentText.Lines
                 .GetLineFromPosition(closingPoint)
                 .LineNumber;
 
@@ -215,8 +213,7 @@ namespace Microsoft.CodeAnalysis.CSharp.BraceCompletion
                 CancellationToken cancellationToken
             )
             {
-                var indentationService = document
-                    .LanguageServices
+                var indentationService = document.LanguageServices
                     .GetRequiredService<IIndentationService>();
                 var indentation = indentationService.GetIndentation(
                     document,

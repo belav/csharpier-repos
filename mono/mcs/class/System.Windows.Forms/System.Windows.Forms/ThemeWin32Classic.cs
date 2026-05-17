@@ -1441,8 +1441,7 @@ namespace System.Windows.Forms
         public virtual void DrawCheckBoxGlyph(Graphics g, CheckBox cb, Rectangle glyphArea)
         {
             if (cb.Pressed)
-                ThemeElements
-                    .CurrentTheme
+                ThemeElements.CurrentTheme
                     .CheckBoxPainter
                     .PaintCheckBox(
                         g,
@@ -1454,8 +1453,7 @@ namespace System.Windows.Forms
                         cb.CheckState
                     );
             else if (cb.InternalSelected)
-                ThemeElements
-                    .CurrentTheme
+                ThemeElements.CurrentTheme
                     .CheckBoxPainter
                     .PaintCheckBox(
                         g,
@@ -1467,8 +1465,7 @@ namespace System.Windows.Forms
                         cb.CheckState
                     );
             else if (cb.Entered)
-                ThemeElements
-                    .CurrentTheme
+                ThemeElements.CurrentTheme
                     .CheckBoxPainter
                     .PaintCheckBox(
                         g,
@@ -1480,8 +1477,7 @@ namespace System.Windows.Forms
                         cb.CheckState
                     );
             else if (!cb.Enabled)
-                ThemeElements
-                    .CurrentTheme
+                ThemeElements.CurrentTheme
                     .CheckBoxPainter
                     .PaintCheckBox(
                         g,
@@ -1493,8 +1489,7 @@ namespace System.Windows.Forms
                         cb.CheckState
                     );
             else
-                ThemeElements
-                    .CurrentTheme
+                ThemeElements.CurrentTheme
                     .CheckBoxPainter
                     .PaintCheckBox(
                         g,
@@ -2454,13 +2449,14 @@ namespace System.Windows.Forms
 
             e.Graphics.FillRectangle(ResPool.GetSolidBrush(back_color), item_rect);
 
-            e.Graphics.DrawString(
-                ctrl.GetItemText(ctrl.Items[e.Index]),
-                e.Font,
-                ResPool.GetSolidBrush(fore_color),
-                item_rect,
-                ctrl.StringFormat
-            );
+            e.Graphics
+                .DrawString(
+                    ctrl.GetItemText(ctrl.Items[e.Index]),
+                    e.Font,
+                    ResPool.GetSolidBrush(fore_color),
+                    item_rect,
+                    ctrl.StringFormat
+                );
 
             if ((e.State & DrawItemState.Focus) == DrawItemState.Focus)
             {
@@ -2497,13 +2493,14 @@ namespace System.Windows.Forms
 
             if (e.Index != -1)
             {
-                e.Graphics.DrawString(
-                    ctrl.GetItemText(ctrl.Items[e.Index]),
-                    e.Font,
-                    ResPool.GetSolidBrush(fore_color),
-                    text_draw,
-                    string_format
-                );
+                e.Graphics
+                    .DrawString(
+                        ctrl.GetItemText(ctrl.Items[e.Index]),
+                        e.Font,
+                        ResPool.GetSolidBrush(fore_color),
+                        text_draw,
+                        string_format
+                    );
             }
 
             if ((e.State & DrawItemState.Focus) == DrawItemState.Focus)
@@ -2736,10 +2733,8 @@ namespace System.Windows.Forms
 
                 if (pe.ClipRectangle.IntersectsWith(corner))
                 {
-                    pe.Graphics.FillRectangle(
-                        ResPool.GetSolidBrush(grid.ParentRowsBackColor),
-                        corner
-                    );
+                    pe.Graphics
+                        .FillRectangle(ResPool.GetSolidBrush(grid.ParentRowsBackColor), corner);
                 }
             }
         }
@@ -4052,13 +4047,14 @@ namespace System.Windows.Forms
 
             e.Graphics.FillRectangle(ResPool.GetSolidBrush(back_color), e.Bounds);
 
-            e.Graphics.DrawString(
-                ctrl.GetItemText(ctrl.Items[e.Index]),
-                e.Font,
-                ResPool.GetSolidBrush(fore_color),
-                e.Bounds,
-                ctrl.StringFormat
-            );
+            e.Graphics
+                .DrawString(
+                    ctrl.GetItemText(ctrl.Items[e.Index]),
+                    e.Font,
+                    ResPool.GetSolidBrush(fore_color),
+                    e.Bounds,
+                    ctrl.StringFormat
+                );
 
             if ((e.State & DrawItemState.Focus) == DrawItemState.Focus)
                 CPDrawFocusRectangle(e.Graphics, e.Bounds, fore_color, back_color);
@@ -4244,8 +4240,7 @@ namespace System.Windows.Forms
                             if (x_origin < rect.X)
                                 x_origin = rect.X;
 
-                            control
-                                .SmallImageList
+                            control.SmallImageList
                                 .Draw(dc, new Point(x_origin, y_origin), image_index);
                             rect.X += image_width;
                             rect.Width -= image_width;
@@ -5074,21 +5069,23 @@ namespace System.Windows.Forms
             {
                 int liney = e.Bounds.Y + (e.Bounds.Height / 2);
 
-                e.Graphics.DrawLine(
-                    SystemPens.ControlDark,
-                    e.Bounds.X,
-                    liney,
-                    e.Bounds.X + e.Bounds.Width,
-                    liney
-                );
+                e.Graphics
+                    .DrawLine(
+                        SystemPens.ControlDark,
+                        e.Bounds.X,
+                        liney,
+                        e.Bounds.X + e.Bounds.Width,
+                        liney
+                    );
 
-                e.Graphics.DrawLine(
-                    SystemPens.ControlLight,
-                    e.Bounds.X,
-                    liney + 1,
-                    e.Bounds.X + e.Bounds.Width,
-                    liney + 1
-                );
+                e.Graphics
+                    .DrawLine(
+                        SystemPens.ControlLight,
+                        e.Bounds.X,
+                        liney + 1,
+                        e.Bounds.X + e.Bounds.Width,
+                        liney + 1
+                    );
 
                 return;
             }
@@ -5103,21 +5100,17 @@ namespace System.Windows.Forms
                 rect.Width = 3;
                 rect.Height = item.MenuHeight - 6;
 
-                e.Graphics.DrawLine(
-                    SystemPens.ControlDark,
-                    rect.X,
-                    rect.Y,
-                    rect.X,
-                    rect.Y + rect.Height
-                );
+                e.Graphics
+                    .DrawLine(SystemPens.ControlDark, rect.X, rect.Y, rect.X, rect.Y + rect.Height);
 
-                e.Graphics.DrawLine(
-                    SystemPens.ControlLight,
-                    rect.X + 1,
-                    rect.Y,
-                    rect.X + 1,
-                    rect.Y + rect.Height
-                );
+                e.Graphics
+                    .DrawLine(
+                        SystemPens.ControlLight,
+                        rect.X + 1,
+                        rect.Y,
+                        rect.X + 1,
+                        rect.Y + rect.Height
+                    );
             }
 
             Color color_text;
@@ -5173,27 +5166,29 @@ namespace System.Windows.Forms
             {
                 if ((item.Status & DrawItemState.Selected) != DrawItemState.Selected)
                 {
-                    e.Graphics.DrawString(
-                        item.Text,
-                        e.Font,
-                        Brushes.White,
-                        new RectangleF(
-                            rect_text.X + 1,
-                            rect_text.Y + 1,
-                            rect_text.Width,
-                            rect_text.Height
-                        ),
-                        string_format
-                    );
+                    e.Graphics
+                        .DrawString(
+                            item.Text,
+                            e.Font,
+                            Brushes.White,
+                            new RectangleF(
+                                rect_text.X + 1,
+                                rect_text.Y + 1,
+                                rect_text.Width,
+                                rect_text.Height
+                            ),
+                            string_format
+                        );
                 }
 
-                e.Graphics.DrawString(
-                    item.Text,
-                    e.Font,
-                    ResPool.GetSolidBrush(ColorGrayText),
-                    rect_text,
-                    string_format
-                );
+                e.Graphics
+                    .DrawString(
+                        item.Text,
+                        e.Font,
+                        ResPool.GetSolidBrush(ColorGrayText),
+                        rect_text,
+                        string_format
+                    );
             }
 
             if (!item.MenuBar && item.Shortcut != Shortcut.None && item.ShowShortcut)
@@ -5205,33 +5200,35 @@ namespace System.Windows.Forms
 
                 if (item.Enabled)
                 {
-                    e.Graphics.DrawString(
-                        str,
-                        e.Font,
-                        brush_text,
-                        rect,
-                        string_format_menu_shortcut
-                    );
+                    e.Graphics
+                        .DrawString(str, e.Font, brush_text, rect, string_format_menu_shortcut);
                 }
                 else
                 {
                     if ((item.Status & DrawItemState.Selected) != DrawItemState.Selected)
                     {
-                        e.Graphics.DrawString(
+                        e.Graphics
+                            .DrawString(
+                                str,
+                                e.Font,
+                                Brushes.White,
+                                new RectangleF(
+                                    rect.X + 1,
+                                    rect.Y + 1,
+                                    rect.Width,
+                                    rect_text.Height
+                                ),
+                                string_format_menu_shortcut
+                            );
+                    }
+                    e.Graphics
+                        .DrawString(
                             str,
                             e.Font,
-                            Brushes.White,
-                            new RectangleF(rect.X + 1, rect.Y + 1, rect.Width, rect_text.Height),
+                            ResPool.GetSolidBrush(ColorGrayText),
+                            rect,
                             string_format_menu_shortcut
                         );
-                    }
-                    e.Graphics.DrawString(
-                        str,
-                        e.Font,
-                        ResPool.GetSolidBrush(ColorGrayText),
-                        rect,
-                        string_format_menu_shortcut
-                    );
                 }
             }
 
@@ -5244,11 +5241,12 @@ namespace System.Windows.Forms
 
                 if (item.Enabled)
                 {
-                    e.Graphics.DrawImage(
-                        bmp,
-                        e.Bounds.X + e.Bounds.Width - cx,
-                        e.Bounds.Y + ((e.Bounds.Height - cy) / 2)
-                    );
+                    e.Graphics
+                        .DrawImage(
+                            bmp,
+                            e.Bounds.X + e.Bounds.Width - cx,
+                            e.Bounds.Y + ((e.Bounds.Height - cy) / 2)
+                        );
                 }
                 else
                 {
@@ -6274,15 +6272,16 @@ namespace System.Windows.Forms
                         image = pis[p].Image;
                     Rectangle dest = new Rectangle(new Point(page_x, page_y), page_size);
 
-                    pe.Graphics.DrawImage(
-                        image,
-                        dest,
-                        0,
-                        0,
-                        image.Width,
-                        image.Height,
-                        GraphicsUnit.Pixel
-                    );
+                    pe.Graphics
+                        .DrawImage(
+                            image,
+                            dest,
+                            0,
+                            0,
+                            image.Width,
+                            image.Height,
+                            GraphicsUnit.Pixel
+                        );
 
                     page_x += padding + page_size.Width;
                     p++;
@@ -6933,8 +6932,7 @@ namespace System.Windows.Forms
         public virtual void DrawRadioButtonGlyph(Graphics g, RadioButton rb, Rectangle glyphArea)
         {
             if (rb.Pressed)
-                ThemeElements
-                    .CurrentTheme
+                ThemeElements.CurrentTheme
                     .RadioButtonPainter
                     .PaintRadioButton(
                         g,
@@ -6946,8 +6944,7 @@ namespace System.Windows.Forms
                         rb.Checked
                     );
             else if (rb.InternalSelected)
-                ThemeElements
-                    .CurrentTheme
+                ThemeElements.CurrentTheme
                     .RadioButtonPainter
                     .PaintRadioButton(
                         g,
@@ -6959,8 +6956,7 @@ namespace System.Windows.Forms
                         rb.Checked
                     );
             else if (rb.Entered)
-                ThemeElements
-                    .CurrentTheme
+                ThemeElements.CurrentTheme
                     .RadioButtonPainter
                     .PaintRadioButton(
                         g,
@@ -6972,8 +6968,7 @@ namespace System.Windows.Forms
                         rb.Checked
                     );
             else if (!rb.Enabled)
-                ThemeElements
-                    .CurrentTheme
+                ThemeElements.CurrentTheme
                     .RadioButtonPainter
                     .PaintRadioButton(
                         g,
@@ -6985,8 +6980,7 @@ namespace System.Windows.Forms
                         rb.Checked
                     );
             else
-                ThemeElements
-                    .CurrentTheme
+                ThemeElements.CurrentTheme
                     .RadioButtonPainter
                     .PaintRadioButton(
                         g,

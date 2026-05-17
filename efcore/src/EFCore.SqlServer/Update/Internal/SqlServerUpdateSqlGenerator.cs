@@ -61,8 +61,7 @@ public class SqlServerUpdateSqlGenerator : UpdateAndSelectSqlGenerator, ISqlServ
         // Otherwise fall back to INSERT ... OUTPUT INTO @inserted; SELECT ... FROM @inserted.
         var table = StoreObjectIdentifier.Table(command.TableName, command.Schema);
 
-        return command
-            .ColumnModifications
+        return command.ColumnModifications
             .All(o =>
                 !o.IsKey
                 || !o.IsRead
@@ -382,8 +381,7 @@ public class SqlServerUpdateSqlGenerator : UpdateAndSelectSqlGenerator, ISqlServ
         }
 
         if (
-            firstCommand
-                .Entries
+            firstCommand.Entries
                 .SelectMany(e => e.EntityType.GetAllBaseTypesInclusive())
                 .Any(e => e.IsMemoryOptimized())
         )
@@ -442,8 +440,7 @@ public class SqlServerUpdateSqlGenerator : UpdateAndSelectSqlGenerator, ISqlServ
         // MERGE ... OUTPUT INTO is faster.
         if (
             modificationCommands.Count < MergeIntoMinimumThreshold
-            && firstCommand
-                .ColumnModifications
+            && firstCommand.ColumnModifications
                 .All(o =>
                     !o.IsKey
                     || !o.IsRead
@@ -802,8 +799,7 @@ public class SqlServerUpdateSqlGenerator : UpdateAndSelectSqlGenerator, ISqlServ
 
         if (storedProcedure.ReturnValue is not null)
         {
-            var returnValueModification = command
-                .ColumnModifications
+            var returnValueModification = command.ColumnModifications
                 .First(c => c.Column is IStoreStoredProcedureReturnValue);
 
             Check.DebugAssert(

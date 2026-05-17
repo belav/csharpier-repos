@@ -33,8 +33,7 @@ public static class RemoteAuthenticationBuilderExtensions
         where TAccount : RemoteUserAccount
         where TAccountClaimsPrincipalFactory : AccountClaimsPrincipalFactory<TAccount>
     {
-        builder
-            .Services
+        builder.Services
             .Replace(
                 ServiceDescriptor.Scoped<
                     AccountClaimsPrincipalFactory<TAccount>,

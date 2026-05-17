@@ -90,8 +90,7 @@ public class BasicBlazorHybridTest
         var isWebViewReady = false;
 
         Console.WriteLine($"RegisterWebMessageReceivedHandler...");
-        mainWindow
-            .PhotinoWindow
+        mainWindow.PhotinoWindow
             .RegisterWebMessageReceivedHandler(
                 (s, msg) =>
                 {

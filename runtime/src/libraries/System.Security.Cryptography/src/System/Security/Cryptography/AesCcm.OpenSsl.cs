@@ -34,8 +34,7 @@ namespace System.Security.Cryptography
             CheckDisposed();
 
             using (
-                SafeEvpCipherCtxHandle ctx = Interop
-                    .Crypto
+                SafeEvpCipherCtxHandle ctx = Interop.Crypto
                     .EvpCipherCreatePartial(GetCipher(_key.Length * 8))
             )
             {
@@ -43,8 +42,7 @@ namespace System.Security.Cryptography
 
                 // We need to set mode to encryption before setting the tag and nonce length
                 // otherwise older versions of OpenSSL (i.e. 1.0.1f which can be found on Ubuntu 14.04) will fail
-                Interop
-                    .Crypto
+                Interop.Crypto
                     .EvpCipherSetKeyAndIV(
                         ctx,
                         Span<byte>.Empty,
@@ -53,8 +51,7 @@ namespace System.Security.Cryptography
                     );
                 Interop.Crypto.EvpCipherSetCcmTagLength(ctx, tag.Length);
                 Interop.Crypto.EvpCipherSetCcmNonceLength(ctx, nonce.Length);
-                Interop
-                    .Crypto
+                Interop.Crypto
                     .EvpCipherSetKeyAndIV(
                         ctx,
                         _key,
@@ -68,8 +65,7 @@ namespace System.Security.Cryptography
                     Interop.Crypto.EvpCipherSetInputLength(ctx, plaintext.Length);
 
                     if (
-                        !Interop
-                            .Crypto
+                        !Interop.Crypto
                             .EvpCipherUpdate(ctx, Span<byte>.Empty, out _, associatedData)
                     )
                     {
@@ -78,8 +74,7 @@ namespace System.Security.Cryptography
                 }
 
                 if (
-                    !Interop
-                        .Crypto
+                    !Interop.Crypto
                         .EvpCipherUpdate(ctx, ciphertext, out int ciphertextBytesWritten, plaintext)
                 )
                 {
@@ -87,8 +82,7 @@ namespace System.Security.Cryptography
                 }
 
                 if (
-                    !Interop
-                        .Crypto
+                    !Interop.Crypto
                         .EvpCipherFinalEx(
                             ctx,
                             ciphertext.Slice(ciphertextBytesWritten),
@@ -124,8 +118,7 @@ namespace System.Security.Cryptography
             CheckDisposed();
 
             using (
-                SafeEvpCipherCtxHandle ctx = Interop
-                    .Crypto
+                SafeEvpCipherCtxHandle ctx = Interop.Crypto
                     .EvpCipherCreatePartial(GetCipher(_key.Length * 8))
             )
             {
@@ -133,8 +126,7 @@ namespace System.Security.Cryptography
                 Interop.Crypto.EvpCipherSetCcmNonceLength(ctx, nonce.Length);
                 Interop.Crypto.EvpCipherSetCcmTag(ctx, tag);
 
-                Interop
-                    .Crypto
+                Interop.Crypto
                     .EvpCipherSetKeyAndIV(
                         ctx,
                         _key,
@@ -148,8 +140,7 @@ namespace System.Security.Cryptography
                     Interop.Crypto.EvpCipherSetInputLength(ctx, ciphertext.Length);
 
                     if (
-                        !Interop
-                            .Crypto
+                        !Interop.Crypto
                             .EvpCipherUpdate(ctx, Span<byte>.Empty, out _, associatedData)
                     )
                     {
@@ -158,8 +149,7 @@ namespace System.Security.Cryptography
                 }
 
                 if (
-                    !Interop
-                        .Crypto
+                    !Interop.Crypto
                         .EvpCipherUpdate(ctx, plaintext, out int plaintextBytesWritten, ciphertext)
                 )
                 {

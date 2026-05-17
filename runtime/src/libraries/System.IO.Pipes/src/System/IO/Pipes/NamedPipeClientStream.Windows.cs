@@ -129,8 +129,7 @@ namespace System.IO.Pipes
                 int pipeFlags,
                 int access
             ) =>
-                Interop
-                    .Kernel32
+                Interop.Kernel32
                     .CreateNamedPipeClient(
                         path,
                         access,
@@ -156,8 +155,7 @@ namespace System.IO.Pipes
                 // this if they are created (on WinXP SP2 at least)]
                 uint numInstances;
                 if (
-                    !Interop
-                        .Kernel32
+                    !Interop.Kernel32
                         .GetNamedPipeHandleStateW(
                             InternalHandle!,
                             null,

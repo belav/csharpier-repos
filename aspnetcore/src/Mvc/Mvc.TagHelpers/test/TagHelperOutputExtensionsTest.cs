@@ -521,8 +521,7 @@ public class TagHelperOutputExtensionsTest
         var expectedAttribute = new TagHelperAttribute("type", "btn");
         tagHelperOutput.Attributes.Add(expectedAttribute);
 
-        var attributes = tagHelperOutput
-            .Attributes
+        var attributes = tagHelperOutput.Attributes
             .Where(item => item.Name.StartsWith("route-", StringComparison.OrdinalIgnoreCase))
             .ToList();
 
@@ -550,8 +549,7 @@ public class TagHelperOutputExtensionsTest
         );
         var expectedAttribute = new TagHelperAttribute("type", "btn");
         tagHelperOutput.Attributes.Add(expectedAttribute);
-        var attributes = tagHelperOutput
-            .Attributes
+        var attributes = tagHelperOutput.Attributes
             .Where(item => item.Name.StartsWith("route-", StringComparison.OrdinalIgnoreCase));
 
         // Act
@@ -579,8 +577,7 @@ public class TagHelperOutputExtensionsTest
         var expectedAttribute = new TagHelperAttribute("type", "btn");
         tagHelperOutput.Attributes.Add(expectedAttribute);
 
-        var attributes = tagHelperOutput
-            .Attributes
+        var attributes = tagHelperOutput.Attributes
             .Where(item => item.Name.StartsWith("route-", StringComparison.OrdinalIgnoreCase));
 
         // Act
@@ -1038,8 +1035,7 @@ public class TagHelperOutputExtensionsTest
                 Task.FromResult<TagHelperContent>(new DefaultTagHelperContent())
         );
 
-        tagHelperOutput
-            .Attributes
+        tagHelperOutput.Attributes
             .SetAttribute("class", new HtmlString("HtmlEncode[[btn]] HtmlEncode[[btn]]"));
 
         // Act
@@ -1064,8 +1060,7 @@ public class TagHelperOutputExtensionsTest
                 Task.FromResult<TagHelperContent>(new DefaultTagHelperContent())
         );
 
-        tagHelperOutput
-            .Attributes
+        tagHelperOutput.Attributes
             .SetAttribute(
                 "class",
                 new HtmlString("HtmlEncode[[btn]] HtmlEncode[[btn-primary]] HtmlEncode[[btn]]")
@@ -1118,8 +1113,7 @@ public class TagHelperOutputExtensionsTest
                 Task.FromResult<TagHelperContent>(new DefaultTagHelperContent())
         );
 
-        tagHelperOutput
-            .Attributes
+        tagHelperOutput.Attributes
             .SetAttribute("class", new HtmlString("HtmlEncode[[btn]] HtmlEncode[[btn-primary]]"));
 
         // Act

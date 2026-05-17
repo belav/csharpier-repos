@@ -30,8 +30,7 @@ namespace System.IdentityModel
 
             if (xmlDictionaryReaderQuotas == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("xmlDictionaryReaderQuotas");
             }
 

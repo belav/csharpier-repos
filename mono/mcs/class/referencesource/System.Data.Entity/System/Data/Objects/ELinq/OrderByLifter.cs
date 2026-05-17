@@ -244,8 +244,7 @@ namespace System.Data.Objects.ELinq
                     );
 
                     // invoke lambda with variable from the first projection
-                    DbProjectExpression composed = first
-                        .Input
+                    DbProjectExpression composed = first.Input
                         .Project(secondLambda.Invoke(first.Projection));
 
                     return RebindProject(input, composed);
@@ -266,8 +265,7 @@ namespace System.Data.Objects.ELinq
                     );
 
                     // invoke lambda with variable from the project
-                    DbFilterExpression composed = first
-                        .Input
+                    DbFilterExpression composed = first.Input
                         .Filter(secondLambda.Invoke(first.Projection));
 
                     return RebindFilter(input, composed);
@@ -326,9 +324,8 @@ namespace System.Data.Objects.ELinq
                         object rightValue = ((DbConstantExpression)right).Value;
                         if (leftValue is int && rightValue is int)
                         {
-                            return left.ResultType.Constant(
-                                combineConstants((int)leftValue, (int)rightValue)
-                            );
+                            return left.ResultType
+                                .Constant(combineConstants((int)leftValue, (int)rightValue));
                         }
                     }
                     Debug.Fail("only valid for integer constants");

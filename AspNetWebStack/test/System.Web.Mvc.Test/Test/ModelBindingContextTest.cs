@@ -97,8 +97,7 @@ namespace System.Web.Mvc.Test
             // Act
             ModelBindingContext bindingContext = new ModelBindingContext
             {
-                ModelMetadata = ModelMetadataProviders
-                    .Current
+                ModelMetadata = ModelMetadataProviders.Current
                     .GetMetadataForType(() => 42, typeof(int)),
             };
 

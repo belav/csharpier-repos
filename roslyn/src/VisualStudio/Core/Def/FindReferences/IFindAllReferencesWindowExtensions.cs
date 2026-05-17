@@ -13,8 +13,7 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
         public static ColumnState2 GetDefinitionColumn(this IFindAllReferencesWindow window)
         {
             return (ColumnState2)
-                window
-                    .TableControl
+                window.TableControl
                     .ColumnStates
                     .First(s => s.Name == StandardTableColumnDefinitions2.Definition);
         }

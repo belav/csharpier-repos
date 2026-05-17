@@ -35,8 +35,7 @@ namespace System.ServiceModel.Security.Tokens
         {
             if (keySizeInBits <= 0 || keySizeInBits >= 512)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentOutOfRangeException(
                             "keySizeInBits",
@@ -47,8 +46,7 @@ namespace System.ServiceModel.Security.Tokens
 
             if ((keySizeInBits % 8) != 0)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentOutOfRangeException(
                             "keySizeInBits",

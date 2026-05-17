@@ -91,8 +91,7 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             CancellationToken cancellationToken
         )
         {
-            var tokens = state
-                .Root
+            var tokens = state.Root
                 .DescendantTokens(descendIntoTrivia: true)
                 .WhereAsArray(
                     static (token, state) => IsPotentialReference(state.SyntaxFacts, token),

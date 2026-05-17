@@ -67,8 +67,7 @@ namespace System.Web.Http.Owin
 
             using (HttpServer server = new HttpServer())
             {
-                server
-                    .Configuration
+                server.Configuration
                     .Routes
                     .IgnoreRoute(
                         "Constraints",

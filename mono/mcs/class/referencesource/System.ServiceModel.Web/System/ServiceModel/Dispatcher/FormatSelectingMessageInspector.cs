@@ -70,10 +70,11 @@ namespace System.ServiceModel.Description
                 "An operation should only be registered once."
             );
             this.formatters.Add(operationName, formatter);
-            this.caches.Add(
-                operationName,
-                new NameValueCache<FormatContentTypePair>(maxCachedAcceptHeaders)
-            );
+            this.caches
+                .Add(
+                    operationName,
+                    new NameValueCache<FormatContentTypePair>(maxCachedAcceptHeaders)
+                );
         }
 
         public object AfterReceiveRequest(
@@ -84,8 +85,7 @@ namespace System.ServiceModel.Description
         {
             if (this.automaticFormatSelectionEnabled)
             {
-                MessageProperties messageProperties = OperationContext
-                    .Current
+                MessageProperties messageProperties = OperationContext.Current
                     .IncomingMessageProperties;
                 if (
                     messageProperties.ContainsKey(
@@ -175,8 +175,7 @@ namespace System.ServiceModel.Description
                 "The calling method is responsible for ensuring that the 'operationName' key exists in the formatters dictionary."
             );
 
-            IList<ContentType> acceptHeaderElements = WebOperationContext
-                .Current
+            IList<ContentType> acceptHeaderElements = WebOperationContext.Current
                 .IncomingRequest
                 .GetAcceptHeaderElements();
 
@@ -300,8 +299,7 @@ namespace System.ServiceModel.Description
 
         void SetFormatAndContentType(WebMessageFormat format, string contentType)
         {
-            OutgoingWebResponseContext outgoingResponse = WebOperationContext
-                .Current
+            OutgoingWebResponseContext outgoingResponse = WebOperationContext.Current
                 .OutgoingResponse;
             outgoingResponse.Format = format;
             outgoingResponse.AutomatedFormatSelectionContentType = contentType;

@@ -117,8 +117,7 @@ namespace System.Net.Sockets
                 return (T)(object)transmitPackets;
             }
 
-            System
-                .Diagnostics
+            System.Diagnostics
                 .Debug
                 .Assert(false, "Invalid type passed to DynamicWinsockMethods.GetDelegate");
             return null;
@@ -133,8 +132,7 @@ namespace System.Net.Sockets
 
             unsafe
             {
-                errorCode = UnsafeNclNativeMethods
-                    .OSSOCK
+                errorCode = UnsafeNclNativeMethods.OSSOCK
                     .WSAIoctl(
                         socketHandle,
                         IoctlSocketConstants.SIOGETEXTENSIONFUNCTIONPOINTER,

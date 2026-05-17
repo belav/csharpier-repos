@@ -178,8 +178,7 @@ namespace Internal.TypeSystem
         {
             // TODO: Determine what a the right hash function should be. Use stable hashcode based on the type name?
             // For now, use the same hash as a SignatureVariable type.
-            return Internal
-                .NativeFormat
+            return Internal.NativeFormat
                 .TypeHashingAlgorithms
                 .ComputeSignatureVariableHashCode(Index, Kind == GenericParameterKind.Method);
         }

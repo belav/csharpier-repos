@@ -305,8 +305,7 @@ namespace System
 
                 while (true)
                 {
-                    bool r = Interop
-                        .Kernel32
+                    bool r = Interop.Kernel32
                         .PeekConsoleInput(
                             InputHandle,
                             out Interop.INPUT_RECORD ir,
@@ -370,8 +369,7 @@ namespace System
                 { // We did NOT have a previous keystroke with repeated characters:
                     while (true)
                     {
-                        r = Interop
-                            .Kernel32
+                        r = Interop.Kernel32
                             .ReadConsoleInput(InputHandle, out ir, 1, out int numEventsRead);
                         if (!r || numEventsRead == 0)
                         {
@@ -842,8 +840,7 @@ namespace System
 
             bool r;
             fixed (Interop.Kernel32.CHAR_INFO* pCharInfo = data)
-                r = Interop
-                    .Kernel32
+                r = Interop.Kernel32
                     .ReadConsoleOutput(
                         OutputHandle,
                         pCharInfo,
@@ -864,8 +861,7 @@ namespace System
             for (int i = sourceTop; i < sourceTop + sourceHeight; i++)
             {
                 writeCoord.Y = (short)i;
-                r = Interop
-                    .Kernel32
+                r = Interop.Kernel32
                     .FillConsoleOutputCharacter(
                         OutputHandle,
                         sourceChar,
@@ -880,8 +876,7 @@ namespace System
                 if (!r)
                     throw Win32Marshal.GetExceptionForWin32Error(Marshal.GetLastPInvokeError());
 
-                r = Interop
-                    .Kernel32
+                r = Interop.Kernel32
                     .FillConsoleOutputAttribute(
                         OutputHandle,
                         attr,
@@ -901,8 +896,7 @@ namespace System
             writeRegion.Bottom = (short)(targetTop + sourceHeight);
 
             fixed (Interop.Kernel32.CHAR_INFO* pCharInfo = data)
-                Interop
-                    .Kernel32
+                Interop.Kernel32
                     .WriteConsoleOutput(
                         OutputHandle,
                         pCharInfo,
@@ -931,16 +925,14 @@ namespace System
 
             // fill the entire screen with blanks
 
-            success = Interop
-                .Kernel32
+            success = Interop.Kernel32
                 .FillConsoleOutputCharacter(hConsole, ' ', conSize, coordScreen, out _);
             if (!success)
                 throw Win32Marshal.GetExceptionForWin32Error(Marshal.GetLastPInvokeError());
 
             // now set the buffer's attributes accordingly
 
-            success = Interop
-                .Kernel32
+            success = Interop.Kernel32
                 .FillConsoleOutputAttribute(
                     hConsole,
                     csbi.wAttributes,
@@ -1039,8 +1031,7 @@ namespace System
             {
                 // Note this varies based on current screen resolution and
                 // current console font.  Do not cache this value.
-                Interop.Kernel32.COORD bounds = Interop
-                    .Kernel32
+                Interop.Kernel32.COORD bounds = Interop.Kernel32
                     .GetLargestConsoleWindowSize(OutputHandle);
                 return bounds.X;
             }
@@ -1052,8 +1043,7 @@ namespace System
             {
                 // Note this varies based on current screen resolution and
                 // current console font.  Do not cache this value.
-                Interop.Kernel32.COORD bounds = Interop
-                    .Kernel32
+                Interop.Kernel32.COORD bounds = Interop.Kernel32
                     .GetLargestConsoleWindowSize(OutputHandle);
                 return bounds.Y;
             }
@@ -1192,8 +1182,7 @@ namespace System
                 }
 
                 // Try to give a better error message here
-                Interop.Kernel32.COORD bounds = Interop
-                    .Kernel32
+                Interop.Kernel32.COORD bounds = Interop.Kernel32
                     .GetLargestConsoleWindowSize(OutputHandle);
                 if (width > bounds.X)
                     throw new ArgumentOutOfRangeException(
@@ -1387,8 +1376,7 @@ namespace System
                     {
                         readSuccess = (
                             0
-                            != Interop
-                                .Kernel32
+                            != Interop.Kernel32
                                 .ReadFile(hFile, p, buffer.Length, out bytesRead, IntPtr.Zero)
                         );
                     }
@@ -1396,8 +1384,7 @@ namespace System
                     {
                         // If the code page could be Unicode, we should use ReadConsole instead, e.g.
                         int charsRead;
-                        readSuccess = Interop
-                            .Kernel32
+                        readSuccess = Interop.Kernel32
                             .ReadConsole(
                                 hFile,
                                 p,
@@ -1440,8 +1427,7 @@ namespace System
                         int numBytesWritten;
                         writeSuccess = (
                             0
-                            != Interop
-                                .Kernel32
+                            != Interop.Kernel32
                                 .WriteFile(hFile, p, bytes.Length, out numBytesWritten, IntPtr.Zero)
                         );
                         // In some cases we have seen numBytesWritten returned that is twice count;
@@ -1455,8 +1441,7 @@ namespace System
                         // However, we do not need to worry about that because the StreamWriter in Console has
                         // a much shorter buffer size anyway.
                         int charsWritten;
-                        writeSuccess = Interop
-                            .Kernel32
+                        writeSuccess = Interop.Kernel32
                             .WriteConsole(
                                 hFile,
                                 p,

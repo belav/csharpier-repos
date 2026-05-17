@@ -105,8 +105,7 @@ namespace Microsoft.CodeAnalysis.GenerateConstructorFromMembers
             {
                 get
                 {
-                    var parameters = _state
-                        .Parameters
+                    var parameters = _state.Parameters
                         .Select(p => _service.ToDisplayString(p, SimpleFormat));
                     var parameterString = string.Join(", ", parameters);
 

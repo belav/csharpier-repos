@@ -80,9 +80,9 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
         public static void DecryptSuccessfullyWithWrongKeyProducesInvalidSymmetricKey()
         {
             using (
-                X509Certificate2 wrongRecipient = Certificates
-                    .RSAKeyTransfer5_ExplicitSkiOfRSAKeyTransfer4
-                    .TryGetCertificateWithPrivateKey()
+                X509Certificate2 wrongRecipient =
+                    Certificates.RSAKeyTransfer5_ExplicitSkiOfRSAKeyTransfer4
+                        .TryGetCertificateWithPrivateKey()
             )
             {
                 // This is an enveloped CMS that is encrypted with one RSA key recipient
@@ -140,18 +140,16 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
         public static void DecryptUsingCertificateWithSameSubjectKeyIdentifierButDifferentKeyPair()
         {
             using (
-                X509Certificate2 recipientCert = Certificates
-                    .RSAKeyTransfer4_ExplicitSki
+                X509Certificate2 recipientCert = Certificates.RSAKeyTransfer4_ExplicitSki
                     .GetCertificate()
             )
             using (
-                X509Certificate2 otherRecipientWithSameSki = Certificates
-                    .RSAKeyTransfer5_ExplicitSkiOfRSAKeyTransfer4
-                    .TryGetCertificateWithPrivateKey()
+                X509Certificate2 otherRecipientWithSameSki =
+                    Certificates.RSAKeyTransfer5_ExplicitSkiOfRSAKeyTransfer4
+                        .TryGetCertificateWithPrivateKey()
             )
             using (
-                X509Certificate2 realRecipientCert = Certificates
-                    .RSAKeyTransfer4_ExplicitSki
+                X509Certificate2 realRecipientCert = Certificates.RSAKeyTransfer4_ExplicitSki
                     .TryGetCertificateWithPrivateKey()
             )
             {

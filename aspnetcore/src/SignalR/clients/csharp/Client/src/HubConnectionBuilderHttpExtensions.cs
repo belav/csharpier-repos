@@ -28,8 +28,7 @@ public static class HubConnectionBuilderHttpExtensions
         this IHubConnectionBuilder hubConnectionBuilder
     )
     {
-        hubConnectionBuilder
-            .Services
+        hubConnectionBuilder.Services
             .Configure<HttpConnectionOptions>(options => options.UseStatefulReconnect = true);
 
         return hubConnectionBuilder;
@@ -180,8 +179,7 @@ public static class HubConnectionBuilderHttpExtensions
     {
         ArgumentNullThrowHelper.ThrowIfNull(hubConnectionBuilder);
 
-        hubConnectionBuilder
-            .Services
+        hubConnectionBuilder.Services
             .Configure<HttpConnectionOptions>(o =>
             {
                 o.Url = url;
@@ -198,13 +196,11 @@ public static class HubConnectionBuilderHttpExtensions
 
         // Add HttpConnectionOptionsDerivedHttpEndPoint so HubConnection can read the Url from HttpConnectionOptions
         // without the Signal.Client.Core project taking a new dependency on Http.Connections.Client.
-        hubConnectionBuilder
-            .Services
+        hubConnectionBuilder.Services
             .AddSingleton<EndPoint, HttpConnectionOptionsDerivedHttpEndPoint>();
 
         // Configure the HttpConnection so that it uses the correct transfer format for the configured IHubProtocol.
-        hubConnectionBuilder
-            .Services
+        hubConnectionBuilder.Services
             .AddSingleton<
                 IConfigureOptions<HttpConnectionOptions>,
                 HubProtocolDerivedHttpOptionsConfigurer

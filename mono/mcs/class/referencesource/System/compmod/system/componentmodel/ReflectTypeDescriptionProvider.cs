@@ -485,8 +485,7 @@ namespace System.ComponentModel
                 // class initializer for editorBaseType hasn't
                 // actually run.
                 //
-                System
-                    .Runtime
+                System.Runtime
                     .CompilerServices
                     .RuntimeHelpers
                     .RunClassConstructor(editorBaseType.TypeHandle);

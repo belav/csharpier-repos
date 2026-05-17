@@ -52,8 +52,7 @@ namespace System.Runtime.Serialization.Json
                         context
                     );
                 default:
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             XmlObjectSerializer.CreateSerializationException(
                                 SR.GetString(SR.JsonUnexpectedAttributeValue, contentMode)
@@ -87,12 +86,10 @@ namespace System.Runtime.Serialization.Json
         {
             if (value == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new XmlException(
-                            System
-                                .Runtime
+                            System.Runtime
                                 .Serialization
                                 .SR
                                 .GetString(

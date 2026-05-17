@@ -3927,14 +3927,12 @@ namespace System.Tests
                     Assert.Equal(new DateTime(1942, 12, 31), rules[i].DateEnd);
                     Assert.Equal(daylightDelta, rules[i].DaylightDelta);
                     Assert.Equal(
-                        TimeZoneInfo
-                            .TransitionTime
+                        TimeZoneInfo.TransitionTime
                             .CreateFixedDateRule(new DateTime(1, 1, 1, 2, 0, 0), 2, 9),
                         rules[i].DaylightTransitionStart
                     );
                     Assert.Equal(
-                        TimeZoneInfo
-                            .TransitionTime
+                        TimeZoneInfo.TransitionTime
                             .CreateFixedDateRule(new DateTime(1, 1, 1, 23, 59, 59, 999), 12, 31),
                         rules[i].DaylightTransitionEnd
                     );
@@ -3949,14 +3947,12 @@ namespace System.Tests
                     Assert.Equal(new DateTime(1944, 12, 31), rules[i + 1].DateEnd);
                     Assert.Equal(daylightDelta, rules[i + 1].DaylightDelta);
                     Assert.Equal(
-                        TimeZoneInfo
-                            .TransitionTime
+                        TimeZoneInfo.TransitionTime
                             .CreateFixedDateRule(new DateTime(1, 1, 1, 0, 0, 0), 1, 1),
                         rules[i + 1].DaylightTransitionStart
                     );
                     Assert.Equal(
-                        TimeZoneInfo
-                            .TransitionTime
+                        TimeZoneInfo.TransitionTime
                             .CreateFixedDateRule(new DateTime(1, 1, 1, 23, 59, 59, 999), 12, 31),
                         rules[i + 1].DaylightTransitionEnd
                     );
@@ -3971,14 +3967,12 @@ namespace System.Tests
                     Assert.Equal(new DateTime(1945, 8, 14), rules[i + 2].DateEnd);
                     Assert.Equal(daylightDelta, rules[i + 2].DaylightDelta);
                     Assert.Equal(
-                        TimeZoneInfo
-                            .TransitionTime
+                        TimeZoneInfo.TransitionTime
                             .CreateFixedDateRule(new DateTime(1, 1, 1, 0, 0, 0), 1, 1),
                         rules[i + 2].DaylightTransitionStart
                     );
                     Assert.Equal(
-                        TimeZoneInfo
-                            .TransitionTime
+                        TimeZoneInfo.TransitionTime
                             .CreateFixedDateRule(new DateTime(1, 1, 1, 15, 59, 59, 999), 8, 14),
                         rules[i + 2].DaylightTransitionEnd
                     );
@@ -4463,14 +4457,11 @@ namespace System.Tests
         [Fact]
         public static void CreateCustomTimeZone()
         {
-            TimeZoneInfo.TransitionTime s1 = TimeZoneInfo
-                .TransitionTime
+            TimeZoneInfo.TransitionTime s1 = TimeZoneInfo.TransitionTime
                 .CreateFloatingDateRule(new DateTime(1, 1, 1, 4, 0, 0), 3, 2, DayOfWeek.Sunday);
-            TimeZoneInfo.TransitionTime e1 = TimeZoneInfo
-                .TransitionTime
+            TimeZoneInfo.TransitionTime e1 = TimeZoneInfo.TransitionTime
                 .CreateFloatingDateRule(new DateTime(1, 1, 1, 4, 0, 0), 10, 2, DayOfWeek.Sunday);
-            TimeZoneInfo.AdjustmentRule r1 = TimeZoneInfo
-                .AdjustmentRule
+            TimeZoneInfo.AdjustmentRule r1 = TimeZoneInfo.AdjustmentRule
                 .CreateAdjustmentRule(
                     new DateTime(2000, 1, 1),
                     new DateTime(2005, 1, 1),
@@ -4541,21 +4532,16 @@ namespace System.Tests
         [Fact]
         public static void CreateCustomTimeZone_InvalidTimeZone()
         {
-            TimeZoneInfo.TransitionTime s1 = TimeZoneInfo
-                .TransitionTime
+            TimeZoneInfo.TransitionTime s1 = TimeZoneInfo.TransitionTime
                 .CreateFloatingDateRule(new DateTime(1, 1, 1, 4, 0, 0), 3, 2, DayOfWeek.Sunday);
-            TimeZoneInfo.TransitionTime e1 = TimeZoneInfo
-                .TransitionTime
+            TimeZoneInfo.TransitionTime e1 = TimeZoneInfo.TransitionTime
                 .CreateFloatingDateRule(new DateTime(1, 1, 1, 4, 0, 0), 10, 2, DayOfWeek.Sunday);
-            TimeZoneInfo.TransitionTime s2 = TimeZoneInfo
-                .TransitionTime
+            TimeZoneInfo.TransitionTime s2 = TimeZoneInfo.TransitionTime
                 .CreateFloatingDateRule(new DateTime(1, 1, 1, 4, 0, 0), 2, 2, DayOfWeek.Sunday);
-            TimeZoneInfo.TransitionTime e2 = TimeZoneInfo
-                .TransitionTime
+            TimeZoneInfo.TransitionTime e2 = TimeZoneInfo.TransitionTime
                 .CreateFloatingDateRule(new DateTime(1, 1, 1, 4, 0, 0), 11, 2, DayOfWeek.Sunday);
 
-            TimeZoneInfo.AdjustmentRule r1 = TimeZoneInfo
-                .AdjustmentRule
+            TimeZoneInfo.AdjustmentRule r1 = TimeZoneInfo.AdjustmentRule
                 .CreateAdjustmentRule(
                     new DateTime(2000, 1, 1),
                     new DateTime(2005, 1, 1),
@@ -4565,8 +4551,7 @@ namespace System.Tests
                 );
 
             // AdjustmentRules overlap
-            TimeZoneInfo.AdjustmentRule r2 = TimeZoneInfo
-                .AdjustmentRule
+            TimeZoneInfo.AdjustmentRule r2 = TimeZoneInfo.AdjustmentRule
                 .CreateAdjustmentRule(
                     new DateTime(2004, 1, 1),
                     new DateTime(2007, 1, 1),
@@ -4584,8 +4569,7 @@ namespace System.Tests
             );
 
             // AdjustmentRules not ordered
-            TimeZoneInfo.AdjustmentRule r3 = TimeZoneInfo
-                .AdjustmentRule
+            TimeZoneInfo.AdjustmentRule r3 = TimeZoneInfo.AdjustmentRule
                 .CreateAdjustmentRule(
                     new DateTime(2006, 1, 1),
                     new DateTime(2007, 1, 1),
@@ -4603,8 +4587,7 @@ namespace System.Tests
             );
 
             // Offset out of range
-            TimeZoneInfo.AdjustmentRule r4 = TimeZoneInfo
-                .AdjustmentRule
+            TimeZoneInfo.AdjustmentRule r4 = TimeZoneInfo.AdjustmentRule
                 .CreateAdjustmentRule(
                     new DateTime(2000, 1, 1),
                     new DateTime(2005, 1, 1),
@@ -4622,8 +4605,7 @@ namespace System.Tests
             );
 
             // overlapping AdjustmentRules for a date
-            TimeZoneInfo.AdjustmentRule r5 = TimeZoneInfo
-                .AdjustmentRule
+            TimeZoneInfo.AdjustmentRule r5 = TimeZoneInfo.AdjustmentRule
                 .CreateAdjustmentRule(
                     new DateTime(2005, 1, 1),
                     new DateTime(2007, 1, 1),
@@ -5176,8 +5158,7 @@ namespace System.Tests
                             int d = int.Parse(day);
                             int m = int.Parse(month);
 
-                            TimeZoneInfo.AdjustmentRule[] rules = TimeZoneInfo
-                                .Local
+                            TimeZoneInfo.AdjustmentRule[] rules = TimeZoneInfo.Local
                                 .GetAdjustmentRules();
 
                             if (expectedToSucceed)
@@ -5214,10 +5195,11 @@ namespace System.Tests
             string hostTZId = TimeZoneInfo.Local.Id;
 
             ProcessStartInfo psi = new ProcessStartInfo() { UseShellExecute = false };
-            psi.Environment.Add(
-                "DOTNET_SYSTEM_GLOBALIZATION_INVARIANT",
-                PlatformDetection.IsInvariantGlobalization ? "0" : "1"
-            );
+            psi.Environment
+                .Add(
+                    "DOTNET_SYSTEM_GLOBALIZATION_INVARIANT",
+                    PlatformDetection.IsInvariantGlobalization ? "0" : "1"
+                );
 
             RemoteExecutor
                 .Invoke(
@@ -5407,8 +5389,7 @@ namespace System.Tests
                 {
                     Assert.Equal(
                         !s_isWindows
-                            || TimeZoneInfo
-                                .Local
+                            || TimeZoneInfo.Local
                                 .Id
                                 .Equals("Utc", StringComparison.OrdinalIgnoreCase),
                         TimeZoneInfo.Local.HasIanaId
@@ -5713,14 +5694,11 @@ namespace System.Tests
         [Fact]
         public static void AdjustmentRuleBaseUtcOffsetDeltaTest()
         {
-            TimeZoneInfo.TransitionTime start = TimeZoneInfo
-                .TransitionTime
+            TimeZoneInfo.TransitionTime start = TimeZoneInfo.TransitionTime
                 .CreateFixedDateRule(timeOfDay: new DateTime(1, 1, 1, 2, 0, 0), month: 3, day: 7);
-            TimeZoneInfo.TransitionTime end = TimeZoneInfo
-                .TransitionTime
+            TimeZoneInfo.TransitionTime end = TimeZoneInfo.TransitionTime
                 .CreateFixedDateRule(timeOfDay: new DateTime(1, 1, 1, 1, 0, 0), month: 11, day: 7);
-            TimeZoneInfo.AdjustmentRule rule = TimeZoneInfo
-                .AdjustmentRule
+            TimeZoneInfo.AdjustmentRule rule = TimeZoneInfo.AdjustmentRule
                 .CreateAdjustmentRule(
                     DateTime.MinValue.Date,
                     DateTime.MaxValue.Date,
@@ -6166,14 +6144,11 @@ namespace System.Tests
 
         private static TimeZoneInfo CreateCustomLondonTimeZone()
         {
-            TimeZoneInfo.TransitionTime start = TimeZoneInfo
-                .TransitionTime
+            TimeZoneInfo.TransitionTime start = TimeZoneInfo.TransitionTime
                 .CreateFloatingDateRule(new DateTime(1, 1, 1, 1, 0, 0), 3, 5, DayOfWeek.Sunday);
-            TimeZoneInfo.TransitionTime end = TimeZoneInfo
-                .TransitionTime
+            TimeZoneInfo.TransitionTime end = TimeZoneInfo.TransitionTime
                 .CreateFloatingDateRule(new DateTime(1, 1, 1, 2, 0, 0), 10, 5, DayOfWeek.Sunday);
-            TimeZoneInfo.AdjustmentRule rule = TimeZoneInfo
-                .AdjustmentRule
+            TimeZoneInfo.AdjustmentRule rule = TimeZoneInfo.AdjustmentRule
                 .CreateAdjustmentRule(
                     DateTime.MinValue.Date,
                     DateTime.MaxValue.Date,

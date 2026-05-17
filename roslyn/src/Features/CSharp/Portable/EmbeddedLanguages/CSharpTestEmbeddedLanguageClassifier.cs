@@ -53,8 +53,7 @@ internal sealed class CSharpTestEmbeddedLanguageClassifier : IEmbeddedLanguageCl
         )
             return;
 
-        var virtualCharsWithMarkup = CSharpVirtualCharService
-            .Instance
+        var virtualCharsWithMarkup = CSharpVirtualCharService.Instance
             .TryConvertToVirtualChars(token);
         if (virtualCharsWithMarkup.IsDefaultOrEmpty)
             return;

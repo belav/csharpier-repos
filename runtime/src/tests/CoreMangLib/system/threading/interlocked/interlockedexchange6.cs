@@ -47,8 +47,7 @@ public class InterlockedExchange6
         Int32 prevLocation;
         Int32 oldLocation;
 
-        TestLibrary
-            .TestFramework
+        TestLibrary.TestFramework
             .BeginScenario("PosTest1: Int32 Interlocked.Exchange(Int32&,Int32)");
 
         try
@@ -63,8 +62,7 @@ public class InterlockedExchange6
 
                 if (!location.Equals(value))
                 {
-                    TestLibrary
-                        .TestFramework
+                    TestLibrary.TestFramework
                         .LogError(
                             "001",
                             "Interlocked.Exchange() did not do the exchange correctly: Expected("
@@ -78,8 +76,7 @@ public class InterlockedExchange6
 
                 if (!oldLocation.Equals(prevLocation))
                 {
-                    TestLibrary
-                        .TestFramework
+                    TestLibrary.TestFramework
                         .LogError(
                             "002",
                             "Interlocked.Exchange() did not return the expected value: Expected("

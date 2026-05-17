@@ -62,8 +62,7 @@ namespace System.ServiceModel.Channels
 
             if (!this.CanBuildChannelFactory<TChannel>(context.Clone()))
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .Argument(
                         "TChannel",
                         SR2.GetString(SR2.ChannelTypeNotSupported, typeof(TChannel))
@@ -153,8 +152,7 @@ namespace System.ServiceModel.Channels
                     }
                     else
                     {
-                        throw FxTrace
-                            .Exception
+                        throw FxTrace.Exception
                             .AsError(base.CreateChannelTypeNotSupportedException(typeof(TChannel)));
                     }
                 }

@@ -952,8 +952,7 @@ namespace System.Diagnostics.Tracing
             long registrationHandle = 0;
             _providerId = eventSource.Guid;
             Guid providerId = _providerId;
-            uint status = Interop
-                .Advapi32
+            uint status = Interop.Advapi32
                 .EventRegister(
                     &providerId,
                     &Callback,
@@ -995,8 +994,7 @@ namespace System.Diagnostics.Tracing
             EventProvider.EventData* userData
         )
         {
-            int error = Interop
-                .Advapi32
+            int error = Interop.Advapi32
                 .EventWriteTransfer(
                     _registrationHandle,
                     in eventDescriptor,
@@ -1055,8 +1053,7 @@ namespace System.Diagnostics.Tracing
             {
                 try
                 {
-                    status = Interop
-                        .Advapi32
+                    status = Interop.Advapi32
                         .EventSetInformation(_registrationHandle, eventInfoClass, data, dataSize);
                 }
                 catch (TypeLoadException)
@@ -1225,8 +1222,7 @@ namespace System.Diagnostics.Tracing
 
                     fixed (Guid* provider = &_providerId)
                     {
-                        hr = Interop
-                            .Advapi32
+                        hr = Interop.Advapi32
                             .EnumerateTraceGuidsEx(
                                 Interop.Advapi32.TRACE_QUERY_INFO_CLASS.TraceGuidQueryInfo,
                                 provider,

@@ -458,13 +458,14 @@ namespace System.Net.Security
             string targetName
         )
         {
-            return Task.Factory.FromAsync(
-                BeginAuthenticateAsClient,
-                EndAuthenticateAsClient,
-                credential,
-                targetName,
-                null
-            );
+            return Task.Factory
+                .FromAsync(
+                    BeginAuthenticateAsClient,
+                    EndAuthenticateAsClient,
+                    credential,
+                    targetName,
+                    null
+                );
         }
 
         [HostProtection(ExternalThreading = true)]
@@ -475,19 +476,20 @@ namespace System.Net.Security
             TokenImpersonationLevel allowedImpersonationLevel
         )
         {
-            return Task.Factory.FromAsync(
-                (callback, state) =>
-                    BeginAuthenticateAsClient(
-                        credential,
-                        targetName,
-                        requiredProtectionLevel,
-                        allowedImpersonationLevel,
-                        callback,
-                        state
-                    ),
-                EndAuthenticateAsClient,
-                null
-            );
+            return Task.Factory
+                .FromAsync(
+                    (callback, state) =>
+                        BeginAuthenticateAsClient(
+                            credential,
+                            targetName,
+                            requiredProtectionLevel,
+                            allowedImpersonationLevel,
+                            callback,
+                            state
+                        ),
+                    EndAuthenticateAsClient,
+                    null
+                );
         }
 
         [HostProtection(ExternalThreading = true)]
@@ -497,14 +499,15 @@ namespace System.Net.Security
             string targetName
         )
         {
-            return Task.Factory.FromAsync(
-                BeginAuthenticateAsClient,
-                EndAuthenticateAsClient,
-                credential,
-                binding,
-                targetName,
-                null
-            );
+            return Task.Factory
+                .FromAsync(
+                    BeginAuthenticateAsClient,
+                    EndAuthenticateAsClient,
+                    credential,
+                    binding,
+                    targetName,
+                    null
+                );
         }
 
         [HostProtection(ExternalThreading = true)]
@@ -516,20 +519,21 @@ namespace System.Net.Security
             TokenImpersonationLevel allowedImpersonationLevel
         )
         {
-            return Task.Factory.FromAsync(
-                (callback, state) =>
-                    BeginAuthenticateAsClient(
-                        credential,
-                        binding,
-                        targetName,
-                        requiredProtectionLevel,
-                        allowedImpersonationLevel,
-                        callback,
-                        state
-                    ),
-                EndAuthenticateAsClient,
-                null
-            );
+            return Task.Factory
+                .FromAsync(
+                    (callback, state) =>
+                        BeginAuthenticateAsClient(
+                            credential,
+                            binding,
+                            targetName,
+                            requiredProtectionLevel,
+                            allowedImpersonationLevel,
+                            callback,
+                            state
+                        ),
+                    EndAuthenticateAsClient,
+                    null
+                );
         }
 
         [HostProtection(ExternalThreading = true)]
@@ -541,12 +545,8 @@ namespace System.Net.Security
         [HostProtection(ExternalThreading = true)]
         public virtual Task AuthenticateAsServerAsync(ExtendedProtectionPolicy policy)
         {
-            return Task.Factory.FromAsync(
-                BeginAuthenticateAsServer,
-                EndAuthenticateAsServer,
-                policy,
-                null
-            );
+            return Task.Factory
+                .FromAsync(BeginAuthenticateAsServer, EndAuthenticateAsServer, policy, null);
         }
 
         [HostProtection(ExternalThreading = true)]
@@ -556,14 +556,15 @@ namespace System.Net.Security
             TokenImpersonationLevel requiredImpersonationLevel
         )
         {
-            return Task.Factory.FromAsync(
-                BeginAuthenticateAsServer,
-                EndAuthenticateAsServer,
-                credential,
-                requiredProtectionLevel,
-                requiredImpersonationLevel,
-                null
-            );
+            return Task.Factory
+                .FromAsync(
+                    BeginAuthenticateAsServer,
+                    EndAuthenticateAsServer,
+                    credential,
+                    requiredProtectionLevel,
+                    requiredImpersonationLevel,
+                    null
+                );
         }
 
         [HostProtection(ExternalThreading = true)]
@@ -574,19 +575,20 @@ namespace System.Net.Security
             TokenImpersonationLevel requiredImpersonationLevel
         )
         {
-            return Task.Factory.FromAsync(
-                (callback, state) =>
-                    BeginAuthenticateAsServer(
-                        credential,
-                        policy,
-                        requiredProtectionLevel,
-                        requiredImpersonationLevel,
-                        callback,
-                        state
-                    ),
-                EndAuthenticateAsClient,
-                null
-            );
+            return Task.Factory
+                .FromAsync(
+                    (callback, state) =>
+                        BeginAuthenticateAsServer(
+                            credential,
+                            policy,
+                            requiredProtectionLevel,
+                            requiredImpersonationLevel,
+                            callback,
+                            state
+                        ),
+                    EndAuthenticateAsClient,
+                    null
+                );
         }
 
         //

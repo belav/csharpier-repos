@@ -97,8 +97,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
             Type[] additionalParts = null
         )
         {
-            var composition = EditorTestCompositions
-                .EditorFeatures
+            var composition = EditorTestCompositions.EditorFeatures
                 .RemoveParts(typeof(MockWorkspaceEventListenerProvider))
                 .AddParts(typeof(MockHostWorkspaceProvider), typeof(MockManagedHotReloadService))
                 .AddParts(additionalParts);
@@ -636,8 +635,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
                 Generate(syntaxTree.GetText().ToString(), fileName);
 
                 if (
-                    context
-                        .AnalyzerConfigOptions
+                    context.AnalyzerConfigOptions
                         .GetOptions(syntaxTree)
                         .TryGetValue("enc_generator_output", out var optionValue)
                 )
@@ -1281,8 +1279,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
             Assert.False(designTimeOnlyDocument2.State.SupportsEditAndContinue());
             Assert.True(designTimeOnlyDocument2.Project.SupportsEditAndContinue());
 
-            var activeStatementMap = await debuggingSession
-                .EditSession
+            var activeStatementMap = await debuggingSession.EditSession
                 .BaseActiveStatements
                 .GetValueAsync(CancellationToken.None);
             Assert.NotEmpty(activeStatementMap.DocumentPathMap);
@@ -1984,8 +1981,7 @@ class C1
 
             EnterBreakState(debuggingSession);
 
-            var (document, state) = await debuggingSession
-                .LastCommittedSolution
+            var (document, state) = await debuggingSession.LastCommittedSolution
                 .GetDocumentAndStateAsync(
                     documentId,
                     currentDocument: null,
@@ -2870,8 +2866,7 @@ class C { int Y => 2; }
                         case DocumentKind.Source:
                             context.AddSource(
                                 "Generated.cs",
-                                context
-                                    .Compilation
+                                context.Compilation
                                     .SyntaxTrees
                                     .SingleOrDefault(t => t.FilePath.EndsWith("X.cs"))
                                     ?.ToString()
@@ -2888,12 +2883,10 @@ class C { int Y => 2; }
                             break;
 
                         case DocumentKind.AnalyzerConfig:
-                            var syntaxTree = context
-                                .Compilation
+                            var syntaxTree = context.Compilation
                                 .SyntaxTrees
                                 .Single(t => t.FilePath.EndsWith("A.cs"));
-                            var content = context
-                                .AnalyzerConfigOptions
+                            var content = context.AnalyzerConfigOptions
                                 .GetOptions(syntaxTree)
                                 .TryGetValue("x", out var optionValue)
                                 ? optionValue.ToString()
@@ -2912,8 +2905,7 @@ class C { int Y => 2; }
                 .AddDocument("A.cs", "", filePath: pathA)
                 .Project;
             var projectId = project.Id;
-            solution = project
-                .Solution
+            solution = project.Solution
                 .AddAnalyzerReference(projectId, new TestGeneratorReference(generator));
             project = solution.GetRequiredProject(projectId);
             var generatedDocument = (await project.GetSourceGeneratedDocumentsAsync()).Single();
@@ -3836,8 +3828,7 @@ class G
 
             // save (note that this call will fail to match the content with the PDB since it uses the content prior to the actual file write)
             // TODO: await debuggingSession.OnSourceFileUpdatedAsync(currentDocument);
-            var (doc, state) = await debuggingSession
-                .LastCommittedSolution
+            var (doc, state) = await debuggingSession.LastCommittedSolution
                 .GetDocumentAndStateAsync(documentId, currentDocument, CancellationToken.None);
             Assert.Null(doc);
             Assert.Equal(CommittedSolution.DocumentState.OutOfSync, state);
@@ -4877,12 +4868,10 @@ class C { int Y => 1; }
 
             // the update should be stored on the service:
             var pendingUpdate = debuggingSession.GetTestAccessor().GetPendingSolutionUpdate();
-            var newBaselineA1 = pendingUpdate
-                .ProjectBaselines
+            var newBaselineA1 = pendingUpdate.ProjectBaselines
                 .Single(b => b.ProjectId == projectA.Id)
                 .EmitBaseline;
-            var newBaselineB1 = pendingUpdate
-                .ProjectBaselines
+            var newBaselineB1 = pendingUpdate.ProjectBaselines
                 .Single(b => b.ProjectId == projectB.Id)
                 .EmitBaseline;
 
@@ -4943,12 +4932,10 @@ class C { int Y => 1; }
 
             // the update should be stored on the service:
             pendingUpdate = debuggingSession.GetTestAccessor().GetPendingSolutionUpdate();
-            var newBaselineA2 = pendingUpdate
-                .ProjectBaselines
+            var newBaselineA2 = pendingUpdate.ProjectBaselines
                 .Single(b => b.ProjectId == projectA.Id)
                 .EmitBaseline;
-            var newBaselineB2 = pendingUpdate
-                .ProjectBaselines
+            var newBaselineB2 = pendingUpdate.ProjectBaselines
                 .Single(b => b.ProjectId == projectB.Id)
                 .EmitBaseline;
 
@@ -5127,11 +5114,9 @@ class C { int Y => 1; }
             var activeLineSpan12 = sourceTextV1.Lines.GetLinePositionSpan(activeSpan12);
             var activeLineSpan21 = sourceTextV2.Lines.GetLinePositionSpan(activeSpan21);
             var activeLineSpan22 = sourceTextV2.Lines.GetLinePositionSpan(activeSpan22);
-            var adjustedActiveLineSpan1 = sourceTextV2
-                .Lines
+            var adjustedActiveLineSpan1 = sourceTextV2.Lines
                 .GetLinePositionSpan(adjustedActiveSpan1);
-            var adjustedActiveLineSpan2 = sourceTextV2
-                .Lines
+            var adjustedActiveLineSpan2 = sourceTextV2.Lines
                 .GetLinePositionSpan(adjustedActiveSpan2);
 
             var debuggingSession = await StartDebuggingSessionAsync(service, solution);
@@ -5350,8 +5335,7 @@ class C { int Y => 1; }
         [CombinatorialData]
         public async Task ActiveStatements_ForeignDocument(bool withPath, bool designTimeOnly)
         {
-            var composition = FeaturesTestCompositions
-                .Features
+            var composition = FeaturesTestCompositions.Features
                 .AddParts(typeof(NoCompilationLanguageService));
 
             using var _ = CreateWorkspace(
@@ -5466,12 +5450,8 @@ class C { int Y => 1; }
             {
                 var p = solution.AddProject(projectName, projectName, "C#");
                 var linkedDocId = DocumentId.CreateNewId(p.Id, projectName + "->" + doc.Name);
-                solution = p.Solution.AddDocument(
-                    linkedDocId,
-                    doc.Name,
-                    text,
-                    filePath: doc.FilePath
-                );
+                solution = p.Solution
+                    .AddDocument(linkedDocId, doc.Name, text, filePath: doc.FilePath);
                 return linkedDocId;
             }
 
@@ -5484,8 +5464,7 @@ class C { int Y => 1; }
 
             // Base Active Statements
 
-            var baseActiveStatementsMap = await debuggingSession
-                .EditSession
+            var baseActiveStatementsMap = await debuggingSession.EditSession
                 .BaseActiveStatements
                 .GetValueAsync(CancellationToken.None)
                 .ConfigureAwait(false);
@@ -5509,8 +5488,7 @@ class C { int Y => 1; }
 
             Assert.Equal(3, baseActiveStatementsMap.InstructionMap.Count);
 
-            var statements = baseActiveStatementsMap
-                .InstructionMap
+            var statements = baseActiveStatementsMap.InstructionMap
                 .Values
                 .OrderBy(v => v.Ordinal)
                 .ToArray();
@@ -5610,8 +5588,7 @@ class C { int Y => 1; }
             solution = solution.WithDocumentText(document.Id, CreateText(source2));
             document = solution.GetDocument(document.Id);
 
-            var baseActiveStatementMap = await debuggingSession
-                .EditSession
+            var baseActiveStatementMap = await debuggingSession.EditSession
                 .BaseActiveStatements
                 .GetValueAsync(CancellationToken.None)
                 .ConfigureAwait(false);
@@ -5632,8 +5609,7 @@ class C { int Y => 1; }
 
             Assert.Equal(1, baseActiveStatementMap.InstructionMap.Count);
 
-            var activeStatement1 = baseActiveStatementMap
-                .InstructionMap
+            var activeStatement1 = baseActiveStatementMap.InstructionMap
                 .Values
                 .OrderBy(v => v.InstructionId.Method.Token)
                 .Single();
@@ -5653,8 +5629,7 @@ class C { int Y => 1; }
             );
 
             // Document got synchronized:
-            debuggingSession
-                .LastCommittedSolution
+            debuggingSession.LastCommittedSolution
                 .Test_SetDocumentState(
                     document.Id,
                     CommittedSolution.DocumentState.MatchesBuildOutput
@@ -5722,8 +5697,7 @@ class C
             );
 
             var generatedDocument1 = (
-                await solution
-                    .Projects
+                await solution.Projects
                     .Single()
                     .GetSourceGeneratedDocumentsAsync()
                     .ConfigureAwait(false)
@@ -6789,8 +6763,7 @@ class C
 
             // check committed document status:
             var debuggingSession = service.GetTestAccessor().GetActiveDebuggingSessions().Single();
-            var (document, state) = await debuggingSession
-                .LastCommittedSolution
+            var (document, state) = await debuggingSession.LastCommittedSolution
                 .GetDocumentAndStateAsync(
                     documentId,
                     currentDocument: null,

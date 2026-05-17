@@ -77,8 +77,7 @@ namespace System.Workflow.Activities.Design
                 operationInfoBase = workflowOperationListItem.Operation;
                 if (workflowOperationListItem.Operation.HasProtectionLevel)
                 {
-                    this.protectionLevelComboBox.SelectedItem = workflowOperationListItem
-                        .Operation
+                    this.protectionLevelComboBox.SelectedItem = workflowOperationListItem.Operation
                         .ProtectionLevel;
                 }
                 else

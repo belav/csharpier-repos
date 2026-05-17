@@ -43,8 +43,7 @@ namespace System.ServiceModel.Diagnostics
                     && message.Headers != null
                 )
                 {
-                    int index = message
-                        .Headers
+                    int index = message.Headers
                         .FindHeader(
                             DiagnosticStrings.ActivityId,
                             DiagnosticStrings.DiagnosticsNamespace
@@ -101,8 +100,7 @@ namespace System.ServiceModel.Diagnostics
             {
                 if (message.State != MessageState.Closed && message.Headers != null)
                 {
-                    int index = message
-                        .Headers
+                    int index = message.Headers
                         .FindHeader(
                             DiagnosticStrings.ActivityId,
                             DiagnosticStrings.DiagnosticsNamespace
@@ -156,8 +154,7 @@ namespace System.ServiceModel.Diagnostics
                 && message.Headers.MessageVersion.Envelope != EnvelopeVersion.None
             )
             {
-                int index = message
-                    .Headers
+                int index = message.Headers
                     .FindHeader(
                         DiagnosticStrings.ActivityId,
                         DiagnosticStrings.DiagnosticsNamespace

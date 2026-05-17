@@ -95,8 +95,7 @@ namespace Mono.Mozilla.DOM
                 nsIDOMDocument doc;
                 this.window.getDocument(out doc);
                 if (!control.documents.ContainsKey(doc.GetHashCode()))
-                    control
-                        .documents
+                    control.documents
                         .Add(doc.GetHashCode(), new Document(control, (nsIDOMHTMLDocument)doc));
                 return control.documents[doc.GetHashCode()] as IDocument;
             }

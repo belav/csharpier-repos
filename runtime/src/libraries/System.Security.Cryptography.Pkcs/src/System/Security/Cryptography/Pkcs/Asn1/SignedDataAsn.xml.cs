@@ -154,8 +154,7 @@ namespace System.Security.Cryptography.Pkcs.Asn1
 
                 while (collectionReader.HasData)
                 {
-                    System
-                        .Security
+                    System.Security
                         .Cryptography
                         .Asn1
                         .AlgorithmIdentifierAsn
@@ -166,8 +165,7 @@ namespace System.Security.Cryptography.Pkcs.Asn1
                 decoded.DigestAlgorithms = tmpList.ToArray();
             }
 
-            System
-                .Security
+            System.Security
                 .Cryptography
                 .Pkcs
                 .Asn1
@@ -192,8 +190,7 @@ namespace System.Security.Cryptography.Pkcs.Asn1
 
                     while (collectionReader.HasData)
                     {
-                        System
-                            .Security
+                        System.Security
                             .Cryptography
                             .Pkcs
                             .Asn1
@@ -242,8 +239,7 @@ namespace System.Security.Cryptography.Pkcs.Asn1
 
                 while (collectionReader.HasData)
                 {
-                    System
-                        .Security
+                    System.Security
                         .Cryptography
                         .Pkcs
                         .Asn1

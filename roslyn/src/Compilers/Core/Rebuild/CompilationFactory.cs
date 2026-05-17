@@ -101,8 +101,7 @@ namespace Microsoft.CodeAnalysis.Rebuild
             CancellationToken cancellationToken
         )
         {
-            var embeddedTexts = rebuildCompilation
-                .SyntaxTrees
+            var embeddedTexts = rebuildCompilation.SyntaxTrees
                 .Select(st => (path: st.FilePath, text: st.GetText()))
                 .Where(pair => pair.text.CanBeEmbedded)
                 .Select(pair => EmbeddedText.FromSource(pair.path, pair.text))
@@ -126,8 +125,7 @@ namespace Microsoft.CodeAnalysis.Rebuild
         )
         {
             var peHeader = OptionsReader.PeReader.PEHeaders.PEHeader!;
-            var win32Resources = OptionsReader
-                .PeReader
+            var win32Resources = OptionsReader.PeReader
                 .GetSectionData(peHeader.ResourceTableDirectory.RelativeVirtualAddress);
             using var win32ResourceStream =
                 win32Resources.Pointer != null
@@ -163,8 +161,7 @@ namespace Microsoft.CodeAnalysis.Rebuild
                 }
 
                 debugInformationFormat = DebugInformationFormat.PortablePdb;
-                var codeViewEntry = OptionsReader
-                    .PeReader
+                var codeViewEntry = OptionsReader.PeReader
                     .ReadDebugDirectory()
                     .Single(entry => entry.Type == DebugDirectoryEntryType.CodeView);
                 var codeView = OptionsReader.PeReader.ReadCodeViewDebugDirectoryData(codeViewEntry);

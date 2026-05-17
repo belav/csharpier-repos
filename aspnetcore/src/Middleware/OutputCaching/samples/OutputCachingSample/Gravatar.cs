@@ -11,8 +11,7 @@ public static class Gravatar
 
         context.Response.StatusCode = 200;
         context.Response.ContentType = "text/html";
-        await context
-            .Response
+        await context.Response
             .WriteAsync($"<img src=\"https://www.gravatar.com/avatar/{hash}?s={size}&d={type}\"/>");
         await context.Response.WriteAsync($"<pre>Generated at {DateTime.Now:hh:mm:ss.ff}</pre>");
     }

@@ -139,8 +139,7 @@ namespace System.Activities.DynamicUpdate
             );
             if (originalDefinition == null)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .Argument("updatedWorkflowDefinition", SR.MustCallPrepareBeforeFinalize);
             }
 
@@ -204,8 +203,7 @@ namespace System.Activities.DynamicUpdate
                 DynamicUpdateInfo.GetOriginalActivityBuilder(updatedActivityDefinition);
             if (originalActivityDefinition == null)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .Argument("updatedActivityDefinition", SR.MustCallPrepareBeforeFinalize);
             }
 

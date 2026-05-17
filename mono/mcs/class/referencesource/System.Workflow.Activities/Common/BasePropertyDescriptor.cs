@@ -462,8 +462,7 @@ namespace System.Workflow.Activities.Common
             )
             {
                 if (
-                    memberInfo
-                        .Name
+                    memberInfo.Name
                         .Equals(
                             name,
                             (

@@ -913,15 +913,13 @@ namespace System.IO.Pipelines
                 if (completionData.ExecutionContext is null)
                 {
                     // We need to box the struct here since there's no generic overload for state
-                    completionData
-                        .SynchronizationContext
+                    completionData.SynchronizationContext
                         .Post(s_syncContextExecuteWithoutExecutionContextCallback, completionData);
                 }
                 else
                 {
                     // We need to execute the callback with the execution context
-                    completionData
-                        .SynchronizationContext
+                    completionData.SynchronizationContext
                         .Post(s_syncContextExecutionContextCallback, completionData);
                 }
             }

@@ -77,8 +77,7 @@ namespace System.ServiceModel.Syndication
         {
             if (dataContractExtension == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("dataContractExtension");
             }
             if (dataContractSerializer == null)
@@ -101,8 +100,7 @@ namespace System.ServiceModel.Syndication
         {
             if (xmlSerializerExtension == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("xmlSerializerExtension");
             }
             if (serializer == null)
@@ -290,8 +288,7 @@ namespace System.ServiceModel.Syndication
         {
             if (string.IsNullOrEmpty(extensionName))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(SR.GetString(SR.ExtensionNameNotSpecified));
             }
             Fx.Assert(

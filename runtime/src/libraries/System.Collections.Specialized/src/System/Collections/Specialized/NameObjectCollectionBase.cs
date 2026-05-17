@@ -35,8 +35,7 @@ namespace System.Collections.Specialized
         private KeysCollection? _keys;
         private int _version;
 
-        private static readonly StringComparer s_defaultComparer = CultureInfo
-            .InvariantCulture
+        private static readonly StringComparer s_defaultComparer = CultureInfo.InvariantCulture
             .CompareInfo
             .GetStringComparer(CompareOptions.IgnoreCase);
 

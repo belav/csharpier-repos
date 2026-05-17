@@ -72,11 +72,12 @@ namespace MonoTests.System.Threading.Tasks
         static Task<int> CreateNestedFuture(int level)
         {
             if (level == 0)
-                return Task.Factory.StartNew(() =>
-                {
-                    Thread.Sleep(1);
-                    return 1;
-                });
+                return Task.Factory
+                    .StartNew(() =>
+                    {
+                        Thread.Sleep(1);
+                        return 1;
+                    });
 
             var t = CreateNestedFuture(level - 1);
             return Task.Factory.StartNew(() => t.Result + 1);
@@ -106,8 +107,7 @@ namespace MonoTests.System.Threading.Tasks
         public void FaultedFutureTest()
         {
             var thrown = new ApplicationException();
-            var f = Task<int>
-                .Factory
+            var f = Task<int>.Factory
                 .StartNew(() =>
                 {
                     throw thrown;

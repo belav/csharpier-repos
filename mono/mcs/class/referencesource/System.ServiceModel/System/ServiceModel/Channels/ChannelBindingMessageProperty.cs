@@ -133,8 +133,7 @@ namespace System.ServiceModel.Channels
         {
             if (this.IsDisposed)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ObjectDisposedException(this.GetType().FullName));
             }
         }

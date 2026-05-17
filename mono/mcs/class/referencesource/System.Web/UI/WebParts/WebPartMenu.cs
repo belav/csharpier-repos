@@ -117,8 +117,7 @@ menu"
 
             if (_menuUser.Page != null)
             {
-                _menuUser
-                    .Page
+                _menuUser.Page
                     .ClientScript
                     .RegisterStartupScript(
                         (Control)_menuUser,
@@ -152,8 +151,7 @@ menu"
                     _menuUser.ClientID
                     + "__Menu_"
                     + _cssStyleIndex++.ToString(NumberFormatInfo.InvariantInfo);
-                _menuUser
-                    .Page
+                _menuUser.Page
                     .Header
                     .StyleSheet
                     .CreateStyleRule(style, _menuUser.UrlResolver, "." + name);
@@ -402,8 +400,7 @@ menu"
                                 + Util.QuoteJScriptString(eventArgument)
                                 + "');";
 
-                            _menuUser
-                                .Page
+                            _menuUser.Page
                                 .ClientScript
                                 .RegisterForEventValidation(target, eventArgument);
                         }

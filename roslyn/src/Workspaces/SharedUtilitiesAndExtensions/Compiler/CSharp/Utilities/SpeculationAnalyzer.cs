@@ -500,14 +500,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
                         newOtherPartOfConditional = newExpression.WhenTrue;
                     }
 
-                    var originalExpressionTypeInfo = this.OriginalSemanticModel.GetTypeInfo(
-                        originalExpression,
-                        this.CancellationToken
-                    );
-                    var newExpressionTypeInfo = this.SpeculativeSemanticModel.GetTypeInfo(
-                        newExpression,
-                        this.CancellationToken
-                    );
+                    var originalExpressionTypeInfo = this.OriginalSemanticModel
+                        .GetTypeInfo(originalExpression, this.CancellationToken);
+                    var newExpressionTypeInfo = this.SpeculativeSemanticModel
+                        .GetTypeInfo(newExpression, this.CancellationToken);
 
                     var originalExpressionType = originalExpressionTypeInfo.Type;
                     var newExpressionType = newExpressionTypeInfo.Type;
@@ -536,14 +532,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
                         return originalExpressionType != newExpressionType;
                     }
 
-                    var originalConversion = this.OriginalSemanticModel.ClassifyConversion(
-                        originalOtherPartOfConditional,
-                        originalExpressionType
-                    );
-                    var newConversion = this.SpeculativeSemanticModel.ClassifyConversion(
-                        newOtherPartOfConditional,
-                        newExpressionType
-                    );
+                    var originalConversion = this.OriginalSemanticModel
+                        .ClassifyConversion(originalOtherPartOfConditional, originalExpressionType);
+                    var newConversion = this.SpeculativeSemanticModel
+                        .ClassifyConversion(newOtherPartOfConditional, newExpressionType);
 
                     // If this changes a boxing operation in one of the branches, we assume that semantics will change.
                     if (originalConversion.IsBoxing != newConversion.IsBoxing)
@@ -589,14 +581,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
                     originalCaseSwitchLabel.Parent.Parent;
                 var newSwitchStatement = (SwitchStatementSyntax)newCaseSwitchLabel.Parent.Parent;
 
-                var originalConversion = this.OriginalSemanticModel.ClassifyConversion(
-                    oldSwitchStatement.Expression,
-                    originalCaseType
-                );
-                var newConversion = this.SpeculativeSemanticModel.ClassifyConversion(
-                    newSwitchStatement.Expression,
-                    newCaseType
-                );
+                var originalConversion = this.OriginalSemanticModel
+                    .ClassifyConversion(oldSwitchStatement.Expression, originalCaseType);
+                var newConversion = this.SpeculativeSemanticModel
+                    .ClassifyConversion(newSwitchStatement.Expression, newCaseType);
 
                 // if conversion only exists for either original or new, then semantics changed.
                 if (originalConversion.Exists != newConversion.Exists)
@@ -627,12 +615,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
                 )
                     return true;
 
-                var originalSwitchLabels = originalSwitchStatement
-                    .Sections
+                var originalSwitchLabels = originalSwitchStatement.Sections
                     .SelectMany(section => section.Labels)
                     .ToArray();
-                var newSwitchLabels = newSwitchStatement
-                    .Sections
+                var newSwitchLabels = newSwitchStatement.Sections
                     .SelectMany(section => section.Labels)
                     .ToArray();
 
@@ -661,14 +647,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
                 // Switch expression's expression changed.  Ensure it's the same type as before. If not, inference of
                 // the meaning of the patterns within can change.
 
-                var originalExprType = this.OriginalSemanticModel.GetTypeInfo(
-                    originalSwitchExpression.GoverningExpression,
-                    CancellationToken
-                );
-                var replacedExprType = this.SpeculativeSemanticModel.GetTypeInfo(
-                    replacedSwitchExpression.GoverningExpression,
-                    CancellationToken
-                );
+                var originalExprType = this.OriginalSemanticModel
+                    .GetTypeInfo(originalSwitchExpression.GoverningExpression, CancellationToken);
+                var replacedExprType = this.SpeculativeSemanticModel
+                    .GetTypeInfo(replacedSwitchExpression.GoverningExpression, CancellationToken);
 
                 if (!Equals(originalExprType.Type, replacedExprType.Type))
                     return true;
@@ -749,15 +731,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
             // If the resultant types are different and it is boxing to the converted type then semantics could be changing.
             if (!Equals(originalExpressionTypeInfo.Type, newExpressionTypeInfo.Type))
             {
-                var originalConvertedTypeConversion = this.OriginalSemanticModel.ClassifyConversion(
-                    previousOriginalNode,
-                    originalExpressionTypeInfo.ConvertedType
-                );
-                var newExpressionConvertedTypeConversion =
-                    this.SpeculativeSemanticModel.ClassifyConversion(
-                        previousReplacedNode,
-                        newExpressionTypeInfo.ConvertedType
+                var originalConvertedTypeConversion = this.OriginalSemanticModel
+                    .ClassifyConversion(
+                        previousOriginalNode,
+                        originalExpressionTypeInfo.ConvertedType
                     );
+                var newExpressionConvertedTypeConversion = this.SpeculativeSemanticModel
+                    .ClassifyConversion(previousReplacedNode, newExpressionTypeInfo.ConvertedType);
 
                 if (
                     originalConvertedTypeConversion.IsBoxing
@@ -978,16 +958,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
                 return originalConvertedType != newConvertedType;
             }
 
-            var originalConversion = this.OriginalSemanticModel.ClassifyConversion(
-                originalIsOrAsExpression.Left,
-                originalConvertedType,
-                isExplicitInSource: true
-            );
-            var newConversion = this.SpeculativeSemanticModel.ClassifyConversion(
-                newIsOrAsExpression.Left,
-                newConvertedType,
-                isExplicitInSource: true
-            );
+            var originalConversion = this.OriginalSemanticModel
+                .ClassifyConversion(
+                    originalIsOrAsExpression.Left,
+                    originalConvertedType,
+                    isExplicitInSource: true
+                );
+            var newConversion = this.SpeculativeSemanticModel
+                .ClassifyConversion(
+                    newIsOrAsExpression.Left,
+                    newConvertedType,
+                    isExplicitInSource: true
+                );
 
             // Is and As operators do not consider any user-defined operators, just ensure that the conversion exists.
             return originalConversion.Exists != newConversion.Exists;
@@ -1024,14 +1006,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
         )
         {
             // Ensure QueryClauseInfos are compatible.
-            var originalClauseInfo = this.OriginalSemanticModel.GetQueryClauseInfo(
-                originalClause,
-                this.CancellationToken
-            );
-            var newClauseInfo = this.SpeculativeSemanticModel.GetQueryClauseInfo(
-                newClause,
-                this.CancellationToken
-            );
+            var originalClauseInfo = this.OriginalSemanticModel
+                .GetQueryClauseInfo(originalClause, this.CancellationToken);
+            var newClauseInfo = this.SpeculativeSemanticModel
+                .GetQueryClauseInfo(newClause, this.CancellationToken);
 
             return !SymbolInfosAreCompatible(originalClauseInfo.CastInfo, newClauseInfo.CastInfo)
                 || !SymbolInfosAreCompatible(

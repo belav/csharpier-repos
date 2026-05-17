@@ -73,8 +73,7 @@ public class PageActionEndpointDataSourceTest : ActionEndpointDataSourceBaseTest
             mockDescriptorProvider.Object
         );
 
-        dataSource
-            .DefaultBuilder
+        dataSource.DefaultBuilder
             .Add(
                 (b) =>
                 {
@@ -134,8 +133,7 @@ public class PageActionEndpointDataSourceTest : ActionEndpointDataSourceBaseTest
             mockDescriptorProvider.Object
         );
 
-        dataSource
-            .DefaultBuilder
+        dataSource.DefaultBuilder
             .Add(
                 (b) =>
                 {
@@ -257,8 +255,7 @@ public class PageActionEndpointDataSourceTest : ActionEndpointDataSourceBaseTest
             mockDescriptorProvider.Object
         );
 
-        dataSource
-            .DefaultBuilder
+        dataSource.DefaultBuilder
             .Finally(
                 (b) =>
                 {

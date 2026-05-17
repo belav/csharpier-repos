@@ -2543,8 +2543,7 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
                                 )
                     )
                 )
-            )
-                .Message
+            ).Message
                 .Replace("\r", "")
                 .Replace("\n", "")
         );
@@ -2574,8 +2573,7 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
                                     .ThenInclude(l2 => l2.OneToOne_Required_FK2)
                     )
                 )
-            )
-                .Message
+            ).Message
                 .Replace("\r", "")
                 .Replace("\n", "")
         );
@@ -3638,13 +3636,16 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
                     {
                         l1.Id,
                         Collection = l1.Maybe(x =>
-                            x.OneToOne_Optional_FK1.Maybe(xx =>
-                                xx.OneToMany_Optional2.Select(l3 => new
-                                {
-                                    ChildId = (int)l3.MaybeScalar(xxx => xxx.Id),
-                                    ParentName = l1.OneToOne_Optional_FK1.Maybe(xxx => xxx.Name),
-                                })
-                            )
+                            x.OneToOne_Optional_FK1
+                                .Maybe(xx =>
+                                    xx.OneToMany_Optional2
+                                        .Select(l3 => new
+                                        {
+                                            ChildId = (int)l3.MaybeScalar(xxx => xxx.Id),
+                                            ParentName = l1.OneToOne_Optional_FK1
+                                                .Maybe(xxx => xxx.Name),
+                                        })
+                                )
                         ),
                     }),
             elementSorter: e => e.Id,
@@ -3684,11 +3685,12 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
                         l1.Id,
                         Entity = l1.OneToOne_Optional_FK1.OneToOne_Optional_FK2,
                         Collection = l1.Maybe(x =>
-                            x.OneToOne_Optional_FK1.Maybe(xx =>
-                                xx.OneToMany_Optional2
-                                    .GroupBy(x => x.Name)
-                                    .Select(g => new { g.Key, Count = g.Count() })
-                            )
+                            x.OneToOne_Optional_FK1
+                                .Maybe(xx =>
+                                    xx.OneToMany_Optional2
+                                        .GroupBy(x => x.Name)
+                                        .Select(g => new { g.Key, Count = g.Count() })
+                                )
                         ),
                     }),
             elementSorter: e => e.Id,

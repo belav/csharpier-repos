@@ -272,8 +272,7 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             var identifierName = identifier.ValueText;
 
             return syntaxFacts.StringComparer.Equals(identifierName, "SuppressMessage")
-                || syntaxFacts
-                    .StringComparer
+                || syntaxFacts.StringComparer
                     .Equals(identifierName, nameof(SuppressMessageAttribute));
         }
 

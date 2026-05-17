@@ -29,8 +29,7 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
                 ? sharedState.AdditionalProbingPath
                 : sharedState.Location;
             TestApp app = sharedState.FrameworkReferenceApp;
-            CommandResult result = sharedState
-                .DotNetWithNetCoreApp
+            CommandResult result = sharedState.DotNetWithNetCoreApp
                 .Exec(Constants.AdditionalProbingPath.CommandLineArgument, probePath, app.AppDll)
                 .EnableTracingAndCaptureOutputs()
                 .Execute();
@@ -68,8 +67,7 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
             // Host should replace |arch| and |tfm| with actual architecture and TFM
             string probePath = Path.Combine(sharedState.AdditionalProbingPath, "|arch|", "|tfm|");
             TestApp app = sharedState.FrameworkReferenceApp;
-            sharedState
-                .DotNetWithNetCoreApp
+            sharedState.DotNetWithNetCoreApp
                 .Exec(Constants.AdditionalProbingPath.CommandLineArgument, probePath, app.AppDll)
                 .EnableTracingAndCaptureOutputs()
                 .Execute()
@@ -96,8 +94,7 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
                 .FromFile(app.RuntimeConfigJson)
                 .WithAdditionalProbingPath(probePath)
                 .Save();
-            CommandResult result = sharedState
-                .DotNetWithNetCoreApp
+            CommandResult result = sharedState.DotNetWithNetCoreApp
                 .Exec(app.AppDll)
                 .EnableTracingAndCaptureOutputs()
                 .Execute();

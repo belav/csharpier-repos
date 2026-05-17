@@ -65,9 +65,10 @@ public class MissingConverter : AutoMapperSpecBase
     {
         new Action(() => Mapper.Map<int, int>(0)).ShouldThrowException<AutoMapperMappingException>(
             e =>
-                e.Message.ShouldBe(
-                    "Cannot create an instance of type AutoMapper.ITypeConverter`2[System.Int32,System.Int32]"
-                )
+                e.Message
+                    .ShouldBe(
+                        "Cannot create an instance of type AutoMapper.ITypeConverter`2[System.Int32,System.Int32]"
+                    )
         );
     }
 }

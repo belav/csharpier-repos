@@ -202,8 +202,7 @@ namespace System.Reflection.Tests
 
         private static Action<Type[]> GetClearCacheMethod()
         {
-            Type updateHandler = typeof(Type)
-                .Assembly
+            Type updateHandler = typeof(Type).Assembly
                 .GetType(
                     "System.Reflection.Metadata.RuntimeTypeMetadataUpdateHandler",
                     throwOnError: true,

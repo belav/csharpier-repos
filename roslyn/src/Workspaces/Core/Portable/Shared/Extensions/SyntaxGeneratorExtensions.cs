@@ -287,11 +287,9 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         {
             var identifier = factory.IdentifierName(identifierName);
             var nullExpr = factory.NullLiteralExpression();
-            var condition = factory
-                .SyntaxGeneratorInternal
+            var condition = factory.SyntaxGeneratorInternal
                 .SupportsPatterns(semanticModel.SyntaxTree.Options)
-                ? factory
-                    .SyntaxGeneratorInternal
+                ? factory.SyntaxGeneratorInternal
                     .IsPatternExpression(
                         identifier,
                         factory.SyntaxGeneratorInternal.ConstantPattern(nullExpr)
@@ -442,11 +440,9 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             CancellationToken cancellationToken
         )
         {
-            var getAccessibility = overriddenProperty
-                .GetMethod
+            var getAccessibility = overriddenProperty.GetMethod
                 .ComputeResultantAccessibility(containingType);
-            var setAccessibility = overriddenProperty
-                .SetMethod
+            var setAccessibility = overriddenProperty.SetMethod
                 .ComputeResultantAccessibility(containingType);
 
             SyntaxNode? getBody;
@@ -454,8 +450,7 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             // Implement an abstract property by throwing not implemented in accessors.
             if (overriddenProperty.IsAbstract)
             {
-                var compilation = await document
-                    .Project
+                var compilation = await document.Project
                     .GetCompilationAsync(cancellationToken)
                     .ConfigureAwait(false);
                 var statement = codeFactory.CreateThrowNotImplementedStatement(compilation);
@@ -730,8 +725,7 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             // Abstract: Throw not implemented
             if (overriddenMethod.IsAbstract)
             {
-                var compilation = await newDocument
-                    .Project
+                var compilation = await newDocument.Project
                     .GetCompilationAsync(cancellationToken)
                     .ConfigureAwait(false);
                 var statement = codeFactory.CreateThrowNotImplementedStatement(compilation);

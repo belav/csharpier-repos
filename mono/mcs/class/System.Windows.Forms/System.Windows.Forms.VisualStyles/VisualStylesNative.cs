@@ -271,8 +271,7 @@ namespace System.Windows.Forms.VisualStyles
             int retval;
             int hresult = UXTheme.GetThemeColor(hTheme, iPartId, iStateId, (int)prop, out retval);
 
-            result = System
-                .Drawing
+            result = System.Drawing
                 .Color
                 .FromArgb(
                     (int)(0x000000FFU & retval),
@@ -669,8 +668,7 @@ namespace System.Windows.Forms.VisualStyles
                 uint retval = UXTheme.GetThemeSysColor(theme, 1621);
                 UXTheme.CloseThemeData(theme);
 
-                return System
-                    .Drawing
+                return System.Drawing
                     .Color
                     .FromArgb(
                         (int)(0x000000FFU & retval),
@@ -809,8 +807,7 @@ namespace System.Windows.Forms.VisualStyles
                 uint retval = UXTheme.GetThemeSysColor(theme, 1611);
                 UXTheme.CloseThemeData(theme);
 
-                return System
-                    .Drawing
+                return System.Drawing
                     .Color
                     .FromArgb(
                         (int)(0x000000FFU & retval),

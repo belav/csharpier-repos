@@ -154,8 +154,7 @@ namespace System.Net.Http
                     lock (_state.Lock)
                     {
                         if (
-                            !Interop
-                                .WinHttp
+                            !Interop.WinHttp
                                 .WinHttpReadData(
                                     _requestHandle,
                                     Marshal.UnsafeAddrOfPinnedArrayElement(buffer, 0),
@@ -301,8 +300,7 @@ namespace System.Net.Http
                 {
                     Debug.Assert(!_requestHandle.IsInvalid);
                     if (
-                        !Interop
-                            .WinHttp
+                        !Interop.WinHttp
                             .WinHttpReadData(
                                 _requestHandle,
                                 Marshal.UnsafeAddrOfPinnedArrayElement(buffer, offset),

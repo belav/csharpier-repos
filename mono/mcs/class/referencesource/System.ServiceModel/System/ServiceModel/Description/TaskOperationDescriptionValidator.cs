@@ -35,8 +35,7 @@ namespace System.ServiceModel.Description
             {
                 string method1Name = operation.TaskMethod.Name;
                 string method2Name = operation.SyncMethod.Name;
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(
@@ -56,8 +55,7 @@ namespace System.ServiceModel.Description
             {
                 string method1Name = operation.TaskMethod.Name;
                 string method2Name = operation.BeginMethod.Name;
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(
@@ -85,8 +83,7 @@ namespace System.ServiceModel.Description
                     )
                 )
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new NotSupportedException(
                                 SR.GetString(SR.TaskMethodParameterNotSupported, parameterType)
@@ -100,8 +97,7 @@ namespace System.ServiceModel.Description
         {
             if (ServiceReflector.HasOutputParameters(method, false))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(SR.TaskMethodMustNotHaveOutParameter)

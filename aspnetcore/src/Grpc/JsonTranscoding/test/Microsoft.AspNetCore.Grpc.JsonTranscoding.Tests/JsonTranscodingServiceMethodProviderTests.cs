@@ -84,8 +84,7 @@ public class JsonTranscodingServiceMethodProviderTests
         );
         Assert.Equal(
             "/v1/additional_bindings/{name}",
-            additionalMethodModel
-                .Metadata
+            additionalMethodModel.Metadata
                 .GetMetadata<GrpcJsonTranscodingMetadata>()
                 ?.HttpRule
                 .Delete
@@ -156,8 +155,7 @@ public class JsonTranscodingServiceMethodProviderTests
         });
 
         // Assert
-        var write = testSink
-            .Writes
+        var write = testSink.Writes
             .Single(w =>
             {
                 if (w.EventId.Name != "HttpRuleFound")

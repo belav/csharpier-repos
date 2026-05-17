@@ -71,8 +71,7 @@ namespace Newtonsoft.Json.Tests.Utilities
                 .GetConstructors(typeof(InTestClass))
                 .Single(c => c.GetParameters().Count() == 1);
 
-            var creator = LateBoundReflectionDelegateFactory
-                .Instance
+            var creator = LateBoundReflectionDelegateFactory.Instance
                 .CreateParameterizedConstructor(constructor);
 
             object[] args = new object[] { "Value" };
@@ -88,8 +87,7 @@ namespace Newtonsoft.Json.Tests.Utilities
                 .GetConstructors(typeof(InTestClass))
                 .Single(c => c.GetParameters().Count() == 2);
 
-            var creator = LateBoundReflectionDelegateFactory
-                .Instance
+            var creator = LateBoundReflectionDelegateFactory.Instance
                 .CreateParameterizedConstructor(constructor);
 
             object[] args = new object[] { "Value", true };
@@ -106,8 +104,7 @@ namespace Newtonsoft.Json.Tests.Utilities
                 .GetConstructors(typeof(OutAndRefTestClass))
                 .Single(c => c.GetParameters().Count() == 1);
 
-            var creator = LateBoundReflectionDelegateFactory
-                .Instance
+            var creator = LateBoundReflectionDelegateFactory.Instance
                 .CreateParameterizedConstructor(constructor);
 
             object[] args = new object[] { "Input" };
@@ -123,8 +120,7 @@ namespace Newtonsoft.Json.Tests.Utilities
                 .GetConstructors(typeof(OutAndRefTestClass))
                 .Single(c => c.GetParameters().Count() == 2);
 
-            var creator = LateBoundReflectionDelegateFactory
-                .Instance
+            var creator = LateBoundReflectionDelegateFactory.Instance
                 .CreateParameterizedConstructor(constructor);
 
             object[] args = new object[] { "Input", null };
@@ -140,8 +136,7 @@ namespace Newtonsoft.Json.Tests.Utilities
                 .GetConstructors(typeof(OutAndRefTestClass))
                 .Single(c => c.GetParameters().Count() == 3);
 
-            var creator = LateBoundReflectionDelegateFactory
-                .Instance
+            var creator = LateBoundReflectionDelegateFactory.Instance
                 .CreateParameterizedConstructor(constructor);
 
             object[] args = new object[] { "Input", true, null };

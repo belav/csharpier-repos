@@ -37,8 +37,7 @@ internal sealed class AnyIPListenOptions : ListenOptions
             }
             if (context.Logger.IsEnabled(LogLevel.Debug))
             {
-                context
-                    .Logger
+                context.Logger
                     .LogDebug(CoreStrings.FallbackToIPv4Any, IPEndPoint.Port, IPEndPoint.Port);
             }
 

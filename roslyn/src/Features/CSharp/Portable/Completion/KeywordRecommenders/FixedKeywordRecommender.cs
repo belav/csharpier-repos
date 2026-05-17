@@ -41,8 +41,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
         {
             return context.TargetToken.IsUnsafeContext()
                 && (
-                    context
-                        .SyntaxTree
+                    context.SyntaxTree
                         .IsGlobalMemberDeclarationContext(
                             context.Position,
                             SyntaxKindSet.AllGlobalMemberModifiers,

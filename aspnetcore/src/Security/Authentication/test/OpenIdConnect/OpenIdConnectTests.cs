@@ -263,8 +263,7 @@ public class OpenIdConnectTests
         var transaction = await server.SendAsync(DefaultHost + TestServerBuilder.Signout);
         Assert.Equal(HttpStatusCode.Redirect, transaction.Response.StatusCode);
 
-        var query = transaction
-            .Response
+        var query = transaction.Response
             .Headers
             .Location
             .Query
@@ -306,8 +305,7 @@ public class OpenIdConnectTests
         );
         Assert.Equal(HttpStatusCode.Redirect, transaction.Response.StatusCode);
 
-        var query = transaction
-            .Response
+        var query = transaction.Response
             .Headers
             .Location
             .Query

@@ -69,8 +69,7 @@ public class DataProtectionCommonExtensionsTests
         firstMock.Setup(o => o.CreateProtector("first")).Returns(secondMock.Object);
 
         // Act
-        var retVal = firstMock
-            .Object
+        var retVal = firstMock.Object
             .CreateProtector((IEnumerable<string>)new string[] { "first", "second", "third" });
 
         // Assert

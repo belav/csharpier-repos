@@ -414,8 +414,7 @@ namespace System.Runtime.Remoting.Channels
                 StackBuilderSink s = new StackBuilderSink(_serverObject);
                 Object returnValue = s.PrivateProcessMessage(
                     _asyncEnd.MethodHandle,
-                    System
-                        .Runtime
+                    System.Runtime
                         .Remoting
                         .Messaging
                         .Message

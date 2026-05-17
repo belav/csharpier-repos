@@ -29,8 +29,7 @@ namespace System.ServiceModel.Dispatcher
         {
             if (workflowDefinitionContext == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("workflowDefinitionContext");
             }
 
@@ -65,14 +64,12 @@ namespace System.ServiceModel.Dispatcher
 
             if (instanceContext != null && this.InstanceLifeTimeManager != null)
             {
-                WorkflowDurableInstance workflowDurableInstance = instanceContext
-                    .Extensions
+                WorkflowDurableInstance workflowDurableInstance = instanceContext.Extensions
                     .Find<WorkflowDurableInstance>();
 
                 if (workflowDurableInstance == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR2.GetString(
@@ -83,15 +80,16 @@ namespace System.ServiceModel.Dispatcher
                         );
                 }
 
-                this.InstanceLifeTimeManager.NotifyWorkflowActivationComplete(
-                    workflowDurableInstance.InstanceId,
-                    this.workflowActivationCompleteCallback,
-                    new WorkflowActivationCompletedCallbackState(
+                this.InstanceLifeTimeManager
+                    .NotifyWorkflowActivationComplete(
                         workflowDurableInstance.InstanceId,
-                        instanceContext
-                    ),
-                    false
-                );
+                        this.workflowActivationCompleteCallback,
+                        new WorkflowActivationCompletedCallbackState(
+                            workflowDurableInstance.InstanceId,
+                            instanceContext
+                        ),
+                        false
+                    );
             }
 
             return instanceContext;
@@ -105,14 +103,12 @@ namespace System.ServiceModel.Dispatcher
         {
             base.InitializeInstanceContext(instanceContext, message, channel);
 
-            WorkflowDurableInstance workflowDurableInstance = instanceContext
-                .Extensions
+            WorkflowDurableInstance workflowDurableInstance = instanceContext.Extensions
                 .Find<WorkflowDurableInstance>();
 
             if (workflowDurableInstance == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR2.GetString(
@@ -125,15 +121,16 @@ namespace System.ServiceModel.Dispatcher
 
             if (this.InstanceLifeTimeManager != null)
             {
-                this.InstanceLifeTimeManager.NotifyWorkflowActivationComplete(
-                    workflowDurableInstance.InstanceId,
-                    this.workflowActivationCompleteCallback,
-                    new WorkflowActivationCompletedCallbackState(
+                this.InstanceLifeTimeManager
+                    .NotifyWorkflowActivationComplete(
                         workflowDurableInstance.InstanceId,
-                        instanceContext
-                    ),
-                    false
-                );
+                        this.workflowActivationCompleteCallback,
+                        new WorkflowActivationCompletedCallbackState(
+                            workflowDurableInstance.InstanceId,
+                            instanceContext
+                        ),
+                        false
+                    );
             }
         }
 
@@ -144,14 +141,12 @@ namespace System.ServiceModel.Dispatcher
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("instanceContext");
             }
 
-            WorkflowDurableInstance workflowDurableInstance = instanceContext
-                .Extensions
+            WorkflowDurableInstance workflowDurableInstance = instanceContext.Extensions
                 .Find<WorkflowDurableInstance>();
 
             if (workflowDurableInstance == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR2.GetString(
@@ -165,9 +160,8 @@ namespace System.ServiceModel.Dispatcher
             if (this.InstanceLifeTimeManager != null)
             {
                 return (
-                        !this.InstanceLifeTimeManager.IsInstanceInMemory(
-                            workflowDurableInstance.InstanceId
-                        )
+                        !this.InstanceLifeTimeManager
+                            .IsInstanceInMemory(workflowDurableInstance.InstanceId)
                     ) && base.IsIdle(instanceContext);
             }
             return base.IsIdle(instanceContext);
@@ -178,14 +172,12 @@ namespace System.ServiceModel.Dispatcher
             InstanceContext instanceContext
         )
         {
-            WorkflowDurableInstance workflowDurableInstance = instanceContext
-                .Extensions
+            WorkflowDurableInstance workflowDurableInstance = instanceContext.Extensions
                 .Find<WorkflowDurableInstance>();
 
             if (workflowDurableInstance == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR2.GetString(
@@ -199,21 +191,21 @@ namespace System.ServiceModel.Dispatcher
             if (this.InstanceLifeTimeManager != null)
             {
                 if (
-                    this.InstanceLifeTimeManager.IsInstanceInMemory(
-                        workflowDurableInstance.InstanceId
-                    )
+                    this.InstanceLifeTimeManager
+                        .IsInstanceInMemory(workflowDurableInstance.InstanceId)
                 )
                 {
-                    this.InstanceLifeTimeManager.NotifyWorkflowActivationComplete(
-                        workflowDurableInstance.InstanceId,
-                        Fx.ThunkCallback(new WaitCallback(this.OnWorkflowActivationCompleted)),
-                        new WorkflowActivationCompletedCallbackState(
+                    this.InstanceLifeTimeManager
+                        .NotifyWorkflowActivationComplete(
                             workflowDurableInstance.InstanceId,
-                            instanceContext,
-                            callback
-                        ),
-                        true
-                    );
+                            Fx.ThunkCallback(new WaitCallback(this.OnWorkflowActivationCompleted)),
+                            new WorkflowActivationCompletedCallbackState(
+                                workflowDurableInstance.InstanceId,
+                                instanceContext,
+                                callback
+                            ),
+                            true
+                        );
                 }
                 else
                 {
@@ -279,15 +271,13 @@ namespace System.ServiceModel.Dispatcher
             {
                 if (base.Cache.Contains(callbackState.InstanceId, callbackState.InstanceContext))
                 {
-                    WorkflowDurableInstance durableInstance = callbackState
-                        .InstanceContext
+                    WorkflowDurableInstance durableInstance = callbackState.InstanceContext
                         .Extensions
                         .Find<WorkflowDurableInstance>();
                     if (
                         durableInstance != null
                         && durableInstance.CurrentOperationInvocation != null
-                        && durableInstance
-                            .CurrentOperationInvocation
+                        && durableInstance.CurrentOperationInvocation
                             .HasWorkflowRequestContextBeenSerialized
                         && !durableInstance.CurrentOperationInvocation.IsCompleted
                     )
@@ -297,8 +287,7 @@ namespace System.ServiceModel.Dispatcher
                         // service model to consider this operation invocation failed.
                         try
                         {
-                            durableInstance
-                                .CurrentOperationInvocation
+                            durableInstance.CurrentOperationInvocation
                                 .SendFault(
                                     WorkflowOperationErrorHandler.CreateUnhandledException(
                                         new InvalidOperationException(

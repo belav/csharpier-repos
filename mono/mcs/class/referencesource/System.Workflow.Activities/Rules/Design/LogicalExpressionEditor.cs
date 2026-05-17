@@ -77,8 +77,7 @@ namespace System.Workflow.Activities.Rules.Design
             if (editorService != null)
             {
                 CodeExpression experssion =
-                    typeDescriptorContext
-                        .PropertyDescriptor
+                    typeDescriptorContext.PropertyDescriptor
                         .GetValue(typeDescriptorContext.Instance) as CodeExpression;
                 try
                 {
@@ -142,8 +141,7 @@ namespace System.Workflow.Activities.Rules.Design
                     baseActivity = rs.GetComponent(typeDescriptorContext.Instance) as Activity;
 
                 string conditionName =
-                    typeDescriptorContext
-                        .PropertyDescriptor
+                    typeDescriptorContext.PropertyDescriptor
                         .GetValue(typeDescriptorContext.Instance) as string;
                 ConditionBrowserDialog dlg = new ConditionBrowserDialog(
                     baseActivity,
@@ -199,8 +197,7 @@ namespace System.Workflow.Activities.Rules.Design
 
                 string ruleSetName = null;
                 RuleSetReference ruleSetReference =
-                    typeDescriptorContext
-                        .PropertyDescriptor
+                    typeDescriptorContext.PropertyDescriptor
                         .GetValue(typeDescriptorContext.Instance) as RuleSetReference;
                 if (ruleSetReference != null)
                     ruleSetName = ruleSetReference.RuleSetName;
@@ -208,8 +205,7 @@ namespace System.Workflow.Activities.Rules.Design
                 RuleSetBrowserDialog dlg = new RuleSetBrowserDialog(baseActivity, ruleSetName);
 
                 if (DialogResult.OK == editorService.ShowDialog(dlg))
-                    returnVal = typeDescriptorContext
-                        .PropertyDescriptor
+                    returnVal = typeDescriptorContext.PropertyDescriptor
                         .Converter
                         .ConvertFrom(
                             typeDescriptorContext,

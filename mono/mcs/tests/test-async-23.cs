@@ -47,11 +47,12 @@ public class TestPostContext
 
     static async Task<int> Test()
     {
-        return await Task.Factory.StartNew(() =>
-        {
-            await_mre.WaitOne();
-            return 1;
-        });
+        return await Task.Factory
+            .StartNew(() =>
+            {
+                await_mre.WaitOne();
+                return 1;
+            });
     }
 
     public static int Main()

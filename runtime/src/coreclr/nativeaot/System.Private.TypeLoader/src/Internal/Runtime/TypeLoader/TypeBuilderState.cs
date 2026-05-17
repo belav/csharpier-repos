@@ -59,8 +59,7 @@ namespace Internal.Runtime.TypeLoader
                     // typeof(object[,]) as their template.
                     if (TypeBeingBuilt.IsMdArray)
                     {
-                        _templateType = TypeBeingBuilt
-                            .Context
+                        _templateType = TypeBeingBuilt.Context
                             .ResolveRuntimeTypeHandle(typeof(object[,]).TypeHandle);
                         _templateTypeLoaderNativeLayout = false;
                         _nativeLayoutComputed =
@@ -79,8 +78,7 @@ namespace Internal.Runtime.TypeLoader
                         && (elementType.IsPointer || elementType.IsFunctionPointer)
                     )
                     {
-                        _templateType = TypeBeingBuilt
-                            .Context
+                        _templateType = TypeBeingBuilt.Context
                             .ResolveRuntimeTypeHandle(typeof(char*[]).TypeHandle);
                         _templateTypeLoaderNativeLayout = false;
                         _nativeLayoutComputed =
@@ -305,8 +303,7 @@ namespace Internal.Runtime.TypeLoader
                     {
                         // MDArray types and pointer arrays have the same vtable as the System.Array type they "derive" from.
                         // They do not implement the generic interfaces that make this interesting for normal arrays.
-                        return TypeBeingBuilt
-                            .BaseType
+                        return TypeBeingBuilt.BaseType
                             .GetRuntimeTypeHandle()
                             .ToEETypePtr()
                             ->NumVtableSlots;
@@ -450,14 +447,12 @@ namespace Internal.Runtime.TypeLoader
                         switch (kind)
                         {
                             case BagElementKind.GcStaticDesc:
-                                GcStaticDesc = NativeLayoutInfo
-                                    .LoadContext
+                                GcStaticDesc = NativeLayoutInfo.LoadContext
                                     .GetGCStaticInfo(typeInfoParser.GetUnsigned());
                                 break;
 
                             case BagElementKind.ThreadStaticDesc:
-                                ThreadStaticDesc = NativeLayoutInfo
-                                    .LoadContext
+                                ThreadStaticDesc = NativeLayoutInfo.LoadContext
                                     .GetGCStaticInfo(typeInfoParser.GetUnsigned());
                                 break;
 

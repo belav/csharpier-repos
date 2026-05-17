@@ -156,8 +156,7 @@ expander-partial";
         // Arrange
         var cultureCookie = "c=" + value + "|uic=" + value;
         var request = new HttpRequestMessage(HttpMethod.Get, "http://localhost/TemplateExpander");
-        request
-            .Headers
+        request.Headers
             .Add(
                 "Cookie",
                 new CookieHeaderValue(
@@ -309,8 +308,7 @@ index-content";
             HttpMethod.Get,
             "http://localhost/TemplateExpander/ViewWithLayout"
         );
-        request
-            .Headers
+        request.Headers
             .Add(
                 "Cookie",
                 new CookieHeaderValue(

@@ -103,8 +103,7 @@ namespace Internal.IL.Stubs
 
             if (type.IsNullable)
             {
-                return context
-                    .SystemModule
+                return context.SystemModule
                     .GetKnownType("System.Collections.Generic", $"Nullable{flavor}`1")
                     .MakeInstantiatedType(type.Instantiation[0]);
             }
@@ -112,8 +111,7 @@ namespace Internal.IL.Stubs
             if (type.IsEnum)
             {
                 // Enums have a specialized comparer that avoids boxing
-                return context
-                    .SystemModule
+                return context.SystemModule
                     .GetKnownType("System.Collections.Generic", $"Enum{flavor}`1")
                     .MakeInstantiatedType(type);
             }
@@ -124,8 +122,7 @@ namespace Internal.IL.Stubs
                 return null;
             }
 
-            return context
-                .SystemModule
+            return context.SystemModule
                 .GetKnownType(
                     "System.Collections.Generic",
                     implementsInterfaceOfSelf.Value ? $"Generic{flavor}`1" : $"Object{flavor}`1"
@@ -172,29 +169,25 @@ namespace Internal.IL.Stubs
                 ArrayBuilder<TypeDesc> universalComparers = default(ArrayBuilder<TypeDesc>);
 
                 universalComparers.Add(
-                    context
-                        .SystemModule
+                    context.SystemModule
                         .GetKnownType("System.Collections.Generic", $"Nullable{flavor}`1")
                         .MakeInstantiatedType(type)
                 );
 
                 universalComparers.Add(
-                    context
-                        .SystemModule
+                    context.SystemModule
                         .GetKnownType("System.Collections.Generic", $"Enum{flavor}`1")
                         .MakeInstantiatedType(type)
                 );
 
                 universalComparers.Add(
-                    context
-                        .SystemModule
+                    context.SystemModule
                         .GetKnownType("System.Collections.Generic", $"Generic{flavor}`1")
                         .MakeInstantiatedType(type)
                 );
 
                 universalComparers.Add(
-                    context
-                        .SystemModule
+                    context.SystemModule
                         .GetKnownType("System.Collections.Generic", $"Object{flavor}`1")
                         .MakeInstantiatedType(type)
                 );
@@ -218,12 +211,10 @@ namespace Internal.IL.Stubs
 
                 return new TypeDesc[]
                 {
-                    context
-                        .SystemModule
+                    context.SystemModule
                         .GetKnownType("System.Collections.Generic", $"Nullable{flavor}`1")
                         .MakeInstantiatedType(nullableType),
-                    context
-                        .SystemModule
+                    context.SystemModule
                         .GetKnownType("System.Collections.Generic", $"Object{flavor}`1")
                         .MakeInstantiatedType(type),
                 };
@@ -231,12 +222,10 @@ namespace Internal.IL.Stubs
 
             return new TypeDesc[]
             {
-                context
-                    .SystemModule
+                context.SystemModule
                     .GetKnownType("System.Collections.Generic", $"Generic{flavor}`1")
                     .MakeInstantiatedType(type),
-                context
-                    .SystemModule
+                context.SystemModule
                     .GetKnownType("System.Collections.Generic", $"Object{flavor}`1")
                     .MakeInstantiatedType(type),
             };

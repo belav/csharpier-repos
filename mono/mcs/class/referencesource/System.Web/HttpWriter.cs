@@ -1050,8 +1050,7 @@ namespace System.Web
                 {
                     _substElements = new ArrayList();
                     // dynamic compression is not compatible with post cache substitution
-                    _response
-                        .Context
+                    _response.Context
                         .Request
                         .SetDynamicCompression(
                             false /*enable*/
@@ -1572,8 +1571,7 @@ namespace System.Web
             // re-enable dynamic compression if we are about to clear substitution blocks
             if (_substElements != null)
             {
-                _response
-                    .Context
+                _response.Context
                     .Request
                     .SetDynamicCompression(
                         true /*enable*/
@@ -1670,8 +1668,7 @@ namespace System.Web
                 }
 
                 // re-enable dynamic compression when we have a snapshot of the subst blocks.
-                _response
-                    .Context
+                _response.Context
                     .Request
                     .SetDynamicCompression(
                         true /*enable*/
@@ -2030,8 +2027,7 @@ namespace System.Web
                 }
 
                 int n = (count < _charBufferFree) ? count : _charBufferFree;
-                System
-                    .Array
+                System.Array
                     .Copy(buffer, index, charBuffer, _charBufferLength - _charBufferFree, n);
                 _charBufferFree -= n;
                 index += n;

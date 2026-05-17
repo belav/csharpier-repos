@@ -67,8 +67,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.TypeInferrer
 
             if (await CanUseSpeculativeSemanticModelAsync(document, textSpan.Start))
             {
-                var document2 = workspaceFixture
-                    .Target
+                var document2 = workspaceFixture.Target
                     .UpdateDocument(text, sourceCodeKind, cleanBeforeUpdate: false);
                 await TestWorkerAsync(document2, textSpan, expectedType, mode);
             }

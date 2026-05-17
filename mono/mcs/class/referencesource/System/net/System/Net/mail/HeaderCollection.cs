@@ -150,8 +150,7 @@ namespace System.Net.Mime
             }
             else if (id == MailHeaderID.ContentDisposition && part is MimePart)
             {
-                ((MimePart)part)
-                    .ContentDisposition
+                ((MimePart)part).ContentDisposition
                     .Set(value.ToLower(CultureInfo.InvariantCulture), this);
             }
             else
@@ -196,8 +195,7 @@ namespace System.Net.Mime
             }
             else if (id == MailHeaderID.ContentDisposition && part is MimePart)
             {
-                ((MimePart)part)
-                    .ContentDisposition
+                ((MimePart)part).ContentDisposition
                     .Set(value.ToLower(CultureInfo.InvariantCulture), this);
             }
             else

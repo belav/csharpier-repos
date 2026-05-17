@@ -345,8 +345,7 @@ namespace System.Net.Http
             string? cookiesFromContainer = null;
             if (_pool.Settings._useCookies)
             {
-                cookiesFromContainer = _pool
-                    .Settings
+                cookiesFromContainer = _pool.Settings
                     ._cookieContainer!
                     .GetCookieHeader(request.RequestUri);
                 if (cookiesFromContainer == "")
@@ -408,8 +407,7 @@ namespace System.Net.Http
         {
             Debug.Assert(_currentRequest is not null);
 
-            HeaderEncodingSelector<HttpRequestMessage>? encodingSelector = _pool
-                .Settings
+            HeaderEncodingSelector<HttpRequestMessage>? encodingSelector = _pool.Settings
                 ._requestHeaderEncodingSelector;
             ref string[]? headerValues = ref t_headerValues;
 
@@ -1083,8 +1081,7 @@ namespace System.Net.Http
             // Copy all of the data to the server.
             if (async)
             {
-                await request
-                    .Content!
+                await request.Content!
                     .CopyToAsync(stream, _transportContext, cancellationToken)
                     .ConfigureAwait(false);
             }
@@ -1259,8 +1256,7 @@ namespace System.Net.Http
                 {
                     try
                     {
-                        response.ReasonPhrase = HttpRuleParser
-                            .DefaultHttpEncoding
+                        response.ReasonPhrase = HttpRuleParser.DefaultHttpEncoding
                             .GetString(reasonBytes);
                     }
                     catch (FormatException formatEx)
@@ -1463,8 +1459,7 @@ namespace System.Net.Http
                 ThrowForInvalidHeaderName(name);
             }
 
-            Encoding? valueEncoding = _pool
-                .Settings
+            Encoding? valueEncoding = _pool.Settings
                 ._responseHeaderEncodingSelector
                 ?.Invoke(descriptor.Name, _currentRequest!);
 
@@ -2255,8 +2250,7 @@ namespace System.Net.Http
                             if (desiredBufferSize > currentCapacity)
                             {
                                 origReadBuffer = _readBuffer.DangerousGetUnderlyingBuffer();
-                                byte[] pooledBuffer = ArrayPool<byte>
-                                    .Shared
+                                byte[] pooledBuffer = ArrayPool<byte>.Shared
                                     .Rent(desiredBufferSize);
                                 _readBuffer = new ArrayBuffer(pooledBuffer);
                             }
@@ -2450,8 +2444,7 @@ namespace System.Net.Http
             string message,
             [CallerMemberName] string? memberName = null
         ) =>
-            NetEventSource
-                .Log
+            NetEventSource.Log
                 .HandlerMessage(
                     _pool?.GetHashCode() ?? 0, // pool ID
                     GetHashCode(), // connection ID

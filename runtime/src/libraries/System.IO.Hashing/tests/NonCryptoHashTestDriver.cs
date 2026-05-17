@@ -48,10 +48,8 @@ namespace System.IO.Hashing.Tests
             {
                 if (info.IsFamily && info.Name.EndsWith(DriverSuffix, StringComparison.Ordinal))
                 {
-                    string targetMethodName = info.Name.Substring(
-                        0,
-                        info.Name.Length - DriverSuffix.Length
-                    );
+                    string targetMethodName = info.Name
+                        .Substring(0, info.Name.Length - DriverSuffix.Length);
 
                     MethodInfo info2 = implType.GetMethod(
                         targetMethodName,

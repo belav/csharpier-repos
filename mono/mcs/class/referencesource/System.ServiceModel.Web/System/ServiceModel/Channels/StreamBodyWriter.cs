@@ -116,8 +116,7 @@ namespace System.ServiceModel.Channels
             {
                 get
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperWarning(
                             new InvalidOperationException(
                                 SR2.GetString(
@@ -133,8 +132,7 @@ namespace System.ServiceModel.Channels
             {
                 get
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperWarning(
                             new InvalidOperationException(
                                 SR2.GetString(
@@ -146,8 +144,7 @@ namespace System.ServiceModel.Channels
                 }
                 set
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperWarning(
                             new InvalidOperationException(
                                 SR2.GetString(
@@ -161,8 +158,7 @@ namespace System.ServiceModel.Channels
 
             public override int Read(byte[] buffer, int offset, int count)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperWarning(
                         new InvalidOperationException(
                             SR2.GetString(SR2.XmlWriterBackedStreamMethodNotSupported, "Read")
@@ -178,8 +174,7 @@ namespace System.ServiceModel.Channels
                 object state
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperWarning(
                         new InvalidOperationException(
                             SR2.GetString(SR2.XmlWriterBackedStreamMethodNotSupported, "BeginRead")
@@ -189,8 +184,7 @@ namespace System.ServiceModel.Channels
 
             public override int EndRead(IAsyncResult asyncResult)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperWarning(
                         new InvalidOperationException(
                             SR2.GetString(SR2.XmlWriterBackedStreamMethodNotSupported, "EndRead")
@@ -200,8 +194,7 @@ namespace System.ServiceModel.Channels
 
             public override int ReadByte()
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperWarning(
                         new InvalidOperationException(
                             SR2.GetString(SR2.XmlWriterBackedStreamMethodNotSupported, "ReadByte")
@@ -211,8 +204,7 @@ namespace System.ServiceModel.Channels
 
             public override long Seek(long offset, SeekOrigin origin)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperWarning(
                         new InvalidOperationException(
                             SR2.GetString(SR2.XmlWriterBackedStreamMethodNotSupported, "Seek")
@@ -222,8 +214,7 @@ namespace System.ServiceModel.Channels
 
             public override void SetLength(long value)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperWarning(
                         new InvalidOperationException(
                             SR2.GetString(SR2.XmlWriterBackedStreamMethodNotSupported, "SetLength")

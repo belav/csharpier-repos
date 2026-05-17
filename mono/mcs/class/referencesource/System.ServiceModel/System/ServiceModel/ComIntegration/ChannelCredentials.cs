@@ -33,8 +33,7 @@ namespace System.ServiceModel.ComIntegration
         )
         {
             if (channelBuilderSettings == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(SR.GetString(SR.CannotCreateChannelOption))
                     );
@@ -179,8 +178,7 @@ namespace System.ServiceModel.ComIntegration
                     channelCredentials = new ClientCredentials();
                     behaviors.Add(channelCredentials);
                 }
-                channelCredentials
-                    .ClientCertificate
+                channelCredentials.ClientCertificate
                     .SetCertificate(location, name, type, findValue);
             }
         }
@@ -252,8 +250,7 @@ namespace System.ServiceModel.ComIntegration
                     channelCredentials = new ClientCredentials();
                     behaviors.Add(channelCredentials);
                 }
-                channelCredentials
-                    .ServiceCertificate
+                channelCredentials.ServiceCertificate
                     .SetDefaultCertificate(location, name, type, findValue);
             }
         }

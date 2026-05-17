@@ -104,8 +104,7 @@ namespace System.Runtime.Serialization
             }
             // m_obj must ALWAYS have atleast one slot empty (null).
             Fx.Assert("Object table overflow");
-            throw System
-                .Runtime
+            throw System.Runtime
                 .Serialization
                 .DiagnosticUtility
                 .ExceptionUtility
@@ -161,8 +160,7 @@ namespace System.Runtime.Serialization
             }
             // m_obj must ALWAYS have atleast one slot empty (null).
             Fx.Assert("Object table overflow");
-            throw System
-                .Runtime
+            throw System.Runtime
                 .Serialization
                 .DiagnosticUtility
                 .ExceptionUtility

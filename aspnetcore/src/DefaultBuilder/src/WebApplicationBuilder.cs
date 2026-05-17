@@ -108,8 +108,7 @@ public sealed class WebApplicationBuilder : IHostApplicationBuilder
         // This won't be added by CreateEmptyApplicationBuilder.
         configuration.AddEnvironmentVariables(prefix: "DOTNET_");
 
-        _hostApplicationBuilder = Microsoft
-            .Extensions
+        _hostApplicationBuilder = Microsoft.Extensions
             .Hosting
             .Host
             .CreateEmptyApplicationBuilder(
@@ -190,8 +189,7 @@ public sealed class WebApplicationBuilder : IHostApplicationBuilder
         // empty builder should still default the ContentRoot as usual. This is the expected behavior for all WebApplicationBuilders.
         SetDefaultContentRoot(options, configuration);
 
-        _hostApplicationBuilder = Microsoft
-            .Extensions
+        _hostApplicationBuilder = Microsoft.Extensions
             .Hosting
             .Host
             .CreateEmptyApplicationBuilder(
@@ -511,8 +509,7 @@ public sealed class WebApplicationBuilder : IHostApplicationBuilder
         {
             // If this is set, someone called UseRouting() when a global route builder was already set
             if (
-                !_builtApplication
-                    .Properties
+                !_builtApplication.Properties
                     .TryGetValue(EndpointRouteBuilderKey, out var localRouteBuilder)
             )
             {
@@ -529,8 +526,7 @@ public sealed class WebApplicationBuilder : IHostApplicationBuilder
 
         // Process authorization and authentication middlewares independently to avoid
         // registering middlewares for services that do not exist
-        var serviceProviderIsService = _builtApplication
-            .Services
+        var serviceProviderIsService = _builtApplication.Services
             .GetService<IServiceProviderIsService>();
         if (serviceProviderIsService?.IsService(typeof(IAuthenticationSchemeProvider)) is true)
         {

@@ -225,8 +225,7 @@ public abstract class CompositeRowValueFactory
             }
             else
             {
-                var modification = command
-                    .ColumnModifications
+                var modification = command.ColumnModifications
                     .FirstOrDefault(m => m.ColumnName == column.Name);
                 if (modification == null)
                 {

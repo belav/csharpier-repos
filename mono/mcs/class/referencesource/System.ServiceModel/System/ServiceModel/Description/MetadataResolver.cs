@@ -280,20 +280,22 @@ namespace System.ServiceModel.Description
 
                 if (this.mode == MetadataExchangeClientMode.HttpGet)
                 {
-                    result = this.client.BeginGetMetadata(
-                        this.address.Uri,
-                        MetadataExchangeClientMode.HttpGet,
-                        Fx.ThunkCallback(new AsyncCallback(this.EndGetMetadataSet)),
-                        null
-                    );
+                    result = this.client
+                        .BeginGetMetadata(
+                            this.address.Uri,
+                            MetadataExchangeClientMode.HttpGet,
+                            Fx.ThunkCallback(new AsyncCallback(this.EndGetMetadataSet)),
+                            null
+                        );
                 }
                 else
                 {
-                    result = this.client.BeginGetMetadata(
-                        this.address,
-                        Fx.ThunkCallback(new AsyncCallback(this.EndGetMetadataSet)),
-                        null
-                    );
+                    result = this.client
+                        .BeginGetMetadata(
+                            this.address,
+                            Fx.ThunkCallback(new AsyncCallback(this.EndGetMetadataSet)),
+                            null
+                        );
                 }
 
                 if (result.CompletedSynchronously)
@@ -406,8 +408,7 @@ namespace System.ServiceModel.Description
                 isEmpty = false;
                 if (cd == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgument(
                             SR.GetString(SR.SFxMetadataResolverKnownContractsCannotContainNull)
                         );
@@ -416,8 +417,7 @@ namespace System.ServiceModel.Description
                 XmlQualifiedName qname = WsdlExporter.WsdlNamingHelper.GetPortTypeQName(cd);
                 if (qnames.Contains(qname))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgument(
                             SR.GetString(
                                 SR.SFxMetadataResolverKnownContractsUniqueQNames,
@@ -432,8 +432,7 @@ namespace System.ServiceModel.Description
 
             if (isEmpty)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(
                         SR.GetString(SR.SFxMetadataResolverKnownContractsArgumentCannotBeEmpty)
                     );

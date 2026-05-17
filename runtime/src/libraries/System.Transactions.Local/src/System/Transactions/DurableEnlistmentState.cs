@@ -133,8 +133,7 @@ namespace System.Transactions
                 }
                 else
                 {
-                    enlistment
-                        .PromotableSinglePhaseNotification
+                    enlistment.PromotableSinglePhaseNotification
                         .Rollback(enlistment.SinglePhaseEnlistment);
                 }
             }
@@ -186,14 +185,12 @@ namespace System.Transactions
                 // Send the Commit notification to the enlistment
                 if (enlistment.SinglePhaseNotification != null)
                 {
-                    enlistment
-                        .SinglePhaseNotification
+                    enlistment.SinglePhaseNotification
                         .SinglePhaseCommit(enlistment.SinglePhaseEnlistment);
                 }
                 else
                 {
-                    enlistment
-                        .PromotableSinglePhaseNotification
+                    enlistment.PromotableSinglePhaseNotification
                         .SinglePhaseCommit(enlistment.SinglePhaseEnlistment);
                 }
                 spcCommitted = true;

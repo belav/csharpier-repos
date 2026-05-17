@@ -45,43 +45,44 @@ namespace System.Threading.Tasks.Tests
                 wakeLoop.Wait();
             };
 
-            Task wrappedTask = Task.Factory.StartNew(
-                delegate
-                {
-                    CancellationToken ct = cts.Token;
-                    switch (_api)
+            Task wrappedTask = Task.Factory
+                .StartNew(
+                    delegate
                     {
-                        case API.For:
-                            result = Parallel.For(
-                                0,
-                                int.MaxValue,
-                                new ParallelOptions() { CancellationToken = ct },
-                                (i) => body()
-                            );
-                            break;
+                        CancellationToken ct = cts.Token;
+                        switch (_api)
+                        {
+                            case API.For:
+                                result = Parallel.For(
+                                    0,
+                                    int.MaxValue,
+                                    new ParallelOptions() { CancellationToken = ct },
+                                    (i) => body()
+                                );
+                                break;
 
-                        case API.For64:
-                            result = Parallel.For(
-                                0,
-                                long.MaxValue,
-                                new ParallelOptions() { CancellationToken = ct },
-                                (i) => body()
-                            );
-                            break;
+                            case API.For64:
+                                result = Parallel.For(
+                                    0,
+                                    long.MaxValue,
+                                    new ParallelOptions() { CancellationToken = ct },
+                                    (i) => body()
+                                );
+                                break;
 
-                        case API.Foreach:
-                            result = Parallel.ForEach<int>(
-                                GetIEnumerable(),
-                                new ParallelOptions() { CancellationToken = ct },
-                                (i) => body()
-                            );
-                            break;
-                    }
-                },
-                cts.Token,
-                TaskCreationOptions.None,
-                TaskScheduler.Default
-            );
+                            case API.Foreach:
+                                result = Parallel.ForEach<int>(
+                                    GetIEnumerable(),
+                                    new ParallelOptions() { CancellationToken = ct },
+                                    (i) => body()
+                                );
+                                break;
+                        }
+                    },
+                    cts.Token,
+                    TaskCreationOptions.None,
+                    TaskScheduler.Default
+                );
 
             allowCancel.Wait();
             cts.Cancel();

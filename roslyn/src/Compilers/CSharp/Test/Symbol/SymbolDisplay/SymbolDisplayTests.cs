@@ -3758,11 +3758,9 @@ class C1 {
                 global.GetTypeMembers("D", 0).Single();
 
             var format = new SymbolDisplayFormat(
-                globalNamespaceStyle: SymbolDisplayFormat
-                    .CSharpErrorMessageFormat
+                globalNamespaceStyle: SymbolDisplayFormat.CSharpErrorMessageFormat
                     .GlobalNamespaceStyle,
-                typeQualificationStyle: SymbolDisplayFormat
-                    .CSharpErrorMessageFormat
+                typeQualificationStyle: SymbolDisplayFormat.CSharpErrorMessageFormat
                     .TypeQualificationStyle,
                 genericsOptions: SymbolDisplayFormat.CSharpErrorMessageFormat.GenericsOptions,
                 memberOptions: SymbolDisplayFormat.CSharpErrorMessageFormat.MemberOptions,
@@ -3772,8 +3770,7 @@ class C1 {
                 kindOptions: SymbolDisplayKindOptions.IncludeNamespaceKeyword
                     | SymbolDisplayKindOptions.IncludeTypeKeyword,
                 delegateStyle: SymbolDisplayDelegateStyle.NameAndSignature,
-                miscellaneousOptions: SymbolDisplayFormat
-                    .CSharpErrorMessageFormat
+                miscellaneousOptions: SymbolDisplayFormat.CSharpErrorMessageFormat
                     .MiscellaneousOptions
             );
 
@@ -3796,8 +3793,7 @@ class C1 {
                 parameterOptions: SymbolDisplayParameterOptions.IncludeName
                     | SymbolDisplayParameterOptions.IncludeType,
                 delegateStyle: SymbolDisplayDelegateStyle.NameAndSignature,
-                miscellaneousOptions: SymbolDisplayFormat
-                    .CSharpErrorMessageFormat
+                miscellaneousOptions: SymbolDisplayFormat.CSharpErrorMessageFormat
                     .MiscellaneousOptions
             );
 
@@ -4999,8 +4995,7 @@ public class C
                 var compilation = CreateCompilation(text);
                 compilation.VerifyDiagnostics();
 
-                var symbol = compilation
-                    .GlobalNamespace
+                var symbol = compilation.GlobalNamespace
                     .GetMember<NamedTypeSymbol>("C")
                     .GetMember<MethodSymbol>("M");
                 Assert.Equal(
@@ -6859,8 +6854,7 @@ class C
             var compilation = (Compilation)CreateCompilation(source);
             var formatWithoutAllowDefaultLiteral = SymbolDisplayFormat.MinimallyQualifiedFormat;
             Assert.False(
-                formatWithoutAllowDefaultLiteral
-                    .MiscellaneousOptions
+                formatWithoutAllowDefaultLiteral.MiscellaneousOptions
                     .IncludesOption(SymbolDisplayMiscellaneousOptions.AllowDefaultLiteral)
             );
             var formatWithAllowDefaultLiteral =
@@ -6868,8 +6862,7 @@ class C
                     SymbolDisplayMiscellaneousOptions.AllowDefaultLiteral
                 );
             Assert.True(
-                formatWithAllowDefaultLiteral
-                    .MiscellaneousOptions
+                formatWithAllowDefaultLiteral.MiscellaneousOptions
                     .IncludesOption(SymbolDisplayMiscellaneousOptions.AllowDefaultLiteral)
             );
 
@@ -7067,8 +7060,7 @@ class C
             var compilation = (Compilation)CreateCompilation(source);
             var formatWithoutAllowDefaultLiteral = SymbolDisplayFormat.MinimallyQualifiedFormat;
             Assert.False(
-                formatWithoutAllowDefaultLiteral
-                    .MiscellaneousOptions
+                formatWithoutAllowDefaultLiteral.MiscellaneousOptions
                     .IncludesOption(SymbolDisplayMiscellaneousOptions.AllowDefaultLiteral)
             );
             var formatWithAllowDefaultLiteral =
@@ -7076,8 +7068,7 @@ class C
                     SymbolDisplayMiscellaneousOptions.AllowDefaultLiteral
                 );
             Assert.True(
-                formatWithAllowDefaultLiteral
-                    .MiscellaneousOptions
+                formatWithAllowDefaultLiteral.MiscellaneousOptions
                     .IncludesOption(SymbolDisplayMiscellaneousOptions.AllowDefaultLiteral)
             );
 
@@ -7128,8 +7119,7 @@ class C
             var compilation = (Compilation)CreateCompilation(source);
             var formatWithoutAllowDefaultLiteral = SymbolDisplayFormat.MinimallyQualifiedFormat;
             Assert.False(
-                formatWithoutAllowDefaultLiteral
-                    .MiscellaneousOptions
+                formatWithoutAllowDefaultLiteral.MiscellaneousOptions
                     .IncludesOption(SymbolDisplayMiscellaneousOptions.AllowDefaultLiteral)
             );
             var formatWithAllowDefaultLiteral =
@@ -7137,8 +7127,7 @@ class C
                     SymbolDisplayMiscellaneousOptions.AllowDefaultLiteral
                 );
             Assert.True(
-                formatWithAllowDefaultLiteral
-                    .MiscellaneousOptions
+                formatWithAllowDefaultLiteral.MiscellaneousOptions
                     .IncludesOption(SymbolDisplayMiscellaneousOptions.AllowDefaultLiteral)
             );
 
@@ -7528,8 +7517,7 @@ class C
                 local.ToMinimalDisplayParts(
                     semanticModel,
                     declarator.SpanStart,
-                    SymbolDisplayFormat
-                        .MinimallyQualifiedFormat
+                    SymbolDisplayFormat.MinimallyQualifiedFormat
                         .AddLocalOptions(SymbolDisplayLocalOptions.IncludeRef)
                 ),
                 "int x",
@@ -7567,8 +7555,7 @@ class C
                 local.ToMinimalDisplayParts(
                     semanticModel,
                     declarator.SpanStart,
-                    SymbolDisplayFormat
-                        .MinimallyQualifiedFormat
+                    SymbolDisplayFormat.MinimallyQualifiedFormat
                         .AddLocalOptions(SymbolDisplayLocalOptions.IncludeRef)
                 ),
                 "ref int x",
@@ -7620,8 +7607,7 @@ class C
                 local.ToMinimalDisplayParts(
                     semanticModel,
                     declarator.SpanStart,
-                    SymbolDisplayFormat
-                        .MinimallyQualifiedFormat
+                    SymbolDisplayFormat.MinimallyQualifiedFormat
                         .AddLocalOptions(SymbolDisplayLocalOptions.IncludeRef)
                 ),
                 "ref readonly int x",
@@ -7713,8 +7699,7 @@ enum E : long
             TestSymbolDescription(
                 text,
                 g => g.GetTypeMembers("E").Single().GetField("A"),
-                SymbolDisplayFormat
-                    .MinimallyQualifiedFormat
+                SymbolDisplayFormat.MinimallyQualifiedFormat
                     .AddMemberOptions(SymbolDisplayMemberOptions.IncludeConstantValue),
                 "E.A = 0",
                 SymbolDisplayPartKind.EnumName,
@@ -7742,8 +7727,7 @@ namespace Nested
             var comp = CreateCompilation(source).VerifyDiagnostics();
             var semanticModel = comp.GetSemanticModel(comp.SyntaxTrees.Single());
 
-            var declarations = semanticModel
-                .SyntaxTree
+            var declarations = semanticModel.SyntaxTree
                 .GetRoot()
                 .DescendantNodes()
                 .Where(n => n.Kind() == SyntaxKind.StructDeclaration)
@@ -7751,8 +7735,7 @@ namespace Nested
                 .ToArray();
             Assert.Equal(2, declarations.Length);
 
-            var format = SymbolDisplayFormat
-                .TestFormat
+            var format = SymbolDisplayFormat.TestFormat
                 .AddKindOptions(SymbolDisplayKindOptions.IncludeTypeKeyword);
 
             Verify(
@@ -7793,8 +7776,7 @@ namespace Nested
             var comp = CreateCompilation(source).VerifyDiagnostics();
             var semanticModel = comp.GetSemanticModel(comp.SyntaxTrees.Single());
 
-            var declarations = semanticModel
-                .SyntaxTree
+            var declarations = semanticModel.SyntaxTree
                 .GetRoot()
                 .DescendantNodes()
                 .Where(n => n.Kind() == SyntaxKind.StructDeclaration)
@@ -7802,8 +7784,7 @@ namespace Nested
                 .ToArray();
             Assert.Equal(2, declarations.Length);
 
-            var format = SymbolDisplayFormat
-                .TestFormat
+            var format = SymbolDisplayFormat.TestFormat
                 .AddKindOptions(SymbolDisplayKindOptions.IncludeTypeKeyword);
 
             Verify(
@@ -7844,8 +7825,7 @@ namespace Nested
             var comp = CreateCompilation(source).VerifyDiagnostics();
             var semanticModel = comp.GetSemanticModel(comp.SyntaxTrees.Single());
 
-            var declarations = semanticModel
-                .SyntaxTree
+            var declarations = semanticModel.SyntaxTree
                 .GetRoot()
                 .DescendantNodes()
                 .Where(n => n.Kind() == SyntaxKind.StructDeclaration)
@@ -7853,8 +7833,7 @@ namespace Nested
                 .ToArray();
             Assert.Equal(2, declarations.Length);
 
-            var format = SymbolDisplayFormat
-                .TestFormat
+            var format = SymbolDisplayFormat.TestFormat
                 .AddKindOptions(SymbolDisplayKindOptions.IncludeTypeKeyword);
 
             Verify(
@@ -7897,8 +7876,7 @@ struct X
     readonly event System.Action E2 { remove { } }
 }
 ";
-            var format = SymbolDisplayFormat
-                .TestFormat
+            var format = SymbolDisplayFormat.TestFormat
                 .AddMemberOptions(SymbolDisplayMemberOptions.IncludeModifiers)
                 .AddMiscellaneousOptions(SymbolDisplayMiscellaneousOptions.UseSpecialTypes);
 
@@ -7929,8 +7907,7 @@ struct X
             var semanticModel = comp.GetSemanticModel(comp.SyntaxTrees.Single());
 
             var declaration = (BaseTypeDeclarationSyntax)
-                semanticModel
-                    .SyntaxTree
+                semanticModel.SyntaxTree
                     .GetRoot()
                     .DescendantNodes()
                     .Single(n => n.Kind() == SyntaxKind.StructDeclaration);
@@ -8011,8 +7988,7 @@ struct X
     readonly event System.Action E { add {} remove {} }
 }
 ";
-            var format = SymbolDisplayFormat
-                .TestFormat
+            var format = SymbolDisplayFormat.TestFormat
                 .AddMemberOptions(SymbolDisplayMemberOptions.IncludeModifiers)
                 .AddMiscellaneousOptions(SymbolDisplayMiscellaneousOptions.UseSpecialTypes);
 
@@ -8020,8 +7996,7 @@ struct X
             var semanticModel = comp.GetSemanticModel(comp.SyntaxTrees.Single());
 
             var declaration = (BaseTypeDeclarationSyntax)
-                semanticModel
-                    .SyntaxTree
+                semanticModel.SyntaxTree
                     .GetRoot()
                     .DescendantNodes()
                     .Single(n => n.Kind() == SyntaxKind.StructDeclaration);
@@ -8312,8 +8287,7 @@ readonly struct X
     event System.Action E { add {} remove {} }
 }
 ";
-            var format = SymbolDisplayFormat
-                .TestFormat
+            var format = SymbolDisplayFormat.TestFormat
                 .AddMemberOptions(SymbolDisplayMemberOptions.IncludeModifiers)
                 .AddMiscellaneousOptions(SymbolDisplayMiscellaneousOptions.UseSpecialTypes);
 
@@ -8321,8 +8295,7 @@ readonly struct X
             var semanticModel = comp.GetSemanticModel(comp.SyntaxTrees.Single());
 
             var declaration = (BaseTypeDeclarationSyntax)
-                semanticModel
-                    .SyntaxTree
+                semanticModel.SyntaxTree
                     .GetRoot()
                     .DescendantNodes()
                     .Single(n => n.Kind() == SyntaxKind.StructDeclaration);
@@ -8498,8 +8471,7 @@ namespace Nested
                 + cb
                 + @"
 ";
-            var format = SymbolDisplayFormat
-                .TestFormat
+            var format = SymbolDisplayFormat.TestFormat
                 .AddMemberOptions(SymbolDisplayMemberOptions.IncludeModifiers)
                 .AddMiscellaneousOptions(SymbolDisplayMiscellaneousOptions.UseSpecialTypes);
 
@@ -8511,8 +8483,7 @@ namespace Nested
             var semanticModel = comp.GetSemanticModel(comp.SyntaxTrees.Single());
 
             var declaration = (BaseTypeDeclarationSyntax)
-                semanticModel
-                    .SyntaxTree
+                semanticModel.SyntaxTree
                     .GetRoot()
                     .DescendantNodes()
                     .Single(n => n.Kind() == SyntaxKind.StructDeclaration);
@@ -8546,13 +8517,11 @@ End Structure";
             var comp = CreateVisualBasicCompilation(source).VerifyDiagnostics();
             var semanticModel = comp.GetSemanticModel(comp.SyntaxTrees.Single());
 
-            var structure = semanticModel
-                .SyntaxTree
+            var structure = semanticModel.SyntaxTree
                 .GetRoot()
                 .DescendantNodes()
                 .Single(n => n.RawKind == (int)VisualBasic.SyntaxKind.StructureStatement);
-            var format = SymbolDisplayFormat
-                .TestFormat
+            var format = SymbolDisplayFormat.TestFormat
                 .AddKindOptions(SymbolDisplayKindOptions.IncludeTypeKeyword);
 
             Verify(
@@ -8570,8 +8539,7 @@ End Structure";
             TestSymbolDescription(
                 "class X<T> where T : System.Enum { }",
                 global => global.GetTypeMember("X"),
-                SymbolDisplayFormat
-                    .TestFormat
+                SymbolDisplayFormat.TestFormat
                     .WithGenericsOptions(
                         SymbolDisplayGenericsOptions.IncludeTypeParameters
                             | SymbolDisplayGenericsOptions.IncludeTypeConstraints
@@ -8615,8 +8583,7 @@ End Structure";
             TestSymbolDescription(
                 "class X<T> where T : System.Delegate { }",
                 global => global.GetTypeMember("X"),
-                SymbolDisplayFormat
-                    .TestFormat
+                SymbolDisplayFormat.TestFormat
                     .WithGenericsOptions(
                         SymbolDisplayGenericsOptions.IncludeTypeParameters
                             | SymbolDisplayGenericsOptions.IncludeTypeConstraints
@@ -8660,8 +8627,7 @@ End Structure";
             TestSymbolDescription(
                 "class X<T> where T : System.MulticastDelegate { }",
                 global => global.GetTypeMember("X"),
-                SymbolDisplayFormat
-                    .TestFormat
+                SymbolDisplayFormat.TestFormat
                     .WithGenericsOptions(
                         SymbolDisplayGenericsOptions.IncludeTypeParameters
                             | SymbolDisplayGenericsOptions.IncludeTypeConstraints
@@ -8705,8 +8671,7 @@ End Structure";
             TestSymbolDescription(
                 "class X<T> where T : unmanaged { }",
                 global => global.GetTypeMember("X"),
-                SymbolDisplayFormat
-                    .TestFormat
+                SymbolDisplayFormat.TestFormat
                     .AddGenericsOptions(SymbolDisplayGenericsOptions.IncludeTypeConstraints),
                 "X<T> where T : unmanaged",
                 SymbolDisplayPartKind.ClassName,
@@ -8734,8 +8699,7 @@ class X
     void M<T>() where T : unmanaged, System.IDisposable { }
 }",
                 global => global.GetTypeMember("X").GetMethod("M"),
-                SymbolDisplayFormat
-                    .TestFormat
+                SymbolDisplayFormat.TestFormat
                     .AddGenericsOptions(SymbolDisplayGenericsOptions.IncludeTypeConstraints),
                 "void X.M<T>() where T : unmanaged, System.IDisposable",
                 SymbolDisplayPartKind.Keyword,
@@ -8770,8 +8734,7 @@ class X
             TestSymbolDescription(
                 "delegate void D<T>() where T : unmanaged;",
                 global => global.GetTypeMember("D"),
-                SymbolDisplayFormat
-                    .TestFormat
+                SymbolDisplayFormat.TestFormat
                     .AddGenericsOptions(SymbolDisplayGenericsOptions.IncludeTypeConstraints),
                 "D<T> where T : unmanaged",
                 SymbolDisplayPartKind.DelegateName,
@@ -9379,8 +9342,7 @@ class C
             var semanticModel = comp.GetSemanticModel(comp.SyntaxTrees.Single());
             var syntaxTree = semanticModel.SyntaxTree;
             var declaration = (LocalDeclarationStatementSyntax)
-                semanticModel
-                    .SyntaxTree
+                semanticModel.SyntaxTree
                     .GetRoot()
                     .DescendantNodes()
                     .Single(n => n.Kind() == SyntaxKind.LocalDeclarationStatement);
@@ -9442,8 +9404,7 @@ class C
             var semanticModel = comp.GetSemanticModel(comp.SyntaxTrees.Single());
             var syntaxTree = semanticModel.SyntaxTree;
             var declaration = (LocalDeclarationStatementSyntax)
-                semanticModel
-                    .SyntaxTree
+                semanticModel.SyntaxTree
                     .GetRoot()
                     .DescendantNodes()
                     .Single(n => n.Kind() == SyntaxKind.LocalDeclarationStatement);
@@ -9745,8 +9706,7 @@ class Program
             comp.VerifyDiagnostics();
             var method = comp.GetMember<MethodSymbol>("Program.F");
 
-            var formatTypeOnly = SymbolDisplayFormat
-                .TestFormat
+            var formatTypeOnly = SymbolDisplayFormat.TestFormat
                 .WithParameterOptions(
                     SymbolDisplayParameterOptions.IncludeType
                         | SymbolDisplayParameterOptions.IncludeName
@@ -9927,8 +9887,7 @@ class Program
             var comp = CreateCompilation(new[] { source, UnscopedRefAttributeDefinition });
             comp.VerifyDiagnostics();
 
-            var format = SymbolDisplayFormat
-                .TestFormat
+            var format = SymbolDisplayFormat.TestFormat
                 .WithParameterOptions(
                     SymbolDisplayParameterOptions.IncludeType
                         | SymbolDisplayParameterOptions.IncludeName
@@ -9970,8 +9929,7 @@ class Program
                 .ToArray();
             var locals = decls.Select(d => model.GetDeclaredSymbol(d)).ToArray();
 
-            var formatTypeOnly = SymbolDisplayFormat
-                .TestFormat
+            var formatTypeOnly = SymbolDisplayFormat.TestFormat
                 .WithLocalOptions(SymbolDisplayLocalOptions.IncludeType);
             var formatTypeRefAndScoped = formatTypeOnly.AddLocalOptions(
                 SymbolDisplayLocalOptions.IncludeRef

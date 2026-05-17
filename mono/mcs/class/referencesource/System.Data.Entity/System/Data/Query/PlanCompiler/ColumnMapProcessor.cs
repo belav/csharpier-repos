@@ -378,14 +378,12 @@ namespace System.Data.Query.PlanCompiler
 
             if (includeSupertypeRelProperties)
             {
-                relProperties = m_typeInfo
-                    .RelPropertyHelper
+                relProperties = m_typeInfo.RelPropertyHelper
                     .GetRelProperties(typeInfo.Type.EdmType as md.EntityTypeBase);
             }
             else
             {
-                relProperties = m_typeInfo
-                    .RelPropertyHelper
+                relProperties = m_typeInfo.RelPropertyHelper
                     .GetDeclaredOnlyRelProperties(typeInfo.Type.EdmType as md.EntityTypeBase);
             }
 

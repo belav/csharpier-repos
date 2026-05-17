@@ -34,14 +34,12 @@ namespace System.Runtime.Serialization
         {
             if (type == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("type"));
             }
             if (pathToMember == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("pathToMember"));
             }
 
@@ -85,8 +83,7 @@ namespace System.Runtime.Serialization
             {
                 return ProcessClassDataContract((ClassDataContract)contract, context, memberNode);
             }
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(
                     XmlObjectSerializer.CreateSerializationException(
                         SR.GetString(SR.QueryGeneratorPathToMemberNotFound)
@@ -112,8 +109,7 @@ namespace System.Runtime.Serialization
                     return member.MemberTypeContract;
                 }
             }
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(
                     XmlObjectSerializer.CreateSerializationException(
                         SR.GetString(SR.QueryGeneratorPathToMemberNotFound)
@@ -165,12 +161,13 @@ namespace System.Runtime.Serialization
 
             public void WriteChildToContext(DataMember contextMember, string prefix)
             {
-                this.xPathBuilder.Append(
-                    XPathQueryGenerator.XPathSeparator
-                        + prefix
-                        + XPathQueryGenerator.NsSeparator
-                        + contextMember.Name
-                );
+                this.xPathBuilder
+                    .Append(
+                        XPathQueryGenerator.XPathSeparator
+                            + prefix
+                            + XPathQueryGenerator.NsSeparator
+                            + contextMember.Name
+                    );
             }
 
             public XmlNamespaceManager Namespaces

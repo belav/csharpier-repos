@@ -14,8 +14,7 @@ namespace System.ServiceModel.Channels
         {
             // no assurances if messages are volatile
             if (!factory.Durable && factory.ExactlyOnce)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(SR.GetString(SR.MsmqNoAssurancesForVolatile))
                     );
@@ -26,8 +25,7 @@ namespace System.ServiceModel.Channels
                 && transportFactory.UseActiveDirectory
                 && QueueTransferProtocol.Native != transportFactory.QueueTransferProtocol
             )
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(SR.MsmqActiveDirectoryRequiresNativeTransfer)
@@ -43,8 +41,7 @@ namespace System.ServiceModel.Channels
             {
                 if (DeadLetterQueue.Custom != factory.DeadLetterQueue)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(SR.MsmqPerAppDLQRequiresCustom)
@@ -54,8 +51,7 @@ namespace System.ServiceModel.Channels
 
                 if (!Msmq.IsPerAppDeadLetterQueueSupported)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(SR.MsmqPerAppDLQRequiresMsmq4)
@@ -65,8 +61,7 @@ namespace System.ServiceModel.Channels
 
                 if (!factory.ExactlyOnce)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(SR.MsmqPerAppDLQRequiresExactlyOnce)
@@ -74,21 +69,18 @@ namespace System.ServiceModel.Channels
                         );
                 }
 
-                string dlqFormatName = MsmqUri
-                    .NetMsmqAddressTranslator
+                string dlqFormatName = MsmqUri.NetMsmqAddressTranslator
                     .UriToFormatName(factory.CustomDeadLetterQueue);
 
                 if (!MsmqQueue.IsWriteable(dlqFormatName))
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(SR.GetString(SR.MsmqDLQNotWriteable))
                         );
 
                 bool isQueueTx;
                 if (!MsmqQueue.TryGetIsTransactional(dlqFormatName, out isQueueTx) || !isQueueTx)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(SR.MsmqTransactedDLQExpected)
@@ -101,8 +93,7 @@ namespace System.ServiceModel.Channels
                 && DeadLetterQueue.Custom == factory.DeadLetterQueue
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(SR.GetString(SR.MsmqCustomRequiresPerAppDLQ))
                     );
@@ -120,16 +111,14 @@ namespace System.ServiceModel.Channels
         {
             if (!receiveParameters.Durable && receiveParameters.ExactlyOnce)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(SR.GetString(SR.MsmqNoAssurancesForVolatile))
                     );
             }
             if (receiveParameters.ReceiveContextSettings.Enabled && !receiveParameters.ExactlyOnce)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(SR.MsmqExactlyOnceNeededForReceiveContext)
@@ -143,8 +132,7 @@ namespace System.ServiceModel.Channels
 
             if (receiveParameters.ReceiveContextSettings.Enabled && formatName.Contains(";"))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(SR.MsmqReceiveContextSubqueuesNotSupported)
@@ -156,8 +144,7 @@ namespace System.ServiceModel.Channels
             MsmqException msmqException;
             if (!MsmqQueue.IsReadable(formatName, out msmqException))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(SR.MsmqQueueNotReadable),
@@ -185,16 +172,14 @@ namespace System.ServiceModel.Channels
             if (knownTxStatus)
             {
                 if (!receiveParameters.ExactlyOnce && isQueueTx)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(SR.MsmqNonTransactionalQueueNeeded)
                             )
                         );
                 if (receiveParameters.ExactlyOnce && !isQueueTx)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(SR.MsmqTransactionalQueueNeeded)
@@ -211,8 +196,7 @@ namespace System.ServiceModel.Channels
                     {
                         // no retry queues for subqueues
                         if (ReceiveErrorHandling.Move == receiveParameters.ReceiveErrorHandling)
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
                                     new InvalidOperationException(
                                         SR.GetString(SR.MsmqNoMoveForSubqueues)
@@ -223,8 +207,7 @@ namespace System.ServiceModel.Channels
                     {
                         // should be able to open the retry queue for move
                         if (!MsmqQueue.IsMoveable(formatName + ";retry"))
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
                                     new InvalidOperationException(
                                         SR.GetString(SR.MsmqDirectFormatNameRequiredForPoison)
@@ -239,8 +222,7 @@ namespace System.ServiceModel.Channels
                         || ReceiveErrorHandling.Move == receiveParameters.ReceiveErrorHandling
                     )
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(
                                     SR.GetString(SR.MsmqAdvancedPoisonHandlingRequired)
@@ -257,8 +239,7 @@ namespace System.ServiceModel.Channels
                 security.MsmqAuthenticationMode == MsmqAuthenticationMode.WindowsDomain
                 && !Msmq.ActiveDirectoryEnabled
             )
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(SR.GetString(SR.MsmqWindowsAuthnRequiresAD))
                     );
@@ -268,8 +249,7 @@ namespace System.ServiceModel.Channels
                 security.MsmqAuthenticationMode == MsmqAuthenticationMode.None
                 && security.MsmqProtectionLevel != ProtectionLevel.None
             )
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(SR.MsmqAuthNoneRequiresProtectionNone)
@@ -281,8 +261,7 @@ namespace System.ServiceModel.Channels
                 security.MsmqAuthenticationMode == MsmqAuthenticationMode.Certificate
                 && security.MsmqProtectionLevel == ProtectionLevel.None
             )
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(SR.MsmqAuthCertificateRequiresProtectionSign)
@@ -293,8 +272,7 @@ namespace System.ServiceModel.Channels
             if (security.MsmqAuthenticationMode == MsmqAuthenticationMode.WindowsDomain)
             {
                 if (security.MsmqProtectionLevel == ProtectionLevel.None)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(SR.MsmqAuthWindowsRequiresProtectionNotNone)
@@ -308,8 +286,7 @@ namespace System.ServiceModel.Channels
                 && useActiveDirectory.HasValue
                 && !useActiveDirectory.Value
             )
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(SR.GetString(SR.MsmqEncryptRequiresUseAD))
                     );
@@ -321,8 +298,7 @@ namespace System.ServiceModel.Channels
         )
         {
             if (null == factory.SecurityTokenManager)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(SR.MsmqTokenProviderNeededForCertificates)

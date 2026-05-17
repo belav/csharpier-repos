@@ -133,8 +133,7 @@ namespace System.Resources
 #if !FEATURE_CORECLR && !MONO
                         if (FrameworkEventSource.IsInitialized)
                         {
-                            FrameworkEventSource
-                                .Log
+                            FrameworkEventSource.Log
                                 .ResourceManagerFoundResourceSetInCacheUnexpected(
                                     _mediator.BaseName,
                                     _mediator.MainAssembly,
@@ -153,8 +152,7 @@ namespace System.Resources
             {
                 if (stream != null)
                 {
-                    FrameworkEventSource
-                        .Log
+                    FrameworkEventSource.Log
                         .ResourceManagerStreamFound(
                             _mediator.BaseName,
                             _mediator.MainAssembly,
@@ -165,8 +163,7 @@ namespace System.Resources
                 }
                 else
                 {
-                    FrameworkEventSource
-                        .Log
+                    FrameworkEventSource.Log
                         .ResourceManagerStreamNotFound(
                             _mediator.BaseName,
                             _mediator.MainAssembly,
@@ -184,8 +181,7 @@ namespace System.Resources
 #if !FEATURE_CORECLR && !MONO
                 if (FrameworkEventSource.IsInitialized)
                 {
-                    FrameworkEventSource
-                        .Log
+                    FrameworkEventSource.Log
                         .ResourceManagerCreatingResourceSet(
                             _mediator.BaseName,
                             _mediator.MainAssembly,
@@ -211,8 +207,7 @@ namespace System.Resources
             {
                 if (FrameworkEventSource.IsInitialized)
                 {
-                    FrameworkEventSource
-                        .Log
+                    FrameworkEventSource.Log
                         .ResourceManagerNotCreatingResourceSet(
                             _mediator.BaseName,
                             _mediator.MainAssembly,
@@ -256,8 +251,7 @@ namespace System.Resources
 #if !FEATURE_CORECLR && !MONO
                 if (FrameworkEventSource.IsInitialized)
                 {
-                    FrameworkEventSource
-                        .Log
+                    FrameworkEventSource.Log
                         .ResourceManagerNeutralResourcesSufficient(
                             _mediator.BaseName,
                             _mediator.MainAssembly,
@@ -632,8 +626,7 @@ namespace System.Resources
             {
                 if (canonicalName != null)
                 {
-                    FrameworkEventSource
-                        .Log
+                    FrameworkEventSource.Log
                         .ResourceManagerCaseInsensitiveResourceStreamLookupSucceeded(
                             _mediator.BaseName,
                             _mediator.MainAssembly,
@@ -643,8 +636,7 @@ namespace System.Resources
                 }
                 else
                 {
-                    FrameworkEventSource
-                        .Log
+                    FrameworkEventSource.Log
                         .ResourceManagerCaseInsensitiveResourceStreamLookupFailed(
                             _mediator.BaseName,
                             _mediator.MainAssembly,
@@ -683,8 +675,7 @@ namespace System.Resources
             {
                 if (FrameworkEventSource.IsInitialized)
                 {
-                    FrameworkEventSource
-                        .Log
+                    FrameworkEventSource.Log
                         .ResourceManagerManifestResourceAccessDenied(
                             _mediator.BaseName,
                             _mediator.MainAssembly,
@@ -721,8 +712,7 @@ namespace System.Resources
             // Yet also somehow log this error for a developer.
             try
             {
-                satellite = _mediator
-                    .MainAssembly
+                satellite = _mediator.MainAssembly
                     .InternalGetSatelliteAssembly(
                         satAssemblyName,
                         lookForCulture,
@@ -796,8 +786,7 @@ namespace System.Resources
             {
                 if (satellite != null)
                 {
-                    FrameworkEventSource
-                        .Log
+                    FrameworkEventSource.Log
                         .ResourceManagerGetSatelliteAssemblySucceeded(
                             _mediator.BaseName,
                             _mediator.MainAssembly,
@@ -807,8 +796,7 @@ namespace System.Resources
                 }
                 else
                 {
-                    FrameworkEventSource
-                        .Log
+                    FrameworkEventSource.Log
                         .ResourceManagerGetSatelliteAssemblyFailed(
                             _mediator.BaseName,
                             _mediator.MainAssembly,

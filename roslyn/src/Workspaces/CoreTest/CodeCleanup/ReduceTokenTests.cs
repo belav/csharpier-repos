@@ -1767,8 +1767,7 @@ End Module
 
             try
             {
-                System.Threading.Thread.CurrentThread.CurrentCulture = System
-                    .Globalization
+                System.Threading.Thread.CurrentThread.CurrentCulture = System.Globalization
                     .CultureInfo
                     .CreateSpecificCulture("de-DE");
 

@@ -23,8 +23,7 @@ namespace System.IO
             var eofInfo = new Interop.Kernel32.FILE_END_OF_FILE_INFO { EndOfFile = length };
 
             if (
-                !Interop
-                    .Kernel32
+                !Interop.Kernel32
                     .SetFileInformationByHandle(
                         handle,
                         Interop.Kernel32.FileEndOfFileInfo,
@@ -59,8 +58,7 @@ namespace System.IO
             fixed (byte* pinned = &MemoryMarshal.GetReference(buffer))
             {
                 if (
-                    Interop
-                        .Kernel32
+                    Interop.Kernel32
                         .ReadFile(handle, pinned, buffer.Length, out int numBytesRead, &overlapped)
                     != 0
                 )
@@ -100,8 +98,7 @@ namespace System.IO
 
                 fixed (byte* pinned = &MemoryMarshal.GetReference(buffer))
                 {
-                    Interop
-                        .Kernel32
+                    Interop.Kernel32
                         .ReadFile(handle, pinned, buffer.Length, IntPtr.Zero, overlapped);
 
                     int errorCode = FileStreamHelpers.GetLastWin32ErrorAndDisposeHandleIfInvalid(
@@ -117,8 +114,7 @@ namespace System.IO
                     {
                         int result = 0;
                         if (
-                            Interop
-                                .Kernel32
+                            Interop.Kernel32
                                 .GetOverlappedResult(handle, overlapped, ref result, bWait: false)
                         )
                         {
@@ -186,8 +182,7 @@ namespace System.IO
             fixed (byte* pinned = &MemoryMarshal.GetReference(buffer))
             {
                 if (
-                    Interop
-                        .Kernel32
+                    Interop.Kernel32
                         .WriteFile(
                             handle,
                             pinned,
@@ -230,8 +225,7 @@ namespace System.IO
 
                 fixed (byte* pinned = &MemoryMarshal.GetReference(buffer))
                 {
-                    Interop
-                        .Kernel32
+                    Interop.Kernel32
                         .WriteFile(handle, pinned, buffer.Length, IntPtr.Zero, overlapped);
 
                     int errorCode = FileStreamHelpers.GetLastWin32ErrorAndDisposeHandleIfInvalid(
@@ -247,8 +241,7 @@ namespace System.IO
                     {
                         int result = 0;
                         if (
-                            Interop
-                                .Kernel32
+                            Interop.Kernel32
                                 .GetOverlappedResult(handle, overlapped, ref result, bWait: false)
                         )
                         {
@@ -382,8 +375,7 @@ namespace System.IO
 
                 // Queue an async ReadFile operation.
                 if (
-                    Interop
-                        .Kernel32
+                    Interop.Kernel32
                         .ReadFile(
                             handle,
                             (byte*)vts._memoryHandle.Pointer,
@@ -514,8 +506,7 @@ namespace System.IO
 
                 // Queue an async WriteFile operation.
                 if (
-                    Interop
-                        .Kernel32
+                    Interop.Kernel32
                         .WriteFile(
                             handle,
                             (byte*)vts._memoryHandle.Pointer,
@@ -808,8 +799,7 @@ namespace System.IO
                 Debug.Assert(segmentsPtr != IntPtr.Zero);
 
                 if (
-                    Interop
-                        .Kernel32
+                    Interop.Kernel32
                         .ReadFileScatter(
                             handle,
                             (long*)segmentsPtr,
@@ -983,8 +973,7 @@ namespace System.IO
 
                 // Queue an async WriteFile operation.
                 if (
-                    Interop
-                        .Kernel32
+                    Interop.Kernel32
                         .WriteFileGather(
                             handle,
                             (long*)segmentsPtr,
@@ -1009,8 +998,7 @@ namespace System.IO
                         // Error. Callback will not be invoked.
                         vts.Dispose();
                         return ValueTask.FromException(
-                            SafeFileHandle
-                                .OverlappedValueTaskSource
+                            SafeFileHandle.OverlappedValueTaskSource
                                 .GetIOError(errorCode, path: null)
                         );
                     }
@@ -1052,8 +1040,7 @@ namespace System.IO
         {
             // After SafeFileHandle is bound to ThreadPool, we need to use ThreadPoolBinding
             // to allocate a native overlapped and provide a valid callback.
-            NativeOverlapped* result = handle
-                .ThreadPoolBinding!
+            NativeOverlapped* result = handle.ThreadPoolBinding!
                 .UnsafeAllocateNativeOverlapped(s_callback, resetEvent, null);
 
             if (handle.CanSeek)

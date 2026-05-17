@@ -28,14 +28,12 @@ namespace System.Web.UI
             string localizedValue = base.GetLocalizedString(value);
             if (localizedValue == null)
             {
-                localizedValue = AtlasWeb
-                    .ResourceManager
+                localizedValue = AtlasWeb.ResourceManager
                     .GetString("Category_" + value, AtlasWeb.Culture);
             }
             // This attribute is internal, and we should never have a missing resource string.
             //
-            System
-                .Diagnostics
+            System.Diagnostics
                 .Debug
                 .Assert(
                     localizedValue != null,

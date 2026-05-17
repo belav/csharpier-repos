@@ -528,8 +528,7 @@ record struct Point(int x, int y);
                     Assert.Equal(
                         "record struct Point",
                         point.ToDisplayString(
-                            SymbolDisplayFormat
-                                .TestFormat
+                            SymbolDisplayFormat.TestFormat
                                 .AddKindOptions(SymbolDisplayKindOptions.IncludeTypeKeyword)
                         )
                     );
@@ -542,8 +541,7 @@ record struct Point(int x, int y);
                     Assert.Equal(
                         "struct Point",
                         point.ToDisplayString(
-                            SymbolDisplayFormat
-                                .TestFormat
+                            SymbolDisplayFormat.TestFormat
                                 .AddKindOptions(SymbolDisplayKindOptions.IncludeTypeKeyword)
                         )
                     );
@@ -4289,8 +4287,7 @@ record struct B(int X)
 
             Assert.Equal(
                 "readonly void B.Deconstruct(out System.Int32 X)",
-                verifier
-                    .Compilation
+                verifier.Compilation
                     .GetMember("B.Deconstruct")
                     .ToTestDisplayString(includeNonNullable: false)
             );
@@ -4403,8 +4400,7 @@ record struct B(int X, int Y)
 
             Assert.Equal(
                 "void B.Deconstruct(out System.Int32 X, out System.Int32 Y)",
-                verifier
-                    .Compilation
+                verifier.Compilation
                     .GetMember("B.Deconstruct")
                     .ToTestDisplayString(includeNonNullable: false)
             );
@@ -12499,8 +12495,7 @@ record struct R3(int X) : Error3
             Assert.Equal("Error1(0, 1)", baseWithargs.ToString());
 
             var speculativeBase = baseWithargs.WithArgumentList(
-                baseWithargs
-                    .ArgumentList
+                baseWithargs.ArgumentList
                     .WithArguments(baseWithargs.ArgumentList.Arguments.RemoveAt(1))
             );
             Assert.Equal("Error1(0)", speculativeBase.ToString());

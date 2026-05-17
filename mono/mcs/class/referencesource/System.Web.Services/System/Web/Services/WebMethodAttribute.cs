@@ -353,8 +353,7 @@ namespace System.Web.Services
 
                 if (declaration != null)
                 {
-                    object[] attrs = declaration
-                        .DeclaringType
+                    object[] attrs = declaration.DeclaringType
                         .GetCustomAttributes(typeof(WebServiceBindingAttribute), false);
                     if (attrs.Length > 0)
                     {

@@ -14,8 +14,7 @@ class T1
             Configuration config = ConfigurationManager.OpenExeConfiguration(
                 ConfigurationUserLevel.None
             );
-            ConnectionStringSettingsCollection connectionstrings = config
-                .ConnectionStrings
+            ConnectionStringSettingsCollection connectionstrings = config.ConnectionStrings
                 .ConnectionStrings;
 
             foreach (ConnectionStringSettings cs in connectionstrings)

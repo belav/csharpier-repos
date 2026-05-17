@@ -53,8 +53,7 @@ namespace System.ServiceModel.Dispatcher
             {
                 if (this.IsOnServer)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(SR.SFxImmutableServiceHostBehavior0)
@@ -63,8 +62,7 @@ namespace System.ServiceModel.Dispatcher
                 }
                 else
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(SR.SFxImmutableChannelFactoryBehavior0)

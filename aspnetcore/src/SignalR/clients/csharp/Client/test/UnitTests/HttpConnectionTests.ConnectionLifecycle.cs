@@ -349,8 +349,7 @@ public partial class HttpConnectionTests
                     async (connection) =>
                     {
                         await connection.StartAsync().DefaultTimeout();
-                        await connection
-                            .Transport
+                        await connection.Transport
                             .Output
                             .WriteAsync(new byte[] { 0x42 })
                             .DefaultTimeout();

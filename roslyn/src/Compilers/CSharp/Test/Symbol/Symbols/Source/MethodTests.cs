@@ -2743,8 +2743,7 @@ public partial class C
                 source,
                 sourceSymbolValidator: module =>
                 {
-                    var m = module
-                        .GlobalNamespace
+                    var m = module.GlobalNamespace
                         .GetTypeMember("C")
                         .GetMethod("M")
                         .GetPublicSymbol();
@@ -2754,8 +2753,7 @@ public partial class C
                 },
                 symbolValidator: module =>
                 {
-                    var m = module
-                        .GlobalNamespace
+                    var m = module.GlobalNamespace
                         .GetTypeMember("C")
                         .GetMethod("M")
                         .GetPublicSymbol();

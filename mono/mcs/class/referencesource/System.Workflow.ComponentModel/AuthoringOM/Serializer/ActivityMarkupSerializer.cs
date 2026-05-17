@@ -234,8 +234,7 @@ namespace System.Workflow.ComponentModel.Serialization
                     endColumn = linePosition + reader.Name.Length - 1;
 
                 reader.MoveToElement();
-                System
-                    .Diagnostics
+                System.Diagnostics
                     .Debug
                     .Assert(
                         startLine + 1 == lineNumber && startColumn + 1 == linePosition,

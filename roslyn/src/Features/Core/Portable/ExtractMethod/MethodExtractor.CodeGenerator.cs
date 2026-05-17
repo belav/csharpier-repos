@@ -223,8 +223,7 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                         cancellationToken
                     );
 
-                    var finalRoot = documentWithUpdatedCallSite
-                        .Root
+                    var finalRoot = documentWithUpdatedCallSite.Root
                         .ReplaceNode(destination, updatedDestination);
                     return finalRoot;
                 }
@@ -261,8 +260,7 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                         info,
                         cancellationToken
                     );
-                    var finalRoot = documentWithUpdatedCallSite
-                        .Root
+                    var finalRoot = documentWithUpdatedCallSite.Root
                         .ReplaceNode(destination, newContainer);
                     return finalRoot;
                 }
@@ -281,9 +279,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                 }
                 else
                 {
-                    return this.SelectionResult.GetOutermostCallSiteContainerToProcess(
-                        cancellationToken
-                    );
+                    return this.SelectionResult
+                        .GetOutermostCallSiteContainerToProcess(cancellationToken);
                 }
             }
 
@@ -306,9 +303,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                 CancellationToken cancellationToken
             )
             {
-                return this.AnalyzerResult.GetOutermostVariableToMoveIntoMethodDefinition(
-                    cancellationToken
-                );
+                return this.AnalyzerResult
+                    .GetOutermostVariableToMoveIntoMethodDefinition(cancellationToken);
             }
 
             protected ImmutableArray<TStatementSyntax> AddReturnIfUnreachable(

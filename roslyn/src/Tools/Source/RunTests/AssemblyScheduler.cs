@@ -140,8 +140,7 @@ namespace RunTests
                     var currentWorkItem = ImmutableSortedDictionary<
                         AssemblyInfo,
                         ImmutableArray<TestMethodInfo>
-                    >
-                        .Empty
+                    >.Empty
                         .Add(assembly, ImmutableArray<TestMethodInfo>.Empty);
                     workItems.Add(new WorkItemInfo(currentWorkItem, partitionIndex++));
                 }
@@ -209,8 +208,7 @@ namespace RunTests
                     );
                 }
 
-                var unmatchedRemoteTests = testHistory
-                    .Keys
+                var unmatchedRemoteTests = testHistory.Keys
                     .Where(type => !matchedRemoteTests.Contains(type));
                 foreach (var unmatchedRemoteTest in unmatchedRemoteTests)
                 {
@@ -219,16 +217,14 @@ namespace RunTests
                     );
                 }
 
-                var allTests = assemblyTypes
-                    .Values
+                var allTests = assemblyTypes.Values
                     .SelectMany(v => v)
                     .SelectMany(v => v.Tests)
                     .Select(t => t.FullyQualifiedName)
                     .ToList();
 
                 var totalExpectedRunTime = TimeSpan.FromMilliseconds(
-                    updated
-                        .Values
+                    updated.Values
                         .SelectMany(types => types)
                         .SelectMany(type => type.Tests)
                         .Sum(test => test.ExecutionTime.TotalMilliseconds)
@@ -346,8 +342,7 @@ namespace RunTests
             foreach (var workItem in workItems)
             {
                 var totalExecutionTime = TimeSpan.FromMilliseconds(
-                    workItem
-                        .Filters
+                    workItem.Filters
                         .Values
                         .SelectMany(f => f)
                         .Sum(f => f.ExecutionTime.TotalMilliseconds)

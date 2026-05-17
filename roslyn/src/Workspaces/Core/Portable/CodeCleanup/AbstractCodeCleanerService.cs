@@ -949,8 +949,7 @@ namespace Microsoft.CodeAnalysis.CodeCleanup
             {
                 Contract.ThrowIfNull(annotation.Data);
 
-                var types = annotation
-                    .Data
+                var types = annotation.Data
                     .Split(s_separators)
                     .Select(s => (SpanMarkerType)Enum.Parse(typeof(SpanMarkerType), s))
                     .ToArray();

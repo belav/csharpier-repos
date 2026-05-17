@@ -754,11 +754,12 @@ namespace System.Web.UI.WebControls
                         new DayRenderEventArgs(
                             cell,
                             day,
-                            page.ClientScript.GetPostBackClientHyperlink(
-                                this,
-                                GetDaysFromZenith(day.Date).ToString(),
-                                true
-                            )
+                            page.ClientScript
+                                .GetPostBackClientHyperlink(
+                                    this,
+                                    GetDaysFromZenith(day.Date).ToString(),
+                                    true
+                                )
                         )
                     );
                 else

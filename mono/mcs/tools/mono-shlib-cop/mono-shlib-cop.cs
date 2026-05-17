@@ -244,8 +244,7 @@ namespace Mono.Unmanaged.Check
             }
             catch (FileNotFoundException e)
             {
-                report
-                    .Errors
+                report.Errors
                     .Add(
                         new MessageInfo(null, null, "Could not load `" + file + "': " + e.Message)
                     );
@@ -270,8 +269,7 @@ namespace Mono.Unmanaged.Check
 
             if (a == null)
             {
-                report
-                    .Errors
+                report.Errors
                     .Add(
                         new MessageInfo(
                             null,
@@ -421,8 +419,7 @@ namespace Mono.Unmanaged.Check
 
             if (found == null)
             {
-                report
-                    .Errors
+                report.Errors
                     .Add(
                         new MessageInfo(
                             type,
@@ -436,8 +433,7 @@ namespace Mono.Unmanaged.Check
             // UnixFileInfo f = new UnixFileInfo (soname);
             if (found.EndsWith(".so"))
             {
-                report
-                    .Warnings
+                report.Warnings
                     .Add(
                         new MessageInfo(
                             type,
@@ -545,8 +541,7 @@ namespace Mono.Unmanaged.Check
                     Trace.WriteLine("Able to load library " + library + "; soname=" + soname);
                     IntPtr ignore;
                     if (g_module_symbol(h, symbol, out ignore) == 0)
-                        report
-                            .Errors
+                        report.Errors
                             .Add(
                                 new MessageInfo(
                                     type,
@@ -599,8 +594,9 @@ namespace Mono.Unmanaged.Check
             {
                 // SystemConfigurationFile is $sysconfdir/mono/VERSION/machine.config
                 // We want $sysconfdir
-                DirectoryInfo configDir = new FileInfo(RuntimeEnvironment.SystemConfigurationFile)
-                    .Directory
+                DirectoryInfo configDir = new FileInfo(
+                    RuntimeEnvironment.SystemConfigurationFile
+                ).Directory
                     .Parent
                     .Parent
                     .Parent;

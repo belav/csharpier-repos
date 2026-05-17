@@ -197,8 +197,7 @@ namespace System.ServiceModel.Dispatcher
                 }
                 else if (objectType.Name != "EmptyParticle")
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR2.GetString(
@@ -212,8 +211,7 @@ namespace System.ServiceModel.Dispatcher
             }
             else
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR2.GetString(
@@ -234,8 +232,7 @@ namespace System.ServiceModel.Dispatcher
             string content = GenerateContentForXmlSimpleType(attribute.AttributeSchemaType);
             if (String.IsNullOrEmpty(content))
             {
-                context
-                    .writer
+                context.writer
                     .WriteAttributeString(
                         "i",
                         XmlSchemaInstanceNil,
@@ -245,8 +242,7 @@ namespace System.ServiceModel.Dispatcher
             }
             else
             {
-                context
-                    .writer
+                context.writer
                     .WriteAttributeString(
                         attribute.QualifiedName.Name,
                         attribute.QualifiedName.Namespace,
@@ -285,8 +281,7 @@ namespace System.ServiceModel.Dispatcher
 
         static void ErrorHandler(XmlSchemaObject schemaObject, HelpExampleGeneratorContext context)
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(
                     new InvalidOperationException(
                         SR2.GetString(
@@ -309,8 +304,7 @@ namespace System.ServiceModel.Dispatcher
         {
             XmlSchemaElement element = (XmlSchemaElement)schemaObject;
             XmlSchemaElement contentElement = GenerateValidElementsComment(element, context);
-            context
-                .writer
+            context.writer
                 .WriteStartElement(element.QualifiedName.Name, element.QualifiedName.Namespace);
             if (contentElement != element)
             {
@@ -320,19 +314,16 @@ namespace System.ServiceModel.Dispatcher
                     && !String.IsNullOrEmpty(contentElement.QualifiedName.Namespace)
                 )
                 {
-                    string prefix = context
-                        .writer
+                    string prefix = context.writer
                         .LookupPrefix(contentElement.QualifiedName.Namespace);
                     if (prefix == null)
                     {
                         prefix = string.Concat(
                             "d",
-                            context
-                                .currentDepthLevel
+                            context.currentDepthLevel
                                 .ToString(System.Globalization.NumberFormatInfo.InvariantInfo)
                         );
-                        context
-                            .writer
+                        context.writer
                             .WriteAttributeString(
                                 XmlNamespacePrefix,
                                 prefix,
@@ -347,8 +338,7 @@ namespace System.ServiceModel.Dispatcher
                         contentElement.QualifiedName.Name
                     );
                 }
-                context
-                    .writer
+                context.writer
                     .WriteAttributeString(
                         "i",
                         XmlSchemaInstanceType,
@@ -381,8 +371,7 @@ namespace System.ServiceModel.Dispatcher
             InvokeHandler(complexType.ContentTypeParticle, context);
             if (complexType.IsMixed)
             {
-                context
-                    .writer
+                context.writer
                     .WriteString(SR2.GetString(SR2.HelpExampleGeneratorThisElementContainsText));
             }
         }
@@ -413,14 +402,12 @@ namespace System.ServiceModel.Dispatcher
                         }
                         else
                         {
-                            context
-                                .writer
+                            context.writer
                                 .WriteStartElement(
                                     element.QualifiedName.Name,
                                     element.QualifiedName.Namespace
                                 );
-                            context
-                                .writer
+                            context.writer
                                 .WriteAttributeString(
                                     "i",
                                     XmlSchemaInstanceNil,
@@ -468,8 +455,7 @@ namespace System.ServiceModel.Dispatcher
             {
                 if (!(simpleType.Content is XmlSchemaSimpleTypeList))
                 {
-                    context
-                        .writer
+                    context.writer
                         .WriteAttributeString(
                             "i",
                             XmlSchemaInstanceNil,
@@ -540,8 +526,7 @@ namespace System.ServiceModel.Dispatcher
 
             if (IsArrayElementType(element))
             {
-                context
-                    .writer
+                context.writer
                     .WriteAttributeString(JsonGlobals.typeString, JsonGlobals.arrayString);
                 context.overrideElementName = JsonGlobals.itemString;
             }
@@ -553,11 +538,9 @@ namespace System.ServiceModel.Dispatcher
                     context.knownTypes.TryGetValue(contentElement.QualifiedName, out derivedType);
                     if (derivedType != null)
                     {
-                        context
-                            .writer
+                        context.writer
                             .WriteStartAttribute(null, JsonGlobals.serverTypeString, null);
-                        context
-                            .writer
+                        context.writer
                             .WriteString(
                                 String.Format(
                                     CultureInfo.InvariantCulture,
@@ -569,8 +552,7 @@ namespace System.ServiceModel.Dispatcher
                         context.writer.WriteEndAttribute();
                     }
                 }
-                context
-                    .writer
+                context.writer
                     .WriteAttributeString(JsonGlobals.typeString, JsonGlobals.objectString);
             }
             InvokeHandler(contentElement.ElementSchemaType, context);
@@ -620,8 +602,7 @@ namespace System.ServiceModel.Dispatcher
                         {
                             context.writer.WriteStartElement(element.QualifiedName.Name);
                         }
-                        context
-                            .writer
+                        context.writer
                             .WriteAttributeString(JsonGlobals.typeString, JsonGlobals.nullString);
                         context.writer.WriteEndElement();
                     }
@@ -660,8 +641,7 @@ namespace System.ServiceModel.Dispatcher
                     {
                         if (facet is XmlSchemaEnumerationFacet)
                         {
-                            context
-                                .writer
+                            context.writer
                                 .WriteAttributeString(
                                     string.Empty,
                                     JsonGlobals.typeString,
@@ -684,8 +664,7 @@ namespace System.ServiceModel.Dispatcher
             if (simpleType.QualifiedName.Name == "base64Binary")
             {
                 char[] base64stream = value.ToCharArray();
-                context
-                    .writer
+                context.writer
                     .WriteAttributeString(
                         string.Empty,
                         JsonGlobals.typeString,
@@ -695,8 +674,7 @@ namespace System.ServiceModel.Dispatcher
                 for (int i = 0; i < base64stream.Length; i++)
                 {
                     context.writer.WriteStartElement(JsonGlobals.itemString, string.Empty);
-                    context
-                        .writer
+                    context.writer
                         .WriteAttributeString(
                             string.Empty,
                             JsonGlobals.typeString,
@@ -714,8 +692,7 @@ namespace System.ServiceModel.Dispatcher
                     CultureInfo.InvariantCulture
                 );
                 context.writer.WriteString(JsonGlobals.DateTimeStartGuardReader);
-                context
-                    .writer
+                context.writer
                     .WriteValue(
                         (dateTime.ToUniversalTime().Ticks - JsonGlobals.unixEpochTicks) / 10000
                     );
@@ -734,16 +711,14 @@ namespace System.ServiceModel.Dispatcher
                             context.writer.WriteString("+");
                         }
                         int hours = Math.Abs(ts.Hours);
-                        context
-                            .writer
+                        context.writer
                             .WriteString(
                                 (hours < 10)
                                     ? "0" + hours
                                     : hours.ToString(CultureInfo.InvariantCulture)
                             );
                         int minutes = Math.Abs(ts.Minutes);
-                        context
-                            .writer
+                        context.writer
                             .WriteString(
                                 (minutes < 10)
                                     ? "0" + minutes
@@ -780,14 +755,12 @@ namespace System.ServiceModel.Dispatcher
                     || simpleType.QualifiedName.Name == "nonNegativeInteger"
                 )
                 {
-                    context
-                        .writer
+                    context.writer
                         .WriteAttributeString(JsonGlobals.typeString, JsonGlobals.numberString);
                 }
                 else if (simpleType.QualifiedName.Name == "boolean")
                 {
-                    context
-                        .writer
+                    context.writer
                         .WriteAttributeString(JsonGlobals.typeString, JsonGlobals.booleanString);
                 }
                 context.writer.WriteString(value);
@@ -796,8 +769,7 @@ namespace System.ServiceModel.Dispatcher
             {
                 if (!(simpleType.Content is XmlSchemaSimpleTypeList))
                 {
-                    context
-                        .writer
+                    context.writer
                         .WriteAttributeString(JsonGlobals.typeString, JsonGlobals.nullString);
                 }
             }
@@ -985,8 +957,7 @@ namespace System.ServiceModel.Dispatcher
             if (element.ElementSchemaType is XmlSchemaComplexType)
             {
                 foreach (
-                    XmlSchemaElement derivedElement in context
-                        .schemaSet
+                    XmlSchemaElement derivedElement in context.schemaSet
                         .GlobalElements
                         .Values
                         .OfType<XmlSchemaElement>()

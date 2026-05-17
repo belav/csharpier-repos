@@ -70,8 +70,7 @@ public class Driver
                         if (stopOnError)
                             throw;
                         failure++;
-                        Console
-                            .Error
+                        Console.Error
                             .WriteLine(
                                 "INCORRECTLY INVALID "
                                     + id

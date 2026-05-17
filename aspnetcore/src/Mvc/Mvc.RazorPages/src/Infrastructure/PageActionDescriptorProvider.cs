@@ -34,8 +34,7 @@ public class PageActionDescriptorProvider : IActionDescriptorProvider
         _routeModelProviders = pageRouteModelProviders.OrderBy(p => p.Order).ToArray();
         _mvcOptions = mvcOptionsAccessor.Value;
 
-        _conventions = pagesOptionsAccessor
-            .Value
+        _conventions = pagesOptionsAccessor.Value
             .Conventions
             .OfType<IPageRouteModelConvention>()
             .ToArray();
@@ -133,8 +132,7 @@ public class PageActionDescriptorProvider : IActionDescriptorProvider
             return selectorModel.AttributeRouteModel!.Template;
         }
 
-        var pageRouteMetadata = selectorModel
-            .EndpointMetadata
+        var pageRouteMetadata = selectorModel.EndpointMetadata
             .OfType<PageRouteMetadata>()
             .SingleOrDefault();
         if (pageRouteMetadata == null)

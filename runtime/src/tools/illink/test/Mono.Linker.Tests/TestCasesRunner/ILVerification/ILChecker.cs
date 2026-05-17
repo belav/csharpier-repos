@@ -103,8 +103,7 @@ public class ILChecker
         AssemblyDefinition original
     )
     {
-        return linkResult
-                .TestCase
+        return linkResult.TestCase
                 .FindTypeDefinition(original)
                 .CustomAttributes
                 .FirstOrDefault(attr =>
@@ -119,8 +118,7 @@ public class ILChecker
         out List<string> failureMessages
     )
     {
-        var attrs = linkResult
-            .TestCase
+        var attrs = linkResult.TestCase
             .FindTypeDefinition(original)
             .CustomAttributes
             .Where(attr => attr.AttributeType.Name == nameof(ExpectILFailureAttribute))
@@ -145,8 +143,7 @@ public class ILChecker
         out HashSet<string> assembliesToSkip
     )
     {
-        var attrs = linkResult
-            .TestCase
+        var attrs = linkResult.TestCase
             .FindTypeDefinition(original)
             .CustomAttributes
             .Where(attr => attr.AttributeType.Name == nameof(SkipILVerifyAttribute));
@@ -207,8 +204,7 @@ public class ILChecker
             result.Result.Code,
             result.TypeFullName,
             result.MethodSignature,
-            result
-                .Result
+            result.Result
                 .ErrorArguments
                 .Aggregate(string.Empty, (accum, error) => $"{accum}, {KeyForArgument(error)}")
         );

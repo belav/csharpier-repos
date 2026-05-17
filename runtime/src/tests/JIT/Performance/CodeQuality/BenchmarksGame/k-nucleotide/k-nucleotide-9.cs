@@ -231,23 +231,24 @@ namespace BenchmarksGame
             Func<Dictionary<long, Wrapper>, string> summary
         )
         {
-            return Task.Factory.ContinueWhenAll(
-                new[]
-                {
-                    Task.Run(() => countEnding(l, mask, 0)),
-                    Task.Run(() => countEnding(l, mask, 1)),
-                    Task.Run(() => countEnding(l, mask, 2)),
-                    Task.Run(() => countEnding(l, mask, 3)),
-                },
-                dicts =>
-                {
-                    var d = new Dictionary<long, Wrapper>(dicts.Sum(i => i.Result.Count));
-                    for (int i = 0; i < dicts.Length; i++)
-                        foreach (var kv in dicts[i].Result)
-                            d[(kv.Key << 2) | (long)i] = kv.Value;
-                    return summary(d);
-                }
-            );
+            return Task.Factory
+                .ContinueWhenAll(
+                    new[]
+                    {
+                        Task.Run(() => countEnding(l, mask, 0)),
+                        Task.Run(() => countEnding(l, mask, 1)),
+                        Task.Run(() => countEnding(l, mask, 2)),
+                        Task.Run(() => countEnding(l, mask, 3)),
+                    },
+                    dicts =>
+                    {
+                        var d = new Dictionary<long, Wrapper>(dicts.Sum(i => i.Result.Count));
+                        for (int i = 0; i < dicts.Length; i++)
+                            foreach (var kv in dicts[i].Result)
+                                d[(kv.Key << 2) | (long)i] = kv.Value;
+                        return summary(d);
+                    }
+                );
         }
 
         static string writeFrequencies(

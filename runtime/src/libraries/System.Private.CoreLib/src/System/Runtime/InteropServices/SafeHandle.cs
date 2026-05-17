@@ -121,8 +121,7 @@ namespace System.Runtime.InteropServices
             if (!disposing && _ctorStackTrace is not null)
             {
                 long count = Interlocked.Increment(ref s_safeHandlesFinalized);
-                Internal
-                    .Console
+                Internal.Console
                     .WriteLine(
                         $"{Environment.NewLine}*** #{count} {GetType()} (0x{handle.ToInt64():x}) finalized! Ctor stack:{Environment.NewLine}{_ctorStackTrace}{Environment.NewLine}"
                     );

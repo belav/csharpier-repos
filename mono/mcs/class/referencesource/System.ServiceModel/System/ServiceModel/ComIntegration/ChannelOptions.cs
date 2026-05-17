@@ -24,8 +24,7 @@ namespace System.ServiceModel.ComIntegration
         )
         {
             if (channelBuilderSettings == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(SR.GetString(SR.CannotCreateChannelOption))
                     );

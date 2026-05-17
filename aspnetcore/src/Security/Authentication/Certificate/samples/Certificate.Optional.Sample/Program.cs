@@ -45,8 +45,7 @@ public class Program
                                         {
                                             // allow the tls connection without a client certificate
                                             if (
-                                                connectionContext
-                                                    .ClientHelloInfo
+                                                connectionContext.ClientHelloInfo
                                                     .ServerName
                                                     .Equals(
                                                         HostWithoutCert,

@@ -331,11 +331,8 @@ namespace System.Activities
 
             if (this.Handler != null)
             {
-                return this.Handler.InitializeRelationship(
-                    this,
-                    collectionType,
-                    ref validationErrors
-                );
+                return this.Handler
+                    .InitializeRelationship(this, collectionType, ref validationErrors);
             }
 
             return true;

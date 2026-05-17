@@ -92,8 +92,7 @@ namespace System.ServiceModel.Description
 
             if (
                 identifier.Length <= MaxIdentifierLength
-                && System
-                    .CodeDom
+                && System.CodeDom
                     .Compiler
                     .CodeGenerator
                     .IsValidLanguageIndependentIdentifier(identifier)
@@ -147,8 +146,7 @@ namespace System.ServiceModel.Description
         {
             codeType.Name = base.AddUnique(name, defaultName);
             codeNamespace.Types.Add(codeType);
-            return ServiceContractGenerator
-                .NamespaceHelper
+            return ServiceContractGenerator.NamespaceHelper
                 .GetCodeTypeReference(this.codeNamespace, codeType);
         }
 

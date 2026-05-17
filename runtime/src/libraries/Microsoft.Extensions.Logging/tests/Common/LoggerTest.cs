@@ -226,8 +226,7 @@ namespace Microsoft.Extensions.Logging.Test
             var factory = TestLoggerBuilder.Create(builder =>
             {
                 builder.AddProvider(provider.Object);
-                builder
-                    .Services
+                builder.Services
                     .Configure<LoggerFilterOptions>(options => options.CaptureScopes = false);
             });
 
@@ -264,8 +263,7 @@ namespace Microsoft.Extensions.Logging.Test
             var factory = TestLoggerBuilder.Create(builder =>
             {
                 builder.AddProvider(provider.Object);
-                builder
-                    .Services
+                builder.Services
                     .Configure<LoggerFilterOptions>(options => options.CaptureScopes = false);
             });
 

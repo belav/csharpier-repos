@@ -308,8 +308,7 @@ public class SqlExpressionFactory : ISqlExpressionFactory
         var item = ApplyTypeMapping(
             inExpression.Item,
             valuesTypeMapping
-                ?? Dependencies
-                    .TypeMappingSource
+                ?? Dependencies.TypeMappingSource
                     .FindMapping(inExpression.Item.Type, Dependencies.Model)
         );
 

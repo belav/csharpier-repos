@@ -675,8 +675,7 @@ namespace System.Workflow.ComponentModel.Design
             // paperSourceComboBox
             //
             resources.ApplyResources(this.paperSourceComboBox, "paperSourceComboBox");
-            this.paperSourceComboBox.DropDownStyle = System
-                .Windows
+            this.paperSourceComboBox.DropDownStyle = System.Windows
                 .Forms
                 .ComboBoxStyle
                 .DropDownList;
@@ -777,8 +776,7 @@ namespace System.Workflow.ComponentModel.Design
             //
             resources.ApplyResources(this.footerAlignmentComboBox, "footerAlignmentComboBox");
             this.footerTableLayoutPanel.SetColumnSpan(this.footerAlignmentComboBox, 2);
-            this.footerAlignmentComboBox.DropDownStyle = System
-                .Windows
+            this.footerAlignmentComboBox.DropDownStyle = System.Windows
                 .Forms
                 .ComboBoxStyle
                 .DropDownList;
@@ -863,8 +861,7 @@ namespace System.Workflow.ComponentModel.Design
             //
             resources.ApplyResources(this.headerAlignmentComboBox, "headerAlignmentComboBox");
             this.headerTableLayoutPanel.SetColumnSpan(this.headerAlignmentComboBox, 2);
-            this.headerAlignmentComboBox.DropDownStyle = System
-                .Windows
+            this.headerAlignmentComboBox.DropDownStyle = System.Windows
                 .Forms
                 .ComboBoxStyle
                 .DropDownList;
@@ -986,10 +983,10 @@ namespace System.Workflow.ComponentModel.Design
             this.printDocument.PageSetupData.Margins = margins;
 
             //centering
-            this.printDocument.PageSetupData.CenterHorizontally =
-                this.CenterHorizontallyCheckBox.Checked;
-            this.printDocument.PageSetupData.CenterVertically =
-                this.CenterVerticallyCheckBox.Checked;
+            this.printDocument.PageSetupData.CenterHorizontally = this.CenterHorizontallyCheckBox
+                .Checked;
+            this.printDocument.PageSetupData.CenterVertically = this.CenterVerticallyCheckBox
+                .Checked;
 
             //header inputs
             if (this.headerTextComboBox.SelectedIndex == 0)
@@ -1061,8 +1058,7 @@ namespace System.Workflow.ComponentModel.Design
                 if (DialogResult.OK == printDialog.ShowDialog())
                 {
                     this.printDocument.PrinterSettings = printDialog.PrinterSettings;
-                    this.printDocument.DefaultPageSettings = printDialog
-                        .Document
+                    this.printDocument.DefaultPageSettings = printDialog.Document
                         .DefaultPageSettings;
 
                     if (this.printDocument.DefaultPageSettings.Landscape)

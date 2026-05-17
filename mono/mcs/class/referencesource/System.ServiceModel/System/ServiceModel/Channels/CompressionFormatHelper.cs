@@ -11,8 +11,7 @@ namespace System.ServiceModel.Channels
         {
             if (!IsDefined(value))
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new InvalidEnumArgumentException(
                             "value",

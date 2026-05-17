@@ -147,8 +147,7 @@ namespace MonoTests.Security.Cryptography
                 0x70,
                 0xf1,
             };
-            byte[] input = Encoding
-                .Default
+            byte[] input = Encoding.Default
                 .GetBytes("abcdbcdecdefdefgefghfghighijhijkijkljklmklmnlmnomnopnopq");
 
             string testName = className + " 2";

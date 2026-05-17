@@ -327,9 +327,8 @@ namespace System.Web.UI.Design.MobileControls
             this.ClientSize = new System.Drawing.Size(448, 289);
             this.AcceptButton = _dialogButtons.CmdOK;
             this.CancelButton = _dialogButtons.CmdCancel;
-            this.Controls.AddRange(
-                new System.Windows.Forms.Control[] { this._pnlHeader, this._pnlMain }
-            );
+            this.Controls
+                .AddRange(new System.Windows.Forms.Control[] { this._pnlHeader, this._pnlMain });
         }
 
         private void LoadAvailableCapabilities()
@@ -701,8 +700,7 @@ namespace System.Web.UI.Design.MobileControls
             )
             {
                 // if the filter name is legal
-                ((DeviceFilterTreeNode)e.Node)
-                    .DeviceFilter
+                ((DeviceFilterTreeNode)e.Node).DeviceFilter
                     .Name = e.Label;
                 return;
             }

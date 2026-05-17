@@ -222,8 +222,7 @@ namespace System.Xml.Tests
                     "res",
                     BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.IgnoreCase
                 )
-                ?? exceptionType
-                    .BaseType
+                ?? exceptionType.BaseType
                     .GetField(
                         "res",
                         BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.IgnoreCase

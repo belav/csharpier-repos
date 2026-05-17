@@ -105,8 +105,7 @@ namespace System.Workflow.Activities
         {
             if (this.Initialized)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR2.GetString(SR2.Error_LogicalChannelAlreadyInitialized, this.Name)

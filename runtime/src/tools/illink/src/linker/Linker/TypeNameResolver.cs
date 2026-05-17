@@ -235,8 +235,7 @@ namespace Mono.Linker
                 };
             }
 
-            TypeDefinition? resolvedType = assembly
-                .MainModule
+            TypeDefinition? resolvedType = assembly.MainModule
                 .ResolveType(typeName.ToString(), _context);
 
             // True type references (like generics and arrays) don't count as actually resolved types, they're just wrappers

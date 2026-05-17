@@ -89,8 +89,7 @@ namespace System
                     }
 
                     // All the methods have the exact same name and sig so return the most derived one.
-                    return System
-                            .DefaultBinder
+                    return System.DefaultBinder
                             .FindMostDerivedNewSlotMeth(candidates.ToArray(), candidates.Count)
                         as MethodInfo;
                 }

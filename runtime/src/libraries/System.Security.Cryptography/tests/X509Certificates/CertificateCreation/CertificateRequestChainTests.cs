@@ -137,8 +137,7 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
 
                 if (useIntermed || isCA.HasValue)
                 {
-                    request
-                        .CertificateExtensions
+                    request.CertificateExtensions
                         .Add(
                             new X509BasicConstraintsExtension(
                                 useIntermed || isCA.Value,
@@ -172,15 +171,13 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
 
                     if (isCA.HasValue)
                     {
-                        request
-                            .CertificateExtensions
+                        request.CertificateExtensions
                             .Add(new X509BasicConstraintsExtension(isCA.Value, false, 0, true));
                     }
 
                     if (keyUsage != X509KeyUsageFlags.None)
                     {
-                        request
-                            .CertificateExtensions
+                        request.CertificateExtensions
                             .Add(new X509KeyUsageExtension(keyUsage, true));
                     }
 
@@ -308,8 +305,7 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
 
             CertificateRequest request = OpenCertRequest(dn, key, hashAlgorithm);
 
-            request
-                .CertificateExtensions
+            request.CertificateExtensions
                 .Add(
                     new X509SubjectKeyIdentifierExtension(
                         request.PublicKey,
@@ -318,12 +314,10 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
                     )
                 );
 
-            request
-                .CertificateExtensions
+            request.CertificateExtensions
                 .Add(new X509KeyUsageExtension(isCa ? CAFlags : EEFlags, true));
 
-            request
-                .CertificateExtensions
+            request.CertificateExtensions
                 .Add(
                     new X509BasicConstraintsExtension(
                         isCa,
@@ -355,8 +349,7 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
 
                     if (element.ChainElementStatus.Length != 0)
                     {
-                        X509ChainStatusFlags flags = element
-                            .ChainElementStatus
+                        X509ChainStatusFlags flags = element.ChainElementStatus
                             .Select(ces => ces.Status)
                             .Aggregate((a, b) => a | b);
 
@@ -462,8 +455,7 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
                 null
             );
 
-            leafRequest
-                .CertificateExtensions
+            leafRequest.CertificateExtensions
                 .Add(
                     new X509EnhancedKeyUsageExtension(
                         new OidCollection { new Oid("1.3.6.1.5.5.7.3.1") },
@@ -602,8 +594,7 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
                         HashAlgorithmName.SHA512,
                         padding
                     );
-                    request
-                        .CertificateExtensions
+                    request.CertificateExtensions
                         .Add(new X509BasicConstraintsExtension(true, false, 0, true));
 
                     rootCertWithKey = request.CreateSelfSigned(notBefore, notAfter);
@@ -616,8 +607,7 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
                         HashAlgorithmName.SHA384,
                         padding
                     );
-                    request
-                        .CertificateExtensions
+                    request.CertificateExtensions
                         .Add(new X509BasicConstraintsExtension(true, true, 1, true));
 
                     X509Certificate2 intermedPublic = request.Create(
@@ -635,8 +625,7 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
                         HashAlgorithmName.SHA256,
                         padding
                     );
-                    request
-                        .CertificateExtensions
+                    request.CertificateExtensions
                         .Add(new X509BasicConstraintsExtension(false, false, 0, true));
 
                     byte[] leafSerial = { 1, 1, 2, 6, 12, 60, 60 };

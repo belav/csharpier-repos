@@ -83,8 +83,7 @@ namespace System.Security.Cryptography
                     throw new CryptographicException(SR.Cryptography_OpenInvalidHandle);
                 }
 
-                bool gotKeyBlob = Interop
-                    .AppleCrypto
+                bool gotKeyBlob = Interop.AppleCrypto
                     .TrySecKeyCopyExternalRepresentation(
                         includePrivateParameters ? keys.PrivateKey! : keys.PublicKey,
                         out byte[] keyBlob
@@ -185,8 +184,7 @@ namespace System.Security.Cryptography
                         // Validate the DER value and get the number of bytes.
                         RSAKeyFormatHelper.ReadRsaPublicKey(manager.Memory, out int localRead);
 
-                        SafeSecKeyRefHandle publicKey = Interop
-                            .AppleCrypto
+                        SafeSecKeyRefHandle publicKey = Interop.AppleCrypto
                             .CreateDataKey(
                                 source.Slice(0, localRead),
                                 Interop.AppleCrypto.PAL_KeyAlgorithm.RSA,
@@ -284,8 +282,7 @@ namespace System.Security.Cryptography
                             RsaPaddingProcessor.PadPkcs1Encryption(data, tmp);
                         }
 
-                        return Interop
-                            .AppleCrypto
+                        return Interop.AppleCrypto
                             .TryRsaEncryptionPrimitive(
                                 GetKeys().PublicKey,
                                 tmp,
@@ -300,8 +297,7 @@ namespace System.Security.Cryptography
                     }
                 }
 
-                return Interop
-                    .AppleCrypto
+                return Interop.AppleCrypto
                     .TryRsaEncrypt(
                         GetKeys().PublicKey,
                         data,
@@ -377,8 +373,7 @@ namespace System.Security.Cryptography
                     throw new CryptographicException(SR.Cryptography_RSA_DecryptWrongSize);
                 }
 
-                return Interop
-                    .AppleCrypto
+                return Interop.AppleCrypto
                     .TryRsaDecrypt(privateKey, data, destination, padding, out bytesWritten);
             }
 
@@ -423,8 +418,7 @@ namespace System.Security.Cryptography
                         );
                     }
 
-                    return Interop
-                        .AppleCrypto
+                    return Interop.AppleCrypto
                         .CreateSignature(
                             keys.PrivateKey,
                             hash,
@@ -462,12 +456,10 @@ namespace System.Security.Cryptography
 
                 Interop.AppleCrypto.PAL_SignatureAlgorithm signatureAlgorithm = padding.Mode switch
                 {
-                    RSASignaturePaddingMode.Pss => Interop
-                        .AppleCrypto
+                    RSASignaturePaddingMode.Pss => Interop.AppleCrypto
                         .PAL_SignatureAlgorithm
                         .RsaPss,
-                    RSASignaturePaddingMode.Pkcs1 => Interop
-                        .AppleCrypto
+                    RSASignaturePaddingMode.Pkcs1 => Interop.AppleCrypto
                         .PAL_SignatureAlgorithm
                         .RsaPkcs1,
                     _ => throw new CryptographicException(SR.Cryptography_InvalidPaddingMode),
@@ -514,8 +506,7 @@ namespace System.Security.Cryptography
                     || palAlgId != Interop.AppleCrypto.PAL_HashAlgorithm.Md5
                 )
                 {
-                    return Interop
-                        .AppleCrypto
+                    return Interop.AppleCrypto
                         .TryCreateSignature(
                             keys.PrivateKey,
                             hash,
@@ -537,8 +528,7 @@ namespace System.Security.Cryptography
 
                 try
                 {
-                    return Interop
-                        .AppleCrypto
+                    return Interop.AppleCrypto
                         .TryRsaSignaturePrimitive(
                             keys.PrivateKey,
                             buf,
@@ -589,12 +579,10 @@ namespace System.Security.Cryptography
                 );
                 Interop.AppleCrypto.PAL_SignatureAlgorithm signatureAlgorithm = padding.Mode switch
                 {
-                    RSASignaturePaddingMode.Pss => Interop
-                        .AppleCrypto
+                    RSASignaturePaddingMode.Pss => Interop.AppleCrypto
                         .PAL_SignatureAlgorithm
                         .RsaPss,
-                    RSASignaturePaddingMode.Pkcs1 => Interop
-                        .AppleCrypto
+                    RSASignaturePaddingMode.Pkcs1 => Interop.AppleCrypto
                         .PAL_SignatureAlgorithm
                         .RsaPkcs1,
                     _ => throw new CryptographicException(SR.Cryptography_InvalidPaddingMode),
@@ -607,8 +595,7 @@ namespace System.Security.Cryptography
                     || palAlgId != Interop.AppleCrypto.PAL_HashAlgorithm.Md5
                 )
                 {
-                    return Interop
-                        .AppleCrypto
+                    return Interop.AppleCrypto
                         .VerifySignature(
                             GetKeys().PublicKey,
                             hash,
@@ -643,8 +630,7 @@ namespace System.Security.Cryptography
                 try
                 {
                     if (
-                        !Interop
-                            .AppleCrypto
+                        !Interop.AppleCrypto
                             .TryRsaVerificationPrimitive(
                                 publicKey,
                                 signature,
@@ -788,8 +774,7 @@ namespace System.Security.Cryptography
 
                 try
                 {
-                    return Interop
-                        .AppleCrypto
+                    return Interop.AppleCrypto
                         .CreateDataKey(
                             rented.AsSpan(0, written),
                             Interop.AppleCrypto.PAL_KeyAlgorithm.RSA,

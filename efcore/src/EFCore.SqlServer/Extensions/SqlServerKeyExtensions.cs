@@ -79,10 +79,11 @@ public static class SqlServerKeyExtensions
     ) =>
         (bool?)
             key.SetOrRemoveAnnotation(
-                SqlServerAnnotationNames.Clustered,
-                clustered,
-                fromDataAnnotation
-            )?.Value;
+                    SqlServerAnnotationNames.Clustered,
+                    clustered,
+                    fromDataAnnotation
+                )
+                ?.Value;
 
     /// <summary>
     ///     Gets the <see cref="ConfigurationSource" /> for whether the key is clustered.

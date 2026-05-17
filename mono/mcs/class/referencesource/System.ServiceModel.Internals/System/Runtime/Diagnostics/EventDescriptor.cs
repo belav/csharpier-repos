@@ -64,11 +64,8 @@ namespace System.Runtime.Diagnostics
 
             if (task < 0)
             {
-                throw Fx.Exception.ArgumentOutOfRange(
-                    "task",
-                    task,
-                    InternalSR.ValueMustBeNonNegative
-                );
+                throw Fx.Exception
+                    .ArgumentOutOfRange("task", task, InternalSR.ValueMustBeNonNegative);
             }
 
             if (task > ushort.MaxValue)

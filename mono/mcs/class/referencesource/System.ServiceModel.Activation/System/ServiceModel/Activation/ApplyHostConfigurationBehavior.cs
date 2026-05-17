@@ -90,8 +90,7 @@ namespace System.ServiceModel.Activation
                 }
             }
 
-            ServiceDebugBehavior debugBehavior = service
-                .Description
+            ServiceDebugBehavior debugBehavior = service.Description
                 .Behaviors
                 .Find<ServiceDebugBehavior>();
             if (debugBehavior != null)
@@ -106,8 +105,7 @@ namespace System.ServiceModel.Activation
                 }
             }
 
-            ServiceMetadataBehavior metadataBehavior = service
-                .Description
+            ServiceMetadataBehavior metadataBehavior = service.Description
                 .Behaviors
                 .Find<ServiceMetadataBehavior>();
             if (metadataBehavior != null)
@@ -127,8 +125,7 @@ namespace System.ServiceModel.Activation
         {
             if (uri != null && uri.IsAbsoluteUri)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new InvalidOperationException(
                             SR.Hosting_SharedEndpointRequiresRelativeEndpoint(uri.ToString())

@@ -200,13 +200,14 @@ namespace System.Activities.Core.Presentation
 
         private ModelItem FindSwitch()
         {
-            return this.ModelItem.FindParent(
-                (ModelItem item) =>
-                {
-                    return item.ItemType.IsGenericType
-                        && item.ItemType.GetGenericTypeDefinition() == typeof(Switch<>);
-                }
-            );
+            return this.ModelItem
+                .FindParent(
+                    (ModelItem item) =>
+                    {
+                        return item.ItemType.IsGenericType
+                            && item.ItemType.GetGenericTypeDefinition() == typeof(Switch<>);
+                    }
+                );
         }
     }
 }

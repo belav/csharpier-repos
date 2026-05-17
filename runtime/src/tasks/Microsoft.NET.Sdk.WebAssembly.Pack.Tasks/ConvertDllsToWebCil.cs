@@ -71,8 +71,7 @@ public class ConvertDllsToWebCil : Task
             if (Utils.IsNewerThan(dllFilePath, finalWebcil))
             {
                 var tmpWebcil = Path.Combine(tmpDir, webcilFileName);
-                var webcilWriter = Microsoft
-                    .WebAssembly
+                var webcilWriter = Microsoft.WebAssembly
                     .Build
                     .Tasks
                     .WebcilConverter

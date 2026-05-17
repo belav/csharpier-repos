@@ -163,15 +163,13 @@ namespace System
             if (!pElementEEType.IsValueType)
                 return;
 
-            IntPtr constructorEntryPoint = RuntimeAugments
-                .TypeLoaderCallbacks
+            IntPtr constructorEntryPoint = RuntimeAugments.TypeLoaderCallbacks
                 .TryGetDefaultConstructorForType(new RuntimeTypeHandle(pElementEEType));
             if (constructorEntryPoint == IntPtr.Zero)
                 return;
 
             var constructorFtn = (delegate* <ref byte, void>)
-                RuntimeAugments
-                    .TypeLoaderCallbacks
+                RuntimeAugments.TypeLoaderCallbacks
                     .ConvertUnboxingFunctionPointerToUnderlyingNonUnboxingPointer(
                         constructorEntryPoint,
                         new RuntimeTypeHandle(pElementEEType)

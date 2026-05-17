@@ -41,8 +41,7 @@ class C
     }
 }
 ";
-            var sourceLinkBlob = Encoding
-                .UTF8
+            var sourceLinkBlob = Encoding.UTF8
                 .GetBytes(
                     @"
 {
@@ -84,8 +83,7 @@ class C
     }
 }
 ";
-            var sourceLinkBlob = Encoding
-                .UTF8
+            var sourceLinkBlob = Encoding.UTF8
                 .GetBytes(
                     @"
 {
@@ -167,8 +165,7 @@ class C
                 options: EmitOptions.Default.WithDebugInformationFormat(format),
                 sourceLinkStream: sourceLinkStream
             );
-            result
-                .Diagnostics
+            result.Diagnostics
                 .Verify(
                     // error CS0041: Unexpected error writing debug information -- 'Error!'
                     Diagnostic(ErrorCode.FTL_DebugEmitFailure)
@@ -222,8 +219,7 @@ class C
                 }
             );
 
-            result
-                .Diagnostics
+            result.Diagnostics
                 .Verify(
                     // error CS0041: Unexpected error writing debug information -- 'Windows PDB writer doesn't support SourceLink feature: '<lib name>''
                     Diagnostic(ErrorCode.FTL_DebugEmitFailure)

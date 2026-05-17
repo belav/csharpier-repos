@@ -75,8 +75,7 @@ namespace Mono.Linker.Dataflow
             LinkContext context
         )
         {
-            bool diagnosticsEnabled = !context
-                .Annotations
+            bool diagnosticsEnabled = !context.Annotations
                 .ShouldSuppressAnalysisWarningsForRequiresUnreferencedCode(Origin.Provider, out _);
             var diagnosticContext = new DiagnosticContext(Origin, diagnosticsEnabled, context);
             ReflectionMethodBodyScanner.HandleCall(

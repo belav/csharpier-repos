@@ -1205,9 +1205,8 @@ namespace System.Runtime.Serialization
                     )
                 );
 
-            XmlQualifiedName factoryTypeAttributeRefName = SchemaExporter
-                .ISerializableFactoryTypeAttribute
-                .RefName;
+            XmlQualifiedName factoryTypeAttributeRefName =
+                SchemaExporter.ISerializableFactoryTypeAttribute.RefName;
             bool containsFactoryTypeAttribute = false;
             if (attributes != null)
             {
@@ -1445,8 +1444,7 @@ namespace System.Runtime.Serialization
                     memberEmitDefaultValue,
                     memberOrder
                 );
-                int compare = ClassDataContract
-                    .DataMemberComparer
+                int compare = ClassDataContract.DataMemberComparer
                     .Singleton
                     .Compare(prevMember, currentMember);
                 if (compare == 0)
@@ -1492,8 +1490,7 @@ namespace System.Runtime.Serialization
             );
             if (defaultValueElement == null)
                 return null;
-            XmlNode? emitDefaultValueAttribute = defaultValueElement
-                .Attributes
+            XmlNode? emitDefaultValueAttribute = defaultValueElement.Attributes
                 .GetNamedItem(Globals.EmitDefaultValueAttribute);
             if (emitDefaultValueAttribute?.Value == null)
                 throw new InvalidDataContractException(
@@ -1521,8 +1518,7 @@ namespace System.Runtime.Serialization
             if (actualTypeElement == null)
                 return defaultTypeName;
 
-            XmlNode? nameAttribute = actualTypeElement
-                .Attributes
+            XmlNode? nameAttribute = actualTypeElement.Attributes
                 .GetNamedItem(Globals.ActualTypeNameAttribute);
             if (nameAttribute?.Value == null)
                 throw new InvalidDataContractException(
@@ -1534,8 +1530,7 @@ namespace System.Runtime.Serialization
                         Globals.ActualTypeNameAttribute
                     )
                 );
-            XmlNode? nsAttribute = actualTypeElement
-                .Attributes
+            XmlNode? nsAttribute = actualTypeElement.Attributes
                 .GetNamedItem(Globals.ActualTypeNamespaceAttribute);
             if (nsAttribute?.Value == null)
                 throw new InvalidDataContractException(
@@ -1948,8 +1943,7 @@ namespace System.Runtime.Serialization
                         Globals.GenericNameAttribute
                     )
                 );
-            string? ns = typeElement
-                .Attributes
+            string? ns = typeElement.Attributes
                 .GetNamedItem(Globals.GenericNamespaceAttribute)
                 ?.Value;
             if (ns == null)
@@ -1981,8 +1975,7 @@ namespace System.Runtime.Serialization
                                 type.Name
                             )
                         );
-                    XmlNode? nestedLevelAttribute = argumentElement
-                        .Attributes
+                    XmlNode? nestedLevelAttribute = argumentElement.Attributes
                         .GetNamedItem(Globals.GenericParameterNestedLevelAttribute);
                     int argumentLevel = 0;
                     if (nestedLevelAttribute != null)
@@ -2015,8 +2008,7 @@ namespace System.Runtime.Serialization
                 }
             }
 
-            XmlNode? typeNestedLevelsAttribute = typeElement
-                .Attributes
+            XmlNode? typeNestedLevelsAttribute = typeElement.Attributes
                 .GetNamedItem(Globals.GenericParameterNestedLevelAttribute);
             if (typeNestedLevelsAttribute != null)
             {

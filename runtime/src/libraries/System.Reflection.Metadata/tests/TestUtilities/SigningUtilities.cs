@@ -12,8 +12,7 @@ namespace System.Reflection.PortableExecutable.Tests
     internal static class SigningUtilities
     {
         public static bool SupportsSigning { get; } =
-            System
-                .Security
+            System.Security
                 .Cryptography
                 .Tests
                 .SignatureSupport

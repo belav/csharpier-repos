@@ -176,8 +176,7 @@ namespace System.ServiceModel.Dispatcher
             {
                 detailReader.MoveToContent();
                 if (detailReader.NodeType != XmlNodeType.EndElement && !detailReader.EOF)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new FormatException(SR.GetString(SR.ExtraContentIsPresentInFaultDetail))
                         );

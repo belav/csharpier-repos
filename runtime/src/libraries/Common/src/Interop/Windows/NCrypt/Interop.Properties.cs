@@ -41,8 +41,7 @@ internal static partial class Interop
         {
             fixed (byte* pResult = &result)
             {
-                ErrorCode errorCode = Interop
-                    .NCrypt
+                ErrorCode errorCode = Interop.NCrypt
                     .NCryptGetProperty(
                         hObject,
                         pszProperty,
@@ -73,8 +72,7 @@ internal static partial class Interop
                 Debug.Assert(RuntimeInformation.IsOSPlatform(OSPlatform.Windows));
 #endif
 
-                ErrorCode errorCode = Interop
-                    .NCrypt
+                ErrorCode errorCode = Interop.NCrypt
                     .NCryptGetProperty(
                         hObject,
                         pszProperty,

@@ -461,11 +461,9 @@ namespace System.Reflection
                     InitCustomAttributeType((RuntimeType)parameters[i].ParameterType)
                 );
 
-            FieldInfo[] fields = m_ctor
-                .DeclaringType
+            FieldInfo[] fields = m_ctor.DeclaringType
                 .GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
-            PropertyInfo[] properties = m_ctor
-                .DeclaringType
+            PropertyInfo[] properties = m_ctor.DeclaringType
                 .GetProperties(
                     BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic
                 );

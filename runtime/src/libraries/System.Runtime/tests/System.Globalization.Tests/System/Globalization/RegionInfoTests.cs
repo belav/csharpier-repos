@@ -64,8 +64,7 @@ namespace System.Globalization.Tests
                 );
                 Assert.True(
                     RegionInfo.CurrentRegion.Equals(ri)
-                        || RegionInfo
-                            .CurrentRegion
+                        || RegionInfo.CurrentRegion
                             .Equals(new RegionInfo(CultureInfo.CurrentCulture.Name))
                 );
                 Assert.Same(RegionInfo.CurrentRegion, RegionInfo.CurrentRegion);

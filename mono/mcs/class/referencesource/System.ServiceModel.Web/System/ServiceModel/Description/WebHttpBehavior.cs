@@ -48,8 +48,7 @@ namespace System.ServiceModel.Description
             {
                 if (!WebMessageBodyStyleHelper.IsDefined(value))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new ArgumentOutOfRangeException("value"));
                 }
                 this.defaultBodyStyle = value;
@@ -63,8 +62,7 @@ namespace System.ServiceModel.Description
             {
                 if (!WebMessageFormatHelper.IsDefined(value))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new ArgumentOutOfRangeException("value"));
                 }
                 this.defaultOutgoingRequestFormat = value;
@@ -78,8 +76,7 @@ namespace System.ServiceModel.Description
             {
                 if (!WebMessageFormatHelper.IsDefined(value))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new ArgumentOutOfRangeException("value"));
                 }
                 this.defaultOutgoingReplyFormat = value;
@@ -117,8 +114,7 @@ namespace System.ServiceModel.Description
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("clientRuntime");
             }
-            WebMessageEncodingBindingElement webEncodingBindingElement = endpoint
-                .Binding
+            WebMessageEncodingBindingElement webEncodingBindingElement = endpoint.Binding
                 .CreateBindingElements()
                 .Find<WebMessageEncodingBindingElement>();
             if (
@@ -126,8 +122,7 @@ namespace System.ServiceModel.Description
                 && webEncodingBindingElement.CrossDomainScriptAccessEnabled
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new NotSupportedException(SR2.CrossDomainJavascriptNotsupported)
                     );
@@ -167,12 +162,10 @@ namespace System.ServiceModel.Description
             }
             if (endpointDispatcher == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("endpointDispatcher");
             }
-            WebMessageEncodingBindingElement webEncodingBindingElement = endpoint
-                .Binding
+            WebMessageEncodingBindingElement webEncodingBindingElement = endpoint.Binding
                 .CreateBindingElements()
                 .Find<WebMessageEncodingBindingElement>();
             if (
@@ -180,20 +173,17 @@ namespace System.ServiceModel.Description
                 && webEncodingBindingElement.CrossDomainScriptAccessEnabled
             )
             {
-                ISecurityCapabilities securityCapabilities = endpoint
-                    .Binding
+                ISecurityCapabilities securityCapabilities = endpoint.Binding
                     .GetProperty<ISecurityCapabilities>(new BindingParameterCollection());
                 if (securityCapabilities.SupportsClientAuthentication)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new NotSupportedException(SR2.CrossDomainJavascriptAuthNotSupported)
                         );
                 }
                 if (
-                    endpoint
-                        .Contract
+                    endpoint.Contract
                         .Behaviors
                         .Contains(typeof(JavascriptCallbackBehaviorAttribute))
                 )
@@ -207,8 +197,7 @@ namespace System.ServiceModel.Description
                 {
                     this.JavascriptCallbackParameterName = defaultCallbackParameterName;
                 }
-                endpointDispatcher
-                    .DispatchRuntime
+                endpointDispatcher.DispatchRuntime
                     .MessageInspectors
                     .Add(
                         new JavascriptCallbackMessageInspector(this.JavascriptCallbackParameterName)
@@ -258,8 +247,7 @@ namespace System.ServiceModel.Description
                 // WCF v1 installs any Action="*" op into UnhandledDispatchOperation, but WebHttpBehavior
                 // doesn't want this, so we 'move' that operation back into normal set of operations
 #pragma warning disable 56506 // Microsoft, endpointDispatcher.DispatchRuntime.{Operations,UnhandledDispatchOperation} is never null
-                endpointDispatcher
-                    .DispatchRuntime
+                endpointDispatcher.DispatchRuntime
                     .Operations
                     .Add(endpointDispatcher.DispatchRuntime.UnhandledDispatchOperation);
 #pragma warning restore 56506
@@ -289,8 +277,7 @@ namespace System.ServiceModel.Description
                         this,
                         new List<MultiplexingFormatMapping> { xmlFormatMapping, jsonFormatMapping }
                     );
-                    endpointDispatcher
-                        .DispatchRuntime
+                    endpointDispatcher.DispatchRuntime
                         .MessageInspectors
                         .Add(formatSelectingMessageInspector);
                 }
@@ -356,11 +343,9 @@ namespace System.ServiceModel.Description
                         // some of the formatters in MultiplexingDispatchMessageFormatter might not be present
                         // i.e. the JSON formatter
 
-                        replyDispatchAsMultiplexing
-                            .DefaultContentTypes
+                        replyDispatchAsMultiplexing.DefaultContentTypes
                             .Add(WebMessageFormat.Xml, xmlContentType);
-                        replyDispatchAsMultiplexing
-                            .DefaultContentTypes
+                        replyDispatchAsMultiplexing.DefaultContentTypes
                             .Add(WebMessageFormat.Json, jsonContentType);
 
                         if (formatSelectingMessageInspector != null)
@@ -459,8 +444,7 @@ namespace System.ServiceModel.Description
             EndpointAddress address = endpoint.Address;
             if (address.Headers.Count > 0)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR2.GetString(
@@ -577,8 +561,8 @@ namespace System.ServiceModel.Description
         internal static bool SupportsJsonFormat(OperationDescription od)
         {
             // if the type is XmlSerializable, then we cannot create a json serializer for it
-            DataContractSerializerOperationBehavior dcsob =
-                od.Behaviors.Find<DataContractSerializerOperationBehavior>();
+            DataContractSerializerOperationBehavior dcsob = od.Behaviors
+                .Find<DataContractSerializerOperationBehavior>();
             return (dcsob != null);
         }
 
@@ -590,8 +574,7 @@ namespace System.ServiceModel.Description
             Binding binding = serviceEndpoint.Binding;
             if (binding.Scheme != "http" && binding.Scheme != "https")
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR2.GetString(
@@ -604,8 +587,7 @@ namespace System.ServiceModel.Description
             }
             if (binding.MessageVersion != MessageVersion.None)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR2.GetString(
@@ -621,8 +603,7 @@ namespace System.ServiceModel.Description
                 .Find<TransportBindingElement>();
             if (transportBindingElement != null && !transportBindingElement.ManualAddressing)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR2.GetString(
@@ -661,14 +642,13 @@ namespace System.ServiceModel.Description
             bool isWrapped
         )
         {
-            DataContractSerializerOperationBehavior dcsob =
-                od.Behaviors.Find<DataContractSerializerOperationBehavior>();
+            DataContractSerializerOperationBehavior dcsob = od.Behaviors
+                .Find<DataContractSerializerOperationBehavior>();
             if (useJson)
             {
                 if (dcsob == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR2.GetString(
@@ -697,8 +677,8 @@ namespace System.ServiceModel.Description
                     (dcsob as IOperationBehavior).ApplyClientBehavior(od, cop);
                     return cop.Formatter;
                 }
-                XmlSerializerOperationBehavior xsob =
-                    od.Behaviors.Find<XmlSerializerOperationBehavior>();
+                XmlSerializerOperationBehavior xsob = od.Behaviors
+                    .Find<XmlSerializerOperationBehavior>();
                 if (xsob != null)
                 {
                     xsob = new XmlSerializerOperationBehavior(
@@ -738,13 +718,11 @@ namespace System.ServiceModel.Description
                 WebErrorHandler errorHandler = new WebErrorHandler(
                     this,
                     endpoint.Contract,
-                    endpointDispatcher
-                        .DispatchRuntime
+                    endpointDispatcher.DispatchRuntime
                         .ChannelDispatcher
                         .IncludeExceptionDetailInFaults
                 );
-                endpointDispatcher
-                    .DispatchRuntime
+                endpointDispatcher.DispatchRuntime
                     .ChannelDispatcher
                     .ErrorHandlers
                     .Add(errorHandler);
@@ -968,8 +946,7 @@ namespace System.ServiceModel.Description
             bool useJson = (requestFormat == WebMessageFormat.Json);
             WebMessageEncodingBindingElement webEncoding =
                 (useJson)
-                    ? endpoint
-                        .Binding
+                    ? endpoint.Binding
                         .CreateBindingElements()
                         .Find<WebMessageEncodingBindingElement>()
                     : null;
@@ -980,8 +957,7 @@ namespace System.ServiceModel.Description
             // validate that endpoint.Address is not null before accessing the endpoint.Address.Uri. This is to avoid throwing a NullRefException while constructing a UriTemplateClientFormatter
             if (endpoint.Address == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR2.GetString(
@@ -1310,8 +1286,7 @@ namespace System.ServiceModel.Description
                 {
                     // WebGet will give you UriTemplate parameters by default.
                     // We need a special error message for this case to prevent confusion.
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR2.GetString(
@@ -1325,8 +1300,7 @@ namespace System.ServiceModel.Description
                 }
                 else
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR2.GetString(
@@ -1341,8 +1315,7 @@ namespace System.ServiceModel.Description
 
             if (IsUntypedMessage(operationDescription.Messages[0]))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR2.GetString(
@@ -1359,8 +1332,7 @@ namespace System.ServiceModel.Description
         {
             if (wga != null && wia != null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR2.GetString(
@@ -1483,8 +1455,7 @@ namespace System.ServiceModel.Description
             {
                 if (message.Body.Parts.Count > 1)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR2.GetString(
@@ -1505,8 +1476,7 @@ namespace System.ServiceModel.Description
             {
                 if (message.Body.Parts.Count > 0)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR2.GetString(
@@ -1554,8 +1524,7 @@ namespace System.ServiceModel.Description
                 }
                 if (hasStream && message.Body.Parts.Count > 1)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentException(
                                 SR2.GetString(
@@ -1575,8 +1544,7 @@ namespace System.ServiceModel.Description
                 {
                     if (typeof(Stream) == message.Body.Parts[i].Type)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new ArgumentException(
                                     SR2.GetString(
@@ -1597,8 +1565,7 @@ namespace System.ServiceModel.Description
                     // validate that there are no out or ref params
                     if (message.Body.Parts.Count > 0)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new ArgumentException(
                                     SR2.GetString(
@@ -1661,14 +1628,13 @@ namespace System.ServiceModel.Description
             bool isWrapped
         )
         {
-            DataContractSerializerOperationBehavior dcsob =
-                od.Behaviors.Find<DataContractSerializerOperationBehavior>();
+            DataContractSerializerOperationBehavior dcsob = od.Behaviors
+                .Find<DataContractSerializerOperationBehavior>();
             if (useJson)
             {
                 if (dcsob == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR2.GetString(
@@ -1702,8 +1668,8 @@ namespace System.ServiceModel.Description
                     (dcsob as IOperationBehavior).ApplyDispatchBehavior(od, dop);
                     return dop.Formatter;
                 }
-                XmlSerializerOperationBehavior xsob =
-                    od.Behaviors.Find<XmlSerializerOperationBehavior>();
+                XmlSerializerOperationBehavior xsob = od.Behaviors
+                    .Find<XmlSerializerOperationBehavior>();
                 if (xsob != null)
                 {
                     xsob = new XmlSerializerOperationBehavior(
@@ -1865,8 +1831,7 @@ namespace System.ServiceModel.Description
                 {
                     if (!IsTypedMessage(operation.Messages[0]))
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(
                                     SR2.GetString(
@@ -1880,8 +1845,7 @@ namespace System.ServiceModel.Description
                     }
                     else
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(
                                     SR2.GetString(
@@ -1936,8 +1900,7 @@ namespace System.ServiceModel.Description
 
         internal static bool IsXmlSerializerFaultFormat(OperationDescription operationDescription)
         {
-            XmlSerializerOperationBehavior xsob = operationDescription
-                .Behaviors
+            XmlSerializerOperationBehavior xsob = operationDescription.Behaviors
                 .Find<XmlSerializerOperationBehavior>();
             return (xsob != null && xsob.XmlSerializerFormatAttribute.SupportFaults);
         }
@@ -1954,14 +1917,12 @@ namespace System.ServiceModel.Description
                 {
                     if (description.Type == typeof(Stream))
                     {
-                        throw System
-                            .ServiceModel
+                        throw System.ServiceModel
                             .DiagnosticUtility
                             .ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(
-                                    System
-                                        .ServiceModel
+                                    System.ServiceModel
                                         .SR2
                                         .GetString(
                                             System.ServiceModel.SR2.StreamBodyMemberNotSupported,
@@ -1980,8 +1941,8 @@ namespace System.ServiceModel.Description
 
         void ValidateNoOperationHasEncodedXmlSerializer(OperationDescription od)
         {
-            XmlSerializerOperationBehavior xsob =
-                od.Behaviors.Find<XmlSerializerOperationBehavior>();
+            XmlSerializerOperationBehavior xsob = od.Behaviors
+                .Find<XmlSerializerOperationBehavior>();
             if (
                 xsob != null
                 && (
@@ -1990,8 +1951,7 @@ namespace System.ServiceModel.Description
                 )
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR2.GetString(
@@ -2015,8 +1975,7 @@ namespace System.ServiceModel.Description
             {
                 if (md.Body.Parts.Count > 1)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR2.GetString(
@@ -2030,8 +1989,7 @@ namespace System.ServiceModel.Description
                 }
                 if (md.Body.Parts.Count == 1 && md.Body.Parts[0].Multiple)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR2.GetString(
@@ -2054,8 +2012,7 @@ namespace System.ServiceModel.Description
         {
             if (md.Headers.Count != 0)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR2.GetString(SR2.InvalidMethodWithSOAPHeaders, opName, contractName)
@@ -2100,8 +2057,7 @@ namespace System.ServiceModel.Description
             JavascriptCallbackResponseMessageProperty javascriptProperty = null;
             if (
                 !String.IsNullOrEmpty(callbackParameterName)
-                && !OperationContext
-                    .Current
+                && !OperationContext.Current
                     .OutgoingMessageProperties
                     .TryGetValue<JavascriptCallbackResponseMessageProperty>(
                         JavascriptCallbackResponseMessageProperty.Name,
@@ -2109,8 +2065,7 @@ namespace System.ServiceModel.Description
                     )
             )
             {
-                UriTemplateMatch match = WebOperationContext
-                    .Current
+                UriTemplateMatch match = WebOperationContext.Current
                     .IncomingRequest
                     .UriTemplateMatch;
                 if (match != null && match.QueryParameters.AllKeys.Contains(callbackParameterName))
@@ -2123,8 +2078,7 @@ namespace System.ServiceModel.Description
                         {
                             CallbackFunctionName = callbackName,
                         };
-                        OperationContext
-                            .Current
+                        OperationContext.Current
                             .OutgoingMessageProperties
                             .Add(
                                 JavascriptCallbackResponseMessageProperty.Name,

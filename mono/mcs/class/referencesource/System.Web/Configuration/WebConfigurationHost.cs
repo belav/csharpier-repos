@@ -532,8 +532,7 @@ namespace System.Web.Configuration
                 return RootWebConfigPath;
             }
 
-            string virtualPath = vpath
-                .VirtualPathStringNoTrailingSlash
+            string virtualPath = vpath.VirtualPathStringNoTrailingSlash
                 .ToLower(CultureInfo.InvariantCulture);
             string configPath =
                 (siteID == DefaultSiteID)
@@ -733,8 +732,7 @@ namespace System.Web.Configuration
                 list.Add(wrapper);
             }
 
-            HttpRuntime
-                .FileChangesMonitor
+            HttpRuntime.FileChangesMonitor
                 .StartMonitoringFile(streamName, new FileChangeEventHandler(wrapper.OnFileChanged));
 
             return wrapper;

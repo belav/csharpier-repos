@@ -100,8 +100,7 @@ public class Property : PropertyBase, IMutableProperty, IConventionProperty, IPr
         FieldInfo? newFieldInfo,
         FieldInfo? oldFieldInfo
     ) =>
-        DeclaringType
-            .Model
+        DeclaringType.Model
             .ConventionDispatcher
             .OnPropertyFieldChanged(Builder, newFieldInfo, oldFieldInfo);
 
@@ -117,8 +116,7 @@ public class Property : PropertyBase, IMutableProperty, IConventionProperty, IPr
         IConventionAnnotation? annotation,
         IConventionAnnotation? oldAnnotation
     ) =>
-        DeclaringType
-            .Model
+        DeclaringType.Model
             .ConventionDispatcher
             .OnPropertyAnnotationChanged(Builder, name, annotation, oldAnnotation);
 
@@ -1058,8 +1056,7 @@ public class Property : PropertyBase, IMutableProperty, IConventionProperty, IPr
                     ref _typeMapping,
                     (IProperty)this,
                     static property =>
-                        property
-                            .DeclaringType
+                        property.DeclaringType
                             .Model
                             .GetModelDependencies()
                             .TypeMappingSource
@@ -1511,8 +1508,7 @@ public class Property : PropertyBase, IMutableProperty, IConventionProperty, IPr
         IElementType? newElementType,
         IElementType? oldElementType
     ) =>
-        DeclaringType
-            .Model
+        DeclaringType.Model
             .ConventionDispatcher
             .OnPropertyElementTypeChanged(Builder, newElementType, oldElementType);
 

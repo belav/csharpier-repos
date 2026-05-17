@@ -311,8 +311,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             {
                 // although submission and scripts semantically doesn't have a base we need to emit one into metadata:
                 Debug.Assert((object)baseType == null);
-                baseType = AdaptedNamedTypeSymbol
-                    .ContainingAssembly
+                baseType = AdaptedNamedTypeSymbol.ContainingAssembly
                     .GetSpecialType(Microsoft.CodeAnalysis.SpecialType.System_Object);
             }
 
@@ -409,8 +408,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         // a destructor that will never be invoked by the runtime.
                         // NOTE: If System.Object doesn't contain a destructor, you're on your own - this destructor may
                         // or not be called by the runtime.
-                        TypeSymbol objectType = AdaptedNamedTypeSymbol
-                            .DeclaringCompilation
+                        TypeSymbol objectType = AdaptedNamedTypeSymbol.DeclaringCompilation
                             .GetSpecialType(CodeAnalysis.SpecialType.System_Object);
                         foreach (
                             Symbol objectMember in objectType.GetMembers(
@@ -706,8 +704,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             // Don't compute IsAttributeType if IncludePrivateMembers is true, as we'll include it anyway.
             bool alwaysIncludeConstructors =
                 context.IncludePrivateMembers
-                || AdaptedNamedTypeSymbol
-                    .DeclaringCompilation
+                || AdaptedNamedTypeSymbol.DeclaringCompilation
                     .IsAttributeType(AdaptedNamedTypeSymbol);
 
             foreach (var method in AdaptedNamedTypeSymbol.GetMethodsToEmit())

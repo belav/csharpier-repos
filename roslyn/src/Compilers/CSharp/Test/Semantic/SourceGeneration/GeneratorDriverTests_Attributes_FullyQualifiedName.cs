@@ -27,8 +27,7 @@ internal static class IncrementalGeneratorInitializationContextExtensions
     )
         where T : SyntaxNode
     {
-        return context
-            .SyntaxProvider
+        return context.SyntaxProvider
             .ForAttributeWithSimpleName(simpleName, (node, _) => node is T)
             .SelectMany((t, _) => t.matches.Cast<T>())
             .WithTrackingName("result_ForAttribute");
@@ -40,8 +39,7 @@ internal static class IncrementalGeneratorInitializationContextExtensions
     )
         where T : SyntaxNode
     {
-        return context
-            .SyntaxProvider
+        return context.SyntaxProvider
             .ForAttributeWithMetadataName(
                 fullyQualifiedMetadataName,
                 (node, _) => node is T,
@@ -1677,15 +1675,16 @@ class XAttribute : System.Attribute { }
         var generator = new IncrementalGeneratorWrapper(
             new PipelineCallbackGenerator(ctx =>
             {
-                var input = ctx.SyntaxProvider.ForAttributeWithMetadataName<ClassDeclarationSyntax>(
-                    "XAttribute",
-                    (_, _) => true,
-                    (ctx, _) =>
-                    {
-                        Assert.True(ctx.Attributes.Length == 2);
-                        return (ClassDeclarationSyntax)ctx.TargetNode;
-                    }
-                );
+                var input = ctx.SyntaxProvider
+                    .ForAttributeWithMetadataName<ClassDeclarationSyntax>(
+                        "XAttribute",
+                        (_, _) => true,
+                        (ctx, _) =>
+                        {
+                            Assert.True(ctx.Attributes.Length == 2);
+                            return (ClassDeclarationSyntax)ctx.TargetNode;
+                        }
+                    );
                 ctx.RegisterSourceOutput(
                     input,
                     (spc, node) =>
@@ -1741,15 +1740,16 @@ class XAttribute : System.Attribute { }
         var generator = new IncrementalGeneratorWrapper(
             new PipelineCallbackGenerator(ctx =>
             {
-                var input = ctx.SyntaxProvider.ForAttributeWithMetadataName<ClassDeclarationSyntax>(
-                    "XAttribute",
-                    (_, _) => true,
-                    (ctx, _) =>
-                    {
-                        Assert.True(ctx.Attributes.Length == 2);
-                        return (ClassDeclarationSyntax)ctx.TargetNode;
-                    }
-                );
+                var input = ctx.SyntaxProvider
+                    .ForAttributeWithMetadataName<ClassDeclarationSyntax>(
+                        "XAttribute",
+                        (_, _) => true,
+                        (ctx, _) =>
+                        {
+                            Assert.True(ctx.Attributes.Length == 2);
+                            return (ClassDeclarationSyntax)ctx.TargetNode;
+                        }
+                    );
                 ctx.RegisterSourceOutput(
                     input,
                     (spc, node) =>
@@ -1806,15 +1806,16 @@ class YAttribute : System.Attribute { }
         var generator = new IncrementalGeneratorWrapper(
             new PipelineCallbackGenerator(ctx =>
             {
-                var input = ctx.SyntaxProvider.ForAttributeWithMetadataName<ClassDeclarationSyntax>(
-                    "XAttribute",
-                    (_, _) => true,
-                    (ctx, _) =>
-                    {
-                        Assert.True(ctx.Attributes.Length == 1);
-                        return (ClassDeclarationSyntax)ctx.TargetNode;
-                    }
-                );
+                var input = ctx.SyntaxProvider
+                    .ForAttributeWithMetadataName<ClassDeclarationSyntax>(
+                        "XAttribute",
+                        (_, _) => true,
+                        (ctx, _) =>
+                        {
+                            Assert.True(ctx.Attributes.Length == 1);
+                            return (ClassDeclarationSyntax)ctx.TargetNode;
+                        }
+                    );
                 ctx.RegisterSourceOutput(
                     input,
                     (spc, node) =>
@@ -1871,15 +1872,16 @@ class YAttribute : System.Attribute { }
         var generator = new IncrementalGeneratorWrapper(
             new PipelineCallbackGenerator(ctx =>
             {
-                var input = ctx.SyntaxProvider.ForAttributeWithMetadataName<ClassDeclarationSyntax>(
-                    "XAttribute",
-                    (_, _) => true,
-                    (ctx, _) =>
-                    {
-                        Assert.True(ctx.Attributes.Length == 1);
-                        return (ClassDeclarationSyntax)ctx.TargetNode;
-                    }
-                );
+                var input = ctx.SyntaxProvider
+                    .ForAttributeWithMetadataName<ClassDeclarationSyntax>(
+                        "XAttribute",
+                        (_, _) => true,
+                        (ctx, _) =>
+                        {
+                            Assert.True(ctx.Attributes.Length == 1);
+                            return (ClassDeclarationSyntax)ctx.TargetNode;
+                        }
+                    );
                 ctx.RegisterSourceOutput(
                     input,
                     (spc, node) =>
@@ -1936,15 +1938,16 @@ class YAttribute : System.Attribute { }
         var generator = new IncrementalGeneratorWrapper(
             new PipelineCallbackGenerator(ctx =>
             {
-                var input = ctx.SyntaxProvider.ForAttributeWithMetadataName<ClassDeclarationSyntax>(
-                    "XAttribute",
-                    (_, _) => true,
-                    (ctx, _) =>
-                    {
-                        Assert.True(ctx.Attributes.Length == 1);
-                        return (ClassDeclarationSyntax)ctx.TargetNode;
-                    }
-                );
+                var input = ctx.SyntaxProvider
+                    .ForAttributeWithMetadataName<ClassDeclarationSyntax>(
+                        "XAttribute",
+                        (_, _) => true,
+                        (ctx, _) =>
+                        {
+                            Assert.True(ctx.Attributes.Length == 1);
+                            return (ClassDeclarationSyntax)ctx.TargetNode;
+                        }
+                    );
                 ctx.RegisterSourceOutput(
                     input,
                     (spc, node) =>
@@ -2001,15 +2004,16 @@ class YAttribute : System.Attribute { }
         var generator = new IncrementalGeneratorWrapper(
             new PipelineCallbackGenerator(ctx =>
             {
-                var input = ctx.SyntaxProvider.ForAttributeWithMetadataName<ClassDeclarationSyntax>(
-                    "XAttribute",
-                    (_, _) => true,
-                    (ctx, _) =>
-                    {
-                        Assert.True(ctx.Attributes.Length == 1);
-                        return (ClassDeclarationSyntax)ctx.TargetNode;
-                    }
-                );
+                var input = ctx.SyntaxProvider
+                    .ForAttributeWithMetadataName<ClassDeclarationSyntax>(
+                        "XAttribute",
+                        (_, _) => true,
+                        (ctx, _) =>
+                        {
+                            Assert.True(ctx.Attributes.Length == 1);
+                            return (ClassDeclarationSyntax)ctx.TargetNode;
+                        }
+                    );
                 ctx.RegisterSourceOutput(
                     input,
                     (spc, node) =>
@@ -2610,8 +2614,7 @@ class C { }
 
         driver = driver.RunGenerators(
             compilation.AddSyntaxTrees(
-                compilation
-                    .SyntaxTrees
+                compilation.SyntaxTrees
                     .First()
                     .WithChangedText(
                         SourceText.From(
@@ -2743,8 +2746,7 @@ class C2 { }
 
         driver = driver.RunGenerators(
             compilation.AddSyntaxTrees(
-                compilation
-                    .SyntaxTrees
+                compilation.SyntaxTrees
                     .First()
                     .WithChangedText(
                         SourceText.From(
@@ -2880,8 +2882,7 @@ class C2 { }
 
         driver = driver.RunGenerators(
             compilation.AddSyntaxTrees(
-                compilation
-                    .SyntaxTrees
+                compilation.SyntaxTrees
                     .First()
                     .WithChangedText(
                         SourceText.From(
@@ -3016,8 +3017,7 @@ class XAttribute : System.Attribute
         driver = driver.RunGenerators(
             compilation.ReplaceSyntaxTree(
                 compilation.SyntaxTrees.First(),
-                compilation
-                    .SyntaxTrees
+                compilation.SyntaxTrees
                     .First()
                     .WithChangedText(
                         SourceText.From(
@@ -3155,8 +3155,7 @@ class XAttribute : System.Attribute
         driver = driver.RunGenerators(
             compilation.ReplaceSyntaxTree(
                 compilation.SyntaxTrees.First(),
-                compilation
-                    .SyntaxTrees
+                compilation.SyntaxTrees
                     .First()
                     .WithChangedText(
                         SourceText.From(

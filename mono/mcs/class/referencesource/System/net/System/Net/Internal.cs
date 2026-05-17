@@ -360,8 +360,7 @@ namespace System.Net
                 // Assert DNS permissions.
                 //
                 StringBuilder hostname = new StringBuilder(HostNameBufferLength);
-                SocketError errorCode = UnsafeNclNativeMethods
-                    .OSSOCK
+                SocketError errorCode = UnsafeNclNativeMethods.OSSOCK
                     .gethostname(hostname, HostNameBufferLength);
 
                 if (errorCode != SocketError.Success)
@@ -623,8 +622,7 @@ namespace System.Net
                     true,
                     false
                 );
-                UnsafeNclNativeMethods
-                    .OSSOCK
+                UnsafeNclNativeMethods.OSSOCK
                     .ioctlsocket(ipv4Socket, IoctlSocketConstants.FIONBIO, ref blocking);
             }
 
@@ -638,8 +636,7 @@ namespace System.Net
                     true,
                     false
                 );
-                UnsafeNclNativeMethods
-                    .OSSOCK
+                UnsafeNclNativeMethods.OSSOCK
                     .ioctlsocket(ipv6Socket, IoctlSocketConstants.FIONBIO, ref blocking);
             }
             Setup(StartIPOptions.Both);
@@ -653,8 +650,7 @@ namespace System.Net
             if (Socket.OSSupportsIPv4 && (startIPOptions & StartIPOptions.StartIPv4) != 0)
             {
                 errorCode = (SocketError)
-                    UnsafeNclNativeMethods
-                        .OSSOCK
+                    UnsafeNclNativeMethods.OSSOCK
                         .WSAIoctl_Blocking(
                             ipv4Socket.DangerousGetHandle(),
                             (int)IOControlCode.AddressListChange,
@@ -678,8 +674,7 @@ namespace System.Net
                 }
 
                 errorCode = (SocketError)
-                    UnsafeNclNativeMethods
-                        .OSSOCK
+                    UnsafeNclNativeMethods.OSSOCK
                         .WSAEventSelect(
                             ipv4Socket,
                             ipv4Socket.GetEventHandle().SafeWaitHandle,
@@ -695,8 +690,7 @@ namespace System.Net
             if (Socket.OSSupportsIPv6 && (startIPOptions & StartIPOptions.StartIPv6) != 0)
             {
                 errorCode = (SocketError)
-                    UnsafeNclNativeMethods
-                        .OSSOCK
+                    UnsafeNclNativeMethods.OSSOCK
                         .WSAIoctl_Blocking(
                             ipv6Socket.DangerousGetHandle(),
                             (int)IOControlCode.AddressListChange,
@@ -720,8 +714,7 @@ namespace System.Net
                 }
 
                 errorCode = (SocketError)
-                    UnsafeNclNativeMethods
-                        .OSSOCK
+                    UnsafeNclNativeMethods.OSSOCK
                         .WSAEventSelect(
                             ipv6Socket,
                             ipv6Socket.GetEventHandle().SafeWaitHandle,
@@ -854,8 +847,7 @@ namespace System.Net
             try
             {
                 using (
-                    RegistryKey installTypeKey = Registry
-                        .LocalMachine
+                    RegistryKey installTypeKey = Registry.LocalMachine
                         .OpenSubKey(OSInstallTypeRegKey)
                 )
                 {
@@ -2390,8 +2382,7 @@ namespace System.Net
             );
             ChainPolicyStatus status = new ChainPolicyStatus();
             status.cbSize = ChainPolicyStatus.StructSize;
-            int errorCode = UnsafeNclNativeMethods
-                .NativePKI
+            int errorCode = UnsafeNclNativeMethods.NativePKI
                 .CertVerifyCertificateChainPolicy(
                     (IntPtr)ChainPolicyType.SSL,
                     chainContext,

@@ -196,8 +196,7 @@ namespace System.ServiceModel.Dispatcher
         )]
         static void SendTransaction(ref ProxyRpc rpc)
         {
-            System
-                .ServiceModel
+            System.ServiceModel
                 .Channels
                 .TransactionFlowProperty
                 .Set(Transaction.Current, rpc.Request);
@@ -234,8 +233,7 @@ namespace System.ServiceModel.Dispatcher
         {
             if (this.operationSelector == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new NotSupportedException(
                             SR.GetString(

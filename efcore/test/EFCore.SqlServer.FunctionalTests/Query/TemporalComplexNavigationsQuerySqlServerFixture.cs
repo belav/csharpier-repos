@@ -33,20 +33,17 @@ public class TemporalComplexNavigationsQuerySqlServerFixture
         // clean up intermittent history since in the Seed method we do fixup in multiple stages
         foreach (var tableName in tableNames)
         {
-            context
-                .Database
+            context.Database
                 .ExecuteSqlRaw($"ALTER TABLE [{tableName}] SET (SYSTEM_VERSIONING = OFF)");
             context.Database.ExecuteSqlRaw($"DELETE FROM [{tableName + "History"}]");
-            context
-                .Database
+            context.Database
                 .ExecuteSqlRaw(
                     $"ALTER TABLE [{tableName}] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [dbo].[{tableName + "History"}]))"
                 );
         }
 
         foreach (
-            var entityOne in context
-                .ChangeTracker
+            var entityOne in context.ChangeTracker
                 .Entries()
                 .Where(e => e.Entity is Level1)
                 .Select(e => e.Entity)
@@ -56,8 +53,7 @@ public class TemporalComplexNavigationsQuerySqlServerFixture
         }
 
         foreach (
-            var entityOne in context
-                .ChangeTracker
+            var entityOne in context.ChangeTracker
                 .Entries()
                 .Where(e => e.Entity is Level2)
                 .Select(e => e.Entity)
@@ -67,8 +63,7 @@ public class TemporalComplexNavigationsQuerySqlServerFixture
         }
 
         foreach (
-            var entityOne in context
-                .ChangeTracker
+            var entityOne in context.ChangeTracker
                 .Entries()
                 .Where(e => e.Entity is Level3)
                 .Select(e => e.Entity)
@@ -78,8 +73,7 @@ public class TemporalComplexNavigationsQuerySqlServerFixture
         }
 
         foreach (
-            var entityOne in context
-                .ChangeTracker
+            var entityOne in context.ChangeTracker
                 .Entries()
                 .Where(e => e.Entity is Level4)
                 .Select(e => e.Entity)
@@ -92,31 +86,25 @@ public class TemporalComplexNavigationsQuerySqlServerFixture
 
         foreach (var tableName in tableNames)
         {
-            context
-                .Database
+            context.Database
                 .ExecuteSqlRaw($"ALTER TABLE [{tableName}] SET (SYSTEM_VERSIONING = OFF)");
-            context
-                .Database
+            context.Database
                 .ExecuteSqlRaw($"ALTER TABLE [{tableName}] DROP PERIOD FOR SYSTEM_TIME");
 
-            context
-                .Database
+            context.Database
                 .ExecuteSqlRaw(
                     $"UPDATE [{tableName + "History"}] SET PeriodStart = '2000-01-01T01:00:00.0000000Z'"
                 );
-            context
-                .Database
+            context.Database
                 .ExecuteSqlRaw(
                     $"UPDATE [{tableName + "History"}] SET PeriodEnd = '2020-07-01T07:00:00.0000000Z'"
                 );
 
-            context
-                .Database
+            context.Database
                 .ExecuteSqlRaw(
                     $"ALTER TABLE [{tableName}] ADD PERIOD FOR SYSTEM_TIME ([PeriodStart], [PeriodEnd])"
                 );
-            context
-                .Database
+            context.Database
                 .ExecuteSqlRaw(
                     $"ALTER TABLE [{tableName}] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [dbo].[{tableName + "History"}]))"
                 );

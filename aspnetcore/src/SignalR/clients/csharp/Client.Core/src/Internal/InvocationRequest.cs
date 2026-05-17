@@ -126,8 +126,7 @@ internal abstract partial class InvocationRequest : IDisposable
             if (completionMessage.Result != null)
             {
                 Log.ReceivedUnexpectedComplete(Logger, InvocationId);
-                _channel
-                    .Writer
+                _channel.Writer
                     .TryComplete(
                         new InvalidOperationException(
                             "Server provided a result in a completion response to a streamed invocation."

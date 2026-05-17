@@ -588,8 +588,7 @@ namespace System.Data.Services.Client
 
             for (int i = 0; i < properties.Length; i++)
             {
-                var property = entry
-                    .ActualType
+                var property = entry.ActualType
                     .GetProperty(properties[i], materializer.ignoreMissingProperties);
                 object value = propertyValues[i](materializer, entry, expectedType);
                 if (
@@ -946,11 +945,8 @@ namespace System.Data.Services.Client
                             "parser.CurrentEntry != null -- otherwise parser.DataKind shouldn't be Entry"
                         );
                         this.CurrentEntry.ResolvedObject = this.TargetInstance;
-                        this.currentValue = this.materializeEntryPlan.Run(
-                            this,
-                            this.CurrentEntry,
-                            this.expectedType
-                        );
+                        this.currentValue = this.materializeEntryPlan
+                            .Run(this, this.CurrentEntry, this.expectedType);
                         return true;
                     case AtomDataKind.PagingLinks:
                         break;
@@ -1639,12 +1635,8 @@ namespace System.Data.Services.Client
             if (tracking)
             {
                 EntityStates state;
-                entry.ResolvedObject = this.context.TryGetEntity(
-                    entry.Identity,
-                    entry.ETagText,
-                    this.mergeOption,
-                    out state
-                );
+                entry.ResolvedObject = this.context
+                    .TryGetEntity(entry.Identity, entry.ETagText, this.mergeOption, out state);
                 if (entry.ResolvedObject != null)
                 {
                     if (!expectedEntryType.IsInstanceOfType(entry.ResolvedObject))

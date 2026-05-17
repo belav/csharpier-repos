@@ -94,8 +94,7 @@ namespace Internal.IL.Stubs
                 // Type check
                 if (_method.Kind == ArrayMethodKind.Set)
                 {
-                    MethodDesc checkArrayStore = context
-                        .SystemModule
+                    MethodDesc checkArrayStore = context.SystemModule
                         .GetKnownType("System.Runtime", "RuntimeImports")
                         .GetKnownMethod("RhCheckArrayStore", null);
 
@@ -107,8 +106,7 @@ namespace Internal.IL.Stubs
                 else if (_method.Kind == ArrayMethodKind.AddressWithHiddenArg)
                 {
                     TypeDesc objectType = context.GetWellKnownType(WellKnownType.Object);
-                    TypeDesc eetypeType = context
-                        .SystemModule
+                    TypeDesc eetypeType = context.SystemModule
                         .GetKnownType("Internal.Runtime", "MethodTable");
 
                     typeMismatchExceptionLabel = _emitter.NewCodeLabel();
@@ -159,8 +157,7 @@ namespace Internal.IL.Stubs
             if (_rank == 1)
             {
                 TypeDesc objectType = context.GetWellKnownType(WellKnownType.Object);
-                TypeDesc eetypeType = context
-                    .SystemModule
+                TypeDesc eetypeType = context.SystemModule
                     .GetKnownType("Internal.Runtime", "MethodTable");
 
                 codeStream.EmitLdArg(0);

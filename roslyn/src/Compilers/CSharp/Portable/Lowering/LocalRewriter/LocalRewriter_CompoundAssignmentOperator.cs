@@ -827,12 +827,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                     {
                         var implicitIndexerAccess = (BoundImplicitIndexerAccess)originalLHS;
                         Debug.Assert(
-                            implicitIndexerAccess
-                                .Argument
+                            implicitIndexerAccess.Argument
                                 .Type!
                                 .Equals(_compilation.GetWellKnownType(WellKnownType.System_Index))
-                                || implicitIndexerAccess
-                                    .Argument
+                                || implicitIndexerAccess.Argument
                                     .Type!
                                     .Equals(
                                         _compilation.GetWellKnownType(WellKnownType.System_Range)
@@ -955,8 +953,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 case BoundKind.FunctionPointerInvocation:
                     Debug.Assert(
-                        ((BoundFunctionPointerInvocation)originalLHS)
-                            .FunctionPointer
+                        ((BoundFunctionPointerInvocation)originalLHS).FunctionPointer
                             .Signature
                             .RefKind != RefKind.None
                     );

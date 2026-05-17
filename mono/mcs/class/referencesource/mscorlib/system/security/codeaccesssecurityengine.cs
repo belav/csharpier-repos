@@ -811,8 +811,7 @@ namespace System.Security
             {
                 // Security: REQ_SQ flag is missing. Bad compiler ?
                 // This can happen when you create delegates over functions that need the REQ_SQ
-                System
-                    .Environment
+                System.Environment
                     .FailFast(
                         Environment.GetResourceString("ExecutionEngine_MissingSecurityDescriptor")
                     );
@@ -849,8 +848,7 @@ namespace System.Security
             {
                 // Security: REQ_SQ flag is missing. Bad compiler ?
                 // This can happen when you create delegates over functions that need the REQ_SQ
-                System
-                    .Environment
+                System.Environment
                     .FailFast(
                         Environment.GetResourceString("ExecutionEngine_MissingSecurityDescriptor")
                     );
@@ -877,8 +875,7 @@ namespace System.Security
             {
                 // Security: REQ_SQ flag is missing. Bad compiler ?
                 // This can happen when you create delegates over functions that need the REQ_SQ
-                System
-                    .Environment
+                System.Environment
                     .FailFast(
                         Environment.GetResourceString("ExecutionEngine_MissingSecurityDescriptor")
                     );
@@ -914,8 +911,7 @@ namespace System.Security
 
             // If the AppDomain is setup with an ApplicationTrust then it is always homogenous and we can
             // tell its grant set right from the ApplicaitonTrust
-            ApplicationTrust domainTrust = AppDomain
-                .CurrentDomain
+            ApplicationTrust domainTrust = AppDomain.CurrentDomain
                 .SetupInformation
                 .ApplicationTrust;
             if (domainTrust != null)
@@ -1030,8 +1026,7 @@ namespace System.Security
                         );
                     }
 
-                    PermissionSet homogenousGrantSet = AppDomain
-                        .CurrentDomain
+                    PermissionSet homogenousGrantSet = AppDomain.CurrentDomain
                         .ApplicationTrust
                         .DefaultGrantSet
                         .PermissionSet;

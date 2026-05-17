@@ -81,8 +81,7 @@ public static class StackExchangeRedisDataProtectionBuilderExtensions
         RedisKey key
     )
     {
-        builder
-            .Services
+        builder.Services
             .Configure<KeyManagementOptions>(options =>
             {
                 options.XmlRepository = new RedisXmlRepository(databaseFactory, key);

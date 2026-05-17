@@ -75,14 +75,12 @@ namespace System.ServiceModel.Syndication
         {
             if (feedTypeToCreate == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("feedTypeToCreate");
             }
             if (!typeof(SyndicationFeed).IsAssignableFrom(feedTypeToCreate))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(
                         "feedTypeToCreate",
                         SR.GetString(
@@ -184,8 +182,7 @@ namespace System.ServiceModel.Syndication
             TraceFeedReadBegin();
             if (!CanRead(reader))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new XmlException(
                             SR.GetString(SR.UnknownFeedXml, reader.LocalName, reader.NamespaceURI)
@@ -258,8 +255,7 @@ namespace System.ServiceModel.Syndication
                         {
                             if (preserveAttributeExtensions)
                             {
-                                category
-                                    .AttributeExtensions
+                                category.AttributeExtensions
                                     .Add(new XmlQualifiedName(name, ns), val);
                             }
                             else
@@ -790,8 +786,7 @@ namespace System.ServiceModel.Syndication
                     kind = TextSyndicationContentKind.XHtml;
                     break;
                 default:
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new XmlException(
                                 FeedUtils.AddLineInfo(
@@ -873,8 +868,7 @@ namespace System.ServiceModel.Syndication
             dateTimeString = dateTimeString.Trim();
             if (dateTimeString.Length < 20)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new XmlException(FeedUtils.AddLineInfo(reader, SR.ErrorParsingDateTime))
                     );
@@ -915,8 +909,7 @@ namespace System.ServiceModel.Syndication
             {
                 return utcTime;
             }
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(
                     new XmlException(FeedUtils.AddLineInfo(reader, SR.ErrorParsingDateTime))
                 );
@@ -1001,8 +994,7 @@ namespace System.ServiceModel.Syndication
                         {
                             if (this.preserveAttributeExtensions)
                             {
-                                result
-                                    .AttributeExtensions
+                                result.AttributeExtensions
                                     .Add(
                                         new XmlQualifiedName(reader.LocalName, reader.NamespaceURI),
                                         reader.Value
@@ -1080,8 +1072,7 @@ namespace System.ServiceModel.Syndication
                                 {
                                     if (this.preserveAttributeExtensions)
                                     {
-                                        result
-                                            .AttributeExtensions
+                                        result.AttributeExtensions
                                             .Add(
                                                 new XmlQualifiedName(
                                                     reader.LocalName,
@@ -1125,8 +1116,7 @@ namespace System.ServiceModel.Syndication
                             {
                                 if (readItemsAtLeastOnce)
                                 {
-                                    throw DiagnosticUtility
-                                        .ExceptionUtility
+                                    throw DiagnosticUtility.ExceptionUtility
                                         .ThrowHelperWarning(
                                             new InvalidOperationException(
                                                 SR.GetString(
@@ -1182,16 +1172,14 @@ namespace System.ServiceModel.Syndication
             }
             catch (FormatException e)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new XmlException(FeedUtils.AddLineInfo(reader, SR.ErrorParsingFeed), e)
                     );
             }
             catch (ArgumentException e)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new XmlException(FeedUtils.AddLineInfo(reader, SR.ErrorParsingFeed), e)
                     );
@@ -1226,8 +1214,7 @@ namespace System.ServiceModel.Syndication
                         {
                             if (this.preserveAttributeExtensions)
                             {
-                                result
-                                    .AttributeExtensions
+                                result.AttributeExtensions
                                     .Add(
                                         new XmlQualifiedName(reader.LocalName, reader.NamespaceURI),
                                         reader.Value
@@ -1288,16 +1275,14 @@ namespace System.ServiceModel.Syndication
             }
             catch (FormatException e)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new XmlException(FeedUtils.AddLineInfo(reader, SR.ErrorParsingItem), e)
                     );
             }
             catch (ArgumentException e)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new XmlException(FeedUtils.AddLineInfo(reader, SR.ErrorParsingItem), e)
                     );
@@ -1360,10 +1345,11 @@ namespace System.ServiceModel.Syndication
                     {
                         if (this.preserveAttributeExtensions)
                         {
-                            link.AttributeExtensions.Add(
-                                new XmlQualifiedName(reader.LocalName, reader.NamespaceURI),
-                                reader.Value
-                            );
+                            link.AttributeExtensions
+                                .Add(
+                                    new XmlQualifiedName(reader.LocalName, reader.NamespaceURI),
+                                    reader.Value
+                                );
                         }
                         else
                         {
@@ -1470,8 +1456,7 @@ namespace System.ServiceModel.Syndication
                     {
                         if (this.preserveAttributeExtensions)
                         {
-                            result
-                                .AttributeExtensions
+                            result.AttributeExtensions
                                 .Add(
                                     new XmlQualifiedName(reader.LocalName, reader.NamespaceURI),
                                     reader.Value
@@ -1571,8 +1556,7 @@ namespace System.ServiceModel.Syndication
         {
             if (this.Feed == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(SR.GetString(SR.FeedFormatterDoesNotHaveFeed))
                     );

@@ -212,8 +212,7 @@ namespace System.ServiceModel
 
             if (faultDetailTypes == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("faultDetailTypes");
             }
             DataContractSerializerFaultFormatter faultFormatter =

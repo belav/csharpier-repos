@@ -222,15 +222,13 @@ namespace System.Data.OleDb
 
             // replace the original table with the updated one
             metaDataCollectionsTable.AcceptChanges();
-            CollectionDataSet
-                .Tables
+            CollectionDataSet.Tables
                 .Remove(CollectionDataSet.Tables[DbMetaDataCollectionNames.MetaDataCollections]!);
             CollectionDataSet.Tables.Add(metaDataCollectionsTable);
 
             if (restrictionsTable != null)
             {
-                CollectionDataSet
-                    .Tables
+                CollectionDataSet.Tables
                     .Remove(CollectionDataSet.Tables[DbMetaDataCollectionNames.Restrictions]!);
                 CollectionDataSet.Tables.Add(restrictionsTable);
             }

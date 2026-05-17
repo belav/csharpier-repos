@@ -421,8 +421,7 @@ namespace System.Runtime.Serialization
                     break;
             }
             if (!handled)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -505,8 +504,7 @@ namespace System.Runtime.Serialization
                     break;
             }
             if (!handled)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility

@@ -758,8 +758,7 @@ namespace System.Web
                     {
                         if (bufferedLength > 0)
                         {
-                            byte[] chunkPrefix = Encoding
-                                .ASCII
+                            byte[] chunkPrefix = Encoding.ASCII
                                 .GetBytes(Convert.ToString(bufferedLength, 16) + "\r\n");
                             _wr.SendResponseFromMemory(chunkPrefix, chunkPrefix.Length);
 
@@ -2715,8 +2714,7 @@ namespace System.Web
         )
         {
             string destinationUrl = null;
-            VirtualPathData data = RouteTable
-                .Routes
+            VirtualPathData data = RouteTable.Routes
                 .GetVirtualPath(Request.RequestContext, routeName, routeValues);
             if (data != null)
             {

@@ -163,8 +163,7 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
     {
         using var context = CreateContext();
 
-        var query = context
-            .Fields
+        var query = context.Fields
             .Include(x => x.Label.Globalizations)
                 .ThenInclude(x => x.Language)
             .Include(x => x.Placeholder.Globalizations)
@@ -440,9 +439,9 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
             ss =>
                 from e1 in ss.Set<Level1>()
                 where
-                    e1.OneToOne_Optional_FK1.MaybeScalar(x =>
-                        x.Date.AddDays(10).AddDays(15).AddMonths(2)
-                    ) > new DateTime(2000, 2, 1)
+                    e1.OneToOne_Optional_FK1
+                        .MaybeScalar(x => x.Date.AddDays(10).AddDays(15).AddMonths(2))
+                    > new DateTime(2000, 2, 1)
                 select e1
         );
 
@@ -4120,12 +4119,13 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
     {
         using var ctx = CreateContext();
 
-        var query = ctx.LevelOne.Join(
-            ctx.LevelTwo,
-            l1 => l1.Id,
-            l2 => l2.Level1_Required_Id,
-            (o, i) => new { o.OneToOne_Optional_FK1, i.OneToMany_Optional2 }
-        );
+        var query = ctx.LevelOne
+            .Join(
+                ctx.LevelTwo,
+                l1 => l1.Id,
+                l2 => l2.Level1_Required_Id,
+                (o, i) => new { o.OneToOne_Optional_FK1, i.OneToMany_Optional2 }
+            );
 
         _ = async ? await query.ToListAsync() : query.ToList();
     }

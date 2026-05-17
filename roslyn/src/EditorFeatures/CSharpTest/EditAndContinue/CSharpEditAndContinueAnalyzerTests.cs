@@ -523,8 +523,7 @@ class C
             using var workspace = CreateWorkspace();
 
             var projectId = ProjectId.CreateNewId();
-            var oldSolution = workspace
-                .CurrentSolution
+            var oldSolution = workspace.CurrentSolution
                 .AddProject(
                     ProjectInfo.Create(
                         projectId,
@@ -594,8 +593,7 @@ class C
                 var oldDocument = oldProject.Documents.Single();
                 var documentId = oldDocument.Id;
 
-                var newSolution = workspace
-                    .CurrentSolution
+                var newSolution = workspace.CurrentSolution
                     .WithDocumentText(documentId, SourceText.From(source2));
 
                 var result = await AnalyzeDocumentAsync(
@@ -911,8 +909,7 @@ class D
 
             AssertEx.Equal(
                 new[] { expectedDiagnostic },
-                result
-                    .RudeEditErrors
+                result.RudeEditErrors
                     .Select(d => d.ToDiagnostic(newSyntaxTree))
                     .Select(d =>
                         $"{d.Id}: {d.GetMessage().Split(new[] { Environment.NewLine }, StringSplitOptions.None).First()}"

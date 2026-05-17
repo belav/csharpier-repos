@@ -221,8 +221,7 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
                 }
 
                 // Track statistics about the scope (number of disposable objects and number of disposed services)
-                DependencyInjectionEventSource
-                    .Log
+                DependencyInjectionEventSource.Log
                     .ScopeDisposed(
                         RootProvider.GetHashCode(),
                         ResolvedServices.Count,

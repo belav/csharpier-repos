@@ -66,53 +66,54 @@ namespace Roslyn.Test.Utilities
         {
             SharedData.ExecutingTest(TestMethod);
             var sta = StaTaskScheduler.DefaultSta;
-            var task = Task.Factory.StartNew(
-                async () =>
-                {
-                    Debug.Assert(sta.StaThread == Thread.CurrentThread);
-
-                    using (
-                        await SharedData
-                            .TestSerializationGate
-                            .DisposableWaitAsync(CancellationToken.None)
-                    )
+            var task = Task.Factory
+                .StartNew(
+                    async () =>
                     {
-                        try
-                        {
-                            Debug.Assert(
-                                SynchronizationContext.Current is DispatcherSynchronizationContext
-                            );
+                        Debug.Assert(sta.StaThread == Thread.CurrentThread);
 
-                            // Reset our flag ensuring that part of this test actually needs WpfFact
-                            s_wpfFactRequirementReason = null;
-
-                            // Just call back into the normal xUnit dispatch process now that we are on an STA Thread with no synchronization context.
-                            var invoker = new XunitTestInvoker(
-                                Test,
-                                MessageBus,
-                                TestClass,
-                                ConstructorArguments,
-                                TestMethod,
-                                TestMethodArguments,
-                                BeforeAfterAttributes,
-                                aggregator,
-                                CancellationTokenSource
-                            );
-                            return invoker
-                                .RunAsync()
-                                .JoinUsingDispatcher(CancellationTokenSource.Token);
-                        }
-                        finally
+                        using (
+                            await SharedData.TestSerializationGate
+                                .DisposableWaitAsync(CancellationToken.None)
+                        )
                         {
-                            // Cleanup the synchronization context even if the test is failing exceptionally
-                            SynchronizationContext.SetSynchronizationContext(null);
+                            try
+                            {
+                                Debug.Assert(
+                                    SynchronizationContext.Current
+                                        is DispatcherSynchronizationContext
+                                );
+
+                                // Reset our flag ensuring that part of this test actually needs WpfFact
+                                s_wpfFactRequirementReason = null;
+
+                                // Just call back into the normal xUnit dispatch process now that we are on an STA Thread with no synchronization context.
+                                var invoker = new XunitTestInvoker(
+                                    Test,
+                                    MessageBus,
+                                    TestClass,
+                                    ConstructorArguments,
+                                    TestMethod,
+                                    TestMethodArguments,
+                                    BeforeAfterAttributes,
+                                    aggregator,
+                                    CancellationTokenSource
+                                );
+                                return invoker
+                                    .RunAsync()
+                                    .JoinUsingDispatcher(CancellationTokenSource.Token);
+                            }
+                            finally
+                            {
+                                // Cleanup the synchronization context even if the test is failing exceptionally
+                                SynchronizationContext.SetSynchronizationContext(null);
+                            }
                         }
-                    }
-                },
-                CancellationTokenSource.Token,
-                TaskCreationOptions.None,
-                new SynchronizationContextTaskScheduler(sta.DispatcherSynchronizationContext)
-            );
+                    },
+                    CancellationTokenSource.Token,
+                    TaskCreationOptions.None,
+                    new SynchronizationContextTaskScheduler(sta.DispatcherSynchronizationContext)
+                );
 
             return task.Unwrap();
         }

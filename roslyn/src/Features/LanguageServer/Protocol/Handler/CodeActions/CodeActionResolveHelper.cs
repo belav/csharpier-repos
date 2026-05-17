@@ -59,8 +59,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.CodeActions
                 }
 
                 var changes = applyChangesOperation.ChangedSolution.GetChanges(solution);
-                var newSolution = await applyChangesOperation
-                    .ChangedSolution
+                var newSolution = await applyChangesOperation.ChangedSolution
                     .WithMergedLinkedFileChangesAsync(
                         solution,
                         changes,

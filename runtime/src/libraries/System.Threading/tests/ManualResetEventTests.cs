@@ -167,34 +167,36 @@ namespace System.Threading.Tests
             {
                 const int Iters = 10;
                 Task.WaitAll(
-                    Task.Factory.StartNew(
-                        () =>
-                        {
-                            for (int i = 0; i < Iters; i++)
+                    Task.Factory
+                        .StartNew(
+                            () =>
                             {
-                                mre1.CheckedWait();
-                                mre1.Reset();
-                                mre2.Set();
-                            }
-                        },
-                        CancellationToken.None,
-                        TaskCreationOptions.LongRunning,
-                        TaskScheduler.Default
-                    ),
-                    Task.Factory.StartNew(
-                        () =>
-                        {
-                            for (int i = 0; i < Iters; i++)
+                                for (int i = 0; i < Iters; i++)
+                                {
+                                    mre1.CheckedWait();
+                                    mre1.Reset();
+                                    mre2.Set();
+                                }
+                            },
+                            CancellationToken.None,
+                            TaskCreationOptions.LongRunning,
+                            TaskScheduler.Default
+                        ),
+                    Task.Factory
+                        .StartNew(
+                            () =>
                             {
-                                mre2.CheckedWait();
-                                mre2.Reset();
-                                mre1.Set();
-                            }
-                        },
-                        CancellationToken.None,
-                        TaskCreationOptions.LongRunning,
-                        TaskScheduler.Default
-                    )
+                                for (int i = 0; i < Iters; i++)
+                                {
+                                    mre2.CheckedWait();
+                                    mre2.Reset();
+                                    mre1.Set();
+                                }
+                            },
+                            CancellationToken.None,
+                            TaskCreationOptions.LongRunning,
+                            TaskScheduler.Default
+                        )
                 );
             }
         }

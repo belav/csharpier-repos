@@ -35,11 +35,8 @@ namespace System.IdentityModel.Tokens
         /// <summary>
         /// Gets the default issuer token resolver.
         /// </summary>
-        public static readonly SecurityTokenResolver DefaultIssuerTokenResolver = System
-            .IdentityModel
-            .Tokens
-            .IssuerTokenResolver
-            .DefaultInstance;
+        public static readonly SecurityTokenResolver DefaultIssuerTokenResolver =
+            System.IdentityModel.Tokens.IssuerTokenResolver.DefaultInstance;
 
         /// <summary>
         /// Gets the default maximum clock skew.

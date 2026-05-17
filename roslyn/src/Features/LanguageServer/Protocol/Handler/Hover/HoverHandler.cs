@@ -85,8 +85,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             if (info == null)
                 return null;
 
-            var hoverService = document
-                .Project
+            var hoverService = document.Project
                 .Solution
                 .Services
                 .GetRequiredService<ILspHoverResultCreationService>();

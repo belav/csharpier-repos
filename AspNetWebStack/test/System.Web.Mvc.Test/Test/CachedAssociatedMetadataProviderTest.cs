@@ -92,8 +92,7 @@ namespace System.Web.Mvc.Test
                     "Length" /* propertyName */
                 )
             );
-            provider
-                .Object
+            provider.Object
                 .Cache
                 .Verify(c =>
                     c.Add(
@@ -170,8 +169,7 @@ namespace System.Web.Mvc.Test
                 Times.Exactly(2)
             );
 
-            provider
-                .Object
+            provider.Object
                 .Cache
                 .Verify(
                     c =>
@@ -207,8 +205,7 @@ namespace System.Web.Mvc.Test
                     null /* propertyName */
                 )
             );
-            provider
-                .Object
+            provider.Object
                 .Cache
                 .Verify(c =>
                     c.Add(
@@ -284,8 +281,7 @@ namespace System.Web.Mvc.Test
                 Times.Exactly(2)
             );
 
-            provider
-                .Object
+            provider.Object
                 .Cache
                 .Verify(
                     c =>

@@ -356,24 +356,26 @@ namespace System.Data.Mapping.ViewGeneration
 
                 // Check that the EntityKey and the Table key are mapped
                 // (Key for association is all ends)
-                error = cell.CQuery.VerifyKeysPresent(
-                    cell,
-                    Strings.ViewGen_EntitySetKey_Missing,
-                    Strings.ViewGen_AssociationSetKey_Missing,
-                    ViewGenErrorCode.KeyNotMappedForCSideExtent
-                );
+                error = cell.CQuery
+                    .VerifyKeysPresent(
+                        cell,
+                        Strings.ViewGen_EntitySetKey_Missing,
+                        Strings.ViewGen_AssociationSetKey_Missing,
+                        ViewGenErrorCode.KeyNotMappedForCSideExtent
+                    );
 
                 if (error != null)
                 {
                     m_errorLog.AddEntry(error);
                 }
 
-                error = cell.SQuery.VerifyKeysPresent(
-                    cell,
-                    Strings.ViewGen_TableKey_Missing,
-                    null,
-                    ViewGenErrorCode.KeyNotMappedForTable
-                );
+                error = cell.SQuery
+                    .VerifyKeysPresent(
+                        cell,
+                        Strings.ViewGen_TableKey_Missing,
+                        null,
+                        ViewGenErrorCode.KeyNotMappedForTable
+                    );
                 if (error != null)
                 {
                     m_errorLog.AddEntry(error);
@@ -381,18 +383,20 @@ namespace System.Data.Mapping.ViewGeneration
 
                 // Check that if any side has a not-null constraint -- if so,
                 // we must project that slot
-                error = cell.CQuery.CheckForProjectedNotNullSlots(
-                    cell,
-                    m_cells.Where(c => c.SQuery.Extent is AssociationSet)
-                );
+                error = cell.CQuery
+                    .CheckForProjectedNotNullSlots(
+                        cell,
+                        m_cells.Where(c => c.SQuery.Extent is AssociationSet)
+                    );
                 if (error != null)
                 {
                     m_errorLog.AddEntry(error);
                 }
-                error = cell.SQuery.CheckForProjectedNotNullSlots(
-                    cell,
-                    m_cells.Where(c => c.CQuery.Extent is AssociationSet)
-                );
+                error = cell.SQuery
+                    .CheckForProjectedNotNullSlots(
+                        cell,
+                        m_cells.Where(c => c.CQuery.Extent is AssociationSet)
+                    );
                 if (error != null)
                 {
                     m_errorLog.AddEntry(error);

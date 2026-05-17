@@ -167,20 +167,21 @@ namespace System.Diagnostics.Tracing
 
             m_dispatchTaskCancellationSource = new CancellationTokenSource();
             Task? previousDispatchTask = m_dispatchTask;
-            m_dispatchTask = Task.Factory.StartNew(
-                () =>
-                    DispatchEventsToEventListeners(
-                        sessionID,
-                        syncTimeUtc,
-                        syncTimeQPC,
-                        timeQPCFrequency,
-                        previousDispatchTask,
-                        m_dispatchTaskCancellationSource.Token
-                    ),
-                CancellationToken.None,
-                TaskCreationOptions.LongRunning,
-                TaskScheduler.Default
-            );
+            m_dispatchTask = Task.Factory
+                .StartNew(
+                    () =>
+                        DispatchEventsToEventListeners(
+                            sessionID,
+                            syncTimeUtc,
+                            syncTimeQPC,
+                            timeQPCFrequency,
+                            previousDispatchTask,
+                            m_dispatchTaskCancellationSource.Token
+                        ),
+                    CancellationToken.None,
+                    TaskCreationOptions.LongRunning,
+                    TaskScheduler.Default
+                );
         }
 
         private void SetStopDispatchTask()
@@ -238,8 +239,7 @@ namespace System.Diagnostics.Tracing
                             syncTimeQPC,
                             timeQPCFrequency
                         );
-                        NativeRuntimeEventSource
-                            .Log
+                        NativeRuntimeEventSource.Log
                             .ProcessEvent(
                                 instanceData.EventID,
                                 instanceData.ThreadID,

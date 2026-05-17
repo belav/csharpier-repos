@@ -73,8 +73,7 @@ namespace System.ServiceModel
             get { return this.dictionary[key]; }
             set
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
                     );
@@ -83,22 +82,19 @@ namespace System.ServiceModel
 
         public void Add(K key, V value)
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly)));
         }
 
         public void Add(KeyValuePair<K, V> item)
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly)));
         }
 
         public void Clear()
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly)));
         }
 
@@ -129,15 +125,13 @@ namespace System.ServiceModel
 
         public bool Remove(K key)
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly)));
         }
 
         public bool Remove(KeyValuePair<K, V> item)
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly)));
         }
 

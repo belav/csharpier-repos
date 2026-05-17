@@ -48,8 +48,7 @@ namespace System.ServiceModel.Channels
                 context.ListenUriRelativeAddress
             );
 
-            SecurityCredentialsManager credentialProvider = context
-                .BindingParameters
+            SecurityCredentialsManager credentialProvider = context.BindingParameters
                 .Find<SecurityCredentialsManager>();
             if (credentialProvider == null)
             {
@@ -232,16 +231,14 @@ namespace System.ServiceModel.Channels
                 }
                 catch (AuthenticationException exception)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new SecurityNegotiationException(exception.Message, exception)
                         );
                 }
                 catch (IOException ioException)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new SecurityNegotiationException(
                                 SR.GetString(SR.NegotiationFailedIO, ioException.Message),
@@ -339,13 +336,14 @@ namespace System.ServiceModel.Channels
                 protected override IAsyncResult OnBegin(Stream stream, AsyncCallback callback)
                 {
                     this.negotiateStream = new NegotiateStream(stream);
-                    return this.negotiateStream.BeginAuthenticateAsServer(
-                        this.acceptor.parent.ServerCredential,
-                        this.acceptor.parent.ProtectionLevel,
-                        TokenImpersonationLevel.Identification,
-                        callback,
-                        this
-                    );
+                    return this.negotiateStream
+                        .BeginAuthenticateAsServer(
+                            this.acceptor.parent.ServerCredential,
+                            this.acceptor.parent.ProtectionLevel,
+                            TokenImpersonationLevel.Identification,
+                            callback,
+                            this
+                        );
                 }
 
                 protected override Stream OnCompleteAuthenticateAsServer(IAsyncResult result)
@@ -356,10 +354,11 @@ namespace System.ServiceModel.Channels
 
                 protected override SecurityMessageProperty ValidateCreateSecurity()
                 {
-                    return this.acceptor.CreateClientSecurity(
-                        this.negotiateStream,
-                        this.acceptor.parent.ExtractGroupsForWindowsAccounts
-                    );
+                    return this.acceptor
+                        .CreateClientSecurity(
+                            this.negotiateStream,
+                            this.acceptor.parent.ExtractGroupsForWindowsAccounts
+                        );
                 }
             }
         }
@@ -550,16 +549,14 @@ namespace System.ServiceModel.Channels
                 }
                 catch (AuthenticationException exception)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new SecurityNegotiationException(exception.Message, exception)
                         );
                 }
                 catch (IOException ioException)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new SecurityNegotiationException(
                                 SR.GetString(SR.NegotiationFailedIO, ioException.Message),
@@ -587,8 +584,7 @@ namespace System.ServiceModel.Channels
                 identity = null;
 
                 if (
-                    parent
-                        .IdentityVerifier
+                    parent.IdentityVerifier
                         .TryGetIdentity(this.RemoteAddress, this.Via, out identity)
                 )
                 {
@@ -612,8 +608,7 @@ namespace System.ServiceModel.Channels
                     if (expectedIdentity != null)
                     {
                         if (
-                            !parent
-                                .IdentityVerifier
+                            !parent.IdentityVerifier
                                 .CheckAccess(
                                     expectedIdentity,
                                     remoteSecurity.ServiceSecurityContext.AuthorizationContext
@@ -623,8 +618,7 @@ namespace System.ServiceModel.Channels
                             string primaryIdentity = SecurityUtils.GetIdentityNamesFromContext(
                                 remoteSecurity.ServiceSecurityContext.AuthorizationContext
                             );
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
                                     new SecurityNegotiationException(
                                         SR.GetString(
@@ -638,8 +632,7 @@ namespace System.ServiceModel.Channels
                 }
                 else if (!allowNtlm)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new SecurityNegotiationException(
                                 SR.GetString(SR.StreamMutualAuthNotSatisfied)
@@ -670,21 +663,23 @@ namespace System.ServiceModel.Channels
                 )
                 {
                     string targetName;
-                    this.initiator.InitiateUpgradePrepare(
-                        stream,
-                        out this.negotiateStream,
-                        out targetName,
-                        out this.expectedIdentity
-                    );
+                    this.initiator
+                        .InitiateUpgradePrepare(
+                            stream,
+                            out this.negotiateStream,
+                            out targetName,
+                            out this.expectedIdentity
+                        );
 
-                    return this.negotiateStream.BeginAuthenticateAsClient(
-                        this.initiator.credential,
-                        targetName,
-                        this.initiator.parent.ProtectionLevel,
-                        this.initiator.impersonationLevel,
-                        callback,
-                        this
-                    );
+                    return this.negotiateStream
+                        .BeginAuthenticateAsClient(
+                            this.initiator.credential,
+                            targetName,
+                            this.initiator.parent.ProtectionLevel,
+                            this.initiator.impersonationLevel,
+                            callback,
+                            this
+                        );
                 }
 
                 protected override Stream OnCompleteAuthenticateAsClient(IAsyncResult result)
@@ -696,12 +691,13 @@ namespace System.ServiceModel.Channels
                 protected override SecurityMessageProperty ValidateCreateSecurity()
                 {
                     SecurityMessageProperty remoteSecurity = CreateServerSecurity(negotiateStream);
-                    this.initiator.ValidateMutualAuth(
-                        this.expectedIdentity,
-                        this.negotiateStream,
-                        remoteSecurity,
-                        this.initiator.allowNtlm
-                    );
+                    this.initiator
+                        .ValidateMutualAuth(
+                            this.expectedIdentity,
+                            this.negotiateStream,
+                            remoteSecurity,
+                            this.initiator.allowNtlm
+                        );
                     return remoteSecurity;
                 }
             }

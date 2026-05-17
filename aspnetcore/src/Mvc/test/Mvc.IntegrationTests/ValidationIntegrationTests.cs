@@ -1767,8 +1767,7 @@ public class ValidationIntegrationTests
             },
             options =>
             {
-                options
-                    .ModelMetadataDetailsProviders
+                options.ModelMetadataDetailsProviders
                     .Add(new SuppressChildValidationMetadataProvider(typeof(Address)));
             }
         );

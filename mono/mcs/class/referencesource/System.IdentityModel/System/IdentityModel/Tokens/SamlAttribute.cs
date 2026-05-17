@@ -31,13 +31,11 @@ namespace System.IdentityModel.Tokens
         )
         {
             if (string.IsNullOrEmpty(attributeName))
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(SR.GetString(SR.SAMLAttributeNameAttributeRequired));
 
             if (string.IsNullOrEmpty(attributeNamespace))
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(SR.GetString(SR.SAMLAttributeNamespaceAttributeRequired));
 
             if (attributeValues == null)
@@ -52,16 +50,14 @@ namespace System.IdentityModel.Tokens
             foreach (string value in attributeValues)
             {
                 if (value == null)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgument(SR.GetString(SR.SAMLAttributeValueCannotBeNull));
 
                 this.attributeValues.Add(value);
             }
 
             if (this.attributeValues.Count == 0)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(SR.GetString(SR.SAMLAttributeShouldHaveOneValue));
         }
 
@@ -71,15 +67,13 @@ namespace System.IdentityModel.Tokens
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("claim");
 
             if (!(claim.Resource is String))
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(
                         SR.GetString(SR.SamlAttributeClaimResourceShouldBeAString)
                     );
 
             if (claim.Right != Rights.PossessProperty)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(
                         SR.GetString(SR.SamlAttributeClaimRightShouldBePossessProperty)
                     );
@@ -101,8 +95,7 @@ namespace System.IdentityModel.Tokens
                     claim.ClaimType.Substring(0, lastSlashIndex)
                 );
                 this.name = StringUtil.OptimizeString(
-                    claim
-                        .ClaimType
+                    claim.ClaimType
                         .Substring(
                             lastSlashIndex + 1,
                             claim.ClaimType.Length - (lastSlashIndex + 1)
@@ -119,15 +112,13 @@ namespace System.IdentityModel.Tokens
             set
             {
                 if (isReadOnly)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
                         );
 
                 if (string.IsNullOrEmpty(value))
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgument(SR.GetString(SR.SAMLAttributeNameAttributeRequired));
 
                 this.name = StringUtil.OptimizeString(value);
@@ -140,15 +131,13 @@ namespace System.IdentityModel.Tokens
             set
             {
                 if (isReadOnly)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
                         );
 
                 if (string.IsNullOrEmpty(value))
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgument(
                             SR.GetString(SR.SAMLAttributeNamespaceAttributeRequired)
                         );
@@ -172,8 +161,7 @@ namespace System.IdentityModel.Tokens
             {
                 if (value == String.Empty)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgument("value", SR.GetString(SR.ID4251));
                 }
 
@@ -191,32 +179,28 @@ namespace System.IdentityModel.Tokens
             {
                 if (string.IsNullOrEmpty(value))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgument("value", SR.GetString(SR.ID4254));
                 }
 
                 int indexOfHash = value.IndexOf('#');
                 if (indexOfHash == -1)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgument("value", SR.GetString(SR.ID4254));
                 }
 
                 string prefix = value.Substring(0, indexOfHash);
                 if (prefix.Length == 0)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgument("value", SR.GetString(SR.ID4254));
                 }
 
                 string suffix = value.Substring(indexOfHash + 1);
                 if (suffix.Length == 0)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgument("value", SR.GetString(SR.ID4254));
                 }
 
@@ -248,8 +232,7 @@ namespace System.IdentityModel.Tokens
                 for (int i = 0; i < this.attributeValues.Count; i++)
                 {
                     if (this.attributeValues[i] == null)
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperArgument(SR.GetString(SR.SAMLAttributeValueCannotBeNull));
 
                     tempClaims.Add(
@@ -265,8 +248,7 @@ namespace System.IdentityModel.Tokens
         void CheckObjectValidity()
         {
             if (string.IsNullOrEmpty(this.name))
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new SecurityTokenException(
                             SR.GetString(SR.SAMLAttributeNameAttributeRequired)
@@ -274,8 +256,7 @@ namespace System.IdentityModel.Tokens
                     );
 
             if (string.IsNullOrEmpty(this.nameSpace))
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new SecurityTokenException(
                             SR.GetString(SR.SAMLAttributeNamespaceAttributeRequired)
@@ -283,8 +264,7 @@ namespace System.IdentityModel.Tokens
                     );
 
             if (this.attributeValues.Count == 0)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new SecurityTokenException(SR.GetString(SR.SAMLAttributeShouldHaveOneValue))
                     );
@@ -298,13 +278,11 @@ namespace System.IdentityModel.Tokens
         )
         {
             if (reader == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("reader"));
 
             if (samlSerializer == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("samlSerializer"));
 
 #pragma warning suppress 56506 // samlSerializer.DictionaryManager is never null.
@@ -312,8 +290,7 @@ namespace System.IdentityModel.Tokens
 
             this.name = reader.GetAttribute(dictionary.AttributeName, null);
             if (string.IsNullOrEmpty(this.name))
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new SecurityTokenException(
                             SR.GetString(SR.SAMLAttributeMissingNameAttributeOnRead)
@@ -322,8 +299,7 @@ namespace System.IdentityModel.Tokens
 
             this.nameSpace = reader.GetAttribute(dictionary.AttributeNamespace, null);
             if (string.IsNullOrEmpty(this.nameSpace))
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new SecurityTokenException(
                             SR.GetString(SR.SAMLAttributeMissingNamespaceAttributeOnRead)
@@ -347,8 +323,7 @@ namespace System.IdentityModel.Tokens
             }
 
             if (this.attributeValues.Count == 0)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new SecurityTokenException(SR.GetString(SR.SAMLAttributeShouldHaveOneValue))
                     );
@@ -366,13 +341,11 @@ namespace System.IdentityModel.Tokens
             CheckObjectValidity();
 
             if (writer == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("writer"));
 
             if (samlSerializer == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("samlSerializer"));
 
 #pragma warning suppress 56506 // samlSerializer.DictionaryManager is never null.
@@ -394,8 +367,7 @@ namespace System.IdentityModel.Tokens
             for (int i = 0; i < this.attributeValues.Count; i++)
             {
                 if (this.attributeValues[i] == null)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgument(SR.GetString(SR.SAMLAttributeValueCannotBeNull));
 
                 writer.WriteElementString(

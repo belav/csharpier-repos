@@ -429,8 +429,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             Debug.Assert(
                 receiverOpt is null
                     || receiverOpt.Type is { }
-                        && receiverOpt
-                            .Type
+                        && receiverOpt.Type
                             .GetMembers(propertySym.Name)
                             .OfType<PropertySymbol>()
                             .Single() == propertySym
@@ -768,8 +767,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 #else
                 CompoundUseSiteInfo<AssemblySymbol>.Discarded;
 #endif
-                var conversion = Compilation
-                    .Conversions
+                var conversion = Compilation.Conversions
                     .ClassifyConversionFromType(
                         expression.Type,
                         CurrentFunction.ReturnType,
@@ -929,8 +927,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             var discardedUseSiteInfo = CompoundUseSiteInfo<AssemblySymbol>.Discarded;
             // Because compiler-generated nodes are not lowered, this conversion is not used later in the compiler.
             // But it is a required part of the `BoundIsOperator` node, so we compute a conversion here.
-            Conversion c = Compilation
-                .Conversions
+            Conversion c = Compilation.Conversions
                 .ClassifyBuiltInConversion(
                     operand.Type,
                     type,
@@ -1470,11 +1467,12 @@ namespace Microsoft.CodeAnalysis.CSharp
         public BoundExpression Coalesce(BoundExpression left, BoundExpression right)
         {
             Debug.Assert(
-                left.Type!.Equals(
-                    right.Type,
-                    TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds
-                        | TypeCompareKind.IgnoreNullableModifiersForReferenceTypes
-                ) || left.Type.IsErrorType()
+                left.Type!
+                    .Equals(
+                        right.Type,
+                        TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds
+                            | TypeCompareKind.IgnoreNullableModifiersForReferenceTypes
+                    ) || left.Type.IsErrorType()
             );
             Debug.Assert(left.Type.IsReferenceType);
 
@@ -1865,8 +1863,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             // TODO: add diagnostics for when things fall apart
             Debug.Assert(CurrentFunction is { });
-            NamedTypeSymbol baseType = CurrentFunction
-                .ThisParameter
+            NamedTypeSymbol baseType = CurrentFunction.ThisParameter
                 .Type
                 .BaseTypeNoUseSiteDiagnostics;
             var ctor = baseType.InstanceConstructors.Single(c => c.ParameterCount == 0);
@@ -2137,8 +2134,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             // whether or not to call a method with a value type receiver directly).
             if (
                 !method.ContainingType.IsValueType
-                || !Microsoft
-                    .CodeAnalysis
+                || !Microsoft.CodeAnalysis
                     .CSharp
                     .CodeGen
                     .CodeGenerator
@@ -2180,8 +2176,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             return WellKnownMethod(
                 (methodContainer.AllTypeArgumentCount() == 0 && !methodContainer.IsAnonymousType)
                     ? CodeAnalysis.WellKnownMember.System_Reflection_MethodBase__GetMethodFromHandle
-                    : CodeAnalysis
-                        .WellKnownMember
+                    : CodeAnalysis.WellKnownMember
                         .System_Reflection_MethodBase__GetMethodFromHandle2
             );
         }
@@ -2208,8 +2203,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 #else
             CompoundUseSiteInfo<AssemblySymbol>.Discarded;
 #endif
-            Conversion c = Compilation
-                .Conversions
+            Conversion c = Compilation.Conversions
                 .ClassifyConversionFromExpression(arg, type, isChecked: false, ref useSiteInfo);
             Debug.Assert(c.Exists);
             // The use-site diagnostics should be reported earlier, and we shouldn't get to lowering if they're errors.

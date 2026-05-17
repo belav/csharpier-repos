@@ -148,15 +148,13 @@ namespace System.Security.Cryptography.Pkcs.Asn1
                 sequenceReader.ThrowIfNotEmpty();
             }
 
-            System
-                .Security
+            System.Security
                 .Cryptography
                 .Pkcs
                 .Asn1
                 .SignerIdentifierAsn
                 .Decode(ref sequenceReader, rebind, out decoded.Sid);
-            System
-                .Security
+            System.Security
                 .Cryptography
                 .Asn1
                 .AlgorithmIdentifierAsn
@@ -175,8 +173,7 @@ namespace System.Security.Cryptography.Pkcs.Asn1
                     : tmpSpan.ToArray();
             }
 
-            System
-                .Security
+            System.Security
                 .Cryptography
                 .Asn1
                 .AlgorithmIdentifierAsn
@@ -210,8 +207,7 @@ namespace System.Security.Cryptography.Pkcs.Asn1
 
                     while (collectionReader.HasData)
                     {
-                        System
-                            .Security
+                        System.Security
                             .Cryptography
                             .Asn1
                             .AttributeAsn

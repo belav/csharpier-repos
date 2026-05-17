@@ -112,8 +112,7 @@ public class CorsHttpMethodActionConstraintTest
             httpContext.Request.Headers.Add("Origin", StringValues.Empty);
             if (accessControlMethod != string.Empty)
             {
-                httpContext
-                    .Request
+                httpContext.Request
                     .Headers
                     .Add("Access-Control-Request-Method", accessControlMethod);
             }

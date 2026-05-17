@@ -175,8 +175,7 @@ public class SecurityStampValidator<TUser> : ISecurityStampValidator
                 );
                 context.RejectPrincipal();
                 await SignInManager.SignOutAsync();
-                await SignInManager
-                    .Context
+                await SignInManager.Context
                     .SignOutAsync(IdentityConstants.TwoFactorRememberMeScheme);
             }
         }

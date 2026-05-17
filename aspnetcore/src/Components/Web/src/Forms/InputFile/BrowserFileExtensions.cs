@@ -33,8 +33,7 @@ public static class BrowserFileExtensions
     {
         if (browserFile is BrowserFile browserFileInternal)
         {
-            return browserFileInternal
-                .Owner
+            return browserFileInternal.Owner
                 .ConvertToImageFileAsync(browserFileInternal, format, maxWidth, maxHeight);
         }
 

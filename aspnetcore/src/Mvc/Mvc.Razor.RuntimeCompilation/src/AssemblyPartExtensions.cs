@@ -27,8 +27,7 @@ public static class AssemblyPartExtensions
         var dependencyContext = DependencyContext.Load(assembly);
         if (dependencyContext != null)
         {
-            return dependencyContext
-                .CompileLibraries
+            return dependencyContext.CompileLibraries
                 .SelectMany(library => library.ResolveReferencePaths());
         }
 

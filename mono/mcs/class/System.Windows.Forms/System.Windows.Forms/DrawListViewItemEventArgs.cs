@@ -110,8 +110,7 @@ namespace System.Windows.Forms
         public void DrawFocusRectangle()
         {
             if ((state & ListViewItemStates.Focused) != 0)
-                ThemeEngine
-                    .Current
+                ThemeEngine.Current
                     .CPDrawFocusRectangle(
                         graphics,
                         bounds,

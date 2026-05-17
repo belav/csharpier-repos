@@ -23,8 +23,7 @@ public class SqlAzureBatchingTest : IClassFixture<BatchingSqlAzureFixture>
     public void AddWithBatchSize(int batchSize)
     {
         using var context = Fixture.CreateContext(batchSize);
-        context
-            .Database
+        context.Database
             .CreateExecutionStrategy()
             .Execute(
                 context,
@@ -35,8 +34,7 @@ public class SqlAzureBatchingTest : IClassFixture<BatchingSqlAzureFixture>
                         for (var i = 0; i < batchSize; i++)
                         {
                             var uuid = Guid.NewGuid().ToString();
-                            contextScoped
-                                .Products
+                            contextScoped.Products
                                 .Add(
                                     new Product
                                     {

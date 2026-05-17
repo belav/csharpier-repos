@@ -82,8 +82,7 @@ public partial class HubConnectionContext
         _connectionContext = connectionContext;
         _logger = loggerFactory.CreateLogger<HubConnectionContext>();
         ConnectionAborted = _connectionAbortedTokenSource.Token;
-        _closedRegistration = connectionContext
-            .ConnectionClosed
+        _closedRegistration = connectionContext.ConnectionClosed
             .Register(static (state) => ((HubConnectionContext)state!).Abort(), this);
 
         if (
@@ -92,8 +91,7 @@ public partial class HubConnectionContext
         )
         {
             // This feature is used by HttpConnectionManager to close the connection with a non-errored closed message on authentication expiration.
-            _closedRequestedRegistration = lifetimeNotification
-                .ConnectionClosedRequested
+            _closedRequestedRegistration = lifetimeNotification.ConnectionClosedRequested
                 .Register(
                     static (state) => ((HubConnectionContext)state!).AbortAllowReconnect(),
                     this
@@ -491,8 +489,7 @@ public partial class HubConnectionContext
         {
             if (message.Error == null)
             {
-                _connectionContext
-                    .Transport
+                _connectionContext.Transport
                     .Output
                     .Write(HandshakeProtocol.GetSuccessfulHandshake(Protocol));
             }

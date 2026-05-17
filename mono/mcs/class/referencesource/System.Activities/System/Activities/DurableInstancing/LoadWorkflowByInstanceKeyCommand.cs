@@ -57,21 +57,18 @@ namespace System.Activities.DurableInstancing
         {
             if (!view.IsBoundToInstanceOwner)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(new InvalidOperationException(SRCore.OwnerRequired));
             }
             if (view.IsBoundToInstance)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(new InvalidOperationException(SRCore.AlreadyBoundToInstance));
             }
 
             if (LookupInstanceKey == Guid.Empty)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(new InvalidOperationException(SRCore.LoadOpKeyMustBeValid));
             }
 
@@ -79,8 +76,7 @@ namespace System.Activities.DurableInstancing
             {
                 if (InstanceKeysToAssociate.ContainsKey(LookupInstanceKey))
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(
                             new InvalidOperationException(
                                 SRCore.LoadOpAssociateKeysCannotContainLookupKey
@@ -92,8 +88,7 @@ namespace System.Activities.DurableInstancing
             {
                 if (!AcceptUninitializedInstance)
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(
                             new InvalidOperationException(
                                 SRCore.LoadOpFreeKeyRequiresAcceptUninitialized

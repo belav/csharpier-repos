@@ -31,8 +31,7 @@ namespace Mono.Linker.Dataflow
         {
             foreach (var parameter in method.GetMetadataParameters())
             {
-                var parameterValue = _context
-                    .Annotations
+                var parameterValue = _context.Annotations
                     .FlowAnnotations
                     .GetMethodParameterValue(parameter);
                 if (

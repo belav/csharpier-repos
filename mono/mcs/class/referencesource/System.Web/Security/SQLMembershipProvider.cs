@@ -475,30 +475,47 @@ namespace System.Web.Security
 
                     cmd.CommandTimeout = CommandTimeout;
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.Add(
-                        CreateInputParam("@ApplicationName", SqlDbType.NVarChar, ApplicationName)
-                    );
+                    cmd.Parameters
+                        .Add(
+                            CreateInputParam(
+                                "@ApplicationName",
+                                SqlDbType.NVarChar,
+                                ApplicationName
+                            )
+                        );
                     cmd.Parameters.Add(CreateInputParam("@UserName", SqlDbType.NVarChar, username));
                     cmd.Parameters.Add(CreateInputParam("@Password", SqlDbType.NVarChar, pass));
                     cmd.Parameters.Add(CreateInputParam("@PasswordSalt", SqlDbType.NVarChar, salt));
                     cmd.Parameters.Add(CreateInputParam("@Email", SqlDbType.NVarChar, email));
-                    cmd.Parameters.Add(
-                        CreateInputParam("@PasswordQuestion", SqlDbType.NVarChar, passwordQuestion)
-                    );
-                    cmd.Parameters.Add(
-                        CreateInputParam(
-                            "@PasswordAnswer",
-                            SqlDbType.NVarChar,
-                            encodedPasswordAnswer
-                        )
-                    );
+                    cmd.Parameters
+                        .Add(
+                            CreateInputParam(
+                                "@PasswordQuestion",
+                                SqlDbType.NVarChar,
+                                passwordQuestion
+                            )
+                        );
+                    cmd.Parameters
+                        .Add(
+                            CreateInputParam(
+                                "@PasswordAnswer",
+                                SqlDbType.NVarChar,
+                                encodedPasswordAnswer
+                            )
+                        );
                     cmd.Parameters.Add(CreateInputParam("@IsApproved", SqlDbType.Bit, isApproved));
-                    cmd.Parameters.Add(
-                        CreateInputParam("@UniqueEmail", SqlDbType.Int, RequiresUniqueEmail ? 1 : 0)
-                    );
-                    cmd.Parameters.Add(
-                        CreateInputParam("@PasswordFormat", SqlDbType.Int, (int)PasswordFormat)
-                    );
+                    cmd.Parameters
+                        .Add(
+                            CreateInputParam(
+                                "@UniqueEmail",
+                                SqlDbType.Int,
+                                RequiresUniqueEmail ? 1 : 0
+                            )
+                        );
+                    cmd.Parameters
+                        .Add(
+                            CreateInputParam("@PasswordFormat", SqlDbType.Int, (int)PasswordFormat)
+                        );
                     cmd.Parameters.Add(CreateInputParam("@CurrentTimeUtc", SqlDbType.DateTime, dt));
                     SqlParameter p = CreateInputParam(
                         "@UserId",
@@ -640,24 +657,31 @@ namespace System.Web.Security
 
                     cmd.CommandTimeout = CommandTimeout;
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.Add(
-                        CreateInputParam("@ApplicationName", SqlDbType.NVarChar, ApplicationName)
-                    );
+                    cmd.Parameters
+                        .Add(
+                            CreateInputParam(
+                                "@ApplicationName",
+                                SqlDbType.NVarChar,
+                                ApplicationName
+                            )
+                        );
                     cmd.Parameters.Add(CreateInputParam("@UserName", SqlDbType.NVarChar, username));
-                    cmd.Parameters.Add(
-                        CreateInputParam(
-                            "@NewPasswordQuestion",
-                            SqlDbType.NVarChar,
-                            newPasswordQuestion
-                        )
-                    );
-                    cmd.Parameters.Add(
-                        CreateInputParam(
-                            "@NewPasswordAnswer",
-                            SqlDbType.NVarChar,
-                            encodedPasswordAnswer
-                        )
-                    );
+                    cmd.Parameters
+                        .Add(
+                            CreateInputParam(
+                                "@NewPasswordQuestion",
+                                SqlDbType.NVarChar,
+                                newPasswordQuestion
+                            )
+                        );
+                    cmd.Parameters
+                        .Add(
+                            CreateInputParam(
+                                "@NewPasswordAnswer",
+                                SqlDbType.NVarChar,
+                                encodedPasswordAnswer
+                            )
+                        );
 
                     SqlParameter p = new SqlParameter("@ReturnValue", SqlDbType.Int);
                     p.Direction = ParameterDirection.ReturnValue;
@@ -858,18 +882,23 @@ namespace System.Web.Security
 
                     cmd.CommandTimeout = CommandTimeout;
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.Add(
-                        CreateInputParam("@ApplicationName", SqlDbType.NVarChar, ApplicationName)
-                    );
+                    cmd.Parameters
+                        .Add(
+                            CreateInputParam(
+                                "@ApplicationName",
+                                SqlDbType.NVarChar,
+                                ApplicationName
+                            )
+                        );
                     cmd.Parameters.Add(CreateInputParam("@UserName", SqlDbType.NVarChar, username));
                     cmd.Parameters.Add(CreateInputParam("@NewPassword", SqlDbType.NVarChar, pass));
                     cmd.Parameters.Add(CreateInputParam("@PasswordSalt", SqlDbType.NVarChar, salt));
-                    cmd.Parameters.Add(
-                        CreateInputParam("@PasswordFormat", SqlDbType.Int, passwordFormat)
-                    );
-                    cmd.Parameters.Add(
-                        CreateInputParam("@CurrentTimeUtc", SqlDbType.DateTime, DateTime.UtcNow)
-                    );
+                    cmd.Parameters
+                        .Add(CreateInputParam("@PasswordFormat", SqlDbType.Int, passwordFormat));
+                    cmd.Parameters
+                        .Add(
+                            CreateInputParam("@CurrentTimeUtc", SqlDbType.DateTime, DateTime.UtcNow)
+                        );
 
                     SqlParameter p = new SqlParameter("@ReturnValue", SqlDbType.Int);
                     p.Direction = ParameterDirection.ReturnValue;
@@ -1020,47 +1049,58 @@ namespace System.Web.Security
 
                     cmd.CommandTimeout = CommandTimeout;
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.Add(
-                        CreateInputParam("@ApplicationName", SqlDbType.NVarChar, ApplicationName)
-                    );
-                    cmd.Parameters.Add(CreateInputParam("@UserName", SqlDbType.NVarChar, username));
-                    cmd.Parameters.Add(
-                        CreateInputParam(
-                            "@NewPassword",
-                            SqlDbType.NVarChar,
-                            EncodePassword(newPassword, (int)passwordFormat, salt)
-                        )
-                    );
-                    cmd.Parameters.Add(
-                        CreateInputParam(
-                            "@MaxInvalidPasswordAttempts",
-                            SqlDbType.Int,
-                            MaxInvalidPasswordAttempts
-                        )
-                    );
-                    cmd.Parameters.Add(
-                        CreateInputParam(
-                            "@PasswordAttemptWindow",
-                            SqlDbType.Int,
-                            PasswordAttemptWindow
-                        )
-                    );
-                    cmd.Parameters.Add(CreateInputParam("@PasswordSalt", SqlDbType.NVarChar, salt));
-                    cmd.Parameters.Add(
-                        CreateInputParam("@PasswordFormat", SqlDbType.Int, (int)passwordFormat)
-                    );
-                    cmd.Parameters.Add(
-                        CreateInputParam("@CurrentTimeUtc", SqlDbType.DateTime, DateTime.UtcNow)
-                    );
-                    if (RequiresQuestionAndAnswer)
-                    {
-                        cmd.Parameters.Add(
+                    cmd.Parameters
+                        .Add(
                             CreateInputParam(
-                                "@PasswordAnswer",
+                                "@ApplicationName",
                                 SqlDbType.NVarChar,
-                                encodedPasswordAnswer
+                                ApplicationName
                             )
                         );
+                    cmd.Parameters.Add(CreateInputParam("@UserName", SqlDbType.NVarChar, username));
+                    cmd.Parameters
+                        .Add(
+                            CreateInputParam(
+                                "@NewPassword",
+                                SqlDbType.NVarChar,
+                                EncodePassword(newPassword, (int)passwordFormat, salt)
+                            )
+                        );
+                    cmd.Parameters
+                        .Add(
+                            CreateInputParam(
+                                "@MaxInvalidPasswordAttempts",
+                                SqlDbType.Int,
+                                MaxInvalidPasswordAttempts
+                            )
+                        );
+                    cmd.Parameters
+                        .Add(
+                            CreateInputParam(
+                                "@PasswordAttemptWindow",
+                                SqlDbType.Int,
+                                PasswordAttemptWindow
+                            )
+                        );
+                    cmd.Parameters.Add(CreateInputParam("@PasswordSalt", SqlDbType.NVarChar, salt));
+                    cmd.Parameters
+                        .Add(
+                            CreateInputParam("@PasswordFormat", SqlDbType.Int, (int)passwordFormat)
+                        );
+                    cmd.Parameters
+                        .Add(
+                            CreateInputParam("@CurrentTimeUtc", SqlDbType.DateTime, DateTime.UtcNow)
+                        );
+                    if (RequiresQuestionAndAnswer)
+                    {
+                        cmd.Parameters
+                            .Add(
+                                CreateInputParam(
+                                    "@PasswordAnswer",
+                                    SqlDbType.NVarChar,
+                                    encodedPasswordAnswer
+                                )
+                            );
                     }
 
                     SqlParameter p = new SqlParameter("@ReturnValue", SqlDbType.Int);
@@ -1140,37 +1180,50 @@ namespace System.Web.Security
 
                     cmd.CommandTimeout = CommandTimeout;
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.Add(
-                        CreateInputParam("@ApplicationName", SqlDbType.NVarChar, ApplicationName)
-                    );
-                    cmd.Parameters.Add(
-                        CreateInputParam("@UserName", SqlDbType.NVarChar, user.UserName)
-                    );
+                    cmd.Parameters
+                        .Add(
+                            CreateInputParam(
+                                "@ApplicationName",
+                                SqlDbType.NVarChar,
+                                ApplicationName
+                            )
+                        );
+                    cmd.Parameters
+                        .Add(CreateInputParam("@UserName", SqlDbType.NVarChar, user.UserName));
                     cmd.Parameters.Add(CreateInputParam("@Email", SqlDbType.NVarChar, user.Email));
                     cmd.Parameters.Add(CreateInputParam("@Comment", SqlDbType.NText, user.Comment));
-                    cmd.Parameters.Add(
-                        CreateInputParam("@IsApproved", SqlDbType.Bit, user.IsApproved ? 1 : 0)
-                    );
-                    cmd.Parameters.Add(
-                        CreateInputParam(
-                            "@LastLoginDate",
-                            SqlDbType.DateTime,
-                            user.LastLoginDate.ToUniversalTime()
-                        )
-                    );
-                    cmd.Parameters.Add(
-                        CreateInputParam(
-                            "@LastActivityDate",
-                            SqlDbType.DateTime,
-                            user.LastActivityDate.ToUniversalTime()
-                        )
-                    );
-                    cmd.Parameters.Add(
-                        CreateInputParam("@UniqueEmail", SqlDbType.Int, RequiresUniqueEmail ? 1 : 0)
-                    );
-                    cmd.Parameters.Add(
-                        CreateInputParam("@CurrentTimeUtc", SqlDbType.DateTime, DateTime.UtcNow)
-                    );
+                    cmd.Parameters
+                        .Add(
+                            CreateInputParam("@IsApproved", SqlDbType.Bit, user.IsApproved ? 1 : 0)
+                        );
+                    cmd.Parameters
+                        .Add(
+                            CreateInputParam(
+                                "@LastLoginDate",
+                                SqlDbType.DateTime,
+                                user.LastLoginDate.ToUniversalTime()
+                            )
+                        );
+                    cmd.Parameters
+                        .Add(
+                            CreateInputParam(
+                                "@LastActivityDate",
+                                SqlDbType.DateTime,
+                                user.LastActivityDate.ToUniversalTime()
+                            )
+                        );
+                    cmd.Parameters
+                        .Add(
+                            CreateInputParam(
+                                "@UniqueEmail",
+                                SqlDbType.Int,
+                                RequiresUniqueEmail ? 1 : 0
+                            )
+                        );
+                    cmd.Parameters
+                        .Add(
+                            CreateInputParam("@CurrentTimeUtc", SqlDbType.DateTime, DateTime.UtcNow)
+                        );
 
                     SqlParameter p = new SqlParameter("@ReturnValue", SqlDbType.Int);
                     p.Direction = ParameterDirection.ReturnValue;
@@ -1246,9 +1299,14 @@ namespace System.Web.Security
 
                     cmd.CommandTimeout = CommandTimeout;
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.Add(
-                        CreateInputParam("@ApplicationName", SqlDbType.NVarChar, ApplicationName)
-                    );
+                    cmd.Parameters
+                        .Add(
+                            CreateInputParam(
+                                "@ApplicationName",
+                                SqlDbType.NVarChar,
+                                ApplicationName
+                            )
+                        );
                     cmd.Parameters.Add(CreateInputParam("@UserName", SqlDbType.NVarChar, username));
 
                     SqlParameter p = new SqlParameter("@ReturnValue", SqlDbType.Int);
@@ -1312,15 +1370,16 @@ namespace System.Web.Security
 
                     cmd.CommandTimeout = CommandTimeout;
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.Add(
-                        CreateInputParam("@UserId", SqlDbType.UniqueIdentifier, providerUserKey)
-                    );
-                    cmd.Parameters.Add(
-                        CreateInputParam("@UpdateLastActivity", SqlDbType.Bit, userIsOnline)
-                    );
-                    cmd.Parameters.Add(
-                        CreateInputParam("@CurrentTimeUtc", SqlDbType.DateTime, DateTime.UtcNow)
-                    );
+                    cmd.Parameters
+                        .Add(
+                            CreateInputParam("@UserId", SqlDbType.UniqueIdentifier, providerUserKey)
+                        );
+                    cmd.Parameters
+                        .Add(CreateInputParam("@UpdateLastActivity", SqlDbType.Bit, userIsOnline));
+                    cmd.Parameters
+                        .Add(
+                            CreateInputParam("@CurrentTimeUtc", SqlDbType.DateTime, DateTime.UtcNow)
+                        );
                     SqlParameter p = new SqlParameter("@ReturnValue", SqlDbType.Int);
                     p.Direction = ParameterDirection.ReturnValue;
                     cmd.Parameters.Add(p);
@@ -1407,16 +1466,21 @@ namespace System.Web.Security
 
                     cmd.CommandTimeout = CommandTimeout;
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.Add(
-                        CreateInputParam("@ApplicationName", SqlDbType.NVarChar, ApplicationName)
-                    );
+                    cmd.Parameters
+                        .Add(
+                            CreateInputParam(
+                                "@ApplicationName",
+                                SqlDbType.NVarChar,
+                                ApplicationName
+                            )
+                        );
                     cmd.Parameters.Add(CreateInputParam("@UserName", SqlDbType.NVarChar, username));
-                    cmd.Parameters.Add(
-                        CreateInputParam("@UpdateLastActivity", SqlDbType.Bit, userIsOnline)
-                    );
-                    cmd.Parameters.Add(
-                        CreateInputParam("@CurrentTimeUtc", SqlDbType.DateTime, DateTime.UtcNow)
-                    );
+                    cmd.Parameters
+                        .Add(CreateInputParam("@UpdateLastActivity", SqlDbType.Bit, userIsOnline));
+                    cmd.Parameters
+                        .Add(
+                            CreateInputParam("@CurrentTimeUtc", SqlDbType.DateTime, DateTime.UtcNow)
+                        );
                     SqlParameter p = new SqlParameter("@ReturnValue", SqlDbType.Int);
                     p.Direction = ParameterDirection.ReturnValue;
                     cmd.Parameters.Add(p);
@@ -1503,9 +1567,14 @@ namespace System.Web.Security
 
                     cmd.CommandTimeout = CommandTimeout;
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.Add(
-                        CreateInputParam("@ApplicationName", SqlDbType.NVarChar, ApplicationName)
-                    );
+                    cmd.Parameters
+                        .Add(
+                            CreateInputParam(
+                                "@ApplicationName",
+                                SqlDbType.NVarChar,
+                                ApplicationName
+                            )
+                        );
                     cmd.Parameters.Add(CreateInputParam("@Email", SqlDbType.NVarChar, email));
 
                     SqlParameter p = new SqlParameter("@ReturnValue", SqlDbType.Int);
@@ -1569,22 +1638,25 @@ namespace System.Web.Security
 
                     cmd.CommandTimeout = CommandTimeout;
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.Add(
-                        CreateInputParam("@ApplicationName", SqlDbType.NVarChar, ApplicationName)
-                    );
+                    cmd.Parameters
+                        .Add(
+                            CreateInputParam(
+                                "@ApplicationName",
+                                SqlDbType.NVarChar,
+                                ApplicationName
+                            )
+                        );
                     cmd.Parameters.Add(CreateInputParam("@UserName", SqlDbType.NVarChar, username));
 
                     if (deleteAllRelatedData)
                     {
-                        cmd.Parameters.Add(
-                            CreateInputParam("@TablesToDeleteFrom", SqlDbType.Int, 0xF)
-                        );
+                        cmd.Parameters
+                            .Add(CreateInputParam("@TablesToDeleteFrom", SqlDbType.Int, 0xF));
                     }
                     else
                     {
-                        cmd.Parameters.Add(
-                            CreateInputParam("@TablesToDeleteFrom", SqlDbType.Int, 1)
-                        );
+                        cmd.Parameters
+                            .Add(CreateInputParam("@TablesToDeleteFrom", SqlDbType.Int, 1));
                     }
 
                     SqlParameter p = new SqlParameter("@NumTablesDeletedFrom", SqlDbType.Int);
@@ -1652,9 +1724,14 @@ namespace System.Web.Security
 
                     cmd.CommandTimeout = CommandTimeout;
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.Add(
-                        CreateInputParam("@ApplicationName", SqlDbType.NVarChar, ApplicationName)
-                    );
+                    cmd.Parameters
+                        .Add(
+                            CreateInputParam(
+                                "@ApplicationName",
+                                SqlDbType.NVarChar,
+                                ApplicationName
+                            )
+                        );
                     cmd.Parameters.Add(CreateInputParam("@PageIndex", SqlDbType.Int, pageIndex));
                     cmd.Parameters.Add(CreateInputParam("@PageSize", SqlDbType.Int, pageSize));
                     p.Direction = ParameterDirection.ReturnValue;
@@ -1755,19 +1832,26 @@ namespace System.Web.Security
 
                     cmd.CommandTimeout = CommandTimeout;
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.Add(
-                        CreateInputParam("@ApplicationName", SqlDbType.NVarChar, ApplicationName)
-                    );
-                    cmd.Parameters.Add(
-                        CreateInputParam(
-                            "@MinutesSinceLastInActive",
-                            SqlDbType.Int,
-                            Membership.UserIsOnlineTimeWindow
-                        )
-                    );
-                    cmd.Parameters.Add(
-                        CreateInputParam("@CurrentTimeUtc", SqlDbType.DateTime, DateTime.UtcNow)
-                    );
+                    cmd.Parameters
+                        .Add(
+                            CreateInputParam(
+                                "@ApplicationName",
+                                SqlDbType.NVarChar,
+                                ApplicationName
+                            )
+                        );
+                    cmd.Parameters
+                        .Add(
+                            CreateInputParam(
+                                "@MinutesSinceLastInActive",
+                                SqlDbType.Int,
+                                Membership.UserIsOnlineTimeWindow
+                            )
+                        );
+                    cmd.Parameters
+                        .Add(
+                            CreateInputParam("@CurrentTimeUtc", SqlDbType.DateTime, DateTime.UtcNow)
+                        );
                     p.Direction = ParameterDirection.ReturnValue;
                     cmd.Parameters.Add(p);
                     cmd.ExecuteNonQuery();
@@ -1841,12 +1925,22 @@ namespace System.Web.Security
 
                     cmd.CommandTimeout = CommandTimeout;
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.Add(
-                        CreateInputParam("@ApplicationName", SqlDbType.NVarChar, ApplicationName)
-                    );
-                    cmd.Parameters.Add(
-                        CreateInputParam("@UserNameToMatch", SqlDbType.NVarChar, usernameToMatch)
-                    );
+                    cmd.Parameters
+                        .Add(
+                            CreateInputParam(
+                                "@ApplicationName",
+                                SqlDbType.NVarChar,
+                                ApplicationName
+                            )
+                        );
+                    cmd.Parameters
+                        .Add(
+                            CreateInputParam(
+                                "@UserNameToMatch",
+                                SqlDbType.NVarChar,
+                                usernameToMatch
+                            )
+                        );
                     cmd.Parameters.Add(CreateInputParam("@PageIndex", SqlDbType.Int, pageIndex));
                     cmd.Parameters.Add(CreateInputParam("@PageSize", SqlDbType.Int, pageSize));
                     cmd.Parameters.Add(p);
@@ -1969,12 +2063,16 @@ namespace System.Web.Security
 
                     cmd.CommandTimeout = CommandTimeout;
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.Add(
-                        CreateInputParam("@ApplicationName", SqlDbType.NVarChar, ApplicationName)
-                    );
-                    cmd.Parameters.Add(
-                        CreateInputParam("@EmailToMatch", SqlDbType.NVarChar, emailToMatch)
-                    );
+                    cmd.Parameters
+                        .Add(
+                            CreateInputParam(
+                                "@ApplicationName",
+                                SqlDbType.NVarChar,
+                                ApplicationName
+                            )
+                        );
+                    cmd.Parameters
+                        .Add(CreateInputParam("@EmailToMatch", SqlDbType.NVarChar, emailToMatch));
                     cmd.Parameters.Add(CreateInputParam("@PageIndex", SqlDbType.Int, pageIndex));
                     cmd.Parameters.Add(CreateInputParam("@PageSize", SqlDbType.Int, pageSize));
                     cmd.Parameters.Add(p);
@@ -2136,51 +2234,61 @@ namespace System.Web.Security
                     DateTime dtNow = DateTime.UtcNow;
                     cmd.CommandTimeout = CommandTimeout;
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.Add(
-                        CreateInputParam("@ApplicationName", SqlDbType.NVarChar, ApplicationName)
-                    );
+                    cmd.Parameters
+                        .Add(
+                            CreateInputParam(
+                                "@ApplicationName",
+                                SqlDbType.NVarChar,
+                                ApplicationName
+                            )
+                        );
                     cmd.Parameters.Add(CreateInputParam("@UserName", SqlDbType.NVarChar, username));
-                    cmd.Parameters.Add(
-                        CreateInputParam("@IsPasswordCorrect", SqlDbType.Bit, isPasswordCorrect)
-                    );
-                    cmd.Parameters.Add(
-                        CreateInputParam(
-                            "@UpdateLastLoginActivityDate",
-                            SqlDbType.Bit,
-                            updateLastLoginActivityDate
-                        )
-                    );
-                    cmd.Parameters.Add(
-                        CreateInputParam(
-                            "@MaxInvalidPasswordAttempts",
-                            SqlDbType.Int,
-                            MaxInvalidPasswordAttempts
-                        )
-                    );
-                    cmd.Parameters.Add(
-                        CreateInputParam(
-                            "@PasswordAttemptWindow",
-                            SqlDbType.Int,
-                            PasswordAttemptWindow
-                        )
-                    );
-                    cmd.Parameters.Add(
-                        CreateInputParam("@CurrentTimeUtc", SqlDbType.DateTime, dtNow)
-                    );
-                    cmd.Parameters.Add(
-                        CreateInputParam(
-                            "@LastLoginDate",
-                            SqlDbType.DateTime,
-                            isPasswordCorrect ? dtNow : lastLoginDate
-                        )
-                    );
-                    cmd.Parameters.Add(
-                        CreateInputParam(
-                            "@LastActivityDate",
-                            SqlDbType.DateTime,
-                            isPasswordCorrect ? dtNow : lastActivityDate
-                        )
-                    );
+                    cmd.Parameters
+                        .Add(
+                            CreateInputParam("@IsPasswordCorrect", SqlDbType.Bit, isPasswordCorrect)
+                        );
+                    cmd.Parameters
+                        .Add(
+                            CreateInputParam(
+                                "@UpdateLastLoginActivityDate",
+                                SqlDbType.Bit,
+                                updateLastLoginActivityDate
+                            )
+                        );
+                    cmd.Parameters
+                        .Add(
+                            CreateInputParam(
+                                "@MaxInvalidPasswordAttempts",
+                                SqlDbType.Int,
+                                MaxInvalidPasswordAttempts
+                            )
+                        );
+                    cmd.Parameters
+                        .Add(
+                            CreateInputParam(
+                                "@PasswordAttemptWindow",
+                                SqlDbType.Int,
+                                PasswordAttemptWindow
+                            )
+                        );
+                    cmd.Parameters
+                        .Add(CreateInputParam("@CurrentTimeUtc", SqlDbType.DateTime, dtNow));
+                    cmd.Parameters
+                        .Add(
+                            CreateInputParam(
+                                "@LastLoginDate",
+                                SqlDbType.DateTime,
+                                isPasswordCorrect ? dtNow : lastLoginDate
+                            )
+                        );
+                    cmd.Parameters
+                        .Add(
+                            CreateInputParam(
+                                "@LastActivityDate",
+                                SqlDbType.DateTime,
+                                isPasswordCorrect ? dtNow : lastActivityDate
+                            )
+                        );
                     SqlParameter p = new SqlParameter("@ReturnValue", SqlDbType.Int);
                     p.Direction = ParameterDirection.ReturnValue;
                     cmd.Parameters.Add(p);
@@ -2240,20 +2348,27 @@ namespace System.Web.Security
 
                     cmd.CommandTimeout = CommandTimeout;
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.Add(
-                        CreateInputParam("@ApplicationName", SqlDbType.NVarChar, ApplicationName)
-                    );
+                    cmd.Parameters
+                        .Add(
+                            CreateInputParam(
+                                "@ApplicationName",
+                                SqlDbType.NVarChar,
+                                ApplicationName
+                            )
+                        );
                     cmd.Parameters.Add(CreateInputParam("@UserName", SqlDbType.NVarChar, username));
-                    cmd.Parameters.Add(
-                        CreateInputParam(
-                            "@UpdateLastLoginActivityDate",
-                            SqlDbType.Bit,
-                            updateLastLoginActivityDate
-                        )
-                    );
-                    cmd.Parameters.Add(
-                        CreateInputParam("@CurrentTimeUtc", SqlDbType.DateTime, DateTime.UtcNow)
-                    );
+                    cmd.Parameters
+                        .Add(
+                            CreateInputParam(
+                                "@UpdateLastLoginActivityDate",
+                                SqlDbType.Bit,
+                                updateLastLoginActivityDate
+                            )
+                        );
+                    cmd.Parameters
+                        .Add(
+                            CreateInputParam("@CurrentTimeUtc", SqlDbType.DateTime, DateTime.UtcNow)
+                        );
 
                     p = new SqlParameter("@ReturnValue", SqlDbType.Int);
                     p.Direction = ParameterDirection.ReturnValue;
@@ -2337,33 +2452,46 @@ namespace System.Web.Security
 
                     cmd.CommandTimeout = CommandTimeout;
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.Add(
-                        CreateInputParam("@ApplicationName", SqlDbType.NVarChar, ApplicationName)
-                    );
+                    cmd.Parameters
+                        .Add(
+                            CreateInputParam(
+                                "@ApplicationName",
+                                SqlDbType.NVarChar,
+                                ApplicationName
+                            )
+                        );
                     cmd.Parameters.Add(CreateInputParam("@UserName", SqlDbType.NVarChar, username));
-                    cmd.Parameters.Add(
-                        CreateInputParam(
-                            "@MaxInvalidPasswordAttempts",
-                            SqlDbType.Int,
-                            MaxInvalidPasswordAttempts
-                        )
-                    );
-                    cmd.Parameters.Add(
-                        CreateInputParam(
-                            "@PasswordAttemptWindow",
-                            SqlDbType.Int,
-                            PasswordAttemptWindow
-                        )
-                    );
-                    cmd.Parameters.Add(
-                        CreateInputParam("@CurrentTimeUtc", SqlDbType.DateTime, DateTime.UtcNow)
-                    );
+                    cmd.Parameters
+                        .Add(
+                            CreateInputParam(
+                                "@MaxInvalidPasswordAttempts",
+                                SqlDbType.Int,
+                                MaxInvalidPasswordAttempts
+                            )
+                        );
+                    cmd.Parameters
+                        .Add(
+                            CreateInputParam(
+                                "@PasswordAttemptWindow",
+                                SqlDbType.Int,
+                                PasswordAttemptWindow
+                            )
+                        );
+                    cmd.Parameters
+                        .Add(
+                            CreateInputParam("@CurrentTimeUtc", SqlDbType.DateTime, DateTime.UtcNow)
+                        );
 
                     if (requiresQuestionAndAnswer)
                     {
-                        cmd.Parameters.Add(
-                            CreateInputParam("@PasswordAnswer", SqlDbType.NVarChar, passwordAnswer)
-                        );
+                        cmd.Parameters
+                            .Add(
+                                CreateInputParam(
+                                    "@PasswordAnswer",
+                                    SqlDbType.NVarChar,
+                                    passwordAnswer
+                                )
+                            );
                     }
 
                     p = new SqlParameter("@ReturnValue", SqlDbType.Int);

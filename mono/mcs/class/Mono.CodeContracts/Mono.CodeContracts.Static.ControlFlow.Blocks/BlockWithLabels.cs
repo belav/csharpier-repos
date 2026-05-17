@@ -110,8 +110,7 @@ namespace Mono.CodeContracts.Static.ControlFlow.Blocks
         {
             Label label;
             if (TryGetLabel(pc.Index, out label))
-                return Subroutine
-                    .CodeProvider
+                return Subroutine.CodeProvider
                     .Decode<LabelAdapter<Label, Data, Result, Visitor>, Data, Result>(
                         label,
                         new LabelAdapter<Label, Data, Result, Visitor>(visitor, pc),

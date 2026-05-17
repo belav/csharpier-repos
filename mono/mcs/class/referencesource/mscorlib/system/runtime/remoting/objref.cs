@@ -788,8 +788,7 @@ namespace System.Runtime.Remoting
                             String typeName = null;
                             String assemName = null;
 
-                            System
-                                .Runtime
+                            System.Runtime
                                 .Remoting
                                 .TypeInfo
                                 .ParseTypeAndAssembly(srvTypeName, out typeName, out assemName);
@@ -822,8 +821,7 @@ namespace System.Runtime.Remoting
                                 serverType = null;
                             BCLDebug.Assert(serverType != null, "bad objRef!");
 
-                            ret1 = InteropServices
-                                .Marshal
+                            ret1 = InteropServices.Marshal
                                 .GetTypedObjectForIUnknown(pUnk, serverType);
                             if (ret1 != null)
                             {
@@ -1039,8 +1037,7 @@ namespace System.Runtime.Remoting
             if (!idObj.IsWellKnown())
             {
                 // Create the envoy info
-                EnvoyInfo = System
-                    .Runtime
+                EnvoyInfo = System.Runtime
                     .Remoting
                     .EnvoyInfo
                     .CreateEnvoyInfo(idObj as ServerIdentity);

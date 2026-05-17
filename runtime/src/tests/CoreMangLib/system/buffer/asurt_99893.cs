@@ -32,8 +32,7 @@ namespace System
             }
             catch (ArgumentException ex)
             {
-                TestLibrary
-                    .Logging
+                TestLibrary.Logging
                     .WriteLine(
                         "GetByte: Got expected exception: {0}: {1}",
                         ex.GetType(),
@@ -55,8 +54,7 @@ namespace System
             }
             catch (ArgumentException ex)
             {
-                TestLibrary
-                    .Logging
+                TestLibrary.Logging
                     .WriteLine(
                         "SetByte: Got expected exception: {0}: {1}",
                         ex.GetType(),
@@ -79,8 +77,7 @@ namespace System
             }
             catch (ArgumentException ex)
             {
-                TestLibrary
-                    .Logging
+                TestLibrary.Logging
                     .WriteLine(
                         "BlockCopy: Got expected exception: {0}: {1}",
                         ex.GetType(),

@@ -296,8 +296,7 @@ namespace System.Web.UI.DataVisualization.Charting.Utilities
                     try
                     {
                         WebRequest request = WebRequest.Create(imageUri);
-                        image = System
-                            .Drawing
+                        image = System.Drawing
                             .Image
                             .FromStream(request.GetResponse().GetResponseStream());
                     }

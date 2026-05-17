@@ -548,8 +548,7 @@ namespace System.Data.Mapping
             if (Helper.IsEnumType(edmType) ^ Helper.IsEnumType(objectType))
             {
                 throw new MappingException(
-                    System
-                        .Data
+                    System.Data
                         .Entity
                         .Strings
                         .Mapping_EnumTypeMappingToNonEnumType(edmType.FullName, objectType.FullName)
@@ -560,8 +559,7 @@ namespace System.Data.Mapping
             if (edmType.Abstract != objectType.Abstract)
             {
                 throw new MappingException(
-                    System
-                        .Data
+                    System.Data
                         .Entity
                         .Strings
                         .Mapping_AbstractTypeMappingToNonAbstractType(
@@ -615,8 +613,7 @@ namespace System.Data.Mapping
             // Assuming that we will have a single member in O-space for a member in C space
             EdmMember objectMember;
             if (
-                !objectType
-                    .Members
+                !objectType.Members
                     .TryGetValue(
                         edmMember.Name,
                         false /*ignoreCase*/
@@ -626,8 +623,7 @@ namespace System.Data.Mapping
             )
             {
                 throw new MappingException(
-                    System
-                        .Data
+                    System.Data
                         .Entity
                         .Strings
                         .Mapping_Default_OCMapping_Clr_Member(
@@ -656,8 +652,7 @@ namespace System.Data.Mapping
             if (edmMember.BuiltInTypeKind != objectMember.BuiltInTypeKind)
             {
                 throw new MappingException(
-                    System
-                        .Data
+                    System.Data
                         .Entity
                         .Strings
                         .Mapping_Default_OCMapping_MemberKind_Mismatch(
@@ -707,8 +702,7 @@ namespace System.Data.Mapping
                 )
                 {
                     throw new MappingException(
-                        System
-                            .Data
+                        System.Data
                             .Entity
                             .Strings
                             .Mapping_Default_OCMapping_Invalid_MemberType(
@@ -750,8 +744,7 @@ namespace System.Data.Mapping
                 )
                 {
                     edmMemberType = ((CollectionType)edmMember.TypeUsage.EdmType).TypeUsage.EdmType;
-                    objectMemberType = ((CollectionType)objectMember.TypeUsage.EdmType)
-                        .TypeUsage
+                    objectMemberType = ((CollectionType)objectMember.TypeUsage.EdmType).TypeUsage
                         .EdmType;
                 }
                 else
@@ -766,8 +759,7 @@ namespace System.Data.Mapping
                 )
                 {
                     throw new MappingException(
-                        System
-                            .Data
+                        System.Data
                             .Entity
                             .Strings
                             .Mapping_Default_OCMapping_Invalid_MemberType(
@@ -912,8 +904,7 @@ namespace System.Data.Mapping
             if (cdmStructuralType.Members.Count != objectStructuralType.Members.Count)
             {
                 throw new MappingException(
-                    System
-                        .Data
+                    System.Data
                         .Entity
                         .Strings
                         .Mapping_Default_OCMapping_Member_Count_Mismatch(
@@ -928,8 +919,7 @@ namespace System.Data.Mapping
                 if (!cdmStructuralType.Members.Contains(member.Identity))
                 {
                     throw new MappingException(
-                        System
-                            .Data
+                        System.Data
                             .Entity
                             .Strings
                             .Mapping_Default_OCMapping_Clr_Member2(
@@ -969,8 +959,7 @@ namespace System.Data.Mapping
             )
             {
                 throw new MappingException(
-                    System
-                        .Data
+                    System.Data
                         .Entity
                         .Strings
                         .Mapping_Enum_OCMapping_UnderlyingTypesMismatch(
@@ -985,13 +974,11 @@ namespace System.Data.Mapping
             // EnumMember.Value is just a number so sorting by value is faster than by the name.
             // The drawback is that there can be multiple members with the same value. To break
             // the tie we need to sort by name after sorting by value.
-            var edmEnumTypeMembersSortedEnumerator = edmEnumType
-                .Members
+            var edmEnumTypeMembersSortedEnumerator = edmEnumType.Members
                 .OrderBy(m => Convert.ToInt64(m.Value, CultureInfo.InvariantCulture))
                 .ThenBy(m => m.Name)
                 .GetEnumerator();
-            var objectEnumTypeMembersSortedEnumerator = objectEnumType
-                .Members
+            var objectEnumTypeMembersSortedEnumerator = objectEnumType.Members
                 .OrderBy(m => Convert.ToInt64(m.Value, CultureInfo.InvariantCulture))
                 .ThenBy(m => m.Name)
                 .GetEnumerator();
@@ -1003,8 +990,7 @@ namespace System.Data.Mapping
                     if (
                         edmEnumTypeMembersSortedEnumerator.Current.Name
                             == objectEnumTypeMembersSortedEnumerator.Current.Name
-                        && edmEnumTypeMembersSortedEnumerator
-                            .Current
+                        && edmEnumTypeMembersSortedEnumerator.Current
                             .Value
                             .Equals(objectEnumTypeMembersSortedEnumerator.Current.Value)
                     )
@@ -1017,8 +1003,7 @@ namespace System.Data.Mapping
                 }
 
                 throw new MappingException(
-                    System
-                        .Data
+                    System.Data
                         .Entity
                         .Strings
                         .Mapping_Enum_OCMapping_MemberMismatch(
@@ -1070,8 +1055,7 @@ namespace System.Data.Mapping
                 if (edmEnd.RelationshipMultiplicity != objectEnd.RelationshipMultiplicity)
                 {
                     throw new MappingException(
-                        System
-                            .Data
+                        System.Data
                             .Entity
                             .Strings
                             .Mapping_Default_OCMapping_MultiplicityMismatch(

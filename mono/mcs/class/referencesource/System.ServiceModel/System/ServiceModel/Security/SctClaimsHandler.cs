@@ -27,15 +27,13 @@ namespace System.ServiceModel.Security
         {
             if (securityTokenHandlerCollection == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("securityTokenHandlerCollection");
             }
 
             if (endpointId == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNullOrEmptyString("endpointId");
             }
 

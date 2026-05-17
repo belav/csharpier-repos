@@ -41,8 +41,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Peek
         }
 
         public IPeekableItemSource TryCreatePeekableItemSource(ITextBuffer textBuffer) =>
-            textBuffer
-                .Properties
+            textBuffer.Properties
                 .GetOrCreateSingletonProperty(() =>
                     new PeekableItemSource(
                         textBuffer,

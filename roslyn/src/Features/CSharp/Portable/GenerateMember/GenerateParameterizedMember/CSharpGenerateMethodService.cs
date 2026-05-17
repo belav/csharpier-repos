@@ -201,8 +201,7 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateMember.GenerateMethod
         )
         {
             if (
-                semanticModel
-                    .SyntaxTree
+                semanticModel.SyntaxTree
                     .IsNameOfContext(expression.SpanStart, semanticModel, cancellationToken)
             )
             {

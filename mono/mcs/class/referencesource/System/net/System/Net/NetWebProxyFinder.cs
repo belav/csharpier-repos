@@ -690,8 +690,7 @@ namespace System.Net
 
             GlobalLog.Print("NetWebProxyFinder::SafeDetectAutoProxyUrl() Using WinHttp.");
             SafeGlobalFree autoProxyUrl;
-            bool success = UnsafeNclNativeMethods
-                .WinHttp
+            bool success = UnsafeNclNativeMethods.WinHttp
                 .WinHttpDetectAutoProxyConfigUrl(discoveryMethod, out autoProxyUrl);
             if (!success)
             {

@@ -46,8 +46,7 @@ namespace Microsoft.Build.Tasks.Xaml
             this.rootNamespace = rootNamespace;
             this.localAssemblyName = assembly != null ? assembly.GetName().Name : null;
             this.realAssemblyName = realAssemblyName;
-            this.xNull = underlyingReader
-                .SchemaContext
+            this.xNull = underlyingReader.SchemaContext
                 .GetXamlType(new XamlTypeName(XamlLanguage.Null));
         }
 
@@ -306,8 +305,7 @@ namespace Microsoft.Build.Tasks.Xaml
                     return;
                 }
                 if (
-                    !collectionType
-                        .AllowedContentTypes
+                    !collectionType.AllowedContentTypes
                         .Any(contentType => type.CanAssignTo(contentType))
                 )
                 {
@@ -332,8 +330,7 @@ namespace Microsoft.Build.Tasks.Xaml
                     return;
                 }
                 if (
-                    !collectionType
-                        .AllowedContentTypes
+                    !collectionType.AllowedContentTypes
                         .Any(contentType => type.CanAssignTo(contentType))
                 )
                 {
@@ -388,13 +385,14 @@ namespace Microsoft.Build.Tasks.Xaml
                 {
                     if (
                         this.definedType != null
-                        && this.definedType.GetMethod(
-                            value as string,
-                            BindingFlags.Static
-                                | BindingFlags.Instance
-                                | BindingFlags.NonPublic
-                                | BindingFlags.Public
-                        ) == null
+                        && this.definedType
+                            .GetMethod(
+                                value as string,
+                                BindingFlags.Static
+                                    | BindingFlags.Instance
+                                    | BindingFlags.NonPublic
+                                    | BindingFlags.Public
+                            ) == null
                     )
                     {
                         ValidationError(
@@ -442,8 +440,7 @@ namespace Microsoft.Build.Tasks.Xaml
                         return;
                     }
                     if (
-                        !collectionType
-                            .AllowedContentTypes
+                        !collectionType.AllowedContentTypes
                             .Any(contentType => contentType.IsNullable)
                     )
                     {

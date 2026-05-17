@@ -141,8 +141,7 @@ namespace System.Data.Common.EntitySql.AST
         internal void PrefixSign(string sign)
         {
             System.Diagnostics.Debug.Assert(IsNumber && !IsSignedNumber);
-            System
-                .Diagnostics
+            System.Diagnostics
                 .Debug
                 .Assert(sign[0] == '-' || sign[0] == '+', "sign symbol must be + or -");
             System.Diagnostics.Debug.Assert(_computedValue == null);
@@ -240,8 +239,7 @@ namespace System.Data.Common.EntitySql.AST
 
                     default:
                         throw EntityUtil.NotSupported(
-                            System
-                                .Data
+                            System.Data
                                 .Entity
                                 .Strings
                                 .LiteralTypeNotSupported(_literalKind.ToString())
@@ -294,8 +292,7 @@ namespace System.Data.Common.EntitySql.AST
                             {
                                 throw EntityUtil.EntitySqlError(
                                     errCtx,
-                                    System
-                                        .Data
+                                    System.Data
                                         .Entity
                                         .Strings
                                         .CannotConvertNumericLiteral(numericString, "unsigned int")
@@ -319,8 +316,7 @@ namespace System.Data.Common.EntitySql.AST
                             {
                                 throw EntityUtil.EntitySqlError(
                                     errCtx,
-                                    System
-                                        .Data
+                                    System.Data
                                         .Entity
                                         .Strings
                                         .CannotConvertNumericLiteral(numericString, "long")
@@ -345,8 +341,7 @@ namespace System.Data.Common.EntitySql.AST
                             {
                                 throw EntityUtil.EntitySqlError(
                                     errCtx,
-                                    System
-                                        .Data
+                                    System.Data
                                         .Entity
                                         .Strings
                                         .CannotConvertNumericLiteral(numericString, "unsigned long")
@@ -370,8 +365,7 @@ namespace System.Data.Common.EntitySql.AST
                             {
                                 throw EntityUtil.EntitySqlError(
                                     errCtx,
-                                    System
-                                        .Data
+                                    System.Data
                                         .Entity
                                         .Strings
                                         .CannotConvertNumericLiteral(numericString, "float")
@@ -395,8 +389,7 @@ namespace System.Data.Common.EntitySql.AST
                             {
                                 throw EntityUtil.EntitySqlError(
                                     errCtx,
-                                    System
-                                        .Data
+                                    System.Data
                                         .Entity
                                         .Strings
                                         .CannotConvertNumericLiteral(numericString, "decimal")
@@ -420,8 +413,7 @@ namespace System.Data.Common.EntitySql.AST
                             {
                                 throw EntityUtil.EntitySqlError(
                                     errCtx,
-                                    System
-                                        .Data
+                                    System.Data
                                         .Entity
                                         .Strings
                                         .CannotConvertNumericLiteral(numericString, "double")
@@ -458,8 +450,7 @@ namespace System.Data.Common.EntitySql.AST
                 {
                     throw EntityUtil.EntitySqlError(
                         errCtx,
-                        System
-                            .Data
+                        System.Data
                             .Entity
                             .Strings
                             .CannotConvertNumericLiteral(numericString, "double")
@@ -495,8 +486,7 @@ namespace System.Data.Common.EntitySql.AST
                 {
                     throw EntityUtil.EntitySqlError(
                         errCtx,
-                        System
-                            .Data
+                        System.Data
                             .Entity
                             .Strings
                             .CannotConvertNumericLiteral(numericString, "long")
@@ -850,8 +840,7 @@ namespace System.Data.Common.EntitySql.AST
             if (hour > 23)
             {
                 throw EntityUtil.EntitySqlError(
-                    System
-                        .Data
+                    System.Data
                         .Entity
                         .Strings
                         .InvalidHour(datetimeParts[timePartStartIndex], datetimeLiteralValue)
@@ -865,8 +854,7 @@ namespace System.Data.Common.EntitySql.AST
             if (minute > 59)
             {
                 throw EntityUtil.EntitySqlError(
-                    System
-                        .Data
+                    System.Data
                         .Entity
                         .Strings
                         .InvalidMinute(datetimeParts[timePartStartIndex], datetimeLiteralValue)
@@ -885,8 +873,7 @@ namespace System.Data.Common.EntitySql.AST
                 if (second > 59)
                 {
                     throw EntityUtil.EntitySqlError(
-                        System
-                            .Data
+                        System.Data
                             .Entity
                             .Strings
                             .InvalidSecond(datetimeParts[timePartStartIndex], datetimeLiteralValue)
@@ -946,8 +933,7 @@ namespace System.Data.Common.EntitySql.AST
             if (day > DateTime.DaysInMonth(year, month))
             {
                 throw EntityUtil.EntitySqlError(
-                    System
-                        .Data
+                    System.Data
                         .Entity
                         .Strings
                         .InvalidDayInMonth(datetimeParts[2], datetimeParts[1], datetimeLiteralValue)

@@ -1270,8 +1270,7 @@ namespace System.Text.RegularExpressions.Generator
             {
                 Debug.Assert(regexTree.FindOptimizations.FixedDistanceSets is { Count: > 0 });
 
-                List<RegexFindOptimizations.FixedDistanceSet>? sets = regexTree
-                    .FindOptimizations
+                List<RegexFindOptimizations.FixedDistanceSet>? sets = regexTree.FindOptimizations
                     .FixedDistanceSets;
                 RegexFindOptimizations.FixedDistanceSet primarySet = sets![0];
                 const int MaxSets = 4;
@@ -1495,8 +1494,7 @@ namespace System.Text.RegularExpressions.Generator
             {
                 Debug.Assert(regexTree.FindOptimizations.FixedDistanceSets is { Count: > 0 });
 
-                RegexFindOptimizations.FixedDistanceSet set = regexTree
-                    .FindOptimizations
+                RegexFindOptimizations.FixedDistanceSet set = regexTree.FindOptimizations
                     .FixedDistanceSets![0];
                 Debug.Assert(set.Distance == 0);
 

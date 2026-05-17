@@ -199,8 +199,7 @@ namespace System.Net.NetworkInformation
         private static unsafe int GetNumIPAddresses()
         {
             int count = 0;
-            Interop
-                .Sys
+            Interop.Sys
                 .EnumerateInterfaceAddresses(
                     &count,
                     &ProcessIpv4Address,

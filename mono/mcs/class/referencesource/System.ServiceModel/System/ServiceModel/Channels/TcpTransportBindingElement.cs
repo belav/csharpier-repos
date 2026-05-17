@@ -56,8 +56,7 @@ namespace System.ServiceModel.Channels
             {
                 if (value <= 0)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentOutOfRangeException(
                                 "value",
@@ -109,16 +108,14 @@ namespace System.ServiceModel.Channels
 
                 if (
                     value.PolicyEnforcement == PolicyEnforcement.Always
-                    && !System
-                        .Security
+                    && !System.Security
                         .Authentication
                         .ExtendedProtection
                         .ExtendedProtectionPolicy
                         .OSSupportsExtendedProtection
                 )
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new PlatformNotSupportedException(
                                 SR.GetString(SR.ExtendedProtectionNotSupported)
@@ -151,8 +148,7 @@ namespace System.ServiceModel.Channels
 
             if (!this.CanBuildChannelFactory<TChannel>(context))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(
                         "TChannel",
                         SR.GetString(SR.ChannelTypeNotSupported, typeof(TChannel))
@@ -174,8 +170,7 @@ namespace System.ServiceModel.Channels
 
             if (!this.CanBuildChannelListener<TChannel>(context))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(
                         "TChannel",
                         SR.GetString(SR.ChannelTypeNotSupported, typeof(TChannel))
@@ -193,8 +188,7 @@ namespace System.ServiceModel.Channels
             }
             else
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(
                         "TChannel",
                         SR.GetString(SR.ChannelTypeNotSupported, typeof(TChannel))

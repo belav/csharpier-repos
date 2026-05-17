@@ -105,8 +105,7 @@ namespace System.Data.SqlClient
             if (sqlManifest == null)
             {
                 throw EntityUtil.Argument(
-                    System
-                        .Data
+                    System.Data
                         .Entity
                         .Strings
                         .Mapping_Provider_WrongManifestType(typeof(SqlProviderManifest))
@@ -119,8 +118,7 @@ namespace System.Data.SqlClient
             List<SqlParameter> parameters;
             CommandType commandType;
             HashSet<string> paramsToForceNonUnicode;
-            command.CommandText = System
-                .Data
+            command.CommandText = System.Data
                 .SqlClient
                 .SqlGen
                 .SqlGenerator
@@ -149,8 +147,7 @@ namespace System.Data.SqlClient
                 FunctionParameter functionParameter;
                 if (
                     null != function
-                    && function
-                        .Parameters
+                    && function.Parameters
                         .TryGetValue(queryParameter.Key, false, out functionParameter)
                 )
                 {
@@ -173,8 +170,7 @@ namespace System.Data.SqlClient
                         (paramsToForceNonUnicode.Contains(queryParameter.Key))
                     )
                     {
-                        parameterType = queryParameter
-                            .Value
+                        parameterType = queryParameter.Value
                             .ShallowCopy(new FacetValues { Unicode = false });
                     }
                     else
@@ -672,11 +668,8 @@ namespace System.Data.SqlClient
         {
             Facet maxLengthFacet;
             if (
-                type.Facets.TryGetValue(
-                    DbProviderManifest.MaxLengthFacetName,
-                    false,
-                    out maxLengthFacet
-                )
+                type.Facets
+                    .TryGetValue(DbProviderManifest.MaxLengthFacetName, false, out maxLengthFacet)
                 && null != maxLengthFacet.Value
             )
             {
@@ -984,8 +977,7 @@ namespace System.Data.SqlClient
             if (sqlManifest == null)
             {
                 throw EntityUtil.Argument(
-                    System
-                        .Data
+                    System.Data
                         .Entity
                         .Strings
                         .Mapping_Provider_WrongManifestType(typeof(SqlProviderManifest))
@@ -1095,8 +1087,7 @@ namespace System.Data.SqlClient
             Debug.Assert(!string.IsNullOrEmpty(attachDBFile));
 
             //Handle the case when attachDBFilename starts with |DataDirectory|
-            string dataFileName = System
-                .Data
+            string dataFileName = System.Data
                 .EntityClient
                 .DbConnectionOptions
                 .ExpandDataDirectory("AttachDBFilename", attachDBFile);

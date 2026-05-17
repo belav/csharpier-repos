@@ -124,8 +124,7 @@ namespace System.Threading.Tasks.Dataflow
             // In those cases we need to fault the target half to drop its buffered messages and to release its
             // reservations. This should not create an infinite loop, because all our implementations are designed
             // to handle multiple completion requests and to carry over only one.
-            _source
-                .Completion
+            _source.Completion
                 .ContinueWith(
                     static (completed, state) =>
                     {
@@ -516,8 +515,7 @@ namespace System.Threading.Tasks.Dataflow
             // In those cases we need to fault the target half to drop its buffered messages and to release its
             // reservations. This should not create an infinite loop, because all our implementations are designed
             // to handle multiple completion requests and to carry over only one.
-            _source
-                .Completion
+            _source.Completion
                 .ContinueWith(
                     static (completed, state) =>
                     {

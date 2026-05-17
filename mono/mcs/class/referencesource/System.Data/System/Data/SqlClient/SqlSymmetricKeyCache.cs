@@ -85,8 +85,7 @@ namespace System.Data.SqlClient
                 // Get the List corresponding to the connected server
                 IList<string> trustedKeyPaths;
                 if (
-                    SqlConnection
-                        .ColumnEncryptionTrustedMasterKeyPaths
+                    SqlConnection.ColumnEncryptionTrustedMasterKeyPaths
                         .TryGetValue(serverName, out trustedKeyPaths)
                 )
                 {
@@ -156,8 +155,7 @@ namespace System.Data.SqlClient
                 {
                     // In case multiple threads reach here at the same time, the first one wins.
                     // The allocated memory will be reclaimed by Garbage Collector.
-                    DateTimeOffset expirationTime = DateTimeOffset
-                        .UtcNow
+                    DateTimeOffset expirationTime = DateTimeOffset.UtcNow
                         .Add(SqlConnection.ColumnEncryptionKeyCacheTtl);
                     _cache.Add(cacheLookupKey, encryptionKey, expirationTime);
                 }

@@ -253,8 +253,7 @@ namespace Microsoft.Win32
             Interop.Kernel32.SECURITY_ATTRIBUTES secAttrs = default;
 
             // By default, the new key will be writable.
-            int ret = Interop
-                .Advapi32
+            int ret = Interop.Advapi32
                 .RegCreateKeyEx(
                     _hkey,
                     subkey,
@@ -399,8 +398,7 @@ namespace Microsoft.Win32
                     // RegDeleteTree doesn't self-delete when lpSubKey is empty.
                     // Manually delete the key to restore old behavior.
 
-                    ret = Interop
-                        .Advapi32
+                    ret = Interop.Advapi32
                         .RegDeleteKeyEx(key._hkey, string.Empty, (int)_regView, 0);
                     if (ret != 0)
                     {
@@ -510,8 +508,7 @@ namespace Microsoft.Win32
             }
 
             // connect to the specified remote registry
-            int ret = Interop
-                .Advapi32
+            int ret = Interop.Advapi32
                 .RegConnectRegistry(
                     machineName,
                     new IntPtr((int)hKey),
@@ -570,8 +567,7 @@ namespace Microsoft.Win32
             EnsureNotDisposed();
             name = FixupName(name);
 
-            int ret = Interop
-                .Advapi32
+            int ret = Interop.Advapi32
                 .RegOpenKeyEx(
                     _hkey,
                     name,
@@ -640,8 +636,7 @@ namespace Microsoft.Win32
             EnsureNotDisposed();
             name = FixupName(name); // Fixup multiple slashes to a single slash
 
-            int ret = Interop
-                .Advapi32
+            int ret = Interop.Advapi32
                 .RegOpenKeyEx(
                     _hkey,
                     name,
@@ -685,8 +680,7 @@ namespace Microsoft.Win32
             ValidateKeyName(name);
             EnsureNotDisposed();
 
-            int ret = Interop
-                .Advapi32
+            int ret = Interop.Advapi32
                 .RegOpenKeyEx(
                     _hkey,
                     name,
@@ -745,8 +739,7 @@ namespace Microsoft.Win32
                 EnsureNotDisposed();
                 int subkeys = 0;
                 int junk = 0;
-                int ret = Interop
-                    .Advapi32
+                int ret = Interop.Advapi32
                     .RegQueryInfoKey(
                         _hkey,
                         null,
@@ -821,8 +814,7 @@ namespace Microsoft.Win32
             }
 
             // open the base key so that RegistryKey.Handle will return a valid handle
-            ret = Interop
-                .Advapi32
+            ret = Interop.Advapi32
                 .RegOpenKeyEx(
                     baseKey,
                     null,
@@ -915,8 +907,7 @@ namespace Microsoft.Win32
 
             while (
                 (
-                    result = Interop
-                        .Advapi32
+                    result = Interop.Advapi32
                         .RegEnumKeyEx(
                             _hkey,
                             cpt,
@@ -967,8 +958,7 @@ namespace Microsoft.Win32
                 EnsureNotDisposed();
                 int values = 0;
                 int junk = 0;
-                int ret = Interop
-                    .Advapi32
+                int ret = Interop.Advapi32
                     .RegQueryInfoKey(
                         _hkey,
                         null,
@@ -1023,8 +1013,7 @@ namespace Microsoft.Win32
 
                 while (
                     (
-                        result = Interop
-                            .Advapi32
+                        result = Interop.Advapi32
                             .RegEnumValue(_hkey, cpt, name, ref nameLength, 0, null, null, null)
                     ) != Interop.Errors.ERROR_NO_MORE_ITEMS
                 )
@@ -1179,8 +1168,7 @@ namespace Microsoft.Win32
 
                     fixed (byte* lpData = &MemoryMarshal.GetReference(span))
                     {
-                        result = Interop
-                            .Advapi32
+                        result = Interop.Advapi32
                             .RegQueryValueEx(_hkey, name, null, &type, lpData, (uint*)&dataLength);
                         if (dataLength < 0)
                         {
@@ -1372,8 +1360,7 @@ namespace Microsoft.Win32
             EnsureNotDisposed();
             int type = 0;
             int datasize = 0;
-            int ret = Interop
-                .Advapi32
+            int ret = Interop.Advapi32
                 .RegQueryValueEx(_hkey, name, null, &type, (byte*)null, (uint*)&datasize);
             if (ret != 0)
             {
@@ -1434,8 +1421,7 @@ namespace Microsoft.Win32
                     case RegistryValueKind.String:
                     {
                         string data = value.ToString()!;
-                        ret = Interop
-                            .Advapi32
+                        ret = Interop.Advapi32
                             .RegSetValueEx(
                                 _hkey,
                                 name,
@@ -1480,8 +1466,7 @@ namespace Microsoft.Win32
                             destinationIndex += (length + 1); // +1 for null terminator, which is already zero-initialized in new array.
                         }
 
-                        ret = Interop
-                            .Advapi32
+                        ret = Interop.Advapi32
                             .RegSetValueEx(
                                 _hkey,
                                 name,
@@ -1497,8 +1482,7 @@ namespace Microsoft.Win32
                     case RegistryValueKind.None:
                     case RegistryValueKind.Binary:
                         byte[] dataBytes = (byte[])value;
-                        ret = Interop
-                            .Advapi32
+                        ret = Interop.Advapi32
                             .RegSetValueEx(
                                 _hkey,
                                 name,
@@ -1522,8 +1506,7 @@ namespace Microsoft.Win32
                             System.Globalization.CultureInfo.InvariantCulture
                         );
 
-                        ret = Interop
-                            .Advapi32
+                        ret = Interop.Advapi32
                             .RegSetValueEx(
                                 _hkey,
                                 name,
@@ -1542,8 +1525,7 @@ namespace Microsoft.Win32
                             System.Globalization.CultureInfo.InvariantCulture
                         );
 
-                        ret = Interop
-                            .Advapi32
+                        ret = Interop.Advapi32
                             .RegSetValueEx(
                                 _hkey,
                                 name,

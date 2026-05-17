@@ -279,8 +279,7 @@ public class B
                 var result = compilation2.Emit(executableStream);
                 Assert.False(result.Success);
 
-                result
-                    .Diagnostics
+                result.Diagnostics
                     .Verify(
                         expectedDiagnostics
                             .Concat(

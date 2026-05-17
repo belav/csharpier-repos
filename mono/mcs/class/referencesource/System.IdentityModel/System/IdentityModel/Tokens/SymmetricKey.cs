@@ -19,15 +19,13 @@ namespace System.IdentityModel.Tokens
         {
             if (symmetricKey == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("symmetricKey"));
             }
 
             if (symmetricKey.Length == 0)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentException(
                             SR.GetString(SR.SymmetricKeyLengthTooShort, symmetricKey.Length)

@@ -166,8 +166,7 @@ namespace System.ServiceModel.Channels
 
                 if (value.Scheme != PeerStrings.Scheme)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgument(
                             "value",
                             SR.GetString(SR.InvalidUriScheme, value.Scheme, PeerStrings.Scheme)
@@ -359,8 +358,7 @@ namespace System.ServiceModel.Channels
                 );
             if (
                 -1
-                != message
-                    .Headers
+                != message.Headers
                     .FindHeader(
                         PeerOperationNames.Flood,
                         PeerStrings.Namespace,
@@ -373,8 +371,7 @@ namespace System.ServiceModel.Channels
 
             message.Headers.Add(PeerDictionaryHeader.CreateMessageIdHeader(messageId));
             message.Properties.Via = via;
-            message
-                .Headers
+            message.Headers
                 .Add(
                     MessageHeader.CreateHeader(
                         PeerOperationNames.PeerTo,
@@ -510,10 +507,11 @@ namespace System.ServiceModel.Channels
                 {
                     using (Message msg = messageBuffer.CreateMessage())
                     {
-                        int i = msg.Headers.FindHeader(
-                            SecurityJan2004Strings.Security,
-                            SecurityJan2004Strings.Namespace
-                        );
+                        int i = msg.Headers
+                            .FindHeader(
+                                SecurityJan2004Strings.Security,
+                                SecurityJan2004Strings.Namespace
+                            );
                         if (i >= 0)
                         {
                             msg.Headers.AddUnderstood(i);
@@ -881,8 +879,7 @@ namespace System.ServiceModel.Channels
             PeerNodeImplementation node = null;
             if (!TryGet(listenUri, out node))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(SR.NoTransportManagerForUri, listenUri)
@@ -901,8 +898,7 @@ namespace System.ServiceModel.Channels
 
             if (listenUri.Scheme != PeerStrings.Scheme)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(
                         "listenUri",
                         SR.GetString(SR.InvalidUriScheme, listenUri.Scheme, PeerStrings.Scheme)
@@ -941,8 +937,7 @@ namespace System.ServiceModel.Channels
 
             if (listenUri.Scheme != PeerStrings.Scheme)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(
                         "listenUri",
                         SR.GetString(SR.InvalidUriScheme, listenUri.Scheme, PeerStrings.Scheme)
@@ -1035,8 +1030,7 @@ namespace System.ServiceModel.Channels
             if (via == null)
             {
                 Fx.Assert("FloodMessage doesn't contain Via header!");
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(SR.PeerMessageMustHaveVia, message.Headers.Action)
@@ -1093,8 +1087,7 @@ namespace System.ServiceModel.Channels
                 Fx.Assert("No VIA in the forwarded message!");
                 using (Message message = messageBuffer.CreateMessage())
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(SR.PeerMessageMustHaveVia, message.Headers.Action)
@@ -1170,8 +1163,7 @@ namespace System.ServiceModel.Channels
                 {
                     if (Fx.IsFatal(e))
                         throw;
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperCallback(SR.GetString(SR.MessagePropagationException), e);
                 }
             }
@@ -1298,8 +1290,7 @@ namespace System.ServiceModel.Channels
                 {
                     if (Fx.IsFatal(e))
                         throw;
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new CommunicationException(SR.GetString(SR.ResolverException), e)
                         );
@@ -1357,8 +1348,7 @@ namespace System.ServiceModel.Channels
                 {
                     if (Fx.IsFatal(e))
                         throw;
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new CommunicationException(SR.GetString(SR.ResolverException), e)
                         );
@@ -1482,16 +1472,14 @@ namespace System.ServiceModel.Channels
                         !TimeoutHelper.WaitOne(connectCompletedEvent, timeoutHelper.RemainingTime())
                     )
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(new TimeoutException());
                     }
                 }
 
                 if (aborted)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new CommunicationObjectAbortedException(
                                 SR.GetString(SR.PeerNodeAborted)
@@ -1557,8 +1545,7 @@ namespace System.ServiceModel.Channels
             {
                 if (ListenUri == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(SR.ListenUriNotSet, this.GetType())
@@ -1791,8 +1778,7 @@ namespace System.ServiceModel.Channels
                         //mark security header as understood.
                         try
                         {
-                            int i = localCopy
-                                .Headers
+                            int i = localCopy.Headers
                                 .FindHeader(
                                     SecurityJan2004Strings.Security,
                                     SecurityJan2004Strings.Namespace
@@ -1954,8 +1940,7 @@ namespace System.ServiceModel.Channels
         {
             if (!isOpen)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(SR.GetString(SR.TransportManagerNotOpen))
                     );
@@ -1966,8 +1951,7 @@ namespace System.ServiceModel.Channels
         {
             if (isOpen)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(SR.GetString(SR.TransportManagerOpen))
                     );
@@ -2011,8 +1995,7 @@ namespace System.ServiceModel.Channels
         {
             int viaSize = Encoding.UTF8.GetByteCount(uri.OriginalString);
             if (viaSize > maxViaSize)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidDataException(
                             SR.GetString(SR.PeerChannelViaTooLong, uri, viaSize, maxViaSize)
@@ -2054,8 +2037,7 @@ namespace System.ServiceModel.Channels
             {
                 if (factory.Resolver == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(SR.GetString(SR.PeerResolverRequired))
                         );

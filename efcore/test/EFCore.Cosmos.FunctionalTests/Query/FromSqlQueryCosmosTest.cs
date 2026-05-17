@@ -685,8 +685,7 @@ WHERE (c["ContactName"] = c["CompanyName"])
         using var context = CreateContext();
         var propertyName = "OrderID";
         var max = 10250;
-        var query = context
-            .Orders
+        var query = context.Orders
             .FromSqlRaw(
                 $@"SELECT * FROM root c WHERE c[""Discriminator""] = ""Order"" AND c[""{propertyName}""] < {{0}}",
                 max

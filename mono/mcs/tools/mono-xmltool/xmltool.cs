@@ -33,8 +33,7 @@ namespace Commons.Xml.Relaxng
 
         static void Usage()
         {
-            Console
-                .Error
+            Console.Error
                 .WriteLine(
                     @"
 Usage: mono-xmltool [options]

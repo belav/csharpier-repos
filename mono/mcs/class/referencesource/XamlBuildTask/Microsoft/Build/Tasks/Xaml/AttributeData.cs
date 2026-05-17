@@ -193,14 +193,12 @@ namespace Microsoft.Build.Tasks.Xaml
                                 );
                                 if (arrayType.UnderlyingType != null)
                                 {
-                                    paramInfo.Type = xamlArrayReader
-                                        .SchemaContext
+                                    paramInfo.Type = xamlArrayReader.SchemaContext
                                         .GetXamlType(arrayType.UnderlyingType.MakeArrayType());
                                 }
                                 else
                                 {
-                                    throw FxTrace
-                                        .Exception
+                                    throw FxTrace.Exception
                                         .AsError(
                                             new InvalidOperationException(
                                                 SR.AttributeParameterTypeUnknown(arrayType)
@@ -275,8 +273,7 @@ namespace Microsoft.Build.Tasks.Xaml
                             || paramType.UnderlyingType.IsArray
                         )
                         {
-                            throw FxTrace
-                                .Exception
+                            throw FxTrace.Exception
                                 .AsError(
                                     new InvalidOperationException(
                                         SR.AttributeParamTypeNotSupported(
@@ -305,8 +302,7 @@ namespace Microsoft.Build.Tasks.Xaml
                     }
                     else
                     {
-                        throw FxTrace
-                            .Exception
+                        throw FxTrace.Exception
                             .AsError(
                                 new InvalidOperationException(
                                     SR.AttributeParameterTypeUnknown(reader.Value as string)
@@ -405,8 +401,7 @@ namespace Microsoft.Build.Tasks.Xaml
             string clrTypeName;
             if (!XamlBuildTaskServices.TryGetClrTypeName(xamlType, rootNamespace, out clrTypeName))
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new InvalidOperationException(
                             SR.TypeNameUnknown(XamlBuildTaskServices.GetFullTypeName(xamlType))
@@ -484,8 +479,7 @@ namespace Microsoft.Build.Tasks.Xaml
                     }
                     else
                     {
-                        throw FxTrace
-                            .Exception
+                        throw FxTrace.Exception
                             .AsError(new InvalidOperationException(SR.UnknownBooleanValue(value)));
                     }
                 }

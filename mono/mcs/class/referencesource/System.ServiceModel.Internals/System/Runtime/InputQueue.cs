@@ -163,9 +163,8 @@ namespace System.Runtime
 
             if (!this.Dequeue(timeout, out value))
             {
-                throw Fx.Exception.AsError(
-                    new TimeoutException(InternalSR.TimeoutInputQueueDequeue(timeout))
-                );
+                throw Fx.Exception
+                    .AsError(new TimeoutException(InternalSR.TimeoutInputQueueDequeue(timeout)));
             }
 
             return value;

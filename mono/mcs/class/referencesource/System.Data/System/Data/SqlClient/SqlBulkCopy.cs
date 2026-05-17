@@ -293,8 +293,7 @@ namespace System.Data.SqlClient
 
 #if !PROJECTK
         private static int _objectTypeCount; // Bid counter
-        internal readonly int _objectID = System
-            .Threading
+        internal readonly int _objectID = System.Threading
             .Interlocked
             .Increment(ref _objectTypeCount);
 #endif //PROJECTK
@@ -2649,8 +2648,7 @@ namespace System.Data.SqlClient
                             switch (this._rowSourceType)
                             {
                                 case ValueSourceType.DataTable:
-                                    index = ((DataTable)_rowSource)
-                                        .Columns
+                                    index = ((DataTable)_rowSource).Columns
                                         .IndexOf(unquotedColumnName);
                                     break;
                                 case ValueSourceType.RowArray:

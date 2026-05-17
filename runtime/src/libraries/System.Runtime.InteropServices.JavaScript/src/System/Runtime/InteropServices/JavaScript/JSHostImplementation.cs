@@ -400,8 +400,7 @@ namespace System.Runtime.InteropServices.JavaScript
             if (pdbBytes == null)
                 AssemblyLoadContext.Default.LoadFromStream(new MemoryStream(dllBytes));
             else
-                AssemblyLoadContext
-                    .Default
+                AssemblyLoadContext.Default
                     .LoadFromStream(new MemoryStream(dllBytes), new MemoryStream(pdbBytes));
         }
 

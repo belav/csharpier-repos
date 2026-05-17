@@ -274,10 +274,11 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 return false;
 
             var enumerableType = semanticModel.Compilation.IEnumerableOfTType();
-            return type.AllInterfaces.Any(
-                static (i, enumerableType) => i.OriginalDefinition.Equals(enumerableType),
-                enumerableType
-            );
+            return type.AllInterfaces
+                .Any(
+                    static (i, enumerableType) => i.OriginalDefinition.Equals(enumerableType),
+                    enumerableType
+                );
         }
 
         private static bool TryGeneratePluralizedNameFromTypeArgument(

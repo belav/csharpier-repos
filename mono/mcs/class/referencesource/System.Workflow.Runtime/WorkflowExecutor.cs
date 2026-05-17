@@ -308,15 +308,16 @@ namespace System.Workflow.Runtime
             this.rootActivity.SetValue(WorkflowExecutor.ContextIdProperty, 0);
             this.rootActivity.SetValue(WorkflowInstanceIdProperty, instanceId);
             this.WorkflowStatus = WorkflowStatus.Created;
-            this.rootActivity.SetValue(
-                Activity.ActivityExecutionContextInfoProperty,
-                new ActivityExecutionContextInfo(
-                    this.rootActivity.QualifiedName,
-                    GetNewContextId(),
-                    instanceId,
-                    -1
-                )
-            );
+            this.rootActivity
+                .SetValue(
+                    Activity.ActivityExecutionContextInfoProperty,
+                    new ActivityExecutionContextInfo(
+                        this.rootActivity.QualifiedName,
+                        GetNewContextId(),
+                        instanceId,
+                        -1
+                    )
+                );
             this.rootActivity.SetValue(Activity.ActivityContextGuidProperty, instanceId);
             this.rootActivity.SetValue(WorkflowExecutor.IsIdleProperty, true);
             this.isInstanceIdle = true;
@@ -341,8 +342,7 @@ namespace System.Workflow.Runtime
             {
                 List<string> calleeBase = new List<string>();
                 TrackingCallingState parentTCS = (TrackingCallingState)
-                    invokerExec
-                        .rootActivity
+                    invokerExec.rootActivity
                         .GetValue(WorkflowExecutor.TrackingCallingStateProperty);
                 if ((parentTCS != null) && (parentTCS.CallerActivityPathProxy != null))
                 {
@@ -374,10 +374,8 @@ namespace System.Workflow.Runtime
                                 .ContextActivity(invokerExec.CurrentActivity.Parent)
                                 .GetValue(Activity.ActivityExecutionContextInfoProperty)
                     ).ContextGuid;
-                this.rootActivity.SetValue(
-                    WorkflowExecutor.TrackingCallingStateProperty,
-                    trackingCallingState
-                );
+                this.rootActivity
+                    .SetValue(WorkflowExecutor.TrackingCallingStateProperty, trackingCallingState);
             }
 
             _setInArgsOnCompanion(namedArguments);
@@ -511,8 +509,7 @@ namespace System.Workflow.Runtime
             this.schedulingContext = new Scheduler(this, false);
             this.qService = new WorkflowQueuingService(this);
 
-            WorkflowTrace
-                .Runtime
+            WorkflowTrace.Runtime
                 .TraceEvent(
                     TraceEventType.Information,
                     0,
@@ -528,8 +525,7 @@ namespace System.Workflow.Runtime
                 {
                     case WorkflowStatus.Completed:
                     case WorkflowStatus.Terminated:
-                        WorkflowTrace
-                            .Runtime
+                        WorkflowTrace.Runtime
                             .TraceEvent(
                                 TraceEventType.Error,
                                 0,
@@ -752,8 +748,7 @@ namespace System.Workflow.Runtime
         {
             get
             {
-                System
-                    .Diagnostics
+                System.Diagnostics
                     .Debug
                     .Assert(
                         this._workflowInstance != null,
@@ -903,8 +898,7 @@ namespace System.Workflow.Runtime
                                         }
                                         else
                                         {
-                                            WorkflowTrace
-                                                .Host
+                                            WorkflowTrace.Host
                                                 .TraceEvent(
                                                     TraceEventType.Information,
                                                     0,
@@ -987,8 +981,7 @@ namespace System.Workflow.Runtime
                                     }
                                     else
                                     {
-                                        WorkflowTrace
-                                            .Runtime
+                                        WorkflowTrace.Runtime
                                             .TraceEvent(
                                                 TraceEventType.Error,
                                                 0,
@@ -1062,8 +1055,7 @@ namespace System.Workflow.Runtime
                         this.ProcessQueuedEvents(); // deliver any outstanding queued events before persisting
                         if (this.Scheduler.IsStalledNow)
                         {
-                            WorkflowTrace
-                                .Runtime
+                            WorkflowTrace.Runtime
                                 .TraceEvent(
                                     TraceEventType.Information,
                                     0,
@@ -1074,8 +1066,8 @@ namespace System.Workflow.Runtime
 
                             FireEventAfterSchedulerLockDrop(WorkflowEventInternal.Idle);
 
-                            WorkflowPersistenceService persistence =
-                                this.WorkflowRuntime.WorkflowPersistenceService;
+                            WorkflowPersistenceService persistence = this.WorkflowRuntime
+                                .WorkflowPersistenceService;
 
                             // instance is not done.. must be idle
                             // can potentially dehydrate now..
@@ -1094,8 +1086,7 @@ namespace System.Workflow.Runtime
                                 )
                                 {
                                     PerformUnloading(true);
-                                    WorkflowTrace
-                                        .Runtime
+                                    WorkflowTrace.Runtime
                                         .TraceEvent(
                                             TraceEventType.Information,
                                             0,
@@ -1112,8 +1103,7 @@ namespace System.Workflow.Runtime
                                     && this.currentAtomicActivity == null
                                 )
                                 {
-                                    WorkflowTrace
-                                        .Runtime
+                                    WorkflowTrace.Runtime
                                         .TraceEvent(
                                             TraceEventType.Information,
                                             0,
@@ -1139,10 +1129,8 @@ namespace System.Workflow.Runtime
                 )
                 {
                     this.SuspendOnIdle(this.AdditionalInformation);
-                    this.rootActivity.SetValue(
-                        WorkflowExecutor.IsSuspensionRequestedProperty,
-                        false
-                    );
+                    this.rootActivity
+                        .SetValue(WorkflowExecutor.IsSuspensionRequestedProperty, false);
                 }
             }
 
@@ -1221,9 +1209,8 @@ namespace System.Workflow.Runtime
                 if (_timerQueue == null)
                 {
                     _timerQueue = (TimerEventSubscriptionCollection)
-                        this.rootActivity.GetValue(
-                            TimerEventSubscriptionCollection.TimerCollectionProperty
-                        );
+                        this.rootActivity
+                            .GetValue(TimerEventSubscriptionCollection.TimerCollectionProperty);
                     Debug.Assert(
                         _timerQueue != null,
                         "TimerEventSubscriptionCollection on root activity should never be null, but it was"
@@ -1234,10 +1221,11 @@ namespace System.Workflow.Runtime
             private set
             {
                 _timerQueue = value;
-                this.rootActivity.SetValue(
-                    TimerEventSubscriptionCollection.TimerCollectionProperty,
-                    _timerQueue
-                );
+                this.rootActivity
+                    .SetValue(
+                        TimerEventSubscriptionCollection.TimerCollectionProperty,
+                        _timerQueue
+                    );
             }
         }
 
@@ -1322,8 +1310,7 @@ namespace System.Workflow.Runtime
                             if (!this.stateChangedSincePersistence && !unlock)
                             {
                                 // the instance state is not dirty
-                                WorkflowTrace
-                                    .Runtime
+                                WorkflowTrace.Runtime
                                     .TraceEvent(
                                         TraceEventType.Information,
                                         0,
@@ -1344,8 +1331,8 @@ namespace System.Workflow.Runtime
                             this.qService.MoveAllMessagesToPendingQueue();
                         }
                         // give the state to the persistence provider
-                        WorkflowPersistenceService persistence =
-                            this.WorkflowRuntime.WorkflowPersistenceService;
+                        WorkflowPersistenceService persistence = this.WorkflowRuntime
+                            .WorkflowPersistenceService;
 
                         // Create a transient batch for Persistence Service.
                         currentActivity.SetValue(
@@ -1358,7 +1345,8 @@ namespace System.Workflow.Runtime
                         if (persistence != null)
                         {
                             foreach (
-                                Activity completedContextActivity in this.completedContextActivities.Values
+                                Activity completedContextActivity in this.completedContextActivities
+                                    .Values
                             )
                             {
                                 // Save the committing activity
@@ -1391,8 +1379,7 @@ namespace System.Workflow.Runtime
                                     firedPersistingEvent = true;
                                 }
 
-                                WorkflowTrace
-                                    .Runtime
+                                WorkflowTrace.Runtime
                                     .TraceEvent(
                                         TraceEventType.Information,
                                         0,
@@ -1423,8 +1410,7 @@ namespace System.Workflow.Runtime
                             || (unlock && HasNonEmptyWorkBatch())
                         )
                         {
-                            WorkflowTrace
-                                .Runtime
+                            WorkflowTrace.Runtime
                                 .TraceEvent(
                                     TraceEventType.Information,
                                     0,
@@ -1455,8 +1441,7 @@ namespace System.Workflow.Runtime
                 catch (PersistenceException e)
                 {
                     this.Rollback(oldStatus);
-                    WorkflowTrace
-                        .Runtime
+                    WorkflowTrace.Runtime
                         .TraceEvent(
                             TraceEventType.Error,
                             0,
@@ -1474,8 +1459,7 @@ namespace System.Workflow.Runtime
                         throw;
                     }
                     this.Rollback(oldStatus);
-                    WorkflowTrace
-                        .Runtime
+                    WorkflowTrace.Runtime
                         .TraceEvent(
                             TraceEventType.Error,
                             0,
@@ -1617,8 +1601,7 @@ namespace System.Workflow.Runtime
                         // add work items to the current batch if exists
                         if (pendingWork != null)
                         {
-                            IWorkBatch batch = _resourceManager
-                                .BatchCollection
+                            IWorkBatch batch = _resourceManager.BatchCollection
                                 .GetBatch(this.rootActivity);
                             batch.Add(pendingWork, workItem);
                         }
@@ -1691,9 +1674,8 @@ namespace System.Workflow.Runtime
                                 if (pendingWork != null)
                                 {
                                     IWorkBatch batch = (IWorkBatch)
-                                        this.rootActivity.GetValue(
-                                            WorkflowExecutor.TransientBatchProperty
-                                        );
+                                        this.rootActivity
+                                            .GetValue(WorkflowExecutor.TransientBatchProperty);
                                     batch.Add(pendingWork, workItem);
                                 }
 
@@ -1790,8 +1772,7 @@ namespace System.Workflow.Runtime
             int contextId = ContextActivityUtils.ContextId(dynamicActivity);
             this.subStateMap.Add(contextId, dynamicActivity);
 
-            System
-                .Workflow
+            System.Workflow
                 .Runtime
                 .WorkflowTrace
                 .Runtime
@@ -1811,8 +1792,7 @@ namespace System.Workflow.Runtime
             int contextId = ContextActivityUtils.ContextId(dynamicActivity);
             this.subStateMap.Remove(contextId);
 
-            System
-                .Workflow
+            System.Workflow
                 .Runtime
                 .WorkflowTrace
                 .Runtime
@@ -1859,8 +1839,7 @@ namespace System.Workflow.Runtime
         /// <returns>true if successful</returns>
         internal bool TryUnload()
         {
-            WorkflowTrace
-                .Runtime
+            WorkflowTrace.Runtime
                 .TraceEvent(
                     TraceEventType.Information,
                     0,
@@ -1939,8 +1918,7 @@ namespace System.Workflow.Runtime
             }
             catch (Exception e)
             {
-                WorkflowTrace
-                    .Runtime
+                WorkflowTrace.Runtime
                     .TraceEvent(
                         TraceEventType.Error,
                         0,
@@ -1959,8 +1937,7 @@ namespace System.Workflow.Runtime
         {
             InstanceLock.AssertIsLocked(this._schedulerLock);
 
-            WorkflowTrace
-                .Runtime
+            WorkflowTrace.Runtime
                 .TraceEvent(
                     TraceEventType.Information,
                     0,
@@ -1979,8 +1956,7 @@ namespace System.Workflow.Runtime
                 bool persisted;
                 if (handleExceptions)
                 {
-                    WorkflowTrace
-                        .Runtime
+                    WorkflowTrace.Runtime
                         .TraceEvent(
                             TraceEventType.Information,
                             0,
@@ -1990,8 +1966,7 @@ namespace System.Workflow.Runtime
                             this.GetHashCode()
                         );
                     persisted = this.ProtectedPersist(true);
-                    WorkflowTrace
-                        .Runtime
+                    WorkflowTrace.Runtime
                         .TraceEvent(
                             TraceEventType.Information,
                             0,
@@ -2004,8 +1979,7 @@ namespace System.Workflow.Runtime
                 }
                 else
                 {
-                    WorkflowTrace
-                        .Runtime
+                    WorkflowTrace.Runtime
                         .TraceEvent(
                             TraceEventType.Information,
                             0,
@@ -2013,8 +1987,7 @@ namespace System.Workflow.Runtime
                         );
                     this.Persist(this.rootActivity, true, false);
                     persisted = true;
-                    WorkflowTrace
-                        .Runtime
+                    WorkflowTrace.Runtime
                         .TraceEvent(
                             TraceEventType.Information,
                             0,
@@ -2041,8 +2014,7 @@ namespace System.Workflow.Runtime
         // shutsdown the schedule instance sync
         internal void Unload()
         {
-            WorkflowTrace
-                .Runtime
+            WorkflowTrace.Runtime
                 .TraceEvent(
                     TraceEventType.Information,
                     0,
@@ -2089,8 +2061,7 @@ namespace System.Workflow.Runtime
                                 // the scheduler must be idle now
                                 if (this.currentAtomicActivity == null)
                                 {
-                                    WorkflowTrace
-                                        .Runtime
+                                    WorkflowTrace.Runtime
                                         .TraceEvent(
                                             TraceEventType.Information,
                                             0,
@@ -2101,8 +2072,7 @@ namespace System.Workflow.Runtime
                                         );
                                     // unload
                                     PerformUnloading(false);
-                                    WorkflowTrace
-                                        .Runtime
+                                    WorkflowTrace.Runtime
                                         .TraceEvent(
                                             TraceEventType.Information,
                                             0,
@@ -2123,8 +2093,7 @@ namespace System.Workflow.Runtime
             }
             catch (Exception e)
             {
-                WorkflowTrace
-                    .Runtime
+                WorkflowTrace.Runtime
                     .TraceEvent(
                         TraceEventType.Error,
                         0,
@@ -2146,8 +2115,7 @@ namespace System.Workflow.Runtime
         // never call this method... it should call TerminateOnIdle instead.
         internal void Terminate(string error)
         {
-            WorkflowTrace
-                .Runtime
+            WorkflowTrace.Runtime
                 .TraceEvent(
                     TraceEventType.Information,
                     0,
@@ -2188,8 +2156,7 @@ namespace System.Workflow.Runtime
             }
             catch (Exception e)
             {
-                WorkflowTrace
-                    .Runtime
+                WorkflowTrace.Runtime
                     .TraceEvent(
                         TraceEventType.Error,
                         0,
@@ -2216,8 +2183,7 @@ namespace System.Workflow.Runtime
 
             try
             {
-                WorkflowTrace
-                    .Runtime
+                WorkflowTrace.Runtime
                     .TraceEvent(
                         TraceEventType.Information,
                         0,
@@ -2240,10 +2206,11 @@ namespace System.Workflow.Runtime
                 using (_msgDeliveryLock.Enter())
                 {
                     TimerQueue.SuspendDelivery();
-                    this.rootActivity.SetValue(
-                        Activity.ExecutionResultProperty,
-                        ActivityExecutionResult.Canceled
-                    );
+                    this.rootActivity
+                        .SetValue(
+                            Activity.ExecutionResultProperty,
+                            ActivityExecutionResult.Canceled
+                        );
                     try
                     {
                         // persist the instance state
@@ -2253,12 +2220,12 @@ namespace System.Workflow.Runtime
                     {
                         // the persistence at terminate threw an exception.
                         this.WorkflowStatus = oldStatus;
-                        this.rootActivity.SetValue(
-                            Activity.ExecutionResultProperty,
-                            ActivityExecutionResult.None
-                        );
-                        WorkflowTrace
-                            .Runtime
+                        this.rootActivity
+                            .SetValue(
+                                Activity.ExecutionResultProperty,
+                                ActivityExecutionResult.None
+                            );
+                        WorkflowTrace.Runtime
                             .TraceEvent(
                                 TraceEventType.Error,
                                 0,
@@ -2326,8 +2293,7 @@ namespace System.Workflow.Runtime
         // never call this method... it should call AbortOnIdle instead.
         internal void Abort()
         {
-            WorkflowTrace
-                .Runtime
+            WorkflowTrace.Runtime
                 .TraceEvent(
                     TraceEventType.Information,
                     0,
@@ -2368,8 +2334,7 @@ namespace System.Workflow.Runtime
             }
             catch (Exception e)
             {
-                WorkflowTrace
-                    .Runtime
+                WorkflowTrace.Runtime
                     .TraceEvent(
                         TraceEventType.Error,
                         0,
@@ -2399,8 +2364,7 @@ namespace System.Workflow.Runtime
             // tell the scheduler to stop running
             this.Scheduler.CanRun = false;
 
-            WorkflowTrace
-                .Runtime
+            WorkflowTrace.Runtime
                 .TraceEvent(
                     TraceEventType.Information,
                     0,
@@ -2421,8 +2385,8 @@ namespace System.Workflow.Runtime
                 this.ResourceManager.ClearAllBatchedWork();
 
                 // unlock instance state w/o saving it
-                WorkflowPersistenceService persistenceSvc =
-                    this.WorkflowRuntime.WorkflowPersistenceService;
+                WorkflowPersistenceService persistenceSvc = this.WorkflowRuntime
+                    .WorkflowPersistenceService;
                 if (persistenceSvc != null)
                 {
                     persistenceSvc.UnlockWorkflowInstanceState(
@@ -2464,8 +2428,7 @@ namespace System.Workflow.Runtime
         // never call this method... it should call SuspendOnIdle instead.
         internal bool Suspend(string error)
         {
-            WorkflowTrace
-                .Runtime
+            WorkflowTrace.Runtime
                 .TraceEvent(
                     TraceEventType.Information,
                     0,
@@ -2511,8 +2474,7 @@ namespace System.Workflow.Runtime
             }
             catch (Exception e)
             {
-                WorkflowTrace
-                    .Runtime
+                WorkflowTrace.Runtime
                     .TraceEvent(
                         TraceEventType.Error,
                         0,
@@ -2567,8 +2529,7 @@ namespace System.Workflow.Runtime
                         return false;
                 }
 
-                WorkflowTrace
-                    .Runtime
+                WorkflowTrace.Runtime
                     .TraceEvent(
                         TraceEventType.Information,
                         0,
@@ -2596,8 +2557,7 @@ namespace System.Workflow.Runtime
         // never call this method... it should call ResumeOnIdle instead.
         internal void Resume()
         {
-            WorkflowTrace
-                .Runtime
+            WorkflowTrace.Runtime
                 .TraceEvent(
                     TraceEventType.Information,
                     0,
@@ -2647,8 +2607,7 @@ namespace System.Workflow.Runtime
             }
             catch (Exception e)
             {
-                WorkflowTrace
-                    .Runtime
+                WorkflowTrace.Runtime
                     .TraceEvent(
                         TraceEventType.Error,
                         0,
@@ -2676,8 +2635,7 @@ namespace System.Workflow.Runtime
 
             FireWorkflowExecutionEvent(this, WorkflowEventInternal.Resuming);
 
-            WorkflowTrace
-                .Runtime
+            WorkflowTrace.Runtime
                 .TraceEvent(
                     TraceEventType.Information,
                     0,
@@ -2760,8 +2718,7 @@ namespace System.Workflow.Runtime
             // transaction.TransactionCompleted += new TransactionCompletedEventHandler(TransactionCompletionHandler);
             //transaction.EnlistVolatile(new TransactionNotificationEnlistment(this, transaction, atomicActivity), EnlistmentOptions.None);
             transactionalProperties.Transaction = transaction;
-            WorkflowTrace
-                .Runtime
+            WorkflowTrace.Runtime
                 .TraceEvent(
                     TraceEventType.Information,
                     0,
@@ -2784,8 +2741,7 @@ namespace System.Workflow.Runtime
             // Set current atomic activity
             this.currentAtomicActivity = atomicActivity;
             atomicActivityEvent = new ManualResetEvent(false);
-            WorkflowTrace
-                .Runtime
+            WorkflowTrace.Runtime
                 .TraceEvent(
                     TraceEventType.Information,
                     0,
@@ -2808,8 +2764,7 @@ namespace System.Workflow.Runtime
 
             // release transaction
             transactionalProperties.Transaction.Dispose();
-            WorkflowTrace
-                .Runtime
+            WorkflowTrace.Runtime
                 .TraceEvent(
                     TraceEventType.Information,
                     0,
@@ -2928,8 +2883,7 @@ namespace System.Workflow.Runtime
                                 throw;
                             }
 
-                            WorkflowTrace
-                                .Runtime
+                            WorkflowTrace.Runtime
                                 .TraceEvent(
                                     TraceEventType.Information,
                                     0,
@@ -2956,8 +2910,7 @@ namespace System.Workflow.Runtime
                                 qService.PostPersist(false);
                                 throw;
                             }
-                            WorkflowTrace
-                                .Runtime
+                            WorkflowTrace.Runtime
                                 .TraceEvent(
                                     TraceEventType.Information,
                                     0,
@@ -2987,8 +2940,7 @@ namespace System.Workflow.Runtime
                     DisposeTransaction(activityContext);
                     this.currentAtomicActivity = null;
 
-                    WorkflowTrace
-                        .Runtime
+                    WorkflowTrace.Runtime
                         .TraceEvent(
                             TraceEventType.Information,
                             0,
@@ -3063,8 +3015,7 @@ namespace System.Workflow.Runtime
                         != transaction.TransactionInformation.Status
                     )
                         transaction.Rollback();
-                    WorkflowTrace
-                        .Runtime
+                    WorkflowTrace.Runtime
                         .TraceEvent(
                             TraceEventType.Information,
                             0,
@@ -3236,8 +3187,7 @@ namespace System.Workflow.Runtime
                 transactionalProperties.TransactionScope.Complete();
                 transactionalProperties.TransactionScope.Dispose();
                 transactionalProperties.TransactionScope = null;
-                WorkflowTrace
-                    .Runtime
+                WorkflowTrace.Runtime
                     .TraceEvent(
                         TraceEventType.Information,
                         0,
@@ -3298,8 +3248,7 @@ namespace System.Workflow.Runtime
                 if (items == null)
                     return;
 
-                WorkflowTrace
-                    .Runtime
+                WorkflowTrace.Runtime
                     .TraceEvent(
                         TraceEventType.Information,
                         0,
@@ -3546,8 +3495,7 @@ namespace System.Workflow.Runtime
             }
             catch (Exception e)
             {
-                WorkflowTrace
-                    .Runtime
+                WorkflowTrace.Runtime
                     .TraceEvent(
                         TraceEventType.Error,
                         0,
@@ -3562,8 +3510,7 @@ namespace System.Workflow.Runtime
         #endregion Dynamic Update From Outside the instance
         internal bool OnBeforeDynamicChange(IList<WorkflowChangeAction> changes)
         {
-            WorkflowTrace
-                .Runtime
+            WorkflowTrace.Runtime
                 .TraceEvent(
                     TraceEventType.Information,
                     0,
@@ -3574,8 +3521,7 @@ namespace System.Workflow.Runtime
             if (!this.IsInstanceValid)
                 throw new InvalidOperationException(ExecutionStringManager.WorkflowNotValid);
 
-            WorkflowTrace
-                .Runtime
+            WorkflowTrace.Runtime
                 .TraceEvent(
                     TraceEventType.Information,
                     0,
@@ -3606,8 +3552,7 @@ namespace System.Workflow.Runtime
                 FireDynamicUpdateRollback(changes);
             }
 
-            WorkflowTrace
-                .Runtime
+            WorkflowTrace.Runtime
                 .TraceEvent(
                     TraceEventType.Information,
                     0,
@@ -3633,8 +3578,7 @@ namespace System.Workflow.Runtime
         void DiagnosticStackTrace(string reason)
         {
             StackTrace st = new StackTrace(true);
-            WorkflowTrace
-                .Runtime
+            WorkflowTrace.Runtime
                 .TraceEvent(
                     TraceEventType.Information,
                     0,
@@ -3693,15 +3637,16 @@ namespace System.Workflow.Runtime
                 throw new InvalidOperationException(ExecutionStringManager.MustUseRuntimeThread);
 
             Guid instanceId = Guid.Empty;
-            WorkflowInstance instance = this.WorkflowRuntime.InternalCreateWorkflow(
-                new CreationContext(
-                    workflowType,
-                    this,
-                    this.CurrentActivity.QualifiedName,
-                    namedArgumentValues
-                ),
-                Guid.NewGuid()
-            );
+            WorkflowInstance instance = this.WorkflowRuntime
+                .InternalCreateWorkflow(
+                    new CreationContext(
+                        workflowType,
+                        this,
+                        this.CurrentActivity.QualifiedName,
+                        namedArgumentValues
+                    ),
+                    Guid.NewGuid()
+                );
             if (instance != null)
             {
                 instanceId = instance.InstanceId;
@@ -3821,13 +3766,14 @@ namespace System.Workflow.Runtime
         {
             if (!ServiceEnvironment.IsInServiceThread(this.InstanceId))
                 throw new InvalidOperationException(ExecutionStringManager.MustUseRuntimeThread);
-            this.WorkflowStateRollbackService.RequestRevertToCheckpointState(
-                currentActivity,
-                callbackHandler,
-                callbackData,
-                suspendOnRevert,
-                suspendInfo
-            );
+            this.WorkflowStateRollbackService
+                .RequestRevertToCheckpointState(
+                    currentActivity,
+                    callbackHandler,
+                    callbackData,
+                    suspendOnRevert,
+                    suspendInfo
+                );
         }
 
         void IWorkflowCoreRuntime.DisposeCheckpointState()
@@ -4010,11 +3956,12 @@ namespace System.Workflow.Runtime
         {
             if (!ServiceEnvironment.IsInServiceThread(this.InstanceId))
                 throw new InvalidOperationException(ExecutionStringManager.MustUseRuntimeThread);
-            this.completedContextActivities.Add(
-                (ActivityExecutionContextInfo)
-                    contextActivity.GetValue(Activity.ActivityExecutionContextInfoProperty),
-                contextActivity
-            );
+            this.completedContextActivities
+                .Add(
+                    (ActivityExecutionContextInfo)
+                        contextActivity.GetValue(Activity.ActivityExecutionContextInfoProperty),
+                    contextActivity
+                );
         }
 
         Activity IWorkflowCoreRuntime.RootActivity

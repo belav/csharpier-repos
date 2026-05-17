@@ -106,8 +106,7 @@ namespace System.Net
             this.context = context;
             lock (locker)
             {
-                AuthenticationSchemes schemes = context
-                    .Listener
+                AuthenticationSchemes schemes = context.Listener
                     .SelectAuthenticationScheme(context);
                 if (
                     (

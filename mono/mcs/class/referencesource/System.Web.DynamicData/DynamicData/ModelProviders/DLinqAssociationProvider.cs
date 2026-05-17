@@ -105,8 +105,7 @@ namespace System.Web.DynamicData.ModelProviders
             }
             else
             {
-                ToTable = ((DLinqDataModelProvider)FromColumn.Table.DataModel)
-                    .DLinqTables
+                ToTable = ((DLinqDataModelProvider)FromColumn.Table.DataModel).DLinqTables
                     .Single(tp => tp.EntityType == association.OtherType.Type);
             }
         }

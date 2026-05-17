@@ -25,16 +25,13 @@ namespace System.Globalization
             {
 #if TARGET_MACCATALYST || TARGET_IOS || TARGET_TVOS
                 if (GlobalizationMode.Hybrid)
-                    ret = Interop
-                        .Globalization
+                    ret = Interop.Globalization
                         .IsNormalizedNative(normalizationForm, pInput, strInput.Length);
                 else
-                    ret = Interop
-                        .Globalization
+                    ret = Interop.Globalization
                         .IsNormalized(normalizationForm, pInput, strInput.Length);
 #else
-                ret = Interop
-                    .Globalization
+                ret = Interop.Globalization
                     .IsNormalized(normalizationForm, pInput, strInput.Length);
 #endif
             }
@@ -78,8 +75,7 @@ namespace System.Globalization
                     {
 #if TARGET_MACCATALYST || TARGET_IOS || TARGET_TVOS
                         if (GlobalizationMode.Hybrid)
-                            realLen = Interop
-                                .Globalization
+                            realLen = Interop.Globalization
                                 .NormalizeStringNative(
                                     normalizationForm,
                                     pInput,
@@ -88,8 +84,7 @@ namespace System.Globalization
                                     buffer.Length
                                 );
                         else
-                            realLen = Interop
-                                .Globalization
+                            realLen = Interop.Globalization
                                 .NormalizeString(
                                     normalizationForm,
                                     pInput,
@@ -98,8 +93,7 @@ namespace System.Globalization
                                     buffer.Length
                                 );
 #else
-                        realLen = Interop
-                            .Globalization
+                        realLen = Interop.Globalization
                             .NormalizeString(
                                 normalizationForm,
                                 pInput,

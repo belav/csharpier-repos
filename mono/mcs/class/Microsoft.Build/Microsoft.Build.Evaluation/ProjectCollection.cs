@@ -790,16 +790,13 @@ namespace Microsoft.Build.Evaluation
                 case "identity":
                     return file;
                 case "modifiedtime":
-                    return new FileInfo(getFullPath(file))
-                        .LastWriteTime
+                    return new FileInfo(getFullPath(file)).LastWriteTime
                         .ToString("yyyy-MM-dd HH:mm:ss.fffffff");
                 case "createdtime":
-                    return new FileInfo(getFullPath(file))
-                        .CreationTime
+                    return new FileInfo(getFullPath(file)).CreationTime
                         .ToString("yyyy-MM-dd HH:mm:ss.fffffff");
                 case "accessedtime":
-                    return new FileInfo(getFullPath(file))
-                        .LastAccessTime
+                    return new FileInfo(getFullPath(file)).LastAccessTime
                         .ToString("yyyy-MM-dd HH:mm:ss.fffffff");
             }
             return null;

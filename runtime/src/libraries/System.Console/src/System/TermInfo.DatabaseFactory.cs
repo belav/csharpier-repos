@@ -85,8 +85,7 @@ internal static partial class TermInfo
         /// <returns>true if the file was successfully opened; otherwise, false.</returns>
         private static bool TryOpen(string filePath, [NotNullWhen(true)] out SafeFileHandle? fd)
         {
-            fd = Interop
-                .Sys
+            fd = Interop.Sys
                 .Open(
                     filePath,
                     Interop.Sys.OpenFlags.O_RDONLY | Interop.Sys.OpenFlags.O_CLOEXEC,

@@ -117,8 +117,7 @@ public class ConfigurationPatternsTest : IClassFixture<CrossStoreFixture>, IDisp
         )
         {
             using (
-                context1 = serviceScope
-                    .ServiceProvider
+                context1 = serviceScope.ServiceProvider
                     .GetRequiredService<MultipleProvidersContext>()
             )
             {
@@ -128,8 +127,7 @@ public class ConfigurationPatternsTest : IClassFixture<CrossStoreFixture>, IDisp
             }
 
             using (
-                var context1B = serviceScope
-                    .ServiceProvider
+                var context1B = serviceScope.ServiceProvider
                     .GetRequiredService<MultipleProvidersContext>()
             )
             {
@@ -147,8 +145,7 @@ public class ConfigurationPatternsTest : IClassFixture<CrossStoreFixture>, IDisp
         )
         {
             using (
-                context2 = serviceScope
-                    .ServiceProvider
+                context2 = serviceScope.ServiceProvider
                     .GetRequiredService<MultipleProvidersContext>()
             )
             {
@@ -158,8 +155,7 @@ public class ConfigurationPatternsTest : IClassFixture<CrossStoreFixture>, IDisp
             }
 
             using (
-                var context2B = serviceScope
-                    .ServiceProvider
+                var context2B = serviceScope.ServiceProvider
                     .GetRequiredService<MultipleProvidersContext>()
             )
             {

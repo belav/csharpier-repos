@@ -44,8 +44,7 @@ namespace System.ServiceModel.Dispatcher
             {
                 if (!serviceAuthorizationManager.CheckAccess(rpc.OperationContext, ref rpc.Request))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(CreateAccessDeniedFaultException());
                 }
             }
@@ -67,8 +66,7 @@ namespace System.ServiceModel.Dispatcher
                     {
                         string primaryIdentity;
                         string authContextId = null;
-                        AuthorizationContext authContext = security
-                            .ServiceSecurityContext
+                        AuthorizationContext authContext = security.ServiceSecurityContext
                             .AuthorizationContext;
                         if (authContext != null)
                         {
@@ -116,8 +114,7 @@ namespace System.ServiceModel.Dispatcher
             {
                 string primaryIdentity;
                 string authContextId;
-                AuthorizationContext authContext = security
-                    .ServiceSecurityContext
+                AuthorizationContext authContext = security.ServiceSecurityContext
                     .AuthorizationContext;
                 if (authContext != null)
                 {
@@ -160,8 +157,7 @@ namespace System.ServiceModel.Dispatcher
         public static AuthorizationBehavior TryCreate(DispatchRuntime dispatch)
         {
             if (dispatch == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("dispatch"));
 
             if (!dispatch.RequiresAuthorization)

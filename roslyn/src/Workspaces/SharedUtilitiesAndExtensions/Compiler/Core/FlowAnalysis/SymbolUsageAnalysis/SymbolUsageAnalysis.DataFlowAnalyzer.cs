@@ -189,8 +189,7 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
                 );
 
                 // Ensure that we use different instances of block analysis data for fall through successor and conditional successor.
-                _analysisData
-                    .AdditionalConditionalBranchAnalysisData
+                _analysisData.AdditionalConditionalBranchAnalysisData
                     .SetAnalysisDataFrom(newCurrentAnalysisData);
                 var fallThroughSuccessorData =
                     _analysisData.AdditionalConditionalBranchAnalysisData;

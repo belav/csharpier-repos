@@ -316,8 +316,7 @@ internal class DeveloperExceptionPageMiddlewareImpl
                 continue;
             }
 
-            var sourceLines = compilationFailure
-                .SourceFileContent
+            var sourceLines = compilationFailure.SourceFileContent
                 ?.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
 
             foreach (var item in compilationFailure.Messages)
@@ -381,8 +380,7 @@ internal class DeveloperExceptionPageMiddlewareImpl
 
         if (ex is BadHttpRequestException badHttpRequestException)
         {
-            var badRequestReasonPhrase = WebUtilities
-                .ReasonPhrases
+            var badRequestReasonPhrase = WebUtilities.ReasonPhrases
                 .GetReasonPhrase(badHttpRequestException.StatusCode);
 
             if (!string.IsNullOrEmpty(badRequestReasonPhrase))

@@ -387,8 +387,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                     if (typeSyntax is RefTypeSyntax refType)
                     {
-                        MessageID
-                            .IDS_FeatureRefForEach
+                        MessageID.IDS_FeatureRefForEach
                             .CheckFeatureAvailability(diagnostics, typeSyntax);
                         typeSyntax = refType.Type;
                     }
@@ -663,8 +662,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             CompoundUseSiteInfo<AssemblySymbol> useSiteInfo = GetNewCompoundUseSiteInfo(
                 diagnostics
             );
-            Conversion elementConversionClassification =
-                this.Conversions.ClassifyConversionFromType(
+            Conversion elementConversionClassification = this.Conversions
+                .ClassifyConversionFromType(
                     inferredType.Type,
                     iterationVariableType.Type,
                     isChecked: CheckOverflowAtRuntime,
@@ -752,8 +751,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 var location = _syntax.ForEachKeyword.GetLocation();
                 foreach (
-                    var d in createConversionDiagnostics
-                        .DiagnosticBag
+                    var d in createConversionDiagnostics.DiagnosticBag
                         .AsEnumerableWithoutResolution()
                 )
                 {
@@ -770,15 +768,15 @@ namespace Microsoft.CodeAnalysis.CSharp
             // Spec (§8.8.4):
             // If the type X of expression is dynamic then there is an implicit conversion from >>expression<< (not the type of the expression)
             // to the System.Collections.IEnumerable interface (§6.1.8).
-            Conversion collectionConversionClassification =
-                this.Conversions.ClassifyConversionFromExpression(
+            Conversion collectionConversionClassification = this.Conversions
+                .ClassifyConversionFromExpression(
                     collectionExpr,
                     builder.CollectionType,
                     isChecked: CheckOverflowAtRuntime,
                     ref useSiteInfo
                 );
-            Conversion currentConversionClassification =
-                this.Conversions.ClassifyConversionFromType(
+            Conversion currentConversionClassification = this.Conversions
+                .ClassifyConversionFromType(
                     builder.CurrentPropertyGetter.ReturnType,
                     builder.ElementType,
                     isChecked: CheckOverflowAtRuntime,
@@ -817,8 +815,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     )
                     || (
                         builder.ElementType.IsNullableType()
-                        && builder
-                            .ElementType
+                        && builder.ElementType
                             .GetMemberTypeArgumentsNoUseSiteDiagnostics()
                             .Single()
                             .IsErrorType()
@@ -1327,8 +1324,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     && (
                         (
                             result is EnumeratorResult.Succeeded
-                            && builder
-                                .ElementTypeWithAnnotations
+                            && builder.ElementTypeWithAnnotations
                                 .Equals(
                                     elementField.TypeWithAnnotations,
                                     TypeCompareKind.AllIgnoreOptions
@@ -1411,8 +1407,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 collectionExpr == originalCollectionExpr
                     || (
                         originalCollectionExpr.Type?.IsNullableType() == true
-                        && originalCollectionExpr
-                            .Type
+                        && originalCollectionExpr.Type
                             .StrippedType()
                             .Equals(collectionExpr.Type, TypeCompareKind.AllIgnoreOptions)
                     )
@@ -1704,12 +1699,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                     errorLocationSyntax.Location,
                     unwrappedCollectionExprType,
                     isAsync
-                        ? this.Compilation.GetWellKnownType(
-                            WellKnownType.System_Collections_Generic_IAsyncEnumerable_T
-                        )
-                        : this.Compilation.GetSpecialType(
-                            SpecialType.System_Collections_Generic_IEnumerable_T
-                        )
+                        ? this.Compilation
+                            .GetWellKnownType(
+                                WellKnownType.System_Collections_Generic_IAsyncEnumerable_T
+                            )
+                        : this.Compilation
+                            .GetSpecialType(SpecialType.System_Collections_Generic_IEnumerable_T)
                 );
                 return EnumeratorResult.FailedAndReported;
             }
@@ -1720,9 +1715,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (collectionType.IsGenericType)
             {
                 // If the type is generic, we have to search for the methods
-                builder.ElementTypeWithAnnotations = collectionType
-                    .TypeArgumentsWithAnnotationsNoUseSiteDiagnostics
-                    .Single();
+                builder.ElementTypeWithAnnotations =
+                    collectionType.TypeArgumentsWithAnnotationsNoUseSiteDiagnostics.Single();
 
                 MethodSymbol getEnumeratorMethod;
                 if (isAsync)
@@ -1790,8 +1784,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     if (isAsync)
                     {
                         Debug.Assert(
-                            enumeratorType
-                                .OriginalDefinition
+                            enumeratorType.OriginalDefinition
                                 .Equals(
                                     Compilation.GetWellKnownType(
                                         WellKnownType.System_Collections_Generic_IAsyncEnumerator_T
@@ -1994,9 +1987,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         .ClassifyImplicitConversionFromType(
                             enumeratorType,
                             isAsync
-                                ? this.Compilation.GetWellKnownType(
-                                    WellKnownType.System_IAsyncDisposable
-                                )
+                                ? this.Compilation
+                                    .GetWellKnownType(WellKnownType.System_IAsyncDisposable)
                                 : this.Compilation.GetSpecialType(SpecialType.System_IDisposable),
                             ref useSiteInfo
                         )
@@ -2253,14 +2245,15 @@ namespace Microsoft.CodeAnalysis.CSharp
             );
             // We create a dummy receiver of the invocation so MethodInvocationOverloadResolution knows it was invoked from an instance, not a type
             var dummyReceiver = new BoundImplicitReceiver(collectionSyntax, patternType);
-            this.OverloadResolution.MethodInvocationOverloadResolution(
-                methods: candidateMethods,
-                typeArguments: typeArguments,
-                receiver: dummyReceiver,
-                arguments: analyzedArguments,
-                result: overloadResolutionResult,
-                useSiteInfo: ref useSiteInfo
-            );
+            this.OverloadResolution
+                .MethodInvocationOverloadResolution(
+                    methods: candidateMethods,
+                    typeArguments: typeArguments,
+                    receiver: dummyReceiver,
+                    arguments: analyzedArguments,
+                    result: overloadResolutionResult,
+                    useSiteInfo: ref useSiteInfo
+                );
             diagnostics.Add(collectionSyntax, useSiteInfo);
 
             MethodSymbol result = null;
@@ -2387,12 +2380,13 @@ namespace Microsoft.CodeAnalysis.CSharp
                 CompoundUseSiteInfo<AssemblySymbol> useSiteInfo = GetNewCompoundUseSiteInfo(
                     diagnostics
                 );
-                var collectionConversion = this.Conversions.ClassifyConversionFromExpression(
-                    collectionExpr,
-                    result.Parameters[0].Type,
-                    isChecked: CheckOverflowAtRuntime,
-                    ref useSiteInfo
-                );
+                var collectionConversion = this.Conversions
+                    .ClassifyConversionFromExpression(
+                        collectionExpr,
+                        result.Parameters[0].Type,
+                        isChecked: CheckOverflowAtRuntime,
+                        ref useSiteInfo
+                    );
                 diagnostics.Add(syntax, useSiteInfo);
 
                 // Unconditionally convert here, to match what we set the ConvertedExpression to in the main BoundForEachStatement node.
@@ -2662,11 +2656,12 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         private bool IsIAsyncEnumerable(TypeSymbol type)
         {
-            return type.OriginalDefinition.Equals(
-                Compilation.GetWellKnownType(
-                    WellKnownType.System_Collections_Generic_IAsyncEnumerable_T
-                )
-            );
+            return type.OriginalDefinition
+                .Equals(
+                    Compilation.GetWellKnownType(
+                        WellKnownType.System_Collections_Generic_IAsyncEnumerable_T
+                    )
+                );
         }
 
         /// <summary>
@@ -2710,16 +2705,16 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 if (!isAsync)
                 {
-                    var implementedNonGeneric = this.Compilation.GetSpecialType(
-                        SpecialType.System_Collections_IEnumerable
-                    );
+                    var implementedNonGeneric = this.Compilation
+                        .GetSpecialType(SpecialType.System_Collections_IEnumerable);
                     if ((object)implementedNonGeneric != null)
                     {
-                        var conversion = this.Conversions.ClassifyImplicitConversionFromType(
-                            type,
-                            implementedNonGeneric,
-                            ref useSiteInfo
-                        );
+                        var conversion = this.Conversions
+                            .ClassifyImplicitConversionFromType(
+                                type,
+                                implementedNonGeneric,
+                                ref useSiteInfo
+                            );
                         if (conversion.IsImplicit)
                         {
                             implementedIEnumerable = implementedNonGeneric;

@@ -1468,8 +1468,7 @@ class C
 
         CreateCompilation(
                 text,
-                parseOptions: CSharpParseOptions
-                    .Default
+                parseOptions: CSharpParseOptions.Default
                     .WithLanguageVersion(LanguageVersion.CSharp5)
             )
             .VerifyDiagnostics(
@@ -1497,8 +1496,7 @@ class C
 
         CreateCompilation(
                 text,
-                parseOptions: CSharpParseOptions
-                    .Default
+                parseOptions: CSharpParseOptions.Default
                     .WithLanguageVersion(LanguageVersion.CSharp5)
             )
             .VerifyDiagnostics(

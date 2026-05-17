@@ -158,16 +158,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CommentSelection
             var snapshot = textView.TextSnapshot;
             if (spans.Count() == 1)
             {
-                textView
-                    .Selection
+                textView.Selection
                     .Select(new SnapshotSpan(snapshot, spans.Single()), isReversed: false);
                 textView.Caret.MoveTo(new SnapshotPoint(snapshot, spans.Single().End));
             }
             else
             {
                 textView.Selection.Mode = TextSelectionMode.Box;
-                textView
-                    .Selection
+                textView.Selection
                     .Select(
                         new VirtualSnapshotPoint(snapshot, spans.First().Start),
                         new VirtualSnapshotPoint(snapshot, spans.Last().End)

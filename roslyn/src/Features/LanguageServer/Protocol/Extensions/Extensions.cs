@@ -164,8 +164,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer
 
                     var solution = documents.First().Project.Solution;
                     // Lookup which of the linked documents is currently active in the workspace.
-                    var documentIdInCurrentContext = solution
-                        .Workspace
+                    var documentIdInCurrentContext = solution.Workspace
                         .GetDocumentIdInCurrentContext(documents.First().Id);
                     return documentGetter(solution, documentIdInCurrentContext);
                 }
@@ -177,8 +176,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer
             TextDocumentIdentifier projectIdentifier
         )
         {
-            var projects = solution
-                .Projects
+            var projects = solution.Projects
                 .Where(project => project.FilePath == projectIdentifier.Uri.LocalPath)
                 .ToImmutableArray();
             return !projects.Any()
@@ -279,8 +277,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer
 
         public static ClassifiedTextElement GetClassifiedText(this DefinitionItem definition) =>
             new ClassifiedTextElement(
-                definition
-                    .DisplayParts
+                definition.DisplayParts
                     .Select(part => new ClassifiedTextRun(
                         part.Tag.ToClassificationTypeName(),
                         part.Text

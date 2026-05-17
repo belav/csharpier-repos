@@ -69,8 +69,7 @@ namespace System.Data.Objects.Internal
                 // If the result type of the query is neither an Entity type nor a collection
                 // type with an Entity element type, then full Span is currently not allowed.
                 throw EntityUtil.InvalidOperation(
-                    System
-                        .Data
+                    System.Data
                         .Entity
                         .Strings
                         .ObjectQuery_Span_IncludeRequiresEntityOrEntityCollection
@@ -114,16 +113,14 @@ namespace System.Data.Objects.Internal
             // using the name of the current navigation property in the Include path.
             NavigationProperty nextNavProp = null;
             if (
-                !parentInfo
-                    .DeclaringType
+                !parentInfo.DeclaringType
                     .NavigationProperties
                     .TryGetValue(navPropNames[pos], true, out nextNavProp)
             )
             {
                 // The navigation property name is not valid for this Entity type
                 throw EntityUtil.InvalidOperation(
-                    System
-                        .Data
+                    System.Data
                         .Entity
                         .Strings
                         .ObjectQuery_Span_NoNavProp(
@@ -225,10 +222,8 @@ namespace System.Data.Objects.Internal
         /// <returns>The AssociationEndMember that is the target of the navigation operation represented by the NavigationProperty</returns>
         private AssociationEndMember GetNavigationPropertyTargetEnd(NavigationProperty property)
         {
-            AssociationType relationship = this.Metadata.GetItem<AssociationType>(
-                property.RelationshipType.FullName,
-                DataSpace.CSpace
-            );
+            AssociationType relationship = this.Metadata
+                .GetItem<AssociationType>(property.RelationshipType.FullName, DataSpace.CSpace);
             Debug.Assert(
                 relationship.AssociationEndMembers.Contains(property.ToEndMember.Name),
                 "Association does not declare member referenced by Navigation property?"
@@ -280,8 +275,7 @@ namespace System.Data.Objects.Internal
                     _currentSpanPath.Pop();
 
                     // Add a new column to the tracked columns using the rewritten column definition
-                    tracking
-                        .ColumnDefinitions
+                    tracking.ColumnDefinitions
                         .Add(
                             new KeyValuePair<string, DbExpression>(
                                 tracking.ColumnNames.Next(),

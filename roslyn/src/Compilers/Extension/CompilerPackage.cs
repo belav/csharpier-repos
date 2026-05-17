@@ -57,14 +57,12 @@ namespace Roslyn.Compilers.Extension
 
                 try
                 {
-                    Microsoft
-                        .Build
+                    Microsoft.Build
                         .Evaluation
                         .ProjectCollection
                         .GlobalProjectCollection
                         .DisableMarkDirty = true;
-                    Microsoft
-                        .Build
+                    Microsoft.Build
                         .Evaluation
                         .ProjectCollection
                         .GlobalProjectCollection
@@ -72,8 +70,7 @@ namespace Roslyn.Compilers.Extension
                 }
                 finally
                 {
-                    Microsoft
-                        .Build
+                    Microsoft.Build
                         .Evaluation
                         .ProjectCollection
                         .GlobalProjectCollection

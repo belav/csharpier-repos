@@ -121,8 +121,7 @@ namespace System.Web.Mvc
         private static bool GetPrecompiledNonUpdateable()
         {
             IVirtualPathUtility virtualPathUtility = new VirtualPathUtilityWrapper();
-            return WebPages
-                .BuildManagerWrapper
+            return WebPages.BuildManagerWrapper
                 .IsNonUpdateablePrecompiledApp(
                     HostingEnvironment.VirtualPathProvider,
                     virtualPathUtility

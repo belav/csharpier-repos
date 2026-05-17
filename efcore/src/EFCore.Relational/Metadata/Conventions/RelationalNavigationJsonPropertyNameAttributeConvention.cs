@@ -44,8 +44,7 @@ public class RelationalNavigationJsonPropertyNameAttributeConvention
     {
         if (!string.IsNullOrWhiteSpace(attribute.Name))
         {
-            navigationBuilder
-                .Metadata
+            navigationBuilder.Metadata
                 .TargetEntityType
                 .Builder
                 .HasJsonPropertyName(attribute.Name, fromDataAnnotation: true);

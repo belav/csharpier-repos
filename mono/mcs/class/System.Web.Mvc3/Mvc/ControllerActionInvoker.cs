@@ -142,8 +142,7 @@
             ModelBindingContext bindingContext = new ModelBindingContext()
             {
                 FallbackToEmptyPrefix = (parameterDescriptor.BindingInfo.Prefix == null), // only fall back if prefix not specified
-                ModelMetadata = ModelMetadataProviders
-                    .Current
+                ModelMetadata = ModelMetadataProviders.Current
                     .GetMetadataForType(null, parameterType),
                 ModelName = parameterName,
                 ModelState = controllerContext.Controller.ViewData.ModelState,

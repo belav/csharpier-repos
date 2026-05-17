@@ -245,29 +245,32 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.DocumentationComments
                 var editorOptions = optionsFactory.GetOptions(view.TextBuffer);
                 editorOptions.SetOptionValue(DefaultOptions.ConvertTabsToSpacesOptionId, !useTabs);
                 editorOptions.SetOptionValue(DefaultOptions.NewLineCharacterOptionId, newLine);
-                view.Options.SetOptionValue(
-                    DefaultOptions.TrimTrailingWhiteSpaceOptionId,
-                    trimTrailingWhiteSpace
-                );
+                view.Options
+                    .SetOptionValue(
+                        DefaultOptions.TrimTrailingWhiteSpaceOptionId,
+                        trimTrailingWhiteSpace
+                    );
 
                 if (testDocument.SelectedSpans.Any())
                 {
                     var selectedSpan = testDocument.SelectedSpans[0];
                     var isReversed = selectedSpan.Start == startCaretPosition;
 
-                    view.Selection.Select(
-                        new SnapshotSpan(
-                            view.TextSnapshot,
-                            selectedSpan.Start,
-                            selectedSpan.Length
-                        ),
-                        isReversed
-                    );
+                    view.Selection
+                        .Select(
+                            new SnapshotSpan(
+                                view.TextSnapshot,
+                                selectedSpan.Start,
+                                selectedSpan.Length
+                            ),
+                            isReversed
+                        );
                 }
 
-                view.Caret.MoveTo(
-                    new SnapshotPoint(view.TextSnapshot, testDocument.CursorPosition.Value)
-                );
+                view.Caret
+                    .MoveTo(
+                        new SnapshotPoint(view.TextSnapshot, testDocument.CursorPosition.Value)
+                    );
 
                 execute(workspace, view, workspace.GetService<IEditorOperationsFactoryService>());
                 MarkupTestFile.GetPosition(expectedMarkup, out var expectedCode, out int _);

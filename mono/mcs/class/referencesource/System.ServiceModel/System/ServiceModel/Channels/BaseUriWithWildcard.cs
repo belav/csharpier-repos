@@ -53,8 +53,7 @@ namespace System.ServiceModel.Channels
 
             if (urlParameters.Length != segmentCount)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new UriFormatException(
                             SR.GetString(
@@ -86,8 +85,7 @@ namespace System.ServiceModel.Channels
                     )
                 )
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new UriFormatException(
                                 SR.GetString(
@@ -120,8 +118,7 @@ namespace System.ServiceModel.Channels
 
                 DiagnosticUtility.TraceHandledException(exception, TraceEventType.Error);
 
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new UriFormatException(
                             SR.GetString(SR.Hosting_MisformattedBindingData, binding, protocol)
@@ -296,8 +293,7 @@ namespace System.ServiceModel.Channels
                 );
             }
 
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(
                     new UriFormatException(SR.GetString(SR.Hosting_NotSupportedProtocol, binding))
                 );
@@ -392,8 +388,7 @@ namespace System.ServiceModel.Channels
 
             if (!HostNameComparisonModeHelper.IsDefined(this.HostNameComparisonMode))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(
                         "context",
                         SR.GetString(SR.Hosting_BaseUriDeserializedNotValid)
@@ -431,10 +426,11 @@ namespace System.ServiceModel.Channels
             else
             {
                 // Use canonical string representation of the absolute path for comparison
-                this.comparand.Address = this.baseAddress.GetComponents(
-                    UriComponents.Path | UriComponents.KeepDelimiter,
-                    UriFormat.UriEscaped
-                );
+                this.comparand.Address = this.baseAddress
+                    .GetComponents(
+                        UriComponents.Path | UriComponents.KeepDelimiter,
+                        UriFormat.UriEscaped
+                    );
             }
 
             this.comparand.Port = this.baseAddress.Port;

@@ -338,8 +338,7 @@ namespace System.Data.OleDb
                 {
                     throw ODB.TransactionsNotSupported(Provider, null);
                 }
-                transactionJoin
-                    .Value
+                transactionJoin.Value
                     .JoinTransaction(
                         oleTxTransaction,
                         (int)IsolationLevel.Unspecified,

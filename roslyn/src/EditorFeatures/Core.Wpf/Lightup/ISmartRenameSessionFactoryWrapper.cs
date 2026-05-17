@@ -23,8 +23,7 @@ internal readonly struct ISmartRenameSessionFactoryWrapper
 
     static ISmartRenameSessionFactoryWrapper()
     {
-        s_wrappedType = typeof(AggregateFocusInterceptor)
-            .Assembly
+        s_wrappedType = typeof(AggregateFocusInterceptor).Assembly
             .GetType(WrappedTypeName, throwOnError: false, ignoreCase: false);
 
         s_createSmartRenameSession = LightupHelpers.CreateFunctionAccessor<

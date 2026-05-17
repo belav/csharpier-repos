@@ -49,8 +49,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
         protected void AddAssemblyLink(IAssemblySymbol assemblySymbol)
         {
             var name = assemblySymbol.Identity.Name;
-            var navInfo = _libraryManager
-                .LibraryService
+            var navInfo = _libraryManager.LibraryService
                 .NavInfoFactory
                 .CreateForAssembly(assemblySymbol);
 
@@ -80,8 +79,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
             }
 
             var text = namespaceSymbol.ToDisplayString();
-            var navInfo = _libraryManager
-                .LibraryService
+            var navInfo = _libraryManager.LibraryService
                 .NavInfoFactory
                 .CreateForNamespace(
                     namespaceSymbol,
@@ -137,8 +135,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
             );
 
             var text = typeSymbol.ToDisplayString(typeDisplayFormat);
-            var navInfo = _libraryManager
-                .LibraryService
+            var navInfo = _libraryManager.LibraryService
                 .NavInfoFactory
                 .CreateForType(typeSymbol, _project, GetCompilation(), useExpandedHierarchy: false);
 
@@ -347,8 +344,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
                 return;
             }
 
-            var formattingService = _project
-                .Services
+            var formattingService = _project.Services
                 .GetService<IDocumentationCommentFormattingService>();
             if (formattingService == null)
             {

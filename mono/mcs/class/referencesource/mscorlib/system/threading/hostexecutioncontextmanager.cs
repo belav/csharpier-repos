@@ -206,8 +206,7 @@ namespace System.Threading
             Contract.EndContractBlock();
 
             HostExecutionContextSwitcher switcher = new HostExecutionContextSwitcher();
-            ExecutionContext currentExecutionContext = Thread
-                .CurrentThread
+            ExecutionContext currentExecutionContext = Thread.CurrentThread
                 .GetMutableExecutionContext();
 
             switcher.executionContext = currentExecutionContext;

@@ -394,8 +394,7 @@ namespace System.Data.Common
             if (factory == null)
             {
                 throw EntityUtil.ProviderIncompatible(
-                    System
-                        .Data
+                    System.Data
                         .Entity
                         .Strings
                         .EntityClient_ReturnedNullOnProviderMethod(
@@ -423,8 +422,7 @@ namespace System.Data.Common
             if (serviceProvider == null)
             {
                 throw EntityUtil.ProviderIncompatible(
-                    System
-                        .Data
+                    System.Data
                         .Entity
                         .Strings
                         .EntityClient_DoesNotImplementIServiceProvider(factory.GetType().ToString())
@@ -436,8 +434,7 @@ namespace System.Data.Common
             if (providerServices == null)
             {
                 throw EntityUtil.ProviderIncompatible(
-                    System
-                        .Data
+                    System.Data
                         .Entity
                         .Strings
                         .EntityClient_ReturnedNullOnProviderMethod(

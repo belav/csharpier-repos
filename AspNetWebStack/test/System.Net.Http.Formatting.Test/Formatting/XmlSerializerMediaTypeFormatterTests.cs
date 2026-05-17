@@ -58,8 +58,7 @@ namespace System.Net.Http.Formatting
         [Fact]
         public void Indent_RoundTrips()
         {
-            Assert
-                .Reflection
+            Assert.Reflection
                 .BooleanProperty(
                     new XmlSerializerMediaTypeFormatter(),
                     c => c.Indent,
@@ -92,8 +91,7 @@ namespace System.Net.Http.Formatting
         [Fact]
         public void UseXmlSerializer_RoundTrips()
         {
-            Assert
-                .Reflection
+            Assert.Reflection
                 .BooleanProperty(
                     new XmlSerializerMediaTypeFormatter(),
                     c => c.UseXmlSerializer,
@@ -109,8 +107,7 @@ namespace System.Net.Http.Formatting
             XmlMediaTypeFormatter xmlFormatter = new XmlSerializerMediaTypeFormatter();
             MemoryStream memoryStream = new MemoryStream();
             HttpContent content = new StringContent(String.Empty);
-            await Assert
-                .Task
+            await Assert.Task
                 .SucceedsAsync(
                     xmlFormatter.WriteToStreamAsync(
                         type,
@@ -138,8 +135,7 @@ namespace System.Net.Http.Formatting
             XmlSerializerMediaTypeFormatter xmlFormatter = new XmlSerializerMediaTypeFormatter();
             MemoryStream memoryStream = new MemoryStream();
             HttpContent content = new StringContent(String.Empty);
-            await Assert
-                .Task
+            await Assert.Task
                 .SucceedsAsync(
                     xmlFormatter.WriteToStreamAsync(
                         typeof(SampleType),
@@ -174,8 +170,7 @@ namespace System.Net.Http.Formatting
             };
             MemoryStream memoryStream = new MemoryStream();
             HttpContent content = new StringContent(String.Empty);
-            await Assert
-                .Task
+            await Assert.Task
                 .SucceedsAsync(
                     xmlFormatter.WriteToStreamAsync(
                         typeof(SampleType),

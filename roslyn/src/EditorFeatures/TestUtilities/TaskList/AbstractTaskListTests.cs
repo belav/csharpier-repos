@@ -39,8 +39,7 @@ namespace Microsoft.CodeAnalysis.Test.Utilities.TaskList
             using var workspace = CreateWorkspace(codeWithMarker, host);
 
             var descriptors = TaskListOptions.Default.Descriptors;
-            workspace
-                .GlobalOptions
+            workspace.GlobalOptions
                 .SetGlobalOption(TaskListOptionsStorage.Descriptors, descriptors);
 
             var hostDocument = workspace.Documents.First();

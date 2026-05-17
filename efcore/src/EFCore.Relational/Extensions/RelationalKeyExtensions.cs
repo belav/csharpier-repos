@@ -96,10 +96,11 @@ public static class RelationalKeyExtensions
     ) =>
         (string?)
             key.SetOrRemoveAnnotation(
-                RelationalAnnotationNames.Name,
-                Check.NullButNotEmpty(name, nameof(name)),
-                fromDataAnnotation
-            )?.Value;
+                    RelationalAnnotationNames.Name,
+                    Check.NullButNotEmpty(name, nameof(name)),
+                    fromDataAnnotation
+                )
+                ?.Value;
 
     /// <summary>
     ///     Gets the <see cref="ConfigurationSource" /> for the constraint name.
@@ -149,8 +150,7 @@ public static class RelationalKeyExtensions
         {
             IReadOnlyKey? linkedKey = null;
             foreach (
-                var otherKey in rootKey
-                    .DeclaringEntityType
+                var otherKey in rootKey.DeclaringEntityType
                     .FindRowInternalForeignKeys(storeObject)
                     .SelectMany(fk => fk.PrincipalEntityType.GetKeys())
             )

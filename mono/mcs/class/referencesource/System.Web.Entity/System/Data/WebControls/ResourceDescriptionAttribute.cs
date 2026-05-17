@@ -35,8 +35,7 @@ namespace System.Web.UI.WebControls
                 if (!_resourceLoaded)
                 {
                     _resourceLoaded = true;
-                    DescriptionValue = System
-                        .Web
+                    DescriptionValue = System.Web
                         .UI
                         .WebControlsRes
                         .GetString(_descriptionResourceName);

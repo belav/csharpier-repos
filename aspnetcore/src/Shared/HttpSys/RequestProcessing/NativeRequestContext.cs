@@ -894,8 +894,7 @@ internal unsafe class NativeRequestContext : IDisposable
                     (byte*)requestInfo.pInfo,
                     (int)requestInfo.InfoLength
                 ).Memory
-                : _backingBuffer
-                    .Memory
+                : _backingBuffer.Memory
                     .Slice(
                         (int)((long)requestInfo.pInfo - (long)baseAddress),
                         (int)requestInfo.InfoLength

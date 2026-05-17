@@ -48,26 +48,22 @@ namespace System.Collections.Tests
         [Fact]
         public static void ComparerImplementations_Dictionary_WithWellKnownStringComparers()
         {
-            Type nonRandomizedOrdinalComparerType = typeof(object)
-                .Assembly
+            Type nonRandomizedOrdinalComparerType = typeof(object).Assembly
                 .GetType(
                     "System.Collections.Generic.NonRandomizedStringEqualityComparer+OrdinalComparer",
                     throwOnError: true
                 );
-            Type nonRandomizedOrdinalIgnoreCaseComparerType = typeof(object)
-                .Assembly
+            Type nonRandomizedOrdinalIgnoreCaseComparerType = typeof(object).Assembly
                 .GetType(
                     "System.Collections.Generic.NonRandomizedStringEqualityComparer+OrdinalIgnoreCaseComparer",
                     throwOnError: true
                 );
-            Type randomizedOrdinalComparerType = typeof(object)
-                .Assembly
+            Type randomizedOrdinalComparerType = typeof(object).Assembly
                 .GetType(
                     "System.Collections.Generic.RandomizedStringEqualityComparer+OrdinalComparer",
                     throwOnError: true
                 );
-            Type randomizedOrdinalIgnoreCaseComparerType = typeof(object)
-                .Assembly
+            Type randomizedOrdinalIgnoreCaseComparerType = typeof(object).Assembly
                 .GetType(
                     "System.Collections.Generic.RandomizedStringEqualityComparer+OrdinalIgnoreCaseComparer",
                     throwOnError: true
@@ -113,12 +109,10 @@ namespace System.Collections.Tests
 
             RunDictionaryTest(
                 equalityComparer: StringComparer.InvariantCulture,
-                expectedInternalComparerTypeBeforeCollisionThreshold: StringComparer
-                    .InvariantCulture
+                expectedInternalComparerTypeBeforeCollisionThreshold: StringComparer.InvariantCulture
                     .GetType(),
                 expectedPublicComparerBeforeCollisionThreshold: StringComparer.InvariantCulture,
-                expectedInternalComparerTypeAfterCollisionThreshold: StringComparer
-                    .InvariantCulture
+                expectedInternalComparerTypeAfterCollisionThreshold: StringComparer.InvariantCulture
                     .GetType()
             );
 
@@ -157,26 +151,22 @@ namespace System.Collections.Tests
         [Fact]
         public static void ComparerImplementations_HashSet_WithWellKnownStringComparers()
         {
-            Type nonRandomizedOrdinalComparerType = typeof(object)
-                .Assembly
+            Type nonRandomizedOrdinalComparerType = typeof(object).Assembly
                 .GetType(
                     "System.Collections.Generic.NonRandomizedStringEqualityComparer+OrdinalComparer",
                     throwOnError: true
                 );
-            Type nonRandomizedOrdinalIgnoreCaseComparerType = typeof(object)
-                .Assembly
+            Type nonRandomizedOrdinalIgnoreCaseComparerType = typeof(object).Assembly
                 .GetType(
                     "System.Collections.Generic.NonRandomizedStringEqualityComparer+OrdinalIgnoreCaseComparer",
                     throwOnError: true
                 );
-            Type randomizedOrdinalComparerType = typeof(object)
-                .Assembly
+            Type randomizedOrdinalComparerType = typeof(object).Assembly
                 .GetType(
                     "System.Collections.Generic.RandomizedStringEqualityComparer+OrdinalComparer",
                     throwOnError: true
                 );
-            Type randomizedOrdinalIgnoreCaseComparerType = typeof(object)
-                .Assembly
+            Type randomizedOrdinalIgnoreCaseComparerType = typeof(object).Assembly
                 .GetType(
                     "System.Collections.Generic.RandomizedStringEqualityComparer+OrdinalIgnoreCaseComparer",
                     throwOnError: true
@@ -222,12 +212,10 @@ namespace System.Collections.Tests
 
             RunHashSetTest(
                 equalityComparer: StringComparer.InvariantCulture,
-                expectedInternalComparerTypeBeforeCollisionThreshold: StringComparer
-                    .InvariantCulture
+                expectedInternalComparerTypeBeforeCollisionThreshold: StringComparer.InvariantCulture
                     .GetType(),
                 expectedPublicComparerBeforeCollisionThreshold: StringComparer.InvariantCulture,
-                expectedInternalComparerTypeAfterCollisionThreshold: StringComparer
-                    .InvariantCulture
+                expectedInternalComparerTypeAfterCollisionThreshold: StringComparer.InvariantCulture
                     .GetType()
             );
 

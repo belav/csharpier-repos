@@ -1143,8 +1143,7 @@ class D : C
                 var d = module.GlobalNamespace.GetMember<NamedTypeSymbol>("D");
                 var m = d.GetMethod("M");
 
-                var returnTypeWithAnnotations = ((FunctionPointerTypeSymbol)m.ReturnType)
-                    .Signature
+                var returnTypeWithAnnotations = ((FunctionPointerTypeSymbol)m.ReturnType).Signature
                     .ReturnTypeWithAnnotations;
                 Assert.Equal(1, returnTypeWithAnnotations.CustomModifiers.Length);
                 Assert.Equal(
@@ -7668,8 +7667,7 @@ Derived2 Stdcall, Stdcall, Thiscall ref return
                         var derivedM4 = derived.GetMethod("M4");
 
                         Assert.True(
-                            baseM1
-                                .Parameters
+                            baseM1.Parameters
                                 .Single()
                                 .Type
                                 .Equals(
@@ -7678,13 +7676,11 @@ Derived2 Stdcall, Stdcall, Thiscall ref return
                                 )
                         );
                         Assert.True(
-                            baseM2
-                                .ReturnType
+                            baseM2.ReturnType
                                 .Equals(derivedM2.ReturnType, TypeCompareKind.ConsiderEverything)
                         );
                         Assert.True(
-                            baseM3
-                                .Parameters
+                            baseM3.Parameters
                                 .Single()
                                 .Type
                                 .Equals(
@@ -7693,8 +7689,7 @@ Derived2 Stdcall, Stdcall, Thiscall ref return
                                 )
                         );
                         Assert.True(
-                            baseM4
-                                .ReturnType
+                            baseM4.ReturnType
                                 .Equals(derivedM4.ReturnType, TypeCompareKind.ConsiderEverything)
                         );
                     }
@@ -12970,9 +12965,8 @@ class D
                 var c = compilation.GetTypeByMetadataName("C");
                 var m = c.GetMethod("M");
                 Assert.Empty(
-                    m.GetUnmanagedCallersOnlyAttributeData(
-                        forceComplete: true
-                    )!.CallingConventionTypes
+                    m.GetUnmanagedCallersOnlyAttributeData(forceComplete: true)!
+                        .CallingConventionTypes
                 );
             }
         }

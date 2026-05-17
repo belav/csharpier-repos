@@ -48,8 +48,7 @@ namespace System.ServiceModel.Discovery
             }
             if (duplicateMessageHistoryLength < 0)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .ArgumentOutOfRange(
                         "duplicateMessageHistoryLength",
                         duplicateMessageHistoryLength,

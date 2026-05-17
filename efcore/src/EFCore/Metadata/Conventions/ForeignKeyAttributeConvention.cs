@@ -54,8 +54,7 @@ public class ForeignKeyAttributeConvention
         var unconfiguredNavigations = new List<PropertyInfo>();
         var inverses = new List<string>();
         foreach (
-            var candidatePair in Dependencies
-                .MemberClassifier
+            var candidatePair in Dependencies.MemberClassifier
                 .GetNavigationCandidates(entityType, useAttributes: true)
         )
         {
@@ -197,8 +196,7 @@ public class ForeignKeyAttributeConvention
 
         if (fkPropertyOnDependent != null && fkPropertyOnPrincipal != null)
         {
-            Dependencies
-                .Logger
+            Dependencies.Logger
                 .ForeignKeyAttributesOnBothPropertiesWarning(
                     foreignKey.PrincipalToDependent!,
                     foreignKey.DependentToPrincipal!,
@@ -232,8 +230,7 @@ public class ForeignKeyAttributeConvention
             && fkPropertiesOnPrincipalToDependent != null
         )
         {
-            Dependencies
-                .Logger
+            Dependencies.Logger
                 .ForeignKeyAttributesOnBothNavigationsWarning(
                     relationshipBuilder.Metadata.DependentToPrincipal!,
                     relationshipBuilder.Metadata.PrincipalToDependent!
@@ -309,8 +306,7 @@ public class ForeignKeyAttributeConvention
                     || !Equals(fkPropertiesOnNavigation.First(), fkProperty!.GetSimpleMemberName())
                 )
                 {
-                    Dependencies
-                        .Logger
+                    Dependencies.Logger
                         .ConflictingForeignKeyAttributesOnNavigationAndPropertyWarning(
                             fkPropertiesOnDependentToPrincipal != null
                                 ? relationshipBuilder.Metadata.DependentToPrincipal!
@@ -374,13 +370,11 @@ public class ForeignKeyAttributeConvention
         }
         else
         {
-            var existingProperties = foreignKey
-                .DeclaringEntityType
+            var existingProperties = foreignKey.DeclaringEntityType
                 .FindProperties(fkPropertiesToSet);
             if (existingProperties != null)
             {
-                var conflictingFk = foreignKey
-                    .DeclaringEntityType
+                var conflictingFk = foreignKey.DeclaringEntityType
                     .FindForeignKeys(existingProperties)
                     .FirstOrDefault(fk =>
                         fk != foreignKey
@@ -436,8 +430,7 @@ public class ForeignKeyAttributeConvention
             )
                 is null
                 ? null
-            : foreignKey
-                .PrincipalEntityType
+            : foreignKey.PrincipalEntityType
                 .Builder
                 .HasRelationship(
                     foreignKey.DeclaringEntityType,
@@ -541,8 +534,7 @@ public class ForeignKeyAttributeConvention
         PropertyInfo propertyInfo,
         IConventionEntityType entityType
     ) =>
-        Dependencies
-            .MemberClassifier
+        Dependencies.MemberClassifier
             .GetNavigationCandidates(entityType, useAttributes: true)
             .TryGetValue(propertyInfo, out _);
 
@@ -574,13 +566,11 @@ public class ForeignKeyAttributeConvention
             );
         }
 
-        var navigationPropertyTargetType = navigation!
-            .DeclaringEntityType
+        var navigationPropertyTargetType = navigation!.DeclaringEntityType
             .GetRuntimeProperties()[navigation.Name]
             .PropertyType;
 
-        var otherNavigations = navigation
-            .DeclaringEntityType
+        var otherNavigations = navigation.DeclaringEntityType
             .GetRuntimeProperties()
             .Values
             .Where(p =>

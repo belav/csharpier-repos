@@ -1281,10 +1281,11 @@ namespace System.Windows.Forms
             // Paint the Overflow button if it's visible
             if (this.overflow_button != null && this.overflow_button.Visible)
             {
-                e.Graphics.TranslateTransform(
-                    this.overflow_button.Bounds.Left,
-                    this.overflow_button.Bounds.Top
-                );
+                e.Graphics
+                    .TranslateTransform(
+                        this.overflow_button.Bounds.Left,
+                        this.overflow_button.Bounds.Top
+                    );
                 this.overflow_button.FireEvent(e, ToolStripItemEventType.Paint);
                 e.Graphics.ResetTransform();
             }
@@ -1339,15 +1340,16 @@ namespace System.Windows.Forms
                     e.Graphics.TranslateTransform(0, 2);
             }
 
-            this.Renderer.DrawGrip(
-                new ToolStripGripRenderEventArgs(
-                    e.Graphics,
-                    this,
-                    this.GripRectangle,
-                    this.GripDisplayStyle,
-                    this.grip_style
-                )
-            );
+            this.Renderer
+                .DrawGrip(
+                    new ToolStripGripRenderEventArgs(
+                        e.Graphics,
+                        this,
+                        this.GripRectangle,
+                        this.GripDisplayStyle,
+                        this.grip_style
+                    )
+                );
             e.Graphics.ResetTransform();
         }
 
@@ -1527,8 +1529,7 @@ namespace System.Windows.Forms
                 item.Owner.Items.RemoveNoOwnerOrLayout(item);
 
                 if (item.Owner is ToolStripOverflow)
-                    (item.Owner as ToolStripOverflow)
-                        .ParentToolStrip
+                    (item.Owner as ToolStripOverflow).ParentToolStrip
                         .Items
                         .RemoveNoOwnerOrLayout(item);
             }
@@ -2018,8 +2019,7 @@ namespace System.Windows.Forms
             if (item.Parent != null && item.Parent != this)
             {
                 if (item.Parent is ToolStripOverflow)
-                    (item.Parent as ToolStripOverflow)
-                        .ParentToolStrip
+                    (item.Parent as ToolStripOverflow).ParentToolStrip
                         .Items
                         .RemoveNoOwnerOrLayout(item);
                 else

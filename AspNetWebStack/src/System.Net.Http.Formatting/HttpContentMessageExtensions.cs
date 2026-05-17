@@ -627,8 +627,7 @@ namespace System.Net.Http
 
             IEnumerable<string> hostValues;
             if (
-                httpRequest
-                    .HttpHeaders
+                httpRequest.HttpHeaders
                     .TryGetValues(FormattingUtilities.HttpHostHeader, out hostValues)
             )
             {

@@ -652,8 +652,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                     var parentConditionalAccessExpression = (ConditionalAccessExpressionSyntax)
                         expression.Parent;
                     return expression != parentConditionalAccessExpression.WhenNotNull
-                        && !parentConditionalAccessExpression
-                            .Parent
+                        && !parentConditionalAccessExpression.Parent
                             .IsKind(SyntaxKind.ConditionalAccessExpression);
 
                 case SyntaxKind.IsExpression:

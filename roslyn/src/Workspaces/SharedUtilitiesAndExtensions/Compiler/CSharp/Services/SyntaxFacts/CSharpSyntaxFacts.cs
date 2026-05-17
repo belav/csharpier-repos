@@ -911,8 +911,7 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageService
             {
                 if (memberDeclaration.Kind() == SyntaxKind.ConversionOperatorDeclaration)
                 {
-                    name = (memberDeclaration as ConversionOperatorDeclarationSyntax)
-                        ?.Type
+                    name = (memberDeclaration as ConversionOperatorDeclarationSyntax)?.Type
                         .ToString();
                 }
                 else
@@ -1483,8 +1482,7 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageService
             SyntaxNode localDeclarationStatement
         ) =>
             declarator is VariableDeclaratorSyntax variableDeclarator
-            && ((LocalDeclarationStatementSyntax)localDeclarationStatement)
-                .Declaration
+            && ((LocalDeclarationStatementSyntax)localDeclarationStatement).Declaration
                 .Variables
                 .Contains(variableDeclarator);
 

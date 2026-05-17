@@ -72,8 +72,7 @@ namespace System.Diagnostics.Tracing
                 Enable(); // Enable it unconditionally.
 #else
                 if (
-                    System
-                        .Threading
+                    System.Threading
                         .Tasks
                         .TplEtwProvider
                         .Log

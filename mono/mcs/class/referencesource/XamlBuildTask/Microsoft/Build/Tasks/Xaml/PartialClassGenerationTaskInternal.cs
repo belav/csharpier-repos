@@ -249,8 +249,7 @@ namespace Microsoft.Build.Tasks.Xaml
                 }
                 if (!CodeDomProvider.IsDefinedLanguage(this.Language))
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .Argument("Language", SR.UnrecognizedLanguage(this.Language));
                 }
 
@@ -609,8 +608,7 @@ namespace Microsoft.Build.Tasks.Xaml
                         {
                             throw;
                         }
-                        throw FxTrace
-                            .Exception
+                        throw FxTrace.Exception
                             .AsError(
                                 new LoggableException(
                                     SR.ExceptionThrownInExtension(
@@ -651,8 +649,7 @@ namespace Microsoft.Build.Tasks.Xaml
             markupItemName = markupItemName + Path.GetExtension(markupItem);
             if (this.OutputPath == null)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(new InvalidOperationException(SR.OutputPathCannotBeNull));
             }
             return Path.Combine(this.OutputPath, markupItemName);

@@ -41,8 +41,7 @@ namespace System.ServiceModel.Channels
 
             if (version != AddressingVersion.WSAddressing10)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(SR.CallbackContextOnlySupportedInWSAddressing10, version)
@@ -75,8 +74,7 @@ namespace System.ServiceModel.Channels
                 if (encryptAndSignChannelProtectionRequirements == null)
                 {
                     MessagePartSpecification header = new MessagePartSpecification();
-                    header
-                        .HeaderTypes
+                    header.HeaderTypes
                         .Add(
                             new XmlQualifiedName(
                                 CallbackContextHeaderName,
@@ -99,8 +97,7 @@ namespace System.ServiceModel.Channels
                 if (signChannelProtectionRequirements == null)
                 {
                     MessagePartSpecification header = new MessagePartSpecification();
-                    header
-                        .HeaderTypes
+                    header.HeaderTypes
                         .Add(
                             new XmlQualifiedName(
                                 CallbackContextHeaderName,
@@ -118,8 +115,7 @@ namespace System.ServiceModel.Channels
             }
             else
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentOutOfRangeException("protectionLevel"));
             }
 
@@ -138,8 +134,7 @@ namespace System.ServiceModel.Channels
 
             if (version != AddressingVersion.WSAddressing10)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ProtocolException(
                             SR.GetString(SR.CallbackContextOnlySupportedInWSAddressing10, version)
@@ -161,8 +156,7 @@ namespace System.ServiceModel.Channels
             }
             catch (XmlException e)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ProtocolException(
                             SR.GetString(SR.XmlFormatViolationInCallbackContextHeader),
@@ -181,12 +175,13 @@ namespace System.ServiceModel.Channels
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("writer");
             }
-            this.callbackAddress.WriteTo(
-                this.version,
-                writer,
-                CallbackEndpointReference,
-                CallbackContextHeaderNamespace
-            );
+            this.callbackAddress
+                .WriteTo(
+                    this.version,
+                    writer,
+                    CallbackEndpointReference,
+                    CallbackContextHeaderNamespace
+                );
         }
     }
 }

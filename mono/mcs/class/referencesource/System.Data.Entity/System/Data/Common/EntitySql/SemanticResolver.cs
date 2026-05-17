@@ -457,8 +457,7 @@ namespace System.Data.Common.EntitySql
                         for (
                             expressionInterpretationContext = _currentGroupAggregateInfo;
                             expressionInterpretationContext != null
-                                && expressionInterpretationContext
-                                    .DefiningScopeRegion
+                                && expressionInterpretationContext.DefiningScopeRegion
                                     .ScopeRegionIndex
                                     >= definingScopeRegionOfScopeEntry.ScopeRegionIndex;
                             expressionInterpretationContext =
@@ -617,12 +616,13 @@ namespace System.Data.Common.EntitySql
             //
             // Otherwise, resolve as an unqualified name.
             //
-            return this.TypeResolver.ResolveUnqualifiedName(
-                name,
-                leftHandSideOfMemberAccess /* partOfQualifiedName */
-                ,
-                errCtx
-            );
+            return this.TypeResolver
+                .ResolveUnqualifiedName(
+                    name,
+                    leftHandSideOfMemberAccess /* partOfQualifiedName */
+                    ,
+                    errCtx
+                );
         }
 
         internal MetadataMember ResolveSimpleFunctionName(string name, ErrorContext errCtx)
@@ -632,12 +632,13 @@ namespace System.Data.Common.EntitySql
             // Note that calling type resolver directly will avoid resolution of the identifier as a local variable or entity container
             // (these resolutions are performed only by ResolveSimpleName(...)).
             //
-            var resolution = this.TypeResolver.ResolveUnqualifiedName(
-                name,
-                false /* partOfQualifiedName */
-                ,
-                errCtx
-            );
+            var resolution = this.TypeResolver
+                .ResolveUnqualifiedName(
+                    name,
+                    false /* partOfQualifiedName */
+                    ,
+                    errCtx
+                );
             if (resolution.MetadataMemberClass == MetadataMemberClass.Namespace)
             {
                 //
@@ -748,8 +749,7 @@ namespace System.Data.Common.EntitySql
             {
                 EdmMember member;
                 if (
-                    TypeResolver
-                        .Perspective
+                    TypeResolver.Perspective
                         .TryGetMember(
                             (StructuralType)valueExpr.ResultType.EdmType,
                             name,

@@ -25,16 +25,14 @@ namespace ILCompiler.DependencyAnalysis
 
         public override IEnumerable<DependencyListEntry> GetStaticDependencies(NodeFactory factory)
         {
-            PEMemoryBlock resourceDirectory = _module
-                .PEReader
+            PEMemoryBlock resourceDirectory = _module.PEReader
                 .GetSectionData(
                     _module.PEReader.PEHeaders.CorHeader.ResourcesDirectory.RelativeVirtualAddress
                 );
 
             foreach (var resourceHandle in _module.MetadataReader.ManifestResources)
             {
-                ManifestResource resource = _module
-                    .MetadataReader
+                ManifestResource resource = _module.MetadataReader
                     .GetManifestResource(resourceHandle);
 
                 // Don't try to process linked resources or resources in other assemblies

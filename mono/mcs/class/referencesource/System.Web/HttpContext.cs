@@ -2354,8 +2354,7 @@ namespace System.Web
         {
             if (_sqlDependencyCookie != null)
             {
-                System
-                    .Runtime
+                System.Runtime
                     .Remoting
                     .Messaging
                     .CallContext
@@ -2371,8 +2370,7 @@ namespace System.Web
         {
             if (_sqlDependencyCookie != null)
             {
-                System
-                    .Runtime
+                System.Runtime
                     .Remoting
                     .Messaging
                     .CallContext
@@ -2386,8 +2384,7 @@ namespace System.Web
             set
             {
                 _sqlDependencyCookie = value;
-                System
-                    .Runtime
+                System.Runtime
                     .Remoting
                     .Messaging
                     .CallContext

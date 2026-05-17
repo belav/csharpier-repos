@@ -427,8 +427,7 @@ public class AttributeRouteModel
                                     token,
                                     string.Join(
                                         ", ",
-                                        values
-                                            .Keys
+                                        values.Keys
                                             .OrderBy(k => k, StringComparer.OrdinalIgnoreCase)
                                     )
                                 );

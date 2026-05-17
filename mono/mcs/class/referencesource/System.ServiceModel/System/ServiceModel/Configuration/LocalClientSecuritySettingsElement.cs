@@ -108,8 +108,7 @@ namespace System.ServiceModel.Configuration
 
         [ConfigurationProperty(
             ConfigurationStrings.ReconnectTransportOnFailure,
-            DefaultValue = System
-                .ServiceModel
+            DefaultValue = System.ServiceModel
                 .Security
                 .SecuritySessionClientSettings
                 .defaultTolerateTransportFailures
@@ -226,8 +225,7 @@ namespace System.ServiceModel.Configuration
             this.CacheCookies = source.CacheCookies;
             if (
                 PropertyValueOrigin.Default
-                != source
-                    .ElementInformation
+                != source.ElementInformation
                     .Properties[ConfigurationStrings.DetectReplays]
                     .ValueOrigin
             )

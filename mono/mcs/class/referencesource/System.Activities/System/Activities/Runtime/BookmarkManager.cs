@@ -77,8 +77,7 @@ namespace System.Activities.Runtime
 
             if (this.bookmarks != null && this.bookmarks.ContainsKey(toAdd))
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(new InvalidOperationException(SR.BookmarkAlreadyExists(name)));
             }
 
@@ -129,8 +128,7 @@ namespace System.Activities.Runtime
                 return;
             }
 
-            List<ExclusiveHandle> handles = owningInstance
-                .PropertyManager
+            List<ExclusiveHandle> handles = owningInstance.PropertyManager
                 .FindAll<ExclusiveHandle>();
 
             if (handles == null)
@@ -219,8 +217,7 @@ namespace System.Activities.Runtime
         {
             if (this.nextId == long.MaxValue)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(new NotSupportedException(SR.OutOfInternalBookmarks));
             }
 
@@ -356,8 +353,7 @@ namespace System.Activities.Runtime
             {
                 if (callbackWrapper.ActivityInstance != instanceAttemptingRemove)
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(new InvalidOperationException(SR.OnlyBookmarkOwnerCanRemove));
                 }
 

@@ -125,8 +125,7 @@ namespace System.Xml.Serialization
 
                         string a = _choiceArrayName;
                         string c = $"c{a}";
-                        string choiceTypeFullName = mapping
-                            .ChoiceIdentifier
+                        string choiceTypeFullName = mapping.ChoiceIdentifier
                             .Mapping!
                             .TypeDesc!
                             .CSharpName;
@@ -783,8 +782,7 @@ namespace System.Xml.Serialization
         [RequiresUnreferencedCode("XmlSerializationReader methods have RequiresUnreferencedCode")]
         private void WritePrimitive(TypeMapping mapping, string source)
         {
-            System
-                .Diagnostics
+            System.Diagnostics
                 .Debug
                 .Assert(
                     source == "Reader.ReadElementString()"
@@ -913,8 +911,7 @@ namespace System.Xml.Serialization
             }
             else if (mapping.TypeDesc!.FormatterName == "String")
             {
-                System
-                    .Diagnostics
+                System.Diagnostics
                     .Debug
                     .Assert(
                         source == "Reader.Value"
@@ -1093,23 +1090,21 @@ namespace System.Xml.Serialization
             string memberName = MakeUnique(mapping, $"_{propName}")!;
             propName = CodeIdentifier.GetCSharpName(propName);
 
-            FieldBuilder fieldBuilder = this.typeBuilder.DefineField(
-                memberName,
-                typeof(Hashtable),
-                FieldAttributes.Private
-            );
+            FieldBuilder fieldBuilder = this.typeBuilder
+                .DefineField(memberName, typeof(Hashtable), FieldAttributes.Private);
 
-            PropertyBuilder propertyBuilder = this.typeBuilder.DefineProperty(
-                propName,
-                PropertyAttributes.None,
-                CallingConventions.HasThis,
-                typeof(Hashtable),
-                null,
-                null,
-                null,
-                null,
-                null
-            );
+            PropertyBuilder propertyBuilder = this.typeBuilder
+                .DefineProperty(
+                    propName,
+                    PropertyAttributes.None,
+                    CallingConventions.HasThis,
+                    typeof(Hashtable),
+                    null,
+                    null,
+                    null,
+                    null,
+                    null
+                );
 
             ilg = new CodeGenerator(this.typeBuilder);
             ilg.BeginMethod(
@@ -2174,8 +2169,7 @@ namespace System.Xml.Serialization
                 ilg.Load(null);
                 ilg.If(Cmp.EqualTo);
                 WriteSourceBegin(xmlnsMember.Source);
-                ConstructorInfo ctor = xmlnsMember
-                    .Mapping
+                ConstructorInfo ctor = xmlnsMember.Mapping
                     .TypeDesc!
                     .Type!
                     .GetConstructor(CodeGenerator.InstanceBindingFlags, Type.EmptyTypes)!;
@@ -2185,8 +2179,7 @@ namespace System.Xml.Serialization
 
                 Label labelEqual5 = ilg.DefineLabel();
                 Label labelEndLength = ilg.DefineLabel();
-                MethodInfo Add = xmlnsMember
-                    .Mapping
+                MethodInfo Add = xmlnsMember.Mapping
                     .TypeDesc
                     .Type!
                     .GetMethod(
@@ -3069,8 +3062,7 @@ namespace System.Xml.Serialization
                             ilg.Call(XmlSerializationReader_ShrinkArray);
                             ilg.ConvertValue(
                                 XmlSerializationReader_ShrinkArray.ReturnType,
-                                member
-                                    .Mapping
+                                member.Mapping
                                     .ChoiceIdentifier
                                     .Mapping
                                     .TypeDesc
@@ -3079,8 +3071,7 @@ namespace System.Xml.Serialization
                             );
                             WriteSourceEnd(
                                 member.ChoiceSource!,
-                                member
-                                    .Mapping
+                                member.Mapping
                                     .ChoiceIdentifier
                                     .Mapping
                                     .TypeDesc
@@ -3186,8 +3177,7 @@ namespace System.Xml.Serialization
             match = P0Regex().Match(source);
             if (match.Success)
             {
-                System
-                    .Diagnostics
+                System.Diagnostics
                     .Debug
                     .Assert(
                         CodeGenerator
@@ -3270,14 +3260,12 @@ namespace System.Xml.Serialization
                     !localA.LocalType.IsGenericType
                         || (
                             localA.LocalType.GetGenericArguments().Length == 1
-                            && localA
-                                .LocalType
+                            && localA.LocalType
                                 .GetGenericArguments()[0]
                                 .IsAssignableFrom(elementType)
                         )
                 );
-                MethodInfo Add = localA
-                    .LocalType
+                MethodInfo Add = localA.LocalType
                     .GetMethod(
                         "Add",
                         CodeGenerator.InstanceBindingFlags,

@@ -76,8 +76,7 @@ namespace Internal.TypeSystem
                 methodInstantiation
             );
             if (owningType != instantiatedOwningType)
-                field = instantiatedOwningType
-                    .Context
+                field = instantiatedOwningType.Context
                     .GetFieldForInstantiatedType(
                         field.GetTypicalFieldDefinition(),
                         (InstantiatedType)instantiatedOwningType

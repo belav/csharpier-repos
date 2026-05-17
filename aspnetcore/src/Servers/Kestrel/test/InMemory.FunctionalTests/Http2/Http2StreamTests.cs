@@ -434,8 +434,7 @@ public class Http2StreamTests : Http2TestBase
         {
             context.Response.Headers["path"] = context.Request.Path.Value;
             context.Response.Headers["query"] = context.Request.QueryString.Value;
-            context.Response.Headers["rawtarget"] = context
-                .Features
+            context.Response.Headers["rawtarget"] = context.Features
                 .Get<IHttpRequestFeature>()
                 .RawTarget;
             return Task.CompletedTask;
@@ -1197,8 +1196,7 @@ public class Http2StreamTests : Http2TestBase
             var readResult = await context.Request.BodyReader.ReadAsync();
             while (!readResult.IsCompleted)
             {
-                context
-                    .Request
+                context.Request
                     .BodyReader
                     .AdvanceTo(readResult.Buffer.Start, readResult.Buffer.End);
                 readResult = await context.Request.BodyReader.ReadAsync();
@@ -1531,8 +1529,7 @@ public class Http2StreamTests : Http2TestBase
             var readResult = await context.Request.BodyReader.ReadAsync();
             while (!readResult.IsCompleted)
             {
-                context
-                    .Request
+                context.Request
                     .BodyReader
                     .AdvanceTo(readResult.Buffer.Start, readResult.Buffer.End);
                 readResult = await context.Request.BodyReader.ReadAsync();
@@ -2268,9 +2265,8 @@ public class Http2StreamTests : Http2TestBase
         Assert.Contains(
             LogMessages,
             m =>
-                m.Message.Contains(
-                    "the application completed without reading the entire request body."
-                )
+                m.Message
+                    .Contains("the application completed without reading the entire request body.")
         );
 
         await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false);
@@ -2369,9 +2365,8 @@ public class Http2StreamTests : Http2TestBase
         Assert.Contains(
             LogMessages,
             m =>
-                m.Message.Contains(
-                    "the application completed without reading the entire request body."
-                )
+                m.Message
+                    .Contains("the application completed without reading the entire request body.")
         );
 
         await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false);
@@ -2441,9 +2436,8 @@ public class Http2StreamTests : Http2TestBase
         Assert.Contains(
             LogMessages,
             m =>
-                m.Message.Contains(
-                    "the application completed without reading the entire request body."
-                )
+                m.Message
+                    .Contains("the application completed without reading the entire request body.")
         );
 
         await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false);
@@ -3080,8 +3074,7 @@ public class Http2StreamTests : Http2TestBase
         await InitializeConnectionAsync(async context =>
         {
             await context.Response.WriteAsync("Hello World");
-            context
-                .Response
+            context.Response
                 .AppendTrailer(
                     "too_long",
                     new string('a', (int)Http2PeerSettings.DefaultMaxFrameSize)
@@ -3369,8 +3362,7 @@ public class Http2StreamTests : Http2TestBase
             var streamIdFeature = context.Features.Get<IHttp2StreamIdFeature>();
             var sem = new SemaphoreSlim(0);
 
-            context
-                .RequestAborted
+            context.RequestAborted
                 .Register(() =>
                 {
                     lock (_abortedStreamIdsLock)
@@ -3404,8 +3396,7 @@ public class Http2StreamTests : Http2TestBase
             var streamIdFeature = context.Features.Get<IHttp2StreamIdFeature>();
             var sem = new SemaphoreSlim(0);
 
-            context
-                .RequestAborted
+            context.RequestAborted
                 .Register(() =>
                 {
                     lock (_abortedStreamIdsLock)
@@ -3443,8 +3434,7 @@ public class Http2StreamTests : Http2TestBase
 
             try
             {
-                var readTask = context
-                    .Request
+                var readTask = context.Request
                     .Body
                     .ReadAsync(new byte[100], 0, 100)
                     .DefaultTimeout();
@@ -3490,13 +3480,11 @@ public class Http2StreamTests : Http2TestBase
 
             try
             {
-                var read = await context
-                    .Request
+                var read = await context.Request
                     .Body
                     .ReadAsync(new byte[100], 0, 100)
                     .DefaultTimeout();
-                var readTask = context
-                    .Request
+                var readTask = context.Request
                     .Body
                     .ReadAsync(new byte[100], 0, 100)
                     .DefaultTimeout();
@@ -3542,8 +3530,7 @@ public class Http2StreamTests : Http2TestBase
 
             try
             {
-                context
-                    .RequestAborted
+                context.RequestAborted
                     .Register(() =>
                     {
                         lock (_abortedStreamIdsLock)
@@ -3588,8 +3575,7 @@ public class Http2StreamTests : Http2TestBase
 
             try
             {
-                context
-                    .RequestAborted
+                context.RequestAborted
                     .Register(() =>
                     {
                         lock (_abortedStreamIdsLock)
@@ -4889,8 +4875,7 @@ public class Http2StreamTests : Http2TestBase
         {
             try
             {
-                context
-                    .Response
+                context.Response
                     .OnStarting(() =>
                     {
                         startingTcs.SetResult();
@@ -4958,8 +4943,7 @@ public class Http2StreamTests : Http2TestBase
         {
             try
             {
-                context
-                    .Response
+                context.Response
                     .OnStarting(() =>
                     {
                         startingTcs.SetResult();
@@ -5040,8 +5024,7 @@ public class Http2StreamTests : Http2TestBase
         {
             try
             {
-                context
-                    .Response
+                context.Response
                     .OnStarting(() =>
                     {
                         startingTcs.SetResult();
@@ -5113,8 +5096,7 @@ public class Http2StreamTests : Http2TestBase
         {
             try
             {
-                context
-                    .Response
+                context.Response
                     .OnStarting(() =>
                     {
                         startingTcs.SetResult();
@@ -5197,8 +5179,7 @@ public class Http2StreamTests : Http2TestBase
         {
             try
             {
-                context
-                    .Response
+                context.Response
                     .OnStarting(() =>
                     {
                         startingTcs.SetResult();
@@ -5271,8 +5252,7 @@ public class Http2StreamTests : Http2TestBase
         {
             try
             {
-                context
-                    .Response
+                context.Response
                     .OnStarting(() =>
                     {
                         startingTcs.SetResult();
@@ -5409,8 +5389,7 @@ public class Http2StreamTests : Http2TestBase
         {
             try
             {
-                context
-                    .Response
+                context.Response
                     .OnStarting(() =>
                     {
                         startingTcs.SetResult();
@@ -5508,8 +5487,7 @@ public class Http2StreamTests : Http2TestBase
         {
             try
             {
-                context
-                    .Response
+                context.Response
                     .OnStarting(() =>
                     {
                         startingTcs.SetResult();
@@ -5602,8 +5580,7 @@ public class Http2StreamTests : Http2TestBase
         {
             try
             {
-                context
-                    .Response
+                context.Response
                     .OnStarting(() =>
                     {
                         startingTcs.SetResult();
@@ -5694,8 +5671,7 @@ public class Http2StreamTests : Http2TestBase
         {
             try
             {
-                context
-                    .Response
+                context.Response
                     .OnStarting(() =>
                     {
                         startingTcs.SetResult();
@@ -5785,8 +5761,7 @@ public class Http2StreamTests : Http2TestBase
         {
             try
             {
-                context
-                    .Response
+                context.Response
                     .OnStarting(() =>
                     {
                         startingTcs.SetResult();
@@ -5895,8 +5870,7 @@ public class Http2StreamTests : Http2TestBase
             {
                 var requestBodyTask = context.Request.BodyReader.ReadAsync();
 
-                context
-                    .Response
+                context.Response
                     .OnStarting(() =>
                     {
                         startingTcs.SetResult();
@@ -5999,8 +5973,7 @@ public class Http2StreamTests : Http2TestBase
         {
             try
             {
-                context
-                    .Response
+                context.Response
                     .OnStarting(() =>
                     {
                         startingTcs.SetResult();
@@ -6106,8 +6079,7 @@ public class Http2StreamTests : Http2TestBase
             {
                 var requestBodyTask = context.Request.BodyReader.ReadAsync();
 
-                context
-                    .Response
+                context.Response
                     .OnStarting(() =>
                     {
                         startingTcs.SetResult();
@@ -6372,9 +6344,10 @@ public class Http2StreamTests : Http2TestBase
         Assert.Contains(
             LogMessages,
             m =>
-                m.Message.Equals(
-                    "One or more of the following response headers have been removed because they are invalid for HTTP/2 and HTTP/3 responses: 'Connection', 'Transfer-Encoding', 'Keep-Alive', 'Upgrade' and 'Proxy-Connection'."
-                )
+                m.Message
+                    .Equals(
+                        "One or more of the following response headers have been removed because they are invalid for HTTP/2 and HTTP/3 responses: 'Connection', 'Transfer-Encoding', 'Keep-Alive', 'Upgrade' and 'Proxy-Connection'."
+                    )
         );
     }
 

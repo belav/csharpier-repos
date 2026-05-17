@@ -1218,8 +1218,7 @@ namespace System.Data.SqlClient.SqlGen
                     default:
                         // all known scalar types should been handled already.
                         throw EntityUtil.NotSupported(
-                            System
-                                .Data
+                            System.Data
                                 .Entity
                                 .Strings
                                 .NoStoreTypeForEdmType(
@@ -1312,8 +1311,7 @@ namespace System.Data.SqlClient.SqlGen
             if (double.IsNaN(value))
             {
                 throw EntityUtil.NotSupported(
-                    System
-                        .Data
+                    System.Data
                         .Entity
                         .Strings
                         .SqlGen_TypedNaNNotSupported(
@@ -1324,8 +1322,7 @@ namespace System.Data.SqlClient.SqlGen
             else if (double.IsPositiveInfinity(value))
             {
                 throw EntityUtil.NotSupported(
-                    System
-                        .Data
+                    System.Data
                         .Entity
                         .Strings
                         .SqlGen_TypedPositiveInfinityNotSupported(
@@ -1337,8 +1334,7 @@ namespace System.Data.SqlClient.SqlGen
             else if (double.IsNegativeInfinity(value))
             {
                 throw EntityUtil.NotSupported(
-                    System
-                        .Data
+                    System.Data
                         .Entity
                         .Strings
                         .SqlGen_TypedNegativeInfinityNotSupported(
@@ -1359,8 +1355,7 @@ namespace System.Data.SqlClient.SqlGen
             if (float.IsNaN(value))
             {
                 throw EntityUtil.NotSupported(
-                    System
-                        .Data
+                    System.Data
                         .Entity
                         .Strings
                         .SqlGen_TypedNaNNotSupported(
@@ -1371,8 +1366,7 @@ namespace System.Data.SqlClient.SqlGen
             else if (float.IsPositiveInfinity(value))
             {
                 throw EntityUtil.NotSupported(
-                    System
-                        .Data
+                    System.Data
                         .Entity
                         .Strings
                         .SqlGen_TypedPositiveInfinityNotSupported(
@@ -1384,8 +1378,7 @@ namespace System.Data.SqlClient.SqlGen
             else if (float.IsNegativeInfinity(value))
             {
                 throw EntityUtil.NotSupported(
-                    System
-                        .Data
+                    System.Data
                         .Entity
                         .Strings
                         .SqlGen_TypedNegativeInfinityNotSupported(
@@ -2649,8 +2642,7 @@ namespace System.Data.SqlClient.SqlGen
             if (newInstanceExpression != null)
             {
                 Dictionary<string, Symbol> newColumns;
-                result
-                    .Select
+                result.Select
                     .Append(
                         VisitNewInstanceExpression(
                             newInstanceExpression,
@@ -3744,8 +3736,7 @@ namespace System.Data.SqlClient.SqlGen
                 {
                     extents.Add(result.FromExtents[i]);
                 }
-                result
-                    .FromExtents
+                result.FromExtents
                     .RemoveRange(fromSymbolStart, result.FromExtents.Count - fromSymbolStart);
                 fromSymbol = new JoinSymbol(input.VariableName, input.VariableType, extents);
                 result.FromExtents.Add(fromSymbol);
@@ -5049,8 +5040,7 @@ namespace System.Data.SqlClient.SqlGen
             if (SqlVersionUtils.IsPreKatmai(sqlVersion))
             {
                 throw EntityUtil.NotSupported(
-                    System
-                        .Data
+                    System.Data
                         .Entity
                         .Strings
                         .SqlGen_PrimitiveTypeNotSupportedPriorSql10(primitiveTypeKind)
@@ -5067,8 +5057,7 @@ namespace System.Data.SqlClient.SqlGen
             if (this.IsPreKatmai)
             {
                 throw EntityUtil.NotSupported(
-                    System
-                        .Data
+                    System.Data
                         .Entity
                         .Strings
                         .SqlGen_CanonicalFunctionNotSupportedPriorSql10(e.Function.Name)

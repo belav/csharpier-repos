@@ -160,14 +160,12 @@ namespace System.ServiceModel.Discovery
                 {
                     try
                     {
-                        currentEndpointDiscoveryMetadata = this.discoveredEndpoints.Dequeue(
-                            timeoutHelper.RemainingTime()
-                        );
+                        currentEndpointDiscoveryMetadata = this.discoveredEndpoints
+                            .Dequeue(timeoutHelper.RemainingTime());
                     }
                     catch (TimeoutException te)
                     {
-                        throw FxTrace
-                            .Exception
+                        throw FxTrace.Exception
                             .AsError(
                                 new TimeoutException(
                                     SR.DiscoveryClientChannelOpenTimeout(
@@ -182,8 +180,7 @@ namespace System.ServiceModel.Discovery
                     {
                         if (this.totalDiscoveredEndpoints < 1)
                         {
-                            throw FxTrace
-                                .Exception
+                            throw FxTrace.Exception
                                 .AsError(
                                     new EndpointNotFoundException(
                                         SR.DiscoveryClientChannelEndpointNotFound,
@@ -193,8 +190,7 @@ namespace System.ServiceModel.Discovery
                         }
                         else
                         {
-                            throw FxTrace
-                                .Exception
+                            throw FxTrace.Exception
                                 .AsError(
                                     new EndpointNotFoundException(
                                         SR.DiscoveryClientChannelCreationFailed(
@@ -208,8 +204,7 @@ namespace System.ServiceModel.Discovery
 
                     if (timeoutHelper.RemainingTime() == TimeSpan.Zero)
                     {
-                        throw FxTrace
-                            .Exception
+                        throw FxTrace.Exception
                             .AsError(
                                 new TimeoutException(
                                     SR.DiscoveryClientChannelOpenTimeout(
@@ -281,8 +276,7 @@ namespace System.ServiceModel.Discovery
             }
             catch (TimeoutException timeoutException)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new TimeoutException(
                             SR.DiscoveryClientChannelOpenTimeout(timeoutHelper.OriginalTimeout),
@@ -325,11 +319,8 @@ namespace System.ServiceModel.Discovery
             {
                 if (!this.discoveryCompleted)
                 {
-                    this.discoveredEndpoints.EnqueueAndDispatch(
-                        e.EndpointDiscoveryMetadata,
-                        null,
-                        false
-                    );
+                    this.discoveredEndpoints
+                        .EnqueueAndDispatch(e.EndpointDiscoveryMetadata, null, false);
                     if (++this.totalDiscoveredEndpoints == this.totalExpectedEndpoints)
                     {
                         this.discoveryCompleted = true;
@@ -365,13 +356,12 @@ namespace System.ServiceModel.Discovery
 
         void InitializeAndFindAsync()
         {
-            DiscoveryEndpoint discoveryEndpoint =
-                this.discoveryEndpointProvider.GetDiscoveryEndpoint();
+            DiscoveryEndpoint discoveryEndpoint = this.discoveryEndpointProvider
+                .GetDiscoveryEndpoint();
 
             if (discoveryEndpoint == null)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new InvalidOperationException(
                             SR.DiscoveryMethodImplementationReturnsNull(
@@ -604,15 +594,14 @@ namespace System.ServiceModel.Discovery
                 {
                     dequeueStep = DiscoveryChannelBuilderAsyncResult.CallAsync(
                         (thisPtr, t, c, s) =>
-                            thisPtr
-                                .discoveryClientChannelBase
+                            thisPtr.discoveryClientChannelBase
                                 .discoveredEndpoints
                                 .BeginDequeue(thisPtr.RemainingTime(), c, s),
                         (thisPtr, r) =>
-                            thisPtr.currentEndpointDiscoveryMetadata = thisPtr
-                                .discoveryClientChannelBase
-                                .discoveredEndpoints
-                                .EndDequeue(r),
+                            thisPtr.currentEndpointDiscoveryMetadata =
+                                thisPtr.discoveryClientChannelBase
+                                    .discoveredEndpoints
+                                    .EndDequeue(r),
                         new IAsyncCatch[]
                         {
                             new DiscoveryChannelBuilderAsyncResult.AsyncCatch<TimeoutException>(
@@ -785,11 +774,12 @@ namespace System.ServiceModel.Discovery
 
                 if (this.innerChannel != null)
                 {
-                    IAsyncResult closeResult = this.innerChannel.BeginClose(
-                        timeout,
-                        PrepareAsyncCompletion(new AsyncCompletion(OnCloseCompleted)),
-                        this
-                    );
+                    IAsyncResult closeResult = this.innerChannel
+                        .BeginClose(
+                            timeout,
+                            PrepareAsyncCompletion(new AsyncCompletion(OnCloseCompleted)),
+                            this
+                        );
 
                     if (closeResult.CompletedSynchronously && OnCloseCompleted(closeResult))
                     {

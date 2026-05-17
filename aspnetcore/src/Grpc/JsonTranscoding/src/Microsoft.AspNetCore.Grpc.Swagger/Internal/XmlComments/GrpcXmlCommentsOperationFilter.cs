@@ -21,8 +21,7 @@ internal sealed class GrpcXmlCommentsOperationFilter : IOperationFilter
 
     public void Apply(OpenApiOperation operation, OperationFilterContext context)
     {
-        var grpcMetadata = context
-            .ApiDescription
+        var grpcMetadata = context.ApiDescription
             .ActionDescriptor
             .EndpointMetadata
             .OfType<GrpcMethodMetadata>()

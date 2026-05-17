@@ -63,8 +63,7 @@ namespace System.IdentityModel.Configuration
                 base.BaseGet(name) as IdentityConfigurationElement;
 
             if (
-                !StringComparer
-                    .Ordinal
+                !StringComparer.Ordinal
                     .Equals(name, ConfigurationStrings.DefaultConfigurationElementName)
                 && result == null
             )

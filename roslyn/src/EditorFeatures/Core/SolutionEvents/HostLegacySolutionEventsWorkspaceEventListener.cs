@@ -50,8 +50,7 @@ namespace Microsoft.CodeAnalysis.LegacySolutionEvents
             if (_globalOptions.GetOption(SolutionCrawlerRegistrationService.EnableSolutionCrawler))
             {
                 workspace.WorkspaceChanged += OnWorkspaceChanged;
-                _threadingContext
-                    .DisposalToken
+                _threadingContext.DisposalToken
                     .Register(() =>
                     {
                         workspace.WorkspaceChanged -= OnWorkspaceChanged;
@@ -99,8 +98,7 @@ namespace Microsoft.CodeAnalysis.LegacySolutionEvents
 
             if (client is null)
             {
-                var aggregationService = workspace
-                    .Services
+                var aggregationService = workspace.Services
                     .GetRequiredService<ILegacySolutionEventsAggregationService>();
                 var shouldReport = aggregationService.ShouldReportChanges(
                     workspace.Services.SolutionServices

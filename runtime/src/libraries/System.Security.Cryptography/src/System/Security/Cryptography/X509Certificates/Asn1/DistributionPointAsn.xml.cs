@@ -127,8 +127,7 @@ namespace System.Security.Cryptography.X509Certificates.Asn1
                     new Asn1Tag(TagClass.ContextSpecific, 0)
                 );
                 System.Security.Cryptography.X509Certificates.Asn1.DistributionPointNameAsn tmpDistributionPoint;
-                System
-                    .Security
+                System.Security
                     .Cryptography
                     .X509Certificates
                     .Asn1
@@ -169,8 +168,7 @@ namespace System.Security.Cryptography.X509Certificates.Asn1
 
                     while (collectionReader.HasData)
                     {
-                        System
-                            .Security
+                        System.Security
                             .Cryptography
                             .Asn1
                             .GeneralNameAsn

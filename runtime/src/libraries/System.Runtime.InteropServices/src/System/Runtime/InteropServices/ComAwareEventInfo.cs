@@ -111,8 +111,7 @@ namespace System.Runtime.InteropServices
             out int dispid
         )
         {
-            object[] comEventInterfaces = eventInfo
-                .DeclaringType!
+            object[] comEventInterfaces = eventInfo.DeclaringType!
                 .GetCustomAttributes(typeof(ComEventInterfaceAttribute), inherit: false);
 
             if (comEventInterfaces == null || comEventInterfaces.Length == 0)

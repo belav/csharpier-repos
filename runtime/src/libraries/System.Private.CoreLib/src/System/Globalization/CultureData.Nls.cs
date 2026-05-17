@@ -157,8 +157,7 @@ namespace System.Globalization
 
             unsafe
             {
-                Interop
-                    .Kernel32
+                Interop.Kernel32
                     .EnumSystemLocalesEx(
                         &EnumSystemLocalesProc,
                         Interop.Kernel32.LOCALE_SPECIFICDATA | Interop.Kernel32.LOCALE_SUPPLEMENTAL,
@@ -521,8 +520,7 @@ namespace System.Globalization
         {
             Debug.Assert(!GlobalizationMode.Invariant);
 
-            return Interop
-                .Kernel32
+            return Interop.Kernel32
                 .LocaleNameToLCID(cultureName, Interop.Kernel32.LOCALE_ALLOW_NEUTRAL_NAMES);
         }
 
@@ -580,8 +578,7 @@ namespace System.Globalization
 
             unsafe
             {
-                Interop
-                    .Kernel32
+                Interop.Kernel32
                     .EnumSystemLocalesEx(&EnumAllSystemLocalesProc, flags, &context, IntPtr.Zero);
             }
 
@@ -610,8 +607,7 @@ namespace System.Globalization
 
                 unsafe
                 {
-                    Interop
-                        .Kernel32
+                    Interop.Kernel32
                         .EnumSystemLocalesEx(
                             &EnumAllSystemLocalesProc,
                             Interop.Kernel32.LOCALE_REPLACEMENT,

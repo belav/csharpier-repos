@@ -195,8 +195,7 @@ namespace MonoTests.System.Web.DynamicData
             HttpContext.Current = ctx;
             MetaModel m = Utils.GetModel<MyDataContext2>();
 
-            RouteTable
-                .Routes
+            RouteTable.Routes
                 .Add(
                     new DynamicDataRoute("{table}/{action}.aspx")
                     {
@@ -344,8 +343,7 @@ namespace MonoTests.System.Web.DynamicData
             HttpContext.Current = ctx;
             MetaModel m = Utils.GetModel<MyDataContext2>();
 
-            RouteTable
-                .Routes
+            RouteTable.Routes
                 .Add(
                     new DynamicDataRoute("{table}/{action}.aspx")
                     {

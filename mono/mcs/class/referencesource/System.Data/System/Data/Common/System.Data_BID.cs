@@ -556,8 +556,7 @@ internal static partial class Bid
             && modID != NoData
         )
         {
-            System.Data.Common.ActivityCorrelator.ActivityId actId = System
-                .Data
+            System.Data.Common.ActivityCorrelator.ActivityId actId = System.Data
                 .Common
                 .ActivityCorrelator
                 .Next();
@@ -582,8 +581,7 @@ internal static partial class Bid
             && modID != NoData
         )
         {
-            System.Data.Common.ActivityCorrelator.ActivityId actId = System
-                .Data
+            System.Data.Common.ActivityCorrelator.ActivityId actId = System.Data
                 .Common
                 .ActivityCorrelator
                 .Next();
@@ -601,8 +599,7 @@ internal static partial class Bid
             && modID != NoData
         )
         {
-            System.Data.Common.ActivityCorrelator.ActivityId actId = System
-                .Data
+            System.Data.Common.ActivityCorrelator.ActivityId actId = System.Data
                 .Common
                 .ActivityCorrelator
                 .Next();

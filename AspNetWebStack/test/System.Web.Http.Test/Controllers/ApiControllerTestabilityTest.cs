@@ -57,8 +57,7 @@ namespace System.Web.Http.Controllers
             // Arrange
             CustomersController controller = new CustomersController();
             controller.Configuration = new HttpConfiguration();
-            controller
-                .Configuration
+            controller.Configuration
                 .Routes
                 .MapHttpRoute("default", "{controller}/{id}", new { id = RouteParameter.Optional });
             controller.RequestContext.RouteData = new HttpRouteData(

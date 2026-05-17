@@ -117,8 +117,7 @@ namespace System.Configuration
                 Configuration parentFile = GetParentWithFile();
                 if (parentFile != null)
                 {
-                    string parentRelativePath = system
-                        .Host
+                    string parentRelativePath = system.Host
                         .GetConfigPathFromLocationSubPath(configPath, relativePath);
                     parentConfig = parentFile.FindLocationConfiguration(
                         parentRelativePath,
@@ -247,8 +246,7 @@ namespace System.Configuration
             {
                 if (evaluationContext == null)
                 {
-                    object ctx = system
-                        .Host
+                    object ctx = system.Host
                         .CreateConfigurationContext(configPath, GetLocationSubPath());
                     evaluationContext = new ContextInformation(this, ctx);
                 }
@@ -417,8 +415,7 @@ namespace System.Configuration
                 );
 
             if (
-                !system
-                    .Host
+                !system.Host
                     .IsDefinitionAllowed(
                         configPath,
                         sec.SectionInformation.AllowDefinition,

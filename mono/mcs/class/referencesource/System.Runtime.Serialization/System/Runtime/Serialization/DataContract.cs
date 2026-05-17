@@ -118,8 +118,7 @@ namespace System.Runtime.Serialization
             dataContract = dataContract.GetValidContract(mode);
             if (dataContract is ClassDataContract)
             {
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -304,8 +303,7 @@ namespace System.Runtime.Serialization
             XmlObjectSerializerWriteContext context
         )
         {
-            throw System
-                .Runtime
+            throw System.Runtime
                 .Serialization
                 .DiagnosticUtility
                 .ExceptionUtility
@@ -325,8 +323,7 @@ namespace System.Runtime.Serialization
             XmlObjectSerializerReadContext context
         )
         {
-            throw System
-                .Runtime
+            throw System.Runtime
                 .Serialization
                 .DiagnosticUtility
                 .ExceptionUtility
@@ -626,8 +623,7 @@ namespace System.Runtime.Serialization
                 DataContract dataContract = dataContractCache[id];
                 if (dataContract == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new SerializationException(SR.GetString(SR.DataContractCacheOverflow))
                         );
@@ -655,8 +651,7 @@ namespace System.Runtime.Serialization
                         return i;
                     }
                 }
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new SerializationException(SR.GetString(SR.DataContractCacheOverflow))
                     );
@@ -690,8 +685,7 @@ namespace System.Runtime.Serialization
                             {
                                 throw;
                             }
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperFatal(ex.Message, ex);
                         }
                     }
@@ -709,8 +703,7 @@ namespace System.Runtime.Serialization
                     if (newSize <= value)
                     {
                         Fx.Assert("DataContract cache overflow");
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new SerializationException(
                                     SR.GetString(SR.DataContractCacheOverflow)
@@ -1249,8 +1242,7 @@ namespace System.Runtime.Serialization
                             {
                                 throw;
                             }
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperFatal(ex.Message, ex);
                         }
                     }
@@ -1291,15 +1283,13 @@ namespace System.Runtime.Serialization
                             {
                                 throw;
                             }
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperFatal(ex.Message, ex);
                         }
                     }
                 }
 
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -1569,8 +1559,7 @@ namespace System.Runtime.Serialization
                 itemType = itemTypeQueue.Dequeue();
                 if (previousCollectionTypes.ContainsKey(itemType))
                 {
-                    throw System
-                        .Runtime
+                    throw System.Runtime
                         .Serialization
                         .DiagnosticUtility
                         .ExceptionUtility
@@ -1728,8 +1717,7 @@ namespace System.Runtime.Serialization
             {
                 name = dataContractAttribute.Name;
                 if (name == null || name.Length == 0)
-                    throw System
-                        .Runtime
+                    throw System.Runtime
                         .Serialization
                         .DiagnosticUtility
                         .ExceptionUtility
@@ -1752,8 +1740,7 @@ namespace System.Runtime.Serialization
             {
                 ns = dataContractAttribute.Namespace;
                 if (ns == null)
-                    throw System
-                        .Runtime
+                    throw System.Runtime
                         .Serialization
                         .DiagnosticUtility
                         .ExceptionUtility
@@ -1868,8 +1855,7 @@ namespace System.Runtime.Serialization
             {
 #if DEBUG
                 if (dataContractAttributes.Length > 1)
-                    throw System
-                        .Runtime
+                    throw System.Runtime
                         .Serialization
                         .DiagnosticUtility
                         .ExceptionUtility
@@ -1919,8 +1905,7 @@ namespace System.Runtime.Serialization
             {
 #if DEBUG
                 if (collectionContractAttributes.Length > 1)
-                    throw System
-                        .Runtime
+                    throw System.Runtime
                         .Serialization
                         .DiagnosticUtility
                         .ExceptionUtility
@@ -1939,8 +1924,7 @@ namespace System.Runtime.Serialization
                 {
                     name = collectionContractAttribute.Name;
                     if (name == null || name.Length == 0)
-                        throw System
-                            .Runtime
+                        throw System.Runtime
                             .Serialization
                             .DiagnosticUtility
                             .ExceptionUtility
@@ -1963,8 +1947,7 @@ namespace System.Runtime.Serialization
                 {
                     ns = collectionContractAttribute.Namespace;
                     if (ns == null)
-                        throw System
-                            .Runtime
+                        throw System.Runtime
                             .Serialization
                             .DiagnosticUtility
                             .ExceptionUtility
@@ -2409,8 +2392,7 @@ namespace System.Runtime.Serialization
                 if (clrNsInAttribute == clrNs)
                 {
                     if (nsAttribute.ContractNamespace == null)
-                        throw System
-                            .Runtime
+                        throw System.Runtime
                             .Serialization
                             .DiagnosticUtility
                             .ExceptionUtility
@@ -2420,8 +2402,7 @@ namespace System.Runtime.Serialization
                                 )
                             );
                     if (dataContractNs != null)
-                        throw System
-                            .Runtime
+                        throw System.Runtime
                             .Serialization
                             .DiagnosticUtility
                             .ExceptionUtility
@@ -2501,8 +2482,7 @@ namespace System.Runtime.Serialization
                         if (format[i] == '}')
                             break;
                     if (i == format.Length)
-                        throw System
-                            .Runtime
+                        throw System.Runtime
                             .Serialization
                             .DiagnosticUtility
                             .ExceptionUtility
@@ -2542,8 +2522,7 @@ namespace System.Runtime.Serialization
                             || paramIndex < 0
                             || paramIndex >= genericNameProvider.GetParameterCount()
                         )
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
                                     new InvalidDataContractException(
                                         SR.GetString(
@@ -2869,8 +2848,7 @@ namespace System.Runtime.Serialization
                 {
                     if (t.IsGenericType && !IsOpenGenericType(t))
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new ArgumentException(
                                     SR.GetString(
@@ -2918,8 +2896,7 @@ namespace System.Runtime.Serialization
                     alreadyExistingContract.UnderlyingType
                     != DataContractCriticalHelper.GetDataContractAdapterType(type)
                 )
-                    throw System
-                        .Runtime
+                    throw System.Runtime
                         .Serialization
                         .DiagnosticUtility
                         .ExceptionUtility

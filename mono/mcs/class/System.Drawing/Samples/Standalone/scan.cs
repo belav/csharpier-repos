@@ -90,8 +90,7 @@ namespace Samples
                 region = new Region(path);
                 scans = region.GetRegionScans(Matrix);
 
-                infoLabel.Text = System
-                    .String
+                infoLabel.Text = System.String
                     .Format("{0} rectangles to re-create the shape.", scans.Length);
                 StringBuilder sb = new StringBuilder();
                 for (int i = 0; i < scans.Length; i++)

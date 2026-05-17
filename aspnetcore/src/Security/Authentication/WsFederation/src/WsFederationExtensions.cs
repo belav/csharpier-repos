@@ -65,8 +65,7 @@ public static class WsFederationExtensions
         Action<WsFederationOptions> configureOptions
     )
     {
-        builder
-            .Services
+        builder.Services
             .TryAddEnumerable(
                 ServiceDescriptor.Singleton<
                     IPostConfigureOptions<WsFederationOptions>,

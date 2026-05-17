@@ -228,8 +228,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
 
             if (symbol != null)
             {
-                result
-                    .Builder
+                result.Builder
                     .Append(symbol.ToDisplayString(SymbolDisplayFormat.ILVisualizationFormat));
             }
             else

@@ -426,8 +426,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             {
                 int rva;
                 MethodImplAttributes implFlags;
-                moduleSymbol
-                    .Module
+                moduleSymbol.Module
                     .GetMethodDefPropsOrThrow(
                         methodDef,
                         out _name,
@@ -1013,8 +1012,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             {
                 try
                 {
-                    return _containingType
-                        .ContainingPEModule
+                    return _containingType.ContainingPEModule
                         .Module
                         .GetMethodSignatureOrThrow(_handle);
                 }
@@ -1115,8 +1113,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                     )
                     {
                         var moduleSymbol = _containingType.ContainingPEModule;
-                        isExtensionMethod = moduleSymbol
-                            .Module
+                        isExtensionMethod = moduleSymbol.Module
                             .HasExtensionAttribute(_handle, ignoreCase: false);
                     }
                     _packedFlags.InitializeIsExtensionMethod(isExtensionMethod);
@@ -1244,8 +1241,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             byte? value;
             if (!_packedFlags.TryGetNullableContext(out value))
             {
-                value = _containingType
-                    .ContainingPEModule
+                value = _containingType.ContainingPEModule
                     .Module
                     .HasNullableContextAttribute(_handle, out byte arg)
                     ? arg
@@ -1804,8 +1800,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
         {
             if (!_packedFlags.IsConditionalPopulated)
             {
-                var result = _containingType
-                    .ContainingPEModule
+                var result = _containingType.ContainingPEModule
                     .Module
                     .GetConditionalAttributeValues(_handle);
                 Debug.Assert(!result.IsDefault);
@@ -1845,8 +1840,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                 Debug.Assert(MethodKind == MethodKind.Constructor);
                 if (!_packedFlags.HasSetsRequiredMembersPopulated)
                 {
-                    var result = _containingType
-                        .ContainingPEModule
+                    var result = _containingType.ContainingPEModule
                         .Module
                         .HasAttribute(_handle, AttributeDescription.SetsRequiredMembersAttribute);
                     _packedFlags.InitializeSetsRequiredMembersBit(result);
@@ -1913,8 +1907,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             if (!_packedFlags.IsUnmanagedCallersOnlyAttributePopulated)
             {
                 var containingModule = (PEModuleSymbol)ContainingModule;
-                var unmanagedCallersOnlyData = containingModule
-                    .Module
+                var unmanagedCallersOnlyData = containingModule.Module
                     .TryGetUnmanagedCallersOnlyAttribute(
                         _handle,
                         new MetadataDecoder(containingModule),
@@ -2043,8 +2036,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
 
         internal override bool HasAsyncMethodBuilderAttribute(out TypeSymbol builderArgument)
         {
-            builderArgument = _containingType
-                .ContainingPEModule
+            builderArgument = _containingType.ContainingPEModule
                 .TryDecodeAttributeWithTypeArgument(
                     this.Handle,
                     AttributeDescription.AsyncMethodBuilderAttribute

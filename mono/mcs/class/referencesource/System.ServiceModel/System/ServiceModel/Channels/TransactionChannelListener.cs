@@ -43,8 +43,7 @@ namespace System.ServiceModel.Channels
             set
             {
                 if (!TransactionProtocol.IsDefined(value))
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentException(SR.GetString(SR.SFxBadTransactionProtocols))
                         );
@@ -159,8 +158,7 @@ namespace System.ServiceModel.Channels
                 }
                 else
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             listener.CreateChannelTypeNotSupportedException(typeof(TChannel))
                         );
@@ -270,8 +268,7 @@ namespace System.ServiceModel.Channels
         {
             if (this.innerContext == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ObjectDisposedException(this.GetType().FullName));
             }
 
@@ -304,8 +301,7 @@ namespace System.ServiceModel.Channels
         {
             if (this.innerContext == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ObjectDisposedException(this.GetType().FullName));
             }
 
@@ -316,8 +312,7 @@ namespace System.ServiceModel.Channels
         {
             if (this.innerContext == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ObjectDisposedException(this.GetType().FullName));
             }
 
@@ -501,11 +496,8 @@ namespace System.ServiceModel.Channels
                 callback,
                 state
             );
-            result.InnerResult = this.InnerChannel.BeginTryReceiveRequest(
-                timeout,
-                result.InnerCallback,
-                result.InnerState
-            );
+            result.InnerResult = this.InnerChannel
+                .BeginTryReceiveRequest(timeout, result.InnerCallback, result.InnerState);
             return result;
         }
 
@@ -561,8 +553,7 @@ namespace System.ServiceModel.Channels
 
             ReceiveTimeoutAsyncResult result = asyncResult as ReceiveTimeoutAsyncResult;
             if (result == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentException(SR.GetString(SR.AsyncEndCalledWithAnIAsyncResult))
                     );
@@ -684,8 +675,7 @@ namespace System.ServiceModel.Channels
                 );
 
                 System.ServiceModel.Channels.RequestReplyCorrelator.AddressReply(reply, message);
-                System
-                    .ServiceModel
+                System.ServiceModel
                     .Channels
                     .RequestReplyCorrelator
                     .PrepareReply(reply, message.Headers.MessageId);
@@ -800,8 +790,7 @@ namespace System.ServiceModel.Channels
                 }
                 else if (this.innerResult != value)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(SR.SFxAsyncResultsDontMatch0)

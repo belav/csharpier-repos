@@ -1421,10 +1421,8 @@ namespace System.Data.Linq.Mapping
                     : (DataAttribute)this.attrAssoc;
             if (this.attr != null && this.attr.Storage != null)
             {
-                MemberInfo[] mis = mi.DeclaringType.GetMember(
-                    this.attr.Storage,
-                    BindingFlags.Instance | BindingFlags.NonPublic
-                );
+                MemberInfo[] mis = mi.DeclaringType
+                    .GetMember(this.attr.Storage, BindingFlags.Instance | BindingFlags.NonPublic);
                 if (mis == null || mis.Length != 1)
                 {
                     throw Error.BadStorageProperty(this.attr.Storage, mi.DeclaringType, mi.Name);

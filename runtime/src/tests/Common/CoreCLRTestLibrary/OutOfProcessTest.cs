@@ -53,8 +53,7 @@ namespace TestLibrary
         {
             int ret = -100;
             string baseDir = AppContext.BaseDirectory;
-            string outputDir = System
-                .IO
+            string outputDir = System.IO
                 .Path
                 .GetFullPath(Path.Combine(reportBase, Path.GetDirectoryName(assemblyPath)));
             string outputFile = Path.Combine(outputDir, "output.txt");

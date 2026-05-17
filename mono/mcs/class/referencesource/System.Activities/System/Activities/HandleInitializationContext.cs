@@ -107,8 +107,7 @@ namespace System.Activities
         {
             if (this.isDiposed)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(new ObjectDisposedException(SR.HandleInitializationContextDisposed));
             }
         }

@@ -176,8 +176,7 @@ namespace System.ServiceModel.Dispatcher
                         Collection<MessageFilter> matches = new Collection<MessageFilter>();
                         matches.Add(pair.filter);
                         matches.Add(pairs[i].filter);
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new MultipleFilterMatchesException(
                                     SR.GetString(SR.FilterMultipleMatches),

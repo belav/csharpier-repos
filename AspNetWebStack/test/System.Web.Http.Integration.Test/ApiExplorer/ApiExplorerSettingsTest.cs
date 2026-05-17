@@ -29,8 +29,7 @@ namespace System.Web.Http.ApiExplorer
         )
         {
             HttpConfiguration config = new HttpConfiguration();
-            config
-                .Routes
+            config.Routes
                 .MapHttpRoute("Default", "{controller}/{id}", new { id = RouteParameter.Optional });
 
             DefaultHttpControllerSelector controllerSelector =
@@ -69,8 +68,7 @@ namespace System.Web.Http.ApiExplorer
         )
         {
             HttpConfiguration config = new HttpConfiguration();
-            config
-                .Routes
+            config.Routes
                 .MapHttpRoute("Default", "{controller}/{id}", new { id = RouteParameter.Optional });
 
             DefaultHttpControllerSelector controllerSelector =

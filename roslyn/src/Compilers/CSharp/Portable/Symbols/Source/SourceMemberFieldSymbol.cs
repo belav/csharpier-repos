@@ -151,9 +151,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             {
                 AddSynthesizedAttribute(
                     ref attributes,
-                    this.DeclaringCompilation.TrySynthesizeAttribute(
-                        WellKnownMember.System_Runtime_CompilerServices_RequiredMemberAttribute__ctor
-                    )
+                    this.DeclaringCompilation
+                        .TrySynthesizeAttribute(
+                            WellKnownMember.System_Runtime_CompilerServices_RequiredMemberAttribute__ctor
+                        )
                 );
             }
         }
@@ -265,8 +266,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 foreach (var modifier in modifiers)
                 {
                     if (modifier.IsKind(SyntaxKind.FixedKeyword))
-                        MessageID
-                            .IDS_FeatureFixedBuffer
+                        MessageID.IDS_FeatureFixedBuffer
                             .CheckFeatureAvailability(diagnostics, modifier);
                 }
 
@@ -652,9 +652,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 EventSymbol @event = (EventSymbol)associatedPropertyOrEvent;
                 if (@event.IsWindowsRuntimeEvent)
                 {
-                    NamedTypeSymbol tokenTableType = this.DeclaringCompilation.GetWellKnownType(
-                        WellKnownType.System_Runtime_InteropServices_WindowsRuntime_EventRegistrationTokenTable_T
-                    );
+                    NamedTypeSymbol tokenTableType = this.DeclaringCompilation
+                        .GetWellKnownType(
+                            WellKnownType.System_Runtime_InteropServices_WindowsRuntime_EventRegistrationTokenTable_T
+                        );
                     Binder.ReportUseSite(
                         tokenTableType,
                         diagnosticsForFirstDeclarator,
@@ -688,8 +689,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     type = binder.BindType(typeOnly, diagnosticsForFirstDeclarator);
                     if (refKind != RefKind.None)
                     {
-                        MessageID
-                            .IDS_FeatureRefFields
+                        MessageID.IDS_FeatureRefFields
                             .CheckFeatureAvailability(
                                 diagnostics,
                                 compilation,

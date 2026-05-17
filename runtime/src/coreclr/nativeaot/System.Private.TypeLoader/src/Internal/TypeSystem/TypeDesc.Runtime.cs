@@ -86,8 +86,7 @@ namespace Internal.TypeSystem
                         RuntimeTypeHandle rtth;
                         if (
                             argumentsRegistered
-                            && TypeLoaderEnvironment
-                                .Instance
+                            && TypeLoaderEnvironment.Instance
                                 .TryLookupConstructedGenericTypeForComponents(
                                     new TypeLoaderEnvironment.GenericTypeLookupData(typeAsDefType),
                                     out rtth
@@ -168,8 +167,7 @@ namespace Internal.TypeSystem
 
                     if (
                         handlesAvailable
-                        && TypeLoaderEnvironment
-                            .Instance
+                        && TypeLoaderEnvironment.Instance
                             .TryLookupFunctionPointerTypeForComponents(
                                 sig.ReturnType.RuntimeTypeHandle,
                                 parameterHandles,

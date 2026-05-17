@@ -23,8 +23,7 @@ public class JsonPatchDocumentJObjectTest
         };
         var patch = new JsonPatchDocument<ObjectWithJObject>();
 
-        patch
-            .Operations
+        patch.Operations
             .Add(
                 new Operation<ObjectWithJObject>("add", "/CustomData/Emails/-", null, "foo@baz.com")
             );
@@ -46,13 +45,11 @@ public class JsonPatchDocumentJObjectTest
         };
         var patch = new JsonPatchDocument<ObjectWithJObject>();
 
-        patch
-            .Operations
+        patch.Operations
             .Add(
                 new Operation<ObjectWithJObject>("test", "/CustomData/Email", null, "foo@baz.com")
             );
-        patch
-            .Operations
+        patch.Operations
             .Add(new Operation<ObjectWithJObject>("add", "/CustomData/Name", null, "Bar Baz"));
 
         // Act & Assert
@@ -69,13 +66,11 @@ public class JsonPatchDocumentJObjectTest
         };
         var patch = new JsonPatchDocument<ObjectWithJObject>();
 
-        patch
-            .Operations
+        patch.Operations
             .Add(
                 new Operation<ObjectWithJObject>("test", "/CustomData/Email", null, "foo@bar.com")
             );
-        patch
-            .Operations
+        patch.Operations
             .Add(new Operation<ObjectWithJObject>("add", "/CustomData/Name", null, "Bar Baz"));
 
         // Act
@@ -95,8 +90,7 @@ public class JsonPatchDocumentJObjectTest
         };
         var patch = new JsonPatchDocument<ObjectWithJObject>();
 
-        patch
-            .Operations
+        patch.Operations
             .Add(
                 new Operation<ObjectWithJObject>(
                     "copy",
@@ -122,8 +116,7 @@ public class JsonPatchDocumentJObjectTest
         };
         var patch = new JsonPatchDocument<ObjectWithJObject>();
 
-        patch
-            .Operations
+        patch.Operations
             .Add(new Operation<ObjectWithJObject>("remove", "/CustomData/LastName", null));
 
         // Act
@@ -143,8 +136,7 @@ public class JsonPatchDocumentJObjectTest
         };
         var patch = new JsonPatchDocument<ObjectWithJObject>();
 
-        patch
-            .Operations
+        patch.Operations
             .Add(
                 new Operation<ObjectWithJObject>(
                     "move",
@@ -168,8 +160,7 @@ public class JsonPatchDocumentJObjectTest
         var model = new ObjectWithJObject();
         var patch = new JsonPatchDocument<ObjectWithJObject>();
 
-        patch
-            .Operations
+        patch.Operations
             .Add(new Operation<ObjectWithJObject>("add", "/CustomData/Name", null, "Foo"));
 
         // Act
@@ -186,8 +177,7 @@ public class JsonPatchDocumentJObjectTest
         var model = new ObjectWithJObject();
         var patch = new JsonPatchDocument<ObjectWithJObject>();
 
-        patch
-            .Operations
+        patch.Operations
             .Add(new Operation<ObjectWithJObject>("add", "/CustomData/Name", null, null));
 
         // Act
@@ -207,8 +197,7 @@ public class JsonPatchDocumentJObjectTest
         };
         var patch = new JsonPatchDocument<ObjectWithJObject>();
 
-        patch
-            .Operations
+        patch.Operations
             .Add(
                 new Operation<ObjectWithJObject>(
                     "replace",
@@ -235,8 +224,7 @@ public class JsonPatchDocumentJObjectTest
         };
         var patch = new JsonPatchDocument<ObjectWithJObject>();
 
-        patch
-            .Operations
+        patch.Operations
             .Add(new Operation<ObjectWithJObject>("replace", "/CustomData/Email", null, null));
 
         // Act

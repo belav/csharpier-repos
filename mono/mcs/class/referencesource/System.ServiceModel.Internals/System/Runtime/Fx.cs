@@ -484,12 +484,13 @@ namespace System.Runtime
             catch (OutOfMemoryException exception)
             {
                 // Convert OOM into an exception that can be safely handled by higher layers.
-                throw Fx.Exception.AsError(
-                    new InsufficientMemoryException(
-                        InternalSR.BufferAllocationFailed(size),
-                        exception
-                    )
-                );
+                throw Fx.Exception
+                    .AsError(
+                        new InsufficientMemoryException(
+                            InternalSR.BufferAllocationFailed(size),
+                            exception
+                        )
+                    );
             }
         }
 
@@ -503,12 +504,13 @@ namespace System.Runtime
             catch (OutOfMemoryException exception)
             {
                 // Convert OOM into an exception that can be safely handled by higher layers.
-                throw Fx.Exception.AsError(
-                    new InsufficientMemoryException(
-                        InternalSR.BufferAllocationFailed(size * sizeof(char)),
-                        exception
-                    )
-                );
+                throw Fx.Exception
+                    .AsError(
+                        new InsufficientMemoryException(
+                            InternalSR.BufferAllocationFailed(size * sizeof(char)),
+                            exception
+                        )
+                    );
             }
         }
 

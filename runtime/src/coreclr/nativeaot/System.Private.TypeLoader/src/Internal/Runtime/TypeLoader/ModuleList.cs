@@ -156,8 +156,7 @@ namespace Internal.Runtime.TypeLoader
 
             if (
                 !preferredModuleHandle.IsNull
-                && !moduleMap
-                    .HandleToModuleIndex
+                && !moduleMap.HandleToModuleIndex
                     .TryGetValue(preferredModuleHandle, out _preferredIndex)
             )
             {
@@ -293,8 +292,7 @@ namespace Internal.Runtime.TypeLoader
 
             if (
                 !preferredModuleHandle.IsNull
-                && !moduleMap
-                    .HandleToModuleIndex
+                && !moduleMap.HandleToModuleIndex
                     .TryGetValue(preferredModuleHandle, out _preferredIndex)
             )
             {
@@ -552,15 +550,13 @@ namespace Internal.Runtime.TypeLoader
         {
             if (methodSignature.IsNativeLayoutSignature)
             {
-                return ModuleList
-                    .Instance
+                return ModuleList.Instance
                     .GetModuleInfoByHandle(new TypeManagerHandle(methodSignature.ModuleHandle));
             }
             else
             {
                 ModuleInfo moduleInfo;
-                bool success = ModuleList
-                    .Instance
+                bool success = ModuleList.Instance
                     .TryGetModuleInfoByHandle(
                         new TypeManagerHandle(methodSignature.ModuleHandle),
                         out moduleInfo

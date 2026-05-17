@@ -62,8 +62,7 @@ public sealed class SingleDimensionalArrayComparer<TElement> : ValueComparer<TEl
                             Call(
                                 EnumerableMethods.All.MakeGenericMethod(typeof(bool)),
                                 Call(
-                                    EnumerableMethods
-                                        .ZipWithSelector
+                                    EnumerableMethods.ZipWithSelector
                                         .MakeGenericMethod(
                                             typeof(TElement),
                                             typeof(TElement),
@@ -114,8 +113,7 @@ public sealed class SingleDimensionalArrayComparer<TElement> : ValueComparer<TEl
 
         return Lambda<Func<TElement[], int>>(
             Call(
-                EnumerableMethods
-                    .AggregateWithSeedSelector
+                EnumerableMethods.AggregateWithSeedSelector
                     .MakeGenericMethod(elementType, typeof(HashCode), typeof(int)),
                 param,
                 New(typeof(HashCode)),

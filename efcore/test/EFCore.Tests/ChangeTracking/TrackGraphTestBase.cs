@@ -17,8 +17,7 @@ public abstract class TrackGraphTestBase
         {
             var traversal = new List<string>();
 
-            context
-                .ChangeTracker
+            context.ChangeTracker
                 .TrackGraph(
                     root,
                     node =>
@@ -128,8 +127,7 @@ public abstract class TrackGraphTestBase
         {
             var traversal = new List<string>();
 
-            context
-                .ChangeTracker
+            context.ChangeTracker
                 .TrackGraph<EntityState>(
                     root,
                     default,
@@ -1090,8 +1088,7 @@ public abstract class TrackGraphTestBase
         var visited = new HashSet<object>();
         var traversal = new List<string>();
 
-        context
-            .ChangeTracker
+        context.ChangeTracker
             .TrackGraph(
                 category,
                 visited,
@@ -1291,8 +1288,7 @@ public abstract class TrackGraphTestBase
     [ConditionalFact]
     public void TrackGraph_does_not_call_DetectChanges()
     {
-        var provider = InMemoryTestHelpers
-            .Instance
+        var provider = InMemoryTestHelpers.Instance
             .CreateServiceProvider(
                 new ServiceCollection().AddScoped<IChangeDetector, ChangeDetectorProxy>()
             );
@@ -1301,8 +1297,7 @@ public abstract class TrackGraphTestBase
 
         changeDetector.DetectChangesCalled = false;
 
-        context
-            .ChangeTracker
+        context.ChangeTracker
             .TrackGraph(CreateSimpleGraph(2), e => e.Entry.State = EntityState.Unchanged);
 
         Assert.False(changeDetector.DetectChangesCalled);
@@ -1347,8 +1342,7 @@ public abstract class TrackGraphTestBase
         var visited = new HashSet<object>();
         var traversal = new List<string>();
 
-        context
-            .ChangeTracker
+        context.ChangeTracker
             .TrackGraph(
                 category,
                 visited,

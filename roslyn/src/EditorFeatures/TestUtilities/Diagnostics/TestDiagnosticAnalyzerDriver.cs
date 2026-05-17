@@ -78,8 +78,7 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
                     _includeNonLocalDocumentDiagnostics,
                     CancellationToken.None
                 );
-                documentDiagnostics = await CodeAnalysis
-                    .Diagnostics
+                documentDiagnostics = await CodeAnalysis.Diagnostics
                     .Extensions
                     .ToDiagnosticsAsync(
                         filterSpan is null
@@ -106,8 +105,7 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
                     _includeNonLocalDocumentDiagnostics,
                     CancellationToken.None
                 );
-                projectDiagnostics = await CodeAnalysis
-                    .Diagnostics
+                projectDiagnostics = await CodeAnalysis.Diagnostics
                     .Extensions
                     .ToDiagnosticsAsync(
                         dxs.Where(d => d.DocumentId is null),

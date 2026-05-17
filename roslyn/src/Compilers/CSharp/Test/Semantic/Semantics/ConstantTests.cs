@@ -3136,16 +3136,14 @@ class c1
                     .WithArguments("300", "byte")
             );
 
-            var symbol = compilation
-                .GlobalNamespace
+            var symbol = compilation.GlobalNamespace
                 .GetTypeMembers("c1")
                 .First()
                 .GetMembers("Z1")
                 .First();
             Assert.False(((FieldSymbol)symbol).HasConstantValue);
 
-            symbol = compilation
-                .GlobalNamespace
+            symbol = compilation.GlobalNamespace
                 .GetTypeMembers("c1")
                 .First()
                 .GetMembers("Z2")

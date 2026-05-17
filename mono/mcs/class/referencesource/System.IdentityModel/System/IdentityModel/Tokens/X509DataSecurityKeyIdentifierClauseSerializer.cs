@@ -51,8 +51,7 @@ namespace System.IdentityModel.Tokens
         {
             if (securityKeyIdentifierClause == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("securityKeyIdentifierClause");
             }
 
@@ -156,8 +155,7 @@ namespace System.IdentityModel.Tokens
 
             if (securityKeyIdentifierClause == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("securityKeyIdentifierClause");
             }
 
@@ -259,8 +257,7 @@ namespace System.IdentityModel.Tokens
                 return;
             }
 
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperArgument(
                     "securityKeyIdentifierClause",
                     SR.GetString(SR.ID4259, securityKeyIdentifierClause.GetType())

@@ -83,14 +83,12 @@ namespace Microsoft.CodeAnalysis.ColorSchemes
                 _colorSchemes = colorSchemes.ToImmutableDictionary(
                     nameAndScheme => nameAndScheme.Key,
                     nameAndScheme =>
-                        nameAndScheme
-                            .Value
+                        nameAndScheme.Value
                             .Themes
                             .ToImmutableDictionary(
                                 theme => theme.Guid,
                                 theme =>
-                                    theme
-                                        .Category
+                                    theme.Category
                                         .Colors
                                         .Where(color => color.Foreground.HasValue)
                                         .ToImmutableDictionary(
@@ -101,12 +99,10 @@ namespace Microsoft.CodeAnalysis.ColorSchemes
                 );
 
                 // Gather all the classifications from the core and scheme dictionaries.
-                var coreClassifications = DarkThemeForeground
-                    .Keys
+                var coreClassifications = DarkThemeForeground.Keys
                     .Concat(BlueLightThemeForeground.Keys)
                     .Distinct();
-                var colorSchemeClassifications = _colorSchemes
-                    .Values
+                var colorSchemeClassifications = _colorSchemes.Values
                     .SelectMany(scheme => scheme.Values.SelectMany(theme => theme.Keys))
                     .Distinct();
                 _classifications = coreClassifications
@@ -138,8 +134,7 @@ namespace Microsoft.CodeAnalysis.ColorSchemes
                     .GetValueAsync(cancellationToken)
                     .ConfigureAwait(true);
 
-                await _threadingContext
-                    .JoinableTaskFactory
+                await _threadingContext.JoinableTaskFactory
                     .SwitchToMainThreadAsync(cancellationToken);
                 var fontAndColorUtilities = (IVsFontAndColorUtilities)fontAndColorStorage;
 

@@ -59,8 +59,7 @@ namespace System.Net.Security
             AllowTlsResume = sslClientAuthenticationOptions.AllowTlsResume;
             ApplicationProtocols = sslClientAuthenticationOptions.ApplicationProtocols;
             CheckCertName = !(
-                sslClientAuthenticationOptions
-                    .CertificateChainPolicy
+                sslClientAuthenticationOptions.CertificateChainPolicy
                     ?.VerificationFlags
                     .HasFlag(X509VerificationFlags.IgnoreInvalidName) == true
             );
@@ -81,8 +80,7 @@ namespace System.Net.Security
 
             if (sslClientAuthenticationOptions.CertificateChainPolicy != null)
             {
-                CertificateChainPolicy = sslClientAuthenticationOptions
-                    .CertificateChainPolicy
+                CertificateChainPolicy = sslClientAuthenticationOptions.CertificateChainPolicy
                     .Clone();
             }
         }
@@ -203,8 +201,7 @@ namespace System.Net.Security
 
             if (sslServerAuthenticationOptions.CertificateChainPolicy != null)
             {
-                CertificateChainPolicy = sslServerAuthenticationOptions
-                    .CertificateChainPolicy
+                CertificateChainPolicy = sslServerAuthenticationOptions.CertificateChainPolicy
                     .Clone();
             }
         }

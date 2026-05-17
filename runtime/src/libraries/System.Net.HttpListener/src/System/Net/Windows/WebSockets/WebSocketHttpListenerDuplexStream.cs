@@ -258,8 +258,7 @@ namespace System.Net.WebSockets
 
                 uint flags = 0;
                 uint bytesReturned = 0;
-                uint statusCode = Interop
-                    .HttpApi
+                uint statusCode = Interop.HttpApi
                     .HttpReceiveRequestEntityBody(
                         _inputStream.InternalHttpContext.RequestQueueHandle,
                         _inputStream.InternalHttpContext.RequestId,
@@ -523,8 +522,7 @@ namespace System.Net.WebSockets
                 }
 
                 uint bytesSent;
-                statusCode = Interop
-                    .HttpApi
+                statusCode = Interop.HttpApi
                     .HttpSendResponseEntityBody(
                         _outputStream.InternalHttpContext.RequestQueueHandle,
                         _outputStream.InternalHttpContext.RequestId,
@@ -1089,13 +1087,11 @@ namespace System.Net.WebSockets
                     _dataChunks = new Interop.HttpApi.HTTP_DATA_CHUNK[2];
                     _dataChunksGCHandle = GCHandle.Alloc(_dataChunks, GCHandleType.Pinned);
                     _dataChunks[0] = default;
-                    _dataChunks[0].DataChunkType = Interop
-                        .HttpApi
+                    _dataChunks[0].DataChunkType = Interop.HttpApi
                         .HTTP_DATA_CHUNK_TYPE
                         .HttpDataChunkFromMemory;
                     _dataChunks[1] = default;
-                    _dataChunks[1].DataChunkType = Interop
-                        .HttpApi
+                    _dataChunks[1].DataChunkType = Interop.HttpApi
                         .HTTP_DATA_CHUNK_TYPE
                         .HttpDataChunkFromMemory;
                 }
@@ -1164,8 +1160,7 @@ namespace System.Net.WebSockets
                 else
                 {
                     _dataChunks![index].pBuffer = (byte*)
-                        _webSocket
-                            .InternalBuffer
+                        _webSocket.InternalBuffer
                             .ConvertPinnedSendPayloadToNative(buffer, offset, count);
                 }
 

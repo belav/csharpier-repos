@@ -307,8 +307,7 @@ namespace System.Diagnostics
             IntPtr result;
             unsafe
             {
-                return Interop
-                        .User32
+                return Interop.User32
                         .SendMessageTimeout(
                             mainWindow,
                             WM_NULL,
@@ -393,8 +392,7 @@ namespace System.Diagnostics
                     Interop.NtDll.PROCESS_BASIC_INFORMATION info;
 
                     if (
-                        Interop
-                            .NtDll
+                        Interop.NtDll
                             .NtQueryInformationProcess(
                                 handle,
                                 Interop.NtDll.ProcessBasicInformation,

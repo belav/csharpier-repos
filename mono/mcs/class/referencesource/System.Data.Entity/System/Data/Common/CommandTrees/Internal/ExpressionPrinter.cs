@@ -285,10 +285,8 @@ namespace System.Data.Common.CommandTrees.Internal
 
                 AppendParameters(
                     funcInfo,
-                    func.Parameters.Select(fp => new KeyValuePair<string, TypeUsage>(
-                        fp.Name,
-                        fp.TypeUsage
-                    ))
+                    func.Parameters
+                        .Select(fp => new KeyValuePair<string, TypeUsage>(fp.Name, fp.TypeUsage))
                 );
                 if (args != null)
                 {
@@ -460,8 +458,7 @@ namespace System.Data.Common.CommandTrees.Internal
                 TreeNode inputInfo = this.VisitExpression(groupBinding.Expression);
                 TreeNode retInfo = new TreeNode();
                 retInfo.Children.Add(inputInfo);
-                retInfo
-                    .Text
+                retInfo.Text
                     .AppendFormat(
                         CultureInfo.InvariantCulture,
                         "Input : '{0}', '{1}'",
@@ -532,8 +529,7 @@ namespace System.Data.Common.CommandTrees.Internal
             public override TreeNode Visit(DbExpression e)
             {
                 throw EntityUtil.NotSupported(
-                    System
-                        .Data
+                    System.Data
                         .Entity
                         .Strings
                         .Cqt_General_UnsupportedExpression(e.GetType().FullName)
@@ -600,8 +596,7 @@ namespace System.Data.Common.CommandTrees.Internal
 
                 AppendParameters(
                     lambdaInfo,
-                    expression
-                        .Lambda
+                    expression.Lambda
                         .Variables
                         .Select(v => new KeyValuePair<string, TypeUsage>(
                             v.VariableName,
@@ -855,8 +850,7 @@ namespace System.Data.Common.CommandTrees.Internal
                     IList<EdmProperty> properties = TypeHelpers.GetProperties(e.ResultType);
                     for (int idx = 0; idx < properties.Count; idx++)
                     {
-                        retInfo
-                            .Children
+                        retInfo.Children
                             .Add(
                                 this.VisitWithLabel(
                                     description,
@@ -878,8 +872,7 @@ namespace System.Data.Common.CommandTrees.Internal
                                 relatedRef.SourceEnd,
                                 relatedRef.TargetEnd
                             );
-                            refNode
-                                .Children
+                            refNode.Children
                                 .Add(
                                     CreateRelationshipNode(
                                         (RelationshipType)relatedRef.SourceEnd.DeclaringType

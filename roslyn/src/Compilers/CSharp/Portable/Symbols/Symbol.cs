@@ -517,8 +517,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 if (location.SourceSpan.Length != 0)
                 {
-                    SyntaxToken token = location
-                        .SourceTree
+                    SyntaxToken token = location.SourceTree
                         .GetRoot()
                         .FindToken(location.SourceSpan.Start);
                     if (token.Kind() != SyntaxKind.None)
@@ -967,11 +966,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             var declaringReferences = this.DeclaringSyntaxReferences;
             if (this.IsImplicitlyDeclared && declaringReferences.Length == 0)
             {
-                return this.ContainingSymbol.IsDefinedInSourceTree(
-                    tree,
-                    definedWithinSpan,
-                    cancellationToken
-                );
+                return this.ContainingSymbol
+                    .IsDefinedInSourceTree(tree, definedWithinSpan, cancellationToken);
             }
 
             foreach (var syntaxRef in declaringReferences)
@@ -1060,15 +1056,15 @@ namespace Microsoft.CodeAnalysis.CSharp
 
 #nullable disable
 
-        private static readonly SymbolDisplayFormat s_debuggerDisplayFormat = SymbolDisplayFormat
-            .TestFormat
-            .AddMiscellaneousOptions(
-                SymbolDisplayMiscellaneousOptions.IncludeNullableReferenceTypeModifier
-                    | SymbolDisplayMiscellaneousOptions.IncludeNotNullableReferenceTypeModifier
-            )
-            .WithCompilerInternalOptions(
-                SymbolDisplayCompilerInternalOptions.IncludeContainingFileForFileTypes
-            );
+        private static readonly SymbolDisplayFormat s_debuggerDisplayFormat =
+            SymbolDisplayFormat.TestFormat
+                .AddMiscellaneousOptions(
+                    SymbolDisplayMiscellaneousOptions.IncludeNullableReferenceTypeModifier
+                        | SymbolDisplayMiscellaneousOptions.IncludeNotNullableReferenceTypeModifier
+                )
+                .WithCompilerInternalOptions(
+                    SymbolDisplayCompilerInternalOptions.IncludeContainingFileForFileTypes
+                );
 
         internal virtual string GetDebuggerDisplay()
         {
@@ -1526,8 +1522,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             foreach (var modifier in modifiers)
             {
                 if (
-                    ((CSharpCustomModifier)modifier)
-                        .ModifierSymbol
+                    ((CSharpCustomModifier)modifier).ModifierSymbol
                         .GetUnificationUseSiteDiagnosticRecursive(
                             ref result,
                             owner,
@@ -1552,8 +1547,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             foreach (var parameter in parameters)
             {
                 if (
-                    parameter
-                        .TypeWithAnnotations
+                    parameter.TypeWithAnnotations
                         .GetUnificationUseSiteDiagnosticRecursive(
                             ref result,
                             owner,

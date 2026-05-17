@@ -812,8 +812,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                     coord[2 * i + 1] = pointNew.Y;
                 }
 
-                common
-                    .HotRegionsList
+                common.HotRegionsList
                     .AddHotRegion(mapAreaPath, false, coord, point, series.Name, pointIndex);
             }
             //Clean up
@@ -2244,14 +2243,15 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                 points3D[1],
                 points3D[2]
             );
-            Color polygonColor = area.matrix3D.GetPolygonLight(
-                points3D,
-                backColor,
-                topIsVisible,
-                area.Area3DStyle.Rotation,
-                SurfaceNames.Front,
-                area.ReverseSeriesOrder
-            );
+            Color polygonColor = area.matrix3D
+                .GetPolygonLight(
+                    points3D,
+                    backColor,
+                    topIsVisible,
+                    area.Area3DStyle.Rotation,
+                    SurfaceNames.Front,
+                    area.ReverseSeriesOrder
+                );
             Color surfaceBorderColor = borderColor;
             if (surfaceBorderColor == Color.Empty)
             {

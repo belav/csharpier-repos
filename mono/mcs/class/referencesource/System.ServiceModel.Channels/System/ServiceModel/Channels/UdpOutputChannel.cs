@@ -171,8 +171,7 @@ namespace System.ServiceModel.Channels
                 if (this.retransmitSettings.Enabled == true)
                 {
                     // we should only get here if some channel above us starts producing messages that don't match the encoder's message version.
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(
                             new ProtocolException(
                                 SR.RetransmissionRequiresAddressingOnMessage(
@@ -232,8 +231,7 @@ namespace System.ServiceModel.Channels
 
             if (timeoutHelper.RemainingTime() <= TimeSpan.Zero)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(new TimeoutException(SR.SendTimedOut(remoteEndPoint, timeout)));
             }
 
@@ -413,8 +411,7 @@ namespace System.ServiceModel.Channels
                 {
                     // someone is sending a message with the same MessageId
                     // while a retransmission is still in progress for that ID.
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(
                             new InvalidOperationException(
                                 SR.RecycledMessageIdDuringRetransmission(messageId)
@@ -480,8 +477,7 @@ namespace System.ServiceModel.Channels
             {
                 if (timeoutHelper.RemainingTime() <= TimeSpan.Zero)
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(
                             new TimeoutException(
                                 SR.SendTimedOut(remoteEndpoint, timeoutHelper.OriginalTimeout)
@@ -534,8 +530,7 @@ namespace System.ServiceModel.Channels
             {
                 if (!this.retransmissionDoneWaitHandle.Wait(timeout))
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(new TimeoutException(SR.TimeoutOnOperation(timeout)));
                 }
 
@@ -951,11 +946,8 @@ namespace System.ServiceModel.Channels
             private void Initialize(Message message)
             {
                 Exception exceptionToThrow;
-                this.sendSockets = this.channel.GetSendSockets(
-                    message,
-                    out this.remoteEndpoint,
-                    out exceptionToThrow
-                );
+                this.sendSockets = this.channel
+                    .GetSendSockets(message, out this.remoteEndpoint, out exceptionToThrow);
 
                 if (exceptionToThrow != null)
                 {
@@ -969,9 +961,8 @@ namespace System.ServiceModel.Channels
                     this.retransmissionEnabled = true;
                     this.channel.RetransmitStarting(this.message.Headers.MessageId, this);
                     this.retransmitTimer = new IOThreadTimer(onRetransmitMessage, this, false);
-                    this.retransmitIterator = this.channel.CreateRetransmitIterator(
-                        this.IsMulticast
-                    );
+                    this.retransmitIterator = this.channel
+                        .CreateRetransmitIterator(this.IsMulticast);
                 }
 
                 this.messageData = this.channel.EncodeMessage(message);
@@ -981,8 +972,7 @@ namespace System.ServiceModel.Channels
             {
                 if (this.timeoutHelper.RemainingTime() <= TimeSpan.Zero)
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(
                             new TimeoutException(
                                 SR.TimeoutOnOperation(this.timeoutHelper.OriginalTimeout)
@@ -1064,8 +1054,7 @@ namespace System.ServiceModel.Channels
                         exception.GetType() == typeof(TimeoutException),
                         "Exception on callback should always be TimeoutException"
                     );
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(
                             new TimeoutException(
                                 SR.TimeoutOnOperation(thisPtr.timeoutHelper.OriginalTimeout)

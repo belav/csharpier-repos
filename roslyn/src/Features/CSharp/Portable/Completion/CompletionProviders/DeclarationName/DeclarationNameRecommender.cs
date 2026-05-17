@@ -173,8 +173,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers.DeclarationName
                     ?.Type;
 
                 // This can happen for an un-implemented IEnumerable or IAsyncEnumerable.
-                collectionType ??= namedType
-                    .AllInterfaces
+                collectionType ??= namedType.AllInterfaces
                     .FirstOrDefault(t =>
                         t.OriginalDefinition.SpecialType
                             == SpecialType.System_Collections_Generic_IEnumerable_T
@@ -229,8 +228,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers.DeclarationName
             // see if the user has something like `IEnumerable<Customer>` (where IEnumerable doesn't bind).  Weak
             // heuristic.  If there's a matching type under System.Collections with that name, then assume it's a
             // collection and attempt to create a name from the type arg.
-            var system = compilation
-                .GlobalNamespace
+            var system = compilation.GlobalNamespace
                 .GetMembers(nameof(System))
                 .OfType<INamespaceSymbol>()
                 .FirstOrDefault();
@@ -330,11 +328,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers.DeclarationName
                 foreach (var rule in rules)
                 {
                     if (
-                        rule.SymbolSpecification.AppliesTo(
-                            kind,
-                            declarationInfo.Modifiers,
-                            declarationInfo.DeclaredAccessibility
-                        )
+                        rule.SymbolSpecification
+                            .AppliesTo(
+                                kind,
+                                declarationInfo.Modifiers,
+                                declarationInfo.DeclaredAccessibility
+                            )
                     )
                     {
                         foreach (var baseName in baseNames)
@@ -347,8 +346,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers.DeclarationName
                             if (
                                 name.Length > 1
                                 && name
-                                    != CodeAnalysis
-                                        .Shared
+                                    != CodeAnalysis.Shared
                                         .Extensions
                                         .ITypeSymbolExtensions
                                         .DefaultParameterName
@@ -429,8 +427,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers.DeclarationName
             if (overloads.IsEmpty)
                 return;
 
-            var currentParameterNames = baseMethod
-                .ParameterList
+            var currentParameterNames = baseMethod.ParameterList
                 .Parameters
                 .Select(p => p.Identifier.ValueText)
                 .ToImmutableHashSet();

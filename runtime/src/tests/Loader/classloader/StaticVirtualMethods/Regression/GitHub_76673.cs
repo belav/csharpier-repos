@@ -44,8 +44,7 @@ public class Test1 : Test2, I1
     {
         string m1 = T.M1();
         int m2 = T.M2();
-        System
-            .Console
+        System.Console
             .WriteLine(
                 "T.M1 returns {0} ('Test2.M1' expected); T.M2 return {1} (2 expected)",
                 m1,

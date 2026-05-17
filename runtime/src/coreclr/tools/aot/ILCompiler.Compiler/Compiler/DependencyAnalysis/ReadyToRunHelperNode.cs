@@ -142,8 +142,7 @@ namespace ILCompiler.DependencyAnalysis
                 DependencyList dependencyList = new DependencyList();
 
 #if !SUPPORT_JIT
-                factory
-                    .MetadataManager
+                factory.MetadataManager
                     .GetDependenciesDueToVirtualMethodReflectability(
                         ref dependencyList,
                         factory,
@@ -171,8 +170,7 @@ namespace ILCompiler.DependencyAnalysis
                     MethodDesc targetMethod = info.TargetMethod;
 
 #if !SUPPORT_JIT
-                    factory
-                        .MetadataManager
+                    factory.MetadataManager
                         .GetDependenciesDueToVirtualMethodReflectability(
                             ref dependencyList,
                             factory,
@@ -190,8 +188,7 @@ namespace ILCompiler.DependencyAnalysis
 #endif
                 }
 
-                factory
-                    .MetadataManager
+                factory.MetadataManager
                     .GetDependenciesDueToDelegateCreation(
                         ref dependencyList,
                         factory,

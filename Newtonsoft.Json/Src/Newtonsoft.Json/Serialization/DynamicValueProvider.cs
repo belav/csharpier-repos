@@ -66,8 +66,7 @@ namespace Newtonsoft.Json.Serialization
             {
                 if (_setter == null)
                 {
-                    _setter = DynamicReflectionDelegateFactory
-                        .Instance
+                    _setter = DynamicReflectionDelegateFactory.Instance
                         .CreateSet<object>(_memberInfo);
                 }
 
@@ -132,8 +131,7 @@ namespace Newtonsoft.Json.Serialization
             {
                 if (_getter == null)
                 {
-                    _getter = DynamicReflectionDelegateFactory
-                        .Instance
+                    _getter = DynamicReflectionDelegateFactory.Instance
                         .CreateGet<object>(_memberInfo);
                 }
 

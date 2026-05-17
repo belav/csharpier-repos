@@ -358,8 +358,7 @@ public class WebApplicationFactory<TEntryPoint> : IDisposable, IAsyncDisposable
                 return new[] { Assembly.Load(AppDomain.CurrentDomain.FriendlyName) };
             }
 
-            var runtimeProjectLibraries = context
-                .RuntimeLibraries
+            var runtimeProjectLibraries = context.RuntimeLibraries
                 .ToDictionary(r => r.Name, r => r, StringComparer.Ordinal);
 
             // Find the list of projects
@@ -368,11 +367,9 @@ public class WebApplicationFactory<TEntryPoint> : IDisposable, IAsyncDisposable
             var entryPointAssemblyName = typeof(TEntryPoint).Assembly.GetName().Name;
 
             // Find the list of projects referencing TEntryPoint.
-            var candidates = context
-                .CompileLibraries
+            var candidates = context.CompileLibraries
                 .Where(library =>
-                    library
-                        .Dependencies
+                    library.Dependencies
                         .Any(d =>
                             string.Equals(d.Name, entryPointAssemblyName, StringComparison.Ordinal)
                         )

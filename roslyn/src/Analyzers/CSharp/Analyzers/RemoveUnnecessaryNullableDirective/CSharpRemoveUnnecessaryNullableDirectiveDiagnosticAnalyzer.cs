@@ -112,8 +112,7 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessaryNullableDirective
             TextSpanIntervalTree? possibleNullableImpactIntervalTree
         )
         {
-            var root = context
-                .SemanticModel
+            var root = context.SemanticModel
                 .SyntaxTree
                 .GetCompilationUnitRoot(context.CancellationToken);
 

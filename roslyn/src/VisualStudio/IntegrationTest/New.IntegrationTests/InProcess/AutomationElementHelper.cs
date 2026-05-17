@@ -29,8 +29,7 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
             {
                 var tcs = new TaskCompletionSource<VoidResult>();
 
-                Helper
-                    .Automation
+                Helper.Automation
                     .AddAutomationEventHandler(
                         UIA_EventIds.UIA_Invoke_InvokedEventId,
                         element,
@@ -56,8 +55,7 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
         {
             IUIAutomationElement? element = null;
             var scope = recursive ? TreeScope.TreeScope_Descendants : TreeScope.TreeScope_Children;
-            var condition = Helper
-                .Automation
+            var condition = Helper.Automation
                 .CreatePropertyCondition(AutomationElementIdentifiers.NameProperty.Id, elementName);
 
             // TODO(Dustin): This is code is a bit terrifying. If anything goes wrong and the automation

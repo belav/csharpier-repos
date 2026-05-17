@@ -665,8 +665,7 @@ namespace System.Data.Query.InternalTrees
             //Nonnullable definitions
             nodeInfo.NonNullableDefinitions.InitFrom(relOpChildNodeInfo.NonNullableDefinitions);
             nodeInfo.NonNullableDefinitions.And(op.Outputs);
-            nodeInfo
-                .NonNullableVisibleDefinitions
+            nodeInfo.NonNullableVisibleDefinitions
                 .InitFrom(relOpChildNodeInfo.NonNullableDefinitions);
 
             // Local definitions
@@ -748,8 +747,7 @@ namespace System.Data.Query.InternalTrees
 
             //The non-nullable definitions are same as these of the child
             nodeInfo.NonNullableDefinitions.InitFrom(relOpChildNodeInfo.NonNullableDefinitions);
-            nodeInfo
-                .NonNullableVisibleDefinitions
+            nodeInfo.NonNullableVisibleDefinitions
                 .InitFrom(relOpChildNodeInfo.NonNullableDefinitions);
 
             // inherit max RowCount from child; set min RowCount to 0, because
@@ -955,8 +953,7 @@ namespace System.Data.Query.InternalTrees
             {
                 nodeInfo.NonNullableDefinitions.Or(rightRelOpNodeInfo.NonNullableDefinitions);
             }
-            nodeInfo
-                .NonNullableVisibleDefinitions
+            nodeInfo.NonNullableVisibleDefinitions
                 .InitFrom(leftRelOpNodeInfo.NonNullableDefinitions);
             nodeInfo.NonNullableVisibleDefinitions.Or(rightRelOpNodeInfo.NonNullableDefinitions);
 
@@ -1037,8 +1034,7 @@ namespace System.Data.Query.InternalTrees
             {
                 nodeInfo.NonNullableDefinitions.Or(rightRelOpNodeInfo.NonNullableDefinitions);
             }
-            nodeInfo
-                .NonNullableVisibleDefinitions
+            nodeInfo.NonNullableVisibleDefinitions
                 .InitFrom(leftRelOpNodeInfo.NonNullableDefinitions);
             nodeInfo.NonNullableVisibleDefinitions.Or(rightRelOpNodeInfo.NonNullableDefinitions);
 
@@ -1138,8 +1134,7 @@ namespace System.Data.Query.InternalTrees
                             .GetExtendedNodeInfo(m_command);
                         if (!childNodeInfo.Keys.NoKeys && !childNodeInfo.Keys.KeyVars.IsEmpty)
                         {
-                            mappedKeyVec = childNodeInfo
-                                .Keys
+                            mappedKeyVec = childNodeInfo.Keys
                                 .KeyVars
                                 .Remap(unionAllOp.VarMap[i].GetReverseMap());
                             nodeKeys.Or(mappedKeyVec);
@@ -1169,15 +1164,13 @@ namespace System.Data.Query.InternalTrees
             }
 
             //Non-nullable definitions
-            VarVec leftNonNullableVars = leftChildNodeInfo
-                .NonNullableDefinitions
+            VarVec leftNonNullableVars = leftChildNodeInfo.NonNullableDefinitions
                 .Remap(op.VarMap[0].GetReverseMap());
             nodeInfo.NonNullableDefinitions.InitFrom(leftNonNullableVars);
 
             if (op.OpType != OpType.Except)
             {
-                VarVec rightNonNullableVars = rightChildNodeInfo
-                    .NonNullableDefinitions
+                VarVec rightNonNullableVars = rightChildNodeInfo.NonNullableDefinitions
                     .Remap(op.VarMap[1].GetReverseMap());
                 if (op.OpType == OpType.Intersect)
                 {
@@ -1227,8 +1220,7 @@ namespace System.Data.Query.InternalTrees
 
             //Non-nullable definitions are same as the input
             nodeInfo.NonNullableDefinitions.InitFrom(relOpChildNodeInfo.NonNullableDefinitions);
-            nodeInfo
-                .NonNullableVisibleDefinitions
+            nodeInfo.NonNullableVisibleDefinitions
                 .InitFrom(relOpChildNodeInfo.NonNullableDefinitions);
 
             //Row counts are same as the input
@@ -1384,8 +1376,7 @@ namespace System.Data.Query.InternalTrees
             //Non-nullable definitions
             nodeInfo.NonNullableDefinitions.Or(driverChildNodeInfo.NonNullableDefinitions);
             nodeInfo.NonNullableDefinitions.And(nodeInfo.Definitions);
-            nodeInfo
-                .NonNullableVisibleDefinitions
+            nodeInfo.NonNullableVisibleDefinitions
                 .Or(driverChildNodeInfo.NonNullableVisibleDefinitions);
 
             return nodeInfo;

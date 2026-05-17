@@ -44,8 +44,7 @@ public static class DataProtectionBuilderExtensions
     {
         ArgumentNullThrowHelper.ThrowIfNull(builder);
 
-        builder
-            .Services
+        builder.Services
             .Configure<DataProtectionOptions>(options =>
             {
                 options.ApplicationDiscriminator = applicationName;
@@ -71,8 +70,7 @@ public static class DataProtectionBuilderExtensions
         ArgumentNullThrowHelper.ThrowIfNull(builder);
         ArgumentNullThrowHelper.ThrowIfNull(sink);
 
-        builder
-            .Services
+        builder.Services
             .Configure<KeyManagementOptions>(options =>
             {
                 options.KeyEscrowSinks.Add(sink);
@@ -97,8 +95,7 @@ public static class DataProtectionBuilderExtensions
     {
         ArgumentNullThrowHelper.ThrowIfNull(builder);
 
-        builder
-            .Services
+        builder.Services
             .AddSingleton<IConfigureOptions<KeyManagementOptions>>(services =>
             {
                 var implementationInstance = services.GetRequiredService<TImplementation>();
@@ -128,8 +125,7 @@ public static class DataProtectionBuilderExtensions
         ArgumentNullThrowHelper.ThrowIfNull(builder);
         ArgumentNullThrowHelper.ThrowIfNull(factory);
 
-        builder
-            .Services
+        builder.Services
             .AddSingleton<IConfigureOptions<KeyManagementOptions>>(services =>
             {
                 var instance = factory(services);
@@ -175,8 +171,7 @@ public static class DataProtectionBuilderExtensions
     {
         ArgumentNullThrowHelper.ThrowIfNull(builder);
 
-        builder
-            .Services
+        builder.Services
             .Configure<KeyManagementOptions>(options =>
             {
                 options.AutoGenerateKeys = false;
@@ -199,8 +194,7 @@ public static class DataProtectionBuilderExtensions
         ArgumentNullThrowHelper.ThrowIfNull(builder);
         ArgumentNullThrowHelper.ThrowIfNull(directory);
 
-        builder
-            .Services
+        builder.Services
             .AddSingleton<IConfigureOptions<KeyManagementOptions>>(services =>
             {
                 var loggerFactory =
@@ -229,8 +223,7 @@ public static class DataProtectionBuilderExtensions
         ArgumentNullThrowHelper.ThrowIfNull(builder);
         ArgumentNullThrowHelper.ThrowIfNull(registryKey);
 
-        builder
-            .Services
+        builder.Services
             .AddSingleton<IConfigureOptions<KeyManagementOptions>>(services =>
             {
                 var loggerFactory =
@@ -258,8 +251,7 @@ public static class DataProtectionBuilderExtensions
         ArgumentNullThrowHelper.ThrowIfNull(builder);
         ArgumentNullThrowHelper.ThrowIfNull(certificate);
 
-        builder
-            .Services
+        builder.Services
             .AddSingleton<IConfigureOptions<KeyManagementOptions>>(services =>
             {
                 var loggerFactory =
@@ -270,8 +262,7 @@ public static class DataProtectionBuilderExtensions
                 });
             });
 
-        builder
-            .Services
+        builder.Services
             .Configure<XmlKeyDecryptionOptions>(o => o.AddKeyDecryptionCertificate(certificate));
 
         return builder;
@@ -301,8 +292,7 @@ public static class DataProtectionBuilderExtensions
         // if it doesn't already exist.
         builder.Services.TryAddSingleton<ICertificateResolver, CertificateResolver>();
 
-        builder
-            .Services
+        builder.Services
             .AddSingleton<IConfigureOptions<KeyManagementOptions>>(services =>
             {
                 var loggerFactory =
@@ -334,8 +324,7 @@ public static class DataProtectionBuilderExtensions
     {
         ArgumentNullThrowHelper.ThrowIfNull(builder);
 
-        builder
-            .Services
+        builder.Services
             .Configure<XmlKeyDecryptionOptions>(o =>
             {
                 if (certificates != null)
@@ -387,8 +376,7 @@ public static class DataProtectionBuilderExtensions
     {
         ArgumentNullThrowHelper.ThrowIfNull(builder);
 
-        builder
-            .Services
+        builder.Services
             .AddSingleton<IConfigureOptions<KeyManagementOptions>>(services =>
             {
                 var loggerFactory =
@@ -452,8 +440,7 @@ public static class DataProtectionBuilderExtensions
         ArgumentNullThrowHelper.ThrowIfNull(builder);
         ArgumentNullThrowHelper.ThrowIfNull(protectionDescriptorRule);
 
-        builder
-            .Services
+        builder.Services
             .AddSingleton<IConfigureOptions<KeyManagementOptions>>(services =>
             {
                 var loggerFactory =
@@ -494,8 +481,7 @@ public static class DataProtectionBuilderExtensions
             );
         }
 
-        builder
-            .Services
+        builder.Services
             .Configure<KeyManagementOptions>(options =>
             {
                 options.NewKeyLifetime = lifetime;
@@ -600,8 +586,7 @@ public static class DataProtectionBuilderExtensions
     {
         ((IInternalAlgorithmConfiguration)configuration).Validate(); // perform self-test
 
-        builder
-            .Services
+        builder.Services
             .Configure<KeyManagementOptions>(options =>
             {
                 options.AuthenticatedEncryptorConfiguration = configuration;
@@ -626,8 +611,7 @@ public static class DataProtectionBuilderExtensions
     {
         ArgumentNullThrowHelper.ThrowIfNull(builder);
 
-        builder
-            .Services
+        builder.Services
             .Replace(
                 ServiceDescriptor.Singleton<
                     IDataProtectionProvider,

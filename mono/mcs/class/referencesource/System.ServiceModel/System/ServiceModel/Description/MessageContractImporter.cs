@@ -61,8 +61,7 @@ namespace System.ServiceModel.Description
             MarkSoapExtensionsAsHandled(endpointContext.WsdlBinding);
 
             foreach (
-                WsdlNS.OperationBinding wsdlOperationBinding in endpointContext
-                    .WsdlBinding
+                WsdlNS.OperationBinding wsdlOperationBinding in endpointContext.WsdlBinding
                     .Operations
             )
             {
@@ -325,10 +324,8 @@ namespace System.ServiceModel.Description
                 SetWrapperName(operation);
             this.CurrentSchemaImporter.SetOperationStyle(operation, operationInfo.Style);
             this.CurrentSchemaImporter.SetOperationIsEncoded(operation, operationInfo.IsEncoded);
-            this.CurrentSchemaImporter.SetOperationSupportFaults(
-                operation,
-                this.faultImportOptions.UseMessageFormat
-            );
+            this.CurrentSchemaImporter
+                .SetOperationSupportFaults(operation, this.faultImportOptions.UseMessageFormat);
 
             ImportFaults(wsdlOperation, operation, operationInfo.IsEncoded);
 
@@ -338,11 +335,11 @@ namespace System.ServiceModel.Description
                 {
                     WsdlNS.OperationMessage wsdlOperationMessage =
                         contractContext.GetOperationMessage(message);
-                    WsdlNS.ServiceDescriptionCollection wsdlDocuments = wsdlOperationMessage
-                        .Operation
-                        .PortType
-                        .ServiceDescription
-                        .ServiceDescriptions;
+                    WsdlNS.ServiceDescriptionCollection wsdlDocuments =
+                        wsdlOperationMessage.Operation
+                            .PortType
+                            .ServiceDescription
+                            .ServiceDescriptions;
                     WsdlNS.Message wsdlMessage = wsdlDocuments.GetMessage(
                         wsdlOperationMessage.Message
                     );
@@ -381,8 +378,7 @@ namespace System.ServiceModel.Description
             // Check if operation bindings can be imported
 
             StyleAndUse? styleAndUse = null;
-            WsdlNS.ServiceDescriptionCollection documents = wsdlOperation
-                .PortType
+            WsdlNS.ServiceDescriptionCollection documents = wsdlOperation.PortType
                 .ServiceDescription
                 .ServiceDescriptions;
             WsdlNS.OperationBinding prevOperationBinding = null;
@@ -399,8 +395,7 @@ namespace System.ServiceModel.Description
                     if (operationMessage.Message.IsEmpty)
                     {
                         if (operationMessage is WsdlNS.OperationInput)
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
                                     new InvalidOperationException(
                                         SR.GetString(
@@ -411,8 +406,7 @@ namespace System.ServiceModel.Description
                                     )
                                 );
                         if (operationMessage is WsdlNS.OperationOutput)
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
                                     new InvalidOperationException(
                                         SR.GetString(
@@ -521,8 +515,7 @@ namespace System.ServiceModel.Description
                 if (wsdlOperationMessage.Message.IsEmpty)
                 {
                     if (wsdlOperationMessage is WsdlNS.OperationInput)
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(
                                     SR.GetString(
@@ -533,8 +526,7 @@ namespace System.ServiceModel.Description
                                 )
                             );
                     if (wsdlOperationMessage is WsdlNS.OperationOutput)
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(
                                     SR.GetString(
@@ -662,8 +654,7 @@ namespace System.ServiceModel.Description
             OperationDescription operation = contractContext.GetOperationDescription(
                 wsdlOperationMessage.Operation
             );
-            WsdlNS.ServiceDescriptionCollection wsdlDocuments = wsdlOperationMessage
-                .Operation
+            WsdlNS.ServiceDescriptionCollection wsdlDocuments = wsdlOperationMessage.Operation
                 .PortType
                 .ServiceDescription
                 .ServiceDescriptions;
@@ -868,8 +859,7 @@ namespace System.ServiceModel.Description
             detailElementQname = null;
 
             // this will throw if the message is not found (consider wrapping exception)
-            WsdlNS.ServiceDescriptionCollection wsdlDocuments = fault
-                .Operation
+            WsdlNS.ServiceDescriptionCollection wsdlDocuments = fault.Operation
                 .PortType
                 .ServiceDescription
                 .ServiceDescriptions;
@@ -1156,8 +1146,7 @@ namespace System.ServiceModel.Description
                 if (part.Name == name)
                     return part;
 
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(
                     new InvalidOperationException(
                         SR.GetString(
@@ -1197,8 +1186,7 @@ namespace System.ServiceModel.Description
                 }
             }
             if (element == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(
@@ -1240,8 +1228,7 @@ namespace System.ServiceModel.Description
                 }
             }
             if (type == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(
@@ -1541,8 +1528,7 @@ namespace System.ServiceModel.Description
                     foreach (WsdlNS.OperationMessage message in operation.Messages)
                     {
                         if (
-                            message
-                                .Message
+                            message.Message
                                 .Equals(
                                     new XmlQualifiedName(
                                         part.Message.Name,
@@ -1668,8 +1654,7 @@ namespace System.ServiceModel.Description
         {
             ICollection schemas = schemaSet.Schemas(ns);
             if (schemas == null || schemas.Count == 0)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(SR.GetString(SR.SFxSchemaNotFound, ns))
                     );
@@ -1963,8 +1948,7 @@ namespace System.ServiceModel.Description
         )
         {
             isEncoded = (headerBinding.Use == WsdlNS.SoapBindingUse.Encoded);
-            WsdlNS.Message wsdlHeaderMessage = wsdlMessage
-                .ServiceDescription
+            WsdlNS.Message wsdlHeaderMessage = wsdlMessage.ServiceDescription
                 .ServiceDescriptions
                 .GetMessage(headerBinding.Message);
             WsdlNS.MessagePart part = FindPartByName(wsdlHeaderMessage, headerBinding.Part);
@@ -2050,15 +2034,13 @@ namespace System.ServiceModel.Description
             string operationName
         )
         {
-            WsdlNS.Message wsdlHeaderMessage = wsdlMessage
-                .ServiceDescription
+            WsdlNS.Message wsdlHeaderMessage = wsdlMessage.ServiceDescription
                 .ServiceDescriptions
                 .GetMessage(headerBinding.Message);
             WsdlNS.MessagePart part = FindPartByName(wsdlHeaderMessage, headerBinding.Part);
             if (!description.Headers.Contains(this.CurrentSchemaImporter.GetPartName(part)))
             {
-                description
-                    .Headers
+                description.Headers
                     .Add(
                         (MessageHeaderDescription)
                             schemaImporter.ImportMessagePart(
@@ -2089,8 +2071,7 @@ namespace System.ServiceModel.Description
                     return part.Element;
                 if (!IsNullOrEmpty(part.Type))
                     return new XmlQualifiedName(part.Name, String.Empty);
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(
@@ -2141,8 +2122,7 @@ namespace System.ServiceModel.Description
                     bodyPart.BaseType = ImportType(bodyPart, part.Type, isEncoded);
                     return bodyPart;
                 }
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(
@@ -2198,8 +2178,7 @@ namespace System.ServiceModel.Description
                 XmlQualifiedName detailElementTypeName
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new NotImplementedException());
             }
 
@@ -2209,8 +2188,7 @@ namespace System.ServiceModel.Description
                 bool isEncoded
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new NotImplementedException());
             }
 
@@ -2220,8 +2198,7 @@ namespace System.ServiceModel.Description
                 bool isEncoded
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new NotImplementedException());
             }
 
@@ -2230,8 +2207,7 @@ namespace System.ServiceModel.Description
                 bool supportFaults
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new NotImplementedException());
             }
 
@@ -2297,8 +2273,7 @@ namespace System.ServiceModel.Description
                 {
                     object dataContractImporter;
                     if (
-                        !importer
-                            .State
+                        !importer.State
                             .TryGetValue(typeof(XsdDataContractImporter), out dataContractImporter)
                     )
                     {
@@ -2438,8 +2413,7 @@ namespace System.ServiceModel.Description
             )
             {
                 if (isEncoded)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(
@@ -2491,8 +2465,7 @@ namespace System.ServiceModel.Description
             )
             {
                 if (part.Multiple)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(
@@ -2515,8 +2488,7 @@ namespace System.ServiceModel.Description
                     {
                         if (TryGetFailedReferenceType(ex, out failedReferenceType))
                         {
-                            DataContractImporter
-                                .Options
+                            DataContractImporter.Options
                                 .ReferencedTypes
                                 .Remove(failedReferenceType);
                             continue;
@@ -2527,8 +2499,7 @@ namespace System.ServiceModel.Description
                     {
                         if (TryGetFailedReferenceType(ex, out failedReferenceType))
                         {
-                            DataContractImporter
-                                .Options
+                            DataContractImporter.Options
                                 .ReferencedTypes
                                 .Remove(failedReferenceType);
                             continue;
@@ -2588,8 +2559,7 @@ namespace System.ServiceModel.Description
                     return;
                 if (oldValue == 0)
                 {
-                    DataContractImporter.Options.ImportXmlType = !DataContractImporter
-                        .Options
+                    DataContractImporter.Options.ImportXmlType = !DataContractImporter.Options
                         .ImportXmlType;
                     return;
                 }
@@ -2698,8 +2668,7 @@ namespace System.ServiceModel.Description
             )
             {
                 if (isEncoded)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(
@@ -2715,8 +2684,7 @@ namespace System.ServiceModel.Description
                 OperationFormatStyle style
             )
             {
-                DataContractSerializerOperationBehavior operationBehavior = operation
-                    .Behaviors
+                DataContractSerializerOperationBehavior operationBehavior = operation.Behaviors
                     .Find<DataContractSerializerOperationBehavior>();
                 if (operationBehavior == null)
                 {
@@ -2740,8 +2708,7 @@ namespace System.ServiceModel.Description
             )
             {
                 if (isEncoded)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(
@@ -2824,8 +2791,7 @@ namespace System.ServiceModel.Description
                 {
                     foreach (string extTypeName in webReferenceOptions.SchemaImporterExtensions)
                     {
-                        xmlImporter
-                            .Extensions
+                        xmlImporter.Extensions
                             .Add(
                                 extTypeName,
                                 Type.GetType(
@@ -2928,8 +2894,7 @@ namespace System.ServiceModel.Description
             )
             {
                 if (isEncoded)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(SR.SFxDocEncodedFaultNotSupported)
@@ -3025,8 +2990,7 @@ namespace System.ServiceModel.Description
             )
             {
                 if (isEncoded)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(SR.SFxDocEncodedNotSupported, part.Name)
@@ -3094,8 +3058,7 @@ namespace System.ServiceModel.Description
             )
             {
                 if (isEncoded && style != OperationFormatStyle.Rpc)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(SR.SFxDocEncodedNotSupported, operationName)
@@ -3108,8 +3071,7 @@ namespace System.ServiceModel.Description
                 bool createNew
             )
             {
-                XmlSerializerOperationBehavior operationBehavior = operation
-                    .Behaviors
+                XmlSerializerOperationBehavior operationBehavior = operation.Behaviors
                     .Find<XmlSerializerOperationBehavior>();
 
                 if (operationBehavior != null)

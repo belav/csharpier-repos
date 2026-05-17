@@ -41,8 +41,7 @@ namespace System.ServiceModel.Web
         {
             if (!AspNetEnvironment.Current.AspNetCompatibilityEnabled)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new NotSupportedException(
                             SR2.CacheProfileOnlySupportedInAspNetCompatibilityMode
@@ -52,14 +51,12 @@ namespace System.ServiceModel.Web
 
             if (operationDescription.Behaviors.Find<WebGetAttribute>() == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(SR2.CacheProfileAttributeOnlyWithGet)
                     );
             }
-            dispatchOperation
-                .ParameterInspectors
+            dispatchOperation.ParameterInspectors
                 .Add(new CachingParameterInspector(this.cacheProfileName));
         }
 

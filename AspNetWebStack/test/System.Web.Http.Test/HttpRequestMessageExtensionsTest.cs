@@ -1271,8 +1271,7 @@ namespace System.Net.Http
             HttpConfiguration config = CreateAndAddConfiguration(request);
             config.IncludeErrorDetailPolicy = errorDetail;
             request.Properties.Add(HttpPropertyKeys.IsLocalKey, new Lazy<bool>(() => isLocal));
-            request
-                .Properties
+            request.Properties
                 .Add(
                     HttpPropertyKeys.IncludeErrorDetailKey,
                     new Lazy<bool>(() => includeErrorDetail)
@@ -1303,8 +1302,7 @@ namespace System.Net.Http
         {
             // Arrange
             HttpRequestMessage request = CreateRequest();
-            request
-                .Properties
+            request.Properties
                 .Add(HttpPropertyKeys.IncludeErrorDetailKey, new Lazy<bool>(() => true));
 
             // Act
@@ -1364,8 +1362,7 @@ namespace System.Net.Http
             // Assert
             IEnumerable<KeyValuePair<string, string>> cached;
             Assert.True(
-                request
-                    .Properties
+                request.Properties
                     .TryGetValue<IEnumerable<KeyValuePair<string, string>>>(
                         HttpPropertyKeys.RequestQueryNameValuePairsKey,
                         out cached
@@ -1393,16 +1390,14 @@ namespace System.Net.Http
             string queryString;
 
             Assert.True(
-                request
-                    .Properties
+                request.Properties
                     .TryGetValue<IEnumerable<KeyValuePair<string, string>>>(
                         HttpPropertyKeys.RequestQueryNameValuePairsKey,
                         out cached
                     )
             );
             Assert.True(
-                request
-                    .Properties
+                request.Properties
                     .TryGetValue<string>(HttpPropertyKeys.CachedRequestQueryKey, out queryString)
             );
 
@@ -1439,16 +1434,14 @@ namespace System.Net.Http
             string queryString;
 
             Assert.True(
-                request
-                    .Properties
+                request.Properties
                     .TryGetValue<IEnumerable<KeyValuePair<string, string>>>(
                         HttpPropertyKeys.RequestQueryNameValuePairsKey,
                         out cached
                     )
             );
             Assert.True(
-                request
-                    .Properties
+                request.Properties
                     .TryGetValue<string>(HttpPropertyKeys.CachedRequestQueryKey, out queryString)
             );
 
@@ -1486,16 +1479,14 @@ namespace System.Net.Http
 
             // Cache is not cleared when the query is empty, but it is when the query is ?.
             Assert.True(
-                request
-                    .Properties
+                request.Properties
                     .TryGetValue<IEnumerable<KeyValuePair<string, string>>>(
                         HttpPropertyKeys.RequestQueryNameValuePairsKey,
                         out cached
                     )
             );
             Assert.True(
-                request
-                    .Properties
+                request.Properties
                     .TryGetValue<string>(HttpPropertyKeys.CachedRequestQueryKey, out queryString)
             );
 
@@ -1541,16 +1532,14 @@ namespace System.Net.Http
             string queryString;
 
             Assert.True(
-                request
-                    .Properties
+                request.Properties
                     .TryGetValue<IEnumerable<KeyValuePair<string, string>>>(
                         HttpPropertyKeys.RequestQueryNameValuePairsKey,
                         out cached
                     )
             );
             Assert.True(
-                request
-                    .Properties
+                request.Properties
                     .TryGetValue<string>(HttpPropertyKeys.CachedRequestQueryKey, out queryString)
             );
 
@@ -1584,16 +1573,14 @@ namespace System.Net.Http
             string queryString;
 
             Assert.False(
-                request
-                    .Properties
+                request.Properties
                     .TryGetValue<IEnumerable<KeyValuePair<string, string>>>(
                         HttpPropertyKeys.RequestQueryNameValuePairsKey,
                         out cached
                     )
             );
             Assert.True(
-                request
-                    .Properties
+                request.Properties
                     .TryGetValue<string>(HttpPropertyKeys.CachedRequestQueryKey, out queryString)
             ); // this will not get cleared.
 
@@ -1627,16 +1614,14 @@ namespace System.Net.Http
             string queryString;
 
             Assert.True(
-                request
-                    .Properties
+                request.Properties
                     .TryGetValue<IEnumerable<KeyValuePair<string, string>>>(
                         HttpPropertyKeys.RequestQueryNameValuePairsKey,
                         out cached
                     )
             );
             Assert.True(
-                request
-                    .Properties
+                request.Properties
                     .TryGetValue<string>(HttpPropertyKeys.CachedRequestQueryKey, out queryString)
             );
 

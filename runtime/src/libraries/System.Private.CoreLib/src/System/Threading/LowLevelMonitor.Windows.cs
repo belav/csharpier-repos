@@ -58,8 +58,7 @@ namespace System.Threading
         private bool WaitCore(int timeoutMilliseconds)
         {
             Debug.Assert(timeoutMilliseconds >= -1);
-            return Interop
-                .Kernel32
+            return Interop.Kernel32
                 .SleepConditionVariableCS(
                     &_pMonitor->_conditionVariable,
                     &_pMonitor->_criticalSection,

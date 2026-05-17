@@ -122,12 +122,8 @@ namespace System.Activities.Statements
             // Parameters are named according to MethodInfo name if DetermineMethodInfo
             // succeeds, otherwise arbitrary names are used.
             this.methodResolver = CreateMethodResolver();
-            this.methodResolver.DetermineMethodInfo(
-                metadata,
-                funcCache,
-                locker,
-                ref this.methodExecutor
-            );
+            this.methodResolver
+                .DetermineMethodInfo(metadata, funcCache, locker, ref this.methodExecutor);
             this.methodResolver.RegisterParameters(arguments);
 
             metadata.SetArgumentsCollection(arguments);

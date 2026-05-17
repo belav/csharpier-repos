@@ -514,11 +514,8 @@ namespace System.Net.Http
                                                     $"Adding Basic credential to cache, uri={authUri}, username={challenge.Credential.UserName}"
                                                 );
                                             }
-                                            pool.PreAuthCredentials.Add(
-                                                authUri,
-                                                BasicScheme,
-                                                challenge.Credential
-                                            );
+                                            pool.PreAuthCredentials
+                                                .Add(authUri, BasicScheme, challenge.Credential);
                                         }
                                         catch (ArgumentException)
                                         {

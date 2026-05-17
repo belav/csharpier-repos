@@ -737,8 +737,7 @@ namespace System.Net.WebSockets
                 }
 
                 WebSocketHelpers.ThrowIfConnectionAborted(connection.m_InnerStream, false);
-                return connection
-                    .m_InnerStream
+                return connection.m_InnerStream
                     .NetworkStream
                     .BeginMultipleWrite(buffers, callback, asyncState);
             }
@@ -770,12 +769,13 @@ namespace System.Net.WebSockets
                 if (!m_InOpaqueMode)
                 {
                     // We can't use fast path over SSL
-                    return Task.Factory.FromAsync<IList<ArraySegment<byte>>>(
-                        s_BeginMultipleWrite,
-                        s_EndMultipleWrite,
-                        sendBuffers,
-                        this
-                    );
+                    return Task.Factory
+                        .FromAsync<IList<ArraySegment<byte>>>(
+                            s_BeginMultipleWrite,
+                            s_EndMultipleWrite,
+                            sendBuffers,
+                            this
+                        );
                 }
 
                 if (WebSocketBase.LoggingEnabled)
@@ -1109,8 +1109,7 @@ namespace System.Net.WebSockets
 
                 if (eventArgs.SocketError != SocketError.Success)
                 {
-                    thisPtr
-                        .m_WriteTaskCompletionSource
+                    thisPtr.m_WriteTaskCompletionSource
                         .TrySetException(new SocketException(eventArgs.SocketError));
                 }
                 else
@@ -1155,8 +1154,7 @@ namespace System.Net.WebSockets
                 {
                     if (!thisPtr.m_IgnoreReadError)
                     {
-                        thisPtr
-                            .m_ReadTaskCompletionSource
+                        thisPtr.m_ReadTaskCompletionSource
                             .TrySetException(new SocketException(eventArgs.SocketError));
                     }
                     else

@@ -75,8 +75,7 @@ namespace System.ServiceModel.Configuration
         [ConfigurationProperty(
             ConfigurationStrings.IdentityConfiguration,
             IsRequired = false,
-            DefaultValue = System
-                .IdentityModel
+            DefaultValue = System.IdentityModel
                 .Configuration
                 .ConfigurationStrings
                 .DefaultServiceName
@@ -150,8 +149,7 @@ namespace System.ServiceModel.Configuration
                 Type credentialsType = System.Type.GetType(this.Type, true);
                 if (!typeof(ServiceCredentials).IsAssignableFrom(credentialsType))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ConfigurationErrorsException(
                                 SR.GetString(
@@ -214,18 +212,16 @@ namespace System.ServiceModel.Configuration
                 != PropertyValueOrigin.Default
             )
             {
-                this.IssuedTokenAuthentication.ApplyConfiguration(
-                    behavior.IssuedTokenAuthentication
-                );
+                this.IssuedTokenAuthentication
+                    .ApplyConfiguration(behavior.IssuedTokenAuthentication);
             }
             if (
                 propertyInfo[ConfigurationStrings.SecureConversationAuthentication].ValueOrigin
                 != PropertyValueOrigin.Default
             )
             {
-                this.SecureConversationAuthentication.ApplyConfiguration(
-                    behavior.SecureConversationAuthentication
-                );
+                this.SecureConversationAuthentication
+                    .ApplyConfiguration(behavior.SecureConversationAuthentication);
             }
             if (
                 propertyInfo[ConfigurationStrings.UseIdentityConfiguration].ValueOrigin

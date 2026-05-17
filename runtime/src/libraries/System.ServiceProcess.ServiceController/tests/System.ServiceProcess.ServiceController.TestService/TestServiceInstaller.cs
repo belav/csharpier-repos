@@ -72,8 +72,7 @@ namespace System.ServiceProcess.Tests
             // Open the service manager
             using (
                 var serviceManagerHandle = new SafeServiceHandle(
-                    Interop
-                        .Advapi32
+                    Interop.Advapi32
                         .OpenSCManager(
                             null,
                             null,
@@ -92,8 +91,7 @@ namespace System.ServiceProcess.Tests
                 // Install the service
                 using (
                     var serviceHandle = new SafeServiceHandle(
-                        Interop
-                            .Advapi32
+                        Interop.Advapi32
                             .CreateService(
                                 serviceManagerHandle,
                                 ServiceName,
@@ -130,8 +128,7 @@ namespace System.ServiceProcess.Tests
                         Interop.Advapi32.SERVICE_DESCRIPTION serviceDesc =
                             new Interop.Advapi32.SERVICE_DESCRIPTION();
                         serviceDesc.description = Marshal.StringToHGlobalUni(Description);
-                        bool success = Interop
-                            .Advapi32
+                        bool success = Interop.Advapi32
                             .ChangeServiceConfig2(
                                 serviceHandle,
                                 Interop.Advapi32.ServiceConfigOptions.SERVICE_CONFIG_DESCRIPTION,
@@ -231,8 +228,7 @@ namespace System.ServiceProcess.Tests
         {
             using (
                 var serviceManagerHandle = new SafeServiceHandle(
-                    Interop
-                        .Advapi32
+                    Interop.Advapi32
                         .OpenSCManager(
                             null,
                             null,
@@ -250,8 +246,7 @@ namespace System.ServiceProcess.Tests
 
                 using (
                     var serviceHandle = new SafeServiceHandle(
-                        Interop
-                            .Advapi32
+                        Interop.Advapi32
                             .OpenService(
                                 serviceManagerHandle,
                                 ServiceName,

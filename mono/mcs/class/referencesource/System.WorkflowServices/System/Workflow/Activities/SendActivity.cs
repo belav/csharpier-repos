@@ -149,8 +149,7 @@ namespace System.Workflow.Activities
                 if (this.ServiceOperationInfo == null)
                 {
 #pragma warning suppress 56503
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR2.GetString(SR2.Error_ServiceOperationInfoNotSpecified, this.Name)
@@ -168,8 +167,7 @@ namespace System.Workflow.Activities
             {
                 if (this.ServiceOperationInfo == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR2.GetString(SR2.Error_ServiceOperationInfoNotSpecified, this.Name)
@@ -238,8 +236,7 @@ namespace System.Workflow.Activities
 
                     if (currentParent != null)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperArgument(
                                 "value",
                                 SR2.GetString(
@@ -329,8 +326,7 @@ namespace System.Workflow.Activities
             }
             if (string.IsNullOrEmpty(endpointName))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(
                         "endpointName",
                         SR2.GetString(SR2.Error_ArgumentValueNullOrEmptyString)
@@ -392,8 +388,7 @@ namespace System.Workflow.Activities
             }
             if (string.IsNullOrEmpty(endpointName))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(
                         "endpointName",
                         SR2.GetString(SR2.Error_ArgumentValueNullOrEmptyString)
@@ -430,8 +425,7 @@ namespace System.Workflow.Activities
             TypedOperationInfo serviceOperationInfo = this.ServiceOperationInfo;
             if (serviceOperationInfo == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR2.GetString(SR2.Error_ServiceOperationInfoNotSpecified, this.Name)
@@ -442,8 +436,7 @@ namespace System.Workflow.Activities
             MethodInfo methodInfo = serviceOperationInfo.GetMethodInfo(executionContext);
             if (methodInfo == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR2.GetString(SR2.Error_MethodInfoNotAvailable, this.Name)
@@ -599,8 +592,7 @@ namespace System.Workflow.Activities
 
             if (serviceOperationInfo == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR2.GetString(SR2.Error_ServiceOperationInfoNotSpecified, this.Name)
@@ -651,8 +643,7 @@ namespace System.Workflow.Activities
             Guid workflowInstanceId = this.WorkflowInstanceId;
             string qualifiedName = this.QualifiedName;
 
-            System
-                .Workflow
+            System.Workflow
                 .Runtime
                 .WorkflowTrace
                 .Runtime
@@ -666,8 +657,7 @@ namespace System.Workflow.Activities
 
             try
             {
-                object retVal = operation
-                    .ReflectedType
+                object retVal = operation.ReflectedType
                     .InvokeMember(
                         operation.Name,
                         BindingFlags.Instance | BindingFlags.Public | BindingFlags.InvokeMethod,
@@ -677,8 +667,7 @@ namespace System.Workflow.Activities
                         CultureInfo.InvariantCulture
                     );
 
-                System
-                    .Workflow
+                System.Workflow
                     .Runtime
                     .WorkflowTrace
                     .Runtime
@@ -696,8 +685,7 @@ namespace System.Workflow.Activities
             {
                 if (e.InnerException != null)
                 {
-                    System
-                        .Workflow
+                    System.Workflow
                         .Runtime
                         .WorkflowTrace
                         .Runtime
@@ -714,8 +702,7 @@ namespace System.Workflow.Activities
                 }
                 else
                 {
-                    System
-                        .Workflow
+                    System.Workflow
                         .Runtime
                         .WorkflowTrace
                         .Runtime
@@ -757,8 +744,7 @@ namespace System.Workflow.Activities
                 OperationInfoBase serviceOperationInfo = activity.ServiceOperationInfo;
                 if (serviceOperationInfo == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR2.GetString(
@@ -772,8 +758,7 @@ namespace System.Workflow.Activities
                 MethodInfo methodInfo = serviceOperationInfo.GetMethodInfo(serviceProvider);
                 if (methodInfo == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR2.GetString(SR2.Error_MethodInfoNotAvailable, activity.Name)
@@ -856,8 +841,7 @@ namespace System.Workflow.Activities
                         }
                         else
                         {
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
                                     new InvalidOperationException(
                                         SR2.GetString(
@@ -903,8 +887,7 @@ namespace System.Workflow.Activities
                         }
                         else
                         {
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
                                     new InvalidOperationException(
                                         SR2.GetString(
@@ -927,8 +910,7 @@ namespace System.Workflow.Activities
                     }
                     else
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(
                                     SR2.GetString(

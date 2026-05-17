@@ -164,8 +164,7 @@ namespace System.Activities.Hosting
                     {
                         if (!TypeHelper.ContainsCompatibleType(allExtensionTypes, requiredType))
                         {
-                            throw FxTrace
-                                .Exception
+                            throw FxTrace.Exception
                                 .AsError(
                                     new ValidationException(
                                         SR.RequiredExtensionTypeNotFound(requiredType.ToString())
@@ -213,8 +212,7 @@ namespace System.Activities.Hosting
             object newExtension = extensionProvider.ProvideValue();
             if (newExtension is SymbolResolver)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(new InvalidOperationException(SR.SymbolResolverMustBeSingleton));
             }
 
@@ -241,12 +239,13 @@ namespace System.Activities.Hosting
                 this.hasPersistenceModule = true;
             }
 
-            this.instanceExtensions.Add(
-                new KeyValuePair<WorkflowInstanceExtensionProvider, object>(
-                    extensionProvider,
-                    newExtension
-                )
-            );
+            this.instanceExtensions
+                .Add(
+                    new KeyValuePair<WorkflowInstanceExtensionProvider, object>(
+                        extensionProvider,
+                        newExtension
+                    )
+                );
 
             WorkflowInstanceExtensionManager.AddExtensionClosure(
                 newExtension,

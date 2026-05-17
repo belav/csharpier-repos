@@ -30,8 +30,7 @@ public class MiddlewareTests
                     {
                         app.UseRewriter(options);
                         app.Run(context =>
-                            context
-                                .Response
+                            context.Response
                                 .WriteAsync(
                                     context.Request.Scheme
                                         + "://"
@@ -70,8 +69,7 @@ public class MiddlewareTests
                     {
                         app.UseRewriter(options);
                         app.Run(context =>
-                            context
-                                .Response
+                            context.Response
                                 .WriteAsync(
                                     context.Request.Scheme
                                         + "://"
@@ -108,8 +106,7 @@ public class MiddlewareTests
                     {
                         app.UseRewriter(options);
                         app.Run(context =>
-                            context
-                                .Response
+                            context.Response
                                 .WriteAsync(
                                     context.Request.Scheme
                                         + "://"
@@ -146,8 +143,7 @@ public class MiddlewareTests
                     {
                         app.UseRewriter(options);
                         app.Run(context =>
-                            context
-                                .Response
+                            context.Response
                                 .WriteAsync(
                                     context.Request.Scheme
                                         + "://"
@@ -775,8 +771,7 @@ public class MiddlewareTests
                             endpoints.MapGet(
                                 "/foo",
                                 context =>
-                                    context
-                                        .Response
+                                    context.Response
                                         .WriteAsync(
                                             $"{context.GetEndpoint()?.DisplayName} from {context.Request.Path}"
                                         )
@@ -808,8 +803,7 @@ public class MiddlewareTests
                     {
                         app.UseRewriter(options);
                         app.Run(context =>
-                            context
-                                .Response
+                            context.Response
                                 .WriteAsync(context.Request.Path + context.Request.QueryString)
                         );
                     });
@@ -838,8 +832,7 @@ public class MiddlewareTests
                     {
                         app.UseRewriter(options);
                         app.Run(context =>
-                            context
-                                .Response
+                            context.Response
                                 .WriteAsync(context.Request.Path + context.Request.QueryString)
                         );
                     });
@@ -1000,8 +993,7 @@ public class MiddlewareTests
             endpoints.MapGet(
                 "/g",
                 context =>
-                    context
-                        .Response
+                    context.Response
                         .WriteAsync(
                             context.Request.Scheme
                                 + "://"
@@ -1031,8 +1023,7 @@ public class MiddlewareTests
     {
         var builder = WebApplication.CreateBuilder();
         builder.WebHost.UseTestServer();
-        builder
-            .Services
+        builder.Services
             .Configure<RewriteOptions>(options =>
             {
                 options.AddRewrite(regex, "http://example.com/g", skipRemainingRules: false);
@@ -1049,8 +1040,7 @@ public class MiddlewareTests
             endpoints.MapGet(
                 "/g",
                 context =>
-                    context
-                        .Response
+                    context.Response
                         .WriteAsync(
                             context.Request.Scheme
                                 + "://"
@@ -1075,8 +1065,7 @@ public class MiddlewareTests
     {
         var builder = WebApplication.CreateBuilder();
         builder.WebHost.UseTestServer();
-        builder
-            .Services
+        builder.Services
             .Configure<RewriteOptions>(options =>
             {
                 options.AddRewrite("(.*)", "http://example.com/g", skipRemainingRules: true);
@@ -1093,8 +1082,7 @@ public class MiddlewareTests
             endpoints.MapGet(
                 "/g",
                 context =>
-                    context
-                        .Response
+                    context.Response
                         .WriteAsync(
                             context.Request.Scheme
                                 + "://"
@@ -1119,8 +1107,7 @@ public class MiddlewareTests
     {
         var builder = WebApplication.CreateBuilder();
         builder.WebHost.UseTestServer();
-        builder
-            .Services
+        builder.Services
             .Configure<RewriteOptions>(options =>
             {
                 options
@@ -1139,8 +1126,7 @@ public class MiddlewareTests
             endpoints.MapGet(
                 "/g/h",
                 context =>
-                    context
-                        .Response
+                    context.Response
                         .WriteAsync(
                             context.Request.Scheme
                                 + "://"
@@ -1165,8 +1151,7 @@ public class MiddlewareTests
     {
         var builder = WebApplication.CreateBuilder();
         builder.WebHost.UseTestServer();
-        builder
-            .Services
+        builder.Services
             .Configure<RewriteOptions>(options =>
             {
                 options
@@ -1185,8 +1170,7 @@ public class MiddlewareTests
             endpoints.MapGet(
                 "/g",
                 context =>
-                    context
-                        .Response
+                    context.Response
                         .WriteAsync(
                             context.Request.Scheme
                                 + "://"
@@ -1211,8 +1195,7 @@ public class MiddlewareTests
     {
         var builder = WebApplication.CreateBuilder();
         builder.WebHost.UseTestServer();
-        builder
-            .Services
+        builder.Services
             .Configure<RewriteOptions>(options =>
             {
                 options.AddRewrite("(.*)", "http://example.com/g", skipRemainingRules: true);
@@ -1226,8 +1209,7 @@ public class MiddlewareTests
         app.MapGet(
             "/g",
             context =>
-                context
-                    .Response
+                context.Response
                     .WriteAsync(
                         context.Request.Scheme
                             + "://"

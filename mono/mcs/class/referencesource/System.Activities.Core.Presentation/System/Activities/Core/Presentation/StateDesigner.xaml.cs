@@ -184,10 +184,11 @@ namespace System.Activities.Core.Presentation
 
             using (EditingScope es = (EditingScope)this.ModelItem.BeginEdit(SR.SetInitialState))
             {
-                this.ViewStateService.RemoveViewState(
-                    stateMachineModelItem,
-                    StateContainerEditor.ConnectorLocationViewStateKey
-                );
+                this.ViewStateService
+                    .RemoveViewState(
+                        stateMachineModelItem,
+                        StateContainerEditor.ConnectorLocationViewStateKey
+                    );
                 stateMachineModelItem
                     .Properties[StateMachineDesigner.InitialStatePropertyName]
                     .SetValue(this.ModelItem.GetCurrentValue());

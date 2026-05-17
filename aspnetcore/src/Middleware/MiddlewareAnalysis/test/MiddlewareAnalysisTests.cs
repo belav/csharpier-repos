@@ -24,8 +24,8 @@ public class MiddlewareAnalysisTests
                     .UseTestServer()
                     .Configure(app =>
                     {
-                        diagnosticListener =
-                            app.ApplicationServices.GetRequiredService<DiagnosticListener>();
+                        diagnosticListener = app.ApplicationServices
+                            .GetRequiredService<DiagnosticListener>();
 
                         app.UseDeveloperExceptionPage();
                         app.Run(context =>

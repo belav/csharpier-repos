@@ -228,8 +228,7 @@ namespace System.Web.Http.Dispatcher
             HttpMessageHandler routeHandler
         )
         {
-            var route = config
-                .Routes
+            var route = config.Routes
                 .CreateRoute(
                     "api/{controller}/{id}",
                     defaults: new Dictionary<string, object> { { "id", RouteParameter.Optional } },

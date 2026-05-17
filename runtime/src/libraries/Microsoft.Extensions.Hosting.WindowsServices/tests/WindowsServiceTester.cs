@@ -102,8 +102,7 @@ namespace Microsoft.Extensions.Hosting
             // install the service
             using (
                 var serviceManagerHandle = new SafeServiceHandle(
-                    Interop
-                        .Advapi32
+                    Interop.Advapi32
                         .OpenSCManager(
                             null,
                             null,
@@ -120,8 +119,7 @@ namespace Microsoft.Extensions.Hosting
                 // delete existing service if it exists
                 using (
                     var existingServiceHandle = new SafeServiceHandle(
-                        Interop
-                            .Advapi32
+                        Interop.Advapi32
                             .OpenService(
                                 serviceManagerHandle,
                                 serviceName,
@@ -137,8 +135,7 @@ namespace Microsoft.Extensions.Hosting
                 }
 
                 var serviceHandle = new SafeServiceHandle(
-                    Interop
-                        .Advapi32
+                    Interop.Advapi32
                         .CreateService(
                             serviceManagerHandle,
                             serviceName,

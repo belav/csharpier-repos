@@ -40,13 +40,11 @@ internal static class ReactDevelopmentServerMiddleware
 
         // Start create-react-app and attach to middleware pipeline
         var appBuilder = spaBuilder.ApplicationBuilder;
-        var applicationStoppingToken = appBuilder
-            .ApplicationServices
+        var applicationStoppingToken = appBuilder.ApplicationServices
             .GetRequiredService<IHostApplicationLifetime>()
             .ApplicationStopping;
         var logger = LoggerFinder.GetOrCreateLogger(appBuilder, LogCategoryName);
-        var diagnosticSource = appBuilder
-            .ApplicationServices
+        var diagnosticSource = appBuilder.ApplicationServices
             .GetRequiredService<DiagnosticSource>();
         var portTask = StartCreateReactAppServerAsync(
             sourcePath,
@@ -125,8 +123,7 @@ internal static class ReactDevelopmentServerMiddleware
                 // it doesn't do so until it's finished compiling, and even then only if there were
                 // no compiler warnings. So instead of waiting for that, consider it ready as soon
                 // as it starts listening for requests.
-                await scriptRunner
-                    .StdOut
+                await scriptRunner.StdOut
                     .WaitForMatch(
                         new Regex(
                             "Starting the development server",

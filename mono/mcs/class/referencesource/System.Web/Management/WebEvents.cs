@@ -770,8 +770,7 @@ namespace System.Web.Management
 
                 Debug.Assert(manager != null, "manager != null");
 
-                firingRuleInfos = manager
-                    ._sectionHelper
+                firingRuleInfos = manager._sectionHelper
                     .FindFiringRuleInfos(eventRaised.GetType(), eventRaised.EventCode);
             }
 

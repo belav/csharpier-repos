@@ -216,8 +216,7 @@ namespace System.ServiceModel.Dispatcher
                 && channelDispatcher.MaxTransactedBatchSize > 0
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(SR.GetString(SR.IncompatibleBehaviors))
                     );
@@ -437,11 +436,8 @@ namespace System.ServiceModel.Dispatcher
                 return new CompletedAsyncResult(ChannelHandler.onAsyncReceiveComplete, this);
             }
 
-            return this.receiver.BeginTryReceive(
-                TimeSpan.MaxValue,
-                ChannelHandler.onAsyncReceiveComplete,
-                this
-            );
+            return this.receiver
+                .BeginTryReceive(TimeSpan.MaxValue, ChannelHandler.onAsyncReceiveComplete, this);
         }
 
         bool DispatchAndReleasePump(
@@ -477,8 +473,7 @@ namespace System.ServiceModel.Dispatcher
                 {
                     object previousBuffer = null;
                     if (
-                        request
-                            .RequestMessage
+                        request.RequestMessage
                             .Properties
                             .TryGetValue(MessageBufferPropertyName, out previousBuffer)
                     )
@@ -502,8 +497,7 @@ namespace System.ServiceModel.Dispatcher
                 if (operation == null)
                 {
                     Fx.Assert("ChannelHandler.Dispatch (operation == null)");
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 String.Format(
@@ -519,8 +513,7 @@ namespace System.ServiceModel.Dispatcher
                     && message.Headers.Action == OperationDescription.SessionOpenedAction
                 )
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(
@@ -568,8 +561,7 @@ namespace System.ServiceModel.Dispatcher
 
                 if (dispatchBehavior.PreserveMessage)
                 {
-                    currentOperationContext
-                        .IncomingMessageProperties
+                    currentOperationContext.IncomingMessageProperties
                         .Add(MessageBufferPropertyName, buffer);
                 }
 
@@ -604,8 +596,8 @@ namespace System.ServiceModel.Dispatcher
                 // (MessageRpc implicitly owns this throttle once it's created)
                 this.requestInfo.ChannelHandlerOwnsCallThrottle = false;
                 // explicitly passing responsibility for instance throttle to MessageRpc
-                rpc.MessageRpcOwnsInstanceContextThrottle =
-                    this.requestInfo.ChannelHandlerOwnsInstanceContextThrottle;
+                rpc.MessageRpcOwnsInstanceContextThrottle = this.requestInfo
+                    .ChannelHandlerOwnsInstanceContextThrottle;
                 this.requestInfo.ChannelHandlerOwnsInstanceContextThrottle = false;
 
                 // These need to happen before Dispatch but after accessing any ChannelHandler
@@ -938,8 +930,7 @@ namespace System.ServiceModel.Dispatcher
                 DispatchRuntime dispatchBehavior = this.channel
                     .ClientRuntime
                     .CallbackDispatchRuntime;
-                dispatchBehavior
-                    .ChannelDispatcher
+                dispatchBehavior.ChannelDispatcher
                     .ProvideFault(e, this.channel.GetProperty<FaultConverter>(), ref faultInfo);
             }
         }
@@ -955,8 +946,7 @@ namespace System.ServiceModel.Dispatcher
             if (e == null)
             {
                 Fx.Assert(SR.GetString(SR.GetString(SR.SFxNonExceptionThrown)));
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(SR.GetString(SR.SFxNonExceptionThrown))
@@ -1391,8 +1381,7 @@ namespace System.ServiceModel.Dispatcher
                 && request.RequestMessage.Headers.Action == null
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new MessageHeaderException(
                             SR.GetString(SR.SFxMissingActionHeader, addressingVersion.Namespace),
@@ -1611,8 +1600,7 @@ namespace System.ServiceModel.Dispatcher
                 }
                 if (!object.ReferenceEquals(requestID, null) && !this.isManualAddressing)
                 {
-                    System
-                        .ServiceModel
+                    System.ServiceModel
                         .Channels
                         .RequestReplyCorrelator
                         .PrepareReply(reply, requestID);
@@ -1621,8 +1609,7 @@ namespace System.ServiceModel.Dispatcher
                 {
                     try
                     {
-                        canSendReply = System
-                            .ServiceModel
+                        canSendReply = System.ServiceModel
                             .Channels
                             .RequestReplyCorrelator
                             .AddressReply(reply, requestMessage);
@@ -1677,8 +1664,7 @@ namespace System.ServiceModel.Dispatcher
 
             try
             {
-                state
-                    .ChannelHandler
+                state.ChannelHandler
                     .HandleErrorContinuation(
                         state.Exception,
                         state.Request,
@@ -1893,8 +1879,8 @@ namespace System.ServiceModel.Dispatcher
                         throw;
                     }
                 }
-                this.transactedBatchContext =
-                    this.sharedTransactedBatchContext.CreateTransactedBatchContext();
+                this.transactedBatchContext = this.sharedTransactedBatchContext
+                    .CreateTransactedBatchContext();
             }
 
             OperationContext existingOperationContext = OperationContext.Current;
@@ -2032,10 +2018,11 @@ namespace System.ServiceModel.Dispatcher
                                 .DefaultCommunicationTimeouts
                                 .ReceiveTimeout
                         );
-                        received = this.receiver.TryReceive(
-                            TransactionBehavior.NormalizeTimeout(receiveTimeout),
-                            out request
-                        );
+                        received = this.receiver
+                            .TryReceive(
+                                TransactionBehavior.NormalizeTimeout(receiveTimeout),
+                                out request
+                            );
                     }
                     scope.Complete();
                 }

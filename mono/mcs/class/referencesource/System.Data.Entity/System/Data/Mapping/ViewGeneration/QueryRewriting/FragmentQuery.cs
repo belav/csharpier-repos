@@ -247,8 +247,7 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
                 int constHashCode = 0;
                 foreach (MemberRestriction oneOf in q.Condition.MemberRestrictions)
                 {
-                    varHashCode ^= MemberPath
-                        .EqualityComparer
+                    varHashCode ^= MemberPath.EqualityComparer
                         .GetHashCode(oneOf.RestrictedMemberSlot.MemberPath);
                     foreach (Constant constant in oneOf.Domain.Values)
                     {

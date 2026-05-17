@@ -560,10 +560,11 @@ namespace System.IO.Pipelines.Tests
         public async Task ReadingCanBeCanceled()
         {
             var cts = new CancellationTokenSource();
-            cts.Token.Register(() =>
-            {
-                _pipe.Writer.Complete(new OperationCanceledException(cts.Token));
-            });
+            cts.Token
+                .Register(() =>
+                {
+                    _pipe.Writer.Complete(new OperationCanceledException(cts.Token));
+                });
 
             Task ignore = Task.Run(async () =>
             {

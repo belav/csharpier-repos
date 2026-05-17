@@ -41,8 +41,7 @@ namespace System.ServiceModel.ComIntegration
             // Filter known invalid IIDs
             if (!ComPlusTypeValidator.IsValidInterface(iid))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         Error.ListenerInitFailed(SR.GetString(SR.InvalidWebServiceInterface, iid))
                     );
@@ -56,8 +55,7 @@ namespace System.ServiceModel.ComIntegration
                 {
                     if (contractInfo.Operations.Count == 0)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 Error.ListenerInitFailed(
                                     SR.GetString(SR.RequireConfiguredMethods, iid)
@@ -73,8 +71,7 @@ namespace System.ServiceModel.ComIntegration
             // Filter out interfaces that aren't configured at all
             if (!configuredInterface)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         Error.ListenerInitFailed(SR.GetString(SR.RequireConfiguredInterfaces, iid))
                     );
@@ -86,8 +83,7 @@ namespace System.ServiceModel.ComIntegration
             ComContractElement contractConfigElement = ConfigLoader.LookupComContract(iid);
 
             if (contractConfigElement == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         Error.ListenerInitFailed(SR.GetString(SR.InterfaceNotFoundInConfig, iid))
                     );
@@ -95,8 +91,7 @@ namespace System.ServiceModel.ComIntegration
                 String.IsNullOrEmpty(contractConfigElement.Name)
                 || String.IsNullOrEmpty(contractConfigElement.Namespace)
             )
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         Error.ListenerInitFailed(
                             SR.GetString(SR.CannotHaveNullOrEmptyNameOrNamespaceForIID, iid)
@@ -156,8 +151,7 @@ namespace System.ServiceModel.ComIntegration
                     }
                 }
                 if (!methodFound)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             Error.ListenerInitFailed(
                                 SR.GetString(
@@ -170,8 +164,7 @@ namespace System.ServiceModel.ComIntegration
             }
 
             if (contract.Operations.Count == 0)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         Error.ListenerInitFailed(
                             SR.GetString(SR.NoneOfTheMethodsForInterfaceFoundInConfig, iid)
@@ -221,8 +214,7 @@ namespace System.ServiceModel.ComIntegration
                 || info.TransactionOption == TransactionOption.Required
             )
             {
-                operation
-                    .Behaviors
+                operation.Behaviors
                     .Add(new TransactionFlowAttribute(TransactionFlowOption.Allowed));
             }
 
@@ -254,16 +246,14 @@ namespace System.ServiceModel.ComIntegration
             {
                 Fx.Assert("No async operations allowed");
 
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(Error.NoAsyncOperationsAllowed());
             }
             if (contract.Operations.FindAll(operationName.EncodedName).Count != 0)
             {
                 Fx.Assert("Duplicate operation name");
 
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(Error.DuplicateOperation());
             }
 
@@ -289,8 +279,7 @@ namespace System.ServiceModel.ComIntegration
 
                 Guid typeLibID = Fx.CreateGuid(udt.TypeLibID);
 
-                TypeCacheManager
-                    .Provider
+                TypeCacheManager.Provider
                     .FindOrCreateType(
                         typeLibID,
                         udt.TypeLibVersion,
@@ -419,8 +408,7 @@ namespace System.ServiceModel.ComIntegration
                     )
                 )
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             Error.ListenerInitFailed(
                                 SR.GetString(
@@ -462,8 +450,7 @@ namespace System.ServiceModel.ComIntegration
                     )
                 )
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             Error.ListenerInitFailed(
                                 SR.GetString(
@@ -522,8 +509,7 @@ namespace System.ServiceModel.ComIntegration
             {
                 if (!DiagnosticUtility.Utility.TryCreateGuid(contractTypeString, out iid))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             Error.ListenerInitFailed(
                                 SR.GetString(SR.ContractTypeNotAnIID, contractTypeString)
@@ -548,18 +534,12 @@ namespace System.ServiceModel.ComIntegration
                 // Generate a managed type corresponding to the interface in question
                 try
                 {
-                    this.interfaceResolver.FindOrCreateType(
-                        this.info.ServiceType,
-                        iid,
-                        out type,
-                        false,
-                        true
-                    );
+                    this.interfaceResolver
+                        .FindOrCreateType(this.info.ServiceType, iid, out type, false, true);
                 }
                 catch (InvalidOperationException e)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(Error.ListenerInitFailed(e.Message));
                 }
 

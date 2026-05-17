@@ -104,8 +104,7 @@ namespace Microsoft.CodeAnalysis
             var newState = _state.With(
                 sourceGenerators: _state.Generators.AddRange(generators),
                 incrementalGenerators: _state.IncrementalGenerators.AddRange(incrementalGenerators),
-                generatorStates: _state
-                    .GeneratorStates
+                generatorStates: _state.GeneratorStates
                     .AddRange(new GeneratorState[generators.Length])
             );
             return FromState(newState);
@@ -210,8 +209,7 @@ namespace Microsoft.CodeAnalysis
 
         public GeneratorDriverRunResult GetRunResult()
         {
-            var results = _state
-                .Generators
+            var results = _state.Generators
                 .ZipAsArray(
                     _state.GeneratorStates,
                     (generator, generatorState) =>
@@ -250,8 +248,7 @@ namespace Microsoft.CodeAnalysis
 
         public GeneratorDriverTimingInfo GetTimingInfo()
         {
-            var generatorTimings = _state
-                .Generators
+            var generatorTimings = _state.Generators
                 .ZipAsArray(
                     _state.GeneratorStates,
                     (generator, generatorState) =>
@@ -369,8 +366,7 @@ namespace Microsoft.CodeAnalysis
                     // the generator is initialized, but we need to reparse the post-init trees as the parse options have changed
                     var reparsedInitSources = ParseAdditionalSources(
                         sourceGenerator,
-                        generatorState
-                            .PostInitTrees
+                        generatorState.PostInitTrees
                             .SelectAsArray(t => new GeneratedSourceText(t.HintName, t.Text)),
                         cancellationToken
                     );
@@ -405,8 +401,7 @@ namespace Microsoft.CodeAnalysis
             }
             constantSourcesBuilder.Free();
 
-            var syntaxStoreBuilder = _state
-                .SyntaxStore
+            var syntaxStoreBuilder = _state.SyntaxStore
                 .ToBuilder(
                     compilation,
                     syntaxInputNodes.ToImmutableAndFree(),
@@ -428,8 +423,7 @@ namespace Microsoft.CodeAnalysis
                     continue;
                 }
 
-                using var generatorTimer = CodeAnalysisEventSource
-                    .Log
+                using var generatorTimer = CodeAnalysisEventSource.Log
                     .CreateSingleGeneratorRunTimer(
                         state.Generators[i],
                         (t) =>
@@ -593,8 +587,7 @@ namespace Microsoft.CodeAnalysis
         {
             if (CodeAnalysisEventSource.Log.IsEnabled())
             {
-                CodeAnalysisEventSource
-                    .Log
+                CodeAnalysisEventSource.Log
                     .GeneratorException(generator.GetGeneratorType().Name, e.ToString());
             }
 

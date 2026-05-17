@@ -378,9 +378,8 @@
                 {
                     var dest = await ProjectTo<Dest>(context.Sources).SingleAsync();
 
-                    dest.Value.ShouldBe(
-                        "Jimmy, seriously, for real, is straight up dope! No joke!"
-                    );
+                    dest.Value
+                        .ShouldBe("Jimmy, seriously, for real, is straight up dope! No joke!");
                 }
             }
         }

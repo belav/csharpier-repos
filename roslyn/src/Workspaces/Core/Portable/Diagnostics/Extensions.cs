@@ -168,8 +168,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 }
 
                 var result = new DiagnosticAnalysisResultBuilder(project, version);
-                var diagnosticIdsToFilter = skippedAnalyzersInfo
-                    .FilteredDiagnosticIdsForAnalyzers
+                var diagnosticIdsToFilter = skippedAnalyzersInfo.FilteredDiagnosticIdsForAnalyzers
                     .GetValueOrDefault(analyzer, ImmutableArray<string>.Empty);
 
                 if (documentAnalysisScope != null)
@@ -188,8 +187,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                             if (treeToAnalyze != null)
                             {
                                 if (
-                                    analysisResult
-                                        .SyntaxDiagnostics
+                                    analysisResult.SyntaxDiagnostics
                                         .TryGetValue(treeToAnalyze, out diagnosticsByAnalyzerMap)
                                 )
                                 {
@@ -208,8 +206,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                                 }
                             }
                             else if (
-                                analysisResult
-                                    .AdditionalFileDiagnostics
+                                analysisResult.AdditionalFileDiagnostics
                                     .TryGetValue(
                                         additionalFileToAnalyze!,
                                         out diagnosticsByAnalyzerMap
@@ -234,8 +231,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
                         case AnalysisKind.Semantic:
                             if (
-                                analysisResult
-                                    .SemanticDiagnostics
+                                analysisResult.SemanticDiagnostics
                                     .TryGetValue(treeToAnalyze!, out diagnosticsByAnalyzerMap)
                             )
                             {
@@ -553,8 +549,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             }
 
             Debug.Assert(
-                documentAnalysisScope
-                    .Analyzers
+                documentAnalysisScope.Analyzers
                     .ToSet()
                     .IsSubsetOf(compilationWithAnalyzers.Analyzers)
             );

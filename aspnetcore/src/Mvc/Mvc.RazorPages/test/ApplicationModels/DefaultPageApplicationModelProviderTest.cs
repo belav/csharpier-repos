@@ -154,8 +154,7 @@ public class DefaultPageApplicationModelProviderTest
 
         // Assert
         Assert.NotNull(context.PageApplicationModel);
-        var propertiesOnPage = context
-            .PageApplicationModel
+        var propertiesOnPage = context.PageApplicationModel
             .HandlerProperties
             .Where(p => p.PropertyInfo.DeclaringType.GetTypeInfo() == typeInfo);
         Assert.Collection(
@@ -277,8 +276,7 @@ public class DefaultPageApplicationModelProviderTest
         // Assert
         Assert.NotNull(context.PageApplicationModel);
         Assert.Collection(
-            context
-                .PageApplicationModel
+            context.PageApplicationModel
                 .HandlerProperties
                 .OrderBy(p => p.PropertyName)
                 .Where(p => p.BindingInfo != null),
@@ -697,8 +695,7 @@ public class DefaultPageApplicationModelProviderTest
 
         // Assert
         var pageModel = context.PageApplicationModel;
-        var propertiesOnPage = pageModel
-            .HandlerProperties
+        var propertiesOnPage = pageModel.HandlerProperties
             .Where(p => p.PropertyInfo.DeclaringType.GetTypeInfo() == typeInfo);
         Assert.Collection(
             propertiesOnPage.OrderBy(p => p.PropertyName),
@@ -1095,12 +1092,16 @@ public class DefaultPageApplicationModelProviderTest
                 );
                 Assert.NotNull(p.BindingInfo.RequestPredicate);
                 Assert.True(
-                    p.BindingInfo.RequestPredicate(
-                        new ActionContext
-                        {
-                            HttpContext = new DefaultHttpContext { Request = { Method = "GET" } },
-                        }
-                    )
+                    p.BindingInfo
+                        .RequestPredicate(
+                            new ActionContext
+                            {
+                                HttpContext = new DefaultHttpContext
+                                {
+                                    Request = { Method = "GET" },
+                                },
+                            }
+                        )
                 );
             }
         );

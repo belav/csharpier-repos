@@ -292,10 +292,8 @@ namespace System.Activities.Tracking
                 HybridCollection<ActivityStateQuery> eventSubscriptions;
                 //first look for a specific match, if not found, look for a generic match.
                 if (
-                    this.activitySubscriptions.TryGetValue(
-                        activityStateRecord.Activity.Name,
-                        out eventSubscriptions
-                    )
+                    this.activitySubscriptions
+                        .TryGetValue(activityStateRecord.Activity.Name, out eventSubscriptions)
                 )
                 {
                     query = MatchActivityState(
@@ -362,10 +360,8 @@ namespace System.Activities.Tracking
             if (this.workflowEventSubscriptions != null)
             {
                 if (
-                    !this.workflowEventSubscriptions.TryGetValue(
-                        workflowRecord.State,
-                        out trackingQuery
-                    )
+                    !this.workflowEventSubscriptions
+                        .TryGetValue(workflowRecord.State, out trackingQuery)
                 )
                 {
                     this.workflowEventSubscriptions.TryGetValue("*", out trackingQuery);
@@ -381,10 +377,8 @@ namespace System.Activities.Tracking
             {
                 if (bookmarkRecord.BookmarkName != null)
                 {
-                    this.bookmarkSubscriptions.TryGetValue(
-                        bookmarkRecord.BookmarkName,
-                        out trackingQuery
-                    );
+                    this.bookmarkSubscriptions
+                        .TryGetValue(bookmarkRecord.BookmarkName, out trackingQuery);
                 }
                 if (trackingQuery == null)
                 {

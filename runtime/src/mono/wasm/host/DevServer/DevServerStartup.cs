@@ -156,8 +156,7 @@ internal sealed class DevServerStartup
                     else
                     {
                         context.Response.StatusCode = 404;
-                        return context
-                            .Response
+                        return context.Response
                             .WriteAsync(
                                 $"The server is configured only to "
                                     + $"handle request URIs within the PathBase '{pathBase}'."

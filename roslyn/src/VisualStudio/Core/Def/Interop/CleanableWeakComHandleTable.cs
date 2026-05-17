@@ -72,8 +72,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Interop
                 "This method is optimized for cases where calls do not yield before checking _needsCleanUp."
             );
 
-            await ThreadingContext
-                .JoinableTaskFactory
+            await ThreadingContext.JoinableTaskFactory
                 .SwitchToMainThreadAsync(ThreadingContext.DisposalToken);
 
             if (!_needsCleanUp)

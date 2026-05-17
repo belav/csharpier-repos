@@ -301,8 +301,7 @@ public class Index : ConventionAnnotatable, IMutableIndex, IConventionIndex, IIn
         IConventionAnnotation? annotation,
         IConventionAnnotation? oldAnnotation
     ) =>
-        Builder
-            .ModelBuilder
+        Builder.ModelBuilder
             .Metadata
             .ConventionDispatcher
             .OnIndexAnnotationChanged(Builder, name, annotation, oldAnnotation);

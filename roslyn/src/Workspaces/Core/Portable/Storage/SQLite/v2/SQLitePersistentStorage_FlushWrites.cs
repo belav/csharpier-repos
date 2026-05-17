@@ -81,16 +81,13 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
             var exception = connection.RunInTransaction(
                 static state =>
                 {
-                    state
-                        .self
+                    state.self
                         ._solutionAccessor
                         .FlushInMemoryDataToDisk_MustRunInTransaction(state.connection);
-                    state
-                        .self
+                    state.self
                         ._projectAccessor
                         .FlushInMemoryDataToDisk_MustRunInTransaction(state.connection);
-                    state
-                        .self
+                    state.self
                         ._documentAccessor
                         .FlushInMemoryDataToDisk_MustRunInTransaction(state.connection);
                 },

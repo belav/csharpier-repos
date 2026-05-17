@@ -174,8 +174,7 @@ namespace System.Data.Mapping.ViewGeneration.Validation
 
             if (childRewriter == null)
             {
-                string message = System
-                    .Data
+                string message = System.Data
                     .Entity
                     .Strings
                     .ViewGen_Foreign_Key_Missing_Table_Mapping(ToUserString(), ChildTable.Name);
@@ -193,8 +192,7 @@ namespace System.Data.Mapping.ViewGeneration.Validation
 
             if (parentRewriter == null)
             {
-                string message = System
-                    .Data
+                string message = System.Data
                     .Entity
                     .Strings
                     .ViewGen_Foreign_Key_Missing_Table_Mapping(ToUserString(), ParentTable.Name);
@@ -291,8 +289,7 @@ namespace System.Data.Mapping.ViewGeneration.Validation
                 // Foreign key constraint not being ensured in C-space
                 string childExtents = LeftCellWrapper.GetExtentListAsUserString(cNode.GetLeaves());
                 string parentExtents = LeftCellWrapper.GetExtentListAsUserString(pNode.GetLeaves());
-                string message = System
-                    .Data
+                string message = System.Data
                     .Entity
                     .Strings
                     .ViewGen_Foreign_Key_Not_Guaranteed_InCSpace(ToUserString());
@@ -424,8 +421,7 @@ namespace System.Data.Mapping.ViewGeneration.Validation
             if (foundCell == false)
             {
                 // No cell found -- Declare error
-                string message = System
-                    .Data
+                string message = System.Data
                     .Entity
                     .Strings
                     .ViewGen_Foreign_Key_Missing_Relationship_Mapping(ToUserString());
@@ -485,8 +481,7 @@ namespace System.Data.Mapping.ViewGeneration.Validation
             //Now Check if the properties on the Edm side are connected via an FK relationship.
             if ((childPropertiesSet.Count != 0) && (parentPropertiesSet.Count != 0))
             {
-                var foreignKeyAssociations = childContext
-                    .EntityContainerMapping
+                var foreignKeyAssociations = childContext.EntityContainerMapping
                     .EdmEntityContainer
                     .BaseEntitySets
                     .OfType<AssociationSet>()
@@ -494,8 +489,7 @@ namespace System.Data.Mapping.ViewGeneration.Validation
                     .Select(it => it.ElementType);
                 foreach (AssociationType association in foreignKeyAssociations)
                 {
-                    ReferentialConstraint refConstraint = association
-                        .ReferentialConstraints
+                    ReferentialConstraint refConstraint = association.ReferentialConstraints
                         .FirstOrDefault();
                     //We need to check to see if the dependent properties that were mapped from S side are present as
                     //dependant properties of this ref constraint on the Edm side. We need to do the same for principal side but
@@ -618,8 +612,7 @@ namespace System.Data.Mapping.ViewGeneration.Validation
             {
                 // Parent should at most one since we are talking
                 // about foreign keys here
-                string message = System
-                    .Data
+                string message = System.Data
                     .Entity
                     .Strings
                     .ViewGen_Foreign_Key_UpperBound_MustBeOne(
@@ -645,8 +638,7 @@ namespace System.Data.Mapping.ViewGeneration.Validation
             {
                 // Some column in the constraint in the child table
                 // is non-nullable and lower bound is not 1
-                string message = System
-                    .Data
+                string message = System.Data
                     .Entity
                     .Strings
                     .ViewGen_Foreign_Key_LowerBound_MustBeOne(
@@ -701,8 +693,7 @@ namespace System.Data.Mapping.ViewGeneration.Validation
 
                 // childColumns are mapped to parentEnd but ParentColumns are not mapped to the end
                 // corresponding to the parentEnd -- this is an error
-                string message = System
-                    .Data
+                string message = System.Data
                     .Entity
                     .Strings
                     .ViewGen_Foreign_Key_ParentTable_NotMappedToEnd(
@@ -808,10 +799,8 @@ namespace System.Data.Mapping.ViewGeneration.Validation
                     // Get all the slots corresponding to the columns
                     // But stick to the slots with in these ends since the same column might be
                     //projected twice in different ends
-                    List<int> columnIndexes = cell.SQuery.GetProjectedPositions(
-                        columns,
-                        endIndexes
-                    );
+                    List<int> columnIndexes = cell.SQuery
+                        .GetProjectedPositions(columns, endIndexes);
                     if (columnIndexes == null)
                     {
                         continue; // columns are not projected with in this end
@@ -1042,9 +1031,8 @@ namespace System.Data.Mapping.ViewGeneration.Validation
             {
                 foreach (AssociationSetEnd setEnd in set.AssociationSetEnds)
                 {
-                    List<int> endSlots = cell.CQuery.GetAssociationEndSlots(
-                        setEnd.CorrespondingAssociationEndMember
-                    );
+                    List<int> endSlots = cell.CQuery
+                        .GetAssociationEndSlots(setEnd.CorrespondingAssociationEndMember);
                     Debug.Assert(endSlots.Count > 0);
                     List<int> localslotNums = cell.SQuery.GetProjectedPositions(columns, endSlots);
                     if (localslotNums != null)
@@ -1119,8 +1107,7 @@ namespace System.Data.Mapping.ViewGeneration.Validation
         {
             string childColsString = MemberPath.PropertiesToUserString(m_childColumns, false);
             string parentColsString = MemberPath.PropertiesToUserString(m_parentColumns, false);
-            string result = System
-                .Data
+            string result = System.Data
                 .Entity
                 .Strings
                 .ViewGen_Foreign_Key(

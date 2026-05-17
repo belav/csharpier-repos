@@ -35,8 +35,7 @@ internal sealed class TimestampConverter<TMessage> : SettingsConverterBase<TMess
         }
         else
         {
-            message
-                .Descriptor
+            message.Descriptor
                 .Fields[Timestamp.SecondsFieldNumber]
                 .Accessor
                 .SetValue(message, seconds);

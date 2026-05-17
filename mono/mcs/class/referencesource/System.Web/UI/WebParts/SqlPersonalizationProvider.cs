@@ -723,15 +723,13 @@ namespace System.Web.UI.WebControls.WebParts
             }
 
             SetCommandTypeAndTimeout(command);
-            command
-                .Parameters
+            command.Parameters
                 .Add(CreateParameter("@ApplicationName", SqlDbType.NVarChar, this.ApplicationName));
             command.Parameters.Add(CreateParameter("@Path", SqlDbType.NVarChar, path));
             if (userName != null)
             {
                 command.Parameters.Add(CreateParameter("@UserName", SqlDbType.NVarChar, userName));
-                command
-                    .Parameters
+                command.Parameters
                     .Add(CreateParameter("@CurrentTimeUtc", SqlDbType.DateTime, DateTime.UtcNow));
             }
 
@@ -834,15 +832,13 @@ namespace System.Web.UI.WebControls.WebParts
             }
 
             SetCommandTypeAndTimeout(command);
-            command
-                .Parameters
+            command.Parameters
                 .Add(CreateParameter("@ApplicationName", SqlDbType.NVarChar, ApplicationName));
             command.Parameters.Add(CreateParameter("@Path", SqlDbType.NVarChar, path));
             if (userName != null)
             {
                 command.Parameters.Add(CreateParameter("@UserName", SqlDbType.NVarChar, userName));
-                command
-                    .Parameters
+                command.Parameters
                     .Add(CreateParameter("@CurrentTimeUtc", SqlDbType.DateTime, DateTime.UtcNow));
             }
 
@@ -1302,13 +1298,11 @@ namespace System.Web.UI.WebControls.WebParts
             }
 
             SetCommandTypeAndTimeout(command);
-            command
-                .Parameters
+            command.Parameters
                 .Add(CreateParameter("@ApplicationName", SqlDbType.NVarChar, ApplicationName));
             command.Parameters.Add(CreateParameter("@Path", SqlDbType.NVarChar, path));
             command.Parameters.Add(CreateParameter("@PageSettings", SqlDbType.Image, state));
-            command
-                .Parameters
+            command.Parameters
                 .Add(CreateParameter("@CurrentTimeUtc", SqlDbType.DateTime, DateTime.UtcNow));
             if (userName != null)
             {

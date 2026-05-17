@@ -866,8 +866,7 @@ namespace System.Xml.RwFactoryWriterTests
                     != null
                 )
                 {
-                    moduleName = ((CXmlDriverParam)_testModuleParams[0])
-                        .RawNodes
+                    moduleName = ((CXmlDriverParam)_testModuleParams[0]).RawNodes
                         .TestModule
                         .Attribute("Name")
                         .Value;
@@ -885,14 +884,12 @@ namespace System.Xml.RwFactoryWriterTests
                     return null;
                 string moduleDesc = "";
                 if (
-                    ((CXmlDriverParam)_testModuleParams[0])
-                        .RawNodes
+                    ((CXmlDriverParam)_testModuleParams[0]).RawNodes
                         .TestModule
                         .Attribute("Description") != null
                 )
                 {
-                    moduleDesc = ((CXmlDriverParam)_testModuleParams[0])
-                        .RawNodes
+                    moduleDesc = ((CXmlDriverParam)_testModuleParams[0]).RawNodes
                         .TestModule
                         .Attribute("Description")
                         .Value;

@@ -2860,8 +2860,7 @@ public static class Program
 
             CreateCompilationWithMscorlib40AndSystemCore(
                     code,
-                    parseOptions: CSharpParseOptions
-                        .Default
+                    parseOptions: CSharpParseOptions.Default
                         .WithLanguageVersion(LanguageVersion.CSharp7_1)
                 )
                 .VerifyDiagnostics(
@@ -2907,8 +2906,7 @@ public static class Program
 
             CreateCompilationWithMscorlib40AndSystemCore(
                     source: code,
-                    parseOptions: CSharpParseOptions
-                        .Default
+                    parseOptions: CSharpParseOptions.Default
                         .WithLanguageVersion(LanguageVersion.CSharp7_1),
                     references: new[] { reference.ToMetadataReference() }
                 )
@@ -2922,8 +2920,7 @@ public static class Program
 
             CreateCompilationWithMscorlib40AndSystemCore(
                     source: code,
-                    parseOptions: CSharpParseOptions
-                        .Default
+                    parseOptions: CSharpParseOptions.Default
                         .WithLanguageVersion(LanguageVersion.CSharp7_1),
                     references: new[] { reference.EmitToImageReference() }
                 )
@@ -2977,8 +2974,7 @@ public static class Program
 
             CreateCompilationWithMscorlib40AndSystemCore(
                     code,
-                    parseOptions: CSharpParseOptions
-                        .Default
+                    parseOptions: CSharpParseOptions.Default
                         .WithLanguageVersion(LanguageVersion.CSharp7_1)
                 )
                 .VerifyDiagnostics(
@@ -3064,8 +3060,7 @@ public static class Program
 
             CreateCompilationWithMscorlib40AndSystemCore(
                     source: code,
-                    parseOptions: CSharpParseOptions
-                        .Default
+                    parseOptions: CSharpParseOptions.Default
                         .WithLanguageVersion(LanguageVersion.CSharp7_1),
                     references: new[] { reference.ToMetadataReference() }
                 )
@@ -3079,8 +3074,7 @@ public static class Program
 
             CreateCompilationWithMscorlib40AndSystemCore(
                     source: code,
-                    parseOptions: CSharpParseOptions
-                        .Default
+                    parseOptions: CSharpParseOptions.Default
                         .WithLanguageVersion(LanguageVersion.CSharp7_1),
                     references: new[] { reference.EmitToImageReference() }
                 )

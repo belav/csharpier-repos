@@ -15,8 +15,7 @@ namespace System.Web.Http.ApiExplorer
         public void FromUriParameterSource_ShowUpCorrectlyOnDescription()
         {
             HttpConfiguration config = new HttpConfiguration();
-            config
-                .Routes
+            config.Routes
                 .MapHttpRoute(
                     "Default",
                     "{controller}/{action}/{id}",
@@ -30,34 +29,29 @@ namespace System.Web.Http.ApiExplorer
             config.Services.Replace(typeof(IHttpControllerSelector), controllerSelector);
             IApiExplorer explorer = config.Services.GetApiExplorer();
 
-            ApiDescription description = explorer
-                .ApiDescriptions
+            ApiDescription description = explorer.ApiDescriptions
                 .FirstOrDefault(desc => desc.ActionDescriptor.ActionName == "GetCompleTypeFromUri");
             Assert.NotNull(description);
             Assert.True(
-                description
-                    .ParameterDescriptions
+                description.ParameterDescriptions
                     .All(param => param.Source == ApiParameterSource.FromUri),
                 "All parameters should come from URI."
             );
 
-            description = explorer
-                .ApiDescriptions
+            description = explorer.ApiDescriptions
                 .FirstOrDefault(desc =>
                     desc.ActionDescriptor.ActionName == "GetCustomFromUriAttribute"
                 );
             Assert.NotNull(description);
             Assert.True(
-                description
-                    .ParameterDescriptions
+                description.ParameterDescriptions
                     .Any(param =>
                         param.Source == ApiParameterSource.FromUri && param.Name == "value"
                     ),
                 "The 'value' parameter should come from URI."
             );
             Assert.True(
-                description
-                    .ParameterDescriptions
+                description.ParameterDescriptions
                     .Any(param =>
                         param.Source == ApiParameterSource.FromBody && param.Name == "bodyValue"
                     ),
@@ -69,8 +63,7 @@ namespace System.Web.Http.ApiExplorer
         public void FromBodyParameterSource_ShowUpCorrectlyOnDescription()
         {
             HttpConfiguration config = new HttpConfiguration();
-            config
-                .Routes
+            config.Routes
                 .MapHttpRoute(
                     "Default",
                     "{controller}/{action}/{id}",
@@ -84,15 +77,13 @@ namespace System.Web.Http.ApiExplorer
             config.Services.Replace(typeof(IHttpControllerSelector), controllerSelector);
             IApiExplorer explorer = config.Services.GetApiExplorer();
 
-            ApiDescription description = explorer
-                .ApiDescriptions
+            ApiDescription description = explorer.ApiDescriptions
                 .FirstOrDefault(desc =>
                     desc.ActionDescriptor.ActionName == "PostSimpleTypeFromBody"
                 );
             Assert.NotNull(description);
             Assert.True(
-                description
-                    .ParameterDescriptions
+                description.ParameterDescriptions
                     .All(param => param.Source == ApiParameterSource.FromBody),
                 "The parameter should come from Body."
             );
@@ -102,8 +93,7 @@ namespace System.Web.Http.ApiExplorer
         public void UnknownParameterSource_ShowUpCorrectlyOnDescription()
         {
             HttpConfiguration config = new HttpConfiguration();
-            config
-                .Routes
+            config.Routes
                 .MapHttpRoute(
                     "Default",
                     "{controller}/{action}/{id}",
@@ -117,15 +107,13 @@ namespace System.Web.Http.ApiExplorer
             config.Services.Replace(typeof(IHttpControllerSelector), controllerSelector);
             IApiExplorer explorer = config.Services.GetApiExplorer();
 
-            ApiDescription description = explorer
-                .ApiDescriptions
+            ApiDescription description = explorer.ApiDescriptions
                 .FirstOrDefault(desc =>
                     desc.ActionDescriptor.ActionName == "GetFromHeaderAttribute"
                 );
             Assert.NotNull(description);
             Assert.True(
-                description
-                    .ParameterDescriptions
+                description.ParameterDescriptions
                     .All(param => param.Source == ApiParameterSource.Unknown),
                 "The parameter source should be Unknown."
             );
@@ -144,8 +132,7 @@ namespace System.Web.Http.ApiExplorer
             config.Services.Replace(typeof(IHttpControllerSelector), controllerSelector);
             IApiExplorer explorer = config.Services.GetApiExplorer();
 
-            ApiDescription description = explorer
-                .ApiDescriptions
+            ApiDescription description = explorer.ApiDescriptions
                 .FirstOrDefault(desc => desc.ActionDescriptor.ActionName == "GetWithEnumParameter");
             Assert.NotNull(description);
             ApiParameterDescription parameterDescription = Assert.Single(
@@ -154,8 +141,7 @@ namespace System.Web.Http.ApiExplorer
             Assert.Equal(ApiParameterSource.FromUri, parameterDescription.Source);
             Assert.Equal("EnumParameterOverloads?scope={scope}", description.RelativePath);
 
-            description = explorer
-                .ApiDescriptions
+            description = explorer.ApiDescriptions
                 .FirstOrDefault(desc =>
                     desc.ActionDescriptor.ActionName == "GetWithTwoEnumParameters"
                 );
@@ -168,8 +154,7 @@ namespace System.Web.Http.ApiExplorer
                 description.RelativePath
             );
 
-            description = explorer
-                .ApiDescriptions
+            description = explorer.ApiDescriptions
                 .FirstOrDefault(desc =>
                     desc.ActionDescriptor.ActionName == "GetWithNullableEnumParameter"
                 );
@@ -200,8 +185,7 @@ namespace System.Web.Http.ApiExplorer
         {
             // Arrange
             HttpConfiguration config = new HttpConfiguration();
-            config
-                .Routes
+            config.Routes
                 .MapHttpRoute(
                     "Default",
                     routeTemplate,
@@ -216,8 +200,7 @@ namespace System.Web.Http.ApiExplorer
             IApiExplorer explorer = config.Services.GetApiExplorer();
 
             // Act
-            ApiDescription description = explorer
-                .ApiDescriptions
+            ApiDescription description = explorer.ApiDescriptions
                 .FirstOrDefault(desc => desc.ActionDescriptor.ActionName == methodName);
 
             // Assert

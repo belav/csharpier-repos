@@ -19,8 +19,7 @@ public class CSharpMigrationOperationGeneratorTest
                 new CSharpHelper(
                     new SqlServerTypeMappingSource(
                         TestServiceFactory.Instance.Create<TypeMappingSourceDependencies>(),
-                        TestServiceFactory
-                            .Instance
+                        TestServiceFactory.Instance
                             .Create<RelationalTypeMappingSourceDependencies>()
                     )
                 )

@@ -88,8 +88,7 @@ namespace System.Data.ProviderBase
             DbConnectionPool _pool;
 
             private static int _objectTypeCount; // Bid counter
-            internal readonly int _objectID = System
-                .Threading
+            internal readonly int _objectID = System.Threading
                 .Interlocked
                 .Increment(ref _objectTypeCount);
 
@@ -560,8 +559,7 @@ namespace System.Data.ProviderBase
         private int _totalObjects;
 
         private static int _objectTypeCount; // Bid counter
-        internal readonly int _objectID = System
-            .Threading
+        internal readonly int _objectID = System.Threading
             .Interlocked
             .Increment(ref _objectTypeCount);
 
@@ -1439,9 +1437,10 @@ namespace System.Data.ProviderBase
                         }
                         else if (timeout)
                         {
-                            next.Completion.TrySetException(
-                                ADP.ExceptionWithStackTrace(ADP.PooledOpenTimeout())
-                            );
+                            next.Completion
+                                .TrySetException(
+                                    ADP.ExceptionWithStackTrace(ADP.PooledOpenTimeout())
+                                );
                         }
                         else
                         {
@@ -1715,8 +1714,7 @@ namespace System.Data.ProviderBase
                                     if (onlyOneCheckConnection)
                                     {
                                         if (
-                                            _waitHandles
-                                                .CreationSemaphore
+                                            _waitHandles.CreationSemaphore
                                                 .WaitOne(
                                                     unchecked((int)waitForMultipleObjectsTimeout)
                                                 )

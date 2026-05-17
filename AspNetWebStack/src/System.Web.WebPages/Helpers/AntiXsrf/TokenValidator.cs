@@ -64,8 +64,7 @@ namespace System.Web.Helpers.AntiXsrf
             // populate AdditionalData
             if (_config.AdditionalDataProvider != null)
             {
-                formToken.AdditionalData = _config
-                    .AdditionalDataProvider
+                formToken.AdditionalData = _config.AdditionalDataProvider
                     .GetAdditionalData(httpContext);
             }
 
@@ -170,8 +169,7 @@ namespace System.Web.Helpers.AntiXsrf
             // Is the AdditionalData valid?
             if (
                 _config.AdditionalDataProvider != null
-                && !_config
-                    .AdditionalDataProvider
+                && !_config.AdditionalDataProvider
                     .ValidateAdditionalData(httpContext, fieldToken.AdditionalData)
             )
             {

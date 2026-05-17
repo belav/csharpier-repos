@@ -42,8 +42,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             SyntaxNode root,
             CancellationToken cancellationToken
         ) =>
-            CodeAnalysis
-                .Shared
+            CodeAnalysis.Shared
                 .Extensions
                 .SyntaxNodeExtensions
                 .GetDirectiveInfoForRoot<DirectiveTriviaSyntax>(

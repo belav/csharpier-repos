@@ -73,12 +73,8 @@ namespace System.Reflection.Runtime.MethodInfos
             CultureInfo? culture
         )
         {
-            object ctorAllocatedObject = this.MethodInvoker.CreateInstance(
-                parameters,
-                binder,
-                invokeAttr,
-                culture
-            );
+            object ctorAllocatedObject = this.MethodInvoker
+                .CreateInstance(parameters, binder, invokeAttr, culture);
             System.Diagnostics.DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
             return ctorAllocatedObject;
         }

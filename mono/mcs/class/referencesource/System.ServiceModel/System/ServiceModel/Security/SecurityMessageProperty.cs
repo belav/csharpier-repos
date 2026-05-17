@@ -316,9 +316,8 @@ namespace System.ServiceModel.Security
                             continue;
                         }
                     }
-                    SecurityTokenAttachmentMode attachmentMode = this.incomingSupportingTokens[
-                        i
-                    ].SecurityTokenAttachmentMode;
+                    SecurityTokenAttachmentMode attachmentMode = this.incomingSupportingTokens[i]
+                        .SecurityTokenAttachmentMode;
                     // a safety net in case more attachment modes get added to the product without
                     // reviewing this code.
                     if (
@@ -348,8 +347,7 @@ namespace System.ServiceModel.Security
         {
             if (this.disposed)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ObjectDisposedException(this.GetType().FullName));
             }
         }

@@ -101,8 +101,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertIfToSwitch
                     .WithTriviaFrom(ifStatement.IfKeyword),
                 openParenToken: ifStatement.OpenParenToken,
                 expression: (ExpressionSyntax)expression,
-                closeParenToken: ifStatement
-                    .CloseParenToken
+                closeParenToken: ifStatement.CloseParenToken
                     .WithPrependedLeadingTrivia(ElasticMarker),
                 openBraceToken: block?.OpenBraceToken ?? Token(SyntaxKind.OpenBraceToken),
                 sections: List(sectionList.Cast<SwitchSectionSyntax>()),
@@ -113,8 +112,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertIfToSwitch
 
         private static WhenClauseSyntax? AsWhenClause(AnalyzedSwitchLabel label) =>
             AsWhenClause(
-                label
-                    .Guards
+                label.Guards
                     .Select(e => e.WalkUpParentheses())
                     .AggregateOrDefault(
                         (prev, current) =>
@@ -163,12 +161,10 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertIfToSwitch
         {
             var node = operation.Syntax;
             Debug.Assert(operation.SemanticModel is not null);
-            var requiresBreak = operation
-                .SemanticModel
+            var requiresBreak = operation.SemanticModel
                 .AnalyzeControlFlow(node)
                 .EndPointIsReachable;
-            var requiresBlock = !operation
-                .SemanticModel
+            var requiresBlock = !operation.SemanticModel
                 .AnalyzeDataFlow(node)
                 .VariablesDeclared
                 .IsDefaultOrEmpty;

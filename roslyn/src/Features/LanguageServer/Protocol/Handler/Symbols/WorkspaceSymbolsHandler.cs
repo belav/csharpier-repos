@@ -97,8 +97,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                 CancellationToken cancellationToken
             )
             {
-                var document = await result
-                    .NavigableItem
+                var document = await result.NavigableItem
                     .Document
                     .GetRequiredDocumentAsync(project.Solution, cancellationToken)
                     .ConfigureAwait(false);
@@ -115,8 +114,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                 if (location == null)
                     return;
 
-                var service = project
-                    .Solution
+                var service = project.Solution
                     .Services
                     .GetRequiredService<ILspSymbolInformationCreationService>();
                 var symbolInfo = service.Create(

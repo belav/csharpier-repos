@@ -995,13 +995,11 @@ namespace Mono.Tools
 
         static void ShowTestRoots()
         {
-            bool ms = X509StoreManager
-                .CurrentUser
+            bool ms = X509StoreManager.CurrentUser
                 .TrustedRoot
                 .Certificates
                 .Contains(new X509Certificate(microsoftRootAgency));
-            bool mono = X509StoreManager
-                .CurrentUser
+            bool mono = X509StoreManager.CurrentUser
                 .TrustedRoot
                 .Certificates
                 .Contains(new X509Certificate(monoTestRoot));

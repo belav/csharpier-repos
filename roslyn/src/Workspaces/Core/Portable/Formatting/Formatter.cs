@@ -670,8 +670,7 @@ namespace Microsoft.CodeAnalysis.Formatting
             string language
         )
         {
-            var syntaxFormattingService = workspace
-                .Services
+            var syntaxFormattingService = workspace.Services
                 .GetRequiredLanguageService<ISyntaxFormattingService>(language);
             return syntaxFormattingService.GetFormattingOptions(
                 optionSet ?? workspace.CurrentSolution.Options,

@@ -23,8 +23,7 @@ namespace System.Globalization.Tests
             try
             {
                 ret = (bool)
-                    typeof(object)
-                        .Assembly
+                    typeof(object).Assembly
                         .GetType("System.Globalization.GlobalizationMode")
                         .GetProperty(
                             "PredefinedCulturesOnly",
@@ -1407,8 +1406,7 @@ namespace System.Globalization.Tests
                 );
 
             Assert.Equal(
-                CultureInfo
-                    .InvariantCulture
+                CultureInfo.InvariantCulture
                     .DateTimeFormat
                     .GetEra(CultureInfo.InvariantCulture.DateTimeFormat.GetEraName(1)),
                 ci.DateTimeFormat.GetEra(ci.DateTimeFormat.GetEraName(1))

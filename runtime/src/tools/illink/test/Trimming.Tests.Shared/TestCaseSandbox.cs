@@ -38,8 +38,7 @@ namespace Mono.Linker.Tests.TestCasesRunner
                 string.IsNullOrEmpty(namePrefix) ? "linker_tests" : namePrefix
             );
 
-            var locationRelativeToRoot = testCase
-                .SourceFile
+            var locationRelativeToRoot = testCase.SourceFile
                 .Parent
                 .RelativeTo(testCase.RootCasesDirectory);
             var suiteDirectory = rootDirectory.Combine(locationRelativeToRoot);
@@ -91,9 +90,10 @@ namespace Mono.Linker.Tests.TestCasesRunner
                 // When this is done, we also need to copy them into the expectations directory so that if they are used
                 // as references we can still compile the expectations version of the assemblies
                 if (destination.Parent == InputDirectory)
-                    dep.Source.Copy(
-                        ExpectationsDirectory.Combine(destination.RelativeTo(InputDirectory))
-                    );
+                    dep.Source
+                        .Copy(
+                            ExpectationsDirectory.Combine(destination.RelativeTo(InputDirectory))
+                        );
             }
 
             // Copy non class library dependencies to the sandbox

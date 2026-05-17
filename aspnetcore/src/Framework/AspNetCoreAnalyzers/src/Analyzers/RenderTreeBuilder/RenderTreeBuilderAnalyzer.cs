@@ -71,8 +71,7 @@ public partial class RenderTreeBuilderAnalyzer : DiagnosticAnalyzer
         WellKnownTypes wellKnownTypes,
         IMethodSymbol targetMethod
     ) =>
-        SymbolEqualityComparer
-            .Default
+        SymbolEqualityComparer.Default
             .Equals(
                 wellKnownTypes.Get(
                     WellKnownType.Microsoft_AspNetCore_Components_Rendering_RenderTreeBuilder

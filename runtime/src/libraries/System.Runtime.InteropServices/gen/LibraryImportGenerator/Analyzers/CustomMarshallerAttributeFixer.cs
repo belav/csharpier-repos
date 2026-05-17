@@ -45,8 +45,7 @@ namespace Microsoft.Interop.Analyzers
                 // Organize all the diagnostics by marshaller, managed type, and whether or not it's a collection marshaller
                 foreach (Diagnostic diagnostic in diagnostics)
                 {
-                    Document doc = fixAllContext
-                        .Solution
+                    Document doc = fixAllContext.Solution
                         .GetDocument(diagnostic.Location.SourceTree);
                     SemanticModel model = await doc.GetSemanticModelAsync(
                             fixAllContext.CancellationToken
@@ -63,8 +62,7 @@ namespace Microsoft.Interop.Analyzers
                         entryPointTypeSymbol
                     );
 
-                    SyntaxNode root = await diagnostic
-                        .Location
+                    SyntaxNode root = await diagnostic.Location
                         .SourceTree
                         .GetRootAsync(fixAllContext.CancellationToken)
                         .ConfigureAwait(false);
@@ -164,8 +162,7 @@ namespace Microsoft.Interop.Analyzers
                         return ImmutableArray.CreateRange(
                             (
                                 await Task.WhenAll(
-                                        context
-                                            .Solution
+                                        context.Solution
                                             .Projects
                                             .Select(context.GetAllDiagnosticsAsync)
                                     )
@@ -226,8 +223,7 @@ namespace Microsoft.Interop.Analyzers
                 {
                     requiredShapeDiagnostics.Add(diagnostic);
                     if (
-                        diagnostic
-                            .Properties
+                        diagnostic.Properties
                             .TryGetValue(MissingMemberNames.Key, out string missingMembers)
                     )
                     {
@@ -375,12 +371,10 @@ namespace Microsoft.Interop.Analyzers
                 isLinearCollectionMarshaller,
                 editor.SemanticModel.Compilation
             );
-            INamedTypeSymbol spanOfT = editor
-                .SemanticModel
+            INamedTypeSymbol spanOfT = editor.SemanticModel
                 .Compilation
                 .GetBestTypeByMetadataName(TypeNames.System_Span_Metadata)!;
-            INamedTypeSymbol readOnlySpanOfT = editor
-                .SemanticModel
+            INamedTypeSymbol readOnlySpanOfT = editor.SemanticModel
                 .Compilation
                 .GetBestTypeByMetadataName(TypeNames.System_ReadOnlySpan_Metadata)!;
             var (typeParameters, _) =
@@ -445,8 +439,7 @@ namespace Microsoft.Interop.Analyzers
                         gen.PropertyDeclaration(
                             ShapeMemberNames.BufferSize,
                             gen.TypeExpression(
-                                editor
-                                    .SemanticModel
+                                editor.SemanticModel
                                     .Compilation
                                     .GetSpecialType(SpecialType.System_Int32)
                             ),
@@ -465,8 +458,7 @@ namespace Microsoft.Interop.Analyzers
 
             if (
                 missingMemberNames.Contains(
-                    ShapeMemberNames
-                        .LinearCollection
+                    ShapeMemberNames.LinearCollection
                         .Stateless
                         .AllocateContainerForUnmanagedElements
                 )
@@ -474,8 +466,7 @@ namespace Microsoft.Interop.Analyzers
             {
                 newMembers.Add(
                     gen.MethodDeclaration(
-                        ShapeMemberNames
-                            .LinearCollection
+                        ShapeMemberNames.LinearCollection
                             .Stateless
                             .AllocateContainerForUnmanagedElements,
                         parameters: new[]
@@ -506,8 +497,7 @@ namespace Microsoft.Interop.Analyzers
             {
                 newMembers.Add(
                     gen.MethodDeclaration(
-                        ShapeMemberNames
-                            .LinearCollection
+                        ShapeMemberNames.LinearCollection
                             .Stateless
                             .AllocateContainerForManagedElements,
                         parameters: new[]
@@ -719,12 +709,10 @@ namespace Microsoft.Interop.Analyzers
                 isLinearCollectionMarshaller,
                 editor.SemanticModel.Compilation
             );
-            INamedTypeSymbol spanOfT = editor
-                .SemanticModel
+            INamedTypeSymbol spanOfT = editor.SemanticModel
                 .Compilation
                 .GetBestTypeByMetadataName(TypeNames.System_Span_Metadata)!;
-            INamedTypeSymbol readOnlySpanOfT = editor
-                .SemanticModel
+            INamedTypeSymbol readOnlySpanOfT = editor.SemanticModel
                 .Compilation
                 .GetBestTypeByMetadataName(TypeNames.System_ReadOnlySpan_Metadata)!;
             var (typeParameters, _) =
@@ -815,8 +803,7 @@ namespace Microsoft.Interop.Analyzers
                         gen.PropertyDeclaration(
                             ShapeMemberNames.BufferSize,
                             gen.TypeExpression(
-                                editor
-                                    .SemanticModel
+                                editor.SemanticModel
                                     .Compilation
                                     .GetSpecialType(SpecialType.System_Int32)
                             ),

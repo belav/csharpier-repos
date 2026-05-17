@@ -1431,8 +1431,7 @@ public abstract class CompiledModelRelationalTestBase : CompiledModelTestBase
     {
         base.AddReferences(build, filePath);
         build.References.Add(BuildReference.ByName("Microsoft.EntityFrameworkCore.Relational"));
-        build
-            .References
+        build.References
             .Add(
                 BuildReference.ByName(
                     "Microsoft.EntityFrameworkCore.Relational.Specification.Tests"

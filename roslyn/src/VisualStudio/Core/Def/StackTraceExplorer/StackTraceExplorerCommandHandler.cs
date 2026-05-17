@@ -56,8 +56,7 @@ namespace Microsoft.VisualStudio.LanguageServices.StackTraceExplorer
             }
 
             var window = GetOrInitializeWindow();
-            _threadingContext
-                .JoinableTaskFactory
+            _threadingContext.JoinableTaskFactory
                 .RunAsync(async () =>
                 {
                     var shouldActivate = await window

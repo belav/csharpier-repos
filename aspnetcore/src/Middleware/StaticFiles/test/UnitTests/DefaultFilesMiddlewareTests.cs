@@ -123,8 +123,7 @@ public class DefaultFilesMiddlewareTests
                                 new Endpoint(
                                     (c) =>
                                     {
-                                        return context
-                                            .Response
+                                        return context.Response
                                             .WriteAsync(context.Request.Path.Value);
                                     },
                                     new EndpointMetadataCollection(),

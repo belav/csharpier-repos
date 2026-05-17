@@ -167,8 +167,7 @@ namespace System.Xml.Schema
             if (context!.NeedValidateChildren)
             { //i think i can get away with removing this if cond since won't make this call for documentelement
                 int errorCode;
-                context
-                    .ElementDecl!
+                context.ElementDecl!
                     .ContentValidator!
                     .ValidateElement(elementName, context, out errorCode);
                 if (errorCode < 0)
@@ -211,8 +210,7 @@ namespace System.Xml.Schema
                     try
                     {
                         reader.SchemaTypeObject = null;
-                        SchemaAttDef? attnDef = context
-                            .ElementDecl!
+                        SchemaAttDef? attnDef = context.ElementDecl!
                             .GetAttDef(new XmlQualifiedName(reader.LocalName, reader.Prefix));
                         if (attnDef != null)
                         {

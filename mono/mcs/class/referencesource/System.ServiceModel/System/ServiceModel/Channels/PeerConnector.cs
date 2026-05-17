@@ -209,12 +209,8 @@ namespace System.ServiceModel.Channels
             // timer will not be found if neighbor is already closed or connected.
             if (RemoveTimer(neighbor))
             {
-                this.neighborManager.CloseNeighbor(
-                    neighbor,
-                    reason,
-                    PeerCloseInitiator.LocalNode,
-                    exception
-                );
+                this.neighborManager
+                    .CloseNeighbor(neighbor, reason, PeerCloseInitiator.LocalNode, exception);
             }
         }
 
@@ -255,11 +251,8 @@ namespace System.ServiceModel.Channels
             // Close the neighbor after setting the neighbor state to Disconnected.
             // The set can fail if the neighbor is already being closed and that is ok.
             if (neighbor.TrySetState(PeerNeighborState.Disconnected))
-                this.neighborManager.CloseNeighbor(
-                    neighbor,
-                    closeReason,
-                    PeerCloseInitiator.RemoteNode
-                );
+                this.neighborManager
+                    .CloseNeighbor(neighbor, closeReason, PeerCloseInitiator.RemoteNode);
             else if (!(neighbor.State >= PeerNeighborState.Disconnected))
             {
                 throw Fx.AssertAndThrow("Unexpected neighbor state");
@@ -349,11 +342,12 @@ namespace System.ServiceModel.Channels
                     else
                     {
                         // We have max connected neighbors already. So close this one.
-                        this.neighborManager.CloseNeighbor(
-                            neighbor,
-                            PeerCloseReason.NodeBusy,
-                            PeerCloseInitiator.LocalNode
-                        );
+                        this.neighborManager
+                            .CloseNeighbor(
+                                neighbor,
+                                PeerCloseReason.NodeBusy,
+                                PeerCloseInitiator.LocalNode
+                            );
                     }
                 }
             }
@@ -455,11 +449,12 @@ namespace System.ServiceModel.Channels
                             {
                                 // The other neighbor should be closed
                                 SendTerminatingMessage(neighborToClose, action, closeReason2);
-                                this.neighborManager.CloseNeighbor(
-                                    neighborToClose,
-                                    closeReason2,
-                                    PeerCloseInitiator.LocalNode
-                                );
+                                this.neighborManager
+                                    .CloseNeighbor(
+                                        neighborToClose,
+                                        closeReason2,
+                                        PeerCloseInitiator.LocalNode
+                                    );
                             }
                         }
                         else
@@ -471,11 +466,8 @@ namespace System.ServiceModel.Channels
             if (closeReason != PeerCloseReason.None)
             {
                 SendTerminatingMessage(neighbor, PeerStrings.RefuseAction, closeReason);
-                this.neighborManager.CloseNeighbor(
-                    neighbor,
-                    closeReason,
-                    PeerCloseInitiator.LocalNode
-                );
+                this.neighborManager
+                    .CloseNeighbor(neighbor, closeReason, PeerCloseInitiator.LocalNode);
             }
         }
 
@@ -606,11 +598,12 @@ namespace System.ServiceModel.Channels
                         {
                             // The other neighbor should be closed
                             SendTerminatingMessage(neighborToClose, action, closeReason2);
-                            this.neighborManager.CloseNeighbor(
-                                neighborToClose,
-                                closeReason2,
-                                PeerCloseInitiator.LocalNode
-                            );
+                            this.neighborManager
+                                .CloseNeighbor(
+                                    neighborToClose,
+                                    closeReason2,
+                                    PeerCloseInitiator.LocalNode
+                                );
                         }
                     }
                     else
@@ -628,11 +621,8 @@ namespace System.ServiceModel.Channels
             if (closeReason != PeerCloseReason.None)
             {
                 SendTerminatingMessage(neighbor, PeerStrings.DisconnectAction, closeReason);
-                this.neighborManager.CloseNeighbor(
-                    neighbor,
-                    closeReason,
-                    PeerCloseInitiator.LocalNode
-                );
+                this.neighborManager
+                    .CloseNeighbor(neighbor, closeReason, PeerCloseInitiator.LocalNode);
             }
         }
 
@@ -794,10 +784,8 @@ namespace System.ServiceModel.Channels
                     return;
                 }
 
-                IPeerNeighbor duplicateNeighbor = this.neighborManager.FindDuplicateNeighbor(
-                    neighborNodeId,
-                    neighbor
-                );
+                IPeerNeighbor duplicateNeighbor = this.neighborManager
+                    .FindDuplicateNeighbor(neighborNodeId, neighbor);
                 if (
                     duplicateNeighbor != null
                     && this.neighborManager.PingNeighbor(duplicateNeighbor)

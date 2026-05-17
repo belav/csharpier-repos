@@ -52,8 +52,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
             >(workspace, analyzerMap);
 
             var firstDocument = workspace.Documents.First();
-            var tagger = wrapper
-                .TaggerProvider
+            var tagger = wrapper.TaggerProvider
                 .CreateTagger<ClassificationTag>(firstDocument.GetTextBuffer());
             using var disposable = tagger as IDisposable;
             // test first update
@@ -181,8 +180,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
 
             // Set fading option
             var fadingOption = GetFadingOptionForDiagnostic(diagnosticId);
-            workspace
-                .GlobalOptions
+            workspace.GlobalOptions
                 .SetGlobalOption(fadingOption, LanguageNames.CSharp, fadingOptionValue);
 
             // Add mapping from diagnostic ID to fading option
@@ -195,8 +193,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
             >(workspace, analyzerMap);
 
             var firstDocument = workspace.Documents.First();
-            var tagger = wrapper
-                .TaggerProvider
+            var tagger = wrapper.TaggerProvider
                 .CreateTagger<ClassificationTag>(firstDocument.GetTextBuffer());
             using var disposable = tagger as IDisposable;
             // test first update

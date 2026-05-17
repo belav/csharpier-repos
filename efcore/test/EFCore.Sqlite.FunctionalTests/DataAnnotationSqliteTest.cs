@@ -162,8 +162,7 @@ RETURNING "Unique_No";
         using var context = CreateContext();
         Assert.Equal(
             10,
-            context
-                .Model
+            context.Model
                 .FindEntityType(typeof(One))
                 .FindProperty("MaxLengthProperty")
                 .GetMaxLength()

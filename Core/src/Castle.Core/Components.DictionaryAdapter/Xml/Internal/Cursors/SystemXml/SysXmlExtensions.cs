@@ -24,11 +24,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
     {
         public static void DefineNamespace(this XmlElement node, string prefix, string namespaceUri)
         {
-            var attribute = node.OwnerDocument.CreateAttribute(
-                Xmlns.Prefix,
-                prefix,
-                Xmlns.NamespaceUri
-            );
+            var attribute = node.OwnerDocument
+                .CreateAttribute(Xmlns.Prefix, prefix, Xmlns.NamespaceUri);
             attribute.Value = namespaceUri;
             node.SetAttributeNode(attribute);
         }

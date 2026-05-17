@@ -294,8 +294,7 @@ namespace System.Web.Http
             IBodyModelValidator validator = Configuration.Services.GetBodyModelValidator();
             if (validator != null)
             {
-                ModelMetadataProvider metadataProvider = Configuration
-                    .Services
+                ModelMetadataProvider metadataProvider = Configuration.Services
                     .GetModelMetadataProvider();
                 Contract.Assert(
                     metadataProvider != null,

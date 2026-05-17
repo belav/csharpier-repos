@@ -36,8 +36,7 @@ internal static partial class Interop
             capacityLow;
         SplitLong(maximumSize, out capacityHigh, out capacityLow);
 
-        return Interop
-            .Kernel32
+        return Interop.Kernel32
             .CreateFileMapping(
                 hFile,
                 ref securityAttributes,
@@ -61,8 +60,7 @@ internal static partial class Interop
             capacityLow;
         SplitLong(maximumSize, out capacityHigh, out capacityLow);
 
-        return Interop
-            .Kernel32
+        return Interop.Kernel32
             .CreateFileMapping(
                 hFile,
                 ref securityAttributes,
@@ -85,8 +83,7 @@ internal static partial class Interop
             offsetLow;
         SplitLong(fileOffset, out offsetHigh, out offsetLow);
 
-        return Interop
-            .Kernel32
+        return Interop.Kernel32
             .MapViewOfFile(
                 hFileMappingObject,
                 desiredAccess,

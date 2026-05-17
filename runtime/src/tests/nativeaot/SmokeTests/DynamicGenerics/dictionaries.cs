@@ -390,8 +390,7 @@ namespace Dictionaries
                 );
             }
 
-            Type singleUseArrayOnlyGenOfType = TypeOf
-                .D_SingleUseArrayOnlyGen
+            Type singleUseArrayOnlyGenOfType = TypeOf.D_SingleUseArrayOnlyGen
                 .MakeGenericType(TypeOf.CommonType1);
             Test_Method = singleUseArrayOnlyGenOfType.GetTypeInfo().GetDeclaredMethod("Test");
             var singleUseArrayOnlyGenOf = (Base)
@@ -675,16 +674,14 @@ namespace MethodDictionaryTest
         [MethodImpl(MethodImplOptions.NoInlining)]
         public static void SGenM<Y>()
         {
-            DictionariesTest
-                .s_Result
+            DictionariesTest.s_Result
                 .AppendLine("Yahoo<" + typeof(X).Name + ">.SGenM<" + typeof(Y).Name + ">()");
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
         public void GenM<Y>(bool recurse = true)
         {
-            DictionariesTest
-                .s_Result
+            DictionariesTest.s_Result
                 .AppendLine("Yahoo<" + typeof(X).Name + ">.GenM<" + typeof(Y).Name + ">()");
 
             if (recurse)
@@ -708,8 +705,7 @@ namespace MethodDictionaryTest
         [MethodImpl(MethodImplOptions.NoInlining)]
         public void GenM<M, N>()
         {
-            DictionariesTest
-                .s_Result
+            DictionariesTest.s_Result
                 .AppendLine("Foo.GenM<" + typeof(M).Name + "," + typeof(N).Name + ">()");
             new Yahoo<N>().GenM<M>();
         }
@@ -720,8 +716,7 @@ namespace MethodDictionaryTest
         [MethodImpl(MethodImplOptions.NoInlining)]
         public void M1()
         {
-            DictionariesTest
-                .s_Result
+            DictionariesTest.s_Result
                 .AppendLine("Bar<" + typeof(T).Name + "," + typeof(U).Name + ">.M1()");
             new Foo().GenM<U, T>();
         }
@@ -2359,12 +2354,10 @@ namespace TemplateDependencyFromGenArgs
                 case 7:
                     return TestClass<H3<H2<H1<X, Y>>>>.NestedTestClass.MyGenMethod<X>();
                 case 8:
-                    return TestClass<I3<I2<I1<X, Y>>>>
-                        .NestedGenTestClass<K3<K2<K1<X, Y>>>>
+                    return TestClass<I3<I2<I1<X, Y>>>>.NestedGenTestClass<K3<K2<K1<X, Y>>>>
                         .MyMethod();
                 case 9:
-                    return TestClass<J3<J2<J1<X, Y>>>>
-                        .NestedGenTestClass<L3<L2<L1<X, Y>>>>
+                    return TestClass<J3<J2<J1<X, Y>>>>.NestedGenTestClass<L3<L2<L1<X, Y>>>>
                         .MyGenMethod<X>();
 
                 case 10:
@@ -2378,16 +2371,13 @@ namespace TemplateDependencyFromGenArgs
                 case 12:
                     return TestClass.MyGenMethod<O3<O2<O1<X, Y>.Nested>.Nested>.Nested>();
                 case 13:
-                    return TestClass
-                        .NestedTestClass
+                    return TestClass.NestedTestClass
                         .MyGenMethod<P3<P2<P1<X, Y>.Nested>.Nested>.Nested>();
                 case 14:
-                    return TestClass
-                        .NestedGenTestClass<Q3<Q2<Q1<X, Y>.Nested>.Nested>.Nested>
+                    return TestClass.NestedGenTestClass<Q3<Q2<Q1<X, Y>.Nested>.Nested>.Nested>
                         .MyMethod();
                 case 15:
-                    return TestClass
-                        .NestedGenTestClass<R3<R2<R1<X, Y>.Nested>.Nested>.Nested>
+                    return TestClass.NestedGenTestClass<R3<R2<R1<X, Y>.Nested>.Nested>.Nested>
                         .MyGenMethod<X>();
             }
             return null;

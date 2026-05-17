@@ -35,8 +35,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 AddKeyword(SyntaxKind.DefaultKeyword);
                 if (
-                    !Format
-                        .MiscellaneousOptions
+                    !Format.MiscellaneousOptions
                         .IncludesOption(SymbolDisplayMiscellaneousOptions.AllowDefaultLiteral)
                 )
                 {

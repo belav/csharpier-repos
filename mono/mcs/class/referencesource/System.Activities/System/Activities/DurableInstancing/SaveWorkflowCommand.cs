@@ -129,15 +129,13 @@ namespace System.Activities.DurableInstancing
         {
             if (!view.IsBoundToInstance)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(new InvalidOperationException(SRCore.InstanceRequired));
             }
 
             if (!view.IsBoundToInstanceOwner)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(new InvalidOperationException(SRCore.OwnerRequired));
             }
 
@@ -169,8 +167,7 @@ namespace System.Activities.DurableInstancing
 
             if (this.CompleteInstance && !this.UnlockInstance)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(new InvalidOperationException(SRCore.ValidateUnlockInstance));
             }
 

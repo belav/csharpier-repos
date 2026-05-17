@@ -39,8 +39,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             if (_possiblyNullableTypeSymbol.IsNullableType())
             {
-                return _possiblyNullableTypeSymbol
-                    .Type
+                return _possiblyNullableTypeSymbol.Type
                     .OriginalDefinition
                     .GetUseSiteInfo()
                     .DiagnosticInfo;

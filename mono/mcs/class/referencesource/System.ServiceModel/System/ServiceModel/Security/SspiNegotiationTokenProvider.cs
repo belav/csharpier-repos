@@ -281,14 +281,12 @@ namespace System.ServiceModel.Security
 
             public void GetOutgoingBlob(ChannelBinding channelBinding)
             {
-                byte[] outgoingBlob = _sspiState
-                    .SspiNegotiation
+                byte[] outgoingBlob = _sspiState.SspiNegotiation
                     .GetOutgoingBlob(null, channelBinding, null);
 
                 if (outgoingBlob == null && _sspiState.SspiNegotiation.IsCompleted == false)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new SecurityNegotiationException(SR.GetString(SR.NoBinaryNegoToSend))
                         );
@@ -356,9 +354,8 @@ namespace System.ServiceModel.Security
                         .TrustDriver
                         .CreateRequestSecurityTokenResponseCollection(bodyReader);
                     using (
-                        IEnumerator<RequestSecurityTokenResponse> enumerator = rstrCollection
-                            .RstrCollection
-                            .GetEnumerator()
+                        IEnumerator<RequestSecurityTokenResponse> enumerator =
+                            rstrCollection.RstrCollection.GetEnumerator()
                     )
                     {
                         enumerator.MoveNext();
@@ -441,8 +438,7 @@ namespace System.ServiceModel.Security
             else
             {
                 // we got an incoming blob. Process it and see if there is an outgoing blob
-                byte[] outgoingBlob = sspiState
-                    .SspiNegotiation
+                byte[] outgoingBlob = sspiState.SspiNegotiation
                     .GetOutgoingBlob(
                         incomingBlob,
                         SecurityUtils.GetChannelBindingFromMessage(incomingMessage),
@@ -494,8 +490,7 @@ namespace System.ServiceModel.Security
             );
             if (serviceToken == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new SecurityNegotiationException(SR.GetString(SR.NoServiceTokenReceived))
                     );
@@ -508,8 +503,7 @@ namespace System.ServiceModel.Security
                 || wrappedToken.WrappingAlgorithm != sspiNegotiation.KeyEncryptionAlgorithm
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new SecurityNegotiationException(
                             SR.GetString(SR.ProofTokenWasNotWrappedCorrectly)
@@ -519,8 +513,7 @@ namespace System.ServiceModel.Security
             byte[] proofKey = wrappedToken.GetWrappedKey();
             if (authenticatorRstr == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new SecurityNegotiationException(
                             SR.GetString(SR.RSTRAuthenticatorNotPresent)
@@ -530,8 +523,7 @@ namespace System.ServiceModel.Security
             byte[] serverAuthenticator = authenticatorRstr.GetAuthenticator();
             if (serverAuthenticator == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new SecurityNegotiationException(
                             SR.GetString(SR.RSTRAuthenticatorNotPresent)
@@ -540,8 +532,7 @@ namespace System.ServiceModel.Security
             }
             if (!IsCorrectAuthenticator(sspiState, proofKey, serverAuthenticator))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new SecurityNegotiationException(
                             SR.GetString(SR.RSTRAuthenticatorIncorrect)
@@ -571,8 +562,7 @@ namespace System.ServiceModel.Security
             )
             {
                 token = null;
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new NotImplementedException());
             }
 
@@ -582,8 +572,7 @@ namespace System.ServiceModel.Security
             )
             {
                 token = null;
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new NotImplementedException());
             }
 
@@ -593,8 +582,7 @@ namespace System.ServiceModel.Security
             )
             {
                 key = null;
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new NotImplementedException());
             }
         }

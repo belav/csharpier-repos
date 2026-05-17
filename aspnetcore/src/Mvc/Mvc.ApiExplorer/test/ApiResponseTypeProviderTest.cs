@@ -661,8 +661,7 @@ public class ApiResponseTypeProviderTest
             typeof(TestController),
             nameof(TestController.PutModel)
         );
-        actionDescriptor
-            .FilterDescriptors
+        actionDescriptor.FilterDescriptors
             .Add(
                 new FilterDescriptor(
                     new ProducesAttribute("application/json"),
@@ -728,8 +727,7 @@ public class ApiResponseTypeProviderTest
             typeof(TestController),
             nameof(TestController.PutModel)
         );
-        actionDescriptor
-            .FilterDescriptors
+        actionDescriptor.FilterDescriptors
             .Add(
                 new FilterDescriptor(
                     new ProducesAttribute("application/json") { Type = typeof(string) },
@@ -811,8 +809,7 @@ public class ApiResponseTypeProviderTest
             typeof(TestController),
             nameof(TestController.GetUser)
         );
-        actionDescriptor
-            .FilterDescriptors
+        actionDescriptor.FilterDescriptors
             .Add(
                 new FilterDescriptor(new ProducesAttribute("application/pdf"), FilterScope.Action)
             );
@@ -850,16 +847,14 @@ public class ApiResponseTypeProviderTest
             typeof(TestController),
             nameof(TestController.GetUser)
         );
-        actionDescriptor
-            .FilterDescriptors
+        actionDescriptor.FilterDescriptors
             .Add(
                 new FilterDescriptor(
                     new ProducesAttribute("text/xml") { Type = typeof(BaseModel) },
                     FilterScope.Action
                 )
             );
-        actionDescriptor
-            .FilterDescriptors
+        actionDescriptor.FilterDescriptors
             .Add(
                 new FilterDescriptor(
                     new ProducesResponseTypeAttribute(
@@ -870,8 +865,7 @@ public class ApiResponseTypeProviderTest
                     FilterScope.Action
                 )
             );
-        actionDescriptor
-            .FilterDescriptors
+        actionDescriptor.FilterDescriptors
             .Add(
                 new FilterDescriptor(
                     new ProducesResponseTypeAttribute(
@@ -882,8 +876,7 @@ public class ApiResponseTypeProviderTest
                     FilterScope.Action
                 )
             );
-        actionDescriptor
-            .FilterDescriptors
+        actionDescriptor.FilterDescriptors
             .Add(new FilterDescriptor(new ProducesResponseTypeAttribute(409), FilterScope.Action));
 
         var provider = new ApiResponseTypeProvider(
@@ -965,8 +958,7 @@ public class ApiResponseTypeProviderTest
 
     private static IEnumerable<string> GetSortedMediaTypes(ApiResponseType apiResponseType)
     {
-        return apiResponseType
-            .ApiResponseFormats
+        return apiResponseType.ApiResponseFormats
             .OrderBy(format => format.MediaType)
             .Select(format => format.MediaType);
     }
@@ -982,8 +974,7 @@ public class ApiResponseTypeProviderTest
 
         foreach (var filterAttribute in method.GetCustomAttributes().OfType<IFilterMetadata>())
         {
-            actionDescriptor
-                .FilterDescriptors
+            actionDescriptor.FilterDescriptors
                 .Add(new FilterDescriptor(filterAttribute, FilterScope.Action));
         }
 

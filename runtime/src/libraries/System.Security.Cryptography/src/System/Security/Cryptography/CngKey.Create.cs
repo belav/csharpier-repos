@@ -41,14 +41,12 @@ namespace System.Security.Cryptography
 
             creationParameters ??= new CngKeyCreationParameters();
 
-            SafeNCryptProviderHandle providerHandle = creationParameters
-                .Provider!
+            SafeNCryptProviderHandle providerHandle = creationParameters.Provider!
                 .OpenStorageProvider();
             SafeNCryptKeyHandle? keyHandle = null;
             try
             {
-                ErrorCode errorCode = Interop
-                    .NCrypt
+                ErrorCode errorCode = Interop.NCrypt
                     .NCryptCreatePersistedKey(
                         providerHandle,
                         out keyHandle,
@@ -109,8 +107,7 @@ namespace System.Security.Cryptography
                 if (creationParameters.KeyUsage.HasValue)
                 {
                     CngKeyUsages keyUsage = creationParameters.KeyUsage.Value;
-                    ErrorCode errorCode = Interop
-                        .NCrypt
+                    ErrorCode errorCode = Interop.NCrypt
                         .NCryptSetProperty(
                             keyHandle,
                             KeyPropertyName.KeyUsage,
@@ -125,8 +122,7 @@ namespace System.Security.Cryptography
                 if (creationParameters.ParentWindowHandle != IntPtr.Zero)
                 {
                     IntPtr parentWindowHandle = creationParameters.ParentWindowHandle;
-                    ErrorCode errorCode = Interop
-                        .NCrypt
+                    ErrorCode errorCode = Interop.NCrypt
                         .NCryptSetProperty(
                             keyHandle,
                             KeyPropertyName.ParentWindowHandle,
@@ -151,8 +147,7 @@ namespace System.Security.Cryptography
                     int valueLength = (value == null) ? 0 : value.Length;
                     fixed (byte* pValue = MapZeroLengthArrayToNonNullPointer(value))
                     {
-                        ErrorCode errorCode = Interop
-                            .NCrypt
+                        ErrorCode errorCode = Interop.NCrypt
                             .NCryptSetProperty(
                                 keyHandle,
                                 property.Name,
@@ -192,8 +187,7 @@ namespace System.Security.Cryptography
                         pszDescription = new IntPtr(pinnedDescription),
                     };
 
-                    ErrorCode errorCode = Interop
-                        .NCrypt
+                    ErrorCode errorCode = Interop.NCrypt
                         .NCryptSetProperty(
                             keyHandle,
                             KeyPropertyName.UIPolicy,
@@ -211,8 +205,7 @@ namespace System.Security.Cryptography
                     int useContextByteLength = checked((useContext.Length + 1) * sizeof(char));
                     fixed (char* pinnedUseContext = useContext)
                     {
-                        ErrorCode errorCode = Interop
-                            .NCrypt
+                        ErrorCode errorCode = Interop.NCrypt
                             .NCryptSetProperty(
                                 keyHandle,
                                 KeyPropertyName.UseContext,

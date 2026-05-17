@@ -128,8 +128,7 @@ public class MyJsonResolver : JsonSerializerContext, IJsonTypeInfoResolver
                 NumberHandling = default,
             };
 
-        jsonTypeInfo = global::System
-            .Text
+        jsonTypeInfo = global::System.Text
             .Json
             .Serialization
             .Metadata
@@ -165,8 +164,7 @@ public class MyJsonResolver : JsonSerializerContext, IJsonTypeInfoResolver
             };
 
         global::System.Text.Json.Serialization.Metadata.JsonPropertyInfo propertyInfo0 =
-            global::System
-                .Text
+            global::System.Text
                 .Json
                 .Serialization
                 .Metadata
@@ -183,8 +181,7 @@ public class MyJsonResolver : JsonSerializerContext, IJsonTypeInfoResolver
     {
         global::System.Text.Json.Serialization.Metadata.JsonTypeInfo<global::System.Int32>? jsonTypeInfo =
             null;
-        jsonTypeInfo = global::System
-            .Text
+        jsonTypeInfo = global::System.Text
             .Json
             .Serialization
             .Metadata

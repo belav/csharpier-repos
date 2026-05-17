@@ -50,8 +50,7 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             // Many static predicates use the same state argument in this method
             var arg = (attributesToRemove, accessibleWithin);
 
-            var someParameterHasAttribute = property
-                .Parameters
+            var someParameterHasAttribute = property.Parameters
                 .Any(static (p, arg) => p.GetAttributes().Any(ShouldRemoveAttribute, arg), arg);
             if (!someParameterHasAttribute)
                 return property;
@@ -65,8 +64,7 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 property.RefKind,
                 property.ExplicitInterfaceImplementations,
                 property.Name,
-                property
-                    .Parameters
+                property.Parameters
                     .SelectAsArray(
                         static (p, arg) =>
                             CodeGenerationSymbolFactory.CreateParameterSymbol(

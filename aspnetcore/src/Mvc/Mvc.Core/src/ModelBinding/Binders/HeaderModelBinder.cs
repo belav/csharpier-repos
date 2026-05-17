@@ -157,8 +157,7 @@ public class HeaderModelBinder : IModelBinder
         }
         else
         {
-            bindingContext
-                .ModelState
+            bindingContext.ModelState
                 .SetModelValue(
                     bindingContext.ModelName,
                     request.Headers.GetCommaSeparatedValues(headerName),

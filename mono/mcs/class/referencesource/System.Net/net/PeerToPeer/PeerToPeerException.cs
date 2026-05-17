@@ -125,8 +125,7 @@ namespace System.Net.PeerToPeer
             }
             catch (Exception ex)
             {
-                Logging
-                    .P2PTraceSource
+                Logging.P2PTraceSource
                     .TraceEvent(
                         TraceEventType.Warning,
                         0,
@@ -152,8 +151,7 @@ namespace System.Net.PeerToPeer
             }
             if (p2pEx == null)
             {
-                Logging
-                    .P2PTraceSource
+                Logging.P2PTraceSource
                     .TraceEvent(
                         TraceEventType.Warning,
                         0,

@@ -44,14 +44,12 @@ namespace System.ServiceModel.Channels
             }
             if (context.Endpoint == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("context.Endpoint");
             }
             if (context.Endpoint.Binding == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("context.Endpoint.Binding");
             }
 
@@ -140,8 +138,7 @@ namespace System.ServiceModel.Channels
             }
             if (context.BindingElements == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(SR.PolicyImportContextBindingElementCollectionIsNull)

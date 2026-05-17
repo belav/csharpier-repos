@@ -160,8 +160,7 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
 
             // `Task` type doesn't have an `AsyncMethodBuilder` attribute, so we need to check for it separately
             return method.ReturnType.Equals(compilation.TaskType())
-                || method
-                    .ReturnType
+                || method.ReturnType
                     .GetAttributes()
                     .Any(a =>
                         a.AttributeClass?.Equals(compilation.AsyncMethodBuilderAttribute()) ?? false

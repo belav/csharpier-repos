@@ -674,8 +674,7 @@ namespace System.Data.Tests
         {
             var serializer = new BinaryFormatter();
             var table = new DataTable();
-            table
-                .Columns
+            table.Columns
                 .Add(
                     new DataColumn("RowID", typeof(int))
                     {

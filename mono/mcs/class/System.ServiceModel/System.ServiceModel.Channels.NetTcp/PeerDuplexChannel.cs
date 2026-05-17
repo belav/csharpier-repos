@@ -100,8 +100,7 @@ namespace System.ServiceModel.Channels
                         Constants.WsaAnonymousUri
                     );
                     if (
-                        !owner
-                            .peers
+                        !owner.peers
                             .Any(p =>
                                 p.Address.EndpointAddress.Equals(connect.Address.EndpointAddress)
                             )
@@ -281,18 +280,15 @@ namespace System.ServiceModel.Channels
                 // see [MC-PRCH] 3.2.4.1
                 if (message.Headers.MessageId == null)
                     message.Headers.MessageId = new UniqueId();
-                message
-                    .Headers
+                message.Headers
                     .Add(
                         MessageHeader.CreateHeader("PeerTo", Constants.NetPeer, RemoteAddress.Uri)
                     );
-                message
-                    .Headers
+                message.Headers
                     .Add(
                         MessageHeader.CreateHeader("PeerVia", Constants.NetPeer, RemoteAddress.Uri)
                     );
-                message
-                    .Headers
+                message.Headers
                     .Add(
                         MessageHeader.CreateHeader("FloodMessage", Constants.NetPeer, "PeerFlooder")
                     );

@@ -45,8 +45,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIndexOrRangeOperator
             operation is IPropertyReferenceOperation propertyRef
             && propertyRef.Instance != null
             && lengthLikeProperty.Equals(propertyRef.Property)
-            && CSharpSyntaxFacts
-                .Instance
+            && CSharpSyntaxFacts.Instance
                 .AreEquivalent(instance.Syntax, propertyRef.Instance.Syntax);
 
         /// <summary>
@@ -162,8 +161,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIndexOrRangeOperator
         public static IMethodSymbol? GetOverload(IMethodSymbol method, ITypeSymbol parameterType) =>
             method.MethodKind != MethodKind.Ordinary
                 ? null
-                : method
-                    .ContainingType
+                : method.ContainingType
                     .GetMembers(method.Name)
                     .OfType<IMethodSymbol>()
                     .Where(m =>

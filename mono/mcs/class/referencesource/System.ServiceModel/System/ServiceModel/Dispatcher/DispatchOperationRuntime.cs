@@ -65,8 +65,7 @@ namespace System.ServiceModel.Dispatcher
             }
             if (operation.Invoker == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(SR.GetString(SR.RuntimeRequiresInvoker0))
                     );
@@ -117,8 +116,7 @@ namespace System.ServiceModel.Dispatcher
 
             if (this.formatter == null && (deserializeRequest || serializeReply))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(SR.DispatchRuntimeRequiresFormatter0, this.name)
@@ -532,11 +530,8 @@ namespace System.ServiceModel.Dispatcher
                             }
                             else
                             {
-                                rpc.ReturnParameter = this.Invoker.Invoke(
-                                    target,
-                                    rpc.InputParameters,
-                                    out rpc.OutputParameters
-                                );
+                                rpc.ReturnParameter = this.Invoker
+                                    .Invoke(target, rpc.InputParameters, out rpc.OutputParameters);
                             }
                         }
                         else
@@ -576,12 +571,13 @@ namespace System.ServiceModel.Dispatcher
                                 }
                                 else
                                 {
-                                    result = this.Invoker.InvokeBegin(
-                                        target,
-                                        rpc.InputParameters,
-                                        invokeCallback,
-                                        resumeRpc
-                                    );
+                                    result = this.Invoker
+                                        .InvokeBegin(
+                                            target,
+                                            rpc.InputParameters,
+                                            invokeCallback,
+                                            resumeRpc
+                                        );
                                 }
 
                                 isBeginSuccessful = true;
@@ -681,8 +677,7 @@ namespace System.ServiceModel.Dispatcher
             {
                 object principal;
                 if (
-                    securityContext
-                        .AuthorizationContext
+                    securityContext.AuthorizationContext
                         .Properties
                         .TryGetValue(AuthorizationPolicy.ClaimsPrincipalKey, out principal)
                 )
@@ -697,8 +692,7 @@ namespace System.ServiceModel.Dispatcher
                     }
                     else
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(
                                     SR.GetString(SR.NoPrincipalSpecifiedInAuthorizationContext)
@@ -720,8 +714,7 @@ namespace System.ServiceModel.Dispatcher
 
             if (resume == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(SR.GetString(SR.SFxInvalidAsyncResultState0));
             }
 
@@ -765,11 +758,8 @@ namespace System.ServiceModel.Dispatcher
                                 );
                         }
 
-                        rpc.ReturnParameter = this.Invoker.InvokeEnd(
-                            rpc.Instance,
-                            out rpc.OutputParameters,
-                            rpc.AsyncResult
-                        );
+                        rpc.ReturnParameter = this.Invoker
+                            .InvokeEnd(rpc.Instance, out rpc.OutputParameters, rpc.AsyncResult);
                     }
                     finally
                     {
@@ -832,11 +822,12 @@ namespace System.ServiceModel.Dispatcher
                             TD.DispatchFormatterSerializeReplyStart(rpc.EventTraceActivity);
                         }
 
-                        reply = this.Formatter.SerializeReply(
-                            rpc.RequestVersion,
-                            rpc.OutputParameters,
-                            rpc.ReturnParameter
-                        );
+                        reply = this.Formatter
+                            .SerializeReply(
+                                rpc.RequestVersion,
+                                rpc.OutputParameters,
+                                rpc.ReturnParameter
+                            );
 
                         if (TD.DispatchFormatterSerializeReplyStopIsEnabled())
                         {
@@ -887,8 +878,7 @@ namespace System.ServiceModel.Dispatcher
                         && (!ProxyOperationRuntime.IsValidAction(reply, this.ReplyAction))
                     )
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(
                                     SR.GetString(
@@ -929,8 +919,7 @@ namespace System.ServiceModel.Dispatcher
                         && MessageState.Closed != rpc.OperationContext.IncomingMessage.State
                     )
                     {
-                        FxTrace
-                            .Trace
+                        FxTrace.Trace
                             .SetAndTraceTransfer(
                                 TraceUtility.GetReceivedActivityId(rpc.OperationContext),
                                 true
@@ -958,8 +947,7 @@ namespace System.ServiceModel.Dispatcher
                             .IsImpersonationEnabledOnCurrentOperation(ref rpc);
                     if (shouldImpersonate)
                     {
-                        reply
-                            .Properties
+                        reply.Properties
                             .Add(
                                 ImpersonateOnSerializingReplyMessageProperty.Name,
                                 new ImpersonateOnSerializingReplyMessageProperty(ref rpc)
@@ -989,8 +977,7 @@ namespace System.ServiceModel.Dispatcher
                     method.DeclaringType.FullName
                 );
 
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new InvalidOperationException(message));
             }
         }
@@ -1002,8 +989,7 @@ namespace System.ServiceModel.Dispatcher
                 rpc.NotUnderstoodHeaders = rpc.Request.Headers.GetHeadersNotUnderstood();
                 if (rpc.NotUnderstoodHeaders != null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new MustUnderstandSoapException(
                                 rpc.NotUnderstoodHeaders,

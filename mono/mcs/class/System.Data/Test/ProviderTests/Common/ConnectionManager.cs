@@ -125,10 +125,8 @@ namespace MonoTests.System.Data.Connected
         private void CreateMssqlDatabase()
         {
             DBHelper.ExecuteNonQuery(sql.Connection, $"CREATE DATABASE [{DatabaseName}]");
-            sql.ConnectionString = sql.ConnectionString.Replace(
-                sql.Connection.Database,
-                DatabaseName
-            );
+            sql.ConnectionString = sql.ConnectionString
+                .Replace(sql.Connection.Database, DatabaseName);
             sql.CloseConnection();
 
             string query = File.ReadAllText(

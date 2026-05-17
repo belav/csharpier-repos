@@ -62,8 +62,7 @@ public sealed class ParseErrorAction : SynchronousCliAction
     private static void WriteHelp(ParseResult parseResult)
     {
         // Find the most proximate help option (if any) and invoke its action.
-        var availableHelpOptions = parseResult
-            .CommandResult
+        var availableHelpOptions = parseResult.CommandResult
             .RecurseWhileNotNull(r => r.Parent as CommandResult)
             .Select(r => r.Command.Options.OfType<HelpOption>().FirstOrDefault());
 
@@ -104,8 +103,7 @@ public sealed class ParseErrorAction : SynchronousCliAction
             {
                 if (first)
                 {
-                    parseResult
-                        .Configuration
+                    parseResult.Configuration
                         .Output
                         .WriteLine(LocalizationResources.SuggestionsTokenNotMatched(token));
                     first = false;
@@ -127,8 +125,7 @@ public sealed class ParseErrorAction : SynchronousCliAction
                 return Array.Empty<string>();
             }
 
-            IEnumerable<string> possibleMatches = targetSymbol
-                .Children
+            IEnumerable<string> possibleMatches = targetSymbol.Children
                 .Where(x => !x.Hidden && x is CliOption or CliCommand)
                 .Select(symbol =>
                 {

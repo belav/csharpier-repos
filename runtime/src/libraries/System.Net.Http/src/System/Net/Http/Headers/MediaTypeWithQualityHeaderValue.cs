@@ -51,8 +51,7 @@ namespace System.Net.Http.Headers
         {
             int index = 0;
             return (MediaTypeWithQualityHeaderValue)
-                MediaTypeHeaderParser
-                    .SingleValueWithQualityParser
+                MediaTypeHeaderParser.SingleValueWithQualityParser
                     .ParseValue(input, null, ref index);
         }
 
@@ -65,8 +64,7 @@ namespace System.Net.Http.Headers
             parsedValue = null;
 
             if (
-                MediaTypeHeaderParser
-                    .SingleValueWithQualityParser
+                MediaTypeHeaderParser.SingleValueWithQualityParser
                     .TryParseValue(input, null, ref index, out object? output)
             )
             {

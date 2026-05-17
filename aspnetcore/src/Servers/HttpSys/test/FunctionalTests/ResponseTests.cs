@@ -176,8 +176,7 @@ public class ResponseTests : LoggedTest
                 out var address,
                 httpContext =>
                 {
-                    httpContext
-                        .Response
+                    httpContext.Response
                         .OnStarting(
                             state =>
                             {
@@ -187,8 +186,7 @@ public class ResponseTests : LoggedTest
                             },
                             httpContext
                         );
-                    httpContext
-                        .Response
+                    httpContext.Response
                         .OnCompleted(
                             state =>
                             {
@@ -226,8 +224,7 @@ public class ResponseTests : LoggedTest
                 out var address,
                 httpContext =>
                 {
-                    httpContext
-                        .Response
+                    httpContext.Response
                         .OnStarting(
                             state =>
                             {
@@ -236,8 +233,7 @@ public class ResponseTests : LoggedTest
                             },
                             httpContext
                         );
-                    httpContext
-                        .Response
+                    httpContext.Response
                         .OnCompleted(
                             state =>
                             {
@@ -275,8 +271,7 @@ public class ResponseTests : LoggedTest
                 out var address,
                 httpContext =>
                 {
-                    httpContext
-                        .Response
+                    httpContext.Response
                         .OnStarting(
                             state =>
                             {
@@ -285,8 +280,7 @@ public class ResponseTests : LoggedTest
                             },
                             httpContext
                         );
-                    httpContext
-                        .Response
+                    httpContext.Response
                         .OnCompleted(
                             state =>
                             {

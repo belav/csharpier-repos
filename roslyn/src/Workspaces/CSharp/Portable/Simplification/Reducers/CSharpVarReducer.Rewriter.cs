@@ -34,8 +34,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                     return typeSyntax;
                 }
 
-                var typeStyle = CSharpUseImplicitTypeHelper
-                    .Instance
+                var typeStyle = CSharpUseImplicitTypeHelper.Instance
                     .AnalyzeTypeName(
                         typeSyntax,
                         this.SemanticModel,

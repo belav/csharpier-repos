@@ -226,8 +226,7 @@ namespace System.IO.Pipes
                     pipeSecurity,
                     ref pinningHandle
                 );
-                SafePipeHandle handle = Interop
-                    .Kernel32
+                SafePipeHandle handle = Interop.Kernel32
                     .CreateNamedPipe(
                         fullPipeName,
                         openMode,
@@ -333,8 +332,7 @@ namespace System.IO.Pipes
             char* userName = stackalloc char[(int)UserNameMaxLength]; // ~1K
 
             if (
-                Interop
-                    .Kernel32
+                Interop.Kernel32
                     .GetNamedPipeHandleStateW(
                         InternalHandle!,
                         null,

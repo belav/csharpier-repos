@@ -78,8 +78,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
                 // attempt to create the contact from the resolved type
                 IComponentRegistration registration;
                 if (
-                    _container
-                        .ComponentRegistry
+                    _container.ComponentRegistry
                         .TryGetRegistration(new TypedService(objectType), out registration)
                 )
                 {

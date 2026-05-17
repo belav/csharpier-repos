@@ -81,14 +81,15 @@ namespace Microsoft.CodeAnalysis.SimplifyThisOrMe
                 .GetAnalyzerOptions()
                 .GetSimplifierOptions(Simplification);
             if (
-                !this.Simplifier.ShouldSimplifyThisMemberAccessExpression(
-                    memberAccessExpression,
-                    semanticModel,
-                    simplifierOptions,
-                    out var thisExpression,
-                    out var notification,
-                    cancellationToken
-                ) || ShouldSkipAnalysis(context, notification)
+                !this.Simplifier
+                    .ShouldSimplifyThisMemberAccessExpression(
+                        memberAccessExpression,
+                        semanticModel,
+                        simplifierOptions,
+                        out var thisExpression,
+                        out var notification,
+                        cancellationToken
+                    ) || ShouldSkipAnalysis(context, notification)
             )
             {
                 return;

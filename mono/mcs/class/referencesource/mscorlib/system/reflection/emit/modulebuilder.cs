@@ -911,8 +911,7 @@ namespace System.Reflection.Emit
                         Contract.Assert(masmi != null);
 
                         methDef = masmi.GetGenericMethodDefinition();
-                        methDef = methDef
-                            .Module
+                        methDef = methDef.Module
                             .ResolveMethod(
                                 method.MetadataToken,
                                 methDef.DeclaringType != null
@@ -923,8 +922,7 @@ namespace System.Reflection.Emit
                     }
                     else
                     {
-                        methDef = method
-                            .Module
+                        methDef = method.Module
                             .ResolveMethod(
                                 method.MetadataToken,
                                 method.DeclaringType != null
@@ -1978,8 +1976,7 @@ namespace System.Reflection.Emit
 
             m_moduleData.m_fHasGlobal = true;
 
-            return m_moduleData
-                .m_globalTypeBuilder
+            return m_moduleData.m_globalTypeBuilder
                 .DefineMethod(
                     name,
                     attributes,
@@ -2084,8 +2081,7 @@ namespace System.Reflection.Emit
             CheckContext(parameterTypes);
 
             m_moduleData.m_fHasGlobal = true;
-            return m_moduleData
-                .m_globalTypeBuilder
+            return m_moduleData.m_globalTypeBuilder
                 .DefinePInvokeMethod(
                     name,
                     dllName,
@@ -2341,9 +2337,8 @@ namespace System.Reflection.Emit
                 // the file name of the referenced module.
                 if (refedModuleBuilder == null)
                 {
-                    refedModuleBuilder = this.ContainingAssemblyBuilder.GetModuleBuilder(
-                        (InternalModuleBuilder)refedModule
-                    );
+                    refedModuleBuilder = this.ContainingAssemblyBuilder
+                        .GetModuleBuilder((InternalModuleBuilder)refedModule);
                 }
                 strRefedModuleFileName = refedModuleBuilder.m_moduleData.m_strFileName;
             }

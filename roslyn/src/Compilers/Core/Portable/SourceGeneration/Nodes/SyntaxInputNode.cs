@@ -43,8 +43,7 @@ namespace Microsoft.CodeAnalysis
         )
         {
             return (NodeStateTable<T>)
-                graphState
-                    .SyntaxStore
+                graphState.SyntaxStore
                     .GetSyntaxInputTable(
                         this,
                         graphState.GetLatestStateTableForNode(SharedInputNodes.SyntaxTrees)

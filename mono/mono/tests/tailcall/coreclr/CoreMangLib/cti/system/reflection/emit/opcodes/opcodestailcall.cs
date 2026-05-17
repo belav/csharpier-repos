@@ -12,8 +12,7 @@ public class OpCodesTailcall
     public static int Main()
     {
         OpCodesTailcall testObj = new OpCodesTailcall();
-        TestLibrary
-            .TestFramework
+        TestLibrary.TestFramework
             .BeginTestCase("for field of System.Reflection.Emit.OpCodes.Tailcall");
         if (testObj.RunTests())
         {
@@ -66,8 +65,7 @@ public class OpCodesTailcall
 
             if (expectedValue != actualValue)
             {
-                TestLibrary
-                    .TestFramework
+                TestLibrary.TestFramework
                     .LogError("001", "Errors accured in fields:" + GetResult(actualValue));
                 retVal = false;
             }

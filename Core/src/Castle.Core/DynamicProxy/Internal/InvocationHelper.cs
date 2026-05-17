@@ -78,8 +78,7 @@ namespace Castle.DynamicProxy.Internal
                 foreach (var method in methods)
                 {
                     if (
-                        MethodSignatureComparer
-                            .Instance
+                        MethodSignatureComparer.Instance
                             .Equals(method.GetBaseDefinition(), proxiedMethod)
                     )
                     {

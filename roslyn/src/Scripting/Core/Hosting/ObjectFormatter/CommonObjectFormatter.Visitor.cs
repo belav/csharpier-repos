@@ -102,8 +102,7 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                 }
 
                 debuggerDisplayName = null;
-                string primitive = _formatter
-                    .PrimitiveFormatter
+                string primitive = _formatter.PrimitiveFormatter
                     .FormatPrimitive(obj, _primitiveOptions);
                 if (primitive != null)
                 {
@@ -392,9 +391,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                 {
                     members.AddRange(type.DeclaredFields.Where(f => !f.IsStatic));
                     members.AddRange(
-                        type.DeclaredProperties.Where(f =>
-                            f.GetMethod != null && !f.GetMethod.IsStatic
-                        )
+                        type.DeclaredProperties
+                            .Where(f => f.GetMethod != null && !f.GetMethod.IsStatic)
                     );
                     type = type.BaseType?.GetTypeInfo();
                 }
@@ -405,8 +403,7 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                         // Need case-sensitive comparison here so that the order of members is
                         // always well-defined (members can differ by case only). And we don't want to
                         // depend on that order.
-                        int comparisonResult = StringComparer
-                            .OrdinalIgnoreCase
+                        int comparisonResult = StringComparer.OrdinalIgnoreCase
                             .Compare(x.Name, y.Name);
                         if (comparisonResult == 0)
                         {
@@ -577,8 +574,7 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                                 }
                             }
                             else if (
-                                _formatter
-                                    .PrimitiveFormatter
+                                _formatter.PrimitiveFormatter
                                     .FormatPrimitive(value, _primitiveOptions) == null
                                 && VisitedObjects.Add(value)
                             )
@@ -663,8 +659,7 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
             {
                 result.Append("!<");
                 result.Append(
-                    _formatter
-                        .TypeNameFormatter
+                    _formatter.TypeNameFormatter
                         .FormatTypeName(exception.GetType(), _typeNameOptions)
                 );
                 result.Append('>');
@@ -694,16 +689,14 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                 if (collection is Array array)
                 {
                     result.Append(
-                        _formatter
-                            .TypeNameFormatter
+                        _formatter.TypeNameFormatter
                             .FormatArrayTypeName(array.GetType(), array, _typeNameOptions)
                     );
                     return;
                 }
 
                 result.Append(
-                    _formatter
-                        .TypeNameFormatter
+                    _formatter.TypeNameFormatter
                         .FormatTypeName(collection.GetType(), _typeNameOptions)
                 );
                 try

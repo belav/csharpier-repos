@@ -132,8 +132,7 @@ namespace System.ServiceModel.Configuration
         {
             if (this.IsReadOnly())
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ConfigurationErrorsException(SR.GetString(SR.ConfigReadOnly))
                     );
@@ -197,8 +196,7 @@ namespace System.ServiceModel.Configuration
                 Type type = System.Type.GetType(this.CustomCertificateValidatorType, true);
                 if (!typeof(X509CertificateValidator).IsAssignableFrom(type))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ConfigurationErrorsException(
                                 SR.GetString(
@@ -217,8 +215,7 @@ namespace System.ServiceModel.Configuration
                 Type type = System.Type.GetType(this.SamlSerializerType, true);
                 if (!typeof(SamlSerializer).IsAssignableFrom(type))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ConfigurationErrorsException(
                                 SR.GetString(
@@ -239,8 +236,7 @@ namespace System.ServiceModel.Configuration
             {
                 foreach (X509CertificateTrustedIssuerElement src in this.KnownCertificates)
                 {
-                    issuedToken
-                        .KnownCertificates
+                    issuedToken.KnownCertificates
                         .Add(
                             SecurityUtils.GetCertificateFromStore(
                                 src.StoreName,

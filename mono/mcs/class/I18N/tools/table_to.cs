@@ -77,8 +77,7 @@ public class table_to
                     Console.Out.Write("0x");
                     for (int j = 0; j < outp.Length; j++)
                         Console.Out.Write(toHexString2(outp[j]));
-                    Console
-                        .Out
+                    Console.Out
                         .WriteLine(
                             "\t0x" + (i < 0x10000 ? toHexString4(i) : ((Int32)i).ToString("X"))
                         );

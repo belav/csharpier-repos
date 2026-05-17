@@ -675,8 +675,7 @@ namespace System.Workflow.Runtime.Tracking
                                 StringComparison.Ordinal
                             )
                         )
-                            point
-                                .MatchingLocation
+                            point.MatchingLocation
                                 .Events
                                 .Add(
                                     (TrackingWorkflowEvent)

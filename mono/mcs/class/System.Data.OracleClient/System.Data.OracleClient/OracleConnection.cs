@@ -1192,10 +1192,8 @@ namespace System.Data.OracleClient
             dt.Columns.Add("QuotedIdentifierCase", typeof(System.Data.Common.IdentifierCase));
             dt.Columns.Add("StatementSeparatorPattern", typeof(System.String));
             dt.Columns.Add("StringLiteralPattern", typeof(System.String));
-            dt.Columns.Add(
-                "SupportedJoinOperators",
-                typeof(System.Data.Common.SupportedJoinOperators)
-            );
+            dt.Columns
+                .Add("SupportedJoinOperators", typeof(System.Data.Common.SupportedJoinOperators));
 
             string ver = ServerVersion;
             string[] ver2 = ver.Substring(0, ver.IndexOf(' ')).Split(new char[] { '.' });

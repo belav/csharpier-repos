@@ -48,8 +48,7 @@
             {
                 throw new ArgumentNullException("httpContext");
             }
-            httpContext
-                .Cache
+            httpContext.Cache
                 .Insert(
                     key,
                     virtualPath,

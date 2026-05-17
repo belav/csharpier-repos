@@ -30,8 +30,7 @@ namespace System.IdentityModel
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("asn1");
 
             if (asn1.Length == 0)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentOutOfRangeException(
                             "asn1",

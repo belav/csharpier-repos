@@ -3518,8 +3518,7 @@ namespace System.Management
                 s =
                     s
                     + " within "
-                    + withinInterval
-                        .TotalSeconds
+                    + withinInterval.TotalSeconds
                         .ToString(
                             (IFormatProvider)CultureInfo.InvariantCulture.GetFormat(typeof(double))
                         );
@@ -3534,8 +3533,7 @@ namespace System.Management
                 s =
                     s
                     + " group within "
-                    + groupWithinInterval
-                        .TotalSeconds
+                    + groupWithinInterval.TotalSeconds
                         .ToString(
                             (IFormatProvider)CultureInfo.InvariantCulture.GetFormat(typeof(double))
                         );

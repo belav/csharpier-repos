@@ -181,32 +181,34 @@ namespace System.Net
         public override IAsyncResult BeginGetRequestStream(AsyncCallback? callback, object? state)
         {
             CheckAndMarkAsyncGetRequestStreamPending();
-            Task<Stream> t = Task.Factory.StartNew<Stream>(
-                s => ((FileWebRequest)s!).CreateWriteStream(),
-                this,
-                CancellationToken.None,
-                TaskCreationOptions.DenyChildAttach,
-                TaskScheduler.Default
-            );
+            Task<Stream> t = Task.Factory
+                .StartNew<Stream>(
+                    s => ((FileWebRequest)s!).CreateWriteStream(),
+                    this,
+                    CancellationToken.None,
+                    TaskCreationOptions.DenyChildAttach,
+                    TaskScheduler.Default
+                );
             return TaskToAsyncResult.Begin(t, callback, state);
         }
 
         public override Task<Stream> GetRequestStreamAsync()
         {
             CheckAndMarkAsyncGetRequestStreamPending();
-            return Task.Factory.StartNew<Stream>(
-                s =>
-                {
-                    FileWebRequest thisRef = (FileWebRequest)s!;
-                    Stream writeStream = thisRef.CreateWriteStream();
-                    thisRef._writePending = false;
-                    return writeStream;
-                },
-                this,
-                CancellationToken.None,
-                TaskCreationOptions.DenyChildAttach,
-                TaskScheduler.Default
-            );
+            return Task.Factory
+                .StartNew<Stream>(
+                    s =>
+                    {
+                        FileWebRequest thisRef = (FileWebRequest)s!;
+                        Stream writeStream = thisRef.CreateWriteStream();
+                        thisRef._writePending = false;
+                        return writeStream;
+                    },
+                    this,
+                    CancellationToken.None,
+                    TaskCreationOptions.DenyChildAttach,
+                    TaskScheduler.Default
+                );
         }
 
         private void CheckAndMarkAsyncGetResponsePending()
@@ -253,32 +255,34 @@ namespace System.Net
         public override IAsyncResult BeginGetResponse(AsyncCallback? callback, object? state)
         {
             CheckAndMarkAsyncGetResponsePending();
-            Task<WebResponse> t = Task.Factory.StartNew(
-                s => ((FileWebRequest)s!).CreateResponse(),
-                this,
-                CancellationToken.None,
-                TaskCreationOptions.DenyChildAttach,
-                TaskScheduler.Default
-            );
+            Task<WebResponse> t = Task.Factory
+                .StartNew(
+                    s => ((FileWebRequest)s!).CreateResponse(),
+                    this,
+                    CancellationToken.None,
+                    TaskCreationOptions.DenyChildAttach,
+                    TaskScheduler.Default
+                );
             return TaskToAsyncResult.Begin(t, callback, state);
         }
 
         public override Task<WebResponse> GetResponseAsync()
         {
             CheckAndMarkAsyncGetResponsePending();
-            return Task.Factory.StartNew(
-                s =>
-                {
-                    var thisRef = (FileWebRequest)s!;
-                    WebResponse response = thisRef.CreateResponse();
-                    _readPending = false;
-                    return response;
-                },
-                this,
-                CancellationToken.None,
-                TaskCreationOptions.DenyChildAttach,
-                TaskScheduler.Default
-            );
+            return Task.Factory
+                .StartNew(
+                    s =>
+                    {
+                        var thisRef = (FileWebRequest)s!;
+                        WebResponse response = thisRef.CreateResponse();
+                        _readPending = false;
+                        return response;
+                    },
+                    this,
+                    CancellationToken.None,
+                    TaskCreationOptions.DenyChildAttach,
+                    TaskScheduler.Default
+                );
         }
 
         public override Stream EndGetRequestStream(IAsyncResult asyncResult)

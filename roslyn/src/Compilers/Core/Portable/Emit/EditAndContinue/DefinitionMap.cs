@@ -284,8 +284,7 @@ namespace Microsoft.CodeAnalysis.Emit
 
             // Check if method has changed previously. If so, we already have a map.
             if (
-                Baseline
-                    .AddedOrChangedMethods
+                Baseline.AddedOrChangedMethods
                     .TryGetValue(methodIndex, out var addedOrChangedMethod)
             )
             {
@@ -302,11 +301,9 @@ namespace Microsoft.CodeAnalysis.Emit
                     out stateMachineStateMap
                 );
 
-                firstUnusedIncreasingStateMachineState = addedOrChangedMethod
-                    .StateMachineStates
+                firstUnusedIncreasingStateMachineState = addedOrChangedMethod.StateMachineStates
                     .FirstUnusedIncreasingStateMachineState;
-                firstUnusedDecreasingStateMachineState = addedOrChangedMethod
-                    .StateMachineStates
+                firstUnusedDecreasingStateMachineState = addedOrChangedMethod.StateMachineStates
                     .FirstUnusedDecreasingStateMachineState;
 
                 if (addedOrChangedMethod.StateMachineTypeName != null)
@@ -319,8 +316,7 @@ namespace Microsoft.CodeAnalysis.Emit
                         out awaiterMap
                     );
 
-                    hoistedLocalSlotCount = addedOrChangedMethod
-                        .StateMachineHoistedLocalSlotsOpt
+                    hoistedLocalSlotCount = addedOrChangedMethod.StateMachineHoistedLocalSlotsOpt
                         .Length;
                     awaiterSlotCount = addedOrChangedMethod.StateMachineAwaiterSlotsOpt.Length;
 
@@ -731,8 +727,7 @@ namespace Microsoft.CodeAnalysis.Emit
             var methodRowId = MetadataTokens.GetRowNumber(methodHandle);
 
             if (
-                Baseline
-                    .AddedOrChangedMethods
+                Baseline.AddedOrChangedMethods
                     .TryGetValue(methodRowId, out var addedOrChangedMethod)
             )
             {
@@ -740,8 +735,7 @@ namespace Microsoft.CodeAnalysis.Emit
                 // This includes all lambdas regardless of whether they were mapped to previous generation or not.
                 if (
                     !addedOrChangedMethod.LambdaDebugInfo.IsDefaultOrEmpty
-                    && Baseline
-                        .SynthesizedMembers
+                    && Baseline.SynthesizedMembers
                         .TryGetValue(oldMethod.ContainingType, out var synthesizedSiblingSymbols)
                 )
                 {

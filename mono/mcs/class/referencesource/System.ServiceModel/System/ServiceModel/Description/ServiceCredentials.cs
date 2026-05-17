@@ -178,8 +178,7 @@ namespace System.ServiceModel.Description
             ServiceCredentials result = CloneCore();
             if (result == null || result.GetType() != this.GetType())
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new NotImplementedException(
                             SR.GetString(
@@ -229,8 +228,7 @@ namespace System.ServiceModel.Description
                 )
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperInvalidOperation(SR.GetString(SR.ID4041, serviceHost));
             }
 
@@ -279,8 +277,7 @@ namespace System.ServiceModel.Description
                 )
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ID4039)));
             }
 
@@ -318,8 +315,7 @@ namespace System.ServiceModel.Description
                 parameters.Find<SecurityCredentialsManager>();
             if (otherCredentialsManager != null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(
@@ -375,8 +371,7 @@ namespace System.ServiceModel.Description
         {
             if (this.isReadOnly)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
                     );

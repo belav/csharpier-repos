@@ -30,8 +30,7 @@ namespace System.Diagnostics.Tests
                 "System.Diagnostics.EventLog.Messages.dll"
             );
             Assert.True(File.Exists(messageDllPath));
-            using SafeLibraryHandle hMessageDll = Interop
-                .Kernel32
+            using SafeLibraryHandle hMessageDll = Interop.Kernel32
                 .LoadLibraryExW(
                     messageDllPath,
                     IntPtr.Zero,
@@ -43,8 +42,7 @@ namespace System.Diagnostics.Tests
             fixed (char* pMessageString = messageString)
             {
                 IntPtr[] insertion = new[] { (IntPtr)pMessageString };
-                int messageLength = Interop
-                    .Kernel32
+                int messageLength = Interop.Kernel32
                     .FormatMessage(
                         Interop.Kernel32.FORMAT_MESSAGE_FROM_HMODULE
                             | Interop.Kernel32.FORMAT_MESSAGE_ARGUMENT_ARRAY,

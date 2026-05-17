@@ -48,8 +48,7 @@ internal static partial class LdapAdapter
             return;
         }
 
-        var distinguishedName = settings
-            .Domain
+        var distinguishedName = settings.Domain
             .Split('.')
             .Select(name => $"dc={name}")
             .Aggregate((a, b) => $"{a},{b}");
@@ -60,8 +59,7 @@ internal static partial class LdapAdapter
 
         Debug.Assert(settings.LdapConnection != null);
         var searchResponse = (SearchResponse)
-            await Task<DirectoryResponse>
-                .Factory
+            await Task<DirectoryResponse>.Factory
                 .FromAsync(
                     settings.LdapConnection.BeginSendRequest!,
                     settings.LdapConnection.EndSendRequest,
@@ -115,8 +113,7 @@ internal static partial class LdapAdapter
                 entrySize += claim.Length * 2; //Approximate the size of stored value in memory cache.
             }
 
-            settings
-                .ClaimsCache
+            settings.ClaimsCache
                 .Set(
                     user,
                     retrievedClaims,

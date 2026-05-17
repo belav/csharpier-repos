@@ -315,13 +315,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                     );
 #endif
 
-                    MessageID
-                        .IDS_FeatureRefLocalsReturns
+                    MessageID.IDS_FeatureRefLocalsReturns
                         .CheckFeatureAvailability(diagnostics, refType.RefKeyword);
 
                     if (refType.ReadOnlyKeyword != default)
-                        MessageID
-                            .IDS_FeatureReadOnlyReferences
+                        MessageID.IDS_FeatureReadOnlyReferences
                             .CheckFeatureAvailability(diagnostics, refType.ReadOnlyKeyword);
                 }
 
@@ -374,8 +372,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return syntax;
             }
 
-            MessageID
-                .IDS_FeatureRefLocalsReturns
+            MessageID.IDS_FeatureRefLocalsReturns
                 .CheckFeatureAvailability(diagnostics, refExpression.RefKeyword);
 
             refKind = RefKind.Ref;

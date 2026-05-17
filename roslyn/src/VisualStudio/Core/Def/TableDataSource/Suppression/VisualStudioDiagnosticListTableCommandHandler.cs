@@ -91,8 +91,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                 .ConfigureAwait(false);
             if (menuCommandService != null)
             {
-                await _threadingContext
-                    .JoinableTaskFactory
+                await _threadingContext.JoinableTaskFactory
                     .SwitchToMainThreadAsync(cancellationToken);
                 AddErrorListSetSeverityMenuHandlers(menuCommandService);
 

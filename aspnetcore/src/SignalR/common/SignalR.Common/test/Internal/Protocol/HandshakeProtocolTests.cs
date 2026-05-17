@@ -52,8 +52,7 @@ public class HandshakeProtocolTests
     [Fact]
     public void ParsingHandshakeRequestMessageSuccessForValidMessageWithMultipleSegments()
     {
-        var message = ReadOnlySequenceFactory
-            .SegmentPerByteFactory
+        var message = ReadOnlySequenceFactory.SegmentPerByteFactory
             .CreateWithContent("{\"protocol\":\"json\",\"version\":1}\u001e");
 
         Assert.True(
@@ -80,8 +79,7 @@ public class HandshakeProtocolTests
     [Fact]
     public void ParsingHandshakeResponseMessageSuccessForValidMessageWithMultipleSegments()
     {
-        var message = ReadOnlySequenceFactory
-            .SegmentPerByteFactory
+        var message = ReadOnlySequenceFactory.SegmentPerByteFactory
             .CreateWithContent("{\"error\":\"dummy\"}\u001e");
 
         Assert.True(HandshakeProtocol.TryParseResponseMessage(ref message, out var response));

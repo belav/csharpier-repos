@@ -347,8 +347,7 @@ namespace System.Activities.Statements
                     )
                 )
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(
                             new InvalidOperationException(
                                 SR.AbortInstanceOnTransactionFailureDoesNotMatch
@@ -358,8 +357,7 @@ namespace System.Activities.Statements
 
                 if (foundHandle.SuppressTransaction)
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(
                             new InvalidOperationException(
                                 SR.CannotNestTransactionScopeWhenAmbientHandleIsSuppressed(
@@ -383,8 +381,7 @@ namespace System.Activities.Statements
                 //Most likely, you are inside a nested TSA
                 if (transaction.IsolationLevel != this.IsolationLevel)
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(new InvalidOperationException(SR.IsolationLevelValidation));
                 }
 
@@ -395,13 +392,14 @@ namespace System.Activities.Statements
                     this.delayWasScheduled.Set(context, true);
                     this.nestedScopeTimeout.Set(context, timeout);
 
-                    this.nestedScopeTimeoutActivityInstance.Set(
-                        context,
-                        context.ScheduleActivity(
-                            this.NestedScopeTimeoutWorkflow,
-                            new CompletionCallback(OnDelayCompletion)
-                        )
-                    );
+                    this.nestedScopeTimeoutActivityInstance
+                        .Set(
+                            context,
+                            context.ScheduleActivity(
+                                this.NestedScopeTimeoutWorkflow,
+                                new CompletionCallback(OnDelayCompletion)
+                            )
+                        );
                 }
 
                 //execute the Body under the current runtime transaction
@@ -472,9 +470,8 @@ namespace System.Activities.Statements
                 this.delayWasScheduled.Get(context),
                 "Internal error..Delay should have been scheduled if we are here"
             );
-            ActivityInstance delayActivityInstance = this.nestedScopeTimeoutActivityInstance.Get(
-                context
-            );
+            ActivityInstance delayActivityInstance = this.nestedScopeTimeoutActivityInstance
+                .Get(context);
             if (delayActivityInstance != null)
             {
                 context.CancelChild(delayActivityInstance);

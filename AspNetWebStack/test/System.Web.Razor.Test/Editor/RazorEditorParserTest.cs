@@ -200,8 +200,7 @@ namespace System.Web.Razor.Test.Editor
                     // Assert
                     MiscUtils.DoWithTimeoutIfNotDebugging(parseComplete.Wait);
 
-                    string generatedCode = capturedArgs
-                        .GeneratorResults
+                    string generatedCode = capturedArgs.GeneratorResults
                         .GeneratedCode
                         .GenerateCode<CSharpCodeProvider>();
 

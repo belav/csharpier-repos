@@ -43,8 +43,7 @@ namespace System.Diagnostics
 
         private static unsafe void SetDelayedSigChildConsoleConfigurationHandler()
         {
-            Interop
-                .Sys
+            Interop.Sys
                 .SetDelayedSigChildConsoleConfigurationHandler(
                     &DelayedSigChildConsoleConfiguration
                 );

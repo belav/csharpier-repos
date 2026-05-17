@@ -196,15 +196,13 @@ namespace System.Net
             )
                 return null;
 
-            SpnToken spnToken = httpWebRequest
-                .CurrentAuthenticationState
+            SpnToken spnToken = httpWebRequest.CurrentAuthenticationState
                 .GetComputeSpn(httpWebRequest);
 
             ChannelBinding binding = null;
             if (httpWebRequest.CurrentAuthenticationState.TransportContext != null)
             {
-                binding = httpWebRequest
-                    .CurrentAuthenticationState
+                binding = httpWebRequest.CurrentAuthenticationState
                     .TransportContext
                     .GetChannelBinding(ChannelBindingKind.Endpoint);
             }
@@ -222,8 +220,7 @@ namespace System.Net
                     digestChallenge.Domain == null
                         ? new string[]
                         {
-                            httpWebRequest
-                                .ChallengedUri
+                            httpWebRequest.ChallengedUri
                                 .GetParts(UriComponents.SchemeAndServer, UriFormat.UriEscaped),
                         }
                         : digestChallenge.Domain.Split(singleSpaceArray);
@@ -278,8 +275,7 @@ namespace System.Net
                 while (index >= 0)
                 {
                     // find the next occurence of "auth"
-                    index = challenge
-                        .QualityOfProtection
+                    index = challenge.QualityOfProtection
                         .IndexOf(HttpDigest.SupportedQuality, index);
                     if (index < 0)
                     {
@@ -289,15 +285,13 @@ namespace System.Net
                     if (
                         (
                             index == 0
-                            || HttpDigest
-                                .ValidSeparator
+                            || HttpDigest.ValidSeparator
                                 .IndexOf(challenge.QualityOfProtection[index - 1]) >= 0
                         )
                         && (
                             index + HttpDigest.SupportedQuality.Length
                                 == challenge.QualityOfProtection.Length
-                            || HttpDigest
-                                .ValidSeparator
+                            || HttpDigest.ValidSeparator
                                 .IndexOf(
                                     challenge.QualityOfProtection[
                                         index + HttpDigest.SupportedQuality.Length
@@ -353,13 +347,11 @@ namespace System.Net
                 ChannelBinding binding = null;
                 if (httpWebRequest.CurrentAuthenticationState.TransportContext != null)
                 {
-                    binding = httpWebRequest
-                        .CurrentAuthenticationState
+                    binding = httpWebRequest.CurrentAuthenticationState
                         .TransportContext
                         .GetChannelBinding(ChannelBindingKind.Endpoint);
                 }
-                httpWebRequest
-                    .ServicePoint
+                httpWebRequest.ServicePoint
                     .SetCachedChannelBinding(httpWebRequest.ChallengedUri, binding);
 
                 return true;
@@ -571,8 +563,7 @@ namespace System.Net
                 )
                     return null;
 
-                SpnToken spn = httpWebRequest
-                    .CurrentAuthenticationState
+                SpnToken spn = httpWebRequest.CurrentAuthenticationState
                     .GetComputeSpn(httpWebRequest);
                 GlobalLog.Print(
                     "NtlmClient::Authenticate() ChallengedSpn:" + ValidationHelper.ToString(spn)
@@ -581,8 +572,7 @@ namespace System.Net
                 ChannelBinding binding = null;
                 if (httpWebRequest.CurrentAuthenticationState.TransportContext != null)
                 {
-                    binding = httpWebRequest
-                        .CurrentAuthenticationState
+                    binding = httpWebRequest.CurrentAuthenticationState
                         .TransportContext
                         .GetChannelBinding(ChannelBindingKind.Endpoint);
                 }
@@ -664,8 +654,7 @@ namespace System.Net
                     digestChallenge.Domain == null
                         ? new string[]
                         {
-                            httpWebRequest
-                                .ChallengedUri
+                            httpWebRequest.ChallengedUri
                                 .GetParts(UriComponents.SchemeAndServer, UriFormat.UriEscaped),
                         }
                         : digestChallenge.Domain.Split(singleSpaceArray);
@@ -695,8 +684,7 @@ namespace System.Net
         {
             GlobalLog.Print("DigestClient::XPUpdate(): " + challenge);
 
-            NTAuthentication authSession = httpWebRequest
-                .CurrentAuthenticationState
+            NTAuthentication authSession = httpWebRequest.CurrentAuthenticationState
                 .GetSecurityContext(this);
             GlobalLog.Print(
                 "DigestClient::XPUpdate() key:"
@@ -718,8 +706,7 @@ namespace System.Net
                 GlobalLog.Print("DigestClient::XPUpdate(): no challenge. returning true");
 
                 // Extract the CBT we used and cache it for future requests that want to do preauth
-                httpWebRequest
-                    .ServicePoint
+                httpWebRequest.ServicePoint
                     .SetCachedChannelBinding(
                         httpWebRequest.ChallengedUri,
                         authSession.ChannelBinding
@@ -743,8 +730,7 @@ namespace System.Net
                 GlobalLog.Print("DigestClient::XPUpdate(): no status code match. returning true");
 
                 // Extract the CBT we used and cache it for future requests that want to do preauth
-                httpWebRequest
-                    .ServicePoint
+                httpWebRequest.ServicePoint
                     .SetCachedChannelBinding(
                         httpWebRequest.ChallengedUri,
                         authSession.ChannelBinding
@@ -937,8 +923,7 @@ namespace System.Net
             if (httpWebRequest.CurrentMethod.ConnectRequest)
             {
                 // Use the orriginal request Uri, not the proxy Uri
-                this.Uri = httpWebRequest
-                    .RequestUri
+                this.Uri = httpWebRequest.RequestUri
                     .GetParts(UriComponents.HostAndPort, UriFormat.UriEscaped);
             }
             else
@@ -1169,8 +1154,7 @@ namespace System.Net
             try
             {
                 using (
-                    RegistryKey lsaKey = Registry
-                        .LocalMachine
+                    RegistryKey lsaKey = Registry.LocalMachine
                         .OpenSubKey(suppressExtendedProtectionKey)
                 )
                 {

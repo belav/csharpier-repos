@@ -336,8 +336,7 @@ internal sealed partial class DfaMatcher : Matcher
         {
             var constraint = constraints[i];
             if (
-                !constraint
-                    .Value
+                !constraint.Value
                     .Match(
                         httpContext,
                         NullRouter.Instance,

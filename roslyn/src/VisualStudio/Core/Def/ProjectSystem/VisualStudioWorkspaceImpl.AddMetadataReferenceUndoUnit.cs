@@ -33,8 +33,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 var fromProject = currentSolution.GetProject(FromProjectId);
                 if (fromProject != null)
                 {
-                    var reference = fromProject
-                        .MetadataReferences
+                    var reference = fromProject.MetadataReferences
                         .OfType<PortableExecutableReference>()
                         .FirstOrDefault(p =>
                             StringComparer.OrdinalIgnoreCase.Equals(p.FilePath, _filePath)
@@ -42,8 +41,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
 
                     if (reference == null)
                     {
-                        var documentationProvider = Workspace
-                            .Services
+                        var documentationProvider = Workspace.Services
                             .GetRequiredService<IDocumentationProviderService>();
                         try
                         {

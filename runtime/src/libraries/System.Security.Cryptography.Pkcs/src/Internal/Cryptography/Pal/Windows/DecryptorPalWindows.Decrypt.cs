@@ -36,8 +36,7 @@ namespace Internal.Cryptography.Pal.Windows
                 }
 
                 ContentInfo contentInfo = _hCryptMsg.GetContentInfo();
-                byte[]? cek = AnyOS
-                    .ManagedPkcsPal
+                byte[]? cek = AnyOS.ManagedPkcsPal
                     .ManagedKeyTransPal
                     .DecryptCekCore(
                         cert,
@@ -58,8 +57,7 @@ namespace Internal.Cryptography.Pal.Windows
                             return null;
                         }
 
-                        return AnyOS
-                            .ManagedPkcsPal
+                        return AnyOS.ManagedPkcsPal
                             .ManagedDecryptorPal
                             .TryDecryptCore(
                                 cek!,
@@ -154,8 +152,7 @@ namespace Internal.Cryptography.Pal.Windows
                 int cbSize = 0;
 
                 if (
-                    Interop
-                        .Crypt32
+                    Interop.Crypt32
                         .CertGetCertificateContextProperty(
                             hCertContext,
                             CertContextPropId.CERT_NCRYPT_KEY_HANDLE_PROP_ID,
@@ -169,8 +166,7 @@ namespace Internal.Cryptography.Pal.Windows
                 }
 
                 if (
-                    !Interop
-                        .Crypt32
+                    !Interop.Crypt32
                         .CertGetCertificateContextProperty(
                             hCertContext,
                             CertContextPropId.CERT_KEY_PROV_INFO_PROP_ID,
@@ -190,8 +186,7 @@ namespace Internal.Cryptography.Pal.Windows
                     fixed (byte* pvData = pData)
                     {
                         if (
-                            !Interop
-                                .Crypt32
+                            !Interop.Crypt32
                                 .CertGetCertificateContextProperty(
                                     hCertContext,
                                     CertContextPropId.CERT_KEY_PROV_INFO_PROP_ID,
@@ -234,8 +229,7 @@ namespace Internal.Cryptography.Pal.Windows
                 decryptPara.dwKeySpec = keySpec;
                 decryptPara.dwRecipientIndex = pal.Index;
 
-                bool success = Interop
-                    .Crypt32
+                bool success = Interop.Crypt32
                     .CryptMsgControl(
                         _hCryptMsg,
                         0,
@@ -308,14 +302,13 @@ namespace Internal.Cryptography.Pal.Windows
                                     );
                                     candidateCerts.AddRange(originatorCerts);
                                     candidateCerts.AddRange(extraStore);
-                                    SubjectIdentifier originatorId = pKeyAgreeRecipientInfo
-                                        ->OriginatorCertId
-                                        .ToSubjectIdentifier();
+                                    SubjectIdentifier originatorId =
+                                        pKeyAgreeRecipientInfo->OriginatorCertId
+                                            .ToSubjectIdentifier();
                                     X509Certificate2? originatorCert =
                                         candidateCerts.TryFindMatchingCertificate(originatorId);
                                     if (originatorCert == null)
-                                        return ErrorCode
-                                            .CRYPT_E_NOT_FOUND
+                                        return ErrorCode.CRYPT_E_NOT_FOUND
                                             .ToCryptographicException();
                                     using (
                                         SafeCertContextHandle hCertContext =
@@ -324,10 +317,10 @@ namespace Internal.Cryptography.Pal.Windows
                                     {
                                         CERT_CONTEXT* pOriginatorCertContext =
                                             hCertContext.DangerousGetCertContext();
-                                        decryptPara.OriginatorPublicKey = pOriginatorCertContext
-                                            ->pCertInfo
-                                            ->SubjectPublicKeyInfo
-                                            .PublicKey;
+                                        decryptPara.OriginatorPublicKey =
+                                            pOriginatorCertContext->pCertInfo
+                                                ->SubjectPublicKeyInfo
+                                                .PublicKey;
 
                                         // Do not factor this call out of the switch statement as leaving this "using" block will free up
                                         // native memory that decryptPara points to.
@@ -337,9 +330,8 @@ namespace Internal.Cryptography.Pal.Windows
 
                                 case CMsgKeyAgreeOriginatorChoice.CMSG_KEY_AGREE_ORIGINATOR_PUBLIC_KEY:
                                 {
-                                    decryptPara.OriginatorPublicKey = pKeyAgreeRecipientInfo
-                                        ->OriginatorPublicKeyInfo
-                                        .PublicKey;
+                                    decryptPara.OriginatorPublicKey =
+                                        pKeyAgreeRecipientInfo->OriginatorPublicKeyInfo.PublicKey;
                                     return TryExecuteDecryptAgree(ref decryptPara);
                                 }
 
@@ -369,8 +361,7 @@ namespace Internal.Cryptography.Pal.Windows
         )
         {
             if (
-                !Interop
-                    .Crypt32
+                !Interop.Crypt32
                     .CryptMsgControl(
                         _hCryptMsg,
                         0,

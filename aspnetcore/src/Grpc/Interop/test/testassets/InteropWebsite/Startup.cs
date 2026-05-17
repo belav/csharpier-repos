@@ -35,22 +35,19 @@ public class Startup
     public void Configure(IApplicationBuilder app, IHostApplicationLifetime applicationLifetime)
     {
         // Required to notify test infrastructure that it can begin tests
-        applicationLifetime
-            .ApplicationStarted
+        applicationLifetime.ApplicationStarted
             .Register(() =>
             {
                 Console.WriteLine("Application started.");
 
                 var runtimeVersion =
-                    typeof(object)
-                        .Assembly
+                    typeof(object).Assembly
                         .GetCustomAttribute<AssemblyInformationalVersionAttribute>()
                         ?.InformationalVersion
                     ?? "Unknown";
                 Console.WriteLine($"NetCoreAppVersion: {runtimeVersion}");
                 var aspNetCoreVersion =
-                    typeof(HeaderNames)
-                        .Assembly
+                    typeof(HeaderNames).Assembly
                         .GetCustomAttribute<AssemblyInformationalVersionAttribute>()
                         ?.InformationalVersion
                     ?? "Unknown";

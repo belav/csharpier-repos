@@ -27,8 +27,7 @@ namespace System.ServiceModel.Description
             {
                 if (value < TimeSpan.Zero)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentOutOfRangeException(
                                 "value",

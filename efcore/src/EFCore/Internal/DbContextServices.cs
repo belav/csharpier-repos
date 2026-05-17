@@ -92,12 +92,10 @@ public class DbContextServices : IDbContextServices
                 modelFromOptions == null
                 || (designTime && modelFromOptions is not Metadata.Internal.Model)
                 ? RuntimeFeature.IsDynamicCodeSupported
-                    ? dependencies
-                        .ModelSource
+                    ? dependencies.ModelSource
                         .GetModel(_currentContext!.Context, dependencies, designTime)
                     : throw new InvalidOperationException(CoreStrings.NativeAotNoCompiledModel)
-                : dependencies
-                    .ModelRuntimeInitializer
+                : dependencies.ModelRuntimeInitializer
                     .Initialize(modelFromOptions, designTime, dependencies.ValidationLogger);
         }
         finally

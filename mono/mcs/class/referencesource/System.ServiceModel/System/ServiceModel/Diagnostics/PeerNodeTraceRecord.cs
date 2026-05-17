@@ -226,8 +226,7 @@ namespace System.ServiceModel.Diagnostics
             {
                 foreach (PeerNodeAddress nodeAddress in addresses)
                 {
-                    nodeAddress
-                        .EndpointAddress
+                    nodeAddress.EndpointAddress
                         .WriteTo(AddressingVersion.WSAddressing10, writer, "Address", "");
                     foreach (IPAddress ipAddress in nodeAddress.IPAddresses)
                     {

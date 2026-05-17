@@ -763,16 +763,14 @@ namespace System.Reflection.Emit.Tests
                     case UnmanagedType.CustomMarshaler:
                         Assert.Equal(
                             typeof(EmptyTestClass).AssemblyQualifiedName,
-                            attributeFromDisk
-                                .NamedArguments
+                            attributeFromDisk.NamedArguments
                                 .First(na => na.MemberName == "MarshalType")
                                 .TypedValue
                                 .Value
                         );
                         Assert.Equal(
                             "MyCookie",
-                            attributeFromDisk
-                                .NamedArguments
+                            attributeFromDisk.NamedArguments
                                 .First(na => na.MemberName == "MarshalCookie")
                                 .TypedValue
                                 .Value
@@ -781,8 +779,7 @@ namespace System.Reflection.Emit.Tests
                     case UnmanagedType.ByValTStr:
                         Assert.Equal(
                             256,
-                            attributeFromDisk
-                                .NamedArguments
+                            attributeFromDisk.NamedArguments
                                 .First(na => na.MemberName == "SizeConst")
                                 .TypedValue
                                 .Value

@@ -52,8 +52,7 @@ public class ArgumentTests
 
         var result = command.Parse("set-color Fuschia");
 
-        result
-            .Errors
+        result.Errors
             .Select(e => e.Message)
             .Should()
             .BeEquivalentTo(

@@ -119,8 +119,7 @@ namespace System.ServiceModel
                     element.EndpointSupportingTokenParameters.Endorsing.Add(istp);
                     goto default;
                 case MessageCredentialType.UserName:
-                    element
-                        .EndpointSupportingTokenParameters
+                    element.EndpointSupportingTokenParameters
                         .SignedEncrypted
                         .Add(new UserNameSecurityTokenParameters());
                     element.RequireSignatureConfirmation = false;

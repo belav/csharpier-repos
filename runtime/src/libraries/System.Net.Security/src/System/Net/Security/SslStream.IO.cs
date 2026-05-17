@@ -167,8 +167,7 @@ namespace System.Net.Security
                 bool connectionOpen =
                     Interlocked.CompareExchange(ref _connectionOpenedStatus, 1, 0) == 0;
 
-                NetSecurityTelemetry
-                    .Log
+                NetSecurityTelemetry.Log
                     .HandshakeCompleted(
                         GetSslProtocolInternal(),
                         startingTimestamp,
@@ -451,8 +450,7 @@ namespace System.Net.Security
             }
 
             if (NetEventSource.Log.IsEnabled())
-                NetEventSource
-                    .Log
+                NetEventSource.Log
                     .SspiSelectedCipherSuite(
                         nameof(ForceAuthenticationAsync),
                         SslProtocol,

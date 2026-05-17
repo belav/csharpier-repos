@@ -60,8 +60,7 @@ internal sealed partial class Request
 
         PathBase = string.Empty;
         Path = originalPath;
-        var prefix = requestContext
-            .Server
+        var prefix = requestContext.Server
             .Options
             .UrlPrefixes
             .GetPrefix((int)requestContext.UrlContext);
@@ -178,8 +177,7 @@ internal sealed partial class Request
             }
         }
         else if (
-            requestContext
-                .Server
+            requestContext.Server
                 .Options
                 .UrlPrefixes
                 .TryMatchLongestPrefix(

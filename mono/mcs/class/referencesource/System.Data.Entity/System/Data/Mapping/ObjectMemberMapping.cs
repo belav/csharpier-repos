@@ -28,8 +28,7 @@ namespace System.Data.Mapping
         /// <param name="clrMember"></param>
         protected ObjectMemberMapping(EdmMember edmMember, EdmMember clrMember)
         {
-            System
-                .Diagnostics
+            System.Diagnostics
                 .Debug
                 .Assert(
                     edmMember.BuiltInTypeKind == clrMember.BuiltInTypeKind,

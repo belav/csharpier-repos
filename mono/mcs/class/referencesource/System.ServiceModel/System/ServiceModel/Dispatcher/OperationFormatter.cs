@@ -199,8 +199,7 @@ namespace System.ServiceModel.Dispatcher
             }
             catch (XmlException xe)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new CommunicationException(
                             SR.GetString(
@@ -214,8 +213,7 @@ namespace System.ServiceModel.Dispatcher
             }
             catch (FormatException fe)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new CommunicationException(
                             SR.GetString(
@@ -229,8 +227,7 @@ namespace System.ServiceModel.Dispatcher
             }
             catch (SerializationException se)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new CommunicationException(
                             SR.GetString(
@@ -264,8 +261,7 @@ namespace System.ServiceModel.Dispatcher
             }
             catch (MissingMethodException mme)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(
@@ -338,8 +334,7 @@ namespace System.ServiceModel.Dispatcher
             }
             catch (XmlException xe)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         OperationFormatter.CreateDeserializationFailedFault(
                             SR.GetString(
@@ -353,8 +348,7 @@ namespace System.ServiceModel.Dispatcher
             }
             catch (FormatException fe)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         OperationFormatter.CreateDeserializationFailedFault(
                             SR.GetString(
@@ -368,8 +362,7 @@ namespace System.ServiceModel.Dispatcher
             }
             catch (SerializationException se)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new CommunicationException(
                             SR.GetString(
@@ -785,8 +778,7 @@ namespace System.ServiceModel.Dispatcher
         {
             if (isEncoded && !isRpc)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(SR.SFxDocEncodedNotSupported, operation.Name)
@@ -805,8 +797,7 @@ namespace System.ServiceModel.Dispatcher
                     if (isRpc && operation.IsValidateRpcWrapperName)
                     {
                         if (!isEncoded)
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
                                     new InvalidOperationException(
                                         SR.GetString(
@@ -824,8 +815,7 @@ namespace System.ServiceModel.Dispatcher
                     hasParameter = true;
             }
             if (hasParameter && hasTypedOrUntypedMessage)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(
@@ -835,8 +825,7 @@ namespace System.ServiceModel.Dispatcher
                         )
                     );
             if (isRpc && hasTypedOrUntypedMessage && hasVoid)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(
@@ -912,15 +901,13 @@ namespace System.ServiceModel.Dispatcher
             {
                 if (description == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new ArgumentNullException("description"));
                 }
 
                 if (instance == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentNullException(
                                 SR.GetString(SR.SFxTypedMessageCannotBeNull, description.Action)
@@ -1111,13 +1098,14 @@ namespace System.ServiceModel.Dispatcher
                 {
                     lock (ThisLock)
                     {
-                        this.operationFormatter.SerializeBodyContents(
-                            writer,
-                            this.version,
-                            this.parameters,
-                            this.returnValue,
-                            this.isRequest
-                        );
+                        this.operationFormatter
+                            .SerializeBodyContents(
+                                writer,
+                                this.version,
+                                this.parameters,
+                                this.returnValue,
+                                this.isRequest
+                            );
                     }
                 }
 
@@ -1164,15 +1152,16 @@ namespace System.ServiceModel.Dispatcher
                         bool completeSelf = true;
                         this.operationFormatter = operationFormatterBodyWriter.OperationFormatter;
 
-                        IAsyncResult result = this.operationFormatter.BeginSerializeBodyContents(
-                            writer,
-                            operationFormatterBodyWriter.version,
-                            operationFormatterBodyWriter.parameters,
-                            operationFormatterBodyWriter.returnValue,
-                            operationFormatterBodyWriter.isRequest,
-                            PrepareAsyncCompletion(handleEndOnWriteBodyContents),
-                            this
-                        );
+                        IAsyncResult result = this.operationFormatter
+                            .BeginSerializeBodyContents(
+                                writer,
+                                operationFormatterBodyWriter.version,
+                                operationFormatterBodyWriter.parameters,
+                                operationFormatterBodyWriter.returnValue,
+                                operationFormatterBodyWriter.isRequest,
+                                PrepareAsyncCompletion(handleEndOnWriteBodyContents),
+                                this
+                            );
                         completeSelf = SyncContinue(result);
 
                         if (completeSelf)
@@ -1214,8 +1203,7 @@ namespace System.ServiceModel.Dispatcher
                     lock (ThisLock)
                     {
                         if (base.Closed)
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(CreateBufferDisposedException());
                         return new OperationFormatterMessage(
                             base.Headers,

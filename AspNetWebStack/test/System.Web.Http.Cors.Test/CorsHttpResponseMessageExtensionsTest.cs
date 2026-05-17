@@ -16,8 +16,7 @@ namespace System.Web.Cors.Test.WebAPI
         {
             Assert.ThrowsArgumentNull(
                 () =>
-                    System
-                        .Web
+                    System.Web
                         .Http
                         .Cors
                         .CorsHttpResponseMessageExtensions

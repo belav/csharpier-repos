@@ -36,8 +36,7 @@ public class DbSetInitializer : IDbSetInitializer
     {
         foreach (var setInfo in _setFinder.FindSets(context.GetType()).Where(p => p.Setter != null))
         {
-            setInfo
-                .Setter!
+            setInfo.Setter!
                 .SetClrValue(context, ((IDbSetCache)context).GetOrAddSet(_setSource, setInfo.Type));
         }
     }

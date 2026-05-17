@@ -180,13 +180,8 @@ namespace System.ServiceModel.Channels
 
             try
             {
-                int count = this.socket.SendTo(
-                    buffer,
-                    offset,
-                    size,
-                    SocketFlags.None,
-                    remoteEndPoint
-                );
+                int count = this.socket
+                    .SendTo(buffer, offset, size, SocketFlags.None, remoteEndPoint);
                 Fx.Assert(
                     count == size,
                     "Bytes sent on the wire should be the same as the bytes specified"
@@ -196,8 +191,7 @@ namespace System.ServiceModel.Channels
             }
             catch (SocketException socketException)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         ConvertNetworkError(
                             socketException,
@@ -324,8 +318,7 @@ namespace System.ServiceModel.Channels
         {
             if (this.IsDisposed)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(new ObjectDisposedException(this.GetType().ToString()));
             }
         }
@@ -369,15 +362,16 @@ namespace System.ServiceModel.Channels
 
                 try
                 {
-                    IAsyncResult socketAsyncResult = this.socket.BeginSendTo(
-                        buffer,
-                        offset,
-                        size,
-                        SocketFlags.None,
-                        remoteEndPoint,
-                        onSendToComplete,
-                        this
-                    );
+                    IAsyncResult socketAsyncResult = this.socket
+                        .BeginSendTo(
+                            buffer,
+                            offset,
+                            size,
+                            SocketFlags.None,
+                            remoteEndPoint,
+                            onSendToComplete,
+                            this
+                        );
 
                     if (!socketAsyncResult.CompletedSynchronously)
                     {
@@ -388,8 +382,7 @@ namespace System.ServiceModel.Channels
                 }
                 catch (SocketException socketException)
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(
                             ConvertNetworkError(
                                 socketException,
@@ -476,15 +469,16 @@ namespace System.ServiceModel.Channels
 
                 try
                 {
-                    IAsyncResult socketAsyncResult = this.socket.BeginReceiveFrom(
-                        this.Buffer.Array,
-                        this.Buffer.Offset,
-                        this.Buffer.Count,
-                        SocketFlags.None,
-                        ref remoteEndPoint,
-                        onReceiveMessageFromCallback,
-                        this
-                    );
+                    IAsyncResult socketAsyncResult = this.socket
+                        .BeginReceiveFrom(
+                            this.Buffer.Array,
+                            this.Buffer.Offset,
+                            this.Buffer.Count,
+                            SocketFlags.None,
+                            ref remoteEndPoint,
+                            onReceiveMessageFromCallback,
+                            this
+                        );
 
                     if (!socketAsyncResult.CompletedSynchronously)
                     {
@@ -495,8 +489,7 @@ namespace System.ServiceModel.Channels
                 }
                 catch (SocketException socketException)
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(UdpSocket.ConvertNetworkError(socketException, this));
                 }
 

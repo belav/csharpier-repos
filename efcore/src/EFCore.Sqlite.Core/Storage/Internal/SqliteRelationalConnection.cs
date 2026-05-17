@@ -37,8 +37,7 @@ public class SqliteRelationalConnection : RelationalConnection, ISqliteRelationa
         _rawSqlCommandBuilder = rawSqlCommandBuilder;
         _logger = logger;
 
-        var optionsExtension = dependencies
-            .ContextOptions
+        var optionsExtension = dependencies.ContextOptions
             .Extensions
             .OfType<SqliteOptionsExtension>()
             .FirstOrDefault();

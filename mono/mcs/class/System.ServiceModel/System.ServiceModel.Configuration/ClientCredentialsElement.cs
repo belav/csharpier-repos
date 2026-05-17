@@ -233,8 +233,7 @@ namespace System.ServiceModel.Configuration
 
             // ClientCertificate
             if (!String.IsNullOrEmpty(ClientCertificate.FindValue))
-                behavior
-                    .ClientCertificate
+                behavior.ClientCertificate
                     .SetCertificate(
                         ClientCertificate.StoreLocation,
                         ClientCertificate.StoreName,
@@ -253,10 +252,11 @@ namespace System.ServiceModel.Configuration
             bi.DefaultKeyEntropyMode = ci.DefaultKeyEntropyMode;
             bi.IssuedTokenRenewalThresholdPercentage = ci.IssuedTokenRenewalThresholdPercentage;
             foreach (IssuedTokenClientBehaviorsElement ccb in ci.IssuerChannelBehaviors)
-                bi.IssuerChannelBehaviors.Add(
-                    new Uri(ccb.IssuerAddress, UriKind.RelativeOrAbsolute),
-                    ConfigUtil.CreateEndpointBehaviors(ccb.BehaviorConfiguration)
-                );
+                bi.IssuerChannelBehaviors
+                    .Add(
+                        new Uri(ccb.IssuerAddress, UriKind.RelativeOrAbsolute),
+                        ConfigUtil.CreateEndpointBehaviors(ccb.BehaviorConfiguration)
+                    );
             bi.LocalIssuerAddress = ci.LocalIssuer.CreateInstance();
             bi.LocalIssuerBinding = ConfigUtil.CreateBinding(
                 ci.LocalIssuer.Binding,
@@ -266,8 +266,7 @@ namespace System.ServiceModel.Configuration
 
             // Peer
             if (!String.IsNullOrEmpty(Peer.Certificate.FindValue))
-                behavior
-                    .Peer
+                behavior.Peer
                     .SetCertificate(
                         Peer.Certificate.StoreLocation,
                         Peer.Certificate.StoreName,
@@ -289,12 +288,12 @@ namespace System.ServiceModel.Configuration
                 (X509CertificateValidator)CreateInstance(
                     Peer.PeerAuthentication.CustomCertificateValidatorType
                 );
-            behavior.Peer.PeerAuthentication.CertificateValidationMode =
-                Peer.PeerAuthentication.CertificateValidationMode;
-            behavior.Peer.PeerAuthentication.RevocationMode =
-                Peer.PeerAuthentication.RevocationMode;
-            behavior.Peer.PeerAuthentication.TrustedStoreLocation =
-                Peer.PeerAuthentication.TrustedStoreLocation;
+            behavior.Peer.PeerAuthentication.CertificateValidationMode = Peer.PeerAuthentication
+                .CertificateValidationMode;
+            behavior.Peer.PeerAuthentication.RevocationMode = Peer.PeerAuthentication
+                .RevocationMode;
+            behavior.Peer.PeerAuthentication.TrustedStoreLocation = Peer.PeerAuthentication
+                .TrustedStoreLocation;
 
             // ServiceCertificate
             var bsc = behavior.ServiceCertificate;

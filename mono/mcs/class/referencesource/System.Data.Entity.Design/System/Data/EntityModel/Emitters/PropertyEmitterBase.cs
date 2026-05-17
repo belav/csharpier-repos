@@ -60,8 +60,7 @@ namespace System.Data.EntityModel.Emitters
             )
             {
                 Generator.AddError(
-                    System
-                        .Data
+                    System.Data
                         .Entity
                         .Design
                         .Strings
@@ -78,8 +77,7 @@ namespace System.Data.EntityModel.Emitters
             )
             {
                 Generator.AddError(
-                    System
-                        .Data
+                    System.Data
                         .Entity
                         .Design
                         .Strings

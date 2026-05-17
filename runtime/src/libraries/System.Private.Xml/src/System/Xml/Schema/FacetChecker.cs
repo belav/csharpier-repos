@@ -238,8 +238,7 @@ namespace System.Xml.Schema
                     SR.Sch_EnumerationFacetProhibited
                 );
                 _derivedRestriction.Enumeration ??= new ArrayList();
-                _derivedRestriction
-                    .Enumeration
+                _derivedRestriction.Enumeration
                     .Add(
                         ParseFacetValue(
                             _datatype,

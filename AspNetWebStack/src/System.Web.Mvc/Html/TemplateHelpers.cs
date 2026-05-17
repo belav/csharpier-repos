@@ -134,8 +134,7 @@ namespace System.Web.Mvc.Html
                 }
                 else
                 {
-                    ViewEngineResult viewEngineResult = ViewEngines
-                        .Engines
+                    ViewEngineResult viewEngineResult = ViewEngines.Engines
                         .FindPartialView(html.ViewContext, fullViewName);
                     if (viewEngineResult.View != null)
                     {
@@ -146,8 +145,7 @@ namespace System.Web.Mvc.Html
 
                         using (StringWriter writer = new StringWriter(CultureInfo.InvariantCulture))
                         {
-                            viewEngineResult
-                                .View
+                            viewEngineResult.View
                                 .Render(
                                     new ViewContext(
                                         html.ViewContext,
@@ -519,13 +517,11 @@ namespace System.Web.Mvc.Html
 
             public override string Execute(HtmlHelper html, ViewDataDictionary viewData)
             {
-                ViewEngineResult viewEngineResult = ViewEngines
-                    .Engines
+                ViewEngineResult viewEngineResult = ViewEngines.Engines
                     .FindPartialView(html.ViewContext, ViewName);
                 using (StringWriter writer = new StringWriter(CultureInfo.InvariantCulture))
                 {
-                    viewEngineResult
-                        .View
+                    viewEngineResult.View
                         .Render(
                             new ViewContext(
                                 html.ViewContext,

@@ -87,8 +87,7 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
                     )
                 );
 
-            var semanticFacts = document
-                .Project
+            var semanticFacts = document.Project
                 .Solution
                 .Services
                 .GetLanguageServices(state.TypeToGenerateIn.Language)
@@ -100,8 +99,7 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
             )
             {
                 var typeParameters = state.SignatureInfo.DetermineTypeParameters(cancellationToken);
-                var returnType = await state
-                    .SignatureInfo
+                var returnType = await state.SignatureInfo
                     .DetermineReturnTypeAsync(cancellationToken)
                     .ConfigureAwait(false);
 

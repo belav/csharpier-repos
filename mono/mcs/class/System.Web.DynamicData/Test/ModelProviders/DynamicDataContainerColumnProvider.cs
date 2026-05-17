@@ -75,8 +75,7 @@ namespace MonoTests.ModelProviders
             TableProvider tableProvider = null;
             try
             {
-                tableProvider = Table
-                    .DataModel
+                tableProvider = Table.DataModel
                     .Tables
                     .First<TableProvider>(
                         (TableProvider tp) =>
@@ -99,8 +98,7 @@ namespace MonoTests.ModelProviders
 
             try
             {
-                toColumn = tableProvider
-                    .Columns
+                toColumn = tableProvider.Columns
                     .First<ColumnProvider>(
                         (ColumnProvider cp) =>
                         {

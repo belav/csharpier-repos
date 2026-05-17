@@ -144,8 +144,7 @@ namespace System.ServiceModel.Discovery
                 Guid guid;
                 if (!TryGetUuidGuid(scope, out guid))
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(
                             new FormatException(
                                 SR2.DiscoveryFormatInvalidScopeUuidUri(scope.ToString())
@@ -159,8 +158,7 @@ namespace System.ServiceModel.Discovery
             {
                 if (string.Compare(scope.Scheme, "ldap", StringComparison.OrdinalIgnoreCase) != 0)
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(
                             new FormatException(
                                 SR2.DiscoveryFormatInvalidScopeLdapUri(scope.ToString())
@@ -177,8 +175,7 @@ namespace System.ServiceModel.Discovery
             }
             else
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .ArgumentOutOfRange(
                         "matchBy",
                         matchBy,

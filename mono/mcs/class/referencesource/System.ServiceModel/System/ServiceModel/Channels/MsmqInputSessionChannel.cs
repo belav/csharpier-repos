@@ -40,10 +40,11 @@ namespace System.ServiceModel.Channels
 
                 // only enlist if we are running in a non-receive context mode
                 this.associatedTx = associatedTx;
-                this.associatedTx.EnlistVolatile(
-                    new TransactionEnlistment(this, this.associatedTx),
-                    EnlistmentOptions.None
-                );
+                this.associatedTx
+                    .EnlistVolatile(
+                        new TransactionEnlistment(this, this.associatedTx),
+                        EnlistmentOptions.None
+                    );
             }
             else
             {
@@ -195,8 +196,7 @@ namespace System.ServiceModel.Channels
                 if (this.associatedTx != null)
                 {
                     // Channel.Abort called within the associated transaction
-                    Exception e = DiagnosticUtility
-                        .ExceptionUtility
+                    Exception e = DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(SR.GetString(SR.MsmqSessionChannelAbort))
                         );
@@ -211,8 +211,7 @@ namespace System.ServiceModel.Channels
                     // no need for rollback, it will happen automatically when this condition is hit in the Prepare() call
                     this.Fault();
                     this.sessiongramReceiveContext.Abandon(TimeSpan.MaxValue);
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(SR.MsmqSessionPrematureClose)
@@ -235,8 +234,7 @@ namespace System.ServiceModel.Channels
                 {
                     RollbackTransaction(null);
                     this.Fault();
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(SR.MsmqSessionMessagesNotConsumed)
@@ -303,8 +301,7 @@ namespace System.ServiceModel.Channels
             // associate the session channel with this transaction
             if (Transaction.Current == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperCritical(
                         new InvalidOperationException(SR.GetString(SR.MsmqTransactionRequired))
                     );
@@ -313,14 +310,15 @@ namespace System.ServiceModel.Channels
             if (this.associatedTx == null)
             {
                 this.associatedTx = Transaction.Current;
-                this.associatedTx.EnlistVolatile(
-                    new ReceiveContextTransactionEnlistment(
-                        this,
-                        this.associatedTx,
-                        this.sessiongramReceiveContext
-                    ),
-                    EnlistmentOptions.EnlistDuringPrepareRequired
-                );
+                this.associatedTx
+                    .EnlistVolatile(
+                        new ReceiveContextTransactionEnlistment(
+                            this,
+                            this.associatedTx,
+                            this.sessiongramReceiveContext
+                        ),
+                        EnlistmentOptions.EnlistDuringPrepareRequired
+                    );
             }
             else
             {
@@ -328,8 +326,7 @@ namespace System.ServiceModel.Channels
                 {
                     RollbackTransaction(null);
                     this.Fault();
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperCritical(
                             new InvalidOperationException(
                                 SR.GetString(SR.MsmqSameTransactionExpected)
@@ -340,8 +337,7 @@ namespace System.ServiceModel.Channels
                 if (TransactionStatus.Active != Transaction.Current.TransactionInformation.Status)
                 {
                     this.Fault();
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperCritical(
                             new InvalidOperationException(SR.GetString(SR.MsmqTransactionNotActive))
                         );
@@ -357,8 +353,7 @@ namespace System.ServiceModel.Channels
                 {
                     RollbackTransaction(null);
                     this.Fault();
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperCritical(
                             new InvalidOperationException(
                                 SR.GetString(SR.MsmqSameTransactionExpected)
@@ -370,8 +365,7 @@ namespace System.ServiceModel.Channels
                 {
                     RollbackTransaction(null);
                     this.Fault();
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperCritical(
                             new InvalidOperationException(SR.GetString(SR.MsmqTransactionNotActive))
                         );
@@ -589,8 +583,7 @@ namespace System.ServiceModel.Channels
                 // Note that we are not placing any restriction on the channel state
                 if (this.channel.TotalPendingItems > 0 || this.channel.sessiongramDoomed)
                 {
-                    Exception e = DiagnosticUtility
-                        .ExceptionUtility
+                    Exception e = DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(SR.MsmqSessionChannelHasPendingItems)
@@ -663,8 +656,7 @@ namespace System.ServiceModel.Channels
                     && this.channel.InternalPendingItems > 0
                 )
                 {
-                    Exception e = DiagnosticUtility
-                        .ExceptionUtility
+                    Exception e = DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(SR.MsmqSessionChannelsMustBeClosed)

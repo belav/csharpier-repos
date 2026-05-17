@@ -42,8 +42,7 @@ namespace System.Net
 
                 unsafe
                 {
-                    osStatus = Interop
-                        .AppleCrypto
+                    osStatus = Interop.AppleCrypto
                         .SslSetIoCallbacks(_sslContext, &ReadFromConnection, &WriteToConnection);
                 }
 
@@ -54,8 +53,7 @@ namespace System.Net
 
                 if (sslAuthenticationOptions.CipherSuitesPolicy != null)
                 {
-                    uint[] tlsCipherSuites = sslAuthenticationOptions
-                        .CipherSuitesPolicy
+                    uint[] tlsCipherSuites = sslAuthenticationOptions.CipherSuitesPolicy
                         .Pal
                         .TlsCipherSuites;
 
@@ -63,8 +61,7 @@ namespace System.Net
                     {
                         fixed (uint* cipherSuites = tlsCipherSuites)
                         {
-                            osStatus = Interop
-                                .AppleCrypto
+                            osStatus = Interop.AppleCrypto
                                 .SslSetEnabledCipherSuites(
                                     _sslContext,
                                     cipherSuites,
@@ -87,8 +84,7 @@ namespace System.Net
                     if (sslAuthenticationOptions.IsClient)
                     {
                         // On macOS coreTls supports only client side.
-                        Interop
-                            .AppleCrypto
+                        Interop.AppleCrypto
                             .SslCtxSetAlpnProtos(
                                 _sslContext,
                                 sslAuthenticationOptions.ApplicationProtocols
@@ -114,8 +110,7 @@ namespace System.Net
                 && !TargetHostNameHelper.IsValidAddress(sslAuthenticationOptions.TargetHost)
             )
             {
-                Interop
-                    .AppleCrypto
+                Interop.AppleCrypto
                     .SslSetTargetName(_sslContext, sslAuthenticationOptions.TargetHost);
             }
 
@@ -157,8 +152,7 @@ namespace System.Net
                         handles[i] = certList[i].Handle;
                     }
 
-                    Interop
-                        .AppleCrypto
+                    Interop.AppleCrypto
                         .SslSetCertificateAuthorities(
                             _sslContext,
                             handles.Slice(0, certList.Count),
@@ -191,8 +185,7 @@ namespace System.Net
                     );
             }
 
-            SafeSslHandle sslContext = Interop
-                .AppleCrypto
+            SafeSslHandle sslContext = Interop.AppleCrypto
                 .SslCreateContext(sslAuthenticationOptions.IsServer ? 1 : 0);
 
             try
@@ -333,8 +326,7 @@ namespace System.Net
 
                     int limit = Math.Min((int)toRead, context._inputBuffer.ActiveLength);
 
-                    context
-                        ._inputBuffer
+                    context._inputBuffer
                         .ActiveSpan
                         .Slice(0, limit)
                         .CopyTo(new Span<byte>(data, limit));

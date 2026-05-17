@@ -42,8 +42,7 @@ namespace System.ServiceModel.Channels
             if (!added)
             {
                 item.Abort();
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ObjectDisposedException(this.GetType().ToString()));
             }
         }

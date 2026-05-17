@@ -218,8 +218,7 @@ namespace System.IO
         [ComVisible(false)]
         public virtual Task<String> ReadLineAsync()
         {
-            return Task<String>
-                .Factory
+            return Task<String>.Factory
                 .StartNew(
                     _ReadLineDelegate,
                     this,
@@ -281,8 +280,7 @@ namespace System.IO
                 index,
                 count
             );
-            return Task<int>
-                .Factory
+            return Task<int>.Factory
                 .StartNew(
                     _ReadDelegate,
                     tuple,

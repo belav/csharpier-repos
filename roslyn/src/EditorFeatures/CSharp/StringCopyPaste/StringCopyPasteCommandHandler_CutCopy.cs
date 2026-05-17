@@ -97,14 +97,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.StringCopyPaste
             CancellationToken cancellationToken
         )
         {
-            var document = subjectBuffer
-                .CurrentSnapshot
+            var document = subjectBuffer.CurrentSnapshot
                 .GetOpenDocumentInCurrentContextWithChanges();
             if (document == null)
                 return default;
 
-            var copyPasteService = document
-                .Project
+            var copyPasteService = document.Project
                 .Solution
                 .Services
                 .GetService<IStringCopyPasteService>();

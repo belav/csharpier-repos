@@ -83,15 +83,13 @@ public class PersistComponentStateTagHelperTest
 
         var context = GetTagHelperContext();
         var output = GetTagHelperOutput();
-        var manager = tagHelper
-            .ViewContext
+        var manager = tagHelper.ViewContext
             .HttpContext
             .RequestServices
             .GetRequiredService<ComponentStatePersistenceManager>();
 
         // Act
-        manager
-            .State
+        manager.State
             .RegisterOnPersisting(
                 () =>
                 {
@@ -122,15 +120,13 @@ public class PersistComponentStateTagHelperTest
 
         var context = GetTagHelperContext();
         var output = GetTagHelperOutput();
-        var manager = tagHelper
-            .ViewContext
+        var manager = tagHelper.ViewContext
             .HttpContext
             .RequestServices
             .GetRequiredService<ComponentStatePersistenceManager>();
 
         // Act
-        manager
-            .State
+        manager.State
             .RegisterOnPersisting(
                 () =>
                 {
@@ -160,15 +156,13 @@ public class PersistComponentStateTagHelperTest
 
         var context = GetTagHelperContext();
         var output = GetTagHelperOutput();
-        var manager = tagHelper
-            .ViewContext
+        var manager = tagHelper.ViewContext
             .HttpContext
             .RequestServices
             .GetRequiredService<ComponentStatePersistenceManager>();
 
         // Act
-        manager
-            .State
+        manager.State
             .RegisterOnPersisting(
                 () =>
                 {
@@ -222,15 +216,13 @@ public class PersistComponentStateTagHelperTest
 
         var context = GetTagHelperContext();
         var output = GetTagHelperOutput();
-        var manager = tagHelper
-            .ViewContext
+        var manager = tagHelper.ViewContext
             .HttpContext
             .RequestServices
             .GetRequiredService<ComponentStatePersistenceManager>();
 
         // Act
-        manager
-            .State
+        manager.State
             .RegisterOnPersisting(
                 () =>
                 {

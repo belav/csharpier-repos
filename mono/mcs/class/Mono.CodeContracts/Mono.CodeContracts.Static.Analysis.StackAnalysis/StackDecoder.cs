@@ -356,23 +356,11 @@ namespace Mono.CodeContracts.Static.Analysis.StackAnalysis
         )
         {
             if (pc.InsideOldManifestation)
-                return this.visitor.LoadStack(
-                    pc,
-                    1,
-                    Push(matchingBegin, 0),
-                    Pop(pc, 0),
-                    false,
-                    data
-                );
+                return this.visitor
+                    .LoadStack(pc, 1, Push(matchingBegin, 0), Pop(pc, 0), false, data);
 
-            return this.visitor.EndOld(
-                pc,
-                matchingBegin,
-                type,
-                Push(matchingBegin, 0),
-                Pop(pc, 0),
-                data
-            );
+            return this.visitor
+                .EndOld(pc, matchingBegin, type, Push(matchingBegin, 0), Pop(pc, 0), data);
         }
 
         public TResult LoadStack(
@@ -397,15 +385,8 @@ namespace Mono.CodeContracts.Static.Analysis.StackAnalysis
             TData data
         )
         {
-            return this.visitor.LoadStackAddress(
-                pc,
-                offset,
-                Push(pc, 0),
-                Pop(pc, offset),
-                type,
-                isOld,
-                data
-            );
+            return this.visitor
+                .LoadStackAddress(pc, offset, Push(pc, 0), Pop(pc, offset), type, isOld, data);
         }
 
         public TResult LoadResult(APC pc, TypeNode type, Dummy dest, Dummy source, TData data)
@@ -469,15 +450,16 @@ namespace Mono.CodeContracts.Static.Analysis.StackAnalysis
                 method,
                 extraVarargs == null ? 0 : extraVarargs.Count
             );
-            return this.visitor.Call(
-                pc,
-                method,
-                virt,
-                extraVarargs,
-                Push(pc, argsCount, this.parent.MetaDataProvider.ReturnType(method)),
-                PopSequence(pc, argsCount, 0),
-                data
-            );
+            return this.visitor
+                .Call(
+                    pc,
+                    method,
+                    virt,
+                    extraVarargs,
+                    Push(pc, argsCount, this.parent.MetaDataProvider.ReturnType(method)),
+                    PopSequence(pc, argsCount, 0),
+                    data
+                );
         }
 
         public TResult Calli<TypeList, ArgList>(
@@ -494,16 +476,17 @@ namespace Mono.CodeContracts.Static.Analysis.StackAnalysis
             where ArgList : IIndexable<Dummy>
         {
             int argsCount = argTypes.Count + (instance ? 1 : 0);
-            return this.visitor.Calli(
-                pc,
-                returnType,
-                argTypes,
-                instance,
-                Push(pc, argsCount + 1, returnType),
-                Pop(pc, 0),
-                PopSequence(pc, argsCount, 1),
-                data
-            );
+            return this.visitor
+                .Calli(
+                    pc,
+                    returnType,
+                    argTypes,
+                    instance,
+                    Push(pc, argsCount + 1, returnType),
+                    Pop(pc, 0),
+                    PopSequence(pc, argsCount, 1),
+                    data
+                );
         }
 
         public TResult CheckFinite(APC pc, Dummy dest, Dummy source, TData data)
@@ -548,14 +531,15 @@ namespace Mono.CodeContracts.Static.Analysis.StackAnalysis
                     out lookupPC
                 )
             )
-                return this.visitor.LoadStack(
-                    pc,
-                    loadStackOffset,
-                    Push(pc, 0),
-                    Pop(lookupPC, loadStackOffset),
-                    isOld,
-                    data
-                );
+                return this.visitor
+                    .LoadStack(
+                        pc,
+                        loadStackOffset,
+                        Push(pc, 0),
+                        Pop(lookupPC, loadStackOffset),
+                        isOld,
+                        data
+                    );
 
             if (argument == null)
                 argument = p;
@@ -573,23 +557,25 @@ namespace Mono.CodeContracts.Static.Analysis.StackAnalysis
                                 )
                         )
                 )
-                    return this.visitor.LoadStackAddress(
+                    return this.visitor
+                        .LoadStackAddress(
+                            pc,
+                            loadStackOffset,
+                            Push(pc, 0),
+                            Pop(pc, loadStackOffset),
+                            this.parent.MetaDataProvider.ParameterType(argument),
+                            isOld,
+                            data
+                        );
+
+                return this.visitor
+                    .LoadResult(
                         pc,
-                        loadStackOffset,
+                        this.parent.MetaDataProvider.ParameterType(argument),
                         Push(pc, 0),
                         Pop(pc, loadStackOffset),
-                        this.parent.MetaDataProvider.ParameterType(argument),
-                        isOld,
                         data
                     );
-
-                return this.visitor.LoadResult(
-                    pc,
-                    this.parent.MetaDataProvider.ParameterType(argument),
-                    Push(pc, 0),
-                    Pop(pc, loadStackOffset),
-                    data
-                );
             }
 
             return this.visitor.LoadArg(pc, argument, isOld, Push(pc, 0), data);
@@ -617,15 +603,16 @@ namespace Mono.CodeContracts.Static.Analysis.StackAnalysis
                     out lookupPC
                 )
             )
-                return this.visitor.LoadStackAddress(
-                    pc,
-                    loadStackOffset,
-                    Push(pc, 0),
-                    Pop(lookupPC, loadStackOffset),
-                    this.parent.MetaDataProvider.ParameterType(argument),
-                    isOld,
-                    data
-                );
+                return this.visitor
+                    .LoadStackAddress(
+                        pc,
+                        loadStackOffset,
+                        Push(pc, 0),
+                        Pop(lookupPC, loadStackOffset),
+                        this.parent.MetaDataProvider.ParameterType(argument),
+                        isOld,
+                        data
+                    );
 
             if (isLoadResult)
                 throw new InvalidOperationException();
@@ -704,15 +691,16 @@ namespace Mono.CodeContracts.Static.Analysis.StackAnalysis
                 method,
                 extraVarargs == null ? 0 : extraVarargs.Count
             );
-            return this.visitor.ConstrainedCallvirt(
-                pc,
-                method,
-                constraint,
-                extraVarargs,
-                Push(pc, argsCount, this.parent.MetaDataProvider.ReturnType(method)),
-                PopSequence(pc, argsCount, 0),
-                data
-            );
+            return this.visitor
+                .ConstrainedCallvirt(
+                    pc,
+                    method,
+                    constraint,
+                    extraVarargs,
+                    Push(pc, argsCount, this.parent.MetaDataProvider.ReturnType(method)),
+                    PopSequence(pc, argsCount, 0),
+                    data
+                );
         }
 
         public TResult CastClass(APC pc, TypeNode type, Dummy dest, Dummy obj, TData data)
@@ -791,26 +779,16 @@ namespace Mono.CodeContracts.Static.Analysis.StackAnalysis
         )
             where ArgList : IIndexable<Dummy>
         {
-            return this.visitor.NewArray(
-                pc,
-                type,
-                Push(pc, 1),
-                PopSequence(pc, lengths.Count, 0),
-                data
-            );
+            return this.visitor
+                .NewArray(pc, type, Push(pc, 1), PopSequence(pc, lengths.Count, 0), data);
         }
 
         public TResult NewObj<ArgList>(APC pc, Method ctor, Dummy dest, ArgList args, TData data)
             where ArgList : IIndexable<Dummy>
         {
             int argsCount = GetParametersCount(ctor, 0) - 1;
-            return this.visitor.NewObj(
-                pc,
-                ctor,
-                Push(pc, argsCount),
-                PopSequence(pc, argsCount, 0),
-                data
-            );
+            return this.visitor
+                .NewObj(pc, ctor, Push(pc, argsCount), PopSequence(pc, argsCount, 0), data);
         }
 
         public TResult MkRefAny(APC pc, TypeNode type, Dummy dest, Dummy obj, TData data)

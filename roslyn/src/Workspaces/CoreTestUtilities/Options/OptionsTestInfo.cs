@@ -103,8 +103,7 @@ internal readonly record struct OptionsTestInfo(
                             {
                                 optionInfo = optionInfo with
                                 {
-                                    Accessors = optionInfo
-                                        .Accessors
+                                    Accessors = optionInfo.Accessors
                                         .Add((accessorNamespace!, accessor, isPublic, option)),
                                 };
                             }

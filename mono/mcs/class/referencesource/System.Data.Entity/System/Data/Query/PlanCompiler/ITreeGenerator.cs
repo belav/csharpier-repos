@@ -336,8 +336,7 @@ namespace System.Data.Query.PlanCompiler
                 if (!ValidateParameterType(paramInfo.Value))
                 {
                     throw EntityUtil.NotSupported(
-                        System
-                            .Data
+                        System.Data
                             .Entity
                             .Strings
                             .ParameterTypeNotSupported(paramInfo.Key, paramInfo.Value.ToString())
@@ -1197,8 +1196,7 @@ namespace System.Data.Query.PlanCompiler
                 DbLambda lambda;
                 try
                 {
-                    lambda = _iqtCommand
-                        .MetadataWorkspace
+                    lambda = _iqtCommand.MetadataWorkspace
                         .GetGeneratedFunctionDefinition(e.Function);
                 }
                 catch (Exception exception)
@@ -2201,8 +2199,7 @@ namespace System.Data.Query.PlanCompiler
                             typeFilter
                         );
                         DbExpressionBinding treatBinding = rewrittenIsOf.Bind();
-                        DbTreatExpression treatProjection = treatBinding
-                            .Variable
+                        DbTreatExpression treatProjection = treatBinding.Variable
                             .TreatAs(ofTypeExp.OfType);
                         _fakeTreats.Add(treatProjection);
                         result = treatBinding.Project(treatProjection);

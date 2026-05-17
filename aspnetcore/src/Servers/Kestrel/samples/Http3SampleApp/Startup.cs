@@ -21,8 +21,7 @@ public class Startup
             var length = await context.Request.Body.ReadAsync(memory);
             context.Response.Headers["test"] = "foo";
             // for testing
-            await context
-                .Response
+            await context.Response
                 .WriteAsync(
                     $"Hello World! {context.Request.Protocol} {context.Connection.ClientCertificate?.Subject}"
                 );

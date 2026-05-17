@@ -1465,9 +1465,8 @@ namespace System.Workflow.ComponentModel.Design
                 int yOffset = 2; //there is a 1 pixel white space between items and the outer form border
                 foreach (ItemInfo itemInfo in this.enabledItems)
                 {
-                    this.itemRectangles.Add(
-                        new Rectangle(2, yOffset, this.itemWidth, this.itemHeight)
-                    );
+                    this.itemRectangles
+                        .Add(new Rectangle(2, yOffset, this.itemWidth, this.itemHeight));
                     yOffset += this.itemHeight + 2 * this.selectionItemMargin.Height;
                 }
 
@@ -1778,56 +1777,62 @@ namespace System.Workflow.ComponentModel.Design
                 e.Graphics.DrawLine(SystemPens.ControlLightLight, 0, 0, 0, this.splitter.Height);
                 e.Graphics.DrawLine(SystemPens.ControlLightLight, 0, 0, SplitterSize - 1, 0);
 
-                e.Graphics.DrawLine(
-                    SystemPens.ControlDark,
-                    SplitterSize - 2,
-                    0,
-                    SplitterSize - 2,
-                    this.splitter.Height - 1
-                );
-                e.Graphics.DrawLine(
-                    SystemPens.ControlDark,
-                    SplitterSize - 2,
-                    this.splitter.Height - 1,
-                    0,
-                    this.splitter.Height - 1
-                );
+                e.Graphics
+                    .DrawLine(
+                        SystemPens.ControlDark,
+                        SplitterSize - 2,
+                        0,
+                        SplitterSize - 2,
+                        this.splitter.Height - 1
+                    );
+                e.Graphics
+                    .DrawLine(
+                        SystemPens.ControlDark,
+                        SplitterSize - 2,
+                        this.splitter.Height - 1,
+                        0,
+                        this.splitter.Height - 1
+                    );
 
-                e.Graphics.DrawLine(
-                    SystemPens.ControlText,
-                    SplitterSize - 1,
-                    0,
-                    SplitterSize - 1,
-                    this.splitter.Height
-                );
+                e.Graphics
+                    .DrawLine(
+                        SystemPens.ControlText,
+                        SplitterSize - 1,
+                        0,
+                        SplitterSize - 1,
+                        this.splitter.Height
+                    );
             }
             else
             {
                 e.Graphics.DrawLine(SystemPens.ControlLightLight, 0, 1, this.splitter.Width, 1);
                 e.Graphics.DrawLine(SystemPens.ControlLightLight, 0, 1, 0, SplitterSize - 1);
 
-                e.Graphics.DrawLine(
-                    SystemPens.ControlDark,
-                    0,
-                    SplitterSize - 2,
-                    this.splitter.Width,
-                    SplitterSize - 2
-                );
-                e.Graphics.DrawLine(
-                    SystemPens.ControlDark,
-                    this.splitter.Width - 1,
-                    SplitterSize - 2,
-                    this.splitter.Width - 1,
-                    1
-                );
+                e.Graphics
+                    .DrawLine(
+                        SystemPens.ControlDark,
+                        0,
+                        SplitterSize - 2,
+                        this.splitter.Width,
+                        SplitterSize - 2
+                    );
+                e.Graphics
+                    .DrawLine(
+                        SystemPens.ControlDark,
+                        this.splitter.Width - 1,
+                        SplitterSize - 2,
+                        this.splitter.Width - 1,
+                        1
+                    );
 
-                e.Graphics.DrawLine(
-                    SystemPens.ControlText,
-                    0,
-                    SplitterSize - 1,
-                    this.splitter.Width,
-                    SplitterSize - 1
-                );
+                e.Graphics
+                    .DrawLine(
+                        SystemPens.ControlText,
+                        0,
+                        SplitterSize - 1,
+                        this.splitter.Width,
+                        SplitterSize - 1
+                    );
             }
         }
 
@@ -2160,13 +2165,14 @@ namespace System.Workflow.ComponentModel.Design
                                 tabTextRectangle.Width,
                                 tabTextRectangle.Height
                             );
-                            e.Graphics.DrawString(
-                                tabItem.Text,
-                                Font,
-                                SystemBrushes.ControlText,
-                                tabTextRectangleF,
-                                stringFormat
-                            );
+                            e.Graphics
+                                .DrawString(
+                                    tabItem.Text,
+                                    Font,
+                                    SystemBrushes.ControlText,
+                                    tabTextRectangleF,
+                                    stringFormat
+                                );
                         }
                         else
                         {
@@ -2179,8 +2185,7 @@ namespace System.Workflow.ComponentModel.Design
                             )
                             using (Graphics graphics = Graphics.FromImage(bitmap))
                             {
-                                graphics.TextRenderingHint = System
-                                    .Drawing
+                                graphics.TextRenderingHint = System.Drawing
                                     .Text
                                     .TextRenderingHint
                                     .AntiAlias;
@@ -2556,9 +2561,10 @@ namespace System.Workflow.ComponentModel.Design
                     && notifyHeader.code == NativeMethods.TTN_SHOW
                 )
                 {
-                    Point screenCoOrd = this.parentControl.PointToScreen(
-                        new Point(this.inplaceTipRectangle.Left, this.inplaceTipRectangle.Top)
-                    );
+                    Point screenCoOrd = this.parentControl
+                        .PointToScreen(
+                            new Point(this.inplaceTipRectangle.Left, this.inplaceTipRectangle.Top)
+                        );
                     int result = NativeMethods.SetWindowPos(
                         this.inplaceTip.Handle,
                         IntPtr.Zero,
@@ -2815,30 +2821,33 @@ namespace System.Workflow.ComponentModel.Design
                 if (this.accessibilityObjects == null)
                 {
                     this.accessibilityObjects = new List<ItemStripAccessibleObject>();
-                    this.accessibilityObjects.Add(
-                        new ItemStripAccessibleObject(
-                            ItemStripAccessibleObject.AccessibleObjectType.LeftScroll,
-                            this
-                        )
-                    );
+                    this.accessibilityObjects
+                        .Add(
+                            new ItemStripAccessibleObject(
+                                ItemStripAccessibleObject.AccessibleObjectType.LeftScroll,
+                                this
+                            )
+                        );
                     for (
                         int i = 0;
                         (i < VisibleItemCount) && ((this.scrollMarker + i) < Items.Count);
                         i++
                     )
-                        this.accessibilityObjects.Add(
+                        this.accessibilityObjects
+                            .Add(
+                                new ItemStripAccessibleObject(
+                                    ItemStripAccessibleObject.AccessibleObjectType.Item,
+                                    this,
+                                    i
+                                )
+                            );
+                    this.accessibilityObjects
+                        .Add(
                             new ItemStripAccessibleObject(
-                                ItemStripAccessibleObject.AccessibleObjectType.Item,
-                                this,
-                                i
+                                ItemStripAccessibleObject.AccessibleObjectType.RightScroll,
+                                this
                             )
                         );
-                    this.accessibilityObjects.Add(
-                        new ItemStripAccessibleObject(
-                            ItemStripAccessibleObject.AccessibleObjectType.RightScroll,
-                            this
-                        )
-                    );
                 }
                 return accessibilityObjects.ToArray();
             }

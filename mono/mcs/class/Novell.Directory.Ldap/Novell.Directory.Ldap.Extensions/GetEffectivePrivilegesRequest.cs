@@ -70,15 +70,13 @@ namespace Novell.Directory.Ldap.Extensions
             {
                 LdapExtendedResponse.register(
                     ReplicationConstants.GET_EFFECTIVE_PRIVILEGES_RES,
-                    System
-                        .Type
+                    System.Type
                         .GetType("Novell.Directory.Ldap.Extensions.GetEffectivePrivilegesResponse")
                 );
             }
             catch (System.Exception e)
             {
-                System
-                    .Console
+                System.Console
                     .Error
                     .WriteLine("Could not register Extended Response -" + " Class not found");
             }

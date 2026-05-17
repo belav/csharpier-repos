@@ -269,8 +269,7 @@ namespace System.ServiceModel.Dispatcher
 
         internal virtual Opcode Eval(NodeSequence sequence, SeekableXPathNavigator node)
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperCritical(new QueryProcessingException(QueryProcessingError.Unexpected));
         }
 

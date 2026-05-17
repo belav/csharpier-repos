@@ -324,8 +324,7 @@ namespace System.Data.Linq
                     typeof(Enumerable),
                     "FirstOrDefault",
                     new Type[] { association.ThisMember.DeclaringType.Type },
-                    System
-                        .Data
+                    System.Data
                         .Linq
                         .SqlClient
                         .Translator
@@ -347,8 +346,7 @@ namespace System.Data.Linq
                         otherSource
                     );
                 }
-                Expression expr = System
-                    .Data
+                Expression expr = System.Data
                     .Linq
                     .SqlClient
                     .Translator

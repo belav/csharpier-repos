@@ -167,8 +167,7 @@ namespace System.Linq.Expressions
 
             // bind to public names first
             FieldInfo? fi =
-                expression
-                    .Type
+                expression.Type
                     .GetField(
                         fieldName,
                         BindingFlags.Instance
@@ -176,8 +175,7 @@ namespace System.Linq.Expressions
                             | BindingFlags.IgnoreCase
                             | BindingFlags.FlattenHierarchy
                     )
-                ?? expression
-                    .Type
+                ?? expression.Type
                     .GetField(
                         fieldName,
                         BindingFlags.Instance
@@ -255,8 +253,7 @@ namespace System.Linq.Expressions
             ArgumentNullException.ThrowIfNull(propertyName);
             // bind to public names first
             PropertyInfo? pi =
-                expression
-                    .Type
+                expression.Type
                     .GetProperty(
                         propertyName,
                         BindingFlags.Instance
@@ -264,8 +261,7 @@ namespace System.Linq.Expressions
                             | BindingFlags.IgnoreCase
                             | BindingFlags.FlattenHierarchy
                     )
-                ?? expression
-                    .Type
+                ?? expression.Type
                     .GetProperty(
                         propertyName,
                         BindingFlags.Instance
@@ -464,8 +460,7 @@ namespace System.Linq.Expressions
         {
             ExpressionUtils.RequiresCanRead(expression, nameof(expression));
             // bind to public names first
-            PropertyInfo? pi = expression
-                .Type
+            PropertyInfo? pi = expression.Type
                 .GetProperty(
                     propertyOrFieldName,
                     BindingFlags.Instance
@@ -475,8 +470,7 @@ namespace System.Linq.Expressions
                 );
             if (pi != null)
                 return Property(expression, pi);
-            FieldInfo? fi = expression
-                .Type
+            FieldInfo? fi = expression.Type
                 .GetField(
                     propertyOrFieldName,
                     BindingFlags.Instance
@@ -486,8 +480,7 @@ namespace System.Linq.Expressions
                 );
             if (fi != null)
                 return Field(expression, fi);
-            pi = expression
-                .Type
+            pi = expression.Type
                 .GetProperty(
                     propertyOrFieldName,
                     BindingFlags.Instance
@@ -497,8 +490,7 @@ namespace System.Linq.Expressions
                 );
             if (pi != null)
                 return Property(expression, pi);
-            fi = expression
-                .Type
+            fi = expression.Type
                 .GetField(
                     propertyOrFieldName,
                     BindingFlags.Instance

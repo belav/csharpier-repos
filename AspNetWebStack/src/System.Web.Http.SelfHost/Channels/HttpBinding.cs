@@ -216,8 +216,7 @@ namespace System.Web.Http.SelfHost.Channels
 
             if (_security.Mode == HttpBindingSecurityMode.Transport)
             {
-                _security
-                    .Transport
+                _security.Transport
                     .ConfigureTransportProtectionAndAuthentication(_httpsTransportBindingElement);
                 result = _httpsTransportBindingElement;
             }

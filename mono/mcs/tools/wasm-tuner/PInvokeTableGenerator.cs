@@ -44,8 +44,7 @@ public class PInvokeTableGenerator
                 {
                     if (pinvoke.CDecl != prev_pinvoke.CDecl)
                     {
-                        Console
-                            .Error
+                        Console.Error
                             .WriteLine(
                                 $"Warning: PInvoke method '{pinvoke.EntryPoint}' has incompatible declarations."
                             );

@@ -72,9 +72,8 @@ namespace Roslyn.Test.Utilities
             }
 
             // now try to match single method with any parameter list
-            var keys = map.Keys.Where(k =>
-                k.StartsWith(qualifiedMethodName + "(", StringComparison.Ordinal)
-            );
+            var keys = map.Keys
+                .Where(k => k.StartsWith(qualifiedMethodName + "(", StringComparison.Ordinal));
             if (keys.Count() == 1)
             {
                 methodData = map[keys.First()];
@@ -139,9 +138,8 @@ namespace Roslyn.Test.Utilities
             // TODO:
             return new EditAndContinueMethodDebugInformation(
                 0,
-                Cci.MetadataWriter.GetLocalSlotDebugInfos(
-                    methodData.ILBuilder.LocalSlotManager.LocalsInOrder()
-                ),
+                Cci.MetadataWriter
+                    .GetLocalSlotDebugInfos(methodData.ILBuilder.LocalSlotManager.LocalsInOrder()),
                 closures: ImmutableArray<ClosureDebugInfo>.Empty,
                 lambdas: ImmutableArray<LambdaDebugInfo>.Empty,
                 stateMachineStates: ImmutableArray<StateMachineStateDebugInfo>.Empty

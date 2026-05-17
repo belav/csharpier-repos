@@ -334,8 +334,7 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
                 return null;
             }
 
-            var changeSignatureOptionsService = succeededContext
-                .Solution
+            var changeSignatureOptionsService = succeededContext.Solution
                 .Services
                 .GetRequiredService<IChangeSignatureOptionsService>();
 
@@ -362,8 +361,7 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
                 var engine = new FindReferencesSearchEngine(
                     solution,
                     documents: null,
-                    ReferenceFinders
-                        .DefaultReferenceFinders
+                    ReferenceFinders.DefaultReferenceFinders
                         .Add(DelegateInvokeMethodReferenceFinder.DelegateInvokeMethod),
                     streamingProgress,
                     FindReferencesSearchOptions.Default
@@ -842,8 +840,7 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
 
                 if (
                     !arguments[i].IsNamed
-                    || updatedSignature
-                        .UpdatedConfiguration
+                    || updatedSignature.UpdatedConfiguration
                         .ToListOfParameters()
                         .Any(
                             static (p, arg) => p.Name == arg.arguments[arg.i].GetName(),
@@ -874,11 +871,9 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
                 > updatedSignature.OriginalConfiguration.ToListOfParameters().Length
             )
             {
-                var originalConfigurationParameters = updatedSignature
-                    .OriginalConfiguration
+                var originalConfigurationParameters = updatedSignature.OriginalConfiguration
                     .ToListOfParameters();
-                var updatedConfigurationParameters = updatedSignature
-                    .UpdatedConfiguration
+                var updatedConfigurationParameters = updatedSignature.UpdatedConfiguration
                     .ToListOfParameters();
 
                 var bonusParameters = realParameters.Skip(originalConfigurationParameters.Length);
@@ -1349,8 +1344,7 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
                 }
 
                 if (
-                    semanticModel
-                        .Compilation
+                    semanticModel.Compilation
                         .ClassifyCommonConversion(symbolType, addedParameter.Type)
                         .IsImplicit
                 )
@@ -1486,8 +1480,7 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
                             cancellationToken
                         );
                         var toType = methodSymbol.Parameters.Last().Type;
-                        return !semanticModel
-                            .Compilation
+                        return !semanticModel.Compilation
                             .HasImplicitConversion(fromType.Type, toType);
                     }
                 }

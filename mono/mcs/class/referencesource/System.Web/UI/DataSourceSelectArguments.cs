@@ -162,8 +162,7 @@ namespace System.Web.UI
         /// </devdoc>
         public override int GetHashCode()
         {
-            return System
-                .Web
+            return System.Web
                 .Util
                 .HashCodeCombiner
                 .CombineHashCodes(

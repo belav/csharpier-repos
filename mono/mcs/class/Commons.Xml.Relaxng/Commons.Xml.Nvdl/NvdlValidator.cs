@@ -51,8 +51,7 @@ namespace Commons.Xml.Nvdl
 
         public void StartElement()
         {
-            NvdlDebug
-                .Writer
+            NvdlDebug.Writer
                 .WriteLine(
                     "  <dispatcher.StartElement {0}. stack depth: {1}. current section ns {2}",
                     Reader.Name,
@@ -102,8 +101,7 @@ namespace Commons.Xml.Nvdl
 
         public void EndElement()
         {
-            NvdlDebug
-                .Writer
+            NvdlDebug.Writer
                 .WriteLine(
                     "  <dispatcher.EndElement {0}. depth: {1}",
                     Reader.Name,
@@ -173,8 +171,7 @@ namespace Commons.Xml.Nvdl
                 }
             }
 
-            NvdlDebug
-                .Writer
+            NvdlDebug.Writer
                 .WriteLine(
                     "New section: ns {0} / interp.count {1} / loc: {2}",
                     ns,
@@ -195,8 +192,7 @@ namespace Commons.Xml.Nvdl
             NvdlInterpretation p
         )
         {
-            NvdlDebug
-                .Writer
+            NvdlDebug.Writer
                 .WriteLine(
                     "***** new interp from action {0} from mode {1}",
                     a.Location,
@@ -212,8 +208,7 @@ namespace Commons.Xml.Nvdl
         {
             SimpleMode m = FindContextMode(i.Action, parentState);
             SimpleRule rule = FindElementRule(m, dispatcher.Reader);
-            NvdlDebug
-                .Writer
+            NvdlDebug.Writer
                 .WriteLine(
                     "***** populate interp from action {0} whose mode is {1}. Rule is {2} whose actions are {3}",
                     i.Action.Location,
@@ -227,8 +222,7 @@ namespace Commons.Xml.Nvdl
                 for (; cur != null; cur = cur.Parent)
                     if (cur.CreatedMode == m && cur.Action == a)
                     {
-                        NvdlDebug
-                            .Writer
+                        NvdlDebug.Writer
                             .WriteLine("------- corresponding PlanElem already exists.");
                         break;
                     }
@@ -349,8 +343,7 @@ namespace Commons.Xml.Nvdl
 
         public void EndElement()
         {
-            NvdlDebug
-                .Writer
+            NvdlDebug.Writer
                 .WriteLine(
                     "    <section.EndElement {0} ({2}). {1} interp.",
                     Reader.Name,
@@ -525,8 +518,7 @@ namespace Commons.Xml.Nvdl
 
         public override void StartElement()
         {
-            NvdlDebug
-                .Writer
+            NvdlDebug.Writer
                 .WriteLine("            <result.StartElement : " + type + "/" + Action.Location);
             if (type != NvdlResultType.Unwrap)
                 ValidateStartElement(); // unwrap itself does not dispatch to parent interpretation
@@ -535,8 +527,7 @@ namespace Commons.Xml.Nvdl
 
         public override void EndElement()
         {
-            NvdlDebug
-                .Writer
+            NvdlDebug.Writer
                 .WriteLine(
                     "            <result.EndElement : "
                         + type
@@ -550,8 +541,7 @@ namespace Commons.Xml.Nvdl
 
         public override void Text()
         {
-            NvdlDebug
-                .Writer
+            NvdlDebug.Writer
                 .WriteLine(
                     "            <result.Text : "
                         + type
@@ -565,8 +555,7 @@ namespace Commons.Xml.Nvdl
 
         public override void Whitespace()
         {
-            NvdlDebug
-                .Writer
+            NvdlDebug.Writer
                 .WriteLine(
                     "            <result.Whitespace : "
                         + type
@@ -679,8 +668,7 @@ namespace Commons.Xml.Nvdl
 
         public override void StartElement()
         {
-            NvdlDebug
-                .Writer
+            NvdlDebug.Writer
                 .WriteLine(
                     "  <validate.StartElement {0} {1}",
                     validator.Name,

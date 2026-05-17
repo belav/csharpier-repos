@@ -274,8 +274,7 @@ namespace marshalertest
             {
                 if (exc.GetType() != typeof(T))
                 {
-                    Console
-                        .Error
+                    Console.Error
                         .WriteLine(
                             $"Expected {func.Method.Name} to throw {typeof(T)} but it threw {exc.GetType()}."
                         );
@@ -285,8 +284,7 @@ namespace marshalertest
                 }
                 else if (!exc.Message.Contains(message))
                 {
-                    Console
-                        .Error
+                    Console.Error
                         .WriteLine(
                             $"Expected {func.Method.Name} to throw {typeof(T)} with '{message}' in its message."
                         );

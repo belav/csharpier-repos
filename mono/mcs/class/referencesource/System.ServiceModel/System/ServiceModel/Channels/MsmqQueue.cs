@@ -130,8 +130,7 @@ namespace System.ServiceModel.Channels
             if (error != 0)
             {
                 Utility.CloseInvalidOutSafeHandle(handle);
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new MsmqException(
                             SR.GetString(SR.MsmqOpenError, MsmqError.GetErrorString(error)),
@@ -186,8 +185,7 @@ namespace System.ServiceModel.Channels
                     );
                     if (error != 0)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new MsmqException(
                                     SR.GetString(
@@ -364,8 +362,7 @@ namespace System.ServiceModel.Channels
                     HandleIsStale(handle);
                 }
 
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new MsmqException(
                             SR.GetString(SR.MsmqSendError, MsmqError.GetErrorString(error)),
@@ -457,8 +454,7 @@ namespace System.ServiceModel.Channels
                     destinationQueue.HandleIsStale(destinationQueueHandle);
                 }
 
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new MsmqException(
                             SR.GetString(SR.MsmqSendError, MsmqError.GetErrorString(error)),
@@ -530,8 +526,7 @@ namespace System.ServiceModel.Channels
                     HandleIsStale(handle);
                 }
 
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new MsmqException(
                             SR.GetString(SR.MsmqReceiveError, MsmqError.GetErrorString(error)),
@@ -607,8 +602,7 @@ namespace System.ServiceModel.Channels
                     HandleIsStale(handle);
                 }
 
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new MsmqException(
                             SR.GetString(SR.MsmqReceiveError, MsmqError.GetErrorString(error)),
@@ -812,8 +806,7 @@ namespace System.ServiceModel.Channels
             }
             if (transactionMode == MsmqTransactionMode.CurrentOrThrow)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(SR.GetString(SR.MsmqTransactionRequired))
                     );
@@ -843,8 +836,7 @@ namespace System.ServiceModel.Channels
                 case MsmqTransactionMode.CurrentOrThrow:
                     return true;
                 default:
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new ArgumentOutOfRangeException("transactionMode"));
             }
         }
@@ -860,8 +852,7 @@ namespace System.ServiceModel.Channels
                 case MsmqTransactionMode.CurrentOrSingle:
                     return UnsafeNativeMethods.MQ_SINGLE_MESSAGE;
                 default:
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new ArgumentOutOfRangeException("transactionMode"));
             }
         }
@@ -935,8 +926,7 @@ namespace System.ServiceModel.Channels
                 {
                     HandleIsStale(handle);
                 }
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new MsmqException(
                             SR.GetString(SR.MsmqSendError, MsmqError.GetErrorString(error)),
@@ -1200,8 +1190,7 @@ namespace System.ServiceModel.Channels
                                 this.msmqQueue.HandleIsStale(this.handle);
                             }
 
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
                                     new MsmqException(
                                         SR.GetString(
@@ -1314,8 +1303,7 @@ namespace System.ServiceModel.Channels
 
             if (0 != error)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new MsmqException(
                             SR.GetString(

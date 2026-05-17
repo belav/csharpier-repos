@@ -140,8 +140,7 @@ namespace Microsoft.CodeAnalysis.Syntax
                     case 2:
                         return new SyntaxTriviaList(
                             default(SyntaxToken),
-                            InternalSyntax
-                                .SyntaxList
+                            InternalSyntax.SyntaxList
                                 .List(_nodes[0].UnderlyingNode!, _nodes[1].UnderlyingNode!),
                             position: 0,
                             index: 0
@@ -149,8 +148,7 @@ namespace Microsoft.CodeAnalysis.Syntax
                     case 3:
                         return new SyntaxTriviaList(
                             default(SyntaxToken),
-                            InternalSyntax
-                                .SyntaxList
+                            InternalSyntax.SyntaxList
                                 .List(
                                     _nodes[0].UnderlyingNode!,
                                     _nodes[1].UnderlyingNode!,

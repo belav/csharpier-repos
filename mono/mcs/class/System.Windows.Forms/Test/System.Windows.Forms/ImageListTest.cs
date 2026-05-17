@@ -94,9 +94,10 @@ namespace MonoTests.System.Windows.Forms
 
             // create an ImageList containing an image
             il = new ImageList();
-            il.Images.Add(
-                Image.FromFile(TestResourceHelper.GetFullPathOfResource("Test/resources/M.gif"))
-            );
+            il.Images
+                .Add(
+                    Image.FromFile(TestResourceHelper.GetFullPathOfResource("Test/resources/M.gif"))
+                );
 
             Assert.IsFalse(colordepth_prop.ShouldSerializeValue(il), "13");
             Assert.IsFalse(colordepth_prop.CanResetValue(il), "14");

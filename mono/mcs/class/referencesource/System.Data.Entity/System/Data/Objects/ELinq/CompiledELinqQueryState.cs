@@ -320,8 +320,7 @@ namespace System.Data.Objects.ELinq
                 object[] parameterValues
             )
             {
-                Dictionary<ParameterExpression, object> parameterLookup = query
-                    .Parameters
+                Dictionary<ParameterExpression, object> parameterLookup = query.Parameters
                     .Skip(1)
                     .Zip(parameterValues)
                     .ToDictionary(pair => pair.Key, pair => pair.Value);

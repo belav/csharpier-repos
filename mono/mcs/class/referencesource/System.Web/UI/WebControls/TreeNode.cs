@@ -927,8 +927,7 @@ namespace System.Web.UI.WebControls
             }
             if (_owner.Page != null)
             {
-                _owner
-                    .Page
+                _owner.Page
                     .ClientScript
                     .RegisterForEventValidation(
                         _owner.UniqueID,
@@ -1475,8 +1474,7 @@ namespace System.Web.UI.WebControls
                                 string href = "javascript:0";
                                 if (_owner.Page != null)
                                 {
-                                    href = _owner
-                                        .Page
+                                    href = _owner.Page
                                         .ClientScript
                                         .GetPostBackClientHyperlink(
                                             _owner,
@@ -1501,8 +1499,7 @@ namespace System.Web.UI.WebControls
                         string href = "javascript:0";
                         if (_owner.Page != null)
                         {
-                            href = _owner
-                                .Page
+                            href = _owner.Page
                                 .ClientScript
                                 .GetPostBackClientHyperlink(_owner, "t" + InternalValuePath, true);
                         }
@@ -1618,8 +1615,7 @@ namespace System.Web.UI.WebControls
                                 //
                                 onClick = Util.MergeScript(
                                     onClick,
-                                    _owner
-                                        .Page
+                                    _owner.Page
                                         .ClientScript
                                         .GetPostBackClientHyperlink(
                                             _owner,
@@ -1685,8 +1681,7 @@ namespace System.Web.UI.WebControls
                             string href = "javascript:0";
                             if (_owner.Page != null)
                             {
-                                href = _owner
-                                    .Page
+                                href = _owner.Page
                                     .ClientScript
                                     .GetPostBackClientHyperlink(
                                         _owner,
@@ -1713,8 +1708,7 @@ namespace System.Web.UI.WebControls
 
                     if (_owner.Page != null)
                     {
-                        string href = _owner
-                            .Page
+                        string href = _owner.Page
                             .ClientScript
                             .GetPostBackClientHyperlink(
                                 _owner,

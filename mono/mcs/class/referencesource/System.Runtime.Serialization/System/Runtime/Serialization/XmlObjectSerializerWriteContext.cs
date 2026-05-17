@@ -407,8 +407,7 @@ namespace System.Runtime.Serialization
             {
                 if (!IsKnownType(dataContract, declaredType))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             XmlObjectSerializer.CreateSerializationException(
                                 SR.GetString(
@@ -618,8 +617,7 @@ namespace System.Runtime.Serialization
                     );
                 }
                 if (byValObjectsInScope.Contains(obj))
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             XmlObjectSerializer.CreateSerializationException(
                                 SR.GetString(
@@ -710,8 +708,7 @@ namespace System.Runtime.Serialization
 
         public static void ThrowRequiredMemberMustBeEmitted(string memberName, Type type)
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(
                     new SerializationException(
                         SR.GetString(SR.RequiredMemberMustBeEmitted, memberName, type.FullName)
@@ -759,8 +756,7 @@ namespace System.Runtime.Serialization
                         foreach (XmlNode xmlNode in xmlNodes)
                             xmlNode.WriteTo(xmlSerializableWriter);
                     else
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 XmlObjectSerializer.CreateSerializationException(
                                     SR.GetString(
@@ -809,8 +805,7 @@ namespace System.Runtime.Serialization
             )
             {
                 // Throw if a malicious type tries to set its assembly name to "0" to get deserialized in mscorlib
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         XmlObjectSerializer.CreateSerializationException(
                             SR.GetString(
@@ -1156,8 +1151,7 @@ namespace System.Runtime.Serialization
                 )
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         XmlObjectSerializer.CreateSerializationException(
                             SR.GetString(
@@ -1176,8 +1170,7 @@ namespace System.Runtime.Serialization
                 }
                 else
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             XmlObjectSerializer.CreateSerializationException(
                                 SR.GetString(
@@ -1191,8 +1184,7 @@ namespace System.Runtime.Serialization
             }
             if (typeNamespace == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         XmlObjectSerializer.CreateSerializationException(
                             SR.GetString(

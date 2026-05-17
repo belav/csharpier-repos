@@ -188,19 +188,19 @@ namespace System.Activities.DurableInstancing
         {
             if (this.Store.DatabaseVersion >= this.targetVersion)
             {
-                this.Store.BeginTryCommandInternal(
-                    this.InstancePersistenceContext,
-                    this.InstancePersistenceCommand,
-                    this.currentTransaction,
-                    this.TimeoutHelper.RemainingTime(),
-                    instanceCommandCompleteCallback,
-                    this
-                );
+                this.Store
+                    .BeginTryCommandInternal(
+                        this.InstancePersistenceContext,
+                        this.InstancePersistenceCommand,
+                        this.currentTransaction,
+                        this.TimeoutHelper.RemainingTime(),
+                        instanceCommandCompleteCallback,
+                        this
+                    );
             }
             else
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new InstancePersistenceCommandException(
                             SR.DatabaseUpgradeRequiredForCommand(

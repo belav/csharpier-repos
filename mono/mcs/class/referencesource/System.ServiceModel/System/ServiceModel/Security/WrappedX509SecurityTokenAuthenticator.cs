@@ -37,8 +37,7 @@ namespace System.ServiceModel.Security
         {
             if (wrappedX509SecurityTokenHandler == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("wrappedX509SecurityTokenHandler");
             }
 
@@ -80,8 +79,7 @@ namespace System.ServiceModel.Security
                 SecurityTokenHandlerConfiguration.DefaultSaveBootstrapContext;
             if (_wrappedX509SecurityTokenHandler.Configuration != null)
             {
-                shouldSaveBootstrapContext = _wrappedX509SecurityTokenHandler
-                    .Configuration
+                shouldSaveBootstrapContext = _wrappedX509SecurityTokenHandler.Configuration
                     .SaveBootstrapContext;
             }
 
@@ -118,8 +116,7 @@ namespace System.ServiceModel.Security
         {
             if (securityTokenHandler == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("securityTokenHandler");
             }
 

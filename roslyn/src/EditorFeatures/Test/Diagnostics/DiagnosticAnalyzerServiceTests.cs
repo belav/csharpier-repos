@@ -38,15 +38,13 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
     public class DiagnosticAnalyzerServiceTests
     {
         private static readonly TestComposition s_featuresCompositionWithMockDiagnosticUpdateSourceRegistrationService =
-            EditorTestCompositions
-                .EditorFeatures
+            EditorTestCompositions.EditorFeatures
                 .AddExcludedPartTypes(typeof(IDiagnosticUpdateSourceRegistrationService))
                 .AddParts(typeof(MockDiagnosticUpdateSourceRegistrationService))
                 .AddParts(typeof(TestDocumentTrackingService));
 
         private static readonly TestComposition s_editorFeaturesCompositionWithMockDiagnosticUpdateSourceRegistrationService =
-            EditorTestCompositions
-                .EditorFeatures
+            EditorTestCompositions.EditorFeatures
                 .AddExcludedPartTypes(typeof(IDiagnosticUpdateSourceRegistrationService))
                 .AddParts(typeof(MockDiagnosticUpdateSourceRegistrationService));
 
@@ -58,8 +56,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
             );
 
         private static IGlobalOptionService GetGlobalOptions(Workspace workspace) =>
-            workspace
-                .Services
+            workspace.Services
                 .SolutionServices
                 .ExportProvider
                 .GetExportedValue<IGlobalOptionService>();
@@ -540,14 +537,12 @@ dotnet_diagnostic.{DisabledByDefaultAnalyzer.s_compilationRule.Id}.severity = wa
 
             // cause analysis
             var location = Location.Create(document.FilePath, textSpan: default, lineSpan: default);
-            var properties = ImmutableDictionary<string, string>
-                .Empty
+            var properties = ImmutableDictionary<string, string>.Empty
                 .Add(WellKnownDiagnosticPropertyNames.Origin, WellKnownDiagnosticTags.Build);
 
             await service.SynchronizeWithBuildAsync(
                 workspace,
-                ImmutableDictionary<ProjectId, ImmutableArray<DiagnosticData>>
-                    .Empty
+                ImmutableDictionary<ProjectId, ImmutableArray<DiagnosticData>>.Empty
                     .Add(
                         document.Project.Id,
                         ImmutableArray.Create(
@@ -753,8 +748,7 @@ dotnet_diagnostic.{DisabledByDefaultAnalyzer.s_compilationRule.Id}.severity = wa
             );
             var project = workspace.CurrentSolution.Projects.Single();
 
-            var newSpecificOptions = project
-                .CompilationOptions
+            var newSpecificOptions = project.CompilationOptions
                 .SpecificDiagnosticOptions
                 .Add(NamedTypeAnalyzer.DiagnosticId, ReportDiagnostic.Warn);
             project = project.WithCompilationOptions(
@@ -1103,8 +1097,7 @@ dotnet_diagnostic.{NamedTypeAnalyzer.DiagnosticId}.severity = warning
                 )
             );
 
-            workspace
-                .GlobalOptions
+            workspace.GlobalOptions
                 .SetGlobalOption(
                     SolutionCrawlerOptionsStorage.BackgroundAnalysisScopeOption,
                     LanguageNames.CSharp,
@@ -1269,23 +1262,20 @@ class A
 
             using var workspace = new TestWorkspace(composition);
 
-            workspace
-                .GlobalOptions
+            workspace.GlobalOptions
                 .SetGlobalOption(
                     SolutionCrawlerOptionsStorage.BackgroundAnalysisScopeOption,
                     LanguageNames.CSharp,
                     analysisScope
                 );
-            workspace
-                .GlobalOptions
+            workspace.GlobalOptions
                 .SetGlobalOption(
                     SolutionCrawlerOptionsStorage.EnableDiagnosticsInSourceGeneratedFiles,
                     isSourceGenerated
                 );
 
             var compilerDiagnosticsScope = analysisScope.ToEquivalentCompilerDiagnosticsScope();
-            workspace
-                .GlobalOptions
+            workspace.GlobalOptions
                 .SetGlobalOption(
                     SolutionCrawlerOptionsStorage.CompilerDiagnosticsScopeOption,
                     LanguageNames.CSharp,
@@ -1831,8 +1821,7 @@ class A
             );
             Assert.True(
                 workspace.TryApplyChanges(
-                    workspace
-                        .CurrentSolution
+                    workspace.CurrentSolution
                         .Projects
                         .Single()
                         .AddAnalyzerReference(new TestGeneratorReference(generator))

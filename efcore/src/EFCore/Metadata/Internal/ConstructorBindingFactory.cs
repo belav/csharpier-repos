@@ -150,8 +150,7 @@ public class ConstructorBindingFactory : IConstructorBindingFactory
                 )
             )
             {
-                var serviceParamCount = binding
-                    .ParameterBindings
+                var serviceParamCount = binding.ParameterBindings
                     .OfType<ServiceParameterBinding>()
                     .Count();
                 var propertyParamCount = binding.ParameterBindings.Count - serviceParamCount;
@@ -246,8 +245,7 @@ public class ConstructorBindingFactory : IConstructorBindingFactory
         IEnumerable<string> ConstructConstructor(
             IGrouping<ConstructorInfo, ParameterInfo> parameters
         ) =>
-            parameters
-                .Key
+            parameters.Key
                 .GetParameters()
                 .Select(y => $"{y.ParameterType.ShortDisplayName()} {y.Name}");
     }

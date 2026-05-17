@@ -486,8 +486,7 @@ namespace System.ServiceModel.Configuration
                 Type type = System.Type.GetType(contentTypeMapperType, true);
                 if (!WebContentTypeMapperType.IsAssignableFrom(type))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ConfigurationErrorsException(
                                 SR2.GetString(
@@ -510,8 +509,7 @@ namespace System.ServiceModel.Configuration
         {
             if (webBindingReaderQuotas == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("webBindingReaderQuotas");
             }
             if (elementReaderQuotas.MaxDepth != 0)

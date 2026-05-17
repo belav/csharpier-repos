@@ -84,8 +84,7 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
             {
                 Debug.Assert(_currentInterpolatedStringHandlerArgumentContext != null);
                 Debug.Assert(
-                    _currentInterpolatedStringHandlerArgumentContext
-                        .ApplicableCreationOperations
+                    _currentInterpolatedStringHandlerArgumentContext.ApplicableCreationOperations
                         .Contains((IInterpolatedStringHandlerCreationOperation)operation)
                 );
             }

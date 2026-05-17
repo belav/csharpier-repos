@@ -36,8 +36,7 @@ public sealed class HeaderDictionaryAddAnalyzer : DiagnosticAnalyzer
                 if (
                     IsAddMethod(invocation.TargetMethod)
                     && invocation.TargetMethod.Parameters.Length == 2
-                    && SymbolEqualityComparer
-                        .Default
+                    && SymbolEqualityComparer.Default
                         .Equals(
                             wellKnownTypes.Get(
                                 WellKnownType.Microsoft_AspNetCore_Http_IHeaderDictionary

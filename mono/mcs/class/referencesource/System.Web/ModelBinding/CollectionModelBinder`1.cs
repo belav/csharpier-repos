@@ -16,8 +16,7 @@
                 bindingContext.ModelName,
                 "index"
             );
-            ValueProviderResult vpResultIndex = bindingContext
-                .UnvalidatedValueProvider
+            ValueProviderResult vpResultIndex = bindingContext.UnvalidatedValueProvider
                 .GetValue(indexPropertyName);
             IEnumerable<string> indexNames =
                 CollectionModelBinderUtil.GetIndexNamesFromValueProviderResult(vpResultIndex);
@@ -54,15 +53,13 @@
                 );
                 ModelBindingContext childBindingContext = new ModelBindingContext(bindingContext)
                 {
-                    ModelMetadata = ModelMetadataProviders
-                        .Current
+                    ModelMetadata = ModelMetadataProviders.Current
                         .GetMetadataForType(null, typeof(TElement)),
                     ModelName = fullChildName,
                 };
 
                 object boundValue = null;
-                IModelBinder childBinder = bindingContext
-                    .ModelBinderProviders
+                IModelBinder childBinder = bindingContext.ModelBinderProviders
                     .GetBinder(modelBindingExecutionContext, childBindingContext);
                 if (childBinder != null)
                 {
@@ -71,8 +68,7 @@
                         boundValue = childBindingContext.Model;
 
                         // merge validation up
-                        bindingContext
-                            .ValidationNode
+                        bindingContext.ValidationNode
                             .ChildNodes
                             .Add(childBindingContext.ValidationNode);
                     }
@@ -99,8 +95,7 @@
         {
             ModelBinderUtil.ValidateBindingContext(bindingContext);
 
-            ValueProviderResult vpResult = bindingContext
-                .UnvalidatedValueProvider
+            ValueProviderResult vpResult = bindingContext.UnvalidatedValueProvider
                 .GetValue(
                     bindingContext.ModelName,
                     skipValidation: !bindingContext.ValidateRequest
@@ -144,8 +139,7 @@
             {
                 ModelBindingContext innerBindingContext = new ModelBindingContext(bindingContext)
                 {
-                    ModelMetadata = ModelMetadataProviders
-                        .Current
+                    ModelMetadata = ModelMetadataProviders.Current
                         .GetMetadataForType(null, typeof(TElement)),
                     ModelName = bindingContext.ModelName,
                     ValueProvider = new ValueProviderCollection()
@@ -156,16 +150,14 @@
                 };
 
                 object boundValue = null;
-                IModelBinder childBinder = bindingContext
-                    .ModelBinderProviders
+                IModelBinder childBinder = bindingContext.ModelBinderProviders
                     .GetBinder(modelBindingExecutionContext, innerBindingContext);
                 if (childBinder != null)
                 {
                     if (childBinder.BindModel(modelBindingExecutionContext, innerBindingContext))
                     {
                         boundValue = innerBindingContext.Model;
-                        bindingContext
-                            .ValidationNode
+                        bindingContext.ValidationNode
                             .ChildNodes
                             .Add(innerBindingContext.ValidationNode);
                     }

@@ -254,8 +254,7 @@ public class DefaultParameterPolicyFactoryTest
     {
         // Arrange
         var options = new RouteOptions();
-        options
-            .ConstraintMap
+        options.ConstraintMap
             .Add("customConstraintPolicy", typeof(CustomParameterPolicyWithArguments));
 
         var services = new ServiceCollection();
@@ -280,8 +279,7 @@ public class DefaultParameterPolicyFactoryTest
     {
         // Arrange
         var options = new RouteOptions();
-        options
-            .ConstraintMap
+        options.ConstraintMap
             .Add("customConstraintPolicy", typeof(CustomParameterPolicyWithMultipleArguments));
 
         var services = new ServiceCollection();
@@ -308,8 +306,7 @@ public class DefaultParameterPolicyFactoryTest
     {
         // Arrange
         var options = new RouteOptions();
-        options
-            .ConstraintMap
+        options.ConstraintMap
             .Add("customConstraintPolicy", typeof(CustomParameterPolicyWithOnlyServiceArguments));
 
         var services = new ServiceCollection();
@@ -336,8 +333,7 @@ public class DefaultParameterPolicyFactoryTest
     {
         // Arrange
         var options = new RouteOptions();
-        options
-            .ConstraintMap
+        options.ConstraintMap
             .Add("customConstraintPolicy", typeof(CustomParameterPolicyWithMultipleCtors));
 
         var services = new ServiceCollection();
@@ -362,8 +358,7 @@ public class DefaultParameterPolicyFactoryTest
     {
         // Arrange
         var options = new RouteOptions();
-        options
-            .ConstraintMap
+        options.ConstraintMap
             .Add(
                 "customConstraintPolicy",
                 typeof(CustomParameterPolicyWithMultipleCtorsInAscendingOrder)
@@ -394,8 +389,7 @@ public class DefaultParameterPolicyFactoryTest
     {
         // Arrange
         var options = new RouteOptions();
-        options
-            .ConstraintMap
+        options.ConstraintMap
             .Add("customConstraintPolicy", typeof(CustomParameterPolicyWithAmbiguousMultipleCtors));
 
         var services = new ServiceCollection();
@@ -445,8 +439,7 @@ public class DefaultParameterPolicyFactoryTest
     {
         // Arrange
         var options = new RouteOptions();
-        options
-            .ConstraintMap
+        options.ConstraintMap
             .Add("customConstraintPolicy", typeof(CustomParameterPolicyWithArguments));
 
         var services = new ServiceCollection();

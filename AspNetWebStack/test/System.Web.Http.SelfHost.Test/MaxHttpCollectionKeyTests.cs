@@ -32,8 +32,7 @@ namespace System.Web.Http.SelfHost
             baseAddress = String.Format("http://localhost/");
 
             HttpConfiguration config = new HttpConfiguration();
-            config
-                .Routes
+            config.Routes
                 .MapHttpRoute(
                     "Default",
                     "{controller}/{action}",

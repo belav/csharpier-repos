@@ -23,8 +23,7 @@ namespace System.ServiceModel.Security
         {
             if (securityTokenHandler == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("securityTokenHandler");
             }
 

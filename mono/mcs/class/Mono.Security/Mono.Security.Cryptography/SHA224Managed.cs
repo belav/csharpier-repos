@@ -92,8 +92,7 @@ namespace Mono.Security.Cryptography
             {
                 if (size < (BLOCK_SIZE_BYTES - _ProcessingBufferCount))
                 {
-                    System
-                        .Buffer
+                    System.Buffer
                         .BlockCopy(rgb, start, _ProcessingBuffer, _ProcessingBufferCount, size);
                     _ProcessingBufferCount += size;
                     return;
@@ -101,8 +100,7 @@ namespace Mono.Security.Cryptography
                 else
                 {
                     i = (BLOCK_SIZE_BYTES - _ProcessingBufferCount);
-                    System
-                        .Buffer
+                    System.Buffer
                         .BlockCopy(rgb, start, _ProcessingBuffer, _ProcessingBufferCount, i);
                     ProcessBlock(_ProcessingBuffer, 0);
                     _ProcessingBufferCount = 0;
@@ -118,8 +116,7 @@ namespace Mono.Security.Cryptography
 
             if (size % BLOCK_SIZE_BYTES != 0)
             {
-                System
-                    .Buffer
+                System.Buffer
                     .BlockCopy(
                         rgb,
                         size - size % BLOCK_SIZE_BYTES + start,

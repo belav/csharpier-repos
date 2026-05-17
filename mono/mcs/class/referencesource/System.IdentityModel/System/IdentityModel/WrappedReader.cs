@@ -26,8 +26,7 @@ namespace System.IdentityModel
             }
             if (!reader.IsStartElement())
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(SR.GetString(SR.InnerReaderMustBeAtElement))
                     );
@@ -260,22 +259,24 @@ namespace System.IdentityModel
                 case XmlNodeType.Element:
                 {
                     bool isEmpty = base.InnerReader.IsEmptyElement;
-                    this.xmlTokens.AddElement(
-                        base.InnerReader.Prefix,
-                        base.InnerReader.LocalName,
-                        base.InnerReader.NamespaceURI,
-                        isEmpty
-                    );
+                    this.xmlTokens
+                        .AddElement(
+                            base.InnerReader.Prefix,
+                            base.InnerReader.LocalName,
+                            base.InnerReader.NamespaceURI,
+                            isEmpty
+                        );
                     if (base.InnerReader.MoveToFirstAttribute())
                     {
                         do
                         {
-                            this.xmlTokens.AddAttribute(
-                                base.InnerReader.Prefix,
-                                base.InnerReader.LocalName,
-                                base.InnerReader.NamespaceURI,
-                                base.InnerReader.Value
-                            );
+                            this.xmlTokens
+                                .AddAttribute(
+                                    base.InnerReader.Prefix,
+                                    base.InnerReader.LocalName,
+                                    base.InnerReader.NamespaceURI,
+                                    base.InnerReader.Value
+                                );
                         } while (base.InnerReader.MoveToNextAttribute());
                         base.InnerReader.MoveToElement();
                     }
@@ -316,8 +317,7 @@ namespace System.IdentityModel
                 }
                 default:
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new XmlException(
                                 SR.GetString(
@@ -376,8 +376,7 @@ namespace System.IdentityModel
         {
             if (initialSize < 1)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentOutOfRangeException(
                             "initialSize",
@@ -624,14 +623,12 @@ namespace System.IdentityModel
             {
                 if (writer == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new ArgumentNullException("writer"));
                 }
                 if (!MoveToFirst())
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(SR.GetString(SR.XmlTokenBufferIsEmpty))
                         );

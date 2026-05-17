@@ -41,8 +41,7 @@ public class EntityMaterializerSource : IEntityMaterializerSource
     public EntityMaterializerSource(EntityMaterializerSourceDependencies dependencies)
     {
         Dependencies = dependencies;
-        _bindingInterceptors = dependencies
-            .SingletonInterceptors
+        _bindingInterceptors = dependencies.SingletonInterceptors
             .OfType<IInstantiationBindingInterceptor>()
             .ToList();
 
@@ -132,8 +131,7 @@ public class EntityMaterializerSource : IEntityMaterializerSource
         }
 
         foreach (
-            var consumedProperty in constructorBinding
-                .ParameterBindings
+            var consumedProperty in constructorBinding.ParameterBindings
                 .SelectMany(p => p.ConsumedProperties)
         )
         {
@@ -192,8 +190,7 @@ public class EntityMaterializerSource : IEntityMaterializerSource
                     property
                 ),
 
-                IServiceProperty serviceProperty => serviceProperty
-                    .ParameterBinding
+                IServiceProperty serviceProperty => serviceProperty.ParameterBinding
                     .BindToParameter(bindingInfo),
 
                 IComplexProperty complexProperty => CreateMaterializeExpression(
@@ -513,8 +510,7 @@ public class EntityMaterializerSource : IEntityMaterializerSource
         blockExpressions.Add(instanceVariable);
 
         return Expression.Block(
-            bindingInfo
-                .ServiceInstances
+            bindingInfo.ServiceInstances
                 .Concat(
                     new[]
                     {
@@ -767,8 +763,7 @@ public class EntityMaterializerSource : IEntityMaterializerSource
     )
     {
         foreach (
-            var parameterBinding in constructorBinding
-                .ParameterBindings
+            var parameterBinding in constructorBinding.ParameterBindings
                 .OfType<ServiceParameterBinding>()
         )
         {

@@ -59,9 +59,8 @@ namespace System.Workflow.ComponentModel.Design
         {
             get
             {
-                return this.activityDesigner.InternalRectangleToScreen(
-                    this.activityDesigner.Bounds
-                );
+                return this.activityDesigner
+                    .InternalRectangleToScreen(this.activityDesigner.Bounds);
             }
         }
 

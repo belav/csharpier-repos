@@ -120,8 +120,7 @@ namespace Microsoft.CodeAnalysis.Remote
                     }
                     catch (Exception e)
                     {
-                        hubClient
-                            .Logger
+                        hubClient.Logger
                             .TraceEvent(
                                 TraceEventType.Error,
                                 1,
@@ -131,8 +130,7 @@ namespace Microsoft.CodeAnalysis.Remote
                 }
                 else
                 {
-                    hubClient
-                        .Logger
+                    hubClient.Logger
                         .TraceEvent(
                             TraceEventType.Error,
                             1,

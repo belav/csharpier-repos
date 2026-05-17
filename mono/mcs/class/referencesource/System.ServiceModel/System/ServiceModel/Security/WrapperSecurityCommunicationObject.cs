@@ -20,8 +20,7 @@ namespace System.ServiceModel.Security
         {
             if (innerCommunicationObject == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("innerCommunicationObject");
             }
             this.innerCommunicationObject = innerCommunicationObject;

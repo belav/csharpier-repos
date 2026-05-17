@@ -104,9 +104,8 @@ namespace System.Activities.Tracking
             {
                 if (string.IsNullOrEmpty(this.instanceId))
                 {
-                    this.instanceId = this.instanceIdInternal.ToString(
-                        CultureInfo.InvariantCulture
-                    );
+                    this.instanceId = this.instanceIdInternal
+                        .ToString(CultureInfo.InvariantCulture);
                 }
                 return this.instanceId;
             }

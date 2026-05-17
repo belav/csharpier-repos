@@ -125,8 +125,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CallHierarchy
                 if (symbolUnderCaret != null)
                 {
                     // Map symbols so that Call Hierarchy works from metadata-as-source
-                    var mappingService = document
-                        .Project
+                    var mappingService = document.Project
                         .Solution
                         .Services
                         .GetService<ISymbolMappingService>();
@@ -147,8 +146,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CallHierarchy
 
                         if (node != null)
                         {
-                            await _threadingContext
-                                .JoinableTaskFactory
+                            await _threadingContext.JoinableTaskFactory
                                 .SwitchToMainThreadAsync(cancellationToken);
                             _presenter.PresentRoot((CallHierarchyItem)node);
                             return;
@@ -157,13 +155,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CallHierarchy
                 }
 
                 // Come back to the UI thread so we can give the user an error notification.
-                await _threadingContext
-                    .JoinableTaskFactory
+                await _threadingContext.JoinableTaskFactory
                     .SwitchToMainThreadAsync(cancellationToken);
             }
 
-            var notificationService = document
-                .Project
+            var notificationService = document.Project
                 .Solution
                 .Services
                 .GetService<INotificationService>();

@@ -19,8 +19,7 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript.Api
             IEnumerable<TextChange> textChanges,
             CancellationToken cancellationToken
         ) =>
-            Editor
-                .Shared
+            Editor.Shared
                 .Extensions
                 .IWorkspaceExtensions
                 .ApplyTextChanges(workspace, id, textChanges, cancellationToken);
@@ -34,8 +33,7 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript.Api
             this ITextView textView,
             SnapshotPoint point
         ) =>
-            Editor
-                .Shared
+            Editor.Shared
                 .Extensions
                 .ITextViewExtensions
                 .TryMoveCaretToAndEnsureVisible(textView, point);
@@ -49,8 +47,7 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript.Api
             this ITextView textView,
             VirtualSnapshotPoint point
         ) =>
-            Editor
-                .Shared
+            Editor.Shared
                 .Extensions
                 .ITextViewExtensions
                 .TryMoveCaretToAndEnsureVisible(textView, point);

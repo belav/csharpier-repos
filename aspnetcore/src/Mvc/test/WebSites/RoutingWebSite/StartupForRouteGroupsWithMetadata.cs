@@ -19,14 +19,12 @@ public class StartupForRouteGroupsWithMetadata
         // Remove the default controller feature provider so we don't find all of the controllers
         // in this app, we do this because adding controllers to multple groups with the same name
         // does not work.
-        var old = builder
-            .PartManager
+        var old = builder.PartManager
             .FeatureProviders
             .OfType<IApplicationFeatureProvider<ControllerFeature>>()
             .FirstOrDefault();
         builder.PartManager.FeatureProviders.Remove(old);
-        builder
-            .PartManager
+        builder.PartManager
             .FeatureProviders
             .Add(
                 new ManualControllerFeatureProvider(f =>

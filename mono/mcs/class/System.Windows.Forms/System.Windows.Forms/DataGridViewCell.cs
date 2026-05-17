@@ -2417,14 +2417,12 @@ namespace System.Windows.Forms
                         //dataGridViewCell.Focus();
                         break;
                     case AccessibleSelection.AddSelection:
-                        dataGridViewCell
-                            .dataGridViewOwner
+                        dataGridViewCell.dataGridViewOwner
                             .SelectedCells
                             .InternalAdd(dataGridViewCell);
                         break;
                     case AccessibleSelection.RemoveSelection:
-                        dataGridViewCell
-                            .dataGridViewOwner
+                        dataGridViewCell.dataGridViewOwner
                             .SelectedCells
                             .InternalRemove(dataGridViewCell);
                         break;

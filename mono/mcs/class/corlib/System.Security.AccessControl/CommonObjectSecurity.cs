@@ -112,8 +112,7 @@ namespace System.Security.AccessControl
                 switch (modification)
                 {
                     case AccessControlModification.Add:
-                        descriptor
-                            .DiscretionaryAcl
+                        descriptor.DiscretionaryAcl
                             .AddAccess(
                                 rule.AccessControlType,
                                 SidFromIR(rule.IdentityReference),
@@ -123,8 +122,7 @@ namespace System.Security.AccessControl
                             );
                         break;
                     case AccessControlModification.Set:
-                        descriptor
-                            .DiscretionaryAcl
+                        descriptor.DiscretionaryAcl
                             .SetAccess(
                                 rule.AccessControlType,
                                 SidFromIR(rule.IdentityReference),
@@ -137,8 +135,7 @@ namespace System.Security.AccessControl
                         PurgeAccessRules(rule.IdentityReference);
                         goto case AccessControlModification.Add;
                     case AccessControlModification.Remove:
-                        modified = descriptor
-                            .DiscretionaryAcl
+                        modified = descriptor.DiscretionaryAcl
                             .RemoveAccess(
                                 rule.AccessControlType,
                                 SidFromIR(rule.IdentityReference),
@@ -151,8 +148,7 @@ namespace System.Security.AccessControl
                         PurgeAccessRules(rule.IdentityReference);
                         break;
                     case AccessControlModification.RemoveSpecific:
-                        descriptor
-                            .DiscretionaryAcl
+                        descriptor.DiscretionaryAcl
                             .RemoveAccessSpecific(
                                 rule.AccessControlType,
                                 SidFromIR(rule.IdentityReference),
@@ -226,8 +222,7 @@ namespace System.Security.AccessControl
                         if (null == descriptor.SystemAcl)
                             descriptor.SystemAcl = new SystemAcl(IsContainer, IsDS, 1);
 
-                        descriptor
-                            .SystemAcl
+                        descriptor.SystemAcl
                             .AddAudit(
                                 rule.AuditFlags,
                                 SidFromIR(rule.IdentityReference),
@@ -240,8 +235,7 @@ namespace System.Security.AccessControl
                         if (null == descriptor.SystemAcl)
                             descriptor.SystemAcl = new SystemAcl(IsContainer, IsDS, 1);
 
-                        descriptor
-                            .SystemAcl
+                        descriptor.SystemAcl
                             .SetAudit(
                                 rule.AuditFlags,
                                 SidFromIR(rule.IdentityReference),
@@ -256,8 +250,7 @@ namespace System.Security.AccessControl
                         if (null == descriptor.SystemAcl)
                             modified = false;
                         else
-                            modified = descriptor
-                                .SystemAcl
+                            modified = descriptor.SystemAcl
                                 .RemoveAudit(
                                     rule.AuditFlags,
                                     SidFromIR(rule.IdentityReference),
@@ -271,8 +264,7 @@ namespace System.Security.AccessControl
                         break;
                     case AccessControlModification.RemoveSpecific:
                         if (null != descriptor.SystemAcl)
-                            descriptor
-                                .SystemAcl
+                            descriptor.SystemAcl
                                 .RemoveAuditSpecific(
                                     rule.AuditFlags,
                                     SidFromIR(rule.IdentityReference),

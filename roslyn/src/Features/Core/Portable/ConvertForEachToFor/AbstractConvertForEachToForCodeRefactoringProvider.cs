@@ -354,8 +354,7 @@ namespace Microsoft.CodeAnalysis.ConvertForEachToFor
 
             // check ImmutableArray case
             if (
-                collectionType
-                    .OriginalDefinition
+                collectionType.OriginalDefinition
                     .Equals(
                         model.Compilation.GetTypeByMetadataName(typeof(ImmutableArray<>).FullName!)
                     )

@@ -142,8 +142,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                     h.Document.Id == document.Id
                 );
 
-                return highlightsForDocument
-                    .HighlightSpans
+                return highlightsForDocument.HighlightSpans
                     .SelectAsArray(h => new DocumentHighlight
                     {
                         Range = ProtocolConversions.TextSpanToRange(h.TextSpan, text),

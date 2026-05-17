@@ -37,15 +37,13 @@ End Class
                 HangMitigatingCancellationToken
             );
 
-            await TestServices
-                .Input
+            await TestServices.Input
                 .SendAsync(
                     (VirtualKeyCode.F12, VirtualKeyCode.SHIFT),
                     HangMitigatingCancellationToken
                 );
 
-            var results = await TestServices
-                .FindReferencesWindow
+            var results = await TestServices.FindReferencesWindow
                 .GetContentsAsync(HangMitigatingCancellationToken);
 
             Assert.Collection(
@@ -83,15 +81,13 @@ End Class$$
                 HangMitigatingCancellationToken
             );
             var project = ProjectName;
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .AddFileAsync(
                     project,
                     "File2.vb",
                     cancellationToken: HangMitigatingCancellationToken
                 );
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .OpenFileAsync(project, "File2.vb", HangMitigatingCancellationToken);
 
             await SetUpEditorAsync(
@@ -105,15 +101,13 @@ End Class
                 HangMitigatingCancellationToken
             );
 
-            await TestServices
-                .Input
+            await TestServices.Input
                 .SendAsync(
                     (VirtualKeyCode.F12, VirtualKeyCode.SHIFT),
                     HangMitigatingCancellationToken
                 );
 
-            var results = await TestServices
-                .FindReferencesWindow
+            var results = await TestServices.FindReferencesWindow
                 .GetContentsAsync(HangMitigatingCancellationToken);
 
             Assert.Collection(
@@ -141,8 +135,7 @@ End Class
                 }
             );
 
-            await TestServices
-                .FindReferencesWindow
+            await TestServices.FindReferencesWindow
                 .NavigateToAsync(
                     results[0],
                     isPreview: false,
@@ -153,14 +146,12 @@ End Class
             // Assert we are in the right file now
             Assert.Equal(
                 $"Class1.vb",
-                await TestServices
-                    .Shell
+                await TestServices.Shell
                     .GetActiveDocumentFileNameAsync(HangMitigatingCancellationToken)
             );
             Assert.Equal(
                 "Alpha As Int32",
-                await TestServices
-                    .Editor
+                await TestServices.Editor
                     .GetLineTextAfterCaretAsync(HangMitigatingCancellationToken)
             );
         }

@@ -168,14 +168,12 @@ namespace ILCompiler.DependencyAnalysis
             NativeLayoutSavedVertexNode templateLayout;
             if (_owningMethodOrType is MethodDesc)
             {
-                templateLayout = factory
-                    .NativeLayout
+                templateLayout = factory.NativeLayout
                     .TemplateMethodLayout((MethodDesc)_owningMethodOrType);
             }
             else
             {
-                templateLayout = factory
-                    .NativeLayout
+                templateLayout = factory.NativeLayout
                     .TemplateTypeLayout((TypeDesc)_owningMethodOrType);
             }
 

@@ -225,8 +225,7 @@ namespace Microsoft.CodeAnalysis.Rebuild.UnitTests
 
             void assert(string? expected, params (string Key, object? Value)[] values)
             {
-                var parseOptions = VisualBasicParseOptions
-                    .Default
+                var parseOptions = VisualBasicParseOptions.Default
                     .WithPreprocessorSymbols(
                         values.Select(x => new KeyValuePair<string, object>(x.Key, x.Value!))
                     );
@@ -302,8 +301,7 @@ namespace Microsoft.CodeAnalysis.Rebuild.UnitTests
                 {
                     VisualBasicSyntaxTree.ParseText(
                         @"// this is a comment",
-                        VisualBasicParseOptions
-                            .Default
+                        VisualBasicParseOptions.Default
                             .WithLanguageVersion(LanguageVersion.VisualBasic15)
                     ),
                 },

@@ -168,14 +168,12 @@ namespace System.Web.UI
                     if (bindingContainerBuilder.BindingContainerBuilder != null)
                     {
                         return (
-                            from object propertyEntry in bindingContainerBuilder
-                                .BindingContainerBuilder
+                            from object propertyEntry in bindingContainerBuilder.BindingContainerBuilder
                                 .SimplePropertyEntriesInternal
                             let simplePropertyEntry = propertyEntry as SimplePropertyEntry
                             where
                                 simplePropertyEntry != null
-                                && simplePropertyEntry
-                                    .Name
+                                && simplePropertyEntry.Name
                                     .Equals(ItemTypeProperty, StringComparison.OrdinalIgnoreCase)
                             select (string)simplePropertyEntry.Value
                         ).FirstOrDefault();
@@ -2471,8 +2469,7 @@ namespace System.Web.UI
 #endif
             if (parser != null && parser.ControlBuilderInterceptor != null)
             {
-                parser
-                    .ControlBuilderInterceptor
+                parser.ControlBuilderInterceptor
                     .PreControlBuilderInit(
                         this,
                         parser,
@@ -3025,8 +3022,7 @@ namespace System.Web.UI
                     {
                         string expression =
                             entry.Expression == null ? String.Empty : entry.Expression.Trim();
-                        ((IExpressionsAccessor)obj)
-                            .Expressions
+                        ((IExpressionsAccessor)obj).Expressions
                             .Add(
                                 new ExpressionBinding(
                                     entry.Name,
@@ -3200,8 +3196,7 @@ namespace System.Web.UI
                     }
                 }
 
-                evalValue = containerControl
-                    .TemplateControl
+                evalValue = containerControl.TemplateControl
                     .Eval(entry.FieldName, entry.FormatString);
 
                 string objectModelName;
@@ -3815,8 +3810,7 @@ namespace System.Web.UI
 
             // Restrict resource keys the same way as we restrict ID's (VSWhidbey 256438)
             if (
-                !System
-                    .CodeDom
+                !System.CodeDom
                     .Compiler
                     .CodeGenerator
                     .IsValidLanguageIndependentIdentifier(keyPrefix)
@@ -4154,8 +4148,7 @@ namespace System.Web.UI
                     else if (
                         !usingSetAttribute
                         && !mainDirectiveMode
-                        && propDesc
-                            .Attributes
+                        && propDesc.Attributes
                             .Contains(DesignerSerializationVisibilityAttribute.Hidden)
                     )
                     {

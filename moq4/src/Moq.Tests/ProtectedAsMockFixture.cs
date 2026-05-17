@@ -325,13 +325,16 @@ namespace Moq.Tests
         {
             void VerifySet(Times? times = null, string failMessage = null)
             {
-                this.protectedMock.VerifySet(
-                    o =>
-                        o[It.IsInRange(0, 5, Moq.Range.Inclusive), It.IsIn("Bad", "JustAsBad")] =
-                            It.Is<int>(i => i > 10),
-                    times,
-                    failMessage
-                );
+                this.protectedMock
+                    .VerifySet(
+                        o =>
+                            o[
+                                It.IsInRange(0, 5, Moq.Range.Inclusive),
+                                It.IsIn("Bad", "JustAsBad")
+                            ] = It.Is<int>(i => i > 10),
+                        times,
+                        failMessage
+                    );
             }
             VerifySet(Times.Never());
 
@@ -391,11 +394,12 @@ namespace Moq.Tests
 
             var exception = Record.Exception(() =>
             {
-                this.protectedMock.Verify(
-                    m => m.DoSomethingImpl(),
-                    Times.Exactly(3),
-                    "Wasn't called three times."
-                );
+                this.protectedMock
+                    .Verify(
+                        m => m.DoSomethingImpl(),
+                        Times.Exactly(3),
+                        "Wasn't called three times."
+                    );
             });
 
             Assert.IsType<MockException>(exception);
@@ -438,11 +442,8 @@ namespace Moq.Tests
         {
             var exception = Record.Exception(() =>
             {
-                this.protectedMock.VerifyGet(
-                    m => m.ReadOnlyPropertyImpl,
-                    Times.Once(),
-                    "Was not queried."
-                );
+                this.protectedMock
+                    .VerifyGet(m => m.ReadOnlyPropertyImpl, Times.Once(), "Was not queried.");
             });
 
             Assert.IsType<MockException>(exception);

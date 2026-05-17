@@ -2433,8 +2433,7 @@ class C
 
         internal override ICommandHandler CreateCommandHandler(TestWorkspace workspace)
         {
-            return workspace
-                .ExportProvider
+            return workspace.ExportProvider
                 .GetCommandHandler<DocumentationCommentCommandHandler>(
                     PredefinedCommandHandlerNames.DocumentationComments,
                     ContentTypeNames.CSharpContentType

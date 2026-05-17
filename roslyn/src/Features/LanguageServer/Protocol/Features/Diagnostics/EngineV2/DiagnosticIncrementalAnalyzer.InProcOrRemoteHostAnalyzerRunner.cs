@@ -141,8 +141,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             CancellationToken cancellationToken
         )
         {
-            var options = project
-                .Solution
+            var options = project.Solution
                 .Services
                 .GetRequiredService<IWorkspaceConfigurationService>()
                 .Options;
@@ -172,8 +171,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                     if (!result.HasValue)
                         return ImmutableArray<Diagnostic>.Empty;
 
-                    return await result
-                        .Value
+                    return await result.Value
                         .ToDiagnosticsAsync(project, cancellationToken)
                         .ConfigureAwait(false);
                 }
@@ -273,8 +271,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 var count = documentAnalysisScope != null ? 1 : project.DocumentIds.Count + 1;
                 var forSpanAnalysis = documentAnalysisScope?.Span.HasValue ?? false;
 
-                var performanceInfo = analysisResult
-                    .AnalyzerTelemetryInfo
+                var performanceInfo = analysisResult.AnalyzerTelemetryInfo
                     .ToAnalyzerPerformanceInfo(AnalyzerInfoCache)
                     .ToImmutableArray();
 
@@ -323,8 +320,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
             var analyzers =
                 documentAnalysisScope?.Analyzers
-                ?? compilationWithAnalyzers
-                    .Analyzers
+                ?? compilationWithAnalyzers.Analyzers
                     .Where(a =>
                         forceExecuteAllAnalyzers
                         || !a.IsOpenFileOnly(ideOptions.CleanupOptions?.SimplifierOptions)
@@ -388,8 +384,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                     : null;
 
             return new DiagnosticAnalysisResultMap<DiagnosticAnalyzer, DiagnosticAnalysisResult>(
-                result
-                    .Value
+                result.Value
                     .Diagnostics
                     .ToImmutableDictionary(
                         entry => analyzerMap[entry.analyzerId],
@@ -404,8 +399,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                                 documentIds
                             )
                     ),
-                result
-                    .Value
+                result.Value
                     .Telemetry
                     .ToImmutableDictionary(
                         entry => analyzerMap[entry.analyzerId],

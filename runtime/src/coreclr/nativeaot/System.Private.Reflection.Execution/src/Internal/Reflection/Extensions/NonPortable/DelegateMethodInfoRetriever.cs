@@ -64,8 +64,7 @@ namespace Internal.Reflection.Extensions.NonPortable
                     }
                     else
                     {
-                        System
-                            .Diagnostics
+                        System.Diagnostics
                             .Debug
                             .Assert(resolver->ResolverType == OpenMethodResolver.GVMResolve);
 
@@ -76,8 +75,7 @@ namespace Internal.Reflection.Extensions.NonPortable
                         );
 
                         if (
-                            !TypeLoaderEnvironment
-                                .Instance
+                            !TypeLoaderEnvironment.Instance
                                 .TryGetRuntimeMethodHandleComponents(
                                     resolver->GVMMethodHandle,
                                     out _,
@@ -95,8 +93,7 @@ namespace Internal.Reflection.Extensions.NonPortable
             if (callTryGetMethod)
             {
                 if (
-                    !ReflectionExecution
-                        .ExecutionEnvironment
+                    !ReflectionExecution.ExecutionEnvironment
                         .TryGetMethodForOriginalLdFtnResult(
                             originalLdFtnResult,
                             ref typeOfFirstParameterIfInstanceDelegate,
@@ -105,8 +102,7 @@ namespace Internal.Reflection.Extensions.NonPortable
                         )
                 )
                 {
-                    ReflectionExecution
-                        .ExecutionEnvironment
+                    ReflectionExecution.ExecutionEnvironment
                         .GetFunctionPointerAndInstantiationArgumentForOriginalLdFtnResult(
                             originalLdFtnResult,
                             out IntPtr ip,

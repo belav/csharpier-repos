@@ -41,8 +41,7 @@ namespace System.ServiceModel.Configuration
             }
             else
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(
@@ -69,8 +68,7 @@ namespace System.ServiceModel.Configuration
 
             if (configElement.Filter == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument("element", SR.GetString(SR.ConfigXPathFilterIsNull));
             }
 
@@ -93,8 +91,7 @@ namespace System.ServiceModel.Configuration
 
                 if (!key.GetType().IsAssignableFrom(typeof(XPathMessageFilter)))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(
@@ -110,8 +107,7 @@ namespace System.ServiceModel.Configuration
                 XPathMessageFilterElement retval = (XPathMessageFilterElement)this.BaseGet(key);
                 if (retval == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new System.Collections.Generic.KeyNotFoundException(
                                 SR.GetString(
@@ -142,8 +138,7 @@ namespace System.ServiceModel.Configuration
 
                 if (!key.GetType().IsAssignableFrom(typeof(XPathMessageFilter)))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(
@@ -171,8 +166,7 @@ namespace System.ServiceModel.Configuration
                 }
                 else
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgument(
                             SR.GetString(
                                 SR.ConfigKeysDoNotMatch,

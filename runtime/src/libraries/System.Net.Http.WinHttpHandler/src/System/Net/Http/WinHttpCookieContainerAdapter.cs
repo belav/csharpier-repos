@@ -72,8 +72,7 @@ namespace System.Net.Http
 
             // Clear cookies.
             if (
-                !Interop
-                    .WinHttp
+                !Interop.WinHttp
                     .WinHttpAddRequestHeaders(
                         requestHandle,
                         CookieHeaderNameWithColon,
@@ -98,8 +97,7 @@ namespace System.Net.Http
             if (!string.IsNullOrEmpty(cookieHeader))
             {
                 if (
-                    !Interop
-                        .WinHttp
+                    !Interop.WinHttp
                         .WinHttpAddRequestHeaders(
                             requestHandle,
                             cookieHeader,

@@ -365,8 +365,7 @@ class CL3
             );
 
             var withModifiers = cl3.BaseType().BaseType();
-            var withoutModifiers = withModifiers
-                .OriginalDefinition
+            var withoutModifiers = withModifiers.OriginalDefinition
                 .Construct(withModifiers.TypeArguments());
             Assert.True(HasTypeArgumentsCustomModifiers(withModifiers));
             Assert.False(HasTypeArgumentsCustomModifiers(withoutModifiers));
@@ -383,9 +382,8 @@ class CL3
 
         private bool HasTypeArgumentsCustomModifiers(NamedTypeSymbol type)
         {
-            return type.TypeArgumentsWithAnnotationsNoUseSiteDiagnostics.Any(a =>
-                a.CustomModifiers.Any()
-            );
+            return type.TypeArgumentsWithAnnotationsNoUseSiteDiagnostics
+                .Any(a => a.CustomModifiers.Any());
         }
 
         [ConditionalFact(typeof(DesktopOnly))]
@@ -1811,8 +1809,7 @@ class Module1
                             .TypeArgumentsWithAnnotationsNoUseSiteDiagnostics[0]
                             .CustomModifiers
                             .First()
-                )
-                    .ModifierSymbol
+                ).ModifierSymbol
                     .ContainingAssembly
             );
 
@@ -1842,8 +1839,7 @@ class Module1
                             .TypeArgumentsWithAnnotationsNoUseSiteDiagnostics[0]
                             .CustomModifiers
                             .First()
-                )
-                    .ModifierSymbol
+                ).ModifierSymbol
                     .ContainingAssembly
             );
 
@@ -3014,16 +3010,18 @@ Implemented B",
                 t2.Equals(t1, TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds)
             );
             Assert.True(
-                t1.Type.Equals(
-                    t2.Type,
-                    TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds
-                )
+                t1.Type
+                    .Equals(
+                        t2.Type,
+                        TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds
+                    )
             );
             Assert.True(
-                t2.Type.Equals(
-                    t1.Type,
-                    TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds
-                )
+                t2.Type
+                    .Equals(
+                        t1.Type,
+                        TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds
+                    )
             );
         }
 

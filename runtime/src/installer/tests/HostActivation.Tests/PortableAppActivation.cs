@@ -58,8 +58,7 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             File.Copy(appDll, appExe, true);
             File.Delete(appDll);
 
-            TestContext
-                .BuiltDotNet
+            TestContext.BuiltDotNet
                 .Exec("exec", appExe)
                 .CaptureStdErr()
                 .Execute(expectedToFail: true)
@@ -72,12 +71,10 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
         [Fact]
         public void Muxer_AltDirectorySeparatorChar()
         {
-            var appDll = sharedTestState
-                .App
+            var appDll = sharedTestState.App
                 .AppDll
                 .Replace(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
-            TestContext
-                .BuiltDotNet
+            TestContext.BuiltDotNet
                 .Exec(appDll)
                 .CaptureStdErr()
                 .CaptureStdOut()
@@ -99,8 +96,7 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             var runtimeConfig = Path.Combine(subdirectory, Path.GetFileName(app.RuntimeConfigJson));
             File.Move(app.RuntimeConfigJson, runtimeConfig, overwrite: true);
 
-            TestContext
-                .BuiltDotNet
+            TestContext.BuiltDotNet
                 .Exec("exec", "--runtimeconfig", runtimeConfig, app.AppDll)
                 .CaptureStdErr()
                 .CaptureStdOut()
@@ -261,8 +257,7 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
         [Fact]
         public void ComputedTPA_NoTrailingPathSeparator()
         {
-            TestContext
-                .BuiltDotNet
+            TestContext.BuiltDotNet
                 .Exec(sharedTestState.App.AppDll)
                 .EnableTracingAndCaptureOutputs()
                 .Execute()
@@ -536,8 +531,7 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             using (new TestArtifact(dotnetWithMockHostFxr))
             {
                 Directory.CreateDirectory(dotnetWithMockHostFxr);
-                string expectedErrorCode = Constants
-                    .ErrorCode
+                string expectedErrorCode = Constants.ErrorCode
                     .FrameworkMissingFailure
                     .ToString("x");
 

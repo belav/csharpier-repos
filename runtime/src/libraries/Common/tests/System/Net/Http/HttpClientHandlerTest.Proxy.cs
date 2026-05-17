@@ -917,8 +917,7 @@ namespace System.Net.Http.Functional.Tests
                         handler.Proxy = new WebProxy(proxyUri);
                         if (addUserAgentHeader)
                         {
-                            client
-                                .DefaultRequestHeaders
+                            client.DefaultRequestHeaders
                                 .UserAgent
                                 .Add(new ProductInfoHeaderValue("Mozilla", "5.0"));
                         }

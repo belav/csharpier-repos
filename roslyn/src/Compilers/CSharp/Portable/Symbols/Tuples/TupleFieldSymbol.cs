@@ -358,8 +358,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             FieldSymbol? newCorrespondingDefaultFieldOpt = null;
             if ((object)_correspondingDefaultField != this)
             {
-                newCorrespondingDefaultFieldOpt = _correspondingDefaultField
-                    .OriginalDefinition
+                newCorrespondingDefaultFieldOpt = _correspondingDefaultField.OriginalDefinition
                     .AsMember(newOwner);
             }
 

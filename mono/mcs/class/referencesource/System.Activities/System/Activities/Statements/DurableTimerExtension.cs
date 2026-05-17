@@ -80,8 +80,7 @@ namespace System.Activities.Statements
         {
             if (this.instance != null && instance != null)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(new InvalidOperationException(SR.TimerExtensionAlreadyAttached));
             }
 
@@ -213,8 +212,7 @@ namespace System.Activities.Statements
             BookmarkResumptionState state = (BookmarkResumptionState)result.AsyncState;
 
             BookmarkResumptionResult resumptionResult = state.Instance.EndResumeBookmark(result);
-            state
-                .TimerExtension
+            state.TimerExtension
                 .ProcessBookmarkResumptionResult(state.TimerBookmark, resumptionResult);
         }
 

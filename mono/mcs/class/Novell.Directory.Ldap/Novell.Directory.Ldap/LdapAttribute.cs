@@ -648,8 +648,7 @@ namespace Novell.Directory.Ldap
             try
             {
                 // Get InputStream from the URL
-                System.IO.Stream in_Renamed = System
-                    .Net
+                System.IO.Stream in_Renamed = System.Net
                     .WebRequest
                     .Create(url)
                     .GetResponse()

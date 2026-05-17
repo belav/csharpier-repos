@@ -525,8 +525,7 @@ namespace System.Runtime.CompilerServices
 
             if (!hasExpiredEntries)
             {
-                newSize = System
-                    .Collections
+                newSize = System.Collections
                     .HashHelpers
                     .GetPrime(_buckets.Length == 0 ? _initialCapacity + 1 : _buckets.Length * 2);
             }

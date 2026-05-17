@@ -87,8 +87,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
                         var comparer = isCaseSensitive
                             ? StringComparer.Ordinal
                             : StringComparer.OrdinalIgnoreCase;
-                        var index = bestItem
-                            .Parameters
+                        var index = bestItem.Parameters
                             .IndexOf(p => comparer.Equals(p.Name, parameterName));
                         if (index >= 0)
                         {
@@ -180,10 +179,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
                         var comparer = isCaseSensitive
                             ? StringComparer.Ordinal
                             : StringComparer.OrdinalIgnoreCase;
-                        return item.Parameters.Any(
-                            static (p, arg) => arg.comparer.Equals(p.Name, arg.name),
-                            (comparer, name)
-                        );
+                        return item.Parameters
+                            .Any(
+                                static (p, arg) => arg.comparer.Equals(p.Name, arg.name),
+                                (comparer, name)
+                            );
                     }
 
                     // An item is applicable if it has at least as many parameters as the selected

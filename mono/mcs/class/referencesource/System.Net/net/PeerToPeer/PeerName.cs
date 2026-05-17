@@ -98,8 +98,7 @@ namespace System.Net.PeerToPeer
             string classifier;
             if (!StrongParsePeerName(remotePeerName, out authority, out classifier))
             {
-                Logging
-                    .P2PTraceSource
+                Logging.P2PTraceSource
                     .TraceEvent(
                         TraceEventType.Information,
                         0,
@@ -119,8 +118,7 @@ namespace System.Net.PeerToPeer
                 m_PeerName = authority;
             m_Authority = authority;
             m_Classifier = classifier;
-            Logging
-                .P2PTraceSource
+            Logging.P2PTraceSource
                 .TraceEvent(
                     TraceEventType.Information,
                     0,
@@ -229,8 +227,7 @@ namespace System.Net.PeerToPeer
                 if (shDefaultIdentity != null)
                     shDefaultIdentity.Dispose();
             }
-            Logging
-                .P2PTraceSource
+            Logging.P2PTraceSource
                 .TraceEvent(
                     TraceEventType.Information,
                     0,
@@ -296,8 +293,7 @@ namespace System.Net.PeerToPeer
             string classifier;
             WeakParsePeerName(peerName, out authority, out classifier);
             PeerName p = new PeerName(peerName, authority, classifier);
-            Logging
-                .P2PTraceSource
+            Logging.P2PTraceSource
                 .TraceEvent(
                     TraceEventType.Information,
                     0,
@@ -391,8 +387,7 @@ namespace System.Net.PeerToPeer
             string newClassifier;
             WeakParsePeerName(newPeerName, out authority, out newClassifier);
             PeerName p = new PeerName(newPeerName, authority, newClassifier);
-            Logging
-                .P2PTraceSource
+            Logging.P2PTraceSource
                 .TraceEvent(
                     TraceEventType.Information,
                     0,
@@ -503,8 +498,7 @@ namespace System.Net.PeerToPeer
                             shPeerHostName.Dispose();
                     }
                 }
-                Logging
-                    .P2PTraceSource
+                Logging.P2PTraceSource
                     .TraceEvent(
                         TraceEventType.Information,
                         0,

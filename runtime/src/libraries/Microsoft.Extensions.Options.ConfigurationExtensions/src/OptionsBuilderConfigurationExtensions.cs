@@ -53,8 +53,7 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             ThrowHelper.ThrowIfNull(optionsBuilder);
 
-            optionsBuilder
-                .Services
+            optionsBuilder.Services
                 .Configure<TOptions>(optionsBuilder.Name, config, configureBinder);
             return optionsBuilder;
         }
@@ -100,8 +99,7 @@ namespace Microsoft.Extensions.DependencyInjection
                 }
             );
 
-            optionsBuilder
-                .Services
+            optionsBuilder.Services
                 .AddSingleton<
                     IOptionsChangeTokenSource<TOptions>,
                     ConfigurationChangeTokenSource<TOptions>

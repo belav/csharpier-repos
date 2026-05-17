@@ -209,8 +209,7 @@ namespace System.Activities
 
             if (!object.ReferenceEquals(activity.Parent, this.CurrentInstance))
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(new InvalidOperationException(SR.CanOnlyAbortDirectChildren));
             }
 
@@ -263,8 +262,7 @@ namespace System.Activities
 
             if (!object.ReferenceEquals(activityInstance.Parent, this.CurrentInstance))
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(new InvalidOperationException(SR.CanOnlyCancelDirectChildren));
             }
 
@@ -290,12 +288,8 @@ namespace System.Activities
                 throw FxTrace.Exception.ArgumentNullOrEmpty("name");
             }
 
-            return this.bookmarkManager.CreateBookmark(
-                name,
-                null,
-                this.CurrentInstance,
-                BookmarkOptions.None
-            );
+            return this.bookmarkManager
+                .CreateBookmark(name, null, this.CurrentInstance, BookmarkOptions.None);
         }
 
         public Bookmark CreateBookmark(string name, BookmarkCallback callback)
@@ -323,8 +317,7 @@ namespace System.Activities
 
             if (!CallbackWrapper.IsValidCallback(callback, this.CurrentInstance))
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .Argument(
                         "callback",
                         SR.InvalidExecutionCallback(callback, this.Activity.ToString())
@@ -333,12 +326,8 @@ namespace System.Activities
 
             BookmarkOptionsHelper.Validate(options, "options");
 
-            return this.bookmarkManager.CreateBookmark(
-                name,
-                callback,
-                this.CurrentInstance,
-                options
-            );
+            return this.bookmarkManager
+                .CreateBookmark(name, callback, this.CurrentInstance, options);
         }
 
         public Bookmark CreateBookmark(string name, BookmarkCallback callback, BookmarkScope scope)
@@ -363,8 +352,7 @@ namespace System.Activities
 
             if (!CallbackWrapper.IsValidCallback(callback, this.CurrentInstance))
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .Argument(
                         "callback",
                         SR.InvalidExecutionCallback(callback, this.Activity.ToString())
@@ -405,8 +393,7 @@ namespace System.Activities
                 && !CallbackWrapper.IsValidCallback(callback, this.CurrentInstance)
             )
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .Argument(
                         "callback",
                         SR.InvalidExecutionCallback(callback, this.Activity.ToString())
@@ -434,8 +421,7 @@ namespace System.Activities
 
             if (scopeId != Guid.Empty && !this.executor.KeysAllowed)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(new InvalidOperationException(SR.BookmarkScopesRequireKeys));
             }
 
@@ -458,8 +444,7 @@ namespace System.Activities
             ThrowIfDisposed();
             if (!this.executor.KeysAllowed)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(new InvalidOperationException(SR.BookmarkScopesRequireKeys));
             }
 
@@ -477,10 +462,8 @@ namespace System.Activities
         {
             ThrowIfDisposed();
 
-            this.CurrentInstance.RemoveAllBookmarks(
-                this.executor.RawBookmarkScopeManager,
-                this.bookmarkManager
-            );
+            this.CurrentInstance
+                .RemoveAllBookmarks(this.executor.RawBookmarkScopeManager, this.bookmarkManager);
         }
 
         public void MarkCanceled()
@@ -489,8 +472,7 @@ namespace System.Activities
 
             if (!this.CurrentInstance.IsCancellationRequested)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new InvalidOperationException(SR.MarkCanceledOnlyCallableIfCancelRequested)
                     );
@@ -609,8 +591,7 @@ namespace System.Activities
                 }
                 else
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .Argument(
                             "onCompleted",
                             SR.InvalidExecutionCallback(onCompleted, this.Activity.ToString())
@@ -629,8 +610,7 @@ namespace System.Activities
                 }
                 else
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .Argument(
                             "onFaulted",
                             SR.InvalidExecutionCallback(onFaulted, this.Activity.ToString())
@@ -651,8 +631,7 @@ namespace System.Activities
 
             if (!activity.IsMetadataCached || activity.CacheId != parent.Activity.CacheId)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .Argument(
                         "activity",
                         SR.ActivityNotPartOfThisTree(
@@ -664,8 +643,7 @@ namespace System.Activities
 
             if (!activity.CanBeScheduledBy(parent.Activity))
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new InvalidOperationException(
                             SR.CanOnlyScheduleDirectChildren(
@@ -679,8 +657,7 @@ namespace System.Activities
 
             if (activity.HandlerOf != null)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new InvalidOperationException(
                             SR.DelegateHandlersCannotBeScheduledDirectly(
@@ -693,8 +670,7 @@ namespace System.Activities
 
             if (parent.WaitingForTransactionContext)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new InvalidOperationException(
                             SR.CannotScheduleChildrenWhileEnteringIsolation
@@ -738,8 +714,7 @@ namespace System.Activities
 
             if (onCompleted != null && !CallbackWrapper.IsValidCallback(onCompleted, parent))
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .Argument(
                         "onCompleted",
                         SR.InvalidExecutionCallback(onCompleted, parent.Activity.ToString())
@@ -748,8 +723,7 @@ namespace System.Activities
 
             if (onFaulted != null && !CallbackWrapper.IsValidCallback(onFaulted, parent))
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .Argument(
                         "onFaulted",
                         SR.InvalidExecutionCallback(onFaulted, parent.Activity.ToString())
@@ -792,8 +766,7 @@ namespace System.Activities
 
             if (onCompleted != null && !CallbackWrapper.IsValidCallback(onCompleted, parent))
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .Argument(
                         "onCompleted",
                         SR.InvalidExecutionCallback(onCompleted, parent.Activity.ToString())
@@ -802,8 +775,7 @@ namespace System.Activities
 
             if (onFaulted != null && !CallbackWrapper.IsValidCallback(onFaulted, parent))
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .Argument(
                         "onFaulted",
                         SR.InvalidExecutionCallback(onFaulted, parent.Activity.ToString())
@@ -852,8 +824,7 @@ namespace System.Activities
 
             if (onCompleted != null && !CallbackWrapper.IsValidCallback(onCompleted, parent))
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .Argument(
                         "onCompleted",
                         SR.InvalidExecutionCallback(onCompleted, parent.Activity.ToString())
@@ -862,8 +833,7 @@ namespace System.Activities
 
             if (onFaulted != null && !CallbackWrapper.IsValidCallback(onFaulted, parent))
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .Argument(
                         "onFaulted",
                         SR.InvalidExecutionCallback(onFaulted, parent.Activity.ToString())
@@ -914,8 +884,7 @@ namespace System.Activities
 
             if (onCompleted != null && !CallbackWrapper.IsValidCallback(onCompleted, parent))
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .Argument(
                         "onCompleted",
                         SR.InvalidExecutionCallback(onCompleted, parent.Activity.ToString())
@@ -924,8 +893,7 @@ namespace System.Activities
 
             if (onFaulted != null && !CallbackWrapper.IsValidCallback(onFaulted, parent))
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .Argument(
                         "onFaulted",
                         SR.InvalidExecutionCallback(onFaulted, parent.Activity.ToString())
@@ -978,8 +946,7 @@ namespace System.Activities
 
             if (onCompleted != null && !CallbackWrapper.IsValidCallback(onCompleted, parent))
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .Argument(
                         "onCompleted",
                         SR.InvalidExecutionCallback(onCompleted, parent.Activity.ToString())
@@ -988,8 +955,7 @@ namespace System.Activities
 
             if (onFaulted != null && !CallbackWrapper.IsValidCallback(onFaulted, parent))
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .Argument(
                         "onFaulted",
                         SR.InvalidExecutionCallback(onFaulted, parent.Activity.ToString())
@@ -1044,8 +1010,7 @@ namespace System.Activities
 
             if (onCompleted != null && !CallbackWrapper.IsValidCallback(onCompleted, parent))
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .Argument(
                         "onCompleted",
                         SR.InvalidExecutionCallback(onCompleted, parent.Activity.ToString())
@@ -1054,8 +1019,7 @@ namespace System.Activities
 
             if (onFaulted != null && !CallbackWrapper.IsValidCallback(onFaulted, parent))
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .Argument(
                         "onFaulted",
                         SR.InvalidExecutionCallback(onFaulted, parent.Activity.ToString())
@@ -1112,8 +1076,7 @@ namespace System.Activities
 
             if (onCompleted != null && !CallbackWrapper.IsValidCallback(onCompleted, parent))
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .Argument(
                         "onCompleted",
                         SR.InvalidExecutionCallback(onCompleted, parent.Activity.ToString())
@@ -1122,8 +1085,7 @@ namespace System.Activities
 
             if (onFaulted != null && !CallbackWrapper.IsValidCallback(onFaulted, parent))
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .Argument(
                         "onFaulted",
                         SR.InvalidExecutionCallback(onFaulted, parent.Activity.ToString())
@@ -1182,8 +1144,7 @@ namespace System.Activities
 
             if (onCompleted != null && !CallbackWrapper.IsValidCallback(onCompleted, parent))
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .Argument(
                         "onCompleted",
                         SR.InvalidExecutionCallback(onCompleted, parent.Activity.ToString())
@@ -1192,8 +1153,7 @@ namespace System.Activities
 
             if (onFaulted != null && !CallbackWrapper.IsValidCallback(onFaulted, parent))
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .Argument(
                         "onFaulted",
                         SR.InvalidExecutionCallback(onFaulted, parent.Activity.ToString())
@@ -1254,8 +1214,7 @@ namespace System.Activities
 
             if (onCompleted != null && !CallbackWrapper.IsValidCallback(onCompleted, parent))
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .Argument(
                         "onCompleted",
                         SR.InvalidExecutionCallback(onCompleted, parent.Activity.ToString())
@@ -1264,8 +1223,7 @@ namespace System.Activities
 
             if (onFaulted != null && !CallbackWrapper.IsValidCallback(onFaulted, parent))
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .Argument(
                         "onFaulted",
                         SR.InvalidExecutionCallback(onFaulted, parent.Activity.ToString())
@@ -1328,8 +1286,7 @@ namespace System.Activities
 
             if (onCompleted != null && !CallbackWrapper.IsValidCallback(onCompleted, parent))
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .Argument(
                         "onCompleted",
                         SR.InvalidExecutionCallback(onCompleted, parent.Activity.ToString())
@@ -1338,8 +1295,7 @@ namespace System.Activities
 
             if (onFaulted != null && !CallbackWrapper.IsValidCallback(onFaulted, parent))
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .Argument(
                         "onFaulted",
                         SR.InvalidExecutionCallback(onFaulted, parent.Activity.ToString())
@@ -1404,8 +1360,7 @@ namespace System.Activities
 
             if (onCompleted != null && !CallbackWrapper.IsValidCallback(onCompleted, parent))
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .Argument(
                         "onCompleted",
                         SR.InvalidExecutionCallback(onCompleted, parent.Activity.ToString())
@@ -1414,8 +1369,7 @@ namespace System.Activities
 
             if (onFaulted != null && !CallbackWrapper.IsValidCallback(onFaulted, parent))
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .Argument(
                         "onFaulted",
                         SR.InvalidExecutionCallback(onFaulted, parent.Activity.ToString())
@@ -1482,8 +1436,7 @@ namespace System.Activities
 
             if (onCompleted != null && !CallbackWrapper.IsValidCallback(onCompleted, parent))
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .Argument(
                         "onCompleted",
                         SR.InvalidExecutionCallback(onCompleted, parent.Activity.ToString())
@@ -1492,8 +1445,7 @@ namespace System.Activities
 
             if (onFaulted != null && !CallbackWrapper.IsValidCallback(onFaulted, parent))
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .Argument(
                         "onFaulted",
                         SR.InvalidExecutionCallback(onFaulted, parent.Activity.ToString())
@@ -1562,8 +1514,7 @@ namespace System.Activities
 
             if (onCompleted != null && !CallbackWrapper.IsValidCallback(onCompleted, parent))
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .Argument(
                         "onCompleted",
                         SR.InvalidExecutionCallback(onCompleted, parent.Activity.ToString())
@@ -1572,8 +1523,7 @@ namespace System.Activities
 
             if (onFaulted != null && !CallbackWrapper.IsValidCallback(onFaulted, parent))
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .Argument(
                         "onFaulted",
                         SR.InvalidExecutionCallback(onFaulted, parent.Activity.ToString())
@@ -1658,8 +1608,7 @@ namespace System.Activities
 
             if (onCompleted != null && !CallbackWrapper.IsValidCallback(onCompleted, parent))
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .Argument(
                         "onCompleted",
                         SR.InvalidExecutionCallback(onCompleted, parent.Activity.ToString())
@@ -1668,8 +1617,7 @@ namespace System.Activities
 
             if (onFaulted != null && !CallbackWrapper.IsValidCallback(onFaulted, parent))
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .Argument(
                         "onFaulted",
                         SR.InvalidExecutionCallback(onFaulted, parent.Activity.ToString())
@@ -1772,8 +1720,7 @@ namespace System.Activities
 
             if (onCompleted != null && !CallbackWrapper.IsValidCallback(onCompleted, parent))
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .Argument(
                         "onCompleted",
                         SR.InvalidExecutionCallback(onCompleted, parent.Activity.ToString())
@@ -1782,8 +1729,7 @@ namespace System.Activities
 
             if (onFaulted != null && !CallbackWrapper.IsValidCallback(onFaulted, parent))
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .Argument(
                         "onFaulted",
                         SR.InvalidExecutionCallback(onFaulted, parent.Activity.ToString())
@@ -1890,8 +1836,7 @@ namespace System.Activities
 
             if (onCompleted != null && !CallbackWrapper.IsValidCallback(onCompleted, parent))
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .Argument(
                         "onCompleted",
                         SR.InvalidExecutionCallback(onCompleted, parent.Activity.ToString())
@@ -1900,8 +1845,7 @@ namespace System.Activities
 
             if (onFaulted != null && !CallbackWrapper.IsValidCallback(onFaulted, parent))
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .Argument(
                         "onFaulted",
                         SR.InvalidExecutionCallback(onFaulted, parent.Activity.ToString())
@@ -2012,8 +1956,7 @@ namespace System.Activities
 
             if (onCompleted != null && !CallbackWrapper.IsValidCallback(onCompleted, parent))
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .Argument(
                         "onCompleted",
                         SR.InvalidExecutionCallback(onCompleted, parent.Activity.ToString())
@@ -2022,8 +1965,7 @@ namespace System.Activities
 
             if (onFaulted != null && !CallbackWrapper.IsValidCallback(onFaulted, parent))
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .Argument(
                         "onFaulted",
                         SR.InvalidExecutionCallback(onFaulted, parent.Activity.ToString())
@@ -2085,8 +2027,7 @@ namespace System.Activities
 
             if (onCompleted != null && !CallbackWrapper.IsValidCallback(onCompleted, parent))
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .Argument(
                         "onCompleted",
                         SR.InvalidExecutionCallback(onCompleted, parent.Activity.ToString())
@@ -2095,8 +2036,7 @@ namespace System.Activities
 
             if (onFaulted != null && !CallbackWrapper.IsValidCallback(onFaulted, parent))
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .Argument(
                         "onFaulted",
                         SR.InvalidExecutionCallback(onFaulted, parent.Activity.ToString())
@@ -2137,8 +2077,7 @@ namespace System.Activities
 
             if (onCompleted != null && !CallbackWrapper.IsValidCallback(onCompleted, parent))
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .Argument(
                         "onCompleted",
                         SR.InvalidExecutionCallback(onCompleted, parent.Activity.ToString())
@@ -2147,8 +2086,7 @@ namespace System.Activities
 
             if (onFaulted != null && !CallbackWrapper.IsValidCallback(onFaulted, parent))
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .Argument(
                         "onFaulted",
                         SR.InvalidExecutionCallback(onFaulted, parent.Activity.ToString())
@@ -2191,8 +2129,7 @@ namespace System.Activities
 
             if (onCompleted != null && !CallbackWrapper.IsValidCallback(onCompleted, parent))
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .Argument(
                         "onCompleted",
                         SR.InvalidExecutionCallback(onCompleted, parent.Activity.ToString())
@@ -2201,8 +2138,7 @@ namespace System.Activities
 
             if (onFaulted != null && !CallbackWrapper.IsValidCallback(onFaulted, parent))
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .Argument(
                         "onFaulted",
                         SR.InvalidExecutionCallback(onFaulted, parent.Activity.ToString())
@@ -2251,8 +2187,7 @@ namespace System.Activities
 
             if (onCompleted != null && !CallbackWrapper.IsValidCallback(onCompleted, parent))
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .Argument(
                         "onCompleted",
                         SR.InvalidExecutionCallback(onCompleted, parent.Activity.ToString())
@@ -2261,8 +2196,7 @@ namespace System.Activities
 
             if (onFaulted != null && !CallbackWrapper.IsValidCallback(onFaulted, parent))
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .Argument(
                         "onFaulted",
                         SR.InvalidExecutionCallback(onFaulted, parent.Activity.ToString())
@@ -2313,8 +2247,7 @@ namespace System.Activities
 
             if (onCompleted != null && !CallbackWrapper.IsValidCallback(onCompleted, parent))
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .Argument(
                         "onCompleted",
                         SR.InvalidExecutionCallback(onCompleted, parent.Activity.ToString())
@@ -2323,8 +2256,7 @@ namespace System.Activities
 
             if (onFaulted != null && !CallbackWrapper.IsValidCallback(onFaulted, parent))
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .Argument(
                         "onFaulted",
                         SR.InvalidExecutionCallback(onFaulted, parent.Activity.ToString())
@@ -2377,8 +2309,7 @@ namespace System.Activities
 
             if (onCompleted != null && !CallbackWrapper.IsValidCallback(onCompleted, parent))
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .Argument(
                         "onCompleted",
                         SR.InvalidExecutionCallback(onCompleted, parent.Activity.ToString())
@@ -2387,8 +2318,7 @@ namespace System.Activities
 
             if (onFaulted != null && !CallbackWrapper.IsValidCallback(onFaulted, parent))
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .Argument(
                         "onFaulted",
                         SR.InvalidExecutionCallback(onFaulted, parent.Activity.ToString())
@@ -2443,8 +2373,7 @@ namespace System.Activities
 
             if (onCompleted != null && !CallbackWrapper.IsValidCallback(onCompleted, parent))
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .Argument(
                         "onCompleted",
                         SR.InvalidExecutionCallback(onCompleted, parent.Activity.ToString())
@@ -2453,8 +2382,7 @@ namespace System.Activities
 
             if (onFaulted != null && !CallbackWrapper.IsValidCallback(onFaulted, parent))
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .Argument(
                         "onFaulted",
                         SR.InvalidExecutionCallback(onFaulted, parent.Activity.ToString())
@@ -2511,8 +2439,7 @@ namespace System.Activities
 
             if (onCompleted != null && !CallbackWrapper.IsValidCallback(onCompleted, parent))
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .Argument(
                         "onCompleted",
                         SR.InvalidExecutionCallback(onCompleted, parent.Activity.ToString())
@@ -2521,8 +2448,7 @@ namespace System.Activities
 
             if (onFaulted != null && !CallbackWrapper.IsValidCallback(onFaulted, parent))
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .Argument(
                         "onFaulted",
                         SR.InvalidExecutionCallback(onFaulted, parent.Activity.ToString())
@@ -2581,8 +2507,7 @@ namespace System.Activities
 
             if (onCompleted != null && !CallbackWrapper.IsValidCallback(onCompleted, parent))
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .Argument(
                         "onCompleted",
                         SR.InvalidExecutionCallback(onCompleted, parent.Activity.ToString())
@@ -2591,8 +2516,7 @@ namespace System.Activities
 
             if (onFaulted != null && !CallbackWrapper.IsValidCallback(onFaulted, parent))
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .Argument(
                         "onFaulted",
                         SR.InvalidExecutionCallback(onFaulted, parent.Activity.ToString())
@@ -2653,8 +2577,7 @@ namespace System.Activities
 
             if (onCompleted != null && !CallbackWrapper.IsValidCallback(onCompleted, parent))
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .Argument(
                         "onCompleted",
                         SR.InvalidExecutionCallback(onCompleted, parent.Activity.ToString())
@@ -2663,8 +2586,7 @@ namespace System.Activities
 
             if (onFaulted != null && !CallbackWrapper.IsValidCallback(onFaulted, parent))
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .Argument(
                         "onFaulted",
                         SR.InvalidExecutionCallback(onFaulted, parent.Activity.ToString())
@@ -2727,8 +2649,7 @@ namespace System.Activities
 
             if (onCompleted != null && !CallbackWrapper.IsValidCallback(onCompleted, parent))
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .Argument(
                         "onCompleted",
                         SR.InvalidExecutionCallback(onCompleted, parent.Activity.ToString())
@@ -2737,8 +2658,7 @@ namespace System.Activities
 
             if (onFaulted != null && !CallbackWrapper.IsValidCallback(onFaulted, parent))
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .Argument(
                         "onFaulted",
                         SR.InvalidExecutionCallback(onFaulted, parent.Activity.ToString())
@@ -2803,8 +2723,7 @@ namespace System.Activities
 
             if (onCompleted != null && !CallbackWrapper.IsValidCallback(onCompleted, parent))
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .Argument(
                         "onCompleted",
                         SR.InvalidExecutionCallback(onCompleted, parent.Activity.ToString())
@@ -2813,8 +2732,7 @@ namespace System.Activities
 
             if (onFaulted != null && !CallbackWrapper.IsValidCallback(onFaulted, parent))
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .Argument(
                         "onFaulted",
                         SR.InvalidExecutionCallback(onFaulted, parent.Activity.ToString())
@@ -2881,8 +2799,7 @@ namespace System.Activities
 
             if (onCompleted != null && !CallbackWrapper.IsValidCallback(onCompleted, parent))
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .Argument(
                         "onCompleted",
                         SR.InvalidExecutionCallback(onCompleted, parent.Activity.ToString())
@@ -2891,8 +2808,7 @@ namespace System.Activities
 
             if (onFaulted != null && !CallbackWrapper.IsValidCallback(onFaulted, parent))
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .Argument(
                         "onFaulted",
                         SR.InvalidExecutionCallback(onFaulted, parent.Activity.ToString())
@@ -2975,8 +2891,7 @@ namespace System.Activities
 
             if (onCompleted != null && !CallbackWrapper.IsValidCallback(onCompleted, parent))
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .Argument(
                         "onCompleted",
                         SR.InvalidExecutionCallback(onCompleted, parent.Activity.ToString())
@@ -2985,8 +2900,7 @@ namespace System.Activities
 
             if (onFaulted != null && !CallbackWrapper.IsValidCallback(onFaulted, parent))
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .Argument(
                         "onFaulted",
                         SR.InvalidExecutionCallback(onFaulted, parent.Activity.ToString())
@@ -3087,8 +3001,7 @@ namespace System.Activities
 
             if (onCompleted != null && !CallbackWrapper.IsValidCallback(onCompleted, parent))
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .Argument(
                         "onCompleted",
                         SR.InvalidExecutionCallback(onCompleted, parent.Activity.ToString())
@@ -3097,8 +3010,7 @@ namespace System.Activities
 
             if (onFaulted != null && !CallbackWrapper.IsValidCallback(onFaulted, parent))
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .Argument(
                         "onFaulted",
                         SR.InvalidExecutionCallback(onFaulted, parent.Activity.ToString())
@@ -3203,8 +3115,7 @@ namespace System.Activities
 
             if (onCompleted != null && !CallbackWrapper.IsValidCallback(onCompleted, parent))
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .Argument(
                         "onCompleted",
                         SR.InvalidExecutionCallback(onCompleted, parent.Activity.ToString())
@@ -3213,8 +3124,7 @@ namespace System.Activities
 
             if (onFaulted != null && !CallbackWrapper.IsValidCallback(onFaulted, parent))
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .Argument(
                         "onFaulted",
                         SR.InvalidExecutionCallback(onFaulted, parent.Activity.ToString())
@@ -3323,8 +3233,7 @@ namespace System.Activities
 
             if (onCompleted != null && !CallbackWrapper.IsValidCallback(onCompleted, parent))
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .Argument(
                         "onCompleted",
                         SR.InvalidExecutionCallback(onCompleted, parent.Activity.ToString())
@@ -3333,8 +3242,7 @@ namespace System.Activities
 
             if (onFaulted != null && !CallbackWrapper.IsValidCallback(onFaulted, parent))
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .Argument(
                         "onFaulted",
                         SR.InvalidExecutionCallback(onFaulted, parent.Activity.ToString())
@@ -3447,8 +3355,7 @@ namespace System.Activities
 
             if (onCompleted != null && !CallbackWrapper.IsValidCallback(onCompleted, parent))
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .Argument(
                         "onCompleted",
                         SR.InvalidExecutionCallback(onCompleted, parent.Activity.ToString())
@@ -3457,8 +3364,7 @@ namespace System.Activities
 
             if (onFaulted != null && !CallbackWrapper.IsValidCallback(onFaulted, parent))
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .Argument(
                         "onFaulted",
                         SR.InvalidExecutionCallback(onFaulted, parent.Activity.ToString())
@@ -3516,8 +3422,7 @@ namespace System.Activities
 
             if (onCompleted != null && !CallbackWrapper.IsValidCallback(onCompleted, parent))
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .Argument(
                         "onCompleted",
                         SR.InvalidExecutionCallback(onCompleted, parent.Activity.ToString())
@@ -3526,8 +3431,7 @@ namespace System.Activities
 
             if (onFaulted != null && !CallbackWrapper.IsValidCallback(onFaulted, parent))
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .Argument(
                         "onFaulted",
                         SR.InvalidExecutionCallback(onFaulted, parent.Activity.ToString())
@@ -3535,17 +3439,16 @@ namespace System.Activities
             }
 
             // Check if the inputParameters collection matches the expected inputs for activityDelegate
-            IEnumerable<RuntimeDelegateArgument> expectedParameters = activityDelegate
-                .RuntimeDelegateArguments
-                .Where(p => ArgumentDirectionHelper.IsIn(p.Direction));
+            IEnumerable<RuntimeDelegateArgument> expectedParameters =
+                activityDelegate.RuntimeDelegateArguments
+                    .Where(p => ArgumentDirectionHelper.IsIn(p.Direction));
             int expectedParameterCount = expectedParameters.Count();
             if (
                 (inputParameters == null && expectedParameterCount > 0)
                 || (inputParameters != null && inputParameters.Count != expectedParameterCount)
             )
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .Argument(
                         "inputParameters",
                         SR.InputParametersCountMismatch(
@@ -3569,8 +3472,7 @@ namespace System.Activities
                             )
                         )
                         {
-                            throw FxTrace
-                                .Exception
+                            throw FxTrace.Exception
                                 .Argument(
                                     "inputParameters",
                                     SR.InputParametersTypeMismatch(
@@ -3582,8 +3484,7 @@ namespace System.Activities
                     }
                     else
                     {
-                        throw FxTrace
-                            .Exception
+                        throw FxTrace.Exception
                             .Argument(
                                 "inputParameters",
                                 SR.InputParametersMissing(expectedParameter.Name)
@@ -3615,8 +3516,7 @@ namespace System.Activities
 
                 if (!activity.IsMetadataCached || activity.CacheId != parent.Activity.CacheId)
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .Argument(
                             "activity",
                             SR.ActivityNotPartOfThisTree(
@@ -3629,8 +3529,7 @@ namespace System.Activities
 
             if (activityDelegate.Owner == null)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new InvalidOperationException(
                             SR.ActivityDelegateOwnerMissing(activityDelegate)
@@ -3640,8 +3539,7 @@ namespace System.Activities
 
             if (!activityDelegate.CanBeScheduledBy(parent.Activity))
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new InvalidOperationException(
                             SR.CanOnlyScheduleDirectChildren(
@@ -3655,8 +3553,7 @@ namespace System.Activities
 
             if (parent.WaitingForTransactionContext)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new InvalidOperationException(
                             SR.CannotScheduleChildrenWhileEnteringIsolation
@@ -3676,14 +3573,15 @@ namespace System.Activities
             }
 
             // Activity delegates execute in the environment of the declaring actvity and not the invoking activity.
-            return this.executor.ScheduleDelegate(
-                activityDelegate,
-                inputParameters,
-                parent,
-                declaringActivityInstance.Environment,
-                completionBookmark,
-                faultBookmark
-            );
+            return this.executor
+                .ScheduleDelegate(
+                    activityDelegate,
+                    inputParameters,
+                    parent,
+                    declaringActivityInstance.Environment,
+                    completionBookmark,
+                    faultBookmark
+                );
         }
 
         internal void EnterNoPersist(NoPersistHandle handle)
@@ -3744,8 +3642,7 @@ namespace System.Activities
 
             if (property == null)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(new InvalidOperationException(SR.UnmatchedNoPersistExit));
             }
 
@@ -3762,13 +3659,14 @@ namespace System.Activities
             object state
         )
         {
-            this.executor.RequestTransactionContext(
-                this.CurrentInstance,
-                isRequires,
-                handle,
-                callback,
-                state
-            );
+            this.executor
+                .RequestTransactionContext(
+                    this.CurrentInstance,
+                    isRequires,
+                    handle,
+                    callback,
+                    state
+                );
         }
 
         internal void CompleteTransaction(
@@ -3820,8 +3718,7 @@ namespace System.Activities
             Activity associatedActivity = this.Activity;
             if (!associatedActivity.InternalCanInduceIdle)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new InvalidOperationException(
                             SR.CanInduceIdleNotSpecified(associatedActivity.GetType().FullName)

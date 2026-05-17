@@ -91,8 +91,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     // '/// <param': ' ' token preceding '<' owns '///' trivia
                     var startLessThanToken = paramElement.StartTag.LessThanToken;
                     if (
-                        !startLessThanToken
-                            .LeadingTrivia
+                        !startLessThanToken.LeadingTrivia
                             .Any(SyntaxKind.DocumentationCommentExteriorTrivia)
                     )
                     {

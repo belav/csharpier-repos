@@ -114,8 +114,7 @@ namespace System.Text.RegularExpressions
                         Match match
                     ) =>
                     {
-                        state
-                            .results
+                        state.results
                             .Add(state.input.Substring(state.prevat, match.Index - state.prevat));
                         state.prevat = match.Index + match.Length;
 
@@ -154,11 +153,9 @@ namespace System.Text.RegularExpressions
                         Match match
                     ) =>
                     {
-                        state
-                            .results
+                        state.results
                             .Add(
-                                state
-                                    .input
+                                state.input
                                     .Substring(
                                         match.Index + match.Length,
                                         state.prevat - match.Index - match.Length

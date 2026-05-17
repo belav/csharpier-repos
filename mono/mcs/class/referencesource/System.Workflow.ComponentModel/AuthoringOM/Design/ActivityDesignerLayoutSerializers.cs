@@ -545,8 +545,7 @@ namespace System.Workflow.ComponentModel.Design
                     if (colorValue.StartsWith("0X", StringComparison.OrdinalIgnoreCase))
                     {
                         long propertyValue = Convert.ToInt64((string)value, 16) & 0xFFFFFFFF;
-                        return System
-                            .Drawing
+                        return System.Drawing
                             .Color
                             .FromArgb(
                                 (Byte)(propertyValue >> 24),

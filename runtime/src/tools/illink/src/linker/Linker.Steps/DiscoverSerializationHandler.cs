@@ -119,12 +119,10 @@ namespace Mono.Linker.Steps
                 return;
 
             if (serializedFor.HasFlag(SerializerKind.DataContractSerializer))
-                Context
-                    .SerializationMarker
+                Context.SerializationMarker
                     .TrackForSerialization(provider, SerializerKind.DataContractSerializer);
             if (serializedFor.HasFlag(SerializerKind.XmlSerializer))
-                Context
-                    .SerializationMarker
+                Context.SerializationMarker
                     .TrackForSerialization(provider, SerializerKind.XmlSerializer);
         }
 

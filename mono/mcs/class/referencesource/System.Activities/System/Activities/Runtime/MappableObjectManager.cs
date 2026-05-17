@@ -80,9 +80,8 @@ namespace System.Activities.Runtime
                 this.mappableLocations = new List<MappableLocation>();
             }
 
-            this.mappableLocations.Add(
-                new MappableLocation(locationOwner, activity, activityInstance, location)
-            );
+            this.mappableLocations
+                .Add(new MappableLocation(locationOwner, activity, activityInstance, location));
         }
 
         public void Unregister(Location location)

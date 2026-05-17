@@ -53,8 +53,7 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation
             DkmCompletionRoutine<DkmGetChildrenAsyncResult> completionRoutine
         )
         {
-            InspectionContext
-                .InspectionSession
+            InspectionContext.InspectionSession
                 .InvokeResultProvider(
                     this,
                     MethodId.GetChildren,
@@ -74,8 +73,7 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation
 
         public string GetUnderlyingString()
         {
-            return InspectionContext
-                .InspectionSession
+            return InspectionContext.InspectionSession
                 .InvokeResultProvider(
                     this,
                     MethodId.GetUnderlyingString,

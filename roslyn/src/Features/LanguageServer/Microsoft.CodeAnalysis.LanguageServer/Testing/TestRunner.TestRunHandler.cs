@@ -169,8 +169,7 @@ internal partial class TestRunner
                 return string.Empty;
             }
 
-            var results = testRunChangedEventArgs
-                .NewTestResults
+            var results = testRunChangedEventArgs.NewTestResults
                 .Select(result =>
                 {
                     var messageBuilder = new StringBuilder();

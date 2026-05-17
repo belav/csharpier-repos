@@ -100,8 +100,7 @@ namespace Microsoft.CodeAnalysis.Formatting
 
                 if (selectionOpt.HasValue)
                 {
-                    var ruleFactory = document
-                        .Project
+                    var ruleFactory = document.Project
                         .Solution
                         .Services
                         .GetRequiredService<IHostDependentFormattingRuleFactoryService>();
@@ -176,8 +175,7 @@ namespace Microsoft.CodeAnalysis.Formatting
                 return;
             }
 
-            var document = subjectBuffer
-                .CurrentSnapshot
+            var document = subjectBuffer.CurrentSnapshot
                 .GetOpenDocumentInCurrentContextWithChanges();
             if (document == null)
             {
@@ -258,11 +256,9 @@ namespace Microsoft.CodeAnalysis.Formatting
 
             var snapshotAfterFormatting = subjectBuffer.CurrentSnapshot;
 
-            var oldCaretPosition = caretPosition
-                .Value
+            var oldCaretPosition = caretPosition.Value
                 .TranslateTo(snapshotAfterFormatting, PointTrackingMode.Negative);
-            var newCaretPosition = newCaretPositionMarker
-                .Value
+            var newCaretPosition = newCaretPositionMarker.Value
                 .TranslateTo(snapshotAfterFormatting, PointTrackingMode.Negative);
             if (oldCaretPosition.Position == newCaretPosition.Position)
             {

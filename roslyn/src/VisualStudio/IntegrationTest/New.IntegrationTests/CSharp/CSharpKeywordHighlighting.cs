@@ -118,8 +118,7 @@ class C
         )
         {
             await TestServices.Editor.PlaceCaretAsync(marker, charsOffset: -1, cancellationToken);
-            await TestServices
-                .Workspace
+            await TestServices.Workspace
                 .WaitForAllAsyncOperationsAsync(
                     [
                         FeatureAttribute.Workspace,

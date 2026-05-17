@@ -525,10 +525,11 @@ namespace System.Collections.Immutable.Tests
                 "_root"
             );
             DebuggerAttributes.ValidateDebuggerDisplayReferences(rootNode);
-            PropertyInfo itemProperty = info.Properties.Single(pr =>
-                pr.GetCustomAttribute<DebuggerBrowsableAttribute>().State
-                == DebuggerBrowsableState.RootHidden
-            );
+            PropertyInfo itemProperty = info.Properties
+                .Single(pr =>
+                    pr.GetCustomAttribute<DebuggerBrowsableAttribute>().State
+                    == DebuggerBrowsableState.RootHidden
+                );
             KeyValuePair<int, int>[] items =
                 itemProperty.GetValue(info.Instance) as KeyValuePair<int, int>[];
             Assert.Equal(dict, items);
@@ -625,8 +626,7 @@ namespace System.Collections.Immutable.Tests
             IEqualityComparer<TValue> valueComparer = null
         )
         {
-            return ImmutableSortedDictionary<TKey, TValue>
-                .Empty
+            return ImmutableSortedDictionary<TKey, TValue>.Empty
                 .WithComparers(keyComparer, valueComparer);
         }
     }

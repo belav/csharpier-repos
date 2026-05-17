@@ -181,8 +181,7 @@ internal class Endpoint
         // Resolve LineSpan associated with the name span so we can resolve the line and character number.
         var lineSpan = operation.Syntax.SyntaxTree.GetLineSpan(invocationNameSpan);
         // Resolve the filepath of the invocation while accounting for source mapped paths.
-        var filePath = operation
-            .Syntax
+        var filePath = operation.Syntax
             .SyntaxTree
             .GetInterceptorFilePath(
                 operation.SemanticModel?.Compilation.Options.SourceReferenceResolver

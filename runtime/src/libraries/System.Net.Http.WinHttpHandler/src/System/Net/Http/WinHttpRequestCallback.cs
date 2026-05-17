@@ -171,8 +171,7 @@ namespace System.Net.Http
                 && state.CurrentBytesRead < state.ExpectedBytesToRead.Value
             )
             {
-                state
-                    .LifecycleAwaitable
+                state.LifecycleAwaitable
                     .SetException(
                         new IOException(
                             SR.Format(
@@ -290,8 +289,7 @@ namespace System.Net.Http
                 uint certHandleSize = (uint)IntPtr.Size;
 
                 if (
-                    !Interop
-                        .WinHttp
+                    !Interop.WinHttp
                         .WinHttpQueryOption(
                             state.RequestHandle,
                             Interop.WinHttp.WINHTTP_OPTION_SERVER_CERT_CONTEXT,
@@ -449,8 +447,7 @@ namespace System.Net.Http
                     }
                     else
                     {
-                        state
-                            .LifecycleAwaitable
+                        state.LifecycleAwaitable
                             .SetException(new IOException(SR.net_http_io_read, innerException));
                     }
                     break;
@@ -467,8 +464,7 @@ namespace System.Net.Http
                     }
                     else
                     {
-                        state
-                            .LifecycleAwaitable
+                        state.LifecycleAwaitable
                             .SetException(new IOException(SR.net_http_io_read, innerException));
                     }
                     break;
@@ -486,8 +482,7 @@ namespace System.Net.Http
                     }
                     else
                     {
-                        state
-                            .TcsInternalWriteDataToRequestStream
+                        state.TcsInternalWriteDataToRequestStream
                             .TrySetException(new IOException(SR.net_http_io_write, innerException));
                     }
                     break;
@@ -509,8 +504,7 @@ namespace System.Net.Http
 
             // Clear auth headers.
             if (
-                !Interop
-                    .WinHttp
+                !Interop.WinHttp
                     .WinHttpAddRequestHeaders(
                         requestHandle,
                         AuthHeaderNameWithColon,

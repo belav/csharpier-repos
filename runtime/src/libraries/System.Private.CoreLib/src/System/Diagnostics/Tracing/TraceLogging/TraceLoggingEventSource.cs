@@ -510,8 +510,7 @@ namespace System.Diagnostics.Tracing
 
                 try
                 {
-                    DataCollector
-                        .ThreadInstance
+                    DataCollector.ThreadInstance
                         .Enable(
                             scratch,
                             eventTypes.scratchSize,
@@ -758,8 +757,7 @@ namespace System.Diagnostics.Tracing
 
                         try
                         {
-                            DataCollector
-                                .ThreadInstance
+                            DataCollector.ThreadInstance
                                 .Enable(
                                     scratch,
                                     eventTypes.scratchSize,

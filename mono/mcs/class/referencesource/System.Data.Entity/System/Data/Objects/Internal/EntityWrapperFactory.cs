@@ -320,8 +320,7 @@ namespace System.Data.Objects.Internal
                 if (stateManager.TransactionManager.TrackProcessedEntities)
                 {
                     if (
-                        stateManager
-                            .TransactionManager
+                        stateManager.TransactionManager
                             .WrappedEntities
                             .TryGetValue(entity, out wrapper)
                     )
@@ -383,8 +382,7 @@ namespace System.Data.Objects.Internal
         {
             if (wrapper.EntityKey == null)
             {
-                wrapper.EntityKey = context
-                    .ObjectStateManager
+                wrapper.EntityKey = context.ObjectStateManager
                     .CreateEntityKey(entitySet, wrapper.Entity);
             }
             if (wrapper.Context == null)

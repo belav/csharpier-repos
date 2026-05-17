@@ -28,8 +28,7 @@ namespace Internal.TypeSystem
                     .InstantiateSignature(this.Instantiation, default(Instantiation));
                 if (implTypeInstantiated is InstantiatedType)
                 {
-                    decl = _typeDef
-                        .Context
+                    decl = _typeDef.Context
                         .GetMethodForInstantiatedType(
                             uninstMethodImpls[i].Decl.GetTypicalMethodDefinition(),
                             (InstantiatedType)implTypeInstantiated
@@ -40,8 +39,7 @@ namespace Internal.TypeSystem
                     decl = uninstMethodImpls[i].Decl;
                 }
 
-                MethodDesc body = _typeDef
-                    .Context
+                MethodDesc body = _typeDef.Context
                     .GetMethodForInstantiatedType(uninstMethodImpls[i].Body, this);
                 instMethodImpls[i] = new MethodImplRecord(decl, body);
             }

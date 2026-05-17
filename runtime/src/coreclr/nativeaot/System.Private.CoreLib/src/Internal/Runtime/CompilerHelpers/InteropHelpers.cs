@@ -369,8 +369,7 @@ namespace Internal.Runtime.CompilerHelpers
                     & ~InteropDataConstants.HasDllImportSearchPath;
             }
 
-            Assembly callingAssembly = ReflectionAugments
-                .ReflectionCoreCallbacks
+            Assembly callingAssembly = ReflectionAugments.ReflectionCoreCallbacks
                 .GetAssemblyForHandle(new RuntimeTypeHandle(pCell->CallingAssemblyType));
 
             // First check if there's a NativeLibrary callback and call it to attempt the resolution
@@ -472,8 +471,7 @@ namespace Internal.Runtime.CompilerHelpers
 #endif
             if (pTarget == IntPtr.Zero)
             {
-                string entryPointName = Encoding
-                    .UTF8
+                string entryPointName = Encoding.UTF8
                     .GetString(methodName, string.strlen(methodName));
                 throw new EntryPointNotFoundException(
                     SR.Format(
@@ -709,8 +707,7 @@ namespace Internal.Runtime.CompilerHelpers
                 throw new ApplicationException();
             }
 
-            var marshaller = CustomMarshallerTable
-                .s_customMarshallersTable
+            var marshaller = CustomMarshallerTable.s_customMarshallersTable
                 .GetOrAdd(
                     new CustomMarshallerKey(
                         pParameterType,

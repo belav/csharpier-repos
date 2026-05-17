@@ -144,8 +144,7 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateVariable
 
             private ImmutableArray<SyntaxNode> GenerateStatements()
             {
-                var syntaxFactory = _semanticDocument
-                    .Project
+                var syntaxFactory = _semanticDocument.Project
                     .Solution
                     .Services
                     .GetLanguageServices(_state.TypeToGenerateIn.Language)
@@ -173,8 +172,7 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateVariable
 
                 // Otherwise, figure out what accessibility modifier to use and optionally mark
                 // it as static.
-                var syntaxFacts = _semanticDocument
-                    .Document
+                var syntaxFacts = _semanticDocument.Document
                     .GetLanguageService<ISyntaxFactsService>();
                 if (
                     syntaxFacts.IsAttributeNamedArgumentIdentifier(
@@ -209,8 +207,7 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateVariable
                     return Accessibility.Protected;
                 }
                 else if (
-                    state
-                        .ContainingType
+                    state.ContainingType
                         .ContainingAssembly
                         .IsSameAssemblyOrHasFriendAccessTo(
                             state.TypeToGenerateIn.ContainingAssembly

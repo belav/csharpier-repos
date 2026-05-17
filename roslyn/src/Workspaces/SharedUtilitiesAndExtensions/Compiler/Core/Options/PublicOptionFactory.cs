@@ -104,8 +104,7 @@ internal static class PublicOptionFactory
             option.Definition,
             option.LanguageName,
             publicOptionFactory: internalOption => new Option<TPublicValue>(
-                option
-                    .Definition
+                option.Definition
                     .ToPublicOptionDefinition(internalOption, toPublicValue, toInternalValue),
                 feature,
                 name,
@@ -123,8 +122,7 @@ internal static class PublicOptionFactory
         new(
             option.Definition,
             publicOptionFactory: internalOption => new PerLanguageOption<TPublicValue>(
-                option
-                    .Definition
+                option.Definition
                     .ToPublicOptionDefinition(internalOption, toPublicValue, toInternalValue),
                 feature,
                 name,

@@ -203,9 +203,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         )
         {
             NamedTypeSymbol? result;
-            NamespaceSymbol? scope = this.GlobalNamespace.LookupNestedNamespace(
-                emittedName.NamespaceSegmentsMemory
-            );
+            NamespaceSymbol? scope = this.GlobalNamespace
+                .LookupNestedNamespace(emittedName.NamespaceSegmentsMemory);
 
             if ((object?)scope == null)
             {

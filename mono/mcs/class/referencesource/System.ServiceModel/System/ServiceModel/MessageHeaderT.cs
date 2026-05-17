@@ -211,8 +211,7 @@ namespace System.ServiceModel
 
                 MessageHeader<T> header = typedHeaderInstance as MessageHeader<T>;
                 if (header == null)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new ArgumentException("typedHeaderInstance"));
                 mustUnderstand = header.MustUnderstand;
                 relay = header.Relay;

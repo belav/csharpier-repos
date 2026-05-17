@@ -16,8 +16,7 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
         public override async Task InitializeAsync()
         {
             await base.InitializeAsync();
-            await TestServices
-                .InteractiveWindow
+            await TestServices.InteractiveWindow
                 .SubmitTextAsync(
                     @"#r ""System.Windows.Forms""
 #r ""WindowsBase""
@@ -27,8 +26,7 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
                     HangMitigatingCancellationToken
                 );
 
-            await TestServices
-                .InteractiveWindow
+            await TestServices.InteractiveWindow
                 .SubmitTextAsync(
                     @"using System.Windows;
 using System.Windows.Forms;
@@ -41,8 +39,7 @@ using Wpf = System.Windows.Controls;",
         public async Task InteractiveWithDisplayFormAndWpfWindow()
         {
             // 1) Create and display form and WPF window
-            await TestServices
-                .InteractiveWindow
+            await TestServices.InteractiveWindow
                 .SubmitTextAsync(
                     @"Form form = new Form();
 form.Text = ""win form text"";
@@ -61,8 +58,7 @@ wind.Show();",
                 .WithCancellation(HangMitigatingCancellationToken);
 
             // 3) Add UI elements to windows and verify
-            await TestServices
-                .InteractiveWindow
+            await TestServices.InteractiveWindow
                 .SubmitTextAsync(
                     @"// add a label to the form
 Label l = new Label();
@@ -82,8 +78,7 @@ wind.Content = t;",
             Assert.Equal("wpf body text", wpfContent.CurrentName);
 
             // 4) Close windows
-            await TestServices
-                .InteractiveWindow
+            await TestServices.InteractiveWindow
                 .SubmitTextAsync(
                     @"form.Close();
 wind.Close();",

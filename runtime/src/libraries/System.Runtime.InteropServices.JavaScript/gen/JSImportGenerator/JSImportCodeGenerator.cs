@@ -55,8 +55,7 @@ namespace Microsoft.Interop.JavaScript
             diagnosticsBag.ReportGeneratorDiagnostics(bindingFailures);
 
             if (
-                _marshallers
-                    .ManagedReturnMarshaller
+                _marshallers.ManagedReturnMarshaller
                     .Generator
                     .UsesNativeIdentifier(_marshallers.ManagedReturnMarshaller.TypeInfo, null)
             )
@@ -78,8 +77,7 @@ namespace Microsoft.Interop.JavaScript
                 is JSMarshallingInfo(_, JSTaskTypeInfo)
             )
             {
-                BoundGenerator spanArg = _marshallers
-                    .SignatureMarshallers
+                BoundGenerator spanArg = _marshallers.SignatureMarshallers
                     .FirstOrDefault(m =>
                         m.TypeInfo.MarshallingAttributeInfo is JSMarshallingInfo(_, JSSpanTypeInfo)
                     );
@@ -270,8 +268,7 @@ namespace Microsoft.Interop.JavaScript
             var types = ((IJSMarshallingGenerator)_marshallers.ManagedReturnMarshaller.Generator)
                 .GenerateBind(_marshallers.ManagedReturnMarshaller.TypeInfo, _context)
                 .Concat(
-                    _marshallers
-                        .NativeParameterMarshallers
+                    _marshallers.NativeParameterMarshallers
                         .SelectMany(p =>
                             ((IJSMarshallingGenerator)p.Generator).GenerateBind(
                                 p.TypeInfo,
@@ -335,8 +332,7 @@ namespace Microsoft.Interop.JavaScript
                                                                         SyntaxKind.NumericLiteralExpression,
                                                                         Literal(
                                                                             2
-                                                                                + _marshallers
-                                                                                    .NativeParameterMarshallers
+                                                                                + _marshallers.NativeParameterMarshallers
                                                                                     .Length
                                                                         )
                                                                     )

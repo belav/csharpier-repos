@@ -1191,11 +1191,8 @@ namespace System.Web.UI.WebControls
                 if (page != null)
                 {
                     string eventArgument = absoluteDay.ToString(CultureInfo.InvariantCulture);
-                    selectUrl = Page.ClientScript.GetPostBackClientHyperlink(
-                        this,
-                        eventArgument,
-                        true
-                    );
+                    selectUrl = Page.ClientScript
+                        .GetPostBackClientHyperlink(this, eventArgument, true);
                 }
                 handler(this, new DayRenderEventArgs(cell, day, selectUrl));
             }
@@ -1273,8 +1270,7 @@ namespace System.Web.UI.WebControls
                         // is the default value of VisibleDate property, so we add a day to keep
                         // showing the first supported month.
                         // We assume the first supported month has more than one day.
-                        VisibleDate = DateTimeFormatInfo
-                            .CurrentInfo
+                        VisibleDate = DateTimeFormatInfo.CurrentInfo
                             .Calendar
                             .AddDays(VisibleDate, 1);
                     }
@@ -1998,8 +1994,7 @@ namespace System.Web.UI.WebControls
 
                     string prevMonthKey =
                         NAVIGATE_MONTH_COMMAND
-                        + (prevMonthDate.Subtract(baseDate))
-                            .Days
+                        + (prevMonthDate.Subtract(baseDate)).Days
                             .ToString(CultureInfo.InvariantCulture);
 
                     string previousMonthTitle = null;
@@ -2088,8 +2083,7 @@ namespace System.Web.UI.WebControls
                     DateTime nextMonthDate = threadCalendar.AddMonths(visibleDate, 1);
                     string nextMonthKey =
                         NAVIGATE_MONTH_COMMAND
-                        + (nextMonthDate.Subtract(baseDate))
-                            .Days
+                        + (nextMonthDate.Subtract(baseDate)).Days
                             .ToString(CultureInfo.InvariantCulture);
 
                     string nextMonthTitle = null;

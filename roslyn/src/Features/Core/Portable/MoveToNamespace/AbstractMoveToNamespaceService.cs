@@ -474,13 +474,11 @@ namespace Microsoft.CodeAnalysis.MoveToNamespace
             CancellationToken cancellationToken
         )
         {
-            var compilation = await document
-                .Project
+            var compilation = await document.Project
                 .GetCompilationAsync(cancellationToken)
                 .ConfigureAwait(false);
 
-            return compilation
-                .GlobalNamespace
+            return compilation.GlobalNamespace
                 .GetAllNamespaces(cancellationToken)
                 .Where(n =>
                     n.NamespaceKind == NamespaceKind.Module

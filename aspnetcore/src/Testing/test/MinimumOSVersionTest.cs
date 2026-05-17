@@ -17,8 +17,7 @@ public class MinimumOSVersionTest
     {
         Assert.False(
             RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
-                && Environment
-                    .OSVersion
+                && Environment.OSVersion
                     .Version
                     .ToString()
                     .StartsWith("6.1", StringComparison.Ordinal),
@@ -33,8 +32,7 @@ public class MinimumOSVersionTest
     {
         Assert.False(
             RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
-                && Environment
-                    .OSVersion
+                && Environment.OSVersion
                     .Version
                     .ToString()
                     .StartsWith("6.1", StringComparison.Ordinal),
@@ -48,8 +46,7 @@ public class MinimumOSVersionTest
     public void RunTest_Win10_RS4()
     {
         Assert.True(RuntimeInformation.IsOSPlatform(OSPlatform.Windows));
-        var versionKey = Registry
-            .LocalMachine
+        var versionKey = Registry.LocalMachine
             .OpenSubKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion");
         Assert.NotNull(versionKey);
         var currentVersion = (string)versionKey.GetValue("CurrentBuildNumber");
@@ -63,8 +60,7 @@ public class MinimumOSVersionTest
     public void RunTest_Win10_19H2()
     {
         Assert.True(RuntimeInformation.IsOSPlatform(OSPlatform.Windows));
-        var versionKey = Registry
-            .LocalMachine
+        var versionKey = Registry.LocalMachine
             .OpenSubKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion");
         Assert.NotNull(versionKey);
         var currentVersion = (string)versionKey.GetValue("CurrentBuildNumber");
@@ -81,8 +77,7 @@ public class OSMinVersionClassTest
     {
         Assert.False(
             RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
-                && Environment
-                    .OSVersion
+                && Environment.OSVersion
                     .Version
                     .ToString()
                     .StartsWith("6.1", StringComparison.Ordinal),

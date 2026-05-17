@@ -87,8 +87,7 @@ namespace Moq.Language.Flow
         public ISetupSetter<T, TProperty> SetupSet<TProperty>(Action<T> setterExpression)
         {
             Guard.NotNull(setterExpression, nameof(setterExpression));
-            var expression = ExpressionReconstructor
-                .Instance
+            var expression = ExpressionReconstructor.Instance
                 .ReconstructExpression(setterExpression, this.mock.ConstructorArguments);
 
             var setup = Mock.SetupSet(mock, expression, this.condition);
@@ -98,8 +97,7 @@ namespace Moq.Language.Flow
         public ISetup<T> SetupSet(Action<T> setterExpression)
         {
             Guard.NotNull(setterExpression, nameof(setterExpression));
-            var expression = ExpressionReconstructor
-                .Instance
+            var expression = ExpressionReconstructor.Instance
                 .ReconstructExpression(setterExpression, this.mock.ConstructorArguments);
 
             var setup = Mock.SetupSet(mock, expression, this.condition);

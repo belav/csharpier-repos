@@ -1954,12 +1954,13 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </summary>
         internal new NamedTypeSymbol? GetTypeByMetadataName(string fullyQualifiedMetadataName)
         {
-            var result = this.Assembly.GetTypeByMetadataName(
-                fullyQualifiedMetadataName,
-                includeReferences: true,
-                isWellKnownType: false,
-                conflicts: out var _
-            );
+            var result = this.Assembly
+                .GetTypeByMetadataName(
+                    fullyQualifiedMetadataName,
+                    includeReferences: true,
+                    isWellKnownType: false,
+                    conflicts: out var _
+                );
             Debug.Assert(result?.IsErrorType() != true);
             return result;
         }
@@ -2053,8 +2054,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                         entryPoint = new EntryPoint(
                             entryPoint.MethodSymbol,
                             new ImmutableBindingDiagnostic<AssemblySymbol>(
-                                entryPoint
-                                    .Diagnostics
+                                entryPoint.Diagnostics
                                     .Diagnostics
                                     .Concat(diagnostics.ToReadOnlyAndFree()),
                                 entryPoint.Diagnostics.Dependencies
@@ -2906,8 +2906,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         )
         {
             Debug.Assert(
-                System
-                    .Runtime
+                System.Runtime
                     .CompilerServices
                     .Unsafe
                     .AreSame(
@@ -3615,8 +3614,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (reportUnusedUsings && UsageOfUsingsRecordedInTrees is not null)
             {
                 foreach (
-                    var singleDeclaration in ((SourceNamespaceSymbol)SourceModule.GlobalNamespace)
-                        .MergedDeclaration
+                    var singleDeclaration in (
+                        (SourceNamespaceSymbol)SourceModule.GlobalNamespace
+                    ).MergedDeclaration
                         .Declarations
                 )
                 {
@@ -4175,8 +4175,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 if (
                     (
                         emittingPdb
-                        || moduleBeingBuilt
-                            .EmitOptions
+                        || moduleBeingBuilt.EmitOptions
                             .InstrumentationKinds
                             .Contains(InstrumentationKind.TestCoverage)
                     )
@@ -5048,8 +5047,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (!elementNullableAnnotations.IsDefault)
             {
                 tupleType = tupleType.WithElementTypes(
-                    tupleType
-                        .TupleElementTypesWithAnnotations
+                    tupleType.TupleElementTypesWithAnnotations
                         .ZipAsArray(
                             elementNullableAnnotations,
                             (t, a) => TypeWithAnnotations.Create(t.Type, a.ToInternalAnnotation())
@@ -5176,8 +5174,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     && csharpRightType.SpecialType != SpecialType.None
                 )
                 {
-                    var easyOutBinaryKind = OverloadResolution
-                        .BinopEasyOut
+                    var easyOutBinaryKind = OverloadResolution.BinopEasyOut
                         .OpKind(binaryKind, csharpLeftType, csharpRightType);
 
                     if (easyOutBinaryKind != BinaryOperatorKind.Error)
@@ -5531,8 +5528,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     && csharpOperandType.SpecialType != SpecialType.None
                 )
                 {
-                    var easyOutUnaryKind = OverloadResolution
-                        .UnopEasyOut
+                    var easyOutUnaryKind = OverloadResolution.UnopEasyOut
                         .OpKind(unaryKind, csharpOperandType);
 
                     if (easyOutUnaryKind != UnaryOperatorKind.Error)
@@ -6172,8 +6168,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     if (mergedNamespace != null)
                     {
                         _cache[
-                            mergedNamespace
-                                .ConstituentNamespaces
+                            mergedNamespace.ConstituentNamespaces
                                 .OfType<SourceNamespaceSymbol>()
                                 .First()
                                 .MergedDeclaration

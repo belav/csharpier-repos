@@ -24,15 +24,13 @@ namespace System.Globalization.Tests
             AssertExtensions.Throws<ArgumentException>(
                 "options",
                 () =>
-                    new CultureInfo("tr-TR")
-                        .CompareInfo
+                    new CultureInfo("tr-TR").CompareInfo
                         .GetStringComparer(CompareOptions.Ordinal | CompareOptions.IgnoreCase)
             );
             AssertExtensions.Throws<ArgumentException>(
                 "options",
                 () =>
-                    new CultureInfo("tr-TR")
-                        .CompareInfo
+                    new CultureInfo("tr-TR").CompareInfo
                         .GetStringComparer(
                             CompareOptions.OrdinalIgnoreCase | CompareOptions.IgnoreCase
                         )
@@ -62,8 +60,7 @@ namespace System.Globalization.Tests
         )
         {
             int expected = PlatformDetection.IsNlsGlobalization ? expectedNls : expectedICU;
-            StringComparer comparer = new CultureInfo(cultureName)
-                .CompareInfo
+            StringComparer comparer = new CultureInfo(cultureName).CompareInfo
                 .GetStringComparer(options);
 
             Assert.Equal(expected, Math.Sign(comparer.Compare(x, y)));
@@ -84,8 +81,7 @@ namespace System.Globalization.Tests
             AssertExtensions.Throws<ArgumentNullException>(
                 "obj",
                 () =>
-                    new CultureInfo("tr-TR")
-                        .CompareInfo
+                    new CultureInfo("tr-TR").CompareInfo
                         .GetStringComparer(CompareOptions.None)
                         .GetHashCode(null)
             );
@@ -110,11 +106,9 @@ namespace System.Globalization.Tests
             bool expected
         )
         {
-            StringComparer comparer1 = new CultureInfo(cultureName1)
-                .CompareInfo
+            StringComparer comparer1 = new CultureInfo(cultureName1).CompareInfo
                 .GetStringComparer(options1);
-            StringComparer comparer2 = new CultureInfo(cultureName2)
-                .CompareInfo
+            StringComparer comparer2 = new CultureInfo(cultureName2).CompareInfo
                 .GetStringComparer(options2);
 
             Assert.Equal(expected, comparer1.Equals(comparer2));

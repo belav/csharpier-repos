@@ -31,8 +31,7 @@ namespace System.ServiceModel.Security.Tokens
             if (name == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("name");
             if (authenticationType == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("authenticationType");
 
             this.sid = sid;

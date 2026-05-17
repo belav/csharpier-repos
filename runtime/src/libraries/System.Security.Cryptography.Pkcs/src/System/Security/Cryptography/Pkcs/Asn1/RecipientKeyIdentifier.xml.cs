@@ -131,8 +131,7 @@ namespace System.Security.Cryptography.Pkcs.Asn1
             )
             {
                 System.Security.Cryptography.Pkcs.Asn1.OtherKeyAttributeAsn tmpOther;
-                System
-                    .Security
+                System.Security
                     .Cryptography
                     .Pkcs
                     .Asn1

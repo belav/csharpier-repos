@@ -564,12 +564,8 @@ namespace System.Activities.Runtime
             if (location.CanBeMapped)
             {
                 this.hasMappableLocations = true;
-                this.MappableObjectManager.Register(
-                    location,
-                    this.Definition,
-                    locationReference,
-                    activityInstance
-                );
+                this.MappableObjectManager
+                    .Register(location, this.Definition, locationReference, activityInstance);
             }
         }
 
@@ -582,8 +578,7 @@ namespace System.Activities.Runtime
         {
             if (isDisposed)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new ObjectDisposedException(this.GetType().FullName, SR.EnvironmentDisposed)
                     );
@@ -605,8 +600,7 @@ namespace System.Activities.Runtime
                 || map.RuntimeDelegateArgumentCount != actualRuntimeDelegateArgumentCount
             )
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new InstanceUpdateException(
                             SR.InvalidUpdateMap(
@@ -660,8 +654,7 @@ namespace System.Activities.Runtime
 
             if (expectedLocationCount != actualLocationCount)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new InstanceUpdateException(
                             SR.InvalidUpdateMap(

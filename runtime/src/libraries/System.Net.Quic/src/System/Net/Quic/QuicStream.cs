@@ -167,8 +167,7 @@ public sealed partial class QuicStream
         {
             QUIC_HANDLE* handle;
             ThrowHelper.ThrowIfMsQuicError(
-                MsQuicApi
-                    .Api
+                MsQuicApi.Api
                     .StreamOpen(
                         connectionHandle,
                         type == QuicStreamType.Unidirectional
@@ -232,8 +231,7 @@ public sealed partial class QuicStream
                 void*,
                 QUIC_STREAM_EVENT*,
                 int> nativeCallback = &NativeCallback;
-            MsQuicApi
-                .Api
+            MsQuicApi.Api
                 .SetCallbackHandler(_handle, nativeCallback, (void*)GCHandle.ToIntPtr(context));
         }
         catch
@@ -270,8 +268,7 @@ public sealed partial class QuicStream
         {
             unsafe
             {
-                int status = MsQuicApi
-                    .Api
+                int status = MsQuicApi.Api
                     .StreamStart(
                         _handle,
                         QUIC_STREAM_START_FLAGS.SHUTDOWN_ON_FAIL
@@ -441,8 +438,7 @@ public sealed partial class QuicStream
             unsafe
             {
                 _sendBuffers.Initialize(buffer);
-                int status = MsQuicApi
-                    .Api
+                int status = MsQuicApi.Api
                     .StreamSend(
                         _handle,
                         _sendBuffers.Buffers,

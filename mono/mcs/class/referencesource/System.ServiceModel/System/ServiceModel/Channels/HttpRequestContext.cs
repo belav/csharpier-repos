@@ -181,8 +181,7 @@ namespace System.ServiceModel.Channels
         {
             if ((message == null) && (requestException == null))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ProtocolException(
                             SR.GetString(SR.MessageXmlProtocolError),
@@ -223,8 +222,7 @@ namespace System.ServiceModel.Channels
                 // from the web headers for http since correlation might be propogated.
                 if (
                     message.Headers.MessageId == null
-                    && message
-                        .Properties
+                    && message.Properties
                         .TryGetValue<HttpRequestMessageProperty>(
                             HttpRequestMessageProperty.Name,
                             out httpProperty
@@ -315,8 +313,7 @@ namespace System.ServiceModel.Channels
                         message.Headers.To != null
                         && (
                             listener.AnonymousUriPrefixMatcher == null
-                            || !listener
-                                .AnonymousUriPrefixMatcher
+                            || !listener.AnonymousUriPrefixMatcher
                                 .IsAnonymousUri(message.Headers.To)
                         )
                     )
@@ -326,8 +323,7 @@ namespace System.ServiceModel.Channels
                 }
                 else
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ProtocolException(
                                 SR.GetString(
@@ -551,8 +547,7 @@ namespace System.ServiceModel.Channels
                 {
                     if (!acceptTask.Wait(TimeoutHelper.ToMilliseconds(timeout)))
                     {
-                        throw FxTrace
-                            .Exception
+                        throw FxTrace.Exception
                             .AsError(
                                 new TimeoutException(SR.GetString(SR.AcceptWebSocketTimedOutError))
                             );
@@ -601,14 +596,15 @@ namespace System.ServiceModel.Channels
             HttpRequestMessage requestMessage
         )
         {
-            this.webSocketChannel.SetWebSocketInfo(
-                context,
-                remoteEndpointMessageProperty,
-                this.securityProperty,
-                webSocketInternalBuffer,
-                shouldDisposeWebSocketAfterClose,
-                requestMessage
-            );
+            this.webSocketChannel
+                .SetWebSocketInfo(
+                    context,
+                    remoteEndpointMessageProperty,
+                    this.securityProperty,
+                    webSocketInternalBuffer,
+                    shouldDisposeWebSocketAfterClose,
+                    requestMessage
+                );
         }
 
         public IAsyncResult BeginAcceptWebSocket(
@@ -796,8 +792,7 @@ namespace System.ServiceModel.Channels
                     }
 
                     if (
-                        context
-                            .httpPipeline
+                        context.httpPipeline
                             .SendAsyncReply(this.responseMessage, onHttpPipelineSend, this)
                         == AsyncCompletionResult.Queued
                     )
@@ -839,14 +834,12 @@ namespace System.ServiceModel.Channels
                 IAsyncResult result;
                 if (httpResponseMessage == null)
                 {
-                    result = context
-                        .httpOutput
+                    result = context.httpOutput
                         .BeginSend(this.timeoutHelper.RemainingTime(), onSendCompleted, this);
                 }
                 else
                 {
-                    result = context
-                        .httpOutput
+                    result = context.httpOutput
                         .BeginSend(
                             httpResponseMessage,
                             this.timeoutHelper.RemainingTime(),
@@ -873,12 +866,13 @@ namespace System.ServiceModel.Channels
             object state
         )
         {
-            return this.httpPipeline.BeginProcessInboundRequest(
-                replyChannelAcceptor,
-                acceptorCallback,
-                callback,
-                state
-            );
+            return this.httpPipeline
+                .BeginProcessInboundRequest(
+                    replyChannelAcceptor,
+                    acceptorCallback,
+                    callback,
+                    state
+                );
         }
 
         internal void EndProcessInboundRequest(IAsyncResult result)
@@ -1040,8 +1034,7 @@ namespace System.ServiceModel.Channels
                 }
                 catch (HttpListenerException listenerException)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             HttpChannelUtilities.CreateCommunicationException(listenerException)
                         );
@@ -1169,8 +1162,7 @@ namespace System.ServiceModel.Channels
                         new RemoteEndpointMessageProperty(
                             this.listenerHttpContext.listenerContext.Request.RemoteEndPoint
                         );
-                    message
-                        .Properties
+                    message.Properties
                         .Add(RemoteEndpointMessageProperty.Name, remoteEndpointProperty);
                 }
 
@@ -1193,8 +1185,7 @@ namespace System.ServiceModel.Channels
                             this.listenerHttpContext.listenerContext.Request.Headers[webHeaderKey]
                         );
                     }
-                    message
-                        .Properties
+                    message.Properties
                         .Add(
                             RemoteEndpointMessageProperty.Name,
                             new RemoteEndpointMessageProperty(
@@ -1245,8 +1236,7 @@ namespace System.ServiceModel.Channels
                         }
                         catch (HttpListenerException listenerException)
                         {
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
                                     HttpChannelUtilities.CreateCommunicationException(
                                         listenerException
@@ -1263,8 +1253,7 @@ namespace System.ServiceModel.Channels
                         }
                         catch (HttpListenerException listenerException)
                         {
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
                                     HttpChannelUtilities.CreateCommunicationException(
                                         listenerException
@@ -1281,8 +1270,7 @@ namespace System.ServiceModel.Channels
                         }
                         catch (HttpListenerException listenerException)
                         {
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
                                     HttpChannelUtilities.CreateCommunicationException(
                                         listenerException
@@ -1299,8 +1287,7 @@ namespace System.ServiceModel.Channels
                         }
                         catch (HttpListenerException listenerException)
                         {
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
                                     HttpChannelUtilities.CreateCommunicationException(
                                         listenerException
@@ -1391,8 +1378,7 @@ namespace System.ServiceModel.Channels
                 {
                     this.context.OnAcceptWebSocketError();
                     //
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(
                             new TimeoutException(SR.GetString(SR.AcceptWebSocketTimedOutError))
                         );

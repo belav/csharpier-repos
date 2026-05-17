@@ -173,8 +173,7 @@ public partial class CollectionModelBinder<TElement> : ICollectionModelBinder
         Debug.Assert(model != null);
         if (result.ValidationStrategy != null)
         {
-            bindingContext
-                .ValidationState
+            bindingContext.ValidationState
                 .Add(model, new ValidationStateEntry() { Strategy = result.ValidationStrategy });
         }
 
@@ -182,8 +181,7 @@ public partial class CollectionModelBinder<TElement> : ICollectionModelBinder
         {
             // If we did simple binding, then modelstate should be updated to reflect what we bound for ModelName.
             // If we did complex binding, there will already be an entry for each index.
-            bindingContext
-                .ModelState
+            bindingContext.ModelState
                 .SetModelValue(bindingContext.ModelName, valueProviderResult);
         }
 

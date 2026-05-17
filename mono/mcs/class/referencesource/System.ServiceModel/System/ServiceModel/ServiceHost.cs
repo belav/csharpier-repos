@@ -154,14 +154,12 @@ namespace System.ServiceModel
                 if (value < TimeSpan.Zero)
                 {
                     string message = SR.GetString(SR.SFxTimeoutOutOfRange0);
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new ArgumentOutOfRangeException("value", message));
                 }
                 if (TimeoutHelper.IsTooLarge(value))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentOutOfRangeException(
                                 "value",
@@ -260,14 +258,12 @@ namespace System.ServiceModel
                 if (value < TimeSpan.Zero)
                 {
                     string message = SR.GetString(SR.SFxTimeoutOutOfRange0);
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new ArgumentOutOfRangeException("value", message));
                 }
                 if (TimeoutHelper.IsTooLarge(value))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentOutOfRangeException(
                                 "value",
@@ -336,8 +332,7 @@ namespace System.ServiceModel
         {
             if (this.initializeDescriptionHasFinished)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(SR.GetString(SR.SFxCannotCallAddBaseAddress))
                     );
@@ -363,8 +358,7 @@ namespace System.ServiceModel
         {
             if (address == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("address"));
             }
 
@@ -400,22 +394,19 @@ namespace System.ServiceModel
         {
             if (address == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("address"));
             }
 
             if (binding == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("binding"));
             }
 
             if (implementedContract == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("implementedContract"));
             }
 
@@ -424,8 +415,7 @@ namespace System.ServiceModel
                 && this.State != CommunicationState.Opening
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(SR.SFxServiceHostBaseCannotAddEndpointAfterOpen)
@@ -435,8 +425,7 @@ namespace System.ServiceModel
 
             if (this.Description == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(SR.SFxServiceHostBaseCannotAddEndpointWithoutDescription)
@@ -482,8 +471,7 @@ namespace System.ServiceModel
                 && this.State != CommunicationState.Opening
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(SR.SFxServiceHostBaseCannotAddEndpointAfterOpen)
@@ -492,8 +480,7 @@ namespace System.ServiceModel
             }
             if (this.Description == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(SR.SFxServiceHostBaseCannotAddEndpointWithoutDescription)
@@ -502,20 +489,17 @@ namespace System.ServiceModel
             }
             if (endpoint.Address == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(SR.GetString(SR.SFxEndpointAddressNotSpecified));
             }
             if (endpoint.Contract == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(SR.GetString(SR.SFxEndpointContractNotSpecified));
             }
             if (endpoint.Binding == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(SR.GetString(SR.SFxEndpointBindingNotSpecified));
             }
             if (
@@ -543,8 +527,7 @@ namespace System.ServiceModel
             }
             if (endpoint.Binding == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(SR.GetString(SR.SFxEndpointBindingNotSpecified));
             }
             Uri absoluteUri = MakeAbsoluteUri(
@@ -570,8 +553,7 @@ namespace System.ServiceModel
             {
                 if (binding.Scheme == string.Empty)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(SR.SFxCustomBindingWithoutTransport)
@@ -581,8 +563,7 @@ namespace System.ServiceModel
                 result = GetVia(binding.Scheme, result, baseAddresses);
                 if (result == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(
@@ -602,8 +583,7 @@ namespace System.ServiceModel
         {
             if (this.Description == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(
@@ -652,8 +632,7 @@ namespace System.ServiceModel
                     }
                     else
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new Exception(
                                     SR.GetString(
@@ -712,8 +691,7 @@ namespace System.ServiceModel
         {
             if (this.Description == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(
@@ -759,8 +737,7 @@ namespace System.ServiceModel
                     || this.State == CommunicationState.Opening,
                 ""
             );
-            ServiceAuthorizationBehavior a = description
-                .Behaviors
+            ServiceAuthorizationBehavior a = description.Behaviors
                 .Find<ServiceAuthorizationBehavior>();
 
             if (a == null)
@@ -779,8 +756,7 @@ namespace System.ServiceModel
                     || this.State == CommunicationState.Opening,
                 ""
             );
-            ServiceAuthenticationBehavior a = description
-                .Behaviors
+            ServiceAuthenticationBehavior a = description.Behaviors
                 .Find<ServiceAuthenticationBehavior>();
 
             if (a == null)
@@ -873,10 +849,11 @@ namespace System.ServiceModel
                 endpoints = new Collection<ServiceEndpoint>();
             }
             else if (
-                !this.EndpointsByListenUriInfo.TryGetValue(
-                    DispatcherBuilder.GetListenUriInfoForEndpoint(this, inputEndpoint),
-                    out endpoints
-                ) || !endpoints.Contains(inputEndpoint)
+                !this.EndpointsByListenUriInfo
+                    .TryGetValue(
+                        DispatcherBuilder.GetListenUriInfoForEndpoint(this, inputEndpoint),
+                        out endpoints
+                    ) || !endpoints.Contains(inputEndpoint)
             )
             {
                 endpoints = new Collection<ServiceEndpoint>();
@@ -997,8 +974,7 @@ namespace System.ServiceModel
             }
             if (this.Description == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(
@@ -1300,18 +1276,18 @@ namespace System.ServiceModel
                     && this.baseAddresses.Contains(serviceEndpoint.ListenUri.Scheme)
                 )
                 {
-                    HttpTransportBindingElement httpTransportBindingElement = serviceEndpoint
-                        .Binding
-                        .CreateBindingElements()
-                        .Find<HttpTransportBindingElement>();
+                    HttpTransportBindingElement httpTransportBindingElement =
+                        serviceEndpoint.Binding
+                            .CreateBindingElements()
+                            .Find<HttpTransportBindingElement>();
 
                     if (httpTransportBindingElement != null)
                     {
-                        AuthenticationSchemes hostSupportedAuthenticationSchemes = AspNetEnvironment
-                            .Current
-                            .GetAuthenticationSchemes(
-                                this.baseAddresses[serviceEndpoint.ListenUri.Scheme]
-                            );
+                        AuthenticationSchemes hostSupportedAuthenticationSchemes =
+                            AspNetEnvironment.Current
+                                .GetAuthenticationSchemes(
+                                    this.baseAddresses[serviceEndpoint.ListenUri.Scheme]
+                                );
 
                         if (hostSupportedAuthenticationSchemes != AuthenticationSchemes.None)
                         {
@@ -1365,8 +1341,7 @@ namespace System.ServiceModel
                     this.readOnlyCredentials = credentialsCopy;
                 }
 
-                ServiceAuthorizationBehavior authorization = description
-                    .Behaviors
+                ServiceAuthorizationBehavior authorization = description.Behaviors
                     .Find<ServiceAuthorizationBehavior>();
                 if (authorization != null)
                 {
@@ -1375,8 +1350,7 @@ namespace System.ServiceModel
                     this.readOnlyAuthorization = authorizationCopy;
                 }
 
-                ServiceAuthenticationBehavior authentication = description
-                    .Behaviors
+                ServiceAuthenticationBehavior authentication = description.Behaviors
                     .Find<ServiceAuthenticationBehavior>();
                 if (authentication != null)
                 {
@@ -1586,11 +1560,12 @@ namespace System.ServiceModel
 
             bool ProcessAfterInitializeRuntime()
             {
-                IAsyncResult result = this.host.BeginAfterInitializeRuntime(
-                    this.timeoutHelper.RemainingTime(),
-                    PrepareAsyncCompletion(handleEndAfterInitializeRuntime),
-                    this
-                );
+                IAsyncResult result = this.host
+                    .BeginAfterInitializeRuntime(
+                        this.timeoutHelper.RemainingTime(),
+                        PrepareAsyncCompletion(handleEndAfterInitializeRuntime),
+                        this
+                    );
 
                 return SyncContinue(result);
             }
@@ -1605,11 +1580,12 @@ namespace System.ServiceModel
 
             bool ProcessOpenChannelDispatchers()
             {
-                IAsyncResult result = this.host.BeginOpenChannelDispatchers(
-                    this.timeoutHelper.RemainingTime(),
-                    PrepareAsyncCompletion(handleEndOpenChannelDispatchers),
-                    this
-                );
+                IAsyncResult result = this.host
+                    .BeginOpenChannelDispatchers(
+                        this.timeoutHelper.RemainingTime(),
+                        PrepareAsyncCompletion(handleEndOpenChannelDispatchers),
+                        this
+                    );
 
                 return SyncContinue(result);
             }
@@ -1868,8 +1844,8 @@ namespace System.ServiceModel
 
             void CloseChannelDispatchers(bool completedSynchronously)
             {
-                IList<ICommunicationObject> channelDispatchers =
-                    this.serviceHost.SnapshotChannelDispatchers();
+                IList<ICommunicationObject> channelDispatchers = this.serviceHost
+                    .SnapshotChannelDispatchers();
                 AsyncCallback callback = Fx.ThunkCallback(this.CloseChannelDispatchersCallback);
                 TimeSpan timeout = this.timeoutHelper.RemainingTime();
                 Exception exception = null;
@@ -2020,8 +1996,7 @@ namespace System.ServiceModel
         {
             if (serviceType == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("serviceType"));
             }
 
@@ -2104,8 +2079,7 @@ namespace System.ServiceModel
         {
             if (address == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("address"));
             }
 
@@ -2139,8 +2113,7 @@ namespace System.ServiceModel
             if (!implementedContract.IsDefined(typeof(ServiceContractAttribute), false))
             {
 #pragma warning suppress 56506 // implementedContract is never null at this point
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(
@@ -2154,8 +2127,7 @@ namespace System.ServiceModel
             {
                 if (implementedContract == typeof(IMetadataExchange))
 #pragma warning suppress 56506 // ServiceType is never null at this point
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(
@@ -2166,8 +2138,7 @@ namespace System.ServiceModel
                         );
                 else
 #pragma warning suppress 56506 // implementedContract and ServiceType are never null at this point
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(
@@ -2189,14 +2160,12 @@ namespace System.ServiceModel
         {
             if (implementedContract == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("implementedContract"));
             }
             if (this.reflectedContracts == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(
@@ -2347,8 +2316,7 @@ namespace System.ServiceModel
         {
             if (this.Description == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(
@@ -2376,8 +2344,7 @@ namespace System.ServiceModel
         {
             if (this.Description == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(
@@ -2470,8 +2437,7 @@ namespace System.ServiceModel
         {
             if (this.serviceType == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(SR.SFxServiceHostCannotCreateDescriptionWithoutServiceType)
@@ -2488,8 +2454,7 @@ namespace System.ServiceModel
             {
                 description = ServiceDescription.GetService(this.serviceType);
             }
-            ServiceBehaviorAttribute serviceBehavior = description
-                .Behaviors
+            ServiceBehaviorAttribute serviceBehavior = description.Behaviors
                 .Find<ServiceBehaviorAttribute>();
             object serviceInstanceUsedAsABehavior = serviceBehavior.GetWellKnownSingleton();
             if (serviceInstanceUsedAsABehavior == null)
@@ -2580,8 +2545,7 @@ namespace System.ServiceModel
         {
             if (serviceType == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("serviceType"));
             }
 
@@ -2680,8 +2644,7 @@ namespace System.ServiceModel
 
                 Fx.Assert("Calls to GetConfigKey are preceeded by calls to Contains.");
 #pragma warning suppress 56506 // implementedContract is never null at this point
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(

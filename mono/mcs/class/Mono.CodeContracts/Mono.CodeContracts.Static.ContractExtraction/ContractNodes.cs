@@ -83,10 +83,8 @@ namespace Mono.CodeContracts.Static.ContractExtraction
             if (this.ContractClass == null)
                 return;
 
-            IEnumerable<Method> methods = this.ContractClass.GetMethods(
-                RequiresName,
-                CoreSystemTypes.Instance.TypeBoolean
-            );
+            IEnumerable<Method> methods = this.ContractClass
+                .GetMethods(RequiresName, CoreSystemTypes.Instance.TypeBoolean);
             foreach (Method method in methods)
             {
                 if (method.GenericParameters == null || method.GenericParameters.Count == 0)
@@ -99,45 +97,43 @@ namespace Mono.CodeContracts.Static.ContractExtraction
                 return;
             }
 
-            methods = this.ContractClass.GetMethods(
-                RequiresName,
-                CoreSystemTypes.Instance.TypeBoolean,
-                CoreSystemTypes.Instance.TypeString
-            );
+            methods = this.ContractClass
+                .GetMethods(
+                    RequiresName,
+                    CoreSystemTypes.Instance.TypeBoolean,
+                    CoreSystemTypes.Instance.TypeString
+                );
             foreach (Method method in methods)
             {
                 if (method.GenericParameters == null || method.GenericParameters.Count == 0)
                     this.RequiresWithMessageMethod = method;
             }
-            this.EnsuresMethod = this.ContractClass.GetMethod(
-                EnsuresName,
-                CoreSystemTypes.Instance.TypeBoolean
-            );
-            this.EnsuresWithMessageMethod = this.ContractClass.GetMethod(
-                EnsuresName,
-                CoreSystemTypes.Instance.TypeBoolean,
-                CoreSystemTypes.Instance.TypeString
-            );
+            this.EnsuresMethod = this.ContractClass
+                .GetMethod(EnsuresName, CoreSystemTypes.Instance.TypeBoolean);
+            this.EnsuresWithMessageMethod = this.ContractClass
+                .GetMethod(
+                    EnsuresName,
+                    CoreSystemTypes.Instance.TypeBoolean,
+                    CoreSystemTypes.Instance.TypeString
+                );
 
-            this.AssertMethod = this.ContractClass.GetMethod(
-                AssertName,
-                CoreSystemTypes.Instance.TypeBoolean
-            );
-            this.AssertWithMessageMethod = this.ContractClass.GetMethod(
-                AssertName,
-                CoreSystemTypes.Instance.TypeBoolean,
-                CoreSystemTypes.Instance.TypeString
-            );
+            this.AssertMethod = this.ContractClass
+                .GetMethod(AssertName, CoreSystemTypes.Instance.TypeBoolean);
+            this.AssertWithMessageMethod = this.ContractClass
+                .GetMethod(
+                    AssertName,
+                    CoreSystemTypes.Instance.TypeBoolean,
+                    CoreSystemTypes.Instance.TypeString
+                );
 
-            this.AssumeMethod = this.ContractClass.GetMethod(
-                AssumeName,
-                CoreSystemTypes.Instance.TypeBoolean
-            );
-            this.AssumeWithMessageMethod = this.ContractClass.GetMethod(
-                AssumeName,
-                CoreSystemTypes.Instance.TypeBoolean,
-                CoreSystemTypes.Instance.TypeString
-            );
+            this.AssumeMethod = this.ContractClass
+                .GetMethod(AssumeName, CoreSystemTypes.Instance.TypeBoolean);
+            this.AssumeWithMessageMethod = this.ContractClass
+                .GetMethod(
+                    AssumeName,
+                    CoreSystemTypes.Instance.TypeBoolean,
+                    CoreSystemTypes.Instance.TypeString
+                );
 
             this.EndContractBlock = this.ContractClass.GetMethod(EndContractBlockName);
 

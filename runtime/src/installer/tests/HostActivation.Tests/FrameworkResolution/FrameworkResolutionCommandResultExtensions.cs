@@ -87,8 +87,7 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
             );
             if (frameworkName is not null)
             {
-                constraint = constraint
-                    .And
+                constraint = constraint.And
                     .HaveStdErrContaining(
                         $"Framework: '{frameworkName}', {(requestedVersion is null ? "" : $"version '{requestedVersion}'")}"
                     );

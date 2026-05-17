@@ -483,15 +483,18 @@ namespace Mono.Debugger.Soft
                 Callback = callback,
             };
             thread.InvalidateFrames();
-            r.ID = vm.conn.VM_BeginInvokeMethod(
-                thread.Id,
-                method.Id,
-                this_obj != null ? vm.EncodeValue(this_obj) : vm.EncodeValue(vm.CreateValue(null)),
-                vm.EncodeValues(arguments),
-                f,
-                InvokeCB,
-                r
-            );
+            r.ID = vm.conn
+                .VM_BeginInvokeMethod(
+                    thread.Id,
+                    method.Id,
+                    this_obj != null
+                        ? vm.EncodeValue(this_obj)
+                        : vm.EncodeValue(vm.CreateValue(null)),
+                    vm.EncodeValues(arguments),
+                    f,
+                    InvokeCB,
+                    r
+                );
 
             return r;
         }
@@ -542,10 +545,11 @@ namespace Mono.Debugger.Soft
             {
                 try
                 {
-                    r.VM.ErrorHandler(
-                        null,
-                        new ErrorHandlerEventArgs() { ErrorCode = r.ErrorCode }
-                    );
+                    r.VM
+                        .ErrorHandler(
+                            null,
+                            new ErrorHandlerEventArgs() { ErrorCode = r.ErrorCode }
+                        );
                 }
                 catch (CommandException ex)
                 {
@@ -683,15 +687,18 @@ namespace Mono.Debugger.Soft
             for (int i = 0; i < methods.Length; ++i)
                 args.Add(vm.EncodeValues(arguments[i]));
             thread.InvalidateFrames();
-            r.ID = vm.conn.VM_BeginInvokeMethods(
-                thread.Id,
-                mids,
-                this_obj != null ? vm.EncodeValue(this_obj) : vm.EncodeValue(vm.CreateValue(null)),
-                args,
-                f,
-                InvokeMultipleCB,
-                r
-            );
+            r.ID = vm.conn
+                .VM_BeginInvokeMethods(
+                    thread.Id,
+                    mids,
+                    this_obj != null
+                        ? vm.EncodeValue(this_obj)
+                        : vm.EncodeValue(vm.CreateValue(null)),
+                    args,
+                    f,
+                    InvokeMultipleCB,
+                    r
+                );
 
             return r;
         }

@@ -116,8 +116,7 @@ namespace System.Data.Metadata.Edm
             {
                 Facet item = null;
                 if (
-                    TypeUsage
-                        .Facets
+                    TypeUsage.Facets
                         .TryGetValue(
                             EdmProviderManifest.StoreGeneratedPatternFacetName,
                             false,
@@ -140,8 +139,7 @@ namespace System.Data.Metadata.Edm
             {
                 Facet item = null;
                 if (
-                    TypeUsage
-                        .Facets
+                    TypeUsage.Facets
                         .TryGetValue(
                             EdmProviderManifest.StoreGeneratedPatternFacetName,
                             false,

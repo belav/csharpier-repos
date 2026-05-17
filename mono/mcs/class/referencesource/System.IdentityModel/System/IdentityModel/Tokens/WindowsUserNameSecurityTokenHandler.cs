@@ -55,8 +55,7 @@ namespace System.IdentityModel.Tokens
             UserNameSecurityToken usernameToken = token as UserNameSecurityToken;
             if (usernameToken == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(
                         "token",
                         SR.GetString(SR.ID0018, typeof(UserNameSecurityToken))
@@ -79,8 +78,7 @@ namespace System.IdentityModel.Tokens
                     if (strings.Length != 2 || string.IsNullOrEmpty(strings[0]))
                     {
                         // Only support one slash and domain cannot be empty (consistent with windowslogon).
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperArgument("token", SR.GetString(SR.ID4062));
                     }
 
@@ -106,8 +104,7 @@ namespace System.IdentityModel.Tokens
                     )
                     {
                         int error = Marshal.GetLastWin32Error();
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new SecurityTokenValidationException(
                                     SR.GetString(SR.ID4063, userName),

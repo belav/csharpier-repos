@@ -230,8 +230,7 @@ namespace System.ServiceModel.Diagnostics
                         TraceEventType.Warning
                     );
 
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new SecurityException(
                                 SR.GetString(SR.PartialTrustPerformanceCountersNotEnabled)
@@ -316,14 +315,12 @@ namespace System.ServiceModel.Diagnostics
 
                 if (logEvent)
                 {
-                    DiagnosticUtility
-                        .EventLog
+                    DiagnosticUtility.EventLog
                         .LogEvent(
                             TraceEventType.Error,
                             (ushort)System.Runtime.Diagnostics.EventLogCategory.PerformanceCounter,
                             (uint)
-                                System
-                                    .Runtime
+                                System.Runtime
                                     .Diagnostics
                                     .EventLogEventId
                                     .FailedToLoadPerformanceCounter,
@@ -427,8 +424,7 @@ namespace System.ServiceModel.Diagnostics
                     lock (PerformanceCounters.perfCounterDictionarySyncObject)
                     {
                         if (
-                            !PerformanceCounters
-                                .PerformanceCountersForEndpoint
+                            !PerformanceCounters.PerformanceCountersForEndpoint
                                 .TryGetValue(endpointDispatcher.PerfCounterId, out counters)
                         )
                         {
@@ -439,12 +435,10 @@ namespace System.ServiceModel.Diagnostics
                             );
                             if (counters.Initialized)
                             {
-                                PerformanceCounters
-                                    .PerformanceCountersForEndpoint
+                                PerformanceCounters.PerformanceCountersForEndpoint
                                     .Add(endpointDispatcher.PerfCounterId, counters);
 
-                                int index = PerformanceCounters
-                                    .PerformanceCountersForEndpointList
+                                int index = PerformanceCounters.PerformanceCountersForEndpointList
                                     .FindIndex(c => c == null);
                                 if (index >= 0)
                                 {
@@ -453,8 +447,7 @@ namespace System.ServiceModel.Diagnostics
                                 }
                                 else
                                 {
-                                    PerformanceCounters
-                                        .PerformanceCountersForEndpointList
+                                    PerformanceCounters.PerformanceCountersForEndpointList
                                         .Add(counters);
                                     index =
                                         PerformanceCounters.PerformanceCountersForEndpointList.Count
@@ -473,8 +466,7 @@ namespace System.ServiceModel.Diagnostics
                     lock (PerformanceCounters.perfCounterDictionarySyncObject)
                     {
                         if (
-                            !PerformanceCounters
-                                .PerformanceCountersForBaseUri
+                            !PerformanceCounters.PerformanceCountersForBaseUri
                                 .TryGetValue(
                                     endpointDispatcher.PerfCounterBaseId,
                                     out countersEntry
@@ -493,8 +485,7 @@ namespace System.ServiceModel.Diagnostics
                                     serviceHost.DefaultCounters
                                 );
                             }
-                            PerformanceCounters
-                                .PerformanceCountersForBaseUri
+                            PerformanceCounters.PerformanceCountersForBaseUri
                                 .Add(endpointDispatcher.PerfCounterBaseId, countersEntry);
                         }
                         countersEntry.Add(counters);
@@ -513,14 +504,12 @@ namespace System.ServiceModel.Diagnostics
                     {
                         ServiceModelPerformanceCounters counters;
                         if (
-                            PerformanceCounters
-                                .PerformanceCountersForEndpoint
+                            PerformanceCounters.PerformanceCountersForEndpoint
                                 .TryGetValue(id, out counters)
                         )
                         {
                             PerformanceCounters.PerformanceCountersForEndpoint.Remove(id);
-                            int index = PerformanceCounters
-                                .PerformanceCountersForEndpointList
+                            int index = PerformanceCounters.PerformanceCountersForEndpointList
                                 .IndexOf(counters);
                             PerformanceCounters.PerformanceCountersForEndpointList[index] = null;
                         }

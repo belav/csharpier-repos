@@ -618,8 +618,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
                 }
 
                 // Map a field to the block (that makes it addressable).
-                var field = _builder
-                    .module
+                var field = _builder.module
                     .GetFieldForData(
                         data,
                         alignment: 1,
@@ -700,8 +699,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
 
                 // ldtoken <PrivateImplementationDetails>...
                 // call ReadOnlySpan<elementType> RuntimeHelpers::CreateSpan<elementType>(fldHandle)
-                var field = _builder
-                    .module
+                var field = _builder.module
                     .GetFieldForData(
                         data,
                         alignment: (ushort)specialElementType.SizeInBytes(),
@@ -752,8 +750,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
                 TypeWithAnnotations.Create(elementType.EnumUnderlyingTypeOrSelf())
             );
 
-            var cachingField = _builder
-                .module
+            var cachingField = _builder.module
                 .GetArrayCachingFieldForData(
                     data,
                     _module.Translate(arrayType),

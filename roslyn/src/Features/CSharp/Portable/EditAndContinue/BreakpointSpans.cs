@@ -224,8 +224,7 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
                         //   C<T>(...) :$$ [|B(...)|], I
                         //   C<T>(...) : [|B(...)|], I where ... $$
                         var baseInitializer = (PrimaryConstructorBaseTypeSyntax?)
-                            typeDeclaration
-                                .BaseList
+                            typeDeclaration.BaseList
                                 ?.Types
                                 .FirstOrDefault(t =>
                                     t.IsKind(SyntaxKind.PrimaryConstructorBaseType)
@@ -549,8 +548,7 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
         internal static IEnumerable<SyntaxToken> GetActiveTokensForImplicitConstructorInitializer(
             ConstructorDeclarationSyntax constructor
         ) =>
-            constructor
-                .Modifiers
+            constructor.Modifiers
                 .Concat(SpecializedCollections.SingletonEnumerable(constructor.Identifier))
                 .Concat(constructor.ParameterList.DescendantTokens());
 

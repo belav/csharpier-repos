@@ -189,12 +189,13 @@ namespace MonoTests.System.DirectoryServices
             DirectoryServicesPermission result = (DirectoryServicesPermission)dsp1.Intersect(dsp2);
             Assert.IsNull(result, "Empty N Empty");
             // 2. None N Entry
-            dsp2.PermissionEntries.Add(
-                new DirectoryServicesPermissionEntry(
-                    DirectoryServicesPermissionAccess.None,
-                    String.Empty
-                )
-            );
+            dsp2.PermissionEntries
+                .Add(
+                    new DirectoryServicesPermissionEntry(
+                        DirectoryServicesPermissionAccess.None,
+                        String.Empty
+                    )
+                );
             result = (DirectoryServicesPermission)dsp1.Intersect(dsp2);
             Assert.IsNull(result, "Empty N Entry");
             // 3. Entry N None
@@ -234,12 +235,13 @@ namespace MonoTests.System.DirectoryServices
             );
 
             // 4. Unrestricted N Entry
-            dsp2.PermissionEntries.Add(
-                new DirectoryServicesPermissionEntry(
-                    DirectoryServicesPermissionAccess.None,
-                    String.Empty
-                )
-            );
+            dsp2.PermissionEntries
+                .Add(
+                    new DirectoryServicesPermissionEntry(
+                        DirectoryServicesPermissionAccess.None,
+                        String.Empty
+                    )
+                );
             result = (DirectoryServicesPermission)dsp1.Intersect(dsp2);
             Assert.IsFalse(result.IsUnrestricted(), "(Unrestricted N Entry).IsUnrestricted");
             Assert.AreEqual(1, result.PermissionEntries.Count, "(Unrestricted N Entry).Count");
@@ -250,12 +252,13 @@ namespace MonoTests.System.DirectoryServices
             Assert.AreEqual(1, result.PermissionEntries.Count, "(Entry N Unrestricted).Count");
 
             // 6. Unrestricted N Unrestricted
-            dsp1.PermissionEntries.Add(
-                new DirectoryServicesPermissionEntry(
-                    DirectoryServicesPermissionAccess.None,
-                    String.Empty
-                )
-            );
+            dsp1.PermissionEntries
+                .Add(
+                    new DirectoryServicesPermissionEntry(
+                        DirectoryServicesPermissionAccess.None,
+                        String.Empty
+                    )
+                );
             result = (DirectoryServicesPermission)dsp1.Intersect(dsp1);
             Assert.IsTrue(result.IsUnrestricted(), "(Unrestricted N Unrestricted).IsUnrestricted");
             Assert.AreEqual(
@@ -286,9 +289,8 @@ namespace MonoTests.System.DirectoryServices
                 DirectoryServicesPermission dsp2 = new DirectoryServicesPermission(
                     PermissionState.None
                 );
-                dsp2.PermissionEntries.Add(
-                    new DirectoryServicesPermissionEntry(ppl, ppl.ToString())
-                );
+                dsp2.PermissionEntries
+                    .Add(new DirectoryServicesPermissionEntry(ppl, ppl.ToString()));
                 Assert.IsTrue(dsp1.IsSubsetOf(dsp2), "target " + ppl.ToString());
                 Assert.IsFalse(dsp2.IsSubsetOf(dsp1), "source " + ppl.ToString());
             }
@@ -302,9 +304,8 @@ namespace MonoTests.System.DirectoryServices
                 DirectoryServicesPermission dsp = new DirectoryServicesPermission(
                     PermissionState.None
                 );
-                dsp.PermissionEntries.Add(
-                    new DirectoryServicesPermissionEntry(ppl, ppl.ToString())
-                );
+                dsp.PermissionEntries
+                    .Add(new DirectoryServicesPermissionEntry(ppl, ppl.ToString()));
                 Assert.IsTrue(dsp.IsSubsetOf(dsp), ppl.ToString());
             }
         }
@@ -323,9 +324,8 @@ namespace MonoTests.System.DirectoryServices
                 DirectoryServicesPermission dsp2 = new DirectoryServicesPermission(
                     PermissionState.None
                 );
-                dsp2.PermissionEntries.Add(
-                    new DirectoryServicesPermissionEntry(ppl, ppl.ToString())
-                );
+                dsp2.PermissionEntries
+                    .Add(new DirectoryServicesPermissionEntry(ppl, ppl.ToString()));
                 Assert.IsFalse(dsp1.IsSubsetOf(dsp2), "target " + ppl.ToString());
                 Assert.IsTrue(dsp2.IsSubsetOf(dsp1), "source " + ppl.ToString());
             }
@@ -336,12 +336,13 @@ namespace MonoTests.System.DirectoryServices
         public void Union_Null()
         {
             DirectoryServicesPermission dsp = new DirectoryServicesPermission(PermissionState.None);
-            dsp.PermissionEntries.Add(
-                new DirectoryServicesPermissionEntry(
-                    DirectoryServicesPermissionAccess.None,
-                    String.Empty
-                )
-            );
+            dsp.PermissionEntries
+                .Add(
+                    new DirectoryServicesPermissionEntry(
+                        DirectoryServicesPermissionAccess.None,
+                        String.Empty
+                    )
+                );
             // Union with null is a simple copy
             DirectoryServicesPermission union = (DirectoryServicesPermission)dsp.Union(null);
             Assert.IsNotNull(dsp.PermissionEntries.Count, "Count");
@@ -358,9 +359,8 @@ namespace MonoTests.System.DirectoryServices
                 DirectoryServicesPermission dsp2 = new DirectoryServicesPermission(
                     PermissionState.None
                 );
-                dsp2.PermissionEntries.Add(
-                    new DirectoryServicesPermissionEntry(ppl, ppl.ToString())
-                );
+                dsp2.PermissionEntries
+                    .Add(new DirectoryServicesPermissionEntry(ppl, ppl.ToString()));
                 DirectoryServicesPermission union = (DirectoryServicesPermission)dsp1.Union(dsp2);
                 Assert.IsFalse(union.IsUnrestricted(), "target.IsUnrestricted " + ppl.ToString());
                 Assert.AreEqual(1, union.PermissionEntries.Count, "target.Count " + ppl.ToString());
@@ -379,9 +379,8 @@ namespace MonoTests.System.DirectoryServices
                 DirectoryServicesPermission dsp = new DirectoryServicesPermission(
                     PermissionState.None
                 );
-                dsp.PermissionEntries.Add(
-                    new DirectoryServicesPermissionEntry(ppl, ppl.ToString())
-                );
+                dsp.PermissionEntries
+                    .Add(new DirectoryServicesPermissionEntry(ppl, ppl.ToString()));
                 DirectoryServicesPermission union = (DirectoryServicesPermission)dsp.Union(dsp);
                 Assert.IsFalse(union.IsUnrestricted(), "IsUnrestricted " + ppl.ToString());
                 Assert.AreEqual(1, union.PermissionEntries.Count, "Count " + ppl.ToString());
@@ -400,9 +399,8 @@ namespace MonoTests.System.DirectoryServices
                 DirectoryServicesPermission dsp2 = new DirectoryServicesPermission(
                     PermissionState.None
                 );
-                dsp2.PermissionEntries.Add(
-                    new DirectoryServicesPermissionEntry(ppl, ppl.ToString())
-                );
+                dsp2.PermissionEntries
+                    .Add(new DirectoryServicesPermissionEntry(ppl, ppl.ToString()));
                 DirectoryServicesPermission union = (DirectoryServicesPermission)dsp1.Union(dsp2);
                 Assert.IsTrue(union.IsUnrestricted(), "target.IsUnrestricted " + ppl.ToString());
                 Assert.AreEqual(0, union.PermissionEntries.Count, "target.Count " + ppl.ToString());

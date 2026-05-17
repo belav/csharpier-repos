@@ -411,8 +411,7 @@ namespace System.ServiceModel.Channels
             try
             {
                 // If a message contains multiple Hopcounts with our name and namespace or the message can't deserialize to a ulong then ignore the HopCount
-                index = message
-                    .Headers
+                index = message.Headers
                     .FindHeader(
                         PeerStrings.HopCountElementName,
                         PeerStrings.HopCountElementNamespace
@@ -657,8 +656,7 @@ namespace System.ServiceModel.Channels
             {
                 FloodAsyncResult fresult = result as FloodAsyncResult;
                 if (fresult == null)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgument("result", SR.GetString(SR.InvalidAsyncResult));
                 fresult.End();
             }
@@ -856,8 +854,7 @@ namespace System.ServiceModel.Channels
                 int table = NotFound;
                 if (disposed)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(SR.GetString(SR.PeerFlooderDisposed))
                         );
@@ -877,8 +874,7 @@ namespace System.ServiceModel.Channels
             {
                 if (disposed)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(SR.GetString(SR.PeerFlooderDisposed))
                         );
@@ -1045,8 +1041,7 @@ namespace System.ServiceModel.Channels
                 {
                     try
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(new TimeoutException());
                     }
                     catch (Exception e)

@@ -25,8 +25,7 @@ public class HandlerDescriptorTests
 
             var descriptor = HandlerDescriptor.FromMethodInfo(method);
 
-            descriptor
-                .ParameterDescriptors
+            descriptor.ParameterDescriptors
                 .Select(p => p.ValueName)
                 .Should()
                 .BeEquivalentSequenceTo("value");
@@ -44,8 +43,7 @@ public class HandlerDescriptorTests
 
             var descriptor = HandlerDescriptor.FromMethodInfo(method);
 
-            descriptor
-                .ParameterDescriptors
+            descriptor.ParameterDescriptors
                 .Select(p => p.ValueType)
                 .Should()
                 .BeEquivalentSequenceTo(parameterType);
@@ -66,8 +64,7 @@ public class HandlerDescriptorTests
 
             var descriptor = HandlerDescriptor.FromMethodInfo(method);
 
-            descriptor
-                .ParameterDescriptors
+            descriptor.ParameterDescriptors
                 .Select(p => p.ValueName)
                 .Should()
                 .BeEquivalentSequenceTo("value");
@@ -85,8 +82,7 @@ public class HandlerDescriptorTests
 
             var descriptor = HandlerDescriptor.FromMethodInfo(method);
 
-            descriptor
-                .ParameterDescriptors
+            descriptor.ParameterDescriptors
                 .Select(p => p.ValueType)
                 .Should()
                 .BeEquivalentSequenceTo(parameterType);

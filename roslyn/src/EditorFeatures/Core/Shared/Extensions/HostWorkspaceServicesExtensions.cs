@@ -47,8 +47,7 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
         /// </summary>
         internal static string? GetLanguageName(this ITextBuffer buffer) =>
             Workspace.TryGetWorkspace(buffer.AsTextContainer(), out var workspace)
-                ? workspace
-                    .Services
+                ? workspace.Services
                     .SolutionServices
                     .GetProjectServices(buffer.ContentType)
                     ?.Language
@@ -110,8 +109,7 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
             }
 
             // We can't do anything special, so fall back to the expensive path
-            return hostWorkspaceServices
-                .SupportedLanguages
+            return hostWorkspaceServices.SupportedLanguages
                 .ToDictionary(
                     l => l,
                     l =>

@@ -44,8 +44,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             if (caretPoint.HasValue)
             {
                 if (
-                    _renameService
-                        .ActiveSession
+                    _renameService.ActiveSession
                         .TryGetContainingEditableSpan(caretPoint.Value, out var span)
                 )
                 {

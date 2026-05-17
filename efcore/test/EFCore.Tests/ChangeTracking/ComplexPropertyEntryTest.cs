@@ -296,8 +296,7 @@ public class ComplexPropertyEntryTest
         using var context = new YogurtContext();
         var complexEntry = context.Attach(CreateYogurt()).ComplexProperty(e => e.Culture);
 
-        var modified = complexEntry
-            .Properties
+        var modified = complexEntry.Properties
             .Where(e => e.IsModified)
             .Select(e => e.Metadata.Name)
             .ToList();
@@ -307,8 +306,7 @@ public class ComplexPropertyEntryTest
         complexEntry.Property(e => e.Species).CurrentValue = "S";
         complexEntry.Property(e => e.Subspecies).CurrentValue = "SS";
 
-        modified = complexEntry
-            .Properties
+        modified = complexEntry.Properties
             .Where(e => e.IsModified)
             .Select(e => e.Metadata.Name)
             .ToList();
@@ -704,8 +702,7 @@ public class ComplexPropertyEntryTest
         using var context = new YogurtContext();
         var complexEntry = context.Attach(CreateYogurt()).ComplexProperty(e => e.FieldCulture);
 
-        var modified = complexEntry
-            .Properties
+        var modified = complexEntry.Properties
             .Where(e => e.IsModified)
             .Select(e => e.Metadata.Name)
             .ToList();
@@ -715,8 +712,7 @@ public class ComplexPropertyEntryTest
         complexEntry.Property(e => e.Species).CurrentValue = "S";
         complexEntry.Property(e => e.Subspecies).CurrentValue = "SS";
 
-        modified = complexEntry
-            .Properties
+        modified = complexEntry.Properties
             .Where(e => e.IsModified)
             .Select(e => e.Metadata.Name)
             .ToList();

@@ -369,8 +369,7 @@ namespace System.Runtime.Remoting.Channels
                 desReqMsg = CrossAppDomainSerializer.DeserializeMessage(reqStm);
             }
 
-            LogicalCallContext lcc = Thread
-                .CurrentThread
+            LogicalCallContext lcc = Thread.CurrentThread
                 .GetMutableExecutionContext()
                 .LogicalCallContext;
             lcc.SetData(LCC_DATA_KEY, true);
@@ -459,8 +458,7 @@ namespace System.Runtime.Remoting.Channels
             Object[] args = new Object[] { reqStmBuff, smuggledMcm, null };
 
             retBuff = (byte[])
-                Thread
-                    .CurrentThread
+                Thread.CurrentThread
                     .InternalCrossContextCallback(
                         null,
                         _xadData.ContextID,

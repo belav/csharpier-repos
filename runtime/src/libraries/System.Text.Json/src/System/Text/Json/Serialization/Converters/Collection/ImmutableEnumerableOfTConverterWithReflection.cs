@@ -31,8 +31,7 @@ namespace System.Text.Json.Serialization.Converters
             JsonSerializerOptions options
         )
         {
-            jsonTypeInfo.CreateObjectWithArgs = DefaultJsonTypeInfoResolver
-                .MemberAccessor
+            jsonTypeInfo.CreateObjectWithArgs = DefaultJsonTypeInfoResolver.MemberAccessor
                 .CreateImmutableEnumerableCreateRangeDelegate<TCollection, TElement>();
         }
     }

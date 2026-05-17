@@ -930,8 +930,7 @@ namespace System.Web.Compilation
                 catch (Exception) { }
 
 #if DEBUG
-                Console
-                    .Error
+                Console.Error
                     .WriteLine(
                         "********************************************************************"
                     );
@@ -950,8 +949,7 @@ namespace System.Web.Compilation
                     Console.Error.WriteLine("File text:\n{0}\n", fileText);
                 else
                     Console.Error.WriteLine("No file text available");
-                Console
-                    .Error
+                Console.Error
                     .WriteLine(
                         "********************************************************************"
                     );

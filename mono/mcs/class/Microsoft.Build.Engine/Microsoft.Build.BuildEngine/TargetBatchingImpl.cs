@@ -206,8 +206,7 @@ namespace Microsoft.Build.BuildEngine
 
             if (String.IsNullOrEmpty(outputs.Trim()))
             {
-                project
-                    .ParentEngine
+                project.ParentEngine
                     .LogError("Target {0} has inputs but no outputs specified.", name);
                 return true;
             }

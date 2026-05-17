@@ -95,8 +95,7 @@ namespace System.ServiceModel.Channels
                                 reliableMessagingVersion,
                                 reason
                             );
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
                                     WsrmMessageInfo.CreateInternalFaultException(
                                         faultReply,
@@ -140,8 +139,7 @@ namespace System.ServiceModel.Channels
                                     reliableMessagingVersion,
                                     reason
                                 );
-                                throw DiagnosticUtility
-                                    .ExceptionUtility
+                                throw DiagnosticUtility.ExceptionUtility
                                     .ThrowHelperError(
                                         WsrmMessageInfo.CreateInternalFaultException(
                                             faultReply,
@@ -190,8 +188,7 @@ namespace System.ServiceModel.Channels
                             reliableMessagingVersion,
                             reason
                         );
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 WsrmMessageInfo.CreateInternalFaultException(
                                     faultReply,
@@ -217,8 +214,7 @@ namespace System.ServiceModel.Channels
                         reliableMessagingVersion,
                         reason
                     );
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             WsrmMessageInfo.CreateInternalFaultException(
                                 faultReply,
@@ -241,8 +237,7 @@ namespace System.ServiceModel.Channels
                     reliableMessagingVersion,
                     reason
                 );
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         WsrmMessageInfo.CreateInternalFaultException(
                             faultReply,

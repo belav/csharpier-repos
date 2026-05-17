@@ -35,8 +35,7 @@ namespace System.ServiceModel.Description
         public override void ExportContract(ContractDescription contract)
         {
             if (this.isFaulted)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(SR.GetString(SR.WsdlExporterIsFaulted))
                     );
@@ -118,8 +117,7 @@ namespace System.ServiceModel.Description
         public override void ExportEndpoint(ServiceEndpoint endpoint)
         {
             if (this.isFaulted)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(SR.GetString(SR.WsdlExporterIsFaulted))
                     );
@@ -152,8 +150,7 @@ namespace System.ServiceModel.Description
         )
         {
             if (this.isFaulted)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(SR.GetString(SR.WsdlExporterIsFaulted))
                     );
@@ -161,8 +158,7 @@ namespace System.ServiceModel.Description
             if (endpoints == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("endpoints");
             if (wsdlServiceQName == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("wsdlServiceQName");
 
             foreach (ServiceEndpoint endpoint in endpoints)
@@ -200,8 +196,7 @@ namespace System.ServiceModel.Description
         )
         {
             if (endpoint.Binding == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentException(
                             SR.GetString(SR.EndpointsMustHaveAValidBinding1, endpoint.Name)
@@ -369,8 +364,7 @@ namespace System.ServiceModel.Description
             WsdlNS.PortType wsdlPortType = new WsdlNS.PortType();
             wsdlPortType.Name = wsdlPortTypeQName.Name;
             if (wsdl.PortTypes[wsdlPortType.Name] != null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentException(
                             SR.GetString(
@@ -766,8 +760,7 @@ namespace System.ServiceModel.Description
                 XmlAttribute attribute;
                 if (policyVersion == PolicyVersion.Policy12)
                 {
-                    attribute = WsdlExporter
-                        .XmlDoc
+                    attribute = WsdlExporter.XmlDoc
                         .CreateAttribute(
                             MetadataStrings.AddressingWsdl.Prefix,
                             MetadataStrings.AddressingWsdl.Action,
@@ -776,8 +769,7 @@ namespace System.ServiceModel.Description
                 }
                 else
                 {
-                    attribute = WsdlExporter
-                        .XmlDoc
+                    attribute = WsdlExporter.XmlDoc
                         .CreateAttribute(
                             MetadataStrings.AddressingMetadata.Prefix,
                             MetadataStrings.AddressingMetadata.Action,
@@ -824,8 +816,7 @@ namespace System.ServiceModel.Description
                 }
                 else
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(SR.AddressingVersionNotSupported, addressing)
@@ -890,8 +881,7 @@ namespace System.ServiceModel.Description
                         {
                             mode = (SupportedAddressingMode)exporter.State[key];
                             if (!SupportedAddressingModeHelper.IsDefined(mode))
-                                throw DiagnosticUtility
-                                    .ExceptionUtility
+                                throw DiagnosticUtility.ExceptionUtility
                                     .ThrowHelperError(
                                         new InvalidOperationException(
                                             SR.GetString(
@@ -907,15 +897,13 @@ namespace System.ServiceModel.Description
                             string responsesAssertionLocalName;
                             if (mode == SupportedAddressingMode.Anonymous)
                             {
-                                responsesAssertionLocalName = MetadataStrings
-                                    .Addressing10
+                                responsesAssertionLocalName = MetadataStrings.Addressing10
                                     .MetadataPolicy
                                     .AnonymousResponses;
                             }
                             else
                             {
-                                responsesAssertionLocalName = MetadataStrings
-                                    .Addressing10
+                                responsesAssertionLocalName = MetadataStrings.Addressing10
                                     .MetadataPolicy
                                     .NonAnonymousResponses;
                             }
@@ -944,8 +932,7 @@ namespace System.ServiceModel.Description
                 }
                 else
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(SR.AddressingVersionNotSupported, addressVersion)
@@ -988,8 +975,7 @@ namespace System.ServiceModel.Description
                     keyBase;
                 ICollection<XmlElement> assertions;
 
-                WsdlNS.ServiceDescription policyWsdl = endpointContext
-                    .WsdlBinding
+                WsdlNS.ServiceDescription policyWsdl = endpointContext.WsdlBinding
                     .ServiceDescription;
 
                 assertions = policyContext.GetBindingAssertions();
@@ -1317,8 +1303,7 @@ namespace System.ServiceModel.Description
                 if (!(scopes.Length > 0))
                 {
                     Fx.Assert("You must pass at least one namespaceScope");
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 String.Format(
@@ -1597,8 +1582,7 @@ namespace System.ServiceModel.Description
             {
                 if (Fx.IsFatal(e))
                     throw;
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         ThrowExtensionException(contractContext.Contract, extension, e)
                     );
@@ -1619,8 +1603,7 @@ namespace System.ServiceModel.Description
             {
                 if (Fx.IsFatal(e))
                     throw;
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         ThrowExtensionException(endpointContext.Endpoint, extension, e)
                     );

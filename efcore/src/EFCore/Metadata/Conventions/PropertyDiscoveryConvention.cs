@@ -126,8 +126,7 @@ public class PropertyDiscoveryConvention
         IConventionTypeBase structuralType,
         out CoreTypeMapping? mapping
     ) =>
-        Dependencies
-            .MemberClassifier
+        Dependencies.MemberClassifier
             .IsCandidatePrimitiveProperty(
                 memberInfo,
                 structuralType.Model,

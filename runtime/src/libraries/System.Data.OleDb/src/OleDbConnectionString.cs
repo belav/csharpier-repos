@@ -359,8 +359,7 @@ namespace System.Data.OleDb
                         { // please verify header before allocating memory block for connection string
                             bytes = new byte[length - hdrlength];
                             count = fstream.Read(bytes, 0, bytes.Length);
-                            connectionString = System
-                                .Text
+                            connectionString = System.Text
                                 .Encoding
                                 .Unicode
                                 .GetString(bytes, 0, count);

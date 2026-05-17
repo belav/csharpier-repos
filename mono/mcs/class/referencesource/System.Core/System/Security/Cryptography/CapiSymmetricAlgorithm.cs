@@ -339,8 +339,7 @@ namespace System.Security.Cryptography
                 fixed (byte* pData = &buffer[offset])
                 {
                     if (
-                        !CapiNative
-                            .UnsafeNativeMethods
+                        !CapiNative.UnsafeNativeMethods
                             .CryptEncrypt(
                                 m_key,
                                 SafeCapiHashHandle.InvalidHandle,
@@ -397,8 +396,7 @@ namespace System.Security.Cryptography
                 case PaddingMode.ISO10126:
                     result = new byte[count + padBytes];
 
-                    CapiNative
-                        .UnsafeNativeMethods
+                    CapiNative.UnsafeNativeMethods
                         .CryptGenRandom(m_provider, result.Length - 1, result);
                     Buffer.BlockCopy(block, 0, result, 0, count);
                     result[result.Length - 1] = (byte)padBytes;
@@ -523,8 +521,7 @@ namespace System.Security.Cryptography
                 fixed (byte* pData = &buffer[offset])
                 {
                     if (
-                        !CapiNative
-                            .UnsafeNativeMethods
+                        !CapiNative.UnsafeNativeMethods
                             .CryptDecrypt(
                                 m_key,
                                 SafeCapiHashHandle.InvalidHandle,
@@ -566,8 +563,7 @@ namespace System.Security.Cryptography
                 {
                     if (m_encryptionMode == EncryptionMode.Encrypt)
                     {
-                        CapiNative
-                            .UnsafeNativeMethods
+                        CapiNative.UnsafeNativeMethods
                             .CryptEncrypt(
                                 m_key,
                                 SafeCapiHashHandle.InvalidHandle,
@@ -586,8 +582,7 @@ namespace System.Security.Cryptography
                         {
                             resetSize = buffer.Length;
                         }
-                        CapiNative
-                            .UnsafeNativeMethods
+                        CapiNative.UnsafeNativeMethods
                             .CryptDecrypt(
                                 m_key,
                                 SafeCapiHashHandle.InvalidHandle,

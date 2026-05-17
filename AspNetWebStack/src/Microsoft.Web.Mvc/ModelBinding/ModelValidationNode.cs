@@ -164,8 +164,7 @@ namespace Microsoft.Web.Mvc.ModelBinding
             // DevDiv Bugs #227802 - Caching problem in ModelMetadata requires us to manually regenerate
             // the ModelMetadata.
             object model = ModelMetadata.Model;
-            ModelMetadata updatedMetadata = ModelMetadataProviders
-                .Current
+            ModelMetadata updatedMetadata = ModelMetadataProviders.Current
                 .GetMetadataForType(() => model, ModelMetadata.ModelType);
 
             foreach (ModelMetadata propertyMetadata in updatedMetadata.Properties)

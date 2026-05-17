@@ -39,8 +39,7 @@ internal class HubSample
             logging.AddConsole();
         });
 
-        connectionBuilder
-            .Services
+        connectionBuilder.Services
             .Configure<LoggerFilterOptions>(options =>
             {
                 options.MinLevel = LogLevel.Trace;

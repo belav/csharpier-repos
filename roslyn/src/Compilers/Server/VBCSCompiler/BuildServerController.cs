@@ -147,8 +147,7 @@ namespace Microsoft.CodeAnalysis.CompilerServer
                     return CommonCompiler.Failed;
                 }
 
-                compilerServerHost
-                    .Logger
+                compilerServerHost.Logger
                     .Log(
                         "Keep alive timeout is: {0} milliseconds.",
                         keepAlive?.TotalMilliseconds ?? 0

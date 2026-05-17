@@ -1068,9 +1068,10 @@ namespace System.Data.ProviderBase
                         }
                         else if (timeout)
                         {
-                            next.Completion.TrySetException(
-                                ADP.ExceptionWithStackTrace(ADP.PooledOpenTimeout())
-                            );
+                            next.Completion
+                                .TrySetException(
+                                    ADP.ExceptionWithStackTrace(ADP.PooledOpenTimeout())
+                                );
                         }
                         else
                         {
@@ -1217,8 +1218,7 @@ namespace System.Data.ProviderBase
                             unsafe
                             {
                                 nint* handle = (nint*)_waitHandles.DangerousGetHandle();
-                                waitResult = Interop
-                                    .Kernel32
+                                waitResult = Interop.Kernel32
                                     .WaitForMultipleObjects(
                                         waitHandleCount,
                                         handle,
@@ -1315,8 +1315,7 @@ namespace System.Data.ProviderBase
                                     if (onlyOneCheckConnection)
                                     {
                                         if (
-                                            _waitHandles
-                                                .CreationSemaphore
+                                            _waitHandles.CreationSemaphore
                                                 .WaitOne(
                                                     unchecked((int)waitForMultipleObjectsTimeout)
                                                 )
@@ -1379,8 +1378,7 @@ namespace System.Data.ProviderBase
                     {
                         if (CREATION_HANDLE == waitResult)
                         {
-                            bool result = Interop
-                                .Kernel32
+                            bool result = Interop.Kernel32
                                 .ReleaseSemaphore(_waitHandles.CreationHandle, 1, out _);
                             if (!result)
                             { // failure case
@@ -1583,8 +1581,7 @@ namespace System.Data.ProviderBase
                             try { }
                             finally
                             {
-                                waitResult = Interop
-                                    .Kernel32
+                                waitResult = Interop.Kernel32
                                     .WaitForSingleObject(_waitHandles.CreationHandle, (int)timeout);
                             }
                             if (WAIT_OBJECT_0 == waitResult)
@@ -1644,8 +1641,7 @@ namespace System.Data.ProviderBase
                             if (WAIT_OBJECT_0 == waitResult)
                             {
                                 // reuse waitResult and ignore its value
-                                waitResult = Interop
-                                    .Kernel32
+                                waitResult = Interop.Kernel32
                                     .ReleaseSemaphore(_waitHandles.CreationHandle, 1, out _)
                                     ? 1
                                     : 0;

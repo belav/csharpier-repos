@@ -69,8 +69,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SyncNamespaces
                 .ConfigureAwait(false);
             if (menuCommandService != null)
             {
-                await _threadingContext
-                    .JoinableTaskFactory
+                await _threadingContext.JoinableTaskFactory
                     .SwitchToMainThreadAsync(cancellationToken);
                 VisualStudioCommandHandlerHelpers.AddCommand(
                     menuCommandService,
@@ -101,12 +100,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SyncNamespaces
             else
             {
                 // Is a solution node. Do we contain any C# projects?
-                visible = _workspace
-                    .CurrentSolution
+                visible = _workspace.CurrentSolution
                     .Projects
                     .Any(project =>
-                        project
-                            .Language
+                        project.Language
                             .Equals(LanguageNames.CSharp, StringComparison.OrdinalIgnoreCase)
                     );
             }
@@ -141,12 +138,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SyncNamespaces
             else
             {
                 // The solution node is selected, so collect all the C# projects for update.
-                var projects = _workspace
-                    .CurrentSolution
+                var projects = _workspace.CurrentSolution
                     .Projects
                     .Where(project =>
-                        project
-                            .Language
+                        project.Language
                             .Equals(LanguageNames.CSharp, StringComparison.OrdinalIgnoreCase)
                     )
                     .ToImmutableArray();
@@ -162,8 +157,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SyncNamespaces
             var projectFilePath = projectHierarchy.TryGetProjectFilePath();
 
             var solution = _workspace.CurrentSolution;
-            return solution
-                .Projects
+            return solution.Projects
                 .Where(project =>
                     project.FilePath?.Equals(projectFilePath, StringComparison.OrdinalIgnoreCase)
                     == true
@@ -189,8 +183,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SyncNamespaces
                 showProgress: true,
                 operationContext =>
                 {
-                    solution = _threadingContext
-                        .JoinableTaskFactory
+                    solution = _threadingContext.JoinableTaskFactory
                         .Run(() =>
                             syncService.SyncNamespacesAsync(
                                 projects,
@@ -206,8 +199,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SyncNamespaces
             {
                 if (_workspace.CurrentSolution.GetChanges(solution).GetProjectChanges().Any())
                 {
-                    var previewChangeService = _workspace
-                        .Services
+                    var previewChangeService = _workspace.Services
                         .GetRequiredService<IPreviewDialogService>();
                     var newSolution = previewChangeService.PreviewChanges(
                         title: EditorFeaturesResources.Preview_Changes,

@@ -811,24 +811,25 @@ namespace System.Threading.Tasks.Tests
                 if (s == null)
                     throw new ArgumentNullException(nameof(s));
 
-                Task t = Task.Factory.StartNew(
-                    delegate
-                    {
-                        try
+                Task t = Task.Factory
+                    .StartNew(
+                        delegate
                         {
-                            lock (_list)
+                            try
                             {
-                                for (int i = 0; i < length; i++)
-                                    _list.Add(s[i + offset]);
+                                lock (_list)
+                                {
+                                    for (int i = 0; i < length; i++)
+                                        _list.Add(s[i + offset]);
+                                }
+                                mar.Signal();
                             }
-                            mar.Signal();
+                            catch (Exception e)
+                            {
+                                mar.Signal(e);
+                            }
                         }
-                        catch (Exception e)
-                        {
-                            mar.Signal(e);
-                        }
-                    }
-                );
+                    );
 
                 return mar;
             }
@@ -877,36 +878,37 @@ namespace System.Threading.Tasks.Tests
                 if (maxBytes == -1)
                     throw new ArgumentException("Value was not valid", nameof(maxBytes));
 
-                Task t = Task.Factory.StartNew(
-                    delegate
-                    {
-                        StringBuilder sb = new StringBuilder();
-                        int bytesRead = 0;
-                        try
+                Task t = Task.Factory
+                    .StartNew(
+                        delegate
                         {
-                            lock (_list)
+                            StringBuilder sb = new StringBuilder();
+                            int bytesRead = 0;
+                            try
                             {
-                                while ((_list.Count > 0) && (bytesRead < maxBytes))
+                                lock (_list)
                                 {
-                                    sb.Append(_list[0]);
-                                    if (buf != null)
+                                    while ((_list.Count > 0) && (bytesRead < maxBytes))
                                     {
-                                        buf[offset] = _list[0];
-                                        offset++;
+                                        sb.Append(_list[0]);
+                                        if (buf != null)
+                                        {
+                                            buf[offset] = _list[0];
+                                            offset++;
+                                        }
+                                        _list.RemoveAt(0);
+                                        bytesRead++;
                                     }
-                                    _list.RemoveAt(0);
-                                    bytesRead++;
                                 }
-                            }
 
-                            mar.SignalState(sb.ToString());
+                                mar.SignalState(sb.ToString());
+                            }
+                            catch (Exception e)
+                            {
+                                mar.Signal(e);
+                            }
                         }
-                        catch (Exception e)
-                        {
-                            mar.Signal(e);
-                        }
-                    }
-                );
+                    );
 
                 return mar;
             }

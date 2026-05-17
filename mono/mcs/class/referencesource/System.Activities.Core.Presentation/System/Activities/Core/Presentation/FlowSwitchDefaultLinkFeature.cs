@@ -17,8 +17,7 @@ namespace System.Activities.Core.Presentation
         public override void Initialize(EditingContext context, Type modelType)
         {
             if (
-                context
-                    .Services
+                context.Services
                     .GetService<DesignerConfigurationService>()
                     .TargetFrameworkName
                     .IsLessThan45()

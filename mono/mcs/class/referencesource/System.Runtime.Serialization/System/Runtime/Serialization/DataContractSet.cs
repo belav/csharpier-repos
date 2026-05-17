@@ -45,8 +45,7 @@ namespace System.Runtime.Serialization
         internal DataContractSet(DataContractSet dataContractSet)
         {
             if (dataContractSet == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -122,8 +121,7 @@ namespace System.Runtime.Serialization
         internal static void EnsureTypeNotGeneric(Type type)
         {
             if (type.ContainsGenericParameters)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -157,8 +155,7 @@ namespace System.Runtime.Serialization
                         dataContract.UnderlyingType == null
                         || dataContractInSet.UnderlyingType == null
                     )
-                        throw System
-                            .Runtime
+                        throw System.Runtime
                             .Serialization
                             .DiagnosticUtility
                             .ExceptionUtility
@@ -177,8 +174,7 @@ namespace System.Runtime.Serialization
                             DataContract.GetClrTypeFullName(dataContract.UnderlyingType)
                             == DataContract.GetClrTypeFullName(dataContractInSet.UnderlyingType)
                         );
-                        throw System
-                            .Runtime
+                        throw System.Runtime
                             .Serialization
                             .DiagnosticUtility
                             .ExceptionUtility
@@ -195,8 +191,7 @@ namespace System.Runtime.Serialization
                                         ),
                                         (
                                             typeNamesEqual
-                                                ? dataContractInSet
-                                                    .UnderlyingType
+                                                ? dataContractInSet.UnderlyingType
                                                     .AssemblyQualifiedName
                                                 : DataContract.GetClrTypeFullName(
                                                     dataContractInSet.UnderlyingType
@@ -351,8 +346,7 @@ namespace System.Runtime.Serialization
                         );
                         if (dcType != dataMemberType)
                         {
-                            throw System
-                                .Runtime
+                            throw System.Runtime
                                 .Serialization
                                 .DiagnosticUtility
                                 .ExceptionUtility
@@ -476,8 +470,7 @@ namespace System.Runtime.Serialization
                     foreach (Type type in this.referencedTypes)
                     {
                         if (type == null)
-                            throw System
-                                .Runtime
+                            throw System.Runtime
                                 .Serialization
                                 .DiagnosticUtility
                                 .ExceptionUtility
@@ -504,8 +497,7 @@ namespace System.Runtime.Serialization
                     foreach (Type type in this.referencedCollectionTypes)
                     {
                         if (type == null)
-                            throw System
-                                .Runtime
+                            throw System.Runtime
                                 .Serialization
                                 .DiagnosticUtility
                                 .ExceptionUtility
@@ -657,8 +649,7 @@ namespace System.Runtime.Serialization
                     }
                     if (containsGenericType)
                     {
-                        throw System
-                            .Runtime
+                        throw System.Runtime
                             .Serialization
                             .DiagnosticUtility
                             .ExceptionUtility
@@ -677,8 +668,7 @@ namespace System.Runtime.Serialization
                     }
                     else
                     {
-                        throw System
-                            .Runtime
+                        throw System.Runtime
                             .Serialization
                             .DiagnosticUtility
                             .ExceptionUtility

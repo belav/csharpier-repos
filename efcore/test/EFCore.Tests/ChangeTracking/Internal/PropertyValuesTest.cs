@@ -44,11 +44,9 @@ public class PropertyValuesTest
         entity.Entity.Name = NewNameValue;
 
         // Act
-        var current = entity
-            .CurrentValues
+        var current = entity.CurrentValues
             .TryGetValue<string>("Non_Existent_Property", out var non_existent_current);
-        var original = entity
-            .OriginalValues
+        var original = entity.OriginalValues
             .TryGetValue<string>("Non_Existent_Property", out var non_existent_original);
 
         // Assert

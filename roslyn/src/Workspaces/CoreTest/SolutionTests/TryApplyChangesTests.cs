@@ -181,8 +181,7 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 workspace.TryApplyChanges(
                     project
                         .WithParseOptions(
-                            project
-                                .ParseOptions!
+                            project.ParseOptions!
                                 .WithFeatures(new[] { KeyValuePairUtil.Create("Feature", "") })
                         )
                         .Solution
@@ -206,8 +205,7 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 workspace.TryApplyChanges(
                     project
                         .WithParseOptions(
-                            project
-                                .ParseOptions!
+                            project.ParseOptions!
                                 .WithFeatures(
                                     new[] { KeyValuePairUtil.Create("Feature", "ExpectedValue") }
                                 )
@@ -233,8 +231,7 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 workspace.TryApplyChanges(
                     project
                         .WithParseOptions(
-                            project
-                                .ParseOptions!
+                            project.ParseOptions!
                                 .WithFeatures(
                                     new[] { KeyValuePairUtil.Create("Feature", "WrongThing") }
                                 )

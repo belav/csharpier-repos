@@ -33,8 +33,7 @@ namespace System.Net
                 // add in the new headers from the cookie container for this request
                 //
                 string optCookie2;
-                string cookieString = httpWebRequest
-                    .CookieContainer
+                string cookieString = httpWebRequest.CookieContainer
                     .GetCookieHeader(httpWebRequest.GetRemoteResourceUri(), out optCookie2);
 
                 if (cookieString.Length > 0)
@@ -88,8 +87,7 @@ namespace System.Net
                     );
                     if ((cookieString != null) && (cookieString.Length > 0))
                     {
-                        cookies = httpWebRequest
-                            .CookieContainer
+                        cookies = httpWebRequest.CookieContainer
                             .CookieCutter(
                                 response.ResponseUri,
                                 HttpKnownHeaderNames.SetCookie,
@@ -110,8 +108,7 @@ namespace System.Net
                     );
                     if ((cookieString != null) && (cookieString.Length > 0))
                     {
-                        CookieCollection cookies2 = httpWebRequest
-                            .CookieContainer
+                        CookieCollection cookies2 = httpWebRequest.CookieContainer
                             .CookieCutter(
                                 response.ResponseUri,
                                 HttpKnownHeaderNames.SetCookie2,

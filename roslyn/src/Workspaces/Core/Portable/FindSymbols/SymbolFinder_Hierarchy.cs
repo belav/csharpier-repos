@@ -242,8 +242,7 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                                         {
                                             if (
                                                 implementation != null
-                                                && SymbolEquivalenceComparer
-                                                    .Instance
+                                                && SymbolEquivalenceComparer.Instance
                                                     .Equals(
                                                         implementation.OriginalDefinition,
                                                         symbol.OriginalDefinition

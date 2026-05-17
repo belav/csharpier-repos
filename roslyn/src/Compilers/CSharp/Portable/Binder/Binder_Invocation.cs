@@ -1800,13 +1800,11 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 InvocationExpressionSyntax invocation => invocation.ArgumentList.OpenParenToken,
                 BaseObjectCreationExpressionSyntax objectCreation => objectCreation.NewKeyword,
-                ConstructorInitializerSyntax constructorInitializer => constructorInitializer
-                    .ArgumentList
-                    .OpenParenToken,
+                ConstructorInitializerSyntax constructorInitializer =>
+                    constructorInitializer.ArgumentList.OpenParenToken,
                 PrimaryConstructorBaseTypeSyntax primaryConstructorBaseType =>
                     primaryConstructorBaseType.ArgumentList.OpenParenToken,
-                ElementAccessExpressionSyntax elementAccess => elementAccess
-                    .ArgumentList
+                ElementAccessExpressionSyntax elementAccess => elementAccess.ArgumentList
                     .OpenBracketToken,
                 _ => syntax.GetFirstToken(),
             };
@@ -2294,8 +2292,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 BoundExpression defaultValue;
                 if (callerSourceLocation is object && parameter.IsCallerLineNumber)
                 {
-                    int line = callerSourceLocation
-                        .SourceTree
+                    int line = callerSourceLocation.SourceTree
                         .GetDisplayLineNumber(callerSourceLocation.SourceSpan);
                     defaultValue = new BoundLiteral(
                         syntax,
@@ -2308,8 +2305,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 }
                 else if (callerSourceLocation is object && parameter.IsCallerFilePath)
                 {
-                    string path = callerSourceLocation
-                        .SourceTree
+                    string path = callerSourceLocation.SourceTree
                         .GetDisplayPath(
                             callerSourceLocation.SourceSpan,
                             Compilation.Options.SourceReferenceResolver
@@ -2590,8 +2586,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                                         ErrorCode.WRN_PrimaryConstructorParameterIsShadowedAndNotPassedToBase
                                 && !(
                                     d.Arguments is [ParameterSymbol shadowedParameter]
-                                    && shadowedParameter
-                                        .Type
+                                    && shadowedParameter.Type
                                         .Equals(
                                             typeOrValue.Data.ValueExpression.Type,
                                             TypeCompareKind.AllIgnoreOptions

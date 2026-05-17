@@ -638,8 +638,7 @@ namespace System.Data.Objects.ELinq
                 }
                 else
                 {
-                    EntityCollection<T> result = wrappedOwner
-                        .RelationshipManager
+                    EntityCollection<T> result = wrappedOwner.RelationshipManager
                         .GetRelatedCollection<T>(relationshipName, targetRoleName);
                     // register a handler for deferred loading (when the nested result has been consumed)
                     coordinator.RegisterCloseHandler(
@@ -671,8 +670,7 @@ namespace System.Data.Objects.ELinq
                 if (!EntityUtil.TryGetICollectionElementType(ClrType, out elementType))
                 {
                     throw EntityUtil.InvalidOperation(
-                        System
-                            .Data
+                        System.Data
                             .Entity
                             .Strings
                             .ELinq_UnexpectedTypeForNavigationProperty(

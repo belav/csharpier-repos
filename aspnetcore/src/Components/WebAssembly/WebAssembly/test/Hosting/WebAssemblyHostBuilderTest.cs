@@ -22,8 +22,7 @@ public class WebAssemblyHostBuilderTest
         // Arrange
         var builder = new WebAssemblyHostBuilder(new TestInternalJSImportMethods(), JsonOptions);
 
-        builder
-            .Configuration
+        builder.Configuration
             .AddInMemoryCollection(new[] { new KeyValuePair<string, string>("key", "value") });
 
         // Act
@@ -208,8 +207,7 @@ public class WebAssemblyHostBuilderTest
         // Arrange
         var builder = new WebAssemblyHostBuilder(new TestInternalJSImportMethods(), JsonOptions);
 
-        builder
-            .Configuration
+        builder.Configuration
             .AddInMemoryCollection(new[] { new KeyValuePair<string, string>("key", "value") });
 
         // Act

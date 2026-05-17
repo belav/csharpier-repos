@@ -210,10 +210,15 @@ namespace System.Data.Query.PlanCompiler
             bool isUnnested
         )
         {
-            this._groupAggregateVarRelatedVarToInfo.Add(
-                var,
-                new GroupAggregateVarRefInfo(groupAggregateVarInfo, computationTemplate, isUnnested)
-            );
+            this._groupAggregateVarRelatedVarToInfo
+                .Add(
+                    var,
+                    new GroupAggregateVarRefInfo(
+                        groupAggregateVarInfo,
+                        computationTemplate,
+                        isUnnested
+                    )
+                );
             _groupAggregateVarInfos.Add(groupAggregateVarInfo);
         }
 
@@ -281,10 +286,8 @@ namespace System.Data.Query.PlanCompiler
             out GroupAggregateVarRefInfo groupAggregateVarRefInfo
         )
         {
-            return this._groupAggregateVarRelatedVarToInfo.TryGetValue(
-                var,
-                out groupAggregateVarRefInfo
-            );
+            return this._groupAggregateVarRelatedVarToInfo
+                .TryGetValue(var, out groupAggregateVarRefInfo);
         }
 
         /// <summary>
@@ -642,10 +645,8 @@ namespace System.Data.Query.PlanCompiler
             Node computationTemplate = groupAggregateVarRefInfo.Computation;
             if (localProperty != null)
             {
-                computationTemplate = this._command.CreateNode(
-                    this._command.CreatePropertyOp(localProperty),
-                    computationTemplate
-                );
+                computationTemplate = this._command
+                    .CreateNode(this._command.CreatePropertyOp(localProperty), computationTemplate);
             }
             return computationTemplate;
         }
@@ -936,8 +937,7 @@ namespace System.Data.Query.PlanCompiler
                 )
             )
             {
-                referencedGroupAggregateVarInfo
-                    .CandidateAggregateNodes
+                referencedGroupAggregateVarInfo.CandidateAggregateNodes
                     .Add(new KeyValuePair<Node, Node>(n, templateNode));
             }
         }

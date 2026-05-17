@@ -143,8 +143,7 @@ namespace Microsoft.CodeAnalysis.GenerateEqualsAndGetHashCodeFromMembers
 
             GetExistingMemberInfo(containingType, out var hasEquals, out var hasGetHashCode);
 
-            var globalOptions = document
-                .Project
+            var globalOptions = document.Project
                 .Solution
                 .Services
                 .GetService<ILegacyGlobalOptionsWorkspaceService>();
@@ -193,8 +192,7 @@ namespace Microsoft.CodeAnalysis.GenerateEqualsAndGetHashCodeFromMembers
             // options if the type is a ref struct.
             if (!containingType.IsRefLikeType)
             {
-                var equatableTypeOpt = semanticModel
-                    .Compilation
+                var equatableTypeOpt = semanticModel.Compilation
                     .GetTypeByMetadataName(typeof(IEquatable<>).FullName!);
                 if (equatableTypeOpt != null)
                 {

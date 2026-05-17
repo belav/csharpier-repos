@@ -1076,8 +1076,7 @@ public class ChunkedRequestTests : LoggedTest
 
                     response.Headers["Content-Length"] = new[] { "11" };
 
-                    await response
-                        .BodyWriter
+                    await response.BodyWriter
                         .WriteAsync(
                             new Memory<byte>(Encoding.ASCII.GetBytes("Hello World"), 0, 11)
                         );
@@ -1135,8 +1134,7 @@ public class ChunkedRequestTests : LoggedTest
 
                     response.Headers["Content-Length"] = new[] { "11" };
 
-                    await response
-                        .BodyWriter
+                    await response.BodyWriter
                         .WriteAsync(
                             new Memory<byte>(Encoding.ASCII.GetBytes("Hello World"), 0, 11)
                         );
@@ -1267,8 +1265,7 @@ public class ChunkedRequestTests : LoggedTest
 
                     response.Headers["Content-Length"] = new[] { "11" };
 
-                    await response
-                        .BodyWriter
+                    await response.BodyWriter
                         .WriteAsync(
                             new Memory<byte>(Encoding.ASCII.GetBytes("Hello World"), 0, 11)
                         );

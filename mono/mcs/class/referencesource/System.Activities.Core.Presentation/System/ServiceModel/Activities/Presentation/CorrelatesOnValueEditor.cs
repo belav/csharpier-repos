@@ -18,8 +18,7 @@ namespace System.ServiceModel.Activities.Presentation
     {
         public CorrelatesOnValueEditor()
         {
-            this.InlineEditorTemplate = EditorCategoryTemplateDictionary
-                .Instance
+            this.InlineEditorTemplate = EditorCategoryTemplateDictionary.Instance
                 .GetCategoryTemplate("CorrelatesOnDesigner_InlineTemplate");
         }
 
@@ -51,8 +50,7 @@ namespace System.ServiceModel.Activities.Presentation
             Fx.Assert(null != undoEngine, "UndoEngine should be available");
 
             using (
-                EditingScope scope = context
-                    .Services
+                EditingScope scope = context.Services
                     .GetRequiredService<ModelTreeManager>()
                     .CreateEditingScope(bookmarkTitle, true)
             )
@@ -77,8 +75,7 @@ namespace System.ServiceModel.Activities.Presentation
                 this.MinWidth = 450;
                 this.WindowResizeMode = ResizeMode.CanResize;
                 this.WindowSizeToContent = SizeToContent.Manual;
-                var template = EditorCategoryTemplateDictionary
-                    .Instance
+                var template = EditorCategoryTemplateDictionary.Instance
                     .GetCategoryTemplate("CorrelatesOnDesigner_DialogTemplate");
 
                 var presenter = new ContentPresenter()

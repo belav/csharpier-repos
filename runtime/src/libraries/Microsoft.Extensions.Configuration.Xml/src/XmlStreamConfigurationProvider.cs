@@ -82,14 +82,12 @@ namespace Microsoft.Extensions.Configuration.Xml
                                 {
                                     // check if this element has appeared before, elements are considered siblings if their SiblingName properties match
                                     if (
-                                        !parent
-                                            .ChildrenBySiblingName
+                                        !parent.ChildrenBySiblingName
                                             .TryGetValue(element.SiblingName, out var siblings)
                                     )
                                     {
                                         siblings = new List<XmlConfigurationElement>();
-                                        parent
-                                            .ChildrenBySiblingName
+                                        parent.ChildrenBySiblingName
                                             .Add(element.SiblingName, siblings);
                                     }
                                     siblings.Add(element);
@@ -268,8 +266,7 @@ namespace Microsoft.Extensions.Configuration.Xml
                     );
                 }
 
-                element
-                    .Attributes!
+                element.Attributes!
                     .Add(
                         new XmlConfigurationElementAttributeValue(
                             reader.LocalName,

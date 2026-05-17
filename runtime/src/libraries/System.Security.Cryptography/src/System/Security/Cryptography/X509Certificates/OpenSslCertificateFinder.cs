@@ -16,8 +16,7 @@ namespace System.Security.Cryptography.X509Certificates
         {
             OpenSslX509CertificateReader certPal = (OpenSslX509CertificateReader)cert.Pal;
 
-            byte[] publicKeyInfoBytes = Interop
-                .Crypto
+            byte[] publicKeyInfoBytes = Interop.Crypto
                 .OpenSslEncode(
                     Interop.Crypto.GetX509SubjectPublicKeyInfoDerSize,
                     Interop.Crypto.EncodeX509SubjectPublicKeyInfo,

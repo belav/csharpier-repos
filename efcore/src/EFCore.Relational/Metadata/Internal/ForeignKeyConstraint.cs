@@ -113,8 +113,7 @@ public class ForeignKeyConstraint : Annotatable, IForeignKeyConstraint
             ref _foreignKeyRowValueFactory,
             this,
             static constraint =>
-                constraint
-                    .Table
+                constraint.Table
                     .Model
                     .Model
                     .GetRelationalDependencies()

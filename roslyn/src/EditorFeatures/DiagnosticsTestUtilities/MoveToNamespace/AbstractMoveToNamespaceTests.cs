@@ -50,8 +50,7 @@ namespace Microsoft.CodeAnalysis.Test.Utilities.MoveToNamespace
             testState.TestMoveToNamespaceOptionsService.SetOptions(moveToNamespaceOptions);
             if (expectedSuccess)
             {
-                var actions = await testState
-                    .MoveToNamespaceService
+                var actions = await testState.MoveToNamespaceService
                     .GetCodeActionsAsync(
                         testState.InvocationDocument,
                         testState.TestInvocationDocument.SelectedSpans.Single(),
@@ -133,8 +132,7 @@ namespace Microsoft.CodeAnalysis.Test.Utilities.MoveToNamespace
             var workspace = CreateWorkspaceFromOptions(markup, new TestParameters());
             using var testState = new TestState(workspace);
 
-            var analysis = await testState
-                .MoveToNamespaceService
+            var analysis = await testState.MoveToNamespaceService
                 .AnalyzeTypeAtPositionAsync(
                     testState.InvocationDocument,
                     testState.TestInvocationDocument.SelectedSpans.Single().Start,

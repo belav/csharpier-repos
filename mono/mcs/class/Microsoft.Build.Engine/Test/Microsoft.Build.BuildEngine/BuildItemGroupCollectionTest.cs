@@ -101,8 +101,7 @@ namespace MonoTests.Microsoft.Build.BuildEngine
             project = engine.CreateNewProject();
             project.LoadXml(documentString);
 
-            project
-                .ItemGroups
+            project.ItemGroups
                 .CopyTo(
                     new BuildItemGroup[][] { new BuildItemGroup[] { new BuildItemGroup() } },
                     0

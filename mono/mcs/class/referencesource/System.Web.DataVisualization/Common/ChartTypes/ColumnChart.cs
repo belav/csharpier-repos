@@ -297,8 +297,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             foreach (string seriesName in typeSeries)
             {
                 if (
-                    common
-                        .DataManager
+                    common.DataManager
                         .Series[seriesName]
                         .IsCustomPropertySet(CustomPropertyName.DrawSideBySide)
                 )
@@ -449,8 +448,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                 // Call Back Paint event
                 if (!selection)
                 {
-                    common
-                        .Chart
+                    common.Chart
                         .CallOnPrePaint(
                             new ChartPaintEventArgs(ser, graph, common, area.PlotAreaPosition)
                         );
@@ -650,8 +648,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                 // Call Paint event
                 if (!selection)
                 {
-                    common
-                        .Chart
+                    common.Chart
                         .CallOnPostPaint(
                             new ChartPaintEventArgs(ser, graph, common, area.PlotAreaPosition)
                         );
@@ -776,8 +773,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                 foreach (string seriesName in typeSeries)
                 {
                     if (
-                        common
-                            .DataManager
+                        common.DataManager
                             .Series[seriesName]
                             .IsCustomPropertySet(CustomPropertyName.DrawSideBySide)
                     )
@@ -1038,8 +1034,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                     //************************************************************
                     if (common.ProcessModeRegions && !labels)
                     {
-                        common
-                            .HotRegionsList
+                        common.HotRegionsList
                             .AddHotRegion(
                                 rectPath,
                                 false,
@@ -1345,8 +1340,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                         circCoord[1] = markerPosition.Y;
                         circCoord[2] = relativeMarkerSize.Width / 2f;
 
-                        common
-                            .HotRegionsList
+                        common.HotRegionsList
                             .AddHotRegion(
                                 insertIndex,
                                 graph,
@@ -1361,8 +1355,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                     // All other markers represented as rectangles
                     else
                     {
-                        common
-                            .HotRegionsList
+                        common.HotRegionsList
                             .AddHotRegion(
                                 new RectangleF(
                                     markerPosition.X - relativeMarkerSize.Width / 2f,

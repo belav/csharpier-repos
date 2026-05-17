@@ -926,8 +926,7 @@ namespace System.Web
 
             while (i < l)
             {
-                i = CultureInfo
-                    .InvariantCulture
+                i = CultureInfo.InvariantCulture
                     .CompareInfo
                     .IndexOf(headerValue, attrName, i, CompareOptions.IgnoreCase);
                 if (i < 0)
@@ -1875,10 +1874,8 @@ namespace System.Web
                         _pathInfo = null;
                     else
                     {
-                        string pathInfoString = path.VirtualPathString.Substring(
-                            filePathLength,
-                            pathLength - filePathLength
-                        );
+                        string pathInfoString = path.VirtualPathString
+                            .Substring(filePathLength, pathLength - filePathLength);
                         _pathInfo = VirtualPath.CreateAbsolute(pathInfoString);
                     }
                 }
@@ -3177,8 +3174,7 @@ namespace System.Web
 
             int validationFailureIndex;
             if (
-                !RequestValidator
-                    .Current
+                !RequestValidator.Current
                     .IsValidRequestString(
                         contextToProvide,
                         value,

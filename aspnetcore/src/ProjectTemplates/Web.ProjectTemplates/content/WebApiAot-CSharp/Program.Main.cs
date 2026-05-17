@@ -8,12 +8,10 @@ public class Program
     {
         var builder = WebApplication.CreateSlimBuilder(args);
 
-        builder
-            .Services
+        builder.Services
             .ConfigureHttpJsonOptions(options =>
             {
-                options
-                    .SerializerOptions
+                options.SerializerOptions
                     .TypeInfoResolverChain
                     .Insert(0, AppJsonSerializerContext.Default);
             });

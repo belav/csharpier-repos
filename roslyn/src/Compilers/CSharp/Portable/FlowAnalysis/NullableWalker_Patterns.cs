@@ -419,8 +419,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             // to evaluate the patterns.  In this way we infer non-nullability of the original element's parts.
             // We do not extend such courtesy to nested tuple literals.
             var originalInputElementSlots = expression is BoundTupleExpression tuple
-                ? tuple
-                    .Arguments
+                ? tuple.Arguments
                     .SelectAsArray(static (a, w) => w.GetSlotForSwitchInputValue(a), this)
                 : default;
             var originalInputMap = PooledDictionary<int, BoundExpression>.GetInstance();
@@ -843,8 +842,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                                         // merge inferred nullable annotation from different branches of the decision tree
                                         inferredType = TypeWithAnnotations.Create(
                                             inferredType.Type,
-                                            existingType
-                                                .NullableAnnotation
+                                            existingType.NullableAnnotation
                                                 .Join(inferredType.NullableAnnotation)
                                         );
                                     }

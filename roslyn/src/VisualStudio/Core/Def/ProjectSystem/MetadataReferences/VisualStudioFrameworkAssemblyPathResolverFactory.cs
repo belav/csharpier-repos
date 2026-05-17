@@ -156,8 +156,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
 
                     var frameworkName = new FrameworkName(targetMoniker);
                     if (
-                        StringComparer
-                            .OrdinalIgnoreCase
+                        StringComparer.OrdinalIgnoreCase
                             .Equals(frameworkName.Identifier, ".NETCore")
                         && frameworkName.Version >= new Version(major: 5, minor: 0)
                     )

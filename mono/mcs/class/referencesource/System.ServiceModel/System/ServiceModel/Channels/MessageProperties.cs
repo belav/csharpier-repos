@@ -42,16 +42,14 @@ namespace System.ServiceModel.Channels
         internal MessageProperties(KeyValuePair<string, object>[] array)
         {
             if (array == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("array"));
             CopyProperties(array);
         }
 
         void ThrowDisposed()
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(
                     new ObjectDisposedException(
                         string.Empty,
@@ -71,8 +69,7 @@ namespace System.ServiceModel.Channels
 
                 if (!TryGetValue(name, out value))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentException(SR.GetString(SR.MessagePropertyNotFound, name))
                         );
@@ -296,8 +293,7 @@ namespace System.ServiceModel.Channels
                 ThrowDisposed();
 
             if (property == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("property"));
             UpdateProperty(name, property, true);
         }
@@ -459,8 +455,7 @@ namespace System.ServiceModel.Channels
                 ThrowDisposed();
 
             if (name == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("name"));
             int index = FindProperty(name);
             switch (index)
@@ -487,8 +482,7 @@ namespace System.ServiceModel.Channels
                 return propertyValue;
             object copy = messageProperty.CreateCopy();
             if (copy == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentException(SR.GetString(SR.MessagePropertyReturnedNullCopy))
                     );
@@ -575,8 +569,7 @@ namespace System.ServiceModel.Channels
                 ThrowDisposed();
 
             if (name == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("name"));
 
             int index = FindProperty(name);
@@ -641,8 +634,7 @@ namespace System.ServiceModel.Channels
         void UpdateProperty(string name, object value, bool mustNotExist)
         {
             if (name == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("name"));
             int index = FindProperty(name);
             if (index != NotFoundIndex)
@@ -670,8 +662,7 @@ namespace System.ServiceModel.Channels
                     }
                     if (exists)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new ArgumentException(
                                     SR.GetString(SR.DuplicateMessageProperty, name)
@@ -723,8 +714,7 @@ namespace System.ServiceModel.Channels
                             break;
                         default:
                             Fx.Assert("");
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(new InvalidOperationException());
                     }
                 }
@@ -771,18 +761,15 @@ namespace System.ServiceModel.Channels
                 ThrowDisposed();
 
             if (array == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("array"));
             if (array.Length < propertyCount)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentException(SR.GetString(SR.MessagePropertiesArraySize0))
                     );
             if (index < 0 || index > array.Length - propertyCount)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentOutOfRangeException(
                             "index",
@@ -834,8 +821,7 @@ namespace System.ServiceModel.Channels
                 ThrowDisposed();
 
             if (pair.Value == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("pair.Value"));
             UpdateProperty(pair.Key, pair.Value, true);
         }
@@ -846,12 +832,10 @@ namespace System.ServiceModel.Channels
                 ThrowDisposed();
 
             if (pair.Value == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("pair.Value"));
             if (pair.Key == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("pair.Key"));
             object value;
             if (!TryGetValue(pair.Key, out value))
@@ -918,12 +902,10 @@ namespace System.ServiceModel.Channels
                 ThrowDisposed();
 
             if (pair.Value == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("pair.Value"));
             if (pair.Key == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("pair.Key"));
 
             object value;

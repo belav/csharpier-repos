@@ -467,8 +467,7 @@ namespace System.Net.Http
                         {
                             timer = new Timer(
                                 static o =>
-                                    ((Http3RequestStream)o!)
-                                        ._expect100ContinueCompletionSource!
+                                    ((Http3RequestStream)o!)._expect100ContinueCompletionSource!
                                         .TrySetResult(true),
                                 this,
                                 _connection.Pool.Settings._expect100ContinueTimeout,
@@ -743,15 +742,13 @@ namespace System.Net.Http
 
             if (_connection.Pool.Settings._useCookies)
             {
-                string cookiesFromContainer = _connection
-                    .Pool
+                string cookiesFromContainer = _connection.Pool
                     .Settings
                     ._cookieContainer!
                     .GetCookieHeader(request.RequestUri);
                 if (cookiesFromContainer != string.Empty)
                 {
-                    Encoding? valueEncoding = _connection
-                        .Pool
+                    Encoding? valueEncoding = _connection.Pool
                         .Settings
                         ._requestHeaderEncodingSelector
                         ?.Invoke(HttpKnownHeaderNames.Cookie, request);
@@ -813,8 +810,7 @@ namespace System.Net.Http
         // TODO: special-case Content-Type for static table values values?
         private int BufferHeaderCollection(HttpHeaders headers)
         {
-            HeaderEncodingSelector<HttpRequestMessage>? encodingSelector = _connection
-                .Pool
+            HeaderEncodingSelector<HttpRequestMessage>? encodingSelector = _connection.Pool
                 .Settings
                 ._requestHeaderEncodingSelector;
 
@@ -1360,8 +1356,7 @@ namespace System.Net.Http
 
                 if (headerValue is null)
                 {
-                    Encoding? encoding = _connection
-                        .Pool
+                    Encoding? encoding = _connection.Pool
                         .Settings
                         ._responseHeaderEncodingSelector
                         ?.Invoke(descriptor.Name, _request);
@@ -1382,14 +1377,12 @@ namespace System.Net.Http
                         );
                     case HeaderState.ResponseHeaders
                         when descriptor.HeaderType.HasFlag(HttpHeaderType.Content):
-                        _response!
-                            .Content!
+                        _response!.Content!
                             .Headers
                             .TryAddWithoutValidation(descriptor, headerValue);
                         break;
                     case HeaderState.ResponseHeaders:
-                        _response!
-                            .Headers
+                        _response!.Headers
                             .TryAddWithoutValidation(
                                 descriptor.HeaderType.HasFlag(HttpHeaderType.Request)
                                     ? descriptor.AsCustomHeader()

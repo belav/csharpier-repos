@@ -27,8 +27,7 @@ namespace Microsoft.CodeAnalysis.ForEachCast
         where TForEachStatementSyntax : SyntaxNode
     {
         public static readonly ImmutableDictionary<string, string?> s_isFixableProperties =
-            ImmutableDictionary<string, string?>
-                .Empty
+            ImmutableDictionary<string, string?>.Empty
                 .Add(ForEachCastHelpers.IsFixable, ForEachCastHelpers.IsFixable);
 
         protected AbstractForEachCastDiagnosticAnalyzer()
@@ -168,11 +167,9 @@ namespace Microsoft.CodeAnalysis.ForEachCast
             // System.Linq.Enumerable available.  Then we can add a .Cast call to their collection explicitly.
             var isFixable =
                 collectionType.Equals(ienumerableType)
-                || collectionType
-                    .AllInterfaces
+                || collectionType.AllInterfaces
                     .Any(static (i, ienumerableType) => i.Equals(ienumerableType), ienumerableType)
-                    && semanticModel
-                        .Compilation
+                    && semanticModel.Compilation
                         .GetBestTypeByMetadataName(typeof(Enumerable).FullName!) != null;
 
             context.ReportDiagnostic(
@@ -196,8 +193,7 @@ namespace Microsoft.CodeAnalysis.ForEachCast
         ) =>
             collectionElementType.SpecialType != SpecialType.System_Object
             || collectionType.OriginalDefinition.Equals(ienumerableOfTType)
-            || collectionType
-                .AllInterfaces
+            || collectionType.AllInterfaces
                 .Any(
                     static (i, ienumerableOfTType) =>
                         i.OriginalDefinition.Equals(ienumerableOfTType),

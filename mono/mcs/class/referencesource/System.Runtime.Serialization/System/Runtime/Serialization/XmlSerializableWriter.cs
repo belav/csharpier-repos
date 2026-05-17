@@ -22,8 +22,7 @@ namespace System.Runtime.Serialization
         internal void EndWrite()
         {
             if (depth != 0)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -73,8 +72,7 @@ namespace System.Runtime.Serialization
         public override void WriteEndElement()
         {
             if (depth == 0)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -97,8 +95,7 @@ namespace System.Runtime.Serialization
         public override void WriteFullEndElement()
         {
             if (depth == 0)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -120,8 +117,7 @@ namespace System.Runtime.Serialization
 
         public override void Close()
         {
-            throw System
-                .Runtime
+            throw System.Runtime
                 .Serialization
                 .DiagnosticUtility
                 .ExceptionUtility

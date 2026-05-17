@@ -79,8 +79,7 @@ namespace System.ServiceModel.Configuration
             {
                 if (element.Name.Equals(extension.Name, StringComparison.Ordinal))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ConfigurationErrorsException(
                                 SR.GetString(SR.ConfigDuplicateExtensionName, element.Name)
@@ -109,8 +108,7 @@ namespace System.ServiceModel.Configuration
 
                 if (foundDuplicateType)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ConfigurationErrorsException(
                                 SR.GetString(SR.ConfigDuplicateExtensionType, element.Type)

@@ -72,8 +72,7 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                 return ImmutableArray<CompletionItem>.Empty;
 
             var isSameLanguage = Language == language;
-            var isInternalsVisible = originCompilation
-                .Assembly
+            var isInternalsVisible = originCompilation.Assembly
                 .IsSameAssemblyOrHasFriendAccessTo(assemblySymbol);
             using var _ = ArrayBuilder<CompletionItem>.GetInstance(out var builder);
 
@@ -146,8 +145,7 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             )
             {
                 if (
-                    attributeItem
-                        .DisplayText
+                    attributeItem.DisplayText
                         .TryGetWithoutAttributeSuffix(
                             isCaseSensitive: isCaseSensitive,
                             out var attributeNameWithoutSuffix

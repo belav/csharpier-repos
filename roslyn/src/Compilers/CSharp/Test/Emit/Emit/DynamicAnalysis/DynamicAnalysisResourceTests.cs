@@ -82,8 +82,7 @@ public class C
                 references: new[] { RefSafetyRulesAttributeLib }
             );
             var peImage = c.EmitToArray(
-                EmitOptions
-                    .Default
+                EmitOptions.Default
                     .WithInstrumentationKinds(
                         ImmutableArray.Create(InstrumentationKind.TestCoverage)
                     )
@@ -277,8 +276,7 @@ public class C
                 references: new[] { RefSafetyRulesAttributeLib }
             );
             var peImage = c.EmitToArray(
-                EmitOptions
-                    .Default
+                EmitOptions.Default
                     .WithInstrumentationKinds(
                         ImmutableArray.Create(InstrumentationKind.TestCoverage)
                     )
@@ -420,8 +418,7 @@ public class C
                 references: new[] { RefSafetyRulesAttributeLib }
             );
             var peImage = c.EmitToArray(
-                EmitOptions
-                    .Default
+                EmitOptions.Default
                     .WithInstrumentationKinds(
                         ImmutableArray.Create(InstrumentationKind.TestCoverage)
                     )
@@ -574,8 +571,7 @@ class Student : Person { public double GPA; }
                 references: new[] { RefSafetyRulesAttributeLib }
             );
             var peImage = c.EmitToArray(
-                EmitOptions
-                    .Default
+                EmitOptions.Default
                     .WithInstrumentationKinds(
                         ImmutableArray.Create(InstrumentationKind.TestCoverage)
                     )
@@ -652,8 +648,7 @@ public class C
                 references: new[] { RefSafetyRulesAttributeLib }
             );
             var peImage = c.EmitToArray(
-                EmitOptions
-                    .Default
+                EmitOptions.Default
                     .WithInstrumentationKinds(
                         ImmutableArray.Create(InstrumentationKind.TestCoverage)
                     )
@@ -708,8 +703,7 @@ public class C
                 references: new[] { RefSafetyRulesAttributeLib }
             );
             var peImage = c.EmitToArray(
-                EmitOptions
-                    .Default
+                EmitOptions.Default
                     .WithInstrumentationKinds(
                         ImmutableArray.Create(InstrumentationKind.TestCoverage)
                     )
@@ -756,8 +750,7 @@ public class C
                 references: new[] { RefSafetyRulesAttributeLib }
             );
             var peImage = c.EmitToArray(
-                EmitOptions
-                    .Default
+                EmitOptions.Default
                     .WithInstrumentationKinds(
                         ImmutableArray.Create(InstrumentationKind.TestCoverage)
                     )
@@ -812,8 +805,7 @@ public class C
                 references: new[] { RefSafetyRulesAttributeLib }
             );
             var peImage = c.EmitToArray(
-                EmitOptions
-                    .Default
+                EmitOptions.Default
                     .WithInstrumentationKinds(
                         ImmutableArray.Create(InstrumentationKind.TestCoverage)
                     )
@@ -896,8 +888,7 @@ public class C
                 references: new[] { RefSafetyRulesAttributeLib }
             );
             var peImage = c.EmitToArray(
-                EmitOptions
-                    .Default
+                EmitOptions.Default
                     .WithInstrumentationKinds(
                         ImmutableArray.Create(InstrumentationKind.TestCoverage)
                     )
@@ -1018,8 +1009,7 @@ public class C
                 references: new[] { RefSafetyRulesAttributeLib }
             );
             var peImage = c.EmitToArray(
-                EmitOptions
-                    .Default
+                EmitOptions.Default
                     .WithInstrumentationKinds(
                         ImmutableArray.Create(InstrumentationKind.TestCoverage)
                     )
@@ -1132,8 +1122,7 @@ partial struct E
                 references: new[] { RefSafetyRulesAttributeLib }
             );
             var peImage = c.EmitToArray(
-                EmitOptions
-                    .Default
+                EmitOptions.Default
                     .WithInstrumentationKinds(
                         ImmutableArray.Create(InstrumentationKind.TestCoverage)
                     )
@@ -1267,8 +1256,7 @@ public class D
                 references: new[] { RefSafetyRulesAttributeLib }
             );
             var peImage = c.EmitToArray(
-                EmitOptions
-                    .Default
+                EmitOptions.Default
                     .WithInstrumentationKinds(
                         ImmutableArray.Create(InstrumentationKind.TestCoverage)
                     )
@@ -1348,8 +1336,7 @@ class C
 
     static object obj = null!;
 }" + InstrumentationHelperSource;
-            var emitOptions = EmitOptions
-                .Default
+            var emitOptions = EmitOptions.Default
                 .WithInstrumentationKinds(ImmutableArray.Create(InstrumentationKind.TestCoverage));
             CompileAndVerify(source, emitOptions: emitOptions)
                 .VerifyIL(
@@ -1393,8 +1380,7 @@ class C
 {
     static object obj = null!;
 }" + InstrumentationHelperSource;
-            var emitOptions = EmitOptions
-                .Default
+            var emitOptions = EmitOptions.Default
                 .WithInstrumentationKinds(ImmutableArray.Create(InstrumentationKind.TestCoverage));
             CompileAndVerify(
                 source,

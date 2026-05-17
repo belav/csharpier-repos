@@ -31,8 +31,7 @@ namespace System.ServiceModel
         {
             if (authorizationPolicies == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("authorizationPolicies");
             }
             this.authorizationContext = null;
@@ -49,14 +48,12 @@ namespace System.ServiceModel
         {
             if (authorizationContext == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("authorizationContext");
             }
             if (authorizationPolicies == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("authorizationPolicies");
             }
             this.authorizationContext = authorizationContext;

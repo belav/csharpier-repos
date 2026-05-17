@@ -65,8 +65,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                         )
                         {
                             foreach (
-                                var baseNode in namedType
-                                    .OriginalDefinition
+                                var baseNode in namedType.OriginalDefinition
                                     .AllInterfaces
                                     .Distinct()
                             )

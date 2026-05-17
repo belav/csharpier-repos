@@ -301,11 +301,8 @@ namespace Mono.CodeContracts.Static.Analysis.HeapAnalysis.SymbolicGraph
                     {
                         SymValue v1 = this.Graph1.LookupWithoutManifesting(sv1, function);
                         bool isPlaceHolder;
-                        SymValue v2 = this.Graph2.LookupOrBottomPlaceHolder(
-                            sv2,
-                            function,
-                            out isPlaceHolder
-                        );
+                        SymValue v2 = this.Graph2
+                            .LookupOrBottomPlaceHolder(sv2, function, out isPlaceHolder);
                         if (!isPlaceHolder || function.KeepAsBottomField)
                         {
                             SymValue r1 = AddJointEdge(v1, v2, function, r);
@@ -327,11 +324,8 @@ namespace Mono.CodeContracts.Static.Analysis.HeapAnalysis.SymbolicGraph
                     foreach (TFunc function in this.Graph2.TermMap.Keys2(sv2))
                     {
                         bool isPlaceHolder;
-                        SymValue v1 = this.Graph1.LookupOrBottomPlaceHolder(
-                            sv1,
-                            function,
-                            out isPlaceHolder
-                        );
+                        SymValue v1 = this.Graph1
+                            .LookupOrBottomPlaceHolder(sv1, function, out isPlaceHolder);
                         SymValue v2 = this.Graph2.LookupWithoutManifesting(sv2, function);
                         if (!isPlaceHolder || function.KeepAsBottomField)
                         {
@@ -578,9 +572,8 @@ namespace Mono.CodeContracts.Static.Analysis.HeapAnalysis.SymbolicGraph
 
         private void AddMergeTriple(SymValue v1, SymValue v2, SymValue result)
         {
-            this.merge_triples = this.merge_triples.Cons(
-                new Tuple<SymValue, SymValue, SymValue>(v1, v2, result)
-            );
+            this.merge_triples = this.merge_triples
+                .Cons(new Tuple<SymValue, SymValue, SymValue>(v1, v2, result));
         }
 
         private bool IsMappingAlreadyAdded(SymValue v1, SymValue v2)

@@ -250,8 +250,7 @@ namespace System.ServiceModel.Dispatcher
             }
             else
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(SR.AddressingVersionNotSupported, addressing)
@@ -281,8 +280,7 @@ namespace System.ServiceModel.Dispatcher
             }
             else
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(SR.AddressingVersionNotSupported, addressing)
@@ -310,8 +308,7 @@ namespace System.ServiceModel.Dispatcher
                 case TypeCode.Double:
                     return "double";
                 default:
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(SR.SFxInvalidUseOfPrimitiveOperationFormatter)
@@ -400,8 +397,7 @@ namespace System.ServiceModel.Dispatcher
             Fx.Assert(bodyDescription != null, "");
             Type type = bodyDescription.Type;
             if (type == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(
@@ -501,8 +497,7 @@ namespace System.ServiceModel.Dispatcher
         public object DeserializeReply(Message message, object[] parameters)
         {
             if (message == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("message"));
             if (parameters == null)
                 throw TraceUtility.ThrowHelperError(
@@ -515,8 +510,7 @@ namespace System.ServiceModel.Dispatcher
                 {
                     if (responseWrapperName == null)
                         return null;
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new SerializationException(
                                 SR.GetString(SR.SFxInvalidMessageBodyEmptyMessage)
@@ -534,8 +528,7 @@ namespace System.ServiceModel.Dispatcher
             }
             catch (XmlException xe)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new CommunicationException(
                             SR.GetString(
@@ -549,8 +542,7 @@ namespace System.ServiceModel.Dispatcher
             }
             catch (FormatException fe)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new CommunicationException(
                             SR.GetString(
@@ -564,8 +556,7 @@ namespace System.ServiceModel.Dispatcher
             }
             catch (SerializationException se)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new CommunicationException(
                             SR.GetString(
@@ -582,8 +573,7 @@ namespace System.ServiceModel.Dispatcher
         public void DeserializeRequest(Message message, object[] parameters)
         {
             if (message == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("message"));
             if (parameters == null)
                 throw TraceUtility.ThrowHelperError(
@@ -596,8 +586,7 @@ namespace System.ServiceModel.Dispatcher
                 {
                     if (requestWrapperName == null)
                         return;
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new SerializationException(
                                 SR.GetString(SR.SFxInvalidMessageBodyEmptyMessage)
@@ -614,8 +603,7 @@ namespace System.ServiceModel.Dispatcher
             }
             catch (XmlException xe)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         OperationFormatter.CreateDeserializationFailedFault(
                             SR.GetString(
@@ -629,8 +617,7 @@ namespace System.ServiceModel.Dispatcher
             }
             catch (FormatException fe)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         OperationFormatter.CreateDeserializationFailedFault(
                             SR.GetString(
@@ -644,8 +631,7 @@ namespace System.ServiceModel.Dispatcher
             }
             catch (SerializationException se)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new CommunicationException(
                             SR.GetString(
@@ -664,8 +650,7 @@ namespace System.ServiceModel.Dispatcher
             if (requestWrapperName != null)
             {
                 if (!reader.IsStartElement(requestWrapperName, requestWrapperNamespace))
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new SerializationException(
                                 SR.GetString(
@@ -699,8 +684,7 @@ namespace System.ServiceModel.Dispatcher
             if (responseWrapperName != null)
             {
                 if (!reader.IsStartElement(responseWrapperName, responseWrapperNamespace))
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new SerializationException(
                                 SR.GetString(
@@ -755,8 +739,7 @@ namespace System.ServiceModel.Dispatcher
         )
         {
             if (parts.Length != parameters.Length)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentException(
                             SR.GetString(
@@ -834,8 +817,7 @@ namespace System.ServiceModel.Dispatcher
         void SerializeParameters(XmlDictionaryWriter writer, PartInfo[] parts, object[] parameters)
         {
             if (parts.Length != parameters.Length)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentException(
                             SR.GetString(
@@ -1033,8 +1015,7 @@ namespace System.ServiceModel.Dispatcher
                             }
                             break;
                         default:
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
                                     new InvalidOperationException(
                                         SR.GetString(SR.SFxInvalidUseOfPrimitiveOperationFormatter)
@@ -1070,8 +1051,7 @@ namespace System.ServiceModel.Dispatcher
                         case TypeCode.String:
                             return reader.ReadElementContentAsString();
                         default:
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
                                     new InvalidOperationException(
                                         SR.GetString(SR.SFxInvalidUseOfPrimitiveOperationFormatter)
@@ -1186,8 +1166,7 @@ namespace System.ServiceModel.Dispatcher
                             }
                             break;
                         default:
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
                                     new InvalidOperationException(
                                         SR.GetString(SR.SFxInvalidUseOfPrimitiveOperationFormatter)
@@ -1224,8 +1203,7 @@ namespace System.ServiceModel.Dispatcher
                             writer.WriteString((string)value);
                             break;
                         default:
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
                                     new InvalidOperationException(
                                         SR.GetString(SR.SFxInvalidUseOfPrimitiveOperationFormatter)

@@ -67,8 +67,7 @@ namespace Microsoft.CodeAnalysis.NavigateTo
                 }
             );
 
-            var docTrackingService = _solution
-                .Services
+            var docTrackingService = _solution.Services
                 .GetRequiredService<IDocumentTrackingService>();
 
             // If the workspace is tracking documents, use that to prioritize our search

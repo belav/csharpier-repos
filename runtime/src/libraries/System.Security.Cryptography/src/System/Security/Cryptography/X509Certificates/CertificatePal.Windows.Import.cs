@@ -71,8 +71,7 @@ namespace System.Security.Cryptography.X509Certificates
                                 : Interop.Crypt32.CertQueryObjectType.CERT_QUERY_OBJECT_BLOB;
                             void* pvObject = loadFromFile ? (void*)pFileName : (void*)&certBlob;
 
-                            bool success = Interop
-                                .Crypt32
+                            bool success = Interop.Crypt32
                                 .CryptQueryObject(
                                     objectType,
                                     pvObject,
@@ -148,8 +147,7 @@ namespace System.Security.Cryptography.X509Certificates
             int dwSigners;
             int cbSigners = sizeof(int);
             if (
-                !Interop
-                    .Crypt32
+                !Interop.Crypt32
                     .CryptMsgGetParam(
                         hCryptMsg,
                         Interop.Crypt32.CryptMsgParamType.CMSG_SIGNER_COUNT_PARAM,
@@ -165,8 +163,7 @@ namespace System.Security.Cryptography.X509Certificates
             // get the first signer from the store, and use that as the loaded certificate
             int cbData = 0;
             if (
-                !Interop
-                    .Crypt32
+                !Interop.Crypt32
                     .CryptMsgGetParam(
                         hCryptMsg,
                         Interop.Crypt32.CryptMsgParamType.CMSG_SIGNER_INFO_PARAM,
@@ -180,8 +177,7 @@ namespace System.Security.Cryptography.X509Certificates
             fixed (byte* pCmsgSignerBytes = new byte[cbData])
             {
                 if (
-                    !Interop
-                        .Crypt32
+                    !Interop.Crypt32
                         .CryptMsgGetParam(
                             hCryptMsg,
                             Interop.Crypt32.CryptMsgParamType.CMSG_SIGNER_INFO_PARAM,
@@ -203,8 +199,7 @@ namespace System.Security.Cryptography.X509Certificates
 
                 SafeCertContextHandle? pCertContext = null;
                 if (
-                    !Interop
-                        .crypt32
+                    !Interop.crypt32
                         .CertFindCertificateInStore(
                             hCertStore,
                             Interop.Crypt32.CertFindType.CERT_FIND_SUBJECT_CERT,
@@ -237,8 +232,7 @@ namespace System.Security.Cryptography.X509Certificates
                         new IntPtr(pbRawData),
                         (uint)rawData.Length
                     );
-                    hStore = Interop
-                        .Crypt32
+                    hStore = Interop.Crypt32
                         .PFXImportCertStore(ref certBlob, password, pfxCertStoreFlags);
                     if (hStore.IsInvalid)
                     {
@@ -360,9 +354,7 @@ namespace System.Security.Cryptography.X509Certificates
             | Interop.Crypt32.ExpectedContentTypeFlags.CERT_QUERY_CONTENT_FLAG_PKCS7_SIGNED_EMBED
             | Interop.Crypt32.ExpectedContentTypeFlags.CERT_QUERY_CONTENT_FLAG_PFX;
 
-        private const Interop.Crypt32.ExpectedFormatTypeFlags X509ExpectedFormatTypeFlags = Interop
-            .Crypt32
-            .ExpectedFormatTypeFlags
-            .CERT_QUERY_FORMAT_FLAG_ALL;
+        private const Interop.Crypt32.ExpectedFormatTypeFlags X509ExpectedFormatTypeFlags =
+            Interop.Crypt32.ExpectedFormatTypeFlags.CERT_QUERY_FORMAT_FLAG_ALL;
     }
 }

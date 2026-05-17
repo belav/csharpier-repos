@@ -55,8 +55,7 @@ namespace System.Workflow.Activities.Design
         {
             if (editableListItemType == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("editableListItemType");
             }
             if (!typeof(object).IsAssignableFrom(editableListItemType))
@@ -84,8 +83,7 @@ namespace System.Workflow.Activities.Design
         {
             if (editableListItemType == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("editableListItemType");
             }
             if (!typeof(object).IsAssignableFrom(editableListItemType))

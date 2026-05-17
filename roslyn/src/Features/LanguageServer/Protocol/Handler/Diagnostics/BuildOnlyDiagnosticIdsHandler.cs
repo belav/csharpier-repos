@@ -73,8 +73,7 @@ internal sealed class BuildOnlyDiagnosticIdsHandler(
 
         foreach (var project in context.Solution.Projects)
         {
-            var analyzersPerReferenceMap = context
-                .Solution
+            var analyzersPerReferenceMap = context.Solution
                 .State
                 .Analyzers
                 .CreateDiagnosticAnalyzersPerReference(project);
@@ -90,8 +89,7 @@ internal sealed class BuildOnlyDiagnosticIdsHandler(
                         continue;
 
                     foreach (
-                        var buildOnlyDescriptor in _globalCache
-                            .AnalyzerInfoCache
+                        var buildOnlyDescriptor in _globalCache.AnalyzerInfoCache
                             .GetCompilationEndDiagnosticDescriptors(analyzer)
                     )
                     {

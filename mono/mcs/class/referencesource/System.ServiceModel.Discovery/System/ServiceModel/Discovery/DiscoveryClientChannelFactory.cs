@@ -38,12 +38,10 @@ namespace System.ServiceModel.Discovery
         {
             if (!address.Equals(DiscoveryClientBindingElement.DiscoveryEndpointAddress))
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .Argument(
                         "address",
-                        Discovery
-                            .SR
+                        Discovery.SR
                             .DiscoveryEndpointAddressIncorrect(
                                 "address",
                                 address.Uri,
@@ -54,12 +52,10 @@ namespace System.ServiceModel.Discovery
 
             if (!via.Equals(DiscoveryClientBindingElement.DiscoveryEndpointAddress.Uri))
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .Argument(
                         "via",
-                        Discovery
-                            .SR
+                        Discovery.SR
                             .DiscoveryEndpointAddressIncorrect(
                                 "via",
                                 via,
@@ -135,12 +131,10 @@ namespace System.ServiceModel.Discovery
                         );
             }
 
-            throw FxTrace
-                .Exception
+            throw FxTrace.Exception
                 .Argument(
                     "TChannel",
-                    ServiceModel
-                        .SR
+                    ServiceModel.SR
                         .GetString(ServiceModel.SR.ChannelTypeNotSupported, typeof(TChannel))
                 );
         }

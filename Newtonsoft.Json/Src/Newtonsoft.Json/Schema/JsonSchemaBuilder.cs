@@ -115,8 +115,7 @@ namespace Newtonsoft.Json.Schema
                 {
                     if (locationReference)
                     {
-                        string[] escapedParts = schema
-                            .DeferredReference
+                        string[] escapedParts = schema.DeferredReference
                             .TrimStart('#')
                             .Split(new[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
                         JToken currentToken = _rootSchema;
@@ -204,8 +203,7 @@ namespace Newtonsoft.Json.Schema
             if (schema.PatternProperties != null)
             {
                 foreach (
-                    KeyValuePair<string, JsonSchema> patternProperty in schema
-                        .PatternProperties
+                    KeyValuePair<string, JsonSchema> patternProperty in schema.PatternProperties
                         .ToList()
                 )
                 {
@@ -556,8 +554,7 @@ namespace Newtonsoft.Json.Schema
         internal static JsonSchemaType MapType(string type)
         {
             if (
-                !JsonSchemaConstants
-                    .JsonSchemaTypeMapping
+                !JsonSchemaConstants.JsonSchemaTypeMapping
                     .TryGetValue(type, out JsonSchemaType mappedType)
             )
             {

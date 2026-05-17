@@ -66,8 +66,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
         /// directly to LSP semantic token types, but otherwise generally returns the classification type name as a custom token type.
         /// </summary>
         private static readonly SemanticTokensSchema s_vsTokenSchema = new(
-            ClassificationTypeNames
-                .AllTypeNames
+            ClassificationTypeNames.AllTypeNames
                 .Where(classificationTypeName =>
                     !ClassificationTypeNames.AdditiveTypeNames.Contains(classificationTypeName)
                 )
@@ -87,8 +86,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
         /// LSP compatible custom token type names.
         /// </summary>
         private static readonly SemanticTokensSchema s_pureLspTokenSchema = new(
-            ClassificationTypeNames
-                .AllTypeNames
+            ClassificationTypeNames.AllTypeNames
                 .Where(classificationTypeName =>
                     !ClassificationTypeNames.AdditiveTypeNames.Contains(classificationTypeName)
                 )
@@ -127,8 +125,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
             TokenTypeMap = tokenTypeMap;
 
             // Get all custom token type names that don't directly map to an built-in LSP semantic token type.
-            var customTokenTypes = TokenTypeMap
-                .Values
+            var customTokenTypes = TokenTypeMap.Values
                 .Where(tokenType => !SemanticTokenTypes.AllTypes.Contains(tokenType))
                 .Order()
                 .ToImmutableArray();

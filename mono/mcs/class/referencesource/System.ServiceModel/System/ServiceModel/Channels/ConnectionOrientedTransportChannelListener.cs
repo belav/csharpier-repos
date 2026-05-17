@@ -41,8 +41,7 @@ namespace System.ServiceModel.Channels
             {
                 if (bindingElement.MaxReceivedMessageSize > int.MaxValue)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentOutOfRangeException(
                                 "bindingElement.MaxReceivedMessageSize",
@@ -53,8 +52,7 @@ namespace System.ServiceModel.Channels
 
                 if (bindingElement.MaxBufferSize != bindingElement.MaxReceivedMessageSize)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgument(
                             "bindingElement",
                             SR.GetString(SR.MaxBufferSizeMustMatchMaxReceivedMessageSize)
@@ -65,8 +63,7 @@ namespace System.ServiceModel.Channels
             {
                 if (bindingElement.MaxBufferSize > bindingElement.MaxReceivedMessageSize)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgument(
                             "bindingElement",
                             SR.GetString(SR.MaxBufferSizeMustNotExceedMaxReceivedMessageSize)
@@ -84,14 +81,12 @@ namespace System.ServiceModel.Channels
             this.maxPendingAccepts = bindingElement.MaxPendingAccepts;
             this.transferMode = bindingElement.TransferMode;
 
-            Collection<StreamUpgradeBindingElement> upgradeBindingElements = context
-                .BindingParameters
-                .FindAll<StreamUpgradeBindingElement>();
+            Collection<StreamUpgradeBindingElement> upgradeBindingElements =
+                context.BindingParameters.FindAll<StreamUpgradeBindingElement>();
 
             if (upgradeBindingElements.Count > 1)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(SR.MultipleStreamUpgradeProvidersInParameters)
@@ -379,8 +374,7 @@ namespace System.ServiceModel.Channels
             int encodedSize = Encoding.UTF8.GetByteCount(uri.AbsoluteUri);
             if (encodedSize > maxViaSize)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new QuotaExceededException(
                             SR.GetString(

@@ -314,8 +314,7 @@ class C
         for (ref int rx = ref x; x < 0; x++) { }
     }
 }",
-                parseOptions: CSharpParseOptions
-                    .Default
+                parseOptions: CSharpParseOptions.Default
                     .WithLanguageVersion(LanguageVersion.CSharp7_2)
             );
             comp.VerifyDiagnostics(
@@ -340,8 +339,7 @@ class C
         foreach (ref int x in span) { }
     }
 }",
-                parseOptions: CSharpParseOptions
-                    .Default
+                parseOptions: CSharpParseOptions.Default
                     .WithLanguageVersion(LanguageVersion.CSharp7_2)
             );
             comp.VerifyDiagnostics(

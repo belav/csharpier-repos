@@ -3403,8 +3403,7 @@ namespace Microsoft.VisualBasic
 
             if (options.OutputAssembly == null || options.OutputAssembly.Length == 0)
             {
-                options.OutputAssembly = results
-                    .TempFiles
+                options.OutputAssembly = results.TempFiles
                     .AddExtension(extension, !options.GenerateInMemory);
 
                 // Create an empty assembly.  This is so that the file will have permissions that
@@ -3439,8 +3438,7 @@ namespace Microsoft.VisualBasic
             // hack so that we don't delete pdbs when debug=false but they have specified pdbonly.
             if (
                 options.CompilerOptions != null
-                && options
-                    .CompilerOptions
+                && options.CompilerOptions
                     .IndexOf("/debug:pdbonly", StringComparison.OrdinalIgnoreCase) != -1
             )
                 results.TempFiles.AddExtension(pdbname, true);

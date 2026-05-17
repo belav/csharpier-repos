@@ -83,11 +83,12 @@ namespace System.Data.Services.Client
                     this.Target.WriteStartElement(c, XmlConstants.AtomNamespace);
                     if (nonTextPossible)
                     {
-                        this.Target.WriteAttributeString(
-                            XmlConstants.AtomTypeAttributeName,
-                            String.Empty,
-                            contentType
-                        );
+                        this.Target
+                            .WriteAttributeString(
+                                XmlConstants.AtomTypeAttributeName,
+                                String.Empty,
+                                contentType
+                            );
                     }
 
                     String textPropertyValue =
@@ -150,10 +151,11 @@ namespace System.Data.Services.Client
                 }
                 else if (targetSegment.SegmentName == XmlConstants.AtomContributorElementName)
                 {
-                    this.Target.WriteStartElement(
-                        XmlConstants.AtomContributorElementName,
-                        XmlConstants.AtomNamespace
-                    );
+                    this.Target
+                        .WriteStartElement(
+                            XmlConstants.AtomContributorElementName,
+                            XmlConstants.AtomNamespace
+                        );
                     base.Serialize(targetSegment, kind);
                     this.Target.WriteEndElement();
                 }
@@ -170,23 +172,26 @@ namespace System.Data.Services.Client
             {
                 if (createNull)
                 {
-                    this.Target.WriteStartElement(
-                        XmlConstants.AtomAuthorElementName,
-                        XmlConstants.AtomNamespace
-                    );
-                    this.Target.WriteElementString(
-                        XmlConstants.AtomNameElementName,
-                        XmlConstants.AtomNamespace,
-                        String.Empty
-                    );
+                    this.Target
+                        .WriteStartElement(
+                            XmlConstants.AtomAuthorElementName,
+                            XmlConstants.AtomNamespace
+                        );
+                    this.Target
+                        .WriteElementString(
+                            XmlConstants.AtomNameElementName,
+                            XmlConstants.AtomNamespace,
+                            String.Empty
+                        );
                     this.Target.WriteEndElement();
                 }
                 else
                 {
-                    this.Target.WriteStartElement(
-                        XmlConstants.AtomAuthorElementName,
-                        XmlConstants.AtomNamespace
-                    );
+                    this.Target
+                        .WriteStartElement(
+                            XmlConstants.AtomAuthorElementName,
+                            XmlConstants.AtomNamespace
+                        );
                 }
 
                 this.authorInfoPresent = true;
@@ -201,11 +206,12 @@ namespace System.Data.Services.Client
             );
             if (this.authorNamePresent == false)
             {
-                this.Target.WriteElementString(
-                    XmlConstants.AtomNameElementName,
-                    XmlConstants.AtomNamespace,
-                    String.Empty
-                );
+                this.Target
+                    .WriteElementString(
+                        XmlConstants.AtomNameElementName,
+                        XmlConstants.AtomNamespace,
+                        String.Empty
+                    );
                 this.authorNamePresent = true;
             }
 
@@ -216,11 +222,15 @@ namespace System.Data.Services.Client
         {
             if (!this.updatedPresent)
             {
-                this.Target.WriteElementString(
-                    XmlConstants.AtomUpdatedElementName,
-                    XmlConstants.AtomNamespace,
-                    XmlConvert.ToString(DateTime.UtcNow, XmlDateTimeSerializationMode.RoundtripKind)
-                );
+                this.Target
+                    .WriteElementString(
+                        XmlConstants.AtomUpdatedElementName,
+                        XmlConstants.AtomNamespace,
+                        XmlConvert.ToString(
+                            DateTime.UtcNow,
+                            XmlDateTimeSerializationMode.RoundtripKind
+                        )
+                    );
             }
         }
     }

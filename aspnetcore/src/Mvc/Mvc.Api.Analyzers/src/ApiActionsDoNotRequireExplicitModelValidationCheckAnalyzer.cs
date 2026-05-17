@@ -233,8 +233,7 @@ public class ApiActionsDoNotRequireExplicitModelValidationCheckAnalyzer : Diagno
         }
 
         if (
-            !SymbolEqualityComparer
-                .Default
+            !SymbolEqualityComparer.Default
                 .Equals(propertyReference.Member.ContainingType, symbolCache.ModelStateDictionary)
         )
         {

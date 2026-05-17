@@ -504,8 +504,7 @@ namespace Microsoft.CodeAnalysis
                 SyntaxAnnotation[]? annotations;
                 if (s_annotationsTable.TryGetValue(this, out annotations))
                 {
-                    System
-                        .Diagnostics
+                    System.Diagnostics
                         .Debug
                         .Assert(
                             annotations.Length != 0,

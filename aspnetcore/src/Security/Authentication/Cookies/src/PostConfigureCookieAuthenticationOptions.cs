@@ -42,8 +42,7 @@ public class PostConfigureCookieAuthenticationOptions
         if (options.TicketDataFormat == null)
         {
             // Note: the purpose for the data protector must remain fixed for interop to work.
-            var dataProtector = options
-                .DataProtectionProvider
+            var dataProtector = options.DataProtectionProvider
                 .CreateProtector(
                     "Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationMiddleware",
                     name,

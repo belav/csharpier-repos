@@ -91,8 +91,7 @@ public class TempDataInCookiesTest
         // Assert 1
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         Assert.True(
-            response
-                .Headers
+            response.Headers
                 .TryGetValues(HeaderNames.SetCookie, out IEnumerable<string> setCookieValues)
         );
         setCookieValues = setCookieValues.Where(cookie =>
@@ -163,8 +162,7 @@ public class TempDataInCookiesTest
         // Assert 1
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         Assert.True(
-            response
-                .Headers
+            response.Headers
                 .TryGetValues(HeaderNames.SetCookie, out IEnumerable<string> setCookieValues)
         );
         var setCookieHeader = setCookieValues
@@ -233,8 +231,7 @@ public class TempDataInCookiesTest
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         Assert.True(
-            response
-                .Headers
+            response.Headers
                 .TryGetValues(HeaderNames.SetCookie, out IEnumerable<string> setCookieValues)
         );
         var setCookieHeader = setCookieValues

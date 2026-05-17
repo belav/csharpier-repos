@@ -164,8 +164,7 @@ namespace ILCompiler.PEWriter
 
         private void WriteRelocTypeStatistics(StreamWriter writer)
         {
-            KeyValuePair<RelocType, int>[] relocTypeCounts = _outputInfoBuilder
-                .RelocCounts
+            KeyValuePair<RelocType, int>[] relocTypeCounts = _outputInfoBuilder.RelocCounts
                 .ToArray();
             Array.Sort(relocTypeCounts, (a, b) => b.Value.CompareTo(a.Value));
 
@@ -183,8 +182,7 @@ namespace ILCompiler.PEWriter
             WriteTitle(writer, "   COUNT | SYMBOL  (NODE)");
 
             foreach (
-                OutputNode node in _outputInfoBuilder
-                    .Nodes
+                OutputNode node in _outputInfoBuilder.Nodes
                     .Where(node => node.Relocations != 0)
                     .OrderByDescending(node => node.Relocations)
                     .Take(NumberOfTopNodesByRelocType)
@@ -235,8 +233,7 @@ namespace ILCompiler.PEWriter
                 if (
                     nodeIndex >= _outputInfoBuilder.Nodes.Count
                     || symbolIndex < _outputInfoBuilder.Symbols.Count
-                        && OutputItem
-                            .Comparer
+                        && OutputItem.Comparer
                             .Instance
                             .Compare(
                                 _outputInfoBuilder.Symbols[symbolIndex],
@@ -265,8 +262,7 @@ namespace ILCompiler.PEWriter
                     writer.Write($"{GetNameHead(section), -SectionNameHeadLength} | ");
                     if (
                         symbolIndex < _outputInfoBuilder.Symbols.Count
-                        && OutputItem
-                            .Comparer
+                        && OutputItem.Comparer
                             .Instance
                             .Compare(node, _outputInfoBuilder.Symbols[symbolIndex]) == 0
                     )
@@ -294,8 +290,7 @@ namespace ILCompiler.PEWriter
                 if (
                     nodeIndex >= _outputInfoBuilder.Nodes.Count
                     || symbolIndex < _outputInfoBuilder.Symbols.Count
-                        && OutputItem
-                            .Comparer
+                        && OutputItem.Comparer
                             .Instance
                             .Compare(
                                 _outputInfoBuilder.Symbols[symbolIndex],
@@ -325,8 +320,7 @@ namespace ILCompiler.PEWriter
                     writer.Write($"{section.Name},");
                     if (
                         symbolIndex < _outputInfoBuilder.Symbols.Count
-                        && OutputItem
-                            .Comparer
+                        && OutputItem.Comparer
                             .Instance
                             .Compare(node, _outputInfoBuilder.Symbols[symbolIndex]) == 0
                     )

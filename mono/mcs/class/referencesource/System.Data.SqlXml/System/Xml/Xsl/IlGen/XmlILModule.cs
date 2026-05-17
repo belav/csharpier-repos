@@ -93,8 +93,7 @@ namespace System.Xml.Xsl.IlGen
             // 2. No temp files need be created
             // 3. Never allow assembly to Assert permissions
             asmName = CreateAssemblyName();
-            asmBldr = AppDomain
-                .CurrentDomain
+            asmBldr = AppDomain.CurrentDomain
                 .DefineDynamicAssembly(asmName, AssemblyBuilderAccess.Run);
 
             try
@@ -175,8 +174,7 @@ namespace System.Xml.Xsl.IlGen
                 }
 #endif
 
-                asmBldr = AppDomain
-                    .CurrentDomain
+                asmBldr = AppDomain.CurrentDomain
                     .DefineDynamicAssembly(
                         asmName,
                         this.persistAsm
@@ -266,12 +264,13 @@ namespace System.Xml.Xsl.IlGen
             {
                 MethodBuilder methBldr;
 
-                methBldr = this.typeBldr.DefineMethod(
-                    name,
-                    MethodAttributes.Private | MethodAttributes.Static,
-                    returnType,
-                    paramTypes
-                );
+                methBldr = this.typeBldr
+                    .DefineMethod(
+                        name,
+                        MethodAttributes.Private | MethodAttributes.Static,
+                        returnType,
+                        paramTypes
+                    );
 
                 if (emitSymbols && (xmlAttrs & XmlILMethodAttributes.NonUser) != 0)
                 {
@@ -355,11 +354,12 @@ namespace System.Xml.Xsl.IlGen
         public FieldInfo DefineInitializedData(string name, byte[] data)
         {
             Debug.Assert(!this.useLRE, "Cannot create initialized data for an LRE module");
-            return this.typeBldr.DefineInitializedData(
-                name,
-                data,
-                FieldAttributes.Private | FieldAttributes.Static
-            );
+            return this.typeBldr
+                .DefineInitializedData(
+                    name,
+                    data,
+                    FieldAttributes.Private | FieldAttributes.Static
+                );
         }
 
         /// <summary>
@@ -368,11 +368,8 @@ namespace System.Xml.Xsl.IlGen
         public FieldInfo DefineField(string fieldName, Type type)
         {
             Debug.Assert(!this.useLRE, "Cannot create field for an LRE module");
-            return this.typeBldr.DefineField(
-                fieldName,
-                type,
-                FieldAttributes.Private | FieldAttributes.Static
-            );
+            return this.typeBldr
+                .DefineField(fieldName, type, FieldAttributes.Private | FieldAttributes.Static);
         }
 
         /// <summary>

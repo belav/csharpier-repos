@@ -482,8 +482,7 @@ public class BatchingTest : IClassFixture<BatchingTest.BatchingTestFixture>
         protected override void Seed(PoolableDbContext context)
         {
             context.Database.EnsureCreatedResiliently();
-            context
-                .Database
+            context.Database
                 .ExecuteSqlRaw(
                     @"
 ALTER TABLE dbo.Owners

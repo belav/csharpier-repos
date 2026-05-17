@@ -350,8 +350,7 @@ namespace System.Globalization
             }
 
             // Now call the enumeration API. Work is done by our callback function
-            Interop
-                .Kernel32
+            Interop.Kernel32
                 .EnumCalendarInfoExEx(
                     &EnumCalendarInfoCallback,
                     localeName,
@@ -529,8 +528,7 @@ namespace System.Globalization
 
             unsafe
             {
-                Interop
-                    .Kernel32
+                Interop.Kernel32
                     .EnumCalendarInfoExEx(
                         &EnumCalendarsCallback,
                         localeName,

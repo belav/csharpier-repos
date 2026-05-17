@@ -305,24 +305,26 @@ namespace System.Web.Compilation
             args[0] = new CodeAttributeArgument(new CodePrimitiveExpression(cultureName));
 
             CodeCompileUnit unit = new CodeCompileUnit();
-            unit.AssemblyCustomAttributes.Add(
-                new CodeAttributeDeclaration(
-                    new CodeTypeReference("System.Reflection.AssemblyCultureAttribute"),
-                    args
-                )
-            );
+            unit.AssemblyCustomAttributes
+                .Add(
+                    new CodeAttributeDeclaration(
+                        new CodeTypeReference("System.Reflection.AssemblyCultureAttribute"),
+                        args
+                    )
+                );
 
             args = new CodeAttributeArgument[2];
             args[0] = new CodeAttributeArgument(new CodePrimitiveExpression("ASP.NET"));
             args[1] = new CodeAttributeArgument(
                 new CodePrimitiveExpression(Environment.Version.ToString())
             );
-            unit.AssemblyCustomAttributes.Add(
-                new CodeAttributeDeclaration(
-                    new CodeTypeReference("System.CodeDom.Compiler.GeneratedCodeAttribute"),
-                    args
-                )
-            );
+            unit.AssemblyCustomAttributes
+                .Add(
+                    new CodeAttributeDeclaration(
+                        new CodeTypeReference("System.CodeDom.Compiler.GeneratedCodeAttribute"),
+                        args
+                    )
+                );
 
             return unit;
         }

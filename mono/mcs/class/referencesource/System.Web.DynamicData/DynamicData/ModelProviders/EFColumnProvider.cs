@@ -76,8 +76,7 @@ namespace System.Web.DynamicData.ModelProviders
         {
             MetadataProperty generated;
             if (
-                property
-                    .MetadataProperties
+                property.MetadataProperties
                     .TryGetValue(StoreGeneratedMetadata, false, out generated)
             )
             {

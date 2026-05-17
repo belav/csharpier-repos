@@ -744,8 +744,7 @@ namespace Microsoft.Scripting
                     }
 
                     ComMethodDesc method = new ComMethodDesc(typeInfo, funcDesc);
-                    string name = method
-                        .Name
+                    string name = method.Name
                         .ToUpper(System.Globalization.CultureInfo.InvariantCulture);
 
                     if ((funcDesc.invkind & ComTypes.INVOKEKIND.INVOKE_PROPERTYPUT) != 0)

@@ -58,8 +58,7 @@ namespace System.ServiceModel.Discovery
 
             List<ServiceEndpoint> appEndpoints = this.GetApplicationEndpoints(serviceDescription);
 
-            DiscoveryServiceExtension discoveryServiceExtension = serviceHostBase
-                .Extensions
+            DiscoveryServiceExtension discoveryServiceExtension = serviceHostBase.Extensions
                 .Find<DiscoveryServiceExtension>();
 
             if (discoveryServiceExtension == null)
@@ -108,8 +107,7 @@ namespace System.ServiceModel.Discovery
                 throw FxTrace.Exception.ArgumentNull("serviceHostBase");
             }
 
-            DiscoveryServiceExtension discoveryServiceExtension = serviceHostBase
-                .Extensions
+            DiscoveryServiceExtension discoveryServiceExtension = serviceHostBase.Extensions
                 .Find<DiscoveryServiceExtension>();
             if (discoveryServiceExtension != null)
             {
@@ -123,8 +121,7 @@ namespace System.ServiceModel.Discovery
 
                 if (this.announcementEndpoints.Count > 0)
                 {
-                    serviceHostBase
-                        .ChannelDispatchers
+                    serviceHostBase.ChannelDispatchers
                         .Add(
                             new OnlineAnnouncementChannelDispatcher(
                                 serviceHostBase,
@@ -134,8 +131,7 @@ namespace System.ServiceModel.Discovery
                             )
                         );
 
-                    serviceHostBase
-                        .ChannelDispatchers
+                    serviceHostBase.ChannelDispatchers
                         .Insert(
                             0,
                             new OfflineAnnouncementChannelDispatcher(

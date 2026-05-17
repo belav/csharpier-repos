@@ -12,8 +12,7 @@ internal sealed partial class HubServerProxyGenerator : IIncrementalGenerator
 {
     public void Initialize(IncrementalGeneratorInitializationContext context)
     {
-        var methodDeclaration = context
-            .SyntaxProvider
+        var methodDeclaration = context.SyntaxProvider
             .CreateSyntaxProvider(
                 static (s, _) => Parser.IsSyntaxTargetForAttribute(s),
                 static (ctx, _) => Parser.GetSemanticTargetForAttribute(ctx)
@@ -21,16 +20,14 @@ internal sealed partial class HubServerProxyGenerator : IIncrementalGenerator
             .Where(static m => m is not null)
             .Collect();
 
-        var memberAccessExpressions = context
-            .SyntaxProvider
+        var memberAccessExpressions = context.SyntaxProvider
             .CreateSyntaxProvider(
                 static (s, _) => Parser.IsSyntaxTargetForGeneration(s),
                 static (ctx, _) => Parser.GetSemanticTargetForGeneration(ctx)
             )
             .Where(static m => m is not null);
 
-        var compilationAndMethodDeclaration = context
-            .CompilationProvider
+        var compilationAndMethodDeclaration = context.CompilationProvider
             .Combine(methodDeclaration);
 
         var payload = compilationAndMethodDeclaration.Combine(memberAccessExpressions.Collect());

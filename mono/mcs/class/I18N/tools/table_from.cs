@@ -127,8 +127,7 @@ public class table_from
                                     )
                                 )
                                 {
-                                    Console
-                                        .Out
+                                    Console.Out
                                         .Write(
                                             "0x"
                                                 + toHexString2(i0)
@@ -161,8 +160,7 @@ public class table_from
                                             )
                                         )
                                         {
-                                            Console
-                                                .Out
+                                            Console.Out
                                                 .Write(
                                                     "0x"
                                                         + toHexString2(i0)

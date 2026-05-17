@@ -130,8 +130,7 @@ internal abstract partial class AbstractDiagnosticsTaggerProvider<TTag>
             // is generating code that it doesn't want errors shown for.
             var buffer = snapshot.TextBuffer;
             var suppressedDiagnosticsSpans = (NormalizedSnapshotSpanCollection?)null;
-            buffer
-                .Properties
+            buffer.Properties
                 .TryGetProperty(
                     PredefinedPreviewTaggerKeys.SuppressDiagnosticsSpansKey,
                     out suppressedDiagnosticsSpans

@@ -266,12 +266,10 @@ public class SimpleWithWebApplicationBuilderTests
 
         using var client = _fixture.CreateDefaultClient();
         var antiforgery = _fixture.Services.GetRequiredService<IAntiforgery>();
-        var antiforgeryOptions = _fixture
-            .Services
+        var antiforgeryOptions = _fixture.Services
             .GetRequiredService<IOptions<AntiforgeryOptions>>();
         var tokens = antiforgery.GetAndStoreTokens(new DefaultHttpContext());
-        client
-            .DefaultRequestHeaders
+        client.DefaultRequestHeaders
             .Add(
                 "Cookie",
                 new CookieHeaderValue(

@@ -102,8 +102,7 @@ namespace System.ComponentModel.Tests
             );
 
             var actualInstanceDescriptor = (InstanceDescriptor)
-                UriTypeConverterTests
-                    .s_converter
+                UriTypeConverterTests.s_converter
                     .ConvertTo(new Uri("http://www.Microsoft.com/"), typeof(InstanceDescriptor));
             var expectedMemberInfo = typeof(Uri).GetConstructor(
                 new[] { typeof(string), typeof(UriKind) }
@@ -117,8 +116,7 @@ namespace System.ComponentModel.Tests
             Assert.Equal(new Uri("http://www.Microsoft.com/"), actualInstanceDescriptor.Invoke());
 
             var actualRelativeInstanceDescriptor = (InstanceDescriptor)
-                UriTypeConverterTests
-                    .s_converter
+                UriTypeConverterTests.s_converter
                     .ConvertTo(new Uri("relative", UriKind.Relative), typeof(InstanceDescriptor));
             Assert.Equal(expectedMemberInfo, actualRelativeInstanceDescriptor.MemberInfo);
             Assert.Equal(
@@ -136,13 +134,11 @@ namespace System.ComponentModel.Tests
         public static void ConvertFrom_WithContext_Negative()
         {
             Assert.Throws<NotSupportedException>(() =>
-                UriTypeConverterTests
-                    .s_converter
+                UriTypeConverterTests.s_converter
                     .ConvertFrom(TypeConverterTests.s_context, null, null)
             );
             Assert.Throws<UriFormatException>(() =>
-                UriTypeConverterTests
-                    .s_converter
+                UriTypeConverterTests.s_converter
                     .ConvertFrom(TypeConverterTests.s_context, null, "mailto:User@")
             );
         }

@@ -1006,8 +1006,7 @@ namespace System
             {
                 return false;
             }
-            return TimeZoneInfo
-                .Local
+            return TimeZoneInfo.Local
                 .IsDaylightSavingTime(this, TimeZoneInfoOptions.NoThrowOnInvalidTime);
         }
 

@@ -26,8 +26,7 @@ public class SqlServerTypeAliasTest : IClassFixture<SqlServerFixture>
 
         using (var context = new TypeAliasContext(options))
         {
-            context
-                .Database
+            context.Database
                 .ExecuteSqlRaw(
                     """
 CREATE TYPE datetimeAlias FROM datetime2(6);

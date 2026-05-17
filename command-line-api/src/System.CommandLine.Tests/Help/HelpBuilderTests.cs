@@ -169,8 +169,7 @@ namespace System.CommandLine.Tests.Help
             outer.Subcommands.Add(inner);
             var innerEr = new CliCommand("inner-er", "the inner-er command");
             inner.Subcommands.Add(innerEr);
-            innerEr
-                .Options
+            innerEr.Options
                 .Add(new CliOption<string>("--some-option") { Description = "some option" });
             var rootCommand = new CliRootCommand();
             rootCommand.Add(outer);
@@ -211,8 +210,7 @@ namespace System.CommandLine.Tests.Help
         public void Usage_section_does_not_show_additional_arguments_when_TreatUnmatchedTokensAsErrors_is_not_specified()
         {
             var command = new CliCommand("some-command", "Does something");
-            command
-                .Options
+            command.Options
                 .Add(new CliOption<string>("-x") { Description = "Indicates whether x" });
 
             _helpBuilder.Write(command, _console);
@@ -226,8 +224,7 @@ namespace System.CommandLine.Tests.Help
             var command = new CliRootCommand();
             var subcommand = new CliCommand("some-command", "Does something");
             command.Subcommands.Add(subcommand);
-            subcommand
-                .Options
+            subcommand.Options
                 .Add(new CliOption<string>("-x") { Description = "Indicates whether x" });
             subcommand.TreatUnmatchedTokensAsErrors = true;
 
@@ -242,8 +239,7 @@ namespace System.CommandLine.Tests.Help
             var command = new CliRootCommand();
             var subcommand = new CliCommand("some-command", "Does something");
             command.Subcommands.Add(subcommand);
-            subcommand
-                .Options
+            subcommand.Options
                 .Add(new CliOption<string>("-x") { Description = "Indicates whether x" });
             subcommand.TreatUnmatchedTokensAsErrors = false;
 
@@ -897,11 +893,9 @@ namespace System.CommandLine.Tests.Help
         public void Options_section_does_not_contain_option_with_HelpDefinition_that_IsHidden()
         {
             var command = new CliCommand("the-command");
-            command
-                .Options
+            command.Options
                 .Add(new CliOption<string>("-x") { Description = "Is Hidden", Hidden = true });
-            command
-                .Options
+            command.Options
                 .Add(new CliOption<string>("-n") { Description = "Not Hidden", Hidden = false });
 
             _helpBuilder.Write(command, _console);

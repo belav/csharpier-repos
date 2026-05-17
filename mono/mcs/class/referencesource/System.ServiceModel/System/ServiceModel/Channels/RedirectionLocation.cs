@@ -23,8 +23,7 @@ namespace System.ServiceModel.Channels
 
             if (!address.IsAbsoluteUri)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument("address", SR.GetString(SR.UriMustBeAbsolute));
             }
 

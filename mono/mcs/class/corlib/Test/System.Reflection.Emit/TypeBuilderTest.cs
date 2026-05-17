@@ -4983,9 +4983,8 @@ namespace MonoTests.System.Reflection.Emit
             Assert.AreEqual(1, tb.GetEvents(BindingFlags.Instance | BindingFlags.NonPublic).Length);
             Assert.AreEqual(
                 2,
-                tb.GetEvents(
-                    BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic
-                ).Length
+                tb.GetEvents(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic)
+                    .Length
             );
             Assert.AreEqual(
                 tb.GetEvents(BindingFlags.Instance | BindingFlags.Public).Length,
@@ -4996,9 +4995,8 @@ namespace MonoTests.System.Reflection.Emit
                 emittedType.GetEvents(BindingFlags.Instance | BindingFlags.NonPublic).Length
             );
             Assert.AreEqual(
-                tb.GetEvents(
-                    BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic
-                ).Length,
+                tb.GetEvents(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic)
+                    .Length,
                 emittedType
                     .GetEvents(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic)
                     .Length
@@ -8848,8 +8846,9 @@ namespace MonoTests.System.Reflection.Emit
             Assert.AreEqual(
                 1,
                 tb.GetMethods(
-                    BindingFlags.Instance | BindingFlags.Public | BindingFlags.DeclaredOnly
-                ).Length,
+                        BindingFlags.Instance | BindingFlags.Public | BindingFlags.DeclaredOnly
+                    )
+                    .Length,
                 "#1"
             );
             Assert.AreEqual(
@@ -8860,8 +8859,9 @@ namespace MonoTests.System.Reflection.Emit
             Assert.AreEqual(
                 0,
                 tb.GetMethods(
-                    BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.DeclaredOnly
-                ).Length,
+                        BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.DeclaredOnly
+                    )
+                    .Length,
                 "#3"
             );
             Assert.AreEqual(
@@ -9485,18 +9485,16 @@ namespace MonoTests.System.Reflection.Emit
             Assert.AreEqual(
                 1,
                 tb.GetMember(
-                    "FOO",
-                    MemberTypes.Field,
-                    BindingFlags.Instance | BindingFlags.NonPublic
-                ).Length
+                        "FOO",
+                        MemberTypes.Field,
+                        BindingFlags.Instance | BindingFlags.NonPublic
+                    )
+                    .Length
             );
             Assert.AreEqual(
                 0,
-                tb.GetMember(
-                    "FOO",
-                    MemberTypes.Field,
-                    BindingFlags.Instance | BindingFlags.Public
-                ).Length
+                tb.GetMember("FOO", MemberTypes.Field, BindingFlags.Instance | BindingFlags.Public)
+                    .Length
             );
         }
 
@@ -12413,8 +12411,7 @@ namespace MonoTests.System.Reflection.Emit
         public void DefinedDefaultConstructorWorksWithGenericBaseType()
         {
             AssemblyName assemblyName = new AssemblyName("a");
-            AssemblyBuilder ass = AppDomain
-                .CurrentDomain
+            AssemblyBuilder ass = AppDomain.CurrentDomain
                 .DefineDynamicAssembly(assemblyName, AssemblyBuilderAccess.RunAndSave);
             var mb = ass.DefineDynamicModule("a.dll");
 
@@ -12798,8 +12795,7 @@ namespace MonoTests.System.Reflection.Emit
         [Category("MobileNotWorking")] // Mono.CompilerServices.SymbolWriter not available in XA
         public void CircularArrayType()
         {
-            var assemblyBuilder = AppDomain
-                .CurrentDomain
+            var assemblyBuilder = AppDomain.CurrentDomain
                 .DefineDynamicAssembly(new AssemblyName("Test"), AssemblyBuilderAccess.RunAndSave);
             var moduleBuilder = assemblyBuilder.DefineDynamicModule("Test", "Test.dll", true);
             var typeBuilder = moduleBuilder.DefineType("Foo", TypeAttributes.Public);
@@ -12897,8 +12893,7 @@ namespace MonoTests.System.Reflection.Emit
         public void TypeWithFieldRVAWorksUnderSgen()
         {
             AssemblyName an = new AssemblyName("MAIN");
-            AssemblyBuilder ab = AppDomain
-                .CurrentDomain
+            AssemblyBuilder ab = AppDomain.CurrentDomain
                 .DefineDynamicAssembly(an, AssemblyBuilderAccess.Run, ".");
             ModuleBuilder mob = ab.DefineDynamicModule("MAIN");
             TypeBuilder tb = mob.DefineType(
@@ -12960,8 +12955,7 @@ namespace MonoTests.System.Reflection.Emit
                 base_class
             );
 
-            var field = builder
-                .BaseType
+            var field = builder.BaseType
                 .GetField("Field", BindingFlags.Instance | BindingFlags.Public);
 
             var cb = builder.DefineConstructor(
@@ -13010,8 +13004,7 @@ namespace MonoTests.System.Reflection.Emit
 
             var assemblyBuilderAccess = AssemblyBuilderAccess.Save;
             var assemblyName = new AssemblyName(AssemblyName);
-            var assemblyBuilder = AppDomain
-                .CurrentDomain
+            var assemblyBuilder = AppDomain.CurrentDomain
                 .DefineDynamicAssembly(assemblyName, assemblyBuilderAccess);
             var moduleBuilder = assemblyBuilder.DefineDynamicModule(AssemblyName, AssemblyFileName);
 
@@ -13021,8 +13014,7 @@ namespace MonoTests.System.Reflection.Emit
                 base_class
             );
 
-            var field = builder
-                .BaseType
+            var field = builder.BaseType
                 .GetField("Field", BindingFlags.Instance | BindingFlags.Public);
 
             var cb = builder.DefineConstructor(
@@ -13183,8 +13175,7 @@ namespace MonoTests.System.Reflection.Emit
              * }
              */
             var aname = new AssemblyName("example1");
-            var ab = AppDomain
-                .CurrentDomain
+            var ab = AppDomain.CurrentDomain
                 .DefineDynamicAssembly(aname, AssemblyBuilderAccess.Run);
             var mb = ab.DefineDynamicModule(aname.Name);
             var tbS = mb.DefineType("S", TypeAttributes.Public);
@@ -13218,8 +13209,7 @@ namespace MonoTests.System.Reflection.Emit
              * }
              */
             var aname = new AssemblyName("example1");
-            var ab = AppDomain
-                .CurrentDomain
+            var ab = AppDomain.CurrentDomain
                 .DefineDynamicAssembly(aname, AssemblyBuilderAccess.Run);
             var mb = ab.DefineDynamicModule(aname.Name);
             var tbS = mb.DefineType("S", TypeAttributes.Public);
@@ -13248,8 +13238,7 @@ namespace MonoTests.System.Reflection.Emit
         public void GetGenericTypeDefinitionAfterCreateReturnsBuilder()
         {
             var aname = new AssemblyName("genericDefnAfterCreate");
-            var ab = AppDomain
-                .CurrentDomain
+            var ab = AppDomain.CurrentDomain
                 .DefineDynamicAssembly(aname, AssemblyBuilderAccess.Run);
             var mb = ab.DefineDynamicModule(aname.Name);
             var buildX = mb.DefineType("X", TypeAttributes.Public);

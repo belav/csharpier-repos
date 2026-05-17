@@ -104,14 +104,12 @@ public abstract partial class ConferencePlannerTestBase<TFixture> : IClassFixtur
 
             var pinky = context.Attendees.Single(a => a.UserName == "Pinks");
 
-            var pinkySessions = context
-                .Sessions
+            var pinkySessions = context.Sessions
                 .AsNoTracking()
                 .Where(s => s.SessionAttendees.Any(e => e.Attendee.UserName == "Pinks"))
                 .ToList();
 
-            var session = context
-                .Sessions
+            var session = context.Sessions
                 .AsNoTracking()
                 .Single(e => e.Title == "Hidden gems in .NET Core 3");
 
@@ -134,8 +132,7 @@ public abstract partial class ConferencePlannerTestBase<TFixture> : IClassFixtur
 
             Assert.Equal(
                 result.Sessions.Select(r => r.Id).OrderBy(i => i).ToList(),
-                context
-                    .Sessions
+                context.Sessions
                     .AsNoTracking()
                     .Where(s => s.SessionAttendees.Any(e => e.Attendee.UserName == "Pinks"))
                     .Select(s => s.Id)
@@ -161,8 +158,7 @@ public abstract partial class ConferencePlannerTestBase<TFixture> : IClassFixtur
         {
             var controller = new AttendeesController(context);
 
-            var session = context
-                .Sessions
+            var session = context.Sessions
                 .AsNoTracking()
                 .Single(e => e.Title == "Hidden gems in .NET Core 3");
 
@@ -177,8 +173,7 @@ public abstract partial class ConferencePlannerTestBase<TFixture> : IClassFixtur
         {
             var controller = new AttendeesController(context);
 
-            var beforeRemove = context
-                .Sessions
+            var beforeRemove = context.Sessions
                 .AsNoTracking()
                 .Where(s => s.SessionAttendees.Any(e => e.Attendee.UserName == "Pinks"))
                 .OrderBy(e => e.Id)
@@ -192,8 +187,7 @@ public abstract partial class ConferencePlannerTestBase<TFixture> : IClassFixtur
 
             Assert.Equal("Success", result);
 
-            var afterRemove = context
-                .Sessions
+            var afterRemove = context.Sessions
                 .AsNoTracking()
                 .Where(s => s.SessionAttendees.Any(e => e.Attendee.UserName == "Pinks"))
                 .OrderBy(e => e.Id)
@@ -222,8 +216,7 @@ public abstract partial class ConferencePlannerTestBase<TFixture> : IClassFixtur
         {
             var controller = new AttendeesController(context);
 
-            var session = context
-                .Sessions
+            var session = context.Sessions
                 .AsNoTracking()
                 .Single(e => e.Title == "Hidden gems in .NET Core 3");
 
@@ -305,8 +298,7 @@ public abstract partial class ConferencePlannerTestBase<TFixture> : IClassFixtur
                 return "No session";
             }
 
-            attendee
-                .SessionsAttendees
+            attendee.SessionsAttendees
                 .Add(new SessionAttendee { AttendeeId = attendee.Id, SessionId = sessionId });
 
             await _db.SaveChangesAsync();
@@ -332,8 +324,7 @@ public abstract partial class ConferencePlannerTestBase<TFixture> : IClassFixtur
                 return "No session";
             }
 
-            var sessionAttendee = attendee
-                .SessionsAttendees
+            var sessionAttendee = attendee.SessionsAttendees
                 .FirstOrDefault(sa => sa.SessionId == sessionId);
             attendee.SessionsAttendees.Remove(sessionAttendee);
 
@@ -444,8 +435,7 @@ public abstract partial class ConferencePlannerTestBase<TFixture> : IClassFixtur
     public virtual async Task SessionsController_Get_with_ID() =>
         await ExecuteWithStrategyInTransactionAsync(async context =>
         {
-            var session = context
-                .Sessions
+            var session = context.Sessions
                 .AsNoTracking()
                 .Single(e => e.Title.StartsWith("C# and Rust: combining "));
 
@@ -500,8 +490,7 @@ public abstract partial class ConferencePlannerTestBase<TFixture> : IClassFixtur
     public virtual async Task SessionsController_Put() =>
         await ExecuteWithStrategyInTransactionAsync(async context =>
         {
-            var session = context
-                .Sessions
+            var session = context.Sessions
                 .AsNoTracking()
                 .Single(e => e.Title.StartsWith("C# and Rust: combining "));
 
@@ -543,8 +532,7 @@ public abstract partial class ConferencePlannerTestBase<TFixture> : IClassFixtur
     public virtual async Task SessionsController_Delete() =>
         await ExecuteWithStrategyInTransactionAsync(async context =>
         {
-            var session = context
-                .Sessions
+            var session = context.Sessions
                 .AsNoTracking()
                 .Single(e => e.Title.StartsWith("C# and Rust: combining "));
 

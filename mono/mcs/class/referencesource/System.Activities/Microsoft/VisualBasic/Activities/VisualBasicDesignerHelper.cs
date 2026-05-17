@@ -305,8 +305,7 @@ namespace Microsoft.VisualBasic.Activities
                             {
                                 errorMessage += ":" + extraErrorMessage;
                             }
-                            throw FxTrace
-                                .Exception
+                            throw FxTrace.Exception
                                 .AsError(
                                     new SourceExpressionException(
                                         SR.CompilerErrorSpecificExpression(
@@ -348,8 +347,7 @@ namespace Microsoft.VisualBasic.Activities
                         {
                             errorMessage += ":" + extraErrorMessage;
                         }
-                        throw FxTrace
-                            .Exception
+                        throw FxTrace.Exception
                             .AsError(
                                 new SourceExpressionException(
                                     SR.CompilerErrorSpecificExpression(expressionText, errorMessage)

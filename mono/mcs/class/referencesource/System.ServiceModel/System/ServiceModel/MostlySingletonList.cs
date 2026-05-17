@@ -71,8 +71,7 @@ namespace System.ServiceModel
         {
             if (this.count != 1 || index != 0)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentOutOfRangeException("index"));
             }
         }

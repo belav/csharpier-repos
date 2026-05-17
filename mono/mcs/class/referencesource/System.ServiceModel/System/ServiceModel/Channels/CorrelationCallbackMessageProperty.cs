@@ -139,8 +139,7 @@ namespace System.ServiceModel.Channels
 
             if (timeout < TimeSpan.Zero)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentOutOfRangeException(
                             "timeout",
@@ -181,8 +180,7 @@ namespace System.ServiceModel.Channels
 
             if (timeout < TimeSpan.Zero)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentOutOfRangeException(
                             "timeout",

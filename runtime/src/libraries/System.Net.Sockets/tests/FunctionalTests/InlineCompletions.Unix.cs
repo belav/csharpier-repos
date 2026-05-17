@@ -18,8 +18,7 @@ namespace System.Net.Sockets.Tests
         public void InlineSocketContinuations()
         {
             RemoteInvokeOptions options = new RemoteInvokeOptions();
-            options
-                .StartInfo
+            options.StartInfo
                 .EnvironmentVariables
                 .Add("DOTNET_SYSTEM_NET_SOCKETS_INLINE_COMPLETIONS", "1");
             options.TimeOut = (int)TimeSpan.FromMinutes(20).TotalMilliseconds;

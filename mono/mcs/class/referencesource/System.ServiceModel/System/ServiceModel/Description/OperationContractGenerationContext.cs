@@ -31,16 +31,13 @@ namespace System.ServiceModel.Description
         )
         {
             if (serviceContractGenerator == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("serviceContractGenerator"));
             if (contract == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("contract"));
             if (declaringType == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("declaringType"));
 
             this.serviceContractGenerator = serviceContractGenerator;
@@ -62,20 +59,16 @@ namespace System.ServiceModel.Description
             : this(serviceContractGenerator, contract, operation, declaringType)
         {
             if (syncMethod == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("syncMethod"));
             if (beginMethod == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("beginMethod"));
             if (endMethod == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("endMethod"));
             if (taskMethod == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("taskMethod"));
 
             this.syncMethod = syncMethod;
@@ -96,16 +89,13 @@ namespace System.ServiceModel.Description
             : this(serviceContractGenerator, contract, operation, declaringType)
         {
             if (syncMethod == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("syncMethod"));
             if (beginMethod == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("beginMethod"));
             if (endMethod == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("endMethod"));
 
             this.syncMethod = syncMethod;
@@ -124,12 +114,10 @@ namespace System.ServiceModel.Description
             : this(serviceContractGenerator, contract, operation, declaringType)
         {
             if (syncMethod == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("syncMethod"));
             if (taskMethod == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("taskMethod"));
 
             this.syncMethod = syncMethod;
@@ -146,8 +134,7 @@ namespace System.ServiceModel.Description
             : this(serviceContractGenerator, contract, operation, declaringType)
         {
             if (method == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("method"));
 
             this.syncMethod = method;

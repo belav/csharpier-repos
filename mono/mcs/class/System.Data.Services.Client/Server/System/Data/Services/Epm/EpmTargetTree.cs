@@ -205,8 +205,7 @@ namespace System.Data.Services.Common
         )
         {
             foreach (
-                EpmTargetPathSegment childSegment in currentSegment
-                    .SubSegments
+                EpmTargetPathSegment childSegment in currentSegment.SubSegments
                     .Where(s => !s.IsAttribute)
             )
             {

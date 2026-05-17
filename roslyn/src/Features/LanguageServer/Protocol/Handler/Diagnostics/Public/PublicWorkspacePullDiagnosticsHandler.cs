@@ -134,8 +134,7 @@ internal sealed class PublicWorkspacePullDiagnosticsHandler(
         WorkspaceDiagnosticParams diagnosticsParams
     )
     {
-        return diagnosticsParams
-            .PreviousResultId
+        return diagnosticsParams.PreviousResultId
             .Select(id => new PreviousPullResult
             {
                 PreviousResultId = id.Value,

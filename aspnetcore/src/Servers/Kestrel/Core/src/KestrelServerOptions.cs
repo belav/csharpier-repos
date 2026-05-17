@@ -414,8 +414,7 @@ public class KestrelServerOptions
     {
         try
         {
-            var cert = CertificateManager
-                .Instance
+            var cert = CertificateManager.Instance
                 .ListCertificates(
                     StoreName.My,
                     StoreLocation.CurrentUser,
@@ -430,8 +429,7 @@ public class KestrelServerOptions
                 return null;
             }
 
-            var status = CertificateManager
-                .Instance
+            var status = CertificateManager.Instance
                 .CheckCertificateState(cert, interactive: false);
             if (!status.Success)
             {

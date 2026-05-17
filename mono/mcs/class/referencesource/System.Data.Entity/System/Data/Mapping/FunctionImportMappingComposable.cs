@@ -83,8 +83,7 @@ namespace System.Data.Mapping
             m_mappingItemCollection = mappingItemCollection;
             // We will use these parameters to target s-space function calls in the generated command tree.
             // Since enums don't exist in s-space we need to use the underlying type.
-            m_commandParameters = functionImport
-                .Parameters
+            m_commandParameters = functionImport.Parameters
                 .Select(p =>
                     TypeHelpers.GetPrimitiveTypeUsageForScalar(p.TypeUsage).Parameter(p.Name)
                 )
@@ -306,9 +305,8 @@ namespace System.Data.Mapping
             // Prepare the direct call of the store function as StoreFunction(@EdmFunc_p1, ..., @EdmFunc_pN).
             // Note that function call arguments are command parameters created from the m_edmFunction parameters.
             Debug.Assert(this.TargetFunction != null, "this.TargetFunction != null");
-            DbExpression storeFunctionInvoke = this.TargetFunction.Invoke(
-                GetParametersForTargetFunctionCall()
-            );
+            DbExpression storeFunctionInvoke = this.TargetFunction
+                .Invoke(GetParametersForTargetFunctionCall());
 
             // Generate the query expression producing c-space result from s-space function call(s).
             DbExpression queryExpression;

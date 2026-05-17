@@ -58,21 +58,23 @@ namespace System.IO.Pipelines.Tests
                 )
             );
 
-            pipe.Writer.OnReaderCompleted(
-                (exception, state) =>
-                {
-                    pipe.Writer.Complete();
-                },
-                null
-            );
+            pipe.Writer
+                .OnReaderCompleted(
+                    (exception, state) =>
+                    {
+                        pipe.Writer.Complete();
+                    },
+                    null
+                );
 
-            pipe.Reader.OnWriterCompleted(
-                (exception, state) =>
-                {
-                    callbackRan = true;
-                },
-                null
-            );
+            pipe.Reader
+                .OnWriterCompleted(
+                    (exception, state) =>
+                    {
+                        callbackRan = true;
+                    },
+                    null
+                );
 
             pipe.Reader.Complete();
             Assert.True(callbackRan);
@@ -93,21 +95,23 @@ namespace System.IO.Pipelines.Tests
                 )
             );
 
-            pipe.Reader.OnWriterCompleted(
-                (exception, state) =>
-                {
-                    pipe.Reader.Complete();
-                },
-                null
-            );
+            pipe.Reader
+                .OnWriterCompleted(
+                    (exception, state) =>
+                    {
+                        pipe.Reader.Complete();
+                    },
+                    null
+                );
 
-            pipe.Writer.OnReaderCompleted(
-                (exception, state) =>
-                {
-                    callbackRan = true;
-                },
-                null
-            );
+            pipe.Writer
+                .OnReaderCompleted(
+                    (exception, state) =>
+                    {
+                        callbackRan = true;
+                    },
+                    null
+                );
 
             pipe.Writer.Complete();
             Assert.True(callbackRan);
@@ -131,27 +135,29 @@ namespace System.IO.Pipelines.Tests
                     useSynchronizationContext: false
                 )
             );
-            pipe.Writer.OnReaderCompleted(
-                (exception, state) =>
-                {
-                    Assert.Equal(callbackState1, state);
-                    Assert.Equal(0, counter);
-                    counter++;
-                    throw exception1;
-                },
-                callbackState1
-            );
+            pipe.Writer
+                .OnReaderCompleted(
+                    (exception, state) =>
+                    {
+                        Assert.Equal(callbackState1, state);
+                        Assert.Equal(0, counter);
+                        counter++;
+                        throw exception1;
+                    },
+                    callbackState1
+                );
 
-            pipe.Writer.OnReaderCompleted(
-                (exception, state) =>
-                {
-                    Assert.Equal(callbackState2, state);
-                    Assert.Equal(1, counter);
-                    counter++;
-                    throw exception2;
-                },
-                callbackState2
-            );
+            pipe.Writer
+                .OnReaderCompleted(
+                    (exception, state) =>
+                    {
+                        Assert.Equal(callbackState2, state);
+                        Assert.Equal(1, counter);
+                        counter++;
+                        throw exception2;
+                    },
+                    callbackState2
+                );
 
             var aggregateException = Assert.Throws<AggregateException>(() =>
                 pipe.Reader.Complete()
@@ -197,14 +203,15 @@ namespace System.IO.Pipelines.Tests
             );
             pipe.Reader.Complete();
 
-            pipe.Writer.OnReaderCompleted(
-                (exception, state) =>
-                {
-                    Assert.Null(exception);
-                    callbackRan = true;
-                },
-                null
-            );
+            pipe.Writer
+                .OnReaderCompleted(
+                    (exception, state) =>
+                    {
+                        Assert.Null(exception);
+                        callbackRan = true;
+                    },
+                    null
+                );
 
             Assert.True(callbackRan);
             Assert.Equal(1, scheduler.CallCount);
@@ -223,13 +230,14 @@ namespace System.IO.Pipelines.Tests
                     useSynchronizationContext: false
                 )
             );
-            pipe.Writer.OnReaderCompleted(
-                (exception, state) =>
-                {
-                    callbackRan = true;
-                },
-                null
-            );
+            pipe.Writer
+                .OnReaderCompleted(
+                    (exception, state) =>
+                    {
+                        callbackRan = true;
+                    },
+                    null
+                );
 
             pipe.Reader.Complete();
             pipe.Writer.Complete();
@@ -259,14 +267,15 @@ namespace System.IO.Pipelines.Tests
             );
             var readerException = new Exception();
 
-            pipe.Writer.OnReaderCompleted(
-                (exception, state) =>
-                {
-                    callbackRan = true;
-                    Assert.Same(readerException, exception);
-                },
-                null
-            );
+            pipe.Writer
+                .OnReaderCompleted(
+                    (exception, state) =>
+                    {
+                        callbackRan = true;
+                        Assert.Same(readerException, exception);
+                    },
+                    null
+                );
             pipe.Reader.Complete(readerException);
 
             Assert.True(callbackRan);
@@ -285,14 +294,15 @@ namespace System.IO.Pipelines.Tests
                     useSynchronizationContext: false
                 )
             );
-            pipe.Writer.OnReaderCompleted(
-                (exception, state) =>
-                {
-                    Assert.Equal(callbackState, state);
-                    callbackRan = true;
-                },
-                callbackState
-            );
+            pipe.Writer
+                .OnReaderCompleted(
+                    (exception, state) =>
+                    {
+                        Assert.Equal(callbackState, state);
+                        callbackRan = true;
+                    },
+                    callbackState
+                );
             pipe.Reader.Complete();
 
             Assert.True(callbackRan);
@@ -314,14 +324,15 @@ namespace System.IO.Pipelines.Tests
                 )
             );
 
-            pipe.Writer.OnReaderCompleted(
-                (exception, state) =>
-                {
-                    Assert.False(continuationRan);
-                    callbackRan = true;
-                },
-                null
-            );
+            pipe.Writer
+                .OnReaderCompleted(
+                    (exception, state) =>
+                    {
+                        Assert.False(continuationRan);
+                        callbackRan = true;
+                    },
+                    null
+                );
 
             PipeWriter buffer = pipe.Writer.WriteEmpty(10);
             ValueTaskAwaiter<FlushResult> awaiter = buffer.FlushAsync().GetAwaiter();
@@ -353,35 +364,38 @@ namespace System.IO.Pipelines.Tests
                     useSynchronizationContext: false
                 )
             );
-            pipe.Writer.OnReaderCompleted(
-                (exception, state) =>
-                {
-                    Assert.Equal(callbackState1, state);
-                    Assert.Equal(0, counter);
-                    counter++;
-                },
-                callbackState1
-            );
+            pipe.Writer
+                .OnReaderCompleted(
+                    (exception, state) =>
+                    {
+                        Assert.Equal(callbackState1, state);
+                        Assert.Equal(0, counter);
+                        counter++;
+                    },
+                    callbackState1
+                );
 
-            pipe.Writer.OnReaderCompleted(
-                (exception, state) =>
-                {
-                    Assert.Equal(callbackState2, state);
-                    Assert.Equal(1, counter);
-                    counter++;
-                },
-                callbackState2
-            );
+            pipe.Writer
+                .OnReaderCompleted(
+                    (exception, state) =>
+                    {
+                        Assert.Equal(callbackState2, state);
+                        Assert.Equal(1, counter);
+                        counter++;
+                    },
+                    callbackState2
+                );
 
-            pipe.Writer.OnReaderCompleted(
-                (exception, state) =>
-                {
-                    Assert.Equal(callbackState3, state);
-                    Assert.Equal(2, counter);
-                    counter++;
-                },
-                callbackState3
-            );
+            pipe.Writer
+                .OnReaderCompleted(
+                    (exception, state) =>
+                    {
+                        Assert.Equal(callbackState3, state);
+                        Assert.Equal(2, counter);
+                        counter++;
+                    },
+                    callbackState3
+                );
 
             pipe.Reader.Complete();
 
@@ -416,13 +430,14 @@ namespace System.IO.Pipelines.Tests
                     useSynchronizationContext: false
                 )
             );
-            pipe.Writer.OnReaderCompleted(
-                (exception, state) =>
-                {
-                    callbackRan = true;
-                },
-                null
-            );
+            pipe.Writer
+                .OnReaderCompleted(
+                    (exception, state) =>
+                    {
+                        callbackRan = true;
+                    },
+                    null
+                );
             pipe.Reader.Complete();
 
             Assert.True(callbackRan);
@@ -447,27 +462,29 @@ namespace System.IO.Pipelines.Tests
                     useSynchronizationContext: false
                 )
             );
-            pipe.Reader.OnWriterCompleted(
-                (exception, state) =>
-                {
-                    Assert.Equal(callbackState1, state);
-                    Assert.Equal(0, counter);
-                    counter++;
-                    throw exception1;
-                },
-                callbackState1
-            );
+            pipe.Reader
+                .OnWriterCompleted(
+                    (exception, state) =>
+                    {
+                        Assert.Equal(callbackState1, state);
+                        Assert.Equal(0, counter);
+                        counter++;
+                        throw exception1;
+                    },
+                    callbackState1
+                );
 
-            pipe.Reader.OnWriterCompleted(
-                (exception, state) =>
-                {
-                    Assert.Equal(callbackState2, state);
-                    Assert.Equal(1, counter);
-                    counter++;
-                    throw exception2;
-                },
-                callbackState2
-            );
+            pipe.Reader
+                .OnWriterCompleted(
+                    (exception, state) =>
+                    {
+                        Assert.Equal(callbackState2, state);
+                        Assert.Equal(1, counter);
+                        counter++;
+                        throw exception2;
+                    },
+                    callbackState2
+                );
 
             var aggregateException = Assert.Throws<AggregateException>(() =>
                 pipe.Writer.Complete()
@@ -513,14 +530,15 @@ namespace System.IO.Pipelines.Tests
             );
             pipe.Writer.Complete();
 
-            pipe.Reader.OnWriterCompleted(
-                (exception, state) =>
-                {
-                    Assert.Null(exception);
-                    callbackRan = true;
-                },
-                null
-            );
+            pipe.Reader
+                .OnWriterCompleted(
+                    (exception, state) =>
+                    {
+                        Assert.Null(exception);
+                        callbackRan = true;
+                    },
+                    null
+                );
 
             Assert.True(callbackRan);
             Assert.Equal(1, scheduler.CallCount);
@@ -539,13 +557,14 @@ namespace System.IO.Pipelines.Tests
                     useSynchronizationContext: false
                 )
             );
-            pipe.Reader.OnWriterCompleted(
-                (exception, state) =>
-                {
-                    callbackRan = true;
-                },
-                null
-            );
+            pipe.Reader
+                .OnWriterCompleted(
+                    (exception, state) =>
+                    {
+                        callbackRan = true;
+                    },
+                    null
+                );
             pipe.Reader.Complete();
             pipe.Writer.Complete();
             pipe.Reset();
@@ -574,14 +593,15 @@ namespace System.IO.Pipelines.Tests
             );
             var readerException = new Exception();
 
-            pipe.Reader.OnWriterCompleted(
-                (exception, state) =>
-                {
-                    callbackRan = true;
-                    Assert.Same(readerException, exception);
-                },
-                null
-            );
+            pipe.Reader
+                .OnWriterCompleted(
+                    (exception, state) =>
+                    {
+                        callbackRan = true;
+                        Assert.Same(readerException, exception);
+                    },
+                    null
+                );
             pipe.Writer.Complete(readerException);
 
             Assert.True(callbackRan);
@@ -600,14 +620,15 @@ namespace System.IO.Pipelines.Tests
                     useSynchronizationContext: false
                 )
             );
-            pipe.Reader.OnWriterCompleted(
-                (exception, state) =>
-                {
-                    Assert.Equal(callbackState, state);
-                    callbackRan = true;
-                },
-                callbackState
-            );
+            pipe.Reader
+                .OnWriterCompleted(
+                    (exception, state) =>
+                    {
+                        Assert.Equal(callbackState, state);
+                        callbackRan = true;
+                    },
+                    callbackState
+                );
             pipe.Writer.Complete();
 
             Assert.True(callbackRan);
@@ -627,14 +648,15 @@ namespace System.IO.Pipelines.Tests
                 )
             );
 
-            pipe.Reader.OnWriterCompleted(
-                (exception, state) =>
-                {
-                    callbackRan = true;
-                    Assert.False(continuationRan);
-                },
-                null
-            );
+            pipe.Reader
+                .OnWriterCompleted(
+                    (exception, state) =>
+                    {
+                        callbackRan = true;
+                        Assert.False(continuationRan);
+                    },
+                    null
+                );
 
             ValueTask<ReadResult> awaiter = pipe.Reader.ReadAsync();
             Assert.False(awaiter.IsCompleted);
@@ -665,35 +687,38 @@ namespace System.IO.Pipelines.Tests
                     useSynchronizationContext: false
                 )
             );
-            pipe.Reader.OnWriterCompleted(
-                (exception, state) =>
-                {
-                    Assert.Equal(callbackState1, state);
-                    Assert.Equal(0, counter);
-                    counter++;
-                },
-                callbackState1
-            );
+            pipe.Reader
+                .OnWriterCompleted(
+                    (exception, state) =>
+                    {
+                        Assert.Equal(callbackState1, state);
+                        Assert.Equal(0, counter);
+                        counter++;
+                    },
+                    callbackState1
+                );
 
-            pipe.Reader.OnWriterCompleted(
-                (exception, state) =>
-                {
-                    Assert.Equal(callbackState2, state);
-                    Assert.Equal(1, counter);
-                    counter++;
-                },
-                callbackState2
-            );
+            pipe.Reader
+                .OnWriterCompleted(
+                    (exception, state) =>
+                    {
+                        Assert.Equal(callbackState2, state);
+                        Assert.Equal(1, counter);
+                        counter++;
+                    },
+                    callbackState2
+                );
 
-            pipe.Reader.OnWriterCompleted(
-                (exception, state) =>
-                {
-                    Assert.Equal(callbackState3, state);
-                    Assert.Equal(2, counter);
-                    counter++;
-                },
-                callbackState3
-            );
+            pipe.Reader
+                .OnWriterCompleted(
+                    (exception, state) =>
+                    {
+                        Assert.Equal(callbackState3, state);
+                        Assert.Equal(2, counter);
+                        counter++;
+                    },
+                    callbackState3
+                );
 
             pipe.Writer.Complete();
 
@@ -728,13 +753,14 @@ namespace System.IO.Pipelines.Tests
                     useSynchronizationContext: false
                 )
             );
-            pipe.Reader.OnWriterCompleted(
-                (exception, state) =>
-                {
-                    callbackRan = true;
-                },
-                null
-            );
+            pipe.Reader
+                .OnWriterCompleted(
+                    (exception, state) =>
+                    {
+                        callbackRan = true;
+                    },
+                    null
+                );
             pipe.Writer.Complete();
 
             Assert.True(callbackRan);

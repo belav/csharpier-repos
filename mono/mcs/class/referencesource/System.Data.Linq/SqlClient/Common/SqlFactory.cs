@@ -552,8 +552,7 @@ namespace System.Data.Linq.SqlClient
             Expression sourceExpression
         )
         {
-            System
-                .Diagnostics
+            System.Diagnostics
                 .Debug
                 .Assert(
                     !targetSqlType.IsRuntimeOnlyType,
@@ -636,11 +635,8 @@ namespace System.Data.Linq.SqlClient
             }
             else
             {
-                ProviderType resultType = this.typeProvider.PredictTypeForBinary(
-                    nodeType,
-                    left.SqlType,
-                    right.SqlType
-                );
+                ProviderType resultType = this.typeProvider
+                    .PredictTypeForBinary(nodeType, left.SqlType, right.SqlType);
                 if (resultType == right.SqlType)
                 {
                     if (clrType == null)

@@ -29,8 +29,7 @@ namespace System.Web.Http.ModelBinding.Binders
                 ValueProvider = new SimpleHttpValueProvider(),
             };
             HttpActionContext context = ContextUtil.CreateActionContext();
-            context
-                .ControllerContext
+            context.ControllerContext
                 .Configuration
                 .Services
                 .Replace(
@@ -62,8 +61,7 @@ namespace System.Web.Http.ModelBinding.Binders
                 ValueProvider = new SimpleHttpValueProvider(),
             };
             HttpActionContext context = ContextUtil.CreateActionContext();
-            context
-                .ControllerContext
+            context.ControllerContext
                 .Configuration
                 .Services
                 .Replace(
@@ -114,8 +112,7 @@ namespace System.Web.Http.ModelBinding.Binders
                 ValueProvider = new SimpleHttpValueProvider(),
             };
             HttpActionContext context = ContextUtil.CreateActionContext();
-            context
-                .ControllerContext
+            context.ControllerContext
                 .Configuration
                 .Services
                 .ReplaceRange(

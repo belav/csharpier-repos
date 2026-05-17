@@ -29,8 +29,7 @@ namespace SIMD
             int which
         )
         {
-            return Algorithms
-                .FractalRenderer
+            return Algorithms.FractalRenderer
                 .SelectRender(
                     draw,
                     Abort,

@@ -3711,17 +3711,13 @@ class C
             Action<ModuleSymbol> symbolValidator = moduleSymbol =>
             {
                 var type = moduleSymbol.GlobalNamespace.GetMember<NamedTypeSymbol>("C");
-                var typeAttrType = moduleSymbol
-                    .GlobalNamespace
+                var typeAttrType = moduleSymbol.GlobalNamespace
                     .GetMember<NamedTypeSymbol>("TypeAttribute");
-                var paramAttrType = moduleSymbol
-                    .GlobalNamespace
+                var paramAttrType = moduleSymbol.GlobalNamespace
                     .GetMember<NamedTypeSymbol>("ParamAttribute");
-                var returnTypeAttrType = moduleSymbol
-                    .GlobalNamespace
+                var returnTypeAttrType = moduleSymbol.GlobalNamespace
                     .GetMember<NamedTypeSymbol>("ReturnTypeAttribute");
-                var typeParamAttrType = moduleSymbol
-                    .GlobalNamespace
+                var typeParamAttrType = moduleSymbol.GlobalNamespace
                     .GetMember<NamedTypeSymbol>("TypeParamAttribute");
 
                 // Verify delegate type attribute
@@ -3896,8 +3892,7 @@ class C
                 moduleSymbol =>
                 {
                     var type = moduleSymbol.GlobalNamespace.GetMember<NamedTypeSymbol>("C");
-                    var paramAttrType = moduleSymbol
-                        .GlobalNamespace
+                    var paramAttrType = moduleSymbol.GlobalNamespace
                         .GetMember<NamedTypeSymbol>("ParamAttribute");
 
                     // Verify delegate type attribute
@@ -6217,52 +6212,40 @@ public class A : Attribute
                 Assert.Equal(12, attrs.Count());
                 var enumerator = attrs.GetEnumerator();
                 enumerator.MoveNext();
-                enumerator
-                    .Current
+                enumerator.Current
                     .VerifyNamedArgumentValue(0, "X", TypedConstantKind.Enum, (int)new DayOfWeek());
                 enumerator.MoveNext();
-                enumerator
-                    .Current
+                enumerator.Current
                     .VerifyNamedArgumentValue(0, "X", TypedConstantKind.Primitive, new bool());
                 enumerator.MoveNext();
-                enumerator
-                    .Current
+                enumerator.Current
                     .VerifyNamedArgumentValue(0, "X", TypedConstantKind.Primitive, new sbyte());
                 enumerator.MoveNext();
-                enumerator
-                    .Current
+                enumerator.Current
                     .VerifyNamedArgumentValue(0, "X", TypedConstantKind.Primitive, new byte());
                 enumerator.MoveNext();
-                enumerator
-                    .Current
+                enumerator.Current
                     .VerifyNamedArgumentValue(0, "X", TypedConstantKind.Primitive, new short());
                 enumerator.MoveNext();
-                enumerator
-                    .Current
+                enumerator.Current
                     .VerifyNamedArgumentValue(0, "X", TypedConstantKind.Primitive, new ushort());
                 enumerator.MoveNext();
-                enumerator
-                    .Current
+                enumerator.Current
                     .VerifyNamedArgumentValue(0, "X", TypedConstantKind.Primitive, new int());
                 enumerator.MoveNext();
-                enumerator
-                    .Current
+                enumerator.Current
                     .VerifyNamedArgumentValue(0, "X", TypedConstantKind.Primitive, new uint());
                 enumerator.MoveNext();
-                enumerator
-                    .Current
+                enumerator.Current
                     .VerifyNamedArgumentValue(0, "X", TypedConstantKind.Primitive, new char());
                 enumerator.MoveNext();
-                enumerator
-                    .Current
+                enumerator.Current
                     .VerifyNamedArgumentValue(0, "X", TypedConstantKind.Primitive, new float());
                 enumerator.MoveNext();
-                enumerator
-                    .Current
+                enumerator.Current
                     .VerifyNamedArgumentValue(0, "X", TypedConstantKind.Primitive, new Single());
                 enumerator.MoveNext();
-                enumerator
-                    .Current
+                enumerator.Current
                     .VerifyNamedArgumentValue(0, "X", TypedConstantKind.Primitive, new double());
             };
 
@@ -10653,8 +10636,7 @@ public class IA
                     .WithLocation(6, 3)
             );
 
-            var indexer = compilation
-                .GlobalNamespace
+            var indexer = compilation.GlobalNamespace
                 .GetMember<NamedTypeSymbol>("IA")
                 .GetMember<PropertySymbol>(WellKnownMemberNames.Indexer);
             Assert.Equal("ItemX", indexer.MetadataName); //First one wins.
@@ -10696,8 +10678,7 @@ public class IA
             Assert.Equal(0, assembly.GetAttributes().Length);
             var type = compilation.GlobalNamespace.GetMember<NamedTypeSymbol>("E");
             Assert.Equal(0, type.GetAttributes().Length);
-            var method = compilation
-                .GlobalNamespace
+            var method = compilation.GlobalNamespace
                 .GetMember<NamedTypeSymbol>("E")
                 .GetMember<PEMethodSymbol>("M");
             Assert.Equal(0, method.GetAttributes().Length);
@@ -10742,8 +10723,7 @@ public class IA
             Assert.Equal(0, assembly.GetAttributes().Length);
             var type = compilation.GlobalNamespace.GetMember<NamedTypeSymbol>("E");
             Assert.Equal(0, type.GetAttributes().Length);
-            var method = compilation
-                .GlobalNamespace
+            var method = compilation.GlobalNamespace
                 .GetMember<NamedTypeSymbol>("E")
                 .GetMember<PEMethodSymbol>("M");
             Assert.Equal(0, method.GetAttributes().Length);
@@ -10794,8 +10774,7 @@ public class IA
             Assert.Equal(0, assembly.GetAttributes().Length);
             var type = compilation.GlobalNamespace.GetMember<NamedTypeSymbol>("E");
             Assert.Equal(0, type.GetAttributes().Length);
-            var method = compilation
-                .GlobalNamespace
+            var method = compilation.GlobalNamespace
                 .GetMember<NamedTypeSymbol>("E")
                 .GetMember<PEMethodSymbol>("M");
             Assert.Equal(0, method.GetAttributes().Length);
@@ -10836,8 +10815,7 @@ public class IA
             var compilation = CreateCompilation(source2, new[] { reference1 });
             compilation.VerifyDiagnostics();
 
-            var method = compilation
-                .GlobalNamespace
+            var method = compilation.GlobalNamespace
                 .GetMember<NamedTypeSymbol>("A")
                 .GetMember<PEMethodSymbol>("M");
             Assert.Equal(0, method.GetAttributes().Length);
@@ -12278,8 +12256,7 @@ internal sealed class CSharpCompilerDiagnosticAnalyzer
                 options: new EmitOptions(metadataOnly: true)
             );
             Assert.False(emitResult2.Success);
-            emitResult2
-                .Diagnostics
+            emitResult2.Diagnostics
                 .Verify(
                     // error CS7038: Failed to emit module 'Test.dll': Module has invalid attributes.
                     Diagnostic(ErrorCode.ERR_ModuleEmitFailure)
@@ -12310,8 +12287,7 @@ internal sealed class CSharpCompilerDiagnosticAnalyzer
                 options: new EmitOptions(metadataOnly: true)
             );
             Assert.False(emitResult3.Success);
-            emitResult3
-                .Diagnostics
+            emitResult3.Diagnostics
                 .Verify(
                     // (2,35): error CS0246: The type or namespace name 'xyz' could not be found (are you missing a using directive or an assembly reference?)
                     // [DiagnosticAnalyzer(LanguageNames.CSharp)]

@@ -114,8 +114,7 @@ namespace System.Security.Cryptography.Pkcs.Asn1
             )
             {
                 System.Security.Cryptography.Pkcs.Asn1.CadesIssuerSerial tmpIssuerSerial;
-                System
-                    .Security
+                System.Security
                     .Cryptography
                     .Pkcs
                     .Asn1

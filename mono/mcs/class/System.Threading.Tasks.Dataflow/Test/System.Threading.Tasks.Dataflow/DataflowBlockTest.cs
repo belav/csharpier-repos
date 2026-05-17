@@ -52,11 +52,12 @@ namespace MonoTests.System.Threading.Tasks.Dataflow
         public void ReceiveTest()
         {
             var block = new BufferBlock<int>();
-            Task.Factory.StartNew(() =>
-            {
-                Thread.Sleep(300);
-                block.Post(42);
-            });
+            Task.Factory
+                .StartNew(() =>
+                {
+                    Thread.Sleep(300);
+                    block.Post(42);
+                });
             Assert.AreEqual(42, block.Receive());
         }
 
@@ -100,11 +101,12 @@ namespace MonoTests.System.Threading.Tasks.Dataflow
                     result = i.Result;
                     mre.Set();
                 });
-            Task.Factory.StartNew(() =>
-            {
-                Thread.Sleep(100);
-                block.Post(42);
-            });
+            Task.Factory
+                .StartNew(() =>
+                {
+                    Thread.Sleep(100);
+                    block.Post(42);
+                });
             Assert.IsTrue(mre.Wait(1000));
 
             Assert.AreEqual(42, result);
@@ -117,11 +119,12 @@ namespace MonoTests.System.Threading.Tasks.Dataflow
 
             var block = new WriteOnceBlock<int>(null);
             var task = block.ReceiveAsync(src.Token);
-            Task.Factory.StartNew(() =>
-            {
-                Thread.Sleep(800);
-                block.Post(42);
-            });
+            Task.Factory
+                .StartNew(() =>
+                {
+                    Thread.Sleep(800);
+                    block.Post(42);
+                });
             Thread.Sleep(50);
             src.Cancel();
 

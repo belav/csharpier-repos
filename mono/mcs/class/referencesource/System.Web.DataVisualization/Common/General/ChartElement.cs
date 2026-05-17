@@ -1582,8 +1582,7 @@ namespace System.Web.UI.DataVisualization.Charting
             }
 
             if (
-                Utilities
-                    .CustomPropertyRegistry
+                Utilities.CustomPropertyRegistry
                     .IsXAxisQuantitativeChartTypes
                     .Contains(series.ChartType)
                 && series.IsCustomPropertySet(Utilities.CustomPropertyName.IsXAxisQuantitative)

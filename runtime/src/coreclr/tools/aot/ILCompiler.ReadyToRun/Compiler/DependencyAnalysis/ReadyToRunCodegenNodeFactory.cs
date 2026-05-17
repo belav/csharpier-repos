@@ -106,8 +106,7 @@ namespace ILCompiler.DependencyAnalysis
         public void SetMarkingComplete()
         {
             _markingComplete = true;
-            ILCompiler
-                .DependencyAnalysis
+            ILCompiler.DependencyAnalysis
                 .ReadyToRun
                 .ILBodyFixupSignature
                 .NotifyComplete(this, _markedILBodyFixupSignatures);
@@ -495,8 +494,7 @@ namespace ILCompiler.DependencyAnalysis
             MethodWithToken method = key.Method;
             bool isInstantiatingStub = key.IsInstantiatingStub;
             bool isPrecodeImportRequired = key.IsPrecodeImportRequired;
-            MethodDesc compilableMethod = method
-                .Method
+            MethodDesc compilableMethod = method.Method
                 .GetCanonMethodTarget(CanonicalFormKind.Specific);
             MethodWithGCInfo methodWithGCInfo = null;
 

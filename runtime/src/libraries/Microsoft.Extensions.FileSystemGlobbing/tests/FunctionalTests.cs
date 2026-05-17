@@ -978,8 +978,7 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests
                 new DirectoryInfoWrapper(new DirectoryInfo(directoryPath))
             );
 
-            var actual = results
-                .Files
+            var actual = results.Files
                 .Select(match =>
                     Path.GetFullPath(Path.Combine(_context.RootPath, directoryPath, match.Path))
                 );

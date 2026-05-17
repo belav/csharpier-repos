@@ -155,8 +155,7 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
                     var data = new byte[6];
                     try
                     {
-                        await context
-                            .Request
+                        await context.Request
                             .Body
                             .FillEntireBufferAsync(data, cts.Token)
                             .DefaultTimeout();
@@ -396,16 +395,14 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
             var value = local.Value;
             Assert.Equal(0, value);
 
-            context
-                .Response
+            context.Response
                 .OnStarting(() =>
                 {
                     local.Value++;
                     return Task.CompletedTask;
                 });
 
-            context
-                .Response
+            context.Response
                 .OnCompleted(() =>
                 {
                     local.Value++;
@@ -437,16 +434,14 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
             var value = local.Value.Value;
             Assert.Equal(0, value);
 
-            context
-                .Response
+            context.Response
                 .OnStarting(() =>
                 {
                     local.Value.Value++;
                     return Task.CompletedTask;
                 });
 
-            context
-                .Response
+            context.Response
                 .OnCompleted(() =>
                 {
                     local.Value.Value++;
@@ -476,16 +471,14 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
             var value = local.Value;
             Assert.Equal(0, value);
 
-            context
-                .Response
+            context.Response
                 .OnStarting(async () =>
                 {
                     local.Value++;
                     Assert.Equal(1, local.Value);
                 });
 
-            context
-                .Response
+            context.Response
                 .OnCompleted(async () =>
                 {
                     local.Value++;
@@ -512,16 +505,14 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
             var value = local.Value;
             Assert.Equal(0, value);
 
-            context
-                .Response
+            context.Response
                 .OnStarting(async () =>
                 {
                     local.Value++;
                     Assert.Equal(2, local.Value);
                 });
 
-            context
-                .Response
+            context.Response
                 .OnCompleted(async () =>
                 {
                     local.Value++;
@@ -557,16 +548,14 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
             var value = local.Value.Value;
             Assert.Equal(0, value); // Start
 
-            context
-                .Response
+            context.Response
                 .OnStarting(async () =>
                 {
                     local.Value.Value++;
                     Assert.Equal(2, local.Value.Value); // Second
                 });
 
-            context
-                .Response
+            context.Response
                 .OnCompleted(async () =>
                 {
                     local.Value.Value++;
@@ -600,8 +589,7 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
             var value = local.Value;
             Assert.Equal(0, value);
 
-            context
-                .Response
+            context.Response
                 .OnStarting(() =>
                 {
                     local.Value++;
@@ -610,8 +598,7 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
                     return Task.CompletedTask;
                 });
 
-            context
-                .Response
+            context.Response
                 .OnCompleted(() =>
                 {
                     local.Value++;
@@ -679,8 +666,7 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
             )
         )
         {
-            var requestId = await server
-                .HttpClientSlim
+            var requestId = await server.HttpClientSlim
                 .GetStringAsync($"http://localhost:{server.Port}/");
             Assert.Equal(knownId, requestId);
         }
@@ -716,8 +702,7 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
                 tasks.Add(
                     Task.Run(async () =>
                     {
-                        var id = await server
-                            .HttpClientSlim
+                        var id = await server.HttpClientSlim
                             .GetStringAsync($"http://localhost:{server.Port}/");
                         Assert.DoesNotContain(id, usedIds.ToArray());
                         usedIds.Add(id);
@@ -746,8 +731,7 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
 
                     while (offset < identifierLength)
                     {
-                        var read = await connection
-                            .Reader
+                        var read = await connection.Reader
                             .ReadAsync(buffer, offset, identifierLength - offset);
                         offset += read;
 
@@ -1087,8 +1071,7 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
             var server = new TestServer(
                 async httpContext =>
                 {
-                    var readResult = await httpContext
-                        .Request
+                    var readResult = await httpContext.Request
                         .BodyReader
                         .ReadAsync()
                         .AsTask()
@@ -1179,8 +1162,7 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
                     var readResult = await httpContext.Request.BodyReader.ReadAsync();
                     // This will hang if 0 content length is not assumed by the server
                     Assert.Equal(5, readResult.Buffer.Length);
-                    httpContext
-                        .Request
+                    httpContext.Request
                         .BodyReader
                         .AdvanceTo(readResult.Buffer.Start, readResult.Buffer.End);
                     readResult = await httpContext.Request.BodyReader.ReadAsync();
@@ -1223,8 +1205,7 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
                     var readResult = await httpContext.Request.BodyReader.ReadAsync();
                     // This will hang if 0 content length is not assumed by the server
                     Assert.Equal(5, readResult.Buffer.Length);
-                    httpContext
-                        .Request
+                    httpContext.Request
                         .BodyReader
                         .AdvanceTo(readResult.Buffer.Start, readResult.Buffer.End);
 
@@ -1232,8 +1213,7 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
                     {
                         readResult = await httpContext.Request.BodyReader.ReadAsync();
                         Assert.Equal(5, readResult.Buffer.Length);
-                        httpContext
-                            .Request
+                        httpContext.Request
                             .BodyReader
                             .AdvanceTo(readResult.Buffer.Start, readResult.Buffer.End);
                     }
@@ -1344,15 +1324,13 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
                     Assert.Equal(3, readResult.Buffer.Length);
                     tcs.SetResult();
 
-                    httpContext
-                        .Request
+                    httpContext.Request
                         .BodyReader
                         .AdvanceTo(readResult.Buffer.Start, readResult.Buffer.End);
 
                     // Buffer 1 more byte.
                     readResult = await httpContext.Request.BodyReader.ReadAsync();
-                    httpContext
-                        .Request
+                    httpContext.Request
                         .BodyReader
                         .AdvanceTo(readResult.Buffer.Start, readResult.Buffer.End);
                     tcs2.SetResult();
@@ -1362,8 +1340,7 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
                     Assert.Equal(5, readResult.Buffer.Length);
 
                     // Do one more read to ensure completion is always observed.
-                    httpContext
-                        .Request
+                    httpContext.Request
                         .BodyReader
                         .AdvanceTo(readResult.Buffer.Start, readResult.Buffer.End);
                     readResult = await httpContext.Request.BodyReader.ReadAsync();
@@ -1402,14 +1379,12 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
                 {
                     var readResult = await httpContext.Request.BodyReader.ReadAsync();
 
-                    httpContext
-                        .Request
+                    httpContext.Request
                         .BodyReader
                         .AdvanceTo(readResult.Buffer.Start, readResult.Buffer.End);
 
                     readResult = await httpContext.Request.BodyReader.ReadAsync();
-                    httpContext
-                        .Request
+                    httpContext.Request
                         .BodyReader
                         .AdvanceTo(readResult.Buffer.Slice(1).Start, readResult.Buffer.End);
                 },
@@ -1862,8 +1837,7 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
                         );
 
                     using (
-                        var stream = await context
-                            .Features
+                        var stream = await context.Features
                             .Get<IHttpUpgradeFeature>()
                             .UpgradeAsync()
                     )
@@ -2038,8 +2012,7 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
                     Assert.Equal(CoreStrings.SynchronousReadsDisallowed, ioEx2.Message);
 
                     var buffer = new byte[5];
-                    var length = await context
-                        .Request
+                    var length = await context.Request
                         .Body
                         .FillBufferUntilEndAsync(buffer)
                         .DefaultTimeout();
@@ -2167,8 +2140,7 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
 
                     response.Headers["Content-Length"] = new[] { "11" };
 
-                    await response
-                        .BodyWriter
+                    await response.BodyWriter
                         .WriteAsync(
                             new Memory<byte>(Encoding.ASCII.GetBytes("Hello World"), 0, 11)
                         );
@@ -2218,8 +2190,7 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
 
                     response.Headers["Content-Length"] = new[] { "11" };
 
-                    await response
-                        .BodyWriter
+                    await response.BodyWriter
                         .WriteAsync(
                             new Memory<byte>(Encoding.ASCII.GetBytes("Hello World"), 0, 11)
                         );
@@ -2308,8 +2279,7 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
 
                     response.Headers["Content-Length"] = new[] { "11" };
 
-                    await response
-                        .BodyWriter
+                    await response.BodyWriter
                         .WriteAsync(
                             new Memory<byte>(Encoding.ASCII.GetBytes("Hello World"), 0, 11)
                         );
@@ -2409,8 +2379,7 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
                 context =>
                 {
                     requestCount++;
-                    var persistentStateCollection = context
-                        .Features
+                    var persistentStateCollection = context.Features
                         .Get<IPersistentStateFeature>()
                         .State;
                     if (persistentStateCollection.TryGetValue("Counter", out var value))

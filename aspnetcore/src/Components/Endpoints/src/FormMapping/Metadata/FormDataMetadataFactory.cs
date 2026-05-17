@@ -217,8 +217,7 @@ internal partial class FormDataMetadataFactory(
                             return null;
                         }
 
-                        result
-                            .ConstructorParameters
+                        result.ConstructorParameters
                             .Add(new FormDataParameterMetadata(parameter, parameterTypeInfo));
                     }
                 }
@@ -228,8 +227,7 @@ internal partial class FormDataMetadataFactory(
                 {
                     var property = propertyHelper.Property;
                     Log.CandidateProperty(_logger, propertyHelper.Name, property.PropertyType);
-                    var matchingConstructorParameter = result
-                        .ConstructorParameters
+                    var matchingConstructorParameter = result.ConstructorParameters
                         .FirstOrDefault(p =>
                             string.Equals(p.Name, property.Name, StringComparison.OrdinalIgnoreCase)
                         );

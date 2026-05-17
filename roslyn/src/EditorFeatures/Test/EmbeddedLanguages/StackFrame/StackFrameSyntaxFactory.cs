@@ -332,8 +332,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.EmbeddedLanguages.StackFrame
             params StackFrameIdentifierNameNode[] typeArguments
         )
         {
-            using var _ = PooledObjects
-                .ArrayBuilder<StackFrameNodeOrToken>
+            using var _ = PooledObjects.ArrayBuilder<StackFrameNodeOrToken>
                 .GetInstance(out var builder);
             var openToken = useBrackets ? OpenBracketToken : LessThanToken;
             var closeToken = useBrackets ? CloseBracketToken : GreaterThanToken;

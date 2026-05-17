@@ -43,8 +43,7 @@ public class MulticastDelegateCombineImpl
     {
         bool retVal = true;
 
-        TestLibrary
-            .TestFramework
+        TestLibrary.TestFramework
             .BeginScenario("PosTest1: Combine two function from different type to a delegate");
 
         try
@@ -75,8 +74,7 @@ public class MulticastDelegateCombineImpl
     {
         bool retVal = true;
 
-        TestLibrary
-            .TestFramework
+        TestLibrary.TestFramework
             .BeginScenario("PosTest2: Combine two function from same type to a delegate");
 
         try
@@ -107,8 +105,7 @@ public class MulticastDelegateCombineImpl
     {
         bool retVal = true;
 
-        TestLibrary
-            .TestFramework
+        TestLibrary.TestFramework
             .BeginScenario(
                 "PosTest3: Combine a instance method and a class method from same type to a delegate"
             );
@@ -141,8 +138,7 @@ public class MulticastDelegateCombineImpl
     {
         bool retVal = true;
 
-        TestLibrary
-            .TestFramework
+        TestLibrary.TestFramework
             .BeginScenario(
                 "PosTest4: Combine a public instance method and a public class method from different type to a delegate"
             );
@@ -175,8 +171,7 @@ public class MulticastDelegateCombineImpl
     {
         bool retVal = true;
 
-        TestLibrary
-            .TestFramework
+        TestLibrary.TestFramework
             .BeginScenario(
                 "PosTest5: Combine a private instance method and a private class method from the same type to a delegate"
             );
@@ -209,8 +204,7 @@ public class MulticastDelegateCombineImpl
     {
         bool retVal = true;
 
-        TestLibrary
-            .TestFramework
+        TestLibrary.TestFramework
             .BeginScenario("PosTest6: Combine two static methods from different class");
 
         try
@@ -286,8 +280,7 @@ public class MulticastDelegateCombineImpl
             );
             if (returnObject != DelegateDefinitions.c_DELEGATE_TEST_DEFAULT_VALUE_PARAMETER)
             {
-                TestLibrary
-                    .TestFramework
+                TestLibrary.TestFramework
                     .LogError("007", "Incorrect delegate return value: " + returnObject);
                 retVal = false;
             }
@@ -339,8 +332,7 @@ public class MulticastDelegateCombineImpl
                 != DelegateDefinitions.c_DELEGATE_TEST_DEFAULT_VALUE_PARAMETER + 1
             )
             {
-                TestLibrary
-                    .TestFramework
+                TestLibrary.TestFramework
                     .LogError(
                         "009",
                         "Combined delegate does not work: " + dd.VoidParameterVoidDelegateTestValue
@@ -353,8 +345,7 @@ public class MulticastDelegateCombineImpl
                 != DelegateDefinitions.c_DELEGATE_TEST_DEFAULT_VALUE_PARAMETER + 1
             )
             {
-                TestLibrary
-                    .TestFramework
+                TestLibrary.TestFramework
                     .LogError(
                         "010",
                         "Combined delegate does not work: " + dd1.VoidParameterVoidDelegateTestValue
@@ -367,8 +358,7 @@ public class MulticastDelegateCombineImpl
                 != DelegateDefinitions.c_DELEGATE_TEST_DEFAULT_VALUE_PARAMETER + 2
             )
             {
-                TestLibrary
-                    .TestFramework
+                TestLibrary.TestFramework
                     .LogError(
                         "011",
                         "Combined delegate does not work: "
@@ -459,8 +449,7 @@ public class MulticastDelegateCombineImpl
     {
         bool retVal = true;
 
-        TestLibrary
-            .TestFramework
+        TestLibrary.TestFramework
             .BeginScenario(
                 "NegTest3: Return value of second method is different with first method"
             );
@@ -480,8 +469,7 @@ public class MulticastDelegateCombineImpl
             int returnObject = dd.VoidParameterValueDelegate();
             if (returnObject != DelegateDefinitions.c_DELEGATE_TEST_DEFAULT_VALUE_PARAMETER + 1)
             {
-                TestLibrary
-                    .TestFramework
+                TestLibrary.TestFramework
                     .LogError("103", "Incorrect delegate return value: " + returnObject);
                 retVal = false;
             }

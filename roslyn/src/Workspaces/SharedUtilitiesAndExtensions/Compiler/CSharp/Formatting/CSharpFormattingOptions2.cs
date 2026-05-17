@@ -131,8 +131,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             CreateOption(
                     CSharpFormattingOptionGroups.Spacing,
                     "csharp_space_between_method_declaration_name_and_open_parenthesis",
-                    CSharpSyntaxFormattingOptions
-                        .SpacingDefault
+                    CSharpSyntaxFormattingOptions.SpacingDefault
                         .HasFlag(SpacePlacement.AfterMethodDeclarationName)
                 )
                 .WithPublicOption(PublicFeatureName, "SpacingAfterMethodDeclarationName");
@@ -141,8 +140,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             CreateOption(
                     CSharpFormattingOptionGroups.Spacing,
                     "csharp_space_between_method_declaration_parameter_list_parentheses",
-                    CSharpSyntaxFormattingOptions
-                        .SpacingDefault
+                    CSharpSyntaxFormattingOptions.SpacingDefault
                         .HasFlag(SpacePlacement.WithinMethodDeclarationParenthesis)
                 )
                 .WithPublicOption(PublicFeatureName, "SpaceWithinMethodDeclarationParenthesis");
@@ -151,8 +149,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             CreateOption(
                     CSharpFormattingOptionGroups.Spacing,
                     "csharp_space_between_method_declaration_empty_parameter_list_parentheses",
-                    CSharpSyntaxFormattingOptions
-                        .SpacingDefault
+                    CSharpSyntaxFormattingOptions.SpacingDefault
                         .HasFlag(SpacePlacement.BetweenEmptyMethodDeclarationParentheses)
                 )
                 .WithPublicOption(
@@ -164,8 +161,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             CreateOption(
                     CSharpFormattingOptionGroups.Spacing,
                     "csharp_space_between_method_call_name_and_opening_parenthesis",
-                    CSharpSyntaxFormattingOptions
-                        .SpacingDefault
+                    CSharpSyntaxFormattingOptions.SpacingDefault
                         .HasFlag(SpacePlacement.AfterMethodCallName)
                 )
                 .WithPublicOption(PublicFeatureName, "SpaceAfterMethodCallName");
@@ -174,8 +170,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             CreateOption(
                     CSharpFormattingOptionGroups.Spacing,
                     "csharp_space_between_method_call_parameter_list_parentheses",
-                    CSharpSyntaxFormattingOptions
-                        .SpacingDefault
+                    CSharpSyntaxFormattingOptions.SpacingDefault
                         .HasFlag(SpacePlacement.WithinMethodCallParentheses)
                 )
                 .WithPublicOption(PublicFeatureName, "SpaceWithinMethodCallParentheses");
@@ -184,8 +179,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             CreateOption(
                     CSharpFormattingOptionGroups.Spacing,
                     "csharp_space_between_method_call_empty_parameter_list_parentheses",
-                    CSharpSyntaxFormattingOptions
-                        .SpacingDefault
+                    CSharpSyntaxFormattingOptions.SpacingDefault
                         .HasFlag(SpacePlacement.BetweenEmptyMethodCallParentheses)
                 )
                 .WithPublicOption(PublicFeatureName, "SpaceBetweenEmptyMethodCallParentheses");
@@ -194,8 +188,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             CreateOption(
                     CSharpFormattingOptionGroups.Spacing,
                     "csharp_space_after_keywords_in_control_flow_statements",
-                    CSharpSyntaxFormattingOptions
-                        .SpacingDefault
+                    CSharpSyntaxFormattingOptions.SpacingDefault
                         .HasFlag(SpacePlacement.AfterControlFlowStatementKeyword)
                 )
                 .WithPublicOption(PublicFeatureName, "SpaceAfterControlFlowStatementKeyword");
@@ -223,8 +216,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             CreateOption(
                     CSharpFormattingOptionGroups.Spacing,
                     "csharp_space_around_declaration_statements",
-                    CSharpSyntaxFormattingOptions
-                        .SpacingDefault
+                    CSharpSyntaxFormattingOptions.SpacingDefault
                         .HasFlag(SpacePlacement.IgnoreAroundVariableDeclaration),
                     new EditorConfigValueSerializer<bool>(
                         s => DetermineIfIgnoreSpacesAroundVariableDeclarationIsSet(s),
@@ -237,8 +229,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             CreateOption(
                     CSharpFormattingOptionGroups.Spacing,
                     "csharp_space_before_open_square_brackets",
-                    CSharpSyntaxFormattingOptions
-                        .SpacingDefault
+                    CSharpSyntaxFormattingOptions.SpacingDefault
                         .HasFlag(SpacePlacement.BeforeOpenSquareBracket)
                 )
                 .WithPublicOption(PublicFeatureName, "SpaceBeforeOpenSquareBracket");
@@ -247,8 +238,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             CreateOption(
                     CSharpFormattingOptionGroups.Spacing,
                     "csharp_space_between_empty_square_brackets",
-                    CSharpSyntaxFormattingOptions
-                        .SpacingDefault
+                    CSharpSyntaxFormattingOptions.SpacingDefault
                         .HasFlag(SpacePlacement.BetweenEmptySquareBrackets)
                 )
                 .WithPublicOption(PublicFeatureName, "SpaceBetweenEmptySquareBrackets");
@@ -257,8 +247,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             CreateOption(
                     CSharpFormattingOptionGroups.Spacing,
                     "csharp_space_between_square_brackets",
-                    CSharpSyntaxFormattingOptions
-                        .SpacingDefault
+                    CSharpSyntaxFormattingOptions.SpacingDefault
                         .HasFlag(SpacePlacement.WithinSquareBrackets)
                 )
                 .WithPublicOption(PublicFeatureName, "SpaceWithinSquareBrackets");
@@ -267,8 +256,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             CreateOption(
                     CSharpFormattingOptionGroups.Spacing,
                     "csharp_space_after_colon_in_inheritance_clause",
-                    CSharpSyntaxFormattingOptions
-                        .SpacingDefault
+                    CSharpSyntaxFormattingOptions.SpacingDefault
                         .HasFlag(SpacePlacement.AfterColonInBaseTypeDeclaration)
                 )
                 .WithPublicOption(PublicFeatureName, "SpaceAfterColonInBaseTypeDeclaration");
@@ -293,8 +281,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             CreateOption(
                     CSharpFormattingOptionGroups.Spacing,
                     "csharp_space_after_semicolon_in_for_statement",
-                    CSharpSyntaxFormattingOptions
-                        .SpacingDefault
+                    CSharpSyntaxFormattingOptions.SpacingDefault
                         .HasFlag(SpacePlacement.AfterSemicolonsInForStatement)
                 )
                 .WithPublicOption(PublicFeatureName, "SpaceAfterSemicolonsInForStatement");
@@ -303,8 +290,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             CreateOption(
                     CSharpFormattingOptionGroups.Spacing,
                     "csharp_space_before_colon_in_inheritance_clause",
-                    CSharpSyntaxFormattingOptions
-                        .SpacingDefault
+                    CSharpSyntaxFormattingOptions.SpacingDefault
                         .HasFlag(SpacePlacement.BeforeColonInBaseTypeDeclaration)
                 )
                 .WithPublicOption(PublicFeatureName, "SpaceBeforeColonInBaseTypeDeclaration");
@@ -329,8 +315,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             CreateOption(
                     CSharpFormattingOptionGroups.Spacing,
                     "csharp_space_before_semicolon_in_for_statement",
-                    CSharpSyntaxFormattingOptions
-                        .SpacingDefault
+                    CSharpSyntaxFormattingOptions.SpacingDefault
                         .HasFlag(SpacePlacement.BeforeSemicolonsInForStatement)
                 )
                 .WithPublicOption(PublicFeatureName, "SpaceBeforeSemicolonsInForStatement");
@@ -351,8 +336,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             CreateOption(
                     CSharpFormattingOptionGroups.Indentation,
                     "csharp_indent_braces",
-                    CSharpSyntaxFormattingOptions
-                        .IndentationDefault
+                    CSharpSyntaxFormattingOptions.IndentationDefault
                         .HasFlag(IndentationPlacement.Braces)
                 )
                 .WithPublicOption(PublicFeatureName, "IndentBraces");
@@ -361,8 +345,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             CreateOption(
                     CSharpFormattingOptionGroups.Indentation,
                     "csharp_indent_block_contents",
-                    CSharpSyntaxFormattingOptions
-                        .IndentationDefault
+                    CSharpSyntaxFormattingOptions.IndentationDefault
                         .HasFlag(IndentationPlacement.BlockContents)
                 )
                 .WithPublicOption(PublicFeatureName, "IndentBlock");
@@ -371,8 +354,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             CreateOption(
                     CSharpFormattingOptionGroups.Indentation,
                     "csharp_indent_switch_labels",
-                    CSharpSyntaxFormattingOptions
-                        .IndentationDefault
+                    CSharpSyntaxFormattingOptions.IndentationDefault
                         .HasFlag(IndentationPlacement.SwitchSection)
                 )
                 .WithPublicOption(PublicFeatureName, "IndentSwitchSection");
@@ -381,8 +363,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             CreateOption(
                     CSharpFormattingOptionGroups.Indentation,
                     "csharp_indent_case_contents",
-                    CSharpSyntaxFormattingOptions
-                        .IndentationDefault
+                    CSharpSyntaxFormattingOptions.IndentationDefault
                         .HasFlag(IndentationPlacement.SwitchSection)
                 )
                 .WithPublicOption(PublicFeatureName, "IndentSwitchCaseSection");
@@ -391,8 +372,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             CreateOption(
                     CSharpFormattingOptionGroups.Indentation,
                     "csharp_indent_case_contents_when_block",
-                    CSharpSyntaxFormattingOptions
-                        .IndentationDefault
+                    CSharpSyntaxFormattingOptions.IndentationDefault
                         .HasFlag(IndentationPlacement.SwitchCaseContentsWhenBlock)
                 )
                 .WithPublicOption(PublicFeatureName, "IndentSwitchCaseSectionWhenBlock");
@@ -440,8 +420,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             CreateOption(
                     FormattingOptionGroups.NewLine,
                     "csharp_new_line_before_else",
-                    CSharpSyntaxFormattingOptions
-                        .NewLinesDefault
+                    CSharpSyntaxFormattingOptions.NewLinesDefault
                         .HasFlag(NewLinePlacement.BeforeElse)
                 )
                 .WithPublicOption(PublicFeatureName, "NewLineForElse");
@@ -450,8 +429,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             CreateOption(
                     FormattingOptionGroups.NewLine,
                     "csharp_new_line_before_catch",
-                    CSharpSyntaxFormattingOptions
-                        .NewLinesDefault
+                    CSharpSyntaxFormattingOptions.NewLinesDefault
                         .HasFlag(NewLinePlacement.BeforeCatch)
                 )
                 .WithPublicOption(PublicFeatureName, "NewLineForCatch");
@@ -460,8 +438,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             CreateOption(
                     FormattingOptionGroups.NewLine,
                     "csharp_new_line_before_finally",
-                    CSharpSyntaxFormattingOptions
-                        .NewLinesDefault
+                    CSharpSyntaxFormattingOptions.NewLinesDefault
                         .HasFlag(NewLinePlacement.BeforeFinally)
                 )
                 .WithPublicOption(PublicFeatureName, "NewLineForFinally");
@@ -470,8 +447,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             CreateOption(
                     FormattingOptionGroups.NewLine,
                     "csharp_new_line_before_members_in_object_initializers",
-                    CSharpSyntaxFormattingOptions
-                        .NewLinesDefault
+                    CSharpSyntaxFormattingOptions.NewLinesDefault
                         .HasFlag(NewLinePlacement.BeforeMembersInObjectInitializers)
                 )
                 .WithPublicOption(PublicFeatureName, "NewLineForMembersInObjectInit");
@@ -480,8 +456,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             CreateOption(
                     FormattingOptionGroups.NewLine,
                     "csharp_new_line_before_members_in_anonymous_types",
-                    CSharpSyntaxFormattingOptions
-                        .NewLinesDefault
+                    CSharpSyntaxFormattingOptions.NewLinesDefault
                         .HasFlag(NewLinePlacement.BeforeMembersInAnonymousTypes)
                 )
                 .WithPublicOption(PublicFeatureName, "NewLineForMembersInAnonymousTypes");
@@ -490,8 +465,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             CreateOption(
                     FormattingOptionGroups.NewLine,
                     "csharp_new_line_between_query_expression_clauses",
-                    CSharpSyntaxFormattingOptions
-                        .NewLinesDefault
+                    CSharpSyntaxFormattingOptions.NewLinesDefault
                         .HasFlag(NewLinePlacement.BetweenQueryExpressionClauses)
                 )
                 .WithPublicOption(PublicFeatureName, "NewLineForClausesInQuery");

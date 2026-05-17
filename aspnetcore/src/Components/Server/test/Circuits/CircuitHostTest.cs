@@ -1096,8 +1096,7 @@ public class CircuitHostTest
 
         public void TriggerRender()
         {
-            var task = _renderHandle
-                .Dispatcher
+            var task = _renderHandle.Dispatcher
                 .InvokeAsync(() => _renderHandle.Render(_renderFragment));
             Assert.True(task.IsCompletedSuccessfully);
         }

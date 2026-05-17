@@ -175,8 +175,7 @@ namespace System.Web.Configuration
                 else
                 {
                     if (
-                        !System
-                            .CodeDom
+                        !System.CodeDom
                             .Compiler
                             .CodeGenerator
                             .IsValidLanguageIndependentIdentifier(refID)

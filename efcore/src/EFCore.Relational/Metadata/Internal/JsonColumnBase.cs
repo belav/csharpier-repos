@@ -36,8 +36,7 @@ public class JsonColumnBase : ColumnBase<ColumnMappingBase>
     /// </summary>
     protected override RelationalTypeMapping GetDefaultStoreTypeMapping() =>
         (RelationalTypeMapping)
-            Table
-                .Model
+            Table.Model
                 .Model
                 .GetModelDependencies()
                 .TypeMappingSource

@@ -79,8 +79,7 @@ namespace Microsoft.CodeAnalysis.UnitTests.Renamer
             foreach (var (documentId, endDocument) in documentIdToDocumentInfoMap)
             {
                 var document = solution.GetDocument(documentId);
-                var documentRenameResult = await Rename
-                    .Renamer
+                var documentRenameResult = await Rename.Renamer
                     .RenameDocumentAsync(
                         document,
                         options,
@@ -248,8 +247,7 @@ namespace Microsoft.CodeAnalysis.UnitTests.Renamer
             foreach (var (documentId, endDocument) in documentIdToDocumentInfoMap)
             {
                 var document = solution.GetDocument(documentId);
-                var documentRenameResult = await Rename
-                    .Renamer
+                var documentRenameResult = await Rename.Renamer
                     .RenameDocumentAsync(
                         document,
                         options,
@@ -305,8 +303,7 @@ namespace Microsoft.CodeAnalysis.UnitTests.Renamer
 
             var options = new DocumentRenameOptions();
             var document = solution.GetDocument(documentId);
-            var documentRenameResult = await Rename
-                .Renamer
+            var documentRenameResult = await Rename.Renamer
                 .RenameDocumentAsync(
                     document,
                     options,

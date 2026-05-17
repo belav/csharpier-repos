@@ -199,8 +199,7 @@ namespace System.Activities
         {
             if (this.activityInstance == null)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(new ObjectDisposedException(this.GetType().FullName, SR.WDCDisposed));
             }
         }
@@ -269,8 +268,7 @@ namespace System.Activities
 
             public override void ResetValue(object component)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(new NotSupportedException(SR.CannotResetPropertyInDataContext));
             }
 
@@ -278,8 +276,7 @@ namespace System.Activities
             {
                 if (IsReadOnly)
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(
                             new NotSupportedException(
                                 SR.PropertyReadOnlyInWorkflowDataContext(this.Name)

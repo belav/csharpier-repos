@@ -19,8 +19,7 @@ namespace System.Reflection
             )]
                 System.Type interfaceType,
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
-                System
-                    .Diagnostics
+                System.Diagnostics
                     .CodeAnalysis
                     .DynamicallyAccessedMemberTypes
                     .PublicParameterlessConstructor
@@ -40,8 +39,7 @@ namespace System.Reflection
             )]
                 T,
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
-                System
-                    .Diagnostics
+                System.Diagnostics
                     .CodeAnalysis
                     .DynamicallyAccessedMemberTypes
                     .PublicParameterlessConstructor

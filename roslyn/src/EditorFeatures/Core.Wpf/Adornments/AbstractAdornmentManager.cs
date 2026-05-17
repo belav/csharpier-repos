@@ -196,8 +196,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Adornments
                 if (needToScheduleUpdate)
                 {
                     // schedule an update
-                    _threadingContext
-                        .JoinableTaskFactory
+                    _threadingContext.JoinableTaskFactory
                         .WithPriority(TextView.VisualElement.Dispatcher, DispatcherPriority.Render)
                         .RunAsync(async () =>
                         {
@@ -205,8 +204,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Adornments
                                 _asyncListener.BeginAsyncOperation(GetType() + ".OnTagsChanged.2")
                             )
                             {
-                                await _threadingContext
-                                    .JoinableTaskFactory
+                                await _threadingContext.JoinableTaskFactory
                                     .SwitchToMainThreadAsync(alwaysYield: true);
                                 UpdateInvalidSpans();
                             }
@@ -328,8 +326,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Adornments
             IMappingTagSpan<T> mappingTagSpan
         )
         {
-            var point = mappingTagSpan
-                .Span
+            var point = mappingTagSpan.Span
                 .End
                 .GetPoint(snapshotSpan.Snapshot, PositionAffinity.Predecessor);
             if (point == null)
@@ -337,8 +334,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Adornments
                 return null;
             }
 
-            var mappedPoint = TextView
-                .BufferGraph
+            var mappedPoint = TextView.BufferGraph
                 .MapUpToSnapshot(
                     point.Value,
                     PointTrackingMode.Negative,
@@ -370,12 +366,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Adornments
             // should use the cheapest.
             if (viewSnapshot != null && mappingSpan.AnchorBuffer == viewSnapshot.TextBuffer)
             {
-                var mappedStart = mappingSpan
-                    .Start
+                var mappedStart = mappingSpan.Start
                     .GetPoint(viewSnapshot, PositionAffinity.Predecessor)
                     .Value;
-                var mappedEnd = mappingSpan
-                    .End
+                var mappedEnd = mappingSpan.End
                     .GetPoint(viewSnapshot, PositionAffinity.Successor)
                     .Value;
                 span = new SnapshotSpan(mappedStart, mappedEnd);

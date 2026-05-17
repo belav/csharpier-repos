@@ -218,8 +218,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
                 AddError(
                     ErrorCode.NullableComplexType,
                     EdmSchemaErrorSeverity.Error,
-                    System
-                        .Data
+                    System.Data
                         .Entity
                         .Strings
                         .ComplexObject_NullableComplexTypesNotSupported(this.FQName)

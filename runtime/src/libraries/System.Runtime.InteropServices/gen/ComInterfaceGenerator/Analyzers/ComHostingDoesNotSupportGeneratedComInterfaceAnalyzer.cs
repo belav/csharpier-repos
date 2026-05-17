@@ -24,8 +24,7 @@ namespace Microsoft.Interop.Analyzers
             context.RegisterCompilationStartAction(context =>
             {
                 if (
-                    !context
-                        .Options
+                    !context.Options
                         .AnalyzerConfigOptionsProvider
                         .GlobalOptions
                         .TryGetValue(
@@ -39,14 +38,11 @@ namespace Microsoft.Interop.Analyzers
                     return;
                 }
 
-                INamedTypeSymbol? generatedComClassAttribute = context
-                    .Compilation
+                INamedTypeSymbol? generatedComClassAttribute = context.Compilation
                     .GetBestTypeByMetadataName(TypeNames.GeneratedComClassAttribute);
-                INamedTypeSymbol? generatedComInterfaceAttribute = context
-                    .Compilation
+                INamedTypeSymbol? generatedComInterfaceAttribute = context.Compilation
                     .GetBestTypeByMetadataName(TypeNames.GeneratedComInterfaceAttribute);
-                INamedTypeSymbol? comVisibleAttribute = context
-                    .Compilation
+                INamedTypeSymbol? comVisibleAttribute = context.Compilation
                     .GetBestTypeByMetadataName(
                         TypeNames.System_Runtime_InteropServices_ComVisibleAttribute
                     )!;
@@ -91,8 +87,7 @@ namespace Microsoft.Interop.Analyzers
                         )
                         {
                             context.ReportDiagnostic(
-                                context
-                                    .ContainingSymbol
+                                context.ContainingSymbol
                                     .CreateDiagnostic(
                                         ComHostingDoesNotSupportGeneratedComInterface,
                                         context.ContainingSymbol.Name
@@ -115,8 +110,7 @@ namespace Microsoft.Interop.Analyzers
                             )
                             {
                                 context.ReportDiagnostic(
-                                    context
-                                        .ContainingSymbol
+                                    context.ContainingSymbol
                                         .CreateDiagnostic(
                                             ComHostingDoesNotSupportGeneratedComInterface,
                                             context.ContainingSymbol.Name

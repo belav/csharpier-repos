@@ -216,8 +216,7 @@ namespace System.Web.UI
             // and to make sure this is an expected name/value pair from an event validation
             // perspective.
 
-            IPage
-                .ClientScript
+            IPage.ClientScript
                 .GetPostBackEventReference(new PostBackOptions(this, String.Empty));
         }
 

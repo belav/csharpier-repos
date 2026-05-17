@@ -77,8 +77,7 @@ namespace System.ServiceModel.Description
 
                 if (value.Length == 0)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentOutOfRangeException(
                                 "value",
@@ -115,8 +114,7 @@ namespace System.ServiceModel.Description
             set
             {
                 if (!ProtectionLevelHelper.IsDefined(value))
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new ArgumentOutOfRangeException("value"));
                 this.protectionLevel = value;
                 this.hasProtectionLevel = true;
@@ -141,8 +139,7 @@ namespace System.ServiceModel.Description
             {
                 if (!SessionModeHelper.IsDefined(value))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new ArgumentOutOfRangeException("value"));
                 }
 
@@ -195,8 +192,7 @@ namespace System.ServiceModel.Description
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("contractType");
 
             if (serviceImplementation == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("serviceImplementation");
 
             TypeLoader typeLoader = new TypeLoader();
@@ -231,8 +227,7 @@ namespace System.ServiceModel.Description
         {
             if (string.IsNullOrEmpty(this.Name))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(SR.AChannelServiceEndpointSContractSNameIsNull0)
@@ -241,8 +236,7 @@ namespace System.ServiceModel.Description
             }
             if (this.Namespace == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(SR.AChannelServiceEndpointSContractSNamespace0)
@@ -251,8 +245,7 @@ namespace System.ServiceModel.Description
             }
             if (this.Operations.Count == 0)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(SR.SFxContractHasZeroOperations, this.Name)
@@ -271,8 +264,7 @@ namespace System.ServiceModel.Description
                     && (this.SessionMode != SessionMode.Required)
                 )
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(
@@ -285,8 +277,7 @@ namespace System.ServiceModel.Description
             }
             if (!thereIsAtLeastOneInitiatingOperation)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(SR.SFxContractHasZeroInitiatingOperations, this.Name)

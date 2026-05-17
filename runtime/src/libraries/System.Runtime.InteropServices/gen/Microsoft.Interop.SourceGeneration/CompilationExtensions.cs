@@ -15,8 +15,7 @@ namespace Microsoft.Interop
         {
             EnvironmentFlags flags = EnvironmentFlags.None;
             if (
-                compilation
-                    .SourceModule
+                compilation.SourceModule
                     .GetAttributes()
                     .Any(attr =>
                         attr.AttributeClass.ToDisplayString()
@@ -27,8 +26,7 @@ namespace Microsoft.Interop
                 flags |= EnvironmentFlags.SkipLocalsInit;
             }
             if (
-                compilation
-                    .SourceModule
+                compilation.SourceModule
                     .GetAttributes()
                     .Any(attr =>
                         attr.AttributeClass.ToDisplayString()

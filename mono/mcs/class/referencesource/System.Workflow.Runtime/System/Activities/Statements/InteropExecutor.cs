@@ -137,9 +137,8 @@ namespace System.Activities.Statements
                 if (this.timerQueue == null)
                 {
                     this.timerQueue = (TimerEventSubscriptionCollection)
-                        this.rootActivity.GetValue(
-                            TimerEventSubscriptionCollection.TimerCollectionProperty
-                        );
+                        this.rootActivity
+                            .GetValue(TimerEventSubscriptionCollection.TimerCollectionProperty);
                     Debug.Assert(
                         this.timerQueue != null,
                         "TimerEventSubscriptionCollection on root activity should never be null, but it was"
@@ -150,10 +149,11 @@ namespace System.Activities.Statements
             set
             {
                 this.timerQueue = value;
-                this.rootActivity.SetValue(
-                    TimerEventSubscriptionCollection.TimerCollectionProperty,
-                    this.timerQueue
-                );
+                this.rootActivity
+                    .SetValue(
+                        TimerEventSubscriptionCollection.TimerCollectionProperty,
+                        this.timerQueue
+                    );
             }
         }
 
@@ -212,9 +212,8 @@ namespace System.Activities.Statements
             if (transaction != null && this.currentAtomicActivity != null)
             {
                 TransactionalProperties transactionalProperties = (TransactionalProperties)
-                    this.currentAtomicActivity.GetValue(
-                        WorkflowExecutor.TransactionalPropertiesProperty
-                    );
+                    this.currentAtomicActivity
+                        .GetValue(WorkflowExecutor.TransactionalPropertiesProperty);
                 Debug.Assert(
                     transactionalProperties != null,
                     "The current atomic activity is missing transactional properties"
@@ -240,9 +239,8 @@ namespace System.Activities.Statements
                 if (this.currentAtomicActivity != null)
                 {
                     TransactionalProperties transactionalProperties = (TransactionalProperties)
-                        this.currentAtomicActivity.GetValue(
-                            WorkflowExecutor.TransactionalPropertiesProperty
-                        );
+                        this.currentAtomicActivity
+                            .GetValue(WorkflowExecutor.TransactionalPropertiesProperty);
                     Debug.Assert(
                         transactionalProperties != null,
                         "The current atomic activity is missing transactional properties"
@@ -341,15 +339,16 @@ namespace System.Activities.Statements
             bool hasNameCollision
         )
         {
-            this.rootActivity.SetValue(
-                Activity.ActivityExecutionContextInfoProperty,
-                new ActivityExecutionContextInfo(
-                    this.rootActivity.QualifiedName,
-                    this.GetNewContextActivityId(),
-                    instanceId,
-                    -1
-                )
-            );
+            this.rootActivity
+                .SetValue(
+                    Activity.ActivityExecutionContextInfoProperty,
+                    new ActivityExecutionContextInfo(
+                        this.rootActivity.QualifiedName,
+                        this.GetNewContextActivityId(),
+                        instanceId,
+                        -1
+                    )
+                );
             this.rootActivity.SetValue(Activity.ActivityContextGuidProperty, instanceId);
 
             SetInputParameters(definition, this.rootActivity, inputs, hasNameCollision);
@@ -495,10 +494,11 @@ namespace System.Activities.Statements
             this.outputProperties = outputProperties;
             this.resourceManager = new VolatileResourceManager();
 
-            this.rootActivity.SetValue(
-                System.Workflow.ComponentModel.Activity.WorkflowDefinitionProperty,
-                workflowDefinition
-            );
+            this.rootActivity
+                .SetValue(
+                    System.Workflow.ComponentModel.Activity.WorkflowDefinitionProperty,
+                    workflowDefinition
+                );
             this.rootActivity.SetValue(WorkflowExecutor.WorkflowExecutorProperty, this);
         }
 
@@ -518,8 +518,7 @@ namespace System.Activities.Statements
                     //If there was a naming collision, we renamed the InArguments and need to strip "In" from the end of the property name
                     if (hasNameCollision)
                     {
-                        string truncatedName = input
-                            .Key
+                        string truncatedName = input.Key
                             .Substring(0, input.Key.Length - suffixLength);
                         propertyInfo = definition.GetType().GetProperty(truncatedName);
                     }
@@ -539,8 +538,7 @@ namespace System.Activities.Statements
         {
             if (this.abortTransaction)
             {
-                WorkflowTrace
-                    .Runtime
+                WorkflowTrace.Runtime
                     .TraceEvent(
                         TraceEventType.Information,
                         1127,
@@ -566,17 +564,17 @@ namespace System.Activities.Statements
                         //We renamed the OutArgument half of the pair. Don't attempt to populate if there is no Get method.
                         if (property.CanRead && (property.GetGetMethod() != null))
                         {
-                            this.outputs.Add(
-                                property.Name + Interop.OutArgumentSuffix,
-                                property.GetValue(this.rootActivity, null)
-                            );
+                            this.outputs
+                                .Add(
+                                    property.Name + Interop.OutArgumentSuffix,
+                                    property.GetValue(this.rootActivity, null)
+                                );
                         }
                     }
                 }
                 if (this.outstandingException != null)
                 {
-                    WorkflowTrace
-                        .Runtime
+                    WorkflowTrace.Runtime
                         .TraceEvent(
                             TraceEventType.Information,
                             1127,
@@ -996,12 +994,8 @@ namespace System.Activities.Statements
             // Forward to 4.0 tracking mechanism, AEC.Track
             if (this.trackingEnabled)
             {
-                this.ServiceProvider.TrackData(
-                    this.CurrentActivity,
-                    this.eventCounter++,
-                    key,
-                    data
-                );
+                this.ServiceProvider
+                    .TrackData(this.CurrentActivity, this.eventCounter++, key, data);
             }
         }
 
@@ -1105,8 +1099,7 @@ namespace System.Activities.Statements
                 if (this.schedulerQueue == null)
                 {
                     this.schedulerQueue = new Queue<SchedulableItem>();
-                    owner
-                        .RootActivity
+                    owner.RootActivity
                         .SetValue(Scheduler.SchedulerQueueProperty, this.schedulerQueue);
                 }
 
@@ -1116,8 +1109,7 @@ namespace System.Activities.Statements
                 if (this.atomicActivityQueue == null)
                 {
                     this.atomicActivityQueue = new Queue<SchedulableItem>();
-                    owner
-                        .RootActivity
+                    owner.RootActivity
                         .SetValue(Scheduler.AtomicActivityQueueProperty, this.atomicActivityQueue);
                 }
             }

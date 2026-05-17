@@ -64,8 +64,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
             AnalyzerService = analyzerService;
             Workspace = workspace;
 
-            _documentTrackingService = workspace
-                .Services
+            _documentTrackingService = workspace.Services
                 .GetRequiredService<IDocumentTrackingService>();
 
             _correlationId = correlationId;

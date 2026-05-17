@@ -491,11 +491,12 @@ namespace Microsoft.CodeAnalysis.CSharp
             bool isDerivedType(TypeSymbol possibleDerived, TypeSymbol possibleBase)
             {
                 var discardedUseSiteInfo = CompoundUseSiteInfo<AssemblySymbol>.Discarded;
-                return this._conversions.HasIdentityOrImplicitReferenceConversion(
-                    possibleDerived,
-                    possibleBase,
-                    ref discardedUseSiteInfo
-                );
+                return this._conversions
+                    .HasIdentityOrImplicitReferenceConversion(
+                        possibleDerived,
+                        possibleBase,
+                        ref discardedUseSiteInfo
+                    );
             }
         }
 
@@ -1115,8 +1116,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                         // If one incoming edge does not have a set of possible values for the temp,
                         // that means the temp can take on any value of its type.
                         if (
-                            existingState
-                                .RemainingValues
+                            existingState.RemainingValues
                                 .TryGetValue(dagTemp, out var existingValuesForTemp)
                         )
                         {
@@ -1129,8 +1129,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                     if (
                         existingState.RemainingValues.Count != newRemainingValues.Count
-                        || !existingState
-                            .RemainingValues
+                        || !existingState.RemainingValues
                             .All(kv =>
                                 newRemainingValues.TryGetValue(kv.Key, out IValueSet? values)
                                 && kv.Value.Equals(values)
@@ -1213,16 +1212,14 @@ namespace Microsoft.CodeAnalysis.CSharp
                     switch (state.SelectedTest = state.ComputeSelectedTest())
                     {
                         case BoundDagAssignmentEvaluation e
-                            when state
-                                .RemainingValues
+                            when state.RemainingValues
                                 .TryGetValue(e.Input, out IValueSet? currentValues):
                             Debug.Assert(e.Input.IsEquivalentTo(e.Target));
                             // Update the target temp entry with current values. Note that even though we have determined that the two are the same,
                             // we don't need to update values for the current input. We will emit another assignment node with this temp as the target
                             // if apropos, which has the effect of flowing the remaining values from the other test in the analysis of subsequent states.
                             if (
-                                state
-                                    .RemainingValues
+                                state.RemainingValues
                                     .TryGetValue(e.Target, out IValueSet? targetValues)
                             )
                             {
@@ -1423,8 +1420,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             ref bool foundExplicitNullTest
         )
         {
-            stateForCase
-                .RemainingTests
+            stateForCase.RemainingTests
                 .Filter(
                     this,
                     test,
@@ -2151,8 +2147,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                             + stateIdentifierMap[state]
                             + (isFail ? " FAIL" : "")
                     );
-                    var remainingValues = state
-                        .RemainingValues
+                    var remainingValues = state.RemainingValues
                         .Select(kvp => $"{tempName(kvp.Key)}:{kvp.Value}");
                     result.AppendLine(
                         $"{(remainingValues.Any() ? " REMAINING " + string.Join(" ", remainingValues) : "")}"
@@ -2194,9 +2189,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                     builder.Append(
                         $"{cd.Index}. [{cd.Syntax}] {(cd.PatternIsSatisfied ? "MATCH" : cd.RemainingTests.Dump(dumpDagTest))}"
                     );
-                    var bindings = cd.Bindings.Select(bpb =>
-                        $"{(bpb.VariableAccess is BoundLocal l ? l.LocalSymbol.Name : "<var>")}={tempName(bpb.TempContainingValue)}"
-                    );
+                    var bindings = cd.Bindings
+                        .Select(bpb =>
+                            $"{(bpb.VariableAccess is BoundLocal l ? l.LocalSymbol.Name : "<var>")}={tempName(bpb.TempContainingValue)}"
+                        );
                     if (bindings.Any())
                     {
                         builder.Append(" BIND[");
@@ -2882,8 +2878,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                         Tests.False _ => Tests.True.Instance,
                         Tests.Not n => n.Negated, // double negative
                         Tests.AndSequence a => new Not(a),
-                        Tests.OrSequence a => Tests
-                            .AndSequence
+                        Tests.OrSequence a => Tests.AndSequence
                             .Create(NegateSequenceElements(a.RemainingTests)), // use demorgan to prefer and sequences
                         Tests.One o => new Not(o),
                         _ => throw ExceptionUtilities.UnexpectedValue(negated),

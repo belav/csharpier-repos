@@ -36,8 +36,7 @@ namespace Microsoft.Interop.JavaScript
         public void Initialize(IncrementalGeneratorInitializationContext context)
         {
             // Collect all methods adorned with JSExportAttribute
-            var attributedMethods = context
-                .SyntaxProvider
+            var attributedMethods = context.SyntaxProvider
                 .ForAttributeWithMetadataName(
                     Constants.JSExportAttribute,
                     static (node, ct) => node is MethodDeclarationSyntax,
@@ -485,8 +484,7 @@ namespace Microsoft.Interop.JavaScript
                                             LiteralExpression(
                                                 SyntaxKind.StringLiteralExpression,
                                                 Literal(
-                                                    incrementalContext
-                                                        .SignatureContext
+                                                    incrementalContext.SignatureContext
                                                         .StubTypeFullName
                                                 )
                                             )

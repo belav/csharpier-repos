@@ -18,8 +18,7 @@ namespace System.Security.Cryptography.X509Certificates
 
         protected override ICertificatePalCore ReadX509Der(ReadOnlyMemory<byte> data)
         {
-            SafeSecCertificateHandle certHandle = Interop
-                .AppleCrypto
+            SafeSecCertificateHandle certHandle = Interop.AppleCrypto
                 .X509ImportCertificate(
                     data.Span,
                     X509ContentType.Cert,

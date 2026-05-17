@@ -380,8 +380,7 @@ namespace System.Xml
 
             try
             {
-                return XmlUntypedConverter
-                    .Untyped
+                return XmlUntypedConverter.Untyped
                     .ChangeType(
                         strContentValue,
                         returnType,
@@ -607,8 +606,7 @@ namespace System.Xml
 
             return returnType == typeof(string)
                 ? string.Empty
-                : XmlUntypedConverter
-                    .Untyped
+                : XmlUntypedConverter.Untyped
                     .ChangeType(string.Empty, returnType, namespaceResolver);
         }
 

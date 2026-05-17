@@ -22,15 +22,13 @@ namespace System.Web.Http
                 "Users",
                 typeof(UsersController)
             );
-            usersControllerDescriptor
-                .Configuration
+            usersControllerDescriptor.Configuration
                 .Services
                 .Replace(typeof(IHttpActionSelector), actionSelector);
             GetContext.ControllerDescriptor = usersControllerDescriptor;
             GetContext.Request = new HttpRequestMessage { Method = HttpMethod.Get };
             HttpControllerContext PostContext = ContextUtil.CreateControllerContext();
-            usersControllerDescriptor
-                .Configuration
+            usersControllerDescriptor.Configuration
                 .Services
                 .Replace(typeof(IHttpActionSelector), actionSelector);
             PostContext.ControllerDescriptor = usersControllerDescriptor;
@@ -57,8 +55,7 @@ namespace System.Web.Http
             context.ControllerDescriptor = controllerDescriptor;
             ReflectedHttpActionDescriptor directRouteAction = (ReflectedHttpActionDescriptor)
                 actionSelector.GetActionMapping(controllerDescriptor)["Get"].First();
-            context
-                .RouteData
+            context.RouteData
                 .Route
                 .DataTokens
                 .Add("actions", new ReflectedHttpActionDescriptor[] { directRouteAction });

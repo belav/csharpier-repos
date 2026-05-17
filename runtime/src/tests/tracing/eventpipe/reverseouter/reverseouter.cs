@@ -51,8 +51,7 @@ namespace Tracing.Tests.ReverseValidation
                                 config,
                                 out var sessionId
                             );
-                            Logger
-                                .logger
+                            Logger.logger
                                 .Log(
                                     $"Started EventPipeSession over standard connection with session id: 0x{sessionId:x}"
                                 );

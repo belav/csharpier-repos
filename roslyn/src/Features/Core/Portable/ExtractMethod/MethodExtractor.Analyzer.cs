@@ -188,19 +188,18 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
 
                 var thisParameterBeingRead = (IParameterSymbol?)
                     dataFlowAnalysisData.ReadInside.FirstOrDefault(IsThisParameter);
-                var isThisParameterWritten = dataFlowAnalysisData
-                    .WrittenInside
+                var isThisParameterWritten = dataFlowAnalysisData.WrittenInside
                     .Any(static s => IsThisParameter(s));
 
-                var localFunctionCallsNotWithinSpan = symbolMap
-                    .Keys
+                var localFunctionCallsNotWithinSpan = symbolMap.Keys
                     .Where(s =>
                         s.IsLocalFunction()
-                        && !s.Locations.Any(
-                            static (l, self) =>
-                                self.SelectionResult.FinalSpan.Contains(l.SourceSpan),
-                            this
-                        )
+                        && !s.Locations
+                            .Any(
+                                static (l, self) =>
+                                    self.SelectionResult.FinalSpan.Contains(l.SourceSpan),
+                                this
+                            )
                     );
 
                 // Checks to see if selection includes a local function call + if the given local function declaration is not included in the selection.
@@ -539,8 +538,7 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
 
             private Dictionary<ISymbol, List<SyntaxToken>> GetSymbolMap(SemanticModel model)
             {
-                var syntaxFactsService = _semanticDocument
-                    .Document
+                var syntaxFactsService = _semanticDocument.Document
                     .Project
                     .Services
                     .GetService<ISyntaxFactsService>();
@@ -862,8 +860,7 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                 // we probably need to move the API to syntaxFact service not semanticFact.
                 //
                 // if one wants to get result that also considers semantic, he should use data control flow analysis API.
-                var semanticFacts = _semanticDocument
-                    .Document
+                var semanticFacts = _semanticDocument.Document
                     .Project
                     .Services
                     .GetRequiredService<ISemanticFactsService>();
@@ -1245,8 +1242,7 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                     return OperationStatus.SucceededStatus;
 
                 using var _ = ArrayBuilder<string>.GetInstance(out var names);
-                var semanticFacts = _semanticDocument
-                    .Document
+                var semanticFacts = _semanticDocument.Document
                     .Project
                     .Services
                     .GetRequiredService<ISemanticFactsService>();

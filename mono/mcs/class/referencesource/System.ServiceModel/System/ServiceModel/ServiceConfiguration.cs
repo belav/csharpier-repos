@@ -115,8 +115,7 @@ namespace System.ServiceModel
                 && (this.host.State != CommunicationState.Opening)
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString("SFxServiceHostBaseCannotAddEndpointAfterOpen")
@@ -126,8 +125,7 @@ namespace System.ServiceModel
 
             if (this.Description == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString("SFxServiceHostBaseCannotAddEndpointWithoutDescription")
@@ -137,22 +135,19 @@ namespace System.ServiceModel
 
             if (endpoint.Address == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(SR.GetString("SFxEndpointAddressNotSpecified"));
             }
 
             if (endpoint.Contract == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(SR.GetString("SFxEndpointContractNotSpecified"));
             }
 
             if (endpoint.Binding == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(SR.GetString("SFxEndpointBindingNotSpecified"));
             }
 
@@ -164,9 +159,8 @@ namespace System.ServiceModel
                 // Throw if contract is not valid for this service
                 //   i.e. if contract is not implemented by service, unless endpoint is a standard endpoint
                 //   note: (metadata endpoints require metadata behavior to implement IMetadataExchange even though it's a standard endpoint)
-                IContractResolver resolver = this.host.GetContractResolver(
-                    this.host.ImplementedContracts
-                );
+                IContractResolver resolver = this.host
+                    .GetContractResolver(this.host.ImplementedContracts);
                 ConfigLoader configLoader = new ConfigLoader(resolver);
                 configLoader.LookupContract(
                     endpoint.Contract.ConfigurationName,
@@ -222,8 +216,7 @@ namespace System.ServiceModel
                         );
             if (contract == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(
                         "contractType",
                         SR.GetString(

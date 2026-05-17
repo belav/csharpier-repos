@@ -300,8 +300,7 @@ namespace System.Security.Principal
                 someFailed = false;
                 uint ReturnCode;
 
-                ReturnCode = Interop
-                    .Advapi32
+                ReturnCode = Interop.Advapi32
                     .LsaLookupNames2(
                         LsaHandle,
                         0,

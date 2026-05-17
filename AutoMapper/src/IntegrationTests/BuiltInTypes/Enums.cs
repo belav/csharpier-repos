@@ -26,8 +26,7 @@ public class EnumToUnderlyingType : IntegrationTest<EnumToUnderlyingType.Databas
     {
         protected override void Seed(Context context)
         {
-            context
-                .Customers
+            context.Customers
                 .Add(
                     new Customer
                     {
@@ -82,8 +81,7 @@ public class UnderlyingTypeToEnum : IntegrationTest<UnderlyingTypeToEnum.Databas
     {
         protected override void Seed(Context context)
         {
-            context
-                .Customers
+            context.Customers
                 .Add(
                     new Customer
                     {
@@ -138,8 +136,7 @@ public class EnumToEnum : IntegrationTest<EnumToEnum.DatabaseInitializer>
     {
         protected override void Seed(Context context)
         {
-            context
-                .Customers
+            context.Customers
                 .Add(
                     new Customer
                     {

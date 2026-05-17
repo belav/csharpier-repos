@@ -48,8 +48,7 @@ namespace WebApiHelpPageWebHost.UnitTest
             ImageSample sample = new ImageSample("http://host/image.png");
             model.SampleRequests.Add(new MediaTypeHeaderValue("text/plain"), sample);
             object sampleRequest;
-            model
-                .SampleRequests
+            model.SampleRequests
                 .TryGetValue(new MediaTypeHeaderValue("text/plain"), out sampleRequest);
             Assert.NotEmpty(model.SampleRequests);
             Assert.Same(sample, sampleRequest);
@@ -62,8 +61,7 @@ namespace WebApiHelpPageWebHost.UnitTest
             InvalidSample sample = new InvalidSample("invalid");
             model.SampleResponses.Add(new MediaTypeHeaderValue("text/xml"), sample);
             object sampleResponse;
-            model
-                .SampleResponses
+            model.SampleResponses
                 .TryGetValue(new MediaTypeHeaderValue("text/xml"), out sampleResponse);
             Assert.NotEmpty(model.SampleResponses);
             Assert.Same(sample, sampleResponse);

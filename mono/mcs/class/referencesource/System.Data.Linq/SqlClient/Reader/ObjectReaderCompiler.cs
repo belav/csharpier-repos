@@ -225,8 +225,7 @@ namespace System.Data.Linq.SqlClient
                 AssemblyName assemblyName = new AssemblyName(
                     System.IO.Path.GetFileNameWithoutExtension(name)
                 );
-                captureAssembly = AppDomain
-                    .CurrentDomain
+                captureAssembly = AppDomain.CurrentDomain
                     .DefineDynamicAssembly(assemblyName, AssemblyBuilderAccess.Save, dir);
                 captureModule = captureAssembly.DefineDynamicModule(name);
                 captureAssemblyFilename = filename;
@@ -295,8 +294,7 @@ namespace System.Data.Linq.SqlClient
                 BindingFlags.Instance | BindingFlags.Public
             );
 
-            System
-                .Diagnostics
+            System.Diagnostics
                 .Debug
                 .Assert(
                     this.miDRisDBNull != null
@@ -458,8 +456,7 @@ namespace System.Data.Linq.SqlClient
             Type elementType
         )
         {
-            TypeBuilder tb = ObjectReaderCompiler
-                .CaptureModule
+            TypeBuilder tb = ObjectReaderCompiler.CaptureModule
                 .DefineType("reader_type_" + ObjectReaderCompiler.GetNextId());
             MethodBuilder mb = tb.DefineMethod(
                 "Read_" + elementType.Name,
@@ -570,18 +567,19 @@ namespace System.Data.Linq.SqlClient
                 IObjectReaderFactory factory
             )
             {
-                this.list.AddFirst(
-                    new LinkedListNode<CacheInfo>(
-                        new CacheInfo(
-                            elementType,
-                            dataReaderType,
-                            mapping,
-                            options,
-                            projection,
-                            factory
+                this.list
+                    .AddFirst(
+                        new LinkedListNode<CacheInfo>(
+                            new CacheInfo(
+                                elementType,
+                                dataReaderType,
+                                mapping,
+                                options,
+                                projection,
+                                factory
+                            )
                         )
-                    )
-                );
+                    );
                 if (this.list.Count > this.maxCacheSize)
                 {
                     this.list.RemoveLast();
@@ -1399,9 +1397,8 @@ namespace System.Data.Linq.SqlClient
 
                 // read/write key bindings if there are any
                 foreach (
-                    SqlMemberAssign ma in sn.Members.OrderBy(m =>
-                        sn.MetaType.GetDataMember(m.Member).Ordinal
-                    )
+                    SqlMemberAssign ma in sn.Members
+                        .OrderBy(m => sn.MetaType.GetDataMember(m.Member).Ordinal)
                 )
                 {
                     MetaDataMember mm = sn.MetaType.GetDataMember(ma.Member);
@@ -1463,9 +1460,8 @@ namespace System.Data.Linq.SqlClient
 
                 // read/write non-key bindings
                 foreach (
-                    SqlMemberAssign ma in sn.Members.OrderBy(m =>
-                        sn.MetaType.GetDataMember(m.Member).Ordinal
-                    )
+                    SqlMemberAssign ma in sn.Members
+                        .OrderBy(m => sn.MetaType.GetDataMember(m.Member).Ordinal)
                 )
                 {
                     MetaDataMember mm = sn.MetaType.GetDataMember(ma.Member);
@@ -1673,8 +1669,7 @@ namespace System.Data.Linq.SqlClient
             {
                 MemberInfo m = mm.StorageMember != null ? mm.StorageMember : mm.Member;
                 Type memberType = TypeSystem.GetMemberType(m);
-                System
-                    .Diagnostics
+                System.Diagnostics
                     .Debug
                     .Assert(
                         memberType.IsGenericType
@@ -1759,8 +1754,7 @@ namespace System.Data.Linq.SqlClient
             {
                 MemberInfo m = mm.StorageMember != null ? mm.StorageMember : mm.Member;
                 Type memberType = TypeSystem.GetMemberType(m);
-                System
-                    .Diagnostics
+                System.Diagnostics
                     .Debug
                     .Assert(
                         memberType.IsGenericType
@@ -1840,8 +1834,7 @@ namespace System.Data.Linq.SqlClient
             {
                 MemberInfo m = mm.StorageMember != null ? mm.StorageMember : mm.Member;
                 Type memberType = TypeSystem.GetMemberType(m);
-                System
-                    .Diagnostics
+                System.Diagnostics
                     .Debug
                     .Assert(
                         memberType.IsGenericType
@@ -3061,12 +3054,13 @@ namespace System.Data.Linq.SqlClient
                 int iGlobal = this.globals.Count;
                 if (type.IsValueType)
                 {
-                    this.globals.Add(
-                        Activator.CreateInstance(
-                            typeof(StrongBox<>).MakeGenericType(type),
-                            new object[] { value }
-                        )
-                    );
+                    this.globals
+                        .Add(
+                            Activator.CreateInstance(
+                                typeof(StrongBox<>).MakeGenericType(type),
+                                new object[] { value }
+                            )
+                        );
                 }
                 else
                 {

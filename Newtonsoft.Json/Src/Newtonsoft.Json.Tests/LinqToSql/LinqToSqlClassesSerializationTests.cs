@@ -51,8 +51,7 @@ namespace Newtonsoft.Json.Tests.LinqToSql
             person.FirstName = "FirstName!";
             person.LastName = "LastName!";
             person.PersonId = new Guid("7AA027AA-C995-4986-908D-999D8063599F");
-            person
-                .PersonRoles
+            person.PersonRoles
                 .Add(
                     new PersonRole
                     {

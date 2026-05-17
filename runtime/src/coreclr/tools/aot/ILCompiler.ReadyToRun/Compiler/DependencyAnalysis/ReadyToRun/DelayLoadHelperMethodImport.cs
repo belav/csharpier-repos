@@ -53,8 +53,7 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             if (_useInstantiatingStub)
             {
                 // Require compilation of the canonical version for instantiating stubs
-                MethodDesc canonMethod = _method
-                    .Method
+                MethodDesc canonMethod = _method.Method
                     .GetCanonMethodTarget(CanonicalFormKind.Specific);
                 if (factory.CompilationModuleGroup.ContainsMethodBody(canonMethod, false))
                 {

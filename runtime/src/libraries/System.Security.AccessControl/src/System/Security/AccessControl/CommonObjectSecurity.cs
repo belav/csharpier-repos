@@ -285,8 +285,7 @@ namespace System.Security.AccessControl
                     switch (modification)
                     {
                         case AccessControlModification.Add:
-                            _securityDescriptor
-                                .DiscretionaryAcl
+                            _securityDescriptor.DiscretionaryAcl
                                 .AddAccess(
                                     AccessControlType.Allow,
                                     sid,
@@ -297,8 +296,7 @@ namespace System.Security.AccessControl
                             break;
 
                         case AccessControlModification.Set:
-                            _securityDescriptor
-                                .DiscretionaryAcl
+                            _securityDescriptor.DiscretionaryAcl
                                 .SetAccess(
                                     AccessControlType.Allow,
                                     sid,
@@ -309,8 +307,7 @@ namespace System.Security.AccessControl
                             break;
 
                         case AccessControlModification.Reset:
-                            _securityDescriptor
-                                .DiscretionaryAcl
+                            _securityDescriptor.DiscretionaryAcl
                                 .RemoveAccess(
                                     AccessControlType.Deny,
                                     sid,
@@ -319,8 +316,7 @@ namespace System.Security.AccessControl
                                         | InheritanceFlags.ObjectInherit,
                                     0
                                 );
-                            _securityDescriptor
-                                .DiscretionaryAcl
+                            _securityDescriptor.DiscretionaryAcl
                                 .SetAccess(
                                     AccessControlType.Allow,
                                     sid,
@@ -331,8 +327,7 @@ namespace System.Security.AccessControl
                             break;
 
                         case AccessControlModification.Remove:
-                            result = _securityDescriptor
-                                .DiscretionaryAcl
+                            result = _securityDescriptor.DiscretionaryAcl
                                 .RemoveAccess(
                                     AccessControlType.Allow,
                                     sid,
@@ -343,8 +338,7 @@ namespace System.Security.AccessControl
                             break;
 
                         case AccessControlModification.RemoveAll:
-                            result = _securityDescriptor
-                                .DiscretionaryAcl
+                            result = _securityDescriptor.DiscretionaryAcl
                                 .RemoveAccess(
                                     AccessControlType.Allow,
                                     sid,
@@ -362,8 +356,7 @@ namespace System.Security.AccessControl
                             break;
 
                         case AccessControlModification.RemoveSpecific:
-                            _securityDescriptor
-                                .DiscretionaryAcl
+                            _securityDescriptor.DiscretionaryAcl
                                 .RemoveAccessSpecific(
                                     AccessControlType.Allow,
                                     sid,
@@ -385,8 +378,7 @@ namespace System.Security.AccessControl
                     switch (modification)
                     {
                         case AccessControlModification.Add:
-                            _securityDescriptor
-                                .DiscretionaryAcl
+                            _securityDescriptor.DiscretionaryAcl
                                 .AddAccess(
                                     AccessControlType.Deny,
                                     sid,
@@ -397,8 +389,7 @@ namespace System.Security.AccessControl
                             break;
 
                         case AccessControlModification.Set:
-                            _securityDescriptor
-                                .DiscretionaryAcl
+                            _securityDescriptor.DiscretionaryAcl
                                 .SetAccess(
                                     AccessControlType.Deny,
                                     sid,
@@ -409,8 +400,7 @@ namespace System.Security.AccessControl
                             break;
 
                         case AccessControlModification.Reset:
-                            _securityDescriptor
-                                .DiscretionaryAcl
+                            _securityDescriptor.DiscretionaryAcl
                                 .RemoveAccess(
                                     AccessControlType.Allow,
                                     sid,
@@ -419,8 +409,7 @@ namespace System.Security.AccessControl
                                         | InheritanceFlags.ObjectInherit,
                                     0
                                 );
-                            _securityDescriptor
-                                .DiscretionaryAcl
+                            _securityDescriptor.DiscretionaryAcl
                                 .SetAccess(
                                     AccessControlType.Deny,
                                     sid,
@@ -431,8 +420,7 @@ namespace System.Security.AccessControl
                             break;
 
                         case AccessControlModification.Remove:
-                            result = _securityDescriptor
-                                .DiscretionaryAcl
+                            result = _securityDescriptor.DiscretionaryAcl
                                 .RemoveAccess(
                                     AccessControlType.Deny,
                                     sid,
@@ -443,8 +431,7 @@ namespace System.Security.AccessControl
                             break;
 
                         case AccessControlModification.RemoveAll:
-                            result = _securityDescriptor
-                                .DiscretionaryAcl
+                            result = _securityDescriptor.DiscretionaryAcl
                                 .RemoveAccess(
                                     AccessControlType.Deny,
                                     sid,
@@ -462,8 +449,7 @@ namespace System.Security.AccessControl
                             break;
 
                         case AccessControlModification.RemoveSpecific:
-                            _securityDescriptor
-                                .DiscretionaryAcl
+                            _securityDescriptor.DiscretionaryAcl
                                 .RemoveAccessSpecific(
                                     AccessControlType.Deny,
                                     sid,
@@ -543,8 +529,7 @@ namespace System.Security.AccessControl
                 switch (modification)
                 {
                     case AccessControlModification.Add:
-                        _securityDescriptor
-                            .SystemAcl
+                        _securityDescriptor.SystemAcl
                             .AddAudit(
                                 rule.AuditFlags,
                                 sid,
@@ -555,8 +540,7 @@ namespace System.Security.AccessControl
                         break;
 
                     case AccessControlModification.Set:
-                        _securityDescriptor
-                            .SystemAcl
+                        _securityDescriptor.SystemAcl
                             .SetAudit(
                                 rule.AuditFlags,
                                 sid,
@@ -567,8 +551,7 @@ namespace System.Security.AccessControl
                         break;
 
                     case AccessControlModification.Reset:
-                        _securityDescriptor
-                            .SystemAcl
+                        _securityDescriptor.SystemAcl
                             .SetAudit(
                                 rule.AuditFlags,
                                 sid,
@@ -579,8 +562,7 @@ namespace System.Security.AccessControl
                         break;
 
                     case AccessControlModification.Remove:
-                        result = _securityDescriptor
-                            .SystemAcl
+                        result = _securityDescriptor.SystemAcl
                             .RemoveAudit(
                                 rule.AuditFlags,
                                 sid,
@@ -591,8 +573,7 @@ namespace System.Security.AccessControl
                         break;
 
                     case AccessControlModification.RemoveAll:
-                        result = _securityDescriptor
-                            .SystemAcl
+                        result = _securityDescriptor.SystemAcl
                             .RemoveAudit(
                                 AuditFlags.Failure | AuditFlags.Success,
                                 sid,
@@ -608,8 +589,7 @@ namespace System.Security.AccessControl
                         break;
 
                     case AccessControlModification.RemoveSpecific:
-                        _securityDescriptor
-                            .SystemAcl
+                        _securityDescriptor.SystemAcl
                             .RemoveAuditSpecific(
                                 rule.AuditFlags,
                                 sid,

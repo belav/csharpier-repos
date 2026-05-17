@@ -162,8 +162,7 @@ namespace System.ServiceModel
             {
                 if (value == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new ArgumentNullException("value"));
                 }
                 this.reliableSession.CopySettings(value);
@@ -283,8 +282,7 @@ namespace System.ServiceModel
             NetTcpBindingElement element = section.Bindings[configurationName];
             if (element == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ConfigurationErrorsException(
                             SR.GetString(
@@ -322,8 +320,7 @@ namespace System.ServiceModel
             }
             else if (mode == SecurityMode.Message)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new NotSupportedException(
                             SR.GetString(SR.UnsupportedSecuritySetting, "Mode", mode)
@@ -344,8 +341,7 @@ namespace System.ServiceModel
                         || (mct == MessageCredentialType.Windows)
                     )
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new NotSupportedException(
                                     SR.GetString(
@@ -371,8 +367,7 @@ namespace System.ServiceModel
                 && (transport.ClientCredentialType == TcpClientCredentialType.Certificate)
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new NotSupportedException(
                             SR.GetString(

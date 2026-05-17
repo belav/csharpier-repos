@@ -18,8 +18,7 @@ namespace System.Reflection.Tests
         public static void TestDllImportPseudoCustomAttribute()
         {
             TypeInfo runtimeType = typeof(DllImportHolders).GetTypeInfo(); // Intentionally not projected - using to get expected results.
-            MethodInfo[] runtimeMethods = runtimeType
-                .DeclaredMethods
+            MethodInfo[] runtimeMethods = runtimeType.DeclaredMethods
                 .OrderBy(m => m.Name)
                 .ToArray();
 
@@ -63,8 +62,7 @@ namespace System.Reflection.Tests
             TypeInfo ecmaType = typeof(MarshalAsHolders).Project().GetTypeInfo();
             FieldInfo ecmaField = ecmaType.GetDeclaredField(fieldName);
             Assert.NotNull(ecmaField);
-            CustomAttributeData cad = ecmaField
-                .CustomAttributes
+            CustomAttributeData cad = ecmaField.CustomAttributes
                 .Single(c => c.AttributeType.Name == nameof(MarshalAsAttribute));
             MarshalAsAttribute actual = cad.UnprojectAndInstantiate<MarshalAsAttribute>();
             AssertEqual(expected, actual);

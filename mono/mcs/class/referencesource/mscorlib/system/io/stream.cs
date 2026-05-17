@@ -355,13 +355,14 @@ namespace System.IO
         [ComVisible(false)]
         public virtual Task FlushAsync(CancellationToken cancellationToken)
         {
-            return Task.Factory.StartNew(
-                state => ((Stream)state).Flush(),
-                this,
-                cancellationToken,
-                TaskCreationOptions.DenyChildAttach,
-                TaskScheduler.Default
-            );
+            return Task.Factory
+                .StartNew(
+                    state => ((Stream)state).Flush(),
+                    this,
+                    cancellationToken,
+                    TaskCreationOptions.DenyChildAttach,
+                    TaskScheduler.Default
+                );
         }
 #endif // FEATURE_ASYNC_IO
 
@@ -451,8 +452,7 @@ namespace System.IO
                     );
 
                     // Do the Read and return the number of bytes read
-                    var bytesRead = thisTask
-                        ._stream
+                    var bytesRead = thisTask._stream
                         .Read(thisTask._buffer, thisTask._offset, thisTask._count);
                     thisTask.ClearBeginState(); // just to help alleviate some memory pressure
                     return bytesRead;

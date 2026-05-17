@@ -104,8 +104,7 @@ public class CSharpMigrationsGenerator : MigrationsCodeGenerator
                 .AppendLine("{");
             using (builder.Indent())
             {
-                CSharpDependencies
-                    .CSharpMigrationOperationGenerator
+                CSharpDependencies.CSharpMigrationOperationGenerator
                     .Generate("migrationBuilder", upOperations, builder);
             }
 
@@ -118,8 +117,7 @@ public class CSharpMigrationsGenerator : MigrationsCodeGenerator
                 .AppendLine("{");
             using (builder.Indent())
             {
-                CSharpDependencies
-                    .CSharpMigrationOperationGenerator
+                CSharpDependencies.CSharpMigrationOperationGenerator
                     .Generate("migrationBuilder", downOperations, builder);
             }
 
@@ -212,8 +210,7 @@ public class CSharpMigrationsGenerator : MigrationsCodeGenerator
             using (builder.Indent())
             {
                 // TODO: Optimize. This is repeated below
-                CSharpDependencies
-                    .CSharpSnapshotGenerator
+                CSharpDependencies.CSharpSnapshotGenerator
                     .Generate("modelBuilder", targetModel, builder);
             }
 

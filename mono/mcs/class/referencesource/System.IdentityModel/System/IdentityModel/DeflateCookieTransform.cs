@@ -48,8 +48,7 @@ namespace System.IdentityModel
 
             if (0 == encoded.Length)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument("encoded", SR.GetString(SR.ID6045));
             }
 
@@ -75,8 +74,7 @@ namespace System.IdentityModel
                         // check length against configured maximum to prevevent decompression bomb attacks
                         if (decompressedStream.Length > MaxDecompressedSize)
                         {
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
                                     new SecurityTokenException(
                                         SR.GetString(SR.ID1068, MaxDecompressedSize)
@@ -106,8 +104,7 @@ namespace System.IdentityModel
 
             if (0 == value.Length)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument("value", SR.GetString(SR.ID6044));
             }
 

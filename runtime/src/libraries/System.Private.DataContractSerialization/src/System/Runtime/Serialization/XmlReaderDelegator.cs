@@ -872,8 +872,7 @@ namespace System.Runtime.Serialization
             }
             else
             {
-                array = BooleanArrayHelperWithDictionaryString
-                    .Instance
+                array = BooleanArrayHelperWithDictionaryString.Instance
                     .ReadArray(
                         dictionaryReader,
                         itemName,
@@ -923,8 +922,7 @@ namespace System.Runtime.Serialization
             }
             else
             {
-                array = DateTimeArrayHelperWithDictionaryString
-                    .Instance
+                array = DateTimeArrayHelperWithDictionaryString.Instance
                     .ReadArray(
                         dictionaryReader,
                         itemName,
@@ -974,8 +972,7 @@ namespace System.Runtime.Serialization
             }
             else
             {
-                array = DecimalArrayHelperWithDictionaryString
-                    .Instance
+                array = DecimalArrayHelperWithDictionaryString.Instance
                     .ReadArray(
                         dictionaryReader,
                         itemName,
@@ -1025,8 +1022,7 @@ namespace System.Runtime.Serialization
             }
             else
             {
-                array = Int32ArrayHelperWithDictionaryString
-                    .Instance
+                array = Int32ArrayHelperWithDictionaryString.Instance
                     .ReadArray(
                         dictionaryReader,
                         itemName,
@@ -1076,8 +1072,7 @@ namespace System.Runtime.Serialization
             }
             else
             {
-                array = Int64ArrayHelperWithDictionaryString
-                    .Instance
+                array = Int64ArrayHelperWithDictionaryString.Instance
                     .ReadArray(
                         dictionaryReader,
                         itemName,
@@ -1127,8 +1122,7 @@ namespace System.Runtime.Serialization
             }
             else
             {
-                array = SingleArrayHelperWithDictionaryString
-                    .Instance
+                array = SingleArrayHelperWithDictionaryString.Instance
                     .ReadArray(
                         dictionaryReader,
                         itemName,
@@ -1178,8 +1172,7 @@ namespace System.Runtime.Serialization
             }
             else
             {
-                array = DoubleArrayHelperWithDictionaryString
-                    .Instance
+                array = DoubleArrayHelperWithDictionaryString.Instance
                     .ReadArray(
                         dictionaryReader,
                         itemName,

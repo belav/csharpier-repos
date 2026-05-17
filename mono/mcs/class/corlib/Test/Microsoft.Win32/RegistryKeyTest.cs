@@ -45,8 +45,7 @@ namespace MonoTests.Microsoft.Win32
                 Assert.Ignore("Running on Unix.");
 
             // this regpath always exists under windows
-            RegistryKey k = Registry
-                .CurrentUser
+            RegistryKey k = Registry.CurrentUser
                 .OpenSubKey("Software", false)
                 .OpenSubKey("Microsoft", false)
                 .OpenSubKey("Windows", false);
@@ -770,8 +769,7 @@ namespace MonoTests.Microsoft.Win32
 
             try
             {
-                key = Registry
-                    .CurrentUser
+                key = Registry.CurrentUser
                     .CreateSubKey(
                         subKeyName,
                         RegistryKeyPermissionCheck.Default,
@@ -807,8 +805,7 @@ namespace MonoTests.Microsoft.Win32
 
             try
             {
-                key = Registry
-                    .CurrentUser
+                key = Registry.CurrentUser
                     .CreateSubKey(
                         subKeyName,
                         RegistryKeyPermissionCheck.Default,
@@ -842,15 +839,13 @@ namespace MonoTests.Microsoft.Win32
                 //
                 // Create a volatile key and try to open it as a normal one
                 //
-                key = Registry
-                    .CurrentUser
+                key = Registry.CurrentUser
                     .CreateSubKey(
                         subKeyNameVolatile,
                         RegistryKeyPermissionCheck.Default,
                         RegistryOptions.Volatile
                     );
-                key2 = Registry
-                    .CurrentUser
+                key2 = Registry.CurrentUser
                     .CreateSubKey(
                         subKeyNameVolatile,
                         RegistryKeyPermissionCheck.Default,
@@ -873,16 +868,14 @@ namespace MonoTests.Microsoft.Win32
                 //
                 // Create a non-volatile key and try to open it as a volatile one
                 //
-                key2 = Registry
-                    .CurrentUser
+                key2 = Registry.CurrentUser
                     .CreateSubKey(
                         subKeyNameNonVolatile,
                         RegistryKeyPermissionCheck.Default,
                         RegistryOptions.None
                     );
                 key2.SetValue("Name", "Mono");
-                key = Registry
-                    .CurrentUser
+                key = Registry.CurrentUser
                     .CreateSubKey(
                         subKeyNameNonVolatile,
                         RegistryKeyPermissionCheck.Default,
@@ -901,8 +894,7 @@ namespace MonoTests.Microsoft.Win32
                 //
                 key.Close();
                 key2.Close();
-                key = Registry
-                    .CurrentUser
+                key = Registry.CurrentUser
                     .CreateSubKey(
                         subKeyNameNonVolatile,
                         RegistryKeyPermissionCheck.Default,
@@ -933,8 +925,7 @@ namespace MonoTests.Microsoft.Win32
 
             try
             {
-                key = Registry
-                    .CurrentUser
+                key = Registry.CurrentUser
                     .CreateSubKey(
                         subKeyName,
                         RegistryKeyPermissionCheck.Default,

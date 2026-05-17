@@ -53,10 +53,11 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.AspNetCore.Internal.EmbeddedLang
                 {
                     return highlights.SelectAsArray(h => new DocumentHighlights(
                         document,
-                        h.HighlightSpans.SelectAsArray(hs => new HighlightSpan(
-                            hs.TextSpan,
-                            ConvertKind(hs.Kind)
-                        ))
+                        h.HighlightSpans
+                            .SelectAsArray(hs => new HighlightSpan(
+                                hs.TextSpan,
+                                ConvertKind(hs.Kind)
+                            ))
                     ));
                 }
             }

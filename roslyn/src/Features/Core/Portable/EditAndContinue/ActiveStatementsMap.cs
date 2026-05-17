@@ -130,8 +130,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             var byDocumentPath = updatedSpansByDocumentPath.ToImmutableDictionary(
                 keySelector: entry => entry.Key,
                 elementSelector: entry =>
-                    entry
-                        .Value
+                    entry.Value
                         .SelectAsArray(item => new ActiveStatement(
                             ordinal: item.ordinal,
                             flags: item.info.Flags,
@@ -230,8 +229,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             CancellationToken cancellationToken
         )
         {
-            var oldTree = await oldDocument
-                .DocumentState
+            var oldTree = await oldDocument.DocumentState
                 .GetSyntaxTreeAsync(cancellationToken)
                 .ConfigureAwait(false);
             var oldRoot = await oldTree.GetRootAsync(cancellationToken).ConfigureAwait(false);

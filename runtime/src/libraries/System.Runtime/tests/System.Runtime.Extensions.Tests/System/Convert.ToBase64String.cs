@@ -390,29 +390,25 @@ namespace System.Tests
             };
             yield return new object[]
             {
-                Encoding
-                    .Unicode
+                Encoding.Unicode
                     .GetBytes("aaaabbbbccccdddddddeeeeeaaaabbbbccccdddddddeeeeeaaaabbbbccccdd"),
                 "YQBhAGEAYQBiAGIAYgBiAGMAYwBjAGMAZABkAGQAZABkAGQAZABlAGUAZQBlAGUAYQBhAGEAYQBiAGIAYgBiAGMAYwBjAGMAZABkAGQAZABkAGQAZABlAGUAZQBlAGUAYQBhAGEAYQBiAGIAYgBiAGMAYwBjAGMAZABkAA==",
             };
             yield return new object[]
             {
-                Encoding
-                    .Unicode
+                Encoding.Unicode
                     .GetBytes("vbnmbbbbccccdddddddeeeeeaaaabbbbccccdddddddeeeeeaaaabbbbccccddx"),
                 "dgBiAG4AbQBiAGIAYgBiAGMAYwBjAGMAZABkAGQAZABkAGQAZABlAGUAZQBlAGUAYQBhAGEAYQBiAGIAYgBiAGMAYwBjAGMAZABkAGQAZABkAGQAZABlAGUAZQBlAGUAYQBhAGEAYQBiAGIAYgBiAGMAYwBjAGMAZABkAHgA",
             };
             yield return new object[]
             {
-                Encoding
-                    .Unicode
+                Encoding.Unicode
                     .GetBytes("rrrrbbbbccccdddddddeeeeeaaaabbbbccccdddddddeeeeeaaaabbbbccccdd\0"),
                 "cgByAHIAcgBiAGIAYgBiAGMAYwBjAGMAZABkAGQAZABkAGQAZABlAGUAZQBlAGUAYQBhAGEAYQBiAGIAYgBiAGMAYwBjAGMAZABkAGQAZABkAGQAZABlAGUAZQBlAGUAYQBhAGEAYQBiAGIAYgBiAGMAYwBjAGMAZABkAAAA",
             };
             yield return new object[]
             {
-                Encoding
-                    .Unicode
+                Encoding.Unicode
                     .GetBytes(
                         "uuuubbbbccccdddddddeeeeeaaaabbbbccccdddddddeeeeeaaaabbbbccccdd\0feffe"
                     ),
@@ -420,8 +416,7 @@ namespace System.Tests
             };
             yield return new object[]
             {
-                Encoding
-                    .Unicode
+                Encoding.Unicode
                     .GetBytes(
                         "kkkkkbbbbccccdddddddeeeeeaaaabbbbccccdddddddeeeeeaaaabbbbccccddx\u043F\u0440\u0438\u0432\u0435\u0442\u043C\u0438\u0440\u4F60\u597D\u4E16\u754C"
                     ),
@@ -429,8 +424,7 @@ namespace System.Tests
             };
             yield return new object[]
             {
-                Encoding
-                    .Unicode
+                Encoding.Unicode
                     .GetBytes(
                         ",,,,bbbbccccdddddddeeeeeaaaabbbbccccdddddddeeeeeaaaabbbbccccddx\u043F\u0440\u0438\u0432\u0435\u0442\u043C\u0438\u0440\u4F60\u597D\u4E16\u754Cddddeeeeea"
                     ),
@@ -438,8 +432,7 @@ namespace System.Tests
             };
             yield return new object[]
             {
-                Encoding
-                    .Unicode
+                Encoding.Unicode
                     .GetBytes(
                         "____bbbbccccdddddddeeeeeaaaabbbbccccdddddddeeeeeaaaabbbbccccddaaaabbbbccccdddddddeeeeeaaaabbbbccccdcccd"
                     ),
@@ -447,8 +440,7 @@ namespace System.Tests
             };
             yield return new object[]
             {
-                Encoding
-                    .Unicode
+                Encoding.Unicode
                     .GetBytes(
                         "    bbbbccccdddddddeeeeeaaaabbbbccccdddddddeeeeeaaaabbbbccccddaaaabbbbccccdddddddeeeeeaaaabbbbccccdddddddeeeeeaaaabbbbccccd"
                     ),
@@ -456,8 +448,7 @@ namespace System.Tests
             };
             yield return new object[]
             {
-                Encoding
-                    .Unicode
+                Encoding.Unicode
                     .GetBytes(
                         "\0\0bbbbccccdddddddeeeeeaaaabbbbccccdddddddeeeeeaaaabbbbccccddaaaabbbbccccdddddddeeeeeaaaabbbbccccdddddddeeeeeaaaabbbbccccddx"
                     ),
@@ -465,8 +456,7 @@ namespace System.Tests
             };
             yield return new object[]
             {
-                Encoding
-                    .Unicode
+                Encoding.Unicode
                     .GetBytes(
                         "eeeebbbbccccdddddddeeeeeaaaabbbbccccdddddddeeeeeaaaabbbbccccdgggdaaaabbbbccccdddddddeeeeeaaaabbbbccccdddddddeeeeeaaaabbbbccccddx"
                     ),

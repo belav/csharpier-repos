@@ -50,15 +50,13 @@ namespace System.IdentityModel.Protocols.WSTrust
 
             if (!valueType.IsAbsoluteUri)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument("valueType", SR.GetString(SR.ID0013));
             }
 
             if (!encodingType.IsAbsoluteUri)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument("encodingType", SR.GetString(SR.ID0013));
             }
 

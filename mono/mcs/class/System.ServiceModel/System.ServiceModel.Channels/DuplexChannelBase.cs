@@ -91,14 +91,12 @@ namespace System.ServiceModel.Channels
                 if (channel_factory_base is IHasMessageEncoder)
                     return (T)
                         (object)
-                            ((IHasMessageEncoder)channel_factory_base)
-                                .MessageEncoder
+                            ((IHasMessageEncoder)channel_factory_base).MessageEncoder
                                 .MessageVersion;
                 if (channel_listener_base is IHasMessageEncoder)
                     return (T)
                         (object)
-                            ((IHasMessageEncoder)channel_listener_base)
-                                .MessageEncoder
+                            ((IHasMessageEncoder)channel_listener_base).MessageEncoder
                                 .MessageVersion;
             }
             if (typeof(T) == typeof(IChannelFactory))

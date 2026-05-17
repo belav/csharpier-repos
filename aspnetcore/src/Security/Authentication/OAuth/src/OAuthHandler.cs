@@ -243,8 +243,7 @@ public class OAuthHandler<TOptions> : RemoteAuthenticationHandler<TOptions>
 
         // PKCE https://tools.ietf.org/html/rfc7636#section-4.5, see BuildChallengeUrl
         if (
-            context
-                .Properties
+            context.Properties
                 .Items
                 .TryGetValue(OAuthConstants.CodeVerifierKey, out var codeVerifier)
         )

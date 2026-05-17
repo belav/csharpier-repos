@@ -82,8 +82,7 @@ namespace LibraryImportGenerator.IntegrationTests
                 Assert.Equal(IntEnum.Max, ret);
             }
             {
-                ByteEnum ret = NativeExportsNE
-                    .ByteEnum
+                ByteEnum ret = NativeExportsNE.ByteEnum
                     .Subtract_Return(ByteEnum.Max, ByteEnum.Zero);
                 Assert.Equal(ByteEnum.Max, ret);
             }

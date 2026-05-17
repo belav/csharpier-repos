@@ -27,8 +27,7 @@ namespace System.Runtime.Serialization
             set
             {
                 if (ReferencedTypeExists)
-                    throw System
-                        .Runtime
+                    throw System.Runtime
                         .Serialization
                         .DiagnosticUtility
                         .ExceptionUtility
@@ -48,8 +47,7 @@ namespace System.Runtime.Serialization
         internal Dictionary<string, object> GetMemberNames()
         {
             if (ReferencedTypeExists)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility

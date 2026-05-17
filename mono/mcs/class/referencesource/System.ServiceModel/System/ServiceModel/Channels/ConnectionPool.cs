@@ -815,12 +815,8 @@ namespace System.ServiceModel.Channels
 
         IConnection TakeConnection(TimeSpan timeout)
         {
-            return this.connectionPool.TakeConnection(
-                null,
-                this.via,
-                timeout,
-                out this.connectionKey
-            );
+            return this.connectionPool
+                .TakeConnection(null, this.via, timeout, out this.connectionKey);
         }
 
         public IConnection EstablishConnection(TimeSpan timeout)
@@ -895,12 +891,13 @@ namespace System.ServiceModel.Channels
                             }
 
                             // This cannot throw TimeoutException since isConnectionStillGood is false (doesn't attempt a Close).
-                            this.connectionPool.ReturnConnection(
-                                connectionKey,
-                                localRawConnection,
-                                false,
-                                TimeSpan.Zero
-                            );
+                            this.connectionPool
+                                .ReturnConnection(
+                                    connectionKey,
+                                    localRawConnection,
+                                    false,
+                                    TimeSpan.Zero
+                                );
                         }
                     }
                 }
@@ -915,15 +912,12 @@ namespace System.ServiceModel.Channels
                 {
                     try
                     {
-                        localRawConnection = this.connectionInitiator.Connect(
-                            this.via,
-                            connectTimeout
-                        );
+                        localRawConnection = this.connectionInitiator
+                            .Connect(this.via, connectTimeout);
                     }
                     catch (TimeoutException e)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 CreateNewConnectionTimeoutException(connectTimeout, e)
                             );
@@ -978,16 +972,16 @@ namespace System.ServiceModel.Channels
                     // cleanup our pool if necessary
                     if (isConnectionFromPool)
                     {
-                        this.connectionPool.ReturnConnection(
-                            this.connectionKey,
-                            rawConnection,
-                            false,
-                            TimeSpan.Zero
-                        );
+                        this.connectionPool
+                            .ReturnConnection(
+                                this.connectionKey,
+                                rawConnection,
+                                false,
+                                TimeSpan.Zero
+                            );
                     }
 
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new CommunicationObjectAbortedException(
                                 SR.GetString(
@@ -1042,12 +1036,8 @@ namespace System.ServiceModel.Channels
             {
                 if (this.isConnectionFromPool)
                 {
-                    this.connectionPool.ReturnConnection(
-                        localConnectionKey,
-                        localRawConnection,
-                        !abort,
-                        timeout
-                    );
+                    this.connectionPool
+                        .ReturnConnection(localConnectionKey, localRawConnection, !abort, timeout);
                 }
                 else
                 {
@@ -1057,11 +1047,8 @@ namespace System.ServiceModel.Channels
                     }
                     else
                     {
-                        this.connectionPool.AddConnection(
-                            localConnectionKey,
-                            localRawConnection,
-                            timeout
-                        );
+                        this.connectionPool
+                            .AddConnection(localConnectionKey, localRawConnection, timeout);
                     }
                 }
             }
@@ -1239,14 +1226,12 @@ namespace System.ServiceModel.Channels
                         onConnect = Fx.ThunkCallback(new AsyncCallback(OnConnect));
                     }
 
-                    result = parent
-                        .connectionInitiator
+                    result = parent.connectionInitiator
                         .BeginConnect(parent.via, this.connectTimeout, onConnect, this);
                 }
                 catch (TimeoutException e)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             parent.CreateNewConnectionTimeoutException(connectTimeout, e)
                         );
@@ -1268,8 +1253,7 @@ namespace System.ServiceModel.Channels
                 }
                 catch (TimeoutException e)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             parent.CreateNewConnectionTimeoutException(connectTimeout, e)
                         );
@@ -1353,8 +1337,7 @@ namespace System.ServiceModel.Channels
                         }
 
                         // This cannot throw TimeoutException since isConnectionStillGood is false (doesn't attempt a Close).
-                        parent
-                            .connectionPool
+                        parent.connectionPool
                             .ReturnConnection(
                                 parent.connectionKey,
                                 this.rawConnection,

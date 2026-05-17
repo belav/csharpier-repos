@@ -52,14 +52,12 @@ namespace Microsoft.Extensions.DependencyInjection
             ThrowHelper.ThrowIfNull(builder);
             ThrowHelper.ThrowIfNull(httpClientLoggerFactory);
 
-            builder
-                .Services
+            builder.Services
                 .Configure<HttpClientFactoryOptions>(
                     builder.Name,
                     options =>
                     {
-                        options
-                            .LoggingBuilderActions
+                        options.LoggingBuilderActions
                             .Add(b =>
                             {
                                 IHttpClientLogger httpClientLogger = httpClientLoggerFactory(
@@ -144,8 +142,7 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             ThrowHelper.ThrowIfNull(builder);
 
-            builder
-                .Services
+            builder.Services
                 .Configure<HttpClientFactoryOptions>(
                     builder.Name,
                     options =>
@@ -167,8 +164,7 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             ThrowHelper.ThrowIfNull(builder);
 
-            builder
-                .Services
+            builder.Services
                 .Configure<HttpClientFactoryOptions>(
                     builder.Name,
                     options => options.SuppressDefaultLogging = false

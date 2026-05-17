@@ -236,8 +236,7 @@ void local() => System.Console.WriteLine(2);
 
             comp = CreateCompilation(
                 text1,
-                options: TestOptions
-                    .DebugExe
+                options: TestOptions.DebugExe
                     .WithNullableContextOptions(NullableContextOptions.Enable),
                 parseOptions: DefaultParseOptions
             );
@@ -412,8 +411,7 @@ IMethodBodyOperation (OperationKind.MethodBody, Type: null) (Syntax: 'local(); .
 
             comp = CreateCompilation(
                 new[] { text1, text2 },
-                options: TestOptions
-                    .DebugExe
+                options: TestOptions.DebugExe
                     .WithNullableContextOptions(NullableContextOptions.Enable),
                 parseOptions: DefaultParseOptions
             );
@@ -8582,8 +8580,7 @@ static extern void local1();
             {
                 var fromSource = module is SourceModuleSymbol;
 
-                var program = module
-                    .GlobalNamespace
+                var program = module.GlobalNamespace
                     .GetMember<NamedTypeSymbol>(
                         WellKnownMemberNames.TopLevelStatementsEntryPointTypeName
                     );
@@ -12433,8 +12430,7 @@ System.Console.WriteLine(""Hi!"");
             void validate(ModuleSymbol module)
             {
                 bool fromSource = module is SourceModuleSymbol;
-                var program = module
-                    .GlobalNamespace
+                var program = module.GlobalNamespace
                     .GetMember<NamedTypeSymbol>(
                         WellKnownMemberNames.TopLevelStatementsEntryPointTypeName
                     );
@@ -12515,8 +12511,7 @@ public partial class Program
 
             void validate(ModuleSymbol module)
             {
-                var program = module
-                    .GlobalNamespace
+                var program = module.GlobalNamespace
                     .GetMember<NamedTypeSymbol>(
                         WellKnownMemberNames.TopLevelStatementsEntryPointTypeName
                     );
@@ -12960,8 +12955,7 @@ partial class Program
             void validate(ModuleSymbol module)
             {
                 bool fromSource = module is SourceModuleSymbol;
-                var field = module
-                    .GlobalNamespace
+                var field = module.GlobalNamespace
                     .GetMember<NamedTypeSymbol>("Program")
                     .GetField("<Property>k__BackingField");
                 Assert.False(field.ContainingType.IsImplicitlyDeclared);

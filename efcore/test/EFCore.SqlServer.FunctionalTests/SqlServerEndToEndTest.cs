@@ -705,20 +705,21 @@ public class SqlServerEndToEndTest : IClassFixture<SqlServerFixture>
             db.Entry(toDelete).State = EntityState.Deleted;
 
             var toAdd = db.Add(
-                new Blog
-                {
-                    Name = "Blog to Insert",
-                    George = true,
-                    TheGu = new Guid("0456AEF1-B7FC-47AA-8102-975D6BA3A9BF"),
-                    NotFigTime = new DateTime(1973, 9, 3, 0, 10, 33, 777),
-                    ToEat = 64,
-                    OrNothing = 0.123456789,
-                    Fuse = 777,
-                    WayRound = 9876543210,
-                    Away = 0.12345f,
-                    AndChew = new byte[16],
-                }
-            ).Entity;
+                    new Blog
+                    {
+                        Name = "Blog to Insert",
+                        George = true,
+                        TheGu = new Guid("0456AEF1-B7FC-47AA-8102-975D6BA3A9BF"),
+                        NotFigTime = new DateTime(1973, 9, 3, 0, 10, 33, 777),
+                        ToEat = 64,
+                        OrNothing = 0.123456789,
+                        Fuse = 777,
+                        WayRound = 9876543210,
+                        Away = 0.12345f,
+                        AndChew = new byte[16],
+                    }
+                )
+                .Entity;
 
             await db.SaveChangesAsync();
 
@@ -833,8 +834,7 @@ public class SqlServerEndToEndTest : IClassFixture<SqlServerFixture>
 
         using (var context = new GameDbContext(options))
         {
-            var character = context
-                .Characters
+            var character = context.Characters
                 .Include(c => c.Level.Game)
                 .OrderBy(c => c.Id)
                 .First();
@@ -863,8 +863,7 @@ public class SqlServerEndToEndTest : IClassFixture<SqlServerFixture>
         var expectedCId = 0;
         using (var context = new SomeDbContext(options))
         {
-            var entityA = context
-                .EntitiesA
+            var entityA = context.EntitiesA
                 .Include(x => x.EntityB)
                     .ThenInclude(x => x.EntitiesC)
                 .OrderBy(x => x.Id)
@@ -879,8 +878,7 @@ public class SqlServerEndToEndTest : IClassFixture<SqlServerFixture>
 
         using (var context = new SomeDbContext(options))
         {
-            var entityA = context
-                .EntitiesA
+            var entityA = context.EntitiesA
                 .Include(x => x.EntityB)
                     .ThenInclude(x => x.EntitiesC)
                 .OrderBy(x => x.Id)
@@ -1039,8 +1037,7 @@ public class SqlServerEndToEndTest : IClassFixture<SqlServerFixture>
             Assert.Equal(studentCount, context.Students.ToList().Count());
             Assert.Equal(courseCount, context.Courses.ToList().Count());
 
-            var enrollments = context
-                .Enrollments
+            var enrollments = context.Enrollments
                 .Include(e => e.Course)
                 .Include(e => e.Student)
                 .ToList();

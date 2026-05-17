@@ -153,8 +153,7 @@ namespace System.ComponentModel.DataAnnotations
             if (validationContext != null && instance != validationContext.ObjectInstance)
             {
                 throw new ArgumentException(
-                    Resources
-                        .DataAnnotationsResources
+                    Resources.DataAnnotationsResources
                         .Validator_InstanceMustMatchValidationContextInstance,
                     "instance"
                 );
@@ -315,8 +314,7 @@ namespace System.ComponentModel.DataAnnotations
             if (instance != validationContext.ObjectInstance)
             {
                 throw new ArgumentException(
-                    Resources
-                        .DataAnnotationsResources
+                    Resources.DataAnnotationsResources
                         .Validator_InstanceMustMatchValidationContextInstance,
                     "instance"
                 );

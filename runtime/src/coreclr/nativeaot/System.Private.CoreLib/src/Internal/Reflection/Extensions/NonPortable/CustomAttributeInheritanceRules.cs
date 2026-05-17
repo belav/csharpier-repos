@@ -29,8 +29,7 @@ namespace Internal.Reflection.Extensions.NonPortable
             bool skipTypeValidation = false
         )
         {
-            return AssemblyCustomAttributeSearcher
-                .Default
+            return AssemblyCustomAttributeSearcher.Default
                 .GetMatchingCustomAttributes(
                     element,
                     optionalAttributeTypeFilter,
@@ -45,8 +44,7 @@ namespace Internal.Reflection.Extensions.NonPortable
             bool skipTypeValidation = false
         )
         {
-            return ModuleCustomAttributeSearcher
-                .Default
+            return ModuleCustomAttributeSearcher.Default
                 .GetMatchingCustomAttributes(
                     element,
                     optionalAttributeTypeFilter,
@@ -62,8 +60,7 @@ namespace Internal.Reflection.Extensions.NonPortable
             bool skipTypeValidation = false
         )
         {
-            return ParameterCustomAttributeSearcher
-                .Default
+            return ParameterCustomAttributeSearcher.Default
                 .GetMatchingCustomAttributes(
                     element,
                     optionalAttributeTypeFilter,
@@ -82,8 +79,7 @@ namespace Internal.Reflection.Extensions.NonPortable
             {
                 Type? type = element as Type;
                 if (type != null)
-                    return TypeCustomAttributeSearcher
-                        .Default
+                    return TypeCustomAttributeSearcher.Default
                         .GetMatchingCustomAttributes(
                             type,
                             optionalAttributeTypeFilter,
@@ -94,8 +90,7 @@ namespace Internal.Reflection.Extensions.NonPortable
             {
                 ConstructorInfo? constructorInfo = element as ConstructorInfo;
                 if (constructorInfo != null)
-                    return ConstructorCustomAttributeSearcher
-                        .Default
+                    return ConstructorCustomAttributeSearcher.Default
                         .GetMatchingCustomAttributes(
                             constructorInfo,
                             optionalAttributeTypeFilter,
@@ -106,8 +101,7 @@ namespace Internal.Reflection.Extensions.NonPortable
             {
                 MethodInfo? methodInfo = element as MethodInfo;
                 if (methodInfo != null)
-                    return MethodCustomAttributeSearcher
-                        .Default
+                    return MethodCustomAttributeSearcher.Default
                         .GetMatchingCustomAttributes(
                             methodInfo,
                             optionalAttributeTypeFilter,
@@ -118,8 +112,7 @@ namespace Internal.Reflection.Extensions.NonPortable
             {
                 FieldInfo? fieldInfo = element as FieldInfo;
                 if (fieldInfo != null)
-                    return FieldCustomAttributeSearcher
-                        .Default
+                    return FieldCustomAttributeSearcher.Default
                         .GetMatchingCustomAttributes(
                             fieldInfo,
                             optionalAttributeTypeFilter,
@@ -130,8 +123,7 @@ namespace Internal.Reflection.Extensions.NonPortable
             {
                 PropertyInfo? propertyInfo = element as PropertyInfo;
                 if (propertyInfo != null)
-                    return PropertyCustomAttributeSearcher
-                        .Default
+                    return PropertyCustomAttributeSearcher.Default
                         .GetMatchingCustomAttributes(
                             propertyInfo,
                             optionalAttributeTypeFilter,
@@ -142,8 +134,7 @@ namespace Internal.Reflection.Extensions.NonPortable
             {
                 EventInfo? eventInfo = element as EventInfo;
                 if (eventInfo != null)
-                    return EventCustomAttributeSearcher
-                        .Default
+                    return EventCustomAttributeSearcher.Default
                         .GetMatchingCustomAttributes(
                             eventInfo,
                             optionalAttributeTypeFilter,
@@ -266,8 +257,7 @@ namespace Internal.Reflection.Extensions.NonPortable
 
             public sealed override MethodInfo GetParent(MethodInfo e)
             {
-                return ReflectionAugments
-                    .ReflectionCoreCallbacks
+                return ReflectionAugments.ReflectionCoreCallbacks
                     .GetImplicitlyOverriddenBaseClassMethod(e);
             }
 
@@ -289,8 +279,7 @@ namespace Internal.Reflection.Extensions.NonPortable
 
             public sealed override PropertyInfo GetParent(PropertyInfo e)
             {
-                return ReflectionAugments
-                    .ReflectionCoreCallbacks
+                return ReflectionAugments.ReflectionCoreCallbacks
                     .GetImplicitlyOverriddenBaseClassProperty(e);
             }
 
@@ -312,8 +301,7 @@ namespace Internal.Reflection.Extensions.NonPortable
 
             public sealed override EventInfo GetParent(EventInfo e)
             {
-                return ReflectionAugments
-                    .ReflectionCoreCallbacks
+                return ReflectionAugments.ReflectionCoreCallbacks
                     .GetImplicitlyOverriddenBaseClassEvent(e);
             }
 

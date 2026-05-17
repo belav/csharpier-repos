@@ -42,8 +42,7 @@ namespace ComWrappersTests.GlobalInstance
 #endif
 
                 IntPtr trackerObjRaw = MockReferenceTrackerRuntime.CreateTrackerObject();
-                var trackerObj = GlobalComWrappers
-                    .Instance
+                var trackerObj = GlobalComWrappers.Instance
                     .GetOrCreateObjectForComInstance(
                         trackerObjRaw,
                         CreateObjectFlags.TrackerObject

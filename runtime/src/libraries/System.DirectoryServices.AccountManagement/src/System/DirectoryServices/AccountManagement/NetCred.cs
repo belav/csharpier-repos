@@ -73,8 +73,7 @@ namespace System.DirectoryServices.AccountManagement
             fixed (char* splitUsername = new char[Interop.Credui.CRED_MAX_USERNAME_LENGTH])
             fixed (char* splitDomain = new char[Interop.Credui.CRED_MAX_DOMAIN_TARGET_LENGTH])
             {
-                int result = Interop
-                    .Credui
+                int result = Interop.Credui
                     .CredUIParseUserName(
                         username,
                         splitUsername,

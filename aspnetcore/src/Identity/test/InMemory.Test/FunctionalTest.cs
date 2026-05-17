@@ -372,8 +372,7 @@ public class FunctionalTest : LoggedTest
 
     private static string FindClaimValue(Transaction transaction, string claimType)
     {
-        var claim = transaction
-            .ResponseElement
+        var claim = transaction.ResponseElement
             .Elements("claim")
             .SingleOrDefault(elt => elt.Attribute("type").Value == claimType);
         if (claim == null)
@@ -401,14 +400,11 @@ public class FunctionalTest : LoggedTest
                             {
                                 var req = context.Request;
                                 var res = context.Response;
-                                var userManager = context
-                                    .RequestServices
+                                var userManager = context.RequestServices
                                     .GetRequiredService<UserManager<PocoUser>>();
-                                var roleManager = context
-                                    .RequestServices
+                                var roleManager = context.RequestServices
                                     .GetRequiredService<RoleManager<PocoRole>>();
-                                var signInManager = context
-                                    .RequestServices
+                                var signInManager = context.RequestServices
                                     .GetRequiredService<SignInManager<PocoUser>>();
                                 PathString remainder;
                                 if (req.Path == new PathString("/normal"))
@@ -446,10 +442,11 @@ public class FunctionalTest : LoggedTest
                                     res.StatusCode = result.Succeeded ? 200 : 500;
                                 }
                                 else if (
-                                    req.Path.StartsWithSegments(
-                                        new PathString("/pwdLogin"),
-                                        out remainder
-                                    )
+                                    req.Path
+                                        .StartsWithSegments(
+                                            new PathString("/pwdLogin"),
+                                            out remainder
+                                        )
                                 )
                                 {
                                     var isPersistent = bool.Parse(remainder.Value.AsSpan(1));
@@ -495,10 +492,8 @@ public class FunctionalTest : LoggedTest
                                     );
                                 }
                                 else if (
-                                    req.Path.StartsWithSegments(
-                                        new PathString("/me"),
-                                        out remainder
-                                    )
+                                    req.Path
+                                        .StartsWithSegments(new PathString("/me"), out remainder)
                                 )
                                 {
                                     var auth = await context.AuthenticateAsync(
@@ -560,8 +555,7 @@ public class FunctionalTest : LoggedTest
         if (result != null && result.Principal != null)
         {
             xml.Add(
-                result
-                    .Principal
+                result.Principal
                     .Claims
                     .Select(claim => new XElement(
                         "claim",
@@ -573,8 +567,7 @@ public class FunctionalTest : LoggedTest
         if (result != null && result.Properties != null)
         {
             xml.Add(
-                result
-                    .Properties
+                result.Properties
                     .Items
                     .Select(extra => new XElement(
                         "extra",
@@ -621,8 +614,7 @@ public class FunctionalTest : LoggedTest
         };
         if (transaction.Response.Headers.Contains("Set-Cookie"))
         {
-            transaction.SetCookie = transaction
-                .Response
+            transaction.SetCookie = transaction.Response
                 .Headers
                 .GetValues("Set-Cookie")
                 .FirstOrDefault();

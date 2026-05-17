@@ -258,8 +258,7 @@ namespace Microsoft.CodeAnalysis.Completion
                 CancellationToken cancellationToken
             )
             {
-                var extensionManager = document
-                    .Project
+                var extensionManager = document.Project
                     .Solution
                     .Workspace
                     .Services
@@ -499,8 +498,7 @@ namespace Microsoft.CodeAnalysis.Completion
             CancellationToken cancellationToken
         )
         {
-            var extensionManager = document
-                .Project
+            var extensionManager = document.Project
                 .Solution
                 .Workspace
                 .Services

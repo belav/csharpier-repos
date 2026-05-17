@@ -213,8 +213,7 @@ namespace System.ServiceModel.Channels
                             ServiceHostingEnvironment.IsConfigurationBasedService(serviceFile)
                             || HostingEnvironmentWrapper.ServiceFileExists(serviceFile)
                         )
-                        && AspNetEnvironment
-                            .Current
+                        && AspNetEnvironment.Current
                             .IsWithinApp(VirtualPathUtility.ToAbsolute(serviceFile))
                     );
                 }

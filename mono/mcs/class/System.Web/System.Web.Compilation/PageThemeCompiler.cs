@@ -71,9 +71,12 @@ namespace System.Web.Compilation
             prop.Name = "ControlSkins";
             prop.Attributes = MemberAttributes.Family | MemberAttributes.Override;
             prop.Type = new CodeTypeReference(typeof(IDictionary));
-            prop.GetStatements.Add(
-                new CodeMethodReturnStatement(new CodeVariableReferenceExpression("__controlSkins"))
-            );
+            prop.GetStatements
+                .Add(
+                    new CodeMethodReturnStatement(
+                        new CodeVariableReferenceExpression("__controlSkins")
+                    )
+                );
             mainClass.Members.Add(prop);
 
             /* LinkedStyleSheets */
@@ -86,11 +89,12 @@ namespace System.Web.Compilation
             prop.Name = "LinkedStyleSheets";
             prop.Attributes = MemberAttributes.Family | MemberAttributes.Override;
             prop.Type = new CodeTypeReference(typeof(string[]));
-            prop.GetStatements.Add(
-                new CodeMethodReturnStatement(
-                    new CodeVariableReferenceExpression("__linkedStyleSheets")
-                )
-            );
+            prop.GetStatements
+                .Add(
+                    new CodeMethodReturnStatement(
+                        new CodeVariableReferenceExpression("__linkedStyleSheets")
+                    )
+                );
             mainClass.Members.Add(prop);
 
             /* AppRelativeTemplateSourceDirectory */
@@ -98,13 +102,14 @@ namespace System.Web.Compilation
             prop.Name = "AppRelativeTemplateSourceDirectory";
             prop.Attributes = MemberAttributes.Family | MemberAttributes.Override;
             prop.Type = new CodeTypeReference(typeof(string));
-            prop.GetStatements.Add(
-                new CodeMethodReturnStatement(
-                    new CodePrimitiveExpression(
-                        VirtualPathUtility.ToAbsolute(parser.BaseVirtualDir)
+            prop.GetStatements
+                .Add(
+                    new CodeMethodReturnStatement(
+                        new CodePrimitiveExpression(
+                            VirtualPathUtility.ToAbsolute(parser.BaseVirtualDir)
+                        )
                     )
-                )
-            );
+                );
             mainClass.Members.Add(prop);
 
             ControlBuilder builder = parser.RootBuilder;
@@ -170,8 +175,7 @@ namespace System.Web.Compilation
                 new CodeVariableReferenceExpression("ctrl")
             );
 
-            method
-                .Statements
+            method.Statements
                 .Add(new CodeVariableDeclarationStatement(builder.ControlType, "__ctrl"));
             CodeAssignStatement assign = new CodeAssignStatement();
             assign.Left = ctrlVar;

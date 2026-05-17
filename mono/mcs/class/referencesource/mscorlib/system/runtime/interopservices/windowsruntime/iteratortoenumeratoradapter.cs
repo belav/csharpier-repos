@@ -51,8 +51,7 @@ namespace System.Runtime.InteropServices.WindowsRuntime
             where T : class
         {
             bool fUseString;
-            Delegate target = System
-                .StubHelpers
+            Delegate target = System.StubHelpers
                 .StubHelpers
                 .GetTargetForAmbiguousVariantCall(
                     this,

@@ -34,8 +34,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
             else
             {
-                TypeMap = TypeMap
-                    .Empty
+                TypeMap = TypeMap.Empty
                     .WithConcatAlphaRename(
                         containingMethod,
                         this,

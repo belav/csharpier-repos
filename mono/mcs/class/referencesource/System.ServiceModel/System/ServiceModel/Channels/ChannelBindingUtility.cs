@@ -235,15 +235,13 @@ namespace System.ServiceModel.Channels
 
                 if (source.IsInvalid || source.IsClosed)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new ObjectDisposedException(source.GetType().FullName));
                 }
 
                 if (source.Size <= 0)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentOutOfRangeException(
                                 "source.Size",

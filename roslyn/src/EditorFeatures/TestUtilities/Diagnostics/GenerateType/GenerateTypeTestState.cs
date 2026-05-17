@@ -44,14 +44,12 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.GenerateType
             if (projectToBeModified == null)
             {
                 // Select the project from which the Codefix was triggered
-                ProjectToBeModified = Workspace
-                    .CurrentSolution
+                ProjectToBeModified = Workspace.CurrentSolution
                     .GetProject(_testDocument.Project.Id);
             }
             else
             {
-                ProjectToBeModified = Workspace
-                    .CurrentSolution
+                ProjectToBeModified = Workspace.CurrentSolution
                     .Projects
                     .FirstOrDefault(proj => proj.Name.Equals(projectToBeModified));
                 Contract.ThrowIfNull(
@@ -67,8 +65,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.GenerateType
             }
             else if (existingFileName != null)
             {
-                ExistingDocument = ProjectToBeModified
-                    .Documents
+                ExistingDocument = ProjectToBeModified.Documents
                     .FirstOrDefault(doc => doc.Name.Equals(existingFileName));
             }
 
@@ -80,8 +77,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.GenerateType
             get
             {
                 return (TestGenerateTypeOptionsService)
-                    InvocationDocument
-                        .Project
+                    InvocationDocument.Project
                         .Solution
                         .Services
                         .GetRequiredService<IGenerateTypeOptionsService>();
@@ -93,8 +89,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.GenerateType
             get
             {
                 return (TestProjectManagementService)
-                    InvocationDocument
-                        .Project
+                    InvocationDocument.Project
                         .Solution
                         .Services
                         .GetService<IProjectManagementService>();

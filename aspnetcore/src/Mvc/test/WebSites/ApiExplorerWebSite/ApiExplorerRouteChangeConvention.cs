@@ -23,8 +23,7 @@ public class ApiExplorerRouteChangeConvention : Attribute, IActionModelConventio
         {
             action.ActionName = "NewIndex";
             action.Selectors.Clear();
-            action
-                .Selectors
+            action.Selectors
                 .Add(
                     new SelectorModel
                     {

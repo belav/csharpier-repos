@@ -217,8 +217,7 @@ namespace BuildBoss
                     continue;
                 }
 
-                var builtByThisRepository = _solutionMap
-                    .Values
+                var builtByThisRepository = _solutionMap.Values
                     .Any(projectData =>
                         GetAssemblyName(projectData) == internalsVisibleTo.TargetAssembly
                     );

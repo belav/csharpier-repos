@@ -154,8 +154,7 @@ namespace System.Data.Objects.DataClasses
                                         attachedKey == null,
                                         "Found more than one non-Deleted relationship for the same AssociationSet and source role"
                                     );
-                                    attachedKey = relationshipEntry
-                                        .RelationshipWrapper
+                                    attachedKey = relationshipEntry.RelationshipWrapper
                                         .GetOtherEntityKey(ownerKey);
                                     // key should never be temporary or special since it came from a key entry
                                 }
@@ -608,8 +607,7 @@ namespace System.Data.Objects.DataClasses
                     int dependentOrdinal = dependentTypeMetadata.GetOrdinalforOLayerMemberName(
                         constraint.ToProperties[i].Name
                     );
-                    bool valueChanging = !ByValueEqualityComparer
-                        .Default
+                    bool valueChanging = !ByValueEqualityComparer.Default
                         .Equals(
                             dependentTypeMetadata
                                 .Member(dependentOrdinal)
@@ -635,14 +633,12 @@ namespace System.Data.Objects.DataClasses
                             if (changedFKs.TryGetValue(dependentOrdinal, out previouslySetValue))
                             {
                                 if (
-                                    !ByValueEqualityComparer
-                                        .Default
+                                    !ByValueEqualityComparer.Default
                                         .Equals(previouslySetValue, value)
                                 )
                                 {
                                     throw new InvalidOperationException(
-                                        System
-                                            .Data
+                                        System.Data
                                             .Entity
                                             .Strings
                                             .Update_ReferentialConstraintIntegrityViolation
@@ -806,8 +802,9 @@ namespace System.Data.Objects.DataClasses
                 && !transManager.IsRelatedEndAdd
             )
             {
-                ReferentialConstraint constraint = ((AssociationType)RelationMetadata)
-                    .ReferentialConstraints
+                ReferentialConstraint constraint = (
+                    (AssociationType)RelationMetadata
+                ).ReferentialConstraints
                     .Single();
                 if (TargetRoleName == constraint.FromRole.Name) // Only do this on the dependent end
                 {
@@ -891,8 +888,7 @@ namespace System.Data.Objects.DataClasses
                                         // RelatedEnd operations the user is not required to call DetectChanges.
                                         if (
                                             canSetModifiedProps
-                                            && WrappedOwner
-                                                .ObjectStateEntry
+                                            && WrappedOwner.ObjectStateEntry
                                                 .OriginalValues
                                                 .GetValue(dependentOrdinal) != null
                                         )

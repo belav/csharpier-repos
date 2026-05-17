@@ -2222,8 +2222,7 @@ public class C
             Func<bool, Action<ModuleSymbol>> validator = isFromSource =>
                 module =>
                 {
-                    var methods = module
-                        .GlobalNamespace
+                    var methods = module.GlobalNamespace
                         .GetMember<NamedTypeSymbol>("C")
                         .GetMembers()
                         .OfType<MethodSymbol>()
@@ -2342,8 +2341,7 @@ public struct S
             Func<bool, Action<ModuleSymbol>> validator = isFromSource =>
                 module =>
                 {
-                    var methods = module
-                        .GlobalNamespace
+                    var methods = module.GlobalNamespace
                         .GetMember<NamedTypeSymbol>("C")
                         .GetMembers()
                         .OfType<MethodSymbol>()
@@ -2409,8 +2407,7 @@ public class C
             Func<bool, Action<ModuleSymbol>> validator = isFromSource =>
                 module =>
                 {
-                    var methods = module
-                        .GlobalNamespace
+                    var methods = module.GlobalNamespace
                         .GetMember<NamedTypeSymbol>("C")
                         .GetMembers()
                         .OfType<MethodSymbol>()
@@ -2521,8 +2518,7 @@ public class C
             Func<bool, Action<ModuleSymbol>> validator = isFromSource =>
                 module =>
                 {
-                    var methods = module
-                        .GlobalNamespace
+                    var methods = module.GlobalNamespace
                         .GetMember<NamedTypeSymbol>("C")
                         .GetMembers()
                         .OfType<MethodSymbol>()
@@ -2641,8 +2637,7 @@ public class C
             Func<bool, Action<ModuleSymbol>> validator = isFromSource =>
                 module =>
                 {
-                    var methods = module
-                        .GlobalNamespace
+                    var methods = module.GlobalNamespace
                         .GetMember<NamedTypeSymbol>("C")
                         .GetMembers()
                         .OfType<MethodSymbol>()

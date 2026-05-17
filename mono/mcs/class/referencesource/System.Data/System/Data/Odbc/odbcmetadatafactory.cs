@@ -172,15 +172,13 @@ namespace System.Data.Odbc
 
             // replace the original table with the updated one
             metaDataCollectionsTable.AcceptChanges();
-            CollectionDataSet
-                .Tables
+            CollectionDataSet.Tables
                 .Remove(CollectionDataSet.Tables[DbMetaDataCollectionNames.MetaDataCollections]);
             CollectionDataSet.Tables.Add(metaDataCollectionsTable);
 
             if (restrictionsTable != null)
             {
-                CollectionDataSet
-                    .Tables
+                CollectionDataSet.Tables
                     .Remove(CollectionDataSet.Tables[DbMetaDataCollectionNames.Restrictions]);
                 CollectionDataSet.Tables.Add(restrictionsTable);
             }
@@ -781,8 +779,7 @@ namespace System.Data.Odbc
                 (retcode == ODBC32.RetCode.SUCCESS) || (retcode == ODBC32.RetCode.SUCCESS_WITH_INFO)
             )
             {
-                Common.SupportedJoinOperators supportedJoinOperators = Common
-                    .SupportedJoinOperators
+                Common.SupportedJoinOperators supportedJoinOperators = Common.SupportedJoinOperators
                     .None;
                 if ((int32Value & (Int32)ODBC32.SQL_OJ_CAPABILITIES.LEFT) != 0)
                 {

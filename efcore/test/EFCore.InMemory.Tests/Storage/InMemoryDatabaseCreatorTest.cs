@@ -45,8 +45,7 @@ public class InMemoryDatabaseCreatorTest
         var optionsBuilder = new DbContextOptionsBuilder();
         optionsBuilder.UseInMemoryDatabase(nameof(InMemoryDatabaseCreatorTest));
 
-        var contextServices = InMemoryTestHelpers
-            .Instance
+        var contextServices = InMemoryTestHelpers.Instance
             .CreateContextServices(serviceProvider, optionsBuilder.Options);
         return new InMemoryDatabaseCreator(contextServices.GetRequiredService<IDatabase>());
     }
@@ -63,8 +62,7 @@ public class InMemoryDatabaseCreatorTest
     {
         using (var context = new FraggleContext())
         {
-            context
-                .Fraggles
+            context.Fraggles
                 .AddRange(
                     new Fraggle { Id = 1, Name = "Gobo" },
                     new Fraggle { Id = 2, Name = "Monkey" },

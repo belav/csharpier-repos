@@ -688,8 +688,7 @@ namespace System.Xml
                 {
                     foreach (SchemaNotation scNot in schInfo.Notations.Values)
                     {
-                        dtNode
-                            .Notations
+                        dtNode.Notations
                             .SetNamedItem(
                                 new XmlNotation(
                                     scNot.Name.Name,

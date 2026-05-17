@@ -245,8 +245,7 @@ public sealed partial class QuicConnection : IAsyncDisposable
         {
             QUIC_HANDLE* handle;
             ThrowHelper.ThrowIfMsQuicError(
-                MsQuicApi
-                    .Api
+                MsQuicApi.Api
                     .ConnectionOpen(
                         MsQuicApi.Api.Registration,
                         &NativeCallback,
@@ -284,8 +283,7 @@ public sealed partial class QuicConnection : IAsyncDisposable
                 void*,
                 QUIC_CONNECTION_EVENT*,
                 int> nativeCallback = &NativeCallback;
-            MsQuicApi
-                .Api
+            MsQuicApi.Api
                 .SetCallbackHandler(_handle, nativeCallback, (void*)GCHandle.ToIntPtr(context));
         }
         catch
@@ -315,8 +313,7 @@ public sealed partial class QuicConnection : IAsyncDisposable
             _defaultCloseErrorCode = options.DefaultCloseErrorCode;
 
             if (
-                !options
-                    .RemoteEndPoint
+                !options.RemoteEndPoint
                     .TryParse(out string? host, out IPAddress? address, out int port)
             )
             {
@@ -395,8 +392,7 @@ public sealed partial class QuicConnection : IAsyncDisposable
                 unsafe
                 {
                     ThrowHelper.ThrowIfMsQuicError(
-                        MsQuicApi
-                            .Api
+                        MsQuicApi.Api
                             .ConnectionStart(
                                 _handle,
                                 _configuration,
@@ -554,8 +550,7 @@ public sealed partial class QuicConnection : IAsyncDisposable
         {
             unsafe
             {
-                MsQuicApi
-                    .Api
+                MsQuicApi.Api
                     .ConnectionShutdown(
                         _handle,
                         QUIC_CONNECTION_SHUTDOWN_FLAGS.NONE,
@@ -614,8 +609,7 @@ public sealed partial class QuicConnection : IAsyncDisposable
 
     private unsafe int HandleEventShutdownInitiatedByPeer(ref SHUTDOWN_INITIATED_BY_PEER_DATA data)
     {
-        _acceptQueue
-            .Writer
+        _acceptQueue.Writer
             .TryComplete(
                 ExceptionDispatchInfo.SetCurrentStackTrace(
                     ThrowHelper.GetConnectionAbortedException((long)data.ErrorCode)
@@ -783,8 +777,7 @@ public sealed partial class QuicConnection : IAsyncDisposable
         {
             unsafe
             {
-                MsQuicApi
-                    .Api
+                MsQuicApi.Api
                     .ConnectionShutdown(
                         _handle,
                         QUIC_CONNECTION_SHUTDOWN_FLAGS.NONE,
@@ -808,8 +801,7 @@ public sealed partial class QuicConnection : IAsyncDisposable
         }
 
         // Flush the queue and dispose all remaining streams.
-        _acceptQueue
-            .Writer
+        _acceptQueue.Writer
             .TryComplete(
                 ExceptionDispatchInfo.SetCurrentStackTrace(
                     new ObjectDisposedException(GetType().FullName)

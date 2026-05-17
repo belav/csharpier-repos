@@ -638,8 +638,7 @@ namespace System.Net.Http.Functional.Tests
             var content = new MockContent(contentBytes);
 
             Assert.True(
-                content
-                    .Headers
+                content.Headers
                     .TryAddWithoutValidation("Content-Type", $"text/plain;charset={charset}")
             );
 
@@ -941,8 +940,7 @@ namespace System.Net.Http.Functional.Tests
                     var cts = new CancellationTokenSource();
                     cts.Cancel();
 
-                    Stream receivedStream = await response
-                        .Content
+                    Stream receivedStream = await response.Content
                         .ReadAsStreamAsync(readStreamAsync, cts.Token);
                     Assert.IsType<MemoryStream>(receivedStream);
                     byte[] receivedBytes = (receivedStream as MemoryStream).ToArray();
@@ -983,8 +981,7 @@ namespace System.Net.Http.Functional.Tests
                     var cts = new CancellationTokenSource();
                     cts.Cancel();
 
-                    Stream receivedStream = await response
-                        .Content
+                    Stream receivedStream = await response.Content
                         .ReadAsStreamAsync(readStreamAsync, cts.Token);
                     var ms = new MemoryStream();
                     await receivedStream.CopyToAsync(ms);

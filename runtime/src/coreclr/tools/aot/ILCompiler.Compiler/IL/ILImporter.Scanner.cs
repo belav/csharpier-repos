@@ -190,11 +190,9 @@ namespace Internal.IL
                     if (_canonMethod.IsCanonicalMethod(CanonicalFormKind.Any))
                     {
                         _dependencies.Add(
-                            _compilation
-                                .NodeFactory
+                            _compilation.NodeFactory
                                 .MethodEntrypoint(
-                                    _compilation
-                                        .NodeFactory
+                                    _compilation.NodeFactory
                                         .TypeSystemContext
                                         .GetHelperEntryPoint(
                                             "SynchronizedMethodHelpers",
@@ -206,11 +204,9 @@ namespace Internal.IL
 
                         if (_canonMethod.RequiresInstMethodDescArg())
                             _dependencies.Add(
-                                _compilation
-                                    .NodeFactory
+                                _compilation.NodeFactory
                                     .MethodEntrypoint(
-                                        _compilation
-                                            .NodeFactory
+                                        _compilation.NodeFactory
                                             .TypeSystemContext
                                             .GetHelperEntryPoint(
                                                 "SynchronizedMethodHelpers",
@@ -255,8 +251,7 @@ namespace Internal.IL
 
             if (_canonMethod.RequiresInstMethodDescArg())
             {
-                return _compilation
-                    .NodeFactory
+                return _compilation.NodeFactory
                     .ReadyToRunHelperFromDictionaryLookup(
                         lookup.HelperId,
                         lookup.HelperObject,
@@ -268,8 +263,7 @@ namespace Internal.IL
                 Debug.Assert(
                     _canonMethod.RequiresInstArg() || _canonMethod.AcquiresInstMethodTableFromThis()
                 );
-                return _compilation
-                    .NodeFactory
+                return _compilation.NodeFactory
                     .ReadyToRunHelperFromTypeLookup(
                         lookup.HelperId,
                         lookup.HelperObject,
@@ -382,8 +376,7 @@ namespace Internal.IL
             )
                 ThrowHelper.ThrowBadImageFormatException();
 
-            _compilation
-                .NodeFactory
+            _compilation.NodeFactory
                 .MetadataManager
                 .GetDependenciesDueToAccess(
                     ref _dependencies,
@@ -585,8 +578,7 @@ namespace Internal.IL
                 {
                     // Constrained calls to methods on enum methods resolve to System.Enum's methods. System.Enum is a reference
                     // type though, so we would fail to resolve and box. We have a special path for those to avoid boxing.
-                    directMethod = _compilation
-                        .TypeSystemContext
+                    directMethod = _compilation.TypeSystemContext
                         .TryResolveConstrainedEnumMethod(constrained, method);
                 }
 
@@ -714,15 +706,13 @@ namespace Internal.IL
 
                 MethodDesc targetOfLookup;
                 if (_constrained.IsRuntimeDeterminedType)
-                    targetOfLookup = _compilation
-                        .TypeSystemContext
+                    targetOfLookup = _compilation.TypeSystemContext
                         .GetMethodForRuntimeDeterminedType(
                             targetMethod.GetTypicalMethodDefinition(),
                             (RuntimeDeterminedType)_constrained
                         );
                 else if (_constrained.HasInstantiation)
-                    targetOfLookup = _compilation
-                        .TypeSystemContext
+                    targetOfLookup = _compilation.TypeSystemContext
                         .GetMethodForInstantiatedType(
                             targetMethod.GetTypicalMethodDefinition(),
                             (InstantiatedType)_constrained
@@ -819,8 +809,7 @@ namespace Internal.IL
                             if (targetMethod.IsIntrinsic)
                             {
                                 if (
-                                    _factory
-                                        .TypeSystemContext
+                                    _factory.TypeSystemContext
                                         .IsSpecialUnboxingThunkTargetMethod(targetMethod)
                                 )
                                     hasHiddenParameter = false;
@@ -881,8 +870,7 @@ namespace Internal.IL
 
                     if (targetMethod.RequiresInstMethodDescArg())
                     {
-                        instParam = _compilation
-                            .NodeFactory
+                        instParam = _compilation.NodeFactory
                             .MethodGenericDictionary(concreteMethod);
                     }
                     else if (
@@ -891,8 +879,7 @@ namespace Internal.IL
                     )
                     {
                         // Ask for a constructed type symbol because we need the vtable to get to the dictionary
-                        instParam = _compilation
-                            .NodeFactory
+                        instParam = _compilation.NodeFactory
                             .ConstructedTypeSymbol(concreteMethod.OwningType);
                     }
 
@@ -1021,8 +1008,7 @@ namespace Internal.IL
                     while (_dependencies.Count > numDependenciesBeforeTargetDetermination)
                         _dependencies.RemoveAt(_dependencies.Count - 1);
 
-                    TypeDesc canonDelegateType = ctorMethod
-                        .OwningType
+                    TypeDesc canonDelegateType = ctorMethod.OwningType
                         .ConvertToCanonForm(CanonicalFormKind.Specific);
                     DelegateCreationInfo info = _compilation.GetDelegateCtor(
                         canonDelegateType,
@@ -1068,8 +1054,7 @@ namespace Internal.IL
             if (_methodIL is Internal.IL.Stubs.PInvokeILStubMethodIL)
                 return;
 
-            MethodDesc stub = _compilation
-                .PInvokeILProvider
+            MethodDesc stub = _compilation.PInvokeILProvider
                 .GetCalliStub(signature, ((MetadataType)_methodIL.OwningMethod.OwningType).Module);
 
             _dependencies.Add(_factory.CanonicalEntrypoint(stub), "calli");
@@ -1254,8 +1239,7 @@ namespace Internal.IL
             }
             else if (obj is MethodDesc method)
             {
-                _factory
-                    .MetadataManager
+                _factory.MetadataManager
                     .GetDependenciesDueToAccess(
                         ref _dependencies,
                         _factory,
@@ -1284,8 +1268,7 @@ namespace Internal.IL
             {
                 var field = (FieldDesc)obj;
 
-                _factory
-                    .MetadataManager
+                _factory.MetadataManager
                     .GetDependenciesDueToAccess(
                         ref _dependencies,
                         _factory,
@@ -1334,8 +1317,7 @@ namespace Internal.IL
             var field = (FieldDesc)_methodIL.GetObject(token);
             var canonField = (FieldDesc)_canonMethodIL.GetObject(token);
 
-            _compilation
-                .NodeFactory
+            _compilation.NodeFactory
                 .MetadataManager
                 .GetDependenciesDueToAccess(
                     ref _dependencies,
@@ -1365,8 +1347,7 @@ namespace Internal.IL
                         CanonicalFormKind.Specific
                     );
                     if (fieldOwningType != canonFieldOwningType)
-                        fieldToReport = _factory
-                            .TypeSystemContext
+                        fieldToReport = _factory.TypeSystemContext
                             .GetFieldForInstantiatedType(
                                 fieldToReport.GetTypicalFieldDefinition(),
                                 (InstantiatedType)canonFieldOwningType

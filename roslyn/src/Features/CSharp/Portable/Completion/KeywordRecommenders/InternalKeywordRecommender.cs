@@ -29,11 +29,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
         private static bool IsValidContextForAccessor(CSharpSyntaxContext context)
         {
             if (
-                context
-                    .TargetToken
+                context.TargetToken
                     .IsAccessorDeclarationContext<PropertyDeclarationSyntax>(context.Position)
-                || context
-                    .TargetToken
+                || context.TargetToken
                     .IsAccessorDeclarationContext<IndexerDeclarationSyntax>(context.Position)
             )
             {
@@ -49,8 +47,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
         )
         {
             if (
-                context
-                    .SyntaxTree
+                context.SyntaxTree
                     .IsGlobalMemberDeclarationContext(
                         context.Position,
                         SyntaxKindSet.AllGlobalMemberModifiers,

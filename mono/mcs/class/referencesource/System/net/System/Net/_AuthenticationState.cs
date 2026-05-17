@@ -163,8 +163,7 @@ namespace System.Net
 
             bool trustNewHost = true; // Assume trusted unless proven otherwise
 
-            string spnKey = httpWebRequest
-                .ChallengedUri
+            string spnKey = httpWebRequest.ChallengedUri
                 .GetParts(
                     UriComponents.Scheme
                         | UriComponents.Host
@@ -232,8 +231,7 @@ namespace System.Net
                 }
                 string spn = "HTTP/" + host;
                 spnKey =
-                    httpWebRequest
-                        .ChallengedUri
+                    httpWebRequest.ChallengedUri
                         .GetParts(UriComponents.SchemeAndServer, UriFormat.SafeUnescaped) + "/";
                 spnToken = new SpnToken(spn, trustNewHost);
                 AuthenticationManager.SpnDictionary.InternalSet(spnKey, spnToken);
@@ -606,8 +604,7 @@ namespace System.Net
                                     httpWebRequest.CurrentAuthenticationState == null
                                     || httpWebRequest.CurrentAuthenticationState.Authorization
                                         == null
-                                    || !httpWebRequest
-                                        .CurrentAuthenticationState
+                                    || !httpWebRequest.CurrentAuthenticationState
                                         .Authorization
                                         .MutuallyAuthenticated
                                 )

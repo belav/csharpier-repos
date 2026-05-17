@@ -38,16 +38,14 @@ namespace System.ServiceModel.Channels
             }
             catch (AuthenticationException exception)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new SecurityNegotiationException(exception.Message, exception)
                     );
             }
             catch (IOException ioException)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new SecurityNegotiationException(
                             SR.GetString(SR.NegotiationFailedIO, ioException.Message),
@@ -73,16 +71,14 @@ namespace System.ServiceModel.Channels
             }
             catch (AuthenticationException exception)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new SecurityNegotiationException(exception.Message, exception)
                     );
             }
             catch (IOException ioException)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new SecurityNegotiationException(
                             SR.GetString(SR.NegotiationFailedIO, ioException.Message),

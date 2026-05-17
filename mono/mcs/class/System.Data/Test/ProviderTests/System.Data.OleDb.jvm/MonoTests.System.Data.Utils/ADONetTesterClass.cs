@@ -67,8 +67,7 @@ namespace MonoTests.System.Data.Utils
             oleDBda.InsertCommand.Connection = Conn;
             oleDBda.UpdateCommand.Connection = Conn;
 
-            oleDBda
-                .DeleteCommand
+            oleDBda.DeleteCommand
                 .Parameters
                 .Add(
                     new Sys.Data.OleDb.OleDbParameter(
@@ -79,8 +78,7 @@ namespace MonoTests.System.Data.Utils
             oleDBda.DeleteCommand.Parameters["EmployeeID"].SourceVersion = DataRowVersion.Original;
             oleDBda.DeleteCommand.Parameters["EmployeeID"].SourceColumn = "EmployeeID";
 
-            oleDBda
-                .InsertCommand
+            oleDBda.InsertCommand
                 .Parameters
                 .Add(
                     new Sys.Data.OleDb.OleDbParameter(
@@ -88,8 +86,7 @@ namespace MonoTests.System.Data.Utils
                         Sys.Data.OleDb.OleDbType.Integer
                     )
                 );
-            oleDBda
-                .InsertCommand
+            oleDBda.InsertCommand
                 .Parameters
                 .Add(
                     new Sys.Data.OleDb.OleDbParameter(
@@ -98,8 +95,7 @@ namespace MonoTests.System.Data.Utils
                         20
                     )
                 );
-            oleDBda
-                .InsertCommand
+            oleDBda.InsertCommand
                 .Parameters
                 .Add(
                     new Sys.Data.OleDb.OleDbParameter(
@@ -112,8 +108,7 @@ namespace MonoTests.System.Data.Utils
             oleDBda.InsertCommand.Parameters["LastName"].SourceColumn = "LastName";
             oleDBda.InsertCommand.Parameters["FirstName"].SourceColumn = "FirstName";
 
-            oleDBda
-                .UpdateCommand
+            oleDBda.UpdateCommand
                 .Parameters
                 .Add(
                     new Sys.Data.OleDb.OleDbParameter(
@@ -122,8 +117,7 @@ namespace MonoTests.System.Data.Utils
                         30
                     )
                 );
-            oleDBda
-                .UpdateCommand
+            oleDBda.UpdateCommand
                 .Parameters
                 .Add(
                     new Sys.Data.OleDb.OleDbParameter(
@@ -159,25 +153,21 @@ namespace MonoTests.System.Data.Utils
             Sqlda.InsertCommand.Connection = Conn;
             Sqlda.UpdateCommand.Connection = Conn;
 
-            Sqlda
-                .DeleteCommand
+            Sqlda.DeleteCommand
                 .Parameters
                 .Add(new Sys.Data.SqlClient.SqlParameter("@EmployeeID", DbType.Int32));
             Sqlda.DeleteCommand.Parameters["@EmployeeID"].SourceVersion = DataRowVersion.Original;
             Sqlda.DeleteCommand.Parameters["@EmployeeID"].SourceColumn = "EmployeeID";
 
-            Sqlda
-                .InsertCommand
+            Sqlda.InsertCommand
                 .Parameters
                 .Add(new Sys.Data.SqlClient.SqlParameter("@EmployeeID", DbType.Int32));
-            Sqlda
-                .InsertCommand
+            Sqlda.InsertCommand
                 .Parameters
                 .Add(
                     new Sys.Data.SqlClient.SqlParameter("@LastName", Sys.Data.SqlDbType.VarChar, 20)
                 );
-            Sqlda
-                .InsertCommand
+            Sqlda.InsertCommand
                 .Parameters
                 .Add(
                     new Sys.Data.SqlClient.SqlParameter(
@@ -190,12 +180,10 @@ namespace MonoTests.System.Data.Utils
             Sqlda.InsertCommand.Parameters["@LastName"].SourceColumn = "LastName";
             Sqlda.InsertCommand.Parameters["@FirstName"].SourceColumn = "FirstName";
 
-            Sqlda
-                .UpdateCommand
+            Sqlda.UpdateCommand
                 .Parameters
                 .Add(new Sys.Data.SqlClient.SqlParameter("@Title", Sys.Data.SqlDbType.VarChar, 30));
-            Sqlda
-                .UpdateCommand
+            Sqlda.UpdateCommand
                 .Parameters
                 .Add(new Sys.Data.SqlClient.SqlParameter("@EmployeeID", DbType.Int32));
             Sqlda.UpdateCommand.Parameters["@EmployeeID"].SourceColumn = "EmployeeID";
@@ -513,8 +501,7 @@ namespace MonoTests.System.Data.Utils
             IDbCommand ICmd = Ida.SelectCommand;
             IDbConnection IConn = ICmd.Connection;
             IDataReader Idr;
-            IConn.ConnectionString = MonoTests
-                .System
+            IConn.ConnectionString = MonoTests.System
                 .Data
                 .Utils
                 .ConnectedDataProvider
@@ -666,8 +653,7 @@ namespace MonoTests.System.Data.Utils
             IDbDataAdapter Ida = (IDbDataAdapter)dbDA;
             IDbCommand ICmd = Ida.SelectCommand;
             IDbConnection IConn = ICmd.Connection;
-            IConn.ConnectionString = MonoTests
-                .System
+            IConn.ConnectionString = MonoTests.System
                 .Data
                 .Utils
                 .ConnectedDataProvider
@@ -1841,8 +1827,7 @@ namespace MonoTests.System.Data.Utils
             IDbConnection IConn = ICmd.Connection;
             if (!sqlConnectionString)
             {
-                IConn.ConnectionString = MonoTests
-                    .System
+                IConn.ConnectionString = MonoTests.System
                     .Data
                     .Utils
                     .ConnectedDataProvider
@@ -1981,8 +1966,7 @@ namespace MonoTests.System.Data.Utils
             IDbDataAdapter Ida = (IDbDataAdapter)dbDA;
             IDbCommand ICmd = Ida.SelectCommand;
             IDbConnection IConn = ICmd.Connection;
-            IConn.ConnectionString = MonoTests
-                .System
+            IConn.ConnectionString = MonoTests.System
                 .Data
                 .Utils
                 .ConnectedDataProvider
@@ -2105,8 +2089,7 @@ namespace MonoTests.System.Data.Utils
             IDbDataAdapter Ida = (IDbDataAdapter)dbDA;
             IDbCommand ICmd = Ida.SelectCommand;
             IDbConnection IConn = ICmd.Connection;
-            IConn.ConnectionString = MonoTests
-                .System
+            IConn.ConnectionString = MonoTests.System
                 .Data
                 .Utils
                 .ConnectedDataProvider
@@ -2324,8 +2307,7 @@ namespace MonoTests.System.Data.Utils
             IDbDataAdapter Ida = (IDbDataAdapter)dbDA;
             IDbCommand ICmd = Ida.SelectCommand;
             IDbConnection IConn = ICmd.Connection;
-            IConn.ConnectionString = MonoTests
-                .System
+            IConn.ConnectionString = MonoTests.System
                 .Data
                 .Utils
                 .ConnectedDataProvider
@@ -2581,8 +2563,7 @@ namespace MonoTests.System.Data.Utils
             IDbDataAdapter Ida = (IDbDataAdapter)dbDA;
             IDbCommand ICmd = Ida.SelectCommand;
             IDbConnection IConn = ICmd.Connection;
-            IConn.ConnectionString = MonoTests
-                .System
+            IConn.ConnectionString = MonoTests.System
                 .Data
                 .Utils
                 .ConnectedDataProvider

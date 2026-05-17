@@ -23,8 +23,7 @@ namespace Microsoft.CodeAnalysis.Editor.Xaml
         public static string GetFilePath(this ITextBuffer textBuffer)
         {
             if (
-                textBuffer
-                    .Properties
+                textBuffer.Properties
                     .TryGetProperty<ITextDocument>(typeof(ITextDocument), out var textDoc)
             )
             {
@@ -42,8 +41,7 @@ namespace Microsoft.CodeAnalysis.Editor.Xaml
             }
 
             // There has to be a match
-            return document
-                .Project
+            return document.Project
                 .Solution
                 .Projects
                 .Single(p => p.SupportsCompilation && p.FilePath == document.Project.FilePath);

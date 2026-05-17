@@ -32,8 +32,7 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.VisualBasic
             await base.InitializeAsync();
 
             // reset relevant global options to default values:
-            var globalOptions = await TestServices
-                .Shell
+            var globalOptions = await TestServices.Shell
                 .GetComponentModelServiceAsync<IGlobalOptionService>(
                     HangMitigatingCancellationToken
                 );
@@ -71,21 +70,18 @@ End Module";
             await TestServices.InlineRename.InvokeAsync(HangMitigatingCancellationToken);
 
             MarkupTestFile.GetSpans(markup, out var _, out var renameSpans);
-            var tags = await TestServices
-                .Editor
+            var tags = await TestServices.Editor
                 .GetRenameTagsAsync(HangMitigatingCancellationToken);
             var tagSpans = tags.SelectAsArray(tag => new TextSpan(tag.Span.Start, tag.Span.Length));
             AssertEx.SetEqual(renameSpans, tagSpans);
 
-            await TestServices
-                .Input
+            await TestServices.Input
                 .SendWithoutActivateAsync(
                     [VirtualKeyCode.VK_Y, VirtualKeyCode.RETURN],
                     HangMitigatingCancellationToken
                 );
             await TestServices.Workspace.WaitForRenameAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .TextEqualsAsync(
                     @"
 Imports System
@@ -131,26 +127,22 @@ Module Program
 End Module";
             await SetUpEditorAsync(markup, HangMitigatingCancellationToken);
             await TestServices.InlineRename.InvokeAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .InlineRename
+            await TestServices.InlineRename
                 .ToggleIncludeCommentsAsync(HangMitigatingCancellationToken);
 
             MarkupTestFile.GetSpans(markup, out var _, out var renameSpans);
-            var tags = await TestServices
-                .Editor
+            var tags = await TestServices.Editor
                 .GetRenameTagsAsync(HangMitigatingCancellationToken);
             var tagSpans = tags.SelectAsArray(tag => new TextSpan(tag.Span.Start, tag.Span.Length));
             AssertEx.SetEqual(renameSpans, tagSpans);
 
-            await TestServices
-                .Input
+            await TestServices.Input
                 .SendWithoutActivateAsync(
                     [VirtualKeyCode.VK_Y, VirtualKeyCode.RETURN],
                     HangMitigatingCancellationToken
                 );
             await TestServices.Workspace.WaitForRenameAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .TextEqualsAsync(
                     @"
 Imports System
@@ -191,26 +183,22 @@ End Module";
             await SetUpEditorAsync(markup, HangMitigatingCancellationToken);
 
             await TestServices.InlineRename.InvokeAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .InlineRename
+            await TestServices.InlineRename
                 .ToggleIncludeStringsAsync(HangMitigatingCancellationToken);
 
             MarkupTestFile.GetSpans(markup, out var _, out var renameSpans);
-            var tags = await TestServices
-                .Editor
+            var tags = await TestServices.Editor
                 .GetRenameTagsAsync(HangMitigatingCancellationToken);
             var tagSpans = tags.SelectAsArray(tag => new TextSpan(tag.Span.Start, tag.Span.Length));
             AssertEx.SetEqual(renameSpans, tagSpans);
 
-            await TestServices
-                .Input
+            await TestServices.Input
                 .SendWithoutActivateAsync(
                     [VirtualKeyCode.VK_Y, VirtualKeyCode.RETURN],
                     HangMitigatingCancellationToken
                 );
             await TestServices.Workspace.WaitForRenameAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .TextEqualsAsync(
                     @"
 Imports System
@@ -246,26 +234,22 @@ End Class";
             await SetUpEditorAsync(markup, HangMitigatingCancellationToken);
 
             await TestServices.InlineRename.InvokeAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .InlineRename
+            await TestServices.InlineRename
                 .ToggleIncludeOverloadsAsync(HangMitigatingCancellationToken);
 
             MarkupTestFile.GetSpans(markup, out var _, out var renameSpans);
-            var tags = await TestServices
-                .Editor
+            var tags = await TestServices.Editor
                 .GetRenameTagsAsync(HangMitigatingCancellationToken);
             var tagSpans = tags.SelectAsArray(tag => new TextSpan(tag.Span.Start, tag.Span.Length));
             AssertEx.SetEqual(renameSpans, tagSpans);
 
-            await TestServices
-                .Input
+            await TestServices.Input
                 .SendWithoutActivateAsync(
                     [VirtualKeyCode.VK_Y, VirtualKeyCode.RETURN],
                     HangMitigatingCancellationToken
                 );
             await TestServices.Workspace.WaitForRenameAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .TextEqualsAsync(
                     @"
 Interface I
@@ -296,21 +280,18 @@ End Class";
             await TestServices.InlineRename.InvokeAsync(HangMitigatingCancellationToken);
 
             MarkupTestFile.GetSpans(markup, out var _, out var renameSpans);
-            var tags = await TestServices
-                .Editor
+            var tags = await TestServices.Editor
                 .GetRenameTagsAsync(HangMitigatingCancellationToken);
             var tagSpans = tags.SelectAsArray(tag => new TextSpan(tag.Span.Start, tag.Span.Length));
             AssertEx.SetEqual(renameSpans, tagSpans);
 
-            await TestServices
-                .Input
+            await TestServices.Input
                 .SendWithoutActivateAsync(
                     ["Custom", VirtualKeyCode.RETURN],
                     HangMitigatingCancellationToken
                 );
             await TestServices.Workspace.WaitForRenameAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .TextEqualsAsync(
                     @"
 Imports System
@@ -337,18 +318,15 @@ End Class";
             await TestServices.InlineRename.InvokeAsync(HangMitigatingCancellationToken);
 
             MarkupTestFile.GetSpans(markup, out var _, out var renameSpans);
-            var tags = await TestServices
-                .Editor
+            var tags = await TestServices.Editor
                 .GetRenameTagsAsync(HangMitigatingCancellationToken);
             var tagSpans = tags.SelectAsArray(tag => new TextSpan(tag.Span.Start, tag.Span.Length));
             AssertEx.SetEqual(renameSpans, tagSpans);
 
-            await TestServices
-                .Input
+            await TestServices.Input
                 .SendWithoutActivateAsync("Custom", HangMitigatingCancellationToken);
             await TestServices.Workspace.WaitForRenameAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .TextEqualsAsync(
                     @"
 Imports System
@@ -378,18 +356,15 @@ End Class";
             await TestServices.InlineRename.InvokeAsync(HangMitigatingCancellationToken);
 
             MarkupTestFile.GetSpans(markup, out _, out var renameSpans);
-            var tags = await TestServices
-                .Editor
+            var tags = await TestServices.Editor
                 .GetRenameTagsAsync(HangMitigatingCancellationToken);
             var tagSpans = tags.SelectAsArray(tag => new TextSpan(tag.Span.Start, tag.Span.Length));
             AssertEx.SetEqual(renameSpans, tagSpans);
 
-            await TestServices
-                .Input
+            await TestServices.Input
                 .SendWithoutActivateAsync("Custom", HangMitigatingCancellationToken);
             await TestServices.Workspace.WaitForRenameAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .TextEqualsAsync(
                     @"
 Imports System
@@ -423,18 +398,15 @@ End Class";
             await TestServices.InlineRename.InvokeAsync(HangMitigatingCancellationToken);
 
             MarkupTestFile.GetSpans(markup, out _, out var renameSpans);
-            var tags = await TestServices
-                .Editor
+            var tags = await TestServices.Editor
                 .GetRenameTagsAsync(HangMitigatingCancellationToken);
             var tagSpans = tags.SelectAsArray(tag => new TextSpan(tag.Span.Start, tag.Span.Length));
             AssertEx.SetEqual(renameSpans, tagSpans);
 
-            await TestServices
-                .Input
+            await TestServices.Input
                 .SendWithoutActivateAsync("Custom", HangMitigatingCancellationToken);
             await TestServices.Workspace.WaitForRenameAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .TextEqualsAsync(
                     @"
 Imports System
@@ -464,21 +436,18 @@ End Class";
             await TestServices.InlineRename.InvokeAsync(HangMitigatingCancellationToken);
 
             MarkupTestFile.GetSpans(markup, out var _, out var renameSpans);
-            var tags = await TestServices
-                .Editor
+            var tags = await TestServices.Editor
                 .GetRenameTagsAsync(HangMitigatingCancellationToken);
             var tagSpans = tags.SelectAsArray(tag => new TextSpan(tag.Span.Start, tag.Span.Length));
             AssertEx.SetEqual(renameSpans, tagSpans);
 
-            await TestServices
-                .Input
+            await TestServices.Input
                 .SendWithoutActivateAsync(
                     ["Custom", VirtualKeyCode.RETURN],
                     HangMitigatingCancellationToken
                 );
             await TestServices.Workspace.WaitForRenameAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .TextEqualsAsync(
                     @"
 Imports System
@@ -504,14 +473,12 @@ End Class";
             await TestServices.InlineRename.InvokeAsync(HangMitigatingCancellationToken);
 
             MarkupTestFile.GetSpans(markup, out var _, out var renameSpans);
-            var tags = await TestServices
-                .Editor
+            var tags = await TestServices.Editor
                 .GetRenameTagsAsync(HangMitigatingCancellationToken);
             var tagSpans = tags.SelectAsArray(tag => new TextSpan(tag.Span.Start, tag.Span.Length));
             AssertEx.SetEqual(renameSpans, tagSpans);
 
-            await TestServices
-                .Input
+            await TestServices.Input
                 .SendWithoutActivateAsync(
                     ["Custom", VirtualKeyCode.RETURN],
                     HangMitigatingCancellationToken
@@ -520,8 +487,7 @@ End Class";
             try
             {
                 // This is the expected behavior
-                await TestServices
-                    .EditorVerifier
+                await TestServices.EditorVerifier
                     .TextEqualsAsync(
                         @"
 Imports System
@@ -535,8 +501,7 @@ End Class",
             catch (XunitException)
             {
                 // But sometimes we get this instead
-                await TestServices
-                    .EditorVerifier
+                await TestServices.EditorVerifier
                     .TextEqualsAsync(
                         @"
 Imports System

@@ -34,8 +34,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
         )
         {
             return (context.IsGlobalStatementContext && context.SyntaxTree.IsScript())
-                || context
-                    .SyntaxTree
+                || context.SyntaxTree
                     .IsGlobalMemberDeclarationContext(
                         context.Position,
                         SyntaxKindSet.AllGlobalMemberModifiers,

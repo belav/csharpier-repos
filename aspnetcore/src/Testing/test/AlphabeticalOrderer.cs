@@ -17,8 +17,7 @@ public class AlphabeticalOrderer : ITestCaseOrderer
         var result = testCases.ToList();
         result.Sort(
             (x, y) =>
-                StringComparer
-                    .OrdinalIgnoreCase
+                StringComparer.OrdinalIgnoreCase
                     .Compare(x.TestMethod.Method.Name, y.TestMethod.Method.Name)
         );
         return result;

@@ -152,8 +152,7 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
                 testAssemblyName + ".dll"
             );
 
-            SharedState
-                .DotNetWithNetCoreApp
+            SharedState.DotNetWithNetCoreApp
                 .Exec(app.AppDll)
                 .EnableTracingAndCaptureOutputs()
                 .Execute()
@@ -215,8 +214,7 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
                         SharedState.DotNetWithNetCoreApp.GreatestVersionSharedFxPath,
                         $"{testAssemblyName}.dll"
                     );
-                SharedState
-                    .DotNetWithNetCoreApp
+                SharedState.DotNetWithNetCoreApp
                     .Exec(
                         Constants.AdditionalDeps.CommandLineArgument,
                         additionalDependency.DepsJson,

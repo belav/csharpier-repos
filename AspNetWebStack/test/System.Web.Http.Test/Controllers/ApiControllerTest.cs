@@ -68,8 +68,7 @@ namespace System.Web.Http
                     );
                     return tcs.Task;
                 });
-            controllerDescriptor
-                .Configuration
+            controllerDescriptor.Configuration
                 .Services
                 .Replace(typeof(IHttpActionInvoker), mockInvoker.Object);
 
@@ -112,8 +111,7 @@ namespace System.Web.Http
                         MethodInfo = testDelegate.Method,
                     };
                 });
-            controllerDescriptor
-                .Configuration
+            controllerDescriptor.Configuration
                 .Services
                 .Replace(typeof(IHttpActionSelector), mockSelector.Object);
 
@@ -434,10 +432,11 @@ namespace System.Web.Http
                     )
                 )
                 .Returns(() =>
-                    Task.Factory.StartNew(() =>
-                    {
-                        log.Add("model binding");
-                    })
+                    Task.Factory
+                        .StartNew(() =>
+                        {
+                            log.Add("model binding");
+                        })
                 );
             binderMock
                 .Setup(b => b.GetBinding(It.IsAny<HttpActionDescriptor>()))
@@ -538,22 +537,20 @@ namespace System.Web.Http
                     )
                 )
                 .Returns(() =>
-                    Task.Factory.StartNew(() =>
-                    {
-                        log.Add("action");
-                        return new HttpResponseMessage();
-                    })
+                    Task.Factory
+                        .StartNew(() =>
+                        {
+                            log.Add("action");
+                            return new HttpResponseMessage();
+                        })
                 );
-            controllerContext
-                .Configuration
+            controllerContext.Configuration
                 .Services
                 .Replace(typeof(IHttpActionInvoker), invokerMock.Object);
-            controllerContext
-                .Configuration
+            controllerContext.Configuration
                 .Services
                 .Replace(typeof(IHttpActionSelector), selectorMock.Object);
-            controllerContext
-                .Configuration
+            controllerContext.Configuration
                 .Services
                 .Replace(typeof(IActionValueBinder), binderMock.Object);
 
@@ -627,8 +624,7 @@ namespace System.Web.Http
         [Fact]
         public void RequestPropertyGetterSetterWorks()
         {
-            Assert
-                .Reflection
+            Assert.Reflection
                 .Property(
                     new Mock<ApiController>().Object,
                     c => c.Request,
@@ -641,8 +637,7 @@ namespace System.Web.Http
         [Fact]
         public void ConfigurationPropertyGetterSetterWorks()
         {
-            Assert
-                .Reflection
+            Assert.Reflection
                 .Property(
                     new Mock<ApiController>().Object,
                     c => c.Configuration,
@@ -672,8 +667,7 @@ namespace System.Web.Http
                 }
             );
 
-            controller
-                .ModelState
+            controller.ModelState
                 .Add(
                     "a",
                     new ModelState()
@@ -1015,8 +1009,7 @@ namespace System.Web.Http
             controllerContext.ControllerDescriptor = controllerDescriptor;
             controllerContext.Controller = controller;
             controllerContext.Configuration.Services.Add(typeof(IExceptionLogger), exceptionLogger);
-            controllerContext
-                .Configuration
+            controllerContext.Configuration
                 .Services
                 .Replace(typeof(IExceptionHandler), exceptionHandler);
             controllerContext.Configuration.Filters.Add(CreateStubExceptionFilter());

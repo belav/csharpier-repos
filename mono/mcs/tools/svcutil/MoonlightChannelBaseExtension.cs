@@ -176,8 +176,7 @@ namespace Mono.ServiceContractTool
             creator.Name = "CreateChannel";
             creator.Attributes = MemberAttributes.Family | MemberAttributes.Override;
             creator.ReturnType = gt;
-            creator
-                .Statements
+            creator.Statements
                 .Add(
                     new CodeMethodReturnStatement(
                         new CodeCastExpression(
@@ -412,11 +411,12 @@ namespace Mono.ServiceContractTool
             if (cm.ReturnType.BaseType == "System.Void")
                 cm.Statements.Add(new CodeExpressionStatement(call));
             else
-                cm.Statements.Add(
-                    new CodeMethodReturnStatement(
-                        new CodeCastExpression(context.SyncMethod.ReturnType, call)
-                    )
-                );
+                cm.Statements
+                    .Add(
+                        new CodeMethodReturnStatement(
+                            new CodeCastExpression(context.SyncMethod.ReturnType, call)
+                        )
+                    );
         }
 
         public void FixupAsync()
@@ -497,18 +497,18 @@ namespace Mono.ServiceContractTool
             if (cm.ReturnType.BaseType == "System.Void")
                 cm.Statements.Add(new CodeExpressionStatement(ret));
             else
-                cm.Statements.Add(
-                    new CodeMethodReturnStatement(
-                        new CodeCastExpression(context.EndMethod.ReturnType, ret)
-                    )
-                );
+                cm.Statements
+                    .Add(
+                        new CodeMethodReturnStatement(
+                            new CodeCastExpression(context.EndMethod.ReturnType, ret)
+                        )
+                    );
         }
 
         void AddMethodParam(CodeMemberMethod cm, Type type, string name)
         {
-            cm.Parameters.Add(
-                new CodeParameterDeclarationExpression(new CodeTypeReference(type), name)
-            );
+            cm.Parameters
+                .Add(new CodeParameterDeclarationExpression(new CodeTypeReference(type), name));
         }
     }
 }

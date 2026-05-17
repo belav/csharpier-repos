@@ -37,8 +37,7 @@ namespace System.Runtime.InteropServices
                 );
                 perm.Demand();
 #endif//FEATURE_CAS_POLICY
-                System
-                    .Runtime
+                System.Runtime
                     .InteropServices
                     .ComEventsHelper
                     .Combine(target, sourceIid, dispid, handler);
@@ -69,8 +68,7 @@ namespace System.Runtime.InteropServices
                 );
                 perm.Demand();
 #endif//FEATURE_CAS_POLICY
-                System
-                    .Runtime
+                System.Runtime
                     .InteropServices
                     .ComEventsHelper
                     .Remove(target, sourceIid, dispid, handler);
@@ -143,8 +141,7 @@ namespace System.Runtime.InteropServices
             out int dispid
         )
         {
-            object[] comEventInterfaces = eventInfo
-                .DeclaringType
+            object[] comEventInterfaces = eventInfo.DeclaringType
                 .GetCustomAttributes(typeof(ComEventInterfaceAttribute), false);
 
             if (comEventInterfaces == null || comEventInterfaces.Length == 0)

@@ -49,8 +49,7 @@ namespace System.Activities
             {
                 if (value < 0 && value != Argument.UnspecifiedEvaluationOrder)
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .ArgumentOutOfRange(
                             "EvaluationOrder",
                             value,
@@ -370,8 +369,7 @@ namespace System.Activities
         {
             if (!this.IsInTree)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new InvalidOperationException(SR.ArgumentNotInTree(this.ArgumentType))
                     );

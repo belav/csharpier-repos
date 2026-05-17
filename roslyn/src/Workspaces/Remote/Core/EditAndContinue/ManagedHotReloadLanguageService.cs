@@ -90,8 +90,7 @@ internal sealed partial class ManagedHotReloadLanguageService : IManagedHotReloa
     }
 
     private static Solution GetCurrentCompileTimeSolution(Solution currentDesignTimeSolution) =>
-        currentDesignTimeSolution
-            .Services
+        currentDesignTimeSolution.Services
             .GetRequiredService<ICompileTimeSolutionProvider>()
             .GetCompileTimeSolution(currentDesignTimeSolution);
 

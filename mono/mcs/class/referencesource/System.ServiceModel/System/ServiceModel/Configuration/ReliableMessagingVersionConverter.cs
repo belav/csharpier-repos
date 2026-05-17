@@ -48,8 +48,7 @@ namespace System.ServiceModel.Configuration
                     case ConfigurationStrings.WSReliableMessagingFebruary2005:
                         return ReliableMessagingVersion.WSReliableMessagingFebruary2005;
                     default:
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperArgument(
                                 SR.GetString(SR.ConfigInvalidReliableMessagingVersionValue, version)
                             );
@@ -83,8 +82,7 @@ namespace System.ServiceModel.Configuration
                 }
                 else
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentOutOfRangeException(
                                 "value",

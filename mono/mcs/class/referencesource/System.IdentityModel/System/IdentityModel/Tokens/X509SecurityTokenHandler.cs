@@ -90,8 +90,7 @@ namespace System.IdentityModel.Tokens
         {
             if (customConfigElements == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("customConfigElements");
             }
 
@@ -108,8 +107,7 @@ namespace System.IdentityModel.Tokens
             foreach (XmlElement customConfigElement in configNodes)
             {
                 if (
-                    !StringComparer
-                        .Ordinal
+                    !StringComparer.Ordinal
                         .Equals(
                             customConfigElement.LocalName,
                             ConfigurationStrings.X509SecurityTokenHandlerRequirement
@@ -132,16 +130,14 @@ namespace System.IdentityModel.Tokens
                 foreach (XmlAttribute attribute in customConfigElement.Attributes)
                 {
                     if (
-                        StringComparer
-                            .OrdinalIgnoreCase
+                        StringComparer.OrdinalIgnoreCase
                             .Equals(attribute.LocalName, ConfigurationStrings.MapToWindows)
                     )
                     {
                         mapToWindows = XmlConvert.ToBoolean(attribute.Value.ToLowerInvariant());
                     }
                     else if (
-                        StringComparer
-                            .OrdinalIgnoreCase
+                        StringComparer.OrdinalIgnoreCase
                             .Equals(
                                 attribute.LocalName,
                                 ConfigurationStrings.X509CertificateValidator
@@ -151,8 +147,7 @@ namespace System.IdentityModel.Tokens
                         customValidator = attribute.Value.ToString();
                     }
                     else if (
-                        StringComparer
-                            .OrdinalIgnoreCase
+                        StringComparer.OrdinalIgnoreCase
                             .Equals(
                                 attribute.LocalName,
                                 ConfigurationStrings.X509CertificateRevocationMode
@@ -164,8 +159,7 @@ namespace System.IdentityModel.Tokens
                         string revocationModeString = attribute.Value.ToString();
 
                         if (
-                            StringComparer
-                                .OrdinalIgnoreCase
+                            StringComparer.OrdinalIgnoreCase
                                 .Equals(
                                     revocationModeString,
                                     ConfigurationStrings.X509RevocationModeNoCheck
@@ -175,8 +169,7 @@ namespace System.IdentityModel.Tokens
                             revocationMode = X509RevocationMode.NoCheck;
                         }
                         else if (
-                            StringComparer
-                                .OrdinalIgnoreCase
+                            StringComparer.OrdinalIgnoreCase
                                 .Equals(
                                     revocationModeString,
                                     ConfigurationStrings.X509RevocationModeOffline
@@ -186,8 +179,7 @@ namespace System.IdentityModel.Tokens
                             revocationMode = X509RevocationMode.Offline;
                         }
                         else if (
-                            StringComparer
-                                .OrdinalIgnoreCase
+                            StringComparer.OrdinalIgnoreCase
                                 .Equals(
                                     revocationModeString,
                                     ConfigurationStrings.X509RevocationModeOnline
@@ -198,8 +190,7 @@ namespace System.IdentityModel.Tokens
                         }
                         else
                         {
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
                                     new InvalidOperationException(
                                         SR.GetString(
@@ -212,8 +203,7 @@ namespace System.IdentityModel.Tokens
                         }
                     }
                     else if (
-                        StringComparer
-                            .OrdinalIgnoreCase
+                        StringComparer.OrdinalIgnoreCase
                             .Equals(
                                 attribute.LocalName,
                                 ConfigurationStrings.X509CertificateValidationMode
@@ -225,8 +215,7 @@ namespace System.IdentityModel.Tokens
                         string validationModeString = attribute.Value.ToString();
 
                         if (
-                            StringComparer
-                                .OrdinalIgnoreCase
+                            StringComparer.OrdinalIgnoreCase
                                 .Equals(
                                     validationModeString,
                                     ConfigurationStrings.X509CertificateValidationModeChainTrust
@@ -236,8 +225,7 @@ namespace System.IdentityModel.Tokens
                             certificateValidationMode = X509CertificateValidationMode.ChainTrust;
                         }
                         else if (
-                            StringComparer
-                                .OrdinalIgnoreCase
+                            StringComparer.OrdinalIgnoreCase
                                 .Equals(
                                     validationModeString,
                                     ConfigurationStrings.X509CertificateValidationModePeerOrChainTrust
@@ -248,8 +236,7 @@ namespace System.IdentityModel.Tokens
                                 X509CertificateValidationMode.PeerOrChainTrust;
                         }
                         else if (
-                            StringComparer
-                                .OrdinalIgnoreCase
+                            StringComparer.OrdinalIgnoreCase
                                 .Equals(
                                     validationModeString,
                                     ConfigurationStrings.X509CertificateValidationModePeerTrust
@@ -259,8 +246,7 @@ namespace System.IdentityModel.Tokens
                             certificateValidationMode = X509CertificateValidationMode.PeerTrust;
                         }
                         else if (
-                            StringComparer
-                                .OrdinalIgnoreCase
+                            StringComparer.OrdinalIgnoreCase
                                 .Equals(
                                     validationModeString,
                                     ConfigurationStrings.X509CertificateValidationModeNone
@@ -270,8 +256,7 @@ namespace System.IdentityModel.Tokens
                             certificateValidationMode = X509CertificateValidationMode.None;
                         }
                         else if (
-                            StringComparer
-                                .OrdinalIgnoreCase
+                            StringComparer.OrdinalIgnoreCase
                                 .Equals(
                                     validationModeString,
                                     ConfigurationStrings.X509CertificateValidationModeCustom
@@ -282,8 +267,7 @@ namespace System.IdentityModel.Tokens
                         }
                         else
                         {
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
                                     new InvalidOperationException(
                                         SR.GetString(
@@ -296,8 +280,7 @@ namespace System.IdentityModel.Tokens
                         }
                     }
                     else if (
-                        StringComparer
-                            .OrdinalIgnoreCase
+                        StringComparer.OrdinalIgnoreCase
                             .Equals(
                                 attribute.LocalName,
                                 ConfigurationStrings.X509TrustedStoreLocation
@@ -309,8 +292,7 @@ namespace System.IdentityModel.Tokens
                         string trustedStoreLocationString = attribute.Value.ToString();
 
                         if (
-                            StringComparer
-                                .OrdinalIgnoreCase
+                            StringComparer.OrdinalIgnoreCase
                                 .Equals(
                                     trustedStoreLocationString,
                                     ConfigurationStrings.X509TrustedStoreLocationCurrentUser
@@ -320,8 +302,7 @@ namespace System.IdentityModel.Tokens
                             trustedStoreLocation = StoreLocation.CurrentUser;
                         }
                         else if (
-                            StringComparer
-                                .OrdinalIgnoreCase
+                            StringComparer.OrdinalIgnoreCase
                                 .Equals(
                                     trustedStoreLocationString,
                                     ConfigurationStrings.X509TrustedStoreLocationLocalMachine
@@ -332,8 +313,7 @@ namespace System.IdentityModel.Tokens
                         }
                         else
                         {
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
                                     new InvalidOperationException(
                                         SR.GetString(
@@ -347,8 +327,7 @@ namespace System.IdentityModel.Tokens
                     }
                     else
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(
                                     SR.GetString(
@@ -375,8 +354,7 @@ namespace System.IdentityModel.Tokens
 
                 if (customValidatorType == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgument("value", SR.GetString(SR.ID7007, customValidatorType));
                 }
 
@@ -511,8 +489,7 @@ namespace System.IdentityModel.Tokens
                     WSSecurity10Constants.Attributes.ValueType,
                     null
                 );
-                return StringComparer
-                    .Ordinal
+                return StringComparer.Ordinal
                     .Equals(valueTypeUri, WSSecurity10Constants.X509TokenType);
             }
 
@@ -536,8 +513,7 @@ namespace System.IdentityModel.Tokens
         {
             if (securityKeyIdentifierClause == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("securityKeyIdentifierClause");
             }
 
@@ -595,8 +571,7 @@ namespace System.IdentityModel.Tokens
                 )
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new XmlException(
                             SR.GetString(
@@ -617,8 +592,7 @@ namespace System.IdentityModel.Tokens
 
             if (!StringComparer.Ordinal.Equals(valueTypeUri, WSSecurity10Constants.X509TokenType))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new XmlException(
                             SR.GetString(
@@ -658,8 +632,7 @@ namespace System.IdentityModel.Tokens
             }
             else
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new XmlException(SR.GetString(SR.ID4068)));
             }
 
@@ -698,8 +671,7 @@ namespace System.IdentityModel.Tokens
             X509SecurityToken x509Token = token as X509SecurityToken;
             if (x509Token == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(
                         "token",
                         SR.GetString(SR.ID0018, typeof(X509SecurityToken))
@@ -720,8 +692,7 @@ namespace System.IdentityModel.Tokens
                 }
                 catch (SecurityTokenValidationException e)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new SecurityTokenValidationException(
                                 SR.GetString(
@@ -744,8 +715,7 @@ namespace System.IdentityModel.Tokens
                 );
                 if (String.IsNullOrEmpty(issuer))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new SecurityTokenException(SR.GetString(SR.ID4175)));
                 }
 
@@ -857,8 +827,7 @@ namespace System.IdentityModel.Tokens
 
             if (securityKeyIdentifierClause == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("securityKeyIdentifierClause");
             }
 
@@ -895,8 +864,7 @@ namespace System.IdentityModel.Tokens
             X509SecurityToken x509Token = token as X509SecurityToken;
             if (x509Token == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(
                         "token",
                         SR.GetString(SR.ID0018, typeof(X509SecurityToken))

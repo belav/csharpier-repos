@@ -93,9 +93,8 @@ namespace System.Web.Compilation
                 {
                     foreach (object o in array)
                     {
-                        exp.Initializers.Add(
-                            GenerateExpressionForValue(null, o, valueType.GetElementType())
-                        );
+                        exp.Initializers
+                            .Add(GenerateExpressionForValue(null, o, valueType.GetElementType()));
                     }
                 }
                 rightExpr = exp;
@@ -293,8 +292,7 @@ namespace System.Web.Compilation
                         }
 
                         methCall.Parameters.Add(new CodePrimitiveExpression(s));
-                        methCall
-                            .Parameters
+                        methCall.Parameters
                             .Add(
                                 new CodePropertyReferenceExpression(
                                     BuildGlobalCodeTypeReferenceExpression(typeof(CultureInfo)),
@@ -443,8 +441,7 @@ namespace System.Web.Compilation
             );
             invokeExpr.Method.MethodName = "ToString";
             invokeExpr.Parameters.Add(value);
-            invokeExpr
-                .Parameters
+            invokeExpr.Parameters
                 .Add(
                     new CodePropertyReferenceExpression(
                         BuildGlobalCodeTypeReferenceExpression(typeof(CultureInfo)),

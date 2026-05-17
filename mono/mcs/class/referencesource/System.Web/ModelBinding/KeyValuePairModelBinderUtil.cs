@@ -21,8 +21,7 @@
                 ),
             };
 
-            IModelBinder binder = parentBindingContext
-                .ModelBinderProviders
+            IModelBinder binder = parentBindingContext.ModelBinderProviders
                 .GetBinder(modelBindingExecutionContext, propertyBindingContext);
             if (binder != null)
             {
@@ -30,8 +29,7 @@
                 {
                     object untypedModel = propertyBindingContext.Model;
                     model = ModelBinderUtil.CastOrDefault<TModel>(untypedModel);
-                    parentBindingContext
-                        .ValidationNode
+                    parentBindingContext.ValidationNode
                         .ChildNodes
                         .Add(propertyBindingContext.ValidationNode);
                     return true;

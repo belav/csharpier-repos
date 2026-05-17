@@ -31,8 +31,7 @@ public class MigrationsIdGeneratorTest
     [UseCulture("fa")]
     public void CreateId_uses_invariant_calendar()
     {
-        var invariantYear = CultureInfo
-            .InvariantCulture
+        var invariantYear = CultureInfo.InvariantCulture
             .Calendar
             .GetYear(DateTime.Today)
             .ToString();

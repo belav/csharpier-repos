@@ -192,8 +192,7 @@ namespace System.Data.Mapping.ViewGeneration.Validation
             string message;
             if (cSet is EntitySet)
             {
-                message = System
-                    .Data
+                message = System.Data
                     .Entity
                     .Strings
                     .ViewGen_KeyConstraint_Update_Violation_EntitySet(
@@ -214,16 +213,14 @@ namespace System.Data.Mapping.ViewGeneration.Validation
                 );
                 if (endMember != null)
                 {
-                    message = System
-                        .Data
+                    message = System.Data
                         .Entity
                         .Strings
                         .ViewGen_AssociationEndShouldBeMappedToKey(endMember.Name, table.Name);
                 }
                 else
                 {
-                    message = System
-                        .Data
+                    message = System.Data
                         .Entity
                         .Strings
                         .ViewGen_KeyConstraint_Update_Violation_AssociationSet(

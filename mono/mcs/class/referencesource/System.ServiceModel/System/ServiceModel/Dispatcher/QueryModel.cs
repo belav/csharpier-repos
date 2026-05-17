@@ -722,8 +722,7 @@ namespace System.ServiceModel.Dispatcher
             }
             else
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(SR.QueryCantGetStringForMovedIterator)
@@ -806,8 +805,7 @@ namespace System.ServiceModel.Dispatcher
             switch (op)
             {
                 default:
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperCritical(
                             new QueryProcessingException(QueryProcessingError.TypeMismatch)
                         );
@@ -970,8 +968,7 @@ namespace System.ServiceModel.Dispatcher
                     return QueryValueModel.Compare((double)x, (string)y, op);
                 }
             }
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(new QueryCompileException(QueryCompileError.InvalidComparison));
         }
 

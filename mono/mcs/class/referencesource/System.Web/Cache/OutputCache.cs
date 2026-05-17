@@ -644,8 +644,7 @@ namespace System.Web.Caching
             )
             {
                 // file dependencies have not changed--cache them with callback to remove OutputCacheEntry if they change
-                HttpRuntime
-                    .Cache
+                HttpRuntime.Cache
                     .InternalCache
                     .Insert(
                         depKey,
@@ -1051,8 +1050,7 @@ namespace System.Web.Caching
             // Now insert into the cache (use cache provider if possible, otherwise use internal cache)
             if (!useProvider)
             {
-                HttpRuntime
-                    .Cache
+                HttpRuntime.Cache
                     .InternalCache
                     .Insert(
                         fragmentKey,
@@ -1078,8 +1076,7 @@ namespace System.Web.Caching
                 if (dependencies != null)
                 {
                     // use Add and dispose dependencies if there's already one in the cache
-                    Object d = HttpRuntime
-                        .Cache
+                    Object d = HttpRuntime.Cache
                         .InternalCache
                         .Add(
                             depKey,
@@ -1215,8 +1212,7 @@ namespace System.Web.Caching
             // Now insert into the cache (use cache provider if possible, otherwise use internal cache)
             if (!useProvider)
             {
-                HttpRuntime
-                    .Cache
+                HttpRuntime.Cache
                     .InternalCache
                     .Insert(
                         rawResponseKey,
@@ -1249,8 +1245,7 @@ namespace System.Web.Caching
                 if (dependencies != null)
                 {
                     // use Add and dispose dependencies if there's already one in the cache
-                    Object d = HttpRuntime
-                        .Cache
+                    Object d = HttpRuntime.Cache
                         .InternalCache
                         .Add(
                             depKey,

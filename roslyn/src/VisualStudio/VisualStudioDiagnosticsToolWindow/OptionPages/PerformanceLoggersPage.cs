@@ -73,8 +73,7 @@ namespace Roslyn.VisualStudio.DiagnosticsWindow.OptionsPages
             SetRoslynLogger(loggerTypeNames, () => new OutputWindowLogger(isEnabled));
 
             // update loggers in remote process
-            var client = threadingContext
-                .JoinableTaskFactory
+            var client = threadingContext.JoinableTaskFactory
                 .Run(() =>
                     RemoteHostClient.TryGetClientAsync(workspaceServices, CancellationToken.None)
                 );
@@ -85,8 +84,7 @@ namespace Roslyn.VisualStudio.DiagnosticsWindow.OptionsPages
                     .Where(isEnabled)
                     .ToImmutableArray();
 
-                threadingContext
-                    .JoinableTaskFactory
+                threadingContext.JoinableTaskFactory
                     .Run(async () =>
                         _ = await client
                             .TryInvokeAsync<IRemoteProcessTelemetryService>(

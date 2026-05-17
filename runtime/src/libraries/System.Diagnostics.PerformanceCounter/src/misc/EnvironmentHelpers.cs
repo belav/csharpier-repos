@@ -49,8 +49,7 @@ namespace System
             using (WindowsIdentity wi = WindowsIdentity.GetCurrent(TokenAccessLevels.Query))
             {
                 if (
-                    !Interop
-                        .Advapi32
+                    !Interop.Advapi32
                         .GetTokenInformation(
                             wi.Token,
                             (uint)Interop.Advapi32.TOKEN_INFORMATION_CLASS.TokenIsAppContainer,

@@ -188,16 +188,14 @@ namespace System.Web.UI.WebControls.WebParts
                 typeof(PartChromeState)
             );
             _chromeState = new DropDownList();
-            _chromeState
-                .Items
+            _chromeState.Items
                 .Add(
                     new ListItem(
                         SR.GetString(SR.PartChromeState_Normal),
                         chromeStateConverter.ConvertToString(PartChromeState.Normal)
                     )
                 );
-            _chromeState
-                .Items
+            _chromeState.Items
                 .Add(
                     new ListItem(
                         SR.GetString(SR.PartChromeState_Minimized),

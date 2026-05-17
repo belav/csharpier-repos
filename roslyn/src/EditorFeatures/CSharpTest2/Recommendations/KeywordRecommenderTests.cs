@@ -23,8 +23,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         static KeywordRecommenderTests()
         {
             foreach (
-                var recommenderType in typeof(AbstractSyntacticSingleKeywordRecommender)
-                    .Assembly
+                var recommenderType in typeof(AbstractSyntacticSingleKeywordRecommender).Assembly
                     .GetTypes()
             )
             {

@@ -63,8 +63,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
         public ITagger<T> CreateTagger<T>(ITextBuffer buffer)
             where T : ITag
         {
-            var stateMachine = buffer
-                .Properties
+            var stateMachine = buffer.Properties
                 .GetOrCreateSingletonProperty(() =>
                     new StateMachine(
                         _threadingContext,
@@ -114,8 +113,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
                     }
 
                     if (
-                        textBuffer
-                            .Properties
+                        textBuffer.Properties
                             .TryGetProperty(typeof(StateMachine), out StateMachine stateMachine)
                     )
                     {
@@ -149,8 +147,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
                     var textBuffer = text.Container.TryGetTextBuffer();
                     if (
                         textBuffer != null
-                        && textBuffer
-                            .Properties
+                        && textBuffer.Properties
                             .TryGetProperty(typeof(StateMachine), out StateMachine stateMachine)
                         && stateMachine.CanInvokeRename(out _, cancellationToken: cancellationToken)
                     )

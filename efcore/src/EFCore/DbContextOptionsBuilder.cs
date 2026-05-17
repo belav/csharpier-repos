@@ -252,8 +252,7 @@ public class DbContextOptionsBuilder : IDbContextOptionsBuilderInfrastructure
                         for (var i = 0; i < categoriesArray.Length; i++)
                         {
                             if (
-                                eventId
-                                    .Name!
+                                eventId.Name!
                                     .StartsWith(
                                         categoriesArray[i],
                                         StringComparison.OrdinalIgnoreCase

@@ -112,8 +112,7 @@ namespace Microsoft.CodeAnalysis.UnitTests
         [Fact]
         public void SpecialTypeIsValueType()
         {
-            var comp = CSharp
-                .CSharpCompilation
+            var comp = CSharp.CSharpCompilation
                 .Create(
                     "c",
                     options: new CSharp.CSharpCompilationOptions(

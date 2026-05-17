@@ -1073,8 +1073,7 @@ public class RelationalModelBuilderTest : ModelBuilderTest
                                 )
                                 {
                                     Assert.IsType<PropertyBuilder<int>>(
-                                        genericBuilder
-                                            .Instance
+                                        genericBuilder.Instance
                                             .GetInfrastructure<PropertyBuilder<int>>()
                                     );
                                     Assert.IsAssignableFrom<IMutableRelationalPropertyOverrides>(
@@ -1116,8 +1115,7 @@ public class RelationalModelBuilderTest : ModelBuilderTest
             );
             Assert.Same(
                 fragment,
-                bookOwnership1
-                    .DeclaringEntityType
+                bookOwnership1.DeclaringEntityType
                     .GetMappingFragments(StoreObjectType.Table)
                     .Single()
             );
@@ -1173,8 +1171,7 @@ public class RelationalModelBuilderTest : ModelBuilderTest
                                 )
                                 {
                                     Assert.IsType<PropertyBuilder<Guid>>(
-                                        genericBuilder
-                                            .Instance
+                                        genericBuilder.Instance
                                             .GetInfrastructure<PropertyBuilder<Guid>>()
                                     );
                                     Assert.IsAssignableFrom<IMutableRelationalPropertyOverrides>(

@@ -1597,8 +1597,7 @@ namespace Microsoft.WebAssembly.Diagnostics
 
             if (sourceLinkDebugInfo != null)
             {
-                var sourceLinkContent = System
-                    .Text
+                var sourceLinkContent = System.Text
                     .Encoding
                     .UTF8
                     .GetString(sourceLinkDebugInfo, 0, sourceLinkDebugInfo.Length);
@@ -1680,8 +1679,7 @@ namespace Microsoft.WebAssembly.Diagnostics
                     PdbGuid.ToString("N").ToUpperInvariant()
                     + (IsPortableCodeView ? "FFFFFFFF" : PdbAge);
                 var key = $"{pdbName}/{pdbGuid}/{pdbName}";
-                SymbolStoreFile file = await debugStore
-                    .symbolStore
+                SymbolStoreFile file = await debugStore.symbolStore
                     .GetFile(new SymbolStoreKey(key, PdbName, false, PdbChecksums), token);
                 TriedToLoadSymbolsOnDemand = true;
                 if (file == null)
@@ -2134,8 +2132,7 @@ namespace Microsoft.WebAssembly.Diagnostics
                             new DebugItem
                             {
                                 Url = file_name,
-                                DataTask = context
-                                    .SdbAgent
+                                DataTask = context.SdbAgent
                                     .GetDataFromAssemblyAndPdbAsync(
                                         Path.GetFileName(unescapedFileName),
                                         false,
@@ -2334,8 +2331,7 @@ namespace Microsoft.WebAssembly.Diagnostics
             AssemblyInfo asm = assemblies.FirstOrDefault(a =>
                 a.Name.Equals(request.Assembly, StringComparison.OrdinalIgnoreCase)
             );
-            SourceFile sourceFile = asm
-                ?.Sources
+            SourceFile sourceFile = asm?.Sources
                 ?.SingleOrDefault(s =>
                     s.FilePath.Equals(request.File, StringComparison.OrdinalIgnoreCase)
                 );

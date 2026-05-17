@@ -16,11 +16,9 @@ public class ProducesContentBaseController : Controller
         if (result != null)
         {
             result.Formatters.Add(new PlainTextFormatter());
-            result
-                .Formatters
+            result.Formatters
                 .Add(new CustomFormatter("application/custom_ProducesContentBaseController"));
-            result
-                .Formatters
+            result.Formatters
                 .Add(
                     new CustomFormatter("application/custom_ProducesContentBaseController_Action")
                 );

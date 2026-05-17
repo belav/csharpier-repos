@@ -440,8 +440,7 @@ public class AssemblyTestLog : IAcceptFailureReports, IDisposable
             File.Delete(fileName);
         }
 
-        var serilogger = new LoggerConfiguration()
-            .Enrich
+        var serilogger = new LoggerConfiguration().Enrich
             .FromLogContext()
             .Enrich
             .With(new AssemblyLogTimestampOffsetEnricher(logStart))

@@ -112,8 +112,7 @@ internal partial class CircuitHost : IAsyncDisposable
     {
         Log.InitializationStarted(_logger);
 
-        return Renderer
-            .Dispatcher
+        return Renderer.Dispatcher
             .InvokeAsync(async () =>
             {
                 if (_initialized)
@@ -193,8 +192,7 @@ internal partial class CircuitHost : IAsyncDisposable
     {
         Log.DisposeStarted(_logger, CircuitId);
 
-        await Renderer
-            .Dispatcher
+        await Renderer.Dispatcher
             .InvokeAsync(async () =>
             {
                 if (_disposed)
@@ -435,8 +433,7 @@ internal partial class CircuitHost : IAsyncDisposable
         try
         {
             await HandleInboundActivityAsync(() =>
-                Renderer
-                    .Dispatcher
+                Renderer.Dispatcher
                     .InvokeAsync(() =>
                     {
                         Log.BeginInvokeDotNet(
@@ -489,8 +486,7 @@ internal partial class CircuitHost : IAsyncDisposable
         try
         {
             await HandleInboundActivityAsync(() =>
-                Renderer
-                    .Dispatcher
+                Renderer.Dispatcher
                     .InvokeAsync(() =>
                     {
                         if (!succeeded)
@@ -533,8 +529,7 @@ internal partial class CircuitHost : IAsyncDisposable
         try
         {
             await HandleInboundActivityAsync(() =>
-                Renderer
-                    .Dispatcher
+                Renderer.Dispatcher
                     .InvokeAsync(() =>
                     {
                         Log.ReceiveByteArraySuccess(_logger, id);
@@ -573,8 +568,7 @@ internal partial class CircuitHost : IAsyncDisposable
         try
         {
             return await HandleInboundActivityAsync(() =>
-                Renderer
-                    .Dispatcher
+                Renderer.Dispatcher
                     .InvokeAsync(() =>
                     {
                         return RemoteJSDataStream.ReceiveData(
@@ -615,8 +609,7 @@ internal partial class CircuitHost : IAsyncDisposable
 
         try
         {
-            return await Renderer
-                .Dispatcher
+            return await Renderer.Dispatcher
                 .InvokeAsync(async () => await dotNetStreamReference.Stream.ReadAsync(buffer));
         }
         catch (Exception ex)
@@ -645,8 +638,7 @@ internal partial class CircuitHost : IAsyncDisposable
 
         try
         {
-            return await Renderer
-                .Dispatcher
+            return await Renderer.Dispatcher
                 .InvokeAsync<DotNetStreamReference>(() =>
                 {
                     if (
@@ -691,8 +683,7 @@ internal partial class CircuitHost : IAsyncDisposable
         try
         {
             await HandleInboundActivityAsync(() =>
-                Renderer
-                    .Dispatcher
+                Renderer.Dispatcher
                     .InvokeAsync(() =>
                     {
                         Log.LocationChange(_logger, uri, CircuitId);
@@ -753,8 +744,7 @@ internal partial class CircuitHost : IAsyncDisposable
         try
         {
             var shouldContinueNavigation = await HandleInboundActivityAsync(() =>
-                Renderer
-                    .Dispatcher
+                Renderer.Dispatcher
                     .InvokeAsync(async () =>
                     {
                         Log.LocationChanging(_logger, uri, CircuitId);
@@ -940,8 +930,7 @@ internal partial class CircuitHost : IAsyncDisposable
     {
         Log.UpdateRootComponentsStarted(_logger);
 
-        return Renderer
-            .Dispatcher
+        return Renderer.Dispatcher
             .InvokeAsync(async () =>
             {
                 var webRootComponentManager = Renderer.GetOrCreateWebRootComponentManager();
@@ -968,8 +957,7 @@ internal partial class CircuitHost : IAsyncDisposable
                             shouldClearStore = true;
                             // We only do this if we have no root components. Otherwise, the state would have been
                             // provided during the start up process
-                            var appLifetime = _scope
-                                .ServiceProvider
+                            var appLifetime = _scope.ServiceProvider
                                 .GetRequiredService<ComponentStatePersistenceManager>();
                             await appLifetime.RestoreStateAsync(store);
                         }
@@ -977,8 +965,7 @@ internal partial class CircuitHost : IAsyncDisposable
                         // Retrieve the circuit handlers at this point.
                         _circuitHandlers =
                         [
-                            .. _scope
-                                .ServiceProvider
+                            .. _scope.ServiceProvider
                                 .GetServices<CircuitHandler>()
                                 .OrderBy(h => h.Order),
                         ];

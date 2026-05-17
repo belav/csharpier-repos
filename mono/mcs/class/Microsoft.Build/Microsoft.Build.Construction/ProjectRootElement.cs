@@ -401,8 +401,7 @@ namespace Microsoft.Build.Construction
                 {
                     if (parentGroup == null)
                         parentGroup = @group;
-                    var property = @group
-                        .Properties
+                    var property = @group.Properties
                         .Where(p =>
                             string.IsNullOrEmpty(p.Condition)
                             && p.Name.Equals(name, StringComparison.OrdinalIgnoreCase)

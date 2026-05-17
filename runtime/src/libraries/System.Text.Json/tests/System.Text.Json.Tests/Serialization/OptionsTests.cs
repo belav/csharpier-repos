@@ -859,8 +859,7 @@ namespace System.Text.Json.Serialization.Tests
 
             if (isCompatibilitySwitchExplicitlyDisabled)
             {
-                options
-                    .RuntimeConfigurationOptions
+                options.RuntimeConfigurationOptions
                     .Add("System.Text.Json.Serialization.EnableSourceGenReflectionFallback", false);
             }
 
@@ -937,8 +936,7 @@ namespace System.Text.Json.Serialization.Tests
                         JsonTestHelper.AssertJsonEqual("""{"Value":"value", "Thing":null}""", json);
 
                         // A converter can be resolved when looking up JsonSerializerOptions
-                        JsonConverter converter = JsonContext
-                            .Default
+                        JsonConverter converter = JsonContext.Default
                             .Options
                             .GetConverter(typeof(MyClass));
                         Assert.IsAssignableFrom<JsonConverter<MyClass>>(converter);
@@ -1259,8 +1257,7 @@ namespace System.Text.Json.Serialization.Tests
             Assert.Same(original, newOptions.TypeInfoResolver);
 
             // resolving metadata returns metadata tied to the new options
-            JsonTypeInfo typeInfo = newOptions
-                .TypeInfoResolver
+            JsonTypeInfo typeInfo = newOptions.TypeInfoResolver
                 .GetTypeInfo(typeof(int), newOptions);
             Assert.Same(typeInfo.Options, newOptions);
 

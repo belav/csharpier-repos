@@ -57,8 +57,7 @@ namespace System.ServiceModel.Security
         {
             if (authorizationContext == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("authorizationContext");
             }
 
@@ -126,8 +125,7 @@ namespace System.ServiceModel.Security
         {
             if (authorizationContext == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("authorizationContext");
             }
 
@@ -237,8 +235,7 @@ namespace System.ServiceModel.Security
 
                     if (versionNumber != 1)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new NotSupportedException(
                                     SR2.GetString(

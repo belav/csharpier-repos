@@ -95,8 +95,7 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
             if (useDecompiler)
             {
 #pragma warning disable SYSLIB0025  // 'SuppressIldasmAttribute' is obsolete: 'SuppressIldasmAttribute has no effect in .NET 6.0+.'
-                useDecompiler = !symbol
-                    .ContainingAssembly
+                useDecompiler = !symbol.ContainingAssembly
                     .GetAttributes()
                     .Any(static attribute =>
                         attribute.AttributeClass?.Name == nameof(SuppressIldasmAttribute)
@@ -202,8 +201,7 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
 
                 if (!useDecompiler)
                 {
-                    var sourceFromMetadataService = temporaryDocument
-                        .Project
+                    var sourceFromMetadataService = temporaryDocument.Project
                         .Services
                         .GetRequiredService<IMetadataAsSourceService>();
                     temporaryDocument = await sourceFromMetadataService
@@ -340,8 +338,7 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
                 try
                 {
                     var fullAssemblyName = containingAssembly.Identity.GetDisplayName();
-                    GlobalAssemblyCache
-                        .Instance
+                    GlobalAssemblyCache.Instance
                         .ResolvePartialName(
                             fullAssemblyName,
                             out assemblyLocation,
@@ -396,8 +393,7 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
         private static void AssertIsMainThread(MetadataAsSourceWorkspace workspace)
         {
             Contract.ThrowIfNull(workspace);
-            var threadingService = workspace
-                .Services
+            var threadingService = workspace.Services
                 .GetRequiredService<IWorkspaceThreadingServiceProvider>()
                 .Service;
             Contract.ThrowIfFalse(threadingService.IsOnMainThread);

@@ -32,8 +32,7 @@ namespace System.ServiceModel
             {
                 if (!NetNamedPipeSecurityModeHelper.IsDefined(value))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new ArgumentOutOfRangeException("value"));
                 }
                 this.mode = value;

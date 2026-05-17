@@ -164,8 +164,7 @@ namespace Microsoft.CodeAnalysis.ExtractInterface
             CancellationToken cancellationToken
         )
         {
-            var containingNamespaceDisplay = refactoringResult
-                .TypeToExtractFrom
+            var containingNamespaceDisplay = refactoringResult.TypeToExtractFrom
                 .ContainingNamespace
                 .IsGlobalNamespace
                 ? string.Empty
@@ -297,8 +296,7 @@ namespace Microsoft.CodeAnalysis.ExtractInterface
 
             var completedSolution = await GetFormattedSolutionAsync(
                     completedUnformattedSolution,
-                    symbolMapping
-                        .DocumentIdsToSymbolMap
+                    symbolMapping.DocumentIdsToSymbolMap
                         .Keys
                         .Concat(unformattedInterfaceDocument.Id),
                     extractInterfaceOptions.FallbackOptions,
@@ -331,8 +329,7 @@ namespace Microsoft.CodeAnalysis.ExtractInterface
                 )
                 .ConfigureAwait(false);
 
-            var document = symbolMapping
-                .AnnotatedSolution
+            var document = symbolMapping.AnnotatedSolution
                 .GetDocument(refactoringResult.DocumentToExtractFrom.Id);
 
             var (documentWithInterface, _) = await ExtractTypeHelpers
@@ -362,8 +359,7 @@ namespace Microsoft.CodeAnalysis.ExtractInterface
 
             var completedSolution = await GetFormattedSolutionAsync(
                     unformattedSolutionWithUpdatedType,
-                    symbolMapping
-                        .DocumentIdsToSymbolMap
+                    symbolMapping.DocumentIdsToSymbolMap
                         .Keys
                         .Concat(refactoringResult.DocumentToExtractFrom.Id),
                     extractInterfaceOptions.FallbackOptions,
@@ -397,8 +393,7 @@ namespace Microsoft.CodeAnalysis.ExtractInterface
                 name => !conflictingTypeNames.Contains(name)
             );
             var syntaxFactsService = document.GetLanguageService<ISyntaxFactsService>();
-            var notificationService = document
-                .Project
+            var notificationService = document.Project
                 .Solution
                 .Services
                 .GetService<INotificationService>();
@@ -413,8 +408,7 @@ namespace Microsoft.CodeAnalysis.ExtractInterface
                 cancellationToken
             );
 
-            var service = document
-                .Project
+            var service = document.Project
                 .Solution
                 .Services
                 .GetService<IExtractInterfaceOptionsService>();

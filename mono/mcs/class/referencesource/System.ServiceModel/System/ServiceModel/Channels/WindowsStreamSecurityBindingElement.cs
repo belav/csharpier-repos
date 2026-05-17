@@ -175,8 +175,7 @@ namespace System.ServiceModel.Channels
                 }
                 if (string.IsNullOrEmpty(protectionLevelString))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new XmlException(
                                 SR.GetString(

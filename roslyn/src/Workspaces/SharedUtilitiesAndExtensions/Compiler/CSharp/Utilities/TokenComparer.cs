@@ -67,8 +67,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
             // First check in a case insensitive manner.  This will put
             // everything that starts with an 'a' or 'A' above everything
             // that starts with a 'b' or 'B'.
-            var compare = CultureInfo
-                .InvariantCulture
+            var compare = CultureInfo.InvariantCulture
                 .CompareInfo
                 .Compare(
                     string1,
@@ -84,8 +83,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
 
             // Now, once we've grouped such that 'a' words and 'A' words are
             // together, sort such that 'a' words come before 'A' words.
-            return CultureInfo
-                .InvariantCulture
+            return CultureInfo.InvariantCulture
                 .CompareInfo
                 .Compare(
                     string1,

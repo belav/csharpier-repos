@@ -659,8 +659,7 @@ namespace Microsoft.CodeAnalysis.Emit
                 var previousTypeDef = symbolChanges.DefinitionMap.MapDefinition(typeDef);
                 if (
                     previousTypeDef != null
-                    && PreviousGeneration
-                        .GenerationOrdinals
+                    && PreviousGeneration.GenerationOrdinals
                         .TryGetValue(previousTypeDef, out int lastEmittedOrdinal)
                 )
                 {

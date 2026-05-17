@@ -18,8 +18,7 @@ namespace System.ServiceModel.Channels
         {
             if (acceptBufferSize <= 0)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentOutOfRangeException("acceptBufferSize"));
             }
 
@@ -78,8 +77,7 @@ namespace System.ServiceModel.Channels
         protected override SocketAsyncEventArgs Create()
         {
             SocketAsyncEventArgs eventArgs = new SocketAsyncEventArgs();
-            byte[] acceptBuffer = DiagnosticUtility
-                .Utility
+            byte[] acceptBuffer = DiagnosticUtility.Utility
                 .AllocateByteArray(this.acceptBufferSize);
             eventArgs.SetBuffer(acceptBuffer, 0, this.acceptBufferSize);
             return eventArgs;

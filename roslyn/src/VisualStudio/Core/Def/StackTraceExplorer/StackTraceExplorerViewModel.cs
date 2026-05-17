@@ -76,8 +76,7 @@ namespace Microsoft.VisualStudio.LanguageServices.StackTraceExplorer
             IsLoading = true;
             Frames.Clear();
             var cancellationToken = _threadingContext.DisposalToken;
-            System
-                .Threading
+            System.Threading
                 .Tasks
                 .Task
                 .Run(

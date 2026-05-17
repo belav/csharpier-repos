@@ -28,8 +28,7 @@ public class ProjectToAbstractType : IntegrationTest<ProjectToAbstractType.Datab
     {
         protected override void Seed(Context context)
         {
-            context
-                .EntityA
+            context.EntityA
                 .AddRange(
                     new[]
                     {

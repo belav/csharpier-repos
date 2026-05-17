@@ -27,8 +27,7 @@ namespace System.ServiceModel.Channels
         {
             if (value < 0)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentOutOfRangeException(
                             "value",
@@ -61,8 +60,7 @@ namespace System.ServiceModel.Channels
         {
             int valueByteCount = Encoding.UTF8.GetByteCount(value);
             int sizeByteCount = IntEncoder.GetEncodedSize(valueByteCount);
-            encodedBytes = DiagnosticUtility
-                .Utility
+            encodedBytes = DiagnosticUtility.Utility
                 .AllocateByteArray(checked(1 + sizeByteCount + valueByteCount));
             encodedBytes[0] = (byte)recordType;
             int offset = 1;
@@ -225,8 +223,7 @@ namespace System.ServiceModel.Channels
             int offset = messageFrame.Offset - spaceNeeded;
             if (offset < 0)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentOutOfRangeException(
                             "messageFrame.Offset",
@@ -325,8 +322,7 @@ namespace System.ServiceModel.Channels
             int offset = messageFrame.Offset - spaceNeeded;
             if (offset < 0)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentOutOfRangeException(
                             "messageFrame.Offset",

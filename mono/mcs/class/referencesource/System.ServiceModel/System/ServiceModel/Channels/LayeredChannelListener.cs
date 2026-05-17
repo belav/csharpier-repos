@@ -189,8 +189,7 @@ namespace System.ServiceModel.Channels
         {
             if (this.InnerChannelListener == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(SR.InnerListenerFactoryNotSet, this.GetType().ToString())
@@ -205,8 +204,7 @@ namespace System.ServiceModel.Channels
 
             if (innerChannelListener == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(SR.InnerListenerFactoryNotSet, this.GetType().ToString())
@@ -241,11 +239,8 @@ namespace System.ServiceModel.Channels
                     return;
                 }
 
-                IAsyncResult result = this.communicationObject.BeginOpen(
-                    timeout,
-                    onOpenComplete,
-                    this
-                );
+                IAsyncResult result = this.communicationObject
+                    .BeginOpen(timeout, onOpenComplete, this);
                 if (result.CompletedSynchronously)
                 {
                     this.communicationObject.EndOpen(result);
@@ -307,11 +302,8 @@ namespace System.ServiceModel.Channels
                     return;
                 }
 
-                IAsyncResult result = this.communicationObject.BeginClose(
-                    timeout,
-                    onCloseComplete,
-                    this
-                );
+                IAsyncResult result = this.communicationObject
+                    .BeginClose(timeout, onCloseComplete, this);
 
                 if (result.CompletedSynchronously)
                 {

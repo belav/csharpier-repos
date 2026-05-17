@@ -233,8 +233,7 @@ namespace System.Windows.Forms
         {
             if (Marshal.SizeOf<IntPtr>() == 8)
             {
-                Console
-                    .Error
+                Console.Error
                     .WriteLine(
                         "WARNING: The Carbon driver has not been ported to 64bits, and very few parts of Windows.Forms will work properly, or at all"
                     );
@@ -1443,8 +1442,7 @@ namespace System.Windows.Forms
             int yHotSpot
         )
         {
-            return Carbon
-                .Cursor
+            return Carbon.Cursor
                 .DefineCursor(bitmap, mask, cursor_pixel, mask_pixel, xHotSpot, yHotSpot);
         }
 

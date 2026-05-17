@@ -65,8 +65,7 @@ namespace System.ServiceModel.Description
         {
             if (workflowDefinitionContext == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("workflowDefinitionContext");
             }
 
@@ -82,8 +81,7 @@ namespace System.ServiceModel.Description
             {
                 if (!AddressFilterModeHelper.IsDefined(value))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new ArgumentOutOfRangeException("value"));
                 }
                 this.addressFilterMode = value;
@@ -182,20 +180,17 @@ namespace System.ServiceModel.Description
             }
             if (description.Behaviors == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument("description", SR2.GetString(SR2.NoBehaviors));
             }
             if (description.Endpoints == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument("description", SR2.GetString(SR2.NoEndpoints));
             }
 
             bool syncContextRegistered = false;
-            WorkflowRuntimeBehavior workflowRuntimeBehavior = description
-                .Behaviors
+            WorkflowRuntimeBehavior workflowRuntimeBehavior = description.Behaviors
                 .Find<WorkflowRuntimeBehavior>();
 
             if (workflowRuntimeBehavior == null)
@@ -204,8 +199,7 @@ namespace System.ServiceModel.Description
                 description.Behaviors.Add(workflowRuntimeBehavior);
             }
 
-            WorkflowPersistenceService persistenceService = workflowRuntimeBehavior
-                .WorkflowRuntime
+            WorkflowPersistenceService persistenceService = workflowRuntimeBehavior.WorkflowRuntime
                 .GetService<WorkflowPersistenceService>();
             if (persistenceService != null)
             {
@@ -215,8 +209,7 @@ namespace System.ServiceModel.Description
                     workflowRuntimeBehavior.WorkflowRuntime.StopRuntime();
                 }
                 workflowRuntimeBehavior.WorkflowRuntime.RemoveService(persistenceService);
-                workflowRuntimeBehavior
-                    .WorkflowRuntime
+                workflowRuntimeBehavior.WorkflowRuntime
                     .AddService(
                         new SkipUnloadOnFirstIdleWorkflowPersistenceService(persistenceService)
                     );
@@ -226,10 +219,11 @@ namespace System.ServiceModel.Description
                 }
             }
 
-            this.workflowDefinitionContext.Register(
-                workflowRuntimeBehavior.WorkflowRuntime,
-                workflowRuntimeBehavior.ValidateOnCreate
-            );
+            this.workflowDefinitionContext
+                .Register(
+                    workflowRuntimeBehavior.WorkflowRuntime,
+                    workflowRuntimeBehavior.ValidateOnCreate
+                );
 
             WorkflowInstanceContextProvider instanceContextProvider =
                 new WorkflowInstanceContextProvider(
@@ -243,8 +237,7 @@ namespace System.ServiceModel.Description
             IInstanceProvider instanceProvider = new WorkflowInstanceProvider(
                 instanceContextProvider
             );
-            ServiceDebugBehavior serviceDebugBehavior = description
-                .Behaviors
+            ServiceDebugBehavior serviceDebugBehavior = description.Behaviors
                 .Find<ServiceDebugBehavior>();
 
             bool includeExceptionDetailsInFaults = this.IncludeExceptionDetailInFaults;
@@ -276,8 +269,7 @@ namespace System.ServiceModel.Description
                             continue;
                         }
 
-                        ServiceEndpoint serviceEndPoint = description
-                            .Endpoints
+                        ServiceEndpoint serviceEndPoint = description.Endpoints
                             .Find(
                                 new XmlQualifiedName(
                                     endPointDispatcher.ContractName,
@@ -300,8 +292,7 @@ namespace System.ServiceModel.Description
                             else if (!syncContextRegistered)
                             {
                                 SynchronizationContextWorkflowSchedulerService syncSchedulerService =
-                                    workflowRuntimeBehavior
-                                        .WorkflowRuntime
+                                    workflowRuntimeBehavior.WorkflowRuntime
                                         .GetService<SynchronizationContextWorkflowSchedulerService>();
                                 Fx.Assert(
                                     syncSchedulerService != null,
@@ -355,8 +346,7 @@ namespace System.ServiceModel.Description
                                 endPointDispatcher.DispatchRuntime.InstanceContextProvider =
                                     singleCallInstanceContextProvider;
                             }
-                            endPointDispatcher
-                                .DispatchRuntime
+                            endPointDispatcher.DispatchRuntime
                                 .MessageInspectors
                                 .Add(
                                     new DurableMessageDispatchInspector(

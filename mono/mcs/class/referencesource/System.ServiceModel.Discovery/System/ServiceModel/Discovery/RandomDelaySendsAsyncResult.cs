@@ -256,11 +256,12 @@ namespace System.ServiceModel.Discovery
             {
                 try
                 {
-                    IAsyncResult result = this.channel.BeginClose(
-                        this.timeoutHelper.RemainingTime(),
-                        onCloseCompletedCallback,
-                        null
-                    );
+                    IAsyncResult result = this.channel
+                        .BeginClose(
+                            this.timeoutHelper.RemainingTime(),
+                            onCloseCompletedCallback,
+                            null
+                        );
                     if (result.CompletedSynchronously)
                     {
                         this.channel.EndClose(result);

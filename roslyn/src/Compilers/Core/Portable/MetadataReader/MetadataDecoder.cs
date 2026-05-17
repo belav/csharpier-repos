@@ -210,9 +210,8 @@ namespace Microsoft.CodeAnalysis
 
             try
             {
-                BlobReader memoryReader = this.Module.GetTypeSpecificationSignatureReaderOrThrow(
-                    typeSpec
-                );
+                BlobReader memoryReader = this.Module
+                    .GetTypeSpecificationSignatureReaderOrThrow(typeSpec);
 
                 bool refersToNoPiaLocalType;
                 ptype = DecodeTypeOrThrow(ref memoryReader, out refersToNoPiaLocalType);
@@ -441,9 +440,8 @@ namespace Microsoft.CodeAnalysis
                     }
 
                     typeSymbol = MakeFunctionPointerTypeSymbol(
-                        Cci.CallingConventionUtils.FromSignatureConvention(
-                            signatureHeader.CallingConvention
-                        ),
+                        Cci.CallingConventionUtils
+                            .FromSignatureConvention(signatureHeader.CallingConvention),
                         ImmutableArray.Create(parameters)
                     );
                     break;
@@ -934,10 +932,8 @@ namespace Microsoft.CodeAnalysis
                     // In addition, managed C++ compiler can use constructed generic types as modifiers, for example Nullable<bool>, etc.
                     // We will support only cases like these even though it looks like CLR allows any types that can be encoded through a TypeSpec.
 
-                    BlobReader memoryReader =
-                        this.Module.GetTypeSpecificationSignatureReaderOrThrow(
-                            (TypeSpecificationHandle)token
-                        );
+                    BlobReader memoryReader = this.Module
+                        .GetTypeSpecificationSignatureReaderOrThrow((TypeSpecificationHandle)token);
 
                     SignatureTypeCode typeCode = memoryReader.ReadSignatureTypeCode();
                     bool refersToNoPiaLocalType;
@@ -1069,9 +1065,10 @@ namespace Microsoft.CodeAnalysis
                 {
                     try
                     {
-                        var memoryReader = this.Module.GetTypeSpecificationSignatureReaderOrThrow(
-                            (TypeSpecificationHandle)token
-                        );
+                        var memoryReader = this.Module
+                            .GetTypeSpecificationSignatureReaderOrThrow(
+                                (TypeSpecificationHandle)token
+                            );
                         modifiers = DecodeModifiersOrThrow(ref memoryReader, out var typeCode);
                         var type = DecodeTypeOrThrow(ref memoryReader, typeCode, out _);
                         return type;
@@ -2545,8 +2542,7 @@ namespace Microsoft.CodeAnalysis
                 var interfaceImplHandle in Module.GetInterfaceImplementationsOrThrow(searchTypeDef)
             )
             {
-                var interfaceImpl = Module
-                    .MetadataReader
+                var interfaceImpl = Module.MetadataReader
                     .GetInterfaceImplementation(interfaceImplHandle);
                 EnqueueTypeToken(typeDefsToSearch, typeSymbolsToSearch, interfaceImpl.Interface);
             }
@@ -2809,11 +2805,12 @@ namespace Microsoft.CodeAnalysis
                     case HandleKind.MethodSpecification:
                         EntityHandle method;
                         BlobHandle instantiation;
-                        this.Module.GetMethodSpecificationOrThrow(
-                            (MethodSpecificationHandle)token,
-                            out method,
-                            out instantiation
-                        );
+                        this.Module
+                            .GetMethodSpecificationOrThrow(
+                                (MethodSpecificationHandle)token,
+                                out method,
+                                out instantiation
+                            );
 
                         var genericDefinition = (MethodSymbol)GetSymbolForILToken(method);
                         if (genericDefinition == null)

@@ -144,8 +144,7 @@ namespace Microsoft.Extensions.Caching.Memory
         {
             ThrowHelper.ThrowIfNull(callback);
 
-            options
-                .PostEvictionCallbacks
+            options.PostEvictionCallbacks
                 .Add(
                     new PostEvictionCallbackRegistration()
                     {

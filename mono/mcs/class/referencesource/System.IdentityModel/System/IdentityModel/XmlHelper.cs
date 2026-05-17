@@ -44,8 +44,7 @@ namespace System.IdentityModel
 
         internal static void OnRequiredAttributeMissing(string attrName, string elementName)
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(
                     new XmlException(
                         SR.GetString(SR.RequiredAttributeMissing, attrName, elementName)
@@ -92,8 +91,7 @@ namespace System.IdentityModel
 
         internal static void OnRequiredElementMissing(string elementName, string elementNamespace)
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(
                     new XmlException(
                         SR.GetString(SR.ExpectedElementMissing, elementName, elementNamespace)
@@ -103,8 +101,7 @@ namespace System.IdentityModel
 
         internal static void OnUnexpectedChildNodeError(string parentName, XmlReader r)
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(
                     new XmlException(
                         SR.GetString(SR.UnexpectedXmlChildNode, r.Name, r.NodeType, parentName)
@@ -114,8 +111,7 @@ namespace System.IdentityModel
 
         internal static void OnUnexpectedChildNodeError(XmlElement parent, XmlNode n)
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(
                     new XmlException(
                         SR.GetString(SR.UnexpectedXmlChildNode, n.Name, n.NodeType, parent.Name)

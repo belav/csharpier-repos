@@ -176,8 +176,7 @@ namespace System.ServiceModel.Activities
                 {
                     if (context.DefaultBookmarkScope.Id != instanceKey.Value)
                     {
-                        throw FxTrace
-                            .Exception
+                        throw FxTrace.Exception
                             .AsError(
                                 new InvalidOperationException(
                                     SR2.CorrelationHandleInUse(
@@ -229,8 +228,7 @@ namespace System.ServiceModel.Activities
                                 }
                                 else
                                 {
-                                    throw FxTrace
-                                        .Exception
+                                    throw FxTrace.Exception
                                         .AsError(
                                             new InvalidOperationException(
                                                 SR2.QueryCorrelationInitializerCannotBeInitialized

@@ -2994,8 +2994,7 @@ public class FormattingEngineTests : CSharpFormattingEngineTestBase
         var textView = subjectDocument.GetTextView();
 
         globalOptions?.SetGlobalOptions(workspace.GlobalOptions);
-        workspace
-            .GlobalOptions
+        workspace.GlobalOptions
             .SetEditorOptions(textView.Options.GlobalOptions, subjectDocument.Project.Language);
 
         commandHandler.ExecuteCommand(

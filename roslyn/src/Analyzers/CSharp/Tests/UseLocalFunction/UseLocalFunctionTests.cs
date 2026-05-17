@@ -30,8 +30,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                 new CSharpUseLocalFunctionCodeFixProvider()
             );
 
-        private static readonly ParseOptions CSharp72ParseOptions = CSharpParseOptions
-            .Default
+        private static readonly ParseOptions CSharp72ParseOptions = CSharpParseOptions.Default
             .WithLanguageVersion(LanguageVersion.CSharp7_2);
 
         [Fact]
@@ -58,8 +57,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                 }
                 """,
                 parameters: new TestParameters(
-                    parseOptions: CSharpParseOptions
-                        .Default
+                    parseOptions: CSharpParseOptions.Default
                         .WithLanguageVersion(LanguageVersion.CSharp6)
                 )
             );
@@ -4294,8 +4292,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                     }
                 }
                 """,
-                parseOptions: CSharpParseOptions
-                    .Default
+                parseOptions: CSharpParseOptions.Default
                     .WithLanguageVersion(LanguageVersion.CSharp10)
             );
         }
@@ -4314,8 +4311,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                 }
                 """,
                 new TestParameters(
-                    parseOptions: CSharpParseOptions
-                        .Default
+                    parseOptions: CSharpParseOptions.Default
                         .WithLanguageVersion(LanguageVersion.CSharp9)
                 )
             );

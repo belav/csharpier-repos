@@ -82,8 +82,7 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ProjectSystemShim
                 parsedArguments
                     .ResolveMetadataReferences(metadataResolver)
                     .Where(m => m is not UnresolvedMetadataReference),
-                parsedArguments
-                    .CompilationOptions
+                parsedArguments.CompilationOptions
                     .WithAssemblyIdentityComparer(DesktopAssemblyIdentityComparer.Default)
                     .WithSourceReferenceResolver(SourceFileResolver.Default)
                     .WithXmlReferenceResolver(XmlFileResolver.Default)
@@ -140,8 +139,7 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ProjectSystemShim
                 }
             }
 
-            return CSharpCommandLineParser
-                .Default
+            return CSharpCommandLineParser.Default
                 .Parse(arguments, baseDirectory, RuntimeEnvironment.GetRuntimeDirectory());
         }
     }

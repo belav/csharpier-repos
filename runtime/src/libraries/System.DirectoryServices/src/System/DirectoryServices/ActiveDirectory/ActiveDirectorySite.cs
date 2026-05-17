@@ -454,8 +454,7 @@ namespace System.DirectoryServices.ActiveDirectory
                         bool ISTGExist;
                         try
                         {
-                            ISTGExist = NTDSSiteEntry
-                                .Properties
+                            ISTGExist = NTDSSiteEntry.Properties
                                 .Contains("interSiteTopologyGenerator");
                         }
                         catch (COMException e)
@@ -974,8 +973,7 @@ namespace System.DirectoryServices.ActiveDirectory
                     try
                     {
                         // create nTDSSiteSettings object
-                        DirectoryEntry tmpEntry = cachedEntry
-                            .Children
+                        DirectoryEntry tmpEntry = cachedEntry.Children
                             .Add("CN=NTDS Site Settings", "nTDSSiteSettings");
                         //set properties on the Site NTDS settings object
                         DirectoryServer? replica = InterSiteTopologyGenerator;
@@ -1004,8 +1002,7 @@ namespace System.DirectoryServices.ActiveDirectory
                         if (!IsADAM)
                         {
                             // create the licensingSiteSettings object
-                            tmpEntry = cachedEntry
-                                .Children
+                            tmpEntry = cachedEntry.Children
                                 .Add("CN=Licensing Site Settings", "licensingSiteSettings");
                             tmpEntry.CommitChanges();
                         }
@@ -1709,8 +1706,7 @@ namespace System.DirectoryServices.ActiveDirectory
                 void* pDomains = null;
                 // call DsReplicaSyncAllW
                 var dsListDomainsInSiteW = (delegate* unmanaged<IntPtr, char*, void**, int>)
-                    global::Interop
-                        .Kernel32
+                    global::Interop.Kernel32
                         .GetProcAddress(DirectoryContext.ADHandle, "DsListDomainsInSiteW");
                 if (dsListDomainsInSiteW == null)
                 {
@@ -1776,8 +1772,7 @@ namespace System.DirectoryServices.ActiveDirectory
                 {
                     // call DsFreeNameResultW
                     var dsFreeNameResultW = (delegate* unmanaged<void*, void>)
-                        global::Interop
-                            .Kernel32
+                        global::Interop.Kernel32
                             .GetProcAddress(DirectoryContext.ADHandle, "DsFreeNameResultW");
                     if (dsFreeNameResultW == null)
                     {

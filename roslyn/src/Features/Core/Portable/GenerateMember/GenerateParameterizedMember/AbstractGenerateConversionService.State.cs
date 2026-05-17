@@ -103,8 +103,7 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
                     return false;
                 }
 
-                ContainingType = document
-                    .SemanticModel
+                ContainingType = document.SemanticModel
                     .GetEnclosingNamedType(node.SpanStart, cancellationToken);
                 if (ContainingType == null)
                 {
@@ -142,8 +141,7 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
                     return false;
                 }
 
-                ContainingType = document
-                    .SemanticModel
+                ContainingType = document.SemanticModel
                     .GetEnclosingNamedType(node.SpanStart, cancellationToken);
                 if (ContainingType == null)
                 {

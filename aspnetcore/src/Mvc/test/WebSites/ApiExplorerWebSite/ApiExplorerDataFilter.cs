@@ -74,8 +74,7 @@ public class ApiExplorerDataFilter : IResourceFilter
             {
                 parameterData.RouteInfo = new ApiExplorerParameterRouteInfo()
                 {
-                    ConstraintTypes = parameter
-                        .RouteInfo
+                    ConstraintTypes = parameter.RouteInfo
                         .Constraints
                         ?.Select(c => c.GetType().Name)
                         .ToArray(),
@@ -89,13 +88,14 @@ public class ApiExplorerDataFilter : IResourceFilter
 
         foreach (var request in description.SupportedRequestFormats)
         {
-            data.SupportedRequestFormats.Add(
-                new ApiExplorerRequestFormat
-                {
-                    FormatterType = request.Formatter?.GetType().FullName,
-                    MediaType = request.MediaType,
-                }
-            );
+            data.SupportedRequestFormats
+                .Add(
+                    new ApiExplorerRequestFormat
+                    {
+                        FormatterType = request.Formatter?.GetType().FullName,
+                        MediaType = request.MediaType,
+                    }
+                );
         }
 
         foreach (var response in description.SupportedResponseTypes)
@@ -109,8 +109,7 @@ public class ApiExplorerDataFilter : IResourceFilter
 
             foreach (var responseFormat in response.ApiResponseFormats)
             {
-                responseType
-                    .ResponseFormats
+                responseType.ResponseFormats
                     .Add(
                         new ApiExplorerResponseFormat()
                         {

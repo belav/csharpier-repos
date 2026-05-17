@@ -36,8 +36,7 @@ namespace Microsoft.CodeAnalysis.CSharp.QualifyMemberAccess
             CancellationToken cancellationToken
         )
         {
-            var node = diagnostic
-                .Location
+            var node = diagnostic.Location
                 .FindNode(getInnermostNodeForTie: true, cancellationToken);
             switch (node)
             {

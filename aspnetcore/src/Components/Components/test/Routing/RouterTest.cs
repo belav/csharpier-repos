@@ -48,8 +48,7 @@ public class RouterTest
         _router.OnNavigateAsync = new EventCallback<NavigationContext>(null, OnNavigateAsync);
 
         // Act
-        await _renderer
-            .Dispatcher
+        await _renderer.Dispatcher
             .InvokeAsync(() => _router.RunOnNavigateAsync("http://example.com/jan", false));
 
         // Assert
@@ -79,11 +78,9 @@ public class RouterTest
         _router.OnNavigateAsync = new EventCallback<NavigationContext>(null, OnNavigateAsync);
 
         // Act
-        var janTask = _renderer
-            .Dispatcher
+        var janTask = _renderer.Dispatcher
             .InvokeAsync(() => _router.RunOnNavigateAsync("http://example.com/jan", false));
-        var febTask = _renderer
-            .Dispatcher
+        var febTask = _renderer.Dispatcher
             .InvokeAsync(() => _router.RunOnNavigateAsync("http://example.com/feb", false));
 
         await janTask;
@@ -123,11 +120,9 @@ public class RouterTest
         _router.OnNavigateAsync = new EventCallback<NavigationContext>(null, OnNavigateAsync);
 
         // Act (start the operations then await them)
-        var jan = _renderer
-            .Dispatcher
+        var jan = _renderer.Dispatcher
             .InvokeAsync(() => _router.RunOnNavigateAsync("http://example.com/jan", false));
-        var feb = _renderer
-            .Dispatcher
+        var feb = _renderer.Dispatcher
             .InvokeAsync(() => _router.RunOnNavigateAsync("http://example.com/feb", false));
         triggerCancel.TrySetResult();
 
@@ -180,11 +175,9 @@ public class RouterTest
         _router.OnNavigateAsync = new EventCallback<NavigationContext>(null, OnNavigateAsync);
 
         // Act
-        var jan = _renderer
-            .Dispatcher
+        var jan = _renderer.Dispatcher
             .InvokeAsync(() => _router.RunOnNavigateAsync("http://example.com/jan", false));
-        var feb = _renderer
-            .Dispatcher
+        var feb = _renderer.Dispatcher
             .InvokeAsync(() => _router.RunOnNavigateAsync("http://example.com/feb", false));
 
         await jan;
@@ -205,8 +198,7 @@ public class RouterTest
         };
 
         // Act
-        await _renderer
-            .Dispatcher
+        await _renderer.Dispatcher
             .InvokeAsync(() =>
                 _router.SetParametersAsync(ParameterView.FromDictionary(parameters))
             );
@@ -238,8 +230,7 @@ public class RouterTest
         };
 
         // Act
-        await _renderer
-            .Dispatcher
+        await _renderer.Dispatcher
             .InvokeAsync(() =>
                 _router.SetParametersAsync(ParameterView.FromDictionary(parameters))
             );
@@ -266,8 +257,7 @@ public class RouterTest
         };
 
         // Act
-        await _renderer
-            .Dispatcher
+        await _renderer.Dispatcher
             .InvokeAsync(() =>
                 _router.SetParametersAsync(ParameterView.FromDictionary(parameters))
             );
@@ -292,8 +282,7 @@ public class RouterTest
         };
 
         // Act
-        await _renderer
-            .Dispatcher
+        await _renderer.Dispatcher
             .InvokeAsync(() =>
                 _router.SetParametersAsync(ParameterView.FromDictionary(parameters))
             );

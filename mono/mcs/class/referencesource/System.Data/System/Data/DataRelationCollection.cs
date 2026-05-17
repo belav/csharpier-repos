@@ -40,8 +40,7 @@ namespace System.Data
         private CollectionChangeEventHandler onCollectionChangingDelegate;
 
         private static int _objectTypeCount; // Bid counter
-        private readonly int _objectID = System
-            .Threading
+        private readonly int _objectID = System.Threading
             .Interlocked
             .Increment(ref _objectTypeCount);
 
@@ -907,8 +906,7 @@ namespace System.Data
                     relation.ChildTable.CacheNestedParent();
                 }
 
-                ForeignKeyConstraint foreignKey = relation
-                    .ChildTable
+                ForeignKeyConstraint foreignKey = relation.ChildTable
                     .Constraints
                     .FindForeignKeyConstraint(
                         relation.ParentColumnsReference,
@@ -918,8 +916,7 @@ namespace System.Data
                 {
                     if (foreignKey == null)
                     {
-                        relation
-                            .ChildTable
+                        relation.ChildTable
                             .Constraints
                             .Add(
                                 foreignKey = new ForeignKeyConstraint(
@@ -945,8 +942,7 @@ namespace System.Data
                         }
                     }
                 }
-                UniqueConstraint key = relation
-                    .ParentTable
+                UniqueConstraint key = relation.ParentTable
                     .Constraints
                     .FindKeyConstraint(relation.ParentColumnsReference);
                 relation.SetParentKeyConstraint(key);

@@ -123,8 +123,7 @@ namespace System.ServiceModel.Configuration
                 Type credentialsType = System.Type.GetType(this.Type, true);
                 if (!typeof(ClientCredentials).IsAssignableFrom(credentialsType))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ConfigurationErrorsException(
                                 SR.GetString(

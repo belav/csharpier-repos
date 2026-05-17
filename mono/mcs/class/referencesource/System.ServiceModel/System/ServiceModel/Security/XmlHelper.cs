@@ -139,8 +139,7 @@ namespace System.ServiceModel.Security
             string ns = reader.LookupNamespace(prefix);
             if (ns == null && prefix.Length > 0)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new XmlException(SR.GetString(SR.CouldNotFindNamespaceForPrefix, prefix))
                     );
@@ -197,8 +196,7 @@ namespace System.ServiceModel.Security
 
         internal static void OnChildNodeTypeMissing(string parentName, XmlNodeType expectedNodeType)
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(
                     new XmlException(
                         SR.GetString(SR.ChildNodeTypeMissing, parentName, expectedNodeType)
@@ -208,8 +206,7 @@ namespace System.ServiceModel.Security
 
         internal static void OnChildNodeTypeMissing(XmlElement parent, XmlNodeType expectedNodeType)
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(
                     new XmlException(
                         SR.GetString(SR.ChildNodeTypeMissing, parent.Name, expectedNodeType)
@@ -219,29 +216,25 @@ namespace System.ServiceModel.Security
 
         internal static void OnEmptyElementError(XmlReader r)
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(new XmlException(SR.GetString(SR.EmptyXmlElementError, r.Name)));
         }
 
         internal static void OnEmptyElementError(XmlElement e)
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(new XmlException(SR.GetString(SR.EmptyXmlElementError, e.Name)));
         }
 
         internal static void OnEOF()
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(new XmlException(SR.GetString(SR.UnexpectedEndOfFile)));
         }
 
         internal static void OnNamespaceMissing(string prefix)
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(
                     new XmlException(SR.GetString(SR.CouldNotFindNamespaceForPrefix, prefix))
                 );
@@ -249,8 +242,7 @@ namespace System.ServiceModel.Security
 
         internal static void OnRequiredAttributeMissing(string attrName, string elementName)
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(
                     new XmlException(
                         SR.GetString(SR.RequiredAttributeMissing, attrName, elementName)
@@ -260,8 +252,7 @@ namespace System.ServiceModel.Security
 
         internal static void OnRequiredElementMissing(string elementName, string elementNamespace)
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(
                     new XmlException(
                         SR.GetString(SR.ExpectedElementMissing, elementName, elementNamespace)
@@ -271,8 +262,7 @@ namespace System.ServiceModel.Security
 
         internal static void OnUnexpectedChildNodeError(string parentName, XmlReader r)
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(
                     new XmlException(
                         SR.GetString(SR.UnexpectedXmlChildNode, r.Name, r.NodeType, parentName)
@@ -282,8 +272,7 @@ namespace System.ServiceModel.Security
 
         internal static void OnUnexpectedChildNodeError(XmlElement parent, XmlNode n)
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(
                     new XmlException(
                         SR.GetString(SR.UnexpectedXmlChildNode, n.Name, n.NodeType, parent.Name)
@@ -343,8 +332,7 @@ namespace System.ServiceModel.Security
             byte[] value = reader.ReadContentAsBase64();
             if (value == null || value.Length == 0)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new XmlException(SR.GetString(SR.EmptyBase64Attribute, name, ns))
                     );
@@ -376,8 +364,7 @@ namespace System.ServiceModel.Security
             string[] parts = qName.Split(':');
             if (parts.Length > 2)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(SR.GetString(SR.InvalidQName));
             }
 
@@ -397,15 +384,13 @@ namespace System.ServiceModel.Security
         {
             if (idPrefix == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("idPrefix"));
             }
 
             if (idPrefix.Length == 0)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentOutOfRangeException(
                             "idPrefix",
@@ -416,8 +401,7 @@ namespace System.ServiceModel.Security
 
             if ((!Char.IsLetter(idPrefix[0]) && idPrefix[0] != '_'))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentOutOfRangeException(
                             "idPrefix",
@@ -431,8 +415,7 @@ namespace System.ServiceModel.Security
                 char c = idPrefix[i];
                 if (!Char.IsLetter(c) && !Char.IsNumber(c) && c != '.' && c != '_' && c != '-')
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentOutOfRangeException(
                                 "idPrefix",

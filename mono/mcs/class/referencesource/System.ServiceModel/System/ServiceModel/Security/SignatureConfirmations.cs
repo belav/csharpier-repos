@@ -50,8 +50,7 @@ namespace System.ServiceModel.Security
         {
             if (index < 0 || index >= length)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentOutOfRangeException(
                             "index",

@@ -618,11 +618,12 @@ namespace System.Web.UI.WebControls.Adapters
                     else
                     {
                         HyperLink link = new HyperLink();
-                        link.NavigateUrl = Page.ClientScript.GetPostBackClientHyperlink(
-                            owner,
-                            (clickOpensThisNode ? 'o' : 'b') + Escape(item.InternalValuePath),
-                            true
-                        );
+                        link.NavigateUrl = Page.ClientScript
+                            .GetPostBackClientHyperlink(
+                                owner,
+                                (clickOpensThisNode ? 'o' : 'b') + Escape(item.InternalValuePath),
+                                true
+                            );
                         link.AccessKey = itemAccessKey;
                         link.Page = Page;
                         if (writer is Html32TextWriter)
@@ -783,8 +784,7 @@ namespace System.Web.UI.WebControls.Adapters
                     }
                     // Check this item does have subitem
                     // (otherwise, it should just be selected, not opened)
-                    MenuItem item = Control
-                        .Items
+                    MenuItem item = Control.Items
                         .FindItem(newPath.Split(TreeView.InternalPathSeparator), 0);
                     if (item != null)
                     {
@@ -804,8 +804,7 @@ namespace System.Web.UI.WebControls.Adapters
                     if (_path != null)
                     {
                         // Find that item in the tree
-                        MenuItem item = Control
-                            .Items
+                        MenuItem item = Control.Items
                             .FindItem(_path.Split(TreeView.InternalPathSeparator), 0);
                         if (item != null)
                         {

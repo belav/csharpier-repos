@@ -1508,8 +1508,7 @@ namespace System.Linq
 
             return new OrderedParallelQuery<TSource>(
                 (QueryOperator<TSource>)
-                    source
-                        .OrderedEnumerable
+                    source.OrderedEnumerable
                         .CreateOrderedEnumerable<TKey>(keySelector, comparer, false)
             );
         }
@@ -1582,8 +1581,7 @@ namespace System.Linq
 
             return new OrderedParallelQuery<TSource>(
                 (QueryOperator<TSource>)
-                    source
-                        .OrderedEnumerable
+                    source.OrderedEnumerable
                         .CreateOrderedEnumerable<TKey>(keySelector, comparer, true)
             );
         }
@@ -5098,8 +5096,7 @@ namespace System.Linq
 
             // We use a fully-qualified type name for Shared here to prevent the conflict between System.Linq.Parallel.Shared<>
             // and System.Threading.Shared<> in the 3.5 legacy build.
-            QuerySettings settings = leftOp
-                .SpecifiedQuerySettings
+            QuerySettings settings = leftOp.SpecifiedQuerySettings
                 .Merge(rightOp.SpecifiedQuerySettings)
                 .WithDefaults()
                 .WithPerExecutionSettings(
@@ -6288,8 +6285,7 @@ namespace System.Linq
                 && settings.ExecutionMode != ParallelExecutionMode.ForceParallelism
             )
             {
-                IEnumerable<TSource> childAsSequential = queryOp
-                    .Child
+                IEnumerable<TSource> childAsSequential = queryOp.Child
                     .AsSequentialQuery(settings.CancellationState.ExternalCancellationToken);
                 IEnumerable<TSource> childWithCancelChecks = CancellableEnumerable.Wrap(
                     childAsSequential,
@@ -6347,8 +6343,7 @@ namespace System.Linq
                 && settings.ExecutionMode != ParallelExecutionMode.ForceParallelism
             )
             {
-                IEnumerable<TSource> childAsSequential = queryOp
-                    .Child
+                IEnumerable<TSource> childAsSequential = queryOp.Child
                     .AsSequentialQuery(settings.CancellationState.ExternalCancellationToken);
                 IEnumerable<TSource> childWithCancelChecks = CancellableEnumerable.Wrap(
                     childAsSequential,
@@ -6402,8 +6397,7 @@ namespace System.Linq
                 && settings.ExecutionMode != ParallelExecutionMode.ForceParallelism
             )
             {
-                IEnumerable<TSource> childAsSequential = queryOp
-                    .Child
+                IEnumerable<TSource> childAsSequential = queryOp.Child
                     .AsSequentialQuery(settings.CancellationState.ExternalCancellationToken);
                 IEnumerable<TSource> childWithCancelChecks = CancellableEnumerable.Wrap(
                     childAsSequential,
@@ -6463,8 +6457,7 @@ namespace System.Linq
                 && settings.ExecutionMode != ParallelExecutionMode.ForceParallelism
             )
             {
-                IEnumerable<TSource> childAsSequential = queryOp
-                    .Child
+                IEnumerable<TSource> childAsSequential = queryOp.Child
                     .AsSequentialQuery(settings.CancellationState.ExternalCancellationToken);
                 IEnumerable<TSource> childWithCancelChecks = CancellableEnumerable.Wrap(
                     childAsSequential,
@@ -6525,8 +6518,7 @@ namespace System.Linq
                 && settings.ExecutionMode != ParallelExecutionMode.ForceParallelism
             )
             {
-                IEnumerable<TSource> childAsSequential = queryOp
-                    .Child
+                IEnumerable<TSource> childAsSequential = queryOp.Child
                     .AsSequentialQuery(settings.CancellationState.ExternalCancellationToken);
                 IEnumerable<TSource> childWithCancelChecks = CancellableEnumerable.Wrap(
                     childAsSequential,
@@ -6581,8 +6573,7 @@ namespace System.Linq
                 && settings.ExecutionMode != ParallelExecutionMode.ForceParallelism
             )
             {
-                IEnumerable<TSource> childAsSequential = queryOp
-                    .Child
+                IEnumerable<TSource> childAsSequential = queryOp.Child
                     .AsSequentialQuery(settings.CancellationState.ExternalCancellationToken);
                 IEnumerable<TSource> childWithCancelChecks = CancellableEnumerable.Wrap(
                     childAsSequential,
@@ -6636,8 +6627,7 @@ namespace System.Linq
                 && settings.ExecutionMode != ParallelExecutionMode.ForceParallelism
             )
             {
-                IEnumerable<TSource> childAsSequential = queryOp
-                    .Child
+                IEnumerable<TSource> childAsSequential = queryOp.Child
                     .AsSequentialQuery(settings.CancellationState.ExternalCancellationToken);
                 IEnumerable<TSource> childWithCancelChecks = CancellableEnumerable.Wrap(
                     childAsSequential,
@@ -6691,8 +6681,7 @@ namespace System.Linq
                 && settings.ExecutionMode != ParallelExecutionMode.ForceParallelism
             )
             {
-                IEnumerable<TSource> childAsSequential = queryOp
-                    .Child
+                IEnumerable<TSource> childAsSequential = queryOp.Child
                     .AsSequentialQuery(settings.CancellationState.ExternalCancellationToken);
                 IEnumerable<TSource> childWithCancelChecks = CancellableEnumerable.Wrap(
                     childAsSequential,

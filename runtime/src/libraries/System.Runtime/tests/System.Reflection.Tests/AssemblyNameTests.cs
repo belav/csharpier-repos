@@ -346,8 +346,7 @@ namespace System.Reflection.Tests
                 an.VersionCompatibility
             );
 
-            an.VersionCompatibility = System
-                .Configuration
+            an.VersionCompatibility = System.Configuration
                 .Assemblies
                 .AssemblyVersionCompatibility
                 .SameProcess;
@@ -757,9 +756,8 @@ namespace System.Reflection.Tests
             Assert.Contains("Version=255.1.2.3", assemblyName.FullName);
         }
 
-        private static readonly string VersionUnspecifiedStr = ushort.MaxValue.ToString(
-            NumberFormatInfo.InvariantInfo
-        );
+        private static readonly string VersionUnspecifiedStr = ushort.MaxValue
+            .ToString(NumberFormatInfo.InvariantInfo);
 
         public static IEnumerable<object[]> Constructor_String_InvalidVersionTest_MemberData()
         {

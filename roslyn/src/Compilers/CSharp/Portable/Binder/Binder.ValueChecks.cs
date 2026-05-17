@@ -1018,12 +1018,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                     }
 
                     getItemOrSliceHelper = getItemOrSliceHelper.AsMember(
-                        getItemOrSliceHelper
-                            .ContainingType
+                        getItemOrSliceHelper.ContainingType
                             .Construct(
                                 ImmutableArray.Create(
-                                    elementAccess
-                                        .Expression
+                                    elementAccess.Expression
                                         .Type
                                         .TryGetInlineArrayElementField()
                                         .TypeWithAnnotations
@@ -4133,8 +4131,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 case BoundKind.ThisReference:
                     var thisParam = ((MethodSymbol)_symbol).ThisParameter;
                     Debug.Assert(
-                        thisParam
-                            .Type
+                        thisParam.Type
                             .Equals(
                                 ((BoundThisReference)expr).Type,
                                 TypeCompareKind.ConsiderEverything
@@ -4484,8 +4481,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 case BoundKind.ThisReference:
                     var thisParam = ((MethodSymbol)_symbol).ThisParameter;
                     Debug.Assert(
-                        thisParam
-                            .Type
+                        thisParam.Type
                             .Equals(
                                 ((BoundThisReference)expr).Type,
                                 TypeCompareKind.ConsiderEverything
@@ -4725,9 +4721,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 case BoundKind.FunctionPointerInvocation:
                     var functionPointerInvocation = (BoundFunctionPointerInvocation)expr;
 
-                    FunctionPointerMethodSymbol signature = functionPointerInvocation
-                        .FunctionPointer
-                        .Signature;
+                    FunctionPointerMethodSymbol signature =
+                        functionPointerInvocation.FunctionPointer.Signature;
                     if (signature.RefKind == RefKind.None)
                     {
                         break;
@@ -4877,8 +4872,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 case BoundKind.ThisReference:
                     var thisParam = ((MethodSymbol)_symbol).ThisParameter;
                     Debug.Assert(
-                        thisParam
-                            .Type
+                        thisParam.Type
                             .Equals(
                                 ((BoundThisReference)expr).Type,
                                 TypeCompareKind.ConsiderEverything
@@ -5376,13 +5370,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                         return true;
                     }
                     Debug.Assert(
-                        constructMethod
-                            .ReturnType
+                        constructMethod.ReturnType
                             .Equals(expr.Type, TypeCompareKind.AllIgnoreOptions)
                     );
                     Debug.Assert(
-                        parameter
-                            .Type
+                        parameter.Type
                             .OriginalDefinition
                             .Equals(
                                 _compilation.GetWellKnownType(WellKnownType.System_ReadOnlySpan_T),
@@ -5533,8 +5525,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 case BoundKind.ThisReference:
                     var thisParam = ((MethodSymbol)_symbol).ThisParameter;
                     Debug.Assert(
-                        thisParam
-                            .Type
+                        thisParam.Type
                             .Equals(
                                 ((BoundThisReference)expr).Type,
                                 TypeCompareKind.ConsiderEverything
@@ -6505,8 +6496,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             // - Span<T> Convert(ref inlineArray), or
             // - ReadOnlySpan<T> Convert(in inlineArray)
 
-            RefKind parameterRefKind = resultType
-                .OriginalDefinition
+            RefKind parameterRefKind = resultType.OriginalDefinition
                 .Equals(
                     _compilation.GetWellKnownType(WellKnownType.System_ReadOnlySpan_T),
                     TypeCompareKind.AllIgnoreOptions

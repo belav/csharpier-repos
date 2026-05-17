@@ -830,8 +830,7 @@ namespace System
             if (domainManager == null)
                 domainManager = new AppDomainManager();
 
-            return domainManager
-                .ApplicationActivator
+            return domainManager.ApplicationActivator
                 .CreateInstance(activationContext, activationCustomData);
         }
 #else

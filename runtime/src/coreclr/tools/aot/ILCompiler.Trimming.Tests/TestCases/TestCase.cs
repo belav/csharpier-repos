@@ -92,8 +92,7 @@ namespace Mono.Linker.Tests.TestCases
 
         public TypeDefinition? TryFindTypeDefinition(AssemblyDefinition caseAssemblyDefinition)
         {
-            var typeDefinition = caseAssemblyDefinition
-                .MainModule
+            var typeDefinition = caseAssemblyDefinition.MainModule
                 .GetType(reconstructedFullTypeName);
 
             // For all of the Test Cases, the full type name we constructed from the directory structure will be correct and we can successfully find
@@ -110,9 +109,8 @@ namespace Mono.Linker.Tests.TestCases
             {
                 if (
                     type.Name == "Program"
-                    && type.CustomAttributes.Any(attr =>
-                        attr.AttributeType.Name == nameof(CompilerGeneratedAttribute)
-                    )
+                    && type.CustomAttributes
+                        .Any(attr => attr.AttributeType.Name == nameof(CompilerGeneratedAttribute))
                 )
                     return type;
 

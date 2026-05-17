@@ -195,9 +195,8 @@ namespace System.Data.Objects
 
             try
             {
-                ObjectQueryExecutionPlan execPlan = this.QueryState.GetExecutionPlan(
-                    forMergeOption
-                );
+                ObjectQueryExecutionPlan execPlan = this.QueryState
+                    .GetExecutionPlan(forMergeOption);
                 return execPlan.Execute<T>(
                     this.QueryState.ObjectContext,
                     this.QueryState.Parameters

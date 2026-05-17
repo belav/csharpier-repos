@@ -1286,8 +1286,7 @@ namespace System.Data.Query.PlanCompiler
                     useCompatMode
                         ? (
                             augmentedJoinNode.Children.All(c => c is AugmentedTableNode)
-                            && augmentedJoinNode
-                                .JoinEdges
+                            && augmentedJoinNode.JoinEdges
                                 .All(joinEdge =>
                                     IsConstraintPresentForTurningIntoInnerJoin(joinEdge)
                                 )
@@ -2038,8 +2037,7 @@ namespace System.Data.Query.PlanCompiler
 
             // Am I a self-join?
             if (
-                !joinEdge
-                    .Left
+                !joinEdge.Left
                     .Table
                     .TableMetadata
                     .Extent
@@ -2757,8 +2755,7 @@ namespace System.Data.Query.PlanCompiler
             if (joinNode.OtherPredicate != null)
             {
                 foreach (
-                    Var var in joinNode
-                        .OtherPredicate
+                    Var var in joinNode.OtherPredicate
                         .GetNodeInfo(this.m_command)
                         .ExternalReferences
                 )

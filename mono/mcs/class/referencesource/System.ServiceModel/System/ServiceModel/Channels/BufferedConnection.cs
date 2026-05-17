@@ -121,8 +121,7 @@ namespace System.ServiceModel.Channels
         {
             if (size <= 0)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentOutOfRangeException(
                             "size",
@@ -159,8 +158,7 @@ namespace System.ServiceModel.Channels
         {
             if (size <= 0)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentOutOfRangeException(
                             "size",
@@ -259,8 +257,7 @@ namespace System.ServiceModel.Channels
                     {
                         if (writeBuffer == null)
                         {
-                            writeBuffer = DiagnosticUtility
-                                .Utility
+                            writeBuffer = DiagnosticUtility.Utility
                                 .AllocateByteArray(writeBufferSize);
                         }
 

@@ -989,8 +989,7 @@ namespace System.Web.Configuration
                 }
             }
 
-            System
-                .Web
+            System.Web
                 .Util
                 .Debug
                 .Trace("LoadAssembly", "Successfully loaded assembly '" + assemblyName + "'");
@@ -1010,8 +1009,7 @@ namespace System.Web.Configuration
             if (!FileUtil.DirectoryExists(binPath))
             {
                 // This is expected to fail if there is no 'bin' dir
-                System
-                    .Web
+                System.Web
                     .Util
                     .Debug
                     .Trace("Template", "Failed to access bin dir \"" + binPath + "\"");

@@ -178,8 +178,7 @@ namespace Microsoft.Interop
                 // Declare variable for return value
                 if (marshaller.TypeInfo.IsNativeReturnPosition)
                 {
-                    bool nativeReturnUsesNativeIdentifier = marshaller
-                        .Generator
+                    bool nativeReturnUsesNativeIdentifier = marshaller.Generator
                         .UsesNativeIdentifier(marshaller.TypeInfo, context);
 
                     // Always initialize the return value.
@@ -204,8 +203,7 @@ namespace Microsoft.Interop
                 }
                 else
                 {
-                    ValueBoundaryBehavior boundaryBehavior = marshaller
-                        .Generator
+                    ValueBoundaryBehavior boundaryBehavior = marshaller.Generator
                         .GetValueBoundaryBehavior(marshaller.TypeInfo, context);
 
                     // Declare variable with native type for parameter
@@ -220,8 +218,7 @@ namespace Microsoft.Interop
                             )
                     )
                     {
-                        TypeSyntax localType = marshaller
-                            .Generator
+                        TypeSyntax localType = marshaller.Generator
                             .AsNativeType(marshaller.TypeInfo)
                             .Syntax;
                         if (boundaryBehavior != ValueBoundaryBehavior.AddressOfNativeIdentifier)
@@ -238,8 +235,7 @@ namespace Microsoft.Interop
                                 Declare(
                                     RefType(localType),
                                     native,
-                                    marshaller
-                                        .Generator
+                                    marshaller.Generator
                                         .GenerateNativeByRefInitialization(
                                             marshaller.TypeInfo,
                                             context

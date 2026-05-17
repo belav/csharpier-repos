@@ -278,8 +278,7 @@ namespace Microsoft.Reflection
         {
             // Minimal implementation to cover only the cases we need
             System.Diagnostics.Debug.Assert((flags & BindingFlags.DeclaredOnly) != 0);
-            System
-                .Diagnostics
+            System.Diagnostics
                 .Debug
                 .Assert(
                     (
@@ -338,8 +337,7 @@ namespace Microsoft.Reflection
         {
             // Minimal implementation to cover only the cases we need
             System.Diagnostics.Debug.Assert((flags & BindingFlags.DeclaredOnly) != 0);
-            System
-                .Diagnostics
+            System.Diagnostics
                 .Debug
                 .Assert(
                     (

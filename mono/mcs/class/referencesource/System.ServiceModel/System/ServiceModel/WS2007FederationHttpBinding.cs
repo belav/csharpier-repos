@@ -77,8 +77,7 @@ namespace System.ServiceModel
             WS2007FederationHttpBindingElement element = section.Bindings[configurationName];
             if (element == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ConfigurationErrorsException(
                             SR.GetString(
@@ -97,10 +96,8 @@ namespace System.ServiceModel
 
         protected override SecurityBindingElement CreateMessageSecurity()
         {
-            return this.Security.CreateMessageSecurity(
-                this.ReliableSession.Enabled,
-                WS2007MessageSecurityVersion
-            );
+            return this.Security
+                .CreateMessageSecurity(this.ReliableSession.Enabled, WS2007MessageSecurityVersion);
         }
 
         internal static new bool TryCreate(

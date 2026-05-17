@@ -991,8 +991,7 @@ namespace System.DirectoryServices
                     // we know ADsPath does not end with object type qualifier like ",computer" so it is fine to compare with whole newparent's adspath
                     // for the case that child has different components from newparent in the aspects other than case, we don't do any processing, just let ADSI decide in case future adsi change
                     if (
-                        System
-                            .DirectoryServices
+                        System.DirectoryServices
                             .ActiveDirectory
                             .Utils
                             .Compare(
@@ -1012,8 +1011,7 @@ namespace System.DirectoryServices
                             | System.DirectoryServices.ActiveDirectory.Utils.SORT_STRINGSORT;
                         // work around the ADSI case sensitive
                         if (
-                            System
-                                .DirectoryServices
+                            System.DirectoryServices
                                 .ActiveDirectory
                                 .Utils
                                 .Compare(

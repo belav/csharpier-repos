@@ -45,19 +45,16 @@ public class Startup
                     try
                     {
                         addresses.Add(toAdd);
-                        await context
-                            .Response
+                        await context.Response
                             .WriteAsync("Added: <a href=\"" + toAdd + "\">" + toAdd + "</a>");
                     }
                     catch (Exception ex)
                     {
                         await context.Response.WriteAsync("Error adding: " + toAdd + "<br>");
-                        await context
-                            .Response
+                        await context.Response
                             .WriteAsync(ex.ToString().Replace(Environment.NewLine, "<br>"));
                     }
-                    await context
-                        .Response
+                    await context.Response
                         .WriteAsync(
                             "<br><a href=\""
                                 + context.Request.PathBase.ToUriComponent()
@@ -88,8 +85,7 @@ public class Startup
                     {
                         await context.Response.WriteAsync("Not found: " + toRemove);
                     }
-                    await context
-                        .Response
+                    await context.Response
                         .WriteAsync(
                             "<br><a href=\""
                                 + context.Request.PathBase.ToUriComponent()
@@ -109,8 +105,7 @@ public class Startup
             await context.Response.WriteAsync("Listening on these prefixes: <br>");
             foreach (var prefix in addresses)
             {
-                await context
-                    .Response
+                await context.Response
                     .WriteAsync(
                         "<a href=\""
                             + prefix
@@ -122,15 +117,13 @@ public class Startup
                     );
             }
 
-            await context
-                .Response
+            await context.Response
                 .WriteAsync(
                     "<form action=\""
                         + context.Request.PathBase.ToUriComponent()
                         + "\" method=\"GET\">"
                 );
-            await context
-                .Response
+            await context.Response
                 .WriteAsync("<input type=\"text\" name=\"add\" value=\"http://localhost:12348\" >");
             await context.Response.WriteAsync("<input type=\"submit\" value=\"Add\">");
             await context.Response.WriteAsync("</form>");

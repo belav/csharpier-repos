@@ -120,8 +120,7 @@ namespace Microsoft.Win32.SafeHandles
                 | Interop.Kernel32.SecurityOptions.SECURITY_ANONYMOUS
             );
 
-            SafeFileHandle fileHandle = Interop
-                .Kernel32
+            SafeFileHandle fileHandle = Interop.Kernel32
                 .CreateFile(
                     fullPath,
                     fAccess,
@@ -171,8 +170,7 @@ namespace Microsoft.Win32.SafeHandles
             };
 
             if (
-                !Interop
-                    .Kernel32
+                !Interop.Kernel32
                     .SetFileInformationByHandle(
                         fileHandle,
                         Interop.Kernel32.FileAllocationInfo,
@@ -263,8 +261,7 @@ namespace Microsoft.Win32.SafeHandles
             }
 
             Interop.NtDll.CreateOptions options;
-            int ntStatus = Interop
-                .NtDll
+            int ntStatus = Interop.NtDll
                 .NtQueryInformationFile(
                     FileHandle: this,
                     IoStatusBlock: out _,
@@ -356,8 +353,7 @@ namespace Microsoft.Win32.SafeHandles
                 Interop.Kernel32.FILE_STANDARD_INFO info;
 
                 if (
-                    Interop
-                        .Kernel32
+                    Interop.Kernel32
                         .GetFileInformationByHandleEx(
                             this,
                             Interop.Kernel32.FileStandardInfo,
@@ -381,8 +377,7 @@ namespace Microsoft.Win32.SafeHandles
                 }
 
                 Interop.Kernel32.STORAGE_READ_CAPACITY storageReadCapacity;
-                bool success = Interop
-                    .Kernel32
+                bool success = Interop.Kernel32
                     .DeviceIoControl(
                         this,
                         dwIoControlCode: Interop.Kernel32.IOCTL_STORAGE_READ_CAPACITY,

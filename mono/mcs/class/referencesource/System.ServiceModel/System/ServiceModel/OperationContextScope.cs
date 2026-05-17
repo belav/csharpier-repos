@@ -83,8 +83,7 @@ namespace System.ServiceModel
                 ServiceModelAppSettings.DisableOperationContextAsyncFlow
                 && this.thread != Thread.CurrentThread
             )
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(SR.SFxInvalidContextScopeThread0)
@@ -92,15 +91,13 @@ namespace System.ServiceModel
                     );
 
             if (CurrentScope != this)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(SR.GetString(SR.SFxInterleavedContextScopes0))
                     );
 
             if (OperationContext.Current != this.currentContext)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(SR.SFxContextModifiedInsideScope0)

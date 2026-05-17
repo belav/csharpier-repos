@@ -398,8 +398,7 @@ namespace System.Text.RegularExpressions
                         Match match
                     ) =>
                     {
-                        state
-                            .segments
+                        state.segments
                             .Add(state.inputMemory.Slice(state.prevat, match.Index - state.prevat));
                         state.prevat = match.Index + match.Length;
                         state.thisRef.ReplacementImpl(ref state.segments, match);
@@ -438,11 +437,9 @@ namespace System.Text.RegularExpressions
                         Match match
                     ) =>
                     {
-                        state
-                            .segments
+                        state.segments
                             .Add(
-                                state
-                                    .inputMemory
+                                state.inputMemory
                                     .Slice(
                                         match.Index + match.Length,
                                         state.prevat - match.Index - match.Length

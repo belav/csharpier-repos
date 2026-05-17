@@ -34,8 +34,7 @@ namespace System.ServiceModel.Configuration
                     || relativeAddress.Length < 3
                 )
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(
                             new ArgumentException(
                                 SR.GetString(SR.Hosting_RelativeAddressFormatError, relativeAddress)
@@ -55,8 +54,7 @@ namespace System.ServiceModel.Configuration
                     )
                 )
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(
                             new ArgumentException(
                                 SR.GetString(SR.Hosting_NoAbsoluteRelativeAddress, relativeAddress)
@@ -82,8 +80,7 @@ namespace System.ServiceModel.Configuration
         {
             if (relativeAddress == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull(ConfigurationStrings.RelativeAddress);
             }
             this.RelativeAddress = relativeAddress;

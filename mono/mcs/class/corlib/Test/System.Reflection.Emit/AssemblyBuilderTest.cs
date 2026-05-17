@@ -879,8 +879,7 @@ namespace MonoTests.System.Reflection.Emit
             aname.Name = "lib";
             aname.Version = new Version(3, 5, 7);
 
-            AssemblyBuilder ab = AppDomain
-                .CurrentDomain
+            AssemblyBuilder ab = AppDomain.CurrentDomain
                 .DefineDynamicAssembly(aname, AssemblyBuilderAccess.RunAndSave, tempDir);
 
             // AssemblyCulture
@@ -901,8 +900,7 @@ namespace MonoTests.System.Reflection.Emit
             }
             catch (CultureNotFoundException ex) { }
 
-            ab = AppDomain
-                .CurrentDomain
+            ab = AppDomain.CurrentDomain
                 .DefineDynamicAssembly(aname, AssemblyBuilderAccess.RunAndSave, tempDir);
 
             // AssemblyCulture
@@ -997,8 +995,7 @@ namespace MonoTests.System.Reflection.Emit
             aname.Name = "lib";
             aname.Version = new Version(3, 5, 7);
 
-            AssemblyBuilder ab = AppDomain
-                .CurrentDomain
+            AssemblyBuilder ab = AppDomain.CurrentDomain
                 .DefineDynamicAssembly(aname, AssemblyBuilderAccess.RunAndSave, tempDir);
 
             // AssemblyCulture
@@ -1019,8 +1016,7 @@ namespace MonoTests.System.Reflection.Emit
             }
             catch (CultureNotFoundException ex) { }
 
-            ab = AppDomain
-                .CurrentDomain
+            ab = AppDomain.CurrentDomain
                 .DefineDynamicAssembly(aname, AssemblyBuilderAccess.RunAndSave, tempDir);
 
             // AssemblyCulture
@@ -2400,8 +2396,7 @@ namespace MonoTests.System.Reflection.Emit
             const string fullName =
                 "AssemblyNameTest_PublicKey, Version=1.2.3.4, Culture=neutral, PublicKeyToken=0eea7ce65f35f2d8";
 
-            AssemblyBuilder ab = AppDomain
-                .CurrentDomain
+            AssemblyBuilder ab = AppDomain.CurrentDomain
                 .DefineDynamicAssembly(assemblyName, AssemblyBuilderAccess.Save, tempDir);
 
             AssemblyName abName = ab.GetName();
@@ -2443,8 +2438,7 @@ namespace MonoTests.System.Reflection.Emit
             const string fullName =
                 "AssemblyNameTest_MoreCultureInfo, Version=1.2.3.4, Culture=neutral, PublicKeyToken=0eea7ce65f35f2d8";
 
-            AssemblyBuilder ab = AppDomain
-                .CurrentDomain
+            AssemblyBuilder ab = AppDomain.CurrentDomain
                 .DefineDynamicAssembly(assemblyName, AssemblyBuilderAccess.Save, tempDir);
 
             AssemblyName abName = ab.GetName();

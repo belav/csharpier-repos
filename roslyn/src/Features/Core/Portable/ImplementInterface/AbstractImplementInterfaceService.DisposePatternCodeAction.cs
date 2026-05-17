@@ -168,8 +168,7 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
                 CancellationToken cancellationToken
             )
             {
-                var compilation = await document
-                    .Project
+                var compilation = await document.Project
                     .GetRequiredCompilationAsync(cancellationToken)
                     .ConfigureAwait(false);
 
@@ -223,12 +222,13 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
                     .GetCodeGenerationInfoAsync(context, Options.FallbackOptions, cancellationToken)
                     .ConfigureAwait(false);
 
-                var typeDeclarationWithAllMembers = info.Service.AddMembers(
-                    typeDeclarationWithCoreMembers,
-                    disposableMethods,
-                    info,
-                    cancellationToken
-                );
+                var typeDeclarationWithAllMembers = info.Service
+                    .AddMembers(
+                        typeDeclarationWithCoreMembers,
+                        disposableMethods,
+                        info,
+                        cancellationToken
+                    );
 
                 var docWithAllMembers = docWithCoreMembers.WithSyntaxRoot(
                     rootWithCoreMembers.ReplaceNode(
@@ -296,10 +296,8 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
                     disposedValueField
                 );
 
-                var disposeMethodDisplayString = this.Service.ToDisplayString(
-                    disposeImplMethod,
-                    s_format
-                );
+                var disposeMethodDisplayString = this.Service
+                    .ToDisplayString(disposeImplMethod, s_format);
 
                 var disposeInterfaceMethod = CreateDisposeInterfaceMethod(
                     compilation,
@@ -471,8 +469,7 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
                 var syntaxTree = await document
                     .GetRequiredSyntaxTreeAsync(cancellationToken)
                     .ConfigureAwait(false);
-                var configOptions = document
-                    .Project
+                var configOptions = document.Project
                     .AnalyzerOptions
                     .AnalyzerConfigOptionsProvider
                     .GetOptions(syntaxTree);
@@ -516,8 +513,7 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
                     )
                     .ConfigureAwait(false);
 
-                var compilation = await document
-                    .Project
+                var compilation = await document.Project
                     .GetRequiredCompilationAsync(cancellationToken)
                     .ConfigureAwait(false);
                 var boolType = compilation.GetSpecialType(SpecialType.System_Boolean);

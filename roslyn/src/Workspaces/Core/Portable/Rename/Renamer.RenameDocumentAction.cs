@@ -35,8 +35,7 @@ namespace Microsoft.CodeAnalysis.Rename
             public ImmutableArray<string> GetErrors(CultureInfo? culture = null) =>
                 _errorStringKeys.SelectAsArray(s =>
                     string.Format(
-                        WorkspacesResources
-                            .ResourceManager
+                        WorkspacesResources.ResourceManager
                             .GetString(s.FormatString, culture ?? WorkspacesResources.Culture)!,
                         s.Arguments
                     )

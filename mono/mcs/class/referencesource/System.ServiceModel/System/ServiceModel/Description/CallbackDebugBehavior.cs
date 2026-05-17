@@ -37,8 +37,7 @@ namespace System.ServiceModel.Description
             EndpointDispatcher endpointDispatcher
         )
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(
                     new InvalidOperationException(
                         SR.GetString(
@@ -54,8 +53,7 @@ namespace System.ServiceModel.Description
             ClientRuntime behavior
         )
         {
-            ChannelDispatcher channelDispatcher = behavior
-                .CallbackDispatchRuntime
+            ChannelDispatcher channelDispatcher = behavior.CallbackDispatchRuntime
                 .ChannelDispatcher;
             if (channelDispatcher != null && this.includeExceptionDetailInFaults)
             {

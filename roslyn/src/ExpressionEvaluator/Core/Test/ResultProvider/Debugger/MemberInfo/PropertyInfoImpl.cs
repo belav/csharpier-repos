@@ -141,13 +141,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             Debug.Assert(binder == null, "NYI");
             Debug.Assert(index == null, "NYI");
             Debug.Assert(culture == null, "NYI");
-            return this.Property.GetValue(
-                obj,
-                (System.Reflection.BindingFlags)invokeAttr,
-                null,
-                null,
-                null
-            );
+            return this.Property
+                .GetValue(obj, (System.Reflection.BindingFlags)invokeAttr, null, null, null);
         }
 
         public override bool IsDefined(Type attributeType, bool inherit)

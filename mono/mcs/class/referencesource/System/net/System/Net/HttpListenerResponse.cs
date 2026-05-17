@@ -215,12 +215,10 @@ namespace System.Net
             m_BoundaryType = templateResponse.m_BoundaryType;
             m_ContentLength = templateResponse.m_ContentLength;
             m_NativeResponse.StatusCode = templateResponse.m_NativeResponse.StatusCode;
-            m_NativeResponse.Version.MajorVersion = templateResponse
-                .m_NativeResponse
+            m_NativeResponse.Version.MajorVersion = templateResponse.m_NativeResponse
                 .Version
                 .MajorVersion;
-            m_NativeResponse.Version.MinorVersion = templateResponse
-                .m_NativeResponse
+            m_NativeResponse.Version.MinorVersion = templateResponse.m_NativeResponse
                 .Version
                 .MinorVersion;
             m_StatusDescription = templateResponse.m_StatusDescription;
@@ -707,8 +705,7 @@ namespace System.Net
                     fixed (byte* pStatusDescription = statusDescriptionBytes)
                     {
                         m_NativeResponse.ReasonLength = (ushort)statusDescriptionBytes.Length;
-                        WebHeaderCollection
-                            .HeaderEncoding
+                        WebHeaderCollection.HeaderEncoding
                             .GetBytes(
                                 StatusDescription,
                                 0,
@@ -726,8 +723,7 @@ namespace System.Net
                             {
                                 HttpListenerContext.EnsureBoundHandle();
                             }
-                            statusCode = UnsafeNclNativeMethods
-                                .HttpApi
+                            statusCode = UnsafeNclNativeMethods.HttpApi
                                 .HttpSendHttpResponse(
                                     HttpListenerContext.RequestQueueHandle,
                                     HttpListenerRequest.RequestId,
@@ -763,8 +759,7 @@ namespace System.Net
                         {
                             HttpListenerContext.EnsureBoundHandle();
                         }
-                        statusCode = UnsafeNclNativeMethods
-                            .HttpApi
+                        statusCode = UnsafeNclNativeMethods.HttpApi
                             .HttpSendHttpResponse(
                                 HttpListenerContext.RequestQueueHandle,
                                 HttpListenerRequest.RequestId,
@@ -882,8 +877,7 @@ namespace System.Net
 
         internal UnsafeNclNativeMethods.HttpApi.HTTP_FLAGS ComputeHeaders()
         {
-            UnsafeNclNativeMethods.HttpApi.HTTP_FLAGS flags = UnsafeNclNativeMethods
-                .HttpApi
+            UnsafeNclNativeMethods.HttpApi.HTTP_FLAGS flags = UnsafeNclNativeMethods.HttpApi
                 .HTTP_FLAGS
                 .NONE;
             GlobalLog.Print(
@@ -980,8 +974,7 @@ namespace System.Net
                 Headers.Add(HttpResponseHeader.Connection, "close");
                 if (flags == UnsafeNclNativeMethods.HttpApi.HTTP_FLAGS.NONE)
                 {
-                    flags = UnsafeNclNativeMethods
-                        .HttpApi
+                    flags = UnsafeNclNativeMethods.HttpApi
                         .HTTP_FLAGS
                         .HTTP_SEND_RESPONSE_FLAG_DISCONNECT;
                 }
@@ -1095,8 +1088,7 @@ namespace System.Net
                 headerName = Headers.GetKey(index) as string;
 
                 //See if this is an unknown header
-                lookup = UnsafeNclNativeMethods
-                    .HttpApi
+                lookup = UnsafeNclNativeMethods.HttpApi
                     .HTTP_RESPONSE_HEADER_ID
                     .IndexOfKnownHeader(headerName);
 
@@ -1127,8 +1119,7 @@ namespace System.Net
                     {
                         headerName = Headers.GetKey(index) as string;
                         headerValue = Headers.Get(index) as string;
-                        lookup = UnsafeNclNativeMethods
-                            .HttpApi
+                        lookup = UnsafeNclNativeMethods.HttpApi
                             .HTTP_RESPONSE_HEADER_ID
                             .IndexOfKnownHeader(headerName);
                         if (
@@ -1189,8 +1180,7 @@ namespace System.Net
                                 ];
                                 unknownHeaders[headers.UnknownHeaderCount].NameLength = (ushort)
                                     bytes.Length;
-                                WebHeaderCollection
-                                    .HeaderEncoding
+                                WebHeaderCollection.HeaderEncoding
                                     .GetBytes(headerName, 0, bytes.Length, bytes, 0);
                                 gcHandle = GCHandle.Alloc(bytes, GCHandleType.Pinned);
                                 pinnedHeaders.Add(gcHandle);
@@ -1204,8 +1194,7 @@ namespace System.Net
                                 ];
                                 unknownHeaders[headers.UnknownHeaderCount].RawValueLength = (ushort)
                                     bytes.Length;
-                                WebHeaderCollection
-                                    .HeaderEncoding
+                                WebHeaderCollection.HeaderEncoding
                                     .GetBytes(headerValue, 0, bytes.Length, bytes, 0);
                                 gcHandle = GCHandle.Alloc(bytes, GCHandleType.Pinned);
                                 pinnedHeaders.Add(gcHandle);
@@ -1238,8 +1227,7 @@ namespace System.Net
                                     WebHeaderCollection.HeaderEncoding.GetByteCount(headerValue)
                                 ];
                                 pKnownHeaders[lookup].RawValueLength = (ushort)bytes.Length;
-                                WebHeaderCollection
-                                    .HeaderEncoding
+                                WebHeaderCollection.HeaderEncoding
                                     .GetBytes(headerValue, 0, bytes.Length, bytes, 0);
                                 gcHandle = GCHandle.Alloc(bytes, GCHandleType.Pinned);
                                 pinnedHeaders.Add(gcHandle);

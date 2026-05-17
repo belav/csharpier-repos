@@ -15,8 +15,7 @@ namespace System.ServiceModel.Description
         {
             if (maxBatchSize < 0)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentOutOfRangeException(
                             "maxBatchSize",
@@ -35,8 +34,7 @@ namespace System.ServiceModel.Description
             {
                 if (value < 0)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentOutOfRangeException(
                                 "value",
@@ -51,8 +49,7 @@ namespace System.ServiceModel.Description
 
         void IEndpointBehavior.Validate(ServiceEndpoint serviceEndpoint)
         {
-            BindingElementCollection bindingElements = serviceEndpoint
-                .Binding
+            BindingElementCollection bindingElements = serviceEndpoint.Binding
                 .CreateBindingElements();
             bool transactedElementFound = false;
 
@@ -67,8 +64,7 @@ namespace System.ServiceModel.Description
             }
 
             if (!transactedElementFound)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(SR.GetString(SR.SfxTransactedBindingNeeded))
                     );
@@ -85,16 +81,14 @@ namespace System.ServiceModel.Description
         )
         {
             if (endpointDispatcher.DispatchRuntime.ReleaseServiceInstanceOnTransactionComplete)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(SR.SFxNoBatchingForReleaseOnComplete)
                         )
                     );
             if (serviceEndpoint.Contract.SessionMode == SessionMode.Required)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(SR.GetString(SR.SFxNoBatchingForSession))
                     );
@@ -106,8 +100,7 @@ namespace System.ServiceModel.Description
         )
         {
             if (serviceEndpoint.Contract.SessionMode == SessionMode.Required)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(SR.GetString(SR.SFxNoBatchingForSession))
                     );

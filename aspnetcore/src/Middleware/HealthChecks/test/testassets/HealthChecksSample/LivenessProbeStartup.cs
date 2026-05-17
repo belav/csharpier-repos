@@ -64,8 +64,7 @@ public class LivenessProbeStartup
         app.Run(
             async (context) =>
             {
-                await context
-                    .Response
+                await context.Response
                     .WriteAsync("Go to /health/ready to see the readiness status");
                 await context.Response.WriteAsync(Environment.NewLine);
                 await context.Response.WriteAsync("Go to /health/live to see the liveness status");

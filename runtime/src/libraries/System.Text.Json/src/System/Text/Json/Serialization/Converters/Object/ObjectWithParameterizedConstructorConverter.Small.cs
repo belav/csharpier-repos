@@ -83,14 +83,15 @@ namespace System.Text.Json.Serialization.Converters
 
             var info = (JsonParameterInfo<TArg>)jsonParameterInfo;
 
-            bool success = info.EffectiveConverter.TryRead(
-                ref reader,
-                info.ParameterType,
-                info.Options,
-                ref state,
-                out TArg? value,
-                out _
-            );
+            bool success = info.EffectiveConverter
+                .TryRead(
+                    ref reader,
+                    info.ParameterType,
+                    info.Options,
+                    ref state,
+                    out TArg? value,
+                    out _
+                );
 
             arg =
                 value is null && jsonParameterInfo.IgnoreNullTokensOnRead
@@ -152,8 +153,7 @@ namespace System.Text.Json.Serialization.Converters
             JsonSerializerOptions options
         )
         {
-            jsonTypeInfo.CreateObjectWithArgs = DefaultJsonTypeInfoResolver
-                .MemberAccessor
+            jsonTypeInfo.CreateObjectWithArgs = DefaultJsonTypeInfoResolver.MemberAccessor
                 .CreateParameterizedConstructor<T, TArg0, TArg1, TArg2, TArg3>(ConstructorInfo!);
         }
     }

@@ -41,8 +41,7 @@ namespace Microsoft.Extensions.Options.Generators
             SyntaxKind modifierToSearch,
             CancellationToken token
         ) =>
-            property
-                .DeclaringSyntaxReferences
+            property.DeclaringSyntaxReferences
                 .Any(x =>
                     x.GetSyntax(token) is PropertyDeclarationSyntax syntax
                     && syntax.Modifiers.Any(m => m.IsKind(modifierToSearch))

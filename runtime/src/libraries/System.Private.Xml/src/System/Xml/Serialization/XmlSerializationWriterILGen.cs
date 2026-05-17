@@ -1205,8 +1205,7 @@ namespace System.Xml.Serialization
                     ilg.Load(null);
                 else
                 {
-                    System
-                        .Diagnostics
+                    System.Diagnostics
                         .Debug
                         .Assert(xmlnsSource.StartsWith("o.@", StringComparison.Ordinal));
                     ILGenLoad(xmlnsSource);
@@ -1813,8 +1812,7 @@ namespace System.Xml.Serialization
                 }
                 else
                 {
-                    getEnumeratorMethod = arrayTypeDesc
-                        .Type!
+                    getEnumeratorMethod = arrayTypeDesc.Type!
                         .GetMethod("GetEnumerator", Type.EmptyTypes)!;
                 }
                 ilg.Call(getEnumeratorMethod);
@@ -2306,8 +2304,7 @@ namespace System.Xml.Serialization
                 switch (specialMapping.TypeDesc!.Kind)
                 {
                     case TypeKind.Node:
-                        MethodInfo WriteTo = source
-                            .Type!
+                        MethodInfo WriteTo = source.Type!
                             .GetMethod(
                                 "WriteTo",
                                 CodeGenerator.InstanceBindingFlags,
@@ -2351,8 +2348,7 @@ namespace System.Xml.Serialization
             {
                 if (source.Type == element.Mapping.TypeDesc!.Type)
                 {
-                    MethodInfo Nullable_get_HasValue = element
-                        .Mapping
+                    MethodInfo Nullable_get_HasValue = element.Mapping
                         .TypeDesc
                         .Type!
                         .GetMethod(
@@ -3144,8 +3140,7 @@ namespace System.Xml.Serialization
                     {
                         object sVar = initValue.ILG.GetVariable(initValue.Arg);
                         initValue.ILG.Load(sVar);
-                        initValue
-                            .ILG
+                        initValue.ILG
                             .ConvertValue(CodeGenerator.GetVariableType(sVar), localA.LocalType);
                     }
                 }

@@ -344,8 +344,7 @@ namespace System.Web.Mobile
             try
             {
                 return (MobileCapabilities.EvaluateCapabilitiesDelegate)
-                    MobileCapabilities
-                        .EvaluateCapabilitiesDelegate
+                    MobileCapabilities.EvaluateCapabilitiesDelegate
                         .CreateDelegate(
                             typeof(MobileCapabilities.EvaluateCapabilitiesDelegate),
                             FilterClass,

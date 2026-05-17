@@ -114,8 +114,7 @@ namespace IBM.Data.DB2
 
         private int _cultureAwareCompare(string strA, string strB)
         {
-            return CultureInfo
-                .CurrentCulture
+            return CultureInfo.CurrentCulture
                 .CompareInfo
                 .Compare(
                     strA,

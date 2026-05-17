@@ -227,8 +227,7 @@ namespace System.Net.Sockets
 
             int type = 0;
             int optLen = sizeof(int);
-            Interop.Error err = Interop
-                .Sys
+            Interop.Error err = Interop.Sys
                 .GetSockOpt(
                     handle,
                     SocketOptionLevel.Socket,

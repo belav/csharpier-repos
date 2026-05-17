@@ -60,8 +60,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
                     AddError(
                         ErrorCode.InvalidBaseType,
                         EdmSchemaErrorSeverity.Error,
-                        System
-                            .Data
+                        System.Data
                             .Entity
                             .Strings
                             .InvalidBaseTypeForItemType(BaseType.FQName, FQName)
@@ -73,8 +72,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
                     AddError(
                         ErrorCode.InvalidKey,
                         EdmSchemaErrorSeverity.Error,
-                        System
-                            .Data
+                        System.Data
                             .Entity
                             .Strings
                             .InvalidKeyKeyDefinedInBaseClass(FQName, BaseType.FQName)
@@ -161,8 +159,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
                 {
                     if (BaseType != null)
                     {
-                        System
-                            .Diagnostics
+                        System.Diagnostics
                             .Debug
                             .Assert(
                                 BaseType is SchemaEntityType,

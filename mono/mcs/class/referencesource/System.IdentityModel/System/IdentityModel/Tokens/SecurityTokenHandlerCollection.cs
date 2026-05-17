@@ -292,8 +292,7 @@ namespace System.IdentityModel.Tokens
         {
             if (String.IsNullOrEmpty(tokenString))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNullOrEmptyString("tokenString");
             }
 
@@ -347,8 +346,7 @@ namespace System.IdentityModel.Tokens
             SecurityTokenHandler handler = this[tokenDescriptor.TokenType];
             if (null == handler)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(SR.ID4020, tokenDescriptor.TokenType)
@@ -376,8 +374,7 @@ namespace System.IdentityModel.Tokens
             SecurityTokenHandler handler = this[token];
             if (null == handler || !handler.CanValidateToken)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(SR.GetString(SR.ID4011, token.GetType()))
                     );
@@ -420,8 +417,7 @@ namespace System.IdentityModel.Tokens
         {
             if (String.IsNullOrEmpty(tokenString))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNullOrEmptyString("tokenString");
             }
 
@@ -457,8 +453,7 @@ namespace System.IdentityModel.Tokens
             SecurityTokenHandler handler = this[token];
             if (null == handler || !handler.CanWriteToken)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(SR.GetString(SR.ID4010, token.GetType()))
                     );
@@ -483,8 +478,7 @@ namespace System.IdentityModel.Tokens
             SecurityTokenHandler handler = this[token];
             if (null == handler || !handler.CanWriteToken)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(SR.GetString(SR.ID4010, token.GetType()))
                     );
@@ -639,8 +633,7 @@ namespace System.IdentityModel.Tokens
 
             if (keyIdentifierClause == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("keyIdentifierClause");
             }
 
@@ -665,8 +658,7 @@ namespace System.IdentityModel.Tokens
 
             if (keyIdentifierClause == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("keyIdentifierClause");
             }
 

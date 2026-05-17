@@ -337,8 +337,7 @@ namespace Microsoft.Win32.SafeHandles
             try
             {
                 if (
-                    !CapiNative
-                        .UnsafeNativeMethods
+                    !CapiNative.UnsafeNativeMethods
                         .CryptDuplicateKey(this, IntPtr.Zero, 0, out duplicate)
                 )
                 {

@@ -355,8 +355,7 @@ namespace System.Net
                 if (_inputStream == null)
                 {
                     if (_isChunked || _contentLength > 0)
-                        _inputStream = _context
-                            .Connection
+                        _inputStream = _context.Connection
                             .GetRequestStream(_isChunked, _contentLength);
                     else
                         _inputStream = Stream.Null;

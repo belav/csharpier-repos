@@ -151,8 +151,7 @@ public class MapCodeTests : AbstractLanguageServerProtocolTests
             Assert.Null(results.DocumentChanges);
 
             Assert.True(
-                results
-                    .Changes!
+                results.Changes!
                     .TryGetValue(
                         ProtocolConversions.GetDocumentFilePathFromUri(documentUri),
                         out edits

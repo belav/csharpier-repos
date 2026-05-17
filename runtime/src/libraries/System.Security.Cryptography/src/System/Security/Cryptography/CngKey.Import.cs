@@ -92,8 +92,7 @@ namespace System.Security.Cryptography
                     ulVersion = 0,
                 };
 
-                ErrorCode errorCode = Interop
-                    .NCrypt
+                ErrorCode errorCode = Interop.NCrypt
                     .NCryptImportKey(
                         providerHandle,
                         IntPtr.Zero,
@@ -148,8 +147,7 @@ namespace System.Security.Cryptography
 
                 if (curveName == null)
                 {
-                    errorCode = Interop
-                        .NCrypt
+                    errorCode = Interop.NCrypt
                         .NCryptImportKey(
                             providerHandle,
                             IntPtr.Zero,

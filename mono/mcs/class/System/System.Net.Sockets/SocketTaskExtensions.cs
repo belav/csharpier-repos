@@ -12,8 +12,7 @@ namespace System.Net.Sockets
     {
         public static Task<Socket> AcceptAsync(this Socket socket)
         {
-            return Task<Socket>
-                .Factory
+            return Task<Socket>.Factory
                 .FromAsync(
                     (callback, state) => ((Socket)state).BeginAccept(callback, state),
                     asyncResult => ((Socket)asyncResult.AsyncState).EndAccept(asyncResult),
@@ -24,8 +23,7 @@ namespace System.Net.Sockets
         public static Task<Socket> AcceptAsync(this Socket socket, Socket acceptSocket)
         {
             const int ReceiveSize = 0;
-            return Task<Socket>
-                .Factory
+            return Task<Socket>.Factory
                 .FromAsync(
                     (socketForAccept, receiveSize, callback, state) =>
                         ((Socket)state).BeginAccept(socketForAccept, receiveSize, callback, state),
@@ -38,49 +36,53 @@ namespace System.Net.Sockets
 
         public static Task ConnectAsync(this Socket socket, EndPoint remoteEP)
         {
-            return Task.Factory.FromAsync(
-                (targetEndPoint, callback, state) =>
-                    ((Socket)state).BeginConnect(targetEndPoint, callback, state),
-                asyncResult => ((Socket)asyncResult.AsyncState).EndConnect(asyncResult),
-                remoteEP,
-                state: socket
-            );
+            return Task.Factory
+                .FromAsync(
+                    (targetEndPoint, callback, state) =>
+                        ((Socket)state).BeginConnect(targetEndPoint, callback, state),
+                    asyncResult => ((Socket)asyncResult.AsyncState).EndConnect(asyncResult),
+                    remoteEP,
+                    state: socket
+                );
         }
 
         public static Task ConnectAsync(this Socket socket, IPAddress address, int port)
         {
-            return Task.Factory.FromAsync(
-                (targetAddress, targetPort, callback, state) =>
-                    ((Socket)state).BeginConnect(targetAddress, targetPort, callback, state),
-                asyncResult => ((Socket)asyncResult.AsyncState).EndConnect(asyncResult),
-                address,
-                port,
-                state: socket
-            );
+            return Task.Factory
+                .FromAsync(
+                    (targetAddress, targetPort, callback, state) =>
+                        ((Socket)state).BeginConnect(targetAddress, targetPort, callback, state),
+                    asyncResult => ((Socket)asyncResult.AsyncState).EndConnect(asyncResult),
+                    address,
+                    port,
+                    state: socket
+                );
         }
 
         public static Task ConnectAsync(this Socket socket, IPAddress[] addresses, int port)
         {
-            return Task.Factory.FromAsync(
-                (targetAddresses, targetPort, callback, state) =>
-                    ((Socket)state).BeginConnect(targetAddresses, targetPort, callback, state),
-                asyncResult => ((Socket)asyncResult.AsyncState).EndConnect(asyncResult),
-                addresses,
-                port,
-                state: socket
-            );
+            return Task.Factory
+                .FromAsync(
+                    (targetAddresses, targetPort, callback, state) =>
+                        ((Socket)state).BeginConnect(targetAddresses, targetPort, callback, state),
+                    asyncResult => ((Socket)asyncResult.AsyncState).EndConnect(asyncResult),
+                    addresses,
+                    port,
+                    state: socket
+                );
         }
 
         public static Task ConnectAsync(this Socket socket, string host, int port)
         {
-            return Task.Factory.FromAsync(
-                (targetHost, targetPort, callback, state) =>
-                    ((Socket)state).BeginConnect(targetHost, targetPort, callback, state),
-                asyncResult => ((Socket)asyncResult.AsyncState).EndConnect(asyncResult),
-                host,
-                port,
-                state: socket
-            );
+            return Task.Factory
+                .FromAsync(
+                    (targetHost, targetPort, callback, state) =>
+                        ((Socket)state).BeginConnect(targetHost, targetPort, callback, state),
+                    asyncResult => ((Socket)asyncResult.AsyncState).EndConnect(asyncResult),
+                    host,
+                    port,
+                    state: socket
+                );
         }
 
         public static Task<int> ReceiveAsync(
@@ -89,8 +91,7 @@ namespace System.Net.Sockets
             SocketFlags socketFlags
         )
         {
-            return Task<int>
-                .Factory
+            return Task<int>.Factory
                 .FromAsync(
                     (targetBuffer, flags, callback, state) =>
                         ((Socket)state).BeginReceive(
@@ -114,8 +115,7 @@ namespace System.Net.Sockets
             SocketFlags socketFlags
         )
         {
-            return Task<int>
-                .Factory
+            return Task<int>.Factory
                 .FromAsync(
                     (targetBuffers, flags, callback, state) =>
                         ((Socket)state).BeginReceive(targetBuffers, flags, callback, state),
@@ -135,8 +135,7 @@ namespace System.Net.Sockets
         {
             object[] packedArguments = new object[] { socket, remoteEndPoint };
 
-            return Task<SocketReceiveFromResult>
-                .Factory
+            return Task<SocketReceiveFromResult>.Factory
                 .FromAsync(
                     (targetBuffer, flags, callback, state) =>
                     {
@@ -186,8 +185,7 @@ namespace System.Net.Sockets
         {
             object[] packedArguments = new object[] { socket, socketFlags, remoteEndPoint };
 
-            return Task<SocketReceiveMessageFromResult>
-                .Factory
+            return Task<SocketReceiveMessageFromResult>.Factory
                 .FromAsync(
                     (targetBuffer, callback, state) =>
                     {
@@ -243,8 +241,7 @@ namespace System.Net.Sockets
             SocketFlags socketFlags
         )
         {
-            return Task<int>
-                .Factory
+            return Task<int>.Factory
                 .FromAsync(
                     (targetBuffer, flags, callback, state) =>
                         ((Socket)state).BeginSend(
@@ -268,8 +265,7 @@ namespace System.Net.Sockets
             SocketFlags socketFlags
         )
         {
-            return Task<int>
-                .Factory
+            return Task<int>.Factory
                 .FromAsync(
                     (targetBuffers, flags, callback, state) =>
                         ((Socket)state).BeginSend(targetBuffers, flags, callback, state),
@@ -287,8 +283,7 @@ namespace System.Net.Sockets
             EndPoint remoteEP
         )
         {
-            return Task<int>
-                .Factory
+            return Task<int>.Factory
                 .FromAsync(
                     (targetBuffer, flags, endPoint, callback, state) =>
                         ((Socket)state).BeginSendTo(

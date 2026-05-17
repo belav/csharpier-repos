@@ -39,8 +39,7 @@ public class ExceptionHandlerMiddlewareTest
                     {
                         if (context.Exception is not null)
                         {
-                            context
-                                .ProblemDetails
+                            context.ProblemDetails
                                 .Extensions
                                 .Add("OriginalExceptionMessage", context.Exception.Message);
                         }

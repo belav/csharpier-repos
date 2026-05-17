@@ -34,8 +34,7 @@ internal static class ClientCertBufferingExtensions
                     && !connectionItems.Items.TryGetValue("tls.clientcert.negotiated", out var _)
                 )
                 {
-                    context
-                        .Features
+                    context.Features
                         .Set<ITlsConnectionFeature>(
                             new ClientCertBufferingFeature(tlsFeature, context)
                         );

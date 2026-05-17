@@ -277,8 +277,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                 diagnostics,
                 compilation.Assembly
             );
-            var conversion = compilation
-                .Conversions
+            var conversion = compilation.Conversions
                 .ClassifyConversionFromExpression(expr, type, isChecked: false, ref useSiteInfo);
             diagnostics.Add(expr.Syntax, useSiteInfo);
             Debug.Assert(conversion.IsValid || diagnostics.HasAnyErrors());

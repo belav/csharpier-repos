@@ -26,8 +26,7 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.VisualBasic
         [IdeFact, Trait(Traits.Feature, Traits.Features.Classification)]
         public async Task NavigationBetweenKeywords()
         {
-            await TestServices
-                .Editor
+            await TestServices.Editor
                 .SetTextAsync(
                     @"
 Class C
@@ -41,20 +40,17 @@ End Class",
                 );
 
             await VerifyAsync("To", 4, HangMitigatingCancellationToken);
-            await TestServices
-                .Workspace
+            await TestServices.Workspace
                 .WaitForAsyncOperationsAsync(
                     FeatureAttribute.ReferenceHighlighting,
                     HangMitigatingCancellationToken
                 );
-            await TestServices
-                .Shell
+            await TestServices.Shell
                 .ExecuteCommandAsync(
                     WellKnownCommands.Edit.NextHighlightedReference,
                     HangMitigatingCancellationToken
                 );
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .CurrentLineTextAsync(
                     "        For a = 0 To 1 Step$$ 1",
                     assertCaretPosition: true,
@@ -69,8 +65,7 @@ End Class",
         )
         {
             await TestServices.Editor.PlaceCaretAsync(marker, charsOffset: -1, cancellationToken);
-            await TestServices
-                .Workspace
+            await TestServices.Workspace
                 .WaitForAllAsyncOperationsAsync(
                     [
                         FeatureAttribute.Workspace,

@@ -366,8 +366,7 @@ namespace Mono.Linker
 
             for (var i = 0; i < type.GenericArguments.Count; ++i)
             {
-                result
-                    .GenericArguments
+                result.GenericArguments
                     .Add(
                         InflateGenericType(
                             genericInstanceProvider,
@@ -422,8 +421,7 @@ namespace Mono.Linker
 
 #pragma warning disable RS0030 // MethodReference.Parameters is banned. It makes sense to use when needing to directly use Cecil's api.
             foreach (var parameter in methodDef.Parameters)
-                method
-                    .Parameters
+                method.Parameters
                     .Add(
                         new ParameterDefinition(
                             parameter.Name,

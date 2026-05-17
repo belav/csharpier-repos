@@ -49,12 +49,10 @@ namespace System.IdentityModel.Tokens
         )
         {
             if (request == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("request"));
             if (id == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("id"));
 
             this.id = id;
@@ -203,8 +201,7 @@ namespace System.IdentityModel.Tokens
                     && policyHelper.ProtectionScenario != ProtectionScenario.TrustedProxy
                 )
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new SecurityTokenException(
                                 SR.GetString(SR.SecurityChannelBindingMissing)
@@ -262,8 +259,7 @@ namespace System.IdentityModel.Tokens
                 {
                     if (statusCode == (int)SecurityStatus.ContinueNeeded)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new SecurityTokenException(
                                     SR.GetString(SR.KerberosMultilegsNotSupported),
@@ -273,8 +269,7 @@ namespace System.IdentityModel.Tokens
                     }
                     else if (statusCode == (int)SecurityStatus.OutOfMemory)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new SecurityTokenException(
                                     SR.GetString(SR.KerberosApReqInvalidOrOutOfMemory),
@@ -284,8 +279,7 @@ namespace System.IdentityModel.Tokens
                     }
                     else
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new SecurityTokenException(
                                     SR.GetString(SR.FailAcceptSecurityContext),
@@ -316,8 +310,7 @@ namespace System.IdentityModel.Tokens
                 );
                 if (statusCode != (int)SecurityStatus.OK)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new Win32Exception(statusCode));
                 }
 

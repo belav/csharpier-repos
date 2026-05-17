@@ -287,36 +287,37 @@ namespace System.Activities.Core.Presentation
             ModelItem oldSelectedCatch = this.SelectedCatch;
             this.SelectedCatch = newSelectedCatch;
 
-            this.Dispatcher.BeginInvoke(
-                DispatcherPriority.Normal,
-                (Action)(
-                    () =>
-                    {
-                        if (oldSelectedCatch != null)
+            this.Dispatcher
+                .BeginInvoke(
+                    DispatcherPriority.Normal,
+                    (Action)(
+                        () =>
                         {
-                            CatchDesigner oldSelectedCatchDesigner = (CatchDesigner)
-                                oldSelectedCatch.View;
-                            if (oldSelectedCatchDesigner != null)
+                            if (oldSelectedCatch != null)
                             {
-                                oldSelectedCatchDesigner.ExpandState = false;
-                                oldSelectedCatchDesigner.PinState = false;
+                                CatchDesigner oldSelectedCatchDesigner = (CatchDesigner)
+                                    oldSelectedCatch.View;
+                                if (oldSelectedCatchDesigner != null)
+                                {
+                                    oldSelectedCatchDesigner.ExpandState = false;
+                                    oldSelectedCatchDesigner.PinState = false;
+                                }
+                            }
+                            if (newSelectedCatch != null)
+                            {
+                                CollapseTryView();
+                                CollapseFinallyView();
+                                CatchDesigner newSelectedCatchDesigner = (CatchDesigner)
+                                    newSelectedCatch.View;
+                                if (newSelectedCatchDesigner != null)
+                                {
+                                    newSelectedCatchDesigner.ExpandState = true;
+                                    newSelectedCatchDesigner.PinState = true;
+                                }
                             }
                         }
-                        if (newSelectedCatch != null)
-                        {
-                            CollapseTryView();
-                            CollapseFinallyView();
-                            CatchDesigner newSelectedCatchDesigner = (CatchDesigner)
-                                newSelectedCatch.View;
-                            if (newSelectedCatchDesigner != null)
-                            {
-                                newSelectedCatchDesigner.ExpandState = true;
-                                newSelectedCatchDesigner.PinState = true;
-                            }
-                        }
-                    }
-                )
-            );
+                    )
+                );
         }
 
         void CreateCatch(Type exceptionType)
@@ -420,31 +421,33 @@ namespace System.Activities.Core.Presentation
         void ExpandFinallyView()
         {
             UpdateSelection(null);
-            this.Dispatcher.BeginInvoke(
-                DispatcherPriority.Normal,
-                (Action)(
-                    () =>
-                    {
-                        this.ShowTryExpanded = false;
-                        this.ShowFinallyExpanded = true;
-                    }
-                )
-            );
+            this.Dispatcher
+                .BeginInvoke(
+                    DispatcherPriority.Normal,
+                    (Action)(
+                        () =>
+                        {
+                            this.ShowTryExpanded = false;
+                            this.ShowFinallyExpanded = true;
+                        }
+                    )
+                );
         }
 
         void ExpandTryView()
         {
             UpdateSelection(null);
-            this.Dispatcher.BeginInvoke(
-                DispatcherPriority.Normal,
-                (Action)(
-                    () =>
-                    {
-                        this.ShowFinallyExpanded = false;
-                        this.ShowTryExpanded = true;
-                    }
-                )
-            );
+            this.Dispatcher
+                .BeginInvoke(
+                    DispatcherPriority.Normal,
+                    (Action)(
+                        () =>
+                        {
+                            this.ShowFinallyExpanded = false;
+                            this.ShowTryExpanded = true;
+                        }
+                    )
+                );
         }
 
         void CollapseFinallyView()

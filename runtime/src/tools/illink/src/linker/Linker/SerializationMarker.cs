@@ -215,8 +215,7 @@ namespace Mono.Linker
             if (type == null)
                 return;
 
-            _context
-                .Annotations
+            _context.Annotations
                 .Mark(
                     type,
                     typeReason,
@@ -246,8 +245,7 @@ namespace Mono.Linker
                         field.FieldType,
                         new DependencyInfo(DependencyKind.SerializedRecursiveType, type)
                     );
-                    _context
-                        .Annotations
+                    _context.Annotations
                         .Mark(
                             field,
                             new DependencyInfo(DependencyKind.SerializedMember, type),
@@ -274,16 +272,14 @@ namespace Mono.Linker
                         new DependencyInfo(DependencyKind.SerializedRecursiveType, type)
                     );
                     if (get != null)
-                        _context
-                            .Annotations
+                        _context.Annotations
                             .Mark(
                                 get,
                                 new DependencyInfo(DependencyKind.SerializedMember, type),
                                 new MessageOrigin(type)
                             );
                     if (set != null)
-                        _context
-                            .Annotations
+                        _context.Annotations
                             .Mark(
                                 set,
                                 new DependencyInfo(DependencyKind.SerializedMember, type),
@@ -301,8 +297,7 @@ namespace Mono.Linker
                     if (!method.IsPublic || !method.IsDefaultConstructor())
                         continue;
 
-                    _context
-                        .Annotations
+                    _context.Annotations
                         .Mark(
                             method,
                             new DependencyInfo(DependencyKind.SerializedMember, type),

@@ -83,8 +83,7 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript
             var navigationSpan = item.GetCurrentItemSpan(textVersion, item.Spans.First());
 
             var workspace = document.Project.Solution.Workspace;
-            var navigationService = workspace
-                .Services
+            var navigationService = workspace.Services
                 .GetRequiredService<IDocumentNavigationService>();
             return await navigationService
                 .TryNavigateToPositionAsync(

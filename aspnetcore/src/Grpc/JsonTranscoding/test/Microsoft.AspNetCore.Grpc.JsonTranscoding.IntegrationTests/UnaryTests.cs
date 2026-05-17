@@ -28,8 +28,7 @@ public class UnaryTests : IntegrationTestBase
         {
             return Task.FromResult(new HelloReply { Message = $"Hello {request.Name}!" });
         }
-        var method = Fixture
-            .DynamicGrpc
+        var method = Fixture.DynamicGrpc
             .AddUnaryMethod<HelloRequest, HelloReply>(
                 UnaryMethod,
                 Greeter.Descriptor.FindMethodByName("SayHello")
@@ -62,8 +61,7 @@ public class UnaryTests : IntegrationTestBase
 
             return new HelloReply { Message = $"Hello {request.Name}!" };
         }
-        var method = Fixture
-            .DynamicGrpc
+        var method = Fixture.DynamicGrpc
             .AddUnaryMethod<HelloRequest, HelloReply>(
                 UnaryMethod,
                 Greeter.Descriptor.FindMethodByName("SayHello")
@@ -108,8 +106,7 @@ public class UnaryTests : IntegrationTestBase
 
             return new HelloReply { Message = $"Hello {request.Name}!" };
         }
-        var method = Fixture
-            .DynamicGrpc
+        var method = Fixture.DynamicGrpc
             .AddUnaryMethod<HelloRequest, HelloReply>(
                 UnaryMethod,
                 Greeter.Descriptor.FindMethodByName("SayHello")
@@ -147,8 +144,7 @@ public class UnaryTests : IntegrationTestBase
             authContext = context.AuthContext;
             return Task.FromResult(new HelloReply { Message = $"Hello {request.Name}!" });
         }
-        var method = Fixture
-            .DynamicGrpc
+        var method = Fixture.DynamicGrpc
             .AddUnaryMethod<HelloRequest, HelloReply>(
                 UnaryMethod,
                 Greeter.Descriptor.FindMethodByName("SayHello")
@@ -178,8 +174,7 @@ public class UnaryTests : IntegrationTestBase
         {
             return Task.FromResult(new HelloReply { Message = $"Hello {request.Name}!" });
         }
-        var method = Fixture
-            .DynamicGrpc
+        var method = Fixture.DynamicGrpc
             .AddUnaryMethod<HelloRequest, HelloReply>(
                 UnaryMethod,
                 Greeter.Descriptor.FindMethodByName("SayHelloPost")
@@ -224,8 +219,7 @@ public class UnaryTests : IntegrationTestBase
         {
             return Task.FromResult(new HelloReply { Message = $"Hello {request.Name}!" });
         }
-        var method = Fixture
-            .DynamicGrpc
+        var method = Fixture.DynamicGrpc
             .AddUnaryMethod<HelloRequest, HelloReply>(
                 UnaryMethod,
                 Greeter.Descriptor.FindMethodByName("SayHelloPost")
@@ -258,8 +252,7 @@ public class UnaryTests : IntegrationTestBase
         {
             return Task.FromResult(new HelloReply { Message = $"Hello {request.Name}!" });
         }
-        var method = Fixture
-            .DynamicGrpc
+        var method = Fixture.DynamicGrpc
             .AddUnaryMethod<EnumHelloRequest, HelloReply>(
                 UnaryMethod,
                 Greeter.Descriptor.FindMethodByName("SayHelloPostEnum")

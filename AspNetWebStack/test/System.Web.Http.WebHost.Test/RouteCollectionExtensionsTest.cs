@@ -12,8 +12,7 @@ namespace System.Web.Http
         [Fact]
         public void IsCorrectType()
         {
-            Assert
-                .Type
+            Assert.Type
                 .HasProperties(
                     typeof(RouteCollectionExtensions),
                     TypeAssert.TypeProperties.IsStatic

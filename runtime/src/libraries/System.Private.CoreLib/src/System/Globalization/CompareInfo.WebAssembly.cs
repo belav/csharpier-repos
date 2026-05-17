@@ -50,8 +50,7 @@ namespace System.Globalization
             fixed (char* pString1 = &MemoryMarshal.GetReference(string1))
             fixed (char* pString2 = &MemoryMarshal.GetReference(string2))
             {
-                cmpResult = Interop
-                    .JsGlobalization
+                cmpResult = Interop.JsGlobalization
                     .CompareString(
                         cultureName,
                         pString1,
@@ -84,8 +83,7 @@ namespace System.Globalization
             fixed (char* pSource = &MemoryMarshal.GetReference(source))
             fixed (char* pPrefix = &MemoryMarshal.GetReference(prefix))
             {
-                result = Interop
-                    .JsGlobalization
+                result = Interop.JsGlobalization
                     .StartsWith(
                         cultureName,
                         pSource,
@@ -118,8 +116,7 @@ namespace System.Globalization
             fixed (char* pSource = &MemoryMarshal.GetReference(source))
             fixed (char* pPrefix = &MemoryMarshal.GetReference(prefix))
             {
-                result = Interop
-                    .JsGlobalization
+                result = Interop.JsGlobalization
                     .EndsWith(
                         cultureName,
                         pSource,
@@ -175,8 +172,7 @@ namespace System.Globalization
                 fixed (char* pSource = &MemoryMarshal.GetReference(source))
                 fixed (char* pTarget = &MemoryMarshal.GetReference(target))
                 {
-                    idx = Interop
-                        .JsGlobalization
+                    idx = Interop.JsGlobalization
                         .IndexOf(
                             m_name,
                             pTarget,

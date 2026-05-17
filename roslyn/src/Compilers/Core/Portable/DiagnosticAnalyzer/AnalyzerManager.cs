@@ -516,8 +516,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                                 cancellationToken,
                                 out var configuredValue
                             )
-                            || analyzerExecutor
-                                .AnalyzerOptions
+                            || analyzerExecutor.AnalyzerOptions
                                 .TryGetSeverityFromBulkConfiguration(
                                     tree,
                                     analyzerExecutor.Compilation,
@@ -608,8 +607,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                     )
                     || (
                         options.SyntaxTreeOptionsProvider is object
-                        && options
-                            .SyntaxTreeOptionsProvider
+                        && options.SyntaxTreeOptionsProvider
                             .TryGetGlobalDiagnosticValue(diag.Id, cancellationToken, out severity)
                     )
                 )

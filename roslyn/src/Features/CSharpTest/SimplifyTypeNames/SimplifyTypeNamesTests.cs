@@ -5355,8 +5355,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
                     }
                 }
                 """,
-                parseOptions: CSharpParseOptions
-                    .Default
+                parseOptions: CSharpParseOptions.Default
                     .WithLanguageVersion(LanguageVersion.CSharp6)
             );
         }

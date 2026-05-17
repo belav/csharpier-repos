@@ -334,10 +334,8 @@ namespace System.Data.Services.Client
             LinkDescriptor link;
 
             if (
-                this.bindings.TryGetValue(
-                    new LinkDescriptor(source, sourceProperty, target),
-                    out link
-                )
+                this.bindings
+                    .TryGetValue(new LinkDescriptor(source, sourceProperty, target), out link)
             )
             {
                 return link;
@@ -1931,8 +1929,7 @@ namespace System.Data.Services.Client
             string prefix = String.Empty;
             ClientType clientType = ClientType.Create(entity.GetType());
 
-            ClientType.ClientProperty[] keys = clientType
-                .Properties
+            ClientType.ClientProperty[] keys = clientType.Properties
                 .Where<ClientType.ClientProperty>(ClientType.ClientProperty.GetKeyProperty)
                 .ToArray();
             foreach (ClientType.ClientProperty property in keys)
@@ -2353,13 +2350,14 @@ namespace System.Data.Services.Client
                 Debug.Assert(null != binding.Target, "null target in collection");
                 EntityDescriptor targetResource = this.entityDescriptors[binding.Target];
 
-                Uri navigationPropertyUri = this.BaseUriWithSlash.MakeRelativeUri(
-                    DataServiceContext.GenerateEditLinkUri(
-                        this.BaseUriWithSlash,
-                        binding.SourceProperty,
-                        targetResource.Entity
-                    )
-                );
+                Uri navigationPropertyUri = this.BaseUriWithSlash
+                    .MakeRelativeUri(
+                        DataServiceContext.GenerateEditLinkUri(
+                            this.BaseUriWithSlash,
+                            binding.SourceProperty,
+                            targetResource.Entity
+                        )
+                    );
 
                 relative = Util.CreateUri(
                     XmlConstants.UriLinkSegment + "/" + navigationPropertyUri.OriginalString,
@@ -3093,8 +3091,7 @@ namespace System.Data.Services.Client
 
                 EpmSourcePathSegment matchedSegment =
                     currentSegment != null
-                        ? currentSegment
-                            .SubProperties
+                        ? currentSegment.SubProperties
                             .SingleOrDefault(s => s.PropertyName == property.PropertyName)
                         : null;
 
@@ -3388,8 +3385,7 @@ namespace System.Data.Services.Client
         {
             if (null == this.identityToDescriptor)
             {
-                System
-                    .Threading
+                System.Threading
                     .Interlocked
                     .CompareExchange(
                         ref this.identityToDescriptor,
@@ -3843,8 +3839,7 @@ namespace System.Data.Services.Client
                     if (property.MimeTypeProperty != null)
                     {
 #if ASTORIA_OPEN_OBJECT
-                        property
-                            .MimeTypeProperty
+                        property.MimeTypeProperty
                             .SetValue(this.entity, mimeType, null, ref openProps, false);
                         Debug.Assert(openProps == null, "These should not be set in this path");
 #else
@@ -3934,8 +3929,7 @@ namespace System.Data.Services.Client
                 if (null == queries)
                 {
                     #region changed entries
-                    this.ChangedEntries = context
-                        .entityDescriptors
+                    this.ChangedEntries = context.entityDescriptors
                         .Values
                         .Cast<Descriptor>()
                         .Union(context.bindings.Values.Cast<Descriptor>())
@@ -4197,8 +4191,7 @@ namespace System.Data.Services.Client
                                         int read;
                                         do
                                         {
-                                            read = contentStream
-                                                .Stream
+                                            read = contentStream.Stream
                                                 .Read(buffer, 0, buffer.Length);
                                             if (read > 0)
                                             {
@@ -4336,8 +4329,7 @@ namespace System.Data.Services.Client
                         System.Threading.Interlocked.CompareExchange(ref this.request, null, pereq);
                         if (IsFlagSet(this.options, SaveChangesOptions.Batch))
                         {
-                            System
-                                .Threading
+                            System.Threading
                                 .Interlocked
                                 .CompareExchange(
                                     ref this.batchResponse,
@@ -4579,24 +4571,26 @@ namespace System.Data.Services.Client
             )
             {
 #if ASTORIA_LIGHT
-                HttpWebRequest mediaResourceRequest = this.Context.CreateRequest(
-                    requestUri,
-                    method,
-                    false,
-                    XmlConstants.MimeAny,
-                    Util.DataServiceVersion1,
-                    sendChunked,
-                    HttpStack.ClientHttp
-                );
+                HttpWebRequest mediaResourceRequest = this.Context
+                    .CreateRequest(
+                        requestUri,
+                        method,
+                        false,
+                        XmlConstants.MimeAny,
+                        Util.DataServiceVersion1,
+                        sendChunked,
+                        HttpStack.ClientHttp
+                    );
 #else
-                HttpWebRequest mediaResourceRequest = this.Context.CreateRequest(
-                    requestUri,
-                    method,
-                    false,
-                    XmlConstants.MimeAny,
-                    Util.DataServiceVersion1,
-                    sendChunked
-                );
+                HttpWebRequest mediaResourceRequest = this.Context
+                    .CreateRequest(
+                        requestUri,
+                        method,
+                        false,
+                        XmlConstants.MimeAny,
+                        Util.DataServiceVersion1,
+                        sendChunked
+                    );
 #endif
                 return mediaResourceRequest;
             }
@@ -4703,12 +4697,13 @@ namespace System.Data.Services.Client
 
                 this.changesetStarted = true;
                 this.buildBatchWriter.WriteLine("--{0}", this.batchBoundary);
-                this.buildBatchWriter.WriteLine(
-                    "{0}: {1}; boundary={2}",
-                    XmlConstants.HttpContentType,
-                    XmlConstants.MimeMultiPartMixed,
-                    this.changesetBoundary
-                );
+                this.buildBatchWriter
+                    .WriteLine(
+                        "{0}: {1}; boundary={2}",
+                        XmlConstants.HttpContentType,
+                        XmlConstants.MimeMultiPartMixed,
+                        this.changesetBoundary
+                    );
                 this.buildBatchWriter.WriteLine();
                 this.buildBatchWriter.WriteLine("--{0}", this.changesetBoundary);
             }
@@ -4737,16 +4732,18 @@ namespace System.Data.Services.Client
                 {
                     this.HandleOperationStart();
                     WriteOperationResponseHeaders(this.buildBatchWriter, 500);
-                    this.buildBatchWriter.WriteLine(
-                        "{0}: {1}",
-                        XmlConstants.HttpContentType,
-                        XmlConstants.MimeTextPlain
-                    );
-                    this.buildBatchWriter.WriteLine(
-                        "{0}: {1}",
-                        XmlConstants.HttpContentID,
-                        this.ChangedEntries[this.entryIndex].ChangeOrder
-                    );
+                    this.buildBatchWriter
+                        .WriteLine(
+                            "{0}: {1}",
+                            XmlConstants.HttpContentType,
+                            XmlConstants.MimeTextPlain
+                        );
+                    this.buildBatchWriter
+                        .WriteLine(
+                            "{0}: {1}",
+                            XmlConstants.HttpContentID,
+                            this.ChangedEntries[this.entryIndex].ChangeOrder
+                        );
                     this.buildBatchWriter.WriteLine();
                     this.buildBatchWriter.WriteLine(e.ToString());
                     this.HandleOperationEnd();
@@ -4831,11 +4828,8 @@ namespace System.Data.Services.Client
                     }
                 }
 
-                this.buildBatchWriter.WriteLine(
-                    "{0}: {1}",
-                    XmlConstants.HttpContentID,
-                    entry.ChangeOrder
-                );
+                this.buildBatchWriter
+                    .WriteLine("{0}: {1}", XmlConstants.HttpContentID, entry.ChangeOrder);
                 this.buildBatchWriter.WriteLine();
             }
 
@@ -4897,14 +4891,15 @@ namespace System.Data.Services.Client
                     + XmlConstants.HttpMultipartBoundary
                     + "="
                     + this.batchBoundary;
-                HttpWebRequest httpWebRequest = this.Context.CreateRequest(
-                    requestUri,
-                    XmlConstants.HttpMethodPost,
-                    false,
-                    contentType,
-                    Util.DataServiceVersion1,
-                    false
-                );
+                HttpWebRequest httpWebRequest = this.Context
+                    .CreateRequest(
+                        requestUri,
+                        XmlConstants.HttpMethodPost,
+                        false,
+                        contentType,
+                        Util.DataServiceVersion1,
+                        false
+                    );
                 httpWebRequest.ContentLength = memory.Length - memory.Position;
                 return httpWebRequest;
             }
@@ -5040,11 +5035,8 @@ namespace System.Data.Services.Client
 
                         if (entry.IsResource)
                         {
-                            this.Context.CreateRequestBatch(
-                                entityDescriptor,
-                                text,
-                                replaceOnUpdate
-                            );
+                            this.Context
+                                .CreateRequestBatch(entityDescriptor, text, replaceOnUpdate);
                         }
                         else
                         {
@@ -5622,12 +5614,13 @@ namespace System.Data.Services.Client
                                                     )
                                                 )
                                                 {
-                                                    this.Context.HandleResponsePost(
-                                                        entityDescriptor,
-                                                        atom,
-                                                        editLink,
-                                                        etag
-                                                    );
+                                                    this.Context
+                                                        .HandleResponsePost(
+                                                            entityDescriptor,
+                                                            atom,
+                                                            editLink,
+                                                            etag
+                                                        );
                                                 }
                                             }
                                             finally
@@ -5646,12 +5639,13 @@ namespace System.Data.Services.Client
                                         }
                                         else
                                         {
-                                            this.Context.HandleResponsePost(
-                                                entityDescriptor,
-                                                null,
-                                                editLink,
-                                                etag
-                                            );
+                                            this.Context
+                                                .HandleResponsePost(
+                                                    entityDescriptor,
+                                                    null,
+                                                    editLink,
+                                                    etag
+                                                );
                                         }
                                     }
                                     else
@@ -5718,15 +5712,15 @@ namespace System.Data.Services.Client
                         && (
                             0 == changesetIndex
                             || 0 < queryCount
-                            || this.ChangedEntries.Any(o =>
-                                o.ContentGeneratedForSave && 0 == o.SaveResultWasProcessed
-                            )
+                            || this.ChangedEntries
+                                .Any(o =>
+                                    o.ContentGeneratedForSave && 0 == o.SaveResultWasProcessed
+                                )
                                 && (
                                     !IsFlagSet(this.options, SaveChangesOptions.Batch)
                                     || null
-                                        == this.ChangedEntries.FirstOrDefault(o =>
-                                            null != o.SaveError
-                                        )
+                                        == this.ChangedEntries
+                                            .FirstOrDefault(o => null != o.SaveError)
                                 )
                         )
                     ) || (null != this.Queries && queryCount != this.Queries.Length)

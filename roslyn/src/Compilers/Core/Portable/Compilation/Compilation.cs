@@ -2690,8 +2690,8 @@ namespace Microsoft.CodeAnalysis
 
             // Dev10 always uses the default value for 32bit for sizeOfHeapReserve.
             // check with link -dump -headers <filename>
-            const ulong sizeOfHeapReserve =
-                Cci.ModulePropertiesForSerialization.DefaultSizeOfHeapReserve32Bit;
+            const ulong sizeOfHeapReserve = Cci.ModulePropertiesForSerialization
+                .DefaultSizeOfHeapReserve32Bit;
 
             ulong sizeOfStackReserve = requires64Bit
                 ? Cci.ModulePropertiesForSerialization.DefaultSizeOfStackReserve64Bit
@@ -3941,8 +3941,7 @@ namespace Microsoft.CodeAnalysis
                             emitOptions.EmitMetadataOnly,
                             emitOptions.IncludePrivateMembers,
                             deterministic,
-                            emitOptions
-                                .InstrumentationKinds
+                            emitOptions.InstrumentationKinds
                                 .Contains(InstrumentationKind.TestCoverage),
                             privateKeyOpt,
                             cancellationToken
@@ -4077,25 +4076,26 @@ namespace Microsoft.CodeAnalysis
             bool deterministicPrimaryOutput =
                 (metadataOnly && !includePrivateMembers) || isDeterministic;
             if (
-                !Cci.PeWriter.WritePeToStream(
-                    new EmitContext(
-                        moduleBeingBuilt,
-                        metadataDiagnostics,
+                !Cci.PeWriter
+                    .WritePeToStream(
+                        new EmitContext(
+                            moduleBeingBuilt,
+                            metadataDiagnostics,
+                            metadataOnly,
+                            includePrivateMembersOnPrimaryOutput,
+                            rebuildData: rebuildData
+                        ),
+                        messageProvider,
+                        getPeStream,
+                        getPortablePdbStreamOpt,
+                        nativePdbWriterOpt,
+                        pdbPathOpt,
                         metadataOnly,
-                        includePrivateMembersOnPrimaryOutput,
-                        rebuildData: rebuildData
-                    ),
-                    messageProvider,
-                    getPeStream,
-                    getPortablePdbStreamOpt,
-                    nativePdbWriterOpt,
-                    pdbPathOpt,
-                    metadataOnly,
-                    deterministicPrimaryOutput,
-                    emitTestCoverageData,
-                    privateKeyOpt,
-                    cancellationToken
-                )
+                        deterministicPrimaryOutput,
+                        emitTestCoverageData,
+                        privateKeyOpt,
+                        cancellationToken
+                    )
             )
             {
                 return false;
@@ -4108,25 +4108,26 @@ namespace Microsoft.CodeAnalysis
                 Debug.Assert(!includePrivateMembers);
 
                 if (
-                    !Cci.PeWriter.WritePeToStream(
-                        new EmitContext(
-                            moduleBeingBuilt,
-                            syntaxNode: null,
-                            metadataDiagnostics,
+                    !Cci.PeWriter
+                        .WritePeToStream(
+                            new EmitContext(
+                                moduleBeingBuilt,
+                                syntaxNode: null,
+                                metadataDiagnostics,
+                                metadataOnly: true,
+                                includePrivateMembers: false
+                            ),
+                            messageProvider,
+                            getMetadataPeStreamOpt,
+                            getPortablePdbStreamOpt: null,
+                            nativePdbWriterOpt: null,
+                            pdbPathOpt: null,
                             metadataOnly: true,
-                            includePrivateMembers: false
-                        ),
-                        messageProvider,
-                        getMetadataPeStreamOpt,
-                        getPortablePdbStreamOpt: null,
-                        nativePdbWriterOpt: null,
-                        pdbPathOpt: null,
-                        metadataOnly: true,
-                        isDeterministic: true,
-                        emitTestCoverageData: false,
-                        privateKeyOpt: privateKeyOpt,
-                        cancellationToken: cancellationToken
-                    )
+                            isDeterministic: true,
+                            emitTestCoverageData: false,
+                            privateKeyOpt: privateKeyOpt,
+                            cancellationToken: cancellationToken
+                        )
                 )
                 {
                     return false;

@@ -223,9 +223,8 @@ namespace MonoCasTests.System.Web
             AspNetHostingPermissionLevel level
         )
         {
-            ConstructorInfo ci = this.Type.GetConstructor(
-                new Type[1] { typeof(HttpWorkerRequest) }
-            );
+            ConstructorInfo ci = this.Type
+                .GetConstructor(new Type[1] { typeof(HttpWorkerRequest) });
             Assert.IsNotNull(ci, ".ctor(HttpWorkerRequest)");
             return ci.Invoke(new object[1] { null });
         }

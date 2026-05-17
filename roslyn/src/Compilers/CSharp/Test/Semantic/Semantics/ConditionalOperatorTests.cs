@@ -90,8 +90,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             TestConditional(
                 "true ? T : U",
                 null,
-                parseOptions: TestOptions
-                    .Regular8
+                parseOptions: TestOptions.Regular8
                     .WithLanguageVersion(
                         MessageID.IDS_FeatureTargetTypedConditional.RequiredVersion()
                     ),
@@ -107,8 +106,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             TestConditional(
                 "false ? T : 1",
                 null,
-                parseOptions: TestOptions
-                    .Regular8
+                parseOptions: TestOptions.Regular8
                     .WithLanguageVersion(
                         MessageID.IDS_FeatureTargetTypedConditional.RequiredVersion()
                     ),
@@ -343,8 +341,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             TestConditional(
                 "1 ? null : null",
                 null,
-                parseOptions: TestOptions
-                    .Regular
+                parseOptions: TestOptions.Regular
                     .WithLanguageVersion(
                         MessageID.IDS_FeatureTargetTypedConditional.RequiredVersion()
                     ),
@@ -1449,8 +1446,7 @@ System.Collections.Generic.List`1[System.Int32]
                 TestConditionalCore(
                     conditionalExpression,
                     expectedType,
-                    TestOptions
-                        .Regular8
+                    TestOptions.Regular8
                         .WithLanguageVersion(
                             MessageID.IDS_FeatureTargetTypedConditional.RequiredVersion()
                         ),

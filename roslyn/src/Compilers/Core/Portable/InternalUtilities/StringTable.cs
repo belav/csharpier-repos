@@ -707,8 +707,7 @@ namespace Roslyn.Utilities
             foreach (var chunk in text.GetChunks())
             {
                 if (
-                    !chunk
-                        .Span
+                    !chunk.Span
                         .Equals(
                             array.AsSpan().Slice(chunkOffset, chunk.Length),
                             StringComparison.Ordinal

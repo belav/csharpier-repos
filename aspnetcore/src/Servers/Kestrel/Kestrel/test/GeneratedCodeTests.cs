@@ -70,8 +70,7 @@ public class GeneratedCodeTests
                 transportConnectionGeneratedPath
             );
 
-            CodeGenerator
-                .Program
+            CodeGenerator.Program
                 .Run(
                     testHttpHeadersGeneratedPath,
                     testHttpProtocolGeneratedPath,

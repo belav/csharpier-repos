@@ -72,8 +72,7 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
         )
         {
             using (
-                context
-                    .OperationContext
+                context.OperationContext
                     .AddScope(allowCancellation: true, FeaturesResources.Change_signature)
             )
             {
@@ -88,8 +87,7 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
                     return false;
                 }
 
-                var document = subjectBuffer
-                    .CurrentSnapshot
+                var document = subjectBuffer.CurrentSnapshot
                     .GetFullyLoadedOpenDocumentInCurrentContextWithChanges(
                         context.OperationContext,
                         _threadingContext

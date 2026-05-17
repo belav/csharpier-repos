@@ -59,8 +59,7 @@ namespace TestLibrary
             // This is needed for marshalling of function pointers to work - requires private access to the ADR unfortunately
             // Delegate marshalling doesn't support casting delegates to anything but the original type
             // so we need to use the original type.
-            _corehost_error_writer_fnType = typeof(object)
-                .Assembly
+            _corehost_error_writer_fnType = typeof(object).Assembly
                 .GetType("Interop+HostPolicy+corehost_error_writer_fn");
         }
 

@@ -15,8 +15,7 @@ namespace System.Web.Mvc.Test
         public void ClientRulesWithStringLengthAttribute()
         {
             // Arrange
-            var metadata = ModelMetadataProviders
-                .Current
+            var metadata = ModelMetadataProviders.Current
                 .GetMetadataForProperty(() => null, typeof(string), "Length");
             var context = new ControllerContext();
             var attribute = new StringLengthAttribute(10) { MinimumLength = 3 };

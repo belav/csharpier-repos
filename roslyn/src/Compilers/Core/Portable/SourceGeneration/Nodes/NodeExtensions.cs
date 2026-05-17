@@ -36,8 +36,7 @@ namespace Microsoft.CodeAnalysis
                 // don't log the new table if we skipped creating a new one
                 var newTableOpt = newTable != previousTable ? newTable : null;
 
-                CodeAnalysisEventSource
-                    .Log
+                CodeAnalysisEventSource.Log
                     .NodeTransform(
                         self.GetHashCode(),
                         name ?? "<anonymous>",

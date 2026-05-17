@@ -60,8 +60,7 @@ public class JwtBearerPostConfigureOptions : IPostConfigureOptions<JwtBearerOpti
 
                 if (
                     options.RequireHttpsMetadata
-                    && !options
-                        .MetadataAddress
+                    && !options.MetadataAddress
                         .StartsWith("https://", StringComparison.OrdinalIgnoreCase)
                 )
                 {
@@ -75,8 +74,7 @@ public class JwtBearerPostConfigureOptions : IPostConfigureOptions<JwtBearerOpti
                     options.Backchannel = new HttpClient(
                         options.BackchannelHttpHandler ?? new HttpClientHandler()
                     );
-                    options
-                        .Backchannel
+                    options.Backchannel
                         .DefaultRequestHeaders
                         .UserAgent
                         .ParseAdd("Microsoft ASP.NET Core JwtBearer handler");

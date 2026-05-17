@@ -86,8 +86,7 @@ namespace System.ServiceModel.Channels
                     }
                     else
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(
                                     SR.GetString(
@@ -111,8 +110,7 @@ namespace System.ServiceModel.Channels
                     }
                     else
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(
                                     SR.GetString(
@@ -148,8 +146,7 @@ namespace System.ServiceModel.Channels
                     && assertion != null
                 )
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(
@@ -169,8 +166,7 @@ namespace System.ServiceModel.Channels
                     && assertion != null
                 )
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(
@@ -239,8 +235,7 @@ namespace System.ServiceModel.Channels
                 }
                 else
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentException(
                                 SR.GetString(
@@ -257,12 +252,10 @@ namespace System.ServiceModel.Channels
         void AddParts(ref MessagePartSpecification parts1, MessagePartSpecification parts2)
         {
             if (parts1 == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("parts1"));
             if (parts2 == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("parts2"));
 
             if (!parts2.IsEmpty())
@@ -542,8 +535,7 @@ namespace System.ServiceModel.Channels
                     {
                         if (fault.ProtectionLevel != newProtectionLevel)
                         {
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
                                     new ArgumentException(
                                         SR.GetString(
@@ -584,8 +576,7 @@ namespace System.ServiceModel.Channels
                     || contractProtectionLevel != otherBindingProtectionLevel.UniformProtectionLevel
                 )
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentException(
                                 SR.GetString(
@@ -657,8 +648,7 @@ namespace System.ServiceModel.Channels
                 }
                 else
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidChannelBindingException(
                                 SR.GetString(
@@ -742,8 +732,7 @@ namespace System.ServiceModel.Channels
                     && assertion != null
                 )
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(
@@ -764,8 +753,7 @@ namespace System.ServiceModel.Channels
                     && assertion != null
                 )
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(
@@ -827,8 +815,7 @@ namespace System.ServiceModel.Channels
                 }
                 else if (assertion != null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(
@@ -885,8 +872,7 @@ namespace System.ServiceModel.Channels
                 }
                 else if (assertion != null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(
@@ -946,8 +932,7 @@ namespace System.ServiceModel.Channels
                             binding
                         );
                         if (
-                            importer
-                                .State
+                            importer.State
                                 .ContainsKey(InSecureConversationBootstrapBindingImportMode)
                         )
                         {
@@ -963,8 +948,7 @@ namespace System.ServiceModel.Channels
                 }
                 else if (assertion != null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(
@@ -1083,8 +1067,7 @@ namespace System.ServiceModel.Channels
                     if (config.HasImportFailed)
                     {
 #pragma warning suppress 56506
-                        importer
-                            .Errors
+                        importer.Errors
                             .Add(
                                 new MetadataConversionError(
                                     SR.GetString(

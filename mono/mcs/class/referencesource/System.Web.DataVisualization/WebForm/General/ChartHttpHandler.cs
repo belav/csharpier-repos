@@ -148,8 +148,7 @@ namespace System.Web.UI.DataVisualization.Charting
                     {
                         using (TextWriter w = new StringWriter(CultureInfo.InvariantCulture))
                         {
-                            HttpContext
-                                .Current
+                            HttpContext.Current
                                 .Server
                                 .Execute(ChartHttpHandlerName + "?" + handlerCheckQry + "=0", w);
                         }
@@ -1145,12 +1144,13 @@ namespace System.Web.UI.DataVisualization.Charting
         /// </summary>
         private void InspectHandlerLoader()
         {
-            this._handlerConstructor = this.HandlerType.GetConstructor(
-                BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance,
-                null,
-                new Type[0],
-                new ParameterModifier[0]
-            );
+            this._handlerConstructor = this.HandlerType
+                .GetConstructor(
+                    BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance,
+                    null,
+                    new Type[0],
+                    new ParameterModifier[0]
+                );
             if (this._handlerConstructor == null)
             {
                 throw new InvalidOperationException(
@@ -1309,16 +1309,14 @@ namespace System.Web.UI.DataVisualization.Charting
             {
                 Process process = Process.GetCurrentProcess();
                 if (
-                    process
-                        .ProcessName
+                    process.ProcessName
                         .StartsWith("WebDev.WebServer", StringComparison.OrdinalIgnoreCase)
                 )
                 {
                     return true;
                 }
                 if (
-                    process
-                        .ProcessName
+                    process.ProcessName
                         .StartsWith("ii----press", StringComparison.OrdinalIgnoreCase)
                 )
                 {

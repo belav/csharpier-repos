@@ -186,16 +186,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.PdbSourceDocument
 
                 var masWorkspace = service.TryGetWorkspace();
 
-                var document = masWorkspace!
-                    .CurrentSolution
+                var document = masWorkspace!.CurrentSolution
                     .Projects
                     .First()
                     .Documents
                     .First(d => d.FilePath == file.FilePath);
 
                 // Mapping the project from the generated document should map back to the original project
-                var provider = workspace
-                    .ExportProvider
+                var provider = workspace.ExportProvider
                     .GetExportedValues<IMetadataAsSourceFileProvider>()
                     .OfType<PdbSourceDocumentMetadataAsSourceFileProvider>()
                     .Single();
@@ -299,8 +297,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.PdbSourceDocument
             // We construct our own composition here because we only want the decompilation metadata as source provider
             // to be available.
 
-            return EditorTestCompositions
-                .EditorFeatures
+            return EditorTestCompositions.EditorFeatures
                 .WithExcludedPartTypes(
                     ImmutableHashSet.Create(typeof(IMetadataAsSourceFileProvider))
                 )
@@ -384,8 +381,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.PdbSourceDocument
             Encoding? fallbackEncoding = null
         )
         {
-            var compilationFactory = project
-                .Solution
+            var compilationFactory = project.Solution
                 .Services
                 .GetRequiredLanguageService<ICompilationFactoryService>(LanguageNames.CSharp);
             var options = compilationFactory

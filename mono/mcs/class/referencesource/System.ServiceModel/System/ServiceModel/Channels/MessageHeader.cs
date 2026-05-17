@@ -96,12 +96,10 @@ namespace System.ServiceModel.Channels
         public void WriteHeader(XmlDictionaryWriter writer, MessageVersion messageVersion)
         {
             if (writer == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("writer"));
             if (messageVersion == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("messageVersion"));
             OnWriteStartHeader(writer, messageVersion);
             OnWriteHeaderContents(writer, messageVersion);
@@ -111,12 +109,10 @@ namespace System.ServiceModel.Channels
         public void WriteStartHeader(XmlDictionaryWriter writer, MessageVersion messageVersion)
         {
             if (writer == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("writer"));
             if (messageVersion == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("messageVersion"));
             OnWriteStartHeader(writer, messageVersion);
         }
@@ -133,12 +129,10 @@ namespace System.ServiceModel.Channels
         public void WriteHeaderContents(XmlDictionaryWriter writer, MessageVersion messageVersion)
         {
             if (writer == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("writer"));
             if (messageVersion == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("messageVersion"));
             OnWriteHeaderContents(writer, messageVersion);
         }
@@ -302,8 +296,7 @@ namespace System.ServiceModel.Channels
         )
         {
             if (serializer == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("serializer"));
 
             return new XmlObjectSerializerHeader(
@@ -421,8 +414,7 @@ namespace System.ServiceModel.Channels
             }
             catch (FormatException exception)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new XmlException(exception.Message, null));
             }
         }
@@ -519,15 +511,13 @@ namespace System.ServiceModel.Channels
         {
             if (null == name)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("name"));
             }
 
             if (name.Length == 0)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentException(
                             SR.GetString(SR.SFXHeaderNameCannotBeNullOrEmpty),
@@ -570,8 +560,7 @@ namespace System.ServiceModel.Channels
             }
             else
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(
@@ -640,8 +629,7 @@ namespace System.ServiceModel.Channels
         )
         {
             if (!IsMessageVersionSupported(messageVersion))
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentException(
                             SR.GetString(
@@ -809,8 +797,7 @@ namespace System.ServiceModel.Channels
         public override bool IsMessageVersionSupported(MessageVersion messageVersion)
         {
             if (messageVersion == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("messageVersion"));
             return messageVersion == this.version;
         }

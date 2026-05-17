@@ -41,8 +41,7 @@ namespace System
             out int version
         )
         {
-            string targetFrameworkMoniker = AppDomain
-                .CurrentDomain
+            string targetFrameworkMoniker = AppDomain.CurrentDomain
                 .SetupInformation
                 .TargetFrameworkName;
 

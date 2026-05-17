@@ -246,8 +246,7 @@ namespace System.Web.UI.WebControls
                 table.CellPadding = 0;
 
                 // Title row
-                table
-                    .Rows
+                table.Rows
                     .Add(
                         CreateRow(
                             CreateCell(
@@ -262,8 +261,7 @@ namespace System.Web.UI.WebControls
                 // Instruction row
                 if (_login.InstructionText.Length > 0)
                 {
-                    table
-                        .Rows
+                    table.Rows
                         .Add(
                             CreateRow(
                                 CreateCell(
@@ -301,8 +299,7 @@ namespace System.Web.UI.WebControls
                 else
                 { // Orientation.Vertical
                     if (_login.TextLayout == LoginTextLayout.TextOnLeft)
-                        table
-                            .Rows
+                        table.Rows
                             .Add(
                                 CreateRow(
                                     UserNameLabel,
@@ -317,8 +314,7 @@ namespace System.Web.UI.WebControls
                         table.Rows.Add(CreateRow(null, UserName, UserNameRequired, null));
                     }
                     if (_login.TextLayout == LoginTextLayout.TextOnLeft)
-                        table
-                            .Rows
+                        table.Rows
                             .Add(
                                 CreateRow(
                                     PasswordLabel,
@@ -334,8 +330,7 @@ namespace System.Web.UI.WebControls
                     }
                     if (useRememberMe)
                         table.Rows.Add(CreateRow(CreateCell(RememberMe, null, null)));
-                    table
-                        .Rows
+                    table.Rows
                         .Add(CreateRow(CreateCell(LoginButton, null, null, HorizontalAlign.Right)));
                 }
 

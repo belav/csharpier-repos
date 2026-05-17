@@ -151,8 +151,7 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ProjectSystemShim
                 var entryPointNames = entryPoints
                     .Select(e =>
                         e.ToDisplayString(
-                            SymbolDisplayFormat
-                                .FullyQualifiedFormat
+                            SymbolDisplayFormat.FullyQualifiedFormat
                                 .WithGlobalNamespaceStyle(SymbolDisplayGlobalNamespaceStyle.Omitted)
                         )
                     )

@@ -85,12 +85,10 @@ public partial class HttpConnectionTests
                 async (connection) =>
                 {
                     await connection.StartAsync().DefaultTimeout();
-                    await connection
-                        .Transport
+                    await connection.Transport
                         .Output
                         .WriteAsync(Encoding.UTF8.GetBytes("Hello world 1"));
-                    await connection
-                        .Transport
+                    await connection.Transport
                         .Output
                         .WriteAsync(Encoding.UTF8.GetBytes("Hello world 2"));
                 }
@@ -135,8 +133,7 @@ public partial class HttpConnectionTests
                     {
                         await connection.StartAsync().DefaultTimeout();
 
-                        var feature = connection
-                            .Features
+                        var feature = connection.Features
                             .Get<IConnectionInherentKeepAliveFeature>();
                         Assert.NotNull(feature);
                         Assert.Equal(expectedValue, feature.HasInherentKeepAlive);
@@ -172,8 +169,7 @@ public partial class HttpConnectionTests
                     Assert.StartsWith("Microsoft SignalR/", userAgentHeader);
 
                     // user agent version should come from version embedded in assembly metadata
-                    var assemblyVersion = typeof(Constants)
-                        .Assembly
+                    var assemblyVersion = typeof(Constants).Assembly
                         .GetCustomAttribute<AssemblyInformationalVersionAttribute>();
 
                     Assert.Contains(assemblyVersion.InformationalVersion, userAgentHeader);
@@ -196,8 +192,7 @@ public partial class HttpConnectionTests
                 async (connection) =>
                 {
                     await connection.StartAsync().DefaultTimeout();
-                    await connection
-                        .Transport
+                    await connection.Transport
                         .Output
                         .WriteAsync(Encoding.UTF8.GetBytes("Hello World"));
                 }
@@ -251,8 +246,7 @@ public partial class HttpConnectionTests
                 async (connection) =>
                 {
                     await connection.StartAsync().DefaultTimeout();
-                    await connection
-                        .Transport
+                    await connection.Transport
                         .Output
                         .WriteAsync(Encoding.UTF8.GetBytes("Hello World"));
                 }
@@ -536,8 +530,7 @@ public partial class HttpConnectionTests
                     var message = await connection.Transport.Input.ReadAtLeastAsync(14);
                     Assert.Equal("This is a test", Encoding.UTF8.GetString(message.Buffer));
                     await startSendTcs.Task;
-                    await connection
-                        .Transport
+                    await connection.Transport
                         .Output
                         .WriteAsync(Encoding.UTF8.GetBytes("Hello world 1"));
                     await tcs.Task;
@@ -669,8 +662,7 @@ public partial class HttpConnectionTests
                 async (connection) =>
                 {
                     await connection.StartAsync().DefaultTimeout();
-                    await connection
-                        .Transport
+                    await connection.Transport
                         .Output
                         .WriteAsync(Encoding.UTF8.GetBytes("Hello world 1"));
                     await sendFinishedTcs.Task;
@@ -731,8 +723,7 @@ public partial class HttpConnectionTests
                 async (connection) =>
                 {
                     await connection.StartAsync().DefaultTimeout();
-                    await connection
-                        .Transport
+                    await connection.Transport
                         .Output
                         .WriteAsync(Encoding.UTF8.GetBytes("Hello world 1"));
                     await Assert.ThrowsAsync<HttpRequestException>(async () =>

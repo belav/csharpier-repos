@@ -37,12 +37,11 @@ namespace System.ServiceModel.Description
         {
             get
             {
-                WebScriptEnablingBehavior webScriptEnablingBehavior =
-                    this.Behaviors.Find<WebScriptEnablingBehavior>();
+                WebScriptEnablingBehavior webScriptEnablingBehavior = this.Behaviors
+                    .Find<WebScriptEnablingBehavior>();
                 if (webScriptEnablingBehavior == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR2.GetString(

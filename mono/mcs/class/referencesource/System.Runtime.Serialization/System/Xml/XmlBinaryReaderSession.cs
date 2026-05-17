@@ -21,8 +21,7 @@ namespace System.Xml
         public XmlDictionaryString Add(int id, string value)
         {
             if (id < 0)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -30,16 +29,14 @@ namespace System.Xml
                         new ArgumentOutOfRangeException(SR.GetString(SR.XmlInvalidID))
                     );
             if (value == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
                     .ThrowHelperArgumentNull("value");
             XmlDictionaryString xmlString;
             if (TryLookup(id, out xmlString))
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -91,8 +88,7 @@ namespace System.Xml
         public bool TryLookup(string value, out XmlDictionaryString result)
         {
             if (value == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -130,8 +126,7 @@ namespace System.Xml
         public bool TryLookup(XmlDictionaryString value, out XmlDictionaryString result)
         {
             if (value == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility

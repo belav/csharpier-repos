@@ -77,8 +77,7 @@ namespace Castle.Core.Logging
 
             if (exception != null)
             {
-                Console
-                    .Out
+                Console.Out
                     .WriteLine(
                         "[{0}] '{1}' {2}: {3} {4}",
                         loggerLevel,

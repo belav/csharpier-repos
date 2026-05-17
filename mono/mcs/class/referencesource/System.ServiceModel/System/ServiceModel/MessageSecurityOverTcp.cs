@@ -34,8 +34,7 @@ namespace System.ServiceModel
             {
                 if (!MessageCredentialTypeHelper.IsDefined(value))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new ArgumentOutOfRangeException("value"));
                 }
                 this.clientCredentialType = value;
@@ -79,8 +78,7 @@ namespace System.ServiceModel
                 switch (this.clientCredentialType)
                 {
                     case MessageCredentialType.None:
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(
                                     SR.GetString(SR.ClientCredentialTypeMustBeSpecifiedForMixedMode)
@@ -111,8 +109,7 @@ namespace System.ServiceModel
                         break;
                     default:
                         Fx.Assert("unknown ClientCredentialType");
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(new NotSupportedException());
                 }
                 result = SecurityBindingElement.CreateSecureConversationBindingElement(
@@ -158,8 +155,7 @@ namespace System.ServiceModel
                         break;
                     default:
                         Fx.Assert("unknown ClientCredentialType");
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(new NotSupportedException());
                 }
                 result = SecurityBindingElement.CreateSecureConversationBindingElement(
@@ -270,8 +266,7 @@ namespace System.ServiceModel
                                 new WSSecurityTokenSerializer(
                                     bootstrapSecurity.MessageSecurityVersion.SecurityVersion,
                                     bootstrapSecurity.MessageSecurityVersion.TrustVersion,
-                                    bootstrapSecurity
-                                        .MessageSecurityVersion
+                                    bootstrapSecurity.MessageSecurityVersion
                                         .SecureConversationVersion,
                                     true,
                                     null,
@@ -316,8 +311,7 @@ namespace System.ServiceModel
                                 new WSSecurityTokenSerializer(
                                     bootstrapSecurity.MessageSecurityVersion.SecurityVersion,
                                     bootstrapSecurity.MessageSecurityVersion.TrustVersion,
-                                    bootstrapSecurity
-                                        .MessageSecurityVersion
+                                    bootstrapSecurity.MessageSecurityVersion
                                         .SecureConversationVersion,
                                     true,
                                     null,

@@ -102,8 +102,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Diagnostics
 
         private protected override TestAnalyzerReferenceByLanguage CreateTestAnalyzersReference() =>
             new(
-                ImmutableDictionary<string, ImmutableArray<DiagnosticAnalyzer>>
-                    .Empty
+                ImmutableDictionary<string, ImmutableArray<DiagnosticAnalyzer>>.Empty
                     .Add(
                         LanguageNames.CSharp,
                         ImmutableArray.Create(

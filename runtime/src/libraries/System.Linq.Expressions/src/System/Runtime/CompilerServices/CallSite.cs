@@ -332,8 +332,7 @@ namespace System.Runtime.CompilerServices
                 {
                     if (
                         target
-                        == System
-                            .Linq
+                        == System.Linq
                             .Expressions
                             .Compiler
                             .DelegateHelpers
@@ -354,8 +353,7 @@ namespace System.Runtime.CompilerServices
                 {
                     if (
                         target
-                        == System
-                            .Linq
+                        == System.Linq
                             .Expressions
                             .Compiler
                             .DelegateHelpers

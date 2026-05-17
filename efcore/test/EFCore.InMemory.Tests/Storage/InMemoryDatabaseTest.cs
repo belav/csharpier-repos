@@ -17,12 +17,10 @@ public class InMemoryDatabaseTest
     {
         var serviceProvider = InMemoryTestHelpers.Instance.CreateServiceProvider();
 
-        var store1 = InMemoryTestHelpers
-            .Instance
+        var store1 = InMemoryTestHelpers.Instance
             .CreateContextServices(serviceProvider, CreateModel())
             .GetRequiredService<IInMemoryDatabase>();
-        var store2 = InMemoryTestHelpers
-            .Instance
+        var store2 = InMemoryTestHelpers.Instance
             .CreateContextServices(serviceProvider, CreateModel())
             .GetRequiredService<IInMemoryDatabase>();
 
@@ -60,8 +58,7 @@ public class InMemoryDatabaseTest
         var optionsBuilder = new DbContextOptionsBuilder();
         optionsBuilder.UseInMemoryDatabase(nameof(InMemoryDatabaseCreatorTest));
 
-        return InMemoryTestHelpers
-            .Instance
+        return InMemoryTestHelpers.Instance
             .CreateContextServices(serviceProvider, optionsBuilder.Options);
     }
 
@@ -153,8 +150,7 @@ public class InMemoryDatabaseTest
         var serviceCollection = new ServiceCollection();
         serviceCollection.AddSingleton<ILoggerFactory>(loggerFactory);
 
-        var scopedServices = InMemoryTestHelpers
-            .Instance
+        var scopedServices = InMemoryTestHelpers.Instance
             .CreateContextServices(serviceCollection, CreateModel());
 
         var customer = new Customer { Id = 42, Name = "Unikorn" };
@@ -167,8 +163,7 @@ public class InMemoryDatabaseTest
 
         await inMemoryDatabase.SaveChangesAsync(new[] { entityEntry });
 
-        var (Level, _, Message, _, _) = loggerFactory
-            .Log
+        var (Level, _, Message, _, _) = loggerFactory.Log
             .Single(t => t.Id.Id == InMemoryEventId.ChangesSaved.Id);
 
         Assert.Equal(LogLevel.Information, Level);

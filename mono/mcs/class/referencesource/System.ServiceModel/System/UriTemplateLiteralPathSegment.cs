@@ -50,8 +50,7 @@ namespace System
             }
             if (segment.IndexOf(UriTemplate.WildcardPath, StringComparison.Ordinal) != -1)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new FormatException(
                             SR.GetString(
@@ -74,8 +73,7 @@ namespace System
                 // This path through UriBuilder will sometimes '----' various segments
                 // such as '../' and './'.  When this happens and the result is an empty
                 // string, we should just throw and tell the user we don't handle that.
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(
                         "segment",
                         SR.GetString(SR.UTInvalidFormatSegmentOrQueryPart, segment)

@@ -61,8 +61,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UseNamedArguments
                     && (argType.Name == "Range" || argType.Name == "Index")
                 )
                 {
-                    var conversion = semanticModel
-                        .Compilation
+                    var conversion = semanticModel.Compilation
                         .ClassifyConversion(argType, parameters[0].Type);
                     if (!conversion.Exists || conversion.IsExplicit)
                     {

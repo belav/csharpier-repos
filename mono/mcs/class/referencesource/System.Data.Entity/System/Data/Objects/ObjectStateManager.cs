@@ -913,17 +913,19 @@ namespace System.Data.Objects
                 foreach (IEntityWrapper wrappedEntity in pair.Value)
                 {
                     if (
-                        pair.Key.RemoveFromCache(
-                            wrappedEntity, /*resetIsLoaded*/
-                            false, /*preserveForeignKey*/
-                            false
-                        )
+                        pair.Key
+                            .RemoveFromCache(
+                                wrappedEntity, /*resetIsLoaded*/
+                                false, /*preserveForeignKey*/
+                                false
+                            )
                     )
                     {
-                        pair.Key.OnAssociationChanged(
-                            CollectionChangeAction.Remove,
-                            wrappedEntity.Entity
-                        );
+                        pair.Key
+                            .OnAssociationChanged(
+                                CollectionChangeAction.Remove,
+                                wrappedEntity.Entity
+                            );
                     }
                 }
             }
@@ -954,8 +956,7 @@ namespace System.Data.Objects
         )
         {
             // Call GetRelatedEnd to retrieve the related end on the source entity that points to the target entity
-            RelatedEnd relatedEnd = wrappedSource
-                .RelationshipManager
+            RelatedEnd relatedEnd = wrappedSource.RelationshipManager
                 .GetRelatedEndInternal(sourceMember.DeclaringType.FullName, targetMember.Name);
 
             // EntityReference can only have one value
@@ -1108,12 +1109,10 @@ namespace System.Data.Objects
                 && wrappedSource.Context.ObjectStateManager.TransactionManager.IsAttachTracking
             )
             {
-                wrappedSource
-                    .Context
+                wrappedSource.Context
                     .ObjectStateManager
                     .TrackPromotedRelationship(relatedEnd, wrappedTarget);
-                wrappedSource
-                    .Context
+                wrappedSource.Context
                     .ObjectStateManager
                     .TrackPromotedRelationship(targetRelatedEnd, wrappedSource);
             }
@@ -1195,8 +1194,7 @@ namespace System.Data.Objects
                 {
                     if (mergeOption == MergeOption.NoTracking)
                     {
-                        RelatedEnd relatedEnd = wrappedSource
-                            .RelationshipManager
+                        RelatedEnd relatedEnd = wrappedSource.RelationshipManager
                             .GetRelatedEndInternal(
                                 sourceMember.DeclaringType.FullName,
                                 targetMember.Name
@@ -1352,8 +1350,7 @@ namespace System.Data.Objects
             AssociationEndMember targetMember
         )
         {
-            RelatedEnd relatedEnd = wrappedSource
-                .RelationshipManager
+            RelatedEnd relatedEnd = wrappedSource.RelationshipManager
                 .GetRelatedEndInternal(sourceMember.DeclaringType.FullName, targetMember.Name);
             AssociationEndMember endMember = (AssociationEndMember)(relatedEnd.ToEndMember);
             if (
@@ -1399,8 +1396,7 @@ namespace System.Data.Objects
             if (mergeOption == MergeOption.OverwriteChanges)
             {
                 foreach (
-                    RelationshipEntry relationshipEntry in context
-                        .ObjectStateManager
+                    RelationshipEntry relationshipEntry in context.ObjectStateManager
                         .FindRelationshipsByKey(sourceKey)
                 )
                 {
@@ -1421,8 +1417,7 @@ namespace System.Data.Objects
             {
                 // Leave any Added relationships for this entity, but remove Unchanged and Deleted ones
                 foreach (
-                    RelationshipEntry relationshipEntry in context
-                        .ObjectStateManager
+                    RelationshipEntry relationshipEntry in context.ObjectStateManager
                         .FindRelationshipsByKey(sourceKey)
                 )
                 {
@@ -1729,9 +1724,8 @@ namespace System.Data.Objects
         {
             //Find two ends of the relationship
             ObjectStateManager cache = relationshipEntry.ObjectStateManager;
-            ReadOnlyMetadataCollection<AssociationEndMember> endMembers = relationshipEntry
-                .RelationshipWrapper
-                .AssociationEndMembers;
+            ReadOnlyMetadataCollection<AssociationEndMember> endMembers =
+                relationshipEntry.RelationshipWrapper.AssociationEndMembers;
 
             UnloadReferenceRelatedEnds(
                 cache,
@@ -1759,8 +1753,7 @@ namespace System.Data.Objects
             if (entry.WrappedEntity.Entity != null)
             {
                 EntityReference reference =
-                    entry
-                        .WrappedEntity
+                    entry.WrappedEntity
                         .RelationshipManager
                         .GetRelatedEndInternal(
                             ((AssociationSet)relationshipEntry.EntitySet).ElementType.FullName,
@@ -2491,8 +2484,7 @@ namespace System.Data.Objects
             {
                 // ArgumentException is not the best choice here but anything else would be a breaking change.
                 throw new ArgumentException(
-                    System
-                        .Data
+                    System.Data
                         .Entity
                         .Strings
                         .ObjectStateManager_ChangeStateFromAddedWithNullKeyIsInvalid,
@@ -2810,8 +2802,7 @@ namespace System.Data.Objects
                 out removedConvert
             );
             RelatedEnd relatedEnd = (RelatedEnd)
-                sourceEntry
-                    .WrappedEntity
+                sourceEntry.WrappedEntity
                     .RelationshipManager
                     .GetRelatedEnd(navigationProperty, throwArgumentException: removedConvert);
 
@@ -2853,8 +2844,7 @@ namespace System.Data.Objects
                 out targetEntry
             );
 
-            RelatedEnd relatedEnd = sourceEntry
-                .WrappedEntity
+            RelatedEnd relatedEnd = sourceEntry.WrappedEntity
                 .RelationshipManager
                 .GetRelatedEndInternal(relationshipName, targetRoleName);
 
@@ -2960,8 +2950,7 @@ namespace System.Data.Objects
             if (relatedEnd.IsForeignKey)
             {
                 throw new NotSupportedException(
-                    System
-                        .Data
+                    System.Data
                         .Entity
                         .Strings
                         .ObjectStateManager_ChangeRelationshipStateNotSupportedForForeignKeyAssociations
@@ -2985,8 +2974,7 @@ namespace System.Data.Objects
             )
             {
                 throw new InvalidOperationException(
-                    System
-                        .Data
+                    System.Data
                         .Entity
                         .Strings
                         .ObjectStateManager_CannotChangeRelationshipStateEntityDeleted
@@ -3002,8 +2990,7 @@ namespace System.Data.Objects
             )
             {
                 throw new InvalidOperationException(
-                    System
-                        .Data
+                    System.Data
                         .Entity
                         .Strings
                         .ObjectStateManager_CannotChangeRelationshipStateEntityAdded
@@ -3081,8 +3068,7 @@ namespace System.Data.Objects
             if (entry.IsKeyEntry)
             {
                 throw new InvalidOperationException(
-                    System
-                        .Data
+                    System.Data
                         .Entity
                         .Strings
                         .ObjectStateManager_CannotChangeRelationshipStateKeyEntry
@@ -3342,8 +3328,7 @@ namespace System.Data.Objects
             if (!TryGetRelationshipManager(entity, out rm))
             {
                 throw new InvalidOperationException(
-                    System
-                        .Data
+                    System.Data
                         .Entity
                         .Strings
                         .ObjectStateManager_CannotGetRelationshipManagerForDetachedPocoEntity
@@ -3833,8 +3818,7 @@ namespace System.Data.Objects
             else
             {
                 throw EntityUtil.InvalidOperation(
-                    System
-                        .Data
+                    System.Data
                         .Entity
                         .Strings
                         .Mapping_CannotMapCLRTypeMultipleTimes(
@@ -3929,15 +3913,11 @@ namespace System.Data.Objects
 
                 //Find all relationships being added for this entity
                 Dictionary<RelatedEnd, HashSet<IEntityWrapper>> addedRelationshipsByGraph;
-                tm.AddedRelationshipsByGraph.TryGetValue(
-                    entry.WrappedEntity,
-                    out addedRelationshipsByGraph
-                );
+                tm.AddedRelationshipsByGraph
+                    .TryGetValue(entry.WrappedEntity, out addedRelationshipsByGraph);
                 Dictionary<RelatedEnd, HashSet<EntityKey>> addedRelationshipsByForeignKey;
-                tm.AddedRelationshipsByForeignKey.TryGetValue(
-                    entry.WrappedEntity,
-                    out addedRelationshipsByForeignKey
-                );
+                tm.AddedRelationshipsByForeignKey
+                    .TryGetValue(entry.WrappedEntity, out addedRelationshipsByForeignKey);
 
                 //Ensure new graph relationships do not involve a Deleted Entity
                 if (addedRelationshipsByGraph != null && addedRelationshipsByGraph.Count > 0)
@@ -3977,8 +3957,7 @@ namespace System.Data.Objects
                             if (pair.Value.Count > 1)
                             {
                                 throw new InvalidOperationException(
-                                    System
-                                        .Data
+                                    System.Data
                                         .Entity
                                         .Strings
                                         .ObjectStateManager_ConflictingChangesOfRelationshipDetected(
@@ -4028,8 +4007,7 @@ namespace System.Data.Objects
                             if (pair.Value.Count > 1)
                             {
                                 throw new InvalidOperationException(
-                                    System
-                                        .Data
+                                    System.Data
                                         .Entity
                                         .Strings
                                         .ObjectStateManager_ConflictingChangesOfRelationshipDetected(
@@ -4060,10 +4038,11 @@ namespace System.Data.Objects
                                         HashSet<EntityKey>
                                     > addedRelationshipsByPrincipalKey;
                                     if (
-                                        tm.AddedRelationshipsByPrincipalKey.TryGetValue(
-                                            entry.WrappedEntity,
-                                            out addedRelationshipsByPrincipalKey
-                                        )
+                                        tm.AddedRelationshipsByPrincipalKey
+                                            .TryGetValue(
+                                                entry.WrappedEntity,
+                                                out addedRelationshipsByPrincipalKey
+                                            )
                                     )
                                     {
                                         addedRelationshipsByPrincipalKey.TryGetValue(
@@ -4086,14 +4065,12 @@ namespace System.Data.Objects
                                     if (addedKey != newFks.First())
                                     {
                                         throw new InvalidOperationException(
-                                            System
-                                                .Data
+                                            System.Data
                                                 .Entity
                                                 .Strings
                                                 .ObjectStateManager_ConflictingChangesOfRelationshipDetected(
                                                     reference.RelationshipNavigation.To,
-                                                    reference
-                                                        .RelationshipNavigation
+                                                    reference.RelationshipNavigation
                                                         .RelationshipName
                                                 )
                                         );
@@ -4108,10 +4085,11 @@ namespace System.Data.Objects
                                         HashSet<EntityKey>
                                     > deletedRelationshipsByForeignKey;
                                     if (
-                                        tm.DeletedRelationshipsByForeignKey.TryGetValue(
-                                            entry.WrappedEntity,
-                                            out deletedRelationshipsByForeignKey
-                                        )
+                                        tm.DeletedRelationshipsByForeignKey
+                                            .TryGetValue(
+                                                entry.WrappedEntity,
+                                                out deletedRelationshipsByForeignKey
+                                            )
                                     )
                                     {
                                         HashSet<EntityKey> removedKeys;
@@ -4125,14 +4103,12 @@ namespace System.Data.Objects
                                             if (removedKeys.Count > 0)
                                             {
                                                 throw new InvalidOperationException(
-                                                    System
-                                                        .Data
+                                                    System.Data
                                                         .Entity
                                                         .Strings
                                                         .ObjectStateManager_ConflictingChangesOfRelationshipDetected(
                                                             reference.RelationshipNavigation.To,
-                                                            reference
-                                                                .RelationshipNavigation
+                                                            reference.RelationshipNavigation
                                                                 .RelationshipName
                                                         )
                                                 );
@@ -4256,8 +4232,7 @@ namespace System.Data.Objects
                 if (entry.State != EntityState.Detached && !entry.IsKeyEntry) // Still need to check this here because entries may have been demoted
                 {
                     foreach (
-                        RelatedEnd relatedEnd in entry
-                            .WrappedEntity
+                        RelatedEnd relatedEnd in entry.WrappedEntity
                             .RelationshipManager
                             .Relationships
                     )
@@ -4269,10 +4244,11 @@ namespace System.Data.Objects
                         Dictionary<RelatedEnd, HashSet<EntityKey>> addedRelationshipsByForeignKey;
                         if (
                             relatedEnd is EntityReference
-                            && tm.AddedRelationshipsByForeignKey.TryGetValue(
-                                entry.WrappedEntity,
-                                out addedRelationshipsByForeignKey
-                            )
+                            && tm.AddedRelationshipsByForeignKey
+                                .TryGetValue(
+                                    entry.WrappedEntity,
+                                    out addedRelationshipsByForeignKey
+                                )
                         )
                         {
                             addedRelationshipsByForeignKey.TryGetValue(
@@ -4286,10 +4262,8 @@ namespace System.Data.Objects
                         Dictionary<RelatedEnd, HashSet<IEntityWrapper>> addedRelationshipsByGraph;
                         HashSet<IEntityWrapper> entitiesToAdd = null;
                         if (
-                            tm.AddedRelationshipsByGraph.TryGetValue(
-                                entry.WrappedEntity,
-                                out addedRelationshipsByGraph
-                            )
+                            tm.AddedRelationshipsByGraph
+                                .TryGetValue(entry.WrappedEntity, out addedRelationshipsByGraph)
                         )
                         {
                             addedRelationshipsByGraph.TryGetValue(relatedEnd, out entitiesToAdd);
@@ -4429,8 +4403,7 @@ namespace System.Data.Objects
                 ) // Still need to check this here because entries may have been demoted
                 {
                     foreach (
-                        RelatedEnd relatedEnd in entry
-                            .WrappedEntity
+                        RelatedEnd relatedEnd in entry.WrappedEntity
                             .RelationshipManager
                             .Relationships
                     )
@@ -4442,10 +4415,11 @@ namespace System.Data.Objects
                         Dictionary<RelatedEnd, HashSet<EntityKey>> deletedRelationshipsByForeignKey;
                         if (
                             relatedEnd is EntityReference
-                            && tm.DeletedRelationshipsByForeignKey.TryGetValue(
-                                entry.WrappedEntity,
-                                out deletedRelationshipsByForeignKey
-                            )
+                            && tm.DeletedRelationshipsByForeignKey
+                                .TryGetValue(
+                                    entry.WrappedEntity,
+                                    out deletedRelationshipsByForeignKey
+                                )
                         )
                         {
                             deletedRelationshipsByForeignKey.TryGetValue(
@@ -4459,10 +4433,8 @@ namespace System.Data.Objects
                         Dictionary<RelatedEnd, HashSet<IEntityWrapper>> deletedRelationshipsByGraph;
                         HashSet<IEntityWrapper> entitiesToDelete = null;
                         if (
-                            tm.DeletedRelationshipsByGraph.TryGetValue(
-                                entry.WrappedEntity,
-                                out deletedRelationshipsByGraph
-                            )
+                            tm.DeletedRelationshipsByGraph
+                                .TryGetValue(entry.WrappedEntity, out deletedRelationshipsByGraph)
                         )
                         {
                             deletedRelationshipsByGraph.TryGetValue(
@@ -4657,16 +4629,14 @@ namespace System.Data.Objects
                     Dictionary<RelatedEnd, HashSet<IEntityWrapper>> deletedRelationshipsByGraph;
                     // There must be a foreign key and graph change on the dependent side to know if we need to preserve the FK
                     if (
-                        TransactionManager
-                            .DeletedRelationshipsByForeignKey
+                        TransactionManager.DeletedRelationshipsByForeignKey
                             .TryGetValue(relatedEntity, out deletedRelationshipsByForeignKey)
                         && deletedRelationshipsByForeignKey.TryGetValue(
                             otherEnd,
                             out entityKeysOfDeletedObjects
                         )
                         && entityKeysOfDeletedObjects.Count > 0
-                        && TransactionManager
-                            .DeletedRelationshipsByGraph
+                        && TransactionManager.DeletedRelationshipsByGraph
                             .TryGetValue(relatedEntity, out deletedRelationshipsByGraph)
                         && deletedRelationshipsByGraph.TryGetValue(otherEnd, out entitiesToDelete)
                     )
@@ -4703,8 +4673,7 @@ namespace System.Data.Objects
             HashSet<IEntityWrapper> entitiesToAdd = null;
             if (
                 reference != null
-                && TransactionManager
-                    .AddedRelationshipsByGraph
+                && TransactionManager.AddedRelationshipsByGraph
                     .TryGetValue(wrappedOwner, out addedRelationshipsByGraph)
                 && addedRelationshipsByGraph.TryGetValue(reference, out entitiesToAdd)
                 && entitiesToAdd.Count > 0
@@ -4733,10 +4702,8 @@ namespace System.Data.Objects
                 HashSet<EntityKey> entityKeysOfAddedObjects = null;
                 Dictionary<RelatedEnd, HashSet<EntityKey>> addedRelationshipsByForeignKey;
                 if (
-                    tm.AddedRelationshipsByForeignKey.TryGetValue(
-                        wrappedEntity,
-                        out addedRelationshipsByForeignKey
-                    )
+                    tm.AddedRelationshipsByForeignKey
+                        .TryGetValue(wrappedEntity, out addedRelationshipsByForeignKey)
                     && addedRelationshipsByForeignKey.TryGetValue(
                         reference,
                         out entityKeysOfAddedObjects
@@ -4750,10 +4717,8 @@ namespace System.Data.Objects
                 Dictionary<RelatedEnd, HashSet<IEntityWrapper>> addedRelationshipsByGraph;
                 HashSet<IEntityWrapper> entitiesToAdd = null;
                 if (
-                    tm.AddedRelationshipsByGraph.TryGetValue(
-                        wrappedEntity,
-                        out addedRelationshipsByGraph
-                    )
+                    tm.AddedRelationshipsByGraph
+                        .TryGetValue(wrappedEntity, out addedRelationshipsByGraph)
                     && addedRelationshipsByGraph.TryGetValue(reference, out entitiesToAdd)
                     && entitiesToAdd.Count > 0
                 )

@@ -4444,8 +4444,7 @@ System.Diagnostics.Process.GetCurrentProcess();
 
             var compilation = CreateCompilationWithMscorlib45(
                 trees,
-                options: TestOptions
-                    .ReleaseDll
+                options: TestOptions.ReleaseDll
                     .WithMetadataReferenceResolver(new Resolver(data, core, system))
             );
 
@@ -4486,8 +4485,7 @@ System.Diagnostics.Process.GetCurrentProcess();
 
             var compilation = CreateCompilationWithMscorlib45(
                 trees,
-                options: TestOptions
-                    .ReleaseDll
+                options: TestOptions.ReleaseDll
                     .WithMetadataReferenceResolver(new Resolver(data, core, system))
             );
 
@@ -4553,8 +4551,7 @@ class C : Metadata.ICSPropImpl { }";
 
             var compilation = CreateCompilationWithMscorlib45(
                 new[] { Parse(source, options: TestOptions.Script) },
-                options: TestOptions
-                    .ReleaseDll
+                options: TestOptions.ReleaseDll
                     .WithMetadataReferenceResolver(new DummyReferenceResolver(csClasses01))
             );
 
@@ -4609,8 +4606,7 @@ class C
 
             var compilation = CreateCompilationWithMscorlib45(
                 trees,
-                options: TestOptions
-                    .ReleaseDll
+                options: TestOptions.ReleaseDll
                     .WithUsings(ImmutableArray.Create("System.Console", "System"))
             );
 

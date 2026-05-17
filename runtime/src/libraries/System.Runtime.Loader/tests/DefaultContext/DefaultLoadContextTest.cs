@@ -192,8 +192,7 @@ namespace System.Runtime.Loader.Tests
         {
             // Now, try to load an assembly that does not exist
             Assert.Throws<FileNotFoundException>(() =>
-                AssemblyLoadContext
-                    .Default
+                AssemblyLoadContext.Default
                     .LoadFromAssemblyName(
                         new AssemblyName("System.Runtime.Loader.NonExistent.Assembly")
                     )

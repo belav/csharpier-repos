@@ -46,8 +46,7 @@ namespace System.Data.SqlClient
     public sealed class SqlCommand : DbCommand, ICloneable
     {
         private static int _objectTypeCount; // Bid counter
-        internal readonly int ObjectID = System
-            .Threading
+        internal readonly int ObjectID = System.Threading
             .Interlocked
             .Increment(ref _objectTypeCount);
 
@@ -1992,8 +1991,7 @@ namespace System.Data.SqlClient
                                     _stateObj._syncOverAsync,
                                     "Should not attempt pends in a synchronous call"
                                 );
-                                bool result = _stateObj
-                                    .Parser
+                                bool result = _stateObj.Parser
                                     .TryRun(
                                         RunBehavior.UntilDone,
                                         this,
@@ -3034,8 +3032,7 @@ namespace System.Data.SqlClient
             {
                 long firstAttemptStart = ADP.TimerCurrent();
 
-                localCompletion
-                    .Task
+                localCompletion.Task
                     .ContinueWith(
                         tsk =>
                         {
@@ -3343,8 +3340,7 @@ namespace System.Data.SqlClient
             {
                 RegisterForConnectionCloseNotification(ref returnedTask);
 
-                Task<int>
-                    .Factory
+                Task<int>.Factory
                     .FromAsync(BeginExecuteNonQueryAsync, EndExecuteNonQueryAsync, null)
                     .ContinueWith(
                         (t) =>
@@ -3445,8 +3441,7 @@ namespace System.Data.SqlClient
             {
                 RegisterForConnectionCloseNotification(ref returnedTask);
 
-                Task<SqlDataReader>
-                    .Factory
+                Task<SqlDataReader>.Factory
                     .FromAsync(BeginExecuteReaderAsync, EndExecuteReaderAsync, behavior, null)
                     .ContinueWith(
                         (t) =>
@@ -3597,8 +3592,7 @@ namespace System.Data.SqlClient
             {
                 RegisterForConnectionCloseNotification(ref returnedTask);
 
-                Task<XmlReader>
-                    .Factory
+                Task<XmlReader>.Factory
                     .FromAsync(BeginExecuteXmlReaderAsync, EndExecuteXmlReaderAsync, null)
                     .ContinueWith(
                         (t) =>
@@ -3839,23 +3833,20 @@ namespace System.Data.SqlClient
 
             //
 
-            paramsCmd
-                .Parameters
+            paramsCmd.Parameters
                 .Add(new SqlParameter("@procedure_name", SqlDbType.NVarChar, 255));
             paramsCmd.Parameters[0].Value = UnquoteProcedureName(parsedSProc[3], out groupNumber); // ProcedureName is 4rd element in parsed array
 
             if (null != groupNumber)
             {
-                SqlParameter param = paramsCmd
-                    .Parameters
+                SqlParameter param = paramsCmd.Parameters
                     .Add(new SqlParameter("@group_number", SqlDbType.Int));
                 param.Value = groupNumber;
             }
 
             if (!ADP.IsEmpty(parsedSProc[2]))
             { // SchemaName is 3rd element in parsed array
-                SqlParameter param = paramsCmd
-                    .Parameters
+                SqlParameter param = paramsCmd.Parameters
                     .Add(new SqlParameter("@procedure_schema", SqlDbType.NVarChar, 255));
                 param.Value = UnquoteProcedurePart(parsedSProc[2]);
             }
@@ -4102,9 +4093,9 @@ namespace System.Data.SqlClient
                     if (!ADP.IsEmpty(notifyContext))
                     {
                         // Map to dependency by ID set in context data.
-                        SqlDependency dependency = SqlDependencyPerAppDomainDispatcher
-                            .SingletonInstance
-                            .LookupDependencyEntry(notifyContext);
+                        SqlDependency dependency =
+                            SqlDependencyPerAppDomainDispatcher.SingletonInstance
+                                .LookupDependencyEntry(notifyContext);
 
                         if (null != dependency)
                         {
@@ -4295,8 +4286,7 @@ namespace System.Data.SqlClient
                     "<sc.SqlCommand.ExecuteNonQuery|INFO> %d#, Command executed as SQLBATCH.\n",
                     ObjectID
                 );
-                Task executeTask = _stateObj
-                    .Parser
+                Task executeTask = _stateObj.Parser
                     .TdsExecuteSQLBatch(
                         this.CommandText,
                         timeout,
@@ -4318,8 +4308,7 @@ namespace System.Data.SqlClient
                         _stateObj._syncOverAsync,
                         "Should not attempt pends in a synchronous call"
                     );
-                    bool result = _stateObj
-                        .Parser
+                    bool result = _stateObj.Parser
                         .TryRun(RunBehavior.UntilDone, this, null, null, _stateObj, out dataReady);
                     if (!result)
                     {
@@ -5005,9 +4994,8 @@ namespace System.Data.SqlClient
                     inputParameterEncryptionNeeded = true;
                 }
 
-                _sqlRPCParameterEncryptionReqArray = describeParameterEncryptionRpcOriginalRpcMap
-                    .Keys
-                    .ToArray();
+                _sqlRPCParameterEncryptionReqArray =
+                    describeParameterEncryptionRpcOriginalRpcMap.Keys.ToArray();
 
                 Debug.Assert(
                     _sqlRPCParameterEncryptionReqArray.Length > 0,
@@ -5452,8 +5440,7 @@ namespace System.Data.SqlClient
                         Debug.Assert(sqlParameter != null, "sqlParameter should not be null.");
 
                         if (
-                            sqlParameter
-                                .ParameterNameFixed
+                            sqlParameter.ParameterNameFixed
                                 .Equals(parameterName, StringComparison.Ordinal)
                         )
                         {
@@ -6079,8 +6066,7 @@ namespace System.Data.SqlClient
                         _sqlRPCParameterEncryptionReqArray != null,
                         "RunExecuteReader rpc array not provided for describe parameter encryption request."
                     );
-                    writeTask = _stateObj
-                        .Parser
+                    writeTask = _stateObj.Parser
                         .TdsExecuteRPC(
                             this,
                             _sqlRPCParameterEncryptionReqArray,
@@ -6108,8 +6094,7 @@ namespace System.Data.SqlClient
                         _SqlRPCBatchArray != null,
                         "RunExecuteReader rpc array not provided"
                     );
-                    writeTask = _stateObj
-                        .Parser
+                    writeTask = _stateObj.Parser
                         .TdsExecuteRPC(
                             this,
                             _SqlRPCBatchArray,
@@ -6140,8 +6125,7 @@ namespace System.Data.SqlClient
                         );
                     }
                     string text = GetCommandText(cmdBehavior) + GetResetOptionsString(cmdBehavior);
-                    writeTask = _stateObj
-                        .Parser
+                    writeTask = _stateObj.Parser
                         .TdsExecuteSQLBatch(
                             text,
                             timeout,
@@ -6211,8 +6195,7 @@ namespace System.Data.SqlClient
 
                     //
                     Debug.Assert(_rpcArrayOf1[0] == rpc);
-                    writeTask = _stateObj
-                        .Parser
+                    writeTask = _stateObj.Parser
                         .TdsExecuteRPC(
                             this,
                             _rpcArrayOf1,
@@ -6251,8 +6234,7 @@ namespace System.Data.SqlClient
                     // turn set options ON
                     if (null != optionSettings)
                     {
-                        Task executeTask = _stateObj
-                            .Parser
+                        Task executeTask = _stateObj.Parser
                             .TdsExecuteSQLBatch(
                                 optionSettings,
                                 timeout,
@@ -6269,8 +6251,7 @@ namespace System.Data.SqlClient
                             _stateObj._syncOverAsync,
                             "Should not attempt pends in a synchronous call"
                         );
-                        bool result = _stateObj
-                            .Parser
+                        bool result = _stateObj.Parser
                             .TryRun(
                                 RunBehavior.UntilDone,
                                 this,
@@ -6292,8 +6273,7 @@ namespace System.Data.SqlClient
 
                     // execute sp
                     Debug.Assert(_rpcArrayOf1[0] == rpc);
-                    writeTask = _stateObj
-                        .Parser
+                    writeTask = _stateObj.Parser
                         .TdsExecuteRPC(
                             this,
                             _rpcArrayOf1,
@@ -6506,8 +6486,7 @@ namespace System.Data.SqlClient
             }
             finally
             {
-                TdsParser
-                    .ReliabilitySection
+                TdsParser.ReliabilitySection
                     .Assert("unreliable call to CompleteAsyncExecuteReader"); // you need to setup for a thread abort somewhere before you call this method
                 if (processFinallyBlock)
                 {
@@ -6555,8 +6534,7 @@ namespace System.Data.SqlClient
                         _stateObj._syncOverAsync,
                         "Should not attempt pends in a synchronous call"
                     );
-                    bool result = _stateObj
-                        .Parser
+                    bool result = _stateObj.Parser
                         .TryRun(RunBehavior.UntilDone, this, ds, null, _stateObj, out dataReady);
                     if (!result)
                     {
@@ -8793,8 +8771,7 @@ namespace System.Data.SqlClient
             {
                 string commandText =
                     CommandType == CommandType.StoredProcedure ? CommandText : string.Empty;
-                SqlEventSource
-                    .Log
+                SqlEventSource.Log
                     .BeginExecute(
                         GetHashCode(),
                         Connection.DataSource,
@@ -8828,8 +8805,7 @@ namespace System.Data.SqlClient
 
                 int compositeState = successFlag | isSqlExceptionFlag | synchronousFlag;
 
-                SqlEventSource
-                    .Log
+                SqlEventSource.Log
                     .EndExecute(
                         GetHashCode(),
                         compositeState,

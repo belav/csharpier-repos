@@ -23,14 +23,15 @@ namespace System.ComponentModel.Composition
             params CompositionScopeDefinition[] children
         )
         {
-            IEnumerable<ExportDefinition> definitions = catalog
-                .Parts
+            IEnumerable<ExportDefinition> definitions = catalog.Parts
                 .SelectMany(
                     (p) =>
-                        p.ExportDefinitions.Where(
-                            (e) =>
-                                e.ContractName == AttributedModelServices.GetContractName(typeof(T))
-                        )
+                        p.ExportDefinitions
+                            .Where(
+                                (e) =>
+                                    e.ContractName
+                                    == AttributedModelServices.GetContractName(typeof(T))
+                            )
                 );
             return new CompositionScopeDefinition(catalog, children, definitions);
         }

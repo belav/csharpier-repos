@@ -38,8 +38,7 @@ public class InputRadioGroup<
         // On the first render, we can instantiate the InputRadioContext
         if (_context is null)
         {
-            var changeEventCallback = EventCallback
-                .Factory
+            var changeEventCallback = EventCallback.Factory
                 .CreateBinder<string?>(
                     this,
                     __value => CurrentValueAsString = __value,

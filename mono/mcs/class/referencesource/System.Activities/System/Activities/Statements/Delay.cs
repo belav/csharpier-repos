@@ -58,8 +58,7 @@ namespace System.Activities.Statements
             TimeSpan duration = this.Duration.Get(context);
             if (duration < TimeSpan.Zero)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .ArgumentOutOfRange(
                         "Duration",
                         duration,

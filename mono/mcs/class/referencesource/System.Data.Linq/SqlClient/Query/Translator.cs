@@ -183,8 +183,7 @@ namespace System.Data.Linq.SqlClient
                     bindings.Add(new SqlMemberAssign(mm.Member, sql.Member(item, mm)));
                 }
             }
-            ConstructorInfo cons = rowType
-                .Type
+            ConstructorInfo cons = rowType.Type
                 .GetConstructor(
                     BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic,
                     null,
@@ -269,8 +268,7 @@ namespace System.Data.Linq.SqlClient
 
             if (context.LoadOptions != null)
             {
-                LambdaExpression subquery = context
-                    .LoadOptions
+                LambdaExpression subquery = context.LoadOptions
                     .GetAssociationSubquery(association.ThisMember.Member);
                 if (subquery != null)
                 {
@@ -508,8 +506,7 @@ namespace System.Data.Linq.SqlClient
         )]
         internal SqlExpression TranslateEquals(SqlBinary expr)
         {
-            System
-                .Diagnostics
+            System.Diagnostics
                 .Debug
                 .Assert(
                     expr.NodeType == SqlNodeType.EQ
@@ -778,8 +775,7 @@ namespace System.Data.Linq.SqlClient
 
         internal SqlExpression TranslateLinkIsNull(SqlUnary expr)
         {
-            System
-                .Diagnostics
+            System.Diagnostics
                 .Debug
                 .Assert(
                     expr.NodeType == SqlNodeType.IsNull || expr.NodeType == SqlNodeType.IsNotNull

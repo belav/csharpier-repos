@@ -313,8 +313,7 @@ namespace System.Activities.Core.Presentation
                     || !converter.CanConvertTo(typeof(string))
                 )
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(new NotSupportedException(SR.NotSupportedCaseKeyStringConversion));
                 }
 

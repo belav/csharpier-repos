@@ -374,8 +374,7 @@ namespace System.Data.SqlClient
             }
             catch (System.Security.SecurityException)
             {
-                System
-                    .Diagnostics
+                System.Diagnostics
                     .Debug
                     .Assert(false, "unexpected SecurityException for current codepath");
                 throw;
@@ -1251,12 +1250,10 @@ namespace System.Data.SqlClient
             bool isDelegateControlRequest
         )
         {
-            TdsEnums.TransactionManagerRequestType requestType = TdsEnums
-                .TransactionManagerRequestType
-                .Begin;
-            TdsEnums.TransactionManagerIsolationLevel isoLevel = TdsEnums
-                .TransactionManagerIsolationLevel
-                .ReadCommitted;
+            TdsEnums.TransactionManagerRequestType requestType =
+                TdsEnums.TransactionManagerRequestType.Begin;
+            TdsEnums.TransactionManagerIsolationLevel isoLevel =
+                TdsEnums.TransactionManagerIsolationLevel.ReadCommitted;
 
             switch (iso)
             {
@@ -1334,8 +1331,7 @@ namespace System.Data.SqlClient
                     && releaseConnectionLock
                 )
                 {
-                    Task reconnectTask = internalTransaction
-                        .Parent
+                    Task reconnectTask = internalTransaction.Parent
                         .Connection
                         .ValidateAndReconnect(
                             () =>
@@ -2359,8 +2355,7 @@ namespace System.Data.SqlClient
                         else
                         {
                             TdsParserStaticMethods.AliasRegistryLookup(ref host, ref protocol);
-                            _currentSessionData
-                                ._resolvedAliases
+                            _currentSessionData._resolvedAliases
                                 .Add(
                                     serverInfo.UserServerName,
                                     new Tuple<string, string>(host, protocol)
@@ -2759,8 +2754,7 @@ namespace System.Data.SqlClient
 
                 // Try to retrieve the authentication context from the pool, if one does exist for this key.
                 if (
-                    _dbConnectionPool
-                        .AuthenticationContexts
+                    _dbConnectionPool.AuthenticationContexts
                         .TryGetValue(
                             _dbConnectionPoolAuthenticationContextKey,
                             out dbConnectionPoolAuthenticationContext
@@ -2773,8 +2767,7 @@ namespace System.Data.SqlClient
                     );
 
                     // The timespan between UTCNow and the token expiry.
-                    TimeSpan contextValidity = dbConnectionPoolAuthenticationContext
-                        .ExpirationTime
+                    TimeSpan contextValidity = dbConnectionPoolAuthenticationContext.ExpirationTime
                         .Subtract(DateTime.UtcNow);
 
                     // If the authentication context is expiring within next 10 minutes, lets just re-create a token for this connection attempt.
@@ -2815,8 +2808,7 @@ namespace System.Data.SqlClient
                             Bid.Trace(
                                 "<sc.SqlInternalConnectionTds.OnFedAuthInfo> %d#, The authentication context needs a refresh.The expiration time is %s. Current Time is %s.\n",
                                 ObjectID,
-                                dbConnectionPoolAuthenticationContext
-                                    .ExpirationTime
+                                dbConnectionPoolAuthenticationContext.ExpirationTime
                                     .ToLongTimeString(),
                                 DateTime.UtcNow.ToLongTimeString()
                             );
@@ -3306,8 +3298,7 @@ namespace System.Data.SqlClient
                         );
 
                         DbConnectionPoolAuthenticationContext newAuthenticationContextInCacheAfterAddOrUpdate =
-                            _dbConnectionPool
-                                .AuthenticationContexts
+                            _dbConnectionPool.AuthenticationContexts
                                 .AddOrUpdate(
                                     _dbConnectionPoolAuthenticationContextKey,
                                     _newDbConnectionPoolAuthenticationContext,

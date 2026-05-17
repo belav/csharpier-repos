@@ -100,8 +100,7 @@ namespace System.Security.Cryptography
                     case HashAlgorithmNames.SHA256:
                     case HashAlgorithmNames.SHA384:
                     case HashAlgorithmNames.SHA512:
-                        hashBufferSize = HashProviderDispenser
-                            .OneShotHashProvider
+                        hashBufferSize = HashProviderDispenser.OneShotHashProvider
                             .HashData(hashAlgorithmName, password, hashBuffer);
                         break;
                     case HashAlgorithmNames.SHA3_256:
@@ -112,8 +111,7 @@ namespace System.Security.Cryptography
                             throw new PlatformNotSupportedException();
                         }
 
-                        hashBufferSize = HashProviderDispenser
-                            .OneShotHashProvider
+                        hashBufferSize = HashProviderDispenser.OneShotHashProvider
                             .HashData(hashAlgorithmName, password, hashBuffer);
                         break;
                     default:
@@ -134,8 +132,7 @@ namespace System.Security.Cryptography
             {
                 fixed (byte* pSymmetricKeyMaterial = symmetricKeyMaterial)
                 {
-                    generateKeyStatus = Interop
-                        .BCrypt
+                    generateKeyStatus = Interop.BCrypt
                         .BCryptGenerateSymmetricKey(
                             (nuint)BCryptAlgPseudoHandle.BCRYPT_PBKDF2_ALG_HANDLE,
                             out keyHandle,
@@ -151,8 +148,7 @@ namespace System.Security.Cryptography
             {
                 if (s_pbkdf2AlgorithmHandle is null)
                 {
-                    NTSTATUS openStatus = Interop
-                        .BCrypt
+                    NTSTATUS openStatus = Interop.BCrypt
                         .BCryptOpenAlgorithmProvider(
                             out SafeBCryptAlgorithmHandle pbkdf2AlgorithmHandle,
                             Internal.NativeCrypto.BCryptNative.AlgorithmName.Pbkdf2,
@@ -178,8 +174,7 @@ namespace System.Security.Cryptography
 
                 fixed (byte* pSymmetricKeyMaterial = symmetricKeyMaterial)
                 {
-                    generateKeyStatus = Interop
-                        .BCrypt
+                    generateKeyStatus = Interop.BCrypt
                         .BCryptGenerateSymmetricKey(
                             s_pbkdf2AlgorithmHandle,
                             out keyHandle,
@@ -231,8 +226,7 @@ namespace System.Security.Cryptography
                         bufferDesc.cBuffers = buffers.Length;
                         bufferDesc.pBuffers = (IntPtr)pBuffers;
 
-                        NTSTATUS deriveStatus = Interop
-                            .BCrypt
+                        NTSTATUS deriveStatus = Interop.BCrypt
                             .BCryptKeyDerivation(
                                 keyHandle,
                                 &bufferDesc,
@@ -269,8 +263,7 @@ namespace System.Security.Cryptography
 
             // This code path will only be taken on Windows 7, so we can assume pseudo handles are not supported.
             // Do not dispose handle since it is shared and cached.
-            SafeBCryptAlgorithmHandle handle = Interop
-                .BCrypt
+            SafeBCryptAlgorithmHandle handle = Interop.BCrypt
                 .BCryptAlgorithmCache
                 .GetCachedBCryptAlgorithmHandle(hashAlgorithmName, OpenAlgorithmFlags, out _);
 
@@ -278,8 +271,7 @@ namespace System.Security.Cryptography
             fixed (byte* pSalt = salt)
             fixed (byte* pDestination = destination)
             {
-                NTSTATUS status = Interop
-                    .BCrypt
+                NTSTATUS status = Interop.BCrypt
                     .BCryptDeriveKeyPBKDF2(
                         handle,
                         pPassword,

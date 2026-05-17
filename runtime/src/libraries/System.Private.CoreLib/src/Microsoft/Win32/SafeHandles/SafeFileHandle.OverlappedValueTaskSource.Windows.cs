@@ -103,8 +103,7 @@ namespace Microsoft.Win32.SafeHandles
                 _strategy = strategy;
                 _bufferSize = memory.Length;
                 _memoryHandle = memory.Pin();
-                _overlapped = _fileHandle
-                    .ThreadPoolBinding!
+                _overlapped = _fileHandle.ThreadPoolBinding!
                     .AllocateNativeOverlapped(_preallocatedOverlapped);
                 if (_fileHandle.CanSeek)
                 {
@@ -155,8 +154,7 @@ namespace Microsoft.Win32.SafeHandles
                                 {
                                     try
                                     {
-                                        Interop
-                                            .Kernel32
+                                        Interop.Kernel32
                                             .CancelIoEx(vts._fileHandle, vts._overlapped);
                                         // Ignore all failures: no matter whether it succeeds or fails, completion is handled via the IOCallback.
                                     }

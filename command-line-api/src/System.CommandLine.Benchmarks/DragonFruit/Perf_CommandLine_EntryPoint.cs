@@ -138,8 +138,7 @@ namespace System.CommandLine.Benchmarks.DragonFruit
 
         [Benchmark(Description = "ExecuteAssemblyAsync entry point search.")]
         public Task SearchForStartingPointUsingReflection() =>
-            System
-                .CommandLine
+            System.CommandLine
                 .DragonFruit
                 .CommandLine
                 .ExecuteAssemblyAsync(
@@ -151,8 +150,7 @@ namespace System.CommandLine.Benchmarks.DragonFruit
 
         [Benchmark(Description = "ExecuteAssemblyAsync explicit entry point.")]
         public Task SearchForStartingPointWhenGivenEntryPointClass() =>
-            System
-                .CommandLine
+            System.CommandLine
                 .DragonFruit
                 .CommandLine
                 .ExecuteAssemblyAsync(

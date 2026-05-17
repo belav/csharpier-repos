@@ -139,8 +139,7 @@ namespace System
             CultureInfo? culture,
             object?[]? activationAttributes
         ) =>
-            ReflectionAugments
-                .ReflectionCoreCallbacks
+            ReflectionAugments.ReflectionCoreCallbacks
                 .ActivatorCreateInstance(
                     type,
                     bindingAttr,

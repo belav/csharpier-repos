@@ -171,8 +171,7 @@ namespace System.Web.Script.Services
                 response.AddHeader("jsonerror", "true");
                 response.ContentType = "application/json";
                 response.StatusCode = 500;
-                JavaScriptSerializer
-                    .DefaultSerializer
+                JavaScriptSerializer.DefaultSerializer
                     .Serialize(new ExceptionSerializer(e.GetBaseException()), response.Output);
                 response.End();
             }

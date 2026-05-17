@@ -76,8 +76,7 @@ public class Startup
                 {
                     OnMessageReceived = context =>
                     {
-                        var endpoint = context
-                            .HttpContext
+                        var endpoint = context.HttpContext
                             .Features
                             .Get<IEndpointFeature>()
                             ?.Endpoint;
@@ -218,8 +217,7 @@ public class Startup
                     context.Response.Cookies.Append("testCookie2", "testValue2", cookieOptions);
 
                     cookieOptions.Expires = DateTimeOffset.Now.AddHours(-1);
-                    context
-                        .Response
+                    context.Response
                         .Cookies
                         .Append("expiredCookie", "doesntmatter", expiredCookieOptions);
                 }
@@ -289,8 +287,7 @@ public class Startup
                 {
                     try
                     {
-                        var result = await hubContext
-                            .Clients
+                        var result = await hubContext.Clients
                             .Client(id)
                             .InvokeAsync<int>("Result", cancellationToken: default);
                         return result.ToString(CultureInfo.InvariantCulture);

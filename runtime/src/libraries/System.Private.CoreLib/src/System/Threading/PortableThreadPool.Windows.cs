@@ -14,8 +14,7 @@ namespace System.Threading
             {
                 get
                 {
-                    bool success = Interop
-                        .Kernel32
+                    bool success = Interop.Kernel32
                         .GetThreadIOPendingFlag(
                             Interop.Kernel32.GetCurrentThread(),
                             out Interop.BOOL isIOPending
@@ -37,8 +36,7 @@ namespace System.Threading
                 get
                 {
                     if (
-                        !Interop
-                            .Kernel32
+                        !Interop.Kernel32
                             .GetSystemTimes(
                                 out long idleTime,
                                 out long kernelTime,

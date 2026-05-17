@@ -40,8 +40,7 @@ namespace System.ServiceModel.Discovery
             }
             else
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .Argument("binding", SR.DiscoveryClientBindingElementPresentInDynamicEndpoint);
             }
         }

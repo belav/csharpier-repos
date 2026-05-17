@@ -176,10 +176,11 @@ namespace System.ServiceModel.Channels
             pt.InitializeSecurityTokenRequirement(req);
             object dummy;
             if (
-                req.Properties.TryGetValue(
-                    ServiceModelSecurityTokenRequirement.IssuedSecurityTokenParametersProperty,
-                    out dummy
-                )
+                req.Properties
+                    .TryGetValue(
+                        ServiceModelSecurityTokenRequirement.IssuedSecurityTokenParametersProperty,
+                        out dummy
+                    )
                 && dummy != null
             )
             {
@@ -235,10 +236,11 @@ namespace System.ServiceModel.Channels
             pt.InitializeSecurityTokenRequirement(req);
             object dummy;
             if (
-                req.Properties.TryGetValue(
-                    ServiceModelSecurityTokenRequirement.IssuedSecurityTokenParametersProperty,
-                    out dummy
-                )
+                req.Properties
+                    .TryGetValue(
+                        ServiceModelSecurityTokenRequirement.IssuedSecurityTokenParametersProperty,
+                        out dummy
+                    )
                 && dummy != null
             )
             {

@@ -50,11 +50,9 @@ namespace System.Linq.Parallel
             Contract.Assert(secondChild != null, "second child data source cannot be null");
             m_outputOrdered = LeftChild.OutputOrdered || RightChild.OutputOrdered;
 
-            m_prematureMergeLeft = LeftChild
-                .OrdinalIndexState
+            m_prematureMergeLeft = LeftChild.OrdinalIndexState
                 .IsWorseThan(OrdinalIndexState.Increasing);
-            m_prematureMergeRight = RightChild
-                .OrdinalIndexState
+            m_prematureMergeRight = RightChild.OrdinalIndexState
                 .IsWorseThan(OrdinalIndexState.Increasing);
 
             if (

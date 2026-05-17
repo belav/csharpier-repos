@@ -167,8 +167,7 @@ namespace System.Text
         public override int GetMaxByteCount(int charCount)
         {
             if (charCount < 0)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -179,8 +178,7 @@ namespace System.Text
                         )
                     );
             if ((charCount % 2) != 0)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -214,15 +212,13 @@ namespace System.Text
         )
         {
             if (chars == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("chars"));
             if (charIndex < 0)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -233,8 +229,7 @@ namespace System.Text
                         )
                     );
             if (charIndex > chars.Length)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -245,8 +240,7 @@ namespace System.Text
                         )
                     );
             if (charCount < 0)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -257,8 +251,7 @@ namespace System.Text
                         )
                     );
             if (charCount > chars.Length - charIndex)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -272,15 +265,13 @@ namespace System.Text
                         )
                     );
             if (bytes == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("bytes"));
             if (byteIndex < 0)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -291,8 +282,7 @@ namespace System.Text
                         )
                     );
             if (byteIndex > bytes.Length)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -304,8 +294,7 @@ namespace System.Text
                     );
             int byteCount = GetByteCount(chars, charIndex, charCount);
             if (byteCount < 0 || byteCount > bytes.Length - byteIndex)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -329,8 +318,7 @@ namespace System.Text
                                 char pch0 = pch[0];
                                 char pch1 = pch[1];
                                 if ((pch0 | pch1) >= 128)
-                                    throw System
-                                        .Runtime
+                                    throw System.Runtime
                                         .Serialization
                                         .DiagnosticUtility
                                         .ExceptionUtility
@@ -346,8 +334,7 @@ namespace System.Text
                                 byte d1 = _char2val[pch0];
                                 byte d2 = _char2val[pch1];
                                 if ((d1 | d2) == 0xFF)
-                                    throw System
-                                        .Runtime
+                                    throw System.Runtime
                                         .Serialization
                                         .DiagnosticUtility
                                         .ExceptionUtility
@@ -381,8 +368,7 @@ namespace System.Text
         public override int GetMaxCharCount(int byteCount)
         {
             if (byteCount < 0 || byteCount > int.MaxValue / 2)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -414,15 +400,13 @@ namespace System.Text
         )
         {
             if (bytes == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("bytes"));
             if (byteIndex < 0)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -433,8 +417,7 @@ namespace System.Text
                         )
                     );
             if (byteIndex > bytes.Length)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -445,8 +428,7 @@ namespace System.Text
                         )
                     );
             if (byteCount < 0)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -457,8 +439,7 @@ namespace System.Text
                         )
                     );
             if (byteCount > bytes.Length - byteIndex)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -473,15 +454,13 @@ namespace System.Text
                     );
             int charCount = GetCharCount(bytes, byteIndex, byteCount);
             if (chars == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("chars"));
             if (charIndex < 0)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -492,8 +471,7 @@ namespace System.Text
                         )
                     );
             if (charIndex > chars.Length)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -504,8 +482,7 @@ namespace System.Text
                         )
                     );
             if (charCount < 0 || charCount > chars.Length - charIndex)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility

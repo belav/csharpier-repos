@@ -32,11 +32,8 @@ namespace System.Activities.Runtime
             ActivityInstanceReference originalExceptionSource
         )
         {
-            return this.callbackWrapper.CreateWorkItem(
-                propagatedException,
-                propagatedFrom,
-                originalExceptionSource
-            );
+            return this.callbackWrapper
+                .CreateWorkItem(propagatedException, propagatedFrom, originalExceptionSource);
         }
     }
 }

@@ -52,8 +52,7 @@ namespace Microsoft.WebAssembly.Diagnostics
                 }
             }
 
-            applicationLifetime
-                .ApplicationStarted
+            applicationLifetime.ApplicationStarted
                 .Register(() =>
                 {
                     string ipAddress = app.ServerFeatures
@@ -156,8 +155,7 @@ namespace Microsoft.WebAssembly.Diagnostics
                         HttpResponseMessage response = await s_httpClient.GetAsync(
                             GetEndpoint(context)
                         );
-                        context.Response.ContentType = response
-                            .Content
+                        context.Response.ContentType = response.Content
                             .Headers
                             .ContentType
                             .ToString();
@@ -181,8 +179,7 @@ namespace Microsoft.WebAssembly.Diagnostics
                             Dictionary<string, string>
                         >(GetEndpoint(context));
                         context.Response.ContentType = "application/json";
-                        await context
-                            .Response
+                        await context.Response
                             .WriteAsync(
                                 JsonSerializer.Serialize(mapFunc(version, context, devToolsHost))
                             );
@@ -229,8 +226,7 @@ namespace Microsoft.WebAssembly.Diagnostics
                     var endpoint = new Uri($"ws://{devToolsHost.Authority}{context.Request.Path}");
                     int runtimeId = 0;
                     if (
-                        context
-                            .Request
+                        context.Request
                             .Query
                             .TryGetValue("RuntimeId", out StringValues runtimeIdValue)
                         && int.TryParse(runtimeIdValue.FirstOrDefault(), out int parsedId)
@@ -245,8 +241,7 @@ namespace Microsoft.WebAssembly.Diagnostics
                         var loggerFactory = context.RequestServices.GetService<ILoggerFactory>();
                         var proxy = new DebuggerProxy(loggerFactory, runtimeId, options: options);
 
-                        System.Net.WebSockets.WebSocket ideSocket = await context
-                            .WebSockets
+                        System.Net.WebSockets.WebSocket ideSocket = await context.WebSockets
                             .AcceptWebSocketAsync();
 
                         logger.LogInformation(

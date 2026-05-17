@@ -463,8 +463,7 @@ namespace ILCompiler
                     TargetArchitecture targetArch = Helpers.GetTargetArchitecture(arch);
                     bool first = true;
                     foreach (
-                        var instructionSet in Internal
-                            .JitInterface
+                        var instructionSet in Internal.JitInterface
                             .InstructionSetFlags
                             .ArchitectureToValidInstructionSets(targetArch)
                     )

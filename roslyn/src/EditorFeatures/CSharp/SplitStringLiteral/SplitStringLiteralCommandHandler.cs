@@ -52,8 +52,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.SplitStringLiteral
         )
         {
             if (
-                !_editorOptionsService
-                    .GlobalOptions
+                !_editorOptionsService.GlobalOptions
                     .GetOption(SplitStringLiteralOptionsStorage.Enabled)
             )
             {
@@ -83,8 +82,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.SplitStringLiteral
                     return false;
             }
 
-            var document = subjectBuffer
-                .CurrentSnapshot
+            var document = subjectBuffer.CurrentSnapshot
                 .GetOpenDocumentInCurrentContextWithChanges();
             if (document == null)
                 return false;
@@ -134,8 +132,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.SplitStringLiteral
                 // Only adjust caret if it is the only one (no multi-caret support: https://github.com/dotnet/roslyn/issues/64812).
                 if (spans.Count == 1)
                 {
-                    var newCaretPoint = textView
-                        .BufferGraph
+                    var newCaretPoint = textView.BufferGraph
                         .MapUpToBuffer(
                             new SnapshotPoint(newSnapshot, newPosition),
                             PointTrackingMode.Negative,

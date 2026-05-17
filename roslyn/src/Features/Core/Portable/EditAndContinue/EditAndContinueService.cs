@@ -149,8 +149,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 if (captureAllMatchingDocuments || !captureMatchingDocuments.IsEmpty)
                 {
                     var documentsByProject = captureAllMatchingDocuments
-                        ? solution
-                            .Projects
+                        ? solution.Projects
                             .Select(project =>
                                 (project, project.State.DocumentStates.States.Values)
                             )

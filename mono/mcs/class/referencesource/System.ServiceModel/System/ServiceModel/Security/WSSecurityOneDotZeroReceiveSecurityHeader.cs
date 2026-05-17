@@ -60,8 +60,7 @@ namespace System.ServiceModel.Security
         {
             if (encryptionMethod == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new MessageSecurityException(
                             SR.GetString(SR.EncryptionMethodMissingInEncryptedData)
@@ -73,8 +72,7 @@ namespace System.ServiceModel.Security
                 SecurityUtils.GetSecurityKey<SymmetricSecurityKey>(token);
             if (symmetricSecurityKey == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new MessageSecurityException(
                             SR.GetString(SR.TokenCannotCreateSymmetricCrypto, token)
@@ -87,8 +85,7 @@ namespace System.ServiceModel.Security
             );
             if (algorithm == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new MessageSecurityException(
                             SR.GetString(
@@ -111,8 +108,7 @@ namespace System.ServiceModel.Security
             bodyXml.ReadFrom(bodyContentReader, MaxReceivedMessageSize);
             if (!bodyContentReader.EOF && bodyContentReader.NodeType != XmlNodeType.EndElement)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new FormatException(SR.GetString(SR.BadEncryptedBody)));
             }
             if (token == null)
@@ -142,8 +138,7 @@ namespace System.ServiceModel.Security
             WrappedKeySecurityToken wrappedKeyToken
         )
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(
                     new MessageSecurityException(
                         SR.GetString(SR.HeaderDecryptionNotSupportedInWsSecurityJan2004)
@@ -177,8 +172,7 @@ namespace System.ServiceModel.Security
                     // all the EncryptedData pointed by the ReferenceList should be encrypted only
                     // by this key. The individual EncryptedData elements if containing a KeyInfo
                     // clause should point back to the same EncryptedKey token.
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new MessageSecurityException(
                                 SR.GetString(
@@ -217,10 +211,11 @@ namespace System.ServiceModel.Security
                 this.StandardsManager
                     .SecurityTokenSerializer
                     .ReadToken(reader, this.PrimaryTokenResolver);
-            this.AlgorithmSuite.EnsureAcceptableKeyWrapAlgorithm(
-                token.WrappingAlgorithm,
-                token.WrappingSecurityKey is AsymmetricSecurityKey
-            );
+            this.AlgorithmSuite
+                .EnsureAcceptableKeyWrapAlgorithm(
+                    token.WrappingAlgorithm,
+                    token.WrappingSecurityKey is AsymmetricSecurityKey
+                );
 
             if (TD.WrappedKeyDecryptionSuccessIsEnabled())
             {
@@ -262,8 +257,7 @@ namespace System.ServiceModel.Security
                 //
                 // Wrap the crypto exception here so that the perf couter can be updated correctly
                 //
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new MessageSecurityException(
                             SR.GetString(SR.FailedSignatureVerification),
@@ -274,8 +268,7 @@ namespace System.ServiceModel.Security
 
             if (signed && isRecognizedSecurityToken)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new MessageSecurityException(
                             SR.GetString(
@@ -458,8 +451,7 @@ namespace System.ServiceModel.Security
                 if (isHeaderEncrypted && !headerSigned)
                 {
                     // We require all encrypted headers (outside the security header) to be signed.
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new MessageSecurityException(
                                 SR.GetString(SR.EncryptedHeaderNotSigned, info.Name, info.Namespace)
@@ -566,23 +558,24 @@ namespace System.ServiceModel.Security
 
             if (!bodySigned && signatureParts.IsBodyIncluded)
             {
-                this.SecurityVerifiedMessage.OnUnsignedPart(
-                    XD.MessageDictionary.Body.Value,
-                    this.Version.Envelope.Namespace
-                );
+                this.SecurityVerifiedMessage
+                    .OnUnsignedPart(
+                        XD.MessageDictionary.Body.Value,
+                        this.Version.Envelope.Namespace
+                    );
             }
 
             if (!bodyEncrypted && encryptionParts.IsBodyIncluded)
             {
-                this.SecurityVerifiedMessage.OnUnencryptedPart(
-                    XD.MessageDictionary.Body.Value,
-                    this.Version.Envelope.Namespace
-                );
+                this.SecurityVerifiedMessage
+                    .OnUnencryptedPart(
+                        XD.MessageDictionary.Body.Value,
+                        this.Version.Envelope.Namespace
+                    );
             }
 
-            this.SecurityVerifiedMessage.OnMessageProtectionPassComplete(
-                atLeastOneHeaderOrBodyEncrypted
-            );
+            this.SecurityVerifiedMessage
+                .OnMessageProtectionPassComplete(atLeastOneHeaderOrBodyEncrypted);
         }
 
         protected override bool IsReaderAtEncryptedData(XmlDictionaryReader reader)
@@ -677,8 +670,7 @@ namespace System.ServiceModel.Security
             {
                 if (isFromSignature)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new MessageSecurityException(
                                 SR.GetString(SR.NoKeyInfoInSignatureToFindVerificationToken)
@@ -687,8 +679,7 @@ namespace System.ServiceModel.Security
                 }
                 else
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new MessageSecurityException(
                                 SR.GetString(SR.NoKeyInfoInEncryptedItemToFindDecryptingToken)
@@ -711,8 +702,7 @@ namespace System.ServiceModel.Security
             {
                 if (isFromSignature)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new MessageSecurityException(
                                 SR.GetString(
@@ -725,8 +715,7 @@ namespace System.ServiceModel.Security
                 }
                 else
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new MessageSecurityException(
                                 SR.GetString(
@@ -772,8 +761,7 @@ namespace System.ServiceModel.Security
                             );
                             if (rsaTracker == null)
                             {
-                                throw DiagnosticUtility
-                                    .ExceptionUtility
+                                throw DiagnosticUtility.ExceptionUtility
                                     .ThrowHelperWarning(
                                         new MessageSecurityException(
                                             SR.GetString(
@@ -794,8 +782,7 @@ namespace System.ServiceModel.Security
             }
             if (token == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new MessageSecurityException(
                             SR.GetString(
@@ -912,8 +899,7 @@ namespace System.ServiceModel.Security
             SecurityKey securityKey = (keys != null && keys.Count > 0) ? keys[0] : null;
             if (securityKey == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new MessageSecurityException(
                             SR.GetString(
@@ -924,10 +910,11 @@ namespace System.ServiceModel.Security
                     );
             }
             this.AlgorithmSuite.EnsureAcceptableSignatureKeySize(securityKey, token);
-            this.AlgorithmSuite.EnsureAcceptableSignatureAlgorithm(
-                securityKey,
-                signedXml.Signature.SignedInfo.SignatureMethod
-            );
+            this.AlgorithmSuite
+                .EnsureAcceptableSignatureAlgorithm(
+                    securityKey,
+                    signedXml.Signature.SignedInfo.SignatureMethod
+                );
             signedXml.StartSignatureVerification(securityKey);
             StandardSignedInfo signedInfo = (StandardSignedInfo)signedXml.Signature.SignedInfo;
 
@@ -956,8 +943,7 @@ namespace System.ServiceModel.Security
                             this.Message.Version.Addressing.Namespace
                         );
                     if (headerIndex == -1)
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new MessageSecurityException(
                                     SR.GetString(SR.TransportSecuredMessageMissingToHeader)
@@ -987,8 +973,7 @@ namespace System.ServiceModel.Security
                         if (id == null)
                         {
                             //
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
                                     new MessageSecurityException(
                                         SR.GetString(SR.UnsignedToHeaderInTransportSecuredMessage)
@@ -1053,10 +1038,11 @@ namespace System.ServiceModel.Security
                             if (reference.IsStrTranform())
                             {
                                 if (
-                                    this.ElementManager.TryGetTokenElementIndexFromStrId(
-                                        referredId,
-                                        out tokenIndex
-                                    )
+                                    this.ElementManager
+                                        .TryGetTokenElementIndexFromStrId(
+                                            referredId,
+                                            out tokenIndex
+                                        )
                                 )
                                 {
                                     ReceiveSecurityHeaderEntry entry;
@@ -1081,17 +1067,16 @@ namespace System.ServiceModel.Security
                                     }
                                     this.ElementManager.SetSigned(tokenIndex);
                                     // We pass true if it is a signed supporting token, signed primary token or a SignedEndorsing token. We pass false if it is a SignedEncrypted Token.
-                                    reader = this.ElementManager.GetReader(
-                                        tokenIndex,
-                                        isSignedToken
-                                    );
+                                    reader = this.ElementManager
+                                        .GetReader(tokenIndex, isSignedToken);
                                 }
                             }
                             else
-                                reader = this.ElementManager.GetSignatureVerificationReader(
-                                    referredId,
-                                    this.EncryptBeforeSignMode
-                                );
+                                reader = this.ElementManager
+                                    .GetSignatureVerificationReader(
+                                        referredId,
+                                        this.EncryptBeforeSignMode
+                                    );
 
                             if (reader != null)
                             {
@@ -1118,8 +1103,7 @@ namespace System.ServiceModel.Security
                 && !this.ElementManager.IsPrimaryTokenSigned
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new MessageSecurityException(
                             SR.GetString(

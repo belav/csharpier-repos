@@ -554,8 +554,7 @@ public class InternalModelBuilder
 
             foreach (var existingEntityType in Metadata.FindEntityTypes(type).ToList())
             {
-                Metadata
-                    .Builder
+                Metadata.Builder
                     .HasNoEntityType(existingEntityType, ConfigurationSource.Convention);
             }
 
@@ -564,8 +563,7 @@ public class InternalModelBuilder
             {
                 foreach (var property in properties)
                 {
-                    property
-                        .DeclaringType
+                    property.DeclaringType
                         .Builder
                         .RemoveProperty(property, ConfigurationSource.Convention);
                 }
@@ -700,8 +698,7 @@ public class InternalModelBuilder
             {
                 if (entityType.GetConfigurationSource() == ConfigurationSource.Explicit)
                 {
-                    Metadata
-                        .ScopedModelDependencies
+                    Metadata.ScopedModelDependencies
                         ?.Logger
                         .MappedEntityTypeIgnoredWarning(entityType);
                 }
@@ -816,8 +813,7 @@ public class InternalModelBuilder
                 }
                 else
                 {
-                    var removed = foreignKey
-                        .DeclaringEntityType
+                    var removed = foreignKey.DeclaringEntityType
                         .Builder
                         .HasNoRelationship(foreignKey, configurationSource);
                     Check.DebugAssert(removed != null, "removed is null");
@@ -828,8 +824,7 @@ public class InternalModelBuilder
                 var skipNavigation in entityType.GetDeclaredReferencingSkipNavigations().ToList()
             )
             {
-                var removed = skipNavigation
-                    .DeclaringEntityType
+                var removed = skipNavigation.DeclaringEntityType
                     .Builder
                     .HasNoSkipNavigation(skipNavigation, configurationSource);
                 Check.DebugAssert(removed != null, "removed is null");
@@ -848,8 +843,7 @@ public class InternalModelBuilder
 
             foreach (var directlyDerivedType in entityType.GetDirectlyDerivedTypes().ToList())
             {
-                var derivedEntityTypeBuilder = directlyDerivedType
-                    .Builder
+                var derivedEntityTypeBuilder = directlyDerivedType.Builder
                     .HasBaseType(entityType.BaseType, configurationSource);
                 Check.DebugAssert(
                     derivedEntityTypeBuilder != null,

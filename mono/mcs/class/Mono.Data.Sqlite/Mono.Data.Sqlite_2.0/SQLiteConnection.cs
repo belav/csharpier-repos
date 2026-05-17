@@ -1417,16 +1417,12 @@ namespace Mono.Data.Sqlite
             DataRow row;
 
             tbl.Locale = CultureInfo.InvariantCulture;
-            tbl.Columns.Add(
-                DbMetaDataColumnNames.CompositeIdentifierSeparatorPattern,
-                typeof(string)
-            );
+            tbl.Columns
+                .Add(DbMetaDataColumnNames.CompositeIdentifierSeparatorPattern, typeof(string));
             tbl.Columns.Add(DbMetaDataColumnNames.DataSourceProductName, typeof(string));
             tbl.Columns.Add(DbMetaDataColumnNames.DataSourceProductVersion, typeof(string));
-            tbl.Columns.Add(
-                DbMetaDataColumnNames.DataSourceProductVersionNormalized,
-                typeof(string)
-            );
+            tbl.Columns
+                .Add(DbMetaDataColumnNames.DataSourceProductVersionNormalized, typeof(string));
             tbl.Columns.Add(DbMetaDataColumnNames.GroupByBehavior, typeof(int));
             tbl.Columns.Add(DbMetaDataColumnNames.IdentifierPattern, typeof(string));
             tbl.Columns.Add(DbMetaDataColumnNames.IdentifierCase, typeof(int));
@@ -2157,8 +2153,7 @@ namespace Mono.Data.Sqlite
                             .Replace('\r', ' ')
                             .Replace('\n', ' ')
                             .Replace('\t', ' ');
-                        nPos = CultureInfo
-                            .InvariantCulture
+                        nPos = CultureInfo.InvariantCulture
                             .CompareInfo
                             .IndexOf(strItem, " AS ", CompareOptions.IgnoreCase);
                         if (nPos > -1)
@@ -2615,8 +2610,7 @@ namespace Mono.Data.Sqlite
                                 .Replace('\r', ' ')
                                 .Replace('\n', ' ')
                                 .Replace('\t', ' ');
-                            n = CultureInfo
-                                .InvariantCulture
+                            n = CultureInfo.InvariantCulture
                                 .CompareInfo
                                 .IndexOf(strSql, " AS ", CompareOptions.IgnoreCase);
                             if (n < 0)

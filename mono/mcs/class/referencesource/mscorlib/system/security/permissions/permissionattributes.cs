@@ -1313,8 +1313,7 @@ namespace System.Security.Permissions
                 else if (m_certFile != null)
                 {
                     return new PublisherIdentityPermission(
-                        System
-                            .Security
+                        System.Security
                             .Cryptography
                             .X509Certificates
                             .X509Certificate
@@ -1324,8 +1323,7 @@ namespace System.Security.Permissions
                 else if (m_signedFile != null)
                 {
                     return new PublisherIdentityPermission(
-                        System
-                            .Security
+                        System.Security
                             .Cryptography
                             .X509Certificates
                             .X509Certificate

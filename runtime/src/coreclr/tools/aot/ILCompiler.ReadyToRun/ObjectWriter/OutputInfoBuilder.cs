@@ -226,8 +226,7 @@ namespace ILCompiler.PEWriter
             {
                 yield return new AssemblyInfo(
                     inputModule.Assembly.GetName().Name,
-                    inputModule
-                        .MetadataReader
+                    inputModule.MetadataReader
                         .GetGuid(inputModule.MetadataReader.GetModuleDefinition().Mvid)
                 );
             }

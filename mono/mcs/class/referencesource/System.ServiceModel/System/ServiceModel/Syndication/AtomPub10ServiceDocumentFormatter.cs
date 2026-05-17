@@ -38,14 +38,12 @@ namespace System.ServiceModel.Syndication
         {
             if (documentTypeToCreate == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("documentTypeToCreate");
             }
             if (!typeof(ServiceDocument).IsAssignableFrom(documentTypeToCreate))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(
                         "documentTypeToCreate",
                         SR.GetString(
@@ -124,8 +122,7 @@ namespace System.ServiceModel.Syndication
             }
             if (this.Document == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(SR.DocumentFormatterDoesNotHaveDocument)
@@ -146,8 +143,7 @@ namespace System.ServiceModel.Syndication
             reader.MoveToContent();
             if (!CanRead(reader))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new XmlException(
                             SR.GetString(
@@ -171,8 +167,7 @@ namespace System.ServiceModel.Syndication
             }
             if (this.Document == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(SR.DocumentFormatterDoesNotHaveDocument)
@@ -382,8 +377,7 @@ namespace System.ServiceModel.Syndication
                         {
                             if (preserveAttributeExtensions)
                             {
-                                inlineCategories
-                                    .AttributeExtensions
+                                inlineCategories.AttributeExtensions
                                     .Add(
                                         new XmlQualifiedName(reader.LocalName, reader.NamespaceURI),
                                         reader.Value
@@ -519,8 +513,7 @@ namespace System.ServiceModel.Syndication
                         {
                             if (preserveAttributeExtensions)
                             {
-                                referencedCategories
-                                    .AttributeExtensions
+                                referencedCategories.AttributeExtensions
                                     .Add(
                                         new XmlQualifiedName(reader.LocalName, reader.NamespaceURI),
                                         reader.Value
@@ -686,8 +679,7 @@ namespace System.ServiceModel.Syndication
                         {
                             if (this.preserveAttributeExtensions)
                             {
-                                result
-                                    .AttributeExtensions
+                                result.AttributeExtensions
                                     .Add(
                                         new XmlQualifiedName(reader.LocalName, reader.NamespaceURI),
                                         reader.Value
@@ -729,8 +721,7 @@ namespace System.ServiceModel.Syndication
                         reader.IsStartElement(App10Constants.Categories, App10Constants.Namespace)
                     )
                     {
-                        result
-                            .Categories
+                        result.Categories
                             .Add(
                                 ReadCategories(
                                     reader,
@@ -823,8 +814,7 @@ namespace System.ServiceModel.Syndication
                             {
                                 if (this.preserveAttributeExtensions)
                                 {
-                                    result
-                                        .AttributeExtensions
+                                    result.AttributeExtensions
                                         .Add(
                                             new XmlQualifiedName(
                                                 reader.LocalName,
@@ -896,16 +886,14 @@ namespace System.ServiceModel.Syndication
             }
             catch (FormatException e)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new XmlException(FeedUtils.AddLineInfo(reader, SR.ErrorParsingDocument), e)
                     );
             }
             catch (ArgumentException e)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new XmlException(FeedUtils.AddLineInfo(reader, SR.ErrorParsingDocument), e)
                     );
@@ -941,8 +929,7 @@ namespace System.ServiceModel.Syndication
                         {
                             if (this.preserveAttributeExtensions)
                             {
-                                result
-                                    .AttributeExtensions
+                                result.AttributeExtensions
                                     .Add(
                                         new XmlQualifiedName(reader.LocalName, reader.NamespaceURI),
                                         reader.Value
@@ -1040,8 +1027,7 @@ namespace System.ServiceModel.Syndication
             WriteAttributeExtensions(writer, collection, this.Version);
             if (collection.Title != null)
             {
-                collection
-                    .Title
+                collection.Title
                     .WriteTo(writer, Atom10Constants.TitleTag, Atom10Constants.Atom10Namespace);
             }
             for (int i = 0; i < collection.Accepts.Count; ++i)
@@ -1103,8 +1089,7 @@ namespace System.ServiceModel.Syndication
             WriteAttributeExtensions(writer, workspace, this.Version);
             if (workspace.Title != null)
             {
-                workspace
-                    .Title
+                workspace.Title
                     .WriteTo(writer, Atom10Constants.TitleTag, Atom10Constants.Atom10Namespace);
             }
             for (int i = 0; i < workspace.Collections.Count; ++i)

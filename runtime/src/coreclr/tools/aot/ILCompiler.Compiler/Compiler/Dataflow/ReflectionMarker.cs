@@ -125,8 +125,7 @@ namespace ILCompiler.Dataflow
             )?.Module;
 
             List<ModuleDesc> referencedModules = new();
-            TypeDesc foundType = System
-                .Reflection
+            TypeDesc foundType = System.Reflection
                 .TypeNameParser
                 .ResolveType(
                     typeName,
@@ -153,8 +152,7 @@ namespace ILCompiler.Dataflow
                 {
                     // Also add module metadata in case this reference was through a type forward
                     if (
-                        Factory
-                            .MetadataManager
+                        Factory.MetadataManager
                             .CanGenerateMetadata(referencedModule.GetGlobalModuleType())
                     )
                         _dependencies.Add(Factory.ModuleMetadata(referencedModule), reason);

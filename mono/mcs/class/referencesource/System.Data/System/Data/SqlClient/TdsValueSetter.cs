@@ -224,8 +224,7 @@ namespace System.Data.SqlClient
 
                 if (SqlDbType.Variant == _metaData.SqlDbType)
                 {
-                    _stateObj
-                        .Parser
+                    _stateObj.Parser
                         .WriteSqlVariantHeader(4 + length, TdsEnums.SQLBIGVARBINARY, 2, _stateObj);
                 }
                 _stateObj.Parser.WriteShort(length, _stateObj);
@@ -264,8 +263,7 @@ namespace System.Data.SqlClient
 
                     if (SqlDbType.Variant == _metaData.SqlDbType)
                     {
-                        _stateObj
-                            .Parser
+                        _stateObj.Parser
                             .WriteSqlVariantHeader(4, TdsEnums.SQLBIGVARBINARY, 2, _stateObj);
                     }
                     _stateObj.Parser.WriteShort(0, _stateObj);
@@ -334,8 +332,7 @@ namespace System.Data.SqlClient
 
                     if (SqlDbType.Variant == _metaData.SqlDbType)
                     {
-                        _stateObj
-                            .Parser
+                        _stateObj.Parser
                             .WriteSqlVariantValue(
                                 new String(buffer, bufferOffset, length),
                                 length,
@@ -457,13 +454,11 @@ namespace System.Data.SqlClient
                     }
                     else
                     {
-                        bytes = _stateObj
-                            .Parser
+                        bytes = _stateObj.Parser
                             ._defaultEncoding
                             .GetBytes(value.ToCharArray(offset, length));
                     }
-                    _stateObj
-                        .Parser
+                    _stateObj.Parser
                         .WriteSqlVariantHeader(
                             9 + bytes.Length,
                             TdsEnums.SQLBIGVARCHAR,
@@ -477,8 +472,7 @@ namespace System.Data.SqlClient
                 }
                 else
                 {
-                    _stateObj
-                        .Parser
+                    _stateObj.Parser
                         .WriteSqlVariantHeader(
                             9 + length * ADP.CharSize,
                             TdsEnums.SQLNVARCHAR,
@@ -637,8 +631,7 @@ namespace System.Data.SqlClient
             else
             {
                 _stateObj.WriteByte(checked((byte)MetaType.MetaDecimal.FixedLength)); // SmiMetaData's length and actual wire format's length are different
-                _stateObj
-                    .Parser
+                _stateObj.Parser
                     .WriteSqlDecimal(
                         SqlDecimal.ConvertToPrecScale(value, _metaData.Precision, _metaData.Scale),
                         _stateObj
@@ -784,8 +777,7 @@ namespace System.Data.SqlClient
                 MSS.SmiMetaData dateTimeOffsetMetaData = MSS.SmiMetaData.DefaultDateTimeOffset;
                 scale = MetaType.MetaDateTimeOffset.Scale;
                 length = (byte)dateTimeOffsetMetaData.MaxLength;
-                _stateObj
-                    .Parser
+                _stateObj.Parser
                     .WriteSqlVariantHeader(13, TdsEnums.SQLDATETIMEOFFSET, 1, _stateObj);
                 _stateObj.WriteByte(scale); //propbytes: scale
             }

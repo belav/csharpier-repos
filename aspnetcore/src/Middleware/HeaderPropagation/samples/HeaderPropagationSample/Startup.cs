@@ -32,8 +32,7 @@ public class Startup
             options.Headers.Add("X-BetaFeatures");
 
             // Generate a new X-BetaFeatures if not present.
-            options
-                .Headers
+            options.Headers
                 .Add(
                     "X-BetaFeatures",
                     context =>
@@ -75,8 +74,7 @@ public class Startup
                 {
                     foreach (var header in context.Request.Headers)
                     {
-                        await context
-                            .Response
+                        await context.Response
                             .WriteAsync(
                                 $"'/' Got Header '{header.Key}': {string.Join(", ", header.Value)}\r\n"
                             );
@@ -98,16 +96,14 @@ public class Startup
 
                         foreach (var header in response.RequestMessage.Headers)
                         {
-                            await context
-                                .Response
+                            await context.Response
                                 .WriteAsync(
                                     $"Sent Header '{header.Key}': {string.Join(", ", header.Value)}\r\n"
                                 );
                         }
 
                         await context.Response.WriteAsync("Got response\r\n");
-                        await context
-                            .Response
+                        await context.Response
                             .WriteAsync(await response.Content.ReadAsStringAsync());
                     }
                 }
@@ -119,8 +115,7 @@ public class Startup
                 {
                     foreach (var header in context.Request.Headers)
                     {
-                        await context
-                            .Response
+                        await context.Response
                             .WriteAsync(
                                 $"'/forwarded' Got Header '{header.Key}': {string.Join(", ", header.Value)}\r\n"
                             );

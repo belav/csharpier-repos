@@ -195,8 +195,7 @@ my_PROP = my_VAL"
                 )
             );
             AssertEx.SetEqual(
-                AnalyzerConfig
-                    .ReservedKeys
+                AnalyzerConfig.ReservedKeys
                     .Select(k => KeyValuePair.Create("my_" + k, "MY_VAL"))
                     .ToList(),
                 config.GlobalSection.Properties
@@ -370,15 +369,13 @@ RoOt = TruE"
             var config = ParseConfigFile(
                 string.Join(
                     Environment.NewLine,
-                    AnalyzerConfig
-                        .ReservedValues
+                    AnalyzerConfig.ReservedValues
                         .Select(v => "MY_KEY" + (index++) + " = " + v.ToUpperInvariant())
                 )
             );
             index = 0;
             AssertEx.SetEqual(
-                AnalyzerConfig
-                    .ReservedValues
+                AnalyzerConfig.ReservedValues
                     .Select(v => KeyValuePair.Create("my_key" + (index++), v))
                     .ToList(),
                 config.GlobalSection.Properties

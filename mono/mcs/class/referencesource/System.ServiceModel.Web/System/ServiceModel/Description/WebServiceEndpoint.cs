@@ -84,8 +84,7 @@ namespace System.ServiceModel.Description
                 WebHttpBinding webHttpBinding = this.Binding as WebHttpBinding;
                 if (webHttpBinding == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR2.GetString(

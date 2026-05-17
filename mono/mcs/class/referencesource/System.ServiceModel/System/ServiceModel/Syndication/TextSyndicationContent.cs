@@ -28,8 +28,7 @@ namespace System.ServiceModel.Syndication
         {
             if (!TextSyndicationContentKindHelper.IsDefined(textKind))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentOutOfRangeException("textKind"));
             }
             this.text = text;

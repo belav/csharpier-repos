@@ -70,16 +70,14 @@ namespace System.Runtime.Serialization.Diagnostics
                 )
             );
 #if !MONO
-            string msdnTraceCode = System
-                .ServiceModel
+            string msdnTraceCode = System.ServiceModel
                 .Diagnostics
                 .LegacyDiagnosticTrace
                 .GenerateMsdnTraceCode("System.Runtime.Serialization", traceCodes[traceCode]);
 #else
             string msdnTraceCode = "";
 #endif
-            DiagnosticUtility
-                .DiagnosticTrace
+            DiagnosticUtility.DiagnosticTrace
                 .TraceEvent(
                     severity,
                     traceCode,

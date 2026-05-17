@@ -342,11 +342,12 @@ namespace System.Web.UI.WebControls
 
                     if (c is IButtonControl)
                     {
-                        Page.ClientScript.RegisterDefaultButtonScript(
-                            c,
-                            writer,
-                            true /* UseAddAttribute */
-                        );
+                        Page.ClientScript
+                            .RegisterDefaultButtonScript(
+                                c,
+                                writer,
+                                true /* UseAddAttribute */
+                            );
                     }
                     else
                     {

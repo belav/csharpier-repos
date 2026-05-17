@@ -60,14 +60,12 @@ namespace Microsoft.Extensions.Http
                 );
 
                 // The 'scope' handler goes first so it can surround everything.
-                builder
-                    .AdditionalHandlers
+                builder.AdditionalHandlers
                     .Insert(0, new LoggingScopeHttpMessageHandler(outerLogger, options));
 
                 // We want this handler to be last so we can log details about the request after
                 // service discovery and security happen.
-                builder
-                    .AdditionalHandlers
+                builder.AdditionalHandlers
                     .Add(new LoggingHttpMessageHandler(innerLogger, options));
             };
         }

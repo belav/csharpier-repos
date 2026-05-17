@@ -347,8 +347,7 @@ namespace ICSharpCode.SharpZipLib.GZip
                 avail = 8;
             }
 
-            System
-                .Array
+            System.Array
                 .Copy(
                     inputBuffer.RawData,
                     inputBuffer.RawLength - inf.RemainingInput,

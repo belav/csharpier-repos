@@ -821,8 +821,7 @@ namespace System
                     if (!IsRunningOnWindows)
                         return null;
                     using (
-                        Microsoft.Win32.RegistryKey env = Microsoft
-                            .Win32
+                        Microsoft.Win32.RegistryKey env = Microsoft.Win32
                             .Registry
                             .LocalMachine
                             .OpenSubKey(
@@ -838,8 +837,7 @@ namespace System
                     if (!IsRunningOnWindows)
                         return null;
                     using (
-                        Microsoft.Win32.RegistryKey env = Microsoft
-                            .Win32
+                        Microsoft.Win32.RegistryKey env = Microsoft.Win32
                             .Registry
                             .CurrentUser
                             .OpenSubKey("Environment", false)
@@ -866,8 +864,7 @@ namespace System
                     if (IsRunningOnWindows)
                     {
                         using (
-                            Microsoft.Win32.RegistryKey env = Microsoft
-                                .Win32
+                            Microsoft.Win32.RegistryKey env = Microsoft.Win32
                                 .Registry
                                 .LocalMachine
                                 .OpenSubKey(
@@ -886,8 +883,7 @@ namespace System
                     if (IsRunningOnWindows)
                     {
                         using (
-                            Microsoft.Win32.RegistryKey env = Microsoft
-                                .Win32
+                            Microsoft.Win32.RegistryKey env = Microsoft.Win32
                                 .Registry
                                 .CurrentUser
                                 .OpenSubKey("Environment")
@@ -942,8 +938,7 @@ namespace System
                     if (!IsRunningOnWindows)
                         return;
                     using (
-                        Microsoft.Win32.RegistryKey env = Microsoft
-                            .Win32
+                        Microsoft.Win32.RegistryKey env = Microsoft.Win32
                             .Registry
                             .LocalMachine
                             .OpenSubKey(
@@ -963,8 +958,7 @@ namespace System
                     if (!IsRunningOnWindows)
                         return;
                     using (
-                        Microsoft.Win32.RegistryKey env = Microsoft
-                            .Win32
+                        Microsoft.Win32.RegistryKey env = Microsoft.Win32
                             .Registry
                             .CurrentUser
                             .OpenSubKey("Environment", true)
@@ -1127,8 +1121,7 @@ namespace System
                     /* On windows, we don't know the path where mscorlib.dll will be installed */
                     string corlibDir = new DirectoryInfo(
                         Path.GetDirectoryName(typeof(int).Assembly.Location)
-                    )
-                        .Parent
+                    ).Parent
                         .Parent
                         .FullName;
                     return Path.Combine(Path.Combine(corlibDir, "mono"), "gac");

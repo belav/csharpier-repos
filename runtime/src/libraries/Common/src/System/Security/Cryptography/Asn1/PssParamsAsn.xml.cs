@@ -59,8 +59,7 @@ namespace System.Security.Cryptography.Asn1
             AsnValueReader reader;
 
             reader = new AsnValueReader(DefaultHashAlgorithm, AsnEncodingRules.DER);
-            System
-                .Security
+            System.Security
                 .Cryptography
                 .Asn1
                 .AlgorithmIdentifierAsn
@@ -68,8 +67,7 @@ namespace System.Security.Cryptography.Asn1
             reader.ThrowIfNotEmpty();
 
             reader = new AsnValueReader(DefaultMaskGenAlgorithm, AsnEncodingRules.DER);
-            System
-                .Security
+            System.Security
                 .Cryptography
                 .Asn1
                 .AlgorithmIdentifierAsn
@@ -241,8 +239,7 @@ namespace System.Security.Cryptography.Asn1
                 explicitReader = sequenceReader.ReadSequence(
                     new Asn1Tag(TagClass.ContextSpecific, 0)
                 );
-                System
-                    .Security
+                System.Security
                     .Cryptography
                     .Asn1
                     .AlgorithmIdentifierAsn
@@ -252,8 +249,7 @@ namespace System.Security.Cryptography.Asn1
             else
             {
                 defaultReader = new AsnValueReader(DefaultHashAlgorithm, AsnEncodingRules.DER);
-                System
-                    .Security
+                System.Security
                     .Cryptography
                     .Asn1
                     .AlgorithmIdentifierAsn
@@ -270,8 +266,7 @@ namespace System.Security.Cryptography.Asn1
                 explicitReader = sequenceReader.ReadSequence(
                     new Asn1Tag(TagClass.ContextSpecific, 1)
                 );
-                System
-                    .Security
+                System.Security
                     .Cryptography
                     .Asn1
                     .AlgorithmIdentifierAsn
@@ -281,8 +276,7 @@ namespace System.Security.Cryptography.Asn1
             else
             {
                 defaultReader = new AsnValueReader(DefaultMaskGenAlgorithm, AsnEncodingRules.DER);
-                System
-                    .Security
+                System.Security
                     .Cryptography
                     .Asn1
                     .AlgorithmIdentifierAsn

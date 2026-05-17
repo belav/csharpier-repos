@@ -54,8 +54,7 @@ public class JSRuntimeExtensionsTest
             .Verifiable();
 
         // Act
-        var result = await jsRuntime
-            .Object
+        var result = await jsRuntime.Object
             .InvokeAsync<string>(method, cancellationToken, "a", "b");
 
         // Assert
@@ -118,8 +117,7 @@ public class JSRuntimeExtensionsTest
             .Returns(new ValueTask<string>(expected));
 
         // Act
-        var result = await jsRuntime
-            .Object
+        var result = await jsRuntime.Object
             .InvokeAsync<string>(method, TimeSpan.FromMinutes(5), args);
 
         Assert.Equal(expected, result);
@@ -146,8 +144,7 @@ public class JSRuntimeExtensionsTest
             .Returns(new ValueTask<string>(expected));
 
         // Act
-        var result = await jsRuntime
-            .Object
+        var result = await jsRuntime.Object
             .InvokeAsync<string>(method, Timeout.InfiniteTimeSpan, args);
 
         Assert.Equal(expected, result);

@@ -58,12 +58,13 @@ namespace Mono.CodeContracts.Static.ControlFlow.Subroutines
                 return this.current_block.UsesOverriding;
 
             this.state = ScanState.OutsideOld;
-            this.current_block.EndOldWithoutInstruction(
-                this.subroutine
-                    .SubroutineFacade
-                    .MetaDataProvider
-                    .ManagedPointer(this.next_end_old_type)
-            );
+            this.current_block
+                .EndOldWithoutInstruction(
+                    this.subroutine
+                        .SubroutineFacade
+                        .MetaDataProvider
+                        .ManagedPointer(this.next_end_old_type)
+                );
             return true;
         }
         #endregion
@@ -106,10 +107,8 @@ namespace Mono.CodeContracts.Static.ControlFlow.Subroutines
                 return this.current_block.UsesOverriding;
 
             this.state = ScanState.OutsideOld;
-            this.current_block.EndOld(
-                data,
-                this.subroutine.SubroutineFacade.MetaDataProvider.FieldType(field)
-            );
+            this.current_block
+                .EndOld(data, this.subroutine.SubroutineFacade.MetaDataProvider.FieldType(field));
             return false;
         }
 

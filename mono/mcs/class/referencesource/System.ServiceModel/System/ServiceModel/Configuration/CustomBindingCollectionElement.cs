@@ -81,8 +81,7 @@ namespace System.ServiceModel.Configuration
                     as BindingElementExtensionElement;
                 if (null == bindingElementExtension)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ConfigurationErrorsException(
                                 SR.GetString(
@@ -98,14 +97,12 @@ namespace System.ServiceModel.Configuration
                 bool isMatch;
                 if (allowDerivedTypes)
                 {
-                    isMatch = bindingElementExtension
-                        .BindingElementType
+                    isMatch = bindingElementExtension.BindingElementType
                         .IsAssignableFrom(bindingElement.GetType());
                 }
                 else
                 {
-                    isMatch = bindingElementExtension
-                        .BindingElementType
+                    isMatch = bindingElementExtension.BindingElementType
                         .Equals(bindingElement.GetType());
                 }
 

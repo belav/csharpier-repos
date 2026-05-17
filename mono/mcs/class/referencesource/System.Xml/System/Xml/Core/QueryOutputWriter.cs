@@ -162,12 +162,13 @@ namespace System.Xml
             // Output doc-type declaration immediately before first element is output
             if (this.outputDocType)
             {
-                this.wrapped.WriteDocType(
-                    prefix.Length != 0 ? prefix + ":" + localName : localName,
-                    this.publicId,
-                    this.systemId,
-                    null
-                );
+                this.wrapped
+                    .WriteDocType(
+                        prefix.Length != 0 ? prefix + ":" + localName : localName,
+                        this.publicId,
+                        this.systemId,
+                        null
+                    );
 
                 this.outputDocType = false;
             }

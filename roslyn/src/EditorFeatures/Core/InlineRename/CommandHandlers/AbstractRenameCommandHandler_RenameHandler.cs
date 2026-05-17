@@ -71,8 +71,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                 return;
             }
 
-            var backgroundWorkIndicatorFactory = workspace
-                .Services
+            var backgroundWorkIndicatorFactory = workspace.Services
                 .GetRequiredService<IBackgroundWorkIndicatorFactory>();
             using var context = backgroundWorkIndicatorFactory.Create(
                 args.TextView,
@@ -86,8 +85,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                 // Is the caret within any of the rename fields in this buffer?
                 // If so, focus the dashboard
                 if (
-                    _renameService
-                        .ActiveSession
+                    _renameService.ActiveSession
                         .TryGetContainingEditableSpan(caretPoint.Value, out _)
                 )
                 {

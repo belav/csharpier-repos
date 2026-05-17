@@ -142,9 +142,8 @@ namespace System
 
         private const int DEFAULT_ALL_DATETIMES_SIZE = 132;
 
-        internal static readonly DateTimeFormatInfo InvariantFormatInfo = CultureInfo
-            .InvariantCulture
-            .DateTimeFormat;
+        internal static readonly DateTimeFormatInfo InvariantFormatInfo =
+            CultureInfo.InvariantCulture.DateTimeFormat;
         private static readonly string[] s_invariantAbbreviatedMonthNames =
             InvariantFormatInfo.AbbreviatedMonthNames;
         private static readonly string[] s_invariantAbbreviatedDayNames =
@@ -856,8 +855,7 @@ namespace System
             else
             {
                 Debug.Assert(typeof(TChar) == typeof(byte));
-                Encoding
-                    .UTF8
+                Encoding.UTF8
                     .GetBytes(
                         s,
                         MemoryMarshal.Cast<TChar, byte>(

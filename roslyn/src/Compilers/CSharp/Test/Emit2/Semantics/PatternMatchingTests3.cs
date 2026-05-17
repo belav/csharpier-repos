@@ -659,8 +659,7 @@ class Source2
             var expectedOutput = "Source1 Source1 Source2 Source2 ";
             var compilation = CreateCompilation(
                 source,
-                options: TestOptions
-                    .DebugExe
+                options: TestOptions.DebugExe
                     .WithNullableContextOptions(NullableContextOptions.Disable)
             );
             compilation.VerifyDiagnostics();
@@ -707,8 +706,7 @@ class Source2
             var expectedOutput = "Source1 Source1 Source2 Source2 ";
             var compilation = CreateCompilation(
                 source,
-                options: TestOptions
-                    .DebugExe
+                options: TestOptions.DebugExe
                     .WithNullableContextOptions(NullableContextOptions.Disable)
             );
             compilation.VerifyDiagnostics();
@@ -755,8 +753,7 @@ class Source2
             var expectedOutput = "Source1 Source1 Source2 Source2 ";
             var compilation = CreateCompilation(
                 source,
-                options: TestOptions
-                    .DebugExe
+                options: TestOptions.DebugExe
                     .WithNullableContextOptions(NullableContextOptions.Disable)
             );
             compilation.VerifyDiagnostics();
@@ -803,8 +800,7 @@ class Source2
             var expectedOutput = "Source1 Source2 ";
             var compilation = CreateCompilation(
                 source,
-                options: TestOptions
-                    .DebugExe
+                options: TestOptions.DebugExe
                     .WithNullableContextOptions(NullableContextOptions.Disable)
             );
             compilation.VerifyDiagnostics();
@@ -832,8 +828,7 @@ class Program
             var expectedOutput = "Int16";
             var compilation = CreateCompilation(
                 source,
-                options: TestOptions
-                    .DebugExe
+                options: TestOptions.DebugExe
                     .WithNullableContextOptions(NullableContextOptions.Disable)
             );
             compilation.VerifyDiagnostics();
@@ -860,8 +855,7 @@ class Program
             var expectedOutput = "Int16";
             var compilation = CreateCompilation(
                 source,
-                options: TestOptions
-                    .DebugExe
+                options: TestOptions.DebugExe
                     .WithNullableContextOptions(NullableContextOptions.Disable)
             );
             compilation.VerifyDiagnostics();
@@ -908,8 +902,7 @@ class Source2
             var expectedOutput = "Source1 Source2 ";
             var compilation = CreateCompilation(
                 source,
-                options: TestOptions
-                    .DebugExe
+                options: TestOptions.DebugExe
                     .WithNullableContextOptions(NullableContextOptions.Disable)
             );
             compilation.VerifyDiagnostics();
@@ -955,8 +948,7 @@ class Source2
             var expectedOutput = "Source1 Source1 ";
             var compilation = CreateCompilation(
                 source,
-                options: TestOptions
-                    .DebugExe
+                options: TestOptions.DebugExe
                     .WithNullableContextOptions(NullableContextOptions.Disable)
             );
             compilation.VerifyDiagnostics();
@@ -1008,8 +1000,7 @@ class Source2
 ";
             var compilation = CreateCompilation(
                 source,
-                options: TestOptions
-                    .DebugExe
+                options: TestOptions.DebugExe
                     .WithNullableContextOptions(NullableContextOptions.Disable)
             );
             compilation.VerifyDiagnostics(
@@ -1082,8 +1073,7 @@ class Source2
 ";
             var compilation = CreateCompilation(
                 source,
-                options: TestOptions
-                    .DebugExe
+                options: TestOptions.DebugExe
                     .WithNullableContextOptions(NullableContextOptions.Disable)
             );
             compilation.VerifyDiagnostics(
@@ -1125,8 +1115,7 @@ class Program
 ";
             var compilation = CreateCompilation(
                 source,
-                options: TestOptions
-                    .DebugExe
+                options: TestOptions.DebugExe
                     .WithNullableContextOptions(NullableContextOptions.Disable)
             );
             compilation.VerifyDiagnostics(
@@ -1180,8 +1169,7 @@ TargetSubtype
 TargetSubtype";
             var compilation = CreateCompilation(
                 source,
-                options: TestOptions
-                    .DebugExe
+                options: TestOptions.DebugExe
                     .WithNullableContextOptions(NullableContextOptions.Disable)
             );
             compilation.VerifyDiagnostics();
@@ -1239,8 +1227,7 @@ Target->Ultimate
 Ultimate";
             var compilation = CreateCompilation(
                 source,
-                options: TestOptions
-                    .DebugExe
+                options: TestOptions.DebugExe
                     .WithNullableContextOptions(NullableContextOptions.Disable)
             );
             compilation.VerifyDiagnostics();
@@ -1298,8 +1285,7 @@ Target->Ultimate
 Ultimate";
             var compilation = CreateCompilation(
                 source,
-                options: TestOptions
-                    .DebugExe
+                options: TestOptions.DebugExe
                     .WithNullableContextOptions(NullableContextOptions.Disable)
             );
             compilation.VerifyDiagnostics();
@@ -1357,8 +1343,7 @@ Target->Ultimate
 (2, Ultimate)";
             var compilation = CreateCompilation(
                 source,
-                options: TestOptions
-                    .DebugExe
+                options: TestOptions.DebugExe
                     .WithNullableContextOptions(NullableContextOptions.Disable)
             );
             compilation.VerifyDiagnostics();
@@ -3315,8 +3300,7 @@ class C
 }";
                     var compilation = CreateCompilation(
                         source,
-                        parseOptions: TestOptions
-                            .Regular
+                        parseOptions: TestOptions.Regular
                             .WithLanguageVersion(LanguageVersion.CSharp9)
                     );
                     if (withExhaustive)

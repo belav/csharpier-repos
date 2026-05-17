@@ -97,8 +97,7 @@ internal static partial class Interop
                     public Native(IPv6MulticastRequest managed)
                     {
                         Debug.Assert(managed.MulticastAddress.Length == MulticastAddressLength);
-                        managed
-                            .MulticastAddress
+                        managed.MulticastAddress
                             .CopyTo(
                                 MemoryMarshal.CreateSpan(
                                     ref _multicastAddress[0],

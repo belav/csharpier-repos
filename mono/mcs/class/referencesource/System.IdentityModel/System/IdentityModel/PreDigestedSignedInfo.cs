@@ -87,8 +87,7 @@ namespace System.IdentityModel
             }
             else
             {
-                SignedInfoCanonicalFormWriter
-                    .Instance
+                SignedInfoCanonicalFormWriter.Instance
                     .WriteSignedInfoCanonicalForm(
                         hashStream,
                         this.SignatureMethod,
@@ -276,8 +275,7 @@ namespace System.IdentityModel
             {
                 if (useStrTransform && string.IsNullOrEmpty(id))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new ArgumentNullException(id));
                 }
 

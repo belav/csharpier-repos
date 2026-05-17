@@ -91,8 +91,7 @@ namespace System.Workflow.ComponentModel
                     if (paramType.FullName.EndsWith("&"))
                     {
                         // strip the & and reload the type without it.
-                        paramType = paramType
-                            .Assembly
+                        paramType = paramType.Assembly
                             .GetType(
                                 paramType.FullName.Substring(0, paramType.FullName.Length - 1),
                                 true

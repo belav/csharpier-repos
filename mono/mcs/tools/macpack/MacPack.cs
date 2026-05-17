@@ -134,8 +134,7 @@ namespace Mac
                     }
                     catch (Exception e)
                     {
-                        Console
-                            .Error
+                        Console.Error
                             .WriteLine(
                                 "Error while processing {0} (Details: {1})",
                                 res,
@@ -396,8 +395,7 @@ namespace Mac
                                 }
                                 catch
                                 {
-                                    Console
-                                        .Error
+                                    Console.Error
                                         .WriteLine(
                                             "Could not recognize option {0} as the mode",
                                             value

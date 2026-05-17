@@ -94,8 +94,7 @@ namespace Microsoft.CodeAnalysis.CodeFixes.AddExplicitCast
             if (baseType is null)
                 return 0;
 
-            var conversion = _semanticModel
-                .Compilation
+            var conversion = _semanticModel.Compilation
                 .ClassifyCommonConversion(baseType, castType);
 
             // If the node has the explicit conversion operator, then it has the shortest distance

@@ -180,8 +180,7 @@ namespace System.ServiceModel.Channels
                 }
                 else
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(decoder.CreatePrematureEOFException());
                 }
             }
@@ -201,8 +200,7 @@ namespace System.ServiceModel.Channels
         {
             if (readException != null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelper(readException, Connection.ExceptionEventType);
             }
 

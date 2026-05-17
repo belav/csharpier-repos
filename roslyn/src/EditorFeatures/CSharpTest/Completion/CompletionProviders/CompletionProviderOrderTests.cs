@@ -25,8 +25,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         [Fact]
         public void TestCompletionProviderOrder()
         {
-            var exportProvider = EditorTestCompositions
-                .EditorFeaturesWpf
+            var exportProvider = EditorTestCompositions.EditorFeaturesWpf
                 .ExportProviderFactory
                 .CreateExportProvider();
             var completionProviderExports = exportProvider.GetExports<
@@ -99,8 +98,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         [Fact]
         public void TestCompletionProviderOrderMetadata()
         {
-            var exportProvider = EditorTestCompositions
-                .EditorFeatures
+            var exportProvider = EditorTestCompositions.EditorFeatures
                 .ExportProviderFactory
                 .CreateExportProvider();
             var completionProviderExports = exportProvider.GetExports<
@@ -162,8 +160,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         [Fact]
         public void TestCompletionProviderFirstNameMetadata()
         {
-            var exportProvider = EditorTestCompositions
-                .EditorFeatures
+            var exportProvider = EditorTestCompositions.EditorFeatures
                 .ExportProviderFactory
                 .CreateExportProvider();
             var completionProviderExports = exportProvider.GetExports<
@@ -183,8 +180,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         [Fact]
         public void TestCompletionProviderLastNameMetadata()
         {
-            var exportProvider = EditorTestCompositions
-                .EditorFeatures
+            var exportProvider = EditorTestCompositions.EditorFeatures
                 .ExportProviderFactory
                 .CreateExportProvider();
             var completionProviderExports = exportProvider.GetExports<
@@ -204,8 +200,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         [Fact]
         public void TestCompletionProviderNameMetadata()
         {
-            var exportProvider = EditorTestCompositions
-                .EditorFeatures
+            var exportProvider = EditorTestCompositions.EditorFeatures
                 .ExportProviderFactory
                 .CreateExportProvider();
             var completionProviderExports = exportProvider.GetExports<

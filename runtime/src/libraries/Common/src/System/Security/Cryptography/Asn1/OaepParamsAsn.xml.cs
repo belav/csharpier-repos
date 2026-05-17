@@ -73,8 +73,7 @@ namespace System.Security.Cryptography.Asn1
             AsnValueReader reader;
 
             reader = new AsnValueReader(DefaultHashFunc, AsnEncodingRules.DER);
-            System
-                .Security
+            System.Security
                 .Cryptography
                 .Asn1
                 .AlgorithmIdentifierAsn
@@ -82,8 +81,7 @@ namespace System.Security.Cryptography.Asn1
             reader.ThrowIfNotEmpty();
 
             reader = new AsnValueReader(DefaultMaskGenFunc, AsnEncodingRules.DER);
-            System
-                .Security
+            System.Security
                 .Cryptography
                 .Asn1
                 .AlgorithmIdentifierAsn
@@ -91,8 +89,7 @@ namespace System.Security.Cryptography.Asn1
             reader.ThrowIfNotEmpty();
 
             reader = new AsnValueReader(DefaultPSourceFunc, AsnEncodingRules.DER);
-            System
-                .Security
+            System.Security
                 .Cryptography
                 .Asn1
                 .AlgorithmIdentifierAsn
@@ -225,8 +222,7 @@ namespace System.Security.Cryptography.Asn1
                 explicitReader = sequenceReader.ReadSequence(
                     new Asn1Tag(TagClass.ContextSpecific, 0)
                 );
-                System
-                    .Security
+                System.Security
                     .Cryptography
                     .Asn1
                     .AlgorithmIdentifierAsn
@@ -236,8 +232,7 @@ namespace System.Security.Cryptography.Asn1
             else
             {
                 defaultReader = new AsnValueReader(DefaultHashFunc, AsnEncodingRules.DER);
-                System
-                    .Security
+                System.Security
                     .Cryptography
                     .Asn1
                     .AlgorithmIdentifierAsn
@@ -254,8 +249,7 @@ namespace System.Security.Cryptography.Asn1
                 explicitReader = sequenceReader.ReadSequence(
                     new Asn1Tag(TagClass.ContextSpecific, 1)
                 );
-                System
-                    .Security
+                System.Security
                     .Cryptography
                     .Asn1
                     .AlgorithmIdentifierAsn
@@ -265,8 +259,7 @@ namespace System.Security.Cryptography.Asn1
             else
             {
                 defaultReader = new AsnValueReader(DefaultMaskGenFunc, AsnEncodingRules.DER);
-                System
-                    .Security
+                System.Security
                     .Cryptography
                     .Asn1
                     .AlgorithmIdentifierAsn
@@ -283,8 +276,7 @@ namespace System.Security.Cryptography.Asn1
                 explicitReader = sequenceReader.ReadSequence(
                     new Asn1Tag(TagClass.ContextSpecific, 2)
                 );
-                System
-                    .Security
+                System.Security
                     .Cryptography
                     .Asn1
                     .AlgorithmIdentifierAsn
@@ -294,8 +286,7 @@ namespace System.Security.Cryptography.Asn1
             else
             {
                 defaultReader = new AsnValueReader(DefaultPSourceFunc, AsnEncodingRules.DER);
-                System
-                    .Security
+                System.Security
                     .Cryptography
                     .Asn1
                     .AlgorithmIdentifierAsn

@@ -79,18 +79,19 @@ namespace System.Tests
             Task.WaitAll(
                 (
                     from i in Enumerable.Range(0, b.ParticipantCount)
-                    select Task.Factory.StartNew(
-                        () =>
-                        {
-                            b.SignalAndWait();
-                            lock (ids)
-                                ids.Add(Environment.CurrentManagedThreadId);
-                            b.SignalAndWait();
-                        },
-                        CancellationToken.None,
-                        TaskCreationOptions.LongRunning,
-                        TaskScheduler.Default
-                    )
+                    select Task.Factory
+                        .StartNew(
+                            () =>
+                            {
+                                b.SignalAndWait();
+                                lock (ids)
+                                    ids.Add(Environment.CurrentManagedThreadId);
+                                b.SignalAndWait();
+                            },
+                            CancellationToken.None,
+                            TaskCreationOptions.LongRunning,
+                            TaskScheduler.Default
+                        )
                 ).ToArray()
             );
             Assert.Equal(b.ParticipantCount, ids.Count);

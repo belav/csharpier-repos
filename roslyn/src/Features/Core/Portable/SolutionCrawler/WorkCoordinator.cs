@@ -49,12 +49,10 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                 _registration = registration;
 
                 _listener = listener;
-                _documentTrackingService = _registration
-                    .Workspace
+                _documentTrackingService = _registration.Workspace
                     .Services
                     .GetRequiredService<IDocumentTrackingService>();
-                _solutionCrawlerOptions = _registration
-                    .Workspace
+                _solutionCrawlerOptions = _registration.Workspace
                     .Services
                     .GetService<ISolutionCrawlerOptionsService>();
 
@@ -938,15 +936,13 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                         }
                     }
 
-                    _workCoordinator
-                        ._documentAndProjectWorkerProcessor
+                    _workCoordinator._documentAndProjectWorkerProcessor
                         .GetTestAccessor()
                         .WaitUntilCompletion(workers, list);
                 }
 
                 internal void WaitUntilCompletion() =>
-                    _workCoordinator
-                        ._documentAndProjectWorkerProcessor
+                    _workCoordinator._documentAndProjectWorkerProcessor
                         .GetTestAccessor()
                         .WaitUntilCompletion();
             }
@@ -1000,9 +996,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                 using var pool = SharedPools.Default<HashSet<string>>().GetPooledObject();
                 if (_solutionId != null)
                 {
-                    pool.Object.UnionWith(
-                        solution.State.ProjectStates.Select(kv => kv.Value.Language)
-                    );
+                    pool.Object
+                        .UnionWith(solution.State.ProjectStates.Select(kv => kv.Value.Language));
                     return string.Join(",", pool.Object);
                 }
 

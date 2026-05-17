@@ -120,8 +120,7 @@ public class Startup
                                 basePort + 1,
                                 listenOptions =>
                                 {
-                                    listenOptions.Protocols = Microsoft
-                                        .AspNetCore
+                                    listenOptions.Protocols = Microsoft.AspNetCore
                                         .Server
                                         .Kestrel
                                         .Core

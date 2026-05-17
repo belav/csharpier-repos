@@ -318,8 +318,7 @@ class Test
             var typeParameters = PooledHashSet<TypeParameterSymbol>.GetInstance();
             try
             {
-                method
-                    .ContainingType
+                method.ContainingType
                     .VisitType(
                         static (typeSymbol, typeParameters, _) =>
                         {

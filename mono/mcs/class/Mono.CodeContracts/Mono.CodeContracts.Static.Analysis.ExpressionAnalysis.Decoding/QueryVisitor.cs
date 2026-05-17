@@ -95,8 +95,7 @@ namespace Mono.CodeContracts.Static.Analysis.ExpressionAnalysis.Decoding
         )
             where Visitor : QueryVisitor<V, E>
         {
-            return decoder
-                .ContextProvider
+            return decoder.ContextProvider
                 .ExpressionContext
                 .Decode<Dummy, bool, Visitor>(expr, visitor, Dummy.Value);
         }

@@ -81,8 +81,7 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
                 return solution;
             }
 
-            var allFixers = projectAnalyzersAndFixers
-                .Values
+            var allFixers = projectAnalyzersAndFixers.Values
                 .SelectMany(analyzersAndFixers => analyzersAndFixers.Fixers)
                 .ToImmutableArray();
 
@@ -96,8 +95,7 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
                             ?.Contains(FixAllScope.Solution) == true
                     )
                     .SelectMany(codefix =>
-                        codefix
-                            .FixableDiagnosticIds
+                        codefix.FixableDiagnosticIds
                             .Where(id => id.StartsWith("CS") || id.StartsWith("BC"))
                     )
                     .ToImmutableHashSet()
@@ -230,8 +228,7 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
             var projects =
                 options.WorkspaceType == WorkspaceType.Solution
                     ? solution.Projects
-                    : solution
-                        .Projects
+                    : solution.Projects
                         .Where(project => project.FilePath == options.WorkspaceFilePath);
             foreach (var project in projects)
             {
@@ -266,8 +263,7 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
                 formattedFiles
             );
 
-            return result
-                .Diagnostics
+            return result.Diagnostics
                 .ToImmutableDictionary(
                     kvp => kvp.Key.Id,
                     kvp => kvp.Value.Select(diagnostic => diagnostic.Id).ToImmutableHashSet()
@@ -378,8 +374,7 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
 
                     var analyzers = projectAnalyzers[project.Id]
                         .Where(analyzer =>
-                            analyzer
-                                .SupportedDiagnostics
+                            analyzer.SupportedDiagnostics
                                 .Any(descriptor => descriptor.Id == diagnosticId)
                         )
                         .ToImmutableArray();
@@ -476,8 +471,7 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
 
                 // Skip if the project does not contain any of the formattable paths.
                 if (
-                    !project
-                        .Documents
+                    !project.Documents
                         .Any(d => d.FilePath is not null && formattablePaths.Contains(d.FilePath))
                 )
                 {
@@ -496,8 +490,7 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
                     // Filter by excluded diagnostics
                     if (
                         !excludeDiagnostics.IsEmpty
-                        && analyzer
-                            .SupportedDiagnostics
+                        && analyzer.SupportedDiagnostics
                             .All(descriptor => excludeDiagnostics.Contains(descriptor.Id))
                     )
                     {
@@ -507,8 +500,7 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
                     // Filter by diagnostics
                     if (
                         !diagnostics.IsEmpty
-                        && !analyzer
-                            .SupportedDiagnostics
+                        && !analyzer.SupportedDiagnostics
                             .Any(descriptor => diagnostics.Contains(descriptor.Id))
                     )
                     {

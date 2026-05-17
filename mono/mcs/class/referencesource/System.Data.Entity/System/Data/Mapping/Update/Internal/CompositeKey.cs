@@ -131,8 +131,7 @@ namespace System.Data.Mapping.Update.Internal
                     {
                         if (
                             rightValue.Identifier != PropagatorResult.NullIdentifier
-                            || !ByValueEqualityComparer
-                                .Default
+                            || !ByValueEqualityComparer.Default
                                 .Equals(leftValue.GetSimpleValue(), rightValue.GetSimpleValue())
                         )
                         {
@@ -169,8 +168,7 @@ namespace System.Data.Mapping.Update.Internal
                         null != keyComponent && null != keyComponent,
                         "key value must not be null"
                     );
-                    return ByValueEqualityComparer
-                        .Default
+                    return ByValueEqualityComparer.Default
                         .GetHashCode(keyComponent.GetSimpleValue());
                 }
                 else

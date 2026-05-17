@@ -62,14 +62,15 @@ namespace Mono.CodeContracts.Static.Analysis.ExpressionAnalysis
             Data data
         )
         {
-            return this.visitor.Binary(
-                Unrefine(pc, dest),
-                op,
-                dest,
-                Unrefine(pc, operand1),
-                Unrefine(pc, operand2),
-                data
-            );
+            return this.visitor
+                .Binary(
+                    Unrefine(pc, dest),
+                    op,
+                    dest,
+                    Unrefine(pc, operand1),
+                    Unrefine(pc, operand2),
+                    data
+                );
         }
 
         public Result Isinst(
@@ -113,14 +114,8 @@ namespace Mono.CodeContracts.Static.Analysis.ExpressionAnalysis
             Data data
         )
         {
-            return this.visitor.Unary(
-                Unrefine(pc, dest),
-                op,
-                unsigned,
-                dest,
-                Unrefine(pc, source),
-                data
-            );
+            return this.visitor
+                .Unary(Unrefine(pc, dest), op, unsigned, dest, Unrefine(pc, source), data);
         }
 
         private LabeledSymbol<APC, SymbolicValue> Unrefine(APC pc, SymbolicValue dest)

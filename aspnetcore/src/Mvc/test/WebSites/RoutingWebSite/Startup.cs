@@ -21,14 +21,12 @@ public class Startup
             .AddNewtonsoftJson()
             .AddRazorPagesOptions(options =>
             {
-                options
-                    .Conventions
+                options.Conventions
                     .AddPageRoute(
                         "/PageRouteTransformer/PageWithConfiguredRoute",
                         "/PageRouteTransformer/NewConventionRoute/{id?}"
                     );
-                options
-                    .Conventions
+                options.Conventions
                     .AddFolderRouteModelConvention(
                         "/PageRouteTransformer",
                         model =>
@@ -131,8 +129,7 @@ public class Startup
     protected virtual void ConfigureMvcOptions(MvcOptions options)
     {
         // Add route token transformer to one controller
-        options
-            .Conventions
+        options.Conventions
             .Add(
                 new ControllerRouteTokenTransformerConvention(
                     typeof(ParameterTransformerController),

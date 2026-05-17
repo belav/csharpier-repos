@@ -59,8 +59,7 @@ namespace Microsoft.CodeAnalysis.Formatting
                 );
 
                 var previousToken = context.TokenStream.GetToken(pairIndex);
-                context
-                    .TokenStream
+                context.TokenStream
                     .GetTokenLength(previousToken, out var tokenLength, out var multipleLines);
 
                 // get end column of previous token
@@ -73,8 +72,7 @@ namespace Microsoft.CodeAnalysis.Formatting
                 {
                     Debug.Assert(!context.IsFormattingDisabled(pairIndex));
 
-                    context
-                        .TokenStream
+                    context.TokenStream
                         .ApplyChange(
                             pairIndex,
                             triviaInfo.WithSpace(
@@ -112,8 +110,7 @@ namespace Microsoft.CodeAnalysis.Formatting
 
                 Debug.Assert(!context.IsFormattingDisabled(pairIndex));
 
-                context
-                    .TokenStream
+                context.TokenStream
                     .ApplyChange(pairIndex, triviaInfo.WithSpace(space, context, formattingRules));
                 return true;
             }
@@ -129,8 +126,7 @@ namespace Microsoft.CodeAnalysis.Formatting
 
                 Debug.Assert(!context.IsFormattingDisabled(pairIndex));
 
-                context
-                    .TokenStream
+                context.TokenStream
                     .ApplyChange(
                         pairIndex,
                         triviaInfo.WithSpace(operation.Space, context, formattingRules)
@@ -157,8 +153,7 @@ namespace Microsoft.CodeAnalysis.Formatting
 
                 Debug.Assert(!context.IsFormattingDisabled(pairIndex));
 
-                context
-                    .TokenStream
+                context.TokenStream
                     .ApplyChange(pairIndex, triviaInfo.WithSpace(space, context, formattingRules));
                 return true;
             }
@@ -186,8 +181,7 @@ namespace Microsoft.CodeAnalysis.Formatting
                     // we do, then that will be counted as a line operation and the indentation of
                     // the second token will be modified)
                     if (
-                        context
-                            .TokenStream
+                        context.TokenStream
                             .TwoTokensOnSameLine(
                                 context.TokenStream.GetToken(pairIndex),
                                 context.TokenStream.GetToken(pairIndex + 1)
@@ -228,8 +222,7 @@ namespace Microsoft.CodeAnalysis.Formatting
                 Debug.Assert(!context.IsFormattingDisabled(pairIndex));
 
                 // well, force it regardless original content
-                context
-                    .TokenStream
+                context.TokenStream
                     .ApplyChange(
                         pairIndex,
                         triviaInfo.WithLine(
@@ -261,8 +254,7 @@ namespace Microsoft.CodeAnalysis.Formatting
                     Debug.Assert(!context.IsFormattingDisabled(pairIndex));
 
                     // alright force them
-                    context
-                        .TokenStream
+                    context.TokenStream
                         .ApplyChange(
                             pairIndex,
                             triviaInfo.WithLine(
@@ -288,8 +280,7 @@ namespace Microsoft.CodeAnalysis.Formatting
                         )
                     );
 
-                    context
-                        .TokenStream
+                    context.TokenStream
                         .ApplyChange(
                             pairIndex,
                             triviaInfo.WithIndentation(
@@ -477,8 +468,7 @@ namespace Microsoft.CodeAnalysis.Formatting
                 }
 
                 // okay, update indentation
-                context
-                    .TokenStream
+                context.TokenStream
                     .ApplyChange(
                         previousToken.IndexInStream,
                         triviaInfo.WithIndentation(
@@ -626,8 +616,7 @@ namespace Microsoft.CodeAnalysis.Formatting
                 previousChangesMap.Add(currentToken, triviaInfo.Spaces);
 
                 // okay, update indentation
-                context
-                    .TokenStream
+                context.TokenStream
                     .ApplyChange(
                         pairIndex,
                         triviaInfo.WithIndentation(
@@ -652,8 +641,7 @@ namespace Microsoft.CodeAnalysis.Formatting
                 );
 
                 var baseTokenWithIndex = context.TokenStream.GetTokenData(baseToken);
-                var firstTokenWithIndex = context
-                    .TokenStream
+                var firstTokenWithIndex = context.TokenStream
                     .GetTokenData(startToken)
                     .GetPreviousTokenData();
                 var lastTokenWithIndex = context.TokenStream.GetTokenData(endToken);
@@ -696,8 +684,7 @@ namespace Microsoft.CodeAnalysis.Formatting
                     var tokenPairIndex = tokenWithIndex.IndexInStream - 1;
                     if (
                         tokenPairIndex < 0
-                        || context
-                            .TokenStream
+                        || context.TokenStream
                             .GetTriviaData(tokenPairIndex)
                             .SecondTokenIsFirstTokenOnLine
                     )
@@ -770,8 +757,7 @@ namespace Microsoft.CodeAnalysis.Formatting
                     previousChangesMap.Add(firstTokenOnLine, triviaInfo.Spaces);
 
                     // okay, update indentation
-                    context
-                        .TokenStream
+                    context.TokenStream
                         .ApplyChange(
                             pairIndex,
                             triviaInfo.WithIndentation(

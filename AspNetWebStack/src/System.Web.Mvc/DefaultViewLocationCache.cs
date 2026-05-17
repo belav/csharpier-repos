@@ -51,8 +51,7 @@ namespace System.Web.Mvc
             {
                 throw new ArgumentNullException("httpContext");
             }
-            httpContext
-                .Cache
+            httpContext.Cache
                 .Insert(
                     key,
                     virtualPath,

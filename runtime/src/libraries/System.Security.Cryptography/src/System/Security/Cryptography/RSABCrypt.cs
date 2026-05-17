@@ -10,8 +10,7 @@ namespace System.Security.Cryptography
 {
     internal sealed class RSABCrypt : RSA
     {
-        private static readonly SafeBCryptAlgorithmHandle s_algHandle = Interop
-            .BCrypt
+        private static readonly SafeBCryptAlgorithmHandle s_algHandle = Interop.BCrypt
             .BCryptOpenAlgorithmProvider(BCryptNative.AlgorithmName.RSA);
 
         // See https://msdn.microsoft.com/en-us/library/windows/desktop/bb931354(v=vs.85).aspx
@@ -63,8 +62,7 @@ namespace System.Security.Cryptography
         {
             Debug.Assert(!newKey.IsInvalid);
 
-            int keySize = Interop
-                .BCrypt
+            int keySize = Interop.BCrypt
                 .BCryptGetDWordProperty(
                     newKey,
                     Interop.BCrypt.BCryptPropertyStrings.BCRYPT_KEY_STRENGTH
@@ -79,8 +77,7 @@ namespace System.Security.Cryptography
         {
             SafeBCryptKeyHandle key = GetKey();
 
-            ArraySegment<byte> keyBlob = Interop
-                .BCrypt
+            ArraySegment<byte> keyBlob = Interop.BCrypt
                 .BCryptExportKey(
                     key,
                     includePrivateParameters
@@ -108,8 +105,7 @@ namespace System.Security.Cryptography
 
             try
             {
-                newKey = Interop
-                    .BCrypt
+                newKey = Interop.BCrypt
                     .BCryptImportKeyPair(
                         s_algHandle,
                         parameters.D != null
@@ -211,12 +207,10 @@ namespace System.Security.Cryptography
             switch (padding.Mode)
             {
                 case RSAEncryptionPaddingMode.Pkcs1:
-                    return Interop
-                        .BCrypt
+                    return Interop.BCrypt
                         .BCryptDecryptPkcs1(key, data, destination, out bytesWritten);
                 case RSAEncryptionPaddingMode.Oaep:
-                    return Interop
-                        .BCrypt
+                    return Interop.BCrypt
                         .BCryptDecryptOaep(
                             key,
                             data,
@@ -265,8 +259,7 @@ namespace System.Security.Cryptography
                     bytesWritten = Interop.BCrypt.BCryptEncryptPkcs1(key, data, destination);
                     return true;
                 case RSAEncryptionPaddingMode.Oaep:
-                    bytesWritten = Interop
-                        .BCrypt
+                    bytesWritten = Interop.BCrypt
                         .BCryptEncryptOaep(key, data, destination, padding.OaepHashAlgorithm.Name);
 
                     return true;
@@ -300,8 +293,7 @@ namespace System.Security.Cryptography
             switch (padding.Mode)
             {
                 case RSASignaturePaddingMode.Pkcs1:
-                    status = Interop
-                        .BCrypt
+                    status = Interop.BCrypt
                         .BCryptSignHashPkcs1(
                             key,
                             hash,
@@ -312,8 +304,7 @@ namespace System.Security.Cryptography
 
                     break;
                 case RSASignaturePaddingMode.Pss:
-                    status = Interop
-                        .BCrypt
+                    status = Interop.BCrypt
                         .BCryptSignHashPss(key, hash, destination, hashAlgorithmName, out written);
 
                     break;
@@ -357,12 +348,10 @@ namespace System.Security.Cryptography
             switch (padding.Mode)
             {
                 case RSASignaturePaddingMode.Pkcs1:
-                    return Interop
-                        .BCrypt
+                    return Interop.BCrypt
                         .BCryptVerifySignaturePkcs1(key, hash, signature, hashAlgorithmName);
                 case RSASignaturePaddingMode.Pss:
-                    return Interop
-                        .BCrypt
+                    return Interop.BCrypt
                         .BCryptVerifySignaturePss(key, hash, signature, hashAlgorithmName);
                 default:
                     throw new CryptographicException(SR.Cryptography_UnsupportedPaddingMode);

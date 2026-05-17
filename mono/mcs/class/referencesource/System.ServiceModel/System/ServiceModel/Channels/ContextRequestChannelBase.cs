@@ -175,12 +175,13 @@ namespace System.ServiceModel.Channels
 
                         if (this.correlationCallback.IsFullyDefined)
                         {
-                            IAsyncResult result = this.correlationCallback.BeginFinalizeCorrelation(
-                                this.message,
-                                this.timeoutHelper.RemainingTime(),
-                                onFinalizeCorrelation,
-                                this
-                            );
+                            IAsyncResult result = this.correlationCallback
+                                .BeginFinalizeCorrelation(
+                                    this.message,
+                                    this.timeoutHelper.RemainingTime(),
+                                    onFinalizeCorrelation,
+                                    this
+                                );
                             if (result.CompletedSynchronously)
                             {
                                 if (OnFinalizeCorrelationCompleted(result))
@@ -196,12 +197,13 @@ namespace System.ServiceModel.Channels
 
                 if (shouldRequest)
                 {
-                    IAsyncResult result = this.channel.BeginRequest(
-                        this.message,
-                        this.timeoutHelper.RemainingTime(),
-                        onRequest,
-                        this
-                    );
+                    IAsyncResult result = this.channel
+                        .BeginRequest(
+                            this.message,
+                            this.timeoutHelper.RemainingTime(),
+                            onRequest,
+                            this
+                        );
                     if (result.CompletedSynchronously)
                     {
                         OnRequestCompleted(result);
@@ -284,12 +286,13 @@ namespace System.ServiceModel.Channels
                 IAsyncResult requestResult;
                 try
                 {
-                    requestResult = this.channel.BeginRequest(
-                        this.requestMessage,
-                        this.timeoutHelper.RemainingTime(),
-                        onRequest,
-                        this
-                    );
+                    requestResult = this.channel
+                        .BeginRequest(
+                            this.requestMessage,
+                            this.timeoutHelper.RemainingTime(),
+                            onRequest,
+                            this
+                        );
                     throwing = false;
                 }
                 finally

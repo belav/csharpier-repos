@@ -40,8 +40,7 @@ public class InputTextArea : InputBase<string?>
         builder.AddAttribute(
             5,
             "onchange",
-            EventCallback
-                .Factory
+            EventCallback.Factory
                 .CreateBinder<string?>(
                     this,
                     __value => CurrentValueAsString = __value,

@@ -22,8 +22,7 @@ public class ResponseBodyTests : LoggedTest
                     var startingTcs = new TaskCompletionSource(
                         TaskCreationOptions.RunContinuationsAsynchronously
                     );
-                    httpContext
-                        .Response
+                    httpContext.Response
                         .OnStarting(() =>
                         {
                             startingTcs.SetResult();
@@ -66,8 +65,7 @@ public class ResponseBodyTests : LoggedTest
                     var startingTcs = new TaskCompletionSource(
                         TaskCreationOptions.RunContinuationsAsynchronously
                     );
-                    httpContext
-                        .Response
+                    httpContext.Response
                         .OnStarting(() =>
                         {
                             startingTcs.SetResult();
@@ -261,8 +259,7 @@ public class ResponseBodyTests : LoggedTest
                 {
                     httpContext.Response.Headers["transfeR-Encoding"] = "CHunked";
                     Stream stream = httpContext.Response.Body;
-                    var responseBytes = Encoding
-                        .ASCII
+                    var responseBytes = Encoding.ASCII
                         .GetBytes("10\r\nManually Chunked\r\n0\r\n\r\n");
                     await stream.WriteAsync(responseBytes, 0, responseBytes.Length);
                 },
@@ -443,8 +440,7 @@ public class ResponseBodyTests : LoggedTest
                 httpContext =>
                 {
                     httpContext.Features.Get<IHttpBodyControlFeature>().AllowSynchronousIO = true;
-                    httpContext
-                        .Response
+                    httpContext.Response
                         .OnStarting(
                             state =>
                             {
@@ -485,8 +481,7 @@ public class ResponseBodyTests : LoggedTest
                 out address,
                 httpContext =>
                 {
-                    httpContext
-                        .Response
+                    httpContext.Response
                         .OnStarting(
                             state =>
                             {
@@ -496,8 +491,7 @@ public class ResponseBodyTests : LoggedTest
                             },
                             httpContext
                         );
-                    httpContext
-                        .Response
+                    httpContext.Response
                         .Body
                         .EndWrite(
                             httpContext.Response.Body.BeginWrite(new byte[10], 0, 10, null, null)
@@ -532,8 +526,7 @@ public class ResponseBodyTests : LoggedTest
                 out address,
                 httpContext =>
                 {
-                    httpContext
-                        .Response
+                    httpContext.Response
                         .OnStarting(
                             state =>
                             {

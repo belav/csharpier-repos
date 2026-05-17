@@ -340,8 +340,7 @@ namespace System.Net.PeerToPeer
             try
             {
                 using (
-                    RegistryKey installTypeKey = Registry
-                        .LocalMachine
+                    RegistryKey installTypeKey = Registry.LocalMachine
                         .OpenSubKey(OSInstallTypeRegKey)
                 )
                 {
@@ -349,8 +348,7 @@ namespace System.Net.PeerToPeer
 
                     if (string.IsNullOrEmpty(installType))
                     {
-                        Logging
-                            .P2PTraceSource
+                        Logging.P2PTraceSource
                             .TraceEvent(
                                 TraceEventType.Warning,
                                 0,
@@ -377,8 +375,7 @@ namespace System.Net.PeerToPeer
             }
             catch (UnauthorizedAccessException e)
             {
-                Logging
-                    .P2PTraceSource
+                Logging.P2PTraceSource
                     .TraceEvent(
                         TraceEventType.Warning,
                         0,
@@ -391,8 +388,7 @@ namespace System.Net.PeerToPeer
             }
             catch (SecurityException e)
             {
-                Logging
-                    .P2PTraceSource
+                Logging.P2PTraceSource
                     .TraceEvent(
                         TraceEventType.Warning,
                         0,

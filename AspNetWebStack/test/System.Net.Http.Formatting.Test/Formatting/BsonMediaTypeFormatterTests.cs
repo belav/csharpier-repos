@@ -61,8 +61,7 @@ namespace System.Net.Http.Formatting
         {
             get
             {
-                return CommonUnitTestDataSets
-                    .ValueAndRefTypeTestDataCollection
+                return CommonUnitTestDataSets.ValueAndRefTypeTestDataCollection
                     .Except(
                         new TestData[]
                         {
@@ -191,8 +190,7 @@ namespace System.Net.Http.Formatting
             // Replace serializable settings and switch one property's value
             JsonSerializerSettings oldSettings = formatter.SerializerSettings;
             formatter.SerializerSettings = formatter.CreateDefaultSerializerSettings();
-            formatter.SerializerSettings.CheckAdditionalContent = !formatter
-                .SerializerSettings
+            formatter.SerializerSettings.CheckAdditionalContent = !formatter.SerializerSettings
                 .CheckAdditionalContent;
 
             // Act
@@ -216,8 +214,7 @@ namespace System.Net.Http.Formatting
         public void MaxDepth_RoundTrips()
         {
             // Arrange & Act & Assert
-            Assert
-                .Reflection
+            Assert.Reflection
                 .IntegerProperty(
                     new BsonMediaTypeFormatter(),
                     c => c.MaxDepth,
@@ -444,8 +441,7 @@ namespace System.Net.Http.Formatting
             HttpContent content = new StringContent(String.Empty);
 
             // Act & Assert
-            await Assert
-                .Task
+            await Assert.Task
                 .SucceedsAsync(
                     formatter.WriteToStreamAsync(
                         type,

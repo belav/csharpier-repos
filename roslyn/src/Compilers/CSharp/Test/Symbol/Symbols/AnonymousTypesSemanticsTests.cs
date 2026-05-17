@@ -895,9 +895,8 @@ class ClassA
                 2
             );
 
-            var info1 = data.Model.GetSymbolInfo(
-                ((AnonymousObjectMemberDeclaratorSyntax)data.Nodes[1]).Expression
-            );
+            var info1 = data.Model
+                .GetSymbolInfo(((AnonymousObjectMemberDeclaratorSyntax)data.Nodes[1]).Expression);
             Assert.NotNull(info1.Symbol);
             Assert.Equal(SymbolKind.RangeVariable, info1.Symbol.Kind);
             Assert.Equal("x", info1.Symbol.ToDisplayString());
@@ -986,16 +985,14 @@ class ClassA
                 info0.Type.ToTestDisplayString()
             );
 
-            var info1 = data.Model.GetSymbolInfo(
-                ((AnonymousObjectMemberDeclaratorSyntax)data.Nodes[1]).Expression
-            );
+            var info1 = data.Model
+                .GetSymbolInfo(((AnonymousObjectMemberDeclaratorSyntax)data.Nodes[1]).Expression);
             Assert.NotNull(info1.Symbol);
             Assert.Equal(SymbolKind.RangeVariable, info1.Symbol.Kind);
             Assert.Equal("x", info1.Symbol.ToDisplayString());
 
-            var info2 = data.Model.GetSymbolInfo(
-                ((AnonymousObjectMemberDeclaratorSyntax)data.Nodes[2]).Expression
-            );
+            var info2 = data.Model
+                .GetSymbolInfo(((AnonymousObjectMemberDeclaratorSyntax)data.Nodes[2]).Expression);
             Assert.NotNull(info2.Symbol);
             Assert.Equal(SymbolKind.RangeVariable, info2.Symbol.Kind);
             Assert.Equal("y", info2.Symbol.ToDisplayString());

@@ -22,8 +22,7 @@ public class AppendSelectPropertyExpressionMutator : ExpressionMutator
 
         var i = random.Next(properties.Count);
 
-        var select = QueryableMethods
-            .Select
+        var select = QueryableMethods.Select
             .MakeGenericMethod(typeArgument, properties[i].PropertyType);
         var prm = Expression.Parameter(typeArgument, "prm");
 

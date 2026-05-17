@@ -320,8 +320,7 @@ namespace System.Activities.Runtime
                         {
                             throw;
                         }
-                        throw FxTrace
-                            .Exception
+                        throw FxTrace.Exception
                             .AsError(
                                 new CallbackException(
                                     SR.CallbackExceptionFromHostGetExtension(
@@ -379,8 +378,7 @@ namespace System.Activities.Runtime
                     WorkflowInstanceId = this.host.Id;
                     if (!this.instanceIdSet)
                     {
-                        throw FxTrace
-                            .Exception
+                        throw FxTrace.Exception
                             .AsError(
                                 new InvalidOperationException(
                                     SR.EmptyIdReturnedFromHost(this.host.GetType())
@@ -619,8 +617,8 @@ namespace System.Activities.Runtime
                 {
                     // If we have an ExceptionPersistenceExtension, set our cached "persistExceptions" value to its
                     // PersistExceptions property. If we don't have the extension, set the cached value to true.
-                    ExceptionPersistenceExtension extension =
-                        this.host.GetExtension<ExceptionPersistenceExtension>();
+                    ExceptionPersistenceExtension extension = this.host
+                        .GetExtension<ExceptionPersistenceExtension>();
                     if (extension != null)
                     {
                         this.persistExceptions = extension.PersistExceptions;
@@ -851,8 +849,7 @@ namespace System.Activities.Runtime
         {
             if (this.throwDuringSerialization)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new InvalidOperationException(
                             SR.StateCannotBeSerialized(this.WorkflowInstanceId)
@@ -870,11 +867,12 @@ namespace System.Activities.Runtime
         {
             Fx.Assert(updateMap != null, "UpdateMap must not be null.");
             Collection<ActivityBlockingUpdate> result = null;
-            this.instanceMap.GetActivitiesBlockingUpdate(
-                updateMap,
-                this.executingSecondaryRootInstances,
-                ref result
-            );
+            this.instanceMap
+                .GetActivitiesBlockingUpdate(
+                    updateMap,
+                    this.executingSecondaryRootInstances,
+                    ref result
+                );
             return result;
         }
 
@@ -885,12 +883,13 @@ namespace System.Activities.Runtime
         )
         {
             Fx.Assert(updateMap != null, "UpdateMap must not be null.");
-            this.instanceMap.UpdateRawInstance(
-                updateMap,
-                targetDefinition,
-                this.executingSecondaryRootInstances,
-                ref updateErrors
-            );
+            this.instanceMap
+                .UpdateRawInstance(
+                    updateMap,
+                    targetDefinition,
+                    this.executingSecondaryRootInstances,
+                    ref updateErrors
+                );
         }
 
         public void UpdateInstancePhase2(
@@ -898,11 +897,8 @@ namespace System.Activities.Runtime
             ref Collection<ActivityBlockingUpdate> updateErrors
         )
         {
-            this.instanceMap.UpdateInstanceByActivityParticipation(
-                this,
-                updateMap,
-                ref updateErrors
-            );
+            this.instanceMap
+                .UpdateInstanceByActivityParticipation(this, updateMap, ref updateErrors);
         }
 
         internal List<Handle> Handles
@@ -923,12 +919,8 @@ namespace System.Activities.Runtime
                 this.cachedResolutionContext = new CodeActivityContext(parentInstance, this);
             }
 
-            this.cachedResolutionContext.Reinitialize(
-                parentInstance,
-                this,
-                expressionActivity,
-                instanceId
-            );
+            this.cachedResolutionContext
+                .Reinitialize(parentInstance, this, expressionActivity, instanceId);
             try
             {
                 this.ignorableResultLocation = resultLocation;
@@ -967,12 +959,8 @@ namespace System.Activities.Runtime
                 this.cachedResolutionContext = new CodeActivityContext(parentInstance, this);
             }
 
-            this.cachedResolutionContext.Reinitialize(
-                parentInstance,
-                this,
-                expressionActivity,
-                parentInstance.InternalId
-            );
+            this.cachedResolutionContext
+                .Reinitialize(parentInstance, this, expressionActivity, parentInstance.InternalId);
             T result;
             try
             {
@@ -1403,11 +1391,8 @@ namespace System.Activities.Runtime
         {
             if (callback != null)
             {
-                Bookmark bookmark = this.bookmarkManager.CreateBookmark(
-                    callback,
-                    callbackOwner,
-                    BookmarkOptions.None
-                );
+                Bookmark bookmark = this.bookmarkManager
+                    .CreateBookmark(callback, callbackOwner, BookmarkOptions.None);
                 ActivityExecutionWorkItem workItem;
 
                 ActivityInstance isolationScope = null;
@@ -1417,14 +1402,15 @@ namespace System.Activities.Runtime
                     isolationScope = this.runtimeTransaction.IsolationScope;
                 }
 
-                this.bookmarkManager.TryGenerateWorkItem(
-                    this,
-                    false,
-                    ref bookmark,
-                    null,
-                    isolationScope,
-                    out workItem
-                );
+                this.bookmarkManager
+                    .TryGenerateWorkItem(
+                        this,
+                        false,
+                        ref bookmark,
+                        null,
+                        isolationScope,
+                        out workItem
+                    );
                 this.scheduler.EnqueueWork(workItem);
             }
 
@@ -1550,12 +1536,8 @@ namespace System.Activities.Runtime
             {
                 if (!this.rootInstance.IsCompleted)
                 {
-                    this.rootInstance.Abort(
-                        this,
-                        this.bookmarkManager,
-                        terminationException,
-                        isTerminate
-                    );
+                    this.rootInstance
+                        .Abort(this, this.bookmarkManager, terminationException, isTerminate);
 
                     // the Abort walk won't catch host-registered properties
                     if (this.rootPropertyManager != null)
@@ -1723,8 +1705,7 @@ namespace System.Activities.Runtime
                 {
                     throw;
                 }
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new CallbackException(
                             SR.CallbackExceptionFromHostAbort(this.WorkflowInstanceId),
@@ -1884,17 +1865,18 @@ namespace System.Activities.Runtime
                     )
                     {
                         // We are propagating the exception across the isolation scope
-                        this.scheduler.PushWork(
-                            new AbortActivityWorkItem(
-                                this,
-                                exceptionPropagator,
-                                exception,
-                                CreateActivityInstanceReference(
-                                    workItem.OriginalExceptionSource,
-                                    exceptionPropagator
+                        this.scheduler
+                            .PushWork(
+                                new AbortActivityWorkItem(
+                                    this,
+                                    exceptionPropagator,
+                                    exception,
+                                    CreateActivityInstanceReference(
+                                        workItem.OriginalExceptionSource,
+                                        exceptionPropagator
+                                    )
                                 )
-                            )
-                        );
+                            );
 
                         // Because we are aborting the transaction we reset the ShouldScheduleCompletion flag
                         this.runtimeTransaction.ShouldScheduleCompletion = false;
@@ -1948,16 +1930,17 @@ namespace System.Activities.Runtime
                     );
                 }
 
-                this.scheduler.PushWork(
-                    targetBookmark.GenerateWorkItem(
-                        exception,
-                        exceptionPropagator,
-                        CreateActivityInstanceReference(
-                            workItem.OriginalExceptionSource,
-                            exceptionPropagator.Parent
+                this.scheduler
+                    .PushWork(
+                        targetBookmark.GenerateWorkItem(
+                            exception,
+                            exceptionPropagator,
+                            CreateActivityInstanceReference(
+                                workItem.OriginalExceptionSource,
+                                exceptionPropagator.Parent
+                            )
                         )
-                    )
-                );
+                    );
                 workItem.ExceptionPropagated();
             }
             else
@@ -1996,9 +1979,10 @@ namespace System.Activities.Runtime
 
         internal void RethrowException(ActivityInstance fromInstance, FaultContext context)
         {
-            this.scheduler.PushWork(
-                new RethrowExceptionWorkItem(fromInstance, context.Exception, context.Source)
-            );
+            this.scheduler
+                .PushWork(
+                    new RethrowExceptionWorkItem(fromInstance, context.Exception, context.Source)
+                );
         }
 
         internal void OnDeserialized(Activity workflow, WorkflowInstance workflowInstance)
@@ -2008,8 +1992,7 @@ namespace System.Activities.Runtime
 
             if (!object.Equals(workflowInstance.DefinitionIdentity, this.WorkflowIdentity))
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new VersionMismatchException(
                             workflowInstance.DefinitionIdentity,
@@ -2023,14 +2006,12 @@ namespace System.Activities.Runtime
 
             if (!this.instanceIdSet)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(new InvalidOperationException(SR.EmptyGuidOnDeserializedInstance));
             }
             if (this.host.Id != this.instanceId)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new InvalidOperationException(
                             SR.HostIdDoesNotMatchInstance(this.host.Id, this.instanceId)
@@ -2053,12 +2034,13 @@ namespace System.Activities.Runtime
             if (this.rootInstance != null)
             {
                 Fx.Assert(this.instanceMap != null, "We always have an InstanceMap.");
-                this.instanceMap.LoadActivityTree(
-                    workflow,
-                    this.rootInstance,
-                    this.executingSecondaryRootInstances,
-                    this
-                );
+                this.instanceMap
+                    .LoadActivityTree(
+                        workflow,
+                        this.rootInstance,
+                        this.executingSecondaryRootInstances,
+                        this
+                    );
 
                 // We need to make sure that any "dangling" secondary root environments
                 // get OnDeserialized called.
@@ -2101,8 +2083,7 @@ namespace System.Activities.Runtime
                 {
                     throw;
                 }
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new CallbackException(
                             SR.CallbackExceptionFromHostGetExtension(this.WorkflowInstanceId),
@@ -2153,8 +2134,7 @@ namespace System.Activities.Runtime
                 if (propertyManagerOwner != null && propertyManagerOwner.PropertyManager != null)
                 {
                     // This throws only fatal exceptions
-                    propertyManagerOwner
-                        .PropertyManager
+                    propertyManagerOwner.PropertyManager
                         .CleanupWorkflowThread(ref setupOrCleanupException);
                 }
 
@@ -2420,9 +2400,10 @@ namespace System.Activities.Runtime
         {
             if (this.runtimeTransaction != null && this.runtimeTransaction.ShouldScheduleCompletion)
             {
-                this.scheduler.PushWork(
-                    new CompleteTransactionWorkItem(this.runtimeTransaction.IsolationScope)
-                );
+                this.scheduler
+                    .PushWork(
+                        new CompleteTransactionWorkItem(this.runtimeTransaction.IsolationScope)
+                    );
                 return;
             }
 
@@ -2497,8 +2478,7 @@ namespace System.Activities.Runtime
             {
                 if (targetInstance.PropertyManager != null)
                 {
-                    targetInstance
-                        .PropertyManager
+                    targetInstance.PropertyManager
                         .UnregisterProperties(targetInstance, targetInstance.Activity.MemberOf);
                 }
 
@@ -2717,13 +2697,11 @@ namespace System.Activities.Runtime
                             this.workflowOutputs = new Dictionary<string, object>();
                         }
 
-                        Location location = this.rootEnvironment.GetSpecificLocation(
-                            argument.BoundArgument.Id
-                        );
+                        Location location = this.rootEnvironment
+                            .GetSpecificLocation(argument.BoundArgument.Id);
                         if (location == null)
                         {
-                            throw FxTrace
-                                .Exception
+                            throw FxTrace.Exception
                                 .AsError(
                                     new InvalidOperationException(
                                         SR.NoOutputLocationWasFound(argument.Name)
@@ -2882,18 +2860,19 @@ namespace System.Activities.Runtime
                 this.persistenceWaiters = new Queue<PersistenceWaiter>();
             }
 
-            this.persistenceWaiters.Enqueue(
-                new PersistenceWaiter(onPersistBookmark, requestingInstance)
-            );
+            this.persistenceWaiters
+                .Enqueue(new PersistenceWaiter(onPersistBookmark, requestingInstance));
         }
 
         void ScheduleCompletionBookmark(ActivityInstance completedInstance)
         {
             if (completedInstance.CompletionBookmark != null)
             {
-                this.scheduler.PushWork(
-                    completedInstance.CompletionBookmark.GenerateWorkItem(completedInstance, this)
-                );
+                this.scheduler
+                    .PushWork(
+                        completedInstance.CompletionBookmark
+                            .GenerateWorkItem(completedInstance, this)
+                    );
             }
             else if (completedInstance.Parent != null)
             {
@@ -2945,14 +2924,15 @@ namespace System.Activities.Runtime
 
             ActivityExecutionWorkItem resumeExecutionWorkItem;
 
-            BookmarkResumptionResult result = this.bookmarkManager.TryGenerateWorkItem(
-                this,
-                isExternal,
-                ref bookmark,
-                value,
-                isolationInstance,
-                out resumeExecutionWorkItem
-            );
+            BookmarkResumptionResult result = this.bookmarkManager
+                .TryGenerateWorkItem(
+                    this,
+                    isExternal,
+                    ref bookmark,
+                    value,
+                    isolationInstance,
+                    out resumeExecutionWorkItem
+                );
 
             if (result == BookmarkResumptionResult.Success)
             {
@@ -3040,9 +3020,8 @@ namespace System.Activities.Runtime
             }
             else
             {
-                ReadOnlyCollection<BookmarkInfo> bookmarks = this.bookmarkScopeManager.GetBookmarks(
-                    scope
-                );
+                ReadOnlyCollection<BookmarkInfo> bookmarks = this.bookmarkScopeManager
+                    .GetBookmarks(scope);
 
                 if (bookmarks == null)
                 {
@@ -3095,15 +3074,16 @@ namespace System.Activities.Runtime
             bool hasOperations = this.activeOperations != null && this.activeOperations.Count > 0;
 
             ActivityExecutionWorkItem resumeExecutionWorkItem;
-            BookmarkResumptionResult result = this.BookmarkScopeManager.TryGenerateWorkItem(
-                this,
-                ref bookmark,
-                scope,
-                value,
-                isolationInstance,
-                hasOperations || this.bookmarkManager.HasBookmarks,
-                out resumeExecutionWorkItem
-            );
+            BookmarkResumptionResult result = this.BookmarkScopeManager
+                .TryGenerateWorkItem(
+                    this,
+                    ref bookmark,
+                    scope,
+                    value,
+                    isolationInstance,
+                    hasOperations || this.bookmarkManager.HasBookmarks,
+                    out resumeExecutionWorkItem
+                );
 
             if (result == BookmarkResumptionResult.Success)
             {
@@ -3193,13 +3173,8 @@ namespace System.Activities.Runtime
             Fx.Assert(this.lastInstanceId == 0, "We should only hit this path once");
             this.lastInstanceId++;
 
-            bool requiresSymbolResolution = this.rootInstance.Initialize(
-                null,
-                this.instanceMap,
-                null,
-                this.lastInstanceId,
-                this
-            );
+            bool requiresSymbolResolution = this.rootInstance
+                .Initialize(null, this.instanceMap, null, this.lastInstanceId, this);
 
             if (TD.ActivityScheduledIsEnabled())
             {
@@ -3207,13 +3182,14 @@ namespace System.Activities.Runtime
             }
 
             // Add the work item for executing the root
-            this.scheduler.PushWork(
-                new ExecuteRootWorkItem(
-                    this.rootInstance,
-                    requiresSymbolResolution,
-                    argumentValueOverrides
-                )
-            );
+            this.scheduler
+                .PushWork(
+                    new ExecuteRootWorkItem(
+                        this.rootInstance,
+                        requiresSymbolResolution,
+                        argumentValueOverrides
+                    )
+                );
 
             TraceSuspend(hasTracedStart, oldActivityId);
         }
@@ -3323,8 +3299,7 @@ namespace System.Activities.Runtime
                         // Populate argument location. Set it's value in the activity handler's
                         // instance environment only if it is a DelegateInArgument.
                         Location newLocation = runtimeArgument.BoundArgument.CreateLocation();
-                        handlerInstance
-                            .Environment
+                        handlerInstance.Environment
                             .Declare(runtimeArgument.BoundArgument, newLocation, handlerInstance);
 
                         if (ArgumentDirectionHelper.IsIn(runtimeArgument.Direction))
@@ -3493,8 +3468,7 @@ namespace System.Activities.Runtime
 
             if (!activity.IsMetadataCached || activity.CacheId != parent.Activity.CacheId)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .Argument(
                         "activity",
                         SR.ActivityNotPartOfThisTree(
@@ -3632,14 +3606,15 @@ namespace System.Activities.Runtime
             }
             else
             {
-                this.scheduler.PushWork(
-                    new ExecuteExpressionWorkItem(
-                        activityInstance,
-                        requiresSymbolResolution,
-                        argumentValueOverrides,
-                        resultLocation
-                    )
-                );
+                this.scheduler
+                    .PushWork(
+                        new ExecuteExpressionWorkItem(
+                            activityInstance,
+                            requiresSymbolResolution,
+                            argumentValueOverrides,
+                            resultLocation
+                        )
+                    );
             }
         }
 
@@ -3652,8 +3627,7 @@ namespace System.Activities.Runtime
         {
             if (this.activeOperations != null && this.activeOperations.ContainsKey(owningActivity))
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(new InvalidOperationException(SR.OnlyOneOperationPerActivity));
             }
 
@@ -3835,8 +3809,7 @@ namespace System.Activities.Runtime
 
                     try
                     {
-                        result = executor
-                            .host
+                        result = executor.host
                             .OnBeginPersist(
                                 Fx.ThunkCallback(new AsyncCallback(OnPersistComplete)),
                                 executor
@@ -4176,11 +4149,12 @@ namespace System.Activities.Runtime
                     if (this.requiresSymbolResolution)
                     {
                         if (
-                            !this.ActivityInstance.ResolveArguments(
-                                executor,
-                                this.argumentValueOverrides,
-                                resultLocation
-                            )
+                            !this.ActivityInstance
+                                .ResolveArguments(
+                                    executor,
+                                    this.argumentValueOverrides,
+                                    resultLocation
+                                )
                         )
                         {
                             return true;

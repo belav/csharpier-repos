@@ -125,8 +125,7 @@ namespace AnalyzerRunner
                                 continue;
                             }
 
-                            var changes = applyChangesOperation
-                                .ChangedSolution
+                            var changes = applyChangesOperation.ChangedSolution
                                 .GetChanges(document.Project.Solution);
                             var projectChanges = changes.GetProjectChanges().ToArray();
                             if (

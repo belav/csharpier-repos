@@ -47,8 +47,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
         )
         {
             var clientSupportsMarkdown =
-                clientCapabilities
-                    ?.TextDocument
+                clientCapabilities?.TextDocument
                     ?.Hover
                     ?.ContentFormat
                     ?.Contains(MarkupKind.Markdown) == true;

@@ -37,8 +37,7 @@ internal static partial class Interop
 
                 if (ret == 0)
                 {
-                    throw Interop
-                        .AppleCrypto
+                    throw Interop.AppleCrypto
                         .CreateExceptionForCCError(ccStatus, Interop.AppleCrypto.CCCryptorStatus);
                 }
 

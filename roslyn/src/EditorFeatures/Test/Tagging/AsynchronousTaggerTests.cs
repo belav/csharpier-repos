@@ -107,8 +107,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Tagging
                 $"{nameof(AsynchronousTaggerTests)}.{nameof(TestNotSynchronousOutlining)} creates asynchronous taggers"
             );
 
-            var tagProvider = workspace
-                .ExportProvider
+            var tagProvider = workspace.ExportProvider
                 .GetExportedValue<AbstractStructureTaggerProvider>();
 
             var document = workspace.Documents.First();
@@ -141,8 +140,7 @@ class Program
                 $"{nameof(AsynchronousTaggerTests)}.{nameof(TestSynchronousOutlining)} creates asynchronous taggers"
             );
 
-            var tagProvider = workspace
-                .ExportProvider
+            var tagProvider = workspace.ExportProvider
                 .GetExportedValue<AbstractStructureTaggerProvider>();
 
             var document = workspace.Documents.First();

@@ -118,11 +118,9 @@ public class SqlServerValueGenerationStrategyConvention
                             )
                             .Metadata;
 
-                        property
-                            .Builder
+                        property.Builder
                             .HasDefaultValueSql(
-                                RelationalDependencies
-                                    .UpdateSqlGenerator
+                                RelationalDependencies.UpdateSqlGenerator
                                     .GenerateObtainNextSequenceValueOperation(
                                         sequence.Name,
                                         sequence.Schema
@@ -150,8 +148,7 @@ public class SqlServerValueGenerationStrategyConvention
                         property.FindRelationalTypeMapping(storeObject)
                         ?? Dependencies.TypeMappingSource.FindMapping((IProperty)property)
                     )?.Converter
-                )
-                    ?.ProviderClrType
+                )?.ProviderClrType
                     .UnwrapNullableType();
 
                 return providerClrType != null

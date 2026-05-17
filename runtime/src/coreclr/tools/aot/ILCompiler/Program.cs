@@ -480,8 +480,7 @@ namespace ILCompiler
 
                 resourceBlocks = ManifestResourceBlockingPolicy.UnionBlockings(
                     resourceBlocks,
-                    ManifestResourceBlockingPolicy
-                        .SubstitutionsReader
+                    ManifestResourceBlockingPolicy.SubstitutionsReader
                         .GetSubstitutions(
                             logger,
                             typeSystemContext,

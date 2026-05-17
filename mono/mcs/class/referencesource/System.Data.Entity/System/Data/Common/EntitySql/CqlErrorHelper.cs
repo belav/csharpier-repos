@@ -111,8 +111,7 @@ namespace System.Data.Common.EntitySql
             //
             throw EntityUtil.EntitySqlError(
                 errCtx,
-                System
-                    .Data
+                System.Data
                     .Entity
                     .Strings
                     .ArgumentTypesAreIncompatible(leftType.Identity, rightType.Identity)
@@ -143,8 +142,7 @@ namespace System.Data.Common.EntitySql
             {
                 throw EntityUtil.EntitySqlError(
                     errCtx,
-                    System
-                        .Data
+                    System.Data
                         .Entity
                         .Strings
                         .TypeKindMismatch(
@@ -166,8 +164,7 @@ namespace System.Data.Common.EntitySql
                     {
                         if (isRootType)
                         {
-                            errorMessage = System
-                                .Data
+                            errorMessage = System.Data
                                 .Entity
                                 .Strings
                                 .InvalidRootRowType(
@@ -177,8 +174,7 @@ namespace System.Data.Common.EntitySql
                         }
                         else
                         {
-                            errorMessage = System
-                                .Data
+                            errorMessage = System.Data
                                 .Entity
                                 .Strings
                                 .InvalidRowType(
@@ -220,8 +216,7 @@ namespace System.Data.Common.EntitySql
                     {
                         if (isRootType)
                         {
-                            errorMessage = System
-                                .Data
+                            errorMessage = System.Data
                                 .Entity
                                 .Strings
                                 .InvalidEntityRootTypeArgument(
@@ -231,8 +226,7 @@ namespace System.Data.Common.EntitySql
                         }
                         else
                         {
-                            errorMessage = System
-                                .Data
+                            errorMessage = System.Data
                                 .Entity
                                 .Strings
                                 .InvalidEntityTypeArgument(
@@ -253,8 +247,7 @@ namespace System.Data.Common.EntitySql
                     {
                         if (isRootType)
                         {
-                            errorMessage = System
-                                .Data
+                            errorMessage = System.Data
                                 .Entity
                                 .Strings
                                 .InvalidRootComplexType(
@@ -264,8 +257,7 @@ namespace System.Data.Common.EntitySql
                         }
                         else
                         {
-                            errorMessage = System
-                                .Data
+                            errorMessage = System.Data
                                 .Entity
                                 .Strings
                                 .InvalidComplexType(
@@ -295,8 +287,7 @@ namespace System.Data.Common.EntitySql
                     {
                         if (isRootType)
                         {
-                            errorMessage = System
-                                .Data
+                            errorMessage = System.Data
                                 .Entity
                                 .Strings
                                 .InvalidPlaceholderRootTypeArgument(
@@ -308,8 +299,7 @@ namespace System.Data.Common.EntitySql
                         }
                         else
                         {
-                            errorMessage = System
-                                .Data
+                            errorMessage = System.Data
                                 .Entity
                                 .Strings
                                 .InvalidPlaceholderTypeArgument(

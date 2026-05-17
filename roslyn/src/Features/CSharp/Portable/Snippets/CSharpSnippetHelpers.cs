@@ -40,8 +40,7 @@ internal static class CSharpSnippetHelpers
     )
     {
         var parsedDocument = ParsedDocument.CreateSynchronously(document, cancellationToken);
-        var openBraceLine = parsedDocument
-            .Text
+        var openBraceLine = parsedDocument.Text
             .Lines
             .GetLineFromPosition(startPositionOfOpenCurlyBrace)
             .LineNumber;
@@ -49,8 +48,7 @@ internal static class CSharpSnippetHelpers
         var indentationOptions = new IndentationOptions(syntaxFormattingOptions);
         var newLine = indentationOptions.FormattingOptions.NewLine;
 
-        var indentationService = parsedDocument
-            .LanguageServices
+        var indentationService = parsedDocument.LanguageServices
             .GetRequiredService<IIndentationService>();
         var indentation = indentationService.GetIndentation(
             parsedDocument,
@@ -100,8 +98,7 @@ internal static class CSharpSnippetHelpers
         );
 
         var updatedBlock = block.WithCloseBraceToken(
-            block
-                .CloseBraceToken
+            block.CloseBraceToken
                 .WithPrependedLeadingTrivia(
                     SyntaxFactory.SyntaxTrivia(SyntaxKind.WhitespaceTrivia, indentationString)
                 )

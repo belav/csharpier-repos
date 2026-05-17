@@ -55,10 +55,11 @@ namespace MonoTests.System.ServiceModel.Discovery
                     .Contract
                     .Operations
                     .Any(od =>
-                        od.Messages.Any(md =>
-                            md.Action
-                            == "http://docs.oasis-open.org/ws-dd/ns/discovery/2009/01/Hello"
-                        )
+                        od.Messages
+                            .Any(md =>
+                                md.Action
+                                == "http://docs.oasis-open.org/ws-dd/ns/discovery/2009/01/Hello"
+                            )
                     ),
                 "#2-3"
             );
@@ -67,9 +68,11 @@ namespace MonoTests.System.ServiceModel.Discovery
                     .Contract
                     .Operations
                     .Any(od =>
-                        od.Messages.Any(md =>
-                            md.Action == "http://docs.oasis-open.org/ws-dd/ns/discovery/2009/01/Bye"
-                        )
+                        od.Messages
+                            .Any(md =>
+                                md.Action
+                                == "http://docs.oasis-open.org/ws-dd/ns/discovery/2009/01/Bye"
+                            )
                     ),
                 "#2-4"
             );

@@ -62,8 +62,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
         {
             get
             {
-                return RetargetingModule
-                    .RetargetingTranslator
+                return RetargetingModule.RetargetingTranslator
                     .RetargetModifiers(
                         _underlyingParameter.RefCustomModifiers,
                         ref _lazyRefCustomModifiers

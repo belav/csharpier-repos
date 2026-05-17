@@ -309,8 +309,7 @@ public readonly ushort Lcid;
             }
             catch (ArgumentException)
             {
-                Console
-                    .Error
+                Console.Error
                     .WriteLine("WARNING: culture " + lcid + " is not supported in the runtime.");
                 return null;
             }
@@ -356,8 +355,7 @@ public readonly ushort Lcid;
                         {
                             case "last_primary_ignorable":
                             case "last_secondary_ignorable":
-                                Console
-                                    .Error
+                                Console.Error
                                     .WriteLine(
                                         "WARNING: {0} is not supported for now.",
                                         el.FirstChild.LocalName

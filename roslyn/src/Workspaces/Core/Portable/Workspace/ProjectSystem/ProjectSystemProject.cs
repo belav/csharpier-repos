@@ -236,14 +236,12 @@ namespace Microsoft.CodeAnalysis.Workspaces.ProjectSystem
                     Path.GetDirectoryName(filePath)!,
                     fileExtensionToWatch
                 );
-                _documentFileChangeContext = _projectSystemProjectFactory
-                    .FileChangeWatcher
+                _documentFileChangeContext = _projectSystemProjectFactory.FileChangeWatcher
                     .CreateContext(projectDirectoryToWatch);
             }
             else
             {
-                _documentFileChangeContext = _projectSystemProjectFactory
-                    .FileChangeWatcher
+                _documentFileChangeContext = _projectSystemProjectFactory.FileChangeWatcher
                     .CreateContext();
             }
 
@@ -290,15 +288,13 @@ namespace Microsoft.CodeAnalysis.Workspaces.ProjectSystem
 
                 if (logThrowAwayTelemetry)
                 {
-                    var telemetryService = _projectSystemProjectFactory
-                        .Workspace
+                    var telemetryService = _projectSystemProjectFactory.Workspace
                         .Services
                         .GetService<IWorkspaceTelemetryService>();
 
                     if (telemetryService?.HasActiveSession == true)
                     {
-                        var workspaceStatusService = _projectSystemProjectFactory
-                            .Workspace
+                        var workspaceStatusService = _projectSystemProjectFactory.Workspace
                             .Services
                             .GetRequiredService<IWorkspaceStatusService>();
 
@@ -372,8 +368,7 @@ namespace Microsoft.CodeAnalysis.Workspaces.ProjectSystem
                     {
                         // Note: Not using our project Id. This is the same ProjectGuid that the project system uses
                         // so data can be correlated
-                        m["ProjectGuid"] = projectState
-                            .ProjectInfo
+                        m["ProjectGuid"] = projectState.ProjectInfo
                             .Attributes
                             .TelemetryId
                             .ToString("B");
@@ -743,16 +738,14 @@ namespace Microsoft.CodeAnalysis.Workspaces.ProjectSystem
                                 {
                                     solutionChanges.UpdateSolutionForProjectAction(
                                         Id,
-                                        solutionChanges
-                                            .Solution
+                                        solutionChanges.Solution
                                             .RemoveProjectReference(Id, projectReference)
                                     );
                                 }
                                 else
                                 {
                                     // TODO: find a cleaner way to fetch this
-                                    var metadataReference = _projectSystemProjectFactory
-                                        .Workspace
+                                    var metadataReference = _projectSystemProjectFactory.Workspace
                                         .CurrentSolution
                                         .GetRequiredProject(Id)
                                         .MetadataReferences
@@ -761,14 +754,12 @@ namespace Microsoft.CodeAnalysis.Workspaces.ProjectSystem
                                             m.FilePath == path && m.Properties == properties
                                         );
 
-                                    _projectSystemProjectFactory
-                                        .FileWatchedReferenceFactory
+                                    _projectSystemProjectFactory.FileWatchedReferenceFactory
                                         .StopWatchingReference(metadataReference);
 
                                     solutionChanges.UpdateSolutionForProjectAction(
                                         Id,
-                                        newSolution: solutionChanges
-                                            .Solution
+                                        newSolution: solutionChanges.Solution
                                             .RemoveMetadataReference(Id, metadataReference)
                                     );
                                 }
@@ -797,17 +788,19 @@ namespace Microsoft.CodeAnalysis.Workspaces.ProjectSystem
                                     }
                                     else
                                     {
-                                        var metadataReference = _projectSystemProjectFactory
-                                            .FileWatchedReferenceFactory
-                                            .CreateReferenceAndStartWatchingFile(path, properties);
+                                        var metadataReference =
+                                            _projectSystemProjectFactory.FileWatchedReferenceFactory
+                                                .CreateReferenceAndStartWatchingFile(
+                                                    path,
+                                                    properties
+                                                );
                                         metadataReferencesCreated.Add(metadataReference);
                                     }
                                 }
 
                                 solutionChanges.UpdateSolutionForProjectAction(
                                     Id,
-                                    solutionChanges
-                                        .Solution
+                                    solutionChanges.Solution
                                         .AddProjectReferences(Id, projectReferencesCreated)
                                         .AddMetadataReferences(Id, metadataReferencesCreated)
                                 );
@@ -818,8 +811,7 @@ namespace Microsoft.CodeAnalysis.Workspaces.ProjectSystem
                             // Project reference adding...
                             solutionChanges.UpdateSolutionForProjectAction(
                                 Id,
-                                newSolution: solutionChanges
-                                    .Solution
+                                newSolution: solutionChanges.Solution
                                     .AddProjectReferences(Id, _projectReferencesAddedInBatch)
                             );
                             ClearAndZeroCapacity(_projectReferencesAddedInBatch);
@@ -829,8 +821,7 @@ namespace Microsoft.CodeAnalysis.Workspaces.ProjectSystem
                             {
                                 solutionChanges.UpdateSolutionForProjectAction(
                                     Id,
-                                    newSolution: solutionChanges
-                                        .Solution
+                                    newSolution: solutionChanges.Solution
                                         .RemoveProjectReference(Id, projectReference)
                                 );
                             }
@@ -840,8 +831,7 @@ namespace Microsoft.CodeAnalysis.Workspaces.ProjectSystem
                             // Analyzer reference adding...
                             solutionChanges.UpdateSolutionForProjectAction(
                                 Id,
-                                newSolution: solutionChanges
-                                    .Solution
+                                newSolution: solutionChanges.Solution
                                     .AddAnalyzerReferences(
                                         Id,
                                         _analyzersAddedInBatch.Select(a => a.GetReference())
@@ -854,8 +844,7 @@ namespace Microsoft.CodeAnalysis.Workspaces.ProjectSystem
                             {
                                 solutionChanges.UpdateSolutionForProjectAction(
                                     Id,
-                                    newSolution: solutionChanges
-                                        .Solution
+                                    newSolution: solutionChanges.Solution
                                         .RemoveAnalyzerReference(
                                             Id,
                                             analyzerReference.GetReference()
@@ -1019,8 +1008,7 @@ namespace Microsoft.CodeAnalysis.Workspaces.ProjectSystem
                 {
                     // skip unrelated providers
                     if (
-                        !provider
-                            .Metadata
+                        !provider.Metadata
                             .Extensions
                             .Any(e =>
                                 string.Equals(e, extension, StringComparison.OrdinalIgnoreCase)
@@ -1035,8 +1023,7 @@ namespace Microsoft.CodeAnalysis.Workspaces.ProjectSystem
                     // and the parameter filePath points to dynamic file such as ASP.NET .g.cs files.
                     //
                     // Also, provider is free-threaded. so fine to call Wait rather than JTF.
-                    fileInfo = provider
-                        .Value
+                    fileInfo = provider.Value
                         .GetDynamicFileInfoAsync(
                             projectId: Id,
                             projectFilePath: _filePath,
@@ -1309,8 +1296,7 @@ namespace Microsoft.CodeAnalysis.Workspaces.ProjectSystem
                 == fullPath.LastIndexOf(Path.DirectorySeparatorChar)
             )
             {
-                var vsixRazorAnalyzers = _hostInfo
-                    .HostDiagnosticAnalyzerProvider
+                var vsixRazorAnalyzers = _hostInfo.HostDiagnosticAnalyzerProvider
                     .GetAnalyzerReferencesInExtensions()
                     .SelectAsArray(
                         predicate: item => item.extensionId == RazorVsixExtensionId,
@@ -1407,9 +1393,9 @@ namespace Microsoft.CodeAnalysis.Workspaces.ProjectSystem
                         }
                         else
                         {
-                            var metadataReference = _projectSystemProjectFactory
-                                .FileWatchedReferenceFactory
-                                .CreateReferenceAndStartWatchingFile(fullPath, properties);
+                            var metadataReference =
+                                _projectSystemProjectFactory.FileWatchedReferenceFactory
+                                    .CreateReferenceAndStartWatchingFile(fullPath, properties);
                             w.OnMetadataReferenceAdded(Id, metadataReference);
                         }
                     });
@@ -1508,8 +1494,7 @@ namespace Microsoft.CodeAnalysis.Workspaces.ProjectSystem
                                 .Cast<PortableExecutableReference>()
                                 .Single(m => m.FilePath == fullPath && m.Properties == properties);
 
-                            _projectSystemProjectFactory
-                                .FileWatchedReferenceFactory
+                            _projectSystemProjectFactory.FileWatchedReferenceFactory
                                 .StopWatchingReference(metadataReference);
                             w.OnMetadataReferenceRemoved(Id, metadataReference);
                         }
@@ -1581,8 +1566,7 @@ namespace Microsoft.CodeAnalysis.Workspaces.ProjectSystem
                 return true;
             }
 
-            return _projectSystemProjectFactory
-                .Workspace
+            return _projectSystemProjectFactory.Workspace
                 .CurrentSolution
                 .GetRequiredProject(Id)
                 .AllProjectReferences
@@ -1594,8 +1578,7 @@ namespace Microsoft.CodeAnalysis.Workspaces.ProjectSystem
             using (_gate.DisposableWait())
             {
                 // If we're not batching, then this is cheap: just fetch from the workspace and we're done
-                var projectReferencesInWorkspace = _projectSystemProjectFactory
-                    .Workspace
+                var projectReferencesInWorkspace = _projectSystemProjectFactory.Workspace
                     .CurrentSolution
                     .GetRequiredProject(Id)
                     .AllProjectReferences;
@@ -1698,15 +1681,13 @@ namespace Microsoft.CodeAnalysis.Workspaces.ProjectSystem
 
             foreach (PortableExecutableReference reference in remainingMetadataReferences)
             {
-                _projectSystemProjectFactory
-                    .FileWatchedReferenceFactory
+                _projectSystemProjectFactory.FileWatchedReferenceFactory
                     .StopWatchingReference(reference);
             }
 
             // Dispose of any analyzers that might still be around to remove their load diagnostics
             foreach (
-                var visualStudioAnalyzer in _analyzerPathsToAnalyzers
-                    .Values
+                var visualStudioAnalyzer in _analyzerPathsToAnalyzers.Values
                     .Concat(_analyzersRemovedInBatch)
             )
             {

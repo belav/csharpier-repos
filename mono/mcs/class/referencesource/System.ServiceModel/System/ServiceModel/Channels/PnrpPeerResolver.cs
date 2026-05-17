@@ -32,9 +32,8 @@ namespace System.ServiceModel.Channels
             new UnsafePnrpNativeMethods.PeerNameRegistrar();
         static bool isPnrpAvailable;
         static bool isPnrpInstalled;
-        const UnsafePnrpNativeMethods.PnrpResolveCriteria resolutionScope = UnsafePnrpNativeMethods
-            .PnrpResolveCriteria
-            .NearestNonCurrentProcess;
+        const UnsafePnrpNativeMethods.PnrpResolveCriteria resolutionScope =
+            UnsafePnrpNativeMethods.PnrpResolveCriteria.NearestNonCurrentProcess;
         public const int PNRPINFO_HINT = 0x00000001;
 
         internal const int CommentLength = 80;
@@ -146,9 +145,8 @@ namespace System.ServiceModel.Channels
             PnrpResolveScope currentScope = PnrpResolveScope.None;
             LinkCloudNames.Clear();
             SiteCloudNames.Clear();
-            UnsafePnrpNativeMethods.CloudInfo[] cloudInfos = UnsafePnrpNativeMethods
-                .PeerCloudEnumerator
-                .GetClouds();
+            UnsafePnrpNativeMethods.CloudInfo[] cloudInfos =
+                UnsafePnrpNativeMethods.PeerCloudEnumerator.GetClouds();
 
             // If we are resolving we should first look for active clouds only
             // If we find some then we should return those to the caller
@@ -298,8 +296,7 @@ namespace System.ServiceModel.Channels
             {
                 if (Fx.IsFatal(e))
                     throw;
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentException(SR.GetString(SR.PeerPnrpIllegalUri), e)
                     );
@@ -390,8 +387,7 @@ namespace System.ServiceModel.Channels
         {
             if (!isPnrpAvailable)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(SR.GetString(SR.PeerPnrpNotAvailable))
                     );
@@ -402,8 +398,7 @@ namespace System.ServiceModel.Channels
         {
             RegistrationHandle regHandle = registrationId as RegistrationHandle;
             if (regHandle == null || String.IsNullOrEmpty(regHandle.PeerName))
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentException(
                             SR.GetString(SR.PeerInvalidRegistrationId, regHandle),
@@ -441,8 +436,7 @@ namespace System.ServiceModel.Channels
         {
             RegistrationHandle regHandle = registrationId as RegistrationHandle;
             if (regHandle == null || string.IsNullOrEmpty(regHandle.PeerName))
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentException(
                             SR.GetString(SR.PeerInvalidRegistrationId, regHandle),
@@ -668,8 +662,7 @@ namespace System.ServiceModel.Channels
                 return TcpTransport;
             }
 
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperArgument("name", SR.GetString(SR.PeerPnrpIllegalUri));
         }
 
@@ -680,8 +673,7 @@ namespace System.ServiceModel.Channels
                 case TcpTransport:
                     return Uri.UriSchemeNetTcp;
                 default:
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentException(SR.GetString(SR.PeerPnrpIllegalUri))
                         );
@@ -720,8 +712,7 @@ namespace System.ServiceModel.Channels
                             }
                             catch (FormatException e)
                             {
-                                throw DiagnosticUtility
-                                    .ExceptionUtility
+                                throw DiagnosticUtility.ExceptionUtility
                                     .ThrowHelperError(
                                         new ArgumentException(
                                             SR.GetString(SR.PeerPnrpIllegalUri),
@@ -733,8 +724,7 @@ namespace System.ServiceModel.Channels
                     }
                 }
             }
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(new ArgumentException(SR.GetString(SR.PeerPnrpIllegalUri)));
         }
 
@@ -951,8 +941,7 @@ namespace System.ServiceModel.Channels
             static void CheckAtLimit(int current)
             {
                 if (current + 1 >= CommentLength)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentException(SR.GetString(SR.PeerPnrpIllegalUri))
                         );
@@ -1948,8 +1937,7 @@ namespace System.ServiceModel.Channels
                             );
                             if (ret != 0)
                             {
-                                throw DiagnosticUtility
-                                    .ExceptionUtility
+                                throw DiagnosticUtility.ExceptionUtility
                                     .ThrowHelperError(new SocketException(ret));
                             }
                         }
@@ -2199,8 +2187,7 @@ namespace System.ServiceModel.Channels
                                 }
 
                                 // unexpected error
-                                throw DiagnosticUtility
-                                    .ExceptionUtility
+                                throw DiagnosticUtility.ExceptionUtility
                                     .ThrowHelperError(new SocketException(error));
                             }
                             else

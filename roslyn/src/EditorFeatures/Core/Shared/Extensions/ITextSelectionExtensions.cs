@@ -23,8 +23,7 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
             foreach (var snapshotSpan in selection.SelectedSpans)
             {
                 list.AddRange(
-                    selection
-                        .TextView
+                    selection.TextView
                         .BufferGraph
                         .MapDownToBuffer(
                             snapshotSpan,

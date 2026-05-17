@@ -395,9 +395,10 @@ namespace MonoTests.System.Xml
         {
             XmlDocument doc = new XmlDocument();
             doc.AppendChild(doc.CreateElement("foo"));
-            doc.DocumentElement.SetAttributeNode(
-                doc.CreateAttribute("xmlns", "u", "http://www.w3.org/2000/xmlns/")
-            );
+            doc.DocumentElement
+                .SetAttributeNode(
+                    doc.CreateAttribute("xmlns", "u", "http://www.w3.org/2000/xmlns/")
+                );
             doc.DocumentElement.Attributes[0].Value = "urn:foo";
             XmlElement el = doc.CreateElement("bar");
             doc.DocumentElement.AppendChild(el);

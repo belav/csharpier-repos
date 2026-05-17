@@ -229,8 +229,7 @@ namespace System.Reflection.TypeLoading
                 }
 
                 if ((bindingAttr & BindingFlags.ExactBinding) != 0)
-                    return System
-                        .DefaultBinder
+                    return System.DefaultBinder
                         .ExactPropertyBinding(candidates.ToArray(), returnType, types);
 
                 binder ??= Loader.GetDefaultBinder();

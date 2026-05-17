@@ -749,8 +749,7 @@ public static class BindConverter
         if (format != null)
         {
             // We convert to a DateTime so formatting doesn't throw if the format includes time information
-            return value
-                .Value
+            return value.Value
                 .ToDateTime(TimeOnly.MinValue)
                 .ToString(format, culture ?? CultureInfo.CurrentCulture);
         }
@@ -813,8 +812,7 @@ public static class BindConverter
         if (format != null)
         {
             // We convert to a DateTime so formatting doesn't throw if the format includes date information
-            return DateTime
-                .MinValue
+            return DateTime.MinValue
                 .Add(value.ToTimeSpan())
                 .ToString(format, culture ?? CultureInfo.CurrentCulture);
         }
@@ -877,8 +875,7 @@ public static class BindConverter
         if (format != null)
         {
             // We convert to a DateTime so formatting doesn't throw if the format includes date information
-            return DateTime
-                .MinValue
+            return DateTime.MinValue
                 .Add(value.Value.ToTimeSpan())
                 .ToString(format, culture ?? CultureInfo.CurrentCulture);
         }

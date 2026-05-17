@@ -50,8 +50,7 @@ namespace System.ServiceModel
             {
                 if (!ImpersonationOptionHelper.IsDefined(value))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new ArgumentOutOfRangeException("value"));
                 }
                 this.impersonation = value;
@@ -65,8 +64,7 @@ namespace System.ServiceModel
             {
                 if (!ReleaseInstanceModeHelper.IsDefined(value))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new ArgumentOutOfRangeException("value"));
                 }
 
@@ -102,8 +100,7 @@ namespace System.ServiceModel
             }
             if (description.IsServerInitiated() && this.releaseInstance != ReleaseInstanceMode.None)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(

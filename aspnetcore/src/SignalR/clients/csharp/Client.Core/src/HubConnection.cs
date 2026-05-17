@@ -1269,8 +1269,7 @@ public partial class HubConnection : IAsyncDisposable
         {
             _protocol.WriteMessage(hubMessage, connectionState.Connection.Transport.Output);
 
-            await connectionState
-                .Connection
+            await connectionState.Connection
                 .Transport
                 .Output
                 .FlushAsync(cancellationToken)
@@ -1633,8 +1632,7 @@ public partial class HubConnection : IAsyncDisposable
             startingConnectionState.Connection.Transport.Output
         );
 
-        var sendHandshakeResult = await startingConnectionState
-            .Connection
+        var sendHandshakeResult = await startingConnectionState.Connection
             .Transport
             .Output
             .FlushAsync(CancellationToken.None)
@@ -2417,8 +2415,7 @@ public partial class HubConnection : IAsyncDisposable
                 _messageBuffer = new MessageBuffer(
                     connection,
                     hubConnection._protocol,
-                    _hubConnection
-                        ._serviceProvider
+                    _hubConnection._serviceProvider
                         .GetService<IOptions<HubConnectionOptions>>()
                         ?.Value
                         .StatefulReconnectBufferSize

@@ -26,8 +26,7 @@ public static class EntityFrameworkCoreDataProtectionExtensions
     )
         where TContext : DbContext, IDataProtectionKeyContext
     {
-        builder
-            .Services
+        builder.Services
             .AddSingleton<IConfigureOptions<KeyManagementOptions>>(services =>
             {
                 var loggerFactory =

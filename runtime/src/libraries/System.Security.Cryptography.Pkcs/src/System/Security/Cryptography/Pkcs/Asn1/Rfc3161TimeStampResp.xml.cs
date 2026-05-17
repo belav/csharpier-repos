@@ -107,8 +107,7 @@ namespace System.Security.Cryptography.Pkcs.Asn1
             int offset;
             ReadOnlySpan<byte> tmpSpan;
 
-            System
-                .Security
+            System.Security
                 .Cryptography
                 .Pkcs
                 .Asn1

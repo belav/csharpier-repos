@@ -16,8 +16,7 @@ namespace System.IO.Compression
 
         internal void InitializeDecoder()
         {
-            _state = Interop
-                .Brotli
+            _state = Interop.Brotli
                 .BrotliDecoderCreateInstance(IntPtr.Zero, IntPtr.Zero, IntPtr.Zero);
             if (_state.IsInvalid)
                 throw new IOException(SR.BrotliDecoder_Create);
@@ -80,8 +79,7 @@ namespace System.IO.Compression
                     fixed (byte* inBytes = &MemoryMarshal.GetReference(source))
                     fixed (byte* outBytes = &MemoryMarshal.GetReference(destination))
                     {
-                        int brotliResult = Interop
-                            .Brotli
+                        int brotliResult = Interop.Brotli
                             .BrotliDecoderDecompressStream(
                                 _state,
                                 ref availableInput,
@@ -140,8 +138,7 @@ namespace System.IO.Compression
             {
                 nuint availableOutput = (nuint)destination.Length;
                 bool success =
-                    Interop
-                        .Brotli
+                    Interop.Brotli
                         .BrotliDecoderDecompress(
                             (nuint)source.Length,
                             inBytes,

@@ -37,8 +37,7 @@ namespace Microsoft.CodeAnalysis.Formatting
             }
 
             using (
-                context
-                    .OperationContext
+                context.OperationContext
                     .AddScope(allowCancellation: true, EditorFeaturesResources.Formatting_document)
             )
             {

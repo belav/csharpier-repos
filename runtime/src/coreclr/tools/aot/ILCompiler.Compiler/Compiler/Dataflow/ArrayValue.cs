@@ -102,8 +102,7 @@ namespace ILLink.Shared.TrimAnalysis
                     System.Diagnostics.Debug.Assert(v is not ArrayValue);
                 }
 #endif
-                newValue
-                    .IndexValues
+                newValue.IndexValues
                     .Add(
                         kvp.Key,
                         new ValueBasicBlockPair(

@@ -258,8 +258,7 @@ namespace System.Text.Json.Serialization.Tests
                     JsonSerializer.Serialize<SimpleTestClass>(testObj, options);
                     Assert.NotEqual(0, getCount(options));
 
-                    Type updateHandler = typeof(JsonSerializerOptions)
-                        .Assembly
+                    Type updateHandler = typeof(JsonSerializerOptions).Assembly
                         .GetType(
                             "System.Text.Json.JsonSerializerOptionsUpdateHandler",
                             throwOnError: true,
@@ -282,8 +281,7 @@ namespace System.Text.Json.Serialization.Tests
                     BindingFlags.NonPublic | BindingFlags.Instance
                 );
                 Assert.NotNull(cacheField);
-                PropertyInfo countProperty = cacheField
-                    .FieldType
+                PropertyInfo countProperty = cacheField.FieldType
                     .GetProperty("Count", BindingFlags.Public | BindingFlags.Instance);
                 Assert.NotNull(countProperty);
                 return options =>
@@ -355,8 +353,7 @@ namespace System.Text.Json.Serialization.Tests
                     BindingFlags.NonPublic | BindingFlags.Instance
                 );
                 Assert.NotNull(cacheField);
-                PropertyInfo optionsField = cacheField
-                    .FieldType
+                PropertyInfo optionsField = cacheField.FieldType
                     .GetProperty("Options", BindingFlags.Public | BindingFlags.Instance);
                 Assert.NotNull(optionsField);
                 return options =>

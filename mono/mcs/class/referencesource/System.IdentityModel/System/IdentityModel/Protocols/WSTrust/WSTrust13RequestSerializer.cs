@@ -97,8 +97,7 @@ namespace System.IdentityModel.Protocols.WSTrust
                 rst.KeyWrapAlgorithm = reader.ReadElementContentAsString();
                 if (!UriUtil.CanCreateValidUri(rst.KeyWrapAlgorithm, UriKind.Absolute))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new WSTrustSerializationException(
                                 SR.GetString(
@@ -131,8 +130,7 @@ namespace System.IdentityModel.Protocols.WSTrust
 
                 if (rst.ValidateTarget == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new WSTrustSerializationException(SR.GetString(SR.ID3221))
                         );
@@ -192,8 +190,7 @@ namespace System.IdentityModel.Protocols.WSTrust
             {
                 if (!UriUtil.CanCreateValidUri(rst.KeyWrapAlgorithm, UriKind.Absolute))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new WSTrustSerializationException(
                                 SR.GetString(
@@ -315,8 +312,7 @@ namespace System.IdentityModel.Protocols.WSTrust
 
             // Write out the WSTrust13 specific elements
             if (
-                StringComparer
-                    .Ordinal
+                StringComparer.Ordinal
                     .Equals(elementName, WSTrust13Constants.ElementNames.SecondaryParameters)
             )
             {
@@ -324,8 +320,7 @@ namespace System.IdentityModel.Protocols.WSTrust
 
                 if (secondaryParameters == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(
@@ -339,8 +334,7 @@ namespace System.IdentityModel.Protocols.WSTrust
                 // WS-Trust 13 spec does not allow this
                 if (secondaryParameters.SecondaryParameters != null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ID2055)));
                 }
 
@@ -373,8 +367,7 @@ namespace System.IdentityModel.Protocols.WSTrust
             }
 
             if (
-                StringComparer
-                    .Ordinal
+                StringComparer.Ordinal
                     .Equals(elementName, WSTrust13Constants.ElementNames.KeyWrapAlgorithm)
             )
             {
@@ -388,8 +381,7 @@ namespace System.IdentityModel.Protocols.WSTrust
             }
 
             if (
-                StringComparer
-                    .Ordinal
+                StringComparer.Ordinal
                     .Equals(elementName, WSTrust13Constants.ElementNames.ValidateTarget)
             )
             {
@@ -397,8 +389,7 @@ namespace System.IdentityModel.Protocols.WSTrust
 
                 if (tokenElement == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgument(
                             "elementValue",
                             SR.GetString(
@@ -422,8 +413,7 @@ namespace System.IdentityModel.Protocols.WSTrust
                 }
                 else
                 {
-                    context
-                        .SecurityTokenHandlers
+                    context.SecurityTokenHandlers
                         .WriteToken(writer, tokenElement.GetSecurityToken());
                 }
 
@@ -504,8 +494,7 @@ namespace System.IdentityModel.Protocols.WSTrust
                         )
                     )
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new WSTrustSerializationException(
                                     SR.GetString(
@@ -525,8 +514,7 @@ namespace System.IdentityModel.Protocols.WSTrust
                     )
                 )
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new WSTrustSerializationException(SR.GetString(SR.ID3130))
                         );

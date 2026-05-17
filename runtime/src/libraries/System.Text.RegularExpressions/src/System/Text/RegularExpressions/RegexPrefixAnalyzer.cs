@@ -498,8 +498,7 @@ namespace System.Text.RegularExpressions
                                 )
                                 {
                                     if (
-                                        value
-                                            .Set
+                                        value.Set
                                             .TryAddCharClass(RegexCharClass.Parse(fixedSet.Set))
                                     )
                                     {

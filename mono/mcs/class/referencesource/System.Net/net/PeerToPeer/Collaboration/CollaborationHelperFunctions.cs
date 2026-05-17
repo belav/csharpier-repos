@@ -51,8 +51,7 @@ namespace System.Net.PeerToPeer.Collaboration
                         );
                         if (errorCode != 0)
                         {
-                            Logging
-                                .P2PTraceSource
+                            Logging.P2PTraceSource
                                 .TraceEvent(
                                     TraceEventType.Error,
                                     0,
@@ -571,8 +570,7 @@ namespace System.Net.PeerToPeer.Collaboration
                     );
                     if (errorCode != 0)
                     {
-                        Logging
-                            .P2PTraceSource
+                        Logging.P2PTraceSource
                             .TraceEvent(
                                 TraceEventType.Error,
                                 0,
@@ -588,8 +586,7 @@ namespace System.Net.PeerToPeer.Collaboration
                 presenceChanged += callback;
             }
 
-            Logging
-                .P2PTraceSource
+            Logging.P2PTraceSource
                 .TraceEvent(TraceEventType.Information, 0, "AddMyPresenceChanged() successful.");
         }
 
@@ -647,8 +644,7 @@ namespace System.Net.PeerToPeer.Collaboration
                     );
                     if (errorCode != 0)
                     {
-                        Logging
-                            .P2PTraceSource
+                        Logging.P2PTraceSource
                             .TraceEvent(
                                 TraceEventType.Error,
                                 0,
@@ -664,8 +660,7 @@ namespace System.Net.PeerToPeer.Collaboration
                 applicationChanged += callback;
             }
 
-            Logging
-                .P2PTraceSource
+            Logging.P2PTraceSource
                 .TraceEvent(TraceEventType.Information, 0, "AddApplicationChanged() successful.");
         }
 
@@ -723,8 +718,7 @@ namespace System.Net.PeerToPeer.Collaboration
                     );
                     if (errorCode != 0)
                     {
-                        Logging
-                            .P2PTraceSource
+                        Logging.P2PTraceSource
                             .TraceEvent(
                                 TraceEventType.Error,
                                 0,
@@ -740,8 +734,7 @@ namespace System.Net.PeerToPeer.Collaboration
                 objectChanged += callback;
             }
 
-            Logging
-                .P2PTraceSource
+            Logging.P2PTraceSource
                 .TraceEvent(TraceEventType.Information, 0, "AddObjectChanged() successful.");
         }
 

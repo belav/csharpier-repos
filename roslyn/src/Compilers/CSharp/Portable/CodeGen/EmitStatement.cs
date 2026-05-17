@@ -420,8 +420,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
             {
                 _diagnostics.Add(
                     ErrorCode.ERR_InsufficientStack,
-                    BoundTreeVisitor
-                        .CancelledByStackGuardException
+                    BoundTreeVisitor.CancelledByStackGuardException
                         .GetTooLongOrComplexExpressionErrorLocation(condition)
                 );
                 throw new EmitCancelledException();
@@ -1348,8 +1347,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
 
             EmitSwitchHeader(
                 dispatch.Expression,
-                dispatch
-                    .Cases
+                dispatch.Cases
                     .Select(p => new KeyValuePair<ConstantValue, object>(p.value, p.label))
                     .ToArray(),
                 dispatch.DefaultLabel,
@@ -1580,8 +1578,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
                 // switch dispatch on lengthTemp using fallThroughLabel and cases:
                 //   lengthConstant -> corresponding label
                 _builder.EmitIntegerSwitchJumpTable(
-                    lengthBasedSwitchInfo
-                        .LengthBasedJumpTable
+                    lengthBasedSwitchInfo.LengthBasedJumpTable
                         .LengthCaseLabels
                         .Select(p => new KeyValuePair<ConstantValue, object>(
                             ConstantValue.Create(p.value),
@@ -1637,8 +1634,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
                     // switch dispatch on charTemp using fallThroughLabel and cases:
                     //   charConstant -> corresponding label
                     _builder.EmitIntegerSwitchJumpTable(
-                        charJumpTable
-                            .CharCaseLabels
+                        charJumpTable.CharCaseLabels
                             .Select(p => new KeyValuePair<ConstantValue, object>(
                                 ConstantValue.Create(p.value),
                                 p.label
@@ -1669,8 +1665,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
                     // switch dispatch on keyTemp using fallThroughLabel and cases:
                     //   stringConstant -> corresponding label
                     EmitStringSwitchJumpTable(
-                        stringJumpTable
-                            .StringCaseLabels
+                        stringJumpTable.StringCaseLabels
                             .Select(p => new KeyValuePair<ConstantValue, object>(
                                 ConstantValue.Create(p.value),
                                 p.label
@@ -1799,8 +1794,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
             else
             {
                 var stringEqualityMethod =
-                    _module
-                        .Compilation
+                    _module.Compilation
                         .GetSpecialTypeMember(SpecialMember.System_String__op_Equality)
                     as MethodSymbol;
                 Debug.Assert(stringEqualityMethod != null && !stringEqualityMethod.HasUseSiteError);
@@ -2033,8 +2027,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
                 stringEqualityMethodRef
                     == _module.Translate(
                         (MethodSymbol)
-                            _module
-                                .Compilation
+                            _module.Compilation
                                 .GetSpecialTypeMember(SpecialMember.System_String__op_Equality),
                         (CSharpSyntaxNode)syntaxNode,
                         assertDiagnostics
@@ -2189,8 +2182,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
             LocalDebugId localId;
             var name = GetLocalDebugName(local, out localId);
 
-            var localDef = _builder
-                .LocalSlotManager
+            var localDef = _builder.LocalSlotManager
                 .DeclareLocal(
                     type: translatedType,
                     symbol: local,
@@ -2201,8 +2193,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
                     constraints: constraints,
                     dynamicTransformFlags: dynamicTransformFlags,
                     tupleElementNames: tupleElementNames,
-                    isSlotReusable: local
-                        .SynthesizedKind
+                    isSlotReusable: local.SynthesizedKind
                         .IsSlotReusable(_ilEmitStyle != ILEmitStyle.Release)
                 );
 
@@ -2300,8 +2291,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
             LocalSlotConstraints slotConstraints = LocalSlotConstraints.None
         )
         {
-            return _builder
-                .LocalSlotManager
+            return _builder.LocalSlotManager
                 .AllocateSlot(
                     _module.Translate(type, syntaxNode, _diagnostics.DiagnosticBag),
                     slotConstraints

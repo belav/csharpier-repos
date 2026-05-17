@@ -91,17 +91,11 @@ namespace tests.system_data_dll.System_Data
         {
             DataSet ds = getDataSet();
             Compare(ds.Relations.Count, 0);
-            ds.Relations.Add(
-                "rel1",
-                ds.Tables[0].Columns["ParentId"],
-                ds.Tables[1].Columns["ParentId"]
-            );
+            ds.Relations
+                .Add("rel1", ds.Tables[0].Columns["ParentId"], ds.Tables[1].Columns["ParentId"]);
             Compare(ds.Relations.Count, 1);
-            ds.Relations.Add(
-                "rel2",
-                ds.Tables[0].Columns["String1"],
-                ds.Tables[1].Columns["String1"]
-            );
+            ds.Relations
+                .Add("rel2", ds.Tables[0].Columns["String1"], ds.Tables[1].Columns["String1"]);
             Compare(ds.Relations.Count, 2);
             ds.Relations.Remove("rel2");
             Compare(ds.Relations.Count, 1);

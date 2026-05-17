@@ -252,8 +252,7 @@ namespace Moq
                 )
             )
             {
-                return ExpressionComparer
-                    .Default
+                return ExpressionComparer.Default
                     .Equals(this.RenderExpression, other.RenderExpression);
             }
             else

@@ -306,8 +306,7 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
 
                 if (
                     !string.IsNullOrEmpty(symbolToVerify)
-                    && !declaration
-                        .DeclaredSymbol
+                    && !declaration.DeclaredSymbol
                         .Name
                         .Equals(symbolToVerify, StringComparison.Ordinal)
                 )

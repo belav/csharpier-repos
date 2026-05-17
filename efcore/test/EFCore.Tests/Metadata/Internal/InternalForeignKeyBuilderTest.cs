@@ -198,8 +198,7 @@ public class InternalForeignKeyBuilderTest
         );
         var orderEntityBuilder = modelBuilder.Entity(typeof(Order), ConfigurationSource.Explicit);
 
-        var foreignKey = orderEntityBuilder
-            .Metadata
+        var foreignKey = orderEntityBuilder.Metadata
             .AddForeignKey(
                 new[]
                 {
@@ -600,8 +599,7 @@ public class InternalForeignKeyBuilderTest
         );
         var orderEntityBuilder = modelBuilder.Entity(typeof(Order), ConfigurationSource.Explicit);
 
-        var foreignKey = orderEntityBuilder
-            .Metadata
+        var foreignKey = orderEntityBuilder.Metadata
             .AddForeignKey(
                 new[]
                 {
@@ -731,8 +729,7 @@ public class InternalForeignKeyBuilderTest
         var customerUniqueProperty = orderEntityBuilder
             .Property(Order.CustomerUniqueProperty, ConfigurationSource.Convention)
             .Metadata;
-        var fk = orderEntityBuilder
-            .Metadata
+        var fk = orderEntityBuilder.Metadata
             .AddForeignKey(
                 new[] { customerIdProperty, customerUniqueProperty },
                 pk,
@@ -1206,8 +1203,7 @@ public class InternalForeignKeyBuilderTest
             typeof(Order),
             ConfigurationSource.Explicit
         );
-        var existingForeignKey = dependentEntityBuilder
-            .Metadata
+        var existingForeignKey = dependentEntityBuilder.Metadata
             .AddForeignKey(
                 new[]
                 {

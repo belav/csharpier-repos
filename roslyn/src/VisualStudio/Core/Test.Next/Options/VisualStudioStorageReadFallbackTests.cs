@@ -17,8 +17,7 @@ public class VisualStudioStorageReadFallbackTests
     [Fact]
     public void SpaceBetweenParentheses()
     {
-        var exportProvider = VisualStudioTestCompositions
-            .LanguageServices
+        var exportProvider = VisualStudioTestCompositions.LanguageServices
             .ExportProviderFactory
             .CreateExportProvider();
         var fallback = exportProvider
@@ -73,8 +72,7 @@ public class VisualStudioStorageReadFallbackTests
     [Fact]
     public void NewLinesForBraces()
     {
-        var exportProvider = VisualStudioTestCompositions
-            .LanguageServices
+        var exportProvider = VisualStudioTestCompositions.LanguageServices
             .ExportProviderFactory
             .CreateExportProvider();
         var fallback = exportProvider

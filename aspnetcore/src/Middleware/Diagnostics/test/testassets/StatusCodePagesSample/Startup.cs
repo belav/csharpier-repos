@@ -46,8 +46,7 @@ public class Startup
                     var disableStatusCodePages = context.Request.Query["disableStatusCodePages"];
                     if (disableStatusCodePages == "true")
                     {
-                        var statusCodePagesFeature = context
-                            .Features
+                        var statusCodePagesFeature = context.Features
                             .Get<IStatusCodePagesFeature>();
                         if (statusCodePagesFeature != null)
                         {
@@ -75,8 +74,7 @@ public class Startup
                     builder.AppendLine("<html><body>");
                     builder.AppendLine(
                         "An error occurred, Status Code: "
-                            + HtmlEncoder
-                                .Default
+                            + HtmlEncoder.Default
                                 .Encode(context.Request.Path.ToString().Substring(1))
                             + "<br>"
                     );

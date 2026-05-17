@@ -1503,8 +1503,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                 }
                 """,
                 new TestParameters(
-                    parseOptions: CSharpParseOptions
-                        .Default
+                    parseOptions: CSharpParseOptions.Default
                         .WithLanguageVersion(LanguageVersion.CSharp8)
                 )
             );
@@ -1524,8 +1523,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                 }
                 """,
                 new TestParameters(
-                    parseOptions: CSharpParseOptions
-                        .Default
+                    parseOptions: CSharpParseOptions.Default
                         .WithLanguageVersion(LanguageVersion.CSharp9)
                 )
             );

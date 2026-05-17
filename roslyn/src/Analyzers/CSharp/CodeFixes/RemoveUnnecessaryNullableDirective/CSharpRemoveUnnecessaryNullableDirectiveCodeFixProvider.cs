@@ -67,8 +67,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.RemoveUnnecessaryNullableDirec
         {
             foreach (var diagnostic in diagnostics)
             {
-                var nullableDirective = diagnostic
-                    .Location
+                var nullableDirective = diagnostic.Location
                     .FindNode(
                         findInsideTrivia: true,
                         getInnermostNodeForTie: true,

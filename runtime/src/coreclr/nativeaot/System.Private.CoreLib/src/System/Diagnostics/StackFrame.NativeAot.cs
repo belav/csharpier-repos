@@ -59,8 +59,7 @@ namespace System.Diagnostics
 
             IntPtr methodStartAddress = _ipAddress - _nativeOffset;
             Debug.Assert(RuntimeImports.RhFindMethodStartAddress(_ipAddress) == methodStartAddress);
-            _method = ReflectionAugments
-                .ReflectionCoreCallbacks
+            _method = ReflectionAugments.ReflectionCoreCallbacks
                 .GetMethodBaseFromStartAddressIfAvailable(methodStartAddress);
             if (_method == null)
             {
@@ -100,8 +99,7 @@ namespace System.Diagnostics
 
                 if (needFileInfo)
                 {
-                    DeveloperExperience
-                        .Default
+                    DeveloperExperience.Default
                         .TryGetSourceLineInfo(
                             _ipAddress,
                             out _fileName,
@@ -152,8 +150,7 @@ namespace System.Diagnostics
         private bool AppendStackFrameWithoutMethodBase(StringBuilder builder)
         {
             builder.Append(
-                DeveloperExperience
-                    .Default
+                DeveloperExperience.Default
                     .CreateStackTraceString(_ipAddress, includeFileInfo: false, out _)
             );
             return true;
@@ -174,8 +171,7 @@ namespace System.Diagnostics
         {
             if (_ipAddress != Exception.EdiSeparator)
             {
-                string s = DeveloperExperience
-                    .Default
+                string s = DeveloperExperience.Default
                     .CreateStackTraceString(_ipAddress, _needFileInfo, out bool isStackTraceHidden);
                 if (!isStackTraceHidden)
                 {

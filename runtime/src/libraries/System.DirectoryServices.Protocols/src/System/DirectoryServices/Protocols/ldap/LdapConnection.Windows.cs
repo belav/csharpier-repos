@@ -74,8 +74,7 @@ namespace System.DirectoryServices.Protocols
             BindMethod method
         ) =>
             tempCredential == null && AuthType == AuthType.External
-                ? Interop
-                    .Ldap
+                ? Interop.Ldap
                     .ldap_bind_s(
                         _ldapHandle,
                         null,

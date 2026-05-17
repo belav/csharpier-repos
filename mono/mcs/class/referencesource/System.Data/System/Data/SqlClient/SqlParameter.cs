@@ -1663,8 +1663,8 @@ namespace System.Data.SqlClient
                 for (int rowOrdinal = 0; rowOrdinal < fieldCount; rowOrdinal++)
                 {
                     DataRow row = schema.Rows[rowOrdinal];
-                    SmiExtendedMetaData candidateMd =
-                        MSS.MetaDataUtilsSmi.SmiMetaDataFromSchemaTableRow(row);
+                    SmiExtendedMetaData candidateMd = MSS.MetaDataUtilsSmi
+                        .SmiMetaDataFromSchemaTableRow(row);
 
                     // Determine destination ordinal.  Allow for ordinal not specified by assuming rowOrdinal *is* columnOrdinal
                     //  in that case, but don't worry about mix-and-match of the two techniques

@@ -38,8 +38,7 @@ namespace System.IdentityModel.Protocols.WSTrust
         public Lifetime(DateTime? created, DateTime? expires)
         {
             if (created != null && expires != null && expires.Value <= created.Value)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentException(SR.GetString(SR.ID2000)));
 
             _created = DateTimeUtil.ToUniversalTime(created);

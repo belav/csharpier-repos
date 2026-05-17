@@ -846,8 +846,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                     else
                     {
                         int end = TextWindow.Text.Length;
-                        info.Text = TextWindow
-                            .Text
+                        info.Text = TextWindow.Text
                             .ToString(TextSpan.FromBounds(startingPosition, end));
                         TextWindow.Reset(end);
                     }

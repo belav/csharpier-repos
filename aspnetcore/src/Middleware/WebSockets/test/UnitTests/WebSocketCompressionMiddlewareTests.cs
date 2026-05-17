@@ -22,8 +22,7 @@ public class WebSocketCompressionMiddlewareTests : LoggedTest
                 async context =>
                 {
                     Assert.True(context.WebSockets.IsWebSocketRequest);
-                    var webSocket = await context
-                        .WebSockets
+                    var webSocket = await context.WebSockets
                         .AcceptWebSocketAsync(
                             new WebSocketAcceptContext()
                             {
@@ -50,8 +49,7 @@ public class WebSocketCompressionMiddlewareTests : LoggedTest
                     Assert.Equal(HttpStatusCode.SwitchingProtocols, response.StatusCode);
                     Assert.Equal(
                         "permessage-deflate; server_no_context_takeover",
-                        response
-                            .Headers
+                        response.Headers
                             .GetValues(HeaderNames.SecWebSocketExtensions)
                             .Aggregate((l, r) => $"{l}; {r}")
                     );
@@ -115,8 +113,7 @@ public class WebSocketCompressionMiddlewareTests : LoggedTest
                 async context =>
                 {
                     Assert.True(context.WebSockets.IsWebSocketRequest);
-                    var webSocket = await context
-                        .WebSockets
+                    var webSocket = await context.WebSockets
                         .AcceptWebSocketAsync(
                             new WebSocketAcceptContext()
                             {
@@ -143,8 +140,7 @@ public class WebSocketCompressionMiddlewareTests : LoggedTest
                     Assert.Equal(HttpStatusCode.SwitchingProtocols, response.StatusCode);
                     Assert.Equal(
                         expectedResponse,
-                        response
-                            .Headers
+                        response.Headers
                             .GetValues(HeaderNames.SecWebSocketExtensions)
                             .Aggregate((l, r) => $"{l}; {r}")
                     );
@@ -164,8 +160,7 @@ public class WebSocketCompressionMiddlewareTests : LoggedTest
                 async context =>
                 {
                     Assert.True(context.WebSockets.IsWebSocketRequest);
-                    using var webSocket = await context
-                        .WebSockets
+                    using var webSocket = await context.WebSockets
                         .AcceptWebSocketAsync(
                             new WebSocketAcceptContext()
                             {
@@ -249,8 +244,7 @@ public class WebSocketCompressionMiddlewareTests : LoggedTest
         request.Headers.Upgrade.Add(new System.Net.Http.Headers.ProductHeaderValue("websocket"));
         request.Headers.Add(HeaderNames.SecWebSocketVersion, "13");
         // SecWebSocketKey required to be 16 bytes
-        request
-            .Headers
+        request.Headers
             .Add(
                 HeaderNames.SecWebSocketKey,
                 Convert.ToBase64String(

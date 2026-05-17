@@ -44,8 +44,7 @@ namespace System.ServiceModel.Dispatcher
             }
             if (endpoint.Address == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR2.GetString(SR2.EndpointAddressCannotBeNull)
@@ -88,8 +87,7 @@ namespace System.ServiceModel.Dispatcher
                     {
                         if (this.catchAllOperationName != "")
                         {
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
                                     new InvalidOperationException(
                                         SR2.GetString(
@@ -107,8 +105,7 @@ namespace System.ServiceModel.Dispatcher
                     WCFKey wcfKey = new WCFKey(ut, method);
                     if (alreadyHaves.ContainsKey(wcfKey))
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(
                                     SR2.GetString(
@@ -129,8 +126,7 @@ namespace System.ServiceModel.Dispatcher
                         methodSpecificTables.Add(method, methodSpecificTable);
                     }
 
-                    methodSpecificTable
-                        .KeyValuePairs
+                    methodSpecificTable.KeyValuePairs
                         .Add(new KeyValuePair<UriTemplate, object>(ut, od.Name));
                     this.templates.Add(od.Name, ut);
                 }
@@ -275,8 +271,7 @@ namespace System.ServiceModel.Dispatcher
                     {
                         return HelpOperationInvoker.OperationName;
                     }
-                    message
-                        .Properties
+                    message.Properties
                         .Add(
                             WebHttpDispatchOperationSelector.HttpOperationSelectorDataPropertyName,
                             new WebHttpDispatchOperationSelectorData()
@@ -351,8 +346,7 @@ namespace System.ServiceModel.Dispatcher
             if (allowedMethods != null)
             {
                 uriMatched = true;
-                message
-                    .Properties
+                message.Properties
                     .Add(
                         WebHttpDispatchOperationSelector.HttpOperationSelectorDataPropertyName,
                         new WebHttpDispatchOperationSelectorData()
@@ -392,8 +386,7 @@ namespace System.ServiceModel.Dispatcher
         )
         {
             match.SetBaseUri(match.BaseUri, requestProp);
-            message
-                .Properties
+            message.Properties
                 .Add(IncomingWebRequestContext.UriTemplateMatchResultsPropertyName, match);
         }
 
@@ -466,8 +459,7 @@ namespace System.ServiceModel.Dispatcher
                     return hostName;
                 }
             }
-            IAspNetMessageProperty aspNetMessageProperty = AspNetEnvironment
-                .Current
+            IAspNetMessageProperty aspNetMessageProperty = AspNetEnvironment.Current
                 .GetHostingProperty(message);
             if (aspNetMessageProperty != null)
             {

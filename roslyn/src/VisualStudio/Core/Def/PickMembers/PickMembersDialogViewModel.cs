@@ -57,10 +57,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.PickMembers
                     ? _allMembers
                     : _allMembers
                         .Where(m =>
-                            m.SymbolAutomationText.IndexOf(
-                                searchText,
-                                StringComparison.OrdinalIgnoreCase
-                            ) >= 0
+                            m.SymbolAutomationText
+                                .IndexOf(searchText, StringComparison.OrdinalIgnoreCase) >= 0
                         )
                         .ToList();
             NotifyPropertyChanged(nameof(MemberContainers));

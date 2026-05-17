@@ -1064,8 +1064,7 @@ namespace System.Diagnostics.Contracts.Internal
             Exception innerException
         )
         {
-            return System
-                .Runtime
+            return System.Runtime
                 .CompilerServices
                 .ContractHelper
                 .RaiseContractFailedEvent(failureKind, userMessage, conditionText, innerException);
@@ -1086,8 +1085,7 @@ namespace System.Diagnostics.Contracts.Internal
             Exception innerException
         )
         {
-            System
-                .Runtime
+            System.Runtime
                 .CompilerServices
                 .ContractHelper
                 .TriggerFailure(kind, displayMessage, userMessage, conditionText, innerException);

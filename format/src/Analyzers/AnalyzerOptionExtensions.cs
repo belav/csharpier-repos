@@ -51,8 +51,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
             // If user has explicitly configured severity for this diagnostic ID, that should be respected.
             if (
-                compilation
-                    .Options
+                compilation.Options
                     .SpecificDiagnosticOptions
                     .TryGetValue(diagnosticId, out severity)
             )
@@ -63,8 +62,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             // If user has explicitly configured severity for this diagnostic ID, that should be respected.
             // For example, 'dotnet_diagnostic.CA1000.severity = error'
             if (
-                compilation
-                    .Options
+                compilation.Options
                     .SyntaxTreeOptionsProvider
                     ?.TryGetDiagnosticValue(
                         tree,
@@ -84,8 +82,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             if (
                 analyzerOptions == null
                 || !descriptor.IsEnabledByDefault
-                || descriptor
-                    .CustomTags
+                || descriptor.CustomTags
                     .Any(tag =>
                         tag == WellKnownDiagnosticTags.Compiler
                         || tag == WellKnownDiagnosticTags.NotConfigurable
@@ -96,8 +93,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 return false;
             }
 
-            var analyzerConfigOptions = analyzerOptions
-                .AnalyzerConfigOptionsProvider
+            var analyzerConfigOptions = analyzerOptions.AnalyzerConfigOptionsProvider
                 .GetOptions(tree);
 
             // If user has explicitly configured default severity for the diagnostic category, that should be respected.

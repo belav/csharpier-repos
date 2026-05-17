@@ -553,8 +553,7 @@ namespace System.Web.DynamicData
 
         internal static Type GetEnumType(this IMetaColumn column)
         {
-            return column
-                    .Attributes
+            return column.Attributes
                     .GetAttributePropertyValue<EnumDataTypeAttribute, Type>(a => a.EnumType, null)
                 ?? (column.ColumnType.IsEnum ? column.ColumnType : null);
         }

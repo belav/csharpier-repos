@@ -355,8 +355,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options.Style.N
             {
                 _symbolKind = symbolKind;
                 Name = name;
-                IsChecked = specification
-                    .ApplicableSymbolKindList
+                IsChecked = specification.ApplicableSymbolKindList
                     .Any(static (k, symbolKind) => k.SymbolKind == symbolKind, symbolKind);
             }
 
@@ -368,8 +367,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options.Style.N
             {
                 _typeKind = typeKind;
                 Name = name;
-                IsChecked = specification
-                    .ApplicableSymbolKindList
+                IsChecked = specification.ApplicableSymbolKindList
                     .Any(static (k, typeKind) => k.TypeKind == typeKind, typeKind);
             }
 
@@ -381,8 +379,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options.Style.N
             {
                 _methodKind = methodKind;
                 Name = name;
-                IsChecked = specification
-                    .ApplicableSymbolKindList
+                IsChecked = specification.ApplicableSymbolKindList
                     .Any(static (k, methodKind) => k.MethodKind == methodKind, methodKind);
             }
 
@@ -419,8 +416,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options.Style.N
                 _accessibility = accessibility;
                 Name = name;
 
-                IsChecked = specification
-                    .ApplicableAccessibilityList
+                IsChecked = specification.ApplicableAccessibilityList
                     .Any(static (a, accessibility) => a == accessibility, accessibility);
             }
         }
@@ -449,8 +445,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options.Style.N
                 _modifier = modifier;
                 Name = name;
 
-                IsChecked = specification
-                    .RequiredModifierList
+                IsChecked = specification.RequiredModifierList
                     .Any(static (m, modifier) => m.Modifier == modifier, modifier);
             }
         }

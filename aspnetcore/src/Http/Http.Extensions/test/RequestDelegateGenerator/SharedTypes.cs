@@ -1042,8 +1042,7 @@ public class AddsRoutePatternMetadata : IEndpointMetadataProvider
             return;
         }
 
-        builder
-            .Metadata
+        builder.Metadata
             .Add(
                 new RoutePatternMetadata
                 {

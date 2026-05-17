@@ -110,8 +110,7 @@ namespace System.IdentityModel.Claims
                     }
                     // SelfSigned?
                     else if (
-                        StringComparer
-                            .OrdinalIgnoreCase
+                        StringComparer.OrdinalIgnoreCase
                             .Equals(
                                 this.certificate.SubjectName.Name,
                                 this.certificate.IssuerName.Name
@@ -360,8 +359,7 @@ namespace System.IdentityModel.Claims
         {
             if (this.disposed)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ObjectDisposedException(this.GetType().FullName));
             }
         }
@@ -373,8 +371,7 @@ namespace System.IdentityModel.Claims
             public X500DistinguishedNameClaimSet(X500DistinguishedName x500DistinguishedName)
             {
                 if (x500DistinguishedName == null)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgumentNull("x500DistinguishedName");
 
                 this.identity = new X509Identity(x500DistinguishedName);
@@ -626,8 +623,7 @@ namespace System.IdentityModel.Claims
         {
             if (this.disposed)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ObjectDisposedException(this.GetType().FullName));
             }
         }

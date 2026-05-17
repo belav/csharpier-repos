@@ -33,8 +33,7 @@ namespace System.ServiceModel.Dispatcher
             for (int i = 0; i < endpoint.Contract.Operations.Count; i++)
             {
                 OperationDescription operationDescription = endpoint.Contract.Operations[i];
-                TransactionFlowAttribute transactionFlow = operationDescription
-                    .Behaviors
+                TransactionFlowAttribute transactionFlow = operationDescription.Behaviors
                     .Find<TransactionFlowAttribute>();
                 if (
                     transactionFlow != null
@@ -49,8 +48,7 @@ namespace System.ServiceModel.Dispatcher
             if (anOperationRequiresTxFlow)
             {
                 CustomBinding binding = new CustomBinding(endpoint.Binding);
-                TransactionFlowBindingElement transactionFlowBindingElement = binding
-                    .Elements
+                TransactionFlowBindingElement transactionFlowBindingElement = binding.Elements
                     .Find<TransactionFlowBindingElement>();
 
                 if (
@@ -58,8 +56,7 @@ namespace System.ServiceModel.Dispatcher
                     || !transactionFlowBindingElement.Transactions
                 )
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 String.Format(
@@ -91,8 +88,7 @@ namespace System.ServiceModel.Dispatcher
             );
             if (autoCompleteFalseOperation != null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(
@@ -111,15 +107,13 @@ namespace System.ServiceModel.Dispatcher
             // transaction-related properties on the CallbackBehaviorAttribute
             if (!HasTransactedOperations(endpoint))
             {
-                CallbackBehaviorAttribute attribute = endpoint
-                    .Behaviors
+                CallbackBehaviorAttribute attribute = endpoint.Behaviors
                     .Find<CallbackBehaviorAttribute>();
                 if (attribute != null)
                 {
                     if (attribute.TransactionTimeoutSet)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(
                                     SR.GetString(
@@ -132,8 +126,7 @@ namespace System.ServiceModel.Dispatcher
 
                     if (attribute.IsolationLevelSet)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(
                                     SR.GetString(
@@ -220,16 +213,14 @@ namespace System.ServiceModel.Dispatcher
             if (autoCompleteFalseOperation != null)
             {
                 // Does the service have InstanceContextMode.PerSession or Shareable?
-                ServiceBehaviorAttribute serviceBehavior = service
-                    .Behaviors
+                ServiceBehaviorAttribute serviceBehavior = service.Behaviors
                     .Find<ServiceBehaviorAttribute>();
                 if (serviceBehavior != null)
                 {
                     InstanceContextMode instanceMode = serviceBehavior.InstanceContextMode;
                     if (instanceMode != InstanceContextMode.PerSession)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(
                                     SR.GetString(
@@ -247,8 +238,7 @@ namespace System.ServiceModel.Dispatcher
                 {
                     if (!RequiresSessions(endpoint))
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(
                                     SR.GetString(
@@ -277,8 +267,7 @@ namespace System.ServiceModel.Dispatcher
 
         void ValidateTransactionAutoCompleteOnSessionCloseHasSession(ServiceDescription service)
         {
-            ServiceBehaviorAttribute serviceBehavior = service
-                .Behaviors
+            ServiceBehaviorAttribute serviceBehavior = service.Behaviors
                 .Find<ServiceBehaviorAttribute>();
 
             if (serviceBehavior != null)
@@ -289,8 +278,7 @@ namespace System.ServiceModel.Dispatcher
                     && instanceMode != InstanceContextMode.PerSession
                 )
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(
@@ -309,15 +297,13 @@ namespace System.ServiceModel.Dispatcher
             // transaction-related properties on the ServiceBehaviorAttribute
             if (!HasTransactedOperations(service))
             {
-                ServiceBehaviorAttribute attribute = service
-                    .Behaviors
+                ServiceBehaviorAttribute attribute = service.Behaviors
                     .Find<ServiceBehaviorAttribute>();
                 if (attribute != null)
                 {
                     if (attribute.TransactionTimeoutSet)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(
                                     SR.GetString(
@@ -330,8 +316,7 @@ namespace System.ServiceModel.Dispatcher
 
                     if (attribute.IsolationLevelSet)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(
                                     SR.GetString(
@@ -344,8 +329,7 @@ namespace System.ServiceModel.Dispatcher
 
                     if (attribute.ReleaseServiceInstanceOnTransactionCompleteSet)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(
                                     SR.GetString(
@@ -358,8 +342,7 @@ namespace System.ServiceModel.Dispatcher
 
                     if (attribute.TransactionAutoCompleteOnSessionCloseSet)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(
                                     SR.GetString(
@@ -376,8 +359,7 @@ namespace System.ServiceModel.Dispatcher
         void EnsureNoOneWayTransactions(ServiceEndpoint endpoint)
         {
             CustomBinding binding = new CustomBinding(endpoint.Binding);
-            TransactionFlowBindingElement txFlowBindingElement = binding
-                .Elements
+            TransactionFlowBindingElement txFlowBindingElement = binding.Elements
                 .Find<TransactionFlowBindingElement>();
             if (txFlowBindingElement != null)
             {
@@ -386,8 +368,7 @@ namespace System.ServiceModel.Dispatcher
                     OperationDescription operation = endpoint.Contract.Operations[i];
                     if (operation.IsOneWay)
                     {
-                        TransactionFlowAttribute tfbp = operation
-                            .Behaviors
+                        TransactionFlowAttribute tfbp = operation.Behaviors
                             .Find<TransactionFlowAttribute>();
                         TransactionFlowOption transactions;
                         if (tfbp != null)
@@ -400,8 +381,7 @@ namespace System.ServiceModel.Dispatcher
                         }
                         if (TransactionFlowOptionHelper.AllowedOrRequired(transactions))
                         {
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
                                     new InvalidOperationException(
                                         SR.GetString(
@@ -434,8 +414,7 @@ namespace System.ServiceModel.Dispatcher
             for (int j = 0; j < endpoint.Contract.Operations.Count; j++)
             {
                 OperationDescription operation = endpoint.Contract.Operations[j];
-                OperationBehaviorAttribute attribute = operation
-                    .Behaviors
+                OperationBehaviorAttribute attribute = operation.Behaviors
                     .Find<OperationBehaviorAttribute>();
 
                 if (attribute != null && attribute.TransactionScopeRequired)
@@ -461,8 +440,7 @@ namespace System.ServiceModel.Dispatcher
 
         bool IsAutoComplete(OperationDescription operation)
         {
-            OperationBehaviorAttribute attribute = operation
-                .Behaviors
+            OperationBehaviorAttribute attribute = operation.Behaviors
                 .Find<OperationBehaviorAttribute>();
 
             if (attribute != null)
@@ -485,8 +463,7 @@ namespace System.ServiceModel.Dispatcher
             string contractName
         )
         {
-            OperationBehaviorAttribute attribute = operation
-                .Behaviors
+            OperationBehaviorAttribute attribute = operation.Behaviors
                 .Find<OperationBehaviorAttribute>();
 
             if (attribute != null)
@@ -494,8 +471,7 @@ namespace System.ServiceModel.Dispatcher
                 if (!singleThreaded && !attribute.TransactionAutoComplete)
                 {
                     string id = SR.SFxTransactionNonConcurrentOrAutoComplete2;
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(id, contractName, operation.Name)
@@ -514,8 +490,7 @@ namespace System.ServiceModel.Dispatcher
                 && bindingElements.Find<MsmqTransportBindingElement>() != null
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(
@@ -538,8 +513,7 @@ namespace System.ServiceModel.Dispatcher
                     && !IsSingleThreaded(service)
                 )
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(

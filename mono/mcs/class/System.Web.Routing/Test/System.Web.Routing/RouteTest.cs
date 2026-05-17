@@ -1562,8 +1562,7 @@ namespace MonoTests.System.Web.Routing
             var rc = new RequestContext(context, new RouteData());
 
             Assert.IsNotNull(RouteTable.Routes, "#A1");
-            RouteTable
-                .Routes
+            RouteTable.Routes
                 .MapPageRoute(
                     "TestRoute",
                     "{language}/testroute",
@@ -1574,8 +1573,7 @@ namespace MonoTests.System.Web.Routing
                 );
 
             Assert.IsNotNull(
-                RouteTable
-                    .Routes
+                RouteTable.Routes
                     .GetVirtualPath(
                         rc,
                         "TestRoute",
@@ -1638,8 +1636,7 @@ namespace MonoTests.System.Web.Routing
             );
             var rc = new RequestContext(context, new RouteData());
 
-            RouteTable
-                .Routes
+            RouteTable.Routes
                 .Add(
                     "FirstPage",
                     new Route("Hello/FirstPage", new MyRouteHandler())
@@ -1654,8 +1651,7 @@ namespace MonoTests.System.Web.Routing
                         ),
                     }
                 );
-            RouteTable
-                .Routes
+            RouteTable.Routes
                 .Add(
                     "OtherPages",
                     new Route("Hello/Page-{page}", new MyRouteHandler())
@@ -1697,8 +1693,7 @@ namespace MonoTests.System.Web.Routing
             );
             var rc = new RequestContext(context, new RouteData());
 
-            RouteTable
-                .Routes
+            RouteTable.Routes
                 .Add(
                     "Published",
                     new Route("Posts/Published", new MyRouteHandler())
@@ -1713,8 +1708,7 @@ namespace MonoTests.System.Web.Routing
                         ),
                     }
                 );
-            RouteTable
-                .Routes
+            RouteTable.Routes
                 .Add(
                     "Unpublished",
                     new Route("Posts/Unpublished", new MyRouteHandler())

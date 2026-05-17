@@ -199,8 +199,7 @@ public partial class ParameterBinder
         {
             // Enforce BindingBehavior.Required (e.g., [BindRequired])
             var modelName = modelBindingContext.FieldName;
-            var message = metadata
-                .ModelBindingMessageProvider
+            var message = metadata.ModelBindingMessageProvider
                 .MissingBindRequiredValueAccessor(modelName);
             actionContext.ModelState.TryAddModelError(modelName, message);
         }

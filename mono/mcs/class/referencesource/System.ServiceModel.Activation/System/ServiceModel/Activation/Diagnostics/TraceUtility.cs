@@ -63,13 +63,11 @@ namespace System.ServiceModel.Activation.Diagnostics
                     typeof(TraceUtility)
                 )
             );
-            string msdnTraceCode = System
-                .ServiceModel
+            string msdnTraceCode = System.ServiceModel
                 .Diagnostics
                 .LegacyDiagnosticTrace
                 .GenerateMsdnTraceCode("System.ServiceModel.Activation", traceCodes[traceCode]);
-            DiagnosticUtility
-                .DiagnosticTrace
+            DiagnosticUtility.DiagnosticTrace
                 .TraceEvent(
                     severity,
                     traceCode,

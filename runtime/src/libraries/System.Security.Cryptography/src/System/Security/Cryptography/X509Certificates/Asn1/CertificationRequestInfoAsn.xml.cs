@@ -141,8 +141,7 @@ namespace System.Security.Cryptography.X509Certificates.Asn1
             decoded.Subject = rebindSpan.Overlaps(tmpSpan, out offset)
                 ? rebind.Slice(offset, tmpSpan.Length)
                 : tmpSpan.ToArray();
-            System
-                .Security
+            System.Security
                 .Cryptography
                 .Asn1
                 .SubjectPublicKeyInfoAsn
@@ -158,8 +157,7 @@ namespace System.Security.Cryptography.X509Certificates.Asn1
 
                 while (collectionReader.HasData)
                 {
-                    System
-                        .Security
+                    System.Security
                         .Cryptography
                         .Asn1
                         .AttributeAsn

@@ -21,20 +21,19 @@ namespace System.Threading.Tasks.Tests
             object stateObject = new object();
 
             // Exercise void overload that takes IAsyncResult instead of StartMethod
-            t = Task.Factory.FromAsync(
-                fac.StartWrite("", 0, 0, null, null),
-                delegate(IAsyncResult iar) { }
-            );
+            t = Task.Factory
+                .FromAsync(fac.StartWrite("", 0, 0, null, null), delegate(IAsyncResult iar) { });
             t.Wait();
             check = fac.ToString();
             Assert.Equal(0, check.Length);
 
             //CreationOption overload
-            t = Task.Factory.FromAsync(
-                fac.StartWrite("", 0, 0, null, null),
-                delegate(IAsyncResult iar) { },
-                TaskCreationOptions.None
-            );
+            t = Task.Factory
+                .FromAsync(
+                    fac.StartWrite("", 0, 0, null, null),
+                    delegate(IAsyncResult iar) { },
+                    TaskCreationOptions.None
+                );
             t.Wait();
             check = fac.ToString();
             Assert.Equal(0, check.Length);
@@ -71,8 +70,7 @@ namespace System.Threading.Tasks.Tests
             char[] carray = new char[100];
 
             // Exercise 3-arg value option
-            f = Task<string>
-                .Factory
+            f = Task<string>.Factory
                 .FromAsync(
                     fac.StartRead,
                     fac.EndRead,
@@ -111,15 +109,16 @@ namespace System.Threading.Tasks.Tests
             fac.EndWrite(fac.StartWrite("12345678aaaaAAAAzzzz", null, null));
 
             // Exercise 3-arg value option
-            f = Task.Factory.FromAsync<int, char[], int, string>(
-                //f = Task.Factory.FromAsync(
-                fac.StartRead,
-                fac.EndRead,
-                4, // maxchars
-                carray,
-                0,
-                stateObject
-            );
+            f = Task.Factory
+                .FromAsync<int, char[], int, string>(
+                    //f = Task.Factory.FromAsync(
+                    fac.StartRead,
+                    fac.EndRead,
+                    4, // maxchars
+                    carray,
+                    0,
+                    stateObject
+                );
 
             s = f.Result;
             Assert.Equal("1234", s);
@@ -127,16 +126,17 @@ namespace System.Threading.Tasks.Tests
             Assert.Same(stateObject, ((IAsyncResult)f).AsyncState);
 
             // one more with the creationOptions overload
-            f = Task.Factory.FromAsync<int, char[], int, string>(
-                //f = Task.Factory.FromAsync(
-                fac.StartRead,
-                fac.EndRead,
-                4, // maxchars
-                carray,
-                0,
-                stateObject,
-                TaskCreationOptions.None
-            );
+            f = Task.Factory
+                .FromAsync<int, char[], int, string>(
+                    //f = Task.Factory.FromAsync(
+                    fac.StartRead,
+                    fac.EndRead,
+                    4, // maxchars
+                    carray,
+                    0,
+                    stateObject,
+                    TaskCreationOptions.None
+                );
 
             s = f.Result;
             Assert.Equal("5678", s);
@@ -144,27 +144,23 @@ namespace System.Threading.Tasks.Tests
             Assert.Same(stateObject, ((IAsyncResult)f).AsyncState);
 
             // Exercise 2-arg value option
-            f = Task.Factory.FromAsync<int, char[], string>(
-                fac.StartRead,
-                fac.EndRead,
-                4,
-                carray,
-                stateObject
-            );
+            f = Task.Factory
+                .FromAsync<int, char[], string>(fac.StartRead, fac.EndRead, 4, carray, stateObject);
             s = f.Result;
             Assert.Equal("aaaa", s);
             Assert.Equal('a', carray[0]);
             Assert.Same(stateObject, ((IAsyncResult)f).AsyncState);
 
             //one more with the creation option overload
-            f = Task.Factory.FromAsync<int, char[], string>(
-                fac.StartRead,
-                fac.EndRead,
-                4,
-                carray,
-                stateObject,
-                TaskCreationOptions.None
-            );
+            f = Task.Factory
+                .FromAsync<int, char[], string>(
+                    fac.StartRead,
+                    fac.EndRead,
+                    4,
+                    carray,
+                    stateObject,
+                    TaskCreationOptions.None
+                );
             s = f.Result;
             Assert.Equal("AAAA", s);
             Assert.Equal('A', carray[0]);
@@ -177,13 +173,14 @@ namespace System.Threading.Tasks.Tests
             Assert.Same(stateObject, ((IAsyncResult)f).AsyncState);
 
             // one more with creation option overload
-            f = Task.Factory.FromAsync<int, string>(
-                fac.StartRead,
-                fac.EndRead,
-                1,
-                stateObject,
-                TaskCreationOptions.None
-            );
+            f = Task.Factory
+                .FromAsync<int, string>(
+                    fac.StartRead,
+                    fac.EndRead,
+                    1,
+                    stateObject,
+                    TaskCreationOptions.None
+                );
             s = f.Result;
             Assert.Equal("z", s);
             Assert.Same(stateObject, ((IAsyncResult)f).AsyncState);
@@ -195,12 +192,13 @@ namespace System.Threading.Tasks.Tests
             Assert.Same(stateObject, ((IAsyncResult)f).AsyncState);
 
             //one more with Creation options overload
-            f = Task.Factory.FromAsync<string>(
-                fac.StartRead,
-                fac.EndRead,
-                stateObject,
-                TaskCreationOptions.None
-            );
+            f = Task.Factory
+                .FromAsync<string>(
+                    fac.StartRead,
+                    fac.EndRead,
+                    stateObject,
+                    TaskCreationOptions.None
+                );
             s = f.Result;
             Assert.Equal(string.Empty, s);
             Assert.Same(stateObject, ((IAsyncResult)f).AsyncState);
@@ -220,17 +218,17 @@ namespace System.Threading.Tasks.Tests
             // Test Exception handling from beginMethod
             Assert.Throws<NullReferenceException>(() =>
             {
-                t = Task.Factory.FromAsync(
-                    fac.StartWrite,
-                    fac.EndWrite,
-                    (string)null, // will cause null.Length to be dereferenced
-                    null
-                );
+                t = Task.Factory
+                    .FromAsync(
+                        fac.StartWrite,
+                        fac.EndWrite,
+                        (string)null, // will cause null.Length to be dereferenced
+                        null
+                    );
             });
 
             // Test Exception handling from asynchronous logic
-            f = Task<string>
-                .Factory
+            f = Task<string>.Factory
                 .FromAsync(
                     fac.StartRead,
                     fac.EndRead,
@@ -244,22 +242,19 @@ namespace System.Threading.Tasks.Tests
 
             Assert.Throws<ArgumentOutOfRangeException>(() =>
             {
-                Task.Factory.FromAsync(
-                    fac.StartWrite,
-                    fac.EndWrite,
-                    null,
-                    TaskCreationOptions.LongRunning
-                );
+                Task.Factory
+                    .FromAsync(fac.StartWrite, fac.EndWrite, null, TaskCreationOptions.LongRunning);
             });
 
             Assert.Throws<ArgumentOutOfRangeException>(() =>
             {
-                Task.Factory.FromAsync(
-                    fac.StartWrite,
-                    fac.EndWrite,
-                    null,
-                    TaskCreationOptions.PreferFairness
-                );
+                Task.Factory
+                    .FromAsync(
+                        fac.StartWrite,
+                        fac.EndWrite,
+                        null,
+                        TaskCreationOptions.PreferFairness
+                    );
             });
 
             // Empty the buffer, then inject a few more characters into the buffer
@@ -272,13 +267,14 @@ namespace System.Threading.Tasks.Tests
             //
 
             // Test IAsyncResult overload that returns Task
-            asyncTask = Task.Factory.FromAsync(
-                fac.StartWrite("abc", null, null),
-                delegate(IAsyncResult iar)
-                {
-                    throw new OperationCanceledException("FromAsync");
-                }
-            );
+            asyncTask = Task.Factory
+                .FromAsync(
+                    fac.StartWrite("abc", null, null),
+                    delegate(IAsyncResult iar)
+                    {
+                        throw new OperationCanceledException("FromAsync");
+                    }
+                );
 
             AggregateException ae = Assert.Throws<AggregateException>(() =>
             {
@@ -288,15 +284,16 @@ namespace System.Threading.Tasks.Tests
             Assert.Equal(TaskStatus.Canceled, asyncTask.Status);
 
             // Test beginMethod overload that returns Task
-            asyncTask = Task.Factory.FromAsync(
-                fac.StartWrite,
-                delegate(IAsyncResult iar)
-                {
-                    throw new OperationCanceledException("FromAsync");
-                },
-                "abc",
-                null
-            );
+            asyncTask = Task.Factory
+                .FromAsync(
+                    fac.StartWrite,
+                    delegate(IAsyncResult iar)
+                    {
+                        throw new OperationCanceledException("FromAsync");
+                    },
+                    "abc",
+                    null
+                );
 
             ae = Assert.Throws<AggregateException>(() =>
             {
@@ -307,8 +304,7 @@ namespace System.Threading.Tasks.Tests
 
             // Test IAsyncResult overload that returns Task<string>
             Task<string> asyncFuture = null;
-            asyncFuture = Task<string>
-                .Factory
+            asyncFuture = Task<string>.Factory
                 .FromAsync(
                     fac.StartRead(3, null, null),
                     delegate(IAsyncResult iar)
@@ -326,8 +322,7 @@ namespace System.Threading.Tasks.Tests
 
             // Test beginMethod overload that returns Task<string>
             asyncFuture = null;
-            asyncFuture = Task<string>
-                .Factory
+            asyncFuture = Task<string>.Factory
                 .FromAsync(
                     fac.StartRead,
                     delegate(IAsyncResult iar)
@@ -348,68 +343,69 @@ namespace System.Threading.Tasks.Tests
             //
             // Make sure that tasks aren't left hanging if StartXYZ() throws an exception
             //
-            Task foo = Task.Factory.StartNew(
-                delegate
-                {
-                    // Every one of these should throw an exception from StartWrite/StartRead.  Test to
-                    // see that foo is allowed to complete (i.e., no dangling attached tasks from FromAsync()
-                    // calls.
-                    Task foo1 = Task.Factory.FromAsync(
-                        fac.StartWrite,
-                        fac.EndWrite,
-                        (string)null,
-                        null,
-                        TaskCreationOptions.AttachedToParent
-                    );
-                    Task foo2 = Task.Factory.FromAsync(
-                        fac.StartWrite,
-                        fac.EndWrite,
-                        (string)null,
-                        4,
-                        null,
-                        TaskCreationOptions.AttachedToParent
-                    );
-                    Task foo3 = Task.Factory.FromAsync(
-                        fac.StartWrite,
-                        fac.EndWrite,
-                        (string)null,
-                        4,
-                        4,
-                        null,
-                        TaskCreationOptions.AttachedToParent
-                    );
-                    Task<string> foo4 = Task<string>
-                        .Factory
-                        .FromAsync(
-                            fac.StartRead,
-                            fac.EndRead,
-                            -1,
-                            null,
-                            TaskCreationOptions.AttachedToParent
-                        );
-                    Task<string> foo5 = Task<string>
-                        .Factory
-                        .FromAsync(
-                            fac.StartRead,
-                            fac.EndRead,
-                            -1,
-                            (char[])null,
-                            null,
-                            TaskCreationOptions.AttachedToParent
-                        );
-                    Task<string> foo6 = Task<string>
-                        .Factory
-                        .FromAsync(
-                            fac.StartRead,
-                            fac.EndRead,
-                            -1,
-                            (char[])null,
-                            200,
-                            null,
-                            TaskCreationOptions.AttachedToParent
-                        );
-                }
-            );
+            Task foo = Task.Factory
+                .StartNew(
+                    delegate
+                    {
+                        // Every one of these should throw an exception from StartWrite/StartRead.  Test to
+                        // see that foo is allowed to complete (i.e., no dangling attached tasks from FromAsync()
+                        // calls.
+                        Task foo1 = Task.Factory
+                            .FromAsync(
+                                fac.StartWrite,
+                                fac.EndWrite,
+                                (string)null,
+                                null,
+                                TaskCreationOptions.AttachedToParent
+                            );
+                        Task foo2 = Task.Factory
+                            .FromAsync(
+                                fac.StartWrite,
+                                fac.EndWrite,
+                                (string)null,
+                                4,
+                                null,
+                                TaskCreationOptions.AttachedToParent
+                            );
+                        Task foo3 = Task.Factory
+                            .FromAsync(
+                                fac.StartWrite,
+                                fac.EndWrite,
+                                (string)null,
+                                4,
+                                4,
+                                null,
+                                TaskCreationOptions.AttachedToParent
+                            );
+                        Task<string> foo4 = Task<string>.Factory
+                            .FromAsync(
+                                fac.StartRead,
+                                fac.EndRead,
+                                -1,
+                                null,
+                                TaskCreationOptions.AttachedToParent
+                            );
+                        Task<string> foo5 = Task<string>.Factory
+                            .FromAsync(
+                                fac.StartRead,
+                                fac.EndRead,
+                                -1,
+                                (char[])null,
+                                null,
+                                TaskCreationOptions.AttachedToParent
+                            );
+                        Task<string> foo6 = Task<string>.Factory
+                            .FromAsync(
+                                fac.StartRead,
+                                fac.EndRead,
+                                -1,
+                                (char[])null,
+                                200,
+                                null,
+                                TaskCreationOptions.AttachedToParent
+                            );
+                    }
+                );
 
             Debug.WriteLine(
                 "RunAPMFactoryTests: Waiting on task w/ faulted FromAsync() calls.  If we hang, there is a problem"
@@ -467,25 +463,26 @@ namespace System.Threading.Tasks.Tests
                 if (s == null)
                     throw new ArgumentNullException(nameof(s));
 
-                Task t = Task.Factory.StartNew(
-                    delegate
-                    {
-                        //Task.Delay(100).Wait();
-                        try
+                Task t = Task.Factory
+                    .StartNew(
+                        delegate
                         {
-                            lock (_list)
+                            //Task.Delay(100).Wait();
+                            try
                             {
-                                for (int i = 0; i < length; i++)
-                                    _list.Add(s[i + offset]);
+                                lock (_list)
+                                {
+                                    for (int i = 0; i < length; i++)
+                                        _list.Add(s[i + offset]);
+                                }
+                                mar.Signal();
                             }
-                            mar.Signal();
+                            catch (Exception e)
+                            {
+                                mar.Signal(e);
+                            }
                         }
-                        catch (Exception e)
-                        {
-                            mar.Signal(e);
-                        }
-                    }
-                );
+                    );
 
                 return mar;
             }
@@ -534,37 +531,38 @@ namespace System.Threading.Tasks.Tests
                 if (maxBytes == -1)
                     throw new ArgumentException("Value was not valid", nameof(maxBytes));
 
-                Task t = Task.Factory.StartNew(
-                    delegate
-                    {
-                        //Thread.Sleep(100);
-                        StringBuilder sb = new StringBuilder();
-                        int bytesRead = 0;
-                        try
+                Task t = Task.Factory
+                    .StartNew(
+                        delegate
                         {
-                            lock (_list)
+                            //Thread.Sleep(100);
+                            StringBuilder sb = new StringBuilder();
+                            int bytesRead = 0;
+                            try
                             {
-                                while ((_list.Count > 0) && (bytesRead < maxBytes))
+                                lock (_list)
                                 {
-                                    sb.Append(_list[0]);
-                                    if (buf != null)
+                                    while ((_list.Count > 0) && (bytesRead < maxBytes))
                                     {
-                                        buf[offset] = _list[0];
-                                        offset++;
+                                        sb.Append(_list[0]);
+                                        if (buf != null)
+                                        {
+                                            buf[offset] = _list[0];
+                                            offset++;
+                                        }
+                                        _list.RemoveAt(0);
+                                        bytesRead++;
                                     }
-                                    _list.RemoveAt(0);
-                                    bytesRead++;
                                 }
-                            }
 
-                            mar.SignalState(sb.ToString());
+                                mar.SignalState(sb.ToString());
+                            }
+                            catch (Exception e)
+                            {
+                                mar.Signal(e);
+                            }
                         }
-                        catch (Exception e)
-                        {
-                            mar.Signal(e);
-                        }
-                    }
-                );
+                    );
 
                 return mar;
             }
@@ -668,17 +666,18 @@ namespace System.Threading.Tasks.Tests
             bool invokesCallback
         )
         {
-            Task t = Task.Factory.FromAsync(
-                (callback, state) =>
-                {
-                    var ar = new SynchronouslyCompletedAsyncResult { AsyncState = state };
-                    if (invokesCallback)
-                        callback(ar);
-                    return ar;
-                },
-                iar => { },
-                null
-            );
+            Task t = Task.Factory
+                .FromAsync(
+                    (callback, state) =>
+                    {
+                        var ar = new SynchronouslyCompletedAsyncResult { AsyncState = state };
+                        if (invokesCallback)
+                            callback(ar);
+                        return ar;
+                    },
+                    iar => { },
+                    null
+                );
             Assert.Equal(TaskStatus.RanToCompletion, t.Status);
         }
 

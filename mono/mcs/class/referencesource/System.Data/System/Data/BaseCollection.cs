@@ -78,8 +78,7 @@ namespace System.Data
 
             // Case, kana and width -Insensitive compare
             if (
-                locale
-                    .CompareInfo
+                locale.CompareInfo
                     .Compare(
                         s1,
                         s2,

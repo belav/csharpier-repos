@@ -206,8 +206,7 @@ internal sealed class CSharpUseAutoPropertyAnalyzer
         var declaration = getMethod.DeclaringSyntaxReferences[0].GetSyntax(cancellationToken);
         return declaration switch
         {
-            AccessorDeclarationSyntax accessorDeclaration => accessorDeclaration
-                .ExpressionBody
+            AccessorDeclarationSyntax accessorDeclaration => accessorDeclaration.ExpressionBody
                 ?.Expression
                 ?? GetSingleStatementFromAccessor<ReturnStatementSyntax>(
                     accessorDeclaration

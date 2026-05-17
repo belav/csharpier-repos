@@ -48,8 +48,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
                 if (reportDiagnostics)
                 {
-                    context
-                        .Diagnostics
+                    context.Diagnostics
                         .Add(
                             ErrorCode.ERR_NotAnAttributeClass,
                             context.Location ?? NoLocation.Singleton,

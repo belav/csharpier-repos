@@ -102,8 +102,7 @@ namespace System.Net
                             offset = 0;
                         }
                         Interop.HttpApi.HTTP_DATA_CHUNK dataChunk = default;
-                        dataChunk.DataChunkType = Interop
-                            .HttpApi
+                        dataChunk.DataChunkType = Interop.HttpApi
                             .HTTP_DATA_CHUNK_TYPE
                             .HttpDataChunkFromMemory;
                         dataChunk.pBuffer = (byte*)(pBuffer + offset);
@@ -115,8 +114,7 @@ namespace System.Net
                                 : Interop.HttpApi.HTTP_FLAGS.HTTP_SEND_RESPONSE_FLAG_MORE_DATA;
                         if (!sentHeaders)
                         {
-                            statusCode = _httpContext
-                                .Response
+                            statusCode = _httpContext.Response
                                 .SendHeaders(&dataChunk, null, flags, false);
                         }
                         else
@@ -127,8 +125,7 @@ namespace System.Net
                                     "Calling Interop.HttpApi.HttpSendResponseEntityBody"
                                 );
 
-                            statusCode = Interop
-                                .HttpApi
+                            statusCode = Interop.HttpApi
                                 .HttpSendResponseEntityBody(
                                     _httpContext.RequestQueueHandle,
                                     _httpContext.RequestId,
@@ -242,8 +239,7 @@ namespace System.Net
                             "Calling Interop.HttpApi.HttpSendResponseEntityBody"
                         );
 
-                    statusCode = Interop
-                        .HttpApi
+                    statusCode = Interop.HttpApi
                         .HttpSendResponseEntityBody(
                             _httpContext.RequestQueueHandle,
                             _httpContext.RequestId,
@@ -419,8 +415,7 @@ namespace System.Net
                     if (_httpContext.Response.BoundaryType == BoundaryType.Chunked)
                     {
                         Interop.HttpApi.HTTP_DATA_CHUNK dataChunk = default;
-                        dataChunk.DataChunkType = Interop
-                            .HttpApi
+                        dataChunk.DataChunkType = Interop.HttpApi
                             .HTTP_DATA_CHUNK_TYPE
                             .HttpDataChunkFromMemory;
                         dataChunk.pBuffer = (byte*)pBuffer;
@@ -429,8 +424,7 @@ namespace System.Net
                     }
                     if (!sentHeaders)
                     {
-                        statusCode = _httpContext
-                            .Response
+                        statusCode = _httpContext.Response
                             .SendHeaders(pDataChunk, null, flags, false);
                     }
                     else
@@ -441,8 +435,7 @@ namespace System.Net
                                 "Calling Interop.HttpApi.HttpSendResponseEntityBody"
                             );
 
-                        statusCode = Interop
-                            .HttpApi
+                        statusCode = Interop.HttpApi
                             .HttpSendResponseEntityBody(
                                 _httpContext.RequestQueueHandle,
                                 _httpContext.RequestId,

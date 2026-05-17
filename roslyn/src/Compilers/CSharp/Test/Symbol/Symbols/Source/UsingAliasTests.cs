@@ -898,8 +898,7 @@ class Test
 
             var compilation = CreateCompilation(
                 text,
-                parseOptions: CSharpParseOptions
-                    .Default
+                parseOptions: CSharpParseOptions.Default
                     .WithLanguageVersion(LanguageVersion.Preview)
             );
 

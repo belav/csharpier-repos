@@ -37,8 +37,7 @@ namespace System.ServiceModel.Security
 
             if (sctClaimsHandler == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("sctClaimsHandler");
             }
 
@@ -216,8 +215,7 @@ namespace System.ServiceModel.Security
             );
             if (_tokenCache.Get(key) == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperInvalidOperation(
                         SR.GetString(SR.ID4285, sessionToken.ContextId.ToString())
                     );

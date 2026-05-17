@@ -20,8 +20,7 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System
-                    .Data
+                return System.Data
                     .Services
                     .Client
                     .TextRes
@@ -31,8 +30,7 @@ namespace System.Data.Services.Client
 
         internal static string BatchStream_ContentExpected(object p0)
         {
-            return System
-                .Data
+            return System.Data
                 .Services
                 .Client
                 .TextRes
@@ -41,8 +39,7 @@ namespace System.Data.Services.Client
 
         internal static string BatchStream_ContentUnexpected(object p0)
         {
-            return System
-                .Data
+            return System.Data
                 .Services
                 .Client
                 .TextRes
@@ -53,14 +50,12 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System
-                    .Data
+                return System.Data
                     .Services
                     .Client
                     .TextRes
                     .GetString(
-                        System
-                            .Data
+                        System.Data
                             .Services
                             .Client
                             .TextRes
@@ -73,8 +68,7 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System
-                    .Data
+                return System.Data
                     .Services
                     .Client
                     .TextRes
@@ -84,8 +78,7 @@ namespace System.Data.Services.Client
 
         internal static string BatchStream_InvalidDelimiter(object p0)
         {
-            return System
-                .Data
+            return System.Data
                 .Services
                 .Client
                 .TextRes
@@ -96,8 +89,7 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System
-                    .Data
+                return System.Data
                     .Services
                     .Client
                     .TextRes
@@ -109,8 +101,7 @@ namespace System.Data.Services.Client
 
         internal static string BatchStream_InvalidHeaderValueSpecified(object p0)
         {
-            return System
-                .Data
+            return System.Data
                 .Services
                 .Client
                 .TextRes
@@ -122,8 +113,7 @@ namespace System.Data.Services.Client
 
         internal static string BatchStream_InvalidContentLengthSpecified(object p0)
         {
-            return System
-                .Data
+            return System.Data
                 .Services
                 .Client
                 .TextRes
@@ -137,14 +127,12 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System
-                    .Data
+                return System.Data
                     .Services
                     .Client
                     .TextRes
                     .GetString(
-                        System
-                            .Data
+                        System.Data
                             .Services
                             .Client
                             .TextRes
@@ -157,14 +145,12 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System
-                    .Data
+                return System.Data
                     .Services
                     .Client
                     .TextRes
                     .GetString(
-                        System
-                            .Data
+                        System.Data
                             .Services
                             .Client
                             .TextRes
@@ -175,8 +161,7 @@ namespace System.Data.Services.Client
 
         internal static string BatchStream_InvalidHttpMethodName(object p0)
         {
-            return System
-                .Data
+            return System.Data
                 .Services
                 .Client
                 .TextRes
@@ -190,8 +175,7 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System
-                    .Data
+                return System.Data
                     .Services
                     .Client
                     .TextRes
@@ -205,14 +189,12 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System
-                    .Data
+                return System.Data
                     .Services
                     .Client
                     .TextRes
                     .GetString(
-                        System
-                            .Data
+                        System.Data
                             .Services
                             .Client
                             .TextRes
@@ -223,8 +205,7 @@ namespace System.Data.Services.Client
 
         internal static string BatchStream_InvalidMethodHeaderSpecified(object p0)
         {
-            return System
-                .Data
+            return System.Data
                 .Services
                 .Client
                 .TextRes
@@ -236,8 +217,7 @@ namespace System.Data.Services.Client
 
         internal static string BatchStream_InvalidHttpVersionSpecified(object p0, object p1)
         {
-            return System
-                .Data
+            return System.Data
                 .Services
                 .Client
                 .TextRes
@@ -253,14 +233,12 @@ namespace System.Data.Services.Client
             object p1
         )
         {
-            return System
-                .Data
+            return System.Data
                 .Services
                 .Client
                 .TextRes
                 .GetString(
-                    System
-                        .Data
+                    System.Data
                         .Services
                         .Client
                         .TextRes
@@ -275,14 +253,12 @@ namespace System.Data.Services.Client
             object p1
         )
         {
-            return System
-                .Data
+            return System.Data
                 .Services
                 .Client
                 .TextRes
                 .GetString(
-                    System
-                        .Data
+                    System.Data
                         .Services
                         .Client
                         .TextRes
@@ -297,14 +273,12 @@ namespace System.Data.Services.Client
             object p1
         )
         {
-            return System
-                .Data
+            return System.Data
                 .Services
                 .Client
                 .TextRes
                 .GetString(
-                    System
-                        .Data
+                    System.Data
                         .Services
                         .Client
                         .TextRes
@@ -316,8 +290,7 @@ namespace System.Data.Services.Client
 
         internal static string BatchStream_MissingContentTypeHeader(object p0)
         {
-            return System
-                .Data
+            return System.Data
                 .Services
                 .Client
                 .TextRes
@@ -334,8 +307,7 @@ namespace System.Data.Services.Client
             object p3
         )
         {
-            return System
-                .Data
+            return System.Data
                 .Services
                 .Client
                 .TextRes
@@ -350,8 +322,7 @@ namespace System.Data.Services.Client
 
         internal static string Batch_ExpectedContentType(object p0)
         {
-            return System
-                .Data
+            return System.Data
                 .Services
                 .Client
                 .TextRes
@@ -360,8 +331,7 @@ namespace System.Data.Services.Client
 
         internal static string Batch_ExpectedResponse(object p0)
         {
-            return System
-                .Data
+            return System.Data
                 .Services
                 .Client
                 .TextRes
@@ -372,8 +342,7 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System
-                    .Data
+                return System.Data
                     .Services
                     .Client
                     .TextRes
@@ -383,8 +352,7 @@ namespace System.Data.Services.Client
 
         internal static string Batch_UnexpectedContent(object p0)
         {
-            return System
-                .Data
+            return System.Data
                 .Services
                 .Client
                 .TextRes
@@ -395,8 +363,7 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System
-                    .Data
+                return System.Data
                     .Services
                     .Client
                     .TextRes
@@ -406,8 +373,7 @@ namespace System.Data.Services.Client
 
         internal static string Context_CannotConvertKey(object p0)
         {
-            return System
-                .Data
+            return System.Data
                 .Services
                 .Client
                 .TextRes
@@ -418,8 +384,7 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System
-                    .Data
+                return System.Data
                     .Services
                     .Client
                     .TextRes
@@ -433,8 +398,7 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System
-                    .Data
+                return System.Data
                     .Services
                     .Client
                     .TextRes
@@ -446,8 +410,7 @@ namespace System.Data.Services.Client
 
         internal static string Context_InternalError(object p0)
         {
-            return System
-                .Data
+            return System.Data
                 .Services
                 .Client
                 .TextRes
@@ -458,8 +421,7 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System
-                    .Data
+                return System.Data
                     .Services
                     .Client
                     .TextRes
@@ -471,8 +433,7 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System
-                    .Data
+                return System.Data
                     .Services
                     .Client
                     .TextRes
@@ -484,8 +445,7 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System
-                    .Data
+                return System.Data
                     .Services
                     .Client
                     .TextRes
@@ -499,8 +459,7 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System
-                    .Data
+                return System.Data
                     .Services
                     .Client
                     .TextRes
@@ -514,14 +473,12 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System
-                    .Data
+                return System.Data
                     .Services
                     .Client
                     .TextRes
                     .GetString(
-                        System
-                            .Data
+                        System.Data
                             .Services
                             .Client
                             .TextRes
@@ -534,8 +491,7 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System
-                    .Data
+                return System.Data
                     .Services
                     .Client
                     .TextRes
@@ -547,8 +503,7 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System
-                    .Data
+                return System.Data
                     .Services
                     .Client
                     .TextRes
@@ -560,8 +515,7 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System
-                    .Data
+                return System.Data
                     .Services
                     .Client
                     .TextRes
@@ -573,8 +527,7 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System
-                    .Data
+                return System.Data
                     .Services
                     .Client
                     .TextRes
@@ -586,8 +539,7 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System
-                    .Data
+                return System.Data
                     .Services
                     .Client
                     .TextRes
@@ -601,8 +553,7 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System
-                    .Data
+                return System.Data
                     .Services
                     .Client
                     .TextRes
@@ -614,8 +565,7 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System
-                    .Data
+                return System.Data
                     .Services
                     .Client
                     .TextRes
@@ -627,8 +577,7 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System
-                    .Data
+                return System.Data
                     .Services
                     .Client
                     .TextRes
@@ -640,8 +589,7 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System
-                    .Data
+                return System.Data
                     .Services
                     .Client
                     .TextRes
@@ -653,8 +601,7 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System
-                    .Data
+                return System.Data
                     .Services
                     .Client
                     .TextRes
@@ -666,8 +613,7 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System
-                    .Data
+                return System.Data
                     .Services
                     .Client
                     .TextRes
@@ -679,8 +625,7 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System
-                    .Data
+                return System.Data
                     .Services
                     .Client
                     .TextRes
@@ -694,8 +639,7 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System
-                    .Data
+                return System.Data
                     .Services
                     .Client
                     .TextRes
@@ -709,8 +653,7 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System
-                    .Data
+                return System.Data
                     .Services
                     .Client
                     .TextRes
@@ -722,8 +665,7 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System
-                    .Data
+                return System.Data
                     .Services
                     .Client
                     .TextRes
@@ -737,8 +679,7 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System
-                    .Data
+                return System.Data
                     .Services
                     .Client
                     .TextRes
@@ -752,8 +693,7 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System
-                    .Data
+                return System.Data
                     .Services
                     .Client
                     .TextRes
@@ -763,8 +703,7 @@ namespace System.Data.Services.Client
 
         internal static string Context_NoContentTypeForMediaLink(object p0, object p1)
         {
-            return System
-                .Data
+            return System.Data
                 .Services
                 .Client
                 .TextRes
@@ -779,8 +718,7 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System
-                    .Data
+                return System.Data
                     .Services
                     .Client
                     .TextRes
@@ -794,8 +732,7 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System
-                    .Data
+                return System.Data
                     .Services
                     .Client
                     .TextRes
@@ -805,8 +742,7 @@ namespace System.Data.Services.Client
 
         internal static string Context_VersionNotSupported(object p0, object p1)
         {
-            return System
-                .Data
+            return System.Data
                 .Services
                 .Client
                 .TextRes
@@ -817,8 +753,7 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System
-                    .Data
+                return System.Data
                     .Services
                     .Client
                     .TextRes
@@ -830,8 +765,7 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System
-                    .Data
+                return System.Data
                     .Services
                     .Client
                     .TextRes
@@ -841,8 +775,7 @@ namespace System.Data.Services.Client
 
         internal static string Context_MLEWithoutSaveStream(object p0)
         {
-            return System
-                .Data
+            return System.Data
                 .Services
                 .Client
                 .TextRes
@@ -851,8 +784,7 @@ namespace System.Data.Services.Client
 
         internal static string Context_SetSaveStreamOnMediaEntryProperty(object p0)
         {
-            return System
-                .Data
+            return System.Data
                 .Services
                 .Client
                 .TextRes
@@ -866,14 +798,12 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System
-                    .Data
+                return System.Data
                     .Services
                     .Client
                     .TextRes
                     .GetString(
-                        System
-                            .Data
+                        System.Data
                             .Services
                             .Client
                             .TextRes
@@ -884,8 +814,7 @@ namespace System.Data.Services.Client
 
         internal static string Collection_NullCollectionReference(object p0, object p1)
         {
-            return System
-                .Data
+            return System.Data
                 .Services
                 .Client
                 .TextRes
@@ -898,8 +827,7 @@ namespace System.Data.Services.Client
 
         internal static string ClientType_MissingOpenProperty(object p0, object p1)
         {
-            return System
-                .Data
+            return System.Data
                 .Services
                 .Client
                 .TextRes
@@ -912,8 +840,7 @@ namespace System.Data.Services.Client
 
         internal static string Clienttype_MultipleOpenProperty(object p0)
         {
-            return System
-                .Data
+            return System.Data
                 .Services
                 .Client
                 .TextRes
@@ -922,8 +849,7 @@ namespace System.Data.Services.Client
 
         internal static string ClientType_MissingProperty(object p0, object p1)
         {
-            return System
-                .Data
+            return System.Data
                 .Services
                 .Client
                 .TextRes
@@ -932,8 +858,7 @@ namespace System.Data.Services.Client
 
         internal static string ClientType_KeysMustBeSimpleTypes(object p0)
         {
-            return System
-                .Data
+            return System.Data
                 .Services
                 .Client
                 .TextRes
@@ -945,8 +870,7 @@ namespace System.Data.Services.Client
 
         internal static string ClientType_KeysOnDifferentDeclaredType(object p0)
         {
-            return System
-                .Data
+            return System.Data
                 .Services
                 .Client
                 .TextRes
@@ -958,8 +882,7 @@ namespace System.Data.Services.Client
 
         internal static string ClientType_MissingMimeTypeProperty(object p0, object p1)
         {
-            return System
-                .Data
+            return System.Data
                 .Services
                 .Client
                 .TextRes
@@ -972,8 +895,7 @@ namespace System.Data.Services.Client
 
         internal static string ClientType_MissingMediaEntryProperty(object p0)
         {
-            return System
-                .Data
+            return System.Data
                 .Services
                 .Client
                 .TextRes
@@ -985,8 +907,7 @@ namespace System.Data.Services.Client
 
         internal static string ClientType_NoSettableFields(object p0)
         {
-            return System
-                .Data
+            return System.Data
                 .Services
                 .Client
                 .TextRes
@@ -997,14 +918,12 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System
-                    .Data
+                return System.Data
                     .Services
                     .Client
                     .TextRes
                     .GetString(
-                        System
-                            .Data
+                        System.Data
                             .Services
                             .Client
                             .TextRes
@@ -1015,8 +934,7 @@ namespace System.Data.Services.Client
 
         internal static string ClientType_NullOpenProperties(object p0)
         {
-            return System
-                .Data
+            return System.Data
                 .Services
                 .Client
                 .TextRes
@@ -1027,8 +945,7 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System
-                    .Data
+                return System.Data
                     .Services
                     .Client
                     .TextRes
@@ -1040,8 +957,7 @@ namespace System.Data.Services.Client
 
         internal static string ClientType_Ambiguous(object p0, object p1)
         {
-            return System
-                .Data
+            return System.Data
                 .Services
                 .Client
                 .TextRes
@@ -1052,8 +968,7 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System
-                    .Data
+                return System.Data
                     .Services
                     .Client
                     .TextRes
@@ -1067,8 +982,7 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System
-                    .Data
+                return System.Data
                     .Services
                     .Client
                     .TextRes
@@ -1078,8 +992,7 @@ namespace System.Data.Services.Client
 
         internal static string Deserialize_Current(object p0, object p1)
         {
-            return System
-                .Data
+            return System.Data
                 .Services
                 .Client
                 .TextRes
@@ -1090,8 +1003,7 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System
-                    .Data
+                return System.Data
                     .Services
                     .Client
                     .TextRes
@@ -1105,8 +1017,7 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System
-                    .Data
+                return System.Data
                     .Services
                     .Client
                     .TextRes
@@ -1120,8 +1031,7 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System
-                    .Data
+                return System.Data
                     .Services
                     .Client
                     .TextRes
@@ -1133,8 +1043,7 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System
-                    .Data
+                return System.Data
                     .Services
                     .Client
                     .TextRes
@@ -1146,14 +1055,12 @@ namespace System.Data.Services.Client
 
         internal static string Deserialize_MismatchAtomLinkFeedPropertyNotCollection(object p0)
         {
-            return System
-                .Data
+            return System.Data
                 .Services
                 .Client
                 .TextRes
                 .GetString(
-                    System
-                        .Data
+                    System.Data
                         .Services
                         .Client
                         .TextRes
@@ -1164,14 +1071,12 @@ namespace System.Data.Services.Client
 
         internal static string Deserialize_MismatchAtomLinkEntryPropertyIsCollection(object p0)
         {
-            return System
-                .Data
+            return System.Data
                 .Services
                 .Client
                 .TextRes
                 .GetString(
-                    System
-                        .Data
+                    System.Data
                         .Services
                         .Client
                         .TextRes
@@ -1182,8 +1087,7 @@ namespace System.Data.Services.Client
 
         internal static string Deserialize_UnknownMimeTypeSpecified(object p0)
         {
-            return System
-                .Data
+            return System.Data
                 .Services
                 .Client
                 .TextRes
@@ -1197,14 +1101,12 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System
-                    .Data
+                return System.Data
                     .Services
                     .Client
                     .TextRes
                     .GetString(
-                        System
-                            .Data
+                        System.Data
                             .Services
                             .Client
                             .TextRes
@@ -1217,14 +1119,12 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System
-                    .Data
+                return System.Data
                     .Services
                     .Client
                     .TextRes
                     .GetString(
-                        System
-                            .Data
+                        System.Data
                             .Services
                             .Client
                             .TextRes
@@ -1237,8 +1137,7 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System
-                    .Data
+                return System.Data
                     .Services
                     .Client
                     .TextRes
@@ -1248,8 +1147,7 @@ namespace System.Data.Services.Client
 
         internal static string Deserialize_ServerException(object p0)
         {
-            return System
-                .Data
+            return System.Data
                 .Services
                 .Client
                 .TextRes
@@ -1260,8 +1158,7 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System
-                    .Data
+                return System.Data
                     .Services
                     .Client
                     .TextRes
@@ -1271,8 +1168,7 @@ namespace System.Data.Services.Client
 
         internal static string EpmClientType_PropertyIsComplex(object p0)
         {
-            return System
-                .Data
+            return System.Data
                 .Services
                 .Client
                 .TextRes
@@ -1281,8 +1177,7 @@ namespace System.Data.Services.Client
 
         internal static string EpmClientType_PropertyIsPrimitive(object p0)
         {
-            return System
-                .Data
+            return System.Data
                 .Services
                 .Client
                 .TextRes
@@ -1294,8 +1189,7 @@ namespace System.Data.Services.Client
 
         internal static string EpmSourceTree_InvalidSourcePath(object p0, object p1)
         {
-            return System
-                .Data
+            return System.Data
                 .Services
                 .Client
                 .TextRes
@@ -1311,14 +1205,12 @@ namespace System.Data.Services.Client
             object p1
         )
         {
-            return System
-                .Data
+            return System.Data
                 .Services
                 .Client
                 .TextRes
                 .GetString(
-                    System
-                        .Data
+                    System.Data
                         .Services
                         .Client
                         .TextRes
@@ -1330,8 +1222,7 @@ namespace System.Data.Services.Client
 
         internal static string EpmSourceTree_InaccessiblePropertyOnType(object p0, object p1)
         {
-            return System
-                .Data
+            return System.Data
                 .Services
                 .Client
                 .TextRes
@@ -1344,8 +1235,7 @@ namespace System.Data.Services.Client
 
         internal static string EpmTargetTree_InvalidTargetPath(object p0)
         {
-            return System
-                .Data
+            return System.Data
                 .Services
                 .Client
                 .TextRes
@@ -1354,8 +1244,7 @@ namespace System.Data.Services.Client
 
         internal static string EpmTargetTree_AttributeInMiddle(object p0)
         {
-            return System
-                .Data
+            return System.Data
                 .Services
                 .Client
                 .TextRes
@@ -1369,14 +1258,12 @@ namespace System.Data.Services.Client
             object p3
         )
         {
-            return System
-                .Data
+            return System.Data
                 .Services
                 .Client
                 .TextRes
                 .GetString(
-                    System
-                        .Data
+                    System.Data
                         .Services
                         .Client
                         .TextRes
@@ -1390,8 +1277,7 @@ namespace System.Data.Services.Client
 
         internal static string EntityPropertyMapping_EpmAttribute(object p0)
         {
-            return System
-                .Data
+            return System.Data
                 .Services
                 .Client
                 .TextRes
@@ -1403,14 +1289,12 @@ namespace System.Data.Services.Client
 
         internal static string EntityPropertyMapping_TargetNamespaceUriNotValid(object p0)
         {
-            return System
-                .Data
+            return System.Data
                 .Services
                 .Client
                 .TextRes
                 .GetString(
-                    System
-                        .Data
+                    System.Data
                         .Services
                         .Client
                         .TextRes
@@ -1423,8 +1307,7 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System
-                    .Data
+                return System.Data
                     .Services
                     .Client
                     .TextRes
@@ -1438,8 +1321,7 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System
-                    .Data
+                return System.Data
                     .Services
                     .Client
                     .TextRes
@@ -1453,14 +1335,12 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System
-                    .Data
+                return System.Data
                     .Services
                     .Client
                     .TextRes
                     .GetString(
-                        System
-                            .Data
+                        System.Data
                             .Services
                             .Client
                             .TextRes
@@ -1473,14 +1353,12 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System
-                    .Data
+                return System.Data
                     .Services
                     .Client
                     .TextRes
                     .GetString(
-                        System
-                            .Data
+                        System.Data
                             .Services
                             .Client
                             .TextRes
@@ -1493,14 +1371,12 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System
-                    .Data
+                return System.Data
                     .Services
                     .Client
                     .TextRes
                     .GetString(
-                        System
-                            .Data
+                        System.Data
                             .Services
                             .Client
                             .TextRes
@@ -1513,8 +1389,7 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System
-                    .Data
+                return System.Data
                     .Services
                     .Client
                     .TextRes
@@ -1526,8 +1401,7 @@ namespace System.Data.Services.Client
 
         internal static string HttpProcessUtility_EncodingNotSupported(object p0)
         {
-            return System
-                .Data
+            return System.Data
                 .Services
                 .Client
                 .TextRes
@@ -1539,8 +1413,7 @@ namespace System.Data.Services.Client
 
         internal static string HttpProcessUtility_EscapeCharWithoutQuotes(object p0)
         {
-            return System
-                .Data
+            return System.Data
                 .Services
                 .Client
                 .TextRes
@@ -1552,8 +1425,7 @@ namespace System.Data.Services.Client
 
         internal static string HttpProcessUtility_EscapeCharAtEnd(object p0)
         {
-            return System
-                .Data
+            return System.Data
                 .Services
                 .Client
                 .TextRes
@@ -1565,8 +1437,7 @@ namespace System.Data.Services.Client
 
         internal static string HttpProcessUtility_ClosingQuoteNotFound(object p0)
         {
-            return System
-                .Data
+            return System.Data
                 .Services
                 .Client
                 .TextRes
@@ -1580,8 +1451,7 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System
-                    .Data
+                return System.Data
                     .Services
                     .Client
                     .TextRes
@@ -1595,8 +1465,7 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System
-                    .Data
+                return System.Data
                     .Services
                     .Client
                     .TextRes
@@ -1610,14 +1479,12 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System
-                    .Data
+                return System.Data
                     .Services
                     .Client
                     .TextRes
                     .GetString(
-                        System
-                            .Data
+                        System.Data
                             .Services
                             .Client
                             .TextRes
@@ -1630,14 +1497,12 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System
-                    .Data
+                return System.Data
                     .Services
                     .Client
                     .TextRes
                     .GetString(
-                        System
-                            .Data
+                        System.Data
                             .Services
                             .Client
                             .TextRes
@@ -1650,14 +1515,12 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System
-                    .Data
+                return System.Data
                     .Services
                     .Client
                     .TextRes
                     .GetString(
-                        System
-                            .Data
+                        System.Data
                             .Services
                             .Client
                             .TextRes
@@ -1668,8 +1531,7 @@ namespace System.Data.Services.Client
 
         internal static string Serializer_NullKeysAreNotSupported(object p0)
         {
-            return System
-                .Data
+            return System.Data
                 .Services
                 .Client
                 .TextRes
@@ -1683,8 +1545,7 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System
-                    .Data
+                return System.Data
                     .Services
                     .Client
                     .TextRes
@@ -1696,8 +1557,7 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System
-                    .Data
+                return System.Data
                     .Services
                     .Client
                     .TextRes
@@ -1709,8 +1569,7 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System
-                    .Data
+                return System.Data
                     .Services
                     .Client
                     .TextRes
@@ -1720,8 +1579,7 @@ namespace System.Data.Services.Client
 
         internal static string ALinq_UnsupportedExpression(object p0)
         {
-            return System
-                .Data
+            return System.Data
                 .Services
                 .Client
                 .TextRes
@@ -1730,8 +1588,7 @@ namespace System.Data.Services.Client
 
         internal static string ALinq_CouldNotConvert(object p0)
         {
-            return System
-                .Data
+            return System.Data
                 .Services
                 .Client
                 .TextRes
@@ -1740,8 +1597,7 @@ namespace System.Data.Services.Client
 
         internal static string ALinq_MethodNotSupported(object p0)
         {
-            return System
-                .Data
+            return System.Data
                 .Services
                 .Client
                 .TextRes
@@ -1750,8 +1606,7 @@ namespace System.Data.Services.Client
 
         internal static string ALinq_UnaryNotSupported(object p0)
         {
-            return System
-                .Data
+            return System.Data
                 .Services
                 .Client
                 .TextRes
@@ -1760,8 +1615,7 @@ namespace System.Data.Services.Client
 
         internal static string ALinq_BinaryNotSupported(object p0)
         {
-            return System
-                .Data
+            return System.Data
                 .Services
                 .Client
                 .TextRes
@@ -1770,8 +1624,7 @@ namespace System.Data.Services.Client
 
         internal static string ALinq_ConstantNotSupported(object p0)
         {
-            return System
-                .Data
+            return System.Data
                 .Services
                 .Client
                 .TextRes
@@ -1782,8 +1635,7 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System
-                    .Data
+                return System.Data
                     .Services
                     .Client
                     .TextRes
@@ -1795,8 +1647,7 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System
-                    .Data
+                return System.Data
                     .Services
                     .Client
                     .TextRes
@@ -1808,8 +1659,7 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System
-                    .Data
+                return System.Data
                     .Services
                     .Client
                     .TextRes
@@ -1819,8 +1669,7 @@ namespace System.Data.Services.Client
 
         internal static string ALinq_MemberAccessNotSupported(object p0)
         {
-            return System
-                .Data
+            return System.Data
                 .Services
                 .Client
                 .TextRes
@@ -1831,8 +1680,7 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System
-                    .Data
+                return System.Data
                     .Services
                     .Client
                     .TextRes
@@ -1844,8 +1692,7 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System
-                    .Data
+                return System.Data
                     .Services
                     .Client
                     .TextRes
@@ -1857,8 +1704,7 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System
-                    .Data
+                return System.Data
                     .Services
                     .Client
                     .TextRes
@@ -1870,8 +1716,7 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System
-                    .Data
+                return System.Data
                     .Services
                     .Client
                     .TextRes
@@ -1883,8 +1728,7 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System
-                    .Data
+                return System.Data
                     .Services
                     .Client
                     .TextRes
@@ -1896,8 +1740,7 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System
-                    .Data
+                return System.Data
                     .Services
                     .Client
                     .TextRes
@@ -1909,8 +1752,7 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System
-                    .Data
+                return System.Data
                     .Services
                     .Client
                     .TextRes
@@ -1924,8 +1766,7 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System
-                    .Data
+                return System.Data
                     .Services
                     .Client
                     .TextRes
@@ -1935,8 +1776,7 @@ namespace System.Data.Services.Client
 
         internal static string ALinq_CantCastToUnsupportedPrimitive(object p0)
         {
-            return System
-                .Data
+            return System.Data
                 .Services
                 .Client
                 .TextRes
@@ -1950,8 +1790,7 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System
-                    .Data
+                return System.Data
                     .Services
                     .Client
                     .TextRes
@@ -1965,8 +1804,7 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System
-                    .Data
+                return System.Data
                     .Services
                     .Client
                     .TextRes
@@ -1978,8 +1816,7 @@ namespace System.Data.Services.Client
 
         internal static string ALinq_CantTranslateExpression(object p0)
         {
-            return System
-                .Data
+            return System.Data
                 .Services
                 .Client
                 .TextRes
@@ -1988,8 +1825,7 @@ namespace System.Data.Services.Client
 
         internal static string ALinq_TranslationError(object p0)
         {
-            return System
-                .Data
+            return System.Data
                 .Services
                 .Client
                 .TextRes
@@ -2000,8 +1836,7 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System
-                    .Data
+                return System.Data
                     .Services
                     .Client
                     .TextRes
@@ -2011,8 +1846,7 @@ namespace System.Data.Services.Client
 
         internal static string ALinq_CantAddDuplicateQueryOption(object p0)
         {
-            return System
-                .Data
+            return System.Data
                 .Services
                 .Client
                 .TextRes
@@ -2024,8 +1858,7 @@ namespace System.Data.Services.Client
 
         internal static string ALinq_CantAddAstoriaQueryOption(object p0)
         {
-            return System
-                .Data
+            return System.Data
                 .Services
                 .Client
                 .TextRes
@@ -2034,14 +1867,12 @@ namespace System.Data.Services.Client
 
         internal static string ALinq_CantAddQueryOptionStartingWithDollarSign(object p0)
         {
-            return System
-                .Data
+            return System.Data
                 .Services
                 .Client
                 .TextRes
                 .GetString(
-                    System
-                        .Data
+                    System.Data
                         .Services
                         .Client
                         .TextRes
@@ -2052,8 +1883,7 @@ namespace System.Data.Services.Client
 
         internal static string ALinq_CantReferToPublicField(object p0)
         {
-            return System
-                .Data
+            return System.Data
                 .Services
                 .Client
                 .TextRes
@@ -2064,14 +1894,12 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System
-                    .Data
+                return System.Data
                     .Services
                     .Client
                     .TextRes
                     .GetString(
-                        System
-                            .Data
+                        System.Data
                             .Services
                             .Client
                             .TextRes
@@ -2082,8 +1910,7 @@ namespace System.Data.Services.Client
 
         internal static string ALinq_QueryOptionOutOfOrder(object p0, object p1)
         {
-            return System
-                .Data
+            return System.Data
                 .Services
                 .Client
                 .TextRes
@@ -2094,8 +1921,7 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System
-                    .Data
+                return System.Data
                     .Services
                     .Client
                     .TextRes
@@ -2107,8 +1933,7 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System
-                    .Data
+                return System.Data
                     .Services
                     .Client
                     .TextRes
@@ -2122,8 +1947,7 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System
-                    .Data
+                return System.Data
                     .Services
                     .Client
                     .TextRes
@@ -2137,8 +1961,7 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System
-                    .Data
+                return System.Data
                     .Services
                     .Client
                     .TextRes
@@ -2154,8 +1977,7 @@ namespace System.Data.Services.Client
             object p2
         )
         {
-            return System
-                .Data
+            return System.Data
                 .Services
                 .Client
                 .TextRes
@@ -2172,14 +1994,12 @@ namespace System.Data.Services.Client
             object p1
         )
         {
-            return System
-                .Data
+            return System.Data
                 .Services
                 .Client
                 .TextRes
                 .GetString(
-                    System
-                        .Data
+                    System.Data
                         .Services
                         .Client
                         .TextRes
@@ -2191,8 +2011,7 @@ namespace System.Data.Services.Client
 
         internal static string ALinq_ExpressionNotSupportedInProjection(object p0, object p1)
         {
-            return System
-                .Data
+            return System.Data
                 .Services
                 .Client
                 .TextRes
@@ -2207,8 +2026,7 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System
-                    .Data
+                return System.Data
                     .Services
                     .Client
                     .TextRes
@@ -2222,8 +2040,7 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System
-                    .Data
+                return System.Data
                     .Services
                     .Client
                     .TextRes
@@ -2235,8 +2052,7 @@ namespace System.Data.Services.Client
 
         internal static string ALinq_PropertyNamesMustMatchInProjections(object p0, object p1)
         {
-            return System
-                .Data
+            return System.Data
                 .Services
                 .Client
                 .TextRes
@@ -2251,8 +2067,7 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System
-                    .Data
+                return System.Data
                     .Services
                     .Client
                     .TextRes
@@ -2264,8 +2079,7 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System
-                    .Data
+                return System.Data
                     .Services
                     .Client
                     .TextRes
@@ -2279,14 +2093,12 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System
-                    .Data
+                return System.Data
                     .Services
                     .Client
                     .TextRes
                     .GetString(
-                        System
-                            .Data
+                        System.Data
                             .Services
                             .Client
                             .TextRes
@@ -2297,8 +2109,7 @@ namespace System.Data.Services.Client
 
         internal static string HttpWeb_Internal(object p0)
         {
-            return System
-                .Data
+            return System.Data
                 .Services
                 .Client
                 .TextRes
@@ -2307,8 +2118,7 @@ namespace System.Data.Services.Client
 
         internal static string HttpWeb_InternalArgument(object p0, object p1)
         {
-            return System
-                .Data
+            return System.Data
                 .Services
                 .Client
                 .TextRes
@@ -2319,8 +2129,7 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System
-                    .Data
+                return System.Data
                     .Services
                     .Client
                     .TextRes
@@ -2332,14 +2141,12 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System
-                    .Data
+                return System.Data
                     .Services
                     .Client
                     .TextRes
                     .GetString(
-                        System
-                            .Data
+                        System.Data
                             .Services
                             .Client
                             .TextRes
@@ -2352,14 +2159,12 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System
-                    .Data
+                return System.Data
                     .Services
                     .Client
                     .TextRes
                     .GetString(
-                        System
-                            .Data
+                        System.Data
                             .Services
                             .Client
                             .TextRes
@@ -2372,14 +2177,12 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System
-                    .Data
+                return System.Data
                     .Services
                     .Client
                     .TextRes
                     .GetString(
-                        System
-                            .Data
+                        System.Data
                             .Services
                             .Client
                             .TextRes
@@ -2392,14 +2195,12 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System
-                    .Data
+                return System.Data
                     .Services
                     .Client
                     .TextRes
                     .GetString(
-                        System
-                            .Data
+                        System.Data
                             .Services
                             .Client
                             .TextRes
@@ -2412,14 +2213,12 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System
-                    .Data
+                return System.Data
                     .Services
                     .Client
                     .TextRes
                     .GetString(
-                        System
-                            .Data
+                        System.Data
                             .Services
                             .Client
                             .TextRes
@@ -2432,14 +2231,12 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System
-                    .Data
+                return System.Data
                     .Services
                     .Client
                     .TextRes
                     .GetString(
-                        System
-                            .Data
+                        System.Data
                             .Services
                             .Client
                             .TextRes
@@ -2452,14 +2249,12 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System
-                    .Data
+                return System.Data
                     .Services
                     .Client
                     .TextRes
                     .GetString(
-                        System
-                            .Data
+                        System.Data
                             .Services
                             .Client
                             .TextRes
@@ -2472,14 +2267,12 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System
-                    .Data
+                return System.Data
                     .Services
                     .Client
                     .TextRes
                     .GetString(
-                        System
-                            .Data
+                        System.Data
                             .Services
                             .Client
                             .TextRes
@@ -2492,14 +2285,12 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System
-                    .Data
+                return System.Data
                     .Services
                     .Client
                     .TextRes
                     .GetString(
-                        System
-                            .Data
+                        System.Data
                             .Services
                             .Client
                             .TextRes
@@ -2512,14 +2303,12 @@ namespace System.Data.Services.Client
             object p0
         )
         {
-            return System
-                .Data
+            return System.Data
                 .Services
                 .Client
                 .TextRes
                 .GetString(
-                    System
-                        .Data
+                    System.Data
                         .Services
                         .Client
                         .TextRes
@@ -2533,14 +2322,12 @@ namespace System.Data.Services.Client
             object p1
         )
         {
-            return System
-                .Data
+            return System.Data
                 .Services
                 .Client
                 .TextRes
                 .GetString(
-                    System
-                        .Data
+                    System.Data
                         .Services
                         .Client
                         .TextRes
@@ -2552,8 +2339,7 @@ namespace System.Data.Services.Client
 
         internal static string DataBinding_CollectionChangedUnknownAction(object p0)
         {
-            return System
-                .Data
+            return System.Data
                 .Services
                 .Client
                 .TextRes
@@ -2567,14 +2353,12 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System
-                    .Data
+                return System.Data
                     .Services
                     .Client
                     .TextRes
                     .GetString(
-                        System
-                            .Data
+                        System.Data
                             .Services
                             .Client
                             .TextRes
@@ -2585,8 +2369,7 @@ namespace System.Data.Services.Client
 
         internal static string DataBinding_BindingOperation_ArrayItemNull(object p0)
         {
-            return System
-                .Data
+            return System.Data
                 .Services
                 .Client
                 .TextRes
@@ -2598,14 +2381,12 @@ namespace System.Data.Services.Client
 
         internal static string DataBinding_BindingOperation_ArrayItemNotEntity(object p0)
         {
-            return System
-                .Data
+            return System.Data
                 .Services
                 .Client
                 .TextRes
                 .GetString(
-                    System
-                        .Data
+                    System.Data
                         .Services
                         .Client
                         .TextRes
@@ -2616,8 +2397,7 @@ namespace System.Data.Services.Client
 
         internal static string DataBinding_Util_UnknownEntitySetName(object p0)
         {
-            return System
-                .Data
+            return System.Data
                 .Services
                 .Client
                 .TextRes
@@ -2629,8 +2409,7 @@ namespace System.Data.Services.Client
 
         internal static string DataBinding_EntityAlreadyInCollection(object p0)
         {
-            return System
-                .Data
+            return System.Data
                 .Services
                 .Client
                 .TextRes
@@ -2642,8 +2421,7 @@ namespace System.Data.Services.Client
 
         internal static string DataBinding_NotifyPropertyChangedNotImpl(object p0)
         {
-            return System
-                .Data
+            return System.Data
                 .Services
                 .Client
                 .TextRes
@@ -2655,14 +2433,12 @@ namespace System.Data.Services.Client
 
         internal static string DataBinding_ComplexObjectAssociatedWithMultipleEntities(object p0)
         {
-            return System
-                .Data
+            return System.Data
                 .Services
                 .Client
                 .TextRes
                 .GetString(
-                    System
-                        .Data
+                    System.Data
                         .Services
                         .Client
                         .TextRes
@@ -2675,8 +2451,7 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System
-                    .Data
+                return System.Data
                     .Services
                     .Client
                     .TextRes
@@ -2688,8 +2463,7 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System
-                    .Data
+                return System.Data
                     .Services
                     .Client
                     .TextRes
@@ -2703,8 +2477,7 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System
-                    .Data
+                return System.Data
                     .Services
                     .Client
                     .TextRes
@@ -2716,8 +2489,7 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System
-                    .Data
+                return System.Data
                     .Services
                     .Client
                     .TextRes
@@ -2731,14 +2503,12 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System
-                    .Data
+                return System.Data
                     .Services
                     .Client
                     .TextRes
                     .GetString(
-                        System
-                            .Data
+                        System.Data
                             .Services
                             .Client
                             .TextRes
@@ -2749,8 +2519,7 @@ namespace System.Data.Services.Client
 
         internal static string AtomMaterializer_CannotAssignNull(object p0, object p1)
         {
-            return System
-                .Data
+            return System.Data
                 .Services
                 .Client
                 .TextRes
@@ -2765,8 +2534,7 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System
-                    .Data
+                return System.Data
                     .Services
                     .Client
                     .TextRes
@@ -2778,14 +2546,12 @@ namespace System.Data.Services.Client
 
         internal static string AtomMaterializer_EntryIntoCollectionMismatch(object p0, object p1)
         {
-            return System
-                .Data
+            return System.Data
                 .Services
                 .Client
                 .TextRes
                 .GetString(
-                    System
-                        .Data
+                    System.Data
                         .Services
                         .Client
                         .TextRes
@@ -2797,8 +2563,7 @@ namespace System.Data.Services.Client
 
         internal static string AtomMaterializer_EntryToAccessIsNull(object p0)
         {
-            return System
-                .Data
+            return System.Data
                 .Services
                 .Client
                 .TextRes
@@ -2810,8 +2575,7 @@ namespace System.Data.Services.Client
 
         internal static string AtomMaterializer_EntryToInitializeIsNull(object p0)
         {
-            return System
-                .Data
+            return System.Data
                 .Services
                 .Client
                 .TextRes
@@ -2827,8 +2591,7 @@ namespace System.Data.Services.Client
             object p2
         )
         {
-            return System
-                .Data
+            return System.Data
                 .Services
                 .Client
                 .TextRes
@@ -2844,8 +2607,7 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System
-                    .Data
+                return System.Data
                     .Services
                     .Client
                     .TextRes
@@ -2857,8 +2619,7 @@ namespace System.Data.Services.Client
 
         internal static string AtomMaterializer_PropertyMissing(object p0)
         {
-            return System
-                .Data
+            return System.Data
                 .Services
                 .Client
                 .TextRes
@@ -2870,8 +2631,7 @@ namespace System.Data.Services.Client
 
         internal static string AtomMaterializer_PropertyMissingFromEntry(object p0, object p1)
         {
-            return System
-                .Data
+            return System.Data
                 .Services
                 .Client
                 .TextRes
@@ -2884,8 +2644,7 @@ namespace System.Data.Services.Client
 
         internal static string AtomMaterializer_PropertyNotExpectedEntry(object p0, object p1)
         {
-            return System
-                .Data
+            return System.Data
                 .Services
                 .Client
                 .TextRes
@@ -2900,14 +2659,12 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System
-                    .Data
+                return System.Data
                     .Services
                     .Client
                     .TextRes
                     .GetString(
-                        System
-                            .Data
+                        System.Data
                             .Services
                             .Client
                             .TextRes

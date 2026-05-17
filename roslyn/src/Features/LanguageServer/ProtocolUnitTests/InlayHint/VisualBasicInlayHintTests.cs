@@ -67,8 +67,7 @@ End Class";
                     },
                 }
             );
-            testLspServer
-                .TestWorkspace
+            testLspServer.TestWorkspace
                 .GlobalOptions
                 .SetGlobalOption(
                     InlineHintsOptionsStorage.EnabledForParameters,

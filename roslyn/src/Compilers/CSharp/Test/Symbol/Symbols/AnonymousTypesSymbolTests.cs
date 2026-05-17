@@ -1041,8 +1041,7 @@ class Query
             for (int i = 0; i < cnt; i++)
             {
                 TestAnonymousType(
-                    module
-                        .GlobalNamespace
+                    module.GlobalNamespace
                         .GetMember<NamedTypeSymbol>("<>f__AnonymousType" + i.ToString()),
                     i,
                     typeDescrs[i]
@@ -1559,8 +1558,7 @@ class Class3
 ";
             var compilation = CreateCompilationWithMscorlib40(
                 new string[] { source1, source2, source3 },
-                options: TestOptions
-                    .ReleaseDll
+                options: TestOptions.ReleaseDll
                     .WithMetadataImportOptions(MetadataImportOptions.Internal),
                 parseOptions: TestOptions.Regular
             );
@@ -1571,8 +1569,7 @@ class Class3
                     compilation,
                     symbolValidator: module =>
                     {
-                        var types = module
-                            .GlobalNamespace
+                        var types = module.GlobalNamespace
                             .GetTypeMembers()
                             .Where(t => t.Name.StartsWith("<>", StringComparison.Ordinal))
                             .Select(t => t.ToDisplayString())
@@ -1901,8 +1898,7 @@ class Program
             );
             var result = comp.Emit(new MemoryStream());
 
-            result
-                .Diagnostics
+            result.Diagnostics
                 .Verify(
                     // error CS0656: Missing compiler required member 'System.Object.Equals'
                     Diagnostic(ErrorCode.ERR_MissingPredefinedMember)
@@ -1971,8 +1967,7 @@ class Program
             );
             var result = comp.Emit(new MemoryStream());
 
-            result
-                .Diagnostics
+            result.Diagnostics
                 .Verify(
                     // error CS0656: Missing compiler required member 'System.Object.Equals'
                     Diagnostic(ErrorCode.ERR_MissingPredefinedMember)

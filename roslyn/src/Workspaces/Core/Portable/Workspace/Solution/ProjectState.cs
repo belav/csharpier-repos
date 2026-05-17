@@ -122,8 +122,7 @@ namespace Microsoft.CodeAnalysis
             if (projectInfoFixed.CompilationOptions != null)
             {
                 projectInfoFixed = projectInfoFixed.WithCompilationOptions(
-                    projectInfoFixed
-                        .CompilationOptions
+                    projectInfoFixed.CompilationOptions
                         .WithSyntaxTreeOptionsProvider(
                             new ProjectSyntaxTreeOptionsProvider(_lazyAnalyzerConfigOptions)
                         )
@@ -413,8 +412,7 @@ namespace Microsoft.CodeAnalysis
                 CancellationToken cancellationToken
             )
             {
-                var cache = await projectState
-                    ._lazyAnalyzerConfigOptions
+                var cache = await projectState._lazyAnalyzerConfigOptions
                     .GetValueAsync(cancellationToken)
                     .ConfigureAwait(false);
                 return GetOptions(cache, documentState);
@@ -603,8 +601,7 @@ namespace Microsoft.CodeAnalysis
             return new AsyncLazy<AnalyzerConfigOptionsCache>(
                 asynchronousComputeFunction: async cancellationToken =>
                 {
-                    var tasks = analyzerConfigDocumentStates
-                        .States
+                    var tasks = analyzerConfigDocumentStates.States
                         .Values
                         .Select(a => a.GetAnalyzerConfigAsync(cancellationToken));
                     var analyzerConfigs = await Task.WhenAll(tasks).ConfigureAwait(false);

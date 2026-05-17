@@ -51,9 +51,8 @@ namespace System.ServiceModel.Syndication
             this.type = string.IsNullOrEmpty(this.type) ? Atom10Constants.XmlMediaType : this.type;
             this.contentBuffer = new XmlBuffer(int.MaxValue);
             using (
-                XmlDictionaryWriter writer = this.contentBuffer.OpenSection(
-                    XmlDictionaryReaderQuotas.Max
-                )
+                XmlDictionaryWriter writer = this.contentBuffer
+                    .OpenSection(XmlDictionaryReaderQuotas.Max)
             )
             {
                 writer.WriteNode(reader, false);

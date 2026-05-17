@@ -59,8 +59,7 @@ namespace System.ServiceModel.Diagnostics
                         xml.WriteStartElement("Security");
                         xml.WriteElementString(
                             "IsAnonymous",
-                            message
-                                .Properties
+                            message.Properties
                                 .Security
                                 .ServiceSecurityContext
                                 .IsAnonymous
@@ -70,8 +69,7 @@ namespace System.ServiceModel.Diagnostics
                             message.Properties.Security.ServiceSecurityContext.WindowsIdentity
                                 != null
                             && !string.IsNullOrEmpty(
-                                message
-                                    .Properties
+                                message.Properties
                                     .Security
                                     .ServiceSecurityContext
                                     .WindowsIdentity
@@ -84,8 +82,7 @@ namespace System.ServiceModel.Diagnostics
                         if (DiagnosticUtility.ShouldTraceVerbose)
                         {
                             xml.WriteStartElement("Claims");
-                            AuthorizationContext authContext = message
-                                .Properties
+                            AuthorizationContext authContext = message.Properties
                                 .Security
                                 .ServiceSecurityContext
                                 .AuthorizationContext;

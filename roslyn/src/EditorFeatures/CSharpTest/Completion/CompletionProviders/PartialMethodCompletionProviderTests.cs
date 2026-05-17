@@ -939,8 +939,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
             using var workspaceFixture = GetOrCreateWorkspaceFixture();
 
             var workspace = workspaceFixture.Target.GetWorkspace(GetComposition());
-            workspace
-                .GlobalOptions
+            workspace.GlobalOptions
                 .SetGlobalOption(
                     CSharpCodeStyleOptions.PreferExpressionBodiedMethods,
                     new CodeStyleOption2<ExpressionBodyPreference>(
@@ -976,8 +975,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
             using var workspaceFixture = GetOrCreateWorkspaceFixture();
 
             var workspace = workspaceFixture.Target.GetWorkspace(GetComposition());
-            workspace
-                .GlobalOptions
+            workspace.GlobalOptions
                 .SetGlobalOption(
                     CSharpCodeStyleOptions.PreferExpressionBodiedMethods,
                     new CodeStyleOption2<ExpressionBodyPreference>(

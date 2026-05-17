@@ -33,8 +33,7 @@ namespace Microsoft.Extensions.DependencyInjection
             ThrowHelper.ThrowIfNull(builder);
             ThrowHelper.ThrowIfNull(configureClient);
 
-            builder
-                .Services
+            builder.Services
                 .Configure<HttpClientFactoryOptions>(
                     builder.Name,
                     options => options.HttpClientActions.Add(configureClient)
@@ -61,16 +60,14 @@ namespace Microsoft.Extensions.DependencyInjection
             ThrowHelper.ThrowIfNull(builder);
             ThrowHelper.ThrowIfNull(configureClient);
 
-            builder
-                .Services
+            builder.Services
                 .AddTransient<IConfigureOptions<HttpClientFactoryOptions>>(services =>
                 {
                     return new ConfigureNamedOptions<HttpClientFactoryOptions>(
                         builder.Name,
                         (options) =>
                         {
-                            options
-                                .HttpClientActions
+                            options.HttpClientActions
                                 .Add(client => configureClient(services, client));
                         }
                     );
@@ -97,14 +94,12 @@ namespace Microsoft.Extensions.DependencyInjection
             ThrowHelper.ThrowIfNull(builder);
             ThrowHelper.ThrowIfNull(configureHandler);
 
-            builder
-                .Services
+            builder.Services
                 .Configure<HttpClientFactoryOptions>(
                     builder.Name,
                     options =>
                     {
-                        options
-                            .HttpMessageHandlerBuilderActions
+                        options.HttpMessageHandlerBuilderActions
                             .Add(b => b.AdditionalHandlers.Add(configureHandler()));
                     }
                 );
@@ -135,14 +130,12 @@ namespace Microsoft.Extensions.DependencyInjection
             ThrowHelper.ThrowIfNull(builder);
             ThrowHelper.ThrowIfNull(configureHandler);
 
-            builder
-                .Services
+            builder.Services
                 .Configure<HttpClientFactoryOptions>(
                     builder.Name,
                     options =>
                     {
-                        options
-                            .HttpMessageHandlerBuilderActions
+                        options.HttpMessageHandlerBuilderActions
                             .Add(b => b.AdditionalHandlers.Add(configureHandler(b.Services)));
                     }
                 );
@@ -171,14 +164,12 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             ThrowHelper.ThrowIfNull(builder);
 
-            builder
-                .Services
+            builder.Services
                 .Configure<HttpClientFactoryOptions>(
                     builder.Name,
                     options =>
                     {
-                        options
-                            .HttpMessageHandlerBuilderActions
+                        options.HttpMessageHandlerBuilderActions
                             .Add(b =>
                                 b.AdditionalHandlers.Add(b.Services.GetRequiredService<THandler>())
                             );
@@ -207,14 +198,12 @@ namespace Microsoft.Extensions.DependencyInjection
             ThrowHelper.ThrowIfNull(builder);
             ThrowHelper.ThrowIfNull(configureHandler);
 
-            builder
-                .Services
+            builder.Services
                 .Configure<HttpClientFactoryOptions>(
                     builder.Name,
                     options =>
                     {
-                        options
-                            .HttpMessageHandlerBuilderActions
+                        options.HttpMessageHandlerBuilderActions
                             .Add(b => b.PrimaryHandler = configureHandler());
                     }
                 );
@@ -247,14 +236,12 @@ namespace Microsoft.Extensions.DependencyInjection
             ThrowHelper.ThrowIfNull(builder);
             ThrowHelper.ThrowIfNull(configureHandler);
 
-            builder
-                .Services
+            builder.Services
                 .Configure<HttpClientFactoryOptions>(
                     builder.Name,
                     options =>
                     {
-                        options
-                            .HttpMessageHandlerBuilderActions
+                        options.HttpMessageHandlerBuilderActions
                             .Add(b => b.PrimaryHandler = configureHandler(b.Services));
                     }
                 );
@@ -284,14 +271,12 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             ThrowHelper.ThrowIfNull(builder);
 
-            builder
-                .Services
+            builder.Services
                 .Configure<HttpClientFactoryOptions>(
                     builder.Name,
                     options =>
                     {
-                        options
-                            .HttpMessageHandlerBuilderActions
+                        options.HttpMessageHandlerBuilderActions
                             .Add(b => b.PrimaryHandler = b.Services.GetRequiredService<THandler>());
                     }
                 );
@@ -320,14 +305,12 @@ namespace Microsoft.Extensions.DependencyInjection
             ThrowHelper.ThrowIfNull(builder);
             ThrowHelper.ThrowIfNull(configureHandler);
 
-            builder
-                .Services
+            builder.Services
                 .Configure<HttpClientFactoryOptions>(
                     builder.Name,
                     options =>
                     {
-                        options
-                            .HttpMessageHandlerBuilderActions
+                        options.HttpMessageHandlerBuilderActions
                             .Add(b => configureHandler(b.PrimaryHandler, b.Services));
                     }
                 );
@@ -353,8 +336,7 @@ namespace Microsoft.Extensions.DependencyInjection
             ThrowHelper.ThrowIfNull(builder);
             ThrowHelper.ThrowIfNull(configureBuilder);
 
-            builder
-                .Services
+            builder.Services
                 .Configure<HttpClientFactoryOptions>(
                     builder.Name,
                     options => options.HttpMessageHandlerBuilderActions.Add(configureBuilder)
@@ -387,14 +369,12 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             ThrowHelper.ThrowIfNull(builder);
 
-            builder
-                .Services
+            builder.Services
                 .Configure<HttpClientFactoryOptions>(
                     builder.Name,
                     options =>
                     {
-                        options
-                            .HttpMessageHandlerBuilderActions
+                        options.HttpMessageHandlerBuilderActions
                             .Add(b =>
                             {
                                 if (b.PrimaryHandler is not SocketsHttpHandler handler)
@@ -570,8 +550,7 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             ReserveClient(builder, typeof(TClient), builder.Name, validateSingleType);
 
-            builder
-                .Services
+            builder.Services
                 .AddTransient(s => AddTransientHelper<TClient, TImplementation>(s, builder));
 
             return builder;
@@ -640,8 +619,7 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             ReserveClient(builder, typeof(TClient), builder.Name, validateSingleType);
 
-            builder
-                .Services
+            builder.Services
                 .AddTransient<TClient>(s =>
                 {
                     IHttpClientFactory httpClientFactory =
@@ -699,8 +677,7 @@ namespace Microsoft.Extensions.DependencyInjection
 
             ReserveClient(builder, typeof(TClient), builder.Name, validateSingleType);
 
-            builder
-                .Services
+            builder.Services
                 .AddTransient<TClient>(s =>
                 {
                     IHttpClientFactory httpClientFactory =
@@ -729,8 +706,7 @@ namespace Microsoft.Extensions.DependencyInjection
             ThrowHelper.ThrowIfNull(builder);
             ThrowHelper.ThrowIfNull(shouldRedactHeaderValue);
 
-            builder
-                .Services
+            builder.Services
                 .Configure<HttpClientFactoryOptions>(
                     builder.Name,
                     options =>
@@ -756,8 +732,7 @@ namespace Microsoft.Extensions.DependencyInjection
             ThrowHelper.ThrowIfNull(builder);
             ThrowHelper.ThrowIfNull(redactedLoggedHeaderNames);
 
-            builder
-                .Services
+            builder.Services
                 .Configure<HttpClientFactoryOptions>(
                     builder.Name,
                     options =>
@@ -817,8 +792,7 @@ namespace Microsoft.Extensions.DependencyInjection
                 );
             }
 
-            builder
-                .Services
+            builder.Services
                 .Configure<HttpClientFactoryOptions>(
                     builder.Name,
                     options => options.HandlerLifetime = handlerLifetime
@@ -841,14 +815,12 @@ namespace Microsoft.Extensions.DependencyInjection
             ThrowHelper.ThrowIfNull(builder);
             ThrowHelper.ThrowIfNull(configureAdditionalHandlers);
 
-            builder
-                .Services
+            builder.Services
                 .Configure<HttpClientFactoryOptions>(
                     builder.Name,
                     options =>
                     {
-                        options
-                            .HttpMessageHandlerBuilderActions
+                        options.HttpMessageHandlerBuilderActions
                             .Add(b =>
                                 configureAdditionalHandlers(b.AdditionalHandlers, b.Services)
                             );
@@ -867,8 +839,7 @@ namespace Microsoft.Extensions.DependencyInjection
         )
         {
             var registry = (HttpClientMappingRegistry?)
-                builder
-                    .Services
+                builder.Services
                     .Single(sd => sd.ServiceType == typeof(HttpClientMappingRegistry))
                     .ImplementationInstance;
             Debug.Assert(registry != null);

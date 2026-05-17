@@ -82,8 +82,7 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                 return false;
             }
 
-            return property1
-                .Parameters
+            return property1.Parameters
                 .SequenceEqual(property2.Parameters, this.ParameterEquivalenceComparer);
         }
 
@@ -167,8 +166,7 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             for (var i = 0; i < parameters1.Count; ++i)
             {
                 if (
-                    !_symbolEquivalenceComparer
-                        .ParameterEquivalenceComparer
+                    !_symbolEquivalenceComparer.ParameterEquivalenceComparer
                         .Equals(
                             parameters1[i],
                             parameters2[i],
@@ -210,10 +208,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
 
                     return property1.ReturnsByRef == property2.ReturnsByRef
                         && property1.ReturnsByRefReadonly == property2.ReturnsByRefReadonly
-                        && this.SignatureTypeEquivalenceComparer.Equals(
-                            property1.Type,
-                            property2.Type
-                        )
+                        && this.SignatureTypeEquivalenceComparer
+                            .Equals(property1.Type, property2.Type)
                         && HaveSameAccessors(property1, property2);
                 case SymbolKind.Event:
                     var ev1 = (IEventSymbol)symbol1;
@@ -274,10 +270,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
 
             if (
                 !method1.ReturnsVoid
-                && !this.SignatureTypeEquivalenceComparer.Equals(
-                    method1.ReturnType,
-                    method2.ReturnType
-                )
+                && !this.SignatureTypeEquivalenceComparer
+                    .Equals(method1.ReturnType, method2.ReturnType)
             )
                 return false;
 
@@ -313,8 +307,7 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                 return false;
             }
 
-            return typeParameter1
-                .ConstraintTypes
+            return typeParameter1.ConstraintTypes
                 .SetEquals(typeParameter2.ConstraintTypes, this.SignatureTypeEquivalenceComparer);
         }
 

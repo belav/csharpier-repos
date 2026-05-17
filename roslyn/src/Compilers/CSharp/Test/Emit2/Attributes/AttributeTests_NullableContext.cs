@@ -227,8 +227,7 @@ public class Program
                 comp,
                 symbolValidator: module =>
                 {
-                    var attributeType = module
-                        .GlobalNamespace
+                    var attributeType = module.GlobalNamespace
                         .GetMember<NamedTypeSymbol>(
                             "System.Runtime.CompilerServices.NullableContextAttribute"
                         );

@@ -78,8 +78,7 @@ namespace System.ServiceModel.Channels
         {
             if (!securityUpgraded)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(SR.OperationInvalidBeforeSecurityNegotiation)

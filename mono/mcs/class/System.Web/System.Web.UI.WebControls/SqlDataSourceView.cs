@@ -241,8 +241,7 @@ namespace System.Web.UI.WebControls
             {
                 command.CommandType = CommandType.StoredProcedure;
                 if (SortParameterName.Length > 0 && arguments.SortExpression.Length > 0)
-                    command
-                        .Parameters
+                    command.Parameters
                         .Add(CreateDbParameter(SortParameterName, arguments.SortExpression));
             }
 
@@ -554,8 +553,7 @@ namespace System.Web.UI.WebControls
                 }
                 else
                 {
-                    command
-                        .Parameters
+                    command.Parameters
                         .Add(
                             CreateDbParameter(
                                 p.Name,
@@ -578,12 +576,10 @@ namespace System.Web.UI.WebControls
             {
                 foreach (DictionaryEntry de in oldValues)
                     if (
-                        !command
-                            .Parameters
+                        !command.Parameters
                             .Contains(ParameterPrefix + FormatOldParameter((string)de.Key))
                     )
-                        command
-                            .Parameters
+                        command.Parameters
                             .Add(CreateDbParameter(FormatOldParameter((string)de.Key), de.Value));
             }
         }

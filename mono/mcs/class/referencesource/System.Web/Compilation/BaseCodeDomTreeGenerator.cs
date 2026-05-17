@@ -187,8 +187,7 @@ namespace System.Web.Compilation
             // [EditorBrowsable(EditorBrowsableState.Never)]
             CodeAttributeDeclaration editorBrowsableAttribute = new CodeAttributeDeclaration();
             editorBrowsableAttribute.Name = typeof(EditorBrowsableAttribute).FullName;
-            editorBrowsableAttribute
-                .Arguments
+            editorBrowsableAttribute.Arguments
                 .Add(
                     new CodeAttributeArgument(
                         new CodeFieldReferenceExpression(
@@ -303,8 +302,7 @@ namespace System.Web.Compilation
                     _sourceDataClass = new CodeTypeDeclaration(generatedClassName);
                     // VSWhidbey 411701. Always use global type reference for the baseType
                     // when codefile is present.
-                    _sourceDataClass
-                        .BaseTypes
+                    _sourceDataClass.BaseTypes
                         .Add(
                             CodeDomUtility.BuildGlobalCodeTypeReference(
                                 Util.MakeFullTypeName(Parser.BaseTypeNamespace, Parser.BaseTypeName)
@@ -319,8 +317,7 @@ namespace System.Web.Compilation
                 // The page is not using code besides
 
                 _intermediateClass = new CodeTypeDeclaration(generatedClassName);
-                _intermediateClass
-                    .BaseTypes
+                _intermediateClass.BaseTypes
                     .Add(CodeDomUtility.BuildGlobalCodeTypeReference(Parser.BaseType));
                 _sourceDataNamespace.Types.Add(_intermediateClass);
 
@@ -465,8 +462,7 @@ namespace System.Web.Compilation
 
             this.BuildInitStatements(initializedCondition.TrueStatements, _ctor.Statements);
 
-            initializedCondition
-                .TrueStatements
+            initializedCondition.TrueStatements
                 .Add(
                     new CodeAssignStatement(
                         new CodeFieldReferenceExpression(_classTypeExpr, initializedFieldName),
@@ -552,9 +548,8 @@ namespace System.Web.Compilation
             );
             propRef = new CodePropertyReferenceExpression(propRef, "Profile");
 
-            prop.GetStatements.Add(
-                new CodeMethodReturnStatement(new CodeCastExpression(typeName, propRef))
-            );
+            prop.GetStatements
+                .Add(new CodeMethodReturnStatement(new CodeCastExpression(typeName, propRef)));
             _intermediateClass.Members.Add(prop);
         }
 
@@ -584,9 +579,10 @@ namespace System.Web.Compilation
             prop.Name = propName;
             prop.Type = new CodeTypeReference(propType);
             prop.GetStatements.Add(new CodeMethodReturnStatement(fieldRef));
-            prop.SetStatements.Add(
-                new CodeAssignStatement(fieldRef, new CodePropertySetValueReferenceExpression())
-            );
+            prop.SetStatements
+                .Add(
+                    new CodeAssignStatement(fieldRef, new CodePropertySetValueReferenceExpression())
+                );
 
             if (attrDeclarations != null)
             {
@@ -728,11 +724,12 @@ namespace System.Web.Compilation
                     CodeMemberProperty prop = new CodeMemberProperty();
                     prop.Name = entry.Name;
                     prop.Type = new CodeTypeReference(declaredType);
-                    prop.GetStatements.Add(
-                        new CodeMethodReturnStatement(
-                            new CodeCastExpression(declaredType, getObject)
-                        )
-                    );
+                    prop.GetStatements
+                        .Add(
+                            new CodeMethodReturnStatement(
+                                new CodeCastExpression(declaredType, getObject)
+                            )
+                        );
                     _sourceDataClass.Members.Add(prop);
                 }
             }

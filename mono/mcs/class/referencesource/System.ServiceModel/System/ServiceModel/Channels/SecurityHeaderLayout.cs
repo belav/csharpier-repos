@@ -29,8 +29,7 @@ namespace System.ServiceModel.Channels
         {
             if (!IsDefined(value))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidEnumArgumentException(
                             "value",

@@ -248,8 +248,7 @@ class {|caret:ABC|}
             );
 
             var testWorkspace = testLspServer.TestWorkspace;
-            var documentBefore = testWorkspace
-                .CurrentSolution
+            var documentBefore = testWorkspace.CurrentSolution
                 .GetDocument(testWorkspace.Documents.Single().Id);
             var documentUriBefore = documentBefore.GetUriForRenamedDocument();
 
@@ -258,8 +257,7 @@ class {|caret:ABC|}
                 unresolvedCodeAction
             );
 
-            var documentAfter = testWorkspace
-                .CurrentSolution
+            var documentAfter = testWorkspace.CurrentSolution
                 .GetDocument(testWorkspace.Documents.Single().Id);
             var documentUriAfter = documentBefore.WithName("ABC.cs").GetUriForRenamedDocument();
 
@@ -470,8 +468,7 @@ class BCD
             var newDocumentUri = ProtocolConversions.CreateAbsoluteUri(
                 Path.Combine(Path.GetDirectoryName(project.FilePath), "ABC.cs")
             );
-            var existingDocumentUri = testWorkspace
-                .CurrentSolution
+            var existingDocumentUri = testWorkspace.CurrentSolution
                 .GetRequiredDocument(testWorkspace.Documents.Single().Id)
                 .GetURI();
             var workspaceEdit = new WorkspaceEdit()
@@ -615,8 +612,7 @@ class {|caret:BCD|}
                 unresolvedCodeAction
             );
 
-            var existingDocument = testWorkspace
-                .CurrentSolution
+            var existingDocument = testWorkspace.CurrentSolution
                 .GetRequiredDocument(testWorkspace.Documents.Single().Id);
             var existingDocumentUri = existingDocument.GetURI();
 

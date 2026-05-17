@@ -35,8 +35,7 @@ public class AcceptLanguageHeaderRequestCultureProviderTest
                         );
                         app.Run(context =>
                         {
-                            var requestCultureFeature = context
-                                .Features
+                            var requestCultureFeature = context.Features
                                 .Get<IRequestCultureFeature>();
                             var requestCulture = requestCultureFeature.RequestCulture;
                             Assert.Equal("ar-SA", requestCulture.Culture.Name);
@@ -81,8 +80,7 @@ public class AcceptLanguageHeaderRequestCultureProviderTest
                         );
                         app.Run(context =>
                         {
-                            var requestCultureFeature = context
-                                .Features
+                            var requestCultureFeature = context.Features
                                 .Get<IRequestCultureFeature>();
                             var requestCulture = requestCultureFeature.RequestCulture;
                             Assert.Equal("ar-SA", requestCulture.Culture.Name);
@@ -126,8 +124,7 @@ public class AcceptLanguageHeaderRequestCultureProviderTest
                         );
                         app.Run(context =>
                         {
-                            var requestCultureFeature = context
-                                .Features
+                            var requestCultureFeature = context.Features
                                 .Get<IRequestCultureFeature>();
                             var requestCulture = requestCultureFeature.RequestCulture;
                             Assert.Equal("fr-FR", requestCulture.Culture.Name);
@@ -175,8 +172,7 @@ public class AcceptLanguageHeaderRequestCultureProviderTest
                         );
                         app.Run(context =>
                         {
-                            var requestCultureFeature = context
-                                .Features
+                            var requestCultureFeature = context.Features
                                 .Get<IRequestCultureFeature>();
                             var requestCulture = requestCultureFeature.RequestCulture;
 

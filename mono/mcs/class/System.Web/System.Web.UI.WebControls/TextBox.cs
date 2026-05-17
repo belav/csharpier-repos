@@ -173,10 +173,8 @@ namespace System.Web.UI.WebControls
 
                 if (page != null)
                 {
-                    string onchange = page.ClientScript.GetPostBackEventReference(
-                        GetPostBackOptions(),
-                        true
-                    );
+                    string onchange = page.ClientScript
+                        .GetPostBackEventReference(GetPostBackOptions(), true);
                     onchange = String.Concat(
                         "setTimeout('",
                         onchange.Replace("\\", "\\\\").Replace("'", "\\'"),
@@ -314,12 +312,13 @@ namespace System.Web.UI.WebControls
                 script.AppendLine("\t}");
                 script.AppendLine("\treturn true;");
                 script.AppendLine("}");
-                Page.ClientScript.RegisterClientScriptBlock(
-                    typeof(TextBox),
-                    "KeyHandler",
-                    script.ToString(),
-                    true
-                );
+                Page.ClientScript
+                    .RegisterClientScriptBlock(
+                        typeof(TextBox),
+                        "KeyHandler",
+                        script.ToString(),
+                        true
+                    );
             }
         }
 

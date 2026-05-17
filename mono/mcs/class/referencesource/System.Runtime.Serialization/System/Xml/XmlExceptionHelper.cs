@@ -50,8 +50,7 @@ namespace System.Xml
                 TD.ReaderQuotaExceeded(s);
             }
 
-            throw System
-                .Runtime
+            throw System.Runtime
                 .Serialization
                 .DiagnosticUtility
                 .ExceptionUtility
@@ -66,8 +65,7 @@ namespace System.Xml
             {
                 s += " " + SR.GetString(SR.XmlLineInfo, lineInfo.LineNumber, lineInfo.LinePosition);
             }
-            throw System
-                .Runtime
+            throw System.Runtime
                 .Serialization
                 .DiagnosticUtility
                 .ExceptionUtility

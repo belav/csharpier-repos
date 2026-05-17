@@ -154,30 +154,33 @@ namespace System.ServiceModel.Discovery
         {
             var schema = new XmlSchema() { TargetNamespace = version.Namespace };
             var ccr = new XmlSchemaComplexContentRestriction();
-            ccr.Attributes.Add(
-                new XmlSchemaAttribute()
-                {
-                    Name = "InstanceId",
-                    SchemaTypeName = new XmlQualifiedName("unsignedInt", XmlSchema.Namespace),
-                    Use = XmlSchemaUse.Required,
-                }
-            );
-            ccr.Attributes.Add(
-                new XmlSchemaAttribute()
-                {
-                    Name = "SequenceId",
-                    SchemaTypeName = new XmlQualifiedName("anyURI", XmlSchema.Namespace),
-                    Use = XmlSchemaUse.Optional,
-                }
-            );
-            ccr.Attributes.Add(
-                new XmlSchemaAttribute()
-                {
-                    Name = "MessageNumber",
-                    SchemaTypeName = new XmlQualifiedName("unsignedInt", XmlSchema.Namespace),
-                    Use = XmlSchemaUse.Required,
-                }
-            );
+            ccr.Attributes
+                .Add(
+                    new XmlSchemaAttribute()
+                    {
+                        Name = "InstanceId",
+                        SchemaTypeName = new XmlQualifiedName("unsignedInt", XmlSchema.Namespace),
+                        Use = XmlSchemaUse.Required,
+                    }
+                );
+            ccr.Attributes
+                .Add(
+                    new XmlSchemaAttribute()
+                    {
+                        Name = "SequenceId",
+                        SchemaTypeName = new XmlQualifiedName("anyURI", XmlSchema.Namespace),
+                        Use = XmlSchemaUse.Optional,
+                    }
+                );
+            ccr.Attributes
+                .Add(
+                    new XmlSchemaAttribute()
+                    {
+                        Name = "MessageNumber",
+                        SchemaTypeName = new XmlQualifiedName("unsignedInt", XmlSchema.Namespace),
+                        Use = XmlSchemaUse.Required,
+                    }
+                );
             var ct = new XmlSchemaComplexType()
             {
                 Name = "AppSequenceType",

@@ -601,13 +601,11 @@ namespace System.Web.Services.Description
             codeClass.Comments.Add(new CodeCommentStatement(Res.GetString(Res.CodeRemarks), true));
             if (Style == ServiceDescriptionImportStyle.Client)
             {
-                codeClass
-                    .CustomAttributes
+                codeClass.CustomAttributes
                     .Add(
                         new CodeAttributeDeclaration(typeof(DebuggerStepThroughAttribute).FullName)
                     );
-                codeClass
-                    .CustomAttributes
+                codeClass.CustomAttributes
                     .Add(
                         new CodeAttributeDeclaration(
                             typeof(DesignerCategoryAttribute).FullName,
@@ -627,8 +625,7 @@ namespace System.Web.Services.Description
                     Service != null
                         ? Service.ServiceDescription.TargetNamespace
                         : Binding.ServiceDescription.TargetNamespace;
-                webService
-                    .Arguments
+                webService.Arguments
                     .Add(
                         new CodeAttributeArgument(
                             "Namespace",
@@ -641,16 +638,14 @@ namespace System.Web.Services.Description
             CodeAttributeDeclaration attribute = new CodeAttributeDeclaration(
                 typeof(WebServiceBindingAttribute).FullName
             );
-            attribute
-                .Arguments
+            attribute.Arguments
                 .Add(
                     new CodeAttributeArgument(
                         "Name",
                         new CodePrimitiveExpression(XmlConvert.DecodeName(Binding.Name))
                     )
                 );
-            attribute
-                .Arguments
+            attribute.Arguments
                 .Add(
                     new CodeAttributeArgument(
                         "Namespace",
@@ -735,8 +730,7 @@ namespace System.Web.Services.Description
         {
             if (extensions == null)
             {
-                TypeElementCollection extensionTypes = WebServicesSection
-                    .Current
+                TypeElementCollection extensionTypes = WebServicesSection.Current
                     .SoapExtensionImporterTypes;
                 extensions = new SoapExtensionImporter[extensionTypes.Count];
                 for (int i = 0; i < extensions.Length; i++)
@@ -1332,8 +1326,7 @@ namespace System.Web.Services.Description
                     | (Style == ServiceDescriptionImportStyle.Client ? 0 : CodeFlags.IsAbstract)
             );
 
-            mainCodeMethod
-                .Comments
+            mainCodeMethod.Comments
                 .Add(new CodeCommentStatement(Res.GetString(Res.CodeRemarks), true));
 
             if (parameters.Return != null)
@@ -1354,8 +1347,7 @@ namespace System.Web.Services.Description
 
                 if (
                     mainCodeMethod.ReturnTypeCustomAttributes.Count != 0
-                    && !ServiceImporter
-                        .CodeGenerator
+                    && !ServiceImporter.CodeGenerator
                         .Supports(GeneratorSupport.ReturnTypeAttributes)
                 )
                 {
@@ -1433,8 +1425,7 @@ namespace System.Web.Services.Description
                         CodeFlags.IsPublic
                     );
 
-                    beginCodeMethod
-                        .Comments
+                    beginCodeMethod.Comments
                         .Add(new CodeCommentStatement(Res.GetString(Res.CodeRemarks), true));
 
                     invokeParams = new CodeExpression[4];
@@ -1495,8 +1486,7 @@ namespace System.Web.Services.Description
                         CodeFlags.IsPublic
                     );
 
-                    codeMethod
-                        .Comments
+                    codeMethod.Comments
                         .Add(new CodeCommentStatement(Res.GetString(Res.CodeRemarks), true));
 
                     CodeExpression invokeParam = new CodeArgumentReferenceExpression("asyncResult");
@@ -1658,8 +1648,7 @@ namespace System.Web.Services.Description
                                     delegateInfo.handlerArgs,
                                     asyncReturnTypes,
                                     asyncReturnNames,
-                                    ServiceImporter
-                                        .CodeGenerator
+                                    ServiceImporter.CodeGenerator
                                         .Supports(GeneratorSupport.PartialTypes)
                                 )
                             );
@@ -1684,8 +1673,7 @@ namespace System.Web.Services.Description
             }
             else
             {
-                codeMethod
-                    .Statements
+                codeMethod.Statements
                     .Add(
                         new CodeVariableDeclarationStatement(typeof(object[]), resultsName, invoke)
                     );
@@ -1698,8 +1686,7 @@ namespace System.Web.Services.Description
                     CodeExpression value = new CodeArrayIndexerExpression();
                     ((CodeArrayIndexerExpression)value).TargetObject =
                         new CodeVariableReferenceExpression(resultsName);
-                    ((CodeArrayIndexerExpression)value)
-                        .Indices
+                    ((CodeArrayIndexerExpression)value).Indices
                         .Add(new CodePrimitiveExpression(count++));
                     value = new CodeCastExpression(
                         WebCodeGenerator.FullTypeName(
@@ -1715,8 +1702,7 @@ namespace System.Web.Services.Description
                         value = new CodeArrayIndexerExpression();
                         ((CodeArrayIndexerExpression)value).TargetObject =
                             new CodeVariableReferenceExpression(resultsName);
-                        ((CodeArrayIndexerExpression)value)
-                            .Indices
+                        ((CodeArrayIndexerExpression)value).Indices
                             .Add(new CodePrimitiveExpression(count++));
                         value = new CodeCastExpression(typeof(bool).FullName, value);
                         codeMethod.Statements.Add(new CodeAssignStatement(target, value));

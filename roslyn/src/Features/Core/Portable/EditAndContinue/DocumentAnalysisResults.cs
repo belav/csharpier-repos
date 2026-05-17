@@ -153,8 +153,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                     // line updates are sorted:
                     Debug.Assert(
                         lineEditsOpt.All(documentLineEdits =>
-                            documentLineEdits
-                                .LineUpdates
+                            documentLineEdits.LineUpdates
                                 .IsSorted(
                                     Comparer<SourceLineUpdate>.Create(
                                         (x, y) => x.OldLine.CompareTo(y.OldLine)

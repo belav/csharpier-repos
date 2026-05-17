@@ -268,16 +268,14 @@ namespace System.DirectoryServices
 
                     object[] allValues = new object[_changeList.Count];
                     _changeList.CopyTo(allValues, 0);
-                    _entry
-                        .AdsObject
+                    _entry.AdsObject
                         .PutEx((int)AdsPropertyOperation.Append, PropertyName, allValues);
 
                     _updateType = UpdateType.Add;
                 }
                 else
                 {
-                    _entry
-                        .AdsObject
+                    _entry.AdsObject
                         .PutEx(
                             (int)AdsPropertyOperation.Append,
                             PropertyName,
@@ -308,16 +306,14 @@ namespace System.DirectoryServices
                     _changeList.Add(value);
                     object?[] allValues = new object[_changeList.Count];
                     _changeList.CopyTo(allValues, 0);
-                    _entry
-                        .AdsObject
+                    _entry.AdsObject
                         .PutEx((int)AdsPropertyOperation.Delete, PropertyName, allValues);
 
                     _updateType = UpdateType.Delete;
                 }
                 else
                 {
-                    _entry
-                        .AdsObject
+                    _entry.AdsObject
                         .PutEx(
                             (int)AdsPropertyOperation.Delete,
                             PropertyName,
@@ -346,15 +342,13 @@ namespace System.DirectoryServices
             {
                 if (_needNewBehavior)
                 {
-                    _entry
-                        .AdsObject
+                    _entry.AdsObject
                         .PutEx(
                             (int)AdsPropertyOperation.Delete,
                             PropertyName,
                             new object?[] { oldValue }
                         );
-                    _entry
-                        .AdsObject
+                    _entry.AdsObject
                         .PutEx(
                             (int)AdsPropertyOperation.Append,
                             PropertyName,
@@ -365,8 +359,7 @@ namespace System.DirectoryServices
                 {
                     object?[] allValues = new object[InnerList.Count];
                     InnerList.CopyTo(allValues, 0);
-                    _entry
-                        .AdsObject
+                    _entry.AdsObject
                         .PutEx((int)AdsPropertyOperation.Update, PropertyName, allValues);
                 }
             }

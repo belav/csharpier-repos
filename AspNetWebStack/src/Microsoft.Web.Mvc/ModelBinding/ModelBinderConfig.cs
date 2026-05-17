@@ -113,8 +113,7 @@ namespace Microsoft.Web.Mvc.ModelBinding
                 && (controllerContext != null)
                 && (controllerContext.HttpContext != null)
             )
-                ? controllerContext
-                    .HttpContext
+                ? controllerContext.HttpContext
                     .GetGlobalResourceObject(
                         resourceClassKey,
                         resourceName,

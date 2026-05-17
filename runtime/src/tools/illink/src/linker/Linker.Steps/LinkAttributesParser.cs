@@ -281,8 +281,7 @@ namespace Mono.Linker.Steps
                     continue;
                 }
 
-                PropertyDefinition? property = attributeType
-                    .Properties
+                PropertyDefinition? property = attributeType.Properties
                     .Where(prop => prop.Name == propertyName)
                     .FirstOrDefault();
                 if (property == null)
@@ -295,8 +294,7 @@ namespace Mono.Linker.Steps
                 if (caa is null)
                     continue;
 
-                customAttribute
-                    .Properties
+                customAttribute.Properties
                     .Add(new CustomAttributeNamedArgument(property.Name, caa.Value));
             }
         }
@@ -386,8 +384,7 @@ namespace Mono.Linker.Steps
                     if (enumType?.IsEnum != true)
                         goto default;
 
-                    var enumField = enumType
-                        .Fields
+                    var enumField = enumType.Fields
                         .Where(f => f.IsStatic && f.Name == svalue)
                         .FirstOrDefault();
                     object evalue = enumField?.Constant ?? svalue;
@@ -408,8 +405,7 @@ namespace Mono.Linker.Steps
                         _context
                     );
                     if (
-                        !_context
-                            .TypeNameResolver
+                        !_context.TypeNameResolver
                             .TryResolveTypeName(
                                 svalue,
                                 diagnosticContext,
@@ -453,11 +449,12 @@ namespace Mono.Linker.Steps
                                 // </argument>
                                 //
                                 else if (
-                                    arg.Type.IsSubclassOf(
-                                        elementType.Namespace,
-                                        elementType.Name,
-                                        _context
-                                    )
+                                    arg.Type
+                                        .IsSubclassOf(
+                                            elementType.Namespace,
+                                            elementType.Name,
+                                            _context
+                                        )
                                 )
                                 {
                                     elements.Add(new CustomAttributeArgument(elementType, arg));
@@ -504,8 +501,7 @@ namespace Mono.Linker.Steps
                     _context
                 );
                 if (
-                    !_context
-                        .TypeNameResolver
+                    !_context.TypeNameResolver
                         .TryResolveTypeName(
                             typeName,
                             diagnosticContext,

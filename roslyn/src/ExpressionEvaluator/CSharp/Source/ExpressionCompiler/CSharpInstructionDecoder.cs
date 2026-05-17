@@ -185,8 +185,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             var appDomain = moduleInstance.AppDomain;
             var moduleVersionId = moduleInstance.Mvid;
             var previous = appDomain.GetMetadataContext<CSharpMetadataContext>();
-            var metadataBlocks = moduleInstance
-                .RuntimeInstance
+            var metadataBlocks = moduleInstance.RuntimeInstance
                 .GetMetadataBlocks(appDomain, previous.MetadataBlocks);
 
             var kind = GetMakeAssemblyReferencesKind();

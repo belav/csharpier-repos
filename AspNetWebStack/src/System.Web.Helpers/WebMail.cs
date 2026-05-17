@@ -364,8 +364,7 @@ namespace System.Web.Helpers
                 {
                     if (!Path.IsPathRooted(file) && HttpRuntime.AppDomainAppPath != null)
                     {
-                        message
-                            .Attachments
+                        message.Attachments
                             .Add(new Attachment(Path.Combine(HttpRuntime.AppDomainAppPath, file)));
                     }
                     else

@@ -45,8 +45,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             try
             {
-                var baseConstructor = ContainingType
-                    .BaseTypeNoUseSiteDiagnostics
+                var baseConstructor = ContainingType.BaseTypeNoUseSiteDiagnostics
                     .InstanceConstructors
                     .Single();
                 var field = ContainingType.GetFieldsToEmit().Single();

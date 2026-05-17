@@ -101,8 +101,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
         private static bool IsRefParameterModifierContext(int position, CSharpSyntaxContext context)
         {
             if (
-                context
-                    .SyntaxTree
+                context.SyntaxTree
                     .IsParameterModifierContext(
                         position,
                         context.LeftToken,

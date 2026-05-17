@@ -10,8 +10,7 @@ namespace System.Web.Http.Tracing
         [Fact]
         public void TraceRecord_TraceKind_RoundTrips()
         {
-            Assert
-                .Reflection
+            Assert.Reflection
                 .EnumProperty(
                     new TraceRecord(request: null, category: null, level: TraceLevel.Info),
                     r => r.Kind,
@@ -24,8 +23,7 @@ namespace System.Web.Http.Tracing
         [Fact]
         public void TraceRecord_TraceLevel_RoundTrips()
         {
-            Assert
-                .Reflection
+            Assert.Reflection
                 .EnumProperty(
                     new TraceRecord(request: null, category: null, level: TraceLevel.Info),
                     r => r.Level,

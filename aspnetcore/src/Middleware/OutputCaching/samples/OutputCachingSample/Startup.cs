@@ -6,8 +6,7 @@ using Microsoft.AspNetCore.OutputCaching;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder
-    .Services
+builder.Services
     .AddOutputCache(options =>
     {
         // Define policies for all requests which are not configured per endpoint or per request

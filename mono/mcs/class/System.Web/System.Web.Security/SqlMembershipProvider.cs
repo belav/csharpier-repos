@@ -1418,8 +1418,7 @@ namespace System.Web.Security
                 case MembershipPasswordFormat.Hashed:
                     throw new ProviderException("Hashed passwords cannot be decoded.");
                 case MembershipPasswordFormat.Encrypted:
-                    return Encoding
-                        .Unicode
+                    return Encoding.Unicode
                         .GetString(DecryptPassword(Convert.FromBase64String(password)));
                 default:
                     /* not reached.. */

@@ -124,8 +124,7 @@ namespace System.ServiceModel.MsmqIntegration
                         continue;
                 }
 
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(

@@ -19,11 +19,12 @@ class C
 
     Task Call()
     {
-        return Task.Factory.StartNew(() =>
-        {
-            mre.WaitOne(3000);
-            Console.WriteLine("a");
-        });
+        return Task.Factory
+            .StartNew(() =>
+            {
+                mre.WaitOne(3000);
+                Console.WriteLine("a");
+            });
     }
 
     public async Task<int> TestTaskGeneric()
@@ -33,11 +34,12 @@ class C
 
     Task<int> CallGeneric()
     {
-        return Task.Factory.StartNew(() =>
-        {
-            mre.WaitOne(3000);
-            return 5;
-        });
+        return Task.Factory
+            .StartNew(() =>
+            {
+                mre.WaitOne(3000);
+                return 5;
+            });
     }
 
     public static int Main()

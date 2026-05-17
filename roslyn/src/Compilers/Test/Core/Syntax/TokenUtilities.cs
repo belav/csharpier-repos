@@ -115,17 +115,16 @@ namespace Roslyn.Test.Utilities
         {
             if (language == LanguageNames.CSharp)
             {
-                return CS.SyntaxFactory.ParseCompilationUnit(
-                    expectedText,
-                    options: (CS.CSharpParseOptions)options
-                );
+                return CS.SyntaxFactory
+                    .ParseCompilationUnit(expectedText, options: (CS.CSharpParseOptions)options);
             }
             else
             {
-                return VB.SyntaxFactory.ParseCompilationUnit(
-                    expectedText,
-                    options: (VB.VisualBasicParseOptions)options
-                );
+                return VB.SyntaxFactory
+                    .ParseCompilationUnit(
+                        expectedText,
+                        options: (VB.VisualBasicParseOptions)options
+                    );
             }
         }
     }

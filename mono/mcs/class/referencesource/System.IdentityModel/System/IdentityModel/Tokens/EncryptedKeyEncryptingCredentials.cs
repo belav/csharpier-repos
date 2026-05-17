@@ -62,8 +62,7 @@ namespace System.IdentityModel.Tokens
         {
             if (wrappingCredentials == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("wrappingCredentials");
             }
 
@@ -92,8 +91,7 @@ namespace System.IdentityModel.Tokens
             //
             // key identifier
             //
-            byte[] encryptedKey = _wrappingCredentials
-                .SecurityKey
+            byte[] encryptedKey = _wrappingCredentials.SecurityKey
                 .EncryptKey(_wrappingCredentials.Algorithm, _keyBytes);
             base.SecurityKeyIdentifier = new SecurityKeyIdentifier(
                 new EncryptedKeyIdentifierClause(

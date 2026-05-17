@@ -1063,8 +1063,7 @@ namespace Mono.Data.SqlSharp
                 }
                 catch (ConfigurationException)
                 {
-                    Console
-                        .Error
+                    Console.Error
                         .WriteLine(
                             "*** Error: Unable to load provider factory: "
                                 + factoryName
@@ -1879,8 +1878,7 @@ namespace Mono.Data.SqlSharp
                         }
                         catch (Exception e)
                         {
-                            Console
-                                .Error
+                            Console.Error
                                 .WriteLine("Error: unable to set key.  Reason: " + e.Message);
                             return;
                         }
@@ -1890,8 +1888,7 @@ namespace Mono.Data.SqlSharp
             }
             if (!found)
             {
-                Console
-                    .Error
+                Console.Error
                     .WriteLine(
                         "Warning: your provider does not subclass DbConnectionStringBuilder fully."
                     );

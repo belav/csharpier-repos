@@ -1062,8 +1062,7 @@ namespace Microsoft.CodeAnalysis
                 referencesBuilder.AddRange(compilation.ExternalReferences);
 
                 // Add all explicit references of the previous script compilation.
-                var previousScriptCompilation = compilation
-                    .ScriptCompilationInfo
+                var previousScriptCompilation = compilation.ScriptCompilationInfo
                     ?.PreviousScriptCompilation;
                 if (previousScriptCompilation != null)
                 {
@@ -1110,8 +1109,7 @@ namespace Microsoft.CodeAnalysis
             // checked earlier:
             Debug.Assert(compilation.Options.MetadataReferenceResolver != null);
 
-            var references = compilation
-                .Options
+            var references = compilation.Options
                 .MetadataReferenceResolver
                 .ResolveReference(
                     reference,
@@ -1310,8 +1308,7 @@ namespace Microsoft.CodeAnalysis
                             == OutputKind.WindowsRuntimeMetadata
                         && reference.Version.Equals(definition.Version)
                         && reference.IsRetargetable == definition.IsRetargetable
-                        && AssemblyIdentityComparer
-                            .CultureComparer
+                        && AssemblyIdentityComparer.CultureComparer
                             .Equals(reference.CultureName, definition.CultureName)
                         && AssemblyIdentity.KeysEqual(reference, definition)
                     )

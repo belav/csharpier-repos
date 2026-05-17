@@ -113,8 +113,7 @@
             {
                 if (_propertyMetadata == null)
                 {
-                    _propertyMetadata = ModelMetadata
-                        .Properties
+                    _propertyMetadata = ModelMetadata.Properties
                         .ToDictionary(m => m.PropertyName, StringComparer.OrdinalIgnoreCase);
                 }
 

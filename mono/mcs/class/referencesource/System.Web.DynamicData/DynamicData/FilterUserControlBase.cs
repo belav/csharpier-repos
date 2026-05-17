@@ -409,8 +409,7 @@ namespace System.Web.DynamicData
             {
                 object value;
                 if (
-                    FilterUserControl
-                        .RouteValues
+                    FilterUserControl.RouteValues
                         .TryGetValue(FilterUserControl.Column.Name, out value)
                 )
                 {
@@ -428,16 +427,14 @@ namespace System.Web.DynamicData
 
             public override void PopulateListControl(ListControl listControl)
             {
-                listControl
-                    .Items
+                listControl.Items
                     .Add(
                         new ListItem(
                             DynamicDataResources.FilterUserControlBase_BooleanFilter_TrueString,
                             bool.TrueString
                         )
                     );
-                listControl
-                    .Items
+                listControl.Items
                     .Add(
                         new ListItem(
                             DynamicDataResources.FilterUserControlBase_BooleanFilter_FalseString,

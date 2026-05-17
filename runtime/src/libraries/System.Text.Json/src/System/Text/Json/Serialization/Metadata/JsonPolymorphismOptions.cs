@@ -123,8 +123,7 @@ namespace System.Text.Json.Serialization.Metadata
                 )
             )
             {
-                (options ??= new())
-                    .DerivedTypes
+                (options ??= new()).DerivedTypes
                     .Add(new JsonDerivedType(attr.DerivedType, attr.TypeDiscriminator));
             }
 

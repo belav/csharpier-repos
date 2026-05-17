@@ -21,8 +21,7 @@ public sealed class DocumentOptionSetTests
     public void GetOption()
     {
         var underlyingSet = new TestOptionSet(
-            ImmutableDictionary<OptionKey, object?>
-                .Empty
+            ImmutableDictionary<OptionKey, object?>.Empty
                 .Add(
                     new OptionKey(
                         CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInMemberAccess,
@@ -85,8 +84,7 @@ public sealed class DocumentOptionSetTests
     public void GetOption_NoConfigOptions()
     {
         var underlyingSet = new TestOptionSet(
-            ImmutableDictionary<OptionKey, object?>
-                .Empty
+            ImmutableDictionary<OptionKey, object?>.Empty
                 .Add(
                     new OptionKey(
                         CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInMemberAccess,
@@ -217,8 +215,7 @@ public sealed class DocumentOptionSetTests
     public void InternalStorageMapping_NewLineBeforeOpenBrace_Config()
     {
         var underlyingSet = new TestOptionSet(
-            ImmutableDictionary<OptionKey, object?>
-                .Empty
+            ImmutableDictionary<OptionKey, object?>.Empty
                 .Add(new OptionKey(CSharpFormattingOptions.NewLinesForBracesInTypes), false)
                 .Add(new OptionKey(CSharpFormattingOptions.NewLinesForBracesInAccessors), true)
                 .Add(

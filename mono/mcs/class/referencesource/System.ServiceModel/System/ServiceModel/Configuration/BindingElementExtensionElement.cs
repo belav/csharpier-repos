@@ -33,8 +33,7 @@ namespace System.ServiceModel.Configuration
             }
             if (bindingElement.GetType() != this.BindingElementType)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(
                         "bindingElement",
                         SR.GetString(

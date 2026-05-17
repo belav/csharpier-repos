@@ -1239,17 +1239,14 @@ public abstract partial class ModelBuilderTest
                 var targetEntityType = clonedEntityType.Value;
                 foreach (var foreignKey in clonedEntityType.Key.GetDeclaredForeignKeys())
                 {
-                    var targetPrincipalEntityType = targetEntityType
-                        .Model
+                    var targetPrincipalEntityType = targetEntityType.Model
                         .FindEntityType(foreignKey.PrincipalEntityType.Name)!;
                     var clonedForeignKey = targetEntityType.AddForeignKey(
-                        foreignKey
-                            .Properties
+                        foreignKey.Properties
                             .Select(p => targetEntityType.FindProperty(p.Name)!)
                             .ToList(),
                         targetPrincipalEntityType.FindKey(
-                            foreignKey
-                                .PrincipalKey
+                            foreignKey.PrincipalKey
                                 .Properties
                                 .Select(p => targetPrincipalEntityType.FindProperty(p.Name)!)
                                 .ToList()
@@ -1265,13 +1262,11 @@ public abstract partial class ModelBuilderTest
                 foreach (var skipNavigation in clonedEntityType.Key.GetDeclaredSkipNavigations())
                 {
                     var targetEntityType = clonedEntityType.Value;
-                    var otherEntityType = targetEntityType
-                        .Model
+                    var otherEntityType = targetEntityType.Model
                         .FindEntityType(skipNavigation.TargetEntityType.Name)!;
                     Copy(
                         skipNavigation,
-                        clonedEntityType
-                            .Value
+                        clonedEntityType.Value
                             .AddSkipNavigation(
                                 skipNavigation.Name,
                                 skipNavigation.GetIdentifyingMemberInfo(),
@@ -1293,8 +1288,7 @@ public abstract partial class ModelBuilderTest
         {
             if (sourceEntityType.BaseType != null)
             {
-                targetEntityType.BaseType = targetEntityType
-                    .Model
+                targetEntityType.BaseType = targetEntityType.Model
                     .FindEntityType(sourceEntityType.BaseType.Name);
             }
 
@@ -1369,8 +1363,7 @@ public abstract partial class ModelBuilderTest
 
             foreach (var index in sourceEntityType.GetDeclaredIndexes())
             {
-                var targetProperties = index
-                    .Properties
+                var targetProperties = index.Properties
                     .Select(p => targetEntityType.FindProperty(p.Name)!)
                     .ToList();
                 var clonedIndex =
@@ -1596,25 +1589,21 @@ public abstract partial class ModelBuilderTest
             );
             if (sourceNavigation.ForeignKey != null)
             {
-                var targetDependentType = targetNavigation
-                    .DeclaringEntityType
+                var targetDependentType = targetNavigation.DeclaringEntityType
                     .Model
                     .FindEntityType(sourceNavigation.ForeignKey.DeclaringEntityType.Name)!;
-                var targetPrincipalType = targetNavigation
-                    .DeclaringEntityType
+                var targetPrincipalType = targetNavigation.DeclaringEntityType
                     .Model
                     .FindEntityType(sourceNavigation.ForeignKey.PrincipalEntityType.Name)!;
                 var targetKey = targetPrincipalType.FindKey(
-                    sourceNavigation
-                        .ForeignKey
+                    sourceNavigation.ForeignKey
                         .PrincipalKey
                         .Properties
                         .Select(p => targetPrincipalType.FindProperty(p.Name)!)
                         .ToList()
                 )!;
                 var targetForeignKey = targetDependentType.FindForeignKey(
-                    sourceNavigation
-                        .ForeignKey
+                    sourceNavigation.ForeignKey
                         .Properties
                         .Select(p => targetDependentType.FindProperty(p.Name)!)
                         .ToList(),
@@ -1626,8 +1615,7 @@ public abstract partial class ModelBuilderTest
 
             if (sourceNavigation.Inverse != null)
             {
-                var targetEntityType = targetNavigation
-                    .DeclaringEntityType
+                var targetEntityType = targetNavigation.DeclaringEntityType
                     .Model
                     .FindEntityType(sourceNavigation.Inverse.DeclaringEntityType.Name)!;
                 targetNavigation.SetInverse(

@@ -44,8 +44,7 @@ public class MaxRequestBodySizeTests : IISFunctionalTestBase
 
         var deploymentResult = await DeployAsync(deploymentParameters);
 
-        var result = await deploymentResult
-            .HttpClient
+        var result = await deploymentResult.HttpClient
             .PostAsync("/ReadRequestBody", new StringContent("test"));
         Assert.Equal(HttpStatusCode.RequestEntityTooLarge, result.StatusCode);
     }
@@ -55,8 +54,7 @@ public class MaxRequestBodySizeTests : IISFunctionalTestBase
     public async Task SetIISLimitMaxRequestBodySizeE2EWorks()
     {
         var deploymentParameters = Fixture.GetBaseDeploymentParameters();
-        deploymentParameters
-            .ServerConfigActionList
+        deploymentParameters.ServerConfigActionList
             .Add(
                 (config, _) =>
                 {
@@ -69,8 +67,7 @@ public class MaxRequestBodySizeTests : IISFunctionalTestBase
             );
         var deploymentResult = await DeployAsync(deploymentParameters);
 
-        var result = await deploymentResult
-            .HttpClient
+        var result = await deploymentResult.HttpClient
             .PostAsync("/ReadRequestBody", new StringContent("test"));
 
         // IIS either returns a 404 or a 413 based on versions of IIS.
@@ -86,8 +83,7 @@ public class MaxRequestBodySizeTests : IISFunctionalTestBase
     public async Task SetIISLimitMaxRequestBodySizeE2EWorksWithLargerLimit()
     {
         var deploymentParameters = Fixture.GetBaseDeploymentParameters();
-        deploymentParameters
-            .ServerConfigActionList
+        deploymentParameters.ServerConfigActionList
             .Add(
                 (config, _) =>
                 {
@@ -100,8 +96,7 @@ public class MaxRequestBodySizeTests : IISFunctionalTestBase
             );
         var deploymentResult = await DeployAsync(deploymentParameters);
 
-        var result = await deploymentResult
-            .HttpClient
+        var result = await deploymentResult.HttpClient
             .PostAsync("/ReadRequestBodyLarger", new StringContent(new string('a', 100000000)));
 
         Assert.Equal(HttpStatusCode.OK, result.StatusCode);
@@ -112,8 +107,7 @@ public class MaxRequestBodySizeTests : IISFunctionalTestBase
     public async Task SetIISLimitMaxRequestBodySizeE2EWorksWithIntMaxValue()
     {
         var deploymentParameters = Fixture.GetBaseDeploymentParameters();
-        deploymentParameters
-            .ServerConfigActionList
+        deploymentParameters.ServerConfigActionList
             .Add(
                 (config, _) =>
                 {
@@ -126,8 +120,7 @@ public class MaxRequestBodySizeTests : IISFunctionalTestBase
             );
         var deploymentResult = await DeployAsync(deploymentParameters);
 
-        var result = await deploymentResult
-            .HttpClient
+        var result = await deploymentResult.HttpClient
             .PostAsync("/ReadRequestBodyLarger", new StringContent(new string('a', 10000)));
 
         Assert.Equal(HttpStatusCode.OK, result.StatusCode);
@@ -164,8 +157,7 @@ public class MaxRequestBodySizeTests : IISFunctionalTestBase
         // Logs get tangled up due to ANCM debug logs and managed logs logging at the same time.
         // Disable it for this test as we are trying to verify a log.
         deploymentParameters.HandlerSettings["debugLevel"] = "";
-        deploymentParameters
-            .ServerConfigActionList
+        deploymentParameters.ServerConfigActionList
             .Add(
                 (config, _) =>
                 {
@@ -178,8 +170,7 @@ public class MaxRequestBodySizeTests : IISFunctionalTestBase
             );
         var deploymentResult = await DeployAsync(deploymentParameters);
 
-        var result = await deploymentResult
-            .HttpClient
+        var result = await deploymentResult.HttpClient
             .PostAsync("/IncreaseRequestLimit", new StringContent("1"));
         Assert.Equal(HttpStatusCode.OK, result.StatusCode);
 
@@ -190,11 +181,12 @@ public class MaxRequestBodySizeTests : IISFunctionalTestBase
             Assert.Single(
                 TestSink.Writes,
                 w =>
-                    w.Message.Contains(
-                        "Increasing the MaxRequestBodySize conflicts with the max value for IIS limit maxAllowedContentLength."
-                            + " HTTP requests that have a content length greater than maxAllowedContentLength will still be rejected by IIS."
-                            + " You can disable the limit by either removing or setting the maxAllowedContentLength value to a higher limit."
-                    )
+                    w.Message
+                        .Contains(
+                            "Increasing the MaxRequestBodySize conflicts with the max value for IIS limit maxAllowedContentLength."
+                                + " HTTP requests that have a content length greater than maxAllowedContentLength will still be rejected by IIS."
+                                + " You can disable the limit by either removing or setting the maxAllowedContentLength value to a higher limit."
+                        )
             );
         }
     }

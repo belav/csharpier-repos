@@ -887,28 +887,30 @@ namespace ComInterfaceGenerator.Unit.Tests
                 .AdditionalReferences
                 .AddRange(test.TestState.AdditionalReferences);
 
-            test.ExpectedDiagnostics.Add(
-                VerifyComInterfaceGenerator
-                    .Diagnostic(GeneratorDiagnostics.BaseInterfaceIsNotGenerated)
-                    .WithLocation(0)
-                    .WithArguments("J", "I")
-            );
+            test.ExpectedDiagnostics
+                .Add(
+                    VerifyComInterfaceGenerator
+                        .Diagnostic(GeneratorDiagnostics.BaseInterfaceIsNotGenerated)
+                        .WithLocation(0)
+                        .WithArguments("J", "I")
+                );
 
             // The Roslyn SDK doesn't apply the compilation options from CreateCompilationOptions to AdditionalProjects-based projects.
-            test.SolutionTransforms.Add(
-                (sln, _) =>
-                {
-                    var additionalProject = sln.Projects.First(proj => proj.Name == "Other");
-                    return additionalProject
-                        .WithCompilationOptions(
-                            new CSharpCompilationOptions(
-                                OutputKind.DynamicallyLinkedLibrary,
-                                allowUnsafe: true
+            test.SolutionTransforms
+                .Add(
+                    (sln, _) =>
+                    {
+                        var additionalProject = sln.Projects.First(proj => proj.Name == "Other");
+                        return additionalProject
+                            .WithCompilationOptions(
+                                new CSharpCompilationOptions(
+                                    OutputKind.DynamicallyLinkedLibrary,
+                                    allowUnsafe: true
+                                )
                             )
-                        )
-                        .Solution;
-                }
-            );
+                            .Solution;
+                    }
+                );
 
             await test.RunAsync();
         }
@@ -1279,9 +1281,8 @@ namespace ComInterfaceGenerator.Unit.Tests
                     TestBehaviors.SkipGeneratedSourcesCheck | TestBehaviors.SkipGeneratedCodeCheck,
             };
             test.ExpectedDiagnostics.AddRange(diagnostics);
-            test.DisabledDiagnostics.Remove(
-                GeneratorDiagnostics.Ids.NotRecommendedGeneratedComInterfaceUsage
-            );
+            test.DisabledDiagnostics
+                .Remove(GeneratorDiagnostics.Ids.NotRecommendedGeneratedComInterfaceUsage);
             await test.RunAsync();
         }
 
@@ -1301,17 +1302,17 @@ namespace ComInterfaceGenerator.Unit.Tests
                 TestBehaviors =
                     TestBehaviors.SkipGeneratedSourcesCheck | TestBehaviors.SkipGeneratedCodeCheck,
             };
-            test.ExpectedDiagnostics.Add(
-                VerifyComInterfaceGenerator
-                    .Diagnostic(
-                        GeneratorDiagnostics.GeneratedComInterfaceUsageDoesNotFollowBestPractices
-                    )
-                    .WithLocation(2)
-                    .WithArguments(SR.InVariantShouldBeRef)
-            );
-            test.DisabledDiagnostics.Remove(
-                GeneratorDiagnostics.Ids.NotRecommendedGeneratedComInterfaceUsage
-            );
+            test.ExpectedDiagnostics
+                .Add(
+                    VerifyComInterfaceGenerator
+                        .Diagnostic(
+                            GeneratorDiagnostics.GeneratedComInterfaceUsageDoesNotFollowBestPractices
+                        )
+                        .WithLocation(2)
+                        .WithArguments(SR.InVariantShouldBeRef)
+                );
+            test.DisabledDiagnostics
+                .Remove(GeneratorDiagnostics.Ids.NotRecommendedGeneratedComInterfaceUsage);
             await test.RunAsync();
         }
     }

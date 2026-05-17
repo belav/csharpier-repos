@@ -31,8 +31,7 @@ namespace System.ServiceModel.Channels
         {
             if (context == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("context"));
             }
 
@@ -45,8 +44,7 @@ namespace System.ServiceModel.Channels
         {
             if (context == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("context"));
             }
 
@@ -62,8 +60,7 @@ namespace System.ServiceModel.Channels
         {
             if (context == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("context"));
             }
 
@@ -77,8 +74,7 @@ namespace System.ServiceModel.Channels
         {
             if (context == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("context"));
             }
 

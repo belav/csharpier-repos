@@ -37,15 +37,13 @@ namespace Internal.TypeSystem.Ecma
 
                 string moduleRefString;
                 if (
-                    !_mutableModule
-                        ._moduleToModuleRefString
+                    !_mutableModule._moduleToModuleRefString
                         .TryGetValue(module, out moduleRefString)
                 )
                 {
                     Debug.Assert(
                         _mutableModule.ModuleThatIsCurrentlyTheSourceOfNewReferences != null
-                            && _mutableModule
-                                ._compilationGroup
+                            && _mutableModule._compilationGroup
                                 .CrossModuleInlineableModule(
                                     _mutableModule.ModuleThatIsCurrentlyTheSourceOfNewReferences
                                 )
@@ -276,8 +274,7 @@ namespace Internal.TypeSystem.Ecma
                             metadataArrayTemp.Length,
                             pinned: true
                         );
-                        System
-                            .Runtime
+                        System.Runtime
                             .InteropServices
                             .GCHandle
                             .Alloc(
@@ -332,8 +329,7 @@ namespace Internal.TypeSystem.Ecma
                         {
                             int result;
                             if (
-                                _mutableModule
-                                    ._cache
+                                _mutableModule._cache
                                     .ExistingEntities
                                     .TryGetValue(value, out result)
                             )

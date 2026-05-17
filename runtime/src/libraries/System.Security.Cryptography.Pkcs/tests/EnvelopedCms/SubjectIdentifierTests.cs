@@ -31,8 +31,7 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
         {
             using (X509Certificate2 cert = Certificates.RSAKeyTransfer_ExplicitSki.GetCertificate())
             using (
-                X509Certificate2 notMatchingCert = Certificates
-                    .RSAKeyTransfer4_ExplicitSki
+                X509Certificate2 notMatchingCert = Certificates.RSAKeyTransfer4_ExplicitSki
                     .GetCertificate()
             )
             {

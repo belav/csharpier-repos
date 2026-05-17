@@ -41,8 +41,7 @@ internal static class ParsabilityHelper
 
         // Uri is valid.
         if (
-            SymbolEqualityComparer
-                .Default
+            SymbolEqualityComparer.Default
                 .Equals(typeSymbol, wellKnownTypes.Get(WellKnownType.System_Uri))
         )
         {
@@ -136,8 +135,7 @@ internal static class ParsabilityHelper
             && methodSymbol.ReturnType.SpecialType == SpecialType.System_Boolean
             && methodSymbol.Parameters.Length == 3
             && methodSymbol.Parameters[0].Type.SpecialType == SpecialType.System_String
-            && SymbolEqualityComparer
-                .Default
+            && SymbolEqualityComparer.Default
                 .Equals(
                     methodSymbol.Parameters[1].Type,
                     wellKnownTypes.Get(WellKnownType.System_IFormatProvider)
@@ -151,8 +149,7 @@ internal static class ParsabilityHelper
     )
     {
         var iParsableTypeSymbol = wellKnownTypes.Get(WellKnownType.System_IParsable_T);
-        var implementsIParsable = typeSymbol
-            .AllInterfaces
+        var implementsIParsable = typeSymbol.AllInterfaces
             .Any(i =>
                 SymbolEqualityComparer.Default.Equals(i.ConstructedFrom, iParsableTypeSymbol)
             );
@@ -167,16 +164,13 @@ internal static class ParsabilityHelper
         var iBindableFromHttpContextTypeSymbol = wellKnownTypes.Get(
             WellKnownType.Microsoft_AspNetCore_Http_IBindableFromHttpContext_T
         );
-        var constructedTypeSymbol = typeSymbol
-            .AllInterfaces
+        var constructedTypeSymbol = typeSymbol.AllInterfaces
             .FirstOrDefault(i =>
-                SymbolEqualityComparer
-                    .Default
+                SymbolEqualityComparer.Default
                     .Equals(i.ConstructedFrom, iBindableFromHttpContextTypeSymbol)
             );
         return constructedTypeSymbol != null
-            && SymbolEqualityComparer
-                .Default
+            && SymbolEqualityComparer.Default
                 .Equals(
                     constructedTypeSymbol.TypeArguments[0].UnwrapTypeSymbol(unwrapNullable: true),
                     typeSymbol
@@ -192,15 +186,13 @@ internal static class ParsabilityHelper
         return methodSymbol.DeclaredAccessibility == Accessibility.Public
             && methodSymbol.IsStatic
             && methodSymbol.Parameters.Length == 1
-            && SymbolEqualityComparer
-                .Default
+            && SymbolEqualityComparer.Default
                 .Equals(
                     methodSymbol.Parameters[0].Type,
                     wellKnownTypes.Get(WellKnownType.Microsoft_AspNetCore_Http_HttpContext)
                 )
             && methodSymbol.ReturnType is INamedTypeSymbol returnType
-            && SymbolEqualityComparer
-                .Default
+            && SymbolEqualityComparer.Default
                 .Equals(
                     returnType.ConstructedFrom,
                     wellKnownTypes.Get(WellKnownType.System_Threading_Tasks_ValueTask_T)
@@ -217,14 +209,12 @@ internal static class ParsabilityHelper
         return methodSymbol.DeclaredAccessibility == Accessibility.Public
             && methodSymbol.IsStatic
             && methodSymbol.Parameters.Length == 2
-            && SymbolEqualityComparer
-                .Default
+            && SymbolEqualityComparer.Default
                 .Equals(
                     methodSymbol.Parameters[0].Type,
                     wellKnownTypes.Get(WellKnownType.Microsoft_AspNetCore_Http_HttpContext)
                 )
-            && SymbolEqualityComparer
-                .Default
+            && SymbolEqualityComparer.Default
                 .Equals(
                     methodSymbol.Parameters[1].Type,
                     wellKnownTypes.Get(WellKnownType.System_Reflection_ParameterInfo)
@@ -239,14 +229,12 @@ internal static class ParsabilityHelper
         WellKnownTypes wellKnownTypes
     )
     {
-        return SymbolEqualityComparer
-                .Default
+        return SymbolEqualityComparer.Default
                 .Equals(
                     returnType.ConstructedFrom,
                     wellKnownTypes.Get(WellKnownType.System_Threading_Tasks_ValueTask_T)
                 )
-            && SymbolEqualityComparer
-                .Default
+            && SymbolEqualityComparer.Default
                 .Equals(
                     returnType.TypeArguments[0].UnwrapTypeSymbol(unwrapNullable: true),
                     containingType

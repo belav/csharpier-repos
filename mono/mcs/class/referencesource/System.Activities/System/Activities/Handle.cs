@@ -89,8 +89,7 @@ namespace System.Activities
         {
             if (this.isUninitialized)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(new InvalidOperationException(SR.HandleNotInitialized));
             }
         }

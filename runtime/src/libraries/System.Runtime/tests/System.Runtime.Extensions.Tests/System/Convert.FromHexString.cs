@@ -142,8 +142,7 @@ namespace System.Tests
         {
             const int destinationSize = 10;
             Span<byte> destination = stackalloc byte[destinationSize];
-            byte[] data = Security
-                .Cryptography
+            byte[] data = Security.Cryptography
                 .RandomNumberGenerator
                 .GetBytes(destinationSize * 2 + 1);
             string hex = Convert.ToHexString(data);

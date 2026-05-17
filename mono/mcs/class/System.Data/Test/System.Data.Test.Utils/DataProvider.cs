@@ -56,8 +56,7 @@ namespace MonoTests.System.Data.Utils
             dtChild.Columns.Add("ChildDateTime", typeof(DateTime));
             dtChild.Columns.Add("ChildDouble", typeof(double));
 
-            dtChild
-                .Rows
+            dtChild.Rows
                 .Add(
                     new object[]
                     {
@@ -69,11 +68,9 @@ namespace MonoTests.System.Data.Utils
                         1.534,
                     }
                 );
-            dtChild
-                .Rows
+            dtChild.Rows
                 .Add(new object[] { 1, 2, "2-String1", "2-String2", DateTime.MaxValue, -1.534 });
-            dtChild
-                .Rows
+            dtChild.Rows
                 .Add(
                     new object[]
                     {
@@ -85,8 +82,7 @@ namespace MonoTests.System.Data.Utils
                         double.MaxValue / 10000,
                     }
                 );
-            dtChild
-                .Rows
+            dtChild.Rows
                 .Add(
                     new object[]
                     {
@@ -98,8 +94,7 @@ namespace MonoTests.System.Data.Utils
                         double.MinValue * 10000,
                     }
                 );
-            dtChild
-                .Rows
+            dtChild.Rows
                 .Add(
                     new object[]
                     {
@@ -111,8 +106,7 @@ namespace MonoTests.System.Data.Utils
                         0.45,
                     }
                 );
-            dtChild
-                .Rows
+            dtChild.Rows
                 .Add(
                     new object[]
                     {
@@ -124,8 +118,7 @@ namespace MonoTests.System.Data.Utils
                         0.55,
                     }
                 );
-            dtChild
-                .Rows
+            dtChild.Rows
                 .Add(
                     new object[]
                     {
@@ -137,8 +130,7 @@ namespace MonoTests.System.Data.Utils
                         0,
                     }
                 );
-            dtChild
-                .Rows
+            dtChild.Rows
                 .Add(
                     new object[]
                     {
@@ -150,8 +142,7 @@ namespace MonoTests.System.Data.Utils
                         10,
                     }
                 );
-            dtChild
-                .Rows
+            dtChild.Rows
                 .Add(
                     new object[]
                     {
@@ -163,8 +154,7 @@ namespace MonoTests.System.Data.Utils
                         20,
                     }
                 );
-            dtChild
-                .Rows
+            dtChild.Rows
                 .Add(
                     new object[]
                     {
@@ -176,8 +166,7 @@ namespace MonoTests.System.Data.Utils
                         25,
                     }
                 );
-            dtChild
-                .Rows
+            dtChild.Rows
                 .Add(
                     new object[]
                     {
@@ -189,8 +178,7 @@ namespace MonoTests.System.Data.Utils
                         30,
                     }
                 );
-            dtChild
-                .Rows
+            dtChild.Rows
                 .Add(
                     new object[]
                     {
@@ -218,8 +206,7 @@ namespace MonoTests.System.Data.Utils
             dtParent.Columns.Add("ParentDouble", typeof(double));
             dtParent.Columns.Add("ParentBool", typeof(bool));
 
-            dtParent
-                .Rows
+            dtParent.Rows
                 .Add(
                     new object[]
                     {
@@ -231,8 +218,7 @@ namespace MonoTests.System.Data.Utils
                         true,
                     }
                 );
-            dtParent
-                .Rows
+            dtParent.Rows
                 .Add(
                     new object[]
                     {
@@ -244,8 +230,7 @@ namespace MonoTests.System.Data.Utils
                         true,
                     }
                 );
-            dtParent
-                .Rows
+            dtParent.Rows
                 .Add(
                     new object[]
                     {
@@ -257,8 +242,7 @@ namespace MonoTests.System.Data.Utils
                         false,
                     }
                 );
-            dtParent
-                .Rows
+            dtParent.Rows
                 .Add(
                     new object[]
                     {
@@ -270,8 +254,7 @@ namespace MonoTests.System.Data.Utils
                         true,
                     }
                 );
-            dtParent
-                .Rows
+            dtParent.Rows
                 .Add(
                     new object[]
                     {
@@ -283,8 +266,7 @@ namespace MonoTests.System.Data.Utils
                         true,
                     }
                 );
-            dtParent
-                .Rows
+            dtParent.Rows
                 .Add(
                     new object[]
                     {

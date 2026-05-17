@@ -299,15 +299,13 @@ namespace System.Xml
         public unsafe UniqueId(byte[] guid, int offset)
         {
             if (guid == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("guid"));
             if (offset < 0)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -318,8 +316,7 @@ namespace System.Xml
                         )
                     );
             if (offset > guid.Length)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -330,8 +327,7 @@ namespace System.Xml
                         )
                     );
             if (guidLength > guid.Length - offset)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -356,15 +352,13 @@ namespace System.Xml
         public unsafe UniqueId(string value)
         {
             if (value == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
                     .ThrowHelperArgumentNull("value");
             if (value.Length == 0)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -384,15 +378,13 @@ namespace System.Xml
         public unsafe UniqueId(char[] chars, int offset, int count)
         {
             if (chars == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("chars"));
             if (offset < 0)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -403,8 +395,7 @@ namespace System.Xml
                         )
                     );
             if (offset > chars.Length)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -415,8 +406,7 @@ namespace System.Xml
                         )
                     );
             if (count < 0)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -427,8 +417,7 @@ namespace System.Xml
                         )
                     );
             if (count > chars.Length - offset)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -439,8 +428,7 @@ namespace System.Xml
                         )
                     );
             if (count == 0)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -614,16 +602,14 @@ namespace System.Xml
             int count = CharArrayLength;
 
             if (chars == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("chars"));
 
             if (offset < 0)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -634,8 +620,7 @@ namespace System.Xml
                         )
                     );
             if (offset > chars.Length)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -647,8 +632,7 @@ namespace System.Xml
                     );
 
             if (count > chars.Length - offset)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -736,16 +720,14 @@ namespace System.Xml
                 return false;
 
             if (buffer == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("buffer"));
 
             if (offset < 0)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -756,8 +738,7 @@ namespace System.Xml
                         )
                     );
             if (offset > buffer.Length)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -769,8 +750,7 @@ namespace System.Xml
                     );
 
             if (guidLength > buffer.Length - offset)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility

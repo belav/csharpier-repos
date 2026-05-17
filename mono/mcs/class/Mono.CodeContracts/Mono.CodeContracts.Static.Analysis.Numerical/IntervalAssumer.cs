@@ -41,8 +41,7 @@ namespace Mono.CodeContracts.Static.Analysis.Numerical
         {
             IntervalInference.InferenceResult<TVar, Interval> resultLeft;
             IntervalInference.InferenceResult<TVar, Interval> resultRight;
-            IntervalInference
-                .ConstraintsFor
+            IntervalInference.ConstraintsFor
                 .NotEqual(left, right, env.Decoder, env, out resultLeft, out resultRight);
 
             IntervalInference.InferenceResult<TVar, Interval> join = resultLeft.Join(resultRight);

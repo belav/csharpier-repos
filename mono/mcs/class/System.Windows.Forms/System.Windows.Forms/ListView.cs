@@ -1322,8 +1322,9 @@ namespace System.Windows.Forms
                     ret_size.Width = ThemeEngine.Current.ListViewEmptyColumnWidth;
                     if (col.Text.Length > 0)
                         ret_size.Height = Size.Ceiling(
-                            TextRenderer.MeasureString(col.Text, this.Font)
-                        ).Height;
+                                TextRenderer.MeasureString(col.Text, this.Font)
+                            )
+                            .Height;
                     else
                         ret_size.Height = this.Font.Height;
                 }
@@ -4265,8 +4266,7 @@ namespace System.Windows.Forms
                 if (isPrefixSearch)
                 { // prefix search
                     if (
-                        CultureInfo
-                            .CurrentCulture
+                        CultureInfo.CurrentCulture
                             .CompareInfo
                             .IsPrefix(lvi.Text, text, CompareOptions.IgnoreCase)
                     )
@@ -4300,8 +4300,7 @@ namespace System.Windows.Forms
                         if (isPrefixSearch)
                         {
                             if (
-                                CultureInfo
-                                    .CurrentCulture
+                                CultureInfo.CurrentCulture
                                     .CompareInfo
                                     .IsPrefix(sub_item.Text, text, CompareOptions.IgnoreCase)
                             )

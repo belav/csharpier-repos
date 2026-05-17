@@ -114,8 +114,7 @@ namespace System.ServiceModel.ComIntegration
                     this.isolationLevel = IsolationLevel.Serializable;
                     break;
                 default:
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             Error.ListenerInitFailed(
                                 SR.GetString(
@@ -206,8 +205,7 @@ namespace System.ServiceModel.ComIntegration
                     {
                         Guid otherInterfaceID;
                         if (
-                            DiagnosticUtility
-                                .Utility
+                            DiagnosticUtility.Utility
                                 .TryCreateGuid(
                                     (string)interfaceObject.GetValue("IID"),
                                     out otherInterfaceID
@@ -230,8 +228,7 @@ namespace System.ServiceModel.ComIntegration
 
                 if (contract == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             Error.ListenerInitFailed(
                                 SR.GetString(

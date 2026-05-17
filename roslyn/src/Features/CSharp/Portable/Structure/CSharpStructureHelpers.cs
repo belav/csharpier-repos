@@ -27,8 +27,7 @@ internal static class CSharpStructureHelpers
         // Check *this* token to see if it has any trailing comments and use the last one; otherwise, we use the end
         // of this token.
 
-        var lastTrailingCommentOrWhitespaceTrivia = firstToken
-            .TrailingTrivia
+        var lastTrailingCommentOrWhitespaceTrivia = firstToken.TrailingTrivia
             .GetLastCommentOrWhitespace();
         return lastTrailingCommentOrWhitespaceTrivia?.Span.End ?? firstToken.Span.End;
     }
@@ -269,8 +268,7 @@ internal static class CSharpStructureHelpers
                 return false;
             }
 
-            var firstComment = startToken
-                .LeadingTrivia
+            var firstComment = startToken.LeadingTrivia
                 .FirstOrNull(t =>
                     t.Kind()
                         is SyntaxKind.SingleLineCommentTrivia
@@ -304,14 +302,13 @@ internal static class CSharpStructureHelpers
         static SyntaxToken GetEndToken(SyntaxNode node) =>
             node switch
             {
-                ConstructorDeclarationSyntax constructorDeclaration => constructorDeclaration
-                    .Modifiers
-                    .FirstOrNull() ?? constructorDeclaration.Identifier,
+                ConstructorDeclarationSyntax constructorDeclaration =>
+                    constructorDeclaration.Modifiers.FirstOrNull()
+                        ?? constructorDeclaration.Identifier,
                 ConversionOperatorDeclarationSyntax conversionOperatorDeclaration =>
                     conversionOperatorDeclaration.Modifiers.FirstOrNull()
                         ?? conversionOperatorDeclaration.ImplicitOrExplicitKeyword,
-                DelegateDeclarationSyntax delegateDeclaration => delegateDeclaration
-                    .Modifiers
+                DelegateDeclarationSyntax delegateDeclaration => delegateDeclaration.Modifiers
                     .FirstOrNull() ?? delegateDeclaration.DelegateKeyword,
                 DestructorDeclarationSyntax destructorDeclaration =>
                     destructorDeclaration.TildeToken,
@@ -321,22 +318,17 @@ internal static class CSharpStructureHelpers
                     enumMemberDeclaration.Identifier,
                 EventDeclarationSyntax eventDeclaration => eventDeclaration.Modifiers.FirstOrNull()
                     ?? eventDeclaration.EventKeyword,
-                EventFieldDeclarationSyntax eventFieldDeclaration => eventFieldDeclaration
-                    .Modifiers
+                EventFieldDeclarationSyntax eventFieldDeclaration => eventFieldDeclaration.Modifiers
                     .FirstOrNull() ?? eventFieldDeclaration.EventKeyword,
                 FieldDeclarationSyntax fieldDeclaration => fieldDeclaration.Modifiers.FirstOrNull()
                     ?? fieldDeclaration.Declaration.GetFirstToken(),
-                IndexerDeclarationSyntax indexerDeclaration => indexerDeclaration
-                    .Modifiers
+                IndexerDeclarationSyntax indexerDeclaration => indexerDeclaration.Modifiers
                     .FirstOrNull() ?? indexerDeclaration.Type.GetFirstToken(),
-                MethodDeclarationSyntax methodDeclaration => methodDeclaration
-                    .Modifiers
+                MethodDeclarationSyntax methodDeclaration => methodDeclaration.Modifiers
                     .FirstOrNull() ?? methodDeclaration.ReturnType.GetFirstToken(),
-                OperatorDeclarationSyntax operatorDeclaration => operatorDeclaration
-                    .Modifiers
+                OperatorDeclarationSyntax operatorDeclaration => operatorDeclaration.Modifiers
                     .FirstOrNull() ?? operatorDeclaration.ReturnType.GetFirstToken(),
-                PropertyDeclarationSyntax propertyDeclaration => propertyDeclaration
-                    .Modifiers
+                PropertyDeclarationSyntax propertyDeclaration => propertyDeclaration.Modifiers
                     .FirstOrNull() ?? propertyDeclaration.Type.GetFirstToken(),
                 TypeDeclarationSyntax typeDeclaration => typeDeclaration.Modifiers.FirstOrNull()
                     ?? typeDeclaration.Keyword,
@@ -346,11 +338,9 @@ internal static class CSharpStructureHelpers
         static SyntaxToken GetHintTextEndToken(SyntaxNode node) =>
             node switch
             {
-                EnumDeclarationSyntax enumDeclaration => enumDeclaration
-                    .OpenBraceToken
+                EnumDeclarationSyntax enumDeclaration => enumDeclaration.OpenBraceToken
                     .GetPreviousToken(),
-                TypeDeclarationSyntax typeDeclaration => typeDeclaration
-                    .OpenBraceToken
+                TypeDeclarationSyntax typeDeclaration => typeDeclaration.OpenBraceToken
                     .GetPreviousToken(),
                 _ => node.GetLastToken(),
             };

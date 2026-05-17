@@ -57,8 +57,7 @@ namespace Microsoft.Build.BuildEngine
         [MonoTODO]
         public void AddOutputItem(string taskParameter, string itemName)
         {
-            XmlElement element = parentTarget
-                .Project
+            XmlElement element = parentTarget.Project
                 .XmlDocument
                 .CreateElement("Output", Project.XmlNamespace);
             taskElement.AppendChild(element);
@@ -72,8 +71,7 @@ namespace Microsoft.Build.BuildEngine
         [MonoTODO]
         public void AddOutputProperty(string taskParameter, string propertyName)
         {
-            XmlElement element = parentTarget
-                .Project
+            XmlElement element = parentTarget.Project
                 .XmlDocument
                 .CreateElement("Output", Project.XmlNamespace);
             taskElement.AppendChild(element);
@@ -252,8 +250,7 @@ namespace Microsoft.Build.BuildEngine
                 );
                 throw;
             }
-            parentTarget
-                .Project
+            parentTarget.Project
                 .ParentEngine
                 .LogMessage(
                     MessageImportance.Low,

@@ -598,8 +598,7 @@ public class ContentDispositionHeaderValue
 
         MimeSuffix.CopyTo(bufferContent.Slice(base64ContentLength));
 
-        var result = Encoding
-            .UTF8
+        var result = Encoding.UTF8
             .GetString(
                 buffer.Slice(0, MimePrefix.Length + base64ContentLength + MimeSuffix.Length)
             );

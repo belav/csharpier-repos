@@ -64,8 +64,7 @@ public class RelationalMethodCallTranslatorProvider : IMethodCallTranslatorProvi
         {
             if (dbFunction.Translation != null)
             {
-                var translation = dbFunction
-                    .Translation
+                var translation = dbFunction.Translation
                     .Invoke(
                         arguments
                             .Select(e => _sqlExpressionFactory.ApplyDefaultTypeMapping(e))
@@ -85,8 +84,7 @@ public class RelationalMethodCallTranslatorProvider : IMethodCallTranslatorProvi
                 return translation;
             }
 
-            var argumentsPropagateNullability = dbFunction
-                .Parameters
+            var argumentsPropagateNullability = dbFunction.Parameters
                 .Select(p => p.PropagatesNullability);
 
             return dbFunction.IsBuiltIn

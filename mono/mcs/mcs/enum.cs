@@ -186,13 +186,14 @@ namespace Mono.CSharp
                 }
                 catch (OverflowException)
                 {
-                    rc.Report.Error(
-                        543,
-                        current.Location,
-                        "The enumerator value `{0}' is outside the range of enumerator underlying type `{1}'",
-                        current.GetSignatureForError(),
-                        ((Enum)current.Parent).UnderlyingType.GetSignatureForError()
-                    );
+                    rc.Report
+                        .Error(
+                            543,
+                            current.Location,
+                            "The enumerator value `{0}' is outside the range of enumerator underlying type `{1}'",
+                            current.GetSignatureForError(),
+                            ((Enum)current.Parent).UnderlyingType.GetSignatureForError()
+                        );
 
                     return New.Constantify(current.Parent.Definition, current.Location);
                 }

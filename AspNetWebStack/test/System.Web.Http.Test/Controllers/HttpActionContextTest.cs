@@ -61,8 +61,7 @@ namespace System.Web.Http
         [Fact]
         public void ControllerContext_Property()
         {
-            Assert
-                .Reflection
+            Assert.Reflection
                 .Property<HttpActionContext, HttpControllerContext>(
                     instance: new HttpActionContext(),
                     propertyGetter: ac => ac.ControllerContext,
@@ -75,8 +74,7 @@ namespace System.Web.Http
         [Fact]
         public void ActionDescriptor_Property()
         {
-            Assert
-                .Reflection
+            Assert.Reflection
                 .Property<HttpActionContext, HttpActionDescriptor>(
                     instance: new HttpActionContext(),
                     propertyGetter: ac => ac.ActionDescriptor,

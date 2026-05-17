@@ -29,8 +29,7 @@ public class Tests
         AssemblyName an = new AssemblyName();
         an.Name = "NOT.EXISTS";
 
-        AssemblyBuilder ab = AppDomain
-            .CurrentDomain
+        AssemblyBuilder ab = AppDomain.CurrentDomain
             .DefineDynamicAssembly(an, AssemblyBuilderAccess.RunAndSave);
 
         ModuleBuilder mb = ab.DefineDynamicModule("NOT.EXISTS");

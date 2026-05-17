@@ -1126,8 +1126,7 @@ namespace System.Speech.Internal.SrgsParser
                 return semanticTag;
             }
 
-            System
-                .Diagnostics
+            System.Diagnostics
                 .Debug
                 .Assert(_parser.Grammar.TagFormat == SrgsTagFormat.KeyValuePairs);
 

@@ -613,8 +613,7 @@ namespace System.Web.UI
             ModelBindingContext bindingContext = new ModelBindingContext()
             {
                 ModelBinderProviders = ModelBinderProviders.Providers,
-                ModelMetadata = ModelMetadataProviders
-                    .Current
+                ModelMetadata = ModelMetadataProviders.Current
                     .GetMetadataForType(() => model, typeof(TModel)),
                 ModelState = ModelState,
                 ValueProvider = valueProvider,
@@ -2095,8 +2094,7 @@ namespace System.Web.UI
                 {
                     // ASP.NET 4.5 Crypto DCR: Go through the new AspNetCryptoServiceProvider
                     // if we're configured to do so.
-                    ICryptoService cryptoService = AspNetCryptoServiceProvider
-                        .Instance
+                    ICryptoService cryptoService = AspNetCryptoServiceProvider.Instance
                         .GetCryptoService(purpose, CryptoServiceOptions.CacheableOutput);
                     clearData = cryptoService.Unprotect(protectedData);
                 }
@@ -2250,8 +2248,7 @@ namespace System.Web.UI
                 ret = null;
             // If page was posted due to a HttpResponse.Redirect, ignore the postback.
             else if (
-                Request
-                    .QueryStringText
+                Request.QueryStringText
                     .IndexOf(HttpResponse.RedirectQueryStringAssignment, StringComparison.Ordinal)
                 != -1
             )
@@ -2296,8 +2293,7 @@ namespace System.Web.UI
             {
                 // ASP.NET 4.5 Crypto DCR: Go through the new AspNetCryptoServiceProvider
                 // if we're configured to do so.
-                ICryptoService cryptoService = AspNetCryptoServiceProvider
-                    .Instance
+                ICryptoService cryptoService = AspNetCryptoServiceProvider.Instance
                     .GetCryptoService(purpose, CryptoServiceOptions.CacheableOutput);
                 protectedData = cryptoService.Protect(clearData);
             }
@@ -7402,8 +7398,7 @@ window.onload = WebForm_RestoreScrollPosition;
 
                     try
                     {
-                        _page
-                            .Context
+                        _page.Context
                             .InvokeCancellableCallback(
                                 new WaitCallback(o =>
                                 {
@@ -8110,8 +8105,7 @@ window.onload = WebForm_RestoreScrollPosition;
             }
             else
             {
-                System
-                    .Web
+                System.Web
                     .Util
                     .Debug
                     .Trace("tpeters", prefix + "ObjViewState: " + controlViewState.ToString());
@@ -8126,8 +8120,7 @@ window.onload = WebForm_RestoreScrollPosition;
 
                     if (control == null)
                     {
-                        System
-                            .Web
+                        System.Web
                             .Util
                             .Debug
                             .Trace("tpeters", prefix + "Control index: " + index.ToString());
@@ -8149,8 +8142,7 @@ window.onload = WebForm_RestoreScrollPosition;
                                 s = "out of range";
                             }
                         }
-                        System
-                            .Web
+                        System.Web
                             .Util
                             .Debug
                             .Trace(

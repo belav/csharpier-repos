@@ -452,8 +452,7 @@ namespace System.ServiceModel.Channels
                 case UnsafeNativeMethods.ERROR_NOT_ENOUGH_MEMORY:
                 case UnsafeNativeMethods.ERROR_OUTOFMEMORY:
                 case UnsafeNativeMethods.ERROR_NO_SYSTEM_RESOURCES:
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InsufficientMemoryException(SR.GetString(SR.InsufficentMemory), e)
                         );
@@ -585,8 +584,7 @@ namespace System.ServiceModel.Channels
                     break;
 
                 default:
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(
@@ -647,8 +645,7 @@ namespace System.ServiceModel.Channels
                         listenStartedEvent = null;
                         if (listenStartedException != null)
                         {
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(listenStartedException);
                         }
                     }
@@ -669,8 +666,7 @@ namespace System.ServiceModel.Channels
                 switch (listenerException.NativeErrorCode)
                 {
                     case UnsafeNativeMethods.ERROR_ALREADY_EXISTS:
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new AddressAlreadyInUseException(
                                     SR.GetString(SR.HttpRegistrationAlreadyExists, httpListenUrl),
@@ -679,8 +675,7 @@ namespace System.ServiceModel.Channels
                             );
 
                     case UnsafeNativeMethods.ERROR_SHARING_VIOLATION:
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new AddressAlreadyInUseException(
                                     SR.GetString(
@@ -693,8 +688,7 @@ namespace System.ServiceModel.Channels
                             );
 
                     case UnsafeNativeMethods.ERROR_ACCESS_DENIED:
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new AddressAccessDeniedException(
                                     SR.GetString(SR.HttpRegistrationAccessDenied, httpListenUrl),
@@ -703,8 +697,7 @@ namespace System.ServiceModel.Channels
                             );
 
                     case UnsafeNativeMethods.ERROR_ALLOTTED_SPACE_EXCEEDED:
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new CommunicationException(
                                     SR.GetString(SR.HttpRegistrationLimitExceeded, httpListenUrl),
@@ -713,8 +706,7 @@ namespace System.ServiceModel.Channels
                             );
 
                     case UnsafeNativeMethods.ERROR_INVALID_PARAMETER:
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(
                                     SR.GetString(SR.HttpInvalidListenURI, ListenUri.OriginalString),
@@ -723,8 +715,7 @@ namespace System.ServiceModel.Channels
                             );
 
                     default:
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 HttpChannelUtilities.CreateCommunicationException(listenerException)
                             );

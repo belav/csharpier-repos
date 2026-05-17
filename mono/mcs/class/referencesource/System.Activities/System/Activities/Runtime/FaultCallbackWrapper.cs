@@ -169,11 +169,8 @@ namespace System.Activities.Runtime
                         this.propagatedException,
                         this.originalExceptionSource
                     );
-                    this.callbackWrapper.Invoke(
-                        faultContext,
-                        this.propagatedException,
-                        this.propagatedFrom
-                    );
+                    this.callbackWrapper
+                        .Invoke(faultContext, this.propagatedException, this.propagatedFrom);
 
                     if (!faultContext.IsFaultHandled)
                     {

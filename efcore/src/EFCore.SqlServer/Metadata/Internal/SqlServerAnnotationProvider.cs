@@ -72,8 +72,7 @@ public class SqlServerAnnotationProvider : RelationalAnnotationProvider
         }
 
         if (
-            model
-                .Tables
+            model.Tables
                 .Any(t =>
                     !t.IsExcludedFromMigrations
                     && (t[SqlServerAnnotationNames.MemoryOptimized] as bool? == true)
@@ -208,8 +207,7 @@ public class SqlServerAnnotationProvider : RelationalAnnotationProvider
         {
             var includeColumns = includeProperties
                 .Select(p =>
-                    modelIndex
-                        .DeclaringEntityType
+                    modelIndex.DeclaringEntityType
                         .FindProperty(p)!
                         .GetColumnName(StoreObjectIdentifier.Table(table.Name, table.Schema))
                 )
@@ -256,8 +254,7 @@ public class SqlServerAnnotationProvider : RelationalAnnotationProvider
         }
 
         var table = StoreObjectIdentifier.Table(column.Table.Name, column.Table.Schema);
-        var identityProperty = column
-            .PropertyMappings
+        var identityProperty = column.PropertyMappings
             .Select(m => m.Property)
             .FirstOrDefault(p =>
                 p.GetValueGenerationStrategy(table)

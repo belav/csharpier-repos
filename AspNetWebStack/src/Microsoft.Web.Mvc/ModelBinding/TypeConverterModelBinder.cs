@@ -27,8 +27,7 @@ namespace Microsoft.Web.Mvc.ModelBinding
         {
             ModelBinderUtil.ValidateBindingContext(bindingContext);
 
-            ValueProviderResult valueProviderResult = bindingContext
-                .ValueProvider
+            ValueProviderResult valueProviderResult = bindingContext.ValueProvider
                 .GetValue(bindingContext.ModelName);
             if (valueProviderResult == null)
             {
@@ -53,8 +52,7 @@ namespace Microsoft.Web.Mvc.ModelBinding
                     );
                     if (errorString != null)
                     {
-                        bindingContext
-                            .ModelState
+                        bindingContext.ModelState
                             .AddModelError(bindingContext.ModelName, errorString);
                     }
                 }

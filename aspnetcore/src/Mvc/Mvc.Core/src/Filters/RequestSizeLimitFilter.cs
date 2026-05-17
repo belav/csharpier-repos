@@ -47,8 +47,7 @@ internal sealed partial class RequestSizeLimitFilter : IAuthorizationFilter, IRe
             return;
         }
 
-        var maxRequestBodySizeFeature = context
-            .HttpContext
+        var maxRequestBodySizeFeature = context.HttpContext
             .Features
             .Get<IHttpMaxRequestBodySizeFeature>();
 

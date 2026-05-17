@@ -174,8 +174,7 @@ namespace System.Data.Services.Client
                     tmp[i] = ' ';
                 }
 
-                System
-                    .Threading
+                System.Threading
                     .Interlocked
                     .CompareExchange(ref Util.whitespaceForTracing, tmp, whitespace);
                 whitespace = tmp;

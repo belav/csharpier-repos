@@ -30,8 +30,7 @@ namespace Microsoft.Interop.UnitTests.Verifiers
         > GetNullableWarningsFromCompiler()
         {
             string[] args = { "/warnaserror:nullable" };
-            var commandLineArguments = CSharpCommandLineParser
-                .Default
+            var commandLineArguments = CSharpCommandLineParser.Default
                 .Parse(
                     args,
                     baseDirectory: Environment.CurrentDirectory,
@@ -48,8 +47,7 @@ namespace Microsoft.Interop.UnitTests.Verifiers
             {
                 var project = solution.GetProject(projectId)!;
                 var compilationOptions = project.CompilationOptions!;
-                var diagnosticOptions = compilationOptions
-                    .SpecificDiagnosticOptions
+                var diagnosticOptions = compilationOptions.SpecificDiagnosticOptions
                     .SetItems(NullableWarnings);
 
                 // Explicitly enable diagnostics that are not enabled by default
@@ -77,8 +75,7 @@ namespace Microsoft.Interop.UnitTests.Verifiers
                 }
 
                 compilationOptions = compilationOptions.WithSpecificDiagnosticOptions(
-                    compilationOptions
-                        .SpecificDiagnosticOptions
+                    compilationOptions.SpecificDiagnosticOptions
                         .SetItems(NullableWarnings)
                         .AddRange(enableAnalyzersOptions)
                         .AddRange(TestUtils.BindingRedirectWarnings)

@@ -250,8 +250,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 );
 
                 var modifier = CSharpCustomModifier.CreateRequired(
-                    moduleBeingBuilt
-                        .Compilation
+                    moduleBeingBuilt.Compilation
                         .GetWellKnownType(
                             WellKnownType.System_Runtime_InteropServices_UnmanagedType
                         )

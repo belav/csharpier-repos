@@ -79,8 +79,7 @@ public static class ChangeTrackerExtensions
                 return 1;
             }
 
-            var result = StringComparer
-                .InvariantCulture
+            var result = StringComparer.InvariantCulture
                 .Compare(x.EntityType.Name, y.EntityType.Name);
             if (result != 0)
             {

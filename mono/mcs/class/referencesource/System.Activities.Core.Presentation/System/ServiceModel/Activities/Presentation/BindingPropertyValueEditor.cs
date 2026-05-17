@@ -11,8 +11,7 @@ namespace System.ServiceModel.Activities.Presentation
     {
         public BindingPropertyValueEditor()
         {
-            this.InlineEditorTemplate = EditorCategoryTemplateDictionary
-                .Instance
+            this.InlineEditorTemplate = EditorCategoryTemplateDictionary.Instance
                 .GetCategoryTemplate("Binding_InlineEditorTemplate");
         }
     }

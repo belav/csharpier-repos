@@ -68,8 +68,7 @@ namespace System.Tests
             );
             if (
                 OperatingSystem.IsWindows()
-                && System
-                    .Tests
+                && System.Tests
                     .SetEnvironmentVariable
                     .IsSupportedTarget(EnvironmentVariableTarget.User)
             )

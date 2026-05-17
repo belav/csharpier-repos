@@ -31,8 +31,7 @@ namespace System.ServiceModel.Dispatcher
         {
             if (operationDescription == null)
             {
-                throw System
-                    .ServiceModel
+                throw System.ServiceModel
                     .DiagnosticUtility
                     .ExceptionUtility
                     .ThrowHelperArgumentNull("operationDescription");
@@ -53,8 +52,7 @@ namespace System.ServiceModel.Dispatcher
         {
             if (parameterType == null)
             {
-                throw System
-                    .ServiceModel
+                throw System.ServiceModel
                     .DiagnosticUtility
                     .ExceptionUtility
                     .ThrowHelperArgumentNull("parameterType");
@@ -183,8 +181,7 @@ namespace System.ServiceModel.Dispatcher
             GetDataContractJsonSerializer(parameterType).WriteObject(jsonWriter, parameter);
             jsonWriter.Flush();
             memoryStream.Seek(0, SeekOrigin.Begin);
-            return Encoding
-                .UTF8
+            return Encoding.UTF8
                 .GetString(
                     memoryStream.GetBuffer(),
                     (int)memoryStream.Position,

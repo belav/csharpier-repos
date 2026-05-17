@@ -154,8 +154,7 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnusedParametersAndValues
                     && parent.SyntaxTree.Options.LanguageVersion() >= LanguageVersion.CSharp9
                 )
                 {
-                    var trailingTrivia = declarationPattern
-                        .Type
+                    var trailingTrivia = declarationPattern.Type
                         .GetTrailingTrivia()
                         .AddRange(triviaToAppend);
                     return SyntaxFactory
@@ -307,8 +306,7 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnusedParametersAndValues
                 if (!originalCompoundAssignment.IsKind(SyntaxKind.CoalesceAssignmentExpression))
                 {
                     // Case 1. Simple compound assignment parented by an expression statement.
-                    return editor
-                        .Generator
+                    return editor.Generator
                         .AssignmentStatement(newAssignmentTarget, rightOfAssignment);
                 }
                 else
@@ -316,8 +314,7 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnusedParametersAndValues
                     // Case 2. Null coalescing compound assignment parented by an expression statement.
                     // Remove leading trivia from 'leftOfAssignment' as it should have been moved to 'newAssignmentTarget'.
                     leftOfAssignment = leftOfAssignment.WithoutLeadingTrivia();
-                    return editor
-                        .Generator
+                    return editor.Generator
                         .AssignmentStatement(
                             newAssignmentTarget,
                             SyntaxFactory.BinaryExpression(

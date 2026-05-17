@@ -261,8 +261,7 @@ namespace System.Runtime.Serialization
             }
 
             if (maxItemsInObjectGraph < 0)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentOutOfRangeException(
                             "maxItemsInObjectGraph",
@@ -519,8 +518,7 @@ namespace System.Runtime.Serialization
         )
         {
             if (MaxItemsInObjectGraph == 0)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         XmlObjectSerializer.CreateSerializationException(
                             SR.GetString(SR.ExceededMaxItemsQuota, MaxItemsInObjectGraph)
@@ -545,8 +543,7 @@ namespace System.Runtime.Serialization
             if (graph == null)
             {
                 if (IsRootXmlAny(rootName, contract))
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             XmlObjectSerializer.CreateSerializationException(
                                 SR.GetString(SR.IsAnyCannotBeNull, declaredType)
@@ -583,8 +580,7 @@ namespace System.Runtime.Serialization
                 {
                     XmlObjectSerializerWriteContext context = null;
                     if (IsRootXmlAny(rootName, contract))
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 XmlObjectSerializer.CreateSerializationException(
                                     SR.GetString(
@@ -672,8 +668,7 @@ namespace System.Runtime.Serialization
         )
         {
             if (MaxItemsInObjectGraph == 0)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         XmlObjectSerializer.CreateSerializationException(
                             SR.GetString(SR.ExceededMaxItemsQuota, MaxItemsInObjectGraph)
@@ -699,8 +694,7 @@ namespace System.Runtime.Serialization
                         expectedName = rootName;
                         expectedNs = rootNamespace;
                     }
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             XmlObjectSerializer.CreateSerializationExceptionWithReaderDetails(
                                 SR.GetString(SR.ExpectingElement, expectedNs, expectedName),
@@ -711,8 +705,7 @@ namespace System.Runtime.Serialization
             }
             else if (!IsStartElement(xmlReader))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         XmlObjectSerializer.CreateSerializationExceptionWithReaderDetails(
                             SR.GetString(SR.ExpectingElementAtDeserialize, XmlNodeType.Element),

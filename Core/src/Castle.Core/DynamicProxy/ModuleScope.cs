@@ -168,8 +168,7 @@ namespace Castle.DynamicProxy
         public static byte[] GetKeyPair()
         {
             using (
-                var stream = typeof(ModuleScope)
-                    .Assembly
+                var stream = typeof(ModuleScope).Assembly
                     .GetManifestResourceStream("Castle.DynamicProxy.DynProxy.snk")
             )
             {
@@ -331,8 +330,7 @@ namespace Castle.DynamicProxy
                 AssemblyBuilder assemblyBuilder;
                 try
                 {
-                    assemblyBuilder = AppDomain
-                        .CurrentDomain
+                    assemblyBuilder = AppDomain.CurrentDomain
                         .DefineDynamicAssembly(
                             assemblyName,
                             AssemblyBuilderAccess.RunAndSave,
@@ -364,8 +362,7 @@ namespace Castle.DynamicProxy
 #endif
             {
 #if FEATURE_APPDOMAIN
-                var assemblyBuilder = AppDomain
-                    .CurrentDomain
+                var assemblyBuilder = AppDomain.CurrentDomain
                     .DefineDynamicAssembly(assemblyName, AssemblyBuilderAccess.Run);
 #else
                 var assemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(

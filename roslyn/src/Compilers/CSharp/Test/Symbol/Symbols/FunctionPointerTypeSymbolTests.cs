@@ -1461,8 +1461,7 @@ class C
                     }
 
                     Assert.True(
-                        param1
-                            .Type
+                        param1.Type
                             .Equals(
                                 param2.Type,
                                 TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds
@@ -1577,8 +1576,7 @@ class C
 
             var misplacedDeclaration = (
                 (ArrayTypeSyntax)functionPointerTypeSyntax.ParameterList.Parameters.Single().Type!
-            )
-                .RankSpecifiers
+            ).RankSpecifiers
                 .Single()
                 .Sizes
                 .Single();
@@ -3014,17 +3012,19 @@ namespace System
             {
                 // No equality between pointers with differing refkinds
                 Assert.False(
-                    ptr1.NoRef.Equals(
-                        ptr2.ByRef,
-                        TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds
-                    )
+                    ptr1.NoRef
+                        .Equals(
+                            ptr2.ByRef,
+                            TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds
+                        )
                 );
                 Assert.False(ptr1.NoRef.Equals(ptr2.ByRef, TypeCompareKind.ConsiderEverything));
                 Assert.False(
-                    ptr1.ByRef.Equals(
-                        ptr2.NoRef,
-                        TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds
-                    )
+                    ptr1.ByRef
+                        .Equals(
+                            ptr2.NoRef,
+                            TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds
+                        )
                 );
                 Assert.False(ptr1.ByRef.Equals(ptr2.NoRef, TypeCompareKind.ConsiderEverything));
 
@@ -3047,17 +3047,19 @@ namespace System
                 }
                 Assert.Equal(
                     expectedConventionEquality,
-                    ptr1.NoRef.Equals(
-                        ptr2.NoRef,
-                        TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds
-                    )
+                    ptr1.NoRef
+                        .Equals(
+                            ptr2.NoRef,
+                            TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds
+                        )
                 );
                 Assert.Equal(
                     expectedConventionEquality,
-                    ptr1.ByRef.Equals(
-                        ptr2.ByRef,
-                        TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds
-                    )
+                    ptr1.ByRef
+                        .Equals(
+                            ptr2.ByRef,
+                            TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds
+                        )
                 );
                 Assert.Equal(
                     expectedFullEquality,
@@ -3149,17 +3151,19 @@ namespace System
             {
                 // No equality between pointers with differing refkinds
                 Assert.False(
-                    ptr1.NoRef.Equals(
-                        ptr2.ByRef,
-                        TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds
-                    )
+                    ptr1.NoRef
+                        .Equals(
+                            ptr2.ByRef,
+                            TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds
+                        )
                 );
                 Assert.False(ptr1.NoRef.Equals(ptr2.ByRef, TypeCompareKind.ConsiderEverything));
                 Assert.False(
-                    ptr1.ByRef.Equals(
-                        ptr2.NoRef,
-                        TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds
-                    )
+                    ptr1.ByRef
+                        .Equals(
+                            ptr2.NoRef,
+                            TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds
+                        )
                 );
                 Assert.False(ptr1.ByRef.Equals(ptr2.NoRef, TypeCompareKind.ConsiderEverything));
 
@@ -3179,17 +3183,19 @@ namespace System
                 );
                 Assert.Equal(
                     expectedConventionEquality,
-                    ptr1.NoRef.Equals(
-                        ptr2.NoRef,
-                        TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds
-                    )
+                    ptr1.NoRef
+                        .Equals(
+                            ptr2.NoRef,
+                            TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds
+                        )
                 );
                 Assert.Equal(
                     expectedConventionEquality,
-                    ptr1.ByRef.Equals(
-                        ptr2.ByRef,
-                        TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds
-                    )
+                    ptr1.ByRef
+                        .Equals(
+                            ptr2.ByRef,
+                            TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds
+                        )
                 );
                 Assert.Equal(
                     expectedFullEquality,
@@ -3287,17 +3293,19 @@ namespace System
             {
                 // No equality between pointers with differing refkinds
                 Assert.False(
-                    ptr1.NoRef.Equals(
-                        ptr2.ByRef,
-                        TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds
-                    )
+                    ptr1.NoRef
+                        .Equals(
+                            ptr2.ByRef,
+                            TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds
+                        )
                 );
                 Assert.False(ptr1.NoRef.Equals(ptr2.ByRef, TypeCompareKind.ConsiderEverything));
                 Assert.False(
-                    ptr1.ByRef.Equals(
-                        ptr2.NoRef,
-                        TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds
-                    )
+                    ptr1.ByRef
+                        .Equals(
+                            ptr2.NoRef,
+                            TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds
+                        )
                 );
                 Assert.False(ptr1.ByRef.Equals(ptr2.NoRef, TypeCompareKind.ConsiderEverything));
 
@@ -3318,17 +3326,19 @@ namespace System
 
                 Assert.Equal(
                     expectedTypeConventionEquality,
-                    ptr1.NoRef.Equals(
-                        ptr2.NoRef,
-                        TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds
-                    )
+                    ptr1.NoRef
+                        .Equals(
+                            ptr2.NoRef,
+                            TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds
+                        )
                 );
                 Assert.Equal(
                     expectedRefConventionEquality,
-                    ptr1.ByRef.Equals(
-                        ptr2.ByRef,
-                        TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds
-                    )
+                    ptr1.ByRef
+                        .Equals(
+                            ptr2.ByRef,
+                            TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds
+                        )
                 );
                 // If we weren't expected the ref version to be equal, but we were expecting the type version to be equal, then that means
                 // the type version will be identical because it will have no ref modifiers

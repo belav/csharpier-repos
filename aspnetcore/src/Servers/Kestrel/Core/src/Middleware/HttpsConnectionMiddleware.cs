@@ -192,8 +192,7 @@ internal sealed class HttpsConnectionMiddleware
         context.Features.Set<ISslStreamFeature>(feature);
         context.Features.Set<SslStream>(sslStream); // Anti-pattern, but retain for back compat
 
-        var metricsContext = context
-            .Features
+        var metricsContext = context.Features
             .GetRequiredFeature<IConnectionMetricsContextFeature>()
             .MetricsContext;
         var startTimestamp = Stopwatch.GetTimestamp();
@@ -287,12 +286,10 @@ internal sealed class HttpsConnectionMiddleware
             {
                 if (protocolName != "tls")
                 {
-                    metricsTags
-                        .Tags
+                    metricsTags.Tags
                         .Add(new KeyValuePair<string, object?>("tls.protocol.name", protocolName));
                 }
-                metricsTags
-                    .Tags
+                metricsTags.Tags
                     .Add(
                         new KeyValuePair<string, object?>("tls.protocol.version", protocolVersion)
                     );
@@ -328,8 +325,7 @@ internal sealed class HttpsConnectionMiddleware
             Exception ex
         )
         {
-            KestrelEventSource
-                .Log
+            KestrelEventSource.Log
                 .TlsHandshakeFailed(metricsContext.ConnectionContext.ConnectionId);
             KestrelEventSource.Log.TlsHandshakeStop(metricsContext.ConnectionContext, null);
             metrics.TlsHandshakeStop(
@@ -376,8 +372,7 @@ internal sealed class HttpsConnectionMiddleware
             {
                 using (store)
                 {
-                    var certs = store
-                        .Certificates
+                    var certs = store.Certificates
                         .Find(
                             X509FindType.FindByThumbprint,
                             certificate.Thumbprint,
@@ -398,8 +393,7 @@ internal sealed class HttpsConnectionMiddleware
             {
                 using (store)
                 {
-                    var certs = store
-                        .Certificates
+                    var certs = store.Certificates
                         .Find(
                             X509FindType.FindByThumbprint,
                             certificate.Thumbprint,

@@ -256,8 +256,7 @@ namespace System.ServiceModel.Dispatcher
                     break;
 
                 default:
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new QueryCompileException(
                                 QueryCompileError.InvalidType,
@@ -292,8 +291,7 @@ namespace System.ServiceModel.Dispatcher
                 object o = this.variable.Evaluate(this.xsltContext);
                 if (o == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new QueryProcessingException(
                                 QueryProcessingError.Unexpected,
@@ -328,8 +326,7 @@ namespace System.ServiceModel.Dispatcher
                             }
                             else
                             {
-                                throw DiagnosticUtility
-                                    .ExceptionUtility
+                                throw DiagnosticUtility.ExceptionUtility
                                     .ThrowHelperError(
                                         new QueryProcessingException(
                                             QueryProcessingError.Unexpected,
@@ -342,8 +339,7 @@ namespace System.ServiceModel.Dispatcher
                         break;
 
                     default:
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperCritical(
                                 new QueryProcessingException(
                                     QueryProcessingError.Unexpected,

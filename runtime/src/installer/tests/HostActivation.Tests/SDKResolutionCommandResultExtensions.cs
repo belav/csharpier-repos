@@ -33,22 +33,19 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
 
             if (globalJsonPath is not null)
             {
-                constraint = constraint
-                    .And
+                constraint = constraint.And
                     .HaveStdErrContaining($"global.json file: {globalJsonPath}");
             }
 
             if (requestedVersion is not null)
             {
-                constraint = constraint
-                    .And
+                constraint = constraint.And
                     .HaveStdErrContaining($"Requested SDK version: {requestedVersion}");
             }
 
             if (globalJsonPath is not null && requestedVersion is not null)
             {
-                constraint = constraint
-                    .And
+                constraint = constraint.And
                     .HaveStdErrContaining(
                         $"Install the [{requestedVersion}] .NET SDK or update [{globalJsonPath}] to match an installed SDK."
                     );

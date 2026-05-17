@@ -30,8 +30,7 @@ namespace System.Security.Cryptography
                 try
                 {
                     if (
-                        Interop
-                            .Crypt32
+                        Interop.Crypt32
                             .CryptFormatObject(
                                 X509_ASN_ENCODING,
                                 0,
@@ -53,8 +52,7 @@ namespace System.Security.Cryptography
                         fixed (char* bufferPtr = buffer)
                         {
                             if (
-                                Interop
-                                    .Crypt32
+                                Interop.Crypt32
                                     .CryptFormatObject(
                                         X509_ASN_ENCODING,
                                         0,

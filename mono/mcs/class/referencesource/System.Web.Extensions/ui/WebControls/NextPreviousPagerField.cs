@@ -686,8 +686,7 @@ namespace System.Web.UI.WebControls
         {
             if (ShowFirstPageButton)
             {
-                container
-                    .Controls
+                container.Controls
                     .Add(
                         CreateControl(
                             DataControlCommands.FirstPageCommandArgument,
@@ -702,8 +701,7 @@ namespace System.Web.UI.WebControls
 
             if (ShowPreviousPageButton)
             {
-                container
-                    .Controls
+                container.Controls
                     .Add(
                         CreateControl(
                             DataControlCommands.PreviousPageCommandArgument,
@@ -718,8 +716,7 @@ namespace System.Web.UI.WebControls
 
             if (ShowNextPageButton)
             {
-                container
-                    .Controls
+                container.Controls
                     .Add(
                         CreateControl(
                             DataControlCommands.NextPageCommandArgument,
@@ -734,8 +731,7 @@ namespace System.Web.UI.WebControls
 
             if (ShowLastPageButton)
             {
-                container
-                    .Controls
+                container.Controls
                     .Add(
                         CreateControl(
                             DataControlCommands.LastPageCommandArgument,
@@ -755,8 +751,7 @@ namespace System.Web.UI.WebControls
 
             if (ShowFirstPageButton)
             {
-                container
-                    .Controls
+                container.Controls
                     .Add(CreateLink(FirstPageText, 0, FirstPageImageUrl, EnablePreviousPage));
                 AddNonBreakingSpace(container);
             }
@@ -764,8 +759,7 @@ namespace System.Web.UI.WebControls
             if (ShowPreviousPageButton)
             {
                 int pageIndex = (_startRowIndex / _maximumRows) - 1;
-                container
-                    .Controls
+                container.Controls
                     .Add(
                         CreateLink(
                             PreviousPageText,
@@ -780,8 +774,7 @@ namespace System.Web.UI.WebControls
             if (ShowNextPageButton)
             {
                 int pageIndex = (_startRowIndex + _maximumRows) / _maximumRows;
-                container
-                    .Controls
+                container.Controls
                     .Add(CreateLink(NextPageText, pageIndex, NextPageImageUrl, EnableNextPage));
                 AddNonBreakingSpace(container);
             }
@@ -790,8 +783,7 @@ namespace System.Web.UI.WebControls
             {
                 int pageIndex =
                     (_totalRowCount / _maximumRows) - (_totalRowCount % _maximumRows == 0 ? 1 : 0);
-                container
-                    .Controls
+                container.Controls
                     .Add(CreateLink(LastPageText, pageIndex, LastPageImageUrl, EnableNextPage));
                 AddNonBreakingSpace(container);
             }

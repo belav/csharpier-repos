@@ -14,8 +14,7 @@ public class CultureController : Controller
     {
         if (culture != null)
         {
-            HttpContext
-                .Response
+            HttpContext.Response
                 .Cookies
                 .Append(
                     CookieRequestCultureProvider.DefaultCookieName,

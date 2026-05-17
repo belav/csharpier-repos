@@ -87,8 +87,7 @@ namespace MonoTests.System.Xml
         {
             XmlDocument document = new XmlDocument();
             document.LoadXml("<foo><bar><baz/></bar></foo>");
-            XPathNavigator navigator = document
-                .DocumentElement
+            XPathNavigator navigator = document.DocumentElement
                 .FirstChild
                 .FirstChild
                 .CreateNavigator();
@@ -101,8 +100,7 @@ namespace MonoTests.System.Xml
         {
             XmlDocument document = new XmlDocument();
             document.LoadXml("<foo><bar><baz/></bar></foo>");
-            XPathNavigator navigator = document
-                .DocumentElement
+            XPathNavigator navigator = document.DocumentElement
                 .FirstChild
                 .FirstChild
                 .CreateNavigator();

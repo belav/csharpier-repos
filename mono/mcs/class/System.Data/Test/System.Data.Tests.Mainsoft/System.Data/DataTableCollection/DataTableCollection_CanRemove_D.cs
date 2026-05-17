@@ -176,12 +176,13 @@ namespace tests.system_data_dll.System_Data
             ds.Tables.Add(DataProvider.CreateParentDataTable());
             ds.Tables.Add(DataProvider.CreateChildDataTable());
 
-            ds.Relations.Add(
-                "rel",
-                ds.Tables[0].Columns["ParentId"],
-                ds.Tables[1].Columns["ParentId"],
-                false
-            );
+            ds.Relations
+                .Add(
+                    "rel",
+                    ds.Tables[0].Columns["ParentId"],
+                    ds.Tables[1].Columns["ParentId"],
+                    false
+                );
 
             Compare(ds.Tables.CanRemove(ds.Tables[0]), false);
             Compare(ds.Tables.CanRemove(ds.Tables[1]), false);

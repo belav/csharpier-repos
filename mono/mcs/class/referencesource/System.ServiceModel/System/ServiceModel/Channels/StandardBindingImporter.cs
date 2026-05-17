@@ -34,8 +34,7 @@ namespace System.ServiceModel.Channels
 
 #pragma warning suppress 56506 // Microsoft, endpointContext.Endpoint is never null
             if (endpointContext.Endpoint.Binding == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("endpointContext.Binding");
 
             if (endpointContext.Endpoint.Binding is CustomBinding)

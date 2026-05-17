@@ -129,8 +129,7 @@ namespace System.Xml
                 }
                 else
                 {
-                    return XmlUntypedConverter
-                        .Untyped
+                    return XmlUntypedConverter.Untyped
                         .ChangeType(typedValue, returnType, namespaceResolver);
                 }
             }
@@ -264,14 +263,12 @@ namespace System.Xml
                         typedValue = originalStringValue;
                     }
 
-                    return xmlType
-                        .ValueConverter
+                    return xmlType.ValueConverter
                         .ChangeType(typedValue, returnType, namespaceResolver);
                 }
                 else
                 {
-                    return XmlUntypedConverter
-                        .Untyped
+                    return XmlUntypedConverter.Untyped
                         .ChangeType(typedValue, returnType, namespaceResolver);
                 }
             }
@@ -858,8 +855,7 @@ namespace System.Xml
                 {
                     if (_validationState == ValidatingReaderState.OnDefaultAttribute)
                     {
-                        XmlSchemaAttribute schemaAttr = _attributePSVI
-                            .attributeSchemaInfo
+                        XmlSchemaAttribute schemaAttr = _attributePSVI.attributeSchemaInfo
                             .SchemaAttribute!;
                         originalStringValue = schemaAttr.DefaultValue ?? schemaAttr.FixedValue!;
                     }

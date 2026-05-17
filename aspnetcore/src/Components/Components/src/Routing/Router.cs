@@ -313,8 +313,7 @@ public partial class Router : IComponent, IHandleAfterRender, IDisposable
         var cancellationTcs = new TaskCompletionSource(
             TaskCreationOptions.RunContinuationsAsynchronously
         );
-        navigateContext
-            .CancellationToken
+        navigateContext.CancellationToken
             .Register(state => ((TaskCompletionSource)state).SetResult(), cancellationTcs);
 
         try

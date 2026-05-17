@@ -3065,8 +3065,7 @@ public class HubConnectionTests : FunctionalTestBase
                 .WithUrl(server.Url + HubPaths.First(), HttpTransportType.WebSockets)
                 .WithAutomaticReconnect();
 
-            connectionBuilder
-                .Services
+            connectionBuilder.Services
                 .Configure<HttpConnectionOptions>(o =>
                 {
                     o.SkipNegotiation = true;
@@ -3643,8 +3642,7 @@ public class HubConnectionTests : FunctionalTestBase
                             );
                             httpResponse.EnsureSuccessStatusCode();
                             var authHeader = await httpResponse.Content.ReadAsStringAsync();
-                            websocket
-                                .Options
+                            websocket.Options
                                 .SetRequestHeader("Authorization", $"Bearer {authHeader}");
 
                             await websocket.ConnectAsync(context.Uri, token);
@@ -3778,8 +3776,7 @@ public class HubConnectionTests : FunctionalTestBase
                 .WithStatefulReconnect()
                 .WithUrl(server.Url + "/default", HttpTransportType.WebSockets);
             connectionBuilder.Services.AddSingleton(protocol);
-            connectionBuilder
-                .Services
+            connectionBuilder.Services
                 .Configure<HubConnectionOptions>(o => o.StatefulReconnectBufferSize = 500);
             var connection = connectionBuilder.Build();
 
@@ -3857,8 +3854,7 @@ public class HubConnectionTests : FunctionalTestBase
                     }
                 );
             // Force version 1 on the server so it turns off Stateful Reconnects
-            connectionBuilder
-                .Services
+            connectionBuilder.Services
                 .AddSingleton<IHubProtocol>(
                     new HubProtocolVersionTests.SingleVersionHubProtocol(HubProtocols["json"], 1)
                 );

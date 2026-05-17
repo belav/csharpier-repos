@@ -103,8 +103,7 @@ namespace System.ServiceModel.Syndication
         {
             if (inlineCategories == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("inlineCategories");
             }
             return inlineCategories.CreateCategory();

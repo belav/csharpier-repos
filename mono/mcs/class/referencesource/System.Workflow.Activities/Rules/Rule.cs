@@ -165,8 +165,7 @@ namespace System.Workflow.Activities.Rules
             int oldErrorCount = validation.Errors.Count;
 
             if (string.IsNullOrEmpty(name))
-                validation
-                    .Errors
+                validation.Errors
                     .Add(
                         new ValidationError(
                             Messages.RuleNameMissing,
@@ -176,8 +175,7 @@ namespace System.Workflow.Activities.Rules
 
             // check the condition
             if (condition == null)
-                validation
-                    .Errors
+                validation.Errors
                     .Add(
                         new ValidationError(
                             Messages.MissingRuleCondition,
@@ -242,8 +240,7 @@ namespace System.Workflow.Activities.Rules
             if (statementsAfterHalt)
             {
                 // one or more actions after Halt
-                validator
-                    .Errors
+                validator.Errors
                     .Add(
                         new ValidationError(
                             Messages.UnreachableCodeHalt,

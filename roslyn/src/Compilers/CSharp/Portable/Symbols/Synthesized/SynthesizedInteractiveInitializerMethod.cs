@@ -259,8 +259,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 var compilation = DeclaringCompilation;
                 bool value =
                     (compilation.Options.NullableContextOptions != NullableContextOptions.Disable)
-                    || compilation
-                        .SyntaxTrees
+                    || compilation.SyntaxTrees
                         .Any(static tree =>
                             ((CSharpSyntaxTree)tree).IsNullableAnalysisEnabled(
                                 new TextSpan(0, tree.Length)

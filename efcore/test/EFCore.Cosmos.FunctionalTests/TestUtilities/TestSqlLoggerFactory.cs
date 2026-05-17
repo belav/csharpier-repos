@@ -52,8 +52,7 @@ public class TestSqlLoggerFactory : ListLoggerFactory
         }
         catch
         {
-            var methodCallLine = Environment
-                .StackTrace
+            var methodCallLine = Environment.StackTrace
                 .Split(new[] { _eol }, StringSplitOptions.RemoveEmptyEntries)[3][6..];
 
             var indexMethodEnding = methodCallLine.IndexOf(')') + 1;
@@ -94,8 +93,7 @@ public class TestSqlLoggerFactory : ListLoggerFactory
                 newBaseLine += "Output truncated.";
             }
 
-            Logger
-                .TestOutputHelper
+            Logger.TestOutputHelper
                 ?.WriteLine(
                     "---- New Baseline -------------------------------------------------------------------"
                 );

@@ -218,13 +218,14 @@ public class EntityReferenceMap
         {
             foreach (var map in _sharedTypeReferenceMap)
             {
-                count += map.Value.GetCountForState(
-                    added,
-                    modified,
-                    deleted,
-                    unchanged,
-                    countDeletedSharedIdentity
-                );
+                count += map.Value
+                    .GetCountForState(
+                        added,
+                        modified,
+                        deleted,
+                        unchanged,
+                        countDeletedSharedIdentity
+                    );
             }
         }
 

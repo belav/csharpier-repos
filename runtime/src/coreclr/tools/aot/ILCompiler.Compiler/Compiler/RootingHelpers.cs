@@ -195,8 +195,7 @@ namespace ILCompiler
             // and instantiations that are not fully closed can be ignored.
             if (
                 method.OwningType.IsGenericDefinition
-                || method
-                    .OwningType
+                || method.OwningType
                     .ContainsSignatureVariables(treatGenericParameterLikeSignatureVariable: true)
             )
             {
@@ -210,8 +209,7 @@ namespace ILCompiler
                     return false;
                 }
 
-                method = method
-                    .Context
+                method = method.Context
                     .GetMethodForInstantiatedType(
                         method.GetTypicalMethodDefinition(),
                         ((MetadataType)owningType).MakeInstantiatedType(inst)
@@ -285,8 +283,7 @@ namespace ILCompiler
             // and instantiations that are not fully closed can be ignored.
             if (
                 field.OwningType.IsGenericDefinition
-                || field
-                    .OwningType
+                || field.OwningType
                     .ContainsSignatureVariables(treatGenericParameterLikeSignatureVariable: true)
             )
             {
@@ -300,8 +297,7 @@ namespace ILCompiler
                     return false;
                 }
 
-                field = field
-                    .Context
+                field = field.Context
                     .GetFieldForInstantiatedType(
                         field.GetTypicalFieldDefinition(),
                         ((MetadataType)owningType).MakeInstantiatedType(inst)

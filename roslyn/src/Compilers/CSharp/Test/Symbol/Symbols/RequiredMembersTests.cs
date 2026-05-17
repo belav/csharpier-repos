@@ -128,16 +128,14 @@ public class RequiredMembersTests : CSharpTestBase
             {
                 var peMethod = (PEMethodSymbol)ctor;
                 var decoder = new MetadataDecoder(peModule, peMethod);
-                var obsoleteAttribute = peModule
-                    .Module
+                var obsoleteAttribute = peModule.Module
                     .TryGetDeprecatedOrExperimentalOrObsoleteAttribute(
                         peMethod.Handle,
                         decoder,
                         ignoreByRefLikeMarker: false,
                         ignoreRequiredMemberMarker: false
                     );
-                string? unsupportedCompilerFeatureToken = peModule
-                    .Module
+                string? unsupportedCompilerFeatureToken = peModule.Module
                     .GetFirstUnsupportedCompilerFeatureFromToken(
                         peMethod.Handle,
                         decoder,
@@ -165,8 +163,7 @@ public class RequiredMembersTests : CSharpTestBase
                         unsupportedCompilerFeatureToken
                     );
                     Assert.Null(
-                        peModule
-                            .Module
+                        peModule.Module
                             .GetFirstUnsupportedCompilerFeatureFromToken(
                                 peMethod.Handle,
                                 decoder,
@@ -8746,8 +8743,7 @@ public class Derived : Base
         Assert.True(tupleType.HasDeclaredRequiredMembers);
         AssertEx.Equal(
             new[] { "AnotherField", "Item1", "Item2", "Property" },
-            tupleType
-                .AllRequiredMembers
+            tupleType.AllRequiredMembers
                 .OrderBy(m => m.Key, StringComparer.InvariantCulture)
                 .Select(m => m.Key)
         );

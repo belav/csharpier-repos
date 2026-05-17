@@ -191,9 +191,8 @@ namespace System.Reflection.PortableExecutable.Tests
             {
                 var md = reader.GetMetadataReader();
                 var il = reader.GetMethodBody(
-                    md.GetMethodDefinition(
-                        MetadataTokens.MethodDefinitionHandle(1)
-                    ).RelativeVirtualAddress
+                    md.GetMethodDefinition(MetadataTokens.MethodDefinitionHandle(1))
+                        .RelativeVirtualAddress
                 );
 
                 Assert.Equal(new byte[] { 0, 42 }, il.GetILBytes());
@@ -216,9 +215,8 @@ namespace System.Reflection.PortableExecutable.Tests
             {
                 var md = reader.GetMetadataReader();
                 var il = reader.GetMethodBody(
-                    md.GetMethodDefinition(
-                        MetadataTokens.MethodDefinitionHandle(1)
-                    ).RelativeVirtualAddress
+                    md.GetMethodDefinition(MetadataTokens.MethodDefinitionHandle(1))
+                        .RelativeVirtualAddress
                 );
 
                 Assert.Equal(new byte[] { 0, 42 }, il.GetILBytes());
@@ -298,9 +296,8 @@ namespace System.Reflection.PortableExecutable.Tests
                 {
                     var md = reader.GetMetadataReader();
                     var il = reader.GetMethodBody(
-                        md.GetMethodDefinition(
-                            MetadataTokens.MethodDefinitionHandle(1)
-                        ).RelativeVirtualAddress
+                        md.GetMethodDefinition(MetadataTokens.MethodDefinitionHandle(1))
+                            .RelativeVirtualAddress
                     );
 
                     Assert.Equal(new byte[] { 0, 42 }, il.GetILBytes());
@@ -1284,8 +1281,7 @@ namespace System.Reflection.PortableExecutable.Tests
                 File.WriteAllBytes(tempFile.Path, Misc.Members);
 
                 using (
-                    SafeLibraryHandle libHandle = global::Interop
-                        .Kernel32
+                    SafeLibraryHandle libHandle = global::Interop.Kernel32
                         .LoadLibraryExW(tempFile.Path, IntPtr.Zero, 0)
                 )
                 {

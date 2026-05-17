@@ -89,11 +89,9 @@ namespace ILCompiler.DependencyAnalysis
             if (!factory.MetadataManager.WillUseMetadataTokenToReferenceMethod(method))
             {
                 dependencies.Add(
-                    factory
-                        .NativeLayout
+                    factory.NativeLayout
                         .PlacedSignatureVertex(
-                            factory
-                                .NativeLayout
+                            factory.NativeLayout
                                 .MethodNameAndSignatureVertex(method.GetTypicalMethodDefinition())
                         ),
                     "Non metadata-local method reference"
@@ -105,11 +103,9 @@ namespace ILCompiler.DependencyAnalysis
                 if (method.IsCanonicalMethod(CanonicalFormKind.Any))
                 {
                     dependencies.Add(
-                        factory
-                            .NativeLayout
+                        factory.NativeLayout
                             .PlacedSignatureVertex(
-                                factory
-                                    .NativeLayout
+                                factory.NativeLayout
                                     .MethodNameAndSignatureVertex(
                                         method.GetTypicalMethodDefinition()
                                     )
@@ -255,11 +251,9 @@ namespace ILCompiler.DependencyAnalysis
                 }
                 else
                 {
-                    var nameAndSig = factory
-                        .NativeLayout
+                    var nameAndSig = factory.NativeLayout
                         .PlacedSignatureVertex(
-                            factory
-                                .NativeLayout
+                            factory.NativeLayout
                                 .MethodNameAndSignatureVertex(method.GetTypicalMethodDefinition())
                         );
                     vertex = writer.GetTuple(
@@ -306,11 +300,9 @@ namespace ILCompiler.DependencyAnalysis
                 {
                     if ((flags & InvokeTableFlags.RequiresInstArg) != 0)
                     {
-                        var nameAndSigGenericMethod = factory
-                            .NativeLayout
+                        var nameAndSigGenericMethod = factory.NativeLayout
                             .PlacedSignatureVertex(
-                                factory
-                                    .NativeLayout
+                                factory.NativeLayout
                                     .MethodNameAndSignatureVertex(
                                         method.GetTypicalMethodDefinition()
                                     )

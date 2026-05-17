@@ -8142,8 +8142,7 @@ public class C
 
         static void validate(ModuleSymbol module)
         {
-            var cParam = module
-                .GlobalNamespace
+            var cParam = module.GlobalNamespace
                 .GetTypeMember("C")
                 .GetMethod("M")
                 .Parameters
@@ -8248,8 +8247,7 @@ public partial struct CustomHandler
 
         static void validate(ModuleSymbol module)
         {
-            var cParam = module
-                .GlobalNamespace
+            var cParam = module.GlobalNamespace
                 .GetTypeMember("C")
                 .GetMethod("M")
                 .Parameters
@@ -8686,8 +8684,7 @@ public partial struct CustomHandler
 
         static void validate(ModuleSymbol module)
         {
-            var cParam = module
-                .GlobalNamespace
+            var cParam = module.GlobalNamespace
                 .GetTypeMember("C")
                 .GetMethod("M")
                 .Parameters
@@ -8789,8 +8786,7 @@ literal:2"
 
         static void validator(ModuleSymbol module)
         {
-            var cParam = module
-                .GlobalNamespace
+            var cParam = module.GlobalNamespace
                 .GetTypeMember("C")
                 .GetMethod("M")
                 .Parameters
@@ -8956,8 +8952,7 @@ literal:literal
 
         static void validator(ModuleSymbol verifier)
         {
-            var cParam = verifier
-                .GlobalNamespace
+            var cParam = verifier.GlobalNamespace
                 .GetTypeMember("C")
                 .GetMethod("M")
                 .Parameters
@@ -9250,8 +9245,7 @@ o in M
 
         static void validator(ModuleSymbol module)
         {
-            var cParam = module
-                .GlobalNamespace
+            var cParam = module.GlobalNamespace
                 .GetTypeMember("C")
                 .GetMethod("M")
                 .Parameters
@@ -9412,8 +9406,7 @@ literal:literal
 
         static void validator(ModuleSymbol module)
         {
-            var cParam = module
-                .GlobalNamespace
+            var cParam = module.GlobalNamespace
                 .GetTypeMember("C")
                 .GetMethod("M")
                 .Parameters
@@ -9600,8 +9593,7 @@ literal:literal
 
         static void validator(ModuleSymbol module)
         {
-            var cParam = module
-                .GlobalNamespace
+            var cParam = module.GlobalNamespace
                 .GetTypeMember("C")
                 .GetMethod("M")
                 .Parameters
@@ -9748,8 +9740,7 @@ literal:literal
 
         static void validator(ModuleSymbol module)
         {
-            var cParam = module
-                .GlobalNamespace
+            var cParam = module.GlobalNamespace
                 .GetTypeMember("C")
                 .GetMethod("M")
                 .Parameters
@@ -9856,8 +9847,7 @@ public struct CustomHandler
 
         static void validator(ModuleSymbol module)
         {
-            var cParam = module
-                .GlobalNamespace
+            var cParam = module.GlobalNamespace
                 .GetTypeMember("C")
                 .GetMethod("M")
                 .Parameters
@@ -9961,8 +9951,7 @@ public struct CustomHandler
 
         static void validate(ModuleSymbol module)
         {
-            var cParam = module
-                .GlobalNamespace
+            var cParam = module.GlobalNamespace
                 .GetTypeMember("C")
                 .GetMethod("M")
                 .Parameters
@@ -10114,8 +10103,7 @@ literal:literal
 
         static void validator(ModuleSymbol module)
         {
-            var cParam = module
-                .GlobalNamespace
+            var cParam = module.GlobalNamespace
                 .GetTypeMember("C")
                 .GetIndexer<PropertySymbol>("Item")
                 .Parameters
@@ -10267,8 +10255,7 @@ literal:literal
 
         static void validator(ModuleSymbol module)
         {
-            var cParam = module
-                .GlobalNamespace
+            var cParam = module.GlobalNamespace
                 .GetTypeMember("C")
                 .GetIndexer<PropertySymbol>("Item")
                 .Parameters
@@ -10430,8 +10417,7 @@ literal:literal
 
         static void validator(ModuleSymbol module)
         {
-            var cParam = module
-                .GlobalNamespace
+            var cParam = module.GlobalNamespace
                 .GetTypeMember("C")
                 .GetMethod("M")
                 .Parameters
@@ -10803,8 +10789,7 @@ public partial struct CustomHandler
 
         static void validator(ModuleSymbol module)
         {
-            var cParam = module
-                .GlobalNamespace
+            var cParam = module.GlobalNamespace
                 .GetTypeMember("C")
                 .GetMethod("M")
                 .Parameters
@@ -10914,8 +10899,7 @@ public partial struct CustomHandler
 
         static void validator(ModuleSymbol module)
         {
-            var cParam = module
-                .GlobalNamespace
+            var cParam = module.GlobalNamespace
                 .GetTypeMember("C")
                 .GetMethod("M")
                 .Parameters
@@ -11455,8 +11439,7 @@ literal:literal
 
         static void validator(ModuleSymbol module)
         {
-            var cParam = module
-                .GlobalNamespace
+            var cParam = module.GlobalNamespace
                 .GetTypeMember("C")
                 .GetMethod("M")
                 .Parameters

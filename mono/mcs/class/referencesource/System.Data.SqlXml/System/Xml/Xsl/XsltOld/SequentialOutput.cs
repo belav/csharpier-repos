@@ -174,9 +174,8 @@ namespace System.Xml.Xsl.XsltOld
 
             if (
                 this.cdataElements != null
-                && this.cdataElements.Contains(
-                    new XmlQualifiedName(mainNode.LocalName, mainNode.NamespaceURI)
-                )
+                && this.cdataElements
+                    .Contains(new XmlQualifiedName(mainNode.LocalName, mainNode.NamespaceURI))
                 && this.isXmlOutput
             )
             {
@@ -671,13 +670,8 @@ namespace System.Xml.Xsl.XsltOld
                                 this.utf8Encoding = Encoding.UTF8;
                                 this.byteBuffer = new byte[utf8Encoding.GetMaxByteCount(1)];
                             }
-                            int bytes = this.utf8Encoding.GetBytes(
-                                value,
-                                i - 1,
-                                1,
-                                this.byteBuffer,
-                                0
-                            );
+                            int bytes = this.utf8Encoding
+                                .GetBytes(value, i - 1, 1, this.byteBuffer, 0);
                             for (int j = 0; j < bytes; j++)
                             {
                                 Write("%");

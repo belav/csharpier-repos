@@ -218,8 +218,7 @@ namespace System.Net
                         SocketAddress.IPv6AddressSize
                     );
 
-                    SocketError errorCode = UnsafeNclNativeMethods
-                        .OSSOCK
+                    SocketError errorCode = UnsafeNclNativeMethods.OSSOCK
                         .WSAStringToAddress(
                             ipString,
                             AddressFamily.InterNetworkV6,
@@ -522,8 +521,7 @@ namespace System.Net
                             saddr[26] = (byte)(m_ScopeId >> 16);
                             saddr[27] = (byte)(m_ScopeId >> 24);
                         }
-                        SocketError errorCode = UnsafeNclNativeMethods
-                            .OSSOCK
+                        SocketError errorCode = UnsafeNclNativeMethods.OSSOCK
                             .WSAAddressToString(
                                 saddr.m_Buffer,
                                 saddr.m_Size,

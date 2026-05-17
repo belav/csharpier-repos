@@ -70,8 +70,7 @@ namespace IdeCoreBenchmarks
                 throw new ArgumentException("Couldn't find Roslyn.sln");
 
             Console.WriteLine("Found Roslyn.sln: " + Process.GetCurrentProcess().Id);
-            var assemblies = MSBuildMefHostServices
-                .DefaultAssemblies
+            var assemblies = MSBuildMefHostServices.DefaultAssemblies
                 .Add(typeof(AnalyzerRunnerHelper).Assembly)
                 .Add(typeof(FindReferencesBenchmarks).Assembly);
             var services = MefHostServices.Create(assemblies);
@@ -186,8 +185,7 @@ namespace IdeCoreBenchmarks
             var start = DateTime.Now;
             foreach (var project in _workspace.CurrentSolution.Projects)
             {
-                var tasks = project
-                    .Documents
+                var tasks = project.Documents
                     .Select(d =>
                         Task.Run(async () =>
                         {
@@ -220,8 +218,7 @@ namespace IdeCoreBenchmarks
                 Console.WriteLine("Successfully got persistent storage instance");
                 var start = DateTime.Now;
                 var indexTime = TimeSpan.Zero;
-                var tasks = _workspace
-                    .CurrentSolution
+                var tasks = _workspace.CurrentSolution
                     .Projects
                     .SelectMany(p => p.Documents)
                     .Select(d =>
@@ -251,8 +248,7 @@ namespace IdeCoreBenchmarks
             var start = DateTime.Now;
             // Search each project with an independent threadpool task.
             var solution = _workspace.CurrentSolution;
-            var searchTasks = solution
-                .Projects
+            var searchTasks = solution.Projects
                 .GroupBy(p => p.Services.GetService<INavigateToSearchService>())
                 .Select(g =>
                     Task.Run(

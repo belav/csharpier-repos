@@ -444,14 +444,11 @@ namespace System.Security.Cryptography.X509Certificates.Tests.RevocationTests
                             RSASignaturePadding.Pkcs1
                         );
 
-                        rootReq
-                            .CertificateExtensions
+                        rootReq.CertificateExtensions
                             .Add(new X509BasicConstraintsExtension(true, false, 0, true));
-                        rootReq
-                            .CertificateExtensions
+                        rootReq.CertificateExtensions
                             .Add(new X509SubjectKeyIdentifierExtension(rootReq.PublicKey, false));
-                        rootReq
-                            .CertificateExtensions
+                        rootReq.CertificateExtensions
                             .Add(
                                 new X509KeyUsageExtension(
                                     X509KeyUsageFlags.KeyCertSign | X509KeyUsageFlags.CrlSign,
@@ -550,14 +547,11 @@ namespace System.Security.Cryptography.X509Certificates.Tests.RevocationTests
                             RSASignaturePadding.Pkcs1
                         );
 
-                        rootReq
-                            .CertificateExtensions
+                        rootReq.CertificateExtensions
                             .Add(new X509BasicConstraintsExtension(true, false, 0, true));
-                        rootReq
-                            .CertificateExtensions
+                        rootReq.CertificateExtensions
                             .Add(new X509SubjectKeyIdentifierExtension(rootReq.PublicKey, false));
-                        rootReq
-                            .CertificateExtensions
+                        rootReq.CertificateExtensions
                             .Add(
                                 new X509KeyUsageExtension(
                                     X509KeyUsageFlags.KeyCertSign | X509KeyUsageFlags.CrlSign,

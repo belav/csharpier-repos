@@ -82,8 +82,7 @@ namespace System.Security.Cryptography
             {
                 if (cbSize < (BLOCK_SIZE_BYTES - _ProcessingBufferCount))
                 {
-                    System
-                        .Buffer
+                    System.Buffer
                         .BlockCopy(rgb, ibStart, _ProcessingBuffer, _ProcessingBufferCount, cbSize);
                     _ProcessingBufferCount += cbSize;
                     return;
@@ -91,8 +90,7 @@ namespace System.Security.Cryptography
                 else
                 {
                     i = (BLOCK_SIZE_BYTES - _ProcessingBufferCount);
-                    System
-                        .Buffer
+                    System.Buffer
                         .BlockCopy(rgb, ibStart, _ProcessingBuffer, _ProcessingBufferCount, i);
                     ProcessBlock(_ProcessingBuffer, 0);
                     _ProcessingBufferCount = 0;
@@ -108,8 +106,7 @@ namespace System.Security.Cryptography
 
             if (cbSize % BLOCK_SIZE_BYTES != 0)
             {
-                System
-                    .Buffer
+                System.Buffer
                     .BlockCopy(
                         rgb,
                         cbSize - cbSize % BLOCK_SIZE_BYTES + ibStart,

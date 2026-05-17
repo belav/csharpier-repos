@@ -71,8 +71,7 @@ namespace Microsoft.CodeAnalysis.Interactive
         /// <summary>Returns the span for the currently selected line.</summary>
         private static IEnumerable<SnapshotSpan> GetSelectedLine(ITextView textView)
         {
-            var snapshotLine = textView
-                .Caret
+            var snapshotLine = textView.Caret
                 .Position
                 .VirtualBufferPosition
                 .Position

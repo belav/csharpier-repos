@@ -399,8 +399,7 @@ namespace System.Diagnostics
                     IntPtr processAffinity,
                         systemAffinity;
                     if (
-                        !Interop
-                            .Kernel32
+                        !Interop.Kernel32
                             .GetProcessAffinityMask(handle, out processAffinity, out systemAffinity)
                     )
                         throw new Win32Exception();
@@ -441,8 +440,7 @@ namespace System.Diagnostics
             {
                 int ignoredFlags;
                 if (
-                    !Interop
-                        .Kernel32
+                    !Interop.Kernel32
                         .GetProcessWorkingSetSizeEx(
                             handle,
                             out minWorkingSet,
@@ -477,8 +475,7 @@ namespace System.Diagnostics
                     max;
                 int ignoredFlags;
                 if (
-                    !Interop
-                        .Kernel32
+                    !Interop.Kernel32
                         .GetProcessWorkingSetSizeEx(handle, out min, out max, out ignoredFlags)
                 )
                 {
@@ -516,8 +513,7 @@ namespace System.Diagnostics
 
                 // The value may be rounded/changed by the OS, so go get it
                 if (
-                    !Interop
-                        .Kernel32
+                    !Interop.Kernel32
                         .GetProcessWorkingSetSizeEx(handle, out min, out max, out ignoredFlags)
                 )
                 {
@@ -579,8 +575,7 @@ namespace System.Diagnostics
                         else
                         {
                             childInputPipeHandle = new SafeFileHandle(
-                                Interop
-                                    .Kernel32
+                                Interop.Kernel32
                                     .GetStdHandle(Interop.Kernel32.HandleTypes.STD_INPUT_HANDLE),
                                 false
                             );
@@ -597,8 +592,7 @@ namespace System.Diagnostics
                         else
                         {
                             childOutputPipeHandle = new SafeFileHandle(
-                                Interop
-                                    .Kernel32
+                                Interop.Kernel32
                                     .GetStdHandle(Interop.Kernel32.HandleTypes.STD_OUTPUT_HANDLE),
                                 false
                             );
@@ -611,8 +605,7 @@ namespace System.Diagnostics
                         else
                         {
                             childErrorPipeHandle = new SafeFileHandle(
-                                Interop
-                                    .Kernel32
+                                Interop.Kernel32
                                     .GetStdHandle(Interop.Kernel32.HandleTypes.STD_ERROR_HANDLE),
                                 false
                             );
@@ -622,8 +615,7 @@ namespace System.Diagnostics
                         startupInfo.hStdOutput = childOutputPipeHandle.DangerousGetHandle();
                         startupInfo.hStdError = childErrorPipeHandle.DangerousGetHandle();
 
-                        startupInfo.dwFlags = Interop
-                            .Advapi32
+                        startupInfo.dwFlags = Interop.Advapi32
                             .StartupInfoOptions
                             .STARTF_USESTDHANDLES;
                     }
@@ -633,8 +625,7 @@ namespace System.Diagnostics
                         startupInfo.wShowWindow = (short)GetShowWindowFromWindowStyle(
                             startInfo.WindowStyle
                         );
-                        startupInfo.dwFlags |= Interop
-                            .Advapi32
+                        startupInfo.dwFlags |= Interop.Advapi32
                             .StartupInfoOptions
                             .STARTF_USESHOWWINDOW;
                     }
@@ -648,8 +639,7 @@ namespace System.Diagnostics
                     string? environmentBlock = null;
                     if (startInfo._environmentVariables != null)
                     {
-                        creationFlags |= Interop
-                            .Advapi32
+                        creationFlags |= Interop.Advapi32
                             .StartupInfoOptions
                             .CREATE_UNICODE_ENVIRONMENT;
                         environmentBlock = GetEnvironmentVariablesBlock(
@@ -708,8 +698,7 @@ namespace System.Diagnostics
 
                             try
                             {
-                                retVal = Interop
-                                    .Advapi32
+                                retVal = Interop.Advapi32
                                     .CreateProcessWithLogonW(
                                         startInfo.UserName,
                                         startInfo.Domain,
@@ -744,8 +733,7 @@ namespace System.Diagnostics
                             )
                         )
                         {
-                            retVal = Interop
-                                .Kernel32
+                            retVal = Interop.Kernel32
                                 .CreateProcess(
                                     null, // we don't need this since all the info is in commandLine
                                     commandLinePtr, // pointer to the command line string
@@ -908,8 +896,7 @@ namespace System.Diagnostics
 
                 ProcessThreadTimes processTimes = new ProcessThreadTimes();
                 if (
-                    !Interop
-                        .Kernel32
+                    !Interop.Kernel32
                         .GetProcessTimes(
                             handle,
                             out processTimes._create,
@@ -936,8 +923,7 @@ namespace System.Diagnostics
                 // get the process token so we can adjust the privilege on it.  We DO need to
                 // close the token when we're done with it.
                 if (
-                    !Interop
-                        .Advapi32
+                    !Interop.Advapi32
                         .OpenProcessToken(
                             Interop.Kernel32.GetCurrentProcess(),
                             Interop.Kernel32.HandleOptions.TOKEN_ADJUST_PRIVILEGES,
@@ -949,8 +935,7 @@ namespace System.Diagnostics
                 }
 
                 if (
-                    !Interop
-                        .Advapi32
+                    !Interop.Advapi32
                         .LookupPrivilegeValue(null, privilegeName, out Interop.Advapi32.LUID luid)
                 )
                 {
@@ -1050,8 +1035,7 @@ namespace System.Diagnostics
             int nSize
         )
         {
-            bool ret = Interop
-                .Kernel32
+            bool ret = Interop.Kernel32
                 .CreatePipe(out hReadPipe, out hWritePipe, ref lpPipeAttributes, nSize);
             if (!ret || hReadPipe.IsInvalid || hWritePipe.IsInvalid)
             {
@@ -1103,8 +1087,7 @@ namespace System.Diagnostics
                 // as parent will not be draining the pipe at the other end anymore.
                 IntPtr currentProcHandle = Interop.Kernel32.GetCurrentProcess();
                 if (
-                    !Interop
-                        .Kernel32
+                    !Interop.Kernel32
                         .DuplicateHandle(
                             currentProcHandle,
                             hTmp,

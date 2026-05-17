@@ -234,8 +234,7 @@ public abstract class NorthwindStringIncludeQueryTestBase<TFixture>
                 && methodCallExpression.Method.IsGenericMethod
             )
             {
-                var genericMethodDefinition = methodCallExpression
-                    .Method
+                var genericMethodDefinition = methodCallExpression.Method
                     .GetGenericMethodDefinition();
                 if (genericMethodDefinition == _includeMethodInfo)
                 {

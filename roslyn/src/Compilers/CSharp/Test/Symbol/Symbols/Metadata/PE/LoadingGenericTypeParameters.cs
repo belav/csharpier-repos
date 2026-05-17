@@ -22,8 +22,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             var assembly = MetadataTestHelpers.GetSymbolForReference(TestMetadata.Net40.mscorlib);
             var module0 = assembly.Modules[0];
 
-            var objectType = module0
-                .GlobalNamespace
+            var objectType = module0.GlobalNamespace
                 .GetMembers("System")
                 .OfType<NamespaceSymbol>()
                 .Single()

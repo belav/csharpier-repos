@@ -141,8 +141,7 @@ namespace System.Runtime.Tests
                     if (publicMember is MethodInfo methodInfo)
                     {
                         if (
-                            methodInfo
-                                .ReturnParameter
+                            methodInfo.ReturnParameter
                                 .CustomAttributes
                                 .GetNullableAttributes()
                                 .Any()

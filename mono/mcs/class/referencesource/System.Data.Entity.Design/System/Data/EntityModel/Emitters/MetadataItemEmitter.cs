@@ -118,11 +118,12 @@ namespace System.Data.EntityModel.Emitters
             TypeAttributes accessibilty = TypeAttributes.Public;
             MetadataProperty metadataProperty;
             if (
-                item.MetadataProperties.TryGetValue(
-                    Utils.GetFullyQualifiedCodeGenerationAttributeName(XmlConstants.TypeAccess),
-                    false,
-                    out metadataProperty
-                )
+                item.MetadataProperties
+                    .TryGetValue(
+                        Utils.GetFullyQualifiedCodeGenerationAttributeName(XmlConstants.TypeAccess),
+                        false,
+                        out metadataProperty
+                    )
             )
             {
                 accessibilty = GetCodeAccessibilityTypeAttribute(metadataProperty.Value.ToString());
@@ -137,11 +138,12 @@ namespace System.Data.EntityModel.Emitters
             MemberAttributes accessibilty = MemberAttributes.Public;
             MetadataProperty metadataProperty;
             if (
-                item.MetadataProperties.TryGetValue(
-                    Utils.GetFullyQualifiedCodeGenerationAttributeName(attribute),
-                    false,
-                    out metadataProperty
-                )
+                item.MetadataProperties
+                    .TryGetValue(
+                        Utils.GetFullyQualifiedCodeGenerationAttributeName(attribute),
+                        false,
+                        out metadataProperty
+                    )
             )
             {
                 accessibilty = GetCodeAccessibilityMemberAttribute(

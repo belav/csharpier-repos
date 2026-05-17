@@ -23,8 +23,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Formatting
         public async Task BlankFileMatchesWorkspaceSettings()
         {
             using var testWorkspace = CreateWithLines("");
-            var options = await testWorkspace
-                .CurrentSolution
+            var options = await testWorkspace.CurrentSolution
                 .Projects
                 .Single()
                 .Documents
@@ -38,8 +37,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Formatting
         public async Task SingleLineWithTab()
         {
             using var testWorkspace = CreateWithLines("class C", "{", "\tvoid M() { }", "}");
-            var options = await testWorkspace
-                .CurrentSolution
+            var options = await testWorkspace.CurrentSolution
                 .Projects
                 .Single()
                 .Documents
@@ -54,8 +52,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Formatting
         public async Task SingleLineWithFourSpaces()
         {
             using var testWorkspace = CreateWithLines("class C", "{", "    void M() { }", "}");
-            var options = await testWorkspace
-                .CurrentSolution
+            var options = await testWorkspace.CurrentSolution
                 .Projects
                 .Single()
                 .Documents
@@ -72,12 +69,10 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Formatting
                 string.Join("\r\n", lines),
                 openDocuments: true
             );
-            var editorOptionsFactoryService = workspace
-                .ExportProvider
+            var editorOptionsFactoryService = workspace.ExportProvider
                 .GetExportedValue<IEditorOptionsFactoryService>();
 
-            editorOptionsFactoryService
-                .GlobalOptions
+            editorOptionsFactoryService.GlobalOptions
                 .SetOptionValue(DefaultOptions.AdaptiveFormattingOptionId, true);
 
             return workspace;

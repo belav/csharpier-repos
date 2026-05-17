@@ -60,8 +60,7 @@ namespace Tracing.Tests.Common
                 // so this is when we should throw an exception, just like
                 // System.IO.PipeStream. This will result in the dispose method
                 // being called and the culprit stream data being dumped to disk
-                Logger
-                    .logger
+                Logger.logger
                     .Log(
                         $"[Error] Attempted to read {count} bytes into a buffer of length {buffer.Length} at offset {offset}"
                     );
@@ -108,8 +107,7 @@ namespace Tracing.Tests.Common
 
         public void DumpStreamToDisk()
         {
-            var helixWorkItemDirectory = System
-                .Environment
+            var helixWorkItemDirectory = System.Environment
                 .GetEnvironmentVariable("HELIX_WORKITEM_UPLOAD_ROOT");
             if (helixWorkItemDirectory != null && Directory.Exists(helixWorkItemDirectory))
             {

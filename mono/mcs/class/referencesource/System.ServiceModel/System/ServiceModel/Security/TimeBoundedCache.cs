@@ -422,8 +422,7 @@ namespace System.ServiceModel.Security
         {
             string message = SR.GetString(SR.CacheQuotaReached, this.maxCacheItems);
             Exception inner = new QuotaExceededException(message);
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(new CommunicationException(message, inner));
         }
 

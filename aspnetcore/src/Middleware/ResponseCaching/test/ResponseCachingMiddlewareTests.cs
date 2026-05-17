@@ -578,8 +578,7 @@ public class ResponseCachingMiddlewareTests
         context.HttpContext.Response.Headers.Vary = new StringValues(
             new[] { "headerA", "HEADERB", "HEADERc" }
         );
-        context
-            .HttpContext
+        context.HttpContext
             .Features
             .Set<IResponseCachingFeature>(
                 new ResponseCachingFeature()
@@ -612,8 +611,7 @@ public class ResponseCachingMiddlewareTests
         context.HttpContext.Response.Headers.Vary = new StringValues(
             new[] { "headerA", "HEADERB" }
         );
-        context
-            .HttpContext
+        context.HttpContext
             .Features
             .Set<IResponseCachingFeature>(
                 new ResponseCachingFeature()
@@ -667,8 +665,7 @@ public class ResponseCachingMiddlewareTests
         var context = TestUtils.CreateTestContext();
 
         context.HttpContext.Response.Headers.Vary = vary;
-        context
-            .HttpContext
+        context.HttpContext
             .Features
             .Set<IResponseCachingFeature>(new ResponseCachingFeature() { VaryByQueryKeys = vary });
 

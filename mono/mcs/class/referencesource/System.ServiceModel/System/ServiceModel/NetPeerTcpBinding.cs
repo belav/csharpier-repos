@@ -157,8 +157,7 @@ namespace System.ServiceModel
             this.resolverSettings = new PeerResolverSettings();
             if (element == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ConfigurationErrorsException(
                             SR.GetString(
@@ -192,8 +191,7 @@ namespace System.ServiceModel
                                 new PnrpPeerResolverBindingElement(this.Resolver.ReferralPolicy)
                             );
                         else
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
                                     new InvalidOperationException(
                                         SR.GetString(SR.PeerResolverRequired)
@@ -208,8 +206,7 @@ namespace System.ServiceModel
                                 new PeerCustomResolverBindingElement(this.Resolver.Custom)
                             );
                         else
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
                                     new InvalidOperationException(
                                         SR.GetString(SR.PeerResolverSettingsInvalid)
@@ -224,8 +221,7 @@ namespace System.ServiceModel
                                 new PnrpPeerResolverBindingElement(this.Resolver.ReferralPolicy)
                             );
                         else
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
                                     new InvalidOperationException(
                                         SR.GetString(SR.PeerResolverRequired)
@@ -234,8 +230,7 @@ namespace System.ServiceModel
                     }
                     break;
                 default:
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(SR.GetString(SR.PeerResolverRequired))
                         );

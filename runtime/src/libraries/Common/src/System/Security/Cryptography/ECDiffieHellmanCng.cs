@@ -83,8 +83,7 @@ namespace System.Security.Cryptography
                 )
             )
             {
-                return Interop
-                    .NCrypt
+                return Interop.NCrypt
                     .DeriveKeyMaterialHash(
                         secretAgreement,
                         hashAlgorithm.Name,
@@ -117,8 +116,7 @@ namespace System.Security.Cryptography
                         ? Interop.NCrypt.SecretAgreementFlags.UseSecretAsHmacKey
                         : Interop.NCrypt.SecretAgreementFlags.None;
 
-                return Interop
-                    .NCrypt
+                return Interop.NCrypt
                     .DeriveKeyMaterialHmac(
                         secretAgreement,
                         hashAlgorithm.Name,
@@ -146,8 +144,7 @@ namespace System.Security.Cryptography
                 )
             )
             {
-                return Interop
-                    .NCrypt
+                return Interop.NCrypt
                     .DeriveKeyMaterialTls(
                         secretAgreement,
                         prfLabel,
@@ -170,8 +167,7 @@ namespace System.Security.Cryptography
                 )
             )
             {
-                return Interop
-                    .NCrypt
+                return Interop.NCrypt
                     .DeriveKeyMaterialTruncate(
                         secretAgreement,
                         Interop.NCrypt.SecretAgreementFlags.None

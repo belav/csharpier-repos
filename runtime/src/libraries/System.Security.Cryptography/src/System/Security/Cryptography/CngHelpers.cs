@@ -31,8 +31,7 @@ namespace System.Security.Cryptography
         {
             string providerName = provider.Provider;
             SafeNCryptProviderHandle providerHandle;
-            ErrorCode errorCode = Interop
-                .NCrypt
+            ErrorCode errorCode = Interop.NCrypt
                 .NCryptOpenStorageProvider(out providerHandle, providerName, 0);
 
             if (errorCode != ErrorCode.ERROR_SUCCESS)
@@ -51,8 +50,7 @@ namespace System.Security.Cryptography
         {
             unsafe
             {
-                ErrorCode errorCode = Interop
-                    .NCrypt
+                ErrorCode errorCode = Interop.NCrypt
                     .NCryptSetProperty(
                         keyHandle,
                         KeyPropertyName.ExportPolicy,
@@ -84,8 +82,7 @@ namespace System.Security.Cryptography
             Debug.Assert(!ncryptHandle.IsInvalid);
             unsafe
             {
-                ErrorCode errorCode = Interop
-                    .NCrypt
+                ErrorCode errorCode = Interop.NCrypt
                     .NCryptGetProperty(
                         ncryptHandle,
                         propertyName,
@@ -109,8 +106,7 @@ namespace System.Security.Cryptography
 
                 fixed (byte* pPropertyValue = propertyValue)
                 {
-                    errorCode = Interop
-                        .NCrypt
+                    errorCode = Interop.NCrypt
                         .NCryptGetProperty(
                             ncryptHandle,
                             propertyName,
@@ -203,8 +199,7 @@ namespace System.Security.Cryptography
         {
             T value;
 
-            ErrorCode errorCode = Interop
-                .NCrypt
+            ErrorCode errorCode = Interop.NCrypt
                 .NCryptGetProperty(ncryptHandle, propertyName, &value, sizeof(T), out _, options);
 
             if (errorCode == ErrorCode.NTE_NOT_FOUND)
@@ -440,32 +435,24 @@ namespace System.Security.Cryptography
                     int offset = sizeof(BCRYPT_RSAKEY_BLOB);
 
                     // Read out the exponent
-                    rsaParams.Exponent = Interop
-                        .BCrypt
+                    rsaParams.Exponent = Interop.BCrypt
                         .Consume(rsaBlob, ref offset, pBcryptBlob->cbPublicExp);
-                    rsaParams.Modulus = Interop
-                        .BCrypt
+                    rsaParams.Modulus = Interop.BCrypt
                         .Consume(rsaBlob, ref offset, pBcryptBlob->cbModulus);
 
                     if (includePrivateParameters)
                     {
-                        rsaParams.P = Interop
-                            .BCrypt
+                        rsaParams.P = Interop.BCrypt
                             .Consume(rsaBlob, ref offset, pBcryptBlob->cbPrime1);
-                        rsaParams.Q = Interop
-                            .BCrypt
+                        rsaParams.Q = Interop.BCrypt
                             .Consume(rsaBlob, ref offset, pBcryptBlob->cbPrime2);
-                        rsaParams.DP = Interop
-                            .BCrypt
+                        rsaParams.DP = Interop.BCrypt
                             .Consume(rsaBlob, ref offset, pBcryptBlob->cbPrime1);
-                        rsaParams.DQ = Interop
-                            .BCrypt
+                        rsaParams.DQ = Interop.BCrypt
                             .Consume(rsaBlob, ref offset, pBcryptBlob->cbPrime2);
-                        rsaParams.InverseQ = Interop
-                            .BCrypt
+                        rsaParams.InverseQ = Interop.BCrypt
                             .Consume(rsaBlob, ref offset, pBcryptBlob->cbPrime1);
-                        rsaParams.D = Interop
-                            .BCrypt
+                        rsaParams.D = Interop.BCrypt
                             .Consume(rsaBlob, ref offset, pBcryptBlob->cbModulus);
                     }
                 }

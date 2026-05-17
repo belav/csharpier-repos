@@ -185,8 +185,7 @@ namespace System.Net
 #endif
 
                 if (i == 0)
-                    returnResult
-                        .m_Context
+                    returnResult.m_Context
                         .Add(new RequestContext(requests[i], firstRequestException));
                 else
                     returnResult.m_Context.Add(new RequestContext(requests[i], exception));
@@ -552,8 +551,7 @@ namespace System.Net
             // add this Connection to the pool in the connection group,
             //  keep a weak reference to it
             //
-            m_MaximumUnauthorizedUploadLength = SettingsSectionInternal
-                .Section
+            m_MaximumUnauthorizedUploadLength = SettingsSectionInternal.Section
                 .MaximumUnauthorizedUploadLength;
             if (m_MaximumUnauthorizedUploadLength > 0)
             {
@@ -579,8 +577,7 @@ namespace System.Net
             m_Error = WebExceptionStatus.Success;
             if (PinnableBufferCacheEventSource.Log.IsEnabled())
             {
-                PinnableBufferCacheEventSource
-                    .Log
+                PinnableBufferCacheEventSource.Log
                     .DebugMessage1(
                         "CTOR: In System.Net.Connection.Connnection",
                         this.GetHashCode()
@@ -594,8 +591,7 @@ namespace System.Net
             {
                 if (PinnableBufferCacheEventSource.Log.IsEnabled())
                 {
-                    PinnableBufferCacheEventSource
-                        .Log
+                    PinnableBufferCacheEventSource.Log
                         .DebugMessage1(
                             "DTOR: ERROR Needing to Free m_ReadBuffer in Connection Destructor",
                             m_ReadBuffer.GetHashCode()
@@ -621,8 +617,7 @@ namespace System.Net
         {
             if (PinnableBufferCacheEventSource.Log.IsEnabled())
             {
-                PinnableBufferCacheEventSource
-                    .Log
+                PinnableBufferCacheEventSource.Log
                     .DebugMessage1("In System.Net.Connection.Dispose()", this.GetHashCode());
             }
             FreeReadBuffer();
@@ -847,8 +842,7 @@ namespace System.Net
                     m_WaitList.Add(
                         new WaitListItem(request, NetworkingPerfCounters.GetTimestamp())
                     );
-                    NetworkingPerfCounters
-                        .Instance
+                    NetworkingPerfCounters.Instance
                         .Increment(NetworkingPerfCounterName.HttpWebRequestQueued);
                     GlobalLog.Print(
                         "Connection#"
@@ -1302,8 +1296,7 @@ namespace System.Net
                         + (m_WaitList.Count - 1).ToString()
                 );
 
-                NetworkingPerfCounters
-                    .Instance
+                NetworkingPerfCounters.Instance
                     .IncrementAverage(
                         NetworkingPerfCounterName.HttpWebRequestAvgQueueTime,
                         item.QueueStartTime
@@ -2271,8 +2264,7 @@ namespace System.Net
             // add to Description if already partialy parsed
             if (startIndexStatusDescription != -1)
             {
-                statusDescription += WebHeaderCollection
-                    .HeaderEncoding
+                statusDescription += WebHeaderCollection.HeaderEncoding
                     .GetString(
                         statusLine,
                         startIndexStatusDescription,
@@ -2635,8 +2627,7 @@ namespace System.Net
 
                             if (++bytesParsed == effectiveMax)
                             {
-                                string s = WebHeaderCollection
-                                    .HeaderEncoding
+                                string s = WebHeaderCollection.HeaderEncoding
                                     .GetString(byteBuffer + beginning, bytesParsed - beginning);
                                 if (statusLineValues.StatusDescription == null)
                                     statusLineValues.StatusDescription = s;
@@ -2649,8 +2640,7 @@ namespace System.Net
 
                         if (bytesParsed > beginning)
                         {
-                            string s = WebHeaderCollection
-                                .HeaderEncoding
+                            string s = WebHeaderCollection.HeaderEncoding
                                 .GetString(byteBuffer + beginning, bytesParsed - beginning);
                             if (statusLineValues.StatusDescription == null)
                                 statusLineValues.StatusDescription = s;
@@ -3376,8 +3366,7 @@ namespace System.Net
 
                     if (SettingsSectionInternal.Section.UseUnsafeHeaderParsing)
                     {
-                        parseSubStatus = m_ResponseData
-                            .m_ResponseHeaders
+                        parseSubStatus = m_ResponseData.m_ResponseHeaders
                             .ParseHeaders(
                                 m_ReadBuffer,
                                 m_BytesRead,
@@ -3389,8 +3378,7 @@ namespace System.Net
                     }
                     else
                     {
-                        parseSubStatus = m_ResponseData
-                            .m_ResponseHeaders
+                        parseSubStatus = m_ResponseData.m_ResponseHeaders
                             .ParseHeadersStrict(
                                 m_ReadBuffer,
                                 m_BytesRead,
@@ -3684,8 +3672,7 @@ namespace System.Net
                     // If so then we let request.Abort() to deal with this situation.
                     if (foundItem != null)
                     {
-                        NetworkingPerfCounters
-                            .Instance
+                        NetworkingPerfCounters.Instance
                             .IncrementAverage(
                                 NetworkingPerfCounterName.HttpWebRequestAvgQueueTime,
                                 foundItem.QueueStartTime
@@ -4074,8 +4061,7 @@ namespace System.Net
 
                 foreach (WaitListItem item in m_WaitList)
                 {
-                    NetworkingPerfCounters
-                        .Instance
+                    NetworkingPerfCounters.Instance
                         .IncrementAverage(
                             NetworkingPerfCounterName.HttpWebRequestAvgQueueTime,
                             item.QueueStartTime

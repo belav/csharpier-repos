@@ -614,8 +614,7 @@ namespace Microsoft.CodeAnalysis
                 return default(SyntaxToken);
             }
 
-            return SyntaxNavigator
-                .Instance
+            return SyntaxNavigator.Instance
                 .GetNextToken(
                     this,
                     includeZeroWidth,
@@ -661,8 +660,7 @@ namespace Microsoft.CodeAnalysis
                 return default(SyntaxToken);
             }
 
-            return SyntaxNavigator
-                .Instance
+            return SyntaxNavigator.Instance
                 .GetPreviousToken(
                     this,
                     includeZeroWidth,

@@ -673,8 +673,7 @@ public class ComplexTypeModelBinderTest
         // Arrange
         var bindingContext = CreateContext(GetMetadataForType(typeof(Person)), new Person());
         var originalModel = bindingContext.Model;
-        var binders = bindingContext
-            .ModelMetadata
+        var binders = bindingContext.ModelMetadata
             .Properties
             .ToDictionary(keySelector: item => item, elementSelector: item => (IModelBinder)null);
 
@@ -694,8 +693,7 @@ public class ComplexTypeModelBinderTest
     {
         // Arrange
         var bindingContext = CreateContext(GetMetadataForType(typeof(Person)), model: null);
-        var binders = bindingContext
-            .ModelMetadata
+        var binders = bindingContext.ModelMetadata
             .Properties
             .ToDictionary(keySelector: item => item, elementSelector: item => (IModelBinder)null);
 

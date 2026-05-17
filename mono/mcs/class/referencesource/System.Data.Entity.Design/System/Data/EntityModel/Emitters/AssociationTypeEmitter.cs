@@ -31,8 +31,7 @@ namespace System.Data.EntityModel.Emitters
             AssociationEndMember end1 = Item.AssociationEndMembers[0];
             AssociationEndMember end2 = Item.AssociationEndMembers[1];
 
-            Generator
-                .CompileUnit
+            Generator.CompileUnit
                 .AssemblyCustomAttributes
                 .Add(
                     AttributeEmitter.EmitSimpleAttribute(

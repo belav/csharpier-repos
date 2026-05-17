@@ -1523,11 +1523,12 @@ public abstract class JsonQueryTestBase<TFixture> : QueryTestBase<TFixture>
                 ss.Set<JsonEntityBasic>()
                     .OrderBy(x => x.Id)
                     .Select(x =>
-                        x.OwnedCollectionRoot.Select(xx =>
-                            xx.OwnedCollectionBranch
-                                .Where(xxx => xxx.Date != new DateTime(2000, 1, 1))
-                                .ToList()
-                        )
+                        x.OwnedCollectionRoot
+                            .Select(xx =>
+                                xx.OwnedCollectionBranch
+                                    .Where(xxx => xxx.Date != new DateTime(2000, 1, 1))
+                                    .ToList()
+                            )
                     )
                     .AsNoTracking(),
             assertOrder: true,
@@ -1549,19 +1550,20 @@ public abstract class JsonQueryTestBase<TFixture> : QueryTestBase<TFixture>
                 ss.Set<JsonEntityBasic>()
                     .OrderBy(x => x.Id)
                     .Select(x =>
-                        x.OwnedCollectionRoot.Select(xx =>
-                            xx.OwnedCollectionBranch
-                                .Select(xxx => new
-                                {
-                                    xxx.Date,
-                                    xxx.Enum,
-                                    xxx.Enums,
-                                    xxx.Fraction,
-                                    xxx.OwnedReferenceLeaf,
-                                    xxx.OwnedCollectionLeaf,
-                                })
-                                .ToList()
-                        )
+                        x.OwnedCollectionRoot
+                            .Select(xx =>
+                                xx.OwnedCollectionBranch
+                                    .Select(xxx => new
+                                    {
+                                        xxx.Date,
+                                        xxx.Enum,
+                                        xxx.Enums,
+                                        xxx.Fraction,
+                                        xxx.OwnedReferenceLeaf,
+                                        xxx.OwnedCollectionLeaf,
+                                    })
+                                    .ToList()
+                            )
                     )
                     .AsNoTracking(),
             assertOrder: true,
@@ -1747,11 +1749,12 @@ public abstract class JsonQueryTestBase<TFixture> : QueryTestBase<TFixture>
                             .Where(xx => xx.SomethingSomething != "Baz")
                             .ToList(),
                         Second = x.OwnedCollectionRoot.Distinct().ToList(),
-                        Third = x.OwnedCollectionRoot.Select(xx =>
-                            xx.OwnedCollectionBranch
-                                .Where(xxx => xxx.Date != new DateTime(2000, 1, 1))
-                                .ToList()
-                        ),
+                        Third = x.OwnedCollectionRoot
+                            .Select(xx =>
+                                xx.OwnedCollectionBranch
+                                    .Where(xxx => xxx.Date != new DateTime(2000, 1, 1))
+                                    .ToList()
+                            ),
                         Fourth = x.EntityCollection.ToList(),
                     })
                     .AsNoTracking(),
@@ -3284,8 +3287,7 @@ public abstract class JsonQueryTestBase<TFixture> : QueryTestBase<TFixture>
             async,
             ss =>
                 ((DbSet<JsonEntityBasic>)ss.Set<JsonEntityBasic>()).FromSqlRaw(
-                    Fixture
-                        .TestStore
+                    Fixture.TestStore
                         .NormalizeDelimitersInRawString("SELECT * FROM [JsonEntitiesBasic] AS j")
                 ),
             ss => ss.Set<JsonEntityBasic>()
@@ -3299,8 +3301,7 @@ public abstract class JsonQueryTestBase<TFixture> : QueryTestBase<TFixture>
             ss =>
                 ((DbSet<JsonEntityBasic>)ss.Set<JsonEntityBasic>())
                     .FromSqlRaw(
-                        Fixture
-                            .TestStore
+                        Fixture.TestStore
                             .NormalizeDelimitersInRawString(
                                 "SELECT * FROM [JsonEntitiesBasic] AS j"
                             )
@@ -3318,8 +3319,7 @@ public abstract class JsonQueryTestBase<TFixture> : QueryTestBase<TFixture>
             ss =>
                 ((DbSet<JsonEntityBasic>)ss.Set<JsonEntityBasic>())
                     .FromSqlRaw(
-                        Fixture
-                            .TestStore
+                        Fixture.TestStore
                             .NormalizeDelimitersInRawString(
                                 "SELECT * FROM [JsonEntitiesBasic] AS j"
                             )
@@ -3338,8 +3338,7 @@ public abstract class JsonQueryTestBase<TFixture> : QueryTestBase<TFixture>
             async,
             ss =>
                 ((DbSet<JsonEntityInheritanceBase>)ss.Set<JsonEntityInheritanceBase>()).FromSqlRaw(
-                    Fixture
-                        .TestStore
+                    Fixture.TestStore
                         .NormalizeDelimitersInRawString(
                             "SELECT * FROM [JsonEntitiesInheritance] AS j"
                         )
@@ -3356,8 +3355,7 @@ public abstract class JsonQueryTestBase<TFixture> : QueryTestBase<TFixture>
                 (
                     (DbSet<JsonEntityInheritanceDerived>)ss.Set<JsonEntityInheritanceDerived>()
                 ).FromSqlRaw(
-                    Fixture
-                        .TestStore
+                    Fixture.TestStore
                         .NormalizeDelimitersInRawString(
                             "SELECT * FROM [JsonEntitiesInheritance] AS j"
                         )
@@ -3375,8 +3373,7 @@ public abstract class JsonQueryTestBase<TFixture> : QueryTestBase<TFixture>
             ss =>
                 ((DbSet<JsonEntityInheritanceBase>)ss.Set<JsonEntityInheritanceBase>())
                     .FromSqlRaw(
-                        Fixture
-                            .TestStore
+                        Fixture.TestStore
                             .NormalizeDelimitersInRawString(
                                 "SELECT * FROM [JsonEntitiesInheritance] AS j"
                             )
@@ -3401,8 +3398,7 @@ public abstract class JsonQueryTestBase<TFixture> : QueryTestBase<TFixture>
             ss =>
                 ((DbSet<JsonEntityInheritanceDerived>)ss.Set<JsonEntityInheritanceDerived>())
                     .FromSqlRaw(
-                        Fixture
-                            .TestStore
+                        Fixture.TestStore
                             .NormalizeDelimitersInRawString(
                                 "SELECT * FROM [JsonEntitiesInheritance] AS j"
                             )

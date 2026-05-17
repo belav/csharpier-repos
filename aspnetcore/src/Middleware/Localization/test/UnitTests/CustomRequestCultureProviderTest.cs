@@ -29,8 +29,7 @@ public class CustomRequestCultureProviderTest
                             SupportedCultures = new List<CultureInfo> { new CultureInfo("ar") },
                             SupportedUICultures = new List<CultureInfo> { new CultureInfo("ar") },
                         };
-                        options
-                            .RequestCultureProviders
+                        options.RequestCultureProviders
                             .Insert(
                                 0,
                                 new CustomRequestCultureProvider(context =>
@@ -46,8 +45,7 @@ public class CustomRequestCultureProviderTest
                         app.UseRequestLocalization(options);
                         app.Run(context =>
                         {
-                            var requestCultureFeature = context
-                                .Features
+                            var requestCultureFeature = context.Features
                                 .Get<IRequestCultureFeature>();
                             var requestCulture = requestCultureFeature.RequestCulture;
                             Assert.Equal("ar", requestCulture.Culture.Name);
@@ -72,8 +70,7 @@ public class CustomRequestCultureProviderTest
     )
     {
         var currentCulture = "en";
-        var segments = context
-            .Request
+        var segments = context.Request
             .Path
             .Value
             .Split(new char[] { '/' }, StringSplitOptions.RemoveEmptyEntries);

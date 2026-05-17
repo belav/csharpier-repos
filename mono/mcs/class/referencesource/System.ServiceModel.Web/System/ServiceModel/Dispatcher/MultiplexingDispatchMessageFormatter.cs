@@ -49,8 +49,7 @@ namespace System.ServiceModel.Dispatcher
 
         public void DeserializeRequest(Message message, object[] parameters)
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(
                     new NotSupportedException(
                         SR2.GetString(SR2.SerializingRequestNotSupportedByFormatter, this)
@@ -88,8 +87,7 @@ namespace System.ServiceModel.Dispatcher
 
                 if (OperationContext.Current != null)
                 {
-                    MessageProperties messageProperties = OperationContext
-                        .Current
+                    MessageProperties messageProperties = OperationContext.Current
                         .IncomingMessageProperties;
                     if (
                         messageProperties.ContainsKey(
@@ -103,8 +101,7 @@ namespace System.ServiceModel.Dispatcher
                             ] as string;
                     }
                 }
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new NotSupportedException(
                             SR2.GetString(

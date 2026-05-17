@@ -16,14 +16,11 @@ namespace MonoTests.System
             {
                 DateTime dateStart = new DateTime(2007, 01, 01, 0, 0, 0, DateTimeKind.Utc);
                 DateTime dateEnd = new DateTime(2008, 01, 01);
-                TimeZoneInfo.TransitionTime daylightTransitionStart = TimeZoneInfo
-                    .TransitionTime
+                TimeZoneInfo.TransitionTime daylightTransitionStart = TimeZoneInfo.TransitionTime
                     .CreateFixedDateRule(new DateTime(1, 1, 1, 2, 0, 0), 03, 11);
-                TimeZoneInfo.TransitionTime daylightTransitionEnd = TimeZoneInfo
-                    .TransitionTime
+                TimeZoneInfo.TransitionTime daylightTransitionEnd = TimeZoneInfo.TransitionTime
                     .CreateFixedDateRule(new DateTime(1, 1, 1, 2, 0, 0), 10, 11);
-                TimeZoneInfo
-                    .AdjustmentRule
+                TimeZoneInfo.AdjustmentRule
                     .CreateAdjustmentRule(
                         dateStart,
                         dateEnd,
@@ -39,11 +36,9 @@ namespace MonoTests.System
             {
                 DateTime dateStart = new DateTime(2007, 01, 01);
                 DateTime dateEnd = new DateTime(2008, 01, 01);
-                TimeZoneInfo.TransitionTime daylightTransition = TimeZoneInfo
-                    .TransitionTime
+                TimeZoneInfo.TransitionTime daylightTransition = TimeZoneInfo.TransitionTime
                     .CreateFixedDateRule(new DateTime(1, 1, 1, 2, 0, 0), 03, 11);
-                TimeZoneInfo
-                    .AdjustmentRule
+                TimeZoneInfo.AdjustmentRule
                     .CreateAdjustmentRule(
                         dateStart,
                         dateEnd,
@@ -59,14 +54,11 @@ namespace MonoTests.System
             {
                 DateTime dateStart = new DateTime(2007, 01, 01, 0, 1, 0);
                 DateTime dateEnd = new DateTime(2008, 01, 01);
-                TimeZoneInfo.TransitionTime daylightTransitionStart = TimeZoneInfo
-                    .TransitionTime
+                TimeZoneInfo.TransitionTime daylightTransitionStart = TimeZoneInfo.TransitionTime
                     .CreateFixedDateRule(new DateTime(1, 1, 1, 2, 0, 0), 03, 11);
-                TimeZoneInfo.TransitionTime daylightTransitionEnd = TimeZoneInfo
-                    .TransitionTime
+                TimeZoneInfo.TransitionTime daylightTransitionEnd = TimeZoneInfo.TransitionTime
                     .CreateFixedDateRule(new DateTime(1, 1, 1, 2, 0, 0), 10, 11);
-                TimeZoneInfo
-                    .AdjustmentRule
+                TimeZoneInfo.AdjustmentRule
                     .CreateAdjustmentRule(
                         dateStart,
                         dateEnd,
@@ -81,14 +73,12 @@ namespace MonoTests.System
             {
                 try
                 {
-                    TimeZoneInfo.TransitionTime daylightTransitionStart = TimeZoneInfo
-                        .TransitionTime
-                        .CreateFixedDateRule(new DateTime(1, 1, 1, 2, 0, 0), 03, 11);
-                    TimeZoneInfo.TransitionTime daylightTransitionEnd = TimeZoneInfo
-                        .TransitionTime
+                    TimeZoneInfo.TransitionTime daylightTransitionStart =
+                        TimeZoneInfo.TransitionTime
+                            .CreateFixedDateRule(new DateTime(1, 1, 1, 2, 0, 0), 03, 11);
+                    TimeZoneInfo.TransitionTime daylightTransitionEnd = TimeZoneInfo.TransitionTime
                         .CreateFixedDateRule(new DateTime(1, 1, 1, 2, 0, 0), 10, 11);
-                    TimeZoneInfo
-                        .AdjustmentRule
+                    TimeZoneInfo.AdjustmentRule
                         .CreateAdjustmentRule(
                             DateTime.MinValue.Date,
                             DateTime.MaxValue.Date,
@@ -108,16 +98,13 @@ namespace MonoTests.System
             {
                 DateTime dateStart = new DateTime(2007, 01, 01);
                 DateTime dateEnd = new DateTime(2006, 01, 01);
-                TimeZoneInfo.TransitionTime daylightTransitionStart = TimeZoneInfo
-                    .TransitionTime
+                TimeZoneInfo.TransitionTime daylightTransitionStart = TimeZoneInfo.TransitionTime
                     .CreateFixedDateRule(new DateTime(1, 1, 1, 2, 0, 0), 03, 11);
-                TimeZoneInfo.TransitionTime daylightTransitionEnd = TimeZoneInfo
-                    .TransitionTime
+                TimeZoneInfo.TransitionTime daylightTransitionEnd = TimeZoneInfo.TransitionTime
                     .CreateFixedDateRule(new DateTime(1, 1, 1, 2, 0, 0), 10, 11);
                 try
                 {
-                    TimeZoneInfo
-                        .AdjustmentRule
+                    TimeZoneInfo.AdjustmentRule
                         .CreateAdjustmentRule(
                             dateStart,
                             dateEnd,
@@ -136,14 +123,11 @@ namespace MonoTests.System
             {
                 DateTime dateStart = new DateTime(2007, 01, 01);
                 DateTime dateEnd = new DateTime(2008, 01, 01);
-                TimeZoneInfo.TransitionTime daylightTransitionStart = TimeZoneInfo
-                    .TransitionTime
+                TimeZoneInfo.TransitionTime daylightTransitionStart = TimeZoneInfo.TransitionTime
                     .CreateFixedDateRule(new DateTime(1, 1, 1, 2, 0, 0), 03, 11);
-                TimeZoneInfo.TransitionTime daylightTransitionEnd = TimeZoneInfo
-                    .TransitionTime
+                TimeZoneInfo.TransitionTime daylightTransitionEnd = TimeZoneInfo.TransitionTime
                     .CreateFixedDateRule(new DateTime(1, 1, 1, 2, 0, 0), 10, 11);
-                TimeZoneInfo
-                    .AdjustmentRule
+                TimeZoneInfo.AdjustmentRule
                     .CreateAdjustmentRule(
                         dateStart,
                         dateEnd,
@@ -158,16 +142,13 @@ namespace MonoTests.System
             {
                 DateTime dateStart = new DateTime(2007, 01, 01);
                 DateTime dateEnd = new DateTime(2008, 01, 01);
-                TimeZoneInfo.TransitionTime daylightTransitionStart = TimeZoneInfo
-                    .TransitionTime
+                TimeZoneInfo.TransitionTime daylightTransitionStart = TimeZoneInfo.TransitionTime
                     .CreateFixedDateRule(new DateTime(1, 1, 1, 2, 0, 0), 03, 11);
-                TimeZoneInfo.TransitionTime daylightTransitionEnd = TimeZoneInfo
-                    .TransitionTime
+                TimeZoneInfo.TransitionTime daylightTransitionEnd = TimeZoneInfo.TransitionTime
                     .CreateFixedDateRule(new DateTime(1, 1, 1, 2, 0, 0), 10, 11);
                 try
                 {
-                    TimeZoneInfo
-                        .AdjustmentRule
+                    TimeZoneInfo.AdjustmentRule
                         .CreateAdjustmentRule(
                             dateStart,
                             dateEnd,
@@ -187,19 +168,16 @@ namespace MonoTests.System
             [Test]
             public void Serialization_Deserialization()
             {
-                TimeZoneInfo.TransitionTime start = TimeZoneInfo
-                    .TransitionTime
+                TimeZoneInfo.TransitionTime start = TimeZoneInfo.TransitionTime
                     .CreateFloatingDateRule(new DateTime(1, 1, 1, 1, 0, 0), 3, 5, DayOfWeek.Sunday);
-                TimeZoneInfo.TransitionTime end = TimeZoneInfo
-                    .TransitionTime
+                TimeZoneInfo.TransitionTime end = TimeZoneInfo.TransitionTime
                     .CreateFloatingDateRule(
                         new DateTime(1, 1, 1, 2, 0, 0),
                         10,
                         5,
                         DayOfWeek.Sunday
                     );
-                TimeZoneInfo.AdjustmentRule rule = TimeZoneInfo
-                    .AdjustmentRule
+                TimeZoneInfo.AdjustmentRule rule = TimeZoneInfo.AdjustmentRule
                     .CreateAdjustmentRule(
                         DateTime.MinValue.Date,
                         DateTime.MaxValue.Date,

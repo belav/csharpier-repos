@@ -64,8 +64,7 @@ namespace System.Net
                                 )
                             )
                             {
-                                result = listenerSession
-                                    .Listener
+                                result = listenerSession.Listener
                                     .HandleAuthentication(
                                         listenerSession,
                                         asyncResult._requestContext!,
@@ -88,16 +87,14 @@ namespace System.Net
                             }
                             else
                             {
-                                asyncResult
-                                    ._requestContext!
+                                asyncResult._requestContext!
                                     .Reset(listenerSession.RequestQueueBoundHandle, 0, 0);
                             }
                         }
                     }
                     else
                     {
-                        asyncResult
-                            ._requestContext!
+                        asyncResult._requestContext!
                             .Reset(
                                 listenerSession.RequestQueueBoundHandle,
                                 asyncResult._requestContext.RequestBlob->RequestId,
@@ -163,8 +160,7 @@ namespace System.Net
                 uint bytesTransferred = 0;
                 Debug.Assert(AsyncObject != null);
                 HttpListenerSession listenerSession = (HttpListenerSession)AsyncObject!;
-                statusCode = Interop
-                    .HttpApi
+                statusCode = Interop.HttpApi
                     .HttpReceiveHttpRequest(
                         listenerSession.RequestQueueHandle,
                         _requestContext.RequestBlob->RequestId,

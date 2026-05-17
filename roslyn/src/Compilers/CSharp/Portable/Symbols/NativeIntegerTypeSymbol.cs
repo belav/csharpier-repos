@@ -440,8 +440,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             {
                 if (_lazyParameters.IsDefault)
                 {
-                    var parameters = UnderlyingMethod
-                        .Parameters
+                    var parameters = UnderlyingMethod.Parameters
                         .SelectAsArray(
                             (p, m) =>
                                 (ParameterSymbol)

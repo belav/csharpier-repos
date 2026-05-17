@@ -397,14 +397,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             if (usingDirective.UnsafeKeyword != default)
             {
-                MessageID
-                    .IDS_FeatureUsingTypeAlias
+                MessageID.IDS_FeatureUsingTypeAlias
                     .CheckFeatureAvailability(diagnostics, usingDirective.UnsafeKeyword);
             }
             else if (usingDirective.NamespaceOrType is not NameSyntax)
             {
-                MessageID
-                    .IDS_FeatureUsingTypeAlias
+                MessageID.IDS_FeatureUsingTypeAlias
                     .CheckFeatureAvailability(diagnostics, usingDirective.NamespaceOrType);
             }
 
@@ -428,8 +426,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     flags |= BinderFlags.UnsafeRegion;
             }
 
-            var declarationBinder = ContainingSymbol
-                .DeclaringCompilation
+            var declarationBinder = ContainingSymbol.DeclaringCompilation
                 .GetBinderFactory(syntax.SyntaxTree)
                 .GetBinder(syntax)
                 .WithAdditionalFlags(flags);
@@ -461,8 +458,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             )
             {
                 // using X = nint;
-                MessageID
-                    .IDS_FeatureUsingTypeAlias
+                MessageID.IDS_FeatureUsingTypeAlias
                     .CheckFeatureAvailability(diagnostics, usingDirective.NamespaceOrType);
             }
 

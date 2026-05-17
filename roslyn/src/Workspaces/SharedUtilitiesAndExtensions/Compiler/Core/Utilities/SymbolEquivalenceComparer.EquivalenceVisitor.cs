@@ -600,8 +600,7 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                         equivalentTypesWithDifferingAssemblies != null
                         && x.ContainingType == null
                         && x.ContainingAssembly != null
-                        && !AssemblyIdentityComparer
-                            .SimpleNameComparer
+                        && !AssemblyIdentityComparer.SimpleNameComparer
                             .Equals(x.ContainingAssembly.Name, y.ContainingAssembly.Name)
                         && !equivalentTypesWithDifferingAssemblies.ContainsKey(x)
                     )
@@ -702,8 +701,7 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                 for (var i = 0; i < count; i++)
                 {
                     if (
-                        !symbolEquivalenceComparer
-                            .ParameterEquivalenceComparer
+                        !symbolEquivalenceComparer.ParameterEquivalenceComparer
                             .Equals(
                                 xParameters[i],
                                 yParameters[i],
@@ -729,8 +727,7 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                 >? equivalentTypesWithDifferingAssemblies = null
             )
             {
-                return symbolEquivalenceComparer
-                        .SignatureTypeEquivalenceComparer
+                return symbolEquivalenceComparer.SignatureTypeEquivalenceComparer
                         .Equals(x.ReturnType, y.ReturnType, equivalentTypesWithDifferingAssemblies)
                     && AreEquivalent(
                         x.ReturnTypeCustomModifiers,

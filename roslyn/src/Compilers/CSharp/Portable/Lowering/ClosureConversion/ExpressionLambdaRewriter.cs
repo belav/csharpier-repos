@@ -158,10 +158,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                 );
                 var result = r.VisitLambdaInternal(node);
                 if (
-                    !node.Type.Equals(
-                        result.Type,
-                        TypeCompareKind.IgnoreNullableModifiersForReferenceTypes
-                    )
+                    !node.Type
+                        .Equals(
+                            result.Type,
+                            TypeCompareKind.IgnoreNullableModifiersForReferenceTypes
+                        )
                 )
                 {
                     diagnostics.Add(
@@ -726,8 +727,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 Diagnostics,
                 _bound.Compilation.Assembly
             );
-            var kind = _bound
-                .Compilation
+            var kind = _bound.Compilation
                 .Conversions
                 .ClassifyConversionFromType(oldType, newType, isChecked: false, ref useSiteInfo)
                 .Kind;

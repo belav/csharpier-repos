@@ -143,8 +143,7 @@ namespace System.Net.Sockets
                 throw new InvalidOperationException(SR.net_sockets_handle_already_used);
             }
 
-            error = Interop
-                .Sys
+            error = Interop.Sys
                 .TryChangeSocketEventRegistration(
                     _port,
                     socketHandle,
@@ -215,8 +214,7 @@ namespace System.Net.Sockets
                 while (true)
                 {
                     int numEvents = EventBufferCount;
-                    Interop.Error err = Interop
-                        .Sys
+                    Interop.Error err = Interop.Sys
                         .WaitForSocketEvents(_port, handler.Buffer, &numEvents);
                     if (err != Interop.Error.SUCCESS)
                     {

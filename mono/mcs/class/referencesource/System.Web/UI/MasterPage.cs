@@ -255,8 +255,7 @@ namespace System.Web.UI
                 foreach (String contentName in contentTemplateCollection.Keys)
                 {
                     if (
-                        !master
-                            .ContentPlaceHolders
+                        !master.ContentPlaceHolders
                             .Contains(contentName.ToLower(CultureInfo.InvariantCulture))
                     )
                     {
@@ -285,8 +284,7 @@ namespace System.Web.UI
             // Recursively apply master pages to the nested masterpages.
             if (master.Master != null)
             {
-                string pageFile = master
-                    ._masterPageFile
+                string pageFile = master._masterPageFile
                     .VirtualPathString
                     .ToLower(CultureInfo.InvariantCulture);
                 if (appliedMasterFilePaths.Contains(pageFile))

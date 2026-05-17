@@ -168,8 +168,7 @@ public class ControllerActionEndpointDataSourceTest : ActionEndpointDataSourceBa
         dataSource.AddRoute("1", "/1/{controller}/{action}/{id?}", null, null, null);
         dataSource.AddRoute("2", "/2/{controller}/{action}/{id?}", null, null, null);
 
-        dataSource
-            .DefaultBuilder
+        dataSource.DefaultBuilder
             .Add(
                 (b) =>
                 {
@@ -262,8 +261,7 @@ public class ControllerActionEndpointDataSourceTest : ActionEndpointDataSourceBa
         dataSource.AddRoute("1", "/1/{controller}/{action}/{id?}", null, null, null);
         dataSource.AddRoute("2", "/2/{controller}/{action}/{id?}", null, null, null);
 
-        dataSource
-            .DefaultBuilder
+        dataSource.DefaultBuilder
             .Add(b =>
             {
                 if (
@@ -368,8 +366,7 @@ public class ControllerActionEndpointDataSourceTest : ActionEndpointDataSourceBa
             .AddRoute("2", "/2/{controller}/{action}/{id?}", null, null, null)
             .Add(b => b.Metadata.Add("B"));
 
-        dataSource
-            .DefaultBuilder
+        dataSource.DefaultBuilder
             .Add(
                 (b) =>
                 {
@@ -467,8 +464,7 @@ public class ControllerActionEndpointDataSourceTest : ActionEndpointDataSourceBa
             .AddRoute("2", "/2/{controller}/{action}/{id?}", null, null, null)
             .Add(b => b.Metadata.Add("B"));
 
-        dataSource
-            .DefaultBuilder
+        dataSource.DefaultBuilder
             .Add(
                 (b) =>
                 {

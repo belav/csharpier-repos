@@ -18,8 +18,7 @@ namespace System.ServiceModel.ComIntegration
             moniker = moniker.TrimStart();
             int indexOfEqualSign = moniker.IndexOf("=", StringComparison.Ordinal);
             if (indexOfEqualSign == -1)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new MonikerSyntaxException(SR.GetString(SR.NoEqualSignFound, moniker))
                     );
@@ -27,8 +26,7 @@ namespace System.ServiceModel.ComIntegration
             int indexOfComma = moniker.IndexOf(",", StringComparison.Ordinal);
 
             if (indexOfComma != -1 && indexOfComma < indexOfEqualSign)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new MonikerSyntaxException(SR.GetString(SR.NoEqualSignFound, moniker))
                     );
@@ -49,8 +47,7 @@ namespace System.ServiceModel.ComIntegration
                     return moniker;
                 }
             }
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(
                     new MonikerSyntaxException(
                         SR.GetString(SR.UnknownMonikerKeyword, suspectedKeyword)
@@ -64,8 +61,7 @@ namespace System.ServiceModel.ComIntegration
             int index = 0;
             moniker = moniker.Trim();
             if (string.IsNullOrEmpty(moniker))
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new MonikerSyntaxException(SR.GetString(SR.KewordMissingValue))
                     );
@@ -113,8 +109,7 @@ namespace System.ServiceModel.ComIntegration
                                     moniker = moniker.Trim();
                                 }
                                 else
-                                    throw DiagnosticUtility
-                                        .ExceptionUtility
+                                    throw DiagnosticUtility.ExceptionUtility
                                         .ThrowHelperError(
                                             new MonikerSyntaxException(
                                                 SR.GetString(
@@ -129,8 +124,7 @@ namespace System.ServiceModel.ComIntegration
                             moniker = "";
                     }
                     else
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new MonikerSyntaxException(
                                     SR.GetString(SR.MissingQuote, value.ToString())
@@ -169,8 +163,7 @@ namespace System.ServiceModel.ComIntegration
         {
             int indexOfMonikerData = displayName.IndexOf(":", StringComparison.Ordinal);
             if (indexOfMonikerData == -1)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new MonikerSyntaxException(SR.GetString(SR.MonikerMissingColon))
                     );
@@ -183,8 +176,7 @@ namespace System.ServiceModel.ComIntegration
                 monikerParams = Getkeyword(monikerParams, out keyword);
                 propertyTable.TryGetValue(keyword, out value);
                 if (!String.IsNullOrEmpty(value))
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new MonikerSyntaxException(SR.GetString(SR.RepeatedKeyword))
                         );

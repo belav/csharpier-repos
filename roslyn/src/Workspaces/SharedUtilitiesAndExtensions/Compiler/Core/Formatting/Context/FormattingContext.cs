@@ -240,8 +240,7 @@ namespace Microsoft.CodeAnalysis.Formatting
                     FormattingContext,
                     IndentBlockOperation,
                     SyntaxToken
-                > effectiveBaseTokenGetter = operation
-                    .Option
+                > effectiveBaseTokenGetter = operation.Option
                     .IsOn(IndentBlockOption.RelativeToFirstTokenOnBaseTokenLine)
                     ? static (self, operation) =>
                         self._tokenStream.FirstTokenOfBaseTokenLine(operation.BaseToken)

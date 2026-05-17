@@ -57,8 +57,7 @@
                 Type type = Type.GetType(serviceAuthenticationManagerType, true);
                 if (!typeof(ServiceAuthenticationManager).IsAssignableFrom(type))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ConfigurationErrorsException(
                                 SR.GetString(

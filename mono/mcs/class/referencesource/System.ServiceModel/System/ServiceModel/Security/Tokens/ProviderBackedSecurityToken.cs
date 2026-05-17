@@ -40,8 +40,7 @@ namespace System.ServiceModel.Security.Tokens
 
             if (tokenProvider == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("tokenProvider"));
             }
 
@@ -89,8 +88,7 @@ namespace System.ServiceModel.Security.Tokens
 
             if (_securityToken == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new SecurityTokenException(
                             SR.GetString(

@@ -16,8 +16,7 @@ namespace System.ServiceModel.Channels
         internal DirectionalAction(MessageDirection direction, string action)
         {
             if (!MessageDirectionHelper.IsDefined(direction))
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentOutOfRangeException("direction"));
 
             this.direction = direction;

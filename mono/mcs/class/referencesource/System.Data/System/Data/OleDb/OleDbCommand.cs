@@ -41,8 +41,7 @@ namespace System.Data.OleDb
         private OleDbTransaction _transaction;
 
         private static int _objectTypeCount; // Bid counter
-        internal readonly int ObjectID = System
-            .Threading
+        internal readonly int ObjectID = System.Threading
             .Interlocked
             .Increment(ref _objectTypeCount);
 
@@ -1218,8 +1217,7 @@ namespace System.Data.OleDb
                                 try
                                 {
                                     propSet.DangerousAddRef(ref mustRelease);
-                                    hr = iopenRowset
-                                        .Value
+                                    hr = iopenRowset.Value
                                         .OpenRowset(
                                             ADP.PtrZero,
                                             tableID,
@@ -1249,8 +1247,7 @@ namespace System.Data.OleDb
                                         "<oledb.IOpenRowset.OpenRowset|API|OLEDB> %d#, IID_IRowset\n",
                                         ObjectID
                                     );
-                                    hr = iopenRowset
-                                        .Value
+                                    hr = iopenRowset.Value
                                         .OpenRowset(
                                             ADP.PtrZero,
                                             tableID,
@@ -1272,8 +1269,7 @@ namespace System.Data.OleDb
                                     "<oledb.IOpenRowset.OpenRowset|API|OLEDB> %d#, IID_IRowset\n",
                                     ObjectID
                                 );
-                                hr = iopenRowset
-                                    .Value
+                                hr = iopenRowset.Value
                                     .OpenRowset(
                                         ADP.PtrZero,
                                         tableID,

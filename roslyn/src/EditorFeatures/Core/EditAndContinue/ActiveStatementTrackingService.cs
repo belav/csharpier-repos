@@ -137,8 +137,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             {
                 _workspace = workspace;
                 _spanProvider = spanProvider;
-                _compileTimeSolutionProvider = workspace
-                    .Services
+                _compileTimeSolutionProvider = workspace.Services
                     .GetRequiredService<ICompileTimeSolutionProvider>();
 
                 _workspace.DocumentOpened += DocumentOpened;

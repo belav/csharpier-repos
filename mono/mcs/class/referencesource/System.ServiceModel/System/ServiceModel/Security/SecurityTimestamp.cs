@@ -40,8 +40,7 @@ namespace System.ServiceModel.Security
 
             if (creationTimeUtc > expiryTimeUtc)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperWarning(
                         new ArgumentOutOfRangeException(
                             "recordedExpiryTime",
@@ -167,20 +166,15 @@ namespace System.ServiceModel.Security
             // Check that the creation time is less than expiry time
             if (this.CreationTimeUtc >= this.ExpiryTimeUtc)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new MessageSecurityException(
                             SR.GetString(
                                 SR.TimeStampHasCreationAheadOfExpiry,
-                                this.CreationTimeUtc.ToString(
-                                    DefaultFormat,
-                                    CultureInfo.CurrentCulture
-                                ),
-                                this.ExpiryTimeUtc.ToString(
-                                    DefaultFormat,
-                                    CultureInfo.CurrentCulture
-                                )
+                                this.CreationTimeUtc
+                                    .ToString(DefaultFormat, CultureInfo.CurrentCulture),
+                                this.ExpiryTimeUtc
+                                    .ToString(DefaultFormat, CultureInfo.CurrentCulture)
                             )
                         )
                     );
@@ -195,16 +189,13 @@ namespace System.ServiceModel.Security
             // check that the message has not expired
             if (this.ExpiryTimeUtc <= TimeoutHelper.Subtract(now, allowedClockSkew))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new MessageSecurityException(
                             SR.GetString(
                                 SR.TimeStampHasExpiryTimeInPast,
-                                this.ExpiryTimeUtc.ToString(
-                                    DefaultFormat,
-                                    CultureInfo.CurrentCulture
-                                ),
+                                this.ExpiryTimeUtc
+                                    .ToString(DefaultFormat, CultureInfo.CurrentCulture),
                                 now.ToString(DefaultFormat, CultureInfo.CurrentCulture),
                                 allowedClockSkew
                             )
@@ -215,16 +206,13 @@ namespace System.ServiceModel.Security
             // check that creation time is not in the future (modulo clock skew)
             if (this.CreationTimeUtc >= TimeoutHelper.Add(now, allowedClockSkew))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new MessageSecurityException(
                             SR.GetString(
                                 SR.TimeStampHasCreationTimeInFuture,
-                                this.CreationTimeUtc.ToString(
-                                    DefaultFormat,
-                                    CultureInfo.CurrentCulture
-                                ),
+                                this.CreationTimeUtc
+                                    .ToString(DefaultFormat, CultureInfo.CurrentCulture),
                                 now.ToString(DefaultFormat, CultureInfo.CurrentCulture),
                                 allowedClockSkew
                             )
@@ -238,16 +226,13 @@ namespace System.ServiceModel.Security
                 <= TimeoutHelper.Subtract(now, TimeoutHelper.Add(timeToLive, allowedClockSkew))
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new MessageSecurityException(
                             SR.GetString(
                                 SR.TimeStampWasCreatedTooLongAgo,
-                                this.CreationTimeUtc.ToString(
-                                    DefaultFormat,
-                                    CultureInfo.CurrentCulture
-                                ),
+                                this.CreationTimeUtc
+                                    .ToString(DefaultFormat, CultureInfo.CurrentCulture),
                                 now.ToString(DefaultFormat, CultureInfo.CurrentCulture),
                                 timeToLive,
                                 allowedClockSkew

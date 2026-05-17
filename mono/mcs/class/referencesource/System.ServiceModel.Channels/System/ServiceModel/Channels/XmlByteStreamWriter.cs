@@ -80,8 +80,7 @@ namespace System.ServiceModel.Channels
                 && this.state != ByteStreamWriterState.StartElement
             )
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new InvalidOperationException(
                             SR.XmlWriterMustBeInElement(
@@ -106,8 +105,7 @@ namespace System.ServiceModel.Channels
                 && this.state != ByteStreamWriterState.Content
             )
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(new InvalidOperationException(SR.XmlUnexpectedEndElement));
             }
             this.state = ByteStreamWriterState.EndElement;
@@ -142,14 +140,8 @@ namespace System.ServiceModel.Channels
 
         public override Task WriteBase64Async(byte[] buffer, int index, int count)
         {
-            return Task.Factory.FromAsync(
-                this.BeginWriteBase64,
-                this.EndWriteBase64,
-                buffer,
-                index,
-                count,
-                null
-            );
+            return Task.Factory
+                .FromAsync(this.BeginWriteBase64, this.EndWriteBase64, buffer, index, count, null);
         }
 
         internal IAsyncResult BeginWriteBase64(
@@ -185,8 +177,7 @@ namespace System.ServiceModel.Channels
             {
                 this.writer = writer;
 
-                IAsyncResult result = writer
-                    .stream
+                IAsyncResult result = writer.stream
                     .BeginWrite(
                         buffer,
                         index,
@@ -302,8 +293,7 @@ namespace System.ServiceModel.Channels
             ThrowIfClosed();
             if (this.state != ByteStreamWriterState.Start)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new InvalidOperationException(SR.ByteStreamWriteStartElementAlreadyCalled)
                     );
@@ -315,8 +305,7 @@ namespace System.ServiceModel.Channels
                 || localName != ByteStreamMessageUtility.StreamElementName
             )
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new XmlException(
                             SR.XmlStartElementNameExpected(

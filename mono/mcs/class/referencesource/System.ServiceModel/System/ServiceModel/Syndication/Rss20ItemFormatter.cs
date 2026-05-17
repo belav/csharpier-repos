@@ -35,14 +35,12 @@ namespace System.ServiceModel.Syndication
         {
             if (itemTypeToCreate == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("itemTypeToCreate");
             }
             if (!typeof(SyndicationItem).IsAssignableFrom(itemTypeToCreate))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(
                         "itemTypeToCreate",
                         SR.GetString(
@@ -172,8 +170,7 @@ namespace System.ServiceModel.Syndication
             SyndicationFeedFormatter.TraceItemReadBegin();
             if (!CanRead(reader))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new XmlException(
                             SR.GetString(SR.UnknownItemXml, reader.LocalName, reader.NamespaceURI)
@@ -215,8 +212,7 @@ namespace System.ServiceModel.Syndication
         {
             if (this.Item == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(SR.GetString(SR.ItemFormatterDoesNotHaveItem))
                     );

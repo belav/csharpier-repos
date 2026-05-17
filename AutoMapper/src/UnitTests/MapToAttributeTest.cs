@@ -44,8 +44,7 @@ public class SourceToDestinationNameMapperAttributesMember : ISourceToDestinatio
     {
         if (!_allSourceMembers.TryGetValue(sourceTypeDetails, out SourceMember[] sourceMembers))
         {
-            sourceMembers = sourceTypeDetails
-                .ReadAccessors
+            sourceMembers = sourceTypeDetails.ReadAccessors
                 .Select(sourceMember => new SourceMember(sourceMember))
                 .Where(s => s.Attribute != null)
                 .ToArray();
@@ -54,13 +53,8 @@ public class SourceToDestinationNameMapperAttributesMember : ISourceToDestinatio
         }
         return sourceMembers
             .FirstOrDefault(d =>
-                d.Attribute.IsMatch(
-                    sourceTypeDetails,
-                    d.Member,
-                    destType,
-                    destMemberType,
-                    nameToSearch
-                )
+                d.Attribute
+                    .IsMatch(sourceTypeDetails, d.Member, destType, destMemberType, nameToSearch)
             )
             .Member;
     }

@@ -136,8 +136,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.RemoveUnnecessaryNullableDirec
 
                 if (
                     typeSyntax is PredefinedTypeSyntax predefinedType
-                    && CSharpSyntaxFacts
-                        .Instance
+                    && CSharpSyntaxFacts.Instance
                         .TryGetPredefinedType(predefinedType.Keyword, out var type)
                 )
                 {

@@ -137,8 +137,7 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
             await dispatcher.ExecuteAsync(context, options, c => Task.CompletedTask);
 
             // This write should complete immediately but it exceeds the writer threshold
-            var writeTask = connection
-                .Application
+            var writeTask = connection.Application
                 .Output
                 .WriteAsync(new[] { (byte)'b', (byte)'y', (byte)'t', (byte)'e', (byte)'s' });
 
@@ -544,11 +543,8 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
                 {
                     var ws = (TestWebSocketConnectionFeature)
                         context.Features.Get<IHttpWebSocketFeature>();
-                    await ws.Client.CloseOutputAsync(
-                        WebSocketCloseStatus.NormalClosure,
-                        "",
-                        default
-                    );
+                    await ws.Client
+                        .CloseOutputAsync(WebSocketCloseStatus.NormalClosure, "", default);
                 }
                 else
                 {
@@ -1642,11 +1638,8 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
             var ws = (TestWebSocketConnectionFeature)context1.Features.Get<IHttpWebSocketFeature>();
             if (ws != null)
             {
-                await ws.Client.CloseAsync(
-                    WebSocketCloseStatus.NormalClosure,
-                    "",
-                    CancellationToken.None
-                );
+                await ws.Client
+                    .CloseAsync(WebSocketCloseStatus.NormalClosure, "", CancellationToken.None);
             }
 
             manager.CloseConnections();
@@ -2049,8 +2042,7 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
             var currentUser = connection.User;
 
             var connectionHandlerTask = dispatcher.ExecuteAsync(context, options, app);
-            await connection
-                .Transport
+            await connection.Transport
                 .Output
                 .WriteAsync(Encoding.UTF8.GetBytes("Unblock"))
                 .AsTask()
@@ -2106,8 +2098,7 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
             var currentUser = connection.User;
 
             var connectionHandlerTask = dispatcher.ExecuteAsync(context, options, app);
-            await connection
-                .Transport
+            await connection.Transport
                 .Output
                 .WriteAsync(Encoding.UTF8.GetBytes("Unblock"))
                 .AsTask()
@@ -2670,8 +2661,7 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
                 context.Features.Get<IHttpWebSocketFeature>();
             await websocketFeature.Accepted.DefaultTimeout();
             // Run the client socket
-            var webSocketMessage = await websocketFeature
-                .Client
+            var webSocketMessage = await websocketFeature.Client
                 .GetNextMessageAsync()
                 .DefaultTimeout();
 
@@ -2757,8 +2747,7 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
                 context.Features.Get<IHttpWebSocketFeature>();
             await websocketFeature.Accepted.DefaultTimeout();
             // Run the client socket
-            var webSocketMessage = await websocketFeature
-                .Client
+            var webSocketMessage = await websocketFeature.Client
                 .GetNextMessageAsync()
                 .DefaultTimeout();
 
@@ -2927,8 +2916,7 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
                 requestBody.Seek(0, SeekOrigin.Begin);
 
                 // Write some data to the pipe to fill it up and make the next write wait
-                await connection
-                    .ApplicationStream
+                await connection.ApplicationStream
                     .WriteAsync(buffer, 0, buffer.Length)
                     .DefaultTimeout();
 
@@ -2987,8 +2975,7 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
                 requestBody.Seek(0, SeekOrigin.Begin);
 
                 // Write some data to the pipe to fill it up and make the next write wait
-                await connection
-                    .ApplicationStream
+                await connection.ApplicationStream
                     .WriteAsync(buffer, 0, buffer.Length)
                     .DefaultTimeout();
 
@@ -3012,8 +2999,7 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
         bool ExpectedErrors(WriteContext writeContext)
         {
             return (
-                    writeContext
-                        .LoggerName
+                    writeContext.LoggerName
                         .Equals(
                             "Microsoft.AspNetCore.Http.Connections.Internal.Transports.LongPollingTransport"
                         )
@@ -3165,8 +3151,7 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
             var websocket = (TestWebSocketConnectionFeature)
                 context.Features.Get<IHttpWebSocketFeature>();
             await websocket.Accepted.DefaultTimeout();
-            await websocket
-                .Client
+            await websocket.Client
                 .CloseOutputAsync(
                     WebSocketCloseStatus.NormalClosure,
                     "",
@@ -3943,9 +3928,10 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
                             app.Use(
                                 (c, n) =>
                                 {
-                                    c.Features.Set<IHttpRequestTimeoutFeature>(
-                                        new HttpRequestTimeoutFeature()
-                                    );
+                                    c.Features
+                                        .Set<IHttpRequestTimeoutFeature>(
+                                            new HttpRequestTimeoutFeature()
+                                        );
                                     Assert.True(
                                         (
                                             (HttpRequestTimeoutFeature)
@@ -3998,8 +3984,7 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
                 manager.TryGetConnection(negotiateResponse.ConnectionToken, out var context)
             );
             var feature = Assert.IsType<HttpRequestTimeoutFeature>(
-                context
-                    .Features
+                context.Features
                     .Get<IHttpContextFeature>()
                     ?.HttpContext
                     .Features
@@ -4243,8 +4228,7 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
         switch (transportType)
         {
             case HttpTransportType.WebSockets:
-                context
-                    .Features
+                context.Features
                     .Set<IHttpWebSocketFeature>(new TestWebSocketConnectionFeature(sync));
                 break;
             case HttpTransportType.ServerSentEvents:
@@ -4500,8 +4484,7 @@ public class ReconnectConnectionHandler : ConnectionHandler
     {
         _writer = connection.Transport.Output;
 
-        connection
-            .ConnectionClosed
+        connection.ConnectionClosed
             .Register(() =>
             {
                 _pause.TrySetResult(false);

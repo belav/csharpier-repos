@@ -318,8 +318,7 @@ public static class RelationalDatabaseFacadeExtensions
         {
             var rawSqlCommand = facadeDependencies.RawSqlCommandBuilder.Build(sql, parameters);
 
-            return rawSqlCommand
-                .RelationalCommand
+            return rawSqlCommand.RelationalCommand
                 .ExecuteNonQuery(
                     new RelationalCommandParameterObject(
                         facadeDependencies.RelationalConnection,
@@ -648,8 +647,7 @@ public static class RelationalDatabaseFacadeExtensions
         {
             var rawSqlCommand = facadeDependencies.RawSqlCommandBuilder.Build(sql, parameters);
 
-            return await rawSqlCommand
-                .RelationalCommand
+            return await rawSqlCommand.RelationalCommand
                 .ExecuteNonQueryAsync(
                     new RelationalCommandParameterObject(
                         facadeDependencies.RelationalConnection,
@@ -754,8 +752,7 @@ public static class RelationalDatabaseFacadeExtensions
     /// </remarks>
     /// <param name="databaseFacade">The <see cref="DatabaseFacade" /> for the context.</param>
     public static void OpenConnection(this DatabaseFacade databaseFacade) =>
-        ((IDatabaseFacadeDependenciesAccessor)databaseFacade)
-            .Dependencies
+        ((IDatabaseFacadeDependenciesAccessor)databaseFacade).Dependencies
             .ExecutionStrategy
             .Execute(
                 databaseFacade,
@@ -777,8 +774,7 @@ public static class RelationalDatabaseFacadeExtensions
         this DatabaseFacade databaseFacade,
         CancellationToken cancellationToken = default
     ) =>
-        ((IDatabaseFacadeDependenciesAccessor)databaseFacade)
-            .Dependencies
+        ((IDatabaseFacadeDependenciesAccessor)databaseFacade).Dependencies
             .ExecutionStrategy
             .ExecuteAsync(
                 databaseFacade,
@@ -822,8 +818,7 @@ public static class RelationalDatabaseFacadeExtensions
         this DatabaseFacade databaseFacade,
         IsolationLevel isolationLevel
     ) =>
-        ((IDatabaseFacadeDependenciesAccessor)databaseFacade)
-            .Dependencies
+        ((IDatabaseFacadeDependenciesAccessor)databaseFacade).Dependencies
             .ExecutionStrategy
             .Execute(
                 databaseFacade,
@@ -859,8 +854,7 @@ public static class RelationalDatabaseFacadeExtensions
         IsolationLevel isolationLevel,
         CancellationToken cancellationToken = default
     ) =>
-        ((IDatabaseFacadeDependenciesAccessor)databaseFacade)
-            .Dependencies
+        ((IDatabaseFacadeDependenciesAccessor)databaseFacade).Dependencies
             .ExecutionStrategy
             .ExecuteAsync(
                 databaseFacade,
@@ -1061,8 +1055,7 @@ public static class RelationalDatabaseFacadeExtensions
     ///     <see langword="false" /> otherwise.
     /// </returns>
     public static bool IsRelational(this DatabaseFacade databaseFacade) =>
-        ((IDatabaseFacadeDependenciesAccessor)databaseFacade)
-            .Context
+        ((IDatabaseFacadeDependenciesAccessor)databaseFacade).Context
             .GetService<IDbContextOptions>()
             .Extensions
             .OfType<RelationalOptionsExtension>()

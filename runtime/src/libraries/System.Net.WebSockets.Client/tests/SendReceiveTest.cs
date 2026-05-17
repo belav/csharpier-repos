@@ -698,8 +698,7 @@ namespace System.Net.WebSockets.Client.Tests
                         Assert.NotNull(await LoopbackHelper.WebSocketHandshakeAsync(connection));
 
                         // Wait for client-side ConnectAsync to complete and for a pending ReceiveAsync to be posted.
-                        await pendingReceiveAsyncPosted
-                            .Task
+                        await pendingReceiveAsyncPosted.Task
                             .WaitAsync(TimeSpan.FromMilliseconds(TimeOutMilliseconds));
 
                         // Close the underlying connection prematurely (without sending a WebSocket Close frame).

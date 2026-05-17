@@ -280,8 +280,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 );
                 var actualGreen = actualRed.Node;
 
-                var expectedGreen = InternalSyntax
-                    .SyntaxFactory
+                var expectedGreen = InternalSyntax.SyntaxFactory
                     .Token(
                         InternalSyntax.SyntaxFactory.ElasticZeroSpace,
                         kind,

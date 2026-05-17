@@ -94,12 +94,13 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateVariable
                     .GetCodeGenerationInfoAsync(context, _fallbackOptions, cancellationToken)
                     .ConfigureAwait(false);
 
-                return info.Service.AddStatements(
-                    root,
-                    SpecializedCollections.SingletonEnumerable(localStatement),
-                    info,
-                    cancellationToken: cancellationToken
-                );
+                return info.Service
+                    .AddStatements(
+                        root,
+                        SpecializedCollections.SingletonEnumerable(localStatement),
+                        info,
+                        cancellationToken: cancellationToken
+                    );
             }
         }
     }

@@ -355,8 +355,7 @@ namespace System.Web.Services.Description
                 importer.CodeGenerationOptions = options.CodeGenerationOptions;
                 foreach (string extensionType in options.SchemaImporterExtensions)
                 {
-                    importer
-                        .Extensions
+                    importer.Extensions
                         .Add(
                             Type.GetType(
                                 extensionType,
@@ -443,8 +442,7 @@ namespace System.Web.Services.Description
                     foreach (OperationMessage message in operation.Messages)
                     {
                         if (
-                            message
-                                .Message
+                            message.Message
                                 .Equals(
                                     new XmlQualifiedName(
                                         part.Message.Name,

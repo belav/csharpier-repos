@@ -123,12 +123,10 @@ namespace Microsoft.CodeAnalysis.Editor.InlineHints
                     .ConfigureAwait(false);
                 if (!taggedText.IsDefaultOrEmpty)
                 {
-                    var classificationOptions = _taggerProvider
-                        .EditorOptionsService
+                    var classificationOptions = _taggerProvider.EditorOptionsService
                         .GlobalOptions
                         .GetClassificationOptions(document.Project.Language);
-                    var lineFormattingOptions = _span
-                        .Snapshot
+                    var lineFormattingOptions = _span.Snapshot
                         .TextBuffer
                         .GetLineFormattingOptions(
                             _taggerProvider.EditorOptionsService,
@@ -144,8 +142,7 @@ namespace Microsoft.CodeAnalysis.Editor.InlineHints
                         _taggerProvider.AsynchronousOperationListener,
                         _taggerProvider.StreamingFindUsagesPresenter
                     );
-                    return Implementation
-                        .IntelliSense
+                    return Implementation.IntelliSense
                         .Helpers
                         .BuildInteractiveTextElements(taggedText, context);
                 }
@@ -311,8 +308,7 @@ namespace Microsoft.CodeAnalysis.Editor.InlineHints
                 );
             }
 
-            var toolTipPresenter = _taggerProvider
-                .ToolTipService
+            var toolTipPresenter = _taggerProvider.ToolTipService
                 .CreatePresenter(
                     _textView,
                     new ToolTipParameters(trackMouse: true, ignoreBufferChange: false, KeepOpen)
@@ -330,13 +326,11 @@ namespace Microsoft.CodeAnalysis.Editor.InlineHints
                     CreateDescriptionAsync(threadingContext.DisposalToken)
                 )
                 .ConfigureAwait(false);
-            await threadingContext
-                .JoinableTaskFactory
+            await threadingContext.JoinableTaskFactory
                 .SwitchToMainThreadAsync(threadingContext.DisposalToken);
 
             toolTipPresenter.StartOrUpdate(
-                _textView
-                    .TextSnapshot
+                _textView.TextSnapshot
                     .CreateTrackingSpan(_span.Start, _span.Length, SpanTrackingMode.EdgeInclusive),
                 uiList
             );
@@ -355,8 +349,7 @@ namespace Microsoft.CodeAnalysis.Editor.InlineHints
                 // Selected SpanTrackingMode to be EdgeExclusive by default.
                 // Will revise if there are some scenarios we did not think of that produce undesirable behavior.
                 subjectBuffer.Replace(
-                    textChange
-                        .Span
+                    textChange.Span
                         .ToSnapshotSpan(snapshot)
                         .TranslateTo(subjectBuffer.CurrentSnapshot, SpanTrackingMode.EdgeExclusive),
                     textChange.NewText

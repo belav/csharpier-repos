@@ -236,8 +236,7 @@ namespace System.Runtime.Serialization.Json
                             )
                         )
                         {
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
                                     new SerializationException(
                                         SR.GetString(

@@ -297,18 +297,19 @@ namespace Microsoft.Extensions.Caching.Memory
         private static void ExpirationTokensExpired(object obj)
         {
             // start a new thread to avoid issues with callbacks called from RegisterChangeCallback
-            Task.Factory.StartNew(
-                state =>
-                {
-                    var entry = (CacheEntry)state!;
-                    entry.SetExpired(EvictionReason.TokenExpired);
-                    entry._cache.EntryExpired(entry);
-                },
-                obj,
-                CancellationToken.None,
-                TaskCreationOptions.DenyChildAttach,
-                TaskScheduler.Default
-            );
+            Task.Factory
+                .StartNew(
+                    state =>
+                    {
+                        var entry = (CacheEntry)state!;
+                        entry.SetExpired(EvictionReason.TokenExpired);
+                        entry._cache.EntryExpired(entry);
+                    },
+                    obj,
+                    CancellationToken.None,
+                    TaskCreationOptions.DenyChildAttach,
+                    TaskScheduler.Default
+                );
         }
 
         internal void InvokeEvictionCallbacks() => _tokens?.InvokeEvictionCallbacks(this);

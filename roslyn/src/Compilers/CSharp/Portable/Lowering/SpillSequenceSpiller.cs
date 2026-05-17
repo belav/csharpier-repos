@@ -578,13 +578,15 @@ namespace Microsoft.CodeAnalysis.CSharp
                             }
                             else if (
                                 call.Method.OriginalDefinition
-                                    == _F.Compilation.GetWellKnownTypeMember(
-                                        WellKnownMember.System_Span_T__get_Item
-                                    )
+                                    == _F.Compilation
+                                        .GetWellKnownTypeMember(
+                                            WellKnownMember.System_Span_T__get_Item
+                                        )
                                 || call.Method.OriginalDefinition
-                                    == _F.Compilation.GetWellKnownTypeMember(
-                                        WellKnownMember.System_ReadOnlySpan_T__get_Item
-                                    )
+                                    == _F.Compilation
+                                        .GetWellKnownTypeMember(
+                                            WellKnownMember.System_ReadOnlySpan_T__get_Item
+                                        )
                             )
                             {
                                 Debug.Assert(call.Arguments.Length == 1);
@@ -610,13 +612,15 @@ namespace Microsoft.CodeAnalysis.CSharp
                         }
                         else if (
                             call.Method.OriginalDefinition
-                                == _F.Compilation.GetWellKnownTypeMember(
-                                    WellKnownMember.System_Span_T__Slice_Int_Int
-                                )
+                                == _F.Compilation
+                                    .GetWellKnownTypeMember(
+                                        WellKnownMember.System_Span_T__Slice_Int_Int
+                                    )
                             || call.Method.OriginalDefinition
-                                == _F.Compilation.GetWellKnownTypeMember(
-                                    WellKnownMember.System_ReadOnlySpan_T__Slice_Int_Int
-                                )
+                                == _F.Compilation
+                                    .GetWellKnownTypeMember(
+                                        WellKnownMember.System_ReadOnlySpan_T__Slice_Int_Int
+                                    )
                         )
                         {
                             Debug.Assert(call.Arguments.Length == 2);
@@ -752,11 +756,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 && receiverRefLocal.Type.IsTypeParameter()
                 && !receiverRefLocal.Type.IsReferenceType
                 && !receiverRefLocal.Type.IsValueType
-                && valueTypeReceiver
-                    .Type
+                && valueTypeReceiver.Type
                     .Equals(receiverRefLocal.Type, TypeCompareKind.AllIgnoreOptions)
-                && referenceTypeReceiver
-                    .Type
+                && referenceTypeReceiver.Type
                     .Equals(receiverRefLocal.Type, TypeCompareKind.AllIgnoreOptions)
             )
             {

@@ -281,8 +281,7 @@ namespace System.Net.Http.WinHttpHandlerFunctional.Tests
             return responseMessage.TrailingHeaders;
 #else
 #pragma warning disable CS0618 // Type or member is obsolete
-            responseMessage
-                .RequestMessage
+            responseMessage.RequestMessage
                 .Properties
                 .TryGetValue("__ResponseTrailers", out object trailers);
 #pragma warning restore CS0618 // Type or member is obsolete

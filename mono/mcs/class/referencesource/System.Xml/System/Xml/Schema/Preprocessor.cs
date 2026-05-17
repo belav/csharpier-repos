@@ -1072,8 +1072,7 @@ namespace System.Xml.Schema
                         else
                         {
                             attributeGroup.Redefined = originalAttrGroup;
-                            schemaToUpdate
-                                .AttributeGroups
+                            schemaToUpdate.AttributeGroups
                                 .Insert(attributeGroup.QualifiedName, attributeGroup);
                             CheckRefinedAttributeGroup(attributeGroup);
                         }
@@ -1112,8 +1111,7 @@ namespace System.Xml.Schema
                         else if (originalType is XmlSchemaComplexType)
                         {
                             complexType.Redefined = originalType;
-                            schemaToUpdate
-                                .SchemaTypes
+                            schemaToUpdate.SchemaTypes
                                 .Insert(complexType.QualifiedName, complexType);
                             CheckRefinedComplexType(complexType);
                         }

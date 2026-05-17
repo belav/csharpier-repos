@@ -463,14 +463,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions.ContextQuery
             if (
                 token.Kind() == SyntaxKind.OpenBracketToken
                 && token.Parent.IsKind(SyntaxKind.AttributeList)
-                && this.SyntaxTree.IsTypeDeclarationContext(
-                    token.SpanStart,
-                    context: null,
-                    validModifiers: null,
-                    validTypeDeclarations: SyntaxKindSet.ClassInterfaceStructRecordTypeDeclarations,
-                    canBePartial: false,
-                    cancellationToken: cancellationToken
-                )
+                && this.SyntaxTree
+                    .IsTypeDeclarationContext(
+                        token.SpanStart,
+                        context: null,
+                        validModifiers: null,
+                        validTypeDeclarations: SyntaxKindSet.ClassInterfaceStructRecordTypeDeclarations,
+                        canBePartial: false,
+                        cancellationToken: cancellationToken
+                    )
             )
             {
                 return true;
@@ -486,14 +487,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions.ContextQuery
             CancellationToken cancellationToken = default
         )
         {
-            return this.SyntaxTree.IsTypeDeclarationContext(
-                this.Position,
-                this,
-                validModifiers,
-                validTypeDeclarations,
-                canBePartial,
-                cancellationToken
-            );
+            return this.SyntaxTree
+                .IsTypeDeclarationContext(
+                    this.Position,
+                    this,
+                    validModifiers,
+                    validTypeDeclarations,
+                    canBePartial,
+                    cancellationToken
+                );
         }
 
         public bool IsRecordDeclarationContext(
@@ -580,14 +582,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions.ContextQuery
             CancellationToken cancellationToken = default
         )
         {
-            return this.SyntaxTree.IsMemberDeclarationContext(
-                this.Position,
-                this,
-                validModifiers,
-                validTypeDeclarations,
-                canBePartial,
-                cancellationToken
-            );
+            return this.SyntaxTree
+                .IsMemberDeclarationContext(
+                    this.Position,
+                    this,
+                    validModifiers,
+                    validTypeDeclarations,
+                    canBePartial,
+                    cancellationToken
+                );
         }
 
         public bool IsRegularTopLevelStatementsContext() =>

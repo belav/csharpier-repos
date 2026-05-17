@@ -63,8 +63,7 @@ namespace System.Security.Policy
         public SecurityElement ToXml(PolicyLevel level)
         {
             SecurityElement root = new SecurityElement("IMembershipCondition");
-            System
-                .Security
+            System.Security
                 .Util
                 .XMLUtil
                 .AddClassAttribute(

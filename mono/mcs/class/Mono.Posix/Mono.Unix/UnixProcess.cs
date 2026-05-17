@@ -57,8 +57,7 @@ namespace Mono.Unix
         private int GetProcessStatus()
         {
             int status;
-            int r = Native
-                .Syscall
+            int r = Native.Syscall
                 .waitpid(
                     pid,
                     out status,

@@ -110,8 +110,7 @@ internal sealed partial class WebSocketsTransport : ITransport, IStatefulReconne
             webSocket.Options.SetRequestHeader("User-Agent", Constants.UserAgentHeader.ToString());
 #else
             // Set an alternative user agent header on Full framework
-            webSocket
-                .Options
+            webSocket.Options
                 .SetRequestHeader("X-SignalR-User-Agent", Constants.UserAgentHeader.ToString());
 #endif
 
@@ -150,8 +149,7 @@ internal sealed partial class WebSocketsTransport : ITransport, IStatefulReconne
 
                 if (context.Options.ClientCertificates is { Count: > 0 })
                 {
-                    webSocket
-                        .Options
+                    webSocket.Options
                         .ClientCertificates
                         .AddRange(context.Options.ClientCertificates);
                 }
@@ -174,8 +172,7 @@ internal sealed partial class WebSocketsTransport : ITransport, IStatefulReconne
 
                 if (context.Options.UseDefaultCredentials != null)
                 {
-                    webSocket.Options.UseDefaultCredentials = context
-                        .Options
+                    webSocket.Options.UseDefaultCredentials = context.Options
                         .UseDefaultCredentials
                         .Value;
                     if (context.Options.UseDefaultCredentials.Value)

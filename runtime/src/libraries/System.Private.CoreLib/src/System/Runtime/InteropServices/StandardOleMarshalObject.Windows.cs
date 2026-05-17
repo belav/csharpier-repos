@@ -22,8 +22,7 @@ namespace System.Runtime.InteropServices
                 try
                 {
                     IntPtr pStandardMarshal = IntPtr.Zero;
-                    int hr = Interop
-                        .Ole32
+                    int hr = Interop.Ole32
                         .CoGetStandardMarshal(
                             ref riid,
                             pUnknown,

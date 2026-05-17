@@ -47,8 +47,7 @@ public static class RateLimiterEndpointConventionBuilderExtensions
 
         builder.Add(endpointBuilder =>
         {
-            endpointBuilder
-                .Metadata
+            endpointBuilder.Metadata
                 .Add(
                     new EnableRateLimitingAttribute(
                         new DefaultRateLimiterPolicy(

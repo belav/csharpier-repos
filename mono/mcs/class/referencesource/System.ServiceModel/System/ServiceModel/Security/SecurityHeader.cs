@@ -47,8 +47,7 @@ namespace System.ServiceModel.Security
             }
             if (standardsManager == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("standardsManager");
             }
             if (algorithmSuite == null)
@@ -155,8 +154,7 @@ namespace System.ServiceModel.Security
         {
             if (this.processingStarted)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(SR.OperationCannotBeDoneAfterProcessingIsStarted)

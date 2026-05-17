@@ -1596,8 +1596,7 @@ class C
                 capabilities.HasVisualStudioLspCapability()
             );
 
-            var expectedNames = ClassificationTypeNames
-                .AllTypeNames
+            var expectedNames = ClassificationTypeNames.AllTypeNames
                 .Where(s => !ClassificationTypeNames.AdditiveTypeNames.Contains(s));
             foreach (var expectedClassificationName in expectedNames)
             {

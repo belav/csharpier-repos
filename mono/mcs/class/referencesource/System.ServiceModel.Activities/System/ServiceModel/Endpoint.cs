@@ -73,8 +73,7 @@ namespace System.ServiceModel
                     ContractValidationHelper.GetErrorMessageEndpointServiceContractName(
                         this.ServiceContractName
                     );
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new InvalidOperationException(
                             SMASR.MissingUriInEndpoint(endpointName, contractName)
@@ -98,8 +97,7 @@ namespace System.ServiceModel
                         ContractValidationHelper.GetErrorMessageEndpointServiceContractName(
                             this.ServiceContractName
                         );
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(
                             new InvalidOperationException(
                                 SMASR.RelativeUriRequiresBinding(
@@ -119,8 +117,7 @@ namespace System.ServiceModel
                         ContractValidationHelper.GetErrorMessageEndpointServiceContractName(
                             this.ServiceContractName
                         );
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(
                             new InvalidOperationException(
                                 SMASR.RelativeUriRequiresHost(

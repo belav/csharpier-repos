@@ -215,8 +215,7 @@ namespace System.Security.Cryptography.Xml
                     keyBlob.cbData = publicKey.Length;
                     keyBlob.pbData = new IntPtr(pPublicKey);
 
-                    int hrToken = CapiNative
-                        .UnsafeNativeMethods
+                    int hrToken = CapiNative.UnsafeNativeMethods
                         ._AxlPublicKeyBlobToPublicKeyToken(ref keyBlob, out tokenBuffer);
                     if (((uint)hrToken & 0x80000000) != 0)
                     {
@@ -558,8 +557,7 @@ namespace System.Security.Cryptography.Xml
 
             // Get the actual key hash
             SafeAxlBufferHandle issuerKeyBuffer = null;
-            int hrHash = X509Native
-                .UnsafeNativeMethods
+            int hrHash = X509Native.UnsafeNativeMethods
                 ._AxlGetIssuerPublicKeyHash(publisherCertificate.Handle, out issuerKeyBuffer);
             if (hrHash != (int)SignatureVerificationResult.Valid)
             {
@@ -675,8 +673,7 @@ namespace System.Security.Cryptography.Xml
                         xmlBlob.cbData = licenseXml.Length;
                         xmlBlob.pbData = new IntPtr(pLicenseXml);
 
-                        int hrVerify = X509Native
-                            .UnsafeNativeMethods
+                        int hrVerify = X509Native.UnsafeNativeMethods
                             .CertVerifyAuthenticodeLicense(
                                 ref xmlBlob,
                                 verificationFlags,

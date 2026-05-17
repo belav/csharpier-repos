@@ -241,30 +241,31 @@ namespace Mono.CSharp
 
         static void Error_InvalidNamedArgument(ResolveContext rc, NamedArgument name)
         {
-            rc.Report.Error(
-                617,
-                name.Location,
-                "`{0}' is not a valid named attribute argument. Named attribute arguments "
-                    + "must be fields which are not readonly, static, const or read-write properties which are "
-                    + "public and not static",
-                name.Name
-            );
+            rc.Report
+                .Error(
+                    617,
+                    name.Location,
+                    "`{0}' is not a valid named attribute argument. Named attribute arguments "
+                        + "must be fields which are not readonly, static, const or read-write properties which are "
+                        + "public and not static",
+                    name.Name
+                );
         }
 
         static void Error_InvalidNamedArgumentType(ResolveContext rc, NamedArgument name)
         {
-            rc.Report.Error(
-                655,
-                name.Location,
-                "`{0}' is not a valid named attribute argument because it is not a valid attribute parameter type",
-                name.Name
-            );
+            rc.Report
+                .Error(
+                    655,
+                    name.Location,
+                    "`{0}' is not a valid named attribute argument because it is not a valid attribute parameter type",
+                    name.Name
+                );
         }
 
         public static void Error_AttributeArgumentIsDynamic(IMemberContext context, Location loc)
         {
-            context
-                .Module
+            context.Module
                 .Compiler
                 .Report
                 .Error(1982, loc, "An attribute argument cannot be dynamic expression");
@@ -674,12 +675,8 @@ namespace Mono.CSharp
                 string name = a.Name;
                 if (seen_names.Contains(name))
                 {
-                    ec.Report.Error(
-                        643,
-                        a.Location,
-                        "Duplicate named attribute `{0}' argument",
-                        name
-                    );
+                    ec.Report
+                        .Error(643, a.Location, "Duplicate named attribute `{0}' argument", name);
                     continue;
                 }
 
@@ -807,8 +804,9 @@ namespace Mono.CSharp
         {
             StringBuilder sb = new StringBuilder();
             AttributeTargets targets = Type.GetAttributeUsage(
-                context.Module.PredefinedAttributes.AttributeUsage
-            ).ValidOn;
+                    context.Module.PredefinedAttributes.AttributeUsage
+                )
+                .ValidOn;
 
             if ((targets & AttributeTargets.Assembly) != 0)
                 sb.Append("assembly, ");
@@ -1208,8 +1206,7 @@ namespace Mono.CSharp
         public CharSet GetCharSetValue()
         {
             return (CharSet)
-                System
-                    .Enum
+                System.Enum
                     .Parse(typeof(CharSet), ((Constant)pos_args[0].Expr).GetValue().ToString());
         }
 
@@ -1241,8 +1238,7 @@ namespace Mono.CSharp
             if (pos_args.Count == 1)
             {
                 options = (MethodImplOptions)
-                    System
-                        .Enum
+                    System.Enum
                         .Parse(
                             typeof(MethodImplOptions),
                             ((Constant)pos_args[0].Expr).GetValue().ToString()
@@ -1267,8 +1263,7 @@ namespace Mono.CSharp
                 return false;
 
             var value = (LayoutKind)
-                System
-                    .Enum
+                System.Enum
                     .Parse(typeof(LayoutKind), ((Constant)pos_args[0].Expr).GetValue().ToString());
             return value == LayoutKind.Explicit;
         }
@@ -1351,8 +1346,7 @@ namespace Mono.CSharp
                                     || (Type == predefined.IndexerName && Tokenizer.IsKeyword(v))
                                 )
                                 {
-                                    context
-                                        .Module
+                                    context.Module
                                         .Compiler
                                         .Report
                                         .Error(
@@ -1388,8 +1382,7 @@ namespace Mono.CSharp
                                 if (pos_args.Count == 1)
                                 {
                                     var u_type = (UnmanagedType)
-                                        System
-                                            .Enum
+                                        System.Enum
                                             .Parse(
                                                 typeof(UnmanagedType),
                                                 ((Constant)pos_args[0].Expr).GetValue().ToString()
@@ -1736,12 +1729,13 @@ namespace Mono.CSharp
                 foreach (Attribute collision in d.Value)
                     a.Report.SymbolRelatedToPreviousError(collision.Location, "");
 
-                a.Report.Error(
-                    579,
-                    a.Location,
-                    "The attribute `{0}' cannot be applied multiple times",
-                    a.GetSignatureForError()
-                );
+                a.Report
+                    .Error(
+                        579,
+                        a.Location,
+                        "The attribute `{0}' cannot be applied multiple times",
+                        a.GetSignatureForError()
+                    );
             }
         }
 

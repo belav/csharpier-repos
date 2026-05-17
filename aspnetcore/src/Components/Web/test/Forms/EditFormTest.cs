@@ -113,8 +113,7 @@ public class EditFormTest
 
         // Act
         await RenderAndGetTestEditFormComponentAsync(rootComponent);
-        var editFormComponentId = _testRenderer
-            .Batches
+        var editFormComponentId = _testRenderer.Batches
             .Single()
             .GetComponentFrames<EditForm>()
             .Single()
@@ -150,8 +149,7 @@ public class EditFormTest
 
         // Act
         await RenderAndGetTestEditFormComponentAsync(rootComponent);
-        var editFormComponentId = _testRenderer
-            .Batches
+        var editFormComponentId = _testRenderer.Batches
             .Single()
             .GetComponentFrames<EditForm>()
             .Single()
@@ -205,8 +203,7 @@ public class EditFormTest
 
         // Act
         await RenderAndGetTestEditFormComponentAsync(rootComponent);
-        var editFormComponentId = _testRenderer
-            .Batches
+        var editFormComponentId = _testRenderer.Batches
             .Single()
             .GetComponentFrames<EditForm>()
             .Single()
@@ -224,8 +221,7 @@ public class EditFormTest
     }
 
     private static EditForm FindEditFormComponent(CapturedBatch batch) =>
-        batch
-            .ReferenceFrames
+        batch.ReferenceFrames
             .Where(f => f.FrameType == RenderTreeFrameType.Component)
             .Select(f => f.Component)
             .OfType<EditForm>()

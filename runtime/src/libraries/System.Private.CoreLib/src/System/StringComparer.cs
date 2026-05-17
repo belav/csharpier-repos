@@ -372,8 +372,7 @@ namespace System
 
             if (_ignoreCase)
             {
-                return Globalization
-                    .Ordinal
+                return Globalization.Ordinal
                     .CompareStringIgnoreCase(
                         ref x.GetRawStringData(),
                         x.Length,
@@ -398,8 +397,7 @@ namespace System
                 {
                     return false;
                 }
-                return Globalization
-                    .Ordinal
+                return Globalization.Ordinal
                     .EqualsIgnoreCase(ref x.GetRawStringData(), ref y.GetRawStringData(), x.Length);
             }
             return x.Equals(y);
@@ -498,8 +496,7 @@ namespace System
                 return 1;
             }
 
-            return Globalization
-                .Ordinal
+            return Globalization.Ordinal
                 .CompareStringIgnoreCase(
                     ref x.GetRawStringData(),
                     x.Length,
@@ -525,8 +522,7 @@ namespace System
                 return false;
             }
 
-            return Globalization
-                .Ordinal
+            return Globalization.Ordinal
                 .EqualsIgnoreCase(ref x.GetRawStringData(), ref y.GetRawStringData(), x.Length);
         }
 

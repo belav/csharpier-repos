@@ -143,8 +143,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
 
             // Pattern matching is not supported in expression tree.  So we can't fix this up.
             if (
-                CSharpSemanticFactsService
-                    .Instance
+                CSharpSemanticFactsService.Instance
                     .IsInExpressionTree(
                         semanticModel,
                         isExpression,
@@ -272,12 +271,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
             }
 
             var changedRoot = editor.GetChangedRoot();
-            var updatedSyntaxTree = semanticModel
-                .SyntaxTree
+            var updatedSyntaxTree = semanticModel.SyntaxTree
                 .WithRootAndOptions(changedRoot, semanticModel.SyntaxTree.Options);
 
-            var updatedCompilation = semanticModel
-                .Compilation
+            var updatedCompilation = semanticModel.Compilation
                 .ReplaceSyntaxTree(semanticModel.SyntaxTree, updatedSyntaxTree);
 #pragma warning disable RS1030 // Do not invoke Compilation.GetSemanticModel() method within a diagnostic analyzer
             return updatedCompilation.GetSemanticModel(updatedSyntaxTree);

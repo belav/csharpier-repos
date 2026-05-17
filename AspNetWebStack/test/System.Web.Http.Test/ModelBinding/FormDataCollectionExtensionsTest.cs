@@ -359,8 +359,7 @@ namespace System.Web.Http.ModelBinding
 
             using (HttpConfiguration configuration = new HttpConfiguration())
             {
-                configuration
-                    .Services
+                configuration.Services
                     .Insert(typeof(ModelBinderProvider), 0, new CustomIntModelBinderProvider());
 
                 HttpActionContext actionContext = CreateActionContext(configuration);
@@ -500,8 +499,7 @@ namespace System.Web.Http.ModelBinding
                 ModelBindingContext bindingContext
             )
             {
-                ValueProviderResult valueResult = bindingContext
-                    .ValueProvider
+                ValueProviderResult valueResult = bindingContext.ValueProvider
                     .GetValue(bindingContext.ModelName);
                 int result = (int)valueResult.ConvertTo(typeof(int));
 

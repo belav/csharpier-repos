@@ -54,8 +54,7 @@ namespace Newtonsoft.Json.Tests.Benchmarks
         public void SerializeLargeJsonFile()
         {
             using (
-                StreamWriter file = System
-                    .IO
+                StreamWriter file = System.IO
                     .File
                     .CreateText(TestFixtureBase.ResolvePath("largewrite.json"))
             )

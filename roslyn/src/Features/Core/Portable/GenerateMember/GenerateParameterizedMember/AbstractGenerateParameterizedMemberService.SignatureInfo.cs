@@ -155,8 +155,7 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
                 );
 
                 // Ensure no conflicts between type parameter names and parameter names.
-                var languageServiceProvider = Document
-                    .Project
+                var languageServiceProvider = Document.Project
                     .Solution
                     .Services
                     .GetLanguageServices(State.TypeToGenerateIn.Language);
@@ -334,8 +333,7 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
                         return Accessibility.Protected;
                     }
                     else if (
-                        containingType
-                            .ContainingAssembly
+                        containingType.ContainingAssembly
                             .IsSameAssemblyOrHasFriendAccessTo(
                                 State.TypeToGenerateIn.ContainingAssembly
                             )

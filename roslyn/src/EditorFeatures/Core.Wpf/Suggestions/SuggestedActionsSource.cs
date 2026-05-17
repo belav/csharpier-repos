@@ -265,8 +265,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
                         && state.Target.SubjectBuffer.SupportsCodeFixes()
                     )
                     {
-                        var result = await state
-                            .Target
+                        var result = await state.Target
                             .Owner
                             ._codeFixService
                             .GetMostSevereFixAsync(
@@ -319,8 +318,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
                 )
                 {
                     if (
-                        await state
-                            .Target
+                        await state.Target
                             .Owner
                             ._codeRefactoringService
                             .HasRefactoringsAsync(
@@ -346,14 +344,12 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
             {
                 this.AssertIsForeground();
 
-                var selectedSpans = state
-                    .Target
+                var selectedSpans = state.Target
                     .TextView
                     .Selection
                     .SelectedSpans
                     .SelectMany(ss =>
-                        state
-                            .Target
+                        state.Target
                             .TextView
                             .BufferGraph
                             .MapDownToBuffer(
@@ -401,8 +397,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
 
                 // never show light bulb if solution is not fully loaded yet
                 if (
-                    !await workspace
-                        .Services
+                    !await workspace.Services
                         .GetRequiredService<IWorkspaceStatusService>()
                         .IsFullyLoadedAsync(cancellationToken)
                         .ConfigureAwait(false)
@@ -411,8 +406,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
 
                 cancellationToken.ThrowIfCancellationRequested();
 
-                using var asyncToken = state
-                    .Target
+                using var asyncToken = state.Target
                     .Owner
                     .OperationListener
                     .BeginAsyncOperation(nameof(GetSuggestedActionCategoriesAsync));

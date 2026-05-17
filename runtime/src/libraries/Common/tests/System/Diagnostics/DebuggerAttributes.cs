@@ -68,9 +68,8 @@ namespace System.Diagnostics
 
         public static DebuggerBrowsableState? GetDebuggerBrowsableState(MemberInfo info)
         {
-            CustomAttributeData debuggerBrowsableAttribute = info.CustomAttributes.SingleOrDefault(
-                a => a.AttributeType == typeof(DebuggerBrowsableAttribute)
-            );
+            CustomAttributeData debuggerBrowsableAttribute = info.CustomAttributes
+                .SingleOrDefault(a => a.AttributeType == typeof(DebuggerBrowsableAttribute));
             // Enums in attribute constructors are boxed as ints, so cast to int? first.
             return (DebuggerBrowsableState?)
                 (int?)debuggerBrowsableAttribute?.ConstructorArguments.Single().Value;
@@ -198,9 +197,9 @@ namespace System.Diagnostics
             object obj
         )
         {
-            CustomAttributeNamedArgument namedAttribute = debuggerDisplayAttributeData
-                .NamedArguments
-                .FirstOrDefault(na => na.MemberName == argumentName);
+            CustomAttributeNamedArgument namedAttribute =
+                debuggerDisplayAttributeData.NamedArguments
+                    .FirstOrDefault(na => na.MemberName == argumentName);
             if (namedAttribute != default)
             {
                 string? value = (string?)namedAttribute.TypedValue.Value;

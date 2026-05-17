@@ -1646,8 +1646,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     return hasDeclaredMembers;
                 }
 
-                hasDeclaredMembers = declaration
-                    .Declarations
+                hasDeclaredMembers = declaration.Declarations
                     .Any(static decl => decl.HasRequiredMembers);
                 _flags.SetHasDeclaredRequiredMembers(hasDeclaredMembers);
                 return hasDeclaredMembers;
@@ -1851,8 +1850,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     // what name it will have after attribute binding (because of
                     // IndexerNameAttribute).
                     membersByName = ToNameKeyedDictionary(
-                        membersAndInitializers
-                            .NonTypeMembers
+                        membersAndInitializers.NonTypeMembers
                             .WhereAsArray(s =>
                                 !s.IsIndexer()
                                 && (
@@ -2092,8 +2090,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             var membersAndInitializers = this.GetMembersAndInitializers();
 
-            IEnumerable<Symbol> result = membersAndInitializers
-                .NonTypeMembers
+            IEnumerable<Symbol> result = membersAndInitializers.NonTypeMembers
                 .Where(IsInstanceFieldOrEvent);
 
             return result;
@@ -2528,8 +2525,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             // diagnostic about duplicate signature.
             if (
                 method1.MethodKind == MethodKind.Constructor
-                && ((ConstructorDeclarationSyntax)method1.SyntaxRef.GetSyntax())
-                    .Identifier
+                && ((ConstructorDeclarationSyntax)method1.SyntaxRef.GetSyntax()).Identifier
                     .ValueText != this.Name
             )
             {
@@ -3762,8 +3758,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             == InstanceInitializersForPositionalMembers[0].Syntax.SyntaxTree
                     );
                     Debug.Assert(
-                        declaredMembers
-                            .DeclarationWithParameters
+                        declaredMembers.DeclarationWithParameters
                             .Span
                             .Contains(InstanceInitializersForPositionalMembers[0].Syntax.Span.Start)
                     );
@@ -3807,8 +3802,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         insertAt != groupCount
                         && declaredMembers.DeclarationWithParameters.SyntaxTree
                             == declaredMembers.InstanceInitializers[insertAt][0].Syntax.SyntaxTree
-                        && declaredMembers
-                            .DeclarationWithParameters
+                        && declaredMembers.DeclarationWithParameters
                             .Span
                             .Contains(
                                 declaredMembers.InstanceInitializers[insertAt][0].Syntax.Span.Start
@@ -3847,13 +3841,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     else
                     {
                         Debug.Assert(
-                            !declaredMembers
-                                .InstanceInitializers
+                            !declaredMembers.InstanceInitializers
                                 .Any(g =>
                                     declaredMembers.DeclarationWithParameters.SyntaxTree
                                         == g[0].Syntax.SyntaxTree
-                                    && declaredMembers
-                                        .DeclarationWithParameters
+                                    && declaredMembers.DeclarationWithParameters
                                         .Span
                                         .Contains(g[0].Syntax.Span.Start)
                                 )
@@ -5043,8 +5035,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         }
                         else
                         {
-                            MessageID
-                                .IDS_FeatureParameterlessStructConstructors
+                            MessageID.IDS_FeatureParameterlessStructConstructors
                                 .CheckFeatureAvailability(
                                     diagnostics,
                                     m.DeclaringCompilation,
@@ -5088,8 +5079,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 {
                     hasInitializers = true;
                     var symbol = initializer.FieldOpt.AssociatedSymbol ?? initializer.FieldOpt;
-                    MessageID
-                        .IDS_FeatureStructFieldInitializers
+                    MessageID.IDS_FeatureStructFieldInitializers
                         .CheckFeatureAvailability(
                             diagnostics,
                             symbol.DeclaringCompilation,
@@ -5100,8 +5090,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             if (
                 hasInitializers
-                && !builder
-                    .NonTypeMembers
+                && !builder.NonTypeMembers
                     .Any(member => member is MethodSymbol { MethodKind: MethodKind.Constructor })
             )
             {
@@ -5159,9 +5148,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 declaredMembersAndInitializers.PrimaryConstructor?.GetBackingFields().Any() != true
             );
 
-            ParameterListSyntax? paramList = declaredMembersAndInitializers
-                .DeclarationWithParameters
-                ?.ParameterList;
+            ParameterListSyntax? paramList =
+                declaredMembersAndInitializers.DeclarationWithParameters?.ParameterList;
             var memberSignatures = s_duplicateRecordMemberSignatureDictionary.Allocate();
             var fieldsByName = PooledDictionary<string, Symbol>.GetInstance();
             var memberNames = PooledHashSet<string>.GetInstance();
@@ -5286,14 +5274,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     MethodKind.Ordinary,
                     Cci.CallingConvention.HasThis,
                     ImmutableArray<TypeParameterSymbol>.Empty,
-                    ctor.Parameters.SelectAsArray<ParameterSymbol, ParameterSymbol>(
-                        param => new SignatureOnlyParameterSymbol(
-                            param.TypeWithAnnotations,
-                            ImmutableArray<CustomModifier>.Empty,
-                            isParams: false,
-                            RefKind.Out
-                        )
-                    ),
+                    ctor.Parameters
+                        .SelectAsArray<ParameterSymbol, ParameterSymbol>(
+                            param => new SignatureOnlyParameterSymbol(
+                                param.TypeWithAnnotations,
+                                ImmutableArray<CustomModifier>.Empty,
+                                isParams: false,
+                                RefKind.Out
+                            )
+                        ),
                     RefKind.None,
                     isInitOnly: false,
                     isStatic: false,
@@ -5489,8 +5478,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     }
 
                     if (
-                        !printMembersMethod
-                            .ReturnType
+                        !printMembersMethod.ReturnType
                             .Equals(targetMethod.ReturnType, TypeCompareKind.AllIgnoreOptions)
                     )
                     {
@@ -5543,16 +5531,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 {
                     if (
                         baseToStringMethod.ContainingModule != this.ContainingModule
-                        && !this.DeclaringCompilation.IsFeatureEnabled(
-                            MessageID.IDS_FeatureSealedToStringInRecord
-                        )
+                        && !this.DeclaringCompilation
+                            .IsFeatureEnabled(MessageID.IDS_FeatureSealedToStringInRecord)
                     )
                     {
                         var languageVersion = (
                             (CSharpParseOptions)this.GetFirstLocation().SourceTree!.Options
                         ).LanguageVersion;
-                        var requiredVersion = MessageID
-                            .IDS_FeatureSealedToStringInRecord
+                        var requiredVersion = MessageID.IDS_FeatureSealedToStringInRecord
                             .RequiredVersion();
                         diagnostics.Add(
                             ErrorCode.ERR_InheritingFromRecordWithSealedToString,
@@ -5591,8 +5577,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             && !IsSealed
                         )
                         {
-                            MessageID
-                                .IDS_FeatureSealedToStringInRecord
+                            MessageID.IDS_FeatureSealedToStringInRecord
                                 .CheckFeatureAvailability(
                                     diagnostics,
                                     this.DeclaringCompilation,
@@ -5604,9 +5589,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
                 MethodSymbol? getBaseToStringMethod()
                 {
-                    var objectToString = this.DeclaringCompilation.GetSpecialTypeMember(
-                        SpecialMember.System_Object__ToString
-                    );
+                    var objectToString = this.DeclaringCompilation
+                        .GetSpecialTypeMember(SpecialMember.System_Object__ToString);
                     var currentBaseType = this.BaseTypeNoUseSiteDiagnostics;
                     while (currentBaseType is not null)
                     {
@@ -5681,8 +5665,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     }
                     else if (
                         existingMember is FieldSymbol { IsStatic: false } field
-                        && field
-                            .TypeWithAnnotations
+                        && field.TypeWithAnnotations
                             .Equals(param.TypeWithAnnotations, TypeCompareKind.AllIgnoreOptions)
                     )
                     {
@@ -5698,10 +5681,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     }
                     else if (
                         existingMember is PropertySymbol { IsStatic: false, GetMethod: { } } prop
-                        && prop.TypeWithAnnotations.Equals(
-                            param.TypeWithAnnotations,
-                            TypeCompareKind.AllIgnoreOptions
-                        )
+                        && prop.TypeWithAnnotations
+                            .Equals(param.TypeWithAnnotations, TypeCompareKind.AllIgnoreOptions)
                     )
                     {
                         // There already exists a member corresponding to the candidate synthesized property.
@@ -5730,8 +5711,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             param.GetFirstLocation(),
                             new FormattedSymbol(
                                 existingMember,
-                                SymbolDisplayFormat
-                                    .CSharpErrorMessageFormat
+                                SymbolDisplayFormat.CSharpErrorMessageFormat
                                     .WithMemberOptions(
                                         SymbolDisplayMemberOptions.IncludeContainingType
                                     )
@@ -5898,8 +5878,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     }
 
                     if (
-                        !equalityContract
-                            .Type
+                        !equalityContract.Type
                             .Equals(targetProperty.Type, TypeCompareKind.AllIgnoreOptions)
                     )
                     {
@@ -6233,8 +6212,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             var fieldSyntax = (FieldDeclarationSyntax)m;
 
                             // Lang version check for ref-fields is done inside SourceMemberFieldSymbol;
-                            _ = fieldSyntax
-                                .Declaration
+                            _ = fieldSyntax.Declaration
                                 .Type
                                 .SkipScoped(out _)
                                 .SkipRefInField(out var refKind);
@@ -6493,8 +6471,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             }
 
                             foreach (
-                                VariableDeclaratorSyntax declarator in eventFieldSyntax
-                                    .Declaration
+                                VariableDeclaratorSyntax declarator in eventFieldSyntax.Declaration
                                     .Variables
                             )
                             {

@@ -65,8 +65,7 @@ namespace Microsoft.CodeAnalysis.AutomaticCompletion
                 SubjectBuffer = subjectBuffer;
                 OpeningBrace = openingBrace;
                 ClosingBrace = closingBrace;
-                ClosingPoint = SubjectBuffer
-                    .CurrentSnapshot
+                ClosingPoint = SubjectBuffer.CurrentSnapshot
                     .CreateTrackingPoint(openingPoint.Position, PointTrackingMode.Positive);
                 _undoHistory = undoHistory;
                 _editorOperations = editorOperationsFactoryService.GetEditorOperations(textView);
@@ -108,12 +107,10 @@ namespace Microsoft.CodeAnalysis.AutomaticCompletion
                     return false;
                 }
 
-                OpeningPoint = SubjectBuffer
-                    .CurrentSnapshot
+                OpeningPoint = SubjectBuffer.CurrentSnapshot
                     .CreateTrackingPoint(openingSnapshotPoint, PointTrackingMode.Positive);
 
-                var document = SubjectBuffer
-                    .CurrentSnapshot
+                var document = SubjectBuffer.CurrentSnapshot
                     .GetOpenDocumentInCurrentContextWithChanges();
                 if (document == null)
                 {
@@ -148,8 +145,7 @@ namespace Microsoft.CodeAnalysis.AutomaticCompletion
                 ApplyBraceCompletionResult(braceResult);
 
                 // switch the closing point from positive to negative tracking so that the closing point stays against the closing brace
-                ClosingPoint = SubjectBuffer
-                    .CurrentSnapshot
+                ClosingPoint = SubjectBuffer.CurrentSnapshot
                     .CreateTrackingPoint(
                         ClosingPoint.GetPoint(SubjectBuffer.CurrentSnapshot),
                         PointTrackingMode.Negative
@@ -446,8 +442,7 @@ namespace Microsoft.CodeAnalysis.AutomaticCompletion
                 var closingSnapshotPoint = ClosingPoint.GetPoint(SubjectBuffer.CurrentSnapshot);
 
                 // find the position just after the closing brace in the view's text buffer
-                var afterBrace = TextView
-                    .BufferGraph
+                var afterBrace = TextView.BufferGraph
                     .MapUpToBuffer(
                         closingSnapshotPoint,
                         PointTrackingMode.Negative,
@@ -468,8 +463,7 @@ namespace Microsoft.CodeAnalysis.AutomaticCompletion
                 CancellationToken cancellationToken
             )
             {
-                var document = SubjectBuffer
-                    .CurrentSnapshot
+                var document = SubjectBuffer.CurrentSnapshot
                     .GetOpenDocumentInCurrentContextWithChanges();
                 if (document == null)
                 {
@@ -532,8 +526,7 @@ namespace Microsoft.CodeAnalysis.AutomaticCompletion
                     return;
                 }
 
-                var caretLine = SubjectBuffer
-                    .CurrentSnapshot
+                var caretLine = SubjectBuffer.CurrentSnapshot
                     .GetLineFromLineNumber(result.CaretLocation.Line);
                 TextView.TryMoveCaretToAndEnsureVisible(
                     new VirtualSnapshotPoint(caretLine, result.CaretLocation.Character)

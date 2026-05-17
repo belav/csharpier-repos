@@ -145,9 +145,10 @@ namespace System.Runtime.DurableInstancing
                                 || reference.InstanceHandle.Version != 0
                             )
                             {
-                                throw Fx.Exception.AsError(
-                                    new InvalidOperationException(SRCore.InvalidLockToken)
-                                );
+                                throw Fx.Exception
+                                    .AsError(
+                                        new InvalidOperationException(SRCore.InvalidLockToken)
+                                    );
                             }
 
                             reference.InstanceHandle.ConflictingHandle = existingHandle;
@@ -171,11 +172,12 @@ namespace System.Runtime.DurableInstancing
                         if (existingHandle.Version == reference.InstanceHandle.Version)
                         {
                             // This could be a case of amnesia (backup / restore).
-                            throw Fx.Exception.AsError(
-                                new InvalidOperationException(
-                                    SRCore.InstanceStoreBoundSameVersionTwice
-                                )
-                            );
+                            throw Fx.Exception
+                                .AsError(
+                                    new InvalidOperationException(
+                                        SRCore.InstanceStoreBoundSameVersionTwice
+                                    )
+                                );
                         }
 
                         throw Fx.AssertAndThrow("All cases covered above.");
@@ -238,9 +240,10 @@ namespace System.Runtime.DurableInstancing
                         {
                             if (existingHandle.Version != 0 || instanceVersion != 0)
                             {
-                                throw Fx.Exception.AsError(
-                                    new InvalidOperationException(SRCore.InvalidLockToken)
-                                );
+                                throw Fx.Exception
+                                    .AsError(
+                                        new InvalidOperationException(SRCore.InvalidLockToken)
+                                    );
                             }
 
                             reference.InstanceHandle.ConflictingHandle = existingHandle;

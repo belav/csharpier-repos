@@ -171,8 +171,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                     coord[2 * i + 1] = pointNew.Y;
                 }
 
-                common
-                    .HotRegionsList
+                common.HotRegionsList
                     .AddHotRegion(path, false, coord, point, series.Name, pointIndex);
                 path.Dispose();
                 // Create grapics path object for the line
@@ -199,8 +198,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                     coord[2 * i + 1] = pointNew.Y;
                 }
 
-                common
-                    .HotRegionsList
+                common.HotRegionsList
                     .AddHotRegion(
                         path,
                         false,

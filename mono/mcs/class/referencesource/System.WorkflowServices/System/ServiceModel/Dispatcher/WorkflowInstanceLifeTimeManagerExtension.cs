@@ -290,10 +290,8 @@ namespace System.ServiceModel.Dispatcher
             lock (this.lockObject)
             {
                 if (
-                    !this.instanceRecordMap.TryGetValue(
-                        args.WorkflowInstance.InstanceId,
-                        out instanceRecord
-                    )
+                    !this.instanceRecordMap
+                        .TryGetValue(args.WorkflowInstance.InstanceId, out instanceRecord)
                 )
                 {
                     instanceRecord = new InstanceRecord();
@@ -315,10 +313,8 @@ namespace System.ServiceModel.Dispatcher
             lock (this.lockObject)
             {
                 if (
-                    !this.instanceRecordMap.TryGetValue(
-                        args.WorkflowInstance.InstanceId,
-                        out instanceRecord
-                    )
+                    !this.instanceRecordMap
+                        .TryGetValue(args.WorkflowInstance.InstanceId, out instanceRecord)
                 )
                 {
                     instanceRecord = new InstanceRecord();

@@ -411,8 +411,7 @@ namespace System.ServiceModel.Activation
                 // Check for ending bracket first, MB 45013.
                 if (this.serviceText.IndexOf('>') == -1)
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(
                             new HttpException(
                                 SR.Hosting_BuildProviderDirectiveEndBracketMissing(
@@ -463,8 +462,7 @@ namespace System.ServiceModel.Activation
 
                 if (!foundMainDirective)
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(
                             new HttpException(
                                 SR.Hosting_BuildProviderDirectiveMissing(
@@ -490,8 +488,7 @@ namespace System.ServiceModel.Activation
                 // the string is set in the internal exception, no need to set it again.
                 //
                 Exception parseException = CreateParseException(e, this.serviceText);
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(new HttpCompileException(parseException.Message, parseException));
             }
         }
@@ -545,8 +542,7 @@ namespace System.ServiceModel.Activation
                     }
                     catch (ArgumentException)
                     {
-                        throw FxTrace
-                            .Exception
+                        throw FxTrace.Exception
                             .AsError(
                                 new HttpException(
                                     SR.Hosting_BuildProviderDuplicateAttribute(attribName)
@@ -607,8 +603,7 @@ namespace System.ServiceModel.Activation
             //
             if (directiveName.Length == 0)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(new HttpException(SR.Hosting_BuildProviderDirectiveNameMissing));
             }
 
@@ -626,8 +621,7 @@ namespace System.ServiceModel.Activation
                 //
                 if (foundMainDirective)
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(
                             new HttpException(
                                 SR.Hosting_BuildProviderDuplicateDirective(
@@ -682,8 +676,7 @@ namespace System.ServiceModel.Activation
                 }
                 else
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(new HttpException(SR.Hosting_BuildProviderMainAttributeMissing));
                 }
                 // parse the parameters that are related to the compiler
@@ -696,8 +689,7 @@ namespace System.ServiceModel.Activation
             {
                 if (directive.Contains("name") && directive.Contains("src"))
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(
                             new HttpException(
                                 SR.Hosting_BuildProviderMutualExclusiveAttributes("src", "name")
@@ -715,8 +707,7 @@ namespace System.ServiceModel.Activation
                         AddAssemblyDependency(assemblyName);
                     }
                     else
-                        throw FxTrace
-                            .Exception
+                        throw FxTrace.Exception
                             .AsError(
                                 new HttpException(SR.Hosting_BuildProviderAttributeEmpty("name"))
                             );
@@ -732,16 +723,14 @@ namespace System.ServiceModel.Activation
                         ImportSourceFile(srcPath);
                     }
                     else
-                        throw FxTrace
-                            .Exception
+                        throw FxTrace.Exception
                             .AsError(
                                 new HttpException(SR.Hosting_BuildProviderAttributeEmpty("src"))
                             );
                 }
                 else
                 { // if (!directive.Contains("name") && !directive.Contains("src"))
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(
                             new HttpException(
                                 SR.Hosting_BuildProviderRequiredAttributesMissing("src", "name")
@@ -751,8 +740,7 @@ namespace System.ServiceModel.Activation
             }
             else
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new HttpException(SR.Hosting_BuildProviderUnknownDirective(directiveName))
                     );
@@ -761,8 +749,7 @@ namespace System.ServiceModel.Activation
             // check if there are any directives that you did not process
             //
             if (directive.Count > 0)
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new HttpException(
                             SR.Hosting_BuildProviderUnknownAttribute(
@@ -819,15 +806,13 @@ namespace System.ServiceModel.Activation
                 catch (ArgumentException e)
                 {
                     Exception parseException = CreateParseException(e, this.sourceString);
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(new HttpCompileException(parseException.Message, parseException));
                 }
                 catch (TargetInvocationException e)
                 {
                     Exception parseException = CreateParseException(e, this.sourceString);
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(new HttpCompileException(parseException.Message, parseException));
                 }
                 catch (TypeLoadException e)
@@ -837,8 +822,7 @@ namespace System.ServiceModel.Activation
                         e,
                         this.sourceString
                     );
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(new HttpCompileException(parseException.Message, parseException));
                 }
 
@@ -870,8 +854,7 @@ namespace System.ServiceModel.Activation
                     e,
                     this.sourceString
                 );
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(new HttpCompileException(parseException.Message, parseException));
             }
 
@@ -942,8 +925,7 @@ namespace System.ServiceModel.Activation
                 {
                     if (required)
                     {
-                        throw FxTrace
-                            .Exception
+                        throw FxTrace.Exception
                             .AsError(
                                 new HttpException(SR.Hosting_BuildProviderAttributeMissing(key))
                             );
@@ -988,8 +970,7 @@ namespace System.ServiceModel.Activation
                 }
                 catch (FormatException)
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(
                             new HttpException(
                                 SR.Hosting_BuildProviderInvalidValueForBooleanAttribute(s, key)
@@ -1038,8 +1019,7 @@ namespace System.ServiceModel.Activation
                 }
                 catch (FormatException)
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(
                             new HttpException(
                                 SR.Hosting_BuildProviderInvalidValueForNonNegativeIntegerAttribute(
@@ -1054,8 +1034,7 @@ namespace System.ServiceModel.Activation
                 //
                 if (ret < 0)
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(
                             new HttpException(
                                 SR.Hosting_BuildProviderInvalidValueForNonNegativeIntegerAttribute(
@@ -1145,8 +1124,7 @@ namespace System.ServiceModel.Activation
                     //
                     if (type != null && t != type)
                     {
-                        throw FxTrace
-                            .Exception
+                        throw FxTrace.Exception
                             .AsError(
                                 new HttpException(
                                     SR.Hosting_BuildProviderAmbiguousType(

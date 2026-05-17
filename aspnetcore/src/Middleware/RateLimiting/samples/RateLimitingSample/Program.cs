@@ -21,8 +21,7 @@ var todoName = "todoPolicy";
 var completeName = "completePolicy";
 var helloName = "helloPolicy";
 
-builder
-    .Services
+builder.Services
     .AddRateLimiter(options =>
     {
         // Define endpoint limiters and a global limiter.

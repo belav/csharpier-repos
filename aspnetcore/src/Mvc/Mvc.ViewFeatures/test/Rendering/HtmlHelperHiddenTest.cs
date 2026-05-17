@@ -453,20 +453,17 @@ public class HtmlHelperHiddenTest
         );
         helper.ViewContext.ViewData.TemplateInfo.HtmlFieldPrefix = "MyPrefix";
         helper.ViewData.ModelState.Clear();
-        helper
-            .ViewData
+        helper.ViewData
             .ModelState
             .SetModelValue("Property1", "modelstate-without-prefix", "modelstate-without-prefix");
-        helper
-            .ViewData
+        helper.ViewData
             .ModelState
             .SetModelValue(
                 "MyPrefix.Property1",
                 "modelstate-with-prefix",
                 "modelstate-with-prefix"
             );
-        helper
-            .ViewData
+        helper.ViewData
             .ModelState
             .SetModelValue(
                 "MyPrefix$Property1",
@@ -828,20 +825,17 @@ public class HtmlHelperHiddenTest
         helper.ViewData.Model.Property1 = "propValue";
         helper.ViewContext.ViewData.TemplateInfo.HtmlFieldPrefix = "MyPrefix";
         helper.ViewData.ModelState.Clear();
-        helper
-            .ViewData
+        helper.ViewData
             .ModelState
             .SetModelValue("Property1", "modelstate-without-prefix", "modelstate-without-prefix");
-        helper
-            .ViewData
+        helper.ViewData
             .ModelState
             .SetModelValue(
                 "MyPrefix.Property1",
                 "modelstate-with-prefix",
                 "modelstate-with-prefix"
             );
-        helper
-            .ViewData
+        helper.ViewData
             .ModelState
             .SetModelValue(
                 "MyPrefix$Property1",

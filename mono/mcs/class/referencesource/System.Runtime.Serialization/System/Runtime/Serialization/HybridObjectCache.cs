@@ -22,8 +22,7 @@ namespace System.Runtime.Serialization
 
             object existingObject;
             if (objectDictionary.TryGetValue(id, out existingObject))
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility

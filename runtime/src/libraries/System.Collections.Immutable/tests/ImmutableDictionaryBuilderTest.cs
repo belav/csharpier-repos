@@ -36,8 +36,10 @@ namespace System.Collections.Immutable.Tests
         [Fact]
         public void ToBuilder()
         {
-            ImmutableDictionary<int, string>.Builder builder = ImmutableDictionary<int, string>
-                .Empty
+            ImmutableDictionary<int, string>.Builder builder = ImmutableDictionary<
+                int,
+                string
+            >.Empty
                 .ToBuilder();
             builder.Add(3, "3");
             builder.Add(5, "5");
@@ -58,8 +60,7 @@ namespace System.Collections.Immutable.Tests
         [Fact]
         public void BuilderAddRangeThrowsWhenAddingNullKey()
         {
-            ImmutableDictionary<string, int> set = ImmutableDictionary<string, int>
-                .Empty
+            ImmutableDictionary<string, int> set = ImmutableDictionary<string, int>.Empty
                 .Add("1", 1);
             ImmutableDictionary<string, int>.Builder builder = set.ToBuilder();
             KeyValuePair<string, int>[] items = new[] { new KeyValuePair<string, int>(null, 0) };
@@ -69,8 +70,7 @@ namespace System.Collections.Immutable.Tests
         [Fact]
         public void BuilderFromMap()
         {
-            ImmutableDictionary<int, string> set = ImmutableDictionary<int, string>
-                .Empty
+            ImmutableDictionary<int, string> set = ImmutableDictionary<int, string>.Empty
                 .Add(1, "1");
             ImmutableDictionary<int, string>.Builder builder = set.ToBuilder();
             Assert.True(builder.ContainsKey(1));
@@ -96,8 +96,10 @@ namespace System.Collections.Immutable.Tests
         [Fact]
         public void SeveralChanges()
         {
-            ImmutableDictionary<int, string>.Builder mutable = ImmutableDictionary<int, string>
-                .Empty
+            ImmutableDictionary<int, string>.Builder mutable = ImmutableDictionary<
+                int,
+                string
+            >.Empty
                 .ToBuilder();
             ImmutableDictionary<int, string> immutable1 = mutable.ToImmutable();
             Assert.Same(immutable1, mutable.ToImmutable()); // "The Immutable property getter is creating new objects without any differences."
@@ -112,8 +114,10 @@ namespace System.Collections.Immutable.Tests
         [Fact]
         public void EnumerateBuilderWhileMutating()
         {
-            ImmutableDictionary<int, string>.Builder builder = ImmutableDictionary<int, string>
-                .Empty
+            ImmutableDictionary<int, string>.Builder builder = ImmutableDictionary<
+                int,
+                string
+            >.Empty
                 .AddRange(
                     Enumerable.Range(1, 10).Select(n => new KeyValuePair<int, string>(n, null))
                 )
@@ -148,8 +152,7 @@ namespace System.Collections.Immutable.Tests
         [Fact]
         public void BuilderReusesUnchangedImmutableInstances()
         {
-            ImmutableDictionary<int, string> collection = ImmutableDictionary<int, string>
-                .Empty
+            ImmutableDictionary<int, string> collection = ImmutableDictionary<int, string>.Empty
                 .Add(1, null);
             ImmutableDictionary<int, string>.Builder builder = collection.ToBuilder();
             Assert.Same(collection, builder.ToImmutable()); // no changes at all.
@@ -329,10 +332,11 @@ namespace System.Collections.Immutable.Tests
             DebuggerAttributeInfo info = DebuggerAttributes.ValidateDebuggerTypeProxyProperties(
                 builder
             );
-            PropertyInfo itemProperty = info.Properties.Single(pr =>
-                pr.GetCustomAttribute<DebuggerBrowsableAttribute>().State
-                == DebuggerBrowsableState.RootHidden
-            );
+            PropertyInfo itemProperty = info.Properties
+                .Single(pr =>
+                    pr.GetCustomAttribute<DebuggerBrowsableAttribute>().State
+                    == DebuggerBrowsableState.RootHidden
+                );
             KeyValuePair<int, string>[] items =
                 itemProperty.GetValue(info.Instance) as KeyValuePair<int, string>[];
             Assert.Equal(builder, items);

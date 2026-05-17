@@ -322,11 +322,9 @@ public class WebHostFunctionalTests : LoggedTest
         string environment
     )
     {
-        deploymentParameters
-            .EnvironmentVariables
+        deploymentParameters.EnvironmentVariables
             .Add(new KeyValuePair<string, string>("aspnetcore_environment", environment));
-        deploymentParameters
-            .EnvironmentVariables
+        deploymentParameters.EnvironmentVariables
             .Add(new KeyValuePair<string, string>("envKey", "envValue"));
     }
 

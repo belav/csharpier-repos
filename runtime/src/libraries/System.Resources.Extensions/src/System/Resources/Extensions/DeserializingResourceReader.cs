@@ -21,8 +21,7 @@ namespace System.Resources.Extensions
         {
             // our format?
             if (
-                TypeNameComparer
-                    .Instance
+                TypeNameComparer.Instance
                     .Equals(
                         readerType,
                         PreserializedResourceWriter.DeserializingResourceReaderFullyQualifiedName
@@ -34,8 +33,7 @@ namespace System.Resources.Extensions
 
             // default format?
             if (
-                TypeNameComparer
-                    .Instance
+                TypeNameComparer.Instance
                     .Equals(
                         readerType,
                         PreserializedResourceWriter.ResourceReaderFullyQualifiedName

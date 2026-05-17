@@ -441,33 +441,34 @@ namespace System.Threading.ThreadPools.Tests
             bool useUnsafe
         )
         {
-            await Task.Factory.StartNew(
-                () =>
-                {
-                    int origThread = Environment.CurrentManagedThreadId;
-                    var tcs = new TaskCompletionSource<int>();
-                    if (useUnsafe)
+            await Task.Factory
+                .StartNew(
+                    () =>
                     {
-                        ThreadPool.UnsafeQueueUserWorkItem(
-                            s => s.SetResult(Environment.CurrentManagedThreadId),
-                            tcs,
-                            preferLocal
-                        );
-                    }
-                    else
-                    {
-                        ThreadPool.QueueUserWorkItem(
-                            s => s.SetResult(Environment.CurrentManagedThreadId),
-                            tcs,
-                            preferLocal
-                        );
-                    }
-                    Assert.NotEqual(origThread, tcs.Task.GetAwaiter().GetResult());
-                },
-                CancellationToken.None,
-                TaskCreationOptions.LongRunning,
-                TaskScheduler.Default
-            );
+                        int origThread = Environment.CurrentManagedThreadId;
+                        var tcs = new TaskCompletionSource<int>();
+                        if (useUnsafe)
+                        {
+                            ThreadPool.UnsafeQueueUserWorkItem(
+                                s => s.SetResult(Environment.CurrentManagedThreadId),
+                                tcs,
+                                preferLocal
+                            );
+                        }
+                        else
+                        {
+                            ThreadPool.QueueUserWorkItem(
+                                s => s.SetResult(Environment.CurrentManagedThreadId),
+                                tcs,
+                                preferLocal
+                            );
+                        }
+                        Assert.NotEqual(origThread, tcs.Task.GetAwaiter().GetResult());
+                    },
+                    CancellationToken.None,
+                    TaskCreationOptions.LongRunning,
+                    TaskScheduler.Default
+                );
         }
 
         [ConditionalTheory(

@@ -182,8 +182,7 @@ namespace Internal.TypeSystem.Ecma
                         continue;
 
                     if (
-                        metadataReader
-                            .StringComparer
+                        metadataReader.StringComparer
                             .Equals(namespaceHandle, "System.Runtime.CompilerServices")
                     )
                     {
@@ -193,14 +192,12 @@ namespace Internal.TypeSystem.Ecma
                         }
                     }
                     else if (
-                        metadataReader
-                            .StringComparer
+                        metadataReader.StringComparer
                             .Equals(namespaceHandle, "System.Runtime.InteropServices")
                     )
                     {
                         if (
-                            metadataReader
-                                .StringComparer
+                            metadataReader.StringComparer
                                 .Equals(nameHandle, "UnmanagedCallersOnlyAttribute")
                         )
                         {

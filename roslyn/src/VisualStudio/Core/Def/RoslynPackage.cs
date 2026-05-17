@@ -96,8 +96,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Setup
         {
             if (_lazyInstance is null)
             {
-                await threadingContext
-                    .JoinableTaskFactory
+                await threadingContext.JoinableTaskFactory
                     .SwitchToMainThreadAsync(cancellationToken);
 
                 var shell = (IVsShell7?)
@@ -171,8 +170,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Setup
             LoadComponentsInUIContextOnceSolutionFullyLoadedAsync(cancellationToken).Forget();
 
             // We are at the VS layer, so we know we must be able to get the IGlobalOperationNotificationService here.
-            var globalNotificationService =
-                this.ComponentModel.GetService<IGlobalOperationNotificationService>();
+            var globalNotificationService = this.ComponentModel
+                .GetService<IGlobalOperationNotificationService>();
             Assumes.Present(globalNotificationService);
 
             _solutionEventMonitor = new SolutionEventMonitor(globalNotificationService);
@@ -336,8 +335,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Setup
             await LoadStackTraceExplorerMenusAsync(cancellationToken).ConfigureAwait(true);
 
             // Initialize keybinding reset detector
-            await ComponentModel
-                .DefaultExportProvider
+            await ComponentModel.DefaultExportProvider
                 .GetExportedValue<KeybindingReset.KeybindingResetDetector>()
                 .InitializeAsync()
                 .ConfigureAwait(true);

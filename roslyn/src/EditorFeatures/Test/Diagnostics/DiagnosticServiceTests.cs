@@ -45,8 +45,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
                 composition: EditorTestCompositions.EditorFeatures
             );
             var mutex = new ManualResetEvent(false);
-            var document = workspace
-                .CurrentSolution
+            var document = workspace.CurrentSolution
                 .AddProject("TestProject", "TestProject", LanguageNames.CSharp)
                 .AddDocument("TestDocument", string.Empty);
 
@@ -118,8 +117,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
                 composition: EditorTestCompositions.EditorFeatures
             );
             var mutex = new ManualResetEvent(false);
-            var document = workspace
-                .CurrentSolution
+            var document = workspace.CurrentSolution
                 .AddProject("TestProject", "TestProject", LanguageNames.CSharp)
                 .AddDocument("TestDocument", string.Empty);
             var document2 = document.Project.AddDocument("TestDocument2", string.Empty);
@@ -211,8 +209,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
                 composition: EditorTestCompositions.EditorFeatures
             );
             var mutex = new ManualResetEvent(false);
-            var document = workspace
-                .CurrentSolution
+            var document = workspace.CurrentSolution
                 .AddProject("TestProject", "TestProject", LanguageNames.CSharp)
                 .AddDocument("TestDocument", string.Empty);
             var document2 = document.Project.AddDocument("TestDocument2", string.Empty);

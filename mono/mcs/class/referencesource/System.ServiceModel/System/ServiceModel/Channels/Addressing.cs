@@ -67,12 +67,10 @@ namespace System.ServiceModel.Channels
         public static ActionHeader Create(string action, AddressingVersion addressingVersion)
         {
             if (action == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("action"));
             if (addressingVersion == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("addressingVersion");
             return new ActionHeader(action, addressingVersion);
         }
@@ -83,12 +81,10 @@ namespace System.ServiceModel.Channels
         )
         {
             if (dictionaryAction == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("action"));
             if (addressingVersion == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("addressingVersion");
             return new DictionaryActionHeader(dictionaryAction, addressingVersion);
         }
@@ -229,12 +225,10 @@ namespace System.ServiceModel.Channels
         public static FromHeader Create(EndpointAddress from, AddressingVersion addressingVersion)
         {
             if (from == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("from"));
             if (addressingVersion == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("addressingVersion");
             return new FromHeader(from, addressingVersion);
         }
@@ -359,12 +353,10 @@ namespace System.ServiceModel.Channels
         )
         {
             if (faultTo == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("faultTo"));
             if (addressingVersion == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("addressingVersion");
             return new FaultToHeader(faultTo, addressingVersion);
         }
@@ -496,8 +488,7 @@ namespace System.ServiceModel.Channels
         )
         {
             if (addressingVersion == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("addressingVersion");
 
             if (((object)toUri == (object)addressingVersion.AnonymousUri))
@@ -517,8 +508,7 @@ namespace System.ServiceModel.Channels
         {
             if ((object)to == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("to"));
             }
             else if ((object)to == (object)addressingVersion.AnonymousUri)
@@ -738,12 +728,10 @@ namespace System.ServiceModel.Channels
         )
         {
             if (replyTo == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("replyTo"));
             if (addressingVersion == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("addressingVersion"));
             return new ReplyToHeader(replyTo, addressingVersion);
         }
@@ -864,12 +852,10 @@ namespace System.ServiceModel.Channels
         )
         {
             if (object.ReferenceEquals(messageId, null))
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("messageId"));
             if (addressingVersion == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("addressingVersion"));
             return new MessageIDHeader(messageId, addressingVersion);
         }
@@ -994,12 +980,10 @@ namespace System.ServiceModel.Channels
         )
         {
             if (object.ReferenceEquals(messageId, null))
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("messageId"));
             if (addressingVersion == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("addressingVersion"));
             return new RelatesToHeader(messageId, addressingVersion);
         }
@@ -1011,16 +995,13 @@ namespace System.ServiceModel.Channels
         )
         {
             if (object.ReferenceEquals(messageId, null))
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("messageId"));
             if (addressingVersion == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("addressingVersion"));
             if (relationshipType == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("relationshipType"));
             if (relationshipType == ReplyRelationshipType)
             {

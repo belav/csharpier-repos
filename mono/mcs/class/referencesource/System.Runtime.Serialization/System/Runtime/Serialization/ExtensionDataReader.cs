@@ -233,8 +233,7 @@ namespace System.Runtime.Serialization
             else
             {
                 if (index < 0 || index >= attributeCount)
-                    throw System
-                        .Runtime
+                    throw System.Runtime
                         .Serialization
                         .DiagnosticUtility
                         .ExceptionUtility
@@ -339,8 +338,7 @@ namespace System.Runtime.Serialization
                     while (depth != 0)
                     {
                         if (!Read())
-                            throw System
-                                .Runtime
+                            throw System.Runtime
                                 .Serialization
                                 .DiagnosticUtility
                                 .ExceptionUtility
@@ -422,8 +420,7 @@ namespace System.Runtime.Serialization
 
                 case ExtensionDataNodeType.None:
                     if (depth != 0)
-                        throw System
-                            .Runtime
+                        throw System.Runtime
                             .Serialization
                             .DiagnosticUtility
                             .ExceptionUtility
@@ -447,8 +444,7 @@ namespace System.Runtime.Serialization
 
                 default:
                     Fx.Assert("ExtensionDataReader in invalid state");
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new SerializationException(
                                 SR.GetString(SR.InvalidStateInExtensionDataReader)
@@ -605,8 +601,7 @@ namespace System.Runtime.Serialization
                     else
                     {
                         Fx.Assert("Encountered invalid data node when deserializing unknown data");
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new SerializationException(
                                     SR.GetString(SR.InvalidStateInExtensionDataReader)
@@ -778,8 +773,7 @@ namespace System.Runtime.Serialization
                 for (int i = 0; i < element.attributeCount; i++)
                 {
                     AttributeData a = element.attributes[i];
-                    XmlAttribute xmlAttr = dataNode
-                        .OwnerDocument
+                    XmlAttribute xmlAttr = dataNode.OwnerDocument
                         .CreateAttribute(a.prefix, a.localName, a.ns);
                     xmlAttr.Value = a.value;
                     wrapperElement.Attributes.Append(xmlAttr);
@@ -812,8 +806,7 @@ namespace System.Runtime.Serialization
                 }
                 else
                 {
-                    throw System
-                        .Runtime
+                    throw System.Runtime
                         .Serialization
                         .DiagnosticUtility
                         .ExceptionUtility

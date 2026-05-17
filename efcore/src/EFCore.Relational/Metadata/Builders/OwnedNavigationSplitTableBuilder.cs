@@ -132,8 +132,7 @@ public class OwnedNavigationSplitTableBuilder : IInfrastructure<OwnedNavigationB
     {
         Check.NotEmpty(annotation, nameof(annotation));
 
-        InternalMappingFragment
-            .Builder
+        InternalMappingFragment.Builder
             .HasAnnotation(annotation, value, ConfigurationSource.Explicit);
 
         return this;

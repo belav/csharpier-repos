@@ -121,8 +121,7 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageService
                 return false;
             }
 
-            var initializersExpressions = node!
-                .Declaration
+            var initializersExpressions = node!.Declaration
                 .Variables
                 .Where(v => v.Initializer != null)
                 .SelectAsArray(initializedV => initializedV.Initializer!.Value);

@@ -23,22 +23,19 @@ namespace System.Xml
         public XmlDictionaryString(IXmlDictionary dictionary, string value, int key)
         {
             if (dictionary == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("dictionary"));
             if (value == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("value"));
             if (key < MinKey || key > MaxKey)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -109,8 +106,7 @@ namespace System.Xml
             public bool TryLookup(string value, out XmlDictionaryString result)
             {
                 if (value == null)
-                    throw System
-                        .Runtime
+                    throw System.Runtime
                         .Serialization
                         .DiagnosticUtility
                         .ExceptionUtility
@@ -138,8 +134,7 @@ namespace System.Xml
             public bool TryLookup(XmlDictionaryString value, out XmlDictionaryString result)
             {
                 if (value == null)
-                    throw System
-                        .Runtime
+                    throw System.Runtime
                         .Serialization
                         .DiagnosticUtility
                         .ExceptionUtility

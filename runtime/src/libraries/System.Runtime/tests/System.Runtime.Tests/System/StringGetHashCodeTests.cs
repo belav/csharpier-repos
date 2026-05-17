@@ -88,57 +88,49 @@ namespace System.Tests
             },
             () =>
             {
-                return CultureInfo
-                    .CurrentCulture
+                return CultureInfo.CurrentCulture
                     .CompareInfo
                     .GetHashCode("abc", CompareOptions.IgnoreCase);
             },
             () =>
             {
-                return CultureInfo
-                    .CurrentCulture
+                return CultureInfo.CurrentCulture
                     .CompareInfo
                     .GetHashCode("abc", CompareOptions.IgnoreKanaType);
             },
             () =>
             {
-                return CultureInfo
-                    .CurrentCulture
+                return CultureInfo.CurrentCulture
                     .CompareInfo
                     .GetHashCode("abc", CompareOptions.IgnoreNonSpace);
             },
             () =>
             {
-                return CultureInfo
-                    .CurrentCulture
+                return CultureInfo.CurrentCulture
                     .CompareInfo
                     .GetHashCode("abc", CompareOptions.IgnoreSymbols);
             },
             () =>
             {
-                return CultureInfo
-                    .CurrentCulture
+                return CultureInfo.CurrentCulture
                     .CompareInfo
                     .GetHashCode("abc", CompareOptions.IgnoreWidth);
             },
             () =>
             {
-                return CultureInfo
-                    .CurrentCulture
+                return CultureInfo.CurrentCulture
                     .CompareInfo
                     .GetHashCode("abc", CompareOptions.None);
             },
             () =>
             {
-                return CultureInfo
-                    .CurrentCulture
+                return CultureInfo.CurrentCulture
                     .CompareInfo
                     .GetHashCode("abc", CompareOptions.Ordinal);
             },
             () =>
             {
-                return CultureInfo
-                    .CurrentCulture
+                return CultureInfo.CurrentCulture
                     .CompareInfo
                     .GetHashCode("abc", CompareOptions.OrdinalIgnoreCase);
             },

@@ -328,8 +328,7 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
 
         var tags = context.Tags.Select(t => (Guid?)t.Id).ToList();
 
-        var query = context
-            .Gears
+        var query = context.Gears
             .Include(g => g.Tag)
             .Where(g => g.Tag != null && tags.Contains(g.Tag.Id));
 
@@ -349,8 +348,7 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
 
         var tags = context.Tags.Select(t => (Guid?)t.Id).ToList();
 
-        var query = context
-            .Gears
+        var query = context.Gears
             .Include(g => g.Tag)
             .Where(g => g.CityOfBirth.Location != null && tags.Contains(g.Tag.Id));
 
@@ -689,13 +687,14 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
             ss =>
                 ss.Set<Gear>()
                     .Where(g =>
-                        g.Rank.HasFlag(
-                            ss.Set<Gear>()
-                                .OrderBy(x => x.Nickname)
-                                .ThenBy(x => x.SquadId)
-                                .Select(x => x.Rank)
-                                .FirstOrDefault()
-                        )
+                        g.Rank
+                            .HasFlag(
+                                ss.Set<Gear>()
+                                    .OrderBy(x => x.Nickname)
+                                    .ThenBy(x => x.SquadId)
+                                    .Select(x => x.Rank)
+                                    .FirstOrDefault()
+                            )
                     )
         );
 
@@ -704,8 +703,7 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
             ss =>
                 ss.Set<Gear>()
                     .Where(g =>
-                        MilitaryRank
-                            .Corporal
+                        MilitaryRank.Corporal
                             .HasFlag(
                                 ss.Set<Gear>()
                                     .OrderBy(x => x.Nickname)
@@ -726,13 +724,14 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
             ss =>
                 ss.Set<Gear>()
                     .Where(g =>
-                        g.Rank.HasFlag(
-                            ss.Set<Gear>()
-                                .OrderBy(x => x.Nickname)
-                                .ThenBy(x => x.SquadId)
-                                .FirstOrDefault()
-                                .Rank
-                        )
+                        g.Rank
+                            .HasFlag(
+                                ss.Set<Gear>()
+                                    .OrderBy(x => x.Nickname)
+                                    .ThenBy(x => x.SquadId)
+                                    .FirstOrDefault()
+                                    .Rank
+                            )
                     )
         );
 
@@ -741,8 +740,7 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
             ss =>
                 ss.Set<Gear>()
                     .Where(g =>
-                        MilitaryRank
-                            .Corporal
+                        MilitaryRank.Corporal
                             .HasFlag(
                                 ss.Set<Gear>()
                                     .OrderBy(x => x.Nickname)
@@ -762,13 +760,14 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
             ss =>
                 ss.Set<Gear>()
                     .Where(g =>
-                        g.Rank.HasFlag(
-                            ss.Set<Gear>()
-                                .OrderBy(x => x.Nickname)
-                                .ThenBy(x => x.SquadId)
-                                .First()
-                                .Rank
-                        )
+                        g.Rank
+                            .HasFlag(
+                                ss.Set<Gear>()
+                                    .OrderBy(x => x.Nickname)
+                                    .ThenBy(x => x.SquadId)
+                                    .First()
+                                    .Rank
+                            )
                     )
         );
 
@@ -7424,12 +7423,13 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
                     .OrderBy(g => g.Nickname)
                     .Select(g => new
                     {
-                        Weapons = g.Weapons.Select(w => new
-                        {
-                            w.Id,
-                            w.IsAutomatic,
-                            w.SynergyWith.Name,
-                        }),
+                        Weapons = g.Weapons
+                            .Select(w => new
+                            {
+                                w.Id,
+                                w.IsAutomatic,
+                                w.SynergyWith.Name,
+                            }),
                     }),
             assertOrder: true,
             elementAsserter: (e, a) =>
@@ -10362,8 +10362,7 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
                             (l as LocustCommander).CommandingFaction,
                             IsNull = (l as LocustCommander).CommandingFaction == null,
                             Property = (int?)(l as LocustCommander).HighCommandId,
-                            PropertyAfterNavigation = (l as LocustCommander)
-                                .CommandingFaction
+                            PropertyAfterNavigation = (l as LocustCommander).CommandingFaction
                                 .Eradicated,
                             NestedInner = new
                             {
@@ -10389,8 +10388,7 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
                             (l as LocustCommander).CommandingFaction,
                             IsNull = (l as LocustCommander).CommandingFaction == null,
                             Property = (int?)(l as LocustCommander).HighCommandId,
-                            PropertyAfterNavigation = (l as LocustCommander)
-                                .CommandingFaction
+                            PropertyAfterNavigation = (l as LocustCommander).CommandingFaction
                                 .MaybeScalar(x => x.Eradicated),
                             NestedInner = new
                             {

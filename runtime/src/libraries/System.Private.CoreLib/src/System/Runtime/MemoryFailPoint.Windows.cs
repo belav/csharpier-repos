@@ -97,8 +97,7 @@ namespace System.Runtime
         {
             unsafe
             {
-                void* pMemory = Interop
-                    .Kernel32
+                void* pMemory = Interop.Kernel32
                     .VirtualAlloc(
                         null,
                         numBytes,
@@ -107,8 +106,7 @@ namespace System.Runtime
                     );
                 if (pMemory != null)
                 {
-                    bool r = Interop
-                        .Kernel32
+                    bool r = Interop.Kernel32
                         .VirtualFree(
                             pMemory,
                             UIntPtr.Zero,

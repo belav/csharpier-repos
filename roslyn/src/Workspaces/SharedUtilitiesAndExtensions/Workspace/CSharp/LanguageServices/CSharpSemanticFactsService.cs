@@ -96,8 +96,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             CancellationToken cancellationToken
         )
         {
-            return semanticModel
-                .SyntaxTree
+            return semanticModel.SyntaxTree
                 .IsExpressionContext(
                     position,
                     semanticModel.SyntaxTree.FindTokenOnLeftOfPosition(position, cancellationToken),
@@ -113,8 +112,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             CancellationToken cancellationToken
         )
         {
-            return semanticModel
-                .SyntaxTree
+            return semanticModel.SyntaxTree
                 .IsStatementContext(
                     position,
                     semanticModel.SyntaxTree.FindTokenOnLeftOfPosition(position, cancellationToken),
@@ -148,8 +146,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             CancellationToken cancellationToken
         )
         {
-            return semanticModel
-                .SyntaxTree
+            return semanticModel.SyntaxTree
                 .IsTypeDeclarationContext(
                     position,
                     semanticModel.SyntaxTree.FindTokenOnLeftOfPosition(position, cancellationToken),
@@ -163,8 +160,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             CancellationToken cancellationToken
         )
         {
-            return semanticModel
-                .SyntaxTree
+            return semanticModel.SyntaxTree
                 .IsMemberDeclarationContext(
                     position,
                     semanticModel.SyntaxTree.FindTokenOnLeftOfPosition(position, cancellationToken)

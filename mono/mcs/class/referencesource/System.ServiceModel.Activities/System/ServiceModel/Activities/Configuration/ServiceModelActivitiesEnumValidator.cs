@@ -19,10 +19,11 @@ namespace System.ServiceModel.Activities.Configuration
         public ServiceModelActivitiesEnumValidator(Type enumHelperType)
         {
             this.enumHelperType = enumHelperType;
-            this.isDefined = this.enumHelperType.GetMethod(
-                "IsDefined",
-                BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public
-            );
+            this.isDefined = this.enumHelperType
+                .GetMethod(
+                    "IsDefined",
+                    BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public
+                );
         }
 
         public override bool CanValidate(Type type)
@@ -37,8 +38,7 @@ namespace System.ServiceModel.Activities.Configuration
             if (!retVal)
             {
                 ParameterInfo[] isDefinedParameters = this.isDefined.GetParameters();
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new InvalidEnumArgumentException(
                             "value",

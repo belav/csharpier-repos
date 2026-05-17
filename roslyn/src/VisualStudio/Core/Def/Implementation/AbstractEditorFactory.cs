@@ -336,8 +336,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
         )
         {
             var threadingContext = _componentModel.GetService<IThreadingContext>();
-            threadingContext
-                .JoinableTaskFactory
+            threadingContext.JoinableTaskFactory
                 .Run(() =>
                     FormatDocumentCreatedFromTemplateAsync(
                         hierarchy,
@@ -436,8 +435,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                 filePath,
                 defaultEncoding: null
             );
-            var forkedSolution = projectToAddTo
-                .Solution
+            var forkedSolution = projectToAddTo.Solution
                 .AddDocument(
                     DocumentInfo.Create(
                         documentId,
@@ -495,8 +493,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             foreach (var originalLine in originalText.Lines)
             {
                 var originalNewLine = originalText.ToString(
-                    CodeAnalysis
-                        .Text
+                    CodeAnalysis.Text
                         .TextSpan
                         .FromBounds(originalLine.End, originalLine.EndIncludingLineBreak)
                 );
@@ -505,8 +502,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                 if (originalNewLine.Length > 0 && originalNewLine != targetLineEnding)
                 {
                     var currentLine = formattedText.Lines[originalLine.LineNumber];
-                    var currentSpan = CodeAnalysis
-                        .Text
+                    var currentSpan = CodeAnalysis.Text
                         .TextSpan
                         .FromBounds(currentLine.End, currentLine.EndIncludingLineBreak);
                     formattedText = formattedText.WithChanges(

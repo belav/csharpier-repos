@@ -41,8 +41,7 @@ namespace ILLink.RoslynAnalyzer
             {
                 var compilation = context.Compilation;
                 if (
-                    !context
-                        .Options
+                    !context.Options
                         .IsMSBuildPropertyValueTrue(MSBuildPropertyOptionNames.EnableTrimAnalyzer)
                 )
                     return;
@@ -56,8 +55,7 @@ namespace ILLink.RoslynAnalyzer
                             return;
 
                         if (
-                            operationContext
-                                .ContainingSymbol
+                            operationContext.ContainingSymbol
                                 .IsInRequiresUnreferencedCodeAttributeScope(out _)
                         )
                             return;

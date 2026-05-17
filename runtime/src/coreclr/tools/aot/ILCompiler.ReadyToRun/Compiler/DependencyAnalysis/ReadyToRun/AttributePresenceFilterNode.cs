@@ -255,8 +255,7 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             {
                 MethodDefinitionHandle customAttributeConstructorDefinitionHandle =
                     (MethodDefinitionHandle)customAttributeConstructorHandle;
-                MethodDefinition customAttributeConstructorDefinition = _module
-                    .MetadataReader
+                MethodDefinition customAttributeConstructorDefinition = _module.MetadataReader
                     .GetMethodDefinition(customAttributeConstructorDefinitionHandle);
                 TypeDefinitionHandle customAttributeConstructorTypeDefinitionHandle =
                     customAttributeConstructorDefinition.GetDeclaringType();
@@ -270,8 +269,7 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             {
                 MemberReferenceHandle customAttributeConstructorReferenceHandle =
                     (MemberReferenceHandle)customAttributeConstructorHandle;
-                MemberReference customAttributeConstructorReference = _module
-                    .MetadataReader
+                MemberReference customAttributeConstructorReference = _module.MetadataReader
                     .GetMemberReference(customAttributeConstructorReferenceHandle);
                 EntityHandle customAttributeConstructorReferenceParentHandle =
                     customAttributeConstructorReference.Parent;
@@ -295,9 +293,11 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                     );
                     TypeSpecificationHandle customAttributeConstructorTypeSpecificationHandle =
                         (TypeSpecificationHandle)customAttributeConstructorReferenceParentHandle;
-                    TypeSpecification customAttributeConstructorTypeSpecification = _module
-                        .MetadataReader
-                        .GetTypeSpecification(customAttributeConstructorTypeSpecificationHandle);
+                    TypeSpecification customAttributeConstructorTypeSpecification =
+                        _module.MetadataReader
+                            .GetTypeSpecification(
+                                customAttributeConstructorTypeSpecificationHandle
+                            );
                     FirstTypeHandleExtractor fakeSignatureTypeProvider =
                         new FirstTypeHandleExtractor();
                     customAttributeConstructorTypeSpecification.DecodeSignature(
@@ -342,8 +342,7 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             out string typeName
         )
         {
-            TypeReference typeReference = _module
-                .MetadataReader
+            TypeReference typeReference = _module.MetadataReader
                 .GetTypeReference(typeReferenceHandle);
             StringHandle typeNamespaceHandle = typeReference.Namespace;
             StringHandle typeNameHandle = typeReference.Name;
@@ -357,8 +356,7 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             out string typeName
         )
         {
-            TypeDefinition typeDefinition = _module
-                .MetadataReader
+            TypeDefinition typeDefinition = _module.MetadataReader
                 .GetTypeDefinition(typeDefinitionHandle);
             StringHandle typeNamespaceHandle = typeDefinition.Namespace;
             StringHandle typeNameHandle = typeDefinition.Name;

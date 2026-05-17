@@ -80,8 +80,7 @@ namespace System.Net.WebSockets.Compression
             {
                 // Rent a buffer as close to the size of the user buffer as possible.
                 // If the payload is smaller than the user buffer, rent only as much as we need.
-                _buffer = ArrayPool<byte>
-                    .Shared
+                _buffer = ArrayPool<byte>.Shared
                     .Rent((int)Math.Min(userBufferLength, payloadLength));
             }
         }
@@ -107,8 +106,7 @@ namespace System.Net.WebSockets.Compression
                 {
                     if (_buffer.Length < _available + FlushMarkerLength)
                     {
-                        byte[] newBuffer = ArrayPool<byte>
-                            .Shared
+                        byte[] newBuffer = ArrayPool<byte>.Shared
                             .Rent(_available + FlushMarkerLength);
                         _buffer.AsSpan(0, _available).CopyTo(newBuffer);
 

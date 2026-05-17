@@ -90,8 +90,7 @@ internal sealed partial class ConvertPrimaryToRegularConstructorCodeRefactoringP
         CancellationToken cancellationToken
     )
     {
-        var compilation = await document
-            .Project
+        var compilation = await document.Project
             .GetCompilationAsync(cancellationToken)
             .ConfigureAwait(false);
         var semanticModels = new ConcurrentSet<SemanticModel>();
@@ -119,8 +118,7 @@ internal sealed partial class ConvertPrimaryToRegularConstructorCodeRefactoringP
 
         // Get the named type and all its parameters for use during the rewrite.
         var namedType = semanticModel.GetRequiredDeclaredSymbol(typeDeclaration, cancellationToken);
-        var parameters = parameterList
-            .Parameters
+        var parameters = parameterList.Parameters
             .SelectAsArray(p => semanticModel.GetRequiredDeclaredSymbol(p, cancellationToken));
 
         // We may have to update multiple files (in the case of a partial type).  Use a solution-editor to make that
@@ -135,8 +133,7 @@ internal sealed partial class ConvertPrimaryToRegularConstructorCodeRefactoringP
             is [PrimaryConstructorBaseTypeSyntax type, ..]
             ? type
             : null;
-        var methodTargetingAttributes = typeDeclaration
-            .AttributeLists
+        var methodTargetingAttributes = typeDeclaration.AttributeLists
             .Where(list => list.Target?.Identifier.ValueText == "method");
 
         // Find the references to all the parameters.  This will help us determine how they're used and what change we
@@ -182,8 +179,7 @@ internal sealed partial class ConvertPrimaryToRegularConstructorCodeRefactoringP
         > GetParameterReferencesAsync()
         {
             var result = new MultiDictionary<IParameterSymbol, IdentifierNameSyntax>();
-            var documentsToSearch = namedType
-                .DeclaringSyntaxReferences
+            var documentsToSearch = namedType.DeclaringSyntaxReferences
                 .Select(r => r.SyntaxTree)
                 .Distinct()
                 .Select(solution.GetRequiredDocument)
@@ -202,8 +198,7 @@ internal sealed partial class ConvertPrimaryToRegularConstructorCodeRefactoringP
                     //
                     // Note Use DistinctBy (.Net6) once available.
                     foreach (
-                        var referenceLocation in reference
-                            .Locations
+                        var referenceLocation in reference.Locations
                             .Distinct(LinkedFileReferenceLocationEqualityComparer.Instance)
                     )
                     {
@@ -211,8 +206,7 @@ internal sealed partial class ConvertPrimaryToRegularConstructorCodeRefactoringP
                             continue;
 
                         if (
-                            referenceLocation
-                                .Location
+                            referenceLocation.Location
                                 .FindNode(
                                     findInsideTrivia: true,
                                     getInnermostNodeForTie: true,
@@ -267,8 +261,7 @@ internal sealed partial class ConvertPrimaryToRegularConstructorCodeRefactoringP
                     && locationToField.TryGetValue(location, out var existingField)
                 )
                 {
-                    var baseFieldName = fieldNameRule
-                        .NamingStyle
+                    var baseFieldName = fieldNameRule.NamingStyle
                         .MakeCompliant(parameter.Name)
                         .First();
                     var fieldName = NameGenerator.GenerateUniqueName(
@@ -437,8 +430,7 @@ internal sealed partial class ConvertPrimaryToRegularConstructorCodeRefactoringP
                         .WithAdditionalAnnotations(constructorAnnotation);
 
                     // If there is an existing non-static constructor, place it before that
-                    var firstConstructorIndex = currentTypeDeclaration
-                        .Members
+                    var firstConstructorIndex = currentTypeDeclaration.Members
                         .IndexOf(m =>
                             m is ConstructorDeclarationSyntax c
                             && !c.Modifiers.Any(SyntaxKind.StaticKeyword)
@@ -446,19 +438,16 @@ internal sealed partial class ConvertPrimaryToRegularConstructorCodeRefactoringP
                     if (firstConstructorIndex >= 0)
                     {
                         return currentTypeDeclaration.WithMembers(
-                            currentTypeDeclaration
-                                .Members
+                            currentTypeDeclaration.Members
                                 .Insert(firstConstructorIndex, constructorDeclaration)
                         );
                     }
 
                     // No constructors.  Place after any fields if present, or any properties if there are no fields.
-                    var lastFieldOrProperty = currentTypeDeclaration
-                        .Members
+                    var lastFieldOrProperty = currentTypeDeclaration.Members
                         .LastIndexOf(m => m is FieldDeclarationSyntax);
                     if (lastFieldOrProperty < 0)
-                        lastFieldOrProperty = currentTypeDeclaration
-                            .Members
+                        lastFieldOrProperty = currentTypeDeclaration.Members
                             .LastIndexOf(m => m is PropertyDeclarationSyntax);
 
                     if (lastFieldOrProperty >= 0)
@@ -468,8 +457,7 @@ internal sealed partial class ConvertPrimaryToRegularConstructorCodeRefactoringP
                         );
 
                         return currentTypeDeclaration.WithMembers(
-                            currentTypeDeclaration
-                                .Members
+                            currentTypeDeclaration.Members
                                 .Insert(lastFieldOrProperty + 1, constructorDeclaration)
                         );
                     }

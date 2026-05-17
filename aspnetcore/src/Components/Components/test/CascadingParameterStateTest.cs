@@ -522,8 +522,7 @@ public class CascadingParameterStateTest
             supplierParams.Add("Name", name);
         }
 
-        renderer
-            .Dispatcher
+        renderer.Dispatcher
             .InvokeAsync(
                 (Action)(
                     () => supplier.SetParametersAsync(ParameterView.FromDictionary(supplierParams))

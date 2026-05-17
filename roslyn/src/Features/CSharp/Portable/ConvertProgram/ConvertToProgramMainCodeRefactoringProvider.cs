@@ -58,8 +58,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertProgram
                 .GetCSharpCodeFixOptionsProviderAsync(context.Options, cancellationToken)
                 .ConfigureAwait(false);
 
-            var compilation = await document
-                .Project
+            var compilation = await document.Project
                 .GetRequiredCompilationAsync(cancellationToken)
                 .ConfigureAwait(false);
             if (

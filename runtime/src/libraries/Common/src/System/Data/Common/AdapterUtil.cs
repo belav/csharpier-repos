@@ -659,8 +659,7 @@ namespace System.Data.Common
 
         internal static bool CompareInsensitiveInvariant(string? strvalue, string? strconst) =>
             0
-            == CultureInfo
-                .InvariantCulture
+            == CultureInfo.InvariantCulture
                 .CompareInfo
                 .Compare(strvalue, strconst, CompareOptions.IgnoreCase);
 

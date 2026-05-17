@@ -1314,8 +1314,7 @@ namespace System
             {
                 Contract.Requires(args != null);
 
-                IEnumerable<string> fileNames = System
-                    .Runtime
+                IEnumerable<string> fileNames = System.Runtime
                     .InteropServices
                     .WindowsRuntime
                     .WindowsRuntimeMetadata
@@ -1345,8 +1344,7 @@ namespace System
             NamespaceResolverForIntrospection namespaceResolver =
                 new NamespaceResolverForIntrospection(packageGraphFilePaths);
 
-            System
-                .Runtime
+            System.Runtime
                 .InteropServices
                 .WindowsRuntime
                 .WindowsRuntimeMetadata
@@ -3290,8 +3288,7 @@ namespace System
                 SecurityElement root = parser.GetTopElement();
                 if (root.Tag.Equals("IPermission") || root.Tag.Equals("Permission"))
                 {
-                    IPermission ip = System
-                        .Security
+                    IPermission ip = System.Security
                         .Util
                         .XMLUtil
                         .CreatePermission(root, PermissionState.None, false);
@@ -3688,8 +3685,7 @@ namespace System
             string namespaceName
         )
         {
-            return System
-                .Runtime
+            return System.Runtime
                 .InteropServices
                 .WindowsRuntime
                 .WindowsRuntimeMetadata
@@ -3703,8 +3699,7 @@ namespace System
         // Called by VM - code:CLRPrivTypeCacheWinRT::RaiseDesignerNamespaceResolveEvent
         private string[] OnDesignerNamespaceResolveEvent(string namespaceName)
         {
-            return System
-                .Runtime
+            return System.Runtime
                 .InteropServices
                 .WindowsRuntime
                 .WindowsRuntimeMetadata

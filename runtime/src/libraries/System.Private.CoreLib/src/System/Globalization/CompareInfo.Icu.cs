@@ -71,8 +71,7 @@ namespace System.Globalization
             fixed (char* pString1 = &MemoryMarshal.GetReference(string1))
             fixed (char* pString2 = &MemoryMarshal.GetReference(string2))
             {
-                return Interop
-                    .Globalization
+                return Interop.Globalization
                     .CompareString(
                         _sortHandle,
                         pString1,
@@ -136,8 +135,7 @@ namespace System.Globalization
                         );
 #endif
                     if (fromBeginning)
-                        return Interop
-                            .Globalization
+                        return Interop.Globalization
                             .IndexOf(
                                 _sortHandle,
                                 pTarget,
@@ -148,8 +146,7 @@ namespace System.Globalization
                                 matchLengthPtr
                             );
                     else
-                        return Interop
-                            .Globalization
+                        return Interop.Globalization
                             .LastIndexOf(
                                 _sortHandle,
                                 pTarget,
@@ -274,8 +271,7 @@ namespace System.Globalization
 #if TARGET_BROWSER
                 if (GlobalizationMode.Hybrid)
                 {
-                    int result = Interop
-                        .JsGlobalization
+                    int result = Interop.JsGlobalization
                         .IndexOf(
                             m_name,
                             b,
@@ -304,8 +300,7 @@ namespace System.Globalization
                     );
 #endif
                 if (fromBeginning)
-                    return Interop
-                        .Globalization
+                    return Interop.Globalization
                         .IndexOf(
                             _sortHandle,
                             b,
@@ -316,8 +311,7 @@ namespace System.Globalization
                             matchLengthPtr
                         );
                 else
-                    return Interop
-                        .Globalization
+                    return Interop.Globalization
                         .LastIndexOf(
                             _sortHandle,
                             b,
@@ -425,8 +419,7 @@ namespace System.Globalization
 #if TARGET_BROWSER
                 if (GlobalizationMode.Hybrid)
                 {
-                    int result = Interop
-                        .JsGlobalization
+                    int result = Interop.JsGlobalization
                         .IndexOf(
                             m_name,
                             b,
@@ -455,8 +448,7 @@ namespace System.Globalization
                     );
 #endif
                 if (fromBeginning)
-                    return Interop
-                        .Globalization
+                    return Interop.Globalization
                         .IndexOf(
                             _sortHandle,
                             b,
@@ -467,8 +459,7 @@ namespace System.Globalization
                             matchLengthPtr
                         );
                 else
-                    return Interop
-                        .Globalization
+                    return Interop.Globalization
                         .LastIndexOf(
                             _sortHandle,
                             b,
@@ -524,8 +515,7 @@ namespace System.Globalization
                             options
                         );
 #endif
-                    return Interop
-                        .Globalization
+                    return Interop.Globalization
                         .StartsWith(
                             _sortHandle,
                             pPrefix,
@@ -631,8 +621,7 @@ namespace System.Globalization
                 if (GlobalizationMode.Hybrid)
                     return NativeStartsWith(bp, prefix.Length, ap, source.Length, options);
 #endif
-                return Interop
-                    .Globalization
+                return Interop.Globalization
                     .StartsWith(
                         _sortHandle,
                         bp,
@@ -724,8 +713,7 @@ namespace System.Globalization
                 if (GlobalizationMode.Hybrid)
                     return NativeStartsWith(bp, prefix.Length, ap, source.Length, options);
 #endif
-                return Interop
-                    .Globalization
+                return Interop.Globalization
                     .StartsWith(
                         _sortHandle,
                         bp,
@@ -776,8 +764,7 @@ namespace System.Globalization
                             options
                         );
 #endif
-                    return Interop
-                        .Globalization
+                    return Interop.Globalization
                         .EndsWith(
                             _sortHandle,
                             pSuffix,
@@ -884,8 +871,7 @@ namespace System.Globalization
                 if (GlobalizationMode.Hybrid)
                     return NativeEndsWith(bp, suffix.Length, ap, source.Length, options);
 #endif
-                return Interop
-                    .Globalization
+                return Interop.Globalization
                     .EndsWith(
                         _sortHandle,
                         bp,
@@ -977,8 +963,7 @@ namespace System.Globalization
                 if (GlobalizationMode.Hybrid)
                     return NativeEndsWith(bp, suffix.Length, ap, source.Length, options);
 #endif
-                return Interop
-                    .Globalization
+                return Interop.Globalization
                     .EndsWith(
                         _sortHandle,
                         bp,
@@ -1006,16 +991,14 @@ namespace System.Globalization
             byte[] keyData;
             fixed (char* pSource = source)
             {
-                int sortKeyLength = Interop
-                    .Globalization
+                int sortKeyLength = Interop.Globalization
                     .GetSortKey(_sortHandle, pSource, source.Length, null, 0, options);
                 keyData = new byte[sortKeyLength];
 
                 fixed (byte* pSortKey = keyData)
                 {
                     if (
-                        Interop
-                            .Globalization
+                        Interop.Globalization
                             .GetSortKey(
                                 _sortHandle,
                                 pSource,
@@ -1051,8 +1034,7 @@ namespace System.Globalization
             fixed (char* pSource = &MemoryMarshal.GetReference(source))
             fixed (byte* pDest = &MemoryMarshal.GetReference(destination))
             {
-                actualSortKeyLength = Interop
-                    .Globalization
+                actualSortKeyLength = Interop.Globalization
                     .GetSortKey(
                         _sortHandle,
                         pSource,
@@ -1090,8 +1072,7 @@ namespace System.Globalization
 
             fixed (char* pSource = &MemoryMarshal.GetReference(source))
             {
-                return Interop
-                    .Globalization
+                return Interop.Globalization
                     .GetSortKey(_sortHandle, pSource, source.Length, null, 0, options);
             }
         }
@@ -1152,8 +1133,7 @@ namespace System.Globalization
             {
                 fixed (byte* pSortKey = &MemoryMarshal.GetReference(sortKey))
                 {
-                    sortKeyLength = Interop
-                        .Globalization
+                    sortKeyLength = Interop.Globalization
                         .GetSortKey(
                             _sortHandle,
                             pSource,
@@ -1175,8 +1155,7 @@ namespace System.Globalization
 
                     fixed (byte* pSortKey = &MemoryMarshal.GetReference(sortKey))
                     {
-                        sortKeyLength = Interop
-                            .Globalization
+                        sortKeyLength = Interop.Globalization
                             .GetSortKey(
                                 _sortHandle,
                                 pSource,
@@ -1260,8 +1239,7 @@ namespace System.Globalization
                 {
                     if (!s_sortNameToSortHandleCache.TryGetValue(sortName, out IntPtr result))
                     {
-                        Interop.Globalization.ResultCode resultCode = Interop
-                            .Globalization
+                        Interop.Globalization.ResultCode resultCode = Interop.Globalization
                             .GetSortHandle(sortName, out result);
 
                         if (resultCode == Interop.Globalization.ResultCode.OutOfMemory)

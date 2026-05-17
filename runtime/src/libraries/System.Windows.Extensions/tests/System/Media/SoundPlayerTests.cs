@@ -142,8 +142,7 @@ namespace System.Media.Test
                         string line;
                         while (!string.IsNullOrEmpty(line = await reader.ReadLineAsync()))
                             ;
-                        byte[] header = Encoding
-                            .UTF8
+                        byte[] header = Encoding.UTF8
                             .GetBytes(
                                 $"HTTP/1.1 200 OK\r\nContent-Length: {sourceStream.Length}\r\n\r\n"
                             );

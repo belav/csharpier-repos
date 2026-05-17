@@ -294,8 +294,7 @@ namespace System.Diagnostics
                     fixed (char* bufDomainName = new char[domainNameLen])
                     {
                         if (
-                            Interop
-                                .Advapi32
+                            Interop.Advapi32
                                 .LookupAccountSid(
                                     MachineName,
                                     sid,

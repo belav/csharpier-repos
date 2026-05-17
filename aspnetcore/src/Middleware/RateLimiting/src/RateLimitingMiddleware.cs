@@ -79,8 +79,7 @@ internal sealed partial class RateLimitingMiddleware
         {
             return _next(context);
         }
-        var enableRateLimitingAttribute = endpoint
-            ?.Metadata
+        var enableRateLimitingAttribute = endpoint?.Metadata
             .GetMetadata<EnableRateLimitingAttribute>();
         // If this endpoint has no EnableRateLimitingAttribute & there's no global limiter, don't apply any rate limits.
         if (enableRateLimitingAttribute is null && _globalLimiter is null)

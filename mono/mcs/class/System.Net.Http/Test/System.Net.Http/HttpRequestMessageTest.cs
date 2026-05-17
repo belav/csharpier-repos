@@ -299,8 +299,7 @@ namespace MonoTests.System.Net.Http
             headers.Add("pragma", "nocache,R=1,g");
 
             Assert.IsTrue(
-                headers
-                    .Accept
+                headers.Accept
                     .SequenceEqual(
                         new[]
                         {
@@ -311,8 +310,7 @@ namespace MonoTests.System.Net.Http
             );
 
             Assert.IsTrue(
-                headers
-                    .AcceptCharset
+                headers.AcceptCharset
                     .SequenceEqual(
                         new[]
                         {
@@ -323,8 +321,7 @@ namespace MonoTests.System.Net.Http
             );
 
             Assert.IsTrue(
-                headers
-                    .AcceptEncoding
+                headers.AcceptEncoding
                     .SequenceEqual(
                         new[]
                         {
@@ -335,8 +332,7 @@ namespace MonoTests.System.Net.Http
             );
 
             Assert.IsTrue(
-                headers
-                    .AcceptLanguage
+                headers.AcceptLanguage
                     .SequenceEqual(
                         new[]
                         {
@@ -357,8 +353,7 @@ namespace MonoTests.System.Net.Http
             Assert.AreEqual(headers.Date, new DateTimeOffset(DateTime.Today));
 
             Assert.IsTrue(
-                headers
-                    .Expect
+                headers.Expect
                     .SequenceEqual(
                         new[]
                         {
@@ -372,8 +367,7 @@ namespace MonoTests.System.Net.Http
             Assert.AreEqual(headers.From, "webmaster@w3.org");
 
             Assert.IsTrue(
-                headers
-                    .IfMatch
+                headers.IfMatch
                     .SequenceEqual(
                         new EntityTagHeaderValue[]
                         {
@@ -385,8 +379,7 @@ namespace MonoTests.System.Net.Http
 
             Assert.AreEqual(headers.IfModifiedSince, new DateTimeOffset(DateTime.Today));
             Assert.IsTrue(
-                headers
-                    .IfNoneMatch
+                headers.IfNoneMatch
                     .SequenceEqual(
                         new EntityTagHeaderValue[]
                         {
@@ -404,8 +397,7 @@ namespace MonoTests.System.Net.Http
             Assert.AreEqual("bytes", headers.Range.Unit);
             Assert.AreEqual(headers.Referrer, new Uri("http://xamarin.com"));
             Assert.IsTrue(
-                headers
-                    .TE
+                headers.TE
                     .SequenceEqual(
                         new TransferCodingWithQualityHeaderValue[]
                         {
@@ -418,8 +410,7 @@ namespace MonoTests.System.Net.Http
             Assert.IsTrue(headers.Trailer.SequenceEqual(new string[] { "value", "value2" }), "30");
 
             Assert.IsTrue(
-                headers
-                    .TransferEncoding
+                headers.TransferEncoding
                     .SequenceEqual(
                         new[]
                         {
@@ -431,8 +422,7 @@ namespace MonoTests.System.Net.Http
             );
 
             Assert.IsTrue(
-                headers
-                    .Upgrade
+                headers.Upgrade
                     .SequenceEqual(
                         new[]
                         {
@@ -443,8 +433,7 @@ namespace MonoTests.System.Net.Http
             );
 
             Assert.IsTrue(
-                headers
-                    .UserAgent
+                headers.UserAgent
                     .SequenceEqual(
                         new[]
                         {
@@ -455,8 +444,7 @@ namespace MonoTests.System.Net.Http
             );
 
             Assert.IsTrue(
-                headers
-                    .Via
+                headers.Via
                     .SequenceEqual(
                         new[]
                         {
@@ -467,8 +455,7 @@ namespace MonoTests.System.Net.Http
             );
 
             Assert.IsTrue(
-                headers
-                    .Warning
+                headers.Warning
                     .SequenceEqual(
                         new[]
                         {
@@ -479,8 +466,7 @@ namespace MonoTests.System.Net.Http
             );
 
             Assert.IsTrue(
-                headers
-                    .Pragma
+                headers.Pragma
                     .SequenceEqual(
                         new[]
                         {
@@ -513,8 +499,7 @@ namespace MonoTests.System.Net.Http
 
             Assert.AreEqual(2, headers.Accept.Count, "#1a");
             Assert.IsTrue(
-                headers
-                    .Accept
+                headers.Accept
                     .SequenceEqual(
                         new[]
                         {
@@ -531,8 +516,7 @@ namespace MonoTests.System.Net.Http
 
             Assert.AreEqual(2, headers.AcceptCharset.Count, "#2a");
             Assert.IsTrue(
-                headers
-                    .AcceptCharset
+                headers.AcceptCharset
                     .SequenceEqual(
                         new[]
                         {
@@ -554,8 +538,7 @@ namespace MonoTests.System.Net.Http
 
             Assert.AreEqual(4, headers.IfMatch.Count, "#4a");
             Assert.IsTrue(
-                headers
-                    .IfMatch
+                headers.IfMatch
                     .SequenceEqual(
                         new[]
                         {
@@ -571,8 +554,7 @@ namespace MonoTests.System.Net.Http
             Assert.AreEqual(6, headers.UserAgent.Count, "#10a");
 
             Assert.IsTrue(
-                headers
-                    .UserAgent
+                headers.UserAgent
                     .SequenceEqual(
                         new[]
                         {
@@ -596,8 +578,7 @@ namespace MonoTests.System.Net.Http
 
             headers.Add("User-Agent", "MonoDevelop (Unix 3.13.0; amd64; en-US; Octokit 0.3.4)");
 
-            var se = headers
-                .UserAgent
+            var se = headers.UserAgent
                 .SequenceEqual(
                     new[]
                     {
@@ -622,8 +603,7 @@ namespace MonoTests.System.Net.Http
 
             headers.Add("User-Agent", "A \t  \t B");
 
-            var se = headers
-                .UserAgent
+            var se = headers.UserAgent
                 .SequenceEqual(
                     new[]
                     {
@@ -661,8 +641,7 @@ namespace MonoTests.System.Net.Http
                 "application/vnd.github.moondragon+json; charset=utf-8,application/vnd.github.v3+json; charset=utf-8"
             );
 
-            var se = headers
-                .Accept
+            var se = headers.Accept
                 .SequenceEqual(
                     new[]
                     {

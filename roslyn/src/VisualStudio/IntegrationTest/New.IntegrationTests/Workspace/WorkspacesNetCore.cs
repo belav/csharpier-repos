@@ -25,11 +25,9 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.Workspaces
         [WorkItem("https://github.com/dotnet/roslyn/issues/34264")]
         public override async Task MetadataReference()
         {
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .CreateSolutionAsync(nameof(WorkspacesNetCore), HangMitigatingCancellationToken);
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .AddCustomProjectAsync(
                     ProjectName,
                     ".csproj",
@@ -40,8 +38,7 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.Workspaces
 </Project>",
                     HangMitigatingCancellationToken
                 );
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .AddFileAsync(
                     ProjectName,
                     "Class1.cs",
@@ -49,17 +46,14 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.Workspaces
                     open: true,
                     cancellationToken: HangMitigatingCancellationToken
                 );
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .RestoreNuGetPackagesAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .Workspace
+            await TestServices.Workspace
                 .WaitForAllAsyncOperationsAsync(
                     [FeatureAttribute.Workspace],
                     HangMitigatingCancellationToken
                 );
-            await TestServices
-                .Workspace
+            await TestServices.Workspace
                 .SetFullSolutionAnalysisAsync(true, HangMitigatingCancellationToken);
 
             await base.MetadataReference();

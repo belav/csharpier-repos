@@ -145,8 +145,7 @@ internal sealed class LoadedProject : IDisposable
             commandLineArguments.ReferencePaths,
             commandLineArguments.BaseDirectory
         );
-        var metadataReferences = commandLineArguments
-            .MetadataReferences
+        var metadataReferences = commandLineArguments.MetadataReferences
             .Select(cr =>
             {
                 // The relative path resolver calls File.Exists() to see if the path doesn't exist; it guarantees that generally the path returned
@@ -186,8 +185,7 @@ internal sealed class LoadedProject : IDisposable
         // Now that we've updated it hold onto the old list of references so we can remove them if there's a later update
         _mostRecentMetadataReferences = metadataReferences;
 
-        var analyzerReferences = commandLineArguments
-            .AnalyzerReferences
+        var analyzerReferences = commandLineArguments.AnalyzerReferences
             .Select(cr =>
             {
                 // Note that unlike regular references, we do not resolve these with the relative path resolver that searches reference paths

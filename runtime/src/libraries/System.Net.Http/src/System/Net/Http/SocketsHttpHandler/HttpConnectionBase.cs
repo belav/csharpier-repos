@@ -74,16 +74,13 @@ namespace System.Net.Http
                 int port = pool.OriginAuthority.Port;
 
                 if (this is HttpConnection)
-                    HttpTelemetry
-                        .Log
+                    HttpTelemetry.Log
                         .Http11ConnectionEstablished(Id, scheme, host, port, remoteEndPoint);
                 else if (this is Http2Connection)
-                    HttpTelemetry
-                        .Log
+                    HttpTelemetry.Log
                         .Http20ConnectionEstablished(Id, scheme, host, port, remoteEndPoint);
                 else
-                    HttpTelemetry
-                        .Log
+                    HttpTelemetry.Log
                         .Http30ConnectionEstablished(Id, scheme, host, port, remoteEndPoint);
             }
         }

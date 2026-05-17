@@ -31,8 +31,7 @@ namespace System.Runtime.InteropServices
             int uniLength
         )
         {
-            return Interop
-                .Kernel32
+            return Interop.Kernel32
                 .MultiByteToWideChar(
                     Interop.Kernel32.CP_ACP,
                     0,
@@ -51,8 +50,7 @@ namespace System.Runtime.InteropServices
             int multiByteLen
         )
         {
-            return Interop
-                .Kernel32
+            return Interop.Kernel32
                 .WideCharToMultiByte(
                     Interop.Kernel32.CP_ACP,
                     0,
@@ -77,8 +75,7 @@ namespace System.Runtime.InteropServices
         {
             uint flags = (bestFit ? 0 : Interop.Kernel32.WC_NO_BEST_FIT_CHARS);
             Interop.BOOL defaultCharUsed = Interop.BOOL.FALSE;
-            int ret = Interop
-                .Kernel32
+            int ret = Interop.Kernel32
                 .WideCharToMultiByte(
                     Interop.Kernel32.CP_ACP,
                     flags,
@@ -100,8 +97,7 @@ namespace System.Runtime.InteropServices
         // Return size in bytes required to convert a UTF16 string to byte array.
         public static unsafe int GetByteCount(char* wStr, int wideStrLen)
         {
-            return Interop
-                .Kernel32
+            return Interop.Kernel32
                 .WideCharToMultiByte(
                     Interop.Kernel32.CP_ACP,
                     0,
@@ -117,8 +113,7 @@ namespace System.Runtime.InteropServices
         // Return number of charaters encoded in native byte array lpMultiByteStr
         public static unsafe int GetCharCount(byte* multiByteStr, int multiByteLen)
         {
-            return Interop
-                .Kernel32
+            return Interop.Kernel32
                 .MultiByteToWideChar(
                     Interop.Kernel32.CP_ACP,
                     0,

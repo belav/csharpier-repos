@@ -123,8 +123,7 @@ namespace System.ServiceModel.Syndication
             {
                 if (cloneItems)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(SR.UnbufferedItemsCannotBeCloned)
@@ -293,8 +292,7 @@ namespace System.ServiceModel.Syndication
                 rssSerializer.ReadFrom(reader);
                 return rssSerializer.Feed as TSyndicationFeed;
             }
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(
                     new XmlException(
                         SR.GetString(SR.UnknownFeedXml, reader.LocalName, reader.NamespaceURI)

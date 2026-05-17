@@ -125,8 +125,7 @@ namespace System.ServiceModel.Configuration
 
         [ConfigurationProperty(
             ConfigurationStrings.KeyEntropyMode,
-            DefaultValue = System
-                .ServiceModel
+            DefaultValue = System.ServiceModel
                 .Security
                 .AcceleratedTokenProvider
                 .defaultKeyEntropyMode
@@ -404,136 +403,119 @@ namespace System.ServiceModel.Configuration
 
             if (
                 PropertyValueOrigin.Default
-                != source
-                    .ElementInformation
+                != source.ElementInformation
                     .Properties[ConfigurationStrings.AllowSerializedSigningTokenOnReply]
                     .ValueOrigin
             )
                 this.AllowSerializedSigningTokenOnReply = source.AllowSerializedSigningTokenOnReply;
             if (
                 PropertyValueOrigin.Default
-                != source
-                    .ElementInformation
+                != source.ElementInformation
                     .Properties[ConfigurationStrings.DefaultAlgorithmSuite]
                     .ValueOrigin
             )
                 this.DefaultAlgorithmSuite = source.DefaultAlgorithmSuite;
             if (
                 PropertyValueOrigin.Default
-                != source
-                    .ElementInformation
+                != source.ElementInformation
                     .Properties[ConfigurationStrings.EnableUnsecuredResponse]
                     .ValueOrigin
             )
                 this.EnableUnsecuredResponse = source.EnableUnsecuredResponse;
             if (
                 PropertyValueOrigin.Default
-                != source
-                    .ElementInformation
+                != source.ElementInformation
                     .Properties[ConfigurationStrings.AllowInsecureTransport]
                     .ValueOrigin
             )
                 this.AllowInsecureTransport = source.AllowInsecureTransport;
             if (
                 PropertyValueOrigin.Default
-                != source
-                    .ElementInformation
+                != source.ElementInformation
                     .Properties[ConfigurationStrings.RequireDerivedKeys]
                     .ValueOrigin
             )
                 this.RequireDerivedKeys = source.RequireDerivedKeys;
             if (
                 PropertyValueOrigin.Default
-                != source
-                    .ElementInformation
+                != source.ElementInformation
                     .Properties[ConfigurationStrings.IncludeTimestamp]
                     .ValueOrigin
             )
                 this.IncludeTimestamp = source.IncludeTimestamp;
             if (
                 PropertyValueOrigin.Default
-                != source
-                    .ElementInformation
+                != source.ElementInformation
                     .Properties[ConfigurationStrings.IssuedTokenParameters]
                     .ValueOrigin
             )
                 this.IssuedTokenParameters.Copy(source.IssuedTokenParameters);
             if (
                 PropertyValueOrigin.Default
-                != source
-                    .ElementInformation
+                != source.ElementInformation
                     .Properties[ConfigurationStrings.MessageProtectionOrder]
                     .ValueOrigin
             )
                 this.MessageProtectionOrder = source.MessageProtectionOrder;
             if (
                 PropertyValueOrigin.Default
-                != source
-                    .ElementInformation
+                != source.ElementInformation
                     .Properties[ConfigurationStrings.ProtectTokens]
                     .ValueOrigin
             )
                 this.ProtectTokens = source.ProtectTokens;
             if (
                 PropertyValueOrigin.Default
-                != source
-                    .ElementInformation
+                != source.ElementInformation
                     .Properties[ConfigurationStrings.MessageSecurityVersion]
                     .ValueOrigin
             )
                 this.MessageSecurityVersion = source.MessageSecurityVersion;
             if (
                 PropertyValueOrigin.Default
-                != source
-                    .ElementInformation
+                != source.ElementInformation
                     .Properties[ConfigurationStrings.RequireSignatureConfirmation]
                     .ValueOrigin
             )
                 this.RequireSignatureConfirmation = source.RequireSignatureConfirmation;
             if (
                 PropertyValueOrigin.Default
-                != source
-                    .ElementInformation
+                != source.ElementInformation
                     .Properties[ConfigurationStrings.RequireSecurityContextCancellation]
                     .ValueOrigin
             )
                 this.RequireSecurityContextCancellation = source.RequireSecurityContextCancellation;
             if (
                 PropertyValueOrigin.Default
-                != source
-                    .ElementInformation
+                != source.ElementInformation
                     .Properties[ConfigurationStrings.CanRenewSecurityContextToken]
                     .ValueOrigin
             )
                 this.CanRenewSecurityContextToken = source.CanRenewSecurityContextToken;
             if (
                 PropertyValueOrigin.Default
-                != source
-                    .ElementInformation
+                != source.ElementInformation
                     .Properties[ConfigurationStrings.KeyEntropyMode]
                     .ValueOrigin
             )
                 this.KeyEntropyMode = source.KeyEntropyMode;
             if (
                 PropertyValueOrigin.Default
-                != source
-                    .ElementInformation
+                != source.ElementInformation
                     .Properties[ConfigurationStrings.SecurityHeaderLayout]
                     .ValueOrigin
             )
                 this.SecurityHeaderLayout = source.SecurityHeaderLayout;
             if (
                 PropertyValueOrigin.Default
-                != source
-                    .ElementInformation
+                != source.ElementInformation
                     .Properties[ConfigurationStrings.LocalClientSettings]
                     .ValueOrigin
             )
                 this.LocalClientSettings.CopyFrom(source.LocalClientSettings);
             if (
                 PropertyValueOrigin.Default
-                != source
-                    .ElementInformation
+                != source.ElementInformation
                     .Properties[ConfigurationStrings.LocalServiceSettings]
                     .ValueOrigin
             )
@@ -634,8 +616,7 @@ namespace System.ServiceModel.Configuration
                         );
                     break;
                 default:
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidEnumArgumentException(
                                 "AuthenticationMode",
@@ -1066,10 +1047,8 @@ namespace System.ServiceModel.Configuration
                     ((SslSecurityTokenParameters)sp).RequireCancellation
                 );
             else if (sp is IssuedSecurityTokenParameters)
-                this.IssuedTokenParameters.InitializeFrom(
-                    (IssuedSecurityTokenParameters)sp,
-                    initializeNestedBindings
-                );
+                this.IssuedTokenParameters
+                    .InitializeFrom((IssuedSecurityTokenParameters)sp, initializeNestedBindings);
         }
 
         internal void InitializeFrom(BindingElement bindingElement, bool initializeNestedBindings)

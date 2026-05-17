@@ -106,22 +106,19 @@ namespace System.ServiceModel.Channels
         {
             if (mode == PeerAuthenticationMode.None && !signing)
                 return null;
-            ClientCredentials clientCredentials = context
-                .BindingParameters
+            ClientCredentials clientCredentials = context.BindingParameters
                 .Find<ClientCredentials>();
             if (clientCredentials != null)
             {
                 return new PeerSecurityCredentialsManager(clientCredentials.Peer, mode, signing);
             }
-            ServiceCredentials serviceCredentials = context
-                .BindingParameters
+            ServiceCredentials serviceCredentials = context.BindingParameters
                 .Find<ServiceCredentials>();
             if (serviceCredentials != null)
             {
                 return new PeerSecurityCredentialsManager(serviceCredentials.Peer, mode, signing);
             }
-            SecurityCredentialsManager credman = context
-                .BindingParameters
+            SecurityCredentialsManager credman = context.BindingParameters
                 .Find<SecurityCredentialsManager>();
             if (credman == null)
             {
@@ -207,8 +204,7 @@ namespace System.ServiceModel.Channels
                 }
             }
 
-            ChannelProtectionRequirements reqs = context
-                .BindingParameters
+            ChannelProtectionRequirements reqs = context.BindingParameters
                 .Find<ChannelProtectionRequirements>();
             PeerSecurityCredentialsManager credman = GetCredentialsManager(
                 authenticationMode,
@@ -274,8 +270,7 @@ namespace System.ServiceModel.Channels
             if (signMessages)
             {
                 if (
-                    !credential
-                        .MessageSenderAuthentication
+                    !credential.MessageSenderAuthentication
                         .TryGetCertificateValidator(out validator)
                 )
                 {
@@ -288,8 +283,7 @@ namespace System.ServiceModel.Channels
 
         void ApplyAuditBehaviorSettings(BindingContext context)
         {
-            ServiceSecurityAuditBehavior auditBehavior = context
-                .BindingParameters
+            ServiceSecurityAuditBehavior auditBehavior = context.BindingParameters
                 .Find<ServiceSecurityAuditBehavior>();
             if (auditBehavior != null)
             {
@@ -377,8 +371,7 @@ namespace System.ServiceModel.Channels
                             );
                         }
                         if (
-                            !credential
-                                .PeerAuthentication
+                            !credential.PeerAuthentication
                                 .TryGetCertificateValidator(out connectionValidator)
                         )
                         {
@@ -394,8 +387,7 @@ namespace System.ServiceModel.Channels
                 if (credential.MessageSenderAuthentication != null)
                 {
                     if (
-                        !credential
-                            .MessageSenderAuthentication
+                        !credential.MessageSenderAuthentication
                             .TryGetCertificateValidator(out messageValidator)
                     )
                     {
@@ -494,8 +486,7 @@ namespace System.ServiceModel.Channels
                     SecurityTokenResolver resolver;
                     X509SecurityTokenAuthenticator auth =
                         tokenManager.CreateSecurityTokenAuthenticator(
-                            PeerSecurityCredentialsManager
-                                .PeerClientSecurityTokenManager
+                            PeerSecurityCredentialsManager.PeerClientSecurityTokenManager
                                 .CreateRequirement(SecurityTokenTypes.X509Certificate, true),
                             out resolver
                         ) as X509SecurityTokenAuthenticator;
@@ -790,8 +781,7 @@ namespace System.ServiceModel.Channels
                 Abort(neighbor);
                 return null;
             }
-            PeerChannelAuthenticatorExtension extension = neighbor
-                .Extensions
+            PeerChannelAuthenticatorExtension extension = neighbor.Extensions
                 .Find<PeerChannelAuthenticatorExtension>();
             Claim claim = FindClaim(ServiceSecurityContext.Current);
             if (!(extension != null && claim != null))
@@ -927,8 +917,7 @@ namespace System.ServiceModel.Channels
                     X509SecurityTokenProvider tokenProvider =
                         this.manager.CreateSecurityTokenProvider(req) as X509SecurityTokenProvider;
                     if (tokenProvider == null)
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperArgument("TokenProvider");
                     X509SecurityToken token =
                         tokenProvider.GetToken(ServiceDefaults.SendTimeout) as X509SecurityToken;
@@ -1101,8 +1090,7 @@ namespace System.ServiceModel.Channels
                         delegateManager.CreateSecurityTokenProvider(requirement)
                         as UserNameSecurityTokenProvider;
                     if (tokenProvider == null)
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new NotSupportedException(
                                     SR.GetString(
@@ -1140,8 +1128,7 @@ namespace System.ServiceModel.Channels
                     }
                     else
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new NotSupportedException(
                                     SR.GetString(
@@ -1221,8 +1208,7 @@ namespace System.ServiceModel.Channels
                                     .MessageSenderAuthentication
                                     .TryGetCertificateValidator(out validator)
                             )
-                                throw DiagnosticUtility
-                                    .ExceptionUtility
+                                throw DiagnosticUtility.ExceptionUtility
                                     .ThrowHelperArgumentNull("TokenType");
                             return new PeerX509TokenProvider(
                                 validator,
@@ -1236,15 +1222,13 @@ namespace System.ServiceModel.Channels
                     }
                     else
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperArgumentNull("TokenType");
                     }
                 }
                 else
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgumentNull("tokenRequirement");
                 }
             }
@@ -1327,8 +1311,7 @@ namespace System.ServiceModel.Channels
                                             .PeerAuthentication
                                             .TryGetCertificateValidator(out validator)
                                     )
-                                        throw DiagnosticUtility
-                                            .ExceptionUtility
+                                        throw DiagnosticUtility.ExceptionUtility
                                             .ThrowHelperError(
                                                 new NotSupportedException(
                                                     SR.GetString(
@@ -1348,8 +1331,7 @@ namespace System.ServiceModel.Channels
                                         .MessageSenderAuthentication
                                         .TryGetCertificateValidator(out validator)
                                 )
-                                    throw DiagnosticUtility
-                                        .ExceptionUtility
+                                    throw DiagnosticUtility.ExceptionUtility
                                         .ThrowHelperError(
                                             new NotSupportedException(
                                                 SR.GetString(
@@ -1364,15 +1346,13 @@ namespace System.ServiceModel.Channels
                     }
                     else
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperArgument("tokenRequirement");
                     }
                 }
                 else
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgumentNull("tokenRequirement");
                 }
             }

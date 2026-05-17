@@ -69,8 +69,7 @@ namespace System.ServiceModel.Configuration
 
         internal override string GetConfigurationElementName()
         {
-            return ConfigUtil
-                .ExtensionsSection
+            return ConfigUtil.ExtensionsSection
                 .BindingElementExtensions
                 .GetConfigurationElementName(GetType());
         }

@@ -113,17 +113,19 @@ namespace System.Data.SqlClient
             object result = null;
             if (wellKnownValue.WellKnownText != null)
             {
-                result = this.SqlTypes.SqlTypesGeographyFromText(
-                    wellKnownValue.WellKnownText,
-                    wellKnownValue.CoordinateSystemId
-                );
+                result = this.SqlTypes
+                    .SqlTypesGeographyFromText(
+                        wellKnownValue.WellKnownText,
+                        wellKnownValue.CoordinateSystemId
+                    );
             }
             else if (wellKnownValue.WellKnownBinary != null)
             {
-                result = this.SqlTypes.SqlTypesGeographyFromBinary(
-                    wellKnownValue.WellKnownBinary,
-                    wellKnownValue.CoordinateSystemId
-                );
+                result = this.SqlTypes
+                    .SqlTypesGeographyFromBinary(
+                        wellKnownValue.WellKnownBinary,
+                        wellKnownValue.CoordinateSystemId
+                    );
             }
             else
             {
@@ -231,17 +233,19 @@ namespace System.Data.SqlClient
             object result = null;
             if (wellKnownValue.WellKnownText != null)
             {
-                result = this.SqlTypes.SqlTypesGeometryFromText(
-                    wellKnownValue.WellKnownText,
-                    wellKnownValue.CoordinateSystemId
-                );
+                result = this.SqlTypes
+                    .SqlTypesGeometryFromText(
+                        wellKnownValue.WellKnownText,
+                        wellKnownValue.CoordinateSystemId
+                    );
             }
             else if (wellKnownValue.WellKnownBinary != null)
             {
-                result = this.SqlTypes.SqlTypesGeometryFromBinary(
-                    wellKnownValue.WellKnownBinary,
-                    wellKnownValue.CoordinateSystemId
-                );
+                result = this.SqlTypes
+                    .SqlTypesGeometryFromBinary(
+                        wellKnownValue.WellKnownBinary,
+                        wellKnownValue.CoordinateSystemId
+                    );
             }
             else
             {

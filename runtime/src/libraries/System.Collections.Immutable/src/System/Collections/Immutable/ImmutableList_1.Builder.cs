@@ -1191,8 +1191,7 @@ namespace System.Collections.Immutable
                 {
                     if (_syncRoot == null)
                     {
-                        System
-                            .Threading
+                        System.Threading
                             .Interlocked
                             .CompareExchange<object?>(ref _syncRoot, new object(), null);
                     }

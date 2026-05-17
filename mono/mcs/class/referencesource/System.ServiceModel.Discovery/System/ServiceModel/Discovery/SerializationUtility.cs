@@ -29,8 +29,7 @@ namespace System.ServiceModel.Discovery
                 ns = reader.LookupNamespace(prefix);
                 if (ns == null)
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(
                             new XmlException(
                                 SR2.DiscoveryXmlQNamePrefixNotDefined(prefix, prefixedQName)
@@ -40,8 +39,7 @@ namespace System.ServiceModel.Discovery
                 localname = prefixedQName.Substring(index + 1);
                 if (localname == string.Empty)
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(
                             new XmlException(
                                 SR2.DiscoveryXmlQNameLocalnameNotDefined(prefixedQName)
@@ -107,8 +105,7 @@ namespace System.ServiceModel.Discovery
                     {
                         if (uriKind == UriKind.Absolute)
                         {
-                            throw FxTrace
-                                .Exception
+                            throw FxTrace.Exception
                                 .AsError(
                                     new XmlException(
                                         SR2.DiscoveryXmlAbsoluteUriFormatError(uriStrings[i]),
@@ -118,8 +115,7 @@ namespace System.ServiceModel.Discovery
                         }
                         else
                         {
-                            throw FxTrace
-                                .Exception
+                            throw FxTrace.Exception
                                 .AsError(
                                     new XmlException(
                                         SR2.DiscoveryXmlUriFormatError(uriStrings[i]),
@@ -286,8 +282,7 @@ namespace System.ServiceModel.Discovery
                 maxResults = reader.ReadContentAsInt();
                 if (maxResults <= 0)
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(
                             new XmlException(SR2.DiscoveryXmlMaxResultsLessThanZero(maxResults))
                         );
@@ -314,8 +309,7 @@ namespace System.ServiceModel.Discovery
                 );
                 if (timeout <= TimeSpan.Zero)
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(new XmlException(SR2.DiscoveryXmlDurationLessThanZero(timeout)));
                     ;
                 }
@@ -430,8 +424,7 @@ namespace System.ServiceModel.Discovery
                         }
                         catch (FormatException fe)
                         {
-                            throw FxTrace
-                                .Exception
+                            throw FxTrace.Exception
                                 .AsError(
                                     new XmlException(
                                         SR2.DiscoveryXmlUriFormatError(scopeMatchByStr),
@@ -498,8 +491,7 @@ namespace System.ServiceModel.Discovery
 
             if (metadataVersion < 0)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new XmlException(
                             SR2.DiscoveryXmlMetadataVersionLessThanZero(metadataVersion)
@@ -584,8 +576,7 @@ namespace System.ServiceModel.Discovery
                 );
                 if (scopeMatchBy != null)
                 {
-                    Uri versionDependentScopeMatchBy = discoveryVersion
-                        .Implementation
+                    Uri versionDependentScopeMatchBy = discoveryVersion.Implementation
                         .ToVersionDependentScopeMatchBy(scopeMatchBy);
                     writer.WriteAttributeString(
                         ProtocolStrings.SchemaNames.MatchByAttribute,

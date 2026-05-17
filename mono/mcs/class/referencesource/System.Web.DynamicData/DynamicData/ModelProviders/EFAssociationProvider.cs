@@ -36,8 +36,7 @@ namespace System.Web.DynamicData.ModelProviders
             else
             {
                 EntityType value = (EntityType)
-                    navigationProperty
-                        .ToEndMember
+                    navigationProperty.ToEndMember
                         .TypeUsage
                         .EdmType
                         .MetadataProperties
@@ -82,8 +81,7 @@ namespace System.Web.DynamicData.ModelProviders
             if (IsForeignKeyReference)
             {
                 var foreignKeyNames = new List<string>();
-                var primaryKeyNames = FromColumn
-                    .Table
+                var primaryKeyNames = FromColumn.Table
                     .Columns
                     .Where(c => c.IsPrimaryKey)
                     .Select(c => c.Name);
@@ -184,8 +182,7 @@ namespace System.Web.DynamicData.ModelProviders
                     // to build a foreign key name of the form "Item.ItemID", but we want just "ItemID".
                     AssociationType relationshipType = (AssociationType)
                         navigationProperty.RelationshipType;
-                    ReferentialConstraint constraint = relationshipType
-                        .ReferentialConstraints
+                    ReferentialConstraint constraint = relationshipType.ReferentialConstraints
                         .FirstOrDefault(c => c.ToRole == navigationProperty.ToEndMember);
                     if (constraint != null)
                     {
@@ -194,8 +191,7 @@ namespace System.Web.DynamicData.ModelProviders
 
                     // Fall back on the primary keys if no constraints were found but only if we are on the parent side. i.e the 1 side Item side in an Item-ItemDetail
                     // Get the primary keys on the "from" side of the relationship. i.e Product.Category -> ProductID
-                    return navigationProperty
-                        .FromEndMember
+                    return navigationProperty.FromEndMember
                         .GetEntityType()
                         .KeyMembers
                         .Select(m => m.Name);

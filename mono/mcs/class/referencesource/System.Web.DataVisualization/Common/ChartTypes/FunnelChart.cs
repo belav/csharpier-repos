@@ -841,23 +841,24 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             if (this.Common.ProcessModePaint)
             {
                 // Fill graphics path
-                this.Graph.DrawPathAbs(
-                    segmentPath,
-                    (drawSegment) ? lightColor : Color.Transparent,
-                    point.BackHatchStyle,
-                    point.BackImage,
-                    point.BackImageWrapMode,
-                    point.BackImageTransparentColor,
-                    point.BackImageAlignment,
-                    point.BackGradientStyle,
-                    (drawSegment) ? point.BackSecondaryColor : Color.Transparent,
-                    (drawSegment) ? point.BorderColor : Color.Transparent,
-                    point.BorderWidth,
-                    point.BorderDashStyle,
-                    PenAlignment.Center,
-                    (drawSegmentShadow) ? point.series.ShadowOffset : 0,
-                    point.series.ShadowColor
-                );
+                this.Graph
+                    .DrawPathAbs(
+                        segmentPath,
+                        (drawSegment) ? lightColor : Color.Transparent,
+                        point.BackHatchStyle,
+                        point.BackImage,
+                        point.BackImageWrapMode,
+                        point.BackImageTransparentColor,
+                        point.BackImageAlignment,
+                        point.BackGradientStyle,
+                        (drawSegment) ? point.BackSecondaryColor : Color.Transparent,
+                        (drawSegment) ? point.BorderColor : Color.Transparent,
+                        point.BorderWidth,
+                        point.BorderDashStyle,
+                        PenAlignment.Center,
+                        (drawSegmentShadow) ? point.series.ShadowOffset : 0,
+                        point.series.ShadowColor
+                    );
             }
 
             if (this.Common.ProcessModeRegions)
@@ -919,23 +920,24 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             if (this.Common.ProcessModePaint)
             {
                 // Fill graphics path
-                this.Graph.DrawPathAbs(
-                    segmentPath,
-                    (drawSegment) ? darkColor : Color.Transparent,
-                    point.BackHatchStyle,
-                    point.BackImage,
-                    point.BackImageWrapMode,
-                    point.BackImageTransparentColor,
-                    point.BackImageAlignment,
-                    point.BackGradientStyle,
-                    (drawSegment) ? point.BackSecondaryColor : Color.Transparent,
-                    (drawSegment) ? point.BorderColor : Color.Transparent,
-                    point.BorderWidth,
-                    point.BorderDashStyle,
-                    PenAlignment.Center,
-                    (drawSegmentShadow) ? point.series.ShadowOffset : 0,
-                    point.series.ShadowColor
-                );
+                this.Graph
+                    .DrawPathAbs(
+                        segmentPath,
+                        (drawSegment) ? darkColor : Color.Transparent,
+                        point.BackHatchStyle,
+                        point.BackImage,
+                        point.BackImageWrapMode,
+                        point.BackImageTransparentColor,
+                        point.BackImageAlignment,
+                        point.BackGradientStyle,
+                        (drawSegment) ? point.BackSecondaryColor : Color.Transparent,
+                        (drawSegment) ? point.BorderColor : Color.Transparent,
+                        point.BorderWidth,
+                        point.BorderDashStyle,
+                        PenAlignment.Center,
+                        (drawSegmentShadow) ? point.series.ShadowOffset : 0,
+                        point.series.ShadowColor
+                    );
             }
 
             if (this.Common.ProcessModeRegions)
@@ -971,25 +973,26 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                     if (this.Common.ProcessModePaint)
                     {
                         // Fill graphics path
-                        this.Graph.DrawPathAbs(
-                            topCurve,
-                            (drawSegment)
-                                ? ChartGraphics.GetGradientColor(point.Color, Color.Black, 0.4)
-                                : Color.Transparent,
-                            point.BackHatchStyle,
-                            point.BackImage,
-                            point.BackImageWrapMode,
-                            point.BackImageTransparentColor,
-                            point.BackImageAlignment,
-                            point.BackGradientStyle,
-                            (drawSegment) ? point.BackSecondaryColor : Color.Transparent,
-                            (drawSegment) ? point.BorderColor : Color.Transparent,
-                            point.BorderWidth,
-                            point.BorderDashStyle,
-                            PenAlignment.Center,
-                            (drawSegmentShadow) ? point.series.ShadowOffset : 0,
-                            point.series.ShadowColor
-                        );
+                        this.Graph
+                            .DrawPathAbs(
+                                topCurve,
+                                (drawSegment)
+                                    ? ChartGraphics.GetGradientColor(point.Color, Color.Black, 0.4)
+                                    : Color.Transparent,
+                                point.BackHatchStyle,
+                                point.BackImage,
+                                point.BackImageWrapMode,
+                                point.BackImageTransparentColor,
+                                point.BackImageAlignment,
+                                point.BackGradientStyle,
+                                (drawSegment) ? point.BackSecondaryColor : Color.Transparent,
+                                (drawSegment) ? point.BorderColor : Color.Transparent,
+                                point.BorderWidth,
+                                point.BorderDashStyle,
+                                PenAlignment.Center,
+                                (drawSegmentShadow) ? point.series.ShadowOffset : 0,
+                                point.series.ShadowColor
+                            );
                     }
 
                     if (this.Common.ProcessModeRegions)
@@ -1033,25 +1036,26 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                     if (this.Common.ProcessModePaint)
                     {
                         // Fill graphics path
-                        this.Graph.DrawPathAbs(
-                            topCurve,
-                            (drawSegment)
-                                ? ChartGraphics.GetGradientColor(point.Color, Color.Black, 0.4)
-                                : Color.Transparent,
-                            point.BackHatchStyle,
-                            point.BackImage,
-                            point.BackImageWrapMode,
-                            point.BackImageTransparentColor,
-                            point.BackImageAlignment,
-                            point.BackGradientStyle,
-                            (drawSegment) ? point.BackSecondaryColor : Color.Transparent,
-                            (drawSegment) ? point.BorderColor : Color.Transparent,
-                            point.BorderWidth,
-                            point.BorderDashStyle,
-                            PenAlignment.Center,
-                            (drawSegmentShadow) ? point.series.ShadowOffset : 0,
-                            point.series.ShadowColor
-                        );
+                        this.Graph
+                            .DrawPathAbs(
+                                topCurve,
+                                (drawSegment)
+                                    ? ChartGraphics.GetGradientColor(point.Color, Color.Black, 0.4)
+                                    : Color.Transparent,
+                                point.BackHatchStyle,
+                                point.BackImage,
+                                point.BackImageWrapMode,
+                                point.BackImageTransparentColor,
+                                point.BackImageAlignment,
+                                point.BackGradientStyle,
+                                (drawSegment) ? point.BackSecondaryColor : Color.Transparent,
+                                (drawSegment) ? point.BorderColor : Color.Transparent,
+                                point.BorderWidth,
+                                point.BorderDashStyle,
+                                PenAlignment.Center,
+                                (drawSegmentShadow) ? point.series.ShadowOffset : 0,
+                                point.series.ShadowColor
+                            );
                     }
 
                     if (this.Common.ProcessModeRegions)
@@ -1430,23 +1434,24 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                 else
                 {
                     // Fill graphics path
-                    this.Graph.DrawPathAbs(
-                        segmentPath,
-                        (drawSegment) ? point.Color : Color.Transparent,
-                        point.BackHatchStyle,
-                        point.BackImage,
-                        point.BackImageWrapMode,
-                        point.BackImageTransparentColor,
-                        point.BackImageAlignment,
-                        point.BackGradientStyle,
-                        (drawSegment) ? point.BackSecondaryColor : Color.Transparent,
-                        (drawSegment) ? point.BorderColor : Color.Transparent,
-                        point.BorderWidth,
-                        point.BorderDashStyle,
-                        PenAlignment.Center,
-                        (drawSegmentShadow) ? point.series.ShadowOffset : 0,
-                        point.series.ShadowColor
-                    );
+                    this.Graph
+                        .DrawPathAbs(
+                            segmentPath,
+                            (drawSegment) ? point.Color : Color.Transparent,
+                            point.BackHatchStyle,
+                            point.BackImage,
+                            point.BackImageWrapMode,
+                            point.BackImageTransparentColor,
+                            point.BackImageAlignment,
+                            point.BackGradientStyle,
+                            (drawSegment) ? point.BackSecondaryColor : Color.Transparent,
+                            (drawSegment) ? point.BorderColor : Color.Transparent,
+                            point.BorderWidth,
+                            point.BorderDashStyle,
+                            PenAlignment.Center,
+                            (drawSegmentShadow) ? point.series.ShadowOffset : 0,
+                            point.series.ShadowColor
+                        );
                 }
             }
 
@@ -1482,25 +1487,26 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                     if (this.Common.ProcessModePaint)
                     {
                         // Fill graphics path
-                        this.Graph.DrawPathAbs(
-                            topCurve,
-                            (drawSegment)
-                                ? ChartGraphics.GetGradientColor(point.Color, Color.Black, 0.4)
-                                : Color.Transparent,
-                            point.BackHatchStyle,
-                            point.BackImage,
-                            point.BackImageWrapMode,
-                            point.BackImageTransparentColor,
-                            point.BackImageAlignment,
-                            point.BackGradientStyle,
-                            (drawSegment) ? point.BackSecondaryColor : Color.Transparent,
-                            (drawSegment) ? point.BorderColor : Color.Transparent,
-                            point.BorderWidth,
-                            point.BorderDashStyle,
-                            PenAlignment.Center,
-                            (drawSegmentShadow) ? point.series.ShadowOffset : 0,
-                            point.series.ShadowColor
-                        );
+                        this.Graph
+                            .DrawPathAbs(
+                                topCurve,
+                                (drawSegment)
+                                    ? ChartGraphics.GetGradientColor(point.Color, Color.Black, 0.4)
+                                    : Color.Transparent,
+                                point.BackHatchStyle,
+                                point.BackImage,
+                                point.BackImageWrapMode,
+                                point.BackImageTransparentColor,
+                                point.BackImageAlignment,
+                                point.BackGradientStyle,
+                                (drawSegment) ? point.BackSecondaryColor : Color.Transparent,
+                                (drawSegment) ? point.BorderColor : Color.Transparent,
+                                point.BorderWidth,
+                                point.BorderDashStyle,
+                                PenAlignment.Center,
+                                (drawSegmentShadow) ? point.series.ShadowOffset : 0,
+                                point.series.ShadowColor
+                            );
                     }
 
                     if (this.Common.ProcessModeRegions)
@@ -1543,25 +1549,26 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                     if (this.Common.ProcessModePaint)
                     {
                         // Fill graphics path
-                        this.Graph.DrawPathAbs(
-                            topCurve,
-                            (drawSegment)
-                                ? ChartGraphics.GetGradientColor(point.Color, Color.Black, 0.4)
-                                : Color.Transparent,
-                            point.BackHatchStyle,
-                            point.BackImage,
-                            point.BackImageWrapMode,
-                            point.BackImageTransparentColor,
-                            point.BackImageAlignment,
-                            point.BackGradientStyle,
-                            (drawSegment) ? point.BackSecondaryColor : Color.Transparent,
-                            (drawSegment) ? point.BorderColor : Color.Transparent,
-                            point.BorderWidth,
-                            point.BorderDashStyle,
-                            PenAlignment.Center,
-                            (drawSegmentShadow) ? point.series.ShadowOffset : 0,
-                            point.series.ShadowColor
-                        );
+                        this.Graph
+                            .DrawPathAbs(
+                                topCurve,
+                                (drawSegment)
+                                    ? ChartGraphics.GetGradientColor(point.Color, Color.Black, 0.4)
+                                    : Color.Transparent,
+                                point.BackHatchStyle,
+                                point.BackImage,
+                                point.BackImageWrapMode,
+                                point.BackImageTransparentColor,
+                                point.BackImageAlignment,
+                                point.BackGradientStyle,
+                                (drawSegment) ? point.BackSecondaryColor : Color.Transparent,
+                                (drawSegment) ? point.BorderColor : Color.Transparent,
+                                point.BorderWidth,
+                                point.BorderDashStyle,
+                                PenAlignment.Center,
+                                (drawSegmentShadow) ? point.series.ShadowOffset : 0,
+                                point.series.ShadowColor
+                            );
                     }
 
                     if (this.Common.ProcessModeRegions)
@@ -1762,12 +1769,13 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                     this.Graph.StartHotRegion(labelInfo.Point);
 
                     // Get size of a single character used for spacing
-                    SizeF spacing = this.Graph.MeasureString(
-                        "W",
-                        labelInfo.Point.Font,
-                        new SizeF(1000f, 1000F),
-                        StringFormat.GenericTypographic
-                    );
+                    SizeF spacing = this.Graph
+                        .MeasureString(
+                            "W",
+                            labelInfo.Point.Font,
+                            new SizeF(1000f, 1000F),
+                            StringFormat.GenericTypographic
+                        );
 
                     // Draw a callout line
                     if (
@@ -1799,13 +1807,14 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                         Color lineColor = GetCalloutLineColor(labelInfo.Point);
 
                         // Draw callout line
-                        this.Graph.DrawLineAbs(
-                            lineColor,
-                            1,
-                            ChartDashStyle.Solid,
-                            labelInfo.CalloutPoint1,
-                            labelInfo.CalloutPoint2
-                        );
+                        this.Graph
+                            .DrawLineAbs(
+                                lineColor,
+                                1,
+                                ChartDashStyle.Solid,
+                                labelInfo.CalloutPoint1,
+                                labelInfo.CalloutPoint2
+                            );
                     }
 
                     // Get label background position
@@ -1822,23 +1831,24 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                         // Draw label text
                         using (Brush brush = new SolidBrush(labelInfo.Point.LabelForeColor))
                         {
-                            this.Graph.DrawPointLabelStringRel(
-                                this.Common,
-                                labelInfo.Text,
-                                labelInfo.Point.Font,
-                                brush,
-                                labelBackPosition,
-                                format,
-                                labelInfo.Point.LabelAngle,
-                                labelBackPosition,
-                                labelInfo.Point.LabelBackColor,
-                                labelInfo.Point.LabelBorderColor,
-                                labelInfo.Point.LabelBorderWidth,
-                                labelInfo.Point.LabelBorderDashStyle,
-                                labelInfo.Point.series,
-                                labelInfo.Point,
-                                labelInfo.PointIndex
-                            );
+                            this.Graph
+                                .DrawPointLabelStringRel(
+                                    this.Common,
+                                    labelInfo.Text,
+                                    labelInfo.Point.Font,
+                                    brush,
+                                    labelBackPosition,
+                                    format,
+                                    labelInfo.Point.LabelAngle,
+                                    labelBackPosition,
+                                    labelInfo.Point.LabelBackColor,
+                                    labelInfo.Point.LabelBorderColor,
+                                    labelInfo.Point.LabelBorderWidth,
+                                    labelInfo.Point.LabelBorderDashStyle,
+                                    labelInfo.Point.series,
+                                    labelInfo.Point,
+                                    labelInfo.PointIndex
+                                );
                         }
 
                         // End Svg Selection mode
@@ -1857,9 +1867,8 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             ArrayList list = new ArrayList();
 
             // Get area position in pixels
-            RectangleF plotAreaPositionAbs = this.Graph.GetAbsoluteRectangle(
-                this.Area.Position.ToRectangleF()
-            );
+            RectangleF plotAreaPositionAbs = this.Graph
+                .GetAbsoluteRectangle(this.Area.Position.ToRectangleF());
 
             // Get funnel chart type series
             Series series = GetDataSeries();
@@ -1918,12 +1927,13 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                             }
 
                             // Measure string size
-                            labelInfo.Size = this.Graph.MeasureString(
-                                labelInfo.Text,
-                                point.Font,
-                                plotAreaPositionAbs.Size,
-                                StringFormat.GenericTypographic
-                            );
+                            labelInfo.Size = this.Graph
+                                .MeasureString(
+                                    labelInfo.Text,
+                                    point.Font,
+                                    plotAreaPositionAbs.Size,
+                                    StringFormat.GenericTypographic
+                                );
 
                             // Add label information into the list
                             if (
@@ -1956,9 +1966,8 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             GetLabelsPosition();
 
             // Get spacing required to draw labels
-            RectangleF requiredSpacing = this.Graph.GetAbsoluteRectangle(
-                new RectangleF(1f, 1f, 1f, 1f)
-            );
+            RectangleF requiredSpacing = this.Graph
+                .GetAbsoluteRectangle(new RectangleF(1f, 1f, 1f, 1f));
             foreach (FunnelPointLabelInfo labelInfo in this.labelInfoList)
             {
                 // Add additional horizontal spacing for outside labels

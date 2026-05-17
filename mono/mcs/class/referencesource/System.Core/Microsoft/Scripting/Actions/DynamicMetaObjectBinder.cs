@@ -350,8 +350,7 @@ namespace System.Dynamic
         }
 
 #if !SILVERLIGHT
-        private static readonly Type ComObjectType = typeof(object)
-            .Assembly
+        private static readonly Type ComObjectType = typeof(object).Assembly
             .GetType("System.__ComObject");
 
         private static bool IsComObject(object obj)

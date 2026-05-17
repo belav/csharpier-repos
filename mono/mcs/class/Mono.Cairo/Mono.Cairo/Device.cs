@@ -62,8 +62,7 @@ namespace Cairo
         {
             get
             {
-                return System
-                    .Runtime
+                return System.Runtime
                     .InteropServices
                     .Marshal
                     .PtrToStringAuto(

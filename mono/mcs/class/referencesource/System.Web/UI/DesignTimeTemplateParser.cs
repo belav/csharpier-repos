@@ -91,8 +91,7 @@ namespace System.Web.UI
                         // Instantiate the control
                         ControlBuilder controlBuilder = (ControlBuilder)cur;
 
-                        System
-                            .Diagnostics
+                        System.Diagnostics
                             .Debug
                             .Assert(controlBuilder.CurrentFilterResolutionService == null);
 

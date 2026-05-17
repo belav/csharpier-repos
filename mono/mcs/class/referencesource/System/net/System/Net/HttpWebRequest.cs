@@ -2500,8 +2500,7 @@ namespace System.Net
                                 "EndGetResponse",
                                 castedAsyncResult.Result as Exception
                             );
-                        NetworkingPerfCounters
-                            .Instance
+                        NetworkingPerfCounters.Instance
                             .Increment(NetworkingPerfCounterName.HttpWebRequestFailed);
                         throw (Exception)castedAsyncResult.Result;
                     }
@@ -2743,8 +2742,7 @@ namespace System.Net
                                 "GetResponse",
                                 _ReadAResult.Result as Exception
                             );
-                        NetworkingPerfCounters
-                            .Instance
+                        NetworkingPerfCounters.Instance
                             .Increment(NetworkingPerfCounterName.HttpWebRequestFailed);
                         throw (Exception)_ReadAResult.Result;
                     }
@@ -3711,8 +3709,7 @@ namespace System.Net
                         + exception
                 );
 
-                NetworkingPerfCounters
-                    .Instance
+                NetworkingPerfCounters.Instance
                     .Increment(NetworkingPerfCounterName.HttpWebRequestAborted);
 
                 m_OnceFailed = true;
@@ -5876,8 +5873,7 @@ namespace System.Net
             int writeBufferLength =
                 CurrentMethod.Name.Length + host.ByteCount + RequestLineConstantSize + headersSize;
             SetWriteBuffer(writeBufferLength);
-            offset = Encoding
-                .ASCII
+            offset = Encoding.ASCII
                 .GetBytes(CurrentMethod.Name, 0, CurrentMethod.Name.Length, WriteBuffer, 0);
             WriteBuffer[offset++] = (byte)' ';
             host.Copy(WriteBuffer, offset);
@@ -6006,8 +6002,7 @@ namespace System.Net
                 + headersSize;
             SetWriteBuffer(writeBufferLength);
 
-            offset = Encoding
-                .ASCII
+            offset = Encoding.ASCII
                 .GetBytes(CurrentMethod.Name, 0, CurrentMethod.Name.Length, WriteBuffer, 0);
             WriteBuffer[offset++] = (byte)' ';
             offset += Encoding.ASCII.GetBytes(scheme, 0, scheme.Length, WriteBuffer, offset);
@@ -6088,8 +6083,7 @@ namespace System.Net
                 + headersSize;
             SetWriteBuffer(writeBufferLength);
 
-            offset = Encoding
-                .ASCII
+            offset = Encoding.ASCII
                 .GetBytes(CurrentMethod.Name, 0, CurrentMethod.Name.Length, WriteBuffer, 0);
             WriteBuffer[offset++] = (byte)' ';
             offset += Encoding.ASCII.GetBytes(scheme, 0, scheme.Length, WriteBuffer, offset);
@@ -6129,12 +6123,10 @@ namespace System.Net
                 + headersSize;
 
             SetWriteBuffer(writeBufferLength);
-            offset = Encoding
-                .ASCII
+            offset = Encoding.ASCII
                 .GetBytes(CurrentMethod.Name, 0, CurrentMethod.Name.Length, WriteBuffer, 0);
             WriteBuffer[offset++] = (byte)' ';
-            offset += Encoding
-                .ASCII
+            offset += Encoding.ASCII
                 .GetBytes(pathAndQuery, 0, pathAndQuery.Length, WriteBuffer, offset);
             WriteBuffer[offset++] = (byte)' ';
             return offset;
@@ -6418,8 +6410,7 @@ namespace System.Net
 
             int offset;
             string requestHeadersString = _HttpRequestHeaders.ToString();
-            int requestHeadersSize = WebHeaderCollection
-                .HeaderEncoding
+            int requestHeadersSize = WebHeaderCollection.HeaderEncoding
                 .GetByteCount(requestHeadersString);
 
             // NOTE: Perhaps we should cache this on this-object in the future?
@@ -6457,8 +6448,7 @@ namespace System.Net
             // Serialze the headers out to the byte Buffer,
             //   by converting them to bytes from UNICODE
             //
-            WebHeaderCollection
-                .HeaderEncoding
+            WebHeaderCollection.HeaderEncoding
                 .GetBytes(
                     requestHeadersString,
                     0,
@@ -6507,8 +6497,7 @@ namespace System.Net
             CheckConnectPermission(uri, false);
 
             m_StartTimestamp = NetworkingPerfCounters.GetTimestamp();
-            NetworkingPerfCounters
-                .Instance
+            NetworkingPerfCounters.Instance
                 .Increment(NetworkingPerfCounterName.HttpWebRequestCreated);
 
             // OOPS, This ctor can also be called with FTP scheme but then it should only allowed if going through the proxy
@@ -7218,9 +7207,8 @@ namespace System.Net
                     HttpWebResponse response = _HttpResponse;
                     if (response != null)
                     {
-                        response.InternalSetIsMutuallyAuthenticated = ServerAuthenticationState
-                            .Authorization
-                            .MutuallyAuthenticated;
+                        response.InternalSetIsMutuallyAuthenticated =
+                            ServerAuthenticationState.Authorization.MutuallyAuthenticated;
 #if !FEATURE_PAL
                         if (
                             AuthenticationLevel == AuthenticationLevel.MutualAuthRequired

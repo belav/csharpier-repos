@@ -19,8 +19,7 @@ public class CustomMapFromTest : IntegrationTest<CustomMapFromTest.DatabaseIniti
     {
         using (var context = new Context())
         {
-            var customerVms = context
-                .Customers
+            var customerVms = context.Customers
                 .Select(c => new CustomerViewModel
                 {
                     FirstName = c.FirstName,
@@ -81,8 +80,7 @@ public class CustomMapFromTest : IntegrationTest<CustomMapFromTest.DatabaseIniti
     {
         protected override void Seed(Context context)
         {
-            context
-                .Customers
+            context.Customers
                 .Add(
                     new Customer
                     {

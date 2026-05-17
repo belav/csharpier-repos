@@ -30,8 +30,7 @@ public class HubConnectionBuilderTests
     public void CannotCreateConnectionWithNoEndPoint()
     {
         var builder = new HubConnectionBuilder();
-        builder
-            .Services
+        builder.Services
             .AddSingleton<IConnectionFactory>(
                 new HttpConnectionFactory(
                     Options.Create(new HttpConnectionOptions()),
@@ -86,8 +85,7 @@ public class HubConnectionBuilderTests
     public void BuildCanOnlyBeCalledOnce()
     {
         var builder = new HubConnectionBuilder();
-        builder
-            .Services
+        builder.Services
             .AddSingleton<IConnectionFactory>(
                 new HttpConnectionFactory(
                     Options.Create(new HttpConnectionOptions()),

@@ -174,8 +174,7 @@ namespace System.Security.Cryptography.X509Certificates
             [NotNullWhen(true)] out ICertificatePal? certPal
         )
         {
-            SafeX509Handle certHandle = Interop
-                .Crypto
+            SafeX509Handle certHandle = Interop.Crypto
                 .DecodeX509(ref MemoryMarshal.GetReference(rawData), rawData.Length);
 
             if (certHandle.IsInvalid)
@@ -317,8 +316,7 @@ namespace System.Security.Cryptography.X509Certificates
                 // don't use it here.
                 return _subject ??= UseCertInteriorData(static cert =>
                 {
-                    return Interop
-                        .Crypto
+                    return Interop.Crypto
                         .LoadX500Name(Interop.Crypto.X509GetSubjectName(cert))
                         .Name;
                 });
@@ -368,8 +366,7 @@ namespace System.Security.Cryptography.X509Certificates
             get
             {
                 using (
-                    SafeSharedAsn1IntegerHandle serialNumber = Interop
-                        .Crypto
+                    SafeSharedAsn1IntegerHandle serialNumber = Interop.Crypto
                         .X509GetSerialNumber(_cert)
                 )
                 {
@@ -417,8 +414,7 @@ namespace System.Security.Cryptography.X509Certificates
         {
             get
             {
-                return Interop
-                    .Crypto
+                return Interop.Crypto
                     .OpenSslEncode(Interop.Crypto.GetX509DerSize, Interop.Crypto.EncodeX509, _cert);
             }
         }
@@ -507,31 +503,26 @@ namespace System.Security.Cryptography.X509Certificates
                     switch (oidValue)
                     {
                         case Oids.ApplicationCertPolicies:
-                            policyData.ApplicationCertPolicies = Interop
-                                .Crypto
+                            policyData.ApplicationCertPolicies = Interop.Crypto
                                 .GetAsn1StringBytes(dataPtr);
                             break;
                         case Oids.CertPolicies:
                             policyData.CertPolicies = Interop.Crypto.GetAsn1StringBytes(dataPtr);
                             break;
                         case Oids.CertPolicyMappings:
-                            policyData.CertPolicyMappings = Interop
-                                .Crypto
+                            policyData.CertPolicyMappings = Interop.Crypto
                                 .GetAsn1StringBytes(dataPtr);
                             break;
                         case Oids.CertPolicyConstraints:
-                            policyData.CertPolicyConstraints = Interop
-                                .Crypto
+                            policyData.CertPolicyConstraints = Interop.Crypto
                                 .GetAsn1StringBytes(dataPtr);
                             break;
                         case Oids.EnhancedKeyUsage:
-                            policyData.EnhancedKeyUsage = Interop
-                                .Crypto
+                            policyData.EnhancedKeyUsage = Interop.Crypto
                                 .GetAsn1StringBytes(dataPtr);
                             break;
                         case Oids.InhibitAnyPolicyExtension:
-                            policyData.InhibitAnyPolicyExtension = Interop
-                                .Crypto
+                            policyData.InhibitAnyPolicyExtension = Interop.Crypto
                                 .GetAsn1StringBytes(dataPtr);
                             break;
                     }
@@ -583,8 +574,7 @@ namespace System.Security.Cryptography.X509Certificates
             int nid = Interop.Crypto.ResolveRequiredNid(oidValue);
 
             using (
-                SafeSharedAsn1OctetStringHandle data = Interop
-                    .Crypto
+                SafeSharedAsn1OctetStringHandle data = Interop.Crypto
                     .X509FindExtensionData(cert, nid)
             )
             {
@@ -762,8 +752,7 @@ namespace System.Security.Cryptography.X509Certificates
         public string GetNameInfo(X509NameType nameType, bool forIssuer)
         {
             using (
-                SafeBioHandle bioHandle = Interop
-                    .Crypto
+                SafeBioHandle bioHandle = Interop.Crypto
                     .GetX509NameInfo(_cert, (int)nameType, forIssuer)
             )
             {

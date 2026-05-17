@@ -23,8 +23,7 @@ namespace System.Collections.Generic
         public SynchronizedCollection(object syncRoot)
         {
             if (syncRoot == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("syncRoot"));
 
             this.items = new List<T>();
@@ -34,12 +33,10 @@ namespace System.Collections.Generic
         public SynchronizedCollection(object syncRoot, IEnumerable<T> list)
         {
             if (syncRoot == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("syncRoot"));
             if (list == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("list"));
 
             this.items = new List<T>(list);
@@ -49,12 +46,10 @@ namespace System.Collections.Generic
         public SynchronizedCollection(object syncRoot, params T[] list)
         {
             if (syncRoot == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("syncRoot"));
             if (list == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("list"));
 
             this.items = new List<T>(list.Length);
@@ -99,8 +94,7 @@ namespace System.Collections.Generic
                 lock (this.sync)
                 {
                     if (index < 0 || index >= this.items.Count)
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new ArgumentOutOfRangeException(
                                     "index",
@@ -168,8 +162,7 @@ namespace System.Collections.Generic
             lock (this.sync)
             {
                 if (index < 0 || index > this.items.Count)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentOutOfRangeException(
                                 "index",
@@ -214,8 +207,7 @@ namespace System.Collections.Generic
             lock (this.sync)
             {
                 if (index < 0 || index >= this.items.Count)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentOutOfRangeException(
                                 "index",
@@ -337,8 +329,7 @@ namespace System.Collections.Generic
             {
                 if (typeof(T).IsValueType)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentException(
                                 SR.GetString(SR.SynchronizedCollectionWrongTypeNull)
@@ -348,8 +339,7 @@ namespace System.Collections.Generic
             }
             else if (!(value is T))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentException(
                             SR.GetString(

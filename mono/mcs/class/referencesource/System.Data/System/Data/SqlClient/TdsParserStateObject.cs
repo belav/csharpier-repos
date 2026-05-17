@@ -42,8 +42,7 @@ namespace System.Data.SqlClient
         private const long CheckConnectionWindow = 50000;
 
         private static int _objectTypeCount; // Bid counter
-        internal readonly int _objectID = System
-            .Threading
+        internal readonly int _objectID = System.Threading
             .Interlocked
             .Increment(ref _objectTypeCount);
 
@@ -681,8 +680,7 @@ namespace System.Data.SqlClient
                                 {
                                     try
                                     {
-                                        _parser
-                                            .Connection
+                                        _parser.Connection
                                             ._parserLock
                                             .Wait(
                                                 canReleaseFromAnyThread: false,
@@ -3033,8 +3031,7 @@ namespace System.Data.SqlClient
                                 (_parser.State == TdsParserState.OpenNotLoggedIn)
                                 && (
                                     _parser.Connection.ConnectionOptions.MultiSubnetFailover
-                                    || _parser
-                                        .Connection
+                                    || _parser.Connection
                                         .ConnectionOptions
                                         .TransparentNetworkIPResolution
                                 )
@@ -3286,12 +3283,13 @@ namespace System.Data.SqlClient
 
                 // The safest thing to do is to ensure that the connection is broken and attempt to cancel the task
                 // This must be done from another thread to not block the callback thread
-                Task.Factory.StartNew(() =>
-                {
-                    _parser.State = TdsParserState.Broken;
-                    _parser.Connection.BreakConnection();
-                    source.TrySetCanceled();
-                });
+                Task.Factory
+                    .StartNew(() =>
+                    {
+                        _parser.State = TdsParserState.Broken;
+                        _parser.Connection.BreakConnection();
+                        source.TrySetCanceled();
+                    });
             }
         }
 

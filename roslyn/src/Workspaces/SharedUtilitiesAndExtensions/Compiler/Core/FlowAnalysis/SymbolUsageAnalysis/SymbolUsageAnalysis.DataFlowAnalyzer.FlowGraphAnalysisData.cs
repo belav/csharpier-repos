@@ -148,8 +148,7 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
                         controlFlowGraph
                     );
                     Debug.Assert(
-                        LValueFlowCapturesInGraph
-                            .Values
+                        LValueFlowCapturesInGraph.Values
                             .All(kind =>
                                 kind
                                     is FlowCaptureKind.LValueCapture
@@ -293,8 +292,7 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
                                 or OperationKind.AnonymousFunction
                         )
                         {
-                            var dataFlow = operation
-                                .SemanticModel
+                            var dataFlow = operation.SemanticModel
                                 .AnalyzeDataFlow(operation.Syntax);
                             builder.AddRange(dataFlow.Captured.OfType<ILocalSymbol>());
                         }

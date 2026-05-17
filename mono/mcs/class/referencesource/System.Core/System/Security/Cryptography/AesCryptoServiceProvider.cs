@@ -484,8 +484,7 @@ namespace System.Security.Cryptography
             try
             {
                 if (
-                    !CapiNative
-                        .UnsafeNativeMethods
+                    !CapiNative.UnsafeNativeMethods
                         .CryptGenKey(
                             m_cspHandle,
                             GetAlgorithmId(KeySizeValue),

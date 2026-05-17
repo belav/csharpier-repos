@@ -97,22 +97,19 @@ namespace System.ServiceModel.Dispatcher
 
         public override void WriteStartObject(XmlDictionaryWriter writer, object graph)
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(new NotImplementedException());
         }
 
         public override void WriteObjectContent(XmlDictionaryWriter writer, object graph)
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(new NotImplementedException());
         }
 
         public override void WriteEndObject(XmlDictionaryWriter writer)
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(new NotImplementedException());
         }
 
@@ -133,8 +130,7 @@ namespace System.ServiceModel.Dispatcher
         public override bool IsStartObject(XmlDictionaryReader reader)
         {
             if (reader == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("reader"));
 
             reader.MoveToElement();

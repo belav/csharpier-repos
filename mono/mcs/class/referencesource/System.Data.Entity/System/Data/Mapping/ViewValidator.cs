@@ -70,8 +70,7 @@ namespace System.Data.Mapping
             {
                 get
                 {
-                    return _setMapping
-                        .EntityContainerMapping
+                    return _setMapping.EntityContainerMapping
                         .StorageMappingItemCollection
                         .EdmItemCollection;
                 }
@@ -80,8 +79,7 @@ namespace System.Data.Mapping
             {
                 get
                 {
-                    return _setMapping
-                        .EntityContainerMapping
+                    return _setMapping.EntityContainerMapping
                         .StorageMappingItemCollection
                         .StoreItemCollection;
                 }
@@ -157,8 +155,7 @@ namespace System.Data.Mapping
                                 : _elementType.ToString();
                         _errors.Add(
                             new EdmSchemaError(
-                                System
-                                    .Data
+                                System.Data
                                     .Entity
                                     .Strings
                                     .Mapping_UnsupportedExpressionKind_QueryView(
@@ -185,8 +182,7 @@ namespace System.Data.Mapping
                 {
                     _errors.Add(
                         new EdmSchemaError(
-                            System
-                                .Data
+                            System.Data
                                 .Entity
                                 .Strings
                                 .Mapping_UnsupportedPropertyKind_QueryView(
@@ -225,8 +221,7 @@ namespace System.Data.Mapping
                     {
                         _errors.Add(
                             new EdmSchemaError(
-                                System
-                                    .Data
+                                System.Data
                                     .Entity
                                     .Strings
                                     .Mapping_UnsupportedInitialization_QueryView(
@@ -312,8 +307,7 @@ namespace System.Data.Mapping
                 {
                     _errors.Add(
                         new EdmSchemaError(
-                            System
-                                .Data
+                            System.Data
                                 .Entity
                                 .Strings
                                 .Mapping_UnsupportedFunctionCall_QueryView(
@@ -364,8 +358,7 @@ namespace System.Data.Mapping
                 {
                     _errors.Add(
                         new EdmSchemaError(
-                            System
-                                .Data
+                            System.Data
                                 .Entity
                                 .Strings
                                 .Mapping_UnsupportedScanTarget_QueryView(
@@ -425,9 +418,13 @@ namespace System.Data.Mapping
             private void VisitExpressionBindingEnterScope(DbExpressionBinding binding)
             {
                 DbExpressionEntitySetInfo info = this.VisitExpressionBinding(binding);
-                this.variableScopes.Push(
-                    new KeyValuePair<string, DbExpressionEntitySetInfo>(binding.VariableName, info)
-                );
+                this.variableScopes
+                    .Push(
+                        new KeyValuePair<string, DbExpressionEntitySetInfo>(
+                            binding.VariableName,
+                            info
+                        )
+                    );
             }
 
             private void VisitExpressionBindingExitScope()
@@ -447,8 +444,7 @@ namespace System.Data.Mapping
                 //query view, it is better to be defensive since we might have missed some path up the tree
                 //while computing the sets
                 if (
-                    setInfos
-                        .SetInfos
+                    setInfos.SetInfos
                         .All(it =>
                             (
                                 (it.Value != null)
@@ -459,8 +455,7 @@ namespace System.Data.Mapping
                 )
                 {
                     foreach (
-                        DbExpressionSimpleTypeEntitySetInfo setInfo in setInfos
-                            .SetInfos
+                        DbExpressionSimpleTypeEntitySetInfo setInfo in setInfos.SetInfos
                             .Select(it => it.Value)
                     )
                     {
@@ -470,8 +465,7 @@ namespace System.Data.Mapping
                         {
                             _errors.Add(
                                 new EdmSchemaError(
-                                    System
-                                        .Data
+                                    System.Data
                                         .Entity
                                         .Strings
                                         .Mapping_EntitySetMismatchOnAssociationSetEnd_QueryView(

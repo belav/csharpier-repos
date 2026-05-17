@@ -243,8 +243,7 @@ public class ResponseTrailersTests : LoggedTest
             Assert.Equal(HttpVersion.Version20, response.Version);
             // Avoid HttpContent's automatic content-length calculation.
             Assert.True(
-                response
-                    .Content
+                response.Content
                     .Headers
                     .TryGetValues(HeaderNames.ContentLength, out var contentLength),
                 HeaderNames.ContentLength
@@ -290,8 +289,7 @@ public class ResponseTrailersTests : LoggedTest
             Assert.Equal(HttpVersion.Version20, response.Version);
             // Avoid HttpContent's automatic content-length calculation.
             Assert.True(
-                response
-                    .Content
+                response.Content
                     .Headers
                     .TryGetValues(HeaderNames.ContentLength, out var contentLength),
                 HeaderNames.ContentLength
@@ -335,8 +333,7 @@ public class ResponseTrailersTests : LoggedTest
             Assert.Equal(HttpVersion.Version20, response.Version);
             // Avoid HttpContent's automatic content-length calculation.
             Assert.True(
-                response
-                    .Content
+                response.Content
                     .Headers
                     .TryGetValues(HeaderNames.ContentLength, out var contentLength),
                 HeaderNames.ContentLength
@@ -435,8 +432,7 @@ public class ResponseTrailersTests : LoggedTest
                 out var address,
                 httpContext =>
                 {
-                    httpContext
-                        .Response
+                    httpContext.Response
                         .AppendTrailer(
                             "trailername",
                             new StringValues(new[] { "TrailerValue0", "TrailerValue1" })
@@ -483,8 +479,7 @@ public class ResponseTrailersTests : LoggedTest
                 out var address,
                 httpContext =>
                 {
-                    httpContext
-                        .Response
+                    httpContext.Response
                         .AppendTrailer(
                             "ThisIsALongerHeaderNameThatStillWorksForReals",
                             new StringValues(values)

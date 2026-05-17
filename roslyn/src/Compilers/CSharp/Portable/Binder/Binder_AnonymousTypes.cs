@@ -23,8 +23,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             BindingDiagnosticBag diagnostics
         )
         {
-            MessageID
-                .IDS_FeatureAnonymousTypes
+            MessageID.IDS_FeatureAnonymousTypes
                 .CheckFeatureAvailability(diagnostics, node.NewKeyword);
 
             //  prepare

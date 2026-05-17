@@ -321,8 +321,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
 
                 // If this diagnostic is for LSP only, then we won't show it here
                 if (
-                    diagnostic
-                        .Properties
+                    diagnostic.Properties
                         .ContainsKey(nameof(DocumentPropertiesService.DiagnosticsLspClientName))
                 )
                 {
@@ -554,10 +553,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                 private static ErrorRank GetErrorRank(DiagnosticData item)
                 {
                     if (
-                        !item.Properties.TryGetValue(
-                            WellKnownDiagnosticPropertyNames.Origin,
-                            out var value
-                        )
+                        !item.Properties
+                            .TryGetValue(WellKnownDiagnosticPropertyNames.Origin, out var value)
                     )
                     {
                         return ErrorRank.Other;

@@ -114,8 +114,7 @@ namespace System.Reflection.Metadata
         internal static void AddRemoteInvokeOptions(ref RemoteInvokeOptions options)
         {
             options = options ?? new RemoteInvokeOptions();
-            options
-                .StartInfo
+            options.StartInfo
                 .EnvironmentVariables
                 .Add(DotNetModifiableAssembliesSwitch, DotNetModifiableAssembliesValue);
             /* Ask mono to use .dpdb data to generate sequence points even without a debugger attached */
@@ -196,8 +195,7 @@ namespace System.Reflection.Metadata
         private static Action<Type[]> GetClearCacheMethod()
         {
             // TODO: Unify with src/libraries/System.Runtime/tests/System/Reflection/ReflectionCacheTests.cs
-            Type updateHandler = typeof(Type)
-                .Assembly
+            Type updateHandler = typeof(Type).Assembly
                 .GetType(
                     "System.Reflection.Metadata.RuntimeTypeMetadataUpdateHandler",
                     throwOnError: true,

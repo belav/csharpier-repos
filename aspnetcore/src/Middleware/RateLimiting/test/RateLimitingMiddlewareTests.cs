@@ -216,8 +216,7 @@ public class RateLimitingMiddlewareTests
         var onRejectedInvoked = false;
         var options = CreateOptionsAccessor();
         var name = "myEndpoint";
-        options
-            .Value
+        options.Value
             .AddPolicy<string>(
                 name,
                 (
@@ -263,8 +262,7 @@ public class RateLimitingMiddlewareTests
         var onRejectedInvoked = false;
         var options = CreateOptionsAccessor();
         var name = "myEndpoint";
-        options
-            .Value
+        options.Value
             .AddFixedWindowLimiter(
                 name,
                 options =>
@@ -480,11 +478,9 @@ public class RateLimitingMiddlewareTests
         var endpointName2 = "myEndpoint2";
         var duplicateKey = "myKey";
         // Two policies with the same partition key should not collide, because DefaultKeyType has reference equality
-        options
-            .Value
+        options.Value
             .AddPolicy<string>(endpointName1, new TestRateLimiterPolicy(duplicateKey, 404, false));
-        options
-            .Value
+        options.Value
             .AddPolicy<string>(endpointName2, new TestRateLimiterPolicy(duplicateKey, 400, false));
         // This OnRejected should be ignored in favor of the ones on the policy
         options.Value.OnRejected = (context, token) =>
@@ -525,8 +521,7 @@ public class RateLimitingMiddlewareTests
         var endpointName2 = "myEndpoint2";
         var duplicateKey = "myKey";
         // Two policies with the same partition key should not collide, because DefaultKeyType has reference equality
-        options
-            .Value
+        options.Value
             .AddPolicy<string>(
                 endpointName1,
                 key =>
@@ -540,8 +535,7 @@ public class RateLimitingMiddlewareTests
                     );
                 }
             );
-        options
-            .Value
+        options.Value
             .AddPolicy<string>(
                 endpointName2,
                 key =>

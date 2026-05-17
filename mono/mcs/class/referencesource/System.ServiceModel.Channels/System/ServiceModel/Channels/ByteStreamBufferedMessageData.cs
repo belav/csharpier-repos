@@ -21,8 +21,7 @@ namespace System.ServiceModel.Channels
         {
             if (buffer.Array == null)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .ArgumentNull(SR.ArgumentPropertyShouldNotBeNullError("buffer.Array"));
             }
 

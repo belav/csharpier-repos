@@ -23,8 +23,7 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
         {
             try
             {
-                var syntaxFactsService = newDocument
-                    .Project
+                var syntaxFactsService = newDocument.Project
                     .Services
                     .GetService<ISyntaxFactsService>();
                 if (syntaxFactsService == null)

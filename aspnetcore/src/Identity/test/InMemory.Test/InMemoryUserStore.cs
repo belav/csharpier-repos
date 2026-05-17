@@ -47,14 +47,15 @@ public class InMemoryUserStore<TUser>
     {
         foreach (var claim in claims)
         {
-            user.Claims.Add(
-                new PocoUserClaim
-                {
-                    ClaimType = claim.Type,
-                    ClaimValue = claim.Value,
-                    UserId = user.Id,
-                }
-            );
+            user.Claims
+                .Add(
+                    new PocoUserClaim
+                    {
+                        ClaimType = claim.Type,
+                        ClaimValue = claim.Value,
+                        UserId = user.Id,
+                    }
+                );
         }
         return Task.FromResult(0);
     }
@@ -85,9 +86,12 @@ public class InMemoryUserStore<TUser>
     {
         foreach (var claim in claims)
         {
-            var entity = user.Claims.FirstOrDefault(uc =>
-                uc.UserId == user.Id && uc.ClaimType == claim.Type && uc.ClaimValue == claim.Value
-            );
+            var entity = user.Claims
+                .FirstOrDefault(uc =>
+                    uc.UserId == user.Id
+                    && uc.ClaimType == claim.Type
+                    && uc.ClaimValue == claim.Value
+                );
             if (entity != null)
             {
                 user.Claims.Remove(entity);
@@ -231,15 +235,16 @@ public class InMemoryUserStore<TUser>
         CancellationToken cancellationToken = default(CancellationToken)
     )
     {
-        user.Logins.Add(
-            new PocoUserLogin
-            {
-                UserId = user.Id,
-                ProviderKey = login.ProviderKey,
-                LoginProvider = login.LoginProvider,
-                ProviderDisplayName = login.ProviderDisplayName,
-            }
-        );
+        user.Logins
+            .Add(
+                new PocoUserLogin
+                {
+                    UserId = user.Id,
+                    ProviderKey = login.ProviderKey,
+                    LoginProvider = login.LoginProvider,
+                    ProviderDisplayName = login.ProviderDisplayName,
+                }
+            );
         _logins[GetLoginKey(login.LoginProvider, login.ProviderKey)] = user;
         return Task.FromResult(0);
     }
@@ -251,9 +256,12 @@ public class InMemoryUserStore<TUser>
         CancellationToken cancellationToken = default(CancellationToken)
     )
     {
-        var loginEntity = user.Logins.SingleOrDefault(l =>
-            l.ProviderKey == providerKey && l.LoginProvider == loginProvider && l.UserId == user.Id
-        );
+        var loginEntity = user.Logins
+            .SingleOrDefault(l =>
+                l.ProviderKey == providerKey
+                && l.LoginProvider == loginProvider
+                && l.UserId == user.Id
+            );
         if (loginEntity != null)
         {
             user.Logins.Remove(loginEntity);
@@ -508,24 +516,26 @@ public class InMemoryUserStore<TUser>
         CancellationToken cancellationToken
     )
     {
-        var tokenEntity = user.Tokens.SingleOrDefault(l =>
-            l.TokenName == name && l.LoginProvider == loginProvider && l.UserId == user.Id
-        );
+        var tokenEntity = user.Tokens
+            .SingleOrDefault(l =>
+                l.TokenName == name && l.LoginProvider == loginProvider && l.UserId == user.Id
+            );
         if (tokenEntity != null)
         {
             tokenEntity.TokenValue = value;
         }
         else
         {
-            user.Tokens.Add(
-                new PocoUserToken
-                {
-                    UserId = user.Id,
-                    LoginProvider = loginProvider,
-                    TokenName = name,
-                    TokenValue = value,
-                }
-            );
+            user.Tokens
+                .Add(
+                    new PocoUserToken
+                    {
+                        UserId = user.Id,
+                        LoginProvider = loginProvider,
+                        TokenName = name,
+                        TokenValue = value,
+                    }
+                );
         }
         return Task.FromResult(0);
     }
@@ -537,9 +547,10 @@ public class InMemoryUserStore<TUser>
         CancellationToken cancellationToken
     )
     {
-        var tokenEntity = user.Tokens.SingleOrDefault(l =>
-            l.TokenName == name && l.LoginProvider == loginProvider && l.UserId == user.Id
-        );
+        var tokenEntity = user.Tokens
+            .SingleOrDefault(l =>
+                l.TokenName == name && l.LoginProvider == loginProvider && l.UserId == user.Id
+            );
         if (tokenEntity != null)
         {
             user.Tokens.Remove(tokenEntity);
@@ -554,9 +565,10 @@ public class InMemoryUserStore<TUser>
         CancellationToken cancellationToken
     )
     {
-        var tokenEntity = user.Tokens.SingleOrDefault(l =>
-            l.TokenName == name && l.LoginProvider == loginProvider && l.UserId == user.Id
-        );
+        var tokenEntity = user.Tokens
+            .SingleOrDefault(l =>
+                l.TokenName == name && l.LoginProvider == loginProvider && l.UserId == user.Id
+            );
         return Task.FromResult(tokenEntity?.TokenValue);
     }
 

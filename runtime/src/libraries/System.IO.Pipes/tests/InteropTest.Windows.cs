@@ -25,8 +25,7 @@ namespace System.IO.Pipes.Tests
             char* userName = stackalloc char[(int)UserNameMaxLength];
 
             if (
-                Interop
-                    .Kernel32
+                Interop.Kernel32
                     .GetNamedPipeHandleStateW(
                         handle,
                         null,
@@ -59,8 +58,7 @@ namespace System.IO.Pipes.Tests
             uint serverInstances;
 
             if (
-                Interop
-                    .Kernel32
+                Interop.Kernel32
                     .GetNamedPipeHandleStateW(handle, null, &serverInstances, null, null, null, 0)
             )
             {
@@ -94,8 +92,7 @@ namespace System.IO.Pipes.Tests
                 ) && Environment.Is64BitProcess
             )
             {
-                Interop
-                    .Kernel32
+                Interop.Kernel32
                     .LoadLibraryEx(
                         "sspicli.dll",
                         IntPtr.Zero,
@@ -103,8 +100,7 @@ namespace System.IO.Pipes.Tests
                     );
 
                 if (
-                    Interop
-                        .Kernel32
+                    Interop.Kernel32
                         .GetNamedPipeHandleStateW(
                             handle,
                             null,

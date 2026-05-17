@@ -2072,9 +2072,8 @@ namespace System.Web.UI.WebControls
                 if (String.IsNullOrEmpty(_createUserWizard.CreateUserStep.Title))
                     ((Table)InnerCell.Controls[0]).Rows[0].Visible = false;
                 else
-                    ((Table)InnerCell.Controls[0]).Rows[0].Cells[0].Text = _createUserWizard
-                        .CreateUserStep
-                        .Title;
+                    ((Table)InnerCell.Controls[0]).Rows[0].Cells[0].Text =
+                        _createUserWizard.CreateUserStep.Title;
 
                 // Row #1 - InstructionText
                 if (String.IsNullOrEmpty(_createUserWizard.InstructionText))
@@ -2338,13 +2337,11 @@ namespace System.Web.UI.WebControls
                 table.ControlStyle.Height = Unit.Percentage(100);
 
                 // Row #0
-                table
-                    .Controls
+                table.Controls
                     .Add(CreateRow(null, null, null, _createUserWizard.TitleTextStyle, null));
 
                 // Row #1
-                table
-                    .Controls
+                table.Controls
                     .Add(CreateRow(null, null, null, _createUserWizard.InstructionTextStyle, null));
 
                 // Row #2
@@ -2368,8 +2365,7 @@ namespace System.Web.UI.WebControls
                     _createUserWizard.ValidatorTextStyle
                 );
 
-                table
-                    .Controls
+                table.Controls
                     .Add(
                         CreateRow(
                             UserNameLabel,
@@ -2401,8 +2397,7 @@ namespace System.Web.UI.WebControls
                     _createUserWizard.ValidatorTextStyle
                 );
 
-                table
-                    .Controls
+                table.Controls
                     .Add(
                         CreateRow(
                             PasswordLabel,
@@ -2414,8 +2409,7 @@ namespace System.Web.UI.WebControls
                     );
 
                 // Row #4
-                table
-                    .Controls
+                table.Controls
                     .Add(
                         CreateRow(
                             new LiteralControl(String.Empty),
@@ -2449,8 +2443,7 @@ namespace System.Web.UI.WebControls
                     _createUserWizard.ValidatorTextStyle
                 );
 
-                table
-                    .Controls
+                table.Controls
                     .Add(
                         CreateRow(
                             ConfirmPasswordLabel,
@@ -2480,8 +2473,7 @@ namespace System.Web.UI.WebControls
                     _createUserWizard.ValidatorTextStyle
                 );
 
-                table
-                    .Controls
+                table.Controls
                     .Add(
                         CreateRow(
                             EmailLabel,
@@ -2511,8 +2503,7 @@ namespace System.Web.UI.WebControls
                     _createUserWizard.ValidatorTextStyle
                 );
 
-                table
-                    .Controls
+                table.Controls
                     .Add(
                         CreateRow(
                             QuestionLabel,
@@ -2542,8 +2533,7 @@ namespace System.Web.UI.WebControls
                     _createUserWizard.ValidatorTextStyle
                 );
 
-                table
-                    .Controls
+                table.Controls
                     .Add(
                         CreateRow(
                             AnswerLabel,
@@ -2645,9 +2635,8 @@ namespace System.Web.UI.WebControls
                 if (String.IsNullOrEmpty(_createUserWizard.CompleteStep.Title))
                     ((Table)InnerCell.Controls[0]).Rows[0].Visible = false;
                 else
-                    ((Table)InnerCell.Controls[0]).Rows[0].Cells[0].Text = _createUserWizard
-                        .CompleteStep
-                        .Title;
+                    ((Table)InnerCell.Controls[0]).Rows[0].Cells[0].Text =
+                        _createUserWizard.CompleteStep.Title;
 
                 // CompleteSuccessText
                 if (String.IsNullOrEmpty(_createUserWizard.CompleteSuccessText))

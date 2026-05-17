@@ -121,8 +121,7 @@ namespace System.Web.Http.WebHost
 
             // Add route data
             request.SetRouteData(_routeData);
-            CancellationToken cancellationToken = contextBase
-                .Response
+            CancellationToken cancellationToken = contextBase.Response
                 .GetClientDisconnectedTokenWhenFixed();
             HttpResponseMessage response = null;
 
@@ -184,8 +183,7 @@ namespace System.Web.Http.WebHost
 
             if (!httpRequestMessage.Headers.TryAddWithoutValidation(headerName, headerValues))
             {
-                httpRequestMessage
-                    .Content
+                httpRequestMessage.Content
                     .Headers
                     .TryAddWithoutValidation(headerName, headerValues);
             }
@@ -305,8 +303,7 @@ namespace System.Web.Http.WebHost
                 && httpContextItems.Contains(OwinEnvironmentHttpContextKey)
             )
             {
-                request
-                    .Properties
+                request.Properties
                     .Add(OwinEnvironmentKey, httpContextItems[OwinEnvironmentHttpContextKey]);
             }
 
@@ -314,21 +311,18 @@ namespace System.Web.Http.WebHost
             // the behavior for all cases except when accessing the property directly by key.
 
             // Add the retrieve client certificate delegate to the property bag to enable lookup later on
-            request
-                .Properties
+            request.Properties
                 .Add(
                     HttpPropertyKeys.RetrieveClientCertificateDelegateKey,
                     _retrieveClientCertificate
                 );
 
             // Add information about whether the request is local or not
-            request
-                .Properties
+            request.Properties
                 .Add(HttpPropertyKeys.IsLocalKey, new Lazy<bool>(() => requestBase.IsLocal));
 
             // Add information about whether custom errors are enabled for this request or not
-            request
-                .Properties
+            request.Properties
                 .Add(
                     HttpPropertyKeys.IncludeErrorDetailKey,
                     new Lazy<bool>(() => !httpContextBase.IsCustomErrorEnabled)

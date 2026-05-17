@@ -126,8 +126,7 @@ namespace System.Security.Cryptography.Pkcs.Asn1
             }
 
             explicitReader = sequenceReader.ReadSequence(new Asn1Tag(TagClass.ContextSpecific, 0));
-            System
-                .Security
+            System.Security
                 .Cryptography
                 .Pkcs
                 .Asn1
@@ -160,8 +159,7 @@ namespace System.Security.Cryptography.Pkcs.Asn1
                 explicitReader.ThrowIfNotEmpty();
             }
 
-            System
-                .Security
+            System.Security
                 .Cryptography
                 .Asn1
                 .AlgorithmIdentifierAsn
@@ -176,8 +174,7 @@ namespace System.Security.Cryptography.Pkcs.Asn1
 
                 while (collectionReader.HasData)
                 {
-                    System
-                        .Security
+                    System.Security
                         .Cryptography
                         .Pkcs
                         .Asn1

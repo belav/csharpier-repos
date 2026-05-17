@@ -192,8 +192,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 if (emitMethodBodies)
                 {
                     // By this time we have processed all types reachable from module's global namespace
-                    compilation
-                        .AnonymousTypeManager
+                    compilation.AnonymousTypeManager
                         .AssignTemplatesNamesAndCompile(
                             methodCompiler,
                             moduleBeingBuiltOpt,
@@ -430,8 +429,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 Debug.Assert(_moduleBeingBuiltOpt != null);
                 return _lazyDebugDocumentProvider ??= new DebugDocumentProvider(
                     (path, basePath) =>
-                        _moduleBeingBuiltOpt
-                            .DebugDocumentsBuilder
+                        _moduleBeingBuiltOpt.DebugDocumentsBuilder
                             .GetOrAddDebugDocument(path, basePath, CreateDebugDocumentForFile)
                 );
             }
@@ -728,8 +726,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 )
                 {
                     Debug.Assert(
-                        processedStaticInitializers
-                            .BoundInitializers
+                        processedStaticInitializers.BoundInitializers
                             .All(
                                 (init) =>
                                     (init.Kind == BoundKind.FieldEqualsValue)
@@ -1337,8 +1334,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 )
                                 || methodSymbol is SynthesizedPrimaryConstructor
                                 || instrumentation.Kinds.Contains(InstrumentationKind.TestCoverage)
-                                || instrumentation
-                                    .Kinds
+                                || instrumentation.Kinds
                                     .Contains(InstrumentationKindExtensions.LocalStateTracing)
                             )
                         )
@@ -1347,8 +1343,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 methodSymbol.IsImplicitConstructor
                                 && (
                                     instrumentation.Kinds.Contains(InstrumentationKind.TestCoverage)
-                                    || instrumentation
-                                        .Kinds
+                                    || instrumentation.Kinds
                                         .Contains(InstrumentationKindExtensions.LocalStateTracing)
                                 )
                             )
@@ -1519,8 +1514,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 );
                             }
 
-                            _compilation
-                                .EventQueue
+                            _compilation.EventQueue
                                 .TryEnqueue(
                                     new SymbolDeclaredCompilationEvent(
                                         _compilation,
@@ -1671,8 +1665,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 // For test coverage, field initializers are instrumented as part of constructors,
                                 // and so are never instrumented here.
                                 Debug.Assert(
-                                    !instrumentation
-                                        .Kinds
+                                    !instrumentation.Kinds
                                         .Contains(InstrumentationKind.TestCoverage)
                                 );
 
@@ -1872,8 +1865,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     return loweredBody;
                 }
 
-                lazyVariableSlotAllocator ??= compilationState
-                    .ModuleBuilderOpt
+                lazyVariableSlotAllocator ??= compilationState.ModuleBuilderOpt
                     .TryCreateVariableSlotAllocator(method, method, diagnostics.DiagnosticBag);
 
                 BoundStatement bodyWithoutLambdas = loweredBody;

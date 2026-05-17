@@ -230,8 +230,7 @@ namespace Microsoft.CodeAnalysis.MakeFieldReadonly
                         .GetAttributes()
                         .Any(
                             static (a, threadStaticAttribute) =>
-                                SymbolEqualityComparer
-                                    .Default
+                                SymbolEqualityComparer.Default
                                     .Equals(a.AttributeClass, threadStaticAttribute),
                             threadStaticAttribute
                         )
@@ -254,18 +253,15 @@ namespace Microsoft.CodeAnalysis.MakeFieldReadonly
                             .GetAttributes()
                             .Any(
                                 static (x, dataMemberAttribute) =>
-                                    SymbolEqualityComparer
-                                        .Default
+                                    SymbolEqualityComparer.Default
                                         .Equals(x.AttributeClass, dataMemberAttribute),
                                 dataMemberAttribute
                             )
-                        && symbol
-                            .ContainingType
+                        && symbol.ContainingType
                             .GetAttributes()
                             .Any(
                                 static (x, dataContractAttribute) =>
-                                    SymbolEqualityComparer
-                                        .Default
+                                    SymbolEqualityComparer.Default
                                         .Equals(x.AttributeClass, dataContractAttribute),
                                 dataContractAttribute
                             );

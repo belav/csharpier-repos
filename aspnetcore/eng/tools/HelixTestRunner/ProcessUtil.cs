@@ -249,7 +249,6 @@ public static partial class ProcessUtil
         );
 
     public static void PrintErrorMessage(string message) =>
-        Console
-            .Error
+        Console.Error
             .WriteLine($"{DateTime.UtcNow.ToString("O", CultureInfo.InvariantCulture)} {message}");
 }

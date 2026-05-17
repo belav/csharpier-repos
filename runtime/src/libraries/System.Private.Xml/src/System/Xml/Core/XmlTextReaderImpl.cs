@@ -670,16 +670,14 @@ namespace System.Xml
             {
                 // this will be hit when user create a XmlReader by setting Async, but the first call is Read() instead of ReadAsync(),
                 // then we still should create an async stream here. And wait for the method finish.
-                Task<object> t = _laterInitParam
-                    .inputUriResolver
+                Task<object> t = _laterInitParam.inputUriResolver
                     .GetEntityAsync(_laterInitParam.inputbaseUri, string.Empty, typeof(Stream));
                 stream = (Stream)t.GetAwaiter().GetResult();
             }
             else
             {
                 stream = (Stream?)
-                    _laterInitParam
-                        .inputUriResolver
+                    _laterInitParam.inputUriResolver
                         .GetEntity(_laterInitParam.inputbaseUri, string.Empty, typeof(Stream));
             }
 
@@ -3552,11 +3550,8 @@ namespace System.Xml
                     // read new bytes
                     if (_ps.bytePos == _ps.bytesUsed && _ps.bytes.Length - _ps.bytesUsed > 0)
                     {
-                        int read = _ps.stream.Read(
-                            _ps.bytes,
-                            _ps.bytesUsed,
-                            _ps.bytes.Length - _ps.bytesUsed
-                        );
+                        int read = _ps.stream
+                            .Read(_ps.bytes, _ps.bytesUsed, _ps.bytes.Length - _ps.bytesUsed);
                         if (read == 0)
                         {
                             _ps.isStreamEof = true;
@@ -3578,11 +3573,8 @@ namespace System.Xml
             else if (_ps.textReader != null)
             {
                 // read chars
-                charsRead = _ps.textReader.Read(
-                    _ps.chars,
-                    _ps.charsUsed,
-                    _ps.chars.Length - _ps.charsUsed - 1
-                );
+                charsRead = _ps.textReader
+                    .Read(_ps.chars, _ps.charsUsed, _ps.chars.Length - _ps.charsUsed - 1);
                 _ps.charsUsed += charsRead;
             }
             else
@@ -3621,18 +3613,19 @@ namespace System.Xml
             try
             {
                 // decode chars
-                _ps.decoder.Convert(
-                    _ps.bytes,
-                    _ps.bytePos,
-                    bytesCount,
-                    _ps.chars,
-                    _ps.charsUsed,
-                    maxCharsCount,
-                    false,
-                    out bytesCount,
-                    out charsCount,
-                    out completed
-                );
+                _ps.decoder
+                    .Convert(
+                        _ps.bytes,
+                        _ps.bytePos,
+                        bytesCount,
+                        _ps.chars,
+                        _ps.charsUsed,
+                        maxCharsCount,
+                        false,
+                        out bytesCount,
+                        out charsCount,
+                        out completed
+                    );
             }
             catch (ArgumentException)
             {
@@ -3660,18 +3653,19 @@ namespace System.Xml
                     Debug.Assert(_ps.decoder != null);
                     Debug.Assert(_ps.bytes != null);
                     Debug.Assert(_ps.chars != null);
-                    _ps.decoder.Convert(
-                        _ps.bytes,
-                        _ps.bytePos + bytesDecoded,
-                        1,
-                        _ps.chars,
-                        _ps.charsUsed + charsDecoded,
-                        2,
-                        false,
-                        out bDec,
-                        out chDec,
-                        out completed
-                    );
+                    _ps.decoder
+                        .Convert(
+                            _ps.bytes,
+                            _ps.bytePos + bytesDecoded,
+                            1,
+                            _ps.chars,
+                            _ps.charsUsed + charsDecoded,
+                            2,
+                            false,
+                            out bDec,
+                            out chDec,
+                            out completed
+                        );
                     charsDecoded += chDec;
                     bytesDecoded += bDec;
                 }

@@ -17,8 +17,7 @@ namespace System.ServiceModel.Channels
         {
             if (format == WebContentFormat.Default)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentException(
                             SR2.GetString(SR2.DefaultContentFormatNotAllowedInProperty)

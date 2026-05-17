@@ -913,13 +913,14 @@ namespace System.Net
                 {
                     // do not append a space when writing from a stream since this means
                     // it's writing the email body
-                    this.written += this.parent.EncodeBytes(
-                        this.buffer,
-                        this.offset + this.written,
-                        this.count - this.written,
-                        false,
-                        false
-                    );
+                    this.written += this.parent
+                        .EncodeBytes(
+                            this.buffer,
+                            this.offset + this.written,
+                            this.count - this.written,
+                            false,
+                            false
+                        );
                     if (this.written < this.count)
                     {
                         IAsyncResult result = this.parent

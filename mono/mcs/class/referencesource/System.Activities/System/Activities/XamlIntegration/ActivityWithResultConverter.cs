@@ -161,8 +161,7 @@ namespace System.Activities.XamlIntegration
                 {
                     if (this.locationHelper != null)
                     {
-                        throw FxTrace
-                            .Exception
+                        throw FxTrace.Exception
                             .AsError(new InvalidOperationException(SR.InvalidLocationExpression));
                     }
 

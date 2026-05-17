@@ -15,8 +15,7 @@ namespace System.Web.Http.Internal
         [Fact]
         public void TypeIsCorrect()
         {
-            Assert
-                .Type
+            Assert.Type
                 .HasProperties(
                     typeof(TypeActivator),
                     TypeAssert.TypeProperties.IsClass | TypeAssert.TypeProperties.IsStatic

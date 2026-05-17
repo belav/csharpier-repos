@@ -96,8 +96,7 @@ namespace Microsoft.CodeAnalysis.CSharp.NewLines.ConstructorInitializerPlacement
                     // Just add a space after the colon, and remove all leading trivia from this/base
                     replacementMap[colonToken] = colonToken
                         .WithLeadingTrivia(
-                            colonToken
-                                .LeadingTrivia
+                            colonToken.LeadingTrivia
                                 .AddRange(colonToken.TrailingTrivia)
                                 .AddRange(thisBaseKeyword.LeadingTrivia)
                         )
@@ -140,8 +139,7 @@ namespace Microsoft.CodeAnalysis.CSharp.NewLines.ConstructorInitializerPlacement
             {
                 var allColonTrivia = colonToken.LeadingTrivia.AddRange(colonToken.TrailingTrivia);
 
-                return previousToken
-                    .TrailingTrivia
+                return previousToken.TrailingTrivia
                     .All(t => t.Kind() == SyntaxKind.WhitespaceTrivia)
                     ? previousToken.WithTrailingTrivia(allColonTrivia)
                     : previousToken.WithAppendedTrailingTrivia(allColonTrivia);

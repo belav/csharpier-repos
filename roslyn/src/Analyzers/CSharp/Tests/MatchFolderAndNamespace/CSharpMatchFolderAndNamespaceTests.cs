@@ -66,8 +66,7 @@ build_property.RootNamespace = {DefaultNamespace}
             var testState = new VerifyCS.Test
             {
                 EditorConfig = editorconfig ?? EditorConfig,
-                CodeFixTestBehaviors = CodeAnalysis
-                    .Testing
+                CodeFixTestBehaviors = CodeAnalysis.Testing
                     .CodeFixTestBehaviors
                     .SkipFixAllInDocumentCheck,
                 LanguageVersion = LanguageVersion.CSharp10,
@@ -83,8 +82,7 @@ build_property.RootNamespace = {DefaultNamespace}
             // If empty string was provided as the namespace, then we will not set a default
             if (defaultNamespace.Length > 0)
             {
-                testState
-                    .SolutionTransforms
+                testState.SolutionTransforms
                     .Add(
                         (solution, projectId) =>
                         {
@@ -921,8 +919,7 @@ namespace [|Project2.Test|]
                 },
             };
 
-            testState
-                .SolutionTransforms
+            testState.SolutionTransforms
                 .Add(
                     (solution, projectId) =>
                     {

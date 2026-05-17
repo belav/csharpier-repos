@@ -492,8 +492,7 @@ public partial class HubConnectionTests : VerifiableLoggedTest
         using (StartVerifiableLog())
         {
             var testConnection = new TestConnection();
-            testConnection
-                .Features
+            testConnection.Features
                 .Set<IConnectionInherentKeepAliveFeature>(
                     new TestKeepAliveFeature() { HasInherentKeepAlive = true }
                 );

@@ -255,8 +255,7 @@ public class RemoteAttributeBaseTest
             ErrorMessage = "Error about '{0}' from override.",
         };
 
-        var options = context
-            .ActionContext
+        var options = context.ActionContext
             .HttpContext
             .RequestServices
             .GetRequiredService<IOptions<MvcDataAnnotationsLocalizationOptions>>();
@@ -318,8 +317,7 @@ public class RemoteAttributeBaseTest
             .Setup(l => l["Error about '{0}' from override.", "Length"])
             .Returns(localizedString)
             .Verifiable();
-        var options = context
-            .ActionContext
+        var options = context.ActionContext
             .HttpContext
             .RequestServices
             .GetRequiredService<IOptions<MvcDataAnnotationsLocalizationOptions>>();
@@ -379,8 +377,7 @@ public class RemoteAttributeBaseTest
         var context = GetValidationContext(localizerFactory);
 
         var localizer = new Mock<IStringLocalizer>(MockBehavior.Strict);
-        var options = context
-            .ActionContext
+        var options = context.ActionContext
             .HttpContext
             .RequestServices
             .GetRequiredService<IOptions<MvcDataAnnotationsLocalizationOptions>>();
@@ -503,8 +500,7 @@ public class RemoteAttributeBaseTest
             .Setup(l => l["Error about '{0}' from override.", "Display Length"])
             .Returns(localizedString)
             .Verifiable();
-        var options = context
-            .ActionContext
+        var options = context.ActionContext
             .HttpContext
             .RequestServices
             .GetRequiredService<IOptions<MvcDataAnnotationsLocalizationOptions>>();

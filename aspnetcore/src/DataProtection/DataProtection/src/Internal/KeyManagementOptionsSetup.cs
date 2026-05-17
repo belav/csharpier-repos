@@ -66,17 +66,13 @@ internal sealed class KeyManagementOptionsSetup : IConfigureOptions<KeyManagemen
             options.AuthenticatedEncryptorConfiguration = new AuthenticatedEncryptorConfiguration();
         }
 
-        options
-            .AuthenticatedEncryptorFactories
+        options.AuthenticatedEncryptorFactories
             .Add(new CngGcmAuthenticatedEncryptorFactory(_loggerFactory));
-        options
-            .AuthenticatedEncryptorFactories
+        options.AuthenticatedEncryptorFactories
             .Add(new CngCbcAuthenticatedEncryptorFactory(_loggerFactory));
-        options
-            .AuthenticatedEncryptorFactories
+        options.AuthenticatedEncryptorFactories
             .Add(new ManagedAuthenticatedEncryptorFactory(_loggerFactory));
-        options
-            .AuthenticatedEncryptorFactories
+        options.AuthenticatedEncryptorFactories
             .Add(new AuthenticatedEncryptorFactory(_loggerFactory));
     }
 }

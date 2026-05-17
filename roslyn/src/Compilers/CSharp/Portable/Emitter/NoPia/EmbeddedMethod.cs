@@ -43,8 +43,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit.NoPia
 
         protected override ImmutableArray<EmbeddedTypeParameter> GetTypeParameters()
         {
-            return UnderlyingMethod
-                .AdaptedMethodSymbol
+            return UnderlyingMethod.AdaptedMethodSymbol
                 .TypeParameters
                 .SelectAsArray((t, m) => new EmbeddedTypeParameter(m, t.GetCciAdapter()), this);
         }

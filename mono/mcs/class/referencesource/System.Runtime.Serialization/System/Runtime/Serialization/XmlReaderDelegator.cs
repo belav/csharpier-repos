@@ -58,8 +58,7 @@ namespace System.Runtime.Serialization
         internal string GetAttribute(int i)
         {
             if (isEndOfEmptyElement)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -157,8 +156,7 @@ namespace System.Runtime.Serialization
         internal void MoveToAttribute(int i)
         {
             if (isEndOfEmptyElement)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -300,8 +298,7 @@ namespace System.Runtime.Serialization
                         return ReadContentAsQName();
                     break;
             }
-            throw System
-                .Runtime
+            throw System.Runtime
                 .Serialization
                 .DiagnosticUtility
                 .ExceptionUtility
@@ -360,8 +357,7 @@ namespace System.Runtime.Serialization
                         return new DataNode<XmlQualifiedName>(ReadContentAsQName());
                     break;
             }
-            throw System
-                .Runtime
+            throw System.Runtime
                 .Serialization
                 .DiagnosticUtility
                 .ExceptionUtility
@@ -370,8 +366,7 @@ namespace System.Runtime.Serialization
 
         void ThrowConversionException(string value, string type)
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(
                     new XmlException(
                         XmlObjectSerializer.TryAddLineInfo(
@@ -384,8 +379,7 @@ namespace System.Runtime.Serialization
 
         void ThrowNotAtElement()
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(
                     new XmlException(SR.GetString(SR.XmlStartElementExpected, "EndElement"))
                 );
@@ -543,16 +537,14 @@ namespace System.Runtime.Serialization
             }
             catch (ArgumentException exception)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         XmlExceptionHelper.CreateConversionException(str, "byte[]", exception)
                     );
             }
             catch (FormatException exception)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         XmlExceptionHelper.CreateConversionException(str, "byte[]", exception)
                     );
@@ -775,24 +767,21 @@ namespace System.Runtime.Serialization
             }
             catch (ArgumentException exception)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         XmlExceptionHelper.CreateConversionException(str, "Guid", exception)
                     );
             }
             catch (FormatException exception)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         XmlExceptionHelper.CreateConversionException(str, "Guid", exception)
                     );
             }
             catch (OverflowException exception)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         XmlExceptionHelper.CreateConversionException(str, "Guid", exception)
                     );
@@ -813,24 +802,21 @@ namespace System.Runtime.Serialization
             }
             catch (ArgumentException exception)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         XmlExceptionHelper.CreateConversionException(str, "Guid", exception)
                     );
             }
             catch (FormatException exception)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         XmlExceptionHelper.CreateConversionException(str, "Guid", exception)
                     );
             }
             catch (OverflowException exception)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         XmlExceptionHelper.CreateConversionException(str, "Guid", exception)
                     );
@@ -849,16 +835,14 @@ namespace System.Runtime.Serialization
             }
             catch (ArgumentException exception)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         XmlExceptionHelper.CreateConversionException(str, "Uri", exception)
                     );
             }
             catch (FormatException exception)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         XmlExceptionHelper.CreateConversionException(str, "Uri", exception)
                     );
@@ -874,16 +858,14 @@ namespace System.Runtime.Serialization
             }
             catch (ArgumentException exception)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         XmlExceptionHelper.CreateConversionException(str, "Uri", exception)
                     );
             }
             catch (FormatException exception)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         XmlExceptionHelper.CreateConversionException(str, "Uri", exception)
                     );
@@ -928,8 +910,7 @@ namespace System.Runtime.Serialization
             if (dictionaryReader.TryGetArrayLength(out readerArrayLength))
             {
                 if (readerArrayLength != arrayLength)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             XmlObjectSerializer.CreateSerializationException(
                                 SR.GetString(
@@ -960,8 +941,7 @@ namespace System.Runtime.Serialization
         )
         {
             if (expectedLength != actualLength)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         XmlObjectSerializer.CreateSerializationException(
                             SR.GetString(
@@ -1012,8 +992,7 @@ namespace System.Runtime.Serialization
             }
             else
             {
-                array = BooleanArrayHelperWithDictionaryString
-                    .Instance
+                array = BooleanArrayHelperWithDictionaryString.Instance
                     .ReadArray(
                         dictionaryReader,
                         itemName,
@@ -1063,8 +1042,7 @@ namespace System.Runtime.Serialization
             }
             else
             {
-                array = DateTimeArrayHelperWithDictionaryString
-                    .Instance
+                array = DateTimeArrayHelperWithDictionaryString.Instance
                     .ReadArray(
                         dictionaryReader,
                         itemName,
@@ -1114,8 +1092,7 @@ namespace System.Runtime.Serialization
             }
             else
             {
-                array = DecimalArrayHelperWithDictionaryString
-                    .Instance
+                array = DecimalArrayHelperWithDictionaryString.Instance
                     .ReadArray(
                         dictionaryReader,
                         itemName,
@@ -1165,8 +1142,7 @@ namespace System.Runtime.Serialization
             }
             else
             {
-                array = Int32ArrayHelperWithDictionaryString
-                    .Instance
+                array = Int32ArrayHelperWithDictionaryString.Instance
                     .ReadArray(
                         dictionaryReader,
                         itemName,
@@ -1216,8 +1192,7 @@ namespace System.Runtime.Serialization
             }
             else
             {
-                array = Int64ArrayHelperWithDictionaryString
-                    .Instance
+                array = Int64ArrayHelperWithDictionaryString.Instance
                     .ReadArray(
                         dictionaryReader,
                         itemName,
@@ -1267,8 +1242,7 @@ namespace System.Runtime.Serialization
             }
             else
             {
-                array = SingleArrayHelperWithDictionaryString
-                    .Instance
+                array = SingleArrayHelperWithDictionaryString.Instance
                     .ReadArray(
                         dictionaryReader,
                         itemName,
@@ -1318,8 +1292,7 @@ namespace System.Runtime.Serialization
             }
             else
             {
-                array = DoubleArrayHelperWithDictionaryString
-                    .Instance
+                array = DoubleArrayHelperWithDictionaryString.Instance
                     .ReadArray(
                         dictionaryReader,
                         itemName,
@@ -1713,8 +1686,7 @@ namespace System.Runtime.Serialization
         internal void ReadStartElement()
         {
             if (isEndOfEmptyElement)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -1730,8 +1702,7 @@ namespace System.Runtime.Serialization
         internal void ReadStartElement(String localname, String ns)
         {
             if (isEndOfEmptyElement)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -1747,8 +1718,7 @@ namespace System.Runtime.Serialization
         internal void ReadStartElement(string name)
         {
             if (isEndOfEmptyElement)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -1766,8 +1736,7 @@ namespace System.Runtime.Serialization
             if (this.NodeType == XmlNodeType.Element)
                 return reader.ReadSubtree();
 
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(
                     new InvalidOperationException(
                         SR.GetString(SR.XmlFunctionRequiredNodeType, "ReadSubtree", "Element")

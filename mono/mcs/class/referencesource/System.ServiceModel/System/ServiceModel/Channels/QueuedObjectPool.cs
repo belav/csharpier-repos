@@ -35,8 +35,7 @@ namespace System.ServiceModel.Channels
         {
             if (batchAllocCount <= 0)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentOutOfRangeException("batchAllocCount"));
             }
 

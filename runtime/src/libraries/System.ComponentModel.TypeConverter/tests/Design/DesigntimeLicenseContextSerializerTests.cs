@@ -48,8 +48,7 @@ namespace System.ComponentModel.Design.Tests
             RemoteInvokeOptions options = new RemoteInvokeOptions();
             if (useBinaryFormatter)
             {
-                options
-                    .RuntimeConfigurationOptions
+                options.RuntimeConfigurationOptions
                     .Add(enableBinaryFormatterInTypeConverter, bool.TrueString);
             }
             RemoteExecutor

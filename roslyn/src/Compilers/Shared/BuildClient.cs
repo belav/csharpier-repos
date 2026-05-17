@@ -124,8 +124,7 @@ namespace Microsoft.CodeAnalysis.CommandLine
             {
                 // Register encodings for console
                 // https://github.com/dotnet/roslyn/issues/10785
-                System
-                    .Text
+                System.Text
                     .Encoding
                     .RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
             }

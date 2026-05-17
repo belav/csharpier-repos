@@ -127,8 +127,7 @@ namespace System.Speech.Internal.Synthesis
                     mediaType
                 );
                 BinaryReader reader = new(localStream);
-                byte[] waveFormat = System
-                    .Speech
+                byte[] waveFormat = System.Speech
                     .Internal
                     .Synthesis
                     .AudioBase

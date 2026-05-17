@@ -119,8 +119,7 @@ namespace System.Security.Cryptography
             Debug.Assert(hashAlgorithm.Name is not null);
 
             byte[] buffer = new byte[hashSizeInBytes];
-            int written = HashProviderDispenser
-                .OneShotHashProvider
+            int written = HashProviderDispenser.OneShotHashProvider
                 .HashData(hashAlgorithm.Name, source, buffer);
             Debug.Assert(written == hashSizeInBytes);
             return buffer;
@@ -204,8 +203,7 @@ namespace System.Security.Cryptography
                 return false;
             }
 
-            bytesWritten = HashProviderDispenser
-                .OneShotHashProvider
+            bytesWritten = HashProviderDispenser.OneShotHashProvider
                 .HashData(hashAlgorithm.Name, source, destination);
             Debug.Assert(bytesWritten == hashSizeInBytes);
             return true;
@@ -451,8 +449,7 @@ namespace System.Security.Cryptography
             Debug.Assert(hashAlgorithm.Name is not null);
             byte[] buffer = new byte[hashSizeInBytes];
 
-            int written = HashProviderDispenser
-                .OneShotHashProvider
+            int written = HashProviderDispenser.OneShotHashProvider
                 .MacData(hashAlgorithm.Name, key, source, buffer);
             Debug.Assert(written == hashSizeInBytes);
             return buffer;
@@ -540,8 +537,7 @@ namespace System.Security.Cryptography
                 return false;
             }
 
-            bytesWritten = HashProviderDispenser
-                .OneShotHashProvider
+            bytesWritten = HashProviderDispenser.OneShotHashProvider
                 .MacData(hashAlgorithm.Name, key, source, destination);
             Debug.Assert(bytesWritten == hashSizeInBytes);
             return true;

@@ -354,15 +354,13 @@ namespace System.Web.Script.Services
                 return defaultTypeName;
             }
 
-            XmlNode nameAttribute = actualTypeElement
-                .Attributes
+            XmlNode nameAttribute = actualTypeElement.Attributes
                 .GetNamedItem(ActualTypeNameAttribute);
             Debug.Assert(nameAttribute != null);
             Debug.Assert(nameAttribute.Value != null);
             string name = nameAttribute.Value;
 
-            XmlNode nsAttribute = actualTypeElement
-                .Attributes
+            XmlNode nsAttribute = actualTypeElement.Attributes
                 .GetNamedItem(ActualTypeNamespaceAttribute);
             Debug.Assert(nsAttribute != null);
             Debug.Assert(nsAttribute.Value != null);

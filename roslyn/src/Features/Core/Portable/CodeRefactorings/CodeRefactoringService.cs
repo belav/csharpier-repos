@@ -139,8 +139,7 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
             CancellationToken cancellationToken
         )
         {
-            var extensionManager = document
-                .Project
+            var extensionManager = document.Project
                 .Solution
                 .Services
                 .GetRequiredService<IExtensionManager>();
@@ -192,8 +191,7 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
                 )
             )
             {
-                var extensionManager = document
-                    .Project
+                var extensionManager = document.Project
                     .Solution
                     .Services
                     .GetRequiredService<IExtensionManager>();

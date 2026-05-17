@@ -171,8 +171,7 @@ namespace System.Threading
         {
             if (s_work == IntPtr.Zero)
             {
-                IntPtr work = Interop
-                    .Kernel32
+                IntPtr work = Interop.Kernel32
                     .CreateThreadpoolWork(&DispatchCallback, IntPtr.Zero, IntPtr.Zero);
                 if (work == IntPtr.Zero)
                     throw new OutOfMemoryException();

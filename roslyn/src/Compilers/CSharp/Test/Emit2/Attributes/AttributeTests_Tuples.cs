@@ -291,8 +291,7 @@ class C
             );
 
             var srcTypes = sourceModule.GlobalNamespace.GetTypeMembers();
-            var peTypes = peModule
-                .GlobalNamespace
+            var peTypes = peModule.GlobalNamespace
                 .GetTypeMembers()
                 .WhereAsArray(t => t.Name != "<Module>");
 
@@ -432,8 +431,7 @@ class C
                     expectedElementNames: expectedElementNames
                 );
 
-                AttributeTests_Dynamic
-                    .DynamicAttributeValidator
+                AttributeTests_Dynamic.DynamicAttributeValidator
                     .ValidateDynamicAttribute(
                         args.GetAttributes(),
                         expectedDynamicAttribute: true,
@@ -466,8 +464,7 @@ class C
                     expectedTupleNamesAttribute: true,
                     expectedElementNames: new[] { "e1", "e4", null, "e2", "e3" }
                 );
-                AttributeTests_Dynamic
-                    .DynamicAttributeValidator
+                AttributeTests_Dynamic.DynamicAttributeValidator
                     .ValidateDynamicAttribute(
                         event1.GetAttributes(),
                         expectedDynamicAttribute: true,
@@ -587,8 +584,7 @@ class C
                     expectedTupleNamesAttribute: true,
                     expectedElementNames: expectedElementNames
                 );
-                AttributeTests_Dynamic
-                    .DynamicAttributeValidator
+                AttributeTests_Dynamic.DynamicAttributeValidator
                     .ValidateDynamicAttribute(
                         field4.GetAttributes(),
                         expectedDynamicAttribute: true,
@@ -617,8 +613,7 @@ class C
                     expectedTupleNamesAttribute: true,
                     expectedElementNames: expectedElementNames
                 );
-                AttributeTests_Dynamic
-                    .DynamicAttributeValidator
+                AttributeTests_Dynamic.DynamicAttributeValidator
                     .ValidateDynamicAttribute(
                         field5.GetAttributes(),
                         expectedDynamicAttribute: true,
@@ -865,8 +860,7 @@ class C
                     );
                     Assert.Equal(
                         "System.String[]",
-                        tupleAttr
-                            .AttributeConstructor
+                        tupleAttr.AttributeConstructor
                             .Parameters
                             .Single()
                             .TypeWithAnnotations

@@ -49,25 +49,21 @@ namespace System.ServiceModel.Security
         {
             if (parentCredentials == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("parentCredentials");
             }
 
             if (parentCredentials.IdentityConfiguration == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("parentCredentials.IdentityConfiguration");
             }
 
             _exceptionMapper = parentCredentials.ExceptionMapper;
 
-            _securityTokenHandlerCollection = parentCredentials
-                .IdentityConfiguration
+            _securityTokenHandlerCollection = parentCredentials.IdentityConfiguration
                 .SecurityTokenHandlers;
-            _tokenCache = _securityTokenHandlerCollection
-                .Configuration
+            _tokenCache = _securityTokenHandlerCollection.Configuration
                 .Caches
                 .SessionSecurityTokenCache;
             _cookieTransforms = SessionSecurityTokenHandler.DefaultCookieTransforms;
@@ -120,8 +116,7 @@ namespace System.ServiceModel.Security
         {
             if (tokenRequirement == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("tokenRequirement");
             }
 
@@ -157,8 +152,7 @@ namespace System.ServiceModel.Security
                         securityTokenHandler as UserNameSecurityTokenHandler;
                     if (upSecurityTokenHandler == null)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(
                                     SR.GetString(
@@ -188,8 +182,7 @@ namespace System.ServiceModel.Security
                         securityTokenHandler as RsaSecurityTokenHandler;
                     if (rsaSecurityTokenHandler == null)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(
                                     SR.GetString(
@@ -214,8 +207,7 @@ namespace System.ServiceModel.Security
                         securityTokenHandler as X509SecurityTokenHandler;
                     if (x509SecurityTokenHandler == null)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(
                                     SR.GetString(
@@ -234,8 +226,7 @@ namespace System.ServiceModel.Security
                 }
                 else if (
                     StringComparer.Ordinal.Equals(tokenType, SecurityTokenTypes.SamlTokenProfile11)
-                    || StringComparer
-                        .Ordinal
+                    || StringComparer.Ordinal
                         .Equals(tokenType, SecurityTokenTypes.OasisWssSamlTokenProfile11)
                 )
                 {
@@ -243,8 +234,7 @@ namespace System.ServiceModel.Security
                         securityTokenHandler as SamlSecurityTokenHandler;
                     if (saml11SecurityTokenHandler == null)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(
                                     SR.GetString(
@@ -259,8 +249,7 @@ namespace System.ServiceModel.Security
 
                     if (saml11SecurityTokenHandler.Configuration == null)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperInvalidOperation(SR.GetString(SR.ID4274));
                     }
 
@@ -269,14 +258,12 @@ namespace System.ServiceModel.Security
                         _exceptionMapper
                     );
                     // The out-of-band token resolver will be used by WCF to decrypt any encrypted SAML tokens.
-                    outOfBandTokenResolver = saml11SecurityTokenHandler
-                        .Configuration
+                    outOfBandTokenResolver = saml11SecurityTokenHandler.Configuration
                         .ServiceTokenResolver;
                 }
                 else if (
                     StringComparer.Ordinal.Equals(tokenType, SecurityTokenTypes.Saml2TokenProfile11)
-                    || StringComparer
-                        .Ordinal
+                    || StringComparer.Ordinal
                         .Equals(tokenType, SecurityTokenTypes.OasisWssSaml2TokenProfile11)
                 )
                 {
@@ -284,8 +271,7 @@ namespace System.ServiceModel.Security
                         securityTokenHandler as Saml2SecurityTokenHandler;
                     if (saml2SecurityTokenHandler == null)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(
                                     SR.GetString(
@@ -300,8 +286,7 @@ namespace System.ServiceModel.Security
 
                     if (saml2SecurityTokenHandler.Configuration == null)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperInvalidOperation(SR.GetString(SR.ID4274));
                     }
 
@@ -310,13 +295,11 @@ namespace System.ServiceModel.Security
                         _exceptionMapper
                     );
                     // The out-of-band token resolver will be used by WCF to decrypt any encrypted SAML tokens.
-                    outOfBandTokenResolver = saml2SecurityTokenHandler
-                        .Configuration
+                    outOfBandTokenResolver = saml2SecurityTokenHandler.Configuration
                         .ServiceTokenResolver;
                 }
                 else if (
-                    StringComparer
-                        .Ordinal
+                    StringComparer.Ordinal
                         .Equals(tokenType, ServiceModelSecurityTokenTypes.SecureConversation)
                 )
                 {
@@ -324,8 +307,7 @@ namespace System.ServiceModel.Security
                         tokenRequirement as RecipientServiceModelSecurityTokenRequirement;
                     if (tr == null)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperInvalidOperation(
                                 SR.GetString(SR.ID4240, tokenRequirement.GetType().ToString())
                             );
@@ -359,8 +341,7 @@ namespace System.ServiceModel.Security
                         tokenRequirement as RecipientServiceModelSecurityTokenRequirement;
                     if (tr == null)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperInvalidOperation(
                                 SR.GetString(SR.ID4240, tokenRequirement.GetType().ToString())
                             );
@@ -425,9 +406,8 @@ namespace System.ServiceModel.Security
 
             if (ServiceCredentials != null)
             {
-                sessionTokenHandler.Configuration.MaxClockSkew = ServiceCredentials
-                    .IdentityConfiguration
-                    .MaxClockSkew;
+                sessionTokenHandler.Configuration.MaxClockSkew =
+                    ServiceCredentials.IdentityConfiguration.MaxClockSkew;
             }
 
             SctClaimsHandler claimsHandler = new SctClaimsHandler(
@@ -513,24 +493,21 @@ namespace System.ServiceModel.Security
             foreach (string securitySpecification in version.GetSecuritySpecifications())
             {
                 if (
-                    StringComparer
-                        .Ordinal
+                    StringComparer.Ordinal
                         .Equals(securitySpecification, WSTrustFeb2005Constants.NamespaceURI)
                 )
                 {
                     trustVersion = TrustVersion.WSTrustFeb2005;
                 }
                 else if (
-                    StringComparer
-                        .Ordinal
+                    StringComparer.Ordinal
                         .Equals(securitySpecification, WSTrust13Constants.NamespaceURI)
                 )
                 {
                     trustVersion = TrustVersion.WSTrust13;
                 }
                 else if (
-                    StringComparer
-                        .Ordinal
+                    StringComparer.Ordinal
                         .Equals(
                             securitySpecification,
                             WSSecureConversationFeb2005Constants.Namespace
@@ -540,8 +517,7 @@ namespace System.ServiceModel.Security
                     scVersion = SecureConversationVersion.WSSecureConversationFeb2005;
                 }
                 else if (
-                    StringComparer
-                        .Ordinal
+                    StringComparer.Ordinal
                         .Equals(securitySpecification, WSSecureConversation13Constants.Namespace)
                 )
                 {
@@ -756,8 +732,7 @@ namespace System.ServiceModel.Security
                 && saml11SecurityTokenHandler.Configuration == null
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperInvalidOperation(SR.GetString(SR.ID4274));
             }
 
@@ -766,8 +741,7 @@ namespace System.ServiceModel.Security
                 && saml2SecurityTokenHandler.Configuration == null
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperInvalidOperation(SR.GetString(SR.ID4274));
             }
 
@@ -811,8 +785,7 @@ namespace System.ServiceModel.Security
                 );
 
                 // The out-of-band token resolver will be used by WCF to decrypt any encrypted SAML tokens.
-                outOfBandTokenResolver = saml2SecurityTokenHandler
-                    .Configuration
+                outOfBandTokenResolver = saml2SecurityTokenHandler.Configuration
                     .ServiceTokenResolver;
             }
             else if (saml11SecurityTokenHandler != null && saml2SecurityTokenHandler == null)
@@ -827,8 +800,7 @@ namespace System.ServiceModel.Security
                 );
 
                 // The out-of-band token resolver will be used by WCF to decrypt any encrypted SAML tokens.
-                outOfBandTokenResolver = saml11SecurityTokenHandler
-                    .Configuration
+                outOfBandTokenResolver = saml11SecurityTokenHandler.Configuration
                     .ServiceTokenResolver;
             }
             else
@@ -853,8 +825,7 @@ namespace System.ServiceModel.Security
         {
             if (tokenRequirement == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("tokenRequirement");
             }
 
@@ -866,8 +837,7 @@ namespace System.ServiceModel.Security
 
             if (listenUri == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperInvalidOperation(SR.GetString(SR.ID4287, tokenRequirement));
             }
 

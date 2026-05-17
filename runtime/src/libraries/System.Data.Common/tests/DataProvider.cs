@@ -42,8 +42,7 @@ namespace System.Data.Tests
             dtChild.Columns.Add("ChildDateTime", typeof(DateTime));
             dtChild.Columns.Add("ChildDouble", typeof(double));
 
-            dtChild
-                .Rows
+            dtChild.Rows
                 .Add(
                     new object[]
                     {
@@ -55,11 +54,9 @@ namespace System.Data.Tests
                         1.534,
                     }
                 );
-            dtChild
-                .Rows
+            dtChild.Rows
                 .Add(new object[] { 1, 2, "2-String1", "2-String2", DateTime.MaxValue, -1.534 });
-            dtChild
-                .Rows
+            dtChild.Rows
                 .Add(
                     new object[]
                     {
@@ -71,8 +68,7 @@ namespace System.Data.Tests
                         double.MaxValue / 10000,
                     }
                 );
-            dtChild
-                .Rows
+            dtChild.Rows
                 .Add(
                     new object[]
                     {
@@ -84,8 +80,7 @@ namespace System.Data.Tests
                         double.MinValue * 10000,
                     }
                 );
-            dtChild
-                .Rows
+            dtChild.Rows
                 .Add(
                     new object[]
                     {
@@ -97,8 +92,7 @@ namespace System.Data.Tests
                         0.45,
                     }
                 );
-            dtChild
-                .Rows
+            dtChild.Rows
                 .Add(
                     new object[]
                     {
@@ -110,8 +104,7 @@ namespace System.Data.Tests
                         0.55,
                     }
                 );
-            dtChild
-                .Rows
+            dtChild.Rows
                 .Add(
                     new object[]
                     {
@@ -123,8 +116,7 @@ namespace System.Data.Tests
                         0,
                     }
                 );
-            dtChild
-                .Rows
+            dtChild.Rows
                 .Add(
                     new object[]
                     {
@@ -136,8 +128,7 @@ namespace System.Data.Tests
                         10,
                     }
                 );
-            dtChild
-                .Rows
+            dtChild.Rows
                 .Add(
                     new object[]
                     {
@@ -149,8 +140,7 @@ namespace System.Data.Tests
                         20,
                     }
                 );
-            dtChild
-                .Rows
+            dtChild.Rows
                 .Add(
                     new object[]
                     {
@@ -162,8 +152,7 @@ namespace System.Data.Tests
                         25,
                     }
                 );
-            dtChild
-                .Rows
+            dtChild.Rows
                 .Add(
                     new object[]
                     {
@@ -175,8 +164,7 @@ namespace System.Data.Tests
                         30,
                     }
                 );
-            dtChild
-                .Rows
+            dtChild.Rows
                 .Add(
                     new object[]
                     {
@@ -204,8 +192,7 @@ namespace System.Data.Tests
             dtParent.Columns.Add("ParentDouble", typeof(double));
             dtParent.Columns.Add("ParentBool", typeof(bool));
 
-            dtParent
-                .Rows
+            dtParent.Rows
                 .Add(
                     new object[]
                     {
@@ -217,8 +204,7 @@ namespace System.Data.Tests
                         true,
                     }
                 );
-            dtParent
-                .Rows
+            dtParent.Rows
                 .Add(
                     new object[]
                     {
@@ -230,8 +216,7 @@ namespace System.Data.Tests
                         true,
                     }
                 );
-            dtParent
-                .Rows
+            dtParent.Rows
                 .Add(
                     new object[]
                     {
@@ -243,8 +228,7 @@ namespace System.Data.Tests
                         false,
                     }
                 );
-            dtParent
-                .Rows
+            dtParent.Rows
                 .Add(
                     new object[]
                     {
@@ -256,8 +240,7 @@ namespace System.Data.Tests
                         true,
                     }
                 );
-            dtParent
-                .Rows
+            dtParent.Rows
                 .Add(
                     new object[]
                     {
@@ -269,8 +252,7 @@ namespace System.Data.Tests
                         true,
                     }
                 );
-            dtParent
-                .Rows
+            dtParent.Rows
                 .Add(
                     new object[]
                     {

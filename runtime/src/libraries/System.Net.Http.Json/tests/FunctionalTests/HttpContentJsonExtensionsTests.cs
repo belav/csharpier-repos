@@ -209,8 +209,7 @@ namespace System.Net.Http.Json.Functional.Tests
                         JsonException ex = await Assert.ThrowsAsync<JsonException>(async () =>
                         {
                             await foreach (
-                                Person? per in response
-                                    .Content
+                                Person? per in response.Content
                                     .ReadFromJsonAsAsyncEnumerable<Person>()
                             )
                             {

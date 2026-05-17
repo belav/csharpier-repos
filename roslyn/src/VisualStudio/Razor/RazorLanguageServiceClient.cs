@@ -97,8 +97,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Razor
                 CancellationToken cancellationToken
             )
             {
-                return _inner
-                    .KeepAliveSession
+                return _inner.KeepAliveSession
                     .RunRemoteAsync(targetName, solution: null, arguments, cancellationToken);
             }
 
@@ -108,8 +107,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Razor
                 CancellationToken cancellationToken
             )
             {
-                return _inner
-                    .KeepAliveSession
+                return _inner.KeepAliveSession
                     .RunRemoteAsync<T>(targetName, solution: null, arguments, cancellationToken);
             }
 

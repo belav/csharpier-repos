@@ -1052,8 +1052,7 @@ public abstract class TransactionTestBase<TFixture> : IClassFixture<TFixture>
                 if (DirtyReadsOccur)
                 {
                     using (
-                        await innerContext
-                            .Database
+                        await innerContext.Database
                             .BeginTransactionAsync(IsolationLevel.ReadUncommitted)
                     )
                     {
@@ -1273,8 +1272,7 @@ public abstract class TransactionTestBase<TFixture> : IClassFixture<TFixture>
         context.Database.EnlistTransaction(transaction);
 
         var ex = Assert.Throws<InvalidOperationException>(() =>
-            context
-                .Database
+            context.Database
                 .BeginTransaction(
                     DirtyReadsOccur ? IsolationLevel.ReadUncommitted : IsolationLevel.Unspecified
                 )

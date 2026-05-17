@@ -102,8 +102,7 @@ namespace System.IdentityModel
             }
             else
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new NotSupportedException(
                             SR.GetString(SR.UnsupportedInputTypeForTransform, input.GetType())
@@ -152,8 +151,7 @@ namespace System.IdentityModel
             }
             else
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new NotSupportedException(
                             SR.GetString(SR.UnsupportedInputTypeForTransform, input.GetType())
@@ -211,8 +209,7 @@ namespace System.IdentityModel
             );
             if (string.IsNullOrEmpty(algorithm))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new CryptographicException(
                             SR.GetString(
@@ -240,8 +237,7 @@ namespace System.IdentityModel
             }
             else
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new CryptographicException(SR.GetString(SR.ID6005, algorithm))
                     );

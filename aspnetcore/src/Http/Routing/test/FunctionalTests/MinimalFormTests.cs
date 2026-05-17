@@ -54,8 +54,7 @@ public class MinimalFormTests
         var antiforgeryOptions = host.Services.GetRequiredService<IOptions<AntiforgeryOptions>>();
         var tokens = antiforgery.GetAndStoreTokens(new DefaultHttpContext());
         var request = new HttpRequestMessage(HttpMethod.Post, "todo");
-        request
-            .Headers
+        request.Headers
             .Add("Cookie", antiforgeryOptions.Value.Cookie.Name + "=" + tokens.CookieToken);
         var nameValueCollection = new List<KeyValuePair<string, string>>
         {
@@ -127,8 +126,7 @@ public class MinimalFormTests
         var antiforgeryOptions = host.Services.GetRequiredService<IOptions<AntiforgeryOptions>>();
         var tokens = antiforgery.GetAndStoreTokens(new DefaultHttpContext());
         var request = new HttpRequestMessage(HttpMethod.Post, "todo");
-        request
-            .Headers
+        request.Headers
             .Add("Cookie", antiforgeryOptions.Value.Cookie.Name + "=" + tokens.CookieToken);
         var nameValueCollection = new List<KeyValuePair<string, string>>
         {
@@ -510,8 +508,7 @@ public class MinimalFormTests
                         app.Use(
                             (context, next) =>
                             {
-                                context
-                                    .Features
+                                context.Features
                                     .Set<IHttpMaxRequestBodySizeFeature>(
                                         new FakeHttpMaxRequestBodySizeFeature(5_000_000)
                                     );
@@ -524,8 +521,7 @@ public class MinimalFormTests
                             {
                                 context.Request.Body = new SizeLimitedStream(
                                     context.Request.Body,
-                                    context
-                                        .Features
+                                    context.Features
                                         .Get<IHttpMaxRequestBodySizeFeature>()
                                         ?.MaxRequestBodySize
                                 );
@@ -555,8 +551,7 @@ public class MinimalFormTests
         var antiforgeryOptions = host.Services.GetRequiredService<IOptions<AntiforgeryOptions>>();
         var tokens = antiforgery.GetAndStoreTokens(new DefaultHttpContext());
         var request = new HttpRequestMessage(HttpMethod.Post, "todo");
-        request
-            .Headers
+        request.Headers
             .Add("Cookie", antiforgeryOptions.Value.Cookie.Name + "=" + tokens.CookieToken);
         var nameValueCollection = new List<KeyValuePair<string, string>>
         {
@@ -622,8 +617,7 @@ public class MinimalFormTests
         var antiforgeryOptions = host.Services.GetRequiredService<IOptions<AntiforgeryOptions>>();
         var tokens = antiforgery.GetAndStoreTokens(new DefaultHttpContext());
         var request = new HttpRequestMessage(HttpMethod.Post, "todo");
-        request
-            .Headers
+        request.Headers
             .Add("Cookie", antiforgeryOptions.Value.Cookie.Name + "=" + tokens.CookieToken);
         var nameValueCollection = new List<KeyValuePair<string, string>>
         {
@@ -683,8 +677,7 @@ public class MinimalFormTests
         var antiforgeryOptions = host.Services.GetRequiredService<IOptions<AntiforgeryOptions>>();
         var tokens = antiforgery.GetAndStoreTokens(new DefaultHttpContext());
         var request = new HttpRequestMessage(HttpMethod.Post, "/todos/1");
-        request
-            .Headers
+        request.Headers
             .Add("Cookie", antiforgeryOptions.Value.Cookie.Name + "=" + tokens.CookieToken);
         var nameValueCollection = new List<KeyValuePair<string, string>>
         {
@@ -743,8 +736,7 @@ public class MinimalFormTests
         var antiforgeryOptions = host.Services.GetRequiredService<IOptions<AntiforgeryOptions>>();
         var tokens = antiforgery.GetAndStoreTokens(new DefaultHttpContext());
         var request = new HttpRequestMessage(HttpMethod.Post, "/todos/1");
-        request
-            .Headers
+        request.Headers
             .Add("Cookie", antiforgeryOptions.Value.Cookie.Name + "=" + tokens.CookieToken);
         var nameValueCollection = new List<KeyValuePair<string, string>>
         {
@@ -801,8 +793,7 @@ public class MinimalFormTests
         var antiforgeryOptions = host.Services.GetRequiredService<IOptions<AntiforgeryOptions>>();
         var tokens = antiforgery.GetAndStoreTokens(new DefaultHttpContext());
         var request = new HttpRequestMessage(HttpMethod.Post, "todo");
-        request
-            .Headers
+        request.Headers
             .Add("Cookie", antiforgeryOptions.Value.Cookie.Name + "=" + tokens.CookieToken);
         var nameValueCollection = new List<KeyValuePair<string, string>>
         {

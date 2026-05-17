@@ -16,8 +16,7 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
 
         internal Task InvokeAsync(CancellationToken cancellationToken)
         {
-            return TestServices
-                .Input
+            return TestServices.Input
                 .SendAsync(
                     [
                         (VirtualKeyCode.VK_R, VirtualKeyCode.CONTROL),

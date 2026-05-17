@@ -186,8 +186,7 @@ namespace System.Windows.Forms.X11Internal
             }
             catch
             {
-                Console
-                    .Error
+                Console.Error
                     .WriteLine(
                         "Could not disable keyboard auto repeat, will attempt to disable manually."
                     );

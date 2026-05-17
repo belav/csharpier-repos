@@ -52,8 +52,7 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
         )
         {
             // TODO: pass fallback options: https://github.com/dotnet/roslyn/issues/60786
-            var globalOptions = document
-                .Project
+            var globalOptions = document.Project
                 .Solution
                 .Services
                 .GetService<ILegacyGlobalCleanCodeGenerationOptionsWorkspaceService>();
@@ -222,8 +221,7 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             var context = new CodeGenerationSolutionContext(
                 document.Project.Solution,
                 new CodeGenerationContext(
-                    contextLocation: semanticModel
-                        .SyntaxTree
+                    contextLocation: semanticModel.SyntaxTree
                         .GetLocation(TextSpan.FromBounds(line.Start, line.Start))
                 ),
                 fallbackOptions

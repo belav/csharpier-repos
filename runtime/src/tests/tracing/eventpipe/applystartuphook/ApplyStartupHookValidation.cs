@@ -44,8 +44,7 @@ namespace Tracing.Tests.ApplyStartupHookValidation
                         Logger.logger.Log($"IpcAdvertise: {advertise}");
 
                         string startupHookPath = Hook.Basic.AssemblyPath;
-                        Logger
-                            .logger
+                        Logger.logger
                             .Log($"Send ApplyStartupHook Diagnostic IPC: {startupHookPath}");
                         IpcMessage message = CreateApplyStartupHookMessage(startupHookPath);
                         Logger.logger.Log($"Sent: {message.ToString()}");
@@ -115,8 +114,7 @@ namespace Tracing.Tests.ApplyStartupHookValidation
                             config,
                             out ulong sessionId
                         );
-                        Logger
-                            .logger
+                        Logger.logger
                             .Log(
                                 $"Started EventPipeSession over standard connection with session id: 0x{sessionId:X}"
                             );
@@ -145,8 +143,7 @@ namespace Tracing.Tests.ApplyStartupHookValidation
                         Logger.logger.Log($"received: {response.ToString()}");
                         fSuccess &= CheckResponse(response);
 
-                        Logger
-                            .logger
+                        Logger.logger
                             .Log(
                                 "Start waiting for any event that indicates managed code is running."
                             );
@@ -165,8 +162,7 @@ namespace Tracing.Tests.ApplyStartupHookValidation
                         Logger.logger.Log($"IpcAdvertise: {advertise}");
 
                         string startupHookPath = Hook.Basic.AssemblyPath;
-                        Logger
-                            .logger
+                        Logger.logger
                             .Log($"Send ApplyStartupHook Diagnostic IPC: {startupHookPath}");
                         IpcMessage message = CreateApplyStartupHookMessage(startupHookPath);
                         Logger.logger.Log($"Sent: {message.ToString()}");

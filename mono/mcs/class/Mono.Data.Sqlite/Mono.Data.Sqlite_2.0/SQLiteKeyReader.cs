@@ -211,11 +211,8 @@ namespace Mono.Data.Sqlite
                                     int rootPage = Convert.ToInt32(
                                         tblTables.Rows[0]["TABLE_ROOTPAGE"]
                                     );
-                                    int cursor = stmt._sql.GetCursorForTable(
-                                        stmt,
-                                        database,
-                                        rootPage
-                                    );
+                                    int cursor = stmt._sql
+                                        .GetCursorForTable(stmt, database, rootPage);
 
                                     // Now enumerate the members of the index we're going to use
                                     using (

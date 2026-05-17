@@ -4013,8 +4013,7 @@ class Program
             var compilationUnit = tree.GetCompilationUnitRoot();
             var @class = (ClassDeclarationSyntax)compilationUnit.Members.Single();
             var method = (MethodDeclarationSyntax)@class.Members.Single();
-            var newModifiers = method
-                .Modifiers
+            var newModifiers = method.Modifiers
                 .Add(
                     SyntaxFactory.Token(
                         default(SyntaxTriviaList),
@@ -4200,8 +4199,7 @@ namespace HelloWorld
             var SecondUsingClause = root.Usings[1];
             var ThirdUsingClause = root.Usings[2];
 
-            var ChangesForDifferentTrees = FirstUsingClause
-                .SyntaxTree
+            var ChangesForDifferentTrees = FirstUsingClause.SyntaxTree
                 .GetChanges(SecondUsingClause.SyntaxTree);
             Assert.Equal(0, ChangesForDifferentTrees.Count);
 
@@ -4216,8 +4214,7 @@ namespace HelloWorld
             // Replace Node with a different Imports Clause
             root = root.ReplaceNode(ThirdUsingClause, newUsingClause);
 
-            var ChangesFromTransform = ThirdUsingClause
-                .SyntaxTree
+            var ChangesFromTransform = ThirdUsingClause.SyntaxTree
                 .GetChanges(newUsingClause.SyntaxTree);
             Assert.Equal(2, ChangesFromTransform.Count);
 
@@ -4258,8 +4255,7 @@ namespace HelloWorld
             var SecondUsingClause = root.Usings[1];
             var ThirdUsingClause = root.Usings[2];
 
-            var ChangesForDifferentTrees = FirstUsingClause
-                .SyntaxTree
+            var ChangesForDifferentTrees = FirstUsingClause.SyntaxTree
                 .GetChanges(SecondUsingClause.SyntaxTree);
             Assert.Equal(0, ChangesForDifferentTrees.Count);
 
@@ -4296,8 +4292,7 @@ namespace HelloWorld
             var SecondUsingClause = root.Usings[1];
             var ThirdUsingClause = root.Usings[2];
 
-            var ChangesForDifferentTrees = FirstUsingClause
-                .SyntaxTree
+            var ChangesForDifferentTrees = FirstUsingClause.SyntaxTree
                 .GetChangedSpans(SecondUsingClause.SyntaxTree);
             Assert.Equal(0, ChangesForDifferentTrees.Count);
 

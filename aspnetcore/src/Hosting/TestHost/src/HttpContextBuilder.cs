@@ -171,12 +171,13 @@ internal sealed class HttpContextBuilder : IHttpBodyControlFeature, IHttpResetFe
         // Async offload, don't let the test code block the caller.
         if (_preserveExecutionContext)
         {
-            _ = Task.Factory.StartNew(
-                RunRequestAsync,
-                default,
-                TaskCreationOptions.DenyChildAttach,
-                TaskScheduler.Default
-            );
+            _ = Task.Factory
+                .StartNew(
+                    RunRequestAsync,
+                    default,
+                    TaskCreationOptions.DenyChildAttach,
+                    TaskScheduler.Default
+                );
         }
         else
         {
@@ -262,8 +263,7 @@ internal sealed class HttpContextBuilder : IHttpBodyControlFeature, IHttpResetFe
             {
                 newFeatures[pair.Key] = pair.Value;
             }
-            var serverResponseFeature = _httpContext
-                .Features
+            var serverResponseFeature = _httpContext.Features
                 .GetRequiredFeature<IHttpResponseFeature>();
             // The client gets a deep copy of this so they can interact with the body stream independently of the server.
             var clientResponseFeature = new HttpResponseFeature()

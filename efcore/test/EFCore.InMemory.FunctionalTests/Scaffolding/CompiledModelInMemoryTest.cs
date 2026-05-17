@@ -119,12 +119,13 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding
                     modelBuilder.Entity<LazyPropertyDelegateEntity>(b =>
                     {
                         var serviceProperty = (ServiceProperty)
-                            b.Metadata.AddServiceProperty(
-                                typeof(LazyPropertyDelegateEntity)
-                                    .GetRuntimeProperties()
-                                    .Single(p => p.Name == "LoaderState"),
-                                typeof(ILazyLoader)
-                            );
+                            b.Metadata
+                                .AddServiceProperty(
+                                    typeof(LazyPropertyDelegateEntity)
+                                        .GetRuntimeProperties()
+                                        .Single(p => p.Name == "LoaderState"),
+                                    typeof(ILazyLoader)
+                                );
 
                         serviceProperty.SetParameterBinding(
                             new DependencyInjectionParameterBinding(
@@ -139,8 +140,7 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding
                 model =>
                 {
                     var lazyConstructorEntity = model.FindEntityType(typeof(LazyConstructorEntity));
-                    var lazyParameterBinding = lazyConstructorEntity!
-                        .ConstructorBinding!
+                    var lazyParameterBinding = lazyConstructorEntity!.ConstructorBinding!
                         .ParameterBindings
                         .Single();
                     Assert.Equal(typeof(ILazyLoader), lazyParameterBinding.ParameterType);

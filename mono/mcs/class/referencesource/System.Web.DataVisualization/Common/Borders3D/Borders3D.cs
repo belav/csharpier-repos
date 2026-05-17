@@ -654,8 +654,7 @@ namespace System.Web.UI.DataVisualization.Charting.Borders3D
             if (!_createdBorderTypes.Contains(name))
             {
                 // Create border type object
-                _createdBorderTypes[name] = ((Type)registeredBorderTypes[name])
-                    .Assembly
+                _createdBorderTypes[name] = ((Type)registeredBorderTypes[name]).Assembly
                     .CreateInstance(((Type)registeredBorderTypes[name]).ToString());
             }
 

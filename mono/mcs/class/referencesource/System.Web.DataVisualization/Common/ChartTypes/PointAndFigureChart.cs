@@ -181,11 +181,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             }
 
             // Remember prev. series parameters
-            series["OldXValueIndexed"] = series
-                .IsXValueIndexed
+            series["OldXValueIndexed"] = series.IsXValueIndexed
                 .ToString(CultureInfo.InvariantCulture);
-            series["OldYValuesPerPoint"] = series
-                .YValuesPerPoint
+            series["OldYValuesPerPoint"] = series.YValuesPerPoint
                 .ToString(CultureInfo.InvariantCulture);
             series.IsXValueIndexed = true;
 
@@ -853,8 +851,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             {
                 // Check for the PointAndFigure chart type
                 if (
-                    series
-                        .Name
+                    series.Name
                         .StartsWith("POINTANDFIGURE_ORIGINAL_DATA_", StringComparison.Ordinal)
                 )
                 {
@@ -919,8 +916,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                             boxXSize *= 0.8;
 
                             // Get absolute size in pixels
-                            SizeF markSize = chart
-                                .chartPicture
+                            SizeF markSize = chart.chartPicture
                                 .ChartGraph
                                 .GetAbsoluteSize(new SizeF((float)boxXSize, (float)boxYSize));
 

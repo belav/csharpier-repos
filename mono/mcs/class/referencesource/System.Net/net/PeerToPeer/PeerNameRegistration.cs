@@ -107,8 +107,7 @@ namespace System.Net.PeerToPeer
             m_PeerNameRecord.PeerName = name;
             m_Port = port;
             m_Cloud = cloud;
-            Logging
-                .P2PTraceSource
+            Logging.P2PTraceSource
                 .TraceEvent(
                     TraceEventType.Information,
                     0,
@@ -225,8 +224,7 @@ namespace System.Net.PeerToPeer
             if (m_Disposed)
                 throw new ObjectDisposedException(this.GetType().FullName);
 
-            Logging
-                .P2PTraceSource
+            Logging.P2PTraceSource
                 .TraceEvent(
                     TraceEventType.Information,
                     0,
@@ -301,8 +299,7 @@ namespace System.Net.PeerToPeer
             //---------------------------------------------------------------
             if (Logging.P2PTraceSource.Switch.ShouldTrace(TraceEventType.Information))
             {
-                Logging
-                    .P2PTraceSource
+                Logging.P2PTraceSource
                     .TraceEvent(
                         TraceEventType.Information,
                         0,
@@ -430,8 +427,7 @@ namespace System.Net.PeerToPeer
             }
             m_RegisteredPeerName = m_PeerNameRecord.PeerName;
             m_IsRegistered = true;
-            Logging
-                .P2PTraceSource
+            Logging.P2PTraceSource
                 .TraceEvent(
                     TraceEventType.Information,
                     0,
@@ -518,8 +514,7 @@ namespace System.Net.PeerToPeer
             //---------------------------------------------------------------
             if (Logging.P2PTraceSource.Switch.ShouldTrace(TraceEventType.Information))
             {
-                Logging
-                    .P2PTraceSource
+                Logging.P2PTraceSource
                     .TraceEvent(
                         TraceEventType.Information,
                         0,
@@ -630,8 +625,7 @@ namespace System.Net.PeerToPeer
                     }
                 }
 
-                Logging
-                    .P2PTraceSource
+                Logging.P2PTraceSource
                     .TraceEvent(
                         TraceEventType.Information,
                         0,

@@ -378,8 +378,7 @@ namespace System.Web.UI.MobileControls.Adapters
             {
                 // We use __ufps as the delimiter in the collection.
                 writer.WriteHiddenField(
-                    Constants
-                        .UniqueFilePathSuffixVariable
+                    Constants.UniqueFilePathSuffixVariable
                         .Substring(0, Constants.UniqueFilePathSuffixVariable.Length - 1),
                     String.Empty
                 );

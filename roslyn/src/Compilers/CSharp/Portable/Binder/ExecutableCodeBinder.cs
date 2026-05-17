@@ -161,8 +161,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             Location errorLocation =
-                (iterator as SynthesizedSimpleProgramEntryPointSymbol)
-                    ?.ReturnTypeSyntax
+                (iterator as SynthesizedSimpleProgramEntryPointSymbol)?.ReturnTypeSyntax
                     .GetLocation() ?? iterator.GetFirstLocation();
             if (iterator.IsVararg)
             {

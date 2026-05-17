@@ -75,8 +75,7 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
         public string Resolve(string assemblyName)
         {
             string path;
-            GlobalAssemblyCache
-                .Instance
+            GlobalAssemblyCache.Instance
                 .ResolvePartialName(assemblyName, out path, Architectures, this.PreferredCulture);
             return File.Exists(path) ? path : null;
         }

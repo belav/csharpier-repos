@@ -1060,29 +1060,28 @@ namespace MonoTests.System.Security.Cryptography.X509Certificates
             c.Add(new X509Certificate2(X509Certificate2Test.cert_8));
             Assert.AreEqual(
                 0,
-                c.Find(
-                    X509FindType.FindBySubjectKeyIdentifier,
-                    "9D2D73C3B8E34D2928C3",
-                    false
-                ).Count,
+                c.Find(X509FindType.FindBySubjectKeyIdentifier, "9D2D73C3B8E34D2928C3", false)
+                    .Count,
                 "FindBySubjectKeyIdentifier/half/false"
             );
             Assert.AreEqual(
                 1,
                 c.Find(
-                    X509FindType.FindBySubjectKeyIdentifier,
-                    "9D2D73C3B8E34D2928C365BEA998CBD68A06689C",
-                    false
-                ).Count,
+                        X509FindType.FindBySubjectKeyIdentifier,
+                        "9D2D73C3B8E34D2928C365BEA998CBD68A06689C",
+                        false
+                    )
+                    .Count,
                 "FindBySubjectKeyIdentifier/full/false"
             );
             Assert.AreEqual(
                 1,
                 c.Find(
-                    X509FindType.FindBySubjectKeyIdentifier,
-                    "9d2d73c3b8e34d2928c365bea998cbd68a06689c",
-                    false
-                ).Count,
+                        X509FindType.FindBySubjectKeyIdentifier,
+                        "9d2d73c3b8e34d2928c365bea998cbd68a06689c",
+                        false
+                    )
+                    .Count,
                 "FindBySubjectKeyIdentifier/full/false"
             );
         }

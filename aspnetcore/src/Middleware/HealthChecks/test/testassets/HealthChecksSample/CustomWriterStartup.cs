@@ -52,8 +52,7 @@ public class CustomWriterStartup
             new JProperty(
                 "results",
                 new JObject(
-                    result
-                        .Entries
+                    result.Entries
                         .Select(pair => new JProperty(
                             pair.Key,
                             new JObject(

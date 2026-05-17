@@ -47,8 +47,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CallHierarchy
             _navigableLocation = navigableLocation;
             _finders = finders;
             _containingTypeName = symbol.ContainingType.ToDisplayString(ContainingTypeFormat);
-            _containingNamespaceName = symbol
-                .ContainingNamespace
+            _containingNamespaceName = symbol.ContainingNamespace
                 .ToDisplayString(ContainingNamespaceFormat);
             _glyphCreator = glyphCreator;
             _name = symbol.ToDisplayString(MemberNameFormat);
@@ -143,8 +142,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CallHierarchy
 
         private async Task NavigateToAsync()
         {
-            using var context = _provider
-                .ThreadOperationExecutor
+            using var context = _provider.ThreadOperationExecutor
                 .BeginExecute(
                     ServicesVSResources.Call_Hierarchy,
                     ServicesVSResources.Navigating,

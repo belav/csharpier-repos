@@ -100,8 +100,7 @@ internal partial class WpfBackgroundWorkIndicatorFactory
 
             // Create a tool-tip at the requested position.  Turn off all default behavior for it.  We'll be
             // controlling everything ourselves.
-            _toolTipPresenter = factory
-                ._toolTipPresenterFactory
+            _toolTipPresenter = factory._toolTipPresenterFactory
                 .Create(
                     textView,
                     new ToolTipParameters(

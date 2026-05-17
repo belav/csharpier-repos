@@ -53,8 +53,7 @@ public static class TestStartup
             foreach (var requestDelegate in delegates)
             {
                 if (
-                    context
-                        .Request
+                    context.Request
                         .Path
                         .StartsWithSegments(
                             requestDelegate.Key,

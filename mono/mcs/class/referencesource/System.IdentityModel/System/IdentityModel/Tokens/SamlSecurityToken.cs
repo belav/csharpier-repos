@@ -96,8 +96,7 @@ namespace System.IdentityModel.Tokens
             if (typeof(T) == typeof(SamlAssertionKeyIdentifierClause))
                 return new SamlAssertionKeyIdentifierClause(this.Id) as T;
 
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(
                     new InvalidOperationException(SR.GetString(SR.UnableToCreateTokenReference))
                 );

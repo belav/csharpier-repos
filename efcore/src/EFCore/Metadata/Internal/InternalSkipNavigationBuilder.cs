@@ -74,8 +74,7 @@ public class InternalSkipNavigationBuilder
             && oldForeignKey.ReferencingSkipNavigations?.Any() != true
         )
         {
-            oldForeignKey
-                .DeclaringEntityType
+            oldForeignKey.DeclaringEntityType
                 .Builder
                 .HasNoRelationship(oldForeignKey, ConfigurationSource.Convention);
         }
@@ -232,8 +231,7 @@ public class InternalSkipNavigationBuilder
         targetEntityType ??= Metadata.TargetEntityType;
         if (!targetEntityType.IsInModel)
         {
-            targetEntityType = Metadata
-                .DeclaringEntityType
+            targetEntityType = Metadata.DeclaringEntityType
                 .Model
                 .FindEntityType(targetEntityType.Name);
             if (targetEntityType == null)

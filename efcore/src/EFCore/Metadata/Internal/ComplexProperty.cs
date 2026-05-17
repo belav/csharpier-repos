@@ -189,8 +189,7 @@ public class ComplexProperty
         FieldInfo? newFieldInfo,
         FieldInfo? oldFieldInfo
     ) =>
-        DeclaringType
-            .Model
+        DeclaringType.Model
             .ConventionDispatcher
             .OnComplexPropertyFieldChanged(Builder, newFieldInfo, oldFieldInfo);
 
@@ -276,8 +275,7 @@ public class ComplexProperty
         IConventionAnnotation? annotation,
         IConventionAnnotation? oldAnnotation
     ) =>
-        DeclaringType
-            .Model
+        DeclaringType.Model
             .ConventionDispatcher
             .OnComplexPropertyAnnotationChanged(Builder, name, annotation, oldAnnotation);
 

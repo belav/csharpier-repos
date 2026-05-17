@@ -58,9 +58,8 @@ namespace System.Runtime.Collections
                 }
                 else
                 {
-                    throw Fx.Exception.AsError(
-                        new KeyNotFoundException(InternalSR.KeyNotFoundInDictionary)
-                    );
+                    throw Fx.Exception
+                        .AsError(new KeyNotFoundException(InternalSR.KeyNotFoundInDictionary));
                 }
             }
             set

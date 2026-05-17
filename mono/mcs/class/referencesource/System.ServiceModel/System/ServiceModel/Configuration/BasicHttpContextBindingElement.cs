@@ -65,8 +65,7 @@ namespace System.ServiceModel.Configuration
             }
             else if (!this.AllowCookies)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(
                         SR.GetString(SR.BasicHttpContextBindingRequiresAllowCookie, this.Name, "")
                     );

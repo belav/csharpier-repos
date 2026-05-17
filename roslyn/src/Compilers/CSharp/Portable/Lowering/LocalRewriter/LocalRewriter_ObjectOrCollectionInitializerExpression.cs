@@ -193,8 +193,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             Debug.Assert(addMethod.Name == "Add");
             Debug.Assert(
-                addMethod
-                    .Parameters
+                addMethod.Parameters
                     .Skip(addMethod.IsExtensionMethod ? 1 : 0)
                     .All(p =>
                         p.RefKind is RefKind.None or RefKind.In or RefKind.RefReadOnlyParameter
@@ -680,8 +679,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 ArrayBuilder<LocalSymbol>? temps
                             ) elementArg
                         ) =>
-                            elementArg
-                                .rewriter
+                            elementArg.rewriter
                                 .EvaluateSideEffects(
                                     element,
                                     RefKind.None,
@@ -758,8 +756,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 #if DEBUG
             var discardedUseSiteInfo = CompoundUseSiteInfo<AssemblySymbol>.Discarded;
             Debug.Assert(
-                _compilation
-                    .Conversions
+                _compilation.Conversions
                     .ClassifyConversionFromType(
                         rewrittenReceiver.Type,
                         memberSymbol.ContainingType,

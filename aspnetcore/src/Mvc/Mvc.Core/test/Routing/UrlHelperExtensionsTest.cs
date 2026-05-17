@@ -101,8 +101,7 @@ public class UrlHelperExtensionsTest
             .Callback((UrlRouteContext context) => actual = context);
 
         // Act
-        urlHelper
-            .Object
+        urlHelper.Object
             .Page("/TestPage", pageHandler: null, values: new { id = 13 }, protocol: "https");
 
         // Assert
@@ -138,8 +137,7 @@ public class UrlHelperExtensionsTest
             .Callback((UrlRouteContext context) => actual = context);
 
         // Act
-        urlHelper
-            .Object
+        urlHelper.Object
             .Page(
                 "/TestPage",
                 pageHandler: null,
@@ -181,8 +179,7 @@ public class UrlHelperExtensionsTest
             .Callback((UrlRouteContext context) => actual = context);
 
         // Act
-        urlHelper
-            .Object
+        urlHelper.Object
             .Page("/TestPage", "test-handler", new { id = 13 }, "https", "mytesthost", "#toc");
 
         // Assert
@@ -401,8 +398,7 @@ public class UrlHelperExtensionsTest
 
         // Act
         string page = null;
-        urlHelper
-            .Object
+        urlHelper.Object
             .Page(page, pageHandler: null, values: new { handler = "route-value-handler" });
 
         // Assert

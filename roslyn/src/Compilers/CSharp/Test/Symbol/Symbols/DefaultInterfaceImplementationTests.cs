@@ -285,8 +285,7 @@ public interface I1
             if (m is PEModuleSymbol peModule)
             {
                 int rva;
-                peModule
-                    .Module
+                peModule.Module
                     .GetMethodDefPropsOrThrow(
                         ((PEMethodSymbol)m1.OriginalDefinition).Handle,
                         out _,
@@ -2738,8 +2737,7 @@ class Test1 : I2
                     Assert.True(i1.IsMetadataAbstract);
 
                     int rva;
-                    ((PEModuleSymbol)m)
-                        .Module
+                    ((PEModuleSymbol)m).Module
                         .GetMethodDefPropsOrThrow(result.Handle, out _, out _, out _, out rva);
                     Assert.NotEqual(0, rva);
 
@@ -3533,8 +3531,7 @@ class Test2 : I1
 
                 if (haveGet)
                 {
-                    peModule
-                        .Module
+                    peModule.Module
                         .GetMethodDefPropsOrThrow(
                             ((PEMethodSymbol)p1.GetMethod).Handle,
                             out _,
@@ -3547,8 +3544,7 @@ class Test2 : I1
 
                 if (haveSet)
                 {
-                    peModule
-                        .Module
+                    peModule.Module
                         .GetMethodDefPropsOrThrow(
                             ((PEMethodSymbol)p1.SetMethod).Handle,
                             out _,
@@ -8723,8 +8719,7 @@ class Test2 : I1
 
                 if (haveAdd)
                 {
-                    peModule
-                        .Module
+                    peModule.Module
                         .GetMethodDefPropsOrThrow(
                             ((PEMethodSymbol)addE1).Handle,
                             out _,
@@ -8737,8 +8732,7 @@ class Test2 : I1
 
                 if (haveRemove)
                 {
-                    peModule
-                        .Module
+                    peModule.Module
                         .GetMethodDefPropsOrThrow(
                             ((PEMethodSymbol)rmvE1).Handle,
                             out _,
@@ -23764,8 +23758,7 @@ set_P6
                     var compilation3 = CreateCompilation(
                         source2,
                         new[] { reference },
-                        options: TestOptions
-                            .DebugExe
+                        options: TestOptions.DebugExe
                             .WithMetadataImportOptions(metadataImportOptions),
                         parseOptions: TestOptions.Regular,
                         targetFramework: TargetFramework.NetCoreApp
@@ -24034,8 +24027,7 @@ set_P1",
                 var compilation3 = CreateCompilation(
                     source2,
                     new[] { reference },
-                    options: TestOptions
-                        .DebugExe
+                    options: TestOptions.DebugExe
                         .WithMetadataImportOptions(MetadataImportOptions.All),
                     parseOptions: TestOptions.Regular9,
                     targetFramework: TargetFramework.NetCoreApp
@@ -24052,8 +24044,7 @@ set_P1",
                 compilation3 = CreateCompilation(
                     source2,
                     new[] { reference },
-                    options: TestOptions
-                        .DebugExe
+                    options: TestOptions.DebugExe
                         .WithMetadataImportOptions(MetadataImportOptions.All),
                     parseOptions: TestOptions.Regular,
                     targetFramework: TargetFramework.NetCoreApp
@@ -41787,8 +41778,7 @@ I4.M1
             if (m1.ContainingModule is PEModuleSymbol peModule)
             {
                 int rva;
-                peModule
-                    .Module
+                peModule.Module
                     .GetMethodDefPropsOrThrow(
                         ((PEMethodSymbol)m1.OriginalDefinition).Handle,
                         out _,
@@ -42930,8 +42920,7 @@ class Test1 : I1
             if (m1.ContainingModule is PEModuleSymbol peModule)
             {
                 int rva;
-                peModule
-                    .Module
+                peModule.Module
                     .GetMethodDefPropsOrThrow(
                         ((PEMethodSymbol)m1).Handle,
                         out _,
@@ -43070,8 +43059,7 @@ class Test1 : I1
                 if (m1.ContainingModule is PEModuleSymbol peModule)
                 {
                     int rva;
-                    peModule
-                        .Module
+                    peModule.Module
                         .GetMethodDefPropsOrThrow(
                             ((PEMethodSymbol)m1).Handle,
                             out _,
@@ -88298,8 +88286,7 @@ public interface I1
             void validate(ModuleSymbol module)
             {
                 foreach (
-                    var m01 in module
-                        .GlobalNamespace
+                    var m01 in module.GlobalNamespace
                         .GetTypeMember("I1")
                         .GetMembers()
                         .OfType<MethodSymbol>()

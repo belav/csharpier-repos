@@ -18,8 +18,7 @@ public class UpdatesSqliteTest : UpdatesRelationalTestBase<UpdatesSqliteTest.Upd
     public override void Identifiers_are_generated_correctly()
     {
         using var context = CreateContext();
-        var entityType = context
-            .Model
+        var entityType = context.Model
             .FindEntityType(
                 typeof(LoginEntityTypeWithAnExtremelyLongAndOverlyConvolutedNameThatIsUsedToVerifyThatTheStoreIdentifierGenerationLengthLimitIsWorkingCorrectly)
             );

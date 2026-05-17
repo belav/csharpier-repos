@@ -49,8 +49,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Interactive
             _monitorSelection = monitorSelection;
             _componentModel = componentModel;
             _threadingContext = threadingContext;
-            _resetInteractiveCommand = _componentModel
-                .DefaultExportProvider
+            _resetInteractiveCommand = _componentModel.DefaultExportProvider
                 .GetExports<IResetInteractiveCommand, ContentTypeMetadata>()
                 .Where(resetInteractiveService =>
                     resetInteractiveService.Metadata.ContentTypes.Contains(_contentType)

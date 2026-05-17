@@ -91,8 +91,7 @@ namespace System.Net.Security.Tests
             TcpListener listener = new TcpListener(IPAddress.Loopback, 0);
 
             using (
-                X509Certificate2 serverCertificate = Configuration
-                    .Certificates
+                X509Certificate2 serverCertificate = Configuration.Certificates
                     .GetServerCertificate()
             )
             using (TcpClient client = new TcpClient())
@@ -245,13 +244,11 @@ namespace System.Net.Security.Tests
             using (client)
             using (server)
             using (
-                X509Certificate2 serverCertificate = Configuration
-                    .Certificates
+                X509Certificate2 serverCertificate = Configuration.Certificates
                     .GetServerCertificate()
             )
             using (
-                X509Certificate2 clientCertificate = Configuration
-                    .Certificates
+                X509Certificate2 clientCertificate = Configuration.Certificates
                     .GetClientCertificate()
             )
             {
@@ -353,13 +350,11 @@ namespace System.Net.Security.Tests
             using (client)
             using (server)
             using (
-                X509Certificate2 serverCertificate = Configuration
-                    .Certificates
+                X509Certificate2 serverCertificate = Configuration.Certificates
                     .GetServerCertificate()
             )
             using (
-                X509Certificate2 clientCertificate = Configuration
-                    .Certificates
+                X509Certificate2 clientCertificate = Configuration.Certificates
                     .GetClientCertificate()
             )
             {
@@ -455,8 +450,7 @@ namespace System.Net.Security.Tests
             using (client)
             using (server)
             {
-                using X509Certificate2 serverCertificate = Configuration
-                    .Certificates
+                using X509Certificate2 serverCertificate = Configuration.Certificates
                     .GetServerCertificate();
 
                 SslClientAuthenticationOptions clientOptions = new SslClientAuthenticationOptions()
@@ -513,11 +507,9 @@ namespace System.Net.Security.Tests
             using (SslStream server = new SslStream(serverStream))
             using (SslStream client = new SslStream(clientChunkingStream))
             {
-                using X509Certificate2 serverCertificate = Configuration
-                    .Certificates
+                using X509Certificate2 serverCertificate = Configuration.Certificates
                     .GetServerCertificate();
-                using X509Certificate2 clientCertificate = Configuration
-                    .Certificates
+                using X509Certificate2 clientCertificate = Configuration.Certificates
                     .GetClientCertificate();
 
                 SslClientAuthenticationOptions clientOptions = new SslClientAuthenticationOptions()
@@ -602,11 +594,9 @@ namespace System.Net.Security.Tests
             using (client)
             using (server)
             {
-                using X509Certificate2 serverCertificate = Configuration
-                    .Certificates
+                using X509Certificate2 serverCertificate = Configuration.Certificates
                     .GetServerCertificate();
-                using X509Certificate2 clientCertificate = Configuration
-                    .Certificates
+                using X509Certificate2 clientCertificate = Configuration.Certificates
                     .GetClientCertificate();
 
                 SslClientAuthenticationOptions clientOptions = new SslClientAuthenticationOptions()
@@ -682,13 +672,11 @@ namespace System.Net.Security.Tests
             using (client)
             using (server)
             using (
-                X509Certificate2 serverCertificate = Configuration
-                    .Certificates
+                X509Certificate2 serverCertificate = Configuration.Certificates
                     .GetServerCertificate()
             )
             using (
-                X509Certificate2 clientCertificate = Configuration
-                    .Certificates
+                X509Certificate2 clientCertificate = Configuration.Certificates
                     .GetClientCertificate()
             )
             {
@@ -785,13 +773,11 @@ namespace System.Net.Security.Tests
             using (client)
             using (server)
             using (
-                X509Certificate2 serverCertificate = Configuration
-                    .Certificates
+                X509Certificate2 serverCertificate = Configuration.Certificates
                     .GetServerCertificate()
             )
             using (
-                X509Certificate2 clientCertificate = Configuration
-                    .Certificates
+                X509Certificate2 clientCertificate = Configuration.Certificates
                     .GetClientCertificate()
             )
             {
@@ -877,13 +863,11 @@ namespace System.Net.Security.Tests
             using (client)
             using (server)
             using (
-                X509Certificate2 serverCertificate = Configuration
-                    .Certificates
+                X509Certificate2 serverCertificate = Configuration.Certificates
                     .GetServerCertificate()
             )
             using (
-                X509Certificate2 clientCertificate = Configuration
-                    .Certificates
+                X509Certificate2 clientCertificate = Configuration.Certificates
                     .GetClientCertificate()
             )
             {
@@ -1039,8 +1023,7 @@ namespace System.Net.Security.Tests
                 RevocationMode = X509RevocationMode.NoCheck,
                 TrustMode = X509ChainTrustMode.CustomRootTrust,
             };
-            clientOptions
-                .CertificateChainPolicy
+            clientOptions.CertificateChainPolicy
                 .CustomTrustStore
                 .Add(_certificates.serverChain[_certificates.serverChain.Count - 1]);
             // Add only one CA to verify that peer did send intermediate CA cert.
@@ -1049,8 +1032,7 @@ namespace System.Net.Security.Tests
             {
                 for (int i = split; i < _certificates.serverChain.Count - 1; i++)
                 {
-                    clientOptions
-                        .CertificateChainPolicy
+                    clientOptions.CertificateChainPolicy
                         .ExtraStore
                         .Add(_certificates.serverChain[i]);
                 }
@@ -1443,8 +1425,7 @@ namespace System.Net.Security.Tests
                     (ssl, info, o, ct) =>
                     {
                         callbackCalled = true;
-                        options.ServerCertificate = Configuration
-                            .Certificates
+                        options.ServerCertificate = Configuration.Certificates
                             .GetServerCertificate();
                         return new ValueTask<SslServerAuthenticationOptions>(options);
                     },

@@ -28,8 +28,7 @@ namespace System.IO
                 return;
 
             // Create handle to directory being monitored
-            _directoryHandle = Interop
-                .Kernel32
+            _directoryHandle = Interop.Kernel32
                 .CreateFile(
                     lpFileName: _directory,
                     dwDesiredAccess: Interop.Kernel32.FileOperations.FILE_LIST_DIRECTORY,
@@ -168,11 +167,9 @@ namespace System.IO
                     return;
 
                 // Get the overlapped pointer to use for this iteration.
-                overlappedPointer = state
-                    .ThreadPoolBinding
+                overlappedPointer = state.ThreadPoolBinding
                     .AllocateNativeOverlapped(state.PreAllocatedOverlapped);
-                continueExecuting = Interop
-                    .Kernel32
+                continueExecuting = Interop.Kernel32
                     .ReadDirectoryChangesW(
                         state.DirectoryHandle,
                         state.Buffer, // the buffer is kept pinned for the duration of the sync and async operation by the PreAllocatedOverlapped

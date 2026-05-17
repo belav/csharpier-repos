@@ -342,9 +342,8 @@ namespace tests.system_data_dll.System_Data
 
             dtChild.Constraints.Clear();
             dtParent.Constraints.Clear();
-            ds.Relations.Add(
-                new DataRelation("myRelation", dtParent.Columns[0], dtChild.Columns[0])
-            );
+            ds.Relations
+                .Add(new DataRelation("myRelation", dtParent.Columns[0], dtChild.Columns[0]));
 
             try
             {

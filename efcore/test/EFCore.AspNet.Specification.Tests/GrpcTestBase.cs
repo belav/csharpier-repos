@@ -98,8 +98,7 @@ public abstract class GrpcTestBase<TFixture> : IClassFixture<TFixture>
     {
         using var context = Fixture.CreateContext();
 
-        var entityTypeMappings = context
-            .Model
+        var entityTypeMappings = context.Model
             .GetEntityTypes()
             .Select(e => new EntityTypeMapping(e))
             .ToList();

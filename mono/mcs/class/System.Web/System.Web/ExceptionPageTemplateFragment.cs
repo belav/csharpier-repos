@@ -164,8 +164,7 @@ namespace System.Web
         {
             if (!File.Exists(path))
             {
-                Console
-                    .Error
+                Console.Error
                     .WriteLine("File '{0}' not found. Required for exception template.", path);
                 return String.Empty;
             }
@@ -176,8 +175,7 @@ namespace System.Web
             }
             catch (Exception ex)
             {
-                Console
-                    .Error
+                Console.Error
                     .WriteLine(
                         "Error reading file '{0}'. Required for exception template. Exception {1} has been thrown: {2}",
                         path,
@@ -205,8 +203,7 @@ namespace System.Web
                 }
                 catch (Exception ex)
                 {
-                    Console
-                        .Error
+                    Console.Error
                         .WriteLine(
                             "Unable to load assembly '{0}' needed to retrieve an exception template resource '{1}'. Exception {2} has been thrown: {3}",
                             assemblyName,
@@ -225,8 +222,7 @@ namespace System.Web
                 Stream st = asm.GetManifestResourceStream(resourceName);
                 if (st == null)
                 {
-                    Console
-                        .Error
+                    Console.Error
                         .WriteLine(
                             "Manifest resource '{0}' required for exception template not found in assembly '{1}'.",
                             resourceName,
@@ -240,8 +236,7 @@ namespace System.Web
             }
             catch (Exception ex)
             {
-                Console
-                    .Error
+                Console.Error
                     .WriteLine(
                         "Error reading manifest resource '{0}' from assembly '{1}', required for exception template. Exception {2} has been thrown: {3}",
                         resourceName,

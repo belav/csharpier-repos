@@ -37,8 +37,7 @@ namespace System.Security.Cryptography
         )
         {
             CheckDisposed();
-            Interop
-                .AppleCrypto
+            Interop.AppleCrypto
                 .AesGcmEncrypt(_key, nonce, plaintext, ciphertext, tag, associatedData);
         }
 
@@ -51,8 +50,7 @@ namespace System.Security.Cryptography
         )
         {
             CheckDisposed();
-            Interop
-                .AppleCrypto
+            Interop.AppleCrypto
                 .AesGcmDecrypt(_key, nonce, ciphertext, tag, plaintext, associatedData);
         }
 

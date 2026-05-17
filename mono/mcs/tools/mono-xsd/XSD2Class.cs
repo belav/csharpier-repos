@@ -141,8 +141,7 @@ namespace Commons.Xml.XSD2ClassLib
             {
                 GenerateComplexType(baseComplexType);
                 //				currentType.BaseTypes = new CodeTypeReferenceCollection ();
-                currentType
-                    .BaseTypes
+                currentType.BaseTypes
                     .Add(
                         new CodeTypeReference(
                             (
@@ -154,15 +153,13 @@ namespace Commons.Xml.XSD2ClassLib
             else if (xsType.BaseSchemaType != null)
             {
                 // TODO: insufficient. e.g. XmlQualifiedName
-                currentType
-                    .BaseTypes
+                currentType.BaseTypes
                     .Add(new CodeTypeReference(((XmlSchemaSimpleType)xsType.BaseSchemaType).Name));
             }
 
             // anyAttribute
             if (xsType.AnyAttribute != null)
-                currentType
-                    .Members
+                currentType.Members
                     .Add(
                         CreateMemberField(
                             typeof(XmlAttribute).FullName,
@@ -394,22 +391,21 @@ namespace Commons.Xml.XSD2ClassLib
             {
                 case XmlStructureType.Element:
                     if (clrName != xmlName)
-                        cmf.CustomAttributes.Add(
-                            CreateXmlAttribute(typeof(XmlElementAttribute), xmlName)
-                        );
+                        cmf.CustomAttributes
+                            .Add(CreateXmlAttribute(typeof(XmlElementAttribute), xmlName));
                     break;
                 case XmlStructureType.Attribute:
-                    cmf.CustomAttributes.Add(
-                        CreateXmlAttribute(
-                            typeof(XmlAttributeAttribute),
-                            clrName != xmlName ? xmlName : null
-                        )
-                    );
+                    cmf.CustomAttributes
+                        .Add(
+                            CreateXmlAttribute(
+                                typeof(XmlAttributeAttribute),
+                                clrName != xmlName ? xmlName : null
+                            )
+                        );
                     break;
                 case XmlStructureType.AnyAttribute:
-                    cmf.CustomAttributes.Add(
-                        CreateXmlAttribute(typeof(XmlAnyAttributeAttribute), null)
-                    );
+                    cmf.CustomAttributes
+                        .Add(CreateXmlAttribute(typeof(XmlAnyAttributeAttribute), null));
                     reference.ArrayRank = 1;
                     break;
             }
@@ -439,18 +435,21 @@ namespace Commons.Xml.XSD2ClassLib
             if (includeInSchema)
             {
                 if (xmlName != clrName)
-                    decl.CustomAttributes.Add(
-                        CreateXmlAttribute(typeof(XmlTypeAttribute), xmlName)
-                    );
+                    decl.CustomAttributes
+                        .Add(CreateXmlAttribute(typeof(XmlTypeAttribute), xmlName));
             }
             else
             {
                 CodeAttributeDeclaration xt = new CodeAttributeDeclaration(
                     typeof(XmlTypeAttribute).FullName
                 );
-                xt.Arguments.Add(
-                    new CodeAttributeArgument("IncludeInSchema", new CodePrimitiveExpression(false))
-                );
+                xt.Arguments
+                    .Add(
+                        new CodeAttributeArgument(
+                            "IncludeInSchema",
+                            new CodePrimitiveExpression(false)
+                        )
+                    );
                 decl.CustomAttributes.Add(xt);
             }
             return decl;
@@ -492,8 +491,7 @@ namespace Commons.Xml.XSD2ClassLib
         {
             CodeAttributeDeclaration xmlAtt = new CodeAttributeDeclaration(attrType.FullName);
             if (name != null)
-                xmlAtt
-                    .Arguments
+                xmlAtt.Arguments
                     .Add(new CodeAttributeArgument("Name", new CodePrimitiveExpression(name)));
 
             return xmlAtt;

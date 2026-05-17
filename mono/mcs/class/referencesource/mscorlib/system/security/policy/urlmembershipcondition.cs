@@ -164,8 +164,7 @@ namespace System.Security.Policy
                 ParseURL();
 
             SecurityElement root = new SecurityElement("IMembershipCondition");
-            System
-                .Security
+            System.Security
                 .Util
                 .XMLUtil
                 .AddClassAttribute(

@@ -42,8 +42,7 @@ namespace System.ServiceModel.Dispatcher
         {
             if (actions.Length == 0)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentException(SR.GetString(SR.ActionFilterEmptyList), "actions")
                     );

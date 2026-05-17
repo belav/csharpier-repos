@@ -51,8 +51,7 @@ public class LazyLoadingTests : AppTestBase
             )
         );
         Assert.True(
-            result
-                .ConsoleOutput
+            result.ConsoleOutput
                 .Any(m =>
                     m.Contains("Could not load file or assembly") && m.Contains("System.Text.Json")
                 ),

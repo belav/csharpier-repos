@@ -232,8 +232,7 @@ namespace System.Web.UI.MobileControls
                 try
                 {
                     predicateDelegate = (IndividualDeviceConfig.DeviceQualifiesDelegate)
-                        IndividualDeviceConfig
-                            .DeviceQualifiesDelegate
+                        IndividualDeviceConfig.DeviceQualifiesDelegate
                             .CreateDelegate(
                                 typeof(IndividualDeviceConfig.DeviceQualifiesDelegate),
                                 predicateClassType,

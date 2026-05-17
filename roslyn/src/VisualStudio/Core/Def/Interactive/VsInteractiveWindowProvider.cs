@@ -115,8 +115,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Interactive
             }
 
             var window = _vsInteractiveWindow.InteractiveWindow;
-            window
-                .TextView
+            window.TextView
                 .Options
                 .SetOptionValue(DefaultTextViewHostOptions.SuggestionMarginId, true);
 

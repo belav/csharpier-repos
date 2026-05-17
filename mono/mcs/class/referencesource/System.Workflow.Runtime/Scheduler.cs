@@ -64,8 +64,7 @@ namespace System.Workflow.Runtime
             if (this.highPriorityEntriesQueue == null)
             {
                 this.highPriorityEntriesQueue = new Queue<SchedulableItem>();
-                rootExec
-                    .RootActivity
+                rootExec.RootActivity
                     .SetValue(
                         Scheduler.HighPriorityEntriesQueueProperty,
                         this.highPriorityEntriesQueue
@@ -74,8 +73,7 @@ namespace System.Workflow.Runtime
             if (this.normalPriorityEntriesQueue == null)
             {
                 this.normalPriorityEntriesQueue = new Queue<SchedulableItem>();
-                rootExec
-                    .RootActivity
+                rootExec.RootActivity
                     .SetValue(
                         Scheduler.NormalPriorityEntriesQueueProperty,
                         this.normalPriorityEntriesQueue
@@ -145,9 +143,8 @@ namespace System.Workflow.Runtime
                 int contextId = item.ContextId;
 
                 // This function gets the root or enclosing while-loop activity
-                Activity contextActivity = this.RootWorkflowExecutor.GetContextActivityForId(
-                    contextId
-                );
+                Activity contextActivity = this.RootWorkflowExecutor
+                    .GetContextActivityForId(contextId);
                 if (contextActivity == null)
                     throw new InvalidOperationException(
                         ExecutionStringManager.InvalidExecutionContext
@@ -177,10 +174,8 @@ namespace System.Workflow.Runtime
 
                         Activity atomicActivity = null;
                         if (
-                            this.RootWorkflowExecutor.IsActivityInAtomicContext(
-                                itemActivity,
-                                out atomicActivity
-                            )
+                            this.RootWorkflowExecutor
+                                .IsActivityInAtomicContext(itemActivity, out atomicActivity)
                         )
                         {
                             transactionalProperties = (TransactionalProperties)
@@ -206,8 +201,7 @@ namespace System.Workflow.Runtime
                                         EnterpriseServicesInteropOption.Full
                                     );
 
-                                    WorkflowTrace
-                                        .Runtime
+                                    WorkflowTrace.Runtime
                                         .TraceEvent(
                                             TraceEventType.Information,
                                             0,
@@ -223,8 +217,7 @@ namespace System.Workflow.Runtime
                         // Run the item
                         //
                         runningItem = true;
-                        WorkflowTrace
-                            .Runtime
+                        WorkflowTrace.Runtime
                             .TraceEvent(
                                 TraceEventType.Information,
                                 1,
@@ -258,8 +251,7 @@ namespace System.Workflow.Runtime
                         if (!ignoreFinallyBlock)
                         {
                             if (runningItem)
-                                WorkflowTrace
-                                    .Runtime
+                                WorkflowTrace.Runtime
                                     .TraceEvent(
                                         TraceEventType.Information,
                                         1,
@@ -273,11 +265,12 @@ namespace System.Workflow.Runtime
                             if (exp != null)
                             {
                                 //
-                                this.RootWorkflowExecutor.ExceptionOccured(
-                                    exp,
-                                    itemActivity == null ? contextActivity : itemActivity,
-                                    null
-                                );
+                                this.RootWorkflowExecutor
+                                    .ExceptionOccured(
+                                        exp,
+                                        itemActivity == null ? contextActivity : itemActivity,
+                                        null
+                                    );
                                 exp = null;
                             }
                         }
@@ -383,8 +376,7 @@ namespace System.Workflow.Runtime
         {
             lock (this.syncObject)
             {
-                WorkflowTrace
-                    .Runtime
+                WorkflowTrace.Runtime
                     .TraceEvent(
                         TraceEventType.Information,
                         1,

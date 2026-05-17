@@ -25,8 +25,7 @@ namespace System.ServiceModel.Configuration
 
             return (WebHttpBindingCollectionElement)
                 bindings[
-                    WebHttpBinding
-                        .WebHttpBindingConfigurationStrings
+                    WebHttpBinding.WebHttpBindingConfigurationStrings
                         .WebHttpBindingCollectionElementName
                 ];
         }

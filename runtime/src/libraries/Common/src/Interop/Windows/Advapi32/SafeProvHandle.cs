@@ -91,8 +91,7 @@ namespace System.Security.Cryptography
                     (_flags & (uint)Interop.Advapi32.CryptAcquireContextFlags.CRYPT_MACHINE_KEYSET)
                     | (uint)Interop.Advapi32.CryptAcquireContextFlags.CRYPT_DELETEKEYSET;
                 SafeProvHandle hIgnoredProv;
-                _ = Interop
-                    .Advapi32
+                _ = Interop.Advapi32
                     .CryptAcquireContext(
                         out hIgnoredProv,
                         _containerName,

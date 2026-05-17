@@ -159,8 +159,7 @@ namespace System.Net
             {
                 bool ignore = false;
                 context.DangerousAddRef(ref ignore);
-                status = Interop
-                    .SspiCli
+                status = Interop.SspiCli
                     .DecryptMessage(ref context._handle, ref inputOutput, 0, &qopTemp);
             }
             finally
@@ -246,8 +245,7 @@ namespace System.Net
             {
                 bool ignore = false;
                 phContext.DangerousAddRef(ref ignore);
-                return Interop
-                    .SspiCli
+                return Interop.SspiCli
                     .QuerySecurityContextToken(ref phContext._handle, out safeHandle);
             }
             finally

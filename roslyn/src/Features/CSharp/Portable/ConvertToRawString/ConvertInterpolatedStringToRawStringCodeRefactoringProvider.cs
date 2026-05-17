@@ -109,8 +109,7 @@ internal partial class ConvertInterpolatedStringToRawStringProvider
 
                 if (
                     canBeSingleLine
-                    && !document
-                        .Text
+                    && !document.Text
                         .AreOnSameLine(interpolation.OpenBraceToken, interpolation.CloseBraceToken)
                 )
                     canBeSingleLine = false;
@@ -305,8 +304,7 @@ internal partial class ConvertInterpolatedStringToRawStringProvider
                     ? CleanInterpolatedString(rawStringExpression, cancellationToken)
                     : rawStringExpression;
 
-            var startLine = document
-                .Text
+            var startLine = document.Text
                 .Lines
                 .GetLineFromPosition(GetAnchorNode(document, stringExpression).SpanStart);
             var rootAnchorIndentation = GetIndentationStringForToken(
@@ -452,8 +450,7 @@ internal partial class ConvertInterpolatedStringToRawStringProvider
         int start
     )
     {
-        var interpolation = stringExpression
-            .Contents
+        var interpolation = stringExpression.Contents
             .OfType<InterpolationSyntax>()
             .Single(i => i.Span.Contains(start));
         var interpolationLine = text.Lines.GetLineFromPosition(interpolation.SpanStart);
@@ -773,9 +770,8 @@ internal partial class ConvertInterpolatedStringToRawStringProvider
                 // though for restricted content as we never want to touch that.
                 if (line.GetFirstNonWhitespacePosition() is int pos)
                 {
-                    var currentLineLeadingWhitespace = line.Text!.ToString(
-                        TextSpan.FromBounds(line.Start, pos)
-                    );
+                    var currentLineLeadingWhitespace = line.Text!
+                        .ToString(TextSpan.FromBounds(line.Start, pos));
                     if (currentLineLeadingWhitespace.StartsWith(commonWhitespacePrefix))
                     {
                         builder.Append(
@@ -870,9 +866,8 @@ internal partial class ConvertInterpolatedStringToRawStringProvider
             if (line.GetFirstNonWhitespacePosition() is not int pos)
                 continue;
 
-            var currentLineLeadingWhitespace = line.Text!.ToString(
-                TextSpan.FromBounds(line.Start, pos)
-            );
+            var currentLineLeadingWhitespace = line.Text!
+                .ToString(TextSpan.FromBounds(line.Start, pos));
             commonLeadingWhitespace = ComputeCommonWhitespacePrefix(
                 commonLeadingWhitespace,
                 currentLineLeadingWhitespace

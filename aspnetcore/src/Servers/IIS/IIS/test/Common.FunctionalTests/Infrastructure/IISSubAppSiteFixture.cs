@@ -20,8 +20,7 @@ public class IISSubAppSiteFixture : IISTestSiteFixture
         }
         else // IIS Express
         {
-            using var stream = typeof(IISExpressDeployer)
-                .Assembly
+            using var stream = typeof(IISExpressDeployer).Assembly
                 .GetManifestResourceStream(
                     "Microsoft.AspNetCore.Server.IntegrationTesting.IIS.Http.SubApp.config"
                 );

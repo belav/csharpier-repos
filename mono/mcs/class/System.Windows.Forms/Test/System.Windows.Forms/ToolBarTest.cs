@@ -66,8 +66,7 @@ namespace MonoTests.System.Windows.Forms
 
             // I
             ImageList myImageList = new ImageList();
-            myImageList
-                .Images
+            myImageList.Images
                 .Add(
                     Image.FromFile(TestResourceHelper.GetFullPathOfResource("Test/resources/M.gif"))
                 );

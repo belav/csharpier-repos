@@ -62,8 +62,7 @@ namespace Microsoft.CodeAnalysis.ForEachCast
                 .ConfigureAwait(false);
             foreach (var diagnostic in diagnostics)
             {
-                var node = editor
-                    .OriginalRoot
+                var node = editor.OriginalRoot
                     .FindNode(diagnostic.Location.SourceSpan, getInnermostNodeForTie: true);
                 if (node is TForEachStatementSyntax foreachStatement)
                     AddCast(
@@ -89,8 +88,7 @@ namespace Microsoft.CodeAnalysis.ForEachCast
                 semanticModel.GetRequiredOperation(forEachStatement, cancellationToken);
             var variableDeclarator = (IVariableDeclaratorOperation)
                 loopOperation.LoopControlVariable;
-            var enumerableType = semanticModel
-                .Compilation
+            var enumerableType = semanticModel.Compilation
                 .GetBestTypeByMetadataName(typeof(Enumerable).FullName!);
 
             // These were already verified to be non-null in the analyzer.
@@ -98,8 +96,7 @@ namespace Microsoft.CodeAnalysis.ForEachCast
             Contract.ThrowIfNull(enumerableType);
 
             var elementType = GetForEachElementType(semanticModel, forEachStatement);
-            var conversion = semanticModel
-                .Compilation
+            var conversion = semanticModel.Compilation
                 .ClassifyCommonConversion(elementType, variableDeclarator.Symbol.Type);
 
             var rewritten = GetRewrittenCollection(

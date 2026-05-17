@@ -96,8 +96,7 @@ public abstract class WasmTemplateTestBase : BuildTestBase
                 $"Unable to parse runtimeconfigtemplate at '{runtimeconfigTemplatePath}'"
             );
 
-        var perHostConfigs = runtimeconfigTemplate
-            ?["wasmHostProperties"]
+        var perHostConfigs = runtimeconfigTemplate?["wasmHostProperties"]
             ?["perHostConfig"]
             ?.AsArray();
         if (perHostConfigs == null || perHostConfigs.Count == 0 || perHostConfigs[0] == null)

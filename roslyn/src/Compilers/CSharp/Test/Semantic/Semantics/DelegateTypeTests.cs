@@ -1412,8 +1412,7 @@ class Program
 
         private static bool HaveMatchingSignatures(IMethodSymbol methodA, IMethodSymbol methodB)
         {
-            return MemberSignatureComparer
-                .CSharp10MethodGroupSignatureComparer
+            return MemberSignatureComparer.CSharp10MethodGroupSignatureComparer
                 .Equals(methodA.GetSymbol<MethodSymbol>(), methodB.GetSymbol<MethodSymbol>());
         }
 
@@ -22810,8 +22809,7 @@ class Program
             Assert.Equal("System.Func<?>[]", typeInfo.ConvertedType.ToTestDisplayString());
 
             typeInfo = model.GetTypeInfo(
-                declarator
-                    .Initializer!
+                declarator.Initializer!
                     .Value
                     .DescendantNodes()
                     .OfType<ParenthesizedLambdaExpressionSyntax>()
@@ -22866,8 +22864,7 @@ class Program
             Assert.Equal("?[]", typeInfo.ConvertedType.ToTestDisplayString());
 
             typeInfo = model.GetTypeInfo(
-                declarator
-                    .Initializer!
+                declarator.Initializer!
                     .Value
                     .DescendantNodes()
                     .OfType<ParenthesizedLambdaExpressionSyntax>()

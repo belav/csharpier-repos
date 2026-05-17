@@ -90,12 +90,10 @@ internal sealed class TryParseModelBinder : IModelBinder
                 // current bindingContext. If not, an error is logged.
                 if (!bindingContext.ModelMetadata.IsReferenceOrNullableType)
                 {
-                    bindingContext
-                        .ModelState
+                    bindingContext.ModelState
                         .TryAddModelError(
                             bindingContext.ModelName,
-                            bindingContext
-                                .ModelMetadata
+                            bindingContext.ModelMetadata
                                 .ModelBindingMessageProvider
                                 .ValueMustNotBeNullAccessor(valueProviderResult.ToString())
                         );
@@ -123,8 +121,7 @@ internal sealed class TryParseModelBinder : IModelBinder
     private static void AddModelError(ModelBindingContext bindingContext, Exception exception)
     {
         // Conversion failed.
-        bindingContext
-            .ModelState
+        bindingContext.ModelState
             .TryAddModelError(bindingContext.ModelName, exception, bindingContext.ModelMetadata);
     }
 

@@ -111,8 +111,7 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                 explicitInterfaceImplementations: default,
                 name: member.Name,
                 typeParameters: method.TypeParameters,
-                parameters: method
-                    .Parameters
+                parameters: method.Parameters
                     .SelectAsArray(p =>
                         CodeGenerationSymbolFactory.CreateParameterSymbol(
                             p.GetAttributes(),

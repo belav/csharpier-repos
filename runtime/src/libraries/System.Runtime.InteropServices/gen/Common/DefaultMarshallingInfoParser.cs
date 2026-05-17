@@ -31,8 +31,7 @@ namespace Microsoft.Interop
                 };
             }
             else if (
-                interopAttributeData
-                    .IsUserDefined
+                interopAttributeData.IsUserDefined
                     .HasFlag(InteropAttributeMember.StringMarshallingCustomType)
             )
             {

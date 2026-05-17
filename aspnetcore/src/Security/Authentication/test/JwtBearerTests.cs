@@ -422,11 +422,9 @@ public class JwtBearerTests : SharedAuthenticationTests<JwtBearerOptions>
             options.UseSecurityTokenValidators = true;
 #pragma warning disable CS0618 // Type or member is obsolete
             options.SecurityTokenValidators.Clear();
-            options
-                .SecurityTokenValidators
+            options.SecurityTokenValidators
                 .Add(new InvalidTokenValidator(typeof(SecurityTokenInvalidAudienceException)));
-            options
-                .SecurityTokenValidators
+            options.SecurityTokenValidators
                 .Add(new InvalidTokenValidator(typeof(SecurityTokenSignatureKeyNotFoundException)));
 #pragma warning restore CS0618 // Type or member is obsolete
         });
@@ -569,8 +567,7 @@ public class JwtBearerTests : SharedAuthenticationTests<JwtBearerOptions>
             options.UseSecurityTokenValidators = true;
 #pragma warning disable CS0618 // Type or member is obsolete
             options.SecurityTokenValidators.Clear();
-            options
-                .SecurityTokenValidators
+            options.SecurityTokenValidators
                 .Add(new BlobTokenValidator(JwtBearerDefaults.AuthenticationScheme));
 #pragma warning restore CS0618 // Type or member is obsolete
         });
@@ -597,8 +594,7 @@ public class JwtBearerTests : SharedAuthenticationTests<JwtBearerOptions>
             options.UseSecurityTokenValidators = true;
 #pragma warning disable CS0618 // Type or member is obsolete
             options.SecurityTokenValidators.Clear();
-            options
-                .SecurityTokenValidators
+            options.SecurityTokenValidators
                 .Add(
                     new BlobTokenValidator(
                         "JWT",
@@ -1241,8 +1237,7 @@ public class JwtBearerTests : SharedAuthenticationTests<JwtBearerOptions>
         Assert.Equal(
             firstKey,
             Convert.ToBase64String(
-                jwtBearerOptions
-                    .TokenValidationParameters
+                jwtBearerOptions.TokenValidationParameters
                     .IssuerSigningKeys
                     .OfType<SymmetricSecurityKey>()
                     .FirstOrDefault()
@@ -1252,8 +1247,7 @@ public class JwtBearerTests : SharedAuthenticationTests<JwtBearerOptions>
         Assert.Equal(
             secondKey,
             Convert.ToBase64String(
-                jwtBearerOptions
-                    .TokenValidationParameters
+                jwtBearerOptions.TokenValidationParameters
                     .IssuerSigningKeys
                     .OfType<SymmetricSecurityKey>()
                     .LastOrDefault()
@@ -1474,8 +1468,7 @@ public class JwtBearerTests : SharedAuthenticationTests<JwtBearerOptions>
                                         return;
                                     }
 
-                                    var identifier = context
-                                        .User
+                                    var identifier = context.User
                                         .FindFirst(ClaimTypes.NameIdentifier);
                                     if (identifier == null)
                                     {
@@ -1527,13 +1520,11 @@ public class JwtBearerTests : SharedAuthenticationTests<JwtBearerOptions>
                                     var authenticationResult = await context.AuthenticateAsync(
                                         JwtBearerDefaults.AuthenticationScheme
                                     );
-                                    await context
-                                        .Response
+                                    await context.Response
                                         .WriteAsJsonAsync(
                                             new
                                             {
-                                                Expires = authenticationResult
-                                                    .Properties
+                                                Expires = authenticationResult.Properties
                                                     ?.ExpiresUtc,
                                                 Issued = authenticationResult.Properties?.IssuedUtc,
                                             }

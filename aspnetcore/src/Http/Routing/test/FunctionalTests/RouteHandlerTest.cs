@@ -77,8 +77,7 @@ public class RouteHandlerTest
                             b.DataSources.Add(testDisposeDataSource);
 
                             var group = b.MapGroup("");
-                            ((IEndpointRouteBuilder)group)
-                                .DataSources
+                            ((IEndpointRouteBuilder)group).DataSources
                                 .Add(testGroupDisposeDataSource);
                         });
                     })

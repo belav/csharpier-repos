@@ -32,8 +32,7 @@ namespace ILCompiler.DependencyAnalysis
             var mdManager = (UsageBasedMetadataManager)factory.MetadataManager;
             try
             {
-                return Dataflow
-                    .ReflectionMethodBodyScanner
+                return Dataflow.ReflectionMethodBodyScanner
                     .ScanAndProcessReturnValue(
                         factory,
                         mdManager.FlowAnnotations,

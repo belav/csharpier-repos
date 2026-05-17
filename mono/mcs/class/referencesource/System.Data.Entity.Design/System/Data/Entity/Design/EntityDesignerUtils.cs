@@ -121,10 +121,11 @@ namespace System.Data.Entity.Design
                         // treat attribute names case-sensitive (since it is xml), but attribute value case-insensitive to be accommodating .
                         if (
                             a.Name.Equals("Name", StringComparison.Ordinal)
-                            && a.Value.Equals(
-                                "MetadataArtifactProcessing",
-                                StringComparison.OrdinalIgnoreCase
-                            )
+                            && a.Value
+                                .Equals(
+                                    "MetadataArtifactProcessing",
+                                    StringComparison.OrdinalIgnoreCase
+                                )
                         )
                         {
                             foreach (XmlAttribute a2 in propertyNode.Attributes)

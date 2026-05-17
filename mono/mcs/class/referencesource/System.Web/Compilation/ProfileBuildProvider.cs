@@ -337,8 +337,7 @@ namespace System.Web.Compilation
             method.ReturnType = new CodeTypeReference( /*BaseCodeDomTreeGenerator.defaultNamespace + "." + */
                 ProfileTypeName
             );
-            method
-                .Parameters
+            method.Parameters
                 .Add(new CodeParameterDeclarationExpression(typeof(string), "username"));
 
             CodeMethodInvokeExpression cmie = new CodeMethodInvokeExpression();

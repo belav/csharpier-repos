@@ -567,20 +567,19 @@ namespace System.Runtime.Serialization
                             break;
                         case CollectionKind.GenericCollection:
                         case CollectionKind.GenericList:
-                            incrementCollectionCountMethod = XmlFormatGeneratorStatics
-                                .IncrementCollectionCountGenericMethod
-                                .MakeGenericMethod(collectionContract.ItemType);
+                            incrementCollectionCountMethod =
+                                XmlFormatGeneratorStatics.IncrementCollectionCountGenericMethod
+                                    .MakeGenericMethod(collectionContract.ItemType);
                             break;
                         case CollectionKind.GenericDictionary:
-                            incrementCollectionCountMethod = XmlFormatGeneratorStatics
-                                .IncrementCollectionCountGenericMethod
-                                .MakeGenericMethod(
-                                    Globals
-                                        .TypeOfKeyValuePair
-                                        .MakeGenericType(
-                                            collectionContract.ItemType.GetGenericArguments()
-                                        )
-                                );
+                            incrementCollectionCountMethod =
+                                XmlFormatGeneratorStatics.IncrementCollectionCountGenericMethod
+                                    .MakeGenericMethod(
+                                        Globals.TypeOfKeyValuePair
+                                            .MakeGenericType(
+                                                collectionContract.ItemType.GetGenericArguments()
+                                            )
+                                    );
                             break;
                     }
                     if (incrementCollectionCountMethod != null)
@@ -601,8 +600,7 @@ namespace System.Runtime.Serialization
                     {
                         isGenericDictionary = true;
                         keyValueTypes = collectionContract.ItemType.GetGenericArguments();
-                        enumeratorType = Globals
-                            .TypeOfGenericDictionaryEnumerator
+                        enumeratorType = Globals.TypeOfGenericDictionaryEnumerator
                             .MakeGenericType(keyValueTypes);
                     }
                     else if (collectionContract.Kind == CollectionKind.Dictionary)
@@ -686,8 +684,7 @@ namespace System.Runtime.Serialization
                     }
                     else if (isGenericDictionary)
                     {
-                        Type ctorParam = Globals
-                            .TypeOfIEnumeratorGeneric
+                        Type ctorParam = Globals.TypeOfIEnumeratorGeneric
                             .MakeGenericType(
                                 Globals.TypeOfKeyValuePair.MakeGenericType(keyValueTypes!)
                             );
@@ -1058,8 +1055,7 @@ namespace System.Runtime.Serialization
                     );
                     _ilg.Brfalse(onNull);
                     _ilg.Call(
-                        XmlFormatGeneratorStatics
-                            .GetNullableValueMethod
+                        XmlFormatGeneratorStatics.GetNullableValueMethod
                             .MakeGenericMethod(innerType)
                     );
                     memberType = innerType;

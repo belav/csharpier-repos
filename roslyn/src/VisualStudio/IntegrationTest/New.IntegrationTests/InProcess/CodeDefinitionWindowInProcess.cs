@@ -72,8 +72,7 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.InProcess
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
-            await TestServices
-                .Workspace
+            await TestServices.Workspace
                 .WaitForAsyncOperationsAsync(
                     FeatureAttribute.CodeDefinitionWindow,
                     cancellationToken

@@ -180,8 +180,7 @@ namespace Microsoft.CodeAnalysis
         {
             System.Numerics.BigInteger number;
             if (
-                System
-                    .Numerics
+                System.Numerics
                     .BigInteger
                     .TryParse(s, NumberStyles.None, CultureInfo.InvariantCulture, out number)
             )

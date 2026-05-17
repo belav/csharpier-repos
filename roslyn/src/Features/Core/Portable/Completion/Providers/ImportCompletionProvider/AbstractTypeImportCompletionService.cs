@@ -116,8 +116,7 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                 projectsBuilder.Add(currentProject);
                 projectsBuilder.AddRange(referencedProjects);
                 nonGlobalAliasedProjectReferencesSet.AddRange(
-                    currentProject
-                        .ProjectReferences
+                    currentProject.ProjectReferences
                         .Where(pr => !HasGlobalAlias(pr.Aliases))
                         .Select(pr => pr.ProjectId)
                 );
@@ -156,8 +155,7 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                     new EditorBrowsableInfo(originCompilation)
                 );
                 foreach (
-                    var peReference in currentProject
-                        .MetadataReferences
+                    var peReference in currentProject.MetadataReferences
                         .OfType<PortableExecutableReference>()
                 )
                 {

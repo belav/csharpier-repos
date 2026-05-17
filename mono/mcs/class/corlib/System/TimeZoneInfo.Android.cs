@@ -157,8 +157,7 @@ namespace System
             }
             catch (Exception e)
             {
-                Console
-                    .Error
+                Console.Error
                     .WriteLine("tzdata file \"{0}\" was present but invalid: {1}", path, e);
             }
             return false;
@@ -166,8 +165,7 @@ namespace System
 
         unsafe void ReadHeader()
         {
-            int size = System
-                .Math
+            int size = System.Math
                 .Max(
                     Marshal.SizeOf(typeof(AndroidTzDataHeader)),
                     Marshal.SizeOf(typeof(AndroidTzDataEntry))

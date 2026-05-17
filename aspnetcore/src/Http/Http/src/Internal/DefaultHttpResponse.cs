@@ -92,8 +92,7 @@ internal sealed class DefaultHttpResponse : HttpResponse
                 return;
             }
 
-            _features
-                .Collection
+            _features.Collection
                 .Set<IHttpResponseBodyFeature>(new StreamResponseBodyFeature(value, otherFeature));
         }
     }

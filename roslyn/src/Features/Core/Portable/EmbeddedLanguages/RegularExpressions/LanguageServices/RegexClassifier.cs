@@ -42,8 +42,7 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.RegularExpressions.L
 
         public void RegisterClassifications(EmbeddedLanguageClassificationContext context)
         {
-            var info = context
-                .Project
+            var info = context.Project
                 .GetRequiredLanguageService<IEmbeddedLanguagesProvider>()
                 .EmbeddedLanguageInfo;
 

@@ -359,22 +359,23 @@ namespace System.Threading
                         // the work item is invoked... that's fine, it just means we spent a bit of energy we
                         // ultimately didn't have to.  Note we explicitly don't schedule each registration individually
                         // to run concurrently, as there's no guarantee they're independent and safe to do so.
-                        return Task.Factory.StartNew(
-                            s =>
-                            {
-                                ((CancellationTokenSource)s!).ExecuteCallbackHandlers(
-                                    throwOnFirstException: false
-                                );
-                                Debug.Assert(
-                                    IsCancellationCompleted,
-                                    "Expected cancellation to have finished"
-                                );
-                            },
-                            this,
-                            CancellationToken.None,
-                            TaskCreationOptions.DenyChildAttach,
-                            TaskScheduler.Default
-                        );
+                        return Task.Factory
+                            .StartNew(
+                                s =>
+                                {
+                                    ((CancellationTokenSource)s!).ExecuteCallbackHandlers(
+                                        throwOnFirstException: false
+                                    );
+                                    Debug.Assert(
+                                        IsCancellationCompleted,
+                                        "Expected cancellation to have finished"
+                                    );
+                                },
+                                this,
+                                CancellationToken.None,
+                                TaskCreationOptions.DenyChildAttach,
+                                TaskScheduler.Default
+                            );
                     }
                 }
             }
@@ -870,16 +871,17 @@ namespace System.Threading
                         if (node.SynchronizationContext != null)
                         {
                             // Transition to the target syncContext and continue there.
-                            node.SynchronizationContext.Send(
-                                static s =>
-                                {
-                                    var n = (CallbackNode)s!;
-                                    n.Registrations.ThreadIDExecutingCallbacks =
-                                        Environment.CurrentManagedThreadId;
-                                    n.ExecuteCallback();
-                                },
-                                node
-                            );
+                            node.SynchronizationContext
+                                .Send(
+                                    static s =>
+                                    {
+                                        var n = (CallbackNode)s!;
+                                        n.Registrations.ThreadIDExecutingCallbacks =
+                                            Environment.CurrentManagedThreadId;
+                                        n.ExecuteCallback();
+                                    },
+                                    node
+                                );
                             registrations.ThreadIDExecutingCallbacks =
                                 Environment.CurrentManagedThreadId; // above may have altered ThreadIDExecutingCallbacks, so reset it
                         }

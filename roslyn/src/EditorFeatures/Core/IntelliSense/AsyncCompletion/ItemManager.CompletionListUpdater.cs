@@ -103,8 +103,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                     ? initialTriggerLocation.Snapshot
                     : _snapshotData.Snapshot;
 
-                _document = snapshotForDocument
-                    ?.TextBuffer
+                _document = snapshotForDocument?.TextBuffer
                     .AsTextContainer()
                     .GetOpenDocumentInCurrentContext();
                 if (_document != null)
@@ -378,8 +377,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                     // It's also used to sort the items by pattern matching results while preserving the original alphabetical order for items with
                     // same pattern match score since `List<T>.Sort` isn't stable.
                     if (
-                        threadLocalPatternMatchHelper
-                            .Value!
+                        threadLocalPatternMatchHelper.Value!
                             .TryCreateMatchResult(
                                 itemData.RoslynItem,
                                 roslynInitialTriggerKind,
@@ -406,8 +404,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                             else
                             {
                                 if (
-                                    _snapshotData
-                                        .Defaults
+                                    _snapshotData.Defaults
                                         .IndexOf(matchResult.CompletionItem.FilterText) >= 0
                                 )
                                 {
@@ -434,8 +431,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                         if (includedPreferredItems.Contains(completionItem.FilterText))
                             continue;
 
-                        var defaultIndex = _snapshotData
-                            .Defaults
+                        var defaultIndex = _snapshotData.Defaults
                             .IndexOf(completionItem.FilterText);
                         var fabricatedIndex = DefaultIndexToFabricatedOriginalSortedIndex(
                             defaultIndex
@@ -499,15 +495,13 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                         selectedItemIndex = 0;
                         bestOrFirstMatchResult = matchResults[0];
 
-                        var longestCommonPrefixLength = bestOrFirstMatchResult
-                            .FilterTextUsed
+                        var longestCommonPrefixLength = bestOrFirstMatchResult.FilterTextUsed
                             .GetCaseInsensitivePrefixLength(_filterText);
 
                         for (var i = 1; i < matchResults.Count; ++i)
                         {
                             var matchResult = matchResults[i];
-                            var commonPrefixLength = matchResult
-                                .FilterTextUsed
+                            var commonPrefixLength = matchResult.FilterTextUsed
                                 .GetCaseInsensitivePrefixLength(_filterText);
 
                             if (commonPrefixLength > longestCommonPrefixLength)
@@ -726,8 +720,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                     // This also preserves the behavior the VB had through Dev12.
                     hardSelect =
                         !_hasSuggestedItemOptions
-                        && bestMatchResult
-                            .Value
+                        && bestMatchResult.Value
                             .FilterTextUsed
                             .StartsWith(_filterText, StringComparison.CurrentCultureIgnoreCase);
                 }
@@ -830,8 +823,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                     {
                         // Since VS item's display text is created as Prefix + DisplayText + Suffix,
                         // we can calculate the highlighted span by adding an offset that is the length of the Prefix.
-                        return patternMatch
-                            .Value
+                        return patternMatch.Value
                             .MatchedSpans
                             .SelectAsArray(GetOffsetSpan, matchResult.CompletionItem);
                     }
@@ -901,8 +893,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
 
                 // When no items are available for a given filter, it becomes unavailable.
                 // Expanders always appear available as long as it's presented.
-                return _snapshotData
-                    .SelectedFilters
+                return _snapshotData.SelectedFilters
                     .SelectAsArray(n =>
                         n.WithAvailability(
                             n.Filter is CompletionExpander || filters.Contains(n.Filter)
@@ -1191,8 +1182,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                     var item = matches[i].CompletionItem;
                     if (item.IsPreferredItem())
                     {
-                        var defaultIndex = _snapshotData
-                            .Defaults
+                        var defaultIndex = _snapshotData.Defaults
                             .IndexOf(matches[i].CompletionItem.FilterText);
 
                         // This is not a starred item that matches default
@@ -1275,10 +1265,12 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
 
                 private bool ShouldBeFilteredOutOfCompletionList(VSCompletionItem item) =>
                     _needToFilter
-                    && !item.Filters.Any(
-                        static (filter, self) => self._selectedNonExpanderFilters.Contains(filter),
-                        this
-                    );
+                    && !item.Filters
+                        .Any(
+                            static (filter, self) =>
+                                self._selectedNonExpanderFilters.Contains(filter),
+                            this
+                        );
 
                 private bool ShouldBeFilteredOutOfExpandedCompletionList(VSCompletionItem item)
                 {

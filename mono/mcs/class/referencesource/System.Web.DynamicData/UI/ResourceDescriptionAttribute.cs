@@ -33,8 +33,7 @@ namespace System.Web.UI
                 if (!_resourceLoaded)
                 {
                     _resourceLoaded = true;
-                    DescriptionValue = DynamicDataResources
-                        .ResourceManager
+                    DescriptionValue = DynamicDataResources.ResourceManager
                         .GetString(_descriptionResourceName, DynamicDataResources.Culture);
                 }
                 return base.Description;

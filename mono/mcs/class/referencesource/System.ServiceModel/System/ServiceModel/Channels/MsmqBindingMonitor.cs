@@ -75,8 +75,7 @@ namespace System.ServiceModel.Channels
             {
                 if (this.currentState != CommunicationState.Created)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(
@@ -98,8 +97,7 @@ namespace System.ServiceModel.Channels
             {
                 if (this.currentState != CommunicationState.Opened)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(
@@ -160,8 +158,7 @@ namespace System.ServiceModel.Channels
                 {
                     if (state.LastMatch != null)
                     {
-                        state
-                            .LastMatch
+                        state.LastMatch
                             .MatchLost(
                                 this.host,
                                 state.QueueName,
@@ -189,8 +186,7 @@ namespace System.ServiceModel.Channels
             {
                 if (state.LastMatch != null)
                 {
-                    state.CallbackState = state
-                        .LastMatch
+                    state.CallbackState = state.LastMatch
                         .MatchFound(this.host, state.QueueName, state.IsPrivate);
                 }
             }
@@ -216,8 +212,7 @@ namespace System.ServiceModel.Channels
             {
                 if (state.LastMatch != null)
                 {
-                    state
-                        .LastMatch
+                    state.LastMatch
                         .MatchLost(
                             this.host,
                             state.QueueName,
@@ -369,8 +364,7 @@ namespace System.ServiceModel.Channels
                 knownQueues.Remove(state.QueueName);
                 if (state.LastMatch != null)
                 {
-                    state
-                        .LastMatch
+                    state.LastMatch
                         .MatchLost(
                             this.host,
                             state.QueueName,
@@ -388,8 +382,7 @@ namespace System.ServiceModel.Channels
             {
                 if (state.LastMatch == filter)
                 {
-                    state
-                        .LastMatch
+                    state.LastMatch
                         .MatchLost(
                             this.host,
                             state.QueueName,

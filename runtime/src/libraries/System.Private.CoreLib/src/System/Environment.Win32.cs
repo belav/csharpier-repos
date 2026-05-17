@@ -69,8 +69,7 @@ namespace System
                 fixed (char* lParam = "Environment")
                 {
                     IntPtr unused;
-                    IntPtr r = Interop
-                        .User32
+                    IntPtr r = Interop.User32
                         .SendMessageTimeout(
                             new IntPtr(Interop.User32.HWND_BROADCAST),
                             Interop.User32.WM_SETTINGCHANGE,
@@ -172,8 +171,7 @@ namespace System
         {
             uint size = 0;
             while (
-                Interop
-                    .Secur32
+                Interop.Secur32
                     .GetUserNameExW(
                         Interop.Secur32.NameSamCompatible,
                         ref builder.GetPinnableReference(),
@@ -226,8 +224,7 @@ namespace System
                 uint sidLength = 68;
 
                 while (
-                    !Interop
-                        .Advapi32
+                    !Interop.Advapi32
                         .LookupAccountNameW(
                             null,
                             ref builder.GetPinnableReference(),
@@ -420,8 +417,7 @@ namespace System
 
             Guid folderId = new Guid(folderGuid);
 
-            int hr = Interop
-                .Shell32
+            int hr = Interop.Shell32
                 .SHGetKnownFolderPath(folderId, (uint)option, IntPtr.Zero, out string path);
             if (hr != 0) // Not S_OK
             {

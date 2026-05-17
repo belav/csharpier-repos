@@ -34,8 +34,7 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript
                 .ConfigureAwait(false);
 
             return new BlockStructure(
-                blockStructure
-                    .Spans
+                blockStructure.Spans
                     .SelectAsArray(x => new BlockSpan(
                         x.Type!,
                         x.IsCollapsible,

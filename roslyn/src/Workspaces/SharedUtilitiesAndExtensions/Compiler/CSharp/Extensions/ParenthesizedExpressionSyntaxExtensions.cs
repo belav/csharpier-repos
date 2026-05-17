@@ -533,14 +533,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                     if (
                         IsAssociative(parentBinaryExpression.Kind())
                         && parentBinaryExpression.Right == node
-                        && node.Expression.IsKind(
-                            parentBinaryExpression.Kind(),
-                            out BinaryExpressionSyntax? nodeBinary
-                        )
+                        && node.Expression
+                            .IsKind(
+                                parentBinaryExpression.Kind(),
+                                out BinaryExpressionSyntax? nodeBinary
+                            )
                     )
                     {
-                        return !CSharpSemanticFacts
-                            .Instance
+                        return !CSharpSemanticFacts.Instance
                             .IsSafeToChangeAssociativity(
                                 nodeBinary,
                                 parentBinaryExpression,

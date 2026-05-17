@@ -91,8 +91,7 @@ namespace System.Net.Sockets
 
                     IntPtr handle = m_ListenSocket.SafeHandle.DangerousGetHandle();
 
-                    errorCode = UnsafeNclNativeMethods
-                        .OSSOCK
+                    errorCode = UnsafeNclNativeMethods.OSSOCK
                         .setsockopt(
                             m_AcceptSocket.SafeHandle,
                             SocketOptionLevel.Socket,

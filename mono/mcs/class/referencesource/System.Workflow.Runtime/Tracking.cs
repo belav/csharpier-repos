@@ -183,20 +183,19 @@ namespace System.Workflow.Runtime
 
                 if (null != listener)
                 {
-                    exec.RootActivity.SetValue(
-                        WorkflowExecutor.TrackingListenerBrokerProperty,
-                        listener.Broker
-                    );
+                    exec.RootActivity
+                        .SetValue(WorkflowExecutor.TrackingListenerBrokerProperty, listener.Broker);
                     lock (_listenerLock)
                     {
                         _listeners.Add(exec.ID, new WeakReference(listener));
                     }
                 }
                 else
-                    exec.RootActivity.SetValue(
-                        WorkflowExecutor.TrackingListenerBrokerProperty,
-                        new TrackingListenerBroker()
-                    );
+                    exec.RootActivity
+                        .SetValue(
+                            WorkflowExecutor.TrackingListenerBrokerProperty,
+                            new TrackingListenerBroker()
+                        );
             }
 
             if (null != listener)
@@ -290,8 +289,7 @@ namespace System.Workflow.Runtime
 
             if (null == broker)
             {
-                WorkflowTrace
-                    .Tracking
+                WorkflowTrace.Tracking
                     .TraceEvent(TraceEventType.Error, 0, ExecutionStringManager.NullTrackingBroker);
                 return null;
             }
@@ -502,8 +500,7 @@ namespace System.Workflow.Runtime
         {
             if ((null == sked) || (null == skedExec))
             {
-                WorkflowTrace
-                    .Tracking
+                WorkflowTrace.Tracking
                     .TraceEvent(TraceEventType.Error, 0, ExecutionStringManager.NullParameters);
                 return null;
             }
@@ -700,8 +697,7 @@ namespace System.Workflow.Runtime
         {
             if ((null == sked) || (null == broker))
             {
-                WorkflowTrace
-                    .Tracking
+                WorkflowTrace.Tracking
                     .TraceEvent(TraceEventType.Error, 0, ExecutionStringManager.NullParameters);
                 return;
             }
@@ -735,8 +731,7 @@ namespace System.Workflow.Runtime
             WorkflowExecutor.ActivityStatusChangeEventArgs e
         )
         {
-            WorkflowTrace
-                .Tracking
+            WorkflowTrace.Tracking
                 .TraceInformation(
                     "TrackingListener::ActivityStatusChange - Received Activity Status Change Event for activity {0}",
                     e.Activity.QualifiedName
@@ -755,8 +750,7 @@ namespace System.Workflow.Runtime
 
             if ((null == _channels) || (_channels.Count <= 0))
             {
-                WorkflowTrace
-                    .Tracking
+                WorkflowTrace.Tracking
                     .TraceEvent(TraceEventType.Error, 0, ExecutionStringManager.NoChannels);
                 return;
             }
@@ -1426,8 +1420,7 @@ namespace System.Workflow.Runtime
 
             if ((null == service) || (null == schedule))
             {
-                WorkflowTrace
-                    .Tracking
+                WorkflowTrace.Tracking
                     .TraceEvent(TraceEventType.Error, 0, ExecutionStringManager.NullParameters);
                 return null;
             }
@@ -1714,8 +1707,7 @@ namespace System.Workflow.Runtime
                         return false;
 
                     if (
-                        profiles
-                            .Profiles
+                        profiles.Profiles
                             .TryGetValue(new CacheItem(workflowType, versionId), out item)
                     )
                     {

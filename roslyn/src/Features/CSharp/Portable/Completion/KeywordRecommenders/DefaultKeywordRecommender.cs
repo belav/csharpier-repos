@@ -24,8 +24,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
                 || context.IsGlobalStatementContext
                 || context.IsAnyExpressionContext
                 || context.TargetToken.IsSwitchLabelContext()
-                || context
-                    .SyntaxTree
+                || context.SyntaxTree
                     .IsTypeParameterConstraintStartContext(position, context.LeftToken);
         }
 

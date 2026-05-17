@@ -394,12 +394,10 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
                     RSASignaturePadding.Pkcs1
                 );
 
-                req.CertificateExtensions.Add(
-                    new X509SubjectKeyIdentifierExtension(req.PublicKey, false)
-                );
-                req.CertificateExtensions.Add(
-                    X509BasicConstraintsExtension.CreateForCertificateAuthority()
-                );
+                req.CertificateExtensions
+                    .Add(new X509SubjectKeyIdentifierExtension(req.PublicKey, false));
+                req.CertificateExtensions
+                    .Add(X509BasicConstraintsExtension.CreateForCertificateAuthority());
 
                 DateTimeOffset now = DateTimeOffset.UtcNow;
 
@@ -935,9 +933,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
                     HashAlgorithmName.SHA1
                 );
 
-                req.CertificateExtensions.Add(
-                    X509BasicConstraintsExtension.CreateForCertificateAuthority()
-                );
+                req.CertificateExtensions
+                    .Add(X509BasicConstraintsExtension.CreateForCertificateAuthority());
 
                 byte[] serial = { 1, 2, 3 };
 
@@ -1710,15 +1707,15 @@ PMzkCtzeqlHvuzIHHNcS1aNvlb94Tg8tPR5u/deYDrNg4NkbsqpG/QUMWse4T1Q7
                     RSASignaturePadding.Pkcs1
                 );
 
-                req.CertificateExtensions.Add(
-                    X509BasicConstraintsExtension.CreateForCertificateAuthority()
-                );
-                req.CertificateExtensions.Add(
-                    new X509SubjectKeyIdentifierExtension(
-                        "D5C1673AC2A39DF477525B59123829E65568BBA5".HexToByteArray(),
-                        critical: false
-                    )
-                );
+                req.CertificateExtensions
+                    .Add(X509BasicConstraintsExtension.CreateForCertificateAuthority());
+                req.CertificateExtensions
+                    .Add(
+                        new X509SubjectKeyIdentifierExtension(
+                            "D5C1673AC2A39DF477525B59123829E65568BBA5".HexToByteArray(),
+                            critical: false
+                        )
+                    );
 
                 DateTimeOffset thisUpdate = new DateTimeOffset(
                     2022,
@@ -1844,9 +1841,8 @@ PMzkCtzeqlHvuzIHHNcS1aNvlb94Tg8tPR5u/deYDrNg4NkbsqpG/QUMWse4T1Q7
 
                 if (addSubjectKeyIdentifier)
                 {
-                    req.CertificateExtensions.Add(
-                        new X509SubjectKeyIdentifierExtension(req.PublicKey, false)
-                    );
+                    req.CertificateExtensions
+                        .Add(new X509SubjectKeyIdentifierExtension(req.PublicKey, false));
                 }
 
                 foreach (X509Extension ext in extensions)
@@ -1886,9 +1882,8 @@ PMzkCtzeqlHvuzIHHNcS1aNvlb94Tg8tPR5u/deYDrNg4NkbsqpG/QUMWse4T1Q7
 
                 if (addSubjectKeyIdentifier)
                 {
-                    req.CertificateExtensions.Add(
-                        new X509SubjectKeyIdentifierExtension(req.PublicKey, false)
-                    );
+                    req.CertificateExtensions
+                        .Add(new X509SubjectKeyIdentifierExtension(req.PublicKey, false));
                 }
 
                 foreach (X509Extension ext in extensions)

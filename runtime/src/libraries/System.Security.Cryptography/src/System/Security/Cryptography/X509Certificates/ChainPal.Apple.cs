@@ -16,8 +16,7 @@ namespace System.Security.Cryptography.X509Certificates
             | X509ChainStatusFlags.Revoked
             | X509ChainStatusFlags.OfflineRevocation;
 
-        private static readonly SafeCreateHandle s_emptyArray = Interop
-            .CoreFoundation
+        private static readonly SafeCreateHandle s_emptyArray = Interop.CoreFoundation
             .CFArrayCreate(Array.Empty<IntPtr>(), UIntPtr.Zero);
         private Stack<SafeHandle> _extraHandles;
         private SafeX509ChainHandle? _chainHandle;
@@ -55,8 +54,7 @@ namespace System.Security.Cryptography.X509Certificates
             int osStatus;
 
             SafeX509ChainHandle chain;
-            int ret = Interop
-                .AppleCrypto
+            int ret = Interop.AppleCrypto
                 .AppleCryptoNative_X509ChainCreate(
                     certsArray,
                     policiesArray,
@@ -76,8 +74,7 @@ namespace System.Security.Cryptography.X509Certificates
 
                     try
                     {
-                        int error = Interop
-                            .AppleCrypto
+                        int error = Interop.AppleCrypto
                             .X509ChainSetTrustAnchorCertificates(chain, customCertsArray);
                         if (error != 0)
                         {
@@ -236,8 +233,7 @@ namespace System.Security.Cryptography.X509Certificates
 
                 // Creating the array has the effect of calling CFRetain() on all of the pointers, so the native
                 // resource is safe even if we DangerousRelease=>ReleaseHandle them.
-                SafeCreateHandle certsArray = Interop
-                    .CoreFoundation
+                SafeCreateHandle certsArray = Interop.CoreFoundation
                     .CFArrayCreate(ptrs, (UIntPtr)ptrs.Length);
                 _extraHandles.Push(certsArray);
                 return certsArray;
@@ -266,13 +262,11 @@ namespace System.Security.Cryptography.X509Certificates
             int ret;
 
             using (
-                SafeCFDateHandle cfEvaluationTime = Interop
-                    .CoreFoundation
+                SafeCFDateHandle cfEvaluationTime = Interop.CoreFoundation
                     .CFDateCreate(verificationTime)
             )
             {
-                ret = Interop
-                    .AppleCrypto
+                ret = Interop.AppleCrypto
                     .AppleCryptoNative_X509ChainEvaluate(
                         _chainHandle!,
                         cfEvaluationTime,
@@ -322,13 +316,11 @@ namespace System.Security.Cryptography.X509Certificates
             {
                 for (long elementIdx = 0; elementIdx < elementCount; elementIdx++)
                 {
-                    IntPtr certHandle = Interop
-                        .AppleCrypto
+                    IntPtr certHandle = Interop.AppleCrypto
                         .X509ChainGetCertificateAtIndex(chainHandle, elementIdx);
 
                     int dwStatus;
-                    int ret = Interop
-                        .AppleCrypto
+                    int ret = Interop.AppleCrypto
                         .X509ChainGetStatusAtIndex(trustResults, elementIdx, out dwStatus);
 
                     // A return value of zero means no errors happened in locating the status (negative) or in

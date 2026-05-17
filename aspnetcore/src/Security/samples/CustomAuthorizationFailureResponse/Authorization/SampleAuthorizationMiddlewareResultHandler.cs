@@ -37,11 +37,9 @@ public class SampleAuthorizationMiddlewareResultHandler : IAuthorizationMiddlewa
         {
             if (policyAuthorizationResult.AuthorizationFailure.FailureReasons.Any())
             {
-                await httpContext
-                    .Response
+                await httpContext.Response
                     .WriteAsync(
-                        policyAuthorizationResult
-                            .AuthorizationFailure
+                        policyAuthorizationResult.AuthorizationFailure
                             .FailureReasons
                             .First()
                             .Message
@@ -53,8 +51,7 @@ public class SampleAuthorizationMiddlewareResultHandler : IAuthorizationMiddlewa
 
             // as an example, let's return 404 if specific requirement has failed
             if (
-                policyAuthorizationResult
-                    .AuthorizationFailure
+                policyAuthorizationResult.AuthorizationFailure
                     .FailedRequirements
                     .Any(requirement => requirement is SampleRequirement)
             )
@@ -66,8 +63,7 @@ public class SampleAuthorizationMiddlewareResultHandler : IAuthorizationMiddlewa
                 return;
             }
             else if (
-                policyAuthorizationResult
-                    .AuthorizationFailure
+                policyAuthorizationResult.AuthorizationFailure
                     .FailedRequirements
                     .Any(requirement => requirement is SampleWithCustomMessageRequirement)
             )
@@ -77,11 +73,9 @@ public class SampleAuthorizationMiddlewareResultHandler : IAuthorizationMiddlewa
                 // and modifications of the response are not allowed once the writing has started
                 var message = Startup.CustomForbiddenMessage;
 
-                httpContext
-                    .Response
+                httpContext.Response
                     .OnStarting(() =>
-                        httpContext
-                            .Response
+                        httpContext.Response
                             .BodyWriter
                             .WriteAsync(Encoding.UTF8.GetBytes(message))
                             .AsTask()

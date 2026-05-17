@@ -104,8 +104,7 @@ namespace System.ServiceModel.Description
 
                 if (collection.Count == 0)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(SR.UnableToLoadCertificateIdentity)
@@ -140,8 +139,7 @@ namespace System.ServiceModel.Description
 
                     if (collection.Count == 0)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(
                                     SR.GetString(SR.UnableToLoadCertificateIdentity)
@@ -200,8 +198,7 @@ namespace System.ServiceModel.Description
             {
                 if (wildcard)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(
@@ -213,8 +210,7 @@ namespace System.ServiceModel.Description
                 }
                 else
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(
@@ -478,8 +474,7 @@ namespace System.ServiceModel.Description
                 Type wsdlImporterType = Type.GetType(wsdlImporterElement.Type, true, true);
                 if (!typeof(IWsdlImportExtension).IsAssignableFrom(wsdlImporterType))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(
@@ -494,8 +489,7 @@ namespace System.ServiceModel.Description
                 ConstructorInfo constructorInfo = wsdlImporterType.GetConstructor(emptyTypeArray);
                 if (constructorInfo == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(
@@ -531,8 +525,7 @@ namespace System.ServiceModel.Description
                 Type policyImporterType = Type.GetType(policyImporterElement.Type, true, true);
                 if (!typeof(IPolicyImportExtension).IsAssignableFrom(policyImporterType))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(
@@ -547,8 +540,7 @@ namespace System.ServiceModel.Description
                 ConstructorInfo constructorInfo = policyImporterType.GetConstructor(emptyTypeArray);
                 if (constructorInfo == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(
@@ -625,8 +617,7 @@ namespace System.ServiceModel.Description
                         Uri uri;
                         if (!Uri.TryCreate(cookedAddress, UriKind.Absolute, out uri))
                         {
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
                                     new ArgumentException(
                                         SR.GetString(SR.BaseAddressMustBeAbsolute)
@@ -802,8 +793,7 @@ namespace System.ServiceModel.Description
                         }
 
                         if (
-                            endpointElement
-                                .ElementInformation
+                            endpointElement.ElementInformation
                                 .Properties[ConfigurationStrings.IsSystemEndpoint]
                                 .ValueOrigin != PropertyValueOrigin.Default
                         )
@@ -857,8 +847,7 @@ namespace System.ServiceModel.Description
         {
             if (string.IsNullOrEmpty(endpointSectionName))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ConfigurationErrorsException(
                             SR.GetString(SR.ConfigEndpointTypeCannotBeNullOrEmpty)
@@ -972,8 +961,7 @@ namespace System.ServiceModel.Description
             )
             {
                 if (
-                    standardEndpointElement
-                        .Name
+                    standardEndpointElement.Name
                         .Equals(endpointConfiguration, StringComparison.Ordinal)
                 )
                 {
@@ -1000,8 +988,7 @@ namespace System.ServiceModel.Description
                         // by not starting up channel, etc...
                         ConfigLoader.resolvedEndpoints = null;
 
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new ConfigurationErrorsException(
                                     SR.GetString(
@@ -1133,8 +1120,7 @@ namespace System.ServiceModel.Description
             endpoint = standardEndpointElement.CreateServiceEndpoint(contract);
             if (endpoint == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(
@@ -1241,8 +1227,7 @@ namespace System.ServiceModel.Description
             )
             {
                 if (
-                    standardEndpointElement
-                        .Name
+                    standardEndpointElement.Name
                         .Equals(endpointConfiguration, StringComparison.Ordinal)
                 )
                 {
@@ -1269,8 +1254,7 @@ namespace System.ServiceModel.Description
                         // by not starting up channel, etc...
                         ConfigLoader.resolvedEndpoints = null;
 
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new ConfigurationErrorsException(
                                     SR.GetString(
@@ -1411,8 +1395,7 @@ namespace System.ServiceModel.Description
             endpoint = standardEndpointElement.CreateServiceEndpoint(contract);
             if (endpoint == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(
@@ -1495,8 +1478,7 @@ namespace System.ServiceModel.Description
 
             //isSystemEndpoint
             if (
-                serviceEndpointElementCopy
-                    .ElementInformation
+                serviceEndpointElementCopy.ElementInformation
                     .Properties[ConfigurationStrings.IsSystemEndpoint]
                     .ValueOrigin != PropertyValueOrigin.Default
             )
@@ -1603,8 +1585,7 @@ namespace System.ServiceModel.Description
         {
             if (string.IsNullOrEmpty(bindingSectionName))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ConfigurationErrorsException(
                             SR.GetString(SR.ConfigBindingTypeCannotBeNullOrEmpty)
@@ -1747,8 +1728,7 @@ namespace System.ServiceModel.Description
                                 // by not starting up channel, etc...
                                 ConfigLoader.resolvedBindings = null;
 
-                                throw DiagnosticUtility
-                                    .ExceptionUtility
+                                throw DiagnosticUtility.ExceptionUtility
                                     .ThrowHelperError(
                                         new ConfigurationErrorsException(
                                             SR.GetString(
@@ -2003,8 +1983,7 @@ namespace System.ServiceModel.Description
                         {
                             if (wildcard)
                             {
-                                throw DiagnosticUtility
-                                    .ExceptionUtility
+                                throw DiagnosticUtility.ExceptionUtility
                                     .ThrowHelperError(
                                         new InvalidOperationException(
                                             SR.GetString(
@@ -2016,8 +1995,7 @@ namespace System.ServiceModel.Description
                             }
                             else
                             {
-                                throw DiagnosticUtility
-                                    .ExceptionUtility
+                                throw DiagnosticUtility.ExceptionUtility
                                     .ThrowHelperError(
                                         new InvalidOperationException(
                                             SR.GetString(
@@ -2064,8 +2042,7 @@ namespace System.ServiceModel.Description
                     if (!string.IsNullOrEmpty(retval.ElementInformation.Source))
                     {
                         values["ConfigurationFileSource"] = retval.ElementInformation.Source;
-                        values["ConfigurationFileLineNumber"] = retval
-                            .ElementInformation
+                        values["ConfigurationFileLineNumber"] = retval.ElementInformation
                             .LineNumber;
                     }
                 }
@@ -2093,8 +2070,7 @@ namespace System.ServiceModel.Description
             {
                 if (contractName == String.Empty)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(SR.SfxReflectedContractKeyNotFoundEmpty, serviceName)
@@ -2103,8 +2079,7 @@ namespace System.ServiceModel.Description
                 }
                 else
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(
@@ -2130,8 +2105,7 @@ namespace System.ServiceModel.Description
             {
                 if (contractName == ServiceMetadataBehavior.MexContractName)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(
@@ -2224,8 +2198,7 @@ namespace System.ServiceModel.Description
         [MethodImpl(MethodImplOptions.NoInlining)]
         static bool IsWebConfigAboveApplication(ContextInformation contextInformation)
         {
-            return AspNetEnvironment
-                .Current
+            return AspNetEnvironment.Current
                 .IsWebConfigAboveApplication(contextInformation.HostingContext);
         }
 

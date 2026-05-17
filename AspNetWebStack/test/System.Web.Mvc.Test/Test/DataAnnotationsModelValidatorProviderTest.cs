@@ -83,12 +83,10 @@ namespace System.Web.Mvc.Test
                 var type = DataAnnotationsModelValidatorProvider.AttributeFactories.Keys.Single();
                 Assert.Equal(typeof(MyValidationAttribute), type);
 
-                var factory = DataAnnotationsModelValidatorProvider
-                    .AttributeFactories
+                var factory = DataAnnotationsModelValidatorProvider.AttributeFactories
                     .Values
                     .Single();
-                var metadata = ModelMetadataProviders
-                    .Current
+                var metadata = ModelMetadataProviders.Current
                     .GetMetadataForType(() => null, typeof(object));
                 var context = new ControllerContext();
                 var attribute = new MyValidationAttribute();
@@ -230,8 +228,7 @@ namespace System.Web.Mvc.Test
             try
             {
                 // Arrange
-                var metadata = ModelMetadataProviders
-                    .Current
+                var metadata = ModelMetadataProviders.Current
                     .GetMetadataForType(() => null, typeof(MyValidatedClass));
                 var context = new ControllerContext();
                 DataAnnotationsModelValidatorProvider.RegisterDefaultAdapter(
@@ -285,8 +282,7 @@ namespace System.Web.Mvc.Test
             try
             {
                 // Arrange
-                var metadata = ModelMetadataProviders
-                    .Current
+                var metadata = ModelMetadataProviders.Current
                     .GetMetadataForType(() => null, typeof(MyValidatedClass));
                 var context = new ControllerContext();
                 ModelValidator validator = new Mock<ModelValidator>(metadata, context).Object;
@@ -378,12 +374,10 @@ namespace System.Web.Mvc.Test
                 var type = DataAnnotationsModelValidatorProvider.ValidatableFactories.Keys.Single();
                 Assert.Equal(validatable.GetType(), type);
 
-                var factory = DataAnnotationsModelValidatorProvider
-                    .ValidatableFactories
+                var factory = DataAnnotationsModelValidatorProvider.ValidatableFactories
                     .Values
                     .Single();
-                var metadata = ModelMetadataProviders
-                    .Current
+                var metadata = ModelMetadataProviders.Current
                     .GetMetadataForType(() => null, typeof(object));
                 var context = new ControllerContext();
                 var validator = factory(metadata, context);
@@ -528,8 +522,7 @@ namespace System.Web.Mvc.Test
             try
             {
                 // Arrange
-                var metadata = ModelMetadataProviders
-                    .Current
+                var metadata = ModelMetadataProviders.Current
                     .GetMetadataForType(() => null, typeof(MyValidatableClass));
                 var context = new ControllerContext();
                 DataAnnotationsModelValidatorProvider.RegisterDefaultValidatableObjectAdapter(
@@ -589,8 +582,7 @@ namespace System.Web.Mvc.Test
             try
             {
                 // Arrange
-                var metadata = ModelMetadataProviders
-                    .Current
+                var metadata = ModelMetadataProviders.Current
                     .GetMetadataForType(() => null, typeof(MyValidatableClass));
                 var context = new ControllerContext();
                 ModelValidator validator = new Mock<ModelValidator>(metadata, context).Object;
@@ -729,8 +721,7 @@ namespace System.Web.Mvc.Test
         )
         {
             // Arrange
-            var metadata = ModelMetadataProviders
-                .Current
+            var metadata = ModelMetadataProviders.Current
                 .GetMetadataForType(() => null, typeof(object));
             var context = new ControllerContext();
             var adapters = DataAnnotationsModelValidatorProvider.AttributeFactories;
@@ -757,8 +748,7 @@ namespace System.Web.Mvc.Test
             // Arrange
             var provider = new DataAnnotationsModelValidatorProvider();
             var context = new ControllerContext();
-            var metadata = ModelMetadataProviders
-                .Current
+            var metadata = ModelMetadataProviders.Current
                 .GetMetadataForType(() => null, typeof(DummyClassWithDummyValidationAttribute));
 
             // Act
@@ -783,8 +773,7 @@ namespace System.Web.Mvc.Test
             var provider = new DataAnnotationsModelValidatorProvider();
             var mockValidatable = new Mock<IValidatableObject>();
             var context = new ControllerContext();
-            var metadata = ModelMetadataProviders
-                .Current
+            var metadata = ModelMetadataProviders.Current
                 .GetMetadataForType(() => null, mockValidatable.Object.GetType());
 
             // Act
@@ -802,8 +791,7 @@ namespace System.Web.Mvc.Test
             // Arrange
             var provider = new DataAnnotationsModelValidatorProvider();
             var context = new ControllerContext();
-            var metadata = ModelMetadataProviders
-                .Current
+            var metadata = ModelMetadataProviders.Current
                 .GetMetadataForType(() => null, typeof(string));
 
             // Act
@@ -819,8 +807,7 @@ namespace System.Web.Mvc.Test
             // Arrange
             var provider = new DataAnnotationsModelValidatorProvider();
             var context = new ControllerContext();
-            var metadata = ModelMetadataProviders
-                .Current
+            var metadata = ModelMetadataProviders.Current
                 .GetMetadataForProperty(
                     () => null,
                     typeof(DummyRequiredAttributeHelperClass),
@@ -842,8 +829,7 @@ namespace System.Web.Mvc.Test
             // Arrange
             var provider = new DataAnnotationsModelValidatorProvider();
             var context = new ControllerContext();
-            var metadata = ModelMetadataProviders
-                .Current
+            var metadata = ModelMetadataProviders.Current
                 .GetMetadataForProperty(
                     () => null,
                     typeof(DummyRequiredAttributeHelperClass),
@@ -870,8 +856,7 @@ namespace System.Web.Mvc.Test
                 // Arrange
                 var provider = new DataAnnotationsModelValidatorProvider();
                 var context = new ControllerContext();
-                var metadata = ModelMetadataProviders
-                    .Current
+                var metadata = ModelMetadataProviders.Current
                     .GetMetadataForProperty(
                         () => null,
                         typeof(DummyRequiredAttributeHelperClass),

@@ -3112,8 +3112,7 @@ End Class";
             );
         }
 
-        private static readonly MetadataReference s_propertiesDll = TestReferences
-            .SymbolsTests
+        private static readonly MetadataReference s_propertiesDll = TestReferences.SymbolsTests
             .Properties;
 
         #endregion
@@ -3520,8 +3519,7 @@ interface I1
 
             var comp = CreateCompilation(
                 source,
-                parseOptions: CSharpParseOptions
-                    .Default
+                parseOptions: CSharpParseOptions.Default
                     .WithLanguageVersion(LanguageVersion.CSharp5)
             );
             comp.GetDeclarationDiagnostics()

@@ -172,8 +172,7 @@ namespace System.Xml
         public void SetOutput(Stream stream, bool includeComments, string[] inclusivePrefixes)
         {
             if (stream == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -226,8 +225,7 @@ namespace System.Xml
                 {
                     if (inclusivePrefixes[i] == null)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperArgument(
                                 SR.GetString(SR.InvalidInclusivePrefixListCollection)
                             );
@@ -269,8 +267,7 @@ namespace System.Xml
         public void WriteComment(string value)
         {
             if (value == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -312,15 +309,13 @@ namespace System.Xml
         public void WriteStartElement(string prefix, string localName)
         {
             if (prefix == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
                     .ThrowHelperArgumentNull("prefix");
             if (localName == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -362,15 +357,13 @@ namespace System.Xml
         )
         {
             if (prefixBuffer == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("prefixBuffer"));
             if (prefixOffset < 0)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -381,8 +374,7 @@ namespace System.Xml
                         )
                     );
             if (prefixOffset > prefixBuffer.Length)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -393,8 +385,7 @@ namespace System.Xml
                         )
                     );
             if (prefixLength < 0)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -405,8 +396,7 @@ namespace System.Xml
                         )
                     );
             if (prefixLength > prefixBuffer.Length - prefixOffset)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -421,15 +411,13 @@ namespace System.Xml
                     );
 
             if (localNameBuffer == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("localNameBuffer"));
             if (localNameOffset < 0)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -440,8 +428,7 @@ namespace System.Xml
                         )
                     );
             if (localNameOffset > localNameBuffer.Length)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -452,8 +439,7 @@ namespace System.Xml
                         )
                     );
             if (localNameLength < 0)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -464,8 +450,7 @@ namespace System.Xml
                         )
                     );
             if (localNameLength > localNameBuffer.Length - localNameOffset)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -520,8 +505,7 @@ namespace System.Xml
                 {
                     if (
                         String.Compare(
-                            Encoding
-                                .UTF8
+                            Encoding.UTF8
                                 .GetString(
                                     xmlnsBuffer,
                                     xmlnsAttribute.prefixOffset,
@@ -641,15 +625,13 @@ namespace System.Xml
         public void WriteEndElement(string prefix, string localName)
         {
             if (prefix == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
                     .ThrowHelperArgumentNull("prefix");
             if (localName == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -678,23 +660,20 @@ namespace System.Xml
         public void WriteXmlnsAttribute(string prefix, string ns)
         {
             if (prefix == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
                     .ThrowHelperArgumentNull("prefix");
             if (ns == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
                     .ThrowHelperArgumentNull("ns");
             ThrowIfClosed();
             if (prefix.Length > int.MaxValue - ns.Length)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -706,8 +685,7 @@ namespace System.Xml
                     );
             int totalLength = prefix.Length + ns.Length;
             if (totalLength > int.MaxValue / maxBytesPerChar)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -720,13 +698,11 @@ namespace System.Xml
             EnsureXmlnsBuffer(totalLength * maxBytesPerChar);
             XmlnsAttribute xmlnsAttribute;
             xmlnsAttribute.prefixOffset = xmlnsOffset;
-            xmlnsAttribute.prefixLength = Encoding
-                .UTF8
+            xmlnsAttribute.prefixLength = Encoding.UTF8
                 .GetBytes(prefix, 0, prefix.Length, xmlnsBuffer, xmlnsOffset);
             xmlnsOffset += xmlnsAttribute.prefixLength;
             xmlnsAttribute.nsOffset = xmlnsOffset;
-            xmlnsAttribute.nsLength = Encoding
-                .UTF8
+            xmlnsAttribute.nsLength = Encoding.UTF8
                 .GetBytes(ns, 0, ns.Length, xmlnsBuffer, xmlnsOffset);
             xmlnsOffset += xmlnsAttribute.nsLength;
             xmlnsAttribute.referred = false;
@@ -743,15 +719,13 @@ namespace System.Xml
         )
         {
             if (prefixBuffer == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("prefixBuffer"));
             if (prefixOffset < 0)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -762,8 +736,7 @@ namespace System.Xml
                         )
                     );
             if (prefixOffset > prefixBuffer.Length)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -774,8 +747,7 @@ namespace System.Xml
                         )
                     );
             if (prefixLength < 0)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -786,8 +758,7 @@ namespace System.Xml
                         )
                     );
             if (prefixLength > prefixBuffer.Length - prefixOffset)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -802,15 +773,13 @@ namespace System.Xml
                     );
 
             if (nsBuffer == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("nsBuffer"));
             if (nsOffset < 0)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -821,8 +790,7 @@ namespace System.Xml
                         )
                     );
             if (nsOffset > nsBuffer.Length)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -833,8 +801,7 @@ namespace System.Xml
                         )
                     );
             if (nsLength < 0)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -845,8 +812,7 @@ namespace System.Xml
                         )
                     );
             if (nsLength > nsBuffer.Length - nsOffset)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -861,8 +827,7 @@ namespace System.Xml
                     );
             ThrowIfClosed();
             if (prefixLength > int.MaxValue - nsLength)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -889,15 +854,13 @@ namespace System.Xml
         public void WriteStartAttribute(string prefix, string localName)
         {
             if (prefix == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
                     .ThrowHelperArgumentNull("prefix");
             if (localName == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -927,15 +890,13 @@ namespace System.Xml
         )
         {
             if (prefixBuffer == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("prefixBuffer"));
             if (prefixOffset < 0)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -946,8 +907,7 @@ namespace System.Xml
                         )
                     );
             if (prefixOffset > prefixBuffer.Length)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -958,8 +918,7 @@ namespace System.Xml
                         )
                     );
             if (prefixLength < 0)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -970,8 +929,7 @@ namespace System.Xml
                         )
                     );
             if (prefixLength > prefixBuffer.Length - prefixOffset)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -986,15 +944,13 @@ namespace System.Xml
                     );
 
             if (localNameBuffer == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("localNameBuffer"));
             if (localNameOffset < 0)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -1005,8 +961,7 @@ namespace System.Xml
                         )
                     );
             if (localNameOffset > localNameBuffer.Length)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -1017,8 +972,7 @@ namespace System.Xml
                         )
                     );
             if (localNameLength < 0)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -1029,8 +983,7 @@ namespace System.Xml
                         )
                     );
             if (localNameLength > localNameBuffer.Length - localNameOffset)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -1088,8 +1041,7 @@ namespace System.Xml
         public void WriteEscapedText(string value)
         {
             if (value == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -1112,15 +1064,13 @@ namespace System.Xml
         public void WriteEscapedText(byte[] chars, int offset, int count)
         {
             if (chars == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("chars"));
             if (offset < 0)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -1131,8 +1081,7 @@ namespace System.Xml
                         )
                     );
             if (offset > chars.Length)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -1143,8 +1092,7 @@ namespace System.Xml
                         )
                     );
             if (count < 0)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -1155,8 +1103,7 @@ namespace System.Xml
                         )
                     );
             if (count > chars.Length - offset)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -1247,15 +1194,13 @@ namespace System.Xml
         {
             ThrowIfClosed();
             if (chars == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("chars"));
             if (offset < 0)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -1266,8 +1211,7 @@ namespace System.Xml
                         )
                     );
             if (offset > chars.Length)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -1278,8 +1222,7 @@ namespace System.Xml
                         )
                     );
             if (count < 0)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -1290,8 +1233,7 @@ namespace System.Xml
                         )
                     );
             if (count > chars.Length - offset)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -1314,8 +1256,7 @@ namespace System.Xml
         public void WriteText(string value)
         {
             if (value == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -1337,15 +1278,13 @@ namespace System.Xml
         {
             ThrowIfClosed();
             if (chars == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("chars"));
             if (offset < 0)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -1356,8 +1295,7 @@ namespace System.Xml
                         )
                     );
             if (offset > chars.Length)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -1368,8 +1306,7 @@ namespace System.Xml
                         )
                     );
             if (count < 0)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -1380,8 +1317,7 @@ namespace System.Xml
                         )
                     );
             if (count > chars.Length - offset)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -1409,8 +1345,7 @@ namespace System.Xml
 
         void ThrowClosed()
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(new ObjectDisposedException(this.GetType().ToString()));
         }
 

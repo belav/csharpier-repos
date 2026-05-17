@@ -104,8 +104,7 @@ public class CosmosDatabaseWrapper : Database
 
                 if (
                     exception is not DbUpdateConcurrencyException
-                    || !Dependencies
-                        .Logger
+                    || !Dependencies.Logger
                         .OptimisticConcurrencyException(
                             entry.Context,
                             errorEntries,
@@ -190,8 +189,7 @@ public class CosmosDatabaseWrapper : Database
                 if (
                     exception is not DbUpdateConcurrencyException
                     || !(
-                        await Dependencies
-                            .Logger
+                        await Dependencies.Logger
                             .OptimisticConcurrencyExceptionAsync(
                                 entry.Context,
                                 errorEntries,

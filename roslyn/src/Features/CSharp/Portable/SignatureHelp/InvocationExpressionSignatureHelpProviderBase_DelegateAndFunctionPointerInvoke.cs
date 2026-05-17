@@ -36,8 +36,7 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
                 .GetAnySymbol();
             if (
                 expressionSymbol.IsKind(SymbolKind.Event)
-                && !expressionSymbol
-                    .ContainingType
+                && !expressionSymbol.ContainingType
                     .OriginalDefinition
                     .Equals(within.OriginalDefinition)
             )

@@ -290,8 +290,7 @@ public static class SqlServerDbContextOptionsExtensions
         );
 
         coreOptionsExtension = coreOptionsExtension.WithWarningsConfiguration(
-            coreOptionsExtension
-                .WarningsConfiguration
+            coreOptionsExtension.WarningsConfiguration
                 .TryWithExplicit(
                     SqlServerEventId.ConflictingValueGenerationStrategiesWarning,
                     WarningBehavior.Throw

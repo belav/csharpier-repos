@@ -548,8 +548,7 @@ namespace System.Threading.Tasks.Tests
                 AssertExtensions.Throws<ArgumentOutOfRangeException>(
                     "timeout",
                     () =>
-                        new TaskCompletionSource()
-                            .Task
+                        new TaskCompletionSource().Task
                             .WaitAsync(timeout, new CancellationToken(true))
                 );
 
@@ -560,15 +559,13 @@ namespace System.Threading.Tasks.Tests
                 AssertExtensions.Throws<ArgumentOutOfRangeException>(
                     "timeout",
                     () =>
-                        new TaskCompletionSource<int>()
-                            .Task
+                        new TaskCompletionSource<int>().Task
                             .WaitAsync(timeout, CancellationToken.None)
                 );
                 AssertExtensions.Throws<ArgumentOutOfRangeException>(
                     "timeout",
                     () =>
-                        new TaskCompletionSource<int>()
-                            .Task
+                        new TaskCompletionSource<int>().Task
                             .WaitAsync(timeout, new CancellationToken(true))
                 );
 
@@ -970,20 +967,20 @@ namespace System.Threading.Tasks.Tests
             yield return new object[]
             {
                 LineNumber(),
-                Task.Factory.FromAsync(
-                    generic,
-                    new Action<IAsyncResult>(ar =>
-                    {
-                        throw oce;
-                    })
-                ),
+                Task.Factory
+                    .FromAsync(
+                        generic,
+                        new Action<IAsyncResult>(ar =>
+                        {
+                            throw oce;
+                        })
+                    ),
                 oce,
             };
             yield return new object[]
             {
                 LineNumber(),
-                Task<int>
-                    .Factory
+                Task<int>.Factory
                     .FromAsync(
                         nonGeneric,
                         new Func<IAsyncResult, int>(ar =>
@@ -1055,8 +1052,7 @@ namespace System.Threading.Tasks.Tests
             if ((options & ConfigureAwaitOptions.SuppressThrowing) == 0)
             {
                 Assert.False(
-                    new TaskCompletionSource<string>()
-                        .Task
+                    new TaskCompletionSource<string>().Task
                         .ConfigureAwait(options)
                         .GetAwaiter()
                         .IsCompleted

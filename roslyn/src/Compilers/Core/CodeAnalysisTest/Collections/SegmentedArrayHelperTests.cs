@@ -93,8 +93,7 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                     BindingFlags.Static | BindingFlags.NonPublic
                 )
                 .MakeGenericMethod(type);
-            var segmentSize = SegmentedArrayHelper
-                .TestAccessor
+            var segmentSize = SegmentedArrayHelper.TestAccessor
                 .CalculateSegmentSize(InvokeUnsafeSizeOf(type));
             Assert.Equal(
                 SegmentedArrayHelper.TestAccessor.CalculateSegmentShift(segmentSize),
@@ -112,8 +111,7 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                     BindingFlags.Static | BindingFlags.NonPublic
                 )
                 .MakeGenericMethod(type);
-            var segmentSize = SegmentedArrayHelper
-                .TestAccessor
+            var segmentSize = SegmentedArrayHelper.TestAccessor
                 .CalculateSegmentSize(InvokeUnsafeSizeOf(type));
             Assert.Equal(
                 SegmentedArrayHelper.TestAccessor.CalculateOffsetMask(segmentSize),

@@ -286,8 +286,7 @@ namespace System.Security.Cryptography
                 // just remember the last _BufferSize bytes
                 if (count > _BufferSize)
                 {
-                    System
-                        .Buffer
+                    System.Buffer
                         .InternalBlockCopy(
                             buffer,
                             offset + count - _BufferSize,
@@ -300,8 +299,7 @@ namespace System.Security.Cryptography
                 else
                 {
                     // move _BufferSize - count bytes left, then copy the new bytes
-                    System
-                        .Buffer
+                    System.Buffer
                         .InternalBlockCopy(
                             _Buffer,
                             _BufferSize - count,
@@ -309,8 +307,7 @@ namespace System.Security.Cryptography
                             0,
                             _BufferSize - count
                         );
-                    System
-                        .Buffer
+                    System.Buffer
                         .InternalBlockCopy(buffer, offset, _Buffer, _BufferSize - count, count);
                     return;
                 }
@@ -320,8 +317,7 @@ namespace System.Security.Cryptography
                 // buffer isn't full yet, so more cases
                 if (count > _BufferSize)
                 {
-                    System
-                        .Buffer
+                    System.Buffer
                         .InternalBlockCopy(
                             buffer,
                             offset + count - _BufferSize,
@@ -334,8 +330,7 @@ namespace System.Security.Cryptography
                 }
                 else if (count + _BufferIndex >= _BufferSize)
                 {
-                    System
-                        .Buffer
+                    System.Buffer
                         .InternalBlockCopy(
                             _Buffer,
                             _BufferIndex + count - _BufferSize,

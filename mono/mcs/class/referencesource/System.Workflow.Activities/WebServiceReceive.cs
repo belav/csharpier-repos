@@ -966,8 +966,7 @@ namespace System.Workflow.Activities
                 }
 
                 if (!memberExists)
-                    webServiceClass
-                        .Members
+                    webServiceClass.Members
                         .Add(
                             this.GetWebServiceMethodDeclaraion(
                                 methodInfo,
@@ -1037,14 +1036,11 @@ namespace System.Workflow.Activities
                 webServiceCodeNamespace.Imports.Add(new CodeNamespaceImport("System"));
                 webServiceCodeNamespace.Imports.Add(new CodeNamespaceImport("System.Web"));
                 webServiceCodeNamespace.Imports.Add(new CodeNamespaceImport("System.Web.Services"));
-                webServiceCodeNamespace
-                    .Imports
+                webServiceCodeNamespace.Imports
                     .Add(new CodeNamespaceImport("System.Web.Services.Protocols"));
-                webServiceCodeNamespace
-                    .Imports
+                webServiceCodeNamespace.Imports
                     .Add(new CodeNamespaceImport("System.Workflow.Runtime.Hosting"));
-                webServiceCodeNamespace
-                    .Imports
+                webServiceCodeNamespace.Imports
                     .Add(new CodeNamespaceImport("System.Workflow.Activities"));
             }
 
@@ -1119,16 +1115,14 @@ namespace System.Workflow.Activities
             webMethod.Name = methodInfo.Name;
 
             CodeAttributeDeclaration attrDecl = new CodeAttributeDeclaration("WebMethodAttribute");
-            attrDecl
-                .Arguments
+            attrDecl.Arguments
                 .Add(
                     new CodeAttributeArgument(
                         "Description",
                         new CodePrimitiveExpression(methodInfo.Name)
                     )
                 );
-            attrDecl
-                .Arguments
+            attrDecl.Arguments
                 .Add(
                     new CodeAttributeArgument("EnableSession", new CodePrimitiveExpression(false))
                 );
@@ -1157,8 +1151,7 @@ namespace System.Workflow.Activities
                         paramDecl.Direction == FieldDirection.Out
                         && language == SupportedLanguages.VB
                     )
-                        paramDecl
-                            .CustomAttributes
+                        paramDecl.CustomAttributes
                             .Add(
                                 new CodeAttributeDeclaration(
                                     new CodeTypeReference(
@@ -1177,8 +1170,7 @@ namespace System.Workflow.Activities
                 webMethod.Parameters.Add(paramDecl);
 
                 if (!paramInfo.IsOut)
-                    paramArrayCreationExpression
-                        .Initializers
+                    paramArrayCreationExpression.Initializers
                         .Add(new CodeArgumentReferenceExpression(paramInfo.Name));
             }
 

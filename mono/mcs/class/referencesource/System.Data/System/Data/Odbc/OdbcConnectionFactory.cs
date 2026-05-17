@@ -144,8 +144,7 @@ namespace System.Data.Odbc
             // use the embedded xml if the user did not over ride it
             if (XMLStream == null)
             {
-                XMLStream = System
-                    .Reflection
+                XMLStream = System.Reflection
                     .Assembly
                     .GetExecutingAssembly()
                     .GetManifestResourceStream("System.Data.Odbc.OdbcMetaData.xml");

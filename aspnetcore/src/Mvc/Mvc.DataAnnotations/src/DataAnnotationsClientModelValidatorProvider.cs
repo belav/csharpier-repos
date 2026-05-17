@@ -54,8 +54,7 @@ internal sealed class DataAnnotationsClientModelValidatorProvider : IClientModel
         {
             // This will pass first non-null type (either containerType or modelType) to delegate.
             // Pass the root model type(container type) if it is non null, else pass the model type.
-            stringLocalizer = _options
-                .Value
+            stringLocalizer = _options.Value
                 .DataAnnotationLocalizerProvider(
                     context.ModelMetadata.ContainerType ?? context.ModelMetadata.ModelType,
                     _stringLocalizerFactory
@@ -99,8 +98,7 @@ internal sealed class DataAnnotationsClientModelValidatorProvider : IClientModel
         if (!hasRequiredAttribute && context.ModelMetadata.IsRequired)
         {
             // Add a default '[Required]' validator for generating HTML if necessary.
-            context
-                .Results
+            context.Results
                 .Add(
                     new ClientValidatorItem
                     {

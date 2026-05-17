@@ -110,15 +110,16 @@ namespace System.Workflow.ComponentModel.Design
                 if (this.designerVerbs == null)
                 {
                     this.designerVerbs = new ActivityDesignerVerbCollection();
-                    this.designerVerbs.Add(
-                        new ActivityDesignerVerb(
-                            this,
-                            DesignerVerbGroup.General,
-                            DR.GetString(DR.AddBranch),
-                            new EventHandler(OnAddBranch),
-                            new EventHandler(OnStatusAddBranch)
-                        )
-                    );
+                    this.designerVerbs
+                        .Add(
+                            new ActivityDesignerVerb(
+                                this,
+                                DesignerVerbGroup.General,
+                                DR.GetString(DR.AddBranch),
+                                new EventHandler(OnAddBranch),
+                                new EventHandler(OnStatusAddBranch)
+                            )
+                        );
                 }
 
                 verbs.AddRange(this.designerVerbs);

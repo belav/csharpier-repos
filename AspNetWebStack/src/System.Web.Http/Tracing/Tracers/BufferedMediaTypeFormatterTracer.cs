@@ -119,8 +119,7 @@ namespace System.Web.Http.Tracing.Tracers
                 contentHeaders == null ? null : contentHeaders.ContentType;
             object value = null;
 
-            _innerTracer
-                .TraceWriter
+            _innerTracer.TraceWriter
                 .TraceBeginEnd(
                     _innerTracer.Request,
                     TraceCategories.FormattingCategory,
@@ -208,8 +207,7 @@ namespace System.Web.Http.Tracing.Tracers
             MediaTypeHeaderValue contentType =
                 contentHeaders == null ? null : contentHeaders.ContentType;
 
-            _innerTracer
-                .TraceWriter
+            _innerTracer.TraceWriter
                 .TraceBeginEnd(
                     _innerTracer.Request,
                     TraceCategories.FormattingCategory,

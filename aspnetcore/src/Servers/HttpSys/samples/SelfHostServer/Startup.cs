@@ -28,8 +28,7 @@ public class Startup
         app.Run(async context =>
         {
             context.Response.ContentType = "text/plain";
-            await context
-                .Response
+            await context.Response
                 .WriteAsync("Hello world from " + context.Request.Host + " at " + DateTime.Now);
         });
     }

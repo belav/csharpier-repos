@@ -162,16 +162,14 @@ namespace System
             catch
             {
                 System.Diagnostics.Log.Trace("Exception thrown in logging." + Environment.NewLine);
-                System
-                    .Diagnostics
+                System.Diagnostics
                     .Log
                     .Trace(
                         "Switch was: "
                             + ((switchName == null) ? "<null>" : switchName)
                             + Environment.NewLine
                     );
-                System
-                    .Diagnostics
+                System.Diagnostics
                     .Log
                     .Trace(
                         "Message was: "
@@ -337,8 +335,7 @@ namespace System
                 }
                 sb.Append(s);
             }
-            System
-                .Diagnostics
+            System.Diagnostics
                 .Log
                 .LogMessage(
                     (LoggingLevels)((int)level),
@@ -389,8 +386,7 @@ namespace System
             }
 
             sb.Append(Environment.NewLine);
-            System
-                .Diagnostics
+            System.Diagnostics
                 .Log
                 .LogMessage(
                     LoggingLevels.TraceLevel0,
@@ -419,8 +415,7 @@ namespace System
             sb.AppendFormat(format, messages);
             sb.Append(Environment.NewLine);
 
-            System
-                .Diagnostics
+            System.Diagnostics
                 .Log
                 .LogMessage(
                     LoggingLevels.TraceLevel0,
@@ -446,8 +441,7 @@ namespace System
             }
 
             StackTrace trace = new StackTrace();
-            System
-                .Diagnostics
+            System.Diagnostics
                 .Log
                 .LogMessage(LoggingLevels.TraceLevel0, logSwitch, trace.ToString());
         }
@@ -498,8 +492,7 @@ namespace System
             {
                 Log("PERF", "BCL Perf Warning: " + msg);
             }
-            System
-                .Diagnostics
+            System.Diagnostics
                 .Assert
                 .Check(
                     expr,
@@ -535,8 +528,7 @@ namespace System
             {
                 Log("CORRECTNESS", "BCL Correctness Warning: " + msg);
             }
-            System
-                .Diagnostics
+            System.Diagnostics
                 .Assert
                 .Check(expr, "BCL Correctness Warning: Your program may not work because...", msg);
 #endif

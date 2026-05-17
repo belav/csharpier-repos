@@ -478,8 +478,7 @@ internal sealed partial class HttpConnectionDispatcher
         var useStatefulReconnect = false;
         if (
             options.AllowStatefulReconnects == true
-            && context
-                .Request
+            && context.Request
                 .Query
                 .TryGetValue("UseStatefulReconnect", out var useStatefulReconnectValue)
         )
@@ -598,8 +597,7 @@ internal sealed partial class HttpConnectionDispatcher
         {
             Log.PostNotAllowedForWebSockets(_logger);
             context.Response.StatusCode = StatusCodes.Status405MethodNotAllowed;
-            await context
-                .Response
+            await context.Response
                 .WriteAsync("POST requests are not allowed for WebSocket connections.");
             return;
         }
@@ -624,8 +622,7 @@ internal sealed partial class HttpConnectionDispatcher
             {
                 try
                 {
-                    await context
-                        .Request
+                    await context.Request
                         .Body
                         .CopyToAsync(connection.ApplicationStream, bufferSize);
                 }
@@ -700,8 +697,7 @@ internal sealed partial class HttpConnectionDispatcher
             Log.ReceivedDeleteRequestForUnsupportedTransport(_logger, connection.TransportType);
             context.Response.StatusCode = StatusCodes.Status400BadRequest;
             context.Response.ContentType = "text/plain";
-            await context
-                .Response
+            await context.Response
                 .WriteAsync("Cannot terminate this connection using the DELETE endpoint.");
             return;
         }
@@ -732,8 +728,7 @@ internal sealed partial class HttpConnectionDispatcher
             context.Response.ContentType = "text/plain";
             context.Response.StatusCode = StatusCodes.Status404NotFound;
             Log.TransportNotSupported(_logger, transportType);
-            await context
-                .Response
+            await context.Response
                 .WriteAsync($"{transportType} transport not supported by this end point type");
             return false;
         }

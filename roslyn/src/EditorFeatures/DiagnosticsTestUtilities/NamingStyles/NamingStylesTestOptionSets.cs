@@ -39,8 +39,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.NamingStyles
                 {
                     NamingStyleOptions.NamingPreferences,
                     new NamingStylePreferences(
-                        firstPreferences
-                            .SymbolSpecifications
+                        firstPreferences.SymbolSpecifications
                             .AddRange(secondPreferences.SymbolSpecifications),
                         firstPreferences.NamingStyles.AddRange(secondPreferences.NamingStyles),
                         firstPreferences.NamingRules.AddRange(secondPreferences.NamingRules)

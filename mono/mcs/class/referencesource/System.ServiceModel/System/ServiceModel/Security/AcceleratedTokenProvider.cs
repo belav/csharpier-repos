@@ -107,8 +107,7 @@ namespace System.ServiceModel.Security
         {
             if (this.BootstrapSecurityBindingElement == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(SR.BootstrapSecurityBindingElementNotSet, this.GetType())
@@ -125,8 +124,7 @@ namespace System.ServiceModel.Security
             {
                 if (this.BootstrapSecurityBindingElement == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(
@@ -173,10 +171,8 @@ namespace System.ServiceModel.Security
             ChannelBuilder channelBuilder
         )
         {
-            ISecurityCapabilities securityCapabilities =
-                this.bootstrapSecurityBindingElement.GetProperty<ISecurityCapabilities>(
-                    this.IssuerBindingContext
-                );
+            ISecurityCapabilities securityCapabilities = this.bootstrapSecurityBindingElement
+                .GetProperty<ISecurityCapabilities>(this.IssuerBindingContext);
             SecurityCredentialsManager securityCredentials = this.IssuerBindingContext
                 .BindingParameters
                 .Find<SecurityCredentialsManager>();
@@ -185,12 +181,11 @@ namespace System.ServiceModel.Security
                 securityCredentials = ClientCredentials.CreateDefaultCredentials();
             }
 
-            this.bootstrapSecurityBindingElement.ReaderQuotas =
-                this.IssuerBindingContext.GetInnerProperty<XmlDictionaryReaderQuotas>();
+            this.bootstrapSecurityBindingElement.ReaderQuotas = this.IssuerBindingContext
+                .GetInnerProperty<XmlDictionaryReaderQuotas>();
             if (this.bootstrapSecurityBindingElement.ReaderQuotas == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(SR.EncodingBindingElementDoesNotHandleReaderQuotas)
@@ -205,8 +200,8 @@ namespace System.ServiceModel.Security
                 this.bootstrapSecurityBindingElement.MaxReceivedMessageSize =
                     transportBindingElement.MaxReceivedMessageSize;
 
-            SecurityProtocolFactory securityProtocolFactory =
-                this.bootstrapSecurityBindingElement.CreateSecurityProtocolFactory<IRequestChannel>(
+            SecurityProtocolFactory securityProtocolFactory = this.bootstrapSecurityBindingElement
+                .CreateSecurityProtocolFactory<IRequestChannel>(
                     this.IssuerBindingContext.Clone(),
                     securityCredentials,
                     false,
@@ -224,20 +219,16 @@ namespace System.ServiceModel.Security
                         true;
 
                 MessagePartSpecification bodyPart = new MessagePartSpecification(true);
-                soapBindingFactory
-                    .ProtectionRequirements
+                soapBindingFactory.ProtectionRequirements
                     .IncomingSignatureParts
                     .AddParts(bodyPart, RequestSecurityTokenAction);
-                soapBindingFactory
-                    .ProtectionRequirements
+                soapBindingFactory.ProtectionRequirements
                     .IncomingEncryptionParts
                     .AddParts(bodyPart, RequestSecurityTokenAction);
-                soapBindingFactory
-                    .ProtectionRequirements
+                soapBindingFactory.ProtectionRequirements
                     .OutgoingSignatureParts
                     .AddParts(bodyPart, RequestSecurityTokenResponseAction);
-                soapBindingFactory
-                    .ProtectionRequirements
+                soapBindingFactory.ProtectionRequirements
                     .OutgoingEncryptionParts
                     .AddParts(bodyPart, RequestSecurityTokenResponseAction);
             }
@@ -370,8 +361,7 @@ namespace System.ServiceModel.Security
                 && serverContextProperty.ServiceSecurityContext != null
             )
             {
-                authorizationPolicies = serverContextProperty
-                    .ServiceSecurityContext
+                authorizationPolicies = serverContextProperty.ServiceSecurityContext
                     .AuthorizationPolicies;
             }
             else
@@ -404,8 +394,7 @@ namespace System.ServiceModel.Security
                         if (rstr != null)
                         {
                             // More than one RSTR is found. So throw an exception.
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
                                     new MessageSecurityException(
                                         SR.GetString(SR.MoreThanOneRSTRInRSTRC)
@@ -417,8 +406,7 @@ namespace System.ServiceModel.Security
                 }
                 else
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new NotSupportedException());
                 }
 

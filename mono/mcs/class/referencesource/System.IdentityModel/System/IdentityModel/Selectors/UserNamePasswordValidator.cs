@@ -50,8 +50,7 @@ namespace System.IdentityModel.Selectors
             {
                 if (!this.provider.ValidateUser(userName, password))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new SecurityTokenValidationException(
                                 SR.GetString(

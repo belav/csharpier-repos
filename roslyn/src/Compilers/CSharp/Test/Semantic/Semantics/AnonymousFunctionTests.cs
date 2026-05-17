@@ -31,8 +31,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         ) =>
             CompileAndVerify(
                     source,
-                    options: TestOptions
-                        .DebugExe
+                    options: TestOptions.DebugExe
                         .WithMetadataImportOptions(MetadataImportOptions.All),
                     parseOptions: TestOptions.RegularPreview,
                     symbolValidator: symbolValidator,
@@ -54,8 +53,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             {
                 var verifier = CompileAndVerify(
                         source,
-                        options: TestOptions
-                            .DebugExe
+                        options: TestOptions.DebugExe
                             .WithMetadataImportOptions(MetadataImportOptions.All),
                         parseOptions: TestOptions.RegularPreview,
                         symbolValidator: symbolValidator,
@@ -1397,8 +1395,7 @@ public class Program
             {
                 var verifier = CompileAndVerify(
                         source,
-                        options: TestOptions
-                            .DebugExe
+                        options: TestOptions.DebugExe
                             .WithMetadataImportOptions(MetadataImportOptions.All),
                         parseOptions: TestOptions.Regular9,
                         symbolValidator: symbolValidator,

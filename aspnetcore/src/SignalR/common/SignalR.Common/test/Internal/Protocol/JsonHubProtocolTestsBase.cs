@@ -813,8 +813,7 @@ public abstract class JsonHubProtocolTestsBase
     {
         var binder = new TestBinder(new[] { typeof(string) });
         var data = new ReadOnlySequence<byte>(
-            Encoding
-                .UTF8
+            Encoding.UTF8
                 .GetBytes(
                     Frame(
                         "{\"type\":1,\"invocationId\":\"42\",\"target\":\"foo\",\"arguments\":[[],{\"target\":\"foo2\"}]}"

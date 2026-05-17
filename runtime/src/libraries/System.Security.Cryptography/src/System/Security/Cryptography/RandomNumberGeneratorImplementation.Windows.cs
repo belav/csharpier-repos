@@ -11,8 +11,7 @@ namespace System.Security.Cryptography
         {
             Debug.Assert(count > 0);
 
-            Interop.BCrypt.NTSTATUS status = Interop
-                .BCrypt
+            Interop.BCrypt.NTSTATUS status = Interop.BCrypt
                 .BCryptGenRandom(
                     IntPtr.Zero,
                     pbBuffer,

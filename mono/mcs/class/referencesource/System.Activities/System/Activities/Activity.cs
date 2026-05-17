@@ -474,10 +474,11 @@ namespace System.Activities
         )
         {
             Fx.Assert(this.rootProperties != null, "only callable on the root");
-            return this.rootProperties.GetActivityExtensionInformation(
-                out activityExtensionProviders,
-                out requiredActivityExtensionTypes
-            );
+            return this.rootProperties
+                .GetActivityExtensionInformation(
+                    out activityExtensionProviders,
+                    out requiredActivityExtensionTypes
+                );
         }
 
         internal virtual bool IsResultArgument(RuntimeArgument argument)
@@ -672,10 +673,8 @@ namespace System.Activities
 
             argument.SetupBinding(this, createEmptyBindings);
 
-            int insertionIndex = this.arguments.BinarySearch(
-                argument,
-                RuntimeArgument.EvaluationOrderComparer
-            );
+            int insertionIndex = this.arguments
+                .BinarySearch(argument, RuntimeArgument.EvaluationOrderComparer);
             if (insertionIndex < 0)
             {
                 this.arguments.Insert(~insertionIndex, argument);
@@ -1440,10 +1439,8 @@ namespace System.Activities
                     }
                 }
 
-                this.activityExtensionProviders.Add(
-                    key,
-                    new WorkflowInstanceExtensionProvider<T>(extensionProvider)
-                );
+                this.activityExtensionProviders
+                    .Add(key, new WorkflowInstanceExtensionProvider<T>(extensionProvider));
 
                 // if we're providing an extension that exactly matches a required type, simplify further bookkeeping
                 if (this.requiredExtensionTypes != null)
@@ -1813,8 +1810,7 @@ namespace System.Activities
                 {
                     Attribute attribute = propertyAttributes[i];
                     if (
-                        ReflectedInformation
-                            .OverloadGroupAttributeType
+                        ReflectedInformation.OverloadGroupAttributeType
                             .IsAssignableFrom(attribute.GetType())
                     )
                     {
@@ -1894,8 +1890,7 @@ namespace System.Activities
                         if (value == null)
                         {
                             string argName = (key == null) ? "<null>" : key;
-                            throw FxTrace
-                                .Exception
+                            throw FxTrace.Exception
                                 .AsError(
                                     new ValidationException(
                                         SR.MissingArgument(argName, propertyName)
@@ -1904,8 +1899,7 @@ namespace System.Activities
                         }
                         if (string.IsNullOrEmpty(key))
                         {
-                            throw FxTrace
-                                .Exception
+                            throw FxTrace.Exception
                                 .AsError(
                                     new ValidationException(
                                         SR.MissingNameProperty(value.ArgumentType)
@@ -1999,8 +1993,7 @@ namespace System.Activities
 
                 if (this.Result == null && value != null)
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .Argument("value", SR.ResultArgumentMustBeSpecificType(typeof(TResult)));
                 }
             }
@@ -2055,8 +2048,7 @@ namespace System.Activities
                 }
             }
 
-            throw FxTrace
-                .Exception
+            throw FxTrace.Exception
                 .Argument(
                     "variable",
                     SR.ConvertVariableToValueExpressionFailed(

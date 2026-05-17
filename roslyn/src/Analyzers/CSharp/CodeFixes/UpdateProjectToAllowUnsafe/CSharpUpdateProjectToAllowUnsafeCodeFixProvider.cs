@@ -57,8 +57,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UpdateProjectToAllowUnsafe
         {
             var compilationOptions = (CSharpCompilationOptions?)project.CompilationOptions;
             Contract.ThrowIfNull(compilationOptions);
-            return project
-                .Solution
+            return project.Solution
                 .WithProjectCompilationOptions(
                     project.Id,
                     compilationOptions.WithAllowUnsafe(true)

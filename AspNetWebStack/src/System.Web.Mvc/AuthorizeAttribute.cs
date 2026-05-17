@@ -111,11 +111,9 @@ namespace System.Web.Mvc
             }
 
             bool skipAuthorization =
-                filterContext
-                    .ActionDescriptor
+                filterContext.ActionDescriptor
                     .IsDefined(typeof(AllowAnonymousAttribute), inherit: true)
-                || filterContext
-                    .ActionDescriptor
+                || filterContext.ActionDescriptor
                     .ControllerDescriptor
                     .IsDefined(typeof(AllowAnonymousAttribute), inherit: true);
 

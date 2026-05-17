@@ -62,8 +62,7 @@ namespace System.Data.Objects.Internal
                     if (propertyInfo == null)
                     {
                         throw new EntityException(
-                            System
-                                .Data
+                            System.Data
                                 .Entity
                                 .Strings
                                 .PocoEntityWrapper_UnableToSetFieldOrProperty(
@@ -85,8 +84,7 @@ namespace System.Data.Objects.Internal
                 catch (Exception ex)
                 {
                     throw new EntityException(
-                        System
-                            .Data
+                        System.Data
                             .Entity
                             .Strings
                             .PocoEntityWrapper_UnableToSetFieldOrProperty(
@@ -119,8 +117,7 @@ namespace System.Data.Objects.Internal
                     if (propertyInfo == null)
                     {
                         throw new EntityException(
-                            System
-                                .Data
+                            System.Data
                                 .Entity
                                 .Strings
                                 .PocoEntityWrapper_UnableToSetFieldOrProperty(
@@ -142,8 +139,7 @@ namespace System.Data.Objects.Internal
                 catch (Exception ex)
                 {
                     throw new EntityException(
-                        System
-                            .Data
+                        System.Data
                             .Entity
                             .Strings
                             .PocoEntityWrapper_UnableToSetFieldOrProperty(
@@ -162,8 +158,7 @@ namespace System.Data.Objects.Internal
             {
                 EntityType declaringEntityType = (EntityType)
                     relatedEnd.NavigationProperty.DeclaringType;
-                ObjectTypeMapping mapping = System
-                    .Data
+                ObjectTypeMapping mapping = System.Data
                     .Common
                     .Internal
                     .Materialization
@@ -198,8 +193,7 @@ namespace System.Data.Objects.Internal
                 else
                 {
                     throw new EntityException(
-                        System
-                            .Data
+                        System.Data
                             .Entity
                             .Strings
                             .PocoEntityWrapper_UnableToSetFieldOrProperty(
@@ -253,8 +247,7 @@ namespace System.Data.Objects.Internal
             catch (Exception ex)
             {
                 throw new EntityException(
-                    System
-                        .Data
+                    System.Data
                         .Entity
                         .Strings
                         .PocoEntityWrapper_UnableToSetFieldOrProperty(
@@ -327,8 +320,7 @@ namespace System.Data.Objects.Internal
             catch (Exception ex)
             {
                 throw new EntityException(
-                    System
-                        .Data
+                    System.Data
                         .Entity
                         .Strings
                         .PocoEntityWrapper_UnableToSetFieldOrProperty(
@@ -414,8 +406,7 @@ namespace System.Data.Objects.Internal
             if (typeToInstantiate == null)
             {
                 throw new EntityException(
-                    System
-                        .Data
+                    System.Data
                         .Entity
                         .Strings
                         .PocoEntityWrapper_UnableToMaterializeArbitaryNavPropType(

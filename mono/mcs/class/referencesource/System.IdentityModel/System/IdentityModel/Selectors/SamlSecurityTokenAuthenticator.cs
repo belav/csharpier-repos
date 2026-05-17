@@ -32,8 +32,7 @@ namespace System.IdentityModel.Selectors
         )
         {
             if (supportingAuthenticators == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("supportingAuthenticators");
 
             this.supportingAuthenticators = new List<SecurityTokenAuthenticator>(
@@ -79,8 +78,7 @@ namespace System.IdentityModel.Selectors
             SamlSecurityToken samlToken = token as SamlSecurityToken;
 
             if (samlToken == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new SecurityTokenException(
                             SR.GetString(
@@ -91,15 +89,13 @@ namespace System.IdentityModel.Selectors
                     );
 
             if (samlToken.Assertion.Signature == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new SecurityTokenException(SR.GetString(SR.SamlTokenMissingSignature))
                     );
 
             if (!this.IsCurrentlyTimeEffective(samlToken))
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new SecurityTokenException(
                             SR.GetString(
@@ -112,8 +108,7 @@ namespace System.IdentityModel.Selectors
                     );
 
             if (samlToken.Assertion.SigningToken == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new SecurityTokenException(SR.GetString(SR.SamlSigningTokenMissing))
                     );
@@ -129,8 +124,7 @@ namespace System.IdentityModel.Selectors
                     break;
             }
             if (!canBeValidated)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new SecurityTokenException(SR.GetString(SR.SamlInvalidSigningToken))
                     );
@@ -157,8 +151,7 @@ namespace System.IdentityModel.Selectors
                 bool foundAudienceCondition = false;
                 if (this.allowedAudienceUris == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new SecurityTokenException(SR.GetString(SR.SAMLAudienceUrisNotFound))
                         );
@@ -175,8 +168,7 @@ namespace System.IdentityModel.Selectors
                     foundAudienceCondition = true;
                     if (!ValidateAudienceRestriction(audienceCondition))
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new SecurityTokenException(
                                     SR.GetString(SR.SAMLAudienceUriValidationFailed)
@@ -186,8 +178,7 @@ namespace System.IdentityModel.Selectors
                 }
 
                 if (!foundAudienceCondition)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new SecurityTokenException(
                                 SR.GetString(SR.SAMLAudienceUriValidationFailed)
@@ -210,8 +201,7 @@ namespace System.IdentityModel.Selectors
                 for (int j = 0; j < this.allowedAudienceUris.Count; j++)
                 {
                     if (
-                        StringComparer
-                            .Ordinal
+                        StringComparer.Ordinal
                             .Compare(
                                 audienceRestrictionCondition.Audiences[i].AbsoluteUri,
                                 this.allowedAudienceUris[j]

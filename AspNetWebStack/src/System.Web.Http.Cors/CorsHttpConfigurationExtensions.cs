@@ -103,8 +103,7 @@ namespace System.Web.Http
                     if (!config.Properties.TryGetValue(CorsEnabledKey, out corsEnabled))
                     {
                         // Execute this in the Initializer to ensure that the CorsMessageHandler is added last.
-                        config
-                            .MessageHandlers
+                        config.MessageHandlers
                             .Add(new CorsMessageHandler(config, rethrowExceptions));
 
                         ITraceWriter traceWriter = config.Services.GetTraceWriter();
@@ -214,8 +213,7 @@ namespace System.Web.Http
             }
 
             return (ICorsPolicyProviderFactory)
-                httpConfiguration
-                    .Properties
+                httpConfiguration.Properties
                     .GetOrAdd(
                         CorsPolicyProviderFactoryKey,
                         k => new AttributeBasedPolicyProviderFactory()

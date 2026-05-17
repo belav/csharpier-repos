@@ -24,8 +24,7 @@ namespace System.ServiceModel.Channels
 
             if (port < IPEndPoint.MinPort || port > IPEndPoint.MaxPort)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(
                         "port",
                         SR.GetString(SR.ValueMustBeInRange, IPEndPoint.MinPort, IPEndPoint.MaxPort)

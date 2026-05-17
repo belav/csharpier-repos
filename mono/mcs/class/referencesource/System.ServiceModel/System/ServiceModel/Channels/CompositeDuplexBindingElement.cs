@@ -47,8 +47,7 @@ namespace System.ServiceModel.Channels
 
             if (typeof(TChannel) != typeof(IOutputChannel))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(
                         "TChannel",
                         SR.GetString(SR.ChannelTypeNotSupported, typeof(TChannel))
@@ -69,8 +68,7 @@ namespace System.ServiceModel.Channels
 
             if (typeof(TChannel) != typeof(IInputChannel))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(
                         "TChannel",
                         SR.GetString(SR.ChannelTypeNotSupported, typeof(TChannel))

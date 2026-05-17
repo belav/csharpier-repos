@@ -471,8 +471,7 @@ namespace MonoTests.System.Net.WebSockets
             var ctx = await this.listener.GetContextAsync();
             var wsContext = await ctx.AcceptWebSocketAsync(null);
             var result = await action(wsContext.WebSocket);
-            await wsContext
-                .WebSocket
+            await wsContext.WebSocket
                 .CloseOutputAsync(
                     WebSocketCloseStatus.NormalClosure,
                     "Finished",

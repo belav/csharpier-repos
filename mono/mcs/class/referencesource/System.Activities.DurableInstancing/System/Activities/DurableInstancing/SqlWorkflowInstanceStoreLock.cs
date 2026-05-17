@@ -77,8 +77,8 @@ namespace System.Activities.DurableInstancing
                     }
                     else
                     {
-                        this.hostLockRenewalPulseInterval =
-                            this.sqlWorkflowInstanceStore.HostLockRenewalPeriod;
+                        this.hostLockRenewalPulseInterval = this.sqlWorkflowInstanceStore
+                            .HostLockRenewalPeriod;
                     }
                 }
 
@@ -99,8 +99,8 @@ namespace System.Activities.DurableInstancing
             this.SurrogateLockOwnerId = surrogateLockOwnerId;
             this.lockOwnerInstanceHandle = new WeakReference(lockOwnerInstanceHandle);
 
-            TimeSpan runnableInstancesDetectionPeriod =
-                this.sqlWorkflowInstanceStore.RunnableInstancesDetectionPeriod;
+            TimeSpan runnableInstancesDetectionPeriod = this.sqlWorkflowInstanceStore
+                .RunnableInstancesDetectionPeriod;
 
             if (detectActivatableInstances)
             {

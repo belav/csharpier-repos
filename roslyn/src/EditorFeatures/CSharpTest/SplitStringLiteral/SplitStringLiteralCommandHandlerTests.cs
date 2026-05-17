@@ -79,8 +79,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitStringLiteral
                 options.SetOptionValue(DefaultOptions.NewLineCharacterOptionId, endOfLine);
 
             // Remove once https://github.com/dotnet/roslyn/issues/62204 is fixed:
-            workspace
-                .GlobalOptions
+            workspace.GlobalOptions
                 .SetGlobalOption(
                     IndentationOptionsStorage.SmartIndent,
                     document.Project.Language,
@@ -105,8 +104,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitStringLiteral
             }
 
             var undoHistoryRegistry = workspace.GetService<ITextUndoHistoryRegistry>();
-            var commandHandler = workspace
-                .ExportProvider
+            var commandHandler = workspace.ExportProvider
                 .GetCommandHandler<SplitStringLiteralCommandHandler>(
                     nameof(SplitStringLiteralCommandHandler)
                 );

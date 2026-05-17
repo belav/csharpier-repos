@@ -123,8 +123,7 @@ namespace System.ServiceModel.Security
         {
             if (authorizationPolicies == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("authorizationPolicies");
             }
             AuthorizationContext ac = AuthorizationContext.CreateDefaultAuthorizationContext(
@@ -141,8 +140,7 @@ namespace System.ServiceModel.Security
         {
             if (authorizationContext == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("authorizationContext");
             }
             EndpointIdentity identity;
@@ -153,8 +151,7 @@ namespace System.ServiceModel.Security
                     authorizationContext,
                     this.GetType()
                 );
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperWarning(
                         new MessageSecurityException(
                             SR.GetString(errorString, identity, serviceReference)

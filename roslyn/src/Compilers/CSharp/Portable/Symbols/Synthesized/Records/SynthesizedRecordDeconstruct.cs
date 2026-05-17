@@ -58,8 +58,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         diagnostics
                     )
                 ),
-                Parameters: _ctor
-                    .Parameters
+                Parameters: _ctor.Parameters
                     .SelectAsArray<ParameterSymbol, ImmutableArray<Location>, ParameterSymbol>(
                         (param, locations) =>
                             new SourceSimpleParameterSymbol(

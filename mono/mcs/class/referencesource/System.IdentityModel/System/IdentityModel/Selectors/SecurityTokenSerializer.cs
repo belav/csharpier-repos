@@ -66,8 +66,7 @@ namespace System.IdentityModel.Selectors
         {
             if (keyIdentifierClause == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("keyIdentifierClause");
             }
             return CanWriteKeyIdentifierClauseCore(keyIdentifierClause);
@@ -137,8 +136,7 @@ namespace System.IdentityModel.Selectors
             }
             if (keyIdentifierClause == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("keyIdentifierClause");
             }
             WriteKeyIdentifierClauseCore(writer, keyIdentifierClause);

@@ -115,8 +115,7 @@ namespace Microsoft.Build.BuildEngine
             if (treatPropertyValueAsLiteral)
                 propertyValue = Utilities.Escape(propertyValue);
 
-            XmlElement element = propertyGroup
-                .OwnerDocument
+            XmlElement element = propertyGroup.OwnerDocument
                 .CreateElement(propertyName, Project.XmlNamespace);
             propertyGroup.AppendChild(element);
 

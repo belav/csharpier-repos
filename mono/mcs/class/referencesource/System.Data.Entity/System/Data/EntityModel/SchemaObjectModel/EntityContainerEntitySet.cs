@@ -247,8 +247,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
                     AddError(
                         ErrorCode.TableAndSchemaAreMutuallyExclusiveWithDefiningQuery,
                         EdmSchemaErrorSeverity.Error,
-                        System
-                            .Data
+                        System.Data
                             .Entity
                             .Strings
                             .TableAndSchemaAreMutuallyExclusiveWithDefiningQuery(FQName)

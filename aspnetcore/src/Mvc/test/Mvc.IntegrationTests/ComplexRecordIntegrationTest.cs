@@ -2058,8 +2058,7 @@ public class ComplexRecordIntegrationTest
                     binding =>
                     {
                         // A real details provider could customize message based on BindingMetadataProviderContext.
-                        binding
-                            .ModelBindingMessageProvider
+                        binding.ModelBindingMessageProvider
                             .SetMissingBindRequiredValueAccessor(name =>
                                 $"Hurts when '{name}' is not provided."
                             );

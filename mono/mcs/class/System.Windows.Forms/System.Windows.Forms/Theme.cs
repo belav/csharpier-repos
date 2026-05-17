@@ -691,8 +691,7 @@ namespace System.Windows.Forms
             ResPool.AddUIImage(image, name, 0);
             if (image.Width != width && width != 0)
             {
-                Console
-                    .Error
+                Console.Error
                     .WriteLine(
                         "warning: requesting icon that not been tuned {0}_{1} {2}",
                         width,

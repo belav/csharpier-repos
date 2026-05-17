@@ -14,8 +14,7 @@ namespace System.Net.Http.Formatting
         [Fact]
         public void TypeIsCorrect()
         {
-            Assert
-                .Type
+            Assert.Type
                 .HasProperties(
                     typeof(UriPathExtensionMapping),
                     TypeAssert.TypeProperties.IsPublicVisibleClass,

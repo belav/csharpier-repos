@@ -322,8 +322,7 @@ namespace Microsoft.CSharp.RuntimeBinder
                 for (int i = 0; i < genericArguments.Length; i++)
                 {
                     Type t = genericArguments[i];
-                    ((TypeParameterType)ctypes[i])
-                        .Symbol
+                    ((TypeParameterType)ctypes[i]).Symbol
                         .SetBounds(
                             TypeArray.Allocate(
                                 GetCTypeArrayFromTypes(t.GetGenericParameterConstraints())
@@ -846,9 +845,8 @@ namespace Microsoft.CSharp.RuntimeBinder
                 // We use "IsEquivalentTo" so that unified local types match.
                 if (sym is AggregateSymbol agg)
                     if (
-                        agg.AssociatedSystemType.IsEquivalentTo(
-                            t.IsGenericType ? t.GetGenericTypeDefinition() : t
-                        )
+                        agg.AssociatedSystemType
+                            .IsEquivalentTo(t.IsGenericType ? t.GetGenericTypeDefinition() : t)
                     )
                     {
                         return agg;
@@ -1021,8 +1019,7 @@ namespace Microsoft.CSharp.RuntimeBinder
                     Type t = genericArguments[i];
                     if (agg.GetTypeVars()[i] is TypeParameterType typeVar)
                     {
-                        typeVar
-                            .Symbol
+                        typeVar.Symbol
                             .SetBounds(
                                 TypeArray.Allocate(
                                     GetCTypeArrayFromTypes(t.GetGenericParameterConstraints())

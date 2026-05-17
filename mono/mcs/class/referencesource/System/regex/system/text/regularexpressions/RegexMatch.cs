@@ -90,8 +90,7 @@ namespace System.Text.RegularExpressions
             _balancing = false;
 
             // No need for an exception here.  This is only called internally, so we'll use an Assert instead
-            System
-                .Diagnostics
+            System.Diagnostics
                 .Debug
                 .Assert(
                     !(
@@ -447,8 +446,7 @@ namespace System.Text.RegularExpressions
 
             for (i = 0; i < _matchcount.Length; i++)
             {
-                System
-                    .Diagnostics
+                System.Diagnostics
                     .Debug
                     .WriteLine("Capnum " + i.ToString(CultureInfo.InvariantCulture) + ":");
 
@@ -459,8 +457,7 @@ namespace System.Text.RegularExpressions
                     if (_matches[i][j * 2] >= 0)
                         text = _text.Substring(_matches[i][j * 2], _matches[i][j * 2 + 1]);
 
-                    System
-                        .Diagnostics
+                    System.Diagnostics
                         .Debug
                         .WriteLine(
                             "  ("
@@ -536,8 +533,7 @@ namespace System.Text.RegularExpressions
 #endif
                 while (e.MoveNext())
                 {
-                    System
-                        .Diagnostics
+                    System.Diagnostics
                         .Debug
                         .WriteLine(
                             "Slot " + e.Current.ToString() + " -> " + _caps[e.Current].ToString()

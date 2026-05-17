@@ -46,8 +46,7 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                     .DeclaringSyntaxReferences[0]
                     .GetSyntax(cancellationToken);
                 if (
-                    containingType
-                        .DeclaringSyntaxReferences
+                    containingType.DeclaringSyntaxReferences
                         .Any(
                             static (r, arg) =>
                                 r.GetSyntax(arg.cancellationToken) == arg.constructorSyntax,
@@ -95,8 +94,7 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             )
             {
                 var constructorSyntax = constructorReference.GetSyntax(cancellationToken);
-                return containingType
-                    .DeclaringSyntaxReferences
+                return containingType.DeclaringSyntaxReferences
                     .Any(
                         static (r, arg) =>
                             r.GetSyntax(arg.cancellationToken) == arg.constructorSyntax,

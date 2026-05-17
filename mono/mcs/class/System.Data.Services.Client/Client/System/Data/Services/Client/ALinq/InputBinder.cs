@@ -106,8 +106,7 @@ namespace System.Data.Services.Client
                 PropertyInfo currentProp = nestedAccesses.Peek();
 
                 if (
-                    currentProp
-                        .Name
+                    currentProp.Name
                         .Equals(targetSet.TransparentScope.Accessor, StringComparison.Ordinal)
                 )
                 {
@@ -119,8 +118,7 @@ namespace System.Data.Services.Client
 
                 Expression source;
                 if (
-                    !targetSet
-                        .TransparentScope
+                    !targetSet.TransparentScope
                         .SourceAccessors
                         .TryGetValue(currentProp.Name, out source)
                 )

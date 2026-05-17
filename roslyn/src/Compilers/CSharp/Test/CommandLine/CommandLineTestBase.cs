@@ -58,8 +58,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CommandLine.UnitTests
         )
         {
             sdkDirectory = sdkDirectory ?? SdkDirectory;
-            return CSharpCommandLineParser
-                .Default
+            return CSharpCommandLineParser.Default
                 .Parse(args, baseDirectory, sdkDirectory, additionalReferenceDirectories);
         }
 

@@ -37,8 +37,7 @@ namespace System.Web.Http.ModelBinding
                 },
             };
             HttpActionContext context = ContextUtil.CreateActionContext();
-            context
-                .ControllerContext
+            context.ControllerContext
                 .Configuration
                 .Services
                 .Replace(
@@ -95,8 +94,7 @@ namespace System.Web.Http.ModelBinding
             };
 
             HttpActionContext context = ContextUtil.CreateActionContext();
-            context
-                .ControllerContext
+            context.ControllerContext
                 .Configuration
                 .Services
                 .Replace(
@@ -154,8 +152,7 @@ namespace System.Web.Http.ModelBinding
             };
 
             HttpActionContext context = ContextUtil.CreateActionContext();
-            context
-                .ControllerContext
+            context.ControllerContext
                 .Configuration
                 .Services
                 .Replace(
@@ -203,8 +200,7 @@ namespace System.Web.Http.ModelBinding
                 },
             };
             HttpActionContext context = ContextUtil.CreateActionContext();
-            context
-                .ControllerContext
+            context.ControllerContext
                 .Configuration
                 .Services
                 .Replace(
@@ -281,8 +277,7 @@ namespace System.Web.Http.ModelBinding
                 ValueProvider = new SimpleHttpValueProvider(),
             };
             HttpActionContext context = ContextUtil.CreateActionContext();
-            context
-                .ControllerContext
+            context.ControllerContext
                 .Configuration
                 .Services
                 .Replace(

@@ -281,11 +281,8 @@ namespace System.Data.Common
             // only set the size if the parameter has a specific size value.
             Facet maxLengthFacet;
             if (
-                type.Facets.TryGetValue(
-                    DbProviderManifest.MaxLengthFacetName,
-                    true,
-                    out maxLengthFacet
-                )
+                type.Facets
+                    .TryGetValue(DbProviderManifest.MaxLengthFacetName, true, out maxLengthFacet)
                 && maxLengthFacet.Value != null
             )
             {

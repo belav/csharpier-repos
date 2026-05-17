@@ -236,8 +236,7 @@ public class MigrationsSqlGenerator : IMigrationsSqlGenerator
         builder
             .Append("ALTER TABLE ")
             .Append(
-                Dependencies
-                    .SqlGenerationHelper
+                Dependencies.SqlGenerationHelper
                     .DelimitIdentifier(operation.Table, operation.Schema)
             )
             .Append(" ADD ");
@@ -269,8 +268,7 @@ public class MigrationsSqlGenerator : IMigrationsSqlGenerator
         builder
             .Append("ALTER TABLE ")
             .Append(
-                Dependencies
-                    .SqlGenerationHelper
+                Dependencies.SqlGenerationHelper
                     .DelimitIdentifier(operation.Table, operation.Schema)
             )
             .Append(" ADD ");
@@ -302,8 +300,7 @@ public class MigrationsSqlGenerator : IMigrationsSqlGenerator
         builder
             .Append("ALTER TABLE ")
             .Append(
-                Dependencies
-                    .SqlGenerationHelper
+                Dependencies.SqlGenerationHelper
                     .DelimitIdentifier(operation.Table, operation.Schema)
             )
             .Append(" ADD ");
@@ -332,8 +329,7 @@ public class MigrationsSqlGenerator : IMigrationsSqlGenerator
         builder
             .Append("ALTER TABLE ")
             .Append(
-                Dependencies
-                    .SqlGenerationHelper
+                Dependencies.SqlGenerationHelper
                     .DelimitIdentifier(operation.Table, operation.Schema)
             )
             .Append(" ADD ");
@@ -358,8 +354,7 @@ public class MigrationsSqlGenerator : IMigrationsSqlGenerator
         builder
             .Append("ALTER TABLE ")
             .Append(
-                Dependencies
-                    .SqlGenerationHelper
+                Dependencies.SqlGenerationHelper
                     .DelimitIdentifier(operation.Table, operation.Schema)
             )
             .Append(" ADD ");
@@ -518,8 +513,7 @@ public class MigrationsSqlGenerator : IMigrationsSqlGenerator
             .Append(Dependencies.SqlGenerationHelper.DelimitIdentifier(operation.Name))
             .Append(" ON ")
             .Append(
-                Dependencies
-                    .SqlGenerationHelper
+                Dependencies.SqlGenerationHelper
                     .DelimitIdentifier(operation.Table, operation.Schema)
             )
             .Append(" (");
@@ -651,8 +645,7 @@ public class MigrationsSqlGenerator : IMigrationsSqlGenerator
         builder
             .Append("ALTER TABLE ")
             .Append(
-                Dependencies
-                    .SqlGenerationHelper
+                Dependencies.SqlGenerationHelper
                     .DelimitIdentifier(operation.Table, operation.Schema)
             )
             .Append(" DROP COLUMN ")
@@ -683,8 +676,7 @@ public class MigrationsSqlGenerator : IMigrationsSqlGenerator
         builder
             .Append("ALTER TABLE ")
             .Append(
-                Dependencies
-                    .SqlGenerationHelper
+                Dependencies.SqlGenerationHelper
                     .DelimitIdentifier(operation.Table, operation.Schema)
             )
             .Append(" DROP CONSTRAINT ")
@@ -737,8 +729,7 @@ public class MigrationsSqlGenerator : IMigrationsSqlGenerator
         builder
             .Append("ALTER TABLE ")
             .Append(
-                Dependencies
-                    .SqlGenerationHelper
+                Dependencies.SqlGenerationHelper
                     .DelimitIdentifier(operation.Table, operation.Schema)
             )
             .Append(" DROP CONSTRAINT ")
@@ -839,8 +830,7 @@ public class MigrationsSqlGenerator : IMigrationsSqlGenerator
         builder
             .Append("ALTER TABLE ")
             .Append(
-                Dependencies
-                    .SqlGenerationHelper
+                Dependencies.SqlGenerationHelper
                     .DelimitIdentifier(operation.Table, operation.Schema)
             )
             .Append(" DROP CONSTRAINT ")
@@ -866,8 +856,7 @@ public class MigrationsSqlGenerator : IMigrationsSqlGenerator
         builder
             .Append("ALTER TABLE ")
             .Append(
-                Dependencies
-                    .SqlGenerationHelper
+                Dependencies.SqlGenerationHelper
                     .DelimitIdentifier(operation.Table, operation.Schema)
             )
             .Append(" DROP CONSTRAINT ")
@@ -1050,8 +1039,7 @@ public class MigrationsSqlGenerator : IMigrationsSqlGenerator
 
         for (var i = 0; i < operation.Values.GetLength(0); i++)
         {
-            var modificationCommand = Dependencies
-                .ModificationCommandFactory
+            var modificationCommand = Dependencies.ModificationCommandFactory
                 .CreateNonTrackedModificationCommand(
                     new NonTrackedModificationCommandParameters(
                         operation.Table,
@@ -1175,8 +1163,7 @@ public class MigrationsSqlGenerator : IMigrationsSqlGenerator
 
         for (var i = 0; i < operation.KeyValues.GetLength(0); i++)
         {
-            var modificationCommand = Dependencies
-                .ModificationCommandFactory
+            var modificationCommand = Dependencies.ModificationCommandFactory
                 .CreateNonTrackedModificationCommand(
                     new NonTrackedModificationCommandParameters(
                         operation.Table,
@@ -1340,8 +1327,7 @@ public class MigrationsSqlGenerator : IMigrationsSqlGenerator
 
         for (var i = 0; i < operation.KeyValues.GetLength(0); i++)
         {
-            var modificationCommand = Dependencies
-                .ModificationCommandFactory
+            var modificationCommand = Dependencies.ModificationCommandFactory
                 .CreateNonTrackedModificationCommand(
                     new NonTrackedModificationCommandParameters(
                         operation.Table,
@@ -1672,8 +1658,7 @@ public class MigrationsSqlGenerator : IMigrationsSqlGenerator
                 || table.Indexes.Any(u => u.Columns.Contains(column));
         }
 
-        return Dependencies
-            .TypeMappingSource
+        return Dependencies.TypeMappingSource
             .FindMapping(
                 operation.ClrType,
                 null,
@@ -1711,8 +1696,7 @@ public class MigrationsSqlGenerator : IMigrationsSqlGenerator
             var typeMapping =
                 (
                     columnType != null
-                        ? Dependencies
-                            .TypeMappingSource
+                        ? Dependencies.TypeMappingSource
                             .FindMapping(defaultValue.GetType(), columnType)
                         : null
                 ) ?? Dependencies.TypeMappingSource.GetMappingForValue(defaultValue);
@@ -1783,8 +1767,7 @@ public class MigrationsSqlGenerator : IMigrationsSqlGenerator
             .Append(ColumnList(operation.Columns))
             .Append(") REFERENCES ")
             .Append(
-                Dependencies
-                    .SqlGenerationHelper
+                Dependencies.SqlGenerationHelper
                     .DelimitIdentifier(operation.PrincipalTable, operation.PrincipalSchema)
             );
 

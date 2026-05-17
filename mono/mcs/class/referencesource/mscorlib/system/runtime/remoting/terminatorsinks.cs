@@ -227,8 +227,7 @@ namespace System.Runtime.Remoting.Messaging
             }
             else
             {
-                msgCtrl = Thread
-                    .CurrentContext
+                msgCtrl = Thread.CurrentContext
                     .GetClientContextChain()
                     .AsyncProcessMessage(reqMsg, replySink);
             }
@@ -319,8 +318,7 @@ namespace System.Runtime.Remoting.Messaging
                     return errMsg;
                 }
 
-                replyMsg = ((IConstructionCallMessage)reqMsg)
-                    .Activator
+                replyMsg = ((IConstructionCallMessage)reqMsg).Activator
                     .Activate((IConstructionCallMessage)reqMsg);
                 BCLDebug.Assert(replyMsg is IConstructionReturnMessage, "bad ctorRetMsg");
                 errMsg = ctx.NotifyActivatorProperties(
@@ -354,8 +352,7 @@ namespace System.Runtime.Remoting.Messaging
                 if (channelSink != CrossContextChannel.MessageSink)
                 {
                     replyMsg = (IMessage)
-                        Thread
-                            .CurrentThread
+                        Thread.CurrentThread
                             .InternalCrossContextCallback(Context.DefaultContext, xctxDel, args);
                 }
                 else
@@ -469,8 +466,7 @@ namespace System.Runtime.Remoting.Messaging
                 if (channelSink != CrossContextChannel.MessageSink)
                 {
                     msgCtrl = (IMessageCtrl)
-                        Thread
-                            .CurrentThread
+                        Thread.CurrentThread
                             .InternalCrossContextCallback(Context.DefaultContext, xctxDel, args);
                 }
                 else
@@ -519,8 +515,7 @@ namespace System.Runtime.Remoting.Messaging
 
             // Call the dynamic sinks to notify that the async call
             // has completed
-            Thread
-                .CurrentContext
+            Thread.CurrentContext
                 .NotifyDynamicSinks(
                     reqMsg, // this is the async reply
                     true, // bCliSide
@@ -621,8 +616,7 @@ namespace System.Runtime.Remoting.Messaging
                     return errMsg;
                 }
 
-                replyMsg = ((IConstructionCallMessage)reqMsg)
-                    .Activator
+                replyMsg = ((IConstructionCallMessage)reqMsg).Activator
                     .Activate((IConstructionCallMessage)reqMsg);
                 BCLDebug.Assert(replyMsg is IConstructionReturnMessage, "bad ctorRetMsg");
                 errMsg = ctx.NotifyActivatorProperties(

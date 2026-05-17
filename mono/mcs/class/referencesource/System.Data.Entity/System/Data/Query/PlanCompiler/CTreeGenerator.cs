@@ -785,8 +785,7 @@ namespace System.Data.Query.PlanCompiler
             // Create a "true=true" for "true" predicates,
             // Create a "true=false" expression for false predicates
             //
-            return DbExpressionBuilder
-                .True
+            return DbExpressionBuilder.True
                 .Equal(op.IsTrue ? DbExpressionBuilder.True : DbExpressionBuilder.False);
         }
 

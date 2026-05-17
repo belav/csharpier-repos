@@ -733,8 +733,7 @@ namespace System.Xml.Linq
 
                     // Replacing with Interlocked.CompareExchange for now (with no effect)
                     //   which will do a very similar thing to MemoryBarrier (it's just slower)
-                    System
-                        .Threading
+                    System.Threading
                         .Interlocked
                         .CompareExchange<XHashtableState>(ref state, null, null);
 #endif // SILVERLIGHT

@@ -71,8 +71,7 @@ namespace System.Net.Http.Headers
         {
             int index = 0;
             return (NameValueWithParametersHeaderValue)
-                GenericHeaderParser
-                    .SingleValueNameValueWithParametersParser
+                GenericHeaderParser.SingleValueNameValueWithParametersParser
                     .ParseValue(input, null, ref index);
         }
 
@@ -85,8 +84,7 @@ namespace System.Net.Http.Headers
             parsedValue = null;
 
             if (
-                GenericHeaderParser
-                    .SingleValueNameValueWithParametersParser
+                GenericHeaderParser.SingleValueNameValueWithParametersParser
                     .TryParseValue(input, null, ref index, out object? output)
             )
             {

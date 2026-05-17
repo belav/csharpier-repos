@@ -31,9 +31,8 @@ namespace System.ServiceModel.Channels
                 new MatchNoneMessageFilter(),
                 int.MinValue
             );
-            this.innerChannelListener = this.channelDemuxer.BuildChannelListener<IInputChannel>(
-                demuxFilter
-            );
+            this.innerChannelListener = this.channelDemuxer
+                .BuildChannelListener<IInputChannel>(demuxFilter);
             this.localAddressProvider = localAddressProvider;
             this.providesCorrelation = bindingElement.ProvidesCorrelation;
         }
@@ -128,9 +127,8 @@ namespace System.ServiceModel.Channels
             try
             {
                 innerOutputChannel = this.innerChannelFactory.CreateChannel(remoteAddress, via);
-                innerInputListener = this.channelDemuxer.BuildChannelListener<IInputChannel>(
-                    demuxFilter
-                );
+                innerInputListener = this.channelDemuxer
+                    .BuildChannelListener<IInputChannel>(demuxFilter);
                 innerInputListener.Open();
                 innerInputChannel = innerInputListener.AcceptChannel();
                 newChannel = new ClientCompositeDuplexChannel(

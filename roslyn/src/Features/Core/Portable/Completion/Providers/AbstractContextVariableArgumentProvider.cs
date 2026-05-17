@@ -108,8 +108,7 @@ namespace Microsoft.CodeAnalysis.Completion
                 )
             )
             {
-                var enclosingSymbol = context
-                    .SemanticModel
+                var enclosingSymbol = context.SemanticModel
                     .GetEnclosingSymbol(targetToken.SpanStart, context.CancellationToken);
                 while (
                     enclosingSymbol
@@ -152,8 +151,7 @@ namespace Microsoft.CodeAnalysis.Completion
                     return;
                 }
 
-                var conversion = context
-                    .SemanticModel
+                var conversion = context.SemanticModel
                     .Compilation
                     .ClassifyCommonConversion(symbolType, context.Parameter.Type);
                 if (!conversion.IsImplicit)

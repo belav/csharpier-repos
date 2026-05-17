@@ -139,8 +139,7 @@ namespace System.Activities.DurableInstancing
             if (context.InstanceView.InstanceMetadataConsistency == InstanceValueConsistency.None)
             {
                 foreach (
-                    KeyValuePair<XName, InstanceValue> metadataProperty in context
-                        .InstanceView
+                    KeyValuePair<XName, InstanceValue> metadataProperty in context.InstanceView
                         .InstanceMetadata
                 )
                 {
@@ -389,8 +388,7 @@ namespace System.Activities.DurableInstancing
                     command as CreateWorkflowOwnerWithIdentityCommand;
 
                 if (
-                    ownerCommand
-                        .InstanceOwnerMetadata
+                    ownerCommand.InstanceOwnerMetadata
                         .TryGetValue(
                             Workflow45Namespace.DefinitionIdentities,
                             out instanceValueIdentityCollection
@@ -403,11 +401,9 @@ namespace System.Activities.DurableInstancing
                             instanceValueIdentityCollection.Value as IList<WorkflowIdentity>;
                         if (identityCollection == null)
                         {
-                            string typeName = typeof(IList<>)
-                                .Name
+                            string typeName = typeof(IList<>).Name
                                 .Replace("`1", "<" + typeof(WorkflowIdentity).Name + ">");
-                            throw FxTrace
-                                .Exception
+                            throw FxTrace.Exception
                                 .AsError(
                                     new InstancePersistenceCommandException(
                                         SR.InvalidMetadataValue(
@@ -422,8 +418,7 @@ namespace System.Activities.DurableInstancing
 
                 InstanceValue instanceValue = null;
                 if (
-                    ownerCommand
-                        .InstanceOwnerMetadata
+                    ownerCommand.InstanceOwnerMetadata
                         .TryGetValue(
                             Workflow45Namespace.DefinitionIdentityFilter,
                             out instanceValue
@@ -447,8 +442,7 @@ namespace System.Activities.DurableInstancing
                             && workflowIdentityFilter != (int)WorkflowIdentityFilter.AnyRevision
                         )
                         {
-                            throw FxTrace
-                                .Exception
+                            throw FxTrace.Exception
                                 .AsError(
                                     new InstancePersistenceCommandException(
                                         SR.InvalidMetadataValue(
@@ -466,8 +460,7 @@ namespace System.Activities.DurableInstancing
                 InstanceValue instanceValue = null;
                 SaveWorkflowCommand saveCommand = command as SaveWorkflowCommand;
                 if (
-                    saveCommand
-                        .InstanceMetadataChanges
+                    saveCommand.InstanceMetadataChanges
                         .TryGetValue(Workflow45Namespace.DefinitionIdentity, out instanceValue)
                 )
                 {
@@ -476,8 +469,7 @@ namespace System.Activities.DurableInstancing
                         identityCollection = new Collection<WorkflowIdentity>();
                         if (!(instanceValue.Value is WorkflowIdentity))
                         {
-                            throw FxTrace
-                                .Exception
+                            throw FxTrace.Exception
                                 .AsError(
                                     new InstancePersistenceCommandException(
                                         SR.InvalidMetadataValue(

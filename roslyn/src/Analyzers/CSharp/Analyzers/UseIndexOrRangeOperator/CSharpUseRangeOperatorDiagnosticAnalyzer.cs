@@ -104,8 +104,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIndexOrRangeOperator
                 return;
 
             if (
-                CSharpSemanticFacts
-                    .Instance
+                CSharpSemanticFacts.Instance
                     .IsInExpressionTree(
                         semanticModel,
                         operation.Syntax,
@@ -226,8 +225,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIndexOrRangeOperator
             var startOperation = invocation.Arguments[0].Value;
 
             if (
-                CSharpSyntaxFacts
-                    .Instance
+                CSharpSyntaxFacts.Instance
                     .AreEquivalent(startOperation.Syntax, subtraction.RightOperand.Syntax)
             )
             {

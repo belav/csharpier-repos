@@ -147,8 +147,7 @@ public class GlobalOptionsTests
 
                         if (propertyType != property.PropertyType)
                         {
-                            var getValueOrDefault = property
-                                .PropertyType
+                            var getValueOrDefault = property.PropertyType
                                 .GetMethod("GetValueOrDefault", Array.Empty<Type>());
                             value = getValueOrDefault.Invoke(value, Array.Empty<object>());
                             defaultValue = getValueOrDefault.Invoke(
@@ -166,8 +165,7 @@ public class GlobalOptionsTests
 
     private static TestWorkspace CreateWorkspace(out TestGlobalOptions globalOptions)
     {
-        var composition = EditorTestCompositions
-            .LanguageServerProtocolEditorFeatures
+        var composition = EditorTestCompositions.LanguageServerProtocolEditorFeatures
             .AddExcludedPartTypes(typeof(GlobalOptionService))
             .AddParts(typeof(TestGlobalOptions));
 

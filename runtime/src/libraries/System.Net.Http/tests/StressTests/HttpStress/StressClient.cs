@@ -62,8 +62,7 @@ namespace HttpStress
                 {
                     return new SocketsHttpHandler()
                     {
-                        PooledConnectionLifetime = _config
-                            .ConnectionLifetime
+                        PooledConnectionLifetime = _config.ConnectionLifetime
                             .GetValueOrDefault(Timeout.InfiniteTimeSpan),
                         SslOptions = new SslClientAuthenticationOptions
                         {
@@ -366,8 +365,7 @@ namespace HttpStress
                     lock (failureType)
                     {
                         if (
-                            !failureType
-                                .Failures
+                            !failureType.Failures
                                 .TryGetValue(
                                     operationIndex,
                                     out List<(
@@ -542,8 +540,7 @@ namespace HttpStress
 
                 int i = 0;
                 foreach (
-                    StressFailureType failure in _failureTypes
-                        .Values
+                    StressFailureType failure in _failureTypes.Values
                         .OrderByDescending(x => x.FailureCount)
                 )
                 {

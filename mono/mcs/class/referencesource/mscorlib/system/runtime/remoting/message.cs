@@ -920,8 +920,7 @@ namespace System.Runtime.Remoting.Messaging
         [System.Security.SecurityCritical] // auto-generated
         internal static void PropagateCallContextFromThreadToMessage(IMessage msg)
         {
-            LogicalCallContext callCtx = Thread
-                .CurrentThread
+            LogicalCallContext callCtx = Thread.CurrentThread
                 .GetMutableExecutionContext()
                 .LogicalCallContext;
 
@@ -3306,12 +3305,8 @@ namespace System.Runtime.Remoting.Messaging
 
                         // Use the default binder to select the right overload
                         // based on signature.
-                        MI = Type.DefaultBinder.SelectMethod(
-                            MethodCall.LookupAll,
-                            matches,
-                            methodSignature,
-                            null
-                        );
+                        MI = Type.DefaultBinder
+                            .SelectMethod(MethodCall.LookupAll, matches, methodSignature, null);
                     }
 
                     BCLDebug.Trace(
@@ -5198,8 +5193,7 @@ namespace System.Runtime.Remoting.Messaging
                 Identity.ProcessGuid
             );
             String unUsed;
-            IMessageSink channelSink = CrossAppDomainChannel
-                .AppDomainChannel
+            IMessageSink channelSink = CrossAppDomainChannel.AppDomainChannel
                 .CreateMessageSink(
                     null, //uri
                     data, //channelData

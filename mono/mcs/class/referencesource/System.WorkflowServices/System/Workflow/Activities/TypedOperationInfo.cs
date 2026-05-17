@@ -40,8 +40,7 @@ namespace System.Workflow.Activities
             }
             if (string.IsNullOrEmpty(operationName))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(
                         "operationName",
                         SR2.GetString(SR2.Error_ArgumentValueNullOrEmptyString)

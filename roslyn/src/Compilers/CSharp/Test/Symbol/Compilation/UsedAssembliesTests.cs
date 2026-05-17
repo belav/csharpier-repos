@@ -137,9 +137,8 @@ public class C2
                 var comp2 = comp.RemoveAllReferences()
                     .AddReferences(
                         used.Concat(
-                            comp.References.Where(r =>
-                                r.Properties.Kind == MetadataImageKind.Module
-                            )
+                            comp.References
+                                .Where(r => r.Properties.Kind == MetadataImageKind.Module)
                         )
                     );
 
@@ -344,8 +343,7 @@ public class C2
             {
                 if (output is null)
                 {
-                    System
-                        .Array
+                    System.Array
                         .Copy(
                             input,
                             output = new DiagnosticDescription[input.Length],
@@ -546,9 +544,8 @@ public class C2
                 var comp2 = comp.RemoveAllReferences()
                     .AddReferences(
                         used.Concat(
-                            comp.References.Where(r =>
-                                r.Properties.Kind == MetadataImageKind.Module
-                            )
+                            comp.References
+                                .Where(r => r.Properties.Kind == MetadataImageKind.Module)
                         )
                     );
                 CompileAndVerify(
@@ -1470,8 +1467,7 @@ class C2
                 Compilation comp4 = CreateCompilation(
                     source,
                     references: references,
-                    parseOptions: TestOptions
-                        .Regular
+                    parseOptions: TestOptions.Regular
                         .WithDocumentationMode(DocumentationMode.Diagnose)
                 );
                 AssertUsedAssemblyReferences(comp4, expected);
@@ -4823,8 +4819,7 @@ class C2
                 Compilation comp4 = CreateCompilation(
                     source,
                     references: references,
-                    parseOptions: TestOptions
-                        .Regular
+                    parseOptions: TestOptions.Regular
                         .WithDocumentationMode(DocumentationMode.Diagnose)
                 );
                 AssertUsedAssemblyReferences(comp4, expected);
@@ -5635,8 +5630,7 @@ class C2
                 Compilation comp4 = CreateCompilation(
                     source,
                     references: references,
-                    parseOptions: TestOptions
-                        .Regular
+                    parseOptions: TestOptions.Regular
                         .WithDocumentationMode(DocumentationMode.Diagnose)
                 );
                 AssertUsedAssemblyReferences(comp4, expected);
@@ -5895,8 +5889,7 @@ class C2
                 Compilation comp4 = CreateCompilation(
                     source,
                     references: references,
-                    parseOptions: TestOptions
-                        .Regular
+                    parseOptions: TestOptions.Regular
                         .WithDocumentationMode(DocumentationMode.Diagnose)
                 );
                 AssertUsedAssemblyReferences(comp4, new[] { reference0 }, references);

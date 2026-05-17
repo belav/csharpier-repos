@@ -104,8 +104,7 @@ namespace System.Data.Common.Utils.Boolean
                 NotExpr<DomainConstraint<T_Variable, T_Element>> expression
             )
             {
-                return expression
-                    .Child
+                return expression.Child
                     .Accept(NegatedDomainConstraintTreeVisitor<T_Variable, T_Element>.Instance);
             }
         }
@@ -124,8 +123,7 @@ namespace System.Data.Common.Utils.Boolean
                 NotExpr<DomainConstraint<T_Variable, T_Element>> expression
             )
             {
-                return expression
-                    .Child
+                return expression.Child
                     .Accept(NonNegatedDomainConstraintTreeVisitor<T_Variable, T_Element>.Instance);
             }
 

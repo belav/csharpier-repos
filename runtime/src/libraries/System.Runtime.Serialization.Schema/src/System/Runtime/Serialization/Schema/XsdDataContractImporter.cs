@@ -409,8 +409,7 @@ namespace System.Runtime.Serialization
             if (actualTypeElement == null)
                 return defaultTypeName;
 
-            XmlNode? nameAttribute = actualTypeElement
-                .Attributes
+            XmlNode? nameAttribute = actualTypeElement.Attributes
                 .GetNamedItem(ImportGlobals.ActualTypeNameAttribute);
             if (nameAttribute?.Value == null)
                 throw ExceptionUtil.ThrowHelperError(
@@ -424,8 +423,7 @@ namespace System.Runtime.Serialization
                         )
                     )
                 );
-            XmlNode? nsAttribute = actualTypeElement
-                .Attributes
+            XmlNode? nsAttribute = actualTypeElement.Attributes
                 .GetNamedItem(ImportGlobals.ActualTypeNamespaceAttribute);
             if (nsAttribute?.Value == null)
                 throw ExceptionUtil.ThrowHelperError(

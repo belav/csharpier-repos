@@ -86,8 +86,7 @@ namespace Tracing.Tests.Common
                 process.StartInfo.RedirectStandardInput = true;
                 process.StartInfo.RedirectStandardError = true;
 
-                Logger
-                    .logger
+                Logger.logger
                     .Log(
                         $"running sub-process: {process.StartInfo.FileName} {process.StartInfo.Arguments}"
                     );
@@ -140,8 +139,7 @@ namespace Tracing.Tests.Common
 
                 while (!EventPipeClient.ListAvailablePorts().Contains(process.Id))
                 {
-                    Logger
-                        .logger
+                    Logger.logger
                         .Log(
                             $"Standard Diagnostics Server connection not created yet -> try again in 100 ms"
                         );

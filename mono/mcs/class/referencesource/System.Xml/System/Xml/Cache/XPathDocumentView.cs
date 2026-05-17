@@ -906,11 +906,12 @@ namespace System.Xml.XPath.DataBinding
             {
                 XPathNode nd = this.node;
                 int errorCode;
-                this.currentParticle = this.contentValidator.ValidateElement(
-                    new XmlQualifiedName(nd.LocalName, nd.NamespaceUri),
-                    this.currentState,
-                    out errorCode
-                );
+                this.currentParticle = this.contentValidator
+                    .ValidateElement(
+                        new XmlQualifiedName(nd.LocalName, nd.NamespaceUri),
+                        this.currentState,
+                        out errorCode
+                    );
                 if (null == this.currentParticle || 0 != errorCode)
                 {
                     this.node = null;

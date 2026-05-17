@@ -93,8 +93,7 @@ namespace System.ServiceModel.Dispatcher
 
             if (this.formatter == null && (serializeRequest || deserializeReply))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(SR.ClientRuntimeRequiresFormatter0, this.name)
@@ -221,13 +220,11 @@ namespace System.ServiceModel.Dispatcher
 
                 if (parent.ValidateMustUnderstand)
                 {
-                    Collection<MessageHeaderInfo> headersNotUnderstood = reply
-                        .Headers
+                    Collection<MessageHeaderInfo> headersNotUnderstood = reply.Headers
                         .GetHeadersNotUnderstood();
                     if (headersNotUnderstood != null && headersNotUnderstood.Count > 0)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new ProtocolException(
                                     SR.GetString(
@@ -280,10 +277,8 @@ namespace System.ServiceModel.Dispatcher
                     TD.ClientFormatterSerializeRequestStart(rpc.EventTraceActivity);
                 }
 
-                rpc.Request = this.formatter.SerializeRequest(
-                    rpc.MessageVersion,
-                    rpc.InputParameters
-                );
+                rpc.Request = this.formatter
+                    .SerializeRequest(rpc.MessageVersion, rpc.InputParameters);
 
                 if (TD.ClientFormatterSerializeRequestStopIsEnabled())
                 {
@@ -294,8 +289,7 @@ namespace System.ServiceModel.Dispatcher
             {
                 if (rpc.InputParameters[0] == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(SR.SFxProxyRuntimeMessageCannotBeNull, this.name)
@@ -305,8 +299,7 @@ namespace System.ServiceModel.Dispatcher
 
                 rpc.Request = (Message)rpc.InputParameters[0];
                 if (!IsValidAction(rpc.Request, Action))
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(

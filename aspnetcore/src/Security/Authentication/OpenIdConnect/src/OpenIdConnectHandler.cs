@@ -127,8 +127,7 @@ public class OpenIdConnectHandler
             // ToArray handles the StringValues.IsNullOrEmpty case. We assume non-empty Value does not contain null elements.
 #pragma warning disable CS8620 // Argument cannot be used for parameter due to differences in the nullability of reference types.
             message = new OpenIdConnectMessage(
-                Request
-                    .Query
+                Request.Query
                     .Select(pair => new KeyValuePair<string, string[]>(
                         pair.Key,
                         pair.Value.ToArray()
@@ -141,8 +140,7 @@ public class OpenIdConnectHandler
             HttpMethods.IsPost(Request.Method)
             && !string.IsNullOrEmpty(Request.ContentType)
             // May have media/type; charset=utf-8, allow partial match.
-            && Request
-                .ContentType
+            && Request.ContentType
                 .StartsWith("application/x-www-form-urlencoded", StringComparison.OrdinalIgnoreCase)
             && Request.Body.CanRead
         )
@@ -255,8 +253,7 @@ public class OpenIdConnectHandler
 
         if (_configuration == null && Options.ConfigurationManager != null)
         {
-            _configuration = await Options
-                .ConfigurationManager
+            _configuration = await Options.ConfigurationManager
                 .GetConfigurationAsync(Context.RequestAborted);
         }
 
@@ -358,8 +355,7 @@ public class OpenIdConnectHandler
         // ToArray handles the StringValues.IsNullOrEmpty case. We assume non-empty Value does not contain null elements.
 #pragma warning disable CS8620 // Argument cannot be used for parameter due to differences in the nullability of reference types.
         var message = new OpenIdConnectMessage(
-            Request
-                .Query
+            Request.Query
                 .Select(pair => new KeyValuePair<string, string[]>(pair.Key, pair.Value.ToArray()))
         );
 #pragma warning restore CS8620 // Argument cannot be used for parameter due to differences in the nullability of reference types.
@@ -443,8 +439,7 @@ public class OpenIdConnectHandler
 
         if (_configuration == null && Options.ConfigurationManager != null)
         {
-            _configuration = await Options
-                .ConfigurationManager
+            _configuration = await Options.ConfigurationManager
                 .GetConfigurationAsync(Context.RequestAborted);
         }
 
@@ -480,8 +475,7 @@ public class OpenIdConnectHandler
             var codeChallenge = WebEncoders.Base64UrlEncode(challengeBytes);
 
             message.Parameters.Add(OAuthConstants.CodeChallengeKey, codeChallenge);
-            message
-                .Parameters
+            message.Parameters
                 .Add(OAuthConstants.CodeChallengeMethodKey, OAuthConstants.CodeChallengeMethodS256);
         }
 
@@ -544,8 +538,7 @@ public class OpenIdConnectHandler
         }
 
         // When redeeming a 'code' for an AccessToken, this value is needed
-        properties
-            .Items
+        properties.Items
             .Add(OpenIdConnectDefaults.RedirectUriForCodePropertiesKey, message.RedirectUri);
 
         message.State = Options.StateDataFormat.Protect(properties);
@@ -607,8 +600,7 @@ public class OpenIdConnectHandler
             // ToArray handles the StringValues.IsNullOrEmpty case. We assume non-empty Value does not contain null elements.
 #pragma warning disable CS8620 // Argument cannot be used for parameter due to differences in the nullability of reference types.
             authorizationResponse = new OpenIdConnectMessage(
-                Request
-                    .Query
+                Request.Query
                     .Select(pair => new KeyValuePair<string, string[]>(
                         pair.Key,
                         pair.Value.ToArray()
@@ -637,8 +629,7 @@ public class OpenIdConnectHandler
             HttpMethods.IsPost(Request.Method)
             && !string.IsNullOrEmpty(Request.ContentType)
             // May have media/type; charset=utf-8, allow partial match.
-            && Request
-                .ContentType
+            && Request.ContentType
                 .StartsWith("application/x-www-form-urlencoded", StringComparison.OrdinalIgnoreCase)
             && Request.Body.CanRead
         )
@@ -749,8 +740,7 @@ public class OpenIdConnectHandler
             if (_configuration == null && Options.ConfigurationManager != null)
             {
                 Logger.UpdatingConfiguration();
-                _configuration = await Options
-                    .ConfigurationManager
+                _configuration = await Options.ConfigurationManager
                     .GetConfigurationAsync(Context.RequestAborted);
             }
 
@@ -813,8 +803,7 @@ public class OpenIdConnectHandler
                 nonce = tokenValidatedContext.Nonce;
             }
 
-            Options
-                .ProtocolValidator
+            Options.ProtocolValidator
                 .ValidateAuthenticationResponse(
                     new OpenIdConnectProtocolValidationContext()
                     {
@@ -951,8 +940,7 @@ public class OpenIdConnectHandler
                 // Validate the token response if it wasn't provided manually
                 if (!authorizationCodeReceivedContext.HandledCodeRedemption)
                 {
-                    Options
-                        .ProtocolValidator
+                    Options.ProtocolValidator
                         .ValidateTokenResponse(
                             new OpenIdConnectProtocolValidationContext()
                             {
@@ -1035,8 +1023,7 @@ public class OpenIdConnectHandler
             if (properties != null)
             {
                 // If properties can be decoded from state, clear the message state.
-                properties
-                    .Items
+                properties.Items
                     .TryGetValue(OpenIdConnectDefaults.UserstatePropertiesKey, out var userstate);
                 message.State = userstate;
             }
@@ -1110,8 +1097,7 @@ public class OpenIdConnectHandler
         OpenIdConnectMessage message;
         try
         {
-            var responseContent = await responseMessage
-                .Content
+            var responseContent = await responseMessage.Content
                 .ReadAsStringAsync(Context.RequestAborted);
             message = new OpenIdConnectMessage(responseContent);
         }
@@ -1171,8 +1157,7 @@ public class OpenIdConnectHandler
         requestMessage.Version = Backchannel.DefaultRequestVersion;
         var responseMessage = await Backchannel.SendAsync(requestMessage, Context.RequestAborted);
         responseMessage.EnsureSuccessStatusCode();
-        var userInfoResponse = await responseMessage
-            .Content
+        var userInfoResponse = await responseMessage.Content
             .ReadAsStringAsync(Context.RequestAborted);
 
         JsonDocument user;
@@ -1216,8 +1201,7 @@ public class OpenIdConnectHandler
             properties = userInformationReceivedContext.Properties!;
             using (var updatedUser = userInformationReceivedContext.User)
             {
-                Options
-                    .ProtocolValidator
+                Options.ProtocolValidator
                     .ValidateUserInfoResponse(
                         new OpenIdConnectProtocolValidationContext()
                         {
@@ -1332,8 +1316,7 @@ public class OpenIdConnectHandler
 
         var cookieOptions = Options.NonceCookie.Build(Context, TimeProvider.GetUtcNow());
 
-        Response
-            .Cookies
+        Response.Cookies
             .Append(
                 Options.NonceCookie.Name + Options.StringDataFormat.Protect(nonce),
                 NonceProperty,
@@ -1364,8 +1347,7 @@ public class OpenIdConnectHandler
             {
                 try
                 {
-                    var nonceDecodedValue = Options
-                        .StringDataFormat
+                    var nonceDecodedValue = Options.StringDataFormat
                         .Unprotect(
                             nonceKey.Substring(
                                 Options.NonceCookie.Name.Length,
@@ -1374,8 +1356,7 @@ public class OpenIdConnectHandler
                         );
                     if (nonceDecodedValue == nonce)
                     {
-                        var cookieOptions = Options
-                            .NonceCookie
+                        var cookieOptions = Options.NonceCookie
                             .Build(Context, TimeProvider.GetUtcNow());
                         Response.Cookies.Delete(nonceKey, cookieOptions);
                         return nonce;
@@ -1630,8 +1611,7 @@ public class OpenIdConnectHandler
         }
 
 #pragma warning disable CS0618 // Type or member is obsolete
-        var principal = Options
-            .SecurityTokenValidator
+        var principal = Options.SecurityTokenValidator
             .ValidateToken(idToken, validationParameters, out SecurityToken validatedToken);
 #pragma warning restore CS0618 // Type or member is obsolete
         if (validatedToken is JwtSecurityToken validatedJwt)
@@ -1702,8 +1682,7 @@ public class OpenIdConnectHandler
                 ?? _configuration.SigningKeys;
         }
 
-        var validationResult = await Options
-            .TokenHandler
+        var validationResult = await Options.TokenHandler
             .ValidateTokenAsync(idToken, validationParameters);
 
         if (validationResult.Exception != null)

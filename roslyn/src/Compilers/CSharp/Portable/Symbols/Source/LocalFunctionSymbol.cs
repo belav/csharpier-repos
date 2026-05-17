@@ -52,8 +52,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             _declarationModifiers =
                 DeclarationModifiers.Private
-                | syntax
-                    .Modifiers
+                | syntax.Modifiers
                     .ToDeclarationModifiers(
                         isForTypeDeclaration: false,
                         diagnostics: _declarationDiagnostics
@@ -474,8 +473,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             BindingDiagnosticBag diagnostics
         )
         {
-            var diagnosticInfo = MessageID
-                .IDS_FeatureLocalFunctionAttributes
+            var diagnosticInfo = MessageID.IDS_FeatureLocalFunctionAttributes
                 .GetFeatureAvailabilityDiagnosticInfo(
                     (CSharpParseOptions)syntaxReferenceOpt.SyntaxTree.Options
                 );

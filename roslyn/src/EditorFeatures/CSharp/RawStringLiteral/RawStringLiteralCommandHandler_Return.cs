@@ -93,8 +93,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.RawStringLiteral
             CancellationToken cancellationToken
         )
         {
-            var document = subjectBuffer
-                .CurrentSnapshot
+            var document = subjectBuffer.CurrentSnapshot
                 .GetOpenDocumentInCurrentContextWithChanges();
             if (document == null)
                 return false;

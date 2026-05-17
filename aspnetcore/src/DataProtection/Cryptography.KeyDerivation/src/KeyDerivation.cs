@@ -44,8 +44,7 @@ public static class KeyDerivation
         ArgumentOutOfRangeThrowHelper.ThrowIfNegativeOrZero(iterationCount);
         ArgumentOutOfRangeThrowHelper.ThrowIfNegativeOrZero(numBytesRequested);
 
-        return Pbkdf2Util
-            .Pbkdf2Provider
+        return Pbkdf2Util.Pbkdf2Provider
             .DeriveKey(password, salt, prf, iterationCount, numBytesRequested);
     }
 }

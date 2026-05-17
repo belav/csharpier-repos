@@ -61,8 +61,7 @@ namespace Microsoft.CodeAnalysis.CodeActions
                 if (op is ApplyChangesOperation applyChanges)
                 {
                     var oldSolution = workspace.CurrentSolution;
-                    var newSolution = await applyChanges
-                        .ChangedSolution
+                    var newSolution = await applyChanges.ChangedSolution
                         .WithMergedLinkedFileChangesAsync(
                             oldSolution,
                             cancellationToken: cancellationToken
@@ -139,8 +138,7 @@ namespace Microsoft.CodeAnalysis.CodeActions
 
             if (_renameService.ActiveSession != null)
             {
-                workspace
-                    .Services
+                workspace.Services
                     .GetService<INotificationService>()
                     ?.SendNotification(
                         EditorFeaturesResources.Cannot_apply_operation_while_a_rename_session_is_active,
@@ -170,8 +168,7 @@ namespace Microsoft.CodeAnalysis.CodeActions
                     .ConfigureAwait(true);
 
                 using (
-                    workspace
-                        .Services
+                    workspace.Services
                         .GetRequiredService<ISourceTextUndoService>()
                         .RegisterUndoTransaction(text, title)
                 )
@@ -401,8 +398,7 @@ namespace Microsoft.CodeAnalysis.CodeActions
                 .FirstOrDefault();
             if (navigationOperation != null && workspace.CanOpenDocuments)
             {
-                var navigationService = workspace
-                    .Services
+                var navigationService = workspace.Services
                     .GetRequiredService<IDocumentNavigationService>();
                 await navigationService
                     .TryNavigateToPositionAsync(
@@ -421,8 +417,7 @@ namespace Microsoft.CodeAnalysis.CodeActions
                 .FirstOrDefault();
             if (renameOperation != null && workspace.CanOpenDocuments)
             {
-                var navigationService = workspace
-                    .Services
+                var navigationService = workspace.Services
                     .GetRequiredService<IDocumentNavigationService>();
                 if (
                     await navigationService
@@ -436,8 +431,7 @@ namespace Microsoft.CodeAnalysis.CodeActions
                         .ConfigureAwait(true)
                 )
                 {
-                    var openDocument = workspace
-                        .CurrentSolution
+                    var openDocument = workspace.CurrentSolution
                         .GetRequiredDocument(renameOperation.DocumentId);
                     _renameService.StartInlineSession(
                         openDocument,
@@ -463,8 +457,7 @@ namespace Microsoft.CodeAnalysis.CodeActions
                     .FirstOrNull();
                 if (navigationToken.HasValue)
                 {
-                    var navigationService = workspace
-                        .Services
+                    var navigationService = workspace.Services
                         .GetRequiredService<IDocumentNavigationService>();
                     await navigationService
                         .TryNavigateToPositionAsync(
@@ -500,8 +493,7 @@ namespace Microsoft.CodeAnalysis.CodeActions
                         )
                         {
                             var editorWorkspace = workspace;
-                            var navigationService = editorWorkspace
-                                .Services
+                            var navigationService = editorWorkspace.Services
                                 .GetRequiredService<IDocumentNavigationService>();
 
                             if (
@@ -516,8 +508,7 @@ namespace Microsoft.CodeAnalysis.CodeActions
                                     .ConfigureAwait(false)
                             )
                             {
-                                var openDocument = workspace
-                                    .CurrentSolution
+                                var openDocument = workspace.CurrentSolution
                                     .GetRequiredDocument(documentId);
                                 var openRoot = await openDocument
                                     .GetSyntaxRootAsync(cancellationToken)

@@ -75,8 +75,7 @@ public class OrderDetailsControllerActionConvention : IODataControllerActionConv
             if (parameters.Length == 0)
             {
                 var path = new ODataPathTemplate(route);
-                context
-                    .Action
+                context.Action
                     .AddSelector(
                         "get",
                         context.Prefix,
@@ -103,8 +102,7 @@ public class OrderDetailsControllerActionConvention : IODataControllerActionConv
                 var keyTemplate = new KeySegmentTemplate(keys, entitySet.EntityType(), entitySet);
 
                 var path = new ODataPathTemplate(route, keyTemplate);
-                context
-                    .Action
+                context.Action
                     .AddSelector(
                         "get",
                         context.Prefix,

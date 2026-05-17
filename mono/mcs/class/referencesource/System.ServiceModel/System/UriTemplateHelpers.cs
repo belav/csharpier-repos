@@ -111,8 +111,7 @@ namespace System
                 }
                 if (array[a].queries.Count == 0)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(
@@ -194,8 +193,7 @@ namespace System
             {
                 if (varEndIndex != -1)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new FormatException(
                                 SR.GetString(SR.UTInvalidFormatSegmentOrQueryPart, part)
@@ -208,8 +206,7 @@ namespace System
             {
                 if (varEndIndex < varStartIndex + 2)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new FormatException(
                                 SR.GetString(SR.UTInvalidFormatSegmentOrQueryPart, part)
@@ -360,8 +357,7 @@ namespace System
                 }
                 else
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(SR.UTTOtherAmbiguousQueries, array[a].ToString())
@@ -383,8 +379,7 @@ namespace System
                     {
                         if (!array[i + a].IsEquivalentTo(array[j + a]))
                         {
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
                                     new InvalidOperationException(
                                         SR.GetString(
@@ -398,8 +393,7 @@ namespace System
                         Fx.Assert(array[i + a].IsEquivalentTo(array[j + a]), "bad equiv logic");
                         if (!allowDuplicateEquivalentUriTemplates)
                         {
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
                                     new InvalidOperationException(
                                         SR.GetString(

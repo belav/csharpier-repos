@@ -111,8 +111,7 @@ namespace System.ServiceModel.Security
                 context.GetInnerProperty<XmlDictionaryReaderQuotas>();
             if (this.bootstrapSecurityBindingElement.ReaderQuotas == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(SR.EncodingBindingElementDoesNotHandleReaderQuotas)
@@ -120,15 +119,14 @@ namespace System.ServiceModel.Security
                     );
             }
 
-            TransportBindingElement transportBindingElement = context
-                .RemainingBindingElements
+            TransportBindingElement transportBindingElement = context.RemainingBindingElements
                 .Find<TransportBindingElement>();
             if (transportBindingElement != null)
                 this.bootstrapSecurityBindingElement.MaxReceivedMessageSize =
                     transportBindingElement.MaxReceivedMessageSize;
 
-            SecurityProtocolFactory securityProtocolFactory =
-                this.bootstrapSecurityBindingElement.CreateSecurityProtocolFactory<TChannel>(
+            SecurityProtocolFactory securityProtocolFactory = this.bootstrapSecurityBindingElement
+                .CreateSecurityProtocolFactory<TChannel>(
                     this.IssuerBindingContext.Clone(),
                     securityCredentials,
                     true,
@@ -144,20 +142,16 @@ namespace System.ServiceModel.Security
                     soapBindingFactory.RequireIntegrity =
                         true;
                 MessagePartSpecification bodyPart = new MessagePartSpecification(true);
-                soapBindingFactory
-                    .ProtectionRequirements
+                soapBindingFactory.ProtectionRequirements
                     .OutgoingSignatureParts
                     .AddParts(bodyPart, RequestSecurityTokenResponseAction);
-                soapBindingFactory
-                    .ProtectionRequirements
+                soapBindingFactory.ProtectionRequirements
                     .OutgoingEncryptionParts
                     .AddParts(bodyPart, RequestSecurityTokenResponseAction);
-                soapBindingFactory
-                    .ProtectionRequirements
+                soapBindingFactory.ProtectionRequirements
                     .IncomingSignatureParts
                     .AddParts(bodyPart, RequestSecurityTokenAction);
-                soapBindingFactory
-                    .ProtectionRequirements
+                soapBindingFactory.ProtectionRequirements
                     .IncomingEncryptionParts
                     .AddParts(bodyPart, RequestSecurityTokenAction);
             }
@@ -255,8 +249,7 @@ namespace System.ServiceModel.Security
                     }
                     else
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new ProtocolException(
                                     SR.GetString(
@@ -284,8 +277,7 @@ namespace System.ServiceModel.Security
                 byte[] issuerEntropy;
                 byte[] proofKey;
                 SecurityToken proofToken;
-                WSTrust
-                    .Driver
+                WSTrust.Driver
                     .ProcessRstAndIssueKey(
                         requestSecurityToken,
                         null,
@@ -338,16 +330,10 @@ namespace System.ServiceModel.Security
                 );
                 rstr.Context = requestSecurityToken.Context;
                 rstr.KeySize = issuedKeySize;
-                rstr.RequestedUnattachedReference =
-                    this.IssuedSecurityTokenParameters.CreateKeyIdentifierClause(
-                        serviceToken,
-                        SecurityTokenReferenceStyle.External
-                    );
-                rstr.RequestedAttachedReference =
-                    this.IssuedSecurityTokenParameters.CreateKeyIdentifierClause(
-                        serviceToken,
-                        SecurityTokenReferenceStyle.Internal
-                    );
+                rstr.RequestedUnattachedReference = this.IssuedSecurityTokenParameters
+                    .CreateKeyIdentifierClause(serviceToken, SecurityTokenReferenceStyle.External);
+                rstr.RequestedAttachedReference = this.IssuedSecurityTokenParameters
+                    .CreateKeyIdentifierClause(serviceToken, SecurityTokenReferenceStyle.Internal);
                 rstr.TokenType = this.SecurityContextTokenUri;
                 rstr.RequestedSecurityToken = serviceToken;
                 if (issuerEntropy != null)
@@ -377,8 +363,7 @@ namespace System.ServiceModel.Security
                     }
                     else
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new ProtocolException(
                                     SR.GetString(
@@ -412,8 +397,7 @@ namespace System.ServiceModel.Security
                 }
                 else
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new NotSupportedException());
                 }
             }
@@ -496,8 +480,7 @@ namespace System.ServiceModel.Security
             {
                 return (T)
                     (object)
-                        authenticator
-                            .BootstrapSecurityBindingElement
+                        authenticator.BootstrapSecurityBindingElement
                             .GetProperty<ISecurityCapabilities>(context);
             }
 

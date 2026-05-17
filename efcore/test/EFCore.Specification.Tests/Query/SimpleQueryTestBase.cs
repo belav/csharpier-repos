@@ -22,8 +22,7 @@ public abstract class SimpleQueryTestBase : NonSharedModelTestBase
 
         Assert.Equal(1, staff.ManagerId);
 
-        var query = context
-            .Appraisals
+        var query = context.Appraisals
             .Include(ap => ap.Staff)
                 .ThenInclude(s => s.Manager)
             .Include(ap => ap.Staff)
@@ -515,13 +514,11 @@ public abstract class SimpleQueryTestBase : NonSharedModelTestBase
 
         var currentUserId = 1;
 
-        var currentUserGroupIds = context
-            .Memberships
+        var currentUserGroupIds = context.Memberships
             .Where(m => m.UserId == currentUserId)
             .Select(m => m.GroupId);
 
-        var hasMembership = context
-            .Memberships
+        var hasMembership = context.Memberships
             .Where(m => currentUserGroupIds.Contains(m.GroupId))
             .Select(m => m.User);
 
@@ -541,13 +538,11 @@ public abstract class SimpleQueryTestBase : NonSharedModelTestBase
 
         var currentUserId = 1;
 
-        var currentUserGroupIds = context
-            .Memberships
+        var currentUserGroupIds = context.Memberships
             .Where(m => m.UserId == currentUserId)
             .Select(m => m.Group);
 
-        var hasMembership = context
-            .Memberships
+        var hasMembership = context.Memberships
             .Where(m => currentUserGroupIds.Contains(m.Group))
             .Select(m => m.User);
 
@@ -567,13 +562,11 @@ public abstract class SimpleQueryTestBase : NonSharedModelTestBase
 
         var currentUserId = 1;
 
-        var currentUserGroupIds = context
-            .Memberships
+        var currentUserGroupIds = context.Memberships
             .Where(m => m.UserId == currentUserId)
             .Select(m => m.GroupId);
 
-        var hasMembership = context
-            .Memberships
+        var hasMembership = context.Memberships
             .Where(m => currentUserGroupIds.Contains(m.GroupId))
             .Select(m => m.User);
 
@@ -689,8 +682,7 @@ public abstract class SimpleQueryTestBase : NonSharedModelTestBase
         var contextFactory = await InitializeAsync<Context26472>();
         using var context = contextFactory.CreateContext();
         var orderItemType = OrderItemType.MyType1;
-        var query = context
-            .Orders
+        var query = context.Orders
             .Where(x => x.Items.Any())
             .OrderBy(e => e.Id)
             .Take(1)
@@ -699,8 +691,7 @@ public abstract class SimpleQueryTestBase : NonSharedModelTestBase
             .Select(entity => new
             {
                 entity.Id,
-                SpecialSum = entity
-                    .Items
+                SpecialSum = entity.Items
                     .Where(x => x.Type == orderItemType)
                     .Select(x => x.Price)
                     .FirstOrDefault(),
@@ -975,8 +966,7 @@ public abstract class SimpleQueryTestBase : NonSharedModelTestBase
         var contextFactory = await InitializeAsync<Context27163>();
         using var context = contextFactory.CreateContext();
 
-        var query = context
-            .Parents
+        var query = context.Parents
             .GroupBy(x => new { })
             .Select(g => new
             {
@@ -996,8 +986,7 @@ public abstract class SimpleQueryTestBase : NonSharedModelTestBase
         var contextFactory = await InitializeAsync<Context27163>();
         using var context = contextFactory.CreateContext();
 
-        var query = context
-            .Parents
+        var query = context.Parents
             .GroupBy(x => new { })
             .Select(g => new
             {
@@ -1068,8 +1057,7 @@ public abstract class SimpleQueryTestBase : NonSharedModelTestBase
         var contextFactory = await InitializeAsync<Context26744>(seed: c => c.Seed());
         using var context = contextFactory.CreateContext();
 
-        var query = context
-            .Parents
+        var query = context.Parents
             .Where(p =>
                 p.Children.Any(c => c.SomeNullableDateTime == null)
                 && p.Children
@@ -1098,8 +1086,7 @@ public abstract class SimpleQueryTestBase : NonSharedModelTestBase
         var contextFactory = await InitializeAsync<Context26744>(seed: c => c.Seed());
         using var context = contextFactory.CreateContext();
 
-        var query = context
-            .Parents
+        var query = context.Parents
             .SelectMany(p =>
                 p.Children
                     .Where(c => c.SomeNullableDateTime == null)
@@ -1396,8 +1383,7 @@ public abstract class SimpleQueryTestBase : NonSharedModelTestBase
         var contextFactory = await InitializeAsync<Context31961>();
         using var context = contextFactory.CreateContext();
 
-        var query = await context
-            .Customers
+        var query = await context.Customers
             .Select(m => new CustomerDto31961()
             {
                 Id = m.Id,

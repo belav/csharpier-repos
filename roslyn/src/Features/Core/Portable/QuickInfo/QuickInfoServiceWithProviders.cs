@@ -58,8 +58,7 @@ namespace Microsoft.CodeAnalysis.QuickInfo
             CancellationToken cancellationToken
         )
         {
-            var extensionManager = _services
-                .SolutionServices
+            var extensionManager = _services.SolutionServices
                 .GetRequiredService<IExtensionManager>();
 
             // returns the first non-empty quick info found (based on provider order)
@@ -96,8 +95,7 @@ namespace Microsoft.CodeAnalysis.QuickInfo
             CancellationToken cancellationToken
         )
         {
-            var extensionManager = _services
-                .SolutionServices
+            var extensionManager = _services.SolutionServices
                 .GetRequiredService<IExtensionManager>();
 
             // returns the first non-empty quick info found (based on provider order)

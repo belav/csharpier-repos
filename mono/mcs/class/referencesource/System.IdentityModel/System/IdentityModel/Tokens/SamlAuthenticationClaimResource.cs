@@ -32,12 +32,10 @@ namespace System.IdentityModel.Tokens
         void OnDeserialized(StreamingContext ctx)
         {
             if (string.IsNullOrEmpty(authenticationMethod))
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("authenticationMethod");
             if (authorityBindings == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("authorityBindings");
         }
 
@@ -49,8 +47,7 @@ namespace System.IdentityModel.Tokens
         )
         {
             if (string.IsNullOrEmpty(authenticationMethod))
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("authenticationMethod");
 
             this.authenticationInstant = authenticationInstant;
@@ -70,8 +67,7 @@ namespace System.IdentityModel.Tokens
             : this(authenticationInstant, authenticationMethod, dnsAddress, ipAddress)
         {
             if (authorityBindings == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("authorityBindings"));
 
             List<SamlAuthorityBinding> tempList = new List<SamlAuthorityBinding>();
@@ -93,8 +89,7 @@ namespace System.IdentityModel.Tokens
             : this(authenticationInstant, authenticationMethod, dnsAddress, ipAddress)
         {
             if (authorityBindings == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("authorityBindings"));
 
             this.authorityBindings = authorityBindings;

@@ -69,28 +69,27 @@ namespace System.Activities.XamlIntegration
 
             if (lambdaExpression == null)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .Argument("originalExpression", SR.LambdaExpressionTypeRequired);
             }
 
             if (lambdaExpression.ReturnType == null || lambdaExpression.ReturnType == typeof(void))
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .Argument("originalExpression", SR.LambdaExpressionReturnTypeInvalid);
             }
 
-            return this.visitor.Visit(
-                Expression.Lambda(
-                    typeof(Func<,>).MakeGenericType(
-                        typeof(ActivityContext),
-                        lambdaExpression.ReturnType
-                    ),
-                    lambdaExpression.Body,
-                    new ParameterExpression[] { ExpressionUtilities.RuntimeContextParameter }
-                )
-            );
+            return this.visitor
+                .Visit(
+                    Expression.Lambda(
+                        typeof(Func<,>).MakeGenericType(
+                            typeof(ActivityContext),
+                            lambdaExpression.ReturnType
+                        ),
+                        lambdaExpression.Body,
+                        new ParameterExpression[] { ExpressionUtilities.RuntimeContextParameter }
+                    )
+                );
         }
 
         public Location<T> GetLocation<T>(
@@ -220,8 +219,7 @@ namespace System.Activities.XamlIntegration
 
             if (dataContextInstance == null)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new InvalidOperationException(
                             SR.CompiledExpressionsNoCompiledRoot(activityContext.Activity.Id)

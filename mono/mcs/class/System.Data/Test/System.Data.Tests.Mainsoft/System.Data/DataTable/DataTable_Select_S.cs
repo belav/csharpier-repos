@@ -519,9 +519,14 @@ namespace tests.system_data_dll.System_Data
             }
             //-------------------------------------------------------------
             al.Clear();
-            ds.Relations.Add(
-                new DataRelation("ParentChild", ds.Tables[0].Columns[0], ds.Tables[1].Columns[0])
-            );
+            ds.Relations
+                .Add(
+                    new DataRelation(
+                        "ParentChild",
+                        ds.Tables[0].Columns[0],
+                        ds.Tables[1].Columns[0]
+                    )
+                );
             foreach (DataRow dr in dt.Rows)
                 if ((int)dr["ChildId"] == (int)dr.GetParentRow("ParentChild")["ParentId"])
                     al.Add(dr);

@@ -112,8 +112,7 @@ namespace System.Web.SessionState
             if (item == null || String.IsNullOrEmpty(id))
                 return;
 
-            HttpRuntime
-                .InternalCache
+            HttpRuntime.InternalCache
                 .Insert(
                     id,
                     item,
@@ -130,8 +129,7 @@ namespace System.Web.SessionState
             if (String.IsNullOrEmpty(id))
                 return;
 
-            HttpRuntime
-                .InternalCache
+            HttpRuntime.InternalCache
                 .SetItemTimeout(
                     id,
                     Cache.NoAbsoluteExpiration,

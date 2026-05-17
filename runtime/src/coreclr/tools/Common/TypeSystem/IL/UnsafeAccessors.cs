@@ -608,8 +608,7 @@ namespace Internal.IL
             ILCodeLabel label = emit.NewCodeLabel();
             codeStream.EmitLabel(label);
             codeStream.EmitLdc((int)ExceptionStringID.BadImageFormatGeneric);
-            MethodDesc thrower = method
-                .Context
+            MethodDesc thrower = method.Context
                 .GetHelperEntryPoint("ThrowHelpers", "ThrowBadImageFormatException");
             codeStream.Emit(ILOpcode.call, emit.NewToken(thrower));
             codeStream.Emit(ILOpcode.br, label);

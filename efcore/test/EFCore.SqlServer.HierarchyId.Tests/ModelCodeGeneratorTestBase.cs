@@ -21,8 +21,7 @@ public abstract class ModelCodeGeneratorTestBase
         var designServices = new ServiceCollection();
         AddModelServices(designServices);
 
-        var modelBuilder = SqlServerTestHelpers
-            .Instance
+        var modelBuilder = SqlServerTestHelpers.Instance
             .CreateConventionBuilder(customServices: designServices);
         modelBuilder.Model.RemoveAnnotation(CoreAnnotationNames.ProductVersion);
         buildModel(modelBuilder);

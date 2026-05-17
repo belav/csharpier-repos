@@ -95,8 +95,7 @@ public class NestedExplicitExpandWithFields
     {
         protected override void Seed(TestContext context)
         {
-            context
-                .Class1Set
+            context.Class1Set
                 .AddRange(
                     new[]
                     {

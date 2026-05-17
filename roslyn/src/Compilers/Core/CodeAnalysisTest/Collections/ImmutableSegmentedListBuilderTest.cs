@@ -94,8 +94,7 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         [Fact]
         public void EnumerateBuilderWhileMutating()
         {
-            var builder = ImmutableSegmentedList<int>
-                .Empty
+            var builder = ImmutableSegmentedList<int>.Empty
                 .AddRange(Enumerable.Range(1, 10))
                 .ToBuilder();
             Assert.Equal(Enumerable.Range(1, 10), builder);
@@ -373,10 +372,11 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             DebuggerAttributeInfo info = DebuggerAttributes.ValidateDebuggerTypeProxyProperties(
                 builder
             );
-            PropertyInfo itemProperty = info.Properties.Single(pr =>
-                pr.GetCustomAttribute<DebuggerBrowsableAttribute>()!.State
-                == DebuggerBrowsableState.RootHidden
-            );
+            PropertyInfo itemProperty = info.Properties
+                .Single(pr =>
+                    pr.GetCustomAttribute<DebuggerBrowsableAttribute>()!.State
+                    == DebuggerBrowsableState.RootHidden
+                );
             string[]? items = itemProperty.GetValue(info.Instance) as string[];
             Assert.Equal(builder, items);
         }

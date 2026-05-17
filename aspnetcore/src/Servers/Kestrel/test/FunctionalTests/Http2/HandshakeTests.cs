@@ -90,8 +90,7 @@ public class HandshakeTests : LoggedTest
                     var tlsFeature = context.Features.Get<ITlsApplicationProtocolFeature>();
                     Assert.NotNull(tlsFeature);
                     Assert.True(
-                        SslApplicationProtocol
-                            .Http2
+                        SslApplicationProtocol.Http2
                             .Protocol
                             .Span
                             .SequenceEqual(tlsFeature.ApplicationProtocol.Span),
@@ -133,8 +132,7 @@ public class HandshakeTests : LoggedTest
                     var tlsFeature = context.Features.Get<ITlsApplicationProtocolFeature>();
                     Assert.NotNull(tlsFeature);
                     Assert.True(
-                        SslApplicationProtocol
-                            .Http2
+                        SslApplicationProtocol.Http2
                             .Protocol
                             .Span
                             .SequenceEqual(tlsFeature.ApplicationProtocol.Span),

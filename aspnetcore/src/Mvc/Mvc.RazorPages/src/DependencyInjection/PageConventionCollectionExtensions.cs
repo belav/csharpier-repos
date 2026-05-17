@@ -563,8 +563,7 @@ public static class PageConventionCollectionExtensions
                 selector.AttributeRouteModel!.SuppressLinkGeneration = true;
             }
 
-            model
-                .Selectors
+            model.Selectors
                 .Add(
                     new SelectorModel
                     {

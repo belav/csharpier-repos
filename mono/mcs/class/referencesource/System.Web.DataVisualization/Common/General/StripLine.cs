@@ -269,10 +269,11 @@ namespace System.Web.UI.DataVisualization.Charting
             Series axisSeries = null;
             if (Axis.axisType == AxisName.X || Axis.axisType == AxisName.X2)
             {
-                List<string> seriesArray = Axis.ChartArea.GetXAxesSeries(
-                    (Axis.axisType == AxisName.X) ? AxisType.Primary : AxisType.Secondary,
-                    Axis.SubAxisName
-                );
+                List<string> seriesArray = Axis.ChartArea
+                    .GetXAxesSeries(
+                        (Axis.axisType == AxisName.X) ? AxisType.Primary : AxisType.Secondary,
+                        Axis.SubAxisName
+                    );
                 if (seriesArray.Count > 0)
                 {
                     axisSeries = Axis.Common.DataManager.Series[seriesArray[0]];
@@ -483,8 +484,7 @@ namespace System.Web.UI.DataVisualization.Charting
                                 if (!this.Axis.ChartArea.Area3DStyle.Enable3D)
                                 {
 #if !Microsoft_CONTROL
-                                    common
-                                        .HotRegionsList
+                                    common.HotRegionsList
                                         .AddHotRegion(
                                             rect,
                                             this.ToolTip,
@@ -496,8 +496,7 @@ namespace System.Web.UI.DataVisualization.Charting
                                             string.Empty
                                         );
 #else
-                                    common
-                                        .HotRegionsList
+                                    common.HotRegionsList
                                         .AddHotRegion(
                                             rect,
                                             this.ToolTip,
@@ -603,8 +602,7 @@ namespace System.Web.UI.DataVisualization.Charting
                             }
 
 #if !Microsoft_CONTROL
-                            common
-                                .HotRegionsList
+                            common.HotRegionsList
                                 .AddHotRegion(
                                     lineRect,
                                     this.ToolTip,
@@ -616,8 +614,7 @@ namespace System.Web.UI.DataVisualization.Charting
                                     string.Empty
                                 );
 #else
-                            common
-                                .HotRegionsList
+                            common.HotRegionsList
                                 .AddHotRegion(
                                     lineRect,
                                     this.ToolTip,

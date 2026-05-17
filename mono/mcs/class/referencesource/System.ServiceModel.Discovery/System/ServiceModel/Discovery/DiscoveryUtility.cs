@@ -75,8 +75,7 @@ namespace System.ServiceModel.Discovery
             OperationBehaviorAttribute operationBehaviorAttribute;
             foreach (OperationDescription operationDescription in discoveryContract.Operations)
             {
-                operationBehaviorAttribute = operationDescription
-                    .Behaviors
+                operationBehaviorAttribute = operationDescription.Behaviors
                     .Find<OperationBehaviorAttribute>();
                 if (operationBehaviorAttribute == null)
                 {

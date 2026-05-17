@@ -246,8 +246,7 @@ namespace System.Xml.Serialization
             Type targetType
         )
         {
-            System
-                .Diagnostics
+            System.Diagnostics
                 .Debug
                 .Assert(
                     targetType == nullableType

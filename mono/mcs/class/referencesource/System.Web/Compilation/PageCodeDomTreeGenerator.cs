@@ -48,14 +48,12 @@ namespace System.Web.Compilation
 
             if (Parser.FRequiresSessionState)
             {
-                _intermediateClass
-                    .BaseTypes
+                _intermediateClass.BaseTypes
                     .Add(new CodeTypeReference(typeof(IRequiresSessionState)));
             }
             if (Parser.FReadOnlySessionState)
             {
-                _intermediateClass
-                    .BaseTypes
+                _intermediateClass.BaseTypes
                     .Add(new CodeTypeReference(typeof(IReadOnlySessionState)));
             }
 
@@ -170,8 +168,7 @@ namespace System.Web.Compilation
                 Parser.TransactionMode != 0 /*TransactionOption.Disabled*/
             )
             {
-                _ctor
-                    .Statements
+                _ctor.Statements
                     .Add(
                         new CodeAssignStatement(
                             new CodePropertyReferenceExpression(
@@ -185,8 +182,7 @@ namespace System.Web.Compilation
 
             if (Parser.AspCompatMode)
             {
-                _ctor
-                    .Statements
+                _ctor.Statements
                     .Add(
                         new CodeAssignStatement(
                             new CodePropertyReferenceExpression(
@@ -200,8 +196,7 @@ namespace System.Web.Compilation
 
             if (Parser.AsyncMode)
             {
-                _ctor
-                    .Statements
+                _ctor.Statements
                     .Add(
                         new CodeAssignStatement(
                             new CodePropertyReferenceExpression(
@@ -261,8 +256,7 @@ namespace System.Web.Compilation
                         typeof(OutputCacheParameters)
                     );
                     outputCacheSettingsDeclaration.Name = outputCacheSettingsLocalName;
-                    outputCacheSettingsCondition
-                        .TrueStatements
+                    outputCacheSettingsCondition.TrueStatements
                         .Insert(0, outputCacheSettingsDeclaration);
 
                     // e.g. outputCacheSettings = new outputCacheParameters;
@@ -478,8 +472,7 @@ namespace System.Web.Compilation
 #if DBG
             AppendDebugComment(method.Statements);
 #endif
-            method
-                .Statements
+            method.Statements
                 .Add(
                     new CodeMethodReturnStatement(new CodePrimitiveExpression(Parser.TypeHashCode))
                 );
@@ -512,8 +505,7 @@ namespace System.Web.Compilation
             CodeMethodInvokeExpression addDeps = new CodeMethodInvokeExpression();
             addDeps.Method.TargetObject = new CodeThisReferenceExpression();
             addDeps.Method.MethodName = "AddWrappedFileDependencies";
-            addDeps
-                .Parameters
+            addDeps.Parameters
                 .Add(new CodeFieldReferenceExpression(_classTypeExpr, fileDependenciesName));
             method.Statements.Add(addDeps);
 
@@ -529,12 +521,13 @@ namespace System.Web.Compilation
                     CodeMethodInvokeExpression call = new CodeMethodInvokeExpression();
                     call.Method.TargetObject = new CodeThisReferenceExpression();
                     call.Method.MethodName = "InitOutputCache";
-                    call.Parameters.Add(
-                        new CodeFieldReferenceExpression(
-                            _classTypeExpr,
-                            outputCacheSettingsFieldName
-                        )
-                    );
+                    call.Parameters
+                        .Add(
+                            new CodeFieldReferenceExpression(
+                                _classTypeExpr,
+                                outputCacheSettingsFieldName
+                            )
+                        );
 
                     method.Statements.Add(call);
                 }
@@ -542,8 +535,7 @@ namespace System.Web.Compilation
 
             if (Parser.TraceEnabled != TraceEnable.Default)
             {
-                method
-                    .Statements
+                method.Statements
                     .Add(
                         new CodeAssignStatement(
                             new CodePropertyReferenceExpression(
@@ -557,8 +549,7 @@ namespace System.Web.Compilation
 
             if (Parser.TraceMode != TraceMode.Default)
             {
-                method
-                    .Statements
+                method.Statements
                     .Add(
                         new CodeAssignStatement(
                             new CodePropertyReferenceExpression(
@@ -622,11 +613,9 @@ namespace System.Web.Compilation
             method.Attributes &= ~MemberAttributes.ScopeMask;
             method.Attributes |= MemberAttributes.Public;
             method.ImplementationTypes.Add(new CodeTypeReference(typeof(IHttpAsyncHandler)));
-            method
-                .Parameters
+            method.Parameters
                 .Add(new CodeParameterDeclarationExpression(typeof(HttpContext), "context"));
-            method
-                .Parameters
+            method.Parameters
                 .Add(new CodeParameterDeclarationExpression(typeof(AsyncCallback), "cb"));
             method.Parameters.Add(new CodeParameterDeclarationExpression(typeof(Object), "data"));
             method.ReturnType = new CodeTypeReference(typeof(IAsyncResult));
@@ -653,8 +642,7 @@ namespace System.Web.Compilation
             method.Attributes &= ~MemberAttributes.ScopeMask;
             method.Attributes |= MemberAttributes.Public;
             method.ImplementationTypes.Add(typeof(IHttpAsyncHandler));
-            method
-                .Parameters
+            method.Parameters
                 .Add(new CodeParameterDeclarationExpression(typeof(IAsyncResult), "ar"));
 
             call = new CodeMethodInvokeExpression();
@@ -687,11 +675,9 @@ namespace System.Web.Compilation
             method.Attributes &= ~MemberAttributes.ScopeMask;
             method.Attributes |= MemberAttributes.Public;
             method.ImplementationTypes.Add(new CodeTypeReference(typeof(IHttpAsyncHandler)));
-            method
-                .Parameters
+            method.Parameters
                 .Add(new CodeParameterDeclarationExpression(typeof(HttpContext), "context"));
-            method
-                .Parameters
+            method.Parameters
                 .Add(new CodeParameterDeclarationExpression(typeof(AsyncCallback), "cb"));
             method.Parameters.Add(new CodeParameterDeclarationExpression(typeof(Object), "data"));
             method.ReturnType = new CodeTypeReference(typeof(IAsyncResult));
@@ -718,8 +704,7 @@ namespace System.Web.Compilation
             method.Attributes &= ~MemberAttributes.ScopeMask;
             method.Attributes |= MemberAttributes.Public;
             method.ImplementationTypes.Add(typeof(IHttpAsyncHandler));
-            method
-                .Parameters
+            method.Parameters
                 .Add(new CodeParameterDeclarationExpression(typeof(IAsyncResult), "ar"));
 
             call = new CodeMethodInvokeExpression();
@@ -756,8 +741,7 @@ namespace System.Web.Compilation
             MethodInfo methodInfo = null;
             if (Parser.BaseType != typeof(Page))
             {
-                methodInfo = Parser
-                    .BaseType
+                methodInfo = Parser.BaseType
                     .GetMethod(
                         "ProcessRequest",
                         BindingFlags.Public | BindingFlags.Instance,
@@ -779,8 +763,7 @@ namespace System.Web.Compilation
                 method.Attributes |= MemberAttributes.Override | MemberAttributes.Public;
             }
 
-            method
-                .Parameters
+            method.Parameters
                 .Add(new CodeParameterDeclarationExpression(typeof(HttpContext), "context"));
 
             CodeMethodInvokeExpression invokeExpr = new CodeMethodInvokeExpression();

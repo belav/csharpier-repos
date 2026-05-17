@@ -672,8 +672,7 @@ namespace System.Threading
                     {
                         if (CdsSyncEtwBCLProvider.Log.IsEnabled())
                         {
-                            CdsSyncEtwBCLProvider
-                                .Log
+                            CdsSyncEtwBCLProvider.Log
                                 .Barrier_PhaseFinished(sense, CurrentPhaseNumber);
                         }
                         FinishPhase(sense);

@@ -91,8 +91,7 @@ namespace MonoTests.System.Web.Security
                 )
             );
             t.Run();
-            global::System
-                .Diagnostics
+            global::System.Diagnostics
                 .Trace
                 .WriteLineIf(
                     (t.Response.StatusCode != global::System.Net.HttpStatusCode.OK),

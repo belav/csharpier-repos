@@ -293,8 +293,9 @@ namespace B
                 {
                     var info = GetMethodDebugInfo(runtime, "B.C.M");
 
-                    info.ImportRecordGroups.Verify(
-                        @"
+                    info.ImportRecordGroups
+                        .Verify(
+                            @"
                 {
                     Namespace: string='System.Text'
                     Type: alias='F' type='System.IO.File'
@@ -303,11 +304,10 @@ namespace B
                     Assembly: alias='A'
                     Namespace: alias='S' string='System'
                 }"
-                    );
+                        );
 
-                    info.ExternAliasRecords.Verify(
-                        "A = 'Lib, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'"
-                    );
+                    info.ExternAliasRecords
+                        .Verify("A = 'Lib, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'");
                 }
             );
         }
@@ -357,8 +357,9 @@ namespace B
                 {
                     var info = GetMethodDebugInfo(runtime, "B.C.M");
 
-                    info.ImportRecordGroups.Verify(
-                        @"
+                    info.ImportRecordGroups
+                        .Verify(
+                            @"
                 {
                     Type: type='N.Static'
                 }
@@ -366,11 +367,10 @@ namespace B
                     Assembly: alias='A'
                     Type: type='System.Math'
                 }"
-                    );
+                        );
 
-                    info.ExternAliasRecords.Verify(
-                        "A = 'Lib, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'"
-                    );
+                    info.ExternAliasRecords
+                        .Verify("A = 'Lib, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'");
                 }
             );
         }
@@ -421,8 +421,7 @@ namespace D
                 {
                     var debugInfo1 = GetMethodDebugInfo(runtime, "B.C.M1");
 
-                    debugInfo1
-                        .ImportRecordGroups
+                    debugInfo1.ImportRecordGroups
                         .Verify(
                             @"
                 {
@@ -433,14 +432,12 @@ namespace D
                 }"
                         );
 
-                    debugInfo1
-                        .ExternAliasRecords
+                    debugInfo1.ExternAliasRecords
                         .Verify("A = 'Lib, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'");
 
                     var debugInfo2 = GetMethodDebugInfo(runtime, "D.E.M2");
 
-                    debugInfo2
-                        .ImportRecordGroups
+                    debugInfo2.ImportRecordGroups
                         .Verify(
                             @"
                 {
@@ -451,8 +448,7 @@ namespace D
                 }"
                         );
 
-                    debugInfo2
-                        .ExternAliasRecords
+                    debugInfo2.ExternAliasRecords
                         .Verify("A = 'Lib, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'");
                 }
             );
@@ -669,11 +665,9 @@ public class C
             using (var peReader = new PEReader(peImage))
             {
                 var metadataReader = peReader.GetMetadataReader();
-                var methodHandle = metadataReader
-                    .MethodDefinitions
+                var methodHandle = metadataReader.MethodDefinitions
                     .Single(h =>
-                        metadataReader
-                            .StringComparer
+                        metadataReader.StringComparer
                             .Equals(metadataReader.GetMethodDefinition(h).Name, "Main")
                     );
                 var methodToken = metadataReader.GetToken(methodHandle);
@@ -729,11 +723,9 @@ namespace N
             using (var peReader = new PEReader(peImage))
             {
                 var metadataReader = peReader.GetMetadataReader();
-                var methodHandle = metadataReader
-                    .MethodDefinitions
+                var methodHandle = metadataReader.MethodDefinitions
                     .Single(h =>
-                        metadataReader
-                            .StringComparer
+                        metadataReader.StringComparer
                             .Equals(metadataReader.GetMethodDefinition(h).Name, "Main")
                     );
                 var methodToken = metadataReader.GetToken(methodHandle);
@@ -786,11 +778,9 @@ namespace N
             using (var peReader = new PEReader(peImage))
             {
                 var metadataReader = peReader.GetMetadataReader();
-                var methodHandle = metadataReader
-                    .MethodDefinitions
+                var methodHandle = metadataReader.MethodDefinitions
                     .Single(h =>
-                        metadataReader
-                            .StringComparer
+                        metadataReader.StringComparer
                             .Equals(metadataReader.GetMethodDefinition(h).Name, "Main")
                     );
                 var methodToken = metadataReader.GetToken(methodHandle);

@@ -273,9 +273,8 @@ namespace System.Runtime
             {
                 if (this.timer != null)
                 {
-                    throw Fx.Exception.AsError(
-                        new InvalidOperationException(InternalSR.MustCancelOldTimer)
-                    );
+                    throw Fx.Exception
+                        .AsError(new InvalidOperationException(InternalSR.MustCancelOldTimer));
                 }
 
                 this.originalTimeout = timeout;

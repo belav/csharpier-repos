@@ -1294,8 +1294,7 @@ namespace Mono.CSharp
         public void WarningEnable(Location location, int code, CompilerContext context)
         {
             if (context.Settings.IsWarningDisabledGlobally(code))
-                context
-                    .Report
+                context.Report
                     .Warning(
                         1635,
                         1,

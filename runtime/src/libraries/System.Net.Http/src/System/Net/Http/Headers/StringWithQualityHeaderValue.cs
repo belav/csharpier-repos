@@ -70,8 +70,7 @@ namespace System.Net.Http.Headers
         {
             int index = 0;
             return (StringWithQualityHeaderValue)
-                GenericHeaderParser
-                    .SingleValueStringWithQualityParser
+                GenericHeaderParser.SingleValueStringWithQualityParser
                     .ParseValue(input, null, ref index);
         }
 
@@ -84,8 +83,7 @@ namespace System.Net.Http.Headers
             parsedValue = null;
 
             if (
-                GenericHeaderParser
-                    .SingleValueStringWithQualityParser
+                GenericHeaderParser.SingleValueStringWithQualityParser
                     .TryParseValue(input, null, ref index, out object? output)
             )
             {

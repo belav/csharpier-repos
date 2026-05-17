@@ -56,8 +56,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
             // If the switch expression is invalid, still show the default case
             var hasCurrentValue = 1;
 
-            var snippetFunctionService = document
-                .Project
+            var snippetFunctionService = document.Project
                 .GetRequiredLanguageService<SnippetFunctionService>();
             if (
                 !TryGetSpan(SwitchExpressionField, out var switchExpressionSpan)
@@ -107,8 +106,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
             switchExpressionSpan = null;
             var surfaceBufferFieldSpan = new VsTextSpan[1];
             if (
-                snippetExpansionClient
-                    .ExpansionSession
+                snippetExpansionClient.ExpansionSession
                     ?.GetFieldSpan(fieldName, surfaceBufferFieldSpan) != VSConstants.S_OK
             )
             {

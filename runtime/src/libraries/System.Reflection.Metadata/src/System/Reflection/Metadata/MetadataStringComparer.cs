@@ -84,8 +84,7 @@ namespace System.Reflection.Metadata
 
             if (handle.HasFullName)
             {
-                return _reader
-                    .StringHeap
+                return _reader.StringHeap
                     .Equals(handle.GetFullName(), value, _reader.UTF8Decoder, ignoreCase);
             }
 

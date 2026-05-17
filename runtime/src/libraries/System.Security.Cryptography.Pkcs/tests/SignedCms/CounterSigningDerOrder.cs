@@ -16,13 +16,11 @@ namespace System.Security.Cryptography.Pkcs.Tests
             SignedCms cms = new SignedCms(content);
 
             using (
-                X509Certificate2 cert1 = Certificates
-                    .RSA2048SignatureOnly
+                X509Certificate2 cert1 = Certificates.RSA2048SignatureOnly
                     .TryGetCertificateWithPrivateKey()
             )
             using (
-                X509Certificate2 cert2 = Certificates
-                    .RSAKeyTransferCapi1
+                X509Certificate2 cert2 = Certificates.RSAKeyTransferCapi1
                     .TryGetCertificateWithPrivateKey()
             )
             {

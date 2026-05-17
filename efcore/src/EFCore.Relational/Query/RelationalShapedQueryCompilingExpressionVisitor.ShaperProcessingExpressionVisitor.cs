@@ -365,8 +365,7 @@ public partial class RelationalShapedQueryCompilingExpressionVisitor
                 relationalCommandCache = new RelationalCommandCache(
                     _parentVisitor.Dependencies.MemoryCache,
                     _parentVisitor.RelationalDependencies.QuerySqlGeneratorFactory,
-                    _parentVisitor
-                        .RelationalDependencies
+                    _parentVisitor.RelationalDependencies
                         .RelationalParameterBasedSqlProcessorFactory,
                     _selectExpression,
                     _parentVisitor._useRelationalNulls
@@ -398,8 +397,7 @@ public partial class RelationalShapedQueryCompilingExpressionVisitor
                     ? new RelationalCommandCache(
                         _parentVisitor.Dependencies.MemoryCache,
                         _parentVisitor.RelationalDependencies.QuerySqlGeneratorFactory,
-                        _parentVisitor
-                            .RelationalDependencies
+                        _parentVisitor.RelationalDependencies
                             .RelationalParameterBasedSqlProcessorFactory,
                         _selectExpression,
                         _parentVisitor._useRelationalNulls
@@ -514,8 +512,7 @@ public partial class RelationalShapedQueryCompilingExpressionVisitor
                     ? new RelationalCommandCache(
                         _parentVisitor.Dependencies.MemoryCache,
                         _parentVisitor.RelationalDependencies.QuerySqlGeneratorFactory,
-                        _parentVisitor
-                            .RelationalDependencies
+                        _parentVisitor.RelationalDependencies
                             .RelationalParameterBasedSqlProcessorFactory,
                         _selectExpression,
                         _parentVisitor._useRelationalNulls
@@ -718,10 +715,8 @@ public partial class RelationalShapedQueryCompilingExpressionVisitor
                             var entityMaterializationExpression = (BlockExpression)
                                 _parentVisitor.InjectEntityMaterializers(shaper);
 
-                            var mappedProperties = queryableJsonEntityProjectionInfo
-                                .PropertyIndexMap
-                                .Keys
-                                .ToList();
+                            var mappedProperties =
+                                queryableJsonEntityProjectionInfo.PropertyIndexMap.Keys.ToList();
                             var rewrittenEntityMaterializationExpression =
                                 new QueryableJsonEntityMaterializerRewriter(
                                     mappedProperties
@@ -1739,8 +1734,7 @@ public partial class RelationalShapedQueryCompilingExpressionVisitor
                     navigation: ownedNavigation
                 );
 
-                var navigationJsonPropertyName = ownedNavigation
-                    .TargetEntityType
+                var navigationJsonPropertyName = ownedNavigation.TargetEntityType
                     .GetJsonPropertyName()!;
                 innerShapersMap[navigationJsonPropertyName] = innerShaper;
 
@@ -1932,8 +1926,7 @@ public partial class RelationalShapedQueryCompilingExpressionVisitor
                         Constant(_isTracking)
                     );
 
-                    return navigation
-                        .DeclaringEntityType
+                    return navigation.DeclaringEntityType
                         .ClrType
                         .IsAssignableFrom(parentEntityExpression.Type)
                         ? includeJsonEntityCollectionMethodCall
@@ -1957,8 +1950,7 @@ public partial class RelationalShapedQueryCompilingExpressionVisitor
                     Constant(_isTracking)
                 );
 
-                return navigation
-                    .DeclaringEntityType
+                return navigation.DeclaringEntityType
                     .ClrType
                     .IsAssignableFrom(parentEntityExpression.Type)
                     ? includeJsonEntityReferenceMethodCall
@@ -2229,8 +2221,7 @@ public partial class RelationalShapedQueryCompilingExpressionVisitor
                     }
 
                     foreach (
-                        var jsonEntityTypeInitializerBlockExpression in jsonEntityTypeInitializerBlock
-                            .Expressions
+                        var jsonEntityTypeInitializerBlockExpression in jsonEntityTypeInitializerBlock.Expressions
                             .ToArray()[..^1]
                     )
                     {
@@ -2470,8 +2461,7 @@ public partial class RelationalShapedQueryCompilingExpressionVisitor
                             testBinaryExpression,
                             Block(
                                 ifTrueBlock.Variables,
-                                ifTrueBlock
-                                    .Expressions
+                                ifTrueBlock.Expressions
                                     .Concat(
                                         new Expression[]
                                         {
@@ -2485,8 +2475,7 @@ public partial class RelationalShapedQueryCompilingExpressionVisitor
 
                     resultBlockVariables.AddRange(ifFalseBlock.Variables.ToList());
 
-                    var instanceAssignment = ifFalseBlock
-                        .Expressions
+                    var instanceAssignment = ifFalseBlock.Expressions
                         .OfType<BinaryExpression>()
                         .Single(e =>
                             e
@@ -2569,8 +2558,7 @@ public partial class RelationalShapedQueryCompilingExpressionVisitor
                         Assign(instanceAssignment.Left, newInstanceAssignmentBlock)
                     );
 
-                    var startTrackingAssignment = ifFalseBlock
-                        .Expressions
+                    var startTrackingAssignment = ifFalseBlock.Expressions
                         .OfType<BinaryExpression>()
                         .Single(e =>
                             e
@@ -2711,8 +2699,7 @@ public partial class RelationalShapedQueryCompilingExpressionVisitor
                                         : MakeBinary(node.NodeType, node.Left, parameter),
                                     Call(
                                         PopulateListMethod.MakeGenericMethod(
-                                            property
-                                                .ClrType
+                                            property.ClrType
                                                 .TryGetElementType(typeof(IEnumerable<>))!
                                         ),
                                         parameter,
@@ -3348,8 +3335,7 @@ public partial class RelationalShapedQueryCompilingExpressionVisitor
                     ?? property.GetTypeMapping().JsonValueReaderWriter!
             );
 
-            var fromJsonMethod = jsonReaderWriterExpression
-                .Type
+            var fromJsonMethod = jsonReaderWriterExpression.Type
                 .GetMethod(
                     nameof(JsonValueReaderWriter<object>.FromJsonTyped),
                     new[] { typeof(Utf8JsonReaderManager).MakeByRefType(), typeof(object) }

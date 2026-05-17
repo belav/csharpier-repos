@@ -288,12 +288,13 @@ namespace System.Net
 
         public Task<X509Certificate2?> GetClientCertificateAsync()
         {
-            return Task.Factory.FromAsync(
-                (callback, state) =>
-                    ((HttpListenerRequest)state!).BeginGetClientCertificate(callback, state),
-                iar => ((HttpListenerRequest)iar.AsyncState!).EndGetClientCertificate(iar),
-                this
-            );
+            return Task.Factory
+                .FromAsync(
+                    (callback, state) =>
+                        ((HttpListenerRequest)state!).BeginGetClientCertificate(callback, state),
+                    iar => ((HttpListenerRequest)iar.AsyncState!).EndGetClientCertificate(iar),
+                    this
+                );
         }
 
         internal ListenerClientCertState ClientCertState { get; set; } =
@@ -343,8 +344,7 @@ namespace System.Net
 
                 while (i < l)
                 {
-                    i = CultureInfo
-                        .InvariantCulture
+                    i = CultureInfo.InvariantCulture
                         .CompareInfo
                         .IndexOf(headerValue, AttrName, i, CompareOptions.IgnoreCase);
                     if (i < 0)

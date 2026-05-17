@@ -106,8 +106,7 @@ namespace System.Speech.Internal.SrgsCompiler
             RemoveEpsilonStates();
             if (Count != cStates)
             {
-                System
-                    .Diagnostics
+                System.Diagnostics
                     .Trace
                     .WriteLine(
                         "Grammar compiler, additional Epsilons could have been removed :"
@@ -126,8 +125,7 @@ namespace System.Speech.Internal.SrgsCompiler
             //System.Diagnostics.Debug.Assert (_states.Count == cStates);
             if (Count != cStates)
             {
-                System
-                    .Diagnostics
+                System.Diagnostics
                     .Trace
                     .WriteLine(
                         "Grammar compiler, additional Epsilons could have been removed post merge transition :"

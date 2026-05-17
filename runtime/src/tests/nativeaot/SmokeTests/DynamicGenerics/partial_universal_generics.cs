@@ -857,8 +857,7 @@ namespace PartialUniversalGen
         [TestMethod]
         public static void TestUniversalGenericThatUsesCanonicalGeneric()
         {
-            var t = TypeOf
-                .PUG_GenericThatUsesAllocableGeneric
+            var t = TypeOf.PUG_GenericThatUsesAllocableGeneric
                 .MakeGenericType(TypeOf.PUG_StructThatSatisfiesConstraints);
             ITest<StructThatSatisfiesConstraints> b =
                 (ITest<StructThatSatisfiesConstraints>)Activator.CreateInstance(t);
@@ -877,8 +876,7 @@ namespace PartialUniversalGen
         [TestMethod]
         public static void TestUniversalGenericThatImplementsInterfaceOverArrayType()
         {
-            var t = TypeOf
-                .PUG_UniversalGenericImplementsInterfaceInstantiatedOverTArray
+            var t = TypeOf.PUG_UniversalGenericImplementsInterfaceInstantiatedOverTArray
                 .MakeGenericType(TypeOf.PUG_StructThatSatisfiesConstraints);
             var o = Activator.CreateInstance(t);
         }
@@ -886,8 +884,7 @@ namespace PartialUniversalGen
         [TestMethod]
         public static void TestUniversalGenericThatUsesCanonicalGenericMethod()
         {
-            var t = TypeOf
-                .PUG_UseCanonGenericMethodFromUniversalGenericClassType1
+            var t = TypeOf.PUG_UseCanonGenericMethodFromUniversalGenericClassType1
                 .MakeGenericType(TypeOf.PUG_StructThatSatisfiesConstraints);
             ITest<StructThatSatisfiesConstraints> b =
                 (ITest<StructThatSatisfiesConstraints>)Activator.CreateInstance(t);
@@ -901,8 +898,7 @@ namespace PartialUniversalGen
         [TestMethod]
         public static void TestUniversalGenericThatUsesCanonicalGenericMethodWithActivatorCreateInstance()
         {
-            var t = TypeOf
-                .PUG_UseCanonGenericMethodFromUniversalGenericClassType2
+            var t = TypeOf.PUG_UseCanonGenericMethodFromUniversalGenericClassType2
                 .MakeGenericType(TypeOf.PUG_StructThatSatisfiesConstraints);
             ITest<StructThatSatisfiesConstraints> b =
                 (ITest<StructThatSatisfiesConstraints>)Activator.CreateInstance(t);
@@ -916,8 +912,7 @@ namespace PartialUniversalGen
         public static void TestUniversalGenericThatUsesCanonicalGenericType()
         {
             {
-                var t = TypeOf
-                    .PUG_UseCanonGenericTypeFromUniversalGenericClassType3
+                var t = TypeOf.PUG_UseCanonGenericTypeFromUniversalGenericClassType3
                     .MakeGenericType(typeof(DerivedClass3), TypeOf.Double);
                 ITest<DerivedClass3> b = (ITest<DerivedClass3>)Activator.CreateInstance(t);
 
@@ -926,8 +921,7 @@ namespace PartialUniversalGen
             }
 
             {
-                var t = TypeOf
-                    .PUG_UseCanonGenericTypeFromUniversalGenericClassType5
+                var t = TypeOf.PUG_UseCanonGenericTypeFromUniversalGenericClassType5
                     .MakeGenericType(typeof(MyStruct5), TypeOf.Double);
                 ITest<MyStruct5> b = (ITest<MyStruct5>)Activator.CreateInstance(t);
 
@@ -936,8 +930,7 @@ namespace PartialUniversalGen
             }
 
             {
-                var t = TypeOf
-                    .PUG_UseCanonGenericTypeFromUniversalGenericClassType6
+                var t = TypeOf.PUG_UseCanonGenericTypeFromUniversalGenericClassType6
                     .MakeGenericType(typeof(MyStruct6), TypeOf.Double);
                 ITest<MyStruct6> b = (ITest<MyStruct6>)Activator.CreateInstance(t);
 
@@ -949,8 +942,7 @@ namespace PartialUniversalGen
         [TestMethod]
         public static void TestUniversalGenericThatUsesCanonicalGenericMethodWithConstraints()
         {
-            var t = TypeOf
-                .PUG_UseCanonGenericMethodFromUniversalGenericClassType4
+            var t = TypeOf.PUG_UseCanonGenericMethodFromUniversalGenericClassType4
                 .MakeGenericType(typeof(DerivedClass3), TypeOf.Double);
             ITest<DerivedClass3> b = (ITest<DerivedClass3>)Activator.CreateInstance(t);
 

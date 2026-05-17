@@ -589,8 +589,7 @@ namespace Internal.TypeSystem
             if (separatedMethods != null)
             {
                 foreach (
-                    MethodDesc separatedMethod in MethodDescHashtable
-                        .Enumerator
+                    MethodDesc separatedMethod in MethodDescHashtable.Enumerator
                         .Get(separatedMethods)
                 )
                 {
@@ -620,8 +619,7 @@ namespace Internal.TypeSystem
                     )
                     {
                         if (
-                            implSlot
-                                .Signature
+                            implSlot.Signature
                                 .EquivalentWithCovariantReturnType(
                                     unificationGroup.DefiningMethod.Signature
                                 )
@@ -648,8 +646,7 @@ namespace Internal.TypeSystem
                             addDeclGroup.IsInGroupOrIsDefiningSlot(declSlot)
                                 || (
                                     addDeclGroup.RequiresSlotUnification(declSlot)
-                                    && addDeclGroup
-                                        .DefiningMethod
+                                    && addDeclGroup.DefiningMethod
                                         .Signature
                                         .EquivalentWithCovariantReturnType(declSlot.Signature)
                                 )
@@ -701,8 +698,7 @@ namespace Internal.TypeSystem
                     else if (unificationGroup.RequiresSlotUnification(declSlot))
                     {
                         if (
-                            implSlot
-                                .Signature
+                            implSlot.Signature
                                 .EquivalentWithCovariantReturnType(
                                     unificationGroup.DefiningMethod.Signature
                                 )

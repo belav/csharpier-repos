@@ -194,17 +194,18 @@ namespace System.Web.Razor
         )]
         private static void RunTask(Action action)
         {
-            Task.Factory.StartNew(() =>
-            {
-                try
+            Task.Factory
+                .StartNew(() =>
                 {
-                    action();
-                }
-                catch
-                {
-                    // Catch all errors since this is just a debug helper
-                }
-            });
+                    try
+                    {
+                        action();
+                    }
+                    catch
+                    {
+                        // Catch all errors since this is just a debug helper
+                    }
+                });
         }
 
         private static void WriteIndent(StringBuilder sb, int depth)

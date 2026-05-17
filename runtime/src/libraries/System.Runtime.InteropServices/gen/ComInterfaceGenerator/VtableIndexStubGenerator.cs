@@ -36,8 +36,7 @@ namespace Microsoft.Interop
         public void Initialize(IncrementalGeneratorInitializationContext context)
         {
             // Get all methods with the [VirtualMethodIndex] attribute.
-            var attributedMethods = context
-                .SyntaxProvider
+            var attributedMethods = context.SyntaxProvider
                 .ForAttributeWithMetadataName(
                     TypeNames.VirtualMethodIndexAttribute,
                     static (node, ct) => node is MethodDeclarationSyntax,
@@ -285,17 +284,13 @@ namespace Microsoft.Interop
         )
         {
             ct.ThrowIfCancellationRequested();
-            INamedTypeSymbol? lcidConversionAttrType = environment
-                .Compilation
+            INamedTypeSymbol? lcidConversionAttrType = environment.Compilation
                 .GetTypeByMetadataName(TypeNames.LCIDConversionAttribute);
-            INamedTypeSymbol? suppressGCTransitionAttrType = environment
-                .Compilation
+            INamedTypeSymbol? suppressGCTransitionAttrType = environment.Compilation
                 .GetTypeByMetadataName(TypeNames.SuppressGCTransitionAttribute);
-            INamedTypeSymbol? unmanagedCallConvAttrType = environment
-                .Compilation
+            INamedTypeSymbol? unmanagedCallConvAttrType = environment.Compilation
                 .GetTypeByMetadataName(TypeNames.UnmanagedCallConvAttribute);
-            INamedTypeSymbol iUnmanagedInterfaceTypeType = environment
-                .Compilation
+            INamedTypeSymbol iUnmanagedInterfaceTypeType = environment.Compilation
                 .GetTypeByMetadataName(TypeNames.IUnmanagedInterfaceType_Metadata)!;
             // Get any attributes of interest on the method
             AttributeData? virtualMethodIndexAttr = null;
@@ -314,8 +309,7 @@ namespace Microsoft.Interop
                 }
                 else if (
                     lcidConversionAttrType is not null
-                    && SymbolEqualityComparer
-                        .Default
+                    && SymbolEqualityComparer.Default
                         .Equals(attr.AttributeClass, lcidConversionAttrType)
                 )
                 {
@@ -323,8 +317,7 @@ namespace Microsoft.Interop
                 }
                 else if (
                     suppressGCTransitionAttrType is not null
-                    && SymbolEqualityComparer
-                        .Default
+                    && SymbolEqualityComparer.Default
                         .Equals(attr.AttributeClass, suppressGCTransitionAttrType)
                 )
                 {
@@ -332,8 +325,7 @@ namespace Microsoft.Interop
                 }
                 else if (
                     unmanagedCallConvAttrType is not null
-                    && SymbolEqualityComparer
-                        .Default
+                    && SymbolEqualityComparer.Default
                         .Equals(attr.AttributeClass, unmanagedCallConvAttrType)
                 )
                 {
@@ -365,8 +357,7 @@ namespace Microsoft.Interop
             }
 
             if (
-                virtualMethodIndexData
-                    .IsUserDefined
+                virtualMethodIndexData.IsUserDefined
                     .HasFlag(InteropAttributeMember.StringMarshalling)
             )
             {
@@ -451,8 +442,7 @@ namespace Microsoft.Interop
 
             INamedTypeSymbol expectedUnmanagedInterfaceType = iUnmanagedInterfaceTypeType;
 
-            bool implementsIUnmanagedInterfaceOfSelf = symbol
-                .ContainingType
+            bool implementsIUnmanagedInterfaceOfSelf = symbol.ContainingType
                 .AllInterfaces
                 .Any(iface =>
                     SymbolEqualityComparer.Default.Equals(iface, expectedUnmanagedInterfaceType)
@@ -462,8 +452,7 @@ namespace Microsoft.Interop
                 // TODO: Report invalid configuration
             }
 
-            var unmanagedObjectUnwrapper = symbol
-                .ContainingType
+            var unmanagedObjectUnwrapper = symbol.ContainingType
                 .GetAttributes()
                 .FirstOrDefault(att =>
                     att.AttributeClass.IsOfType(TypeNames.UnmanagedObjectUnwrapperAttribute)
@@ -579,8 +568,7 @@ namespace Microsoft.Interop
             );
 
             return (
-                methodStub
-                    .ContainingSyntaxContext
+                methodStub.ContainingSyntaxContext
                     .AddContainingSyntax(NativeTypeContainingSyntax)
                     .WrapMemberInContainingSyntaxWithUnsafeModifier(stub),
                 methodStub.Diagnostics.Array.AddRange(diagnostics)
@@ -598,8 +586,7 @@ namespace Microsoft.Interop
             );
 
             return (
-                methodStub
-                    .ContainingSyntaxContext
+                methodStub.ContainingSyntaxContext
                     .AddContainingSyntax(NativeTypeContainingSyntax)
                     .WrapMemberInContainingSyntaxWithUnsafeModifier(stub),
                 methodStub.Diagnostics.Array.AddRange(diagnostics)
@@ -658,8 +645,7 @@ namespace Microsoft.Interop
 
             // Verify there is an [UnmanagedObjectUnwrapperAttribute<TMapper>]
             if (
-                !method
-                    .ContainingType
+                !method.ContainingType
                     .GetAttributes()
                     .Any(att =>
                         att.AttributeClass.IsOfType(TypeNames.UnmanagedObjectUnwrapperAttribute)
@@ -713,8 +699,7 @@ namespace Microsoft.Interop
             IGrouping<ContainingSyntaxContext, IncrementalMethodStubGenerationContext> vtableMethods
         )
         {
-            ContainingSyntaxContext containingSyntax = vtableMethods
-                .Key
+            ContainingSyntaxContext containingSyntax = vtableMethods.Key
                 .AddContainingSyntax(NativeTypeContainingSyntax);
 
             const string vtableParameter = "vtable";

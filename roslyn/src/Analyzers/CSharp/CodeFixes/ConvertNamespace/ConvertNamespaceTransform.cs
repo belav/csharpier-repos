@@ -135,8 +135,7 @@ internal static class ConvertNamespaceTransform
     )
     {
         var converted = ConvertNamespaceDeclaration(namespaceDeclaration);
-        var updatedRoot = document
-            .Root
+        var updatedRoot = document.Root
             .ReplaceNode(namespaceDeclaration, converted.WithAdditionalAnnotations(annotation));
         var fileScopedNamespace = (FileScopedNamespaceDeclarationSyntax)
             updatedRoot.GetAnnotatedNodes(annotation).Single();
@@ -150,13 +149,11 @@ internal static class ConvertNamespaceTransform
         CancellationToken cancellationToken
     )
     {
-        var openBraceLine = document
-            .Text
+        var openBraceLine = document.Text
             .Lines
             .GetLineFromPosition(namespaceDeclaration.OpenBraceToken.SpanStart)
             .LineNumber;
-        var closeBraceLine = document
-            .Text
+        var closeBraceLine = document.Text
             .Lines
             .GetLineFromPosition(namespaceDeclaration.CloseBraceToken.SpanStart)
             .LineNumber;
@@ -166,8 +163,7 @@ internal static class ConvertNamespaceTransform
         // Auto-formatting options are not relevant since they only control behavior on typing.
         var indentationOptions = new IndentationOptions(options);
 
-        var indentationService = document
-            .LanguageServices
+        var indentationService = document.LanguageServices
             .GetRequiredService<IIndentationService>();
         var indentation = indentationService.GetIndentation(
             document,
@@ -403,8 +399,7 @@ internal static class ConvertNamespaceTransform
         var tokenAfterNamespace = namespaceDeclaration
             .GetLastToken(includeZeroWidth: true, includeSkipped: true)
             .GetNextTokenOrEndOfFile(includeZeroWidth: true, includeSkipped: true);
-        var lineWithNextToken = document
-            .Text
+        var lineWithNextToken = document.Text
             .Lines
             .GetLineFromPosition(tokenAfterNamespace.SpanStart);
         var (splitPosition, needsAdditionalLineEnding) =
@@ -414,12 +409,10 @@ internal static class ConvertNamespaceTransform
                     document.Text.Lines.GetLineFromPosition(tokenAfterNamespace.SpanStart).Start,
                     false
                 );
-        var triviaBeforeSplit = tokenAfterNamespace
-            .LeadingTrivia
+        var triviaBeforeSplit = tokenAfterNamespace.LeadingTrivia
             .TakeWhile(trivia => trivia.SpanStart < splitPosition)
             .ToArray();
-        var triviaAfterSplit = tokenAfterNamespace
-            .LeadingTrivia
+        var triviaAfterSplit = tokenAfterNamespace.LeadingTrivia
             .Skip(triviaBeforeSplit.Length)
             .ToArray();
 
@@ -437,8 +430,7 @@ internal static class ConvertNamespaceTransform
         // file scoped namespace. This check is performed here to account for cases where the token after the
         // opening brace is the closing brace token, and the leading newline for the closing brace token was
         // introduced by the trivia relocation above.
-        var firstBodyToken = converted
-            .OpenBraceToken
+        var firstBodyToken = converted.OpenBraceToken
             .GetNextToken(includeZeroWidth: true, includeSkipped: true);
         if (
             firstBodyToken.Kind() != SyntaxKind.EndOfFileToken
@@ -448,8 +440,7 @@ internal static class ConvertNamespaceTransform
             converted = converted.ReplaceToken(firstBodyToken, firstBodyTokenWithoutBlankLine);
         }
 
-        return document
-            .Root
+        return document.Root
             .ReplaceSyntax(
                 new SyntaxNode[] { namespaceDeclaration },
                 (_, _) => converted.WithAdditionalAnnotations(annotation),
@@ -566,8 +557,7 @@ internal static class ConvertNamespaceTransform
         NewLinePlacement newLinePlacement
     )
     {
-        var nameSyntax = fileScopedNamespace
-            .Name
+        var nameSyntax = fileScopedNamespace.Name
             .WithAppendedTrailingTrivia(fileScopedNamespace.SemicolonToken.LeadingTrivia)
             .WithAppendedTrailingTrivia(
                 newLinePlacement.HasFlag(NewLinePlacement.BeforeOpenBraceInTypes)
@@ -620,8 +610,7 @@ internal static class ConvertNamespaceTransform
         }
 
         // If the file scoped namespace is indented, also indent the newly added braces to match
-        var outerIndentation = document
-            .Text
+        var outerIndentation = document.Text
             .GetLeadingWhitespaceOfLineAtPosition(fileScopedNamespace.SpanStart);
         if (outerIndentation.Length > 0)
         {

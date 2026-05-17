@@ -66,8 +66,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
 
             public bool Invoke(IEnumerable<object> items, InputSource inputSource, bool preview)
             {
-                return _threadingContext
-                    .JoinableTaskFactory
+                return _threadingContext.JoinableTaskFactory
                     .Run(async () =>
                     {
                         var didNavigate = false;

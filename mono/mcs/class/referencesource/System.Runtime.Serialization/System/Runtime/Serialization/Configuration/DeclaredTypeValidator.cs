@@ -24,8 +24,7 @@ namespace System.Runtime.Serialization.Configuration
                 Type t = Type.GetType(type, false);
                 if (t != null && Globals.TypeOfObject.Equals(t))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgument(SR.GetString(SR.KnownTypeConfigObject));
                 }
             }

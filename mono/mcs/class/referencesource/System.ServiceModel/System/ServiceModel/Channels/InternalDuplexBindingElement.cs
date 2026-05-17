@@ -56,8 +56,7 @@ namespace System.ServiceModel.Channels
 
             if (!this.CanBuildChannelFactory<TChannel>(context))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(
                         "TChannel",
                         SR.GetString(SR.ChannelTypeNotSupported, typeof(TChannel))
@@ -77,8 +76,7 @@ namespace System.ServiceModel.Channels
 #pragma warning suppress 56506 // Microsoft, context.RemainingBindingElements will never be null
                 context.RemainingBindingElements.Clear();
             }
-            LocalAddressProvider localAddressProvider = context
-                .BindingParameters
+            LocalAddressProvider localAddressProvider = context.BindingParameters
                 .Remove<LocalAddressProvider>();
             return (IChannelFactory<TChannel>)
                 (object)
@@ -102,8 +100,7 @@ namespace System.ServiceModel.Channels
 
             if (typeof(TChannel) != typeof(IDuplexChannel))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(
                         "TChannel",
                         SR.GetString(SR.ChannelTypeNotSupported, typeof(TChannel))
@@ -293,8 +290,7 @@ namespace System.ServiceModel.Channels
             this.filter = filter;
 
             if (
-                localAddress
-                    .Headers
+                localAddress.Headers
                     .FindHeader(
                         XD.UtilityDictionary.UniqueEndpointHeaderName.Value,
                         XD.UtilityDictionary.UniqueEndpointHeaderNamespace.Value

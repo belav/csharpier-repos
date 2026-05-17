@@ -373,8 +373,7 @@ namespace System.Web.Http.Owin
                 {
                     if (!request.Headers.TryAddWithoutValidation(header.Key, header.Value))
                     {
-                        bool success = requestContent
-                            .Headers
+                        bool success = requestContent.Headers
                             .TryAddWithoutValidation(header.Key, header.Value);
                         Contract.Assert(
                             success,
@@ -416,8 +415,7 @@ namespace System.Web.Http.Owin
             {
                 bool routingFailure;
                 if (
-                    request
-                        .Properties
+                    request.Properties
                         .TryGetValue<bool>(HttpPropertyKeys.NoRouteMatched, out routingFailure)
                     && routingFailure
                 )

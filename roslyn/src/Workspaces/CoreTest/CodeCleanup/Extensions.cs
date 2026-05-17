@@ -58,8 +58,7 @@ namespace Microsoft.CodeAnalysis.UnitTests.CodeCleanup
         public static T RemoveCSharpMember<T>(this T node, int index)
             where T : SyntaxNode
         {
-            var newMembers = CSharp
-                .SyntaxFactory
+            var newMembers = CSharp.SyntaxFactory
                 .List(node.RemoveMember<CSharp.Syntax.MemberDeclarationSyntax>(index));
 
             dynamic d = node;
@@ -73,8 +72,7 @@ namespace Microsoft.CodeAnalysis.UnitTests.CodeCleanup
         )
             where T : SyntaxNode
         {
-            var newMembers = CSharp
-                .SyntaxFactory
+            var newMembers = CSharp.SyntaxFactory
                 .List(node.AddMember<CSharp.Syntax.MemberDeclarationSyntax>(member, index));
 
             dynamic d = node;

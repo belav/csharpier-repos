@@ -20,8 +20,7 @@ namespace NativeExports
         )
         {
             // Round trip through the managed view to allocate a new native instance.
-            *pStringsOut = StringContainerMarshaller
-                .In
+            *pStringsOut = StringContainerMarshaller.In
                 .ConvertToUnmanaged(StringContainerMarshaller.Out.ConvertToManaged(strings));
         }
 

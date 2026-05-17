@@ -28,8 +28,7 @@ namespace System.Data.ProviderBase
         private const int PruningPeriod = 30 * 1000; // thirty seconds
 
         private static int _objectTypeCount; // Bid counter
-        internal readonly int _objectID = System
-            .Threading
+        internal readonly int _objectID = System.Threading
             .Interlocked
             .Increment(ref _objectTypeCount);
 
@@ -408,8 +407,7 @@ namespace System.Data.ProviderBase
                                     if (retry.TrySetResult(task.Result))
                                     {
 #if !MOBILE
-                                        PerformanceCounters
-                                            .NumberOfNonPooledConnections
+                                        PerformanceCounters.NumberOfNonPooledConnections
                                             .Increment();
 #endif
                                     }
@@ -776,8 +774,7 @@ namespace System.Data.ProviderBase
                                     );
                                 }
 #if !MOBILE
-                                PerformanceCounters
-                                    .NumberOfInactiveConnectionPoolGroups
+                                PerformanceCounters.NumberOfInactiveConnectionPoolGroups
                                     .Decrement();
 #endif
                             }

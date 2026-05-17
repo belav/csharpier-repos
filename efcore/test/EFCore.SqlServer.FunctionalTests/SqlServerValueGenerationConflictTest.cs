@@ -96,8 +96,7 @@ public class SqlServerValueGenerationStrategyNoThrowTest
         // Assert - this does not throw
         Validate(modelBuilder);
 
-        var logEntry = Fixture
-            .ListLoggerFactory
+        var logEntry = Fixture.ListLoggerFactory
             .Log
             .Single(l =>
                 l.Level == LogLevel.Warning

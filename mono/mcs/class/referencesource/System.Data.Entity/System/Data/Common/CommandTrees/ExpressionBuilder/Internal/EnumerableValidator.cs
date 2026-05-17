@@ -176,8 +176,7 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder.Internal
                     if (nameIndex.TryGetValue(name, out foundIndex))
                     {
                         throw EntityUtil.Argument(
-                            System
-                                .Data
+                            System.Data
                                 .Entity
                                 .Strings
                                 .Cqt_Util_CheckListDuplicateName(foundIndex, pos, name),

@@ -27,8 +27,7 @@ namespace System.Diagnostics
             out string? traceId,
             out string? traceState
         ) =>
-            LegacyPropagator
-                .Instance
+            LegacyPropagator.Instance
                 .ExtractTraceIdAndState(carrier, getter, out traceId, out traceState);
 
         public override IEnumerable<KeyValuePair<string, string?>>? ExtractBaggage(

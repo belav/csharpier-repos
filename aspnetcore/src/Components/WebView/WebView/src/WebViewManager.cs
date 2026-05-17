@@ -119,11 +119,9 @@ public abstract class WebViewManager : IAsyncDisposable
         {
             return Dispatcher.InvokeAsync(() =>
             {
-                rootComponent.ComponentId = _currentPageContext
-                    .Renderer
+                rootComponent.ComponentId = _currentPageContext.Renderer
                     .AddRootComponent(componentType, selector);
-                return _currentPageContext
-                    .Renderer
+                return _currentPageContext.Renderer
                     .RenderRootComponentAsync(
                         rootComponent.ComponentId.Value,
                         rootComponent.Parameters
@@ -212,8 +210,7 @@ public abstract class WebViewManager : IAsyncDisposable
             return false;
         }
 
-        return await capturedCurrentPageContext
-            .Renderer
+        return await capturedCurrentPageContext.Renderer
             .Dispatcher
             .InvokeAsync(() =>
             {
@@ -282,12 +279,10 @@ public abstract class WebViewManager : IAsyncDisposable
         var pendingRenders = new List<Task>(_rootComponentsBySelector.Count);
         foreach (var (selector, rootComponent) in _rootComponentsBySelector)
         {
-            rootComponent.ComponentId = _currentPageContext
-                .Renderer
+            rootComponent.ComponentId = _currentPageContext.Renderer
                 .AddRootComponent(rootComponent.ComponentType, selector);
             pendingRenders.Add(
-                _currentPageContext
-                    .Renderer
+                _currentPageContext.Renderer
                     .RenderRootComponentAsync(
                         rootComponent.ComponentId.Value,
                         rootComponent.Parameters
@@ -341,8 +336,7 @@ public abstract class WebViewManager : IAsyncDisposable
             if (File.Exists(manifestPath))
             {
                 using var manifestStream = File.OpenRead(manifestPath);
-                var manifest = ManifestStaticWebAssetFileProvider
-                    .StaticWebAssetManifest
+                var manifest = ManifestStaticWebAssetFileProvider.StaticWebAssetManifest
                     .Parse(manifestStream);
                 if (manifest.ContentRoots.Length > 0)
                 {

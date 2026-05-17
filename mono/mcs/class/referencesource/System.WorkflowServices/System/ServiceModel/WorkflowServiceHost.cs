@@ -119,8 +119,7 @@ namespace System.ServiceModel
         {
             if (address == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("address"));
             }
 
@@ -149,8 +148,7 @@ namespace System.ServiceModel
         {
             if (address == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("address"));
             }
 
@@ -171,14 +169,12 @@ namespace System.ServiceModel
         {
             if (implementedContract == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("implementedContract"));
             }
             if (!implementedContract.IsDefined(typeof(ServiceContractAttribute), false))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR2.GetString(
@@ -190,8 +186,7 @@ namespace System.ServiceModel
             }
             if (this.reflectedContracts == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR2.GetString(
@@ -208,8 +203,7 @@ namespace System.ServiceModel
                 {
                     if (!this.Description.Behaviors.Contains(typeof(ServiceMetadataBehavior)))
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(
                                     SR2.GetString(
@@ -222,8 +216,7 @@ namespace System.ServiceModel
                 }
                 else
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR2.GetString(

@@ -353,8 +353,7 @@ internal sealed class MultipartReaderStream : Stream
             stream._bytePool.Return(boundary);
             Debug.Assert(read == length); // It should have all been buffered
 
-            var remainder = await stream
-                ._innerStream
+            var remainder = await stream._innerStream
                 .ReadLineAsync(lengthLimit: 100, cancellationToken: cancellationToken); // Whitespace may exceed the buffer.
             remainder = remainder.Trim();
             if (string.Equals("--", remainder, StringComparison.Ordinal))

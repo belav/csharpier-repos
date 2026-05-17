@@ -139,8 +139,7 @@ namespace System.ServiceModel.Dispatcher
             NodeSequenceItem item1 = (NodeSequenceItem)obj1;
             NodeSequenceItem item2 = (NodeSequenceItem)obj2;
 
-            XmlNodeOrder order = item1
-                .Node
+            XmlNodeOrder order = item1.Node
                 .Node
                 .ComparePosition(item1.Node.Position, item2.Node.Position);
             int ret;
@@ -160,8 +159,7 @@ namespace System.ServiceModel.Dispatcher
 
                 case XmlNodeOrder.Unknown:
                 default:
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new XPathException(SR.GetString(SR.QueryNotSortable)),
                             TraceEventType.Critical
@@ -179,8 +177,7 @@ namespace System.ServiceModel.Dispatcher
 
         public int Compare(NodeSequenceItem item1, NodeSequenceItem item2)
         {
-            XmlNodeOrder order = item1
-                .Node
+            XmlNodeOrder order = item1.Node
                 .Node
                 .ComparePosition(item1.Node.Position, item2.Node.Position);
             int ret;
@@ -200,8 +197,7 @@ namespace System.ServiceModel.Dispatcher
 
                 case XmlNodeOrder.Unknown:
                 default:
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new XPathException(SR.GetString(SR.QueryNotSortable)),
                             TraceEventType.Critical
@@ -248,8 +244,7 @@ namespace System.ServiceModel.Dispatcher
 
                 case XmlNodeOrder.Unknown:
                 default:
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperCritical(new XPathException(SR.GetString(SR.QueryNotSortable)));
             }
 
@@ -472,8 +467,7 @@ namespace System.ServiceModel.Dispatcher
                 }
                 else
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new QueryProcessingException(
                                 QueryProcessingError.Unexpected,
@@ -581,8 +575,7 @@ namespace System.ServiceModel.Dispatcher
                 }
                 else
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperCritical(
                             new QueryProcessingException(
                                 QueryProcessingError.Unexpected,
@@ -1013,8 +1006,7 @@ namespace System.ServiceModel.Dispatcher
                 if (this.index == 0)
                 {
 #pragma warning suppress 56503 // Microsoft, postponing the public change
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new QueryProcessingException(
                                 QueryProcessingError.Unexpected,
@@ -1026,8 +1018,7 @@ namespace System.ServiceModel.Dispatcher
                 if (this.index > this.data.seq.Count)
                 {
 #pragma warning suppress 56503 // Microsoft, postponing the public change
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(SR.GetString(SR.QueryAfterNodes))
                         );
@@ -1075,8 +1066,7 @@ namespace System.ServiceModel.Dispatcher
             if (null == this.data.seq)
             {
                 // User is trying to use an iterator that is  out of scope.
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(SR.GetString(SR.QueryIteratorOutOfScope))
                     );
@@ -1127,8 +1117,7 @@ namespace System.ServiceModel.Dispatcher
                 if (this.iter.CurrentPosition == 0)
                 {
 #pragma warning suppress 56503 // Microsoft, postponing the public change
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(SR.GetString(SR.QueryBeforeNodes))
                         );
@@ -1137,8 +1126,7 @@ namespace System.ServiceModel.Dispatcher
                 if (this.iter.CurrentPosition > this.iter.Count)
                 {
 #pragma warning suppress 56503 // Microsoft, postponing the public change
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(SR.GetString(SR.QueryAfterNodes))
                         );

@@ -856,8 +856,7 @@ namespace Microsoft.Interop.Analyzers
         private void PrepareForAnalysis(CompilationStartAnalysisContext context)
         {
             if (
-                context
-                    .Compilation
+                context.Compilation
                     .GetBestTypeByMetadataName(TypeNames.CustomMarshallerAttribute) is
                 { } customMarshallerAttribute
             )
@@ -898,8 +897,7 @@ namespace Microsoft.Interop.Analyzers
                 IAttributeOperation attr = (IAttributeOperation)context.Operation;
                 if (
                     attr.Operation is IObjectCreationOperation attrCreation
-                    && attrCreation
-                        .Type
+                    && attrCreation.Type
                         .Equals(_customMarshallerAttribute, SymbolEqualityComparer.Default)
                 )
                 {
@@ -969,8 +967,7 @@ namespace Microsoft.Interop.Analyzers
                         {
                             DiagnosticReporter marshallerTypeReporter =
                                 DiagnosticReporter.CreateForLocation(
-                                    ((TypeOfExpressionSyntax)marshallerTypeOfOp.Syntax)
-                                        .Type
+                                    ((TypeOfExpressionSyntax)marshallerTypeOfOp.Syntax).Type
                                         .GetLocation(),
                                     context.ReportDiagnostic
                                 );
@@ -1143,8 +1140,7 @@ namespace Microsoft.Interop.Analyzers
                                         StatelessLinearCollectionRequiresTwoParameterAllocateContainerForUnmanagedElementsRule,
                                         MissingMemberNames.CreateDiagnosticPropertiesForMissingMembersDiagnostic(
                                             mode,
-                                            ShapeMemberNames
-                                                .LinearCollection
+                                            ShapeMemberNames.LinearCollection
                                                 .Stateless
                                                 .AllocateContainerForUnmanagedElements
                                         ),
@@ -1157,8 +1153,7 @@ namespace Microsoft.Interop.Analyzers
                                 if (methods.ManagedValuesSource is null)
                                 {
                                     missingCollectionMethods.Add(
-                                        ShapeMemberNames
-                                            .LinearCollection
+                                        ShapeMemberNames.LinearCollection
                                             .Stateless
                                             .GetManagedValuesSource
                                     );
@@ -1166,8 +1161,7 @@ namespace Microsoft.Interop.Analyzers
                                 if (methods.UnmanagedValuesDestination is null)
                                 {
                                     missingCollectionMethods.Add(
-                                        ShapeMemberNames
-                                            .LinearCollection
+                                        ShapeMemberNames.LinearCollection
                                             .Stateless
                                             .GetUnmanagedValuesDestination
                                     );
@@ -1227,8 +1221,7 @@ namespace Microsoft.Interop.Analyzers
                                         StatelessLinearCollectionRequiresTwoParameterAllocateContainerForManagedElementsRule,
                                         MissingMemberNames.CreateDiagnosticPropertiesForMissingMembersDiagnostic(
                                             mode,
-                                            ShapeMemberNames
-                                                .LinearCollection
+                                            ShapeMemberNames.LinearCollection
                                                 .Stateless
                                                 .AllocateContainerForManagedElements
                                         ),
@@ -1241,8 +1234,7 @@ namespace Microsoft.Interop.Analyzers
                                 if (methods.UnmanagedValuesSource is null)
                                 {
                                     missingCollectionMethods.Add(
-                                        ShapeMemberNames
-                                            .LinearCollection
+                                        ShapeMemberNames.LinearCollection
                                             .Stateless
                                             .GetUnmanagedValuesSource
                                     );
@@ -1250,8 +1242,7 @@ namespace Microsoft.Interop.Analyzers
                                 if (methods.ManagedValuesDestination is null)
                                 {
                                     missingCollectionMethods.Add(
-                                        ShapeMemberNames
-                                            .LinearCollection
+                                        ShapeMemberNames.LinearCollection
                                             .Stateless
                                             .GetManagedValuesDestination
                                     );
@@ -1317,8 +1308,7 @@ namespace Microsoft.Interop.Analyzers
                         if (isLinearCollectionMarshaller)
                         {
                             if (
-                                !SymbolEqualityComparer
-                                    .Default
+                                !SymbolEqualityComparer.Default
                                     .Equals(
                                         methods.UnmanagedValuesDestination.Parameters[0].Type,
                                         unmanagedType
@@ -1341,8 +1331,7 @@ namespace Microsoft.Interop.Analyzers
                         {
                             // If the marshaller has both "ConvertToUnmanaged" method variants, verify that their return types match.
                             if (
-                                !SymbolEqualityComparer
-                                    .Default
+                                !SymbolEqualityComparer.Default
                                     .Equals(
                                         methods.ToUnmanaged.ReturnType,
                                         methods.ToUnmanagedWithBuffer.ReturnType
@@ -1366,8 +1355,7 @@ namespace Microsoft.Interop.Analyzers
 
                         if (
                             unmanagedType is not null
-                            && !SymbolEqualityComparer
-                                .Default
+                            && !SymbolEqualityComparer.Default
                                 .Equals(unmanagedType, toManagedMethod.Parameters[0].Type)
                         )
                         {
@@ -1386,8 +1374,7 @@ namespace Microsoft.Interop.Analyzers
                         if (isLinearCollectionMarshaller)
                         {
                             if (
-                                !SymbolEqualityComparer
-                                    .Default
+                                !SymbolEqualityComparer.Default
                                     .Equals(
                                         methods.UnmanagedValuesSource.Parameters[0].Type,
                                         unmanagedType
@@ -1410,8 +1397,7 @@ namespace Microsoft.Interop.Analyzers
                         {
                             // If the marshaller has both "ConvertToUnmanaged" method variants, verify that their parameter types match.
                             if (
-                                !SymbolEqualityComparer
-                                    .Default
+                                !SymbolEqualityComparer.Default
                                     .Equals(
                                         methods.ToManaged.Parameters[1].Type,
                                         methods.ToManagedFinally.Parameters[1].Type
@@ -1445,8 +1431,7 @@ namespace Microsoft.Interop.Analyzers
                                     methods.ManagedValuesDestination.ReturnType,
                                     out ITypeSymbol destinationElementType
                                 )
-                                && !SymbolEqualityComparer
-                                    .Default
+                                && !SymbolEqualityComparer.Default
                                     .Equals(sourceElementType, destinationElementType)
                             )
                             {
@@ -1492,8 +1477,7 @@ namespace Microsoft.Interop.Analyzers
                         unmanagedValuesCollectionMethod.ReturnType,
                         out ITypeSymbol sourceElementType
                     )
-                    && !SymbolEqualityComparer
-                        .Default
+                    && !SymbolEqualityComparer.Default
                         .Equals(sourceElementType, expectedElementType)
                 )
                 {
@@ -1569,11 +1553,9 @@ namespace Microsoft.Interop.Analyzers
             )
             {
                 if (
-                    SymbolEqualityComparer
-                        .Default
+                    SymbolEqualityComparer.Default
                         .Equals(spanTypeMaybe.OriginalDefinition, _spanOfT)
-                    || SymbolEqualityComparer
-                        .Default
+                    || SymbolEqualityComparer.Default
                         .Equals(spanTypeMaybe.OriginalDefinition, _readOnlySpanOfT)
                 )
                 {
@@ -1710,8 +1692,7 @@ namespace Microsoft.Interop.Analyzers
                                 if (methods.ManagedValuesSource is null)
                                 {
                                     missingCollectionMethods.Add(
-                                        ShapeMemberNames
-                                            .LinearCollection
+                                        ShapeMemberNames.LinearCollection
                                             .Stateful
                                             .GetManagedValuesSource
                                     );
@@ -1719,8 +1700,7 @@ namespace Microsoft.Interop.Analyzers
                                 if (methods.UnmanagedValuesDestination is null)
                                 {
                                     missingCollectionMethods.Add(
-                                        ShapeMemberNames
-                                            .LinearCollection
+                                        ShapeMemberNames.LinearCollection
                                             .Stateful
                                             .GetUnmanagedValuesDestination
                                     );
@@ -1801,8 +1781,7 @@ namespace Microsoft.Interop.Analyzers
                                 if (methods.UnmanagedValuesSource is null)
                                 {
                                     missingCollectionMethods.Add(
-                                        ShapeMemberNames
-                                            .LinearCollection
+                                        ShapeMemberNames.LinearCollection
                                             .Stateful
                                             .GetUnmanagedValuesSource
                                     );
@@ -1810,8 +1789,7 @@ namespace Microsoft.Interop.Analyzers
                                 if (methods.ManagedValuesDestination is null)
                                 {
                                     missingCollectionMethods.Add(
-                                        ShapeMemberNames
-                                            .LinearCollection
+                                        ShapeMemberNames.LinearCollection
                                             .Stateful
                                             .GetManagedValuesDestination
                                     );
@@ -1876,8 +1854,7 @@ namespace Microsoft.Interop.Analyzers
                         IMethodSymbol fromUnmanagedMethod = fromUnmanagedCandidates[0];
                         if (
                             unmanagedType is not null
-                            && !SymbolEqualityComparer
-                                .Default
+                            && !SymbolEqualityComparer.Default
                                 .Equals(unmanagedType, fromUnmanagedMethod.Parameters[0].Type)
                         )
                         {
@@ -1923,8 +1900,7 @@ namespace Microsoft.Interop.Analyzers
                                     methods.ManagedValuesDestination.ReturnType,
                                     out ITypeSymbol destinationElementType
                                 )
-                                && !SymbolEqualityComparer
-                                    .Default
+                                && !SymbolEqualityComparer.Default
                                     .Equals(sourceElementType, destinationElementType)
                             )
                             {

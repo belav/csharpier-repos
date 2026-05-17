@@ -310,8 +310,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
                 Debug.Assert(methodOwner?.MethodKind != MethodKind.LambdaMethod);
                 bool allowShadowingNames =
-                    withTypeParametersBinder
-                        .Compilation
+                    withTypeParametersBinder.Compilation
                         .IsFeatureEnabled(MessageID.IDS_FeatureNameShadowingInNestedFunctions)
                     && methodOwner?.MethodKind == MethodKind.LocalFunction;
 
@@ -842,8 +841,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
                         if (parsingLambdaParams)
                         {
-                            MessageID
-                                .IDS_FeatureLambdaParamsArray
+                            MessageID.IDS_FeatureLambdaParamsArray
                                 .CheckFeatureAvailability(diagnostics, modifier);
                         }
                         break;
@@ -1048,8 +1046,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             else if (firstDefault != -1 && parameterIndex > firstDefault && !isDefault && !isParams)
             {
                 // error CS1737: Optional parameters must appear after all required parameters
-                Location loc = ((ParameterSyntax)syntax)
-                    .Identifier
+                Location loc = ((ParameterSyntax)syntax).Identifier
                     .GetNextToken(includeZeroWidth: true)
                     .GetLocation(); //could be missing
                 diagnostics.Add(ErrorCode.ERR_DefaultValueBeforeRequiredValue, loc);
@@ -1114,8 +1111,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             CompoundUseSiteInfo<AssemblySymbol> useSiteInfo = binder.GetNewCompoundUseSiteInfo(
                 diagnostics
             );
-            Conversion conversion = binder
-                .Conversions
+            Conversion conversion = binder.Conversions
                 .ClassifyImplicitConversionFromExpression(
                     defaultExpression,
                     parameterType,

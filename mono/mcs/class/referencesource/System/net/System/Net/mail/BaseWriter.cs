@@ -72,12 +72,8 @@ namespace System.Net.Mime
                 if (MailBnfHelper.IsFWSAt(value, index)) // At the first char of "\r\n " or "\r\n\t"
                 {
                     index += 2; // Skip the FWS
-                    this.bufferBuilder.Append(
-                        value,
-                        startOfLine,
-                        index - startOfLine,
-                        allowUnicode
-                    );
+                    this.bufferBuilder
+                        .Append(value, startOfLine, index - startOfLine, allowUnicode);
                     // Reset for the next line
                     startOfLine = index;
                     lastSpace = index;
@@ -89,12 +85,8 @@ namespace System.Net.Mime
                     && lastSpace != startOfLine
                 )
                 {
-                    this.bufferBuilder.Append(
-                        value,
-                        startOfLine,
-                        lastSpace - startOfLine,
-                        allowUnicode
-                    );
+                    this.bufferBuilder
+                        .Append(value, startOfLine, lastSpace - startOfLine, allowUnicode);
                     this.bufferBuilder.Append(CRLF);
                     startOfLine = lastSpace;
                     charsAlreadyOnLine = 0;
@@ -108,12 +100,8 @@ namespace System.Net.Mime
             // Write any remaining data to the buffer.
             if (value.Length - startOfLine > 0)
             {
-                this.bufferBuilder.Append(
-                    value,
-                    startOfLine,
-                    value.Length - startOfLine,
-                    allowUnicode
-                );
+                this.bufferBuilder
+                    .Append(value, startOfLine, value.Length - startOfLine, allowUnicode);
             }
         }
 
@@ -179,13 +167,14 @@ namespace System.Net.Mime
                 if (multiResult != null)
                 {
                     multiResult.Enter();
-                    IAsyncResult result = this.stream.BeginWrite(
-                        this.bufferBuilder.GetBuffer(),
-                        0,
-                        this.bufferBuilder.Length,
-                        onWrite,
-                        multiResult
-                    );
+                    IAsyncResult result = this.stream
+                        .BeginWrite(
+                            this.bufferBuilder.GetBuffer(),
+                            0,
+                            this.bufferBuilder.Length,
+                            onWrite,
+                            multiResult
+                        );
                     if (result.CompletedSynchronously)
                     {
                         this.stream.EndWrite(result);

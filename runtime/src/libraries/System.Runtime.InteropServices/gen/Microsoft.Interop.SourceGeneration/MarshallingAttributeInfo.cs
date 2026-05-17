@@ -197,8 +197,7 @@ namespace Microsoft.Interop
                 return new NativeMarshallingAttributeInfo(
                     marshallerTypeInfo,
                     new CustomTypeMarshallers(
-                        ImmutableDictionary<MarshalMode, CustomTypeMarshallerData>
-                            .Empty
+                        ImmutableDictionary<MarshalMode, CustomTypeMarshallerData>.Empty
                             .Add(
                                 MarshalMode.UnmanagedToManagedOut,
                                 new CustomTypeMarshallerData(

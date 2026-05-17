@@ -1081,8 +1081,7 @@ namespace System.Web
                 // Let's emulate .NET
                 throw new NullReferenceException();
 
-            VirtualPathData vpd = RouteTable
-                .Routes
+            VirtualPathData vpd = RouteTable.Routes
                 .GetVirtualPath(req.RequestContext, routeName, routeValues);
             string redirectUrl = vpd != null ? vpd.VirtualPath : null;
             if (String.IsNullOrEmpty(redirectUrl))

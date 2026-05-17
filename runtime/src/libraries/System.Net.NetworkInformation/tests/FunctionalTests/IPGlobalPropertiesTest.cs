@@ -243,11 +243,8 @@ namespace System.Net.NetworkInformation.Tests
             Assert.NotEmpty(props.GetUnicastAddresses());
             Assert.NotEmpty(await props.GetUnicastAddressesAsync());
             Assert.NotEmpty(
-                await Task.Factory.FromAsync(
-                    props.BeginGetUnicastAddresses,
-                    props.EndGetUnicastAddresses,
-                    null
-                )
+                await Task.Factory
+                    .FromAsync(props.BeginGetUnicastAddresses, props.EndGetUnicastAddresses, null)
             );
         }
     }

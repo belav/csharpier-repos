@@ -59,11 +59,9 @@ namespace Microsoft.CodeAnalysis.InlineTemporary
                     var root = await document
                         .GetRequiredSyntaxRootAsync(cancellationToken)
                         .ConfigureAwait(false);
-                    return referencedSymbol
-                        .Locations
+                    return referencedSymbol.Locations
                         .Where(loc =>
-                            !semanticModel
-                                .SyntaxTree
+                            !semanticModel.SyntaxTree
                                 .OverlapsHiddenPosition(loc.Location.SourceSpan, cancellationToken)
                         )
                         .Select(loc =>

@@ -36,8 +36,7 @@ namespace System.Web.Mvc.Html
             );
 
             // write rules to context object
-            IEnumerable<ModelValidator> validators = ModelValidatorProviders
-                .Providers
+            IEnumerable<ModelValidator> validators = ModelValidatorProviders.Providers
                 .GetValidators(modelMetadata, htmlHelper.ViewContext);
             foreach (
                 ModelClientValidationRule rule in validators.SelectMany(v =>
@@ -139,8 +138,7 @@ namespace System.Web.Mvc.Html
                 return; // nothing to do
             }
 
-            string modelName = htmlHelper
-                .ViewContext
+            string modelName = htmlHelper.ViewContext
                 .ViewData
                 .TemplateInfo
                 .GetFullHtmlFieldName(expression);
@@ -601,8 +599,7 @@ namespace System.Web.Mvc.Html
             string tag
         )
         {
-            string modelName = htmlHelper
-                .ViewContext
+            string modelName = htmlHelper.ViewContext
                 .ViewData
                 .TemplateInfo
                 .GetFullHtmlFieldName(expression);
@@ -988,8 +985,7 @@ namespace System.Web.Mvc.Html
             if (excludePropertyErrors)
             {
                 ModelState ms;
-                htmlHelper
-                    .ViewData
+                htmlHelper.ViewData
                     .ModelState
                     .TryGetValue(htmlHelper.ViewData.TemplateInfo.HtmlFieldPrefix, out ms);
                 if (ms != null)

@@ -32,14 +32,15 @@ namespace System.DirectoryServices.ActiveDirectory
             {
                 // all properties in writeable property collection are non-defunct
                 // so calling constructor for non-defunct property
-                this.InnerList.Add(
-                    new ActiveDirectorySchemaProperty(
-                        context,
-                        ldapDisplayName,
-                        (DirectoryEntry?)null,
-                        null
-                    )
-                );
+                this.InnerList
+                    .Add(
+                        new ActiveDirectorySchemaProperty(
+                            context,
+                            ldapDisplayName,
+                            (DirectoryEntry?)null,
+                            null
+                        )
+                    );
             }
         }
 

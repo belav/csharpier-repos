@@ -114,8 +114,7 @@ namespace Microsoft.CodeAnalysis.CommentSelection
                     return true;
                 }
 
-                var document = subjectBuffer
-                    .CurrentSnapshot
+                var document = subjectBuffer.CurrentSnapshot
                     .GetOpenDocumentInCurrentContextWithChanges();
                 if (document == null)
                 {
@@ -174,8 +173,7 @@ namespace Microsoft.CodeAnalysis.CommentSelection
             if (edits.TrackingSpans.Any())
             {
                 // Create tracking spans to track the text changes.
-                var trackingSpans = edits
-                    .TrackingSpans
+                var trackingSpans = edits.TrackingSpans
                     .SelectAsArray(textSpan =>
                         (
                             originalSpan: textSpan,

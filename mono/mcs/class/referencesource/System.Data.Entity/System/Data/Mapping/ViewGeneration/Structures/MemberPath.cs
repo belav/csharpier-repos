@@ -138,8 +138,7 @@ namespace System.Data.Mapping.ViewGeneration.Structures
                 }
                 Facet facet;
                 if (
-                    LeafEdmMember
-                        .TypeUsage
+                    LeafEdmMember.TypeUsage
                         .Facets
                         .TryGetValue(EdmProviderManifest.DefaultValueFacetName, false, out facet)
                 )

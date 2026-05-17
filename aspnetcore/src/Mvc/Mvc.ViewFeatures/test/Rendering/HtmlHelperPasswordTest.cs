@@ -389,11 +389,9 @@ public class HtmlHelperPasswordTest
         // Arrange
         var viewData = GetViewDataWithModelStateAndModelAndViewDataValues();
         viewData.ModelState.SetModelValue("pre.Property3[key]", "Property3Val", "Property3Val");
-        viewData
-            .ModelState
+        viewData.ModelState
             .SetModelValue("pre.Property4.Property5", "Property5Val", "Property5Val");
-        viewData
-            .ModelState
+        viewData.ModelState
             .SetModelValue("pre.Property4.Property6[0]", "Property6Val", "Property6Val");
         viewData["pre.Property3[key]"] = "vdd-value1";
         viewData["pre.Property4.Property5"] = "vdd-value2";
@@ -555,12 +553,10 @@ public class HtmlHelperPasswordTest
         helper.ViewData.TemplateInfo.HtmlFieldPrefix = "pre";
 
         helper.ViewData.ModelState.SetModelValue("pre.Property3[key]", "MProp3Val", "MProp3Val");
-        helper
-            .ViewData
+        helper.ViewData
             .ModelState
             .SetModelValue("pre.Property4.Property5", "MProp5Val", "MProp5Val");
-        helper
-            .ViewData
+        helper.ViewData
             .ModelState
             .SetModelValue("pre.Property4.Property6[0]", "MProp6Val", "MProp6Val");
 

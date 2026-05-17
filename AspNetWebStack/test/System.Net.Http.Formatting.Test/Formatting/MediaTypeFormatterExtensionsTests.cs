@@ -14,8 +14,7 @@ namespace System.Net.Http.Formatting
         [Fact]
         public void TypeIsCorrect()
         {
-            Assert
-                .Type
+            Assert.Type
                 .HasProperties(
                     typeof(MediaTypeFormatterExtensions),
                     TypeAssert.TypeProperties.IsPublicVisibleClass
@@ -77,8 +76,7 @@ namespace System.Net.Http.Formatting
                 true,
                 new MediaTypeHeaderValue("application/xml")
             );
-            IEnumerable<RequestHeaderMapping> mappings = formatter
-                .MediaTypeMappings
+            IEnumerable<RequestHeaderMapping> mappings = formatter.MediaTypeMappings
                 .OfType<RequestHeaderMapping>();
             RequestHeaderMapping mapping = Assert.Single(mappings);
             Assert.Equal("name", mapping.HeaderName);
@@ -117,8 +115,7 @@ namespace System.Net.Http.Formatting
                 true,
                 "application/xml"
             );
-            IEnumerable<RequestHeaderMapping> mappings = formatter
-                .MediaTypeMappings
+            IEnumerable<RequestHeaderMapping> mappings = formatter.MediaTypeMappings
                 .OfType<RequestHeaderMapping>();
             RequestHeaderMapping mapping = Assert.Single(mappings);
             Assert.Equal("name", mapping.HeaderName);

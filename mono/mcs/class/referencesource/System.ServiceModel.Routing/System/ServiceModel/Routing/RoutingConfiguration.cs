@@ -74,8 +74,7 @@ namespace System.ServiceModel.Routing
         {
             if (!this.configured)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(new ConfigurationErrorsException(SR.RoutingTableNotConfigured));
             }
         }

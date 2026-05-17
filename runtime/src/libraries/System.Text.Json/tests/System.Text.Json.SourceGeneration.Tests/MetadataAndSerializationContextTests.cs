@@ -118,8 +118,7 @@ namespace System.Text.Json.SourceGeneration.Tests
             );
             Assert.Null(MetadataAndSerializationContext.Default.String.SerializeHandler);
             Assert.NotNull(
-                MetadataAndSerializationContext
-                    .Default
+                MetadataAndSerializationContext.Default
                     .ValueTupleStringInt32Boolean
                     .SerializeHandler
             );
@@ -160,8 +159,7 @@ namespace System.Text.Json.SourceGeneration.Tests
             );
             Assert.NotNull(MetadataAndSerializationContext.Default.PersonStruct.SerializeHandler);
             Assert.NotNull(
-                MetadataAndSerializationContext
-                    .Default
+                MetadataAndSerializationContext.Default
                     .TypeWithValidationAttributes
                     .SerializeHandler
             );

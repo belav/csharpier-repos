@@ -126,8 +126,7 @@ namespace System.Net.WebSockets
                 if (shouldSendSecWebSocketProtocolHeader)
                 {
                     secWebSocketProtocols.Add(outgoingSecWebSocketProtocolString);
-                    response
-                        .Headers
+                    response.Headers
                         .Add(
                             HttpKnownHeaderNames.SecWebSocketProtocol,
                             outgoingSecWebSocketProtocolString
@@ -141,8 +140,7 @@ namespace System.Net.WebSockets
                 );
 
                 response.Headers.Add(HttpKnownHeaderNames.Connection, HttpKnownHeaderNames.Upgrade);
-                response
-                    .Headers
+                response.Headers
                     .Add(HttpKnownHeaderNames.Upgrade, WebSocketHelpers.WebSocketUpgradeToken);
                 response.Headers.Add(HttpKnownHeaderNames.SecWebSocketAccept, secWebSocketAccept);
 

@@ -37,8 +37,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
             )
             {
                 // the following code requires UI thread:
-                await _threadingContext
-                    .JoinableTaskFactory
+                await _threadingContext.JoinableTaskFactory
                     .SwitchToMainThreadAsync(cancellationToken);
 
                 if (_lazyProvider != null)

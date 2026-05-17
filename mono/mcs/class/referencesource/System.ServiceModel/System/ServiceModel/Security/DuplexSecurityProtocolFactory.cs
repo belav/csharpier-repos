@@ -184,8 +184,7 @@ namespace System.ServiceModel.Security
                 && ReferenceEquals(this.ForwardProtocolFactory, this.ReverseProtocolFactory)
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(
                         "ReverseProtocolFactory",
                         SR.GetString(SR.SameProtocolFactoryCannotBeSetForBothDuplexDirections)
@@ -276,12 +275,8 @@ namespace System.ServiceModel.Security
             {
                 if (this.outgoingProtocol != null)
                 {
-                    return this.outgoingProtocol.BeginSecureOutgoingMessage(
-                        message,
-                        timeout,
-                        callback,
-                        state
-                    );
+                    return this.outgoingProtocol
+                        .BeginSecureOutgoingMessage(message, timeout, callback, state);
                 }
                 else
                 {
@@ -299,13 +294,14 @@ namespace System.ServiceModel.Security
             {
                 if (this.outgoingProtocol != null)
                 {
-                    return this.outgoingProtocol.BeginSecureOutgoingMessage(
-                        message,
-                        timeout,
-                        correlationState,
-                        callback,
-                        state
-                    );
+                    return this.outgoingProtocol
+                        .BeginSecureOutgoingMessage(
+                            message,
+                            timeout,
+                            correlationState,
+                            callback,
+                            state
+                        );
                 }
                 else
                 {
@@ -338,11 +334,8 @@ namespace System.ServiceModel.Security
             {
                 if (this.outgoingProtocol != null)
                 {
-                    this.outgoingProtocol.EndSecureOutgoingMessage(
-                        result,
-                        out message,
-                        out newCorrelationState
-                    );
+                    this.outgoingProtocol
+                        .EndSecureOutgoingMessage(result, out message, out newCorrelationState);
                 }
                 else
                 {
@@ -369,11 +362,8 @@ namespace System.ServiceModel.Security
             {
                 if (this.outgoingProtocol != null)
                 {
-                    return this.outgoingProtocol.SecureOutgoingMessage(
-                        ref message,
-                        timeout,
-                        correlationState
-                    );
+                    return this.outgoingProtocol
+                        .SecureOutgoingMessage(ref message, timeout, correlationState);
                 }
                 else
                 {
@@ -397,11 +387,8 @@ namespace System.ServiceModel.Security
             {
                 if (this.incomingProtocol != null)
                 {
-                    return this.incomingProtocol.VerifyIncomingMessage(
-                        ref message,
-                        timeout,
-                        correlationStates
-                    );
+                    return this.incomingProtocol
+                        .VerifyIncomingMessage(ref message, timeout, correlationStates);
                 }
                 else
                 {

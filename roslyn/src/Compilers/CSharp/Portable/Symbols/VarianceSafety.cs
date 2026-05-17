@@ -201,8 +201,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             if (member.IsStatic && !member.IsAbstract && !member.IsVirtual)
             {
-                return MessageID
-                        .IDS_FeatureVarianceSafetyForStaticInterfaceMembers
+                return MessageID.IDS_FeatureVarianceSafetyForStaticInterfaceMembers
                         .RequiredVersion() <= member.DeclaringCompilation.LanguageVersion;
             }
 
@@ -588,8 +587,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     actualVariance.Localize(),
                     expectedVariance.Localize(),
                     new CSharpRequiredLanguageVersion(
-                        MessageID
-                            .IDS_FeatureVarianceSafetyForStaticInterfaceMembers
+                        MessageID.IDS_FeatureVarianceSafetyForStaticInterfaceMembers
                             .RequiredVersion()
                     )
                 );

@@ -354,8 +354,7 @@ public class ChangeDetector : IChangeDetector
                 _logger.ForeignKeyChangeDetected(entry, property, snapshotValue, currentValue);
             }
 
-            entry
-                .StateManager
+            entry.StateManager
                 .InternalEntityEntryNotifier
                 .KeyPropertyChanged(
                     entry,
@@ -445,8 +444,7 @@ public class ChangeDetector : IChangeDetector
                     }
                 }
 
-                stateManager
-                    .InternalEntityEntryNotifier
+                stateManager.InternalEntityEntryNotifier
                     .NavigationCollectionChanged(entry, navigationBase, added, removed);
 
                 return true;
@@ -477,8 +475,7 @@ public class ChangeDetector : IChangeDetector
                 _logger.ReferenceChangeDetected(entry, navigation, snapshotValue, currentValue);
             }
 
-            stateManager
-                .InternalEntityEntryNotifier
+            stateManager.InternalEntityEntryNotifier
                 .NavigationReferenceChanged(entry, navigation, snapshotValue, currentValue);
 
             return true;

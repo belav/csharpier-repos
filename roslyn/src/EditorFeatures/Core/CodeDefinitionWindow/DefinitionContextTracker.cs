@@ -93,8 +93,7 @@ internal class DefinitionContextTracker(
 
         if (
             reason == ConnectionReason.TextViewLifetime
-            || !textView
-                .BufferGraph
+            || !textView.BufferGraph
                 .GetTextBuffers(b => b.ContentType.IsOfType(ContentTypeNames.RoslynContentType))
                 .Any()
         )
@@ -121,8 +120,7 @@ internal class DefinitionContextTracker(
         _currentUpdateCancellationToken?.Cancel();
 
         // See if we moved somewhere else in a projection that we care about
-        var pointInRoslynSnapshot = caretPosition
-            .Point
+        var pointInRoslynSnapshot = caretPosition.Point
             .GetPoint(
                 tb => tb.ContentType.IsOfType(ContentTypeNames.RoslynContentType),
                 caretPosition.Affinity
@@ -201,12 +199,10 @@ internal class DefinitionContextTracker(
             .ConfigureAwait(false);
         if (navigableItems.Length > 0)
         {
-            var navigationService = workspace
-                .Services
+            var navigationService = workspace.Services
                 .GetRequiredService<IDocumentNavigationService>();
 
-            using var _ = PooledObjects
-                .ArrayBuilder<CodeDefinitionWindowLocation>
+            using var _ = PooledObjects.ArrayBuilder<CodeDefinitionWindowLocation>
                 .GetInstance(navigableItems.Length, out var builder);
             foreach (var item in navigableItems)
             {
@@ -254,8 +250,7 @@ internal class DefinitionContextTracker(
             return ImmutableArray<CodeDefinitionWindowLocation>.Empty;
         }
 
-        var symbolNavigationService = workspace
-            .Services
+        var symbolNavigationService = workspace.Services
             .GetRequiredService<ISymbolNavigationService>();
         var definitionItem = symbol.ToNonClassifiedDefinitionItem(
             document.Project.Solution,

@@ -89,8 +89,7 @@ namespace System.Workflow.ComponentModel
                     {
                         // release locks
                         context.ReleaseLocks(false);
-                        context
-                            .Activity
+                        context.Activity
                             .UnregisterForStatusChange(
                                 Activity.LockCountOnStatusChangeChangedEvent,
                                 this
@@ -105,8 +104,7 @@ namespace System.Workflow.ComponentModel
                         // 1st param is for transactional, means if the release lock on status change will try to persist the workflow instace
                         // if that fails, then locks will be reacquired, otherwise they will be released.
                         context.ReleaseLocks(true);
-                        context
-                            .Activity
+                        context.Activity
                             .UnregisterForStatusChange(
                                 Activity.LockCountOnStatusChangeChangedEvent,
                                 this
@@ -117,8 +115,7 @@ namespace System.Workflow.ComponentModel
                     catch
                     {
                         // re-subscribe
-                        context
-                            .Activity
+                        context.Activity
                             .RegisterForStatusChange(
                                 Activity.LockCountOnStatusChangeChangedEvent,
                                 this
@@ -143,8 +140,7 @@ namespace System.Workflow.ComponentModel
             StateRevertedEventArgs args = e as StateRevertedEventArgs;
 
             // stash exception
-            context
-                .Activity
+            context.Activity
                 .SetValueCommon(
                     ActivityExecutionContext.CurrentExceptionProperty,
                     args.Exception,
@@ -154,8 +150,7 @@ namespace System.Workflow.ComponentModel
 
             // cancel the activity
             context.ReleaseLocks(false);
-            context
-                .Activity
+            context.Activity
                 .UnregisterForStatusChange(Activity.LockCountOnStatusChangeChangedEvent, this);
             context.Activity.ReleaseLockOnStatusChange(this);
         }

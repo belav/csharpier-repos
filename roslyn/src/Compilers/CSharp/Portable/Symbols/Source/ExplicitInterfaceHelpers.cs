@@ -366,8 +366,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 }
 
                 if (
-                    MemberSignatureComparer
-                        .ExplicitImplementationComparer
+                    MemberSignatureComparer.ExplicitImplementationComparer
                         .Equals(implementingMember, interfaceMember)
                 )
                 {
@@ -526,8 +525,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             if (
                 implementedMember.IsStatic
-                && !implementingMember
-                    .ContainingAssembly
+                && !implementingMember.ContainingAssembly
                     .RuntimeSupportsStaticAbstractMembersInInterfaces
             )
             {
@@ -571,8 +569,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     // because that is enough to distinguish them in the runtime.
                     if (
                         !explicitInterfaceTypeIsDefinition
-                        && MemberSignatureComparer
-                            .RuntimeSignatureComparer
+                        && MemberSignatureComparer.RuntimeSignatureComparer
                             .Equals(implementedMember, collisionCandidateMember)
                     )
                     {
@@ -617,8 +614,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     else
                     {
                         if (
-                            MemberSignatureComparer
-                                .ExplicitImplementationComparer
+                            MemberSignatureComparer.ExplicitImplementationComparer
                                 .Equals(implementedMember, collisionCandidateMember)
                         )
                         {

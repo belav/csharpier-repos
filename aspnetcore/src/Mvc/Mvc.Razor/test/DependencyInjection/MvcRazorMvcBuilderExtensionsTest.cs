@@ -42,8 +42,7 @@ public class MvcRazorMvcBuilderExtensionsTest
         var services = new ServiceCollection();
 
         var manager = new ApplicationPartManager();
-        manager
-            .ApplicationParts
+        manager.ApplicationParts
             .Add(new TestApplicationPart(typeof(TestTagHelperOne), typeof(TestTagHelperTwo)));
 
         manager.FeatureProviders.Add(new TagHelperFeatureProvider());

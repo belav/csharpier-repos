@@ -13,8 +13,7 @@ namespace Internal.TypeSystem
 
         public override int GetHashCode()
         {
-            return Internal
-                .NativeFormat
+            return Internal.NativeFormat
                 .TypeHashingAlgorithms
                 .ComputeByrefTypeHashCode(this.ParameterType.GetHashCode());
         }

@@ -425,8 +425,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                 // Call Back Paint event
                 if (!selection)
                 {
-                    common
-                        .Chart
+                    common.Chart
                         .CallOnPrePaint(
                             new ChartPaintEventArgs(ser, graph, common, area.PlotAreaPosition)
                         );
@@ -616,8 +615,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                         }
 
                         if (point.MarkerImage.Length > 0)
-                            common
-                                .ImageLoader
+                            common.ImageLoader
                                 .GetAdjustedImageSize(
                                     point.MarkerImage,
                                     graph.Graphics,
@@ -674,8 +672,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                                     circCoord[1] = markerPosition.Y;
                                     circCoord[2] = relativeMarkerSize.Width / 2f;
 
-                                    common
-                                        .HotRegionsList
+                                    common.HotRegionsList
                                         .AddHotRegion(
                                             insertIndex,
                                             graph,
@@ -690,8 +687,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                                 // All other markers represented as rectangles
                                 else
                                 {
-                                    common
-                                        .HotRegionsList
+                                    common.HotRegionsList
                                         .AddHotRegion(
                                             new RectangleF(
                                                 markerPosition.X - relativeMarkerSize.Width / 2f,
@@ -733,8 +729,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                 // Call Paint event
                 if (!selection)
                 {
-                    common
-                        .Chart
+                    common.Chart
                         .CallOnPostPaint(
                             new ChartPaintEventArgs(ser, graph, common, area.PlotAreaPosition)
                         );
@@ -1173,8 +1168,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                             }
 
                             if (point.MarkerImage.Length > 0)
-                                common
-                                    .ImageLoader
+                                common.ImageLoader
                                     .GetAdjustedImageSize(
                                         point.MarkerImage,
                                         graph.Graphics,
@@ -1193,18 +1187,19 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                             );
 
                             // Adjust label position using SmartLabelStyle algorithm
-                            position = area.smartLabels.AdjustSmartLabelPosition(
-                                common,
-                                graph,
-                                area,
-                                ser.SmartLabelStyle,
-                                position,
-                                sizeFont,
-                                format,
-                                position,
-                                markerSize,
-                                LabelAlignmentStyles.Top
-                            );
+                            position = area.smartLabels
+                                .AdjustSmartLabelPosition(
+                                    common,
+                                    graph,
+                                    area,
+                                    ser.SmartLabelStyle,
+                                    position,
+                                    sizeFont,
+                                    format,
+                                    position,
+                                    markerSize,
+                                    LabelAlignmentStyles.Top
+                                );
 
                             // Smart labels always use 0 degrees text angle
                             textAngle = 0;
@@ -1352,8 +1347,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                 // Call Back Paint event
                 if (!selection)
                 {
-                    common
-                        .Chart
+                    common.Chart
                         .CallOnPrePaint(
                             new ChartPaintEventArgs(ser, graph, common, area.PlotAreaPosition)
                         );
@@ -1601,8 +1595,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                         }
 
                         if (point.MarkerImage.Length > 0)
-                            common
-                                .ImageLoader
+                            common.ImageLoader
                                 .GetAdjustedImageSize(
                                     point.MarkerImage,
                                     graph.Graphics,
@@ -1659,8 +1652,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                                     circCoord[1] = markerPosition.Y;
                                     circCoord[2] = relativeMarkerSize.Width / 2f;
 
-                                    common
-                                        .HotRegionsList
+                                    common.HotRegionsList
                                         .AddHotRegion(
                                             insertIndex,
                                             graph,
@@ -1675,8 +1667,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                                 // All other markers represented as rectangles
                                 else
                                 {
-                                    common
-                                        .HotRegionsList
+                                    common.HotRegionsList
                                         .AddHotRegion(
                                             new RectangleF(
                                                 markerPosition.X - relativeMarkerSize.Width / 2f,
@@ -1705,8 +1696,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                 // Call Paint event
                 if (!selection)
                 {
-                    common
-                        .Chart
+                    common.Chart
                         .CallOnPostPaint(
                             new ChartPaintEventArgs(ser, graph, common, area.PlotAreaPosition)
                         );
@@ -2206,8 +2196,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
 
                 if (point.MarkerImage.Length > 0)
                     if (common.graph != null)
-                        common
-                            .ImageLoader
+                        common.ImageLoader
                             .GetAdjustedImageSize(
                                 point.MarkerImage,
                                 common.graph.Graphics,

@@ -748,8 +748,7 @@ namespace System.Web.UI.Design.MobileControls
             Debug.Assert(choice != null);
 
             return choice.Xmlns != null
-                && choice
-                    .Xmlns
+                && choice.Xmlns
                     .ToLower(CultureInfo.InvariantCulture)
                     .IndexOf(_htmlString, StringComparison.Ordinal) != -1;
         }
@@ -1076,8 +1075,7 @@ namespace System.Web.UI.Design.MobileControls
                 Debug.Assert(_control is DeviceSpecific);
 
                 // Clear the choices if it is a DeviceSpecific control.
-                ((DeviceSpecific)_control)
-                    .Choices
+                ((DeviceSpecific)_control).Choices
                     .Clear();
             }
 

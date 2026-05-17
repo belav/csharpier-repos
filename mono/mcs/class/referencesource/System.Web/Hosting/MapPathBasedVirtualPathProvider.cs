@@ -121,8 +121,7 @@ namespace System.Web.Hosting
             {
                 dep = new CacheDependency(existingDir);
                 TimeSpan slidingExp = CachedPathData.UrlMetadataSlidingExpiration;
-                HttpRuntime
-                    .Cache
+                HttpRuntime.Cache
                     .InternalCache
                     .Insert(
                         cacheKey,

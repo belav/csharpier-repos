@@ -21,8 +21,7 @@ namespace System.ServiceModel.Dispatcher
         {
             if (outgoingContentType == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("outgoingContentType");
             }
             if (innerFormatter == null)
@@ -44,11 +43,8 @@ namespace System.ServiceModel.Dispatcher
             object result
         )
         {
-            Message message = this.innerFormatter.SerializeReply(
-                messageVersion,
-                parameters,
-                result
-            );
+            Message message = this.innerFormatter
+                .SerializeReply(messageVersion, parameters, result);
             if (message != null)
             {
                 AddResponseContentTypeProperty(message, this.outgoingContentType);

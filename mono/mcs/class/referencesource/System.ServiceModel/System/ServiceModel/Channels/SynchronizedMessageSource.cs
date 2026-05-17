@@ -38,8 +38,7 @@ namespace System.ServiceModel.Channels
             TimeoutHelper timeoutHelper = new TimeoutHelper(timeout);
             if (!this.sourceLock.TryEnter(timeoutHelper.RemainingTime()))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new TimeoutException(
                             SR.GetString(SR.WaitForMessageTimedOut, timeout),
@@ -73,8 +72,7 @@ namespace System.ServiceModel.Channels
             TimeoutHelper timeoutHelper = new TimeoutHelper(timeout);
             if (!this.sourceLock.TryEnter(timeoutHelper.RemainingTime()))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new TimeoutException(
                             SR.GetString(SR.ReceiveTimedOut2, timeout),
@@ -113,8 +111,7 @@ namespace System.ServiceModel.Channels
                 this.timeoutHelper = new TimeoutHelper(timeout);
 
                 if (
-                    !syncSource
-                        .sourceLock
+                    !syncSource.sourceLock
                         .EnterAsync(this.timeoutHelper.RemainingTime(), onEnterComplete, this)
                 )
                 {

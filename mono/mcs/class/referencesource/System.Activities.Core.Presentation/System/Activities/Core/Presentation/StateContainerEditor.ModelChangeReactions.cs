@@ -124,8 +124,7 @@ namespace System.Activities.Core.Presentation
 
         static bool ShouldSuppressAddingConnectorsWhenAddingStateVisuals(EditingScope scope)
         {
-            return scope
-                .Changes
+            return scope.Changes
                 .Any<Change>(
                     (p) =>
                     {
@@ -137,8 +136,7 @@ namespace System.Activities.Core.Presentation
 
         static bool IsTransitionReordering(EditingScope scope)
         {
-            return scope
-                .Changes
+            return scope.Changes
                 .Any<Change>(
                     (p) =>
                     {
@@ -191,16 +189,17 @@ namespace System.Activities.Core.Presentation
 
                         if (propertyChange.NewValue != null)
                         {
-                            this.Dispatcher.BeginInvoke(
-                                DispatcherPriority.Loaded,
-                                new Action(() =>
-                                {
-                                    if (this.populated)
+                            this.Dispatcher
+                                .BeginInvoke(
+                                    DispatcherPriority.Loaded,
+                                    new Action(() =>
                                     {
-                                        this.AddTransitionVisual(propertyChange.Owner);
-                                    }
-                                })
-                            );
+                                        if (this.populated)
+                                        {
+                                            this.AddTransitionVisual(propertyChange.Owner);
+                                        }
+                                    })
+                                );
                         }
                     }
                 }
@@ -211,27 +210,28 @@ namespace System.Activities.Core.Presentation
                 if (this.transitionModelItemsAdded.Count > 0)
                 {
                     // We need to wait until after the state visuals are updated
-                    this.Dispatcher.BeginInvoke(
-                        DispatcherPriority.Loaded,
-                        new Action(() =>
-                        {
-                            if (this.populated)
+                    this.Dispatcher
+                        .BeginInvoke(
+                            DispatcherPriority.Loaded,
+                            new Action(() =>
                             {
-                                foreach (ModelItem transition in this.transitionModelItemsAdded)
+                                if (this.populated)
                                 {
-                                    if (
-                                        transition
-                                            .Properties[TransitionDesigner.ToPropertyName]
-                                            .Value != null
-                                    )
+                                    foreach (ModelItem transition in this.transitionModelItemsAdded)
                                     {
-                                        this.AddTransitionVisual(transition);
+                                        if (
+                                            transition
+                                                .Properties[TransitionDesigner.ToPropertyName]
+                                                .Value != null
+                                        )
+                                        {
+                                            this.AddTransitionVisual(transition);
+                                        }
                                     }
                                 }
-                            }
-                            this.transitionModelItemsAdded.Clear();
-                        })
-                    );
+                                this.transitionModelItemsAdded.Clear();
+                            })
+                        );
                 }
 
                 if (this.transitionModelItemsRemoved.Count > 0)
@@ -268,16 +268,19 @@ namespace System.Activities.Core.Presentation
                 if (initialStateModelItem != null)
                 {
                     // We need to wait until after the state visuals are updated
-                    this.Dispatcher.BeginInvoke(
-                        DispatcherPriority.Loaded,
-                        new Action(() =>
-                        {
-                            if (this.populated)
+                    this.Dispatcher
+                        .BeginInvoke(
+                            DispatcherPriority.Loaded,
+                            new Action(() =>
                             {
-                                this.AddInitialNodeConnector(GetStateView(initialStateModelItem));
-                            }
-                        })
-                    );
+                                if (this.populated)
+                                {
+                                    this.AddInitialNodeConnector(
+                                        GetStateView(initialStateModelItem)
+                                    );
+                                }
+                            })
+                        );
                 }
                 this.initialStateChanged = false;
             }
@@ -307,10 +310,8 @@ namespace System.Activities.Core.Presentation
                                 ? DefaultWidthForState
                                 : DefaultWidthForStateMachine
                         );
-                        object widthViewState = this.ViewStateService.RetrieveViewState(
-                            this.ModelItem,
-                            StateContainerWidthViewStateKey
-                        );
+                        object widthViewState = this.ViewStateService
+                            .RetrieveViewState(this.ModelItem, StateContainerWidthViewStateKey);
                         this.StateContainerWidth =
                             (widthViewState != null) ? (double)widthViewState : defaultWidth;
                     }
@@ -327,10 +328,8 @@ namespace System.Activities.Core.Presentation
                                 ? DefaultHeightForState
                                 : DefaultHeightForStateMachine
                         );
-                        object heightViewState = this.ViewStateService.RetrieveViewState(
-                            this.ModelItem,
-                            StateContainerHeightViewStateKey
-                        );
+                        object heightViewState = this.ViewStateService
+                            .RetrieveViewState(this.ModelItem, StateContainerHeightViewStateKey);
                         this.StateContainerHeight =
                             (heightViewState != null) ? (double)heightViewState : defaultHeight;
                     }

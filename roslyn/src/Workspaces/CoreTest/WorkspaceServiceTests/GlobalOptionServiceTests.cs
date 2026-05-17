@@ -143,8 +143,7 @@ namespace Microsoft.CodeAnalysis.UnitTests.WorkspaceServices
 
             // Update global option directly (after the value is cached in the above current solution snapshots).
             // Doing so does NOT update current solutions.
-            optionService
-                .GlobalOptions
+            optionService.GlobalOptions
                 .SetGlobalOption(FormattingOptions2.NewLine, "lang", "NEW_LINE");
 
             Assert.Equal(
@@ -177,8 +176,7 @@ namespace Microsoft.CodeAnalysis.UnitTests.WorkspaceServices
             );
 
             // Set the option directly again and trigger workspace update:
-            optionService
-                .GlobalOptions
+            optionService.GlobalOptions
                 .SetGlobalOption(FormattingOptions2.NewLine, "lang", "NEW_LINE2");
 
             Assert.Equal(

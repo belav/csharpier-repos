@@ -14,15 +14,13 @@ namespace Internal.TypeSystem.Interop
 
         public static MetadataType GetSafeHandle(TypeSystemContext context)
         {
-            return context
-                .SystemModule
+            return context.SystemModule
                 .GetKnownType("System.Runtime.InteropServices", "SafeHandle");
         }
 
         public static MetadataType GetCriticalHandle(TypeSystemContext context)
         {
-            return context
-                .SystemModule
+            return context.SystemModule
                 .GetKnownType("System.Runtime.InteropServices", "CriticalHandle");
         }
 
@@ -33,8 +31,7 @@ namespace Internal.TypeSystem.Interop
 
         public static MetadataType GetPInvokeMarshal(TypeSystemContext context)
         {
-            return context
-                .SystemModule
+            return context.SystemModule
                 .GetKnownType("System.Runtime.InteropServices", "PInvokeMarshal");
         }
 
@@ -45,29 +42,25 @@ namespace Internal.TypeSystem.Interop
 
         public static MetadataType GetMemoryMarshal(TypeSystemContext context)
         {
-            return context
-                .SystemModule
+            return context.SystemModule
                 .GetKnownType("System.Runtime.InteropServices", "MemoryMarshal");
         }
 
         public static MetadataType GetNativeFunctionPointerWrapper(TypeSystemContext context)
         {
-            return context
-                .SystemModule
+            return context.SystemModule
                 .GetKnownType("System.Runtime.InteropServices", "NativeFunctionPointerWrapper");
         }
 
         public static MetadataType GetMarshalDirectiveException(TypeSystemContext context)
         {
-            return context
-                .SystemModule
+            return context.SystemModule
                 .GetKnownType("System.Runtime.InteropServices", "MarshalDirectiveException");
         }
 
         public static MetadataType GetVariant(TypeSystemContext context)
         {
-            return context
-                .SystemModule
+            return context.SystemModule
                 .GetKnownType("System.Runtime.InteropServices.Marshalling", "ComVariant");
         }
 

@@ -157,9 +157,8 @@ namespace Microsoft.CodeAnalysis.QualifyMemberAccess
 
             var symbolKind = operation switch
             {
-                IMemberReferenceOperation memberReferenceOperation => memberReferenceOperation
-                    .Member
-                    .Kind,
+                IMemberReferenceOperation memberReferenceOperation =>
+                    memberReferenceOperation.Member.Kind,
                 IInvocationOperation invocationOperation => invocationOperation.TargetMethod.Kind,
                 _ => throw ExceptionUtilities.UnexpectedValue(operation),
             };

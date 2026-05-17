@@ -286,8 +286,7 @@ namespace System.Security.Cryptography.X509Certificates.Tests
 
                 using (ImportedCollection toClean = new ImportedCollection(cuMy.Certificates))
                 {
-                    X509Certificate2Collection matches = toClean
-                        .Collection
+                    X509Certificate2Collection matches = toClean.Collection
                         .Find(X509FindType.FindBySubjectName, commonName, validOnly: false);
 
                     Assert.Equal(1, matches.Count);
@@ -300,8 +299,7 @@ namespace System.Security.Cryptography.X509Certificates.Tests
 
                 using (ImportedCollection toClean = new ImportedCollection(cuMy.Certificates))
                 {
-                    X509Certificate2Collection matches = toClean
-                        .Collection
+                    X509Certificate2Collection matches = toClean.Collection
                         .Find(X509FindType.FindBySubjectName, commonName, validOnly: false);
 
                     Assert.Equal(1, matches.Count);

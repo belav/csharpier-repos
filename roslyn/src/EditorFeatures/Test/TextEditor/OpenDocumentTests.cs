@@ -70,8 +70,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.TextEditor
             var originalSnapshot = buffer.CurrentSnapshot;
             buffer.Insert(5, ", World!");
 
-            var newDocumentWithChanges = buffer
-                .CurrentSnapshot
+            var newDocumentWithChanges = buffer.CurrentSnapshot
                 .GetOpenDocumentInCurrentContextWithChanges();
 
             // Since we're calling this on the current snapshot and we observed the text edit synchronously,

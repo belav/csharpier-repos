@@ -306,8 +306,7 @@ internal static partial class Interop
                     && sslAuthenticationOptions.ApplicationProtocols.Count != 0
                 )
                 {
-                    Interop
-                        .Ssl
+                    Interop.Ssl
                         .SslCtxSetAlpnSelectCb(sslCtx, &AlpnServerSelectCallback, IntPtr.Zero);
                 }
 
@@ -459,8 +458,7 @@ internal static partial class Interop
             {
                 if (sslAuthenticationOptions.IsServer)
                 {
-                    sslAuthenticationOptions
-                        .CertificateContext!
+                    sslAuthenticationOptions.CertificateContext!
                         .SslContexts!
                         .TryGetValue(
                             protocols | (hasAlpn ? FakeAlpnSslProtocol : SslProtocols.None),
@@ -485,8 +483,7 @@ internal static partial class Interop
                 if (cacheSslContext)
                 {
                     bool added = sslAuthenticationOptions.IsServer
-                        ? sslAuthenticationOptions
-                            .CertificateContext!
+                        ? sslAuthenticationOptions.CertificateContext!
                             .SslContexts!
                             .TryAdd(protocols | (SslProtocols)(hasAlpn ? 1 : 0), newCtxHandle)
                         : s_clientSslContexts.TryAdd(protocols, newCtxHandle);
@@ -526,8 +523,7 @@ internal static partial class Interop
                     else
                     {
                         if (
-                            Interop
-                                .Ssl
+                            Interop.Ssl
                                 .SslSetAlpnProtos(
                                     sslHandle,
                                     sslAuthenticationOptions.ApplicationProtocols
@@ -597,8 +593,7 @@ internal static partial class Interop
                             == true
                         )
                         {
-                            SslCertificateTrust trust = sslAuthenticationOptions
-                                .CertificateContext!
+                            SslCertificateTrust trust = sslAuthenticationOptions.CertificateContext!
                                 .Trust!;
                             X509Certificate2Collection certList = (
                                 trust._trustList ?? trust._store!.Certificates
@@ -624,8 +619,7 @@ internal static partial class Interop
                             }
                         }
 
-                        byte[]? ocspResponse = sslAuthenticationOptions
-                            .CertificateContext
+                        byte[]? ocspResponse = sslAuthenticationOptions.CertificateContext
                             .GetOcspResponseNoWaiting();
 
                         if (ocspResponse != null)

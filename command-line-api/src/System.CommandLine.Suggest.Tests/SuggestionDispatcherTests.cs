@@ -171,8 +171,7 @@ namespace System.CommandLine.Suggest.Tests
 
             await dispatcher.InvokeAsync(new[] { "list" });
 
-            dispatcher
-                .Configuration
+            dispatcher.Configuration
                 .Output
                 .ToString()
                 .Should()

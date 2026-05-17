@@ -38,15 +38,13 @@ public class UseEndpointRoutingStartup
                 "/",
                 (httpContext) =>
                 {
-                    var dataSource = httpContext
-                        .RequestServices
+                    var dataSource = httpContext.RequestServices
                         .GetRequiredService<EndpointDataSource>();
 
                     var sb = new StringBuilder();
                     sb.AppendLine("Endpoints:");
                     foreach (
-                        var endpoint in dataSource
-                            .Endpoints
+                        var endpoint in dataSource.Endpoints
                             .OfType<RouteEndpoint>()
                             .OrderBy(e => e.RoutePattern.RawText, StringComparer.OrdinalIgnoreCase)
                     )
@@ -80,8 +78,7 @@ public class UseEndpointRoutingStartup
                     (httpContext) =>
                     {
                         var endpoint = httpContext.GetEndpoint();
-                        return httpContext
-                            .Response
+                        return httpContext.Response
                             .WriteAsync(
                                 (endpoint.Metadata.GetMetadata<CustomMetadata>() != null)
                                     ? "Has metadata"
@@ -118,8 +115,7 @@ public class UseEndpointRoutingStartup
                     "/WithSingleAsteriskCatchAll/{*path}",
                     (httpContext) =>
                     {
-                        var linkGenerator = httpContext
-                            .RequestServices
+                        var linkGenerator = httpContext.RequestServices
                             .GetRequiredService<LinkGenerator>();
 
                         var response = httpContext.Response;
@@ -141,8 +137,7 @@ public class UseEndpointRoutingStartup
                     "/WithDoubleAsteriskCatchAll/{**path}",
                     (httpContext) =>
                     {
-                        var linkGenerator = httpContext
-                            .RequestServices
+                        var linkGenerator = httpContext.RequestServices
                             .GetRequiredService<LinkGenerator>();
 
                         var response = httpContext.Response;
@@ -208,8 +203,7 @@ public class UseEndpointRoutingStartup
             endpoints.MapGet(
                 "api/get/{id}",
                 (context) =>
-                    context
-                        .Response
+                    context.Response
                         .WriteAsync($"{name} - API Get {context.Request.RouteValues["id"]}")
             );
         });

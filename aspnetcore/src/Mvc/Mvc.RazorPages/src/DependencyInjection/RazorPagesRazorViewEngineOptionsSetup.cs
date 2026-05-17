@@ -69,8 +69,7 @@ internal sealed class RazorPagesRazorViewEngineOptionsSetup
         options.AreaPageViewLocationFormats.Add(areaViewsSharedSearchPath);
 
         options.AreaPageViewLocationFormats.Add(pagesSharedDirectory);
-        options
-            .AreaPageViewLocationFormats
+        options.AreaPageViewLocationFormats
             .Add("/Views/Shared/{0}" + RazorViewEngine.ViewExtension);
 
         options.ViewLocationFormats.Add(pagesSharedDirectory);

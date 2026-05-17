@@ -140,8 +140,7 @@ namespace Microsoft.CodeAnalysis.CSharp.IntroduceVariable
 
             // Generate the names for the locals.  For Tuples that have user provided names, keep that name.
             // Otherwise, generate a reasonable local name for the type of the field, using our helpers.
-            var localTypesAndDesignations = tupleType
-                .TupleElements
+            var localTypesAndDesignations = tupleType.TupleElements
                 .SelectAsArray(
                     (field, index, _) =>
                     {
@@ -211,8 +210,7 @@ namespace Microsoft.CodeAnalysis.CSharp.IntroduceVariable
                     var varPreference = simplifierOptions.GetUseVarPreference();
 
                     // If the user likes 'var' for intrinsics, and all the elements would be intrinsic.  Then use
-                    var isIntrinsic = tupleType
-                        .TupleElements
+                    var isIntrinsic = tupleType.TupleElements
                         .All(f => f.Type?.SpecialType != SpecialType.None);
                     if (isIntrinsic)
                         return varPreference.HasFlag(UseVarPreference.ForBuiltInTypes);

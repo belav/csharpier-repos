@@ -95,8 +95,7 @@ public static class Certificates
 
             if (eku != null)
             {
-                request
-                    .CertificateExtensions
+                request.CertificateExtensions
                     .Add(
                         new X509EnhancedKeyUsageExtension(
                             new OidCollection { new Oid(eku, null) },

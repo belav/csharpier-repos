@@ -59,8 +59,7 @@ namespace Microsoft.CodeAnalysis.Interactive
                                                 completion,
                                                 displayTextSuffix: "",
                                                 CompletionItemRules.Default,
-                                                description: command
-                                                    .Description
+                                                description: command.Description
                                                     .ToSymbolDisplayParts(),
                                                 glyph: Glyph.Intrinsic
                                             )

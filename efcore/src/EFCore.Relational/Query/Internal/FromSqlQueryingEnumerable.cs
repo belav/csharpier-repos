@@ -209,8 +209,7 @@ public class FromSqlQueryingEnumerable<T>
                 {
                     if (_dataReader == null)
                     {
-                        _relationalQueryContext
-                            .ExecutionStrategy
+                        _relationalQueryContext.ExecutionStrategy
                             .Execute(this, (_, enumerator) => InitializeReader(enumerator), null);
                     }
 
@@ -246,9 +245,9 @@ public class FromSqlQueryingEnumerable<T>
         {
             EntityFrameworkEventSource.Log.QueryExecuting();
 
-            var relationalCommand = enumerator._relationalCommand = enumerator
-                ._relationalCommandCache
-                .RentAndPopulateRelationalCommand(enumerator._relationalQueryContext);
+            var relationalCommand = enumerator._relationalCommand =
+                enumerator._relationalCommandCache
+                    .RentAndPopulateRelationalCommand(enumerator._relationalQueryContext);
 
             enumerator._dataReader = relationalCommand.ExecuteReader(
                 new RelationalCommandParameterObject(
@@ -267,8 +266,7 @@ public class FromSqlQueryingEnumerable<T>
                 enumerator._dataReader.DbDataReader
             );
 
-            enumerator
-                ._relationalQueryContext
+            enumerator._relationalQueryContext
                 .InitializeStateManager(enumerator._standAloneStateManager);
 
             return false;
@@ -337,8 +335,7 @@ public class FromSqlQueryingEnumerable<T>
                 {
                     if (_dataReader == null)
                     {
-                        await _relationalQueryContext
-                            .ExecutionStrategy
+                        await _relationalQueryContext.ExecutionStrategy
                             .ExecuteAsync(
                                 this,
                                 (_, enumerator, cancellationToken) =>
@@ -391,9 +388,9 @@ public class FromSqlQueryingEnumerable<T>
         {
             EntityFrameworkEventSource.Log.QueryExecuting();
 
-            var relationalCommand = enumerator._relationalCommand = enumerator
-                ._relationalCommandCache
-                .RentAndPopulateRelationalCommand(enumerator._relationalQueryContext);
+            var relationalCommand = enumerator._relationalCommand =
+                enumerator._relationalCommandCache
+                    .RentAndPopulateRelationalCommand(enumerator._relationalQueryContext);
 
             enumerator._dataReader = await relationalCommand
                 .ExecuteReaderAsync(
@@ -415,8 +412,7 @@ public class FromSqlQueryingEnumerable<T>
                 enumerator._dataReader.DbDataReader
             );
 
-            enumerator
-                ._relationalQueryContext
+            enumerator._relationalQueryContext
                 .InitializeStateManager(enumerator._standAloneStateManager);
 
             return false;

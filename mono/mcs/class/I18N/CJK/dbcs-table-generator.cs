@@ -34,8 +34,7 @@ public class DbcsTableGenerator
 
         if (args.Length < 3)
         {
-            Console
-                .Error
+            Console.Error
                 .WriteLine(
                     @"
 usage1: dbcs-table-generator.exe BIG5
@@ -63,8 +62,7 @@ len: optional. length of array. BIG5: 43"
         {
             native_count = int.Parse(args[3], NumberStyles.HexNumber) << 8;
             native_max = native_min + native_count;
-            Console
-                .Error
+            Console.Error
                 .WriteLine("adjusted as count = {0:X04} max = {1:X04}", native_count, native_max);
         }
 

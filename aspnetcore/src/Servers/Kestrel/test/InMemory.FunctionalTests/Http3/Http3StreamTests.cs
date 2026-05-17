@@ -260,8 +260,7 @@ public class Http3StreamTests : Http3TestBase
             {
                 context.Response.Headers["path"] = context.Request.Path.Value;
                 context.Response.Headers["query"] = context.Request.QueryString.Value;
-                context.Response.Headers["rawtarget"] = context
-                    .Features
+                context.Response.Headers["rawtarget"] = context.Features
                     .Get<IHttpRequestFeature>()
                     .RawTarget;
                 return Task.CompletedTask;
@@ -744,8 +743,7 @@ public class Http3StreamTests : Http3TestBase
                 var total = read;
                 while (read > 0)
                 {
-                    read = await context
-                        .Request
+                    read = await context.Request
                         .Body
                         .ReadAsync(buffer, total, buffer.Length - total);
                     total += read;
@@ -784,8 +782,7 @@ public class Http3StreamTests : Http3TestBase
                 var readResult = await context.Request.BodyReader.ReadAsync();
                 while (!readResult.IsCompleted)
                 {
-                    context
-                        .Request
+                    context.Request
                         .BodyReader
                         .AdvanceTo(readResult.Buffer.Start, readResult.Buffer.End);
                     readResult = await context.Request.BodyReader.ReadAsync();
@@ -847,9 +844,10 @@ public class Http3StreamTests : Http3TestBase
         Assert.Contains(
             LogMessages,
             m =>
-                m.Message.Equals(
-                    "One or more of the following response headers have been removed because they are invalid for HTTP/2 and HTTP/3 responses: 'Connection', 'Transfer-Encoding', 'Keep-Alive', 'Upgrade' and 'Proxy-Connection'."
-                )
+                m.Message
+                    .Equals(
+                        "One or more of the following response headers have been removed because they are invalid for HTTP/2 and HTTP/3 responses: 'Connection', 'Transfer-Encoding', 'Keep-Alive', 'Upgrade' and 'Proxy-Connection'."
+                    )
         );
     }
 
@@ -1419,8 +1417,7 @@ public class Http3StreamTests : Http3TestBase
             {
                 try
                 {
-                    context
-                        .Response
+                    context.Response
                         .OnStarting(() =>
                         {
                             startingTcs.SetResult();
@@ -1481,8 +1478,7 @@ public class Http3StreamTests : Http3TestBase
             {
                 try
                 {
-                    context
-                        .Response
+                    context.Response
                         .OnStarting(() =>
                         {
                             startingTcs.SetResult();
@@ -1547,8 +1543,7 @@ public class Http3StreamTests : Http3TestBase
             {
                 try
                 {
-                    context
-                        .Response
+                    context.Response
                         .OnStarting(() =>
                         {
                             startingTcs.SetResult();
@@ -1613,8 +1608,7 @@ public class Http3StreamTests : Http3TestBase
             {
                 try
                 {
-                    context
-                        .Response
+                    context.Response
                         .OnStarting(() =>
                         {
                             startingTcs.SetResult();
@@ -1682,8 +1676,7 @@ public class Http3StreamTests : Http3TestBase
             {
                 try
                 {
-                    context
-                        .Response
+                    context.Response
                         .OnStarting(() =>
                         {
                             startingTcs.SetResult();
@@ -1749,8 +1742,7 @@ public class Http3StreamTests : Http3TestBase
             {
                 try
                 {
-                    context
-                        .Response
+                    context.Response
                         .OnStarting(() =>
                         {
                             startingTcs.SetResult();
@@ -1864,8 +1856,7 @@ public class Http3StreamTests : Http3TestBase
             {
                 try
                 {
-                    context
-                        .Response
+                    context.Response
                         .OnStarting(() =>
                         {
                             startingTcs.SetResult();
@@ -1940,8 +1931,7 @@ public class Http3StreamTests : Http3TestBase
             {
                 try
                 {
-                    context
-                        .Response
+                    context.Response
                         .OnStarting(() =>
                         {
                             startingTcs.SetResult();
@@ -2011,8 +2001,7 @@ public class Http3StreamTests : Http3TestBase
             {
                 try
                 {
-                    context
-                        .Response
+                    context.Response
                         .OnStarting(() =>
                         {
                             startingTcs.SetResult();
@@ -2089,8 +2078,7 @@ public class Http3StreamTests : Http3TestBase
             {
                 try
                 {
-                    context
-                        .Response
+                    context.Response
                         .OnStarting(() =>
                         {
                             startingTcs.SetResult();
@@ -2166,8 +2154,7 @@ public class Http3StreamTests : Http3TestBase
             {
                 try
                 {
-                    context
-                        .Response
+                    context.Response
                         .OnStarting(() =>
                         {
                             startingTcs.SetResult();
@@ -2246,8 +2233,7 @@ public class Http3StreamTests : Http3TestBase
                 {
                     var requestBodyTask = context.Request.BodyReader.ReadAsync();
 
-                    context
-                        .Response
+                    context.Response
                         .OnStarting(() =>
                         {
                             startingTcs.SetResult();
@@ -2331,8 +2317,7 @@ public class Http3StreamTests : Http3TestBase
             {
                 try
                 {
-                    context
-                        .Response
+                    context.Response
                         .OnStarting(() =>
                         {
                             startingTcs.SetResult();
@@ -2413,8 +2398,7 @@ public class Http3StreamTests : Http3TestBase
                 {
                     var requestBodyTask = context.Request.BodyReader.ReadAsync();
 
-                    context
-                        .Response
+                    context.Response
                         .OnStarting(() =>
                         {
                             startingTcs.SetResult();
@@ -3209,9 +3193,8 @@ public class Http3StreamTests : Http3TestBase
         Assert.Contains(
             LogMessages,
             m =>
-                m.Message.Contains(
-                    "the application completed without reading the entire request body."
-                )
+                m.Message
+                    .Contains("the application completed without reading the entire request body.")
         );
         Assert.Equal(
             "The application completed without reading the entire request body.",
@@ -3299,9 +3282,8 @@ public class Http3StreamTests : Http3TestBase
         Assert.Contains(
             LogMessages,
             m =>
-                m.Message.Contains(
-                    "the application completed without reading the entire request body."
-                )
+                m.Message
+                    .Contains("the application completed without reading the entire request body.")
         );
 
         Assert.Equal(3, receivedHeaders.Count);
@@ -3363,9 +3345,8 @@ public class Http3StreamTests : Http3TestBase
         Assert.Contains(
             LogMessages,
             m =>
-                m.Message.Contains(
-                    "the application completed without reading the entire request body."
-                )
+                m.Message
+                    .Contains("the application completed without reading the entire request body.")
         );
 
         Assert.Equal(3, receivedHeaders.Count);
@@ -3500,8 +3481,7 @@ public class Http3StreamTests : Http3TestBase
             }
         );
 
-        var maxFieldSetting = await Http3Api
-            .ServerReceivedSettingsReader
+        var maxFieldSetting = await Http3Api.ServerReceivedSettingsReader
             .ReadAsync()
             .DefaultTimeout();
 
@@ -3549,8 +3529,7 @@ public class Http3StreamTests : Http3TestBase
                     var readCount = 0;
                     while (readCount < 100)
                     {
-                        readCount += await context
-                            .Request
+                        readCount += await context.Request
                             .Body
                             .ReadAsync(buffer.AsMemory(readCount, 100 - readCount));
                     }
@@ -3597,9 +3576,8 @@ public class Http3StreamTests : Http3TestBase
         Assert.Contains(
             LogMessages,
             m =>
-                m.Message.Contains(
-                    "the application completed without reading the entire request body."
-                )
+                m.Message
+                    .Contains("the application completed without reading the entire request body.")
         );
         Assert.Equal(
             "The application completed without reading the entire request body.",

@@ -127,8 +127,7 @@ static async Task RunAsync(
         serviceBrokerFactory
     );
     // TODO: Remove, the path should match exactly. Workaround for https://devdiv.visualstudio.com/DevDiv/_workitems/edit/1830914.
-    Microsoft
-        .CodeAnalysis
+    Microsoft.CodeAnalysis
         .EditAndContinue
         .EditAndContinueMethodDebugInfoReader
         .IgnoreCaseWhenComparingDocumentNames = Path.DirectorySeparatorChar == '\\';

@@ -56,8 +56,7 @@ namespace BasicApi.Controllers
                 return new StatusCodeResult(StatusCodes.Status403Forbidden);
             }
 
-            var handler = _options
-                .SecurityTokenValidators
+            var handler = _options.SecurityTokenValidators
                 .OfType<JwtSecurityTokenHandler>()
                 .First();
             var tokenDescriptor = new SecurityTokenDescriptor()

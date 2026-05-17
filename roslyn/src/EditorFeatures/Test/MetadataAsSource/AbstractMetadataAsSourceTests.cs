@@ -25,57 +25,49 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.MetadataAsSource
 
         public virtual Task InitializeAsync()
         {
-            AssemblyResolver
-                .TestAccessor
+            AssemblyResolver.TestAccessor
                 .AddInMemoryImage(
                     TestBase.MscorlibRef_v46,
                     "mscorlib.v4_6_1038_0.dll",
                     ImmutableArray.Create(Net461.References.mscorlib.ImageBytes)
                 );
-            AssemblyResolver
-                .TestAccessor
+            AssemblyResolver.TestAccessor
                 .AddInMemoryImage(
                     TestBase.SystemRef_v46,
                     "System.v4_6_1038_0.dll",
                     ImmutableArray.Create(Net461.References.System.ImageBytes)
                 );
-            AssemblyResolver
-                .TestAccessor
+            AssemblyResolver.TestAccessor
                 .AddInMemoryImage(
                     TestBase.SystemCoreRef_v46,
                     "System.Core.v4_6_1038_0.dll",
                     ImmutableArray.Create(Net461.References.SystemCore.ImageBytes)
                 );
-            AssemblyResolver
-                .TestAccessor
+            AssemblyResolver.TestAccessor
                 .AddInMemoryImage(
                     TestBase.ValueTupleRef,
                     "System.ValueTuple.dll",
                     ImmutableArray.Create(TestResources.NetFX.ValueTuple.tuplelib)
                 );
-            AssemblyResolver
-                .TestAccessor
+            AssemblyResolver.TestAccessor
                 .AddInMemoryImage(
                     TestBase.SystemRuntimeFacadeRef,
                     "System.Runtime.dll",
                     ImmutableArray.Create(TestMetadata.ResourcesNet451.SystemRuntime)
                 );
-            AssemblyResolver
-                .TestAccessor
+            AssemblyResolver.TestAccessor
                 .AddInMemoryImage(
                     TestBase.MsvbRef,
                     "Microsoft.VisualBasic.dll",
                     ImmutableArray.Create(TestMetadata.ResourcesNet451.MicrosoftVisualBasic)
                 );
-            AssemblyResolver
-                .TestAccessor
+            AssemblyResolver.TestAccessor
                 .AddInMemoryImage(
                     TestBase.SystemXmlRef,
                     "System.Xml.v4_0_30319.dll",
                     ImmutableArray.Create(TestMetadata.ResourcesNet451.SystemXml)
                 );
-            AssemblyResolver
-                .TestAccessor
+            AssemblyResolver.TestAccessor
                 .AddInMemoryImage(
                     TestBase.SystemXmlLinqRef,
                     "System.Xml.Linq.v4_0_30319.dll",
@@ -130,9 +122,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.MetadataAsSource
             var metadataAsSourceFile = await context.GenerateSourceAsync(navigationSymbol);
             var document = context.GetDocument(metadataAsSourceFile);
             var text = await document.GetTextAsync();
-            var line = text.Lines.GetLineFromPosition(
-                metadataAsSourceFile.IdentifierLocation.SourceSpan.Start
-            );
+            var line = text.Lines
+                .GetLineFromPosition(metadataAsSourceFile.IdentifierLocation.SourceSpan.Start);
             var lineText = line.ToString().Trim();
 
             Assert.Equal(expected, lineText);
@@ -148,8 +139,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.MetadataAsSource
 
             using var context = TestContext.Create(projectLanguage);
             var projectId = ProjectId.CreateNewId();
-            var metadataProject = context
-                .CurrentSolution
+            var metadataProject = context.CurrentSolution
                 .AddProject(projectId, "Metadata", "Metadata", LanguageNames.CSharp)
                 .GetProject(projectId)
                 .AddMetadataReference(TestMetadata.Net451.mscorlib)

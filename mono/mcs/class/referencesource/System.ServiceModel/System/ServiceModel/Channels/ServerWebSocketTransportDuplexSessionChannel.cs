@@ -106,11 +106,8 @@ namespace System.ServiceModel.Channels
                 TD.WebSocketConnectionAcceptStart(this.httpRequestContext.EventTraceActivity);
             }
 
-            this.httpRequestContext.AcceptWebSocket(
-                this.httpResponseMessage,
-                this.subProtocol,
-                timeout
-            );
+            this.httpRequestContext
+                .AcceptWebSocket(this.httpResponseMessage, this.subProtocol, timeout);
 
             if (TD.WebSocketConnectionAcceptedIsEnabled())
             {
@@ -132,12 +129,8 @@ namespace System.ServiceModel.Channels
                 TD.WebSocketConnectionAcceptStart(this.httpRequestContext.EventTraceActivity);
             }
 
-            return this.httpRequestContext.BeginAcceptWebSocket(
-                this.httpResponseMessage,
-                this.subProtocol,
-                callback,
-                state
-            );
+            return this.httpRequestContext
+                .BeginAcceptWebSocket(this.httpResponseMessage, this.subProtocol, callback, state);
         }
 
         protected override void OnEndOpen(IAsyncResult result)

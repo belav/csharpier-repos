@@ -98,8 +98,7 @@ namespace System.ServiceModel.Dispatcher
             this.receiveSynchronously = false;
             this.serviceThrottle = null;
             this.transactionTimeout = TimeSpan.Zero;
-            this.maxPendingReceives = MultipleReceiveBinder
-                .MultipleReceiveDefaults
+            this.maxPendingReceives = MultipleReceiveBinder.MultipleReceiveDefaults
                 .MaxPendingReceives;
             if (this.listener != null)
             {
@@ -251,8 +250,7 @@ namespace System.ServiceModel.Dispatcher
             {
                 if (value < 0)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentOutOfRangeException(
                                 "value",
@@ -357,8 +355,7 @@ namespace System.ServiceModel.Dispatcher
                         break;
 
                     default:
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(new ArgumentOutOfRangeException("value"));
                 }
 
@@ -380,8 +377,7 @@ namespace System.ServiceModel.Dispatcher
             {
                 if (value < TimeSpan.Zero)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentOutOfRangeException(
                                 "value",
@@ -393,8 +389,7 @@ namespace System.ServiceModel.Dispatcher
 
                 if (TimeoutHelper.IsTooLarge(value))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentOutOfRangeException(
                                 "value",
@@ -574,11 +569,12 @@ namespace System.ServiceModel.Dispatcher
                 {
                     if (this.addressTable != null)
                     {
-                        this.addressTable.Add(
-                            endpoint.AddressFilter,
-                            endpoint.EndpointAddress,
-                            endpoint.FilterPriority
-                        );
+                        this.addressTable
+                            .Add(
+                                endpoint.AddressFilter,
+                                endpoint.EndpointAddress,
+                                endpoint.FilterPriority
+                            );
                     }
 
                     this.filterTable.AddEndpoint(endpoint);
@@ -703,8 +699,7 @@ namespace System.ServiceModel.Dispatcher
                 }
                 catch (InvalidOperationException e)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(CreateOuterExceptionWithEndpointsInformation(e));
                 }
             }
@@ -788,8 +783,7 @@ namespace System.ServiceModel.Dispatcher
                 }
                 catch (InvalidOperationException e)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(CreateOuterExceptionWithEndpointsInformation(e));
                 }
             }
@@ -809,8 +803,7 @@ namespace System.ServiceModel.Dispatcher
                 }
                 catch (InvalidOperationException e)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(CreateOuterExceptionWithEndpointsInformation(e));
                 }
             }
@@ -866,11 +859,12 @@ namespace System.ServiceModel.Dispatcher
 
                 if ((this.addressTable != null) && (endpoint.OriginalAddress != null))
                 {
-                    this.addressTable.Add(
-                        endpoint.AddressFilter,
-                        endpoint.OriginalAddress,
-                        endpoint.FilterPriority
-                    );
+                    this.addressTable
+                        .Add(
+                            endpoint.AddressFilter,
+                            endpoint.OriginalAddress,
+                            endpoint.FilterPriority
+                        );
                 }
 
                 if (DiagnosticUtility.ShouldTraceInformation)

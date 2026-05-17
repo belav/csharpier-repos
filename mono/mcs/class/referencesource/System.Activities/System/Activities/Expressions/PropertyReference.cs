@@ -182,8 +182,7 @@ namespace System.Activities.Expressions
                     {
                         if (!this.propertyInfo.GetGetMethod().IsStatic && this.owner == null)
                         {
-                            throw FxTrace
-                                .Exception
+                            throw FxTrace.Exception
                                 .AsError(
                                     new InvalidOperationException(
                                         SR.NullReferencedMemberAccess(
@@ -204,8 +203,7 @@ namespace System.Activities.Expressions
                         ) == false
                     )
                     {
-                        throw FxTrace
-                            .Exception
+                        throw FxTrace.Exception
                             .AsError(
                                 new InvalidOperationException(
                                     SR.WriteonlyPropertyCannotBeRead(
@@ -224,8 +222,7 @@ namespace System.Activities.Expressions
                     {
                         if (!this.propertyInfo.GetSetMethod().IsStatic && this.owner == null)
                         {
-                            throw FxTrace
-                                .Exception
+                            throw FxTrace.Exception
                                 .AsError(
                                     new InvalidOperationException(
                                         SR.NullReferencedMemberAccess(

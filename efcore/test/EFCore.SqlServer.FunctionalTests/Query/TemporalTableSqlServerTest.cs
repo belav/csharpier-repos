@@ -49,8 +49,7 @@ LEFT JOIN [OwnedEntityDifferentTable] FOR SYSTEM_TIME AS OF '2000-01-01T00:00:00
         {
             var date = new DateTime(2000, 1, 1);
 
-            var query = context
-                .MainEntitiesDifferentTable
+            var query = context.MainEntitiesDifferentTable
                 .TemporalAsOf(date)
                 .Join(
                     context.MainEntitiesDifferentTable,
@@ -82,8 +81,7 @@ LEFT JOIN [OwnedEntityDifferentTable] AS [o0] ON [m0].[Id] = [o0].[MainEntityDif
         {
             var date = new DateTime(2000, 1, 1);
 
-            var query = context
-                .MainEntitiesDifferentTable
+            var query = context.MainEntitiesDifferentTable
                 .TemporalAsOf(date)
                 .Union(context.MainEntitiesDifferentTable.TemporalAsOf(date));
 
@@ -114,8 +112,7 @@ LEFT JOIN [OwnedEntityDifferentTable] FOR SYSTEM_TIME AS OF '2000-01-01T00:00:00
         {
             var date = new DateTime(2000, 1, 1);
 
-            var query = context
-                .MainEntitiesDifferentTable
+            var query = context.MainEntitiesDifferentTable
                 .FromSqlRaw(
                     """
 SELECT [m].[Id], [m].[Description], [m].[EndTime], [m].[StartTime]
@@ -149,8 +146,7 @@ LEFT JOIN [OwnedEntityDifferentTable] AS [o] ON [m].[Id] = [o].[MainEntityDiffer
         {
             var date = new DateTime(2000, 1, 1);
 
-            var query = context
-                .MainEntitiesDifferentTable
+            var query = context.MainEntitiesDifferentTable
                 .TemporalAsOf(date)
                 .Distinct()
                 .OrderByDescending(x => x.Id)
@@ -183,8 +179,7 @@ ORDER BY [t].[Id] DESC
         {
             var date = new DateTime(2000, 1, 1);
 
-            var query = context
-                .MainEntitiesDifferentTable
+            var query = context.MainEntitiesDifferentTable
                 .TemporalAsOf(date)
                 .Join(
                     context.MainEntitiesDifferentTable,
@@ -237,8 +232,7 @@ ORDER BY [t0].[Id] DESC
         {
             var date = new DateTime(2000, 1, 1);
 
-            var query = context
-                .MainEntitiesDifferentTable
+            var query = context.MainEntitiesDifferentTable
                 .Join(
                     context.MainEntitiesDifferentTable.TemporalAsOf(date),
                     x => x.Id,
@@ -359,8 +353,7 @@ ORDER BY [m].[Id], [o].[MainEntityManyId]
         using (var context = contextFactory.CreateContext())
         {
             var date = new DateTime(2000, 1, 1);
-            var query = context
-                .MainEntitiesMany
+            var query = context.MainEntitiesMany
                 .TemporalAsOf(date)
                 .Union(context.MainEntitiesMany.TemporalAsOf(date).Where(e => e.Id < 30));
 

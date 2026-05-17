@@ -295,9 +295,8 @@ namespace System.ComponentModel.Composition.AttributedModel
                         // Any InheritedExports on the type itself are contributed during this pass
                         // and we need to do the book keeping for those.
                         if (
-                            !this._contractNamesOnNonInterfaces.Contains(
-                                attributedExportDefinition.ContractName
-                            )
+                            !this._contractNamesOnNonInterfaces
+                                .Contains(attributedExportDefinition.ContractName)
                         )
                         {
                             exports.Add(
@@ -307,9 +306,8 @@ namespace System.ComponentModel.Composition.AttributedModel
                                     this
                                 )
                             );
-                            this._contractNamesOnNonInterfaces.Add(
-                                attributedExportDefinition.ContractName
-                            );
+                            this._contractNamesOnNonInterfaces
+                                .Add(attributedExportDefinition.ContractName);
                         }
                     }
                     else
@@ -343,9 +341,8 @@ namespace System.ComponentModel.Composition.AttributedModel
                     );
 
                     if (
-                        !this._contractNamesOnNonInterfaces.Contains(
-                            attributedExportDefinition.ContractName
-                        )
+                        !this._contractNamesOnNonInterfaces
+                            .Contains(attributedExportDefinition.ContractName)
                     )
                     {
                         exports.Add(
@@ -358,9 +355,8 @@ namespace System.ComponentModel.Composition.AttributedModel
 
                         if (!type.IsInterface)
                         {
-                            this._contractNamesOnNonInterfaces.Add(
-                                attributedExportDefinition.ContractName
-                            );
+                            this._contractNamesOnNonInterfaces
+                                .Add(attributedExportDefinition.ContractName);
                         }
                     }
                 }

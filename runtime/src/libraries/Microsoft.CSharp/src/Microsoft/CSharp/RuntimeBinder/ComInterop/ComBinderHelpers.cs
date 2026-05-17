@@ -73,8 +73,7 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
                 {
                     if (IsStrongBoxArg(curArgument))
                     {
-                        BindingRestrictions restrictions = curArgument
-                            .Restrictions
+                        BindingRestrictions restrictions = curArgument.Restrictions
                             .Merge(GetTypeRestrictionForDynamicMetaObject(curArgument));
 
                         // we have restricted this argument to LimitType so we can convert and conversion will be trivial cast.

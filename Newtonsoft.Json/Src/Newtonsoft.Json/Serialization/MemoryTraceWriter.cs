@@ -45,8 +45,7 @@ namespace Newtonsoft.Json.Serialization
         {
             StringBuilder sb = new StringBuilder();
             sb.Append(
-                DateTime
-                    .Now
+                DateTime.Now
                     .ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff", CultureInfo.InvariantCulture)
             );
             sb.Append(" ");

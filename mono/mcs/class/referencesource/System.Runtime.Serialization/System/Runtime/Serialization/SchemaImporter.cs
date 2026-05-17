@@ -71,8 +71,7 @@ namespace System.Runtime.Serialization
                     null
                 );
                 if (schema == null)
-                    throw System
-                        .Runtime
+                    throw System.Runtime
                         .Serialization
                         .DiagnosticUtility
                         .ExceptionUtility
@@ -98,8 +97,7 @@ namespace System.Runtime.Serialization
                 {
                     throw;
                 }
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -114,8 +112,7 @@ namespace System.Runtime.Serialization
                 foreach (object schemaObj in schemaList)
                 {
                     if (schemaObj == null)
-                        throw System
-                            .Runtime
+                        throw System.Runtime
                             .Serialization
                             .DiagnosticUtility
                             .ExceptionUtility
@@ -150,8 +147,7 @@ namespace System.Runtime.Serialization
                 foreach (XmlQualifiedName typeName in typeNames)
                 {
                     if (typeName == null)
-                        throw System
-                            .Runtime
+                        throw System.Runtime
                             .Serialization
                             .DiagnosticUtility
                             .ExceptionUtility
@@ -492,8 +488,7 @@ namespace System.Runtime.Serialization
                     if (SchemaHelper.GetSchemaType(SchemaObjects, typeQName) == null)
                         break;
                     if (i == Int32.MaxValue)
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidDataContractException(
                                     SR.GetString(SR.CannotComputeUniqueName, element.Name)
@@ -521,8 +516,7 @@ namespace System.Runtime.Serialization
             {
                 XmlSchemaType type = SchemaHelper.GetSchemaType(SchemaObjects, typeName);
                 if (type == null)
-                    throw System
-                        .Runtime
+                    throw System.Runtime
                         .Serialization
                         .DiagnosticUtility
                         .ExceptionUtility
@@ -1282,9 +1276,8 @@ namespace System.Runtime.Serialization
                     )
                 );
 
-            XmlQualifiedName factoryTypeAttributeRefName = SchemaExporter
-                .ISerializableFactoryTypeAttribute
-                .RefName;
+            XmlQualifiedName factoryTypeAttributeRefName =
+                SchemaExporter.ISerializableFactoryTypeAttribute.RefName;
             bool containsFactoryTypeAttribute = false;
             if (attributes != null)
             {
@@ -1486,8 +1479,7 @@ namespace System.Runtime.Serialization
             if (!memberTypeContract.IsValueType && !memberIsNullable)
             {
                 if (emitDefaultValueFromAnnotation != null && emitDefaultValueFromAnnotation.Value)
-                    throw System
-                        .Runtime
+                    throw System.Runtime
                         .Serialization
                         .DiagnosticUtility
                         .ExceptionUtility
@@ -1523,8 +1515,7 @@ namespace System.Runtime.Serialization
                     memberEmitDefaultValue,
                     memberOrder
                 );
-                int compare = ClassDataContract
-                    .DataMemberComparer
+                int compare = ClassDataContract.DataMemberComparer
                     .Singleton
                     .Compare(prevMember, currentMember);
                 if (compare == 0)
@@ -1570,14 +1561,12 @@ namespace System.Runtime.Serialization
             );
             if (defaultValueElement == null)
                 return null;
-            XmlNode emitDefaultValueAttribute = defaultValueElement
-                .Attributes
+            XmlNode emitDefaultValueAttribute = defaultValueElement.Attributes
                 .GetNamedItem(Globals.EmitDefaultValueAttribute);
             string emitDefaultValueString =
                 (emitDefaultValueAttribute == null) ? null : emitDefaultValueAttribute.Value;
             if (emitDefaultValueString == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -1608,13 +1597,11 @@ namespace System.Runtime.Serialization
             if (actualTypeElement == null)
                 return defaultTypeName;
 
-            XmlNode nameAttribute = actualTypeElement
-                .Attributes
+            XmlNode nameAttribute = actualTypeElement.Attributes
                 .GetNamedItem(Globals.ActualTypeNameAttribute);
             string name = (nameAttribute == null) ? null : nameAttribute.Value;
             if (name == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -1629,13 +1616,11 @@ namespace System.Runtime.Serialization
                             )
                         )
                     );
-            XmlNode nsAttribute = actualTypeElement
-                .Attributes
+            XmlNode nsAttribute = actualTypeElement.Attributes
                 .GetNamedItem(Globals.ActualTypeNamespaceAttribute);
             string ns = (nsAttribute == null) ? null : nsAttribute.Value;
             if (ns == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -1937,8 +1922,7 @@ namespace System.Runtime.Serialization
                     )
                 );
                 if (valueInnerText == null)
-                    dataContract
-                        .Values
+                    dataContract.Values
                         .Add(
                             SchemaExporter.GetDefaultEnumValue(isFlags, dataContract.Members.Count)
                         );
@@ -2039,13 +2023,11 @@ namespace System.Runtime.Serialization
 
         GenericInfo ImportGenericInfo(XmlElement typeElement, XmlSchemaType type)
         {
-            XmlNode nameAttribute = typeElement
-                .Attributes
+            XmlNode nameAttribute = typeElement.Attributes
                 .GetNamedItem(Globals.GenericNameAttribute);
             string name = (nameAttribute == null) ? null : nameAttribute.Value;
             if (name == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -2058,13 +2040,11 @@ namespace System.Runtime.Serialization
                             )
                         )
                     );
-            XmlNode nsAttribute = typeElement
-                .Attributes
+            XmlNode nsAttribute = typeElement.Attributes
                 .GetNamedItem(Globals.GenericNamespaceAttribute);
             string ns = (nsAttribute == null) ? null : nsAttribute.Value;
             if (ns == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -2091,8 +2071,7 @@ namespace System.Runtime.Serialization
                     argumentElement.LocalName != Globals.GenericParameterLocalName
                     || argumentElement.NamespaceURI != Globals.SerializationNamespace
                 )
-                    throw System
-                        .Runtime
+                    throw System.Runtime
                         .Serialization
                         .DiagnosticUtility
                         .ExceptionUtility
@@ -2106,15 +2085,13 @@ namespace System.Runtime.Serialization
                                 )
                             )
                         );
-                XmlNode nestedLevelAttribute = argumentElement
-                    .Attributes
+                XmlNode nestedLevelAttribute = argumentElement.Attributes
                     .GetNamedItem(Globals.GenericParameterNestedLevelAttribute);
                 int argumentLevel = 0;
                 if (nestedLevelAttribute != null)
                 {
                     if (!Int32.TryParse(nestedLevelAttribute.Value, out argumentLevel))
-                        throw System
-                            .Runtime
+                        throw System.Runtime
                             .Serialization
                             .DiagnosticUtility
                             .ExceptionUtility
@@ -2133,8 +2110,7 @@ namespace System.Runtime.Serialization
                             );
                 }
                 if (argumentLevel < currentLevel)
-                    throw System
-                        .Runtime
+                    throw System.Runtime
                         .Serialization
                         .DiagnosticUtility
                         .ExceptionUtility
@@ -2153,15 +2129,13 @@ namespace System.Runtime.Serialization
                 currentLevel = argumentLevel;
             }
 
-            XmlNode typeNestedLevelsAttribute = typeElement
-                .Attributes
+            XmlNode typeNestedLevelsAttribute = typeElement.Attributes
                 .GetNamedItem(Globals.GenericParameterNestedLevelAttribute);
             if (typeNestedLevelsAttribute != null)
             {
                 int nestedLevels = 0;
                 if (!Int32.TryParse(typeNestedLevelsAttribute.Value, out nestedLevels))
-                    throw System
-                        .Runtime
+                    throw System.Runtime
                         .Serialization
                         .DiagnosticUtility
                         .ExceptionUtility
@@ -2436,8 +2410,7 @@ namespace System.Runtime.Serialization
 
         static void ThrowTypeCannotBeImportedException(string message)
         {
-            throw System
-                .Runtime
+            throw System.Runtime
                 .Serialization
                 .DiagnosticUtility
                 .ExceptionUtility

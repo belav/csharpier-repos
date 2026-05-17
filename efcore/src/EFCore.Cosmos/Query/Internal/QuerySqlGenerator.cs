@@ -206,8 +206,7 @@ public class QuerySqlGenerator : SqlExpressionVisitor
         if (selectExpression.Projection.Count > 0)
         {
             if (
-                selectExpression
-                    .Projection
+                selectExpression.Projection
                     .Any(p => !string.IsNullOrEmpty(p.Alias) && p.Alias != p.Name)
                 && !selectExpression.Projection.Any(p => p.Expression is SqlFunctionExpression)
             ) // Aggregates are not allowed

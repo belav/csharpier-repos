@@ -1941,8 +1941,7 @@ namespace System.Xml
                     attributeNode = AddXmlAttribute();
                     attributeNode.Prefix.SetValue(_prefix);
                     attributeNode.LocalName.SetValue(_localName);
-                    attributeNode
-                        .Value
+                    attributeNode.Value
                         .SetValue(
                             (escaped ? ValueHandleType.EscapedUTF8 : ValueHandleType.UTF8),
                             valueOffset,
@@ -1955,8 +1954,7 @@ namespace System.Xml
                     attributeNode = AddAttribute();
                     attributeNode.Prefix.SetValue(_prefix);
                     attributeNode.LocalName.SetValue(_localName);
-                    attributeNode
-                        .Value
+                    attributeNode.Value
                         .SetValue(
                             (escaped ? ValueHandleType.EscapedUTF8 : ValueHandleType.UTF8),
                             valueOffset,

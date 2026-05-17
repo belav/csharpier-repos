@@ -23,8 +23,7 @@ namespace System.Globalization
             object ex_result;
             if (HasEmptyCultureName)
             {
-                Interop
-                    .JsGlobalization
+                Interop.JsGlobalization
                     .ChangeCaseInvariant(
                         src,
                         srcLen,
@@ -37,8 +36,7 @@ namespace System.Globalization
             }
             else
             {
-                Interop
-                    .JsGlobalization
+                Interop.JsGlobalization
                     .ChangeCase(
                         _cultureName,
                         src,

@@ -721,8 +721,7 @@ namespace System.Web
             }
 
             if (
-                !_virtualPath
-                    .Extension
+                !_virtualPath.Extension
                     .Equals(_xmlSiteMapFileExtension, StringComparison.OrdinalIgnoreCase)
             )
             {
@@ -742,8 +741,7 @@ namespace System.Web
             if (xmlParentProvider != null && xmlParentProvider._parentSiteMapFileCollection != null)
             {
                 if (
-                    xmlParentProvider
-                        ._parentSiteMapFileCollection
+                    xmlParentProvider._parentSiteMapFileCollection
                         .Contains(_normalizedVirtualPath.VirtualPathString)
                 )
                 {

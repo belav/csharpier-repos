@@ -229,8 +229,7 @@ namespace System.Web.UI.HtmlControls
                 return (bool)isUplevel;
 
             isUplevel = UplevelHelper.IsUplevel(
-                System
-                    .Web
+                System.Web
                     .Configuration
                     .HttpCapabilitiesBase
                     .GetUserAgentForDetection(HttpContext.Current.Request)

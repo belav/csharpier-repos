@@ -134,8 +134,7 @@ namespace System.ServiceModel
         {
             if (this.Endpoint == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(
@@ -174,8 +173,7 @@ namespace System.ServiceModel
         {
             if (endpoint.Address == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(SR.SFxChannelFactoryEndpointAddressUri)
@@ -190,8 +188,7 @@ namespace System.ServiceModel
         {
             if (this.Endpoint == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(SR.SFxChannelFactoryCannotCreateFactoryWithoutDescription)
@@ -203,8 +200,7 @@ namespace System.ServiceModel
             {
                 if (this.configurationName != null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(
@@ -216,8 +212,7 @@ namespace System.ServiceModel
                 }
                 else
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(SR.SFxChannelFactoryNoBindingFoundInConfigOrCode)
@@ -467,8 +462,7 @@ namespace System.ServiceModel
             }
 
             if (this.innerFactory == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(SR.GetString(SR.InnerChannelFactoryWasNotSet))
                     );
@@ -497,11 +491,8 @@ namespace System.ServiceModel
                     return;
                 }
 
-                IAsyncResult result = this.communicationObject.BeginOpen(
-                    timeout,
-                    onOpenComplete,
-                    this
-                );
+                IAsyncResult result = this.communicationObject
+                    .BeginOpen(timeout, onOpenComplete, this);
                 if (result.CompletedSynchronously)
                 {
                     this.communicationObject.EndOpen(result);
@@ -563,11 +554,8 @@ namespace System.ServiceModel
                     return;
                 }
 
-                IAsyncResult result = this.communicationObject.BeginClose(
-                    timeout,
-                    onCloseComplete,
-                    this
-                );
+                IAsyncResult result = this.communicationObject
+                    .BeginClose(timeout, onCloseComplete, this);
 
                 if (result.CompletedSynchronously)
                 {
@@ -626,8 +614,7 @@ namespace System.ServiceModel
 
             if (!channelType.IsInterface)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(SR.SFxChannelFactoryTypeMustBeInterface)
@@ -684,8 +671,7 @@ namespace System.ServiceModel
                 }
                 if (endpointConfigurationName == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgumentNull("endpointConfigurationName");
                 }
 
@@ -838,8 +824,7 @@ namespace System.ServiceModel
 
                     if (this.HasDuplexOperations())
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(
                                     SR.GetString(
@@ -997,9 +982,8 @@ namespace System.ServiceModel
 
         protected override ServiceEndpoint CreateDescription()
         {
-            ContractDescription contractDescription = this.TypeLoader.LoadContractDescription(
-                this.channelType
-            );
+            ContractDescription contractDescription = this.TypeLoader
+                .LoadContractDescription(this.channelType);
 
             ServiceEndpoint endpoint = new ServiceEndpoint(contractDescription);
             ReflectOnCallbackInstance(endpoint);
@@ -1014,8 +998,7 @@ namespace System.ServiceModel
             {
                 if (endpoint.Contract.CallbackContractType == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(
@@ -1032,8 +1015,7 @@ namespace System.ServiceModel
             {
                 if (endpoint.Contract.CallbackContractType == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(
@@ -1071,8 +1053,7 @@ namespace System.ServiceModel
 
             if (channelFactory.HasDuplexOperations())
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(
@@ -1097,8 +1078,7 @@ namespace System.ServiceModel
 
             if (channelFactory.HasDuplexOperations())
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(
@@ -1124,8 +1104,7 @@ namespace System.ServiceModel
 
             if (channelFactory.HasDuplexOperations())
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(

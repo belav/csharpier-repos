@@ -52,8 +52,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeRefactoringService
             var refactoringService = workspace.GetService<ICodeRefactoringService>();
 
             var reference = new StubAnalyzerReference();
-            var project = workspace
-                .CurrentSolution
+            var project = workspace.CurrentSolution
                 .Projects
                 .Single()
                 .AddAnalyzerReference(reference);
@@ -98,8 +97,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeRefactoringService
         [Fact]
         public async Task TestTypeScriptRefactorings()
         {
-            var composition = FeaturesTestCompositions
-                .Features
+            var composition = FeaturesTestCompositions.Features
                 .AddParts(typeof(TypeScriptCodeRefactoringProvider));
 
             using var workspace = TestWorkspace.Create(
@@ -143,8 +141,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeRefactoringService
             errorReportingService.OnError = message => errorReported = true;
 
             var refactoringService = workspace.GetService<ICodeRefactoringService>();
-            var codeRefactoring = workspace
-                .ExportProvider
+            var codeRefactoring = workspace.ExportProvider
                 .GetExportedValues<CodeRefactoringProvider>()
                 .OfType<T>()
                 .Single();
@@ -225,8 +222,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeRefactoringService
                 refactoring3,
                 refactoring4
             );
-            var project = workspace
-                .CurrentSolution
+            var project = workspace.CurrentSolution
                 .Projects
                 .Single()
                 .AddAnalyzerReference(reference)
@@ -236,8 +232,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeRefactoringService
                 .Project;
 
             // Verify available refactorings for .txt additional document
-            var txtAdditionalDocument = project
-                .AdditionalDocuments
+            var txtAdditionalDocument = project.AdditionalDocuments
                 .Single(t => t.Name == "test.txt");
             var txtRefactorings = await refactoringService.GetRefactoringsAsync(
                 txtAdditionalDocument,
@@ -262,8 +257,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeRefactoringService
                 project.Solution,
                 CodeAnalysisProgress.None
             );
-            var changedtxtDocument = solution
-                .Projects
+            var changedtxtDocument = solution.Projects
                 .Single()
                 .AdditionalDocuments
                 .Single(t => t.Id == txtAdditionalDocument.Id);
@@ -276,8 +270,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeRefactoringService
             );
 
             // Verify available refactorings for .log additional document
-            var logAdditionalDocument = project
-                .AdditionalDocuments
+            var logAdditionalDocument = project.AdditionalDocuments
                 .Single(t => t.Name == "test.log");
             var logRefactorings = await refactoringService.GetRefactoringsAsync(
                 logAdditionalDocument,
@@ -309,8 +302,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeRefactoringService
                 refactoring3,
                 refactoring4
             );
-            var project = workspace
-                .CurrentSolution
+            var project = workspace.CurrentSolution
                 .Projects
                 .Single()
                 .AddAnalyzerReference(reference)
@@ -328,8 +320,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeRefactoringService
                 .Project;
 
             // Verify available refactorings for .editorconfig document
-            var editorConfig = project
-                .AnalyzerConfigDocuments
+            var editorConfig = project.AnalyzerConfigDocuments
                 .Single(t => t.Name == ".editorconfig");
             var editorConfigRefactorings = await refactoringService.GetRefactoringsAsync(
                 editorConfig,
@@ -354,8 +345,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeRefactoringService
                 project.Solution,
                 CodeAnalysisProgress.None
             );
-            var changedEditorConfig = solution
-                .Projects
+            var changedEditorConfig = solution.Projects
                 .Single()
                 .AnalyzerConfigDocuments
                 .Single(t => t.Id == editorConfig.Id);
@@ -366,8 +356,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeRefactoringService
             );
 
             // Verify available refactorings for .globalconfig document
-            var globalConfig = project
-                .AnalyzerConfigDocuments
+            var globalConfig = project.AnalyzerConfigDocuments
                 .Single(t => t.Name == ".globalconfig");
             var globalConfigRefactorings = await refactoringService.GetRefactoringsAsync(
                 globalConfig,
@@ -376,8 +365,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeRefactoringService
                 CancellationToken.None
             );
             var globalConfigRefactoring = Assert.Single(globalConfigRefactorings);
-            var globalConfigRefactoringTitle = globalConfigRefactoring
-                .CodeActions
+            var globalConfigRefactoringTitle = globalConfigRefactoring.CodeActions
                 .Single()
                 .action
                 .Title;
@@ -401,12 +389,10 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeRefactoringService
                             var text = await document.GetTextAsync(ct).ConfigureAwait(false);
                             var newText = SourceText.From(text.ToString() + Title);
                             if (document.Kind == TextDocumentKind.AdditionalDocument)
-                                return document
-                                    .Project
+                                return document.Project
                                     .Solution
                                     .WithAdditionalDocumentText(document.Id, newText);
-                            return document
-                                .Project
+                            return document.Project
                                 .Solution
                                 .WithAnalyzerConfigDocumentText(document.Id, newText);
                         }

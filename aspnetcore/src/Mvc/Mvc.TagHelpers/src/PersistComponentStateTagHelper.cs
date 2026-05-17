@@ -43,8 +43,7 @@ public class PersistComponentStateTagHelper : TagHelper
         ArgumentNullException.ThrowIfNull(context);
         ArgumentNullException.ThrowIfNull(output);
 
-        var componentPrerenderer = ViewContext
-            .HttpContext
+        var componentPrerenderer = ViewContext.HttpContext
             .RequestServices
             .GetRequiredService<IComponentPrerenderer>();
         var serializationMode = PersistenceMode switch

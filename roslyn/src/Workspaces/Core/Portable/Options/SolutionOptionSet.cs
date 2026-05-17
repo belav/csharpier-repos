@@ -57,8 +57,7 @@ namespace Microsoft.CodeAnalysis.Options
 
             value =
                 (optionKey.Option is IOption2 internallyDefinedOption)
-                    ? _legacyGlobalOptions
-                        .GlobalOptions
+                    ? _legacyGlobalOptions.GlobalOptions
                         .GetOption<object?>(
                             new OptionKey2(internallyDefinedOption, optionKey.Language)
                         )

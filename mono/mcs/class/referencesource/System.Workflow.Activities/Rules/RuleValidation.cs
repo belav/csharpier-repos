@@ -2631,8 +2631,7 @@ namespace System.Workflow.Activities.Rules
                     for (int i = 0; i < numResults; ++i)
                     {
                         MemberInfo member = results[i];
-                        System
-                            .Diagnostics
+                        System.Diagnostics
                             .Debug
                             .Assert(
                                 member.MemberType == MemberTypes.Property,

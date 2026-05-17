@@ -274,15 +274,13 @@ namespace System.Collections.Frozen.Tests
             );
             Assert.Same(
                 FrozenDictionary<TKey, TValue>.Empty,
-                FrozenDictionary<TKey, TValue>
-                    .Empty
+                FrozenDictionary<TKey, TValue>.Empty
                     .ToFrozenDictionary(EqualityComparer<TKey>.Default)
             );
 
             Assert.NotSame(
                 FrozenDictionary<TKey, TValue>.Empty,
-                FrozenDictionary<TKey, TValue>
-                    .Empty
+                FrozenDictionary<TKey, TValue>.Empty
                     .ToFrozenDictionary(NonDefaultEqualityComparer<TKey>.Instance)
             );
 

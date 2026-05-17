@@ -44,10 +44,8 @@ namespace Castle.Components.DictionaryAdapter
             }
 
             if (
-                This.CopyStrategies.Aggregate(
-                    false,
-                    (copied, s) => copied | s.Copy(this, other, ref selector)
-                )
+                This.CopyStrategies
+                    .Aggregate(false, (copied, s) => copied | s.Copy(this, other, ref selector))
             )
             {
                 return;

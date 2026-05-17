@@ -34,8 +34,7 @@ namespace System.Web.Http.Controllers
                 }
             );
             Func<Task<HttpResponseMessage>> innerAction = () =>
-                Task<HttpResponseMessage>
-                    .Factory
+                Task<HttpResponseMessage>.Factory
                     .StartNew(() =>
                     {
                         log.Add("innerAction");

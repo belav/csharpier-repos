@@ -49,8 +49,7 @@ namespace System.ServiceModel
             {
                 if (!SecurityModeHelper.IsDefined(value))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new ArgumentOutOfRangeException("value"));
                 }
                 this.mode = value;
@@ -64,8 +63,7 @@ namespace System.ServiceModel
             {
                 if (value == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new ArgumentNullException("value"));
                 }
                 this.transportSecurity = value;
@@ -79,8 +77,7 @@ namespace System.ServiceModel
             {
                 if (value == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new ArgumentNullException("value"));
                 }
                 this.messageSecurity = value;
@@ -120,11 +117,12 @@ namespace System.ServiceModel
                 || this.mode == SecurityMode.TransportWithMessageCredential
             )
             {
-                return this.messageSecurity.CreateSecurityBindingElement(
-                    this.Mode == SecurityMode.TransportWithMessageCredential,
-                    isReliableSessionEnabled,
-                    version
-                );
+                return this.messageSecurity
+                    .CreateSecurityBindingElement(
+                        this.Mode == SecurityMode.TransportWithMessageCredential,
+                        isReliableSessionEnabled,
+                        version
+                    );
             }
             else
             {

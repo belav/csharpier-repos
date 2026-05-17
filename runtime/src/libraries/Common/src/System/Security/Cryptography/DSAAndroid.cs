@@ -78,8 +78,7 @@ namespace System.Security.Cryptography
                 // It's entirely possible that this line will cause the key to be generated in the first place.
                 SafeDsaHandle key = GetKey();
 
-                DSAParameters dsaParameters = Interop
-                    .AndroidCrypto
+                DSAParameters dsaParameters = Interop.AndroidCrypto
                     .ExportDsaParameters(key, includePrivateParameters);
                 bool hasPrivateKey = dsaParameters.X != null;
 
@@ -117,8 +116,7 @@ namespace System.Security.Cryptography
 
                 SafeDsaHandle key;
                 if (
-                    !Interop
-                        .AndroidCrypto
+                    !Interop.AndroidCrypto
                         .DsaKeyCreateByExplicitParameters(
                             out key,
                             parameters.P,

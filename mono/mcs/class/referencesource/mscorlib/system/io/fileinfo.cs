@@ -76,8 +76,7 @@ namespace System.IO
 #if FEATURE_LEGACYNETCF
             if (CompatibilitySwitches.IsAppEarlierThanWindowsPhone8)
             {
-                System.Reflection.Assembly callingAssembly = System
-                    .Reflection
+                System.Reflection.Assembly callingAssembly = System.Reflection
                     .Assembly
                     .GetCallingAssembly();
                 if (callingAssembly != null && !callingAssembly.IsProfileAssembly)

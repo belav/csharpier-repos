@@ -50,8 +50,7 @@ namespace Microsoft.CodeAnalysis.StackTraceExplorer
             //
             // Do a first pass to find projects with the type name to check first
             //
-            using var _ = PooledObjects
-                .ArrayBuilder<Project>
+            using var _ = PooledObjects.ArrayBuilder<Project>
                 .GetInstance(out var candidateProjects);
             foreach (var project in solution.Projects)
             {

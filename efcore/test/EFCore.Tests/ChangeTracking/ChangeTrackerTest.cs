@@ -605,8 +605,7 @@ public class ChangeTrackerTest
 
         context.SaveChanges();
 
-        var (level, _, message, _, _) = _loggerFactory
-            .Log
+        var (level, _, message, _, _) = _loggerFactory.Log
             .Single(e => e.Id.Id == CoreEventId.DetectChangesStarting.Id);
         Assert.Equal(LogLevel.Debug, level);
         Assert.Equal(
@@ -616,8 +615,7 @@ public class ChangeTrackerTest
             message
         );
 
-        (level, _, message, _, _) = _loggerFactory
-            .Log
+        (level, _, message, _, _) = _loggerFactory.Log
             .Single(e => e.Id.Id == CoreEventId.DetectChangesCompleted.Id);
         Assert.Equal(LogLevel.Debug, level);
         Assert.Equal(
@@ -651,8 +649,7 @@ public class ChangeTrackerTest
             context.ChangeTracker.DetectChanges();
         }
 
-        var (level, _, message, _, _) = _loggerFactory
-            .Log
+        var (level, _, message, _, _) = _loggerFactory.Log
             .Single(e => e.Id.Id == CoreEventId.PropertyChangeDetected.Id);
         Assert.Equal(LogLevel.Debug, level);
         Assert.Equal(
@@ -718,8 +715,7 @@ public class ChangeTrackerTest
             context.ChangeTracker.DetectChanges();
         }
 
-        var (level, _, message, _, _) = _loggerFactory
-            .Log
+        var (level, _, message, _, _) = _loggerFactory.Log
             .Single(e => e.Id.Id == CoreEventId.PropertyChangeDetected.Id);
         Assert.Equal(LogLevel.Debug, level);
         Assert.Equal(
@@ -830,8 +826,7 @@ public class ChangeTrackerTest
             context.ChangeTracker.DetectChanges();
         }
 
-        var (level, _, message, _, _) = _loggerFactory
-            .Log
+        var (level, _, message, _, _) = _loggerFactory.Log
             .Single(e => e.Id.Id == CoreEventId.ForeignKeyChangeDetected.Id);
         Assert.Equal(LogLevel.Debug, level);
         Assert.Equal(
@@ -856,8 +851,7 @@ public class ChangeTrackerTest
             context.ChangeTracker.DetectChanges();
         }
 
-        (level, _, message, _, _) = _loggerFactory
-            .Log
+        (level, _, message, _, _) = _loggerFactory.Log
             .Single(e => e.Id.Id == CoreEventId.ForeignKeyChangeDetected.Id);
         Assert.Equal(LogLevel.Debug, level);
         Assert.Equal(
@@ -896,8 +890,7 @@ public class ChangeTrackerTest
             context.ChangeTracker.DetectChanges();
         }
 
-        var (level, _, message, _, _) = _loggerFactory
-            .Log
+        var (level, _, message, _, _) = _loggerFactory.Log
             .Single(e => e.Id.Id == CoreEventId.CollectionChangeDetected.Id);
         Assert.Equal(LogLevel.Debug, level);
         Assert.Equal(
@@ -922,8 +915,7 @@ public class ChangeTrackerTest
             context.ChangeTracker.DetectChanges();
         }
 
-        (level, _, message, _, _) = _loggerFactory
-            .Log
+        (level, _, message, _, _) = _loggerFactory.Log
             .Single(e => e.Id.Id == CoreEventId.CollectionChangeDetected.Id);
         Assert.Equal(LogLevel.Debug, level);
         Assert.Equal(
@@ -962,8 +954,7 @@ public class ChangeTrackerTest
             context.ChangeTracker.DetectChanges();
         }
 
-        var (level, _, message, _, _) = _loggerFactory
-            .Log
+        var (level, _, message, _, _) = _loggerFactory.Log
             .Single(e => e.Id.Id == CoreEventId.SkipCollectionChangeDetected.Id);
         Assert.Equal(LogLevel.Debug, level);
         Assert.Equal(
@@ -990,8 +981,7 @@ public class ChangeTrackerTest
             context.ChangeTracker.DetectChanges();
         }
 
-        (level, _, message, _, _) = _loggerFactory
-            .Log
+        (level, _, message, _, _) = _loggerFactory.Log
             .Single(e => e.Id.Id == CoreEventId.SkipCollectionChangeDetected.Id);
         Assert.Equal(LogLevel.Debug, level);
         Assert.Equal(
@@ -1032,8 +1022,7 @@ public class ChangeTrackerTest
             context.ChangeTracker.DetectChanges();
         }
 
-        var (level, _, message, _, _) = _loggerFactory
-            .Log
+        var (level, _, message, _, _) = _loggerFactory.Log
             .Single(e => e.Id.Id == CoreEventId.ReferenceChangeDetected.Id);
         Assert.Equal(LogLevel.Debug, level);
         Assert.Equal(
@@ -1058,8 +1047,7 @@ public class ChangeTrackerTest
             context.ChangeTracker.DetectChanges();
         }
 
-        (level, _, message, _, _) = _loggerFactory
-            .Log
+        (level, _, message, _, _) = _loggerFactory.Log
             .Single(e => e.Id.Id == CoreEventId.ReferenceChangeDetected.Id);
         Assert.Equal(LogLevel.Debug, level);
         Assert.Equal(
@@ -1085,8 +1073,7 @@ public class ChangeTrackerTest
         _loggerFactory.Log.Clear();
         context.Cats.Find(1);
 
-        var (level, _, message, _, _) = _loggerFactory
-            .Log
+        var (level, _, message, _, _) = _loggerFactory.Log
             .Single(e => e.Id.Id == CoreEventId.StartedTracking.Id);
         Assert.Equal(LogLevel.Debug, level);
         Assert.Equal(
@@ -1110,8 +1097,7 @@ public class ChangeTrackerTest
         _loggerFactory.Log.Clear();
         context.Attach(new Hat(88));
 
-        var (level, _, message, _, _) = _loggerFactory
-            .Log
+        var (level, _, message, _, _) = _loggerFactory.Log
             .Single(e => e.Id.Id == CoreEventId.StartedTracking.Id);
         Assert.Equal(LogLevel.Debug, level);
         Assert.Equal(
@@ -1140,8 +1126,7 @@ public class ChangeTrackerTest
 
         context.Entry(cat).State = EntityState.Deleted;
 
-        var (level, _, message, _, _) = _loggerFactory
-            .Log
+        var (level, _, message, _, _) = _loggerFactory.Log
             .Single(e => e.Id.Id == CoreEventId.StateChanged.Id);
         Assert.Equal(LogLevel.Debug, level);
         Assert.Equal(
@@ -1196,8 +1181,7 @@ public class ChangeTrackerTest
             await context.AddAsync(new Hat(0));
         }
 
-        var (level, _, message, _, _) = _loggerFactory
-            .Log
+        var (level, _, message, _, _) = _loggerFactory.Log
             .Single(e => e.Id.Id == CoreEventId.ValueGenerated.Id);
         Assert.Equal(LogLevel.Debug, level);
 
@@ -1333,11 +1317,9 @@ public class ChangeTrackerTest
 
         void CaptureMessages()
         {
-            (cascadeDeleteLevel, _, cascadeDeleteMessage, _, _) = _loggerFactory
-                .Log
+            (cascadeDeleteLevel, _, cascadeDeleteMessage, _, _) = _loggerFactory.Log
                 .FirstOrDefault(e => e.Id.Id == CoreEventId.CascadeDelete.Id);
-            (_, _, deleteOrphansMessage, _, _) = _loggerFactory
-                .Log
+            (_, _, deleteOrphansMessage, _, _) = _loggerFactory.Log
                 .FirstOrDefault(e => e.Id.Id == CoreEventId.CascadeDeleteOrphan.Id);
         }
 
@@ -1463,11 +1445,9 @@ public class ChangeTrackerTest
 
         void CaptureMessages()
         {
-            (_, _, cascadeDeleteMessage, _, _) = _loggerFactory
-                .Log
+            (_, _, cascadeDeleteMessage, _, _) = _loggerFactory.Log
                 .FirstOrDefault(e => e.Id.Id == CoreEventId.CascadeDelete.Id);
-            (deleteOrphansLevel, _, deleteOrphansMessage, _, _) = _loggerFactory
-                .Log
+            (deleteOrphansLevel, _, deleteOrphansMessage, _, _) = _loggerFactory.Log
                 .FirstOrDefault(e => e.Id.Id == CoreEventId.CascadeDeleteOrphan.Id);
         }
 
@@ -1553,8 +1533,7 @@ public class ChangeTrackerTest
             context.SaveChanges();
         }
 
-        var (level, _, message, _, _) = _loggerFactory
-            .Log
+        var (level, _, message, _, _) = _loggerFactory.Log
             .Single(e => e.Id.Id == CoreEventId.SaveChangesStarting.Id);
         Assert.Equal(LogLevel.Debug, level);
         Assert.Equal(
@@ -1564,8 +1543,7 @@ public class ChangeTrackerTest
             message
         );
 
-        (level, _, message, _, _) = _loggerFactory
-            .Log
+        (level, _, message, _, _) = _loggerFactory.Log
             .Single(e => e.Id.Id == CoreEventId.SaveChangesCompleted.Id);
         Assert.Equal(LogLevel.Debug, level);
         Assert.Equal(
@@ -1586,8 +1564,7 @@ public class ChangeTrackerTest
             _loggerFactory.Log.Clear();
         }
 
-        var (level, _, message, _, _) = _loggerFactory
-            .Log
+        var (level, _, message, _, _) = _loggerFactory.Log
             .Single(e => e.Id.Id == CoreEventId.ContextDisposed.Id);
         Assert.Equal(LogLevel.Debug, level);
         Assert.Equal(
@@ -2997,8 +2974,7 @@ public class ChangeTrackerTest
 
         Assert.Equal(
             new object[] { product },
-            context
-                .ChangeTracker
+            context.ChangeTracker
                 .Entries<Product>()
                 .Select(e => e.Entity)
                 .OrderBy(e => e.GetType().Name)
@@ -3006,8 +2982,7 @@ public class ChangeTrackerTest
 
         Assert.Equal(
             new object[] { category },
-            context
-                .ChangeTracker
+            context.ChangeTracker
                 .Entries<Category>()
                 .Select(e => e.Entity)
                 .OrderBy(e => e.GetType().Name)
@@ -3015,8 +2990,7 @@ public class ChangeTrackerTest
 
         Assert.Equal(
             new object[] { category, product },
-            context
-                .ChangeTracker
+            context.ChangeTracker
                 .Entries<object>()
                 .Select(e => e.Entity)
                 .OrderBy(e => e.GetType().Name)
@@ -3129,8 +3103,7 @@ public class ChangeTrackerTest
 
         if (trackNewDependents)
         {
-            newCategory
-                .Products
+            newCategory.Products
                 .AddRange(
                     new OptionalProduct[]
                     {
@@ -3620,8 +3593,7 @@ public class ChangeTrackerTest
                 CoreStrings.TrackingTypeMismatch(nameof(OfThis), "Dreams.Are#AreMade"),
                 Assert
                     .Throws<InvalidOperationException>(() =>
-                        context
-                            .ChangeTracker
+                        context.ChangeTracker
                             .TrackGraph(
                                 dreams,
                                 e =>

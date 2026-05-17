@@ -31,15 +31,13 @@ namespace System.ServiceModel
         {
             if (partialQueueName == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("partialQueueName");
             }
 
             if (contextProperties == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("contextProperties");
             }
 

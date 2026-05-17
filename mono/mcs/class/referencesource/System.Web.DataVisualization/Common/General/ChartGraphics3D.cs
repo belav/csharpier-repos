@@ -599,15 +599,16 @@ namespace System.Web.UI.DataVisualization.Charting
                         backLightColor,
                         rightLightColor,
                         bottomLightColor;
-                    area.matrix3D.GetLight(
-                        brush.Color,
-                        out frontLightColor,
-                        out backLightColor,
-                        out leftLightColor,
-                        out rightLightColor,
-                        out topLightColor,
-                        out bottomLightColor
-                    );
+                    area.matrix3D
+                        .GetLight(
+                            brush.Color,
+                            out frontLightColor,
+                            out backLightColor,
+                            out leftLightColor,
+                            out rightLightColor,
+                            out topLightColor,
+                            out bottomLightColor
+                        );
 
                     Color lightColor;
                     if (area.Area3DStyle.Inclination < 0)
@@ -672,15 +673,16 @@ namespace System.Web.UI.DataVisualization.Charting
                         backLightColor,
                         rightLightColor,
                         bottomLightColor;
-                    area.matrix3D.GetLight(
-                        brush.Color,
-                        out frontLightColor,
-                        out backLightColor,
-                        out leftLightColor,
-                        out rightLightColor,
-                        out topLightColor,
-                        out bottomLightColor
-                    );
+                    area.matrix3D
+                        .GetLight(
+                            brush.Color,
+                            out frontLightColor,
+                            out backLightColor,
+                            out leftLightColor,
+                            out rightLightColor,
+                            out topLightColor,
+                            out bottomLightColor
+                        );
 
                     Color lightColor;
                     if (area.Area3DStyle.Inclination < 0)
@@ -841,8 +843,7 @@ namespace System.Web.UI.DataVisualization.Charting
                     if (point.IsCustomPropertySet("_COLLECTED_DATA_POINT"))
                     {
                         // Add point to the map area
-                        common
-                            .HotRegionsList
+                        common.HotRegionsList
                             .AddHotRegion(
                                 (ChartGraphics)this,
                                 path,
@@ -864,8 +865,7 @@ namespace System.Web.UI.DataVisualization.Charting
                         return;
                     }
 
-                    common
-                        .HotRegionsList
+                    common.HotRegionsList
                         .AddHotRegion(
                             path,
                             false,
@@ -964,15 +964,16 @@ namespace System.Web.UI.DataVisualization.Charting
                         backLightColor,
                         rightLightColor,
                         bottomLightColor;
-                    area.matrix3D.GetLight(
-                        brush.Color,
-                        out frontLightColor,
-                        out backLightColor,
-                        out leftLightColor,
-                        out rightLightColor,
-                        out topLightColor,
-                        out bottomLightColor
-                    );
+                    area.matrix3D
+                        .GetLight(
+                            brush.Color,
+                            out frontLightColor,
+                            out backLightColor,
+                            out leftLightColor,
+                            out rightLightColor,
+                            out topLightColor,
+                            out bottomLightColor
+                        );
 
                     Pen newPen = (Pen)pen.Clone();
 
@@ -1009,8 +1010,7 @@ namespace System.Web.UI.DataVisualization.Charting
                     if (point.IsCustomPropertySet("_COLLECTED_DATA_POINT"))
                     {
                         // Add point to the map area
-                        common
-                            .HotRegionsList
+                        common.HotRegionsList
                             .AddHotRegion(
                                 (ChartGraphics)this,
                                 path,
@@ -1032,8 +1032,7 @@ namespace System.Web.UI.DataVisualization.Charting
                         return;
                     }
 
-                    common
-                        .HotRegionsList
+                    common.HotRegionsList
                         .AddHotRegion(
                             path,
                             false,
@@ -1159,15 +1158,16 @@ namespace System.Web.UI.DataVisualization.Charting
                         backLightColor,
                         rightLightColor,
                         bottomLightColor;
-                    area.matrix3D.GetLight(
-                        brush.Color,
-                        out frontLightColor,
-                        out backLightColor,
-                        out leftLightColor,
-                        out rightLightColor,
-                        out topLightColor,
-                        out bottomLightColor
-                    );
+                    area.matrix3D
+                        .GetLight(
+                            brush.Color,
+                            out frontLightColor,
+                            out backLightColor,
+                            out leftLightColor,
+                            out rightLightColor,
+                            out topLightColor,
+                            out bottomLightColor
+                        );
 
                     Pen newPen = (Pen)pen.Clone();
 
@@ -1204,8 +1204,7 @@ namespace System.Web.UI.DataVisualization.Charting
                     if (point.IsCustomPropertySet("_COLLECTED_DATA_POINT"))
                     {
                         // Add point to the map area
-                        common
-                            .HotRegionsList
+                        common.HotRegionsList
                             .AddHotRegion(
                                 (ChartGraphics)this,
                                 path,
@@ -1228,8 +1227,7 @@ namespace System.Web.UI.DataVisualization.Charting
                     }
 
                     // Add points to the map area
-                    common
-                        .HotRegionsList
+                    common.HotRegionsList
                         .AddHotRegion(
                             path,
                             false,

@@ -95,8 +95,7 @@ namespace Microsoft.CodeAnalysis.CSharp.DecompiledSource
                     document,
                     SpecializedCollections.SingletonEnumerable(node.FullSpan),
                     options,
-                    CSharpDecompiledSourceFormattingRule
-                        .Instance
+                    CSharpDecompiledSourceFormattingRule.Instance
                         .Concat(Formatter.GetDefaultFormattingRules(document)),
                     cancellationToken
                 )
@@ -113,8 +112,7 @@ namespace Microsoft.CodeAnalysis.CSharp.DecompiledSource
         )
         {
             var assemblyInfo = MetadataAsSourceHelpers.GetAssemblyInfo(symbol.ContainingAssembly);
-            var compilation = await document
-                .Project
+            var compilation = await document.Project
                 .GetRequiredCompilationAsync(cancellationToken)
                 .ConfigureAwait(false);
             var assemblyPath = MetadataAsSourceHelpers.GetAssemblyDisplay(

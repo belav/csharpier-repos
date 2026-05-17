@@ -19,13 +19,11 @@ namespace System.Security.Cryptography
         {
             // Constructors should check key size before calling ImportKey.
             Debug.Assert(key.Length == KeySizeInBytes);
-            _ctxHandle = Interop
-                .Crypto
+            _ctxHandle = Interop.Crypto
                 .EvpCipherCreatePartial(Interop.Crypto.EvpChaCha20Poly1305());
 
             Interop.Crypto.CheckValidOpenSslHandle(_ctxHandle);
-            Interop
-                .Crypto
+            Interop.Crypto
                 .EvpCipherSetKeyAndIV(
                     _ctxHandle,
                     key,
@@ -44,8 +42,7 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> associatedData = default
         )
         {
-            Interop
-                .Crypto
+            Interop.Crypto
                 .EvpCipherSetKeyAndIV(
                     _ctxHandle,
                     Span<byte>.Empty,
@@ -76,8 +73,7 @@ namespace System.Security.Cryptography
                 ciphertextAndTag = ciphertextAndTag.Slice(0, ciphertextAndTagLength);
 
                 if (
-                    !Interop
-                        .Crypto
+                    !Interop.Crypto
                         .EvpCipherUpdate(
                             _ctxHandle,
                             ciphertextAndTag,
@@ -90,8 +86,7 @@ namespace System.Security.Cryptography
                 }
 
                 if (
-                    !Interop
-                        .Crypto
+                    !Interop.Crypto
                         .EvpAeadCipherFinalEx(
                             _ctxHandle,
                             ciphertextAndTag.Slice(ciphertextBytesWritten),
@@ -136,8 +131,7 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> associatedData
         )
         {
-            Interop
-                .Crypto
+            Interop.Crypto
                 .EvpCipherSetKeyAndIV(
                     _ctxHandle,
                     ReadOnlySpan<byte>.Empty,
@@ -151,8 +145,7 @@ namespace System.Security.Cryptography
             }
 
             if (
-                !Interop
-                    .Crypto
+                !Interop.Crypto
                     .EvpCipherUpdate(
                         _ctxHandle,
                         plaintext,
@@ -166,8 +159,7 @@ namespace System.Security.Cryptography
             }
 
             if (
-                !Interop
-                    .Crypto
+                !Interop.Crypto
                     .EvpCipherUpdate(
                         _ctxHandle,
                         plaintext.Slice(plaintextBytesWritten),
@@ -183,8 +175,7 @@ namespace System.Security.Cryptography
             plaintextBytesWritten += bytesWritten;
 
             if (
-                !Interop
-                    .Crypto
+                !Interop.Crypto
                     .EvpAeadCipherFinalEx(
                         _ctxHandle,
                         plaintext.Slice(plaintextBytesWritten),

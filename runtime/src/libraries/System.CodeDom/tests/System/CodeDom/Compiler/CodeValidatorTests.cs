@@ -77,24 +77,20 @@ namespace System.CodeDom.Compiler.Tests
             fullEvent.Comments.Add(new CodeCommentStatement("0"));
             fullEvent.Comments.Add(new CodeCommentStatement("text"));
             fullEvent.StartDirectives.Add(new CodeChecksumPragma());
-            fullEvent
-                .StartDirectives
+            fullEvent.StartDirectives
                 .Add(new CodeChecksumPragma("fileName", Guid.NewGuid(), new byte[0]));
             fullEvent.EndDirectives.Add(new CodeChecksumPragma());
-            fullEvent
-                .EndDirectives
+            fullEvent.EndDirectives
                 .Add(new CodeChecksumPragma("fileName", Guid.NewGuid(), new byte[0]));
             fullEvent.CustomAttributes.Add(new CodeAttributeDeclaration("attribute1"));
-            fullEvent
-                .CustomAttributes
+            fullEvent.CustomAttributes
                 .Add(
                     new CodeAttributeDeclaration(
                         "attribute2",
                         new CodeAttributeArgument("name", new CodePrimitiveExpression(1))
                     )
                 );
-            fullEvent
-                .CustomAttributes
+            fullEvent.CustomAttributes
                 .Add(
                     new CodeAttributeDeclaration(
                         "attribute3",
@@ -106,8 +102,7 @@ namespace System.CodeDom.Compiler.Tests
             fullEvent.ImplementationTypes.Add(new CodeTypeReference((string)null));
             fullEvent.ImplementationTypes.Add(new CodeTypeReference(string.Empty));
             fullEvent.ImplementationTypes.Add(new CodeTypeReference("constraint1"));
-            fullEvent
-                .ImplementationTypes
+            fullEvent.ImplementationTypes
                 .Add(
                     new CodeTypeReference(
                         "constraint2`2",
@@ -132,24 +127,20 @@ namespace System.CodeDom.Compiler.Tests
             fullField.Comments.Add(new CodeCommentStatement("0"));
             fullField.Comments.Add(new CodeCommentStatement("text"));
             fullField.StartDirectives.Add(new CodeChecksumPragma());
-            fullField
-                .StartDirectives
+            fullField.StartDirectives
                 .Add(new CodeChecksumPragma("fileName", Guid.NewGuid(), new byte[0]));
             fullField.EndDirectives.Add(new CodeChecksumPragma());
-            fullField
-                .EndDirectives
+            fullField.EndDirectives
                 .Add(new CodeChecksumPragma("fileName", Guid.NewGuid(), new byte[0]));
             fullField.CustomAttributes.Add(new CodeAttributeDeclaration("attribute1"));
-            fullField
-                .CustomAttributes
+            fullField.CustomAttributes
                 .Add(
                     new CodeAttributeDeclaration(
                         "attribute2",
                         new CodeAttributeArgument("name", new CodePrimitiveExpression(1))
                     )
                 );
-            fullField
-                .CustomAttributes
+            fullField.CustomAttributes
                 .Add(
                     new CodeAttributeDeclaration(
                         "attribute3",
@@ -171,16 +162,14 @@ namespace System.CodeDom.Compiler.Tests
                 "name"
             );
             fullParameter.CustomAttributes.Add(new CodeAttributeDeclaration("attribute1"));
-            fullParameter
-                .CustomAttributes
+            fullParameter.CustomAttributes
                 .Add(
                     new CodeAttributeDeclaration(
                         "attribute2",
                         new CodeAttributeArgument("name", new CodePrimitiveExpression(1))
                     )
                 );
-            fullParameter
-                .CustomAttributes
+            fullParameter.CustomAttributes
                 .Add(
                     new CodeAttributeDeclaration(
                         "attribute3",
@@ -193,16 +182,14 @@ namespace System.CodeDom.Compiler.Tests
 
             var fullTypeParameter = new CodeTypeParameter("parameter");
             fullTypeParameter.CustomAttributes.Add(new CodeAttributeDeclaration("attribute1"));
-            fullTypeParameter
-                .CustomAttributes
+            fullTypeParameter.CustomAttributes
                 .Add(
                     new CodeAttributeDeclaration(
                         "attribute2",
                         new CodeAttributeArgument("name", new CodePrimitiveExpression(1))
                     )
                 );
-            fullTypeParameter
-                .CustomAttributes
+            fullTypeParameter.CustomAttributes
                 .Add(
                     new CodeAttributeDeclaration(
                         "attribute3",
@@ -214,8 +201,7 @@ namespace System.CodeDom.Compiler.Tests
             fullTypeParameter.Constraints.Add(new CodeTypeReference((string)null));
             fullTypeParameter.Constraints.Add(new CodeTypeReference(string.Empty));
             fullTypeParameter.Constraints.Add(new CodeTypeReference("constraint1"));
-            fullTypeParameter
-                .Constraints
+            fullTypeParameter.Constraints
                 .Add(
                     new CodeTypeReference(
                         "constraint2`2",
@@ -234,16 +220,14 @@ namespace System.CodeDom.Compiler.Tests
                 new CodeTypeReference("type"),
                 "name"
             );
-            invalidParameterAttribute2
-                .CustomAttributes
+            invalidParameterAttribute2.CustomAttributes
                 .Add(new CodeAttributeDeclaration((string)null));
 
             var invalidParameterAttribute3 = new CodeParameterDeclarationExpression(
                 new CodeTypeReference("type"),
                 "name"
             );
-            invalidParameterAttribute3
-                .CustomAttributes
+            invalidParameterAttribute3.CustomAttributes
                 .Add(new CodeAttributeDeclaration(string.Empty));
 
             var invalidParameterAttribute4 = new CodeParameterDeclarationExpression(
@@ -256,8 +240,7 @@ namespace System.CodeDom.Compiler.Tests
                 new CodeTypeReference("type"),
                 "name"
             );
-            invalidParameterAttribute5
-                .CustomAttributes
+            invalidParameterAttribute5.CustomAttributes
                 .Add(
                     new CodeAttributeDeclaration(
                         "name",
@@ -269,8 +252,7 @@ namespace System.CodeDom.Compiler.Tests
                 new CodeTypeReference("type"),
                 "name"
             );
-            invalidParameterAttribute6
-                .CustomAttributes
+            invalidParameterAttribute6.CustomAttributes
                 .Add(
                     new CodeAttributeDeclaration(
                         "name",
@@ -300,24 +282,20 @@ namespace System.CodeDom.Compiler.Tests
             fullMethod.Comments.Add(new CodeCommentStatement("0"));
             fullMethod.Comments.Add(new CodeCommentStatement("text"));
             fullMethod.StartDirectives.Add(new CodeChecksumPragma());
-            fullMethod
-                .StartDirectives
+            fullMethod.StartDirectives
                 .Add(new CodeChecksumPragma("fileName", Guid.NewGuid(), new byte[0]));
             fullMethod.EndDirectives.Add(new CodeChecksumPragma());
-            fullMethod
-                .EndDirectives
+            fullMethod.EndDirectives
                 .Add(new CodeChecksumPragma("fileName", Guid.NewGuid(), new byte[0]));
             fullMethod.CustomAttributes.Add(new CodeAttributeDeclaration("attribute1"));
-            fullMethod
-                .CustomAttributes
+            fullMethod.CustomAttributes
                 .Add(
                     new CodeAttributeDeclaration(
                         "attribute2",
                         new CodeAttributeArgument("name", new CodePrimitiveExpression(1))
                     )
                 );
-            fullMethod
-                .CustomAttributes
+            fullMethod.CustomAttributes
                 .Add(
                     new CodeAttributeDeclaration(
                         "attribute3",
@@ -329,8 +307,7 @@ namespace System.CodeDom.Compiler.Tests
             fullMethod.ImplementationTypes.Add(new CodeTypeReference((string)null));
             fullMethod.ImplementationTypes.Add(new CodeTypeReference(string.Empty));
             fullMethod.ImplementationTypes.Add(new CodeTypeReference("constraint1"));
-            fullMethod
-                .ImplementationTypes
+            fullMethod.ImplementationTypes
                 .Add(
                     new CodeTypeReference(
                         "constraint2`2",
@@ -339,16 +316,14 @@ namespace System.CodeDom.Compiler.Tests
                     )
                 );
             fullMethod.ReturnTypeCustomAttributes.Add(new CodeAttributeDeclaration("attribute1"));
-            fullMethod
-                .ReturnTypeCustomAttributes
+            fullMethod.ReturnTypeCustomAttributes
                 .Add(
                     new CodeAttributeDeclaration(
                         "attribute2",
                         new CodeAttributeArgument("name", new CodePrimitiveExpression(1))
                     )
                 );
-            fullMethod
-                .ReturnTypeCustomAttributes
+            fullMethod.ReturnTypeCustomAttributes
                 .Add(
                     new CodeAttributeDeclaration(
                         "attribute3",
@@ -358,11 +333,9 @@ namespace System.CodeDom.Compiler.Tests
                     )
                 );
             fullMethod.Statements.Add(new CodeMethodReturnStatement());
-            fullMethod
-                .Statements
+            fullMethod.Statements
                 .Add(new CodeMethodReturnStatement { LinePragma = new CodeLinePragma() });
-            fullMethod
-                .Parameters
+            fullMethod.Parameters
                 .Add(new CodeParameterDeclarationExpression(new CodeTypeReference("type"), "name"));
             fullMethod.Parameters.Add(fullParameter);
             fullMethod.TypeParameters.Add(new CodeTypeParameter("parameter1"));
@@ -419,24 +392,20 @@ namespace System.CodeDom.Compiler.Tests
             fullEntryPointMethod.Comments.Add(new CodeCommentStatement("0"));
             fullEntryPointMethod.Comments.Add(new CodeCommentStatement("text"));
             fullEntryPointMethod.StartDirectives.Add(new CodeChecksumPragma());
-            fullEntryPointMethod
-                .StartDirectives
+            fullEntryPointMethod.StartDirectives
                 .Add(new CodeChecksumPragma("fileName", Guid.NewGuid(), new byte[0]));
             fullEntryPointMethod.EndDirectives.Add(new CodeChecksumPragma());
-            fullEntryPointMethod
-                .EndDirectives
+            fullEntryPointMethod.EndDirectives
                 .Add(new CodeChecksumPragma("fileName", Guid.NewGuid(), new byte[0]));
             fullEntryPointMethod.CustomAttributes.Add(new CodeAttributeDeclaration("attribute1"));
-            fullEntryPointMethod
-                .CustomAttributes
+            fullEntryPointMethod.CustomAttributes
                 .Add(
                     new CodeAttributeDeclaration(
                         "attribute2",
                         new CodeAttributeArgument("name", new CodePrimitiveExpression(1))
                     )
                 );
-            fullEntryPointMethod
-                .CustomAttributes
+            fullEntryPointMethod.CustomAttributes
                 .Add(
                     new CodeAttributeDeclaration(
                         "attribute3",
@@ -449,16 +418,14 @@ namespace System.CodeDom.Compiler.Tests
             fullEntryPointMethod.CustomAttributes.Add(new CodeAttributeDeclaration((string)null));
             fullEntryPointMethod.CustomAttributes.Add(new CodeAttributeDeclaration(string.Empty));
             fullEntryPointMethod.CustomAttributes.Add(new CodeAttributeDeclaration("0"));
-            fullEntryPointMethod
-                .CustomAttributes
+            fullEntryPointMethod.CustomAttributes
                 .Add(
                     new CodeAttributeDeclaration(
                         "name",
                         new CodeAttributeArgument("0", new CodePrimitiveExpression(1))
                     )
                 );
-            fullEntryPointMethod
-                .CustomAttributes
+            fullEntryPointMethod.CustomAttributes
                 .Add(
                     new CodeAttributeDeclaration(
                         "name",
@@ -468,8 +435,7 @@ namespace System.CodeDom.Compiler.Tests
             fullEntryPointMethod.ImplementationTypes.Add(new CodeTypeReference((string)null));
             fullEntryPointMethod.ImplementationTypes.Add(new CodeTypeReference(string.Empty));
             fullEntryPointMethod.ImplementationTypes.Add(new CodeTypeReference("constraint1"));
-            fullEntryPointMethod
-                .ImplementationTypes
+            fullEntryPointMethod.ImplementationTypes
                 .Add(
                     new CodeTypeReference(
                         "constraint2`2",
@@ -477,19 +443,16 @@ namespace System.CodeDom.Compiler.Tests
                         new CodeTypeReference("parameter2")
                     )
                 );
-            fullEntryPointMethod
-                .ReturnTypeCustomAttributes
+            fullEntryPointMethod.ReturnTypeCustomAttributes
                 .Add(new CodeAttributeDeclaration("attribute1"));
-            fullEntryPointMethod
-                .ReturnTypeCustomAttributes
+            fullEntryPointMethod.ReturnTypeCustomAttributes
                 .Add(
                     new CodeAttributeDeclaration(
                         "attribute2",
                         new CodeAttributeArgument("name", new CodePrimitiveExpression(1))
                     )
                 );
-            fullEntryPointMethod
-                .ReturnTypeCustomAttributes
+            fullEntryPointMethod.ReturnTypeCustomAttributes
                 .Add(
                     new CodeAttributeDeclaration(
                         "attribute3",
@@ -499,23 +462,19 @@ namespace System.CodeDom.Compiler.Tests
                     )
                 );
             fullEntryPointMethod.ReturnTypeCustomAttributes.Add(new CodeAttributeDeclaration());
-            fullEntryPointMethod
-                .ReturnTypeCustomAttributes
+            fullEntryPointMethod.ReturnTypeCustomAttributes
                 .Add(new CodeAttributeDeclaration((string)null));
-            fullEntryPointMethod
-                .ReturnTypeCustomAttributes
+            fullEntryPointMethod.ReturnTypeCustomAttributes
                 .Add(new CodeAttributeDeclaration(string.Empty));
             fullEntryPointMethod.ReturnTypeCustomAttributes.Add(new CodeAttributeDeclaration("0"));
-            fullEntryPointMethod
-                .ReturnTypeCustomAttributes
+            fullEntryPointMethod.ReturnTypeCustomAttributes
                 .Add(
                     new CodeAttributeDeclaration(
                         "name",
                         new CodeAttributeArgument("0", new CodePrimitiveExpression(1))
                     )
                 );
-            fullEntryPointMethod
-                .ReturnTypeCustomAttributes
+            fullEntryPointMethod.ReturnTypeCustomAttributes
                 .Add(
                     new CodeAttributeDeclaration(
                         "name",
@@ -523,33 +482,26 @@ namespace System.CodeDom.Compiler.Tests
                     )
                 );
             fullEntryPointMethod.Statements.Add(new CodeMethodReturnStatement());
-            fullEntryPointMethod
-                .Statements
+            fullEntryPointMethod.Statements
                 .Add(new CodeMethodReturnStatement { LinePragma = new CodeLinePragma() });
-            fullEntryPointMethod
-                .Parameters
+            fullEntryPointMethod.Parameters
                 .Add(new CodeParameterDeclarationExpression(new CodeTypeReference("type"), "name"));
             fullEntryPointMethod.Parameters.Add(fullParameter);
             fullEntryPointMethod.Parameters.Add(new CodeParameterDeclarationExpression());
-            fullEntryPointMethod
-                .Parameters
+            fullEntryPointMethod.Parameters
                 .Add(new CodeParameterDeclarationExpression(new CodeTypeReference(), "name"));
-            fullEntryPointMethod
-                .Parameters
+            fullEntryPointMethod.Parameters
                 .Add(new CodeParameterDeclarationExpression(new CodeTypeReference("0"), "name"));
-            fullEntryPointMethod
-                .Parameters
+            fullEntryPointMethod.Parameters
                 .Add(new CodeParameterDeclarationExpression(new CodeTypeReference("type"), null));
-            fullEntryPointMethod
-                .Parameters
+            fullEntryPointMethod.Parameters
                 .Add(
                     new CodeParameterDeclarationExpression(
                         new CodeTypeReference("type"),
                         string.Empty
                     )
                 );
-            fullEntryPointMethod
-                .Parameters
+            fullEntryPointMethod.Parameters
                 .Add(new CodeParameterDeclarationExpression(new CodeTypeReference("type"), "0"));
             fullEntryPointMethod.Parameters.Add(invalidParameterAttribute1);
             fullEntryPointMethod.Parameters.Add(invalidParameterAttribute2);
@@ -602,24 +554,20 @@ namespace System.CodeDom.Compiler.Tests
             fullConstructor.Comments.Add(new CodeCommentStatement("0"));
             fullConstructor.Comments.Add(new CodeCommentStatement("text"));
             fullConstructor.StartDirectives.Add(new CodeChecksumPragma());
-            fullConstructor
-                .StartDirectives
+            fullConstructor.StartDirectives
                 .Add(new CodeChecksumPragma("fileName", Guid.NewGuid(), new byte[0]));
             fullConstructor.EndDirectives.Add(new CodeChecksumPragma());
-            fullConstructor
-                .EndDirectives
+            fullConstructor.EndDirectives
                 .Add(new CodeChecksumPragma("fileName", Guid.NewGuid(), new byte[0]));
             fullConstructor.CustomAttributes.Add(new CodeAttributeDeclaration("attribute1"));
-            fullConstructor
-                .CustomAttributes
+            fullConstructor.CustomAttributes
                 .Add(
                     new CodeAttributeDeclaration(
                         "attribute2",
                         new CodeAttributeArgument("name", new CodePrimitiveExpression(1))
                     )
                 );
-            fullConstructor
-                .CustomAttributes
+            fullConstructor.CustomAttributes
                 .Add(
                     new CodeAttributeDeclaration(
                         "attribute3",
@@ -631,8 +579,7 @@ namespace System.CodeDom.Compiler.Tests
             fullConstructor.ImplementationTypes.Add(new CodeTypeReference((string)null));
             fullConstructor.ImplementationTypes.Add(new CodeTypeReference(string.Empty));
             fullConstructor.ImplementationTypes.Add(new CodeTypeReference("constraint1"));
-            fullConstructor
-                .ImplementationTypes
+            fullConstructor.ImplementationTypes
                 .Add(
                     new CodeTypeReference(
                         "constraint2`2",
@@ -640,19 +587,16 @@ namespace System.CodeDom.Compiler.Tests
                         new CodeTypeReference("parameter2")
                     )
                 );
-            fullConstructor
-                .ReturnTypeCustomAttributes
+            fullConstructor.ReturnTypeCustomAttributes
                 .Add(new CodeAttributeDeclaration("attribute1"));
-            fullConstructor
-                .ReturnTypeCustomAttributes
+            fullConstructor.ReturnTypeCustomAttributes
                 .Add(
                     new CodeAttributeDeclaration(
                         "attribute2",
                         new CodeAttributeArgument("name", new CodePrimitiveExpression(1))
                     )
                 );
-            fullConstructor
-                .ReturnTypeCustomAttributes
+            fullConstructor.ReturnTypeCustomAttributes
                 .Add(
                     new CodeAttributeDeclaration(
                         "attribute3",
@@ -662,23 +606,19 @@ namespace System.CodeDom.Compiler.Tests
                     )
                 );
             fullConstructor.ReturnTypeCustomAttributes.Add(new CodeAttributeDeclaration());
-            fullConstructor
-                .ReturnTypeCustomAttributes
+            fullConstructor.ReturnTypeCustomAttributes
                 .Add(new CodeAttributeDeclaration((string)null));
-            fullConstructor
-                .ReturnTypeCustomAttributes
+            fullConstructor.ReturnTypeCustomAttributes
                 .Add(new CodeAttributeDeclaration(string.Empty));
             fullConstructor.ReturnTypeCustomAttributes.Add(new CodeAttributeDeclaration("0"));
-            fullConstructor
-                .ReturnTypeCustomAttributes
+            fullConstructor.ReturnTypeCustomAttributes
                 .Add(
                     new CodeAttributeDeclaration(
                         "name",
                         new CodeAttributeArgument("0", new CodePrimitiveExpression(1))
                     )
                 );
-            fullConstructor
-                .ReturnTypeCustomAttributes
+            fullConstructor.ReturnTypeCustomAttributes
                 .Add(
                     new CodeAttributeDeclaration(
                         "name",
@@ -686,11 +626,9 @@ namespace System.CodeDom.Compiler.Tests
                     )
                 );
             fullConstructor.Statements.Add(new CodeMethodReturnStatement());
-            fullConstructor
-                .Statements
+            fullConstructor.Statements
                 .Add(new CodeMethodReturnStatement { LinePragma = new CodeLinePragma() });
-            fullConstructor
-                .Parameters
+            fullConstructor.Parameters
                 .Add(new CodeParameterDeclarationExpression(new CodeTypeReference("type"), "name"));
             fullConstructor.Parameters.Add(fullParameter);
             fullConstructor.TypeParameters.Add(new CodeTypeParameter("parameter1"));
@@ -749,24 +687,20 @@ namespace System.CodeDom.Compiler.Tests
             fullTypeConstructor.Comments.Add(new CodeCommentStatement("0"));
             fullTypeConstructor.Comments.Add(new CodeCommentStatement("text"));
             fullTypeConstructor.StartDirectives.Add(new CodeChecksumPragma());
-            fullTypeConstructor
-                .StartDirectives
+            fullTypeConstructor.StartDirectives
                 .Add(new CodeChecksumPragma("fileName", Guid.NewGuid(), new byte[0]));
             fullTypeConstructor.EndDirectives.Add(new CodeChecksumPragma());
-            fullTypeConstructor
-                .EndDirectives
+            fullTypeConstructor.EndDirectives
                 .Add(new CodeChecksumPragma("fileName", Guid.NewGuid(), new byte[0]));
             fullTypeConstructor.CustomAttributes.Add(new CodeAttributeDeclaration("attribute1"));
-            fullTypeConstructor
-                .CustomAttributes
+            fullTypeConstructor.CustomAttributes
                 .Add(
                     new CodeAttributeDeclaration(
                         "attribute2",
                         new CodeAttributeArgument("name", new CodePrimitiveExpression(1))
                     )
                 );
-            fullTypeConstructor
-                .CustomAttributes
+            fullTypeConstructor.CustomAttributes
                 .Add(
                     new CodeAttributeDeclaration(
                         "attribute3",
@@ -779,16 +713,14 @@ namespace System.CodeDom.Compiler.Tests
             fullTypeConstructor.CustomAttributes.Add(new CodeAttributeDeclaration((string)null));
             fullTypeConstructor.CustomAttributes.Add(new CodeAttributeDeclaration(string.Empty));
             fullTypeConstructor.CustomAttributes.Add(new CodeAttributeDeclaration("0"));
-            fullTypeConstructor
-                .CustomAttributes
+            fullTypeConstructor.CustomAttributes
                 .Add(
                     new CodeAttributeDeclaration(
                         "name",
                         new CodeAttributeArgument("0", new CodePrimitiveExpression(1))
                     )
                 );
-            fullTypeConstructor
-                .CustomAttributes
+            fullTypeConstructor.CustomAttributes
                 .Add(
                     new CodeAttributeDeclaration(
                         "name",
@@ -798,8 +730,7 @@ namespace System.CodeDom.Compiler.Tests
             fullTypeConstructor.ImplementationTypes.Add(new CodeTypeReference((string)null));
             fullTypeConstructor.ImplementationTypes.Add(new CodeTypeReference(string.Empty));
             fullTypeConstructor.ImplementationTypes.Add(new CodeTypeReference("constraint1"));
-            fullTypeConstructor
-                .ImplementationTypes
+            fullTypeConstructor.ImplementationTypes
                 .Add(
                     new CodeTypeReference(
                         "constraint2`2",
@@ -807,19 +738,16 @@ namespace System.CodeDom.Compiler.Tests
                         new CodeTypeReference("parameter2")
                     )
                 );
-            fullTypeConstructor
-                .ReturnTypeCustomAttributes
+            fullTypeConstructor.ReturnTypeCustomAttributes
                 .Add(new CodeAttributeDeclaration("attribute1"));
-            fullTypeConstructor
-                .ReturnTypeCustomAttributes
+            fullTypeConstructor.ReturnTypeCustomAttributes
                 .Add(
                     new CodeAttributeDeclaration(
                         "attribute2",
                         new CodeAttributeArgument("name", new CodePrimitiveExpression(1))
                     )
                 );
-            fullTypeConstructor
-                .ReturnTypeCustomAttributes
+            fullTypeConstructor.ReturnTypeCustomAttributes
                 .Add(
                     new CodeAttributeDeclaration(
                         "attribute3",
@@ -829,23 +757,19 @@ namespace System.CodeDom.Compiler.Tests
                     )
                 );
             fullTypeConstructor.ReturnTypeCustomAttributes.Add(new CodeAttributeDeclaration());
-            fullTypeConstructor
-                .ReturnTypeCustomAttributes
+            fullTypeConstructor.ReturnTypeCustomAttributes
                 .Add(new CodeAttributeDeclaration((string)null));
-            fullTypeConstructor
-                .ReturnTypeCustomAttributes
+            fullTypeConstructor.ReturnTypeCustomAttributes
                 .Add(new CodeAttributeDeclaration(string.Empty));
             fullTypeConstructor.ReturnTypeCustomAttributes.Add(new CodeAttributeDeclaration("0"));
-            fullTypeConstructor
-                .ReturnTypeCustomAttributes
+            fullTypeConstructor.ReturnTypeCustomAttributes
                 .Add(
                     new CodeAttributeDeclaration(
                         "name",
                         new CodeAttributeArgument("0", new CodePrimitiveExpression(1))
                     )
                 );
-            fullTypeConstructor
-                .ReturnTypeCustomAttributes
+            fullTypeConstructor.ReturnTypeCustomAttributes
                 .Add(
                     new CodeAttributeDeclaration(
                         "name",
@@ -853,33 +777,26 @@ namespace System.CodeDom.Compiler.Tests
                     )
                 );
             fullTypeConstructor.Statements.Add(new CodeMethodReturnStatement());
-            fullTypeConstructor
-                .Statements
+            fullTypeConstructor.Statements
                 .Add(new CodeMethodReturnStatement { LinePragma = new CodeLinePragma() });
-            fullTypeConstructor
-                .Parameters
+            fullTypeConstructor.Parameters
                 .Add(new CodeParameterDeclarationExpression(new CodeTypeReference("type"), "name"));
             fullTypeConstructor.Parameters.Add(fullParameter);
             fullTypeConstructor.Parameters.Add(new CodeParameterDeclarationExpression());
-            fullTypeConstructor
-                .Parameters
+            fullTypeConstructor.Parameters
                 .Add(new CodeParameterDeclarationExpression(new CodeTypeReference(), "name"));
-            fullTypeConstructor
-                .Parameters
+            fullTypeConstructor.Parameters
                 .Add(new CodeParameterDeclarationExpression(new CodeTypeReference("0"), "name"));
-            fullTypeConstructor
-                .Parameters
+            fullTypeConstructor.Parameters
                 .Add(new CodeParameterDeclarationExpression(new CodeTypeReference("type"), null));
-            fullTypeConstructor
-                .Parameters
+            fullTypeConstructor.Parameters
                 .Add(
                     new CodeParameterDeclarationExpression(
                         new CodeTypeReference("type"),
                         string.Empty
                     )
                 );
-            fullTypeConstructor
-                .Parameters
+            fullTypeConstructor.Parameters
                 .Add(new CodeParameterDeclarationExpression(new CodeTypeReference("type"), "0"));
             fullTypeConstructor.Parameters.Add(invalidParameterAttribute1);
             fullTypeConstructor.Parameters.Add(invalidParameterAttribute2);
@@ -914,24 +831,20 @@ namespace System.CodeDom.Compiler.Tests
             fullItemPropertyUpper.Comments.Add(new CodeCommentStatement("0"));
             fullItemPropertyUpper.Comments.Add(new CodeCommentStatement("text"));
             fullItemPropertyUpper.StartDirectives.Add(new CodeChecksumPragma());
-            fullItemPropertyUpper
-                .StartDirectives
+            fullItemPropertyUpper.StartDirectives
                 .Add(new CodeChecksumPragma("fileName", Guid.NewGuid(), new byte[0]));
             fullItemPropertyUpper.EndDirectives.Add(new CodeChecksumPragma());
-            fullItemPropertyUpper
-                .EndDirectives
+            fullItemPropertyUpper.EndDirectives
                 .Add(new CodeChecksumPragma("fileName", Guid.NewGuid(), new byte[0]));
             fullItemPropertyUpper.CustomAttributes.Add(new CodeAttributeDeclaration("attribute1"));
-            fullItemPropertyUpper
-                .CustomAttributes
+            fullItemPropertyUpper.CustomAttributes
                 .Add(
                     new CodeAttributeDeclaration(
                         "attribute2",
                         new CodeAttributeArgument("name", new CodePrimitiveExpression(1))
                     )
                 );
-            fullItemPropertyUpper
-                .CustomAttributes
+            fullItemPropertyUpper.CustomAttributes
                 .Add(
                     new CodeAttributeDeclaration(
                         "attribute3",
@@ -941,15 +854,12 @@ namespace System.CodeDom.Compiler.Tests
                     )
                 );
             fullItemPropertyUpper.GetStatements.Add(new CodeMethodReturnStatement());
-            fullItemPropertyUpper
-                .GetStatements
+            fullItemPropertyUpper.GetStatements
                 .Add(new CodeMethodReturnStatement { LinePragma = new CodeLinePragma() });
             fullItemPropertyUpper.SetStatements.Add(new CodeMethodReturnStatement());
-            fullItemPropertyUpper
-                .SetStatements
+            fullItemPropertyUpper.SetStatements
                 .Add(new CodeMethodReturnStatement { LinePragma = new CodeLinePragma() });
-            fullItemPropertyUpper
-                .Parameters
+            fullItemPropertyUpper.Parameters
                 .Add(new CodeParameterDeclarationExpression(new CodeTypeReference("type"), "name"));
             fullItemPropertyUpper.Parameters.Add(fullParameter);
             yield return new object[] { fullItemPropertyUpper };
@@ -963,24 +873,20 @@ namespace System.CodeDom.Compiler.Tests
             fullItemPropertyLower.Comments.Add(new CodeCommentStatement("0"));
             fullItemPropertyLower.Comments.Add(new CodeCommentStatement("text"));
             fullItemPropertyLower.StartDirectives.Add(new CodeChecksumPragma());
-            fullItemPropertyLower
-                .StartDirectives
+            fullItemPropertyLower.StartDirectives
                 .Add(new CodeChecksumPragma("fileName", Guid.NewGuid(), new byte[0]));
             fullItemPropertyLower.EndDirectives.Add(new CodeChecksumPragma());
-            fullItemPropertyLower
-                .EndDirectives
+            fullItemPropertyLower.EndDirectives
                 .Add(new CodeChecksumPragma("fileName", Guid.NewGuid(), new byte[0]));
             fullItemPropertyLower.CustomAttributes.Add(new CodeAttributeDeclaration("attribute1"));
-            fullItemPropertyLower
-                .CustomAttributes
+            fullItemPropertyLower.CustomAttributes
                 .Add(
                     new CodeAttributeDeclaration(
                         "attribute2",
                         new CodeAttributeArgument("name", new CodePrimitiveExpression(1))
                     )
                 );
-            fullItemPropertyLower
-                .CustomAttributes
+            fullItemPropertyLower.CustomAttributes
                 .Add(
                     new CodeAttributeDeclaration(
                         "attribute3",
@@ -990,15 +896,12 @@ namespace System.CodeDom.Compiler.Tests
                     )
                 );
             fullItemPropertyLower.GetStatements.Add(new CodeMethodReturnStatement());
-            fullItemPropertyLower
-                .GetStatements
+            fullItemPropertyLower.GetStatements
                 .Add(new CodeMethodReturnStatement { LinePragma = new CodeLinePragma() });
             fullItemPropertyLower.SetStatements.Add(new CodeMethodReturnStatement());
-            fullItemPropertyLower
-                .SetStatements
+            fullItemPropertyLower.SetStatements
                 .Add(new CodeMethodReturnStatement { LinePragma = new CodeLinePragma() });
-            fullItemPropertyLower
-                .Parameters
+            fullItemPropertyLower.Parameters
                 .Add(new CodeParameterDeclarationExpression(new CodeTypeReference("type"), "name"));
             fullItemPropertyLower.Parameters.Add(fullParameter);
             yield return new object[] { fullItemPropertyLower };
@@ -1012,24 +915,20 @@ namespace System.CodeDom.Compiler.Tests
             fullProperty.Comments.Add(new CodeCommentStatement("0"));
             fullProperty.Comments.Add(new CodeCommentStatement("text"));
             fullProperty.StartDirectives.Add(new CodeChecksumPragma());
-            fullProperty
-                .StartDirectives
+            fullProperty.StartDirectives
                 .Add(new CodeChecksumPragma("fileName", Guid.NewGuid(), new byte[0]));
             fullProperty.EndDirectives.Add(new CodeChecksumPragma());
-            fullProperty
-                .EndDirectives
+            fullProperty.EndDirectives
                 .Add(new CodeChecksumPragma("fileName", Guid.NewGuid(), new byte[0]));
             fullProperty.CustomAttributes.Add(new CodeAttributeDeclaration("attribute1"));
-            fullProperty
-                .CustomAttributes
+            fullProperty.CustomAttributes
                 .Add(
                     new CodeAttributeDeclaration(
                         "attribute2",
                         new CodeAttributeArgument("name", new CodePrimitiveExpression(1))
                     )
                 );
-            fullProperty
-                .CustomAttributes
+            fullProperty.CustomAttributes
                 .Add(
                     new CodeAttributeDeclaration(
                         "attribute3",
@@ -1039,37 +938,29 @@ namespace System.CodeDom.Compiler.Tests
                     )
                 );
             fullProperty.GetStatements.Add(new CodeMethodReturnStatement());
-            fullProperty
-                .GetStatements
+            fullProperty.GetStatements
                 .Add(new CodeMethodReturnStatement { LinePragma = new CodeLinePragma() });
             fullProperty.SetStatements.Add(new CodeMethodReturnStatement());
-            fullProperty
-                .SetStatements
+            fullProperty.SetStatements
                 .Add(new CodeMethodReturnStatement { LinePragma = new CodeLinePragma() });
-            fullProperty
-                .Parameters
+            fullProperty.Parameters
                 .Add(new CodeParameterDeclarationExpression(new CodeTypeReference("type"), "name"));
             fullProperty.Parameters.Add(fullParameter);
             fullProperty.Parameters.Add(new CodeParameterDeclarationExpression());
-            fullProperty
-                .Parameters
+            fullProperty.Parameters
                 .Add(new CodeParameterDeclarationExpression(new CodeTypeReference(), "name"));
-            fullProperty
-                .Parameters
+            fullProperty.Parameters
                 .Add(new CodeParameterDeclarationExpression(new CodeTypeReference("0"), "name"));
-            fullProperty
-                .Parameters
+            fullProperty.Parameters
                 .Add(new CodeParameterDeclarationExpression(new CodeTypeReference("type"), null));
-            fullProperty
-                .Parameters
+            fullProperty.Parameters
                 .Add(
                     new CodeParameterDeclarationExpression(
                         new CodeTypeReference("type"),
                         string.Empty
                     )
                 );
-            fullProperty
-                .Parameters
+            fullProperty.Parameters
                 .Add(new CodeParameterDeclarationExpression(new CodeTypeReference("type"), "0"));
             fullProperty.Parameters.Add(invalidParameterAttribute1);
             fullProperty.Parameters.Add(invalidParameterAttribute2);
@@ -1091,24 +982,20 @@ namespace System.CodeDom.Compiler.Tests
             fullSnippetTypeMember.Comments.Add(new CodeCommentStatement("0"));
             fullSnippetTypeMember.Comments.Add(new CodeCommentStatement("text"));
             fullSnippetTypeMember.StartDirectives.Add(new CodeChecksumPragma());
-            fullSnippetTypeMember
-                .StartDirectives
+            fullSnippetTypeMember.StartDirectives
                 .Add(new CodeChecksumPragma("fileName", Guid.NewGuid(), new byte[0]));
             fullSnippetTypeMember.EndDirectives.Add(new CodeChecksumPragma());
-            fullSnippetTypeMember
-                .EndDirectives
+            fullSnippetTypeMember.EndDirectives
                 .Add(new CodeChecksumPragma("fileName", Guid.NewGuid(), new byte[0]));
             fullSnippetTypeMember.CustomAttributes.Add(new CodeAttributeDeclaration("attribute1"));
-            fullSnippetTypeMember
-                .CustomAttributes
+            fullSnippetTypeMember.CustomAttributes
                 .Add(
                     new CodeAttributeDeclaration(
                         "attribute2",
                         new CodeAttributeArgument("name", new CodePrimitiveExpression(1))
                     )
                 );
-            fullSnippetTypeMember
-                .CustomAttributes
+            fullSnippetTypeMember.CustomAttributes
                 .Add(
                     new CodeAttributeDeclaration(
                         "attribute3",
@@ -1141,16 +1028,14 @@ namespace System.CodeDom.Compiler.Tests
             fullTypeDeclaration.Comments.Add(new CodeCommentStatement("0"));
             fullTypeDeclaration.Comments.Add(new CodeCommentStatement("text"));
             fullTypeDeclaration.CustomAttributes.Add(new CodeAttributeDeclaration("attribute1"));
-            fullTypeDeclaration
-                .CustomAttributes
+            fullTypeDeclaration.CustomAttributes
                 .Add(
                     new CodeAttributeDeclaration(
                         "attribute2",
                         new CodeAttributeArgument("name", new CodePrimitiveExpression(1))
                     )
                 );
-            fullTypeDeclaration
-                .CustomAttributes
+            fullTypeDeclaration.CustomAttributes
                 .Add(
                     new CodeAttributeDeclaration(
                         "attribute3",
@@ -1164,8 +1049,7 @@ namespace System.CodeDom.Compiler.Tests
             fullTypeDeclaration.BaseTypes.Add(new CodeTypeReference((string)null));
             fullTypeDeclaration.BaseTypes.Add(new CodeTypeReference(string.Empty));
             fullTypeDeclaration.BaseTypes.Add(new CodeTypeReference("baseType1"));
-            fullTypeDeclaration
-                .BaseTypes
+            fullTypeDeclaration.BaseTypes
                 .Add(
                     new CodeTypeReference(
                         "baseType2`2",
@@ -1175,8 +1059,7 @@ namespace System.CodeDom.Compiler.Tests
                 );
             fullTypeDeclaration.Members.Add(new CodeMemberEvent());
             fullTypeDeclaration.Members.Add(new CodeMemberEvent { Name = "0" });
-            fullTypeDeclaration
-                .Members
+            fullTypeDeclaration.Members
                 .Add(
                     new CodeMemberEvent
                     {
@@ -1184,8 +1067,7 @@ namespace System.CodeDom.Compiler.Tests
                         PrivateImplementationType = new CodeTypeReference(),
                     }
                 );
-            fullTypeDeclaration
-                .Members
+            fullTypeDeclaration.Members
                 .Add(
                     new CodeMemberEvent
                     {
@@ -1194,8 +1076,7 @@ namespace System.CodeDom.Compiler.Tests
                     }
                 );
             fullTypeDeclaration.Members.Add(fullEvent);
-            fullTypeDeclaration
-                .Members
+            fullTypeDeclaration.Members
                 .Add(new CodeMemberField(new CodeTypeReference("type"), "name"));
             fullTypeDeclaration.Members.Add(fullField);
             fullTypeDeclaration.Members.Add(new CodeMemberMethod { Name = "name" });
@@ -1206,13 +1087,11 @@ namespace System.CodeDom.Compiler.Tests
             fullTypeDeclaration.Members.Add(new CodeEntryPointMethod { Name = string.Empty });
             fullTypeDeclaration.Members.Add(new CodeEntryPointMethod { Name = "name" });
             fullTypeDeclaration.Members.Add(new CodeEntryPointMethod { Name = "0" });
-            fullTypeDeclaration
-                .Members
+            fullTypeDeclaration.Members
                 .Add(
                     new CodeEntryPointMethod { Name = "name", ReturnType = new CodeTypeReference() }
                 );
-            fullTypeDeclaration
-                .Members
+            fullTypeDeclaration.Members
                 .Add(
                     new CodeEntryPointMethod
                     {
@@ -1220,8 +1099,7 @@ namespace System.CodeDom.Compiler.Tests
                         ReturnType = new CodeTypeReference("0"),
                     }
                 );
-            fullTypeDeclaration
-                .Members
+            fullTypeDeclaration.Members
                 .Add(
                     new CodeEntryPointMethod
                     {
@@ -1229,8 +1107,7 @@ namespace System.CodeDom.Compiler.Tests
                         PrivateImplementationType = new CodeTypeReference(),
                     }
                 );
-            fullTypeDeclaration
-                .Members
+            fullTypeDeclaration.Members
                 .Add(
                     new CodeEntryPointMethod
                     {
@@ -1244,16 +1121,13 @@ namespace System.CodeDom.Compiler.Tests
             fullTypeDeclaration.Members.Add(new CodeConstructor { Name = null });
             fullTypeDeclaration.Members.Add(new CodeConstructor { Name = string.Empty });
             fullTypeDeclaration.Members.Add(new CodeConstructor { Name = "0" });
-            fullTypeDeclaration
-                .Members
+            fullTypeDeclaration.Members
                 .Add(new CodeConstructor { Name = "name", ReturnType = new CodeTypeReference() });
-            fullTypeDeclaration
-                .Members
+            fullTypeDeclaration.Members
                 .Add(
                     new CodeConstructor { Name = "name", ReturnType = new CodeTypeReference("0") }
                 );
-            fullTypeDeclaration
-                .Members
+            fullTypeDeclaration.Members
                 .Add(
                     new CodeConstructor
                     {
@@ -1261,8 +1135,7 @@ namespace System.CodeDom.Compiler.Tests
                         PrivateImplementationType = new CodeTypeReference(),
                     }
                 );
-            fullTypeDeclaration
-                .Members
+            fullTypeDeclaration.Members
                 .Add(
                     new CodeConstructor
                     {
@@ -1276,13 +1149,11 @@ namespace System.CodeDom.Compiler.Tests
             fullTypeDeclaration.Members.Add(new CodeTypeConstructor { Name = string.Empty });
             fullTypeDeclaration.Members.Add(new CodeTypeConstructor { Name = "name" });
             fullTypeDeclaration.Members.Add(new CodeTypeConstructor { Name = "0" });
-            fullTypeDeclaration
-                .Members
+            fullTypeDeclaration.Members
                 .Add(
                     new CodeTypeConstructor { Name = "name", ReturnType = new CodeTypeReference() }
                 );
-            fullTypeDeclaration
-                .Members
+            fullTypeDeclaration.Members
                 .Add(
                     new CodeTypeConstructor
                     {
@@ -1290,8 +1161,7 @@ namespace System.CodeDom.Compiler.Tests
                         ReturnType = new CodeTypeReference("0"),
                     }
                 );
-            fullTypeDeclaration
-                .Members
+            fullTypeDeclaration.Members
                 .Add(
                     new CodeTypeConstructor
                     {
@@ -1299,8 +1169,7 @@ namespace System.CodeDom.Compiler.Tests
                         PrivateImplementationType = new CodeTypeReference(),
                     }
                 );
-            fullTypeDeclaration
-                .Members
+            fullTypeDeclaration.Members
                 .Add(
                     new CodeTypeConstructor
                     {
@@ -1334,16 +1203,14 @@ namespace System.CodeDom.Compiler.Tests
             fullDelegate.Comments.Add(new CodeCommentStatement("0"));
             fullDelegate.Comments.Add(new CodeCommentStatement("text"));
             fullDelegate.CustomAttributes.Add(new CodeAttributeDeclaration("attribute1"));
-            fullDelegate
-                .CustomAttributes
+            fullDelegate.CustomAttributes
                 .Add(
                     new CodeAttributeDeclaration(
                         "attribute2",
                         new CodeAttributeArgument("name", new CodePrimitiveExpression(1))
                     )
                 );
-            fullDelegate
-                .CustomAttributes
+            fullDelegate.CustomAttributes
                 .Add(
                     new CodeAttributeDeclaration(
                         "attribute3",
@@ -1357,8 +1224,7 @@ namespace System.CodeDom.Compiler.Tests
             fullDelegate.BaseTypes.Add(new CodeTypeReference((string)null));
             fullDelegate.BaseTypes.Add(new CodeTypeReference(string.Empty));
             fullDelegate.BaseTypes.Add(new CodeTypeReference("baseType1"));
-            fullDelegate
-                .BaseTypes
+            fullDelegate.BaseTypes
                 .Add(
                     new CodeTypeReference(
                         "baseType2`2",
@@ -1368,8 +1234,7 @@ namespace System.CodeDom.Compiler.Tests
                 );
             fullDelegate.Members.Add(new CodeMemberEvent());
             fullDelegate.Members.Add(new CodeMemberEvent { Name = "0" });
-            fullDelegate
-                .Members
+            fullDelegate.Members
                 .Add(
                     new CodeMemberEvent
                     {
@@ -1377,8 +1242,7 @@ namespace System.CodeDom.Compiler.Tests
                         PrivateImplementationType = new CodeTypeReference(),
                     }
                 );
-            fullDelegate
-                .Members
+            fullDelegate.Members
                 .Add(
                     new CodeMemberEvent
                     {
@@ -1397,13 +1261,11 @@ namespace System.CodeDom.Compiler.Tests
             fullDelegate.Members.Add(new CodeEntryPointMethod { Name = string.Empty });
             fullDelegate.Members.Add(new CodeEntryPointMethod { Name = "name" });
             fullDelegate.Members.Add(new CodeEntryPointMethod { Name = "0" });
-            fullDelegate
-                .Members
+            fullDelegate.Members
                 .Add(
                     new CodeEntryPointMethod { Name = "name", ReturnType = new CodeTypeReference() }
                 );
-            fullDelegate
-                .Members
+            fullDelegate.Members
                 .Add(
                     new CodeEntryPointMethod
                     {
@@ -1411,8 +1273,7 @@ namespace System.CodeDom.Compiler.Tests
                         ReturnType = new CodeTypeReference("0"),
                     }
                 );
-            fullDelegate
-                .Members
+            fullDelegate.Members
                 .Add(
                     new CodeEntryPointMethod
                     {
@@ -1420,8 +1281,7 @@ namespace System.CodeDom.Compiler.Tests
                         PrivateImplementationType = new CodeTypeReference(),
                     }
                 );
-            fullDelegate
-                .Members
+            fullDelegate.Members
                 .Add(
                     new CodeEntryPointMethod
                     {
@@ -1435,16 +1295,13 @@ namespace System.CodeDom.Compiler.Tests
             fullDelegate.Members.Add(new CodeConstructor { Name = null });
             fullDelegate.Members.Add(new CodeConstructor { Name = string.Empty });
             fullDelegate.Members.Add(new CodeConstructor { Name = "0" });
-            fullDelegate
-                .Members
+            fullDelegate.Members
                 .Add(new CodeConstructor { Name = "name", ReturnType = new CodeTypeReference() });
-            fullDelegate
-                .Members
+            fullDelegate.Members
                 .Add(
                     new CodeConstructor { Name = "name", ReturnType = new CodeTypeReference("0") }
                 );
-            fullDelegate
-                .Members
+            fullDelegate.Members
                 .Add(
                     new CodeConstructor
                     {
@@ -1452,8 +1309,7 @@ namespace System.CodeDom.Compiler.Tests
                         PrivateImplementationType = new CodeTypeReference(),
                     }
                 );
-            fullDelegate
-                .Members
+            fullDelegate.Members
                 .Add(
                     new CodeConstructor
                     {
@@ -1467,13 +1323,11 @@ namespace System.CodeDom.Compiler.Tests
             fullDelegate.Members.Add(new CodeTypeConstructor { Name = string.Empty });
             fullDelegate.Members.Add(new CodeTypeConstructor { Name = "name" });
             fullDelegate.Members.Add(new CodeTypeConstructor { Name = "0" });
-            fullDelegate
-                .Members
+            fullDelegate.Members
                 .Add(
                     new CodeTypeConstructor { Name = "name", ReturnType = new CodeTypeReference() }
                 );
-            fullDelegate
-                .Members
+            fullDelegate.Members
                 .Add(
                     new CodeTypeConstructor
                     {
@@ -1481,8 +1335,7 @@ namespace System.CodeDom.Compiler.Tests
                         ReturnType = new CodeTypeReference("0"),
                     }
                 );
-            fullDelegate
-                .Members
+            fullDelegate.Members
                 .Add(
                     new CodeTypeConstructor
                     {
@@ -1490,8 +1343,7 @@ namespace System.CodeDom.Compiler.Tests
                         PrivateImplementationType = new CodeTypeReference(),
                     }
                 );
-            fullDelegate
-                .Members
+            fullDelegate.Members
                 .Add(
                     new CodeTypeConstructor
                     {
@@ -1512,8 +1364,7 @@ namespace System.CodeDom.Compiler.Tests
             fullDelegate.Members.Add(new CodeSnippetTypeMember(string.Empty));
             fullDelegate.Members.Add(new CodeSnippetTypeMember("text"));
             fullDelegate.Members.Add(fullSnippetTypeMember);
-            fullDelegate
-                .Parameters
+            fullDelegate.Parameters
                 .Add(new CodeParameterDeclarationExpression(new CodeTypeReference("type"), "name"));
             fullDelegate.Parameters.Add(fullParameter);
             yield return new object[] { fullDelegate };
@@ -1540,26 +1391,21 @@ namespace System.CodeDom.Compiler.Tests
 
             var fullCompileUnit = new CodeCompileUnit();
             fullCompileUnit.StartDirectives.Add(new CodeChecksumPragma());
-            fullCompileUnit
-                .StartDirectives
+            fullCompileUnit.StartDirectives
                 .Add(new CodeChecksumPragma("fileName", Guid.NewGuid(), new byte[0]));
             fullCompileUnit.EndDirectives.Add(new CodeChecksumPragma());
-            fullCompileUnit
-                .EndDirectives
+            fullCompileUnit.EndDirectives
                 .Add(new CodeChecksumPragma("fileName", Guid.NewGuid(), new byte[0]));
-            fullCompileUnit
-                .AssemblyCustomAttributes
+            fullCompileUnit.AssemblyCustomAttributes
                 .Add(new CodeAttributeDeclaration("attribute1"));
-            fullCompileUnit
-                .AssemblyCustomAttributes
+            fullCompileUnit.AssemblyCustomAttributes
                 .Add(
                     new CodeAttributeDeclaration(
                         "attribute2",
                         new CodeAttributeArgument("name", new CodePrimitiveExpression(1))
                     )
                 );
-            fullCompileUnit
-                .AssemblyCustomAttributes
+            fullCompileUnit.AssemblyCustomAttributes
                 .Add(
                     new CodeAttributeDeclaration(
                         "attribute3",
@@ -1589,26 +1435,21 @@ namespace System.CodeDom.Compiler.Tests
                 LinePragma = new CodeLinePragma(),
             };
             fullSnippetCompileUnit.StartDirectives.Add(new CodeChecksumPragma());
-            fullSnippetCompileUnit
-                .StartDirectives
+            fullSnippetCompileUnit.StartDirectives
                 .Add(new CodeChecksumPragma("fileName", Guid.NewGuid(), new byte[0]));
             fullSnippetCompileUnit.EndDirectives.Add(new CodeChecksumPragma());
-            fullSnippetCompileUnit
-                .EndDirectives
+            fullSnippetCompileUnit.EndDirectives
                 .Add(new CodeChecksumPragma("fileName", Guid.NewGuid(), new byte[0]));
-            fullSnippetCompileUnit
-                .AssemblyCustomAttributes
+            fullSnippetCompileUnit.AssemblyCustomAttributes
                 .Add(new CodeAttributeDeclaration("attribute1"));
-            fullSnippetCompileUnit
-                .AssemblyCustomAttributes
+            fullSnippetCompileUnit.AssemblyCustomAttributes
                 .Add(
                     new CodeAttributeDeclaration(
                         "attribute2",
                         new CodeAttributeArgument("name", new CodePrimitiveExpression(1))
                     )
                 );
-            fullSnippetCompileUnit
-                .AssemblyCustomAttributes
+            fullSnippetCompileUnit.AssemblyCustomAttributes
                 .Add(
                     new CodeAttributeDeclaration(
                         "attribute3",
@@ -1618,23 +1459,19 @@ namespace System.CodeDom.Compiler.Tests
                     )
                 );
             fullSnippetCompileUnit.AssemblyCustomAttributes.Add(new CodeAttributeDeclaration());
-            fullSnippetCompileUnit
-                .AssemblyCustomAttributes
+            fullSnippetCompileUnit.AssemblyCustomAttributes
                 .Add(new CodeAttributeDeclaration((string)null));
-            fullSnippetCompileUnit
-                .AssemblyCustomAttributes
+            fullSnippetCompileUnit.AssemblyCustomAttributes
                 .Add(new CodeAttributeDeclaration(string.Empty));
             fullSnippetCompileUnit.AssemblyCustomAttributes.Add(new CodeAttributeDeclaration("0"));
-            fullSnippetCompileUnit
-                .AssemblyCustomAttributes
+            fullSnippetCompileUnit.AssemblyCustomAttributes
                 .Add(
                     new CodeAttributeDeclaration(
                         "name",
                         new CodeAttributeArgument("0", new CodePrimitiveExpression(1))
                     )
                 );
-            fullSnippetCompileUnit
-                .AssemblyCustomAttributes
+            fullSnippetCompileUnit.AssemblyCustomAttributes
                 .Add(
                     new CodeAttributeDeclaration(
                         "name",
@@ -2340,16 +2177,14 @@ namespace System.CodeDom.Compiler.Tests
             yield return new object[] { invalidEventStartDirective1 };
 
             var invalidEventStartDirective2 = new CodeMemberEvent();
-            invalidEventStartDirective2
-                .StartDirectives
+            invalidEventStartDirective2.StartDirectives
                 .Add(new CodeChecksumPragma("\0", Guid.NewGuid(), new byte[0]));
             yield return new object[] { invalidEventStartDirective2 };
 
             foreach (char newLineChar in new char[] { '\r', '\n', '\u2028', '\u2029', '\u0085' })
             {
                 var invalidEventStartDirective3 = new CodeMemberEvent();
-                invalidEventStartDirective3
-                    .StartDirectives
+                invalidEventStartDirective3.StartDirectives
                     .Add(new CodeRegionDirective(CodeRegionMode.None, $"te{newLineChar}xt"));
                 yield return new object[] { invalidEventStartDirective3 };
             }
@@ -2359,16 +2194,14 @@ namespace System.CodeDom.Compiler.Tests
             yield return new object[] { invalidEventEndDirective1 };
 
             var invalidEventEndDirective2 = new CodeMemberEvent();
-            invalidEventEndDirective2
-                .EndDirectives
+            invalidEventEndDirective2.EndDirectives
                 .Add(new CodeChecksumPragma("\0", Guid.NewGuid(), new byte[0]));
             yield return new object[] { invalidEventEndDirective2 };
 
             foreach (char newLineChar in new char[] { '\r', '\n', '\u2028', '\u2029', '\u0085' })
             {
                 var invalidEventEndDirective3 = new CodeMemberEvent();
-                invalidEventEndDirective3
-                    .EndDirectives
+                invalidEventEndDirective3.EndDirectives
                     .Add(new CodeRegionDirective(CodeRegionMode.None, $"te{newLineChar}xt"));
                 yield return new object[] { invalidEventEndDirective3 };
             }
@@ -2424,8 +2257,7 @@ namespace System.CodeDom.Compiler.Tests
             yield return new object[] { invalidFieldAttribute4 };
 
             var invalidFieldAttribute5 = new CodeMemberField(new CodeTypeReference("type"), "name");
-            invalidFieldAttribute5
-                .CustomAttributes
+            invalidFieldAttribute5.CustomAttributes
                 .Add(
                     new CodeAttributeDeclaration(
                         "name",
@@ -2435,8 +2267,7 @@ namespace System.CodeDom.Compiler.Tests
             yield return new object[] { invalidFieldAttribute5 };
 
             var invalidFieldAttribute6 = new CodeMemberField(new CodeTypeReference("type"), "name");
-            invalidFieldAttribute6
-                .CustomAttributes
+            invalidFieldAttribute6.CustomAttributes
                 .Add(
                     new CodeAttributeDeclaration(
                         "name",
@@ -2456,8 +2287,7 @@ namespace System.CodeDom.Compiler.Tests
                 new CodeTypeReference("type"),
                 "name"
             );
-            invalidFieldStartDirective2
-                .StartDirectives
+            invalidFieldStartDirective2.StartDirectives
                 .Add(new CodeChecksumPragma("\0", Guid.NewGuid(), new byte[0]));
             yield return new object[] { invalidFieldStartDirective2 };
 
@@ -2467,8 +2297,7 @@ namespace System.CodeDom.Compiler.Tests
                     new CodeTypeReference("type"),
                     "name"
                 );
-                invalidFieldStartDirective3
-                    .StartDirectives
+                invalidFieldStartDirective3.StartDirectives
                     .Add(new CodeRegionDirective(CodeRegionMode.None, $"te{newLineChar}xt"));
                 yield return new object[] { invalidFieldStartDirective3 };
             }
@@ -2484,8 +2313,7 @@ namespace System.CodeDom.Compiler.Tests
                 new CodeTypeReference("type"),
                 "name"
             );
-            invalidFieldEndDirective2
-                .EndDirectives
+            invalidFieldEndDirective2.EndDirectives
                 .Add(new CodeChecksumPragma("\0", Guid.NewGuid(), new byte[0]));
             yield return new object[] { invalidFieldEndDirective2 };
 
@@ -2495,8 +2323,7 @@ namespace System.CodeDom.Compiler.Tests
                     new CodeTypeReference("type"),
                     "name"
                 );
-                invalidFieldEndDirective3
-                    .EndDirectives
+                invalidFieldEndDirective3.EndDirectives
                     .Add(new CodeRegionDirective(CodeRegionMode.None, $"te{newLineChar}xt"));
                 yield return new object[] { invalidFieldEndDirective3 };
             }
@@ -2555,8 +2382,7 @@ namespace System.CodeDom.Compiler.Tests
                 new CodeTypeReference("type"),
                 "name"
             );
-            invalidParameterAttribute2
-                .CustomAttributes
+            invalidParameterAttribute2.CustomAttributes
                 .Add(new CodeAttributeDeclaration((string)null));
             yield return new object[] { invalidParameterAttribute2 };
 
@@ -2564,8 +2390,7 @@ namespace System.CodeDom.Compiler.Tests
                 new CodeTypeReference("type"),
                 "name"
             );
-            invalidParameterAttribute3
-                .CustomAttributes
+            invalidParameterAttribute3.CustomAttributes
                 .Add(new CodeAttributeDeclaration(string.Empty));
             yield return new object[] { invalidParameterAttribute3 };
 
@@ -2580,8 +2405,7 @@ namespace System.CodeDom.Compiler.Tests
                 new CodeTypeReference("type"),
                 "name"
             );
-            invalidParameterAttribute5
-                .CustomAttributes
+            invalidParameterAttribute5.CustomAttributes
                 .Add(
                     new CodeAttributeDeclaration(
                         "name",
@@ -2594,8 +2418,7 @@ namespace System.CodeDom.Compiler.Tests
                 new CodeTypeReference("type"),
                 "name"
             );
-            invalidParameterAttribute6
-                .CustomAttributes
+            invalidParameterAttribute6.CustomAttributes
                 .Add(
                     new CodeAttributeDeclaration(
                         "name",
@@ -2675,14 +2498,12 @@ namespace System.CodeDom.Compiler.Tests
             yield return new object[] { invalidMethodAttribute1 };
 
             var invalidMethodAttribute2 = new CodeMemberMethod { Name = "name" };
-            invalidMethodAttribute2
-                .CustomAttributes
+            invalidMethodAttribute2.CustomAttributes
                 .Add(new CodeAttributeDeclaration((string)null));
             yield return new object[] { invalidMethodAttribute2 };
 
             var invalidMethodAttribute3 = new CodeMemberMethod { Name = "name" };
-            invalidMethodAttribute3
-                .CustomAttributes
+            invalidMethodAttribute3.CustomAttributes
                 .Add(new CodeAttributeDeclaration(string.Empty));
             yield return new object[] { invalidMethodAttribute3 };
 
@@ -2691,8 +2512,7 @@ namespace System.CodeDom.Compiler.Tests
             yield return new object[] { invalidMethodAttribute4 };
 
             var invalidMethodAttribute5 = new CodeMemberMethod { Name = "name" };
-            invalidMethodAttribute5
-                .CustomAttributes
+            invalidMethodAttribute5.CustomAttributes
                 .Add(
                     new CodeAttributeDeclaration(
                         "name",
@@ -2702,8 +2522,7 @@ namespace System.CodeDom.Compiler.Tests
             yield return new object[] { invalidMethodAttribute5 };
 
             var invalidMethodAttribute6 = new CodeMemberMethod { Name = "name" };
-            invalidMethodAttribute6
-                .CustomAttributes
+            invalidMethodAttribute6.CustomAttributes
                 .Add(
                     new CodeAttributeDeclaration(
                         "name",
@@ -2717,16 +2536,14 @@ namespace System.CodeDom.Compiler.Tests
             yield return new object[] { invalidMethodStartDirective1 };
 
             var invalidMethodStartDirective2 = new CodeMemberMethod { Name = "name" };
-            invalidMethodStartDirective2
-                .StartDirectives
+            invalidMethodStartDirective2.StartDirectives
                 .Add(new CodeChecksumPragma("\0", Guid.NewGuid(), new byte[0]));
             yield return new object[] { invalidMethodStartDirective2 };
 
             foreach (char newLineChar in new char[] { '\r', '\n', '\u2028', '\u2029', '\u0085' })
             {
                 var invalidMethodStartDirective3 = new CodeMemberMethod { Name = "name" };
-                invalidMethodStartDirective3
-                    .StartDirectives
+                invalidMethodStartDirective3.StartDirectives
                     .Add(new CodeRegionDirective(CodeRegionMode.None, $"te{newLineChar}xt"));
                 yield return new object[] { invalidMethodStartDirective3 };
             }
@@ -2736,16 +2553,14 @@ namespace System.CodeDom.Compiler.Tests
             yield return new object[] { invalidMethodEndDirective1 };
 
             var invalidMethodEndDirective2 = new CodeMemberMethod { Name = "name" };
-            invalidMethodEndDirective2
-                .EndDirectives
+            invalidMethodEndDirective2.EndDirectives
                 .Add(new CodeChecksumPragma("\0", Guid.NewGuid(), new byte[0]));
             yield return new object[] { invalidMethodEndDirective2 };
 
             foreach (char newLineChar in new char[] { '\r', '\n', '\u2028', '\u2029', '\u0085' })
             {
                 var invalidMethodEndDirective3 = new CodeMemberMethod { Name = "name" };
-                invalidMethodEndDirective3
-                    .EndDirectives
+                invalidMethodEndDirective3.EndDirectives
                     .Add(new CodeRegionDirective(CodeRegionMode.None, $"te{newLineChar}xt"));
                 yield return new object[] { invalidMethodEndDirective3 };
             }
@@ -2771,32 +2586,27 @@ namespace System.CodeDom.Compiler.Tests
             yield return new object[] { invalidMethodImplementationType5 };
 
             var invalidMethodReturnTypeAttribute1 = new CodeMemberMethod { Name = "name" };
-            invalidMethodReturnTypeAttribute1
-                .ReturnTypeCustomAttributes
+            invalidMethodReturnTypeAttribute1.ReturnTypeCustomAttributes
                 .Add(new CodeAttributeDeclaration());
             yield return new object[] { invalidMethodReturnTypeAttribute1 };
 
             var invalidMethodReturnTypeAttribute2 = new CodeMemberMethod { Name = "name" };
-            invalidMethodReturnTypeAttribute2
-                .ReturnTypeCustomAttributes
+            invalidMethodReturnTypeAttribute2.ReturnTypeCustomAttributes
                 .Add(new CodeAttributeDeclaration((string)null));
             yield return new object[] { invalidMethodReturnTypeAttribute2 };
 
             var invalidMethodReturnTypeAttribute3 = new CodeMemberMethod { Name = "name" };
-            invalidMethodReturnTypeAttribute3
-                .ReturnTypeCustomAttributes
+            invalidMethodReturnTypeAttribute3.ReturnTypeCustomAttributes
                 .Add(new CodeAttributeDeclaration(string.Empty));
             yield return new object[] { invalidMethodReturnTypeAttribute3 };
 
             var invalidMethodReturnTypeAttribute4 = new CodeMemberMethod { Name = "name" };
-            invalidMethodReturnTypeAttribute4
-                .ReturnTypeCustomAttributes
+            invalidMethodReturnTypeAttribute4.ReturnTypeCustomAttributes
                 .Add(new CodeAttributeDeclaration("0"));
             yield return new object[] { invalidMethodReturnTypeAttribute4 };
 
             var invalidMethodReturnTypeAttribute5 = new CodeMemberMethod { Name = "name" };
-            invalidMethodReturnTypeAttribute5
-                .ReturnTypeCustomAttributes
+            invalidMethodReturnTypeAttribute5.ReturnTypeCustomAttributes
                 .Add(
                     new CodeAttributeDeclaration(
                         "name",
@@ -2806,8 +2616,7 @@ namespace System.CodeDom.Compiler.Tests
             yield return new object[] { invalidMethodReturnTypeAttribute5 };
 
             var invalidMethodReturnTypeAttribute6 = new CodeMemberMethod { Name = "name" };
-            invalidMethodReturnTypeAttribute6
-                .ReturnTypeCustomAttributes
+            invalidMethodReturnTypeAttribute6.ReturnTypeCustomAttributes
                 .Add(
                     new CodeAttributeDeclaration(
                         "name",
@@ -2825,44 +2634,37 @@ namespace System.CodeDom.Compiler.Tests
             yield return new object[] { invalidMethodParameter1 };
 
             var invalidMethodParameter2 = new CodeMemberMethod { Name = "name" };
-            invalidMethodParameter2
-                .Parameters
+            invalidMethodParameter2.Parameters
                 .Add(new CodeParameterDeclarationExpression(new CodeTypeReference(), "name"));
             yield return new object[] { invalidMethodParameter2 };
 
             var invalidMethodParameter3 = new CodeMemberMethod { Name = "name" };
-            invalidMethodParameter3
-                .Parameters
+            invalidMethodParameter3.Parameters
                 .Add(new CodeParameterDeclarationExpression(new CodeTypeReference("0"), "name"));
             yield return new object[] { invalidMethodParameter3 };
 
             var invalidMethodParameter4 = new CodeMemberMethod { Name = "name" };
-            invalidMethodParameter4
-                .Parameters
+            invalidMethodParameter4.Parameters
                 .Add(new CodeParameterDeclarationExpression(invalidTypeReference1, "name"));
             yield return new object[] { invalidMethodParameter4 };
 
             var invalidMethodParameter5 = new CodeMemberMethod { Name = "name" };
-            invalidMethodParameter5
-                .Parameters
+            invalidMethodParameter5.Parameters
                 .Add(new CodeParameterDeclarationExpression(invalidTypeReference2, "name"));
             yield return new object[] { invalidMethodParameter5 };
 
             var invalidMethodParameter6 = new CodeMemberMethod { Name = "name" };
-            invalidMethodParameter6
-                .Parameters
+            invalidMethodParameter6.Parameters
                 .Add(new CodeParameterDeclarationExpression(invalidTypeReference3, "name"));
             yield return new object[] { invalidMethodParameter6 };
 
             var invalidMethodParameter7 = new CodeMemberMethod { Name = "name" };
-            invalidMethodParameter7
-                .Parameters
+            invalidMethodParameter7.Parameters
                 .Add(new CodeParameterDeclarationExpression(new CodeTypeReference("type"), null));
             yield return new object[] { invalidMethodParameter7 };
 
             var invalidMethodParameter8 = new CodeMemberMethod { Name = "name" };
-            invalidMethodParameter8
-                .Parameters
+            invalidMethodParameter8.Parameters
                 .Add(
                     new CodeParameterDeclarationExpression(
                         new CodeTypeReference("type"),
@@ -2872,8 +2674,7 @@ namespace System.CodeDom.Compiler.Tests
             yield return new object[] { invalidMethodParameter8 };
 
             var invalidMethodParameter9 = new CodeMemberMethod { Name = "name" };
-            invalidMethodParameter9
-                .Parameters
+            invalidMethodParameter9.Parameters
                 .Add(new CodeParameterDeclarationExpression(new CodeTypeReference("type"), "0"));
             yield return new object[] { invalidMethodParameter9 };
 
@@ -2924,16 +2725,14 @@ namespace System.CodeDom.Compiler.Tests
             yield return new object[] { invalidMethodTypeParameterAttribute1 };
 
             var invalidTypeParameterAttribute2 = new CodeTypeParameter("parameter");
-            invalidTypeParameterAttribute2
-                .CustomAttributes
+            invalidTypeParameterAttribute2.CustomAttributes
                 .Add(new CodeAttributeDeclaration((string)null));
             var invalidMethodTypeParameterAttribute2 = new CodeMemberMethod { Name = "name" };
             invalidMethodTypeParameterAttribute2.TypeParameters.Add(invalidTypeParameterAttribute2);
             yield return new object[] { invalidMethodTypeParameterAttribute2 };
 
             var invalidTypeParameterAttribute3 = new CodeTypeParameter("parameter");
-            invalidTypeParameterAttribute3
-                .CustomAttributes
+            invalidTypeParameterAttribute3.CustomAttributes
                 .Add(new CodeAttributeDeclaration(string.Empty));
             var invalidMethodTypeParameterAttribute3 = new CodeMemberMethod { Name = "name" };
             invalidMethodTypeParameterAttribute3.TypeParameters.Add(invalidTypeParameterAttribute3);
@@ -2946,8 +2745,7 @@ namespace System.CodeDom.Compiler.Tests
             yield return new object[] { invalidMethodTypeParameterAttribute4 };
 
             var invalidTypeParameterAttribute5 = new CodeTypeParameter("parameter");
-            invalidTypeParameterAttribute5
-                .CustomAttributes
+            invalidTypeParameterAttribute5.CustomAttributes
                 .Add(
                     new CodeAttributeDeclaration(
                         "attribute",
@@ -2959,8 +2757,7 @@ namespace System.CodeDom.Compiler.Tests
             yield return new object[] { invalidMethodTypeParameterAttribute5 };
 
             var invalidTypeParameterAttribute6 = new CodeTypeParameter("parameter");
-            invalidTypeParameterAttribute6
-                .CustomAttributes
+            invalidTypeParameterAttribute6.CustomAttributes
                 .Add(
                     new CodeAttributeDeclaration(
                         "attribute",
@@ -2977,8 +2774,7 @@ namespace System.CodeDom.Compiler.Tests
             yield return new object[] { invalidEntryPointMethodStartDirective1 };
 
             var invalidEntryPointMethodStartDirective2 = new CodeEntryPointMethod { Name = "name" };
-            invalidEntryPointMethodStartDirective2
-                .StartDirectives
+            invalidEntryPointMethodStartDirective2.StartDirectives
                 .Add(new CodeChecksumPragma("\0", Guid.NewGuid(), new byte[0]));
             yield return new object[] { invalidEntryPointMethodStartDirective2 };
 
@@ -2988,8 +2784,7 @@ namespace System.CodeDom.Compiler.Tests
                 {
                     Name = "name",
                 };
-                invalidEntryPointMethodStartDirective3
-                    .StartDirectives
+                invalidEntryPointMethodStartDirective3.StartDirectives
                     .Add(new CodeRegionDirective(CodeRegionMode.None, $"te{newLineChar}xt"));
                 yield return new object[] { invalidEntryPointMethodStartDirective3 };
             }
@@ -2999,8 +2794,7 @@ namespace System.CodeDom.Compiler.Tests
             yield return new object[] { invalidEntryPointMethodEndDirective1 };
 
             var invalidEntryPointMethodEndDirective2 = new CodeEntryPointMethod { Name = "name" };
-            invalidEntryPointMethodEndDirective2
-                .EndDirectives
+            invalidEntryPointMethodEndDirective2.EndDirectives
                 .Add(new CodeChecksumPragma("\0", Guid.NewGuid(), new byte[0]));
             yield return new object[] { invalidEntryPointMethodEndDirective2 };
 
@@ -3010,8 +2804,7 @@ namespace System.CodeDom.Compiler.Tests
                 {
                     Name = "name",
                 };
-                invalidEntryPointMethodEndDirective3
-                    .EndDirectives
+                invalidEntryPointMethodEndDirective3.EndDirectives
                     .Add(new CodeRegionDirective(CodeRegionMode.None, $"te{newLineChar}xt"));
                 yield return new object[] { invalidEntryPointMethodEndDirective3 };
             }
@@ -3020,8 +2813,7 @@ namespace System.CodeDom.Compiler.Tests
             {
                 Name = "name",
             };
-            invalidEntryPointMethodImplementationType1
-                .ImplementationTypes
+            invalidEntryPointMethodImplementationType1.ImplementationTypes
                 .Add(new CodeTypeReference());
             yield return new object[] { invalidEntryPointMethodImplementationType1 };
 
@@ -3029,8 +2821,7 @@ namespace System.CodeDom.Compiler.Tests
             {
                 Name = "name",
             };
-            invalidEntryPointMethodImplementationType2
-                .ImplementationTypes
+            invalidEntryPointMethodImplementationType2.ImplementationTypes
                 .Add(new CodeTypeReference("0"));
             yield return new object[] { invalidEntryPointMethodImplementationType2 };
 
@@ -3038,8 +2829,7 @@ namespace System.CodeDom.Compiler.Tests
             {
                 Name = "name",
             };
-            invalidEntryPointMethodImplementationType3
-                .ImplementationTypes
+            invalidEntryPointMethodImplementationType3.ImplementationTypes
                 .Add(invalidTypeReference1);
             yield return new object[] { invalidEntryPointMethodImplementationType3 };
 
@@ -3047,8 +2837,7 @@ namespace System.CodeDom.Compiler.Tests
             {
                 Name = "name",
             };
-            invalidEntryPointMethodImplementationType4
-                .ImplementationTypes
+            invalidEntryPointMethodImplementationType4.ImplementationTypes
                 .Add(invalidTypeReference2);
             yield return new object[] { invalidEntryPointMethodImplementationType4 };
 
@@ -3056,8 +2845,7 @@ namespace System.CodeDom.Compiler.Tests
             {
                 Name = "name",
             };
-            invalidEntryPointMethodImplementationType5
-                .ImplementationTypes
+            invalidEntryPointMethodImplementationType5.ImplementationTypes
                 .Add(invalidTypeReference3);
             yield return new object[] { invalidEntryPointMethodImplementationType5 };
 
@@ -3082,8 +2870,7 @@ namespace System.CodeDom.Compiler.Tests
             yield return new object[] { invalidEntryPointMethodTypeParameter2 };
 
             var invalidEntryPointMethodTypeParameter3 = new CodeEntryPointMethod { Name = "name" };
-            invalidEntryPointMethodTypeParameter3
-                .TypeParameters
+            invalidEntryPointMethodTypeParameter3.TypeParameters
                 .Add(new CodeTypeParameter(string.Empty));
             yield return new object[] { invalidEntryPointMethodTypeParameter3 };
 
@@ -3095,8 +2882,7 @@ namespace System.CodeDom.Compiler.Tests
             {
                 Name = "name",
             };
-            invalidEntryPointMethodTypeParameterAttribute1
-                .TypeParameters
+            invalidEntryPointMethodTypeParameterAttribute1.TypeParameters
                 .Add(invalidTypeParameterAttribute1);
             yield return new object[] { invalidEntryPointMethodTypeParameterAttribute1 };
 
@@ -3104,8 +2890,7 @@ namespace System.CodeDom.Compiler.Tests
             {
                 Name = "name",
             };
-            invalidEntryPointMethodTypeParameterAttribute2
-                .TypeParameters
+            invalidEntryPointMethodTypeParameterAttribute2.TypeParameters
                 .Add(invalidTypeParameterAttribute2);
             yield return new object[] { invalidEntryPointMethodTypeParameterAttribute2 };
 
@@ -3113,8 +2898,7 @@ namespace System.CodeDom.Compiler.Tests
             {
                 Name = "name",
             };
-            invalidEntryPointMethodTypeParameterAttribute3
-                .TypeParameters
+            invalidEntryPointMethodTypeParameterAttribute3.TypeParameters
                 .Add(invalidTypeParameterAttribute3);
             yield return new object[] { invalidEntryPointMethodTypeParameterAttribute3 };
 
@@ -3122,8 +2906,7 @@ namespace System.CodeDom.Compiler.Tests
             {
                 Name = "name",
             };
-            invalidEntryPointMethodTypeParameterAttribute4
-                .TypeParameters
+            invalidEntryPointMethodTypeParameterAttribute4.TypeParameters
                 .Add(invalidTypeParameterAttribute4);
             yield return new object[] { invalidEntryPointMethodTypeParameterAttribute4 };
 
@@ -3131,8 +2914,7 @@ namespace System.CodeDom.Compiler.Tests
             {
                 Name = "name",
             };
-            invalidEntryPointMethodTypeParameterAttribute5
-                .TypeParameters
+            invalidEntryPointMethodTypeParameterAttribute5.TypeParameters
                 .Add(invalidTypeParameterAttribute5);
             yield return new object[] { invalidEntryPointMethodTypeParameterAttribute5 };
 
@@ -3140,8 +2922,7 @@ namespace System.CodeDom.Compiler.Tests
             {
                 Name = "name",
             };
-            invalidEntryPointMethodTypeParameterAttribute6
-                .TypeParameters
+            invalidEntryPointMethodTypeParameterAttribute6.TypeParameters
                 .Add(invalidTypeParameterAttribute6);
             yield return new object[] { invalidEntryPointMethodTypeParameterAttribute6 };
 
@@ -3151,14 +2932,12 @@ namespace System.CodeDom.Compiler.Tests
             yield return new object[] { invalidConstructorAttribute1 };
 
             var invalidConstructorAttribute2 = new CodeConstructor { Name = "name" };
-            invalidConstructorAttribute2
-                .CustomAttributes
+            invalidConstructorAttribute2.CustomAttributes
                 .Add(new CodeAttributeDeclaration((string)null));
             yield return new object[] { invalidConstructorAttribute2 };
 
             var invalidConstructorAttribute3 = new CodeConstructor { Name = "name" };
-            invalidConstructorAttribute3
-                .CustomAttributes
+            invalidConstructorAttribute3.CustomAttributes
                 .Add(new CodeAttributeDeclaration(string.Empty));
             yield return new object[] { invalidConstructorAttribute3 };
 
@@ -3167,8 +2946,7 @@ namespace System.CodeDom.Compiler.Tests
             yield return new object[] { invalidConstructorAttribute4 };
 
             var invalidConstructorAttribute5 = new CodeConstructor { Name = "name" };
-            invalidConstructorAttribute5
-                .CustomAttributes
+            invalidConstructorAttribute5.CustomAttributes
                 .Add(
                     new CodeAttributeDeclaration(
                         "name",
@@ -3178,8 +2956,7 @@ namespace System.CodeDom.Compiler.Tests
             yield return new object[] { invalidConstructorAttribute5 };
 
             var invalidConstructorAttribute6 = new CodeConstructor { Name = "name" };
-            invalidConstructorAttribute6
-                .CustomAttributes
+            invalidConstructorAttribute6.CustomAttributes
                 .Add(
                     new CodeAttributeDeclaration(
                         "name",
@@ -3193,16 +2970,14 @@ namespace System.CodeDom.Compiler.Tests
             yield return new object[] { invalidConstructorStartDirective1 };
 
             var invalidConstructorStartDirective2 = new CodeConstructor { Name = "name" };
-            invalidConstructorStartDirective2
-                .StartDirectives
+            invalidConstructorStartDirective2.StartDirectives
                 .Add(new CodeChecksumPragma("\0", Guid.NewGuid(), new byte[0]));
             yield return new object[] { invalidConstructorStartDirective2 };
 
             foreach (char newLineChar in new char[] { '\r', '\n', '\u2028', '\u2029', '\u0085' })
             {
                 var invalidConstructorStartDirective3 = new CodeConstructor { Name = "name" };
-                invalidConstructorStartDirective3
-                    .StartDirectives
+                invalidConstructorStartDirective3.StartDirectives
                     .Add(new CodeRegionDirective(CodeRegionMode.None, $"te{newLineChar}xt"));
                 yield return new object[] { invalidConstructorStartDirective3 };
             }
@@ -3212,16 +2987,14 @@ namespace System.CodeDom.Compiler.Tests
             yield return new object[] { invalidConstructorEndDirective1 };
 
             var invalidConstructorEndDirective2 = new CodeConstructor { Name = "name" };
-            invalidConstructorEndDirective2
-                .EndDirectives
+            invalidConstructorEndDirective2.EndDirectives
                 .Add(new CodeChecksumPragma("\0", Guid.NewGuid(), new byte[0]));
             yield return new object[] { invalidConstructorEndDirective2 };
 
             foreach (char newLineChar in new char[] { '\r', '\n', '\u2028', '\u2029', '\u0085' })
             {
                 var invalidConstructorEndDirective3 = new CodeConstructor { Name = "name" };
-                invalidConstructorEndDirective3
-                    .EndDirectives
+                invalidConstructorEndDirective3.EndDirectives
                     .Add(new CodeRegionDirective(CodeRegionMode.None, $"te{newLineChar}xt"));
                 yield return new object[] { invalidConstructorEndDirective3 };
             }
@@ -3231,8 +3004,7 @@ namespace System.CodeDom.Compiler.Tests
             yield return new object[] { invalidConstructorImplementationType1 };
 
             var invalidConstructorImplementationType2 = new CodeConstructor { Name = "name" };
-            invalidConstructorImplementationType2
-                .ImplementationTypes
+            invalidConstructorImplementationType2.ImplementationTypes
                 .Add(new CodeTypeReference("0"));
             yield return new object[] { invalidConstructorImplementationType2 };
 
@@ -3265,26 +3037,22 @@ namespace System.CodeDom.Compiler.Tests
             yield return new object[] { invalidConstructorParameter1 };
 
             var invalidConstructorParameter2 = new CodeConstructor { Name = "name" };
-            invalidConstructorParameter2
-                .Parameters
+            invalidConstructorParameter2.Parameters
                 .Add(new CodeParameterDeclarationExpression(new CodeTypeReference(), "name"));
             yield return new object[] { invalidConstructorParameter2 };
 
             var invalidConstructorParameter3 = new CodeConstructor { Name = "name" };
-            invalidConstructorParameter3
-                .Parameters
+            invalidConstructorParameter3.Parameters
                 .Add(new CodeParameterDeclarationExpression(new CodeTypeReference("0"), "name"));
             yield return new object[] { invalidConstructorParameter3 };
 
             var invalidConstructorParameter4 = new CodeConstructor { Name = "name" };
-            invalidConstructorParameter4
-                .Parameters
+            invalidConstructorParameter4.Parameters
                 .Add(new CodeParameterDeclarationExpression(new CodeTypeReference("type"), null));
             yield return new object[] { invalidConstructorParameter4 };
 
             var invalidConstructorParameter5 = new CodeConstructor { Name = "name" };
-            invalidConstructorParameter5
-                .Parameters
+            invalidConstructorParameter5.Parameters
                 .Add(
                     new CodeParameterDeclarationExpression(
                         new CodeTypeReference("type"),
@@ -3294,8 +3062,7 @@ namespace System.CodeDom.Compiler.Tests
             yield return new object[] { invalidConstructorParameter5 };
 
             var invalidConstructorParameter6 = new CodeConstructor { Name = "name" };
-            invalidConstructorParameter6
-                .Parameters
+            invalidConstructorParameter6.Parameters
                 .Add(new CodeParameterDeclarationExpression(new CodeTypeReference("type"), "0"));
             yield return new object[] { invalidConstructorParameter6 };
 
@@ -3332,8 +3099,7 @@ namespace System.CodeDom.Compiler.Tests
             yield return new object[] { invalidConstructorTypeParameter2 };
 
             var invalidConstructorTypeParameter3 = new CodeConstructor { Name = "name" };
-            invalidConstructorTypeParameter3
-                .TypeParameters
+            invalidConstructorTypeParameter3.TypeParameters
                 .Add(new CodeTypeParameter(string.Empty));
             yield return new object[] { invalidConstructorTypeParameter3 };
 
@@ -3342,38 +3108,32 @@ namespace System.CodeDom.Compiler.Tests
             yield return new object[] { invalidConstructorTypeParameter4 };
 
             var invalidConstructorTypeParameterAttribute1 = new CodeConstructor { Name = "name" };
-            invalidConstructorTypeParameterAttribute1
-                .TypeParameters
+            invalidConstructorTypeParameterAttribute1.TypeParameters
                 .Add(invalidTypeParameterAttribute1);
             yield return new object[] { invalidConstructorTypeParameterAttribute1 };
 
             var invalidConstructorTypeParameterAttribute2 = new CodeConstructor { Name = "name" };
-            invalidConstructorTypeParameterAttribute2
-                .TypeParameters
+            invalidConstructorTypeParameterAttribute2.TypeParameters
                 .Add(invalidTypeParameterAttribute2);
             yield return new object[] { invalidConstructorTypeParameterAttribute2 };
 
             var invalidConstructorTypeParameterAttribute3 = new CodeConstructor { Name = "name" };
-            invalidConstructorTypeParameterAttribute3
-                .TypeParameters
+            invalidConstructorTypeParameterAttribute3.TypeParameters
                 .Add(invalidTypeParameterAttribute3);
             yield return new object[] { invalidConstructorTypeParameterAttribute3 };
 
             var invalidConstructorTypeParameterAttribute4 = new CodeConstructor { Name = "name" };
-            invalidConstructorTypeParameterAttribute4
-                .TypeParameters
+            invalidConstructorTypeParameterAttribute4.TypeParameters
                 .Add(invalidTypeParameterAttribute4);
             yield return new object[] { invalidConstructorTypeParameterAttribute4 };
 
             var invalidConstructorTypeParameterAttribute5 = new CodeConstructor { Name = "name" };
-            invalidConstructorTypeParameterAttribute5
-                .TypeParameters
+            invalidConstructorTypeParameterAttribute5.TypeParameters
                 .Add(invalidTypeParameterAttribute5);
             yield return new object[] { invalidConstructorTypeParameterAttribute5 };
 
             var invalidConstructorTypeParameterAttribute6 = new CodeConstructor { Name = "name" };
-            invalidConstructorTypeParameterAttribute6
-                .TypeParameters
+            invalidConstructorTypeParameterAttribute6.TypeParameters
                 .Add(invalidTypeParameterAttribute6);
             yield return new object[] { invalidConstructorTypeParameterAttribute6 };
 
@@ -3382,8 +3142,7 @@ namespace System.CodeDom.Compiler.Tests
             yield return new object[] { invalidConstructorBaseConstructorArg };
 
             var invalidConstructorChainedConstructorArg = new CodeConstructor { Name = "name" };
-            invalidConstructorChainedConstructorArg
-                .ChainedConstructorArgs
+            invalidConstructorChainedConstructorArg.ChainedConstructorArgs
                 .Add(new CodeExpression());
             yield return new object[] { invalidConstructorChainedConstructorArg };
 
@@ -3393,8 +3152,7 @@ namespace System.CodeDom.Compiler.Tests
             yield return new object[] { invalidTypeConstructorStartDirective1 };
 
             var invalidTypeConstructorStartDirective2 = new CodeTypeConstructor { Name = "name" };
-            invalidTypeConstructorStartDirective2
-                .StartDirectives
+            invalidTypeConstructorStartDirective2.StartDirectives
                 .Add(new CodeChecksumPragma("\0", Guid.NewGuid(), new byte[0]));
             yield return new object[] { invalidTypeConstructorStartDirective2 };
 
@@ -3404,8 +3162,7 @@ namespace System.CodeDom.Compiler.Tests
                 {
                     Name = "name",
                 };
-                invalidTypeConstructorStartDirective3
-                    .StartDirectives
+                invalidTypeConstructorStartDirective3.StartDirectives
                     .Add(new CodeRegionDirective(CodeRegionMode.None, $"te{newLineChar}xt"));
                 yield return new object[] { invalidTypeConstructorStartDirective3 };
             }
@@ -3415,16 +3172,14 @@ namespace System.CodeDom.Compiler.Tests
             yield return new object[] { invalidTypeConstructorEndDirective1 };
 
             var invalidTypeConstructorEndDirective2 = new CodeTypeConstructor { Name = "name" };
-            invalidTypeConstructorEndDirective2
-                .EndDirectives
+            invalidTypeConstructorEndDirective2.EndDirectives
                 .Add(new CodeChecksumPragma("\0", Guid.NewGuid(), new byte[0]));
             yield return new object[] { invalidTypeConstructorEndDirective2 };
 
             foreach (char newLineChar in new char[] { '\r', '\n', '\u2028', '\u2029', '\u0085' })
             {
                 var invalidTypeConstructorEndDirective3 = new CodeTypeConstructor { Name = "name" };
-                invalidTypeConstructorEndDirective3
-                    .EndDirectives
+                invalidTypeConstructorEndDirective3.EndDirectives
                     .Add(new CodeRegionDirective(CodeRegionMode.None, $"te{newLineChar}xt"));
                 yield return new object[] { invalidTypeConstructorEndDirective3 };
             }
@@ -3433,8 +3188,7 @@ namespace System.CodeDom.Compiler.Tests
             {
                 Name = "name",
             };
-            invalidTypeConstructorImplementationType1
-                .ImplementationTypes
+            invalidTypeConstructorImplementationType1.ImplementationTypes
                 .Add(new CodeTypeReference());
             yield return new object[] { invalidTypeConstructorImplementationType1 };
 
@@ -3442,8 +3196,7 @@ namespace System.CodeDom.Compiler.Tests
             {
                 Name = "name",
             };
-            invalidTypeConstructorImplementationType2
-                .ImplementationTypes
+            invalidTypeConstructorImplementationType2.ImplementationTypes
                 .Add(new CodeTypeReference("0"));
             yield return new object[] { invalidTypeConstructorImplementationType2 };
 
@@ -3451,8 +3204,7 @@ namespace System.CodeDom.Compiler.Tests
             {
                 Name = "name",
             };
-            invalidTypeConstructorImplementationType3
-                .ImplementationTypes
+            invalidTypeConstructorImplementationType3.ImplementationTypes
                 .Add(invalidTypeReference1);
             yield return new object[] { invalidTypeConstructorImplementationType3 };
 
@@ -3460,8 +3212,7 @@ namespace System.CodeDom.Compiler.Tests
             {
                 Name = "name",
             };
-            invalidTypeConstructorImplementationType4
-                .ImplementationTypes
+            invalidTypeConstructorImplementationType4.ImplementationTypes
                 .Add(invalidTypeReference2);
             yield return new object[] { invalidTypeConstructorImplementationType4 };
 
@@ -3469,8 +3220,7 @@ namespace System.CodeDom.Compiler.Tests
             {
                 Name = "name",
             };
-            invalidTypeConstructorImplementationType5
-                .ImplementationTypes
+            invalidTypeConstructorImplementationType5.ImplementationTypes
                 .Add(invalidTypeReference3);
             yield return new object[] { invalidTypeConstructorImplementationType5 };
 
@@ -3495,8 +3245,7 @@ namespace System.CodeDom.Compiler.Tests
             yield return new object[] { invalidTypeConstructorTypeParameter2 };
 
             var invalidTypeConstructorTypeParameter3 = new CodeTypeConstructor { Name = "name" };
-            invalidTypeConstructorTypeParameter3
-                .TypeParameters
+            invalidTypeConstructorTypeParameter3.TypeParameters
                 .Add(new CodeTypeParameter(string.Empty));
             yield return new object[] { invalidTypeConstructorTypeParameter3 };
 
@@ -3508,8 +3257,7 @@ namespace System.CodeDom.Compiler.Tests
             {
                 Name = "name",
             };
-            invalidTypeConstructorTypeParameterAttribute1
-                .TypeParameters
+            invalidTypeConstructorTypeParameterAttribute1.TypeParameters
                 .Add(invalidTypeParameterAttribute1);
             yield return new object[] { invalidTypeConstructorTypeParameterAttribute1 };
 
@@ -3517,8 +3265,7 @@ namespace System.CodeDom.Compiler.Tests
             {
                 Name = "name",
             };
-            invalidTypeConstructorTypeParameterAttribute2
-                .TypeParameters
+            invalidTypeConstructorTypeParameterAttribute2.TypeParameters
                 .Add(invalidTypeParameterAttribute2);
             yield return new object[] { invalidTypeConstructorTypeParameterAttribute2 };
 
@@ -3526,8 +3273,7 @@ namespace System.CodeDom.Compiler.Tests
             {
                 Name = "name",
             };
-            invalidTypeConstructorTypeParameterAttribute3
-                .TypeParameters
+            invalidTypeConstructorTypeParameterAttribute3.TypeParameters
                 .Add(invalidTypeParameterAttribute3);
             yield return new object[] { invalidTypeConstructorTypeParameterAttribute3 };
 
@@ -3535,8 +3281,7 @@ namespace System.CodeDom.Compiler.Tests
             {
                 Name = "name",
             };
-            invalidTypeConstructorTypeParameterAttribute4
-                .TypeParameters
+            invalidTypeConstructorTypeParameterAttribute4.TypeParameters
                 .Add(invalidTypeParameterAttribute4);
             yield return new object[] { invalidTypeConstructorTypeParameterAttribute4 };
 
@@ -3544,8 +3289,7 @@ namespace System.CodeDom.Compiler.Tests
             {
                 Name = "name",
             };
-            invalidTypeConstructorTypeParameterAttribute5
-                .TypeParameters
+            invalidTypeConstructorTypeParameterAttribute5.TypeParameters
                 .Add(invalidTypeParameterAttribute5);
             yield return new object[] { invalidTypeConstructorTypeParameterAttribute5 };
 
@@ -3553,8 +3297,7 @@ namespace System.CodeDom.Compiler.Tests
             {
                 Name = "name",
             };
-            invalidTypeConstructorTypeParameterAttribute6
-                .TypeParameters
+            invalidTypeConstructorTypeParameterAttribute6.TypeParameters
                 .Add(invalidTypeParameterAttribute6);
             yield return new object[] { invalidTypeConstructorTypeParameterAttribute6 };
 
@@ -3609,16 +3352,14 @@ namespace System.CodeDom.Compiler.Tests
             yield return new object[] { invalidPropertyStartDirective1 };
 
             var invalidPropertyStartDirective2 = new CodeMemberProperty { Name = "name" };
-            invalidPropertyStartDirective2
-                .StartDirectives
+            invalidPropertyStartDirective2.StartDirectives
                 .Add(new CodeChecksumPragma("\0", Guid.NewGuid(), new byte[0]));
             yield return new object[] { invalidPropertyStartDirective2 };
 
             foreach (char newLineChar in new char[] { '\r', '\n', '\u2028', '\u2029', '\u0085' })
             {
                 var invalidPropertyStartDirective3 = new CodeMemberProperty { Name = "name" };
-                invalidPropertyStartDirective3
-                    .StartDirectives
+                invalidPropertyStartDirective3.StartDirectives
                     .Add(new CodeRegionDirective(CodeRegionMode.None, $"te{newLineChar}xt"));
                 yield return new object[] { invalidPropertyStartDirective3 };
             }
@@ -3628,16 +3369,14 @@ namespace System.CodeDom.Compiler.Tests
             yield return new object[] { invalidPropertyEndDirective1 };
 
             var invalidPropertyEndDirective2 = new CodeMemberProperty { Name = "name" };
-            invalidPropertyEndDirective2
-                .EndDirectives
+            invalidPropertyEndDirective2.EndDirectives
                 .Add(new CodeChecksumPragma("\0", Guid.NewGuid(), new byte[0]));
             yield return new object[] { invalidPropertyEndDirective2 };
 
             foreach (char newLineChar in new char[] { '\r', '\n', '\u2028', '\u2029', '\u0085' })
             {
                 var invalidPropertyEndDirective3 = new CodeMemberProperty { Name = "name" };
-                invalidPropertyEndDirective3
-                    .EndDirectives
+                invalidPropertyEndDirective3.EndDirectives
                     .Add(new CodeRegionDirective(CodeRegionMode.None, $"te{newLineChar}xt"));
                 yield return new object[] { invalidPropertyEndDirective3 };
             }
@@ -3649,48 +3388,41 @@ namespace System.CodeDom.Compiler.Tests
                 yield return new object[] { invalidPropertyParameter1 };
 
                 var invalidPropertyParameter2 = new CodeMemberProperty { Name = name };
-                invalidPropertyParameter2
-                    .Parameters
+                invalidPropertyParameter2.Parameters
                     .Add(new CodeParameterDeclarationExpression(new CodeTypeReference(), "name"));
                 yield return new object[] { invalidPropertyParameter2 };
 
                 var invalidPropertyParameter3 = new CodeMemberProperty { Name = name };
-                invalidPropertyParameter3
-                    .Parameters
+                invalidPropertyParameter3.Parameters
                     .Add(
                         new CodeParameterDeclarationExpression(new CodeTypeReference("0"), "name")
                     );
                 yield return new object[] { invalidPropertyParameter3 };
 
                 var invalidPropertyParameter4 = new CodeMemberProperty { Name = name };
-                invalidPropertyParameter4
-                    .Parameters
+                invalidPropertyParameter4.Parameters
                     .Add(new CodeParameterDeclarationExpression(invalidTypeReference1, "name"));
                 yield return new object[] { invalidPropertyParameter4 };
 
                 var invalidPropertyParameter5 = new CodeMemberProperty { Name = name };
-                invalidPropertyParameter5
-                    .Parameters
+                invalidPropertyParameter5.Parameters
                     .Add(new CodeParameterDeclarationExpression(invalidTypeReference2, "name"));
                 yield return new object[] { invalidPropertyParameter5 };
 
                 var invalidPropertyParameter6 = new CodeMemberProperty { Name = name };
-                invalidPropertyParameter6
-                    .Parameters
+                invalidPropertyParameter6.Parameters
                     .Add(new CodeParameterDeclarationExpression(invalidTypeReference3, "name"));
                 yield return new object[] { invalidPropertyParameter6 };
 
                 var invalidPropertyParameter7 = new CodeMemberProperty { Name = name };
-                invalidPropertyParameter7
-                    .Parameters
+                invalidPropertyParameter7.Parameters
                     .Add(
                         new CodeParameterDeclarationExpression(new CodeTypeReference("type"), null)
                     );
                 yield return new object[] { invalidPropertyParameter7 };
 
                 var invalidPropertyParameter8 = new CodeMemberProperty { Name = name };
-                invalidPropertyParameter8
-                    .Parameters
+                invalidPropertyParameter8.Parameters
                     .Add(
                         new CodeParameterDeclarationExpression(
                             new CodeTypeReference("type"),
@@ -3700,8 +3432,7 @@ namespace System.CodeDom.Compiler.Tests
                 yield return new object[] { invalidPropertyParameter8 };
 
                 var invalidPropertyParameter9 = new CodeMemberProperty { Name = name };
-                invalidPropertyParameter9
-                    .Parameters
+                invalidPropertyParameter9.Parameters
                     .Add(
                         new CodeParameterDeclarationExpression(new CodeTypeReference("type"), "0")
                     );
@@ -3783,8 +3514,7 @@ namespace System.CodeDom.Compiler.Tests
             yield return new object[] { invalidTypeAttribute4 };
 
             var invalidTypeAttribute5 = new CodeTypeDeclaration("name");
-            invalidTypeAttribute5
-                .CustomAttributes
+            invalidTypeAttribute5.CustomAttributes
                 .Add(
                     new CodeAttributeDeclaration(
                         "name",
@@ -3794,8 +3524,7 @@ namespace System.CodeDom.Compiler.Tests
             yield return new object[] { invalidTypeAttribute5 };
 
             var invalidTypeAttribute6 = new CodeTypeDeclaration("name");
-            invalidTypeAttribute6
-                .CustomAttributes
+            invalidTypeAttribute6.CustomAttributes
                 .Add(
                     new CodeAttributeDeclaration(
                         "name",
@@ -3875,16 +3604,14 @@ namespace System.CodeDom.Compiler.Tests
             yield return new object[] { invalidTypeParameterConstraint5 };
 
             var invalidParameterConstraint6 = new CodeTypeParameter("parameter");
-            invalidParameterConstraint6
-                .Constraints
+            invalidParameterConstraint6.Constraints
                 .Add(new CodeTypeReference("constraint`2", new CodeTypeReference("name")));
             var invalidTypeParameterConstraint6 = new CodeTypeDeclaration("name");
             invalidTypeParameterConstraint6.TypeParameters.Add(invalidParameterConstraint6);
             yield return new object[] { invalidTypeParameterConstraint6 };
 
             var invalidParameterConstraint7 = new CodeTypeParameter("parameter");
-            invalidParameterConstraint7
-                .Constraints
+            invalidParameterConstraint7.Constraints
                 .Add(
                     new CodeTypeReference(
                         "constraint",
@@ -3897,8 +3624,7 @@ namespace System.CodeDom.Compiler.Tests
             yield return new object[] { invalidTypeParameterConstraint7 };
 
             var invalidParameterConstraint8 = new CodeTypeParameter("parameter");
-            invalidParameterConstraint8
-                .Constraints
+            invalidParameterConstraint8.Constraints
                 .Add(
                     new CodeTypeReference(
                         "constraint",
@@ -3911,8 +3637,7 @@ namespace System.CodeDom.Compiler.Tests
             yield return new object[] { invalidTypeParameterConstraint8 };
 
             var invalidParameterConstraint9 = new CodeTypeParameter("parameter");
-            invalidParameterConstraint9
-                .Constraints
+            invalidParameterConstraint9.Constraints
                 .Add(
                     new CodeTypeReference(
                         "constraint",
@@ -3925,8 +3650,7 @@ namespace System.CodeDom.Compiler.Tests
             yield return new object[] { invalidTypeParameterConstraint9 };
 
             var invalidParameterConstraint10 = new CodeTypeParameter("parameter");
-            invalidParameterConstraint10
-                .Constraints
+            invalidParameterConstraint10.Constraints
                 .Add(
                     new CodeTypeReference(
                         "constraint",
@@ -3939,8 +3663,7 @@ namespace System.CodeDom.Compiler.Tests
             yield return new object[] { invalidTypeParameterConstraint10 };
 
             var invalidParameterConstraint11 = new CodeTypeParameter("parameter");
-            invalidParameterConstraint11
-                .Constraints
+            invalidParameterConstraint11.Constraints
                 .Add(
                     new CodeTypeReference(
                         "constraint",
@@ -4003,14 +3726,12 @@ namespace System.CodeDom.Compiler.Tests
             yield return new object[] { invalidDelegateAttribute1 };
 
             var invalidDelegateAttribute2 = new CodeTypeDelegate("name");
-            invalidDelegateAttribute2
-                .CustomAttributes
+            invalidDelegateAttribute2.CustomAttributes
                 .Add(new CodeAttributeDeclaration((string)null));
             yield return new object[] { invalidDelegateAttribute2 };
 
             var invalidDelegateAttribute3 = new CodeTypeDelegate("name");
-            invalidDelegateAttribute3
-                .CustomAttributes
+            invalidDelegateAttribute3.CustomAttributes
                 .Add(new CodeAttributeDeclaration(string.Empty));
             yield return new object[] { invalidDelegateAttribute3 };
 
@@ -4019,8 +3740,7 @@ namespace System.CodeDom.Compiler.Tests
             yield return new object[] { invalidDelegateAttribute4 };
 
             var invalidDelegateAttribute5 = new CodeTypeDelegate("name");
-            invalidDelegateAttribute5
-                .CustomAttributes
+            invalidDelegateAttribute5.CustomAttributes
                 .Add(
                     new CodeAttributeDeclaration(
                         "name",
@@ -4030,8 +3750,7 @@ namespace System.CodeDom.Compiler.Tests
             yield return new object[] { invalidDelegateAttribute5 };
 
             var invalidDelegateAttribute6 = new CodeTypeDelegate("name");
-            invalidDelegateAttribute6
-                .CustomAttributes
+            invalidDelegateAttribute6.CustomAttributes
                 .Add(
                     new CodeAttributeDeclaration(
                         "name",
@@ -4057,38 +3776,32 @@ namespace System.CodeDom.Compiler.Tests
             yield return new object[] { invalidDelegateTypeParameter4 };
 
             var invalidDelegateTypeParameterAttribute1 = new CodeTypeDelegate("name");
-            invalidDelegateTypeParameterAttribute1
-                .TypeParameters
+            invalidDelegateTypeParameterAttribute1.TypeParameters
                 .Add(invalidTypeParameterAttribute1);
             yield return new object[] { invalidDelegateTypeParameterAttribute1 };
 
             var invalidDelegateTypeParameterAttribute2 = new CodeTypeDelegate("name");
-            invalidDelegateTypeParameterAttribute2
-                .TypeParameters
+            invalidDelegateTypeParameterAttribute2.TypeParameters
                 .Add(invalidTypeParameterAttribute2);
             yield return new object[] { invalidDelegateTypeParameterAttribute2 };
 
             var invalidDelegateTypeParameterAttribute3 = new CodeTypeDelegate("name");
-            invalidDelegateTypeParameterAttribute3
-                .TypeParameters
+            invalidDelegateTypeParameterAttribute3.TypeParameters
                 .Add(invalidTypeParameterAttribute3);
             yield return new object[] { invalidDelegateTypeParameterAttribute3 };
 
             var invalidDelegateTypeParameterAttribute4 = new CodeTypeDelegate("name");
-            invalidDelegateTypeParameterAttribute4
-                .TypeParameters
+            invalidDelegateTypeParameterAttribute4.TypeParameters
                 .Add(invalidTypeParameterAttribute4);
             yield return new object[] { invalidDelegateTypeParameterAttribute4 };
 
             var invalidDelegateTypeParameterAttribute5 = new CodeTypeDelegate("name");
-            invalidDelegateTypeParameterAttribute5
-                .TypeParameters
+            invalidDelegateTypeParameterAttribute5.TypeParameters
                 .Add(invalidTypeParameterAttribute5);
             yield return new object[] { invalidDelegateTypeParameterAttribute5 };
 
             var invalidDelegateTypeParameterAttribute6 = new CodeTypeDelegate("name");
-            invalidDelegateTypeParameterAttribute6
-                .TypeParameters
+            invalidDelegateTypeParameterAttribute6.TypeParameters
                 .Add(invalidTypeParameterAttribute6);
             yield return new object[] { invalidDelegateTypeParameterAttribute6 };
 
@@ -4137,44 +3850,37 @@ namespace System.CodeDom.Compiler.Tests
             yield return new object[] { invalidDelegateParameter1 };
 
             var invalidDelegateParameter2 = new CodeTypeDelegate { Name = "name" };
-            invalidDelegateParameter2
-                .Parameters
+            invalidDelegateParameter2.Parameters
                 .Add(new CodeParameterDeclarationExpression(new CodeTypeReference(), "name"));
             yield return new object[] { invalidDelegateParameter2 };
 
             var invalidDelegateParameter3 = new CodeTypeDelegate { Name = "name" };
-            invalidDelegateParameter3
-                .Parameters
+            invalidDelegateParameter3.Parameters
                 .Add(new CodeParameterDeclarationExpression(new CodeTypeReference("0"), "name"));
             yield return new object[] { invalidDelegateParameter3 };
 
             var invalidDelegateParameter4 = new CodeTypeDelegate { Name = "name" };
-            invalidDelegateParameter4
-                .Parameters
+            invalidDelegateParameter4.Parameters
                 .Add(new CodeParameterDeclarationExpression(invalidTypeReference1, "name"));
             yield return new object[] { invalidDelegateParameter4 };
 
             var invalidDelegateParameter5 = new CodeTypeDelegate { Name = "name" };
-            invalidDelegateParameter5
-                .Parameters
+            invalidDelegateParameter5.Parameters
                 .Add(new CodeParameterDeclarationExpression(invalidTypeReference2, "name"));
             yield return new object[] { invalidDelegateParameter5 };
 
             var invalidDelegateParameter6 = new CodeTypeDelegate { Name = "name" };
-            invalidDelegateParameter6
-                .Parameters
+            invalidDelegateParameter6.Parameters
                 .Add(new CodeParameterDeclarationExpression(invalidTypeReference3, "name"));
             yield return new object[] { invalidDelegateParameter6 };
 
             var invalidDelegateParameter7 = new CodeTypeDelegate { Name = "name" };
-            invalidDelegateParameter7
-                .Parameters
+            invalidDelegateParameter7.Parameters
                 .Add(new CodeParameterDeclarationExpression(new CodeTypeReference("type"), null));
             yield return new object[] { invalidDelegateParameter7 };
 
             var invalidDelegateParameter8 = new CodeTypeDelegate { Name = "name" };
-            invalidDelegateParameter8
-                .Parameters
+            invalidDelegateParameter8.Parameters
                 .Add(
                     new CodeParameterDeclarationExpression(
                         new CodeTypeReference("type"),
@@ -4184,8 +3890,7 @@ namespace System.CodeDom.Compiler.Tests
             yield return new object[] { invalidDelegateParameter8 };
 
             var invalidDelegateParameter9 = new CodeTypeDelegate { Name = "name" };
-            invalidDelegateParameter9
-                .Parameters
+            invalidDelegateParameter9.Parameters
                 .Add(new CodeParameterDeclarationExpression(new CodeTypeReference("type"), "0"));
             yield return new object[] { invalidDelegateParameter9 };
 
@@ -4234,32 +3939,27 @@ namespace System.CodeDom.Compiler.Tests
 
             // CodeCompileUnit.
             var invalidCompileUnitAttribute1 = new CodeCompileUnit();
-            invalidCompileUnitAttribute1
-                .AssemblyCustomAttributes
+            invalidCompileUnitAttribute1.AssemblyCustomAttributes
                 .Add(new CodeAttributeDeclaration());
             yield return new object[] { invalidCompileUnitAttribute1 };
 
             var invalidCompileUnitAttribute2 = new CodeCompileUnit();
-            invalidCompileUnitAttribute2
-                .AssemblyCustomAttributes
+            invalidCompileUnitAttribute2.AssemblyCustomAttributes
                 .Add(new CodeAttributeDeclaration((string)null));
             yield return new object[] { invalidCompileUnitAttribute2 };
 
             var invalidCompileUnitAttribute3 = new CodeCompileUnit();
-            invalidCompileUnitAttribute3
-                .AssemblyCustomAttributes
+            invalidCompileUnitAttribute3.AssemblyCustomAttributes
                 .Add(new CodeAttributeDeclaration(string.Empty));
             yield return new object[] { invalidCompileUnitAttribute3 };
 
             var invalidCompileUnitAttribute4 = new CodeCompileUnit();
-            invalidCompileUnitAttribute4
-                .AssemblyCustomAttributes
+            invalidCompileUnitAttribute4.AssemblyCustomAttributes
                 .Add(new CodeAttributeDeclaration("0"));
             yield return new object[] { invalidCompileUnitAttribute4 };
 
             var invalidCompileUnitAttribute5 = new CodeCompileUnit();
-            invalidCompileUnitAttribute5
-                .AssemblyCustomAttributes
+            invalidCompileUnitAttribute5.AssemblyCustomAttributes
                 .Add(
                     new CodeAttributeDeclaration(
                         "name",
@@ -4269,8 +3969,7 @@ namespace System.CodeDom.Compiler.Tests
             yield return new object[] { invalidCompileUnitAttribute5 };
 
             var invalidCompileUnitAttribute6 = new CodeCompileUnit();
-            invalidCompileUnitAttribute6
-                .AssemblyCustomAttributes
+            invalidCompileUnitAttribute6.AssemblyCustomAttributes
                 .Add(
                     new CodeAttributeDeclaration(
                         "name",
@@ -4284,16 +3983,14 @@ namespace System.CodeDom.Compiler.Tests
             yield return new object[] { invalidCompileUnitStartDirective1 };
 
             var invalidCompileUnitStartDirective2 = new CodeCompileUnit();
-            invalidCompileUnitStartDirective2
-                .StartDirectives
+            invalidCompileUnitStartDirective2.StartDirectives
                 .Add(new CodeChecksumPragma("\0", Guid.NewGuid(), new byte[0]));
             yield return new object[] { invalidCompileUnitStartDirective2 };
 
             foreach (char newLineChar in new char[] { '\r', '\n', '\u2028', '\u2029', '\u0085' })
             {
                 var invalidCompileUnitStartDirective3 = new CodeCompileUnit();
-                invalidCompileUnitStartDirective3
-                    .StartDirectives
+                invalidCompileUnitStartDirective3.StartDirectives
                     .Add(new CodeRegionDirective(CodeRegionMode.None, $"te{newLineChar}xt"));
                 yield return new object[] { invalidCompileUnitStartDirective3 };
             }
@@ -4303,16 +4000,14 @@ namespace System.CodeDom.Compiler.Tests
             yield return new object[] { invalidCompileUnitEndDirective1 };
 
             var invalidCompileUnitEndDirective2 = new CodeCompileUnit();
-            invalidCompileUnitEndDirective2
-                .EndDirectives
+            invalidCompileUnitEndDirective2.EndDirectives
                 .Add(new CodeChecksumPragma("\0", Guid.NewGuid(), new byte[0]));
             yield return new object[] { invalidCompileUnitEndDirective2 };
 
             foreach (char newLineChar in new char[] { '\r', '\n', '\u2028', '\u2029', '\u0085' })
             {
                 var invalidCompileUnitEndDirective3 = new CodeCompileUnit();
-                invalidCompileUnitEndDirective3
-                    .EndDirectives
+                invalidCompileUnitEndDirective3.EndDirectives
                     .Add(new CodeRegionDirective(CodeRegionMode.None, $"te{newLineChar}xt"));
                 yield return new object[] { invalidCompileUnitEndDirective3 };
             }
@@ -4323,16 +4018,14 @@ namespace System.CodeDom.Compiler.Tests
             yield return new object[] { invalidSnippetCompileUnitStartDirective1 };
 
             var invalidSnippetCompileUnitStartDirective2 = new CodeSnippetCompileUnit();
-            invalidSnippetCompileUnitStartDirective2
-                .StartDirectives
+            invalidSnippetCompileUnitStartDirective2.StartDirectives
                 .Add(new CodeChecksumPragma("\0", Guid.NewGuid(), new byte[0]));
             yield return new object[] { invalidSnippetCompileUnitStartDirective2 };
 
             foreach (char newLineChar in new char[] { '\r', '\n', '\u2028', '\u2029', '\u0085' })
             {
                 var invalidSnippetCompileUnitStartDirective3 = new CodeSnippetCompileUnit();
-                invalidSnippetCompileUnitStartDirective3
-                    .StartDirectives
+                invalidSnippetCompileUnitStartDirective3.StartDirectives
                     .Add(new CodeRegionDirective(CodeRegionMode.None, $"te{newLineChar}xt"));
                 yield return new object[] { invalidSnippetCompileUnitStartDirective3 };
             }
@@ -4342,16 +4035,14 @@ namespace System.CodeDom.Compiler.Tests
             yield return new object[] { invalidSnippetCompileUnitEndDirective1 };
 
             var invalidSnippetCompileUnitEndDirective2 = new CodeSnippetCompileUnit();
-            invalidSnippetCompileUnitEndDirective2
-                .EndDirectives
+            invalidSnippetCompileUnitEndDirective2.EndDirectives
                 .Add(new CodeChecksumPragma("\0", Guid.NewGuid(), new byte[0]));
             yield return new object[] { invalidSnippetCompileUnitEndDirective2 };
 
             foreach (char newLineChar in new char[] { '\r', '\n', '\u2028', '\u2029', '\u0085' })
             {
                 var invalidSnippetCompileUnitEndDirective3 = new CodeSnippetCompileUnit();
-                invalidSnippetCompileUnitEndDirective3
-                    .EndDirectives
+                invalidSnippetCompileUnitEndDirective3.EndDirectives
                     .Add(new CodeRegionDirective(CodeRegionMode.None, $"te{newLineChar}xt"));
                 yield return new object[] { invalidSnippetCompileUnitEndDirective3 };
             }
@@ -5108,14 +4799,12 @@ namespace System.CodeDom.Compiler.Tests
             yield return new object[] { null };
 
             var invalidTypeAttribute = new CodeTypeDeclaration("name");
-            invalidTypeAttribute
-                .CustomAttributes
+            invalidTypeAttribute.CustomAttributes
                 .Add(new CodeAttributeDeclaration("name", new CodeAttributeArgument()));
             yield return new object[] { invalidTypeAttribute };
 
             var invalidTypeParameterAttribute = new CodeTypeParameter("parameter");
-            invalidTypeParameterAttribute
-                .CustomAttributes
+            invalidTypeParameterAttribute.CustomAttributes
                 .Add(new CodeAttributeDeclaration("attribute", new CodeAttributeArgument()));
             var invalidTypeTypeParameterAttribute = new CodeTypeDeclaration("name");
             invalidTypeTypeParameterAttribute.TypeParameters.Add(invalidTypeParameterAttribute);

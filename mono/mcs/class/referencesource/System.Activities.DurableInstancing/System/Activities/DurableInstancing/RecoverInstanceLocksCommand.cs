@@ -10,8 +10,7 @@ namespace System.Activities.DurableInstancing
     {
         public RecoverInstanceLocksCommand()
             : base(
-                SqlWorkflowInstanceStoreConstants
-                    .DurableInstancingNamespace
+                SqlWorkflowInstanceStoreConstants.DurableInstancingNamespace
                     .GetName("RecoverInstanceLocks")
             ) { }
     }

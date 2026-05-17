@@ -126,10 +126,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                 var firstUnderContainer = this.GetFirstStatementUnderContainer();
                 var lastUnderContainer = this.GetLastStatementUnderContainer();
                 Contract.ThrowIfFalse(
-                    this.SyntaxFacts.AreStatementsInSameContainer(
-                        firstUnderContainer,
-                        lastUnderContainer
-                    )
+                    this.SyntaxFacts
+                        .AreStatementsInSameContainer(firstUnderContainer, lastUnderContainer)
                 );
                 return true;
             }
@@ -218,8 +216,7 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                 var name = syntaxFacts.GetNameOfMemberAccessExpression(invokedExpression);
                 var identifier = syntaxFacts.GetIdentifierOfSimpleName(name);
                 if (
-                    !syntaxFacts
-                        .StringComparer
+                    !syntaxFacts.StringComparer
                         .Equals(identifier.ValueText, nameof(Task.ConfigureAwait))
                 )
                     return false;

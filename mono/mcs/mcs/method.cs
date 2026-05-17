@@ -852,8 +852,7 @@ namespace Mono.CSharp
             }
             else if (ReturnType.HasDynamicElement)
             {
-                Module
-                    .PredefinedAttributes
+                Module.PredefinedAttributes
                     .Dynamic
                     .EmitAttribute(CreateReturnBuilder().Builder, ReturnType, Location);
             }
@@ -864,8 +863,7 @@ namespace Mono.CSharp
 
             if (ReturnType.HasNamedTupleElement)
             {
-                Module
-                    .PredefinedAttributes
+                Module.PredefinedAttributes
                     .TupleElementNames
                     .EmitAttribute(CreateReturnBuilder().Builder, ReturnType, Location);
             }
@@ -1125,32 +1123,35 @@ namespace Mono.CSharp
 
                 if ((mod & invalid_partial_mod) != 0)
                 {
-                    m.Report.Error(
-                        750,
-                        m.Location,
-                        "A partial method cannot define access modifier or any of abstract, extern, new, override, sealed, or virtual modifiers"
-                    );
+                    m.Report
+                        .Error(
+                            750,
+                            m.Location,
+                            "A partial method cannot define access modifier or any of abstract, extern, new, override, sealed, or virtual modifiers"
+                        );
                     mod &= ~invalid_partial_mod;
                 }
 
                 if ((parent.ModFlags & Modifiers.PARTIAL) == 0)
                 {
-                    m.Report.Error(
-                        751,
-                        m.Location,
-                        "A partial method must be declared within a partial class or partial struct"
-                    );
+                    m.Report
+                        .Error(
+                            751,
+                            m.Location,
+                            "A partial method must be declared within a partial class or partial struct"
+                        );
                 }
             }
 
             if ((mod & Modifiers.STATIC) == 0 && parameters.HasExtensionMethodType)
             {
-                m.Report.Error(
-                    1105,
-                    m.Location,
-                    "`{0}': Extension methods must be declared static",
-                    m.GetSignatureForError()
-                );
+                m.Report
+                    .Error(
+                        1105,
+                        m.Location,
+                        "`{0}': Extension methods must be declared static",
+                        m.GetSignatureForError()
+                    );
             }
 
             return m;
@@ -1323,8 +1324,7 @@ namespace Mono.CSharp
                     INamedBlockVariable variable = null;
                     block.GetLocalName(type_argument_name, block, ref variable);
                     if (variable != null)
-                        variable
-                            .Block
+                        variable.Block
                             .Error_AlreadyDeclaredTypeParameter(
                                 type_argument_name,
                                 variable.Location
@@ -1361,8 +1361,7 @@ namespace Mono.CSharp
 
                     if (base_override.DeclaringType.IsGeneric)
                     {
-                        base_decl_tparams = base_override
-                            .DeclaringType
+                        base_decl_tparams = base_override.DeclaringType
                             .MemberDefinition
                             .TypeParameters;
 
@@ -1536,8 +1535,7 @@ namespace Mono.CSharp
                     // Using container location because the interface can be implemented
                     // by base class
                     var tp = (tparams[i].MemberDefinition as MemberCore) ?? container;
-                    container
-                        .Compiler
+                    container.Compiler
                         .Report
                         .Error(
                             425,
@@ -1937,11 +1935,12 @@ namespace Mono.CSharp
 
                     if (dynamic)
                     {
-                        ec.Report.Error(
-                            1975,
-                            loc,
-                            "The constructor call cannot be dynamically dispatched within constructor initializer"
-                        );
+                        ec.Report
+                            .Error(
+                                1975,
+                                loc,
+                                "The constructor call cannot be dynamically dispatched within constructor initializer"
+                            );
 
                         return null;
                     }
@@ -1956,12 +1955,13 @@ namespace Mono.CSharp
                     type = ec.CurrentType.BaseType;
                     if (ec.CurrentType.IsStruct)
                     {
-                        ec.Report.Error(
-                            522,
-                            loc,
-                            "`{0}': Struct constructors cannot call base constructors",
-                            caller_builder.GetSignatureForError()
-                        );
+                        ec.Report
+                            .Error(
+                                522,
+                                loc,
+                                "`{0}': Struct constructors cannot call base constructors",
+                                caller_builder.GetSignatureForError()
+                            );
                         return this;
                     }
                 }
@@ -1974,12 +1974,13 @@ namespace Mono.CSharp
                 && base_ctor.MemberDefinition == caller_builder.Spec.MemberDefinition
             )
             {
-                ec.Report.Error(
-                    516,
-                    loc,
-                    "Constructor `{0}' cannot call itself",
-                    caller_builder.GetSignatureForError()
-                );
+                ec.Report
+                    .Error(
+                        516,
+                        loc,
+                        "Constructor `{0}' cannot call itself",
+                        caller_builder.GetSignatureForError()
+                    );
             }
 
             return this;
@@ -2210,8 +2211,7 @@ namespace Mono.CSharp
                 | MethodAttributes.RTSpecialName
                 | MethodAttributes.SpecialName;
 
-            ConstructorBuilder = Parent
-                .TypeBuilder
+            ConstructorBuilder = Parent.TypeBuilder
                 .DefineConstructor(ca, CallingConventions, parameters.GetMetaInfo());
 
             spec = new MethodSpec(
@@ -2535,8 +2535,7 @@ namespace Mono.CSharp
                     {
                         if (member is PropertyBase)
                         {
-                            container
-                                .Compiler
+                            container.Compiler
                                 .Report
                                 .Error(
                                     550,
@@ -2551,8 +2550,7 @@ namespace Mono.CSharp
                         }
                         else
                         {
-                            container
-                                .Compiler
+                            container.Compiler
                                 .Report
                                 .Error(
                                     539,
@@ -2567,8 +2565,7 @@ namespace Mono.CSharp
                     if (implementing.IsAccessor && !method.IsAccessor)
                     {
                         container.Compiler.Report.SymbolRelatedToPreviousError(implementing);
-                        container
-                            .Compiler
+                        container.Compiler
                             .Report
                             .Error(
                                 683,
@@ -2588,12 +2585,10 @@ namespace Mono.CSharp
                         {
                             if (implementing.IsAccessor)
                             {
-                                container
-                                    .Compiler
+                                container.Compiler
                                     .Report
                                     .SymbolRelatedToPreviousError(implementing);
-                                container
-                                    .Compiler
+                                container.Compiler
                                     .Report
                                     .Error(
                                         470,
@@ -2608,12 +2603,10 @@ namespace Mono.CSharp
                         {
                             if (!implementing.IsAccessor)
                             {
-                                container
-                                    .Compiler
+                                container.Compiler
                                     .Report
                                     .SymbolRelatedToPreviousError(implementing);
-                                container
-                                    .Compiler
+                                container.Compiler
                                     .Report
                                     .Error(
                                         686,
@@ -2634,12 +2627,10 @@ namespace Mono.CSharp
                                     && (pm.ModFlags & Modifiers.PUBLIC) == 0
                                 )
                                 {
-                                    container
-                                        .Compiler
+                                    container.Compiler
                                         .Report
                                         .SymbolRelatedToPreviousError(implementing);
-                                    container
-                                        .Compiler
+                                    container.Compiler
                                         .Report
                                         .Error(
                                             277,
@@ -2659,8 +2650,7 @@ namespace Mono.CSharp
                             )
                         )
                         {
-                            container
-                                .Compiler
+                            container.Compiler
                                 .Report
                                 .Error(
                                     8141,
@@ -2679,8 +2669,7 @@ namespace Mono.CSharp
                             && !NamedTupleSpec.CheckOverrideName(p_member, p_implementing)
                         )
                         {
-                            container
-                                .Compiler
+                            container.Compiler
                                 .Report
                                 .Error(
                                     8141,
@@ -2709,8 +2698,7 @@ namespace Mono.CSharp
                     if (method.ParameterInfo.HasParams && !implementing.Parameters.HasParams)
                     {
                         container.Compiler.Report.SymbolRelatedToPreviousError(implementing);
-                        container
-                            .Compiler
+                        container.Compiler
                             .Report
                             .Error(
                                 466,
@@ -2724,8 +2712,7 @@ namespace Mono.CSharp
                     {
                         container.Compiler.Report.SymbolRelatedToPreviousError(ambig_iface_method);
                         container.Compiler.Report.SymbolRelatedToPreviousError(implementing);
-                        container
-                            .Compiler
+                        container.Compiler
                             .Report
                             .Warning(
                                 473,
@@ -2756,8 +2743,7 @@ namespace Mono.CSharp
                             optional
                             && (
                                 container.Interfaces == null
-                                || !container
-                                    .Definition
+                                || !container.Definition
                                     .Interfaces
                                     .Contains(implementing.DeclaringType)
                             )
@@ -2853,8 +2839,7 @@ namespace Mono.CSharp
             if (!member.IsExplicitImpl)
                 return;
 
-            container
-                .TypeBuilder
+            container.TypeBuilder
                 .DefineMethodOverride(builder, (MethodInfo)implementing.GetMetaInfo());
         }
 
@@ -2867,8 +2852,7 @@ namespace Mono.CSharp
             if (builder != null)
                 throw new InternalErrorException();
 
-            builder = container
-                .TypeBuilder
+            builder = container.TypeBuilder
                 .DefineMethod(full_name, flags, method.CallingConventions);
             return builder;
         }
@@ -3172,8 +3156,7 @@ namespace Mono.CSharp
 
             if (a.Target == AttributeTargets.Method)
             {
-                method_data
-                    .MethodBuilder
+                method_data.MethodBuilder
                     .SetCustomAttribute((ConstructorInfo)ctor.GetMetaInfo(), cdata);
                 return;
             }
@@ -3223,8 +3206,7 @@ namespace Mono.CSharp
             method_data.Emit(parent);
 
             if ((ModFlags & Modifiers.COMPILER_GENERATED) != 0 && !Parent.IsCompilerGenerated)
-                Module
-                    .PredefinedAttributes
+                Module.PredefinedAttributes
                     .CompilerGenerated
                     .EmitAttribute(method_data.MethodBuilder);
             if (((ModFlags & Modifiers.DEBUGGER_HIDDEN) != 0))
@@ -3236,8 +3218,7 @@ namespace Mono.CSharp
             }
             else if (ReturnType.HasDynamicElement)
             {
-                Module
-                    .PredefinedAttributes
+                Module.PredefinedAttributes
                     .Dynamic
                     .EmitAttribute(CreateReturnBuilder().Builder, ReturnType, Location);
             }
@@ -3248,8 +3229,7 @@ namespace Mono.CSharp
 
             if (ReturnType.HasNamedTupleElement)
             {
-                Module
-                    .PredefinedAttributes
+                Module.PredefinedAttributes
                     .TupleElementNames
                     .EmitAttribute(CreateReturnBuilder().Builder, ReturnType, Location);
             }
@@ -3495,16 +3475,14 @@ namespace Mono.CSharp
 
             // imlicit and explicit operator of same types are not allowed
             if (OperatorType == OpType.Explicit)
-                Parent
-                    .MemberCache
+                Parent.MemberCache
                     .CheckExistingMembersOverloads(
                         this,
                         GetMetadataName(OpType.Implicit),
                         parameters
                     );
             else if (OperatorType == OpType.Implicit)
-                Parent
-                    .MemberCache
+                Parent.MemberCache
                     .CheckExistingMembersOverloads(
                         this,
                         GetMetadataName(OpType.Explicit),

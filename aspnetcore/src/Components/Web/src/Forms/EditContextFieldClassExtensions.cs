@@ -36,8 +36,7 @@ public static class EditContextFieldClassExtensions
         in FieldIdentifier fieldIdentifier
     )
     {
-        var provider = editContext
-            .Properties
+        var provider = editContext.Properties
             .TryGetValue(FieldCssClassProviderKey, out var customProvider)
             ? (FieldCssClassProvider)customProvider
             : FieldCssClassProvider.Instance;

@@ -50,8 +50,7 @@ namespace System.Web.Http.Validation.Providers
                     }
                 }
 
-                FieldInfo[] allFields = metadata
-                    .ModelType
+                FieldInfo[] allFields = metadata.ModelType
                     .GetFields(
                         BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance
                     );

@@ -1843,8 +1843,7 @@ namespace System.Runtime.Serialization.DataContracts
                 {
                     boundClassContract.Members = new List<DataMember>(Members.Count);
                     foreach (DataMember member in Members)
-                        boundClassContract
-                            .Members
+                        boundClassContract.Members
                             .Add(member.BindGenericParameters(paramContracts, boundContracts));
                 }
                 return boundClassContract;

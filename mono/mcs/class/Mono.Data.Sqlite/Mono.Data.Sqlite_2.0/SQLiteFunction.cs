@@ -416,13 +416,11 @@ namespace Mono.Data.Sqlite
             {
 #if !PLATFORM_COMPACTFRAMEWORK
                 SqliteFunctionAttribute at;
-                System.Reflection.Assembly[] arAssemblies = System
-                    .AppDomain
+                System.Reflection.Assembly[] arAssemblies = System.AppDomain
                     .CurrentDomain
                     .GetAssemblies();
                 int w = arAssemblies.Length;
-                System.Reflection.AssemblyName sqlite = System
-                    .Reflection
+                System.Reflection.AssemblyName sqlite = System.Reflection
                     .Assembly
                     .GetCallingAssembly()
                     .GetName();

@@ -234,11 +234,9 @@ app.MapGet("/", (HttpContext httpContext, MyBindAsyncTypeThatThrows myBindAsyncP
         httpContext.Request.Body = stream;
 
         httpContext.Request.Headers["Content-Type"] = "application/json";
-        httpContext.Request.Headers["Content-Length"] = stream
-            .Length
+        httpContext.Request.Headers["Content-Length"] = stream.Length
             .ToString(CultureInfo.InvariantCulture);
-        httpContext
-            .Features
+        httpContext.Features
             .Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
 
         var jsonOptions = new JsonOptions();
@@ -292,11 +290,9 @@ app.MapPost("/", (HttpContext context, MyBindAsyncRecord myBindAsyncParam, Todo 
         httpContext.Request.Body = stream;
 
         httpContext.Request.Headers["Content-Type"] = "application/json";
-        httpContext.Request.Headers["Content-Length"] = stream
-            .Length
+        httpContext.Request.Headers["Content-Length"] = stream.Length
             .ToString(CultureInfo.InvariantCulture);
-        httpContext
-            .Features
+        httpContext.Features
             .Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
 
         var jsonOptions = new JsonOptions();

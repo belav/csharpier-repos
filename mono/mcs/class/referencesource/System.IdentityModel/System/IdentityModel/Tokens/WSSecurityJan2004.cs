@@ -88,8 +88,8 @@ namespace System.IdentityModel.Tokens
 
         internal abstract class BinaryTokenEntry : TokenEntry
         {
-            internal static readonly XmlDictionaryString ElementName =
-                XD.SecurityJan2004Dictionary.BinarySecurityToken;
+            internal static readonly XmlDictionaryString ElementName = XD.SecurityJan2004Dictionary
+                .BinarySecurityToken;
             internal static readonly XmlDictionaryString EncodingTypeAttribute =
                 XD.SecurityJan2004Dictionary.EncodingType;
             internal const string EncodingTypeAttributeString = SecurityJan2004Strings.EncodingType;
@@ -111,8 +111,7 @@ namespace System.IdentityModel.Tokens
             protected BinaryTokenEntry(string[] valueTypeUris)
             {
                 if (valueTypeUris == null)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgumentNull("valueTypeUris");
 
                 this.valueTypeUris = new string[valueTypeUris.GetLength(0)];
@@ -383,8 +382,7 @@ namespace System.IdentityModel.Tokens
 
                 if (clause == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new XmlException(
                                 SR.GetString(
@@ -436,8 +434,7 @@ namespace System.IdentityModel.Tokens
                         return;
                     }
                 }
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(
@@ -539,8 +536,7 @@ namespace System.IdentityModel.Tokens
                 }
                 else
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new SecurityMessageSerializationException(
                                 SR.GetString(SR.UnknownEncodingInKeyIdentifier)
@@ -910,8 +906,7 @@ namespace System.IdentityModel.Tokens
                     {
                         if (readAuthorityBinding)
                         {
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
                                     new XmlException(
                                         SR.GetString(SR.MultipleSamlAuthorityBindingsInReference)
@@ -922,8 +917,7 @@ namespace System.IdentityModel.Tokens
                         binding = reader.GetAttribute(XD.SamlDictionary.Binding, null);
                         if (string.IsNullOrEmpty(binding))
                         {
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
                                     new XmlException(
                                         SR.GetString(
@@ -937,8 +931,7 @@ namespace System.IdentityModel.Tokens
                         location = reader.GetAttribute(XD.SamlDictionary.Location, null);
                         if (string.IsNullOrEmpty(location))
                         {
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
                                     new XmlException(
                                         SR.GetString(
@@ -952,8 +945,7 @@ namespace System.IdentityModel.Tokens
                         authorityKind = reader.GetAttribute(XD.SamlDictionary.AuthorityKind, null);
                         if (string.IsNullOrEmpty(authorityKind))
                         {
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
                                     new XmlException(
                                         SR.GetString(
@@ -983,8 +975,7 @@ namespace System.IdentityModel.Tokens
                     {
                         if (readKeyIdentifier)
                         {
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
                                     new XmlException(
                                         SR.GetString(SR.MultipleKeyIdentifiersInReference)
@@ -1005,8 +996,7 @@ namespace System.IdentityModel.Tokens
                 }
                 if (!readKeyIdentifier)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new XmlException(SR.GetString(SR.DidNotFindKeyIdentifierInReference))
                         );
@@ -1297,8 +1287,8 @@ namespace System.IdentityModel.Tokens
 
         public class IdManager : SignatureTargetIdManager
         {
-            internal static readonly XmlDictionaryString ElementName =
-                XD.XmlEncryptionDictionary.EncryptedData;
+            internal static readonly XmlDictionaryString ElementName = XD.XmlEncryptionDictionary
+                .EncryptedData;
 
             static readonly IdManager instance = new IdManager();
 

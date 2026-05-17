@@ -69,21 +69,18 @@ public abstract class StoreValueGenerationFixtureBase
 
     protected override void Seed(StoreValueGenerationContext context)
     {
-        context
-            .WithSomeDatabaseGenerated
+        context.WithSomeDatabaseGenerated
             .AddRange(
                 new StoreValueGenerationData { Data2 = 1 },
                 new StoreValueGenerationData { Data2 = 2 }
             );
-        context
-            .WithSomeDatabaseGenerated2
+        context.WithSomeDatabaseGenerated2
             .AddRange(
                 new StoreValueGenerationData { Data2 = 1 },
                 new StoreValueGenerationData { Data2 = 2 }
             );
 
-        context
-            .WithNoDatabaseGenerated
+        context.WithNoDatabaseGenerated
             .AddRange(
                 new StoreValueGenerationData
                 {
@@ -98,8 +95,7 @@ public abstract class StoreValueGenerationFixtureBase
                     Data2 = 21,
                 }
             );
-        context
-            .WithNoDatabaseGenerated2
+        context.WithNoDatabaseGenerated2
             .AddRange(
                 new StoreValueGenerationData
                 {
@@ -115,11 +111,9 @@ public abstract class StoreValueGenerationFixtureBase
                 }
             );
 
-        context
-            .WithAllDatabaseGenerated
+        context.WithAllDatabaseGenerated
             .AddRange(new StoreValueGenerationData(), new StoreValueGenerationData());
-        context
-            .WithAllDatabaseGenerated2
+        context.WithAllDatabaseGenerated2
             .AddRange(new StoreValueGenerationData(), new StoreValueGenerationData());
 
         context.SaveChanges();

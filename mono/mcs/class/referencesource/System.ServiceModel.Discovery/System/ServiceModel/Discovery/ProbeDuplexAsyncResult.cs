@@ -133,8 +133,7 @@ namespace System.ServiceModel.Discovery
                 (ProbeDuplexAsyncResult<TProbeMessage, TResponseChannel>)result.AsyncState;
 
             if (
-                thisPtr
-                    .multicastSuppressionImpl
+                thisPtr.multicastSuppressionImpl
                     .EndShouldRedirectFind(result, out redirectionEndpoints)
             )
             {
@@ -230,11 +229,12 @@ namespace System.ServiceModel.Discovery
 
         bool SuppressFindRequest()
         {
-            IAsyncResult result = this.multicastSuppressionImpl.BeginShouldRedirectFind(
-                this.findRequest.Criteria,
-                this.PrepareAsyncCompletion(onShouldRedirectFindCompletedCallback),
-                this
-            );
+            IAsyncResult result = this.multicastSuppressionImpl
+                .BeginShouldRedirectFind(
+                    this.findRequest.Criteria,
+                    this.PrepareAsyncCompletion(onShouldRedirectFindCompletedCallback),
+                    this
+                );
 
             return (result.CompletedSynchronously && OnShouldRedirectFindCompleted(result));
         }
@@ -258,11 +258,8 @@ namespace System.ServiceModel.Discovery
 
         bool ProcessFindRequest()
         {
-            IAsyncResult result = this.discoveryServiceImpl.BeginFind(
-                findRequest,
-                onFindCompletedCallback,
-                this
-            );
+            IAsyncResult result = this.discoveryServiceImpl
+                .BeginFind(findRequest, onFindCompletedCallback, this);
 
             if (result.CompletedSynchronously)
             {
@@ -285,9 +282,8 @@ namespace System.ServiceModel.Discovery
 
         bool EnsureNotDuplicate()
         {
-            bool isDuplicate = this.discoveryServiceImpl.IsDuplicate(
-                OperationContext.Current.IncomingMessageHeaders.MessageId
-            );
+            bool isDuplicate = this.discoveryServiceImpl
+                .IsDuplicate(OperationContext.Current.IncomingMessageHeaders.MessageId);
 
             if (isDuplicate && TD.DuplicateDiscoveryMessageIsEnabled())
             {
@@ -400,12 +396,13 @@ namespace System.ServiceModel.Discovery
                 object state
             )
             {
-                return this.probeDuplexAsyncResult.BeginSendProxyAnnouncement(
-                    this.redirectionEndpoints[index],
-                    timeout,
-                    callback,
-                    state
-                );
+                return this.probeDuplexAsyncResult
+                    .BeginSendProxyAnnouncement(
+                        this.redirectionEndpoints[index],
+                        timeout,
+                        callback,
+                        state
+                    );
             }
 
             protected override void OnEndSend(IAsyncResult result)
@@ -447,12 +444,8 @@ namespace System.ServiceModel.Discovery
                 object state
             )
             {
-                return this.probeDuplexAsyncResult.BeginSendFindResponse(
-                    item,
-                    timeout,
-                    callback,
-                    state
-                );
+                return this.probeDuplexAsyncResult
+                    .BeginSendFindResponse(item, timeout, callback, state);
             }
 
             protected override void OnEndSendItem(IAsyncResult result)
@@ -489,8 +482,7 @@ namespace System.ServiceModel.Discovery
                 {
                     if (this.probeDuplexAsyncResult.isFindCompleted)
                     {
-                        throw FxTrace
-                            .Exception
+                        throw FxTrace.Exception
                             .AsError(
                                 new InvalidOperationException(SR.DiscoveryCannotAddMatchingEndpoint)
                             );

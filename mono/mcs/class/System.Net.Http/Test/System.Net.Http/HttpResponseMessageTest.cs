@@ -173,8 +173,7 @@ namespace MonoTests.System.Net.Http
             Assert.AreEqual(new Uri("http://xamarin.com"), headers.Location);
 
             Assert.IsTrue(
-                headers
-                    .Pragma
+                headers.Pragma
                     .SequenceEqual(
                         new[]
                         {
@@ -185,8 +184,7 @@ namespace MonoTests.System.Net.Http
             );
 
             Assert.IsTrue(
-                headers
-                    .ProxyAuthenticate
+                headers.ProxyAuthenticate
                     .SequenceEqual(
                         new[]
                         {
@@ -199,8 +197,7 @@ namespace MonoTests.System.Net.Http
             Assert.AreEqual(new RetryConditionHeaderValue(TimeSpan.MinValue), headers.RetryAfter);
 
             Assert.IsTrue(
-                headers
-                    .Server
+                headers.Server
                     .SequenceEqual(
                         new[]
                         {
@@ -213,8 +210,7 @@ namespace MonoTests.System.Net.Http
             Assert.IsTrue(headers.Trailer.SequenceEqual(new[] { "trailer-vvv", "tt-r" }));
 
             Assert.IsTrue(
-                headers
-                    .TransferEncoding
+                headers.TransferEncoding
                     .SequenceEqual(
                         new[]
                         {
@@ -226,8 +222,7 @@ namespace MonoTests.System.Net.Http
             );
 
             Assert.IsTrue(
-                headers
-                    .Upgrade
+                headers.Upgrade
                     .SequenceEqual(
                         new[]
                         {
@@ -241,8 +236,7 @@ namespace MonoTests.System.Net.Http
             Assert.IsTrue(headers.Vary.SequenceEqual(new[] { "vary", "vvaar" }));
 
             Assert.IsTrue(
-                headers
-                    .Via
+                headers.Via
                     .SequenceEqual(
                         new[]
                         {
@@ -253,8 +247,7 @@ namespace MonoTests.System.Net.Http
             );
 
             Assert.IsTrue(
-                headers
-                    .Warning
+                headers.Warning
                     .SequenceEqual(
                         new[]
                         {
@@ -265,8 +258,7 @@ namespace MonoTests.System.Net.Http
             );
 
             Assert.IsTrue(
-                headers
-                    .WwwAuthenticate
+                headers.WwwAuthenticate
                     .SequenceEqual(
                         new[]
                         {
@@ -358,8 +350,7 @@ namespace MonoTests.System.Net.Http
 
             Assert.AreEqual(4, headers.ProxyAuthenticate.Count, "#1a");
             Assert.IsTrue(
-                headers
-                    .ProxyAuthenticate
+                headers.ProxyAuthenticate
                     .SequenceEqual(
                         new[]
                         {
@@ -374,8 +365,7 @@ namespace MonoTests.System.Net.Http
 
             Assert.AreEqual(4, headers.Upgrade.Count, "#2a");
             Assert.IsTrue(
-                headers
-                    .Upgrade
+                headers.Upgrade
                     .SequenceEqual(
                         new[]
                         {
@@ -390,8 +380,7 @@ namespace MonoTests.System.Net.Http
 
             Assert.AreEqual(2, headers.Via.Count, "#3a");
             Assert.IsTrue(
-                headers
-                    .Via
+                headers.Via
                     .SequenceEqual(
                         new[]
                         {
@@ -404,8 +393,7 @@ namespace MonoTests.System.Net.Http
 
             Assert.AreEqual(2, headers.Warning.Count, "#4a");
             Assert.IsTrue(
-                headers
-                    .Warning
+                headers.Warning
                     .SequenceEqual(
                         new[]
                         {

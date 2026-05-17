@@ -272,11 +272,8 @@ namespace System.ServiceModel.Channels
             bool shouldFault = true;
             try
             {
-                IAsyncResult result = this.messageSource.BeginWaitForMessage(
-                    timeout,
-                    callback,
-                    state
-                );
+                IAsyncResult result = this.messageSource
+                    .BeginWaitForMessage(timeout, callback, state);
                 shouldFault = false;
                 return result;
             }
@@ -366,8 +363,7 @@ namespace System.ServiceModel.Channels
                     TD.CloseTimeout(SR.GetString(SR.CloseTimedOut, timeout));
                 }
 
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new TimeoutException(
                             SR.GetString(SR.CloseTimedOut, timeout),
@@ -556,8 +552,7 @@ namespace System.ServiceModel.Channels
             TimeoutHelper timeoutHelper = new TimeoutHelper(timeout);
             if (!this.sendLock.TryEnter(timeoutHelper.RemainingTime()))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new TimeoutException(
                             SR.GetString(SR.SendToViaTimedOut, Via, timeout),
@@ -634,8 +629,7 @@ namespace System.ServiceModel.Channels
         {
             if (this.isOutputSessionClosed)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(SR.SendCannotBeCalledAfterCloseOutputSession)
@@ -795,11 +789,12 @@ namespace System.ServiceModel.Channels
             {
                 this.channel = channel;
                 this.timeoutHelper = new TimeoutHelper(timeout);
-                IAsyncResult result = this.channel.BeginCloseOutputSession(
-                    this.timeoutHelper.RemainingTime(),
-                    onCloseOutputSession,
-                    this
-                );
+                IAsyncResult result = this.channel
+                    .BeginCloseOutputSession(
+                        this.timeoutHelper.RemainingTime(),
+                        onCloseOutputSession,
+                        this
+                    );
 
                 if (!result.CompletedSynchronously)
                 {
@@ -1001,8 +996,7 @@ namespace System.ServiceModel.Channels
                 this.channel = channel;
 
                 if (
-                    !channel
-                        .sendLock
+                    !channel.sendLock
                         .EnterAsync(this.timeoutHelper.RemainingTime(), onEnterComplete, this)
                 )
                 {
@@ -1108,11 +1102,8 @@ namespace System.ServiceModel.Channels
 
                 this.channel.isOutputSessionClosed = true;
 
-                AsyncCompletionResult completionResult = this.channel.BeginCloseOutput(
-                    this.timeoutHelper.RemainingTime(),
-                    onWriteComplete,
-                    this
-                );
+                AsyncCompletionResult completionResult = this.channel
+                    .BeginCloseOutput(this.timeoutHelper.RemainingTime(), onWriteComplete, this);
 
                 if (completionResult == AsyncCompletionResult.Queued)
                 {
@@ -1177,8 +1168,7 @@ namespace System.ServiceModel.Channels
                 this.streamedOutput = streamedOutput;
 
                 if (
-                    !channel
-                        .sendLock
+                    !channel.sendLock
                         .EnterAsync(this.timeoutHelper.RemainingTime(), onEnterComplete, this)
                 )
                 {
@@ -1303,12 +1293,13 @@ namespace System.ServiceModel.Channels
                 AsyncCompletionResult completionResult;
                 if (this.streamedOutput)
                 {
-                    completionResult = this.channel.StartWritingStreamedMessage(
-                        message,
-                        this.timeoutHelper.RemainingTime(),
-                        onWriteComplete,
-                        this
-                    );
+                    completionResult = this.channel
+                        .StartWritingStreamedMessage(
+                            message,
+                            this.timeoutHelper.RemainingTime(),
+                            onWriteComplete,
+                            this
+                        );
                 }
                 else
                 {
@@ -1318,14 +1309,15 @@ namespace System.ServiceModel.Channels
                     messageData = this.channel.EncodeMessage(message);
 
                     this.buffer = messageData.Array;
-                    completionResult = this.channel.StartWritingBufferedMessage(
-                        message,
-                        messageData,
-                        allowOutputBatching,
-                        this.timeoutHelper.RemainingTime(),
-                        onWriteComplete,
-                        this
-                    );
+                    completionResult = this.channel
+                        .StartWritingBufferedMessage(
+                            message,
+                            messageData,
+                            allowOutputBatching,
+                            this.timeoutHelper.RemainingTime(),
+                            onWriteComplete,
+                            this
+                        );
                 }
 
                 if (completionResult == AsyncCompletionResult.Queued)

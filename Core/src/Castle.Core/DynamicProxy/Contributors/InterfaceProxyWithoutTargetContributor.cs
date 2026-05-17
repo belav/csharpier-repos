@@ -96,8 +96,7 @@ namespace Castle.DynamicProxy.Contributors
 
             // no locking required as we're already within a lock
 
-            return scope
-                .TypeCache
+            return scope.TypeCache
                 .GetOrAddWithoutTakingLock(
                     key,
                     _ =>

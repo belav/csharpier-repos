@@ -102,8 +102,7 @@ namespace System.ServiceModel.Configuration
                     );
                 if (!behaviors.EndpointBehaviors.ContainsKey(behaviorConfiguration))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ConfigurationErrorsException(
                                 SR.GetString(
@@ -152,8 +151,7 @@ namespace System.ServiceModel.Configuration
                     );
                 if (!behaviors.ServiceBehaviors.ContainsKey(behaviorConfiguration))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ConfigurationErrorsException(
                                 SR.GetString(

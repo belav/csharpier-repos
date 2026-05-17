@@ -57,8 +57,7 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
                 CancellationToken cancellationToken
             )
             {
-                var location = await DefinitionBucket
-                    .DefinitionItem
+                var location = await DefinitionBucket.DefinitionItem
                     .GetNavigableLocationAsync(Presenter._workspace, cancellationToken)
                     .ConfigureAwait(false);
                 await location
@@ -67,8 +66,7 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
             }
 
             protected override IList<Inline> CreateLineTextInlines() =>
-                DefinitionBucket
-                    .DefinitionItem
+                DefinitionBucket.DefinitionItem
                     .DisplayParts
                     .ToInlines(Presenter.ClassificationFormatMap, Presenter.TypeMap);
         }

@@ -350,8 +350,7 @@ namespace Microsoft.CodeAnalysis.Tools
                     }
 
                     // Track files covered by an editorconfig separately from those not covered.
-                    var analyzerConfigOptions = document
-                        .Project
+                    var analyzerConfigOptions = document.Project
                         .AnalyzerOptions
                         .AnalyzerConfigOptionsProvider
                         .GetOptions(syntaxTree);

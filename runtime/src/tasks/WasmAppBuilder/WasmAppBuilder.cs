@@ -133,8 +133,7 @@ public class WasmAppBuilder : WasmAppBuilderBaseTask
             if (UseWebcil)
             {
                 var tmpWebcil = Path.GetTempFileName();
-                var webcilWriter = Microsoft
-                    .WebAssembly
+                var webcilWriter = Microsoft.WebAssembly
                     .Build
                     .Tasks
                     .WebcilConverter
@@ -269,8 +268,7 @@ public class WasmAppBuilder : WasmAppBuilderBaseTask
             if (UseWebcil)
             {
                 var tmpWebcil = Path.GetTempFileName();
-                var webcilWriter = Microsoft
-                    .WebAssembly
+                var webcilWriter = Microsoft.WebAssembly
                     .Build
                     .Tasks
                     .WebcilConverter
@@ -294,8 +292,7 @@ public class WasmAppBuilder : WasmAppBuilderBaseTask
                 _fileWrites.Add(finalWebcil);
 
                 if (
-                    !bootConfig
-                        .resources
+                    !bootConfig.resources
                         .satelliteResources
                         .TryGetValue(args.culture, out var cultureSatelliteResources)
                 )
@@ -312,8 +309,7 @@ public class WasmAppBuilder : WasmAppBuilderBaseTask
                 FileCopyChecked(args.fullPath, satellitePath, "SatelliteAssemblies");
 
                 if (
-                    !bootConfig
-                        .resources
+                    !bootConfig.resources
                         .satelliteResources
                         .TryGetValue(args.culture, out var cultureSatelliteResources)
                 )

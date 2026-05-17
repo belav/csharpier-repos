@@ -81,9 +81,10 @@ namespace tests.system_data_dll.System_Data
             ds.Tables[0].Columns.Add(new DataColumn("Column2"));
             ds.Tables[1].Columns.Add(new DataColumn("Column"));
 
-            ds.Relations.Add(
-                new DataRelation("Relation", ds.Tables[0].Columns[0], ds.Tables[1].Columns[0])
-            );
+            ds.Relations
+                .Add(
+                    new DataRelation("Relation", ds.Tables[0].Columns[0], ds.Tables[1].Columns[0])
+                );
             ds.Tables[0]
                 .Constraints
                 .Add(new UniqueConstraint("Constraint", ds.Tables[0].Columns[1]));
@@ -167,13 +168,14 @@ namespace tests.system_data_dll.System_Data
                 BeginCase("DuplicateNameException - Relations ");
                 try
                 {
-                    ds.Relations.Add(
-                        new DataRelation(
-                            "Relation",
-                            ds.Tables[0].Columns[1],
-                            ds.Tables[1].Columns[0]
-                        )
-                    );
+                    ds.Relations
+                        .Add(
+                            new DataRelation(
+                                "Relation",
+                                ds.Tables[0].Columns[1],
+                                ds.Tables[1].Columns[0]
+                            )
+                        );
                 }
                 catch (DuplicateNameException ex)
                 {

@@ -40,15 +40,16 @@ namespace System.Threading.Tasks.Tests
             Task[] tasks = new Task[processorCount];
             for (int i = 0; i < tasks.Length; i++)
             {
-                tasks[i] = Task.Factory.StartNew(
-                    delegate
-                    {
-                        mre.WaitOne();
-                    },
-                    CancellationToken.None,
-                    TaskCreationOptions.None,
-                    tm
-                );
+                tasks[i] = Task.Factory
+                    .StartNew(
+                        delegate
+                        {
+                            mre.WaitOne();
+                        },
+                        CancellationToken.None,
+                        TaskCreationOptions.None,
+                        tm
+                    );
             }
 
             // Create one task that signals the MRE, and wait for it.
@@ -181,12 +182,8 @@ namespace System.Threading.Tasks.Tests
             Debug.WriteLine("  -- testing Task.Factory.StartNew(buggy scheduler)");
             try
             {
-                Task t3 = Task.Factory.StartNew(
-                    delegate { },
-                    CancellationToken.None,
-                    TaskCreationOptions.None,
-                    bts
-                );
+                Task t3 = Task.Factory
+                    .StartNew(delegate { }, CancellationToken.None, TaskCreationOptions.None, bts);
                 Assert.Fail(string.Format("    > FAILED.  No exception thrown."));
             }
             catch (TaskSchedulerException) { }
@@ -308,15 +305,16 @@ namespace System.Threading.Tasks.Tests
             // Launch a Task on scTS, make sure that it is processed in the expected fashion
             //
             bool sideEffect = false;
-            Task task = Task.Factory.StartNew(
-                () =>
-                {
-                    sideEffect = true;
-                },
-                CancellationToken.None,
-                TaskCreationOptions.None,
-                scTS
-            );
+            Task task = Task.Factory
+                .StartNew(
+                    () =>
+                    {
+                        sideEffect = true;
+                    },
+                    CancellationToken.None,
+                    TaskCreationOptions.None,
+                    scTS
+                );
 
             Exception ex = null;
 
@@ -429,12 +427,13 @@ namespace System.Threading.Tasks.Tests
 
             Task[] queuedTasks = (
                 from i in Enumerable.Range(0, 10)
-                select Task.Factory.StartNew(
-                    () => { },
-                    CancellationToken.None,
-                    TaskCreationOptions.None,
-                    nonExecutingScheduler
-                )
+                select Task.Factory
+                    .StartNew(
+                        () => { },
+                        CancellationToken.None,
+                        TaskCreationOptions.None,
+                        nonExecutingScheduler
+                    )
             ).ToArray();
 
             MethodInfo getScheduledTasksForDebuggerMethod = typeof(TaskScheduler)

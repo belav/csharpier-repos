@@ -39,9 +39,8 @@ namespace System.Net.NetworkInformation
                 throw new PlatformNotSupportedException(SR.net_ping_utility_custom_payload);
             }
 
-            UnixCommandLinePing.PingFragmentOptions fragmentOption = UnixCommandLinePing
-                .PingFragmentOptions
-                .Default;
+            UnixCommandLinePing.PingFragmentOptions fragmentOption =
+                UnixCommandLinePing.PingFragmentOptions.Default;
             if (options != null && address.AddressFamily == AddressFamily.InterNetwork)
             {
                 fragmentOption = options.DontFragment
@@ -112,8 +111,7 @@ namespace System.Net.NetworkInformation
                     .WaitForExitAsync(timeoutOrCancellationToken)
                     .ConfigureAwait(false);
 
-                string stdout = await pingProcess
-                    .StandardOutput
+                string stdout = await pingProcess.StandardOutput
                     .ReadToEndAsync(timeoutOrCancellationToken)
                     .ConfigureAwait(false);
 

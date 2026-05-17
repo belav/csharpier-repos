@@ -205,8 +205,7 @@ namespace System.ServiceModel.Security
                 byte[] workBuffer
             )
             {
-                TimestampCanonicalFormWriter
-                    .Instance
+                TimestampCanonicalFormWriter.Instance
                     .WriteCanonicalForm(
                         stream,
                         timestamp.Id,

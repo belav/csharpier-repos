@@ -753,8 +753,7 @@ namespace System.Xml.Serialization
                     return null;
                 ElementAccessor itemAccessor = ImportElement(itemElement, ns);
                 arrayMapping.Elements = new ElementAccessor[] { itemAccessor };
-                arrayMapping.TypeDesc = ((TypeMapping)itemAccessor.Mapping)
-                    .TypeDesc
+                arrayMapping.TypeDesc = ((TypeMapping)itemAccessor.Mapping).TypeDesc
                     .CreateArrayTypeDesc();
             }
             else

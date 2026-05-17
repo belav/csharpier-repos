@@ -187,12 +187,13 @@ namespace System.Activities.Core.Presentation
 
         private ModelItem FindTryCatch()
         {
-            return this.ModelItem.FindParent(
-                (ModelItem item) =>
-                {
-                    return item.ItemType == typeof(TryCatch);
-                }
-            );
+            return this.ModelItem
+                .FindParent(
+                    (ModelItem item) =>
+                    {
+                        return item.ItemType == typeof(TryCatch);
+                    }
+                );
         }
     }
 }

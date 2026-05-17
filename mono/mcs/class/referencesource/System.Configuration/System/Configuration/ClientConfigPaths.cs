@@ -639,8 +639,7 @@ namespace System.Configuration
 
                 if (versionInfoFileName != null)
                 {
-                    System.Diagnostics.FileVersionInfo version = System
-                        .Diagnostics
+                    System.Diagnostics.FileVersionInfo version = System.Diagnostics
                         .FileVersionInfo
                         .GetVersionInfo(versionInfoFileName);
                     if (version != null)

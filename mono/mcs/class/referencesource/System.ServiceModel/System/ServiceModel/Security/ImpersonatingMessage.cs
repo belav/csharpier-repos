@@ -75,8 +75,7 @@ namespace System.ServiceModel.Security
                 )
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(SR.UnableToImpersonateWhileSerializingReponse)
@@ -173,8 +172,7 @@ namespace System.ServiceModel.Security
                 )
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(SR.UnableToImpersonateWhileSerializingReponse)
@@ -247,8 +245,7 @@ namespace System.ServiceModel.Security
                 )
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(SR.UnableToImpersonateWhileSerializingReponse)

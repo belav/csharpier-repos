@@ -144,8 +144,7 @@ namespace System.IdentityModel.Selectors
             {
                 if (value < 0)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentOutOfRangeException(
                                 "value",
@@ -176,8 +175,7 @@ namespace System.IdentityModel.Selectors
             TValue result;
             if (!TryGetProperty<TValue>(propertyName, out result))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentException(
                             SR.GetString(
@@ -203,8 +201,7 @@ namespace System.IdentityModel.Selectors
                 && !typeof(TValue).IsAssignableFrom(dictionaryValue.GetType())
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentException(
                             SR.GetString(

@@ -32,8 +32,7 @@ namespace ILCompiler.Metadata
                     continue;
                 }
 
-                Ecma.ExportedType exportedType = module
-                    .MetadataReader
+                Ecma.ExportedType exportedType = module.MetadataReader
                     .GetExportedType(exportedTypeHandle);
                 if (
                     exportedType.IsForwarder

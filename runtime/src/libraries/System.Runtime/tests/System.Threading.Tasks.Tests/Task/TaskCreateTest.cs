@@ -999,16 +999,16 @@ namespace System.Threading.Tasks.Tests
                         switch (_taskType)
                         {
                             case TaskType.Task:
-                                _task = Task.Factory.StartNew(
-                                    Work,
-                                    cts.Token,
-                                    TaskCreationOptions.None,
-                                    TaskScheduler.Default
-                                );
+                                _task = Task.Factory
+                                    .StartNew(
+                                        Work,
+                                        cts.Token,
+                                        TaskCreationOptions.None,
+                                        TaskScheduler.Default
+                                    );
                                 break;
                             case TaskType.FutureT:
-                                _task = Task<double>
-                                    .Factory
+                                _task = Task<double>.Factory
                                     .StartNew(
                                         FutureWork,
                                         cts.Token,
@@ -1017,12 +1017,13 @@ namespace System.Threading.Tasks.Tests
                                     );
                                 break;
                             case TaskType.Future:
-                                _task = Task.Factory.StartNew<double>(
-                                    FutureWork,
-                                    cts.Token,
-                                    TaskCreationOptions.None,
-                                    TaskScheduler.Default
-                                );
+                                _task = Task.Factory
+                                    .StartNew<double>(
+                                        FutureWork,
+                                        cts.Token,
+                                        TaskCreationOptions.None,
+                                        TaskScheduler.Default
+                                    );
                                 break;
                             default:
                                 throw new NotSupportedException(
@@ -1038,15 +1039,12 @@ namespace System.Threading.Tasks.Tests
                                 _task = Task.Factory.StartNew(Work, TaskCreationOptions.None);
                                 break;
                             case TaskType.FutureT:
-                                _task = Task<double>
-                                    .Factory
+                                _task = Task<double>.Factory
                                     .StartNew(FutureWork, TaskCreationOptions.None);
                                 break;
                             case TaskType.Future:
-                                _task = Task.Factory.StartNew<double>(
-                                    FutureWork,
-                                    TaskCreationOptions.None
-                                );
+                                _task = Task.Factory
+                                    .StartNew<double>(FutureWork, TaskCreationOptions.None);
                                 break;
                             default:
                                 throw new NotSupportedException(
@@ -1102,17 +1100,17 @@ namespace System.Threading.Tasks.Tests
                         switch (_taskType)
                         {
                             case TaskType.Task:
-                                _task = Task.Factory.StartNew(
-                                    WorkWithState,
-                                    ZETA_SEED,
-                                    cts.Token,
-                                    TaskCreationOptions.None,
-                                    TaskScheduler.Default
-                                );
+                                _task = Task.Factory
+                                    .StartNew(
+                                        WorkWithState,
+                                        ZETA_SEED,
+                                        cts.Token,
+                                        TaskCreationOptions.None,
+                                        TaskScheduler.Default
+                                    );
                                 break;
                             case TaskType.FutureT:
-                                _task = Task<double>
-                                    .Factory
+                                _task = Task<double>.Factory
                                     .StartNew(
                                         FutureWorkWithState,
                                         ZETA_SEED,
@@ -1122,13 +1120,14 @@ namespace System.Threading.Tasks.Tests
                                     );
                                 break;
                             case TaskType.Future:
-                                _task = Task.Factory.StartNew<double>(
-                                    FutureWorkWithState,
-                                    ZETA_SEED,
-                                    cts.Token,
-                                    TaskCreationOptions.None,
-                                    TaskScheduler.Default
-                                );
+                                _task = Task.Factory
+                                    .StartNew<double>(
+                                        FutureWorkWithState,
+                                        ZETA_SEED,
+                                        cts.Token,
+                                        TaskCreationOptions.None,
+                                        TaskScheduler.Default
+                                    );
                                 break;
                             default:
                                 throw new NotSupportedException(
@@ -1141,15 +1140,11 @@ namespace System.Threading.Tasks.Tests
                         switch (_taskType)
                         {
                             case TaskType.Task:
-                                _task = Task.Factory.StartNew(
-                                    WorkWithState,
-                                    ZETA_SEED,
-                                    TaskCreationOptions.None
-                                );
+                                _task = Task.Factory
+                                    .StartNew(WorkWithState, ZETA_SEED, TaskCreationOptions.None);
                                 break;
                             case TaskType.FutureT:
-                                _task = Task<double>
-                                    .Factory
+                                _task = Task<double>.Factory
                                     .StartNew(
                                         FutureWorkWithState,
                                         ZETA_SEED,
@@ -1157,11 +1152,12 @@ namespace System.Threading.Tasks.Tests
                                     );
                                 break;
                             case TaskType.Future:
-                                _task = Task.Factory.StartNew<double>(
-                                    FutureWorkWithState,
-                                    ZETA_SEED,
-                                    TaskCreationOptions.None
-                                );
+                                _task = Task.Factory
+                                    .StartNew<double>(
+                                        FutureWorkWithState,
+                                        ZETA_SEED,
+                                        TaskCreationOptions.None
+                                    );
                                 break;
                             default:
                                 throw new NotSupportedException(
@@ -1177,16 +1173,12 @@ namespace System.Threading.Tasks.Tests
                                 _task = Task.Factory.StartNew(Work, cts.Token);
                                 break;
                             case TaskType.FutureT:
-                                _task = Task<double>
-                                    .Factory
+                                _task = Task<double>.Factory
                                     .StartNew(FutureWorkWithState, ZETA_SEED, cts.Token);
                                 break;
                             case TaskType.Future:
-                                _task = Task.Factory.StartNew<double>(
-                                    FutureWorkWithState,
-                                    ZETA_SEED,
-                                    cts.Token
-                                );
+                                _task = Task.Factory
+                                    .StartNew<double>(FutureWorkWithState, ZETA_SEED, cts.Token);
                                 break;
                             default:
                                 throw new NotSupportedException(
@@ -1202,15 +1194,12 @@ namespace System.Threading.Tasks.Tests
                                 _task = Task.Factory.StartNew(WorkWithState, ZETA_SEED);
                                 break;
                             case TaskType.FutureT:
-                                _task = Task<double>
-                                    .Factory
+                                _task = Task<double>.Factory
                                     .StartNew(FutureWorkWithState, ZETA_SEED);
                                 break;
                             case TaskType.Future:
-                                _task = Task.Factory.StartNew<double>(
-                                    FutureWorkWithState,
-                                    ZETA_SEED
-                                );
+                                _task = Task.Factory
+                                    .StartNew<double>(FutureWorkWithState, ZETA_SEED);
                                 break;
                             default:
                                 throw new NotSupportedException(
@@ -1344,19 +1333,17 @@ namespace System.Threading.Tasks.Tests
                             try
                             {
                                 if (_taskType == TaskType.Task)
-                                    _task = Task.Factory.StartNew(
-                                        Work,
-                                        (TaskCreationOptions)invalidOption
-                                    );
+                                    _task = Task.Factory
+                                        .StartNew(Work, (TaskCreationOptions)invalidOption);
                                 else if (_taskType == TaskType.FutureT)
-                                    _task = Task<double>
-                                        .Factory
+                                    _task = Task<double>.Factory
                                         .StartNew(FutureWork, (TaskCreationOptions)invalidOption);
                                 else if (_taskType == TaskType.Future)
-                                    _task = Task.Factory.StartNew<double>(
-                                        FutureWork,
-                                        (TaskCreationOptions)invalidOption
-                                    );
+                                    _task = Task.Factory
+                                        .StartNew<double>(
+                                            FutureWork,
+                                            (TaskCreationOptions)invalidOption
+                                        );
 
                                 Assert.Fail(
                                     string.Format(
@@ -1523,23 +1510,14 @@ namespace System.Threading.Tasks.Tests
                         CancellationToken token = new CancellationToken();
 
                         if (_taskType == TaskType.Task)
-                            _task = Task.Factory.StartNew(
-                                Work,
-                                token,
-                                TaskCreationOptions.None,
-                                tm
-                            );
+                            _task = Task.Factory
+                                .StartNew(Work, token, TaskCreationOptions.None, tm);
                         else if (_taskType == TaskType.FutureT)
-                            _task = Task<double>
-                                .Factory
+                            _task = Task<double>.Factory
                                 .StartNew(FutureWork, token, TaskCreationOptions.None, tm);
                         else if (_taskType == TaskType.Future)
-                            _task = Task.Factory.StartNew<double>(
-                                FutureWork,
-                                token,
-                                TaskCreationOptions.None,
-                                tm
-                            );
+                            _task = Task.Factory
+                                .StartNew<double>(FutureWork, token, TaskCreationOptions.None, tm);
 
                         Assert.Fail(
                             string.Format(

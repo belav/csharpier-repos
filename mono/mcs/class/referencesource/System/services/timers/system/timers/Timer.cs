@@ -354,10 +354,8 @@ namespace System.Timers
                 if (intervalElapsed != null)
                 {
                     if (this.SynchronizingObject != null && this.SynchronizingObject.InvokeRequired)
-                        this.SynchronizingObject.BeginInvoke(
-                            intervalElapsed,
-                            new object[] { this, elapsedEventArgs }
-                        );
+                        this.SynchronizingObject
+                            .BeginInvoke(intervalElapsed, new object[] { this, elapsedEventArgs });
                     else
                         intervalElapsed(this, elapsedEventArgs);
                 }

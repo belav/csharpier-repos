@@ -204,8 +204,7 @@ namespace MonoTests.System.Data.OracleClient
         [Test]
         public void SetConnectionString()
         {
-            con.ConnectionString = MonoTests
-                .System
+            con.ConnectionString = MonoTests.System
                 .Data
                 .Utils
                 .ConnectedDataProvider

@@ -17,8 +17,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             CSharpSyntaxContext context,
             CancellationToken cancellationToken
         ) =>
-            context
-                .SyntaxTree
+            context.SyntaxTree
                 .IsParamsModifierContext(position, context.LeftToken, cancellationToken);
     }
 }

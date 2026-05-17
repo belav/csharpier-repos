@@ -15,12 +15,10 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
         {
             void firstLayout(object sender, TextViewLayoutChangedEventArgs args)
             {
-                threadingContext
-                    .JoinableTaskFactory
+                threadingContext.JoinableTaskFactory
                     .RunAsync(async () =>
                     {
-                        await threadingContext
-                            .JoinableTaskFactory
+                        await threadingContext.JoinableTaskFactory
                             .SwitchToMainThreadAsync(alwaysYield: true);
 
                         var newHeight = view.LineHeight * view.TextBuffer.CurrentSnapshot.LineCount;

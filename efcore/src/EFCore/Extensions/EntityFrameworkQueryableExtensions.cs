@@ -2734,8 +2734,7 @@ public static class EntityFrameworkQueryableExtensions
 
         return new IncludableQueryable<TEntity, TProperty>(
             source.Provider is EntityQueryProvider
-                ? source
-                    .Provider
+                ? source.Provider
                     .CreateQuery<TEntity>(
                         Expression.Call(
                             instance: null,
@@ -2762,8 +2761,7 @@ public static class EntityFrameworkQueryableExtensions
         where TEntity : class =>
         new IncludableQueryable<TEntity, TProperty>(
             source.Provider is EntityQueryProvider
-                ? source
-                    .Provider
+                ? source.Provider
                     .CreateQuery<TEntity>(
                         Expression.Call(
                             instance: null,
@@ -2828,8 +2826,7 @@ public static class EntityFrameworkQueryableExtensions
         where TEntity : class =>
         new IncludableQueryable<TEntity, TProperty>(
             source.Provider is EntityQueryProvider
-                ? source
-                    .Provider
+                ? source.Provider
                     .CreateQuery<TEntity>(
                         Expression.Call(
                             instance: null,
@@ -2874,8 +2871,7 @@ public static class EntityFrameworkQueryableExtensions
         where TEntity : class =>
         new IncludableQueryable<TEntity, TProperty>(
             source.Provider is EntityQueryProvider
-                ? source
-                    .Provider
+                ? source.Provider
                     .CreateQuery<TEntity>(
                         Expression.Call(
                             instance: null,
@@ -2957,8 +2953,7 @@ public static class EntityFrameworkQueryableExtensions
         Check.NotEmpty(navigationPropertyPath, nameof(navigationPropertyPath));
 
         return source.Provider is EntityQueryProvider
-            ? source
-                .Provider
+            ? source.Provider
                 .CreateQuery<TEntity>(
                     Expression.Call(
                         instance: null,
@@ -2991,8 +2986,7 @@ public static class EntityFrameworkQueryableExtensions
     public static IQueryable<TEntity> IgnoreAutoIncludes<TEntity>(this IQueryable<TEntity> source)
         where TEntity : class =>
         source.Provider is EntityQueryProvider
-            ? source
-                .Provider
+            ? source.Provider
                 .CreateQuery<TEntity>(
                     Expression.Call(
                         instance: null,
@@ -3024,8 +3018,7 @@ public static class EntityFrameworkQueryableExtensions
     public static IQueryable<TEntity> IgnoreQueryFilters<TEntity>(this IQueryable<TEntity> source)
         where TEntity : class =>
         source.Provider is EntityQueryProvider
-            ? source
-                .Provider
+            ? source.Provider
                 .CreateQuery<TEntity>(
                     Expression.Call(
                         instance: null,
@@ -3074,8 +3067,7 @@ public static class EntityFrameworkQueryableExtensions
     public static IQueryable<TEntity> AsNoTracking<TEntity>(this IQueryable<TEntity> source)
         where TEntity : class =>
         source.Provider is EntityQueryProvider
-            ? source
-                .Provider
+            ? source.Provider
                 .CreateQuery<TEntity>(
                     Expression.Call(
                         instance: null,
@@ -3122,8 +3114,7 @@ public static class EntityFrameworkQueryableExtensions
     )
         where TEntity : class =>
         source.Provider is EntityQueryProvider
-            ? source
-                .Provider
+            ? source.Provider
                 .CreateQuery<TEntity>(
                     Expression.Call(
                         instance: null,
@@ -3161,8 +3152,7 @@ public static class EntityFrameworkQueryableExtensions
     public static IQueryable<TEntity> AsTracking<TEntity>(this IQueryable<TEntity> source)
         where TEntity : class =>
         source.Provider is EntityQueryProvider
-            ? source
-                .Provider
+            ? source.Provider
                 .CreateQuery<TEntity>(
                     Expression.Call(
                         instance: null,
@@ -3258,8 +3248,7 @@ public static class EntityFrameworkQueryableExtensions
         Check.NotEmpty(tag, nameof(tag));
 
         return source.Provider is EntityQueryProvider
-            ? source
-                .Provider
+            ? source.Provider
                 .CreateQuery<T>(
                     Expression.Call(
                         instance: null,
@@ -3292,8 +3281,7 @@ public static class EntityFrameworkQueryableExtensions
         [NotParameterized] [CallerLineNumber] int lineNumber = 0
     ) =>
         source.Provider is EntityQueryProvider
-            ? source
-                .Provider
+            ? source.Provider
                 .CreateQuery<T>(
                     Expression.Call(
                         instance: null,

@@ -595,8 +595,7 @@ namespace System.Net.Http.Formatting
         [Fact]
         public void TypeIsCorrect()
         {
-            Assert
-                .Type
+            Assert.Type
                 .HasProperties(
                     typeof(DefaultContentNegotiator),
                     TypeAssert.TypeProperties.IsPublicVisibleClass
@@ -663,8 +662,7 @@ namespace System.Net.Http.Formatting
             frmtr.SupportedMediaTypes.Clear();
             frmtr.MediaTypeMappings.Clear();
             frmtr.SupportedMediaTypes.Add(new MediaTypeHeaderValue("application/xml"));
-            frmtr
-                .MediaTypeMappings
+            frmtr.MediaTypeMappings
                 .Add(new MyMediaTypeMapping(new MediaTypeHeaderValue(("application/xml"))));
             formatters.Add(frmtr);
 
@@ -702,8 +700,7 @@ namespace System.Net.Http.Formatting
 
             var result = _negotiator.Negotiate(typeof(string), _request, collection);
             Assert.Same(formatter2, result.Formatter);
-            Assert
-                .MediaType
+            Assert.MediaType
                 .AreEqual(
                     mediaType,
                     result.MediaType,
@@ -839,8 +836,7 @@ namespace System.Net.Http.Formatting
             // Arrange
             _request.Content = new StringContent("test");
             _request.Headers.Add("x-requested-with", "XMLHttpRequest");
-            _request
-                .Headers
+            _request.Headers
                 .Accept
                 .ParseAdd("text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"); // XHR header sent by Firefox 3b5
 
@@ -1231,8 +1227,7 @@ namespace System.Net.Http.Formatting
             HttpRequestMessage request = new HttpRequestMessage();
             foreach (string acceptCharsetHeader in acceptCharsetHeaders)
             {
-                request
-                    .Headers
+                request.Headers
                     .AcceptCharset
                     .Add(StringWithQualityHeaderValue.Parse(acceptCharsetHeader));
             }

@@ -505,8 +505,7 @@ namespace System.Collections.Concurrent
                         {
                             if (matchValue)
                             {
-                                bool valuesMatch = EqualityComparer<TValue>
-                                    .Default
+                                bool valuesMatch = EqualityComparer<TValue>.Default
                                     .Equals(oldValue, curr.m_value);
                                 if (!valuesMatch)
                                 {
@@ -2094,8 +2093,7 @@ namespace System.Collections.Concurrent
 #if !FEATURE_PAL && !FEATURE_CORECLR    // PAL and CoreClr don't support  eventing
             if (CDSCollectionETWBCLProvider.Log.IsEnabled())
             {
-                CDSCollectionETWBCLProvider
-                    .Log
+                CDSCollectionETWBCLProvider.Log
                     .ConcurrentDictionary_AcquiringAllLocks(m_tables.m_buckets.Length);
             }
 #endif //!FEATURE_PAL && !FEATURE_CORECLR

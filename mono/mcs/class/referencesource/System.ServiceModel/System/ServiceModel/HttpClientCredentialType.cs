@@ -61,8 +61,7 @@ namespace System.ServiceModel
                     break;
                 default:
                     Fx.Assert("unsupported client credential type");
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new NotSupportedException());
             }
             return result;
@@ -92,8 +91,7 @@ namespace System.ServiceModel
                     break;
                 default:
                     Fx.Assert("unsupported client AuthenticationScheme");
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new NotSupportedException());
             }
             return result;

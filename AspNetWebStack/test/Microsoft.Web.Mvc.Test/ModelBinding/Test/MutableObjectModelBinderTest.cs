@@ -37,8 +37,7 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                         return true; // just return the DTO unchanged
                     }
                 );
-            bindingContext
-                .ModelBinderProviders
+            bindingContext.ModelBinderProviders
                 .RegisterBinderForType(
                     typeof(ComplexModelDto),
                     mockDtoBinder.Object,
@@ -310,8 +309,7 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             {
                 Controller = new EmptyController(),
             };
-            controllerContext
-                .Controller
+            controllerContext.Controller
                 .ViewData
                 .ModelState
                 .AddModelError("foo.bar", "Some existing error.");
@@ -474,23 +472,20 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                 containerMetadata.Properties
             );
 
-            ModelMetadata firstNameProperty = dto.PropertyMetadata.Single(o =>
-                o.PropertyName == "FirstName"
-            );
+            ModelMetadata firstNameProperty = dto.PropertyMetadata
+                .Single(o => o.PropertyName == "FirstName");
             dto.Results[firstNameProperty] = new ComplexModelDtoResult(
                 "John",
                 new ModelValidationNode(firstNameProperty, "")
             );
-            ModelMetadata lastNameProperty = dto.PropertyMetadata.Single(o =>
-                o.PropertyName == "LastName"
-            );
+            ModelMetadata lastNameProperty = dto.PropertyMetadata
+                .Single(o => o.PropertyName == "LastName");
             dto.Results[lastNameProperty] = new ComplexModelDtoResult(
                 "Doe",
                 new ModelValidationNode(lastNameProperty, "")
             );
-            ModelMetadata dobProperty = dto.PropertyMetadata.Single(o =>
-                o.PropertyName == "DateOfBirth"
-            );
+            ModelMetadata dobProperty = dto.PropertyMetadata
+                .Single(o => o.PropertyName == "DateOfBirth");
             dto.Results[dobProperty] = null;
 
             TestableMutableObjectModelBinder testableBinder =
@@ -519,8 +514,7 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                 ModelMetadata = GetMetadataForObject(new Person()),
             };
 
-            ModelMetadata propertyMetadata = bindingContext
-                .ModelMetadata
+            ModelMetadata propertyMetadata = bindingContext.ModelMetadata
                 .Properties
                 .Single(o => o.PropertyName == "PropertyWithDefaultValue");
             ModelValidationNode validationNode = new ModelValidationNode(propertyMetadata, "foo");
@@ -556,8 +550,7 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                 ModelMetadata = GetMetadataForType(typeof(Person)),
             };
 
-            ModelMetadata propertyMetadata = bindingContext
-                .ModelMetadata
+            ModelMetadata propertyMetadata = bindingContext.ModelMetadata
                 .Properties
                 .Single(o => o.PropertyName == "NonUpdateableProperty");
             ModelValidationNode validationNode = new ModelValidationNode(propertyMetadata, "foo");
@@ -591,8 +584,7 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                 ModelMetadata = GetMetadataForObject(model),
             };
 
-            ModelMetadata propertyMetadata = bindingContext
-                .ModelMetadata
+            ModelMetadata propertyMetadata = bindingContext.ModelMetadata
                 .Properties
                 .Single(o => o.PropertyName == "DateOfBirth");
             ModelValidationNode validationNode = new ModelValidationNode(propertyMetadata, "foo");
@@ -629,8 +621,7 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                 ModelMetadata = GetMetadataForObject(model),
             };
 
-            ModelMetadata propertyMetadata = bindingContext
-                .ModelMetadata
+            ModelMetadata propertyMetadata = bindingContext.ModelMetadata
                 .Properties
                 .Single(o => o.PropertyName == "DateOfDeath");
             ModelValidationNode validationNode = new ModelValidationNode(propertyMetadata, "foo");
@@ -667,8 +658,7 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                 ModelMetadata = GetMetadataForObject(new Person()),
             };
 
-            ModelMetadata propertyMetadata = bindingContext
-                .ModelMetadata
+            ModelMetadata propertyMetadata = bindingContext.ModelMetadata
                 .Properties
                 .Single(o => o.PropertyName == "DateOfBirth");
             ModelValidationNode validationNode = new ModelValidationNode(propertyMetadata, "foo");
@@ -709,8 +699,7 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                 ModelName = "foo",
             };
 
-            ModelMetadata propertyMetadata = bindingContext
-                .ModelMetadata
+            ModelMetadata propertyMetadata = bindingContext.ModelMetadata
                 .Properties
                 .Single(o => o.PropertyName == "ValueTypeRequired");
             ModelValidationNode validationNode = new ModelValidationNode(
@@ -757,8 +746,7 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                 ModelName = "foo",
             };
 
-            ModelMetadata propertyMetadata = bindingContext
-                .ModelMetadata
+            ModelMetadata propertyMetadata = bindingContext.ModelMetadata
                 .Properties
                 .Single(o => o.PropertyName == "NameNoAttribute");
             ModelValidationNode validationNode = new ModelValidationNode(
@@ -807,8 +795,7 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                 ModelName = "foo",
             };
 
-            ModelMetadata propertyMetadata = bindingContext
-                .ModelMetadata
+            ModelMetadata propertyMetadata = bindingContext.ModelMetadata
                 .Properties
                 .Single(o => o.PropertyName == "Name");
             ModelValidationNode validationNode = new ModelValidationNode(

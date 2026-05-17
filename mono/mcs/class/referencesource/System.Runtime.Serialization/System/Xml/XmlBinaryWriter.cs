@@ -71,8 +71,7 @@ namespace System.Xml
         void WroteAttributeValue()
         {
             if (wroteAttributeValue && !inList)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -1071,8 +1070,7 @@ namespace System.Xml
             {
                 if (captureStream != null)
                 {
-                    captureText = XmlConverter
-                        .Base64Encoding
+                    captureText = XmlConverter.Base64Encoding
                         .GetString(captureStream.GetBuffer(), 0, (int)captureStream.Length);
                     captureStream = null;
                 }
@@ -1228,8 +1226,7 @@ namespace System.Xml
         {
             if (
                 logWriteStringNonDictionaryWrites
-                && !typeof(XmlBinaryWriter)
-                    .Assembly
+                && !typeof(XmlBinaryWriter).Assembly
                     .Equals(System.Reflection.Assembly.GetCallingAssembly())
             )
                 OnNonDictionaryWrite("WriteString", false, value, null);
@@ -1245,8 +1242,7 @@ namespace System.Xml
         )
         {
             if (stream == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -1411,15 +1407,13 @@ namespace System.Xml
         void CheckArray(Array array, int offset, int count)
         {
             if (array == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("array"));
             if (offset < 0)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -1430,8 +1424,7 @@ namespace System.Xml
                         )
                     );
             if (offset > array.Length)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -1442,8 +1435,7 @@ namespace System.Xml
                         )
                     );
             if (count < 0)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -1454,8 +1446,7 @@ namespace System.Xml
                         )
                     );
             if (count > array.Length - offset)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility

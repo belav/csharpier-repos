@@ -91,8 +91,7 @@ internal sealed class DefaultComplexObjectValidationStrategy : IValidationStrate
                 else
                 {
                     if (
-                        !_modelMetadata
-                            .BoundConstructorParameterMapping
+                        !_modelMetadata.BoundConstructorParameterMapping
                             .TryGetValue(parameter, out var property)
                     )
                     {

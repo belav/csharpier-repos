@@ -13,8 +13,7 @@ namespace System.Net.Test.Common
                 // Linux bionic uses managed NTLM implementation
                 (
                     OperatingSystem.IsLinux()
-                    && RuntimeInformation
-                        .RuntimeIdentifier
+                    && RuntimeInformation.RuntimeIdentifier
                         .StartsWith("linux-bionic-", StringComparison.Ordinal)
                 )
                 ||

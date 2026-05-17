@@ -179,8 +179,7 @@ namespace System.Configuration
                 TypeUtil.InvokeCtorWithReflectionPermission(ctor);
 
             // Attach the ConfigurationSection to this record
-            configSection
-                .SectionInformation
+            configSection.SectionInformation
                 .AttachToConfigurationRecord(this, factoryRecord, sectionRecord);
             configSection.CallInit();
 
@@ -710,8 +709,7 @@ namespace System.Configuration
                 try
                 {
                     bool wasPresent = configSection.ElementPresent;
-                    PropertySourceInfo saveInfo = configSection
-                        .ElementInformation
+                    PropertySourceInfo saveInfo = configSection.ElementInformation
                         .PropertyInfoInternal();
 
                     configSection.Reset(parentConfigSection);
@@ -1099,8 +1097,7 @@ namespace System.Configuration
             }
 
             // Attach the section to the configuration record.
-            configSection
-                .SectionInformation
+            configSection.SectionInformation
                 .AttachToConfigurationRecord(this, factoryRecord, sectionRecord);
 
             //
@@ -2390,8 +2387,7 @@ namespace System.Configuration
                             continue;
 
                         overrideMode = configSection.SectionInformation.OverrideModeSetting;
-                        inheritInChildApplications = configSection
-                            .SectionInformation
+                        inheritInChildApplications = configSection.SectionInformation
                             .InheritInChildApplications;
 
                         // it is an error to require a location section when the type doesn't allow locations.
@@ -2500,8 +2496,7 @@ namespace System.Configuration
                                         !String.IsNullOrEmpty(
                                             configSection.SectionInformation.ConfigSource
                                         )
-                                        || !configSection
-                                            .SectionInformation
+                                        || !configSection.SectionInformation
                                             .LocationAttributesAreDefault
                                         || (
                                             configSection.SectionInformation.ProtectionProvider
@@ -2566,8 +2561,7 @@ namespace System.Configuration
                                                 ProtectedConfigurationSection.FormatEncryptedSection(
                                                     encryptedSection,
                                                     configSection.SectionInformation.Name,
-                                                    configSection
-                                                        .SectionInformation
+                                                    configSection.SectionInformation
                                                         .ProtectionProvider
                                                         .Name
                                                 );
@@ -2578,8 +2572,7 @@ namespace System.Configuration
                                                 SR.GetString(
                                                     SR.Encryption_failed,
                                                     configSection.SectionInformation.SectionName,
-                                                    configSection
-                                                        .SectionInformation
+                                                    configSection.SectionInformation
                                                         .ProtectionProvider
                                                         .Name,
                                                     e.Message
@@ -2710,20 +2703,15 @@ namespace System.Configuration
                             factoryRecord.FactoryTypeName = configSection.SectionInformation.Type;
                         }
 
-                        factoryRecord.AllowLocation = configSection
-                            .SectionInformation
+                        factoryRecord.AllowLocation = configSection.SectionInformation
                             .AllowLocation;
-                        factoryRecord.RestartOnExternalChanges = configSection
-                            .SectionInformation
+                        factoryRecord.RestartOnExternalChanges = configSection.SectionInformation
                             .RestartOnExternalChanges;
-                        factoryRecord.RequirePermission = configSection
-                            .SectionInformation
+                        factoryRecord.RequirePermission = configSection.SectionInformation
                             .RequirePermission;
-                        factoryRecord.AllowDefinition = configSection
-                            .SectionInformation
+                        factoryRecord.AllowDefinition = configSection.SectionInformation
                             .AllowDefinition;
-                        factoryRecord.AllowExeDefinition = configSection
-                            .SectionInformation
+                        factoryRecord.AllowExeDefinition = configSection.SectionInformation
                             .AllowExeDefinition;
                     }
                 }
@@ -2748,8 +2736,7 @@ namespace System.Configuration
                             configSource = null;
                         }
 
-                        configSourceStreamName = configSection
-                            .SectionInformation
+                        configSourceStreamName = configSection.SectionInformation
                             .ConfigSourceStreamName;
                         if (String.IsNullOrEmpty(configSourceStreamName))
                         {
@@ -2855,22 +2842,17 @@ namespace System.Configuration
                                 sectionXmlInfo.ConfigSourceStreamName = configSourceStreamName;
                                 sectionXmlInfo.ConfigSourceStreamVersion =
                                     configSourceStreamVersion;
-                                sectionXmlInfo.ConfigBuilderName = configSection
-                                    .SectionInformation
+                                sectionXmlInfo.ConfigBuilderName = configSection.SectionInformation
                                     .ConfigBuilderName;
-                                sectionXmlInfo.ProtectionProviderName = configSection
-                                    .SectionInformation
-                                    .ProtectionProviderName;
-                                sectionXmlInfo.OverrideModeSetting = configSection
-                                    .SectionInformation
-                                    .OverrideModeSetting;
-                                sectionXmlInfo.SkipInChildApps = !configSection
-                                    .SectionInformation
+                                sectionXmlInfo.ProtectionProviderName =
+                                    configSection.SectionInformation.ProtectionProviderName;
+                                sectionXmlInfo.OverrideModeSetting =
+                                    configSection.SectionInformation.OverrideModeSetting;
+                                sectionXmlInfo.SkipInChildApps = !configSection.SectionInformation
                                     .InheritInChildApplications;
                             }
 
-                            fileInput.ProtectionProvider = configSection
-                                .SectionInformation
+                            fileInput.ProtectionProvider = configSection.SectionInformation
                                 .ProtectionProvider;
                         }
 

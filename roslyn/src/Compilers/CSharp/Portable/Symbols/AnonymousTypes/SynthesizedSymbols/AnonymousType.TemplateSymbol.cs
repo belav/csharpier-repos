@@ -190,8 +190,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
                 AddSynthesizedAttribute(
                     ref attributes,
-                    Manager
-                        .Compilation
+                    Manager.Compilation
                         .TrySynthesizeAttribute(
                             WellKnownMember.System_Runtime_CompilerServices_CompilerGeneratedAttribute__ctor
                         )
@@ -251,8 +250,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     displayString = builder.ToStringAndFree();
                 }
 
-                return Manager
-                    .Compilation
+                return Manager.Compilation
                     .TrySynthesizeAttribute(
                         WellKnownMember.System_Diagnostics_DebuggerDisplayAttribute__ctor,
                         arguments: ImmutableArray.Create(

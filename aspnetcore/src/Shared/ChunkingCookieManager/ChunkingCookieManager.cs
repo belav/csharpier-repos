@@ -382,8 +382,7 @@ internal sealed class ChunkingCookieManager
 
         if (keyValuePairs.Count > 0)
         {
-            context
-                .Response
+            context.Response
                 .Cookies
                 .Append(
                     keyValuePairs.ToArray(),

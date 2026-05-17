@@ -124,8 +124,7 @@ namespace System.ServiceModel.Description
 
             if (!IsPolicyElement(policy))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(
                         "policy",
 #pragma warning suppress 56506 // Microsoft, policy cannot be null at this point since it has been validated above.
@@ -170,8 +169,7 @@ namespace System.ServiceModel.Description
         {
             if (serviceDescription == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("serviceDescription");
             }
 

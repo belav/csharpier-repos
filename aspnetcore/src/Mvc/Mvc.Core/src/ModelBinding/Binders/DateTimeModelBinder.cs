@@ -78,8 +78,7 @@ public class DateTimeModelBinder : IModelBinder
             {
                 modelState.TryAddModelError(
                     modelName,
-                    metadata
-                        .ModelBindingMessageProvider
+                    metadata.ModelBindingMessageProvider
                         .ValueMustNotBeNullAccessor(valueProviderResult.ToString())
                 );
             }

@@ -133,8 +133,7 @@ namespace System.IdentityModel
             {
                 Utility.CloseInvalidOutSafeHandle(keyHandle);
                 string reason = (err != 0) ? new Win32Exception(err).Message : String.Empty;
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new CryptographicException(SR.GetString(SR.AESCryptImportKeyFailed, reason))
                     );

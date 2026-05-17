@@ -42,8 +42,7 @@ namespace System.ServiceModel.Channels
         internal Exception NormalizePoisonException(long lookupId, Exception innerException)
         {
             if (this.ReceiveParameters.ExactlyOnce)
-                return DiagnosticUtility
-                    .ExceptionUtility
+                return DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new MsmqPoisonMessageException(lookupId, innerException));
             else if (null != innerException)
                 return DiagnosticUtility.ExceptionUtility.ThrowHelperError(innerException);
@@ -156,11 +155,12 @@ namespace System.ServiceModel.Channels
                 // for WebHosted case.
                 ITransportManagerRegistration registration;
                 if (
-                    this.TransportManagerTable.TryLookupUri(
-                        this.Uri,
-                        TransportDefaults.HostNameComparisonMode,
-                        out registration
-                    )
+                    this.TransportManagerTable
+                        .TryLookupUri(
+                            this.Uri,
+                            TransportDefaults.HostNameComparisonMode,
+                            out registration
+                        )
                 )
                 {
                     // no need to use TransportManagerContainer because we never use the transport manager from channels
@@ -186,8 +186,7 @@ namespace System.ServiceModel.Channels
                 == MsmqAuthenticationMode.Certificate
             )
             {
-                SecurityCredentialsManager credentials = context
-                    .BindingParameters
+                SecurityCredentialsManager credentials = context.BindingParameters
                     .Find<SecurityCredentialsManager>();
                 if (credentials == null)
                 {
@@ -223,8 +222,7 @@ namespace System.ServiceModel.Channels
                     try
                     {
                         certificate = new X509Certificate2(
-                            msmqMessage
-                                .SenderCertificate
+                            msmqMessage.SenderCertificate
                                 .GetBufferCopy(msmqMessage.SenderCertificateLength.Value)
                         );
                         X509SecurityToken token = new X509SecurityToken(certificate, false);
@@ -242,16 +240,14 @@ namespace System.ServiceModel.Channels
                     }
                     catch (SecurityTokenValidationException ex)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new ProtocolException(SR.GetString(SR.MsmqBadCertificate), ex)
                             );
                     }
                     catch (System.Security.Cryptography.CryptographicException ex)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new ProtocolException(SR.GetString(SR.MsmqBadCertificate), ex)
                             );
@@ -262,12 +258,10 @@ namespace System.ServiceModel.Channels
                     == this.ReceiveParameters.TransportSecurity.MsmqAuthenticationMode
                 )
                 {
-                    byte[] sid = msmqMessage
-                        .SenderId
+                    byte[] sid = msmqMessage.SenderId
                         .GetBufferCopy(msmqMessage.SenderIdLength.Value);
                     if (0 == sid.Length)
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(new ProtocolException(SR.GetString(SR.MsmqNoSid)));
 
                     SecurityIdentifier securityIdentifier = new SecurityIdentifier(sid, 0);

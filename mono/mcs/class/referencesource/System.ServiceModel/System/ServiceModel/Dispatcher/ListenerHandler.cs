@@ -58,8 +58,7 @@ namespace System.ServiceModel.Dispatcher
             if (!((this.channelDispatcher != null)))
             {
                 Fx.Assert("ListenerHandler.ctor: (this.channelDispatcher != null)");
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("channelDispatcher");
             }
 
@@ -145,8 +144,7 @@ namespace System.ServiceModel.Dispatcher
                 && this.channelDispatcher.MaxTransactedBatchSize > 0
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(SR.GetString(SR.IncompatibleBehaviors))
                     );
@@ -244,10 +242,8 @@ namespace System.ServiceModel.Dispatcher
                     break;
                 }
 
-                IAsyncResult result = this.acceptor.BeginWaitForChannel(
-                    ListenerHandler.waitCallback,
-                    this
-                );
+                IAsyncResult result = this.acceptor
+                    .BeginWaitForChannel(ListenerHandler.waitCallback, this);
 
                 if (!result.CompletedSynchronously)
                 {
@@ -313,11 +309,8 @@ namespace System.ServiceModel.Dispatcher
 
         bool AcceptAndAcquireThrottle()
         {
-            IAsyncResult result = this.acceptor.BeginTryAccept(
-                TimeSpan.MaxValue,
-                ListenerHandler.acceptCallback,
-                this
-            );
+            IAsyncResult result = this.acceptor
+                .BeginTryAccept(TimeSpan.MaxValue, ListenerHandler.acceptCallback, this);
             if (result.CompletedSynchronously)
             {
                 return HandleEndAccept(result);
@@ -344,10 +337,11 @@ namespace System.ServiceModel.Dispatcher
                         this.ChannelDispatcher.DefaultCommunicationTimeouts.ReceiveTimeout
                     );
                     if (
-                        !this.acceptor.TryAccept(
-                            TransactionBehavior.NormalizeTimeout(acceptTimeout),
-                            out binder
-                        )
+                        !this.acceptor
+                            .TryAccept(
+                                TransactionBehavior.NormalizeTimeout(acceptTimeout),
+                                out binder
+                            )
                     )
                     {
                         return false;
@@ -588,8 +582,7 @@ namespace System.ServiceModel.Dispatcher
             CloseChannelState state = (CloseChannelState)result.AsyncState;
             try
             {
-                ((ISessionChannel<IDuplexSession>)state.Channel)
-                    .Session
+                ((ISessionChannel<IDuplexSession>)state.Channel).Session
                     .EndCloseOutputSession(result);
             }
             catch (Exception e)

@@ -91,16 +91,14 @@ public static class JwtBearerExtensions
         Action<JwtBearerOptions> configureOptions
     )
     {
-        builder
-            .Services
+        builder.Services
             .TryAddEnumerable(
                 ServiceDescriptor.Singleton<
                     IConfigureOptions<JwtBearerOptions>,
                     JwtBearerConfigureOptions
                 >()
             );
-        builder
-            .Services
+        builder.Services
             .TryAddEnumerable(
                 ServiceDescriptor.Singleton<
                     IPostConfigureOptions<JwtBearerOptions>,

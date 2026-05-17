@@ -1128,8 +1128,7 @@ namespace MonoTests.System.IO
             DirectoryInfo info = new DirectoryInfo(TempFolder);
             info.LastWriteTimeUtc = new DateTime(2003, 6, 4, 6, 4, 0);
 
-            DateTime time = TimeZone
-                .CurrentTimeZone
+            DateTime time = TimeZone.CurrentTimeZone
                 .ToUniversalTime(Directory.GetLastWriteTime(TempFolder));
             Assert.AreEqual(2003, time.Year, "#A1");
             Assert.AreEqual(6, time.Month, "#A2");

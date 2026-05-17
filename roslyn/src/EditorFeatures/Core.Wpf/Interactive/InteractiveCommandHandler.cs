@@ -72,8 +72,7 @@ namespace Microsoft.CodeAnalysis.Interactive
         {
             var window = OpenInteractiveWindow(focus: false);
             using (
-                context
-                    .OperationContext
+                context.OperationContext
                     .AddScope(
                         allowCancellation: true,
                         EditorFeaturesWpfResources.Executing_selection_in_Interactive_Window
@@ -135,8 +134,7 @@ namespace Microsoft.CodeAnalysis.Interactive
 
             using (var edit = buffer.CreateEdit())
             using (
-                var waitScope = context
-                    .OperationContext
+                var waitScope = context.OperationContext
                     .AddScope(
                         allowCancellation: true,
                         EditorFeaturesWpfResources.Copying_selection_to_Interactive_Window
@@ -147,13 +145,11 @@ namespace Microsoft.CodeAnalysis.Interactive
 
                 // If the last line isn't empty in the existing submission buffer, we will prepend a
                 // newline
-                var lastLine = buffer
-                    .CurrentSnapshot
+                var lastLine = buffer.CurrentSnapshot
                     .GetLineFromLineNumber(buffer.CurrentSnapshot.LineCount - 1);
                 if (lastLine.Extent.Length > 0)
                 {
-                    var editorOptions = _editorOptionsService
-                        .Factory
+                    var editorOptions = _editorOptionsService.Factory
                         .GetOptions(args.SubjectBuffer);
                     text = editorOptions.GetNewLineCharacter() + text;
                 }

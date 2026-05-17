@@ -48,9 +48,10 @@ namespace System.Data.Tests
             // NoNullAllowedException - Add Row
             Assert.Throws<NoNullAllowedException>(() =>
             {
-                tbl.Rows.Add(
-                    new object[] { DBNull.Value, "value", "value", new DateTime(0), 0.5, true }
-                );
+                tbl.Rows
+                    .Add(
+                        new object[] { DBNull.Value, "value", "value", new DateTime(0), 0.5, true }
+                    );
             });
 
             // NoNullAllowedException - ItemArray
@@ -110,9 +111,19 @@ namespace System.Data.Tests
             // NoNullAllowedException - Add Row
             Assert.Throws<NoNullAllowedException>(() =>
             {
-                tbl.Rows.Add(
-                    new object[] { 1, "value", "value", new DateTime(0), 0.5, true, DBNull.Value }
-                );
+                tbl.Rows
+                    .Add(
+                        new object[]
+                        {
+                            1,
+                            "value",
+                            "value",
+                            new DateTime(0),
+                            0.5,
+                            true,
+                            DBNull.Value,
+                        }
+                    );
             });
 
             // NoNullAllowedException - ItemArray

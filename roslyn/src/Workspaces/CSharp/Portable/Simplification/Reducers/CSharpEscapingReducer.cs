@@ -98,8 +98,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
 
                 if (
                     enclosingMethodBlock != null
-                    && ((MethodDeclarationSyntax)enclosingMethodBlock)
-                        .Modifiers
+                    && ((MethodDeclarationSyntax)enclosingMethodBlock).Modifiers
                         .Any(SyntaxKind.AsyncKeyword)
                 )
                 {

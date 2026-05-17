@@ -89,8 +89,7 @@ public class ExpandMembersPath : IntegrationTest<ExpandMembersPath.DatabaseIniti
     {
         protected override void Seed(TestContext context)
         {
-            context
-                .Class1Set
+            context.Class1Set
                 .AddRange(
                     new[]
                     {

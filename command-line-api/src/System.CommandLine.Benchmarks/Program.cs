@@ -43,8 +43,7 @@ namespace System.CommandLine.Benchmarks
             if (
                 result.Any(summary =>
                     summary.HasCriticalValidationErrors
-                    || summary
-                        .Reports
+                    || summary.Reports
                         .Any(report =>
                             !report.BuildResult.IsBuildSuccess || !report.ExecuteResults.Any()
                         )

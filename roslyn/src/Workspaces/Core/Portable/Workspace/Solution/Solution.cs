@@ -2342,8 +2342,7 @@ namespace Microsoft.CodeAnalysis
             var isSubmission = projectState.IsSubmission;
             var hasSubmissionReference =
                 !ignoreExistingReferences
-                && projectState
-                    .ProjectReferences
+                && projectState.ProjectReferences
                     .Any(p => _state.GetRequiredProjectState(p.ProjectId).IsSubmission);
 
             foreach (var projectReference in projectReferences)

@@ -2478,8 +2478,7 @@ class Tests
     public static int test_0_cfold_with_non_constant_ternary_op()
     {
         variable_with_constant_address = 0;
-        var old = System
-            .Threading
+        var old = System.Threading
             .Interlocked
             .CompareExchange(ref variable_with_constant_address, 1, 0);
         return old == 0 && variable_with_constant_address == 1 ? 0 : 1;

@@ -25,8 +25,7 @@ namespace Microsoft.Extensions.Logging
             LogLevel minLevel
         )
         {
-            builder
-                .Services
+            builder.Services
                 .AddSingleton<ILoggerProvider>(new XunitLoggerProvider(output, minLevel));
             return builder;
         }
@@ -38,8 +37,7 @@ namespace Microsoft.Extensions.Logging
             DateTimeOffset? logStart
         )
         {
-            builder
-                .Services
+            builder.Services
                 .AddSingleton<ILoggerProvider>(new XunitLoggerProvider(output, minLevel, logStart));
             return builder;
         }

@@ -81,8 +81,7 @@ namespace System.ServiceModel.Channels
             {
                 if (gotAssertion)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidChannelBindingException(
                                 SR.GetString(
@@ -105,8 +104,7 @@ namespace System.ServiceModel.Channels
             PolicyConversionContext context
         )
         {
-            ReliableSessionBindingElement settings = context
-                .BindingElements
+            ReliableSessionBindingElement settings = context.BindingElements
                 .Find<ReliableSessionBindingElement>();
 
             if (settings == null)
@@ -326,8 +324,7 @@ namespace System.ServiceModel.Channels
                 ReliableSessionPolicyStrings.Milliseconds
             ];
             if (millisecondsAttribute == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidChannelBindingException(
                             SR.GetString(
@@ -356,8 +353,7 @@ namespace System.ServiceModel.Channels
             }
 
             if (innerException != null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidChannelBindingException(
                             SR.GetString(
@@ -378,8 +374,7 @@ namespace System.ServiceModel.Channels
                 }
                 catch (OverflowException exception)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidChannelBindingException(
                                 SR.GetString(
@@ -411,8 +406,7 @@ namespace System.ServiceModel.Channels
             }
             catch (ArgumentOutOfRangeException exception)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidChannelBindingException(
                             SR.GetString(SR.MillisecondsNotConvertibleToBindingRange, localName),
@@ -434,8 +428,7 @@ namespace System.ServiceModel.Channels
             }
             catch (ArgumentOutOfRangeException exception)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidChannelBindingException(
                             SR.GetString(SR.MillisecondsNotConvertibleToBindingRange, localName),
@@ -509,8 +502,7 @@ namespace System.ServiceModel.Channels
                             node.NamespaceURI
                         );
 
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new InvalidChannelBindingException(exceptionString));
             }
 
@@ -564,8 +556,7 @@ namespace System.ServiceModel.Channels
                         ReliableSessionPolicyStrings.ReliableSessionName
                     );
 
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new InvalidChannelBindingException(exceptionString));
                 }
 
@@ -579,8 +570,7 @@ namespace System.ServiceModel.Channels
                     ReliableSessionPolicyStrings.ReliableSession11Prefix,
                     ReliableSessionPolicyStrings.SequenceTransportSecurity
                 );
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new InvalidChannelBindingException(exceptionString));
             }
 
@@ -655,8 +645,7 @@ namespace System.ServiceModel.Channels
                                 )
                             )
                             {
-                                throw DiagnosticUtility
-                                    .ExceptionUtility
+                                throw DiagnosticUtility.ExceptionUtility
                                     .ThrowHelperError(
                                         new InvalidChannelBindingException(
                                             SR.GetString(
@@ -690,8 +679,7 @@ namespace System.ServiceModel.Channels
                             }
                         }
 
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidChannelBindingException(
                                     SR.GetString(
@@ -710,8 +698,7 @@ namespace System.ServiceModel.Channels
                             SR.DeliveryAssuranceRequiredNothingFound,
                             wsrmNs
                         );
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(new InvalidChannelBindingException(exceptionString));
                     }
                 }
@@ -720,8 +707,7 @@ namespace System.ServiceModel.Channels
 
                 if (policyNode != null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidChannelBindingException(
                                 SR.GetString(

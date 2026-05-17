@@ -519,8 +519,7 @@ namespace System.Net
                     // If the request is Sync, then we do our Read here for data
                     if (!m_Request.Async)
                     {
-                        object syncReaderResult = m_Request
-                            .ConnectionReaderAsyncResult
+                        object syncReaderResult = m_Request.ConnectionReaderAsyncResult
                             .InternalWaitForCompletion();
 
                         //we should only do a syncread if we didn't already read the response

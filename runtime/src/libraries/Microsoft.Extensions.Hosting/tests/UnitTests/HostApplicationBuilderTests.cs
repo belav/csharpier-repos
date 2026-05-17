@@ -227,8 +227,7 @@ namespace Microsoft.Extensions.Hosting.Tests
         {
             HostApplicationBuilder builder = createBuilder();
 
-            builder
-                .Configuration
+            builder.Configuration
                 .AddInMemoryCollection(
                     new KeyValuePair<string, string>[]
                     {
@@ -236,8 +235,7 @@ namespace Microsoft.Extensions.Hosting.Tests
                     }
                 );
 
-            builder
-                .Configuration
+            builder.Configuration
                 .AddInMemoryCollection(
                     new KeyValuePair<string, string>[]
                     {
@@ -253,8 +251,7 @@ namespace Microsoft.Extensions.Hosting.Tests
             Assert.Equal("value1", config["key1"]);
             Assert.Equal("value2", config["key2"]);
 
-            builder
-                .Configuration
+            builder.Configuration
                 .AddInMemoryCollection(
                     new KeyValuePair<string, string>[]
                     {
@@ -363,8 +360,8 @@ namespace Microsoft.Extensions.Hosting.Tests
 
                 using IHost host = builder.Build();
 
-                var hostEnvironmentFromServices =
-                    host.Services.GetRequiredService<IHostEnvironment>();
+                var hostEnvironmentFromServices = host.Services
+                    .GetRequiredService<IHostEnvironment>();
                 Assert.Equal("AppA", hostEnvironmentFromServices.ApplicationName);
                 Assert.Equal("EnvA", hostEnvironmentFromServices.EnvironmentName);
                 Assert.Equal(tempPath, hostEnvironmentFromServices.ContentRootPath);
@@ -425,8 +422,8 @@ namespace Microsoft.Extensions.Hosting.Tests
 
                 using IHost host = builder.Build();
 
-                var hostEnvironmentFromServices =
-                    host.Services.GetRequiredService<IHostEnvironment>();
+                var hostEnvironmentFromServices = host.Services
+                    .GetRequiredService<IHostEnvironment>();
                 Assert.Equal("AppB", hostEnvironmentFromServices.ApplicationName);
                 Assert.Equal("EnvB", hostEnvironmentFromServices.EnvironmentName);
                 Assert.Equal(tempPath, hostEnvironmentFromServices.ContentRootPath);
@@ -637,8 +634,7 @@ namespace Microsoft.Extensions.Hosting.Tests
         {
             var builder = new HostApplicationBuilder();
 
-            builder
-                .Services
+            builder.Services
                 .Configure<HostOptions>(options =>
                 {
                     options.BackgroundServiceExceptionBehavior = testBehavior;

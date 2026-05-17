@@ -25,8 +25,7 @@ namespace System.Text.Json
                 _curIdx = -1;
 
                 Debug.Assert(target.TokenType == JsonTokenType.StartObject);
-                _endIdxOrVersion = target
-                    ._parent
+                _endIdxOrVersion = target._parent
                     .GetEndIndex(_target._idx, includeEndElement: false);
             }
 

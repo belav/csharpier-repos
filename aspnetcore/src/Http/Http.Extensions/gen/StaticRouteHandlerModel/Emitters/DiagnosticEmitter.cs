@@ -65,8 +65,7 @@ internal static class DiagnosticEmitter
         if (
             typeSymbol.DeclaredAccessibility is Accessibility.Private or Accessibility.Protected
             || typeSymbol is INamedTypeSymbol
-                && ((INamedTypeSymbol)typeSymbol)
-                    .TypeArguments
+                && ((INamedTypeSymbol)typeSymbol).TypeArguments
                     .Any(typeArg =>
                         typeArg.DeclaredAccessibility
                             is Accessibility.Private

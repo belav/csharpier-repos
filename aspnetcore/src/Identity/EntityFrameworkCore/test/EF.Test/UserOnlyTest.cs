@@ -50,8 +50,7 @@ public class UserOnlyTest : IClassFixture<ScratchDatabaseFixture>
     public async Task EnsureStartupUsageWorks()
     {
         var userStore = _builder.ApplicationServices.GetRequiredService<IUserStore<IdentityUser>>();
-        var userManager = _builder
-            .ApplicationServices
+        var userManager = _builder.ApplicationServices
             .GetRequiredService<UserManager<IdentityUser>>();
 
         Assert.NotNull(userStore);

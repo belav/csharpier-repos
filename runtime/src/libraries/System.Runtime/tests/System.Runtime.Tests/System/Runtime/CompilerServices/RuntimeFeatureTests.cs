@@ -90,8 +90,7 @@ namespace System.Runtime.CompilerServices.Tests
         public static void DynamicCode_ContextSwitch(bool isDynamicCodeSupported)
         {
             RemoteInvokeOptions options = new RemoteInvokeOptions();
-            options
-                .RuntimeConfigurationOptions
+            options.RuntimeConfigurationOptions
                 .Add(
                     "System.Runtime.CompilerServices.RuntimeFeature.IsDynamicCodeSupported",
                     isDynamicCodeSupported.ToString()

@@ -45,8 +45,7 @@ namespace System.IO.Pipes
             {
                 _result = 0;
                 _memoryHandle = memory.Pin();
-                _overlapped = _pipeStream
-                    ._threadPoolBinding!
+                _overlapped = _pipeStream._threadPoolBinding!
                     .AllocateNativeOverlapped(_preallocatedOverlapped);
             }
 

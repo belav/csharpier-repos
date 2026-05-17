@@ -158,8 +158,7 @@ public class CorsApplicationModelProviderTest
         var corsProvider = new CorsApplicationModelProvider(OptionsWithoutEndpointRouting);
         var context = GetProviderContext(typeof(RegularController));
 
-        context
-            .Result
+        context.Result
             .Filters
             .Add(
                 new CorsAuthorizationFilter(

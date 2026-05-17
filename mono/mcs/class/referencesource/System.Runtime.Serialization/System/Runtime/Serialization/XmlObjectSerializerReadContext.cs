@@ -83,8 +83,7 @@ namespace System.Runtime.Serialization
         internal static void ThrowNullValueReturnedForGetOnlyCollectionException(Type type)
 #endif
         {
-            throw System
-                .Runtime
+            throw System.Runtime
                 .Serialization
                 .DiagnosticUtility
                 .ExceptionUtility
@@ -104,8 +103,7 @@ namespace System.Runtime.Serialization
         internal static void ThrowArrayExceededSizeException(int arraySize, Type type)
 #endif
         {
-            throw System
-                .Runtime
+            throw System.Runtime
                 .Serialization
                 .DiagnosticUtility
                 .ExceptionUtility
@@ -227,8 +225,7 @@ namespace System.Runtime.Serialization
             {
                 if (this.isGetOnlyCollection)
                 {
-                    throw System
-                        .Runtime
+                    throw System.Runtime
                         .Serialization
                         .DiagnosticUtility
                         .ExceptionUtility
@@ -288,8 +285,7 @@ namespace System.Runtime.Serialization
                 {
                     if (DataContractResolver == null)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 XmlObjectSerializer.CreateSerializationException(
                                     XmlObjectSerializer.TryAddLineInfo(
@@ -305,8 +301,7 @@ namespace System.Runtime.Serialization
                                 )
                             );
                     }
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             XmlObjectSerializer.CreateSerializationException(
                                 XmlObjectSerializer.TryAddLineInfo(
@@ -347,8 +342,7 @@ namespace System.Runtime.Serialization
                         );
                     }
                     else
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 XmlObjectSerializer.CreateSerializationException(
                                     SR.GetString(
@@ -475,8 +469,7 @@ namespace System.Runtime.Serialization
                     stringBuilder.Append(" | ");
                 stringBuilder.Append(memberNames[i].Value);
             }
-            throw System
-                .Runtime
+            throw System.Runtime
                 .Serialization
                 .DiagnosticUtility
                 .ExceptionUtility
@@ -504,8 +497,7 @@ namespace System.Runtime.Serialization
         {
             xmlReader.MoveToContent();
             if (xmlReader.NodeType != XmlNodeType.Element)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         CreateUnexpectedStateException(XmlNodeType.Element, xmlReader)
                     );
@@ -624,8 +616,7 @@ namespace System.Runtime.Serialization
                 // These XmlObjectSerializer implementations do not currently support fix-ups. Hence we
                 // throw in such cases to allow us add fix-up support in the future if we need to.
                 if (DeserializedObjects.IsObjectReferenced(id))
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             XmlObjectSerializer.CreateSerializationException(
                                 SR.GetString(
@@ -647,8 +638,7 @@ namespace System.Runtime.Serialization
         {
             object retObj = DeserializedObjects.GetObject(id);
             if (retObj == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         XmlObjectSerializer.CreateSerializationException(
                             SR.GetString(SR.DeserializedObjectWithIdNotFound, id)
@@ -669,8 +659,7 @@ namespace System.Runtime.Serialization
         {
             object retObj = DeserializedObjects.GetObject(id);
             if (retObj == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         XmlObjectSerializer.CreateSerializationException(
                             SR.GetString(SR.DeserializedObjectWithIdNotFound, id)
@@ -689,8 +678,7 @@ namespace System.Runtime.Serialization
             // forward references. However, we throw for this case since it allows us to add fix-up support
             // in the future if we need to.
             if (realObj == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         XmlObjectSerializer.CreateSerializationException(
                             SR.GetString(
@@ -723,8 +711,7 @@ namespace System.Runtime.Serialization
         public static void Read(XmlReaderDelegator xmlReader)
         {
             if (!xmlReader.Read())
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         XmlObjectSerializer.CreateSerializationException(
                             SR.GetString(SR.UnexpectedEndOfFile)
@@ -754,8 +741,7 @@ namespace System.Runtime.Serialization
             {
                 if (index == Int32.MaxValue)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             XmlObjectSerializer.CreateSerializationException(
                                 SR.GetString(
@@ -797,8 +783,7 @@ namespace System.Runtime.Serialization
             while (xmlReader.IsStartElement())
             {
                 if (xmlReader.IsStartElement(itemName, itemNamespace))
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             XmlObjectSerializer.CreateSerializationException(
                                 SR.GetString(
@@ -812,8 +797,7 @@ namespace System.Runtime.Serialization
                 SkipUnknownElement(xmlReader);
             }
             if (xmlReader.NodeType != XmlNodeType.EndElement)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         CreateUnexpectedStateException(XmlNodeType.EndElement, xmlReader)
                     );
@@ -866,8 +850,7 @@ namespace System.Runtime.Serialization
             if (xmlDataContract.UnderlyingType == Globals.TypeOfXmlElement)
             {
                 if (!xmlReader.IsStartElement())
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             CreateUnexpectedStateException(XmlNodeType.Element, xmlReader)
                         );
@@ -898,8 +881,7 @@ namespace System.Runtime.Serialization
             while ((nodeType = xmlReader.MoveToContent()) != XmlNodeType.EndElement)
             {
                 if (nodeType != XmlNodeType.Element)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             CreateUnexpectedStateException(XmlNodeType.Element, xmlReader)
                         );
@@ -1142,8 +1124,7 @@ namespace System.Runtime.Serialization
                     );
                 case XmlNodeType.Element:
                     if (
-                        xmlReader
-                            .NamespaceURI
+                        xmlReader.NamespaceURI
                             .StartsWith(
                                 Globals.DataContractXsdBaseNamespace,
                                 StringComparison.Ordinal
@@ -1176,8 +1157,7 @@ namespace System.Runtime.Serialization
                     return objNode;
                 }
                 default:
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             CreateUnexpectedStateException(XmlNodeType.Element, xmlReader)
                         );
@@ -1253,8 +1233,7 @@ namespace System.Runtime.Serialization
             while ((nodeType = xmlReader.MoveToContent()) != XmlNodeType.EndElement)
             {
                 if (nodeType != XmlNodeType.Element)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             CreateUnexpectedStateException(XmlNodeType.Element, xmlReader)
                         );
@@ -1281,8 +1260,7 @@ namespace System.Runtime.Serialization
             while ((nodeType = xmlReader.MoveToContent()) != XmlNodeType.EndElement)
             {
                 if (nodeType != XmlNodeType.Element)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             CreateUnexpectedStateException(XmlNodeType.Element, xmlReader)
                         );
@@ -1309,8 +1287,7 @@ namespace System.Runtime.Serialization
                 if (dataNode.Items == null)
                 {
                     if (dataNode.Size > 0)
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 XmlObjectSerializer.CreateSerializationException(
                                     SR.GetString(SR.ArraySizeAttributeIncorrect, arraySize, 0)
@@ -1318,8 +1295,7 @@ namespace System.Runtime.Serialization
                             );
                 }
                 else if (dataNode.Size != dataNode.Items.Count)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             XmlObjectSerializer.CreateSerializationException(
                                 SR.GetString(
@@ -1361,8 +1337,7 @@ namespace System.Runtime.Serialization
             while ((nodeType = xmlReader.MoveToContent()) != XmlNodeType.EndElement)
             {
                 if (nodeType != XmlNodeType.Element)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             CreateUnexpectedStateException(XmlNodeType.Element, xmlReader)
                         );
@@ -1424,8 +1399,7 @@ namespace System.Runtime.Serialization
             while ((nodeType = xmlReader.MoveToContent()) != XmlNodeType.EndElement)
             {
                 if (xmlReader.EOF)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             XmlObjectSerializer.CreateSerializationException(
                                 SR.GetString(SR.UnexpectedEndOfFile)
@@ -1495,8 +1469,7 @@ namespace System.Runtime.Serialization
                     }
                 }
                 else if (xmlReader.EOF)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             XmlObjectSerializer.CreateSerializationException(
                                 SR.GetString(SR.UnexpectedEndOfFile)
@@ -1515,8 +1488,7 @@ namespace System.Runtime.Serialization
                 if (namespaces == null)
                 {
                     if (attributesInXmlData.XsiTypeName != null)
-                        childNode
-                            .Attributes
+                        childNode.Attributes
                             .Append(
                                 AddNamespaceDeclaration(
                                     attributesInXmlData.XsiTypePrefix,
@@ -1524,8 +1496,7 @@ namespace System.Runtime.Serialization
                                 )
                             );
                     if (attributesInXmlData.FactoryTypeName != null)
-                        childNode
-                            .Attributes
+                        childNode.Attributes
                             .Append(
                                 AddNamespaceDeclaration(
                                     attributesInXmlData.FactoryTypePrefix,

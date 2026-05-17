@@ -56,8 +56,7 @@ namespace System.Reflection.Metadata
             ImmutableArray<MethodDefinitionHandle>.Builder? other = null;
 
             ushort methodCount;
-            int firstRowId = _reader
-                .MethodSemanticsTable
+            int firstRowId = _reader.MethodSemanticsTable
                 .FindSemanticMethodsForEvent(Handle, out methodCount);
             for (ushort i = 0; i < methodCount; i++)
             {

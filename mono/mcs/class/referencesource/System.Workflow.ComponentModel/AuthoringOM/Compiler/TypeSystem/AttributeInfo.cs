@@ -215,8 +215,7 @@ namespace System.Workflow.ComponentModel.Compiler
             }
             else if (requestedType == typeof(bool))
             {
-                return System
-                    .Convert
+                return System.Convert
                     .ToBoolean(this.ArgumentValues[argumentIndex], CultureInfo.InvariantCulture);
             }
             else if (requestedType == typeof(Type))
@@ -259,8 +258,7 @@ namespace System.Workflow.ComponentModel.Compiler
                             string parsedTypeName =
                                 baseTypeName
                                 + "`"
-                                + genericParamTypeNames
-                                    .Length
+                                + genericParamTypeNames.Length
                                     .ToString(CultureInfo.InvariantCulture)
                                 + "[";
                             foreach (string genericArg in genericParamTypeNames)

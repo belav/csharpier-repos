@@ -355,13 +355,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             switch (symbol.Kind)
             {
                 case SymbolKind.Method:
-                    return ((MethodSymbol)symbol)
-                        .TypeArgumentsWithAnnotations
+                    return ((MethodSymbol)symbol).TypeArgumentsWithAnnotations
                         .SelectAsArray(TypeMap.AsTypeSymbol);
                 case SymbolKind.NamedType:
                 case SymbolKind.ErrorType:
-                    return ((NamedTypeSymbol)symbol)
-                        .TypeArgumentsWithAnnotationsNoUseSiteDiagnostics
+                    return (
+                        (NamedTypeSymbol)symbol
+                    ).TypeArgumentsWithAnnotationsNoUseSiteDiagnostics
                         .SelectAsArray(TypeMap.AsTypeSymbol);
                 case SymbolKind.Field:
                 case SymbolKind.Property:
@@ -619,16 +619,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             switch (member.Kind)
             {
                 case SymbolKind.Method:
-                    return ((MethodSymbol)member)
-                        .ExplicitInterfaceImplementations
+                    return ((MethodSymbol)member).ExplicitInterfaceImplementations
                         .Cast<MethodSymbol, Symbol>();
                 case SymbolKind.Property:
-                    return ((PropertySymbol)member)
-                        .ExplicitInterfaceImplementations
+                    return ((PropertySymbol)member).ExplicitInterfaceImplementations
                         .Cast<PropertySymbol, Symbol>();
                 case SymbolKind.Event:
-                    return ((EventSymbol)member)
-                        .ExplicitInterfaceImplementations
+                    return ((EventSymbol)member).ExplicitInterfaceImplementations
                         .Cast<EventSymbol, Symbol>();
                 default:
                     return ImmutableArray<Symbol>.Empty;

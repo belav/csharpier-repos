@@ -1058,15 +1058,13 @@ namespace System.Net
                         // Create empty content so that we can send the entity-body header.
                         request.Content ??= new ByteArrayContent(Array.Empty<byte>());
 
-                        request
-                            .Content
+                        request.Content
                             .Headers
                             .TryAddWithoutValidation(headerName, _webHeaderCollection[headerName!]);
                     }
                     else
                     {
-                        request
-                            .Headers
+                        request.Headers
                             .TryAddWithoutValidation(headerName, _webHeaderCollection[headerName!]);
                     }
                 }
@@ -1146,8 +1144,7 @@ namespace System.Net
             if (policy != null && policy.Level != RequestCacheLevel.BypassCache)
             {
                 CacheControlHeaderValue? cacheControl = null;
-                HttpHeaderValueCollection<NameValueHeaderValue> pragmaHeaders = request
-                    .Headers
+                HttpHeaderValueCollection<NameValueHeaderValue> pragmaHeaders = request.Headers
                     .Pragma;
 
                 if (policy is HttpRequestCachePolicy httpRequestCachePolicy)

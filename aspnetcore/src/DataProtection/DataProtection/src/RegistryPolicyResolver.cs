@@ -28,8 +28,7 @@ internal sealed class RegistryPolicyResolver : IRegistryPolicyResolver
     public RegistryPolicyResolver(IActivator activator)
     {
         _getPolicyRegKey = () =>
-            Registry
-                .LocalMachine
+            Registry.LocalMachine
                 .OpenSubKey(
                     @"SOFTWARE\Microsoft\DotNetPackages\Microsoft.AspNetCore.DataProtection"
                 );

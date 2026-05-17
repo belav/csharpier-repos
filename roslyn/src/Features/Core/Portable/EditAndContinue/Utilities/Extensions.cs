@@ -216,8 +216,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             symbol is IPropertySymbol property && IsAutoProperty(property);
 
         public static bool IsAutoProperty(this IPropertySymbol property) =>
-            property
-                .ContainingType
+            property.ContainingType
                 .GetMembers()
                 .Any(
                     static (member, property) =>
@@ -226,9 +225,10 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 );
 
         public static bool HasSynthesizedDefaultConstructor(this INamedTypeSymbol type) =>
-            !type.InstanceConstructors.Any(static c =>
-                !(c.Parameters is [] || c.ContainingType.IsRecord && c.IsCopyConstructor())
-            );
+            !type.InstanceConstructors
+                .Any(static c =>
+                    !(c.Parameters is [] || c.ContainingType.IsRecord && c.IsCopyConstructor())
+                );
 
         public static bool IsCopyConstructor(this ISymbol symbol) =>
             symbol is IMethodSymbol { Parameters: [var parameter] }
@@ -240,13 +240,11 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         ) =>
             method.Parameters.Length > 0
             && method.Parameters.Length == constructor.Parameters.Length
-            && method
-                .Parameters
+            && method.Parameters
                 .All(
                     static (param, constructor) =>
                         param.RefKind == RefKind.Out
-                        && param
-                            .Type
+                        && param.Type
                             .Equals(
                                 constructor.Parameters[param.Ordinal].Type,
                                 SymbolEqualityComparer.Default
@@ -259,8 +257,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             this IParameterSymbol parameter
         ) =>
             (IFieldSymbol?)
-                parameter
-                    .ContainingType
+                parameter.ContainingType
                     .GetMembers()
                     .FirstOrDefault(
                         static (member, parameter) =>
@@ -291,8 +288,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         /// </summary>
         public static IMethodSymbol? GetMatchingDeconstructor(this IMethodSymbol constructor) =>
             (IMethodSymbol?)
-                constructor
-                    .ContainingType
+                constructor.ContainingType
                     .GetMembers(WellKnownMemberNames.DeconstructMethodName)
                     .FirstOrDefault(
                         static (symbol, constructor) =>

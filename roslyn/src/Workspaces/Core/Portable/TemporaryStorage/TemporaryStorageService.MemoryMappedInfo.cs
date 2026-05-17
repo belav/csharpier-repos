@@ -115,8 +115,7 @@ namespace Microsoft.CodeAnalysis.Host
                                     typeof(MemoryMappedInfo).FullName
                                 );
 
-                            return memoryMappedFile
-                                .Target
+                            return memoryMappedFile.Target
                                 .CreateViewAccessor(
                                     info.Offset,
                                     info.Size,
@@ -151,8 +150,7 @@ namespace Microsoft.CodeAnalysis.Host
                         if (memoryMappedFile is null)
                             throw new ObjectDisposedException(typeof(MemoryMappedInfo).FullName);
 
-                        return memoryMappedFile
-                            .Target
+                        return memoryMappedFile.Target
                             .CreateViewStream(info.Offset, info.Size, MemoryMappedFileAccess.Write);
                     },
                     this

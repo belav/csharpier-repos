@@ -322,8 +322,7 @@ namespace System.Data.Objects.Internal
                                 );
                         }
 
-                        tracking
-                            .ColumnDefinitions
+                        tracking.ColumnDefinitions
                             .Add(
                                 new KeyValuePair<string, DbExpression>(
                                     tracking.ColumnNames.Next(),
@@ -347,8 +346,7 @@ namespace System.Data.Objects.Internal
             }
 
             // Add the original entity-producing expression as the first (root) span column.
-            tracking
-                .ColumnDefinitions
+            tracking.ColumnDefinitions
                 .Insert(
                     0,
                     new KeyValuePair<string, DbExpression>(
@@ -684,8 +682,7 @@ namespace System.Data.Objects.Internal
             {
                 // Consider all Association types...
                 foreach (
-                    AssociationType association in _tree
-                        .MetadataWorkspace
+                    AssociationType association in _tree.MetadataWorkspace
                         .GetItems<AssociationType>(DataSpace.CSpace)
                 )
                 {
@@ -987,8 +984,7 @@ namespace System.Data.Objects.Internal
                 {
                     DbVariableReferenceExpression varRef = (DbVariableReferenceExpression)testExpr;
                     if (
-                        varRef
-                            .VariableName
+                        varRef.VariableName
                             .Equals(expression.Input.VariableName, StringComparison.Ordinal)
                     )
                     {

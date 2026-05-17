@@ -46,8 +46,7 @@ namespace System.Net
                                     i
                                 );
                                 if (NetEventSource.Log.IsEnabled())
-                                    NetEventSource
-                                        .Log
+                                    NetEventSource.Log
                                         .EnumerateSecurityPackages(securityPackages[i].Name);
                             }
 
@@ -239,8 +238,7 @@ namespace System.Net
         )
         {
             if (NetEventSource.Log.IsEnabled())
-                NetEventSource
-                    .Log
+                NetEventSource.Log
                     .InitializeSecurityContext(credential, context, targetName, inFlags);
 
             int errorCode = secModule.InitializeSecurityContext(
@@ -255,8 +253,7 @@ namespace System.Net
             );
 
             if (NetEventSource.Log.IsEnabled())
-                NetEventSource
-                    .Log
+                NetEventSource.Log
                     .SecurityContextInputBuffers(
                         nameof(InitializeSecurityContext),
                         inputBuffers.Count,
@@ -292,8 +289,7 @@ namespace System.Net
             );
 
             if (NetEventSource.Log.IsEnabled())
-                NetEventSource
-                    .Log
+                NetEventSource.Log
                     .SecurityContextInputBuffers(
                         nameof(AcceptSecurityContext),
                         inputBuffers.Count,
@@ -313,8 +309,7 @@ namespace System.Net
             int errorCode = secModule.CompleteAuthToken(ref context, in inputBuffer);
 
             if (NetEventSource.Log.IsEnabled())
-                NetEventSource
-                    .Log
+                NetEventSource.Log
                     .OperationReturnedSomething(
                         nameof(CompleteAuthToken),
                         (Interop.SECURITY_STATUS)errorCode
@@ -332,8 +327,7 @@ namespace System.Net
             int errorCode = secModule.ApplyControlToken(ref context, in inputBuffer);
 
             if (NetEventSource.Log.IsEnabled())
-                NetEventSource
-                    .Log
+                NetEventSource.Log
                     .OperationReturnedSomething(
                         nameof(ApplyControlToken),
                         (Interop.SECURITY_STATUS)errorCode

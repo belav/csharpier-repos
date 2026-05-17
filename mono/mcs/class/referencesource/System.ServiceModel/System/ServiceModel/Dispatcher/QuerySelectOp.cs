@@ -226,8 +226,7 @@ namespace System.ServiceModel.Dispatcher
                     }
                     else
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperCritical(
                                 new QueryProcessingException(QueryProcessingError.Unexpected)
                             );
@@ -352,8 +351,7 @@ namespace System.ServiceModel.Dispatcher
                     }
                     else
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperCritical(
                                 new QueryProcessingException(QueryProcessingError.Unexpected)
                             );

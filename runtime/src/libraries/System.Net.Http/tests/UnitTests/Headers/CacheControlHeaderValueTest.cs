@@ -762,16 +762,13 @@ namespace System.Net.Http.Tests
                 "http://microsoft.com"
             );
 
-            request
-                .Headers
+            request.Headers
                 .TryAddWithoutValidation(KnownHeaders.CacheControl.Descriptor, "min-fresh=123");
-            request
-                .Headers
+            request.Headers
                 .TryAddWithoutValidation(KnownHeaders.CacheControl.Descriptor, string.Empty);
 
             Assert.True(
-                request
-                    .Headers
+                request.Headers
                     .TryGetValues(
                         KnownHeaders.CacheControl.Descriptor,
                         out IEnumerable<string>? values

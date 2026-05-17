@@ -54,18 +54,15 @@ namespace System.IdentityModel.Tokens
         )
         {
             if (string.IsNullOrEmpty(assertionId))
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(SR.GetString(SR.SAMLAssertionIdRequired));
 
             if (!IsAssertionIdValid(assertionId))
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(SR.GetString(SR.SAMLAssertionIDIsInvalid, assertionId));
 
             if (string.IsNullOrEmpty(issuer))
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(SR.GetString(SR.SAMLAssertionIssuerRequired));
 
             if (samlStatements == null)
@@ -82,8 +79,7 @@ namespace System.IdentityModel.Tokens
             foreach (SamlStatement samlStatement in samlStatements)
             {
                 if (samlStatement == null)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgument(
                             SR.GetString(
                                 SR.SAMLEntityCannotBeNullOrEmpty,
@@ -95,8 +91,7 @@ namespace System.IdentityModel.Tokens
             }
 
             if (this.statements.Count == 0)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(SR.GetString(SR.SAMLAssertionRequireOneStatement));
         }
 
@@ -116,15 +111,13 @@ namespace System.IdentityModel.Tokens
             set
             {
                 if (isReadOnly)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
                         );
 
                 if (string.IsNullOrEmpty(value))
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgument(SR.GetString(SR.SAMLAssertionIdRequired));
 
                 this.assertionId = value;
@@ -161,15 +154,13 @@ namespace System.IdentityModel.Tokens
             set
             {
                 if (isReadOnly)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
                         );
 
                 if (string.IsNullOrEmpty(value))
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgument(SR.GetString(SR.SAMLAssertionIssuerRequired));
 
                 this.issuer = value;
@@ -182,8 +173,7 @@ namespace System.IdentityModel.Tokens
             set
             {
                 if (isReadOnly)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
                         );
@@ -198,8 +188,7 @@ namespace System.IdentityModel.Tokens
             set
             {
                 if (isReadOnly)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
                         );
@@ -214,8 +203,7 @@ namespace System.IdentityModel.Tokens
             set
             {
                 if (isReadOnly)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
                         );
@@ -235,8 +223,7 @@ namespace System.IdentityModel.Tokens
             set
             {
                 if (isReadOnly)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
                         );
@@ -261,8 +248,7 @@ namespace System.IdentityModel.Tokens
             set
             {
                 if (isReadOnly)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
                         );
@@ -343,8 +329,7 @@ namespace System.IdentityModel.Tokens
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("samlSerializer");
 
             if (this.signature != null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(SR.GetString(SR.SAMLSignatureAlreadyRead))
                     );
@@ -384,8 +369,7 @@ namespace System.IdentityModel.Tokens
                 outOfBandTokenResolver
             );
             if (this.verificationKey == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new SecurityTokenException(
                             SR.GetString(SR.SAMLUnableToResolveSignatureKey, this.issuer)
@@ -398,8 +382,7 @@ namespace System.IdentityModel.Tokens
                 outOfBandTokenResolver
             );
             if (this.signingToken == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new SecurityTokenException(SR.GetString(SR.SamlSigningTokenNotFound))
                     );
@@ -411,15 +394,13 @@ namespace System.IdentityModel.Tokens
         void CheckObjectValidity()
         {
             if (string.IsNullOrEmpty(this.assertionId))
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new SecurityTokenException(SR.GetString(SR.SAMLAssertionIdRequired))
                     );
 
             if (!IsAssertionIdValid(this.assertionId))
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new SecurityTokenException(
                             SR.GetString(SR.SAMLAssertionIDIsInvalid, this.assertionId)
@@ -427,15 +408,13 @@ namespace System.IdentityModel.Tokens
                     );
 
             if (string.IsNullOrEmpty(this.issuer))
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new SecurityTokenException(SR.GetString(SR.SAMLAssertionIssuerRequired))
                     );
 
             if (this.statements.Count == 0)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new SecurityTokenException(
                             SR.GetString(SR.SAMLAssertionRequireOneStatement)
@@ -516,8 +495,7 @@ namespace System.IdentityModel.Tokens
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("signature");
 
             if (signatureVerificationKey == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("signatureVerificatonKey");
 
             signature.StartSignatureVerification(signatureVerificationKey);
@@ -556,13 +534,11 @@ namespace System.IdentityModel.Tokens
         )
         {
             if (reader == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("ReadXml"));
 
             if (samlSerializer == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("samlSerializer"));
 
             XmlDictionaryReader dictionaryReader = XmlDictionaryReader.CreateDictionaryReader(
@@ -573,8 +549,7 @@ namespace System.IdentityModel.Tokens
             SamlDictionary dictionary = samlSerializer.DictionaryManager.SamlDictionary;
 
             if (!wrappedReader.IsStartElement(dictionary.Assertion, dictionary.Namespace))
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new SecurityTokenException(
                             SR.GetString(SR.SAMLElementNotRecognized, wrappedReader.LocalName)
@@ -583,8 +558,7 @@ namespace System.IdentityModel.Tokens
 
             string attributeValue = wrappedReader.GetAttribute(dictionary.MajorVersion, null);
             if (string.IsNullOrEmpty(attributeValue))
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new SecurityTokenException(
                             SR.GetString(SR.SAMLAssertionMissingMajorVersionAttributeOnRead)
@@ -594,8 +568,7 @@ namespace System.IdentityModel.Tokens
 
             attributeValue = wrappedReader.GetAttribute(dictionary.MinorVersion, null);
             if (string.IsNullOrEmpty(attributeValue))
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new SecurityTokenException(
                             SR.GetString(SR.SAMLAssertionMissingMinorVersionAttributeOnRead)
@@ -609,8 +582,7 @@ namespace System.IdentityModel.Tokens
                 || (minorVersion != SamlConstants.MinorVersionValue)
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new SecurityTokenException(
                             SR.GetString(
@@ -626,15 +598,13 @@ namespace System.IdentityModel.Tokens
 
             attributeValue = wrappedReader.GetAttribute(dictionary.AssertionId, null);
             if (string.IsNullOrEmpty(attributeValue))
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new SecurityTokenException(SR.GetString(SR.SAMLAssertionIdRequired))
                     );
 
             if (!IsAssertionIdValid(attributeValue))
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new SecurityTokenException(
                             SR.GetString(SR.SAMLAssertionIDIsInvalid, attributeValue)
@@ -645,8 +615,7 @@ namespace System.IdentityModel.Tokens
 
             attributeValue = wrappedReader.GetAttribute(dictionary.Issuer, null);
             if (string.IsNullOrEmpty(attributeValue))
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new SecurityTokenException(
                             SR.GetString(SR.SAMLAssertionMissingIssuerAttributeOnRead)
@@ -676,8 +645,7 @@ namespace System.IdentityModel.Tokens
                     outOfBandTokenResolver
                 );
                 if (this.conditions == null)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new SecurityTokenException(SR.GetString(SR.SAMLUnableToLoadCondtions))
                         );
@@ -691,8 +659,7 @@ namespace System.IdentityModel.Tokens
                     outOfBandTokenResolver
                 );
                 if (this.advice == null)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new SecurityTokenException(SR.GetString(SR.SAMLUnableToLoadAdvice))
                         );
@@ -718,8 +685,7 @@ namespace System.IdentityModel.Tokens
                         outOfBandTokenResolver
                     );
                     if (statement == null)
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new SecurityTokenException(
                                     SR.GetString(SR.SAMLUnableToLoadStatement)
@@ -730,8 +696,7 @@ namespace System.IdentityModel.Tokens
             }
 
             if (this.statements.Count == 0)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new SecurityTokenException(
                             SR.GetString(SR.SAMLAssertionRequireOneStatementOnRead)
@@ -774,8 +739,7 @@ namespace System.IdentityModel.Tokens
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("writer");
 
             if ((this.signingCredentials == null) && (this.signature == null))
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(SR.SamlAssertionMissingSigningCredentials)
@@ -825,8 +789,7 @@ namespace System.IdentityModel.Tokens
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("writer");
 
             if (samlSerializer == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("samlSerializer"));
 
 #pragma warning suppress 56506 // samlSerializer.DictionaryManager is never null.
@@ -854,10 +817,11 @@ namespace System.IdentityModel.Tokens
                 writer.WriteEndAttribute();
                 writer.WriteStartAttribute(dictionary.IssueInstant, null);
                 writer.WriteString(
-                    this.issueInstant.ToString(
-                        SamlConstants.GeneratedDateTimeFormat,
-                        CultureInfo.InvariantCulture
-                    )
+                    this.issueInstant
+                        .ToString(
+                            SamlConstants.GeneratedDateTimeFormat,
+                            CultureInfo.InvariantCulture
+                        )
                 );
                 writer.WriteEndAttribute();
 
@@ -886,8 +850,7 @@ namespace System.IdentityModel.Tokens
                 if (Fx.IsFatal(e))
                     throw;
 
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(SR.GetString(SR.SAMLTokenNotSerialized), e)
                     );
@@ -903,8 +866,7 @@ namespace System.IdentityModel.Tokens
         {
             if (!this.CanWriteSourceData)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ID4140)));
             }
 

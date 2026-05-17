@@ -45,8 +45,7 @@ namespace SdtEventSources
                 "  Args: "
                     + string.Join(
                         ", ",
-                        command
-                            .Arguments
+                        command.Arguments
                             .Select((pair) => string.Format("{0} -> {1}", pair.Key, pair.Value))
                     )
             );

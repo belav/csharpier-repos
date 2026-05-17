@@ -96,20 +96,20 @@ namespace System.Threading.Tasks.Dataflow
             targets[1] = _target2 = new JoinBlockTarget<T2>(_sharedResources);
 
             // Let the source know when all targets have completed
-            Task.Factory.ContinueWhenAll(
-                new[] { _target1.CompletionTaskInternal, _target2.CompletionTaskInternal },
-                _ => _source.Complete(),
-                CancellationToken.None,
-                Common.GetContinuationOptions(),
-                TaskScheduler.Default
-            );
+            Task.Factory
+                .ContinueWhenAll(
+                    new[] { _target1.CompletionTaskInternal, _target2.CompletionTaskInternal },
+                    _ => _source.Complete(),
+                    CancellationToken.None,
+                    Common.GetContinuationOptions(),
+                    TaskScheduler.Default
+                );
 
             // It is possible that the source half may fault on its own, e.g. due to a task scheduler exception.
             // In those cases we need to fault the target half to drop its buffered messages and to release its
             // reservations. This should not create an infinite loop, because all our implementations are designed
             // to handle multiple completion requests and to carry over only one.
-            _source
-                .Completion
+            _source.Completion
                 .ContinueWith(
                     static (completed, state) =>
                     {
@@ -466,25 +466,25 @@ namespace System.Threading.Tasks.Dataflow
             targets[2] = _target3 = new JoinBlockTarget<T3>(_sharedResources);
 
             // Let the source know when all targets have completed
-            Task.Factory.ContinueWhenAll(
-                new[]
-                {
-                    _target1.CompletionTaskInternal,
-                    _target2.CompletionTaskInternal,
-                    _target3.CompletionTaskInternal,
-                },
-                _ => _source.Complete(),
-                CancellationToken.None,
-                Common.GetContinuationOptions(),
-                TaskScheduler.Default
-            );
+            Task.Factory
+                .ContinueWhenAll(
+                    new[]
+                    {
+                        _target1.CompletionTaskInternal,
+                        _target2.CompletionTaskInternal,
+                        _target3.CompletionTaskInternal,
+                    },
+                    _ => _source.Complete(),
+                    CancellationToken.None,
+                    Common.GetContinuationOptions(),
+                    TaskScheduler.Default
+                );
 
             // It is possible that the source half may fault on its own, e.g. due to a task scheduler exception.
             // In those cases we need to fault the target half to drop its buffered messages and to release its
             // reservations. This should not create an infinite loop, because all our implementations are designed
             // to handle multiple completion requests and to carry over only one.
-            _source
-                .Completion
+            _source.Completion
                 .ContinueWith(
                     static (completed, state) =>
                     {
@@ -999,8 +999,7 @@ namespace System.Threading.Tasks.Dataflow.Internal
             );
 
             bool consumed;
-            T? consumedValue = _nonGreedy
-                .ReservedMessage
+            T? consumedValue = _nonGreedy.ReservedMessage
                 .Key
                 .ConsumeMessage(_nonGreedy.ReservedMessage.Value, this, out consumed);
 
@@ -1146,8 +1145,7 @@ namespace System.Threading.Tasks.Dataflow.Internal
                 // Release the reservation and null out our reservation flag even if an exception occurs
                 try
                 {
-                    _nonGreedy
-                        .ReservedMessage
+                    _nonGreedy.ReservedMessage
                         .Key
                         .ReleaseReservation(_nonGreedy.ReservedMessage.Value, this);
                 }
@@ -1910,18 +1908,19 @@ namespace System.Threading.Tasks.Dataflow.Internal
                     _decliningPermanently = true;
 
                     // Complete each target asynchronously so as not to invoke synchronous continuations under a lock
-                    Task.Factory.StartNew(
-                        static state =>
-                        {
-                            var sharedResources = (JoinBlockTargetSharedResources)state!;
-                            foreach (JoinBlockTargetBase target in sharedResources._targets)
-                                target.CompleteOncePossible();
-                        },
-                        this,
-                        CancellationToken.None,
-                        Common.GetCreationOptionsForTask(),
-                        TaskScheduler.Default
-                    );
+                    Task.Factory
+                        .StartNew(
+                            static state =>
+                            {
+                                var sharedResources = (JoinBlockTargetSharedResources)state!;
+                                foreach (JoinBlockTargetBase target in sharedResources._targets)
+                                    target.CompleteOncePossible();
+                            },
+                            this,
+                            CancellationToken.None,
+                            Common.GetCreationOptionsForTask(),
+                            TaskScheduler.Default
+                        );
                 }
             }
         }

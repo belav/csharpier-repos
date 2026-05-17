@@ -66,8 +66,7 @@ namespace System.ServiceModel.Routing
                         messageRpc.EventTraceActivity,
                         messageRpc.UniqueID,
                         messageRpc.Message.Headers.Action,
-                        messageRpc
-                            .OperationContext
+                        messageRpc.OperationContext
                             .EndpointDispatcher
                             .EndpointAddress
                             .Uri
@@ -189,8 +188,7 @@ namespace System.ServiceModel.Routing
             )
             {
                 // We can't do error handling for oneway Transactional unless there's RC.
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new ConfigurationErrorsException(
                             SR.ErrorHandlingNotSupportedTxNoRC(
@@ -201,10 +199,8 @@ namespace System.ServiceModel.Routing
             }
 
             RoutingEndpointTrait endpointTrait = sendOperation.CurrentEndpoint;
-            this.client = this.service.GetOrCreateClient<TContract>(
-                endpointTrait,
-                messageRpc.Impersonating
-            );
+            this.client = this.service
+                .GetOrCreateClient<TContract>(endpointTrait, messageRpc.Impersonating);
             try
             {
                 // We always work on cloned message when there are backup endpoints to handle exception cases
@@ -244,12 +240,13 @@ namespace System.ServiceModel.Routing
                             impersonationContext = messageRpc.PrepareCall();
                         }
 
-                        result = this.client.BeginOperation(
-                            message,
-                            transaction,
-                            this.PrepareAsyncCompletion(clientOperationCallback),
-                            this
-                        );
+                        result = this.client
+                            .BeginOperation(
+                                message,
+                                transaction,
+                                this.PrepareAsyncCompletion(clientOperationCallback),
+                                this
+                            );
                     }
                     finally
                     {
@@ -604,9 +601,8 @@ namespace System.ServiceModel.Routing
             {
                 // The channel may not fault for this exception for bindings other than netTcpBinding
                 // We abort the channel in that case. We proactively clean up so that we don't have to cleanup later
-                SessionChannels sessionChannels = this.service.GetSessionChannels(
-                    messageRpc.Impersonating
-                );
+                SessionChannels sessionChannels = this.service
+                    .GetSessionChannels(messageRpc.Impersonating);
                 if (sessionChannels != null)
                 {
                     sessionChannels.AbortChannel(sendOperation.CurrentEndpoint);
@@ -748,8 +744,7 @@ namespace System.ServiceModel.Routing
                     this.PrepareTransactionalCall(this.service.GetTransactionForSending(messageRpc))
                 )
                 {
-                    result = messageRpc
-                        .ReceiveContext
+                    result = messageRpc.ReceiveContext
                         .BeginComplete(
                             this.timeoutHelper.RemainingTime(),
                             this.PrepareAsyncCompletion(completeReceiveContextCallback),

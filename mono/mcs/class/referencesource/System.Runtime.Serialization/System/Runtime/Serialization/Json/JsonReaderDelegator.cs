@@ -118,8 +118,7 @@ namespace System.Runtime.Serialization.Json
             {
                 XmlDictionaryReader tempDictionaryReader =
                     XmlDictionaryReader.CreateDictionaryReader(reader);
-                buffer = ByteArrayHelperWithString
-                    .Instance
+                buffer = ByteArrayHelperWithString.Instance
                     .ReadArray(
                         tempDictionaryReader,
                         JsonGlobals.itemString,
@@ -129,8 +128,7 @@ namespace System.Runtime.Serialization.Json
             }
             else
             {
-                buffer = ByteArrayHelperWithString
-                    .Instance
+                buffer = ByteArrayHelperWithString.Instance
                     .ReadArray(
                         dictionaryReader,
                         JsonGlobals.itemString,
@@ -149,12 +147,10 @@ namespace System.Runtime.Serialization.Json
         {
             if (isEndOfEmptyElement)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new XmlException(
-                            System
-                                .Runtime
+                            System.Runtime
                                 .Serialization
                                 .SR
                                 .GetString(
@@ -236,8 +232,7 @@ namespace System.Runtime.Serialization.Json
                 )
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new FormatException(
                             SR.GetString(
@@ -272,24 +267,21 @@ namespace System.Runtime.Serialization.Json
             }
             catch (ArgumentException exception)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         XmlExceptionHelper.CreateConversionException(ticksvalue, "Int64", exception)
                     );
             }
             catch (FormatException exception)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         XmlExceptionHelper.CreateConversionException(ticksvalue, "Int64", exception)
                     );
             }
             catch (OverflowException exception)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         XmlExceptionHelper.CreateConversionException(ticksvalue, "Int64", exception)
                     );
@@ -317,8 +309,7 @@ namespace System.Runtime.Serialization.Json
             }
             catch (ArgumentException exception)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         XmlExceptionHelper.CreateConversionException(
                             ticksvalue,
@@ -352,12 +343,13 @@ namespace System.Runtime.Serialization.Json
                 return false;
             }
 
-            array = this.DateTimeArrayHelper.ReadArray(
-                dictionaryReader,
-                XmlDictionaryString.GetString(itemName),
-                XmlDictionaryString.GetString(itemNamespace),
-                GetArrayLengthQuota(context)
-            );
+            array = this.DateTimeArrayHelper
+                .ReadArray(
+                    dictionaryReader,
+                    XmlDictionaryString.GetString(itemName),
+                    XmlDictionaryString.GetString(itemNamespace),
+                    GetArrayLengthQuota(context)
+                );
             context.IncrementItemCount(array.Length);
 
             return true;
@@ -406,8 +398,7 @@ namespace System.Runtime.Serialization.Json
                 int count
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new NotImplementedException());
             }
         }
@@ -419,8 +410,7 @@ namespace System.Runtime.Serialization.Json
 
             if (value == null || value.Length == 0)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new XmlException(
                             XmlObjectSerializer.TryAddLineInfo(
@@ -441,24 +431,21 @@ namespace System.Runtime.Serialization.Json
             }
             catch (ArgumentException exception)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         XmlExceptionHelper.CreateConversionException(value, "UInt64", exception)
                     );
             }
             catch (FormatException exception)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         XmlExceptionHelper.CreateConversionException(value, "UInt64", exception)
                     );
             }
             catch (OverflowException exception)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         XmlExceptionHelper.CreateConversionException(value, "UInt64", exception)
                     );
@@ -475,12 +462,10 @@ namespace System.Runtime.Serialization.Json
         {
             if (isEndOfEmptyElement)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new XmlException(
-                            System
-                                .Runtime
+                            System.Runtime
                                 .Serialization
                                 .SR
                                 .GetString(
@@ -495,14 +480,12 @@ namespace System.Runtime.Serialization.Json
 
             if (value == null || value.Length == 0)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new XmlException(
                             XmlObjectSerializer.TryAddLineInfo(
                                 this,
-                                System
-                                    .Runtime
+                                System.Runtime
                                     .Serialization
                                     .SR
                                     .GetString(
@@ -521,24 +504,21 @@ namespace System.Runtime.Serialization.Json
             }
             catch (ArgumentException exception)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         XmlExceptionHelper.CreateConversionException(value, "UInt64", exception)
                     );
             }
             catch (FormatException exception)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         XmlExceptionHelper.CreateConversionException(value, "UInt64", exception)
                     );
             }
             catch (OverflowException exception)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         XmlExceptionHelper.CreateConversionException(value, "UInt64", exception)
                     );

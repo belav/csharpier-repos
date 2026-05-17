@@ -599,8 +599,7 @@ namespace System.Data.Entity.Design
 
             EntitySet entitySet = new EntitySet(type.Name, schema, table, null, type);
 
-            MetadataProperty property = System
-                .Data
+            MetadataProperty property = System.Data
                 .EntityModel
                 .SchemaObjectModel
                 .SchemaElement
@@ -763,8 +762,7 @@ namespace System.Data.Entity.Design
                     List<EdmSchemaError> tvfReturnTypeErrors;
                     if (
                         tvfReturnType != null
-                        && session
-                            .ItemToErrorsMap
+                        && session.ItemToErrorsMap
                             .TryGetValue(tvfReturnType, out tvfReturnTypeErrors)
                     )
                     {
@@ -1078,24 +1076,20 @@ namespace System.Data.Entity.Design
                     //If so, we keep one Association and throw the rest away.
 
                     foreach (
-                        var toPropertyOfAddedAssociation in session
-                            .AssociationTypes
+                        var toPropertyOfAddedAssociation in session.AssociationTypes
                             .SelectMany(t =>
-                                t.ReferentialConstraints.SelectMany(refconst =>
-                                    refconst.ToProperties
-                                )
+                                t.ReferentialConstraints
+                                    .SelectMany(refconst => refconst.ToProperties)
                             )
                     )
                     {
                         foreach (
-                            var toProperty in type.ReferentialConstraints.SelectMany(refconst =>
-                                refconst.ToProperties
-                            )
+                            var toProperty in type.ReferentialConstraints
+                                .SelectMany(refconst => refconst.ToProperties)
                         )
                         {
                             if (
-                                toProperty
-                                    .DeclaringType
+                                toProperty.DeclaringType
                                     .Equals(toPropertyOfAddedAssociation.DeclaringType)
                                 && toProperty.Equals(toPropertyOfAddedAssociation)
                             )
@@ -1273,8 +1267,7 @@ namespace System.Data.Entity.Design
                 EdmProperty property;
 
                 if (
-                    !pkEntityType
-                        .Properties
+                    !pkEntityType.Properties
                         .TryGetValue(columns[index].PKColumn, false, out property)
                 )
                 {
@@ -1294,8 +1287,7 @@ namespace System.Data.Entity.Design
                 fromProperties[index] = property;
 
                 if (
-                    !fkEntityType
-                        .Properties
+                    !fkEntityType.Properties
                         .TryGetValue(columns[index].FKColumn, false, out property)
                 )
                 {
@@ -1997,8 +1989,7 @@ namespace System.Data.Entity.Design
                     if (key.Schema != null)
                     {
                         properties.Add(
-                            System
-                                .Data
+                            System.Data
                                 .EntityModel
                                 .SchemaObjectModel
                                 .SchemaElement
@@ -2010,8 +2001,7 @@ namespace System.Data.Entity.Design
                         );
                     }
                     properties.Add(
-                        System
-                            .Data
+                        System.Data
                             .EntityModel
                             .SchemaObjectModel
                             .SchemaElement

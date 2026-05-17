@@ -143,8 +143,7 @@ namespace System.Web.Mobile
                         try
                         {
                             evaluator = (MobileCapabilities.EvaluateCapabilitiesDelegate)
-                                MobileCapabilities
-                                    .EvaluateCapabilitiesDelegate
+                                MobileCapabilities.EvaluateCapabilitiesDelegate
                                     .CreateDelegate(
                                         typeof(MobileCapabilities.EvaluateCapabilitiesDelegate),
                                         evaluatorClass,

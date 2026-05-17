@@ -77,8 +77,7 @@ namespace Microsoft.CodeAnalysis.Remote
                 solutionChecksum,
                 solution =>
                 {
-                    var service = solution
-                        .Services
+                    var service = solution.Services
                         .GetRequiredService<IDesignerAttributeDiscoveryService>();
                     return service.ProcessSolutionAsync(
                         solution,

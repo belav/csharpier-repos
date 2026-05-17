@@ -40,8 +40,7 @@ namespace Microsoft.Interop
                 return generator;
             }
 
-            var support = generator
-                .Generator
+            var support = generator.Generator
                 .SupportsByValueMarshalKind(
                     info.ByValueContentsMarshalKind,
                     info,

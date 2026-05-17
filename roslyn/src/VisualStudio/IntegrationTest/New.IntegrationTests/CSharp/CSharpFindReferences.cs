@@ -38,15 +38,13 @@ class Program
 ",
                 HangMitigatingCancellationToken
             );
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .AddFileAsync(
                     ProjectName,
                     "File2.cs",
                     cancellationToken: HangMitigatingCancellationToken
                 );
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .OpenFileAsync(ProjectName, "File2.cs", HangMitigatingCancellationToken);
 
             await SetUpEditorAsync(
@@ -62,15 +60,13 @@ class SomeOtherClass
                 HangMitigatingCancellationToken
             );
 
-            await TestServices
-                .Input
+            await TestServices.Input
                 .SendAsync(
                     (VirtualKeyCode.F12, VirtualKeyCode.SHIFT),
                     HangMitigatingCancellationToken
                 );
 
-            var results = await TestServices
-                .FindReferencesWindow
+            var results = await TestServices.FindReferencesWindow
                 .GetContentsAsync(HangMitigatingCancellationToken);
 
             Assert.Collection(
@@ -140,14 +136,12 @@ class SomeOtherClass
             // Assert we are in the right file now
             Assert.Equal(
                 $"Class1.cs",
-                await TestServices
-                    .Shell
+                await TestServices.Shell
                     .GetActiveDocumentFileNameAsync(HangMitigatingCancellationToken)
             );
             Assert.Equal(
                 "Program",
-                await TestServices
-                    .Editor
+                await TestServices.Editor
                     .GetLineTextAfterCaretAsync(HangMitigatingCancellationToken)
             );
         }
@@ -155,8 +149,7 @@ class SomeOtherClass
         [IdeFact]
         public async Task FindReferencesToLocals()
         {
-            await using var telemetry = await TestServices
-                .Telemetry
+            await using var telemetry = await TestServices.Telemetry
                 .EnableTestTelemetryChannelAsync(HangMitigatingCancellationToken);
             await SetUpEditorAsync(
                 @"
@@ -172,15 +165,13 @@ class Program
                 HangMitigatingCancellationToken
             );
 
-            await TestServices
-                .Input
+            await TestServices.Input
                 .SendAsync(
                     (VirtualKeyCode.F12, VirtualKeyCode.SHIFT),
                     HangMitigatingCancellationToken
                 );
 
-            var results = await TestServices
-                .FindReferencesWindow
+            var results = await TestServices.FindReferencesWindow
                 .GetContentsAsync(HangMitigatingCancellationToken);
 
             Assert.Collection(
@@ -269,15 +260,13 @@ class Program
                 HangMitigatingCancellationToken
             );
 
-            await TestServices
-                .Input
+            await TestServices.Input
                 .SendAsync(
                     (VirtualKeyCode.F12, VirtualKeyCode.SHIFT),
                     HangMitigatingCancellationToken
                 );
 
-            var results = await TestServices
-                .FindReferencesWindow
+            var results = await TestServices.FindReferencesWindow
                 .GetContentsAsync(HangMitigatingCancellationToken);
 
             Assert.Collection(
@@ -320,13 +309,11 @@ class Program
         {
             await SetUpEditorAsync(@"class EmptyContent {$$}", HangMitigatingCancellationToken);
 
-            var visualStudioWorkspace = await TestServices
-                .Shell
+            var visualStudioWorkspace = await TestServices.Shell
                 .GetComponentModelServiceAsync<VisualStudioWorkspace>(
                     HangMitigatingCancellationToken
                 );
-            var persistentStorageConfiguration = visualStudioWorkspace
-                .Services
+            var persistentStorageConfiguration = visualStudioWorkspace.Services
                 .GetRequiredService<IPersistentStorageConfiguration>();
 
             // verify working folder has set
@@ -350,8 +337,7 @@ class Program
         private async Task WaitForNavigateAsync(CancellationToken cancellationToken)
         {
             // Navigation operations handled by Roslyn are tracked by FeatureAttribute.FindReferences
-            await TestServices
-                .Workspace
+            await TestServices.Workspace
                 .WaitForAsyncOperationsAsync(FeatureAttribute.FindReferences, cancellationToken);
 
             // Navigation operations handled by the editor are tracked within its own JoinableTaskFactory instance

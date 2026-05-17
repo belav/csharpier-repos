@@ -185,9 +185,12 @@ namespace StaticTestGenerator
                     if (test.Values != null)
                     {
                         if (
-                            !test.Values.All(v =>
-                                v == null || (v is Type t && IsPublic(t)) || IsPublic(v.GetType())
-                            )
+                            !test.Values
+                                .All(v =>
+                                    v == null
+                                    || (v is Type t && IsPublic(t))
+                                    || IsPublic(v.GetType())
+                                )
                         )
                         {
                             Log(
@@ -1067,9 +1070,8 @@ namespace StaticTestGenerator
                 )
                 {
                     name = GetTypeName(
-                        type.DeclaringType.MakeGenericType(
-                            genericArgs.Take(parentGenericArgs.Length).ToArray()
-                        )
+                        type.DeclaringType
+                            .MakeGenericType(genericArgs.Take(parentGenericArgs.Length).ToArray())
                     );
                 }
                 else

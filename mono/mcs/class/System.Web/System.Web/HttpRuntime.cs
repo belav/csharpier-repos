@@ -228,8 +228,7 @@ namespace System.Web
             {
                 if (_actual_bin_directory == null)
                 {
-                    string[] parts = AppDomain
-                        .CurrentDomain
+                    string[] parts = AppDomain.CurrentDomain
                         .SetupInformation
                         .PrivateBinPath
                         .Split(';');

@@ -63,8 +63,7 @@ namespace myNamespace
                 FeatureAttribute.EncapsulateField,
                 HangMitigatingCancellationToken
             );
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .TextContainsAsync(
                     "public static int? Param { get => param; set => param = value; }"
                 );
@@ -78,16 +77,13 @@ namespace myNamespace
             // Suspend file change notification during code action application, since spurious file change notifications
             // can cause silent failure to apply the code action if they occur within this block.
             await using (
-                var fileChangeRestorer = await TestServices
-                    .Shell
+                var fileChangeRestorer = await TestServices.Shell
                     .PauseFileChangesAsync(HangMitigatingCancellationToken)
             )
             {
-                await TestServices
-                    .Editor
+                await TestServices.Editor
                     .InvokeCodeActionListAsync(HangMitigatingCancellationToken);
-                await TestServices
-                    .EditorVerifier
+                await TestServices.EditorVerifier
                     .CodeActionAsync(
                         "Encapsulate field: 'param' (and use property)",
                         applyFix: true,
@@ -96,8 +92,7 @@ namespace myNamespace
                     );
             }
 
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .TextContainsAsync(
                     @"
 namespace myNamespace
@@ -126,16 +121,13 @@ namespace myNamespace
             // Suspend file change notification during code action application, since spurious file change notifications
             // can cause silent failure to apply the code action if they occur within this block.
             await using (
-                var fileChangeRestorer = await TestServices
-                    .Shell
+                var fileChangeRestorer = await TestServices.Shell
                     .PauseFileChangesAsync(HangMitigatingCancellationToken)
             )
             {
-                await TestServices
-                    .Editor
+                await TestServices.Editor
                     .InvokeCodeActionListAsync(HangMitigatingCancellationToken);
-                await TestServices
-                    .EditorVerifier
+                await TestServices.EditorVerifier
                     .CodeActionAsync(
                         "Encapsulate field: 'param' (but still use field)",
                         applyFix: true,
@@ -144,8 +136,7 @@ namespace myNamespace
                     );
             }
 
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .TextContainsAsync(
                     @"
 namespace myNamespace

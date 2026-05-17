@@ -955,8 +955,7 @@ namespace System.Web.Mvc
 
             ModelBindingContext bindingContext = new ModelBindingContext()
             {
-                ModelMetadata = ModelMetadataProviders
-                    .Current
+                ModelMetadata = ModelMetadataProviders.Current
                     .GetMetadataForType(() => model, typeof(TModel)),
                 ModelName = prefix,
                 ModelState = ModelState,
@@ -982,8 +981,7 @@ namespace System.Web.Mvc
                 throw new ArgumentNullException("model");
             }
 
-            ModelMetadata metadata = ModelMetadataProviders
-                .Current
+            ModelMetadata metadata = ModelMetadataProviders.Current
                 .GetMetadataForType(() => model, model.GetType());
 
             foreach (
@@ -1308,8 +1306,7 @@ namespace System.Web.Mvc
                         ExecuteCoreState innerState
                     )
                     {
-                        return innerState
-                            .AsyncInvoker
+                        return innerState.AsyncInvoker
                             .BeginInvokeAction(
                                 innerState.Controller.ControllerContext,
                                 innerState.ActionName,

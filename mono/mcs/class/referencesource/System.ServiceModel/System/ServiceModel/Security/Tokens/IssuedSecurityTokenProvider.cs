@@ -137,8 +137,7 @@ namespace System.ServiceModel.Security.Tokens
             {
                 if (value == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new ArgumentNullException("value"));
                 }
                 this.messageSecurityVersion = value;
@@ -230,8 +229,7 @@ namespace System.ServiceModel.Security.Tokens
         {
             if (this.securityTokenSerializer == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(SR.TokenSerializerNotSetonFederationProvider)
@@ -309,8 +307,7 @@ namespace System.ServiceModel.Security.Tokens
 
             if (actAsOnBehalfOfParameters.IssuedSecurityToken != null)
             {
-                throw System
-                    .IdentityModel
+                throw System.IdentityModel
                     .DiagnosticUtility
                     .ThrowHelperInvalidOperation(SR.GetString(SR.AuthFailed));
             }
@@ -326,8 +323,7 @@ namespace System.ServiceModel.Security.Tokens
                         )
                     )
                     {
-                        throw System
-                            .IdentityModel
+                        throw System.IdentityModel
                             .DiagnosticUtility
                             .ThrowHelperInvalidOperation(
                                 SR.GetString(
@@ -356,8 +352,7 @@ namespace System.ServiceModel.Security.Tokens
                         )
                     )
                     {
-                        throw System
-                            .IdentityModel
+                        throw System.IdentityModel
                             .DiagnosticUtility
                             .ThrowHelperInvalidOperation(
                                 SR.GetString(
@@ -379,8 +374,7 @@ namespace System.ServiceModel.Security.Tokens
                 }
                 else
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new NotSupportedException(
                                 SR.GetString(
@@ -400,8 +394,7 @@ namespace System.ServiceModel.Security.Tokens
                     )
                 )
                 {
-                    throw System
-                        .IdentityModel
+                    throw System.IdentityModel
                         .DiagnosticUtility
                         .ThrowHelperInvalidOperation(
                             SR.GetString(
@@ -645,8 +638,7 @@ namespace System.ServiceModel.Security.Tokens
             {
                 if (this.IssuerAddress == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(SR.StsAddressNotSet, this.TargetAddress)
@@ -655,8 +647,7 @@ namespace System.ServiceModel.Security.Tokens
                 }
                 if (this.IssuerBinding == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(SR.StsBindingNotSet, this.IssuerAddress)
@@ -665,8 +656,7 @@ namespace System.ServiceModel.Security.Tokens
                 }
                 if (this.SecurityAlgorithmSuite == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(
@@ -729,8 +719,7 @@ namespace System.ServiceModel.Security.Tokens
                 {
                     if (this.IssuerBinding == null)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(
                                     SR.GetString(SR.StsBindingNotSet, this.IssuerAddress)
@@ -942,8 +931,7 @@ namespace System.ServiceModel.Security.Tokens
                 }
                 else
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new NotSupportedException());
                 }
             }
@@ -983,8 +971,7 @@ namespace System.ServiceModel.Security.Tokens
                     }
                     else
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new ProtocolException(
                                     SR.GetString(
@@ -1069,10 +1056,8 @@ namespace System.ServiceModel.Security.Tokens
             {
                 EndpointIdentity identity;
                 if (
-                    this.identityVerifier.TryGetIdentity(
-                        negotiationState.TargetAddress,
-                        out identity
-                    )
+                    this.identityVerifier
+                        .TryGetIdentity(negotiationState.TargetAddress, out identity)
                 )
                 {
                     List<Claim> claims = new List<Claim>(1);
@@ -1155,8 +1140,7 @@ namespace System.ServiceModel.Security.Tokens
                         foreach (RequestSecurityTokenResponse rstrItem in rstrc.RstrCollection)
                         {
                             if (rstr != null)
-                                throw DiagnosticUtility
-                                    .ExceptionUtility
+                                throw DiagnosticUtility.ExceptionUtility
                                     .ThrowHelperError(
                                         new MessageSecurityException(
                                             SR.GetString(SR.MoreThanOneRSTRInRSTRC)
@@ -1167,8 +1151,7 @@ namespace System.ServiceModel.Security.Tokens
                     }
                     else
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(new NotSupportedException());
                     }
 
@@ -1213,8 +1196,7 @@ namespace System.ServiceModel.Security.Tokens
                 }
                 else
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new NotSupportedException());
                 }
                 negotiationState.SetServiceToken(serviceToken);
@@ -1296,8 +1278,7 @@ namespace System.ServiceModel.Security.Tokens
                     {
                         return false;
                     }
-                    System
-                        .ServiceModel
+                    System.ServiceModel
                         .Dispatcher
                         .ErrorBehavior
                         .ThrowAndCatch(new Win32Exception(error));

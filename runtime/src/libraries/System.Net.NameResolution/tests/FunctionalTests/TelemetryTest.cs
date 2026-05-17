@@ -17,8 +17,7 @@ namespace System.Net.NameResolution.Tests
         [Fact]
         public static void EventSource_ExistsWithCorrectId()
         {
-            Type esType = typeof(Dns)
-                .Assembly
+            Type esType = typeof(Dns).Assembly
                 .GetType(
                     "System.Net.NameResolutionTelemetry",
                     throwOnError: true,
@@ -259,8 +258,7 @@ namespace System.Net.NameResolution.Tests
                                 && firstResolutionStart.TrySetResult()
                             )
                             {
-                                callbackWaitTimedOut = !secondResolutionStop
-                                    .Task
+                                callbackWaitTimedOut = !secondResolutionStop.Task
                                     .Wait(TimeSpan.FromSeconds(15));
                             }
                         },

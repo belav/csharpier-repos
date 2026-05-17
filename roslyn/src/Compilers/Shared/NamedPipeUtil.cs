@@ -74,8 +74,7 @@ namespace Microsoft.CodeAnalysis
                     clientIdentity = getIdentity();
                 });
 
-                return StringComparer
-                        .OrdinalIgnoreCase
+                return StringComparer.OrdinalIgnoreCase
                         .Equals(serverIdentity.name, clientIdentity.name)
                     && serverIdentity.admin == clientIdentity.admin;
 

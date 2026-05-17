@@ -95,8 +95,7 @@ namespace System.Net.Http.Headers
         {
             int index = 0;
             return (AuthenticationHeaderValue)
-                GenericHeaderParser
-                    .SingleValueAuthenticationParser
+                GenericHeaderParser.SingleValueAuthenticationParser
                     .ParseValue(input, null, ref index);
         }
 
@@ -109,8 +108,7 @@ namespace System.Net.Http.Headers
             parsedValue = null;
 
             if (
-                GenericHeaderParser
-                    .SingleValueAuthenticationParser
+                GenericHeaderParser.SingleValueAuthenticationParser
                     .TryParseValue(input, null, ref index, out object? output)
             )
             {

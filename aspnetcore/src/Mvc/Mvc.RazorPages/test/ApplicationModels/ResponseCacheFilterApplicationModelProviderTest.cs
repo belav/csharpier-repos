@@ -100,8 +100,7 @@ public class ResponseCacheFilterApplicationModelProviderTest
     {
         // Arrange
         var options = Options.Create(new MvcOptions());
-        options
-            .Value
+        options.Value
             .CacheProfiles
             .Add(
                 "TestCacheProfile",

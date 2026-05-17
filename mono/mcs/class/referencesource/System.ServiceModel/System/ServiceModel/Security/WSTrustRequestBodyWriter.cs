@@ -37,8 +37,7 @@ namespace System.ServiceModel.Security
         {
             if (requestSecurityToken == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("requestSecurityToken");
             }
 
@@ -49,8 +48,7 @@ namespace System.ServiceModel.Security
 
             if (serializationContext == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("serializationContext");
             }
 

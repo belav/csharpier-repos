@@ -33,8 +33,7 @@ namespace System.Net.Quic.Tests
         public CertificateSetup()
         {
             Configuration.Certificates.CleanupCertificates(nameof(MsQuicTests));
-            (serverCert, serverChain) = Configuration
-                .Certificates
+            (serverCert, serverChain) = Configuration.Certificates
                 .GenerateCertificates("localhost", nameof(MsQuicTests), longChain: true);
         }
 
@@ -213,9 +212,8 @@ namespace System.Net.Quic.Tests
         [Fact]
         public async Task ConnectWithCertificateChain()
         {
-            (X509Certificate2 certificate, X509Certificate2Collection chain) = Configuration
-                .Certificates
-                .GenerateCertificates("localhost", longChain: true);
+            (X509Certificate2 certificate, X509Certificate2Collection chain) =
+                Configuration.Certificates.GenerateCertificates("localhost", longChain: true);
             try
             {
                 X509Certificate2 rootCA = chain[chain.Count - 1];
@@ -353,8 +351,7 @@ namespace System.Net.Quic.Tests
                 RevocationMode = X509RevocationMode.NoCheck,
                 TrustMode = X509ChainTrustMode.CustomRootTrust,
             };
-            clientSslOptions
-                .CertificateChainPolicy
+            clientSslOptions.CertificateChainPolicy
                 .CustomTrustStore
                 .Add(_certificates.serverChain[_certificates.serverChain.Count - 1]);
             // Add only one CA to verify that peer did send intermediate CA cert.
@@ -363,8 +360,7 @@ namespace System.Net.Quic.Tests
             {
                 for (int i = split; i < _certificates.serverChain.Count - 1; i++)
                 {
-                    clientSslOptions
-                        .CertificateChainPolicy
+                    clientSslOptions.CertificateChainPolicy
                         .ExtraStore
                         .Add(_certificates.serverChain[i]);
                 }
@@ -489,15 +485,13 @@ namespace System.Net.Quic.Tests
         [Fact]
         public async Task ConnectWithServerCertificateCallback()
         {
-            using X509Certificate2 c1 = System
-                .Net
+            using X509Certificate2 c1 = System.Net
                 .Test
                 .Common
                 .Configuration
                 .Certificates
                 .GetServerCertificate();
-            using X509Certificate2 c2 = System
-                .Net
+            using X509Certificate2 c2 = System.Net
                 .Test
                 .Common
                 .Configuration
@@ -597,8 +591,7 @@ namespace System.Net.Quic.Tests
         [InlineData("localhost")]
         public async Task ConnectWithIpSetsSni(string destination)
         {
-            using X509Certificate2 certificate = System
-                .Net
+            using X509Certificate2 certificate = System.Net
                 .Test
                 .Common
                 .Configuration
@@ -645,9 +638,8 @@ namespace System.Net.Quic.Tests
         [Fact]
         public async Task ConnectWithCertificateForDifferentName_Throws()
         {
-            (X509Certificate2 certificate, X509Certificate2Collection chain) = Configuration
-                .Certificates
-                .GenerateCertificates("localhost");
+            (X509Certificate2 certificate, X509Certificate2Collection chain) =
+                Configuration.Certificates.GenerateCertificates("localhost");
             try
             {
                 var quicOptions = new QuicListenerOptions()
@@ -717,9 +709,9 @@ namespace System.Net.Quic.Tests
                 throw new SkipTestException("IPv6 is not available on this platform");
             }
 
-            (X509Certificate2 certificate, X509Certificate2Collection chain) = Configuration
-                .Certificates
-                .GenerateCertificates(expectsError ? "badhost" : "localhost");
+            (X509Certificate2 certificate, X509Certificate2Collection chain) =
+                Configuration.Certificates
+                    .GenerateCertificates(expectsError ? "badhost" : "localhost");
             try
             {
                 var listenerOptions = new QuicListenerOptions()
@@ -1683,8 +1675,7 @@ namespace System.Net.Quic.Tests
         {
             string expectedHostName = shouldSendSni ? hostname : string.Empty;
 
-            using X509Certificate serverCert = Configuration
-                .Certificates
+            using X509Certificate serverCert = Configuration.Certificates
                 .GetSelfSignedServerCertificate();
             var listenerOptions = new QuicListenerOptions()
             {

@@ -19,8 +19,7 @@ internal static partial class Interop
         /// <remarks>
         /// For more information, see the Apple documentation: https://developer.apple.com/library/mac/documentation/CoreFoundation/Reference/CFRunLoopRef/index.html
         /// </remarks>
-        internal static SafeCreateHandle kCFRunLoopDefaultMode = Interop
-            .CoreFoundation
+        internal static SafeCreateHandle kCFRunLoopDefaultMode = Interop.CoreFoundation
             .CFStringCreateWithCString("kCFRunLoopDefaultMode");
 
         /// <summary>

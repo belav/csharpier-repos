@@ -229,8 +229,7 @@ namespace System.Text.Json.Serialization.Tests
     {
         public TestClassWithNestedObjectInner MyData { get; set; }
 
-        public static readonly byte[] s_data = Encoding
-            .UTF8
+        public static readonly byte[] s_data = Encoding.UTF8
             .GetBytes(@"{" + @"""MyData"":" + TestClassWithNestedObjectInner.s_json + @"}");
 
         public void Initialize()
@@ -250,8 +249,7 @@ namespace System.Text.Json.Serialization.Tests
     {
         public List<SimpleTestClass> MyData { get; set; }
 
-        public static readonly byte[] s_data = Encoding
-            .UTF8
+        public static readonly byte[] s_data = Encoding.UTF8
             .GetBytes(
                 @"{"
                     + @"""MyData"":["
@@ -295,8 +293,7 @@ namespace System.Text.Json.Serialization.Tests
     {
         public SimpleTestClass[] MyData { get; set; }
 
-        public static readonly byte[] s_data = Encoding
-            .UTF8
+        public static readonly byte[] s_data = Encoding.UTF8
             .GetBytes(
                 @"{"
                     + @"""MyData"":["
@@ -330,8 +327,7 @@ namespace System.Text.Json.Serialization.Tests
     {
         public IEnumerable<SimpleTestClass> MyData { get; set; }
 
-        public static readonly byte[] s_data = Encoding
-            .UTF8
+        public static readonly byte[] s_data = Encoding.UTF8
             .GetBytes(
                 @"{"
                     + @"""MyData"":["
@@ -371,8 +367,7 @@ namespace System.Text.Json.Serialization.Tests
     {
         public IList<SimpleTestClass> MyData { get; set; }
 
-        public static readonly byte[] s_data = Encoding
-            .UTF8
+        public static readonly byte[] s_data = Encoding.UTF8
             .GetBytes(
                 @"{"
                     + @"""MyData"":["
@@ -412,8 +407,7 @@ namespace System.Text.Json.Serialization.Tests
     {
         public ICollection<SimpleTestClass> MyData { get; set; }
 
-        public static readonly byte[] s_data = Encoding
-            .UTF8
+        public static readonly byte[] s_data = Encoding.UTF8
             .GetBytes(
                 @"{"
                     + @"""MyData"":["
@@ -456,8 +450,7 @@ namespace System.Text.Json.Serialization.Tests
     {
         public IEnumerable MyData { get; set; }
 
-        public static readonly byte[] s_data = Encoding
-            .UTF8
+        public static readonly byte[] s_data = Encoding.UTF8
             .GetBytes(
                 @"{"
                     + @"""MyData"":["
@@ -489,8 +482,7 @@ namespace System.Text.Json.Serialization.Tests
 #if BUILDING_SOURCE_GENERATOR_TESTS
                     SimpleTestClass obj = JsonSerializer.Deserialize(
                         element,
-                        System
-                            .Text
+                        System.Text
                             .Json
                             .SourceGeneration
                             .Tests
@@ -518,8 +510,7 @@ namespace System.Text.Json.Serialization.Tests
     {
         public IList MyData { get; set; }
 
-        public static readonly byte[] s_data = Encoding
-            .UTF8
+        public static readonly byte[] s_data = Encoding.UTF8
             .GetBytes(
                 @"{"
                     + @"""MyData"":["
@@ -557,8 +548,7 @@ namespace System.Text.Json.Serialization.Tests
 #if BUILDING_SOURCE_GENERATOR_TESTS
                     SimpleTestClass obj = JsonSerializer.Deserialize(
                         element,
-                        System
-                            .Text
+                        System.Text
                             .Json
                             .SourceGeneration
                             .Tests
@@ -586,8 +576,7 @@ namespace System.Text.Json.Serialization.Tests
     {
         public ICollection MyData { get; set; }
 
-        public static readonly byte[] s_data = Encoding
-            .UTF8
+        public static readonly byte[] s_data = Encoding.UTF8
             .GetBytes(
                 @"{"
                     + @"""MyData"":["
@@ -627,8 +616,7 @@ namespace System.Text.Json.Serialization.Tests
 #if BUILDING_SOURCE_GENERATOR_TESTS
                     SimpleTestClass obj = JsonSerializer.Deserialize(
                         element,
-                        System
-                            .Text
+                        System.Text
                             .Json
                             .SourceGeneration
                             .Tests
@@ -656,8 +644,7 @@ namespace System.Text.Json.Serialization.Tests
     {
         public IReadOnlyCollection<SimpleTestClass> MyData { get; set; }
 
-        public static readonly byte[] s_data = Encoding
-            .UTF8
+        public static readonly byte[] s_data = Encoding.UTF8
             .GetBytes(
                 @"{"
                     + @"""MyData"":["
@@ -694,8 +681,7 @@ namespace System.Text.Json.Serialization.Tests
     {
         public IReadOnlyList<SimpleTestClass> MyData { get; set; }
 
-        public static readonly byte[] s_data = Encoding
-            .UTF8
+        public static readonly byte[] s_data = Encoding.UTF8
             .GetBytes(
                 @"{"
                     + @"""MyData"":["
@@ -729,8 +715,7 @@ namespace System.Text.Json.Serialization.Tests
     {
         public ISet<SimpleTestClass> MyData { get; set; }
 
-        public static readonly byte[] s_data = Encoding
-            .UTF8
+        public static readonly byte[] s_data = Encoding.UTF8
             .GetBytes(
                 @"{"
                     + @"""MyData"":["
@@ -793,8 +778,7 @@ namespace System.Text.Json.Serialization.Tests
     {
         public string[] MyData { get; set; }
 
-        public static readonly byte[] s_data = Encoding
-            .UTF8
+        public static readonly byte[] s_data = Encoding.UTF8
             .GetBytes(@"{" + @"""MyData"":[" + @"""Hello""," + @"""World""" + @"]" + @"}");
 
         public void Initialize()
@@ -814,8 +798,7 @@ namespace System.Text.Json.Serialization.Tests
     {
         public List<string> MyData { get; set; }
 
-        public static readonly byte[] s_data = Encoding
-            .UTF8
+        public static readonly byte[] s_data = Encoding.UTF8
             .GetBytes(@"{" + @"""MyData"":[" + @"""Hello""," + @"""World""" + @"]" + @"}");
 
         public void Initialize()
@@ -836,8 +819,7 @@ namespace System.Text.Json.Serialization.Tests
     {
         public IEnumerable MyData { get; set; }
 
-        public static readonly byte[] s_data = Encoding
-            .UTF8
+        public static readonly byte[] s_data = Encoding.UTF8
             .GetBytes(@"{" + @"""MyData"":[" + @"""Hello""," + @"""World""" + @"]" + @"}");
 
         public void Initialize()
@@ -876,8 +858,7 @@ namespace System.Text.Json.Serialization.Tests
     {
         public IList MyData { get; set; }
 
-        public static readonly byte[] s_data = Encoding
-            .UTF8
+        public static readonly byte[] s_data = Encoding.UTF8
             .GetBytes(@"{" + @"""MyData"":[" + @"""Hello""," + @"""World""" + @"]" + @"}");
 
         public void Initialize()
@@ -910,8 +891,7 @@ namespace System.Text.Json.Serialization.Tests
     {
         public ICollection MyData { get; set; }
 
-        public static readonly byte[] s_data = Encoding
-            .UTF8
+        public static readonly byte[] s_data = Encoding.UTF8
             .GetBytes(@"{" + @"""MyData"":[" + @"""Hello""," + @"""World""" + @"]" + @"}");
 
         public void Initialize()
@@ -944,8 +924,7 @@ namespace System.Text.Json.Serialization.Tests
     {
         public IEnumerable<string> MyData { get; set; }
 
-        public static readonly byte[] s_data = Encoding
-            .UTF8
+        public static readonly byte[] s_data = Encoding.UTF8
             .GetBytes(@"{" + @"""MyData"":[" + @"""Hello""," + @"""World""" + @"]" + @"}");
 
         public void Initialize()
@@ -979,8 +958,7 @@ namespace System.Text.Json.Serialization.Tests
     {
         public IList<string> MyData { get; set; }
 
-        public static readonly byte[] s_data = Encoding
-            .UTF8
+        public static readonly byte[] s_data = Encoding.UTF8
             .GetBytes(@"{" + @"""MyData"":[" + @"""Hello""," + @"""World""" + @"]" + @"}");
 
         public void Initialize()
@@ -1001,8 +979,7 @@ namespace System.Text.Json.Serialization.Tests
     {
         public ICollection<string> MyData { get; set; }
 
-        public static readonly byte[] s_data = Encoding
-            .UTF8
+        public static readonly byte[] s_data = Encoding.UTF8
             .GetBytes(@"{" + @"""MyData"":[" + @"""Hello""," + @"""World""" + @"]" + @"}");
 
         public void Initialize()
@@ -1029,8 +1006,7 @@ namespace System.Text.Json.Serialization.Tests
     {
         public IReadOnlyCollection<string> MyData { get; set; }
 
-        public static readonly byte[] s_data = Encoding
-            .UTF8
+        public static readonly byte[] s_data = Encoding.UTF8
             .GetBytes(@"{" + @"""MyData"":[" + @"""Hello""," + @"""World""" + @"]" + @"}");
 
         public void Initialize()
@@ -1057,8 +1033,7 @@ namespace System.Text.Json.Serialization.Tests
     {
         public IReadOnlyList<string> MyData { get; set; }
 
-        public static readonly byte[] s_data = Encoding
-            .UTF8
+        public static readonly byte[] s_data = Encoding.UTF8
             .GetBytes(@"{" + @"""MyData"":[" + @"""Hello""," + @"""World""" + @"]" + @"}");
 
         public void Initialize()
@@ -1079,8 +1054,7 @@ namespace System.Text.Json.Serialization.Tests
     {
         public ISet<string> MyData { get; set; }
 
-        public static readonly byte[] s_data = Encoding
-            .UTF8
+        public static readonly byte[] s_data = Encoding.UTF8
             .GetBytes(@"{" + @"""MyData"":[" + @"""Hello""," + @"""World""" + @"]" + @"}");
 
         public void Initialize()
@@ -1130,8 +1104,7 @@ namespace System.Text.Json.Serialization.Tests
         public IReadOnlyDictionary<string, double> MyDoubleIReadOnlyDict { get; set; }
         public IReadOnlyDictionary<string, DateTime> MyDateTimeIReadOnlyDict { get; set; }
 
-        public static readonly byte[] s_data = Encoding
-            .UTF8
+        public static readonly byte[] s_data = Encoding.UTF8
             .GetBytes(
                 @"{"
                     + @"""MyInt32Dict"":{"
@@ -1322,8 +1295,7 @@ namespace System.Text.Json.Serialization.Tests
         public HashSet<SimpleTestClass> MyHashSet { get; set; }
         public LinkedList<SimpleTestClass> MyLinkedList { get; set; }
 
-        public static readonly byte[] s_data = Encoding
-            .UTF8
+        public static readonly byte[] s_data = Encoding.UTF8
             .GetBytes(
                 @"{"
                     + @"""MyStack"":["
@@ -1440,8 +1412,7 @@ namespace System.Text.Json.Serialization.Tests
         public ImmutableStack<SimpleTestClass> MyImmutableStack { get; set; }
         public ImmutableQueue<SimpleTestClass> MyImmutableQueue { get; set; }
 
-        public static readonly byte[] s_data = Encoding
-            .UTF8
+        public static readonly byte[] s_data = Encoding.UTF8
             .GetBytes(
                 @"{"
                     + @"""MyImmutableArray"":["
@@ -1667,8 +1638,7 @@ namespace System.Text.Json.Serialization.Tests
     {
         public Int16 MyInt16 { get; set; }
 
-        public static readonly byte[] s_data = Encoding
-            .UTF8
+        public static readonly byte[] s_data = Encoding.UTF8
             .GetBytes(@"{" + @"""blah"" : 1" + @"}");
     }
 
@@ -1782,8 +1752,7 @@ namespace System.Text.Json.Serialization.Tests
             Assert.Equal(98052, address.zip);
         }
 
-        public static readonly byte[] s_data = Encoding
-            .UTF8
+        public static readonly byte[] s_data = Encoding.UTF8
             .GetBytes(
                 "{"
                     + @"""age"" : 30,"
@@ -1815,8 +1784,7 @@ namespace System.Text.Json.Serialization.Tests
         public BasicJsonAddress mainSite { get; set; }
         public string name { get; set; }
 
-        public static readonly byte[] s_data = Encoding
-            .UTF8
+        public static readonly byte[] s_data = Encoding.UTF8
             .GetBytes(
                 "{\n"
                     + @"""name"" : ""Microsoft"","
@@ -1953,8 +1921,7 @@ namespace System.Text.Json.Serialization.Tests
     {
         public TestClassWithNestedObjectCommentsInner MyData { get; set; }
 
-        public static readonly byte[] s_data = Encoding
-            .UTF8
+        public static readonly byte[] s_data = Encoding.UTF8
             .GetBytes(
                 @"{"
                     + " // This } will be ignored\n"
@@ -2381,8 +2348,7 @@ namespace System.Text.Json.Serialization.Tests
 
         public void Verify()
         {
-            JsonElement[] array = Document
-                .RootElement
+            JsonElement[] array = Document.RootElement
                 .GetProperty("Array")
                 .EnumerateArray()
                 .ToArray();

@@ -853,8 +853,7 @@ public abstract class ManyToManyQueryTestBase<TFixture> : QueryTestBase<TFixture
                                     .ThenInclude(e => e.ThreeSkipPayloadFull)
                     )
                 )
-            )
-                .Message
+            ).Message
                 .Replace("\r", "")
                 .Replace("\n", "")
         );
@@ -884,8 +883,7 @@ public abstract class ManyToManyQueryTestBase<TFixture> : QueryTestBase<TFixture
                                         .ThenInclude(e => e.ThreeSkipPayloadFull)
                     )
                 )
-            )
-                .Message
+            ).Message
                 .Replace("\r", "")
                 .Replace("\n", "")
         );
@@ -1055,8 +1053,7 @@ public abstract class ManyToManyQueryTestBase<TFixture> : QueryTestBase<TFixture
                                         .ThenInclude(e => e.Collection.Where(i => i.Id < 10))
                     )
                 )
-            )
-                .Message
+            ).Message
                 .Replace("\r", "")
                 .Replace("\n", "")
         );
@@ -1147,9 +1144,8 @@ public abstract class ManyToManyQueryTestBase<TFixture> : QueryTestBase<TFixture
             ss =>
                 ss.Set<UnidirectionalEntityOne>()
                     .Where(e =>
-                        e.ThreeSkipPayloadFullShared.Contains(
-                            new UnidirectionalEntityThree { Id = 1 }
-                        )
+                        e.ThreeSkipPayloadFullShared
+                            .Contains(new UnidirectionalEntityThree { Id = 1 })
                     ),
             ss =>
                 ss.Set<UnidirectionalEntityOne>()
@@ -1586,8 +1582,7 @@ public abstract class ManyToManyQueryTestBase<TFixture> : QueryTestBase<TFixture
                                 )
                     )
                 )
-            )
-                .Message
+            ).Message
                 .Replace("\r", "")
                 .Replace("\n", "")
         );

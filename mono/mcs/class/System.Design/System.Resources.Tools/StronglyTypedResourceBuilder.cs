@@ -284,8 +284,7 @@ namespace System.Resources.Tools
                 else if (!kvp.Value.toIgnore)
                 {
                     if (kvp.Value.Resource is Stream)
-                        resType
-                            .Members
+                        resType.Members
                             .Add(
                                 GenerateStreamResourceProp(
                                     kvp.Value.VerifiedKey,
@@ -294,8 +293,7 @@ namespace System.Resources.Tools
                                 )
                             );
                     else if (kvp.Value.Resource is String)
-                        resType
-                            .Members
+                        resType.Members
                             .Add(
                                 GenerateStringResourceProp(
                                     kvp.Value.VerifiedKey,
@@ -304,8 +302,7 @@ namespace System.Resources.Tools
                                 )
                             );
                     else
-                        resType
-                            .Members
+                        resType.Members
                             .Add(
                                 GenerateStandardResourceProp(
                                     kvp.Value.VerifiedKey,
@@ -342,8 +339,7 @@ namespace System.Resources.Tools
             resType.Members.Add(GenerateConstructor());
 
             // Default Properties
-            resType
-                .Members
+            resType.Members
                 .Add(GenerateResourceManagerProp(baseNameToUse, resourcesToUse, internalClass));
             resType.Members.Add(GenerateCultureProp(internalClass));
 
@@ -413,8 +409,7 @@ namespace System.Resources.Tools
                 resType.TypeAttributes = TypeAttributes.Public;
 
             //class CustomAttributes
-            resType
-                .CustomAttributes
+            resType.CustomAttributes
                 .Add(
                     new CodeAttributeDeclaration(
                         "System.CodeDom.Compiler.GeneratedCodeAttribute",
@@ -427,14 +422,12 @@ namespace System.Resources.Tools
                     )
                 );
 
-            resType
-                .CustomAttributes
+            resType.CustomAttributes
                 .Add(
                     new CodeAttributeDeclaration("System.Diagnostics.DebuggerNonUserCodeAttribute")
                 );
 
-            resType
-                .CustomAttributes
+            resType.CustomAttributes
                 .Add(
                     new CodeAttributeDeclaration(
                         "System.Runtime.CompilerServices.CompilerGeneratedAttribute"
@@ -478,15 +471,18 @@ namespace System.Resources.Tools
             CodeConstructor ctor = new CodeConstructor();
             ctor.Attributes = MemberAttributes.FamilyAndAssembly; // always internal
 
-            ctor.CustomAttributes.Add(
-                new CodeAttributeDeclaration(
-                    "System.Diagnostics.CodeAnalysis.SuppressMessageAttribute",
-                    new CodeAttributeArgument(new CodePrimitiveExpression("Microsoft.Performance")),
-                    new CodeAttributeArgument(
-                        new CodePrimitiveExpression("CA1811:AvoidUncalledPrivateCode")
+            ctor.CustomAttributes
+                .Add(
+                    new CodeAttributeDeclaration(
+                        "System.Diagnostics.CodeAnalysis.SuppressMessageAttribute",
+                        new CodeAttributeArgument(
+                            new CodePrimitiveExpression("Microsoft.Performance")
+                        ),
+                        new CodeAttributeArgument(
+                            new CodePrimitiveExpression("CA1811:AvoidUncalledPrivateCode")
+                        )
                     )
-                )
-            );
+                );
 
             return ctor;
         }
@@ -522,8 +518,7 @@ namespace System.Resources.Tools
             cultureProp.CustomAttributes.Add(DefaultPropertyAttribute());
 
             // getter
-            cultureProp
-                .GetStatements
+            cultureProp.GetStatements
                 .Add(
                     new CodeMethodReturnStatement(
                         new CodeFieldReferenceExpression(null, "resourceCulture")
@@ -531,8 +526,7 @@ namespace System.Resources.Tools
                 );
 
             // setter
-            cultureProp
-                .SetStatements
+            cultureProp.SetStatements
                 .Add(
                     new CodeAssignStatement(
                         new CodeFieldReferenceExpression(null, "resourceCulture"),
@@ -582,8 +576,7 @@ namespace System.Resources.Tools
                 new CodeVariableReferenceExpression("temp")
             );
 
-            resourceManagerProp
-                .GetStatements
+            resourceManagerProp.GetStatements
                 .Add(
                     new CodeConditionStatement(
                         new CodeMethodInvokeExpression(
@@ -598,8 +591,7 @@ namespace System.Resources.Tools
                     )
                 );
 
-            resourceManagerProp
-                .GetStatements
+            resourceManagerProp.GetStatements
                 .Add(
                     new CodeMethodReturnStatement(
                         new CodeFieldReferenceExpression(null, "resourceMan")
@@ -624,27 +616,29 @@ namespace System.Resources.Tools
                 false
             );
 
-            prop.GetStatements.Add(
-                new CodeVariableDeclarationStatement(
-                    new CodeTypeReference("System.Object"),
-                    "obj",
-                    new CodeMethodInvokeExpression(
-                        new CodePropertyReferenceExpression(null, "ResourceManager"),
-                        "GetObject",
-                        new CodePrimitiveExpression(resName),
-                        new CodeFieldReferenceExpression(null, "resourceCulture")
+            prop.GetStatements
+                .Add(
+                    new CodeVariableDeclarationStatement(
+                        new CodeTypeReference("System.Object"),
+                        "obj",
+                        new CodeMethodInvokeExpression(
+                            new CodePropertyReferenceExpression(null, "ResourceManager"),
+                            "GetObject",
+                            new CodePrimitiveExpression(resName),
+                            new CodeFieldReferenceExpression(null, "resourceCulture")
+                        )
                     )
-                )
-            );
+                );
 
-            prop.GetStatements.Add(
-                new CodeMethodReturnStatement(
-                    new CodeCastExpression(
-                        new CodeTypeReference(propertyType),
-                        new CodeVariableReferenceExpression("obj")
+            prop.GetStatements
+                .Add(
+                    new CodeMethodReturnStatement(
+                        new CodeCastExpression(
+                            new CodeTypeReference(propertyType),
+                            new CodeVariableReferenceExpression("obj")
+                        )
                     )
-                )
-            );
+                );
 
             return prop;
         }
@@ -663,18 +657,19 @@ namespace System.Resources.Tools
                 false
             );
 
-            prop.GetStatements.Add(
-                new CodeMethodReturnStatement(
-                    new CodeMethodInvokeExpression(
-                        new CodeMethodReferenceExpression(
-                            new CodePropertyReferenceExpression(null, "ResourceManager"),
-                            "GetString"
-                        ),
-                        new CodePrimitiveExpression(resName),
-                        new CodeFieldReferenceExpression(null, "resourceCulture")
+            prop.GetStatements
+                .Add(
+                    new CodeMethodReturnStatement(
+                        new CodeMethodInvokeExpression(
+                            new CodeMethodReferenceExpression(
+                                new CodePropertyReferenceExpression(null, "ResourceManager"),
+                                "GetString"
+                            ),
+                            new CodePrimitiveExpression(resName),
+                            new CodeFieldReferenceExpression(null, "resourceCulture")
+                        )
                     )
-                )
-            );
+                );
 
             return prop;
         }
@@ -693,18 +688,19 @@ namespace System.Resources.Tools
                 false
             );
 
-            prop.GetStatements.Add(
-                new CodeMethodReturnStatement(
-                    new CodeMethodInvokeExpression(
-                        new CodeMethodReferenceExpression(
-                            new CodePropertyReferenceExpression(null, "ResourceManager"),
-                            "GetStream"
-                        ),
-                        new CodePrimitiveExpression(resName),
-                        new CodeFieldReferenceExpression(null, "resourceCulture")
+            prop.GetStatements
+                .Add(
+                    new CodeMethodReturnStatement(
+                        new CodeMethodInvokeExpression(
+                            new CodeMethodReferenceExpression(
+                                new CodePropertyReferenceExpression(null, "ResourceManager"),
+                                "GetStream"
+                            ),
+                            new CodePrimitiveExpression(resName),
+                            new CodeFieldReferenceExpression(null, "resourceCulture")
+                        )
                     )
-                )
-            );
+                );
 
             return prop;
         }

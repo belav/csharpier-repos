@@ -51,21 +51,18 @@ namespace System.Net.Configuration
         protected override void InitializeDefault()
         {
 #if !FEATURE_PAL // Security
-            this.AuthenticationModules.Add(
-                new AuthenticationModuleElement(typeof(NegotiateClient).AssemblyQualifiedName)
-            );
-            this.AuthenticationModules.Add(
-                new AuthenticationModuleElement(typeof(KerberosClient).AssemblyQualifiedName)
-            );
-            this.AuthenticationModules.Add(
-                new AuthenticationModuleElement(typeof(NtlmClient).AssemblyQualifiedName)
-            );
-            this.AuthenticationModules.Add(
-                new AuthenticationModuleElement(typeof(DigestClient).AssemblyQualifiedName)
-            );
-            this.AuthenticationModules.Add(
-                new AuthenticationModuleElement(typeof(BasicClient).AssemblyQualifiedName)
-            );
+            this.AuthenticationModules
+                .Add(
+                    new AuthenticationModuleElement(typeof(NegotiateClient).AssemblyQualifiedName)
+                );
+            this.AuthenticationModules
+                .Add(new AuthenticationModuleElement(typeof(KerberosClient).AssemblyQualifiedName));
+            this.AuthenticationModules
+                .Add(new AuthenticationModuleElement(typeof(NtlmClient).AssemblyQualifiedName));
+            this.AuthenticationModules
+                .Add(new AuthenticationModuleElement(typeof(DigestClient).AssemblyQualifiedName));
+            this.AuthenticationModules
+                .Add(new AuthenticationModuleElement(typeof(BasicClient).AssemblyQualifiedName));
 #endif // !FEATURE_PAL // Security
         }
 

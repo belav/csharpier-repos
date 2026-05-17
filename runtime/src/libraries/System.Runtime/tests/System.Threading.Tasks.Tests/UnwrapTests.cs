@@ -408,29 +408,30 @@ namespace System.Threading.Tasks.Tests
         public void NonGeneric_AttachedToParent()
         {
             Exception error = new InvalidTimeZoneException();
-            Task parent = Task.Factory.StartNew(
-                () =>
-                {
-                    var outerTcs = new TaskCompletionSource<Task>(
-                        TaskCreationOptions.AttachedToParent
-                    );
-                    Task<Task> outer = outerTcs.Task;
+            Task parent = Task.Factory
+                .StartNew(
+                    () =>
+                    {
+                        var outerTcs = new TaskCompletionSource<Task>(
+                            TaskCreationOptions.AttachedToParent
+                        );
+                        Task<Task> outer = outerTcs.Task;
 
-                    Task inner = Task.FromException(error);
+                        Task inner = Task.FromException(error);
 
-                    Task unwrappedInner = outer.Unwrap();
-                    Assert.Equal(
-                        TaskCreationOptions.AttachedToParent,
-                        unwrappedInner.CreationOptions
-                    );
+                        Task unwrappedInner = outer.Unwrap();
+                        Assert.Equal(
+                            TaskCreationOptions.AttachedToParent,
+                            unwrappedInner.CreationOptions
+                        );
 
-                    outerTcs.SetResult(inner);
-                    AssertTasksAreEqual(inner, unwrappedInner);
-                },
-                CancellationToken.None,
-                TaskCreationOptions.None,
-                TaskScheduler.Default
-            );
+                        outerTcs.SetResult(inner);
+                        AssertTasksAreEqual(inner, unwrappedInner);
+                    },
+                    CancellationToken.None,
+                    TaskCreationOptions.None,
+                    TaskScheduler.Default
+                );
             WaitNoThrow(parent);
             Assert.Equal(TaskStatus.Faulted, parent.Status);
             Assert.Same(error, parent.Exception.Flatten().InnerException);
@@ -443,29 +444,30 @@ namespace System.Threading.Tasks.Tests
         public void Generic_AttachedToParent()
         {
             Exception error = new InvalidTimeZoneException();
-            Task parent = Task.Factory.StartNew(
-                () =>
-                {
-                    var outerTcs = new TaskCompletionSource<Task<object>>(
-                        TaskCreationOptions.AttachedToParent
-                    );
-                    Task<Task<object>> outer = outerTcs.Task;
+            Task parent = Task.Factory
+                .StartNew(
+                    () =>
+                    {
+                        var outerTcs = new TaskCompletionSource<Task<object>>(
+                            TaskCreationOptions.AttachedToParent
+                        );
+                        Task<Task<object>> outer = outerTcs.Task;
 
-                    Task<object> inner = Task.FromException<object>(error);
+                        Task<object> inner = Task.FromException<object>(error);
 
-                    Task<object> unwrappedInner = outer.Unwrap();
-                    Assert.Equal(
-                        TaskCreationOptions.AttachedToParent,
-                        unwrappedInner.CreationOptions
-                    );
+                        Task<object> unwrappedInner = outer.Unwrap();
+                        Assert.Equal(
+                            TaskCreationOptions.AttachedToParent,
+                            unwrappedInner.CreationOptions
+                        );
 
-                    outerTcs.SetResult(inner);
-                    AssertTasksAreEqual(inner, unwrappedInner);
-                },
-                CancellationToken.None,
-                TaskCreationOptions.None,
-                TaskScheduler.Default
-            );
+                        outerTcs.SetResult(inner);
+                        AssertTasksAreEqual(inner, unwrappedInner);
+                    },
+                    CancellationToken.None,
+                    TaskCreationOptions.None,
+                    TaskScheduler.Default
+                );
             WaitNoThrow(parent);
             Assert.Equal(TaskStatus.Faulted, parent.Status);
             Assert.Same(error, parent.Exception.Flatten().InnerException);
@@ -484,12 +486,13 @@ namespace System.Threading.Tasks.Tests
                     {
                         int initialCallCount = scheduler.QueueTaskCalls;
 
-                        Task<Task> outer = Task.Factory.StartNew(
-                            () => Task.Run(() => { }),
-                            CancellationToken.None,
-                            TaskCreationOptions.None,
-                            TaskScheduler.Default
-                        );
+                        Task<Task> outer = Task.Factory
+                            .StartNew(
+                                () => Task.Run(() => { }),
+                                CancellationToken.None,
+                                TaskCreationOptions.None,
+                                TaskScheduler.Default
+                            );
                         Task unwrappedInner = outer.Unwrap();
                         unwrappedInner.Wait();
 
@@ -516,12 +519,13 @@ namespace System.Threading.Tasks.Tests
                     {
                         int initialCallCount = scheduler.QueueTaskCalls;
 
-                        Task<Task<int>> outer = Task.Factory.StartNew(
-                            () => Task.Run(() => 42),
-                            CancellationToken.None,
-                            TaskCreationOptions.None,
-                            TaskScheduler.Default
-                        );
+                        Task<Task<int>> outer = Task.Factory
+                            .StartNew(
+                                () => Task.Run(() => 42),
+                                CancellationToken.None,
+                                TaskCreationOptions.None,
+                                TaskScheduler.Default
+                            );
                         Task<int> unwrappedInner = outer.Unwrap();
                         unwrappedInner.Wait();
 

@@ -38,8 +38,7 @@ var builder = WebApplication.CreateBuilder(args);
 var connectionString =
     builder.Configuration.GetConnectionString("DefaultConnection")
     ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
-builder
-    .Services
+builder.Services
     .AddDbContext<ApplicationDbContext>(options =>
 #if (UseLocalDB)
         options.UseSqlServer(connectionString));
@@ -48,16 +47,14 @@ builder
 #endif
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder
-    .Services
+builder.Services
     .AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>();
 #elif (OrganizationalAuth)
 #if (GenerateApiOrGraph)
 var initialScopes = builder.Configuration["DownstreamApi:Scopes"]?.Split(' ');
 #endif
-builder
-    .Services
+builder.Services
     .AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
 #if (GenerateApiOrGraph)
     .AddMicrosoftIdentityWebApp(builder.Configuration.GetSection("AzureAd"))
@@ -76,8 +73,7 @@ builder
 #if (GenerateApi)
 var initialScopes = builder.Configuration["DownstreamApi:Scopes"]?.Split(' ');
 #endif
-builder
-    .Services
+builder.Services
     .AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
 #if (GenerateApi)
     .AddMicrosoftIdentityWebApp(builder.Configuration.GetSection("AzureAdB2C"))
@@ -90,8 +86,7 @@ builder
 #endif
 #if (OrganizationalAuth)
 
-builder
-    .Services
+builder.Services
     .AddAuthorization(options =>
     {
         // By default, all incoming requests will be authorized according to the default policy.
@@ -104,8 +99,7 @@ builder.Services.AddRazorPages().AddMicrosoftIdentityUI();
 
 builder.Services.AddAuthentication(NegotiateDefaults.AuthenticationScheme).AddNegotiate();
 
-builder
-    .Services
+builder.Services
     .AddAuthorization(options =>
     {
         // By default, all incoming requests will be authorized according to the default policy.

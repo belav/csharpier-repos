@@ -102,8 +102,7 @@ namespace R2RTest
                     }
                     catch (Exception ex)
                     {
-                        Console
-                            .Error
+                        Console.Error
                             .WriteLine("Error scanning folder {0}: {1}", directory, ex.Message);
                     }
                     int currentCount = Interlocked.Increment(ref folderCount);

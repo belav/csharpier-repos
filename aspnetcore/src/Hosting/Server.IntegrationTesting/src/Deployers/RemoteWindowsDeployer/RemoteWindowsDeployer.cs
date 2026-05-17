@@ -328,8 +328,7 @@ public class RemoteWindowsDeployer : ApplicationDeployer
             );
             var environmentVariables = string.Join(
                 "`,",
-                _deploymentParameters
-                    .EnvironmentVariables
+                _deploymentParameters.EnvironmentVariables
                     .Select(envVariable => $"{envVariable.Key}={envVariable.Value}")
             );
             parameterBuilder.Append(

@@ -68,8 +68,7 @@ public class DependencyInjectionMethodParameterBinding : DependencyInjectionPara
     /// <returns>The expression tree.</returns>
     public override Expression BindToParameter(ParameterBindingInfo bindingInfo)
     {
-        var serviceInstance = bindingInfo
-            .ServiceInstances
+        var serviceInstance = bindingInfo.ServiceInstances
             .FirstOrDefault(e => e.Type == ServiceType);
         if (serviceInstance != null)
         {

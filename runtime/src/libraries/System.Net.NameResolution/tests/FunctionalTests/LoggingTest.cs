@@ -19,8 +19,7 @@ namespace System.Net.NameResolution.Tests
         [Fact]
         public static void EventSource_ExistsWithCorrectId()
         {
-            Type esType = typeof(Dns)
-                .Assembly
+            Type esType = typeof(Dns).Assembly
                 .GetType("System.Net.NetEventSource", throwOnError: true, ignoreCase: false);
             Assert.NotNull(esType);
 

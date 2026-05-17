@@ -217,8 +217,7 @@ namespace System.Xml.Schema
                     SendValidationEvent(Res.Sch_ContentInNill, elementName.ToString());
                     return null;
                 }
-                particle = context
-                    .ElementDecl
+                particle = context.ElementDecl
                     .ContentValidator
                     .ValidateElement(elementName, context, out errorCode);
                 if (particle == null)

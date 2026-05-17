@@ -20,8 +20,7 @@ namespace System.DirectoryServices.Protocols
             IntPtr clientcontrol,
             ref int messageNumber
         ) =>
-            Interop
-                .Ldap
+            Interop.Ldap
                 .ldap_add(ldapHandle, dn, attrs, servercontrol, clientcontrol, ref messageNumber);
 
         internal static int CompareDirectoryEntries(
@@ -34,8 +33,7 @@ namespace System.DirectoryServices.Protocols
             IntPtr clientcontrol,
             ref int messageNumber
         ) =>
-            Interop
-                .Ldap
+            Interop.Ldap
                 .ldap_compare(
                     ldapHandle,
                     dn,
@@ -67,8 +65,7 @@ namespace System.DirectoryServices.Protocols
             IntPtr clientcontrol,
             ref int messageNumber
         ) =>
-            Interop
-                .Ldap
+            Interop.Ldap
                 .ldap_delete_ext(ldapHandle, dn, servercontrol, clientcontrol, ref messageNumber);
 
         internal static int ExtendedDirectoryOperation(
@@ -79,8 +76,7 @@ namespace System.DirectoryServices.Protocols
             IntPtr clientcontrol,
             ref int messageNumber
         ) =>
-            Interop
-                .Ldap
+            Interop.Ldap
                 .ldap_extended_operation(
                     ldapHandle,
                     oid,
@@ -161,8 +157,7 @@ namespace System.DirectoryServices.Protocols
             IntPtr clientcontrol,
             ref int messageNumber
         ) =>
-            Interop
-                .Ldap
+            Interop.Ldap
                 .ldap_modify(
                     ldapHandle,
                     dn,
@@ -210,8 +205,7 @@ namespace System.DirectoryServices.Protocols
             ref IntPtr control,
             byte freeIt
         ) =>
-            Interop
-                .Ldap
+            Interop.Ldap
                 .ldap_parse_result(
                     ldapHandle,
                     result,
@@ -233,8 +227,7 @@ namespace System.DirectoryServices.Protocols
             IntPtr control,
             byte freeIt
         ) =>
-            Interop
-                .Ldap
+            Interop.Ldap
                 .ldap_parse_result_referral(
                     ldapHandle,
                     result,
@@ -256,8 +249,7 @@ namespace System.DirectoryServices.Protocols
             IntPtr clientcontrol,
             ref int messageNumber
         ) =>
-            Interop
-                .Ldap
+            Interop.Ldap
                 .ldap_rename(
                     ldapHandle,
                     dn,
@@ -296,8 +288,7 @@ namespace System.DirectoryServices.Protocols
             int sizelimit,
             ref int messageNumber
         ) =>
-            Interop
-                .Ldap
+            Interop.Ldap
                 .ldap_search(
                     ldapHandle,
                     dn,
@@ -349,8 +340,7 @@ namespace System.DirectoryServices.Protocols
             IntPtr ServerControls,
             IntPtr ClientControls
         ) =>
-            Interop
-                .Ldap
+            Interop.Ldap
                 .ldap_start_tls(
                     ldapHandle,
                     ref ServerReturnValue,

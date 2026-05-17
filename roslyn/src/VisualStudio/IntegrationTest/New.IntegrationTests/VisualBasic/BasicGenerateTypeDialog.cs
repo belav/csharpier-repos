@@ -24,8 +24,7 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.VisualBasic
         public async Task BasicToCSharp()
         {
             var csProj = "CSProj";
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .AddProjectAsync(
                     csProj,
                     WellKnownProjectTemplates.ClassLibrary,
@@ -34,8 +33,7 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.VisualBasic
                 );
 
             var project = ProjectName;
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .OpenFileAsync(project, "Class1.vb", HangMitigatingCancellationToken);
 
             await SetUpEditorAsync(
@@ -48,8 +46,7 @@ End Class
 ",
                 HangMitigatingCancellationToken
             );
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .CodeActionAsync(
                     "Generate new type...",
                     applyFix: true,
@@ -58,27 +55,21 @@ End Class
                 );
 
             await TestServices.GenerateTypeDialog.VerifyOpenAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .GenerateTypeDialog
+            await TestServices.GenerateTypeDialog
                 .SetAccessibilityAsync("Public", HangMitigatingCancellationToken);
-            await TestServices
-                .GenerateTypeDialog
+            await TestServices.GenerateTypeDialog
                 .SetKindAsync("Structure", HangMitigatingCancellationToken);
-            await TestServices
-                .GenerateTypeDialog
+            await TestServices.GenerateTypeDialog
                 .SetTargetProjectAsync(csProj, HangMitigatingCancellationToken);
-            await TestServices
-                .GenerateTypeDialog
+            await TestServices.GenerateTypeDialog
                 .SetTargetFileToNewNameAsync(
                     "GenerateTypeTest.cs",
                     HangMitigatingCancellationToken
                 );
             await TestServices.GenerateTypeDialog.ClickOKAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .GenerateTypeDialog
+            await TestServices.GenerateTypeDialog
                 .VerifyClosedAsync(HangMitigatingCancellationToken);
-            var actualText = await TestServices
-                .Editor
+            var actualText = await TestServices.Editor
                 .GetTextAsync(HangMitigatingCancellationToken);
             Assert.Contains(
                 @"Imports CSProj
@@ -92,8 +83,7 @@ End Class
                 actualText
             );
 
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .OpenFileAsync(csProj, "GenerateTypeTest.cs", HangMitigatingCancellationToken);
             actualText = await TestServices.Editor.GetTextAsync(HangMitigatingCancellationToken);
             Assert.Contains(
@@ -121,8 +111,7 @@ End Class
                 HangMitigatingCancellationToken
             );
 
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .CodeActionAsync(
                     "Generate new type...",
                     applyFix: true,
@@ -132,25 +121,19 @@ End Class
             var project = ProjectName;
 
             await TestServices.GenerateTypeDialog.VerifyOpenAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .GenerateTypeDialog
+            await TestServices.GenerateTypeDialog
                 .SetAccessibilityAsync("Public", HangMitigatingCancellationToken);
-            await TestServices
-                .GenerateTypeDialog
+            await TestServices.GenerateTypeDialog
                 .SetKindAsync("Structure", HangMitigatingCancellationToken);
-            await TestServices
-                .GenerateTypeDialog
+            await TestServices.GenerateTypeDialog
                 .SetTargetFileToNewNameAsync("GenerateTypeTest", HangMitigatingCancellationToken);
             await TestServices.GenerateTypeDialog.ClickOKAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .GenerateTypeDialog
+            await TestServices.GenerateTypeDialog
                 .VerifyClosedAsync(HangMitigatingCancellationToken);
 
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .OpenFileAsync(project, "GenerateTypeTest.vb", HangMitigatingCancellationToken);
-            var actualText = await TestServices
-                .Editor
+            var actualText = await TestServices.Editor
                 .GetTextAsync(HangMitigatingCancellationToken);
             Assert.Contains(
                 @"Public Structure A
@@ -159,8 +142,7 @@ End Structure
                 actualText
             );
 
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .OpenFileAsync(project, "Class1.vb", HangMitigatingCancellationToken);
             actualText = await TestServices.Editor.GetTextAsync(HangMitigatingCancellationToken);
             Assert.Contains(
@@ -178,8 +160,7 @@ End Class
         public async Task CheckFoldersPopulateComboBox()
         {
             var project = ProjectName;
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .AddFileAsync(
                     project,
                     @"folder1\folder2\GenerateTypeTests.vb",
@@ -196,8 +177,7 @@ End Class
 ",
                 HangMitigatingCancellationToken
             );
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .CodeActionAsync(
                     "Generate new type...",
                     applyFix: true,
@@ -206,12 +186,10 @@ End Class
                 );
 
             await TestServices.GenerateTypeDialog.VerifyOpenAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .GenerateTypeDialog
+            await TestServices.GenerateTypeDialog
                 .SetTargetFileToNewNameAsync("Other", HangMitigatingCancellationToken);
 
-            var folders = await TestServices
-                .GenerateTypeDialog
+            var folders = await TestServices.GenerateTypeDialog
                 .GetNewFileComboBoxItemsAsync(HangMitigatingCancellationToken);
 
             Assert.Contains(@"\folder1\", folders);

@@ -86,8 +86,7 @@ namespace System.ServiceModel.Security
         {
             if (this.IssuerBindingContext == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(SR.IssuerBuildContextNotSet, this.GetType())

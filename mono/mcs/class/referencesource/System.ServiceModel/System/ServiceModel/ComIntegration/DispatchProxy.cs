@@ -131,8 +131,7 @@ namespace System.ServiceModel.ComIntegration
                     if (msgDesc.Body.ReturnValue != null)
                     {
                         if (string.IsNullOrEmpty(msgDesc.Body.ReturnValue.BaseType))
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
                                     new COMException(
                                         SR.GetString(
@@ -167,8 +166,7 @@ namespace System.ServiceModel.ComIntegration
                             methodInfo.paramList.Add(paramInfo);
                             methodInfo.dispIdToParamInfo[dispID] = paramInfo;
                             if (string.IsNullOrEmpty(param.BaseType))
-                                throw DiagnosticUtility
-                                    .ExceptionUtility
+                                throw DiagnosticUtility.ExceptionUtility
                                     .ThrowHelperError(
                                         new COMException(
                                             SR.GetString(
@@ -218,8 +216,7 @@ namespace System.ServiceModel.ComIntegration
             {
                 UInt32 dispID;
                 if (!nameToDisp.TryGetValue(rgszNames[index], out dispID))
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new COMException(
                                 SR.GetString(SR.OperationNotFound, rgszNames[index]),
@@ -246,8 +243,7 @@ namespace System.ServiceModel.ComIntegration
             try
             {
                 if (cNamedArgs > 0)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new COMException(
                                 SR.GetString(SR.NamedArgsNotSupported),
@@ -256,8 +252,7 @@ namespace System.ServiceModel.ComIntegration
                         );
                 MethodInfo mInfo = null;
                 if (!dispToOperationDescription.TryGetValue(dispIdMember, out mInfo))
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new COMException(
                                 SR.GetString(SR.BadDispID, dispIdMember),
@@ -269,8 +264,7 @@ namespace System.ServiceModel.ComIntegration
                 string action = null;
 
                 if (mInfo.paramList.Count != cArgs)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new COMException(
                                 SR.GetString(SR.BadDispID, dispIdMember),
@@ -328,8 +322,7 @@ namespace System.ServiceModel.ComIntegration
                         }
                         catch (ArgumentNullException)
                         {
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperArgumentNull(
                                     SR.GetString(SR.VariantArrayNull, cArgs - index - 1)
                                 );
@@ -338,8 +331,7 @@ namespace System.ServiceModel.ComIntegration
                 }
 
                 if (inCount != ins.Length)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new COMException(
                                 SR.GetString(SR.BadParamCount),
@@ -394,8 +386,7 @@ namespace System.ServiceModel.ComIntegration
                                 }
                                 catch (ArgumentNullException)
                                 {
-                                    throw DiagnosticUtility
-                                        .ExceptionUtility
+                                    throw DiagnosticUtility.ExceptionUtility
                                         .ThrowHelperArgumentNull(
                                             SR.GetString(SR.VariantArrayNull, cArgs - index - 1)
                                         );
@@ -432,8 +423,7 @@ namespace System.ServiceModel.ComIntegration
 
         object SendMessage(OperationDescription opDesc, string action, object[] ins, object[] outs)
         {
-            ProxyOperationRuntime operationRuntime = channelBuilderSettings
-                .ServiceChannel
+            ProxyOperationRuntime operationRuntime = channelBuilderSettings.ServiceChannel
                 .ClientRuntime
                 .GetRuntime()
                 .GetOperationByName(opDesc.Name);
@@ -441,8 +431,7 @@ namespace System.ServiceModel.ComIntegration
             {
                 throw Fx.AssertAndThrow("Operation runtime should not be null");
             }
-            return channelBuilderSettings
-                .ServiceChannel
+            return channelBuilderSettings.ServiceChannel
                 .Call(action, opDesc.IsOneWay, operationRuntime, ins, outs);
         }
 
@@ -466,8 +455,7 @@ namespace System.ServiceModel.ComIntegration
                 if (ret.GetType() == typeof(Int16))
                     ret = (Int32)((Int16)ret);
                 else if (ret.GetType() != typeof(Int32))
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new COMException(
                                 SR.GetString(
@@ -486,8 +474,7 @@ namespace System.ServiceModel.ComIntegration
                 else if (ret.GetType() == typeof(Int32))
                     ret = (Int64)((Int32)ret);
                 else if (ret.GetType() != typeof(Int64))
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new COMException(
                                 SR.GetString(SR.UnsupportedConversion, ret.GetType(), type),
@@ -512,8 +499,7 @@ namespace System.ServiceModel.ComIntegration
             TagVariant varBase = (TagVariant)
                 Marshal.PtrToStructure(GetDisp(baseArray, displacement), typeof(TagVariant));
             if ((varBase.vt & (ushort)(VarEnum.VT_VARIANT | VarEnum.VT_BYREF)) == 0)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new COMException(
                             SR.GetString(SR.OnlyVariantAllowedByRef),
@@ -529,8 +515,7 @@ namespace System.ServiceModel.ComIntegration
                     & (ushort)(VarEnum.VT_VARIANT | VarEnum.VT_BYREF | VarEnum.VT_ARRAY)
                 ) == 0
             )
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new COMException(
                             SR.GetString(SR.OnlyByRefVariantSafeArraysAllowed),
@@ -543,8 +528,7 @@ namespace System.ServiceModel.ComIntegration
 
             int dimensionsOfSafeArray = SafeNativeMethods.SafeArrayGetDim(pSafeArray);
             if (dimensionsOfSafeArray != 1)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new COMException(
                             SR.GetString(SR.OnlyOneDimensionalSafeArraysAllowed),
@@ -554,8 +538,7 @@ namespace System.ServiceModel.ComIntegration
 
             int sizeofElement = SafeNativeMethods.SafeArrayGetElemsize(pSafeArray);
             if (sizeofElement != Marshal.SizeOf(typeof(TagVariant)))
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new COMException(
                             SR.GetString(SR.OnlyVariantTypeElementsAllowed),
@@ -565,8 +548,7 @@ namespace System.ServiceModel.ComIntegration
 
             int lBound = SafeNativeMethods.SafeArrayGetLBound(pSafeArray, 1);
             if (lBound > 0)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new COMException(
                             SR.GetString(SR.OnlyZeroLBoundAllowed),
@@ -600,8 +582,7 @@ namespace System.ServiceModel.ComIntegration
                         if (Fx.IsFatal(e))
                             throw;
 
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new COMException(
                                     SR.GetString(
@@ -625,8 +606,7 @@ namespace System.ServiceModel.ComIntegration
                             else if (objects[i].GetType() == typeof(Int32))
                                 arr.SetValue(objects[i], i);
                             else
-                                throw DiagnosticUtility
-                                    .ExceptionUtility
+                                throw DiagnosticUtility.ExceptionUtility
                                     .ThrowHelperError(
                                         new COMException(
                                             SR.GetString(
@@ -650,8 +630,7 @@ namespace System.ServiceModel.ComIntegration
                             else if (objects[i].GetType() == typeof(Int64))
                                 arr.SetValue(objects[i], i);
                             else
-                                throw DiagnosticUtility
-                                    .ExceptionUtility
+                                throw DiagnosticUtility.ExceptionUtility
                                     .ThrowHelperError(
                                         new COMException(
                                             SR.GetString(
@@ -695,8 +674,7 @@ namespace System.ServiceModel.ComIntegration
                 TagVariant var = (TagVariant)
                     Marshal.PtrToStructure(GetDisp(baseArray, displacement), typeof(TagVariant));
                 if ((var.vt & (ushort)VarEnum.VT_VARIANT) == 0)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new COMException(
                                 SR.GetString(SR.OnlyVariantAllowedByRef),

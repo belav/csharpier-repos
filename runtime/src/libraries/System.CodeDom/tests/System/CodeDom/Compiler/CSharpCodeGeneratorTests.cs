@@ -1507,19 +1507,16 @@ namespace System.CodeDom.Compiler.Tests
                 "name"
             );
             parameterDeclarationExpression.CustomAttributes.Add(new CodeAttributeDeclaration());
-            parameterDeclarationExpression
-                .CustomAttributes
+            parameterDeclarationExpression.CustomAttributes
                 .Add(new CodeAttributeDeclaration(new CodeTypeReference("name1")));
-            parameterDeclarationExpression
-                .CustomAttributes
+            parameterDeclarationExpression.CustomAttributes
                 .Add(
                     new CodeAttributeDeclaration(
                         new CodeTypeReference("name2"),
                         new CodeAttributeArgument(new CodePrimitiveExpression(1))
                     )
                 );
-            parameterDeclarationExpression
-                .CustomAttributes
+            parameterDeclarationExpression.CustomAttributes
                 .Add(
                     new CodeAttributeDeclaration(
                         new CodeTypeReference("name3"),
@@ -1527,8 +1524,7 @@ namespace System.CodeDom.Compiler.Tests
                         new CodeAttributeArgument("arg2", new CodePrimitiveExpression(2))
                     )
                 );
-            parameterDeclarationExpression
-                .CustomAttributes
+            parameterDeclarationExpression.CustomAttributes
                 .Add(
                     new CodeAttributeDeclaration(
                         new CodeTypeReference("is"),
@@ -1555,22 +1551,18 @@ namespace System.CodeDom.Compiler.Tests
                     new CodeTypeReference("type"),
                     "name"
                 );
-                paramsParameterDeclarationExpression
-                    .CustomAttributes
+                paramsParameterDeclarationExpression.CustomAttributes
                     .Add(new CodeAttributeDeclaration());
-                paramsParameterDeclarationExpression
-                    .CustomAttributes
+                paramsParameterDeclarationExpression.CustomAttributes
                     .Add(new CodeAttributeDeclaration(new CodeTypeReference("name1")));
-                paramsParameterDeclarationExpression
-                    .CustomAttributes
+                paramsParameterDeclarationExpression.CustomAttributes
                     .Add(
                         new CodeAttributeDeclaration(
                             new CodeTypeReference("name2"),
                             new CodeAttributeArgument(new CodePrimitiveExpression(1))
                         )
                     );
-                paramsParameterDeclarationExpression
-                    .CustomAttributes
+                paramsParameterDeclarationExpression.CustomAttributes
                     .Add(
                         new CodeAttributeDeclaration(
                             new CodeTypeReference("name3"),
@@ -1578,8 +1570,7 @@ namespace System.CodeDom.Compiler.Tests
                             new CodeAttributeArgument("arg2", new CodePrimitiveExpression(2))
                         )
                     );
-                paramsParameterDeclarationExpression
-                    .CustomAttributes
+                paramsParameterDeclarationExpression.CustomAttributes
                     .Add(
                         new CodeAttributeDeclaration(
                             new CodeTypeReference("is"),
@@ -1587,8 +1578,7 @@ namespace System.CodeDom.Compiler.Tests
                             new CodeAttributeArgument("arg2", new CodePrimitiveExpression(2))
                         )
                     );
-                paramsParameterDeclarationExpression
-                    .CustomAttributes
+                paramsParameterDeclarationExpression.CustomAttributes
                     .Add(
                         new CodeAttributeDeclaration(
                             new CodeTypeReference("System.ParamArrayAttribute"),
@@ -2498,8 +2488,7 @@ namespace System.CodeDom.Compiler.Tests
                 new CodeTypeReference("type"),
                 "name"
             );
-            invalidParameterDeclarationExpression
-                .CustomAttributes
+            invalidParameterDeclarationExpression.CustomAttributes
                 .Add(
                     new CodeAttributeDeclaration(
                         new CodeTypeReference("name"),
@@ -2650,8 +2639,7 @@ namespace System.CodeDom.Compiler.Tests
                 new CodeTypeReference("type"),
                 "name"
             );
-            invalidParameterDeclarationExpression
-                .CustomAttributes
+            invalidParameterDeclarationExpression.CustomAttributes
                 .Add(
                     new CodeAttributeDeclaration(
                         new CodeTypeReference("name"),
@@ -3657,8 +3645,7 @@ namespace System.CodeDom.Compiler.Tests
             var fullStatement = new CodeExpressionStatement(new CodePrimitiveExpression(1));
             fullStatement.StartDirectives.Add(new CodeDirective());
             fullStatement.StartDirectives.Add(new CodeChecksumPragma());
-            fullStatement
-                .StartDirectives
+            fullStatement.StartDirectives
                 .Add(
                     new CodeChecksumPragma(
                         "startFileName",
@@ -3666,8 +3653,7 @@ namespace System.CodeDom.Compiler.Tests
                         new byte[0]
                     )
                 );
-            fullStatement
-                .StartDirectives
+            fullStatement.StartDirectives
                 .Add(
                     new CodeChecksumPragma(
                         "startFileName",
@@ -3676,41 +3662,30 @@ namespace System.CodeDom.Compiler.Tests
                     )
                 );
             fullStatement.StartDirectives.Add(new CodeRegionDirective());
-            fullStatement
-                .StartDirectives
+            fullStatement.StartDirectives
                 .Add(new CodeRegionDirective(CodeRegionMode.None, string.Empty));
-            fullStatement
-                .StartDirectives
+            fullStatement.StartDirectives
                 .Add(new CodeRegionDirective(CodeRegionMode.None, "startText"));
-            fullStatement
-                .StartDirectives
+            fullStatement.StartDirectives
                 .Add(new CodeRegionDirective(CodeRegionMode.Start, string.Empty));
-            fullStatement
-                .StartDirectives
+            fullStatement.StartDirectives
                 .Add(new CodeRegionDirective(CodeRegionMode.Start, "startText"));
-            fullStatement
-                .StartDirectives
+            fullStatement.StartDirectives
                 .Add(new CodeRegionDirective(CodeRegionMode.End, string.Empty));
-            fullStatement
-                .StartDirectives
+            fullStatement.StartDirectives
                 .Add(new CodeRegionDirective(CodeRegionMode.End, "startText"));
-            fullStatement
-                .StartDirectives
+            fullStatement.StartDirectives
                 .Add(new CodeRegionDirective(CodeRegionMode.None - 1, string.Empty));
-            fullStatement
-                .StartDirectives
+            fullStatement.StartDirectives
                 .Add(new CodeRegionDirective(CodeRegionMode.None - 1, "startText"));
-            fullStatement
-                .StartDirectives
+            fullStatement.StartDirectives
                 .Add(new CodeRegionDirective(CodeRegionMode.End - 1, string.Empty));
-            fullStatement
-                .StartDirectives
+            fullStatement.StartDirectives
                 .Add(new CodeRegionDirective(CodeRegionMode.End - 1, "startText"));
             fullStatement.LinePragma = new CodeLinePragma("fileName", 1);
             fullStatement.EndDirectives.Add(new CodeDirective());
             fullStatement.EndDirectives.Add(new CodeChecksumPragma());
-            fullStatement
-                .EndDirectives
+            fullStatement.EndDirectives
                 .Add(
                     new CodeChecksumPragma(
                         "endFileName",
@@ -3718,8 +3693,7 @@ namespace System.CodeDom.Compiler.Tests
                         new byte[0]
                     )
                 );
-            fullStatement
-                .EndDirectives
+            fullStatement.EndDirectives
                 .Add(
                     new CodeChecksumPragma(
                         "endFileName",
@@ -3728,33 +3702,24 @@ namespace System.CodeDom.Compiler.Tests
                     )
                 );
             fullStatement.EndDirectives.Add(new CodeRegionDirective());
-            fullStatement
-                .EndDirectives
+            fullStatement.EndDirectives
                 .Add(new CodeRegionDirective(CodeRegionMode.None, string.Empty));
-            fullStatement
-                .EndDirectives
+            fullStatement.EndDirectives
                 .Add(new CodeRegionDirective(CodeRegionMode.None, "endText"));
-            fullStatement
-                .EndDirectives
+            fullStatement.EndDirectives
                 .Add(new CodeRegionDirective(CodeRegionMode.Start, string.Empty));
-            fullStatement
-                .EndDirectives
+            fullStatement.EndDirectives
                 .Add(new CodeRegionDirective(CodeRegionMode.Start, "endText"));
-            fullStatement
-                .EndDirectives
+            fullStatement.EndDirectives
                 .Add(new CodeRegionDirective(CodeRegionMode.End, string.Empty));
             fullStatement.EndDirectives.Add(new CodeRegionDirective(CodeRegionMode.End, "endText"));
-            fullStatement
-                .EndDirectives
+            fullStatement.EndDirectives
                 .Add(new CodeRegionDirective(CodeRegionMode.None - 1, string.Empty));
-            fullStatement
-                .EndDirectives
+            fullStatement.EndDirectives
                 .Add(new CodeRegionDirective(CodeRegionMode.None - 1, "endText"));
-            fullStatement
-                .EndDirectives
+            fullStatement.EndDirectives
                 .Add(new CodeRegionDirective(CodeRegionMode.End - 1, string.Empty));
-            fullStatement
-                .EndDirectives
+            fullStatement.EndDirectives
                 .Add(new CodeRegionDirective(CodeRegionMode.End - 1, "endText"));
             yield return new object[]
             {
@@ -4172,8 +4137,7 @@ namespace System.CodeDom.Compiler.Tests
                     new CodeTypeReference("type"),
                     "name"
                 );
-                paramsParameter
-                    .CustomAttributes
+                paramsParameter.CustomAttributes
                     .Add(
                         new CodeAttributeDeclaration(
                             new CodeTypeReference("System.ParamArrayAttribute"),
@@ -4201,8 +4165,7 @@ namespace System.CodeDom.Compiler.Tests
             typeParameters.Add(new CodeTypeParameter("name"));
 
             var singleTypeParameterAttribute = new CodeTypeParameter("name");
-            singleTypeParameterAttribute
-                .CustomAttributes
+            singleTypeParameterAttribute.CustomAttributes
                 .Add(new CodeAttributeDeclaration("attribute"));
             typeParameters.Add(singleTypeParameterAttribute);
 
@@ -5961,8 +5924,7 @@ text
                 ReturnType = new CodeTypeReference("returnType"),
                 Name = "name",
             };
-            singleAttributeMethod
-                .CustomAttributes
+            singleAttributeMethod.CustomAttributes
                 .Add(new CodeAttributeDeclaration("attributeName"));
             yield return new object[]
             {
@@ -5976,8 +5938,7 @@ text
                 ReturnType = new CodeTypeReference("returnType"),
                 Name = "name",
             };
-            singleReturnTypeAttributeMethod
-                .ReturnTypeCustomAttributes
+            singleReturnTypeAttributeMethod.ReturnTypeCustomAttributes
                 .Add(new CodeAttributeDeclaration("attributeName"));
             yield return new object[]
             {
@@ -6004,8 +5965,7 @@ text
                 ReturnType = new CodeTypeReference("returnType"),
                 Name = "name",
             };
-            singleImplementationTypes
-                .ImplementationTypes
+            singleImplementationTypes.ImplementationTypes
                 .Add(new CodeTypeReference("implementationType"));
             yield return new object[]
             {
@@ -6019,8 +5979,7 @@ text
                 ReturnType = new CodeTypeReference("returnType"),
                 Name = "name",
             };
-            singleParameterMethod
-                .Parameters
+            singleParameterMethod.Parameters
                 .Add(new CodeParameterDeclarationExpression("parameterType", "parameterName"));
             yield return new object[]
             {
@@ -6034,8 +5993,7 @@ text
                 ReturnType = new CodeTypeReference("returnType"),
                 Name = "name",
             };
-            singleStatementMethod
-                .Statements
+            singleStatementMethod.Statements
                 .Add(new CodeExpressionStatement(new CodePrimitiveExpression(1)));
             yield return new object[]
             {
@@ -6094,8 +6052,7 @@ text
             fullInterface.Members.Add(new CodeSnippetTypeMember("text"));
             fullInterface.Members.Add(fullSnippet);
             fullInterface.Members.Add(new CodeMemberMethod());
-            fullInterface
-                .Members
+            fullInterface.Members
                 .Add(
                     new CodeMemberMethod
                     {
@@ -6103,8 +6060,7 @@ text
                         Name = "name",
                     }
                 );
-            fullInterface
-                .Members
+            fullInterface.Members
                 .Add(
                     new CodeMemberMethod
                     {
@@ -6113,13 +6069,11 @@ text
                         PrivateImplementationType = new CodeTypeReference("privateType"),
                     }
                 );
-            fullInterface
-                .Members
+            fullInterface.Members
                 .Add(
                     new CodeMemberMethod { ReturnType = new CodeTypeReference("as"), Name = "is" }
                 );
-            fullInterface
-                .Members
+            fullInterface.Members
                 .Add(
                     new CodeMemberMethod
                     {
@@ -6314,8 +6268,7 @@ text
             fullEnum.Members.Add(new CodeSnippetTypeMember("text"));
             fullEnum.Members.Add(fullSnippet);
             fullEnum.Members.Add(new CodeMemberMethod());
-            fullEnum
-                .Members
+            fullEnum.Members
                 .Add(
                     new CodeMemberMethod
                     {
@@ -6323,8 +6276,7 @@ text
                         Name = "name",
                     }
                 );
-            fullEnum
-                .Members
+            fullEnum.Members
                 .Add(
                     new CodeMemberMethod
                     {
@@ -6333,13 +6285,11 @@ text
                         PrivateImplementationType = new CodeTypeReference("privateType"),
                     }
                 );
-            fullEnum
-                .Members
+            fullEnum.Members
                 .Add(
                     new CodeMemberMethod { ReturnType = new CodeTypeReference("as"), Name = "is" }
                 );
-            fullEnum
-                .Members
+            fullEnum.Members
                 .Add(
                     new CodeMemberMethod
                     {
@@ -6525,8 +6475,7 @@ text
             {
                 ReturnType = new CodeTypeReference("returnType"),
             };
-            singleAttributeDelegate
-                .CustomAttributes
+            singleAttributeDelegate.CustomAttributes
                 .Add(new CodeAttributeDeclaration("attributeName"));
             yield return new object[]
             {
@@ -6539,8 +6488,7 @@ text
             {
                 ReturnType = new CodeTypeReference("returnType"),
             };
-            singleParameterDelegate
-                .Parameters
+            singleParameterDelegate.Parameters
                 .Add(new CodeParameterDeclarationExpression("parameterType", "parameterName"));
             yield return new object[]
             {
@@ -6567,8 +6515,7 @@ text
             fullDelegate.Members.Add(new CodeSnippetTypeMember("text"));
             fullDelegate.Members.Add(fullSnippet);
             fullDelegate.Members.Add(new CodeMemberMethod());
-            fullDelegate
-                .Members
+            fullDelegate.Members
                 .Add(
                     new CodeMemberMethod
                     {
@@ -6576,8 +6523,7 @@ text
                         Name = "name",
                     }
                 );
-            fullDelegate
-                .Members
+            fullDelegate.Members
                 .Add(
                     new CodeMemberMethod
                     {
@@ -6586,13 +6532,11 @@ text
                         PrivateImplementationType = new CodeTypeReference("privateType"),
                     }
                 );
-            fullDelegate
-                .Members
+            fullDelegate.Members
                 .Add(
                     new CodeMemberMethod { ReturnType = new CodeTypeReference("as"), Name = "is" }
                 );
-            fullDelegate
-                .Members
+            fullDelegate.Members
                 .Add(
                     new CodeMemberMethod
                     {
@@ -6795,8 +6739,7 @@ text
             };
 
             var singleNewTypeParameterConstraintType = new CodeTypeDeclaration("name");
-            singleNewTypeParameterConstraintType
-                .TypeParameters
+            singleNewTypeParameterConstraintType.TypeParameters
                 .Add(new CodeTypeParameter("name") { HasConstructorConstraint = true });
             yield return new object[]
             {

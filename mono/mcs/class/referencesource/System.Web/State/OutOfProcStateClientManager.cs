@@ -99,12 +99,10 @@ namespace System.Web.SessionState
 
             s_configPartitionResolverType = config.PartitionResolverType;
             s_configStateConnectionString = config.StateConnectionString;
-            s_configStateConnectionStringFileName = config
-                .ElementInformation
+            s_configStateConnectionStringFileName = config.ElementInformation
                 .Properties["stateConnectionString"]
                 .Source;
-            s_configStateConnectionStringLineNumber = config
-                .ElementInformation
+            s_configStateConnectionStringLineNumber = config.ElementInformation
                 .Properties["stateConnectionString"]
                 .LineNumber;
             s_configCompressionEnabled = config.CompressionEnabled;

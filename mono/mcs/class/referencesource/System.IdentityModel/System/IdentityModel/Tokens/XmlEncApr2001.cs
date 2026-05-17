@@ -79,9 +79,8 @@ namespace System.IdentityModel.Tokens
 
                 if (this.securityTokenSerializer.CanReadKeyIdentifier(reader))
                 {
-                    encryptingKeyIdentifier = this.securityTokenSerializer.ReadKeyIdentifier(
-                        reader
-                    );
+                    encryptingKeyIdentifier = this.securityTokenSerializer
+                        .ReadKeyIdentifier(reader);
                 }
 
                 reader.ReadStartElement(XD.XmlEncryptionDictionary.CipherData, NamespaceUri);
@@ -160,10 +159,8 @@ namespace System.IdentityModel.Tokens
 
                 if (encryptedKeyClause.EncryptingKeyIdentifier != null)
                 {
-                    this.securityTokenSerializer.WriteKeyIdentifier(
-                        writer,
-                        encryptedKeyClause.EncryptingKeyIdentifier
-                    );
+                    this.securityTokenSerializer
+                        .WriteKeyIdentifier(writer, encryptedKeyClause.EncryptingKeyIdentifier);
                 }
 
                 writer.WriteStartElement(

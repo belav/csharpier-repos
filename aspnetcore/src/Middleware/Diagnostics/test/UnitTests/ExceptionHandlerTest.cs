@@ -42,8 +42,7 @@ public class ExceptionHandlerTest
                                 innerAppBuilder.Run(
                                     async (httpContext) =>
                                     {
-                                        await httpContext
-                                            .Response
+                                        await httpContext.Response
                                             .WriteAsync("Handled error in a custom way.");
                                     }
                                 );
@@ -56,8 +55,7 @@ public class ExceptionHandlerTest
                                 {
                                     context.Response.StatusCode = (int)expectedStatusCode;
                                     context.Response.ContentType = "text/plain; charset=utf-8";
-                                    await context
-                                        .Response
+                                    await context.Response
                                         .WriteAsync("An error occurred while adding a product");
                                 }
                             )
@@ -117,8 +115,7 @@ public class ExceptionHandlerTest
                                 innerAppBuilder.Run(
                                     async (httpContext) =>
                                     {
-                                        await httpContext
-                                            .Response
+                                        await httpContext.Response
                                             .WriteAsync("Handled error in a custom way.");
                                     }
                                 );
@@ -254,16 +251,13 @@ public class ExceptionHandlerTest
                                 innerAppBuilder.Run(
                                     async (httpContext) =>
                                     {
-                                        httpContext
-                                            .Response
+                                        httpContext.Response
                                             .Headers
                                             .Add("Cache-Control", new[] { "max-age=600" });
-                                        httpContext
-                                            .Response
+                                        httpContext.Response
                                             .Headers
                                             .Add("Pragma", new[] { "max-age=600" });
-                                        httpContext
-                                            .Response
+                                        httpContext.Response
                                             .Headers
                                             .Add("Expires", new[] { expiresTime });
                                         httpContext.Response.Headers.Add("ETag", new[] { "12345" });
@@ -326,8 +320,7 @@ public class ExceptionHandlerTest
                                 innerAppBuilder.Run(
                                     async (httpContext) =>
                                     {
-                                        await httpContext
-                                            .Response
+                                        await httpContext.Response
                                             .WriteAsync("Handled error in a custom way.");
                                     }
                                 );
@@ -337,12 +330,10 @@ public class ExceptionHandlerTest
                         app.Run(
                             async (httpContext) =>
                             {
-                                httpContext
-                                    .Response
+                                httpContext.Response
                                     .Headers
                                     .Add("Cache-Control", new[] { "max-age=3600" });
-                                httpContext
-                                    .Response
+                                httpContext.Response
                                     .Headers
                                     .Add("Pragma", new[] { "max-age=3600" });
                                 httpContext.Response.Headers.Add("Expires", new[] { expiresTime });
@@ -425,13 +416,11 @@ public class ExceptionHandlerTest
 
                         app.Run(httpContext =>
                         {
-                            httpContext
-                                .Response
+                            httpContext.Response
                                 .Headers
                                 .Add("Cache-Control", new[] { "max-age=3600" });
                             httpContext.Response.Headers.Add("Pragma", new[] { "max-age=3600" });
-                            httpContext
-                                .Response
+                            httpContext.Response
                                 .Headers
                                 .Add(
                                     "Expires",
@@ -502,8 +491,7 @@ public class ExceptionHandlerTest
                                 innerAppBuilder.Run(
                                     async (httpContext) =>
                                     {
-                                        await httpContext
-                                            .Response
+                                        await httpContext.Response
                                             .WriteAsync("Handled error in a custom way.");
                                     }
                                 );
@@ -513,12 +501,10 @@ public class ExceptionHandlerTest
                         app.Run(
                             async (httpContext) =>
                             {
-                                httpContext
-                                    .Response
+                                httpContext.Response
                                     .Headers
                                     .Add("Cache-Control", new[] { "max-age=3600" });
-                                httpContext
-                                    .Response
+                                httpContext.Response
                                     .Headers
                                     .Add("Pragma", new[] { "max-age=3600" });
                                 httpContext.Response.Headers.Add("Expires", new[] { expiresTime });
@@ -570,8 +556,8 @@ public class ExceptionHandlerTest
                     .UseTestServer()
                     .Configure(app =>
                     {
-                        diagnosticListener =
-                            app.ApplicationServices.GetRequiredService<DiagnosticListener>();
+                        diagnosticListener = app.ApplicationServices
+                            .GetRequiredService<DiagnosticListener>();
 
                         app.UseExceptionHandler("/handle-errors");
                         app.Map(
@@ -581,8 +567,7 @@ public class ExceptionHandlerTest
                                 innerAppBuilder.Run(
                                     async (httpContext) =>
                                     {
-                                        await httpContext
-                                            .Response
+                                        await httpContext.Response
                                             .WriteAsync("Handled error in a custom way.");
                                     }
                                 );
@@ -632,8 +617,8 @@ public class ExceptionHandlerTest
                     .UseTestServer()
                     .Configure(app =>
                     {
-                        diagnosticListener =
-                            app.ApplicationServices.GetRequiredService<DiagnosticListener>();
+                        diagnosticListener = app.ApplicationServices
+                            .GetRequiredService<DiagnosticListener>();
                         app.UseExceptionHandler();
                     });
             })
@@ -707,8 +692,7 @@ public class ExceptionHandlerTest
                                 innerAppBuilder.Run(
                                     async (httpContext) =>
                                     {
-                                        await httpContext
-                                            .Response
+                                        await httpContext.Response
                                             .WriteAsync("Handled error in a custom way.");
                                     }
                                 );

@@ -103,8 +103,7 @@ namespace System.Windows.Forms
                     // UIA Framework: Generate event to associate UserControl with ErrorProvider
                     ErrorProvider.OnUIAControlHookUp(control, new ControlEventArgs(window));
                     control.Parent.Controls.Add(window);
-                    control
-                        .Parent
+                    control.Parent
                         .Controls
                         .SetChildIndex(window, control.Parent.Controls.IndexOf(control) + 1);
                 }
@@ -313,8 +312,7 @@ namespace System.Windows.Forms
                     // UIA Framework: Generate event to disassociate UserControl with ErrorProvider
                     ErrorProvider.OnUIAControlUnhookUp(control, new ControlEventArgs(window));
                     control.Parent.Controls.Add(window);
-                    control
-                        .Parent
+                    control.Parent
                         .Controls
                         .SetChildIndex(window, control.Parent.Controls.IndexOf(control) + 1);
 

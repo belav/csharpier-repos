@@ -98,8 +98,7 @@ internal sealed class CompareAttributeAdapter : AttributeAdapterBase<CompareAttr
                 && validationContext.ModelMetadata.ContainerType != null
             )
             {
-                var otherProperty = validationContext
-                    .MetadataProvider
+                var otherProperty = validationContext.MetadataProvider
                     .GetMetadataForProperty(
                         validationContext.ModelMetadata.ContainerType,
                         attribute.OtherProperty

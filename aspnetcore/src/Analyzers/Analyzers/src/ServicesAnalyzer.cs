@@ -30,8 +30,7 @@ internal sealed class ServicesAnalyzer
                     context.Operation is IInvocationOperation invocation
                     && invocation.Instance == null
                     && invocation.Arguments.Length >= 1
-                    && SymbolEqualityComparer
-                        .Default
+                    && SymbolEqualityComparer.Default
                         .Equals(
                             invocation.Arguments[0].Parameter?.Type,
                             _context.StartupSymbols.IServiceCollection

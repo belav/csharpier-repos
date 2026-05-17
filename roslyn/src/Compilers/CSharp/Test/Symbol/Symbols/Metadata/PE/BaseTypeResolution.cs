@@ -145,8 +145,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             AssertBaseType(varTC8.BaseType(), "C1<System.Type>");
             AssertBaseType(varTC9.BaseType(), "TC6<TC6_T1>");
 
-            var varCorTypes = module2
-                .GlobalNamespace
+            var varCorTypes = module2.GlobalNamespace
                 .GetMembers("CorTypes")
                 .OfType<NamespaceSymbol>()
                 .Single();
@@ -305,8 +304,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
                 base1,
                 module0.TypeRefHandleToTypeMap[
                     (TypeReferenceHandle)
-                        module0
-                            .Module
+                        module0.Module
                             .GetBaseTypeOfTypeOrThrow(((PENamedTypeSymbol)localTC1).Handle)
                 ]
             );
@@ -314,8 +312,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
                 base2,
                 module0.TypeRefHandleToTypeMap[
                     (TypeReferenceHandle)
-                        module0
-                            .Module
+                        module0.Module
                             .GetBaseTypeOfTypeOrThrow(((PENamedTypeSymbol)localTC2).Handle)
                 ]
             );
@@ -323,8 +320,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
                 base3,
                 module0.TypeRefHandleToTypeMap[
                     (TypeReferenceHandle)
-                        module0
-                            .Module
+                        module0.Module
                             .GetBaseTypeOfTypeOrThrow(((PENamedTypeSymbol)localTC3).Handle)
                 ]
             );
@@ -332,8 +328,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
                 base4,
                 module0.TypeRefHandleToTypeMap[
                     (TypeReferenceHandle)
-                        module0
-                            .Module
+                        module0.Module
                             .GetBaseTypeOfTypeOrThrow(((PENamedTypeSymbol)localTC4).Handle)
                 ]
             );
@@ -341,8 +336,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
                 base5,
                 module0.TypeRefHandleToTypeMap[
                     (TypeReferenceHandle)
-                        module0
-                            .Module
+                        module0.Module
                             .GetBaseTypeOfTypeOrThrow(((PENamedTypeSymbol)localTC5).Handle)
                 ]
             );
@@ -350,8 +344,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
                 base6,
                 module0.TypeRefHandleToTypeMap[
                     (TypeReferenceHandle)
-                        module0
-                            .Module
+                        module0.Module
                             .GetBaseTypeOfTypeOrThrow(((PENamedTypeSymbol)localTC6).Handle)
                 ]
             );
@@ -359,8 +352,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
                 base7,
                 module0.TypeRefHandleToTypeMap[
                     (TypeReferenceHandle)
-                        module0
-                            .Module
+                        module0.Module
                             .GetBaseTypeOfTypeOrThrow(((PENamedTypeSymbol)localTC7).Handle)
                 ]
             );
@@ -368,8 +360,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
                 base8,
                 module0.TypeRefHandleToTypeMap[
                     (TypeReferenceHandle)
-                        module0
-                            .Module
+                        module0.Module
                             .GetBaseTypeOfTypeOrThrow(((PENamedTypeSymbol)localTC8).Handle)
                 ]
             );

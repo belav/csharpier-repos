@@ -50,8 +50,7 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
             EdmProviderManifest.Instance.GetCanonicalModelTypeUsage(PrimitiveTypeKind.DateTime)
         );
         private static readonly DbNullExpression _dateTimeOffsetNull = Null(
-            EdmProviderManifest
-                .Instance
+            EdmProviderManifest.Instance
                 .GetCanonicalModelTypeUsage(PrimitiveTypeKind.DateTimeOffset)
         );
         private static readonly DbNullExpression _decimalNull = Null(
@@ -2357,8 +2356,7 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
 
             PrimitiveTypeKind primitiveTypeKind;
             if (
-                ClrProviderManifest
-                    .Instance
+                ClrProviderManifest.Instance
                     .TryGetPrimitiveTypeKind(valueType, out primitiveTypeKind)
             )
             {

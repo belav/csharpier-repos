@@ -822,8 +822,7 @@ public class LongPollingTransportTests : VerifiableLoggedTest
             await longPollingTransport.StartAsync(TestUri, TransferFormat.Binary);
             await longPollingTransport.StopAsync();
 
-            var deleteRequest = handler
-                .ReceivedRequests
+            var deleteRequest = handler.ReceivedRequests
                 .SingleOrDefault(r => r.Method == HttpMethod.Delete);
             Assert.NotNull(deleteRequest);
             Assert.Equal(TestUri, deleteRequest.RequestUri);

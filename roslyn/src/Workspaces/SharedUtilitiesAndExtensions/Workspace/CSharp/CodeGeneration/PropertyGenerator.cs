@@ -314,8 +314,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             if (declaration.ExpressionBody == null)
             {
                 if (
-                    declaration
-                        .Body
+                    declaration.Body
                         ?.TryConvertToArrowExpressionBody(
                             declaration.Kind(),
                             info.LanguageVersion,
@@ -362,8 +361,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                 return false;
             }
 
-            return accessor
-                .Body
+            return accessor.Body
                 .TryConvertToArrowExpressionBody(
                     declarationKind,
                     languageVersion,

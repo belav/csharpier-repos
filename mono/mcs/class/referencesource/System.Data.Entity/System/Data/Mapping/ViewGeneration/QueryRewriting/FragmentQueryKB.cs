@@ -77,9 +77,11 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
                 {
                     EntityType type = (EntityType)
                         ((RefType)endMember.TypeUsage.EdmType).ElementType;
-                    type.KeyMembers.All(member =>
-                        associationkeys.Add(new Pair<EdmMember, EntityType>(member, type)) || true /* prevent early termination */
-                    );
+                    type.KeyMembers
+                        .All(member =>
+                            associationkeys.Add(new Pair<EdmMember, EntityType>(member, type))
+                            || true /* prevent early termination */
+                        );
                 }
 
                 foreach (AssociationSetEnd end in assocSet.AssociationSetEnds)
@@ -167,16 +169,14 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
                     {
                         // Now check that the FromEnd is 1..1 (only then will all the Addresses be present in the assoc set)
                         if (
-                            constraint
-                                .FromRole
+                            constraint.FromRole
                                 .RelationshipMultiplicity
                                 .Equals(RelationshipMultiplicity.One)
                         )
                         {
                             // Make sure that the ToEnd is not 0..* because then the schema is broken
                             Debug.Assert(
-                                constraint
-                                    .ToRole
+                                constraint.ToRole
                                     .RelationshipMultiplicity
                                     .Equals(RelationshipMultiplicity.Many) == false
                             );
@@ -225,14 +225,12 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
                 {
                     //make sure that the method called with a 1:1 association
                     Debug.Assert(
-                        constraint
-                            .FromRole
+                        constraint.FromRole
                             .RelationshipMultiplicity
                             .Equals(RelationshipMultiplicity.One)
                     );
                     Debug.Assert(
-                        constraint
-                            .ToRole
+                        constraint.ToRole
                             .RelationshipMultiplicity
                             .Equals(RelationshipMultiplicity.One)
                     );

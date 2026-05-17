@@ -56,8 +56,7 @@ namespace Microsoft.CodeAnalysis
                     return WithChange(
                         static (compilation, priorCompilation) =>
                             compilation.WithScriptCompilationInfo(
-                                compilation
-                                    .ScriptCompilationInfo!
+                                compilation.ScriptCompilationInfo!
                                     .WithPreviousScriptCompilation(priorCompilation)
                             ),
                         previousScriptCompilation

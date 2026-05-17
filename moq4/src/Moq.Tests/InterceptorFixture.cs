@@ -57,8 +57,7 @@ namespace Moq.Tests
 
         static object CreateProxy(Type type, IInterceptor interceptor)
         {
-            return ProxyFactory
-                .Instance
+            return ProxyFactory.Instance
                 .CreateProxy(type, interceptor, Type.EmptyTypes, new object[0]);
 
             /* Unmerged change from project 'Moq.Tests(net6.0)'

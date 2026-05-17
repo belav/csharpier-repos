@@ -61,8 +61,7 @@ namespace System.Data.ProviderBase
                 DangerousAddRef(ref mustRelease);
 
                 IntPtr handle = DangerousGetHandle();
-                value = System
-                    .Runtime
+                value = System.Runtime
                     .Remoting
                     .Services
                     .EnterpriseServicesHelper

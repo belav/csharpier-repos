@@ -125,8 +125,7 @@ namespace System.Web.UI.Design.MobileControls
                 _decorationCombo.SetBounds(8, 40, 161, 21);
                 _decorationCombo.DropDownStyle = ComboBoxStyle.DropDownList;
                 _decorationCombo.SelectedIndexChanged += new EventHandler(this.OnSetPageDirty);
-                _decorationCombo
-                    .Items
+                _decorationCombo.Items
                     .AddRange(
                         new object[]
                         {
@@ -176,8 +175,7 @@ namespace System.Web.UI.Design.MobileControls
                 _selectTypeCombo.SetBounds(8, 40, 161, 21);
                 _selectTypeCombo.DropDownStyle = ComboBoxStyle.DropDownList;
                 _selectTypeCombo.SelectedIndexChanged += new EventHandler(this.OnSetPageDirty);
-                _selectTypeCombo
-                    .Items
+                _selectTypeCombo.Items
                     .AddRange(
                         new object[]
                         {
@@ -213,24 +211,26 @@ namespace System.Web.UI.Design.MobileControls
 
             if (_isBaseControlList)
             {
-                this.Controls.AddRange(
-                    new Control[]
-                    {
-                        _itemsPerPageTextBox,
-                        itemsPerPageLabel,
-                        _itemCountTextBox,
-                        itemCountLabel,
-                        pagingGroup,
-                        decorationLabel,
-                        _decorationCombo,
-                    }
-                );
+                this.Controls
+                    .AddRange(
+                        new Control[]
+                        {
+                            _itemsPerPageTextBox,
+                            itemsPerPageLabel,
+                            _itemCountTextBox,
+                            itemCountLabel,
+                            pagingGroup,
+                            decorationLabel,
+                            _decorationCombo,
+                        }
+                    );
             }
             else
             {
-                this.Controls.AddRange(
-                    new Control[] { _rowsTextBox, rowsLabel, selectTypeLabel, _selectTypeCombo }
-                );
+                this.Controls
+                    .AddRange(
+                        new Control[] { _rowsTextBox, rowsLabel, selectTypeLabel, _selectTypeCombo }
+                    );
             }
         }
 
@@ -242,9 +242,8 @@ namespace System.Web.UI.Design.MobileControls
             {
                 List list = (List)GetBaseControl();
                 _itemCountTextBox.Text = list.ItemCount.ToString(CultureInfo.InvariantCulture);
-                _itemsPerPageTextBox.Text = list.ItemsPerPage.ToString(
-                    CultureInfo.InvariantCulture
-                );
+                _itemsPerPageTextBox.Text = list.ItemsPerPage
+                    .ToString(CultureInfo.InvariantCulture);
 
                 switch (list.Decoration)
                 {
@@ -362,9 +361,8 @@ namespace System.Web.UI.Design.MobileControls
                 }
                 catch (Exception)
                 {
-                    _itemsPerPageTextBox.Text = list.ItemsPerPage.ToString(
-                        CultureInfo.InvariantCulture
-                    );
+                    _itemsPerPageTextBox.Text = list.ItemsPerPage
+                        .ToString(CultureInfo.InvariantCulture);
                 }
 
                 TypeDescriptor.Refresh(list);

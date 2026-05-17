@@ -20,8 +20,7 @@ namespace System.Text.Json.Serialization.Tests
         public async Task TypeInfoWithNullCreateObjectFailsDeserialization()
         {
             DefaultJsonTypeInfoResolver resolver = new();
-            resolver
-                .Modifiers
+            resolver.Modifiers
                 .Add(ti =>
                 {
                     if (ti.Type == typeof(Poco))

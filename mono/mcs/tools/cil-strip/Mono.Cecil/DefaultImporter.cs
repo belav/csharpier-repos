@@ -88,8 +88,7 @@ namespace Mono.Cecil
                 GenericInstanceType git = original as GenericInstanceType;
                 GenericInstanceType genElemType = new GenericInstanceType(elementType);
 
-                context
-                    .GenericContext
+                context.GenericContext
                     .CheckProvider(genElemType.GetOriginalType(), git.GenericArguments.Count);
                 foreach (TypeReference arg in git.GenericArguments)
                     genElemType.GenericArguments.Add(ImportTypeReference(arg, context));
@@ -122,8 +121,7 @@ namespace Mono.Cecil
                 );
 
                 foreach (ParameterDefinition parameter in ori.Parameters)
-                    fnptr
-                        .Parameters
+                    fnptr.Parameters
                         .Add(
                             new ParameterDefinition(
                                 ImportTypeReference(parameter.ParameterType, context)
@@ -241,8 +239,7 @@ namespace Mono.Cecil
                 ImportMethodReference(gim.ElementMethod, context)
             );
 
-            context
-                .GenericContext
+            context.GenericContext
                 .CheckProvider(ngim.GetOriginalMethod(), gim.GenericArguments.Count);
             foreach (TypeReference arg in gim.GenericArguments)
                 ngim.GenericArguments.Add(ImportTypeReference(arg, context));
@@ -279,9 +276,10 @@ namespace Mono.Cecil
             meth.ReturnType.ReturnType = ImportTypeReference(mr.ReturnType.ReturnType, context);
 
             foreach (ParameterDefinition param in mr.Parameters)
-                meth.Parameters.Add(
-                    new ParameterDefinition(ImportTypeReference(param.ParameterType, context))
-                );
+                meth.Parameters
+                    .Add(
+                        new ParameterDefinition(ImportTypeReference(param.ParameterType, context))
+                    );
 
             context.GenericContext.Type = contextType;
             context.GenericContext.Method = contextMethod;

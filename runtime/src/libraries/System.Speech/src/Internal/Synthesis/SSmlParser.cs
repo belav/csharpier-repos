@@ -160,8 +160,7 @@ namespace System.Speech.Internal.Synthesis
                 {
                     if (reader.Value != xmlNamespaceSsml && reader.Value != xmlNamespacePrompt)
                     {
-                        ssmlAttributes
-                            ._unknownNamespaces
+                        ssmlAttributes._unknownNamespaces
                             .Add(
                                 new SsmlXmlAttribute(
                                     reader.Prefix,
@@ -1018,8 +1017,7 @@ namespace System.Speech.Internal.Synthesis
                         break;
 
                     case AlphabetType.Ups:
-                        aPhoneIds = PhonemeConverter
-                            .UpsConverter
+                        aPhoneIds = PhonemeConverter.UpsConverter
                             .ConvertPronToId(sPh)
                             .ToCharArray();
                         alphabet = AlphabetType.Ipa;
@@ -1338,8 +1336,7 @@ namespace System.Speech.Internal.Synthesis
                             XmlTextReader textReader = reader as XmlTextReader;
                             if (textReader != null && engine.Ssml != null)
                             {
-                                textPosition = engine
-                                    .Ssml
+                                textPosition = engine.Ssml
                                     .IndexOf(
                                         reader.Value,
                                         textReader.LinePosition + reader.LocalName.Length,

@@ -346,8 +346,7 @@ namespace System.Web.Http.Results
             string expectedModelStateKey = "ModelStateKey";
             string expectedModelStateErrorMessage = "ModelStateErrorMessage";
             ModelState originalModelStateItem = new ModelState();
-            originalModelStateItem
-                .Errors
+            originalModelStateItem.Errors
                 .Add(
                     new ModelError(new InvalidOperationException(), expectedModelStateErrorMessage)
                 );
@@ -608,8 +607,7 @@ namespace System.Web.Http.Results
                     InvalidModelStateResult result = CreateProductUnderTest(modelState, controller);
 
                     IContentNegotiator expectedContentNegotiator = CreateDummyContentNegotiator();
-                    configuration
-                        .Services
+                    configuration.Services
                         .Replace(typeof(IContentNegotiator), expectedContentNegotiator);
 
                     // Act
@@ -756,8 +754,7 @@ namespace System.Web.Http.Results
 
                 IContentNegotiator ignore = result.ContentNegotiator;
 
-                configuration
-                    .Services
+                configuration.Services
                     .Replace(typeof(IContentNegotiator), CreateDummyContentNegotiator());
 
                 // Act

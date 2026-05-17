@@ -242,8 +242,7 @@ namespace ILCompiler
                 if (_similarVectorName == "Unknown")
                     return null;
 
-                _similarVectorOpenType = ((MetadataType)vectorOfTType.GetTypeDefinition())
-                    .Module
+                _similarVectorOpenType = ((MetadataType)vectorOfTType.GetTypeDefinition()).Module
                     .GetType("System.Runtime.Intrinsics", _similarVectorName);
             }
 

@@ -22,8 +22,7 @@ namespace System.Security.Cryptography
             ArgumentNullException.ThrowIfNull(format);
 
             int numBytesNeeded;
-            ErrorCode errorCode = Interop
-                .NCrypt
+            ErrorCode errorCode = Interop.NCrypt
                 .NCryptExportKey(
                     _keyHandle,
                     IntPtr.Zero,
@@ -38,8 +37,7 @@ namespace System.Security.Cryptography
                 throw errorCode.ToCryptographicException();
 
             byte[] buffer = new byte[numBytesNeeded];
-            errorCode = Interop
-                .NCrypt
+            errorCode = Interop.NCrypt
                 .NCryptExportKey(
                     _keyHandle,
                     IntPtr.Zero,
@@ -66,8 +64,7 @@ namespace System.Security.Cryptography
             // Sanity check the current bounds
             Span<byte> empty = default;
 
-            ErrorCode errorCode = Interop
-                .NCrypt
+            ErrorCode errorCode = Interop.NCrypt
                 .NCryptExportKey(
                     _keyHandle,
                     IntPtr.Zero,
@@ -90,8 +87,7 @@ namespace System.Security.Cryptography
                 return false;
             }
 
-            errorCode = Interop
-                .NCrypt
+            errorCode = Interop.NCrypt
                 .NCryptExportKey(
                     _keyHandle,
                     IntPtr.Zero,
@@ -209,8 +205,7 @@ namespace System.Security.Cryptography
 
                     Span<byte> empty = default;
 
-                    ErrorCode errorCode = Interop
-                        .NCrypt
+                    ErrorCode errorCode = Interop.NCrypt
                         .NCryptExportKey(
                             keyHandle,
                             IntPtr.Zero,
@@ -240,8 +235,7 @@ namespace System.Security.Cryptography
                         return false;
                     }
 
-                    errorCode = Interop
-                        .NCrypt
+                    errorCode = Interop.NCrypt
                         .NCryptExportKey(
                             keyHandle,
                             IntPtr.Zero,

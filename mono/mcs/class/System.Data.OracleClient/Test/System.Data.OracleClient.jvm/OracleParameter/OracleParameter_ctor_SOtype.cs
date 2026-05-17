@@ -141,8 +141,7 @@ namespace MonoTests.System.Data.OracleClient
                 {
 #if DAAB
 
-                    rdr = Microsoft
-                        .ApplicationBlocks
+                    rdr = Microsoft.ApplicationBlocks
                         .Data
                         .PostgresOracleHelper
                         .OLEDB4ODBCExecuteReader(cmd, true);

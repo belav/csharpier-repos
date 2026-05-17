@@ -373,8 +373,7 @@ namespace System.ServiceModel.Security
                 ThrowIfImmutable();
                 if (value == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new ArgumentNullException("value"));
                 }
                 this.incomingAlgorithmSuite = value;
@@ -394,8 +393,7 @@ namespace System.ServiceModel.Security
                 ThrowIfImmutable();
                 if (value <= 0)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new ArgumentOutOfRangeException("value"));
                 }
                 this.maxCachedNonces = value;
@@ -410,8 +408,7 @@ namespace System.ServiceModel.Security
                 ThrowIfImmutable();
                 if (value < TimeSpan.Zero)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new ArgumentOutOfRangeException("value"));
                 }
                 this.maxClockSkew = value;
@@ -436,8 +433,7 @@ namespace System.ServiceModel.Security
                 ThrowIfImmutable();
                 if (value == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new ArgumentNullException("value"));
                 }
                 this.outgoingAlgorithmSuite = value;
@@ -452,8 +448,7 @@ namespace System.ServiceModel.Security
                 ThrowIfImmutable();
                 if (value <= TimeSpan.Zero)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentOutOfRangeException(
                                 "value",
@@ -535,8 +530,7 @@ namespace System.ServiceModel.Security
                 ThrowIfImmutable();
                 if (value == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new ArgumentNullException("value"));
                 }
                 this.standardsManager = value;
@@ -551,8 +545,7 @@ namespace System.ServiceModel.Security
                 ThrowIfImmutable();
                 if (value <= TimeSpan.Zero)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentOutOfRangeException(
                                 "value",
@@ -707,8 +700,7 @@ namespace System.ServiceModel.Security
             );
             if (securityProtocol == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new MessageSecurityException(
                             SR.GetString(SR.ProtocolFactoryCouldNotCreateProtocol)
@@ -782,8 +774,7 @@ namespace System.ServiceModel.Security
                     {
                         if (numSkipped > 0)
                         {
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
                                     new ArgumentException(
                                         SR.GetString(
@@ -801,8 +792,7 @@ namespace System.ServiceModel.Security
                         || spec2AuthenticatorType.IsAssignableFrom(authenticatorType)
                     )
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new ArgumentException(
                                     SR.GetString(
@@ -841,9 +831,8 @@ namespace System.ServiceModel.Security
                     return mergedSpec.SupportingTokenAuthenticators;
                 }
                 else if (
-                    this.mergedSupportingTokenAuthenticatorsMap.ContainsKey(
-                        MessageHeaders.WildcardAction
-                    )
+                    this.mergedSupportingTokenAuthenticatorsMap
+                        .ContainsKey(MessageHeaders.WildcardAction)
                 )
                 {
                     MergedSupportingTokenAuthenticatorSpecification mergedSpec =
@@ -970,8 +959,7 @@ namespace System.ServiceModel.Security
                 this.extendedProtectionPolicy;
             if (this.endpointFilterTable != null)
             {
-                requirement
-                    .Properties
+                requirement.Properties
                     .Add(
                         ServiceModelSecurityTokenRequirement.EndpointFilterTableProperty,
                         this.endpointFilterTable
@@ -1015,10 +1003,8 @@ namespace System.ServiceModel.Security
                 {
                     System.IdentityModel.Selectors.SecurityTokenResolver resolver;
                     System.IdentityModel.Selectors.SecurityTokenAuthenticator authenticator =
-                        this.SecurityTokenManager.CreateSecurityTokenAuthenticator(
-                            requirement,
-                            out resolver
-                        );
+                        this.SecurityTokenManager
+                            .CreateSecurityTokenAuthenticator(requirement, out resolver);
                     SupportingTokenAuthenticatorSpecification authenticatorSpec =
                         new SupportingTokenAuthenticatorSpecification(
                             authenticator,
@@ -1047,10 +1033,8 @@ namespace System.ServiceModel.Security
                 {
                     System.IdentityModel.Selectors.SecurityTokenResolver resolver;
                     System.IdentityModel.Selectors.SecurityTokenAuthenticator authenticator =
-                        this.SecurityTokenManager.CreateSecurityTokenAuthenticator(
-                            requirement,
-                            out resolver
-                        );
+                        this.SecurityTokenManager
+                            .CreateSecurityTokenAuthenticator(requirement, out resolver);
                     SupportingTokenAuthenticatorSpecification authenticatorSpec =
                         new SupportingTokenAuthenticatorSpecification(
                             authenticator,
@@ -1079,10 +1063,8 @@ namespace System.ServiceModel.Security
                 {
                     System.IdentityModel.Selectors.SecurityTokenResolver resolver;
                     System.IdentityModel.Selectors.SecurityTokenAuthenticator authenticator =
-                        this.SecurityTokenManager.CreateSecurityTokenAuthenticator(
-                            requirement,
-                            out resolver
-                        );
+                        this.SecurityTokenManager
+                            .CreateSecurityTokenAuthenticator(requirement, out resolver);
                     SupportingTokenAuthenticatorSpecification authenticatorSpec =
                         new SupportingTokenAuthenticatorSpecification(
                             authenticator,
@@ -1111,10 +1093,8 @@ namespace System.ServiceModel.Security
                 {
                     System.IdentityModel.Selectors.SecurityTokenResolver resolver;
                     System.IdentityModel.Selectors.SecurityTokenAuthenticator authenticator =
-                        this.SecurityTokenManager.CreateSecurityTokenAuthenticator(
-                            requirement,
-                            out resolver
-                        );
+                        this.SecurityTokenManager
+                            .CreateSecurityTokenAuthenticator(requirement, out resolver);
                     SupportingTokenAuthenticatorSpecification authenticatorSpec =
                         new SupportingTokenAuthenticatorSpecification(
                             authenticator,
@@ -1176,10 +1156,8 @@ namespace System.ServiceModel.Security
                         false,
                         authenticatorSpecList
                     );
-                    this.scopedSupportingTokenAuthenticatorSpecification.Add(
-                        action,
-                        authenticatorSpecList
-                    );
+                    this.scopedSupportingTokenAuthenticatorSpecification
+                        .Add(action, authenticatorSpecList);
                 }
                 foreach (
                     string action in this.securityBindingElement
@@ -1190,10 +1168,8 @@ namespace System.ServiceModel.Security
                     Collection<SupportingTokenAuthenticatorSpecification> authenticatorSpecList;
                     ICollection<SupportingTokenAuthenticatorSpecification> existingList;
                     if (
-                        this.scopedSupportingTokenAuthenticatorSpecification.TryGetValue(
-                            action,
-                            out existingList
-                        )
+                        this.scopedSupportingTokenAuthenticatorSpecification
+                            .TryGetValue(action, out existingList)
                     )
                     {
                         authenticatorSpecList = (
@@ -1204,10 +1180,8 @@ namespace System.ServiceModel.Security
                     {
                         authenticatorSpecList =
                             new Collection<SupportingTokenAuthenticatorSpecification>();
-                        this.scopedSupportingTokenAuthenticatorSpecification.Add(
-                            action,
-                            authenticatorSpecList
-                        );
+                        this.scopedSupportingTokenAuthenticatorSpecification
+                            .Add(action, authenticatorSpecList);
                     }
                     this.AddSupportingTokenAuthenticators(
                         this.securityBindingElement.OptionalOperationSupportingTokenParameters[
@@ -1288,8 +1262,7 @@ namespace System.ServiceModel.Security
             {
                 if (!this.SupportsReplayDetection)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgument(
                             "DetectReplays",
                             SR.GetString(SR.SecurityProtocolCannotDoReplayDetection, this)
@@ -1300,8 +1273,7 @@ namespace System.ServiceModel.Security
                     || this.ReplayWindow == TimeSpan.MaxValue
                 )
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(SR.GetString(SR.NoncesCachedInfinitely))
                         );
@@ -1404,8 +1376,7 @@ namespace System.ServiceModel.Security
         {
             if (requiredForForwardDirection)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentException(
                             SR.GetString(
@@ -1427,8 +1398,7 @@ namespace System.ServiceModel.Security
         {
             if (this.requestReplyErrorPropertyName != null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentException(
                             SR.GetString(

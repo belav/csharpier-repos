@@ -106,8 +106,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             }
 
             Debug.Assert(
-                waiter
-                    .Task
+                waiter.Task
                     .CreationOptions
                     .HasFlag(TaskCreationOptions.RunContinuationsAsynchronously)
             );
@@ -223,8 +222,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             }
 
             Debug.Assert(
-                _whenCompleted
-                    .Task
+                _whenCompleted.Task
                     .CreationOptions
                     .HasFlag(TaskCreationOptions.RunContinuationsAsynchronously)
             );
@@ -356,13 +354,11 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 );
 
             Debug.Assert(
-                taskCompletionSource
-                    .Task
+                taskCompletionSource.Task
                     .CreationOptions
                     .HasFlag(TaskCreationOptions.RunContinuationsAsynchronously)
             );
-            taskCompletionSource
-                .Task
+            taskCompletionSource.Task
                 .ContinueWith(
                     static (_, s) =>
                     {

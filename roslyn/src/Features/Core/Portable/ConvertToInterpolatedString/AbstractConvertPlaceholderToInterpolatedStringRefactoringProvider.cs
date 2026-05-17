@@ -349,13 +349,11 @@ namespace Microsoft.CodeAnalysis.ConvertToInterpolatedString
                             var arg1Name = syntaxFacts.GetNameForArgument(arg1);
                             var arg2Name = syntaxFacts.GetNameForArgument(arg2);
 
-                            var param1 = invocationSymbol
-                                .Parameters
+                            var param1 = invocationSymbol.Parameters
                                 .FirstOrDefault(p =>
                                     syntaxFacts.StringComparer.Equals(p.Name, arg1Name)
                                 );
-                            var param2 = invocationSymbol
-                                .Parameters
+                            var param2 = invocationSymbol.Parameters
                                 .FirstOrDefault(p =>
                                     syntaxFacts.StringComparer.Equals(p.Name, arg2Name)
                                 );

@@ -363,8 +363,7 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                 );
 
                 const string PrecertificatePoisonExtensionOid = "1.3.6.1.4.1.11129.2.4.3";
-                certReq
-                    .CertificateExtensions
+                certReq.CertificateExtensions
                     .Add(
                         new X509Extension(
                             new AsnEncodedData(
@@ -431,8 +430,7 @@ namespace System.Security.Cryptography.X509Certificates.Tests
 
                 certReq.CertificateExtensions.Add(BasicConstraintsEndEntity);
 
-                certReq
-                    .CertificateExtensions
+                certReq.CertificateExtensions
                     .Add(new X509Extension("1.3.6.1.5.5.7.1.1", new byte[] { 5 }, critical: false));
 
                 DateTimeOffset notBefore = DateTimeOffset.UtcNow.AddDays(-1);

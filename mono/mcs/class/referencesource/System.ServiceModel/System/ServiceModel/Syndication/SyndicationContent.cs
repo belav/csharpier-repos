@@ -109,8 +109,7 @@ namespace System.ServiceModel.Syndication
             }
             if (string.IsNullOrEmpty(outerElementName))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(SR.GetString(SR.OuterElementNameNotSpecified));
             }
             writer.WriteStartElement(outerElementName, outerElementNamespace);

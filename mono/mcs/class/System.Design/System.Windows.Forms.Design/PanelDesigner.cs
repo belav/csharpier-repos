@@ -52,10 +52,8 @@ namespace System.Windows.Forms.Design
             base.OnPaintAdornments(pe);
 
             GraphicsState state = pe.Graphics.Save();
-            pe.Graphics.TranslateTransform(
-                this.Control.ClientRectangle.X,
-                this.Control.ClientRectangle.Y
-            );
+            pe.Graphics
+                .TranslateTransform(this.Control.ClientRectangle.X, this.Control.ClientRectangle.Y);
             ControlPaint.DrawBorder(
                 pe.Graphics,
                 Control.ClientRectangle,

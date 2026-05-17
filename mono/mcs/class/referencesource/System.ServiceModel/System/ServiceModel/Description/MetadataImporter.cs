@@ -112,8 +112,7 @@ namespace System.ServiceModel.Description
                 {
                     if (Fx.IsFatal(e))
                         throw;
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(CreateExtensionException(policyImporter, e));
                 }
 

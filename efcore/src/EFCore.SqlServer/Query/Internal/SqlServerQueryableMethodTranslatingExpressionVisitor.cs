@@ -84,8 +84,7 @@ public class SqlServerQueryableMethodTranslatingExpressionVisitor
     {
         if (extensionExpression is TemporalQueryRootExpression queryRootExpression)
         {
-            var selectExpression = RelationalDependencies
-                .SqlExpressionFactory
+            var selectExpression = RelationalDependencies.SqlExpressionFactory
                 .Select(queryRootExpression.EntityType);
             Func<TableExpression, TableExpressionBase> annotationApplyingFunc =
                 queryRootExpression switch
@@ -294,8 +293,7 @@ public class SqlServerQueryableMethodTranslatingExpressionVisitor
     {
         // Calculate the table alias for the OPENJSON expression based on the last named path segment
         // (or the JSON column name if there are none)
-        var lastNamedPathSegment = jsonQueryExpression
-            .Path
+        var lastNamedPathSegment = jsonQueryExpression.Path
             .LastOrDefault(ps => ps.PropertyName is not null);
         var tableAlias = char.ToLowerInvariant(
                 (lastNamedPathSegment.PropertyName ?? jsonQueryExpression.JsonColumn.Name)[0]
@@ -499,8 +497,7 @@ public class SqlServerQueryableMethodTranslatingExpressionVisitor
                         is JsonScalarExpression innerJsonScalarExpression
                         ? (
                             innerJsonScalarExpression.Json,
-                            innerJsonScalarExpression
-                                .Path
+                            innerJsonScalarExpression.Path
                                 .Append(new PathSegment(translatedIndex))
                                 .ToArray()
                         )

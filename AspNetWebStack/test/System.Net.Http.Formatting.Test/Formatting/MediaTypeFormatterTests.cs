@@ -41,8 +41,7 @@ namespace System.Net.Http.Formatting
         [Fact]
         public void TypeIsCorrect()
         {
-            Assert
-                .Type
+            Assert.Type
                 .HasProperties(
                     typeof(MediaTypeFormatter),
                     TypeAssert.TypeProperties.IsPublicVisibleClass
@@ -95,8 +94,7 @@ namespace System.Net.Http.Formatting
             var defaultMaxKeys = MediaTypeFormatter.MaxHttpCollectionKeys;
             try
             {
-                Assert
-                    .Reflection
+                Assert.Reflection
                     .IntegerProperty<MediaTypeFormatter, int>(
                         null,
                         c => MediaTypeFormatter.MaxHttpCollectionKeys,

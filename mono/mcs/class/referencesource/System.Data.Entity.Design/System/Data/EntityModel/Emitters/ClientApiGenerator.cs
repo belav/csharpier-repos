@@ -329,10 +329,8 @@ namespace System.Data.EntityModel
             string itemIdentity
         )
         {
-            List<System.Data.EntityModel.SchemaObjectModel.SchemaType> schemaTypes = schema
-                .SchemaTypes
-                .Where(p => p.Identity == itemIdentity)
-                .ToList();
+            List<System.Data.EntityModel.SchemaObjectModel.SchemaType> schemaTypes =
+                schema.SchemaTypes.Where(p => p.Identity == itemIdentity).ToList();
             if (null != schemaTypes && schemaTypes.Count > 0)
             {
                 return (System.Data.EntityModel.SchemaObjectModel.SchemaElement)schemaTypes.First();
@@ -640,8 +638,7 @@ namespace System.Data.EntityModel
 
             string objectNamespace;
             if (
-                _generator
-                    .EdmToObjectNamespaceMap
+                _generator.EdmToObjectNamespaceMap
                     .TryGetObjectNamespace(csdlNamespaceName, out objectNamespace)
             )
             {

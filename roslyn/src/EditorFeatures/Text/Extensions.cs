@@ -43,8 +43,7 @@ namespace Microsoft.CodeAnalysis.Text
 
         public static SourceText AsText(this ITextSnapshot textSnapshot)
         {
-            textSnapshot
-                .TextBuffer
+            textSnapshot.TextBuffer
                 .Properties
                 .TryGetProperty<ITextBufferCloneService>(
                     typeof(ITextBufferCloneService),
@@ -123,8 +122,7 @@ namespace Microsoft.CodeAnalysis.Text
         /// </para>
         /// </summary>
         internal static Encoding GetEncodingOrUTF8(this ITextBuffer textBuffer) =>
-            textBuffer
-                .Properties
+            textBuffer.Properties
                 .TryGetProperty(typeof(ITextDocument), out ITextDocument textDocument)
                 ? textDocument.Encoding
                 : Encoding.UTF8;

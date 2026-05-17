@@ -4121,11 +4121,8 @@ namespace System.Xml.Schema
                 object[] arrDst = new object[listSrc.Count];
 
                 for (int i = 0; i < listSrc.Count; i++)
-                    arrDst[i] = this.atomicConverter!.ChangeType(
-                        listSrc[i]!,
-                        ObjectType,
-                        nsResolver
-                    );
+                    arrDst[i] = this.atomicConverter!
+                        .ChangeType(listSrc[i]!, ObjectType, nsResolver);
 
                 return arrDst;
             }
@@ -4266,13 +4263,11 @@ namespace System.Xml.Schema
                     return value;
 
                 XsdSimpleValue simpleValue = (XsdSimpleValue)
-                    SchemaType!
-                        .Datatype!
+                    SchemaType!.Datatype!
                         .ParseValue((string)value, new NameTable(), nsResolver, true);
 
                 // Allow the member type to perform the conversion
-                return simpleValue
-                    .XmlType
+                return simpleValue.XmlType
                     .ValueConverter
                     .ChangeType((string)value, destinationType, nsResolver);
             }

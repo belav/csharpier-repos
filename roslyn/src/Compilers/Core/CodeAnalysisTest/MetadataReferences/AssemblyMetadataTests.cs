@@ -192,8 +192,7 @@ namespace Microsoft.CodeAnalysis.UnitTests
         public void IncorrectCustomAssemblyTableSize_TooManyMethodSpecs()
         {
             var metadata = AssemblyMetadata.CreateFromImage(
-                TestResources
-                    .MetadataTests
+                TestResources.MetadataTests
                     .Invalid
                     .IncorrectCustomAssemblyTableSize_TooManyMethodSpecs
             );

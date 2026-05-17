@@ -108,8 +108,7 @@ internal static partial class Interop
                 );
             }
 
-            SafeEcKeyHandle key = Interop
-                .Crypto
+            SafeEcKeyHandle key = Interop.Crypto
                 .EcKeyCreateByExplicitParameters(
                     curve.CurveType,
                     null,

@@ -86,8 +86,7 @@ namespace System.ServiceModel.Dispatcher
                 Stream streamData = data as Stream;
                 if (streamData == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentException(
                                 SR2.GetString(
@@ -121,8 +120,7 @@ namespace System.ServiceModel.Dispatcher
                 }
                 else
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperWarning(
                             new InvalidOperationException(
                                 SR2.GetString(
@@ -137,8 +135,7 @@ namespace System.ServiceModel.Dispatcher
             }
             if (formatProperty.Format != WebContentFormat.Raw)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperWarning(
                         new InvalidOperationException(
                             SR2.GetString(

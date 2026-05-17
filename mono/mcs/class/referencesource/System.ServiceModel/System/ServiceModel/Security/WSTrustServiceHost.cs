@@ -57,8 +57,7 @@ namespace System.ServiceModel.Security
 
             if (serviceContract.SecurityTokenServiceConfiguration == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("serviceContract.SecurityTokenServiceConfiguration");
             }
 
@@ -92,14 +91,12 @@ namespace System.ServiceModel.Security
         {
             if (this.BaseAddresses == null || this.BaseAddresses.Count == 0)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperInvalidOperation(SR.GetString(SR.ID3140));
             }
 
             // Check if a ServiceMetadataBehavior is added.
-            ServiceMetadataBehavior metadataBehavior = Description
-                .Behaviors
+            ServiceMetadataBehavior metadataBehavior = Description.Behaviors
                 .Find<ServiceMetadataBehavior>();
             if (metadataBehavior == null)
             {
@@ -135,8 +132,7 @@ namespace System.ServiceModel.Security
                     mexBinding = MetadataExchangeBindings.CreateMexTcpBinding();
                 }
                 else if (
-                    StringComparer
-                        .OrdinalIgnoreCase
+                    StringComparer.OrdinalIgnoreCase
                         .Equals(baseAddress.Scheme, Uri.UriSchemeNetPipe)
                 )
                 {
@@ -179,8 +175,7 @@ namespace System.ServiceModel.Security
         {
             if (Description.Endpoints.Count == 0)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ID3097)));
             }
 

@@ -35,8 +35,7 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageService
                 case SyntaxKind.EnumDeclaration:
                 case SyntaxKind.DelegateDeclaration:
                     return ignoreDeclarationModifiers
-                        || !((MemberDeclarationSyntax)declaration)
-                            .Modifiers
+                        || !((MemberDeclarationSyntax)declaration).Modifiers
                             .Any(SyntaxKind.FileKeyword);
 
                 case SyntaxKind.FieldDeclaration:
@@ -56,8 +55,7 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageService
                 case SyntaxKind.ConstructorDeclaration:
                     // Static constructor can't have accessibility
                     return ignoreDeclarationModifiers
-                        || !((ConstructorDeclarationSyntax)declaration)
-                            .Modifiers
+                        || !((ConstructorDeclarationSyntax)declaration).Modifiers
                             .Any(SyntaxKind.StaticKeyword);
 
                 case SyntaxKind.PropertyDeclaration:

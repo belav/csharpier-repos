@@ -243,8 +243,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             ImmutableArray<BoundExpression> boundConstructorArguments;
             if (attributeTypeForBinding.IsErrorType())
             {
-                boundConstructorArguments = analyzedArguments
-                    .ConstructorArguments
+                boundConstructorArguments = analyzedArguments.ConstructorArguments
                     .Arguments
                     .SelectAsArray(
                         static (arg, attributeArgumentBinder) =>
@@ -307,8 +306,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                         diagnostics,
                         attributedMember: attributedMember
                     );
-                    boundConstructorArguments = analyzedArguments
-                        .ConstructorArguments
+                    boundConstructorArguments = analyzedArguments.ConstructorArguments
                         .Arguments
                         .ToImmutable();
                     attributeArgumentBinder.ReportDiagnosticsIfObsolete(
@@ -319,8 +317,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     );
 
                     if (
-                        attributeConstructor
-                            .Parameters
+                        attributeConstructor.Parameters
                             .Any(static p =>
                                 p.RefKind is RefKind.In or RefKind.RefReadOnlyParameter
                             )
@@ -340,9 +337,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             Debug.Assert(boundConstructorArguments.All(a => !a.NeedsToBeConverted()));
 
-            ImmutableArray<string?> boundConstructorArgumentNamesOpt = analyzedArguments
-                .ConstructorArguments
-                .GetNames();
+            ImmutableArray<string?> boundConstructorArgumentNamesOpt =
+                analyzedArguments.ConstructorArguments.GetNames();
             ImmutableArray<BoundAssignmentOperator> boundNamedArguments =
                 analyzedArguments.NamedArguments?.ToImmutableAndFree()
                 ?? ImmutableArray<BoundAssignmentOperator>.Empty;
@@ -1166,9 +1162,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 // Validate Statement 1) of the spec comment above.
 
                 RoslynDebug.Assert(node.Type is object);
-                var typedConstantKind = node.Type.GetAttributeParameterTypedConstantKind(
-                    _binder.Compilation
-                );
+                var typedConstantKind = node.Type
+                    .GetAttributeParameterTypedConstantKind(_binder.Compilation);
 
                 return VisitExpression(
                     node,

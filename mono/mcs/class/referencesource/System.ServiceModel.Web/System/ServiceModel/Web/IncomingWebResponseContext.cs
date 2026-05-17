@@ -72,8 +72,7 @@ namespace System.ServiceModel.Web
                     return null;
                 }
                 if (
-                    !operationContext
-                        .IncomingMessageProperties
+                    !operationContext.IncomingMessageProperties
                         .ContainsKey(HttpResponseMessageProperty.Name)
                 )
                 {
@@ -88,8 +87,7 @@ namespace System.ServiceModel.Web
         {
             if (this.MessageProperty == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR2.GetString(

@@ -135,8 +135,7 @@
                 return false;
             }
 
-            return methodExpression
-                .Method
+            return methodExpression.Method
                 .DeclaringType
                 .GetDefaultMembers()
                 .OfType<PropertyInfo>()

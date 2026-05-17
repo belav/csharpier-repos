@@ -527,8 +527,7 @@ public class EndpointHtmlRendererTest
             new InteractiveServerRenderMode(true),
             ParameterView.Empty
         );
-        var firstComponent = await renderer
-            .Dispatcher
+        var firstComponent = await renderer.Dispatcher
             .InvokeAsync(() => HtmlContentToString(firstResult));
         var firstMatch = Regex.Match(
             firstComponent,
@@ -542,8 +541,7 @@ public class EndpointHtmlRendererTest
             new InteractiveServerRenderMode(false),
             ParameterView.Empty
         );
-        var secondComponent = await renderer
-            .Dispatcher
+        var secondComponent = await renderer.Dispatcher
             .InvokeAsync(() => HtmlContentToString(secondResult));
         var secondMatch = Regex.Match(secondComponent, ComponentPattern);
 
@@ -1119,8 +1117,7 @@ public class EndpointHtmlRendererTest
             builder.CloseComponent();
         });
 
-        await renderer
-            .Dispatcher
+        await renderer.Dispatcher
             .InvokeAsync(() =>
                 renderer.BeginRenderingComponent(component, ParameterView.Empty).QuiescenceTask
             );
@@ -1144,8 +1141,7 @@ public class EndpointHtmlRendererTest
             invoked = true;
         };
         var isBadRequest = false;
-        await renderer
-            .Dispatcher
+        await renderer.Dispatcher
             .InvokeAsync(async () =>
             {
                 var result = renderer.BeginRenderingComponent(
@@ -1182,8 +1178,7 @@ public class EndpointHtmlRendererTest
             .AddSingleton<IHostEnvironment>(new TestEnvironment(Environments.Development))
             .BuildServiceProvider();
 
-        await renderer
-            .Dispatcher
+        await renderer.Dispatcher
             .InvokeAsync(async () =>
             {
                 await renderer.RenderEndpointComponent(
@@ -1220,8 +1215,7 @@ public class EndpointHtmlRendererTest
             .AddSingleton<IHostEnvironment>(new TestEnvironment(Environments.Development))
             .BuildServiceProvider();
 
-        await renderer
-            .Dispatcher
+        await renderer.Dispatcher
             .InvokeAsync(async () =>
             {
                 await renderer.RenderEndpointComponent(
@@ -1258,8 +1252,7 @@ public class EndpointHtmlRendererTest
         {
             Continue = continuationTcs.Task,
         };
-        var result = await renderer
-            .Dispatcher
+        var result = await renderer.Dispatcher
             .InvokeAsync(() => renderer.BeginRenderingComponent(component, ParameterView.Empty));
 
         // Assert: it won't complete until we allow it
@@ -1270,8 +1263,7 @@ public class EndpointHtmlRendererTest
 
         // Act/Assert: Dispatching the event uses the final delegate, not the intermediate one
         Assert.Null(component.Message);
-        await renderer
-            .Dispatcher
+        await renderer.Dispatcher
             .InvokeAsync(() => renderer.DispatchSubmitEventAsync("default", out isBadRequest));
         Assert.Equal("Received call to updated handler", component.Message);
         Assert.False(isBadRequest);
@@ -1313,13 +1305,11 @@ public class EndpointHtmlRendererTest
 
             firstRender = false;
         });
-        var result = await renderer
-            .Dispatcher
+        var result = await renderer.Dispatcher
             .InvokeAsync(() => renderer.BeginRenderingComponent(component, ParameterView.Empty));
 
         // Act/Assert
-        await renderer
-            .Dispatcher
+        await renderer.Dispatcher
             .InvokeAsync(() => renderer.DispatchSubmitEventAsync("my-name", out isBadRequest));
         Assert.False(isBadRequest);
         Assert.Equal(1, eventReceivedCount);
@@ -1359,8 +1349,7 @@ public class EndpointHtmlRendererTest
         });
 
         // Act
-        await renderer
-            .Dispatcher
+        await renderer.Dispatcher
             .InvokeAsync(async () =>
             {
                 await renderer.RenderEndpointComponent(
@@ -1378,15 +1367,13 @@ public class EndpointHtmlRendererTest
         component.TriggerRender();
 
         // Act/Assert: Can dispatch with new name
-        await renderer
-            .Dispatcher
+        await renderer.Dispatcher
             .InvokeAsync(() => renderer.DispatchSubmitEventAsync("my-name-2", out isBadRequest));
         Assert.False(isBadRequest);
         Assert.Equal(1, eventReceivedCount);
 
         // Act/Assert: Cannot dispatch with old name
-        await renderer
-            .Dispatcher
+        await renderer.Dispatcher
             .InvokeAsync(() => renderer.DispatchSubmitEventAsync("my-name-1", out isBadRequest));
         Assert.Equal(1, eventReceivedCount);
         Assert.True(isBadRequest);
@@ -1846,8 +1833,7 @@ public class EndpointHtmlRendererTest
         );
         var id = renderer.AssignRootComponentId(ssrBoundary);
 
-        await renderer
-            .Dispatcher
+        await renderer.Dispatcher
             .InvokeAsync(() => renderer.RenderRootComponentAsync(id, ParameterView.Empty));
 
         var content = await renderer.PrerenderPersistedStateAsync(httpContext);
@@ -1923,8 +1909,7 @@ public class EndpointHtmlRendererTest
             configuredMode
         );
         var id = renderer.AssignRootComponentId(ssrBoundary);
-        await renderer
-            .Dispatcher
+        await renderer.Dispatcher
             .InvokeAsync(() =>
                 renderer.RenderRootComponentAsync(
                     id,

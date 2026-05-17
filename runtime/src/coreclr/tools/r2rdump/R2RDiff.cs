@@ -254,8 +254,7 @@ namespace R2RDump
                 foreach (string assemblyName in allComponentAssemblies.OrderBy(name => name))
                 {
                     if (
-                        !_leftDumper
-                            .Reader
+                        !_leftDumper.Reader
                             .ManifestReferenceAssemblies
                             .TryGetValue(assemblyName, out int leftModuleIndex)
                     )
@@ -263,8 +262,7 @@ namespace R2RDump
                         leftModuleIndex = InvalidModule;
                     }
                     if (
-                        !_rightDumper
-                            .Reader
+                        !_rightDumper.Reader
                             .ManifestReferenceAssemblies
                             .TryGetValue(assemblyName, out int rightModuleIndex)
                     )
@@ -459,9 +457,10 @@ namespace R2RDump
             Dictionary<string, int> sectionMap = new Dictionary<string, int>();
 
             foreach (
-                KeyValuePair<ReadyToRunSectionType, ReadyToRunSection> typeAndSection in reader
-                    .ReadyToRunHeader
-                    .Sections
+                KeyValuePair<
+                    ReadyToRunSectionType,
+                    ReadyToRunSection
+                > typeAndSection in reader.ReadyToRunHeader.Sections
             )
             {
                 string name = typeAndSection.Key.ToString();
@@ -556,12 +555,10 @@ namespace R2RDump
                         rtfIndex++
                     )
                     {
-                        RuntimeFunction leftRuntimeFunction = commonMethod
-                            .Value
+                        RuntimeFunction leftRuntimeFunction = commonMethod.Value
                             .LeftMethod
                             .RuntimeFunctions[rtfIndex];
-                        RuntimeFunction rightRuntimeFunction = commonMethod
-                            .Value
+                        RuntimeFunction rightRuntimeFunction = commonMethod.Value
                             .RightMethod
                             .RuntimeFunctions[rtfIndex];
                         int leftOffset = 0;
@@ -578,20 +575,17 @@ namespace R2RDump
                                 }
                                 break;
                             }
-                            leftOffset += _leftDumper
-                                .Disassembler
+                            leftOffset += _leftDumper.Disassembler
                                 .GetInstruction(
                                     leftRuntimeFunction,
                                     _leftDumper.Reader.GetOffset(leftRuntimeFunction.StartAddress),
                                     leftOffset,
                                     out string leftInstruction
                                 );
-                            rightOffset += _rightDumper
-                                .Disassembler
+                            rightOffset += _rightDumper.Disassembler
                                 .GetInstruction(
                                     rightRuntimeFunction,
-                                    _rightDumper
-                                        .Reader
+                                    _rightDumper.Reader
                                         .GetOffset(rightRuntimeFunction.StartAddress),
                                     rightOffset,
                                     out string rightInstruction

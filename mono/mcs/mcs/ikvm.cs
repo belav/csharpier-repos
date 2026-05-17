@@ -648,8 +648,7 @@ namespace Mono.CSharp
                                 {
                                     compiler.Report.SymbolRelatedToPreviousError(entry.Item2);
                                     compiler.Report.SymbolRelatedToPreviousError(fileName);
-                                    compiler
-                                        .Report
+                                    compiler.Report
                                         .Error(
                                             1704,
                                             "An assembly with the same name `{0}' has already been imported. Consider removing one of the references or sign the assembly",
@@ -680,12 +679,10 @@ namespace Mono.CSharp
                                     {
                                         case AssemblyComparisonResult.EquivalentFXUnified:
                                         case AssemblyComparisonResult.EquivalentUnified:
-                                            compiler
-                                                .Report
+                                            compiler.Report
                                                 .SymbolRelatedToPreviousError(entry.Item2);
                                             compiler.Report.SymbolRelatedToPreviousError(fileName);
-                                            compiler
-                                                .Report
+                                            compiler.Report
                                                 .Error(
                                                     1703,
                                                     "An assembly `{0}' with the same identity has already been imported. Consider removing one of the references",
@@ -825,13 +822,14 @@ namespace Mono.CSharp
             }
             catch (Exception e)
             {
-                ctx.Report.Error(
-                    7064,
-                    Location.Null,
-                    "Error opening icon file `{0}'. {1}",
-                    fileName,
-                    e.Message
-                );
+                ctx.Report
+                    .Error(
+                        7064,
+                        Location.Null,
+                        "Error opening icon file `{0}'. {1}",
+                        fileName,
+                        e.Message
+                    );
                 return;
             }
 

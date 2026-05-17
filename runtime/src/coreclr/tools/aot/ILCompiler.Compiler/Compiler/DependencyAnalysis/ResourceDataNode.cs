@@ -77,17 +77,14 @@ namespace ILCompiler.DependencyAnalysis
             _indexData = new List<ResourceIndexData>();
             // Build up index information
             foreach (
-                EcmaAssembly module in factory
-                    .MetadataManager
+                EcmaAssembly module in factory.MetadataManager
                     .GetCompilationModulesWithMetadata()
                     .OfType<EcmaAssembly>()
             )
             {
-                PEMemoryBlock resourceDirectory = module
-                    .PEReader
+                PEMemoryBlock resourceDirectory = module.PEReader
                     .GetSectionData(
-                        module
-                            .PEReader
+                        module.PEReader
                             .PEHeaders
                             .CorHeader
                             .ResourcesDirectory
@@ -100,8 +97,7 @@ namespace ILCompiler.DependencyAnalysis
                     {
                         foreach (var resourceHandle in module.MetadataReader.ManifestResources)
                         {
-                            ManifestResource resource = module
-                                .MetadataReader
+                            ManifestResource resource = module.MetadataReader
                                 .GetManifestResource(resourceHandle);
 
                             // Don't try to embed linked resources or resources in other assemblies
@@ -114,8 +110,7 @@ namespace ILCompiler.DependencyAnalysis
 
                             // Check if emitting the manifest resource is blocked by policy.
                             if (
-                                factory
-                                    .MetadataManager
+                                factory.MetadataManager
                                     .IsManifestResourceBlocked(factory, module, resourceName)
                             )
                                 continue;
@@ -161,11 +156,9 @@ namespace ILCompiler.DependencyAnalysis
             foreach (ResourceIndexData indexData in _indexData)
             {
                 EcmaModule module = indexData.EcmaModule;
-                PEMemoryBlock resourceDirectory = module
-                    .PEReader
+                PEMemoryBlock resourceDirectory = module.PEReader
                     .GetSectionData(
-                        module
-                            .PEReader
+                        module.PEReader
                             .PEHeaders
                             .CorHeader
                             .ResourcesDirectory

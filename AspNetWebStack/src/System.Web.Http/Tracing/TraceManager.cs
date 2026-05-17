@@ -126,8 +126,7 @@ namespace System.Web.Http.Tracing
             ITraceWriter traceWriter
         )
         {
-            IHttpControllerSelector controllerSelector = configuration
-                .Services
+            IHttpControllerSelector controllerSelector = configuration.Services
                 .GetHttpControllerSelector();
             if (controllerSelector != null && !(controllerSelector is HttpControllerSelectorTracer))
             {
@@ -234,8 +233,7 @@ namespace System.Web.Http.Tracing
                     configuration.MessageHandlers.Insert(i, handlerTracer);
                 }
 
-                configuration
-                    .MessageHandlers
+                configuration.MessageHandlers
                     .Insert(0, new RequestMessageHandlerTracer(traceWriter));
             }
         }

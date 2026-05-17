@@ -249,12 +249,10 @@ namespace Mono.Linker.Dataflow
             var callingMethodDefinition = origin.Provider as MethodDefinition;
             Debug.Assert(callingMethodDefinition != null);
 
-            bool requiresDataFlowAnalysis = context
-                .Annotations
+            bool requiresDataFlowAnalysis = context.Annotations
                 .FlowAnnotations
                 .RequiresDataFlowAnalysis(calledMethodDefinition);
-            var annotatedMethodReturnValue = context
-                .Annotations
+            var annotatedMethodReturnValue = context.Annotations
                 .FlowAnnotations
                 .GetMethodReturnValue(calledMethodDefinition);
             Debug.Assert(
@@ -346,8 +344,7 @@ namespace Mono.Linker.Dataflow
                         );
                     }
                     if (
-                        context
-                            .Annotations
+                        context.Annotations
                             .DoesMethodRequireUnreferencedCode(
                                 calledMethodDefinition,
                                 out RequiresUnreferencedCodeAttribute? requiresUnreferencedCode
@@ -425,15 +422,15 @@ namespace Mono.Linker.Dataflow
                             // In this case to get correct results, trimmer would have to mark all public methods on Derived. Which
                             // currently it won't do.
 
-                            TypeDefinition? staticType = (valueNode as IValueWithStaticType)
-                                ?.StaticType
+                            TypeDefinition? staticType = (
+                                valueNode as IValueWithStaticType
+                            )?.StaticType
                                 ?.Type;
                             if (staticType is null)
                             {
                                 // We don't know anything about the type GetType was called on. Track this as a usual result of a method call without any annotations
                                 AddReturnValue(
-                                    context
-                                        .Annotations
+                                    context.Annotations
                                         .FlowAnnotations
                                         .GetMethodReturnValue(calledMethodDefinition)
                                 );
@@ -467,16 +464,14 @@ namespace Mono.Linker.Dataflow
                                 // This should already be true for most cases (method params, fields, ...), but just in case
                                 reflectionMarker.MarkType(origin, staticType);
 
-                                var annotation = markStep
-                                    .DynamicallyAccessedMembersTypeHierarchy
+                                var annotation = markStep.DynamicallyAccessedMembersTypeHierarchy
                                     .ApplyDynamicallyAccessedMembersToTypeHierarchy(staticType);
 
                                 // Return a value which is "unknown type" with annotation. For now we'll use the return value node
                                 // for the method, which means we're loosing the information about which staticType this
                                 // started with. For now we don't need it, but we can add it later on.
                                 AddReturnValue(
-                                    context
-                                        .Annotations
+                                    context.Annotations
                                         .FlowAnnotations
                                         .GetMethodReturnValue(calledMethodDefinition, annotation)
                                 );
@@ -516,8 +511,7 @@ namespace Mono.Linker.Dataflow
                     )
                     {
                         if (
-                            !methodReturnValueWithMemberTypes
-                                .DynamicallyAccessedMemberTypes
+                            !methodReturnValueWithMemberTypes.DynamicallyAccessedMemberTypes
                                 .HasFlag(annotatedMethodReturnValue.DynamicallyAccessedMemberTypes)
                         )
                             throw new InvalidOperationException(

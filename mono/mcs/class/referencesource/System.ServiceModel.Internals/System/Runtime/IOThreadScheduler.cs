@@ -159,8 +159,7 @@ namespace System.Runtime
                 finally
                 {
                     // Called in a finally because it needs to run uninterrupted in order to maintain consistency.
-                    queued = IOThreadScheduler
-                        .current
+                    queued = IOThreadScheduler.current
                         .ScheduleCallbackLowPriHelper(callback, state);
                 }
             }

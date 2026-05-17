@@ -191,8 +191,7 @@ namespace System.IdentityModel.Tokens
             )
                 return (T)this.externalTokenReference;
 
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(
                     new SecurityTokenException(SR.GetString(SR.UnableToCreateTokenReference))
                 );

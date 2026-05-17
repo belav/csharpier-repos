@@ -411,8 +411,7 @@ public abstract class NavigationManager
             {
                 var locationChangingHandlersCopy = ArrayPool<
                     Func<LocationChangingContext, ValueTask>
-                >
-                    .Shared
+                >.Shared
                     .Rent(handlerCount);
 
                 try
@@ -463,8 +462,7 @@ public abstract class NavigationManager
                 }
                 finally
                 {
-                    ArrayPool<Func<LocationChangingContext, ValueTask>>
-                        .Shared
+                    ArrayPool<Func<LocationChangingContext, ValueTask>>.Shared
                         .Return(locationChangingHandlersCopy);
                 }
             }

@@ -63,8 +63,7 @@ namespace Cairo
 
             if (!disposing)
             {
-                Console
-                    .Error
+                Console.Error
                     .WriteLine(
                         "{0} is leaking, programmer is missing a call to Dispose",
                         typeof(T).FullName
@@ -80,8 +79,7 @@ namespace Cairo
                 }
                 else
                 {
-                    Console
-                        .Error
+                    Console.Error
                         .WriteLine("Set MONO_CAIRO_DEBUG_DISPOSE to track allocation traces");
                 }
             }

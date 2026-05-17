@@ -195,8 +195,7 @@ namespace Internal.IL
                                 return null;
 
                             TypeDesc underlyingType = elementType.UnderlyingType;
-                            TypeDesc returnType = method
-                                .Context
+                            TypeDesc returnType = method.Context
                                 .GetWellKnownType(WellKnownType.Int32);
                             MethodDesc underlyingCompareToMethod = underlyingType.GetKnownMethod(
                                 "CompareTo",
@@ -321,8 +320,7 @@ namespace Internal.IL
                                 static MethodDesc GetMethodToCall(TypeDesc elementType)
                                 {
                                     TypeSystemContext context = elementType.Context;
-                                    MetadataType helperType = context
-                                        .SystemModule
+                                    MetadataType helperType = context.SystemModule
                                         .GetKnownType(
                                             "Internal.IntrinsicSupport",
                                             "EqualityComparerHelpers"

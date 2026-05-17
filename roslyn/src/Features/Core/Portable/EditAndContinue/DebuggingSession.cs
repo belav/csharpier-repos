@@ -467,8 +467,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             }
             catch (Exception e)
             {
-                EditAndContinueService
-                    .Log
+                EditAndContinueService.Log
                     .Write("Failed to create baseline for '{0}': {1}", projectId, e.Message);
 
                 var descriptor = EditAndContinueDiagnosticDescriptors.GetDescriptor(
@@ -556,8 +555,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                     return ImmutableArray<Diagnostic>.Empty;
                 }
 
-                var analysis = await EditSession
-                    .Analyses
+                var analysis = await EditSession.Analyses
                     .GetDocumentAnalysisAsync(
                         LastCommittedSolution,
                         oldDocument,
@@ -590,8 +588,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                     return ImmutableArray<Diagnostic>.Empty;
                 }
 
-                EditSession
-                    .Telemetry
+                EditSession.Telemetry
                     .LogRudeEditDiagnostics(
                         analysis.RudeEditErrors,
                         project.State.Attributes.TelemetryId
@@ -726,8 +723,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                     return default;
                 }
 
-                var baseActiveStatements = await EditSession
-                    .BaseActiveStatements
+                var baseActiveStatements = await EditSession.BaseActiveStatements
                     .GetValueAsync(cancellationToken)
                     .ConfigureAwait(false);
                 using var _1 = PooledDictionary<string, ArrayBuilder<(ProjectId, int)>>.GetInstance(
@@ -788,8 +784,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                     Debug.Assert(oldProject.SupportsEditAndContinue());
                     Debug.Assert(newProject.SupportsEditAndContinue());
 
-                    var analyzer = newProject
-                        .Services
+                    var analyzer = newProject.Services
                         .GetRequiredService<IEditAndContinueAnalyzer>();
 
                     await foreach (
@@ -958,13 +953,11 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                     return ImmutableArray<ActiveStatementSpan>.Empty;
                 }
 
-                var baseActiveStatements = await EditSession
-                    .BaseActiveStatements
+                var baseActiveStatements = await EditSession.BaseActiveStatements
                     .GetValueAsync(cancellationToken)
                     .ConfigureAwait(false);
                 if (
-                    !baseActiveStatements
-                        .DocumentPathMap
+                    !baseActiveStatements.DocumentPathMap
                         .TryGetValue(
                             mappedDocument.FilePath,
                             out var oldMappedDocumentActiveStatements
@@ -1023,8 +1016,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                         continue;
                     }
 
-                    var analysis = await EditSession
-                        .Analyses
+                    var analysis = await EditSession.Analyses
                         .GetDocumentAnalysisAsync(
                             LastCommittedSolution,
                             oldUnmappedDocument,

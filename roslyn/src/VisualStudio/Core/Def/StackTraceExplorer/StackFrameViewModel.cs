@@ -51,8 +51,7 @@ namespace Microsoft.VisualStudio.LanguageServices.StackTraceExplorer
             _frame = frame;
             _threadingContext = threadingContext;
             _workspace = workspace;
-            _stackExplorerService = workspace
-                .Services
+            _stackExplorerService = workspace.Services
                 .GetRequiredService<IStackTraceExplorerService>();
         }
 
@@ -155,8 +154,7 @@ namespace Microsoft.VisualStudio.LanguageServices.StackTraceExplorer
                     // version of the file.
                     lineNumber = Math.Min(sourceText.Lines.Count, lineNumber);
 
-                    var navigationService = _workspace
-                        .Services
+                    var navigationService = _workspace.Services
                         .GetService<IDocumentNavigationService>();
                     if (navigationService is null)
                         return;
@@ -195,8 +193,7 @@ namespace Microsoft.VisualStudio.LanguageServices.StackTraceExplorer
 
             var classLink = new Hyperlink();
             var classLinkText = className.ToString();
-            classLink
-                .Inlines
+            classLink.Inlines
                 .Add(MakeClassifiedRun(ClassificationTypeNames.ClassName, classLinkText));
             classLink.Click += (s, a) => NavigateToClass();
             classLink.RequestNavigate += (s, a) => NavigateToClass();
@@ -222,8 +219,7 @@ namespace Microsoft.VisualStudio.LanguageServices.StackTraceExplorer
             }
 
             methodTextBuilder.Append(methodDeclaration.ArgumentList.ToFullString());
-            methodLink
-                .Inlines
+            methodLink.Inlines
                 .Add(
                     MakeClassifiedRun(
                         ClassificationTypeNames.MethodName,
@@ -248,8 +244,7 @@ namespace Microsoft.VisualStudio.LanguageServices.StackTraceExplorer
 
                 var fileLink = new Hyperlink();
                 var fileLinkText = _frame.Root.FileInformationExpression.ToString();
-                fileLink
-                    .Inlines
+                fileLink.Inlines
                     .Add(
                         MakeClassifiedRun(ClassificationTypeNames.Text, fileInformation.ToString())
                     );

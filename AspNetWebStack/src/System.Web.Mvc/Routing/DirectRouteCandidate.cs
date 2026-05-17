@@ -159,8 +159,7 @@ namespace System.Web.Mvc.Routing
                     actionName = actionName ?? candidate.ActionDescriptor.ActionName;
 
                     if (
-                        candidate
-                            .ActionNameSelectors
+                        candidate.ActionNameSelectors
                             .All(selector => selector(controllerContext, actionName))
                     )
                     {

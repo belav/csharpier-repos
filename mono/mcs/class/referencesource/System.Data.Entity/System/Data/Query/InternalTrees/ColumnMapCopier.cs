@@ -279,8 +279,7 @@ namespace System.Data.Query.InternalTrees
         {
             // At this time, we shouldn't ever see this type here; it's for SPROCS which don't use
             // the plan compiler.
-            System
-                .Data
+            System.Data
                 .Query
                 .PlanCompiler
                 .PlanCompiler

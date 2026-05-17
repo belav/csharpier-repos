@@ -266,8 +266,7 @@ public class GroupBySplitQueryingEnumerable<TKey, TElement>
                 {
                     if (_dataReader == null)
                     {
-                        _relationalQueryContext
-                            .ExecutionStrategy
+                        _relationalQueryContext.ExecutionStrategy
                             .Execute(
                                 this,
                                 static (_, enumerator) => InitializeReader(enumerator),
@@ -364,9 +363,9 @@ public class GroupBySplitQueryingEnumerable<TKey, TElement>
         {
             EntityFrameworkEventSource.Log.QueryExecuting();
 
-            var relationalCommand = enumerator._relationalCommand = enumerator
-                ._relationalCommandCache
-                .RentAndPopulateRelationalCommand(enumerator._relationalQueryContext);
+            var relationalCommand = enumerator._relationalCommand =
+                enumerator._relationalCommandCache
+                    .RentAndPopulateRelationalCommand(enumerator._relationalQueryContext);
 
             var dataReader = enumerator._dataReader = relationalCommand.ExecuteReader(
                 new RelationalCommandParameterObject(
@@ -383,8 +382,7 @@ public class GroupBySplitQueryingEnumerable<TKey, TElement>
 
             enumerator._resultCoordinator = new SplitQueryResultCoordinator();
 
-            enumerator
-                ._relationalQueryContext
+            enumerator._relationalQueryContext
                 .InitializeStateManager(enumerator._standAloneStateManager);
 
             return false;
@@ -474,8 +472,7 @@ public class GroupBySplitQueryingEnumerable<TKey, TElement>
                 {
                     if (_dataReader == null)
                     {
-                        await _relationalQueryContext
-                            .ExecutionStrategy
+                        await _relationalQueryContext.ExecutionStrategy
                             .ExecuteAsync(
                                 this,
                                 static (_, enumerator, cancellationToken) =>
@@ -586,9 +583,9 @@ public class GroupBySplitQueryingEnumerable<TKey, TElement>
         {
             EntityFrameworkEventSource.Log.QueryExecuting();
 
-            var relationalCommand = enumerator._relationalCommand = enumerator
-                ._relationalCommandCache
-                .RentAndPopulateRelationalCommand(enumerator._relationalQueryContext);
+            var relationalCommand = enumerator._relationalCommand =
+                enumerator._relationalCommandCache
+                    .RentAndPopulateRelationalCommand(enumerator._relationalQueryContext);
 
             var dataReader = enumerator._dataReader = await relationalCommand
                 .ExecuteReaderAsync(
@@ -608,8 +605,7 @@ public class GroupBySplitQueryingEnumerable<TKey, TElement>
 
             enumerator._resultCoordinator = new SplitQueryResultCoordinator();
 
-            enumerator
-                ._relationalQueryContext
+            enumerator._relationalQueryContext
                 .InitializeStateManager(enumerator._standAloneStateManager);
 
             return false;

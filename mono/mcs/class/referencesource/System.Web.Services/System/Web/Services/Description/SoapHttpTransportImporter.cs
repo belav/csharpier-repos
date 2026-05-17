@@ -26,8 +26,7 @@ namespace System.Web.Services.Description
                         ImportContext.Port.Extensions.Find(typeof(SoapAddressBinding));
             if (ImportContext.Style == ServiceDescriptionImportStyle.Client)
             {
-                ImportContext
-                    .CodeTypeDeclaration
+                ImportContext.CodeTypeDeclaration
                     .BaseTypes
                     .Add(typeof(SoapHttpClientProtocol).FullName);
                 CodeConstructor ctor = WebCodeGenerator.AddConstructor(

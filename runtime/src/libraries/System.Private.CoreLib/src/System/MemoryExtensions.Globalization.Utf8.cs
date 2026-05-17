@@ -51,8 +51,7 @@ namespace System
                 case StringComparison.CurrentCulture:
                 case StringComparison.CurrentCultureIgnoreCase:
                 {
-                    return CultureInfo
-                        .CurrentCulture
+                    return CultureInfo.CurrentCulture
                         .CompareInfo
                         .IsPrefixUtf8(
                             span,
@@ -64,8 +63,7 @@ namespace System
                 case StringComparison.InvariantCulture:
                 case StringComparison.InvariantCultureIgnoreCase:
                 {
-                    return CompareInfo
-                        .Invariant
+                    return CompareInfo.Invariant
                         .IsPrefixUtf8(
                             span,
                             value,

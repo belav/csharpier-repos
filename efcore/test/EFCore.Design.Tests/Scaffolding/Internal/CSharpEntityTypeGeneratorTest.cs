@@ -368,9 +368,8 @@ public partial class EntityWithAscendingDescendingIndexes
     public int B { get; set; }
 }
 """,
-                    code.AdditionalFiles.Single(f =>
-                        f.Path == "EntityWithAscendingDescendingIndexes.cs"
-                    )
+                    code.AdditionalFiles
+                        .Single(f => f.Path == "EntityWithAscendingDescendingIndexes.cs")
                 );
             },
             model =>

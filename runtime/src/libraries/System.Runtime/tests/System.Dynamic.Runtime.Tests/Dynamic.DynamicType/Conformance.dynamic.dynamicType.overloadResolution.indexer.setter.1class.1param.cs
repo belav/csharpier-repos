@@ -290,8 +290,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadRes
             // debug
             if (!ret)
             {
-                System
-                    .Console
+                System.Console
                     .WriteLine("*** Expected= {0}\r\n***   Actual= {1}", message, actualError);
             }
 

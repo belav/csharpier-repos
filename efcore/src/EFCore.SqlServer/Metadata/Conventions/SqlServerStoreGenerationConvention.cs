@@ -148,8 +148,7 @@ public class SqlServerStoreGenerationConvention : StoreGenerationConvention
 
             if (property.TryGetDefaultValue(storeObject, out _))
             {
-                Dependencies
-                    .ValidationLogger
+                Dependencies.ValidationLogger
                     .ConflictingValueGenerationStrategiesWarning(
                         generationStrategy,
                         "DefaultValue",
@@ -159,8 +158,7 @@ public class SqlServerStoreGenerationConvention : StoreGenerationConvention
 
             if (property.GetDefaultValueSql(storeObject) != null)
             {
-                Dependencies
-                    .ValidationLogger
+                Dependencies.ValidationLogger
                     .ConflictingValueGenerationStrategiesWarning(
                         generationStrategy,
                         "DefaultValueSql",
@@ -170,8 +168,7 @@ public class SqlServerStoreGenerationConvention : StoreGenerationConvention
 
             if (property.GetComputedColumnSql(storeObject) != null)
             {
-                Dependencies
-                    .ValidationLogger
+                Dependencies.ValidationLogger
                     .ConflictingValueGenerationStrategiesWarning(
                         generationStrategy,
                         "ComputedColumnSql",

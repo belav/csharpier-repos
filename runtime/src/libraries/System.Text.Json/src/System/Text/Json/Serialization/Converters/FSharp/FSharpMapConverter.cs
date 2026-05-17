@@ -19,8 +19,7 @@ namespace System.Text.Json.Serialization.Converters
         [RequiresDynamicCode(FSharpCoreReflectionProxy.FSharpCoreUnreferencedCodeMessage)]
         public FSharpMapConverter()
         {
-            _mapConstructor = FSharpCoreReflectionProxy
-                .Instance
+            _mapConstructor = FSharpCoreReflectionProxy.Instance
                 .CreateFSharpMapConstructor<TMap, TKey, TValue>();
         }
 

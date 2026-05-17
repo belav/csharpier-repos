@@ -30,8 +30,7 @@ namespace System.Reflection.Runtime.General
         {
             if (typeDefOrRefOrSpec.IsNativeFormatMetadataBased)
             {
-                return global::Internal
-                    .Metadata
+                return global::Internal.Metadata
                     .NativeFormat
                     .Handle
                     .FromIntToken(typeDefOrRefOrSpec.Handle)
@@ -48,8 +47,7 @@ namespace System.Reflection.Runtime.General
                 typeDefOrRefOrSpec.Reader
                 is global::System.Reflection.Metadata.MetadataReader ecmaReader
             )
-                return global::System
-                    .Reflection
+                return global::System.Reflection
                     .Metadata
                     .Ecma335
                     .MetadataTokens

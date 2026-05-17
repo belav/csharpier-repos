@@ -133,8 +133,7 @@ public static class MvcCoreMvcBuilderExtensions
             builder.Services.TryAddTransient(controller, controller);
         }
 
-        builder
-            .Services
+        builder.Services
             .Replace(
                 ServiceDescriptor.Transient<IControllerActivator, ServiceBasedControllerActivator>()
             );

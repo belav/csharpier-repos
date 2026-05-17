@@ -56,8 +56,7 @@ namespace System.Reflection.Emit
         internal void Debug()
         {
 #if NO
-            System
-                .Console
+            System.Console
                 .Write(
                     "\ttype="
                         + type.ToString()

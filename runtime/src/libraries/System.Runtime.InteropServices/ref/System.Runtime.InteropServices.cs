@@ -1557,16 +1557,14 @@ namespace System.Runtime.InteropServices
                 System.Type SourceInterface,
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.NonPublicConstructors
-                    | System
-                        .Diagnostics
+                    | System.Diagnostics
                         .CodeAnalysis
                         .DynamicallyAccessedMemberTypes
                         .PublicConstructors
                     | System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicEvents
                     | System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicFields
                     | System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicMethods
-                    | System
-                        .Diagnostics
+                    | System.Diagnostics
                         .CodeAnalysis
                         .DynamicallyAccessedMemberTypes
                         .PublicProperties
@@ -2793,8 +2791,7 @@ namespace System.Runtime.InteropServices
             System.IntPtr ptr,
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.NonPublicConstructors
-                    | System
-                        .Diagnostics
+                    | System.Diagnostics
                         .CodeAnalysis
                         .DynamicallyAccessedMemberTypes
                         .PublicConstructors
@@ -2808,8 +2805,7 @@ namespace System.Runtime.InteropServices
         public static T? PtrToStructure<
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.NonPublicConstructors
-                    | System
-                        .Diagnostics
+                    | System.Diagnostics
                         .CodeAnalysis
                         .DynamicallyAccessedMemberTypes
                         .PublicConstructors

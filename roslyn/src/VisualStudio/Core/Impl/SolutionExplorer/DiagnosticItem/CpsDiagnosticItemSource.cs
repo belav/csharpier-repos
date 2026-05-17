@@ -128,8 +128,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
                 return null;
             }
 
-            return project
-                .AnalyzerReferences
+            return project.AnalyzerReferences
                 .FirstOrDefault(r =>
                     string.Equals(r.FullPath, analyzerFilePath, StringComparison.OrdinalIgnoreCase)
                 );

@@ -70,8 +70,7 @@ namespace System.Security.Cryptography.X509Certificates
             {
                 // Ensure that certHandle stays alive while we use an interior pointer.
                 certHandle.DangerousAddRef(ref addedRef);
-                X500DistinguishedName dn = Interop
-                    .Crypto
+                X500DistinguishedName dn = Interop.Crypto
                     .LoadX500Name(Interop.Crypto.X509GetSubjectName(certHandle));
                 return dn.Name;
             }

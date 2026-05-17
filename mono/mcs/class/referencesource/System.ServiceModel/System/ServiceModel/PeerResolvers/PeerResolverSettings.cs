@@ -43,8 +43,7 @@ namespace System.ServiceModel.PeerResolvers
             {
                 if (!PeerReferralPolicyHelper.IsDefined(value))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidEnumArgumentException(
                                 "value",

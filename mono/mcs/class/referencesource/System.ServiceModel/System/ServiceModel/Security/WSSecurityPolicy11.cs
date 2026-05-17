@@ -118,8 +118,7 @@ namespace System.ServiceModel.Security
                     if (e is NullReferenceException)
                         throw;
 
-                    importer
-                        .Errors
+                    importer.Errors
                         .Add(
                             new MetadataConversionError(
                                 SR.GetString(

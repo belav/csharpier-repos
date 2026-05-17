@@ -47,8 +47,7 @@ namespace System.Data.Entity.Design.Common
             if (serviceProvider == null)
             {
                 throw MetadataUtil.ProviderIncompatible(
-                    System
-                        .Data
+                    System.Data
                         .Entity
                         .Design
                         .Strings
@@ -61,8 +60,7 @@ namespace System.Data.Entity.Design.Common
             if (providerServices == null)
             {
                 throw MetadataUtil.ProviderIncompatible(
-                    System
-                        .Data
+                    System.Data
                         .Entity
                         .Design
                         .Strings

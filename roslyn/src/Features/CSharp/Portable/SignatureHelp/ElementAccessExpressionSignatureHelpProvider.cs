@@ -377,8 +377,7 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
                 GetPreambleParts(indexer, position, semanticModel),
                 GetSeparatorParts(),
                 GetPostambleParts(),
-                indexer
-                    .Parameters
+                indexer.Parameters
                     .Select(p =>
                         Convert(p, semanticModel, position, documentationCommentFormattingService)
                     )

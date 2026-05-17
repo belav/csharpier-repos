@@ -161,21 +161,18 @@ namespace System.Data.Metadata.Edm
             //For 1:* and 1:0..1 associations, the end other than 1 i.e. either * or 0..1 ends need to be
             //mapped to key columns
             if (
-                associationType
-                    .AssociationEndMembers
+                associationType.AssociationEndMembers
                     .Any(it => it.RelationshipMultiplicity.Equals(RelationshipMultiplicity.One))
             )
             {
                 {
-                    return associationType
-                        .AssociationEndMembers
+                    return associationType.AssociationEndMembers
                         .SingleOrDefault(it =>
                             (
                                 (it.RelationshipMultiplicity.Equals(RelationshipMultiplicity.Many))
                                 || (
-                                    it.RelationshipMultiplicity.Equals(
-                                        RelationshipMultiplicity.ZeroOrOne
-                                    )
+                                    it.RelationshipMultiplicity
+                                        .Equals(RelationshipMultiplicity.ZeroOrOne)
                                 )
                             )
                         );
@@ -183,16 +180,14 @@ namespace System.Data.Metadata.Edm
             }
             //For 0..1:* associations, * end must be mapped to key.
             else if (
-                associationType
-                    .AssociationEndMembers
+                associationType.AssociationEndMembers
                     .Any(it =>
                         (it.RelationshipMultiplicity.Equals(RelationshipMultiplicity.ZeroOrOne))
                     )
             )
             {
                 {
-                    return associationType
-                        .AssociationEndMembers
+                    return associationType.AssociationEndMembers
                         .SingleOrDefault(it =>
                             ((it.RelationshipMultiplicity.Equals(RelationshipMultiplicity.Many)))
                         );

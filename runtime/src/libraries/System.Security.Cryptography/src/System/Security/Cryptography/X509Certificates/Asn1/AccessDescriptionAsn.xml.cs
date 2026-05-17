@@ -100,8 +100,7 @@ namespace System.Security.Cryptography.X509Certificates.Asn1
             AsnValueReader sequenceReader = reader.ReadSequence(expectedTag);
 
             decoded.AccessMethod = sequenceReader.ReadObjectIdentifier();
-            System
-                .Security
+            System.Security
                 .Cryptography
                 .Asn1
                 .GeneralNameAsn

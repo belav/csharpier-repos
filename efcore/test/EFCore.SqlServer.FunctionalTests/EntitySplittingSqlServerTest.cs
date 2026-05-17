@@ -30,8 +30,9 @@ public class EntitySplittingSqlServerTest : EntitySplittingTestBase
             sensitiveLogEnabled: false,
             seed: c =>
             {
-                c.Database.ExecuteSqlRaw(
-                    @"
+                c.Database
+                    .ExecuteSqlRaw(
+                        @"
 CREATE OR ALTER TRIGGER [MeterReadingsDetails_Trigger]
 ON [MeterReadingDetails]
 FOR INSERT, UPDATE, DELETE AS
@@ -39,7 +40,7 @@ BEGIN
 	IF @@ROWCOUNT = 0
 		return
 END"
-                );
+                    );
             }
         );
 

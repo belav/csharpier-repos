@@ -43,8 +43,7 @@ public class DerivedComplexTypes : IntegrationTest<DerivedComplexTypes.DatabaseI
     {
         protected override void Seed(Context context)
         {
-            context
-                .Customers
+            context.Customers
                 .Add(
                     new Customer
                     {

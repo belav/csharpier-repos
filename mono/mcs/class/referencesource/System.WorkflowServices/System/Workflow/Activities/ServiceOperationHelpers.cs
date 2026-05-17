@@ -364,8 +364,7 @@ namespace System.Workflow.Activities
         {
             if (contractDescription == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("contractDescription");
             }
 

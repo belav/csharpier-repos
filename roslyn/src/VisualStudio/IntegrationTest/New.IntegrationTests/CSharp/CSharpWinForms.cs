@@ -24,23 +24,17 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
         public async Task AddControl()
         {
             var project = ProjectName;
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .OpenFileWithDesignerAsync(project, "Form1.cs", HangMitigatingCancellationToken);
-            await TestServices
-                .Editor
+            await TestServices.Editor
                 .AddWinFormButtonAsync("SomeButton", HangMitigatingCancellationToken);
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .SaveFileAsync(project, "Form1.cs", HangMitigatingCancellationToken);
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .SaveFileAsync(project, "Form1.resx", HangMitigatingCancellationToken);
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .OpenFileAsync(project, "Form1.Designer.cs", HangMitigatingCancellationToken);
-            var actualText = await TestServices
-                .Editor
+            var actualText = await TestServices.Editor
                 .GetTextAsync(HangMitigatingCancellationToken);
             Assert.Contains(@"this.SomeButton.Name = ""SomeButton""", actualText);
             Assert.Contains(@"private System.Windows.Forms.Button SomeButton;", actualText);
@@ -50,39 +44,31 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
         public async Task ChangeControlProperty()
         {
             var project = ProjectName;
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .OpenFileWithDesignerAsync(project, "Form1.cs", HangMitigatingCancellationToken);
-            await TestServices
-                .Editor
+            await TestServices.Editor
                 .AddWinFormButtonAsync("SomeButton", HangMitigatingCancellationToken);
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .SaveFileAsync(project, "Form1.cs", HangMitigatingCancellationToken);
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .SaveFileAsync(project, "Form1.resx", HangMitigatingCancellationToken);
-            await TestServices
-                .Editor
+            await TestServices.Editor
                 .EditWinFormButtonPropertyAsync(
                     buttonName: "SomeButton",
                     propertyName: "Text",
                     propertyValue: "NewButtonText",
                     HangMitigatingCancellationToken
                 );
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .CloseDesignerFileAsync(
                     project,
                     "Form1.cs",
                     saveFile: true,
                     HangMitigatingCancellationToken
                 );
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .OpenFileAsync(project, "Form1.Designer.cs", HangMitigatingCancellationToken);
-            var actualText = await TestServices
-                .Editor
+            var actualText = await TestServices.Editor
                 .GetTextAsync(HangMitigatingCancellationToken);
             Assert.Contains(@"this.SomeButton.Text = ""NewButtonText""", actualText);
         }
@@ -91,20 +77,15 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
         public async Task ChangeControlPropertyInCode()
         {
             var project = ProjectName;
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .OpenFileWithDesignerAsync(project, "Form1.cs", HangMitigatingCancellationToken);
-            await TestServices
-                .Editor
+            await TestServices.Editor
                 .AddWinFormButtonAsync("SomeButton", HangMitigatingCancellationToken);
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .SaveFileAsync(project, "Form1.cs", HangMitigatingCancellationToken);
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .SaveFileAsync(project, "Form1.resx", HangMitigatingCancellationToken);
-            await TestServices
-                .Editor
+            await TestServices.Editor
                 .EditWinFormButtonPropertyAsync(
                     buttonName: "SomeButton",
                     propertyName: "Text",
@@ -112,16 +93,14 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
                     HangMitigatingCancellationToken
                 );
             var expectedPropertyValue = "ButtonTextGoesHere";
-            var actualPropertyValue = await TestServices
-                .Editor
+            var actualPropertyValue = await TestServices.Editor
                 .GetWinFormButtonPropertyValueAsync(
                     buttonName: "SomeButton",
                     propertyName: "Text",
                     HangMitigatingCancellationToken
                 );
             Assert.Equal(expectedPropertyValue, actualPropertyValue);
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .CloseDesignerFileAsync(
                     project,
                     "Form1.cs",
@@ -129,29 +108,24 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
                     HangMitigatingCancellationToken
                 );
             //  Change the control's text in designer.cs code
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .OpenFileAsync(project, "Form1.Designer.cs", HangMitigatingCancellationToken);
             //  Verify that the control's property was set correctly. The following text should appear in InitializeComponent().
-            var actualText = await TestServices
-                .Editor
+            var actualText = await TestServices.Editor
                 .GetTextAsync(HangMitigatingCancellationToken);
             Assert.Contains(@"this.SomeButton.Text = ""ButtonTextGoesHere"";", actualText);
             //  Replace text property with something else
-            await TestServices
-                .Editor
+            await TestServices.Editor
                 .SelectTextInCurrentDocumentAsync(
                     @"this.SomeButton.Text = ""ButtonTextGoesHere"";",
                     HangMitigatingCancellationToken
                 );
-            await TestServices
-                .Input
+            await TestServices.Input
                 .SendAsync(
                     @"this.SomeButton.Text = ""GibberishText"";",
                     HangMitigatingCancellationToken
                 );
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .CloseCodeFileAsync(
                     project,
                     "Form1.Designer.cs",
@@ -159,12 +133,10 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
                     HangMitigatingCancellationToken
                 );
             //  Verify that the control text has changed in the designer
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .OpenFileWithDesignerAsync(project, "Form1.cs", HangMitigatingCancellationToken);
             expectedPropertyValue = "GibberishText";
-            actualPropertyValue = await TestServices
-                .Editor
+            actualPropertyValue = await TestServices.Editor
                 .GetWinFormButtonPropertyValueAsync(
                     buttonName: "SomeButton",
                     propertyName: "Text",
@@ -177,41 +149,32 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
         public async Task AddClickHandler()
         {
             var project = ProjectName;
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .OpenFileWithDesignerAsync(project, "Form1.cs", HangMitigatingCancellationToken);
-            await TestServices
-                .Editor
+            await TestServices.Editor
                 .AddWinFormButtonAsync("SomeButton", HangMitigatingCancellationToken);
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .SaveFileAsync(project, "Form1.cs", HangMitigatingCancellationToken);
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .SaveFileAsync(project, "Form1.resx", HangMitigatingCancellationToken);
-            await TestServices
-                .Editor
+            await TestServices.Editor
                 .EditWinFormButtonEventAsync(
                     buttonName: "SomeButton",
                     eventName: "Click",
                     eventHandlerName: "ExecuteWhenButtonClicked",
                     HangMitigatingCancellationToken
                 );
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .OpenFileAsync(project, "Form1.Designer.cs", HangMitigatingCancellationToken);
-            var designerActualText = await TestServices
-                .Editor
+            var designerActualText = await TestServices.Editor
                 .GetTextAsync(HangMitigatingCancellationToken);
             Assert.Contains(
                 @"this.SomeButton.Click += new System.EventHandler(this.ExecuteWhenButtonClicked);",
                 designerActualText
             );
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .OpenFileAsync(project, "Form1.cs", HangMitigatingCancellationToken);
-            var codeFileActualText = await TestServices
-                .Editor
+            var codeFileActualText = await TestServices.Editor
                 .GetTextAsync(HangMitigatingCancellationToken);
             Assert.Contains(
                 @"    public partial class Form1 : Form
@@ -234,29 +197,23 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
         public async Task RenameControl()
         {
             var project = ProjectName;
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .OpenFileWithDesignerAsync(project, "Form1.cs", HangMitigatingCancellationToken);
-            await TestServices
-                .Editor
+            await TestServices.Editor
                 .AddWinFormButtonAsync("SomeButton", HangMitigatingCancellationToken);
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .SaveFileAsync(project, "Form1.cs", HangMitigatingCancellationToken);
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .SaveFileAsync(project, "Form1.resx", HangMitigatingCancellationToken);
             // Add some control properties and events
-            await TestServices
-                .Editor
+            await TestServices.Editor
                 .EditWinFormButtonPropertyAsync(
                     buttonName: "SomeButton",
                     propertyName: "Text",
                     propertyValue: "ButtonTextValue",
                     HangMitigatingCancellationToken
                 );
-            await TestServices
-                .Editor
+            await TestServices.Editor
                 .EditWinFormButtonEventAsync(
                     buttonName: "SomeButton",
                     eventName: "Click",
@@ -264,8 +221,7 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
                     HangMitigatingCancellationToken
                 );
             // Rename the control
-            await TestServices
-                .Editor
+            await TestServices.Editor
                 .EditWinFormButtonPropertyAsync(
                     buttonName: "SomeButton",
                     propertyName: "Name",
@@ -273,8 +229,7 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
                     HangMitigatingCancellationToken
                 );
 
-            await TestServices
-                .Workspace
+            await TestServices.Workspace
                 .WaitForAllAsyncOperationsAsync(
                     [
                         FeatureAttribute.Workspace,
@@ -291,11 +246,9 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
                 await TestServices.ErrorList.GetBuildErrorsAsync(HangMitigatingCancellationToken)
             );
             // Verify that the rename propagated in designer code
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .OpenFileAsync(project, "Form1.Designer.cs", HangMitigatingCancellationToken);
-            var actualText = await TestServices
-                .Editor
+            var actualText = await TestServices.Editor
                 .GetTextAsync(HangMitigatingCancellationToken);
             Assert.Contains(@"this.SomeNewButton.Name = ""SomeNewButton"";", actualText);
             Assert.Contains(@"this.SomeNewButton.Text = ""ButtonTextValue"";", actualText);
@@ -312,20 +265,15 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
         public async Task RemoveEventHandler()
         {
             var project = ProjectName;
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .OpenFileWithDesignerAsync(project, "Form1.cs", HangMitigatingCancellationToken);
-            await TestServices
-                .Editor
+            await TestServices.Editor
                 .AddWinFormButtonAsync("SomeButton", HangMitigatingCancellationToken);
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .SaveFileAsync(project, "Form1.cs", HangMitigatingCancellationToken);
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .SaveFileAsync(project, "Form1.resx", HangMitigatingCancellationToken);
-            await TestServices
-                .Editor
+            await TestServices.Editor
                 .EditWinFormButtonEventAsync(
                     buttonName: "SomeButton",
                     eventName: "Click",
@@ -333,8 +281,7 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
                     HangMitigatingCancellationToken
                 );
             //  Remove the event handler
-            await TestServices
-                .Editor
+            await TestServices.Editor
                 .EditWinFormButtonEventAsync(
                     buttonName: "SomeButton",
                     eventName: "Click",
@@ -342,8 +289,7 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
                     HangMitigatingCancellationToken
                 );
 
-            await TestServices
-                .Workspace
+            await TestServices.Workspace
                 .WaitForAllAsyncOperationsAsync(
                     [
                         FeatureAttribute.Workspace,
@@ -360,11 +306,9 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
                 await TestServices.ErrorList.GetBuildErrorsAsync(HangMitigatingCancellationToken)
             );
             //  Verify that the handler is removed
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .OpenFileAsync(project, "Form1.Designer.cs", HangMitigatingCancellationToken);
-            var actualText = await TestServices
-                .Editor
+            var actualText = await TestServices.Editor
                 .GetTextAsync(HangMitigatingCancellationToken);
             Assert.DoesNotContain(
                 @"VisualStudio.Editor.SomeButton.Click += new System.EventHandler(VisualStudio.Editor.GooHandler);",
@@ -376,20 +320,15 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
         public async Task ChangeAccessibility()
         {
             var project = ProjectName;
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .OpenFileWithDesignerAsync(project, "Form1.cs", HangMitigatingCancellationToken);
-            await TestServices
-                .Editor
+            await TestServices.Editor
                 .AddWinFormButtonAsync("SomeButton", HangMitigatingCancellationToken);
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .SaveFileAsync(project, "Form1.cs", HangMitigatingCancellationToken);
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .SaveFileAsync(project, "Form1.resx", HangMitigatingCancellationToken);
-            await TestServices
-                .Editor
+            await TestServices.Editor
                 .EditWinFormButtonPropertyAsync(
                     buttonName: "SomeButton",
                     propertyName: "Modifiers",
@@ -398,8 +337,7 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
                     cancellationToken: HangMitigatingCancellationToken
                 );
 
-            await TestServices
-                .Workspace
+            await TestServices.Workspace
                 .WaitForAllAsyncOperationsAsync(
                     [
                         FeatureAttribute.Workspace,
@@ -415,11 +353,9 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
             Assert.Empty(
                 await TestServices.ErrorList.GetBuildErrorsAsync(HangMitigatingCancellationToken)
             );
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .OpenFileAsync(project, "Form1.Designer.cs", HangMitigatingCancellationToken);
-            var actualText = await TestServices
-                .Editor
+            var actualText = await TestServices.Editor
                 .GetTextAsync(HangMitigatingCancellationToken);
             Assert.Contains(@"public System.Windows.Forms.Button SomeButton;", actualText);
         }
@@ -428,24 +364,18 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
         public async Task DeleteControl()
         {
             var project = ProjectName;
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .OpenFileWithDesignerAsync(project, "Form1.cs", HangMitigatingCancellationToken);
-            await TestServices
-                .Editor
+            await TestServices.Editor
                 .AddWinFormButtonAsync("SomeButton", HangMitigatingCancellationToken);
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .SaveFileAsync(project, "Form1.cs", HangMitigatingCancellationToken);
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .SaveFileAsync(project, "Form1.resx", HangMitigatingCancellationToken);
-            await TestServices
-                .Editor
+            await TestServices.Editor
                 .DeleteWinFormButtonAsync("SomeButton", HangMitigatingCancellationToken);
 
-            await TestServices
-                .Workspace
+            await TestServices.Workspace
                 .WaitForAllAsyncOperationsAsync(
                     [
                         FeatureAttribute.Workspace,
@@ -461,11 +391,9 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
             Assert.Empty(
                 await TestServices.ErrorList.GetBuildErrorsAsync(HangMitigatingCancellationToken)
             );
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .OpenFileAsync(project, "Form1.Designer.cs", HangMitigatingCancellationToken);
-            var actualText = await TestServices
-                .Editor
+            var actualText = await TestServices.Editor
                 .GetTextAsync(HangMitigatingCancellationToken);
             Assert.DoesNotContain(
                 @"VisualStudio.Editor.SomeButton.Name = ""SomeButton"";",

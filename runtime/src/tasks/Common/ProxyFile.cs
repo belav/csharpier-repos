@@ -37,8 +37,7 @@ internal sealed class ProxyFile
         {
             if (!_cache.ShouldCopy(this, out string? cause))
             {
-                _cache
-                    .Log
+                _cache.Log
                     .LogMessage(
                         MessageImportance.Low,
                         $"Skipping copying over {TargetFile} as the contents are unchanged"
@@ -51,8 +50,7 @@ internal sealed class ProxyFile
 
             File.Copy(TempFile, TargetFile);
 
-            _cache
-                .Log
+            _cache.Log
                 .LogMessage(
                     MessageImportance.Low,
                     $"Copying {TempFile} to {TargetFile} because {cause}"

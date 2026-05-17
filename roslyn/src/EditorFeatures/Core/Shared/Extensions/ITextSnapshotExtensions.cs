@@ -97,8 +97,7 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
                 )
             )
             {
-                var service = document
-                    .Project
+                var service = document.Project
                     .Solution
                     .Services
                     .GetService<IWorkspaceStatusService>();
@@ -129,8 +128,7 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
             // make sure this is only called from UI thread
             threadingContext.ThrowIfNotOnUIThread();
 
-            return threadingContext
-                .JoinableTaskFactory
+            return threadingContext.JoinableTaskFactory
                 .Run(() =>
                     snapshot.GetFullyLoadedOpenDocumentInCurrentContextWithChangesAsync(
                         operationContext

@@ -60,8 +60,7 @@ namespace System.ServiceModel.Channels
                 int valueInt = (int)value;
                 if (valueInt < 100 || valueInt > 599)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentOutOfRangeException(
                                 "value",
@@ -168,8 +167,7 @@ namespace System.ServiceModel.Channels
         {
             HttpResponseMessage httpResponseMessage = null;
 
-            HttpResponseMessageProperty property = message
-                .Properties
+            HttpResponseMessageProperty property = message.Properties
                 .GetValue<HttpResponseMessageProperty>(HttpResponseMessageProperty.Name);
             if (property != null)
             {
@@ -211,9 +209,8 @@ namespace System.ServiceModel.Channels
                 {
                     if (!responseProperty.useHttpBackedProperty)
                     {
-                        this.httpBackedProperty.MergeWithTraditionalProperty(
-                            responseProperty.traditionalProperty
-                        );
+                        this.httpBackedProperty
+                            .MergeWithTraditionalProperty(responseProperty.traditionalProperty);
                         responseProperty.traditionalProperty = null;
                         responseProperty.httpBackedProperty = this.httpBackedProperty;
                         responseProperty.useHttpBackedProperty = true;

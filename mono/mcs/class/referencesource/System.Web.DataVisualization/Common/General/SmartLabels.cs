@@ -883,14 +883,12 @@ namespace System.Web.UI.DataVisualization.Charting
                 RectangleF lp = GetLabelPosition(graph, labelPosition, labelSize, format, false);
                 if (positionFound)
                 {
-                    graph
-                        .Graphics
+                    graph.Graphics
                         .DrawRectangle(Pens.Green, Rectangle.Round(graph.GetAbsoluteRectangle(lp)));
                 }
                 else
                 {
-                    graph
-                        .Graphics
+                    graph.Graphics
                         .DrawRectangle(
                             new Pen(Color.Magenta, 3),
                             Rectangle.Round(graph.GetAbsoluteRectangle(lp))
@@ -1123,8 +1121,7 @@ namespace System.Web.UI.DataVisualization.Charting
                     && common.Chart.ShowDebugMarkings
                 )
                 {
-                    graph
-                        .Graphics
+                    graph.Graphics
                         .DrawRectangle(
                             Pens.Cyan,
                             Rectangle.Round(graph.GetAbsoluteRectangle(labelPosition))
@@ -1159,8 +1156,7 @@ namespace System.Web.UI.DataVisualization.Charting
 #if DEBUG
                                 if (graph != null && common.Chart.ShowDebugMarkings)
                                 {
-                                    graph
-                                        .Graphics
+                                    graph.Graphics
                                         .DrawRectangle(
                                             Pens.Cyan,
                                             Rectangle.Round(
@@ -1193,8 +1189,7 @@ namespace System.Web.UI.DataVisualization.Charting
 #if DEBUG
                                 if (graph != null && common.Chart.ShowDebugMarkings)
                                 {
-                                    graph
-                                        .Graphics
+                                    graph.Graphics
                                         .DrawRectangle(
                                             Pens.Cyan,
                                             Rectangle.Round(
@@ -1222,8 +1217,7 @@ namespace System.Web.UI.DataVisualization.Charting
 #if DEBUG
                             if (graph != null && common.Chart.ShowDebugMarkings)
                             {
-                                graph
-                                    .Graphics
+                                graph.Graphics
                                     .DrawRectangle(
                                         Pens.Cyan,
                                         Rectangle.Round(graph.GetAbsoluteRectangle(labelPosition))
@@ -1241,8 +1235,7 @@ namespace System.Web.UI.DataVisualization.Charting
 #if DEBUG
                             if (graph != null && common.Chart.ShowDebugMarkings)
                             {
-                                graph
-                                    .Graphics
+                                graph.Graphics
                                     .DrawRectangle(
                                         Pens.Cyan,
                                         Rectangle.Round(graph.GetAbsoluteRectangle(labelPosition))
@@ -1313,8 +1306,7 @@ namespace System.Web.UI.DataVisualization.Charting
                             && common.Chart.ShowDebugMarkings
                         )
                         {
-                            common
-                                .ChartPicture
+                            common.ChartPicture
                                 .ChartGraph
                                 .Graphics
                                 .DrawRectangle(
@@ -1323,15 +1315,13 @@ namespace System.Web.UI.DataVisualization.Charting
                                         common.ChartPicture.ChartGraph.GetAbsoluteRectangle(pos)
                                     )
                                 );
-                            common
-                                .ChartPicture
+                            common.ChartPicture
                                 .ChartGraph
                                 .Graphics
                                 .DrawRectangle(
                                     Pens.Red,
                                     Rectangle.Round(
-                                        common
-                                            .ChartPicture
+                                        common.ChartPicture
                                             .ChartGraph
                                             .GetAbsoluteRectangle(labelPosition)
                                     )
@@ -1737,18 +1727,19 @@ namespace System.Web.UI.DataVisualization.Charting
             {
                 area.smartLabels.checkAllCollisions = true;
                 if (
-                    area.smartLabels.IsSmartLabelCollide(
-                        common,
-                        graph,
-                        area,
-                        smartLabelStyle,
-                        position,
-                        size,
-                        markerPosition,
-                        format,
-                        labelAlignment,
-                        checkCalloutLineOverlapping
-                    )
+                    area.smartLabels
+                        .IsSmartLabelCollide(
+                            common,
+                            graph,
+                            area,
+                            smartLabelStyle,
+                            position,
+                            size,
+                            markerPosition,
+                            format,
+                            labelAlignment,
+                            checkCalloutLineOverlapping
+                        )
                 )
                 {
                     area.smartLabels.checkAllCollisions = false;
@@ -1793,14 +1784,12 @@ namespace System.Web.UI.DataVisualization.Charting
 #if DEBUG
                     if (graph != null && common.Chart.ShowDebugMarkings)
                     {
-                        graph
-                            .Graphics
+                        graph.Graphics
                             .DrawRectangle(
                                 Pens.Blue,
                                 Rectangle.Round(graph.GetAbsoluteRectangle(pos))
                             );
-                        graph
-                            .Graphics
+                        graph.Graphics
                             .DrawRectangle(
                                 Pens.Red,
                                 Rectangle.Round(graph.GetAbsoluteRectangle(labelPosition))

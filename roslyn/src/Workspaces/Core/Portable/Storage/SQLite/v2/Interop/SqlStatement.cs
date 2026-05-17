@@ -92,8 +92,7 @@ namespace Microsoft.CodeAnalysis.SQLite.v2.Interop
                         fixed (byte* bytesPtr = bytes)
                         {
                             Contract.ThrowIfFalse(
-                                Encoding
-                                    .UTF8
+                                Encoding.UTF8
                                     .GetBytes(charsPtr, value.Length, bytesPtr, utf8ByteCount)
                                     == utf8ByteCount
                             );

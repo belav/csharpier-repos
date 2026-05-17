@@ -31,8 +31,7 @@ namespace Mono.ILASM
         public static int Main(string[] args)
         {
             // Do everything in Invariant
-            System.Threading.Thread.CurrentThread.CurrentCulture = System
-                .Globalization
+            System.Threading.Thread.CurrentThread.CurrentCulture = System.Globalization
                 .CultureInfo
                 .InvariantCulture;
 
@@ -429,8 +428,7 @@ namespace Mono.ILASM
 
             private void Version()
             {
-                string version = System
-                    .Reflection
+                string version = System.Reflection
                     .Assembly
                     .GetExecutingAssembly()
                     .GetName()

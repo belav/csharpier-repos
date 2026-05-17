@@ -190,8 +190,7 @@ namespace System.Diagnostics
             {
                 var threadTimes = new ProcessThreadTimes();
                 if (
-                    !Interop
-                        .Kernel32
+                    !Interop.Kernel32
                         .GetThreadTimes(
                             threadHandle,
                             out threadTimes._create,

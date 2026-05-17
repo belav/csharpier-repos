@@ -134,8 +134,7 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
             if (!_createdModules.Contains(name))
             {
                 // Create formula module object
-                _createdModules[name] = ((Type)registeredModules[name])
-                    .Assembly
+                _createdModules[name] = ((Type)registeredModules[name]).Assembly
                     .CreateInstance(((Type)registeredModules[name]).ToString());
             }
 

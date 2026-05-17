@@ -27,8 +27,7 @@ namespace System.Web.Mvc.Test
             MyModel model = new MyModel() { ReadWriteProperty = 3 };
             ModelBindingContext bindingContext = new ModelBindingContext()
             {
-                ModelMetadata = ModelMetadataProviders
-                    .Current
+                ModelMetadata = ModelMetadataProviders.Current
                     .GetMetadataForType(() => model, model.GetType()),
             };
 
@@ -72,8 +71,7 @@ namespace System.Web.Mvc.Test
 
             ModelBindingContext bindingContext = new ModelBindingContext()
             {
-                ModelMetadata = ModelMetadataProviders
-                    .Current
+                ModelMetadata = ModelMetadataProviders.Current
                     .GetMetadataForType(null, typeof(int[])),
                 ModelName = "foo",
                 PropertyFilter = _ => false,
@@ -126,8 +124,7 @@ namespace System.Web.Mvc.Test
 
             ModelBindingContext bindingContext = new ModelBindingContext()
             {
-                ModelMetadata = ModelMetadataProviders
-                    .Current
+                ModelMetadata = ModelMetadataProviders.Current
                     .GetMetadataForType(null, typeof(IList<int>)),
                 ModelName = "foo",
                 PropertyFilter = _ => false,
@@ -180,8 +177,7 @@ namespace System.Web.Mvc.Test
 
             ModelBindingContext bindingContext = new ModelBindingContext()
             {
-                ModelMetadata = ModelMetadataProviders
-                    .Current
+                ModelMetadata = ModelMetadataProviders.Current
                     .GetMetadataForType(null, typeof(IDictionary<string, CountryState>)),
                 ModelName = "countries",
                 PropertyFilter = _ => true,
@@ -227,8 +223,7 @@ namespace System.Web.Mvc.Test
 
             ModelBindingContext bindingContext = new ModelBindingContext()
             {
-                ModelMetadata = ModelMetadataProviders
-                    .Current
+                ModelMetadata = ModelMetadataProviders.Current
                     .GetMetadataForType(null, typeof(IDictionary<string, CountryState>)),
                 ModelName = "countries",
                 PropertyFilter = _ => true,
@@ -274,8 +269,7 @@ namespace System.Web.Mvc.Test
 
             ModelBindingContext bindingContext = new ModelBindingContext()
             {
-                ModelMetadata = ModelMetadataProviders
-                    .Current
+                ModelMetadata = ModelMetadataProviders.Current
                     .GetMetadataForType(null, typeof(IDictionary<string, CountryState>)),
                 ModelName = "countries",
                 PropertyFilter = _ => true,
@@ -323,8 +317,7 @@ namespace System.Web.Mvc.Test
 
             ModelBindingContext bindingContext = new ModelBindingContext()
             {
-                ModelMetadata = ModelMetadataProviders
-                    .Current
+                ModelMetadata = ModelMetadataProviders.Current
                     .GetMetadataForType(null, typeof(IDictionary<int, string>)),
                 ModelName = "foo",
                 PropertyFilter = _ => false,
@@ -415,8 +408,7 @@ namespace System.Web.Mvc.Test
             };
             ModelBindingContext bindingContext = new ModelBindingContext()
             {
-                ModelMetadata = ModelMetadataProviders
-                    .Current
+                ModelMetadata = ModelMetadataProviders.Current
                     .GetMetadataForType(() => model, model.GetType()),
                 ValueProvider = new SimpleValueProvider() { { "Foo", null }, { "Bar", null } },
             };
@@ -459,8 +451,7 @@ namespace System.Web.Mvc.Test
             // Arrange
             ModelBindingContext bindingContext = new ModelBindingContext()
             {
-                ModelMetadata = ModelMetadataProviders
-                    .Current
+                ModelMetadata = ModelMetadataProviders.Current
                     .GetMetadataForType(null, typeof(int[])),
                 ModelName = "foo",
                 ValueProvider = new SimpleValueProvider() { { "foo", null } },
@@ -507,8 +498,7 @@ namespace System.Web.Mvc.Test
             };
             ModelBindingContext bindingContext = new ModelBindingContext()
             {
-                ModelMetadata = ModelMetadataProviders
-                    .Current
+                ModelMetadata = ModelMetadataProviders.Current
                     .GetMetadataForType(() => model, model.GetType()),
                 ValueProvider = new SimpleValueProvider() { { "Foo", null }, { "Bar", null } },
             };
@@ -558,8 +548,7 @@ namespace System.Web.Mvc.Test
             };
             ModelBindingContext bindingContext = new ModelBindingContext()
             {
-                ModelMetadata = ModelMetadataProviders
-                    .Current
+                ModelMetadata = ModelMetadataProviders.Current
                     .GetMetadataForType(() => model, model.GetType()),
                 ValueProvider = new SimpleValueProvider() { { "Foo", null }, { "Bar", null } },
             };
@@ -611,8 +600,7 @@ namespace System.Web.Mvc.Test
             };
             ModelBindingContext bindingContext = new ModelBindingContext()
             {
-                ModelMetadata = ModelMetadataProviders
-                    .Current
+                ModelMetadata = ModelMetadataProviders.Current
                     .GetMetadataForType(() => model, model.GetType()),
                 ValueProvider = new SimpleValueProvider() { { "Foo", null }, { "Bar", null } },
             };
@@ -655,8 +643,7 @@ namespace System.Web.Mvc.Test
             // Arrange
             ModelBindingContext bindingContext = new ModelBindingContext()
             {
-                ModelMetadata = ModelMetadataProviders
-                    .Current
+                ModelMetadata = ModelMetadataProviders.Current
                     .GetMetadataForType(null, typeof(int)),
                 ModelName = "foo",
                 ValueProvider = new SimpleValueProvider() { { "foo", "42" } },
@@ -763,8 +750,7 @@ namespace System.Web.Mvc.Test
             // Arrange
             ModelBindingContext bindingContext = new ModelBindingContext()
             {
-                ModelMetadata = ModelMetadataProviders
-                    .Current
+                ModelMetadata = ModelMetadataProviders.Current
                     .GetMetadataForType(null, typeof(int)),
                 ModelName = "foo",
                 ValueProvider = new SimpleValueProvider(),
@@ -801,8 +787,7 @@ namespace System.Web.Mvc.Test
             // Arrange
             ModelBindingContext bindingContext = new ModelBindingContext()
             {
-                ModelMetadata = ModelMetadataProviders
-                    .Current
+                ModelMetadata = ModelMetadataProviders.Current
                     .GetMetadataForType(
                         () => new ModelWithoutBindAttribute(),
                         typeof(ModelWithoutBindAttribute)
@@ -843,8 +828,7 @@ namespace System.Web.Mvc.Test
             // Arrange
             ModelBindingContext bindingContext = new ModelBindingContext
             {
-                ModelMetadata = ModelMetadataProviders
-                    .Current
+                ModelMetadata = ModelMetadataProviders.Current
                     .GetMetadataForType(
                         () => new PropertyTestingModel(),
                         typeof(PropertyTestingModel)
@@ -877,8 +861,7 @@ namespace System.Web.Mvc.Test
             };
             ModelBindingContext bindingContext = new ModelBindingContext()
             {
-                ModelMetadata = ModelMetadataProviders
-                    .Current
+                ModelMetadata = ModelMetadataProviders.Current
                     .GetMetadataForType(() => model, model.GetType()),
                 ModelName = "prefix",
                 ValueProvider = new SimpleValueProvider()
@@ -913,8 +896,7 @@ namespace System.Web.Mvc.Test
             ModelBindingContext bindingContext = new ModelBindingContext()
             {
                 FallbackToEmptyPrefix = true,
-                ModelMetadata = ModelMetadataProviders
-                    .Current
+                ModelMetadata = ModelMetadataProviders.Current
                     .GetMetadataForType(() => model, model.GetType()),
                 ModelName = "prefix",
                 ValueProvider = new SimpleValueProvider()
@@ -948,8 +930,7 @@ namespace System.Web.Mvc.Test
             };
             ModelBindingContext bindingContext = new ModelBindingContext()
             {
-                ModelMetadata = ModelMetadataProviders
-                    .Current
+                ModelMetadata = ModelMetadataProviders.Current
                     .GetMetadataForType(() => model, model.GetType()),
                 ModelName = "prefix",
                 ValueProvider = new SimpleValueProvider()
@@ -976,8 +957,7 @@ namespace System.Web.Mvc.Test
             // Arrange
             ModelBindingContext bindingContext = new ModelBindingContext()
             {
-                ModelMetadata = ModelMetadataProviders
-                    .Current
+                ModelMetadata = ModelMetadataProviders.Current
                     .GetMetadataForType(null, typeof(string)),
                 ModelName = "prefix",
                 ValueProvider = new SimpleValueProvider()
@@ -1006,8 +986,7 @@ namespace System.Web.Mvc.Test
             Customer model = new Customer();
             ModelBindingContext bindingContext = new ModelBindingContext()
             {
-                ModelMetadata = ModelMetadataProviders
-                    .Current
+                ModelMetadata = ModelMetadataProviders.Current
                     .GetMetadataForType(() => model, model.GetType()),
                 ValueProvider = new SimpleValueProvider() { { "Address", null } },
             };
@@ -1051,8 +1030,7 @@ namespace System.Web.Mvc.Test
             MyModel2 model = new MyModel2() { IntReadWrite = 3 };
             ModelBindingContext bindingContext = new ModelBindingContext()
             {
-                ModelMetadata = ModelMetadataProviders
-                    .Current
+                ModelMetadata = ModelMetadataProviders.Current
                     .GetMetadataForType(() => model, model.GetType()),
                 ValueProvider = new SimpleValueProvider(),
             };
@@ -1075,8 +1053,7 @@ namespace System.Web.Mvc.Test
             MyModel2 model = new MyModel2() { IntReadWrite = 3 };
             ModelBindingContext bindingContext = new ModelBindingContext()
             {
-                ModelMetadata = ModelMetadataProviders
-                    .Current
+                ModelMetadata = ModelMetadataProviders.Current
                     .GetMetadataForType(() => model, model.GetType()),
                 ValueProvider = new SimpleValueProvider() { { "IntReadWrite", "42" } },
             };
@@ -1114,8 +1091,7 @@ namespace System.Web.Mvc.Test
             MyModel2 model = new MyModel2() { IntReadWrite = 3 };
             ModelBindingContext bindingContext = new ModelBindingContext()
             {
-                ModelMetadata = ModelMetadataProviders
-                    .Current
+                ModelMetadata = ModelMetadataProviders.Current
                     .GetMetadataForType(() => model, model.GetType()),
                 ValueProvider = new SimpleValueProvider() { { "IntReadWrite", "42" } },
             };
@@ -1154,8 +1130,7 @@ namespace System.Web.Mvc.Test
             MyModel2 model = new MyModel2() { NullableIntReadWrite = 8 };
             ModelBindingContext bindingContext = new ModelBindingContext()
             {
-                ModelMetadata = ModelMetadataProviders
-                    .Current
+                ModelMetadata = ModelMetadataProviders.Current
                     .GetMetadataForType(() => model, model.GetType()),
                 ValueProvider = new SimpleValueProvider() { { "NullableIntReadWrite", null } },
             };
@@ -1186,8 +1161,7 @@ namespace System.Web.Mvc.Test
             MyModel2 model = new MyModel2() { IntReadWriteNonNegative = 8 };
             ModelBindingContext bindingContext = new ModelBindingContext()
             {
-                ModelMetadata = ModelMetadataProviders
-                    .Current
+                ModelMetadata = ModelMetadataProviders.Current
                     .GetMetadataForType(() => model, model.GetType()),
                 ValueProvider = new SimpleValueProvider() { { "IntReadWriteNonNegative", null } },
             };
@@ -1231,8 +1205,7 @@ namespace System.Web.Mvc.Test
             MyModel2 model = new MyModel2() { IntReadWrite = 3 };
             ModelBindingContext bindingContext = new ModelBindingContext()
             {
-                ModelMetadata = ModelMetadataProviders
-                    .Current
+                ModelMetadata = ModelMetadataProviders.Current
                     .GetMetadataForType(() => model, model.GetType()),
                 ModelName = "foo",
                 ModelState = new ModelStateDictionary() { { "blah", new ModelState() } },
@@ -1281,8 +1254,7 @@ namespace System.Web.Mvc.Test
             MyModel2 model = new MyModel2() { IntReadWriteNonNegative = 8 };
             ModelBindingContext bindingContext = new ModelBindingContext()
             {
-                ModelMetadata = ModelMetadataProviders
-                    .Current
+                ModelMetadata = ModelMetadataProviders.Current
                     .GetMetadataForType(() => model, model.GetType()),
                 ValueProvider = new SimpleValueProvider() { { propertyName, null } },
             };
@@ -1295,10 +1267,14 @@ namespace System.Web.Mvc.Test
                 .Returns(
                     delegate(ControllerContext cc, ModelBindingContext bc)
                     {
-                        bc.ModelState.AddModelError(
-                            propertyName,
-                            new Exception("", (Exception)Activator.CreateInstance(exceptionType))
-                        );
+                        bc.ModelState
+                            .AddModelError(
+                                propertyName,
+                                new Exception(
+                                    "",
+                                    (Exception)Activator.CreateInstance(exceptionType)
+                                )
+                            );
                         bc.ModelState[propertyName].Value = new ValueProviderResult(
                             8,
                             "8",
@@ -1337,8 +1313,7 @@ namespace System.Web.Mvc.Test
             MyModel2 model = new MyModel2() { IntReadWriteNonNegative = 8 };
             ModelBindingContext bindingContext = new ModelBindingContext()
             {
-                ModelMetadata = ModelMetadataProviders
-                    .Current
+                ModelMetadata = ModelMetadataProviders.Current
                     .GetMetadataForType(() => model, model.GetType()),
                 ValueProvider = new SimpleValueProvider() { { propertyName, null } },
             };
@@ -1351,10 +1326,14 @@ namespace System.Web.Mvc.Test
                 .Returns(
                     delegate(ControllerContext cc, ModelBindingContext bc)
                     {
-                        bc.ModelState.AddModelError(
-                            propertyName,
-                            new Exception("", (Exception)Activator.CreateInstance(exceptionType))
-                        );
+                        bc.ModelState
+                            .AddModelError(
+                                propertyName,
+                                new Exception(
+                                    "",
+                                    (Exception)Activator.CreateInstance(exceptionType)
+                                )
+                            );
                         bc.ModelState[propertyName].Value = new ValueProviderResult(
                             8,
                             "8",
@@ -1389,8 +1368,7 @@ namespace System.Web.Mvc.Test
             ValueProviderResult result = new ValueProviderResult(42, null, null);
             ModelBindingContext bindingContext = new ModelBindingContext()
             {
-                ModelMetadata = ModelMetadataProviders
-                    .Current
+                ModelMetadata = ModelMetadataProviders.Current
                     .GetMetadataForType(null, typeof(int[])),
                 ModelName = "foo",
             };
@@ -1417,8 +1395,7 @@ namespace System.Web.Mvc.Test
             );
             ModelBindingContext bindingContext = new ModelBindingContext()
             {
-                ModelMetadata = ModelMetadataProviders
-                    .Current
+                ModelMetadata = ModelMetadataProviders.Current
                     .GetMetadataForType(null, typeof(IEnumerable<int>)),
                 ModelName = "foo",
             };
@@ -1444,8 +1421,7 @@ namespace System.Web.Mvc.Test
             ValueProviderResult result = new ValueProviderResult("42", null, null);
             ModelBindingContext bindingContext = new ModelBindingContext()
             {
-                ModelMetadata = ModelMetadataProviders
-                    .Current
+                ModelMetadata = ModelMetadataProviders.Current
                     .GetMetadataForType(null, typeof(int)),
                 ModelName = "foo",
             };
@@ -1466,8 +1442,7 @@ namespace System.Web.Mvc.Test
             ValueProviderResult result = new ValueProviderResult(new object[] { "42" }, null, null);
             ModelBindingContext bindingContext = new ModelBindingContext()
             {
-                ModelMetadata = ModelMetadataProviders
-                    .Current
+                ModelMetadata = ModelMetadataProviders.Current
                     .GetMetadataForType(null, typeof(string)),
                 ModelName = "foo",
             };
@@ -1488,8 +1463,7 @@ namespace System.Web.Mvc.Test
             ValueProviderResult result = new ValueProviderResult(new MemoryStream(), null, null);
             ModelBindingContext bindingContext = new ModelBindingContext()
             {
-                ModelMetadata = ModelMetadataProviders
-                    .Current
+                ModelMetadata = ModelMetadataProviders.Current
                     .GetMetadataForType(null, typeof(Stream)),
                 ModelName = "foo",
             };
@@ -1511,8 +1485,7 @@ namespace System.Web.Mvc.Test
             ValueProviderResult result = new ValueProviderResult("invalid", null, null);
             ModelBindingContext bindingContext = new ModelBindingContext()
             {
-                ModelMetadata = ModelMetadataProviders
-                    .Current
+                ModelMetadata = ModelMetadataProviders.Current
                     .GetMetadataForType(null, typeof(int)),
                 ModelName = "foo",
             };
@@ -1731,8 +1704,7 @@ namespace System.Web.Mvc.Test
             // Arrange
             ModelBindingContext bindingContext = new ModelBindingContext()
             {
-                ModelMetadata = ModelMetadataProviders
-                    .Current
+                ModelMetadata = ModelMetadataProviders.Current
                     .GetMetadataForType(null, typeof(PropertyTestingModel)),
                 PropertyFilter = new BindAttribute() { Exclude = "Blacklisted" }.IsPropertyAllowed,
             };
@@ -1764,8 +1736,7 @@ namespace System.Web.Mvc.Test
             // Arrange
             ModelBindingContext bindingContext = new ModelBindingContext()
             {
-                ModelMetadata = ModelMetadataProviders
-                    .Current
+                ModelMetadata = ModelMetadataProviders.Current
                     .GetMetadataForType(null, typeof(PropertyTestingModel)),
                 PropertyFilter = new BindAttribute() { Exclude = "Blacklisted" }.IsPropertyAllowed,
             };
@@ -1857,8 +1828,7 @@ namespace System.Web.Mvc.Test
             // Arrange
             ModelBindingContext bindingContext = new ModelBindingContext()
             {
-                ModelMetadata = ModelMetadataProviders
-                    .Current
+                ModelMetadata = ModelMetadataProviders.Current
                     .GetMetadataForType(
                         () => new ModelWithoutBindAttribute(),
                         typeof(ModelWithoutBindAttribute)
@@ -1897,8 +1867,7 @@ namespace System.Web.Mvc.Test
             // Arrange
             ModelBindingContext bindingContext = new ModelBindingContext()
             {
-                ModelMetadata = ModelMetadataProviders
-                    .Current
+                ModelMetadata = ModelMetadataProviders.Current
                     .GetMetadataForType(
                         () => new ModelWithoutBindAttribute(),
                         typeof(ModelWithoutBindAttribute)
@@ -1936,8 +1905,7 @@ namespace System.Web.Mvc.Test
         {
             // Arrange
             var binder = new TestableDefaultModelBinder<SetPropertyModel>();
-            binder
-                .Context
+            binder.Context
                 .ModelState
                 .AddModelError(
                     BASE_MODEL_NAME + ".NonNullableStringWithAttribute",
@@ -1962,8 +1930,7 @@ namespace System.Web.Mvc.Test
             ModelWithoutBindAttribute model = new ModelWithoutBindAttribute();
             ModelBindingContext bindingContext = new ModelBindingContext
             {
-                ModelMetadata = ModelMetadataProviders
-                    .Current
+                ModelMetadata = ModelMetadataProviders.Current
                     .GetMetadataForType(() => model, model.GetType()),
                 ModelName = "",
                 ValueProvider = new SimpleValueProvider() { { "foo", "foo" } },
@@ -2000,14 +1967,12 @@ namespace System.Web.Mvc.Test
             DefaultModelBinder binder = new DefaultModelBinder();
             ModelBindingContext bindingContext = new ModelBindingContext()
             {
-                ModelMetadata = ModelMetadataProviders
-                    .Current
+                ModelMetadata = ModelMetadataProviders.Current
                     .GetMetadataForType(null, typeof(MyModel)),
                 ModelName = "theModel",
                 ValueProvider = new SimpleValueProvider(),
             };
-            bindingContext
-                .ModelState
+            bindingContext.ModelState
                 .AddModelError("theModel.ReadWriteProperty", "Existing Error Message");
 
             // Act
@@ -2025,8 +1990,7 @@ namespace System.Web.Mvc.Test
             // Arrange
             ModelBindingContext bindingContext = new ModelBindingContext()
             {
-                ModelMetadata = ModelMetadataProviders
-                    .Current
+                ModelMetadata = ModelMetadataProviders.Current
                     .GetMetadataForType(null, typeof(MyModel)),
                 ModelName = "theModel",
             };
@@ -2057,8 +2021,7 @@ namespace System.Web.Mvc.Test
             List<int> model = new List<int>() { 4, 5, 6, 7, 8 };
             ModelBindingContext bindingContext = new ModelBindingContext()
             {
-                ModelMetadata = ModelMetadataProviders
-                    .Current
+                ModelMetadata = ModelMetadataProviders.Current
                     .GetMetadataForType(() => model, model.GetType()),
                 ModelName = "foo",
                 ValueProvider = new SimpleValueProvider()
@@ -2114,8 +2077,7 @@ namespace System.Web.Mvc.Test
             List<int> model = new List<int>() { 4, 5, 6, 7, 8 };
             ModelBindingContext bindingContext = new ModelBindingContext()
             {
-                ModelMetadata = ModelMetadataProviders
-                    .Current
+                ModelMetadata = ModelMetadataProviders.Current
                     .GetMetadataForType(() => model, model.GetType()),
                 ModelName = "foo",
                 PropertyFilter = _ => false,
@@ -2152,8 +2114,7 @@ namespace System.Web.Mvc.Test
             List<int> model = new List<int>() { 4, 5, 6, 7, 8 };
             ModelBindingContext bindingContext = new ModelBindingContext()
             {
-                ModelMetadata = ModelMetadataProviders
-                    .Current
+                ModelMetadata = ModelMetadataProviders.Current
                     .GetMetadataForType(() => model, model.GetType()),
                 ModelName = "foo",
                 PropertyFilter = _ => false,
@@ -2233,8 +2194,7 @@ namespace System.Web.Mvc.Test
             };
             ModelBindingContext bindingContext = new ModelBindingContext()
             {
-                ModelMetadata = ModelMetadataProviders
-                    .Current
+                ModelMetadata = ModelMetadataProviders.Current
                     .GetMetadataForType(() => model, model.GetType()),
                 ModelName = "foo",
                 ValueProvider = new SimpleValueProvider()
@@ -2323,8 +2283,7 @@ namespace System.Web.Mvc.Test
             };
             ModelBindingContext bindingContext = new ModelBindingContext()
             {
-                ModelMetadata = ModelMetadataProviders
-                    .Current
+                ModelMetadata = ModelMetadataProviders.Current
                     .GetMetadataForType(() => model, model.GetType()),
                 ModelName = "foo",
                 PropertyFilter = _ => false,
@@ -2368,8 +2327,7 @@ namespace System.Web.Mvc.Test
             };
             ModelBindingContext bindingContext = new ModelBindingContext()
             {
-                ModelMetadata = ModelMetadataProviders
-                    .Current
+                ModelMetadata = ModelMetadataProviders.Current
                     .GetMetadataForType(() => model, model.GetType()),
                 ModelName = "foo",
                 PropertyFilter = _ => false,
@@ -2476,8 +2434,7 @@ namespace System.Web.Mvc.Test
 
             ModelBindingContext bindingContext = new ModelBindingContext()
             {
-                ModelMetadata = ModelMetadataProviders
-                    .Current
+                ModelMetadata = ModelMetadataProviders.Current
                     .GetMetadataForType(() => model, model.GetType()),
                 ValueProvider = routeDataFactory.GetValueProvider(controllerContext),
             };
@@ -2509,8 +2466,7 @@ namespace System.Web.Mvc.Test
             };
             ModelBindingContext bindingContext = new ModelBindingContext()
             {
-                ModelMetadata = ModelMetadataProviders
-                    .Current
+                ModelMetadata = ModelMetadataProviders.Current
                     .GetMetadataForType(() => model, model.GetType()),
                 ModelName = "foo",
                 ValueProvider = new SimpleValueProvider()
@@ -3134,8 +3090,7 @@ namespace System.Web.Mvc.Test
             try
             {
                 // Arrange
-                ModelMetadata metadata = ModelMetadataProviders
-                    .Current
+                ModelMetadata metadata = ModelMetadataProviders.Current
                     .GetMetadataForType(null, typeof(object));
                 ControllerContext context = new ControllerContext();
                 Mock<ModelValidator> validator = new Mock<ModelValidator>(metadata, context);
@@ -3219,8 +3174,7 @@ namespace System.Web.Mvc.Test
             };
             TestableDefaultModelBinder<OnModelUpdatedModelMultipleParameters> modelBinder =
                 new TestableDefaultModelBinder<OnModelUpdatedModelMultipleParameters>(model);
-            modelBinder
-                .ModelState
+            modelBinder.ModelState
                 .AddModelError(BASE_MODEL_NAME + ".Minimum", "The minimum value was invalid.");
 
             // Act
@@ -3401,8 +3355,7 @@ namespace System.Web.Mvc.Test
             // Arrange
             ModelBindingContext bindingContext = new ModelBindingContext()
             {
-                ModelMetadata = ModelMetadataProviders
-                    .Current
+                ModelMetadata = ModelMetadataProviders.Current
                     .GetMetadataForType(() => new MyModel(), typeof(MyModel)),
                 ModelName = "theModel",
             };
@@ -3465,8 +3418,7 @@ namespace System.Web.Mvc.Test
             MyModel model = new MyModel();
             ModelBindingContext bindingContext = new ModelBindingContext()
             {
-                ModelMetadata = ModelMetadataProviders
-                    .Current
+                ModelMetadata = ModelMetadataProviders.Current
                     .GetMetadataForType(() => model, model.GetType()),
                 ModelName = "theModel",
             };
@@ -3555,8 +3507,7 @@ namespace System.Web.Mvc.Test
                 ModelState = new ModelStateDictionary();
 
                 Context = new ModelBindingContext();
-                Context.ModelMetadata = ModelMetadataProviders
-                    .Current
+                Context.ModelMetadata = ModelMetadataProviders.Current
                     .GetMetadataForType(() => model, typeof(TModel));
                 Context.ModelName = BASE_MODEL_NAME;
                 Context.ModelState = ModelState;

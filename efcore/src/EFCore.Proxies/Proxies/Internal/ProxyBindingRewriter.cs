@@ -169,16 +169,14 @@ public class ProxyBindingRewriter : IModelFinalizingConvention
                     )
                     {
                         if (
-                            !ConfigurationSource
-                                .Convention
+                            !ConfigurationSource.Convention
                                 .Overrides(conflictingProperty.GetConfigurationSource())
                         )
                         {
                             break;
                         }
 
-                        conflictingProperty
-                            .DeclaringEntityType
+                        conflictingProperty.DeclaringEntityType
                             .RemoveServiceProperty(conflictingProperty.Name);
                     }
 

@@ -208,8 +208,7 @@ namespace System.Data.Objects.ELinq
             get
             {
                 return (EdmItemCollection)
-                    _funcletizer
-                        .RootContext
+                    _funcletizer.RootContext
                         .MetadataWorkspace
                         .GetItemCollection(DataSpace.CSpace, true);
             }
@@ -220,8 +219,7 @@ namespace System.Data.Objects.ELinq
             {
                 return (
                     (StoreItemCollection)
-                        _funcletizer
-                            .RootContext
+                        _funcletizer.RootContext
                             .MetadataWorkspace
                             .GetItemCollection(DataSpace.SSpace)
                 ).StoreProviderManifest;
@@ -337,8 +335,7 @@ namespace System.Data.Objects.ELinq
                 if (!metadata.Equals(existingMetadata))
                 {
                     throw EntityUtil.NotSupported(
-                        System
-                            .Data
+                        System.Data
                             .Entity
                             .Strings
                             .ELinq_UnsupportedHeterogeneousInitializers(
@@ -548,8 +545,7 @@ namespace System.Data.Objects.ELinq
             // For identity projection only, the Span is preserved
             if (
                 projection.ExpressionKind == DbExpressionKind.VariableReference
-                && ((DbVariableReferenceExpression)projection)
-                    .VariableName
+                && ((DbVariableReferenceExpression)projection).VariableName
                     .Equals(input.VariableName, StringComparison.Ordinal)
             )
             {
@@ -645,8 +641,7 @@ namespace System.Data.Objects.ELinq
             )
             {
                 throw EntityUtil.NotSupported(
-                    System
-                        .Data
+                    System.Data
                         .Entity
                         .Strings
                         .ELinq_UnsupportedCast(
@@ -754,8 +749,7 @@ namespace System.Data.Objects.ELinq
             )
             {
                 throw EntityUtil.NotSupported(
-                    System
-                        .Data
+                    System.Data
                         .Entity
                         .Strings
                         .ELinq_UnsupportedIsOrAs(
@@ -828,12 +822,13 @@ namespace System.Data.Objects.ELinq
                     }
                     foreach (ObjectParameter prm in inlineQuery.QueryState.Parameters)
                     {
-                        this._parameters.Add(
-                            new KeyValuePair<ObjectParameter, QueryParameterExpression>(
-                                prm.ShallowCopy(),
-                                null
-                            )
-                        );
+                        this._parameters
+                            .Add(
+                                new KeyValuePair<ObjectParameter, QueryParameterExpression>(
+                                    prm.ShallowCopy(),
+                                    null
+                                )
+                            );
                     }
                 }
 
@@ -1138,8 +1133,7 @@ namespace System.Data.Objects.ELinq
                 )
                 {
                     throw EntityUtil.NotSupported(
-                        System
-                            .Data
+                        System.Data
                             .Entity
                             .Strings
                             .ELinq_UnsupportedNominalType(typeUsage.EdmType.FullName)
@@ -1151,8 +1145,7 @@ namespace System.Data.Objects.ELinq
             if (TypeSystem.IsSequenceType(type))
             {
                 throw EntityUtil.NotSupported(
-                    System
-                        .Data
+                    System.Data
                         .Entity
                         .Strings
                         .ELinq_UnsupportedEnumerableType(DescribeClrType(type))
@@ -1197,8 +1190,7 @@ namespace System.Data.Objects.ELinq
                 // since LINQ expressions cannot indicate model types directly, we must
                 // consider types equivalent if they match on the given CLR equivalent
                 // types (consider the Xml and String primitive types)
-                return ((PrimitiveType)left.EdmType)
-                    .ClrEquivalentType
+                return ((PrimitiveType)left.EdmType).ClrEquivalentType
                     .Equals(((PrimitiveType)right.EdmType).ClrEquivalentType);
             }
 
@@ -1236,8 +1228,7 @@ namespace System.Data.Objects.ELinq
             // See if this is a primitive type
             PrimitiveTypeKind primitiveTypeKind;
             if (
-                ClrProviderManifest
-                    .Instance
+                ClrProviderManifest.Instance
                     .TryGetPrimitiveTypeKind(nonNullableType, out primitiveTypeKind)
             )
             {
@@ -1269,16 +1260,14 @@ namespace System.Data.Objects.ELinq
                 // type (e.g. ulong).
                 if (
                     nonNullableType.IsEnum
-                    && ClrProviderManifest
-                        .Instance
+                    && ClrProviderManifest.Instance
                         .TryGetPrimitiveTypeKind(
                             nonNullableType.GetEnumUnderlyingType(),
                             out primitiveTypeKind
                         )
                 )
                 {
-                    type = EdmProviderManifest
-                        .Instance
+                    type = EdmProviderManifest.Instance
                         .GetCanonicalModelTypeUsage(primitiveTypeKind);
                 }
             }
@@ -1664,8 +1653,8 @@ namespace System.Data.Objects.ELinq
         )
         {
             char escapeChar;
-            bool providerSupportsEscapingLikeArgument =
-                this.ProviderManifest.SupportsEscapingLikeArgument(out escapeChar);
+            bool providerSupportsEscapingLikeArgument = this.ProviderManifest
+                .SupportsEscapingLikeArgument(out escapeChar);
             bool useLikeTranslation = false;
             bool specifyEscape = true;
 
@@ -1725,8 +1714,7 @@ namespace System.Data.Objects.ELinq
                 {
                     //DevDiv #326720: The constant expression for the escape character should not have unicode set by default
                     var escapeExpression = DbExpressionBuilder.Constant(
-                        EdmProviderManifest
-                            .Instance
+                        EdmProviderManifest.Instance
                             .GetCanonicalModelTypeUsage(PrimitiveTypeKind.String),
                         new String(new char[] { escapeChar })
                     );
@@ -1938,8 +1926,7 @@ namespace System.Data.Objects.ELinq
             {
                 MethodInfo methodInfo = ((MethodCallExpression)Expression).Method;
                 throw EntityUtil.NotSupported(
-                    System
-                        .Data
+                    System.Data
                         .Entity
                         .Strings
                         .ELinq_UnresolvableFunctionForMethod(methodInfo, methodInfo.DeclaringType)
@@ -1955,16 +1942,14 @@ namespace System.Data.Objects.ELinq
                     out memberType
                 );
                 throw EntityUtil.NotSupported(
-                    System
-                        .Data
+                    System.Data
                         .Entity
                         .Strings
                         .ELinq_UnresolvableFunctionForMember(memberInfo, memberInfo.DeclaringType)
                 );
             }
             throw EntityUtil.NotSupported(
-                System
-                    .Data
+                System.Data
                     .Entity
                     .Strings
                     .ELinq_UnresolvableFunctionForExpression(Expression.NodeType)
@@ -1986,8 +1971,7 @@ namespace System.Data.Objects.ELinq
                 if (isAmbiguous)
                 {
                     throw EntityUtil.NotSupported(
-                        System
-                            .Data
+                        System.Data
                             .Entity
                             .Strings
                             .ELinq_UnresolvableFunctionForMethodAmbiguousMatch(
@@ -1999,8 +1983,7 @@ namespace System.Data.Objects.ELinq
                 else
                 {
                     throw EntityUtil.NotSupported(
-                        System
-                            .Data
+                        System.Data
                             .Entity
                             .Strings
                             .ELinq_UnresolvableFunctionForMethodNotFound(
@@ -2020,8 +2003,7 @@ namespace System.Data.Objects.ELinq
                     out memberType
                 );
                 throw EntityUtil.NotSupported(
-                    System
-                        .Data
+                    System.Data
                         .Entity
                         .Strings
                         .ELinq_UnresolvableStoreFunctionForMember(
@@ -2031,8 +2013,7 @@ namespace System.Data.Objects.ELinq
                 );
             }
             throw EntityUtil.NotSupported(
-                System
-                    .Data
+                System.Data
                     .Entity
                     .Strings
                     .ELinq_UnresolvableStoreFunctionForExpression(Expression.NodeType)

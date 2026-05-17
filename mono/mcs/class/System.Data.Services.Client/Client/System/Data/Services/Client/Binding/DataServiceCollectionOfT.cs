@@ -613,8 +613,7 @@ namespace System.Data.Services.Client
             try
             {
                 IAsyncResult asyncResult = beginCall(ar =>
-                    System
-                        .Windows
+                    System.Windows
                         .Deployment
                         .Current
                         .Dispatcher

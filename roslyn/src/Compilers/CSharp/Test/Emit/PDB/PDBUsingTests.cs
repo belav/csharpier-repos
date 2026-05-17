@@ -2606,8 +2606,7 @@ namespace goo
             var pdbbits = new MemoryStream();
             var result = compilation.Emit(exebits, pdbbits);
 
-            result
-                .Diagnostics
+            result.Diagnostics
                 .Verify(
                     Diagnostic(ErrorCode.WRN_DebugFullNameTooLong, "Main")
                         .WithArguments(
@@ -2707,8 +2706,7 @@ class C
                             "Enumerable",
                             "DataColumn",
                         },
-                        reader
-                            .TypeReferences
+                        reader.TypeReferences
                             .Select(h => reader.GetString(reader.GetTypeReference(h).Name))
                     );
 
@@ -2901,20 +2899,21 @@ class C
             var compilation = CreateCompilation(source, new[] { libRef });
             var v = CompileAndVerify(compilation);
 
-            v.Diagnostics.Verify(
-                // (14,8): warning CS0169: The field 'C.i' is never used
-                //     NI i;
-                Diagnostic(ErrorCode.WRN_UnreferencedField, "i").WithArguments("C.i"),
-                // (5,1): hidden CS8019: Unnecessary using directive.
-                // using static N.SBad;
-                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using static N.SBad;"),
-                // (10,1): hidden CS8019: Unnecessary using directive.
-                // using NIBad = N.IBad;
-                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using NIBad = N.IBad;"),
-                // (8,1): hidden CS8019: Unnecessary using directive.
-                // using ZBad = N.SBad;
-                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using ZBad = N.SBad;")
-            );
+            v.Diagnostics
+                .Verify(
+                    // (14,8): warning CS0169: The field 'C.i' is never used
+                    //     NI i;
+                    Diagnostic(ErrorCode.WRN_UnreferencedField, "i").WithArguments("C.i"),
+                    // (5,1): hidden CS8019: Unnecessary using directive.
+                    // using static N.SBad;
+                    Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using static N.SBad;"),
+                    // (10,1): hidden CS8019: Unnecessary using directive.
+                    // using NIBad = N.IBad;
+                    Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using NIBad = N.IBad;"),
+                    // (8,1): hidden CS8019: Unnecessary using directive.
+                    // using ZBad = N.SBad;
+                    Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using ZBad = N.SBad;")
+                );
 
             // Usings of embedded types are currently omitted:
             v.VerifyPdb(
@@ -2982,11 +2981,12 @@ class C
             var compilation = CreateCompilation(source, new[] { libRef2 });
             var v = CompileAndVerify(compilation);
 
-            v.Diagnostics.Verify(
-                // (3,1): hidden CS8019: Unnecessary using directive.
-                // using X = N.B;
-                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using X = N.B;")
-            );
+            v.Diagnostics
+                .Verify(
+                    // (3,1): hidden CS8019: Unnecessary using directive.
+                    // using X = N.B;
+                    Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using X = N.B;")
+                );
 
             v.VerifyPdb(
                 "C.M",

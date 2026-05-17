@@ -2947,12 +2947,13 @@ internal static class ReflectionTest
     )]
     public static int CountMethods(this Type t) =>
         t.GetMethods(
-            BindingFlags.Instance
-                | BindingFlags.Static
-                | BindingFlags.Public
-                | BindingFlags.NonPublic
-                | BindingFlags.DeclaredOnly
-        ).Length;
+                BindingFlags.Instance
+                    | BindingFlags.Static
+                    | BindingFlags.Public
+                    | BindingFlags.NonPublic
+                    | BindingFlags.DeclaredOnly
+            )
+            .Length;
 
     class Assert
     {

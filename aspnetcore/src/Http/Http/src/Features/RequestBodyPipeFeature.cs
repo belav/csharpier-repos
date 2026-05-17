@@ -45,8 +45,7 @@ public class RequestBodyPipeFeature : IRequestBodyPipeFeature
                     _defaultReaderOptions
                 );
 
-                _context
-                    .Response
+                _context.Response
                     .OnCompleted(
                         (self) =>
                         {

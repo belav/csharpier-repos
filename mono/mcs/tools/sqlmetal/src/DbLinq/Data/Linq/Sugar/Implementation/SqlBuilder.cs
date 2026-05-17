@@ -140,8 +140,7 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
             if (selectExpression.NextSelectExpression != null)
             {
                 var nextLiteralSelect = Build(selectExpression.NextSelectExpression, queryContext);
-                select = queryContext
-                    .DataContext
+                select = queryContext.DataContext
                     .Vendor
                     .SqlProvider
                     .GetLiteral(
@@ -600,8 +599,7 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
                         select.OffsetAndLimit,
                         queryContext
                     );
-                    return queryContext
-                        .DataContext
+                    return queryContext.DataContext
                         .Vendor
                         .SqlProvider
                         .GetLiteralLimit(
@@ -611,8 +609,7 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
                             literalOffsetAndLimit
                         );
                 }
-                return queryContext
-                    .DataContext
+                return queryContext.DataContext
                     .Vendor
                     .SqlProvider
                     .GetLiteralLimit(literalSelect, literalLimit);

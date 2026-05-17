@@ -74,8 +74,7 @@ namespace System.Web.Razor.Generator
                     {
                         cw.WriteParameterSeparator();
                         cw.WriteSnippet(
-                            ValueGenerator
-                                .Location
+                            ValueGenerator.Location
                                 .AbsoluteIndex
                                 .ToString(CultureInfo.CurrentCulture)
                         );

@@ -67,8 +67,7 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                         // (see https://github.com/dotnet/roslyn/issues/13275).
                         if (
                             hasNoAssemblyRefs
-                            || metadata
-                                .Name
+                            || metadata.Name
                                 .Equals(
                                     "System.Private.CoreLib.dll",
                                     StringComparison.OrdinalIgnoreCase

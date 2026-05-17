@@ -441,12 +441,13 @@ namespace System.Workflow.ComponentModel
             {
                 try
                 {
-                    this.currentActivity.SetValueCommon(
-                        CurrentExceptionProperty,
-                        e,
-                        CurrentExceptionProperty.DefaultMetadata,
-                        false
-                    );
+                    this.currentActivity
+                        .SetValueCommon(
+                            CurrentExceptionProperty,
+                            e,
+                            CurrentExceptionProperty.DefaultMetadata,
+                            false
+                        );
                     this.currentActivity.SetStatus(ActivityExecutionStatus.Faulting, false);
                 }
                 finally
@@ -541,14 +542,15 @@ namespace System.Workflow.ComponentModel
             if (this.currentActivity == null)
                 throw new ObjectDisposedException("ActivityExecutionContext");
 
-            this.Activity.SetValue(
-                LockAcquiredCallbackProperty,
-                new ActivityExecutorDelegateInfo<EventArgs>(
-                    true,
-                    locksAcquiredCallback,
-                    this.Activity.ContextActivity
-                )
-            );
+            this.Activity
+                .SetValue(
+                    LockAcquiredCallbackProperty,
+                    new ActivityExecutorDelegateInfo<EventArgs>(
+                        true,
+                        locksAcquiredCallback,
+                        this.Activity.ContextActivity
+                    )
+                );
             return AcquireLocks(this.Activity);
         }
 

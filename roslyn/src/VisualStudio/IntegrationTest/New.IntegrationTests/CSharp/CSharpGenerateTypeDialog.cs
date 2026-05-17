@@ -35,8 +35,7 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
                 HangMitigatingCancellationToken
             );
 
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .CodeActionAsync(
                     "Generate new type...",
                     applyFix: true,
@@ -46,8 +45,7 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
 
             await TestServices.GenerateTypeDialog.VerifyOpenAsync(HangMitigatingCancellationToken);
             await TestServices.GenerateTypeDialog.ClickCancelAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .GenerateTypeDialog
+            await TestServices.GenerateTypeDialog
                 .VerifyClosedAsync(HangMitigatingCancellationToken);
         }
 
@@ -55,8 +53,7 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
         public async Task CSharpToBasic()
         {
             var vbProj = "VBProj";
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .AddProjectAsync(
                     vbProj,
                     WellKnownProjectTemplates.ClassLibrary,
@@ -65,8 +62,7 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
                 );
 
             var project = ProjectName;
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .OpenFileAsync(project, "Class1.cs", HangMitigatingCancellationToken);
 
             await SetUpEditorAsync(
@@ -81,8 +77,7 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
                 HangMitigatingCancellationToken
             );
 
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .CodeActionAsync(
                     "Generate new type...",
                     applyFix: true,
@@ -91,28 +86,21 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
                 );
 
             await TestServices.GenerateTypeDialog.VerifyOpenAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .GenerateTypeDialog
+            await TestServices.GenerateTypeDialog
                 .SetAccessibilityAsync("public", HangMitigatingCancellationToken);
-            await TestServices
-                .GenerateTypeDialog
+            await TestServices.GenerateTypeDialog
                 .SetKindAsync("interface", HangMitigatingCancellationToken);
-            await TestServices
-                .GenerateTypeDialog
+            await TestServices.GenerateTypeDialog
                 .SetTargetProjectAsync("VBProj", HangMitigatingCancellationToken);
-            await TestServices
-                .GenerateTypeDialog
+            await TestServices.GenerateTypeDialog
                 .SetTargetFileToNewNameAsync("GenerateTypeTest", HangMitigatingCancellationToken);
             await TestServices.GenerateTypeDialog.ClickOKAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .GenerateTypeDialog
+            await TestServices.GenerateTypeDialog
                 .VerifyClosedAsync(HangMitigatingCancellationToken);
 
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .OpenFileAsync(vbProj, "GenerateTypeTest.vb", HangMitigatingCancellationToken);
-            var actualText = await TestServices
-                .Editor
+            var actualText = await TestServices.Editor
                 .GetTextAsync(HangMitigatingCancellationToken);
             Assert.Contains(
                 @"Public Interface A
@@ -121,8 +109,7 @@ End Interface
                 actualText
             );
 
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .OpenFileAsync(project, "Class1.cs", HangMitigatingCancellationToken);
             actualText = await TestServices.Editor.GetTextAsync(HangMitigatingCancellationToken);
             Assert.Contains(

@@ -238,8 +238,7 @@ namespace System.IO.Tests
             public static void Equal(ReadOnlySpan<char> expected, ReadOnlySpan<char> actual)
             {
                 if (!actual.SequenceEqual(expected))
-                    throw Xunit
-                        .Sdk
+                    throw Xunit.Sdk
                         .EqualException
                         .ForMismatchedValues(new string(expected), new string(actual));
             }

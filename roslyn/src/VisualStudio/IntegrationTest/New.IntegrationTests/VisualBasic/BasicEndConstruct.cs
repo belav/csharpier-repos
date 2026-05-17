@@ -32,11 +32,9 @@ End Class",
                 HangMitigatingCancellationToken
             );
             // Send a space to convert virtual whitespace into real whitespace
-            await TestServices
-                .Input
+            await TestServices.Input
                 .SendAsync([VirtualKeyCode.RETURN, " "], HangMitigatingCancellationToken);
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .TextContainsAsync(
                     @"
 Class Program
@@ -64,14 +62,12 @@ End Class",
                 HangMitigatingCancellationToken
             );
             // Send a space to convert virtual whitespace into real whitespace
-            await TestServices
-                .Input
+            await TestServices.Input
                 .SendAsync(
                     ["While True", VirtualKeyCode.RETURN, " "],
                     HangMitigatingCancellationToken
                 );
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .TextContainsAsync(
                     @"
 Class Program
@@ -96,17 +92,14 @@ End Interface",
                 HangMitigatingCancellationToken
             );
 
-            await TestServices
-                .Input
+            await TestServices.Input
                 .SendAsync(
                     (VirtualKeyCode.BACK, VirtualKeyCode.CONTROL),
                     HangMitigatingCancellationToken
                 );
-            await TestServices
-                .Input
+            await TestServices.Input
                 .SendAsync(["Class", VirtualKeyCode.TAB], HangMitigatingCancellationToken);
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .TextContainsAsync(
                     @"
 Class C
@@ -127,17 +120,14 @@ End Class",
                 HangMitigatingCancellationToken
             );
 
-            await TestServices
-                .Input
+            await TestServices.Input
                 .SendAsync(
                     (VirtualKeyCode.BACK, VirtualKeyCode.CONTROL),
                     HangMitigatingCancellationToken
                 );
-            await TestServices
-                .Input
+            await TestServices.Input
                 .SendAsync(["fu", VirtualKeyCode.TAB], HangMitigatingCancellationToken);
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .TextContainsAsync(
                     @"
 Class C

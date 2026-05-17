@@ -5573,8 +5573,7 @@ class C
             using (var stream = new MemoryStream())
             {
                 var result = compilation.Emit(stream);
-                result
-                    .Diagnostics
+                result.Diagnostics
                     .Verify(
                         // warning CS8021: No value for RuntimeMetadataVersion found. No assembly containing System.Object was found nor was a value for RuntimeMetadataVersion specified through options.
                         Diagnostic(ErrorCode.WRN_NoRuntimeMetadataVersion),
@@ -5643,8 +5642,7 @@ class B<T>
             using (var stream = new MemoryStream())
             {
                 var result = compilation.Emit(stream);
-                result
-                    .Diagnostics
+                result.Diagnostics
                     .Verify(
                         // warning CS8021: No value for RuntimeMetadataVersion found. No assembly containing System.Object was found nor was a value for RuntimeMetadataVersion specified through options.
                         Diagnostic(ErrorCode.WRN_NoRuntimeMetadataVersion).WithLocation(1, 1),
@@ -5725,8 +5723,7 @@ class B<T>
             using (var stream = new MemoryStream())
             {
                 var result = compilation.Emit(stream);
-                result
-                    .Diagnostics
+                result.Diagnostics
                     .Verify(
                         // warning CS8021: No value for RuntimeMetadataVersion found. No assembly containing System.Object was found nor was a value for RuntimeMetadataVersion specified through options.
                         Diagnostic(ErrorCode.WRN_NoRuntimeMetadataVersion).WithLocation(1, 1),

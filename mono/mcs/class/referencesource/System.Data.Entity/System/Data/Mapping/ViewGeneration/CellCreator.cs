@@ -416,8 +416,7 @@ namespace System.Data.Mapping.ViewGeneration
                             IEnumerable<EdmType> typeAndSubTypes =
                                 MetadataHelper.GetTypeAndSubtypesOf(
                                     type,
-                                    m_containerMapping
-                                        .StorageMappingItemCollection
+                                    m_containerMapping.StorageMappingItemCollection
                                         .EdmItemCollection,
                                     false /*includeAbstractTypes*/
                                 );
@@ -597,8 +596,7 @@ namespace System.Data.Mapping.ViewGeneration
                             allTypes.AddRange(
                                 MetadataHelper.GetTypeAndSubtypesOf(
                                     type,
-                                    m_containerMapping
-                                        .StorageMappingItemCollection
+                                    m_containerMapping.StorageMappingItemCollection
                                         .EdmItemCollection,
                                     false /*includeAbstractTypes*/
                                 )

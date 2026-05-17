@@ -751,10 +751,11 @@ namespace System.Windows.Forms.Design
             if (drawGrid)
             {
                 GraphicsState state = pe.Graphics.Save();
-                pe.Graphics.TranslateTransform(
-                    this.Control.ClientRectangle.X,
-                    this.Control.ClientRectangle.Y
-                );
+                pe.Graphics
+                    .TranslateTransform(
+                        this.Control.ClientRectangle.X,
+                        this.Control.ClientRectangle.Y
+                    );
                 ControlPaint.DrawGrid(
                     pe.Graphics,
                     this.Control.ClientRectangle,

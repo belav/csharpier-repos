@@ -79,8 +79,7 @@ namespace System.ServiceModel.Channels
                 }
 
                 TryConvertAndThrow(ex);
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         HttpChannelUtilities.CreateRequestWebException(
                             ex,
@@ -126,8 +125,7 @@ namespace System.ServiceModel.Channels
                 }
 
                 TryConvertAndThrow(ex);
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         HttpChannelUtilities.CreateRequestWebException(
                             ex,
@@ -186,8 +184,7 @@ namespace System.ServiceModel.Channels
                 }
 
                 TryConvertAndThrow(ex);
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         HttpChannelUtilities.CreateRequestWebException(
                             ex,
@@ -227,8 +224,7 @@ namespace System.ServiceModel.Channels
             string actualValue = response.Headers[headerKey];
             if (actualValue == null)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new CommunicationException(
                             SR.GetString(SR.WebSocketTransportError),
@@ -244,8 +240,7 @@ namespace System.ServiceModel.Channels
                 : StringComparison.Ordinal;
             if (!actualValue.Equals(expectedValue, comparisonType))
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new CommunicationException(
                             SR.GetString(SR.WebSocketTransportError),
@@ -279,8 +274,7 @@ namespace System.ServiceModel.Channels
                         ];
                         if (!string.IsNullOrWhiteSpace(serverTransferMode))
                         {
-                            throw FxTrace
-                                .Exception
+                            throw FxTrace.Exception
                                 .AsError(
                                     new CommunicationException(
                                         SR.GetString(
@@ -292,8 +286,7 @@ namespace System.ServiceModel.Channels
                         }
                         else
                         {
-                            throw FxTrace
-                                .Exception
+                            throw FxTrace.Exception
                                 .AsError(
                                     new CommunicationException(
                                         SR.GetString(SR.WebSocketContentTypeMismatchFromServer),
@@ -308,8 +301,7 @@ namespace System.ServiceModel.Channels
                     string serverVersion = webResponse.Headers[WebSocketHelper.SecWebSocketVersion];
                     if (!string.IsNullOrWhiteSpace(serverVersion))
                     {
-                        throw FxTrace
-                            .Exception
+                        throw FxTrace.Exception
                             .AsError(
                                 new CommunicationException(
                                     SR.GetString(
@@ -326,8 +318,7 @@ namespace System.ServiceModel.Channels
                     ];
                     if (!string.IsNullOrWhiteSpace(serverSubProtocol))
                     {
-                        throw FxTrace
-                            .Exception
+                        throw FxTrace.Exception
                             .AsError(
                                 new CommunicationException(
                                     SR.GetString(
@@ -346,8 +337,8 @@ namespace System.ServiceModel.Channels
         {
             if (this.WebSocketSettings.SubProtocol != null)
             {
-                request.Headers[WebSocketHelper.SecWebSocketProtocol] =
-                    this.WebSocketSettings.SubProtocol;
+                request.Headers[WebSocketHelper.SecWebSocketProtocol] = this.WebSocketSettings
+                    .SubProtocol;
             }
 
             // These headers were added for WCF specific handshake to avoid encoder or transfermode mismatch between client and server.
@@ -426,14 +417,15 @@ namespace System.ServiceModel.Channels
                 }
             }
 
-            this.channelFactory.CreateAndOpenTokenProviders(
-                this.RemoteAddress,
-                this.Via,
-                channelParameterCollection,
-                helper.RemainingTime(),
-                out this.webRequestTokenProvider,
-                out this.webRequestProxyTokenProvider
-            );
+            this.channelFactory
+                .CreateAndOpenTokenProviders(
+                    this.RemoteAddress,
+                    this.Via,
+                    channelParameterCollection,
+                    helper.RemainingTime(),
+                    out this.webRequestTokenProvider,
+                    out this.webRequestProxyTokenProvider
+                );
 
             SecurityTokenContainer clientCertificateToken = null;
             HttpsChannelFactory<IDuplexSessionChannel> httpsChannelFactory =
@@ -456,15 +448,16 @@ namespace System.ServiceModel.Channels
                 );
             }
 
-            request = this.channelFactory.GetWebRequest(
-                this.RemoteAddress,
-                this.Via,
-                this.webRequestTokenProvider,
-                this.webRequestProxyTokenProvider,
-                clientCertificateToken,
-                helper.RemainingTime(),
-                true
-            );
+            request = this.channelFactory
+                .GetWebRequest(
+                    this.RemoteAddress,
+                    this.Via,
+                    this.webRequestTokenProvider,
+                    this.webRequestProxyTokenProvider,
+                    clientCertificateToken,
+                    helper.RemainingTime(),
+                    true
+                );
 
             // If a web socket connection factory is specified (for example, when using web sockets on pre-Win8 OS),
             // we're going to use the protocol version from it. At the moment, on pre-Win8 OS, the HttpWebRequest
@@ -566,8 +559,8 @@ namespace System.ServiceModel.Channels
 
             bool inputUseStreaming = TransferModeHelper.IsResponseStreamed(this.TransferMode);
 
-            SecurityMessageProperty handshakeReplySecurityMessageProperty =
-                this.channelFactory.CreateReplySecurityProperty(request, response);
+            SecurityMessageProperty handshakeReplySecurityMessageProperty = this.channelFactory
+                .CreateReplySecurityProperty(request, response);
 
             if (handshakeReplySecurityMessageProperty != null)
             {
@@ -583,8 +576,7 @@ namespace System.ServiceModel.Channels
         {
             if (response.StatusCode != HttpStatusCode.SwitchingProtocols)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new CommunicationException(
                             SR.GetString(SR.WebSocketTransportError),
@@ -635,8 +627,7 @@ namespace System.ServiceModel.Channels
                 string headerValue = response.Headers[WebSocketHelper.SecWebSocketProtocol];
                 if (!string.IsNullOrWhiteSpace(headerValue))
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(
                             new CommunicationException(
                                 SR.GetString(SR.WebSocketTransportError),
@@ -680,8 +671,7 @@ namespace System.ServiceModel.Channels
                     throw;
                 }
 
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new InvalidOperationException(
                             SR.GetString(
@@ -696,8 +686,7 @@ namespace System.ServiceModel.Channels
             // The WebSocketVersion is a required http header, to initiate a web-socket connection.
             if (string.IsNullOrWhiteSpace(webSocketVersion))
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new InvalidOperationException(
                             SR.GetString(
@@ -714,8 +703,7 @@ namespace System.ServiceModel.Channels
             }
             catch (ArgumentException e)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new InvalidOperationException(
                             SR.GetString(
@@ -744,10 +732,8 @@ namespace System.ServiceModel.Channels
             WebSocket ws;
             try
             {
-                ws = this.connectionFactory.CreateWebSocket(
-                    this.connection,
-                    this.WebSocketSettings.Clone()
-                );
+                ws = this.connectionFactory
+                    .CreateWebSocket(this.connection, this.WebSocketSettings.Clone());
             }
             catch (Exception e)
             {
@@ -756,8 +742,7 @@ namespace System.ServiceModel.Channels
                     throw;
                 }
 
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new InvalidOperationException(
                             SR.GetString(
@@ -772,8 +757,7 @@ namespace System.ServiceModel.Channels
             // The returned WebSocket should be valid (non-null), in an opened state and with the same SubProtocol that we requested.
             if (ws == null)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new InvalidOperationException(
                             SR.GetString(
@@ -786,8 +770,7 @@ namespace System.ServiceModel.Channels
             else if (ws.State != WebSocketState.Open)
             {
                 ws.Dispose();
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new InvalidOperationException(
                             SR.GetString(
@@ -810,8 +793,7 @@ namespace System.ServiceModel.Channels
                 )
                 {
                     ws.Dispose();
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(
                             new InvalidOperationException(
                                 SR.GetString(

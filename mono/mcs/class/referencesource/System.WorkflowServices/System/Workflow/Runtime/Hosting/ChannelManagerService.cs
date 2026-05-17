@@ -70,8 +70,7 @@ namespace System.Workflow.Runtime.Hosting
             {
                 if (string.IsNullOrEmpty(key))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgument(
                             SR2.GetString(SR2.Error_UnknownConfigurationParameter, key),
                             "parameters"
@@ -161,8 +160,7 @@ namespace System.Workflow.Runtime.Hosting
                 }
                 else
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgument(
                             SR2.GetString(SR2.Error_UnknownConfigurationParameter, key),
                             "parameters"
@@ -201,8 +199,7 @@ namespace System.Workflow.Runtime.Hosting
                 "Can be called within a valid OperationContext Scope"
             );
 
-            WorkflowTrace
-                .Host
+            WorkflowTrace.Host
                 .TraceEvent(
                     TraceEventType.Verbose,
                     0,
@@ -265,15 +262,13 @@ namespace System.Workflow.Runtime.Hosting
         {
             if (executionContext == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("executionContext");
             }
 
             if (workflowId == Guid.Empty)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(
                         "workflowId",
                         SR2.GetString(SR2.Error_Cache_InvalidWorkflowId)
@@ -308,8 +303,7 @@ namespace System.Workflow.Runtime.Hosting
                 "Can be called from valid OperationContextScope"
             );
 
-            WorkflowTrace
-                .Host
+            WorkflowTrace.Host
                 .TraceEvent(
                     TraceEventType.Verbose,
                     0,
@@ -337,8 +331,7 @@ namespace System.Workflow.Runtime.Hosting
                 return;
             }
 
-            WorkflowTrace
-                .Host
+            WorkflowTrace.Host
                 .TraceEvent(
                     TraceEventType.Information,
                     0,
@@ -346,18 +339,15 @@ namespace System.Workflow.Runtime.Hosting
                     new object[] { pooledChannel.WorkflowId, pooledChannel.LogicalChannelId }
                 );
 
-            this.channelManager.ReturnChannel(
-                pooledChannel.ChannelPoolKey,
-                pooledChannel.PooledChannel
-            );
+            this.channelManager
+                .ReturnChannel(pooledChannel.ChannelPoolKey, pooledChannel.PooledChannel);
         }
 
         internal PooledChannelTicket TakeChannel(Guid workflowId, LogicalChannel logicalChannel)
         {
             if (this.closed)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR2.GetString(
@@ -371,8 +361,7 @@ namespace System.Workflow.Runtime.Hosting
 
             if (workflowId == Guid.Empty)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(
                         "workflowId",
                         SR2.GetString(SR2.Error_Cache_InvalidWorkflowId)
@@ -384,8 +373,7 @@ namespace System.Workflow.Runtime.Hosting
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("logicalChannel");
             }
 
-            WorkflowTrace
-                .Host
+            WorkflowTrace.Host
                 .TraceEvent(
                     TraceEventType.Information,
                     0,
@@ -398,16 +386,11 @@ namespace System.Workflow.Runtime.Hosting
             string customAddress = logicalChannel.CustomAddress;
 
             ChannelPoolKey channelKey;
-            ChannelManager.PooledChannel channel = this.channelManager.TakeChannel(
-                endpointName,
-                contractType,
-                customAddress,
-                out channelKey
-            );
+            ChannelManager.PooledChannel channel = this.channelManager
+                .TakeChannel(endpointName, contractType, customAddress, out channelKey);
             if (channel == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR2.GetString(

@@ -212,8 +212,7 @@ namespace System.Activities
                     }
                     else
                     {
-                        throw FxTrace
-                            .Exception
+                        throw FxTrace.Exception
                             .AsError(
                                 new NotSupportedException("Lvalues of member type " + memberType)
                             );
@@ -263,8 +262,7 @@ namespace System.Activities
                         }
                     }
 
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(
                             new InvalidOperationException(
                                 SR.InvalidExpressionForLocation(body.NodeType)
@@ -272,8 +270,7 @@ namespace System.Activities
                         );
 
                 default:
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(
                             new InvalidOperationException(
                                 SR.InvalidExpressionForLocation(body.NodeType)
@@ -521,8 +518,7 @@ namespace System.Activities
                     {
                         if (this.owner == null && !this.fieldInfo.IsStatic)
                         {
-                            throw FxTrace
-                                .Exception
+                            throw FxTrace.Exception
                                 .AsError(
                                     new NullReferenceException(
                                         SR.CannotDereferenceNull(this.fieldInfo.Name)
@@ -536,8 +532,7 @@ namespace System.Activities
                     {
                         if (this.owner == null && !this.fieldInfo.IsStatic)
                         {
-                            throw FxTrace
-                                .Exception
+                            throw FxTrace.Exception
                                 .AsError(
                                     new NullReferenceException(
                                         SR.CannotDereferenceNull(this.fieldInfo.Name)
@@ -764,8 +759,7 @@ namespace System.Activities
                     {
                         if (this.targetObject == null && !this.getItemMethod.IsStatic)
                         {
-                            throw FxTrace
-                                .Exception
+                            throw FxTrace.Exception
                                 .AsError(
                                     new NullReferenceException(
                                         SR.CannotDereferenceNull(this.getItemMethod.Name)
@@ -781,8 +775,7 @@ namespace System.Activities
                         if (this.setItemMethod == null)
                         {
                             string targetObjectTypeName = this.targetObject.GetType().Name;
-                            throw FxTrace
-                                .Exception
+                            throw FxTrace.Exception
                                 .AsError(
                                     new InvalidOperationException(
                                         SR.MissingSetAccessorForIndexer(
@@ -795,8 +788,7 @@ namespace System.Activities
 
                         if (this.targetObject == null && !this.setItemMethod.IsStatic)
                         {
-                            throw FxTrace
-                                .Exception
+                            throw FxTrace.Exception
                                 .AsError(
                                     new NullReferenceException(
                                         SR.CannotDereferenceNull(this.setItemMethod.Name)
@@ -1031,8 +1023,7 @@ namespace System.Activities
                             )
                         )
                         {
-                            throw FxTrace
-                                .Exception
+                            throw FxTrace.Exception
                                 .AsError(
                                     new InvalidOperationException(
                                         SR.WriteonlyPropertyCannotBeRead(
@@ -1048,8 +1039,7 @@ namespace System.Activities
                             && (getMethodInfo == null || !getMethodInfo.IsStatic)
                         )
                         {
-                            throw FxTrace
-                                .Exception
+                            throw FxTrace.Exception
                                 .AsError(
                                     new NullReferenceException(
                                         SR.CannotDereferenceNull(this.propertyInfo.Name)
@@ -1075,8 +1065,7 @@ namespace System.Activities
                             )
                         )
                         {
-                            throw FxTrace
-                                .Exception
+                            throw FxTrace.Exception
                                 .AsError(
                                     new InvalidOperationException(
                                         SR.ReadonlyPropertyCannotBeSet(
@@ -1092,8 +1081,7 @@ namespace System.Activities
                             && (setMethodInfo == null || !setMethodInfo.IsStatic)
                         )
                         {
-                            throw FxTrace
-                                .Exception
+                            throw FxTrace.Exception
                                 .AsError(
                                     new NullReferenceException(
                                         SR.CannotDereferenceNull(this.propertyInfo.Name)
@@ -1819,8 +1807,7 @@ namespace System.Activities
                         throw;
                     }
 
-                    publicAccessor
-                        .ActivityMetadata
+                    publicAccessor.ActivityMetadata
                         .AddValidationError(
                             SR.ErrorExtractingValuesForLambdaRewrite(
                                 argumentExpression.Type,
@@ -1859,8 +1846,7 @@ namespace System.Activities
                     }
                 }
 
-                publicAccessor
-                    .ActivityMetadata
+                publicAccessor.ActivityMetadata
                     .AddValidationError(
                         SR.ErrorExtractingValuesForLambdaRewrite(
                             argumentExpression.Type,
@@ -1882,8 +1868,7 @@ namespace System.Activities
                     )
                 )
                 {
-                    publicAccessor
-                        .ActivityMetadata
+                    publicAccessor.ActivityMetadata
                         .AddValidationError(
                             SR.ErrorExtractingValuesForLambdaRewrite(
                                 argumentExpression.Type,
@@ -2192,8 +2177,7 @@ namespace System.Activities
                         throw;
                     }
 
-                    publicAccessor
-                        .ActivityMetadata
+                    publicAccessor.ActivityMetadata
                         .AddValidationError(
                             SR.ErrorExtractingValuesForLambdaRewrite(
                                 locationReferenceExpression.Type,
@@ -2207,8 +2191,7 @@ namespace System.Activities
 
             if (locationReference == null)
             {
-                publicAccessor
-                    .ActivityMetadata
+                publicAccessor.ActivityMetadata
                     .AddValidationError(
                         SR.ErrorExtractingValuesForLambdaRewrite(
                             locationReferenceExpression.Type,
@@ -2227,8 +2210,7 @@ namespace System.Activities
                 )
             )
             {
-                publicAccessor
-                    .ActivityMetadata
+                publicAccessor.ActivityMetadata
                     .AddValidationError(
                         SR.ErrorExtractingValuesForLambdaRewrite(
                             locationReferenceExpression.Type,
@@ -2277,8 +2259,7 @@ namespace System.Activities
                         )
                     )
                     {
-                        publicAccessor
-                            .ActivityMetadata
+                        publicAccessor.ActivityMetadata
                             .AddValidationError(
                                 SR.ErrorExtractingValuesForLambdaRewrite(
                                     parameterExpression.Type,
@@ -2306,8 +2287,7 @@ namespace System.Activities
                         )
                     )
                     {
-                        publicAccessor
-                            .ActivityMetadata
+                        publicAccessor.ActivityMetadata
                             .AddValidationError(
                                 SR.ErrorExtractingValuesForLambdaRewrite(
                                     parameterExpression.Type,

@@ -467,8 +467,7 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public static void ReadConversionFails()
         {
-            byte[] data = Encoding
-                .UTF8
+            byte[] data = Encoding.UTF8
                 .GetBytes(
                     @"{"
                         + @"""Children"":["

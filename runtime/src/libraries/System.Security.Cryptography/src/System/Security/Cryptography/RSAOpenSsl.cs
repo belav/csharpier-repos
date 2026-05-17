@@ -73,8 +73,7 @@ namespace System.Security.Cryptography
                 throw new ArgumentException(SR.Cryptography_OpenInvalidHandle, nameof(pkeyHandle));
 
             ThrowIfNotSupported();
-            SafeEvpPKeyHandle newKey = Interop
-                .Crypto
+            SafeEvpPKeyHandle newKey = Interop.Crypto
                 .EvpPKeyDuplicate(pkeyHandle, Interop.Crypto.EvpAlgorithmId.RSA);
 
             SetKey(newKey);

@@ -176,8 +176,7 @@ namespace Microsoft.Build.Tasks.Xaml
                 }
                 else
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(
                             new InvalidOperationException(
                                 SR.ClassModifierNotSupported(classModifier)
@@ -254,8 +253,7 @@ namespace Microsoft.Build.Tasks.Xaml
                 }
                 else
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(
                             new InvalidOperationException(
                                 SR.FieldModifierNotSupported(memberModifier)
@@ -297,8 +295,7 @@ namespace Microsoft.Build.Tasks.Xaml
         {
             if (buildTaskPath == null)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new LoggableException(
                             new InvalidOperationException(SR.BuildTaskPathMustNotBeNull)
@@ -407,8 +404,7 @@ namespace Microsoft.Build.Tasks.Xaml
             {
                 if (e.FileName == null)
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError((new FileNotFoundException(e.Message, fullPath)));
                 }
                 else
@@ -734,8 +730,7 @@ namespace Microsoft.Build.Tasks.Xaml
                 {
                     qualifiedName = name + "`" + xamlType.TypeArguments.Count;
                 }
-                XamlType resolvedType = xamlType
-                    .SchemaContext
+                XamlType resolvedType = xamlType.SchemaContext
                     .GetXamlType(new XamlTypeName(@namespace, qualifiedName));
                 if (resolvedType != null && resolvedType.UnderlyingType != null)
                 {
@@ -991,14 +986,12 @@ namespace Microsoft.Build.Tasks.Xaml
                     assemblyName = taskItem.GetMetadata("AssemblyName");
                     if (assemblyName != "" && assemblyFile != "")
                     {
-                        throw FxTrace
-                            .Exception
+                        throw FxTrace.Exception
                             .AsError(new LoggableException(SR.BothAssemblyNameAndFileSpecified));
                     }
                     if (assemblyName == "" && assemblyFile == "")
                     {
-                        throw FxTrace
-                            .Exception
+                        throw FxTrace.Exception
                             .AsError(new LoggableException(SR.AssemblyNameOrFileNotSpecified));
                     }
 

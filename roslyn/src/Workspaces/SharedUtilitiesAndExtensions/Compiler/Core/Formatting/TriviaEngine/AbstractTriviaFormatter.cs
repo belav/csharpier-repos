@@ -706,9 +706,10 @@ namespace Microsoft.CodeAnalysis.Formatting
                 return rule.IndentationOperation switch
                 {
                     LineColumnRule.IndentationOperations.Absolute => Math.Max(0, rule.Indentation),
-                    LineColumnRule.IndentationOperations.Default => this.Context.GetBaseIndentation(
-                        trivia2.RawKind == 0 ? this.EndPosition : trivia2.SpanStart
-                    ),
+                    LineColumnRule.IndentationOperations.Default => this.Context
+                        .GetBaseIndentation(
+                            trivia2.RawKind == 0 ? this.EndPosition : trivia2.SpanStart
+                        ),
                     LineColumnRule.IndentationOperations.Given => (trivia2.RawKind == 0)
                         ? this.Spaces
                         : Math.Max(0, _indentation),

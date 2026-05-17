@@ -204,8 +204,7 @@ internal sealed class HttpsConfigurationService : IHttpsConfigurationService
                     },
                     OnConnection = (context, cancellationToken) =>
                     {
-                        return listenOptions
-                            .HttpsCallbackOptions
+                        return listenOptions.HttpsCallbackOptions
                             .OnConnection(
                                 new TlsHandshakeCallbackContext
                                 {

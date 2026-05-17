@@ -40,8 +40,7 @@ namespace Microsoft.Web.Mvc.Controls
             ModelState modelState;
             if (ViewData.ModelState.TryGetValue(key, out modelState))
             {
-                return modelState
-                    .Value
+                return modelState.Value
                     .ConvertTo(
                         destinationType,
                         null /* culture */

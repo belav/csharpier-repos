@@ -83,8 +83,7 @@ namespace System.Management
 
                 flag |= (int)tag_WBEM_CONDITION_FLAG_TYPE.WBEM_FLAG_ALWAYS;
 
-                int status = parent
-                    .wbemObject
+                int status = parent.wbemObject
                     .GetNames_(null, flag, ref qualVal, out propertyNames);
 
                 if (status < 0)
@@ -268,8 +267,7 @@ namespace System.Management
 
                 flag |= (int)tag_WBEM_CONDITION_FLAG_TYPE.WBEM_FLAG_ALWAYS;
 
-                int status = parent
-                    .wbemObject
+                int status = parent.wbemObject
                     .GetNames_(null, flag, ref qualVal, out propertyNames);
 
                 if (status < 0)

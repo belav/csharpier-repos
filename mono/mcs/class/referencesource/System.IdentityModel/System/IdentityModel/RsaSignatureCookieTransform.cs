@@ -78,8 +78,7 @@ namespace System.IdentityModel
                 {
                     if (algorithm == null)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperArgument("value", SR.GetString(SR.ID6034, value));
                     }
                     _hashName = value;
@@ -140,8 +139,7 @@ namespace System.IdentityModel
 
             if (0 == encoded.Length)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument("encoded", SR.GetString(SR.ID6045));
             }
 
@@ -158,16 +156,14 @@ namespace System.IdentityModel
             // SignatureLength : 4-byte big-endian integer
             if (encoded.Length < sizeof(Int32))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new FormatException(SR.GetString(SR.ID1012)));
             }
             Int32 signatureLength = BitConverter.ToInt32(encoded, currentIndex);
 
             if (signatureLength < 0)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new FormatException(SR.GetString(SR.ID1005, signatureLength))
                     );
@@ -175,8 +171,7 @@ namespace System.IdentityModel
 
             if (signatureLength >= encoded.Length - sizeof(Int32))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new FormatException(SR.GetString(SR.ID1013)));
             }
             currentIndex += sizeof(Int32);
@@ -217,8 +212,7 @@ namespace System.IdentityModel
             // Not all algorithms are supported on all OS
             catch (CryptographicException e)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new NotSupportedException(
                             SR.GetString(
@@ -233,8 +227,7 @@ namespace System.IdentityModel
 
             if (!verified)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new CryptographicException(SR.GetString(SR.ID1014)));
             }
 
@@ -261,8 +254,7 @@ namespace System.IdentityModel
 
             if (0 == value.Length)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument("value", SR.GetString(SR.ID6044));
             }
 
@@ -305,8 +297,7 @@ namespace System.IdentityModel
                 // Not all algorithms are supported on all OS
                 catch (CryptographicException e)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new NotSupportedException(
                                 SR.GetString(SR.ID6035, HashName, signingKey.GetType().FullName),
@@ -381,8 +372,7 @@ namespace System.IdentityModel
             return (
                 StringComparer.OrdinalIgnoreCase.Equals(HashName, "SHA256")
                 || StringComparer.OrdinalIgnoreCase.Equals(HashName, "SHA-256")
-                || StringComparer
-                    .OrdinalIgnoreCase
+                || StringComparer.OrdinalIgnoreCase
                     .Equals(HashName, "System.Security.Cryptography.SHA256")
             );
         }

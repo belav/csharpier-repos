@@ -53,8 +53,7 @@ class C2 { }
 class C3 { }
 ";
 
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .TextContainsAsync(
                     expected,
                     assertCaretPosition: true,

@@ -100,8 +100,7 @@ namespace System.ServiceModel
             {
                 if (!SecurityKeyTypeHelper.IsDefined(value))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new ArgumentOutOfRangeException("value"));
                 }
                 this.issuedKeyType = value;
@@ -130,8 +129,7 @@ namespace System.ServiceModel
                 && (version.TrustVersion == TrustVersion.WSTrustFeb2005)
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(SR.BearerKeyIncompatibleWithWSFederationHttpBinding)
@@ -141,8 +139,7 @@ namespace System.ServiceModel
 
             if (isReliableSession && !this.EstablishSecurityContext)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(SR.SecureConversationRequiredByReliableSession)

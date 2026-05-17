@@ -250,8 +250,7 @@ namespace System.ServiceModel.Channels
             this.innerListener = context.BuildInnerChannelListener<TInnerChannel>();
             if (context.BindingParameters != null)
             {
-                this.demuxFailureHandler = context
-                    .BindingParameters
+                this.demuxFailureHandler = context.BindingParameters
                     .Find<IChannelDemuxFailureHandler>();
             }
             this.openSemaphore = new ThreadNeutralSemaphore(1);
@@ -572,8 +571,7 @@ namespace System.ServiceModel.Channels
             {
                 if (pendingInnerListenerOpenException is CommunicationObjectAbortedException)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperWarning(
                             new CommunicationObjectAbortedException(
                                 SR.GetString(
@@ -585,8 +583,7 @@ namespace System.ServiceModel.Channels
                 }
                 else if (pendingInnerListenerOpenException is CommunicationObjectFaultedException)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperWarning(
                             new CommunicationObjectFaultedException(
                                 SR.GetString(
@@ -598,8 +595,7 @@ namespace System.ServiceModel.Channels
                 }
                 else
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperWarning(
                             new CommunicationException(
                                 SR.GetString(
@@ -650,9 +646,8 @@ namespace System.ServiceModel.Channels
                     try
                     {
                         this.innerListener.Open(timeoutHelper.RemainingTime());
-                        this.innerChannel = this.innerListener.AcceptChannel(
-                            timeoutHelper.RemainingTime()
-                        );
+                        this.innerChannel = this.innerListener
+                            .AcceptChannel(timeoutHelper.RemainingTime());
                         this.innerChannel.Open(timeoutHelper.RemainingTime());
 
                         lock (ThisLock)
@@ -755,8 +750,7 @@ namespace System.ServiceModel.Channels
 
                 if (matchingListener == null)
                 {
-                    System
-                        .ServiceModel
+                    System.ServiceModel
                         .Dispatcher
                         .ErrorBehavior
                         .ThrowAndCatch(
@@ -950,10 +944,8 @@ namespace System.ServiceModel.Channels
 
             bool OnWaitOver()
             {
-                this.openInnerListener = this.channelDemuxer.ShouldOpenInnerListener(
-                    filter,
-                    listener
-                );
+                this.openInnerListener = this.channelDemuxer
+                    .ShouldOpenInnerListener(filter, listener);
                 // the semaphore is obtained. Check if the inner listener needs to be opened. If not,
                 // check if there is a pending exception obtained while opening the inner listener and throw
                 // that
@@ -1164,8 +1156,7 @@ namespace System.ServiceModel.Channels
                     bool closeSucceeded = false;
                     try
                     {
-                        IAsyncResult result = channelDemuxer
-                            .innerChannel
+                        IAsyncResult result = channelDemuxer.innerChannel
                             .BeginClose(timeoutHelper.RemainingTime(), sharedCallback, this);
                         if (!result.CompletedSynchronously)
                         {
@@ -1197,8 +1188,7 @@ namespace System.ServiceModel.Channels
                 bool closeSucceeded = false;
                 try
                 {
-                    IAsyncResult result = channelDemuxer
-                        .innerListener
+                    IAsyncResult result = channelDemuxer.innerListener
                         .BeginClose(timeoutHelper.RemainingTime(), sharedCallback, this);
                     if (!result.CompletedSynchronously)
                     {
@@ -1595,8 +1585,7 @@ namespace System.ServiceModel.Channels
             }
             else
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new NotSupportedException());
             }
         }
@@ -1858,11 +1847,8 @@ namespace System.ServiceModel.Channels
         protected override void OnOpen(TimeSpan timeout)
         {
             TimeoutHelper timeoutHelper = new TimeoutHelper(timeout);
-            this.channelDemuxer.OnOuterListenerOpen(
-                this.filter,
-                this,
-                timeoutHelper.RemainingTime()
-            );
+            this.channelDemuxer
+                .OnOuterListenerOpen(this.filter, this, timeoutHelper.RemainingTime());
             base.OnOpen(timeoutHelper.RemainingTime());
         }
 
@@ -1894,13 +1880,8 @@ namespace System.ServiceModel.Channels
             object state
         )
         {
-            return this.channelDemuxer.OnBeginOuterListenerOpen(
-                this.filter,
-                this,
-                timeout,
-                callback,
-                state
-            );
+            return this.channelDemuxer
+                .OnBeginOuterListenerOpen(this.filter, this, timeout, callback, state);
         }
 
         void OnEndOuterListenerOpen(IAsyncResult result)
@@ -1949,12 +1930,8 @@ namespace System.ServiceModel.Channels
             object state
         )
         {
-            return this.channelDemuxer.OnBeginOuterListenerClose(
-                this.filter,
-                timeout,
-                callback,
-                state
-            );
+            return this.channelDemuxer
+                .OnBeginOuterListenerClose(this.filter, timeout, callback, state);
         }
 
         void OnEndOuterListenerClose(IAsyncResult result)
@@ -1973,11 +1950,8 @@ namespace System.ServiceModel.Channels
             bool canDispatchOnThisThread
         )
         {
-            this.SingletonAcceptor.EnqueueAndDispatch(
-                item,
-                dequeuedCallback,
-                canDispatchOnThisThread
-            );
+            this.SingletonAcceptor
+                .EnqueueAndDispatch(item, dequeuedCallback, canDispatchOnThisThread);
         }
 
         public void EnqueueAndDispatch(
@@ -1986,11 +1960,8 @@ namespace System.ServiceModel.Channels
             bool canDispatchOnThisThread
         )
         {
-            this.SingletonAcceptor.EnqueueAndDispatch(
-                exception,
-                dequeuedCallback,
-                canDispatchOnThisThread
-            );
+            this.SingletonAcceptor
+                .EnqueueAndDispatch(exception, dequeuedCallback, canDispatchOnThisThread);
         }
     }
 
@@ -2032,8 +2003,7 @@ namespace System.ServiceModel.Channels
         {
             if (context.BindingParameters != null)
             {
-                this.demuxFailureHandler = context
-                    .BindingParameters
+                this.demuxFailureHandler = context.BindingParameters
                     .Find<IChannelDemuxFailureHandler>();
             }
             this.innerListener = context.BuildInnerChannelListener<TInnerChannel>();
@@ -2118,11 +2088,8 @@ namespace System.ServiceModel.Channels
 
             try
             {
-                result = this.innerListener.BeginAcceptChannel(
-                    TimeSpan.MaxValue,
-                    onAcceptComplete,
-                    this
-                );
+                result = this.innerListener
+                    .BeginAcceptChannel(TimeSpan.MaxValue, onAcceptComplete, this);
                 releaseThrottle = false;
             }
             catch (CommunicationObjectFaultedException e)
@@ -2419,11 +2386,12 @@ namespace System.ServiceModel.Channels
                     return false;
                 }
 
-                this.filterTable.Add(
-                    filter.Filter,
-                    (InputQueueChannelListener<TInnerChannel>)(object)listener,
-                    filter.Priority
-                );
+                this.filterTable
+                    .Add(
+                        filter.Filter,
+                        (InputQueueChannelListener<TInnerChannel>)(object)listener,
+                        filter.Priority
+                    );
                 if (++this.openCount == 1)
                 {
                     this.abortOngoingOpen = false;
@@ -2455,8 +2423,7 @@ namespace System.ServiceModel.Channels
             {
                 if (pendingExceptionOnOpen is CommunicationObjectAbortedException)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperWarning(
                             new CommunicationObjectAbortedException(
                                 SR.GetString(
@@ -2468,8 +2435,7 @@ namespace System.ServiceModel.Channels
                 }
                 else if (pendingExceptionOnOpen is CommunicationObjectFaultedException)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperWarning(
                             new CommunicationObjectFaultedException(
                                 SR.GetString(
@@ -2481,8 +2447,7 @@ namespace System.ServiceModel.Channels
                 }
                 else
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperWarning(
                             new CommunicationException(
                                 SR.GetString(
@@ -2799,8 +2764,7 @@ namespace System.ServiceModel.Channels
                     this.onItemDequeued = new Action(this.OnItemDequeued);
                 }
 
-                listener
-                    .InputQueueAcceptor
+                listener.InputQueueAcceptor
                     .EnqueueAndDispatch(wrappedChannel, this.onItemDequeued, false);
                 enqueueSucceeded = true;
             }
@@ -2840,8 +2804,7 @@ namespace System.ServiceModel.Channels
                         this.onItemDequeued = new Action(OnItemDequeued);
                     }
 
-                    listener
-                        .InputQueueAcceptor
+                    listener.InputQueueAcceptor
                         .EnqueueAndDispatch(exception, this.onItemDequeued, false);
                 }
             }
@@ -2944,20 +2907,18 @@ namespace System.ServiceModel.Channels
                 if (this.demuxer.peekTimeout == ChannelDemuxer.UseDefaultReceiveTimeout)
                 {
                     //use the default ReceiveTimeout for the channel
-                    receiveResult = this.demuxer.BeginReceive(
-                        this.channel,
-                        onReceiveComplete,
-                        this
-                    );
+                    receiveResult = this.demuxer
+                        .BeginReceive(this.channel, onReceiveComplete, this);
                 }
                 else
                 {
-                    receiveResult = this.demuxer.BeginReceive(
-                        this.channel,
-                        this.demuxer.peekTimeout,
-                        onReceiveComplete,
-                        this
-                    );
+                    receiveResult = this.demuxer
+                        .BeginReceive(
+                            this.channel,
+                            this.demuxer.peekTimeout,
+                            onReceiveComplete,
+                            this
+                        );
                 }
 
                 if (receiveResult.CompletedSynchronously)
@@ -3119,10 +3080,8 @@ namespace System.ServiceModel.Channels
 
             bool OnWaitOver()
             {
-                this.startAccepting = this.channelDemuxer.ShouldStartAccepting(
-                    this.filter,
-                    this.listener
-                );
+                this.startAccepting = this.channelDemuxer
+                    .ShouldStartAccepting(this.filter, this.listener);
                 if (!this.startAccepting)
                 {
                     this.channelDemuxer.ThrowPendingOpenExceptionIfAny();
@@ -4125,11 +4084,8 @@ namespace System.ServiceModel.Channels
         protected override void OnOpen(TimeSpan timeout)
         {
             TimeoutHelper timeoutHelper = new TimeoutHelper(timeout);
-            this.channelDemuxer.OnOuterListenerOpen(
-                this.filter,
-                this,
-                timeoutHelper.RemainingTime()
-            );
+            this.channelDemuxer
+                .OnOuterListenerOpen(this.filter, this, timeoutHelper.RemainingTime());
             base.OnOpen(timeoutHelper.RemainingTime());
         }
 
@@ -4161,13 +4117,8 @@ namespace System.ServiceModel.Channels
             object state
         )
         {
-            return this.channelDemuxer.OnBeginOuterListenerOpen(
-                this.filter,
-                this,
-                timeout,
-                callback,
-                state
-            );
+            return this.channelDemuxer
+                .OnBeginOuterListenerOpen(this.filter, this, timeout, callback, state);
         }
 
         void OnEndOuterListenerOpen(IAsyncResult result)
@@ -4216,12 +4167,8 @@ namespace System.ServiceModel.Channels
             object state
         )
         {
-            return this.channelDemuxer.OnBeginOuterListenerClose(
-                this.filter,
-                timeout,
-                callback,
-                state
-            );
+            return this.channelDemuxer
+                .OnBeginOuterListenerClose(this.filter, timeout, callback, state);
         }
 
         void OnEndOuterListenerClose(IAsyncResult result)
@@ -4264,8 +4211,7 @@ namespace System.ServiceModel.Channels
             {
                 if (value < TimeSpan.Zero && value != ChannelDemuxer.UseDefaultReceiveTimeout)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new ArgumentOutOfRangeException("value"));
                 }
 
@@ -4280,8 +4226,7 @@ namespace System.ServiceModel.Channels
             {
                 if (value < 1)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentOutOfRangeException(
                                 SR.GetString(SR.ValueMustBeGreaterThanZero)
@@ -4371,13 +4316,11 @@ namespace System.ServiceModel.Channels
                 for (int i = 0; i < this.cachedContextState.CachedBindingParameters.Count; ++i)
                 {
                     if (
-                        !context
-                            .BindingParameters
+                        !context.BindingParameters
                             .Contains(this.cachedContextState.CachedBindingParameters[i].GetType())
                     )
                     {
-                        context
-                            .BindingParameters
+                        context.BindingParameters
                             .Add(this.cachedContextState.CachedBindingParameters[i]);
                     }
                 }
@@ -4441,8 +4384,7 @@ namespace System.ServiceModel.Channels
         {
             if (demuxFailureHandler == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("demuxFailureHandler");
             }
             if (requestContext == null)
@@ -4455,12 +4397,13 @@ namespace System.ServiceModel.Channels
 
         public void Start()
         {
-            IAsyncResult result = this.demuxFailureHandler.BeginHandleDemuxFailure(
-                requestContext.RequestMessage,
-                requestContext,
-                demuxFailureHandlerCallback,
-                this
-            );
+            IAsyncResult result = this.demuxFailureHandler
+                .BeginHandleDemuxFailure(
+                    requestContext.RequestMessage,
+                    requestContext,
+                    demuxFailureHandlerCallback,
+                    this
+                );
             if (!result.CompletedSynchronously)
             {
                 return;
@@ -4597,8 +4540,7 @@ namespace System.ServiceModel.Channels
         {
             if (demuxFailureHandler == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("demuxFailureHandler");
             }
             if (channel == null)
@@ -4612,12 +4554,13 @@ namespace System.ServiceModel.Channels
 
         public void Start()
         {
-            IAsyncResult result = this.demuxFailureHandler.BeginHandleDemuxFailure(
-                this.message,
-                this.channel,
-                demuxFailureHandlerCallback,
-                this
-            );
+            IAsyncResult result = this.demuxFailureHandler
+                .BeginHandleDemuxFailure(
+                    this.message,
+                    this.channel,
+                    demuxFailureHandlerCallback,
+                    this
+                );
             if (!result.CompletedSynchronously)
             {
                 return;

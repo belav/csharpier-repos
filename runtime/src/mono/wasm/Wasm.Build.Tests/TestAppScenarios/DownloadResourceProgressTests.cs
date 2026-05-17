@@ -54,8 +54,7 @@ public class DownloadResourceProgressTests : AppTestBase
             "The download progress test did emit unexpected message about second download retry"
         );
         Assert.True(
-            result
-                .TestOutput
+            result.TestOutput
                 .Any(m =>
                     m.Contains("Throw error instead of downloading resource")
                     == failAssemblyDownload

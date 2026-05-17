@@ -1182,11 +1182,9 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         httpContext.Request.Body = stream;
 
         httpContext.Request.Headers["Content-Type"] = "application/json";
-        httpContext.Request.Headers["Content-Length"] = stream
-            .Length
+        httpContext.Request.Headers["Content-Length"] = stream.Length
             .ToString(CultureInfo.InvariantCulture);
-        httpContext
-            .Features
+        httpContext.Features
             .Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
 
         var jsonOptions = new JsonOptions();
@@ -1224,8 +1222,7 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         var httpContext = CreateHttpContext();
         httpContext.Request.Headers["Content-Type"] = "application/json";
         httpContext.Request.Headers["Content-Length"] = "0";
-        httpContext
-            .Features
+        httpContext.Features
             .Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(false));
 
         var factoryResult = RequestDelegateFactory.Create(action);
@@ -1612,8 +1609,7 @@ public partial class RequestDelegateFactoryTests : LoggedTest
     {
         // IEnumerable<T> always resolves from DI but is empty and throws from test method
         if (
-            action
-                .Method
+            action.Method
                 .Name
                 .Contains("TestExplicitFromIEnumerableService", StringComparison.Ordinal)
         )
@@ -1909,8 +1905,7 @@ public partial class RequestDelegateFactoryTests : LoggedTest
             ValueTask<CustomResult> ValueTaskTestAction() =>
                 ValueTask.FromResult(new CustomResult(resultString));
             FSharp.Control.FSharpAsync<CustomResult> FSharpAsyncTestAction() =>
-                FSharp
-                    .Core
+                FSharp.Core
                     .ExtraTopLevelOperators
                     .DefaultAsyncBuilder
                     .Return(new CustomResult(resultString));
@@ -1921,8 +1916,7 @@ public partial class RequestDelegateFactoryTests : LoggedTest
             static ValueTask<CustomResult> StaticValueTaskTestAction() =>
                 ValueTask.FromResult(new CustomResult("Still not enough tests!"));
             static FSharp.Control.FSharpAsync<CustomResult> StaticFSharpAsyncTestAction() =>
-                FSharp
-                    .Core
+                FSharp.Core
                     .ExtraTopLevelOperators
                     .DefaultAsyncBuilder
                     .Return(new CustomResult("Still not enough tests!"));
@@ -1936,8 +1930,7 @@ public partial class RequestDelegateFactoryTests : LoggedTest
             static ValueTask<object> StaticValueTaskOfIResultAsObject() =>
                 ValueTask.FromResult<object>(new CustomResult("Still not enough tests!"));
             static FSharp.Control.FSharpAsync<object> StaticFSharpAsyncOfIResultAsObject() =>
-                FSharp
-                    .Core
+                FSharp.Core
                     .ExtraTopLevelOperators
                     .DefaultAsyncBuilder
                     .Return<object>(new CustomResult("Still not enough tests!"));
@@ -1948,8 +1941,7 @@ public partial class RequestDelegateFactoryTests : LoggedTest
             ValueTask<StructResult> ValueTaskTestStructAction() =>
                 ValueTask.FromResult(new StructResult(resultString));
             FSharp.Control.FSharpAsync<StructResult> FSharpAsyncTestStructAction() =>
-                FSharp
-                    .Core
+                FSharp.Core
                     .ExtraTopLevelOperators
                     .DefaultAsyncBuilder
                     .Return(new StructResult(resultString));
@@ -2742,8 +2734,7 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         httpContext.Request.Headers["Content-Type"] = "application/x-www-form-urlencoded";
         httpContext.Request.Headers["Content-Length"] = "1";
         httpContext.Request.Body = new ExceptionThrowingRequestBodyStream(exception);
-        httpContext
-            .Features
+        httpContext.Features
             .Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
 
         var factoryResult = RequestDelegateFactory.Create(TestAction);
@@ -2780,8 +2771,7 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         httpContext.Request.Headers["Content-Type"] = "application/json";
         httpContext.Request.Headers["Content-Length"] = "1000";
         httpContext.Request.Body = new ExceptionThrowingRequestBodyStream(exception);
-        httpContext
-            .Features
+        httpContext.Features
             .Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
 
         var factoryResult = RequestDelegateFactory.Create(TestAction);
@@ -3229,8 +3219,7 @@ public partial class RequestDelegateFactoryTests : LoggedTest
 
             FSharp.Control.FSharpAsync<FSharp.Core.Unit> FSharpAsyncOfUnitMethod()
             {
-                return FSharp
-                    .Core
+                return FSharp.Core
                     .ExtraTopLevelOperators
                     .DefaultAsyncBuilder
                     .Return(default(FSharp.Core.Unit)!);
@@ -3397,8 +3386,7 @@ public partial class RequestDelegateFactoryTests : LoggedTest
 
             FSharp.Control.FSharpAsync<TodoStruct> FSharpAsyncOfStructMethod()
             {
-                return FSharp
-                    .Core
+                return FSharp.Core
                     .ExtraTopLevelOperators
                     .DefaultAsyncBuilder
                     .Return(new TodoStruct { Name = "Test todo" });
@@ -3651,8 +3639,7 @@ public partial class RequestDelegateFactoryTests : LoggedTest
     {
         // Arrange
         var @delegate = () =>
-            FSharp
-                .Core
+            FSharp.Core
                 .ExtraTopLevelOperators
                 .DefaultAsyncBuilder
                 .Return(new AddsCustomEndpointMetadataResult());
@@ -3744,8 +3731,7 @@ public partial class RequestDelegateFactoryTests : LoggedTest
     {
         // Arrange
         var @delegate = () =>
-            FSharp
-                .Core
+            FSharp.Core
                 .ExtraTopLevelOperators
                 .DefaultAsyncBuilder
                 .Return(new CountsDefaultEndpointMetadataResult());
@@ -3914,11 +3900,9 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         httpContext.Request.Body = stream;
 
         httpContext.Request.Headers["Content-Type"] = "application/json";
-        httpContext.Request.Headers["Content-Length"] = stream
-            .Length
+        httpContext.Request.Headers["Content-Length"] = stream.Length
             .ToString(CultureInfo.InvariantCulture);
-        httpContext
-            .Features
+        httpContext.Features
             .Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
 
         // Act
@@ -4019,8 +4003,7 @@ public partial class RequestDelegateFactoryTests : LoggedTest
     {
         // Arrange
         var @delegate = (Todo todo) =>
-            FSharp
-                .Core
+            FSharp.Core
                 .ExtraTopLevelOperators
                 .DefaultAsyncBuilder
                 .Return(new RemovesAcceptsMetadataResult());
@@ -4316,8 +4299,7 @@ public partial class RequestDelegateFactoryTests : LoggedTest
     public void RequestDelegateFactory_WhenJsonIsReflectionEnabledByDefaultFalse()
     {
         var options = new RemoteInvokeOptions();
-        options
-            .RuntimeConfigurationOptions
+        options.RuntimeConfigurationOptions
             .Add("System.Text.Json.JsonSerializer.IsReflectionEnabledByDefault", false.ToString());
 
         using var remoteHandle = RemoteExecutor.Invoke(
@@ -4346,8 +4328,7 @@ public partial class RequestDelegateFactoryTests : LoggedTest
     public void RequestDelegateFactory_WhenJsonIsReflectionEnabledByDefaultTrue()
     {
         var options = new RemoteInvokeOptions();
-        options
-            .RuntimeConfigurationOptions
+        options.RuntimeConfigurationOptions
             .Add("System.Text.Json.JsonSerializer.IsReflectionEnabledByDefault", true.ToString());
 
         using var remoteHandle = RemoteExecutor.Invoke(
@@ -4621,8 +4602,7 @@ public partial class RequestDelegateFactoryTests : LoggedTest
                 return;
             }
 
-            builder
-                .Metadata
+            builder.Metadata
                 .Add(
                     new RoutePatternMetadata
                     {

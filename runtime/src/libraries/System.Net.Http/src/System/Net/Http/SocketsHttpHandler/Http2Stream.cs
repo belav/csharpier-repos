@@ -224,8 +224,7 @@ namespace System.Net.Http
                         if (HttpTelemetry.Log.IsEnabled())
                             HttpTelemetry.Log.RequestContentStart();
 
-                        ValueTask vt = _request
-                            .Content
+                        ValueTask vt = _request.Content
                             .InternalCopyToAsync(
                                 writeStream,
                                 context: null,
@@ -817,8 +816,7 @@ namespace System.Net.Http
                         );
                     }
 
-                    Encoding? valueEncoding = _connection
-                        ._pool
+                    Encoding? valueEncoding = _connection._pool
                         .Settings
                         ._responseHeaderEncodingSelector
                         ?.Invoke(descriptor.Name, _request);
@@ -853,8 +851,7 @@ namespace System.Net.Http
                             value,
                             valueEncoding
                         );
-                        _response
-                            .Headers
+                        _response.Headers
                             .TryAddWithoutValidation(
                                 (descriptor.HeaderType & HttpHeaderType.Request)
                                 == HttpHeaderType.Request
@@ -1666,8 +1663,7 @@ namespace System.Net.Http
                         if (signalWaiter)
                         {
                             // Wake up the wait.  It will then immediately check whether cancellation was requested and throw if it was.
-                            thisRef
-                                ._waitSource
+                            thisRef._waitSource
                                 .SetException(
                                     ExceptionDispatchInfo.SetCurrentStackTrace(
                                         CancellationHelper.CreateOperationCanceledException(

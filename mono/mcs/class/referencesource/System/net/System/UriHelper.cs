@@ -206,8 +206,7 @@ namespace System
                         );
 
                         short numberOfBytes = (short)
-                            Encoding
-                                .UTF8
+                            Encoding.UTF8
                                 .GetBytes(
                                     pStr + i,
                                     count,
@@ -691,8 +690,7 @@ namespace System
                 {
                     bool isHighSurr = Char.IsHighSurrogate(unescapedCharsPtr[j]);
 
-                    byte[] encodedBytes = Encoding
-                        .UTF8
+                    byte[] encodedBytes = Encoding.UTF8
                         .GetBytes(unescapedChars, j, isHighSurr ? 2 : 1);
                     int encodedBytesLength = encodedBytes.Length;
 

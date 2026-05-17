@@ -152,8 +152,7 @@ namespace Internal.Runtime
             }
             else
             {
-                gcDesc = Internal
-                    .Runtime
+                gcDesc = Internal.Runtime
                     .Augments
                     .RuntimeAugments
                     .TypeLoaderCallbacks

@@ -883,15 +883,16 @@ namespace System.Windows.Forms
                 this.AcceptButton = button_ok;
                 this.CancelButton = button_cancel;
                 this.ClientSize = new System.Drawing.Size(456, 194);
-                this.Controls.AddRange(
-                    new System.Windows.Forms.Control[]
-                    {
-                        this.button_ok,
-                        this.button_cancel,
-                        this.button_network,
-                        this.groupbox_printer,
-                    }
-                );
+                this.Controls
+                    .AddRange(
+                        new System.Windows.Forms.Control[]
+                        {
+                            this.button_ok,
+                            this.button_cancel,
+                            this.button_network,
+                            this.groupbox_printer,
+                        }
+                    );
                 this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
                 this.HelpButton = true;
                 this.MaximizeBox = false;

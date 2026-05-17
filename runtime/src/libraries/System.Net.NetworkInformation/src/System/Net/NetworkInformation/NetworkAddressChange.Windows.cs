@@ -281,8 +281,7 @@ namespace System.Net.NetworkInformation
                                 true
                             );
 
-                            SocketError errorCode = Interop
-                                .Winsock
+                            SocketError errorCode = Interop.Winsock
                                 .WSAIoctl_Blocking(
                                     s_ipv4Socket!.SafeHandle,
                                     (int)IOControlCode.AddressListChange,
@@ -305,8 +304,7 @@ namespace System.Net.NetworkInformation
                                 }
                             }
 
-                            errorCode = Interop
-                                .Winsock
+                            errorCode = Interop.Winsock
                                 .WSAEventSelect(
                                     s_ipv4Socket.SafeHandle,
                                     s_ipv4WaitHandle!.GetSafeWaitHandle(),
@@ -332,8 +330,7 @@ namespace System.Net.NetworkInformation
                                 true
                             );
 
-                            SocketError errorCode = Interop
-                                .Winsock
+                            SocketError errorCode = Interop.Winsock
                                 .WSAIoctl_Blocking(
                                     s_ipv6Socket!.SafeHandle,
                                     (int)IOControlCode.AddressListChange,
@@ -356,8 +353,7 @@ namespace System.Net.NetworkInformation
                                 }
                             }
 
-                            errorCode = Interop
-                                .Winsock
+                            errorCode = Interop.Winsock
                                 .WSAEventSelect(
                                     s_ipv6Socket.SafeHandle,
                                     s_ipv6WaitHandle!.GetSafeWaitHandle(),

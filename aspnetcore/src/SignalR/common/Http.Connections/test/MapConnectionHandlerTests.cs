@@ -356,8 +356,7 @@ public class MapConnectionHandlerTests
                     Assert.Equal("/path/negotiate", endpoint.DisplayName);
                     var metaData = endpoint.Metadata.GetMetadata<NegotiateMetadata>();
                     Assert.NotNull(metaData);
-                    var optionsMetaData = endpoint
-                        .Metadata
+                    var optionsMetaData = endpoint.Metadata
                         .GetMetadata<HttpConnectionDispatcherOptions>();
                     Assert.NotNull(optionsMetaData);
                 },
@@ -399,8 +398,7 @@ public class MapConnectionHandlerTests
                     Assert.Equal("/path/negotiate", endpoint.DisplayName);
                     var metaData = endpoint.Metadata.GetMetadata<NegotiateMetadata>();
                     Assert.NotNull(metaData);
-                    var optionsMetaData = endpoint
-                        .Metadata
+                    var optionsMetaData = endpoint.Metadata
                         .GetMetadata<HttpConnectionDispatcherOptions>();
                     Assert.NotNull(optionsMetaData);
                     Assert.Equal(HttpTransportType.ServerSentEvents, optionsMetaData.Transports);

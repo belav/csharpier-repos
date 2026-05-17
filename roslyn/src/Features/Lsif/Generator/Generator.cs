@@ -407,8 +407,7 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator
                                     cancellationToken
                                 )
                                 : null;
-                        var rangeVertex = Graph
-                            .Range
+                        var rangeVertex = Graph.Range
                             .FromTextSpan(
                                 syntaxToken.Span,
                                 sourceText,
@@ -632,8 +631,7 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator
                 return null;
 
             // Find the syntax node that declared the symbol in the tree we're processing
-            var syntaxReference = declaredSymbol
-                .DeclaringSyntaxReferences
+            var syntaxReference = declaredSymbol.DeclaringSyntaxReferences
                 .FirstOrDefault(
                     static (r, syntaxTree) => r.SyntaxTree == syntaxTree,
                     arg: syntaxTree

@@ -132,8 +132,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.DebuggerIntelli
         {
             // We have to ask the buffer to make itself writable, if it isn't already
             _context.DebuggerTextLines.GetStateFlags(out var bufferFlags);
-            _context
-                .DebuggerTextLines
+            _context.DebuggerTextLines
                 .SetStateFlags(
                     (uint)((BUFFERSTATEFLAGS)bufferFlags & ~BUFFERSTATEFLAGS.BSF_USER_READONLY)
                 );

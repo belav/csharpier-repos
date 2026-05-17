@@ -116,25 +116,21 @@ namespace Roslyn.VisualStudio.IntegrationTests
         {
             await base.InitializeAsync();
 
-            s_listenerProvider ??= await TestServices
-                .Shell
+            s_listenerProvider ??= await TestServices.Shell
                 .GetComponentModelServiceAsync<AsynchronousOperationListenerProvider>(
                     HangMitigatingCancellationToken
                 );
-            s_workspace ??= await TestServices
-                .Shell
+            s_workspace ??= await TestServices.Shell
                 .GetComponentModelServiceAsync<VisualStudioWorkspace>(
                     HangMitigatingCancellationToken
                 );
 
             if (
-                await TestServices
-                    .SolutionExplorer
+                await TestServices.SolutionExplorer
                     .IsSolutionOpenAsync(HangMitigatingCancellationToken)
             )
             {
-                var dte = await TestServices
-                    .Shell
+                var dte = await TestServices.Shell
                     .GetRequiredGlobalServiceAsync<SDTE, EnvDTE.DTE>(
                         HangMitigatingCancellationToken
                     );
@@ -143,19 +139,16 @@ namespace Roslyn.VisualStudio.IntegrationTests
                     dte.Debugger.TerminateAll();
                 }
 
-                await TestServices
-                    .SolutionExplorer
+                await TestServices.SolutionExplorer
                     .CloseSolutionAsync(HangMitigatingCancellationToken);
             }
 
-            await TestServices
-                .Workarounds
+            await TestServices.Workarounds
                 .RemoveConflictingKeyBindingsAsync(HangMitigatingCancellationToken);
             await TestServices.StateReset.ResetGlobalOptionsAsync(HangMitigatingCancellationToken);
             await TestServices.StateReset.ResetHostSettingsAsync(HangMitigatingCancellationToken);
 
-            await TestServices
-                .Workarounds
+            await TestServices.Workarounds
                 .WaitForGitHubCoPilotAsync(HangMitigatingCancellationToken);
         }
 
@@ -168,14 +161,12 @@ namespace Roslyn.VisualStudio.IntegrationTests
 
             await TestServices.StateReset.CloseActiveWindowsAsync(cleanupCancellationToken);
 
-            var dte = await TestServices
-                .Shell
+            var dte = await TestServices.Shell
                 .GetRequiredGlobalServiceAsync<SDTE, EnvDTE.DTE>(cleanupCancellationToken);
             if (dte.Debugger.CurrentMode != EnvDTE.dbgDebugMode.dbgDesignMode)
             {
                 dte.Debugger.TerminateAll();
-                await TestServices
-                    .Workspace
+                await TestServices.Workspace
                     .WaitForAllAsyncOperationsAsync(
                         [FeatureAttribute.Workspace, FeatureAttribute.EditAndContinue],
                         cleanupCancellationToken

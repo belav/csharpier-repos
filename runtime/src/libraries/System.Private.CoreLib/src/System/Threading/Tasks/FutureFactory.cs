@@ -614,8 +614,7 @@ namespace System.Threading.Tasks
                 else
                 {
                     if (TplEventSource.Log.IsEnabled())
-                        TplEventSource
-                            .Log
+                        TplEventSource.Log
                             .TraceOperationEnd(promise.Id, AsyncCausalityStatus.Completed);
 
                     if (Task.s_asyncDebuggingEnabled)
@@ -907,8 +906,7 @@ namespace System.Threading.Tasks
             Task<TResult> promise = new Task<TResult>(state, creationOptions);
 
             if (TplEventSource.Log.IsEnabled())
-                TplEventSource
-                    .Log
+                TplEventSource.Log
                     .TraceOperationBegin(
                         promise.Id,
                         "TaskFactory.FromAsync: " + beginMethod.Method.Name,
@@ -1068,8 +1066,7 @@ namespace System.Threading.Tasks
             Task<TResult> promise = new Task<TResult>(state, creationOptions);
 
             if (TplEventSource.Log.IsEnabled())
-                TplEventSource
-                    .Log
+                TplEventSource.Log
                     .TraceOperationBegin(
                         promise.Id,
                         "TaskFactory.FromAsync: " + beginMethod.Method.Name,
@@ -1242,8 +1239,7 @@ namespace System.Threading.Tasks
             Task<TResult> promise = new Task<TResult>(state, creationOptions);
 
             if (TplEventSource.Log.IsEnabled())
-                TplEventSource
-                    .Log
+                TplEventSource.Log
                     .TraceOperationBegin(
                         promise.Id,
                         "TaskFactory.FromAsync: " + beginMethod.Method.Name,
@@ -1438,8 +1434,7 @@ namespace System.Threading.Tasks
             Task<TResult> promise = new Task<TResult>(state, creationOptions);
 
             if (TplEventSource.Log.IsEnabled())
-                TplEventSource
-                    .Log
+                TplEventSource.Log
                     .TraceOperationBegin(
                         promise.Id,
                         "TaskFactory.FromAsync: " + beginMethod.Method.Name,

@@ -32,8 +32,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.BraceMatching
             using (var workspace = CreateWorkspaceFromCode(markup, options))
             {
                 var position = workspace.Documents.Single().CursorPosition.Value;
-                var document = workspace
-                    .CurrentSolution
+                var document = workspace.CurrentSolution
                     .GetDocument(workspace.Documents.First().Id);
                 var braceMatcher = workspace.GetService<IBraceMatchingService>();
                 var braceMatchingOptions = BraceMatchingOptions.Default;

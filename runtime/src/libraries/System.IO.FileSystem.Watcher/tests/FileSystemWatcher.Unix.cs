@@ -21,8 +21,7 @@ namespace System.IO.Tests
         [OuterLoop("Slow test with significant resource usage.")]
         public void FileSystemWatcher_Unix_DoesNotLeak()
         {
-            Interop
-                .Sys
+            Interop.Sys
                 .GetRLimit(
                     Interop.Sys.RlimitResources.RLIMIT_NOFILE,
                     out Interop.Sys.RLimit limits
@@ -46,14 +45,12 @@ namespace System.IO.Tests
                         // Set open file limit to given value.
                         Assert.Equal(
                             0,
-                            Interop
-                                .Sys
+                            Interop.Sys
                                 .SetRLimit(Interop.Sys.RlimitResources.RLIMIT_NOFILE, ref limits)
                         );
                         Assert.Equal(
                             0,
-                            Interop
-                                .Sys
+                            Interop.Sys
                                 .GetRLimit(Interop.Sys.RlimitResources.RLIMIT_NOFILE, out limits)
                         );
                         Assert.Equal(maxFd, limits.CurrentLimit);

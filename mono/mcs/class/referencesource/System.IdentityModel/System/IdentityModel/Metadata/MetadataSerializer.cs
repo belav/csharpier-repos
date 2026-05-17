@@ -232,8 +232,7 @@ namespace System.IdentityModel.Metadata
                 return KeyType.Signing;
             }
 
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(
                     new MetadataSerializationException(
                         SR.GetString(SR.ID3202, Saml2MetadataConstants.Attributes.Use, keyType)
@@ -342,8 +341,7 @@ namespace System.IdentityModel.Metadata
             person.Type = GetContactPersonType(contactType, out foundKey);
             if (!foundKey)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new MetadataSerializationException(
                             SR.GetString(SR.ID3201, typeof(ContactType), contactType)
@@ -518,8 +516,7 @@ namespace System.IdentityModel.Metadata
             );
             if (!UriUtil.CanCreateValidUri(claimType, UriKind.Absolute))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new MetadataSerializationException(
                             SR.GetString(
@@ -544,8 +541,7 @@ namespace System.IdentityModel.Metadata
                 }
                 catch (FormatException)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new MetadataSerializationException(
                                 SR.GetString(
@@ -656,8 +652,7 @@ namespace System.IdentityModel.Metadata
                         )
                     )
                     {
-                        resultEntityGroup
-                            .ChildEntities
+                        resultEntityGroup.ChildEntities
                             .Add(ReadEntityDescriptor(envelopeReader, tokenResolver));
                     }
                     else if (
@@ -667,8 +662,7 @@ namespace System.IdentityModel.Metadata
                         )
                     )
                     {
-                        resultEntityGroup
-                            .ChildEntityGroups
+                        resultEntityGroup.ChildEntityGroups
                             .Add(ReadEntitiesDescriptor(envelopeReader, tokenResolver));
                     }
                     else if (envelopeReader.TryReadSignature())
@@ -701,8 +695,7 @@ namespace System.IdentityModel.Metadata
                 && resultEntityGroup.ChildEntities.Count == 0
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new MetadataSerializationException(
                             SR.GetString(
@@ -718,8 +711,7 @@ namespace System.IdentityModel.Metadata
                 {
                     if (!StringComparer.Ordinal.Equals(entity.FederationId, resultEntityGroup.Name))
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new MetadataSerializationException(
                                     SR.GetString(
@@ -772,8 +764,7 @@ namespace System.IdentityModel.Metadata
         {
             if (signingCredentials == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("signingCredentials");
             }
 
@@ -790,8 +781,7 @@ namespace System.IdentityModel.Metadata
                 && CertificateValidator == null
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ID4280)));
             }
 
@@ -834,8 +824,7 @@ namespace System.IdentityModel.Metadata
             }
             else
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ID8029)));
             }
         }
@@ -904,8 +893,7 @@ namespace System.IdentityModel.Metadata
                         )
                     )
                     {
-                        resultEntity
-                            .RoleDescriptors
+                        resultEntity.RoleDescriptors
                             .Add(ReadServiceProviderSingleSignOnDescriptor(reader));
                     }
                     else if (
@@ -915,8 +903,7 @@ namespace System.IdentityModel.Metadata
                         )
                     )
                     {
-                        resultEntity
-                            .RoleDescriptors
+                        resultEntity.RoleDescriptors
                             .Add(ReadIdentityProviderSingleSignOnDescriptor(reader));
                     }
                     else if (
@@ -933,8 +920,7 @@ namespace System.IdentityModel.Metadata
                             int index = xsiType.IndexOf(":", 0, StringComparison.Ordinal);
                             if (index < 0)
                             {
-                                throw DiagnosticUtility
-                                    .ExceptionUtility
+                                throw DiagnosticUtility.ExceptionUtility
                                     .ThrowHelperError(
                                         new MetadataSerializationException(
                                             SR.GetString(
@@ -951,8 +937,7 @@ namespace System.IdentityModel.Metadata
 
                             if (String.IsNullOrEmpty(ns))
                             {
-                                throw DiagnosticUtility
-                                    .ExceptionUtility
+                                throw DiagnosticUtility.ExceptionUtility
                                     .ThrowHelperError(
                                         new MetadataSerializationException(
                                             SR.GetString(SR.ID3202, prefix, ns)
@@ -960,51 +945,43 @@ namespace System.IdentityModel.Metadata
                                     );
                             }
                             else if (
-                                !StringComparer
-                                    .Ordinal
+                                !StringComparer.Ordinal
                                     .Equals(ns, FederationMetadataConstants.Namespace)
                             )
                             {
                                 ReadCustomRoleDescriptor(xsiType, reader, resultEntity);
                             }
                             else if (
-                                StringComparer
-                                    .Ordinal
+                                StringComparer.Ordinal
                                     .Equals(
                                         xsiType,
                                         prefix
                                             + ":"
-                                            + FederationMetadataConstants
-                                                .Elements
+                                            + FederationMetadataConstants.Elements
                                                 .ApplicationServiceType
                                     )
                             )
                             {
-                                resultEntity
-                                    .RoleDescriptors
+                                resultEntity.RoleDescriptors
                                     .Add(ReadApplicationServiceDescriptor(reader));
                             }
                             else if (
-                                StringComparer
-                                    .Ordinal
+                                StringComparer.Ordinal
                                     .Equals(
                                         xsiType,
                                         prefix
                                             + ":"
-                                            + FederationMetadataConstants
-                                                .Elements
+                                            + FederationMetadataConstants.Elements
                                                 .SecurityTokenServiceType
                                     )
                             )
                             {
-                                resultEntity
-                                    .RoleDescriptors
+                                resultEntity.RoleDescriptors
                                     .Add(ReadSecurityTokenServiceDescriptor(reader));
                             }
                             else
                             {
-                                throw DiagnosticUtility
-                                    .ExceptionUtility
+                                throw DiagnosticUtility.ExceptionUtility
                                     .ThrowHelperError(
                                         new MetadataSerializationException(
                                             SR.GetString(
@@ -1019,8 +996,7 @@ namespace System.IdentityModel.Metadata
                         }
                         else
                         {
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
                                     new MetadataSerializationException(
                                         SR.GetString(
@@ -1110,14 +1086,12 @@ namespace System.IdentityModel.Metadata
                 }
                 catch (FormatException)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new MetadataSerializationException(
                                 SR.GetString(
                                     SR.ID3202,
-                                    Saml2MetadataConstants
-                                        .Attributes
+                                    Saml2MetadataConstants.Attributes
                                         .WantAuthenticationRequestsSigned,
                                     wantAuthnRequestSignedAttribute
                                 )
@@ -1197,8 +1171,7 @@ namespace System.IdentityModel.Metadata
             Uri bindingUri;
             if (!UriUtil.TryCreateValidUri(binding, UriKind.RelativeOrAbsolute, out bindingUri))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new MetadataSerializationException(
                             SR.GetString(
@@ -1215,8 +1188,7 @@ namespace System.IdentityModel.Metadata
             Uri locationUri;
             if (!UriUtil.TryCreateValidUri(location, UriKind.RelativeOrAbsolute, out locationUri))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new MetadataSerializationException(
                             SR.GetString(
@@ -1236,8 +1208,7 @@ namespace System.IdentityModel.Metadata
             int index;
             if (!Int32.TryParse(indexStr, out index))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new MetadataSerializationException(
                             SR.GetString(
@@ -1266,8 +1237,7 @@ namespace System.IdentityModel.Metadata
                     )
                 )
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new MetadataSerializationException(
                                 SR.GetString(
@@ -1294,8 +1264,7 @@ namespace System.IdentityModel.Metadata
                 }
                 catch (FormatException)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new MetadataSerializationException(
                                 SR.GetString(
@@ -1387,8 +1356,7 @@ namespace System.IdentityModel.Metadata
                             && UriUtil.CanCreateValidUri(algorithm, UriKind.Absolute)
                         )
                         {
-                            resultKey
-                                .EncryptionMethods
+                            resultKey.EncryptionMethods
                                 .Add(new EncryptionMethod(new Uri(algorithm)));
                         }
 
@@ -1427,8 +1395,7 @@ namespace System.IdentityModel.Metadata
 
             if (resultKey.KeyInfo == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new MetadataSerializationException(
                             SR.GetString(SR.ID3200, XmlSignatureConstants.Elements.KeyInfo)
@@ -1460,8 +1427,7 @@ namespace System.IdentityModel.Metadata
             }
             catch (ArgumentNullException)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new MetadataSerializationException(
                             SR.GetString(SR.ID3202, LanguageLocalName, "null")
@@ -1470,8 +1436,7 @@ namespace System.IdentityModel.Metadata
             }
             catch (ArgumentException)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new MetadataSerializationException(
                             SR.GetString(SR.ID3202, LanguageLocalName, lang)
@@ -1504,8 +1469,7 @@ namespace System.IdentityModel.Metadata
 
             if (String.IsNullOrEmpty(resultName.Name))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new MetadataSerializationException(SR.GetString(SR.ID3200, elementName))
                     );
@@ -1535,8 +1499,7 @@ namespace System.IdentityModel.Metadata
             }
             catch (ArgumentNullException)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new MetadataSerializationException(
                             SR.GetString(SR.ID3202, LanguageLocalName, "null")
@@ -1545,8 +1508,7 @@ namespace System.IdentityModel.Metadata
             }
             catch (ArgumentException)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new MetadataSerializationException(
                             SR.GetString(SR.ID3202, LanguageLocalName, lang)
@@ -1565,8 +1527,7 @@ namespace System.IdentityModel.Metadata
                 Uri uri;
                 if (!UriUtil.TryCreateValidUri(uriContent, UriKind.RelativeOrAbsolute, out uri))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new MetadataSerializationException(
                                 SR.GetString(SR.ID3202, elementName, uriContent)
@@ -1590,8 +1551,7 @@ namespace System.IdentityModel.Metadata
 
             if (resultUri.Uri == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new MetadataSerializationException(SR.GetString(SR.ID3200, elementName))
                     );
@@ -1697,8 +1657,7 @@ namespace System.IdentityModel.Metadata
             }
             else
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new MetadataSerializationException(SR.GetString(SR.ID3260)));
             }
 
@@ -1793,8 +1752,7 @@ namespace System.IdentityModel.Metadata
             Uri bindingUri;
             if (!UriUtil.TryCreateValidUri(binding, UriKind.RelativeOrAbsolute, out bindingUri))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new MetadataSerializationException(
                             SR.GetString(
@@ -1811,8 +1769,7 @@ namespace System.IdentityModel.Metadata
             Uri locationUri;
             if (!UriUtil.TryCreateValidUri(location, UriKind.RelativeOrAbsolute, out locationUri))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new MetadataSerializationException(
                             SR.GetString(
@@ -1840,8 +1797,7 @@ namespace System.IdentityModel.Metadata
                     )
                 )
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new MetadataSerializationException(
                                 SR.GetString(
@@ -1896,8 +1852,7 @@ namespace System.IdentityModel.Metadata
             }
             if (roleDescriptor.ProtocolsSupported == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("roleDescriptor.ProtocolsSupported");
             }
 
@@ -1911,8 +1866,7 @@ namespace System.IdentityModel.Metadata
                 DateTime validUntil;
                 if (!DateTime.TryParse(validUntilString, out validUntil))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new MetadataSerializationException(
                                 SR.GetString(
@@ -1942,8 +1896,7 @@ namespace System.IdentityModel.Metadata
                     )
                 )
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new MetadataSerializationException(
                                 SR.GetString(
@@ -1964,8 +1917,7 @@ namespace System.IdentityModel.Metadata
             );
             if (String.IsNullOrEmpty(protocols))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new MetadataSerializationException(
                             SR.GetString(
@@ -2009,14 +1961,12 @@ namespace System.IdentityModel.Metadata
             }
             if (roleDescriptor.Contacts == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("roleDescriptor.Contacts");
             }
             if (roleDescriptor.Keys == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("roleDescriptor.Keys");
             }
 
@@ -2099,8 +2049,7 @@ namespace System.IdentityModel.Metadata
                         if (!isEmpty && reader.IsStartElement())
                         {
                             EndpointReference address = EndpointReference.ReadFrom(reader);
-                            securityTokenServiceDescriptor
-                                .SecurityTokenServiceEndpoints
+                            securityTokenServiceDescriptor.SecurityTokenServiceEndpoints
                                 .Add(address);
                             reader.ReadEndElement();
                         }
@@ -2183,8 +2132,7 @@ namespace System.IdentityModel.Metadata
                 }
                 catch (FormatException)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new MetadataSerializationException(
                                 SR.GetString(
@@ -2210,8 +2158,7 @@ namespace System.IdentityModel.Metadata
                 }
                 catch (FormatException)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new MetadataSerializationException(
                                 SR.GetString(
@@ -2345,8 +2292,7 @@ namespace System.IdentityModel.Metadata
                 );
                 if (!UriUtil.CanCreateValidUri(nameId, UriKind.Absolute))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new MetadataSerializationException(
                                 SR.GetString(
@@ -2430,20 +2376,17 @@ namespace System.IdentityModel.Metadata
             }
             if (roleDescriptor.TargetScopes == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("roleDescriptor.TargetScopes");
             }
             if (roleDescriptor.ClaimTypesOffered == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("roleDescriptor.TargetScopes");
             }
             if (roleDescriptor.TokenTypesOffered == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("roleDescriptor.TokenTypesOffered");
             }
 
@@ -2577,8 +2520,7 @@ namespace System.IdentityModel.Metadata
                                 )
                             )
                             {
-                                throw DiagnosticUtility
-                                    .ExceptionUtility
+                                throw DiagnosticUtility.ExceptionUtility
                                     .ThrowHelperError(
                                         new MetadataSerializationException(
                                             SR.GetString(
@@ -2649,15 +2591,13 @@ namespace System.IdentityModel.Metadata
 
             if (appService.Endpoints == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("appService.Endpoints");
             }
 
             if (appService.PassiveRequestorEndpoints == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("appService.PassiveRequestorEndpoints");
             }
 
@@ -2733,15 +2673,13 @@ namespace System.IdentityModel.Metadata
 
             if (contactPerson.EmailAddresses == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("contactPerson.EmailAddresses");
             }
 
             if (contactPerson.TelephoneNumbers == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("contactPerson.TelephoneNumbers");
             }
 
@@ -2751,8 +2689,7 @@ namespace System.IdentityModel.Metadata
             );
             if (contactPerson.Type == ContactType.Unspecified)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new MetadataSerializationException(
                             SR.GetString(SR.ID3203, Saml2MetadataConstants.Attributes.ContactType)
@@ -2871,8 +2808,7 @@ namespace System.IdentityModel.Metadata
             writer.WriteStartElement(element.Name, element.Namespace);
             if (endpoint.Binding == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new MetadataSerializationException(
                             SR.GetString(SR.ID3203, Saml2MetadataConstants.Attributes.Binding)
@@ -2892,8 +2828,7 @@ namespace System.IdentityModel.Metadata
 
             if (endpoint.Location == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new MetadataSerializationException(
                             SR.GetString(SR.ID3203, Saml2MetadataConstants.Attributes.Location)
@@ -2947,8 +2882,7 @@ namespace System.IdentityModel.Metadata
             // ClaimType is mandatory
             if (String.IsNullOrEmpty(claim.ClaimType))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new MetadataSerializationException(
                             SR.GetString(SR.ID3203, WSAuthorizationConstants.Elements.ClaimType)
@@ -2958,8 +2892,7 @@ namespace System.IdentityModel.Metadata
 
             if (!UriUtil.CanCreateValidUri(claim.ClaimType, UriKind.Absolute))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new MetadataSerializationException(SR.GetString(SR.ID0014, claim.ClaimType))
                     );
@@ -3020,22 +2953,19 @@ namespace System.IdentityModel.Metadata
 
             if (entitiesDescriptor == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("entitiesDescriptor");
             }
 
             if (entitiesDescriptor.ChildEntities == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("entitiesDescriptor.ChildEntities");
             }
 
             if (entitiesDescriptor.ChildEntityGroups == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("entitiesDescriptor.ChildEntityGroups");
             }
 
@@ -3068,8 +2998,7 @@ namespace System.IdentityModel.Metadata
                 && entitiesDescriptor.ChildEntityGroups.Count == 0
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new MetadataSerializationException(
                             SR.GetString(
@@ -3089,8 +3018,7 @@ namespace System.IdentityModel.Metadata
                         !StringComparer.Ordinal.Equals(entity.FederationId, entitiesDescriptor.Name)
                     )
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new MetadataSerializationException(
                                     SR.GetString(
@@ -3155,22 +3083,19 @@ namespace System.IdentityModel.Metadata
 
             if (entityDescriptor == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("entityDescriptor");
             }
 
             if (entityDescriptor.Contacts == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("entityDescriptor.Contacts");
             }
 
             if (entityDescriptor.RoleDescriptors == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("entityDescriptor.RoleDescriptors");
             }
 
@@ -3200,8 +3125,7 @@ namespace System.IdentityModel.Metadata
 
             if (entityDescriptor.EntityId == null || entityDescriptor.EntityId.Id == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new MetadataSerializationException(
                             SR.GetString(SR.ID3203, Saml2MetadataConstants.Attributes.EntityId)
@@ -3234,8 +3158,7 @@ namespace System.IdentityModel.Metadata
 
             if (entityDescriptor.RoleDescriptors.Count == 0)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new MetadataSerializationException(
                             SR.GetString(SR.ID3203, Saml2MetadataConstants.Elements.RoleDescriptor)
@@ -3308,22 +3231,19 @@ namespace System.IdentityModel.Metadata
 
             if (identityProviderSingleSignOnDescriptor == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("idpssoDescriptor");
             }
 
             if (identityProviderSingleSignOnDescriptor.SupportedAttributes == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("idpssoDescriptor.SupportedAttributes");
             }
 
             if (identityProviderSingleSignOnDescriptor.SingleSignOnServices == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("idpssoDescriptor.SingleSignOnServices");
             }
 
@@ -3353,8 +3273,7 @@ namespace System.IdentityModel.Metadata
             // Mandatory SingleSignonServiceEndpoint
             if (identityProviderSingleSignOnDescriptor.SingleSignOnServices.Count == 0)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new MetadataSerializationException(
                             SR.GetString(
@@ -3371,8 +3290,7 @@ namespace System.IdentityModel.Metadata
             {
                 if (endpoint.ResponseLocation != null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new MetadataSerializationException(
                                 SR.GetString(
@@ -3437,8 +3355,7 @@ namespace System.IdentityModel.Metadata
             writer.WriteStartElement(element.Name, element.Namespace);
             if (indexedEP.Binding == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new MetadataSerializationException(
                             SR.GetString(SR.ID3203, Saml2MetadataConstants.Attributes.Binding)
@@ -3458,8 +3375,7 @@ namespace System.IdentityModel.Metadata
 
             if (indexedEP.Location == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new MetadataSerializationException(
                             SR.GetString(SR.ID3203, Saml2MetadataConstants.Attributes.Location)
@@ -3479,8 +3395,7 @@ namespace System.IdentityModel.Metadata
 
             if (indexedEP.Index < 0)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new MetadataSerializationException(
                             SR.GetString(SR.ID3203, Saml2MetadataConstants.Attributes.EndpointIndex)
@@ -3556,8 +3471,7 @@ namespace System.IdentityModel.Metadata
 
             if (keyDescriptor.KeyInfo == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new MetadataSerializationException(
                             SR.GetString(SR.ID3203, XmlSignatureConstants.Elements.KeyInfo)
@@ -3577,8 +3491,7 @@ namespace System.IdentityModel.Metadata
                 {
                     if (encryptionMethod.Algorithm == null)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new MetadataSerializationException(
                                     SR.GetString(
@@ -3591,8 +3504,7 @@ namespace System.IdentityModel.Metadata
 
                     if (!encryptionMethod.Algorithm.IsAbsoluteUri)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new MetadataSerializationException(
                                     SR.GetString(
@@ -3656,8 +3568,7 @@ namespace System.IdentityModel.Metadata
             writer.WriteStartElement(element.Name, element.Namespace);
             if (name.Language == null || String.IsNullOrEmpty(name.Name))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new MetadataSerializationException(
                             SR.GetString(SR.ID3203, LanguageLocalName)
@@ -3708,8 +3619,7 @@ namespace System.IdentityModel.Metadata
             writer.WriteStartElement(element.Name, element.Namespace);
             if (uri.Language == null || uri.Uri == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new MetadataSerializationException(
                             SR.GetString(SR.ID3203, LanguageLocalName)
@@ -3808,8 +3718,7 @@ namespace System.IdentityModel.Metadata
                 EntityDescriptor entityDescriptor = metadataBase as EntityDescriptor;
                 if (entityDescriptor == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new MetadataSerializationException(
                                 SR.GetString(
@@ -3844,22 +3753,19 @@ namespace System.IdentityModel.Metadata
 
             if (organization.DisplayNames == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("organization.DisplayNames");
             }
 
             if (organization.Names == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("organization.Names");
             }
 
             if (organization.Urls == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("organization.Urls");
             }
 
@@ -3870,8 +3776,7 @@ namespace System.IdentityModel.Metadata
 
             if (organization.Names.Count < 1)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new MetadataSerializationException(
                             SR.GetString(
@@ -3893,8 +3798,7 @@ namespace System.IdentityModel.Metadata
 
             if (organization.DisplayNames.Count < 1)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new MetadataSerializationException(
                             SR.GetString(
@@ -3916,8 +3820,7 @@ namespace System.IdentityModel.Metadata
 
             if (organization.Urls.Count < 1)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new MetadataSerializationException(
                             SR.GetString(SR.ID3203, Saml2MetadataConstants.Elements.OrganizationUrl)
@@ -3962,8 +3865,7 @@ namespace System.IdentityModel.Metadata
 
             if (roleDescriptor.ProtocolsSupported == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("roleDescriptor.ProtocolsSupported");
             }
 
@@ -3995,8 +3897,7 @@ namespace System.IdentityModel.Metadata
             // Mandatory
             if (roleDescriptor.ProtocolsSupported.Count == 0)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new MetadataSerializationException(
                             SR.GetString(
@@ -4049,15 +3950,13 @@ namespace System.IdentityModel.Metadata
 
             if (roleDescriptor.Contacts == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("roleDescriptor.Contacts");
             }
 
             if (roleDescriptor.Keys == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("roleDescriptor.Keys");
             }
 
@@ -4101,22 +4000,19 @@ namespace System.IdentityModel.Metadata
 
             if (securityTokenServiceDescriptor == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("securityTokenServiceDescriptor");
             }
 
             if (securityTokenServiceDescriptor.SecurityTokenServiceEndpoints == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("securityTokenServiceDescriptor.Endpoints");
             }
 
             if (securityTokenServiceDescriptor.PassiveRequestorEndpoints == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull(
                         "securityTokenServiceDescriptor.PassiveRequestorEndpoints"
                     );
@@ -4152,8 +4048,7 @@ namespace System.IdentityModel.Metadata
 
             if (securityTokenServiceDescriptor.SecurityTokenServiceEndpoints.Count == 0)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new MetadataSerializationException(
                             SR.GetString(
@@ -4219,8 +4114,7 @@ namespace System.IdentityModel.Metadata
 
             if (serviceProviderSingleSignOnDescriptor.AssertionConsumerServices == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("spssoDescriptor.AssertionConsumerService");
             }
 
@@ -4257,8 +4151,7 @@ namespace System.IdentityModel.Metadata
             WriteSingleSignOnDescriptorElements(writer, serviceProviderSingleSignOnDescriptor);
             if (serviceProviderSingleSignOnDescriptor.AssertionConsumerServices.Count == 0)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new MetadataSerializationException(
                             SR.GetString(
@@ -4270,8 +4163,7 @@ namespace System.IdentityModel.Metadata
             }
 
             foreach (
-                IndexedProtocolEndpoint ep in serviceProviderSingleSignOnDescriptor
-                    .AssertionConsumerServices
+                IndexedProtocolEndpoint ep in serviceProviderSingleSignOnDescriptor.AssertionConsumerServices
                     .Values
             )
             {
@@ -4332,15 +4224,13 @@ namespace System.IdentityModel.Metadata
             {
                 // Write the artifact resolution services
                 foreach (
-                    IndexedProtocolEndpoint ep in singleSignOnDescriptor
-                        .ArtifactResolutionServices
+                    IndexedProtocolEndpoint ep in singleSignOnDescriptor.ArtifactResolutionServices
                         .Values
                 )
                 {
                     if (ep.ResponseLocation != null)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new MetadataSerializationException(
                                     SR.GetString(
@@ -4385,8 +4275,7 @@ namespace System.IdentityModel.Metadata
                 {
                     if (!nameId.IsAbsoluteUri)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new MetadataSerializationException(
                                     SR.GetString(
@@ -4476,22 +4365,19 @@ namespace System.IdentityModel.Metadata
 
             if (wsDescriptor.TargetScopes == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("wsDescriptor.TargetScopes");
             }
 
             if (wsDescriptor.ClaimTypesOffered == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("wsDescriptor.ClaimTypesOffered");
             }
 
             if (wsDescriptor.TokenTypesOffered == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("wsDescriptor.TokenTypesOffered");
             }
 
@@ -4511,8 +4397,7 @@ namespace System.IdentityModel.Metadata
                     );
                     if (!tokenType.IsAbsoluteUri)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new MetadataSerializationException(
                                     SR.GetString(

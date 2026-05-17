@@ -36,8 +36,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Scripting.UnitTests
         [Fact]
         public void WithLanguageVersion_NonCSharpParseOptions_Throws()
         {
-            var options = ScriptOptions
-                .Default
+            var options = ScriptOptions.Default
                 .WithParseOptions(
                     new VisualBasicParseOptions(
                         kind: SourceCodeKind.Script,

@@ -94,9 +94,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 {
                     return ImmutableArray.Create<CustomModifier>(
                         CSharpCustomModifier.CreateRequired(
-                            this.ContainingAssembly.GetSpecialType(
-                                SpecialType.System_Runtime_CompilerServices_IsVolatile
-                            )
+                            this.ContainingAssembly
+                                .GetSpecialType(
+                                    SpecialType.System_Runtime_CompilerServices_IsVolatile
+                                )
                         )
                     );
                 }
@@ -202,8 +203,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         private string _lazyDocComment;
         private string _lazyExpandedDocComment;
-        private ConstantValue _lazyConstantEarlyDecodingValue = Microsoft
-            .CodeAnalysis
+        private ConstantValue _lazyConstantEarlyDecodingValue = Microsoft.CodeAnalysis
             .ConstantValue
             .Unset;
         private ConstantValue _lazyConstantValue = Microsoft.CodeAnalysis.ConstantValue.Unset;
@@ -363,8 +363,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
             else
             {
-                dependencies = ImmutableHashSet<SourceFieldSymbolWithSyntaxReference>
-                    .Empty
+                dependencies = ImmutableHashSet<SourceFieldSymbolWithSyntaxReference>.Empty
                     .Union(builder);
             }
 
@@ -455,9 +454,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     this.AddDeclarationDiagnostics(diagnostics);
                     // CompletionPart.ConstantValue is the last part for a field
                     DeclaringCompilation.SymbolDeclaredEvent(this);
-                    var wasSetThisThread = this.state.NotePartComplete(
-                        CompletionPart.ConstantValue
-                    );
+                    var wasSetThisThread = this.state
+                        .NotePartComplete(CompletionPart.ConstantValue);
                     Debug.Assert(wasSetThisThread);
                 }
             }

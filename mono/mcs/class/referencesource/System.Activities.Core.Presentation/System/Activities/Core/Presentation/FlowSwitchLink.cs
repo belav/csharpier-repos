@@ -147,9 +147,8 @@ namespace System.Activities.Core.Presentation
                     {
                         using (
                             EditingScope es = (EditingScope)
-                                this.flowSwitchModelItem.BeginEdit(
-                                    SR.FlowSwitchCaseRenameEditingScopeDesc
-                                )
+                                this.flowSwitchModelItem
+                                    .BeginEdit(SR.FlowSwitchCaseRenameEditingScopeDesc)
                         )
                         {
                             ModelItem flowNodeMI = GenericFlowSwitchHelper.GetCaseModelItem(
@@ -173,8 +172,7 @@ namespace System.Activities.Core.Presentation
                     {
                         this.internalDefaultCaseChange = true;
                         this.IsDefaultCase = oldValue;
-                        throw FxTrace
-                            .Exception
+                        throw FxTrace.Exception
                             .AsError(new InvalidOperationException(SR.DefaultCaseExists));
                     }
                 }
@@ -184,9 +182,8 @@ namespace System.Activities.Core.Presentation
                     {
                         using (
                             EditingScope es = (EditingScope)
-                                this.flowSwitchModelItem.BeginEdit(
-                                    SR.FlowSwitchCaseRenameEditingScopeDesc
-                                )
+                                this.flowSwitchModelItem
+                                    .BeginEdit(SR.FlowSwitchCaseRenameEditingScopeDesc)
                         )
                         {
                             ModelItem defaultCase = this.flowSwitchModelItem
@@ -206,8 +203,7 @@ namespace System.Activities.Core.Presentation
                                 {
                                     this.internalDefaultCaseChange = true;
                                     this.IsDefaultCase = oldValue;
-                                    throw FxTrace
-                                        .Exception
+                                    throw FxTrace.Exception
                                         .AsError(new InvalidOperationException(errorMessage));
                                 }
                                 uniqueCase = GenericFlowSwitchHelper.GetObject(
@@ -242,8 +238,7 @@ namespace System.Activities.Core.Presentation
                                 {
                                     this.internalDefaultCaseChange = true;
                                     this.IsDefaultCase = oldValue;
-                                    throw FxTrace
-                                        .Exception
+                                    throw FxTrace.Exception
                                         .AsError(
                                             new InvalidOperationException(
                                                 SR.InvalidFlowSwitchCaseMessage
@@ -305,8 +300,7 @@ namespace System.Activities.Core.Presentation
             }
             else
             {
-                isUndoRedoInProgress = designer
-                    .Context
+                isUndoRedoInProgress = designer.Context
                     .Services
                     .GetService<UndoEngine>()
                     .IsUndoRedoInProgress;
@@ -333,9 +327,8 @@ namespace System.Activities.Core.Presentation
                 {
                     using (
                         EditingScope es = (EditingScope)
-                            this.flowSwitchModelItem.BeginEdit(
-                                SR.FlowSwitchCaseRenameEditingScopeDesc
-                            )
+                            this.flowSwitchModelItem
+                                .BeginEdit(SR.FlowSwitchCaseRenameEditingScopeDesc)
                     )
                     {
                         ModelItem flowElementMI = null;
@@ -373,8 +366,7 @@ namespace System.Activities.Core.Presentation
                 {
                     this.internalChange = true;
                     this.CaseObject = oldValue;
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(new InvalidOperationException(SR.InvalidFlowSwitchCaseMessage));
                 }
             }
@@ -498,9 +490,8 @@ namespace System.Activities.Core.Presentation
                 string newValue = (string)e.NewValue;
                 this.internalChange = true;
                 using (
-                    ModelEditingScope scope = this.flowSwitchModelItem.BeginEdit(
-                        SR.FlowSwitchDefaultCaseDisplayNameEditingScopeDesc
-                    )
+                    ModelEditingScope scope = this.flowSwitchModelItem
+                        .BeginEdit(SR.FlowSwitchDefaultCaseDisplayNameEditingScopeDesc)
                 )
                 {
                     this.flowSwitchModelItem
@@ -524,8 +515,7 @@ namespace System.Activities.Core.Presentation
         public override MultiBinding CreateConnectorLabelTextBinding()
         {
             MultiBinding result = base.CreateConnectorLabelTextBinding();
-            result
-                .Bindings
+            result.Bindings
                 .Add(
                     new Binding
                     {

@@ -118,8 +118,7 @@ namespace System.ServiceModel.Discovery
 
             if (context.Binding.Elements.IndexOf(this) != 0)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new InvalidOperationException(SR.DiscoveryClientBindingElementNotFirst)
                     );
@@ -135,12 +134,10 @@ namespace System.ServiceModel.Discovery
             }
             else
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .Argument(
                         "TChannel",
-                        ServiceModel
-                            .SR
+                        ServiceModel.SR
                             .GetString(ServiceModel.SR.ChannelTypeNotSupported, typeof(TChannel))
                     );
             }
@@ -165,12 +162,10 @@ namespace System.ServiceModel.Discovery
                 throw FxTrace.Exception.ArgumentNull("context");
             }
 
-            throw FxTrace
-                .Exception
+            throw FxTrace.Exception
                 .Argument(
                     "TChannel",
-                    ServiceModel
-                        .SR
+                    ServiceModel.SR
                         .GetString(ServiceModel.SR.ChannelTypeNotSupported, typeof(TChannel))
                 );
         }

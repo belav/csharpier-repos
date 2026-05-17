@@ -32,8 +32,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             // Declaration and Initializers are mutually exclusive.
             if (_syntax.Declaration != null)
             {
-                _syntax
-                    .Declaration
+                _syntax.Declaration
                     .Type
                     .VisitRankSpecifiers(
                         (rankSpecifier, args) =>

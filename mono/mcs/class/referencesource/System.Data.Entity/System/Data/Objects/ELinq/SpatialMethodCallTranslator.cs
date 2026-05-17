@@ -84,36 +84,31 @@ namespace System.Data.Objects.ELinq
                         System.Data.Spatial.DbGeography.LineFromText(default(string), default(int))
                     );
                     yield return GetStaticMethod(() =>
-                        System
-                            .Data
+                        System.Data
                             .Spatial
                             .DbGeography
                             .PolygonFromText(default(string), default(int))
                     );
                     yield return GetStaticMethod(() =>
-                        System
-                            .Data
+                        System.Data
                             .Spatial
                             .DbGeography
                             .MultiPointFromText(default(string), default(int))
                     );
                     yield return GetStaticMethod(() =>
-                        System
-                            .Data
+                        System.Data
                             .Spatial
                             .DbGeography
                             .MultiLineFromText(default(string), default(int))
                     );
                     yield return GetStaticMethod(() =>
-                        System
-                            .Data
+                        System.Data
                             .Spatial
                             .DbGeography
                             .MultiPolygonFromText(default(string), default(int))
                     );
                     yield return GetStaticMethod(() =>
-                        System
-                            .Data
+                        System.Data
                             .Spatial
                             .DbGeography
                             .GeographyCollectionFromText(default(string), default(int))
@@ -125,50 +120,43 @@ namespace System.Data.Objects.ELinq
                         System.Data.Spatial.DbGeography.FromBinary(default(byte[]))
                     );
                     yield return GetStaticMethod(() =>
-                        System
-                            .Data
+                        System.Data
                             .Spatial
                             .DbGeography
                             .PointFromBinary(default(byte[]), default(int))
                     );
                     yield return GetStaticMethod(() =>
-                        System
-                            .Data
+                        System.Data
                             .Spatial
                             .DbGeography
                             .LineFromBinary(default(byte[]), default(int))
                     );
                     yield return GetStaticMethod(() =>
-                        System
-                            .Data
+                        System.Data
                             .Spatial
                             .DbGeography
                             .PolygonFromBinary(default(byte[]), default(int))
                     );
                     yield return GetStaticMethod(() =>
-                        System
-                            .Data
+                        System.Data
                             .Spatial
                             .DbGeography
                             .MultiPointFromBinary(default(byte[]), default(int))
                     );
                     yield return GetStaticMethod(() =>
-                        System
-                            .Data
+                        System.Data
                             .Spatial
                             .DbGeography
                             .MultiLineFromBinary(default(byte[]), default(int))
                     );
                     yield return GetStaticMethod(() =>
-                        System
-                            .Data
+                        System.Data
                             .Spatial
                             .DbGeography
                             .MultiPolygonFromBinary(default(byte[]), default(int))
                     );
                     yield return GetStaticMethod(() =>
-                        System
-                            .Data
+                        System.Data
                             .Spatial
                             .DbGeography
                             .GeographyCollectionFromBinary(default(byte[]), default(int))
@@ -242,36 +230,31 @@ namespace System.Data.Objects.ELinq
                         System.Data.Spatial.DbGeometry.LineFromText(default(string), default(int))
                     );
                     yield return GetStaticMethod(() =>
-                        System
-                            .Data
+                        System.Data
                             .Spatial
                             .DbGeometry
                             .PolygonFromText(default(string), default(int))
                     );
                     yield return GetStaticMethod(() =>
-                        System
-                            .Data
+                        System.Data
                             .Spatial
                             .DbGeometry
                             .MultiPointFromText(default(string), default(int))
                     );
                     yield return GetStaticMethod(() =>
-                        System
-                            .Data
+                        System.Data
                             .Spatial
                             .DbGeometry
                             .MultiLineFromText(default(string), default(int))
                     );
                     yield return GetStaticMethod(() =>
-                        System
-                            .Data
+                        System.Data
                             .Spatial
                             .DbGeometry
                             .MultiPolygonFromText(default(string), default(int))
                     );
                     yield return GetStaticMethod(() =>
-                        System
-                            .Data
+                        System.Data
                             .Spatial
                             .DbGeometry
                             .GeometryCollectionFromText(default(string), default(int))
@@ -283,8 +266,7 @@ namespace System.Data.Objects.ELinq
                         System.Data.Spatial.DbGeometry.FromBinary(default(byte[]), default(int))
                     );
                     yield return GetStaticMethod(() =>
-                        System
-                            .Data
+                        System.Data
                             .Spatial
                             .DbGeometry
                             .PointFromBinary(default(byte[]), default(int))
@@ -293,36 +275,31 @@ namespace System.Data.Objects.ELinq
                         System.Data.Spatial.DbGeometry.LineFromBinary(default(byte[]), default(int))
                     );
                     yield return GetStaticMethod(() =>
-                        System
-                            .Data
+                        System.Data
                             .Spatial
                             .DbGeometry
                             .PolygonFromBinary(default(byte[]), default(int))
                     );
                     yield return GetStaticMethod(() =>
-                        System
-                            .Data
+                        System.Data
                             .Spatial
                             .DbGeometry
                             .MultiPointFromBinary(default(byte[]), default(int))
                     );
                     yield return GetStaticMethod(() =>
-                        System
-                            .Data
+                        System.Data
                             .Spatial
                             .DbGeometry
                             .MultiLineFromBinary(default(byte[]), default(int))
                     );
                     yield return GetStaticMethod(() =>
-                        System
-                            .Data
+                        System.Data
                             .Spatial
                             .DbGeometry
                             .MultiPolygonFromBinary(default(byte[]), default(int))
                     );
                     yield return GetStaticMethod(() =>
-                        System
-                            .Data
+                        System.Data
                             .Spatial
                             .DbGeometry
                             .GeometryCollectionFromBinary(default(byte[]), default(int))
@@ -429,8 +406,7 @@ namespace System.Data.Objects.ELinq
                     );
                     result.Add(
                         GetStaticMethod(() =>
-                            System
-                                .Data
+                            System.Data
                                 .Spatial
                                 .DbGeography
                                 .PointFromText(default(string), default(int))
@@ -439,8 +415,7 @@ namespace System.Data.Objects.ELinq
                     );
                     result.Add(
                         GetStaticMethod(() =>
-                            System
-                                .Data
+                            System.Data
                                 .Spatial
                                 .DbGeography
                                 .LineFromText(default(string), default(int))
@@ -449,8 +424,7 @@ namespace System.Data.Objects.ELinq
                     );
                     result.Add(
                         GetStaticMethod(() =>
-                            System
-                                .Data
+                            System.Data
                                 .Spatial
                                 .DbGeography
                                 .PolygonFromText(default(string), default(int))
@@ -459,8 +433,7 @@ namespace System.Data.Objects.ELinq
                     );
                     result.Add(
                         GetStaticMethod(() =>
-                            System
-                                .Data
+                            System.Data
                                 .Spatial
                                 .DbGeography
                                 .MultiPointFromText(default(string), default(int))
@@ -469,8 +442,7 @@ namespace System.Data.Objects.ELinq
                     );
                     result.Add(
                         GetStaticMethod(() =>
-                            System
-                                .Data
+                            System.Data
                                 .Spatial
                                 .DbGeography
                                 .MultiLineFromText(default(string), default(int))
@@ -479,8 +451,7 @@ namespace System.Data.Objects.ELinq
                     );
                     result.Add(
                         GetStaticMethod(() =>
-                            System
-                                .Data
+                            System.Data
                                 .Spatial
                                 .DbGeography
                                 .MultiPolygonFromText(default(string), default(int))
@@ -489,8 +460,7 @@ namespace System.Data.Objects.ELinq
                     );
                     result.Add(
                         GetStaticMethod(() =>
-                            System
-                                .Data
+                            System.Data
                                 .Spatial
                                 .DbGeography
                                 .GeographyCollectionFromText(default(string), default(int))
@@ -499,8 +469,7 @@ namespace System.Data.Objects.ELinq
                     );
                     result.Add(
                         GetStaticMethod(() =>
-                            System
-                                .Data
+                            System.Data
                                 .Spatial
                                 .DbGeography
                                 .FromBinary(default(byte[]), default(int))
@@ -515,8 +484,7 @@ namespace System.Data.Objects.ELinq
                     );
                     result.Add(
                         GetStaticMethod(() =>
-                            System
-                                .Data
+                            System.Data
                                 .Spatial
                                 .DbGeography
                                 .PointFromBinary(default(byte[]), default(int))
@@ -525,8 +493,7 @@ namespace System.Data.Objects.ELinq
                     );
                     result.Add(
                         GetStaticMethod(() =>
-                            System
-                                .Data
+                            System.Data
                                 .Spatial
                                 .DbGeography
                                 .LineFromBinary(default(byte[]), default(int))
@@ -535,8 +502,7 @@ namespace System.Data.Objects.ELinq
                     );
                     result.Add(
                         GetStaticMethod(() =>
-                            System
-                                .Data
+                            System.Data
                                 .Spatial
                                 .DbGeography
                                 .PolygonFromBinary(default(byte[]), default(int))
@@ -545,8 +511,7 @@ namespace System.Data.Objects.ELinq
                     );
                     result.Add(
                         GetStaticMethod(() =>
-                            System
-                                .Data
+                            System.Data
                                 .Spatial
                                 .DbGeography
                                 .MultiPointFromBinary(default(byte[]), default(int))
@@ -555,8 +520,7 @@ namespace System.Data.Objects.ELinq
                     );
                     result.Add(
                         GetStaticMethod(() =>
-                            System
-                                .Data
+                            System.Data
                                 .Spatial
                                 .DbGeography
                                 .MultiLineFromBinary(default(byte[]), default(int))
@@ -565,8 +529,7 @@ namespace System.Data.Objects.ELinq
                     );
                     result.Add(
                         GetStaticMethod(() =>
-                            System
-                                .Data
+                            System.Data
                                 .Spatial
                                 .DbGeography
                                 .MultiPolygonFromBinary(default(byte[]), default(int))
@@ -575,8 +538,7 @@ namespace System.Data.Objects.ELinq
                     );
                     result.Add(
                         GetStaticMethod(() =>
-                            System
-                                .Data
+                            System.Data
                                 .Spatial
                                 .DbGeography
                                 .GeographyCollectionFromBinary(default(byte[]), default(int))
@@ -695,8 +657,7 @@ namespace System.Data.Objects.ELinq
                     );
                     result.Add(
                         GetStaticMethod(() =>
-                            System
-                                .Data
+                            System.Data
                                 .Spatial
                                 .DbGeometry
                                 .PointFromText(default(string), default(int))
@@ -705,8 +666,7 @@ namespace System.Data.Objects.ELinq
                     );
                     result.Add(
                         GetStaticMethod(() =>
-                            System
-                                .Data
+                            System.Data
                                 .Spatial
                                 .DbGeometry
                                 .LineFromText(default(string), default(int))
@@ -715,8 +675,7 @@ namespace System.Data.Objects.ELinq
                     );
                     result.Add(
                         GetStaticMethod(() =>
-                            System
-                                .Data
+                            System.Data
                                 .Spatial
                                 .DbGeometry
                                 .PolygonFromText(default(string), default(int))
@@ -725,8 +684,7 @@ namespace System.Data.Objects.ELinq
                     );
                     result.Add(
                         GetStaticMethod(() =>
-                            System
-                                .Data
+                            System.Data
                                 .Spatial
                                 .DbGeometry
                                 .MultiPointFromText(default(string), default(int))
@@ -735,8 +693,7 @@ namespace System.Data.Objects.ELinq
                     );
                     result.Add(
                         GetStaticMethod(() =>
-                            System
-                                .Data
+                            System.Data
                                 .Spatial
                                 .DbGeometry
                                 .MultiLineFromText(default(string), default(int))
@@ -745,8 +702,7 @@ namespace System.Data.Objects.ELinq
                     );
                     result.Add(
                         GetStaticMethod(() =>
-                            System
-                                .Data
+                            System.Data
                                 .Spatial
                                 .DbGeometry
                                 .MultiPolygonFromText(default(string), default(int))
@@ -755,8 +711,7 @@ namespace System.Data.Objects.ELinq
                     );
                     result.Add(
                         GetStaticMethod(() =>
-                            System
-                                .Data
+                            System.Data
                                 .Spatial
                                 .DbGeometry
                                 .GeometryCollectionFromText(default(string), default(int))
@@ -777,8 +732,7 @@ namespace System.Data.Objects.ELinq
                     );
                     result.Add(
                         GetStaticMethod(() =>
-                            System
-                                .Data
+                            System.Data
                                 .Spatial
                                 .DbGeometry
                                 .PointFromBinary(default(byte[]), default(int))
@@ -787,8 +741,7 @@ namespace System.Data.Objects.ELinq
                     );
                     result.Add(
                         GetStaticMethod(() =>
-                            System
-                                .Data
+                            System.Data
                                 .Spatial
                                 .DbGeometry
                                 .LineFromBinary(default(byte[]), default(int))
@@ -797,8 +750,7 @@ namespace System.Data.Objects.ELinq
                     );
                     result.Add(
                         GetStaticMethod(() =>
-                            System
-                                .Data
+                            System.Data
                                 .Spatial
                                 .DbGeometry
                                 .PolygonFromBinary(default(byte[]), default(int))
@@ -807,8 +759,7 @@ namespace System.Data.Objects.ELinq
                     );
                     result.Add(
                         GetStaticMethod(() =>
-                            System
-                                .Data
+                            System.Data
                                 .Spatial
                                 .DbGeometry
                                 .MultiPointFromBinary(default(byte[]), default(int))
@@ -817,8 +768,7 @@ namespace System.Data.Objects.ELinq
                     );
                     result.Add(
                         GetStaticMethod(() =>
-                            System
-                                .Data
+                            System.Data
                                 .Spatial
                                 .DbGeometry
                                 .MultiLineFromBinary(default(byte[]), default(int))
@@ -827,8 +777,7 @@ namespace System.Data.Objects.ELinq
                     );
                     result.Add(
                         GetStaticMethod(() =>
-                            System
-                                .Data
+                            System.Data
                                 .Spatial
                                 .DbGeometry
                                 .MultiPolygonFromBinary(default(byte[]), default(int))
@@ -837,8 +786,7 @@ namespace System.Data.Objects.ELinq
                     );
                     result.Add(
                         GetStaticMethod(() =>
-                            System
-                                .Data
+                            System.Data
                                 .Spatial
                                 .DbGeometry
                                 .GeometryCollectionFromBinary(default(byte[]), default(int))

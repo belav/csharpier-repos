@@ -318,21 +318,18 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Preview
         private static void UpdateTextViewOptions(IWpfTextView textView)
         {
             // Do not show the IndentationCharacterMargin, which controls spaces vs. tabs etc.
-            textView
-                .Options
+            textView.Options
                 .SetOptionValue(
                     DefaultTextViewHostOptions.IndentationCharacterMarginOptionId,
                     false
                 );
 
             // Do not show LineEndingMargin, which determines EOL and EOF settings.
-            textView
-                .Options
+            textView.Options
                 .SetOptionValue(DefaultTextViewHostOptions.LineEndingMarginOptionId, false);
 
             // Do not show the "no issues found" health indicator for previews.
-            textView
-                .Options
+            textView.Options
                 .SetOptionValue(
                     DefaultTextViewHostOptions.EnableFileHealthIndicatorOptionId,
                     false

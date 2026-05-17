@@ -264,12 +264,10 @@ namespace Microsoft.CodeAnalysis.Editing
 
             bool HasNullableAnnotation(ITypeParameterSymbol typeParameter, IMethodSymbol method)
             {
-                return method
-                        .ReturnType
+                return method.ReturnType
                         .GetReferencedTypeParameters()
                         .Any(t => IsNullableAnnotatedTypeParameter(typeParameter, t))
-                    || method
-                        .Parameters
+                    || method.Parameters
                         .Any(p =>
                             p.Type
                                 .GetReferencedTypeParameters()
@@ -1319,12 +1317,10 @@ namespace Microsoft.CodeAnalysis.Editing
         {
             Contract.ThrowIfNull(attribute.AttributeClass);
 
-            var args = attribute
-                .ConstructorArguments
+            var args = attribute.ConstructorArguments
                 .Select(a => this.AttributeArgument(this.TypedConstantExpression(a)))
                 .Concat(
-                    attribute
-                        .NamedArguments
+                    attribute.NamedArguments
                         .Select(n =>
                             this.AttributeArgument(n.Key, this.TypedConstantExpression(n.Value))
                         )

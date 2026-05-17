@@ -30,8 +30,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
         )
         {
             if (
-                context
-                    .SyntaxTree
+                context.SyntaxTree
                     .IsGlobalMemberDeclarationContext(
                         context.Position,
                         SyntaxKindSet.AllGlobalMemberModifiers,

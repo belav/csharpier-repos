@@ -406,11 +406,8 @@ namespace System.Activities
                 }
                 else
                 {
-                    return this.boundArgument.TryPopulateValue(
-                        targetEnvironment,
-                        targetActivityInstance,
-                        executor
-                    );
+                    return this.boundArgument
+                        .TryPopulateValue(targetEnvironment, targetActivityInstance, executor);
                 }
             }
             else if (resultLocation != null && this.IsResult)
@@ -443,8 +440,7 @@ namespace System.Activities
             {
                 if (!object.ReferenceEquals(this.Owner, context.Activity))
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(
                             new InvalidOperationException(
                                 SR.CanOnlyGetOwnedArguments(
@@ -460,8 +456,7 @@ namespace System.Activities
                 {
                     if (!context.Environment.TryGetLocation(this.Id, out location))
                     {
-                        throw FxTrace
-                            .Exception
+                        throw FxTrace.Exception
                             .AsError(
                                 new InvalidOperationException(
                                     SR.ArgumentDoesNotExistInEnvironment(this.Name)
@@ -494,8 +489,7 @@ namespace System.Activities
 
                 if (!context.Environment.TryGetLocation(this.Id, this.Owner, out location))
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(
                             new InvalidOperationException(
                                 SR.ArgumentDoesNotExistInEnvironment(this.Name)
@@ -536,8 +530,7 @@ namespace System.Activities
             Location location;
             if (!environment.TryGetLocation(this.Id, this.Owner, out location))
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new InvalidOperationException(
                             SR.ArgumentDoesNotExistInEnvironment(this.Name)
@@ -560,8 +553,7 @@ namespace System.Activities
         {
             if (!this.IsInTree)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(new InvalidOperationException(SR.RuntimeArgumentNotOpen(this.Name)));
             }
         }

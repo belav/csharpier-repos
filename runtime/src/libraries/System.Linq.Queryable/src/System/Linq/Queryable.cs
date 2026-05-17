@@ -53,8 +53,7 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(predicate);
 
-            return source
-                .Provider
+            return source.Provider
                 .CreateQuery<TSource>(
                     Expression.Call(
                         null,
@@ -78,8 +77,7 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(predicate);
 
-            return source
-                .Provider
+            return source.Provider
                 .CreateQuery<TSource>(
                     Expression.Call(
                         null,
@@ -99,8 +97,7 @@ namespace System.Linq
         {
             ArgumentNullException.ThrowIfNull(source);
 
-            return source
-                .Provider
+            return source.Provider
                 .CreateQuery<TResult>(
                     Expression.Call(
                         null,
@@ -115,8 +112,7 @@ namespace System.Linq
         {
             ArgumentNullException.ThrowIfNull(source);
 
-            return source
-                .Provider
+            return source.Provider
                 .CreateQuery<TResult>(
                     Expression.Call(
                         null,
@@ -135,8 +131,7 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(selector);
 
-            return source
-                .Provider
+            return source.Provider
                 .CreateQuery<TResult>(
                     Expression.Call(
                         null,
@@ -160,8 +155,7 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(selector);
 
-            return source
-                .Provider
+            return source.Provider
                 .CreateQuery<TResult>(
                     Expression.Call(
                         null,
@@ -185,8 +179,7 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(selector);
 
-            return source
-                .Provider
+            return source.Provider
                 .CreateQuery<TResult>(
                     Expression.Call(
                         null,
@@ -210,8 +203,7 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(selector);
 
-            return source
-                .Provider
+            return source.Provider
                 .CreateQuery<TResult>(
                     Expression.Call(
                         null,
@@ -237,8 +229,7 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(collectionSelector);
             ArgumentNullException.ThrowIfNull(resultSelector);
 
-            return source
-                .Provider
+            return source.Provider
                 .CreateQuery<TResult>(
                     Expression.Call(
                         null,
@@ -266,8 +257,7 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(collectionSelector);
             ArgumentNullException.ThrowIfNull(resultSelector);
 
-            return source
-                .Provider
+            return source.Provider
                 .CreateQuery<TResult>(
                     Expression.Call(
                         null,
@@ -307,8 +297,7 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(innerKeySelector);
             ArgumentNullException.ThrowIfNull(resultSelector);
 
-            return outer
-                .Provider
+            return outer.Provider
                 .CreateQuery<TResult>(
                     Expression.Call(
                         null,
@@ -345,8 +334,7 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(innerKeySelector);
             ArgumentNullException.ThrowIfNull(resultSelector);
 
-            return outer
-                .Provider
+            return outer.Provider
                 .CreateQuery<TResult>(
                     Expression.Call(
                         null,
@@ -384,8 +372,7 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(innerKeySelector);
             ArgumentNullException.ThrowIfNull(resultSelector);
 
-            return outer
-                .Provider
+            return outer.Provider
                 .CreateQuery<TResult>(
                     Expression.Call(
                         null,
@@ -422,8 +409,7 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(innerKeySelector);
             ArgumentNullException.ThrowIfNull(resultSelector);
 
-            return outer
-                .Provider
+            return outer.Provider
                 .CreateQuery<TResult>(
                     Expression.Call(
                         null,
@@ -476,8 +462,7 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source);
 
             return (IOrderedQueryable<T>)
-                source
-                    .Provider
+                source.Provider
                     .CreateQuery<T>(
                         Expression.Call(
                             null,
@@ -521,8 +506,7 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source);
 
             return (IOrderedQueryable<T>)
-                source
-                    .Provider
+                source.Provider
                     .CreateQuery<T>(
                         Expression.Call(
                             null,
@@ -545,8 +529,7 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(keySelector);
 
             return (IOrderedQueryable<TSource>)
-                source
-                    .Provider
+                source.Provider
                     .CreateQuery<TSource>(
                         Expression.Call(
                             null,
@@ -572,8 +555,7 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(keySelector);
 
             return (IOrderedQueryable<TSource>)
-                source
-                    .Provider
+                source.Provider
                     .CreateQuery<TSource>(
                         Expression.Call(
                             null,
@@ -620,8 +602,7 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source);
 
             return (IOrderedQueryable<T>)
-                source
-                    .Provider
+                source.Provider
                     .CreateQuery<T>(
                         Expression.Call(
                             null,
@@ -665,8 +646,7 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source);
 
             return (IOrderedQueryable<T>)
-                source
-                    .Provider
+                source.Provider
                     .CreateQuery<T>(
                         Expression.Call(
                             null,
@@ -689,8 +669,7 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(keySelector);
 
             return (IOrderedQueryable<TSource>)
-                source
-                    .Provider
+                source.Provider
                     .CreateQuery<TSource>(
                         Expression.Call(
                             null,
@@ -716,8 +695,7 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(keySelector);
 
             return (IOrderedQueryable<TSource>)
-                source
-                    .Provider
+                source.Provider
                     .CreateQuery<TSource>(
                         Expression.Call(
                             null,
@@ -744,8 +722,7 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(keySelector);
 
             return (IOrderedQueryable<TSource>)
-                source
-                    .Provider
+                source.Provider
                     .CreateQuery<TSource>(
                         Expression.Call(
                             null,
@@ -771,8 +748,7 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(keySelector);
 
             return (IOrderedQueryable<TSource>)
-                source
-                    .Provider
+                source.Provider
                     .CreateQuery<TSource>(
                         Expression.Call(
                             null,
@@ -799,8 +775,7 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(keySelector);
 
             return (IOrderedQueryable<TSource>)
-                source
-                    .Provider
+                source.Provider
                     .CreateQuery<TSource>(
                         Expression.Call(
                             null,
@@ -826,8 +801,7 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(keySelector);
 
             return (IOrderedQueryable<TSource>)
-                source
-                    .Provider
+                source.Provider
                     .CreateQuery<TSource>(
                         Expression.Call(
                             null,
@@ -849,8 +823,7 @@ namespace System.Linq
         {
             ArgumentNullException.ThrowIfNull(source);
 
-            return source
-                .Provider
+            return source.Provider
                 .CreateQuery<TSource>(
                     Expression.Call(
                         null,
@@ -875,8 +848,7 @@ namespace System.Linq
         {
             ArgumentNullException.ThrowIfNull(source);
 
-            return source
-                .Provider
+            return source.Provider
                 .CreateQuery<TSource>(
                     Expression.Call(
                         null,
@@ -896,8 +868,7 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(predicate);
 
-            return source
-                .Provider
+            return source.Provider
                 .CreateQuery<TSource>(
                     Expression.Call(
                         null,
@@ -921,8 +892,7 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(predicate);
 
-            return source
-                .Provider
+            return source.Provider
                 .CreateQuery<TSource>(
                     Expression.Call(
                         null,
@@ -942,8 +912,7 @@ namespace System.Linq
         {
             ArgumentNullException.ThrowIfNull(source);
 
-            return source
-                .Provider
+            return source.Provider
                 .CreateQuery<TSource>(
                     Expression.Call(
                         null,
@@ -963,8 +932,7 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(predicate);
 
-            return source
-                .Provider
+            return source.Provider
                 .CreateQuery<TSource>(
                     Expression.Call(
                         null,
@@ -988,8 +956,7 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(predicate);
 
-            return source
-                .Provider
+            return source.Provider
                 .CreateQuery<TSource>(
                     Expression.Call(
                         null,
@@ -1013,8 +980,7 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(keySelector);
 
-            return source
-                .Provider
+            return source.Provider
                 .CreateQuery<IGrouping<TKey, TSource>>(
                     Expression.Call(
                         null,
@@ -1040,8 +1006,7 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(keySelector);
             ArgumentNullException.ThrowIfNull(elementSelector);
 
-            return source
-                .Provider
+            return source.Provider
                 .CreateQuery<IGrouping<TKey, TElement>>(
                     Expression.Call(
                         null,
@@ -1068,8 +1033,7 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(keySelector);
 
-            return source
-                .Provider
+            return source.Provider
                 .CreateQuery<IGrouping<TKey, TSource>>(
                     Expression.Call(
                         null,
@@ -1098,8 +1062,7 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(keySelector);
             ArgumentNullException.ThrowIfNull(elementSelector);
 
-            return source
-                .Provider
+            return source.Provider
                 .CreateQuery<IGrouping<TKey, TElement>>(
                     Expression.Call(
                         null,
@@ -1131,8 +1094,7 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(elementSelector);
             ArgumentNullException.ThrowIfNull(resultSelector);
 
-            return source
-                .Provider
+            return source.Provider
                 .CreateQuery<TResult>(
                     Expression.Call(
                         null,
@@ -1162,8 +1124,7 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(keySelector);
             ArgumentNullException.ThrowIfNull(resultSelector);
 
-            return source
-                .Provider
+            return source.Provider
                 .CreateQuery<TResult>(
                     Expression.Call(
                         null,
@@ -1192,8 +1153,7 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(keySelector);
             ArgumentNullException.ThrowIfNull(resultSelector);
 
-            return source
-                .Provider
+            return source.Provider
                 .CreateQuery<TResult>(
                     Expression.Call(
                         null,
@@ -1226,8 +1186,7 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(elementSelector);
             ArgumentNullException.ThrowIfNull(resultSelector);
 
-            return source
-                .Provider
+            return source.Provider
                 .CreateQuery<TResult>(
                     Expression.Call(
                         null,
@@ -1253,8 +1212,7 @@ namespace System.Linq
         {
             ArgumentNullException.ThrowIfNull(source);
 
-            return source
-                .Provider
+            return source.Provider
                 .CreateQuery<TSource>(
                     Expression.Call(
                         null,
@@ -1272,8 +1230,7 @@ namespace System.Linq
         {
             ArgumentNullException.ThrowIfNull(source);
 
-            return source
-                .Provider
+            return source.Provider
                 .CreateQuery<TSource>(
                     Expression.Call(
                         null,
@@ -1304,8 +1261,7 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(keySelector);
 
-            return source
-                .Provider
+            return source.Provider
                 .CreateQuery<TSource>(
                     Expression.Call(
                         null,
@@ -1338,8 +1294,7 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(keySelector);
 
-            return source
-                .Provider
+            return source.Provider
                 .CreateQuery<TSource>(
                     Expression.Call(
                         null,
@@ -1375,8 +1330,7 @@ namespace System.Linq
         {
             ArgumentNullException.ThrowIfNull(source);
 
-            return source
-                .Provider
+            return source.Provider
                 .CreateQuery<TSource[]>(
                     Expression.Call(
                         null,
@@ -1396,8 +1350,7 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source1);
             ArgumentNullException.ThrowIfNull(source2);
 
-            return source1
-                .Provider
+            return source1.Provider
                 .CreateQuery<TSource>(
                     Expression.Call(
                         null,
@@ -1419,8 +1372,7 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source1);
             ArgumentNullException.ThrowIfNull(source2);
 
-            return source1
-                .Provider
+            return source1.Provider
                 .CreateQuery<(TFirst, TSecond)>(
                     Expression.Call(
                         null,
@@ -1446,8 +1398,7 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source2);
             ArgumentNullException.ThrowIfNull(resultSelector);
 
-            return source1
-                .Provider
+            return source1.Provider
                 .CreateQuery<TResult>(
                     Expression.Call(
                         null,
@@ -1489,8 +1440,7 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source2);
             ArgumentNullException.ThrowIfNull(source3);
 
-            return source1
-                .Provider
+            return source1.Provider
                 .CreateQuery<(TFirst, TSecond, TThird)>(
                     Expression.Call(
                         null,
@@ -1516,8 +1466,7 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source1);
             ArgumentNullException.ThrowIfNull(source2);
 
-            return source1
-                .Provider
+            return source1.Provider
                 .CreateQuery<TSource>(
                     Expression.Call(
                         null,
@@ -1540,8 +1489,7 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source1);
             ArgumentNullException.ThrowIfNull(source2);
 
-            return source1
-                .Provider
+            return source1.Provider
                 .CreateQuery<TSource>(
                     Expression.Call(
                         null,
@@ -1577,8 +1525,7 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source2);
             ArgumentNullException.ThrowIfNull(keySelector);
 
-            return source1
-                .Provider
+            return source1.Provider
                 .CreateQuery<TSource>(
                     Expression.Call(
                         null,
@@ -1616,8 +1563,7 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source2);
             ArgumentNullException.ThrowIfNull(keySelector);
 
-            return source1
-                .Provider
+            return source1.Provider
                 .CreateQuery<TSource>(
                     Expression.Call(
                         null,
@@ -1645,8 +1591,7 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source1);
             ArgumentNullException.ThrowIfNull(source2);
 
-            return source1
-                .Provider
+            return source1.Provider
                 .CreateQuery<TSource>(
                     Expression.Call(
                         null,
@@ -1669,8 +1614,7 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source1);
             ArgumentNullException.ThrowIfNull(source2);
 
-            return source1
-                .Provider
+            return source1.Provider
                 .CreateQuery<TSource>(
                     Expression.Call(
                         null,
@@ -1706,8 +1650,7 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source2);
             ArgumentNullException.ThrowIfNull(keySelector);
 
-            return source1
-                .Provider
+            return source1.Provider
                 .CreateQuery<TSource>(
                     Expression.Call(
                         null,
@@ -1745,8 +1688,7 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source2);
             ArgumentNullException.ThrowIfNull(keySelector);
 
-            return source1
-                .Provider
+            return source1.Provider
                 .CreateQuery<TSource>(
                     Expression.Call(
                         null,
@@ -1774,8 +1716,7 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source1);
             ArgumentNullException.ThrowIfNull(source2);
 
-            return source1
-                .Provider
+            return source1.Provider
                 .CreateQuery<TSource>(
                     Expression.Call(
                         null,
@@ -1798,8 +1739,7 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source1);
             ArgumentNullException.ThrowIfNull(source2);
 
-            return source1
-                .Provider
+            return source1.Provider
                 .CreateQuery<TSource>(
                     Expression.Call(
                         null,
@@ -1836,8 +1776,7 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source2);
             ArgumentNullException.ThrowIfNull(keySelector);
 
-            return source1
-                .Provider
+            return source1.Provider
                 .CreateQuery<TSource>(
                     Expression.Call(
                         null,
@@ -1876,8 +1815,7 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source2);
             ArgumentNullException.ThrowIfNull(keySelector);
 
-            return source1
-                .Provider
+            return source1.Provider
                 .CreateQuery<TSource>(
                     Expression.Call(
                         null,
@@ -1901,8 +1839,7 @@ namespace System.Linq
         {
             ArgumentNullException.ThrowIfNull(source);
 
-            return source
-                .Provider
+            return source.Provider
                 .Execute<TSource>(
                     Expression.Call(
                         null,
@@ -1921,8 +1858,7 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(predicate);
 
-            return source
-                .Provider
+            return source.Provider
                 .Execute<TSource>(
                     Expression.Call(
                         null,
@@ -1940,8 +1876,7 @@ namespace System.Linq
         {
             ArgumentNullException.ThrowIfNull(source);
 
-            return source
-                .Provider
+            return source.Provider
                 .Execute<TSource>(
                     Expression.Call(
                         null,
@@ -1965,8 +1900,7 @@ namespace System.Linq
         {
             ArgumentNullException.ThrowIfNull(source);
 
-            return source
-                .Provider
+            return source.Provider
                 .Execute<TSource>(
                     Expression.Call(
                         null,
@@ -1986,8 +1920,7 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(predicate);
 
-            return source
-                .Provider
+            return source.Provider
                 .Execute<TSource>(
                     Expression.Call(
                         null,
@@ -2017,8 +1950,7 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(predicate);
 
-            return source
-                .Provider
+            return source.Provider
                 .Execute<TSource>(
                     Expression.Call(
                         null,
@@ -2040,8 +1972,7 @@ namespace System.Linq
         {
             ArgumentNullException.ThrowIfNull(source);
 
-            return source
-                .Provider
+            return source.Provider
                 .Execute<TSource>(
                     Expression.Call(
                         null,
@@ -2060,8 +1991,7 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(predicate);
 
-            return source
-                .Provider
+            return source.Provider
                 .Execute<TSource>(
                     Expression.Call(
                         null,
@@ -2079,8 +2009,7 @@ namespace System.Linq
         {
             ArgumentNullException.ThrowIfNull(source);
 
-            return source
-                .Provider
+            return source.Provider
                 .Execute<TSource>(
                     Expression.Call(
                         null,
@@ -2104,8 +2033,7 @@ namespace System.Linq
         {
             ArgumentNullException.ThrowIfNull(source);
 
-            return source
-                .Provider
+            return source.Provider
                 .Execute<TSource>(
                     Expression.Call(
                         null,
@@ -2125,8 +2053,7 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(predicate);
 
-            return source
-                .Provider
+            return source.Provider
                 .Execute<TSource>(
                     Expression.Call(
                         null,
@@ -2156,8 +2083,7 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(predicate);
 
-            return source
-                .Provider
+            return source.Provider
                 .Execute<TSource>(
                     Expression.Call(
                         null,
@@ -2179,8 +2105,7 @@ namespace System.Linq
         {
             ArgumentNullException.ThrowIfNull(source);
 
-            return source
-                .Provider
+            return source.Provider
                 .Execute<TSource>(
                     Expression.Call(
                         null,
@@ -2199,8 +2124,7 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(predicate);
 
-            return source
-                .Provider
+            return source.Provider
                 .Execute<TSource>(
                     Expression.Call(
                         null,
@@ -2218,8 +2142,7 @@ namespace System.Linq
         {
             ArgumentNullException.ThrowIfNull(source);
 
-            return source
-                .Provider
+            return source.Provider
                 .Execute<TSource>(
                     Expression.Call(
                         null,
@@ -2244,8 +2167,7 @@ namespace System.Linq
         {
             ArgumentNullException.ThrowIfNull(source);
 
-            return source
-                .Provider
+            return source.Provider
                 .Execute<TSource>(
                     Expression.Call(
                         null,
@@ -2265,8 +2187,7 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(predicate);
 
-            return source
-                .Provider
+            return source.Provider
                 .Execute<TSource>(
                     Expression.Call(
                         null,
@@ -2297,8 +2218,7 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(predicate);
 
-            return source
-                .Provider
+            return source.Provider
                 .Execute<TSource>(
                     Expression.Call(
                         null,
@@ -2323,8 +2243,7 @@ namespace System.Linq
             if (index < 0)
                 throw Error.ArgumentOutOfRange(nameof(index));
 
-            return source
-                .Provider
+            return source.Provider
                 .Execute<TSource>(
                     Expression.Call(
                         null,
@@ -2350,8 +2269,7 @@ namespace System.Linq
             if (index.IsFromEnd && index.Value == 0)
                 throw Error.ArgumentOutOfRange(nameof(index));
 
-            return source
-                .Provider
+            return source.Provider
                 .Execute<TSource>(
                     Expression.Call(
                         null,
@@ -2370,8 +2288,7 @@ namespace System.Linq
         {
             ArgumentNullException.ThrowIfNull(source);
 
-            return source
-                .Provider
+            return source.Provider
                 .Execute<TSource>(
                     Expression.Call(
                         null,
@@ -2396,8 +2313,7 @@ namespace System.Linq
         {
             ArgumentNullException.ThrowIfNull(source);
 
-            return source
-                .Provider
+            return source.Provider
                 .Execute<TSource>(
                     Expression.Call(
                         null,
@@ -2413,8 +2329,7 @@ namespace System.Linq
         {
             ArgumentNullException.ThrowIfNull(source);
 
-            return source
-                .Provider
+            return source.Provider
                 .CreateQuery<TSource>(
                     Expression.Call(
                         null,
@@ -2432,8 +2347,7 @@ namespace System.Linq
         {
             ArgumentNullException.ThrowIfNull(source);
 
-            return source
-                .Provider
+            return source.Provider
                 .CreateQuery<TSource>(
                     Expression.Call(
                         null,
@@ -2451,8 +2365,7 @@ namespace System.Linq
         {
             ArgumentNullException.ThrowIfNull(source);
 
-            return source
-                .Provider
+            return source.Provider
                 .Execute<bool>(
                     Expression.Call(
                         null,
@@ -2472,8 +2385,7 @@ namespace System.Linq
         {
             ArgumentNullException.ThrowIfNull(source);
 
-            return source
-                .Provider
+            return source.Provider
                 .Execute<bool>(
                     Expression.Call(
                         null,
@@ -2492,8 +2404,7 @@ namespace System.Linq
         {
             ArgumentNullException.ThrowIfNull(source);
 
-            return source
-                .Provider
+            return source.Provider
                 .CreateQuery<TSource>(
                     Expression.Call(
                         null,
@@ -2512,8 +2423,7 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source1);
             ArgumentNullException.ThrowIfNull(source2);
 
-            return source1
-                .Provider
+            return source1.Provider
                 .Execute<bool>(
                     Expression.Call(
                         null,
@@ -2536,8 +2446,7 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source1);
             ArgumentNullException.ThrowIfNull(source2);
 
-            return source1
-                .Provider
+            return source1.Provider
                 .Execute<bool>(
                     Expression.Call(
                         null,
@@ -2559,8 +2468,7 @@ namespace System.Linq
         {
             ArgumentNullException.ThrowIfNull(source);
 
-            return source
-                .Provider
+            return source.Provider
                 .Execute<bool>(
                     Expression.Call(
                         null,
@@ -2579,8 +2487,7 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(predicate);
 
-            return source
-                .Provider
+            return source.Provider
                 .Execute<bool>(
                     Expression.Call(
                         null,
@@ -2602,8 +2509,7 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(predicate);
 
-            return source
-                .Provider
+            return source.Provider
                 .Execute<bool>(
                     Expression.Call(
                         null,
@@ -2621,8 +2527,7 @@ namespace System.Linq
         {
             ArgumentNullException.ThrowIfNull(source);
 
-            return source
-                .Provider
+            return source.Provider
                 .Execute<int>(
                     Expression.Call(
                         null,
@@ -2641,8 +2546,7 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(predicate);
 
-            return source
-                .Provider
+            return source.Provider
                 .Execute<int>(
                     Expression.Call(
                         null,
@@ -2674,8 +2578,7 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(keySelector);
 
-            return source
-                .Provider
+            return source.Provider
                 .CreateQuery<KeyValuePair<TKey, int>>(
                     Expression.Call(
                         null,
@@ -2697,8 +2600,7 @@ namespace System.Linq
         {
             ArgumentNullException.ThrowIfNull(source);
 
-            return source
-                .Provider
+            return source.Provider
                 .Execute<long>(
                     Expression.Call(
                         null,
@@ -2717,8 +2619,7 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(predicate);
 
-            return source
-                .Provider
+            return source.Provider
                 .Execute<long>(
                     Expression.Call(
                         null,
@@ -2736,8 +2637,7 @@ namespace System.Linq
         {
             ArgumentNullException.ThrowIfNull(source);
 
-            return source
-                .Provider
+            return source.Provider
                 .Execute<TSource>(
                     Expression.Call(
                         null,
@@ -2762,8 +2662,7 @@ namespace System.Linq
         {
             ArgumentNullException.ThrowIfNull(source);
 
-            return source
-                .Provider
+            return source.Provider
                 .Execute<TSource>(
                     Expression.Call(
                         null,
@@ -2783,8 +2682,7 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(selector);
 
-            return source
-                .Provider
+            return source.Provider
                 .Execute<TResult>(
                     Expression.Call(
                         null,
@@ -2814,8 +2712,7 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(keySelector);
 
-            return source
-                .Provider
+            return source.Provider
                 .Execute<TSource>(
                     Expression.Call(
                         null,
@@ -2847,8 +2744,7 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(keySelector);
 
-            return source
-                .Provider
+            return source.Provider
                 .Execute<TSource>(
                     Expression.Call(
                         null,
@@ -2870,8 +2766,7 @@ namespace System.Linq
         {
             ArgumentNullException.ThrowIfNull(source);
 
-            return source
-                .Provider
+            return source.Provider
                 .Execute<TSource>(
                     Expression.Call(
                         null,
@@ -2895,8 +2790,7 @@ namespace System.Linq
         {
             ArgumentNullException.ThrowIfNull(source);
 
-            return source
-                .Provider
+            return source.Provider
                 .Execute<TSource>(
                     Expression.Call(
                         null,
@@ -2916,8 +2810,7 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(selector);
 
-            return source
-                .Provider
+            return source.Provider
                 .Execute<TResult>(
                     Expression.Call(
                         null,
@@ -2947,8 +2840,7 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(keySelector);
 
-            return source
-                .Provider
+            return source.Provider
                 .Execute<TSource>(
                     Expression.Call(
                         null,
@@ -2980,8 +2872,7 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(keySelector);
 
-            return source
-                .Provider
+            return source.Provider
                 .Execute<TSource>(
                     Expression.Call(
                         null,
@@ -3003,8 +2894,7 @@ namespace System.Linq
         {
             ArgumentNullException.ThrowIfNull(source);
 
-            return source
-                .Provider
+            return source.Provider
                 .Execute<int>(
                     Expression.Call(
                         null,
@@ -3019,8 +2909,7 @@ namespace System.Linq
         {
             ArgumentNullException.ThrowIfNull(source);
 
-            return source
-                .Provider
+            return source.Provider
                 .Execute<int?>(
                     Expression.Call(
                         null,
@@ -3035,8 +2924,7 @@ namespace System.Linq
         {
             ArgumentNullException.ThrowIfNull(source);
 
-            return source
-                .Provider
+            return source.Provider
                 .Execute<long>(
                     Expression.Call(
                         null,
@@ -3051,8 +2939,7 @@ namespace System.Linq
         {
             ArgumentNullException.ThrowIfNull(source);
 
-            return source
-                .Provider
+            return source.Provider
                 .Execute<long?>(
                     Expression.Call(
                         null,
@@ -3067,8 +2954,7 @@ namespace System.Linq
         {
             ArgumentNullException.ThrowIfNull(source);
 
-            return source
-                .Provider
+            return source.Provider
                 .Execute<float>(
                     Expression.Call(
                         null,
@@ -3083,8 +2969,7 @@ namespace System.Linq
         {
             ArgumentNullException.ThrowIfNull(source);
 
-            return source
-                .Provider
+            return source.Provider
                 .Execute<float?>(
                     Expression.Call(
                         null,
@@ -3099,8 +2984,7 @@ namespace System.Linq
         {
             ArgumentNullException.ThrowIfNull(source);
 
-            return source
-                .Provider
+            return source.Provider
                 .Execute<double>(
                     Expression.Call(
                         null,
@@ -3115,8 +2999,7 @@ namespace System.Linq
         {
             ArgumentNullException.ThrowIfNull(source);
 
-            return source
-                .Provider
+            return source.Provider
                 .Execute<double?>(
                     Expression.Call(
                         null,
@@ -3131,8 +3014,7 @@ namespace System.Linq
         {
             ArgumentNullException.ThrowIfNull(source);
 
-            return source
-                .Provider
+            return source.Provider
                 .Execute<decimal>(
                     Expression.Call(
                         null,
@@ -3147,8 +3029,7 @@ namespace System.Linq
         {
             ArgumentNullException.ThrowIfNull(source);
 
-            return source
-                .Provider
+            return source.Provider
                 .Execute<decimal?>(
                     Expression.Call(
                         null,
@@ -3167,8 +3048,7 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(selector);
 
-            return source
-                .Provider
+            return source.Provider
                 .Execute<int>(
                     Expression.Call(
                         null,
@@ -3190,8 +3070,7 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(selector);
 
-            return source
-                .Provider
+            return source.Provider
                 .Execute<int?>(
                     Expression.Call(
                         null,
@@ -3213,8 +3092,7 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(selector);
 
-            return source
-                .Provider
+            return source.Provider
                 .Execute<long>(
                     Expression.Call(
                         null,
@@ -3236,8 +3114,7 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(selector);
 
-            return source
-                .Provider
+            return source.Provider
                 .Execute<long?>(
                     Expression.Call(
                         null,
@@ -3259,8 +3136,7 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(selector);
 
-            return source
-                .Provider
+            return source.Provider
                 .Execute<float>(
                     Expression.Call(
                         null,
@@ -3282,8 +3158,7 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(selector);
 
-            return source
-                .Provider
+            return source.Provider
                 .Execute<float?>(
                     Expression.Call(
                         null,
@@ -3305,8 +3180,7 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(selector);
 
-            return source
-                .Provider
+            return source.Provider
                 .Execute<double>(
                     Expression.Call(
                         null,
@@ -3328,8 +3202,7 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(selector);
 
-            return source
-                .Provider
+            return source.Provider
                 .Execute<double?>(
                     Expression.Call(
                         null,
@@ -3351,8 +3224,7 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(selector);
 
-            return source
-                .Provider
+            return source.Provider
                 .Execute<decimal>(
                     Expression.Call(
                         null,
@@ -3374,8 +3246,7 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(selector);
 
-            return source
-                .Provider
+            return source.Provider
                 .Execute<decimal?>(
                     Expression.Call(
                         null,
@@ -3395,8 +3266,7 @@ namespace System.Linq
         {
             ArgumentNullException.ThrowIfNull(source);
 
-            return source
-                .Provider
+            return source.Provider
                 .Execute<double>(
                     Expression.Call(
                         null,
@@ -3411,8 +3281,7 @@ namespace System.Linq
         {
             ArgumentNullException.ThrowIfNull(source);
 
-            return source
-                .Provider
+            return source.Provider
                 .Execute<double?>(
                     Expression.Call(
                         null,
@@ -3427,8 +3296,7 @@ namespace System.Linq
         {
             ArgumentNullException.ThrowIfNull(source);
 
-            return source
-                .Provider
+            return source.Provider
                 .Execute<double>(
                     Expression.Call(
                         null,
@@ -3443,8 +3311,7 @@ namespace System.Linq
         {
             ArgumentNullException.ThrowIfNull(source);
 
-            return source
-                .Provider
+            return source.Provider
                 .Execute<double?>(
                     Expression.Call(
                         null,
@@ -3459,8 +3326,7 @@ namespace System.Linq
         {
             ArgumentNullException.ThrowIfNull(source);
 
-            return source
-                .Provider
+            return source.Provider
                 .Execute<float>(
                     Expression.Call(
                         null,
@@ -3475,8 +3341,7 @@ namespace System.Linq
         {
             ArgumentNullException.ThrowIfNull(source);
 
-            return source
-                .Provider
+            return source.Provider
                 .Execute<float?>(
                     Expression.Call(
                         null,
@@ -3491,8 +3356,7 @@ namespace System.Linq
         {
             ArgumentNullException.ThrowIfNull(source);
 
-            return source
-                .Provider
+            return source.Provider
                 .Execute<double>(
                     Expression.Call(
                         null,
@@ -3507,8 +3371,7 @@ namespace System.Linq
         {
             ArgumentNullException.ThrowIfNull(source);
 
-            return source
-                .Provider
+            return source.Provider
                 .Execute<double?>(
                     Expression.Call(
                         null,
@@ -3523,8 +3386,7 @@ namespace System.Linq
         {
             ArgumentNullException.ThrowIfNull(source);
 
-            return source
-                .Provider
+            return source.Provider
                 .Execute<decimal>(
                     Expression.Call(
                         null,
@@ -3539,8 +3401,7 @@ namespace System.Linq
         {
             ArgumentNullException.ThrowIfNull(source);
 
-            return source
-                .Provider
+            return source.Provider
                 .Execute<decimal?>(
                     Expression.Call(
                         null,
@@ -3559,8 +3420,7 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(selector);
 
-            return source
-                .Provider
+            return source.Provider
                 .Execute<double>(
                     Expression.Call(
                         null,
@@ -3582,8 +3442,7 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(selector);
 
-            return source
-                .Provider
+            return source.Provider
                 .Execute<double?>(
                     Expression.Call(
                         null,
@@ -3605,8 +3464,7 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(selector);
 
-            return source
-                .Provider
+            return source.Provider
                 .Execute<float>(
                     Expression.Call(
                         null,
@@ -3628,8 +3486,7 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(selector);
 
-            return source
-                .Provider
+            return source.Provider
                 .Execute<float?>(
                     Expression.Call(
                         null,
@@ -3651,8 +3508,7 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(selector);
 
-            return source
-                .Provider
+            return source.Provider
                 .Execute<double>(
                     Expression.Call(
                         null,
@@ -3674,8 +3530,7 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(selector);
 
-            return source
-                .Provider
+            return source.Provider
                 .Execute<double?>(
                     Expression.Call(
                         null,
@@ -3697,8 +3552,7 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(selector);
 
-            return source
-                .Provider
+            return source.Provider
                 .Execute<double>(
                     Expression.Call(
                         null,
@@ -3720,8 +3574,7 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(selector);
 
-            return source
-                .Provider
+            return source.Provider
                 .Execute<double?>(
                     Expression.Call(
                         null,
@@ -3743,8 +3596,7 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(selector);
 
-            return source
-                .Provider
+            return source.Provider
                 .Execute<decimal>(
                     Expression.Call(
                         null,
@@ -3766,8 +3618,7 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(selector);
 
-            return source
-                .Provider
+            return source.Provider
                 .Execute<decimal?>(
                     Expression.Call(
                         null,
@@ -3791,8 +3642,7 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(func);
 
-            return source
-                .Provider
+            return source.Provider
                 .Execute<TSource>(
                     Expression.Call(
                         null,
@@ -3817,8 +3667,7 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(func);
 
-            return source
-                .Provider
+            return source.Provider
                 .Execute<TAccumulate>(
                     Expression.Call(
                         null,
@@ -3847,8 +3696,7 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(func);
             ArgumentNullException.ThrowIfNull(selector);
 
-            return source
-                .Provider
+            return source.Provider
                 .Execute<TResult>(
                     Expression.Call(
                         null,
@@ -3885,8 +3733,7 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(keySelector);
             ArgumentNullException.ThrowIfNull(func);
 
-            return source
-                .Provider
+            return source.Provider
                 .CreateQuery<KeyValuePair<TKey, TAccumulate>>(
                     Expression.Call(
                         null,
@@ -3926,8 +3773,7 @@ namespace System.Linq
             ArgumentNullException.ThrowIfNull(seedSelector);
             ArgumentNullException.ThrowIfNull(func);
 
-            return source
-                .Provider
+            return source.Provider
                 .CreateQuery<KeyValuePair<TKey, TAccumulate>>(
                     Expression.Call(
                         null,
@@ -3956,8 +3802,7 @@ namespace System.Linq
         {
             ArgumentNullException.ThrowIfNull(source);
 
-            return source
-                .Provider
+            return source.Provider
                 .CreateQuery<TSource>(
                     Expression.Call(
                         null,
@@ -3976,8 +3821,7 @@ namespace System.Linq
         {
             ArgumentNullException.ThrowIfNull(source);
 
-            return source
-                .Provider
+            return source.Provider
                 .CreateQuery<TSource>(
                     Expression.Call(
                         null,
@@ -3996,8 +3840,7 @@ namespace System.Linq
         {
             ArgumentNullException.ThrowIfNull(source);
 
-            return source
-                .Provider
+            return source.Provider
                 .CreateQuery<TSource>(
                     Expression.Call(
                         null,
@@ -4016,8 +3859,7 @@ namespace System.Linq
         {
             ArgumentNullException.ThrowIfNull(source);
 
-            return source
-                .Provider
+            return source.Provider
                 .CreateQuery<TSource>(
                     Expression.Call(
                         null,

@@ -261,8 +261,7 @@ namespace System.Web.Handlers
                         return null;
 
                     if (
-                        !entry
-                            .Resources
+                        !entry.Resources
                             .TryGetValue(resNameHash.Substring(0, resNameHash.Length - 1), out res)
                     )
                         return null;

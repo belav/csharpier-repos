@@ -24,8 +24,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                 CancellationToken cancellationToken
             )
             {
-                var preservationService = selectionResult
-                    .SemanticDocument
+                var preservationService = selectionResult.SemanticDocument
                     .Document
                     .Project
                     .Services
@@ -36,8 +35,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                     selectionResult.FinalSpan
                 );
                 return new CSharpTriviaResult(
-                    await selectionResult
-                        .SemanticDocument
+                    await selectionResult.SemanticDocument
                         .WithSyntaxRootAsync(result.Root, cancellationToken)
                         .ConfigureAwait(false),
                     result
@@ -184,8 +182,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                             .Concat(tokenPair.NextToken.LeadingTrivia)
                     ),
                     TriviaLocation.BeforeEndOfSpan => FilterTriviaList(
-                        tokenPair
-                            .PreviousToken
+                        tokenPair.PreviousToken
                             .TrailingTrivia
                             .Concat(list)
                             .Concat(tokenPair.NextToken.LeadingTrivia)
@@ -222,8 +219,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
             )
             {
                 var allList = FilterTriviaList(
-                    tokenPair
-                        .PreviousToken
+                    tokenPair.PreviousToken
                         .TrailingTrivia
                         .Concat(list)
                         .Concat(AppendLeadingTrivia(tokenPair))

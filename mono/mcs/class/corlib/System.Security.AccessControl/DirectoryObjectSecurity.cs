@@ -189,8 +189,7 @@ namespace System.Security.AccessControl
                 switch (modification)
                 {
                     case AccessControlModification.Add:
-                        descriptor
-                            .DiscretionaryAcl
+                        descriptor.DiscretionaryAcl
                             .AddAccess(
                                 orule.AccessControlType,
                                 SidFromIR(orule.IdentityReference),
@@ -203,8 +202,7 @@ namespace System.Security.AccessControl
                             );
                         break;
                     case AccessControlModification.Set:
-                        descriptor
-                            .DiscretionaryAcl
+                        descriptor.DiscretionaryAcl
                             .SetAccess(
                                 orule.AccessControlType,
                                 SidFromIR(orule.IdentityReference),
@@ -220,8 +218,7 @@ namespace System.Security.AccessControl
                         PurgeAccessRules(orule.IdentityReference);
                         goto case AccessControlModification.Add;
                     case AccessControlModification.Remove:
-                        modified = descriptor
-                            .DiscretionaryAcl
+                        modified = descriptor.DiscretionaryAcl
                             .RemoveAccess(
                                 orule.AccessControlType,
                                 SidFromIR(orule.IdentityReference),
@@ -237,8 +234,7 @@ namespace System.Security.AccessControl
                         PurgeAccessRules(orule.IdentityReference);
                         break;
                     case AccessControlModification.RemoveSpecific:
-                        descriptor
-                            .DiscretionaryAcl
+                        descriptor.DiscretionaryAcl
                             .RemoveAccessSpecific(
                                 orule.AccessControlType,
                                 SidFromIR(orule.IdentityReference),
@@ -319,8 +315,7 @@ namespace System.Security.AccessControl
                         if (null == descriptor.SystemAcl)
                             descriptor.SystemAcl = new SystemAcl(IsContainer, IsDS, 1);
 
-                        descriptor
-                            .SystemAcl
+                        descriptor.SystemAcl
                             .AddAudit(
                                 orule.AuditFlags,
                                 SidFromIR(orule.IdentityReference),
@@ -336,8 +331,7 @@ namespace System.Security.AccessControl
                         if (null == descriptor.SystemAcl)
                             descriptor.SystemAcl = new SystemAcl(IsContainer, IsDS, 1);
 
-                        descriptor
-                            .SystemAcl
+                        descriptor.SystemAcl
                             .SetAudit(
                                 orule.AuditFlags,
                                 SidFromIR(orule.IdentityReference),
@@ -355,8 +349,7 @@ namespace System.Security.AccessControl
                         if (null == descriptor.SystemAcl)
                             modified = false;
                         else
-                            modified = descriptor
-                                .SystemAcl
+                            modified = descriptor.SystemAcl
                                 .RemoveAudit(
                                     orule.AuditFlags,
                                     SidFromIR(orule.IdentityReference),
@@ -373,8 +366,7 @@ namespace System.Security.AccessControl
                         break;
                     case AccessControlModification.RemoveSpecific:
                         if (null != descriptor.SystemAcl)
-                            descriptor
-                                .SystemAcl
+                            descriptor.SystemAcl
                                 .RemoveAuditSpecific(
                                     orule.AuditFlags,
                                     SidFromIR(orule.IdentityReference),

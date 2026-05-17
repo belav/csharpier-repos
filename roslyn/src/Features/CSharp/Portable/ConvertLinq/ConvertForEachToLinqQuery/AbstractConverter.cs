@@ -80,8 +80,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq.ConvertForEachToLinqQuery
                     ),
                     SyntaxFactory.QueryBody(
                         SyntaxFactory.List(
-                            ForEachInfo
-                                .ConvertingExtendedNodes
+                            ForEachInfo.ConvertingExtendedNodes
                                 .Select(node => CreateQueryClause(node))
                         ),
                         SyntaxFactory
@@ -127,8 +126,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq.ConvertForEachToLinqQuery
                                     ifStatement.IfKeyword.LeadingTrivia,
                                     ifStatement.IfKeyword.TrailingTrivia
                                 ),
-                            ifStatement
-                                .Condition
+                            ifStatement.Condition
                                 .WithCommentsFrom(
                                     ifStatement.OpenParenToken,
                                     ifStatement.CloseParenToken
@@ -157,8 +155,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq.ConvertForEachToLinqQuery
                         .KeepCommentsAndAddElasticMarkers(),
                     type: forEachStatement.Type.IsVar ? null : forEachStatement.Type,
                     identifier: forEachStatement.Type.IsVar
-                        ? forEachStatement
-                            .Identifier
+                        ? forEachStatement.Identifier
                             .WithPrependedLeadingTrivia(
                                 SyntaxNodeOrTokenExtensions
                                     .GetTrivia(forEachStatement.Type.GetFirstToken())
@@ -214,8 +211,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq.ConvertForEachToLinqQuery
             ref int currentExtendedNodeIndex
         )
         {
-            leadingCommentsTrivia = forEachStatement
-                .ForEachKeyword
+            leadingCommentsTrivia = forEachStatement.ForEachKeyword
                 .GetAllTrivia()
                 .Concat(leadingCommentsTrivia);
 
@@ -241,8 +237,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq.ConvertForEachToLinqQuery
             var lambda = SyntaxFactory
                 .SimpleLambdaExpression(
                     SyntaxFactory.Parameter(
-                        forEachStatement
-                            .Identifier
+                        forEachStatement.Identifier
                             .WithPrependedLeadingTrivia(
                                 SyntaxNodeOrTokenExtensions
                                     .GetTrivia(forEachStatement.Type.GetFirstToken())
@@ -377,8 +372,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq.ConvertForEachToLinqQuery
                                     parentForEachStatement.Identifier.ValueText
                                 )
                             ),
-                            ifStatement
-                                .Condition
+                            ifStatement.Condition
                                 .WithCommentsFrom(
                                     ifStatement.OpenParenToken,
                                     ifStatement.CloseParenToken

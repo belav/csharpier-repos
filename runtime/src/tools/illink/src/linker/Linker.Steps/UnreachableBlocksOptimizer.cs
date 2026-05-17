@@ -512,9 +512,8 @@ namespace Mono.Linker.Steps
             if (type == null)
                 return null;
 
-            return type.Methods.First(l =>
-                !l.HasMetadataParameters() && l.IsStatic && l.Name == "get_Size"
-            );
+            return type.Methods
+                .First(l => !l.HasMetadataParameters() && l.IsStatic && l.Name == "get_Size");
         }
 
         readonly struct CallInliner
@@ -543,8 +542,7 @@ namespace Mono.Linker.Steps
                     {
                         case Code.Call:
                         case Code.Callvirt:
-                            MethodDefinition? md = optimizer
-                                ._context
+                            MethodDefinition? md = optimizer._context
                                 .TryResolve((MethodReference)instr.Operand);
                             if (md == null)
                                 continue;
@@ -565,8 +563,7 @@ namespace Mono.Linker.Steps
 
                             if (!result.IsSideEffectFree)
                             {
-                                optimizer
-                                    ._context
+                                optimizer._context
                                     .LogMessage(
                                         $"Cannot inline constant result of '{md.GetDisplayName()}' call due to presence of side effects"
                                     );

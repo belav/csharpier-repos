@@ -128,13 +128,14 @@ namespace System.Xml.Xsl
 
             // Create metadata for the Execute function, which is the entry point to the query
             // public static void Execute(XmlQueryRuntime);
-            MethodInfo methExec = this.module.DefineMethod(
-                "Execute",
-                typeof(void),
-                new Type[] { },
-                new string[] { },
-                XmlILMethodAttributes.NonUser
-            );
+            MethodInfo methExec = this.module
+                .DefineMethod(
+                    "Execute",
+                    typeof(void),
+                    new Type[] { },
+                    new string[] { },
+                    XmlILMethodAttributes.NonUser
+                );
 
             // Create metadata for the root expression
             // public void Root()
@@ -143,13 +144,8 @@ namespace System.Xml.Xsl
                 (this.qil.Root.SourceLine == null)
                     ? XmlILMethodAttributes.NonUser
                     : XmlILMethodAttributes.None;
-            MethodInfo methRoot = this.module.DefineMethod(
-                "Root",
-                typeof(void),
-                new Type[] { },
-                new string[] { },
-                methAttrs
-            );
+            MethodInfo methRoot = this.module
+                .DefineMethod("Root", typeof(void), new Type[] { }, new string[] { }, methAttrs);
 
             // Declare all early bound function objects
             foreach (EarlyBoundInfo info in this.qil.EarlyBoundTypes)
@@ -249,13 +245,8 @@ namespace System.Xml.Xsl
                     ndFunc.SourceLine == null
                         ? XmlILMethodAttributes.NonUser
                         : XmlILMethodAttributes.None;
-                methInfo = this.module.DefineMethod(
-                    ndFunc.DebugName,
-                    typReturn,
-                    paramTypes,
-                    paramNames,
-                    methAttrs
-                );
+                methInfo = this.module
+                    .DefineMethod(ndFunc.DebugName, typReturn, paramTypes, paramNames, methAttrs);
 
                 for (int arg = 0; arg < ndFunc.Arguments.Count; arg++)
                 {
@@ -285,13 +276,14 @@ namespace System.Xml.Xsl
                     ndRef.SourceLine == null
                         ? XmlILMethodAttributes.NonUser
                         : XmlILMethodAttributes.None;
-                methInfo = this.module.DefineMethod(
-                    ndRef.DebugName.ToString(),
-                    typReturn,
-                    new Type[] { },
-                    new string[] { },
-                    methAttrs
-                );
+                methInfo = this.module
+                    .DefineMethod(
+                        ndRef.DebugName.ToString(),
+                        typReturn,
+                        new Type[] { },
+                        new string[] { },
+                        methAttrs
+                    );
 
                 // Annotate function with MethodBuilder
                 XmlILAnnotation.Write(ndRef).FunctionBinding = methInfo;
@@ -327,13 +319,14 @@ namespace System.Xml.Xsl
             Label lblClone;
 
             // public static XPathNavigator SyncToNavigator(XPathNavigator, XPathNavigator);
-            meth = this.module.DefineMethod(
-                "SyncToNavigator",
-                typeof(XPathNavigator),
-                new Type[] { typeof(XPathNavigator), typeof(XPathNavigator) },
-                new string[] { null, null },
-                XmlILMethodAttributes.NonUser | XmlILMethodAttributes.Raw
-            );
+            meth = this.module
+                .DefineMethod(
+                    "SyncToNavigator",
+                    typeof(XPathNavigator),
+                    new Type[] { typeof(XPathNavigator), typeof(XPathNavigator) },
+                    new string[] { null, null },
+                    XmlILMethodAttributes.NonUser | XmlILMethodAttributes.Raw
+                );
 
             this.helper.MethodBegin(meth, null, false);
 
@@ -402,10 +395,8 @@ namespace System.Xml.Xsl
             ConstructorInfo cctor;
 
             staticData.GetObjectData(out data, out ebTypes);
-            fldInitData = this.module.DefineInitializedData(
-                "__" + XmlQueryStaticData.DataFieldName,
-                data
-            );
+            fldInitData = this.module
+                .DefineInitializedData("__" + XmlQueryStaticData.DataFieldName, data);
             fldData = this.module.DefineField(XmlQueryStaticData.DataFieldName, typeof(object));
             fldTypes = this.module.DefineField(XmlQueryStaticData.TypesFieldName, typeof(Type[]));
 

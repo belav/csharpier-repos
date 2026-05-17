@@ -44,8 +44,7 @@ namespace System.IdentityModel.Tokens
 
             if (null != format && !format.IsAbsoluteUri)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument("format", SR.GetString(SR.ID0013));
             }
 
@@ -83,8 +82,7 @@ namespace System.IdentityModel.Tokens
             {
                 if (null != value && !value.IsAbsoluteUri)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgument("value", SR.GetString(SR.ID0013));
                 }
 

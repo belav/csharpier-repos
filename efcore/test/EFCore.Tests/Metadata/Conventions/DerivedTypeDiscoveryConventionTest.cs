@@ -17,16 +17,14 @@ public class DerivedTypeDiscoveryConventionTest
 
         Assert.Null(entityBuilderC.Metadata.BaseType);
 
-        var entityBuilderA = entityBuilderC
-            .ModelBuilder
+        var entityBuilderA = entityBuilderC.ModelBuilder
             .Entity(typeof(A), ConfigurationSource.Explicit);
 
         RunConvention(entityBuilderA);
 
         Assert.Same(entityBuilderA.Metadata, entityBuilderC.Metadata.BaseType);
 
-        var entityBuilderB = entityBuilderC
-            .ModelBuilder
+        var entityBuilderB = entityBuilderC.ModelBuilder
             .Entity(typeof(B), ConfigurationSource.Explicit);
         Assert.Null(entityBuilderB.Metadata.BaseType);
 
@@ -43,8 +41,7 @@ public class DerivedTypeDiscoveryConventionTest
 
         RunConvention(entityBuilderB);
 
-        var entityBuilderC = entityBuilderB
-            .ModelBuilder
+        var entityBuilderC = entityBuilderB.ModelBuilder
             .Entity(typeof(C), ConfigurationSource.Explicit);
 
         Assert.Null(entityBuilderC.Metadata.BaseType);
@@ -53,8 +50,7 @@ public class DerivedTypeDiscoveryConventionTest
 
         Assert.Same(entityBuilderB.Metadata, entityBuilderC.Metadata.BaseType);
 
-        var entityBuilderA = entityBuilderB
-            .ModelBuilder
+        var entityBuilderA = entityBuilderB.ModelBuilder
             .Entity(typeof(A), ConfigurationSource.Explicit);
 
         RunConvention(entityBuilderA);
@@ -67,16 +63,14 @@ public class DerivedTypeDiscoveryConventionTest
     public void Discovers_child_type_if_base_type_set()
     {
         var entityBuilderA = CreateInternalEntityTypeBuilder<A>();
-        var entityBuilderC = entityBuilderA
-            .ModelBuilder
+        var entityBuilderC = entityBuilderA.ModelBuilder
             .Entity(typeof(C), ConfigurationSource.Explicit);
 
         RunConvention(entityBuilderC);
 
         Assert.Same(entityBuilderA.Metadata, entityBuilderC.Metadata.BaseType);
 
-        var entityBuilderB = entityBuilderA
-            .ModelBuilder
+        var entityBuilderB = entityBuilderA.ModelBuilder
             .Entity(typeof(B), ConfigurationSource.Explicit);
 
         Assert.Null(entityBuilderB.Metadata.BaseType);
@@ -100,8 +94,7 @@ public class DerivedTypeDiscoveryConventionTest
     }
 
     private ProviderConventionSetBuilderDependencies CreateDependencies() =>
-        InMemoryTestHelpers
-            .Instance
+        InMemoryTestHelpers.Instance
             .CreateContextServices()
             .GetRequiredService<ProviderConventionSetBuilderDependencies>();
 

@@ -22,15 +22,13 @@ namespace System.IdentityModel.Tokens
         public SamlAudienceRestrictionCondition(IEnumerable<Uri> audiences)
         {
             if (audiences == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("audiences"));
 
             foreach (Uri audience in audiences)
             {
                 if (audience == null)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgument(
                             SR.GetString(
                                 SR.SAMLEntityCannotBeNullOrEmpty,
@@ -69,8 +67,7 @@ namespace System.IdentityModel.Tokens
         void CheckObjectValidity()
         {
             if (this.audiences.Count == 0)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new SecurityTokenException(
                             SR.GetString(SR.SAMLAudienceRestrictionShouldHaveOneAudience)
@@ -86,13 +83,11 @@ namespace System.IdentityModel.Tokens
         )
         {
             if (reader == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("reader"));
 
             if (samlSerializer == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("samlSerializer"));
 
 #pragma warning suppress 56506 // samlSerializer.DictionaryManager is never null.
@@ -107,8 +102,7 @@ namespace System.IdentityModel.Tokens
                     reader.MoveToContent();
                     string audience = reader.ReadString();
                     if (string.IsNullOrEmpty(audience))
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new SecurityTokenException(
                                     SR.GetString(
@@ -123,8 +117,7 @@ namespace System.IdentityModel.Tokens
                 }
                 else
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new SecurityTokenException(
                                 SR.GetString(
@@ -137,8 +130,7 @@ namespace System.IdentityModel.Tokens
             }
 
             if (this.audiences.Count == 0)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new SecurityTokenException(
                             SR.GetString(SR.SAMLAudienceRestrictionShouldHaveOneAudienceOnRead)
@@ -158,13 +150,11 @@ namespace System.IdentityModel.Tokens
             CheckObjectValidity();
 
             if (writer == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("writer"));
 
             if (samlSerializer == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("samlSerializer"));
 
 #pragma warning suppress 56506 // samlSerializer.DictionaryManager is never null.

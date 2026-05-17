@@ -17,22 +17,19 @@ public class StartupShutdown
         IHostApplicationLifetime lifetime
     )
     {
-        lifetime
-            .ApplicationStarted
+        lifetime.ApplicationStarted
             .Register(() =>
             {
                 Console.WriteLine("Started");
             });
-        lifetime
-            .ApplicationStopping
+        lifetime.ApplicationStopping
             .Register(() =>
             {
                 Console.WriteLine("Stopping firing");
                 System.Threading.Thread.Sleep(200);
                 Console.WriteLine("Stopping end");
             });
-        lifetime
-            .ApplicationStopped
+        lifetime.ApplicationStopped
             .Register(() =>
             {
                 Console.WriteLine("Stopped firing");

@@ -381,11 +381,12 @@ namespace System.ServiceModel.Channels
                 {
                     this.timeoutHelper = new TimeoutHelper(timeout);
 
-                    IAsyncResult result = this.parent.BeginCloseInnerListener(
-                        timeoutHelper.RemainingTime(),
-                        onInnerChannelListenerCloseComplete,
-                        this
-                    );
+                    IAsyncResult result = this.parent
+                        .BeginCloseInnerListener(
+                            timeoutHelper.RemainingTime(),
+                            onInnerChannelListenerCloseComplete,
+                            this
+                        );
 
                     if (result.CompletedSynchronously)
                     {
@@ -533,11 +534,8 @@ namespace System.ServiceModel.Channels
                 this.inputId = inputId;
                 this.outputId = outputId;
 
-                IAsyncResult result = this.channelListener.BeginCloseInnerListener(
-                    timeout,
-                    onInnerChannelListenerCloseComplete,
-                    this
-                );
+                IAsyncResult result = this.channelListener
+                    .BeginCloseInnerListener(timeout, onInnerChannelListenerCloseComplete, this);
 
                 if (result.CompletedSynchronously)
                 {
@@ -627,8 +625,7 @@ namespace System.ServiceModel.Channels
             set
             {
                 // until the public setter is removed, throw
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new InvalidOperationException());
             }
         }
@@ -896,10 +893,8 @@ namespace System.ServiceModel.Channels
                 if (
                     (createSequenceInfo.OfferIdentifier != null)
                     && this.Duplex
-                    && this.channelsByOutput.TryGetValue(
-                        createSequenceInfo.OfferIdentifier,
-                        out reliableChannel
-                    )
+                    && this.channelsByOutput
+                        .TryGetValue(createSequenceInfo.OfferIdentifier, out reliableChannel)
                 )
                 {
                     return reliableChannel;
@@ -966,11 +961,8 @@ namespace System.ServiceModel.Channels
 
                 try
                 {
-                    IAsyncResult result = this.typedListener.BeginAcceptChannel(
-                        TimeSpan.MaxValue,
-                        onAcceptCompleted,
-                        this
-                    );
+                    IAsyncResult result = this.typedListener
+                        .BeginAcceptChannel(TimeSpan.MaxValue, onAcceptCompleted, this);
 
                     if (!result.CompletedSynchronously)
                         return;

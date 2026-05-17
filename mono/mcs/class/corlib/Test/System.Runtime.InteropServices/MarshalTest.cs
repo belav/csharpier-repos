@@ -320,8 +320,7 @@ namespace MonoTests.System.Runtime.InteropServices
             AssemblyName aname = new AssemblyName();
             aname.Name = "foo";
 
-            AssemblyBuilder ab = AppDomain
-                .CurrentDomain
+            AssemblyBuilder ab = AppDomain.CurrentDomain
                 .DefineDynamicAssembly(aname, AssemblyBuilderAccess.Save, Path.GetTempPath());
             ModuleBuilder mb = ab.DefineDynamicModule("foo.dll", false);
 

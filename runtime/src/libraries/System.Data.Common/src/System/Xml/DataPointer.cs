@@ -676,8 +676,7 @@ namespace System.Xml
             {
                 if (_column!.ColumnMapping == MappingType.Attribute)
                 {
-                    n = _node
-                        .Attributes!
+                    n = _node.Attributes!
                         .GetNamedItem(_column.EncodedColumnName, _column.Namespace);
                 }
                 else

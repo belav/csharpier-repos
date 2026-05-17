@@ -78,8 +78,7 @@ namespace System.Activities.Statements
             IEnumerable<T> values = this.Values.Get(context);
             if (values == null)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new InvalidOperationException(
                             SR.ParallelForEachRequiresNonNullValues(this.DisplayName)

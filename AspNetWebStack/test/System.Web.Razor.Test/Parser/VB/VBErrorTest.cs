@@ -167,8 +167,7 @@ bar",
             if (keywordIsMetaCode)
             {
                 expected.Children.Add(Factory.MetaCode(keyword).Accepts(AcceptedCharacters.None));
-                expected
-                    .Children
+                expected.Children
                     .Add(
                         classifier(Factory.EmptyVB())
                             .With(
@@ -187,8 +186,7 @@ bar",
             }
             else
             {
-                expected
-                    .Children
+                expected.Children
                     .Add(
                         classifier(Factory.Code(keyword))
                             .With(

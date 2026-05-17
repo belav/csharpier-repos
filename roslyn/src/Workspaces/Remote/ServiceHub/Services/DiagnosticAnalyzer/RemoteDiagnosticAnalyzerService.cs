@@ -45,8 +45,7 @@ namespace Microsoft.CodeAnalysis.Remote
                 {
                     // register solution crawler:
                     var workspace = GetWorkspace();
-                    workspace
-                        .Services
+                    workspace.Services
                         .GetRequiredService<ISolutionCrawlerRegistrationService>()
                         .Register(workspace);
 
@@ -125,8 +124,7 @@ namespace Microsoft.CodeAnalysis.Remote
                                 .ConfigureAwait(false);
 
                             // save log for debugging
-                            var diagnosticCount = result
-                                .Diagnostics
+                            var diagnosticCount = result.Diagnostics
                                 .Sum(entry =>
                                     entry.diagnosticMap.Syntax.Length
                                     + entry.diagnosticMap.Semantic.Length

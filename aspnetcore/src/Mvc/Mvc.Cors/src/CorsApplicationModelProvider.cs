@@ -45,19 +45,16 @@ internal sealed class CorsApplicationModelProvider : IApplicationModelProvider
 
         foreach (var controllerModel in context.Result.Controllers)
         {
-            var enableCors = controllerModel
-                .Attributes
+            var enableCors = controllerModel.Attributes
                 .OfType<IEnableCorsAttribute>()
                 .FirstOrDefault();
             if (enableCors != null)
             {
-                controllerModel
-                    .Filters
+                controllerModel.Filters
                     .Add(new CorsAuthorizationFilterFactory(enableCors.PolicyName));
             }
 
-            var disableCors = controllerModel
-                .Attributes
+            var disableCors = controllerModel.Attributes
                 .OfType<IDisableCorsAttribute>()
                 .FirstOrDefault();
             if (disableCors != null)
@@ -75,13 +72,11 @@ internal sealed class CorsApplicationModelProvider : IApplicationModelProvider
                 enableCors = actionModel.Attributes.OfType<IEnableCorsAttribute>().FirstOrDefault();
                 if (enableCors != null)
                 {
-                    actionModel
-                        .Filters
+                    actionModel.Filters
                         .Add(new CorsAuthorizationFilterFactory(enableCors.PolicyName));
                 }
 
-                disableCors = actionModel
-                    .Attributes
+                disableCors = actionModel.Attributes
                     .OfType<IDisableCorsAttribute>()
                     .FirstOrDefault();
                 if (disableCors != null)

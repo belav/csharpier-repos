@@ -22,8 +22,7 @@ namespace System.Web.Razor.Generator
                 && !String.IsNullOrEmpty(context.Host.GeneratedClassContext.LayoutPropertyName)
             )
             {
-                context
-                    .TargetMethod
+                context.TargetMethod
                     .Statements
                     .Add(
                         new CodeAssignStatement(

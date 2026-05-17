@@ -28,8 +28,7 @@ public class UnsupportedContentTypeFilterTest
 
         var modelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(typeof(int));
 
-        context
-            .ModelState
+        context.ModelState
             .AddModelError(
                 "person.body",
                 new UnsupportedContentTypeException("error"),

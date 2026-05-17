@@ -188,8 +188,7 @@ namespace System.ServiceModel.Discovery
             InitializeCloseHandle();
             if (!this.closeHandle.Wait(timeout))
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(new TimeoutException(SR2.TimeoutOnOperation(timeout)));
             }
         }

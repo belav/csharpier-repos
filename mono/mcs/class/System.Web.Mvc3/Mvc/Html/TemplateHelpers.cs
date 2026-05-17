@@ -96,8 +96,7 @@
                 }
                 else
                 {
-                    ViewEngineResult viewEngineResult = ViewEngines
-                        .Engines
+                    ViewEngineResult viewEngineResult = ViewEngines.Engines
                         .FindPartialView(html.ViewContext, fullViewName);
                     if (viewEngineResult.View != null)
                     {
@@ -108,8 +107,7 @@
 
                         using (StringWriter writer = new StringWriter(CultureInfo.InvariantCulture))
                         {
-                            viewEngineResult
-                                .View
+                            viewEngineResult.View
                                 .Render(
                                     new ViewContext(
                                         html.ViewContext,
@@ -476,13 +474,11 @@
 
             public override string Execute(HtmlHelper html, ViewDataDictionary viewData)
             {
-                ViewEngineResult viewEngineResult = ViewEngines
-                    .Engines
+                ViewEngineResult viewEngineResult = ViewEngines.Engines
                     .FindPartialView(html.ViewContext, ViewName);
                 using (StringWriter writer = new StringWriter(CultureInfo.InvariantCulture))
                 {
-                    viewEngineResult
-                        .View
+                    viewEngineResult.View
                         .Render(
                             new ViewContext(
                                 html.ViewContext,

@@ -153,8 +153,7 @@ namespace System.ServiceModel.Activities.Dispatcher
                     {
                         if (!allOptional)
                         {
-                            throw FxTrace
-                                .Exception
+                            throw FxTrace.Exception
                                 .AsError(new ProtocolException(SR2.EmptyCorrelationQueryResults));
                         }
                     }
@@ -207,8 +206,7 @@ namespace System.ServiceModel.Activities.Dispatcher
                     {
                         if (!allOptional)
                         {
-                            throw FxTrace
-                                .Exception
+                            throw FxTrace.Exception
                                 .AsError(new ProtocolException(SR2.EmptyCorrelationQueryResults));
                         }
                     }

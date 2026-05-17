@@ -81,18 +81,15 @@ namespace System.ComponentModel.Composition.Hosting
                     // Find all parts that we know will import each export
                     List<ComposablePartDefinition> candidateReachableParts = null;
                     if (
-                        this._importersIndex.TryGetValue(
-                            export.ContractName,
-                            out candidateReachableParts
-                        )
+                        this._importersIndex
+                            .TryGetValue(export.ContractName, out candidateReachableParts)
                     )
                     {
                         // find if they actually match
                         foreach (var candidateReachablePart in candidateReachableParts)
                         {
                             foreach (
-                                ImportDefinition import in candidateReachablePart
-                                    .ImportDefinitions
+                                ImportDefinition import in candidateReachablePart.ImportDefinitions
                                     .Where(this._importFilter)
                             )
                             {

@@ -216,8 +216,7 @@ namespace System.Xml.Xsl.Runtime
                     // Always convert "value" to a list of XPathItem using the item* converter
                     _globalValues[idx] =
                         (IList<XPathItem>)
-                            XmlAnyListConverter
-                                .ItemList
+                            XmlAnyListConverter.ItemList
                                 .ChangeType(value, typeof(XPathItem[]), null);
                     break;
                 }

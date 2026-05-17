@@ -479,8 +479,7 @@ namespace MonoTests.System.Reflection.Emit
             AssemblyName assemblyName = new AssemblyName();
             assemblyName.Name = "foo";
 
-            AssemblyBuilder assembly = AppDomain
-                .CurrentDomain
+            AssemblyBuilder assembly = AppDomain.CurrentDomain
                 .DefineDynamicAssembly(assemblyName, AssemblyBuilderAccess.RunAndSave);
 
             ModuleBuilder module = assembly.DefineDynamicModule("foo.dll");
@@ -654,8 +653,7 @@ namespace MonoTests.System.Reflection.Emit
 
             Assert.IsNotNull(ExceptionHandling_Test_Support.Caught, "#1");
 
-            var lines = ExceptionHandling_Test_Support
-                .CaughtStackTrace
+            var lines = ExceptionHandling_Test_Support.CaughtStackTrace
                 .Split(new[] { Environment.NewLine }, StringSplitOptions.None);
             lines = lines.Where(l => !l.StartsWith("[")).ToArray();
             Assert.AreEqual(2, lines.Length, "#2");
@@ -696,10 +694,8 @@ namespace MonoTests.System.Reflection.Emit
 
             public static void Handler(Exception e)
             {
-                var lines = e.StackTrace.Split(
-                    new[] { Environment.NewLine },
-                    StringSplitOptions.RemoveEmptyEntries
-                );
+                var lines = e.StackTrace
+                    .Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
                 // Ignore Metadata
                 lines = lines.Where(l => !l.StartsWith("[")).ToArray();
 
@@ -780,11 +776,9 @@ namespace MonoTests.System.Reflection.Emit
         [Test] //see bxc #59334
         public void ExceptionWrapping()
         {
-            AssemblyBuilder ab = AppDomain
-                .CurrentDomain
+            AssemblyBuilder ab = AppDomain.CurrentDomain
                 .DefineDynamicAssembly(new AssemblyName("ehatevfheiw"), AssemblyBuilderAccess.Run);
-            AssemblyBuilder ab2 = AppDomain
-                .CurrentDomain
+            AssemblyBuilder ab2 = AppDomain.CurrentDomain
                 .DefineDynamicAssembly(new AssemblyName("ddf4234"), AssemblyBuilderAccess.Run);
             CustomAttributeBuilder cab = new CustomAttributeBuilder(
                 typeof(RuntimeCompatibilityAttribute).GetConstructor(new Type[0]),
@@ -797,8 +791,7 @@ namespace MonoTests.System.Reflection.Emit
             );
             ab2.SetCustomAttribute(cab);
 
-            AssemblyBuilder ab3 = AppDomain
-                .CurrentDomain
+            AssemblyBuilder ab3 = AppDomain.CurrentDomain
                 .DefineDynamicAssembly(new AssemblyName("frfhfher"), AssemblyBuilderAccess.Run);
             //1 NamedArg. Property name: WrapNonExceptionThrows value: true (0x01)
             byte[] blob = new byte[]

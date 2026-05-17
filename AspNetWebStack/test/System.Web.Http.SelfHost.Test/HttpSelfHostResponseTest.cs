@@ -198,8 +198,7 @@ namespace System.Web.Http.SelfHost
                 BaseAddress = _testPort.BaseUri;
 
                 config.HostNameComparisonMode = HostNameComparisonMode.Exact;
-                config
-                    .Routes
+                config.Routes
                     .MapHttpRoute(
                         "Default",
                         "{controller}/{action}",

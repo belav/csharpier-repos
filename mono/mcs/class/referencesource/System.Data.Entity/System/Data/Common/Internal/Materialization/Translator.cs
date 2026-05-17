@@ -1259,8 +1259,7 @@ namespace System.Data.Common.Internal.Materialization
                 DiscriminatedEntityIdentity discriminatedEntityIdentity =
                     (DiscriminatedEntityIdentity)entityIdentity;
 
-                Expression discriminator = discriminatedEntityIdentity
-                    .EntitySetColumnMap
+                Expression discriminator = discriminatedEntityIdentity.EntitySetColumnMap
                     .Accept(translator, new TranslatorArg(typeof(int?)))
                     .Expression;
                 EntitySet[] entitySets = discriminatedEntityIdentity.EntitySetMap;

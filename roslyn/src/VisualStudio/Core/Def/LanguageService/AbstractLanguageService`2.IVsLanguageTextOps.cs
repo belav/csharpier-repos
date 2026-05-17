@@ -49,9 +49,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
             CancellationToken cancellationToken
         )
         {
-            var textBuffer = this.EditorAdaptersFactoryService.GetDataBuffer(
-                (IVsTextBuffer)textLayer
-            );
+            var textBuffer = this.EditorAdaptersFactoryService
+                .GetDataBuffer((IVsTextBuffer)textLayer);
             if (textBuffer == null)
             {
                 return VSConstants.E_UNEXPECTED;
@@ -79,8 +78,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
 
             // Since we know we are on the UI thread, lets get the base indentation now, so that there is less
             // cleanup work to do later in Venus.
-            var ruleFactory = Workspace
-                .Services
+            var ruleFactory = Workspace.Services
                 .GetService<IHostDependentFormattingRuleFactoryService>();
             var rules = ruleFactory
                 .CreateRule(documentSyntax, start)

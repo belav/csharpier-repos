@@ -94,8 +94,7 @@ namespace System.Activities.DurableInstancing
             }
             catch (InstanceLockedException instanceLockedException)
             {
-                TimeSpan retryDelay = tryCommandAsyncResult
-                    .InstanceStore
+                TimeSpan retryDelay = tryCommandAsyncResult.InstanceStore
                     .GetNextRetryDelay(++tryCommandAsyncResult.retryCount);
 
                 if (retryDelay < tryCommandAsyncResult.commandTimeout.RemainingTime())

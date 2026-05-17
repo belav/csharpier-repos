@@ -87,16 +87,17 @@ namespace Mono.CodeContracts.Static.DataStructures
             if (Count > that.Count)
                 return false;
             bool result = true;
-            this.underlying.Visit(
-                (e, dummy) =>
-                {
-                    if (that.Contains(e))
-                        return VisitStatus.ContinueVisit;
+            this.underlying
+                .Visit(
+                    (e, dummy) =>
+                    {
+                        if (that.Contains(e))
+                            return VisitStatus.ContinueVisit;
 
-                    result = false;
-                    return VisitStatus.StopVisit;
-                }
-            );
+                        result = false;
+                        return VisitStatus.StopVisit;
+                    }
+                );
             return result;
         }
 
@@ -161,13 +162,14 @@ namespace Mono.CodeContracts.Static.DataStructures
 
         public void Visit(Action<T> visitor)
         {
-            this.underlying.Visit(
-                (elem, dummy) =>
-                {
-                    visitor(elem);
-                    return VisitStatus.ContinueVisit;
-                }
-            );
+            this.underlying
+                .Visit(
+                    (elem, dummy) =>
+                    {
+                        visitor(elem);
+                        return VisitStatus.ContinueVisit;
+                    }
+                );
         }
 
         public void Dump(TextWriter tw)

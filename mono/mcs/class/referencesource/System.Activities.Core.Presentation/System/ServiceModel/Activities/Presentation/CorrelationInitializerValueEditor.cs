@@ -17,8 +17,7 @@ namespace System.ServiceModel.Activities.Presentation
     {
         public CorrelationInitializerValueEditor()
         {
-            this.InlineEditorTemplate = EditorCategoryTemplateDictionary
-                .Instance
+            this.InlineEditorTemplate = EditorCategoryTemplateDictionary.Instance
                 .GetCategoryTemplate("CorrelationInitializer_InlineTemplate");
         }
 

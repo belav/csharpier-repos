@@ -125,11 +125,8 @@ namespace System.Xml.Schema
                     {
                         Debug.Assert(mt.Datatype != null);
                         Debug.Assert(value != null);
-                        typedValue = mt.Datatype.ParseValue(
-                            value,
-                            schemas.NameTable,
-                            namespaceManager
-                        );
+                        typedValue = mt.Datatype
+                            .ParseValue(value, schemas.NameTable, namespaceManager);
                     }
                     catch (XmlSchemaException) { }
                     if (typedValue != null)

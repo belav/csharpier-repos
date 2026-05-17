@@ -172,10 +172,11 @@ namespace System.Activities.Debugger
                 if (contentStartLocation != null)
                 {
                     DocumentLocation contentEnd = this.FindContentEndBefore(endElementLocation);
-                    this.ContentValueRanges.Add(
-                        endElementLocation,
-                        new DocumentRange(contentStartLocation, contentEnd)
-                    );
+                    this.ContentValueRanges
+                        .Add(
+                            endElementLocation,
+                            new DocumentRange(contentStartLocation, contentEnd)
+                        );
                 }
             }
             else if (this.NodeType == Xml.XmlNodeType.Text)
@@ -215,18 +216,14 @@ namespace System.Activities.Debugger
 
         private DocumentLocation FindStartElementBracket(DocumentLocation elementLocation)
         {
-            return this.characterSpottingTextReader.FindCharacterStrictlyBefore(
-                '<',
-                elementLocation
-            );
+            return this.characterSpottingTextReader
+                .FindCharacterStrictlyBefore('<', elementLocation);
         }
 
         private DocumentLocation FindEndElementBracket(DocumentLocation elementLocation)
         {
-            return this.characterSpottingTextReader.FindCharacterStrictlyAfter(
-                '>',
-                elementLocation
-            );
+            return this.characterSpottingTextReader
+                .FindCharacterStrictlyAfter('>', elementLocation);
         }
 
         private DocumentRange FindEmptyElementRange(DocumentLocation elementLocation)
@@ -251,20 +248,14 @@ namespace System.Activities.Debugger
                 this.characterSpottingTextReader != null,
                 "Ensured by constructor."
             );
-            DocumentLocation attributeStart =
-                this.characterSpottingTextReader.FindCharacterStrictlyAfter(
-                    this.QuoteChar,
-                    memberLocation
-                );
+            DocumentLocation attributeStart = this.characterSpottingTextReader
+                .FindCharacterStrictlyAfter(this.QuoteChar, memberLocation);
             UnitTestUtility.Assert(
                 attributeStart != null,
                 "Read should ensure the two quote characters exists"
             );
-            DocumentLocation attributeEnd =
-                this.characterSpottingTextReader.FindCharacterStrictlyAfter(
-                    this.QuoteChar,
-                    attributeStart
-                );
+            DocumentLocation attributeEnd = this.characterSpottingTextReader
+                .FindCharacterStrictlyAfter(this.QuoteChar, attributeStart);
             UnitTestUtility.Assert(
                 attributeEnd != null,
                 "Read should ensure the two quote characters exists"
@@ -280,10 +271,8 @@ namespace System.Activities.Debugger
             // Line position is 1-based
             if (linePosition < 1)
             {
-                return this.characterSpottingTextReader.FindCharacterStrictlyBefore(
-                    '\n',
-                    contentEnd
-                );
+                return this.characterSpottingTextReader
+                    .FindCharacterStrictlyBefore('\n', contentEnd);
             }
             else
             {

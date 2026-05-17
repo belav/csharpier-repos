@@ -90,8 +90,7 @@ namespace System.Net
                     }
                     else
                     {
-                        asyncResult
-                            .m_RequestContext
+                        asyncResult.m_RequestContext
                             .Reset(asyncResult.m_RequestContext.RequestBlob->RequestId, numBytes);
                     }
 
@@ -168,14 +167,12 @@ namespace System.Net
                 );
                 (AsyncObject as HttpListener).EnsureBoundHandle();
                 uint bytesTransferred = 0;
-                statusCode = UnsafeNclNativeMethods
-                    .HttpApi
+                statusCode = UnsafeNclNativeMethods.HttpApi
                     .HttpReceiveHttpRequest(
                         (AsyncObject as HttpListener).RequestQueueHandle,
                         m_RequestContext.RequestBlob->RequestId,
                         (uint)
-                            UnsafeNclNativeMethods
-                                .HttpApi
+                            UnsafeNclNativeMethods.HttpApi
                                 .HTTP_FLAGS
                                 .HTTP_RECEIVE_REQUEST_FLAG_COPY_BODY,
                         m_RequestContext.RequestBlob,

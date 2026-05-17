@@ -70,8 +70,7 @@ namespace ILCompiler.DependencyAnalysis
                 case ReadyToRunHelperId.GetNonGCStaticBase:
                     {
                         MetadataType target = (MetadataType)Target;
-                        bool hasLazyStaticConstructor = factory
-                            .PreinitializationManager
+                        bool hasLazyStaticConstructor = factory.PreinitializationManager
                             .HasLazyStaticConstructor(target);
                         encoder.EmitLEAQ(
                             encoder.TargetRegister.Result,
@@ -398,8 +397,7 @@ namespace ILCompiler.DependencyAnalysis
                 if (isInitialExecutable)
                 {
                     // mov         rax,qword ptr gs:[58h]
-                    encoder
-                        .Builder
+                    encoder.Builder
                         .EmitBytes(
                             new byte[] { 0x65, 0x48, 0x8B, 0x04, 0x25, 0x58, 0x00, 0x00, 0x00 }
                         );
@@ -415,16 +413,14 @@ namespace ILCompiler.DependencyAnalysis
                 {
                     // mov         ecx,dword ptr [_tls_index]
                     encoder.Builder.EmitBytes(new byte[] { 0x8B, 0x0D });
-                    encoder
-                        .Builder
+                    encoder.Builder
                         .EmitReloc(
                             factory.ExternSymbol("_tls_index"),
                             RelocType.IMAGE_REL_BASED_REL32
                         );
 
                     // mov         rax,qword ptr gs:[58h]
-                    encoder
-                        .Builder
+                    encoder.Builder
                         .EmitBytes(
                             new byte[] { 0x65, 0x48, 0x8B, 0x04, 0x25, 0x58, 0x00, 0x00, 0x00 }
                         );
@@ -451,8 +447,7 @@ namespace ILCompiler.DependencyAnalysis
                 if (isInitialExecutable)
                 {
                     // movq %fs:0x0,%rax
-                    encoder
-                        .Builder
+                    encoder.Builder
                         .EmitBytes(
                             new byte[] { 0x64, 0x48, 0x8B, 0x04, 0x25, 0x00, 0x00, 0x00, 0x00 }
                         );
@@ -469,8 +464,7 @@ namespace ILCompiler.DependencyAnalysis
 
                     // data16 data16 rex.W callq __tls_get_addr@PLT
                     encoder.Builder.EmitBytes(new byte[] { 0x66, 0x66, 0x48, 0xE8 });
-                    encoder
-                        .Builder
+                    encoder.Builder
                         .EmitReloc(
                             factory.ExternSymbol("__tls_get_addr"),
                             RelocType.IMAGE_REL_BASED_REL32

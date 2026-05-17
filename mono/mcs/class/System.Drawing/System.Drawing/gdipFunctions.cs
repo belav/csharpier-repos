@@ -151,8 +151,7 @@ namespace System.Drawing
             }
             catch (TypeInitializationException)
             {
-                Console
-                    .Error
+                Console.Error
                     .WriteLine(
                         "* ERROR: Can not initialize GDI+ library{0}{0}"
                             + "Please check http://www.mono-project.com/Problem:GDIPlusInit for details",

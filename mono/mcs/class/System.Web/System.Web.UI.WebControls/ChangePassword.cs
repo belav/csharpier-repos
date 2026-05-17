@@ -1579,8 +1579,7 @@ namespace System.Web.UI.WebControls
                     );
                 }
                 // Row #0
-                table
-                    .Controls
+                table.Controls
                     .Add(
                         CreateRow(
                             new LiteralControl(_owner.ChangePasswordTitleText),
@@ -1594,8 +1593,7 @@ namespace System.Web.UI.WebControls
                 // Row #1
                 if (_owner.InstructionText.Length > 0)
                 {
-                    table
-                        .Controls
+                    table.Controls
                         .Add(
                             CreateRow(
                                 new LiteralControl(_owner.InstructionText),
@@ -1629,8 +1627,7 @@ namespace System.Web.UI.WebControls
                     UserNameRequired.ValidationGroup = _owner.ID;
                     UserNameRequired.ApplyStyle(_owner.ValidatorTextStyle);
 
-                    table
-                        .Controls
+                    table.Controls
                         .Add(
                             CreateRow(
                                 UserNameLabel,
@@ -1662,8 +1659,7 @@ namespace System.Web.UI.WebControls
                 CurrentPasswordRequired.ValidationGroup = _owner.ID;
                 CurrentPasswordRequired.ApplyStyle(_owner.ValidatorTextStyle);
 
-                table
-                    .Controls
+                table.Controls
                     .Add(
                         CreateRow(
                             CurrentPasswordLabel,
@@ -1694,8 +1690,7 @@ namespace System.Web.UI.WebControls
                 NewPasswordRequired.ValidationGroup = _owner.ID;
                 NewPasswordRequired.ApplyStyle(_owner.ValidatorTextStyle);
 
-                table
-                    .Controls
+                table.Controls
                     .Add(
                         CreateRow(
                             NewPasswordLabel,
@@ -1709,8 +1704,7 @@ namespace System.Web.UI.WebControls
                 // Row #5
                 if (_owner.PasswordHintText.Length > 0)
                 {
-                    table
-                        .Controls
+                    table.Controls
                         .Add(
                             CreateRow(
                                 new LiteralControl(String.Empty),
@@ -1742,8 +1736,7 @@ namespace System.Web.UI.WebControls
                 ConfirmNewPasswordRequired.ValidationGroup = _owner.ID;
                 ConfirmNewPasswordRequired.ApplyStyle(_owner.ValidatorTextStyle);
 
-                table
-                    .Controls
+                table.Controls
                     .Add(
                         CreateRow(
                             ConfirmNewPasswordLabel,
@@ -1773,8 +1766,7 @@ namespace System.Web.UI.WebControls
                 if (_owner.FailureTextStyle.ForeColor.IsEmpty)
                     _owner.FailureTextStyle.ForeColor = System.Drawing.Color.Red;
 
-                table
-                    .Controls
+                table.Controls
                     .Add(CreateRow(FailureTextLiteral, null, null, _owner.FailureTextStyle, null));
 
                 // Row #9
@@ -1819,8 +1811,7 @@ namespace System.Web.UI.WebControls
                 ((IButtonControl)CancelButton).Text = _owner.CancelButtonText;
                 ((IButtonControl)CancelButton).CausesValidation = false;
 
-                table
-                    .Controls
+                table.Controls
                     .Add(
                         CreateRow(
                             ChangePasswordButton,
@@ -1912,8 +1903,7 @@ namespace System.Web.UI.WebControls
                 table.ControlStyle.Height = Unit.Percentage(100);
 
                 // Row #0
-                table
-                    .Controls
+                table.Controls
                     .Add(
                         CreateRow(
                             new LiteralControl(_cPassword.SuccessTitleText),
@@ -1923,8 +1913,7 @@ namespace System.Web.UI.WebControls
                     );
 
                 // Row #1
-                table
-                    .Controls
+                table.Controls
                     .Add(
                         CreateRow(
                             new LiteralControl(_cPassword.SuccessText),

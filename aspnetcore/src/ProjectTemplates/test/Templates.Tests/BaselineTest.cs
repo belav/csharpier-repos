@@ -32,8 +32,7 @@ public class BaselineTest : LoggedTest
         get
         {
             using (
-                var stream = typeof(BaselineTest)
-                    .Assembly
+                var stream = typeof(BaselineTest).Assembly
                     .GetManifestResourceStream(BaselineDefinitionFileResourceName)
             )
             {

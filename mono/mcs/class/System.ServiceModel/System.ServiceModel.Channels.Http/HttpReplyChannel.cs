@@ -57,8 +57,7 @@ namespace System.ServiceModel.Channels.Http
                 {
                     TokenType = SecurityTokenTypes.UserName,
                 };
-                security_token_authenticator = listener
-                    .SecurityTokenManager
+                security_token_authenticator = listener.SecurityTokenManager
                     .CreateSecurityTokenAuthenticator(str, out security_token_resolver);
             }
         }
@@ -161,8 +160,7 @@ namespace System.ServiceModel.Channels.Http
             context = null;
             HttpContextInfo ctxi;
             if (
-                !source
-                    .ListenerManager
+                !source.ListenerManager
                     .TryDequeueRequest(source.ChannelDispatcher, timeout, out ctxi)
             )
                 return false;
@@ -290,13 +288,14 @@ namespace System.ServiceModel.Channels.Http
                     msg.Headers.Action = action;
                 }
             }
-            msg.Properties.Add(
-                RemoteEndpointMessageProperty.Name,
-                new RemoteEndpointMessageProperty(
-                    ctxi.Request.ClientIPAddress,
-                    ctxi.Request.ClientPort
-                )
-            );
+            msg.Properties
+                .Add(
+                    RemoteEndpointMessageProperty.Name,
+                    new RemoteEndpointMessageProperty(
+                        ctxi.Request.ClientIPAddress,
+                        ctxi.Request.ClientPort
+                    )
+                );
 
             return msg;
         }

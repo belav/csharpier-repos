@@ -264,9 +264,10 @@ namespace System.Windows.Forms
         {
             base.OnPaintBackground(e);
 
-            this.Renderer.DrawToolStripContentPanelBackground(
-                new ToolStripContentPanelRenderEventArgs(e.Graphics, this)
-            );
+            this.Renderer
+                .DrawToolStripContentPanelBackground(
+                    new ToolStripContentPanelRenderEventArgs(e.Graphics, this)
+                );
         }
 
         protected virtual void OnRendererChanged(EventArgs e)

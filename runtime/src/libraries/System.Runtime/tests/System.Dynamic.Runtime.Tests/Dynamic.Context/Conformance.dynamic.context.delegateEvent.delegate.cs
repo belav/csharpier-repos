@@ -478,8 +478,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlg
                 string st1 = ary101[0](
                     s_so,
                     s_sd,
-                    ManagedTests
-                        .DynamicCSharp
+                    ManagedTests.DynamicCSharp
                         .Conformance
                         .dynamic
                         .context
@@ -492,8 +491,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlg
                         .item1
                 );
                 if (
-                    ManagedTests
-                        .DynamicCSharp
+                    ManagedTests.DynamicCSharp
                         .Conformance
                         .dynamic
                         .context
@@ -508,8 +506,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlg
                     != s_d001[0](
                         s_so,
                         d,
-                        ManagedTests
-                            .DynamicCSharp
+                        ManagedTests.DynamicCSharp
                             .Conformance
                             .dynamic
                             .context
@@ -527,8 +524,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlg
                 }
 
                 if (
-                    ManagedTests
-                        .DynamicCSharp
+                    ManagedTests.DynamicCSharp
                         .Conformance
                         .dynamic
                         .context
@@ -558,8 +554,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlg
                         foo.M04
                     );
                 st1 = d101(
-                    ManagedTests
-                        .DynamicCSharp
+                    ManagedTests.DynamicCSharp
                         .Conformance
                         .dynamic
                         .context
@@ -574,8 +569,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlg
                     dary
                 );
                 if (
-                    ManagedTests
-                        .DynamicCSharp
+                    ManagedTests.DynamicCSharp
                         .Conformance
                         .dynamic
                         .context
@@ -593,8 +587,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlg
                 }
 
                 st1 = d101(
-                    ManagedTests
-                        .DynamicCSharp
+                    ManagedTests.DynamicCSharp
                         .Conformance
                         .dynamic
                         .context
@@ -609,8 +602,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlg
                     oary
                 );
                 if (
-                    ManagedTests
-                        .DynamicCSharp
+                    ManagedTests.DynamicCSharp
                         .Conformance
                         .dynamic
                         .context
@@ -628,8 +620,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlg
                 }
 
                 st1 = d111(
-                    ManagedTests
-                        .DynamicCSharp
+                    ManagedTests.DynamicCSharp
                         .Conformance
                         .dynamic
                         .context
@@ -644,8 +635,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlg
                     oary
                 );
                 if (
-                    ManagedTests
-                        .DynamicCSharp
+                    ManagedTests.DynamicCSharp
                         .Conformance
                         .dynamic
                         .context
@@ -663,8 +653,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlg
                 }
 
                 st1 = d111(
-                    ManagedTests
-                        .DynamicCSharp
+                    ManagedTests.DynamicCSharp
                         .Conformance
                         .dynamic
                         .context
@@ -679,8 +668,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlg
                     dary
                 );
                 if (
-                    ManagedTests
-                        .DynamicCSharp
+                    ManagedTests.DynamicCSharp
                         .Conformance
                         .dynamic
                         .context
@@ -702,8 +690,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlg
                         foo.M04
                     );
                 st1 = d102(
-                    ManagedTests
-                        .DynamicCSharp
+                    ManagedTests.DynamicCSharp
                         .Conformance
                         .dynamic
                         .context
@@ -718,8 +705,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlg
                     dary
                 );
                 if (
-                    ManagedTests
-                        .DynamicCSharp
+                    ManagedTests.DynamicCSharp
                         .Conformance
                         .dynamic
                         .context
@@ -741,8 +727,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlg
                         foo.M03
                     );
                 st1 = d122(
-                    ManagedTests
-                        .DynamicCSharp
+                    ManagedTests.DynamicCSharp
                         .Conformance
                         .dynamic
                         .context
@@ -757,8 +742,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlg
                     oary
                 );
                 if (
-                    ManagedTests
-                        .DynamicCSharp
+                    ManagedTests.DynamicCSharp
                         .Conformance
                         .dynamic
                         .context

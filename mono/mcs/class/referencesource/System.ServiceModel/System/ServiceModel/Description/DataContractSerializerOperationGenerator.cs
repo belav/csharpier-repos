@@ -115,8 +115,7 @@ namespace System.ServiceModel.Description
                 dataContractFormatAttribute.Style
                 != TypeLoader.DefaultDataContractFormatAttribute.Style
             )
-                context
-                    .SyncMethod
+                context.SyncMethod
                     .CustomAttributes
                     .Add(
                         OperationGenerator.GenerateAttributeDeclaration(
@@ -165,8 +164,7 @@ namespace System.ServiceModel.Description
                         CodeAttributeDeclaration knownTypeAttribute = new CodeAttributeDeclaration(
                             typeof(ServiceKnownTypeAttribute).FullName
                         );
-                        knownTypeAttribute
-                            .Arguments
+                        knownTypeAttribute.Arguments
                             .Add(
                                 new CodeAttributeArgument(
                                     new CodeTypeOfExpression(knownTypeReference)
@@ -196,8 +194,7 @@ namespace System.ServiceModel.Description
                     CodeAttributeDeclaration assemblyCustomAttribute in codeCompileUnit.AssemblyCustomAttributes
                 )
                     if (
-                        !targetCompileUnit
-                            .AssemblyCustomAttributes
+                        !targetCompileUnit.AssemblyCustomAttributes
                             .Contains(assemblyCustomAttribute)
                     )
                         targetCompileUnit.AssemblyCustomAttributes.Add(assemblyCustomAttribute);
@@ -242,8 +239,7 @@ namespace System.ServiceModel.Description
             void ValidateForParameterMode(MessagePartDescription part)
             {
                 if (
-                    dataContractSerializerOperationGenerator
-                        .isNonNillableReferenceTypes
+                    dataContractSerializerOperationGenerator.isNonNillableReferenceTypes
                         .ContainsKey(part)
                 )
                 {
@@ -256,8 +252,7 @@ namespace System.ServiceModel.Description
                     );
                     parameterModeException.MessageContractType =
                         MessageContractType.BareMessageContract;
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(parameterModeException);
                 }
             }
@@ -300,8 +295,7 @@ namespace System.ServiceModel.Description
                         )
                     );
 
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidDataContractException(
                                 String.Format(
@@ -320,8 +314,7 @@ namespace System.ServiceModel.Description
                         nsAttrFound = true;
                         string nsValue = ((CodePrimitiveExpression)attrArg.Value).Value.ToString();
                         if (nsValue != part.Namespace)
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
                                     new InvalidOperationException(
                                         SR.GetString(
@@ -333,8 +326,7 @@ namespace System.ServiceModel.Description
                     }
                 }
                 if (!nsAttrFound)
-                    dataContractAttributeDecl
-                        .Arguments
+                    dataContractAttributeDecl.Arguments
                         .Add(
                             new CodeAttributeArgument(
                                 "Namespace",
@@ -357,8 +349,7 @@ namespace System.ServiceModel.Description
             {
                 if (dataContractSerializerOperationGenerator.isNonNillableReferenceTypes == null)
                     return false;
-                return dataContractSerializerOperationGenerator
-                    .isNonNillableReferenceTypes
+                return dataContractSerializerOperationGenerator.isNonNillableReferenceTypes
                     .ContainsKey(part);
             }
 

@@ -277,8 +277,7 @@ namespace System.IO.Compression
 
                 fixed (ZStream* stream = &_zStream)
                 {
-                    ErrorCode errC = Interop
-                        .ZLib
+                    ErrorCode errC = Interop.ZLib
                         .DeflateInit2_(
                             stream,
                             level,

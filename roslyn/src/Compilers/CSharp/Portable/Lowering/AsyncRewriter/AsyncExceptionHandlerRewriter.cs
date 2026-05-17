@@ -526,18 +526,19 @@ namespace Microsoft.CodeAnalysis.CSharp
             var origAwaitCatchFrame = _currentAwaitCatchFrame;
             _currentAwaitCatchFrame = null;
 
-            var rewrittenCatches = node.CatchBlocks.SelectAsArray(
-                static (catchBlock, arg) =>
-                {
-                    var (@this, origAwaitCatchFrame) = arg;
-                    return (BoundCatchBlock)
-                        @this.VisitCatchBlock(
-                            catchBlock,
-                            parentAwaitCatchFrame: origAwaitCatchFrame
-                        );
-                },
-                (this, origAwaitCatchFrame)
-            );
+            var rewrittenCatches = node.CatchBlocks
+                .SelectAsArray(
+                    static (catchBlock, arg) =>
+                    {
+                        var (@this, origAwaitCatchFrame) = arg;
+                        return (BoundCatchBlock)
+                            @this.VisitCatchBlock(
+                                catchBlock,
+                                parentAwaitCatchFrame: origAwaitCatchFrame
+                            );
+                    },
+                    (this, origAwaitCatchFrame)
+                );
 
             BoundStatement tryWithCatches = _F.Try(rewrittenTry, rewrittenCatches);
 
@@ -1166,8 +1167,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             public void HoistLocal(LocalSymbol local, SyntheticBoundNodeFactory F)
             {
                 if (
-                    !_hoistedLocals
-                        .Keys
+                    !_hoistedLocals.Keys
                         .Any(l =>
                             l.Name == local.Name
                             && TypeSymbol.Equals(

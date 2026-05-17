@@ -147,8 +147,7 @@ namespace System.Data.Common.CommandTrees.Internal
                 if (!TypeSemantics.IsEqual(varRef.ResultType, foundType))
                 {
                     ThrowInvalid(
-                        System
-                            .Data
+                        System.Data
                             .Entity
                             .Strings
                             .Cqt_Validator_VarRefTypeMismatch(varRef.VariableName)

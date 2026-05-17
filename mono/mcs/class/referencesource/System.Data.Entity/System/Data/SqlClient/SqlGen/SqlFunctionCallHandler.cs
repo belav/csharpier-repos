@@ -1591,8 +1591,7 @@ namespace System.Data.SqlClient.SqlGen
             if (null == constExpr)
             {
                 throw EntityUtil.InvalidOperation(
-                    System
-                        .Data
+                    System.Data
                         .Entity
                         .Strings
                         .SqlGen_InvalidDatePartArgumentExpression(
@@ -1606,8 +1605,7 @@ namespace System.Data.SqlClient.SqlGen
             if (null == datepart)
             {
                 throw EntityUtil.InvalidOperation(
-                    System
-                        .Data
+                    System.Data
                         .Entity
                         .Strings
                         .SqlGen_InvalidDatePartArgumentExpression(
@@ -1625,8 +1623,7 @@ namespace System.Data.SqlClient.SqlGen
             if (!_datepartKeywords.Contains(datepart))
             {
                 throw EntityUtil.InvalidOperation(
-                    System
-                        .Data
+                    System.Data
                         .Entity
                         .Strings
                         .SqlGen_InvalidDatePartArgumentValue(
@@ -2675,8 +2672,7 @@ namespace System.Data.SqlClient.SqlGen
 
             for (int i = 0; i < e.Arguments.Count; i++)
             {
-                TypeUsage storeType = sqlgen
-                    .StoreItemCollection
+                TypeUsage storeType = sqlgen.StoreItemCollection
                     .StoreProviderManifest
                     .GetStoreType(e.Arguments[i].ResultType);
                 if (_maxTypeNames.Contains(storeType.EdmType.Name))

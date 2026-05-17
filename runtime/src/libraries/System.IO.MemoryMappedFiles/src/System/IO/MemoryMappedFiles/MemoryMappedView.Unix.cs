@@ -107,8 +107,7 @@ namespace System.IO.MemoryMappedFiles
             IntPtr addr;
             if (nativeSize > 0)
             {
-                addr = Interop
-                    .Sys
+                addr = Interop.Sys
                     .MMap(
                         IntPtr.Zero, // don't specify an address; let the system choose one
                         nativeSize, // specify the rounded-size we computed so as to page align; size + extraMemNeeded
@@ -125,8 +124,7 @@ namespace System.IO.MemoryMappedFiles
                 // we create a map that extends beyond the end of the underlying file, as that'll fail on some platforms at the
                 // time of the map's creation.  Instead, since there's no data to be read/written, it doesn't actually matter
                 // what backs the view, so we just create an anonymous mapping.
-                addr = Interop
-                    .Sys
+                addr = Interop.Sys
                     .MMap(
                         IntPtr.Zero,
                         1, // any length that's greater than zero will suffice
@@ -170,8 +168,7 @@ namespace System.IO.MemoryMappedFiles
             try
             {
                 _viewHandle.AcquirePointer(ref ptr);
-                int result = Interop
-                    .Sys
+                int result = Interop.Sys
                     .MSync(
                         (IntPtr)ptr,
                         (ulong)capacity,

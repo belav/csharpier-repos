@@ -466,12 +466,8 @@ function ValidatorOnSubmit() {
                 if (!page.IsPartialRenderingSupported)
                 {
                     // Fall back to ASP.NET 2.0 behavior
-                    page.ClientScript.RegisterExpandoAttribute(
-                        controlId,
-                        attributeName,
-                        attributeValue,
-                        encode
-                    );
+                    page.ClientScript
+                        .RegisterExpandoAttribute(controlId, attributeName, attributeValue, encode);
                 }
                 else
                 {
@@ -707,32 +703,33 @@ function ValidatorOnSubmit() {
             if (!Page.IsPartialRenderingSupported)
             {
                 if (
-                    Page.ClientScript.IsClientScriptBlockRegistered(
-                        typeof(BaseValidator),
-                        ValidatorIncludeScriptKey
-                    )
+                    Page.ClientScript
+                        .IsClientScriptBlockRegistered(
+                            typeof(BaseValidator),
+                            ValidatorIncludeScriptKey
+                        )
                 )
                 {
                     return;
                 }
 
-                Page.ClientScript.RegisterClientScriptResource(
-                    typeof(BaseValidator),
-                    ValidatorFileName
-                );
-                Page.ClientScript.RegisterOnSubmitStatement(
-                    typeof(BaseValidator),
-                    onSubmitScriptKey,
-                    onSubmitScript
-                );
+                Page.ClientScript
+                    .RegisterClientScriptResource(typeof(BaseValidator), ValidatorFileName);
+                Page.ClientScript
+                    .RegisterOnSubmitStatement(
+                        typeof(BaseValidator),
+                        onSubmitScriptKey,
+                        onSubmitScript
+                    );
                 if (!IsUnobtrusive)
                 {
-                    Page.ClientScript.RegisterStartupScript(
-                        typeof(BaseValidator),
-                        ValidatorIncludeScriptKey,
-                        ValidatorStartupScript,
-                        addScriptTags: true
-                    );
+                    Page.ClientScript
+                        .RegisterStartupScript(
+                            typeof(BaseValidator),
+                            ValidatorIncludeScriptKey,
+                            ValidatorStartupScript,
+                            addScriptTags: true
+                        );
                 }
             }
             else

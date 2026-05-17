@@ -75,8 +75,7 @@ namespace Microsoft.CodeAnalysis.PdbSourceDocument
             // Only the top most containing type in the ExportedType table actually points to an assembly
             // so no point looking for nested types.
             var typeSymbol = MetadataAsSourceHelpers.GetTopLevelContainingNamedType(symbol);
-            var namespaceName = typeSymbol
-                .ContainingNamespace
+            var namespaceName = typeSymbol.ContainingNamespace
                 .ToDisplayString(s_metadataSymbolDisplayFormat);
 
             try

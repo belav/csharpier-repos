@@ -37,8 +37,7 @@ namespace System.Security.Cryptography.X509Certificates
 
         public string NormalizeOid(string maybeOid, OidGroup expectedGroup)
         {
-            string? oidValue = Interop
-                .Crypt32
+            string? oidValue = Interop.Crypt32
                 .FindOidInfo(
                     Interop.Crypt32.CryptOidInfoKeyType.CRYPT_OID_INFO_NAME_KEY,
                     maybeOid,
@@ -130,8 +129,7 @@ namespace System.Security.Cryptography.X509Certificates
                 {
                     // FindCore owns the lifetime of the CERT_CONTEXT and doesn't escape, so it can't be disposed of
                     // by another thread.
-                    ReadOnlySpan<byte> actual = pCertContext
-                        .DangerousCertContext
+                    ReadOnlySpan<byte> actual = pCertContext.DangerousCertContext
                         ->pCertInfo
                         ->SerialNumber
                         .DangerousAsSpan();
@@ -162,8 +160,7 @@ namespace System.Security.Cryptography.X509Certificates
                 (fileTime, compareResult),
                 static (state, pCertContext) =>
                 {
-                    int comparison = Interop
-                        .Crypt32
+                    int comparison = Interop.Crypt32
                         .CertVerifyTimeValidity(
                             ref state.fileTime,
                             pCertContext.DangerousCertContext->pCertInfo
@@ -201,8 +198,7 @@ namespace System.Security.Cryptography.X509Certificates
                 string? actual = Marshal.PtrToStringAnsi(pTemplateExt->pszObjId);
 
                 string expectedOidValue =
-                    Interop
-                        .Crypt32
+                    Interop.Crypt32
                         .FindOidInfo(
                             Interop.Crypt32.CryptOidInfoKeyType.CRYPT_OID_INFO_NAME_KEY,
                             templateName,
@@ -226,11 +222,9 @@ namespace System.Security.Cryptography.X509Certificates
                     // FindCore owns the lifetime of the CERT_CONTEXT and doesn't escape, so it can't be disposed of
                     // by another thread.
                     bool foundMatch = false;
-                    Interop.Crypt32.CERT_INFO* pCertInfo = pCertContext
-                        .DangerousCertContext
+                    Interop.Crypt32.CERT_INFO* pCertInfo = pCertContext.DangerousCertContext
                         ->pCertInfo;
-                    Interop.Crypt32.CERT_EXTENSION* pV1Template = Interop
-                        .Crypt32
+                    Interop.Crypt32.CERT_EXTENSION* pV1Template = Interop.Crypt32
                         .CertFindExtension(
                             Oids.EnrollCertTypeExtension,
                             pCertInfo->cExtension,
@@ -256,8 +250,7 @@ namespace System.Security.Cryptography.X509Certificates
 
                     if (!foundMatch)
                     {
-                        Interop.Crypt32.CERT_EXTENSION* pV2Template = Interop
-                            .Crypt32
+                        Interop.Crypt32.CERT_EXTENSION* pV2Template = Interop.Crypt32
                             .CertFindExtension(
                                 Oids.CertificateTemplate,
                                 pCertInfo->cExtension,
@@ -266,8 +259,7 @@ namespace System.Security.Cryptography.X509Certificates
 
                         if (pV2Template != null)
                         {
-                            ReadOnlySpan<byte> extensionRawData = pV2Template
-                                ->Value
+                            ReadOnlySpan<byte> extensionRawData = pV2Template->Value
                                 .DangerousAsSpan();
 
                             if (
@@ -299,8 +291,7 @@ namespace System.Security.Cryptography.X509Certificates
                     int numOids;
                     int cbData = 0;
                     if (
-                        !Interop
-                            .Crypt32
+                        !Interop.Crypt32
                             .CertGetValidUsages(1, ref pCertContext, out numOids, null, ref cbData)
                     )
                     {
@@ -316,8 +307,7 @@ namespace System.Security.Cryptography.X509Certificates
                     fixed (byte* pOidsPointer = new byte[cbData])
                     {
                         if (
-                            !Interop
-                                .Crypt32
+                            !Interop.Crypt32
                                 .CertGetValidUsages(
                                     1,
                                     ref pCertContext,
@@ -372,11 +362,9 @@ namespace System.Security.Cryptography.X509Certificates
                 oidValue,
                 static (oidValue, pCertContext) =>
                 {
-                    Interop.Crypt32.CERT_INFO* pCertInfo = pCertContext
-                        .DangerousCertContext
+                    Interop.Crypt32.CERT_INFO* pCertInfo = pCertContext.DangerousCertContext
                         ->pCertInfo;
-                    Interop.Crypt32.CERT_EXTENSION* pCertExtension = Interop
-                        .Crypt32
+                    Interop.Crypt32.CERT_EXTENSION* pCertExtension = Interop.Crypt32
                         .CertFindExtension(
                             Oids.CertPolicies,
                             pCertInfo->cExtension,
@@ -415,11 +403,9 @@ namespace System.Security.Cryptography.X509Certificates
                 oidValue,
                 static (oidValue, pCertContext) =>
                 {
-                    Interop.Crypt32.CERT_INFO* pCertInfo = pCertContext
-                        .DangerousCertContext
+                    Interop.Crypt32.CERT_INFO* pCertInfo = pCertContext.DangerousCertContext
                         ->pCertInfo;
-                    Interop.Crypt32.CERT_EXTENSION* pCertExtension = Interop
-                        .Crypt32
+                    Interop.Crypt32.CERT_EXTENSION* pCertExtension = Interop.Crypt32
                         .CertFindExtension(oidValue, pCertInfo->cExtension, pCertInfo->rgExtension);
                     GC.KeepAlive(pCertContext);
                     return pCertExtension != null;
@@ -433,14 +419,12 @@ namespace System.Security.Cryptography.X509Certificates
                 keyUsage,
                 static (keyUsage, pCertContext) =>
                 {
-                    Interop.Crypt32.CERT_INFO* pCertInfo = pCertContext
-                        .DangerousCertContext
+                    Interop.Crypt32.CERT_INFO* pCertInfo = pCertContext.DangerousCertContext
                         ->pCertInfo;
                     X509KeyUsageFlags actual;
 
                     if (
-                        !Interop
-                            .crypt32
+                        !Interop.crypt32
                             .CertGetIntendedKeyUsage(
                                 Interop.Crypt32.CertEncodingType.All,
                                 pCertInfo,
@@ -469,8 +453,7 @@ namespace System.Security.Cryptography.X509Certificates
                         int cbData = 0;
 
                         if (
-                            !Interop
-                                .Crypt32
+                            !Interop.Crypt32
                                 .CertGetCertificateContextPropertyPtr(
                                     pCertContext,
                                     Interop.Crypt32.CertContextPropId.CERT_KEY_IDENTIFIER_PROP_ID,
@@ -494,12 +477,10 @@ namespace System.Security.Cryptography.X509Certificates
                         fixed (byte* pActual = actual)
                         {
                             if (
-                                !Interop
-                                    .Crypt32
+                                !Interop.Crypt32
                                     .CertGetCertificateContextPropertyPtr(
                                         pCertContext,
-                                        Interop
-                                            .Crypt32
+                                        Interop.Crypt32
                                             .CertContextPropId
                                             .CERT_KEY_IDENTIFIER_PROP_ID,
                                         pActual,
@@ -537,8 +518,7 @@ namespace System.Security.Cryptography.X509Certificates
             Func<TState, SafeCertContextHandle, bool>? filter = null
         )
         {
-            SafeCertStoreHandle findResults = Interop
-                .crypt32
+            SafeCertStoreHandle findResults = Interop.crypt32
                 .CertOpenStore(
                     CertStoreProvider.CERT_STORE_PROV_MEMORY,
                     Interop.Crypt32.CertEncodingType.All,
@@ -558,8 +538,7 @@ namespace System.Security.Cryptography.X509Certificates
             SafeCertContextHandle? pCertContext = null;
 
             while (
-                Interop
-                    .crypt32
+                Interop.crypt32
                     .CertFindCertificateInStore(
                         _storePal.SafeCertStoreHandle,
                         dwFindType,
@@ -582,8 +561,7 @@ namespace System.Security.Cryptography.X509Certificates
                 }
 
                 if (
-                    !Interop
-                        .Crypt32
+                    !Interop.Crypt32
                         .CertAddCertificateLinkToStore(
                             findResults,
                             pCertContext,
@@ -651,8 +629,7 @@ namespace System.Security.Cryptography.X509Certificates
         )
         {
             Debug.Assert(dwNameType != Interop.Crypt32.CertNameType.CERT_NAME_ATTR_TYPE);
-            return Interop
-                .crypt32
+            return Interop.crypt32
                 .CertGetNameString(
                     pCertContext,
                     dwNameType,

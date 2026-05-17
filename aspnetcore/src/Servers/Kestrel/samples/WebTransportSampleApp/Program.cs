@@ -9,8 +9,7 @@ using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 
 var builder = WebApplication.CreateBuilder(args);
-builder
-    .WebHost
+builder.WebHost
     .ConfigureKestrel(
         (context, options) =>
         {
@@ -44,8 +43,7 @@ host.Run(
 
         //// READ FROM A STREAM:
         var memory = new Memory<byte>(new byte[4096]);
-        var test = await stream
-            .Transport
+        var test = await stream.Transport
             .Input
             .AsStream()
             .ReadAsync(memory, CancellationToken.None);
@@ -82,19 +80,19 @@ static X509Certificate2 GenerateManualCertificate()
         using var ec = ECDsa.Create(ECCurve.NamedCurves.nistP256);
         CertificateRequest req = new("CN=localhost", ec, HashAlgorithmName.SHA256);
         // Adds purpose
-        req.CertificateExtensions.Add(
-            new X509EnhancedKeyUsageExtension(
-                new OidCollection
-                {
-                    new("1.3.6.1.5.5.7.3.1"), // serverAuth
-                },
-                false
-            )
-        );
+        req.CertificateExtensions
+            .Add(
+                new X509EnhancedKeyUsageExtension(
+                    new OidCollection
+                    {
+                        new("1.3.6.1.5.5.7.3.1"), // serverAuth
+                    },
+                    false
+                )
+            );
         // Adds usage
-        req.CertificateExtensions.Add(
-            new X509KeyUsageExtension(X509KeyUsageFlags.DigitalSignature, false)
-        );
+        req.CertificateExtensions
+            .Add(new X509KeyUsageExtension(X509KeyUsageFlags.DigitalSignature, false));
         // Adds subject alternate names
         req.CertificateExtensions.Add(sanBuilder.Build());
         // Sign

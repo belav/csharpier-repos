@@ -35,8 +35,7 @@ internal static class Utils
 
     public static string GetEmbeddedResource(string file)
     {
-        using Stream stream = typeof(Utils)
-            .Assembly
+        using Stream stream = typeof(Utils).Assembly
             .GetManifestResourceStream(
                 $"{typeof(Utils).Assembly.GetName().Name}.Templates.{file}"
             )!;

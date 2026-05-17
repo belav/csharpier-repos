@@ -56,8 +56,7 @@ namespace System.ServiceModel.Description
             get
             {
                 foreach (
-                    IWsdlExportExtension extension in contract
-                        .Behaviors
+                    IWsdlExportExtension extension in contract.Behaviors
                         .FindAll<IWsdlExportExtension>()
                 )
                 {
@@ -74,8 +73,7 @@ namespace System.ServiceModel.Description
                     // In 3.0SP1, the DCSOB and XSOB were moved from before to after the custom behaviors.  For
                     // IWsdlExportExtension compat, run them in the pre-SP1 order.
                     // TEF QFE 367607
-                    Collection<IWsdlExportExtension> extensions = operation
-                        .Behaviors
+                    Collection<IWsdlExportExtension> extensions = operation.Behaviors
                         .FindAll<IWsdlExportExtension>();
                     for (int i = 0; i < extensions.Count; )
                     {
@@ -173,8 +171,7 @@ namespace System.ServiceModel.Description
             if (!this.operationBindings.TryGetValue(operation, out bindings))
             {
                 bindings = new Collection<WsdlNS.OperationBinding>();
-                WsdlNS.ServiceDescriptionCollection wsdlDocuments = WsdlPortType
-                    .ServiceDescription
+                WsdlNS.ServiceDescriptionCollection wsdlDocuments = WsdlPortType.ServiceDescription
                     .ServiceDescriptions;
                 foreach (WsdlNS.ServiceDescription wsdl in wsdlDocuments)
                 {
@@ -191,8 +188,7 @@ namespace System.ServiceModel.Description
                             )
                             {
                                 if (
-                                    WsdlImporter
-                                        .Binding2DescriptionHelper
+                                    WsdlImporter.Binding2DescriptionHelper
                                         .Match(operationBinding, operation)
                                     != WsdlImporter.Binding2DescriptionHelper.MatchResult.None
                                 )

@@ -442,8 +442,7 @@ public class ForeignKeyTest
         foreignKey1.SetDependentToPrincipal(OneToManyDependent.DeceptionProperty);
 
         var newFkProp = foreignKey1.DeclaringEntityType.AddProperty("FkProp", typeof(int));
-        var foreignKey2 = foreignKey1
-            .DeclaringEntityType
+        var foreignKey2 = foreignKey1.DeclaringEntityType
             .AddForeignKey(
                 new[] { newFkProp },
                 foreignKey1.PrincipalEntityType.FindPrimaryKey(),
@@ -472,8 +471,7 @@ public class ForeignKeyTest
         foreignKey1.SetDependentToPrincipal(OneToManyDependent.DeceptionProperty);
 
         var newFkProp = foreignKey1.DeclaringEntityType.AddProperty("FkProp", typeof(int));
-        var foreignKey2 = foreignKey1
-            .DeclaringEntityType
+        var foreignKey2 = foreignKey1.DeclaringEntityType
             .AddForeignKey(
                 new[] { newFkProp },
                 foreignKey1.PrincipalEntityType.FindPrimaryKey(),

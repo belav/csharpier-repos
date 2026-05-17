@@ -150,8 +150,7 @@ namespace System.Web.Razor.Test
             string src = "Baz";
 
             // Act
-            mockEngine
-                .Object
+            mockEngine.Object
                 .GenerateCode(
                     reader,
                     className: className,

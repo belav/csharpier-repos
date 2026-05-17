@@ -33,27 +33,29 @@ namespace System.Threading.Tasks.Tests
             for (int i = 0; i < taskCount; i++)
             {
                 int iCopy = 2 * i;
-                Task t1 = Task.Factory.StartNew(
-                    () =>
-                    {
-                        tmIDs[iCopy] = TaskScheduler.Current.Id;
-                    },
-                    CancellationToken.None,
-                    TaskCreationOptions.None,
-                    TaskScheduler.Default
-                );
+                Task t1 = Task.Factory
+                    .StartNew(
+                        () =>
+                        {
+                            tmIDs[iCopy] = TaskScheduler.Current.Id;
+                        },
+                        CancellationToken.None,
+                        TaskCreationOptions.None,
+                        TaskScheduler.Default
+                    );
                 taskIDs[iCopy] = t1.Id;
                 t1.Wait();
 
-                Task t2 = Task.Factory.StartNew(
-                    () =>
-                    {
-                        tmIDs[iCopy + 1] = TaskScheduler.Current.Id;
-                    },
-                    CancellationToken.None,
-                    TaskCreationOptions.None,
-                    TaskScheduler.Default
-                );
+                Task t2 = Task.Factory
+                    .StartNew(
+                        () =>
+                        {
+                            tmIDs[iCopy + 1] = TaskScheduler.Current.Id;
+                        },
+                        CancellationToken.None,
+                        TaskCreationOptions.None,
+                        TaskScheduler.Default
+                    );
                 taskIDs[iCopy + 1] = t2.Id;
                 t2.Wait();
             }

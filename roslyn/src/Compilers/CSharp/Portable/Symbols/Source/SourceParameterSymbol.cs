@@ -169,8 +169,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 this.ContainingAssembly
             );
 
-            TypeWithAnnotations newTypeWithModifiers =
-                this.TypeWithAnnotations.WithTypeAndModifiers(newType, newCustomModifiers);
+            TypeWithAnnotations newTypeWithModifiers = this.TypeWithAnnotations
+                .WithTypeAndModifiers(newType, newCustomModifiers);
 
             if (newRefCustomModifiers.IsEmpty)
             {

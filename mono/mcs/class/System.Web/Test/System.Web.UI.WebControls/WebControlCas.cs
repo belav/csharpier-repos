@@ -71,9 +71,8 @@ namespace MonoCasTests.System.Web.UI.WebControls
             AspNetHostingPermissionLevel level
         )
         {
-            ConstructorInfo ci = this.Type.GetConstructor(
-                new Type[1] { typeof(HtmlTextWriterTag) }
-            );
+            ConstructorInfo ci = this.Type
+                .GetConstructor(new Type[1] { typeof(HtmlTextWriterTag) });
             Assert.IsNotNull(ci, ".ctor(HtmlTextWriterTag)");
             return ci.Invoke(new object[1] { HtmlTextWriterTag.A });
         }

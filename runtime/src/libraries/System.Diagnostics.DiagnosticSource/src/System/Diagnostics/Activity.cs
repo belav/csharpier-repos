@@ -398,8 +398,7 @@ namespace System.Diagnostics
                         if (activity._baggage != null)
                         {
                             for (
-                                DiagNode<KeyValuePair<string, string?>>? current = activity
-                                    ._baggage
+                                DiagNode<KeyValuePair<string, string?>>? current = activity._baggage
                                     .First;
                                 current != null;
                                 current = current.Next

@@ -12,11 +12,9 @@ public class StartupWithJsonFormatter
         services
             .AddMvc(options =>
             {
-                options
-                    .ModelMetadataDetailsProviders
+                options.ModelMetadataDetailsProviders
                     .Add(new SuppressChildValidationMetadataProvider(typeof(Developer)));
-                options
-                    .ModelMetadataDetailsProviders
+                options.ModelMetadataDetailsProviders
                     .Add(new SuppressChildValidationMetadataProvider(typeof(Supplier)));
             })
             .AddXmlDataContractSerializerFormatters();

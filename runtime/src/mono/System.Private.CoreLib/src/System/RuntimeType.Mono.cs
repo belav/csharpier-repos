@@ -1059,8 +1059,7 @@ namespace System
             }
 
             if ((bindingAttr & BindingFlags.ExactBinding) != 0)
-                return System
-                    .DefaultBinder
+                return System.DefaultBinder
                     .ExactPropertyBinding(candidates.ToArray(), returnType, types);
 
             binder ??= DefaultBinder;
@@ -1756,8 +1755,7 @@ namespace System
                     instantiation = instantiationCopy;
                     if (!RuntimeFeature.IsDynamicCodeSupported)
                         throw new PlatformNotSupportedException();
-                    return System
-                        .Reflection
+                    return System.Reflection
                         .Emit
                         .TypeBuilderInstantiation
                         .MakeGenericType(this, instantiation);
@@ -2165,10 +2163,11 @@ namespace System
                 throw new MissingMethodException(SR.Format(SR.Acc_CreateAbstEx, this));
             }
 
-            return ctor.Invoker.InvokeWithNoArgs(
-                obj: null,
-                wrapExceptions ? BindingFlags.Default : BindingFlags.DoNotWrapExceptions
-            );
+            return ctor.Invoker
+                .InvokeWithNoArgs(
+                    obj: null,
+                    wrapExceptions ? BindingFlags.Default : BindingFlags.DoNotWrapExceptions
+                );
         }
 
         // FIXME Reuse with coreclr

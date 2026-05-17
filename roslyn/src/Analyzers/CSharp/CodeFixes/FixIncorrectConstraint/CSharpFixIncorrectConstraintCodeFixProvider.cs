@@ -99,8 +99,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.FixIncorrectConstraint
         )
         {
             var generator = SyntaxGenerator.GetGenerator(document);
-            var compilation = await document
-                .Project
+            var compilation = await document.Project
                 .GetRequiredCompilationAsync(cancellationToken)
                 .ConfigureAwait(false);
 
@@ -140,8 +139,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.FixIncorrectConstraint
                             {
                                 var clause = (TypeParameterConstraintClauseSyntax)parent;
                                 return clause.WithConstraints(
-                                    clause
-                                        .Constraints
+                                    clause.Constraints
                                         .Insert(
                                             0,
                                             SyntaxFactory.ClassOrStructConstraint(

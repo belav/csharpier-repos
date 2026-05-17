@@ -167,8 +167,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             if (_lazyDirectives.IsNull)
             {
-                InternalSyntax
-                    .DirectiveStack
+                InternalSyntax.DirectiveStack
                     .InterlockedInitialize(
                         ref _lazyDirectives,
                         GetRoot().CsGreen.ApplyDirectives(InternalSyntax.DirectiveStack.Empty)

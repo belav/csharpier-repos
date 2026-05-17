@@ -34,8 +34,7 @@ namespace System.IdentityModel
             }
             else
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new CryptographicException(SR.GetString(SR.UnsupportedTransformAlgorithm))
                     );

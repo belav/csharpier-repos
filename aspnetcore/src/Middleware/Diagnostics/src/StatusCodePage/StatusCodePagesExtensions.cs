@@ -117,8 +117,7 @@ public static class StatusCodePagesExtensions
                     locationFormat,
                     context.HttpContext.Response.StatusCode
                 );
-                context
-                    .HttpContext
+                context.HttpContext
                     .Response
                     .Redirect(context.HttpContext.Request.PathBase + location);
                 return Task.CompletedTask;
@@ -225,8 +224,7 @@ public static class StatusCodePagesExtensions
             var routeValuesFeature = context.HttpContext.Features.Get<IRouteValuesFeature>();
 
             // Store the original paths so the app can check it.
-            context
-                .HttpContext
+            context.HttpContext
                 .Features
                 .Set<IStatusCodeReExecuteFeature>(
                     new StatusCodeReExecuteFeature()

@@ -168,8 +168,7 @@ namespace Microsoft.Extensions.Logging.Generators
                                     foreach (AttributeData attributeData in boundAttributes)
                                     {
                                         if (
-                                            !SymbolEqualityComparer
-                                                .Default
+                                            !SymbolEqualityComparer.Default
                                                 .Equals(
                                                     attributeData.AttributeClass,
                                                     loggerMessageAttribute
@@ -530,8 +529,7 @@ namespace Microsoft.Extensions.Logging.Generators
                                         }
 
                                         string typeName = paramTypeSymbol.ToDisplayString(
-                                            SymbolDisplayFormat
-                                                .FullyQualifiedFormat
+                                            SymbolDisplayFormat.FullyQualifiedFormat
                                                 .WithMiscellaneousOptions(
                                                     SymbolDisplayMiscellaneousOptions.IncludeNullableReferenceTypeModifier
                                                 )
@@ -708,14 +706,16 @@ namespace Microsoft.Extensions.Logging.Generators
                                             foreach (LoggerParameter p in lm.AllParameters)
                                             {
                                                 if (
-                                                    t.Key.Equals(
-                                                        p.Name,
-                                                        StringComparison.OrdinalIgnoreCase
-                                                    )
-                                                    || t.Key.Equals(
-                                                        p.CodeName,
-                                                        StringComparison.OrdinalIgnoreCase
-                                                    )
+                                                    t.Key
+                                                        .Equals(
+                                                            p.Name,
+                                                            StringComparison.OrdinalIgnoreCase
+                                                        )
+                                                    || t.Key
+                                                        .Equals(
+                                                            p.CodeName,
+                                                            StringComparison.OrdinalIgnoreCase
+                                                        )
                                                     || t.Key[0] == '@'
                                                         && t.Key
                                                             .Substring(1)

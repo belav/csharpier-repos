@@ -128,8 +128,7 @@ namespace System.ComponentModel.Composition.ReflectionModel
             );
 
             Assert.False(
-                exportDefinition
-                    .Metadata
+                exportDefinition.Metadata
                     .ContainsKey(CompositionConstants.PartCreationPolicyMetadataName)
             );
         }

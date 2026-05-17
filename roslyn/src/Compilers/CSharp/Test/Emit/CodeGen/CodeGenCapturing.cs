@@ -57,8 +57,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.CodeGen
                 var fields = VariablesByScope[0];
                 var newCtx = new CaptureContext();
                 newCtx.VariablesByScope.Add(fields);
-                newCtx
-                    .VariablesByScope
+                newCtx.VariablesByScope
                     .AddRange(
                         this.VariablesByScope
                             .Skip(1)
@@ -344,9 +343,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.CodeGen
                     var expr = MakeCaptureExpression(captureCombo, copy.CaptureContext);
                     if (depth >= copy.LocalFuncs.Count)
                     {
-                        copy.LocalFuncs.AddRange(
-                            Enumerable.Repeat<List<string>>(null, depth - copy.LocalFuncs.Count)
-                        );
+                        copy.LocalFuncs
+                            .AddRange(
+                                Enumerable.Repeat<List<string>>(null, depth - copy.LocalFuncs.Count)
+                            );
                         copy.LocalFuncs.Insert(depth, new List<string>());
                     }
                     string localFuncName = $"Local_{localFuncNameIndex}";

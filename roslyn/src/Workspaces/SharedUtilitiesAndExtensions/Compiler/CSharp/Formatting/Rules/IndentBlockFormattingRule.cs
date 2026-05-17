@@ -109,8 +109,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                 // Only one of these values can be true at this point.
                 Debug.Assert(
                     _options.Indentation.HasFlag(IndentationPlacement.SwitchCaseContents)
-                        != _options
-                            .Indentation
+                        != _options.Indentation
                             .HasFlag(IndentationPlacement.SwitchCaseContentsWhenBlock)
                 );
 

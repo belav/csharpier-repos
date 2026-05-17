@@ -339,8 +339,7 @@ namespace System.ServiceModel.Security
                 ) && (!this.orderTracker.AllSignaturesEncrypted)
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new MessageSecurityException(
                             SR.GetString(SR.PrimarySignatureIsRequiredToBeEncrypted)
@@ -595,8 +594,7 @@ namespace System.ServiceModel.Security
         )
         {
             if (outOfBandResolvers == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("outOfBandResolvers");
             if (outOfBandResolvers.Count == 0)
             {
@@ -730,8 +728,7 @@ namespace System.ServiceModel.Security
                 if (spec.IsTokenOptional)
                     return;
                 else
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperWarning(
                             new MessageSecurityException(
                                 SR.GetString(
@@ -747,8 +744,7 @@ namespace System.ServiceModel.Security
                 case SecurityTokenAttachmentMode.Endorsing:
                     if (!tracker.IsEndorsing)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperWarning(
                                 new MessageSecurityException(
                                     SR.GetString(
@@ -765,8 +761,7 @@ namespace System.ServiceModel.Security
                         && !tracker.IsDerivedFrom
                     )
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperWarning(
                                 new MessageSecurityException(
                                     SR.GetString(
@@ -781,8 +776,7 @@ namespace System.ServiceModel.Security
                 case SecurityTokenAttachmentMode.Signed:
                     if (!tracker.IsSigned && this.RequireMessageProtection)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperWarning(
                                 new MessageSecurityException(
                                     SR.GetString(
@@ -797,8 +791,7 @@ namespace System.ServiceModel.Security
                 case SecurityTokenAttachmentMode.SignedEncrypted:
                     if (!tracker.IsSigned && this.RequireMessageProtection)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperWarning(
                                 new MessageSecurityException(
                                     SR.GetString(
@@ -810,8 +803,7 @@ namespace System.ServiceModel.Security
                     }
                     if (!tracker.IsEncrypted && this.RequireMessageProtection)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperWarning(
                                 new MessageSecurityException(
                                     SR.GetString(
@@ -826,8 +818,7 @@ namespace System.ServiceModel.Security
                 case SecurityTokenAttachmentMode.SignedEndorsing:
                     if (!tracker.IsSigned && this.RequireMessageProtection)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperWarning(
                                 new MessageSecurityException(
                                     SR.GetString(
@@ -839,8 +830,7 @@ namespace System.ServiceModel.Security
                     }
                     if (!tracker.IsEndorsing)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperWarning(
                                 new MessageSecurityException(
                                     SR.GetString(
@@ -857,8 +847,7 @@ namespace System.ServiceModel.Security
                         && !tracker.IsDerivedFrom
                     )
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperWarning(
                                 new MessageSecurityException(
                                     SR.GetString(
@@ -873,8 +862,7 @@ namespace System.ServiceModel.Security
 
                 default:
                     Fx.Assert("Unknown token attachment mode " + spec.SecurityTokenAttachmentMode);
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new NotSupportedException(
                                 SR.GetString(
@@ -1146,8 +1134,7 @@ namespace System.ServiceModel.Security
                             != this.wrappingToken
                     )
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperWarning(
                                 new MessageSecurityException(
                                     SR.GetString(
@@ -1162,8 +1149,7 @@ namespace System.ServiceModel.Security
                 {
                     if (this.EncryptionToken != expectedEncryptionToken)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperWarning(
                                 new MessageSecurityException(
                                     SR.GetString(
@@ -1175,8 +1161,7 @@ namespace System.ServiceModel.Security
                 }
                 else if (this.SignatureToken != null && this.EncryptionToken != this.SignatureToken)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperWarning(
                             new MessageSecurityException(
                                 SR.GetString(
@@ -1202,8 +1187,7 @@ namespace System.ServiceModel.Security
                             && !this.primaryTokenTracker.IsDerivedFrom
                         )
                         {
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperWarning(
                                     new MessageSecurityException(
                                         SR.GetString(
@@ -1221,8 +1205,7 @@ namespace System.ServiceModel.Security
                     {
                         if (!this.signatureTracker.IsDerivedToken)
                         {
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperWarning(
                                     new MessageSecurityException(
                                         SR.GetString(
@@ -1245,8 +1228,7 @@ namespace System.ServiceModel.Security
                             && !this.encryptionTracker.IsDerivedToken
                         )
                         {
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperWarning(
                                     new MessageSecurityException(
                                         SR.GetString(
@@ -1264,8 +1246,7 @@ namespace System.ServiceModel.Security
                             && !this.encryptionTracker.IsDerivedToken
                         )
                         {
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperWarning(
                                     new MessageSecurityException(
                                         SR.GetString(
@@ -1283,8 +1264,7 @@ namespace System.ServiceModel.Security
                         && !this.encryptionTracker.IsDerivedToken
                     )
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperWarning(
                                 new MessageSecurityException(
                                     SR.GetString(
@@ -1356,8 +1336,7 @@ namespace System.ServiceModel.Security
         {
             if (!cache.TryAddNonce(nonce))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new MessageSecurityException(SR.GetString(SR.InvalidOrReplayedNonce), true)
                     );
@@ -1368,8 +1347,7 @@ namespace System.ServiceModel.Security
         {
             if (cache.CheckNonce(nonce))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new MessageSecurityException(SR.GetString(SR.InvalidOrReplayedNonce), true)
                     );
@@ -1441,9 +1419,8 @@ namespace System.ServiceModel.Security
                     == ReceiveSecurityHeaderElementCategory.EncryptedData
                 )
                 {
-                    EncryptedData encryptedData = this.elementManager.GetElement<EncryptedData>(
-                        position
-                    );
+                    EncryptedData encryptedData = this.elementManager
+                        .GetElement<EncryptedData>(position);
                     bool dummy = false;
                     ProcessEncryptedData(
                         encryptedData,
@@ -1522,19 +1499,15 @@ namespace System.ServiceModel.Security
                     SignedXml signedXml = ReadSignature(reader, AppendPosition, null);
                     if (primarySignatureFound)
                     {
-                        this.elementManager.SetBindingMode(
-                            position,
-                            ReceiveSecurityHeaderBindingModes.Endorsing
-                        );
+                        this.elementManager
+                            .SetBindingMode(position, ReceiveSecurityHeaderBindingModes.Endorsing);
                         ProcessSupportingSignature(signedXml, false);
                     }
                     else
                     {
                         primarySignatureFound = true;
-                        this.elementManager.SetBindingMode(
-                            position,
-                            ReceiveSecurityHeaderBindingModes.Primary
-                        );
+                        this.elementManager
+                            .SetBindingMode(position, ReceiveSecurityHeaderBindingModes.Primary);
                         ProcessPrimarySignature(signedXml, false);
                     }
                 }
@@ -1597,8 +1570,7 @@ namespace System.ServiceModel.Security
             ++this.numDerivedKeys;
             if (this.numDerivedKeys > this.maxDerivedKeys)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperWarning(
                         new MessageSecurityException(
                             SR.GetString(SR.DerivedKeyLimitExceeded, maxDerivedKeys)
@@ -1621,10 +1593,8 @@ namespace System.ServiceModel.Security
                     if (stub != null)
                     {
                         SecurityToken sourceToken = null;
-                        this.universalTokenResolver.TryResolveToken(
-                            stub.TokenToDeriveIdentifier,
-                            out sourceToken
-                        );
+                        this.universalTokenResolver
+                            .TryResolveToken(stub.TokenToDeriveIdentifier, out sourceToken);
                         if (sourceToken != null)
                         {
                             EnsureDerivedKeyLimitNotReached();
@@ -1735,19 +1705,15 @@ namespace System.ServiceModel.Security
                 {
                     if (primarySignatureFound)
                     {
-                        this.elementManager.SetBindingMode(
-                            position,
-                            ReceiveSecurityHeaderBindingModes.Endorsing
-                        );
+                        this.elementManager
+                            .SetBindingMode(position, ReceiveSecurityHeaderBindingModes.Endorsing);
                         ProcessSupportingSignature(signedXml, true);
                     }
                     else
                     {
                         primarySignatureFound = true;
-                        this.elementManager.SetBindingMode(
-                            position,
-                            ReceiveSecurityHeaderBindingModes.Primary
-                        );
+                        this.elementManager
+                            .SetBindingMode(position, ReceiveSecurityHeaderBindingModes.Primary);
                         ProcessPrimarySignature(signedXml, true);
                     }
                 }
@@ -1838,8 +1804,7 @@ namespace System.ServiceModel.Security
             WrappedKeySecurityToken wrappedKeyToken = DecryptWrappedKey(reader);
             if (wrappedKeyToken.WrappingToken != this.wrappingToken)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperWarning(
                         new MessageSecurityException(
                             SR.GetString(
@@ -1855,8 +1820,7 @@ namespace System.ServiceModel.Security
             {
                 if (!this.EncryptedKeyContainsReferenceList)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new MessageSecurityException(
                                 SR.GetString(SR.EncryptedKeyWithReferenceListNotAllowed)
@@ -1876,11 +1840,8 @@ namespace System.ServiceModel.Security
                 }
                 this.wrappedKeyToken = wrappedKeyToken;
             }
-            this.elementManager.AppendToken(
-                wrappedKeyToken,
-                ReceiveSecurityHeaderBindingModes.Primary,
-                null
-            );
+            this.elementManager
+                .AppendToken(wrappedKeyToken, ReceiveSecurityHeaderBindingModes.Primary, null);
         }
 
         ReferenceList ReadReferenceList(XmlDictionaryReader reader)
@@ -1941,11 +1902,8 @@ namespace System.ServiceModel.Security
             }
             else
             {
-                this.elementManager.SetSignatureAfterDecryption(
-                    position,
-                    signedXml,
-                    decryptedBuffer
-                );
+                this.elementManager
+                    .SetSignatureAfterDecryption(position, signedXml, decryptedBuffer);
                 readerIndex = position;
             }
             signedXml.Signature.SignedInfo.SignatureReaderProviderCallbackContext = (object)(
@@ -2023,11 +1981,12 @@ namespace System.ServiceModel.Security
             else
             {
                 this.AddIncomingSignatureConfirmation(sigConfElement.GetSignatureValue(), true);
-                this.elementManager.SetSignatureConfirmationAfterDecryption(
-                    position,
-                    sigConfElement,
-                    decryptedBuffer
-                );
+                this.elementManager
+                    .SetSignatureConfirmationAfterDecryption(
+                        position,
+                        sigConfElement,
+                        decryptedBuffer
+                    );
             }
         }
 
@@ -2155,8 +2114,7 @@ namespace System.ServiceModel.Security
             TokenTracker tracker = GetSupportingTokenTracker(rootSigningToken);
             if (tracker == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperWarning(
                         new MessageSecurityException(
                             SR.GetString(SR.UnknownSupportingToken, signingToken)
@@ -2165,8 +2123,7 @@ namespace System.ServiceModel.Security
             }
 
             if (tracker.AlreadyReadEndorsingSignature)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new MessageSecurityException(
                             SR.GetString(SR.MoreThanOneSupportingSignature, signingToken)
@@ -2292,16 +2249,10 @@ namespace System.ServiceModel.Security
             if (usedTokenAuthenticator == this.primaryTokenAuthenticator)
             {
                 // this is the primary token. Add to resolver as such
-                this.universalTokenResolver.Add(
-                    token,
-                    SecurityTokenReferenceStyle.Internal,
-                    this.primaryTokenParameters
-                );
-                this.primaryTokenResolver.Add(
-                    token,
-                    SecurityTokenReferenceStyle.Internal,
-                    this.primaryTokenParameters
-                );
+                this.universalTokenResolver
+                    .Add(token, SecurityTokenReferenceStyle.Internal, this.primaryTokenParameters);
+                this.primaryTokenResolver
+                    .Add(token, SecurityTokenReferenceStyle.Internal, this.primaryTokenParameters);
                 if (this.pendingSupportingTokenAuthenticator != null)
                 {
                     this.allowedAuthenticators.Add(this.pendingSupportingTokenAuthenticator);
@@ -2343,8 +2294,7 @@ namespace System.ServiceModel.Security
                 );
                 if (supportingTokenTracker == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperWarning(
                             new MessageSecurityException(
                                 SR.GetString(
@@ -2378,8 +2328,7 @@ namespace System.ServiceModel.Security
                 {
                     if (!this.ExpectBasicTokens)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperWarning(
                                 new MessageSecurityException(SR.GetString(SR.BasicTokenNotExpected))
                             );
@@ -2396,19 +2345,19 @@ namespace System.ServiceModel.Security
                 }
                 if (isSignedButNotBasic && !this.ExpectSignedTokens)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperWarning(
                             new MessageSecurityException(
                                 SR.GetString(SR.SignedSupportingTokenNotExpected)
                             )
                         );
                 }
-                this.universalTokenResolver.Add(
-                    token,
-                    SecurityTokenReferenceStyle.Internal,
-                    supportingTokenSpec.TokenParameters
-                );
+                this.universalTokenResolver
+                    .Add(
+                        token,
+                        SecurityTokenReferenceStyle.Internal,
+                        supportingTokenSpec.TokenParameters
+                    );
             }
             if (position == AppendPosition)
             {
@@ -2416,13 +2365,14 @@ namespace System.ServiceModel.Security
             }
             else
             {
-                this.elementManager.SetTokenAfterDecryption(
-                    position,
-                    token,
-                    mode,
-                    decryptedBuffer,
-                    supportingTokenTracker
-                );
+                this.elementManager
+                    .SetTokenAfterDecryption(
+                        position,
+                        token,
+                        mode,
+                        decryptedBuffer,
+                        supportingTokenTracker
+                    );
             }
         }
 
@@ -2441,8 +2391,7 @@ namespace System.ServiceModel.Security
                 if (this.DerivedTokenAuthenticator == null)
                 {
                     // No Authenticator registered for DerivedKeySecurityToken
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new MessageSecurityException(
                                 SR.GetString(
@@ -2486,8 +2435,7 @@ namespace System.ServiceModel.Security
                 }
             }
 
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(
                     new MessageSecurityException(
                         SR.GetString(SR.UnableToFindTokenAuthenticator, token.GetType())
@@ -2514,10 +2462,8 @@ namespace System.ServiceModel.Security
                 {
                     this.receivedSignatureConfirmations = new SignatureConfirmations();
                 }
-                this.receivedSignatureConfirmations.AddConfirmation(
-                    signatureValue,
-                    isFromDecryptedSource
-                );
+                this.receivedSignatureConfirmations
+                    .AddConfirmation(signatureValue, isFromDecryptedSource);
             }
         }
 
@@ -2639,8 +2585,7 @@ namespace System.ServiceModel.Security
                     case MessageProtectionOrder.SignBeforeEncryptAndEncryptSignature:
                         if (!this.AllSignaturesEncrypted)
                         {
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
                                     new MessageSecurityException(
                                         SR.GetString(SR.PrimarySignatureIsRequiredToBeEncrypted)
@@ -2651,8 +2596,7 @@ namespace System.ServiceModel.Security
                     case MessageProtectionOrder.SignBeforeEncrypt:
                         if (!this.SignBeforeEncryptOrderRequirementMet)
                         {
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
                                     new MessageSecurityException(
                                         SR.GetString(
@@ -2666,8 +2610,7 @@ namespace System.ServiceModel.Security
                     case MessageProtectionOrder.EncryptBeforeSign:
                         if (!this.EncryptBeforeSignOrderRequirementMet)
                         {
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
                                     new MessageSecurityException(
                                         SR.GetString(
@@ -2689,8 +2632,7 @@ namespace System.ServiceModel.Security
                 Fx.Assert(this.enforce, "OrderTracker should have 'enforce' set to true.");
                 if (this.referenceListCount > 0)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new MessageSecurityException(
                                 SR.GetString(
@@ -2712,8 +2654,7 @@ namespace System.ServiceModel.Security
                 Fx.Assert(this.enforce, "OrderTracker should have 'enforce' set to true.");
                 if (this.signatureCount > 0)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new MessageSecurityException(
                                 SR.GetString(SR.AtMostOneSignatureIsSupportedWithDefaultPolicyCheck)
@@ -2737,8 +2678,7 @@ namespace System.ServiceModel.Security
                 Fx.Assert(this.enforce, "OrderTracker should have 'enforce' set to true.");
 
                 if (this.numWrappedKeys == MaxAllowedWrappedKeys)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new MessageSecurityException(
                                 SR.GetString(SR.WrappedKeyLimitExceeded, this.numWrappedKeys)
@@ -2795,8 +2735,7 @@ namespace System.ServiceModel.Security
                 }
                 else if (!ReferenceEquals(this.token, token))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new MessageSecurityException(
                                 SR.GetString(SR.MismatchInSecurityOperationToken)
@@ -2852,8 +2791,7 @@ namespace System.ServiceModel.Security
             {
                 if (!AreTokensEqual(this.token, token))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new MessageSecurityException(
                                 SR.GetString(SR.MismatchInSecurityOperationToken)
@@ -2865,8 +2803,7 @@ namespace System.ServiceModel.Security
             }
             else if (!object.ReferenceEquals(this.token, token))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new MessageSecurityException(
                             SR.GetString(SR.MismatchInSecurityOperationToken)
@@ -2881,11 +2818,11 @@ namespace System.ServiceModel.Security
             // in this case the thumbprint of the reply certificate must match the outofband certificate's thumbprint
             if ((outOfBandToken is X509SecurityToken) && (replyToken is X509SecurityToken))
             {
-                byte[] outOfBandCertificateThumbprint = ((X509SecurityToken)outOfBandToken)
-                    .Certificate
+                byte[] outOfBandCertificateThumbprint = (
+                    (X509SecurityToken)outOfBandToken
+                ).Certificate
                     .GetCertHash();
-                byte[] replyCertificateThumbprint = ((X509SecurityToken)replyToken)
-                    .Certificate
+                byte[] replyCertificateThumbprint = ((X509SecurityToken)replyToken).Certificate
                     .GetCertHash();
                 return (
                     CryptoHelper.IsEqual(outOfBandCertificateThumbprint, replyCertificateThumbprint)
@@ -2922,11 +2859,8 @@ namespace System.ServiceModel.Security
             bool resolved = false;
             key = null;
 
-            resolved = this.tokenResolver.TryResolveSecurityKey(
-                keyIdentifierClause,
-                false,
-                out key
-            );
+            resolved = this.tokenResolver
+                .TryResolveSecurityKey(keyIdentifierClause, false, out key);
 
             if (!resolved)
             {
@@ -3022,12 +2956,8 @@ namespace System.ServiceModel.Security
             bool resolved = false;
             token = null;
 
-            resolved = this.tokenResolver.TryResolveToken(
-                keyIdentifierClause,
-                false,
-                false,
-                out token
-            );
+            resolved = this.tokenResolver
+                .TryResolveToken(keyIdentifierClause, false, false, out token);
 
             if (!resolved)
             {

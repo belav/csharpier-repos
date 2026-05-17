@@ -37,20 +37,17 @@ namespace System.IdentityModel.Tokens
             set
             {
                 if (isReadOnly)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
                         );
 
                 if (value == null)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new ArgumentNullException("value"));
 
                 if (string.IsNullOrEmpty(value.Name))
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgument(SR.GetString(SR.SAMLAuthorityKindMissingName));
 
                 this.authorityKind = value;
@@ -64,15 +61,13 @@ namespace System.IdentityModel.Tokens
             set
             {
                 if (isReadOnly)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
                         );
 
                 if (string.IsNullOrEmpty(value))
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgument(SR.GetString(SR.SAMLAuthorityBindingRequiresBinding));
 
                 this.binding = value;
@@ -86,15 +81,13 @@ namespace System.IdentityModel.Tokens
             set
             {
                 if (isReadOnly)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
                         );
 
                 if (string.IsNullOrEmpty(value))
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgument(SR.GetString(SR.SAMLAuthorityBindingRequiresLocation));
 
                 this.location = value;
@@ -114,8 +107,7 @@ namespace System.IdentityModel.Tokens
         void CheckObjectValidity()
         {
             if (this.authorityKind == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new SecurityTokenException(
                             SR.GetString(SR.SAMLAuthorityBindingMissingAuthorityKind)
@@ -123,15 +115,13 @@ namespace System.IdentityModel.Tokens
                     );
 
             if (string.IsNullOrEmpty(authorityKind.Name))
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new SecurityTokenException(SR.GetString(SR.SAMLAuthorityKindMissingName))
                     );
 
             if (string.IsNullOrEmpty(this.binding))
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new SecurityTokenException(
                             SR.GetString(SR.SAMLAuthorityBindingRequiresBinding)
@@ -139,8 +129,7 @@ namespace System.IdentityModel.Tokens
                     );
 
             if (string.IsNullOrEmpty(this.location))
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new SecurityTokenException(
                             SR.GetString(SR.SAMLAuthorityBindingRequiresLocation)
@@ -156,13 +145,11 @@ namespace System.IdentityModel.Tokens
         )
         {
             if (reader == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("reader"));
 
             if (samlSerializer == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("samlSerializer"));
 
 #pragma warning suppress 56506 // samlSerializer.DictionaryManager is never null.
@@ -170,8 +157,7 @@ namespace System.IdentityModel.Tokens
 
             string authKind = reader.GetAttribute(dictionary.AuthorityKind, null);
             if (string.IsNullOrEmpty(authKind))
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new SecurityTokenException(
                             SR.GetString(SR.SAMLAuthorityBindingMissingAuthorityKindOnRead)
@@ -180,8 +166,7 @@ namespace System.IdentityModel.Tokens
 
             string[] authKindParts = authKind.Split(':');
             if (authKindParts.Length > 2)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new SecurityTokenException(
                             SR.GetString(SR.SAMLAuthorityBindingInvalidAuthorityKind)
@@ -208,8 +193,7 @@ namespace System.IdentityModel.Tokens
 
             this.binding = reader.GetAttribute(dictionary.Binding, null);
             if (string.IsNullOrEmpty(this.binding))
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new SecurityTokenException(
                             SR.GetString(SR.SAMLAuthorityBindingMissingBindingOnRead)
@@ -218,8 +202,7 @@ namespace System.IdentityModel.Tokens
 
             this.location = reader.GetAttribute(dictionary.Location, null);
             if (string.IsNullOrEmpty(this.location))
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new SecurityTokenException(
                             SR.GetString(SR.SAMLAuthorityBindingMissingLocationOnRead)
@@ -248,13 +231,11 @@ namespace System.IdentityModel.Tokens
             CheckObjectValidity();
 
             if (writer == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("writer"));
 
             if (samlSerializer == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("samlSerializer"));
 
 #pragma warning suppress 56506 // samlSerializer.DictionaryManager is never null.

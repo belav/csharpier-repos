@@ -127,8 +127,7 @@ namespace Microsoft.CodeAnalysis.AddImport
 
                 private string? ResolvePath(Workspace workspace)
                 {
-                    var assemblyResolverService = workspace
-                        .Services
+                    var assemblyResolverService = workspace.Services
                         .GetRequiredService<IFrameworkAssemblyPathResolver>();
 
                     return assemblyResolverService.ResolveAssemblyPath(

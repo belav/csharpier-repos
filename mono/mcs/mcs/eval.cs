@@ -688,8 +688,7 @@ namespace Mono.CSharp
             if (kind == InputKind.EOF)
             {
                 if (mode == ParseMode.ReportErrors)
-                    Console
-                        .Error
+                    Console.Error
                         .WriteLine(
                             "Internal error: EOF condition should have been detected in a previous call with silent=true"
                         );
@@ -815,8 +814,7 @@ namespace Mono.CSharp
                     );
 
                     method.Block = new ToplevelBlock(method.Compiler, p, Location.Null);
-                    method
-                        .Block
+                    method.Block
                         .AddStatement(
                             new StatementExpression(
                                 new SimpleAssign(
@@ -842,8 +840,7 @@ namespace Mono.CSharp
                             Location.Null
                         );
 
-                        method
-                            .Block
+                        method.Block
                             .AddStatement(
                                 new StatementExpression(
                                     new Invocation(
@@ -1449,8 +1446,7 @@ namespace Mono.CSharp
 
             if (current_container.Containers != null)
             {
-                var existing = current_container
-                    .Containers
+                var existing = current_container.Containers
                     .FirstOrDefault(l => l.MemberName.Basename == tc.MemberName.Basename);
                 if (existing != null)
                 {

@@ -105,8 +105,7 @@ namespace System.Net.Http.Formatting
         [Fact]
         public void MaxDepthReturnsCorrectValue()
         {
-            Assert
-                .Reflection
+            Assert.Reflection
                 .IntegerProperty(
                     new XmlMediaTypeFormatter(),
                     f => f.MaxDepth,
@@ -143,8 +142,7 @@ namespace System.Net.Http.Formatting
         [Fact]
         public void Indent_RoundTrips()
         {
-            Assert
-                .Reflection
+            Assert.Reflection
                 .BooleanProperty(
                     new XmlMediaTypeFormatter(),
                     c => c.Indent,
@@ -155,8 +153,7 @@ namespace System.Net.Http.Formatting
         [Fact]
         public void UseXmlSerializer_RoundTrips()
         {
-            Assert
-                .Reflection
+            Assert.Reflection
                 .BooleanProperty(
                     new XmlMediaTypeFormatter(),
                     c => c.UseXmlSerializer,
@@ -176,8 +173,7 @@ namespace System.Net.Http.Formatting
             };
             MemoryStream memoryStream = new MemoryStream();
             HttpContent content = new StringContent(String.Empty);
-            await Assert
-                .Task
+            await Assert.Task
                 .SucceedsAsync(
                     xmlFormatter.WriteToStreamAsync(
                         type,
@@ -208,8 +204,7 @@ namespace System.Net.Http.Formatting
             };
             MemoryStream memoryStream = new MemoryStream();
             HttpContent content = new StringContent(String.Empty);
-            await Assert
-                .Task
+            await Assert.Task
                 .SucceedsAsync(
                     xmlFormatter.WriteToStreamAsync(
                         typeof(SampleType),
@@ -245,8 +240,7 @@ namespace System.Net.Http.Formatting
             };
             MemoryStream memoryStream = new MemoryStream();
             HttpContent content = new StringContent(String.Empty);
-            await Assert
-                .Task
+            await Assert.Task
                 .SucceedsAsync(
                     xmlFormatter.WriteToStreamAsync(
                         typeof(SampleType),
@@ -877,8 +871,7 @@ namespace System.Net.Http.Formatting
             formatter.Setup(f => f.GetDeserializer(type, null)).Returns(serializer.Object);
             formatter.Setup(f => f.CreateXmlReader(stream, null)).Returns(reader.Object);
 
-            await formatter
-                .Object
+            await formatter.Object
                 .ReadFromStreamAsync(type, stream, content: null, formatterLogger: null);
 
             serializer.Verify(s => s.ReadObject(reader.Object));
@@ -895,8 +888,7 @@ namespace System.Net.Http.Formatting
 
             return Assert.ThrowsAsync<InvalidOperationException>(
                 () =>
-                    formatter
-                        .Object
+                    formatter.Object
                         .ReadFromStreamAsync(
                             type,
                             new MemoryStream(Encoding.UTF8.GetBytes(xml)),
@@ -918,8 +910,7 @@ namespace System.Net.Http.Formatting
 
             return Assert.ThrowsAsync<InvalidOperationException>(
                 () =>
-                    formatter
-                        .Object
+                    formatter.Object
                         .ReadFromStreamAsync(
                             type,
                             new MemoryStream(Encoding.UTF8.GetBytes(xml)),
@@ -969,8 +960,7 @@ namespace System.Net.Http.Formatting
             formatter.Setup(f => f.GetSerializer(type, value, null)).Returns(serializer.Object);
             formatter.Setup(f => f.CreateXmlWriter(stream, null)).Returns(writer.Object);
 
-            await formatter
-                .Object
+            await formatter.Object
                 .WriteToStreamAsync(type, value, stream, content: null, transportContext: null);
 
             serializer.Verify(s => s.WriteObject(writer.Object, value));
@@ -986,8 +976,7 @@ namespace System.Net.Http.Formatting
 
             return Assert.ThrowsAsync<InvalidOperationException>(
                 () =>
-                    formatter
-                        .Object
+                    formatter.Object
                         .WriteToStreamAsync(
                             type,
                             value,
@@ -1009,8 +998,7 @@ namespace System.Net.Http.Formatting
 
             return Assert.ThrowsAsync<InvalidOperationException>(
                 () =>
-                    formatter
-                        .Object
+                    formatter.Object
                         .WriteToStreamAsync(
                             type,
                             value,

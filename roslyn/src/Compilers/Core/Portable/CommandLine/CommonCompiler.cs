@@ -795,8 +795,7 @@ namespace Microsoft.CodeAnalysis
 
             // Now, go through each of the referenced assemblies and print their IVT information.
             foreach (
-                var assembly in currentAssembly
-                    .Modules
+                var assembly in currentAssembly.Modules
                     .First()
                     .ReferencedAssemblySymbols
                     .OrderBy(a => a.Name)
@@ -1184,8 +1183,7 @@ namespace Microsoft.CodeAnalysis
                 }
 
                 globalConfigOptions = analyzerConfigSet.GlobalConfigOptions;
-                sourceFileAnalyzerConfigOptions = Arguments
-                    .SourceFiles
+                sourceFileAnalyzerConfigOptions = Arguments.SourceFiles
                     .SelectAsArray(f => analyzerConfigSet.GetOptionsForSourcePath(f.Path));
 
                 foreach (var sourceFileAnalyzerConfigOption in sourceFileAnalyzerConfigOptions)
@@ -1495,8 +1493,7 @@ namespace Microsoft.CodeAnalysis
                     bool hasGeneratedOutputPath = !string.IsNullOrWhiteSpace(
                         Arguments.GeneratedFilesOutputDirectory
                     );
-                    var generatedSyntaxTrees = compilation
-                        .SyntaxTrees
+                    var generatedSyntaxTrees = compilation.SyntaxTrees
                         .Skip(Arguments.SourceFiles.Length)
                         .ToList();
                     var analyzerOptionsBuilder = hasAnalyzerConfigs
@@ -1637,8 +1634,7 @@ namespace Microsoft.CodeAnalysis
             try
             {
                 // NOTE: Unlike the PDB path, the XML doc path is not embedded in the assembly, so we don't need to pass it to emit.
-                var emitOptions = Arguments
-                    .EmitOptions
+                var emitOptions = Arguments.EmitOptions
                     .WithOutputNameOverride(outputName)
                     .WithPdbFilePath(
                         PathUtilities.NormalizePathPrefix(finalPdbFilePath, Arguments.PathMap)

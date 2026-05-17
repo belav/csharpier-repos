@@ -27,8 +27,7 @@ namespace Microsoft.Diagnostics.Tools.Pgo
         {
             TraceProcess = traceProcess;
             foreach (
-                var assemblyLoadTrace in traceProcess
-                    .EventsInProcess
+                var assemblyLoadTrace in traceProcess.EventsInProcess
                     .ByEventType<AssemblyLoadUnloadTraceData>()
             )
             {

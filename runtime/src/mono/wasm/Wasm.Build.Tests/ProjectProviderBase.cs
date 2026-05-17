@@ -441,8 +441,7 @@ public abstract class ProjectProviderBase(ITestOutputHelper _testOutput, string?
                 $"Could not find the pattern in the build output: '{s_runtimePackPathPattern}'.{Environment.NewLine}Build output: {buildOutput}"
             );
 
-        string expectedRuntimePackDir = BuildTestBase
-            .s_buildEnv
+        string expectedRuntimePackDir = BuildTestBase.s_buildEnv
             .GetRuntimePackDir(targetFramework, runtimeType);
         string actualPath = match.Groups[1].Value;
         if (string.Compare(actualPath, expectedRuntimePackDir) != 0)
@@ -463,8 +462,7 @@ public abstract class ProjectProviderBase(ITestOutputHelper _testOutput, string?
         {
             TestUtils.AssertFile(
                 Path.Combine(
-                    BuildTestBase
-                        .s_buildEnv
+                    BuildTestBase.s_buildEnv
                         .GetRuntimeNativeDir(
                             assertOptions.TargetFramework,
                             assertOptions.RuntimeType
@@ -530,8 +528,7 @@ public abstract class ProjectProviderBase(ITestOutputHelper _testOutput, string?
 
         BootJsonData bootJson = ParseBootData(bootJsonPath);
         string spcExpectedFilename = $"System.Private.CoreLib{WasmAssemblyExtension}";
-        string? spcActualFilename = bootJson
-            .resources
+        string? spcActualFilename = bootJson.resources
             .assembly
             .Keys
             .Where(a => Path.GetFileNameWithoutExtension(a) == "System.Private.CoreLib")
@@ -545,8 +542,7 @@ public abstract class ProjectProviderBase(ITestOutputHelper _testOutput, string?
                 $"Expected to find {spcExpectedFilename} but found {spcActualFilename} in {bootJsonPath}"
             );
 
-        var bootJsonEntries = bootJson
-            .resources
+        var bootJsonEntries = bootJson.resources
             .jsModuleNative
             .Keys
             .Union(bootJson.resources.jsModuleRuntime.Keys)

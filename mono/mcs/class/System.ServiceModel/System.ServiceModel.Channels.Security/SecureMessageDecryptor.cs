@@ -428,8 +428,7 @@ namespace System.ServiceModel.Channels.Security
                 true
             );
             if (
-                security
-                    .Element
+                security.Element
                     .OptionalOperationSupportingTokenParameters
                     .TryGetValue(action, out supp)
             )
@@ -514,9 +513,8 @@ namespace System.ServiceModel.Channels.Security
                             SecurityAlgorithmSuite suite = security.Element.DefaultAlgorithmSuite;
                             foreach (SecurityTokenReferenceKeyInfo kic in esxml.KeyInfo)
                             {
-                                SecurityKey signKey = spec.SecurityToken.ResolveKeyIdentifierClause(
-                                    kic.Clause
-                                );
+                                SecurityKey signKey = spec.SecurityToken
+                                    .ResolveKeyIdentifierClause(kic.Clause);
                                 SymmetricSecurityKey symkey = signKey as SymmetricSecurityKey;
                                 if (symkey != null)
                                 {
@@ -547,8 +545,7 @@ namespace System.ServiceModel.Channels.Security
                                 break;
                             }
 
-                            sec_prop
-                                .ConfirmedSignatures
+                            sec_prop.ConfirmedSignatures
                                 .Insert(0, Convert.ToBase64String(esxml.SignatureValue));
                             break;
                     }

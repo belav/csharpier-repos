@@ -54,8 +54,7 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
                 CancellationToken cancellationToken
             ) =>
                 _parameterNames.IsDefault
-                    ? _methodSymbol
-                        .Parameters
+                    ? _methodSymbol.Parameters
                         .SelectAsArray(p => new ParameterName(p.Name, isFixed: true))
                     : _parameterNames.SelectAsArray(p => new ParameterName(p, isFixed: true));
 

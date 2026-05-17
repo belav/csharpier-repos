@@ -42,8 +42,7 @@ internal class Mainy
             Threads = Int64.Parse(args[0]);
         }
 
-        TestLibrary
-            .Logging
+        TestLibrary.Logging
             .WriteLine(
                 "LargeObjectAlloc started with {0} threads. Control-C to exit",
                 Threads.ToString()

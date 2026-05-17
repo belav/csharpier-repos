@@ -61,8 +61,7 @@ namespace ILCompiler.DependencyAnalysis
             foreach (TypeDesc type in factory.MetadataManager.GetTypeTemplates())
             {
                 // Type's native layout info
-                NativeLayoutTemplateTypeLayoutVertexNode templateNode = factory
-                    .NativeLayout
+                NativeLayoutTemplateTypeLayoutVertexNode templateNode = factory.NativeLayout
                     .TemplateTypeLayout(type);
                 Vertex nativeLayout = templateNode.SavedVertex;
 

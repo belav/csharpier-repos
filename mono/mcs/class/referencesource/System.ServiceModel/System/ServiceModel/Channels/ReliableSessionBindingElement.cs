@@ -55,8 +55,7 @@ namespace System.ServiceModel.Channels
             {
                 if (value <= TimeSpan.Zero)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentOutOfRangeException(
                                 "value",
@@ -68,8 +67,7 @@ namespace System.ServiceModel.Channels
 
                 if (TimeoutHelper.IsTooLarge(value))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentOutOfRangeException(
                                 "value",
@@ -98,8 +96,7 @@ namespace System.ServiceModel.Channels
             {
                 if (value <= TimeSpan.Zero)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentOutOfRangeException(
                                 "value",
@@ -111,8 +108,7 @@ namespace System.ServiceModel.Channels
 
                 if (TimeoutHelper.IsTooLarge(value))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentOutOfRangeException(
                                 "value",
@@ -133,8 +129,7 @@ namespace System.ServiceModel.Channels
             set
             {
                 if (value <= 0 || value > 16384)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentOutOfRangeException(
                                 "value",
@@ -153,8 +148,7 @@ namespace System.ServiceModel.Channels
             set
             {
                 if (value <= 0)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentOutOfRangeException(
                                 "value",
@@ -173,8 +167,7 @@ namespace System.ServiceModel.Channels
             set
             {
                 if (value <= 0 || value > 4096)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentOutOfRangeException(
                                 "value",
@@ -209,8 +202,7 @@ namespace System.ServiceModel.Channels
 
                 if (!ReliableMessagingVersion.IsDefined(value))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new ArgumentOutOfRangeException("value"));
                 }
 
@@ -536,8 +528,7 @@ namespace System.ServiceModel.Channels
                 }
             }
 
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperArgument(
                     "TChannel",
                     SR.GetString(SR.ChannelTypeNotSupported, typeof(TChannel))
@@ -586,8 +577,7 @@ namespace System.ServiceModel.Channels
             this.SetSecuritySettings(context);
 
 #pragma warning suppress 56506 // BindingContext guarantees BindingParameters is never null.
-            IMessageFilterTable<EndpointAddress> table = context
-                .BindingParameters
+            IMessageFilterTable<EndpointAddress> table = context.BindingParameters
                 .Find<IMessageFilterTable<EndpointAddress>>();
 
             InternalDuplexBindingElement.AddDuplexListenerSupport(
@@ -661,8 +651,7 @@ namespace System.ServiceModel.Channels
                 }
             }
 
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperArgument(
                     "TChannel",
                     SR.GetString(SR.ChannelTypeNotSupported, typeof(TChannel))
@@ -740,8 +729,7 @@ namespace System.ServiceModel.Channels
 
         void SetSecuritySettings(BindingContext context)
         {
-            SecurityBindingElement element = context
-                .RemainingBindingElements
+            SecurityBindingElement element = context.RemainingBindingElements
                 .Find<SecurityBindingElement>();
 
             if (element != null)
@@ -752,15 +740,13 @@ namespace System.ServiceModel.Channels
 
         void VerifyTransportMode(BindingContext context)
         {
-            TransportBindingElement transportElement = context
-                .RemainingBindingElements
+            TransportBindingElement transportElement = context.RemainingBindingElements
                 .Find<TransportBindingElement>();
 
             // Verify ManualAdderssing is turned off.
             if ((transportElement != null) && (transportElement.ManualAddressing))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(SR.GetString(SR.ManualAddressingNotSupported))
                     );
@@ -790,8 +776,7 @@ namespace System.ServiceModel.Channels
 
             if (transportTransferMode != TransferMode.Buffered)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(

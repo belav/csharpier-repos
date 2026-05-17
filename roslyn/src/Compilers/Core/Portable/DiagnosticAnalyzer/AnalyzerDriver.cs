@@ -533,8 +533,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                                 SyntaxTree,
                                 ImmutableHashSet<DiagnosticAnalyzer>
                             >();
-                        _lazyGeneratedCodeAttribute = analyzerExecutor
-                            .Compilation
+                        _lazyGeneratedCodeAttribute = analyzerExecutor.Compilation
                             ?.GetTypeByMetadataName(
                                 "System.CodeDom.Compiler.GeneratedCodeAttribute"
                             );
@@ -1342,12 +1341,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                     return ImmutableHashSet.Create(defaultSeverity);
 
                 if (
-                    compilation
-                        .Options
+                    compilation.Options
                         .SpecificDiagnosticOptions
                         .TryGetValue(descriptor.Id, out var severity)
-                    || compilation
-                        .Options
+                    || compilation.Options
                         .SyntaxTreeOptionsProvider
                         ?.TryGetGlobalDiagnosticValue(
                             descriptor.Id,
@@ -1826,8 +1823,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 {
                     var model = compilation.GetSemanticModel(location.SourceTree);
                     for (
-                        var node = location
-                            .SourceTree
+                        var node = location.SourceTree
                             .GetRoot(cancellationToken)
                             .FindNode(location.SourceSpan, getInnermostNodeForTie: true);
                         node != null;
@@ -2112,8 +2108,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 DiagnosticAnalyzer,
                 ImmutableArray<ImmutableArray<SymbolAnalyzerAction>>
             )>.GetInstance();
-            var actionsByAnalyzers = analyzerActions
-                .SymbolActions
+            var actionsByAnalyzers = analyzerActions.SymbolActions
                 .GroupBy(action => action.Analyzer);
             var actionsByKindBuilder = ArrayBuilder<
                 ArrayBuilder<SymbolAnalyzerAction>
@@ -2962,8 +2957,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             CancellationToken cancellationToken
         )
         {
-            var filteredDiagnostic = compilation
-                .Options
+            var filteredDiagnostic = compilation.Options
                 .FilterDiagnostic(diagnostic, cancellationToken);
             filteredDiagnostic = applyFurtherFiltering(filteredDiagnostic);
 
@@ -3265,8 +3259,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                         {
                             // Don't inherit the symbol start and symbol end actions.
                             var containerAnalyzerActions = containerActions.AnalyzerActions;
-                            var actions = AnalyzerActions
-                                .Empty
+                            var actions = AnalyzerActions.Empty
                                 .Append(
                                     in containerAnalyzerActions,
                                     appendSymbolStartAndSymbolEndActions: false
@@ -3299,8 +3292,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                     return AnalyzerActions.Empty;
                 }
 
-                return await driver
-                    .AnalyzerManager
+                return await driver.AnalyzerManager
                     .GetPerSymbolAnalyzerActionsAsync(
                         symbol,
                         isGeneratedCodeSymbol,
@@ -3453,8 +3445,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 // Check for explicit user configuration for generated code from options.
                 //     generated_code = true | false
                 // If there is no explicit user configuration, fallback to our generated code heuristic.
-                var options = AnalyzerExecutor
-                    .AnalyzerOptions
+                var options = AnalyzerExecutor.AnalyzerOptions
                     .AnalyzerConfigOptionsProvider
                     .GetOptions(tree);
                 return GeneratedCodeUtilities.GetIsGeneratedCodeFromOptions(options)

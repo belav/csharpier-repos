@@ -160,8 +160,7 @@ internal partial class CSharpUsePrimaryConstructorCodeFixProvider() : CodeFixPro
         );
 
         // If we're removing members, first go through and update all references to that member to use the parameter name.
-        var typeDeclarationNodes = namedType
-            .DeclaringSyntaxReferences
+        var typeDeclarationNodes = namedType.DeclaringSyntaxReferences
             .Select(r => (TypeDeclarationSyntax)r.GetSyntax(cancellationToken));
         var namedTypeDocuments = typeDeclarationNodes
             .Select(r => solution.GetRequiredDocument(r.SyntaxTree))
@@ -200,11 +199,9 @@ internal partial class CSharpUsePrimaryConstructorCodeFixProvider() : CodeFixPro
                         ? typeParameterList.GetTrailingTrivia()
                         : currentTypeDeclaration.Identifier.GetAllTrailingTrivia();
 
-                var finalAttributeLists = currentTypeDeclaration
-                    .AttributeLists
+                var finalAttributeLists = currentTypeDeclaration.AttributeLists
                     .AddRange(
-                        constructorDeclaration
-                            .AttributeLists
+                        constructorDeclaration.AttributeLists
                             .Select(a =>
                                 a.WithTarget(
                                         AttributeTargetSpecifier(Token(SyntaxKind.MethodKeyword))
@@ -271,8 +268,7 @@ internal partial class CSharpUsePrimaryConstructorCodeFixProvider() : CodeFixPro
                 parameterList.Parameters,
                 (_, current) =>
                 {
-                    var inKeyword = current
-                        .Modifiers
+                    var inKeyword = current.Modifiers
                         .FirstOrDefault(t => t.Kind() == SyntaxKind.InKeyword);
                     if (inKeyword == default)
                         return current;
@@ -466,11 +462,9 @@ internal partial class CSharpUsePrimaryConstructorCodeFixProvider() : CodeFixPro
                         else
                         {
                             return currentTypeDeclaration.WithBaseList(
-                                currentTypeDeclaration
-                                    .BaseList
+                                currentTypeDeclaration.BaseList
                                     .WithTypes(
-                                        currentTypeDeclaration
-                                            .BaseList
+                                        currentTypeDeclaration.BaseList
                                             .Types
                                             .Insert(0, baseTypeSyntax)
                                     )
@@ -658,8 +652,7 @@ internal partial class CSharpUsePrimaryConstructorCodeFixProvider() : CodeFixPro
                         continue;
 
                     if (
-                        location
-                            .Location
+                        location.Location
                             .FindNode(
                                 findInsideTrivia: true,
                                 getInnermostNodeForTie: true,

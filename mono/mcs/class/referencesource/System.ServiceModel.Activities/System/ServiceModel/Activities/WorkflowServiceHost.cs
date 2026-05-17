@@ -77,8 +77,7 @@ namespace System.ServiceModel.Activities
                 Activity activity = serviceImplementation as Activity;
                 if (activity == null)
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .Argument("serviceImplementation", SR.InvalidServiceImplementation);
                 }
                 InitializeFromConstructor(activity, baseAddresses);
@@ -344,8 +343,7 @@ namespace System.ServiceModel.Activities
             }
             if (this.inferredContracts == null)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new InvalidOperationException(
                             SR.ContractNotFoundInAddServiceEndpoint(
@@ -378,8 +376,7 @@ namespace System.ServiceModel.Activities
             {
                 if (!this.Description.Behaviors.Contains(mexBehaviorType))
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(
                             new InvalidOperationException(
                                 SR.ServiceMetadataBehaviorNotFoundForServiceMetadataEndpoint(
@@ -393,8 +390,7 @@ namespace System.ServiceModel.Activities
             }
             else
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new InvalidOperationException(
                             SR.ContractNotFoundInAddServiceEndpoint(
@@ -469,8 +465,7 @@ namespace System.ServiceModel.Activities
         {
             if (!endpoint.IsSystemEndpoint)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new InvalidOperationException(
                             SR.CannotUseAddServiceEndpointOverloadForWorkflowServices
@@ -531,8 +526,7 @@ namespace System.ServiceModel.Activities
                     {
                         if (result.ContainsKey(contract.ConfigurationName))
                         {
-                            throw FxTrace
-                                .Exception
+                            throw FxTrace.Exception
                                 .AsError(
                                     new InvalidOperationException(
                                         SR.DifferentContractsSameConfigName
@@ -548,10 +542,9 @@ namespace System.ServiceModel.Activities
 
             // Currently, only WorkflowService has CorrelationQueries property
             this.correlationQueries = this.serviceDefinition.CorrelationQueries;
-            ServiceDescription serviceDescription =
-                this.serviceDefinition.GetEmptyServiceDescription();
-            serviceDescription
-                .Behaviors
+            ServiceDescription serviceDescription = this.serviceDefinition
+                .GetEmptyServiceDescription();
+            serviceDescription.Behaviors
                 .Add(new WorkflowServiceBehavior(this.workflowDefinitionProvider));
             return serviceDescription;
         }
@@ -577,8 +570,7 @@ namespace System.ServiceModel.Activities
                         ContractValidationHelper.GetErrorMessageEndpointServiceContractName(
                             endpoint.ServiceContractName
                         );
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(
                             new InvalidOperationException(
                                 SR.MissingBindingInEndpoint(endpointName, contractName)
@@ -635,9 +627,8 @@ namespace System.ServiceModel.Activities
             this.workflowExtensions.EnsureChannelCache();
 
             // add a host-wide (free-threaded) CorrelationExtension based on our ServiceName
-            this.WorkflowExtensions.Add(
-                new CorrelationExtension(this.DurableInstancingOptions.ScopeName)
-            );
+            this.WorkflowExtensions
+                .Add(new CorrelationExtension(this.DurableInstancingOptions.ScopeName));
 
             this.WorkflowExtensions.MakeReadOnly();
 
@@ -765,8 +756,7 @@ namespace System.ServiceModel.Activities
                         }
                     }
                 }
-                serviceEndpoint
-                    .Behaviors
+                serviceEndpoint.Behaviors
                     .Add(
                         new CorrelationQueryBehavior(uniqueQueries)
                         {
@@ -778,8 +768,7 @@ namespace System.ServiceModel.Activities
             {
                 if (!serviceEndpoint.Behaviors.Contains(typeof(CorrelationQueryBehavior)))
                 {
-                    serviceEndpoint
-                        .Behaviors
+                    serviceEndpoint.Behaviors
                         .Add(
                             new CorrelationQueryBehavior(new Collection<CorrelationQuery>())
                             {
@@ -845,8 +834,8 @@ namespace System.ServiceModel.Activities
 
         void SetScopeName()
         {
-            VirtualPathExtension virtualPathExtension =
-                this.Extensions.Find<VirtualPathExtension>();
+            VirtualPathExtension virtualPathExtension = this.Extensions
+                .Find<VirtualPathExtension>();
             if (virtualPathExtension != null)
             {
                 // Web Hosted scenario
@@ -891,13 +880,11 @@ namespace System.ServiceModel.Activities
             {
                 foreach (OperationDescription operation in serviceEndpoint.Contract.Operations)
                 {
-                    ReceiveContextEnabledAttribute behavior = operation
-                        .Behaviors
+                    ReceiveContextEnabledAttribute behavior = operation.Behaviors
                         .Find<ReceiveContextEnabledAttribute>();
                     if (behavior == null)
                     {
-                        operation
-                            .Behaviors
+                        operation.Behaviors
                             .Add(new ReceiveContextEnabledAttribute() { ManualControl = true });
                     }
                     else
@@ -916,8 +903,7 @@ namespace System.ServiceModel.Activities
                 .Contains(bufferedReceiveServiceBehaviorType);
             if (hasBehavior && !this.serviceDefinition.AllowBufferedReceive)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new InvalidOperationException(SR.BufferedReceiveBehaviorUsedWithoutProperty)
                     );
@@ -969,8 +955,7 @@ namespace System.ServiceModel.Activities
             {
                 if (TypeHelper.AreTypesCompatible(type, SendReceiveExtensionType))
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(
                             new InvalidOperationException(
                                 SR.ExtensionTypeNotSupported(SendReceiveExtensionType.FullName)
@@ -1021,11 +1006,12 @@ namespace System.ServiceModel.Activities
 
             bool CloseHost()
             {
-                IAsyncResult result = this.host.BeginHostClose(
-                    this.timeoutHelper.RemainingTime(),
-                    base.PrepareAsyncCompletion(handleEndHostClose),
-                    this
-                );
+                IAsyncResult result = this.host
+                    .BeginHostClose(
+                        this.timeoutHelper.RemainingTime(),
+                        base.PrepareAsyncCompletion(handleEndHostClose),
+                        this
+                    );
                 return SyncContinue(result);
             }
 

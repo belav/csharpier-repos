@@ -291,10 +291,8 @@ namespace System.Web.UI.WebControls
                 string postBackEventReference = null;
                 if (options != null)
                 {
-                    postBackEventReference = Page.ClientScript.GetPostBackEventReference(
-                        options,
-                        true
-                    );
+                    postBackEventReference = Page.ClientScript
+                        .GetPostBackEventReference(options, true);
                 }
 
                 // If the postBackEventReference is empty, use a javascript no-op instead, since

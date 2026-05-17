@@ -72,9 +72,10 @@ namespace System.Activities.DurableInstancing
                     base.Store.UpdateEventStatus(false, HasActivatableWorkflowEvent.Value);
                     base.StoreLock.InstanceDetectionTask.ResetTimer(false);
                 }
-                base.InstancePersistenceContext.QueriedInstanceStore(
-                    new ActivatableWorkflowsQueryResult(activationParametersList)
-                );
+                base.InstancePersistenceContext
+                    .QueriedInstanceStore(
+                        new ActivatableWorkflowsQueryResult(activationParametersList)
+                    );
             }
             return exception;
         }

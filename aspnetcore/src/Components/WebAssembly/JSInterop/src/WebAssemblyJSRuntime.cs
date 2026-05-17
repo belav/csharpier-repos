@@ -19,8 +19,7 @@ public abstract class WebAssemblyJSRuntime : JSInProcessRuntime, IJSUnmarshalled
     /// </summary>
     protected WebAssemblyJSRuntime()
     {
-        JsonSerializerOptions
-            .Converters
+        JsonSerializerOptions.Converters
             .Insert(0, new WebAssemblyJSObjectReferenceJsonConverter(this));
     }
 

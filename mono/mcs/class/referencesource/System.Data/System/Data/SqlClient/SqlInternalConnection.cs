@@ -504,8 +504,7 @@ namespace System.Data.SqlClient
                         else
                         {
                             hasDelegatedTransaction = (bool)
-                                SysTxForGlobalTransactions
-                                    .EnlistPromotableSinglePhase
+                                SysTxForGlobalTransactions.EnlistPromotableSinglePhase
                                     .Invoke(
                                         tx,
                                         new object[]
@@ -845,8 +844,7 @@ namespace System.Data.SqlClient
             byte[] transactionCookie = null;
             if (null != transaction)
             {
-                transactionCookie = SysTx
-                    .TransactionInterop
+                transactionCookie = SysTx.TransactionInterop
                     .GetExportCookie(transaction, whereAbouts);
             }
             return transactionCookie;

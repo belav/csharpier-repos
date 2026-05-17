@@ -19,14 +19,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             CancellationToken cancellationToken
         )
         {
-            return context
-                    .TargetToken
+            return context.TargetToken
                     .IsAccessorDeclarationContext<PropertyDeclarationSyntax>(
                         position,
                         SyntaxKind.InitKeyword
                     )
-                || context
-                    .TargetToken
+                || context.TargetToken
                     .IsAccessorDeclarationContext<IndexerDeclarationSyntax>(
                         position,
                         SyntaxKind.InitKeyword

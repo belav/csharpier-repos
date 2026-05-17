@@ -699,8 +699,7 @@ namespace System.ServiceModel.Security
                     {
                         if (
                             false
-                            == importer
-                                .State
+                            == importer.State
                                 .ContainsKey(
                                     SecurityBindingElementImporter.InSecureConversationBootstrapBindingImportMode
                                 )
@@ -1352,8 +1351,7 @@ namespace System.ServiceModel.Security
                 && assertion != null
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(SR.UnsupportedSecurityPolicyAssertion, assertion.OuterXml)
@@ -1373,8 +1371,7 @@ namespace System.ServiceModel.Security
                 && assertion != null
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(SR.UnsupportedSecurityPolicyAssertion, assertion.OuterXml)
@@ -1394,8 +1391,7 @@ namespace System.ServiceModel.Security
                 && assertion != null
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(SR.UnsupportedSecurityPolicyAssertion, assertion.OuterXml)
@@ -1431,8 +1427,7 @@ namespace System.ServiceModel.Security
             }
             if (optionalSignedEncrypted == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("optionalSignedEncrypted");
             }
 
@@ -1525,8 +1520,7 @@ namespace System.ServiceModel.Security
             }
             if (optionalEndorsing == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("optionalEndorsing");
             }
 
@@ -1551,8 +1545,7 @@ namespace System.ServiceModel.Security
                         && assertion != null
                     )
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(
                                     SR.GetString(
@@ -1627,8 +1620,7 @@ namespace System.ServiceModel.Security
             }
             if (optionalSignedEndorsing == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("optionalSignedEndorsing");
             }
 
@@ -1656,8 +1648,7 @@ namespace System.ServiceModel.Security
                         && assertion != null
                     )
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(
                                     SR.GetString(
@@ -1778,8 +1769,7 @@ namespace System.ServiceModel.Security
                 }
             }
             foreach (
-                SupportingTokenParameters r in security
-                    .OptionalOperationSupportingTokenParameters
+                SupportingTokenParameters r in security.OptionalOperationSupportingTokenParameters
                     .Values
             )
             {
@@ -1793,8 +1783,7 @@ namespace System.ServiceModel.Security
             bindingParameters.Add(
                 ChannelProtectionRequirements.CreateFromContract(
                     policyContext.Contract,
-                    policyContext
-                        .BindingElements
+                    policyContext.BindingElements
                         .Find<SecurityBindingElement>()
                         .GetIndividualProperty<ISecurityCapabilities>(),
                     false
@@ -1847,8 +1836,7 @@ namespace System.ServiceModel.Security
 
                     // confidentiality
                     if (
-                        protectionRequirements
-                            .OutgoingEncryptionParts
+                        protectionRequirements.OutgoingEncryptionParts
                             .TryGetParts(fault.Action, out parts)
                     )
                     {
@@ -2002,8 +1990,7 @@ namespace System.ServiceModel.Security
             switch (layout)
             {
                 default:
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new ArgumentOutOfRangeException("layout"));
                 case SecurityHeaderLayout.Lax:
                     return CreateWsspAssertion(LaxName);
@@ -2139,8 +2126,7 @@ namespace System.ServiceModel.Security
                 result = CreateWsspAssertion(TripleDesSha256Rsa15Name);
             else
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentOutOfRangeException("suite"));
             }
 
@@ -2363,8 +2349,7 @@ namespace System.ServiceModel.Security
         {
             if (transportTokenAssertion == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("transportTokenAssertion");
             }
 
@@ -2481,8 +2466,7 @@ namespace System.ServiceModel.Security
             }
             else
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentOutOfRangeException("parameters"));
             }
 
@@ -2560,8 +2544,7 @@ namespace System.ServiceModel.Security
                         if (e is NullReferenceException)
                             throw;
 
-                        importer
-                            .Errors
+                        importer.Errors
                             .Add(
                                 new MetadataConversionError(
                                     SR.GetString(
@@ -2590,8 +2573,7 @@ namespace System.ServiceModel.Security
             switch (inclusionMode)
             {
                 default:
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new ArgumentOutOfRangeException("inclusionMode"));
                 case SecurityTokenInclusionMode.AlwaysToInitiator:
                     tokenAssertion.SetAttribute(
@@ -2752,8 +2734,7 @@ namespace System.ServiceModel.Security
             switch (referenceStyle)
             {
                 default:
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new ArgumentOutOfRangeException("referenceStyle"));
                 case X509KeyIdentifierClauseType.IssuerSerial:
                     _mustSupportRefIssuerSerialName = true;
@@ -2952,8 +2933,7 @@ namespace System.ServiceModel.Security
             switch (referenceStyle)
             {
                 default:
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new ArgumentOutOfRangeException("referenceStyle"));
                 case SecurityTokenReferenceStyle.External:
                     return CreateWsspAssertion(RequireExternalReferenceName);
@@ -3001,8 +2981,7 @@ namespace System.ServiceModel.Security
                 if (issuerMetadataAddress != null)
                 {
                     MetadataSet metadataSet = new MetadataSet();
-                    metadataSet
-                        .MetadataSections
+                    metadataSet.MetadataSections
                         .Add(
                             new MetadataSection(
                                 null,
@@ -3464,8 +3443,7 @@ namespace System.ServiceModel.Security
         )
         {
             if (bootstrapSecurity == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("bootstrapBinding");
 
             WSSecurityPolicy sp = WSSecurityPolicy.GetSecurityPolicyDriver(
@@ -3476,8 +3454,7 @@ namespace System.ServiceModel.Security
 
             CustomBinding bootstrapBinding = new CustomBinding(bootstrapSecurity);
             if (
-                exporter
-                    .State
+                exporter.State
                     .ContainsKey(
                         SecurityPolicyStrings.SecureConversationBootstrapBindingElementsBelowSecurityKey
                     )
@@ -3506,11 +3483,9 @@ namespace System.ServiceModel.Security
 
             // hard-coded requirements in V1: sign and encrypt RST and RSTR body
             ChannelProtectionRequirements bootstrapProtection = new ChannelProtectionRequirements();
-            bootstrapProtection
-                .IncomingEncryptionParts
+            bootstrapProtection.IncomingEncryptionParts
                 .AddParts(new MessagePartSpecification(true));
-            bootstrapProtection
-                .OutgoingEncryptionParts
+            bootstrapProtection.OutgoingEncryptionParts
                 .AddParts(new MessagePartSpecification(true));
             bootstrapProtection.IncomingSignatureParts.AddParts(new MessagePartSpecification(true));
             bootstrapProtection.OutgoingSignatureParts.AddParts(new MessagePartSpecification(true));
@@ -3591,8 +3566,7 @@ namespace System.ServiceModel.Security
                 {
                     bindingElements = importer.ImportPolicy(NullServiceEndpoint, alternatives);
                     if (
-                        importer
-                            .State
+                        importer.State
                             .ContainsKey(
                                 SecurityBindingElementImporter.SecureConversationBootstrapEncryptionRequirements
                             )
@@ -3604,8 +3578,7 @@ namespace System.ServiceModel.Security
                             ];
                         if (encryption.IsBodyIncluded != true)
                         {
-                            importer
-                                .Errors
+                            importer.Errors
                                 .Add(
                                     new MetadataConversionError(
                                         SR.GetString(
@@ -3618,8 +3591,7 @@ namespace System.ServiceModel.Security
                         }
                     }
                     if (
-                        importer
-                            .State
+                        importer.State
                             .ContainsKey(
                                 SecurityBindingElementImporter.SecureConversationBootstrapSignatureRequirements
                             )
@@ -3631,8 +3603,7 @@ namespace System.ServiceModel.Security
                             ];
                         if (signature.IsBodyIncluded != true)
                         {
-                            importer
-                                .Errors
+                            importer.Errors
                                 .Add(
                                     new MetadataConversionError(
                                         SR.GetString(
@@ -3647,32 +3618,27 @@ namespace System.ServiceModel.Security
                 }
                 finally
                 {
-                    importer
-                        .State
+                    importer.State
                         .Remove(
                             SecurityBindingElementImporter.InSecureConversationBootstrapBindingImportMode
                         );
                     if (
-                        importer
-                            .State
+                        importer.State
                             .ContainsKey(
                                 SecurityBindingElementImporter.SecureConversationBootstrapEncryptionRequirements
                             )
                     )
-                        importer
-                            .State
+                        importer.State
                             .Remove(
                                 SecurityBindingElementImporter.SecureConversationBootstrapEncryptionRequirements
                             );
                     if (
-                        importer
-                            .State
+                        importer.State
                             .ContainsKey(
                                 SecurityBindingElementImporter.SecureConversationBootstrapSignatureRequirements
                             )
                     )
-                        importer
-                            .State
+                        importer.State
                             .Remove(
                                 SecurityBindingElementImporter.SecureConversationBootstrapSignatureRequirements
                             );
@@ -3789,8 +3755,7 @@ namespace System.ServiceModel.Security
             {
                 if (policyContext == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgumentNull("policyContext");
                 }
                 if (parameters == null)
@@ -3815,8 +3780,7 @@ namespace System.ServiceModel.Security
 
                 if (maximumRedirections <= 0)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(SR.MaximumPolicyRedirectionsExceeded)
@@ -3892,8 +3856,7 @@ namespace System.ServiceModel.Security
                     // we could not retrieve the metadata from the issuer for some reason
                     //
                     if (mexException != null)
-                        importer
-                            .Errors
+                        importer.Errors
                             .Add(
                                 new MetadataConversionError(
                                     SR.GetString(
@@ -3939,16 +3902,14 @@ namespace System.ServiceModel.Security
                     )
                 )
                 {
-                    wsdlImporter
-                        .State
+                    wsdlImporter.State
                         .Add(
                             MetadataExchangeClient.MetadataExchangeClientKey,
                             importer.State[MetadataExchangeClient.MetadataExchangeClientKey]
                         );
                 }
 
-                wsdlImporter
-                    .State
+                wsdlImporter.State
                     .Add(
                         SecurityBindingElementImporter.MaxPolicyRedirectionsKey,
                         maximumRedirections
@@ -3960,8 +3921,7 @@ namespace System.ServiceModel.Security
                 for (int i = 0; i < wsdlImporter.Errors.Count; ++i)
                 {
                     MetadataConversionError error = wsdlImporter.Errors[i];
-                    importer
-                        .Errors
+                    importer.Errors
                         .Add(
                             new MetadataConversionError(
                                 SR.GetString(
@@ -3982,8 +3942,7 @@ namespace System.ServiceModel.Security
                         && parameters.AlternativeIssuerEndpoints.Count > 0
                     )
                     {
-                        importer
-                            .Errors
+                        importer.Errors
                             .Add(
                                 new MetadataConversionError(
                                     SR.GetString(SR.MultipleIssuerEndpointsFound, mexAddress)
@@ -4066,8 +4025,7 @@ namespace System.ServiceModel.Security
                                         )
                                         && (
                                             message.Action
-                                            == trustDriver
-                                                .RequestSecurityTokenResponseFinalAction
+                                            == trustDriver.RequestSecurityTokenResponseFinalAction
                                                 .Value
                                         )
                                     )
@@ -4114,8 +4072,7 @@ namespace System.ServiceModel.Security
 
             bool TryGetTrustDriver(ServiceEndpoint endpoint, out TrustDriver trustDriver)
             {
-                SecurityBindingElement sbe = endpoint
-                    .Binding
+                SecurityBindingElement sbe = endpoint.Binding
                     .CreateBindingElements()
                     .Find<SecurityBindingElement>();
                 trustDriver = null;
@@ -4205,8 +4162,7 @@ namespace System.ServiceModel.Security
                     }
                 }
 
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new NotSupportedException());
             }
         }

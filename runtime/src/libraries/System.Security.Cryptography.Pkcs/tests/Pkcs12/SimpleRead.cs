@@ -48,8 +48,7 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
                 keyBagAttrs[1].Values[0]
             );
 
-            byte[] cspNameBytes = Encoding
-                .BigEndianUnicode
+            byte[] cspNameBytes = Encoding.BigEndianUnicode
                 .GetBytes("Microsoft Strong Cryptographic Provider");
 
             Assert.Equal(

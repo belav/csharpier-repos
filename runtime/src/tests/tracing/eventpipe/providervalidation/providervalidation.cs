@@ -44,8 +44,7 @@ namespace Tracing.Tests.ProviderValidation
 
             bool enableRundown = TestLibrary.Utilities.IsNativeAot ? false : true;
 
-            Dictionary<string, ExpectedEventCount> _expectedEventCounts = TestLibrary
-                .Utilities
+            Dictionary<string, ExpectedEventCount> _expectedEventCounts = TestLibrary.Utilities
                 .IsNativeAot
                 ? _expectedEventCountsNativeAOT
                 : _expectedEventCountsCoreCLR;

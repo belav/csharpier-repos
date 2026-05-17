@@ -109,8 +109,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.L
             }
 
             var projectFactory = componentModel.GetService<VisualStudioProjectFactory>();
-            ProjectSystemProject = threadingContext
-                .JoinableTaskFactory
+            ProjectSystemProject = threadingContext.JoinableTaskFactory
                 .Run(() =>
                     projectFactory.CreateAndAddToWorkspaceAsync(
                         projectSystemName,

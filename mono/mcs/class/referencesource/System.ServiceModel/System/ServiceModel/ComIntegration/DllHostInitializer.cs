@@ -82,8 +82,7 @@ namespace System.ServiceModel.ComIntegration
                 application = CatalogUtil.FindApplication(applicationId);
                 if (application == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             Error.ListenerInitFailed(
                                 SR.GetString(
@@ -97,8 +96,7 @@ namespace System.ServiceModel.ComIntegration
                 bool processPooled = ((int)application.GetValue("ConcurrentApps")) > 1;
                 if (processPooled)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             Error.ListenerInitFailed(
                                 SR.GetString(
@@ -117,8 +115,7 @@ namespace System.ServiceModel.ComIntegration
 
                 if (processRecycled)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             Error.ListenerInitFailed(
                                 SR.GetString(
@@ -145,8 +142,7 @@ namespace System.ServiceModel.ComIntegration
                     string[] serviceParams = service.Name.Split(',');
                     if (serviceParams.Length != 2)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(
                                     SR.GetString(SR.OnlyClsidsAllowedForServiceType, service.Name)
@@ -155,13 +151,11 @@ namespace System.ServiceModel.ComIntegration
                     }
 
                     if (
-                        !DiagnosticUtility
-                            .Utility
+                        !DiagnosticUtility.Utility
                             .TryCreateGuid(serviceParams[0], out appIdToCompare)
                     )
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(
                                     SR.GetString(SR.OnlyClsidsAllowedForServiceType, service.Name)
@@ -170,13 +164,11 @@ namespace System.ServiceModel.ComIntegration
                     }
 
                     if (
-                        !DiagnosticUtility
-                            .Utility
+                        !DiagnosticUtility.Utility
                             .TryCreateGuid(serviceParams[1], out clsidToCompare)
                     )
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(
                                     SR.GetString(SR.OnlyClsidsAllowedForServiceType, service.Name)
@@ -207,19 +199,19 @@ namespace System.ServiceModel.ComIntegration
                                 clsid,
                                 service
                             );
-                            this.hosts.Add(
-                                new DllHostedComPlusServiceHost(
-                                    clsid,
-                                    service,
-                                    application,
-                                    classObject
-                                )
-                            );
+                            this.hosts
+                                .Add(
+                                    new DllHostedComPlusServiceHost(
+                                        clsid,
+                                        service,
+                                        application,
+                                        classObject
+                                    )
+                                );
                         }
                     }
                     if (!foundService)
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(
                                     SR.GetString(
@@ -232,8 +224,7 @@ namespace System.ServiceModel.ComIntegration
                 }
                 if (foundService == false)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(Error.DllHostInitializerFoundNoServices());
                 }
 
@@ -244,14 +235,12 @@ namespace System.ServiceModel.ComIntegration
             }
             catch (Exception e)
             {
-                DiagnosticUtility
-                    .EventLog
+                DiagnosticUtility.EventLog
                     .LogEvent(
                         TraceEventType.Error,
                         (ushort)System.Runtime.Diagnostics.EventLogCategory.ComPlus,
                         (uint)
-                            System
-                                .Runtime
+                            System.Runtime
                                 .Diagnostics
                                 .EventLogEventId
                                 .ComPlusDllHostInitializerStartingError,

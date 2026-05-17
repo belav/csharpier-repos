@@ -98,8 +98,7 @@ namespace System.Activities.Core.Presentation
                             clone.Type = property.Type;
                             list.Add(clone);
                             if (
-                                StringComparer
-                                    .Ordinal
+                                StringComparer.Ordinal
                                     .Equals(this.SelectedPropertyName, property.Name)
                             )
                             {

@@ -544,13 +544,8 @@ namespace System.Net.Sockets.Tests
             )
             {
                 server.Start();
-                await Task.Factory.FromAsync(
-                    socket.BeginConnect,
-                    socket.EndConnect,
-                    connectTo,
-                    port,
-                    null
-                );
+                await Task.Factory
+                    .FromAsync(socket.BeginConnect, socket.EndConnect, connectTo, port, null);
                 Assert.True(socket.Connected);
             }
         }
@@ -634,12 +629,13 @@ namespace System.Net.Sockets.Tests
             )
             {
                 server.Start();
-                await Task.Factory.FromAsync(
-                    socket.BeginConnect,
-                    socket.EndConnect,
-                    new IPEndPoint(connectTo, port),
-                    null
-                );
+                await Task.Factory
+                    .FromAsync(
+                        socket.BeginConnect,
+                        socket.EndConnect,
+                        new IPEndPoint(connectTo, port),
+                        null
+                    );
                 Assert.True(socket.Connected);
             }
         }
@@ -664,13 +660,8 @@ namespace System.Net.Sockets.Tests
             )
             {
                 server.Start();
-                await Task.Factory.FromAsync(
-                    socket.BeginConnect,
-                    socket.EndConnect,
-                    connectTo,
-                    port,
-                    null
-                );
+                await Task.Factory
+                    .FromAsync(socket.BeginConnect, socket.EndConnect, connectTo, port, null);
                 Assert.True(socket.Connected);
             }
         }
@@ -689,13 +680,8 @@ namespace System.Net.Sockets.Tests
             )
             {
                 server.Start();
-                await Task.Factory.FromAsync(
-                    socket.BeginConnect,
-                    socket.EndConnect,
-                    "localhost",
-                    port,
-                    null
-                );
+                await Task.Factory
+                    .FromAsync(socket.BeginConnect, socket.EndConnect, "localhost", port, null);
                 Assert.True(socket.Connected);
             }
         }
@@ -714,12 +700,13 @@ namespace System.Net.Sockets.Tests
             )
             {
                 server.Start();
-                await Task.Factory.FromAsync(
-                    socket.BeginConnect,
-                    socket.EndConnect,
-                    new DnsEndPoint("localhost", port),
-                    null
-                );
+                await Task.Factory
+                    .FromAsync(
+                        socket.BeginConnect,
+                        socket.EndConnect,
+                        new DnsEndPoint("localhost", port),
+                        null
+                    );
                 Assert.True(socket.Connected);
             }
         }
@@ -2105,8 +2092,7 @@ namespace System.Net.Sockets.Tests
                 // Assert.Equal(connectTo.MapToIPv6(), remoteEndPoint.Address);
 
                 SocketUdpClient client = new SocketUdpClient(_log, serverSocket, connectTo, port);
-                bool success = async
-                    .AsyncWaitHandle
+                bool success = async.AsyncWaitHandle
                     .WaitOne(
                         expectedToTimeout
                             ? TestSettings.FailingTestTimeout

@@ -34,8 +34,7 @@ namespace ILCompiler.DependencyAnalysis
             );
 
             DependencyList dependencies = new DependencyList();
-            factory
-                .MetadataManager
+            factory.MetadataManager
                 .GetDependenciesDueToReflectability(ref dependencies, factory, _method);
 
             // No runtime artifacts needed if this is a generic definition
@@ -70,8 +69,7 @@ namespace ILCompiler.DependencyAnalysis
                     {
                         // FindSlotDefiningMethod might uninstantiate. We might want to fix the method not to do that.
                         if (slotDefiningMethod.IsMethodDefinition)
-                            slotDefiningMethod = factory
-                                .TypeSystemContext
+                            slotDefiningMethod = factory.TypeSystemContext
                                 .GetInstantiatedMethod(slotDefiningMethod, _method.Instantiation);
                         dependencies.Add(
                             factory.GVMDependencies(

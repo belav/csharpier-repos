@@ -181,8 +181,7 @@ public class DatabaseErrorPageMiddleware
 
             case DbContextErrorEventData contextErrorEventData:
             {
-                _localDiagnostic
-                    .Value
+                _localDiagnostic.Value
                     ?.Hold(
                         contextErrorEventData.Exception,
                         contextErrorEventData.Context!.GetType()
@@ -192,8 +191,7 @@ public class DatabaseErrorPageMiddleware
             }
             case DbContextTypeErrorEventData contextTypeErrorEventData:
             {
-                _localDiagnostic
-                    .Value
+                _localDiagnostic.Value
                     ?.Hold(
                         contextTypeErrorEventData.Exception,
                         contextTypeErrorEventData.ContextType

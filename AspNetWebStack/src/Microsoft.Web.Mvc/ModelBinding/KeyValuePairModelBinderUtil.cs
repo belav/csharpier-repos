@@ -25,8 +25,7 @@ namespace Microsoft.Web.Mvc.ModelBinding
                     ),
                 };
 
-            IExtensibleModelBinder binder = parentBindingContext
-                .ModelBinderProviders
+            IExtensibleModelBinder binder = parentBindingContext.ModelBinderProviders
                 .GetBinder(controllerContext, propertyBindingContext);
             if (binder != null)
             {
@@ -34,8 +33,7 @@ namespace Microsoft.Web.Mvc.ModelBinding
                 {
                     object untypedModel = propertyBindingContext.Model;
                     model = ModelBinderUtil.CastOrDefault<TModel>(untypedModel);
-                    parentBindingContext
-                        .ValidationNode
+                    parentBindingContext.ValidationNode
                         .ChildNodes
                         .Add(propertyBindingContext.ValidationNode);
                     return true;

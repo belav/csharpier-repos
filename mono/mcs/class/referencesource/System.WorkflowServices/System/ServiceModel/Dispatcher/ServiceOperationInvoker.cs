@@ -55,8 +55,7 @@ namespace System.ServiceModel.Dispatcher
 
             if (durableInstance == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR2.GetString(
@@ -116,8 +115,7 @@ namespace System.ServiceModel.Dispatcher
 
             if (durableInstance == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR2.GetString(
@@ -177,11 +175,8 @@ namespace System.ServiceModel.Dispatcher
                 this.durableInstance = instance;
                 this.operationContext = OperationContext.Current;
 
-                IAsyncResult result = this.durableInstance.BeginStartOperation(
-                    canCreateInstance,
-                    startCallback,
-                    this
-                );
+                IAsyncResult result = this.durableInstance
+                    .BeginStartOperation(canCreateInstance, startCallback, this);
 
                 if (result.CompletedSynchronously)
                 {
@@ -254,8 +249,7 @@ namespace System.ServiceModel.Dispatcher
 
                 try
                 {
-                    invokeResult.returnValue = invokeResult
-                        .invoker
+                    invokeResult.returnValue = invokeResult.invoker
                         .innerInvoker
                         .InvokeEnd(
                             invokeResult.serviceInstance,
@@ -301,8 +295,7 @@ namespace System.ServiceModel.Dispatcher
 
                 try
                 {
-                    invokeResult.serviceInstance = invokeResult
-                        .durableInstance
+                    invokeResult.serviceInstance = invokeResult.durableInstance
                         .EndStartOperation(resultParameter);
                 }
                 catch (Exception e)
@@ -329,13 +322,14 @@ namespace System.ServiceModel.Dispatcher
             {
                 try
                 {
-                    IAsyncResult result = this.durableInstance.BeginFinishOperation(
-                        this.invoker.completesInstance,
-                        this.invoker.contractCausesSave,
-                        this.completionException,
-                        finishCallback,
-                        this
-                    );
+                    IAsyncResult result = this.durableInstance
+                        .BeginFinishOperation(
+                            this.invoker.completesInstance,
+                            this.invoker.contractCausesSave,
+                            this.completionException,
+                            finishCallback,
+                            this
+                        );
 
                     if (result.CompletedSynchronously)
                     {

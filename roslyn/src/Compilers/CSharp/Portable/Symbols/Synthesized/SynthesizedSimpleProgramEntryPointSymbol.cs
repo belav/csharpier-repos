@@ -189,8 +189,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             CSharpCompilation compilation
         )
         {
-            return compilation
-                .SourceModule
+            return compilation.SourceModule
                 .GlobalNamespace
                 .GetTypeMembers(WellKnownMemberNames.TopLevelStatementsEntryPointTypeName)
                 .OfType<SourceNamedTypeSymbol>()
@@ -355,8 +354,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     var span = definedWithinSpan.GetValueOrDefault();
 
                     foreach (
-                        var global in ((CompilationUnitSyntax)tree.GetRoot(cancellationToken))
-                            .Members
+                        var global in (
+                            (CompilationUnitSyntax)tree.GetRoot(cancellationToken)
+                        ).Members
                             .OfType<GlobalStatementSyntax>()
                     )
                     {

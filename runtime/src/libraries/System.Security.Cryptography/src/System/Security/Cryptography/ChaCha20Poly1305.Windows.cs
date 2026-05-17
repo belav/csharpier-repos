@@ -16,8 +16,7 @@ namespace System.Security.Cryptography
         [MemberNotNull(nameof(_keyHandle))]
         private void ImportKey(ReadOnlySpan<byte> key)
         {
-            _keyHandle = Interop
-                .BCrypt
+            _keyHandle = Interop.BCrypt
                 .BCryptImportKey(BCryptAeadHandleCache.ChaCha20Poly1305, key);
         }
 

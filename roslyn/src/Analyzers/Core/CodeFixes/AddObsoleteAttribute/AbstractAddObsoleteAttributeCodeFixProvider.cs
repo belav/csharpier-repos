@@ -64,8 +64,7 @@ namespace Microsoft.CodeAnalysis.AddObsoleteAttribute
             CancellationToken cancellationToken
         )
         {
-            var compilation = await document
-                .Project
+            var compilation = await document.Project
                 .GetRequiredCompilationAsync(cancellationToken)
                 .ConfigureAwait(false);
             var attribute = compilation.GetTypeByMetadataName(typeof(ObsoleteAttribute).FullName!);

@@ -24,8 +24,7 @@ namespace System.IdentityModel.Tokens
         {
             if (!IsDefined(value))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidEnumArgumentException(
                             "value",

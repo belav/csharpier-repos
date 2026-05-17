@@ -85,8 +85,7 @@ namespace System.ServiceModel.Channels
             {
                 if (bindingElement.MaxReceivedMessageSize > int.MaxValue)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentOutOfRangeException(
                                 "bindingElement.MaxReceivedMessageSize",
@@ -97,8 +96,7 @@ namespace System.ServiceModel.Channels
 
                 if (bindingElement.MaxBufferSize != bindingElement.MaxReceivedMessageSize)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgument(
                             "bindingElement",
                             SR.GetString(SR.MaxBufferSizeMustMatchMaxReceivedMessageSize)
@@ -109,8 +107,7 @@ namespace System.ServiceModel.Channels
             {
                 if (bindingElement.MaxBufferSize > bindingElement.MaxReceivedMessageSize)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgument(
                             "bindingElement",
                             SR.GetString(SR.MaxBufferSizeMustNotExceedMaxReceivedMessageSize)
@@ -123,8 +120,7 @@ namespace System.ServiceModel.Channels
                 && bindingElement.AuthenticationScheme != AuthenticationSchemes.Anonymous
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(
                         "bindingElement",
                         SR.GetString(SR.HttpAuthDoesNotSupportRequestStreaming)
@@ -139,8 +135,7 @@ namespace System.ServiceModel.Channels
                     context.BindingParameters.FindAll<HttpCookieContainerBindingElement>();
                 if (httpCookieContainerBindingElements.Count > 1)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(
@@ -165,8 +160,7 @@ namespace System.ServiceModel.Channels
 
             if (!bindingElement.AuthenticationScheme.IsSingleton())
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(
                         "value",
                         SR.GetString(
@@ -190,8 +184,7 @@ namespace System.ServiceModel.Channels
             {
                 if (bindingElement.UseDefaultWebProxy)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(
@@ -234,13 +227,11 @@ namespace System.ServiceModel.Channels
             );
             this.bufferPool = new ConnectionBufferPool(webSocketBufferSize);
 
-            Collection<ClientWebSocketFactory> clientWebSocketFactories = context
-                .BindingParameters
+            Collection<ClientWebSocketFactory> clientWebSocketFactories = context.BindingParameters
                 .FindAll<ClientWebSocketFactory>();
             if (clientWebSocketFactories.Count > 1)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(
                         "context",
                         SR.GetString(
@@ -427,8 +418,7 @@ namespace System.ServiceModel.Channels
             ];
             if (spn == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new MessageSecurityException(
                             SR.GetString(SR.HttpSpnNotFound, response.ResponseUri)
@@ -523,8 +513,7 @@ namespace System.ServiceModel.Channels
                 && remoteAddress.Uri != via
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(CreateToMustEqualViaException(remoteAddress.Uri, via));
             }
         }
@@ -583,8 +572,7 @@ namespace System.ServiceModel.Channels
                 && this.WebSocketSettings.TransportUsage == WebSocketTransportUsage.Always
             )
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new InvalidOperationException(
                             SR.GetString(
@@ -601,8 +589,7 @@ namespace System.ServiceModel.Channels
             {
                 if (this.WebSocketSettings.TransportUsage == WebSocketTransportUsage.Never)
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(
                             new InvalidOperationException(
                                 SR.GetString(
@@ -620,8 +607,7 @@ namespace System.ServiceModel.Channels
                     && this.ClientWebSocketFactory == null
                 )
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(
                             new PlatformNotSupportedException(
                                 SR.GetString(
@@ -1029,11 +1015,8 @@ namespace System.ServiceModel.Channels
             }
             else if (this.proxyFactory != null)
             {
-                httpWebRequest.Proxy = this.proxyFactory.CreateWebProxy(
-                    httpWebRequest,
-                    proxyTokenProvider,
-                    timeout
-                );
+                httpWebRequest.Proxy = this.proxyFactory
+                    .CreateWebProxy(httpWebRequest, proxyTokenProvider, timeout);
             }
 
             if (this.AllowCookies)
@@ -1459,14 +1442,15 @@ namespace System.ServiceModel.Channels
                 SecurityTokenProviderContainer webRequestProxyTokenProvider;
                 if (this.ManualAddressing)
                 {
-                    this.Factory.CreateAndOpenTokenProviders(
-                        to,
-                        via,
-                        this.channelParameters,
-                        timeoutHelper.RemainingTime(),
-                        out webRequestTokenProvider,
-                        out webRequestProxyTokenProvider
-                    );
+                    this.Factory
+                        .CreateAndOpenTokenProviders(
+                            to,
+                            via,
+                            this.channelParameters,
+                            timeoutHelper.RemainingTime(),
+                            out webRequestTokenProvider,
+                            out webRequestProxyTokenProvider
+                        );
                 }
                 else
                 {
@@ -1475,15 +1459,16 @@ namespace System.ServiceModel.Channels
                 }
                 try
                 {
-                    return this.Factory.GetWebRequest(
-                        to,
-                        via,
-                        webRequestTokenProvider,
-                        webRequestProxyTokenProvider,
-                        clientCertificateToken,
-                        timeoutHelper.RemainingTime(),
-                        false
-                    );
+                    return this.Factory
+                        .GetWebRequest(
+                            to,
+                            via,
+                            webRequestTokenProvider,
+                            webRequestProxyTokenProvider,
+                            clientCertificateToken,
+                            timeoutHelper.RemainingTime(),
+                            false
+                        );
                 }
                 finally
                 {
@@ -1576,8 +1561,7 @@ namespace System.ServiceModel.Channels
                 {
                     object property;
                     if (
-                        message
-                            .Properties
+                        message.Properties
                             .TryGetValue(ConnectionGroupPrefixMessagePropertyName, out property)
                     )
                     {
@@ -1708,8 +1692,7 @@ namespace System.ServiceModel.Channels
                             // workaround for Whidbey bug #558605 - only happens in streamed case.
                             if (TransferModeHelper.IsRequestStreamed(this.factory.transferMode))
                             {
-                                throw DiagnosticUtility
-                                    .ExceptionUtility
+                                throw DiagnosticUtility.ExceptionUtility
                                     .ThrowHelperError(
                                         HttpChannelUtilities.CreateNullReferenceResponseException(
                                             nullReferenceException
@@ -2080,8 +2063,7 @@ namespace System.ServiceModel.Channels
                             // workaround for Whidbey bug #558605 - only happens in streamed case.
                             if (TransferModeHelper.IsRequestStreamed(this.factory.transferMode))
                             {
-                                throw DiagnosticUtility
-                                    .ExceptionUtility
+                                throw DiagnosticUtility.ExceptionUtility
                                     .ThrowHelperError(
                                         HttpChannelUtilities.CreateNullReferenceResponseException(
                                             nullReferenceException
@@ -2162,8 +2144,7 @@ namespace System.ServiceModel.Channels
                                 // workaround for Whidbey bug #558605 - only happens in streamed case.
                                 if (TransferModeHelper.IsRequestStreamed(this.factory.transferMode))
                                 {
-                                    throw DiagnosticUtility
-                                        .ExceptionUtility
+                                    throw DiagnosticUtility.ExceptionUtility
                                         .ThrowHelperError(
                                             HttpChannelUtilities.CreateNullReferenceResponseException(
                                                 nullReferenceException
@@ -2298,10 +2279,8 @@ namespace System.ServiceModel.Channels
                 void CompleteParseIncomingMessage(IAsyncResult result)
                 {
                     Exception exception = null;
-                    this.replyMessage = this.httpInput.EndParseIncomingMessage(
-                        result,
-                        out exception
-                    );
+                    this.replyMessage = this.httpInput
+                        .EndParseIncomingMessage(result, out exception);
                     Fx.Assert(
                         exception == null,
                         "ParseIncomingMessage should not set an exception after parsing a response message."
@@ -2479,14 +2458,15 @@ namespace System.ServiceModel.Channels
                     this.proxyTokenProvider = channel.proxyTokenProvider;
                     if (factory.ManualAddressing)
                     {
-                        this.factory.CreateAndOpenTokenProviders(
-                            to,
-                            via,
-                            channel.channelParameters,
-                            timeoutHelper.RemainingTime(),
-                            out this.tokenProvider,
-                            out this.proxyTokenProvider
-                        );
+                        this.factory
+                            .CreateAndOpenTokenProviders(
+                                to,
+                                via,
+                                channel.channelParameters,
+                                timeoutHelper.RemainingTime(),
+                                out this.tokenProvider,
+                                out this.proxyTokenProvider
+                            );
                     }
 
                     bool completeSelf = false;
@@ -2592,8 +2572,7 @@ namespace System.ServiceModel.Channels
                     {
                         if (authenticationLevel == AuthenticationLevel.MutualAuthRequired)
                         {
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
                                     new InvalidOperationException(
                                         SR.GetString(SR.CredentialDisallowsNtlm)
@@ -2714,8 +2693,7 @@ namespace System.ServiceModel.Channels
 
                 if (!authenticationScheme.IsSingleton())
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgument(
                             "value",
                             SR.GetString(SR.HttpRequiresSingleAuthScheme, authenticationScheme)
@@ -2759,8 +2737,7 @@ namespace System.ServiceModel.Channels
                         )
                     )
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(
                                     SR.GetString(
@@ -2779,8 +2756,7 @@ namespace System.ServiceModel.Channels
                         && (request.AuthenticationLevel != AuthenticationLevel.MutualAuthRequired)
                     )
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(
                                     SR.GetString(

@@ -43,8 +43,7 @@ namespace System.Net.Sockets
                 //set the socket context
                 try
                 {
-                    errorCode = UnsafeNclNativeMethods
-                        .OSSOCK
+                    errorCode = UnsafeNclNativeMethods.OSSOCK
                         .setsockopt(
                             socket.SafeHandle,
                             SocketOptionLevel.Socket,

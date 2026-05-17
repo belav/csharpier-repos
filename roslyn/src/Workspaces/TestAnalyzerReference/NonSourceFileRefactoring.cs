@@ -38,12 +38,10 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
                             text.ToString() + Environment.NewLine + "# Refactored"
                         );
                         if (document is AdditionalDocument)
-                            return document
-                                .Project
+                            return document.Project
                                 .Solution
                                 .WithAdditionalDocumentText(document.Id, newText);
-                        return document
-                            .Project
+                        return document.Project
                             .Solution
                             .WithAnalyzerConfigDocumentText(document.Id, newText);
                     }

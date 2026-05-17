@@ -117,8 +117,7 @@ namespace System.IdentityModel
                 {
                     if (algorithm == null)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperArgument("value", SR.GetString(SR.ID6034, value));
                     }
                     _hashName = value;
@@ -144,8 +143,7 @@ namespace System.IdentityModel
 
             if (0 == encoded.Length)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument("encoded", SR.GetString(SR.ID6045));
             }
 
@@ -170,8 +168,7 @@ namespace System.IdentityModel
                     int encryptedKeyAndIVSize = br.ReadInt32();
                     if (encryptedKeyAndIVSize < 0)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new FormatException(SR.GetString(SR.ID1006, encryptedKeyAndIVSize))
                             );
@@ -182,8 +179,7 @@ namespace System.IdentityModel
 
                     if (encryptedKeyAndIVSize > encoded.Length)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(new FormatException(SR.GetString(SR.ID1007)));
                     }
                     encryptedKeyAndIV = br.ReadBytes(encryptedKeyAndIVSize);
@@ -191,8 +187,7 @@ namespace System.IdentityModel
                     int encryptedDataSize = br.ReadInt32();
                     if (encryptedDataSize < 0)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new FormatException(SR.GetString(SR.ID1008, encryptedDataSize))
                             );
@@ -202,8 +197,7 @@ namespace System.IdentityModel
                     //
                     if (encryptedDataSize > encoded.Length)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(new FormatException(SR.GetString(SR.ID1009)));
                     }
 
@@ -295,8 +289,7 @@ namespace System.IdentityModel
 
             if (0 == value.Length)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument("value", SR.GetString(SR.ID6044));
             }
 

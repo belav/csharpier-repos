@@ -17,8 +17,7 @@ namespace Microsoft.CodeAnalysis.FindSymbols
     internal partial class AbstractSyntaxIndex<TIndex>
     {
         private static readonly string s_persistenceName = typeof(TIndex).Name;
-        private static readonly Checksum s_serializationFormatChecksum = CodeAnalysis
-            .Checksum
+        private static readonly Checksum s_serializationFormatChecksum = CodeAnalysis.Checksum
             .Create("38");
 
         /// <summary>
@@ -43,8 +42,7 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             CancellationToken cancellationToken
         )
         {
-            var storageService = project
-                .LanguageServices
+            var storageService = project.LanguageServices
                 .SolutionServices
                 .GetPersistentStorageService();
             var documentKey = DocumentKey.ToDocumentKey(
@@ -167,11 +165,9 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                 )
             );
 
-            var textChecksum = CodeAnalysis
-                .Checksum
+            var textChecksum = CodeAnalysis.Checksum
                 .Create(documentChecksumState.Text, s_serializationFormatChecksum);
-            var textAndDirectivesChecksum = CodeAnalysis
-                .Checksum
+            var textAndDirectivesChecksum = CodeAnalysis.Checksum
                 .Create(textChecksum, directivesChecksum.Value);
 
             return (textChecksum, textAndDirectivesChecksum);
@@ -184,8 +180,7 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             CancellationToken cancellationToken
         )
         {
-            var persistentStorageService = project
-                .LanguageServices
+            var persistentStorageService = project.LanguageServices
                 .SolutionServices
                 .GetPersistentStorageService();
             return SaveAsync(

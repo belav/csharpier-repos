@@ -57,11 +57,12 @@ namespace MonoTests.System.Threading
             int called = 0;
             var cts = new CancellationTokenSource(TimeSpan.FromMilliseconds(20));
             var mre = new ManualResetEvent(false);
-            cts.Token.Register(() =>
-            {
-                called++;
-                mre.Set();
-            });
+            cts.Token
+                .Register(() =>
+                {
+                    called++;
+                    mre.Set();
+                });
 
             Assert.IsTrue(mre.WaitOne(1000), "Not called in 1000ms");
             Assert.AreEqual(1, called, "#1");
@@ -74,11 +75,12 @@ namespace MonoTests.System.Threading
             int called = 0;
             var cts = new CancellationTokenSource();
             var mre = new ManualResetEvent(false);
-            cts.Token.Register(() =>
-            {
-                called++;
-                mre.Set();
-            });
+            cts.Token
+                .Register(() =>
+                {
+                    called++;
+                    mre.Set();
+                });
             cts.CancelAfter(20);
 
             Assert.IsTrue(mre.WaitOne(1000), "Should be cancelled in ~20ms");
@@ -103,11 +105,12 @@ namespace MonoTests.System.Threading
             int called = 0;
             var cts = new CancellationTokenSource();
             var mre = new ManualResetEvent(false);
-            cts.Token.Register(() =>
-            {
-                called++;
-                mre.Set();
-            });
+            cts.Token
+                .Register(() =>
+                {
+                    called++;
+                    mre.Set();
+                });
             cts.CancelAfter(50);
             cts.Dispose();
 
@@ -137,22 +140,24 @@ namespace MonoTests.System.Threading
             var cts = new CancellationTokenSource();
 
             int called = 0;
-            cts.Token.Register(
-                l =>
-                {
-                    Assert.AreEqual("v", l);
-                    ++called;
-                },
-                "v"
-            );
+            cts.Token
+                .Register(
+                    l =>
+                    {
+                        Assert.AreEqual("v", l);
+                        ++called;
+                    },
+                    "v"
+                );
             cts.Cancel();
             Assert.AreEqual(1, called, "#1");
 
             called = 0;
-            cts.Token.Register(() =>
-            {
-                called += 12;
-            });
+            cts.Token
+                .Register(() =>
+                {
+                    called += 12;
+                });
             cts.Cancel();
             Assert.AreEqual(12, called, "#2");
         }
@@ -199,10 +204,11 @@ namespace MonoTests.System.Threading
         {
             var cts = new CancellationTokenSource();
 
-            cts.Token.Register(() =>
-            {
-                throw new ApplicationException();
-            });
+            cts.Token
+                .Register(() =>
+                {
+                    throw new ApplicationException();
+                });
             try
             {
                 cts.Cancel();
@@ -221,18 +227,21 @@ namespace MonoTests.System.Threading
         {
             var cts = new CancellationTokenSource();
 
-            cts.Token.Register(() =>
-            {
-                throw new ApplicationException("1");
-            });
-            cts.Token.Register(() =>
-            {
-                throw new ApplicationException("2");
-            });
-            cts.Token.Register(() =>
-            {
-                throw new ApplicationException("3");
-            });
+            cts.Token
+                .Register(() =>
+                {
+                    throw new ApplicationException("1");
+                });
+            cts.Token
+                .Register(() =>
+                {
+                    throw new ApplicationException("2");
+                });
+            cts.Token
+                .Register(() =>
+                {
+                    throw new ApplicationException("3");
+                });
 
             try
             {
@@ -248,10 +257,11 @@ namespace MonoTests.System.Threading
 
             try
             {
-                cts.Token.Register(() =>
-                {
-                    throw new ApplicationException("1");
-                });
+                cts.Token
+                    .Register(() =>
+                    {
+                        throw new ApplicationException("1");
+                    });
                 Assert.Fail("#11");
             }
             catch (ApplicationException) { }
@@ -264,18 +274,21 @@ namespace MonoTests.System.Threading
         {
             var cts = new CancellationTokenSource();
 
-            cts.Token.Register(() =>
-            {
-                throw new ApplicationException("1");
-            });
-            cts.Token.Register(() =>
-            {
-                throw new ApplicationException("2");
-            });
-            cts.Token.Register(() =>
-            {
-                throw new ApplicationException("3");
-            });
+            cts.Token
+                .Register(() =>
+                {
+                    throw new ApplicationException("1");
+                });
+            cts.Token
+                .Register(() =>
+                {
+                    throw new ApplicationException("2");
+                });
+            cts.Token
+                .Register(() =>
+                {
+                    throw new ApplicationException("3");
+                });
 
             try
             {
@@ -326,18 +339,21 @@ namespace MonoTests.System.Threading
         {
             var cts = new CancellationTokenSource();
 
-            cts.Token.Register(() =>
-            {
-                throw new ApplicationException("1");
-            });
-            cts.Token.Register(() =>
-            {
-                throw new ApplicationException("2");
-            });
-            cts.Token.Register(() =>
-            {
-                throw new ApplicationException("3");
-            });
+            cts.Token
+                .Register(() =>
+                {
+                    throw new ApplicationException("1");
+                });
+            cts.Token
+                .Register(() =>
+                {
+                    throw new ApplicationException("2");
+                });
+            cts.Token
+                .Register(() =>
+                {
+                    throw new ApplicationException("3");
+                });
 
             try
             {
@@ -452,16 +468,18 @@ namespace MonoTests.System.Threading
         public void RegisterThenDispose()
         {
             var cts1 = new CancellationTokenSource();
-            var reg1 = cts1.Token.Register(() =>
-            {
-                throw new ApplicationException();
-            });
+            var reg1 = cts1.Token
+                .Register(() =>
+                {
+                    throw new ApplicationException();
+                });
 
             var cts2 = new CancellationTokenSource();
-            var reg2 = cts2.Token.Register(() =>
-            {
-                throw new ApplicationException();
-            });
+            var reg2 = cts2.Token
+                .Register(() =>
+                {
+                    throw new ApplicationException();
+                });
 
             Assert.AreNotEqual(cts1, cts2, "#1");
             Assert.AreNotSame(cts1, cts2, "#2");
@@ -486,25 +504,28 @@ namespace MonoTests.System.Threading
             var mre2 = new ManualResetEvent(false);
             int called = 0;
 
-            cts.Token.Register(() =>
-            {
-                Assert.IsTrue(cts.IsCancellationRequested, "#10");
-                Assert.IsTrue(cts.Token.WaitHandle.WaitOne(0), "#11");
-                mre2.Set();
-                mre.WaitOne(3000);
-                called += 11;
-            });
+            cts.Token
+                .Register(() =>
+                {
+                    Assert.IsTrue(cts.IsCancellationRequested, "#10");
+                    Assert.IsTrue(cts.Token.WaitHandle.WaitOne(0), "#11");
+                    mre2.Set();
+                    mre.WaitOne(3000);
+                    called += 11;
+                });
 
-            var t = Task.Factory.StartNew(() =>
-            {
-                cts.Cancel();
-            });
+            var t = Task.Factory
+                .StartNew(() =>
+                {
+                    cts.Cancel();
+                });
 
             Assert.IsTrue(mre2.WaitOne(1000), "#0");
-            cts.Token.Register(() =>
-            {
-                called++;
-            });
+            cts.Token
+                .Register(() =>
+                {
+                    called++;
+                });
             Assert.AreEqual(1, called, "#1");
             Assert.IsFalse(t.IsCompleted, "#2");
 

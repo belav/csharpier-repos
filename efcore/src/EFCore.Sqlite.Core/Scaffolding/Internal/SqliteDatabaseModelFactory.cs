@@ -216,12 +216,10 @@ public class SqliteDatabaseModelFactory : DatabaseModelFactory
                 GetForeignKeys(connection, table, databaseModel.Tables);
             }
 
-            var nullableKeyColumns = databaseModel
-                .Tables
+            var nullableKeyColumns = databaseModel.Tables
                 .SelectMany(t => t.PrimaryKey?.Columns ?? Array.Empty<DatabaseColumn>())
                 .Concat(
-                    databaseModel
-                        .Tables
+                    databaseModel.Tables
                         .SelectMany(t => t.ForeignKeys)
                         .SelectMany(fk => fk.PrincipalColumns)
                 )
@@ -393,8 +391,7 @@ ORDER BY "cid"
                 SqliteException.ThrowExceptionForRC(rc, db);
             }
 
-            table
-                .Columns
+            table.Columns
                 .Add(
                     new DatabaseColumn
                     {
@@ -971,8 +968,7 @@ ORDER BY "seqno"
             var columnName = reader.GetString(0);
             var column =
                 table.Columns.FirstOrDefault(c => c.Name == columnName)
-                ?? table
-                    .Columns
+                ?? table.Columns
                     .FirstOrDefault(c =>
                         c.Name.Equals(columnName, StringComparison.OrdinalIgnoreCase)
                     );
@@ -1007,8 +1003,7 @@ WHERE "pk" = 1
         var columnName = reader.GetString(0);
         var column =
             table.Columns.FirstOrDefault(c => c.Name == columnName)
-            ?? table
-                .Columns
+            ?? table.Columns
                 .FirstOrDefault(c => c.Name.Equals(columnName, StringComparison.OrdinalIgnoreCase));
         Check.DebugAssert(column != null, "column is null.");
 
@@ -1070,8 +1065,7 @@ ORDER BY "seqno"
                     var columnName = reader2.GetString(0);
                     var column =
                         table.Columns.FirstOrDefault(c => c.Name == columnName)
-                        ?? table
-                            .Columns
+                        ?? table.Columns
                             .FirstOrDefault(c =>
                                 c.Name.Equals(columnName, StringComparison.OrdinalIgnoreCase)
                             );
@@ -1132,8 +1126,7 @@ ORDER BY "seqno"
                     var name = reader2.GetString(0);
                     var column =
                         table.Columns.FirstOrDefault(c => c.Name == name)
-                        ?? table
-                            .Columns
+                        ?? table.Columns
                             .FirstOrDefault(c => c.Name.Equals(name, StringComparison.Ordinal));
                     Check.DebugAssert(column != null, "column is null.");
 
@@ -1223,8 +1216,7 @@ ORDER BY "seq"
                     var columnName = reader2.GetString(1);
                     var column =
                         table.Columns.FirstOrDefault(c => c.Name == columnName)
-                        ?? table
-                            .Columns
+                        ?? table.Columns
                             .FirstOrDefault(c =>
                                 c.Name.Equals(columnName, StringComparison.OrdinalIgnoreCase)
                             );
@@ -1235,18 +1227,17 @@ ORDER BY "seq"
                     if (principalColumnName != null)
                     {
                         principalColumn =
-                            foreignKey
-                                .PrincipalTable
+                            foreignKey.PrincipalTable
                                 .Columns
                                 .FirstOrDefault(c => c.Name == principalColumnName)
-                            ?? foreignKey
-                                .PrincipalTable
+                            ?? foreignKey.PrincipalTable
                                 .Columns
                                 .FirstOrDefault(c =>
-                                    c.Name.Equals(
-                                        principalColumnName,
-                                        StringComparison.OrdinalIgnoreCase
-                                    )
+                                    c.Name
+                                        .Equals(
+                                            principalColumnName,
+                                            StringComparison.OrdinalIgnoreCase
+                                        )
                                 );
                     }
                     else if (principalTable?.PrimaryKey != null)

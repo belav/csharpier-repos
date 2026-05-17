@@ -69,8 +69,7 @@ namespace Microsoft.CodeAnalysis.ColorSchemes
                 CancellationToken cancellationToken
             )
             {
-                await _threadingContext
-                    .JoinableTaskFactory
+                await _threadingContext.JoinableTaskFactory
                     .SwitchToMainThreadAsync(cancellationToken);
 
                 using var registryRoot = VSRegistry.RegistryRoot(
@@ -107,8 +106,7 @@ namespace Microsoft.CodeAnalysis.ColorSchemes
                 CancellationToken cancellationToken
             )
             {
-                await _threadingContext
-                    .JoinableTaskFactory
+                await _threadingContext.JoinableTaskFactory
                     .SwitchToMainThreadAsync(cancellationToken);
 
                 // The applied color scheme is stored in the configuration registry with the color theme information because

@@ -83,8 +83,7 @@ namespace Microsoft.CodeAnalysis.AddImport
             }
 
             // Create a tracking span from the pre-paste caret position that will grow as text is inserted.
-            var trackingSpan = caretPosition
-                .Value
+            var trackingSpan = caretPosition.Value
                 .Snapshot
                 .CreateTrackingSpan(
                     caretPosition.Value.Position,
@@ -162,8 +161,7 @@ namespace Microsoft.CodeAnalysis.AddImport
         {
             _threadingContext.ThrowIfNotOnUIThread();
 
-            var indicatorFactory = document
-                .Project
+            var indicatorFactory = document.Project
                 .Solution
                 .Services
                 .GetRequiredService<IBackgroundWorkIndicatorFactory>();

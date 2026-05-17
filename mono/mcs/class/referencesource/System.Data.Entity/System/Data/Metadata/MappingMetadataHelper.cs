@@ -40,8 +40,7 @@ namespace System.Data.Metadata.Edm
                 //for each mapping fragment of Type we are interested in within the given set
                 //Check use of IsOfTypes in Code review
                 foreach (
-                    StorageTypeMapping typeMap in extentMap
-                        .TypeMappings
+                    StorageTypeMapping typeMap in extentMap.TypeMappings
                         .Where(map => map.Types.Union(map.IsOfTypes).Contains(entityType))
                 )
                 {
@@ -106,8 +105,7 @@ namespace System.Data.Metadata.Edm
             )
             {
                 if (
-                    mapping
-                        .IsOfTypes
+                    mapping.IsOfTypes
                         .Any(parentType => parentType.IsAssignableFrom(childEntityType))
                     || mapping.Types.Contains(childEntityType)
                 )
@@ -138,8 +136,7 @@ namespace System.Data.Metadata.Edm
                 if (entitySetMapping != null) //could be association set mapping
                 {
                     foreach (
-                        var v in entitySetMapping
-                            .ModificationFunctionMappings
+                        var v in entitySetMapping.ModificationFunctionMappings
                             .Where(functionMap => functionMap.EntityType.Equals(entityType))
                     )
                     {
@@ -171,8 +168,7 @@ namespace System.Data.Metadata.Edm
             if (entityContainerMap == null)
             {
                 throw new MappingException(
-                    System
-                        .Data
+                    System.Data
                         .Entity
                         .Strings
                         .Mapping_NotFound_EntityContainer(entityContainer.Name)

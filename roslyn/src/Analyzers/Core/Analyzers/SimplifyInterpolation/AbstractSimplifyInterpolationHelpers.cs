@@ -139,8 +139,7 @@ namespace Microsoft.CodeAnalysis.SimplifyInterpolation
                         formatString = value;
 
                         unnecessarySpans.AddRange(
-                            invocation
-                                .Syntax
+                            invocation.Syntax
                                 .Span
                                 .Subtract(
                                     GetPreservedInterpolationExpressionSyntax(instance).FullSpan
@@ -173,8 +172,7 @@ namespace Microsoft.CodeAnalysis.SimplifyInterpolation
                     formatString = "";
 
                     unnecessarySpans.AddRange(
-                        invocation
-                            .Syntax
+                        invocation.Syntax
                             .Span
                             .Subtract(GetPreservedInterpolationExpressionSyntax(instance).FullSpan)
                     );
@@ -310,8 +308,7 @@ namespace Microsoft.CodeAnalysis.SimplifyInterpolation
                                 negate = targetName == nameof(string.PadRight);
 
                                 unnecessarySpans.AddRange(
-                                    invocation
-                                        .Syntax
+                                    invocation.Syntax
                                         .Span
                                         .Subtract(
                                             GetPreservedInterpolationExpressionSyntax(

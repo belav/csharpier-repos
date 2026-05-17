@@ -1281,8 +1281,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             TypeSymbol formalParameterType = method.GetParameterType(result.Result.BadParameter);
 
-            var boxedArgs = ConstraintsHelper
-                .CheckConstraintsArgsBoxed
+            var boxedArgs = ConstraintsHelper.CheckConstraintsArgsBoxed
                 .Allocate(
                     compilation,
                     conversions,
@@ -1529,8 +1528,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 && !(
                     refArg == RefKind.Ref
                     && refParameter == RefKind.In
-                    && binder
-                        .Compilation
+                    && binder.Compilation
                         .IsFeatureEnabled(MessageID.IDS_FeatureRefReadonlyParameters)
                 )
                 && !(
@@ -1555,8 +1553,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 else if (
                     refArg == RefKind.Ref
                     && refParameter == RefKind.In
-                    && !binder
-                        .Compilation
+                    && !binder.Compilation
                         .IsFeatureEnabled(MessageID.IDS_FeatureRefReadonlyParameters)
                 )
                 {
@@ -1932,8 +1929,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 );
             }
             else if (
-                System
-                    .Linq
+                System.Linq
                     .Enumerable
                     .Any(
                         ResultsBuilder,

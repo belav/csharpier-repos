@@ -483,8 +483,7 @@ namespace System.Diagnostics
                 )
                 {
                     string? filterAndPayloadSpecs = null;
-                    command
-                        .Arguments!
+                    command.Arguments!
                         .TryGetValue("FilterAndPayloadSpecs", out filterAndPayloadSpecs);
 
                     if (!IsEnabled(EventLevel.Informational, Keywords.IgnoreShortCutKeywords))
@@ -831,8 +830,7 @@ namespace System.Diagnostics
 
                 // Set up a subscription that watches for the given Diagnostic Sources and events which will call back
                 // to the EventSource.
-                _diagnosticsListenersSubscription = DiagnosticListener
-                    .AllListeners
+                _diagnosticsListenersSubscription = DiagnosticListener.AllListeners
                     .Subscribe(
                         new CallbackObserver<DiagnosticListener>(
                             delegate(DiagnosticListener newListener)
@@ -1869,8 +1867,7 @@ namespace System.Diagnostics
                             );
                             _propertyFetch =
                                 (Func<TObject, TProperty>)
-                                    property
-                                        .GetMethod!
+                                    property.GetMethod!
                                         .CreateDelegate(typeof(Func<TObject, TProperty>));
                         }
 
@@ -1895,8 +1892,7 @@ namespace System.Diagnostics
                             Debug.Assert(typeof(TStruct) == type);
                             _propertyFetch =
                                 (StructFunc<TStruct, TProperty>)
-                                    property
-                                        .GetMethod!
+                                    property.GetMethod!
                                         .CreateDelegate(typeof(StructFunc<TStruct, TProperty>));
                         }
 

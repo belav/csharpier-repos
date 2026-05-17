@@ -1069,8 +1069,7 @@ namespace System
                 {
                     int[]? arrayToReturn = arrayFromPoolForResultBuffer;
 
-                    arrayFromPoolForResultBuffer = ArrayPool<int>
-                        .Shared
+                    arrayFromPoolForResultBuffer = ArrayPool<int>.Shared
                         .Rent(checked(currentBufferSize * 2));
                     Span<uint> newBuffer = MemoryMarshal.Cast<int, uint>(
                         arrayFromPoolForResultBuffer
@@ -1420,8 +1419,7 @@ namespace System
 
                 if (targetSpan)
                 {
-                    spanSuccess = value
-                        ._sign
+                    spanSuccess = value._sign
                         .TryFormat(destination, out charsWritten, formatSpan, info);
                     return null;
                 }

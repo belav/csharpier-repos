@@ -655,8 +655,7 @@ namespace Microsoft.CodeAnalysis
                 _productNameContents = productName;
                 _productVersionContents = productVersion;
                 _assemblyVersionContents = assemblyVersion;
-                _langIdAndCodePageKey = System
-                    .String
+                _langIdAndCodePageKey = System.String
                     .Format(
                         "{0:x4}{1:x4}",
                         0 /*langId*/
@@ -966,8 +965,7 @@ namespace Microsoft.CodeAnalysis
                 ); //padding
                 System.Diagnostics.Debug.Assert((writer.BaseStream.Position & 3) == 0);
 
-                System
-                    .Diagnostics
+                System.Diagnostics
                     .Debug
                     .Assert(writer.BaseStream.Position - debugPos == dataSize - GetStringsSize());
                 debugPos = writer.BaseStream.Position;
@@ -983,8 +981,7 @@ namespace Microsoft.CodeAnalysis
                     WriteVersionString(entry, writer);
                 }
 
-                System
-                    .Diagnostics
+                System.Diagnostics
                     .Debug
                     .Assert(writer.BaseStream.Position - debugPos == GetStringsSize());
             }

@@ -93,8 +93,7 @@ namespace System.ServiceModel.Channels
             {
                 // In the absence of Receive context, Msmq Sessions can work only with the current transaction,
                 this.Fault();
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(SR.GetString(SR.MsmqTransactionRequired))
                     );
@@ -104,12 +103,13 @@ namespace System.ServiceModel.Channels
             try
             {
                 MsmqMessageProperty property;
-                bool retval = this.receiver.TryReceive(
-                    msmqMessage,
-                    timeout,
-                    MsmqTransactionMode.CurrentOrThrow,
-                    out property
-                );
+                bool retval = this.receiver
+                    .TryReceive(
+                        msmqMessage,
+                        timeout,
+                        MsmqTransactionMode.CurrentOrThrow,
+                        out property
+                    );
                 if (retval)
                 {
                     if (null != property)
@@ -132,8 +132,7 @@ namespace System.ServiceModel.Channels
                 }
                 else
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new TimeoutException());
                 }
             }
@@ -172,21 +171,21 @@ namespace System.ServiceModel.Channels
             {
                 // In the absence of Receive context, Msmq Sessions can work only with the current transaction,
                 this.Fault();
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(SR.GetString(SR.MsmqTransactionRequired))
                     );
             }
 
             MsmqInputMessage msmqMessage = this.receiver.TakeMessage();
-            return this.receiver.BeginTryReceive(
-                msmqMessage,
-                timeout,
-                MsmqTransactionMode.CurrentOrThrow,
-                callback,
-                state
-            );
+            return this.receiver
+                .BeginTryReceive(
+                    msmqMessage,
+                    timeout,
+                    MsmqTransactionMode.CurrentOrThrow,
+                    callback,
+                    state
+                );
         }
 
         //
@@ -229,8 +228,7 @@ namespace System.ServiceModel.Channels
                 }
                 else
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new TimeoutException());
                 }
             }

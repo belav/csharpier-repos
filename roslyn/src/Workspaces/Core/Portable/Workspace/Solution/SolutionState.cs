@@ -622,8 +622,7 @@ namespace Microsoft.CodeAnalysis
         private static IEnumerable<TextDocumentState> GetDocumentStates(
             ProjectState projectState
         ) =>
-            projectState
-                .DocumentStates
+            projectState.DocumentStates
                 .States
                 .Values
                 .Concat<TextDocumentState>(projectState.AdditionalDocumentStates.States.Values)
@@ -1256,15 +1255,13 @@ namespace Microsoft.CodeAnalysis
             // still update with the correct generator instances that are coming from the new reference that is actually held in the project state from above.
             // An alternative approach would be to call oldProject.WithAnalyzerReferences keeping all the references in there that are value equal the same,
             // but this avoids any surprises where other components calling WithAnalyzerReferences might not expect that.
-            var addedReferences = newProject
-                .AnalyzerReferences
+            var addedReferences = newProject.AnalyzerReferences
                 .Except<AnalyzerReference>(
                     oldProject.AnalyzerReferences,
                     ReferenceEqualityComparer.Instance
                 )
                 .ToImmutableArray();
-            var removedReferences = oldProject
-                .AnalyzerReferences
+            var removedReferences = oldProject.AnalyzerReferences
                 .Except<AnalyzerReference>(
                     newProject.AnalyzerReferences,
                     ReferenceEqualityComparer.Instance
@@ -1994,12 +1991,10 @@ namespace Microsoft.CodeAnalysis
             ImmutableDictionary<ProjectId, ProjectState> projectStates
         )
         {
-            var map = projectStates
-                .Values
+            var map = projectStates.Values
                 .Select(state => new KeyValuePair<ProjectId, ImmutableHashSet<ProjectId>>(
                     state.Id,
-                    state
-                        .ProjectReferences
+                    state.ProjectReferences
                         .Where(pr => projectStates.ContainsKey(pr.ProjectId))
                         .Select(pr => pr.ProjectId)
                         .ToImmutableHashSet()
@@ -2521,8 +2516,7 @@ namespace Microsoft.CodeAnalysis
 
             // First see if we have a generator driver that we can get from the other project.
             if (
-                !projectWithCachedGeneratorState
-                    .Solution
+                !projectWithCachedGeneratorState.Solution
                     .State
                     .TryGetCompilationTracker(projectWithCachedGeneratorState.Id, out var tracker)
                 || tracker.GeneratorDriver is null
@@ -2626,8 +2620,7 @@ namespace Microsoft.CodeAnalysis
                         aliases: projectReference.Aliases,
                         embedInteropTypes: projectReference.EmbedInteropTypes
                     );
-                    return await tracker
-                        .SkeletonReferenceCache
+                    return await tracker.SkeletonReferenceCache
                         .GetOrBuildReferenceAsync(tracker, this, properties, cancellationToken)
                         .ConfigureAwait(false);
                 }

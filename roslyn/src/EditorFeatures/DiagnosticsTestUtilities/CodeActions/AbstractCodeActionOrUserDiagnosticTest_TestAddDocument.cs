@@ -144,8 +144,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
             var actual = (await addedDocument.GetTextAsync()).ToString();
             Assert.Equal(expected, actual);
 
-            var editHandler = workspace
-                .ExportProvider
+            var editHandler = workspace.ExportProvider
                 .GetExportedValue<ICodeActionEditHandlerService>();
             if (!hasProjectChange)
             {

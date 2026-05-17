@@ -201,8 +201,7 @@ namespace ICSharpCode.SharpZipLib.Zip.Compression.Streams
                     }
                 }
                 int toCopy = Math.Min(currentLength, available);
-                System
-                    .Array
+                System.Array
                     .Copy(rawData, rawLength - (int)available, outBuffer, currentOffset, toCopy);
                 currentOffset += toCopy;
                 currentLength -= toCopy;
@@ -240,8 +239,7 @@ namespace ICSharpCode.SharpZipLib.Zip.Compression.Streams
                 }
 
                 int toCopy = Math.Min(currentLength, available);
-                System
-                    .Array
+                System.Array
                     .Copy(
                         clearText,
                         clearTextLength - (int)available,

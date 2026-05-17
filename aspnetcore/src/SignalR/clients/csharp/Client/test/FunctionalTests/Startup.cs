@@ -152,8 +152,7 @@ public class Startup
                 "/redirect/{*anything}",
                 context =>
                 {
-                    return context
-                        .Response
+                    return context.Response
                         .WriteAsync(
                             JsonConvert.SerializeObject(
                                 new

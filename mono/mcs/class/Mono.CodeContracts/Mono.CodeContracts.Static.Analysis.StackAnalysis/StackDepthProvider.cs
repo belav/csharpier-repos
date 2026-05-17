@@ -72,11 +72,16 @@ namespace Mono.CodeContracts.Static.Analysis.StackAnalysis
                 || pc.Block != pc.Block.Subroutine.Exit
                 || !pc.Block.Subroutine.IsMethod
             )
-                return this.il_decoder.ForwardDecode<
-                    TData,
-                    TResult,
-                    StackDecoder<TContext, TData, TResult, TVisitor>
-                >(pc, new StackDecoder<TContext, TData, TResult, TVisitor>(this, visitor), data);
+                return this.il_decoder
+                    .ForwardDecode<
+                        TData,
+                        TResult,
+                        StackDecoder<TContext, TData, TResult, TVisitor>
+                    >(
+                        pc,
+                        new StackDecoder<TContext, TData, TResult, TVisitor>(this, visitor),
+                        data
+                    );
             if (!pc.Block.Subroutine.HasReturnValue)
                 return visitor.Return(pc, -1, data);
 
@@ -181,11 +186,12 @@ namespace Mono.CodeContracts.Static.Analysis.StackAnalysis
                 foreach (APC apc in block.APCs())
                 {
                     apcMap.Add(apc, stackInfo.Depth);
-                    stackInfo = this.il_decoder.ForwardDecode<
-                        StackInfo,
-                        StackInfo,
-                        IILVisitor<APC, Dummy, Dummy, StackInfo, StackInfo>
-                    >(apc, this, stackInfo);
+                    stackInfo = this.il_decoder
+                        .ForwardDecode<
+                            StackInfo,
+                            StackInfo,
+                            IILVisitor<APC, Dummy, Dummy, StackInfo, StackInfo>
+                        >(apc, this, stackInfo);
                 }
                 if (!apcMap.ContainsKey(block.Last))
                     apcMap.Add(block.Last, stackInfo.Depth);

@@ -474,14 +474,12 @@ class Class
                         )
                     );
                     workspace.TryApplyChanges(
-                        workspace
-                            .CurrentSolution
+                        workspace.CurrentSolution
                             .WithAnalyzerReferences(new[] { analyzerReference })
                     );
 
                     Assert.IsType<MockDiagnosticUpdateSourceRegistrationService>(
-                        workspace
-                            .ExportProvider
+                        workspace.ExportProvider
                             .GetExportedValue<IDiagnosticUpdateSourceRegistrationService>()
                     );
                     var diagnosticService = Assert.IsType<DiagnosticAnalyzerService>(
@@ -1326,8 +1324,7 @@ class Class
                             case SyntaxKind.EnumDeclaration:
                                 // Report diagnostic on each descendant comment trivia
                                 foreach (
-                                    var trivia in context
-                                        .Node
+                                    var trivia in context.Node
                                         .DescendantTrivia()
                                         .Where(t =>
                                             t.Kind()

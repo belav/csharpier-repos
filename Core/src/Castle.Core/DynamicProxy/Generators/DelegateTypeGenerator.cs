@@ -52,8 +52,7 @@ namespace Castle.DynamicProxy.Generators
                 new ArgumentReference(typeof(object)),
                 new ArgumentReference(typeof(IntPtr))
             );
-            constructor
-                .ConstructorBuilder
+            constructor.ConstructorBuilder
                 .SetImplementationFlags(
                     MethodImplAttributes.Runtime | MethodImplAttributes.Managed
                 );
@@ -71,8 +70,7 @@ namespace Castle.DynamicProxy.Generators
                 @delegate.GetClosedParameterType(method.MethodOnTarget.ReturnType),
                 paramTypes
             );
-            invoke
-                .MethodBuilder
+            invoke.MethodBuilder
                 .SetImplementationFlags(
                     MethodImplAttributes.Runtime | MethodImplAttributes.Managed
                 );

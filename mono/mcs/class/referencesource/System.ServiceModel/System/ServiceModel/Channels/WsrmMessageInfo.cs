@@ -406,8 +406,7 @@ namespace System.ServiceModel.Channels
                     Collection<MessageHeaderInfo> notUnderstoodHeaders =
                         new Collection<MessageHeaderInfo>();
                     notUnderstoodHeaders.Add(headers[foundTooManyIndex]);
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new MustUnderstandSoapException(
                                 notUnderstoodHeaders,
@@ -601,8 +600,7 @@ namespace System.ServiceModel.Channels
                 {
                     if (wsrmFeb2005)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new MessageHeaderException(
                                     SR.GetString(SR.NoActionNoSequenceHeaderReason),
@@ -614,8 +612,7 @@ namespace System.ServiceModel.Channels
                     }
                     else
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(CreateWsrmRequiredException(messageVersion));
                     }
                 }
@@ -685,8 +682,7 @@ namespace System.ServiceModel.Channels
                                     SR.UnrecognizedFaultReceived,
                                     messageInfo.faultInfo.Code.Namespace,
                                     messageInfo.faultInfo.Code.Name,
-                                    System
-                                        .ServiceModel
+                                    System.ServiceModel
                                         .FaultException
                                         .GetSafeReasonText(messageInfo.faultInfo)
                                 )
@@ -701,8 +697,7 @@ namespace System.ServiceModel.Channels
                 {
                     if (wsrmFeb2005)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new ActionNotSupportedException(
                                     SR.GetString(SR.NonWsrmFeb2005ActionNotSupported, action)
@@ -711,8 +706,7 @@ namespace System.ServiceModel.Channels
                     }
                     else
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(CreateWsrmRequiredException(messageVersion));
                     }
                 }
@@ -776,13 +770,11 @@ namespace System.ServiceModel.Channels
 
         static void ValidateMustUnderstand(MessageVersion version, Message message)
         {
-            Collection<MessageHeaderInfo> notUnderstoodHeaders = message
-                .Headers
+            Collection<MessageHeaderInfo> notUnderstoodHeaders = message.Headers
                 .GetHeadersNotUnderstood();
             if ((notUnderstoodHeaders != null) && (notUnderstoodHeaders.Count > 0))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new MustUnderstandSoapException(notUnderstoodHeaders, version.Envelope)
                     );
@@ -889,8 +881,7 @@ namespace System.ServiceModel.Channels
         {
             if (headers.RelatesTo == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new MessageHeaderException(
                             SR.GetString(
@@ -986,8 +977,7 @@ namespace System.ServiceModel.Channels
                     reliableMessagingVersion,
                     reason
                 );
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         WsrmMessageInfo.CreateInternalFaultException(
                             faultReply,
@@ -1020,8 +1010,7 @@ namespace System.ServiceModel.Channels
                     reliableMessagingVersion,
                     reason
                 );
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         WsrmMessageInfo.CreateInternalFaultException(
                             faultReply,
@@ -1066,8 +1055,7 @@ namespace System.ServiceModel.Channels
                     ReliableMessagingVersion.WSReliableMessaging11,
                     reason
                 );
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         WsrmMessageInfo.CreateInternalFaultException(
                             faultReply,
@@ -1121,8 +1109,7 @@ namespace System.ServiceModel.Channels
 
             if (headers.RelatesTo == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new MessageHeaderException(
                             SR.GetString(
@@ -1232,8 +1219,7 @@ namespace System.ServiceModel.Channels
         {
             if (headers.RelatesTo == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new MessageHeaderException(
                             SR.GetString(
@@ -1345,8 +1331,7 @@ namespace System.ServiceModel.Channels
 
             if (this.messageId == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new MessageHeaderException(
                             SR.GetString(SR.MissingMessageIdOnWsrmRequest, RequestName),
@@ -1372,8 +1357,7 @@ namespace System.ServiceModel.Channels
 
             if (this.replyTo == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new MessageHeaderException(
                             SR.GetString(SR.MissingReplyToOnWsrmRequest, RequestName),
@@ -1608,8 +1592,7 @@ namespace System.ServiceModel.Channels
                     )
                 )
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new XmlException(SR.GetString(SR.InvalidSequenceRange, lower, upper))
                         );
@@ -1635,8 +1618,7 @@ namespace System.ServiceModel.Channels
                 {
                     if (validAck)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new XmlException(
                                     SR.GetString(
@@ -1657,8 +1639,7 @@ namespace System.ServiceModel.Channels
                 {
                     if (!validAck)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new XmlException(
                                     SR.GetString(
@@ -1681,8 +1662,7 @@ namespace System.ServiceModel.Channels
             {
                 if (validAck)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new XmlException(
                                 SR.GetString(
@@ -1703,8 +1683,7 @@ namespace System.ServiceModel.Channels
 
             if (!validAck && !foundNack)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new XmlException(
                             SR.GetString(
@@ -1752,8 +1731,7 @@ namespace System.ServiceModel.Channels
                 {
                     if (bufferRemaining != -1)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new XmlException(
                                     SR.GetString(
@@ -1772,8 +1750,7 @@ namespace System.ServiceModel.Channels
 
                     if (bufferRemaining < 0)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new XmlException(
                                     SR.GetString(SR.InvalidBufferRemaining, bufferRemaining)
@@ -1787,8 +1764,7 @@ namespace System.ServiceModel.Channels
 
                 if (reader.IsStartElement(wsrmFeb2005Dictionary.AcknowledgementRange, wsrmNs))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new XmlException(
                                 SR.GetString(
@@ -1802,8 +1778,7 @@ namespace System.ServiceModel.Channels
                 }
                 else if (reader.IsStartElement(wsrmFeb2005Dictionary.Nack, wsrmNs))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new XmlException(
                                 SR.GetString(
@@ -1824,8 +1799,7 @@ namespace System.ServiceModel.Channels
                         || reader.IsStartElement(wsrm11Dictionary.Final, wsrmNs)
                     )
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new XmlException(
                                     SR.GetString(

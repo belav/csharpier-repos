@@ -600,8 +600,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                                 annotation.IsConverted
                                     ? typeInfo.ConvertedNullability
                                     : typeInfo.Nullability
-                            )
-                                .FlowState
+                            ).FlowState
                                 .ToInternalFlowState()
                         )
                         .ToTypeWithAnnotations(compilation);

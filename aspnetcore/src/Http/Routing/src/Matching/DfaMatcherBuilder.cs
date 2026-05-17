@@ -367,8 +367,7 @@ internal sealed class DfaMatcherBuilder : MatcherBuilder
                         // For example, for a parameter in a route {lang:length(2)} and a parent literal "ABC", we can check that "ABC"
                         // doesn't meet the parameter constraint (length(2)) when building the tree, and avoid the extra nodes.
                         if (
-                            endpoint
-                                .RoutePattern
+                            endpoint.RoutePattern
                                 .ParameterPolicies
                                 .TryGetValue(parameterPart.Name, out var parameterPolicyReferences)
                         )
@@ -464,8 +463,7 @@ internal sealed class DfaMatcherBuilder : MatcherBuilder
                         }
 
                         if (
-                            endpoint
-                                .RoutePattern
+                            endpoint.RoutePattern
                                 .ParameterPolicies
                                 .TryGetValue(partParameter.Name, out var parameterPolicyReferences)
                         )
@@ -569,8 +567,7 @@ internal sealed class DfaMatcherBuilder : MatcherBuilder
         )
         {
             if (
-                endpoint
-                    .RoutePattern
+                endpoint.RoutePattern
                     .ParameterPolicies
                     .TryGetValue(parameterPart.Name, out var parameterPolicyReferences)
             )

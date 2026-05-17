@@ -37,8 +37,7 @@ public class CompilationTests
     {
         // TODO: Re-enable OSX validation when TFM is upgraded to net8.0.
         if (
-            !System
-                .Runtime
+            !System.Runtime
                 .InteropServices
                 .RuntimeInformation
                 .IsOSPlatform(System.Runtime.InteropServices.OSPlatform.OSX)

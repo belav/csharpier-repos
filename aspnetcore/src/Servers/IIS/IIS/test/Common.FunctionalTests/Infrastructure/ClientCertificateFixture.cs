@@ -33,8 +33,7 @@ public class ClientCertificateFixture : IDisposable
                 RSASignaturePadding.Pkcs1
             );
 
-            parentRequest
-                .CertificateExtensions
+            parentRequest.CertificateExtensions
                 .Add(
                     new X509BasicConstraintsExtension(
                         certificateAuthority: true,
@@ -44,8 +43,7 @@ public class ClientCertificateFixture : IDisposable
                     )
                 );
 
-            parentRequest
-                .CertificateExtensions
+            parentRequest.CertificateExtensions
                 .Add(
                     new X509KeyUsageExtension(
                         X509KeyUsageFlags.DigitalSignature | X509KeyUsageFlags.NonRepudiation,
@@ -53,8 +51,7 @@ public class ClientCertificateFixture : IDisposable
                     )
                 );
 
-            parentRequest
-                .CertificateExtensions
+            parentRequest.CertificateExtensions
                 .Add(new X509SubjectKeyIdentifierExtension(parentRequest.PublicKey, false));
 
             var notBefore = DateTimeOffset.Now.AddDays(-1);

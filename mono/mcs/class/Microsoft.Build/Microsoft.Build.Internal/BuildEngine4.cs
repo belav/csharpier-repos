@@ -160,8 +160,7 @@ namespace Microsoft.Build.Internal
                     "Initial Global Properties:\n"
                     + string.Join(
                         Environment.NewLine,
-                        project
-                            .Properties
+                        project.Properties
                             .OrderBy(p => p.Name)
                             .Where(p => p.IsImmutable)
                             .Select(p => string.Format("{0} = {1}", p.Name, p.EvaluatedValue))
@@ -179,8 +178,7 @@ namespace Microsoft.Build.Internal
                     "Initial Project Properties:\n"
                     + string.Join(
                         Environment.NewLine,
-                        project
-                            .Properties
+                        project.Properties
                             .OrderBy(p => p.Name)
                             .Where(p => !p.IsImmutable)
                             .Select(p => string.Format("{0} = {1}", p.Name, p.EvaluatedValue))
@@ -198,8 +196,7 @@ namespace Microsoft.Build.Internal
                     "Initial Items:\n"
                     + string.Join(
                         Environment.NewLine,
-                        project
-                            .Items
+                        project.Items
                             .OrderBy(i => i.ItemType)
                             .Select(i => string.Format("{0} : {1}", i.ItemType, i.EvaluatedInclude))
                             .ToArray()
@@ -402,14 +399,15 @@ namespace Microsoft.Build.Internal
                         bool skip = false;
                         if (!string.IsNullOrEmpty(target.Inputs))
                         {
-                            var inputs = args.Project.GetAllItems(
-                                target.Inputs,
-                                string.Empty,
-                                creator,
-                                creator,
-                                s => true,
-                                (t, s) => { }
-                            );
+                            var inputs = args.Project
+                                .GetAllItems(
+                                    target.Inputs,
+                                    string.Empty,
+                                    creator,
+                                    creator,
+                                    s => true,
+                                    (t, s) => { }
+                                );
                             if (!inputs.Any())
                             {
                                 LogMessageEvent(
@@ -427,14 +425,15 @@ namespace Microsoft.Build.Internal
                             }
                             else
                             {
-                                var outputs = args.Project.GetAllItems(
-                                    target.Outputs,
-                                    string.Empty,
-                                    creator,
-                                    creator,
-                                    s => true,
-                                    (t, s) => { }
-                                );
+                                var outputs = args.Project
+                                    .GetAllItems(
+                                        target.Outputs,
+                                        string.Empty,
+                                        creator,
+                                        creator,
+                                        s => true,
+                                        (t, s) => { }
+                                    );
                                 var needsUpdates = GetOlderOutputsThanInputs(inputs, outputs)
                                     .FirstOrDefault();
                                 if (needsUpdates != null)
@@ -475,14 +474,15 @@ namespace Microsoft.Build.Internal
                         {
                             if (DoBuildTarget(target, targetResult, args))
                             {
-                                var items = args.Project.GetAllItems(
-                                    target.Outputs,
-                                    string.Empty,
-                                    creator,
-                                    creator,
-                                    s => true,
-                                    (t, s) => { }
-                                );
+                                var items = args.Project
+                                    .GetAllItems(
+                                        target.Outputs,
+                                        string.Empty,
+                                        creator,
+                                        creator,
+                                        s => true,
+                                        (t, s) => { }
+                                    );
                                 targetResult.Success(items);
                             }
                         }
@@ -654,19 +654,15 @@ namespace Microsoft.Build.Internal
             var host =
                 request.HostServices == null
                     ? null
-                    : request
-                        .HostServices
+                    : request.HostServices
                         .GetHostObject(request.ProjectFullPath, target.Name, taskInstance.Name);
 
             // Create Task instance.
             var factoryIdentityParameters = new Dictionary<string, string>();
             factoryIdentityParameters["MSBuildRuntime"] = taskInstance.MSBuildRuntime;
             factoryIdentityParameters["MSBuildArchitecture"] = taskInstance.MSBuildArchitecture;
-            var task = args.BuildTaskFactory.CreateTask(
-                taskInstance.Name,
-                factoryIdentityParameters,
-                this
-            );
+            var task = args.BuildTaskFactory
+                .CreateTask(taskInstance.Name, factoryIdentityParameters, this);
             if (task == null)
                 throw new InvalidOperationException(
                     string.Format("TaskFactory {0} returned null Task", args.BuildTaskFactory)
@@ -684,8 +680,7 @@ namespace Microsoft.Build.Internal
 
             // Prepare task parameters.
             var evaluator = new ExpressionEvaluator(project);
-            var evaluatedTaskParams = taskInstance
-                .Parameters
+            var evaluatedTaskParams = taskInstance.Parameters
                 .Select(p => new KeyValuePair<string, string>(
                     p.Key,
                     project.ExpandString(evaluator, p.Value)
@@ -893,8 +888,7 @@ namespace Microsoft.Build.Internal
         {
             if (targetType == typeof(ITaskItem) || targetType.IsSubclassOf(typeof(ITaskItem)))
             {
-                var item = evaluator
-                    .EvaluatedTaskItems
+                var item = evaluator.EvaluatedTaskItems
                     .FirstOrDefault(i =>
                         string.Equals(i.ItemSpec, source.Trim(), StringComparison.OrdinalIgnoreCase)
                     );

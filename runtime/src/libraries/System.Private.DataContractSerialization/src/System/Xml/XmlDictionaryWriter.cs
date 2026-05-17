@@ -398,44 +398,34 @@ namespace System.Xml
         )
         {
             if (type == typeof(bool))
-                BooleanArrayHelperWithString
-                    .Instance
+                BooleanArrayHelperWithString.Instance
                     .WriteArray(this, prefix, localName, namespaceUri, reader);
             else if (type == typeof(short))
-                Int16ArrayHelperWithString
-                    .Instance
+                Int16ArrayHelperWithString.Instance
                     .WriteArray(this, prefix, localName, namespaceUri, reader);
             else if (type == typeof(int))
-                Int32ArrayHelperWithString
-                    .Instance
+                Int32ArrayHelperWithString.Instance
                     .WriteArray(this, prefix, localName, namespaceUri, reader);
             else if (type == typeof(long))
-                Int64ArrayHelperWithString
-                    .Instance
+                Int64ArrayHelperWithString.Instance
                     .WriteArray(this, prefix, localName, namespaceUri, reader);
             else if (type == typeof(float))
-                SingleArrayHelperWithString
-                    .Instance
+                SingleArrayHelperWithString.Instance
                     .WriteArray(this, prefix, localName, namespaceUri, reader);
             else if (type == typeof(double))
-                DoubleArrayHelperWithString
-                    .Instance
+                DoubleArrayHelperWithString.Instance
                     .WriteArray(this, prefix, localName, namespaceUri, reader);
             else if (type == typeof(decimal))
-                DecimalArrayHelperWithString
-                    .Instance
+                DecimalArrayHelperWithString.Instance
                     .WriteArray(this, prefix, localName, namespaceUri, reader);
             else if (type == typeof(DateTime))
-                DateTimeArrayHelperWithString
-                    .Instance
+                DateTimeArrayHelperWithString.Instance
                     .WriteArray(this, prefix, localName, namespaceUri, reader);
             else if (type == typeof(Guid))
-                GuidArrayHelperWithString
-                    .Instance
+                GuidArrayHelperWithString.Instance
                     .WriteArray(this, prefix, localName, namespaceUri, reader);
             else if (type == typeof(TimeSpan))
-                TimeSpanArrayHelperWithString
-                    .Instance
+                TimeSpanArrayHelperWithString.Instance
                     .WriteArray(this, prefix, localName, namespaceUri, reader);
             else
             {
@@ -453,44 +443,34 @@ namespace System.Xml
         )
         {
             if (type == typeof(bool))
-                BooleanArrayHelperWithDictionaryString
-                    .Instance
+                BooleanArrayHelperWithDictionaryString.Instance
                     .WriteArray(this, prefix, localName, namespaceUri, reader);
             else if (type == typeof(short))
-                Int16ArrayHelperWithDictionaryString
-                    .Instance
+                Int16ArrayHelperWithDictionaryString.Instance
                     .WriteArray(this, prefix, localName, namespaceUri, reader);
             else if (type == typeof(int))
-                Int32ArrayHelperWithDictionaryString
-                    .Instance
+                Int32ArrayHelperWithDictionaryString.Instance
                     .WriteArray(this, prefix, localName, namespaceUri, reader);
             else if (type == typeof(long))
-                Int64ArrayHelperWithDictionaryString
-                    .Instance
+                Int64ArrayHelperWithDictionaryString.Instance
                     .WriteArray(this, prefix, localName, namespaceUri, reader);
             else if (type == typeof(float))
-                SingleArrayHelperWithDictionaryString
-                    .Instance
+                SingleArrayHelperWithDictionaryString.Instance
                     .WriteArray(this, prefix, localName, namespaceUri, reader);
             else if (type == typeof(double))
-                DoubleArrayHelperWithDictionaryString
-                    .Instance
+                DoubleArrayHelperWithDictionaryString.Instance
                     .WriteArray(this, prefix, localName, namespaceUri, reader);
             else if (type == typeof(decimal))
-                DecimalArrayHelperWithDictionaryString
-                    .Instance
+                DecimalArrayHelperWithDictionaryString.Instance
                     .WriteArray(this, prefix, localName, namespaceUri, reader);
             else if (type == typeof(DateTime))
-                DateTimeArrayHelperWithDictionaryString
-                    .Instance
+                DateTimeArrayHelperWithDictionaryString.Instance
                     .WriteArray(this, prefix, localName, namespaceUri, reader);
             else if (type == typeof(Guid))
-                GuidArrayHelperWithDictionaryString
-                    .Instance
+                GuidArrayHelperWithDictionaryString.Instance
                     .WriteArray(this, prefix, localName, namespaceUri, reader);
             else if (type == typeof(TimeSpan))
-                TimeSpanArrayHelperWithDictionaryString
-                    .Instance
+                TimeSpanArrayHelperWithDictionaryString.Instance
                     .WriteArray(this, prefix, localName, namespaceUri, reader);
             else
             {

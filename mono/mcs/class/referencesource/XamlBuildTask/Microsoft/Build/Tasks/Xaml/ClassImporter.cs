@@ -152,8 +152,7 @@ namespace Microsoft.Build.Tasks.Xaml
                 string xClassDirectiveName =
                     "{" + XamlLanguage.Class.PreferredXamlNamespace + "}" + XamlLanguage.Class.Name;
 
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         LogInvalidOperationException(
                             null,
@@ -498,8 +497,7 @@ namespace Microsoft.Build.Tasks.Xaml
                     }
                     catch (InvalidOperationException e)
                     {
-                        throw FxTrace
-                            .Exception
+                        throw FxTrace.Exception
                             .AsError(LogInvalidOperationException(reader, e.Message));
                     }
                     nextNodeRead = true;
@@ -527,8 +525,7 @@ namespace Microsoft.Build.Tasks.Xaml
                         nextNodeRead = true;
                         if (members.ContainsKey(xProperty.Name))
                         {
-                            throw FxTrace
-                                .Exception
+                            throw FxTrace.Exception
                                 .AsError(
                                     LogInvalidOperationException(
                                         reader,
@@ -585,8 +582,7 @@ namespace Microsoft.Build.Tasks.Xaml
                             // Ignore AttachedProperties on property
                             if (!member.IsAttachable)
                             {
-                                throw FxTrace
-                                    .Exception
+                                throw FxTrace.Exception
                                     .AsError(
                                         LogInvalidOperationException(
                                             xamlReader,
@@ -600,14 +596,12 @@ namespace Microsoft.Build.Tasks.Xaml
             }
             if (string.IsNullOrEmpty(property.Name))
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(LogInvalidOperationException(xamlReader, SR.PropertyNameRequired));
             }
             if (property.Type == null)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         LogInvalidOperationException(
                             xamlReader,
@@ -651,8 +645,7 @@ namespace Microsoft.Build.Tasks.Xaml
             reader.Read();
             if (reader.NodeType != XamlNodeType.Value)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         LogInvalidOperationException(
                             reader,
@@ -682,8 +675,7 @@ namespace Microsoft.Build.Tasks.Xaml
 
             if (string.IsNullOrEmpty(classData.Name))
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(LogInvalidOperationException(null, SR.ClassNameMustBeNonEmpty));
             }
         }

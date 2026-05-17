@@ -823,8 +823,7 @@
 
             ModelBindingContext bindingContext = new ModelBindingContext()
             {
-                ModelMetadata = ModelMetadataProviders
-                    .Current
+                ModelMetadata = ModelMetadataProviders.Current
                     .GetMetadataForType(() => model, typeof(TModel)),
                 ModelName = prefix,
                 ModelState = ModelState,
@@ -850,8 +849,7 @@
                 throw new ArgumentNullException("model");
             }
 
-            ModelMetadata metadata = ModelMetadataProviders
-                .Current
+            ModelMetadata metadata = ModelMetadataProviders.Current
                 .GetMetadataForType(() => model, model.GetType());
 
             foreach (

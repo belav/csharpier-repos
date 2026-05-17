@@ -75,8 +75,7 @@ public class Http2Tests
                 {
                     await h2Connection.InitializeConnectionAsync();
 
-                    h2Connection
-                        .Logger
+                    h2Connection.Logger
                         .LogInformation("Initialized http2 connection. Starting stream 1.");
 
                     var headers = new[]
@@ -131,8 +130,7 @@ public class Http2Tests
                 {
                     await h2Connection.InitializeConnectionAsync();
 
-                    h2Connection
-                        .Logger
+                    h2Connection.Logger
                         .LogInformation("Initialized http2 connection. Starting stream 1.");
 
                     var headers = new[]
@@ -190,8 +188,7 @@ public class Http2Tests
                 {
                     await h2Connection.InitializeConnectionAsync();
 
-                    h2Connection
-                        .Logger
+                    h2Connection.Logger
                         .LogInformation("Initialized http2 connection. Starting stream 1.");
 
                     var headers = new[]
@@ -283,8 +280,7 @@ public class Http2Tests
                 {
                     await h2Connection.InitializeConnectionAsync();
 
-                    h2Connection
-                        .Logger
+                    h2Connection.Logger
                         .LogInformation("Initialized http2 connection. Starting stream 1.");
 
                     var headers = new[]
@@ -368,8 +364,7 @@ public class Http2Tests
                 {
                     await h2Connection.InitializeConnectionAsync();
 
-                    h2Connection
-                        .Logger
+                    h2Connection.Logger
                         .LogInformation("Initialized http2 connection. Starting stream 1.");
 
                     await h2Connection.StartStreamAsync(
@@ -444,8 +439,7 @@ public class Http2Tests
                 {
                     await h2Connection.InitializeConnectionAsync();
 
-                    h2Connection
-                        .Logger
+                    h2Connection.Logger
                         .LogInformation("Initialized http2 connection. Starting stream 1.");
 
                     await h2Connection.StartStreamAsync(

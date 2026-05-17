@@ -1506,8 +1506,7 @@ namespace System.Web.UI.DataVisualization.Charting
             }
 
             if (Common.ProcessModePaint)
-                Common
-                    .Chart
+                Common.Chart
                     .CallOnPrePaint(new ChartPaintEventArgs(this, chartGraph, Common, Position));
 
             //***************************************************************
@@ -1657,8 +1656,7 @@ namespace System.Web.UI.DataVisualization.Charting
                 }
                 // Call Paint event
                 if (Common.ProcessModePaint)
-                    Common
-                        .Chart
+                    Common.Chart
                         .CallOnPostPaint(
                             new ChartPaintEventArgs(this, chartGraph, Common, Position)
                         );
@@ -1674,8 +1672,7 @@ namespace System.Web.UI.DataVisualization.Charting
                 if (Common.ProcessModeRegions)
                 {
 #if !Microsoft_CONTROL
-                    Common
-                        .HotRegionsList
+                    Common.HotRegionsList
                         .AddHotRegion(
                             titlePosition,
                             this.ToolTip,
@@ -1687,8 +1684,7 @@ namespace System.Web.UI.DataVisualization.Charting
                             string.Empty
                         );
 #else
-                    Common
-                        .HotRegionsList
+                    Common.HotRegionsList
                         .AddHotRegion(
                             titlePosition,
                             this.ToolTip,
@@ -1935,12 +1931,13 @@ namespace System.Web.UI.DataVisualization.Charting
                 && this.DockedToChartArea == Constants.NotSetValue
             )
             {
-                this.Position.SetPositionNoAuto(
-                    frameTitlePosition.X + elementSpacing,
-                    frameTitlePosition.Y,
-                    frameTitlePosition.Width - 2f * elementSpacing,
-                    frameTitlePosition.Height
-                );
+                this.Position
+                    .SetPositionNoAuto(
+                        frameTitlePosition.X + elementSpacing,
+                        frameTitlePosition.Y,
+                        frameTitlePosition.Width - 2f * elementSpacing,
+                        frameTitlePosition.Height
+                    );
                 frameTitlePosition = RectangleF.Empty;
                 return;
             }
@@ -2064,12 +2061,13 @@ namespace System.Web.UI.DataVisualization.Charting
                 }
             }
 
-            this.Position.SetPositionNoAuto(
-                titlePosition.X,
-                titlePosition.Y,
-                titlePosition.Width,
-                titlePosition.Height
-            );
+            this.Position
+                .SetPositionNoAuto(
+                    titlePosition.X,
+                    titlePosition.Y,
+                    titlePosition.Width,
+                    titlePosition.Height
+                );
         }
 
         #endregion
@@ -2252,8 +2250,7 @@ namespace System.Web.UI.DataVisualization.Charting
                         }
 
                         // Set title position without changing the 'Auto' flag
-                        title
-                            .Position
+                        title.Position
                             .SetPositionNoAuto(
                                 titlePosition.X,
                                 titlePosition.Y,

@@ -100,8 +100,7 @@ public sealed class InternalUsageDiagnosticAnalyzer : DiagnosticAnalyzer
     private static void AnalyzeMember(OperationAnalysisContext context, ISymbol symbol)
     {
         if (
-            symbol
-                .ContainingAssembly
+            symbol.ContainingAssembly
                 ?.Equals(context.Compilation.Assembly, SymbolEqualityComparer.Default) == true
         )
         {
@@ -343,14 +342,12 @@ public sealed class InternalUsageDiagnosticAnalyzer : DiagnosticAnalyzer
         };
 
     private static bool IsInternal(SymbolAnalysisContext context, ITypeSymbol symbol) =>
-        symbol
-            .ContainingAssembly
+        symbol.ContainingAssembly
             ?.Equals(context.Compilation.Assembly, SymbolEqualityComparer.Default) != true
         && (IsInInternalNamespace(symbol) || HasInternalAttribute(symbol));
 
     private static bool IsInternal(OperationAnalysisContext context, ITypeSymbol symbol) =>
-        symbol
-            .ContainingAssembly
+        symbol.ContainingAssembly
             ?.Equals(context.Compilation.Assembly, SymbolEqualityComparer.Default) != true
         && (IsInInternalNamespace(symbol) || HasInternalAttribute(symbol));
 

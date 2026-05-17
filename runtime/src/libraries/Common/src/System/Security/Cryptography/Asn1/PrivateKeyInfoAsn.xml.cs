@@ -116,8 +116,7 @@ namespace System.Security.Cryptography.Asn1
                 sequenceReader.ThrowIfNotEmpty();
             }
 
-            System
-                .Security
+            System.Security
                 .Cryptography
                 .Asn1
                 .AlgorithmIdentifierAsn
@@ -151,8 +150,7 @@ namespace System.Security.Cryptography.Asn1
 
                     while (collectionReader.HasData)
                     {
-                        System
-                            .Security
+                        System.Security
                             .Cryptography
                             .Asn1
                             .AttributeAsn

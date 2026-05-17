@@ -171,14 +171,15 @@ namespace Mono.Cecil.Cil
             if (body.HasVariables)
             {
                 foreach (VariableDefinition var in body.Variables)
-                    nb.Variables.Add(
-                        new VariableDefinition(
-                            var.Name,
-                            var.Index,
-                            parent,
-                            context.Import(var.VariableType)
-                        )
-                    );
+                    nb.Variables
+                        .Add(
+                            new VariableDefinition(
+                                var.Name,
+                                var.Index,
+                                parent,
+                                context.Import(var.VariableType)
+                            )
+                        );
             }
 
             foreach (Instruction instr in body.Instructions)

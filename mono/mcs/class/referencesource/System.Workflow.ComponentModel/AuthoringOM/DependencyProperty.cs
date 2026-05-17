@@ -210,8 +210,7 @@ namespace System.Workflow.ComponentModel
             lock (((ICollection)DependencyProperty.dependencyProperties).SyncRoot)
             {
                 foreach (
-                    DependencyProperty dependencyProperty in DependencyProperty
-                        .dependencyProperties
+                    DependencyProperty dependencyProperty in DependencyProperty.dependencyProperties
                         .Values
                 )
                 {
@@ -321,8 +320,7 @@ namespace System.Workflow.ComponentModel
             lock (((ICollection)DependencyProperty.dependencyProperties).SyncRoot)
             {
                 if (
-                    DependencyProperty
-                        .dependencyProperties
+                    DependencyProperty.dependencyProperties
                         .ContainsKey(dependencyProperty.GetHashCode())
                 )
                     throw new InvalidOperationException(
@@ -332,8 +330,7 @@ namespace System.Workflow.ComponentModel
                         )
                     );
 
-                DependencyProperty
-                    .dependencyProperties
+                DependencyProperty.dependencyProperties
                     .Add(dependencyProperty.GetHashCode(), dependencyProperty);
             }
 

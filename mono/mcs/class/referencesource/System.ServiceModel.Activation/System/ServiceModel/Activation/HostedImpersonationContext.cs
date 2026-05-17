@@ -59,8 +59,7 @@ namespace System.ServiceModel.Activation
                     tokenHandle = null;
                     if (error != SafeNativeMethods.ERROR_NO_TOKEN)
                     {
-                        throw FxTrace
-                            .Exception
+                        throw FxTrace.Exception
                             .AsError(new Win32Exception(error, SR.Hosting_ImpersonationFailed));
                     }
                 }
@@ -161,8 +160,7 @@ namespace System.ServiceModel.Activation
             {
                 if (impersonatedContext == null)
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(new InvalidOperationException(SR.Hosting_ImpersonationFailed));
                 }
                 this.impersonatedContext = impersonatedContext;

@@ -57,15 +57,13 @@ namespace Microsoft.CodeAnalysis
             var currentPartition = new List<TextChange>();
 
             currentPartition.Add(changes.First());
-            var currentPartitionEndLine = originalSourceText
-                .Lines
+            var currentPartitionEndLine = originalSourceText.Lines
                 .GetLineFromPosition(changes.First().Span.End);
 
             foreach (var change in changes.Skip(1))
             {
                 // If changes are on adjacent lines, consider them part of the same change.
-                var changeStartLine = originalSourceText
-                    .Lines
+                var changeStartLine = originalSourceText.Lines
                     .GetLineFromPosition(change.Span.Start);
                 if (changeStartLine.LineNumber >= currentPartitionEndLine.LineNumber + 2)
                 {
@@ -74,8 +72,7 @@ namespace Microsoft.CodeAnalysis
                 }
 
                 currentPartition.Add(change);
-                currentPartitionEndLine = originalSourceText
-                    .Lines
+                currentPartitionEndLine = originalSourceText.Lines
                     .GetLineFromPosition(change.Span.End);
             }
 
@@ -100,8 +97,7 @@ namespace Microsoft.CodeAnalysis
                 var startPosition = changePartition.First().Span.Start;
                 var endPosition = changePartition.Last().Span.End;
 
-                var startLineStartPosition = oldDocumentText
-                    .Lines
+                var startLineStartPosition = oldDocumentText.Lines
                     .GetLineFromPosition(startPosition)
                     .Start;
                 var endLineEndPosition = oldDocumentText.Lines.GetLineFromPosition(endPosition).End;

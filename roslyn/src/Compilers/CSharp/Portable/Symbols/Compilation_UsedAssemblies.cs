@@ -216,8 +216,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                                         // be emitted into the resulting binary for that compilation. An alternative
                                         // would be to attempt to emit and get the exact set of emitted references
                                         // in case of success. This might be too slow though.
-                                        usedAssemblies = sourceAssembly
-                                            .DeclaringCompilation
+                                        usedAssemblies = sourceAssembly.DeclaringCompilation
                                             .GetCompleteSetOfUsedAssemblies(cancellationToken);
                                         if (usedAssemblies is object)
                                         {
@@ -230,15 +229,13 @@ namespace Microsoft.CodeAnalysis.CSharp
                                         break;
 
                                     case RetargetingAssemblySymbol retargetingAssembly:
-                                        usedAssemblies = retargetingAssembly
-                                            .UnderlyingAssembly
+                                        usedAssemblies = retargetingAssembly.UnderlyingAssembly
                                             .DeclaringCompilation
                                             .GetCompleteSetOfUsedAssemblies(cancellationToken);
                                         if (usedAssemblies is object)
                                         {
                                             foreach (
-                                                AssemblySymbol underlyingDependency in retargetingAssembly
-                                                    .UnderlyingAssembly
+                                                AssemblySymbol underlyingDependency in retargetingAssembly.UnderlyingAssembly
                                                     .SourceModule
                                                     .ReferencedAssemblySymbols
                                             )

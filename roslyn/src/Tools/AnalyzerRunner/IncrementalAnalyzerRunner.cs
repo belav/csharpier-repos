@@ -66,8 +66,7 @@ namespace AnalyzerRunner
 
             if (usePersistentStorage)
             {
-                var persistentStorageService = _workspace
-                    .Services
+                var persistentStorageService = _workspace.Services
                     .SolutionServices
                     .GetPersistentStorageService();
                 await using var persistentStorage = await persistentStorageService

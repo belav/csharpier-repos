@@ -165,8 +165,7 @@ namespace System.Data.Entity.Design.Common
                     multiplicitySet,
                     false
                 );
-                multiplicity = multiplicityAssociationSetEnd
-                    .CorrespondingAssociationEndMember
+                multiplicity = multiplicityAssociationSetEnd.CorrespondingAssociationEndMember
                     .RelationshipMultiplicity;
                 deleteBehavior = OperationAction.None;
                 if (multiplicity != RelationshipMultiplicity.Many)
@@ -179,9 +178,9 @@ namespace System.Data.Entity.Design.Common
                         // Since the other end does not have an operation
                         // that means that only one end could possibly have an operation, that is good
                         // so set it the operation
-                        deleteBehavior = multiplicityAssociationSetEnd
-                            .CorrespondingAssociationEndMember
-                            .DeleteBehavior;
+                        deleteBehavior =
+                            multiplicityAssociationSetEnd.CorrespondingAssociationEndMember
+                                .DeleteBehavior;
                     }
                 }
             }

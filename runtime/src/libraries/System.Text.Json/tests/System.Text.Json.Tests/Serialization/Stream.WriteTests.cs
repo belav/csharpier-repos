@@ -249,8 +249,7 @@ namespace System.Text.Json.Serialization.Tests
 
                 for (int j = 0; j < 5; j++)
                 {
-                    response
-                        .Speakers
+                    response.Speakers
                         .Add(
                             new Speaker()
                             {

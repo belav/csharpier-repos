@@ -17,8 +17,7 @@ namespace System.ServiceModel
             HttpClientCredentialType.None;
         internal const HttpProxyCredentialType DefaultProxyCredentialType =
             HttpProxyCredentialType.None;
-        internal const string DefaultRealm = System
-            .ServiceModel
+        internal const string DefaultRealm = System.ServiceModel
             .Channels
             .HttpTransportDefaults
             .Realm;
@@ -43,8 +42,7 @@ namespace System.ServiceModel
             {
                 if (!HttpClientCredentialTypeHelper.IsDefined(value))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new ArgumentOutOfRangeException("value"));
                 }
                 this.clientCredentialType = value;
@@ -58,8 +56,7 @@ namespace System.ServiceModel
             {
                 if (!HttpProxyCredentialTypeHelper.IsDefined(value))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new ArgumentOutOfRangeException("value"));
                 }
                 this.proxyCredentialType = value;
@@ -84,16 +81,14 @@ namespace System.ServiceModel
 
                 if (
                     value.PolicyEnforcement == PolicyEnforcement.Always
-                    && !System
-                        .Security
+                    && !System.Security
                         .Authentication
                         .ExtendedProtection
                         .ExtendedProtectionPolicy
                         .OSSupportsExtendedProtection
                 )
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new PlatformNotSupportedException(
                                 SR.GetString(SR.ExtendedProtectionNotSupported)
@@ -178,8 +173,7 @@ namespace System.ServiceModel
         {
             if (this.clientCredentialType == HttpClientCredentialType.Certificate)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(SR.CertificateUnsupportedForHttpTransportCredentialOnly)

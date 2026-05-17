@@ -156,8 +156,7 @@ namespace System.Net.Security.Tests
         {
             ReadOnlySpan<byte> input = new ReadOnlySpan<byte>(
                 (
-                    Encoding
-                        .Default
+                    Encoding.Default
                         .GetBytes("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789")
                 )
             );
@@ -188,8 +187,7 @@ namespace System.Net.Security.Tests
         public void TryEncrypt_RepeatedSequenceOfNumbers()
         {
             ReadOnlySpan<byte> input = new ReadOnlySpan<byte>(
-                Encoding
-                    .Default
+                Encoding.Default
                     .GetBytes(
                         "12345678901234567890123456789012345678901234567890123456789012345678901234567890"
                     )
@@ -252,8 +250,7 @@ namespace System.Net.Security.Tests
         public void TryEncrypt_56bytes_HitsEdgeCaseForPaddingLength()
         {
             ReadOnlySpan<byte> input = new ReadOnlySpan<byte>(
-                Encoding
-                    .Default
+                Encoding.Default
                     .GetBytes("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123")
             );
             ReadOnlySpan<byte> expected = new byte[]
@@ -283,8 +280,7 @@ namespace System.Net.Security.Tests
         public void TryEncrypt_63bytes_HitsEdgeCase()
         {
             ReadOnlySpan<byte> input = new ReadOnlySpan<byte>(
-                Encoding
-                    .Default
+                Encoding.Default
                     .GetBytes("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz01234567890")
             );
             ReadOnlySpan<byte> expected = new byte[]
@@ -314,8 +310,7 @@ namespace System.Net.Security.Tests
         public void TryEncrypt_64bytes_HitsEdgeCase()
         {
             ReadOnlySpan<byte> input = new ReadOnlySpan<byte>(
-                Encoding
-                    .Default
+                Encoding.Default
                     .GetBytes("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz012345678901")
             );
             ReadOnlySpan<byte> expected = new byte[]
@@ -345,8 +340,7 @@ namespace System.Net.Security.Tests
         public void TryEncrypt_65bytes_HitsEdgeCase()
         {
             ReadOnlySpan<byte> input = new ReadOnlySpan<byte>(
-                Encoding
-                    .Default
+                Encoding.Default
                     .GetBytes("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789012")
             );
             ReadOnlySpan<byte> expected = new byte[]
@@ -376,8 +370,7 @@ namespace System.Net.Security.Tests
         public void TryEncrypt_127bytes_HitsEdgeCase()
         {
             ReadOnlySpan<byte> input = new ReadOnlySpan<byte>(
-                Encoding
-                    .Default
+                Encoding.Default
                     .GetBytes(
                         "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz012345678901ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz01234567890"
                     )
@@ -409,8 +402,7 @@ namespace System.Net.Security.Tests
         public void TryEncrypt_128bytes_HitsEdgeCase()
         {
             ReadOnlySpan<byte> input = new ReadOnlySpan<byte>(
-                Encoding
-                    .Default
+                Encoding.Default
                     .GetBytes(
                         "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz012345678901ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz012345678901"
                     )
@@ -442,8 +434,7 @@ namespace System.Net.Security.Tests
         public void TryEncrypt_129bytes_HitsEdgeCase()
         {
             ReadOnlySpan<byte> input = new ReadOnlySpan<byte>(
-                Encoding
-                    .Default
+                Encoding.Default
                     .GetBytes(
                         "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz012345678901ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789012"
                     )

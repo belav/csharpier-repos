@@ -49,19 +49,13 @@ namespace System.ServiceModel.Discovery
 
                 if (this.online)
                 {
-                    return this.announcementClient.BeginAnnounceOnline(
-                        this.publishedEndpoints[index],
-                        callback,
-                        state
-                    );
+                    return this.announcementClient
+                        .BeginAnnounceOnline(this.publishedEndpoints[index], callback, state);
                 }
                 else
                 {
-                    return this.announcementClient.BeginAnnounceOffline(
-                        this.publishedEndpoints[index],
-                        callback,
-                        state
-                    );
+                    return this.announcementClient
+                        .BeginAnnounceOffline(this.publishedEndpoints[index], callback, state);
                 }
             }
         }

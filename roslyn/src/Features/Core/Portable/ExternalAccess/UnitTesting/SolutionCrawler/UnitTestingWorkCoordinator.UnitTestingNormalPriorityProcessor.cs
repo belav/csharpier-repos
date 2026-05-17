@@ -114,9 +114,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
                         Contract.ThrowIfFalse(item.DocumentId != null);
 
                         if (
-                            !item.InvocationReasons.Contains(
-                                UnitTestingPredefinedInvocationReasons.HighPriority
-                            )
+                            !item.InvocationReasons
+                                .Contains(UnitTestingPredefinedInvocationReasons.HighPriority)
                         )
                         {
                             return;
@@ -257,8 +256,7 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
 
                         // Now any visible documents
                         foreach (
-                            var visibleDocumentId in Processor
-                                ._documentTracker
+                            var visibleDocumentId in Processor._documentTracker
                                 .GetVisibleDocuments()
                         )
                         {
@@ -528,8 +526,7 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
                         {
 #if DEBUG
                             Debug.Assert(
-                                !workItem
-                                    .InvocationReasons
+                                !workItem.InvocationReasons
                                     .Contains(UnitTestingPredefinedInvocationReasons.Reanalyze)
                                     || workItem.SpecificAnalyzers.Count > 0
                             );
@@ -540,8 +537,7 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
 #if false // Not used in unit testing crawling
                                 workItem.MustRefresh ||
 #endif
-                                !workItem
-                                    .InvocationReasons
+                                !workItem.InvocationReasons
                                     .Contains(UnitTestingPredefinedInvocationReasons.Reanalyze)
                             )
                             {
@@ -567,8 +563,7 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
                             // Note: Semantic analysis is not supported for non-source documents.
                             if (
                                 document is Document sourceDocument
-                                && !workItem
-                                    .InvocationReasons
+                                && !workItem.InvocationReasons
                                     .Contains(
                                         UnitTestingPredefinedInvocationReasons.SemanticChanged
                                     )

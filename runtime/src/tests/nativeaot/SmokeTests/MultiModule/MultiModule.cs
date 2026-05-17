@@ -57,14 +57,12 @@ public class ReflectionTest
             return Fail;
 
         if (
-            !MultiModuleLibrary
-                .GenericClass<MultiModuleLibrary.GenericStruct<string>>
+            !MultiModuleLibrary.GenericClass<MultiModuleLibrary.GenericStruct<string>>
                 .IsArrayOfT(new MultiModuleLibrary.GenericStruct<string>[0])
         )
             return Fail;
         if (
-            !MultiModuleLibrary
-                .GenericClass<MultiModuleLibrary.GenericStruct<string>>
+            !MultiModuleLibrary.GenericClass<MultiModuleLibrary.GenericStruct<string>>
                 .IsT(new MultiModuleLibrary.GenericStruct<string>())
         )
             return Fail;

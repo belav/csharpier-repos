@@ -25,8 +25,7 @@ public class TestModificationCommandBatchFactory : IModificationCommandBatchFact
     {
         CreateCount++;
 
-        var optionsExtension = _options
-            .Extensions
+        var optionsExtension = _options.Extensions
             .OfType<FakeRelationalOptionsExtension>()
             .FirstOrDefault();
 

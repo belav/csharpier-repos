@@ -197,8 +197,7 @@ namespace System.DirectoryServices.ActiveDirectory
                         ForestTrustDomainInformation tmp = _domainInfo[i];
                         record.Time = tmp.time;
                         void* pSid = null;
-                        global::Interop.BOOL result = global::Interop
-                            .Advapi32
+                        global::Interop.BOOL result = global::Interop.Advapi32
                             .ConvertStringSidToSid(tmp.DomainSid, out pSid);
                         if (result == global::Interop.BOOL.FALSE)
                         {

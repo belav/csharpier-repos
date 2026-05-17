@@ -69,8 +69,7 @@ namespace Microsoft.CodeAnalysis.ValueTracking
                 }
                 else if (location.IsWrittenTo)
                 {
-                    var syntaxFacts = location
-                        .Document
+                    var syntaxFacts = location.Document
                         .GetRequiredLanguageService<ISyntaxFactsService>();
                     var node = location.Location.FindNode(cancellationToken);
 
@@ -95,8 +94,7 @@ namespace Microsoft.CodeAnalysis.ValueTracking
                     }
                     else
                     {
-                        var semanticModel = await location
-                            .Document
+                        var semanticModel = await location.Document
                             .GetRequiredSemanticModelAsync(cancellationToken)
                             .ConfigureAwait(false);
                         var operation = semanticModel.GetOperation(node, cancellationToken);
@@ -117,8 +115,7 @@ namespace Microsoft.CodeAnalysis.ValueTracking
                     // invocation sites and track the arguments being used in the invocation and potentially
                     // the expression being indexed to, if it is relavent (as determined by the OperationCollector).
                     var node = location.Location.FindNode(cancellationToken);
-                    var syntaxFacts = location
-                        .Document
+                    var syntaxFacts = location.Document
                         .GetRequiredLanguageService<ISyntaxFactsService>();
 
                     var elementAccess = node.FirstAncestorOrSelf<SyntaxNode>(
@@ -134,8 +131,7 @@ namespace Microsoft.CodeAnalysis.ValueTracking
                         out var expression,
                         out var argumentList
                     );
-                    var semanticModel = await location
-                        .Document
+                    var semanticModel = await location.Document
                         .GetRequiredSemanticModelAsync(cancellationToken)
                         .ConfigureAwait(false);
 

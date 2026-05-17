@@ -70,8 +70,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             );
             Assert.Equal(
                 "System.Int32",
-                attribute
-                    .AttributeConstructor
+                attribute.AttributeConstructor
                     .Parameters
                     .Single()
                     .TypeWithAnnotations
@@ -126,8 +125,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             );
             Assert.Equal(
                 "System.Diagnostics.DebuggableAttribute.DebuggingModes",
-                attribute
-                    .AttributeConstructor
+                attribute.AttributeConstructor
                     .Parameters
                     .Single()
                     .TypeWithAnnotations
@@ -137,8 +135,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
             Assert.Equal(1, attribute.CommonConstructorArguments.Length);
 
-            var expectedDebuggingMode = DebuggableAttribute
-                .DebuggingModes
+            var expectedDebuggingMode = DebuggableAttribute.DebuggingModes
                 .IgnoreSymbolStoreSequencePoints;
 
             if (isSynthesized && optimizations == OptimizationLevel.Debug)
@@ -170,8 +167,7 @@ class C
             var comp = CreateEmptyCompilation(
                 "",
                 new[] { reference },
-                options: TestOptions
-                    .ReleaseDll
+                options: TestOptions.ReleaseDll
                     .WithMetadataImportOptions(MetadataImportOptions.Internal)
             );
 
@@ -179,10 +175,8 @@ class C
                 comp.GlobalNamespace
                     .GetMembers()
                     .Where(s =>
-                        s.Name.StartsWith(
-                            "<PrivateImplementationDetails>",
-                            StringComparison.Ordinal
-                        )
+                        s.Name
+                            .StartsWith("<PrivateImplementationDetails>", StringComparison.Ordinal)
                     )
                     .Single();
 
@@ -208,8 +202,7 @@ unsafe struct S
             var comp = CreateEmptyCompilation(
                 "",
                 new[] { reference },
-                options: TestOptions
-                    .UnsafeReleaseDll
+                options: TestOptions.UnsafeReleaseDll
                     .WithMetadataImportOptions(MetadataImportOptions.Internal)
             );
 
@@ -394,9 +387,8 @@ class C
                 CreateCompilation(source, options: options),
                 symbolValidator: m =>
                 {
-                    var displayClass = m.GlobalNamespace.GetMember<NamedTypeSymbol>(
-                        "C.<>c__DisplayClass0_0"
-                    );
+                    var displayClass = m.GlobalNamespace
+                        .GetMember<NamedTypeSymbol>("C.<>c__DisplayClass0_0");
                     AssertEx.SetEqual(
                         new[] { "CompilerGeneratedAttribute" },
                         GetAttributeNames(displayClass.GetAttributes())
@@ -767,8 +759,7 @@ class B : A
                 CreateCompilationWithMscorlib45(source, options: options),
                 symbolValidator: module =>
                 {
-                    var attributes = module
-                        .GlobalNamespace
+                    var attributes = module.GlobalNamespace
                         .GetTypeMember("B")
                         .GetMember<MethodSymbol>("<>n__0")
                         .GetAttributes();
@@ -817,8 +808,7 @@ class B : A
                 CreateCompilationWithMscorlib45(source, options: options),
                 symbolValidator: module =>
                 {
-                    var baseMethodWrapper = module
-                        .GlobalNamespace
+                    var baseMethodWrapper = module.GlobalNamespace
                         .GetTypeMember("B")
                         .GetMember<MethodSymbol>("<>n__0");
                     AssertEx.SetEqual(
@@ -873,8 +863,7 @@ class B : A
                 CreateCompilationWithMscorlib45(source, options: options),
                 symbolValidator: module =>
                 {
-                    var baseMethodWrapper = module
-                        .GlobalNamespace
+                    var baseMethodWrapper = module.GlobalNamespace
                         .GetTypeMember("B")
                         .GetMember<MethodSymbol>("<>n__0");
                     AssertEx.SetEqual(
@@ -1067,8 +1056,7 @@ namespace System.Runtime.CompilerServices
             CompileAndVerify(
                 source,
                 symbolValidator: validate,
-                options: TestOptions
-                    .ReleaseDll
+                options: TestOptions.ReleaseDll
                     .WithMetadataImportOptions(MetadataImportOptions.All),
                 verify: ExecutionConditionUtil.IsCoreClr ? Verification.Passes : Verification.Fails
             );
@@ -2284,8 +2272,7 @@ class Test
                 CreateCompilationWithMscorlib45(source, options: options),
                 symbolValidator: module =>
                 {
-                    var type = module
-                        .GlobalNamespace
+                    var type = module.GlobalNamespace
                         .GetMember<NamedTypeSymbol>("Test")
                         .GetTypeMember("<>c");
                     var stateMachine = type.GetTypeMember("<<F>b__0_0>d");
@@ -2399,8 +2386,7 @@ class Test
             var reference = CreateCompilationWithMscorlib45(source, options: referenceOptions)
                 .EmitToImageReference(options: new EmitOptions(metadataOnly: true));
 
-            var options = TestOptions
-                .ReleaseDll
+            var options = TestOptions.ReleaseDll
                 .WithMetadataImportOptions(MetadataImportOptions.All);
             var compilation = CreateCompilationWithMscorlib45(
                 "",
@@ -2534,8 +2520,7 @@ public class Test<T>
             var reference = CreateCompilationWithMscorlib45(source, options: referenceOptions)
                 .EmitToImageReference(options: new EmitOptions(metadataOnly: true));
 
-            var options = TestOptions
-                .ReleaseDll
+            var options = TestOptions.ReleaseDll
                 .WithMetadataImportOptions(MetadataImportOptions.All);
             var compilation = CreateCompilationWithMscorlib45(
                 "",

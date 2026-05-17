@@ -124,8 +124,7 @@ namespace System.Web.Http.Dispatcher
 
         public virtual IDictionary<string, HttpControllerDescriptor> GetControllerMapping()
         {
-            return _controllerInfoCache
-                .Value
+            return _controllerInfoCache.Value
                 .ToDictionary(c => c.Key, c => c.Value, StringComparer.OrdinalIgnoreCase);
         }
 

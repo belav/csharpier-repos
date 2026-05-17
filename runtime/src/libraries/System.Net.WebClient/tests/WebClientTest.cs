@@ -1291,8 +1291,7 @@ namespace System.Net.Tests
         public const int TimeoutMilliseconds = 30 * 1000;
 
         public static readonly object[][] EchoServers = Configuration.Http.EchoServers;
-        public static readonly object[][] VerifyUploadServers = Configuration
-            .Http
+        public static readonly object[][] VerifyUploadServers = Configuration.Http
             .VerifyUploadServers;
 
         const string ExpectedText =
@@ -1374,8 +1373,7 @@ namespace System.Net.Tests
 
                     if (IsAsync)
                     {
-                        await downloadProgressInvoked
-                            .Task
+                        await downloadProgressInvoked.Task
                             .WaitAsync(TimeSpan.FromMilliseconds(TimeoutMilliseconds));
                     }
                 }
@@ -1409,8 +1407,7 @@ namespace System.Net.Tests
 
                     if (IsAsync)
                     {
-                        await downloadProgressInvokedWithContentLength
-                            .Task
+                        await downloadProgressInvokedWithContentLength.Task
                             .WaitAsync(TimeSpan.FromMilliseconds(TimeoutMilliseconds));
                     }
                 }
@@ -1493,8 +1490,7 @@ namespace System.Net.Tests
             );
             if (IsAsync)
             {
-                await uploadProgressInvoked
-                    .Task
+                await uploadProgressInvoked.Task
                     .WaitAsync(TimeSpan.FromMilliseconds(TimeoutMilliseconds));
             }
         }

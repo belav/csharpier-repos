@@ -77,8 +77,7 @@ namespace Microsoft.CodeAnalysis.CSharp.DisambiguateSameVariable
             title = null;
 
             var span = diagnostic.Location.SourceSpan;
-            var node = diagnostic
-                .Location
+            var node = diagnostic.Location
                 .FindNode(getInnermostNodeForTie: true, cancellationToken);
             var (left, right, titleFormat) = node switch
             {
@@ -153,8 +152,7 @@ namespace Microsoft.CodeAnalysis.CSharp.DisambiguateSameVariable
             if (matchingMember == null)
                 return false;
 
-            var memberContainer = matchingMember
-                .ContainingType
+            var memberContainer = matchingMember.ContainingType
                 .ToMinimalDisplayString(semanticModel, span.Start);
             title = string.Format(titleFormat, $"{memberContainer}.{matchingMember.Name}");
 

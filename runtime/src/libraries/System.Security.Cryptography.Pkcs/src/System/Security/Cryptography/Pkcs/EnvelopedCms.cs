@@ -109,8 +109,7 @@ namespace System.Security.Cryptography.Pkcs
                 _decryptorPal.Dispose();
                 _decryptorPal = null;
             }
-            _encodedMessage = PkcsPal
-                .Instance
+            _encodedMessage = PkcsPal.Instance
                 .Encrypt(
                     recipients,
                     ContentInfo,
@@ -167,8 +166,7 @@ namespace System.Security.Cryptography.Pkcs
             AlgorithmIdentifier contentEncryptionAlgorithm;
             X509Certificate2Collection originatorCerts;
             CryptographicAttributeObjectCollection unprotectedAttributes;
-            _decryptorPal = PkcsPal
-                .Instance
+            _decryptorPal = PkcsPal.Instance
                 .Decode(
                     encodedMessage,
                     out version,

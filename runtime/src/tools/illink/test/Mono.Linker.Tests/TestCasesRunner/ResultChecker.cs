@@ -62,8 +62,7 @@ namespace Mono.Linker.Tests.TestCasesRunner
                 {
                     case null:
                         // There should be an ExportedType row for this typeref
-                        var exportedType = linked
-                            .MainModule
+                        var exportedType = linked.MainModule
                             .ExportedTypes
                             .SingleOrDefault(et => et.FullName == typeRef.FullName);
                         Assert.IsNotNull(
@@ -75,8 +74,7 @@ namespace Mono.Linker.Tests.TestCasesRunner
                         {
                             case AssemblyNameReference:
                                 // There should be an AssemblyRef row for this assembly
-                                var assemblyRef = linked
-                                    .MainModule
+                                var assemblyRef = linked.MainModule
                                     .AssemblyReferences
                                     .Single(ar => ar.Name == exportedType.Scope.Name);
                                 Assert.IsNotNull(
@@ -93,8 +91,7 @@ namespace Mono.Linker.Tests.TestCasesRunner
                     case AssemblyNameReference:
                     {
                         // There should be an AssemblyRef row for this assembly
-                        var assemblyRef = linked
-                            .MainModule
+                        var assemblyRef = linked.MainModule
                             .AssemblyReferences
                             .Single(ar => ar.Name == typeRef.Scope.Name);
                         Assert.IsNotNull(
@@ -234,8 +231,7 @@ namespace Mono.Linker.Tests.TestCasesRunner
 
         void PerformOutputAssemblyChecks(AssemblyDefinition original, NPath outputDirectory)
         {
-            var assembliesToCheck = original
-                .MainModule
+            var assembliesToCheck = original.MainModule
                 .Types
                 .SelectMany(t => t.CustomAttributes)
                 .Where(attr => ExpectationsProvider.IsAssemblyAssertion(attr));
@@ -304,8 +300,7 @@ namespace Mono.Linker.Tests.TestCasesRunner
 
         void PerformOutputSymbolChecks(AssemblyDefinition original, NPath outputDirectory)
         {
-            var symbolFilesToCheck = original
-                .MainModule
+            var symbolFilesToCheck = original.MainModule
                 .Types
                 .SelectMany(t => t.CustomAttributes)
                 .Where(ExpectationsProvider.IsSymbolAssertion);
@@ -468,22 +463,19 @@ namespace Mono.Linker.Tests.TestCasesRunner
                             .ConstructorArguments[1]
                             .Value
                             .ToString();
-                        TypeDefinition linkedType = linkedAssembly
-                            .MainModule
+                        TypeDefinition linkedType = linkedAssembly.MainModule
                             .GetType(expectedTypeName);
 
                         if (linkedType == null && linkedAssembly.MainModule.HasExportedTypes)
                         {
-                            ExportedType exportedType = linkedAssembly
-                                .MainModule
+                            ExportedType exportedType = linkedAssembly.MainModule
                                 .ExportedTypes
                                 .FirstOrDefault(exported => exported.FullName == expectedTypeName);
 
                             // Note that copied assemblies could have dangling references.
                             if (
                                 exportedType != null
-                                && original
-                                    .EntryPoint
+                                && original.EntryPoint
                                     .DeclaringType
                                     .CustomAttributes
                                     .FirstOrDefault(ca =>
@@ -555,8 +547,7 @@ namespace Mono.Linker.Tests.TestCasesRunner
                                 break;
                             case nameof(RemovedForwarderAttribute):
                                 if (
-                                    linkedAssembly
-                                        .MainModule
+                                    linkedAssembly.MainModule
                                         .ExportedTypes
                                         .Any(l => l.Name == expectedTypeName)
                                 )
@@ -568,8 +559,7 @@ namespace Mono.Linker.Tests.TestCasesRunner
 
                             case nameof(RemovedAssemblyReferenceAttribute):
                                 Assert.False(
-                                    linkedAssembly
-                                        .MainModule
+                                    linkedAssembly.MainModule
                                         .AssemblyReferences
                                         .Any(l => l.Name == expectedTypeName),
                                     $"AssemblyRef '{expectedTypeName}' should have been removed from assembly {assemblyName}"
@@ -702,13 +692,11 @@ namespace Mono.Linker.Tests.TestCasesRunner
                 return;
             }
 
-            var originalPropertyMember = originalType
-                .Properties
+            var originalPropertyMember = originalType.Properties
                 .FirstOrDefault(m => m.Name == memberName);
             if (originalPropertyMember != null)
             {
-                var linkedProperty = linkedType
-                    .Properties
+                var linkedProperty = linkedType.Properties
                     .FirstOrDefault(m => m.Name == memberName);
                 if (linkedProperty == null)
                     Assert.Fail(
@@ -719,13 +707,11 @@ namespace Mono.Linker.Tests.TestCasesRunner
                 return;
             }
 
-            var originalMethodMember = originalType
-                .Methods
+            var originalMethodMember = originalType.Methods
                 .FirstOrDefault(m => m.GetSignature() == memberName);
             if (originalMethodMember != null)
             {
-                var linkedMethod = linkedType
-                    .Methods
+                var linkedMethod = linkedType.Methods
                     .FirstOrDefault(m => m.GetSignature() == memberName);
                 if (linkedMethod == null)
                     Assert.Fail(
@@ -764,8 +750,7 @@ namespace Mono.Linker.Tests.TestCasesRunner
             string expectedAttributeTypeName
         )
         {
-            var match = provider
-                .CustomAttributes
+            var match = provider.CustomAttributes
                 .FirstOrDefault(attr => attr.AttributeType.FullName == expectedAttributeTypeName);
             if (match == null)
                 Assert.Fail(
@@ -778,8 +763,7 @@ namespace Mono.Linker.Tests.TestCasesRunner
             string expectedAttributeTypeName
         )
         {
-            var match = provider
-                .CustomAttributes
+            var match = provider.CustomAttributes
                 .FirstOrDefault(attr => attr.AttributeType.FullName == expectedAttributeTypeName);
             if (match != null)
                 Assert.Fail(
@@ -893,17 +877,18 @@ namespace Mono.Linker.Tests.TestCasesRunner
             string expectedInterfaceTypeName
         )
         {
-            return type.Interfaces.FirstOrDefault(impl =>
-            {
-                var resolvedImpl = impl.InterfaceType.Resolve();
+            return type.Interfaces
+                .FirstOrDefault(impl =>
+                {
+                    var resolvedImpl = impl.InterfaceType.Resolve();
 
-                if (resolvedImpl == null)
-                    Assert.Fail(
-                        $"Failed to resolve interface : `{impl.InterfaceType}` on `{type}`"
-                    );
+                    if (resolvedImpl == null)
+                        Assert.Fail(
+                            $"Failed to resolve interface : `{impl.InterfaceType}` on `{type}`"
+                        );
 
-                return resolvedImpl.FullName == expectedInterfaceTypeName;
-            });
+                    return resolvedImpl.FullName == expectedInterfaceTypeName;
+                });
         }
 
         void VerifyRemovedMemberInAssembly(
@@ -921,8 +906,7 @@ namespace Mono.Linker.Tests.TestCasesRunner
 
                 // We will find the matching type from the original assembly first that way we can confirm
                 // that the name defined in the attribute corresponds to a member that actually existed
-                var originalFieldMember = originalType
-                    .Fields
+                var originalFieldMember = originalType.Fields
                     .FirstOrDefault(m => m.Name == memberName);
                 if (originalFieldMember != null)
                 {
@@ -935,13 +919,11 @@ namespace Mono.Linker.Tests.TestCasesRunner
                     continue;
                 }
 
-                var originalPropertyMember = originalType
-                    .Properties
+                var originalPropertyMember = originalType.Properties
                     .FirstOrDefault(m => m.Name == memberName);
                 if (originalPropertyMember != null)
                 {
-                    var linkedProperty = linkedType
-                        .Properties
+                    var linkedProperty = linkedType.Properties
                         .FirstOrDefault(m => m.Name == memberName);
                     if (linkedProperty != null)
                         Assert.Fail(
@@ -951,13 +933,11 @@ namespace Mono.Linker.Tests.TestCasesRunner
                     continue;
                 }
 
-                var originalMethodMember = originalType
-                    .Methods
+                var originalMethodMember = originalType.Methods
                     .FirstOrDefault(m => m.GetSignature() == memberName);
                 if (originalMethodMember != null)
                 {
-                    var linkedMethod = linkedType
-                        .Methods
+                    var linkedMethod = linkedType.Methods
                         .FirstOrDefault(m => m.GetSignature() == memberName);
                     if (linkedMethod != null)
                         Assert.Fail(
@@ -1034,13 +1014,11 @@ namespace Mono.Linker.Tests.TestCasesRunner
             TypeDefinition linkedType
         )
         {
-            var originalPropertyMember = originalType
-                .Properties
+            var originalPropertyMember = originalType.Properties
                 .FirstOrDefault(m => m.Name == memberName);
             if (originalPropertyMember != null)
             {
-                var linkedProperty = linkedType
-                    .Properties
+                var linkedProperty = linkedType.Properties
                     .FirstOrDefault(m => m.Name == memberName);
                 if (linkedProperty == null)
                     Assert.Fail(
@@ -1076,13 +1054,11 @@ namespace Mono.Linker.Tests.TestCasesRunner
             out MethodDefinition linkedMethod
         )
         {
-            originalMethod = originalType
-                .Methods
+            originalMethod = originalType.Methods
                 .FirstOrDefault(m => m.GetSignature() == memberName);
             if (originalMethod != null)
             {
-                linkedMethod = linkedType
-                    .Methods
+                linkedMethod = linkedType.Methods
                     .FirstOrDefault(m => m.GetSignature() == memberName);
                 if (linkedMethod == null)
                     Assert.Fail(
@@ -1325,8 +1301,7 @@ namespace Mono.Linker.Tests.TestCasesRunner
                                         {
                                             // Note: string.Compare(string, StringComparison) doesn't exist in .NET Framework API set
                                             if (
-                                                actualOrigin
-                                                    .FileName
+                                                actualOrigin.FileName
                                                     .IndexOf(
                                                         fileName,
                                                         StringComparison.OrdinalIgnoreCase
@@ -1456,8 +1431,7 @@ namespace Mono.Linker.Tests.TestCasesRunner
                                                 memberDefinition.Name == "<Main>$"
                                                 && memberDefinition.DeclaringType.FullName
                                                     == "Program"
-                                                && memberDefinition
-                                                    .DeclaringType
+                                                && memberDefinition.DeclaringType
                                                     .Module
                                                     .Assembly
                                                     .Name
@@ -1620,8 +1594,7 @@ namespace Mono.Linker.Tests.TestCasesRunner
                         var expectedMarked = (string)attr.ConstructorArguments[2].Value;
 
                         if (
-                            !dependencyRecorder
-                                .Dependencies
+                            !dependencyRecorder.Dependencies
                                 .Any(dependency =>
                                 {
                                     if (dependency.Source != expectedSource)
@@ -1637,8 +1610,7 @@ namespace Mono.Linker.Tests.TestCasesRunner
                         {
                             string targetCandidates = string.Join(
                                 Environment.NewLine,
-                                dependencyRecorder
-                                    .Dependencies
+                                dependencyRecorder.Dependencies
                                     .Where(d =>
                                         d.Target
                                             .ToLowerInvariant()
@@ -1648,8 +1620,7 @@ namespace Mono.Linker.Tests.TestCasesRunner
                             );
                             string sourceCandidates = string.Join(
                                 Environment.NewLine,
-                                dependencyRecorder
-                                    .Dependencies
+                                dependencyRecorder.Dependencies
                                     .Where(d =>
                                         d.Source
                                             .ToLowerInvariant()
@@ -1825,8 +1796,7 @@ namespace Mono.Linker.Tests.TestCasesRunner
             foreach (var typeWithRemoveInAssembly in original.AllDefinedTypes())
             {
                 foreach (
-                    var attr in typeWithRemoveInAssembly
-                        .CustomAttributes
+                    var attr in typeWithRemoveInAssembly.CustomAttributes
                         .Where(IsTypeInOtherAssemblyAssertion)
                 )
                 {
@@ -1882,8 +1852,7 @@ namespace Mono.Linker.Tests.TestCasesRunner
         {
             if (caProvider is AssemblyDefinition assembly && assembly.EntryPoint != null)
             {
-                customAttribute = assembly
-                    .EntryPoint
+                customAttribute = assembly.EntryPoint
                     .DeclaringType
                     .CustomAttributes
                     .FirstOrDefault(attr => attr!.AttributeType.Name == attributeName, null);
@@ -1892,10 +1861,8 @@ namespace Mono.Linker.Tests.TestCasesRunner
 
             if (caProvider is TypeDefinition type)
             {
-                customAttribute = type.CustomAttributes.FirstOrDefault(
-                    attr => attr!.AttributeType.Name == attributeName,
-                    null
-                );
+                customAttribute = type.CustomAttributes
+                    .FirstOrDefault(attr => attr!.AttributeType.Name == attributeName, null);
                 return customAttribute is not null;
             }
             customAttribute = null;
@@ -1908,16 +1875,14 @@ namespace Mono.Linker.Tests.TestCasesRunner
         )
         {
             if (caProvider is AssemblyDefinition assembly && assembly.EntryPoint != null)
-                return assembly
-                    .EntryPoint
+                return assembly.EntryPoint
                     .DeclaringType
                     .CustomAttributes
                     .Where(attr => attr!.AttributeType.Name == attributeName);
 
             if (caProvider is TypeDefinition type)
-                return type.CustomAttributes.Where(attr =>
-                    attr!.AttributeType.Name == attributeName
-                );
+                return type.CustomAttributes
+                    .Where(attr => attr!.AttributeType.Name == attributeName);
 
             return Enumerable.Empty<CustomAttribute>();
         }

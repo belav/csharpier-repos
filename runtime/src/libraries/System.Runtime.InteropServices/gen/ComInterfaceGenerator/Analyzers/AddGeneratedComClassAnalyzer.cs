@@ -23,11 +23,9 @@ namespace Microsoft.Interop.Analyzers
 
             context.RegisterCompilationStartAction(context =>
             {
-                var generatedComClassAttributeType = context
-                    .Compilation
+                var generatedComClassAttributeType = context.Compilation
                     .GetBestTypeByMetadataName(TypeNames.GeneratedComClassAttribute);
-                var generatedComInterfaceAttributeType = context
-                    .Compilation
+                var generatedComInterfaceAttributeType = context.Compilation
                     .GetBestTypeByMetadataName(TypeNames.GeneratedComInterfaceAttribute);
 
                 if (

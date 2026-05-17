@@ -21,8 +21,7 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             CancellationToken cancellationToken
         )
         {
-            var infoFactory = project
-                .LanguageServices
+            var infoFactory = project.LanguageServices
                 .GetRequiredService<IDeclaredSymbolInfoFactoryService>();
 
             using var _1 = ArrayBuilder<DeclaredSymbolInfo>.GetInstance(

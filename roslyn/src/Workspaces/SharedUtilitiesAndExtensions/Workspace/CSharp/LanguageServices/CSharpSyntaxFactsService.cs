@@ -132,8 +132,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 bool allowPartialSelection,
                 CancellationToken cancellationToken
             ) =>
-                CSharpSelectedMembers
-                    .Instance
+                CSharpSelectedMembers.Instance
                     .GetSelectedFieldsAndPropertiesAsync(
                         tree,
                         textSpan,

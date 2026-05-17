@@ -2080,8 +2080,7 @@ return true;
 
         public override int GetHashCode()
         {
-            return WebUtil
-                .HashCodeCombiner
+            return WebUtil.HashCodeCombiner
                 .CombineHashCodes(
                     _type.GetHashCode(),
                     _key.GetHashCode(),

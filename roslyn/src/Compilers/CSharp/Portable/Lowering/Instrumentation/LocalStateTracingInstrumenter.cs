@@ -179,8 +179,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return false;
             }
 
-            var contextType = factory
-                .Compilation
+            var contextType = factory.Compilation
                 .GetWellKnownType(WellKnownType.Microsoft_CodeAnalysis_Runtime_LocalStoreTracker);
             if (IsSameOrNestedType(method.ContainingType, contextType))
             {
@@ -704,8 +703,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return;
             }
 
-            var targetSymbol = original
-                .Locals
+            var targetSymbol = original.Locals
                 .FirstOrDefault(l => l.SynthesizedKind == SynthesizedLocalKind.UserDefined);
             if (targetSymbol is null)
             {

@@ -48,8 +48,7 @@ namespace System
                     return UriTemplateLiteralQueryValue.CreateFromUriTemplate(value);
 
                 case UriTemplatePartType.Compound:
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(

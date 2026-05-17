@@ -173,8 +173,7 @@ namespace BinderTracingTests
                 BinderTestAttribute attribute = method.GetCustomAttribute<BinderTestAttribute>();
                 if (!string.IsNullOrEmpty(attribute.TestSetup))
                 {
-                    MethodInfo setupMethod = method
-                        .DeclaringType
+                    MethodInfo setupMethod = method.DeclaringType
                         .GetMethod(
                             attribute.TestSetup,
                             BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static

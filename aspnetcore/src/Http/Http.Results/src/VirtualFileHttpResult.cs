@@ -97,8 +97,7 @@ public sealed class VirtualFileHttpResult : IResult, IFileHttpResult, IContentTy
     {
         ArgumentNullException.ThrowIfNull(httpContext);
 
-        var hostingEnvironment = httpContext
-            .RequestServices
+        var hostingEnvironment = httpContext.RequestServices
             .GetRequiredService<IWebHostEnvironment>();
 
         var fileInfo = GetFileInformation(hostingEnvironment.WebRootFileProvider);

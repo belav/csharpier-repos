@@ -80,10 +80,8 @@ namespace System.Activities.Core.Presentation
         {
             List<Action<AttributeTableBuilder>> currentDelayedWorkItems;
             if (
-                this.DelayedWorkItems.TryGetValue(
-                    loadedAssembly.GetName().Name,
-                    out currentDelayedWorkItems
-                )
+                this.DelayedWorkItems
+                    .TryGetValue(loadedAssembly.GetName().Name, out currentDelayedWorkItems)
             )
             {
                 Action delayedRegisterMetadataWork = new DelayedRegisterMetadataWorkContext(

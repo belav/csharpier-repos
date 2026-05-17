@@ -54,8 +54,7 @@ namespace Microsoft.Web.Mvc.ModelBinding
                 if (boundSuccessfully)
                 {
                     // run validation and return the model
-                    newBindingContext
-                        .ValidationNode
+                    newBindingContext.ValidationNode
                         .Validate(
                             controllerContext,
                             null /* parentNode */
@@ -70,8 +69,7 @@ namespace Microsoft.Web.Mvc.ModelBinding
         private static void CheckPropertyFilter(ModelBindingContext bindingContext)
         {
             if (
-                bindingContext
-                    .ModelType
+                bindingContext.ModelType
                     .GetProperties()
                     .Select(p => p.Name)
                     .Any(name => !bindingContext.PropertyFilter(name))

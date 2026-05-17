@@ -58,13 +58,11 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             builder.RequireInitialAlignment(4);
             builder.AddSymbol(this);
 
-            DirectoryEntry strongNameDirectory = _module
-                .PEReader
+            DirectoryEntry strongNameDirectory = _module.PEReader
                 .PEHeaders
                 .CorHeader
                 .StrongNameSignatureDirectory;
-            PEMemoryBlock block = _module
-                .PEReader
+            PEMemoryBlock block = _module.PEReader
                 .GetSectionData(strongNameDirectory.RelativeVirtualAddress);
             builder.EmitBytes(block.GetReader().ReadBytes(strongNameDirectory.Size));
 

@@ -19,8 +19,7 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
     {
         private async Task InvokeFixAsync(CancellationToken cancellationToken)
         {
-            await TestServices
-                .Editor
+            await TestServices.Editor
                 .SetTextAsync(
                     @"
 unsafe class C
@@ -35,14 +34,12 @@ unsafe class C
             // Suspend file change notification during code action application, since spurious file change notifications
             // can cause silent failure to apply the code action if they occur within this block.
             await using (
-                var fileChangeRestorer = await TestServices
-                    .Shell
+                var fileChangeRestorer = await TestServices.Shell
                     .PauseFileChangesAsync(HangMitigatingCancellationToken)
             )
             {
                 await TestServices.Editor.InvokeCodeActionListAsync(cancellationToken);
-                await TestServices
-                    .EditorVerifier
+                await TestServices.EditorVerifier
                     .CodeActionAsync(
                         "Allow unsafe code in this project",
                         applyFix: true,
@@ -56,19 +53,16 @@ unsafe class C
         {
             var project = ProjectName;
 
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .CreateSolutionAsync(SolutionName, HangMitigatingCancellationToken);
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .AddProjectAsync(
                     project,
                     WellKnownProjectTemplates.CSharpNetStandardClassLibrary,
                     LanguageNames.CSharp,
                     HangMitigatingCancellationToken
                 );
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .RestoreNuGetPackagesAsync(project, HangMitigatingCancellationToken);
 
             await InvokeFixAsync(HangMitigatingCancellationToken);
@@ -84,11 +78,9 @@ unsafe class C
         {
             var project = ProjectName;
 
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .CreateSolutionAsync(SolutionName, HangMitigatingCancellationToken);
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .AddProjectAsync(
                     project,
                     WellKnownProjectTemplates.ClassLibrary,
@@ -110,11 +102,9 @@ unsafe class C
         {
             var project = ProjectName;
 
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .CreateSolutionAsync(SolutionName, HangMitigatingCancellationToken);
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .AddCustomProjectAsync(
                     project,
                     ".csproj",
@@ -155,8 +145,7 @@ unsafe class C
                     HangMitigatingCancellationToken
                 );
 
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .AddFileAsync(
                     project,
                     "C.cs",

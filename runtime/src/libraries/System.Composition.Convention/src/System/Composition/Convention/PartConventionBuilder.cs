@@ -818,10 +818,8 @@ namespace System.Composition.Convention
                         && mi.GetParameters().Length == 0
                     )
                     {
-                        MethodInfo underlyingMi = mi.DeclaringType.GetRuntimeMethod(
-                            mi.Name,
-                            _emptyTypeArray
-                        );
+                        MethodInfo underlyingMi = mi.DeclaringType
+                            .GetRuntimeMethod(mi.Name, _emptyTypeArray);
                         if (underlyingMi != null)
                         {
                             bool checkedIfConfigured = false;

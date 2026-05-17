@@ -274,8 +274,7 @@ namespace System.Workflow.Activities
                 Type targetWorkflowType = invokeWorkflow.TargetWorkflow;
                 if (targetWorkflowType.Assembly == null && typeProvider.LocalAssembly != null)
                 {
-                    Type workflowType = typeProvider
-                        .LocalAssembly
+                    Type workflowType = typeProvider.LocalAssembly
                         .GetType(targetWorkflowType.FullName);
                     if (workflowType != null)
                         targetWorkflowType = workflowType;
@@ -381,8 +380,7 @@ namespace System.Workflow.Activities
                                     ErrorNumbers.Error_ParameterNotFound
                                 );
                                 if (
-                                    InvokeWorkflowActivity
-                                        .ReservedParameterNames
+                                    InvokeWorkflowActivity.ReservedParameterNames
                                         .Contains(paramBinding.ParameterName)
                                 )
                                     validationError.PropertyName =

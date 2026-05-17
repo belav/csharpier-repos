@@ -138,9 +138,8 @@ public class Startup
                             // Debug only, in production do not share exceptions with the remote host.
                             return c.Response.WriteAsync(c.Exception.ToString());
                         }
-                        return c.Response.WriteAsync(
-                            "An error occurred processing your authentication."
-                        );
+                        return c.Response
+                            .WriteAsync("An error occurred processing your authentication.");
                     },
                 };
             });
@@ -287,8 +286,7 @@ public class Startup
                 }
 
                 var options = optionsMonitor.Get(OpenIdConnectDefaults.AuthenticationScheme);
-                var metadata = await options
-                    .ConfigurationManager
+                var metadata = await options.ConfigurationManager
                     .GetConfigurationAsync(context.RequestAborted);
 
                 var pairs = new Dictionary<string, string>()
@@ -299,8 +297,7 @@ public class Startup
                     { "refresh_token", refreshToken },
                 };
                 var content = new FormUrlEncodedContent(pairs);
-                var tokenResponse = await options
-                    .Backchannel
+                var tokenResponse = await options.Backchannel
                     .PostAsync(metadata.TokenEndpoint, content, context.RequestAborted);
                 tokenResponse.EnsureSuccessStatusCode();
 
@@ -355,8 +352,7 @@ public class Startup
 
                             await res.WriteAsync("<h2>Payload:</h2>");
                             await res.WriteAsync(
-                                HtmlEncoder
-                                    .Default
+                                HtmlEncoder.Default
                                     .Encode(payload.RootElement.ToString())
                                     .Replace(",", ",<br>") + "<br>"
                             );

@@ -142,8 +142,7 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
         }
 
         private static bool InSameProject(INamedTypeSymbol symbol, Compilation compilation) =>
-            symbol
-                .DeclaringSyntaxReferences
+            symbol.DeclaringSyntaxReferences
                 .Any(
                     static (r, compilation) => compilation.SyntaxTrees.Contains(r.SyntaxTree),
                     compilation
@@ -151,8 +150,7 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
 
         private static bool NotNewDeclaredMember(INamedTypeSymbol symbol, TSyntaxContext context)
         {
-            return symbol
-                .DeclaringSyntaxReferences
+            return symbol.DeclaringSyntaxReferences
                 .Select(reference => reference.GetSyntax())
                 .Any(node =>
                     !(

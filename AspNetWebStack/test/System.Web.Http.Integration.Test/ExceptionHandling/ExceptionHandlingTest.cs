@@ -157,8 +157,7 @@ namespace System.Web.Http
                 actionName
             );
             HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, requestUrl);
-            request
-                .Headers
+            request.Headers
                 .Add(
                     ExceptionController.ResponseExceptionHeaderKey,
                     responseExceptionStatusCode.ToString()
@@ -341,8 +340,7 @@ namespace System.Web.Http
             {
                 IncludeErrorDetailPolicy = IncludeErrorDetailPolicy.Always,
             };
-            config
-                .Routes
+            config.Routes
                 .MapHttpRoute("Default", "Exception/{action}", new { controller = "Exception" });
             HttpServer server = new HttpServer(config);
             HttpClient client = new HttpClient(server);

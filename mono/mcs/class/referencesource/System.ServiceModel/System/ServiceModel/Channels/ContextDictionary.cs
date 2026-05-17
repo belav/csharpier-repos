@@ -227,8 +227,7 @@ namespace System.ServiceModel.Channels
         {
             if (!TryValidateKeyValueSpace(key))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentOutOfRangeException(
                             "key",

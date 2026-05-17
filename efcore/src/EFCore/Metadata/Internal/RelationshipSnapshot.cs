@@ -87,8 +87,7 @@ public class RelationshipSnapshot
                             : navigationEntityType.FindSkipNavigation(skipNavigation.Name);
                     }
 
-                    skipNavigation
-                        ?.Builder
+                    skipNavigation?.Builder
                         .HasForeignKey(
                             newRelationship.Metadata,
                             referencingNavigationTuple.ForeignKeyConfigurationSource

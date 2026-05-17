@@ -130,8 +130,7 @@ namespace System.Net
 
             if (m_DataChunkIndex != -1)
             {
-                dataRead = UnsafeNclNativeMethods
-                    .HttpApi
+                dataRead = UnsafeNclNativeMethods.HttpApi
                     .GetChunks(
                         m_HttpContext.Request.RequestBuffer,
                         m_HttpContext.Request.OriginalBlobAddress,
@@ -178,14 +177,12 @@ namespace System.Net
                     if (!m_InOpaqueMode)
                     {
                         flags = (uint)
-                            UnsafeNclNativeMethods
-                                .HttpApi
+                            UnsafeNclNativeMethods.HttpApi
                                 .HTTP_FLAGS
                                 .HTTP_RECEIVE_REQUEST_FLAG_COPY_BODY;
                     }
 
-                    statusCode = UnsafeNclNativeMethods
-                        .HttpApi
+                    statusCode = UnsafeNclNativeMethods.HttpApi
                         .HttpReceiveRequestEntityBody(
                             m_HttpContext.RequestQueueHandle,
                             m_HttpContext.RequestId,
@@ -306,8 +303,7 @@ namespace System.Net
             uint dataRead = 0;
             if (m_DataChunkIndex != -1)
             {
-                dataRead = UnsafeNclNativeMethods
-                    .HttpApi
+                dataRead = UnsafeNclNativeMethods.HttpApi
                     .GetChunks(
                         m_HttpContext.Request.RequestBuffer,
                         m_HttpContext.Request.OriginalBlobAddress,
@@ -380,14 +376,12 @@ namespace System.Net
                         if (!m_InOpaqueMode)
                         {
                             flags = (uint)
-                                UnsafeNclNativeMethods
-                                    .HttpApi
+                                UnsafeNclNativeMethods.HttpApi
                                     .HTTP_FLAGS
                                     .HTTP_RECEIVE_REQUEST_FLAG_COPY_BODY;
                         }
 
-                        statusCode = UnsafeNclNativeMethods
-                            .HttpApi
+                        statusCode = UnsafeNclNativeMethods.HttpApi
                             .HttpReceiveRequestEntityBody(
                                 m_HttpContext.RequestQueueHandle,
                                 m_HttpContext.RequestId,
@@ -573,8 +567,7 @@ namespace System.Net
         // is currenlty the only consumer of this API
         internal uint GetChunks(byte[] buffer, int offset, int size)
         {
-            return UnsafeNclNativeMethods
-                .HttpApi
+            return UnsafeNclNativeMethods.HttpApi
                 .GetChunks(
                     m_HttpContext.Request.RequestBuffer,
                     m_HttpContext.Request.OriginalBlobAddress,

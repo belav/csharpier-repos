@@ -50,8 +50,7 @@ public class InterlockedExchange1
         T prevLocation;
         T oldLocation;
 
-        TestLibrary
-            .TestFramework
+        TestLibrary.TestFramework
             .BeginScenario("PosTest1: T Interlocked.Exchange(T&,T) (T=" + typeof(T) + ")");
 
         try
@@ -60,13 +59,11 @@ public class InterlockedExchange1
             {
                 value = (T)
                     (object)
-                        TestLibrary
-                            .Generator
+                        TestLibrary.Generator
                             .GetString(-55, false, c_MIN_STRING_LEN, c_MAX_STRING_LEN);
                 location = (T)
                     (object)
-                        TestLibrary
-                            .Generator
+                        TestLibrary.Generator
                             .GetString(-55, false, c_MIN_STRING_LEN, c_MAX_STRING_LEN);
                 prevLocation = location;
 
@@ -74,8 +71,7 @@ public class InterlockedExchange1
 
                 if (!location.Equals(value))
                 {
-                    TestLibrary
-                        .TestFramework
+                    TestLibrary.TestFramework
                         .LogError(
                             "001",
                             "Interlocked.Exchange() did not do the exchange correctly: Expected("
@@ -89,8 +85,7 @@ public class InterlockedExchange1
 
                 if (!oldLocation.Equals(prevLocation))
                 {
-                    TestLibrary
-                        .TestFramework
+                    TestLibrary.TestFramework
                         .LogError(
                             "002",
                             "Interlocked.Exchange() did not return the expected value: Expected("

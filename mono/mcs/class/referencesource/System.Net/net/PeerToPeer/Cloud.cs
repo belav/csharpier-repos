@@ -73,8 +73,7 @@ namespace System.Net.PeerToPeer
         /// <param name="scopeId">id ofthe scope</param>
         internal Cloud(string name, PnrpScope pnrpScope, int scopeId)
         {
-            Logging
-                .P2PTraceSource
+            Logging.P2PTraceSource
                 .TraceEvent(
                     TraceEventType.Information,
                     0,
@@ -243,8 +242,7 @@ namespace System.Net.PeerToPeer
                 }
                 if (numClouds != 0)
                 {
-                    Logging
-                        .P2PTraceSource
+                    Logging.P2PTraceSource
                         .TraceEvent(
                             TraceEventType.Information,
                             0,
@@ -291,8 +289,7 @@ namespace System.Net.PeerToPeer
                 }
                 else
                 {
-                    Logging
-                        .P2PTraceSource
+                    Logging.P2PTraceSource
                         .TraceEvent(
                             TraceEventType.Warning,
                             0,
@@ -309,8 +306,7 @@ namespace System.Net.PeerToPeer
             }
             if (cloudName != null && cloud == null)
             {
-                Logging
-                    .P2PTraceSource
+                Logging.P2PTraceSource
                     .TraceEvent(
                         TraceEventType.Information,
                         0,

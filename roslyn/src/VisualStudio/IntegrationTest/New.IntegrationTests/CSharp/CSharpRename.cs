@@ -35,8 +35,7 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
             await base.InitializeAsync();
 
             // reset relevant global options to default values:
-            var globalOptions = await TestServices
-                .Shell
+            var globalOptions = await TestServices.Shell
                 .GetComponentModelServiceAsync<IGlobalOptionService>(
                     HangMitigatingCancellationToken
                 );
@@ -75,8 +74,7 @@ class Program
     }
 }";
             await using (
-                var telemetry = await TestServices
-                    .Telemetry
+                var telemetry = await TestServices.Telemetry
                     .EnableTestTelemetryChannelAsync(HangMitigatingCancellationToken)
             )
             {
@@ -84,8 +82,7 @@ class Program
                 await TestServices.InlineRename.InvokeAsync(HangMitigatingCancellationToken);
 
                 MarkupTestFile.GetSpans(markup, out var _, out var renameSpans);
-                var tags = await TestServices
-                    .Editor
+                var tags = await TestServices.Editor
                     .GetRenameTagsAsync(HangMitigatingCancellationToken);
                 var tagSpans = tags.SelectAsArray(tag => new TextSpan(
                     tag.Span.Start,
@@ -93,15 +90,13 @@ class Program
                 ));
                 AssertEx.SetEqual(renameSpans, tagSpans);
 
-                await TestServices
-                    .Input
+                await TestServices.Input
                     .SendWithoutActivateAsync(
                         [VirtualKeyCode.VK_Y, VirtualKeyCode.RETURN],
                         HangMitigatingCancellationToken
                     );
                 await TestServices.Workspace.WaitForRenameAsync(HangMitigatingCancellationToken);
-                await TestServices
-                    .EditorVerifier
+                await TestServices.EditorVerifier
                     .TextEqualsAsync(
                         @"
 using System;
@@ -146,21 +141,18 @@ class [|$$ustom|]Attribute : Attribute
             await TestServices.InlineRename.InvokeAsync(HangMitigatingCancellationToken);
 
             MarkupTestFile.GetSpans(markup, out var _, out var renameSpans);
-            var tags = await TestServices
-                .Editor
+            var tags = await TestServices.Editor
                 .GetRenameTagsAsync(HangMitigatingCancellationToken);
             var tagSpans = tags.SelectAsArray(tag => new TextSpan(tag.Span.Start, tag.Span.Length));
             AssertEx.SetEqual(renameSpans, tagSpans);
 
-            await TestServices
-                .Input
+            await TestServices.Input
                 .SendWithoutActivateAsync(
                     ["Custom", VirtualKeyCode.RETURN],
                     HangMitigatingCancellationToken
                 );
             await TestServices.Workspace.WaitForRenameAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .TextEqualsAsync(
                     @"
 using System;
@@ -188,18 +180,15 @@ class [|$$stom|]Attribute : Attribute
             await TestServices.InlineRename.InvokeAsync(HangMitigatingCancellationToken);
 
             MarkupTestFile.GetSpans(markup, out var _, out var renameSpans);
-            var tags = await TestServices
-                .Editor
+            var tags = await TestServices.Editor
                 .GetRenameTagsAsync(HangMitigatingCancellationToken);
             var tagSpans = tags.SelectAsArray(tag => new TextSpan(tag.Span.Start, tag.Span.Length));
             AssertEx.SetEqual(renameSpans, tagSpans);
 
-            await TestServices
-                .Input
+            await TestServices.Input
                 .SendWithoutActivateAsync("Custom", HangMitigatingCancellationToken);
             await TestServices.Workspace.WaitForRenameAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .TextEqualsAsync(
                     @"
 using System;
@@ -232,18 +221,15 @@ class [|stom|]Attribute : Attribute
             await TestServices.InlineRename.InvokeAsync(HangMitigatingCancellationToken);
 
             MarkupTestFile.GetSpans(markup, out _, out var renameSpans);
-            var tags = await TestServices
-                .Editor
+            var tags = await TestServices.Editor
                 .GetRenameTagsAsync(HangMitigatingCancellationToken);
             var tagSpans = tags.SelectAsArray(tag => new TextSpan(tag.Span.Start, tag.Span.Length));
             AssertEx.SetEqual(renameSpans, tagSpans);
 
-            await TestServices
-                .Input
+            await TestServices.Input
                 .SendWithoutActivateAsync("Custom", HangMitigatingCancellationToken);
             await TestServices.Workspace.WaitForRenameAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .TextEqualsAsync(
                     @"
 using System;
@@ -281,18 +267,15 @@ class [|$$stom|]Attribute : Attribute
             await TestServices.InlineRename.InvokeAsync(HangMitigatingCancellationToken);
 
             MarkupTestFile.GetSpans(markup, out _, out var renameSpans);
-            var tags = await TestServices
-                .Editor
+            var tags = await TestServices.Editor
                 .GetRenameTagsAsync(HangMitigatingCancellationToken);
             var tagSpans = tags.SelectAsArray(tag => new TextSpan(tag.Span.Start, tag.Span.Length));
             AssertEx.SetEqual(renameSpans, tagSpans);
 
-            await TestServices
-                .Input
+            await TestServices.Input
                 .SendWithoutActivateAsync("Custom", HangMitigatingCancellationToken);
             await TestServices.Workspace.WaitForRenameAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .TextEqualsAsync(
                     @"
 using System;
@@ -346,26 +329,22 @@ class Program
 }";
             await SetUpEditorAsync(markup, HangMitigatingCancellationToken);
             await TestServices.InlineRename.InvokeAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .InlineRename
+            await TestServices.InlineRename
                 .ToggleIncludeCommentsAsync(HangMitigatingCancellationToken);
 
             MarkupTestFile.GetSpans(markup, out var _, out var renameSpans);
-            var tags = await TestServices
-                .Editor
+            var tags = await TestServices.Editor
                 .GetRenameTagsAsync(HangMitigatingCancellationToken);
             var tagSpans = tags.SelectAsArray(tag => new TextSpan(tag.Span.Start, tag.Span.Length));
             AssertEx.SetEqual(renameSpans, tagSpans);
 
-            await TestServices
-                .Input
+            await TestServices.Input
                 .SendWithoutActivateAsync(
                     [VirtualKeyCode.VK_Y, VirtualKeyCode.RETURN],
                     HangMitigatingCancellationToken
                 );
             await TestServices.Workspace.WaitForRenameAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .TextEqualsAsync(
                     @"
 using System;
@@ -423,26 +402,22 @@ class Program
             await SetUpEditorAsync(markup, HangMitigatingCancellationToken);
 
             await TestServices.InlineRename.InvokeAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .InlineRename
+            await TestServices.InlineRename
                 .ToggleIncludeStringsAsync(HangMitigatingCancellationToken);
 
             MarkupTestFile.GetSpans(markup, out var _, out var renameSpans);
-            var tags = await TestServices
-                .Editor
+            var tags = await TestServices.Editor
                 .GetRenameTagsAsync(HangMitigatingCancellationToken);
             var tagSpans = tags.SelectAsArray(tag => new TextSpan(tag.Span.Start, tag.Span.Length));
             AssertEx.SetEqual(renameSpans, tagSpans);
 
-            await TestServices
-                .Input
+            await TestServices.Input
                 .SendWithoutActivateAsync(
                     [VirtualKeyCode.VK_Y, VirtualKeyCode.RETURN],
                     HangMitigatingCancellationToken
                 );
             await TestServices.Workspace.WaitForRenameAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .TextEqualsAsync(
                     @"
 class Program
@@ -488,26 +463,22 @@ class B : I
             await SetUpEditorAsync(markup, HangMitigatingCancellationToken);
 
             await TestServices.InlineRename.InvokeAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .InlineRename
+            await TestServices.InlineRename
                 .ToggleIncludeOverloadsAsync(HangMitigatingCancellationToken);
 
             MarkupTestFile.GetSpans(markup, out var _, out var renameSpans);
-            var tags = await TestServices
-                .Editor
+            var tags = await TestServices.Editor
                 .GetRenameTagsAsync(HangMitigatingCancellationToken);
             var tagSpans = tags.SelectAsArray(tag => new TextSpan(tag.Span.Start, tag.Span.Length));
             AssertEx.SetEqual(renameSpans, tagSpans);
 
-            await TestServices
-                .Input
+            await TestServices.Input
                 .SendWithoutActivateAsync(
                     [VirtualKeyCode.VK_Y, VirtualKeyCode.RETURN],
                     HangMitigatingCancellationToken
                 );
             await TestServices.Workspace.WaitForRenameAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .TextEqualsAsync(
                     @"
 interface I
@@ -538,16 +509,14 @@ class $$Program
 }",
                 HangMitigatingCancellationToken
             );
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .AddFileAsync(
                     ProjectName,
                     "Class2.cs",
                     @"",
                     cancellationToken: HangMitigatingCancellationToken
                 );
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .OpenFileAsync(ProjectName, "Class2.cs", HangMitigatingCancellationToken);
 
             const string class2Markup =
@@ -562,27 +531,23 @@ class SomeOtherClass
             MarkupTestFile.GetSpans(class2Markup, out var code, out var renameSpans);
 
             await TestServices.Editor.SetTextAsync(code, HangMitigatingCancellationToken);
-            await TestServices
-                .Editor
+            await TestServices.Editor
                 .PlaceCaretAsync("Program", charsOffset: 0, HangMitigatingCancellationToken);
 
             await TestServices.InlineRename.InvokeAsync(HangMitigatingCancellationToken);
 
-            var tags = await TestServices
-                .Editor
+            var tags = await TestServices.Editor
                 .GetRenameTagsAsync(HangMitigatingCancellationToken);
             var tagSpans = tags.SelectAsArray(tag => new TextSpan(tag.Span.Start, tag.Span.Length));
             AssertEx.SetEqual(renameSpans, tagSpans);
 
-            await TestServices
-                .Input
+            await TestServices.Input
                 .SendWithoutActivateAsync(
                     [VirtualKeyCode.VK_Y, VirtualKeyCode.RETURN],
                     HangMitigatingCancellationToken
                 );
             await TestServices.Workspace.WaitForRenameAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .TextEqualsAsync(
                     @"
 class SomeOtherClass
@@ -595,11 +560,9 @@ class SomeOtherClass
                     HangMitigatingCancellationToken
                 );
 
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .OpenFileAsync(ProjectName, "Class1.cs", HangMitigatingCancellationToken);
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .TextEqualsAsync(
                     @"
 class y$$
@@ -620,19 +583,16 @@ class $$Program
                 HangMitigatingCancellationToken
             );
 
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .AddFileAsync(
                     ProjectName,
                     "Class2.cs",
                     @"",
                     cancellationToken: HangMitigatingCancellationToken
                 );
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .OpenFileAsync(ProjectName, "Class2.cs", HangMitigatingCancellationToken);
-            await TestServices
-                .Editor
+            await TestServices.Editor
                 .SetTextAsync(
                     @"
 class SomeOtherClass
@@ -644,18 +604,15 @@ class SomeOtherClass
 }",
                     HangMitigatingCancellationToken
                 );
-            await TestServices
-                .Editor
+            await TestServices.Editor
                 .PlaceCaretAsync("Program", charsOffset: 0, HangMitigatingCancellationToken);
 
             await TestServices.InlineRename.InvokeAsync(HangMitigatingCancellationToken);
 
-            await TestServices
-                .Input
+            await TestServices.Input
                 .SendWithoutActivateAsync(VirtualKeyCode.VK_Y, HangMitigatingCancellationToken);
             await TestServices.Workspace.WaitForRenameAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .TextEqualsAsync(
                     @"
 class SomeOtherClass
@@ -668,11 +625,9 @@ class SomeOtherClass
                     HangMitigatingCancellationToken
                 );
 
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .OpenFileAsync(ProjectName, "Class1.cs", HangMitigatingCancellationToken);
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .TextEqualsAsync(
                     @"
 class y$$
@@ -681,12 +636,10 @@ class y$$
                     HangMitigatingCancellationToken
                 );
 
-            await TestServices
-                .Input
+            await TestServices.Input
                 .SendWithoutActivateAsync(VirtualKeyCode.ESCAPE, HangMitigatingCancellationToken);
             await TestServices.Workspace.WaitForRenameAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .TextEqualsAsync(
                     @"
 class Program$$
@@ -695,11 +648,9 @@ class Program$$
                     HangMitigatingCancellationToken
                 );
 
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .OpenFileAsync(ProjectName, "Class2.cs", HangMitigatingCancellationToken);
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .TextEqualsAsync(
                     @"
 class SomeOtherClass
@@ -731,59 +682,50 @@ $$class RenameRocks
             var project1 = ProjectName;
             var project2 = "Project2";
 
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .AddProjectAsync(
                     project2,
                     WellKnownProjectTemplates.ClassLibrary,
                     LanguageName,
                     HangMitigatingCancellationToken
                 );
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .AddProjectReferenceAsync(
                     projectName: project1,
                     projectToReferenceName: project2,
                     HangMitigatingCancellationToken
                 );
 
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .AddFileAsync(
                     project2,
                     "Class2.cs",
                     @"",
                     cancellationToken: HangMitigatingCancellationToken
                 );
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .OpenFileAsync(project2, "Class2.cs", HangMitigatingCancellationToken);
 
-            await TestServices
-                .Editor
+            await TestServices.Editor
                 .SetTextAsync(
                     @"
 public class Class2 { static void Main(string [] args) { } }",
                     HangMitigatingCancellationToken
                 );
 
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .OpenFileAsync(project1, "Class1.cs", HangMitigatingCancellationToken);
-            await TestServices
-                .Editor
+            await TestServices.Editor
                 .PlaceCaretAsync("Class2", charsOffset: 0, HangMitigatingCancellationToken);
 
             await TestServices.InlineRename.InvokeAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .Input
+            await TestServices.Input
                 .SendWithoutActivateAsync(
                     [VirtualKeyCode.VK_Y, VirtualKeyCode.RETURN],
                     HangMitigatingCancellationToken
                 );
             await TestServices.Workspace.WaitForRenameAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .TextEqualsAsync(
                     @"
 class RenameRocks 
@@ -797,11 +739,9 @@ class RenameRocks
                     HangMitigatingCancellationToken
                 );
 
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .OpenFileAsync(project2, "y.cs", HangMitigatingCancellationToken);
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .TextEqualsAsync(
                     @"
 public class y { static void Main(string [] args) { } }$$",
@@ -814,26 +754,22 @@ public class y { static void Main(string [] args) { } }$$",
         {
             await VerifyCrossProjectRename();
 
-            await TestServices
-                .Input
+            await TestServices.Input
                 .SendWithoutActivateAsync(
                     (VirtualKeyCode.VK_Z, VirtualKeyCode.CONTROL),
                     HangMitigatingCancellationToken
                 );
             await TestServices.Workspace.WaitForRenameAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .TextEqualsAsync(
                     @"
 public class Class2 { static void Main(string [] args) { } }$$",
                     HangMitigatingCancellationToken
                 );
 
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .OpenFileAsync(ProjectName, "Class1.cs", HangMitigatingCancellationToken);
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .TextEqualsAsync(
                     @"
 class RenameRocks 
@@ -852,11 +788,9 @@ class RenameRocks
         public async Task VerifyRenameInStandaloneFiles()
         {
             await TestServices.SolutionExplorer.CloseSolutionAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .AddStandaloneFileAsync("StandaloneFile1.cs", HangMitigatingCancellationToken);
-            await TestServices
-                .Editor
+            await TestServices.Editor
                 .SetTextAsync(
                     @"
 class Program
@@ -869,21 +803,18 @@ class Program
 }",
                     HangMitigatingCancellationToken
                 );
-            await TestServices
-                .Editor
+            await TestServices.Editor
                 .PlaceCaretAsync("ids", charsOffset: 0, HangMitigatingCancellationToken);
 
             await TestServices.InlineRename.InvokeAsync(HangMitigatingCancellationToken);
 
-            await TestServices
-                .Input
+            await TestServices.Input
                 .SendWithoutActivateAsync(
                     [VirtualKeyCode.VK_Y, VirtualKeyCode.RETURN],
                     HangMitigatingCancellationToken
                 );
             await TestServices.Workspace.WaitForRenameAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .TextEqualsAsync(
                     @"
 class Program
@@ -901,8 +832,7 @@ class Program
         [IdeFact, WorkItem("https://github.com/dotnet/roslyn/issues/39617")]
         public async Task VerifyRenameCaseChange()
         {
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .AddFileAsync(
                     ProjectName,
                     "Program.cs",
@@ -916,17 +846,14 @@ class Program
                     cancellationToken: HangMitigatingCancellationToken
                 );
 
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .OpenFileAsync(ProjectName, "Program.cs", HangMitigatingCancellationToken);
-            await TestServices
-                .Editor
+            await TestServices.Editor
                 .PlaceCaretAsync("Program", charsOffset: 0, HangMitigatingCancellationToken);
 
             await TestServices.InlineRename.InvokeAsync(HangMitigatingCancellationToken);
 
-            await TestServices
-                .Input
+            await TestServices.Input
                 .SendWithoutActivateAsync(
                     [
                         VirtualKeyCode.HOME,
@@ -938,8 +865,7 @@ class Program
                 );
             await TestServices.Workspace.WaitForRenameAsync(HangMitigatingCancellationToken);
 
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .TextEqualsAsync(
                     @"
 class p$$rogram
@@ -955,14 +881,12 @@ class p$$rogram
         [IdeFact, WorkItem("https://github.com/dotnet/roslyn/issues/68880")]
         public async Task VerifyTextSync()
         {
-            var globalOptions = await TestServices
-                .Shell
+            var globalOptions = await TestServices.Shell
                 .GetComponentModelServiceAsync<IGlobalOptionService>(
                     HangMitigatingCancellationToken
                 );
             globalOptions.SetGlobalOption(InlineRenameUIOptionsStorage.UseInlineAdornment, true);
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .AddFileAsync(
                     ProjectName,
                     "Program.cs",
@@ -974,19 +898,15 @@ public class Class2
                     cancellationToken: HangMitigatingCancellationToken
                 );
 
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .OpenFileAsync(ProjectName, "Program.cs", HangMitigatingCancellationToken);
-            await TestServices
-                .Editor
+            await TestServices.Editor
                 .PlaceCaretAsync("Field123", charsOffset: 0, HangMitigatingCancellationToken);
             await TestServices.InlineRename.InvokeAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .Input
+            await TestServices.Input
                 .SendWithoutActivateAsync(["F", "i"], HangMitigatingCancellationToken);
             await TestServices.Workspace.WaitForRenameAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .TextEqualsAsync(
                     @"
 public class Class2
@@ -995,11 +915,9 @@ public class Class2
 }",
                     HangMitigatingCancellationToken
                 );
-            await TestServices
-                .InlineRename
+            await TestServices.InlineRename
                 .VerifyStringInFlyout("Fi", HangMitigatingCancellationToken);
-            await TestServices
-                .Input
+            await TestServices.Input
                 .SendWithoutActivateAsync(
                     ["e", "l", "d", "3", "2", "1"],
                     HangMitigatingCancellationToken
@@ -1007,8 +925,7 @@ public class Class2
 
             await TestServices.Workspace.WaitForRenameAsync(HangMitigatingCancellationToken);
 
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .TextEqualsAsync(
                     @"
 public class Class2
@@ -1017,16 +934,14 @@ public class Class2
 }",
                     HangMitigatingCancellationToken
                 );
-            await TestServices
-                .InlineRename
+            await TestServices.InlineRename
                 .VerifyStringInFlyout("Field321", HangMitigatingCancellationToken);
         }
 
         [IdeFact, WorkItem("https://github.com/dotnet/roslyn/issues/68374")]
         public async Task VerifySelectionAsync()
         {
-            var globalOptions = await TestServices
-                .Shell
+            var globalOptions = await TestServices.Shell
                 .GetComponentModelServiceAsync<IGlobalOptionService>(
                     HangMitigatingCancellationToken
                 );
@@ -1037,8 +952,7 @@ public class Class2
 {
     public int LongLongField;
 }";
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .AddFileAsync(
                     ProjectName,
                     "Program.cs",
@@ -1046,17 +960,14 @@ public class Class2
                     cancellationToken: HangMitigatingCancellationToken
                 );
 
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .OpenFileAsync(ProjectName, "Program.cs", HangMitigatingCancellationToken);
-            await TestServices
-                .Editor
+            await TestServices.Editor
                 .PlaceCaretAsync("LongLongField", charsOffset: 0, HangMitigatingCancellationToken);
             await TestServices.InlineRename.InvokeAsync(HangMitigatingCancellationToken);
 
             await TestServices.Editor.SendExplicitFocusAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .Editor
+            await TestServices.Editor
                 .PlaceCaretAsync(
                     "LongLongField",
                     charsOffset: "Long".Length,
@@ -1071,20 +982,16 @@ public class Class2
 }";
             MarkupTestFile.GetPositionAndSpans(markedCode, out var _, out int? _, out var spans);
             var selectedSpan = spans["selection"].Single();
-            await TestServices
-                .Editor
+            await TestServices.Editor
                 .SetSelectionAsync(selectedSpan, HangMitigatingCancellationToken);
-            await TestServices
-                .Input
+            await TestServices.Input
                 .SendWithoutActivateAsync(
                     new InputKey(VirtualKeyCode.BACK, ImmutableArray<VirtualKeyCode>.Empty),
                     HangMitigatingCancellationToken
                 );
-            await TestServices
-                .Input
+            await TestServices.Input
                 .SendWithoutActivateAsync(["Other", "Stuff"], HangMitigatingCancellationToken);
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .TextEqualsAsync(
                     @"
 public class Class2

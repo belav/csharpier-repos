@@ -139,8 +139,7 @@ namespace Microsoft.VisualBasic.Activities
                     }
                     catch (SourceExpressionException e)
                     {
-                        throw FxTrace
-                            .Exception
+                        throw FxTrace.Exception
                             .AsError(
                                 new InvalidOperationException(
                                     SR.VBExpressionTamperedSinceLastCompiled(e.Message)
@@ -163,8 +162,7 @@ namespace Microsoft.VisualBasic.Activities
             }
             else
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(new InvalidOperationException(SR.ActivityIsUncached));
             }
         }

@@ -69,8 +69,7 @@ namespace ILCompiler
                 {
                     OffsetsForType offsetsForType;
                     if (
-                        moduleFieldLayout
-                            .TypeOffsets
+                        moduleFieldLayout.TypeOffsets
                             .TryGetValue(nonGenericType.Handle, out offsetsForType)
                     )
                     {
@@ -195,8 +194,7 @@ namespace ILCompiler
 
                     foreach (FieldDefinitionHandle fieldDefHandle in typeDef.GetFields())
                     {
-                        FieldDefinition fieldDef = module
-                            .MetadataReader
+                        FieldDefinition fieldDef = module.MetadataReader
                             .GetFieldDefinition(fieldDefHandle);
                         if (
                             (
@@ -574,8 +572,7 @@ namespace ILCompiler
 
                 foreach (FieldDesc field in defType.GetFields())
                 {
-                    FieldDefinition fieldDef = module
-                        .MetadataReader
+                    FieldDefinition fieldDef = module.MetadataReader
                         .GetFieldDefinition(((EcmaField)field.GetTypicalFieldDefinition()).Handle);
                     if (
                         (fieldDef.Attributes & (FieldAttributes.Static | FieldAttributes.Literal))
@@ -695,8 +692,7 @@ namespace ILCompiler
                     FieldDefinitionHandle fieldDefHandle = (
                         (EcmaField)field.GetTypicalFieldDefinition()
                     ).Handle;
-                    FieldDefinition fieldDef = module
-                        .MetadataReader
+                    FieldDefinition fieldDef = module.MetadataReader
                         .GetFieldDefinition(fieldDefHandle);
                     if (
                         (fieldDef.Attributes & (FieldAttributes.Static | FieldAttributes.Literal))

@@ -71,8 +71,7 @@ public static class WebAssemblyNetDebugProxyAppBuilderExtensions
                                 }
                                 break;
                             case "/ws-proxy":
-                                context
-                                    .Response
+                                context.Response
                                     .Redirect($"{debugProxyBaseUrl}{browserUrl!.PathAndQuery}");
                                 break;
                             default:

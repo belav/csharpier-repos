@@ -28,8 +28,7 @@ public class Test
                 }
                 catch (Exception e)
                 {
-                    TestLibrary
-                        .Logging
+                    TestLibrary.Logging
                         .WriteLine("Failure to allocate " + size + " at loop " + loop);
                     TestLibrary.Logging.WriteLine("Caught Exception: {0}", e);
                     return 1;

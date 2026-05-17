@@ -21,8 +21,7 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript
             CancellationToken cancellationToken
         )
         {
-            var analyzer = document
-                .Project
+            var analyzer = document.Project
                 .Services
                 .GetRequiredService<VSTypeScriptDiagnosticAnalyzerLanguageService>()
                 .Implementation;
@@ -39,8 +38,7 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript
             CancellationToken cancellationToken
         )
         {
-            var analyzer = document
-                .Project
+            var analyzer = document.Project
                 .Services
                 .GetRequiredService<VSTypeScriptDiagnosticAnalyzerLanguageService>()
                 .Implementation;

@@ -27,8 +27,7 @@ namespace Internal.TypeSystem
             params TypeDesc[] genericParameters
         )
         {
-            return typeDef
-                .Context
+            return typeDef.Context
                 .GetInstantiatedType(typeDef, new Instantiation(genericParameters));
         }
 
@@ -45,8 +44,7 @@ namespace Internal.TypeSystem
             params TypeDesc[] genericParameters
         )
         {
-            return methodDef
-                .Context
+            return methodDef.Context
                 .GetInstantiatedMethod(methodDef, new Instantiation(genericParameters));
         }
 
@@ -130,8 +128,7 @@ namespace Internal.TypeSystem
                 Debug.Assert(
                     instantiatedType.GetTypeDefinition() == methodTypicalDefinition.OwningType
                 );
-                return method
-                    .Context
+                return method.Context
                     .GetMethodForInstantiatedType(methodTypicalDefinition, instantiatedType);
             }
             else if (type.IsArray)
@@ -364,8 +361,7 @@ namespace Internal.TypeSystem
             if (owner.HasInstantiation)
             {
                 MetadataType instantiatedOwner = (MetadataType)owner.InstantiateAsOpen();
-                return method
-                    .Context
+                return method.Context
                     .GetMethodForInstantiatedType(method, (InstantiatedType)instantiatedOwner);
             }
 
@@ -431,8 +427,7 @@ namespace Internal.TypeSystem
                 case TypeFlags.SzArray:
                 case TypeFlags.ByRef:
                 case TypeFlags.Pointer:
-                    return ((ParameterizedType)thisType)
-                        .ParameterType
+                    return ((ParameterizedType)thisType).ParameterType
                         .ContainsSignatureVariables(treatGenericParameterLikeSignatureVariable);
 
                 case TypeFlags.FunctionPointer:
@@ -447,8 +442,7 @@ namespace Internal.TypeSystem
                         )
                             return true;
 
-                    return pointerSignature
-                        .ReturnType
+                    return pointerSignature.ReturnType
                         .ContainsSignatureVariables(treatGenericParameterLikeSignatureVariable);
 
                 case TypeFlags.SignatureMethodVariable:

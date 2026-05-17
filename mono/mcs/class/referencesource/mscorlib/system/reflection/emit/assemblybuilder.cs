@@ -1799,8 +1799,7 @@ namespace System.Reflection.Emit
                     (InternalModuleBuilder)tmpModule
                 );
 
-            MethodToken entryMethodToken = m_assemblyData
-                .m_entryPointModule
+            MethodToken entryMethodToken = m_assemblyData.m_entryPointModule
                 .GetMethodToken(entryMethod);
             m_assemblyData.m_entryPointModule.SetEntryPoint(entryMethodToken);
 #endif //!FEATURE_CORECLR

@@ -48,9 +48,8 @@ namespace System.ServiceModel.Security
                 else
                 {
                     this.messageBuffer = new XmlBuffer(int.MaxValue);
-                    XmlDictionaryWriter writer = this.messageBuffer.OpenSection(
-                        this.securityHeader.ReaderQuotas
-                    );
+                    XmlDictionaryWriter writer = this.messageBuffer
+                        .OpenSection(this.securityHeader.ReaderQuotas);
                     this.InnerMessage.WriteMessage(writer);
                     this.messageBuffer.CloseSection();
                     this.messageBuffer.Close();
@@ -636,8 +635,7 @@ namespace System.ServiceModel.Security
 
             Fx.Assert(openCharIndex > 0, "");
 
-            byte[] splicedBuffer = DiagnosticUtility
-                .Utility
+            byte[] splicedBuffer = DiagnosticUtility.Utility
                 .AllocateByteArray(checked(middle.Length + wrapperLength - 1));
             int offset = 0;
             int count = openCharIndex - 1;

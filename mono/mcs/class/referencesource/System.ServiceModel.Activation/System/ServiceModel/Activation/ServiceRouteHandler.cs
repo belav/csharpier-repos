@@ -96,8 +96,7 @@ namespace System.ServiceModel.Activation
             }
             catch (ArgumentException)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .Argument("virtualPath", SR.Hosting_RouteHasAlreadyBeenAdded(virtualPath));
             }
         }

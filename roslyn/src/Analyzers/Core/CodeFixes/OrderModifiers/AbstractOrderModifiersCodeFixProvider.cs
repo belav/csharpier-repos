@@ -43,8 +43,7 @@ namespace Microsoft.CodeAnalysis.OrderModifiers
 
         public override async Task RegisterCodeFixesAsync(CodeFixContext context)
         {
-            var syntaxTree = await context
-                .Document
+            var syntaxTree = await context.Document
                 .GetRequiredSyntaxTreeAsync(context.CancellationToken)
                 .ConfigureAwait(false);
             var syntaxNode = Location

@@ -219,11 +219,9 @@ public partial class InMemoryQueryExpression
                     _scalarServerQuery = inMemoryQueryExpression._scalarServerQuery,
                 };
 
-                clonedInMemoryQueryExpression
-                    ._clientProjections
+                clonedInMemoryQueryExpression._clientProjections
                     .AddRange(inMemoryQueryExpression._clientProjections.Select(e => Visit(e)));
-                clonedInMemoryQueryExpression
-                    ._projectionMappingExpressions
+                clonedInMemoryQueryExpression._projectionMappingExpressions
                     .AddRange(inMemoryQueryExpression._projectionMappingExpressions);
                 foreach (
                     var (projectionMember, value) in inMemoryQueryExpression._projectionMapping

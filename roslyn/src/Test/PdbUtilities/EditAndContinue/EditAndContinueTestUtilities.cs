@@ -37,8 +37,7 @@ internal class EditAndContinueTestUtilities
             }
         );
 
-        var hasPortableDebugInformation = module
-            .Module
+        var hasPortableDebugInformation = module.Module
             .PEReaderOpt
             .ReadDebugDirectory()
             .Any(static entry => entry.IsPortableCodeView);

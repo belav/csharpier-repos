@@ -398,8 +398,7 @@ namespace Microsoft.InfoCards.Diagnostics
                     message
                 );
 
-                DiagnosticUtility
-                    .DiagnosticTrace
+                DiagnosticUtility.DiagnosticTrace
                     .TraceEvent(
                         TraceEventType.Verbose,
                         TraceCode.GeneralInformation,
@@ -435,8 +434,7 @@ namespace Microsoft.InfoCards.Diagnostics
                     message
                 );
 
-                DiagnosticUtility
-                    .DiagnosticTrace
+                DiagnosticUtility.DiagnosticTrace
                     .TraceEvent(
                         TraceEventType.Verbose,
                         TraceCode.GeneralInformation,
@@ -886,8 +884,7 @@ namespace Microsoft.InfoCards.Diagnostics
                 // Build a trace message conforming to the ETL trace schema and
                 // call down through the diagnostic support classes to trace the call.
                 //
-                DiagnosticUtility
-                    .DiagnosticTrace
+                DiagnosticUtility.DiagnosticTrace
                     .TraceEvent(
                         level,
                         traceCode,

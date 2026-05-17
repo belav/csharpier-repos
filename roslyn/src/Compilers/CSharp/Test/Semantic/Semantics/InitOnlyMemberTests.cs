@@ -1906,8 +1906,7 @@ public class C
                 Assert.True(setter.IsInitOnly);
                 Assert.True(setter.GetPublicSymbol().IsInitOnly);
                 var setterAttributes = property.SetMethod.GetAttributes().Select(a => a.ToString());
-                var modifier = property
-                    .SetMethod
+                var modifier = property.SetMethod
                     .ReturnTypeWithAnnotations
                     .CustomModifiers
                     .Single();
@@ -3218,15 +3217,13 @@ public class C
             );
             comp.VerifyDiagnostics();
 
-            var conversion = comp.GlobalNamespace.GetMember<SourceUserDefinedConversionSymbol>(
-                "C.op_Implicit"
-            );
+            var conversion = comp.GlobalNamespace
+                .GetMember<SourceUserDefinedConversionSymbol>("C.op_Implicit");
             Assert.False(conversion.IsInitOnly);
             Assert.False(conversion.GetPublicSymbol().IsInitOnly);
 
-            var addition = comp.GlobalNamespace.GetMember<SourceUserDefinedOperatorSymbol>(
-                "C.op_Addition"
-            );
+            var addition = comp.GlobalNamespace
+                .GetMember<SourceUserDefinedOperatorSymbol>("C.op_Addition");
             Assert.False(addition.IsInitOnly);
             Assert.False(addition.GetPublicSymbol().IsInitOnly);
         }
@@ -3978,8 +3975,7 @@ class C : R
             Assert.True(success);
             Assert.NotNull(speculativeModel);
 
-            var p = speculativeModel
-                .SyntaxTree
+            var p = speculativeModel.SyntaxTree
                 .GetRoot()
                 .DescendantNodes()
                 .OfType<IdentifierNameSyntax>()
@@ -4955,8 +4951,7 @@ public class D
             Assert.Empty(property0.RefCustomModifiers);
             Assert.Equal(
                 "System.Runtime.CompilerServices.IsExternalInit",
-                property0
-                    .TypeWithAnnotations
+                property0.TypeWithAnnotations
                     .CustomModifiers
                     .Single()
                     .Modifier
@@ -5904,8 +5899,7 @@ public class C
                         libWithIsExternalInitRef,
                         libWithIsExternalInitRef2,
                     },
-                    options: TestOptions
-                        .DebugDll
+                    options: TestOptions.DebugDll
                         .WithTopLevelBinderFlags(BinderFlags.IgnoreCorLibraryDuplicatedTypes)
                 );
                 comp.VerifyEmitDiagnostics(
@@ -5947,8 +5941,7 @@ public class C
                         libWithIsExternalInitRef,
                         libWithIsExternalInitRef2,
                     },
-                    options: TestOptions
-                        .DebugDll
+                    options: TestOptions.DebugDll
                         .WithTopLevelBinderFlags(BinderFlags.IgnoreCorLibraryDuplicatedTypes)
                 );
                 comp.VerifyEmitDiagnostics(
@@ -5985,8 +5978,7 @@ public class C
                 var comp = CreateEmptyCompilation(
                     source,
                     references: new[] { corlibWithIsExternalInitRef, libWithIsExternalInitRef },
-                    options: TestOptions
-                        .DebugDll
+                    options: TestOptions.DebugDll
                         .WithTopLevelBinderFlags(BinderFlags.IgnoreCorLibraryDuplicatedTypes)
                 );
                 comp.VerifyEmitDiagnostics();
@@ -6008,8 +6000,9 @@ public class C
 
             static void verify(CSharpCompilation comp, string expectedAssemblyName)
             {
-                var modifier = ((SourcePropertySymbol)comp.GlobalNamespace.GetMember("C.Property"))
-                    .SetMethod
+                var modifier = (
+                    (SourcePropertySymbol)comp.GlobalNamespace.GetMember("C.Property")
+                ).SetMethod
                     .ReturnTypeWithAnnotations
                     .CustomModifiers
                     .Single();
@@ -6086,8 +6079,9 @@ public class C
                     references: new[] { corlibWithIsExternalInitRef }
                 );
                 comp.VerifyEmitDiagnostics(emitOptions);
-                var modifier = ((SourcePropertySymbol)comp.GlobalNamespace.GetMember("C.Property"))
-                    .SetMethod
+                var modifier = (
+                    (SourcePropertySymbol)comp.GlobalNamespace.GetMember("C.Property")
+                ).SetMethod
                     .ReturnTypeWithAnnotations
                     .CustomModifiers
                     .Single();
@@ -6108,8 +6102,9 @@ public class C
                         .WithArguments("System.Runtime.CompilerServices.IsExternalInit")
                         .WithLocation(8, 35)
                 );
-                var modifier = ((SourcePropertySymbol)comp.GlobalNamespace.GetMember("C.Property"))
-                    .SetMethod
+                var modifier = (
+                    (SourcePropertySymbol)comp.GlobalNamespace.GetMember("C.Property")
+                ).SetMethod
                     .ReturnTypeWithAnnotations
                     .CustomModifiers
                     .Single();

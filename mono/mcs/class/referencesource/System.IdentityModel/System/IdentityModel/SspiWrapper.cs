@@ -351,8 +351,7 @@ namespace System.IdentityModel
                 );
                 if (errorCode != 0)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new Win32Exception(errorCode));
                 }
 
@@ -396,8 +395,7 @@ namespace System.IdentityModel
                 }
             }
 
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(
                     new NotSupportedException(SR.GetString(SR.SSPIPackageNotSupported, packageName))
                 );
@@ -440,8 +438,7 @@ namespace System.IdentityModel
             );
             if (errorCode != 0)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new Win32Exception(errorCode));
             }
             return outCredential;
@@ -462,8 +459,7 @@ namespace System.IdentityModel
             );
             if (errorCode != 0)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new Win32Exception(errorCode));
             }
             return credentialsHandle;
@@ -484,8 +480,7 @@ namespace System.IdentityModel
             );
             if (errorCode != 0)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new Win32Exception(errorCode));
             }
             return outCredential;
@@ -506,8 +501,7 @@ namespace System.IdentityModel
             );
             if (errorCode != 0)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new Win32Exception(errorCode));
             }
             return outCredential;
@@ -634,8 +628,7 @@ namespace System.IdentityModel
                 }
                 else
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentOutOfRangeException(
                                 "handleType",
@@ -704,8 +697,7 @@ namespace System.IdentityModel
                     nativeBlockSize = SecPkgContext_SessionKey.Size;
                     break;
                 default:
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidEnumArgumentException(
                                 "contextAttribute",
@@ -729,8 +721,7 @@ namespace System.IdentityModel
                 );
                 if (errorCode != 0)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new Win32Exception(errorCode));
                 }
 
@@ -857,8 +848,7 @@ namespace System.IdentityModel
             int errorCode = SafeDeleteContext.ImpersonateSecurityContext(context);
             if (errorCode != (int)SecurityStatus.OK)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new Win32Exception(errorCode));
             }
         }
@@ -929,8 +919,7 @@ namespace System.IdentityModel
                         }
                         else if (isGssBlob && !encrypt && iBuffer.type == BufferType.Data)
                         {
-                            iBuffer.token = DiagnosticUtility
-                                .Utility
+                            iBuffer.token = DiagnosticUtility.Utility
                                 .AllocateByteArray(iBuffer.size);
                             Marshal.Copy(unmanagedBuffer[i].token, iBuffer.token, 0, iBuffer.size);
                         }
@@ -982,8 +971,7 @@ namespace System.IdentityModel
                                             iBuffer.offset
                                         )
                                     );
-                                    throw DiagnosticUtility
-                                        .ExceptionUtility
+                                    throw DiagnosticUtility.ExceptionUtility
                                         .ThrowHelperError(
                                             new InvalidOperationException(
                                                 SR.GetString(
@@ -1011,8 +999,7 @@ namespace System.IdentityModel
                                             iBuffer.size
                                         )
                                     );
-                                    throw DiagnosticUtility
-                                        .ExceptionUtility
+                                    throw DiagnosticUtility.ExceptionUtility
                                         .ThrowHelperError(
                                             new InvalidOperationException(
                                                 SR.GetString(

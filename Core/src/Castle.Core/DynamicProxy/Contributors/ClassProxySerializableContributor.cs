@@ -196,13 +196,14 @@ namespace Castle.DynamicProxy.Contributors
 
             var ctor = emitter.CreateConstructor(serializationInfo, streamingContext);
 
-            ctor.CodeBuilder.AddStatement(
-                new ConstructorInvocationStatement(
-                    serializationConstructor,
-                    serializationInfo,
-                    streamingContext
-                )
-            );
+            ctor.CodeBuilder
+                .AddStatement(
+                    new ConstructorInvocationStatement(
+                        serializationConstructor,
+                        serializationInfo,
+                        streamingContext
+                    )
+                );
 
             foreach (var field in serializedFields)
             {
@@ -212,12 +213,17 @@ namespace Castle.DynamicProxy.Contributors
                     new LiteralStringExpression(field.Reference.Name),
                     new TypeTokenExpression(field.Reference.FieldType)
                 );
-                ctor.CodeBuilder.AddStatement(
-                    new AssignStatement(
-                        field,
-                        new ConvertExpression(field.Reference.FieldType, typeof(object), getValue)
-                    )
-                );
+                ctor.CodeBuilder
+                    .AddStatement(
+                        new AssignStatement(
+                            field,
+                            new ConvertExpression(
+                                field.Reference.FieldType,
+                                typeof(object),
+                                getValue
+                            )
+                        )
+                    );
             }
             ctor.CodeBuilder.AddStatement(new ReturnStatement());
         }

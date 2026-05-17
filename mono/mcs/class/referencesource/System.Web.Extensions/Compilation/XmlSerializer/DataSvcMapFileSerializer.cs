@@ -276,8 +276,7 @@ namespace System.Web.Compilation.WCFModel.DataSvcMapFileXmlSerializer
                 WriteAttribute(
                     @"Ignore",
                     @"",
-                    System
-                        .Xml
+                    System.Xml
                         .XmlConvert
                         .ToString((global::System.Boolean)((global::System.Boolean)o.@Ignore))
                 );
@@ -287,8 +286,7 @@ namespace System.Web.Compilation.WCFModel.DataSvcMapFileXmlSerializer
                 WriteAttribute(
                     @"IsMergeResult",
                     @"",
-                    System
-                        .Xml
+                    System.Xml
                         .XmlConvert
                         .ToString(
                             (global::System.Boolean)((global::System.Boolean)o.@IsMergeResult)
@@ -300,8 +298,7 @@ namespace System.Web.Compilation.WCFModel.DataSvcMapFileXmlSerializer
                 WriteAttribute(
                     @"SourceId",
                     @"",
-                    System
-                        .Xml
+                    System.Xml
                         .XmlConvert
                         .ToString((global::System.Int32)((global::System.Int32)o.@SourceId))
                 );
@@ -383,8 +380,7 @@ namespace System.Web.Compilation.WCFModel.DataSvcMapFileXmlSerializer
             WriteAttribute(
                 @"SourceId",
                 @"",
-                System
-                    .Xml
+                System.Xml
                     .XmlConvert
                     .ToString((global::System.Int32)((global::System.Int32)o.@SourceId))
             );
@@ -1143,8 +1139,7 @@ namespace System.Web.Compilation.WCFModel.DataSvcMapFileXmlSerializer
             switch (s)
             {
                 case @"Unknown":
-                    return global::System
-                        .Web
+                    return global::System.Web
                         .Compilation
                         .WCFModel
                         .MetadataFile
@@ -1155,16 +1150,14 @@ namespace System.Web.Compilation.WCFModel.DataSvcMapFileXmlSerializer
                 case @"Wsdl":
                     return global::System.Web.Compilation.WCFModel.MetadataFile.MetadataType.@Wsdl;
                 case @"Schema":
-                    return global::System
-                        .Web
+                    return global::System.Web
                         .Compilation
                         .WCFModel
                         .MetadataFile
                         .MetadataType
                         .@Schema;
                 case @"Policy":
-                    return global::System
-                        .Web
+                    return global::System.Web
                         .Compilation
                         .WCFModel
                         .MetadataFile

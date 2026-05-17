@@ -30,17 +30,13 @@ namespace Microsoft.Interop.Analyzers
             context.EnableConcurrentExecution();
             context.RegisterCompilationStartAction(context =>
             {
-                INamedTypeSymbol? marshalType = context
-                    .Compilation
+                INamedTypeSymbol? marshalType = context.Compilation
                     .GetBestTypeByMetadataName(TypeNames.System_Runtime_InteropServices_Marshal);
-                INamedTypeSymbol? generatedComClassAttribute = context
-                    .Compilation
+                INamedTypeSymbol? generatedComClassAttribute = context.Compilation
                     .GetBestTypeByMetadataName(TypeNames.GeneratedComClassAttribute);
-                INamedTypeSymbol? generatedComInterfaceAttribute = context
-                    .Compilation
+                INamedTypeSymbol? generatedComInterfaceAttribute = context.Compilation
                     .GetBestTypeByMetadataName(TypeNames.GeneratedComInterfaceAttribute);
-                INamedTypeSymbol? comObjectType = context
-                    .Compilation
+                INamedTypeSymbol? comObjectType = context.Compilation
                     .GetBestTypeByMetadataName(
                         TypeNames.System_Runtime_InteropServices_Marshalling_ComObject
                     );
@@ -233,8 +229,7 @@ namespace Microsoft.Interop.Analyzers
                                                 Diagnostic.Create(
                                                     RuntimeComApisDoNotSupportSourceGeneratedCom,
                                                     diagnosticLocation,
-                                                    operation
-                                                        .TargetMethod
+                                                    operation.TargetMethod
                                                         .ToMinimalDisplayString(
                                                             operation.SemanticModel,
                                                             operation.Syntax.SpanStart
@@ -256,8 +251,7 @@ namespace Microsoft.Interop.Analyzers
                 );
 
                 bool enableGeneratedComInterfaceComImportInterop =
-                    context
-                        .Options
+                    context.Options
                         .AnalyzerConfigOptionsProvider
                         .GlobalOptions
                         .TryGetValue(
@@ -342,8 +336,7 @@ namespace Microsoft.Interop.Analyzers
                                 }
                                 else if (
                                     operand is IInvocationOperation invocation
-                                    && invocation
-                                        .TargetMethod
+                                    && invocation.TargetMethod
                                         .Equals(
                                             getObjectForIUnknown,
                                             SymbolEqualityComparer.Default
@@ -400,8 +393,7 @@ namespace Microsoft.Interop.Analyzers
 
                         if (expression.IsKind(SyntaxKind.GenericName))
                         {
-                            location = ((GenericNameSyntax)expression)
-                                .TypeArgumentList
+                            location = ((GenericNameSyntax)expression).TypeArgumentList
                                 .Arguments[ordinal]
                                 .GetLocation();
                         }

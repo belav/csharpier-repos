@@ -1369,8 +1369,7 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
         public void VerifyOpenGenericTrimmabilityChecks()
         {
             RemoteInvokeOptions options = new RemoteInvokeOptions();
-            options
-                .RuntimeConfigurationOptions
+            options.RuntimeConfigurationOptions
                 .Add(
                     "Microsoft.Extensions.DependencyInjection.VerifyOpenGenericServiceTrimmability",
                     "true"
@@ -1471,14 +1470,12 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
             }
 
             RemoteInvokeOptions options = new RemoteInvokeOptions();
-            options
-                .RuntimeConfigurationOptions
+            options.RuntimeConfigurationOptions
                 .Add(
                     "System.Runtime.CompilerServices.RuntimeFeature.IsDynamicCodeSupported",
                     "false"
                 );
-            options
-                .RuntimeConfigurationOptions
+            options.RuntimeConfigurationOptions
                 .Add(
                     "System.Runtime.CompilerServices.RuntimeFeature.IsDynamicCodeCompiled",
                     "false"

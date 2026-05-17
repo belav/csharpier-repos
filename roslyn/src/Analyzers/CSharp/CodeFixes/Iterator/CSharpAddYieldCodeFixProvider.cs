@@ -158,17 +158,13 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.Iterator
             SemanticModel model
         )
         {
-            var ienumerableSymbol = model
-                .Compilation
+            var ienumerableSymbol = model.Compilation
                 .GetTypeByMetadataName(typeof(IEnumerable).FullName!);
-            var ienumeratorSymbol = model
-                .Compilation
+            var ienumeratorSymbol = model.Compilation
                 .GetTypeByMetadataName(typeof(IEnumerator).FullName!);
-            var ienumerableGenericSymbol = model
-                .Compilation
+            var ienumerableGenericSymbol = model.Compilation
                 .GetTypeByMetadataName(typeof(IEnumerable<>).FullName!);
-            var ienumeratorGenericSymbol = model
-                .Compilation
+            var ienumeratorGenericSymbol = model.Compilation
                 .GetTypeByMetadataName(typeof(IEnumerator<>).FullName!);
 
             if (
@@ -254,11 +250,9 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.Iterator
             SemanticModel model
         )
         {
-            var ienumerableSymbol = model
-                .Compilation
+            var ienumerableSymbol = model.Compilation
                 .GetTypeByMetadataName(typeof(IEnumerable).FullName!);
-            var ienumeratorSymbol = model
-                .Compilation
+            var ienumeratorSymbol = model.Compilation
                 .GetTypeByMetadataName(typeof(IEnumerator).FullName!);
 
             if (ienumerableSymbol == null || ienumeratorSymbol == null)

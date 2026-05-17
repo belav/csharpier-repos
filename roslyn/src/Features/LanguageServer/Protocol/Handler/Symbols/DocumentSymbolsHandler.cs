@@ -48,8 +48,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             var document = context.GetRequiredDocument();
             var clientCapabilities = context.GetRequiredClientCapabilities();
 
-            var navBarService = document
-                .Project
+            var navBarService = document.Project
                 .Services
                 .GetRequiredService<INavigationBarItemService>();
             var navBarItems = await navBarService
@@ -113,8 +112,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             )
                 return null;
 
-            var service = document
-                .Project
+            var service = document.Project
                 .Solution
                 .Services
                 .GetRequiredService<ILspSymbolInformationCreationService>();

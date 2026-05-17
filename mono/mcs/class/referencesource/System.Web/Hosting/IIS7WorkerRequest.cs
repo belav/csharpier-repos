@@ -1649,8 +1649,7 @@ namespace System.Web.Hosting
 
                     fragmentLengths = AllocatorProvider.IntBufferAllocator.GetBuffer(numFragments);
 
-                    bodyFragmentTypes = AllocatorProvider
-                        .IntBufferAllocator
+                    bodyFragmentTypes = AllocatorProvider.IntBufferAllocator
                         .GetBuffer(numFragments);
 
                     for (int i = 0; i < numFragments; i++)
@@ -1902,8 +1901,7 @@ namespace System.Web.Hosting
                     // disable RewriteNotifyPipeline
                     _rewriteNotifyDisabled = true;
                     // rewrite path on request
-                    httpContext
-                        .Request
+                    httpContext.Request
                         .InternalRewritePath(
                             VirtualPath.CreateAllowNull(_filePath),
                             VirtualPath.CreateAllowNull(_pathInfo),

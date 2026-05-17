@@ -87,8 +87,7 @@ internal sealed class ResponseCacheFilterExecutor
 
         if (VaryByQueryKeys != null)
         {
-            var responseCachingFeature = context
-                .HttpContext
+            var responseCachingFeature = context.HttpContext
                 .Features
                 .Get<IResponseCachingFeature>();
             if (responseCachingFeature == null)

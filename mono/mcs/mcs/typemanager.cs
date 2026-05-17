@@ -1035,8 +1035,7 @@ namespace Mono.CSharp
                 () =>
                     new TypeSpec[]
                     {
-                        types
-                            .AsyncTaskMethodBuilderGeneric
+                        types.AsyncTaskMethodBuilderGeneric
                             .TypeSpec
                             .MemberDefinition
                             .TypeParameters[0],
@@ -1772,8 +1771,7 @@ namespace Mono.CSharp
             if (found == null)
             {
                 if (reportErrors)
-                    module
-                        .Compiler
+                    module.Compiler
                         .Report
                         .Error(
                             518,
@@ -1845,8 +1843,7 @@ namespace Mono.CSharp
                 module.Compiler.Report.SymbolRelatedToPreviousError(other_match);
                 module.Compiler.Report.SymbolRelatedToPreviousError(candidate);
 
-                module
-                    .Compiler
+                module.Compiler
                     .Report
                     .Warning(
                         1685,
@@ -1867,8 +1864,7 @@ namespace Mono.CSharp
                 if (found_member.Kind == MemberKind.MissingType)
                 {
                     // CSC: should be different error number
-                    module
-                        .Compiler
+                    module.Compiler
                         .Report
                         .Error(
                             518,
@@ -1890,8 +1886,7 @@ namespace Mono.CSharp
                         module.Compiler.Report.SymbolRelatedToPreviousError(found_member);
                     }
 
-                    module
-                        .Compiler
+                    module.Compiler
                         .Report
                         .Error(
                             520,
@@ -2074,8 +2069,7 @@ namespace Mono.CSharp
             if (filter.Parameters != null)
                 method_args = filter.Parameters.GetSignatureForError();
 
-            module
-                .Compiler
+            module.Compiler
                 .Report
                 .Error(
                     656,

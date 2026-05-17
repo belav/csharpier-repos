@@ -204,8 +204,7 @@ public class OpaqueUpgradeTests : LoggedTest
                 out var address,
                 async httpContext =>
                 {
-                    httpContext
-                        .Response
+                    httpContext.Response
                         .OnStarting(
                             _ =>
                             {

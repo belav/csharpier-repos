@@ -31,8 +31,7 @@ namespace System.Data.SqlClient
         private const int MaxInactiveCount = 10; // pick something, preferably small...
 
         private static int _objectTypeCount; // Bid counter
-        private readonly int _objectID = System
-            .Threading
+        private readonly int _objectID = System.Threading
             .Interlocked
             .Increment(ref _objectTypeCount);
 

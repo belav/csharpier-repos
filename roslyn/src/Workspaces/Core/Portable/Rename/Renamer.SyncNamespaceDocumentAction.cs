@@ -43,8 +43,7 @@ namespace Microsoft.CodeAnalysis.Rename
             }
 
             public override string GetDescription(CultureInfo? culture) =>
-                WorkspacesResources
-                    .ResourceManager
+                WorkspacesResources.ResourceManager
                     .GetString(
                         "Sync_namespace_to_folder_structure",
                         culture ?? WorkspacesResources.Culture

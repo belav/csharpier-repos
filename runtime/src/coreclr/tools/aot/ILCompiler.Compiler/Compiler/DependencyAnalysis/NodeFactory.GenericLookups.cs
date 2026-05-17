@@ -114,8 +114,7 @@ namespace ILCompiler.DependencyAnalysis
                 if (
                     type.IsRuntimeDeterminedType
                     && (
-                        ((RuntimeDeterminedType)type)
-                            .CanonicalType
+                        ((RuntimeDeterminedType)type).CanonicalType
                             .IsCanonicalDefinitionType(CanonicalFormKind.Universal)
                         || ((RuntimeDeterminedType)type).CanonicalType.IsNullable
                     )

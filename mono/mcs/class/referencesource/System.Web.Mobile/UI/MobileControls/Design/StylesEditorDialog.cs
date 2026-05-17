@@ -194,8 +194,7 @@ namespace System.Web.UI.Design.MobileControls
             _lvAvailableStyles.HideSelection = false;
             _lvAvailableStyles.FullRowSelect = true;
             _lvAvailableStyles.View = System.Windows.Forms.View.Details;
-            _lvAvailableStyles
-                .Columns
+            _lvAvailableStyles.Columns
                 .AddRange(
                     new System.Windows.Forms.ColumnHeader[2] { chStyleType, chStyleNamespace }
                 );
@@ -336,29 +335,30 @@ namespace System.Web.UI.Design.MobileControls
             this.AcceptButton = _btnOK;
             this.CancelButton = _btnCancel;
             this.Activated += new System.EventHandler(StylesEditorDialog_Activated);
-            this.Controls.AddRange(
-                new Control[]
-                {
-                    grplblStyleList,
-                    lblAvailableStyles,
-                    _lvAvailableStyles,
-                    _btnAdd,
-                    lblDefinedStyles,
-                    _tvDefinedStyles,
-                    _btnUp,
-                    _btnDown,
-                    _btnRemove,
-                    grplblStyleProperties,
-                    lblType,
-                    _txtType,
-                    lblSample,
-                    _samplePreview,
-                    lblProperties,
-                    _propertyBrowser,
-                    _btnOK,
-                    _btnCancel,
-                }
-            );
+            this.Controls
+                .AddRange(
+                    new Control[]
+                    {
+                        grplblStyleList,
+                        lblAvailableStyles,
+                        _lvAvailableStyles,
+                        _btnAdd,
+                        lblDefinedStyles,
+                        _tvDefinedStyles,
+                        _btnUp,
+                        _btnDown,
+                        _btnRemove,
+                        grplblStyleProperties,
+                        lblType,
+                        _txtType,
+                        lblSample,
+                        _samplePreview,
+                        lblProperties,
+                        _propertyBrowser,
+                        _btnOK,
+                        _btnCancel,
+                    }
+                );
         }
 
         private void InitAvailableStyles()
@@ -892,8 +892,7 @@ namespace System.Web.UI.Design.MobileControls
             String caption = SR.GetString(SR.StylesEditorDialog_DeleteStyleCaption);
 
             if (
-                System
-                    .Windows
+                System.Windows
                     .Forms
                     .MessageBox
                     .Show(message, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation)

@@ -46,8 +46,7 @@
         private static object GetDeserializedObject(ControllerContext controllerContext)
         {
             if (
-                !controllerContext
-                    .HttpContext
+                !controllerContext.HttpContext
                     .Request
                     .ContentType
                     .StartsWith("application/json", StringComparison.OrdinalIgnoreCase)

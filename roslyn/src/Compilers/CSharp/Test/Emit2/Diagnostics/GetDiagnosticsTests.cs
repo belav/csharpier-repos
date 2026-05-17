@@ -610,13 +610,11 @@ class C
 
             // Verify CS0168 reported by CSharpCompilerDiagnosticAnalyzer is not affected by "dotnet_analyzer_diagnostic = none"
             var analyzerConfigOptions = new DictionaryAnalyzerConfigOptions(
-                ImmutableDictionary<string, string>
-                    .Empty
+                ImmutableDictionary<string, string>.Empty
                     .Add("dotnet_analyzer_diagnostic.severity", "none")
             );
             var analyzerConfigOptionsProvider = new CompilerAnalyzerConfigOptionsProvider(
-                ImmutableDictionary<object, AnalyzerConfigOptions>
-                    .Empty
+                ImmutableDictionary<object, AnalyzerConfigOptions>.Empty
                     .Add(compilation.SyntaxTrees.Single(), analyzerConfigOptions),
                 DictionaryAnalyzerConfigOptions.Empty
             );
@@ -686,13 +684,11 @@ class C
                 if (options.HasValue)
                 {
                     var analyzerConfigOptions = new DictionaryAnalyzerConfigOptions(
-                        ImmutableDictionary<string, string>
-                            .Empty
+                        ImmutableDictionary<string, string>.Empty
                             .Add(options.Value.key, options.Value.value)
                     );
                     var analyzerConfigOptionsProvider = new CompilerAnalyzerConfigOptionsProvider(
-                        ImmutableDictionary<object, AnalyzerConfigOptions>
-                            .Empty
+                        ImmutableDictionary<object, AnalyzerConfigOptions>.Empty
                             .Add(compilation.SyntaxTrees.Single(), analyzerConfigOptions),
                         DictionaryAnalyzerConfigOptions.Empty
                     );
@@ -1161,8 +1157,7 @@ class D
                             context.RegisterCodeBlockEndAction(blockEndContext =>
                             {
                                 blockEndContext.ReportDiagnostic(
-                                    CodeAnalysis
-                                        .Diagnostic
+                                    CodeAnalysis.Diagnostic
                                         .Create(
                                             DescriptorForBlockEnd,
                                             blockEndContext.CodeBlock.GetLocation()
@@ -1195,8 +1190,7 @@ class D
                                 foreach (var operationBlock in blockEndContext.OperationBlocks)
                                 {
                                     blockEndContext.ReportDiagnostic(
-                                        CodeAnalysis
-                                            .Diagnostic
+                                        CodeAnalysis.Diagnostic
                                             .Create(
                                                 DescriptorForBlockEnd,
                                                 operationBlock.Syntax.GetLocation()
@@ -1248,11 +1242,9 @@ class D
                     {
                         location = basePropertyDecl switch
                         {
-                            PropertyDeclarationSyntax propertyDecl => propertyDecl
-                                .Identifier
+                            PropertyDeclarationSyntax propertyDecl => propertyDecl.Identifier
                                 .GetLocation(),
-                            IndexerDeclarationSyntax indexerDecl => indexerDecl
-                                .ThisKeyword
+                            IndexerDeclarationSyntax indexerDecl => indexerDecl.ThisKeyword
                                 .GetLocation(),
                             EventDeclarationSyntax eventDecl => eventDecl.Identifier.GetLocation(),
                             _ => throw ExceptionUtilities.UnexpectedValue(basePropertyDecl.Kind()),
@@ -1265,17 +1257,13 @@ class D
                     {
                         location = baseMethodDecl switch
                         {
-                            MethodDeclarationSyntax methodDecl => methodDecl
-                                .Identifier
+                            MethodDeclarationSyntax methodDecl => methodDecl.Identifier
                                 .GetLocation(),
-                            OperatorDeclarationSyntax operatorDecl => operatorDecl
-                                .OperatorToken
+                            OperatorDeclarationSyntax operatorDecl => operatorDecl.OperatorToken
                                 .GetLocation(),
-                            ConstructorDeclarationSyntax constructorDecl => constructorDecl
-                                .Identifier
-                                .GetLocation(),
-                            DestructorDeclarationSyntax destructorDecl => destructorDecl
-                                .Identifier
+                            ConstructorDeclarationSyntax constructorDecl =>
+                                constructorDecl.Identifier.GetLocation(),
+                            DestructorDeclarationSyntax destructorDecl => destructorDecl.Identifier
                                 .GetLocation(),
                             _ => throw ExceptionUtilities.UnexpectedValue(baseMethodDecl.Kind()),
                         };
@@ -2599,8 +2587,7 @@ partial class C
             );
             AssertEx.SetEqual(
                 expectedOperationInsideBlockCallbacks,
-                analyzer
-                    .AnalyzedOperationsInsideOperationBlock
+                analyzer.AnalyzedOperationsInsideOperationBlock
                     .Select(op => op.Syntax.ToString())
                     .ToHashSet()
             );
@@ -2719,8 +2706,7 @@ public enum E2
                         {
                             if (!field.IsImplicitlyDeclared)
                             {
-                                var diag = CodeAnalysis
-                                    .Diagnostic
+                                var diag = CodeAnalysis.Diagnostic
                                     .Create(
                                         Descriptor,
                                         field.DeclaringSyntaxReferences[0].GetLocation()

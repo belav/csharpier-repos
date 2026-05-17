@@ -384,8 +384,7 @@ namespace Mono.Data.Sqlite
                 );
 
             VerifyType(i, DbType.Binary);
-            return _activeStatement
-                ._sql
+            return _activeStatement._sql
                 .GetBytes(_activeStatement, i, (int)fieldOffset, buffer, bufferoffset, length);
         }
 
@@ -433,8 +432,7 @@ namespace Mono.Data.Sqlite
                 );
 
             VerifyType(i, DbType.String);
-            return _activeStatement
-                ._sql
+            return _activeStatement._sql
                 .GetChars(_activeStatement, i, (int)fieldoffset, buffer, bufferoffset, length);
         }
 
@@ -718,8 +716,7 @@ namespace Mono.Data.Sqlite
                 {
                     try
                     {
-                        strColumn = _command
-                            .Connection
+                        strColumn = _command.Connection
                             ._sql
                             .ColumnOriginalName(_activeStatement, n);
                         if (String.IsNullOrEmpty(strColumn) == false)
@@ -761,8 +758,7 @@ namespace Mono.Data.Sqlite
                     string[] arSize;
 
                     // Get the column meta data
-                    _command
-                        .Connection
+                    _command.Connection
                         ._sql
                         .ColumnMetaData(
                             (string)row[SchemaTableOptionalColumn.BaseCatalogName],
@@ -864,8 +860,7 @@ namespace Mono.Data.Sqlite
                             strCatalog = (string)row[SchemaTableOptionalColumn.BaseCatalogName];
                             strTable = (string)row[SchemaTableColumn.BaseTableName];
 
-                            tblIndexes = _command
-                                .Connection
+                            tblIndexes = _command.Connection
                                 .GetSchema(
                                     "Indexes",
                                     new string[]
@@ -880,8 +875,7 @@ namespace Mono.Data.Sqlite
 
                         foreach (DataRow rowIndexes in tblIndexes.Rows)
                         {
-                            tblIndexColumns = _command
-                                .Connection
+                            tblIndexColumns = _command.Connection
                                 .GetSchema(
                                     "IndexColumns",
                                     new string[]

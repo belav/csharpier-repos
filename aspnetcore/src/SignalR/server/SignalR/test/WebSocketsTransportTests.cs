@@ -153,8 +153,7 @@ public class WebSocketsTransportTests : FunctionalTestBase
             var userAgent = Encoding.UTF8.GetString(result.Buffer.ToArray());
 
             // user agent version should come from version embedded in assembly metadata
-            var assemblyVersion = typeof(Constants)
-                .Assembly
+            var assemblyVersion = typeof(Constants).Assembly
                 .GetCustomAttribute<AssemblyInformationalVersionAttribute>();
 
             var majorVersion = typeof(HttpConnection).Assembly.GetName().Version.Major;
@@ -183,8 +182,7 @@ public class WebSocketsTransportTests : FunctionalTestBase
                 .StartAsync(new Uri(server.WebSocketsUrl + "/httpheader"), TransferFormat.Binary)
                 .DefaultTimeout();
 
-            await webSocketsTransport
-                .Output
+            await webSocketsTransport.Output
                 .WriteAsync(Encoding.UTF8.GetBytes(HeaderNames.XRequestedWith));
 
             // The HTTP header endpoint closes the connection immediately after sending response which should stop the transport

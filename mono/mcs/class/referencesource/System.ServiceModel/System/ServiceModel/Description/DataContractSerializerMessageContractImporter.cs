@@ -40,8 +40,7 @@ namespace System.ServiceModel.Description
         )
         {
             if (endpointContext == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("endpointContext"));
 
             if (enabled)
@@ -58,8 +57,7 @@ namespace System.ServiceModel.Description
         )
         {
             if (contractContext == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("contractContext"));
 
             if (enabled)
@@ -91,8 +89,7 @@ namespace System.ServiceModel.Description
         )
         {
             if (endpointContext == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("endpointContext"));
 
             MessageContractImporter.ImportMessageBinding(
@@ -108,8 +105,7 @@ namespace System.ServiceModel.Description
         )
         {
             if (contractContext == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("contractContext"));
 
             MessageContractImporter.ImportMessageContract(

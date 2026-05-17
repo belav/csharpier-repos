@@ -112,8 +112,7 @@ namespace Microsoft.Extensions.FileProviders.Physical
         {
             PatternMatchingResult result = _matcher.Execute(_directoryInfo);
 
-            IOrderedEnumerable<FilePatternMatch> files = result
-                .Files
+            IOrderedEnumerable<FilePatternMatch> files = result.Files
                 .OrderBy(f => f.Path, StringComparer.Ordinal);
             using (var sha256 = IncrementalHash.CreateHash(HashAlgorithmName.SHA256))
             {

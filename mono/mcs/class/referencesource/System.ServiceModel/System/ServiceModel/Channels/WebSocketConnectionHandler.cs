@@ -74,13 +74,14 @@ namespace System.ServiceModel.Channels
                 throw FxTrace.Exception.ArgumentNull("request");
             }
 
-            return Task.Factory.StartNew(
-                () =>
-                {
-                    return this.AcceptWebSocket(request, cancellationToken);
-                },
-                cancellationToken
-            );
+            return Task.Factory
+                .StartNew(
+                    () =>
+                    {
+                        return this.AcceptWebSocket(request, cancellationToken);
+                    },
+                    cancellationToken
+                );
         }
     }
 }

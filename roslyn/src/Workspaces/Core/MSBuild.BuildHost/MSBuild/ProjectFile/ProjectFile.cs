@@ -93,8 +93,7 @@ namespace Microsoft.CodeAnalysis.MSBuild
                 );
 
                 if (
-                    !_loadedProject
-                        .GlobalProperties
+                    !_loadedProject.GlobalProperties
                         .TryGetValue(
                             PropertyNames.TargetFramework,
                             out var initialGlobalTargetFrameworkValue
@@ -267,8 +266,7 @@ namespace Microsoft.CodeAnalysis.MSBuild
             //       as this property could come from a different props file
             //   2.  If it imports an SDK.  This can be defined multiple ways in the project file, but
             //       we can look at the resolved imports after evaluation to see if any are SDK based.
-            var hasTargetFrameworkProperty = loadedProject
-                .Properties
+            var hasTargetFrameworkProperty = loadedProject.Properties
                 .Any(property => property.Name is "TargetFramework" or "TargetFrameworks");
             var importsSdk = loadedProject.Imports.Any(import => import.SdkResult != null);
             return hasTargetFrameworkProperty || importsSdk;

@@ -434,8 +434,7 @@ namespace Microsoft.VisualBasic.Activities
 
             if (scriptAndTypeScope.ErrorMessage != null)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new SourceExpressionException(
                             SR.CompilerErrorSpecificExpression(
@@ -455,8 +454,7 @@ namespace Microsoft.VisualBasic.Activities
                 {
                     errorString.AppendLine(error.Description);
                 }
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new SourceExpressionException(
                             SR.CompilerErrorSpecificExpression(
@@ -661,8 +659,7 @@ namespace Microsoft.VisualBasic.Activities
 
             if (scriptAndTypeScope.ErrorMessage != null)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new SourceExpressionException(
                             SR.CompilerErrorSpecificExpression(
@@ -682,8 +679,7 @@ namespace Microsoft.VisualBasic.Activities
                 {
                     errorString.AppendLine(error.Description);
                 }
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new SourceExpressionException(
                             SR.CompilerErrorSpecificExpression(

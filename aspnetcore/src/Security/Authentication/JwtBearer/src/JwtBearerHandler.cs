@@ -188,8 +188,7 @@ public class JwtBearerHandler : AuthenticationHandler<JwtBearerOptions>
 
                 if (Options.SaveToken)
                 {
-                    tokenValidatedContext
-                        .Properties
+                    tokenValidatedContext.Properties
                         .StoreTokens(
                             new[]
                             {
@@ -289,8 +288,7 @@ public class JwtBearerHandler : AuthenticationHandler<JwtBearerOptions>
             if (Options.ConfigurationManager != null)
             {
                 // GetConfigurationAsync has a time interval that must pass before new http request will be issued.
-                var configuration = await Options
-                    .ConfigurationManager
+                var configuration = await Options.ConfigurationManager
                     .GetConfigurationAsync(Context.RequestAborted);
                 var issuers = new[] { configuration.Issuer };
                 tokenValidationParameters.ValidIssuers = (
@@ -301,8 +299,7 @@ public class JwtBearerHandler : AuthenticationHandler<JwtBearerOptions>
                 tokenValidationParameters.IssuerSigningKeys = (
                     tokenValidationParameters.IssuerSigningKeys == null
                         ? configuration.SigningKeys
-                        : tokenValidationParameters
-                            .IssuerSigningKeys
+                        : tokenValidationParameters.IssuerSigningKeys
                             .Concat(configuration.SigningKeys)
                 );
             }

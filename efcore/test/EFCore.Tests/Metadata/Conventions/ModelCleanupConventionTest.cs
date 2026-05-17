@@ -129,8 +129,7 @@ public class ModelCleanupConventionTest
     }
 
     private ProviderConventionSetBuilderDependencies CreateDependencies() =>
-        InMemoryTestHelpers
-            .Instance
+        InMemoryTestHelpers.Instance
             .CreateContextServices()
             .GetRequiredService<ProviderConventionSetBuilderDependencies>();
 

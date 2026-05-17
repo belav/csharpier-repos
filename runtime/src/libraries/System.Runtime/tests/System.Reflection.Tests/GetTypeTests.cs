@@ -270,11 +270,8 @@ namespace System.Reflection.Tests
                 );
                 Assert.Equal(
                     expectedName,
-                    Type.GetType(
-                        typeName,
-                        throwOnError: false,
-                        ignoreCase: true
-                    ).AssemblyQualifiedName,
+                    Type.GetType(typeName, throwOnError: false, ignoreCase: true)
+                        .AssemblyQualifiedName,
                     StringComparer.OrdinalIgnoreCase
                 );
                 Assert.Equal(
@@ -293,11 +290,8 @@ namespace System.Reflection.Tests
                 );
                 Assert.Equal(
                     expectedName,
-                    Type.GetType(
-                        typeName,
-                        throwOnError: true,
-                        ignoreCase: true
-                    ).AssemblyQualifiedName,
+                    Type.GetType(typeName, throwOnError: true, ignoreCase: true)
+                        .AssemblyQualifiedName,
                     StringComparer.OrdinalIgnoreCase
                 );
                 Assert.Equal(
@@ -320,11 +314,8 @@ namespace System.Reflection.Tests
                 );
                 Assert.Equal(
                     expectedName,
-                    a.GetType(
-                        typeName,
-                        throwOnError: false,
-                        ignoreCase: true
-                    ).AssemblyQualifiedName,
+                    a.GetType(typeName, throwOnError: false, ignoreCase: true)
+                        .AssemblyQualifiedName,
                     StringComparer.OrdinalIgnoreCase
                 );
                 Assert.Null(a.GetType(aqn, throwOnError: false, ignoreCase: false));
@@ -355,11 +346,8 @@ namespace System.Reflection.Tests
                 );
                 Assert.Equal(
                     expectedName,
-                    m.GetType(
-                        typeName,
-                        throwOnError: false,
-                        ignoreCase: true
-                    ).AssemblyQualifiedName,
+                    m.GetType(typeName, throwOnError: false, ignoreCase: true)
+                        .AssemblyQualifiedName,
                     StringComparer.OrdinalIgnoreCase
                 );
                 Assert.Null(m.GetType(aqn, throwOnError: false, ignoreCase: false));
@@ -405,11 +393,8 @@ namespace System.Reflection.Tests
                 Assert.Null(Type.GetType(typeName, throwOnError: false, ignoreCase: false));
                 Assert.Equal(
                     expectedName,
-                    Type.GetType(
-                        typeName,
-                        throwOnError: false,
-                        ignoreCase: true
-                    ).AssemblyQualifiedName,
+                    Type.GetType(typeName, throwOnError: false, ignoreCase: true)
+                        .AssemblyQualifiedName,
                     StringComparer.OrdinalIgnoreCase
                 );
                 Assert.Null(Type.GetType(aqn, throwOnError: false, ignoreCase: false));
@@ -424,11 +409,8 @@ namespace System.Reflection.Tests
                 );
                 Assert.Equal(
                     expectedName,
-                    Type.GetType(
-                        typeName,
-                        throwOnError: true,
-                        ignoreCase: true
-                    ).AssemblyQualifiedName,
+                    Type.GetType(typeName, throwOnError: true, ignoreCase: true)
+                        .AssemblyQualifiedName,
                     StringComparer.OrdinalIgnoreCase
                 );
                 Assert.Throws<TypeLoadException>(() =>
@@ -447,11 +429,8 @@ namespace System.Reflection.Tests
                 Assert.Null(a.GetType(typeName, throwOnError: false, ignoreCase: false));
                 Assert.Equal(
                     expectedName,
-                    a.GetType(
-                        typeName,
-                        throwOnError: false,
-                        ignoreCase: true
-                    ).AssemblyQualifiedName,
+                    a.GetType(typeName, throwOnError: false, ignoreCase: true)
+                        .AssemblyQualifiedName,
                     StringComparer.OrdinalIgnoreCase
                 );
                 Assert.Null(a.GetType(aqn, throwOnError: false, ignoreCase: false));
@@ -478,11 +457,8 @@ namespace System.Reflection.Tests
                 Assert.Null(m.GetType(typeName, throwOnError: false, ignoreCase: false));
                 Assert.Equal(
                     expectedName,
-                    m.GetType(
-                        typeName,
-                        throwOnError: false,
-                        ignoreCase: true
-                    ).AssemblyQualifiedName,
+                    m.GetType(typeName, throwOnError: false, ignoreCase: true)
+                        .AssemblyQualifiedName,
                     StringComparer.OrdinalIgnoreCase
                 );
                 Assert.Null(m.GetType(aqn, throwOnError: false, ignoreCase: false));

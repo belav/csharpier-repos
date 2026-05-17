@@ -31,8 +31,7 @@ public class ResponseCachingBenchmark
             async context =>
             {
                 context.Response.Headers.CacheControl = _cacheControl;
-                await context
-                    .Response
+                await context.Response
                     .BodyWriter
                     .WriteAsync(new ReadOnlyMemory<byte>(_data, 0, Size));
             },

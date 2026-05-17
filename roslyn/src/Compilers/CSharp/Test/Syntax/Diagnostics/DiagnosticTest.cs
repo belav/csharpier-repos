@@ -547,8 +547,7 @@ class X
                 }
 
                 if (
-                    ErrorFacts
-                        .NullableWarnings
+                    ErrorFacts.NullableWarnings
                         .Contains(MessageProvider.Instance.GetIdForErrorCode((int)error))
                 )
                 {
@@ -623,8 +622,7 @@ public class C
                 MessageProvider.Instance.GetIdForErrorCode(420),
                 ReportDiagnostic.Suppress
             );
-            CSharpCompilationOptions option = TestOptions
-                .ReleaseExe
+            CSharpCompilationOptions option = TestOptions.ReleaseExe
                 .WithSpecificDiagnosticOptions(warnings);
             CreateCompilation(text, options: option).VerifyDiagnostics();
 
@@ -639,8 +637,7 @@ public class C
                 );
 
             warnings[MessageProvider.Instance.GetIdForErrorCode(420)] = ReportDiagnostic.Error;
-            option = TestOptions
-                .ReleaseExe
+            option = TestOptions.ReleaseExe
                 .WithGeneralDiagnosticOption(ReportDiagnostic.Default)
                 .WithSpecificDiagnosticOptions(warnings);
             CreateCompilation(text, options: option)
@@ -2575,8 +2572,7 @@ class Test
                 .VerifyDiagnostics(expected1);
             CreateCompilation(text1).VerifyDiagnostics(expected1);
 
-            var options = TestOptions
-                .DebugDll
+            var options = TestOptions.DebugDll
                 .WithGeneralDiagnosticOption(ReportDiagnostic.Suppress);
 
             CreateCompilation(text1, parseOptions: TestOptions.Regular7_3, options: options)
@@ -3496,8 +3492,7 @@ class Program
 
             var ca = CreateCompilation(
                 source,
-                options: TestOptions
-                    .ReleaseDll
+                options: TestOptions.ReleaseDll
                     .WithStrongNameProvider(new DesktopStrongNameProvider())
                     .WithCryptoKeyContainer("bogus")
             );
@@ -3537,8 +3532,7 @@ class Program
         )
         {
             var pathmapArg = $"/pathmap:{sourceFrom}={sourceTo}";
-            var parsedArgs = CSharpCommandLineParser
-                .Default
+            var parsedArgs = CSharpCommandLineParser.Default
                 .Parse(
                     new[] { pathmapArg, "a.cs" },
                     TempRoot.Root,
@@ -3555,8 +3549,7 @@ class Program
         {
             CSharpCommandLineArguments parse(params string[] args)
             {
-                var parsedArgs = CSharpCommandLineParser
-                    .Default
+                var parsedArgs = CSharpCommandLineParser.Default
                     .Parse(args, TempRoot.Root, RuntimeEnvironment.GetRuntimeDirectory(), null);
                 parsedArgs.Errors.Verify();
                 return parsedArgs;

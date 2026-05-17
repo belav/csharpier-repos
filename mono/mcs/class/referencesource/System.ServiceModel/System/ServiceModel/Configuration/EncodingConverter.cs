@@ -59,8 +59,7 @@ namespace System.ServiceModel.Configuration
                 }
                 if (retval == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgument(
                             "value",
                             SR.GetString(SR.ConfigInvalidEncodingValue, encoding)

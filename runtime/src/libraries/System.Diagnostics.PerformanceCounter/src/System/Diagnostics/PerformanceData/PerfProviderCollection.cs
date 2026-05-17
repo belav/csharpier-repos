@@ -17,8 +17,7 @@ namespace System.Diagnostics.PerformanceData
         internal PerfProvider(Guid providerGuid)
         {
             _providerGuid = providerGuid;
-            uint Status = Interop
-                .PerfCounter
+            uint Status = Interop.PerfCounter
                 .PerfStartProvider(ref _providerGuid, null, out _hProvider);
             // ERROR_INVALID_PARAMETER, ERROR_OUTOFMEMORY
             if (Status != (uint)Interop.Errors.ERROR_SUCCESS)

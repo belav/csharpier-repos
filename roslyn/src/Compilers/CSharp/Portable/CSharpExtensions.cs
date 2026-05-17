@@ -322,8 +322,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             Func<SyntaxTrivia, SyntaxTrivia, SyntaxTrivia> computeReplacementTrivia
         )
         {
-            return Syntax
-                .SyntaxReplacer
+            return Syntax.SyntaxReplacer
                 .Replace(token, trivia: trivia, computeReplacementTrivia: computeReplacementTrivia);
         }
 
@@ -341,8 +340,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             SyntaxTrivia newTrivia
         )
         {
-            return Syntax
-                .SyntaxReplacer
+            return Syntax.SyntaxReplacer
                 .Replace(
                     token,
                     trivia: new[] { oldTrivia },

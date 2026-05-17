@@ -74,9 +74,13 @@ namespace System.ServiceModel.Security
                         client.BeginValidate(request, OnOperationCompleted, null);
                         break;
                     default:
-                        throw IM.DiagnosticUtility.ThrowHelperInvalidOperation(
-                            SR.GetString(SR.ID3285, Enum.GetName(typeof(Operations), _operation))
-                        );
+                        throw IM.DiagnosticUtility
+                            .ThrowHelperInvalidOperation(
+                                SR.GetString(
+                                    SR.ID3285,
+                                    Enum.GetName(typeof(Operations), _operation)
+                                )
+                            );
                 }
             }
 
@@ -111,9 +115,14 @@ namespace System.ServiceModel.Security
                 WSTrustChannelAsyncResult tcar = iar as WSTrustChannelAsyncResult;
                 if (tcar == null)
                 {
-                    throw IM.DiagnosticUtility.ThrowHelperInvalidOperation(
-                        SR.GetString(SR.ID2004, typeof(WSTrustChannelAsyncResult), iar.GetType())
-                    );
+                    throw IM.DiagnosticUtility
+                        .ThrowHelperInvalidOperation(
+                            SR.GetString(
+                                SR.ID2004,
+                                typeof(WSTrustChannelAsyncResult),
+                                iar.GetType()
+                            )
+                        );
                 }
 
                 return tcar.Response;
@@ -149,9 +158,8 @@ namespace System.ServiceModel.Security
                     case Operations.Validate:
                         return this.Client.EndValidate(iar);
                     default:
-                        throw IM.DiagnosticUtility.ThrowHelperInvalidOperation(
-                            SR.GetString(SR.ID3285, _operation)
-                        );
+                        throw IM.DiagnosticUtility
+                            .ThrowHelperInvalidOperation(SR.GetString(SR.ID3285, _operation));
                 }
             }
         }
@@ -655,8 +663,7 @@ namespace System.ServiceModel.Security
                 keySize = response.KeySizeInBits.Value;
             }
 
-            byte[] keyMaterial = System
-                .IdentityModel
+            byte[] keyMaterial = System.IdentityModel
                 .CryptoHelper
                 .KeyGenerator
                 .ComputeCombinedKey(
@@ -1110,9 +1117,10 @@ namespace System.ServiceModel.Security
             tcar = result as WSTrustChannelAsyncResult;
             if (tcar == null)
             {
-                throw IM.DiagnosticUtility.ThrowHelperInvalidOperation(
-                    SR.GetString(SR.ID2004, typeof(WSTrustChannelAsyncResult), result.GetType())
-                );
+                throw IM.DiagnosticUtility
+                    .ThrowHelperInvalidOperation(
+                        SR.GetString(SR.ID2004, typeof(WSTrustChannelAsyncResult), result.GetType())
+                    );
             }
 
             Message response = WSTrustChannelAsyncResult.End(result);

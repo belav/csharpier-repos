@@ -491,8 +491,7 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 {
                     if (method.Token.TokenType == CorTokenType.mdtMethodSpec)
                     {
-                        MethodSpecification methodSpecification = methodToken
-                            .MetadataReader
+                        MethodSpecification methodSpecification = methodToken.MetadataReader
                             .GetMethodSpecification((MethodSpecificationHandle)methodToken.Handle);
                         methodToken = new ModuleToken(
                             methodToken.Module,

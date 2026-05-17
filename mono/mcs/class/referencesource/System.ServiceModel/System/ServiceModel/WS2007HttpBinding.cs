@@ -70,8 +70,7 @@ namespace System.ServiceModel
             WS2007HttpBindingElement element = section.Bindings[configurationName];
             if (element == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ConfigurationErrorsException(
                             SR.GetString(
@@ -90,10 +89,8 @@ namespace System.ServiceModel
 
         protected override SecurityBindingElement CreateMessageSecurity()
         {
-            return this.Security.CreateMessageSecurity(
-                this.ReliableSession.Enabled,
-                WS2007MessageSecurityVersion
-            );
+            return this.Security
+                .CreateMessageSecurity(this.ReliableSession.Enabled, WS2007MessageSecurityVersion);
         }
 
         // This is effectively just a copy of WSHttpBinding.TryCreate(), only it news up the 2007 version

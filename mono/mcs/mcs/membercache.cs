@@ -1532,8 +1532,7 @@ namespace Mono.CSharp
                         if (container_entry is IParametersMember)
                         {
                             if (
-                                !TypeSpecComparer
-                                    .Override
+                                !TypeSpecComparer.Override
                                     .IsEqual(
                                         ((IParametersMember)container_entry).Parameters,
                                         member_param
@@ -1971,8 +1970,7 @@ namespace Mono.CSharp
                                 else
                                 {
                                     method_b.SetPartialDefinition(method_a);
-                                    method_a.caching_flags |= MemberCore
-                                        .Flags
+                                    method_a.caching_flags |= MemberCore.Flags
                                         .PartialDefinitionExists;
                                 }
                                 continue;

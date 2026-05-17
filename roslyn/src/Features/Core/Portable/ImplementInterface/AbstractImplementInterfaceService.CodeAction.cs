@@ -284,8 +284,7 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
                 var tree = await document
                     .GetRequiredSyntaxTreeAsync(cancellationToken)
                     .ConfigureAwait(false);
-                var compilation = await document
-                    .Project
+                var compilation = await document.Project
                     .GetRequiredCompilationAsync(cancellationToken)
                     .ConfigureAwait(false);
 
@@ -386,8 +385,7 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
             private bool IsReservedName(string name)
             {
                 return IdentifiersMatch(State.ClassOrStructType.Name, name)
-                    || State
-                        .ClassOrStructType
+                    || State.ClassOrStructType
                         .TypeParameters
                         .Any(
                             static (t, arg) => arg.self.IdentifiersMatch(t.Name, arg.name),
@@ -402,8 +400,7 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
             {
                 if (HasConflictingMember(member, implementedVisibleMembers))
                 {
-                    var memberNames = State
-                        .ClassOrStructType
+                    var memberNames = State.ClassOrStructType
                         .GetAccessibleMembersInThisAndBaseTypes<ISymbol>(State.ClassOrStructType)
                         .Select(m => m.Name);
 
@@ -524,11 +521,9 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
                 if (member is not IMethodSymbol method)
                     return false;
 
-                var allowDelegateAndEnumConstraints = this.Service.AllowDelegateAndEnumConstraints(
-                    options
-                );
-                return method
-                    .TypeParameters
+                var allowDelegateAndEnumConstraints = this.Service
+                    .AllowDelegateAndEnumConstraints(options);
+                return method.TypeParameters
                     .Any(t => IsUnexpressibleTypeParameter(t, allowDelegateAndEnumConstraints));
             }
 
@@ -539,8 +534,7 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
             {
                 var condition1 =
                     typeParameter.ConstraintTypes.Count(t => t.TypeKind == TypeKind.Class) >= 2;
-                var condition2 = typeParameter
-                    .ConstraintTypes
+                var condition2 = typeParameter.ConstraintTypes
                     .Any(
                         static (ts, allowDelegateAndEnumConstraints) =>
                             ts.IsUnexpressibleTypeParameterConstraint(
@@ -550,8 +544,7 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
                     );
                 var condition3 =
                     typeParameter.HasReferenceTypeConstraint
-                    && typeParameter
-                        .ConstraintTypes
+                    && typeParameter.ConstraintTypes
                         .Any(static ts =>
                             ts.IsReferenceType && ts.SpecialType != SpecialType.System_Object
                         );
@@ -728,8 +721,7 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
                     return method1.MethodKind == MethodKind.Ordinary
                         && method2.MethodKind == MethodKind.Ordinary
                         && method1.TypeParameters.Length == method2.TypeParameters.Length
-                        && method1
-                            .Parameters
+                        && method1.Parameters
                             .SequenceEqual(
                                 method2.Parameters,
                                 SymbolEquivalenceComparer.Instance.ParameterEquivalenceComparer
@@ -795,8 +787,7 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
                 )
                     return false;
 
-                return SignatureComparer
-                    .Instance
+                return SignatureComparer.Instance
                     .HaveSameSignatureAndConstraintsAndReturnTypeAndAccessors(
                         member1,
                         member2,

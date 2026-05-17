@@ -180,8 +180,7 @@ namespace System.Security.Cryptography.Pkcs.Asn1
             }
 
             decoded.Policy = sequenceReader.ReadObjectIdentifier();
-            System
-                .Security
+            System.Security
                 .Cryptography
                 .Pkcs
                 .Asn1
@@ -199,8 +198,7 @@ namespace System.Security.Cryptography.Pkcs.Asn1
             )
             {
                 System.Security.Cryptography.Pkcs.Asn1.Rfc3161Accuracy tmpAccuracy;
-                System
-                    .Security
+                System.Security
                     .Cryptography
                     .Pkcs
                     .Asn1
@@ -244,8 +242,7 @@ namespace System.Security.Cryptography.Pkcs.Asn1
                     new Asn1Tag(TagClass.ContextSpecific, 0)
                 );
                 System.Security.Cryptography.Asn1.GeneralNameAsn tmpTsa;
-                System
-                    .Security
+                System.Security
                     .Cryptography
                     .Asn1
                     .GeneralNameAsn
@@ -272,8 +269,7 @@ namespace System.Security.Cryptography.Pkcs.Asn1
 
                     while (collectionReader.HasData)
                     {
-                        System
-                            .Security
+                        System.Security
                             .Cryptography
                             .Asn1
                             .X509ExtensionAsn

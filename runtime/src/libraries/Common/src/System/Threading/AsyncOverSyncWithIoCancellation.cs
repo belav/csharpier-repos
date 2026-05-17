@@ -48,8 +48,7 @@ namespace System.Threading
             // in response to the cancellation token having cancellation requested.  If the handle is invalid,
             // which could happen if OpenThread fails, skip attempts at cancellation. The handle needs to be
             // opened with THREAD_TERMINATE in order to be able to call CancelSynchronousIo.
-            SafeThreadHandle handle = Interop
-                .Kernel32
+            SafeThreadHandle handle = Interop.Kernel32
                 .OpenThread(
                     Interop.Kernel32.THREAD_TERMINATE,
                     bInheritHandle: false,
@@ -277,39 +276,46 @@ namespace System.Threading
                     // this looping synchronously, we instead queue the invocation of the looping so that it
                     // runs asynchronously from the Cancel call.  Then in order to be able to track its completion,
                     // we store the Task representing that asynchronous work, such that cleanup can wait for the Task.
-                    instance._callbackCompleted = Task.Factory.StartNew(
-                        static s =>
-                        {
-                            var instance = (AsyncOverSyncWithIoCancellation)s!;
-
-                            // Cancel the I/O.  If the cancellation happens too early and we haven't yet initiated
-                            // the synchronous operation, CancelSynchronousIo will fail with ERROR_NOT_FOUND, and
-                            // we'll loop to try again.
-                            SpinWait sw = default;
-                            while (Volatile.Read(ref instance._continueTryingToCancel))
+                    instance._callbackCompleted = Task.Factory
+                        .StartNew(
+                            static s =>
                             {
-                                if (Interop.Kernel32.CancelSynchronousIo(instance._threadHandle!))
-                                {
-                                    // Successfully canceled I/O.
-                                    break;
-                                }
+                                var instance = (AsyncOverSyncWithIoCancellation)s!;
 
-                                if (Marshal.GetLastPInvokeError() != Interop.Errors.ERROR_NOT_FOUND)
+                                // Cancel the I/O.  If the cancellation happens too early and we haven't yet initiated
+                                // the synchronous operation, CancelSynchronousIo will fail with ERROR_NOT_FOUND, and
+                                // we'll loop to try again.
+                                SpinWait sw = default;
+                                while (Volatile.Read(ref instance._continueTryingToCancel))
                                 {
-                                    // Failed to cancel even though there may have been I/O to cancel.
-                                    // Attempting to keep trying could result in an infinite loop, so
-                                    // give up on trying to cancel.
-                                    break;
-                                }
+                                    if (
+                                        Interop.Kernel32
+                                            .CancelSynchronousIo(instance._threadHandle!)
+                                    )
+                                    {
+                                        // Successfully canceled I/O.
+                                        break;
+                                    }
 
-                                sw.SpinOnce();
-                            }
-                        },
-                        instance,
-                        CancellationToken.None,
-                        TaskCreationOptions.DenyChildAttach,
-                        TaskScheduler.Default
-                    );
+                                    if (
+                                        Marshal.GetLastPInvokeError()
+                                        != Interop.Errors.ERROR_NOT_FOUND
+                                    )
+                                    {
+                                        // Failed to cancel even though there may have been I/O to cancel.
+                                        // Attempting to keep trying could result in an infinite loop, so
+                                        // give up on trying to cancel.
+                                        break;
+                                    }
+
+                                    sw.SpinOnce();
+                                }
+                            },
+                            instance,
+                            CancellationToken.None,
+                            TaskCreationOptions.DenyChildAttach,
+                            TaskScheduler.Default
+                        );
                 },
                 instance
             );

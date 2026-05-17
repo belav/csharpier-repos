@@ -67,14 +67,12 @@ namespace System.ServiceModel.Security
             )
             {
                 if (token.KeyGeneration == null)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgument(
                             SR.GetString(SR.SecurityContextExpiredNoKeyGeneration, token.ContextId)
                         );
                 else
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgument(
                             SR.GetString(
                                 SR.SecurityContextExpired,
@@ -93,8 +91,7 @@ namespace System.ServiceModel.Security
             )
             {
                 if (token.KeyGeneration == null)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgument(
                             SR.GetString(
                                 SR.SecurityContextKeyExpiredNoKeyGeneration,
@@ -102,8 +99,7 @@ namespace System.ServiceModel.Security
                             )
                         );
                 else
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgument(
                             SR.GetString(
                                 SR.SecurityContextKeyExpired,
@@ -124,8 +120,7 @@ namespace System.ServiceModel.Security
                 if (throwOnFailure)
                 {
                     if (token.KeyGeneration == null)
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(
                                     SR.GetString(
@@ -135,8 +130,7 @@ namespace System.ServiceModel.Security
                                 )
                             );
                     else
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(
                                     SR.GetString(
@@ -189,16 +183,14 @@ namespace System.ServiceModel.Security
             if (!base.TryRemoveItem(hashKey) && throwIfNotPresent)
             {
                 if (generation == null)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(SR.ContextNotPresentNoKeyGeneration, contextId)
                             )
                         );
                 else
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(SR.ContextNotPresent, contextId, generation.ToString())

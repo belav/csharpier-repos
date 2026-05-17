@@ -119,8 +119,7 @@ namespace System.Net.Sockets
             using (Socket socket = new Socket(addressFamily, SocketType.Stream, ProtocolType.Tcp))
             {
                 int time = MillisecondsToSeconds(WindowsDefaultTimeMs);
-                SocketError timeErrCode = Interop
-                    .Winsock
+                SocketError timeErrCode = Interop.Winsock
                     .setsockopt(
                         socket.SafeHandle,
                         SocketOptionLevel.Tcp,
@@ -130,8 +129,7 @@ namespace System.Net.Sockets
                     );
 
                 int interval = MillisecondsToSeconds(WindowsDefaultIntervalMs);
-                SocketError intervalErrCode = Interop
-                    .Winsock
+                SocketError intervalErrCode = Interop.Winsock
                     .setsockopt(
                         socket.SafeHandle,
                         SocketOptionLevel.Tcp,

@@ -45,8 +45,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             bool hasBody = syntax.Body is object;
             bool hasExpressionBody = syntax.ExpressionBody is object;
-            bool isNullableAnalysisEnabled = containingType
-                .DeclaringCompilation
+            bool isNullableAnalysisEnabled = containingType.DeclaringCompilation
                 .IsNullableAnalysisEnabledIn(syntax);
             CheckForBlockAndExpressionBody(syntax.Body, syntax.ExpressionBody, syntax, diagnostics);
 
@@ -76,8 +75,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             BindingDiagnosticBag diagnostics
         )
         {
-            bool isNullableAnalysisEnabled = containingType
-                .DeclaringCompilation
+            bool isNullableAnalysisEnabled = containingType.DeclaringCompilation
                 .IsNullableAnalysisEnabledIn(syntax);
             return new SourcePropertyAccessorSymbol(
                 containingType,
@@ -304,8 +302,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
 
             if (modifiers.Count > 0)
-                MessageID
-                    .IDS_FeaturePropertyAccessorMods
+                MessageID.IDS_FeaturePropertyAccessorMods
                     .CheckFeatureAvailability(diagnostics, modifiers[0]);
         }
 
@@ -882,9 +879,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
                     if (IsExplicitInterfaceImplementation)
                     {
-                        PropertySymbol? explicitlyImplementedPropertyOpt = _property
-                            .ExplicitInterfaceImplementations
-                            .FirstOrDefault();
+                        PropertySymbol? explicitlyImplementedPropertyOpt =
+                            _property.ExplicitInterfaceImplementations.FirstOrDefault();
 
                         if (explicitlyImplementedPropertyOpt is object)
                         {

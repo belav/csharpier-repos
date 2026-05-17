@@ -159,8 +159,7 @@ namespace Microsoft.CodeAnalysis.Interactive
 
                 var initialState = new EvaluationState(
                     scriptState: null,
-                    scriptOptions: ScriptOptions
-                        .Default
+                    scriptOptions: ScriptOptions.Default
                         .WithMetadataResolver(new ScriptMetadataResolver(referenceResolver)),
                     ImmutableArray<string>.Empty,
                     workingDirectory
@@ -398,8 +397,7 @@ namespace Microsoft.CodeAnalysis.Interactive
                 var success = false;
                 try
                 {
-                    var resolvedReferences = state
-                        .ScriptOptions
+                    var resolvedReferences = state.ScriptOptions
                         .MetadataResolver
                         .ResolveReference(
                             reference,
@@ -415,8 +413,7 @@ namespace Microsoft.CodeAnalysis.Interactive
                     }
                     else
                     {
-                        Console
-                            .Error
+                        Console.Error
                             .WriteLine(
                                 string.Format(
                                     InteractiveHostResources.Cannot_resolve_reference_0,
@@ -509,8 +506,7 @@ namespace Microsoft.CodeAnalysis.Interactive
                 }
                 else
                 {
-                    Console
-                        .Error
+                    Console.Error
                         .Write(
                             GetServiceState().ReplServiceProvider.ObjectFormatter.FormatException(e)
                         );
@@ -661,8 +657,7 @@ namespace Microsoft.CodeAnalysis.Interactive
 
                     if (File.Exists(initializationFilePath))
                     {
-                        Console
-                            .Out
+                        Console.Out
                             .WriteLine(
                                 string.Format(
                                     InteractiveHostResources.Loading_context_from_0,
@@ -701,11 +696,9 @@ namespace Microsoft.CodeAnalysis.Interactive
 
                             // TODO: Workaround for https://github.com/dotnet/roslyn/issues/45346
                             var referencePathsWithoutRspDir = referencePaths.Remove(rspDirectory);
-                            var metadataResolver = state
-                                .MetadataReferenceResolver
+                            var metadataResolver = state.MetadataReferenceResolver
                                 .WithSearchPaths(referencePathsWithoutRspDir);
-                            var rspMetadataResolver = state
-                                .MetadataReferenceResolver
+                            var rspMetadataResolver = state.MetadataReferenceResolver
                                 .WithSearchPaths(referencePaths)
                                 .WithBaseDirectory(rspDirectory);
 
@@ -746,8 +739,7 @@ namespace Microsoft.CodeAnalysis.Interactive
 
                             var rspState = new EvaluationState(
                                 state.ScriptState,
-                                state
-                                    .ScriptOptions
+                                state.ScriptOptions
                                     .WithFilePath(initializationScriptPath)
                                     .WithReferences(metadataReferences)
                                     .WithImports(initialImports)
@@ -790,8 +782,7 @@ namespace Microsoft.CodeAnalysis.Interactive
 
                     if (!isRestarting)
                     {
-                        Console
-                            .Out
+                        Console.Out
                             .WriteLine(
                                 InteractiveHostResources.Type_Sharphelp_for_more_information
                             );
@@ -839,8 +830,7 @@ namespace Microsoft.CodeAnalysis.Interactive
                 {
                     if (displayPath)
                     {
-                        Console
-                            .Error
+                        Console.Error
                             .WriteLine(
                                 InteractiveHostResources.Specified_file_not_found_colon_0,
                                 path
@@ -879,8 +869,7 @@ namespace Microsoft.CodeAnalysis.Interactive
                 }
                 else
                 {
-                    script = serviceState
-                        .ReplServiceProvider
+                    script = serviceState.ReplServiceProvider
                         .CreateScript<object>(
                             code,
                             scriptOptions,

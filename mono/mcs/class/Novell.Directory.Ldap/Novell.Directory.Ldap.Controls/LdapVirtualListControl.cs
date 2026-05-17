@@ -521,8 +521,7 @@ namespace Novell.Directory.Ldap.Controls
                 {
                     LdapControl.register(
                         responseOID,
-                        System
-                            .Type
+                        System.Type
                             .GetType("Novell.Directory.Ldap.Controls.LdapVirtualListResponse")
                     );
                 }

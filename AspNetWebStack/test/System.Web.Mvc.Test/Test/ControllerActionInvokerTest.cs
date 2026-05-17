@@ -3163,8 +3163,7 @@ namespace System.Web.Mvc.Test
                 DirectRouteTestHelpers.BuildDirectRouteFromController<AttributeRoutingOnTheController>();
 
             // Simulate a match that binds the action parameter
-            context
-                .RouteData
+            context.RouteData
                 .AddDirectRouteMatches(
                     (r, rd) =>
                     {
@@ -3206,8 +3205,7 @@ namespace System.Web.Mvc.Test
                 DirectRouteTestHelpers.BuildDirectRouteFromController<AttributeRoutingOnTheController>();
 
             // Simulate a match that binds the action parameter
-            context
-                .RouteData
+            context.RouteData
                 .AddDirectRouteMatches(
                     (r, rd) =>
                     {
@@ -3244,8 +3242,7 @@ namespace System.Web.Mvc.Test
                 DirectRouteTestHelpers.BuildDirectRouteFromController<AttributeRoutingOnTheController>();
 
             // Simulate a match that binds the action parameter
-            context
-                .RouteData
+            context.RouteData
                 .AddDirectRouteMatches(
                     (r, rd) =>
                     {

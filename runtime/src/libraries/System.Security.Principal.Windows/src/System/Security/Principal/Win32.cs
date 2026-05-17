@@ -22,8 +22,7 @@ namespace System.Security.Principal
         )
         {
             Interop.OBJECT_ATTRIBUTES attributes = default;
-            uint error = Interop
-                .Advapi32
+            uint error = Interop.Advapi32
                 .LsaOpenPolicy(
                     systemName,
                     ref attributes,
@@ -170,8 +169,7 @@ namespace System.Security.Principal
 
             if (
                 FALSE
-                != Interop
-                    .Advapi32
+                != Interop.Advapi32
                     .CreateWellKnownSid((int)sidType, domainSid?.BinaryForm, resultSid, ref length)
             )
             {
@@ -232,8 +230,7 @@ namespace System.Security.Principal
 
             if (
                 FALSE
-                != Interop
-                    .Advapi32
+                != Interop.Advapi32
                     .GetWindowsAccountDomainSid(BinaryForm, resultSidBinary, ref sidLength)
             )
             {

@@ -164,8 +164,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq
                     case SyntaxKind.WhereClause:
                         return SyntaxFactory.Block(
                             SyntaxFactory.IfStatement(
-                                ((WhereClauseSyntax)node)
-                                    .Condition
+                                ((WhereClauseSyntax)node).Condition
                                     .WithAdditionalAnnotations(Simplifier.Annotation)
                                     .WithoutTrivia(),
                                 statement
@@ -293,8 +292,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq
                                                                     joinClause.LeftExpression
                                                                 ),
                                                                 SyntaxFactory.Argument(
-                                                                    joinClause
-                                                                        .RightExpression
+                                                                    joinClause.RightExpression
                                                                         .WithoutTrailingTrivia()
                                                                 ),
                                                             }
@@ -312,8 +310,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq
                         // This is not the latest Select in the Query Expression
                         // There is a QueryBody with the Continuation as a parent.
                         var selectClause = (SelectClauseSyntax)node;
-                        var identifier = ((QueryBodySyntax)selectClause.Parent)
-                            .Continuation
+                        var identifier = ((QueryBodySyntax)selectClause.Parent).Continuation
                             .Identifier;
                         return AddToBlockTop(
                             CreateLocalDeclarationStatement(
@@ -680,8 +677,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq
                                     or SyntaxKind.LocalDeclarationStatement
                             &&
                             // Avoid int i = (from x in a select x).Count(), j = i;
-                            ((VariableDeclarationSyntax)invocationParent.Parent.Parent)
-                                .Variables
+                            (
+                                (VariableDeclarationSyntax)invocationParent.Parent.Parent
+                            ).Variables
                                 .Count == 1
                         )
                         {
@@ -954,8 +952,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq
                         lastSelectExpression is IdentifierNameSyntax identifierName
                         && forEachStatement.Identifier.ValueText
                             == identifierName.Identifier.ValueText
-                        && queryExpressionProcessingInfo
-                            .IdentifierNames
+                        && queryExpressionProcessingInfo.IdentifierNames
                             .Contains(identifierName.Identifier.ValueText)
                     )
                     {

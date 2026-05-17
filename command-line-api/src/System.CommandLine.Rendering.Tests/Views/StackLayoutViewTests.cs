@@ -25,8 +25,7 @@ namespace System.CommandLine.Rendering.Tests.Views
             var renderer = new ConsoleRenderer(terminal);
             stackLayout.Render(renderer, new Region(0, 0, 10, 2));
 
-            terminal
-                .Events
+            terminal.Events
                 .Should()
                 .BeEquivalentSequenceTo(
                     new TestTerminal.CursorPositionChanged(new Point(0, 0)),
@@ -50,8 +49,7 @@ namespace System.CommandLine.Rendering.Tests.Views
             var renderer = new ConsoleRenderer(terminal);
             stackLayout.Render(renderer, new Region(0, 0, 10, 1));
 
-            terminal
-                .Events
+            terminal.Events
                 .Should()
                 .BeEquivalentSequenceTo(
                     new TestTerminal.CursorPositionChanged(new Point(0, 0)),
@@ -73,8 +71,7 @@ namespace System.CommandLine.Rendering.Tests.Views
             var renderer = new ConsoleRenderer(terminal);
             stackLayout.Render(renderer, new Region(0, 0, 5, 4));
 
-            terminal
-                .Events
+            terminal.Events
                 .Should()
                 .BeEquivalentSequenceTo(
                     new TestTerminal.CursorPositionChanged(new Point(0, 0)),
@@ -102,8 +99,7 @@ namespace System.CommandLine.Rendering.Tests.Views
             var renderer = new ConsoleRenderer(terminal);
             stackLayout.Render(renderer, new Region(0, 0, 18, 1));
 
-            terminal
-                .Events
+            terminal.Events
                 .Should()
                 .BeEquivalentSequenceTo(
                     new TestTerminal.CursorPositionChanged(new Point(0, 0)),
@@ -127,8 +123,7 @@ namespace System.CommandLine.Rendering.Tests.Views
             var renderer = new ConsoleRenderer(terminal);
             stackLayout.Render(renderer, new Region(0, 0, 16, 1));
 
-            terminal
-                .Events
+            terminal.Events
                 .Should()
                 .BeEquivalentSequenceTo(
                     new TestTerminal.CursorPositionChanged(new Point(0, 0)),
@@ -152,8 +147,7 @@ namespace System.CommandLine.Rendering.Tests.Views
             var renderer = new ConsoleRenderer(terminal);
             stackLayout.Render(renderer, new Region(0, 0, 14, 2));
 
-            terminal
-                .Events
+            terminal.Events
                 .Should()
                 .BeEquivalentSequenceTo(
                     new TestTerminal.CursorPositionChanged(new Point(0, 0)),

@@ -108,8 +108,7 @@ namespace System.Web.Mvc
             )
             {
                 result =
-                    controllerContext
-                        .HttpContext
+                    controllerContext.HttpContext
                         .GetGlobalResourceObject(
                             ResourceClassKey,
                             resourceName,

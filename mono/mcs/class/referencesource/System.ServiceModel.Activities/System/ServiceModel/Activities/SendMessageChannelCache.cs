@@ -151,8 +151,7 @@ namespace System.ServiceModel.Activities
             if (this.isReadOnly)
             {
                 // cache has already been created, settings cannot be changed now
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(new InvalidOperationException(SR.CacheSettingsLocked));
             }
         }
@@ -186,8 +185,7 @@ namespace System.ServiceModel.Activities
         {
             if (this.isDisposed == true)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new ObjectDisposedException(typeof(SendMessageChannelCache).ToString())
                     );

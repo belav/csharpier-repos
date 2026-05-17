@@ -470,8 +470,7 @@ namespace System.Data.Common
         {
             try
             {
-                return System
-                    .Int32
+                return System.Int32
                     .Parse(
                         stringValue,
                         System.Globalization.NumberStyles.Integer,

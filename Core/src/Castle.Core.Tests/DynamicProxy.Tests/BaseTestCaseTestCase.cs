@@ -61,8 +61,7 @@ namespace Castle.DynamicProxy.Tests
 
         private void FindVerificationErrors()
         {
-            ModuleBuilder moduleBuilder = generator
-                .ProxyBuilder
+            ModuleBuilder moduleBuilder = generator.ProxyBuilder
                 .ModuleScope
                 .ObtainDynamicModule(true);
             TypeBuilder invalidType = moduleBuilder.DefineType("InvalidType");

@@ -323,8 +323,7 @@ namespace nwind
             {
                 return false;
             }
-            return System
-                .Collections
+            return System.Collections
                 .Generic
                 .EqualityComparer<long>
                 .Default
@@ -764,8 +763,7 @@ namespace nwind
             {
                 return false;
             }
-            return System
-                .Collections
+            return System.Collections
                 .Generic
                 .EqualityComparer<string>
                 .Default
@@ -946,8 +944,8 @@ namespace nwind
                 {
                     if ((this._customerDemographic.Entity != null))
                     {
-                        CustomerDemographic previousCustomerDemographic =
-                            this._customerDemographic.Entity;
+                        CustomerDemographic previousCustomerDemographic = this._customerDemographic
+                            .Entity;
                         this._customerDemographic.Entity = null;
                         previousCustomerDemographic.CustomerCustomerDemo.Remove(this);
                     }
@@ -1023,14 +1021,12 @@ namespace nwind
                 return false;
             }
             return (
-                System
-                    .Collections
+                System.Collections
                     .Generic
                     .EqualityComparer<string>
                     .Default
                     .Equals(this._customerID, value._customerID)
-                && System
-                    .Collections
+                && System.Collections
                     .Generic
                     .EqualityComparer<string>
                     .Default
@@ -1191,8 +1187,7 @@ namespace nwind
             {
                 return false;
             }
-            return System
-                .Collections
+            return System.Collections
                 .Generic
                 .EqualityComparer<string>
                 .Default
@@ -1891,8 +1886,7 @@ namespace nwind
             {
                 return false;
             }
-            return System
-                .Collections
+            return System.Collections
                 .Generic
                 .EqualityComparer<long>
                 .Default
@@ -2158,14 +2152,12 @@ namespace nwind
                 return false;
             }
             return (
-                System
-                    .Collections
+                System.Collections
                     .Generic
                     .EqualityComparer<long>
                     .Default
                     .Equals(this._employeeID, value._employeeID)
-                && System
-                    .Collections
+                && System.Collections
                     .Generic
                     .EqualityComparer<string>
                     .Default
@@ -2797,8 +2789,7 @@ namespace nwind
             {
                 return false;
             }
-            return System
-                .Collections
+            return System.Collections
                 .Generic
                 .EqualityComparer<long>
                 .Default
@@ -3128,14 +3119,12 @@ namespace nwind
                 return false;
             }
             return (
-                System
-                    .Collections
+                System.Collections
                     .Generic
                     .EqualityComparer<long>
                     .Default
                     .Equals(this._orderID, value._orderID)
-                && System
-                    .Collections
+                && System.Collections
                     .Generic
                     .EqualityComparer<long>
                     .Default
@@ -3612,8 +3601,7 @@ namespace nwind
             {
                 return false;
             }
-            return System
-                .Collections
+            return System.Collections
                 .Generic
                 .EqualityComparer<long>
                 .Default
@@ -3786,8 +3774,7 @@ namespace nwind
             {
                 return false;
             }
-            return System
-                .Collections
+            return System.Collections
                 .Generic
                 .EqualityComparer<long>
                 .Default
@@ -3984,8 +3971,7 @@ namespace nwind
             {
                 return false;
             }
-            return System
-                .Collections
+            return System.Collections
                 .Generic
                 .EqualityComparer<long>
                 .Default
@@ -4433,8 +4419,7 @@ namespace nwind
             {
                 return false;
             }
-            return System
-                .Collections
+            return System.Collections
                 .Generic
                 .EqualityComparer<long>
                 .Default
@@ -4682,8 +4667,7 @@ namespace nwind
             {
                 return false;
             }
-            return System
-                .Collections
+            return System.Collections
                 .Generic
                 .EqualityComparer<string>
                 .Default

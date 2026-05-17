@@ -35,8 +35,7 @@ namespace System.ServiceModel.Dispatcher
             );
 
             this.dispatch = dispatch;
-            this.isTransactedReceiveChannelDispatcher = dispatch
-                .ChannelDispatcher
+            this.isTransactedReceiveChannelDispatcher = dispatch.ChannelDispatcher
                 .IsTransactedReceive;
 
             // Don't pull in System.Transactions.dll if we don't need it
@@ -229,8 +228,7 @@ namespace System.ServiceModel.Dispatcher
             catch (TransactionException e)
             {
                 DiagnosticUtility.TraceHandledException(e, TraceEventType.Error);
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         TransactionBehavior.CreateFault(
                             SR.GetString(SR.SFxTransactionUnmarshalFailed, e.Message),
@@ -303,8 +301,7 @@ namespace System.ServiceModel.Dispatcher
                             catch (TransactionException e)
                             {
                                 DiagnosticUtility.TraceHandledException(e, TraceEventType.Error);
-                                throw DiagnosticUtility
-                                    .ExceptionUtility
+                                throw DiagnosticUtility.ExceptionUtility
                                     .ThrowHelperError(
                                         TransactionBehavior.CreateFault(
                                             SR.GetString(SR.SFxTransactionAsyncAborted),
@@ -370,8 +367,7 @@ namespace System.ServiceModel.Dispatcher
                 if (transaction == null || transaction == contextTransaction)
                 {
                     rpc.Transaction.Current = contextTransaction;
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             TransactionBehavior.CreateFault(
                                 SR.GetString(SR.SFxTransactionAsyncAborted),
@@ -466,8 +462,7 @@ namespace System.ServiceModel.Dispatcher
                 catch (ObjectDisposedException e) //transaction may be async aborted
                 {
                     DiagnosticUtility.TraceHandledException(e, TraceEventType.Error);
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             TransactionBehavior.CreateFault(
                                 SR.GetString(SR.SFxTransactionAsyncAborted),
@@ -622,8 +617,7 @@ namespace System.ServiceModel.Dispatcher
                     //we don't want to mask the real error here
                     DiagnosticUtility.TraceHandledException(e, TraceEventType.Error);
                 }
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(
@@ -647,8 +641,7 @@ namespace System.ServiceModel.Dispatcher
                     //we don't want to mask the real error here
                     DiagnosticUtility.TraceHandledException(e, TraceEventType.Error);
                 }
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(
@@ -707,8 +700,7 @@ namespace System.ServiceModel.Dispatcher
                 catch (TransactionException e)
                 {
                     DiagnosticUtility.TraceHandledException(e, TraceEventType.Error);
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             TransactionBehavior.CreateFault(
                                 SR.GetString(SR.SFxTransactionAsyncAborted),
@@ -724,9 +716,8 @@ namespace System.ServiceModel.Dispatcher
         {
             if ((this.dependentClone == null) && (this.Clone != null))
             {
-                this.dependentClone = this.Clone.DependentClone(
-                    DependentCloneOption.BlockCommitUntilComplete
-                );
+                this.dependentClone = this.Clone
+                    .DependentClone(DependentCloneOption.BlockCommitUntilComplete);
             }
         }
 
@@ -944,8 +935,7 @@ namespace System.ServiceModel.Dispatcher
             catch (TransactionException e)
             {
                 DiagnosticUtility.TraceHandledException(e, TraceEventType.Error);
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         TransactionBehavior.CreateFault(
                             SR.GetString(SR.SFxTransactionAsyncAborted),
@@ -976,8 +966,7 @@ namespace System.ServiceModel.Dispatcher
             }
 
             //the transaction was asynchronously aborted
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(
                     TransactionBehavior.CreateFault(
                         SR.GetString(SR.SFxTransactionAsyncAborted),

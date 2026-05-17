@@ -32,9 +32,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.DocumentationComments
 
             var testDocument = workspace.Documents.Single();
             var view = testDocument.GetTextView();
-            view.Caret.MoveTo(
-                new SnapshotPoint(view.TextSnapshot, testDocument.CursorPosition.Value)
-            );
+            view.Caret
+                .MoveTo(new SnapshotPoint(view.TextSnapshot, testDocument.CursorPosition.Value));
 
             var commandHandler = CreateCommandHandler(workspace);
 

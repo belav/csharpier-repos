@@ -333,8 +333,7 @@ namespace System.ComponentModel.Composition.Hosting
                 return PartsInternal;
             }
 
-            string? genericContractName = definition
-                .Metadata
+            string? genericContractName = definition.Metadata
                 .GetValue<string>(CompositionConstants.GenericContractMetadataName);
 
             List<ComposablePartDefinition>? nonGenericMatches = GetCandidateParts(contractName);
@@ -350,8 +349,7 @@ namespace System.ComponentModel.Composition.Hosting
                 return null;
             }
 
-            _contractPartIndex
-                .Value
+            _contractPartIndex.Value
                 .TryGetValue(
                     contractName,
                     out List<ComposablePartDefinition>? contractCandidateParts

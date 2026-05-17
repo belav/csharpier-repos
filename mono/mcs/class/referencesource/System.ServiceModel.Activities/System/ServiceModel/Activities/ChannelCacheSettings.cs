@@ -36,8 +36,7 @@ namespace System.ServiceModel.Activities
 
                 if (TimeoutHelper.IsTooLarge(value))
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .ArgumentOutOfRange("IdleTimeout", value, SR.ValueTooLarge("IdleTimeout"));
                 }
 
@@ -55,8 +54,7 @@ namespace System.ServiceModel.Activities
 
                 if (TimeoutHelper.IsTooLarge(value))
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .ArgumentOutOfRange(
                             "LeaseTimeout",
                             value,
@@ -75,8 +73,7 @@ namespace System.ServiceModel.Activities
             {
                 if (value < 0)
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .ArgumentOutOfRange(
                             "MaxItemsInCache",
                             value,

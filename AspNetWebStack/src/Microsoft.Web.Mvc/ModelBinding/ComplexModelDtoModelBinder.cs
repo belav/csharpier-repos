@@ -32,8 +32,7 @@ namespace Microsoft.Web.Mvc.ModelBinding
                     };
 
                 // bind and propagate the values
-                IExtensibleModelBinder propertyBinder = bindingContext
-                    .ModelBinderProviders
+                IExtensibleModelBinder propertyBinder = bindingContext.ModelBinderProviders
                     .GetBinder(controllerContext, propertyBindingContext);
                 if (propertyBinder != null)
                 {

@@ -153,8 +153,7 @@ namespace System.Data.Linq
                 {
                     this.accessor = accessor;
                     this.offset = offset;
-                    this.isKeyNullAssignable = System
-                        .Data
+                    this.isKeyNullAssignable = System.Data
                         .Linq
                         .SqlClient
                         .TypeSystem
@@ -227,8 +226,7 @@ namespace System.Data.Linq
                     out MultiKey<V1, V2> k
                 )
                 {
-                    System
-                        .Diagnostics
+                    System.Diagnostics
                         .Debug
                         .Assert(
                             this.offset < values.Length,

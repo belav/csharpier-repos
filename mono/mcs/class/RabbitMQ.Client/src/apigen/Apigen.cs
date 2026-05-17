@@ -249,8 +249,7 @@ namespace RabbitMQ.Client.Apigen
 
         public void Usage()
         {
-            Console
-                .Error
+            Console.Error
                 .WriteLine("Usage: Apigen.exe [options ...] <input-spec-xml> <output-csharp-file>");
             Console.Error.WriteLine("  Options include:");
             Console.Error.WriteLine("    /apiName:<identifier>");

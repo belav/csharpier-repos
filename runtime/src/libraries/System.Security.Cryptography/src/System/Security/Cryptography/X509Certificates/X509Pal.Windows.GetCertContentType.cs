@@ -25,13 +25,11 @@ namespace System.Security.Cryptography.X509Certificates
                         (uint)rawData.Length
                     );
                     if (
-                        !Interop
-                            .Crypt32
+                        !Interop.Crypt32
                             .CryptQueryObject(
                                 Interop.Crypt32.CertQueryObjectType.CERT_QUERY_OBJECT_BLOB,
                                 &certBlob,
-                                Interop
-                                    .Crypt32
+                                Interop.Crypt32
                                     .ExpectedContentTypeFlags
                                     .CERT_QUERY_CONTENT_FLAG_ALL,
                                 Interop.Crypt32.ExpectedFormatTypeFlags.CERT_QUERY_FORMAT_FLAG_ALL,
@@ -62,13 +60,11 @@ namespace System.Security.Cryptography.X509Certificates
                 fixed (char* pFileName = fileName)
                 {
                     if (
-                        !Interop
-                            .Crypt32
+                        !Interop.Crypt32
                             .CryptQueryObject(
                                 Interop.Crypt32.CertQueryObjectType.CERT_QUERY_OBJECT_FILE,
                                 pFileName,
-                                Interop
-                                    .Crypt32
+                                Interop.Crypt32
                                     .ExpectedContentTypeFlags
                                     .CERT_QUERY_CONTENT_FLAG_ALL,
                                 Interop.Crypt32.ExpectedFormatTypeFlags.CERT_QUERY_FORMAT_FLAG_ALL,

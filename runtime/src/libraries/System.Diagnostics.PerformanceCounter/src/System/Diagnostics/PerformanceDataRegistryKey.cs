@@ -24,8 +24,7 @@ namespace System.Diagnostics
         public static PerformanceDataRegistryKey OpenRemoteBaseKey(string machineName)
         {
             // connect to the specified remote registry
-            int ret = Interop
-                .Advapi32
+            int ret = Interop.Advapi32
                 .RegConnectRegistry(
                     machineName,
                     new IntPtr(PerformanceData),
@@ -70,8 +69,7 @@ namespace System.Diagnostics
             while (
                 Interop.Errors.ERROR_MORE_DATA
                 == (
-                    ret = Interop
-                        .Advapi32
+                    ret = Interop.Advapi32
                         .RegQueryValueEx(
                             _hkey,
                             name,

@@ -713,8 +713,7 @@ class MainClass
                 new TextSpan(),
                 new LinePositionSpan(new LinePosition(2, 1), new LinePosition(3, 1))
             );
-            var diagnostic = CodeAnalysis
-                .Diagnostic
+            var diagnostic = CodeAnalysis.Diagnostic
                 .Create(
                     "CS0000",
                     "",
@@ -728,8 +727,7 @@ class MainClass
 
             Assert.Equal(
                 "test.txt(3,2): warning CS0000: msg",
-                CSharpDiagnosticFormatter
-                    .Instance
+                CSharpDiagnosticFormatter.Instance
                     .Format(diagnostic, EnsureEnglishUICulture.PreferredOrNull)
             );
         }
@@ -756,8 +754,7 @@ class MainClass
             );
             Assert.NotEqual(locationWithMapping, locationWithoutMapping);
 
-            var diagnosticWithoutMapping = CodeAnalysis
-                .Diagnostic
+            var diagnosticWithoutMapping = CodeAnalysis.Diagnostic
                 .Create(
                     "CS0000",
                     "",
@@ -770,13 +767,11 @@ class MainClass
                 );
             Assert.Equal(
                 "test.txt(3,2): warning CS0000: msg",
-                CSharpDiagnosticFormatter
-                    .Instance
+                CSharpDiagnosticFormatter.Instance
                     .Format(diagnosticWithoutMapping, EnsureEnglishUICulture.PreferredOrNull)
             );
 
-            var diagnosticWithMapping = CodeAnalysis
-                .Diagnostic
+            var diagnosticWithMapping = CodeAnalysis.Diagnostic
                 .Create(
                     "CS0000",
                     "",
@@ -789,8 +784,7 @@ class MainClass
                 );
             Assert.Equal(
                 "test2.txt(4,3): warning CS0000: msg",
-                CSharpDiagnosticFormatter
-                    .Instance
+                CSharpDiagnosticFormatter.Instance
                     .Format(diagnosticWithMapping, EnsureEnglishUICulture.PreferredOrNull)
             );
 
@@ -866,12 +860,13 @@ class MainClass
             // create node with error that would place itself outside the tree.
             var nodeWithBadError = SyntaxFactory.IdentifierName(
                 new SyntaxToken(
-                    node.Node.WithDiagnosticsGreen(
-                        new DiagnosticInfo[]
-                        {
-                            new SyntaxDiagnosticInfo(10, 10, ErrorCode.ERR_NoBaseClass),
-                        }
-                    )
+                    node.Node
+                        .WithDiagnosticsGreen(
+                            new DiagnosticInfo[]
+                            {
+                                new SyntaxDiagnosticInfo(10, 10, ErrorCode.ERR_NoBaseClass),
+                            }
+                        )
                 )
             );
             var tree = SyntaxFactory.SyntaxTree(nodeWithBadError);

@@ -136,8 +136,7 @@ namespace System.ServiceModel.Discovery.Configuration
         {
             if (!String.IsNullOrEmpty(channelEndpointElement.Contract))
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new ConfigurationErrorsException(
                             SR2.DiscoveryConfigContractSpecified(channelEndpointElement.Kind)
@@ -152,8 +151,7 @@ namespace System.ServiceModel.Discovery.Configuration
         {
             if (!String.IsNullOrEmpty(serviceEndpointElement.Contract))
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new ConfigurationErrorsException(
                             SR2.DiscoveryConfigContractSpecified(serviceEndpointElement.Kind)
@@ -163,8 +161,7 @@ namespace System.ServiceModel.Discovery.Configuration
 
             if (
                 PropertyValueOrigin.Default
-                == serviceEndpointElement
-                    .ElementInformation
+                == serviceEndpointElement.ElementInformation
                     .Properties[ConfigurationStrings.IsSystemEndpoint]
                     .ValueOrigin
             )

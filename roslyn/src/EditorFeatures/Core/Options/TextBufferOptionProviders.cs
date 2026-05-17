@@ -33,8 +33,7 @@ internal static class TextBufferOptionProviders
             optionsProvider.IndentationManager,
             explicitFormat: false
         );
-        return optionsProvider
-            .GlobalOptions
+        return optionsProvider.GlobalOptions
             .GetDocumentationCommentOptions(lineFormattingOptions, languageServices.Language);
     }
 
@@ -133,12 +132,10 @@ internal static class TextBufferOptionProviders
 
         return new IndentationOptions(formattingOptions)
         {
-            AutoFormattingOptions = optionsProvider
-                .GlobalOptions
+            AutoFormattingOptions = optionsProvider.GlobalOptions
                 .GetAutoFormattingOptions(languageServices.Language),
             // TODO: Call editorOptions.GetIndentStyle() instead (see https://github.com/dotnet/roslyn/issues/62204):
-            IndentStyle = optionsProvider
-                .GlobalOptions
+            IndentStyle = optionsProvider.GlobalOptions
                 .GetOption(IndentationOptionsStorage.SmartIndent, languageServices.Language),
         };
     }
@@ -152,8 +149,7 @@ internal static class TextBufferOptionProviders
     {
         var editorOptions = optionsProvider.Factory.GetOptions(textBuffer);
         var configOptions = editorOptions.ToAnalyzerConfigOptions();
-        var fallbackOptions = optionsProvider
-            .GlobalOptions
+        var fallbackOptions = optionsProvider.GlobalOptions
             .GetAddImportPlacementOptions(languageServices);
         return configOptions.GetAddImportPlacementOptions(
             languageServices,

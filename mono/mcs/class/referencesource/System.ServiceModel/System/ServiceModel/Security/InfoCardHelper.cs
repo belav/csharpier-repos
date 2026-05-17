@@ -60,12 +60,10 @@ namespace System.ServiceModel.Security
         )
         {
             if (tokenRequirement == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("tokenRequirement");
             if (clientCredentialsTokenManager == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("clientCredentialsTokenManager");
 
             provider = null;
@@ -74,13 +72,11 @@ namespace System.ServiceModel.Security
                 !clientCredentialsTokenManager.ClientCredentials.SupportInteractive
                 || (
                     null
-                        != clientCredentialsTokenManager
-                            .ClientCredentials
+                        != clientCredentialsTokenManager.ClientCredentials
                             .IssuedToken
                             .LocalIssuerAddress
                     && null
-                        != clientCredentialsTokenManager
-                            .ClientCredentials
+                        != clientCredentialsTokenManager.ClientCredentials
                             .IssuedToken
                             .LocalIssuerBinding
                 )
@@ -435,8 +431,7 @@ namespace System.ServiceModel.Security
                         || chain[k].Issuer.IsAnonymous
                     )
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(SR.GetString(SR.InfoCardInvalidChain))
                             );
@@ -486,8 +481,7 @@ namespace System.ServiceModel.Security
                         true
                     );
                 federationTokenProvider.IssuerChannelBehaviors.Remove<SecurityCredentialsManager>();
-                federationTokenProvider
-                    .IssuerChannelBehaviors
+                federationTokenProvider.IssuerChannelBehaviors
                     .Add(
                         new InternalClientCredentials(
                             clientCredentialsTokenManager.ClientCredentials,
@@ -688,8 +682,7 @@ namespace System.ServiceModel.Security
                 }
                 else if ((issuedTokenParam != null) && (issuedTokenParam.IssuerBinding != null))
                 {
-                    BindingElementCollection bindingElements = issuedTokenParam
-                        .IssuerBinding
+                    BindingElementCollection bindingElements = issuedTokenParam.IssuerBinding
                         .CreateBindingElements();
                     SecurityBindingElement innerSecurityBindingElement =
                         bindingElements.Find<SecurityBindingElement>();
@@ -758,8 +751,7 @@ namespace System.ServiceModel.Security
                 {
                     if (m_infocardChannelParameter.Token.ValidTo < DateTime.UtcNow)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new ExpiredSecurityTokenException(
                                     (SR.GetString(SR.ExpiredTokenInChannelParameters))
@@ -773,8 +765,7 @@ namespace System.ServiceModel.Security
                 }
                 else
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new MessageSecurityException(
                                 (SR.GetString(SR.NoTokenInChannelParameters))
@@ -1076,8 +1067,7 @@ namespace System.ServiceModel.Security
 
             System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new NotImplementedException());
             }
         }

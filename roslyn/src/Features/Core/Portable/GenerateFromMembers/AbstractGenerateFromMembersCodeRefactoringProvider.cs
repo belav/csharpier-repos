@@ -130,14 +130,11 @@ namespace Microsoft.CodeAnalysis.GenerateFromMembers
 
                 var parameterNamingRule = rules
                     .Where(rule =>
-                        rule.SymbolSpecification.AppliesTo(
-                            SymbolKind.Parameter,
-                            Accessibility.NotApplicable
-                        )
+                        rule.SymbolSpecification
+                            .AppliesTo(SymbolKind.Parameter, Accessibility.NotApplicable)
                     )
                     .First();
-                var parameterName = parameterNamingRule
-                    .NamingStyle
+                var parameterName = parameterNamingRule.NamingStyle
                     .MakeCompliant(identifierNameParts.BaseName)
                     .First();
 

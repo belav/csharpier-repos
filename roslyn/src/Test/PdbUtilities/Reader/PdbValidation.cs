@@ -44,8 +44,7 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             [CallerFilePath] string expectedValueSourcePath = null
         )
         {
-            verifier
-                .Compilation
+            verifier.Compilation
                 .VerifyPdb(
                     expectedPdb,
                     embeddedTexts,
@@ -69,8 +68,7 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             [CallerFilePath] string expectedValueSourcePath = null
         )
         {
-            verifier
-                .Compilation
+            verifier.Compilation
                 .VerifyPdb(
                     expectedPdb,
                     embeddedTexts,
@@ -95,8 +93,7 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             [CallerFilePath] string expectedValueSourcePath = null
         )
         {
-            verifier
-                .Compilation
+            verifier.Compilation
                 .VerifyPdb(
                     qualifiedMethodName,
                     expectedPdb,
@@ -122,8 +119,7 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             [CallerFilePath] string expectedValueSourcePath = null
         )
         {
-            verifier
-                .Compilation
+            verifier.Compilation
                 .VerifyPdb(
                     qualifiedMethodName,
                     expectedPdb,
@@ -748,8 +744,7 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             bool portable
         )
         {
-            var emitOptions = EmitOptions
-                .Default
+            var emitOptions = EmitOptions.Default
                 .WithDebugInformationFormat(
                     portable ? DebugInformationFormat.PortablePdb : DebugInformationFormat.Pdb
                 );

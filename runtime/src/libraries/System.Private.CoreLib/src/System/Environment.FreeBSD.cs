@@ -11,8 +11,7 @@ namespace System
         {
             get
             {
-                Interop.Process.kinfo_proc* processInfo = Interop
-                    .Process
+                Interop.Process.kinfo_proc* processInfo = Interop.Process
                     .GetProcInfo(ProcessId, true, out _);
                 try
                 {

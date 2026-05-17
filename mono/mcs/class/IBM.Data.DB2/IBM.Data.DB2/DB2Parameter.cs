@@ -689,8 +689,7 @@ namespace IBM.Data.DB2
                         db2CType = DB2Constants.SQL_C_DOUBLE;
                         break;
                     case DB2Constants.SQL_DECIMAL:
-                        byte[] tmpDecimalData = System
-                            .Text
+                        byte[] tmpDecimalData = System.Text
                             .Encoding
                             .UTF8
                             .GetBytes(

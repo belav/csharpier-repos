@@ -36,8 +36,7 @@ namespace System.Configuration
 
         public ConfigurationFileMap()
         {
-            machineConfigFilename = System
-                .Runtime
+            machineConfigFilename = System.Runtime
                 .InteropServices
                 .RuntimeEnvironment
                 .SystemConfigurationFile;

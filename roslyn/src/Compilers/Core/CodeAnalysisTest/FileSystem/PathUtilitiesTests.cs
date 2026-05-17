@@ -18,8 +18,7 @@ namespace Microsoft.CodeAnalysis.UnitTests.FileSystem
             string fullPath
         )
         {
-            var roslynName = PathUtilities
-                .TestAccessor
+            var roslynName = PathUtilities.TestAccessor
                 .GetDirectoryName(fullPath, isUnixLike: false);
             Assert.Equal(expectedDirectoryName, roslynName);
 
@@ -141,8 +140,7 @@ namespace Microsoft.CodeAnalysis.UnitTests.FileSystem
             // Dotnet does normalization of dots, so we can't compare against it here.
             Assert.Equal(
                 @"C:\temp\..",
-                PathUtilities
-                    .TestAccessor
+                PathUtilities.TestAccessor
                     .GetDirectoryName(@"C:\temp\..\goo.txt", isUnixLike: false)
             );
 

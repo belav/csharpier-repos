@@ -410,16 +410,14 @@ internal static class ApiContract
                 if (genericArg.IsGenericParameter)
                 {
                     if (
-                        genericArg
-                            .GenericParameterAttributes
+                        genericArg.GenericParameterAttributes
                             .HasFlag(GenericParameterAttributes.Covariant)
                     )
                     {
                         writer.Write("out ");
                     }
                     else if (
-                        genericArg
-                            .GenericParameterAttributes
+                        genericArg.GenericParameterAttributes
                             .HasFlag(GenericParameterAttributes.Contravariant)
                     )
                     {

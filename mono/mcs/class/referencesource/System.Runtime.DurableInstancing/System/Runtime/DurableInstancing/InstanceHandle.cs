@@ -136,9 +136,8 @@ namespace System.Runtime.DurableInstancing
         {
             if (!this.providerObjectSet)
             {
-                throw Fx.Exception.AsError(
-                    new InvalidOperationException(SRCore.HandleFreedBeforeInitialized)
-                );
+                throw Fx.Exception
+                    .AsError(new InvalidOperationException(SRCore.HandleFreedBeforeInitialized));
             }
 
             if (!IsValid)
@@ -165,9 +164,8 @@ namespace System.Runtime.DurableInstancing
                     IEnumerable<XName> eventsToUnbind = null;
                     if (this.pendingOwnerEvents != null && this.pendingOwnerEvents.Count > 0)
                     {
-                        eventsToUnbind = this.pendingOwnerEvents.Select(persistenceEvent =>
-                            persistenceEvent.Name
-                        );
+                        eventsToUnbind = this.pendingOwnerEvents
+                            .Select(persistenceEvent => persistenceEvent.Name);
                     }
                     if (this.boundOwnerEvents != null && this.boundOwnerEvents.Count > 0)
                     {
@@ -403,9 +401,8 @@ namespace System.Runtime.DurableInstancing
                 );
                 if (this.inProgressBind == null)
                 {
-                    throw Fx.Exception.AsError(
-                        new InvalidOperationException(SRCore.BindLockRequiresCommandFlag)
-                    );
+                    throw Fx.Exception
+                        .AsError(new InvalidOperationException(SRCore.BindLockRequiresCommandFlag));
                 }
             }
         }
@@ -433,9 +430,10 @@ namespace System.Runtime.DurableInstancing
                     );
                     if (this.inProgressBind == null)
                     {
-                        throw Fx.Exception.AsError(
-                            new InvalidOperationException(SRCore.BindLockRequiresCommandFlag)
-                        );
+                        throw Fx.Exception
+                            .AsError(
+                                new InvalidOperationException(SRCore.BindLockRequiresCommandFlag)
+                            );
                     }
 
                     Fx.Assert(
@@ -465,11 +463,12 @@ namespace System.Runtime.DurableInstancing
                 {
                     if (this.inProgressBind == null)
                     {
-                        throw Fx.Exception.AsError(
-                            new InvalidOperationException(
-                                SRCore.DoNotCompleteTryCommandWithPendingReclaim
-                            )
-                        );
+                        throw Fx.Exception
+                            .AsError(
+                                new InvalidOperationException(
+                                    SRCore.DoNotCompleteTryCommandWithPendingReclaim
+                                )
+                            );
                     }
 
                     Fx.Assert(
@@ -495,11 +494,12 @@ namespace System.Runtime.DurableInstancing
                 {
                     if (this.inProgressBind == null)
                     {
-                        throw Fx.Exception.AsError(
-                            new InvalidOperationException(
-                                SRCore.DoNotCompleteTryCommandWithPendingReclaim
-                            )
-                        );
+                        throw Fx.Exception
+                            .AsError(
+                                new InvalidOperationException(
+                                    SRCore.DoNotCompleteTryCommandWithPendingReclaim
+                                )
+                            );
                     }
 
                     Fx.Assert(
@@ -855,9 +855,8 @@ namespace System.Runtime.DurableInstancing
             {
                 if (this.waitResult != null)
                 {
-                    throw Fx.Exception.AsError(
-                        new InvalidOperationException(SRCore.WaitAlreadyInProgress)
-                    );
+                    throw Fx.Exception
+                        .AsError(new InvalidOperationException(SRCore.WaitAlreadyInProgress));
                 }
                 if (!IsValid)
                 {
@@ -1006,16 +1005,16 @@ namespace System.Runtime.DurableInstancing
                 {
                     if (!this.handle.IsValid)
                     {
-                        throw Fx.Exception.AsError(
-                            new OperationCanceledException(SRCore.HandleFreed)
-                        );
+                        throw Fx.Exception
+                            .AsError(new OperationCanceledException(SRCore.HandleFreed));
                     }
 
                     if (this.handle.OperationPending)
                     {
-                        throw Fx.Exception.AsError(
-                            new InvalidOperationException(SRCore.CommandExecutionCannotOverlap)
-                        );
+                        throw Fx.Exception
+                            .AsError(
+                                new InvalidOperationException(SRCore.CommandExecutionCannotOverlap)
+                            );
                     }
                     setOperationPending = true;
                     this.handle.OperationPending = true;
@@ -1066,16 +1065,16 @@ namespace System.Runtime.DurableInstancing
                     {
                         if (!transactionWait.WaitForHostTransaction.Wait(waitTimeout))
                         {
-                            throw Fx.Exception.AsError(
-                                new TimeoutException(InternalSR.TimeoutOnOperation(waitTimeout))
-                            );
+                            throw Fx.Exception
+                                .AsError(
+                                    new TimeoutException(InternalSR.TimeoutOnOperation(waitTimeout))
+                                );
                         }
                     }
                     else
                     {
                         if (
-                            !transactionWait
-                                .WaitForHostTransaction
+                            !transactionWait.WaitForHostTransaction
                                 .WaitAsync(
                                     AcquireContextAsyncResult.onHostTransaction,
                                     this,
@@ -1172,9 +1171,8 @@ namespace System.Runtime.DurableInstancing
                     {
                         if (!this.handle.IsValid)
                         {
-                            throw Fx.Exception.AsError(
-                                new OperationCanceledException(SRCore.HandleFreed)
-                            );
+                            throw Fx.Exception
+                                .AsError(new OperationCanceledException(SRCore.HandleFreed));
                         }
 
                         if (HostTransaction == null)
@@ -1292,19 +1290,17 @@ namespace System.Runtime.DurableInstancing
                     );
                 }
 
-                List<InstancePersistenceEvent> existingReadyEvents = this.handle.StartWaiting(
-                    this,
-                    this.timer,
-                    this.timeout
-                );
+                List<InstancePersistenceEvent> existingReadyEvents = this.handle
+                    .StartWaiting(this, this.timer, this.timeout);
                 if (existingReadyEvents == null)
                 {
                     if (this.timeout == TimeSpan.Zero)
                     {
                         this.handle.CancelWaiting(this);
-                        throw Fx.Exception.AsError(
-                            new TimeoutException(SRCore.WaitForEventsTimedOut(TimeSpan.Zero))
-                        );
+                        throw Fx.Exception
+                            .AsError(
+                                new TimeoutException(SRCore.WaitForEventsTimedOut(TimeSpan.Zero))
+                            );
                     }
                 }
                 else

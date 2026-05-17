@@ -198,8 +198,7 @@ namespace BasicApi
             )
             {
                 using (
-                    var dbContext = serviceScope
-                        .ServiceProvider
+                    var dbContext = serviceScope.ServiceProvider
                         .GetRequiredService<BasicApiContext>()
                 )
                 {
@@ -226,8 +225,7 @@ namespace BasicApi
             )
             {
                 using (
-                    var dbContext = serviceScope
-                        .ServiceProvider
+                    var dbContext = serviceScope.ServiceProvider
                         .GetRequiredService<BasicApiContext>()
                 )
                 {
@@ -253,8 +251,7 @@ namespace BasicApi
             )
             {
                 using (
-                    var dbContext = serviceScope
-                        .ServiceProvider
+                    var dbContext = serviceScope.ServiceProvider
                         .GetRequiredService<BasicApiContext>()
                 )
                 {

@@ -234,8 +234,7 @@ namespace System.Xml.Serialization
             if (fieldInfo.DeclaringType != Type)
                 return null;
 
-            TypeDesc typeDesc = ModelScope
-                .TypeScope
+            TypeDesc typeDesc = ModelScope.TypeScope
                 .GetTypeDesc(fieldInfo.FieldType, fieldInfo, true, false);
             if (
                 fieldInfo.IsInitOnly
@@ -254,8 +253,7 @@ namespace System.Xml.Serialization
                 return null;
             if (CheckPropertyRead(propertyInfo))
             {
-                TypeDesc typeDesc = ModelScope
-                    .TypeScope
+                TypeDesc typeDesc = ModelScope.TypeScope
                     .GetTypeDesc(propertyInfo.PropertyType, propertyInfo, true, false);
                 // Fix for CSDMain 100492, please contact arssrvlt if you need to change this line
                 if (
@@ -340,13 +338,11 @@ namespace System.Xml.Serialization
             this.fieldType = fieldType;
             this.fieldTypeDesc = fieldTypeDesc;
             this.memberInfo = memberInfo;
-            this.checkShouldPersistMethodInfo = memberInfo
-                .DeclaringType
+            this.checkShouldPersistMethodInfo = memberInfo.DeclaringType
                 .GetMethod("ShouldSerialize" + memberInfo.Name, new Type[0]);
             this.checkShouldPersist = this.checkShouldPersistMethodInfo != null;
 
-            FieldInfo specifiedField = memberInfo
-                .DeclaringType
+            FieldInfo specifiedField = memberInfo.DeclaringType
                 .GetField(memberInfo.Name + "Specified");
             if (specifiedField != null)
             {
@@ -368,8 +364,7 @@ namespace System.Xml.Serialization
             }
             else
             {
-                PropertyInfo specifiedProperty = memberInfo
-                    .DeclaringType
+                PropertyInfo specifiedProperty = memberInfo.DeclaringType
                     .GetProperty(memberInfo.Name + "Specified");
                 if (specifiedProperty != null)
                 {

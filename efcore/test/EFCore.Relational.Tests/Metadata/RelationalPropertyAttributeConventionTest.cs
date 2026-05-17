@@ -210,8 +210,7 @@ public class RelationalPropertyAttributeConventionTest
     private InternalEntityTypeBuilder CreateInternalEntityTypeBuilder<T>()
     {
         var conventionSet = new ConventionSet();
-        conventionSet
-            .EntityTypeAddedConventions
+        conventionSet.EntityTypeAddedConventions
             .Add(new PropertyDiscoveryConvention(CreateDependencies()));
 
         var modelBuilder = new Model(conventionSet).Builder;
@@ -220,14 +219,12 @@ public class RelationalPropertyAttributeConventionTest
     }
 
     private ProviderConventionSetBuilderDependencies CreateDependencies() =>
-        FakeRelationalTestHelpers
-            .Instance
+        FakeRelationalTestHelpers.Instance
             .CreateContextServices()
             .GetRequiredService<ProviderConventionSetBuilderDependencies>();
 
     private RelationalConventionSetBuilderDependencies CreateRelationalDependencies() =>
-        FakeRelationalTestHelpers
-            .Instance
+        FakeRelationalTestHelpers.Instance
             .CreateContextServices()
             .GetRequiredService<RelationalConventionSetBuilderDependencies>();
 

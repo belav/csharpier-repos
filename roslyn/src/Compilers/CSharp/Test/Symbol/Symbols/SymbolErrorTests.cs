@@ -76,8 +76,7 @@ class C
 
             var comp = CreateCompilationWithILAndMscorlib40(source, il);
             var emitResult = comp.Emit(new System.IO.MemoryStream());
-            emitResult
-                .Diagnostics
+            emitResult.Diagnostics
                 .Verify(Diagnostic(ErrorCode.ERR_BadDelegateConstructor, "Goo").WithArguments("F"));
         }
 
@@ -127,14 +126,12 @@ class Test
             // use ref2 only
             var comp = CreateCompilation(
                 text,
-                options: TestOptions
-                    .ReleaseDll
+                options: TestOptions.ReleaseDll
                     .WithSpecificDiagnosticOptions(
                         new Dictionary<string, ReportDiagnostic>()
                         {
                             {
-                                MessageProvider
-                                    .Instance
+                                MessageProvider.Instance
                                     .GetIdForErrorCode((int)ErrorCode.WRN_UnreferencedField),
                                 ReportDiagnostic.Suppress
                             },
@@ -6438,8 +6435,7 @@ public class A : IA
             );
 
             // Note: invalid attribute had no effect on metadata name.
-            var indexer = compilation
-                .GlobalNamespace
+            var indexer = compilation.GlobalNamespace
                 .GetMember<NamedTypeSymbol>("A")
                 .GetProperty("IA." + WellKnownMemberNames.Indexer);
             Assert.Equal("IA.Item", indexer.MetadataName);
@@ -20760,8 +20756,7 @@ class A
         return 1;
     }
 }";
-            var ref1 = TestReferences
-                .SymbolsTests
+            var ref1 = TestReferences.SymbolsTests
                 .NoPia
                 .Microsoft
                 .VisualStudio
@@ -21084,8 +21079,7 @@ End Structure";
         INestedDelegate.InnerDelegate s5 = null;
     }
 }";
-            var vbcomp = VisualBasic
-                .VisualBasicCompilation
+            var vbcomp = VisualBasic.VisualBasicCompilation
                 .Create(
                     "Test",
                     new[] { VisualBasic.VisualBasicSyntaxTree.ParseText(textdll) },

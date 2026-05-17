@@ -77,11 +77,9 @@ namespace Microsoft.CodeAnalysis.GenerateDefaultConstructors
                 // error here.  We'll let the code fix take care of that.
                 //
                 // Similarly if this is for the codefix only offer if we do see that there's an error.
-                var syntaxFacts = semanticDocument
-                    .Document
+                var syntaxFacts = semanticDocument.Document
                     .GetRequiredLanguageService<ISyntaxFactsService>();
-                var headerFacts = semanticDocument
-                    .Document
+                var headerFacts = semanticDocument.Document
                     .GetRequiredLanguageService<IHeaderFactsService>();
                 if (
                     headerFacts.IsOnTypeHeader(
@@ -97,20 +95,17 @@ namespace Microsoft.CodeAnalysis.GenerateDefaultConstructors
                         return false;
                 }
 
-                var semanticFacts = semanticDocument
-                    .Document
+                var semanticFacts = semanticDocument.Document
                     .GetLanguageService<ISemanticFactsService>();
                 var classConstructors = ClassType.InstanceConstructors;
 
-                var destinationProvider = semanticDocument
-                    .Project
+                var destinationProvider = semanticDocument.Project
                     .Solution
                     .Services
                     .GetLanguageServices(ClassType.Language);
                 var isCaseSensitive = syntaxFacts.IsCaseSensitive;
 
-                UnimplementedConstructors = baseType
-                    .InstanceConstructors
+                UnimplementedConstructors = baseType.InstanceConstructors
                     .WhereAsArray(c =>
                         c.IsAccessibleWithin(ClassType)
                         && IsMissing(c, classConstructors, isCaseSensitive)
@@ -125,13 +120,11 @@ namespace Microsoft.CodeAnalysis.GenerateDefaultConstructors
                 // one for them.   If so, also see if there's an accessible no-arg contructor in the base.
                 // If not, then the compiler will error and we want the code-fix to take over solving this problem.
                 if (
-                    classType
-                        .Constructors
+                    classType.Constructors
                         .Any(static c => c.Parameters.Length == 0 && c.IsImplicitlyDeclared)
                 )
                 {
-                    var baseNoArgConstructor = baseType
-                        .Constructors
+                    var baseNoArgConstructor = baseType.Constructors
                         .FirstOrDefault(c => c.Parameters.Length == 0);
                     if (
                         baseNoArgConstructor == null
@@ -162,8 +155,7 @@ namespace Microsoft.CodeAnalysis.GenerateDefaultConstructors
             )
             {
                 var matchingConstructor = classConstructors.FirstOrDefault(c =>
-                    SignatureComparer
-                        .Instance
+                    SignatureComparer.Instance
                         .HaveSameSignature(
                             constructor.Parameters,
                             c.Parameters,

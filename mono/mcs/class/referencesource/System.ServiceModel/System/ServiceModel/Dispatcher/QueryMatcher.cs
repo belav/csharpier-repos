@@ -61,8 +61,7 @@ namespace System.ServiceModel.Dispatcher
             switch (matches.Count)
             {
                 default:
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new MultipleFilterMatchesException(
                                 SR.GetString(SR.FilterMultipleMatches),
@@ -372,8 +371,7 @@ namespace System.ServiceModel.Dispatcher
 
                         if (prefix.Length > 0 && namespaces.LookupNamespace(prefix) == null)
                         {
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
                                     new XsltException(
                                         SR.GetString(SR.FilterUndefinedPrefix, prefix)
@@ -392,8 +390,7 @@ namespace System.ServiceModel.Dispatcher
             if (XPathResultType.Error == xpathExpr.ReturnType)
             {
                 // This should never be reached.  The above property should throw if there's an error
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new XPathException(SR.GetString(SR.FilterCouldNotCompile, expression))
                     );
@@ -466,8 +463,7 @@ namespace System.ServiceModel.Dispatcher
 
                 if (null == parseTree)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new QueryCompileException(QueryCompileError.CouldNotParseExpression)
                         );

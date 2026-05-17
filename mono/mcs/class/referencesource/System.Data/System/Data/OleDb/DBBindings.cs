@@ -255,8 +255,7 @@ namespace System.Data.OleDb
             Debug.Assert(null == _rowBinding, "row binding already allocated");
             Debug.Assert(null == _columnBindings, "column bindings already allocated");
 
-            RowBinding rowBinding = System
-                .Data
+            RowBinding rowBinding = System.Data
                 .OleDb
                 .RowBinding
                 .CreateBuffer(_count, _dataBufferSize, _needToReset);

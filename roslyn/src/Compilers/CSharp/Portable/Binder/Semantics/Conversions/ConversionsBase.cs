@@ -1552,14 +1552,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                 && source.TryGetInlineArrayElementField()
                     is { TypeWithAnnotations: var elementType }
                 && (
-                    destination
-                        .OriginalDefinition
+                    destination.OriginalDefinition
                         .Equals(
                             Compilation.GetWellKnownType(WellKnownType.System_Span_T),
                             TypeCompareKind.AllIgnoreOptions
                         )
-                    || destination
-                        .OriginalDefinition
+                    || destination.OriginalDefinition
                         .Equals(
                             Compilation.GetWellKnownType(WellKnownType.System_ReadOnlySpan_T),
                             TypeCompareKind.AllIgnoreOptions
@@ -2035,8 +2033,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 if (
                     invokeMethod.RefKind != refKind
-                    || !invokeMethod
-                        .ReturnType
+                    || !invokeMethod.ReturnType
                         .Equals(returnType.Type, TypeCompareKind.AllIgnoreOptions)
                 )
                 {
@@ -3850,9 +3847,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return true;
             }
 
-            var derivedType = this.corLibrary.GetDeclaredSpecialType(
-                SpecialType.System_MulticastDelegate
-            );
+            var derivedType = this.corLibrary
+                .GetDeclaredSpecialType(SpecialType.System_MulticastDelegate);
             if (
                 IsBaseClass(derivedType, destination, ref useSiteInfo)
                 || IsBaseInterface(destination, derivedType, ref useSiteInfo)

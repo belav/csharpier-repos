@@ -113,8 +113,7 @@ namespace System.Net.NetworkInformation
             context._interfaceIndex = interfaceIndex;
             context._addressSet = new HashSet<IPAddress>();
             if (
-                Interop
-                    .Sys
+                Interop.Sys
                     .EnumerateGatewayAddressesForInterface(
                         &context,
                         (uint)interfaceIndex,

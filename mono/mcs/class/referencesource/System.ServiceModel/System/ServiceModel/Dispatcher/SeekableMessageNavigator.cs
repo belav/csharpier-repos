@@ -189,8 +189,7 @@ namespace System.ServiceModel.Dispatcher
                         // validator
                         if (n == NullIndex)
                         {
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
                                     new QueryProcessingException(
                                         QueryProcessingError.InvalidNavigatorPosition,
@@ -370,12 +369,13 @@ namespace System.ServiceModel.Dispatcher
                 return XmlNodeOrder.Unknown;
             }
 
-            return this.dom.ComparePosition(
-                this.specialParent,
-                this.location,
-                nav.specialParent,
-                nav.location
-            );
+            return this.dom
+                .ComparePosition(
+                    this.specialParent,
+                    this.location,
+                    nav.specialParent,
+                    nav.location
+                );
         }
 
         // Compare two position values that are valid for this navigator's DOM
@@ -394,8 +394,7 @@ namespace System.ServiceModel.Dispatcher
             // We can only evaluate atomized navigators
             if (!this.dom.atomize)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperCritical(
                         new QueryProcessingException(
                             QueryProcessingError.NotAtomized,
@@ -412,8 +411,7 @@ namespace System.ServiceModel.Dispatcher
             // We can only evaluate atomized navigators
             if (!this.dom.atomize)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperCritical(
                         new QueryProcessingException(
                             QueryProcessingError.NotAtomized,
@@ -430,8 +428,7 @@ namespace System.ServiceModel.Dispatcher
             // We can only evaluate atomized navigators
             if (!this.dom.atomize)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperCritical(
                         new QueryProcessingException(
                             QueryProcessingError.NotAtomized,
@@ -650,8 +647,7 @@ namespace System.ServiceModel.Dispatcher
             // We can only match atomized navigators
             if (!this.dom.atomize)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperCritical(
                         new QueryProcessingException(
                             QueryProcessingError.NotAtomized,
@@ -668,8 +664,7 @@ namespace System.ServiceModel.Dispatcher
             // We can only match atomized navigators
             if (!this.dom.atomize)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperCritical(
                         new QueryProcessingException(
                             QueryProcessingError.NotAtomized,
@@ -882,8 +877,7 @@ namespace System.ServiceModel.Dispatcher
         public override bool MoveToId(string id)
         {
             // SOAP prohibits the inclusion of a DTD, so unique IDs cannot be defined.
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(
                     new QueryProcessingException(
                         QueryProcessingError.NotSupported,
@@ -1087,8 +1081,7 @@ namespace System.ServiceModel.Dispatcher
             // Cannot select from an unatomized navigator
             if (!this.dom.atomize)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperCritical(
                         new QueryProcessingException(
                             QueryProcessingError.NotAtomized,
@@ -1105,8 +1098,7 @@ namespace System.ServiceModel.Dispatcher
             // Cannot select from an unatomized navigator
             if (!this.dom.atomize)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperCritical(
                         new QueryProcessingException(
                             QueryProcessingError.NotAtomized,
@@ -1123,8 +1115,7 @@ namespace System.ServiceModel.Dispatcher
             // Cannot select from an unatomized navigator
             if (!this.dom.atomize)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperCritical(
                         new QueryProcessingException(
                             QueryProcessingError.NotAtomized,
@@ -1145,8 +1136,7 @@ namespace System.ServiceModel.Dispatcher
             // Cannot select from an unatomized navigator
             if (!this.dom.atomize)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperCritical(
                         new QueryProcessingException(
                             QueryProcessingError.NotAtomized,
@@ -1163,8 +1153,7 @@ namespace System.ServiceModel.Dispatcher
             // Cannot select from an unatomized navigator
             if (!this.dom.atomize)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperCritical(
                         new QueryProcessingException(
                             QueryProcessingError.NotAtomized,
@@ -1181,8 +1170,7 @@ namespace System.ServiceModel.Dispatcher
             // Cannot select from an unatomized navigator
             if (!this.dom.atomize)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperCritical(
                         new QueryProcessingException(
                             QueryProcessingError.NotAtomized,
@@ -1199,8 +1187,7 @@ namespace System.ServiceModel.Dispatcher
             // Cannot select from an unatomized navigator
             if (!this.dom.atomize)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperCritical(
                         new QueryProcessingException(
                             QueryProcessingError.NotAtomized,
@@ -1221,8 +1208,7 @@ namespace System.ServiceModel.Dispatcher
             // Cannot select from an unatomized navigator
             if (!this.dom.atomize)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperCritical(
                         new QueryProcessingException(
                             QueryProcessingError.NotAtomized,
@@ -1431,8 +1417,7 @@ namespace System.ServiceModel.Dispatcher
         {
             if (!IsValidPosition(elem, parent))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new QueryProcessingException(
                             QueryProcessingError.InvalidNavigatorPosition,
@@ -1619,8 +1604,7 @@ namespace System.ServiceModel.Dispatcher
                 }
             }
 
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(
                     new QueryProcessingException(
                         QueryProcessingError.InvalidNavigatorPosition,
@@ -1990,8 +1974,7 @@ namespace System.ServiceModel.Dispatcher
                     else
                     {
                         // Throw an exception if we try to navigate into the body.
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new NavigatorInvalidBodyAccessException(
                                     SR.GetString(SR.SeekableMessageNavBodyForbidden)
@@ -2007,8 +1990,7 @@ namespace System.ServiceModel.Dispatcher
             else if (elem == this.bodyIndex && !this.includeBody)
             {
                 // Throw an exception if we try to navigate into the body.
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new NavigatorInvalidBodyAccessException(
                             SR.GetString(SR.SeekableMessageNavBodyForbidden)
@@ -2077,8 +2059,7 @@ namespace System.ServiceModel.Dispatcher
                         || String.CompareOrdinal(name, XmlnsP) == 0
                     )
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new QueryProcessingException(
                                     QueryProcessingError.InvalidNamespacePrefix,
@@ -2293,8 +2274,7 @@ namespace System.ServiceModel.Dispatcher
             }
             else
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new XPathNavigatorException(
                             SR.GetString(SR.FilterNodeQuotaExceeded, this.counter.nodeCountMax)

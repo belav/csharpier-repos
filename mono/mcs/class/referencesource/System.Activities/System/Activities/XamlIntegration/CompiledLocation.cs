@@ -168,9 +168,8 @@ namespace System.Activities.XamlIntegration
                 this.locationReferences = new List<LocationReference>(value.Count);
                 foreach (Tuple<string, Type> reference in value)
                 {
-                    this.locationReferences.Add(
-                        new CompiledLocationReference(reference.Item1, reference.Item2)
-                    );
+                    this.locationReferences
+                        .Add(new CompiledLocationReference(reference.Item1, reference.Item2));
                 }
             }
         }
@@ -279,8 +278,7 @@ namespace System.Activities.XamlIntegration
                     return compiledExpressionRoot;
                 }
             }
-            throw FxTrace
-                .Exception
+            throw FxTrace.Exception
                 .AsError(
                     new InvalidOperationException(
                         SR.UnableToLocateCompiledLocationContext(this.expressionText)
@@ -356,8 +354,7 @@ namespace System.Activities.XamlIntegration
                 // We should never hit this, these references are strictly for preserving location names/types
                 // through persistence to allow for revalidation on the other side
                 // Actual execution occurs through the locations that were stored separately
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new InvalidOperationException(SR.CompiledLocationReferenceGetLocation)
                     );

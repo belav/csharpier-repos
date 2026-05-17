@@ -1170,8 +1170,7 @@ namespace System.Net.Cache
                 s = cc[HttpKnownHeaderNames.ContentRange];
                 if (
                     s == null
-                    || !Rfc2616
-                        .Common
+                    || !Rfc2616.Common
                         .GetBytesRange(s, ref startRange, ref end, ref totalLength, false)
                 )
                 {
@@ -1547,8 +1546,7 @@ namespace System.Net.Cache
                         {
                             // We cannot use optimized code path due to IA-64 memory alligment problems see VSWhidbey 118967
                             if (
-                                Rfc2616
-                                    .Common
+                                Rfc2616.Common
                                     .UnsafeAsciiLettersNoCaseEqual(sp, i, len, "proxy-revalidate")
                             )
                             {
@@ -1686,8 +1684,7 @@ namespace System.Net.Cache
                                 i += 7;
                             }
                             else if (
-                                Rfc2616
-                                    .Common
+                                Rfc2616.Common
                                     .UnsafeAsciiLettersNoCaseEqual(sp, i, len, "must-revalidate")
                             )
                             {

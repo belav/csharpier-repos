@@ -62,8 +62,7 @@ namespace System.Linq.Expressions.Interpreter
                 bool includeDebugCookies = false
             )
             {
-                return InstructionList
-                    .DebugView
+                return InstructionList.DebugView
                     .GetInstructionViews(
                         _array.Instructions,
                         _array.Objects,

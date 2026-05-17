@@ -36,8 +36,7 @@ namespace System.Net.Http
                 // instead.
                 IDictionary<string, object> environment;
                 if (
-                    request
-                        .Properties
+                    request.Properties
                         .TryGetValue<IDictionary<string, object>>(
                             OwinEnvironmentKey,
                             out environment

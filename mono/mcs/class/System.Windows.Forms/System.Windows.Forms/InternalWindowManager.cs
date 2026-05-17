@@ -1229,8 +1229,7 @@ namespace System.Windows.Forms
                     {
                         button.Entered = true;
                         if (
-                            ThemeEngine
-                                .Current
+                            ThemeEngine.Current
                                 .ManagedWindowTitleButtonHasHotElementStyle(button, form)
                         )
                             any_change = true;
@@ -1247,8 +1246,7 @@ namespace System.Windows.Forms
                     {
                         button.Entered = false;
                         if (
-                            ThemeEngine
-                                .Current
+                            ThemeEngine.Current
                                 .ManagedWindowTitleButtonHasHotElementStyle(button, form)
                         )
                             any_change = true;

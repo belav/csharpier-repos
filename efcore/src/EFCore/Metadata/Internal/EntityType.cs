@@ -449,8 +449,7 @@ public class EntityType : TypeBase, IMutableEntityType, IConventionEntityType, I
         newBaseType?.UpdateConfigurationSource(configurationSource);
 
         return (EntityType?)
-            Model
-                .ConventionDispatcher
+            Model.ConventionDispatcher
                 .OnEntityTypeBaseTypeChanged(Builder, newBaseType, originalBaseType);
     }
 
@@ -527,8 +526,7 @@ public class EntityType : TypeBase, IMutableEntityType, IConventionEntityType, I
         IConventionAnnotation? annotation,
         IConventionAnnotation? oldAnnotation
     ) =>
-        Model
-            .ConventionDispatcher
+        Model.ConventionDispatcher
             .OnEntityTypeAnnotationChanged(Builder, name, annotation, oldAnnotation);
 
     /// <summary>
@@ -1301,8 +1299,7 @@ public class EntityType : TypeBase, IMutableEntityType, IConventionEntityType, I
         foreach (var fk in FindDeclaredForeignKeys(properties))
         {
             if (
-                PropertyListComparer
-                    .Instance
+                PropertyListComparer.Instance
                     .Equals(fk.PrincipalKey.Properties, principalKey.Properties)
                 && fk.PrincipalEntityType == principalEntityType
             )
@@ -1450,8 +1447,7 @@ public class EntityType : TypeBase, IMutableEntityType, IConventionEntityType, I
         if (foreignKey.DependentToPrincipal != null)
         {
             foreignKey.DependentToPrincipal.SetRemovedFromModel();
-            Model
-                .ConventionDispatcher
+            Model.ConventionDispatcher
                 .OnNavigationRemoved(
                     Builder,
                     foreignKey.PrincipalEntityType.Builder,
@@ -1463,8 +1459,7 @@ public class EntityType : TypeBase, IMutableEntityType, IConventionEntityType, I
         if (foreignKey.PrincipalToDependent != null)
         {
             foreignKey.PrincipalToDependent.SetRemovedFromModel();
-            Model
-                .ConventionDispatcher
+            Model.ConventionDispatcher
                 .OnNavigationRemoved(
                     foreignKey.PrincipalEntityType.Builder,
                     Builder,
@@ -1997,8 +1992,7 @@ public class EntityType : TypeBase, IMutableEntityType, IConventionEntityType, I
             || foreignKey.ReferencingSkipNavigations!.Remove(navigation);
         Check.DebugAssert(removed, "removed is false");
 
-        removed = navigation
-            .TargetEntityType
+        removed = navigation.TargetEntityType
             .DeclaredReferencingSkipNavigations!
             .Remove(navigation);
         Check.DebugAssert(removed, "removed is false");
@@ -5114,15 +5108,13 @@ public class EntityType : TypeBase, IMutableEntityType, IConventionEntityType, I
                     baseType = EntityType.Model.FindActualEntityType(baseType);
                 }
 
-                entityTypeBuilder
-                    .Metadata
+                entityTypeBuilder.Metadata
                     .SetBaseType(baseType, EntityType._baseTypeConfigurationSource.Value);
             }
 
             if (EntityType._isKeylessConfigurationSource != null)
             {
-                entityTypeBuilder
-                    .Metadata
+                entityTypeBuilder.Metadata
                     .SetIsKeyless(
                         EntityType.IsKeyless,
                         EntityType._isKeylessConfigurationSource.Value
@@ -5131,8 +5123,7 @@ public class EntityType : TypeBase, IMutableEntityType, IConventionEntityType, I
 
             if (EntityType.GetChangeTrackingStrategyConfigurationSource() != null)
             {
-                entityTypeBuilder
-                    .Metadata
+                entityTypeBuilder.Metadata
                     .SetChangeTrackingStrategy(
                         EntityType.GetChangeTrackingStrategy(),
                         EntityType.GetChangeTrackingStrategyConfigurationSource()!.Value
@@ -5164,8 +5155,7 @@ public class EntityType : TypeBase, IMutableEntityType, IConventionEntityType, I
 
             if (EntityType._constructorBindingConfigurationSource != null)
             {
-                entityTypeBuilder
-                    .Metadata
+                entityTypeBuilder.Metadata
                     .SetConstructorBinding(
                         Create(EntityType.ConstructorBinding, entityTypeBuilder.Metadata),
                         EntityType._constructorBindingConfigurationSource.Value
@@ -5174,8 +5164,7 @@ public class EntityType : TypeBase, IMutableEntityType, IConventionEntityType, I
 
             if (EntityType._serviceOnlyConstructorBindingConfigurationSource != null)
             {
-                entityTypeBuilder
-                    .Metadata
+                entityTypeBuilder.Metadata
                     .SetServiceOnlyConstructorBinding(
                         Create(
                             EntityType.ServiceOnlyConstructorBinding,
@@ -5197,8 +5186,7 @@ public class EntityType : TypeBase, IMutableEntityType, IConventionEntityType, I
             EntityType entityType
         ) =>
             instantiationBinding?.With(
-                instantiationBinding
-                    .ParameterBindings
+                instantiationBinding.ParameterBindings
                     .Select(binding => Create(binding, entityType))
                     .ToList()
             );
@@ -5208,8 +5196,7 @@ public class EntityType : TypeBase, IMutableEntityType, IConventionEntityType, I
             EntityType entityType
         ) =>
             parameterBinding.With(
-                parameterBinding
-                    .ConsumedProperties
+                parameterBinding.ConsumedProperties
                     .Select(property =>
                         (
                             entityType.FindProperty(property.Name)

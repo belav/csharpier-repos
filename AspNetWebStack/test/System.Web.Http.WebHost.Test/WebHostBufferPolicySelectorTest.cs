@@ -127,8 +127,7 @@ namespace System.Web.Http.WebHost
             selector.UseBufferedOutputStream(response);
 
             IEnumerable<string> contentLengthEnumerable;
-            bool isContentLengthInHeaders = content
-                .Headers
+            bool isContentLengthInHeaders = content.Headers
                 .TryGetValues("Content-Length", out contentLengthEnumerable);
             string[] contentLengthStrings = isContentLengthInHeaders
                 ? contentLengthEnumerable.ToArray()

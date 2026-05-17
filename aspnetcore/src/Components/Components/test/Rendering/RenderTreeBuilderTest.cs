@@ -2244,8 +2244,7 @@ public class RenderTreeBuilderTest
             {
                 AssertFrame.Component<TestComponent>(frame, 3, 0);
                 Assert.True(
-                    frame
-                        .ComponentFrameFlags
+                    frame.ComponentFrameFlags
                         .HasFlag(ComponentFrameFlags.HasCallerSpecifiedRenderMode)
                 );
             },
@@ -2291,8 +2290,7 @@ public class RenderTreeBuilderTest
             {
                 AssertFrame.Component<TestComponent>(frame, 2, 0);
                 Assert.False(
-                    frame
-                        .ComponentFrameFlags
+                    frame.ComponentFrameFlags
                         .HasFlag(ComponentFrameFlags.HasCallerSpecifiedRenderMode)
                 );
             },

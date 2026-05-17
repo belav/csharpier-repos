@@ -400,14 +400,12 @@ public abstract class ManagementTests<TStartup, TContext>
         string claimType
     )
     {
-        var expectedPrincipalClaim = expectedPrincipal
-            .Identities
+        var expectedPrincipalClaim = expectedPrincipal.Identities
             .Single()
             .Claims
             .Single(c => c.Type == claimType)
             .Value;
-        var actualPrincipalClaim = actualPrincipal
-            .Identities
+        var actualPrincipalClaim = actualPrincipal.Identities
             .Single()
             .Claims
             .Single(c => c.Type == claimType)
@@ -421,14 +419,12 @@ public abstract class ManagementTests<TStartup, TContext>
         string claimType
     )
     {
-        var expectedPrincipalClaim = expectedPrincipal
-            .Identities
+        var expectedPrincipalClaim = expectedPrincipal.Identities
             .Single()
             .Claims
             .Single(c => c.Type == claimType)
             .Value;
-        var actualPrincipalClaim = actualPrincipal
-            .Identities
+        var actualPrincipalClaim = actualPrincipal.Identities
             .Single()
             .Claims
             .Single(c => c.Type == claimType)

@@ -36,8 +36,7 @@ namespace Internal.Cryptography.Pal.Windows
             {
                 byte[] encodedContent;
                 if (
-                    contentInfo
-                        .ContentType
+                    contentInfo.ContentType
                         .Value!
                         .Equals(Oids.Pkcs7Data, StringComparison.OrdinalIgnoreCase)
                 )
@@ -64,8 +63,7 @@ namespace Internal.Cryptography.Pal.Windows
                         try
                         {
                             if (
-                                !Interop
-                                    .Crypt32
+                                !Interop.Crypt32
                                     .CryptMsgUpdate(
                                         hCryptMsg,
                                         encodedContent,
@@ -163,8 +161,7 @@ namespace Internal.Cryptography.Pal.Windows
                                 unprotectedAttributes,
                                 hb
                             );
-                        SafeCryptMsgHandle hCryptMsg = Interop
-                            .Crypt32
+                        SafeCryptMsgHandle hCryptMsg = Interop.Crypt32
                             .CryptMsgOpenToEncode(
                                 MsgEncodingType.All,
                                 0,
@@ -344,8 +341,7 @@ namespace Internal.Cryptography.Pal.Windows
                 // (The use of SafeCertContextHandle here is about using a consistent pattern to get the CERT_CONTEXT (rather than the ugly (CERT_CONTEXT*)(recipient.Certificate.Handle) pattern.)
                 // It's not about keeping the context alive.)
                 using (
-                    SafeCertContextHandle hCertContext = recipient
-                        .Certificate
+                    SafeCertContextHandle hCertContext = recipient.Certificate
                         .CreateCertContextHandle()
                 )
                 {
@@ -477,8 +473,7 @@ namespace Internal.Cryptography.Pal.Windows
                 // "recipient" is a deep-cloned CmsRecipient object whose lifetime this class controls. Because of this, we can pull out the CERT_CONTEXT* and CERT_INFO* pointers without
                 // bringing in all the SafeCertContextHandle machinery, and embed pointers to them in the memory block we return. Yes, this code is scary.
                 using (
-                    SafeCertContextHandle hCertContext = recipient
-                        .Certificate
+                    SafeCertContextHandle hCertContext = recipient.Certificate
                         .CreateCertContextHandle()
                 )
                 {

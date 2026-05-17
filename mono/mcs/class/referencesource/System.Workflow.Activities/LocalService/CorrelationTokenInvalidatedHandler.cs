@@ -50,9 +50,8 @@ namespace System.Workflow.Activities
             ActivityExecutionContext context = sender as ActivityExecutionContext;
             Activity activity = context.Activity;
 
-            ICollection<CorrelationProperty> correlationValues = dataChangeEventArgs
-                .CorrelationToken
-                .Properties;
+            ICollection<CorrelationProperty> correlationValues =
+                dataChangeEventArgs.CorrelationToken.Properties;
             if (dataChangeEventArgs.IsInitializing)
             {
                 CreateSubscription(this.instanceId, context, correlationValues);
@@ -73,8 +72,7 @@ namespace System.Workflow.Activities
                 }
             }
 
-            dataChangeEventArgs
-                .CorrelationToken
+            dataChangeEventArgs.CorrelationToken
                 .UnsubscribeFromCorrelationTokenInitializedEvent(activity, this);
         }
         #endregion
@@ -95,8 +93,7 @@ namespace System.Workflow.Activities
             WorkflowQueue workflowQueue = null;
             if (!queueSvcs.Exists(queueId))
             {
-                WorkflowActivityTrace
-                    .Activity
+                WorkflowActivityTrace.Activity
                     .TraceEvent(
                         TraceEventType.Information,
                         0,
@@ -164,8 +161,7 @@ namespace System.Workflow.Activities
             if (subscriptionService != null)
                 subscriptionService.DeleteSubscription(this.subscriptionId);
 
-            WorkflowActivityTrace
-                .Activity
+            WorkflowActivityTrace.Activity
                 .TraceEvent(
                     TraceEventType.Information,
                     0,

@@ -138,12 +138,10 @@ public class HtmlHelperTextAreaTest
         helper.ViewData.TemplateInfo.HtmlFieldPrefix = "pre";
 
         helper.ViewData.ModelState.SetModelValue("pre.Property3[key]", "MProp3Val", "MProp3Val");
-        helper
-            .ViewData
+        helper.ViewData
             .ModelState
             .SetModelValue("pre.Property4.Property5", "MProp5Val", "MProp5Val");
-        helper
-            .ViewData
+        helper.ViewData
             .ModelState
             .SetModelValue("pre.Property4.Property6[0]", "MProp6Val", "MProp6Val");
 

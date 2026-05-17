@@ -26,8 +26,7 @@ namespace System.Web.Razor.Generator
 
             Contract.Assert(paddingCharCount > 0);
 
-            context
-                .GeneratedClass
+            context.GeneratedClass
                 .Members
                 .Add(
                     new CodeSnippetTypeMember(paddedCode)

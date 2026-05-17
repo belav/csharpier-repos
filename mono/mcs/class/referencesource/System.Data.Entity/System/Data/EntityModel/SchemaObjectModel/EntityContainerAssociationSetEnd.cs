@@ -149,8 +149,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
                 AddError(
                     ErrorCode.FailedInference,
                     EdmSchemaErrorSeverity.Error,
-                    System
-                        .Data
+                    System.Data
                         .Entity
                         .Strings
                         .InferRelationshipEndFailedNoEntitySetMatch(
@@ -168,8 +167,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
                 AddError(
                     ErrorCode.FailedInference,
                     EdmSchemaErrorSeverity.Error,
-                    System
-                        .Data
+                    System.Data
                         .Entity
                         .Strings
                         .InferRelationshipEndAmbiguous(

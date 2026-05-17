@@ -70,8 +70,7 @@ namespace System.IdentityModel
         {
             if (this.count != 1)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentOutOfRangeException("count", SR.GetString(SR.ValueMustBeOne))
                     );
@@ -79,8 +78,7 @@ namespace System.IdentityModel
 
             if (index != 0)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentOutOfRangeException("index", SR.GetString(SR.ValueMustBeZero))
                     );

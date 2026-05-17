@@ -68,8 +68,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
             _vsHierarchyItemManager = vsHierarchyItemManager;
             _listener = listenerProvider.GetListener(FeatureAttribute.DiagnosticService);
             _globalOptions = globalOptions;
-            _codeAnalysisService = workspace
-                .Services
+            _codeAnalysisService = workspace.Services
                 .GetRequiredService<ICodeAnalysisDiagnosticAnalyzerService>();
         }
 
@@ -89,8 +88,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
                 .ConfigureAwait(false);
             if (menuCommandService != null)
             {
-                await _threadingContext
-                    .JoinableTaskFactory
+                await _threadingContext.JoinableTaskFactory
                     .SwitchToMainThreadAsync(cancellationToken);
                 VisualStudioCommandHandlerHelpers.AddCommand(
                     menuCommandService,
@@ -160,8 +158,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
             }
 
             // Analyzers are only supported for C# and VB currently.
-            var projectsWithHierarchy = currentSolution
-                .Projects
+            var projectsWithHierarchy = currentSolution.Projects
                 .Where(p => p.Language is LanguageNames.CSharp or LanguageNames.VisualBasic)
                 .Where(p => _workspace.GetHierarchy(p.Id) == hierarchy);
 
@@ -266,8 +263,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
 
             // The command is checked if RoslynPackage is loaded and the analysis scope for this command matches the
             // value saved for the solution.
-            var roslynPackage = _threadingContext
-                .JoinableTaskFactory
+            var roslynPackage = _threadingContext.JoinableTaskFactory
                 .Run(() =>
                 {
                     return RoslynPackage
@@ -320,11 +316,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
                     LanguageNames.VisualBasic
                 );
 
-                var containsCSharpProject = solution
-                    .Projects
+                var containsCSharpProject = solution.Projects
                     .Any(static project => project.Language == LanguageNames.CSharp);
-                var containsVisualBasicProject = solution
-                    .Projects
+                var containsVisualBasicProject = solution.Projects
                     .Any(static project => project.Language == LanguageNames.VisualBasic);
                 if (containsCSharpProject && containsVisualBasicProject)
                 {
@@ -374,8 +368,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
                 return;
             }
 
-            var roslynPackage = _threadingContext
-                .JoinableTaskFactory
+            var roslynPackage = _threadingContext.JoinableTaskFactory
                 .Run(() =>
                 {
                     return RoslynPackage
@@ -459,8 +452,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
             ImmutableArray<Project> otherProjectsForMultiTfmProject;
             if (project != null)
             {
-                otherProjectsForMultiTfmProject = solution
-                    .Projects
+                otherProjectsForMultiTfmProject = solution.Projects
                     .Where(p =>
                         p != project
                         && p.FilePath == project.FilePath
@@ -476,8 +468,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
             }
 
             // Force complete analyzer execution in background.
-            _threadingContext
-                .JoinableTaskFactory
+            _threadingContext.JoinableTaskFactory
                 .RunAsync(async () =>
                 {
                     using var asyncToken = _listener.BeginAsyncOperation(
@@ -531,8 +522,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
         {
             if (hierarchy != null)
             {
-                var projectMap = _workspace
-                    .Services
+                var projectMap = _workspace.Services
                     .GetRequiredService<IHierarchyItemToProjectIdMap>();
                 var projectHierarchyItem = _vsHierarchyItemManager.GetHierarchyItem(
                     hierarchy,
@@ -638,8 +628,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
 
             private void UpdateStatusCore()
             {
-                _threadingContext
-                    .JoinableTaskFactory
+                _threadingContext.JoinableTaskFactory
                     .RunAsync(async () =>
                     {
                         await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync();

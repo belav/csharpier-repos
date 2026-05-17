@@ -57,8 +57,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Interactive
         )
         {
             if (
-                !window
-                    .Properties
+                !window.Properties
                     .TryGetProperty(typeof(IContentType), out IContentType contentType)
             )
             {

@@ -38,8 +38,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
 
         // We set conversion items' match priority to "Deprioritize" so completion selects other symbols over it when user starts typing.
         // e.g. method symbol `Should` should be selected over `(short)` when "sh" is typed.
-        private static readonly CompletionItemRules s_conversionRules = CompletionItemRules
-            .Default
+        private static readonly CompletionItemRules s_conversionRules = CompletionItemRules.Default
             .WithMatchPriority(MatchPriority.Deprioritize);
 
         private static void AddConversion(
@@ -51,8 +50,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
         {
             var (symbols, properties) = GetConversionSymbolsAndProperties(context, conversion);
 
-            var targetTypeName = conversion
-                .ReturnType
+            var targetTypeName = conversion.ReturnType
                 .ToMinimalDisplayString(semanticModel, position);
             context.AddItem(
                 SymbolCompletionItem.CreateWithSymbolId(

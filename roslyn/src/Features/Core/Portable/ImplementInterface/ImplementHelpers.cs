@@ -57,8 +57,7 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
             {
                 using var _2 = ArrayBuilder<IParameterSymbol>.GetInstance(out var result);
 
-                var primaryConstructor = namedType
-                    .InstanceConstructors
+                var primaryConstructor = namedType.InstanceConstructors
                     .FirstOrDefault(c =>
                         c.Parameters.Length > 0
                         && c.Parameters[0].IsPrimaryConstructor(cancellationToken)

@@ -557,8 +557,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
         private byte GetNullableAttributeValue()
         {
             if (
-                ((PEModuleSymbol)this.ContainingModule)
-                    .Module
+                ((PEModuleSymbol)this.ContainingModule).Module
                     .HasNullableAttribute(_handle, out byte value, out _)
             )
             {

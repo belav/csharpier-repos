@@ -118,8 +118,7 @@ public abstract class RelationalDatabaseCreator : IRelationalDatabaseCreator
     ///     to incrementally update the schema. It is assumed that none of the tables exist in the database.
     /// </summary>
     public virtual void CreateTables() =>
-        Dependencies
-            .MigrationCommandExecutor
+        Dependencies.MigrationCommandExecutor
             .ExecuteNonQuery(GetCreateTablesCommands(), Dependencies.Connection);
 
     /// <summary>
@@ -132,8 +131,7 @@ public abstract class RelationalDatabaseCreator : IRelationalDatabaseCreator
     /// </returns>
     /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
     public virtual Task CreateTablesAsync(CancellationToken cancellationToken = default) =>
-        Dependencies
-            .MigrationCommandExecutor
+        Dependencies.MigrationCommandExecutor
             .ExecuteNonQueryAsync(
                 GetCreateTablesCommands(),
                 Dependencies.Connection,
@@ -150,8 +148,7 @@ public abstract class RelationalDatabaseCreator : IRelationalDatabaseCreator
     )
     {
         var model = Dependencies.CurrentContext.Context.GetService<IDesignTimeModel>().Model;
-        return Dependencies
-            .MigrationsSqlGenerator
+        return Dependencies.MigrationsSqlGenerator
             .Generate(
                 Dependencies.ModelDiffer.GetDifferences(null, model.GetRelationalModel()),
                 model,

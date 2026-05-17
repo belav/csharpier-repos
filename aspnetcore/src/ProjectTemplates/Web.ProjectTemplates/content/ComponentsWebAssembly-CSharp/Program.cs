@@ -6,15 +6,13 @@ var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
 builder.RootComponents.Add<HeadOutlet>("head::after");
 
-builder
-    .Services
+builder.Services
     .AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 #if(!NoAuth)
 
 #endif
 #if (IndividualLocalAuth)
-builder
-    .Services
+builder.Services
     .AddOidcAuthentication(options =>
     {
 #if(MissingAuthority)
@@ -25,16 +23,14 @@ builder
     });
 #endif
 #if (IndividualB2CAuth)
-builder
-    .Services
+builder.Services
     .AddMsalAuthentication(options =>
     {
         builder.Configuration.Bind("AzureAdB2C", options.ProviderOptions.Authentication);
     });
 #endif
 #if(OrganizationalAuth)
-builder
-    .Services
+builder.Services
     .AddMsalAuthentication(options =>
     {
         builder.Configuration.Bind("AzureAd", options.ProviderOptions.Authentication);

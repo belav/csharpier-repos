@@ -487,8 +487,7 @@ namespace System.Linq.Expressions.Tests
         public static void CompileWorksWhenDynamicCodeNotSupported()
         {
             RemoteInvokeOptions options = new RemoteInvokeOptions();
-            options
-                .RuntimeConfigurationOptions
+            options.RuntimeConfigurationOptions
                 .Add(
                     "System.Runtime.CompilerServices.RuntimeFeature.IsDynamicCodeSupported",
                     false.ToString()

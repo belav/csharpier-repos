@@ -264,8 +264,7 @@ namespace System.Web.UI.MobileControls.Adapters
             if ((labelID < 0) || (labelID >= LabelIDs.Length))
             {
                 throw new ArgumentException(
-                    System
-                        .Web
+                    System.Web
                         .Mobile
                         .SR
                         .GetString(System.Web.Mobile.SR.ControlAdapter_InvalidDefaultLabel)

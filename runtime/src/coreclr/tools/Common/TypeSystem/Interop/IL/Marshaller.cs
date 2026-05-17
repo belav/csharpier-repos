@@ -1741,8 +1741,7 @@ namespace Internal.TypeSystem.Interop
         private ILLocalVariable? _marshallerInstance;
 
         private MetadataType Marshaller =>
-            Context
-                .SystemModule
+            Context.SystemModule
                 .GetKnownType("System.Runtime.InteropServices.Marshalling", "Utf8StringMarshaller");
 
         private MetadataType MarshallerIn => Marshaller.GetNestedType("ManagedToUnmanagedIn");
@@ -1788,8 +1787,7 @@ namespace Internal.TypeSystem.Interop
                 codeStream.EmitLdLoc(vBuffer);
                 codeStream.EmitLdc(LocalBufferLength);
 
-                var spanOfByte = Context
-                    .SystemModule
+                var spanOfByte = Context.SystemModule
                     .GetKnownType("System", "Span`1")
                     .MakeInstantiatedType(
                         new TypeDesc[] { Context.GetWellKnownType(WellKnownType.Byte) }
@@ -2101,8 +2099,7 @@ namespace Internal.TypeSystem.Interop
 
             codeStream.Emit(
                 ILOpcode.call,
-                _ilCodeStreams
-                    .Emitter
+                _ilCodeStreams.Emitter
                     .NewToken(
                         InteropTypes
                             .GetMarshal(Context)
@@ -2141,8 +2138,7 @@ namespace Internal.TypeSystem.Interop
 
             codeStream.Emit(
                 ILOpcode.call,
-                _ilCodeStreams
-                    .Emitter
+                _ilCodeStreams.Emitter
                     .NewToken(
                         InteropTypes
                             .GetMarshal(Context)
@@ -2183,8 +2179,7 @@ namespace Internal.TypeSystem.Interop
                 LoadManagedValue(codeStream);
                 codeStream.Emit(
                     ILOpcode.call,
-                    _ilCodeStreams
-                        .Emitter
+                    _ilCodeStreams.Emitter
                         .NewToken(InteropTypes.GetGC(Context).GetKnownMethod("KeepAlive", null))
                 );
             }

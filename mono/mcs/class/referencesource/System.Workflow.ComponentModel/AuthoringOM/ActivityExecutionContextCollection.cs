@@ -214,8 +214,7 @@ namespace System.Workflow.ComponentModel
 
             // make sure that this is in the active contexts collections
             ActivityExecutionContextInfo childContextInfo =
-                childContext
-                    .Activity
+                childContext.Activity
                     .ContextActivity
                     .GetValue(Activity.ActivityExecutionContextInfoProperty)
                 as ActivityExecutionContextInfo;
@@ -281,12 +280,10 @@ namespace System.Workflow.ComponentModel
                     != ActivityExecutionResult.Uninitialized
             )
             {
-                childContext
-                    .Activity
+                childContext.Activity
                     .ContextActivity
                     .Uninitialize(this.ownerContext.Activity.RootActivity.WorkflowCoreRuntime);
-                childContext
-                    .Activity
+                childContext.Activity
                     .ContextActivity
                     .SetValue(
                         Activity.ExecutionResultProperty,
@@ -489,8 +486,7 @@ namespace System.Workflow.ComponentModel
             // return the new context
             ActivityExecutionContext revokedContext = new ActivityExecutionContext(revokedActivity);
             this.executionContexts.Add(revokedContext);
-            System
-                .Workflow
+            System.Workflow
                 .Runtime
                 .WorkflowTrace
                 .Runtime

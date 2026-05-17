@@ -130,8 +130,7 @@ namespace System.ServiceModel.Discovery
             };
 
             var resolvePart = new XmlSchemaSequence();
-            resolvePart
-                .Items
+            resolvePart.Items
                 .Add(
                     new XmlSchemaElement()
                     {
@@ -139,8 +138,7 @@ namespace System.ServiceModel.Discovery
                         MinOccurs = 0,
                     }
                 );
-            resolvePart
-                .Items
+            resolvePart.Items
                 .Add(
                     new XmlSchemaAny()
                     {

@@ -390,8 +390,7 @@ namespace System.Data
             {
                 onRowEvent.Parameters.Add(ParameterDecl(typeof(DataRowChangeEventArgs), "e"));
                 onRowEvent.Statements.Add(MethodCall(Base(), "OnRow" + eventName, Argument("e")));
-                onRowEvent
-                    .Statements
+                onRowEvent.Statements
                     .Add(
                         If(
                             IdNotEQ(Event(rowClassName + eventName), Primitive(null)),
@@ -426,29 +425,23 @@ namespace System.Data
             //dataTableClass.Attributes |= TypeAttributes.NestedPrivate;
 
             dataTableClass.CustomAttributes.Add(AttributeDecl("System.Serializable"));
-            dataTableClass
-                .CustomAttributes
+            dataTableClass.CustomAttributes
                 .Add(AttributeDecl("System.Diagnostics.DebuggerStepThrough"));
 
             for (int i = 0; i < table.Columns.Count; i++)
             {
                 //\\ DataColumn column<ColumnName>;
-                dataTableClass
-                    .Members
+                dataTableClass.Members
                     .Add(FieldDecl(typeof(DataColumn), TableColumnFieldName(table.Columns[i])));
             }
 
-            dataTableClass
-                .Members
+            dataTableClass.Members
                 .Add(EventDecl(stRowClassName + "ChangeEventHandler", stRowClassName + "Changed"));
-            dataTableClass
-                .Members
+            dataTableClass.Members
                 .Add(EventDecl(stRowClassName + "ChangeEventHandler", stRowClassName + "Changing"));
-            dataTableClass
-                .Members
+            dataTableClass.Members
                 .Add(EventDecl(stRowClassName + "ChangeEventHandler", stRowClassName + "Deleted"));
-            dataTableClass
-                .Members
+            dataTableClass.Members
                 .Add(EventDecl(stRowClassName + "ChangeEventHandler", stRowClassName + "Deleting"));
 
             //\\ internal <TableName>DataTableClass() : base("<TableName>") {
@@ -467,24 +460,21 @@ namespace System.Data
             constructor = new CodeConstructor();
             {
                 constructor.Attributes = MemberAttributes.Family;
-                constructor
-                    .Parameters
+                constructor.Parameters
                     .Add(
                         ParameterDecl(
                             typeof(System.Runtime.Serialization.SerializationInfo),
                             "info"
                         )
                     );
-                constructor
-                    .Parameters
+                constructor.Parameters
                     .Add(
                         ParameterDecl(
                             typeof(System.Runtime.Serialization.StreamingContext),
                             "context"
                         )
                     );
-                constructor
-                    .BaseConstructorArgs
+                constructor.BaseConstructorArgs
                     .AddRange(new CodeExpression[] { Argument("info"), Argument("context") });
                 constructor.Statements.Add(MethodCall(This(), "InitVars"));
             }
@@ -506,8 +496,7 @@ namespace System.Data
                 constructor.Attributes = MemberAttributes.Assembly | MemberAttributes.Final;
                 constructor.Parameters.Add(ParameterDecl(typeof(DataTable), "table"));
                 constructor.BaseConstructorArgs.Add(Property(Argument("table"), "TableName"));
-                constructor
-                    .Statements
+                constructor.Statements
                     .Add(
                         If(
                             IdNotEQ(
@@ -520,8 +509,7 @@ namespace System.Data
                             )
                         )
                     );
-                constructor
-                    .Statements
+                constructor.Statements
                     .Add(
                         If(
                             IdNotEQ(
@@ -537,8 +525,7 @@ namespace System.Data
                             )
                         )
                     );
-                constructor
-                    .Statements
+                constructor.Statements
                     .Add(
                         If(
                             IdNotEQ(
@@ -551,19 +538,16 @@ namespace System.Data
                             )
                         )
                     );
-                constructor
-                    .Statements
+                constructor.Statements
                     .Add(Assign(Property(This(), "Prefix"), Property(Argument("table"), "Prefix")));
-                constructor
-                    .Statements
+                constructor.Statements
                     .Add(
                         Assign(
                             Property(This(), "MinimumCapacity"),
                             Property(Argument("table"), "MinimumCapacity")
                         )
                     );
-                constructor
-                    .Statements
+                constructor.Statements
                     .Add(
                         Assign(
                             Property(This(), "DisplayExpression"),
@@ -582,8 +566,7 @@ namespace System.Data
                 MemberAttributes.Public | MemberAttributes.Final
             );
             {
-                countProp
-                    .CustomAttributes
+                countProp.CustomAttributes
                     .Add(AttributeDecl("System.ComponentModel.Browsable", Primitive(false)));
                 countProp.GetStatements.Add(Return(Property(Property(This(), "Rows"), "Count")));
             }
@@ -616,8 +599,7 @@ namespace System.Data
             );
             {
                 thisIndex.Parameters.Add(ParameterDecl(typeof(Int32), "index"));
-                thisIndex
-                    .GetStatements
+                thisIndex.GetStatements
                     .Add(
                         Return(
                             Cast(
@@ -639,8 +621,7 @@ namespace System.Data
             );
             {
                 addMethod.Parameters.Add(ParameterDecl(stRowConcreateClassName, "row"));
-                addMethod
-                    .Statements
+                addMethod.Statements
                     .Add(MethodCall(Property(This(), "Rows"), "Add", Argument("row")));
             }
             dataTableClass.Members.Add(addMethod);
@@ -679,14 +660,12 @@ namespace System.Data
                         string argumentName = FixIdName(
                             "parent" + ParentTypedRowName + "By" + relation.RelationName
                         );
-                        addByColName
-                            .Parameters
+                        addByColName.Parameters
                             .Add(ParameterDecl(ParentTypedRowName, argumentName));
                     }
                     else
                     {
-                        addByColName
-                            .Parameters
+                        addByColName.Parameters
                             .Add(
                                 ParameterDecl(
                                     GetTypeName(DataType),
@@ -695,8 +674,7 @@ namespace System.Data
                             );
                     }
                 }
-                addByColName
-                    .Statements
+                addByColName.Statements
                     .Add(
                         VariableDecl(
                             stRowConcreateClassName,
@@ -730,8 +708,7 @@ namespace System.Data
                                 string argumentName = FixIdName(
                                     "parent" + ParentTypedRowName + "By" + relation.RelationName
                                 );
-                                newArray
-                                    .Initializers
+                                newArray.Initializers
                                     .Add(
                                         Indexer(
                                             Argument(argumentName),
@@ -741,8 +718,7 @@ namespace System.Data
                             }
                             else
                             {
-                                newArray
-                                    .Initializers
+                                newArray.Initializers
                                     .Add(Argument(RowColumnPropertyName(index[i])));
                             }
                         }
@@ -797,8 +773,7 @@ namespace System.Data
                 {
                     for (int i = 0; i < index.Length; i++)
                     {
-                        findBy
-                            .Parameters
+                        findBy.Parameters
                             .Add(
                                 ParameterDecl(
                                     GetTypeName(index[i].DataType),
@@ -815,8 +790,7 @@ namespace System.Data
                     {
                         arrayCreate.Initializers.Add(Argument(RowColumnPropertyName(index[i])));
                     }
-                    findBy
-                        .Statements
+                    findBy.Statements
                         .Add(
                             Return(
                                 Cast(
@@ -839,8 +813,7 @@ namespace System.Data
             );
             {
                 getEnumerator.ImplementationTypes.Add(Type("System.Collections.IEnumerable"));
-                getEnumerator
-                    .Statements
+                getEnumerator.Statements
                     .Add(Return(MethodCall(Property(This(), "Rows"), "GetEnumerator")));
             }
             dataTableClass.Members.Add(getEnumerator);
@@ -856,8 +829,7 @@ namespace System.Data
                 MemberAttributes.Public | MemberAttributes.Override
             );
             {
-                clone
-                    .Statements
+                clone.Statements
                     .Add(
                         VariableDecl(
                             stTblClassName,
@@ -868,8 +840,7 @@ namespace System.Data
                             )
                         )
                     );
-                clone
-                    .Statements
+                clone.Statements
                     .Add(MethodCall(Variable("cln"), "InitVars", new CodeExpression[] { }));
                 clone.Statements.Add(Return(Variable("cln")));
             }
@@ -884,8 +855,7 @@ namespace System.Data
                 MemberAttributes.Family | MemberAttributes.Override
             );
             {
-                createInstance
-                    .Statements
+                createInstance.Statements
                     .Add(Return(New(stTblClassName, new CodeExpression[] { })));
             }
             dataTableClass.Members.Add(createInstance);
@@ -912,8 +882,7 @@ namespace System.Data
                         CodeExpression codeField = Field(This(), ColumnName);
 
                         //\\ this.column<ColumnName> = new DataColumn("<ColumnName>", typeof(<ColumnType>), "", MappingType.Hidden);
-                        tableInitClass
-                            .Statements
+                        tableInitClass.Statements
                             .Add(
                                 Assign(
                                     codeField,
@@ -943,8 +912,7 @@ namespace System.Data
                                 )
                             );
                         //\\ this.Columns.Add(this.column<ColumnName>);
-                        tableInitClass
-                            .Statements
+                        tableInitClass.Statements
                             .Add(
                                 MethodCall(
                                     Property(This(), "Columns"),
@@ -970,8 +938,7 @@ namespace System.Data
                                 createArgs[j] = Field(This(), TableColumnFieldName(columns[j]));
                             }
                         }
-                        tableInitClass
-                            .Statements
+                        tableInitClass.Statements
                             .Add(
                                 MethodCall(
                                     Property(This(), "Constraints"),
@@ -1000,8 +967,7 @@ namespace System.Data
                         CodeExpression codeField = Field(This(), ColumnName);
 
                         //\\ this.column<ColumnName> = this.Columns["<ColumnName>"];
-                        tableInitVars
-                            .Statements
+                        tableInitVars.Statements
                             .Add(
                                 Assign(
                                     codeField,
@@ -1012,15 +978,13 @@ namespace System.Data
                         if (column.AutoIncrement)
                         {
                             //\\ this.column<ColumnName>.AutoIncrement = true;
-                            tableInitClass
-                                .Statements
+                            tableInitClass.Statements
                                 .Add(Assign(Property(codeField, "AutoIncrement"), Primitive(true)));
                         }
                         if (column.AutoIncrementSeed != 0)
                         {
                             //\\ this.column<ColumnName>.AutoIncrementSeed = <column.AutoIncrementSeed>;
-                            tableInitClass
-                                .Statements
+                            tableInitClass.Statements
                                 .Add(
                                     Assign(
                                         Property(codeField, "AutoIncrementSeed"),
@@ -1031,8 +995,7 @@ namespace System.Data
                         if (column.AutoIncrementStep != 1)
                         {
                             //\\ this.column<ColumnName>.AutoIncrementStep = <column.AutoIncrementStep>;
-                            tableInitClass
-                                .Statements
+                            tableInitClass.Statements
                                 .Add(
                                     Assign(
                                         Property(codeField, "AutoIncrementStep"),
@@ -1043,37 +1006,32 @@ namespace System.Data
                         if (!column.AllowDBNull)
                         {
                             //\\ this.column<ColumnName>.AllowDBNull = false;
-                            tableInitClass
-                                .Statements
+                            tableInitClass.Statements
                                 .Add(Assign(Property(codeField, "AllowDBNull"), Primitive(false)));
                         }
                         if (column.ReadOnly)
                         {
                             //\\ this.column<ColumnName>.ReadOnly = true;
-                            tableInitClass
-                                .Statements
+                            tableInitClass.Statements
                                 .Add(Assign(Property(codeField, "ReadOnly"), Primitive(true)));
                         }
                         if (column.Unique)
                         {
                             //\\ this.column<ColumnName>.Unique = true;
-                            tableInitClass
-                                .Statements
+                            tableInitClass.Statements
                                 .Add(Assign(Property(codeField, "Unique"), Primitive(true)));
                         }
 
                         if (!Common.ADP.IsEmpty(column.Prefix))
                         {
                             //\\ this.column<ColumnName>.Prefix = "<column.Prefix>";
-                            tableInitClass
-                                .Statements
+                            tableInitClass.Statements
                                 .Add(Assign(Property(codeField, "Prefix"), Str(column.Prefix)));
                         }
                         if (column._columnUri != null)
                         {
                             //\\ this.column<ColumnName>.Namespace = "<column.Namespace>";
-                            tableInitClass
-                                .Statements
+                            tableInitClass.Statements
                                 .Add(
                                     Assign(Property(codeField, "Namespace"), Str(column.Namespace))
                                 );
@@ -1081,15 +1039,13 @@ namespace System.Data
                         if (column.Caption != column.ColumnName)
                         {
                             //\\ this.column<ColumnName>.Caption = "<column.Caption>";
-                            tableInitClass
-                                .Statements
+                            tableInitClass.Statements
                                 .Add(Assign(Property(codeField, "Caption"), Str(column.Caption)));
                         }
                         if (column.DefaultValue != DBNull.Value)
                         {
                             //\\ this.column<ColumnName>.DefaultValue = "<column.DefaultValue>";
-                            tableInitClass
-                                .Statements
+                            tableInitClass.Statements
                                 .Add(
                                     Assign(
                                         Property(codeField, "DefaultValue"),
@@ -1100,8 +1056,7 @@ namespace System.Data
                         if (column.MaxLength != -1)
                         {
                             //\\ this.column<ColumnName>.MaxLength = "<column.MaxLength>";
-                            tableInitClass
-                                .Statements
+                            tableInitClass.Statements
                                 .Add(
                                     Assign(
                                         Property(codeField, "MaxLength"),
@@ -1114,8 +1069,7 @@ namespace System.Data
                     if (table.ShouldSerializeCaseSensitive())
                     {
                         //\\ this.CaseSensitive = <CaseSensitive>;
-                        tableInitClass
-                            .Statements
+                        tableInitClass.Statements
                             .Add(
                                 Assign(
                                     Property(This(), "CaseSensitive"),
@@ -1126,8 +1080,7 @@ namespace System.Data
                     if (table.ShouldSerializeLocale())
                     {
                         //\\ this.Locale = new System.Globalization.CultureInfo("<Locale>");
-                        tableInitClass
-                            .Statements
+                        tableInitClass.Statements
                             .Add(
                                 Assign(
                                     Property(This(), "Locale"),
@@ -1141,23 +1094,20 @@ namespace System.Data
                     if (!Common.ADP.IsEmpty(table.Prefix))
                     {
                         //\\ this.Prefix = "<Prefix>";
-                        tableInitClass
-                            .Statements
+                        tableInitClass.Statements
                             .Add(Assign(Property(This(), "Prefix"), Str(table.Prefix)));
                     }
                     if (table._tableNamespace != null)
                     {
                         //\\ this.Namespace = <Namespace>;
-                        tableInitClass
-                            .Statements
+                        tableInitClass.Statements
                             .Add(Assign(Property(This(), "Namespace"), Str(table.Namespace)));
                     }
 
                     if (table.MinimumCapacity != 50)
                     {
                         //\\ this.MinimumCapacity = <MinimumCapacity>;
-                        tableInitClass
-                            .Statements
+                        tableInitClass.Statements
                             .Add(
                                 Assign(
                                     Property(This(), "MinimumCapacity"),
@@ -1168,8 +1118,7 @@ namespace System.Data
                     if (table._displayExpression != null)
                     {
                         //\\ this.DisplayExpression = "<DisplayExpression>";
-                        tableInitClass
-                            .Statements
+                        tableInitClass.Statements
                             .Add(
                                 Assign(
                                     Property(This(), "DisplayExpression"),
@@ -1191,8 +1140,7 @@ namespace System.Data
                 MemberAttributes.Public | MemberAttributes.Final
             );
             {
-                newTableRow
-                    .Statements
+                newTableRow.Statements
                     .Add(Return(Cast(stRowConcreateClassName, MethodCall(This(), "NewRow"))));
             }
             dataTableClass.Members.Add(newTableRow);
@@ -1207,8 +1155,7 @@ namespace System.Data
             );
             {
                 newRowFromBuilder.Parameters.Add(ParameterDecl(typeof(DataRowBuilder), "builder"));
-                newRowFromBuilder
-                    .Statements
+                newRowFromBuilder.Statements
                     .Add(
                         Return(
                             New(
@@ -1248,8 +1195,7 @@ namespace System.Data
             );
             {
                 removeMethod.Parameters.Add(ParameterDecl(stRowConcreateClassName, "row"));
-                removeMethod
-                    .Statements
+                removeMethod.Statements
                     .Add(MethodCall(Property(This(), "Rows"), "Remove", Argument("row")));
             }
             dataTableClass.Members.Add(removeMethod);
@@ -1286,8 +1232,7 @@ namespace System.Data
                 constructor.Attributes = MemberAttributes.Assembly | MemberAttributes.Final;
                 constructor.Parameters.Add(ParameterDecl(typeof(DataRowBuilder), "rb"));
                 constructor.BaseConstructorArgs.Add(Argument("rb"));
-                constructor
-                    .Statements
+                constructor.Statements
                     .Add(
                         Assign(
                             Field(This(), stTblFieldName),
@@ -1400,10 +1345,8 @@ namespace System.Data
                                         );
                                         //\\ private static <ColumnType> <ColumnName>_nullValue = new <ColumnType>();
                                         /* check that object can be constructed with parameterless constructor */{
-                                            System.Reflection.ConstructorInfo ctor =
-                                                col.DataType.GetConstructor(
-                                                    new Type[] { typeof(string) }
-                                                );
+                                            System.Reflection.ConstructorInfo ctor = col.DataType
+                                                .GetConstructor(new Type[] { typeof(string) });
                                             if (ctor == null)
                                             {
                                                 errorList.Add(
@@ -1480,9 +1423,10 @@ namespace System.Data
                                         {
                                             /* check that type can be constructed from this string */{
                                                 System.Reflection.ConstructorInfo ctor =
-                                                    col.DataType.GetConstructor(
-                                                        new Type[] { typeof(string) }
-                                                    );
+                                                    col.DataType
+                                                        .GetConstructor(
+                                                            new Type[] { typeof(string) }
+                                                        );
                                                 if (ctor == null)
                                                 {
                                                     errorList.Add(
@@ -1524,8 +1468,7 @@ namespace System.Data
                             }
                         }
                         rowProp.GetStatements.Add(getStmnt);
-                        rowProp
-                            .SetStatements
+                        rowProp.SetStatements
                             .Add(
                                 Assign(
                                     Indexer(
@@ -1549,8 +1492,7 @@ namespace System.Data
                             MemberAttributes.Public | MemberAttributes.Final
                         );
                         {
-                            isNull
-                                .Statements
+                            isNull.Statements
                                 .Add(
                                     Return(
                                         MethodCall(
@@ -1572,8 +1514,7 @@ namespace System.Data
                             MemberAttributes.Public | MemberAttributes.Final
                         );
                         {
-                            setNull
-                                .Statements
+                            setNull.Statements
                                 .Add(
                                     Assign(
                                         Indexer(
@@ -1604,8 +1545,7 @@ namespace System.Data
                     MemberAttributes.Public | MemberAttributes.Final
                 );
                 {
-                    childArray
-                        .Statements
+                    childArray.Statements
                         .Add(
                             Return(
                                 Cast(
@@ -1645,8 +1585,7 @@ namespace System.Data
                     MemberAttributes.Public | MemberAttributes.Final
                 );
                 {
-                    anotherProp
-                        .GetStatements
+                    anotherProp.GetStatements
                         .Add(
                             Return(
                                 Cast(
@@ -1662,8 +1601,7 @@ namespace System.Data
                                 )
                             )
                         );
-                    anotherProp
-                        .SetStatements
+                    anotherProp.SetStatements
                         .Add(
                             MethodCall(
                                 This(),
@@ -1711,8 +1649,7 @@ namespace System.Data
                 constructor.Parameters.Add(ParameterDecl(stRowConcreateClassName, "row"));
                 constructor.Parameters.Add(ParameterDecl(typeof(DataRowAction), "action"));
                 constructor.Statements.Add(Assign(Field(This(), "eventRow"), Argument("row")));
-                constructor
-                    .Statements
+                constructor.Statements
                     .Add(Assign(Field(This(), "eventAction"), Argument("action")));
             }
             rowClass.Members.Add(constructor);
@@ -1766,33 +1703,27 @@ namespace System.Data
             CodeTypeDeclaration dataSetClass = new CodeTypeDeclaration(stDataSetClassName);
             dataSetClass.BaseTypes.Add(typeof(DataSet));
             dataSetClass.CustomAttributes.Add(AttributeDecl("System.Serializable"));
-            dataSetClass
-                .CustomAttributes
+            dataSetClass.CustomAttributes
                 .Add(AttributeDecl("System.ComponentModel.DesignerCategoryAttribute", Str("code")));
-            dataSetClass
-                .CustomAttributes
+            dataSetClass.CustomAttributes
                 .Add(AttributeDecl("System.Diagnostics.DebuggerStepThrough"));
-            dataSetClass
-                .CustomAttributes
+            dataSetClass.CustomAttributes
                 .Add(AttributeDecl("System.ComponentModel.ToolboxItem", Primitive(true)));
-            dataSetClass
-                .CustomAttributes
+            dataSetClass.CustomAttributes
                 .Add(
                     AttributeDecl(
                         typeof(XmlSchemaProviderAttribute).FullName,
                         Primitive("GetTypedDataSetSchema")
                     )
                 );
-            dataSetClass
-                .CustomAttributes
+            dataSetClass.CustomAttributes
                 .Add(
                     AttributeDecl(typeof(XmlRootAttribute).FullName, Primitive(stDataSetClassName))
                 );
 
             for (int i = 0; i < dataSet.Tables.Count; i++)
             {
-                dataSetClass
-                    .Members
+                dataSetClass.Members
                     .Add(
                         FieldDecl(
                             TableClassName(dataSet.Tables[i]),
@@ -1804,8 +1735,7 @@ namespace System.Data
             for (int i = 0; i < dataSet.Relations.Count; i++)
             {
                 //\\ DataRelation relation<RelationName>;
-                dataSetClass
-                    .Members
+                dataSetClass.Members
                     .Add(FieldDecl(typeof(DataRelation), RelationFieldName(dataSet.Relations[i])));
             }
 
@@ -1814,8 +1744,7 @@ namespace System.Data
                 constructor.Attributes = MemberAttributes.Public;
                 constructor.Statements.Add(MethodCall(This(), "BeginInit"));
                 constructor.Statements.Add(MethodCall(This(), "InitClass"));
-                constructor
-                    .Statements
+                constructor.Statements
                     .Add(
                         VariableDecl(
                             typeof(CollectionChangeEventHandler),
@@ -1827,8 +1756,7 @@ namespace System.Data
                             )
                         )
                     );
-                constructor
-                    .Statements
+                constructor.Statements
                     .Add(
                         new System.CodeDom.CodeAttachEventStatement(
                             new CodeEventReferenceExpression(
@@ -1838,8 +1766,7 @@ namespace System.Data
                             Variable("schemaChangedHandler")
                         )
                     );
-                constructor
-                    .Statements
+                constructor.Statements
                     .Add(
                         new System.CodeDom.CodeAttachEventStatement(
                             new CodeEventReferenceExpression(
@@ -1856,28 +1783,24 @@ namespace System.Data
             constructor = new CodeConstructor();
             {
                 constructor.Attributes = MemberAttributes.Family;
-                constructor
-                    .Parameters
+                constructor.Parameters
                     .Add(
                         ParameterDecl(
                             typeof(System.Runtime.Serialization.SerializationInfo),
                             "info"
                         )
                     );
-                constructor
-                    .Parameters
+                constructor.Parameters
                     .Add(
                         ParameterDecl(
                             typeof(System.Runtime.Serialization.StreamingContext),
                             "context"
                         )
                     );
-                constructor
-                    .BaseConstructorArgs
+                constructor.BaseConstructorArgs
                     .AddRange(new CodeExpression[] { Argument("info"), Argument("context") });
 
-                constructor
-                    .Statements
+                constructor.Statements
                     .Add(
                         If(
                             EQ(
@@ -1919,8 +1842,7 @@ namespace System.Data
                         )
                     );
 
-                constructor
-                    .Statements
+                constructor.Statements
                     .Add(
                         VariableDecl(
                             typeof(String),
@@ -2041,8 +1963,7 @@ namespace System.Data
                 schemaBody.Add(Stm(MethodCall(This(), "InitVars")));
                 CodeStatement[] schemaBodyArray = new CodeStatement[schemaBody.Count];
                 schemaBody.CopyTo(schemaBodyArray);
-                constructor
-                    .Statements
+                constructor.Statements
                     .Add(
                         If(
                             IdNotEQ(Variable("strSchema"), Primitive(null)),
@@ -2055,8 +1976,7 @@ namespace System.Data
                             }
                         )
                     );
-                constructor
-                    .Statements
+                constructor.Statements
                     .Add(
                         MethodCall(
                             This(),
@@ -2064,8 +1984,7 @@ namespace System.Data
                             new CodeExpression[] { Argument("info"), Argument("context") }
                         )
                     );
-                constructor
-                    .Statements
+                constructor.Statements
                     .Add(
                         VariableDecl(
                             typeof(CollectionChangeEventHandler),
@@ -2077,8 +1996,7 @@ namespace System.Data
                             )
                         )
                     );
-                constructor
-                    .Statements
+                constructor.Statements
                     .Add(
                         new System.CodeDom.CodeAttachEventStatement(
                             new CodeEventReferenceExpression(
@@ -2088,8 +2006,7 @@ namespace System.Data
                             Variable("schemaChangedHandler")
                         )
                     );
-                constructor
-                    .Statements
+                constructor.Statements
                     .Add(
                         new System.CodeDom.CodeAttachEventStatement(
                             new CodeEventReferenceExpression(
@@ -2113,8 +2030,7 @@ namespace System.Data
                 MemberAttributes.Public | MemberAttributes.Override
             );
             {
-                clone
-                    .Statements
+                clone.Statements
                     .Add(
                         VariableDecl(
                             stDataSetClassName,
@@ -2125,8 +2041,7 @@ namespace System.Data
                             )
                         )
                     );
-                clone
-                    .Statements
+                clone.Statements
                     .Add(MethodCall(Variable("cln"), "InitVars", new CodeExpression[] { }));
                 clone.Statements.Add(Return(Variable("cln")));
             }
@@ -2139,8 +2054,7 @@ namespace System.Data
                 MemberAttributes.Assembly | MemberAttributes.Final
             );
             {
-                initDataSetVarsMethod
-                    .Statements
+                initDataSetVarsMethod.Statements
                     .Add(MethodCall(This(), "InitVars", new CodeExpression[] { Primitive(true) }));
             }
             dataSetClass.Members.Add(initDataSetVarsMethod);
@@ -2162,20 +2076,16 @@ namespace System.Data
                     initVarsMethod.Parameters.Add(ParameterDecl(typeof(Boolean), "initTable"));
 
                     //\\ this.DataSetName = "<dataSet.DataSetName>"
-                    initClassMethod
-                        .Statements
+                    initClassMethod.Statements
                         .Add(Assign(Property(This(), "DataSetName"), Str(dataSet.DataSetName)));
                     //\\ this.Prefix   = "<dataSet.Prefix>"
-                    initClassMethod
-                        .Statements
+                    initClassMethod.Statements
                         .Add(Assign(Property(This(), "Prefix"), Str(dataSet.Prefix)));
                     //\\ this.Namespace   = "<dataSet.Namespace>"
-                    initClassMethod
-                        .Statements
+                    initClassMethod.Statements
                         .Add(Assign(Property(This(), "Namespace"), Str(dataSet.Namespace)));
                     //\\ this.Locale = new System.Globalization.CultureInfo("dataSet.<Locale>");
-                    initClassMethod
-                        .Statements
+                    initClassMethod.Statements
                         .Add(
                             Assign(
                                 Property(This(), "Locale"),
@@ -2186,8 +2096,7 @@ namespace System.Data
                             )
                         );
                     //\\ this.CaseSensitive = <dataSet.CaseSensitive>;
-                    initClassMethod
-                        .Statements
+                    initClassMethod.Statements
                         .Add(
                             Assign(
                                 Property(This(), "CaseSensitive"),
@@ -2195,8 +2104,7 @@ namespace System.Data
                             )
                         );
                     //\\ this.EnforceConstraints = <dataSet.EnforceConstraints>;
-                    initClassMethod
-                        .Statements
+                    initClassMethod.Statements
                         .Add(
                             Assign(
                                 Property(This(), "EnforceConstraints"),
@@ -2211,8 +2119,7 @@ namespace System.Data
                             TableFieldName(dataSet.Tables[i])
                         );
                         //\\ table<TableFieldName> = new <TableClassName>("<TableName>");
-                        initClassMethod
-                            .Statements
+                        initClassMethod.Statements
                             .Add(
                                 Assign(
                                     fieldTable,
@@ -2220,15 +2127,13 @@ namespace System.Data
                                 )
                             );
                         //\\ this.Tables.Add(this.table<TableFieldName>);
-                        initClassMethod
-                            .Statements
+                        initClassMethod.Statements
                             .Add(MethodCall(Property(This(), "Tables"), "Add", fieldTable));
 
                         //\\ this.table<TableFieldName> = (<TableClassName>)this.Tables["<TableName>"];
                         //\\ if (this.table<TableFieldName> != null)
                         //\\    this.table<TableFieldName>.InitVars();
-                        initVarsMethod
-                            .Statements
+                        initVarsMethod.Statements
                             .Add(
                                 Assign(
                                     fieldTable,
@@ -2242,8 +2147,7 @@ namespace System.Data
                                 )
                             );
 
-                        initVarsMethod
-                            .Statements
+                        initVarsMethod.Statements
                             .Add(
                                 If(
                                     EQ(Variable("initTable"), Primitive(true)),
@@ -2312,11 +2216,9 @@ namespace System.Data
                         MemberAttributes.Static | MemberAttributes.Public
                     );
                     {
-                        getTypedDataSetSchema
-                            .Parameters
+                        getTypedDataSetSchema.Parameters
                             .Add(ParameterDecl(typeof(XmlSchemaSet), "xs"));
-                        getTypedDataSetSchema
-                            .Statements
+                        getTypedDataSetSchema.Statements
                             .Add(
                                 VariableDecl(
                                     stDataSetClassName,
@@ -2324,8 +2226,7 @@ namespace System.Data
                                     New(stDataSetClassName, new CodeExpression[] { })
                                 )
                             );
-                        getTypedDataSetSchema
-                            .Statements
+                        getTypedDataSetSchema.Statements
                             .Add(
                                 MethodCall(
                                     Argument("xs"),
@@ -2340,8 +2241,7 @@ namespace System.Data
                                     }
                                 )
                             );
-                        getTypedDataSetSchema
-                            .Statements
+                        getTypedDataSetSchema.Statements
                             .Add(
                                 VariableDecl(
                                     typeof(XmlSchemaComplexType),
@@ -2349,8 +2249,7 @@ namespace System.Data
                                     New(typeof(XmlSchemaComplexType), new CodeExpression[] { })
                                 )
                             );
-                        getTypedDataSetSchema
-                            .Statements
+                        getTypedDataSetSchema.Statements
                             .Add(
                                 VariableDecl(
                                     typeof(XmlSchemaSequence),
@@ -2358,8 +2257,7 @@ namespace System.Data
                                     New(typeof(XmlSchemaSequence), new CodeExpression[] { })
                                 )
                             );
-                        getTypedDataSetSchema
-                            .Statements
+                        getTypedDataSetSchema.Statements
                             .Add(
                                 VariableDecl(
                                     typeof(XmlSchemaAny),
@@ -2367,16 +2265,14 @@ namespace System.Data
                                     New(typeof(XmlSchemaAny), new CodeExpression[] { })
                                 )
                             );
-                        getTypedDataSetSchema
-                            .Statements
+                        getTypedDataSetSchema.Statements
                             .Add(
                                 Assign(
                                     Property(Variable("any"), "Namespace"),
                                     Property(Variable("ds"), "Namespace")
                                 )
                             );
-                        getTypedDataSetSchema
-                            .Statements
+                        getTypedDataSetSchema.Statements
                             .Add(
                                 MethodCall(
                                     Property(Variable("sequence"), "Items"),
@@ -2384,8 +2280,7 @@ namespace System.Data
                                     new CodeExpression[] { Variable("any") }
                                 )
                             );
-                        getTypedDataSetSchema
-                            .Statements
+                        getTypedDataSetSchema.Statements
                             .Add(
                                 Assign(Property(Variable("type"), "Particle"), Variable("sequence"))
                             );
@@ -2402,14 +2297,11 @@ namespace System.Data
                         MemberAttributes.Family | MemberAttributes.Override
                     );
                     {
-                        readXmlSerializable
-                            .Parameters
+                        readXmlSerializable.Parameters
                             .Add(ParameterDecl(typeof(System.Xml.XmlReader), "reader"));
-                        readXmlSerializable
-                            .Statements
+                        readXmlSerializable.Statements
                             .Add(MethodCall(This(), "Reset", new CodeExpression[] { }));
-                        readXmlSerializable
-                            .Statements
+                        readXmlSerializable.Statements
                             .Add(
                                 VariableDecl(
                                     typeof(DataSet),
@@ -2417,8 +2309,7 @@ namespace System.Data
                                     New(typeof(DataSet), new CodeExpression[] { })
                                 )
                             );
-                        readXmlSerializable
-                            .Statements
+                        readXmlSerializable.Statements
                             .Add(
                                 MethodCall(
                                     Variable("ds"),
@@ -2430,8 +2321,7 @@ namespace System.Data
                         for (int i = 0; i < dataSet.Tables.Count; i++)
                         {
                             //\\ this.Tables.Add(new <TableClassName>("<TableName>"));
-                            readXmlSerializable
-                                .Statements
+                            readXmlSerializable.Statements
                                 .Add(
                                     If(
                                         IdNotEQ(
@@ -2460,56 +2350,49 @@ namespace System.Data
                                     )
                                 );
                         }
-                        readXmlSerializable
-                            .Statements
+                        readXmlSerializable.Statements
                             .Add(
                                 Assign(
                                     Property(This(), "DataSetName"),
                                     Property(Variable("ds"), "DataSetName")
                                 )
                             );
-                        readXmlSerializable
-                            .Statements
+                        readXmlSerializable.Statements
                             .Add(
                                 Assign(
                                     Property(This(), "Prefix"),
                                     Property(Variable("ds"), "Prefix")
                                 )
                             );
-                        readXmlSerializable
-                            .Statements
+                        readXmlSerializable.Statements
                             .Add(
                                 Assign(
                                     Property(This(), "Namespace"),
                                     Property(Variable("ds"), "Namespace")
                                 )
                             );
-                        readXmlSerializable
-                            .Statements
+                        readXmlSerializable.Statements
                             .Add(
                                 Assign(
                                     Property(This(), "Locale"),
                                     Property(Variable("ds"), "Locale")
                                 )
                             );
-                        readXmlSerializable
-                            .Statements
+                        readXmlSerializable.Statements
                             .Add(
                                 Assign(
                                     Property(This(), "CaseSensitive"),
                                     Property(Variable("ds"), "CaseSensitive")
                                 )
                             );
-                        readXmlSerializable
-                            .Statements
+                        readXmlSerializable.Statements
                             .Add(
                                 Assign(
                                     Property(This(), "EnforceConstraints"),
                                     Property(Variable("ds"), "EnforceConstraints")
                                 )
                             );
-                        readXmlSerializable
-                            .Statements
+                        readXmlSerializable.Statements
                             .Add(
                                 MethodCall(
                                     This(),
@@ -2539,8 +2422,7 @@ namespace System.Data
                         MemberAttributes.Family | MemberAttributes.Override
                     );
                     {
-                        getSchemaSerializable
-                            .Statements
+                        getSchemaSerializable.Statements
                             .Add(
                                 VariableDecl(
                                     typeof(System.IO.MemoryStream),
@@ -2548,8 +2430,7 @@ namespace System.Data
                                     New(typeof(System.IO.MemoryStream), new CodeExpression[] { })
                                 )
                             );
-                        getSchemaSerializable
-                            .Statements
+                        getSchemaSerializable.Statements
                             .Add(
                                 MethodCall(
                                     This(),
@@ -2560,11 +2441,9 @@ namespace System.Data
                                     )
                                 )
                             );
-                        getSchemaSerializable
-                            .Statements
+                        getSchemaSerializable.Statements
                             .Add(Assign(Property(Argument("stream"), "Position"), Primitive(0)));
-                        getSchemaSerializable
-                            .Statements
+                        getSchemaSerializable.Statements
                             .Add(
                                 Return(
                                     MethodCall(
@@ -2610,8 +2489,7 @@ namespace System.Data
                                 {
                                     foreach (DataColumn c in fkc.Columns)
                                     {
-                                        childrenColumns
-                                            .Initializers
+                                        childrenColumns.Initializers
                                             .Add(
                                                 Property(
                                                     Field(This(), TableFieldName(c.Table)),
@@ -2626,8 +2504,7 @@ namespace System.Data
                                 {
                                     foreach (DataColumn c in fkc.RelatedColumnsReference)
                                     {
-                                        parentColumns
-                                            .Initializers
+                                        parentColumns.Initializers
                                             .Add(
                                                 Property(
                                                     Field(This(), TableFieldName(c.Table)),
@@ -2639,14 +2516,12 @@ namespace System.Data
 
                                 if (varFkc == null)
                                 {
-                                    initClassMethod
-                                        .Statements
+                                    initClassMethod.Statements
                                         .Add(VariableDecl(typeof(ForeignKeyConstraint), "fkc"));
                                     varFkc = Variable("fkc");
                                 }
 
-                                initClassMethod
-                                    .Statements
+                                initClassMethod.Statements
                                     .Add(
                                         Assign(
                                             varFkc,
@@ -2661,8 +2536,7 @@ namespace System.Data
                                             )
                                         )
                                     );
-                                initClassMethod
-                                    .Statements
+                                initClassMethod.Statements
                                     .Add(
                                         MethodCall(
                                             Property(
@@ -2677,8 +2551,7 @@ namespace System.Data
                                 string acceptRejectRule = fkc.AcceptRejectRule.ToString();
                                 string deleteRule = fkc.DeleteRule.ToString();
                                 string updateRule = fkc.UpdateRule.ToString();
-                                initClassMethod
-                                    .Statements
+                                initClassMethod.Statements
                                     .Add(
                                         Assign(
                                             Property(varFkc, "AcceptRejectRule"),
@@ -2688,16 +2561,14 @@ namespace System.Data
                                             )
                                         )
                                     );
-                                initClassMethod
-                                    .Statements
+                                initClassMethod.Statements
                                     .Add(
                                         Assign(
                                             Property(varFkc, "DeleteRule"),
                                             Field(TypeExpr(fkc.DeleteRule.GetType()), deleteRule)
                                         )
                                     );
-                                initClassMethod
-                                    .Statements
+                                initClassMethod.Statements
                                     .Add(
                                         Assign(
                                             Property(varFkc, "UpdateRule"),
@@ -2724,8 +2595,7 @@ namespace System.Data
                             string parentTableField = TableFieldName(relation.ParentTable);
                             foreach (DataColumn column in relation.ParentColumnsReference)
                             {
-                                parentColCreate
-                                    .Initializers
+                                parentColCreate.Initializers
                                     .Add(
                                         Property(
                                             Field(This(), parentTableField),
@@ -2743,8 +2613,7 @@ namespace System.Data
                             string childTableField = TableFieldName(relation.ChildTable);
                             foreach (DataColumn column in relation.ChildColumnsReference)
                             {
-                                childColCreate
-                                    .Initializers
+                                childColCreate.Initializers
                                     .Add(
                                         Property(
                                             Field(This(), childTableField),
@@ -2754,8 +2623,7 @@ namespace System.Data
                             }
                         }
 
-                        initClassMethod
-                            .Statements
+                        initClassMethod.Statements
                             .Add(
                                 Assign(
                                     Field(This(), RelationFieldName(relation)),
@@ -2775,8 +2643,7 @@ namespace System.Data
                         if (relation.Nested)
                         {
                             //\\ this.relation<RelationName>.Nested = true;
-                            initClassMethod
-                                .Statements
+                            initClassMethod.Statements
                                 .Add(
                                     Assign(
                                         Property(
@@ -2788,8 +2655,7 @@ namespace System.Data
                                 );
                         }
                         //\\ this.Relations.Add(this.relation<RelationName>);
-                        initClassMethod
-                            .Statements
+                        initClassMethod.Statements
                             .Add(
                                 MethodCall(
                                     Property(This(), "Relations"),
@@ -2799,8 +2665,7 @@ namespace System.Data
                             );
 
                         //\\ this.relation<RelationName> = this.Relations["<RelationName>"];
-                        initVarsMethod
-                            .Statements
+                        initVarsMethod.Statements
                             .Add(
                                 Assign(
                                     Field(This(), RelationFieldName(relation)),
@@ -2825,18 +2690,17 @@ namespace System.Data
                     MemberAttributes.Public | MemberAttributes.Final
                 );
                 {
-                    prop.CustomAttributes.Add(
-                        AttributeDecl("System.ComponentModel.Browsable", Primitive(false))
-                    );
-                    prop.CustomAttributes.Add(
-                        AttributeDecl(
-                            "System.ComponentModel.DesignerSerializationVisibilityAttribute",
-                            Field(TypeExpr(typeof(DesignerSerializationVisibility)), "Content")
-                        )
-                    );
-                    prop.GetStatements.Add(
-                        Return(Field(This(), TableFieldName(dataSet.Tables[i])))
-                    );
+                    prop.CustomAttributes
+                        .Add(AttributeDecl("System.ComponentModel.Browsable", Primitive(false)));
+                    prop.CustomAttributes
+                        .Add(
+                            AttributeDecl(
+                                "System.ComponentModel.DesignerSerializationVisibilityAttribute",
+                                Field(TypeExpr(typeof(DesignerSerializationVisibility)), "Content")
+                            )
+                        );
+                    prop.GetStatements
+                        .Add(Return(Field(This(), TableFieldName(dataSet.Tables[i]))));
                 }
                 dataSetClass.Members.Add(prop);
 
@@ -2859,8 +2723,7 @@ namespace System.Data
             {
                 schemaChanged.Parameters.Add(ParameterDecl(typeof(object), "sender"));
                 schemaChanged.Parameters.Add(ParameterDecl(typeof(CollectionChangeEventArgs), "e"));
-                schemaChanged
-                    .Statements
+                schemaChanged.Statements
                     .Add(
                         If(
                             EQ(
@@ -2895,8 +2758,7 @@ namespace System.Data
                         if (column.Expression.Length > 0)
                         {
                             bInitExpressions = true;
-                            initExpressionMethod
-                                .Statements
+                            initExpressionMethod.Statements
                                 .Add(
                                     Assign(
                                         Property(codeField, "Expression"),

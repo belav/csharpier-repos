@@ -26,8 +26,7 @@ namespace Microsoft.CodeAnalysis.CodeFixes.MatchFolderAndNamespace
 
         public override Task RegisterCodeFixesAsync(CodeFixContext context)
         {
-            var service = context
-                .Document
+            var service = context.Document
                 .Project
                 .Solution
                 .Services

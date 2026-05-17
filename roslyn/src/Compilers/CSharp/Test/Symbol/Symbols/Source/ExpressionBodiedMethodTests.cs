@@ -395,8 +395,7 @@ class C : B
         System.Console.WriteLine(c.Y());
     }
 }",
-                options: TestOptions
-                    .ReleaseExe
+                options: TestOptions.ReleaseExe
                     .WithMetadataImportOptions(MetadataImportOptions.Internal)
             );
             var verifier = CompileAndVerify(
@@ -431,8 +430,7 @@ class C
         System.Console.WriteLine(c.N(""World""));
     }
 }",
-                options: TestOptions
-                    .ReleaseExe
+                options: TestOptions.ReleaseExe
                     .WithMetadataImportOptions(MetadataImportOptions.Internal)
             );
             var verifier = CompileAndVerify(

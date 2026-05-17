@@ -430,8 +430,7 @@ namespace System.Diagnostics
                 info.handleOwner = new EventLogInternal(compLogName, compMachineName);
                 // tell the event log system about it
                 info.waitHandle = new AutoResetEvent(false);
-                bool success = Interop
-                    .Advapi32
+                bool success = Interop.Advapi32
                     .NotifyChangeEventLog(
                         info.handleOwner.ReadHandle,
                         info.waitHandle.SafeWaitHandle
@@ -580,10 +579,11 @@ namespace System.Diagnostics
                             this.SynchronizingObject != null
                             && this.SynchronizingObject.InvokeRequired
                         )
-                            this.SynchronizingObject.BeginInvoke(
-                                this.onEntryWrittenHandler,
-                                new object[] { this, new EntryWrittenEventArgs(entry) }
-                            );
+                            this.SynchronizingObject
+                                .BeginInvoke(
+                                    this.onEntryWrittenHandler,
+                                    new object[] { this, new EntryWrittenEventArgs(entry) }
+                                );
                         else
                             onEntryWrittenHandler(this, new EntryWrittenEventArgs(entry));
 
@@ -687,8 +687,7 @@ namespace System.Diagnostics
 
                     if (hModule == null || hModule.IsInvalid)
                     {
-                        hModule = Interop
-                            .Kernel32
+                        hModule = Interop.Kernel32
                             .LoadLibraryExW(
                                 dllName,
                                 IntPtr.Zero,
@@ -699,8 +698,7 @@ namespace System.Diagnostics
                 }
                 else
                 {
-                    hModule = Interop
-                        .Kernel32
+                    hModule = Interop.Kernel32
                         .LoadLibraryExW(
                             dllName,
                             IntPtr.Zero,
@@ -752,8 +750,7 @@ namespace System.Diagnostics
             while (idx < entries.Length)
             {
                 byte[] buf = new byte[BUF_SIZE];
-                bool success = Interop
-                    .Advapi32
+                bool success = Interop.Advapi32
                     .ReadEventLog(
                         readHandle,
                         Interop.Advapi32.FORWARDS_READ | Interop.Advapi32.SEEK_READ,
@@ -781,8 +778,7 @@ namespace System.Diagnostics
                         {
                             buf = new byte[minBytesNeeded];
                         }
-                        success = Interop
-                            .Advapi32
+                        success = Interop.Advapi32
                             .ReadEventLog(
                                 readHandle,
                                 Interop.Advapi32.FORWARDS_READ | Interop.Advapi32.SEEK_READ,
@@ -951,8 +947,7 @@ namespace System.Diagnostics
             cache = new byte[BUF_SIZE];
             int bytesRead;
             int minBytesNeeded;
-            bool success = Interop
-                .Advapi32
+            bool success = Interop.Advapi32
                 .ReadEventLog(
                     readHandle,
                     flags,
@@ -984,8 +979,7 @@ namespace System.Diagnostics
                             cache = new byte[minBytesNeeded];
                         }
                     }
-                    success = Interop
-                        .Advapi32
+                    success = Interop.Advapi32
                         .ReadEventLog(
                             readHandle,
                             Interop.Advapi32.FORWARDS_READ | Interop.Advapi32.SEEK_READ,
@@ -1157,8 +1151,7 @@ namespace System.Diagnostics
             bytesCached = 0;
             firstCachedEntry = -1;
 
-            SafeEventLogReadHandle handle = Interop
-                .Advapi32
+            SafeEventLogReadHandle handle = Interop.Advapi32
                 .OpenEventLog(currentMachineName, logname);
             if (handle.IsInvalid)
             {
@@ -1185,8 +1178,7 @@ namespace System.Diagnostics
             if (string.IsNullOrEmpty(sourceName))
                 throw new ArgumentException(SR.NeedSourceToOpen);
 
-            SafeEventLogWriteHandle handle = Interop
-                .Advapi32
+            SafeEventLogWriteHandle handle = Interop.Advapi32
                 .RegisterEventSource(currentMachineName, sourceName);
             if (handle.IsInvalid)
             {
@@ -1575,8 +1567,7 @@ namespace System.Diagnostics
 
                 byte[] sid = null;
                 // actually report the event
-                bool success = Interop
-                    .Advapi32
+                bool success = Interop.Advapi32
                     .ReportEvent(
                         writeHandle,
                         (short)type,

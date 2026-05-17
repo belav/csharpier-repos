@@ -74,8 +74,7 @@ namespace System.Text
                     if (m_fallback != null)
                         m_fallbackBuffer = m_fallback.CreateFallbackBuffer();
                     else
-                        m_fallbackBuffer = DecoderFallback
-                            .ReplacementFallback
+                        m_fallbackBuffer = DecoderFallback.ReplacementFallback
                             .CreateFallbackBuffer();
                 }
 

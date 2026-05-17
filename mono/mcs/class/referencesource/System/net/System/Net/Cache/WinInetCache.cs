@@ -258,8 +258,7 @@ namespace System.Net.Cache
             {
                 fixed (byte* entryPtr = buffer)
                 {
-                    bool found = UnsafeNclNativeMethods
-                        .UnsafeWinInetCache
+                    bool found = UnsafeNclNativeMethods.UnsafeWinInetCache
                         .GetUrlCacheEntryInfoW(entry.Key, entryPtr, ref size);
 
                     if (found)
@@ -403,8 +402,7 @@ namespace System.Net.Cache
                 UnsafeNclNativeMethods.UnsafeWinInetCache.MAX_PATH
             );
             if (
-                UnsafeNclNativeMethods
-                    .UnsafeWinInetCache
+                UnsafeNclNativeMethods.UnsafeWinInetCache
                     .CreateUrlCacheEntryW(entry.Key, entry.OptionalLength, entry.FileExt, sb, 0)
             )
             {
@@ -446,8 +444,7 @@ namespace System.Net.Cache
                 {
                     byte* realBytesPtr = s.Length == 0 ? null : (byte*)ptr;
                     if (
-                        !UnsafeNclNativeMethods
-                            .UnsafeWinInetCache
+                        !UnsafeNclNativeMethods.UnsafeWinInetCache
                             .CommitUrlCacheEntryW(
                                 entry.Key,
                                 entry.Filename,
@@ -493,8 +490,7 @@ namespace System.Net.Cache
                     if ((attributes & Entry_FC.Headerinfo) == 0)
                     {
                         if (
-                            !UnsafeNclNativeMethods
-                                .UnsafeWinInetCache
+                            !UnsafeNclNativeMethods.UnsafeWinInetCache
                                 .SetUrlCacheEntryInfoW(newEntry.Key, bytePtr, attributes)
                         )
                         {
@@ -681,8 +677,7 @@ namespace System.Net.Cache
             {
                 --bufferCharLength;
             }
-            entry.MetaInfo = Encoding
-                .Unicode
+            entry.MetaInfo = Encoding.Unicode
                 .GetString(
                     buffer,
                     (int)bufferPtr->_OffsetHeaderInfo,

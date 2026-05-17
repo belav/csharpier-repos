@@ -1271,8 +1271,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
                 }
                 else
                 {
-                    System
-                        .Console
+                    System.Console
                         .WriteLine(
                             "Got invalid result when testing {0}: {1}[{2}]",
                             tip,
@@ -1283,8 +1282,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
             }
             catch (Exception ex)
             {
-                System
-                    .Console
+                System.Console
                     .WriteLine("Catch an unexpected exception when testing {0}: {1}", tip, ex);
             }
 
@@ -1302,8 +1300,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
             try
             {
                 dynamic dr = test(dobj);
-                System
-                    .Console
+                System.Console
                     .WriteLine(
                         "Got invalid result when testing {0}: {1}[{2}]",
                         tip,
@@ -1319,8 +1316,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
                 }
                 else
                 {
-                    System
-                        .Console
+                    System.Console
                         .WriteLine(
                             "Catch an unexpected RuntimeBinderException when testing {0}: {1}",
                             tip,
@@ -1330,8 +1326,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
             }
             catch (Exception ex)
             {
-                System
-                    .Console
+                System.Console
                     .WriteLine("Catch an unexpected exception when testing {0}: {1}", tip, ex);
             }
 

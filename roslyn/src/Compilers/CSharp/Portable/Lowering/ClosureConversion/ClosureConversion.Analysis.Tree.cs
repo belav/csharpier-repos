@@ -591,8 +591,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     if (body is null)
                     {
                         // extern closure
-                        _currentScope
-                            .NestedFunctions
+                        _currentScope.NestedFunctions
                             .Add(new NestedFunction(functionSymbol, blockSyntax: null));
                         return null;
                     }

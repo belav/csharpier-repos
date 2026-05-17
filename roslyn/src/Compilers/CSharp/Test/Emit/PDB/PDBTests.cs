@@ -69,8 +69,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.PDB
             );
 
             var result = comp.Emit(new MemoryStream(), pdbStream: new MemoryStream());
-            result
-                .Diagnostics
+            result.Diagnostics
                 .Verify(
                     // Foo.cs(1,1): error CS8055: Cannot emit debug information for a source text without encoding.
                     Diagnostic(ErrorCode.ERR_EncodinglessSyntaxTree, "class A { }")
@@ -283,8 +282,7 @@ public class C
 
             var compilation = CreateCompilation(
                 new[] { Parse(text1, @"C:\Folder1\Folder2\Test1.cs") },
-                options: TestOptions
-                    .DebugDll
+                options: TestOptions.DebugDll
                     .WithSourceReferenceResolver(SourceFileResolver.Default)
             );
 
@@ -334,8 +332,7 @@ public class C
 
             var compilation = CreateCompilation(
                 new[] { Parse(text1, @"/Folder1/Folder2/Test1.cs") },
-                options: TestOptions
-                    .DebugDll
+                options: TestOptions.DebugDll
                     .WithSourceReferenceResolver(SourceFileResolver.Default)
             );
 
@@ -396,8 +393,7 @@ public class C
                 }
             );
 
-            result
-                .Diagnostics
+            result.Diagnostics
                 .Verify(
                     // error CS0041: Unexpected error writing debug information -- 'MockSymUnmanagedWriter error message'
                     Diagnostic(ErrorCode.FTL_DebugEmitFailure)
@@ -439,8 +435,7 @@ public class C
                 }
             );
 
-            result
-                .Diagnostics
+            result.Diagnostics
                 .Verify(
                     // error CS0041: Unexpected error writing debug information -- 'The version of Windows PDB writer is older than required: '<lib name>''
                     Diagnostic(ErrorCode.FTL_DebugEmitFailure)
@@ -490,8 +485,7 @@ public class C
                 }
             );
 
-            result
-                .Diagnostics
+            result.Diagnostics
                 .Verify(
                     // error CS0041: Unexpected error writing debug information -- 'Windows PDB writer doesn't support deterministic compilation: '<lib name>''
                     Diagnostic(ErrorCode.FTL_DebugEmitFailure)
@@ -538,8 +532,7 @@ public class C
                 }
             );
 
-            result
-                .Diagnostics
+            result.Diagnostics
                 .Verify(
                     // error CS0041: Unexpected error writing debug information -- 'xxx'
                     Diagnostic(ErrorCode.FTL_DebugEmitFailure).WithArguments("xxx")
@@ -788,8 +781,7 @@ public class C
             );
 
             var peReader = new PEReader(c.EmitToArray(debugEntryPoint: f.GetPublicSymbol()));
-            int peEntryPointToken = peReader
-                .PEHeaders
+            int peEntryPointToken = peReader.PEHeaders
                 .CorHeader
                 .EntryPointTokenOrRelativeVirtualAddress;
 
@@ -820,8 +812,7 @@ public class C
             );
 
             var peReader = new PEReader(c.EmitToArray(debugEntryPoint: f.GetPublicSymbol()));
-            int peEntryPointToken = peReader
-                .PEHeaders
+            int peEntryPointToken = peReader.PEHeaders
                 .CorHeader
                 .EntryPointTokenOrRelativeVirtualAddress;
 
@@ -861,8 +852,7 @@ public class C
                 new MemoryStream(),
                 debugEntryPoint: f2.GetPublicSymbol()
             );
-            result
-                .Diagnostics
+            result.Diagnostics
                 .Verify(
                     // error CS8096: Debug entry point must be a definition of a source method in the current compilation.
                     Diagnostic(ErrorCode.ERR_DebugEntryPointNotSourceMethodDefinition)
@@ -873,8 +863,7 @@ public class C
                 new MemoryStream(),
                 debugEntryPoint: d_t_g_int.GetPublicSymbol()
             );
-            result
-                .Diagnostics
+            result.Diagnostics
                 .Verify(
                     // error CS8096: Debug entry point must be a definition of a source method in the current compilation.
                     Diagnostic(ErrorCode.ERR_DebugEntryPointNotSourceMethodDefinition)
@@ -885,8 +874,7 @@ public class C
                 new MemoryStream(),
                 debugEntryPoint: d_int_g.GetPublicSymbol()
             );
-            result
-                .Diagnostics
+            result.Diagnostics
                 .Verify(
                     // error CS8096: Debug entry point must be a definition of a source method in the current compilation.
                     Diagnostic(ErrorCode.ERR_DebugEntryPointNotSourceMethodDefinition)
@@ -897,8 +885,7 @@ public class C
                 new MemoryStream(),
                 debugEntryPoint: d_int_g_int.GetPublicSymbol()
             );
-            result
-                .Diagnostics
+            result.Diagnostics
                 .Verify(
                     // error CS8096: Debug entry point must be a definition of a source method in the current compilation.
                     Diagnostic(ErrorCode.ERR_DebugEntryPointNotSourceMethodDefinition)

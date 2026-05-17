@@ -122,8 +122,7 @@ namespace System.ServiceModel.Description
         public override Collection<ContractDescription> ImportAllContracts()
         {
             if (this.isFaulted)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(SR.GetString(SR.WsdlImporterIsFaulted))
                     );
@@ -150,8 +149,7 @@ namespace System.ServiceModel.Description
         public override ServiceEndpointCollection ImportAllEndpoints()
         {
             if (this.isFaulted)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(SR.GetString(SR.WsdlImporterIsFaulted))
                     );
@@ -176,8 +174,7 @@ namespace System.ServiceModel.Description
         public Collection<Binding> ImportAllBindings()
         {
             if (this.isFaulted)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(SR.GetString(SR.WsdlImporterIsFaulted))
                     );
@@ -204,8 +201,7 @@ namespace System.ServiceModel.Description
         public ContractDescription ImportContract(WsdlNS.PortType wsdlPortType)
         {
             if (this.isFaulted)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(SR.GetString(SR.WsdlImporterIsFaulted))
                     );
@@ -223,8 +219,7 @@ namespace System.ServiceModel.Description
         public Binding ImportBinding(WsdlNS.Binding wsdlBinding)
         {
             if (this.isFaulted)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(SR.GetString(SR.WsdlImporterIsFaulted))
                     );
@@ -238,8 +233,7 @@ namespace System.ServiceModel.Description
         public ServiceEndpoint ImportEndpoint(WsdlNS.Port wsdlPort)
         {
             if (this.isFaulted)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(SR.GetString(SR.WsdlImporterIsFaulted))
                     );
@@ -253,8 +247,7 @@ namespace System.ServiceModel.Description
         public ServiceEndpointCollection ImportEndpoints(WsdlNS.PortType wsdlPortType)
         {
             if (this.isFaulted)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(SR.GetString(SR.WsdlImporterIsFaulted))
                     );
@@ -284,8 +277,7 @@ namespace System.ServiceModel.Description
         internal ServiceEndpointCollection ImportEndpoints(ContractDescription contract)
         {
             if (this.isFaulted)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(SR.GetString(SR.WsdlImporterIsFaulted))
                     );
@@ -294,16 +286,14 @@ namespace System.ServiceModel.Description
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("contract");
 
             if (
-                !this.KnownContracts.ContainsKey(
-                    WsdlExporter.WsdlNamingHelper.GetPortTypeQName(contract)
-                )
+                !this.KnownContracts
+                    .ContainsKey(WsdlExporter.WsdlNamingHelper.GetPortTypeQName(contract))
             )
             {
                 Fx.Assert(
                     "WsdlImporter.ImportEndpoints(ContractDescription contract): !this.KnownContracts.ContainsKey(WsdlExporter.WsdlNamingHelper.GetPortTypeQName(contract))"
                 );
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentException(
                             SR.GetString(SR.WsdlImporterContractMustBeInKnownContracts)
@@ -325,8 +315,7 @@ namespace System.ServiceModel.Description
         public ServiceEndpointCollection ImportEndpoints(WsdlNS.Binding wsdlBinding)
         {
             if (this.isFaulted)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(SR.GetString(SR.WsdlImporterIsFaulted))
                     );
@@ -358,8 +347,7 @@ namespace System.ServiceModel.Description
         public ServiceEndpointCollection ImportEndpoints(WsdlNS.Service wsdlService)
         {
             if (this.isFaulted)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(SR.GetString(SR.WsdlImporterIsFaulted))
                     );
@@ -396,8 +384,7 @@ namespace System.ServiceModel.Description
         )
         {
             if (IsBlackListed(wsdlPortType))
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(CreateAlreadyFaultedException(wsdlPortType));
 
             XmlQualifiedName wsdlPortTypeQName = new XmlQualifiedName(
@@ -492,8 +479,7 @@ namespace System.ServiceModel.Description
         {
             //Check for exisiting exception
             if (IsBlackListed(wsdlBinding))
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(CreateAlreadyFaultedException(wsdlBinding));
 
             XmlQualifiedName wsdlBindingQName = new XmlQualifiedName(
@@ -573,8 +559,7 @@ namespace System.ServiceModel.Description
                         {
                             if (Fx.IsFatal(e))
                                 throw;
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
                                     WsdlImportException.Create(wsdlOperationBinding, e)
                                 );
@@ -609,8 +594,7 @@ namespace System.ServiceModel.Description
         ServiceEndpoint ImportWsdlPort(WsdlNS.Port wsdlPort, ErrorBehavior errorBehavior)
         {
             if (IsBlackListed(wsdlPort))
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(CreateAlreadyFaultedException(wsdlPort));
 
             ServiceEndpoint endpoint = null;
@@ -772,8 +756,7 @@ namespace System.ServiceModel.Description
             {
                 if (Fx.IsFatal(e))
                     throw;
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(WsdlImportException.Create(endpointContext.WsdlBinding, e));
             }
         }
@@ -836,8 +819,7 @@ namespace System.ServiceModel.Description
                 {
                     if (Fx.IsFatal(e))
                         throw;
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new ArgumentException(doc.Identifier, e));
                 }
             }
@@ -851,8 +833,7 @@ namespace System.ServiceModel.Description
             }
             catch (InvalidCastException)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new NotSupportedException(
                             SR.GetString(
@@ -908,8 +889,7 @@ namespace System.ServiceModel.Description
                         this.isFaulted = true;
                         if (Fx.IsFatal(e))
                             throw;
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(CreateBeforeImportExtensionException(extension, e));
                     }
                 }
@@ -929,8 +909,7 @@ namespace System.ServiceModel.Description
                 {
                     if (Fx.IsFatal(e))
                         throw;
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(CreateExtensionException(extension, e));
                 }
         }
@@ -947,8 +926,7 @@ namespace System.ServiceModel.Description
                 {
                     if (Fx.IsFatal(e))
                         throw;
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(CreateExtensionException(extension, e));
                 }
         }
@@ -1110,8 +1088,7 @@ namespace System.ServiceModel.Description
                         wsdlOperationBinding,
                         wsdlDocuments
                     );
-                    operation = endpointContext
-                        .ContractConversionContext
+                    operation = endpointContext.ContractConversionContext
                         .GetOperationDescription(wsdlOperation);
                 }
                 else
@@ -1165,8 +1142,7 @@ namespace System.ServiceModel.Description
 
                 if (wsdlOperationBindingName == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(
@@ -1203,8 +1179,7 @@ namespace System.ServiceModel.Description
                 else
                 {
                     //unable to find wsdloperation for wsdlOperationBinding, invalid wsdl binding
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(
@@ -1313,8 +1288,7 @@ namespace System.ServiceModel.Description
                         return operationDescription;
                 }
 
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(
@@ -1332,8 +1306,7 @@ namespace System.ServiceModel.Description
                 WsdlNS.OperationBinding wsdlOperationBinding
             )
             {
-                string wsdlOperationName = WsdlExporter
-                    .WsdlNamingHelper
+                string wsdlOperationName = WsdlExporter.WsdlNamingHelper
                     .GetWsdlOperationName(operationDescription, parentContractDescription);
 
                 if (wsdlOperationName != wsdlOperationBinding.Name)
@@ -1451,11 +1424,9 @@ namespace System.ServiceModel.Description
                 //Try to read Endpoint Address from WsdlPort
                 if (wsdlPort != null)
                 {
-                    XmlElement addressing10Element = wsdlPort
-                        .Extensions
+                    XmlElement addressing10Element = wsdlPort.Extensions
                         .Find(AddressingStrings.EndpointReference, Addressing10Strings.Namespace);
-                    XmlElement addressing200408Element = wsdlPort
-                        .Extensions
+                    XmlElement addressing200408Element = wsdlPort.Extensions
                         .Find(
                             AddressingStrings.EndpointReference,
                             Addressing200408Strings.Namespace
@@ -1582,8 +1553,7 @@ namespace System.ServiceModel.Description
                             {
                                 if (
                                     element.LocalName
-                                    == MetadataStrings
-                                        .Addressing10
+                                    == MetadataStrings.Addressing10
                                         .MetadataPolicy
                                         .NonAnonymousResponses
                                 )
@@ -1592,8 +1562,7 @@ namespace System.ServiceModel.Description
                                 }
                                 else if (
                                     element.LocalName
-                                    == MetadataStrings
-                                        .Addressing10
+                                    == MetadataStrings.Addressing10
                                         .MetadataPolicy
                                         .AnonymousResponses
                                 )
@@ -1824,8 +1793,7 @@ namespace System.ServiceModel.Description
             )
             {
                 if (policyContext == null)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgumentNull("policyContext");
 
                 XmlElement policy = PolicyConversionContext.FindAssertion(
@@ -2029,8 +1997,7 @@ namespace System.ServiceModel.Description
                                 WsdlNS.SoapBinding soapBinding = (WsdlNS.SoapBinding)
                                     wsdlBinding.Extensions.Find(typeof(WsdlNS.SoapBinding));
                                 if (soapBinding != null)
-                                    WsdlImporter
-                                        .SoapInPolicyWorkaroundHelper
+                                    WsdlImporter.SoapInPolicyWorkaroundHelper
                                         .InsertAdHocPolicy(
                                             wsdlBinding,
                                             soapBinding.Transport,
@@ -2135,9 +2102,8 @@ namespace System.ServiceModel.Description
 
         BindingElementCollection ImportPolicyFromWsdl(WsdlEndpointConversionContext endpointContext)
         {
-            PolicyAlternatives policyAlternatives = this.PolicyReader.GetPolicyAlternatives(
-                endpointContext
-            );
+            PolicyAlternatives policyAlternatives = this.PolicyReader
+                .GetPolicyAlternatives(endpointContext);
             IEnumerable<PolicyConversionContext> policyContexts =
                 GetPolicyConversionContextEnumerator(
                     endpointContext.Endpoint,
@@ -2176,8 +2142,7 @@ namespace System.ServiceModel.Description
             if (firstContext != null)
             {
 #pragma warning suppress 56506
-                firstContext
-                    .BindingElements
+                firstContext.BindingElements
                     .Insert(0, CollectUnrecognizedAssertions(firstContext, endpointContext));
                 LogImportWarning(unImportedPolicyMessage.ToString());
                 return firstContext.BindingElements;
@@ -2185,8 +2150,7 @@ namespace System.ServiceModel.Description
             // Consider: a /verbose option for svcutil...
             if (endpointContext.WsdlPort != null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         WsdlImportException.Create(
                             endpointContext.WsdlPort,
@@ -2196,8 +2160,7 @@ namespace System.ServiceModel.Description
             }
             else
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         WsdlImportException.Create(
                             endpointContext.WsdlBinding,
@@ -2788,16 +2751,18 @@ namespace System.ServiceModel.Description
             {
                 List<XmlElement> embeddedPolicies = new List<XmlElement>();
                 embeddedPolicies.AddRange(
-                    item.Extensions.FindAll(
-                        MetadataStrings.WSPolicy.Elements.Policy,
-                        MetadataStrings.WSPolicy.NamespaceUri
-                    )
+                    item.Extensions
+                        .FindAll(
+                            MetadataStrings.WSPolicy.Elements.Policy,
+                            MetadataStrings.WSPolicy.NamespaceUri
+                        )
                 );
                 embeddedPolicies.AddRange(
-                    item.Extensions.FindAll(
-                        MetadataStrings.WSPolicy.Elements.Policy,
-                        MetadataStrings.WSPolicy.NamespaceUri15
-                    )
+                    item.Extensions
+                        .FindAll(
+                            MetadataStrings.WSPolicy.Elements.Policy,
+                            MetadataStrings.WSPolicy.NamespaceUri15
+                        )
                 );
                 return embeddedPolicies;
             }
@@ -2843,16 +2808,18 @@ namespace System.ServiceModel.Description
             {
                 List<XmlElement> policyReferences = new List<XmlElement>();
                 policyReferences.AddRange(
-                    item.Extensions.FindAll(
-                        MetadataStrings.WSPolicy.Elements.PolicyReference,
-                        MetadataStrings.WSPolicy.NamespaceUri
-                    )
+                    item.Extensions
+                        .FindAll(
+                            MetadataStrings.WSPolicy.Elements.PolicyReference,
+                            MetadataStrings.WSPolicy.NamespaceUri
+                        )
                 );
                 policyReferences.AddRange(
-                    item.Extensions.FindAll(
-                        MetadataStrings.WSPolicy.Elements.PolicyReference,
-                        MetadataStrings.WSPolicy.NamespaceUri15
-                    )
+                    item.Extensions
+                        .FindAll(
+                            MetadataStrings.WSPolicy.Elements.PolicyReference,
+                            MetadataStrings.WSPolicy.NamespaceUri15
+                        )
                 );
 
                 foreach (XmlElement element in policyReferences)
@@ -2889,8 +2856,7 @@ namespace System.ServiceModel.Description
                     {
                         if (PolicyHelper.IsPolicyURIs(attribute))
                         {
-                            return attribute
-                                .Value
+                            return attribute.Value
                                 .Split((char[])null, StringSplitOptions.RemoveEmptyEntries);
                         }
                     }
@@ -2908,28 +2874,32 @@ namespace System.ServiceModel.Description
                 }
 
                 if (
-                    item.Extensions.Find(
-                        MetadataStrings.WSPolicy.Elements.PolicyReference,
-                        MetadataStrings.WSPolicy.NamespaceUri
-                    ) != null
-                    || item.Extensions.Find(
-                        MetadataStrings.WSPolicy.Elements.PolicyReference,
-                        MetadataStrings.WSPolicy.NamespaceUri15
-                    ) != null
+                    item.Extensions
+                        .Find(
+                            MetadataStrings.WSPolicy.Elements.PolicyReference,
+                            MetadataStrings.WSPolicy.NamespaceUri
+                        ) != null
+                    || item.Extensions
+                        .Find(
+                            MetadataStrings.WSPolicy.Elements.PolicyReference,
+                            MetadataStrings.WSPolicy.NamespaceUri15
+                        ) != null
                 )
                 {
                     return true;
                 }
 
                 if (
-                    item.Extensions.Find(
-                        MetadataStrings.WSPolicy.Elements.Policy,
-                        MetadataStrings.WSPolicy.NamespaceUri
-                    ) != null
-                    || item.Extensions.Find(
-                        MetadataStrings.WSPolicy.Elements.Policy,
-                        MetadataStrings.WSPolicy.NamespaceUri15
-                    ) != null
+                    item.Extensions
+                        .Find(
+                            MetadataStrings.WSPolicy.Elements.Policy,
+                            MetadataStrings.WSPolicy.NamespaceUri
+                        ) != null
+                    || item.Extensions
+                        .Find(
+                            MetadataStrings.WSPolicy.Elements.Policy,
+                            MetadataStrings.WSPolicy.NamespaceUri15
+                        ) != null
                 )
                 {
                     return true;
@@ -2947,8 +2917,7 @@ namespace System.ServiceModel.Description
                 //
                 // Create EndpointAlternatives either from wsd:binding or from CrossProduct of wsd:binding and wsdl:port policy
                 //
-                WsdlNS.ServiceDescription bindingWsdl = endpointContext
-                    .WsdlBinding
+                WsdlNS.ServiceDescription bindingWsdl = endpointContext.WsdlBinding
                     .ServiceDescription;
                 IEnumerable<IEnumerable<XmlElement>> wsdlBindingAlternatives =
                     this.GetPolicyAlternatives(endpointContext.WsdlBinding, bindingWsdl);
@@ -2998,8 +2967,7 @@ namespace System.ServiceModel.Description
                     {
                         IEnumerable<IEnumerable<XmlElement>> operationAlternatives =
                             this.GetPolicyAlternatives(wsdlOperationBinding, bindingWsdl);
-                        policyAlternatives
-                            .OperationBindingAlternatives
+                        policyAlternatives.OperationBindingAlternatives
                             .Add(operation, operationAlternatives);
 
                         foreach (MessageDescription message in operation.Messages)
@@ -3032,8 +3000,7 @@ namespace System.ServiceModel.Description
                     {
                         if (Fx.IsFatal(e))
                             throw;
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(WsdlImportException.Create(wsdlOperationBinding, e));
                     }
                 }
@@ -3059,8 +3026,7 @@ namespace System.ServiceModel.Description
                 {
                     if (Fx.IsFatal(e))
                         throw;
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(WsdlImportException.Create(wsdlMessageBinding, e));
                 }
             }
@@ -3083,8 +3049,7 @@ namespace System.ServiceModel.Description
                 {
                     if (Fx.IsFatal(e))
                         throw;
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(WsdlImportException.Create(wsdlFaultBinding, e));
                 }
             }
@@ -3094,10 +3059,8 @@ namespace System.ServiceModel.Description
                 XmlElement contextPolicyAssertion
             )
             {
-                return this.policyDictionary.ResolvePolicyReference(
-                    policyReference,
-                    contextPolicyAssertion
-                );
+                return this.policyDictionary
+                    .ResolvePolicyReference(policyReference, contextPolicyAssertion);
             }
 
             class WsdlPolicyDictionary
@@ -3261,10 +3224,8 @@ namespace System.ServiceModel.Description
 
                     Dictionary<string, XmlElement> wsdlPolicyDictionary;
                     if (
-                        !this.embeddedPolicyDictionary.TryGetValue(
-                            wsdlDocument,
-                            out wsdlPolicyDictionary
-                        )
+                        !this.embeddedPolicyDictionary
+                            .TryGetValue(wsdlDocument, out wsdlPolicyDictionary)
                     )
                     {
                         return null;

@@ -109,13 +109,11 @@ namespace DebuggerTests
                     {
                         if (options.WebServerUseCrossOriginPolicy)
                         {
-                            context
-                                .Context
+                            context.Context
                                 .Response
                                 .Headers
                                 .Add("Cross-Origin-Embedder-Policy", "require-corp");
-                            context
-                                .Context
+                            context.Context
                                 .Response
                                 .Headers
                                 .Add("Cross-Origin-Opener-Policy", "same-origin");

@@ -78,8 +78,7 @@ namespace System.ServiceModel.Configuration
                         {
                             if (throwOnFailure)
                             {
-                                throw DiagnosticUtility
-                                    .ExceptionUtility
+                                throw DiagnosticUtility.ExceptionUtility
                                     .ThrowHelperError(
                                         new IndexOutOfRangeException(
                                             SR.GetString(
@@ -126,8 +125,7 @@ namespace System.ServiceModel.Configuration
 
             if (String.IsNullOrEmpty(elementKey))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(

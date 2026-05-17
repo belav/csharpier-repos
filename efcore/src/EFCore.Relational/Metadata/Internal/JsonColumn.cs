@@ -36,8 +36,7 @@ public class JsonColumn : Column, IColumn
     /// </summary>
     protected override RelationalTypeMapping GetDefaultStoreTypeMapping() =>
         (RelationalTypeMapping)
-            Table
-                .Model
+            Table.Model
                 .Model
                 .GetModelDependencies()
                 .TypeMappingSource

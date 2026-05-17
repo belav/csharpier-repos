@@ -58,12 +58,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             // For example, 'dotnet_diagnostic.CA1000.severity = error'
             if (
                 compilation.Options.SpecificDiagnosticOptions.ContainsKey(descriptor.Id)
-                || compilation
-                    .Options
+                || compilation.Options
                     .SyntaxTreeOptionsProvider
                     ?.TryGetDiagnosticValue(tree, descriptor.Id, cancellationToken, out _) == true
-                || compilation
-                    .Options
+                || compilation.Options
                     .SyntaxTreeOptionsProvider
                     ?.TryGetGlobalDiagnosticValue(descriptor.Id, cancellationToken, out _) == true
             )
@@ -72,8 +70,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 return false;
             }
 
-            var analyzerConfigOptions = analyzerOptions
-                .AnalyzerConfigOptionsProvider
+            var analyzerConfigOptions = analyzerOptions.AnalyzerConfigOptionsProvider
                 .GetOptions(tree);
 
             // If user has explicitly configured default severity for the diagnostic category, that should be respected.

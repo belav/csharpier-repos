@@ -96,8 +96,7 @@ public abstract class CompositeKeyEndToEndTestBase<TFixture> : IClassFixture<TFi
 
         using (var context = CreateContext())
         {
-            var unicorn = context
-                .Unicorns
+            var unicorn = context.Unicorns
                 .Single(e => e.Id1 == id1 && e.Id2 == id2 && e.Id3 == id3);
 
             unicorn.Name = "Bad Hair Day";
@@ -107,8 +106,7 @@ public abstract class CompositeKeyEndToEndTestBase<TFixture> : IClassFixture<TFi
 
         using (var context = CreateContext())
         {
-            var unicorn = context
-                .Unicorns
+            var unicorn = context.Unicorns
                 .Single(e => e.Id1 == id1 && e.Id2 == id2 && e.Id3 == id3);
 
             Assert.Equal("Bad Hair Day", unicorn.Name);

@@ -236,8 +236,7 @@ namespace System.Data.Metadata.Edm
             if (!TryGetBuildManagerType(out buildManager))
             {
                 throw EntityUtil.InvalidOperation(
-                    System
-                        .Data
+                    System.Data
                         .Entity
                         .Strings
                         .UnableToFindReflectedType(BUILD_MANAGER_TYPE_NAME, AssemblyRef.SystemWeb)

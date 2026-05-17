@@ -399,9 +399,8 @@ namespace System.Data.Mapping
                         ReferentialConstraint rc = aSet.ElementType.ReferentialConstraints.Single();
 
                         EntitySet dependentSet = aSet.AssociationSetEnds[rc.ToRole.Name].EntitySet;
-                        EntitySet principalSet = aSet.AssociationSetEnds[
-                            rc.FromRole.Name
-                        ].EntitySet;
+                        EntitySet principalSet = aSet.AssociationSetEnds[rc.FromRole.Name]
+                            .EntitySet;
 
                         DbExpression qView = dependentSet.Scan();
 
@@ -465,9 +464,8 @@ namespace System.Data.Mapping
                                         EdmMember keyMember in principalSet.ElementType.KeyMembers
                                     )
                                     {
-                                        int offset = rc.FromProperties.IndexOf(
-                                            (EdmProperty)keyMember
-                                        );
+                                        int offset = rc.FromProperties
+                                            .IndexOf((EdmProperty)keyMember);
                                         keyValues.Add(e.Property(rc.ToProperties[offset]));
                                     }
                                     ends.Add(
@@ -497,8 +495,7 @@ namespace System.Data.Mapping
                 if (!generatedViews.TryGetValue(extent, out view))
                 {
                     throw EntityUtil.InvalidOperation(
-                        System
-                            .Data
+                        System.Data
                             .Entity
                             .Strings
                             .Mapping_Views_For_Extent_Not_Generated(
@@ -543,8 +540,7 @@ namespace System.Data.Mapping
                                 if (!viewContainerType.IsSubclassOf(typeof(EntityViewContainer)))
                                 {
                                     throw EntityUtil.InvalidOperation(
-                                        System
-                                            .Data
+                                        System.Data
                                             .Entity
                                             .Strings
                                             .Generated_View_Type_Super_Class(
@@ -747,8 +743,7 @@ namespace System.Data.Mapping
 
                         if (entityContainer != null)
                         {
-                            entityContainer
-                                .BaseEntitySets
+                            entityContainer.BaseEntitySets
                                 .TryGetValue(extentName, false, out extent);
                         }
                     }
@@ -756,8 +751,7 @@ namespace System.Data.Mapping
                     if (extent == null)
                     {
                         throw new MappingException(
-                            System
-                                .Data
+                            System.Data
                                 .Entity
                                 .Strings
                                 .Generated_Views_Invalid_Extent(extentFullName)

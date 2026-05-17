@@ -2608,8 +2608,7 @@ public class Program
                     source + InstrumentationHelperSource
                 )
                 .GetEmitDiagnostics(
-                    EmitOptions
-                        .Default
+                    EmitOptions.Default
                         .WithInstrumentationKinds(
                             ImmutableArray.Create(InstrumentationKind.TestCoverage)
                         )
@@ -3186,8 +3185,7 @@ class D
 
             var verifier = CompileAndVerify(
                 c,
-                emitOptions: EmitOptions
-                    .Default
+                emitOptions: EmitOptions.Default
                     .WithInstrumentationKinds(
                         ImmutableArray.Create(InstrumentationKind.TestCoverage)
                     )
@@ -3233,8 +3231,7 @@ class D
 
             var verifier = CompileAndVerify(
                 c,
-                emitOptions: EmitOptions
-                    .Default
+                emitOptions: EmitOptions.Default
                     .WithInstrumentationKinds(
                         ImmutableArray.Create(InstrumentationKind.TestCoverage)
                     )
@@ -3891,8 +3888,7 @@ static void Test()
                 expectedOutput: expectedOutput,
                 options: (options ?? TestOptions.ReleaseExe).WithDeterministic(true),
                 parseOptions: parseOptions,
-                emitOptions: EmitOptions
-                    .Default
+                emitOptions: EmitOptions.Default
                     .WithInstrumentationKinds(
                         ImmutableArray.Create(InstrumentationKind.TestCoverage)
                     ),
@@ -3921,8 +3917,7 @@ static void Test()
             return base.CompileAndVerify(
                 compilation,
                 expectedOutput: expectedOutput,
-                emitOptions: EmitOptions
-                    .Default
+                emitOptions: EmitOptions.Default
                     .WithInstrumentationKinds(
                         ImmutableArray.Create(InstrumentationKind.TestCoverage)
                     )

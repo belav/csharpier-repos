@@ -132,8 +132,7 @@ internal class UrlMatchingTree
             )
 #endif
             {
-                current
-                    .Matches
+                current.Matches
                     .Add(new InboundMatch() { Entry = entry, TemplateMatcher = matcher });
             }
 
@@ -243,8 +242,7 @@ internal class UrlMatchingTree
         }
 
         current.Matches.Add(new InboundMatch() { Entry = entry, TemplateMatcher = matcher });
-        current
-            .Matches
+        current.Matches
             .Sort(
                 (x, y) =>
                 {

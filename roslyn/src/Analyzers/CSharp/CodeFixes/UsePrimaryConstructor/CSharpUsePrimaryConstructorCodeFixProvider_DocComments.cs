@@ -189,8 +189,7 @@ internal partial class CSharpUsePrimaryConstructorCodeFixProvider : CodeFixProvi
             // then add the constructor comments.  If the type decl already had a summary tag then convert the
             // constructor's summary tag to a 'remarks' tag to keep around the info while not stomping on the
             // existing summary.
-            var constructorContents = typeStructure
-                .Content
+            var constructorContents = typeStructure.Content
                 .Any(n =>
                     n is XmlElementSyntax { StartTag.Name.LocalName.ValueText: s_summaryTagName }
                 )

@@ -565,8 +565,7 @@ namespace System.Collections.Generic
                     throw new ArgumentException(SR.Arg_ArrayPlusOffTooSmall);
                 }
 
-                _dictionary
-                    ._set
+                _dictionary._set
                     .InOrderTreeWalk(
                         delegate(TreeSet<KeyValuePair<TKey, TValue>>.Node node)
                         {
@@ -606,8 +605,7 @@ namespace System.Collections.Generic
                     try
                     {
                         object[] objects = (object[])array;
-                        _dictionary
-                            ._set
+                        _dictionary._set
                             .InOrderTreeWalk(
                                 delegate(TreeSet<KeyValuePair<TKey, TValue>>.Node node)
                                 {
@@ -746,8 +744,7 @@ namespace System.Collections.Generic
                     throw new ArgumentException(SR.Arg_ArrayPlusOffTooSmall);
                 }
 
-                _dictionary
-                    ._set
+                _dictionary._set
                     .InOrderTreeWalk(
                         delegate(TreeSet<KeyValuePair<TKey, TValue>>.Node node)
                         {
@@ -787,8 +784,7 @@ namespace System.Collections.Generic
                     try
                     {
                         object?[] objects = (object?[])array;
-                        _dictionary
-                            ._set
+                        _dictionary._set
                             .InOrderTreeWalk(
                                 delegate(TreeSet<KeyValuePair<TKey, TValue>>.Node node)
                                 {

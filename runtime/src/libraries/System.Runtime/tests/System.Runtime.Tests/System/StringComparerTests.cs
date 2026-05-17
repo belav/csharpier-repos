@@ -336,8 +336,7 @@ namespace System.Tests
 
         private static IEqualityComparer<string> GetNonRandomizedComparer(string name)
         {
-            Type nonRandomizedComparerType = typeof(StringComparer)
-                .Assembly
+            Type nonRandomizedComparerType = typeof(StringComparer).Assembly
                 .GetType("System.Collections.Generic.NonRandomizedStringEqualityComparer");
             Assert.NotNull(nonRandomizedComparerType);
 

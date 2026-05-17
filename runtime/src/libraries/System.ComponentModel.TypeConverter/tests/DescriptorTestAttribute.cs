@@ -15,8 +15,7 @@ namespace System.ComponentModel.Tests
 
         public override bool Equals(object obj)
         {
-            return (obj as DescriptorTestAttribute)
-                    ?.TestString
+            return (obj as DescriptorTestAttribute)?.TestString
                     .Equals(TestString, StringComparison.Ordinal) ?? false;
         }
 

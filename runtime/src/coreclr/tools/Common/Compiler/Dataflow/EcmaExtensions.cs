@@ -62,8 +62,7 @@ namespace ILCompiler.Dataflow
             foreach (var propertyHandle in reader.GetTypeDefinition(type.Handle).GetProperties())
             {
                 if (
-                    reader
-                        .StringComparer
+                    reader.StringComparer
                         .Equals(reader.GetPropertyDefinition(propertyHandle).Name, name)
                 )
                 {

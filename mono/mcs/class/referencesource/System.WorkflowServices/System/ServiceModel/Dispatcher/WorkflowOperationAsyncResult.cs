@@ -52,15 +52,13 @@ namespace System.ServiceModel.Dispatcher
 
             if (workflowDurableInstance == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("workflowDurableInstance");
             }
 
             if (workflowOperationInvoker == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("workflowOperationInvoker");
             }
 
@@ -228,8 +226,7 @@ namespace System.ServiceModel.Dispatcher
                         callbackState.SynchronizationContext;
                     callbackState.SynchronizationContext = null;
 
-                    SynchronizationContextWorkflowSchedulerService
-                        .SynchronizationContextPostHelper
+                    SynchronizationContextWorkflowSchedulerService.SynchronizationContextPostHelper
                         .Post(
                             synchronizationContext,
                             WorkflowOperationAsyncResult.sendOrPostCallback,
@@ -245,13 +242,11 @@ namespace System.ServiceModel.Dispatcher
 
                         if (callbackState.WorkflowInstanceLifeTimeManager != null)
                         {
-                            callbackState
-                                .WorkflowInstanceLifeTimeManager
+                            callbackState.WorkflowInstanceLifeTimeManager
                                 .NotifyMessageArrived(callbackState.WorkflowInstance.InstanceId);
                         }
 
-                        callbackState
-                            .WorkflowInstance
+                        callbackState.WorkflowInstance
                             .EnqueueItemOnIdle(
                                 callbackState.QueueName,
                                 callbackState.WorkflowRequestContext,
@@ -269,12 +264,10 @@ namespace System.ServiceModel.Dispatcher
                 {
                     if (callbackState.WorkflowInstanceLifeTimeManager != null)
                     {
-                        callbackState
-                            .WorkflowInstanceLifeTimeManager
+                        callbackState.WorkflowInstanceLifeTimeManager
                             .ScheduleTimer(callbackState.WorkflowInstance.InstanceId);
                     }
-                    callbackState
-                        .WorkflowRequestContext
+                    callbackState.WorkflowRequestContext
                         .SendFault(new FaultException(operationFault), null);
                 }
                 catch (Exception unhandled)
@@ -297,8 +290,7 @@ namespace System.ServiceModel.Dispatcher
                 {
                     if (callbackState.WorkflowInstanceLifeTimeManager != null)
                     {
-                        callbackState
-                            .WorkflowInstanceLifeTimeManager
+                        callbackState.WorkflowInstanceLifeTimeManager
                             .ScheduleTimer(callbackState.WorkflowInstance.InstanceId);
                     }
                     //We should field only user code exception; Everything else should go abort path.

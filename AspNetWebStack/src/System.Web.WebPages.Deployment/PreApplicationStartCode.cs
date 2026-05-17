@@ -329,8 +329,7 @@ namespace System.Web.WebPages.Deployment
             CacheDependency cacheDependency = new CacheDependency(physicalPath, DateTime.UtcNow);
             var key = WebPagesDeployment.CacheKeyPrefix + physicalPath;
 
-            HttpRuntime
-                .Cache
+            HttpRuntime.Cache
                 .Insert(
                     key,
                     physicalPath,

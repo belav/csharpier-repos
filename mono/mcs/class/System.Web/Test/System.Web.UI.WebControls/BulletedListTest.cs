@@ -276,8 +276,7 @@ namespace MonoTests.System.Web.UI.WebControls
             p.Controls.Add(b);
             p.EnableEventValidation = false;
             string html = b.Render();
-            MonoTests
-                .stand_alone
+            MonoTests.stand_alone
                 .WebHarness
                 .HtmlDiff
                 .AssertAreEqual(

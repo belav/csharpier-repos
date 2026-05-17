@@ -9,8 +9,7 @@ namespace Internal.Runtime
     {
         static void* ClrVirtualReserve(nuint size)
         {
-            return Interop
-                .Kernel32
+            return Interop.Kernel32
                 .VirtualAlloc(
                     null,
                     size,
@@ -21,8 +20,7 @@ namespace Internal.Runtime
 
         static void* ClrVirtualCommit(void* pBase, nuint size)
         {
-            return Interop
-                .Kernel32
+            return Interop.Kernel32
                 .VirtualAlloc(
                     pBase,
                     size,

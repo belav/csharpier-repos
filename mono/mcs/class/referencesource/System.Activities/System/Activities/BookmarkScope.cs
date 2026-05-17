@@ -130,8 +130,7 @@ namespace System.Activities
 
             if (this.IsInitialized)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(new InvalidOperationException(SR.BookmarkScopeAlreadyInitialized));
             }
 

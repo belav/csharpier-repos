@@ -67,14 +67,12 @@ internal static class StartupFacts
 
         if (
             symbol.Name == null
-            || !symbol
-                .Name
+            || !symbol.Name
                 .StartsWith(
                     SymbolNames.ConfigureServicesMethodPrefix,
                     StringComparison.OrdinalIgnoreCase
                 )
-            || !symbol
-                .Name
+            || !symbol.Name
                 .EndsWith(
                     SymbolNames.ConfigureServicesMethodSuffix,
                     StringComparison.OrdinalIgnoreCase
@@ -89,8 +87,7 @@ internal static class StartupFacts
             return false;
         }
 
-        return SymbolEqualityComparer
-            .Default
+        return SymbolEqualityComparer.Default
             .Equals(symbol.Parameters[0].Type, symbols.IServiceCollection);
     }
 
@@ -119,8 +116,7 @@ internal static class StartupFacts
 
         if (
             symbol.Name == null
-            || !symbol
-                .Name
+            || !symbol.Name
                 .StartsWith(SymbolNames.ConfigureMethodPrefix, StringComparison.OrdinalIgnoreCase)
         )
         {
@@ -131,8 +127,7 @@ internal static class StartupFacts
         for (var i = 0; i < symbol.Parameters.Length; i++)
         {
             if (
-                SymbolEqualityComparer
-                    .Default
+                SymbolEqualityComparer.Default
                     .Equals(symbol.Parameters[i].Type, symbols.IApplicationBuilder)
             )
             {

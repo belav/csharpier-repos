@@ -105,13 +105,11 @@ public class TransactionSqlServerTest
         {
             base.Seed(context);
 
-            context
-                .Database
+            context.Database
                 .ExecuteSqlRaw(
                     "ALTER DATABASE [" + StoreName + "] SET ALLOW_SNAPSHOT_ISOLATION ON"
                 );
-            context
-                .Database
+            context.Database
                 .ExecuteSqlRaw("ALTER DATABASE [" + StoreName + "] SET READ_COMMITTED_SNAPSHOT ON");
         }
 

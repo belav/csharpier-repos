@@ -354,8 +354,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
                             ErrorCode.FunctionWithNonEdmTypeNotSupported,
                             EdmSchemaErrorSeverity.Error,
                             this,
-                            System
-                                .Data
+                            System.Data
                                 .Entity
                                 .Strings
                                 .FunctionWithNonEdmPrimitiveTypeNotSupported(
@@ -382,8 +381,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
                                 ErrorCode.FunctionWithNonPrimitiveTypeNotSupported,
                                 EdmSchemaErrorSeverity.Error,
                                 this,
-                                System
-                                    .Data
+                                System.Data
                                     .Entity
                                     .Strings
                                     .FunctionWithNonPrimitiveTypeNotSupported(
@@ -404,8 +402,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
                                     ErrorCode.FunctionWithNonPrimitiveTypeNotSupported,
                                     EdmSchemaErrorSeverity.Error,
                                     this,
-                                    System
-                                        .Data
+                                    System.Data
                                         .Entity
                                         .Strings
                                         .FunctionWithNonPrimitiveTypeNotSupported(
@@ -439,8 +436,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
                                                 ErrorCode.TVFReturnTypeRowHasNonScalarProperty,
                                                 EdmSchemaErrorSeverity.Error,
                                                 this,
-                                                System
-                                                    .Data
+                                                System.Data
                                                     .Entity
                                                     .Strings
                                                     .TVFReturnTypeRowHasNonScalarProperty

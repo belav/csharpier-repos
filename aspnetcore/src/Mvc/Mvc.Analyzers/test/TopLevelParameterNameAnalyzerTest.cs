@@ -433,8 +433,7 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers.TopLevelParameterNameAnalyzerTestFi
     {
         var compilation = TestCompilation.Create(source);
 
-        var modelType = compilation
-            .Assembly
+        var modelType = compilation.Assembly
             .GetTypeByMetadataName(
                 "Microsoft.AspNetCore.Mvc.Analyzers.TopLevelParameterNameAnalyzerTestFiles.TestController"
             );

@@ -291,8 +291,7 @@ namespace System.Windows.Forms
             }
             catch
             {
-                Console
-                    .Error
+                Console.Error
                     .WriteLine(
                         "Could not disable keyboard auto repeat, will attempt to disable manually."
                     );
@@ -2400,8 +2399,7 @@ namespace System.Windows.Forms
                                 atoms,
                                 atom_count
                             );
-                            sel_event.SelectionEvent.property = xevent
-                                .SelectionRequestEvent
+                            sel_event.SelectionEvent.property = xevent.SelectionRequestEvent
                                 .property;
                         }
                         else if (format_atom == (IntPtr)RICHTEXTFORMAT)
@@ -2427,8 +2425,7 @@ namespace System.Windows.Forms
                                     buffer,
                                     buflen
                                 );
-                                sel_event.SelectionEvent.property = xevent
-                                    .SelectionRequestEvent
+                                sel_event.SelectionEvent.property = xevent.SelectionRequestEvent
                                     .property;
                                 Marshal.FreeHGlobal(buffer);
                             }
@@ -2480,8 +2477,7 @@ namespace System.Windows.Forms
                                     buffer,
                                     buflen
                                 );
-                                sel_event.SelectionEvent.property = xevent
-                                    .SelectionRequestEvent
+                                sel_event.SelectionEvent.property = xevent.SelectionRequestEvent
                                     .property;
                                 Marshal.FreeHGlobal(buffer);
                             }
@@ -2513,8 +2509,7 @@ namespace System.Windows.Forms
                                     buffer,
                                     buflen
                                 );
-                                sel_event.SelectionEvent.property = xevent
-                                    .SelectionRequestEvent
+                                sel_event.SelectionEvent.property = xevent.SelectionRequestEvent
                                     .property;
                                 Marshal.FreeHGlobal(buffer);
                             }

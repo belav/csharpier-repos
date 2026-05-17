@@ -470,16 +470,18 @@ namespace Microsoft.Extensions.Hosting.Tests
             {
 #if NETCOREAPP
                 Assert.True(
-                    e.Failures.FirstOrDefault(predicate: f =>
-                        f.Contains(error, StringComparison.CurrentCulture)
-                    ) != null,
+                    e.Failures
+                        .FirstOrDefault(predicate: f =>
+                            f.Contains(error, StringComparison.CurrentCulture)
+                        ) != null,
                     "Did not find: " + error + " " + e.Failures.First()
                 );
 #else
                 Assert.True(
-                    e.Failures.FirstOrDefault(predicate: f =>
-                        f.IndexOf(error, StringComparison.CurrentCulture) >= 0
-                    ) != null,
+                    e.Failures
+                        .FirstOrDefault(predicate: f =>
+                            f.IndexOf(error, StringComparison.CurrentCulture) >= 0
+                        ) != null,
                     "Did not find: " + error + " " + e.Failures.First()
                 );
 #endif

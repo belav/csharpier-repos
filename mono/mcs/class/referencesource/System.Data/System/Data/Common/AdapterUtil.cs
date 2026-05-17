@@ -2870,8 +2870,7 @@ namespace System.Data.Common
         {
             return (
                 0
-                == CultureInfo
-                    .InvariantCulture
+                == CultureInfo.InvariantCulture
                     .CompareInfo
                     .Compare(strvalue, strconst, CompareOptions.IgnoreCase)
             );
@@ -3118,8 +3117,7 @@ namespace System.Data.Common
                 // if the user has set a decimal separator use it, if not use the current culture's value
                 if (ADP.IsEmpty(decimalSeparator) == true)
                 {
-                    decimalSeparator = CultureInfo
-                        .CurrentCulture
+                    decimalSeparator = CultureInfo.CurrentCulture
                         .NumberFormat
                         .NumberDecimalSeparator;
                 }
@@ -3275,8 +3273,7 @@ namespace System.Data.Common
             Stream XmlStream;
             const string config = "config\\";
             // get location of config directory
-            string rootPath = System
-                .Runtime
+            string rootPath = System.Runtime
                 .InteropServices
                 .RuntimeEnvironment
                 .GetRuntimeDirectory();

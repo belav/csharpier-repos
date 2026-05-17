@@ -136,8 +136,7 @@ internal abstract class BaseCommand : CommandLineApplication
 
     protected static Project LoadProject(FileInfo projectFile)
     {
-        var project = ProjectCollection
-            .GlobalProjectCollection
+        var project = ProjectCollection.GlobalProjectCollection
             .LoadProject(projectFile.FullName, globalProperties: null, toolsVersion: null);
         project.ReevaluateIfNecessary();
         return project;

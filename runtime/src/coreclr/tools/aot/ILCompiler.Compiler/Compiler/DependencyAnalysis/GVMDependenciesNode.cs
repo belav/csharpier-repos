@@ -213,8 +213,7 @@ namespace ILCompiler.DependencyAnalysis
                                         )
                                     );
 
-                                factory
-                                    .MetadataManager
+                                factory.MetadataManager
                                     .NoteOverridingMethod(_method, implementingMethodInstantiation);
                             }
                         }
@@ -278,8 +277,7 @@ namespace ILCompiler.DependencyAnalysis
                             )
                         );
 
-                        factory
-                            .MetadataManager
+                        factory.MetadataManager
                             .NoteOverridingMethod(_method, instantiatedTargetMethod);
                     }
                 }

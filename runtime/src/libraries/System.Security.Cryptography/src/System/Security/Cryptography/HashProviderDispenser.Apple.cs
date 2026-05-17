@@ -54,8 +54,7 @@ namespace System.Security.Cryptography
                 fixed (byte* pDestination = destination)
                 {
                     int digestSize;
-                    int ret = Interop
-                        .AppleCrypto
+                    int ret = Interop.AppleCrypto
                         .HmacOneShot(
                             algorithm,
                             pKey,
@@ -105,8 +104,7 @@ namespace System.Security.Cryptography
                 fixed (byte* pDestination = destination)
                 {
                     int digestSize;
-                    int ret = Interop
-                        .AppleCrypto
+                    int ret = Interop.AppleCrypto
                         .DigestOneShot(
                             algorithm,
                             pSource,

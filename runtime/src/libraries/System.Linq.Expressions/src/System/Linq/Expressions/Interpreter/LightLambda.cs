@@ -406,16 +406,14 @@ namespace System.Linq.Expressions.Interpreter
             MethodInfo method = delegateType.GetInvokeMethod();
             if (method.ReturnType == typeof(void))
             {
-                return System
-                    .Dynamic
+                return System.Dynamic
                     .Utils
                     .DelegateHelpers
                     .CreateObjectArrayDelegate(delegateType, RunVoid);
             }
             else
             {
-                return System
-                    .Dynamic
+                return System.Dynamic
                     .Utils
                     .DelegateHelpers
                     .CreateObjectArrayDelegate(delegateType, Run);

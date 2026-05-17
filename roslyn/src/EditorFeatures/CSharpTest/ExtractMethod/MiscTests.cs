@@ -142,22 +142,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractMethod
             var testDocument = workspace.Documents.Single();
 
             var view = testDocument.GetTextView();
-            view.Selection.Select(
-                new SnapshotSpan(
-                    view.TextBuffer.CurrentSnapshot,
-                    testDocument.SelectedSpans[0].Start,
-                    testDocument.SelectedSpans[0].Length
-                ),
-                isReversed: false
-            );
+            view.Selection
+                .Select(
+                    new SnapshotSpan(
+                        view.TextBuffer.CurrentSnapshot,
+                        testDocument.SelectedSpans[0].Start,
+                        testDocument.SelectedSpans[0].Length
+                    ),
+                    isReversed: false
+                );
 
             var callBackService = (INotificationServiceCallback)
                 workspace.Services.GetRequiredService<INotificationService>();
             var called = false;
             callBackService.NotificationCallback = (_, _, _) => called = true;
 
-            var handler = workspace
-                .ExportProvider
+            var handler = workspace.ExportProvider
                 .GetCommandHandler<ExtractMethodCommandHandler>(
                     PredefinedCommandHandlerNames.ExtractMethod,
                     ContentTypeNames.CSharpContentType
@@ -168,8 +168,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractMethod
                 TestCommandExecutionContext.Create()
             );
 
-            var waiter = workspace
-                .ExportProvider
+            var waiter = workspace.ExportProvider
                 .GetExportedValue<IAsynchronousOperationListenerProvider>()
                 .GetWaiter(FeatureAttribute.ExtractMethod);
             await waiter.ExpeditedWaitAsync();

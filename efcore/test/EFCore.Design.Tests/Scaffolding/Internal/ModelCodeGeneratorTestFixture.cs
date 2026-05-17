@@ -11,8 +11,7 @@ public class ModelCodeGeneratorTestFixture : IDisposable
         Directory.CreateDirectory(templatesDir);
 
         using (
-            var input = typeof(ModelCodeGeneratorTestBase)
-                .Assembly
+            var input = typeof(ModelCodeGeneratorTestBase).Assembly
                 .GetManifestResourceStream(
                     "Microsoft.EntityFrameworkCore.Resources.CSharpDbContextGenerator.tt"
                 )
@@ -23,8 +22,7 @@ public class ModelCodeGeneratorTestFixture : IDisposable
         }
 
         using (
-            var input = typeof(ModelCodeGeneratorTestBase)
-                .Assembly
+            var input = typeof(ModelCodeGeneratorTestBase).Assembly
                 .GetManifestResourceStream(
                     "Microsoft.EntityFrameworkCore.Resources.CSharpEntityTypeGenerator.tt"
                 )

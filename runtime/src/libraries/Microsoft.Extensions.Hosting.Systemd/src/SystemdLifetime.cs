@@ -77,8 +77,7 @@ namespace Microsoft.Extensions.Hosting.Systemd
         /// </returns>
         public Task WaitForStartAsync(CancellationToken cancellationToken)
         {
-            _applicationStartedRegistration = ApplicationLifetime
-                .ApplicationStarted
+            _applicationStartedRegistration = ApplicationLifetime.ApplicationStarted
                 .Register(
                     state =>
                     {
@@ -86,8 +85,7 @@ namespace Microsoft.Extensions.Hosting.Systemd
                     },
                     this
                 );
-            _applicationStoppingRegistration = ApplicationLifetime
-                .ApplicationStopping
+            _applicationStoppingRegistration = ApplicationLifetime.ApplicationStopping
                 .Register(
                     state =>
                     {

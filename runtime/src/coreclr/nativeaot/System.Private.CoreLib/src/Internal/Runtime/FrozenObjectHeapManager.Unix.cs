@@ -11,8 +11,7 @@ namespace Internal.Runtime
         {
             // The shim will return null for failure
             return (void*)
-                Interop
-                    .Sys
+                Interop.Sys
                     .MMap(
                         0,
                         size,
@@ -26,8 +25,7 @@ namespace Internal.Runtime
 
         static void* ClrVirtualCommit(void* pBase, nuint size)
         {
-            int result = Interop
-                .Sys
+            int result = Interop.Sys
                 .MProtect(
                     (nint)pBase,
                     size,

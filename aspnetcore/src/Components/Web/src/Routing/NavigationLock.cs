@@ -49,8 +49,7 @@ public sealed class NavigationLock : IComponent, IHandleAfterRender, IAsyncDispo
         foreach (var parameter in parameters)
         {
             if (
-                parameter
-                    .Name
+                parameter.Name
                     .Equals(nameof(OnBeforeInternalNavigation), StringComparison.OrdinalIgnoreCase)
             )
             {
@@ -58,8 +57,7 @@ public sealed class NavigationLock : IComponent, IHandleAfterRender, IAsyncDispo
                     (EventCallback<LocationChangingContext>)parameter.Value;
             }
             else if (
-                parameter
-                    .Name
+                parameter.Name
                     .Equals(nameof(ConfirmExternalNavigation), StringComparison.OrdinalIgnoreCase)
             )
             {

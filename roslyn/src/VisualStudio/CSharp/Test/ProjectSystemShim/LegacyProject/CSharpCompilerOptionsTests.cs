@@ -117,8 +117,7 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim.LegacyProject
             Assert.Equal(initialPath, project.GetOutputFileName());
 
             string getCurrentCompilationOutputAssemblyPath() =>
-                environment
-                    .Workspace
+                environment.Workspace
                     .CurrentSolution
                     .GetRequiredProject(project.Test_ProjectSystemProject.Id)
                     .CompilationOutputInfo
@@ -155,8 +154,7 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim.LegacyProject
             var project = CSharpHelpers.CreateCSharpProject(environment, "Test");
 
             string getCurrentCompilationOutputAssemblyPath() =>
-                environment
-                    .Workspace
+                environment.Workspace
                     .CurrentSolution
                     .GetRequiredProject(project.Test_ProjectSystemProject.Id)
                     .CompilationOutputInfo
@@ -239,8 +237,7 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim.LegacyProject
 
             const LanguageVersion attemptedVersion = LanguageVersion.CSharp8;
 
-            var canApply = environment
-                .Workspace
+            var canApply = environment.Workspace
                 .CanApplyParseOptionChange(
                     oldParseOptions,
                     oldParseOptions.WithLanguageVersion(attemptedVersion),
@@ -278,8 +275,7 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim.LegacyProject
 
             const LanguageVersion attemptedVersion = LanguageVersion.CSharp8;
 
-            var canApply = environment
-                .Workspace
+            var canApply = environment.Workspace
                 .CanApplyParseOptionChange(
                     oldParseOptions,
                     oldParseOptions.WithLanguageVersion(attemptedVersion),

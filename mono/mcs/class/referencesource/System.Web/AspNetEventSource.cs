@@ -106,8 +106,7 @@ namespace System.Web
             // Step 1: Set the ID (if necessary)
             if (needToSetThreadActivityId)
             {
-                ActivityIdHelper
-                    .Instance
+                ActivityIdHelper.Instance
                     .SetCurrentThreadActivityId(iisActivityId, out originalThreadActivityId);
             }
 
@@ -123,8 +122,7 @@ namespace System.Web
             if (needToSetThreadActivityId)
             {
                 Guid unused;
-                ActivityIdHelper
-                    .Instance
+                ActivityIdHelper.Instance
                     .SetCurrentThreadActivityId(originalThreadActivityId, out unused);
             }
         }

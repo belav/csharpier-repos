@@ -29,8 +29,7 @@ namespace Microsoft.Win32.SafeHandles
         internal bool CertHasProperty(Interop.Crypt32.CertContextPropId propertyId)
         {
             int cb = 0;
-            bool hasProperty = Interop
-                .Crypt32
+            bool hasProperty = Interop.Crypt32
                 .CertGetCertificateContextProperty(this, propertyId, null, ref cb);
 
             return hasProperty;

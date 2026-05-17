@@ -36,8 +36,7 @@ namespace System.Data.Common
         private readonly bool UseOdbcRules;
 
         private static int _objectTypeCount; // Bid counter
-        internal readonly int _objectID = System
-            .Threading
+        internal readonly int _objectID = System.Threading
             .Interlocked
             .Increment(ref _objectTypeCount);
 
@@ -547,11 +546,9 @@ namespace System.Data.Common
 
                             Attribute[] useAttributes = attributes;
                             if (
-                                StringComparer
-                                    .OrdinalIgnoreCase
+                                StringComparer.OrdinalIgnoreCase
                                     .Equals(DbConnectionStringKeywords.Password, keyword)
-                                || StringComparer
-                                    .OrdinalIgnoreCase
+                                || StringComparer.OrdinalIgnoreCase
                                     .Equals(DbConnectionStringSynonyms.Pwd, keyword)
                             )
                             {

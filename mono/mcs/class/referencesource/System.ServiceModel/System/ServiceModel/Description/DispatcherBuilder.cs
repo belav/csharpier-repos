@@ -36,8 +36,7 @@ namespace System.ServiceModel.Description
                 CustomBinding customBinding = endpoint.Binding as CustomBinding;
                 if (null != customBinding)
                 {
-                    MsmqIntegrationBindingElement element = customBinding
-                        .Elements
+                    MsmqIntegrationBindingElement element = customBinding.Elements
                         .Find<MsmqIntegrationBindingElement>();
                     if (null != element)
                     {
@@ -94,8 +93,7 @@ namespace System.ServiceModel.Description
         )
         {
             parameters = new BindingParameterCollection();
-            SecurityContractInformationEndpointBehavior
-                .ClientInstance
+            SecurityContractInformationEndpointBehavior.ClientInstance
                 .AddBindingParameters(serviceEndpoint, parameters);
 
             AddBindingParameters(serviceEndpoint, parameters);
@@ -107,8 +105,7 @@ namespace System.ServiceModel.Description
             );
             clientRuntime.ContractClientType = contractDescription.ContractType;
 
-            IdentityVerifier identityVerifier = serviceEndpoint
-                .Binding
+            IdentityVerifier identityVerifier = serviceEndpoint.Binding
                 .GetProperty<IdentityVerifier>(parameters);
             if (identityVerifier != null)
             {
@@ -461,8 +458,7 @@ namespace System.ServiceModel.Description
                     setOfChannelTypesSupportedByBinding.Add(typeof(IDuplexSessionChannel), 0);
                 }
 
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         ChannelRequirements.CantCreateListenerException(
                             setOfChannelTypesSupportedByBinding.Keys,
@@ -705,8 +701,7 @@ namespace System.ServiceModel.Description
                     return;
                 }
             }
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(
                     new InvalidOperationException(
                         SR.GetString(SR.ServiceHasZeroAppEndpoints, description.ConfigurationName)
@@ -723,11 +718,9 @@ namespace System.ServiceModel.Description
             }
             if (listenUri == null)
             {
-                AspNetEnvironment
-                    .Current
+                AspNetEnvironment.Current
                     .ProcessNotMatchedEndpointAddress(listenUri, endpoint.Binding.Name);
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(
@@ -823,8 +816,7 @@ namespace System.ServiceModel.Description
 
             foreach (ServiceEndpoint endpoint in endpoints)
             {
-                DispatcherBuilder
-                    .SecurityContractInformationEndpointBehavior
+                DispatcherBuilder.SecurityContractInformationEndpointBehavior
                     .ServerInstance
                     .AddBindingParameters(endpoint, parameters);
                 DispatcherBuilder.AddBindingParameters(endpoint, parameters);
@@ -858,8 +850,7 @@ namespace System.ServiceModel.Description
 
             AspNetEnvironment.Current.AddHostingBehavior(serviceHost, description);
 
-            ServiceBehaviorAttribute instanceSettings = description
-                .Behaviors
+            ServiceBehaviorAttribute instanceSettings = description.Behaviors
                 .Find<ServiceBehaviorAttribute>();
             InitializeServicePerformanceCounters(serviceHost);
 
@@ -886,14 +877,12 @@ namespace System.ServiceModel.Description
 
                 if (requiresReceiveContext)
                 {
-                    IReceiveContextSettings receiveContextSettings = endpoint
-                        .Binding
+                    IReceiveContextSettings receiveContextSettings = endpoint.Binding
                         .GetProperty<IReceiveContextSettings>(new BindingParameterCollection());
 
                     if (receiveContextSettings == null)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(
                                     SR.GetString(
@@ -955,8 +944,7 @@ namespace System.ServiceModel.Description
                     // ensure all endpoints with this ListenUriInfo have same binding
                     if (endpoint.Binding != binding)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(
                                     SR.GetString(
@@ -970,8 +958,7 @@ namespace System.ServiceModel.Description
                     // ensure all endpoints with this ListenUriInfo have same identity
                     if (!object.Equals(endpoint.Address.Identity, identity))
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(
                                     SR.GetString(
@@ -984,8 +971,7 @@ namespace System.ServiceModel.Description
 
                     // add binding parameters (endpoint scope and below)
                     AddMsmqIntegrationContractInformation(endpoint);
-                    SecurityContractInformationEndpointBehavior
-                        .ServerInstance
+                    SecurityContractInformationEndpointBehavior.ServerInstance
                         .AddBindingParameters(endpoint, parameters);
                     AddBindingParameters(endpoint, parameters);
                 }
@@ -1033,8 +1019,7 @@ namespace System.ServiceModel.Description
                     for (int j = 0; j < endpoint.Contract.Operations.Count; j++)
                     {
                         OperationDescription operation = endpoint.Contract.Operations[j];
-                        OperationBehaviorAttribute operationBehavior = operation
-                            .Behaviors
+                        OperationBehaviorAttribute operationBehavior = operation.Behaviors
                             .Find<OperationBehaviorAttribute>();
                         if (null != operationBehavior && operationBehavior.TransactionScopeRequired)
                         {
@@ -1055,8 +1040,7 @@ namespace System.ServiceModel.Description
 
                     channelDispatcher.Endpoints.Add(dispatcher);
 
-                    TransactedBatchingBehavior batchBehavior = endpoint
-                        .Behaviors
+                    TransactedBatchingBehavior batchBehavior = endpoint.Behaviors
                         .Find<TransactedBatchingBehavior>();
                     if (batchBehavior == null)
                     {
@@ -1065,15 +1049,13 @@ namespace System.ServiceModel.Description
                     else
                     {
                         if (!canReceiveInTransaction)
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
                                     new InvalidOperationException(
                                         SR.GetString(SR.MsmqBatchRequiresTransactionScope)
                                     )
                                 );
-                        transactedBatchSize = System
-                            .Math
+                        transactedBatchSize = System.Math
                             .Min(transactedBatchSize, batchBehavior.MaxBatchSize);
                     }
                     if (
@@ -1166,11 +1148,9 @@ namespace System.ServiceModel.Description
                         );
                     }
                     // run endpoint behaviors
-                    BindingInformationEndpointBehavior
-                        .Instance
+                    BindingInformationEndpointBehavior.Instance
                         .ApplyDispatchBehavior(endpoint, dispatcher);
-                    TransactionContractInformationEndpointBehavior
-                        .Instance
+                    TransactionContractInformationEndpointBehavior.Instance
                         .ApplyDispatchBehavior(endpoint, dispatcher);
                     for (int j = 0; j < endpoint.Behaviors.Count; j++)
                     {
@@ -1224,8 +1204,7 @@ namespace System.ServiceModel.Description
                                 {
                                     // you will definitely get a MultipleFiltersMatchedException at runtime,
                                     // so let's go ahead and throw now
-                                    throw DiagnosticUtility
-                                        .ExceptionUtility
+                                    throw DiagnosticUtility.ExceptionUtility
                                         .ThrowHelperError(
                                             new InvalidOperationException(
                                                 SR.GetString(
@@ -1257,8 +1236,7 @@ namespace System.ServiceModel.Description
 
                     if (dispatch.InstanceContextProvider == null)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(
                                     SR.GetString(
@@ -1286,14 +1264,12 @@ namespace System.ServiceModel.Description
             }
             if (serviceDescription == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("serviceDescription");
             }
             if (contractDescription == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("contractDescription");
             }
 
@@ -1368,8 +1344,7 @@ namespace System.ServiceModel.Description
             for (int i = 0; i < operation.Faults.Count; i++)
             {
                 FaultDescription fault = operation.Faults[i];
-                child
-                    .FaultContractInfos
+                child.FaultContractInfos
                     .Add(
                         new FaultContractInfo(
                             fault.Action,
@@ -1409,8 +1384,7 @@ namespace System.ServiceModel.Description
             for (int i = 0; i < operation.Faults.Count; i++)
             {
                 FaultDescription fault = operation.Faults[i];
-                child
-                    .FaultContractInfos
+                child.FaultContractInfos
                     .Add(
                         new FaultContractInfo(
                             fault.Action,
@@ -1440,8 +1414,7 @@ namespace System.ServiceModel.Description
             {
                 if (parent.HasMatchAllOperation)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(SR.SFxMultipleContractStarOperations0)
@@ -1466,11 +1439,9 @@ namespace System.ServiceModel.Description
                 behavior.ApplyClientBehavior(contractDescription, serviceEndpoint, clientRuntime);
             }
             // endpoint behaviors
-            BindingInformationEndpointBehavior
-                .Instance
+            BindingInformationEndpointBehavior.Instance
                 .ApplyClientBehavior(serviceEndpoint, clientRuntime);
-            TransactionContractInformationEndpointBehavior
-                .Instance
+            TransactionContractInformationEndpointBehavior.Instance
                 .ApplyClientBehavior(serviceEndpoint, clientRuntime);
             for (int i = 0; i < serviceEndpoint.Behaviors.Count; i++)
             {
@@ -1555,8 +1526,7 @@ namespace System.ServiceModel.Description
         {
             if (contractDescription == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("contractDescription"));
             }
 
@@ -1673,8 +1643,7 @@ namespace System.ServiceModel.Description
                 endpointDispatcher.ChannelDispatcher.EnableFaults = !this.IsMulticast(
                     serviceEndpoint.Binding
                 );
-                endpointDispatcher.ChannelDispatcher.MessageVersion = serviceEndpoint
-                    .Binding
+                endpointDispatcher.ChannelDispatcher.MessageVersion = serviceEndpoint.Binding
                     .MessageVersion;
             }
 

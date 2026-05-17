@@ -87,8 +87,7 @@ namespace System.Web
             if (virtualPath == this)
                 return 0;
 
-            return StringComparer
-                .InvariantCultureIgnoreCase
+            return StringComparer.InvariantCultureIgnoreCase
                 .Compare(this.VirtualPathString, virtualPath.VirtualPathString);
         }
 
@@ -327,8 +326,7 @@ namespace System.Web
 
         public string GetFileHash(IEnumerable virtualPathDependencies)
         {
-            return HostingEnvironment
-                .VirtualPathProvider
+            return HostingEnvironment.VirtualPathProvider
                 .GetFileHash(this, virtualPathDependencies);
         }
 
@@ -337,8 +335,7 @@ namespace System.Web
             DateTime utcStart
         )
         {
-            return HostingEnvironment
-                .VirtualPathProvider
+            return HostingEnvironment.VirtualPathProvider
                 .GetCacheDependency(this, virtualPathDependencies, utcStart);
         }
 
@@ -558,8 +555,7 @@ namespace System.Web
 
         private static bool EqualsHelper(VirtualPath v1, VirtualPath v2)
         {
-            return StringComparer
-                    .InvariantCultureIgnoreCase
+            return StringComparer.InvariantCultureIgnoreCase
                     .Compare(v1.VirtualPathString, v2.VirtualPathString) == 0;
         }
 

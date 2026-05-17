@@ -1292,8 +1292,7 @@ namespace Microsoft.CodeAnalysis
                 ReadOnlyMemory<char> extension = PathUtilities.GetExtension(
                     resolvedPath.AsMemory()
                 );
-                isScriptFile = !extension
-                    .Span
+                isScriptFile = !extension.Span
                     .Equals(RegularFileExtension.AsSpan(), StringComparison.OrdinalIgnoreCase);
             }
             else

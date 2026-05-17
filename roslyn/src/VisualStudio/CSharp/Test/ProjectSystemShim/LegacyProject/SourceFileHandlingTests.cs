@@ -41,8 +41,7 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim.LegacyProject
 
             project.AddFileEx(@"C:\Cat.cs", linkMetadata: @"LinkFolder\Cat.cs");
 
-            var document = environment
-                .Workspace
+            var document = environment.Workspace
                 .CurrentSolution
                 .Projects
                 .Single()
@@ -60,8 +59,7 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim.LegacyProject
 
             project.AddFileEx(@"C:\Cat.cs", linkMetadata: @"Dog.cs");
 
-            var document = environment
-                .Workspace
+            var document = environment.Workspace
                 .CurrentSolution
                 .Projects
                 .Single()
@@ -82,8 +80,7 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim.LegacyProject
 
             project.AddFileEx(Path.Combine(projectFolder, "Cat.cs"), null);
 
-            var document = environment
-                .Workspace
+            var document = environment.Workspace
                 .CurrentSolution
                 .Projects
                 .Single()
@@ -104,8 +101,7 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim.LegacyProject
 
             project.AddFileEx(Path.Combine(projectFolder, "RelativeFolder", "Cat.cs"), null);
 
-            var document = environment
-                .Workspace
+            var document = environment.Workspace
                 .CurrentSolution
                 .Projects
                 .Single()

@@ -59,8 +59,7 @@ namespace Internal.Cryptography
 
                     pOidPointers[i] = pOidContents;
 
-                    int bytesWritten = Encoding
-                        .ASCII
+                    int bytesWritten = Encoding.ASCII
                         .GetBytes(oidString, new Span<byte>(pOidContents, oidString.Length));
                     Debug.Assert(bytesWritten == oidString.Length);
 
@@ -103,8 +102,7 @@ namespace Internal.Cryptography
                 int cb = 0;
 
                 if (
-                    !Interop
-                        .crypt32
+                    !Interop.crypt32
                         .CryptDecodeObjectPointer(
                             Interop.Crypt32.CertEncodingType.All,
                             lpszStructType,
@@ -130,8 +128,7 @@ namespace Internal.Cryptography
                 fixed (byte* pDecoded = decoded)
                 {
                     if (
-                        !Interop
-                            .crypt32
+                        !Interop.crypt32
                             .CryptDecodeObjectPointer(
                                 Interop.Crypt32.CertEncodingType.All,
                                 lpszStructType,
@@ -160,8 +157,7 @@ namespace Internal.Cryptography
             int cb = 0;
 
             if (
-                !Interop
-                    .Crypt32
+                !Interop.Crypt32
                     .CryptDecodeObjectPointer(
                         Interop.Crypt32.CertEncodingType.All,
                         lpszStructType,
@@ -187,8 +183,7 @@ namespace Internal.Cryptography
             fixed (byte* pDecoded = decoded)
             {
                 if (
-                    !Interop
-                        .Crypt32
+                    !Interop.Crypt32
                         .CryptDecodeObjectPointer(
                             Interop.Crypt32.CertEncodingType.All,
                             lpszStructType,
@@ -218,8 +213,7 @@ namespace Internal.Cryptography
             int cb = 0;
 
             if (
-                !Interop
-                    .crypt32
+                !Interop.crypt32
                     .CryptDecodeObjectPointer(
                         Interop.Crypt32.CertEncodingType.All,
                         lpszStructType,
@@ -245,8 +239,7 @@ namespace Internal.Cryptography
             fixed (byte* pDecoded = decoded)
             {
                 if (
-                    !Interop
-                        .crypt32
+                    !Interop.crypt32
                         .CryptDecodeObjectPointer(
                             Interop.Crypt32.CertEncodingType.All,
                             lpszStructType,

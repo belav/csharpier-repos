@@ -354,8 +354,7 @@ namespace System.ServiceModel
             }
             else if (mode == BasicHttpSecurityMode.Message)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new NotSupportedException(
                             SR.GetString(SR.UnsupportedSecuritySetting, "Mode", mode)
@@ -372,8 +371,7 @@ namespace System.ServiceModel
                     && (message.ClientCredentialType == BasicHttpMessageCredentialType.Certificate)
                 )
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new NotSupportedException(
                                 SR.GetString(
@@ -404,8 +402,7 @@ namespace System.ServiceModel
                 )
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new NotSupportedException(
                             SR.GetString(

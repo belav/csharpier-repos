@@ -249,8 +249,7 @@ namespace System.Xml.Serialization
 
         private void ConvertNullableValue(Type nullableType, Type targetType)
         {
-            System
-                .Diagnostics
+            System.Diagnostics
                 .Debug
                 .Assert(
                     targetType == nullableType

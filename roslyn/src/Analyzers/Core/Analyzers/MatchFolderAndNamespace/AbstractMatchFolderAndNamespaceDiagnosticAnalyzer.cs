@@ -35,9 +35,9 @@ namespace Microsoft.CodeAnalysis.Analyzers.MatchFolderAndNamespace
             typeof(AnalyzersResources)
         );
 
-        private static readonly SymbolDisplayFormat s_namespaceDisplayFormat = SymbolDisplayFormat
-            .FullyQualifiedFormat
-            .WithGlobalNamespaceStyle(SymbolDisplayGlobalNamespaceStyle.Omitted);
+        private static readonly SymbolDisplayFormat s_namespaceDisplayFormat =
+            SymbolDisplayFormat.FullyQualifiedFormat
+                .WithGlobalNamespaceStyle(SymbolDisplayGlobalNamespaceStyle.Omitted);
 
         protected AbstractMatchFolderAndNamespaceDiagnosticAnalyzer()
             : base(
@@ -66,8 +66,7 @@ namespace Microsoft.CodeAnalysis.Analyzers.MatchFolderAndNamespace
             }
 
             // It's ok to not have a rootnamespace property, but if it's there we want to use it correctly
-            context
-                .Options
+            context.Options
                 .AnalyzerConfigOptionsProvider
                 .GlobalOptions
                 .TryGetValue(
@@ -77,8 +76,7 @@ namespace Microsoft.CodeAnalysis.Analyzers.MatchFolderAndNamespace
 
             // Project directory is a must to correctly get the relative path and construct a namespace
             if (
-                !context
-                    .Options
+                !context.Options
                     .AnalyzerConfigOptionsProvider
                     .GlobalOptions
                     .TryGetValue(
@@ -114,8 +112,7 @@ namespace Microsoft.CodeAnalysis.Analyzers.MatchFolderAndNamespace
                         Descriptor,
                         nameSyntax.GetLocation(),
                         additionalLocations: null,
-                        properties: ImmutableDictionary<string, string?>
-                            .Empty
+                        properties: ImmutableDictionary<string, string?>.Empty
                             .Add(MatchFolderAndNamespaceConstants.TargetNamespace, targetNamespace),
                         messageArgs: new[] { currentNamespace, targetNamespace }
                     )

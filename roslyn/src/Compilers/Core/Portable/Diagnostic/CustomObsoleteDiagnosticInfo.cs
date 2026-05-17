@@ -96,8 +96,7 @@ namespace Microsoft.CodeAnalysis
             }
             else
             {
-                customTags = baseDescriptor
-                    .ImmutableCustomTags
+                customTags = baseDescriptor.ImmutableCustomTags
                     .Add(WellKnownDiagnosticTags.CustomObsolete);
             }
 

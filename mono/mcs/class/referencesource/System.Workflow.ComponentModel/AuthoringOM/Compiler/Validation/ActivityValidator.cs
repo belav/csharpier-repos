@@ -67,8 +67,7 @@ namespace System.Workflow.ComponentModel.Compiler
             }
             finally
             {
-                System
-                    .Diagnostics
+                System.Diagnostics
                     .Debug
                     .Assert(
                         manager.Context.Current == activity,

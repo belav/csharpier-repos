@@ -89,14 +89,12 @@ namespace System.Security.Cryptography.Asn1
             decoded = default;
             AsnValueReader sequenceReader = reader.ReadSequence(expectedTag);
 
-            System
-                .Security
+            System.Security
                 .Cryptography
                 .Asn1
                 .AlgorithmIdentifierAsn
                 .Decode(ref sequenceReader, rebind, out decoded.KeyDerivationFunc);
-            System
-                .Security
+            System.Security
                 .Cryptography
                 .Asn1
                 .AlgorithmIdentifierAsn

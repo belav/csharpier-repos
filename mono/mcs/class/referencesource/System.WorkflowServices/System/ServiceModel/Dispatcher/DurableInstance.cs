@@ -19,8 +19,7 @@ namespace System.ServiceModel.Dispatcher
         {
             if (instanceContextProvider == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("instanceContextProvider");
             }
 

@@ -87,8 +87,7 @@ public class Program
 
             if (errorCount > 0)
             {
-                Console
-                    .Error
+                Console.Error
                     .WriteLine(
                         $"llvm-dwarfdump failed. First five errors:{Environment.NewLine}{string.Join(Environment.NewLine, firstFiveErrors)}"
                     );

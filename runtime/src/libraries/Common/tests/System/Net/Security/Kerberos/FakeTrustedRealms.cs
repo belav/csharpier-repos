@@ -18,8 +18,7 @@ class FakeTrustedRealms : ITrustedRealmService
     public IRealmReferral? ProposeTransit(KrbTgsReq tgsReq, PreAuthenticationContext context)
     {
         if (
-            !tgsReq
-                .Body
+            !tgsReq.Body
                 .SName
                 .FullyQualifiedName
                 .EndsWith(_currentRealm, StringComparison.InvariantCultureIgnoreCase)

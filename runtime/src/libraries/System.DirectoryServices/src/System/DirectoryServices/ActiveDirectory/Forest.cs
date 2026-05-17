@@ -1136,8 +1136,7 @@ namespace System.DirectoryServices.ActiveDirectory
                     PDS_NAME_RESULT* ppSites
                     );*/
                 var dsListSites = (delegate* unmanaged<IntPtr, IntPtr*, int>)
-                    global::Interop
-                        .Kernel32
+                    global::Interop.Kernel32
                         .GetProcAddress(DirectoryContext.ADHandle, "DsListSitesW");
                 if (dsListSites == null)
                 {
@@ -1177,8 +1176,7 @@ namespace System.DirectoryServices.ActiveDirectory
                         {
                             // call DsFreeNameResultW
                             var dsFreeNameResultW = (delegate* unmanaged<IntPtr, void>)
-                                global::Interop
-                                    .Kernel32
+                                global::Interop.Kernel32
                                     .GetProcAddress(DirectoryContext.ADHandle, "DsFreeNameResultW");
                             if (dsFreeNameResultW == null)
                             {

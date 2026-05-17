@@ -86,8 +86,7 @@ namespace System.Web.Http.WebHost.Routing
                 // All of the HttpContextBase methods are supposed to return paths that are unescaped
                 // and begin with '/'. Don't use Uri.AbsolutePath here because it's escaped.
                 return "/"
-                    + _httpRequest
-                        .RequestUri
+                    + _httpRequest.RequestUri
                         .GetComponents(UriComponents.Path, UriFormat.Unescaped);
             }
         }
@@ -108,8 +107,7 @@ namespace System.Web.Http.WebHost.Routing
             {
                 // All of the HttpContextBase methods are supposed to return paths that are unescaped
                 // and begin with '/'. Don't use Uri.PathAndQuery here because it's escaped.
-                return _httpRequest
-                    .RequestUri
+                return _httpRequest.RequestUri
                     .GetComponents(UriComponents.PathAndQuery, UriFormat.Unescaped);
             }
         }

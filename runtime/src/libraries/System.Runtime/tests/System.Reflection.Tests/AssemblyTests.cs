@@ -68,8 +68,7 @@ namespace System.Reflection.Tests
         public void CustomAttributes(Type type)
         {
             Assembly assembly = Helpers.ExecutingAssembly;
-            IEnumerable<Type> attributesData = assembly
-                .CustomAttributes
+            IEnumerable<Type> attributesData = assembly.CustomAttributes
                 .Select(customAttribute => customAttribute.AttributeType);
             Assert.Contains(type, attributesData);
 
@@ -95,8 +94,7 @@ namespace System.Reflection.Tests
         [InlineData(typeof(NullAttr), true)]
         public void DefinedTypes(Type type, bool expected)
         {
-            IEnumerable<Type> customAttrs = Helpers
-                .ExecutingAssembly
+            IEnumerable<Type> customAttrs = Helpers.ExecutingAssembly
                 .DefinedTypes
                 .Select(typeInfo => typeInfo.AsType());
 
@@ -123,8 +121,7 @@ namespace System.Reflection.Tests
         public void GetManifestResourceStream(string resource, bool exists)
         {
             Type assemblyType = typeof(AssemblyTests);
-            Stream resourceStream = assemblyType
-                .Assembly
+            Stream resourceStream = assemblyType.Assembly
                 .GetManifestResourceStream(assemblyType, resource);
             Assert.Equal(exists, resourceStream != null);
         }
@@ -447,8 +444,7 @@ namespace System.Reflection.Tests
             var loadedAssembly1 = Assembly.LoadFile(fullRuntimeTestsPath);
             Assert.NotEqual(currentAssembly, loadedAssembly1);
 
-            System.Runtime.Loader.AssemblyLoadContext alc = System
-                .Runtime
+            System.Runtime.Loader.AssemblyLoadContext alc = System.Runtime
                 .Loader
                 .AssemblyLoadContext
                 .GetLoadContext(loadedAssembly1);
@@ -1088,8 +1084,7 @@ namespace System.Reflection.Tests
         public void AssemblyLoadFromBytes()
         {
             Assembly assembly = typeof(AssemblyTests).Assembly;
-            byte[] aBytes = System
-                .IO
+            byte[] aBytes = System.IO
                 .File
                 .ReadAllBytes(AssemblyPathHelper.GetAssemblyLocation(assembly));
 
@@ -1097,8 +1092,7 @@ namespace System.Reflection.Tests
             Assert.NotNull(loadedAssembly);
             Assert.Equal(assembly.FullName, loadedAssembly.FullName);
 
-            System.Runtime.Loader.AssemblyLoadContext alc = System
-                .Runtime
+            System.Runtime.Loader.AssemblyLoadContext alc = System.Runtime
                 .Loader
                 .AssemblyLoadContext
                 .GetLoadContext(loadedAssembly);
@@ -1126,17 +1120,14 @@ namespace System.Reflection.Tests
         public void AssemblyLoadFromBytesWithSymbols()
         {
             Assembly assembly = typeof(AssemblyTests).Assembly;
-            byte[] aBytes = System
-                .IO
+            byte[] aBytes = System.IO
                 .File
                 .ReadAllBytes(AssemblyPathHelper.GetAssemblyLocation(assembly));
-            byte[] symbols = System
-                .IO
+            byte[] symbols = System.IO
                 .File
                 .ReadAllBytes(
                     (
-                        System
-                            .IO
+                        System.IO
                             .Path
                             .ChangeExtension(
                                 AssemblyPathHelper.GetAssemblyLocation(assembly),
@@ -1167,8 +1158,7 @@ namespace System.Reflection.Tests
         public void AssemblyReflectionOnlyLoadFromBytes()
         {
             Assembly assembly = typeof(AssemblyTests).Assembly;
-            byte[] aBytes = System
-                .IO
+            byte[] aBytes = System.IO
                 .File
                 .ReadAllBytes(AssemblyPathHelper.GetAssemblyLocation(assembly));
             Assert.Throws<PlatformNotSupportedException>(() => Assembly.ReflectionOnlyLoad(aBytes));
@@ -1232,8 +1222,7 @@ namespace System.Reflection.Tests
         [InlineData(typeof(Attr))]
         public void GetCustomAttributesData(Type attrType)
         {
-            IEnumerable<CustomAttributeData> customAttributesData = typeof(AssemblyTests)
-                .Assembly
+            IEnumerable<CustomAttributeData> customAttributesData = typeof(AssemblyTests).Assembly
                 .GetCustomAttributesData()
                 .Where(cad => cad.AttributeType == attrType);
             Assert.True(

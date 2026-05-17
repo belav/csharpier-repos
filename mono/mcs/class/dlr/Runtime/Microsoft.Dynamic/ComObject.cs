@@ -155,8 +155,7 @@ namespace Microsoft.Scripting
             return new ComFallbackMetaObject(parameter, BindingRestrictions.Empty, this);
         }
 
-        private static readonly Type ComObjectType = typeof(object)
-            .Assembly
+        private static readonly Type ComObjectType = typeof(object).Assembly
             .GetType("System.__ComObject");
 
         internal static bool IsComObject(object obj)

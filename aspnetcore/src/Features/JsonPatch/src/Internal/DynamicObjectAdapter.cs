@@ -240,8 +240,7 @@ public class DynamicObjectAdapter : IAdapter
 
         var propertyName = jsonDynamicContract.PropertyNameResolver(segment);
 
-        var binder = CSharpBinder
-            .Binder
+        var binder = CSharpBinder.Binder
             .GetMember(
                 CSharpBinderFlags.None,
                 propertyName,
@@ -281,8 +280,7 @@ public class DynamicObjectAdapter : IAdapter
 
         var propertyName = jsonDynamicContract.PropertyNameResolver(segment);
 
-        var binder = CSharpBinder
-            .Binder
+        var binder = CSharpBinder.Binder
             .SetMember(
                 CSharpBinderFlags.None,
                 propertyName,

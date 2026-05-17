@@ -89,8 +89,7 @@ namespace Microsoft.CodeAnalysis.Collections
             if (source is ImmutableSegmentedHashSet<TSource> existingSet)
                 return existingSet.WithComparer(equalityComparer);
 
-            return ImmutableSegmentedHashSet<TSource>
-                .Empty
+            return ImmutableSegmentedHashSet<TSource>.Empty
                 .WithComparer(equalityComparer)
                 .Union(source);
         }

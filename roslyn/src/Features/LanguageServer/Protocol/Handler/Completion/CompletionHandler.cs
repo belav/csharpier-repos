@@ -113,8 +113,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
 
             var (list, isIncomplete, resultId) = completionListResult.Value;
 
-            var creationService = document
-                .Project
+            var creationService = document.Project
                 .Solution
                 .Services
                 .GetRequiredService<ILspCompletionResultCreationService>();

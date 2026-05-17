@@ -121,8 +121,7 @@ End Class";
             using (var workspace = CreateWorkspace(LanguageNames.VisualBasic, code))
             {
                 var ideAnalyzerOptions = IdeAnalyzerOptions.GetDefault(
-                    workspace
-                        .Services
+                    workspace.Services
                         .SolutionServices
                         .GetLanguageServices(LanguageNames.VisualBasic)
                 );
@@ -248,8 +247,7 @@ End Class";
             var ideAnalyzerOptions = IdeAnalyzerOptions.GetDefault(
                 workspace.Services.SolutionServices.GetLanguageServices(LanguageNames.CSharp)
             );
-            workspace
-                .GlobalOptions
+            workspace.GlobalOptions
                 .SetGlobalOption(
                     CSharpCodeStyleOptions.VarWhenTypeIsApparent,
                     new CodeStyleOption<bool>(false, NotificationOption.Suggestion)
@@ -317,14 +315,12 @@ End Class";
             );
 
             // add host analyzer as global assets
-            var remotableDataService = workspace
-                .Services
+            var remotableDataService = workspace.Services
                 .GetService<ISolutionAssetStorageProvider>();
             var serializer = workspace.Services.GetRequiredService<ISerializerService>();
 
             // run analysis
-            var project = workspace
-                .CurrentSolution
+            var project = workspace.CurrentSolution
                 .Projects
                 .First()
                 .AddAnalyzerReference(analyzerReference);
@@ -378,8 +374,7 @@ End Class";
                 analyzerType.Assembly.Location,
                 new TestAnalyzerAssemblyLoader()
             );
-            var project = workspace
-                .CurrentSolution
+            var project = workspace.CurrentSolution
                 .GetProject(projectId)
                 .AddAnalyzerReference(analyzerReference);
 
@@ -409,8 +404,7 @@ End Class";
             ParseOptions options = null
         )
         {
-            var composition = EditorTestCompositions
-                .EditorFeatures
+            var composition = EditorTestCompositions.EditorFeatures
                 .WithTestHostParts(TestHost.OutOfProcess);
 
             var workspace =
@@ -426,15 +420,13 @@ End Class";
                         composition: composition
                     );
 
-            workspace
-                .GlobalOptions
+            workspace.GlobalOptions
                 .SetGlobalOption(
                     SolutionCrawlerOptionsStorage.BackgroundAnalysisScopeOption,
                     LanguageNames.CSharp,
                     BackgroundAnalysisScope.FullSolution
                 );
-            workspace
-                .GlobalOptions
+            workspace.GlobalOptions
                 .SetGlobalOption(
                     SolutionCrawlerOptionsStorage.BackgroundAnalysisScopeOption,
                     LanguageNames.VisualBasic,

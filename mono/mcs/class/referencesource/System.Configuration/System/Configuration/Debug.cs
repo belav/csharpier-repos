@@ -657,8 +657,7 @@ namespace System.Configuration
                 {
                     errorCode =
                         "_hr=0x"
-                        + ((ExternalException)e)
-                            .ErrorCode
+                        + ((ExternalException)e).ErrorCode
                             .ToString("x", CultureInfo.InvariantCulture);
                 }
 

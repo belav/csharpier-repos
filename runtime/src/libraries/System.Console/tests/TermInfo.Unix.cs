@@ -59,8 +59,7 @@ public class TermInfoTests
                     if (!string.IsNullOrEmpty(info.Foreground))
                     {
                         Assert.NotEmpty(
-                            TermInfo
-                                .ParameterizedStrings
+                            TermInfo.ParameterizedStrings
                                 .Evaluate(
                                     info.Foreground,
                                     0 /* irrelevant, just an integer to put into the formatting*/
@@ -71,8 +70,7 @@ public class TermInfoTests
                     if (!string.IsNullOrEmpty(info.Background))
                     {
                         Assert.NotEmpty(
-                            TermInfo
-                                .ParameterizedStrings
+                            TermInfo.ParameterizedStrings
                                 .Evaluate(
                                     info.Background,
                                     0 /* irrelevant, just an integer to put into the formatting*/

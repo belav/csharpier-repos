@@ -990,8 +990,7 @@ public class ModelStateDictionaryTest
             new[] { bindingMetadataProvider }
         );
         var optionsAccessor = new OptionsAccessor();
-        optionsAccessor
-            .Value
+        optionsAccessor.Value
             .ModelBindingMessageProvider
             .SetUnknownValueIsInvalidAccessor(name =>
                 $"Hmm, the supplied value is not valid for {name}."
@@ -1022,8 +1021,7 @@ public class ModelStateDictionaryTest
             new[] { bindingMetadataProvider }
         );
         var optionsAccessor = new OptionsAccessor();
-        optionsAccessor
-            .Value
+        optionsAccessor.Value
             .ModelBindingMessageProvider
             .SetNonPropertyUnknownValueIsInvalidAccessor(() =>
                 "Hmm, the supplied value is not valid."
@@ -1056,8 +1054,7 @@ public class ModelStateDictionaryTest
             new[] { bindingMetadataProvider }
         );
         var optionsAccessor = new OptionsAccessor();
-        optionsAccessor
-            .Value
+        optionsAccessor.Value
             .ModelBindingMessageProvider
             .SetNonPropertyUnknownValueIsInvalidAccessor(() =>
                 "Hmm, the supplied value is not valid."
@@ -1123,8 +1120,7 @@ public class ModelStateDictionaryTest
             new[] { bindingMetadataProvider }
         );
         var optionsAccessor = new OptionsAccessor();
-        optionsAccessor
-            .Value
+        optionsAccessor.Value
             .ModelBindingMessageProvider
             .SetAttemptedValueIsInvalidAccessor(
                 (value, name) => $"Hmm, the value '{value}' is not valid for {name}."
@@ -1156,8 +1152,7 @@ public class ModelStateDictionaryTest
             new[] { bindingMetadataProvider }
         );
         var optionsAccessor = new OptionsAccessor();
-        optionsAccessor
-            .Value
+        optionsAccessor.Value
             .ModelBindingMessageProvider
             .SetNonPropertyAttemptedValueIsInvalidAccessor(value =>
                 $"Hmm, the value '{value}' is not valid."
@@ -1191,8 +1186,7 @@ public class ModelStateDictionaryTest
             new[] { bindingMetadataProvider }
         );
         var optionsAccessor = new OptionsAccessor();
-        optionsAccessor
-            .Value
+        optionsAccessor.Value
             .ModelBindingMessageProvider
             .SetNonPropertyAttemptedValueIsInvalidAccessor(
                 (value) => $"Hmm, the value '{value}' is not valid."

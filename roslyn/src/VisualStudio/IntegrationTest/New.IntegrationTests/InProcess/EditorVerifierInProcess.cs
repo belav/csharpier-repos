@@ -61,11 +61,9 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
             var expectedTextAfterCaret = expectedText[expectedCaretMarkupEndIndex..];
 
             var lineText = await TestServices.Editor.GetCurrentLineTextAsync(cancellationToken);
-            var lineTextBeforeCaret = await TestServices
-                .Editor
+            var lineTextBeforeCaret = await TestServices.Editor
                 .GetLineTextBeforeCaretAsync(cancellationToken);
-            var lineTextAfterCaret = await TestServices
-                .Editor
+            var lineTextAfterCaret = await TestServices.Editor
                 .GetLineTextAfterCaretAsync(cancellationToken);
 
             Assert.Equal(expectedTextBeforeCaret, lineTextBeforeCaret);
@@ -80,8 +78,9 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
         {
             var view = await TestServices.Editor.GetActiveTextViewAsync(cancellationToken);
             var editorText = view.TextSnapshot.GetText();
-            var caretPosition = (await TestServices.Editor.GetCaretPositionAsync(cancellationToken))
-                .BufferPosition
+            var caretPosition = (
+                await TestServices.Editor.GetCaretPositionAsync(cancellationToken)
+            ).BufferPosition
                 .Position;
             editorText = editorText.Insert(caretPosition, "$$");
             AssertEx.EqualOrDiff(expectedText, editorText);
@@ -132,8 +131,9 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
 
             var index = editorText.IndexOf(expectedTextWithoutCaret);
 
-            var caretPosition = (await TestServices.Editor.GetCaretPositionAsync(cancellationToken))
-                .BufferPosition
+            var caretPosition = (
+                await TestServices.Editor.GetCaretPositionAsync(cancellationToken)
+            ).BufferPosition
                 .Position;
             Assert.Equal(caretStartIndex + index, caretPosition);
         }
@@ -145,8 +145,7 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
         {
             Assert.Equal(
                 expectedCaretPosition,
-                (await TestServices.Editor.GetCaretPositionAsync(cancellationToken))
-                    .BufferPosition
+                (await TestServices.Editor.GetCaretPositionAsync(cancellationToken)).BufferPosition
                     .Position
             );
         }
@@ -161,8 +160,7 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
             CancellationToken cancellationToken
         )
         {
-            await TestServices
-                .Workspace
+            await TestServices.Workspace
                 .WaitForAllAsyncOperationsAsync(
                     [
                         FeatureAttribute.Workspace,

@@ -71,13 +71,14 @@ namespace Mono.CSharp
                 && BuiltinTypeSpec.IsPrimitiveTypeOrDecimal(type)
             )
             {
-                ec.Report.Error(
-                    31,
-                    loc,
-                    "Constant value `{0}' cannot be converted to a `{1}'",
-                    GetValueAsLiteral(),
-                    target.GetSignatureForError()
-                );
+                ec.Report
+                    .Error(
+                        31,
+                        loc,
+                        "Constant value `{0}' cannot be converted to a `{1}'",
+                        GetValueAsLiteral(),
+                        target.GetSignatureForError()
+                    );
             }
             else
             {
@@ -374,13 +375,14 @@ namespace Mono.CSharp
             {
                 if (ec.ConstantCheckState && Type.BuiltinType != BuiltinTypeSpec.Type.Decimal)
                 {
-                    ec.Report.Error(
-                        221,
-                        loc,
-                        "Constant value `{0}' cannot be converted to a `{1}' (use `unchecked' syntax to override)",
-                        GetValueAsLiteral(),
-                        target_type.GetSignatureForError()
-                    );
+                    ec.Report
+                        .Error(
+                            221,
+                            loc,
+                            "Constant value `{0}' cannot be converted to a `{1}' (use `unchecked' syntax to override)",
+                            GetValueAsLiteral(),
+                            target_type.GetSignatureForError()
+                        );
                 }
                 else
                 {
@@ -526,13 +528,14 @@ namespace Mono.CSharp
             }
             catch
             {
-                ec.Report.Error(
-                    31,
-                    loc,
-                    "Constant value `{0}' cannot be converted to a `{1}'",
-                    GetValueAsLiteral(),
-                    target.GetSignatureForError()
-                );
+                ec.Report
+                    .Error(
+                        31,
+                        loc,
+                        "Constant value `{0}' cannot be converted to a `{1}'",
+                        GetValueAsLiteral(),
+                        target.GetSignatureForError()
+                    );
             }
         }
 
@@ -2316,11 +2319,8 @@ namespace Mono.CSharp
                 Value = sn.Name;
 
                 if (rc.Module.Compiler.Settings.Version < LanguageVersion.V_6)
-                    rc.Report.FeatureIsNotAvailable(
-                        rc.Module.Compiler,
-                        Location,
-                        "nameof operator"
-                    );
+                    rc.Report
+                        .FeatureIsNotAvailable(rc.Module.Compiler, Location, "nameof operator");
 
                 var res = sn.LookupNameExpression(
                     rc,
@@ -2351,11 +2351,8 @@ namespace Mono.CSharp
                 }
 
                 if (rc.Module.Compiler.Settings.Version < LanguageVersion.V_6)
-                    rc.Report.FeatureIsNotAvailable(
-                        rc.Module.Compiler,
-                        Location,
-                        "nameof operator"
-                    );
+                    rc.Report
+                        .FeatureIsNotAvailable(rc.Module.Compiler, Location, "nameof operator");
 
                 if (ma is QualifiedAliasMember)
                 {
@@ -2374,11 +2371,12 @@ namespace Mono.CSharp
                 //
                 if (!IsLeftResolvedExpressionValid(ma.LeftExpression) || ma.HasConditionalAccess())
                 {
-                    rc.Report.Error(
-                        8082,
-                        lexpr.Location,
-                        "An argument to nameof operator cannot include sub-expression"
-                    );
+                    rc.Report
+                        .Error(
+                            8082,
+                            lexpr.Location,
+                            "An argument to nameof operator cannot include sub-expression"
+                        );
                     return false;
                 }
 

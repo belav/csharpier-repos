@@ -36,8 +36,7 @@ namespace System.Collections.Immutable.Tests
         [Fact]
         public void ChangeUnorderedEqualityComparer()
         {
-            ImmutableHashSet<string> ordinalSet = ImmutableHashSet<string>
-                .Empty
+            ImmutableHashSet<string> ordinalSet = ImmutableHashSet<string>.Empty
                 .WithComparer(StringComparer.Ordinal)
                 .Add("apple")
                 .Add("APPLE");
@@ -195,10 +194,11 @@ namespace System.Collections.Immutable.Tests
             DebuggerAttributeInfo info = DebuggerAttributes.ValidateDebuggerTypeProxyProperties(
                 set
             );
-            PropertyInfo itemProperty = info.Properties.Single(pr =>
-                pr.GetCustomAttribute<DebuggerBrowsableAttribute>().State
-                == DebuggerBrowsableState.RootHidden
-            );
+            PropertyInfo itemProperty = info.Properties
+                .Single(pr =>
+                    pr.GetCustomAttribute<DebuggerBrowsableAttribute>().State
+                    == DebuggerBrowsableState.RootHidden
+                );
             int[] items = itemProperty.GetValue(info.Instance) as int[];
             Assert.Equal(set, items);
         }

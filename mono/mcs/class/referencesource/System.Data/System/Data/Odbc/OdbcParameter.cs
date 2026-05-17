@@ -830,8 +830,7 @@ namespace System.Data.Odbc
                         {
                             int lcid = System.Globalization.CultureInfo.CurrentCulture.LCID;
                             CultureInfo culInfo = new CultureInfo(lcid);
-                            Encoding cpe = System
-                                .Text
+                            Encoding cpe = System.Text
                                 .Encoding
                                 .GetEncoding(culInfo.TextInfo.ANSICodePage);
                             value = cpe.GetBytes(value.ToString());
@@ -1097,8 +1096,7 @@ namespace System.Data.Odbc
                         {
                             int lcid = System.Globalization.CultureInfo.CurrentCulture.LCID;
                             CultureInfo culInfo = new CultureInfo(lcid);
-                            Encoding cpe = System
-                                .Text
+                            Encoding cpe = System.Text
                                 .Encoding
                                 .GetEncoding(culInfo.TextInfo.ANSICodePage);
                             Value = cpe.GetString((Byte[])Value);

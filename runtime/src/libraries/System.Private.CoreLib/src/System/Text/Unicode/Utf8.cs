@@ -504,8 +504,7 @@ namespace System.Text.Unicode
 
                     // The 99.999% for AppendLiteral is to be called with a const string.
                     // ReadUtf8 is a JIT intrinsic that can do the UTF8 encoding at JIT time.
-                    int bytesWritten = UTF8Encoding
-                        .UTF8EncodingSealed
+                    int bytesWritten = UTF8Encoding.UTF8EncodingSealed
                         .ReadUtf8(
                             ref value.GetRawStringData(),
                             value.Length,

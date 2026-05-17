@@ -2990,8 +2990,7 @@ record Goo(int Member)
 
         private static bool IsFromFile(NavigateToItem item, string fileName)
         {
-            return ((CodeAnalysis.NavigateTo.INavigateToSearchResult)item.Tag)
-                    .NavigableItem
+            return ((CodeAnalysis.NavigateTo.INavigateToSearchResult)item.Tag).NavigableItem
                     .Document
                     .Name == fileName;
         }

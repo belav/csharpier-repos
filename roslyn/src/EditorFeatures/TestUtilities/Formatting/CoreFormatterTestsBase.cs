@@ -40,9 +40,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Formatting
 {
     public abstract class CoreFormatterTestsBase
     {
-        private static readonly TestComposition s_composition = EditorTestCompositions
-            .EditorFeatures
-            .AddParts(typeof(TestFormattingRuleFactoryServiceFactory));
+        private static readonly TestComposition s_composition =
+            EditorTestCompositions.EditorFeatures
+                .AddParts(typeof(TestFormattingRuleFactoryServiceFactory));
 
         private readonly ITestOutputHelper _output;
 
@@ -97,8 +97,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Formatting
             editorOptions.SetOptionValue(DefaultOptions.ConvertTabsToSpacesOptionId, !useTabs);
 
             // Remove once https://github.com/dotnet/roslyn/issues/62204 is fixed:
-            workspace
-                .GlobalOptions
+            workspace.GlobalOptions
                 .SetGlobalOption(
                     IndentationOptionsStorage.SmartIndent,
                     document.Project.Language,
@@ -120,8 +119,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Formatting
                     (p, m, a, s) =>
                     {
                         if (
-                            workspace
-                                .Services
+                            workspace.Services
                                 .GetService<IHostDependentFormattingRuleFactoryService>()
                                 is TestFormattingRuleFactoryServiceFactory.Factory factory
                             && factory.BaseIndentation != 0
@@ -180,9 +178,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Formatting
             // set up caret position
             var testDocument = workspace.Documents.Single();
             var view = testDocument.GetTextView();
-            view.Caret.MoveTo(
-                new SnapshotPoint(view.TextSnapshot, testDocument.CursorPosition.Value)
-            );
+            view.Caret
+                .MoveTo(new SnapshotPoint(view.TextSnapshot, testDocument.CursorPosition.Value));
 
             // get original buffer
             var buffer = workspace.Documents.First().GetTextBuffer();
@@ -268,8 +265,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Formatting
                 buffer.CurrentSnapshot.GetText()
             );
 
-            var formattingRuleProvider = workspace
-                .Services
+            var formattingRuleProvider = workspace.Services
                 .GetService<IHostDependentFormattingRuleFactoryService>();
             if (baseIndentation.HasValue)
             {
@@ -377,9 +373,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Formatting
             // set up caret position
             var testDocument = workspace.Documents.Single();
             var view = testDocument.GetTextView();
-            view.Caret.MoveTo(
-                new SnapshotPoint(view.TextSnapshot, testDocument.CursorPosition.Value)
-            );
+            view.Caret
+                .MoveTo(new SnapshotPoint(view.TextSnapshot, testDocument.CursorPosition.Value));
 
             // get original buffer
             var buffer = workspace.Documents.First().GetTextBuffer();
@@ -448,8 +443,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Formatting
         protected static void AssertFormatOnArbitraryNode(SyntaxNode node, string expected)
         {
             using var workspace = new AdhocWorkspace();
-            var formattingService = workspace
-                .Services
+            var formattingService = workspace.Services
                 .GetLanguageServices(node.Language)
                 .GetRequiredService<ISyntaxFormattingService>();
             var options = formattingService.GetFormattingOptions(

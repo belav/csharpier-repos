@@ -348,13 +348,14 @@ namespace Microsoft.Extensions.Caching.Memory
             void ScheduleTask(DateTime utcNow)
             {
                 _lastExpirationScan = utcNow;
-                Task.Factory.StartNew(
-                    state => ((MemoryCache)state!).ScanForExpiredItems(),
-                    this,
-                    CancellationToken.None,
-                    TaskCreationOptions.DenyChildAttach,
-                    TaskScheduler.Default
-                );
+                Task.Factory
+                    .StartNew(
+                        state => ((MemoryCache)state!).ScanForExpiredItems(),
+                        this,
+                        CancellationToken.None,
+                        TaskCreationOptions.DenyChildAttach,
+                        TaskScheduler.Default
+                    );
             }
         }
 

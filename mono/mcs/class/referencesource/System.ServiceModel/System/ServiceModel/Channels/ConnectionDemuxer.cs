@@ -211,8 +211,7 @@ namespace System.ServiceModel.Channels
                         PooledConnectionDequeuedCallback
                     );
                 }
-                connectionState
-                    .ModeReader
+                connectionState.ModeReader
                     .StartReading(this.idleTimeout, this.pooledConnectionDequeuedCallback);
             }
         }
@@ -638,11 +637,12 @@ namespace System.ServiceModel.Channels
                 this.timeoutHelper = new TimeoutHelper(
                     this.singletonChannelListener.ReceiveTimeout
                 );
-                IAsyncResult result = this.serverSingletonPreambleReader.BeginCompletePreamble(
-                    this.timeoutHelper.RemainingTime(),
-                    onPreambleComplete,
-                    this
-                );
+                IAsyncResult result = this.serverSingletonPreambleReader
+                    .BeginCompletePreamble(
+                        this.timeoutHelper.RemainingTime(),
+                        onPreambleComplete,
+                        this
+                    );
 
                 if (result.CompletedSynchronously)
                 {
@@ -688,8 +688,8 @@ namespace System.ServiceModel.Channels
 
             bool HandlePreambleComplete(IAsyncResult result)
             {
-                IConnection upgradedConnection =
-                    this.serverSingletonPreambleReader.EndCompletePreamble(result);
+                IConnection upgradedConnection = this.serverSingletonPreambleReader
+                    .EndCompletePreamble(result);
                 ServerSingletonConnectionReader singletonReader =
                     new ServerSingletonConnectionReader(
                         serverSingletonPreambleReader,

@@ -85,25 +85,27 @@ namespace System.Windows.Forms.Theming.Default
                 e.Graphics.DrawLine(Pens.White, 0, 2, 1, 2);
                 e.Graphics.DrawLine(Pens.White, 0, 2, 0, e.GripBounds.Height - 3);
                 e.Graphics.DrawLine(SystemPens.ControlDark, 2, 2, 2, e.GripBounds.Height - 3);
-                e.Graphics.DrawLine(
-                    SystemPens.ControlDark,
-                    2,
-                    e.GripBounds.Height - 3,
-                    0,
-                    e.GripBounds.Height - 3
-                );
+                e.Graphics
+                    .DrawLine(
+                        SystemPens.ControlDark,
+                        2,
+                        e.GripBounds.Height - 3,
+                        0,
+                        e.GripBounds.Height - 3
+                    );
             }
             else
             {
                 e.Graphics.DrawLine(Pens.White, 2, 0, e.GripBounds.Width - 3, 0);
                 e.Graphics.DrawLine(Pens.White, 2, 0, 2, 1);
-                e.Graphics.DrawLine(
-                    SystemPens.ControlDark,
-                    e.GripBounds.Width - 3,
-                    0,
-                    e.GripBounds.Width - 3,
-                    2
-                );
+                e.Graphics
+                    .DrawLine(
+                        SystemPens.ControlDark,
+                        e.GripBounds.Width - 3,
+                        0,
+                        e.GripBounds.Width - 3,
+                        2
+                    );
                 e.Graphics.DrawLine(SystemPens.ControlDark, 2, 2, e.GripBounds.Width - 3, 2);
             }
         }
@@ -216,13 +218,14 @@ namespace System.Windows.Forms.Theming.Default
                 e.Graphics.Clear(e.BackColor);
 
             if (e.ToolStrip is StatusStrip)
-                e.Graphics.DrawLine(
-                    Pens.White,
-                    e.AffectedBounds.Left,
-                    e.AffectedBounds.Top,
-                    e.AffectedBounds.Right,
-                    e.AffectedBounds.Top
-                );
+                e.Graphics
+                    .DrawLine(
+                        Pens.White,
+                        e.AffectedBounds.Left,
+                        e.AffectedBounds.Top,
+                        e.AffectedBounds.Right,
+                        e.AffectedBounds.Top
+                    );
         }
 
         public virtual void OnRenderToolStripBorder(ToolStripRenderEventArgs e)
@@ -234,16 +237,18 @@ namespace System.Windows.Forms.Theming.Default
                 ControlPaint.DrawBorder3D(e.Graphics, e.AffectedBounds, Border3DStyle.Raised);
             else
             {
-                e.Graphics.DrawLine(
-                    SystemPens.ControlDark,
-                    new Point(e.ToolStrip.Left, e.ToolStrip.Height - 2),
-                    new Point(e.ToolStrip.Right, e.ToolStrip.Height - 2)
-                );
-                e.Graphics.DrawLine(
-                    Pens.White,
-                    new Point(e.ToolStrip.Left, e.ToolStrip.Height - 1),
-                    new Point(e.ToolStrip.Right, e.ToolStrip.Height - 1)
-                );
+                e.Graphics
+                    .DrawLine(
+                        SystemPens.ControlDark,
+                        new Point(e.ToolStrip.Left, e.ToolStrip.Height - 2),
+                        new Point(e.ToolStrip.Right, e.ToolStrip.Height - 2)
+                    );
+                e.Graphics
+                    .DrawLine(
+                        Pens.White,
+                        new Point(e.ToolStrip.Left, e.ToolStrip.Height - 1),
+                        new Point(e.ToolStrip.Right, e.ToolStrip.Height - 1)
+                    );
             }
         }
         #endregion

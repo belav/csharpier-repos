@@ -103,8 +103,7 @@ namespace System.Runtime.Serialization
             }
             catch (XmlException ex)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         XmlObjectSerializer.CreateSerializationException(
                             GetTypeInfoError(SR.ErrorSerializing, GetSerializeType(graph), ex),
@@ -114,8 +113,7 @@ namespace System.Runtime.Serialization
             }
             catch (FormatException ex)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         XmlObjectSerializer.CreateSerializationException(
                             GetTypeInfoError(SR.ErrorSerializing, GetSerializeType(graph), ex),
@@ -173,8 +171,7 @@ namespace System.Runtime.Serialization
             }
             catch (XmlException ex)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         XmlObjectSerializer.CreateSerializationException(
                             GetTypeInfoError(SR.ErrorWriteStartObject, GetSerializeType(graph), ex),
@@ -184,8 +181,7 @@ namespace System.Runtime.Serialization
             }
             catch (FormatException ex)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         XmlObjectSerializer.CreateSerializationException(
                             GetTypeInfoError(SR.ErrorWriteStartObject, GetSerializeType(graph), ex),
@@ -210,8 +206,7 @@ namespace System.Runtime.Serialization
                     );
                     if (writer.WriteState != WriteState.Element)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 XmlObjectSerializer.CreateSerializationException(
                                     SR.GetString(SR.XmlWriterMustBeInElement, writer.WriteState)
@@ -229,8 +224,7 @@ namespace System.Runtime.Serialization
                 else
                 {
                     if (writer.WriteState != WriteState.Element)
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 XmlObjectSerializer.CreateSerializationException(
                                     SR.GetString(SR.XmlWriterMustBeInElement, writer.WriteState)
@@ -241,8 +235,7 @@ namespace System.Runtime.Serialization
             }
             catch (XmlException ex)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         XmlObjectSerializer.CreateSerializationException(
                             GetTypeInfoError(SR.ErrorSerializing, GetSerializeType(graph), ex),
@@ -252,8 +245,7 @@ namespace System.Runtime.Serialization
             }
             catch (FormatException ex)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         XmlObjectSerializer.CreateSerializationException(
                             GetTypeInfoError(SR.ErrorSerializing, GetSerializeType(graph), ex),
@@ -272,8 +264,7 @@ namespace System.Runtime.Serialization
             }
             catch (XmlException ex)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         XmlObjectSerializer.CreateSerializationException(
                             GetTypeInfoError(SR.ErrorWriteEndObject, null, ex),
@@ -283,8 +274,7 @@ namespace System.Runtime.Serialization
             }
             catch (FormatException ex)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         XmlObjectSerializer.CreateSerializationException(
                             GetTypeInfoError(SR.ErrorWriteEndObject, null, ex),
@@ -470,8 +460,7 @@ namespace System.Runtime.Serialization
             }
             catch (XmlException ex)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         XmlObjectSerializer.CreateSerializationException(
                             GetTypeInfoError(SR.ErrorDeserializing, GetDeserializeType(), ex),
@@ -481,8 +470,7 @@ namespace System.Runtime.Serialization
             }
             catch (FormatException ex)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         XmlObjectSerializer.CreateSerializationException(
                             GetTypeInfoError(SR.ErrorDeserializing, GetDeserializeType(), ex),
@@ -501,8 +489,7 @@ namespace System.Runtime.Serialization
             }
             catch (XmlException ex)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         XmlObjectSerializer.CreateSerializationException(
                             GetTypeInfoError(SR.ErrorIsStartObject, GetDeserializeType(), ex),
@@ -512,8 +499,7 @@ namespace System.Runtime.Serialization
             }
             catch (FormatException ex)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         XmlObjectSerializer.CreateSerializationException(
                             GetTypeInfoError(SR.ErrorIsStartObject, GetDeserializeType(), ex),
@@ -592,8 +578,7 @@ namespace System.Runtime.Serialization
         internal static void CheckNull(object obj, string name)
         {
             if (obj == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException(name));
         }
 

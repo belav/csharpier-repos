@@ -101,8 +101,7 @@ namespace System.Composition.TypedParts.Discovery
             if (_constructor == null)
             {
                 foreach (
-                    var c in _partType
-                        .DeclaredConstructors
+                    var c in _partType.DeclaredConstructors
                         .Where(ci => ci.IsPublic && !(ci.IsStatic))
                 )
                 {
@@ -131,8 +130,7 @@ namespace System.Composition.TypedParts.Discovery
                     _constructor = GetConstructorInfoFromGenericType(_partType);
                 }
 
-                _constructor ??= _partType
-                    .DeclaredConstructors
+                _constructor ??= _partType.DeclaredConstructors
                     .FirstOrDefault(ci =>
                         ci.IsPublic && !(ci.IsStatic || ci.GetParameters().Length != 0)
                     );
@@ -192,8 +190,7 @@ namespace System.Composition.TypedParts.Discovery
 
             for (var index = 0; index < constructorsCount; index++)
             {
-                ConstructorInfo constructorInfo = genericPartTypeInfo
-                    .DeclaredConstructors
+                ConstructorInfo constructorInfo = genericPartTypeInfo.DeclaredConstructors
                     .ElementAt(index);
 
                 if (!constructorInfo.IsPublic || constructorInfo.IsStatic)

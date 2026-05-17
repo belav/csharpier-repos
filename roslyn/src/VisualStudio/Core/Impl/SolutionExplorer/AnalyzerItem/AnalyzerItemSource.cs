@@ -85,8 +85,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
                 return;
             }
 
-            var project = _analyzersFolder
-                .Workspace
+            var project = _analyzersFolder.Workspace
                 .CurrentSolution
                 .GetProject(_analyzersFolder.ProjectId);
 
@@ -148,8 +147,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
                     return _analyzerItems.Count > 0;
                 }
 
-                var project = _analyzersFolder
-                    .Workspace
+                var project = _analyzersFolder.Workspace
                     .CurrentSolution
                     .GetProject(_analyzersFolder.ProjectId);
 
@@ -170,8 +168,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
                 {
                     _analyzerItems = new BulkObservableCollection<AnalyzerItem>();
 
-                    var project = _analyzersFolder
-                        .Workspace
+                    var project = _analyzersFolder.Workspace
                         .CurrentSolution
                         .GetProject(_analyzersFolder.ProjectId);
 

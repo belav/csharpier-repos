@@ -92,11 +92,9 @@ internal sealed class ExtractMethodCommandHandler : ICommandHandler<ExtractMetho
         // wait indicator for Extract Method
         if (_renameService.ActiveSession != null)
         {
-            _threadingContext
-                .JoinableTaskFactory
+            _threadingContext.JoinableTaskFactory
                 .Run(() =>
-                    _renameService
-                        .ActiveSession
+                    _renameService.ActiveSession
                         .CommitAsync(previewChanges: false, CancellationToken.None)
                 );
         }
@@ -133,8 +131,7 @@ internal sealed class ExtractMethodCommandHandler : ICommandHandler<ExtractMetho
     )
     {
         _threadingContext.ThrowIfNotOnUIThread();
-        var indicatorFactory = document
-            .Project
+        var indicatorFactory = document.Project
             .Solution
             .Services
             .GetRequiredService<IBackgroundWorkIndicatorFactory>();
@@ -162,8 +159,7 @@ internal sealed class ExtractMethodCommandHandler : ICommandHandler<ExtractMetho
 
         var cancellationToken = waitContext.UserCancellationToken;
 
-        var document = await textBuffer
-            .CurrentSnapshot
+        var document = await textBuffer.CurrentSnapshot
             .GetFullyLoadedOpenDocumentInCurrentContextWithChangesAsync(waitContext)
             .ConfigureAwait(false);
         if (document is null)
@@ -254,8 +250,7 @@ internal sealed class ExtractMethodCommandHandler : ICommandHandler<ExtractMetho
 
         // We have some sort of issue.  See what the user wants to do.  If we have no way to inform the user bail
         // out rather than doing something wrong.
-        var notificationService = document
-            .Project
+        var notificationService = document.Project
             .Solution
             .Services
             .GetService<INotificationService>();
@@ -351,9 +346,9 @@ internal sealed class ExtractMethodCommandHandler : ICommandHandler<ExtractMetho
             return null;
 
         var reason = result.Reasons.FirstOrDefault();
-        var length = FeaturesResources
-            .Asynchronous_method_cannot_have_ref_out_parameters_colon_bracket_0_bracket
-            .IndexOf(':');
+        var length =
+            FeaturesResources.Asynchronous_method_cannot_have_ref_out_parameters_colon_bracket_0_bracket
+                .IndexOf(':');
         if (
             reason != null
             && length > 0

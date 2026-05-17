@@ -37,8 +37,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
 
         // Explicitly remove ":" from the set of filter characters because (by default)
         // any character that appears in DisplayText gets treated as a filter char.
-        private static readonly CompletionItemRules s_rules = CompletionItemRules
-            .Default
+        private static readonly CompletionItemRules s_rules = CompletionItemRules.Default
             .WithFilterCharacterRule(
                 CharacterSetModificationRule.Create(CharacterSetModificationKind.Remove, ':')
             );
@@ -194,8 +193,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             int position
         )
         {
-            var existingArguments = argumentList
-                .Arguments
+            var existingArguments = argumentList.Arguments
                 .Where(a => a.Span.End <= position && a.NameColon != null)
                 .Select(a => a.NameColon!.Name.Identifier.ValueText);
 
@@ -362,8 +360,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             var type =
                 semanticModel.GetTypeInfo(baseType.Type, cancellationToken).Type
                 as INamedTypeSymbol;
-            return type
-                ?.InstanceConstructors
+            return type?.InstanceConstructors
                 .Where(m => m.IsAccessibleWithin(within))
                 .Select(m => m.Parameters);
         }

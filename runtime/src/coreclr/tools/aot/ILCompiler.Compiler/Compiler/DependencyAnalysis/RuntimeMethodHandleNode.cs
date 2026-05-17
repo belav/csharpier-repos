@@ -72,8 +72,7 @@ namespace ILCompiler.DependencyAnalysis
                 // GVM analysis happens on canonical forms, but this is potentially injecting new genericness
                 // into the system. Ensure reflection analysis can still see this.
                 if (_targetMethod.IsAbstract)
-                    factory
-                        .MetadataManager
+                    factory.MetadataManager
                         .GetDependenciesDueToMethodCodePresence(
                             ref dependencies,
                             factory,
@@ -82,8 +81,7 @@ namespace ILCompiler.DependencyAnalysis
                         );
             }
 
-            factory
-                .MetadataManager
+            factory.MetadataManager
                 .GetDependenciesDueToLdToken(ref dependencies, factory, _targetMethod);
 
             return dependencies;
@@ -101,12 +99,10 @@ namespace ILCompiler.DependencyAnalysis
             objData.RequireInitialPointerAlignment();
             objData.AddSymbol(this);
 
-            NativeLayoutMethodLdTokenVertexNode ldtokenSigNode = factory
-                .NativeLayout
+            NativeLayoutMethodLdTokenVertexNode ldtokenSigNode = factory.NativeLayout
                 .MethodLdTokenVertex(_targetMethod);
             objData.EmitPointerReloc(
-                factory
-                    .NativeLayout
+                factory.NativeLayout
                     .NativeLayoutSignature(
                         ldtokenSigNode,
                         s_NativeLayoutSignaturePrefix,

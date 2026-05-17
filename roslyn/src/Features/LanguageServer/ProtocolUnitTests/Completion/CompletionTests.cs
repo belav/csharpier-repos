@@ -414,16 +414,14 @@ static class Extensions
             var solution = testLspServer.TestWorkspace.CurrentSolution;
 
             // Make sure the unimported types option is on
-            testLspServer
-                .TestWorkspace
+            testLspServer.TestWorkspace
                 .GlobalOptions
                 .SetGlobalOption(
                     CompletionOptionsStorage.ShowItemsFromUnimportedNamespaces,
                     LanguageNames.CSharp,
                     true
                 );
-            testLspServer
-                .TestWorkspace
+            testLspServer.TestWorkspace
                 .GlobalOptions
                 .SetGlobalOption(
                     CompletionOptionsStorage.ForceExpandedCompletionIndexCreation,
@@ -456,8 +454,7 @@ static class Extensions
                 s_vsCompletionCapabilities
             );
 
-            testLspServer
-                .TestWorkspace
+            testLspServer.TestWorkspace
                 .GlobalOptions
                 .SetGlobalOption(
                     CompletionOptionsStorage.SnippetsBehavior,
@@ -1879,8 +1876,7 @@ pub{|caret:|}class";
                 s_vsCompletionCapabilities
             );
             var caret = testLspServer.GetLocations("caret").Single();
-            testLspServer
-                .TestWorkspace
+            testLspServer.TestWorkspace
                 .GlobalOptions
                 .SetGlobalOption(
                     CompletionOptionsStorage.SnippetsBehavior,

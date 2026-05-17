@@ -157,8 +157,7 @@ namespace System.ServiceModel.Security
 
             if (this.DetectReplays && !this.RequireIntegrity)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(
                         "RequireIntegrity",
                         SR.GetString(SR.ForReplayDetectionToBeDoneRequireIntegrityMustBeSet)
@@ -169,16 +168,14 @@ namespace System.ServiceModel.Security
             {
                 if (!this.SupportsRequestReply)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgument(
                             SR.GetString(SR.SignatureConfirmationRequiresRequestReply)
                         );
                 }
                 if (!this.StandardsManager.SecurityVersion.SupportsSignatureConfirmation)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgument(
                             SR.GetString(
                                 SR.SecurityVersionDoesNotSupportSignatureConfirmation,
@@ -227,8 +224,7 @@ namespace System.ServiceModel.Security
             MessageFault fault = MessageFault.CreateFault(senderCode, reason);
             if (isForSignature)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new MessageSecurityException(
                             SR.GetString(SR.NoSignaturePartsSpecified, action),
@@ -239,8 +235,7 @@ namespace System.ServiceModel.Security
             }
             else
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new MessageSecurityException(
                             SR.GetString(SR.NoEncryptionPartsSpecified, action),

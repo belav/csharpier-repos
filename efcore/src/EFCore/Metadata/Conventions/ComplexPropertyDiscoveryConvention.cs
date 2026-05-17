@@ -106,8 +106,7 @@ public class ComplexPropertyDiscoveryConvention
                 memberInfo is PropertyInfo propertyInfo
                 && propertyInfo.GetIndexParameters().Length != 0
             )
-            || !Dependencies
-                .MemberClassifier
+            || !Dependencies.MemberClassifier
                 .IsCandidateComplexProperty(
                     memberInfo,
                     structuralType.Model,

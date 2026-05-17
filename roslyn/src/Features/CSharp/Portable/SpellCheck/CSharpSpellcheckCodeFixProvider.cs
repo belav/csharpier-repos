@@ -39,8 +39,7 @@ namespace Microsoft.CodeAnalysis.CSharp.SpellCheck
         public CSharpSpellCheckCodeFixProvider() { }
 
         public override ImmutableArray<string> FixableDiagnosticIds { get; } =
-            AddImportDiagnosticIds
-                .FixableDiagnosticIds
+            AddImportDiagnosticIds.FixableDiagnosticIds
                 .Concat(GenerateMethodDiagnosticIds.FixableDiagnosticIds)
                 .Concat(ImmutableArray.Create(CS0426, CS1520));
 

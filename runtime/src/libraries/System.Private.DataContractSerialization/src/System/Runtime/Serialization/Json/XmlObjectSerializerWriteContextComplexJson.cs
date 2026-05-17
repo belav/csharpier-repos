@@ -612,8 +612,7 @@ namespace System.Runtime.Serialization.Json
                 )
                 {
                     itemContract = context.GetDataContract(
-                        Globals
-                            .TypeOfKeyValuePair
+                        Globals.TypeOfKeyValuePair
                             .MakeGenericType(collectionContract.ItemType.GetGenericArguments())
                     );
                 }

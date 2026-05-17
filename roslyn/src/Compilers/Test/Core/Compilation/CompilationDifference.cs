@@ -184,8 +184,7 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             params string[] expectedSynthesizedTypesAndMemberCounts
         )
         {
-            var actual = EmitResult
-                .Baseline
+            var actual = EmitResult.Baseline
                 .SynthesizedMembers
                 .Select(e =>
                     e.Key.ToString() + ": {" + string.Join(", ", e.Value.Select(v => v.Name)) + "}"
@@ -203,8 +202,7 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             params string[] expectedSynthesizedTypesAndMemberCounts
         )
         {
-            var actual = EmitResult
-                .Baseline
+            var actual = EmitResult.Baseline
                 .SynthesizedMembers
                 .Single(e => e.Key.ToString() == typeName)
                 .Value
@@ -222,8 +220,7 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
         {
             AssertEx.Equal(
                 expectedMethodTokens,
-                EmitResult
-                    .UpdatedMethods
+                EmitResult.UpdatedMethods
                     .Select(methodHandle => $"0x{MetadataTokens.GetToken(methodHandle):X8}")
             );
         }

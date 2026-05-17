@@ -118,8 +118,7 @@ namespace System.ServiceModel.Channels
                     {
                         // Get the Win32 error code before doing anything else
                         error = Marshal.GetLastWin32Error();
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(new SocketException(error));
                     }
 

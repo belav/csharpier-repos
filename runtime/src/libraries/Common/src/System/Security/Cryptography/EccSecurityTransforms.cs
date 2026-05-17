@@ -154,8 +154,7 @@ namespace System.Security.Cryptography
                 throw new CryptographicException(SR.Cryptography_OpenInvalidHandle);
             }
 
-            bool gotKeyBlob = Interop
-                .AppleCrypto
+            bool gotKeyBlob = Interop.AppleCrypto
                 .TrySecKeyCopyExternalRepresentation(
                     includePrivateParameters ? keys.PrivateKey! : keys.PublicKey,
                     out byte[] keyBlob
@@ -280,8 +279,7 @@ namespace System.Security.Cryptography
                     dataKey
                 );
 
-                return Interop
-                    .AppleCrypto
+                return Interop.AppleCrypto
                     .CreateDataKey(
                         dataKey,
                         Interop.AppleCrypto.PAL_KeyAlgorithm.EC,

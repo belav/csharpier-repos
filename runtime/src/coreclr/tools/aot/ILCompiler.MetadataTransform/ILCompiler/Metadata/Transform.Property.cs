@@ -70,8 +70,7 @@ namespace ILCompiler.Metadata
 
             if (getterHasMetadata)
             {
-                result
-                    .MethodSemantics
+                result.MethodSemantics
                     .Add(
                         new MethodSemantics
                         {
@@ -83,8 +82,7 @@ namespace ILCompiler.Metadata
 
             if (setterHasMetadata)
             {
-                result
-                    .MethodSemantics
+                result.MethodSemantics
                     .Add(
                         new MethodSemantics
                         {

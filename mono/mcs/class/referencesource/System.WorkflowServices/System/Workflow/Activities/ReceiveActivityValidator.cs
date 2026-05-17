@@ -19,8 +19,7 @@ namespace System.Workflow.Activities
             ReceiveActivity receiveActivity = obj as ReceiveActivity;
             if (receiveActivity == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(
                         "obj",
                         SR2.GetString(SR2.Error_ArgumentTypeInvalid, "obj", typeof(ReceiveActivity))
@@ -30,8 +29,7 @@ namespace System.Workflow.Activities
             ITypeProvider typeProvider = manager.GetService(typeof(ITypeProvider)) as ITypeProvider;
             if (typeProvider == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR2.GetString(SR2.General_MissingService, typeof(ITypeProvider).Name)

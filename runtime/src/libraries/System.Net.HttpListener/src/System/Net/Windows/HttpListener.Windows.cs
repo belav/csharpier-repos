@@ -107,8 +107,7 @@ namespace System.Net
             //
             // Set the url group property using Http Api.
             //
-            uint statusCode = Interop
-                .HttpApi
+            uint statusCode = Interop.HttpApi
                 .HttpSetUrlGroupProperty(_urlGroupId, property, info, infosize);
 
             if (statusCode != Interop.HttpApi.ERROR_SUCCESS)
@@ -182,8 +181,7 @@ namespace System.Net
 
             try
             {
-                uint statusCode = Interop
-                    .HttpApi
+                uint statusCode = Interop.HttpApi
                     .HttpCreateServerSession(Interop.HttpApi.s_version, &id, 0);
 
                 if (statusCode != Interop.HttpApi.ERROR_SUCCESS)
@@ -196,8 +194,7 @@ namespace System.Net
                 _serverSessionHandle = new HttpServerSessionHandle(id);
 
                 id = 0;
-                statusCode = Interop
-                    .HttpApi
+                statusCode = Interop.HttpApi
                     .HttpCreateUrlGroup(_serverSessionHandle.DangerousGetServerSessionId(), &id, 0);
 
                 if (statusCode != Interop.HttpApi.ERROR_SUCCESS)
@@ -360,8 +357,7 @@ namespace System.Net
             info.Flags = Interop.HttpApi.HTTP_FLAGS.NONE;
             info.RequestQueueHandle = IntPtr.Zero;
 
-            uint statusCode = Interop
-                .HttpApi
+            uint statusCode = Interop.HttpApi
                 .HttpSetUrlGroupProperty(
                     _urlGroupId,
                     Interop.HttpApi.HTTP_SERVER_PROPERTY.HttpServerBindingProperty,
@@ -509,8 +505,7 @@ namespace System.Net
             if (NetEventSource.Log.IsEnabled())
                 NetEventSource.Info(this, "Calling Interop.HttpApi.HttpAddUrl[ToUrlGroup]");
 
-            uint statusCode = Interop
-                .HttpApi
+            uint statusCode = Interop.HttpApi
                 .HttpAddUrlToUrlGroup(_urlGroupId, registeredPrefix, 0, 0);
             if (statusCode != Interop.HttpApi.ERROR_SUCCESS)
             {
@@ -568,8 +563,7 @@ namespace System.Net
                                 $"Calling Interop.HttpApi.HttpReceiveHttpRequest RequestId: {requestId}"
                             );
                         uint bytesTransferred = 0;
-                        statusCode = Interop
-                            .HttpApi
+                        statusCode = Interop.HttpApi
                             .HttpReceiveHttpRequest(
                                 session.RequestQueueHandle,
                                 requestId,
@@ -783,8 +777,7 @@ namespace System.Net
             stoleBlob = false;
 
             // Some things we need right away.  Lift them out now while it's convenient.
-            string? authorizationHeader = Interop
-                .HttpApi
+            string? authorizationHeader = Interop.HttpApi
                 .GetKnownHeader(memoryBlob.RequestBlob, (int)HttpRequestHeader.Authorization);
             ulong connectionId = memoryBlob.RequestBlob->ConnectionId;
             ulong requestId = memoryBlob.RequestBlob->RequestId;
@@ -1636,8 +1629,7 @@ namespace System.Net
 
                 DisconnectAsyncResult result = new DisconnectAsyncResult(session, connectionId);
 
-                uint statusCode = Interop
-                    .HttpApi
+                uint statusCode = Interop.HttpApi
                     .HttpWaitForDisconnect(
                         session.RequestQueueHandle,
                         connectionId,
@@ -1747,8 +1739,7 @@ namespace System.Net
 
                             for (int i = 0; i < challengeHandles!.Length; i++)
                             {
-                                byte[] byteChallenge = Encoding
-                                    .Default
+                                byte[] byteChallenge = Encoding.Default
                                     .GetBytes((string)challenges![i]!);
                                 challengeHandles[i] = GCHandle.Alloc(
                                     byteChallenge,
@@ -1769,8 +1760,7 @@ namespace System.Net
                                 session.Listener,
                                 "Calling Interop.HttpApi.HttpSendHtthttpResponse"
                             );
-                        statusCode = Interop
-                            .HttpApi
+                        statusCode = Interop.HttpApi
                             .HttpSendHttpResponse(
                                 session.RequestQueueHandle,
                                 requestId,
@@ -1865,8 +1855,7 @@ namespace System.Net
                 {
                     // Http.sys team: ServiceName will always be null if
                     // HTTP_RECEIVE_SECURE_CHANNEL_TOKEN flag is set.
-                    statusCode = Interop
-                        .HttpApi
+                    statusCode = Interop.HttpApi
                         .HttpReceiveClientCertificate(
                             session.RequestQueueHandle,
                             connectionId,
@@ -1961,8 +1950,7 @@ namespace System.Net
                 _connectionId = connectionId;
 
                 // we can call the Unsafe API here, we won't ever call user code
-                _nativeOverlapped = session
-                    .RequestQueueBoundHandle
+                _nativeOverlapped = session.RequestQueueBoundHandle
                     .AllocateNativeOverlapped(s_IOCallback, state: this, pinData: null);
                 if (NetEventSource.Log.IsEnabled())
                     NetEventSource.Info(
@@ -2007,8 +1995,7 @@ namespace System.Net
                 if (NetEventSource.Log.IsEnabled())
                     NetEventSource.Info(null, "_connectionId:" + asyncResult._connectionId);
 
-                asyncResult
-                    ._listenerSession
+                asyncResult._listenerSession
                     .RequestQueueBoundHandle
                     .FreeNativeOverlapped(nativeOverlapped);
                 if (Interlocked.Exchange(ref asyncResult._ownershipState, 2) == 0)

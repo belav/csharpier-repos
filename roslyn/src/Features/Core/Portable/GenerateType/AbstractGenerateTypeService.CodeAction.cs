@@ -138,18 +138,15 @@ namespace Microsoft.CodeAnalysis.GenerateType
 
             public override object GetOptions(CancellationToken cancellationToken)
             {
-                var generateTypeOptionsService = _document
-                    .Project
+                var generateTypeOptionsService = _document.Project
                     .Solution
                     .Services
                     .GetRequiredService<IGenerateTypeOptionsService>();
-                var notificationService = _document
-                    .Project
+                var notificationService = _document.Project
                     .Solution
                     .Services
                     .GetService<INotificationService>();
-                var projectManagementService = _document
-                    .Project
+                var projectManagementService = _document.Project
                     .Solution
                     .Services
                     .GetService<IProjectManagementService>();

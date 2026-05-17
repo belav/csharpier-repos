@@ -273,8 +273,7 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                         ) != 0;
 
                     Debug.Assert(_module == null);
-                    bool isCrossModuleInlinee = !factory
-                        .CompilationModuleGroup
+                    bool isCrossModuleInlinee = !factory.CompilationModuleGroup
                         .VersionsWithMethodBody(inlinee);
                     Debug.Assert(
                         !isCrossModuleInlinee
@@ -290,11 +289,9 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                             if (a == b)
                                 return 0;
 
-                            bool isCrossModuleInlinerA = !factory
-                                .CompilationModuleGroup
+                            bool isCrossModuleInlinerA = !factory.CompilationModuleGroup
                                 .VersionsWithMethodBody(a);
-                            bool isCrossModuleInlinerB = !factory
-                                .CompilationModuleGroup
+                            bool isCrossModuleInlinerB = !factory.CompilationModuleGroup
                                 .VersionsWithMethodBody(b);
                             if (isCrossModuleInlinerA != isCrossModuleInlinerB)
                             {
@@ -422,8 +419,7 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                                     sig.Append(
                                         new UnsignedConstant(
                                             (uint)
-                                                factory
-                                                    .ManifestMetadataTable
+                                                factory.ManifestMetadataTable
                                                     .ModuleToIndex(inliner.Module)
                                         )
                                     );

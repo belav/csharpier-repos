@@ -30,8 +30,7 @@ public abstract class EndToEndTest : IDisposable
 
             Assert.Equal(1, context.SaveChanges());
 
-            var second = context
-                .SimpleEntities
+            var second = context.SimpleEntities
                 .Add(new SimpleEntity { StringProperty = "Entity 2" })
                 .Entity;
             context.Entry(second).Property(SimpleEntity.ShadowPropertyName).CurrentValue = "shadow";
@@ -49,8 +48,7 @@ public abstract class EndToEndTest : IDisposable
             var secondEntity = context.SimpleEntities.Single(e => e.Id == secondId);
             Assert.Equal("Entity 2", secondEntity.StringProperty);
 
-            var thirdEntity = context
-                .SimpleEntities
+            var thirdEntity = context.SimpleEntities
                 .Single(e => EF.Property<string>(e, SimpleEntity.ShadowPropertyName) == "shadow");
             Assert.Same(secondEntity, thirdEntity);
 

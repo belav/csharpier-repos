@@ -606,8 +606,7 @@ namespace Microsoft.CodeAnalysis.Rebuild.UnitTests
             InstrumentationKind kind
         )
         {
-            var emitOptions = EmitOptions
-                .Default
+            var emitOptions = EmitOptions.Default
                 .WithDebugInformationFormat(debugInformationFormat)
                 .WithInstrumentationKinds(ImmutableArray.Create(kind));
 

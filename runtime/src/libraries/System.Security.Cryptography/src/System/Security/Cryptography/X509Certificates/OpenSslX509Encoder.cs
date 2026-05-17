@@ -188,8 +188,7 @@ namespace System.Security.Cryptography.X509Certificates
         )
         {
             using (
-                SafeAsn1BitStringHandle bitString = Interop
-                    .Crypto
+                SafeAsn1BitStringHandle bitString = Interop.Crypto
                     .DecodeAsn1BitString(encoded, encoded.Length)
             )
             {
@@ -250,8 +249,7 @@ namespace System.Security.Cryptography.X509Certificates
         )
         {
             if (
-                !Interop
-                    .Crypto
+                !Interop.Crypto
                     .DecodeX509BasicConstraints2Extension(
                         encoded,
                         encoded.Length,
@@ -273,8 +271,7 @@ namespace System.Security.Cryptography.X509Certificates
             OidCollection oids = new OidCollection();
 
             using (
-                SafeEkuExtensionHandle eku = Interop
-                    .Crypto
+                SafeEkuExtensionHandle eku = Interop.Crypto
                     .DecodeExtendedKeyUsage(encoded, encoded.Length)
             )
             {

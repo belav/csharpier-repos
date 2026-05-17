@@ -153,8 +153,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             )
             {
                 if (
-                    !_options
-                        .NewLines
+                    !_options.NewLines
                         .HasFlag(
                             NewLinePlacement.BeforeOpenBraceInObjectCollectionArrayInitializers
                         )
@@ -229,8 +228,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             )
             {
                 if (
-                    !_options
-                        .NewLines
+                    !_options.NewLines
                         .HasFlag(NewLinePlacement.BeforeOpenBraceInLambdaExpressionBody)
                 )
                 {
@@ -245,8 +243,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             )
             {
                 if (
-                    !_options
-                        .NewLines
+                    !_options.NewLines
                         .HasFlag(
                             NewLinePlacement.BeforeOpenBraceInObjectCollectionArrayInitializers
                         )
@@ -408,8 +405,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             )
             {
                 if (
-                    _options
-                        .NewLines
+                    _options.NewLines
                         .HasFlag(
                             NewLinePlacement.BeforeOpenBraceInObjectCollectionArrayInitializers
                         )
@@ -522,8 +518,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             )
             {
                 if (
-                    _options
-                        .NewLines
+                    _options.NewLines
                         .HasFlag(NewLinePlacement.BeforeOpenBraceInLambdaExpressionBody)
                 )
                 {
@@ -545,8 +540,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             )
             {
                 if (
-                    _options
-                        .NewLines
+                    _options.NewLines
                         .HasFlag(
                             NewLinePlacement.BeforeOpenBraceInObjectCollectionArrayInitializers
                         )

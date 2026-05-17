@@ -43,8 +43,7 @@ namespace System.ServiceModel.Channels
 
             if (ContextMessageProperty.TryGet(message, out contextProperties))
             {
-                contextProperties
-                    .Context
+                contextProperties.Context
                     .TryGetValue(ContextMessageProperty.InstanceIdKey, out instanceId);
             }
 
@@ -63,8 +62,7 @@ namespace System.ServiceModel.Channels
                 )
             )
             {
-                contextProperties
-                    .Context
+                contextProperties.Context
                     .TryGetValue(ContextMessageProperty.InstanceIdKey, out instanceId);
             }
 

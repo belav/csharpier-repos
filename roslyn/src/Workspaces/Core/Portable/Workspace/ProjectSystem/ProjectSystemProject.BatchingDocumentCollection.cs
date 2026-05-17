@@ -118,8 +118,7 @@ namespace Microsoft.CodeAnalysis.Workspaces.ProjectSystem
                 }
 
                 var documentId = DocumentId.CreateNewId(_project.Id, fullPath);
-                var textLoader = _project
-                    ._projectSystemProjectFactory
+                var textLoader = _project._projectSystemProjectFactory
                     .CreateFileTextLoader(fullPath);
                 var documentInfo = DocumentInfo.Create(
                     documentId,
@@ -144,8 +143,7 @@ namespace Microsoft.CodeAnalysis.Workspaces.ProjectSystem
                     _orderedDocumentsInBatch = _orderedDocumentsInBatch?.Add(documentId);
 
                     _documentPathsToDocumentIds.Add(fullPath, documentId);
-                    _project
-                        ._documentWatchedFiles
+                    _project._documentWatchedFiles
                         .Add(
                             documentId,
                             _project._documentFileChangeContext.EnqueueWatchingFile(fullPath)
@@ -157,11 +155,9 @@ namespace Microsoft.CodeAnalysis.Workspaces.ProjectSystem
                     }
                     else
                     {
-                        _project
-                            ._projectSystemProjectFactory
+                        _project._projectSystemProjectFactory
                             .ApplyChangeToWorkspace(w => _documentAddAction(w, documentInfo));
-                        _project
-                            ._projectSystemProjectFactory
+                        _project._projectSystemProjectFactory
                             .RaiseOnDocumentsAddedMaybeAsync(
                                 useAsync: false,
                                 ImmutableArray.Create(fullPath)
@@ -234,12 +230,10 @@ namespace Microsoft.CodeAnalysis.Workspaces.ProjectSystem
                     }
                     else
                     {
-                        _project
-                            ._projectSystemProjectFactory
+                        _project._projectSystemProjectFactory
                             .ApplyChangeToWorkspace(w =>
                             {
-                                _project
-                                    ._projectSystemProjectFactory
+                                _project._projectSystemProjectFactory
                                     .AddDocumentToDocumentsNotFromFiles_NoLock(documentInfo.Id);
                                 _documentAddAction(w, documentInfo);
                                 w.OnDocumentOpened(documentInfo.Id, textContainer);
@@ -293,8 +287,7 @@ namespace Microsoft.CodeAnalysis.Workspaces.ProjectSystem
                 else
                 {
                     // right now, assumption is dynamically generated file can never be opened in editor
-                    _project
-                        ._projectSystemProjectFactory
+                    _project._projectSystemProjectFactory
                         .ApplyChangeToWorkspace(w => _documentAddAction(w, documentInfo));
                 }
             }
@@ -380,8 +373,7 @@ namespace Microsoft.CodeAnalysis.Workspaces.ProjectSystem
                     }
                     else
                     {
-                        _project
-                            ._projectSystemProjectFactory
+                        _project._projectSystemProjectFactory
                             .ApplyChangeToWorkspace(w => _documentRemoveAction(w, documentId));
                     }
                 }
@@ -437,8 +429,7 @@ namespace Microsoft.CodeAnalysis.Workspaces.ProjectSystem
                     //    as a part of the active batch or immediately)
                     // 2. It hasn't been pushed yet, but is contained in _documentsAddedInBatch
                     if (
-                        _project
-                            ._projectSystemProjectFactory
+                        _project._projectSystemProjectFactory
                             .Workspace
                             .CurrentSolution
                             .GetDocument(documentId) != null
@@ -450,8 +441,7 @@ namespace Microsoft.CodeAnalysis.Workspaces.ProjectSystem
                         }
                         else
                         {
-                            _project
-                                ._projectSystemProjectFactory
+                            _project._projectSystemProjectFactory
                                 .ApplyChangeToWorkspace(w =>
                                 {
                                     // Just pass null for the filePath, since this document is immediately being removed
@@ -463,8 +453,7 @@ namespace Microsoft.CodeAnalysis.Workspaces.ProjectSystem
                                         new SourceTextLoader(textContainer, filePath: null)
                                     );
                                     _documentRemoveAction(w, documentId);
-                                    _project
-                                        ._projectSystemProjectFactory
+                                    _project._projectSystemProjectFactory
                                         .RemoveDocumentToDocumentsNotFromFiles_NoLock(documentId);
                                 });
                         }
@@ -530,8 +519,7 @@ namespace Microsoft.CodeAnalysis.Workspaces.ProjectSystem
                                     (
                                         documentId,
                                         new WorkspaceFileTextLoader(
-                                            _project
-                                                ._projectSystemProjectFactory
+                                            _project._projectSystemProjectFactory
                                                 .Workspace
                                                 .Services
                                                 .SolutionServices,
@@ -550,15 +538,13 @@ namespace Microsoft.CodeAnalysis.Workspaces.ProjectSystem
                         return;
                     }
 
-                    await _project
-                        ._projectSystemProjectFactory
+                    await _project._projectSystemProjectFactory
                         .ApplyBatchChangeToWorkspaceAsync(solutionChanges =>
                         {
                             foreach (var (documentId, textLoader) in documentsToChange)
                             {
                                 if (
-                                    !_project
-                                        ._projectSystemProjectFactory
+                                    !_project._projectSystemProjectFactory
                                         .Workspace
                                         .IsDocumentOpen(documentId)
                                 )
@@ -623,8 +609,7 @@ namespace Microsoft.CodeAnalysis.Workspaces.ProjectSystem
                             )
                         );
 
-                        _project
-                            ._projectSystemProjectFactory
+                        _project._projectSystemProjectFactory
                             .ApplyChangeToWorkspace(w =>
                             {
                                 if (w.IsDocumentOpen(documentId))
@@ -709,8 +694,7 @@ namespace Microsoft.CodeAnalysis.Workspaces.ProjectSystem
                     }
                     else
                     {
-                        _project
-                            ._projectSystemProjectFactory
+                        _project._projectSystemProjectFactory
                             .ApplyChangeToWorkspace(
                                 _project.Id,
                                 solution =>
@@ -781,8 +765,7 @@ namespace Microsoft.CodeAnalysis.Workspaces.ProjectSystem
                 {
                     solutionChanges.UpdateSolutionForProjectAction(
                         _project.Id,
-                        solutionChanges
-                            .Solution
+                        solutionChanges.Solution
                             .WithProjectDocumentsOrder(_project.Id, _orderedDocumentsInBatch)
                     );
                     _orderedDocumentsInBatch = null;

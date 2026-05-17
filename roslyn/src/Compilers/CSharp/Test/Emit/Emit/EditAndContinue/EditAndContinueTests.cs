@@ -231,8 +231,7 @@ class A : System.Attribute
             var compilation0 = CreateCompilation(
                 source0,
                 parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute(),
-                options: TestOptions
-                    .DebugDll
+                options: TestOptions.DebugDll
                     .WithNullableContextOptions(NullableContextOptions.Enable)
             );
             var compilation1 = compilation0.WithSource(source1);
@@ -260,8 +259,7 @@ class A : System.Attribute
 
             // Nullable diagnostics not reported, except for attribute and default parameter values.
             // The compiler doesn't have the necessary emit context when analyzing these.
-            diff1
-                .EmitResult
+            diff1.EmitResult
                 .Diagnostics
                 .Verify(
                     // (12,4): warning CS8625: Cannot convert null literal to non-nullable reference type.
@@ -418,8 +416,7 @@ class C
                 )
             );
 
-            diffError
-                .EmitResult
+            diffError.EmitResult
                 .Diagnostics
                 .Verify(
                     // (6,17): error CS0103: The name 'Unknown' does not exist in the current context
@@ -7286,18 +7283,15 @@ class C
             Assert.Equal(7, baseAttributeCount);
             Assert.Equal(2, baseParameterCount);
 
-            var attributeTypeDefHandle = reader0
-                .TypeDefinitions
+            var attributeTypeDefHandle = reader0.TypeDefinitions
                 .Single(d =>
-                    reader0
-                        .StringComparer
+                    reader0.StringComparer
                         .Equals(
                             reader0.GetTypeDefinition(d).Name,
                             "MetadataUpdateOriginalTypeAttribute"
                         )
                 );
-            var attributeCtorDefHandle = reader0
-                .MethodDefinitions
+            var attributeCtorDefHandle = reader0.MethodDefinitions
                 .Single(d =>
                 {
                     var methodDef = reader0.GetMethodDefinition(d);
@@ -12324,9 +12318,8 @@ class B
                 compilation0,
                 md0,
                 m =>
-                    md0.MetadataReader.GetString(
-                        md0.MetadataReader.GetMethodDefinition(m).Name
-                    ) switch
+                    md0.MetadataReader
+                        .GetString(md0.MetadataReader.GetMethodDefinition(m).Name) switch
                     {
                         "F" => testData0.GetMethodData("C.F").GetEncDebugInfo(),
                         "G" => testData0.GetMethodData("C.G").GetEncDebugInfo(),
@@ -14403,8 +14396,7 @@ class C
                 )
             );
 
-            diff1
-                .EmitResult
+            diff1.EmitResult
                 .Diagnostics
                 .Verify(
                     // error CS7096: Cannot continue since the edit includes a reference to an embedded type: 'I'.
@@ -14484,8 +14476,7 @@ class C
                 )
             );
 
-            diff1
-                .EmitResult
+            diff1.EmitResult
                 .Diagnostics
                 .Verify(
                     // (6,16): warning CS0219: The variable 'y' is assigned but its value is never used
@@ -14603,8 +14594,7 @@ public struct S
                 )
             );
 
-            diff1A
-                .EmitResult
+            diff1A.EmitResult
                 .Diagnostics
                 .Verify(
                     // error CS7094: Cannot continue since the edit includes a reference to an embedded type: 'S'.
@@ -14705,8 +14695,7 @@ public interface IB
                 )
             );
 
-            diff1
-                .EmitResult
+            diff1.EmitResult
                 .Diagnostics
                 .Verify(
                     // error CS7094: Cannot continue since the edit includes a reference to an embedded type: 'N.IA'.
@@ -15105,8 +15094,7 @@ class C
                     default
                 );
                 Assert.False(result.Success);
-                result
-                    .Diagnostics
+                result.Diagnostics
                     .Verify(
                         // error CS8104: An error occurred while writing the output file: System.IO.IOException: I/O error occurred.
                         Diagnostic(ErrorCode.ERR_PeWritingFailure)
@@ -15132,8 +15120,7 @@ class C
                     default
                 );
                 Assert.False(result.Success);
-                result
-                    .Diagnostics
+                result.Diagnostics
                     .Verify(
                         // error CS8104: An error occurred while writing the output file: System.IO.IOException: I/O error occurred.
                         Diagnostic(ErrorCode.ERR_PeWritingFailure)
@@ -15159,8 +15146,7 @@ class C
                     default
                 );
                 Assert.False(result.Success);
-                result
-                    .Diagnostics
+                result.Diagnostics
                     .Verify(
                         // error CS0041: Unexpected error writing debug information -- 'I/O error occurred.'
                         Diagnostic(ErrorCode.FTL_DebugEmitFailure)
@@ -15232,8 +15218,7 @@ class C
                     default
                 );
                 Assert.False(result.Success);
-                result
-                    .Diagnostics
+                result.Diagnostics
                     .Verify(
                         // error CS0041: Unexpected error writing debug information -- 'I/O error occurred.'
                         Diagnostic(ErrorCode.FTL_DebugEmitFailure)
@@ -15284,8 +15269,7 @@ class C
                 }
             );
 
-            diff1
-                .EmitResult
+            diff1.EmitResult
                 .Diagnostics
                 .Verify(
                     // error CS0041: Unexpected error writing debug information -- 'MockSymUnmanagedWriter error message'
@@ -15350,8 +15334,7 @@ class C
 
             // No CDIs should be emitted, specifically not PortableCustomDebugInfoKinds.TypeDefinitionDocuments
             Assert.Empty(
-                pdbReader
-                    .CustomDebugInformation
+                pdbReader.CustomDebugInformation
                     .Select(cdi => pdbReader.GetGuid(pdbReader.GetCustomDebugInformation(cdi).Kind))
             );
         }
@@ -15532,8 +15515,7 @@ public class Y : X { }
                 allAddedSymbols
             );
 
-            diffB1
-                .EmitResult
+            diffB1.EmitResult
                 .Diagnostics
                 .Verify(
                     // (7,14): error CS7101: Member 'X' added during the current debug session can only be accessed from within its declaring assembly 'LibA'.
@@ -15838,8 +15820,7 @@ class C
                 )
             );
 
-            diff1
-                .EmitResult
+            diff1.EmitResult
                 .Diagnostics
                 .Verify(
                     // (6,14): error CS7038: Failed to emit module 'Unable to read debug information of method 'C.F()' (token 0x06000001) from assembly 'PdbReadingErrorsAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null''.
@@ -19224,8 +19205,7 @@ class C
                 )
             );
 
-            diffError
-                .EmitResult
+            diffError.EmitResult
                 .Diagnostics
                 .Verify(
                     // (9,21): error CS0104: 'Timer' is an ambiguous reference between 'System.Threading.Timer' and 'System.Timers.Timer'

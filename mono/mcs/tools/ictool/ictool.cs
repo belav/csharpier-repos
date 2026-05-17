@@ -306,8 +306,7 @@ public class ICTool
                 {
                     if (f is TypeLoadException)
                     {
-                        Console
-                            .Error
+                        Console.Error
                             .WriteLine(
                                 "Warning: {0} could not be loaded from assembly {1}.",
                                 ((TypeLoadException)f).TypeName,

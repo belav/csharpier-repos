@@ -30,8 +30,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Formatting
                             "Remove default case",
                             async cancellationToken =>
                             {
-                                var root = await context
-                                    .Document
+                                var root = await context.Document
                                     .GetSyntaxRootAsync(cancellationToken);
                                 Assumes.NotNull(root);
                                 var sourceTree = diagnostic.Location.SourceTree;

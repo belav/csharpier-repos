@@ -654,8 +654,7 @@ namespace Microsoft.CodeAnalysis.CodeGen
             private string GetDebuggerDisplay()
             {
 #if DEBUG
-                var visType = System
-                    .Type
+                var visType = System.Type
                     .GetType(
                         "Roslyn.Test.Utilities.ILBuilderVisualizer, Roslyn.Test.Utilities",
                         false

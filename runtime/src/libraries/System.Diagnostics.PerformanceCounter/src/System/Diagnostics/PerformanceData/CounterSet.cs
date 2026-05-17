@@ -314,8 +314,7 @@ namespace System.Diagnostics.PerformanceData
                                 }
                                 CurrentCounter++;
                             }
-                            Status = Interop
-                                .PerfCounter
+                            Status = Interop.PerfCounter
                                 .PerfSetCounterSetInfo(
                                     _provider._hProvider,
                                     CounterSetInfo,

@@ -22,20 +22,17 @@ namespace CodeStyleConfigFileGenerator
         private const int ExpectedArguments = 4;
 
         private static readonly string s_neverTag = EnforceOnBuild.Never.ToCustomTag();
-        private static readonly string s_whenExplicitlyEnabledTag = EnforceOnBuild
-            .WhenExplicitlyEnabled
-            .ToCustomTag();
+        private static readonly string s_whenExplicitlyEnabledTag =
+            EnforceOnBuild.WhenExplicitlyEnabled.ToCustomTag();
         private static readonly string s_recommendedTag = EnforceOnBuild.Recommended.ToCustomTag();
-        private static readonly string s_highlyRecommendedTag = EnforceOnBuild
-            .HighlyRecommended
+        private static readonly string s_highlyRecommendedTag = EnforceOnBuild.HighlyRecommended
             .ToCustomTag();
 
         public static int Main(string[] args)
         {
             if (args.Length != ExpectedArguments)
             {
-                Console
-                    .Error
+                Console.Error
                     .WriteLine(
                         $"Excepted {ExpectedArguments} arguments, found {args.Length}: {string.Join(';', args)}"
                     );
@@ -195,12 +192,13 @@ namespace CodeStyleConfigFileGenerator
                         )
                         {
                             Debug.Assert(
-                                rule.CustomTags.Any(c =>
-                                    c == s_neverTag
-                                    || c == s_whenExplicitlyEnabledTag
-                                    || c == s_recommendedTag
-                                    || c == s_highlyRecommendedTag
-                                ),
+                                rule.CustomTags
+                                    .Any(c =>
+                                        c == s_neverTag
+                                        || c == s_whenExplicitlyEnabledTag
+                                        || c == s_recommendedTag
+                                        || c == s_highlyRecommendedTag
+                                    ),
                                 $"DiagnosticDescriptor for '{rule.Id}' must have a {nameof(EnforceOnBuild)} custom tag"
                             );
 
@@ -213,16 +211,14 @@ namespace CodeStyleConfigFileGenerator
 
                                 case AnalysisMode.All:
                                     // Escalate all rules which can be enabled on build.
-                                    isEnabledInNonDefaultMode = !rule.CustomTags.Contains(
-                                        s_neverTag
-                                    );
+                                    isEnabledInNonDefaultMode = !rule.CustomTags
+                                        .Contains(s_neverTag);
                                     break;
 
                                 case AnalysisMode.Minimum:
                                     // Escalate all highly recommended rules.
-                                    isEnabledInNonDefaultMode = rule.CustomTags.Contains(
-                                        s_highlyRecommendedTag
-                                    );
+                                    isEnabledInNonDefaultMode = rule.CustomTags
+                                        .Contains(s_highlyRecommendedTag);
                                     break;
 
                                 case AnalysisMode.Recommended:

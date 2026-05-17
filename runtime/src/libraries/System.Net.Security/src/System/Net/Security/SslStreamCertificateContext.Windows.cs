@@ -105,8 +105,7 @@ namespace System.Net.Security
                                 {
                                     if (
                                         status.Status.HasFlag(X509ChainStatusFlags.PartialChain)
-                                        || status
-                                            .Status
+                                        || status.Status
                                             .HasFlag(X509ChainStatusFlags.NotSignatureValid)
                                     )
                                     {

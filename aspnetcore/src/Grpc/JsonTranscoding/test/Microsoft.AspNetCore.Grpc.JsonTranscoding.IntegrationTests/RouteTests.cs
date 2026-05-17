@@ -27,8 +27,7 @@ public class RouteTests : IntegrationTestBase
         {
             return Task.FromResult(new HelloReply { Message = $"Hello {request.Name}!" });
         }
-        var method = Fixture
-            .DynamicGrpc
+        var method = Fixture.DynamicGrpc
             .AddUnaryMethod<HelloRequest, HelloReply>(
                 UnaryMethod,
                 Greeter.Descriptor.FindMethodByName("SayHelloComplex")
@@ -57,14 +56,12 @@ public class RouteTests : IntegrationTestBase
         {
             return Task.FromResult(new HelloReply { Message = $"Two - Hello {request.Name}!" });
         }
-        var method1 = Fixture
-            .DynamicGrpc
+        var method1 = Fixture.DynamicGrpc
             .AddUnaryMethod<HelloRequest, HelloReply>(
                 UnaryMethod1,
                 Greeter.Descriptor.FindMethodByName("SayHelloComplexCatchAll1")
             );
-        var method2 = Fixture
-            .DynamicGrpc
+        var method2 = Fixture.DynamicGrpc
             .AddUnaryMethod<HelloRequest, HelloReply>(
                 UnaryMethod2,
                 Greeter.Descriptor.FindMethodByName("SayHelloComplexCatchAll2")
@@ -108,8 +105,7 @@ public class RouteTests : IntegrationTestBase
                 }
             );
         }
-        var method = Fixture
-            .DynamicGrpc
+        var method = Fixture.DynamicGrpc
             .AddUnaryMethod<ComplextHelloRequest, HelloReply>(
                 UnaryMethod,
                 Greeter.Descriptor.FindMethodByName("SayHelloComplexCatchAll3")
@@ -139,8 +135,7 @@ public class RouteTests : IntegrationTestBase
         {
             return Task.FromResult(new HelloReply { Message = $"Hello {request.Name}!" });
         }
-        var method = Fixture
-            .DynamicGrpc
+        var method = Fixture.DynamicGrpc
             .AddUnaryMethod<HelloRequest, HelloReply>(
                 UnaryMethod,
                 Greeter.Descriptor.FindMethodByName("SayHelloComplexCatchAll4")
@@ -172,14 +167,12 @@ public class RouteTests : IntegrationTestBase
         {
             return Task.FromResult(new HelloReply { Message = $"Hello {request.Name} two!" });
         }
-        var method1 = Fixture
-            .DynamicGrpc
+        var method1 = Fixture.DynamicGrpc
             .AddUnaryMethod<HelloRequest, HelloReply>(
                 UnaryMethod1,
                 Greeter.Descriptor.FindMethodByName("SayHelloCustomVerbOne")
             );
-        var method2 = Fixture
-            .DynamicGrpc
+        var method2 = Fixture.DynamicGrpc
             .AddUnaryMethod<HelloRequest, HelloReply>(
                 UnaryMethod2,
                 Greeter.Descriptor.FindMethodByName("SayHelloCustomVerbTwo")
@@ -222,14 +215,12 @@ public class RouteTests : IntegrationTestBase
         {
             return Task.FromResult(new HelloReply { Message = $"Hello {request.Name} two!" });
         }
-        var method1 = Fixture
-            .DynamicGrpc
+        var method1 = Fixture.DynamicGrpc
             .AddUnaryMethod<HelloRequest, HelloReply>(
                 UnaryMethod1,
                 Greeter.Descriptor.FindMethodByName("SayHelloCatchAllCustomVerbOne")
             );
-        var method2 = Fixture
-            .DynamicGrpc
+        var method2 = Fixture.DynamicGrpc
             .AddUnaryMethod<HelloRequest, HelloReply>(
                 UnaryMethod2,
                 Greeter.Descriptor.FindMethodByName("SayHelloCatchAllCustomVerbTwo")
@@ -284,14 +275,12 @@ public class RouteTests : IntegrationTestBase
         {
             return Task.FromResult(new HelloReply { Message = $"Hello {request.Name} two!" });
         }
-        var method1 = Fixture
-            .DynamicGrpc
+        var method1 = Fixture.DynamicGrpc
             .AddUnaryMethod<HelloRequest, HelloReply>(
                 UnaryMethod1,
                 Greeter.Descriptor.FindMethodByName("SayHelloPostCustomVerbOne")
             );
-        var method2 = Fixture
-            .DynamicGrpc
+        var method2 = Fixture.DynamicGrpc
             .AddUnaryMethod<HelloRequest, HelloReply>(
                 UnaryMethod2,
                 Greeter.Descriptor.FindMethodByName("SayHelloPostCustomVerbTwo")

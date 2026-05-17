@@ -30,8 +30,7 @@ internal sealed class OptionsAnalyzer
                     && operation.Value.ConstantValue.HasValue
                     && operation.Target is IPropertyReferenceOperation property
                     && property.Property?.ContainingType?.Name != null
-                    && property
-                        .Property
+                    && property.Property
                         .ContainingType
                         .Name
                         .EndsWith("Options", StringComparison.Ordinal)

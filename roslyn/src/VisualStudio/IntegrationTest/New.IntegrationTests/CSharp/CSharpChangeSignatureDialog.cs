@@ -34,8 +34,7 @@ class C
             );
 
             await TestServices.Editor.InvokeCodeActionListAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .CodeActionAsync(
                     "Change signature...",
                     applyFix: false,
@@ -56,17 +55,13 @@ class C
             );
 
             await TestServices.ChangeSignatureDialog.InvokeAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .ChangeSignatureDialog
+            await TestServices.ChangeSignatureDialog
                 .VerifyOpenAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .ChangeSignatureDialog
+            await TestServices.ChangeSignatureDialog
                 .ClickCancelAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .ChangeSignatureDialog
+            await TestServices.ChangeSignatureDialog
                 .VerifyClosedAsync(HangMitigatingCancellationToken);
-            var actualText = await TestServices
-                .Editor
+            var actualText = await TestServices.Editor
                 .GetTextAsync(HangMitigatingCancellationToken);
             Assert.Contains(
                 @"
@@ -91,21 +86,16 @@ class C
             );
 
             await TestServices.ChangeSignatureDialog.InvokeAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .ChangeSignatureDialog
+            await TestServices.ChangeSignatureDialog
                 .VerifyOpenAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .ChangeSignatureDialog
+            await TestServices.ChangeSignatureDialog
                 .SelectParameterAsync("int a", HangMitigatingCancellationToken);
-            await TestServices
-                .ChangeSignatureDialog
+            await TestServices.ChangeSignatureDialog
                 .ClickDownButtonAsync(HangMitigatingCancellationToken);
             await TestServices.ChangeSignatureDialog.ClickOKAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .ChangeSignatureDialog
+            await TestServices.ChangeSignatureDialog
                 .VerifyClosedAsync(HangMitigatingCancellationToken);
-            var actualText = await TestServices
-                .Editor
+            var actualText = await TestServices.Editor
                 .GetTextAsync(HangMitigatingCancellationToken);
             Assert.Contains(
                 @"
@@ -140,24 +130,18 @@ class C
             );
 
             await TestServices.ChangeSignatureDialog.InvokeAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .ChangeSignatureDialog
+            await TestServices.ChangeSignatureDialog
                 .VerifyOpenAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .ChangeSignatureDialog
+            await TestServices.ChangeSignatureDialog
                 .SelectParameterAsync("string b", HangMitigatingCancellationToken);
-            await TestServices
-                .ChangeSignatureDialog
+            await TestServices.ChangeSignatureDialog
                 .ClickUpButtonAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .ChangeSignatureDialog
+            await TestServices.ChangeSignatureDialog
                 .ClickRemoveButtonAsync(HangMitigatingCancellationToken);
             await TestServices.ChangeSignatureDialog.ClickOKAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .ChangeSignatureDialog
+            await TestServices.ChangeSignatureDialog
                 .VerifyClosedAsync(HangMitigatingCancellationToken);
-            var actualText = await TestServices
-                .Editor
+            var actualText = await TestServices.Editor
                 .GetTextAsync(HangMitigatingCancellationToken);
             Assert.Contains(
                 @"
@@ -200,16 +184,14 @@ class Program
             var vbProject = "VBProject";
             var vbProjectReference = vbProject;
             var project = ProjectName;
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .AddProjectAsync(
                     vbProject,
                     WellKnownProjectTemplates.ClassLibrary,
                     LanguageNames.VisualBasic,
                     HangMitigatingCancellationToken
                 );
-            await TestServices
-                .Editor
+            await TestServices.Editor
                 .SetTextAsync(
                     @"
 Public Class VBClass
@@ -220,50 +202,40 @@ End Class",
                 );
 
             await TestServices.SolutionExplorer.SaveAllAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .AddProjectReferenceAsync(
                     projectName: project,
                     projectToReferenceName: vbProjectReference,
                     HangMitigatingCancellationToken
                 );
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .OpenFileAsync(project, "Class1.cs", HangMitigatingCancellationToken);
 
             await TestServices.ChangeSignatureDialog.InvokeAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .ChangeSignatureDialog
+            await TestServices.ChangeSignatureDialog
                 .VerifyOpenAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .ChangeSignatureDialog
+            await TestServices.ChangeSignatureDialog
                 .SelectParameterAsync("String y", HangMitigatingCancellationToken);
-            await TestServices
-                .ChangeSignatureDialog
+            await TestServices.ChangeSignatureDialog
                 .ClickUpButtonAsync(HangMitigatingCancellationToken);
             await TestServices.ChangeSignatureDialog.ClickOKAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .ChangeSignatureDialog
+            await TestServices.ChangeSignatureDialog
                 .VerifyClosedAsync(HangMitigatingCancellationToken);
-            var actualText = await TestServices
-                .Editor
+            var actualText = await TestServices.Editor
                 .GetTextAsync(HangMitigatingCancellationToken);
             Assert.Contains(@"vb.Method(y: ""hello"", x: 1);", actualText);
 
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .OpenFileAsync(vbProject, "Class1.vb", HangMitigatingCancellationToken);
             actualText = await TestServices.Editor.GetTextAsync(HangMitigatingCancellationToken);
             Assert.Contains(@"Public Sub Method(y As String, x As Integer)", actualText);
 
-            await TestServices
-                .Shell
+            await TestServices.Shell
                 .ExecuteCommandAsync(WellKnownCommands.Edit.Undo, HangMitigatingCancellationToken);
             actualText = await TestServices.Editor.GetTextAsync(HangMitigatingCancellationToken);
             Assert.Contains(@"Public Sub Method(x As Integer, y As String)", actualText);
 
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .OpenFileAsync(project, "Class1.cs", HangMitigatingCancellationToken);
             actualText = await TestServices.Editor.GetTextAsync(HangMitigatingCancellationToken);
             Assert.Contains(@"vb.Method(2, ""world"");", actualText);
@@ -288,104 +260,78 @@ class C
             );
 
             await TestServices.ChangeSignatureDialog.InvokeAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .ChangeSignatureDialog
+            await TestServices.ChangeSignatureDialog
                 .VerifyOpenAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .ChangeSignatureDialog
+            await TestServices.ChangeSignatureDialog
                 .ClickAddButtonAsync(HangMitigatingCancellationToken);
 
             // Add 'c'
             await TestServices.AddParameterDialog.VerifyOpenAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .AddParameterDialog
+            await TestServices.AddParameterDialog
                 .FillTypeFieldAsync("int", HangMitigatingCancellationToken);
-            await TestServices
-                .AddParameterDialog
+            await TestServices.AddParameterDialog
                 .FillNameFieldAsync("c", HangMitigatingCancellationToken);
-            await TestServices
-                .AddParameterDialog
+            await TestServices.AddParameterDialog
                 .FillCallSiteFieldAsync("2", HangMitigatingCancellationToken);
             await TestServices.AddParameterDialog.ClickOKAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .AddParameterDialog
+            await TestServices.AddParameterDialog
                 .VerifyClosedAsync(HangMitigatingCancellationToken);
 
-            await TestServices
-                .ChangeSignatureDialog
+            await TestServices.ChangeSignatureDialog
                 .VerifyOpenAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .ChangeSignatureDialog
+            await TestServices.ChangeSignatureDialog
                 .ClickAddButtonAsync(HangMitigatingCancellationToken);
 
             // Add 'd'
             await TestServices.AddParameterDialog.VerifyOpenAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .AddParameterDialog
+            await TestServices.AddParameterDialog
                 .FillTypeFieldAsync("int", HangMitigatingCancellationToken);
-            await TestServices
-                .AddParameterDialog
+            await TestServices.AddParameterDialog
                 .FillNameFieldAsync("d", HangMitigatingCancellationToken);
-            await TestServices
-                .AddParameterDialog
+            await TestServices.AddParameterDialog
                 .FillCallSiteFieldAsync("3", HangMitigatingCancellationToken);
             await TestServices.AddParameterDialog.ClickOKAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .AddParameterDialog
+            await TestServices.AddParameterDialog
                 .VerifyClosedAsync(HangMitigatingCancellationToken);
 
             // Remove 'c'
-            await TestServices
-                .ChangeSignatureDialog
+            await TestServices.ChangeSignatureDialog
                 .VerifyOpenAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .ChangeSignatureDialog
+            await TestServices.ChangeSignatureDialog
                 .SelectParameterAsync("int c", HangMitigatingCancellationToken);
-            await TestServices
-                .ChangeSignatureDialog
+            await TestServices.ChangeSignatureDialog
                 .ClickRemoveButtonAsync(HangMitigatingCancellationToken);
 
             // Move 'd' between 'a' and 'b'
-            await TestServices
-                .ChangeSignatureDialog
+            await TestServices.ChangeSignatureDialog
                 .SelectParameterAsync("int d", HangMitigatingCancellationToken);
-            await TestServices
-                .ChangeSignatureDialog
+            await TestServices.ChangeSignatureDialog
                 .ClickUpButtonAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .ChangeSignatureDialog
+            await TestServices.ChangeSignatureDialog
                 .ClickUpButtonAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .ChangeSignatureDialog
+            await TestServices.ChangeSignatureDialog
                 .ClickDownButtonAsync(HangMitigatingCancellationToken);
 
-            await TestServices
-                .ChangeSignatureDialog
+            await TestServices.ChangeSignatureDialog
                 .ClickAddButtonAsync(HangMitigatingCancellationToken);
 
             // Add 'c' (as a String instead of an Integer this time)
             // Note that 'c' does not have a callsite value.
             await TestServices.AddParameterDialog.VerifyOpenAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .AddParameterDialog
+            await TestServices.AddParameterDialog
                 .FillTypeFieldAsync("string", HangMitigatingCancellationToken);
-            await TestServices
-                .AddParameterDialog
+            await TestServices.AddParameterDialog
                 .FillNameFieldAsync("c", HangMitigatingCancellationToken);
-            await TestServices
-                .AddParameterDialog
+            await TestServices.AddParameterDialog
                 .SetCallSiteTodoAsync(HangMitigatingCancellationToken);
             await TestServices.AddParameterDialog.ClickOKAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .AddParameterDialog
+            await TestServices.AddParameterDialog
                 .VerifyClosedAsync(HangMitigatingCancellationToken);
 
             await TestServices.ChangeSignatureDialog.ClickOKAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .ChangeSignatureDialog
+            await TestServices.ChangeSignatureDialog
                 .VerifyClosedAsync(HangMitigatingCancellationToken);
-            var actualText = await TestServices
-                .Editor
+            var actualText = await TestServices.Editor
                 .GetTextAsync(HangMitigatingCancellationToken);
             Assert.Contains(
                 @"
@@ -416,30 +362,23 @@ class C
             );
 
             await TestServices.ChangeSignatureDialog.InvokeAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .ChangeSignatureDialog
+            await TestServices.ChangeSignatureDialog
                 .VerifyOpenAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .ChangeSignatureDialog
+            await TestServices.ChangeSignatureDialog
                 .ClickAddButtonAsync(HangMitigatingCancellationToken);
 
             await TestServices.AddParameterDialog.VerifyOpenAsync(HangMitigatingCancellationToken);
             await TestServices.AddParameterDialog.ClickCancelAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .AddParameterDialog
+            await TestServices.AddParameterDialog
                 .VerifyClosedAsync(HangMitigatingCancellationToken);
 
-            await TestServices
-                .ChangeSignatureDialog
+            await TestServices.ChangeSignatureDialog
                 .VerifyOpenAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .ChangeSignatureDialog
+            await TestServices.ChangeSignatureDialog
                 .ClickCancelAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .ChangeSignatureDialog
+            await TestServices.ChangeSignatureDialog
                 .VerifyClosedAsync(HangMitigatingCancellationToken);
-            var actualText = await TestServices
-                .Editor
+            var actualText = await TestServices.Editor
                 .GetTextAsync(HangMitigatingCancellationToken);
             Assert.Contains(
                 @"
@@ -469,16 +408,14 @@ class CSharpTest
                 HangMitigatingCancellationToken
             );
             var vbProject = "VBProject";
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .AddProjectAsync(
                     vbProject,
                     WellKnownProjectTemplates.ClassLibrary,
                     LanguageNames.VisualBasic,
                     HangMitigatingCancellationToken
                 );
-            await TestServices
-                .Editor
+            await TestServices.Editor
                 .SetTextAsync(
                     @"
 Public Class VBClass
@@ -492,57 +429,45 @@ End Class
             await TestServices.SolutionExplorer.SaveAllAsync(HangMitigatingCancellationToken);
             var project = ProjectName;
             var vbProjectReference = "VBProject";
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .AddProjectReferenceAsync(
                     project,
                     vbProjectReference,
                     HangMitigatingCancellationToken
                 );
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .OpenFileAsync(project, "Class1.cs", HangMitigatingCancellationToken);
 
-            await TestServices
-                .Workspace
+            await TestServices.Workspace
                 .WaitForAsyncOperationsAsync(
                     FeatureAttribute.Workspace,
                     HangMitigatingCancellationToken
                 );
 
             await TestServices.ChangeSignatureDialog.InvokeAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .ChangeSignatureDialog
+            await TestServices.ChangeSignatureDialog
                 .VerifyOpenAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .ChangeSignatureDialog
+            await TestServices.ChangeSignatureDialog
                 .ClickAddButtonAsync(HangMitigatingCancellationToken);
 
             await TestServices.AddParameterDialog.VerifyOpenAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .AddParameterDialog
+            await TestServices.AddParameterDialog
                 .FillTypeFieldAsync("String", HangMitigatingCancellationToken);
-            await TestServices
-                .AddParameterDialog
+            await TestServices.AddParameterDialog
                 .FillNameFieldAsync("d", HangMitigatingCancellationToken);
-            await TestServices
-                .AddParameterDialog
+            await TestServices.AddParameterDialog
                 .FillCallSiteFieldAsync(@"""str2""", HangMitigatingCancellationToken);
             await TestServices.AddParameterDialog.ClickOKAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .AddParameterDialog
+            await TestServices.AddParameterDialog
                 .VerifyClosedAsync(HangMitigatingCancellationToken);
 
             await TestServices.ChangeSignatureDialog.ClickOKAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .ChangeSignatureDialog
+            await TestServices.ChangeSignatureDialog
                 .VerifyClosedAsync(HangMitigatingCancellationToken);
-            var actualText = await TestServices
-                .Editor
+            var actualText = await TestServices.Editor
                 .GetTextAsync(HangMitigatingCancellationToken);
             Assert.Contains(@"x.Method(0, ""str"", 3.0, ""str2"")", actualText);
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .OpenFileAsync(vbProject, "Class1.vb", HangMitigatingCancellationToken);
             actualText = await TestServices.Editor.GetTextAsync(HangMitigatingCancellationToken);
             var expectedText =

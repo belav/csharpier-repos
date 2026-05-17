@@ -31,8 +31,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
         static GCManager()
         {
             // Allow disabling SustainedLowLatency by setting the reg key value to 0
-            System
-                .Threading
+            System.Threading
                 .Tasks
                 .Task
                 .Run(() =>
@@ -103,8 +102,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                     s_delayMilliseconds,
                     AsynchronousOperationListenerProvider.NullListener
                 );
-                currentDelay
-                    .Task
+                currentDelay.Task
                     .SafeContinueWith(
                         _ => RestoreGCLatencyMode(currentMode),
                         TaskScheduler.Default

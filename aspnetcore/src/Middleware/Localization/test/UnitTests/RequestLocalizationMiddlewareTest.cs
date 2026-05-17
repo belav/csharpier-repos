@@ -71,8 +71,7 @@ public class RequestLocalizationMiddlewareTest
         {
             var client = server.CreateClient();
 
-            client
-                .DefaultRequestHeaders
+            client.DefaultRequestHeaders
                 .Add(
                     "Cookie",
                     new CookieHeaderValue(

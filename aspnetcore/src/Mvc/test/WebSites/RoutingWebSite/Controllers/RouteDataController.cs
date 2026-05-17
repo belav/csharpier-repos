@@ -29,8 +29,7 @@ public class RouteDataController : Controller
     {
         if (!context.RouteData.DataTokens.ContainsKey("actionName"))
         {
-            context
-                .RouteData
+            context.RouteData
                 .DataTokens
                 .Add(
                     "actionName",

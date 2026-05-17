@@ -88,8 +88,7 @@ namespace System.Activities.Expressions
 
             if (items == null)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new InvalidOperationException(
                             SR.MemberCannotBeNull("Array", this.GetType().Name, this.DisplayName)
@@ -100,8 +99,7 @@ namespace System.Activities.Expressions
             Type realItemType = items.GetType().GetElementType();
             if (!TypeHelper.AreTypesCompatible(typeof(TItem), realItemType))
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new InvalidCastException(
                             SR.IncompatibleTypeForMultidimensionalArrayItemReference(

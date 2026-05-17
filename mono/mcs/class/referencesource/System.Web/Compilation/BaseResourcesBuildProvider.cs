@@ -158,8 +158,7 @@ namespace System.Web.Compilation
                     using (ResourceWriter writer = new ResourceWriter(outputStream))
                     {
                         // Enable resource writer to be target-aware
-                        writer.TypeNameConverter = System
-                            .Web
+                        writer.TypeNameConverter = System.Web
                             .UI
                             .TargetFrameworkUtil
                             .TypeNameConverter;

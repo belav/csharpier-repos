@@ -33,8 +33,7 @@ namespace MonoTests.System
                     string filePath = Path.GetFullPath(Path.Combine(Location, testFullName + ext));
                     if (!File.Exists(filePath))
                     {
-                        NUnit
-                            .Framework
+                        NUnit.Framework
                             .Assert
                             .Ignore(
                                 filePath

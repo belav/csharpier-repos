@@ -322,8 +322,7 @@ internal static class DefaultEditorTemplates
 
                 valueDivTag.InnerHtml.AppendHtml(templateBuilderResult);
                 valueDivTag.InnerHtml.AppendHtml(" ");
-                valueDivTag
-                    .InnerHtml
+                valueDivTag.InnerHtml
                     .AppendHtml(
                         htmlHelper.ValidationMessage(
                             propertyMetadata.PropertyName,

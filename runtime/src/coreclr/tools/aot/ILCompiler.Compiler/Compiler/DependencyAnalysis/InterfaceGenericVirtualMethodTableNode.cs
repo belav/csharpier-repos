@@ -71,8 +71,7 @@ namespace ILCompiler.DependencyAnalysis
             MethodDesc openCallingMethod = callingMethod.GetTypicalMethodDefinition();
             TypeDesc openImplementationType = implementationType.GetTypeDefinition();
 
-            var openCallingMethodNameAndSig = factory
-                .NativeLayout
+            var openCallingMethodNameAndSig = factory.NativeLayout
                 .MethodNameAndSignatureVertex(openCallingMethod);
             dependencies.Add(
                 new DependencyListEntry(
@@ -86,13 +85,11 @@ namespace ILCompiler.DependencyAnalysis
             {
                 MethodDesc openImplementationMethod =
                     implementationMethod.GetTypicalMethodDefinition();
-                var openImplementationMethodNameAndSig = factory
-                    .NativeLayout
+                var openImplementationMethodNameAndSig = factory.NativeLayout
                     .MethodNameAndSignatureVertex(openImplementationMethod);
                 dependencies.Add(
                     new DependencyListEntry(
-                        factory
-                            .NativeLayout
+                        factory.NativeLayout
                             .PlacedSignatureVertex(openImplementationMethodNameAndSig),
                         "interface gvm table implementation method signature"
                     )
@@ -110,13 +107,11 @@ namespace ILCompiler.DependencyAnalysis
                     if (openImplementationType.RuntimeInterfaces[index] == callingMethod.OwningType)
                     {
                         TypeDesc currentInterface = openImplementationType.RuntimeInterfaces[index];
-                        var currentInterfaceSignature = factory
-                            .NativeLayout
+                        var currentInterfaceSignature = factory.NativeLayout
                             .TypeSignatureVertex(currentInterface);
                         dependencies.Add(
                             new DependencyListEntry(
-                                factory
-                                    .NativeLayout
+                                factory.NativeLayout
                                     .PlacedSignatureVertex(currentInterfaceSignature),
                                 "interface gvm table interface signature"
                             )
@@ -227,8 +222,7 @@ namespace ILCompiler.DependencyAnalysis
                 uint typeId = _externalReferences.GetIndex(
                     factory.NecessaryTypeSymbol(callingMethod.OwningType)
                 );
-                var nameAndSig = factory
-                    .NativeLayout
+                var nameAndSig = factory.NativeLayout
                     .PlacedSignatureVertex(
                         factory.NativeLayout.MethodNameAndSignatureVertex(callingMethod)
                     );
@@ -248,11 +242,9 @@ namespace ILCompiler.DependencyAnalysis
                 {
                     if (impl is MethodDesc implementationMethod)
                     {
-                        nameAndSig = factory
-                            .NativeLayout
+                        nameAndSig = factory.NativeLayout
                             .PlacedSignatureVertex(
-                                factory
-                                    .NativeLayout
+                                factory.NativeLayout
                                     .MethodNameAndSignatureVertex(implementationMethod)
                             );
                         typeId = _externalReferences.GetIndex(
@@ -324,8 +316,7 @@ namespace ILCompiler.DependencyAnalysis
                                 TypeDesc currentInterface = implementationType.RuntimeInterfaces[
                                     ifaceId
                                 ];
-                                var typeSig = factory
-                                    .NativeLayout
+                                var typeSig = factory.NativeLayout
                                     .PlacedSignatureVertex(
                                         factory.NativeLayout.TypeSignatureVertex(currentInterface)
                                     );

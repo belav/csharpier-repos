@@ -79,8 +79,7 @@ namespace System.Workflow.Runtime.Hosting
                         (ActivityExecutionContextInfo)
                             activity.GetValue(Activity.ActivityExecutionContextInfoProperty);
                     TimeSpan timeElapsed = DateTime.Now - startTime;
-                    WorkflowTrace
-                        .Host
+                    WorkflowTrace.Host
                         .TraceEvent(
                             TraceEventType.Information,
                             0,
@@ -115,8 +114,7 @@ namespace System.Workflow.Runtime.Hosting
             }
             Debug.Assert(state != null, "invalid state recovered");
             TimeSpan timeElapsed = DateTime.Now - startTime;
-            WorkflowTrace
-                .Host
+            WorkflowTrace.Host
                 .TraceEvent(
                     TraceEventType.Information,
                     0,

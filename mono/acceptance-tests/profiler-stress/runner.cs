@@ -216,10 +216,8 @@ namespace Mono.Profiling.Tests.Stress
                 info.EnvironmentVariables.Add("MONO_PATH", classDir);
 
                 if (suspend)
-                    info.EnvironmentVariables.Add(
-                        "MONO_DEBUG",
-                        "suspend-on-native-crash,suspend-on-unhandled"
-                    );
+                    info.EnvironmentVariables
+                        .Add("MONO_DEBUG", "suspend-on-native-crash,suspend-on-unhandled");
 
                 var progress = $"({i + 1}/{benchmarks.Length})";
 

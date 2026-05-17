@@ -667,11 +667,8 @@ namespace System.Data.Metadata.Edm
         {
             Facet nullableFacet;
             if (
-                type.Facets.TryGetValue(
-                    EdmProviderManifest.NullableFacetName,
-                    false,
-                    out nullableFacet
-                )
+                type.Facets
+                    .TryGetValue(EdmProviderManifest.NullableFacetName, false, out nullableFacet)
             )
             {
                 return (bool)nullableFacet.Value;
@@ -760,8 +757,7 @@ namespace System.Data.Metadata.Edm
         [System.Diagnostics.Conditional("DEBUG")]
         internal static void AssertTypeInvariant(string message, Func<bool> assertPredicate)
         {
-            System
-                .Diagnostics
+            System.Diagnostics
                 .Debug
                 .Assert(assertPredicate(), "Type invariant check FAILED\n" + message);
         }
@@ -806,8 +802,7 @@ namespace System.Data.Metadata.Edm
                 return true;
             }
 
-            objectModel.ReadOnlyCollection<PrimitiveType> superTypes = EdmProviderManifest
-                .Instance
+            objectModel.ReadOnlyCollection<PrimitiveType> superTypes = EdmProviderManifest.Instance
                 .GetPromotionTypes(subPrimitiveType);
 
             return (-1 != superTypes.IndexOf(superPrimitiveType));
@@ -1175,8 +1170,7 @@ namespace System.Data.Metadata.Edm
             else if (fromType.EdmType.BuiltInTypeKind == BuiltInTypeKind.RefType)
             {
                 // Both are Reference Types, so compare the referenced Entity types
-                return ((RefType)fromType.EdmType)
-                    .ElementType
+                return ((RefType)fromType.EdmType).ElementType
                     .EdmEquals(((RefType)toType.EdmType).ElementType);
             }
             else if (fromType.EdmType.BuiltInTypeKind == BuiltInTypeKind.RowType)
@@ -1240,9 +1234,8 @@ namespace System.Data.Metadata.Edm
                 commonTypeClosure[i, i] = Helper.EmptyPrimitiveTypeReadOnlyCollection;
             }
 
-            objectModel.ReadOnlyCollection<PrimitiveType> primitiveTypes = EdmProviderManifest
-                .Instance
-                .GetStoreTypes();
+            objectModel.ReadOnlyCollection<PrimitiveType> primitiveTypes =
+                EdmProviderManifest.Instance.GetStoreTypes();
 
             for (int i = 0; i < EdmConstants.NumPrimitiveTypes; i++)
             {
@@ -1275,8 +1268,7 @@ namespace System.Data.Metadata.Edm
                 }
             );
 
-            System
-                .Threading
+            System.Threading
                 .Interlocked
                 .CompareExchange<objectModel.ReadOnlyCollection<PrimitiveType>[,]>(
                     ref _commonTypeClosure,

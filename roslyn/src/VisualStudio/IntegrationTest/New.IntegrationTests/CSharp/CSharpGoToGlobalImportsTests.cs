@@ -27,44 +27,35 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
         public async Task TestGlobalImports()
         {
             // Make sure no glyph is in the margin at first.
-            await TestServices
-                .InheritanceMargin
+            await TestServices.InheritanceMargin
                 .DisableOptionsAsync(LanguageName, HangMitigatingCancellationToken);
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .OpenFileAsync(ProjectName, "Class1.cs", HangMitigatingCancellationToken);
 
-            await TestServices
-                .InheritanceMargin
+            await TestServices.InheritanceMargin
                 .EnableOptionsAndEnsureGlyphsAppearAsync(
                     LanguageName,
                     1,
                     HangMitigatingCancellationToken
                 );
-            await TestServices
-                .InheritanceMargin
+            await TestServices.InheritanceMargin
                 .ClickTheGlyphOnLine(1, HangMitigatingCancellationToken);
 
             // Move focus to menu item 'System'
-            await TestServices
-                .Input
+            await TestServices.Input
                 .SendWithoutActivateAsync(VirtualKeyCode.TAB, HangMitigatingCancellationToken);
             // Navigate to 'System'
-            await TestServices
-                .Input
+            await TestServices.Input
                 .SendWithoutActivateAsync(VirtualKeyCode.RETURN, HangMitigatingCancellationToken);
-            await TestServices
-                .Workspace
+            await TestServices.Workspace
                 .WaitForAllAsyncOperationsAsync(
                     [FeatureAttribute.InheritanceMargin],
                     HangMitigatingCancellationToken
                 );
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .TextContainsAsync(@"global using global::System;$$", assertCaretPosition: true);
 
-            var document = await TestServices
-                .Editor
+            var document = await TestServices.Editor
                 .GetActiveDocumentAsync(HangMitigatingCancellationToken);
             RoslynDebug.AssertNotNull(document);
             Assert.NotEqual(

@@ -15,8 +15,7 @@ namespace Microsoft.CodeAnalysis.LanguageService
         : IStructuralTypeDisplayService
     {
         protected static readonly SymbolDisplayFormat s_minimalWithoutExpandedTuples =
-            SymbolDisplayFormat
-                .MinimallyQualifiedFormat
+            SymbolDisplayFormat.MinimallyQualifiedFormat
                 .AddMiscellaneousOptions(SymbolDisplayMiscellaneousOptions.CollapseTupleTypes);
 
         private static readonly SymbolDisplayFormat s_delegateDisplay =

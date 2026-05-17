@@ -41,8 +41,7 @@ public class RelationalQueryableMethodTranslatingExpressionVisitor
 
         var sqlExpressionFactory = relationalDependencies.SqlExpressionFactory;
         _queryCompilationContext = queryCompilationContext;
-        _sqlTranslator = relationalDependencies
-            .RelationalSqlTranslatingExpressionVisitorFactory
+        _sqlTranslator = relationalDependencies.RelationalSqlTranslatingExpressionVisitorFactory
             .Create(queryCompilationContext, this);
         _sharedTypeEntityExpandingExpressionVisitor =
             new SharedTypeEntityExpandingExpressionVisitor(_sqlTranslator, sqlExpressionFactory);
@@ -71,8 +70,7 @@ public class RelationalQueryableMethodTranslatingExpressionVisitor
     {
         RelationalDependencies = parentVisitor.RelationalDependencies;
         _queryCompilationContext = parentVisitor._queryCompilationContext;
-        _sqlTranslator = RelationalDependencies
-            .RelationalSqlTranslatingExpressionVisitorFactory
+        _sqlTranslator = RelationalDependencies.RelationalSqlTranslatingExpressionVisitorFactory
             .Create(parentVisitor._queryCompilationContext, parentVisitor);
         _sharedTypeEntityExpandingExpressionVisitor =
             new SharedTypeEntityExpandingExpressionVisitor(
@@ -120,8 +118,7 @@ public class RelationalQueryableMethodTranslatingExpressionVisitor
                     _sqlExpressionFactory.Select(
                         fromSqlQueryRootExpression.EntityType,
                         new FromSqlExpression(
-                            fromSqlQueryRootExpression
-                                .EntityType
+                            fromSqlQueryRootExpression.EntityType
                                 .GetDefaultMappings()
                                 .Single()
                                 .Table,
@@ -181,8 +178,7 @@ public class RelationalQueryableMethodTranslatingExpressionVisitor
 
             case EntityQueryRootExpression entityQueryRootExpression
                 when entityQueryRootExpression.GetType() == typeof(EntityQueryRootExpression)
-                    && entityQueryRootExpression
-                        .EntityType
+                    && entityQueryRootExpression.EntityType
                         .GetSqlQueryMappings()
                         .FirstOrDefault(m => m.IsDefaultSqlQueryMapping)
                         ?.SqlQuery
@@ -192,8 +188,7 @@ public class RelationalQueryableMethodTranslatingExpressionVisitor
                     _sqlExpressionFactory.Select(
                         entityQueryRootExpression.EntityType,
                         new FromSqlExpression(
-                            entityQueryRootExpression
-                                .EntityType
+                            entityQueryRootExpression.EntityType
                                 .GetDefaultMappings()
                                 .Single()
                                 .Table,
@@ -230,8 +225,7 @@ public class RelationalQueryableMethodTranslatingExpressionVisitor
 
             case SqlQueryRootExpression sqlQueryRootExpression:
             {
-                var typeMapping = RelationalDependencies
-                    .TypeMappingSource
+                var typeMapping = RelationalDependencies.TypeMappingSource
                     .FindMapping(sqlQueryRootExpression.ElementType, RelationalDependencies.Model);
 
                 if (typeMapping == null)
@@ -744,8 +738,7 @@ public class RelationalQueryableMethodTranslatingExpressionVisitor
             // entity , which e.g. does entity equality/containment for entities with composite keys.
             var anyLambdaParameter = Expression.Parameter(item.Type, "p");
             var anyLambda = Expression.Lambda(
-                Infrastructure
-                    .ExpressionExtensions
+                Infrastructure.ExpressionExtensions
                     .CreateEqualsExpression(anyLambdaParameter, item),
                 anyLambdaParameter
             );
@@ -1995,8 +1988,7 @@ public class RelationalQueryableMethodTranslatingExpressionVisitor
 
                 // Apply the type mapping of the column (translated from the property selector above) to the value,
                 // and apply alias uniquification to it.
-                translatedValueSelector = visitor
-                    ._sqlExpressionFactory
+                translatedValueSelector = visitor._sqlExpressionFactory
                     .ApplyTypeMapping(translatedValueSelector, column.TypeMapping);
                 translatedValueSelector = selectExpression.AssignUniqueAliases(
                     translatedValueSelector
@@ -2822,8 +2814,7 @@ public class RelationalQueryableMethodTranslatingExpressionVisitor
                         innerSelectExpression
                     );
 
-                    var makeNullable = foreignKey
-                        .PrincipalKey
+                    var makeNullable = foreignKey.PrincipalKey
                         .Properties
                         .Concat(foreignKey.Properties)
                         .Select(p => p.ClrType)
@@ -2845,15 +2836,13 @@ public class RelationalQueryableMethodTranslatingExpressionVisitor
                         makeNullable
                     );
 
-                    var keyComparison = Infrastructure
-                        .ExpressionExtensions
+                    var keyComparison = Infrastructure.ExpressionExtensions
                         .CreateEqualsExpression(outerKey, innerKey);
 
                     var predicate = makeNullable
                         ? Expression.AndAlso(
                             outerKey is NewArrayExpression newArrayExpression
-                                ? newArrayExpression
-                                    .Expressions
+                                ? newArrayExpression.Expressions
                                     .Select(e =>
                                     {
                                         var left = (e as UnaryExpression)?.Operand ?? e;
@@ -3543,8 +3532,7 @@ public class RelationalQueryableMethodTranslatingExpressionVisitor
                     // them.
                     FromSqlExpression => false,
 
-                    SelectExpression subquery => subquery
-                        .Projection
+                    SelectExpression subquery => subquery.Projection
                         .FirstOrDefault(p => p.Alias == columnExpression.Name)
                         is { Expression.TypeMapping: null },
 
@@ -3693,8 +3681,7 @@ public class RelationalQueryableMethodTranslatingExpressionVisitor
                     return ApplyTypeMappingsOnValuesExpression(
                         valuesExpression,
                         stripOrdering: _currentSelectExpression is { Limit: null, Offset: null }
-                            && !_currentSelectExpression
-                                .Projection
+                            && !_currentSelectExpression.Projection
                                 .Any(p =>
                                     p.Expression
                                         is ColumnExpression { Name: ValuesOrderingColumnName } c

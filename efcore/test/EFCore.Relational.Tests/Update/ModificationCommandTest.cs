@@ -486,8 +486,7 @@ public class ModificationCommandTest
     {
         var model = BuildModel(generateKeyValues, computeNonKeyValue);
 
-        return FakeRelationalTestHelpers
-            .Instance
+        return FakeRelationalTestHelpers.Instance
             .CreateInternalEntry(
                 model,
                 entityState,

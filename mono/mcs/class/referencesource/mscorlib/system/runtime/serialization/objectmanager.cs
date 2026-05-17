@@ -527,8 +527,7 @@ namespace System.Runtime.Serialization
                     }
                     if (Nullable.GetUnderlyingType(parentField.FieldType) != null)
                     {
-                        fieldsTemp[currentFieldIndex] = parentField
-                            .FieldType
+                        fieldsTemp[currentFieldIndex] = parentField.FieldType
                             .GetField("value", BindingFlags.NonPublic | BindingFlags.Instance);
                         currentFieldIndex++;
                     }

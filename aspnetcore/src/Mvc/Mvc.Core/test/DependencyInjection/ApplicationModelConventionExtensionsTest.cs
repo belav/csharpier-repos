@@ -143,12 +143,10 @@ public class ApplicationModelConventionExtensionsTest
         // Arrange
         var options = new MvcOptions();
         var app = new ApplicationModel();
-        app.Controllers.Add(
-            new ControllerModel(typeof(HelloController).GetTypeInfo(), Array.Empty<object>())
-        );
-        app.Controllers.Add(
-            new ControllerModel(typeof(WorldController).GetTypeInfo(), Array.Empty<object>())
-        );
+        app.Controllers
+            .Add(new ControllerModel(typeof(HelloController).GetTypeInfo(), Array.Empty<object>()));
+        app.Controllers
+            .Add(new ControllerModel(typeof(WorldController).GetTypeInfo(), Array.Empty<object>()));
         options.Conventions.Add(new SimpleControllerConvention());
 
         // Act
@@ -187,8 +185,7 @@ public class ApplicationModelConventionExtensionsTest
     {
         // Arrange
         var applicationModel = new ApplicationModel();
-        applicationModel
-            .Controllers
+        applicationModel.Controllers
             .Add(
                 new ControllerModel(typeof(HelloController).GetTypeInfo(), Array.Empty<object>())
                 {
@@ -210,8 +207,7 @@ public class ApplicationModelConventionExtensionsTest
         // Arrange
         var controllerModelConvention = new ControllerModelCollectionModifyingConvention();
         var applicationModel = new ApplicationModel();
-        applicationModel
-            .Controllers
+        applicationModel.Controllers
             .Add(
                 new ControllerModel(
                     typeof(HelloController).GetTypeInfo(),
@@ -238,8 +234,7 @@ public class ApplicationModelConventionExtensionsTest
         {
             Application = applicationModel,
         };
-        controllerModel
-            .Actions
+        controllerModel.Actions
             .Add(
                 new ActionModel(
                     controllerType.GetMethod(nameof(HelloController.GetHello)),
@@ -269,8 +264,7 @@ public class ApplicationModelConventionExtensionsTest
         {
             Application = applicationModel,
         };
-        controllerModel
-            .ControllerProperties
+        controllerModel.ControllerProperties
             .Add(
                 new PropertyModel(
                     controllerType.GetProperty(nameof(HelloController.Property1)),
@@ -301,8 +295,7 @@ public class ApplicationModelConventionExtensionsTest
         {
             Application = applicationModel,
         };
-        controllerModel
-            .ControllerProperties
+        controllerModel.ControllerProperties
             .Add(
                 new PropertyModel(
                     controllerType.GetProperty(nameof(HelloController.Property1)),

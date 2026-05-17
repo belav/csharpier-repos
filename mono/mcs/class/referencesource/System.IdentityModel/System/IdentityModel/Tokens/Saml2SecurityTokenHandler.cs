@@ -70,8 +70,7 @@ namespace System.IdentityModel.Tokens
         {
             if (samlSecurityTokenRequirement == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("samlSecurityTokenRequirement");
             }
 
@@ -88,8 +87,7 @@ namespace System.IdentityModel.Tokens
         {
             if (customConfigElements == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("customConfigElements");
             }
 
@@ -330,8 +328,7 @@ namespace System.IdentityModel.Tokens
             Saml2SecurityToken samlToken = token as Saml2SecurityToken;
             if (samlToken == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument("token", SR.GetString(SR.ID4151));
             }
 
@@ -353,8 +350,7 @@ namespace System.IdentityModel.Tokens
 
                 if (samlToken.IssuerToken == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new SecurityTokenValidationException(SR.GetString(SR.ID4152))
                         );
@@ -362,8 +358,7 @@ namespace System.IdentityModel.Tokens
 
                 if (samlToken.Assertion == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgument("token", SR.GetString(SR.ID1034));
                 }
 
@@ -384,8 +379,7 @@ namespace System.IdentityModel.Tokens
                     this.DetectReplayedToken(samlToken);
                 }
 
-                Saml2SubjectConfirmation subjectConfirmation = samlToken
-                    .Assertion
+                Saml2SubjectConfirmation subjectConfirmation = samlToken.Assertion
                     .Subject
                     .SubjectConfirmations[0];
                 if (subjectConfirmation.SubjectConfirmationData != null)
@@ -489,8 +483,7 @@ namespace System.IdentityModel.Tokens
             }
             else
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument("token", SR.GetString(SR.ID4160));
             }
         }
@@ -730,8 +723,7 @@ namespace System.IdentityModel.Tokens
 
             if (securityKeyIdentifierClause == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("keyIdentifierClause");
             }
 
@@ -750,8 +742,7 @@ namespace System.IdentityModel.Tokens
 
             if (null == samlClause)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument("keyIdentifierClause", SR.GetString(SR.ID4162));
             }
 
@@ -773,8 +764,7 @@ namespace System.IdentityModel.Tokens
                 // Don't emit @wsc:Length since it's not actually in the spec/schema
                 if (length != 0 && length != WSC.DefaultDerivedKeyLength)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ID4129)));
                 }
             }
@@ -900,8 +890,7 @@ namespace System.IdentityModel.Tokens
 
             if (null == decryptionKey)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new EncryptedTokenDecryptionFailedException());
             }
 
@@ -909,8 +898,7 @@ namespace System.IdentityModel.Tokens
             SymmetricSecurityKey symmetricKey = decryptionKey as SymmetricSecurityKey;
             if (null == symmetricKey)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new SecurityTokenException(SR.GetString(SR.ID4023)));
             }
 
@@ -1140,8 +1128,7 @@ namespace System.IdentityModel.Tokens
 
             if (hasScope)
             {
-                conditions
-                    .AudienceRestrictions
+                conditions.AudienceRestrictions
                     .Add(new Saml2AudienceRestriction(new Uri(relyingPartyAddress)));
             }
 
@@ -1190,8 +1177,7 @@ namespace System.IdentityModel.Tokens
             // Must have an issuer
             if (string.IsNullOrEmpty(issuerName))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ID4138)));
             }
 
@@ -1228,8 +1214,7 @@ namespace System.IdentityModel.Tokens
                 string nameFormat = claim.Properties[ClaimProperties.SamlAttributeNameFormat];
                 if (!UriUtil.CanCreateValidUri(nameFormat, UriKind.Absolute))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgument("nameFormat", SR.GetString(SR.ID0013));
                 }
 
@@ -1641,8 +1626,7 @@ namespace System.IdentityModel.Tokens
                         // Do not allow multiple name identifier claim.
                         if (null != nameIdentifierClaim)
                         {
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
                                     new InvalidOperationException(SR.GetString(SR.ID4139))
                                 );
@@ -1658,8 +1642,7 @@ namespace System.IdentityModel.Tokens
                         }
 
                         if (
-                            claim
-                                .Properties
+                            claim.Properties
                                 .ContainsKey(ClaimProperties.SamlNameIdentifierNameQualifier)
                         )
                         {
@@ -1669,8 +1652,7 @@ namespace System.IdentityModel.Tokens
                         }
 
                         if (
-                            claim
-                                .Properties
+                            claim.Properties
                                 .ContainsKey(ClaimProperties.SamlNameIdentifierSPNameQualifier)
                         )
                         {
@@ -1680,8 +1662,7 @@ namespace System.IdentityModel.Tokens
                         }
 
                         if (
-                            claim
-                                .Properties
+                            claim.Properties
                                 .ContainsKey(ClaimProperties.SamlNameIdentifierSPProvidedId)
                         )
                         {
@@ -1726,8 +1707,7 @@ namespace System.IdentityModel.Tokens
                     Saml2Constants.ConfirmationMethods.HolderOfKey,
                     new Saml2SubjectConfirmationData()
                 );
-                subjectConfirmation
-                    .SubjectConfirmationData
+                subjectConfirmation.SubjectConfirmationData
                     .KeyIdentifiers
                     .Add(tokenDescriptor.Proof.KeyIdentifier);
             }
@@ -1759,8 +1739,7 @@ namespace System.IdentityModel.Tokens
                 encryptingCredentials = tokenDescriptor.EncryptingCredentials;
                 if (encryptingCredentials.SecurityKey is AsymmetricSecurityKey)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new SecurityTokenException(SR.GetString(SR.ID4178)));
                 }
             }
@@ -1820,8 +1799,7 @@ namespace System.IdentityModel.Tokens
                         < conditions.NotBefore.Value
                 )
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new SecurityTokenNotYetValidException(
                                 SR.GetString(SR.ID4147, conditions.NotBefore.Value, now)
@@ -1835,8 +1813,7 @@ namespace System.IdentityModel.Tokens
                         >= conditions.NotOnOrAfter.Value
                 )
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new SecurityTokenExpiredException(
                                 SR.GetString(SR.ID4148, conditions.NotOnOrAfter.Value, now)
@@ -1846,8 +1823,7 @@ namespace System.IdentityModel.Tokens
 
                 if (conditions.OneTimeUse)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new SecurityTokenValidationException(SR.GetString(SR.ID4149))
                         );
@@ -1855,8 +1831,7 @@ namespace System.IdentityModel.Tokens
 
                 if (conditions.ProxyRestriction != null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new SecurityTokenValidationException(SR.GetString(SR.ID4150))
                         );
@@ -1870,15 +1845,13 @@ namespace System.IdentityModel.Tokens
                     || this.Configuration.AudienceRestriction.AllowedAudienceUris.Count == 0
                 )
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ID1032)));
                 }
 
                 if (conditions == null || conditions.AudienceRestrictions.Count == 0)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new AudienceUriValidationFailedException(SR.GetString(SR.ID1035))
                         );
@@ -1943,8 +1916,7 @@ namespace System.IdentityModel.Tokens
             Saml2SecurityToken samlToken = token as Saml2SecurityToken;
             if (null == samlToken)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(
                         "token",
                         SR.GetString(SR.ID1064, token.GetType().ToString())
@@ -1969,8 +1941,7 @@ namespace System.IdentityModel.Tokens
 
             if (string.IsNullOrEmpty(samlToken.Assertion.Id.Value))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new SecurityTokenValidationException(SR.GetString(SR.ID1065))
                     );
@@ -2011,8 +1982,7 @@ namespace System.IdentityModel.Tokens
                         ? samlToken.Assertion.Issuer.Value
                         : String.Empty;
 
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new SecurityTokenReplayDetectedException(
                             SR.GetString(
@@ -2026,8 +1996,7 @@ namespace System.IdentityModel.Tokens
             }
             else
             {
-                Configuration
-                    .Caches
+                Configuration.Caches
                     .TokenReplayCache
                     .AddOrUpdate(
                         key,
@@ -2071,8 +2040,7 @@ namespace System.IdentityModel.Tokens
                     && assertion.Subject.SubjectConfirmations != null
                     && assertion.Subject.SubjectConfirmations.Count != 0
                     && assertion.Subject.SubjectConfirmations[0].SubjectConfirmationData != null
-                    && assertion
-                        .Subject
+                    && assertion.Subject
                         .SubjectConfirmations[0]
                         .SubjectConfirmationData
                         .NotOnOrAfter
@@ -2080,8 +2048,7 @@ namespace System.IdentityModel.Tokens
                 )
                 {
                     // The condition did not have NotOnOrAfter set, but SCD[0] has a NotOnOrAfter set, use that.
-                    tokenExpiration = assertion
-                        .Subject
+                    tokenExpiration = assertion.Subject
                         .SubjectConfirmations[0]
                         .SubjectConfirmationData
                         .NotOnOrAfter
@@ -2101,8 +2068,7 @@ namespace System.IdentityModel.Tokens
             // If the refined token validity period is greater than the TokenReplayCacheExpirationPeriod, throw
             if (DateTime.Compare(maximumExpirationTime, tokenExpiration.Value) < 0)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new SecurityTokenValidationException(
                             SR.GetString(
@@ -2146,8 +2112,7 @@ namespace System.IdentityModel.Tokens
         {
             if (assertionSubject == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("assertionSubject");
             }
 
@@ -2169,8 +2134,7 @@ namespace System.IdentityModel.Tokens
 
                 if (nameId.Format != null)
                 {
-                    claim.Properties[ClaimProperties.SamlNameIdentifierFormat] = nameId
-                        .Format
+                    claim.Properties[ClaimProperties.SamlNameIdentifierFormat] = nameId.Format
                         .AbsoluteUri;
                 }
 
@@ -2523,8 +2487,7 @@ namespace System.IdentityModel.Tokens
 
             if (assertion == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument("samlToken", SR.GetString(SR.ID1034));
             }
 
@@ -2544,8 +2507,7 @@ namespace System.IdentityModel.Tokens
 
             if (string.IsNullOrEmpty(issuer))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new SecurityTokenException(SR.GetString(SR.ID4175)));
             }
 
@@ -2565,29 +2527,25 @@ namespace System.IdentityModel.Tokens
         {
             if (null == confirmationData)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("confirmationData");
             }
 
             if (null != confirmationData.Address)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new SecurityTokenException(SR.GetString(SR.ID4153)));
             }
 
             if (null != confirmationData.InResponseTo)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new SecurityTokenException(SR.GetString(SR.ID4154)));
             }
 
             if (null != confirmationData.Recipient)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new SecurityTokenException(SR.GetString(SR.ID4157)));
             }
 
@@ -2599,8 +2557,7 @@ namespace System.IdentityModel.Tokens
                     < confirmationData.NotBefore.Value
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new SecurityTokenException(
                             SR.GetString(SR.ID4176, confirmationData.NotBefore.Value, now)
@@ -2614,8 +2571,7 @@ namespace System.IdentityModel.Tokens
                     >= confirmationData.NotOnOrAfter.Value
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new SecurityTokenException(
                             SR.GetString(SR.ID4177, confirmationData.NotOnOrAfter.Value, now)
@@ -2645,8 +2601,7 @@ namespace System.IdentityModel.Tokens
             if (null == subject)
             {
                 // No Subject
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new SecurityTokenException(SR.GetString(SR.ID4130)));
             }
 
@@ -2654,16 +2609,14 @@ namespace System.IdentityModel.Tokens
             if (0 == subject.SubjectConfirmations.Count)
             {
                 // No SubjectConfirmation
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new SecurityTokenException(SR.GetString(SR.ID4131)));
             }
 
             if (subject.SubjectConfirmations.Count > 1)
             {
                 // More than one SubjectConfirmation
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new SecurityTokenException(SR.GetString(SR.ID4132)));
             }
 
@@ -2682,8 +2635,7 @@ namespace System.IdentityModel.Tokens
                 )
                 {
                     // Bearer but has keys
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new SecurityTokenException(SR.GetString(SR.ID4133)));
                 }
 
@@ -2697,8 +2649,7 @@ namespace System.IdentityModel.Tokens
                 )
                 {
                     // Holder-of-key but no keys
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new SecurityTokenException(SR.GetString(SR.ID4134)));
                 }
 
@@ -2706,8 +2657,7 @@ namespace System.IdentityModel.Tokens
                 SecurityKey key;
 
                 foreach (
-                    SecurityKeyIdentifier keyIdentifier in subjectConfirmation
-                        .SubjectConfirmationData
+                    SecurityKeyIdentifier keyIdentifier in subjectConfirmation.SubjectConfirmationData
                         .KeyIdentifiers
                 )
                 {
@@ -2743,8 +2693,7 @@ namespace System.IdentityModel.Tokens
             else
             {
                 // SenderVouches, as well as other random things, aren't accepted
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new SecurityTokenException(
                             SR.GetString(SR.ID4136, subjectConfirmation.Method)
@@ -2783,8 +2732,7 @@ namespace System.IdentityModel.Tokens
                 string exceptionMessage = SR.GetString(
                     assertion.SigningCredentials == null ? SR.ID4141 : SR.ID4142
                 );
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new SecurityTokenException(exceptionMessage));
             }
         }
@@ -2813,8 +2761,7 @@ namespace System.IdentityModel.Tokens
                 && issuerResolver != null
             )
             {
-                SecurityKeyIdentifier keyIdentifier = assertion
-                    .SigningCredentials
+                SecurityKeyIdentifier keyIdentifier = assertion.SigningCredentials
                     .SigningKeyIdentifier;
                 return issuerResolver.TryResolveToken(keyIdentifier, out token);
             }
@@ -3552,8 +3499,7 @@ namespace System.IdentityModel.Tokens
             }
             else if (data.ExternalEncryptedKeys == null || data.ExternalEncryptedKeys.Count > 0)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ID4173)));
             }
 
@@ -3584,8 +3530,7 @@ namespace System.IdentityModel.Tokens
                     // An assertion with no statements MUST contain a <Subject> element. [Saml2Core, line 585]
                     if (data.Statements == null || 0 == data.Statements.Count)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(SR.GetString(SR.ID4106))
                             );
@@ -3601,8 +3546,7 @@ namespace System.IdentityModel.Tokens
                             || statement is Saml2AuthorizationDecisionStatement
                         )
                         {
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
                                     new InvalidOperationException(SR.GetString(SR.ID4119))
                                 );
@@ -3683,8 +3627,7 @@ namespace System.IdentityModel.Tokens
                     data.EncryptingCredentials.SecurityKey as SymmetricSecurityKey;
                 if (encryptingKey == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new CryptographicException(SR.GetString(SR.ID3064)));
                 }
 
@@ -3815,8 +3758,7 @@ namespace System.IdentityModel.Tokens
 
                 if (originalIssuer == String.Empty)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new XmlException(SR.GetString(SR.ID4252)));
                 }
 
@@ -4294,8 +4236,7 @@ namespace System.IdentityModel.Tokens
 
             if (data.Attributes == null || 0 == data.Attributes.Count)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ID4124)));
             }
 
@@ -4402,8 +4343,7 @@ namespace System.IdentityModel.Tokens
                     )
                 )
                 {
-                    audienceRestriction
-                        .Audiences
+                    audienceRestriction.Audiences
                         .Add(ReadSimpleUriElement(reader, UriKind.RelativeOrAbsolute, true));
                 }
 
@@ -4451,8 +4391,7 @@ namespace System.IdentityModel.Tokens
             // Schema requires at least one audience.
             if (data.Audiences == null || 0 == data.Audiences.Count)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ID4159)));
             }
 
@@ -4643,8 +4582,7 @@ namespace System.IdentityModel.Tokens
             // One of ClassRef and DeclRef must be present.
             if (null == data.ClassReference && null == data.DeclarationReference)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ID4117)));
             }
 
@@ -4990,8 +4928,7 @@ namespace System.IdentityModel.Tokens
                     decision = SamlAccessDecision.Deny;
                 }
                 else if (
-                    StringComparer
-                        .Ordinal
+                    StringComparer.Ordinal
                         .Equals(SamlAccessDecision.Indeterminate.ToString(), value)
                 )
                 {
@@ -5096,8 +5033,7 @@ namespace System.IdentityModel.Tokens
 #pragma warning suppress 56506 // actions are never null
             if (0 == data.Actions.Count)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ID4122)));
             }
 
@@ -5239,8 +5175,7 @@ namespace System.IdentityModel.Tokens
                                 )
                             )
                             {
-                                conditions
-                                    .AudienceRestrictions
+                                conditions.AudienceRestrictions
                                     .Add(this.ReadAudienceRestriction(reader));
                             }
                             else if (
@@ -5299,8 +5234,7 @@ namespace System.IdentityModel.Tokens
                             )
                         )
                         {
-                            conditions
-                                .AudienceRestrictions
+                            conditions.AudienceRestrictions
                                 .Add(this.ReadAudienceRestriction(reader));
                         }
                         else if (
@@ -5576,8 +5510,7 @@ namespace System.IdentityModel.Tokens
                 && (data.AssertionUriReferences == null || 0 == data.AssertionUriReferences.Count)
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ID4120)));
             }
 
@@ -5811,8 +5744,7 @@ namespace System.IdentityModel.Tokens
                     encryptingCredentials.SecurityKey as SymmetricSecurityKey;
                 if (encryptingKey == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new CryptographicException(SR.GetString(SR.ID3284)));
                 }
 
@@ -5956,8 +5888,7 @@ namespace System.IdentityModel.Tokens
                 // the name identifier value must be a uri and name qualifier, spname qualifier, and spproded id must be omitted.
                 if (
                     nameIdentifier.Format != null
-                    && StringComparer
-                        .Ordinal
+                    && StringComparer.Ordinal
                         .Equals(
                             nameIdentifier.Format.AbsoluteUri,
                             Saml2Constants.NameIdentifierFormats.Entity.AbsoluteUri
@@ -6393,8 +6324,7 @@ namespace System.IdentityModel.Tokens
                 return;
             }
 
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(
                     new InvalidOperationException(
                         SR.GetString(SR.ID4107, data.GetType().AssemblyQualifiedName)
@@ -6512,8 +6442,7 @@ namespace System.IdentityModel.Tokens
 #pragma warning suppress 56506 // SubjectConfirmations is never null
             if (null == data.NameId && 0 == data.SubjectConfirmations.Count)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ID4108)));
             }
 
@@ -7153,8 +7082,7 @@ namespace System.IdentityModel.Tokens
                 XmlReader reader
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new NotSupportedException());
             }
 
@@ -7168,8 +7096,7 @@ namespace System.IdentityModel.Tokens
                 SecurityTokenResolver tokenResolver
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new NotSupportedException());
             }
 
@@ -7184,8 +7111,7 @@ namespace System.IdentityModel.Tokens
                 SecurityKeyIdentifierClause keyIdentifierClause
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new NotSupportedException());
             }
 
@@ -7209,8 +7135,7 @@ namespace System.IdentityModel.Tokens
             /// <param name="token">The <see cref="SecurityToken"/> to serialize.</param>
             protected override void WriteTokenCore(XmlWriter writer, SecurityToken token)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new NotSupportedException());
             }
         }

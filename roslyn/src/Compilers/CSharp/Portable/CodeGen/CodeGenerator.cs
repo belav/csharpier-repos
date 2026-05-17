@@ -190,8 +190,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
                             bodySyntax
                         );
 
-                        result = _builder
-                            .LocalSlotManager
+                        result = _builder.LocalSlotManager
                             .DeclareLocal(
                                 type: _module.Translate(
                                     localSymbol.Type,

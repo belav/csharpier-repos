@@ -28,8 +28,7 @@ namespace System.ServiceModel.Configuration
                 TEnum dummy;
                 if (!Enum.TryParse<TEnum>(value.ToString(), true, out dummy))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidEnumArgumentException("value", (int)value, typeof(TEnum))
                         );
@@ -45,8 +44,7 @@ namespace System.ServiceModel.Configuration
                     )
                 )
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidEnumArgumentException("value", (int)value, typeof(TEnum))
                         );

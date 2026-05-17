@@ -35,8 +35,7 @@ namespace System.Globalization
 
             if (HasEmptyCultureName)
             {
-                Interop
-                    .Globalization
+                Interop.Globalization
                     .ChangeCaseInvariant(src, srcLen, dstBuffer, dstBufferCapacity, bToUpper);
             }
             else
@@ -49,14 +48,12 @@ namespace System.Globalization
                 }
                 if (_needsTurkishCasing == Tristate.True)
                 {
-                    Interop
-                        .Globalization
+                    Interop.Globalization
                         .ChangeCaseTurkish(src, srcLen, dstBuffer, dstBufferCapacity, bToUpper);
                 }
                 else
                 {
-                    Interop
-                        .Globalization
+                    Interop.Globalization
                         .ChangeCase(src, srcLen, dstBuffer, dstBufferCapacity, bToUpper);
                 }
             }

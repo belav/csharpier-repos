@@ -239,10 +239,10 @@ namespace Internal.TypeSystem
                     TypeDesc[] genericParameters = new TypeDesc[
                         rtth.ToEETypePtr()->GenericParameterCount
                     ];
-                    Runtime.GenericVariance* runtimeVariance =
-                        rtth.ToEETypePtr()->HasGenericVariance
-                            ? rtth.ToEETypePtr()->GenericVariance
-                            : null;
+                    Runtime.GenericVariance* runtimeVariance = rtth.ToEETypePtr()
+                        ->HasGenericVariance
+                        ? rtth.ToEETypePtr()->GenericVariance
+                        : null;
                     ReadOnlySpan<Runtime.GenericVariance> varianceData =
                         new ReadOnlySpan<Runtime.GenericVariance>(
                             runtimeVariance,
@@ -511,8 +511,7 @@ namespace Internal.TypeSystem
                                     IntPtr.Zero,
                                     false
                                 );
-                            return typicalMethod
-                                .Context
+                            return typicalMethod.Context
                                 .GetMethodForInstantiatedType(
                                     typicalMethod,
                                     (InstantiatedType)key._owningType

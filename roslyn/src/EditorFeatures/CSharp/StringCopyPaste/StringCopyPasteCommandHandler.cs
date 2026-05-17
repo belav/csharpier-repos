@@ -276,8 +276,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.StringCopyPaste
                 if (selectionsBeforePaste.Count != 1)
                     return default;
 
-                var copyPasteService = documentBeforePaste
-                    .Project
+                var copyPasteService = documentBeforePaste.Project
                     .Solution
                     .Services
                     .GetRequiredService<IStringCopyPasteService>();
@@ -319,8 +318,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.StringCopyPaste
             {
                 // already have a multi-line raw string.  The indentation of it's end delimiter is the indentation all
                 // lines within it should have.
-                var lastLine = textBeforePaste
-                    .Lines
+                var lastLine = textBeforePaste.Lines
                     .GetLineFromPosition(stringExpressionBeforePaste.Span.End);
                 var quotePosition = lastLine.GetFirstNonWhitespacePosition()!.Value;
                 return textBeforePaste.ToString(

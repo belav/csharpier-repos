@@ -16,8 +16,7 @@ public static class CustomBuilderExtensions
         Func<IServiceProvider, IXmlEncryptor> factory
     )
     {
-        builder
-            .Services
+        builder.Services
             .AddSingleton<IConfigureOptions<KeyManagementOptions>>(serviceProvider =>
             {
                 var instance = factory(serviceProvider);

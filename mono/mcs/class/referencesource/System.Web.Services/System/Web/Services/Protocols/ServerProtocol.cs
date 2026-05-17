@@ -255,8 +255,7 @@ namespace System.Web.Services.Protocols
                     };
                 }
 
-                HttpRuntime
-                    .Cache
+                HttpRuntime.Cache
                     .Add(
                         key,
                         result,
@@ -325,8 +324,7 @@ namespace System.Web.Services.Protocols
         )
         {
             PartialTrustHelpers.FailIfInPartialTrustOutsideAspNet();
-            HttpRuntime
-                .Cache
+            HttpRuntime.Cache
                 .Insert(
                     CreateKey(protocolType, serverType, excludeSchemeHostPort),
                     value,
@@ -346,8 +344,7 @@ namespace System.Web.Services.Protocols
         internal object GetFromCache(Type protocolType, Type serverType, bool excludeSchemeHostPort)
         {
             PartialTrustHelpers.FailIfInPartialTrustOutsideAspNet();
-            return HttpRuntime
-                .Cache
+            return HttpRuntime.Cache
                 .Get(CreateKey(protocolType, serverType, excludeSchemeHostPort));
         }
 
@@ -389,8 +386,7 @@ namespace System.Web.Services.Protocols
             }
             else
             {
-                HttpRuntime
-                    .Cache
+                HttpRuntime.Cache
                     .Insert(
                         key,
                         new ServerProtocolCachePressure { Pressure = 1 },

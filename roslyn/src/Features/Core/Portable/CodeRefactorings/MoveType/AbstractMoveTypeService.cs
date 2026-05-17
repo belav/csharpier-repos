@@ -187,8 +187,7 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.MoveType
             );
             var isNestedType = IsNestedType(state.TypeNode);
 
-            var syntaxFacts = state
-                .SemanticDocument
+            var syntaxFacts = state.SemanticDocument
                 .Document
                 .GetRequiredLanguageService<ISyntaxFactsService>();
             var isClassNextToGlobalStatements = manyTypes

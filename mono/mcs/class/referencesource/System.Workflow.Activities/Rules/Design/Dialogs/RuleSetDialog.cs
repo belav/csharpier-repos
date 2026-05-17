@@ -244,9 +244,8 @@ namespace System.Workflow.Activities.Rules.Design
             try
             {
                 Rule rule = this.rulesListView.SelectedItems[0].Tag as Rule;
-                RuleCondition ruleCondition = this.ruleParser.ParseCondition(
-                    this.conditionTextBox.Text
-                );
+                RuleCondition ruleCondition = this.ruleParser
+                    .ParseCondition(this.conditionTextBox.Text);
                 rule.Condition = ruleCondition;
                 if (!string.IsNullOrEmpty(this.conditionTextBox.Text))
                     this.conditionTextBox.Text = ruleCondition.ToString().Replace("\n", "\r\n");
@@ -273,9 +272,8 @@ namespace System.Workflow.Activities.Rules.Design
             try
             {
                 Rule rule = this.rulesListView.SelectedItems[0].Tag as Rule;
-                List<RuleAction> ruleThenActions = this.ruleParser.ParseStatementList(
-                    this.thenTextBox.Text
-                );
+                List<RuleAction> ruleThenActions = this.ruleParser
+                    .ParseStatementList(this.thenTextBox.Text);
                 this.thenTextBox.Text = GetActionsString(ruleThenActions);
                 rule.ThenActions.Clear();
                 foreach (RuleAction ruleAction in ruleThenActions)
@@ -303,9 +301,8 @@ namespace System.Workflow.Activities.Rules.Design
             try
             {
                 Rule rule = (Rule)this.rulesListView.SelectedItems[0].Tag;
-                List<RuleAction> ruleElseActions = this.ruleParser.ParseStatementList(
-                    this.elseTextBox.Text
-                );
+                List<RuleAction> ruleElseActions = this.ruleParser
+                    .ParseStatementList(this.elseTextBox.Text);
                 this.elseTextBox.Text = GetActionsString(ruleElseActions);
                 rule.ElseActions.Clear();
                 foreach (RuleAction ruleAction in ruleElseActions)

@@ -108,8 +108,7 @@ namespace System.ServiceModel.Activities.Configuration
 
                     properties.Add(
                         new ConfigurationProperty(
-                            System
-                                .ServiceModel
+                            System.ServiceModel
                                 .Configuration
                                 .ConfigurationStrings
                                 .BindingConfiguration,
@@ -155,8 +154,7 @@ namespace System.ServiceModel.Activities.Configuration
                 // we need to add validation here
                 if (binding == null)
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(
                             new ConfigurationErrorsException(
                                 SR.FailedToLoadBindingInControlEndpoint(
@@ -236,8 +234,7 @@ namespace System.ServiceModel.Activities.Configuration
 
         bool HasAddressSetByUser(ConfigurationElement configurationElement)
         {
-            return configurationElement
-                    .ElementInformation
+            return configurationElement.ElementInformation
                     .Properties[System.ServiceModel.Configuration.ConfigurationStrings.Address]
                     .ValueOrigin != PropertyValueOrigin.Default;
         }

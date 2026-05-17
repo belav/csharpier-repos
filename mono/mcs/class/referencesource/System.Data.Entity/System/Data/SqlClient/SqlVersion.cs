@@ -50,8 +50,7 @@ namespace System.Data.SqlClient
         /// <returns>Sql Version for the current connection</returns>
         internal static SqlVersion GetSqlVersion(SqlConnection connection)
         {
-            System
-                .Diagnostics
+            System.Diagnostics
                 .Debug
                 .Assert(connection.State == ConnectionState.Open, "Expected an open connection");
             int majorVersion = Int32.Parse(

@@ -78,8 +78,7 @@ namespace Microsoft.CodeAnalysis.EncapsulateField
             var subjectBuffer = args.SubjectBuffer;
             var workspace = initialDocument.Project.Solution.Workspace;
 
-            var indicatorFactory = workspace
-                .Services
+            var indicatorFactory = workspace.Services
                 .GetRequiredService<IBackgroundWorkIndicatorFactory>();
             using var context = indicatorFactory.Create(
                 args.TextView,
@@ -90,8 +89,7 @@ namespace Microsoft.CodeAnalysis.EncapsulateField
             );
 
             var cancellationToken = context.UserCancellationToken;
-            var document = await subjectBuffer
-                .CurrentSnapshot
+            var document = await subjectBuffer.CurrentSnapshot
                 .GetFullyLoadedOpenDocumentInCurrentContextWithChangesAsync(context)
                 .ConfigureAwait(false);
             Contract.ThrowIfNull(document);
@@ -110,8 +108,7 @@ namespace Microsoft.CodeAnalysis.EncapsulateField
 
             if (result == null)
             {
-                await _threadingContext
-                    .JoinableTaskFactory
+                await _threadingContext.JoinableTaskFactory
                     .SwitchToMainThreadAsync(cancellationToken);
 
                 // We are about to show a modal UI dialog so we should take over the command execution
@@ -119,8 +116,7 @@ namespace Microsoft.CodeAnalysis.EncapsulateField
                 // and also will take it into consideration when measuring command handling duration.
                 context.TakeOwnership();
 
-                var notificationService = workspace
-                    .Services
+                var notificationService = workspace.Services
                     .GetRequiredService<INotificationService>();
                 notificationService.SendNotification(
                     EditorFeaturesResources.Please_select_the_definition_of_the_field_to_encapsulate,
@@ -149,8 +145,7 @@ namespace Microsoft.CodeAnalysis.EncapsulateField
             var previewService = workspace.Services.GetService<IPreviewDialogService>();
             if (previewService != null)
             {
-                await _threadingContext
-                    .JoinableTaskFactory
+                await _threadingContext.JoinableTaskFactory
                     .SwitchToMainThreadAsync(cancellationToken);
                 finalSolution = previewService.PreviewChanges(
                     string.Format(

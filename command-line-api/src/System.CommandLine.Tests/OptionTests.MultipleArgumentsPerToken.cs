@@ -120,8 +120,7 @@ namespace System.CommandLine.Tests
 
                     var optionResult = result.GetResult(option);
 
-                    optionResult
-                        .Tokens
+                    optionResult.Tokens
                         .Select(t => t.Value)
                         .Should()
                         .BeEquivalentSequenceTo("1", "2", "3", "4");
@@ -181,8 +180,7 @@ namespace System.CommandLine.Tests
                     var result = command.Parse("--option 1 2");
 
                     result.UnmatchedTokens.Should().BeEquivalentTo(new[] { "2" });
-                    result
-                        .Errors
+                    result.Errors
                         .Should()
                         .Contain(e =>
                             e.Message == LocalizationResources.UnrecognizedCommandOrArgument("2")

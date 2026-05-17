@@ -85,8 +85,7 @@ namespace ILLink.RoslynAnalyzer.TrimAnalysis
             ref LocalStateAndContext<MultiValue, FeatureContext> currentState
         )
         {
-            currentState.Context = currentState
-                .Context
+            currentState.Context = currentState.Context
                 .Union(new FeatureContext(featureChecksValue.EnabledFeatures));
         }
 
@@ -201,8 +200,7 @@ namespace ILLink.RoslynAnalyzer.TrimAnalysis
                 case "EmptyTypes" when field.ContainingType.IsTypeOf("System", "Type"):
 #if DEBUG
                 case "ArrayField"
-                    when field
-                        .ContainingType
+                    when field.ContainingType
                         .IsTypeOf("Mono.Linker.Tests.Cases.DataFlow", "WriteArrayField"):
 #endif
                 {
@@ -493,8 +491,9 @@ namespace ILLink.RoslynAnalyzer.TrimAnalysis
                             // To emulate IL tools behavior (trimmer, NativeAOT compiler), we're going to intentionally "forget" the static type
                             // if it is a generic argument type.
 
-                            ITypeSymbol? staticType = (valueNode as IValueWithStaticType)
-                                ?.StaticType
+                            ITypeSymbol? staticType = (
+                                valueNode as IValueWithStaticType
+                            )?.StaticType
                                 ?.Type;
                             if (staticType?.TypeKind == TypeKind.TypeParameter)
                                 staticType = null;
@@ -533,8 +532,7 @@ namespace ILLink.RoslynAnalyzer.TrimAnalysis
                             {
                                 var annotation = FlowAnnotations.GetTypeAnnotation(staticType);
                                 AddReturnValue(
-                                    FlowAnnotations
-                                        .Instance
+                                    FlowAnnotations.Instance
                                         .GetMethodReturnValue(new(calledMethod), annotation)
                                 );
                             }

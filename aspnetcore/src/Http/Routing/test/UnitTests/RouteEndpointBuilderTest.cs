@@ -204,8 +204,7 @@ public class RouteEndpointBuilderTest
             defaultOrder
         );
 
-        builder
-            .FilterFactories
+        builder.FilterFactories
             .Add(
                 (endopintContext, next) =>
                 {

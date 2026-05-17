@@ -110,8 +110,7 @@ namespace System.Security.Cryptography.Pkcs.Asn1
             if (tag.HasSameClassAndValue(Asn1Tag.Sequence))
             {
                 System.Security.Cryptography.Pkcs.Asn1.KeyTransRecipientInfoAsn tmpKtri;
-                System
-                    .Security
+                System.Security
                     .Cryptography
                     .Pkcs
                     .Asn1
@@ -122,8 +121,7 @@ namespace System.Security.Cryptography.Pkcs.Asn1
             else if (tag.HasSameClassAndValue(new Asn1Tag(TagClass.ContextSpecific, 1)))
             {
                 System.Security.Cryptography.Pkcs.Asn1.KeyAgreeRecipientInfoAsn tmpKari;
-                System
-                    .Security
+                System.Security
                     .Cryptography
                     .Pkcs
                     .Asn1

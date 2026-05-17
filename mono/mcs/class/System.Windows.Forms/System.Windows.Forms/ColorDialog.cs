@@ -967,19 +967,21 @@ namespace System.Windows.Forms
                 {
                     base.OnPaint(pe);
 
-                    pe.Graphics.FillRectangle(
-                        ThemeEngine.Current.ResPool.GetSolidBrush(internalcolor),
-                        new Rectangle(4, 4, 17, 15)
-                    );
+                    pe.Graphics
+                        .FillRectangle(
+                            ThemeEngine.Current.ResPool.GetSolidBrush(internalcolor),
+                            new Rectangle(4, 4, 17, 15)
+                        );
 
                     ControlPaint.DrawBorder3D(pe.Graphics, 3, 3, 19, 17, Border3DStyle.Sunken);
 
                     if (isSelected)
                     {
-                        pe.Graphics.DrawRectangle(
-                            ThemeEngine.Current.ResPool.GetPen(Color.Black),
-                            new Rectangle(2, 2, 20, 18)
-                        );
+                        pe.Graphics
+                            .DrawRectangle(
+                                ThemeEngine.Current.ResPool.GetPen(Color.Black),
+                                new Rectangle(2, 2, 20, 18)
+                            );
                     }
 
                     if (Focused)
@@ -1821,8 +1823,7 @@ namespace System.Windows.Forms
                 Color tmpColor = GetColorFromHSB();
 
                 // update the brightness control
-                colorDialog
-                    .brightnessControl
+                colorDialog.brightnessControl
                     .ShowColor(
                         (int)((float)currentXPos * xstep),
                         240 - ((int)((float)currentYPos * ystep))
@@ -1991,10 +1992,11 @@ namespace System.Windows.Forms
 
             private void Draw(PaintEventArgs e)
             {
-                e.Graphics.FillRectangle(
-                    ThemeEngine.Current.ResPool.GetSolidBrush(BackColor),
-                    new Rectangle(0, 0, 16, 203)
-                );
+                e.Graphics
+                    .FillRectangle(
+                        ThemeEngine.Current.ResPool.GetSolidBrush(BackColor),
+                        new Rectangle(0, 0, 16, 203)
+                    );
 
                 Point[] trianglePoints = new Point[3]
                 {
@@ -2003,10 +2005,11 @@ namespace System.Windows.Forms
                     new Point(8, currentTrianglePosition + 8),
                 };
 
-                e.Graphics.FillPolygon(
-                    ThemeEngine.Current.ResPool.GetSolidBrush(Color.Black),
-                    trianglePoints
-                );
+                e.Graphics
+                    .FillPolygon(
+                        ThemeEngine.Current.ResPool.GetSolidBrush(Color.Black),
+                        trianglePoints
+                    );
             }
 
             protected override void OnMouseDown(MouseEventArgs e)

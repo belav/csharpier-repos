@@ -33,8 +33,7 @@ public abstract class ModelCodeGeneratorTestBase
         var designServices = new ServiceCollection();
         AddModelServices(designServices);
 
-        var modelBuilder = SqlServerTestHelpers
-            .Instance
+        var modelBuilder = SqlServerTestHelpers.Instance
             .CreateConventionBuilder(customServices: designServices);
         buildModel(modelBuilder);
 

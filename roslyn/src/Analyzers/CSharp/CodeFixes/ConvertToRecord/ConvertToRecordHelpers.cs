@@ -303,8 +303,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
             );
 
             // left hand side of each assignment
-            var assignedUnderlyingFields = assignmentValues
-                .Keys
+            var assignedUnderlyingFields = assignmentValues.Keys
                 .SelectAsArray(UnwrapPropertyToField);
 
             // Each right hand assignment should assign the same property.
@@ -375,8 +374,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
                         // we have to do this rather convoluted comparison.
                         // Note: We can use AssociatedSymbol once this is implemented:
                         // https://github.com/dotnet/roslyn/issues/54286
-                        var positionalParam = param
-                            .ContainingSymbol
+                        var positionalParam = param.ContainingSymbol
                             .ContainingType
                             .GetMembers()
                             .FirstOrDefault(member =>
@@ -450,8 +448,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
                 }
             )
             {
-                var dictionaryBuilder = ImmutableDictionary<ISymbol, ExpressionSyntax>
-                    .Empty
+                var dictionaryBuilder = ImmutableDictionary<ISymbol, ExpressionSyntax>.Empty
                     .ToBuilder();
 
                 foreach (var assignment in initializer.Initializers)

@@ -1816,8 +1816,7 @@ namespace System.Web.Compilation
             else
                 dep = null;
 
-            HttpRuntime
-                .InternalCache
+            HttpRuntime.InternalCache
                 .Add(
                     BUILD_MANAGER_VIRTUAL_PATH_CACHE_PREFIX + virtualPath,
                     true,

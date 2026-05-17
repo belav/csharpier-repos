@@ -283,8 +283,7 @@ internal sealed class HotReloadAgent : IDisposable
 
         foreach (var delta in deltas)
         {
-            var assembly = AppDomain
-                .CurrentDomain
+            var assembly = AppDomain.CurrentDomain
                 .GetAssemblies()
                 .FirstOrDefault(assembly =>
                     TryGetModuleId(assembly) is Guid moduleId && moduleId == delta.ModuleId

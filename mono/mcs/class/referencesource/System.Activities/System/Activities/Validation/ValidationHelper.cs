@@ -58,8 +58,7 @@ namespace System.Activities.Validation
                 {
                     string groupName = entry.Key;
                     configurationResults.Add(groupName, false);
-                    IEnumerable<RuntimeArgument> requiredArguments = entry
-                        .Value
+                    IEnumerable<RuntimeArgument> requiredArguments = entry.Value
                         .Where((a) => a.IsRequired);
 
                     if (requiredArguments.Count() > 0)
@@ -78,8 +77,7 @@ namespace System.Activities.Validation
                     else
                     {
                         overloadGroupsWithNoRequiredArgs++;
-                        IEnumerable<RuntimeArgument> optionalArguments = entry
-                            .Value
+                        IEnumerable<RuntimeArgument> optionalArguments = entry.Value
                             .Where((a) => !a.IsRequired);
                         if (
                             optionalArguments.Any(localArgument =>
@@ -121,23 +119,20 @@ namespace System.Activities.Validation
                     List<string> disjointGroups = null;
                     if (!equivalenceInfo.DisjointGroupsDictionary.IsNullOrEmpty())
                     {
-                        equivalenceInfo
-                            .DisjointGroupsDictionary
+                        equivalenceInfo.DisjointGroupsDictionary
                             .TryGetValue(configuredGroupName, out disjointGroups);
                     }
 
                     List<string> overlappingGroups = null;
                     if (!equivalenceInfo.OverlappingGroupsDictionary.IsNullOrEmpty())
                     {
-                        equivalenceInfo
-                            .OverlappingGroupsDictionary
+                        equivalenceInfo.OverlappingGroupsDictionary
                             .TryGetValue(configuredGroupName, out overlappingGroups);
                     }
 
                     // Iterate over the groups that may not be completely configured.
                     foreach (
-                        string groupName in configurationResults
-                            .Keys
+                        string groupName in configurationResults.Keys
                             .Where((k) => configurationResults[k] == false)
                     )
                     {
@@ -201,8 +196,7 @@ namespace System.Activities.Validation
                 //4. If more than one overload group is configured, generate an error.
                 else
                 {
-                    IEnumerable<string> configuredGroups = configurationResults
-                        .Keys
+                    IEnumerable<string> configuredGroups = configurationResults.Keys
                         .Where((k) => configurationResults[k])
                         .OrderBy((k) => k, StringComparer.Ordinal);
                     ActivityUtilities.Add(
@@ -338,8 +332,7 @@ namespace System.Activities.Validation
                     > entry in equivalenceInfo.SupersetOfGroupsDictionary
                 )
                 {
-                    IList<string> sortedList = entry
-                        .Value
+                    IList<string> sortedList = entry.Value
                         .OrderBy((s) => s, StringComparer.Ordinal)
                         .ToList();
                     string[] subsetGroups = new string[sortedList.Count];

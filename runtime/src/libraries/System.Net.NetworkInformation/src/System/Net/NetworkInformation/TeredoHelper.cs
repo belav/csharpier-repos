@@ -56,8 +56,7 @@ namespace System.Net.NetworkInformation
             TeredoHelper? helper = new TeredoHelper(callback, state);
             try
             {
-                uint err = Interop
-                    .IpHlpApi
+                uint err = Interop.IpHlpApi
                     .NotifyStableUnicastIpAddressTable(
                         AddressFamily.Unspecified,
                         out SafeFreeMibTable table,

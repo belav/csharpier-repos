@@ -315,8 +315,7 @@ namespace Microsoft.CodeAnalysis.LanguageService
                 }
 
                 var analysis = semanticModel.AnalyzeDataFlow(syntax);
-                var captures = analysis
-                    .CapturedInside
+                var captures = analysis.CapturedInside
                     .Except(analysis.VariablesDeclared)
                     .ToImmutableArray();
                 if (!captures.IsEmpty)
@@ -341,10 +340,10 @@ namespace Microsoft.CodeAnalysis.LanguageService
                 }
             }
 
-            private static readonly SymbolDisplayFormat s_formatForCaptures = SymbolDisplayFormat
-                .MinimallyQualifiedFormat
-                .RemoveLocalOptions(SymbolDisplayLocalOptions.IncludeType)
-                .RemoveParameterOptions(SymbolDisplayParameterOptions.IncludeType);
+            private static readonly SymbolDisplayFormat s_formatForCaptures =
+                SymbolDisplayFormat.MinimallyQualifiedFormat
+                    .RemoveLocalOptions(SymbolDisplayLocalOptions.IncludeType)
+                    .RemoveParameterOptions(SymbolDisplayParameterOptions.IncludeType);
 
             public async Task<ImmutableArray<SymbolDisplayPart>> BuildDescriptionAsync(
                 ImmutableArray<ISymbol> symbolGroup,
@@ -504,8 +503,7 @@ namespace Microsoft.CodeAnalysis.LanguageService
                 ImmutableArray<TaggedText>
             > BuildDescriptionSections()
             {
-                var includeNavigationHints = Options
-                    .QuickInfoOptions
+                var includeNavigationHints = Options.QuickInfoOptions
                     .IncludeNavigationHintsInQuickInfo;
 
                 // Merge the two maps into one final result.
@@ -567,8 +565,7 @@ namespace Microsoft.CodeAnalysis.LanguageService
                 )
                 {
                     AddEnumUnderlyingTypeSeparator();
-                    var underlyingTypeDisplayParts = symbol
-                        .EnumUnderlyingType
+                    var underlyingTypeDisplayParts = symbol.EnumUnderlyingType
                         .ToDisplayParts(
                             s_descriptionStyle.WithMiscellaneousOptions(
                                 SymbolDisplayMiscellaneousOptions.UseSpecialTypes

@@ -75,8 +75,7 @@ public class MethodHub : TestHub
 
     public Task BroadcastItem()
     {
-        return Clients
-            .All
+        return Clients.All
             .SendAsync("Broadcast", new Result { Message = "test", paramName = "param" });
     }
 
@@ -758,8 +757,7 @@ public class StreamingHub : TestHub
     public ChannelReader<int> ChannelClosedExceptionStream()
     {
         var channel = Channel.CreateUnbounded<int>();
-        channel
-            .Writer
+        channel.Writer
             .TryComplete(new ChannelClosedException("ChannelClosedException from channel"));
         return channel.Reader;
     }
@@ -767,8 +765,7 @@ public class StreamingHub : TestHub
     public ChannelReader<int> ChannelClosedExceptionInnerExceptionStream()
     {
         var channel = Channel.CreateUnbounded<int>();
-        channel
-            .Writer
+        channel.Writer
             .TryComplete(
                 new ChannelClosedException(new Exception("ChannelClosedException from channel"))
             );
@@ -1264,8 +1261,7 @@ public class ErrorInAbortedTokenHub : Hub
     {
         Context.Items[nameof(OnConnectedAsync)] = true;
 
-        Context
-            .ConnectionAborted
+        Context.ConnectionAborted
             .Register(() =>
             {
                 throw new InvalidOperationException("BOOM");
@@ -1295,8 +1291,7 @@ public class ConnectionLifetimeHub : Hub
     {
         _state.TokenStateInConnected = Context.ConnectionAborted.IsCancellationRequested;
 
-        Context
-            .ConnectionAborted
+        Context.ConnectionAborted
             .Register(() =>
             {
                 _state.TokenCallbackTriggered = true;

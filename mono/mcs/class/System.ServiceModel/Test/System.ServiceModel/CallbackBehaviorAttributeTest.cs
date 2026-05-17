@@ -286,8 +286,7 @@ namespace MonoTests.System.ServiceModel
             public void SendMessage()
             {
                 //Make a callback
-                IGreetingsCallback clientCallback = OperationContext
-                    .Current
+                IGreetingsCallback clientCallback = OperationContext.Current
                     .GetCallbackChannel<IGreetingsCallback>();
 
                 clientCallback.ShowMessage("Mono and WCF are GREAT!");
@@ -335,8 +334,7 @@ namespace MonoTests.System.ServiceModel
             public void SendMessage()
             {
                 //Make a callback
-                IGreetingsCallback2 clientCallback = OperationContext
-                    .Current
+                IGreetingsCallback2 clientCallback = OperationContext.Current
                     .GetCallbackChannel<IGreetingsCallback2>();
 
                 clientCallback.ShowMessage("Mono and WCF are GREAT!");

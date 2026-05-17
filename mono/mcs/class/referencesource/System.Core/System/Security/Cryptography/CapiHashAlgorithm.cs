@@ -99,8 +99,7 @@ namespace System.Security.Cryptography
             try
             {
                 if (
-                    !CapiNative
-                        .UnsafeNativeMethods
+                    !CapiNative.UnsafeNativeMethods
                         .CryptCreateHash(
                             m_cspHandle,
                             m_algorithmId,

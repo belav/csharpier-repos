@@ -177,8 +177,7 @@ namespace ILLink.Shared.TrimAnalysis
             if (genericParameter is not EcmaGenericParameter ecmaGenericParameter)
                 return DynamicallyAccessedMemberTypes.None;
 
-            GenericParameter paramDef = ecmaGenericParameter
-                .MetadataReader
+            GenericParameter paramDef = ecmaGenericParameter.MetadataReader
                 .GetGenericParameter(ecmaGenericParameter.Handle);
 
             if (ecmaGenericParameter.Kind == GenericParameterKind.Type)
@@ -405,8 +404,7 @@ namespace ILLink.Shared.TrimAnalysis
                     while (baseType != null)
                     {
                         var ecmaBaseType = (EcmaType)baseType.GetTypeDefinition();
-                        TypeDefinition baseTypeDef = ecmaBaseType
-                            .MetadataReader
+                        TypeDefinition baseTypeDef = ecmaBaseType.MetadataReader
                             .GetTypeDefinition(ecmaBaseType.Handle);
                         typeAnnotation |= GetMemberTypesForDynamicallyAccessedMembersAttribute(
                             ecmaBaseType.MetadataReader,
@@ -419,8 +417,7 @@ namespace ILLink.Shared.TrimAnalysis
                     foreach (DefType runtimeInterface in key.RuntimeInterfaces)
                     {
                         var ecmaInterface = (EcmaType)runtimeInterface.GetTypeDefinition();
-                        TypeDefinition interfaceTypeDef = ecmaInterface
-                            .MetadataReader
+                        TypeDefinition interfaceTypeDef = ecmaInterface.MetadataReader
                             .GetTypeDefinition(ecmaInterface.Handle);
                         typeAnnotation |= GetMemberTypesForDynamicallyAccessedMembersAttribute(
                             ecmaInterface.MetadataReader,
@@ -1397,13 +1394,11 @@ namespace ILLink.Shared.TrimAnalysis
             field.Name switch
             {
                 "EmptyTypes"
-                    when field
-                        .OwningType
+                    when field.OwningType
                         .IsTypeOf(ILLink.Shared.TypeSystemProxy.WellKnownType.System_Type) =>
                     ArrayValue.Create(0, field.OwningType),
                 "Empty"
-                    when field
-                        .OwningType
+                    when field.OwningType
                         .IsTypeOf(ILLink.Shared.TypeSystemProxy.WellKnownType.System_String) =>
                     new KnownStringValue(string.Empty),
                 _ => new FieldValue(field, GetFieldAnnotation(field)),

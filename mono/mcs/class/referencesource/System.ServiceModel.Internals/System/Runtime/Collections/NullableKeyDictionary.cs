@@ -252,16 +252,14 @@ namespace System.Runtime.Collections
 
             public void Add(TypeKey item)
             {
-                throw Fx.Exception.AsError(
-                    new NotSupportedException(InternalSR.KeyCollectionUpdatesNotAllowed)
-                );
+                throw Fx.Exception
+                    .AsError(new NotSupportedException(InternalSR.KeyCollectionUpdatesNotAllowed));
             }
 
             public void Clear()
             {
-                throw Fx.Exception.AsError(
-                    new NotSupportedException(InternalSR.KeyCollectionUpdatesNotAllowed)
-                );
+                throw Fx.Exception
+                    .AsError(new NotSupportedException(InternalSR.KeyCollectionUpdatesNotAllowed));
             }
 
             public bool Contains(TypeKey item)
@@ -283,9 +281,8 @@ namespace System.Runtime.Collections
 
             public bool Remove(TypeKey item)
             {
-                throw Fx.Exception.AsError(
-                    new NotSupportedException(InternalSR.KeyCollectionUpdatesNotAllowed)
-                );
+                throw Fx.Exception
+                    .AsError(new NotSupportedException(InternalSR.KeyCollectionUpdatesNotAllowed));
             }
 
             public IEnumerator<TypeKey> GetEnumerator()
@@ -338,16 +335,18 @@ namespace System.Runtime.Collections
 
             public void Add(TypeValue item)
             {
-                throw Fx.Exception.AsError(
-                    new NotSupportedException(InternalSR.ValueCollectionUpdatesNotAllowed)
-                );
+                throw Fx.Exception
+                    .AsError(
+                        new NotSupportedException(InternalSR.ValueCollectionUpdatesNotAllowed)
+                    );
             }
 
             public void Clear()
             {
-                throw Fx.Exception.AsError(
-                    new NotSupportedException(InternalSR.ValueCollectionUpdatesNotAllowed)
-                );
+                throw Fx.Exception
+                    .AsError(
+                        new NotSupportedException(InternalSR.ValueCollectionUpdatesNotAllowed)
+                    );
             }
 
             public bool Contains(TypeValue item)
@@ -371,9 +370,10 @@ namespace System.Runtime.Collections
 
             public bool Remove(TypeValue item)
             {
-                throw Fx.Exception.AsError(
-                    new NotSupportedException(InternalSR.ValueCollectionUpdatesNotAllowed)
-                );
+                throw Fx.Exception
+                    .AsError(
+                        new NotSupportedException(InternalSR.ValueCollectionUpdatesNotAllowed)
+                    );
             }
 
             public IEnumerator<TypeValue> GetEnumerator()

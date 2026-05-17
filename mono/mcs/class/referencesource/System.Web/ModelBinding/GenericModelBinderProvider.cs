@@ -118,8 +118,7 @@
             {
                 if (
                     SuppressPrefixCheck
-                    || bindingContext
-                        .UnvalidatedValueProvider
+                    || bindingContext.UnvalidatedValueProvider
                         .ContainsPrefix(bindingContext.ModelName)
                 )
                 {

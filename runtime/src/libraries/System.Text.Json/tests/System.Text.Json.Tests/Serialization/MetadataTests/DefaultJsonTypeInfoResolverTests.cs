@@ -143,33 +143,35 @@ namespace System.Text.Json.Serialization.Tests
             JsonTypeInfo storedTypeInfo = null;
             bool createObjectCalled = false;
             bool secondModifierCalled = false;
-            r.Modifiers.Add(
-                (ti) =>
-                {
-                    Assert.Null(storedTypeInfo);
-                    storedTypeInfo = ti;
-
-                    // marker that test has modified something
-                    ti.CreateObject = () =>
+            r.Modifiers
+                .Add(
+                    (ti) =>
                     {
-                        Assert.False(createObjectCalled);
-                        createObjectCalled = true;
+                        Assert.Null(storedTypeInfo);
+                        storedTypeInfo = ti;
 
-                        // we don't care what's returned as it won't be used by deserialization
-                        return null;
-                    };
-                }
-            );
+                        // marker that test has modified something
+                        ti.CreateObject = () =>
+                        {
+                            Assert.False(createObjectCalled);
+                            createObjectCalled = true;
 
-            r.Modifiers.Add(
-                (ti) =>
-                {
-                    // this proves we've been called after first modifier
-                    Assert.NotNull(storedTypeInfo);
-                    Assert.Same(storedTypeInfo, ti);
-                    secondModifierCalled = true;
-                }
-            );
+                            // we don't care what's returned as it won't be used by deserialization
+                            return null;
+                        };
+                    }
+                );
+
+            r.Modifiers
+                .Add(
+                    (ti) =>
+                    {
+                        // this proves we've been called after first modifier
+                        Assert.NotNull(storedTypeInfo);
+                        Assert.Same(storedTypeInfo, ti);
+                        secondModifierCalled = true;
+                    }
+                );
 
             JsonTypeInfo returnedTypeInfo = r.GetTypeInfo(
                 typeof(InvalidOperationException),

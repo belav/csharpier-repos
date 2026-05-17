@@ -362,8 +362,7 @@ namespace System.Data.Services.Client
 
             internal override Expression VisitConditional(ConditionalExpression c)
             {
-                var nullCheck = ResourceBinder
-                    .PatternRules
+                var nullCheck = ResourceBinder.PatternRules
                     .MatchNullCheck(this.box.ParamExpressionInScope, c);
                 if (nullCheck.Match)
                 {
@@ -636,8 +635,7 @@ namespace System.Data.Services.Client
 
             internal override Expression VisitConditional(ConditionalExpression c)
             {
-                var nullCheck = ResourceBinder
-                    .PatternRules
+                var nullCheck = ResourceBinder.PatternRules
                     .MatchNullCheck(this.box.ParamExpressionInScope, c);
                 if (nullCheck.Match)
                 {
@@ -731,10 +729,11 @@ namespace System.Data.Services.Client
                 if (
                     ClientType.CheckElementTypeIsEntity(iv.Expression.Type)
                     || IsCollectionProducingExpression(iv.Expression)
-                    || iv.Arguments.Any(a =>
-                        ClientType.CheckElementTypeIsEntity(a.Type)
-                        || IsCollectionProducingExpression(a)
-                    )
+                    || iv.Arguments
+                        .Any(a =>
+                            ClientType.CheckElementTypeIsEntity(a.Type)
+                            || IsCollectionProducingExpression(a)
+                        )
                 )
                 {
                     throw new NotSupportedException(

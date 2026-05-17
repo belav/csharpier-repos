@@ -355,8 +355,7 @@ namespace ILCompiler.Dataflow
             // Validate that the compiler-generated callees tracked by the compiler-generated state
             // are the same set of methods that we discovered and scanned above.
             if (
-                _annotations
-                    .CompilerGeneratedState
+                _annotations.CompilerGeneratedState
                     .TryGetCompilerGeneratedCalleesForUserMethod(
                         startingMethod,
                         out List<TypeSystemEntity>? compilerGeneratedCallees

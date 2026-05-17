@@ -117,12 +117,16 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.AutomaticCompletion
                 .GlobalOptions
                 .SetOptionValue(DefaultOptions.IndentStyleId, IndentingStyle.Smart);
 
-            view.Caret.MoveTo(
-                new SnapshotPoint(
-                    buffer.CurrentSnapshot,
-                    workspace.Documents.Single(d => d.CursorPosition.HasValue).CursorPosition.Value
-                )
-            );
+            view.Caret
+                .MoveTo(
+                    new SnapshotPoint(
+                        buffer.CurrentSnapshot,
+                        workspace.Documents
+                            .Single(d => d.CursorPosition.HasValue)
+                            .CursorPosition
+                            .Value
+                    )
+                );
 
             var commandHandler = GetCommandHandler(workspace);
             var nextHandler = assertNextHandlerInvoked

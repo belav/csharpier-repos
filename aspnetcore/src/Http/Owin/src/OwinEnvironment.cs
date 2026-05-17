@@ -336,8 +336,7 @@ public class OwinEnvironment : IDictionary<string, object>
                 .Where(pair => pair.Value.TryGet(_context, out _))
                 .Select(pair => pair.Key)
                 .Concat(
-                    _context
-                        .Items
+                    _context.Items
                         .Keys
                         .Select(key => Convert.ToString(key, CultureInfo.InvariantCulture))
                 )

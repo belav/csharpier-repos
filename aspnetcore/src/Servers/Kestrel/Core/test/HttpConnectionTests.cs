@@ -35,8 +35,7 @@ public class HttpConnectionTests
 
         httpConnection.Initialize(http1Connection);
         http1Connection.Reset();
-        http1Connection
-            .RequestAborted
+        http1Connection.RequestAborted
             .Register(() =>
             {
                 aborted.SetResult();

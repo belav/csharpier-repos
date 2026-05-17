@@ -346,8 +346,7 @@ namespace tests.system_data_dll.System_Data
                 dr["ParentDateTime"] = DateTime.Now;
                 dtParent.Rows.Add(dr);
                 base.Compare(
-                    dtParent
-                        .Rows
+                    dtParent.Rows
                         .Contains(new object[] { dr["ParentDouble"], dr["ParentDateTime"] }),
                     true
                 );
@@ -374,8 +373,7 @@ namespace tests.system_data_dll.System_Data
                 dr["ParentDouble"] = 99.399;
                 dtParent.Rows.Add(dr);
                 base.Compare(
-                    dtParent
-                        .Rows
+                    dtParent.Rows
                         .Contains(new object[] { dr["ParentDouble"], dr["ParentDateTime"] }),
                     true
                 );
@@ -433,9 +431,14 @@ namespace tests.system_data_dll.System_Data
             try
             {
                 base.BeginCase("check add primary key with relation ");
-                ds.Relations.Add(
-                    new DataRelation("myRelation", ds.Tables[0].Columns[0], ds.Tables[1].Columns[0])
-                );
+                ds.Relations
+                    .Add(
+                        new DataRelation(
+                            "myRelation",
+                            ds.Tables[0].Columns[0],
+                            ds.Tables[1].Columns[0]
+                        )
+                    );
                 //the following line will cause java to fail
                 ds.Tables[0].PrimaryKey = new DataColumn[]
                 {

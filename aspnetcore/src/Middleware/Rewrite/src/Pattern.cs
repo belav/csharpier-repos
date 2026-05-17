@@ -20,8 +20,7 @@ internal sealed class Pattern
     {
         foreach (var pattern in PatternSegments)
         {
-            context
-                .Builder
+            context.Builder
                 .Append(pattern.Evaluate(context, ruleBackReferences, conditionBackReferences));
         }
         var retVal = context.Builder.ToString();

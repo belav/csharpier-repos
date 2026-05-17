@@ -86,8 +86,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Snippets
                 .Value;
 
             if (
-                CSharpOrderModifiersHelper
-                    .Instance
+                CSharpOrderModifiersHelper.Instance
                     .TryGetOrComputePreferredOrder(
                         preferredModifierOrderString,
                         out var preferredOrder
@@ -170,8 +169,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Snippets
             );
 
             var newTypeDeclaration = originalTypeDeclaration.WithCloseBraceToken(
-                originalTypeDeclaration
-                    .CloseBraceToken
+                originalTypeDeclaration.CloseBraceToken
                     .WithPrependedLeadingTrivia(
                         SyntaxFactory.SyntaxTrivia(SyntaxKind.WhitespaceTrivia, indentationString)
                     )

@@ -126,8 +126,7 @@ namespace System.Web.Services.Protocols
                     : null;
                 if (Tracing.On)
                     Tracing.Enter(protocol.MethodInfo.ToString(), caller, userMethod);
-                object[] returnValues = protocol
-                    .MethodInfo
+                object[] returnValues = protocol.MethodInfo
                     .Invoke(protocol.Target, this.parameters);
                 if (Tracing.On)
                     Tracing.Exit(protocol.MethodInfo.ToString(), caller);
@@ -404,8 +403,7 @@ namespace System.Web.Services.Protocols
                 if (Tracing.On)
                     Tracing.Enter(protocol.MethodInfo.ToString(), caller, userMethod);
 
-                asyncResult = protocol
-                    .MethodInfo
+                asyncResult = protocol.MethodInfo
                     .BeginInvoke(
                         protocol.Target,
                         this.parameters,

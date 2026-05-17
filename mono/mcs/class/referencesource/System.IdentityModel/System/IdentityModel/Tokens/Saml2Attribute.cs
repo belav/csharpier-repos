@@ -83,8 +83,7 @@ namespace System.IdentityModel.Tokens
             {
                 if (string.IsNullOrEmpty(value))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new ArgumentNullException("value"));
                 }
 
@@ -103,8 +102,7 @@ namespace System.IdentityModel.Tokens
             {
                 if (null != value && !value.IsAbsoluteUri)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgument("error", SR.GetString(SR.ID0013));
                 }
 
@@ -122,8 +120,7 @@ namespace System.IdentityModel.Tokens
             {
                 if (value == String.Empty)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgument("value", SR.GetString(SR.ID4251));
                 }
 
@@ -141,32 +138,28 @@ namespace System.IdentityModel.Tokens
             {
                 if (string.IsNullOrEmpty(value))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgument("value", SR.GetString(SR.ID4254));
                 }
 
                 int indexOfHash = value.IndexOf('#');
                 if (indexOfHash == -1)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgument("value", SR.GetString(SR.ID4254));
                 }
 
                 string prefix = value.Substring(0, indexOfHash);
                 if (prefix.Length == 0)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgument("value", SR.GetString(SR.ID4254));
                 }
 
                 string suffix = value.Substring(indexOfHash + 1);
                 if (suffix.Length == 0)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgument("value", SR.GetString(SR.ID4254));
                 }
 

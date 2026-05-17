@@ -64,8 +64,7 @@ namespace MonoTests.System.Windows.Threading
             Dispatcher d = Dispatcher.CurrentDispatcher;
 
             t.Start();
-            op = Dispatcher
-                .CurrentDispatcher
+            op = Dispatcher.CurrentDispatcher
                 .BeginInvoke(
                     DispatcherPriority.Normal,
                     (Action)

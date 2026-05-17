@@ -81,19 +81,16 @@ namespace Microsoft.CodeAnalysis.Simplification.Simplifiers
                 memberAccessExpression,
                 cancellationToken
             );
-            var newSymbolInfo = speculationAnalyzer
-                .SpeculativeSemanticModel
+            var newSymbolInfo = speculationAnalyzer.SpeculativeSemanticModel
                 .GetSymbolInfo(speculationAnalyzer.ReplacedExpression, cancellationToken);
             if (
-                !symbolInfo
-                    .Symbol
+                !symbolInfo.Symbol
                     .Equals(newSymbolInfo.Symbol, SymbolEqualityComparer.IncludeNullability)
             )
                 return false;
 
             notificationOption = optionValue.Notification;
-            return !semanticModel
-                    .SyntaxTree
+            return !semanticModel.SyntaxTree
                     .OverlapsHiddenPosition(memberAccessExpression.Span, cancellationToken)
                 && !MayCauseParseDifference(memberAccessExpression);
         }

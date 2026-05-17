@@ -391,8 +391,7 @@ namespace System.Runtime.Serialization
             Attributes attributes = new Attributes();
             attributes.Read(reader);
             if (attributes.Ref != Globals.NewObjectId)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         XmlObjectSerializer.CreateSerializationException(
                             SR.GetString(SR.CannotDeserializeRefAtTopLevel, attributes.Ref)
@@ -1291,8 +1290,7 @@ namespace System.Runtime.Serialization
                 }
                 catch (XmlException xes)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             XmlObjectSerializer.CreateSerializationException(
                                 SR.GetString(SR.XmlForObjectCannotHaveContent, localName, ns),

@@ -20,8 +20,7 @@ namespace NetCoreServer
                     if (statusCode < 300 || statusCode > 308)
                     {
                         context.Response.StatusCode = 400;
-                        context
-                            .Response
+                        context.Response
                             .SetStatusDescription(
                                 "Invalid redirect statuscode: " + statusCodeString
                             );
@@ -31,8 +30,7 @@ namespace NetCoreServer
                 catch (Exception)
                 {
                     context.Response.StatusCode = 400;
-                    context
-                        .Response
+                    context.Response
                         .SetStatusDescription("Error parsing statuscode: " + statusCodeString);
                     return;
                 }

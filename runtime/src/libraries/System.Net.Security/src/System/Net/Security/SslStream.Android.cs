@@ -39,9 +39,8 @@ namespace System.Net.Security
             out bool isValid
         )
         {
-            JavaProxy.RemoteCertificateValidationResult? validationResult = _securityContext
-                ?.SslStreamProxy
-                .ValidationResult;
+            JavaProxy.RemoteCertificateValidationResult? validationResult =
+                _securityContext?.SslStreamProxy.ValidationResult;
             sslPolicyErrors = validationResult?.SslPolicyErrors ?? default;
             chainStatus = validationResult?.ChainStatus ?? default;
             isValid = validationResult?.IsValid ?? default;
@@ -82,8 +81,7 @@ namespace System.Net.Security
             {
                 if (!s_initialized)
                 {
-                    Interop
-                        .AndroidCrypto
+                    Interop.AndroidCrypto
                         .RegisterRemoteCertificateValidationCallback(&VerifyRemoteCertificate);
                     s_initialized = true;
                 }

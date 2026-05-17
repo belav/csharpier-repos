@@ -34,8 +34,7 @@ namespace System.ServiceModel.ComIntegration
 
         void IMoniker.GetClassID(out System.Guid clsid)
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(new NotImplementedException());
         }
 
@@ -46,22 +45,19 @@ namespace System.ServiceModel.ComIntegration
 
         void IMoniker.Load(IStream stream)
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(new NotImplementedException());
         }
 
         void IMoniker.Save(IStream stream, bool isDirty)
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(new NotImplementedException());
         }
 
         void IMoniker.GetSizeMax(out Int64 size)
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(new NotImplementedException());
         }
 
@@ -72,8 +68,7 @@ namespace System.ServiceModel.ComIntegration
             out object ppvObj
         )
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(new NotImplementedException());
         }
 
@@ -97,8 +92,7 @@ namespace System.ServiceModel.ComIntegration
 
         void IMoniker.CommonPrefixWith(IMoniker pmkOther, out IMoniker ppmkPrefix)
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(new NotImplementedException());
         }
 
@@ -108,43 +102,37 @@ namespace System.ServiceModel.ComIntegration
             out IMoniker ppmkComposite
         )
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(new NotImplementedException());
         }
 
         void IMoniker.Enum(bool fForward, out IEnumMoniker ppenumMoniker)
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(new NotImplementedException());
         }
 
         void IMoniker.GetDisplayName(IBindCtx pbc, IMoniker pmkToLeft, out string ppszDisplayName)
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(new NotImplementedException());
         }
 
         void IMoniker.GetTimeOfLastChange(IBindCtx pbc, IMoniker pmkToLeft, out FILETIME pFileTime)
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(new NotImplementedException());
         }
 
         void IMoniker.Inverse(out IMoniker ppmk)
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(new NotImplementedException());
         }
 
         int IMoniker.IsEqual(IMoniker pmkOtherMoniker)
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(new NotImplementedException());
         }
 
@@ -171,8 +159,7 @@ namespace System.ServiceModel.ComIntegration
             out IMoniker ppmkOut
         )
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(new NotImplementedException());
         }
 
@@ -183,15 +170,13 @@ namespace System.ServiceModel.ComIntegration
             out IMoniker ppmkReduced
         )
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(new NotImplementedException());
         }
 
         void IMoniker.RelativePathTo(IMoniker pmkOther, out IMoniker ppmkRelPath)
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(new NotImplementedException());
         }
 

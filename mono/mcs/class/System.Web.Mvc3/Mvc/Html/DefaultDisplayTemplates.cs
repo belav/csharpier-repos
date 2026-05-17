@@ -119,8 +119,7 @@
                     {
                         itemType = item.GetType();
                     }
-                    ModelMetadata metadata = ModelMetadataProviders
-                        .Current
+                    ModelMetadata metadata = ModelMetadataProviders.Current
                         .GetMetadataForType(() => item, itemType);
                     string fieldName = String.Format(
                         CultureInfo.InvariantCulture,
@@ -215,8 +214,7 @@
             }
 
             foreach (
-                ModelMetadata propertyMetadata in modelMetadata
-                    .Properties
+                ModelMetadata propertyMetadata in modelMetadata.Properties
                     .Where(pm => ShouldShow(pm, templateInfo))
             )
             {

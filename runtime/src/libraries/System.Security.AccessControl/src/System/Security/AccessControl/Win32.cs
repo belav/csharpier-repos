@@ -32,8 +32,7 @@ namespace System.Security.AccessControl
             uint ByteArraySize = 0;
 
             if (
-                !Interop
-                    .Advapi32
+                !Interop.Advapi32
                     .ConvertSdToStringSd(
                         binaryForm,
                         (uint)requestedRevision,
@@ -134,8 +133,7 @@ namespace System.Security.AccessControl
                 if (name != null)
                 {
                     errorCode = (int)
-                        Interop
-                            .Advapi32
+                        Interop.Advapi32
                             .GetSecurityInfoByName(
                                 name,
                                 (uint)resourceType,
@@ -156,8 +154,7 @@ namespace System.Security.AccessControl
                     else
                     {
                         errorCode = (int)
-                            Interop
-                                .Advapi32
+                            Interop.Advapi32
                                 .GetSecurityInfoByHandle(
                                     handle,
                                     (uint)resourceType,
@@ -321,8 +318,7 @@ namespace System.Security.AccessControl
                 if (name != null)
                 {
                     errorCode = (int)
-                        Interop
-                            .Advapi32
+                        Interop.Advapi32
                             .SetSecurityInfoByName(
                                 name,
                                 (uint)type,
@@ -342,8 +338,7 @@ namespace System.Security.AccessControl
                     else
                     {
                         errorCode = (int)
-                            Interop
-                                .Advapi32
+                            Interop.Advapi32
                                 .SetSecurityInfoByHandle(
                                     handle,
                                     (uint)type,

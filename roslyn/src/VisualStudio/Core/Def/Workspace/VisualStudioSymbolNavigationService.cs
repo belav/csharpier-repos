@@ -84,8 +84,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                 var targetDocument = solution.GetDocument(sourceLocation.SourceTree);
                 if (targetDocument != null)
                 {
-                    var navigationService = solution
-                        .Services
+                    var navigationService = solution.Services
                         .GetRequiredService<IDocumentNavigationService>();
                     return await navigationService
                         .GetLocationForSpanAsync(
@@ -112,8 +111,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             if (docCommentId != null && assemblyName != null)
             {
                 foreach (
-                    var lazyService in solution
-                        .Services
+                    var lazyService in solution.Services
                         .ExportProvider
                         .GetExports<ICrossLanguageSymbolNavigationService>()
                 )
@@ -144,8 +142,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                 var compilation = await project
                     .GetCompilationAsync(cancellationToken)
                     .ConfigureAwait(false);
-                var navInfo = libraryService
-                    .NavInfoFactory
+                var navInfo = libraryService.NavInfoFactory
                     .CreateForSymbol(symbol, project, compilation);
                 navInfo ??= libraryService.NavInfoFactory.CreateForProject(project);
 
@@ -254,8 +251,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                     if (openedDocument != null)
                     {
                         var editorWorkspace = openedDocument.Project.Solution.Workspace;
-                        var navigationService = editorWorkspace
-                            .Services
+                        var navigationService = editorWorkspace.Services
                             .GetRequiredService<IDocumentNavigationService>();
 
                         await navigationService

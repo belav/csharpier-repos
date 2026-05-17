@@ -111,8 +111,7 @@
                 && (modelBindingExecutionContext != null)
                 && (modelBindingExecutionContext.HttpContext != null)
             )
-                ? modelBindingExecutionContext
-                    .HttpContext
+                ? modelBindingExecutionContext.HttpContext
                     .GetGlobalResourceObject(
                         resourceClassKey,
                         resourceName,

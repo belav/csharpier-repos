@@ -67,8 +67,7 @@ public abstract class StoreValueGenerationWithoutOutputSqlServerTestBase<TFixtur
         await using var context = CreateContext();
 
         var instances = new StoreValueGenerationData[] { new(), new(), new(), new() };
-        context
-            .WithSomeDatabaseGenerated
+        context.WithSomeDatabaseGenerated
             .AddRange(instances[0], instances[1], instances[2], instances[3]);
 
         Fixture.ListLoggerFactory.Clear();

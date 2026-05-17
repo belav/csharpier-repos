@@ -40,8 +40,7 @@ namespace System.ServiceModel.Configuration
                 }
                 catch (KeyNotFoundException)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ConfigurationErrorsException(
                                 SR.GetString(
@@ -55,8 +54,7 @@ namespace System.ServiceModel.Configuration
                 }
                 catch (NullReferenceException) // System.Configuration.ConfigurationElement bug
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ConfigurationErrorsException(
                                 SR.GetString(
@@ -99,8 +97,7 @@ namespace System.ServiceModel.Configuration
                 }
                 catch (KeyNotFoundException)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ConfigurationErrorsException(
                                 SR.GetString(
@@ -114,8 +111,7 @@ namespace System.ServiceModel.Configuration
                 }
                 catch (NullReferenceException) // System.Configuration.ConfigurationElement bug
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ConfigurationErrorsException(
                                 SR.GetString(
@@ -154,8 +150,7 @@ namespace System.ServiceModel.Configuration
                 }
                 catch (KeyNotFoundException)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ConfigurationErrorsException(
                                 SR.GetString(
@@ -169,8 +164,7 @@ namespace System.ServiceModel.Configuration
                 }
                 catch (NullReferenceException) // System.Configuration.ConfigurationElement bug
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ConfigurationErrorsException(
                                 SR.GetString(
@@ -213,8 +207,7 @@ namespace System.ServiceModel.Configuration
                 }
                 catch (KeyNotFoundException)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ConfigurationErrorsException(
                                 SR.GetString(
@@ -228,8 +221,7 @@ namespace System.ServiceModel.Configuration
                 }
                 catch (NullReferenceException) // System.Configuration.ConfigurationElement bug
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ConfigurationErrorsException(
                                 SR.GetString(
@@ -277,8 +269,7 @@ namespace System.ServiceModel.Configuration
             }
             if (retval == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ConfigurationErrorsException(
                             SR.GetString(SR.ConfigSectionNotFound, sectionPath)
@@ -321,8 +312,7 @@ namespace System.ServiceModel.Configuration
             }
             if (retval == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ConfigurationErrorsException(
                             SR.GetString(SR.ConfigSectionNotFound, sectionPath)
@@ -414,8 +404,7 @@ namespace System.ServiceModel.Configuration
 
             if (retval == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ConfigurationErrorsException(
                             SR.GetString(SR.ConfigSectionNotFound, sectionPath)

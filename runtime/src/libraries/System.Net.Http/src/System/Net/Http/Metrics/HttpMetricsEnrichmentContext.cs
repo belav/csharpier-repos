@@ -116,8 +116,7 @@ namespace System.Net.Http.Metrics
             {
                 return null;
             }
-            request
-                ._options
+            request._options
                 .TryGetValue(s_optionsKeyForContext, out HttpMetricsEnrichmentContext? context);
             return context;
         }

@@ -395,9 +395,12 @@ namespace Mono.Cecil
 
             SR.ParameterInfo[] parameters = mb.GetParameters();
             for (int i = 0; i < parameters.Length; i++)
-                meth.Parameters.Add(
-                    new ParameterDefinition(ImportSystemType(parameters[i].ParameterType, context))
-                );
+                meth.Parameters
+                    .Add(
+                        new ParameterDefinition(
+                            ImportSystemType(parameters[i].ParameterType, context)
+                        )
+                    );
 
             context.GenericContext.Type = contextType;
             context.GenericContext.Method = contextMethod;

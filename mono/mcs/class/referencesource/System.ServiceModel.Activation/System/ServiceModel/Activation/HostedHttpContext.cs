@@ -267,8 +267,7 @@ namespace System.ServiceModel.Activation
 
                 this.hostedHttpContext = hostedHttpContext;
 
-                EnvelopeVersion envelopeVersion = hostedHttpContext
-                    .Listener
+                EnvelopeVersion envelopeVersion = hostedHttpContext.Listener
                     .MessageEncoderFactory
                     .Encoder
                     .MessageVersion
@@ -294,8 +293,7 @@ namespace System.ServiceModel.Activation
                 // differentiate is by reading ahead
                 if (this.contentLength == 0)
                 {
-                    preReadBuffer = hostedHttpContext
-                        .result
+                    preReadBuffer = hostedHttpContext.result
                         .GetPrereadBuffer(ref this.contentLength);
                 }
             }
@@ -354,8 +352,7 @@ namespace System.ServiceModel.Activation
 
                 message.Properties.Add(HttpRequestMessageProperty.Name, requestProperty);
 
-                message
-                    .Properties
+                message.Properties
                     .Add(
                         HostingMessageProperty.Name,
                         CreateMessagePropertyFromHostedResult(this.hostedHttpContext.result)
@@ -451,8 +448,7 @@ namespace System.ServiceModel.Activation
                 {
                     if (!this.result.TryStartStreamedRead())
                     {
-                        throw FxTrace
-                            .Exception
+                        throw FxTrace.Exception
                             .AsError(
                                 new CommunicationObjectAbortedException(SR.RequestContextAborted)
                             );
@@ -474,8 +470,7 @@ namespace System.ServiceModel.Activation
                     }
                     catch (HttpException hostedException)
                     {
-                        throw FxTrace
-                            .Exception
+                        throw FxTrace.Exception
                             .AsError(CreateCommunicationException(hostedException));
                     }
                     finally
@@ -495,8 +490,7 @@ namespace System.ServiceModel.Activation
                     }
                     catch (HttpException hostedException)
                     {
-                        throw FxTrace
-                            .Exception
+                        throw FxTrace.Exception
                             .AsError(CreateCommunicationException(hostedException));
                     }
                     finally
@@ -509,8 +503,7 @@ namespace System.ServiceModel.Activation
                 {
                     if (!this.result.TryStartStreamedRead())
                     {
-                        throw FxTrace
-                            .Exception
+                        throw FxTrace.Exception
                             .AsError(
                                 new CommunicationObjectAbortedException(SR.RequestContextAborted)
                             );
@@ -522,8 +515,7 @@ namespace System.ServiceModel.Activation
                     }
                     catch (HttpException hostedException)
                     {
-                        throw FxTrace
-                            .Exception
+                        throw FxTrace.Exception
                             .AsError(CreateCommunicationException(hostedException));
                     }
                     finally
@@ -611,10 +603,8 @@ namespace System.ServiceModel.Activation
                 }
                 else
                 {
-                    this.result.AppendHeader(
-                        HttpChannelUtilities.MIMEVersionHeader,
-                        this.mimeVersion
-                    );
+                    this.result
+                        .AppendHeader(HttpChannelUtilities.MIMEVersionHeader, this.mimeVersion);
                 }
             }
 
@@ -632,18 +622,17 @@ namespace System.ServiceModel.Activation
 
             protected override void SetContentEncoding(string contentEncoding)
             {
-                this.result.AppendHeader(
-                    HttpChannelUtilities.ContentEncodingHeader,
-                    contentEncoding
-                );
+                this.result
+                    .AppendHeader(HttpChannelUtilities.ContentEncodingHeader, contentEncoding);
             }
 
             protected override void SetContentLength(int contentLength)
             {
-                this.result.AppendHeader(
-                    "content-length",
-                    contentLength.ToString(CultureInfo.InvariantCulture)
-                );
+                this.result
+                    .AppendHeader(
+                        "content-length",
+                        contentLength.ToString(CultureInfo.InvariantCulture)
+                    );
             }
 
             protected override void SetStatusCode(HttpStatusCode statusCode)
@@ -867,8 +856,7 @@ namespace System.ServiceModel.Activation
                         {
                             if (this.context.Aborted)
                             {
-                                throw FxTrace
-                                    .Exception
+                                throw FxTrace.Exception
                                     .AsError(
                                         new CommunicationObjectAbortedException(
                                             SR.RequestContextAborted,
@@ -878,8 +866,7 @@ namespace System.ServiceModel.Activation
                             }
                             else
                             {
-                                throw FxTrace
-                                    .Exception
+                                throw FxTrace.Exception
                                     .AsError(new CommunicationException(e.Message, e));
                             }
                         }
@@ -897,8 +884,7 @@ namespace System.ServiceModel.Activation
                                 );
                             }
 
-                            throw FxTrace
-                                .Exception
+                            throw FxTrace.Exception
                                 .AsError(
                                     new CommunicationObjectAbortedException(
                                         SR.RequestContextAborted

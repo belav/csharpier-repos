@@ -74,8 +74,7 @@ namespace System.IdentityModel.Tokens
         {
             if (encryptionMethod == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("encryptionMethod");
             }
             this.carriedKeyName = carriedKeyName;

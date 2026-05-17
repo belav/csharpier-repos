@@ -134,20 +134,16 @@ namespace System.ServiceModel.Syndication.Tests
                 "category_scheme",
                 "category_label"
             );
-            fullSyndicationCategory
-                .AttributeExtensions
+            fullSyndicationCategory.AttributeExtensions
                 .Add(new XmlQualifiedName("category_name1"), null);
-            fullSyndicationCategory
-                .AttributeExtensions
+            fullSyndicationCategory.AttributeExtensions
                 .Add(new XmlQualifiedName("category_name2", "category_namespace"), "");
-            fullSyndicationCategory
-                .AttributeExtensions
+            fullSyndicationCategory.AttributeExtensions
                 .Add(
                     new XmlQualifiedName("category_name3", "category_namespace"),
                     "category_value"
                 );
-            fullSyndicationCategory
-                .AttributeExtensions
+            fullSyndicationCategory.AttributeExtensions
                 .Add(new XmlQualifiedName("category_name4", "xmlns"), "");
 
             fullSyndicationCategory.ElementExtensions.Add(new ExtensionObject { Value = 10 });
@@ -161,23 +157,19 @@ namespace System.ServiceModel.Syndication.Tests
                 IsFixed = true,
                 Scheme = "inlinecategories_scheme",
             };
-            fullInlineCategoriesDocument
-                .AttributeExtensions
+            fullInlineCategoriesDocument.AttributeExtensions
                 .Add(new XmlQualifiedName("inlinecategories_name1"), null);
-            fullInlineCategoriesDocument
-                .AttributeExtensions
+            fullInlineCategoriesDocument.AttributeExtensions
                 .Add(
                     new XmlQualifiedName("inlinecategories_name2", "inlinecategories_namespace"),
                     ""
                 );
-            fullInlineCategoriesDocument
-                .AttributeExtensions
+            fullInlineCategoriesDocument.AttributeExtensions
                 .Add(
                     new XmlQualifiedName("inlinecategories_name3", "inlinecategories_namespace"),
                     "inlinecategories_value"
                 );
-            fullInlineCategoriesDocument
-                .AttributeExtensions
+            fullInlineCategoriesDocument.AttributeExtensions
                 .Add(new XmlQualifiedName("inlinecategories_name4", "xmlns"), "");
 
             fullInlineCategoriesDocument.ElementExtensions.Add(new ExtensionObject { Value = 10 });
@@ -213,11 +205,9 @@ namespace System.ServiceModel.Syndication.Tests
                 BaseUri = new Uri("http://referencecategories_url.com"),
                 Language = "referencecategories_language",
             };
-            fullReferenceCategoriesDocument
-                .AttributeExtensions
+            fullReferenceCategoriesDocument.AttributeExtensions
                 .Add(new XmlQualifiedName("referencecategories_name1"), null);
-            fullReferenceCategoriesDocument
-                .AttributeExtensions
+            fullReferenceCategoriesDocument.AttributeExtensions
                 .Add(
                     new XmlQualifiedName(
                         "referencecategories_name2",
@@ -225,8 +215,7 @@ namespace System.ServiceModel.Syndication.Tests
                     ),
                     ""
                 );
-            fullReferenceCategoriesDocument
-                .AttributeExtensions
+            fullReferenceCategoriesDocument.AttributeExtensions
                 .Add(
                     new XmlQualifiedName(
                         "referencecategories_name3",
@@ -234,12 +223,10 @@ namespace System.ServiceModel.Syndication.Tests
                     ),
                     "referencecategories_value"
                 );
-            fullReferenceCategoriesDocument
-                .AttributeExtensions
+            fullReferenceCategoriesDocument.AttributeExtensions
                 .Add(new XmlQualifiedName("referencecategories_name4", "xmlns"), "");
 
-            fullReferenceCategoriesDocument
-                .ElementExtensions
+            fullReferenceCategoriesDocument.ElementExtensions
                 .Add(new ExtensionObject { Value = 10 });
 
             yield return new object[]

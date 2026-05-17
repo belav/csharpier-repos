@@ -105,8 +105,7 @@ namespace System.DirectoryServices.AccountManagement
                 //
                 Interop.OBJECT_ATTRIBUTES oa = default;
 
-                uint err = Interop
-                    .Advapi32
+                uint err = Interop.Advapi32
                     .LsaOpenPolicy(
                         target,
                         ref oa,
@@ -138,8 +137,7 @@ namespace System.DirectoryServices.AccountManagement
                 // Translate the SIDs
                 //
 
-                err = Interop
-                    .Advapi32
+                err = Interop.Advapi32
                     .LsaLookupSids(
                         policyHandle,
                         sidCount,

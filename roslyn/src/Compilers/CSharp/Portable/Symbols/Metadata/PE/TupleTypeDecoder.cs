@@ -85,8 +85,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
         )
         {
             ImmutableArray<string?> elementNames;
-            var hasTupleElementNamesAttribute = containingModule
-                .Module
+            var hasTupleElementNamesAttribute = containingModule.Module
                 .HasTupleElementNamesAttribute(targetHandle, out elementNames);
 
             // If we have the TupleElementNamesAttribute, but no names, that's
@@ -110,8 +109,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
         )
         {
             ImmutableArray<string?> elementNames;
-            var hasTupleElementNamesAttribute = containingModule
-                .Module
+            var hasTupleElementNamesAttribute = containingModule.Module
                 .HasTupleElementNamesAttribute(targetHandle, out elementNames);
 
             // If we have the TupleElementNamesAttribute, but no names, that's

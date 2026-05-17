@@ -371,8 +371,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 // of the when clauses to see if they are all simple enough to conclude that they do
                 // not mutate pattern variables.
                 var mightAssignWalker = new WhenClauseMightAssignPatternVariableWalker();
-                bool canShareTemps = !decisionDag
-                    .TopologicallySortedNodes
+                bool canShareTemps = !decisionDag.TopologicallySortedNodes
                     .Any(
                         static (node, mightAssignWalker) =>
                             node is BoundWhenDecisionDagNode w
@@ -499,9 +498,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     var whenTrue = evaluationNode.Next;
                     var whenFalse = testNode.WhenFalse;
-                    bool canEliminateEvaluationNode = !this._dagNodeLabels.ContainsKey(
-                        evaluationNode
-                    );
+                    bool canEliminateEvaluationNode = !this._dagNodeLabels
+                        .ContainsKey(evaluationNode);
 
                     if (canEliminateEvaluationNode)
                         loweredNodes.Add(evaluationNode);
@@ -679,8 +677,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                             input,
                             fac
                         );
-                        return ValueDispatchNode
-                            .RelationalDispatch
+                        return ValueDispatchNode.RelationalDispatch
                             .CreateBalanced(
                                 testNode.Syntax,
                                 relational.Value,
@@ -999,9 +996,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 _factory.SpecialType(SpecialType.System_Int64),
                                 input
                             );
-                            cases = node.Cases.SelectAsArray(p =>
-                                (ConstantValue.Create((long)p.value.Int32Value), p.label)
-                            );
+                            cases = node.Cases
+                                .SelectAsArray(p =>
+                                    (ConstantValue.Create((long)p.value.Int32Value), p.label)
+                                );
                             break;
                         }
                         case SpecialType.System_UIntPtr:
@@ -1010,9 +1008,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 _factory.SpecialType(SpecialType.System_UInt64),
                                 input
                             );
-                            cases = node.Cases.SelectAsArray(p =>
-                                (ConstantValue.Create((ulong)p.value.UInt32Value), p.label)
-                            );
+                            cases = node.Cases
+                                .SelectAsArray(p =>
+                                    (ConstantValue.Create((ulong)p.value.UInt32Value), p.label)
+                                );
                             break;
                         }
                         default:
@@ -1160,8 +1159,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 // with each case label. We use the Dev10 Heuristic to determine this
                 // (see SwitchStringJumpTableEmitter.ShouldGenerateHashTableSwitch() for details).
                 if (
-                    !CodeAnalysis
-                        .CodeGen
+                    !CodeAnalysis.CodeGen
                         .SwitchStringJumpTableEmitter
                         .ShouldGenerateHashTableSwitch(labelsCount)
                 )
@@ -1185,21 +1183,17 @@ namespace Microsoft.CodeAnalysis.CSharp
                     _localRewriter._diagnostics.DiagnosticBag
                 );
                 if (
-                    privateImplClass
-                        .PrivateImplementationDetails
+                    privateImplClass.PrivateImplementationDetails
                         .GetMethod(
                             stringPatternInput switch
                             {
-                                StringPatternInput.String => CodeAnalysis
-                                    .CodeGen
+                                StringPatternInput.String => CodeAnalysis.CodeGen
                                     .PrivateImplementationDetails
                                     .SynthesizedStringHashFunctionName,
-                                StringPatternInput.SpanChar => CodeAnalysis
-                                    .CodeGen
+                                StringPatternInput.SpanChar => CodeAnalysis.CodeGen
                                     .PrivateImplementationDetails
                                     .SynthesizedReadOnlySpanHashFunctionName,
-                                StringPatternInput.ReadOnlySpanChar => CodeAnalysis
-                                    .CodeGen
+                                StringPatternInput.ReadOnlySpanChar => CodeAnalysis.CodeGen
                                     .PrivateImplementationDetails
                                     .SynthesizedSpanHashFunctionName,
                                 _ => throw ExceptionUtilities.UnexpectedValue(stringPatternInput),
@@ -1213,14 +1207,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                 // cannot emit hash method if have no access to Chars.
                 var charsMember = stringPatternInput switch
                 {
-                    StringPatternInput.String => _localRewriter
-                        ._compilation
+                    StringPatternInput.String => _localRewriter._compilation
                         .GetSpecialTypeMember(SpecialMember.System_String__Chars),
-                    StringPatternInput.SpanChar => _localRewriter
-                        ._compilation
+                    StringPatternInput.SpanChar => _localRewriter._compilation
                         .GetWellKnownTypeMember(WellKnownMember.System_Span_T__get_Item),
-                    StringPatternInput.ReadOnlySpanChar => _localRewriter
-                        ._compilation
+                    StringPatternInput.ReadOnlySpanChar => _localRewriter._compilation
                         .GetWellKnownTypeMember(WellKnownMember.System_ReadOnlySpan_T__get_Item),
                     _ => throw ExceptionUtilities.UnexpectedValue(stringPatternInput),
                 };
@@ -1263,8 +1254,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     ),
                     _ => throw ExceptionUtilities.UnexpectedValue(stringPatternInput),
                 };
-                privateImplClass
-                    .PrivateImplementationDetails
+                privateImplClass.PrivateImplementationDetails
                     .TryAddSynthesizedMethod(method.GetCciAdapter());
             }
 
@@ -1498,8 +1488,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     // Only add instrumentation (such as a sequence point) if the node is not compiler-generated.
                     if (GenerateInstrumentation && !whenExpression.WasCompilerGenerated)
                     {
-                        conditionalGoto = _localRewriter
-                            .Instrumenter
+                        conditionalGoto = _localRewriter.Instrumenter
                             .InstrumentSwitchWhenClauseConditionalGotoBody(
                                 whenExpression,
                                 conditionalGoto

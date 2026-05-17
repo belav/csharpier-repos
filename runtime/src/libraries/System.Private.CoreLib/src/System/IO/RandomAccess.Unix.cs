@@ -251,8 +251,7 @@ namespace System.IO
                         Interop.Sys.IOVector* pinnedVectors = &MemoryMarshal.GetReference(vectors)
                     )
                     {
-                        bytesWritten = Interop
-                            .Sys
+                        bytesWritten = Interop.Sys
                             .PWriteV(handle, pinnedVectors, buffersCount, fileOffset);
                     }
 

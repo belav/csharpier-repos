@@ -101,8 +101,7 @@ namespace System.Text.Tests
             AssertExtensions.Throws<ArgumentNullException>(
                 "format",
                 () =>
-                    Span<char>
-                        .Empty
+                    Span<char>.Empty
                         .TryWrite(
                             null,
                             (CompositeFormat)null,

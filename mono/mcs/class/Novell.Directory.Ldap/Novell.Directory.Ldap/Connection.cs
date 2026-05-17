@@ -1583,8 +1583,7 @@ namespace Novell.Directory.Ldap
                     }
                     else
                     {
-                        this.enclosingInstance.stopReaderMessageID = Novell
-                            .Directory
+                        this.enclosingInstance.stopReaderMessageID = Novell.Directory
                             .Ldap
                             .Connection
                             .CONTINUE_READING;

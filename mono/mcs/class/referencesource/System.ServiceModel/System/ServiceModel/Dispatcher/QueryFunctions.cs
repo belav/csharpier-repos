@@ -86,8 +86,7 @@ namespace System.ServiceModel.Dispatcher
                     break;
 
                 default:
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new QueryCompileException(
                                 QueryCompileError.InvalidType,
@@ -144,8 +143,7 @@ namespace System.ServiceModel.Dispatcher
 
                         default:
                             // This should never be reached
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperCritical(
                                     new QueryProcessingException(
                                         QueryProcessingError.Unexpected,
@@ -194,8 +192,7 @@ namespace System.ServiceModel.Dispatcher
 
                             default:
                                 // This should never be reached
-                                throw DiagnosticUtility
-                                    .ExceptionUtility
+                                throw DiagnosticUtility.ExceptionUtility
                                     .ThrowHelperCritical(
                                         new QueryProcessingException(
                                             QueryProcessingError.Unexpected,
@@ -254,8 +251,7 @@ namespace System.ServiceModel.Dispatcher
 
                         default:
                             // This should never be reached
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperCritical(
                                     new QueryProcessingException(
                                         QueryProcessingError.Unexpected,
@@ -823,8 +819,7 @@ namespace System.ServiceModel.Dispatcher
             switch (this.functionID)
             {
                 default:
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new NotImplementedException(
                                 SR.GetString(SR.QueryNotImplemented, this.name)

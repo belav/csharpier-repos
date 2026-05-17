@@ -16,8 +16,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIsNullCheck
         : AbstractBuiltInCodeStyleDiagnosticAnalyzer
     {
         private static readonly ImmutableDictionary<string, string?> s_properties =
-            ImmutableDictionary<string, string?>
-                .Empty
+            ImmutableDictionary<string, string?>.Empty
                 .Add(UseIsNullConstants.Kind, UseIsNullConstants.CastAndEqualityKey);
         private static readonly ImmutableDictionary<string, string?> s_NegatedProperties =
             s_properties.Add(UseIsNullConstants.Negated, "");

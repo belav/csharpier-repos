@@ -34,8 +34,7 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
         {
             get
             {
-                return _expressionToInfoMap
-                    .Values
+                return _expressionToInfoMap.Values
                     .Concat(_tokenToInfoMap.Values)
                     .Select(info => info.Symbol)
                     .Distinct();

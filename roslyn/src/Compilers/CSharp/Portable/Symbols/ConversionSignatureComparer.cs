@@ -48,8 +48,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 return false;
             }
 
-            return member1
-                    .ReturnType
+            return member1.ReturnType
                     .Equals(
                         member2.ReturnType,
                         TypeCompareKind.IgnoreDynamicAndTupleNames

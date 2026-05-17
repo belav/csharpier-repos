@@ -843,8 +843,7 @@ namespace Mono.CSharp
 
         protected void DefineBuilders(MemberKind kind, ParametersCompiled parameters)
         {
-            PropertyBuilder = Parent
-                .TypeBuilder
+            PropertyBuilder = Parent.TypeBuilder
                 .DefineProperty(
                     GetFullName(MemberName),
                     PropertyAttributes.None,
@@ -916,16 +915,14 @@ namespace Mono.CSharp
             }
             else if (member_type.HasDynamicElement)
             {
-                Module
-                    .PredefinedAttributes
+                Module.PredefinedAttributes
                     .Dynamic
                     .EmitAttribute(PropertyBuilder, member_type, Location);
             }
 
             if (member_type.HasNamedTupleElement)
             {
-                Module
-                    .PredefinedAttributes
+                Module.PredefinedAttributes
                     .TupleElementNames
                     .EmitAttribute(PropertyBuilder, member_type, Location);
             }
@@ -1942,8 +1939,7 @@ namespace Mono.CSharp
             add.Define(Parent);
             remove.Define(Parent);
 
-            EventBuilder = Parent
-                .TypeBuilder
+            EventBuilder = Parent.TypeBuilder
                 .DefineEvent(
                     GetFullName(MemberName),
                     EventAttributes.None,
@@ -2282,8 +2278,7 @@ namespace Mono.CSharp
 
             if (InterfaceType != null)
             {
-                string base_IndexerName = InterfaceType
-                    .MemberDefinition
+                string base_IndexerName = InterfaceType.MemberDefinition
                     .GetAttributeDefaultMember();
                 if (base_IndexerName != ShortName)
                 {

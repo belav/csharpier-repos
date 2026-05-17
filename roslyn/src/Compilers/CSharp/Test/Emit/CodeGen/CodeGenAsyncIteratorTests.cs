@@ -4835,11 +4835,9 @@ class C
         {
             var peReader = new PEReader(comp.EmitToArray());
             var metadataReader = peReader.GetMetadataReader();
-            var types = metadataReader
-                .TypeDefinitions
+            var types = metadataReader.TypeDefinitions
                 .Select(t => metadataReader.GetString(metadataReader.GetTypeDefinition(t).Name));
-            var type = metadataReader
-                .TypeDefinitions
+            var type = metadataReader.TypeDefinitions
                 .Single(t =>
                     metadataReader.GetString(metadataReader.GetTypeDefinition(t).Name) == methodName
                 );

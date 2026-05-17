@@ -261,8 +261,7 @@ namespace System.Runtime.Remoting.Proxies
         )
         {
             MonoMethodMessage mMsg = (MonoMethodMessage)msg;
-            mMsg.LogicalCallContext = Thread
-                .CurrentThread
+            mMsg.LogicalCallContext = Thread.CurrentThread
                 .GetMutableExecutionContext()
                 .LogicalCallContext;
             CallType call_type = mMsg.CallType;
@@ -303,9 +302,8 @@ namespace System.Runtime.Remoting.Proxies
                     {
                         // If async dispatch crashes, don't propagate the exception.
                         // The exception will be raised when calling EndInvoke.
-                        mMsg.AsyncResult.SyncProcessMessage(
-                            new ReturnMessage(ex, msg as IMethodCallMessage)
-                        );
+                        mMsg.AsyncResult
+                            .SyncProcessMessage(new ReturnMessage(ex, msg as IMethodCallMessage));
                         res_msg = new ReturnMessage(null, null, 0, null, msg as IMethodCallMessage);
                     }
                     else
@@ -335,8 +333,7 @@ namespace System.Runtime.Remoting.Proxies
 
             if (res_msg.LogicalCallContext != null && res_msg.LogicalCallContext.HasInfo)
             {
-                Thread
-                    .CurrentThread
+                Thread.CurrentThread
                     .GetMutableExecutionContext()
                     .LogicalCallContext
                     .Merge(res_msg.LogicalCallContext);

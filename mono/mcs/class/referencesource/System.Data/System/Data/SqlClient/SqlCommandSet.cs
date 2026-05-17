@@ -32,8 +32,7 @@ namespace System.Data.SqlClient
         private SqlCommand _batchCommand;
 
         private static int _objectTypeCount; // Bid counter
-        internal readonly int _objectID = System
-            .Threading
+        internal readonly int _objectID = System.Threading
             .Interlocked
             .Increment(ref _objectTypeCount);
 

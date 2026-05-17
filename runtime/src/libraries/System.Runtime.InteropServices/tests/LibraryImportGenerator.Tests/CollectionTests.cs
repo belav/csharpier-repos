@@ -434,8 +434,7 @@ namespace LibraryImportGenerator.IntegrationTests
         [Fact]
         public void BlittableElementCollection_GuaranteedUnmarshal()
         {
-            NativeExportsNE
-                .Collections
+            NativeExportsNE.Collections
                 .Stateless
                 .ListGuaranteedUnmarshal<int, int>
                 .AllocateContainerForManagedElementsFinallyCalled = false;
@@ -443,15 +442,13 @@ namespace LibraryImportGenerator.IntegrationTests
                 NativeExportsNE.Collections.Stateless.GuaranteedUnmarshal(out List<int> _)
             );
             Assert.True(
-                NativeExportsNE
-                    .Collections
+                NativeExportsNE.Collections
                     .Stateless
                     .ListGuaranteedUnmarshal<int, int>
                     .AllocateContainerForManagedElementsFinallyCalled
             );
 
-            NativeExportsNE
-                .Collections
+            NativeExportsNE.Collections
                 .Stateful
                 .ListGuaranteedUnmarshal<int, int>
                 .Marshaller
@@ -460,8 +457,7 @@ namespace LibraryImportGenerator.IntegrationTests
                 NativeExportsNE.Collections.Stateful.GuaranteedUnmarshal(out List<int> _)
             );
             Assert.True(
-                NativeExportsNE
-                    .Collections
+                NativeExportsNE.Collections
                     .Stateful
                     .ListGuaranteedUnmarshal<int, int>
                     .Marshaller
@@ -567,15 +563,13 @@ namespace LibraryImportGenerator.IntegrationTests
             List<BoolStruct> expected = GetNegatedBoolStructs(list);
 
             {
-                List<BoolStruct> result = NativeExportsNE
-                    .Collections
+                List<BoolStruct> result = NativeExportsNE.Collections
                     .Stateless
                     .NegateBools(list, list.Count);
                 Assert.Equal(expected, result);
             }
             {
-                List<BoolStruct> result = NativeExportsNE
-                    .Collections
+                List<BoolStruct> result = NativeExportsNE.Collections
                     .Stateful
                     .NegateBools(list, list.Count);
                 Assert.Equal(expected, result);
@@ -585,8 +579,7 @@ namespace LibraryImportGenerator.IntegrationTests
         [Fact]
         public void NonBlittableElementCollection_GuaranteedUnmarshal()
         {
-            NativeExportsNE
-                .Collections
+            NativeExportsNE.Collections
                 .Stateless
                 .ListGuaranteedUnmarshal<BoolStruct, BoolStructMarshaller.BoolStructNative>
                 .AllocateContainerForManagedElementsFinallyCalled = false;
@@ -594,15 +587,13 @@ namespace LibraryImportGenerator.IntegrationTests
                 NativeExportsNE.Collections.Stateless.GuaranteedUnmarshal(out List<BoolStruct> _)
             );
             Assert.True(
-                NativeExportsNE
-                    .Collections
+                NativeExportsNE.Collections
                     .Stateless
                     .ListGuaranteedUnmarshal<BoolStruct, BoolStructMarshaller.BoolStructNative>
                     .AllocateContainerForManagedElementsFinallyCalled
             );
 
-            NativeExportsNE
-                .Collections
+            NativeExportsNE.Collections
                 .Stateful
                 .ListGuaranteedUnmarshal<BoolStruct, BoolStructMarshaller.BoolStructNative>
                 .Marshaller
@@ -611,8 +602,7 @@ namespace LibraryImportGenerator.IntegrationTests
                 NativeExportsNE.Collections.Stateful.GuaranteedUnmarshal(out List<BoolStruct> _)
             );
             Assert.True(
-                NativeExportsNE
-                    .Collections
+                NativeExportsNE.Collections
                     .Stateful
                     .ListGuaranteedUnmarshal<BoolStruct, BoolStructMarshaller.BoolStructNative>
                     .Marshaller

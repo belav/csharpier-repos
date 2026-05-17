@@ -34,8 +34,7 @@ namespace System.Xml
                 if (startPos == len)
                 {
                     return (
-                        System
-                            .Xml
+                        System.Xml
                             .XmlConfiguration
                             .XmlReaderSection
                             .CollapseWhiteSpaceIntoEmptyString

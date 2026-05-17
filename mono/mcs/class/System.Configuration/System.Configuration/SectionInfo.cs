@@ -198,8 +198,7 @@ namespace System.Configuration
                     reader
                 );
             if (
-                !config
-                    .ConfigHost
+                !config.ConfigHost
                     .IsDefinitionAllowed(config.ConfigPath, allowDefinition, allowExeDefinition)
             )
             {
@@ -265,8 +264,7 @@ namespace System.Configuration
                         section.SectionInformation.ProtectionProvider.Name
                     );
                     sb.Append(
-                        config
-                            .ConfigHost
+                        config.ConfigHost
                             .EncryptSection(
                                 xml,
                                 section.SectionInformation.ProtectionProvider,

@@ -181,8 +181,7 @@ namespace System.Runtime.Serialization.Json
                 else
                     ReadClass(classContract);
                 if (
-                    Globals
-                        .TypeOfIDeserializationCallback
+                    Globals.TypeOfIDeserializationCallback
                         .IsAssignableFrom(classContract.UnderlyingType)
                 )
                     ilg.Call(objectLocal, JsonFormatGeneratorStatics.OnDeserializationMethod, null);
@@ -420,8 +419,7 @@ namespace System.Runtime.Serialization.Json
 
             bool HasFactoryMethod(ClassDataContract classContract)
             {
-                return Globals
-                    .TypeOfIObjectReference
+                return Globals.TypeOfIObjectReference
                     .IsAssignableFrom(classContract.UnderlyingType);
             }
 
@@ -670,8 +668,7 @@ namespace System.Runtime.Serialization.Json
 
             void ReadISerializable(ClassDataContract classContract)
             {
-                ConstructorInfo ctor = classContract
-                    .UnderlyingType
+                ConstructorInfo ctor = classContract.UnderlyingType
                     .GetConstructor(
                         Globals.ScanAllMembers,
                         null,
@@ -679,8 +676,7 @@ namespace System.Runtime.Serialization.Json
                         null
                     );
                 if (ctor == null)
-                    throw System
-                        .Runtime
+                    throw System.Runtime
                         .Serialization
                         .DiagnosticUtility
                         .ExceptionUtility
@@ -889,8 +885,7 @@ namespace System.Runtime.Serialization.Json
                     switch (collectionContract.Kind)
                     {
                         case CollectionKind.GenericDictionary:
-                            type = Globals
-                                .TypeOfDictionaryGeneric
+                            type = Globals.TypeOfDictionaryGeneric
                                 .MakeGenericType(itemType.GetGenericArguments());
                             constructor = type.GetConstructor(
                                 BindingFlags.Instance
@@ -987,9 +982,8 @@ namespace System.Runtime.Serialization.Json
                 LocalBuilder value = ReadCollectionItem(collectionContract, itemType);
                 if (isArray)
                 {
-                    MethodInfo ensureArraySizeMethod = XmlFormatGeneratorStatics
-                        .EnsureArraySizeMethod
-                        .MakeGenericMethod(itemType);
+                    MethodInfo ensureArraySizeMethod =
+                        XmlFormatGeneratorStatics.EnsureArraySizeMethod.MakeGenericMethod(itemType);
                     ilg.Call(null, ensureArraySizeMethod, growingCollection, i);
                     ilg.Stloc(growingCollection);
                     ilg.StoreArrayElement(growingCollection, i, value);
@@ -1008,8 +1002,7 @@ namespace System.Runtime.Serialization.Json
                 ilg.EndFor();
                 if (isArray)
                 {
-                    MethodInfo trimArraySizeMethod = XmlFormatGeneratorStatics
-                        .TrimArraySizeMethod
+                    MethodInfo trimArraySizeMethod = XmlFormatGeneratorStatics.TrimArraySizeMethod
                         .MakeGenericMethod(itemType);
                     ilg.Call(null, trimArraySizeMethod, growingCollection, i);
                     ilg.Stloc(objectLocal);

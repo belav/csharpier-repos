@@ -197,8 +197,7 @@ namespace System.Data.SqlClient
                     )
                 )
                 {
-                    exception
-                        .Data
+                    exception.Data
                         .Add(
                             OriginalClientConnectionIdKey,
                             internalConnection.OriginalClientConnectionId
@@ -207,8 +206,7 @@ namespace System.Data.SqlClient
 
                 if (!string.IsNullOrEmpty(internalConnection.RoutingDestination))
                 {
-                    exception
-                        .Data
+                    exception.Data
                         .Add(RoutingDestinationKey, internalConnection.RoutingDestination);
                 }
             }
@@ -262,8 +260,7 @@ namespace System.Data.SqlClient
                 exception.Data.Add("HelpLink.ProdVer", serverVersion);
             }
             exception.Data.Add("HelpLink.EvtSrc", "MSSQLServer");
-            exception
-                .Data
+            exception.Data
                 .Add(
                     "HelpLink.EvtID",
                     errorCollection[0].Number.ToString(CultureInfo.InvariantCulture)

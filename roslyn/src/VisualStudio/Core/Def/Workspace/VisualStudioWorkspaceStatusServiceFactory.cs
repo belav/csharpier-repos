@@ -105,14 +105,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                 _serviceProvider = serviceProvider;
                 _threadingContext = threadingContext;
 
-                _loadHubClientPackage = _threadingContext
-                    .JoinableTaskFactory
+                _loadHubClientPackage = _threadingContext.JoinableTaskFactory
                     .RunAsync(async () =>
                     {
                         // Use the disposal token, since the caller's cancellation token will apply instead to the
                         // JoinAsync operation in GetProgressStageStatusAsync.
-                        await _threadingContext
-                            .JoinableTaskFactory
+                        await _threadingContext.JoinableTaskFactory
                             .SwitchToMainThreadAsync(
                                 alwaysYield: true,
                                 _threadingContext.DisposalToken
@@ -129,8 +127,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                         await shell.LoadPackageAsync(Guids.GlobalHubClientPackageGuid);
                     });
 
-                _progressStageStatus = _threadingContext
-                    .JoinableTaskFactory
+                _progressStageStatus = _threadingContext.JoinableTaskFactory
                     .RunAsync(async () =>
                     {
                         // preemptively make sure event is subscribed. if APIs are called before it is done, calls will be
@@ -139,8 +136,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                             "StatusChanged_EventSubscription"
                         );
 
-                        await threadingContext
-                            .JoinableTaskFactory
+                        await threadingContext.JoinableTaskFactory
                             .SwitchToMainThreadAsync(
                                 alwaysYield: true,
                                 _threadingContext.DisposalToken

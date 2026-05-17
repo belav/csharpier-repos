@@ -50,8 +50,7 @@ namespace System.Net.Sockets.Tests
         [Fact]
         public static void EventSource_ExistsWithCorrectId()
         {
-            Type esType = typeof(Socket)
-                .Assembly
+            Type esType = typeof(Socket).Assembly
                 .GetType(
                     "System.Net.Sockets.SocketsTelemetry",
                     throwOnError: true,

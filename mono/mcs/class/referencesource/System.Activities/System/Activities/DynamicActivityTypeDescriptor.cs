@@ -116,8 +116,7 @@ namespace System.Activities
             {
                 if (string.IsNullOrEmpty(property.Name))
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(
                             new ValidationException(
                                 SR.ActivityPropertyRequiresName(this.owner.DisplayName)
@@ -126,8 +125,7 @@ namespace System.Activities
                 }
                 if (property.Type == null)
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(
                             new ValidationException(
                                 SR.ActivityPropertyRequiresType(this.owner.DisplayName)
@@ -208,8 +206,7 @@ namespace System.Activities
                 IDynamicActivity owner = component as IDynamicActivity;
                 if (owner == null || !owner.Properties.Contains(this.activityProperty))
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(
                             new InvalidOperationException(
                                 SR.InvalidDynamicActivityProperty(this.Name)
@@ -225,8 +222,7 @@ namespace System.Activities
                 IDynamicActivity owner = component as IDynamicActivity;
                 if (owner == null || !owner.Properties.Contains(this.activityProperty))
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(
                             new InvalidOperationException(
                                 SR.InvalidDynamicActivityProperty(this.Name)
@@ -283,8 +279,7 @@ namespace System.Activities
 
                 if (this.Contains(item.Name))
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(
                             new ArgumentException(
                                 SR.DynamicActivityDuplicatePropertyDetected(item.Name),
@@ -308,8 +303,7 @@ namespace System.Activities
                 // name as item, no other element in the collection can.
                 if (!this[index].Name.Equals(item.Name) && this.Contains(item.Name))
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(
                             new ArgumentException(
                                 SR.DynamicActivityDuplicatePropertyDetected(item.Name),

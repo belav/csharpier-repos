@@ -8,8 +8,7 @@ namespace Microsoft.EntityFrameworkCore.TestModels.SpatialModel;
 
 public class GeoPointConverter : ValueConverter<GeoPoint, Point>
 {
-    private static readonly GeometryFactory _geometryFactory = NtsGeometryServices
-        .Instance
+    private static readonly GeometryFactory _geometryFactory = NtsGeometryServices.Instance
         .CreateGeometryFactory(srid: 0);
 
     public GeoPointConverter()

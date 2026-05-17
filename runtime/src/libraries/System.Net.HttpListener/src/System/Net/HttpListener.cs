@@ -232,8 +232,7 @@ namespace System.Net
                                 indexOfNextCopy += 4;
                             }
 
-                            state
-                                .uriPrefix
+                            state.uriPrefix
                                 .AsSpan(state.j)
                                 .CopyTo(destination.Slice(indexOfNextCopy));
                         }
@@ -333,11 +332,12 @@ namespace System.Net
 
         public Task<HttpListenerContext> GetContextAsync()
         {
-            return Task.Factory.FromAsync(
-                (callback, state) => ((HttpListener)state!).BeginGetContext(callback, state),
-                iar => ((HttpListener)iar!.AsyncState!).EndGetContext(iar),
-                this
-            );
+            return Task.Factory
+                .FromAsync(
+                    (callback, state) => ((HttpListener)state!).BeginGetContext(callback, state),
+                    iar => ((HttpListener)iar!.AsyncState!).EndGetContext(iar),
+                    this
+                );
         }
 
         public void Close()

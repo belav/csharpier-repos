@@ -570,8 +570,7 @@ namespace System.Data.Metadata.Edm
                     list[0] = (
                         new FacetDescription(
                             DbProviderManifest.MaxLengthFacetName,
-                            MetadataItem
-                                .EdmProviderManifest
+                            MetadataItem.EdmProviderManifest
                                 .GetPrimitiveType(PrimitiveTypeKind.Int32),
                             0,
                             Int32.MaxValue,
@@ -581,8 +580,7 @@ namespace System.Data.Metadata.Edm
                     list[1] = (
                         new FacetDescription(
                             DbProviderManifest.UnicodeFacetName,
-                            MetadataItem
-                                .EdmProviderManifest
+                            MetadataItem.EdmProviderManifest
                                 .GetPrimitiveType(PrimitiveTypeKind.Boolean),
                             null,
                             null,
@@ -592,8 +590,7 @@ namespace System.Data.Metadata.Edm
                     list[2] = (
                         new FacetDescription(
                             DbProviderManifest.FixedLengthFacetName,
-                            MetadataItem
-                                .EdmProviderManifest
+                            MetadataItem.EdmProviderManifest
                                 .GetPrimitiveType(PrimitiveTypeKind.Boolean),
                             null,
                             null,
@@ -611,8 +608,7 @@ namespace System.Data.Metadata.Edm
                     list[0] = (
                         new FacetDescription(
                             DbProviderManifest.MaxLengthFacetName,
-                            MetadataItem
-                                .EdmProviderManifest
+                            MetadataItem.EdmProviderManifest
                                 .GetPrimitiveType(PrimitiveTypeKind.Int32),
                             0,
                             Int32.MaxValue,
@@ -622,8 +618,7 @@ namespace System.Data.Metadata.Edm
                     list[1] = (
                         new FacetDescription(
                             DbProviderManifest.FixedLengthFacetName,
-                            MetadataItem
-                                .EdmProviderManifest
+                            MetadataItem.EdmProviderManifest
                                 .GetPrimitiveType(PrimitiveTypeKind.Boolean),
                             null,
                             null,
@@ -640,8 +635,7 @@ namespace System.Data.Metadata.Edm
                     list[0] = (
                         new FacetDescription(
                             DbProviderManifest.PrecisionFacetName,
-                            MetadataItem
-                                .EdmProviderManifest
+                            MetadataItem.EdmProviderManifest
                                 .GetPrimitiveType(PrimitiveTypeKind.Byte),
                             0,
                             EdmProviderManifest.MaximumDateTimePrecision,
@@ -658,8 +652,7 @@ namespace System.Data.Metadata.Edm
                     list[0] = (
                         new FacetDescription(
                             DbProviderManifest.PrecisionFacetName,
-                            MetadataItem
-                                .EdmProviderManifest
+                            MetadataItem.EdmProviderManifest
                                 .GetPrimitiveType(PrimitiveTypeKind.Byte),
                             0,
                             EdmProviderManifest.MaximumDateTimePrecision,
@@ -675,8 +668,7 @@ namespace System.Data.Metadata.Edm
                     list[0] = (
                         new FacetDescription(
                             DbProviderManifest.PrecisionFacetName,
-                            MetadataItem
-                                .EdmProviderManifest
+                            MetadataItem.EdmProviderManifest
                                 .GetPrimitiveType(PrimitiveTypeKind.Byte),
                             0,
                             EdmProviderManifest.MaximumDateTimePrecision,
@@ -693,8 +685,7 @@ namespace System.Data.Metadata.Edm
                     list[0] = (
                         new FacetDescription(
                             DbProviderManifest.PrecisionFacetName,
-                            MetadataItem
-                                .EdmProviderManifest
+                            MetadataItem.EdmProviderManifest
                                 .GetPrimitiveType(PrimitiveTypeKind.Byte),
                             1,
                             EdmProviderManifest.MaximumDecimalPrecision,
@@ -704,8 +695,7 @@ namespace System.Data.Metadata.Edm
                     list[1] = (
                         new FacetDescription(
                             DbProviderManifest.ScaleFacetName,
-                            MetadataItem
-                                .EdmProviderManifest
+                            MetadataItem.EdmProviderManifest
                                 .GetPrimitiveType(PrimitiveTypeKind.Byte),
                             0,
                             EdmProviderManifest.MaximumDecimalPrecision,
@@ -728,8 +718,7 @@ namespace System.Data.Metadata.Edm
                     list[0] = (
                         new FacetDescription(
                             DbProviderManifest.SridFacetName,
-                            MetadataItem
-                                .EdmProviderManifest
+                            MetadataItem.EdmProviderManifest
                                 .GetPrimitiveType(PrimitiveTypeKind.Int32),
                             0,
                             Int32.MaxValue,
@@ -739,8 +728,7 @@ namespace System.Data.Metadata.Edm
                     list[1] = (
                         new FacetDescription(
                             DbProviderManifest.IsStrictFacetName,
-                            MetadataItem
-                                .EdmProviderManifest
+                            MetadataItem.EdmProviderManifest
                                 .GetPrimitiveType(PrimitiveTypeKind.Boolean),
                             null,
                             null,
@@ -763,8 +751,7 @@ namespace System.Data.Metadata.Edm
                     list[0] = (
                         new FacetDescription(
                             DbProviderManifest.SridFacetName,
-                            MetadataItem
-                                .EdmProviderManifest
+                            MetadataItem.EdmProviderManifest
                                 .GetPrimitiveType(PrimitiveTypeKind.Int32),
                             0,
                             Int32.MaxValue,
@@ -774,8 +761,7 @@ namespace System.Data.Metadata.Edm
                     list[1] = (
                         new FacetDescription(
                             DbProviderManifest.IsStrictFacetName,
-                            MetadataItem
-                                .EdmProviderManifest
+                            MetadataItem.EdmProviderManifest
                                 .GetPrimitiveType(PrimitiveTypeKind.Boolean),
                             null,
                             null,

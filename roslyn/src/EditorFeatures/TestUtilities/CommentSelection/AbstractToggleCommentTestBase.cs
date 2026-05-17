@@ -110,8 +110,7 @@ namespace Microsoft.CodeAnalysis.Test.Utilities.CommentSelection
             string contentTypeName,
             ITextView textView
         ) =>
-            textView
-                .BufferGraph
+            textView.BufferGraph
                 .GetTextBuffers(b => b.ContentType.IsOfType(contentTypeName))
                 .Single();
 
@@ -133,8 +132,7 @@ namespace Microsoft.CodeAnalysis.Test.Utilities.CommentSelection
             {
                 AssertEx.Equal(
                     expectedSpans,
-                    textView
-                        .Selection
+                    textView.Selection
                         .SelectedSpans
                         .Select(snapshotSpan =>
                             TextSpan.FromBounds(snapshotSpan.Start, snapshotSpan.End)
@@ -148,16 +146,14 @@ namespace Microsoft.CodeAnalysis.Test.Utilities.CommentSelection
             var snapshot = textView.TextSnapshot;
             if (spans.Count() == 1)
             {
-                textView
-                    .Selection
+                textView.Selection
                     .Select(new SnapshotSpan(snapshot, spans.Single()), isReversed: false);
                 textView.Caret.MoveTo(new SnapshotPoint(snapshot, spans.Single().End));
             }
             else if (spans.Count() > 1)
             {
                 textView.Selection.Mode = TextSelectionMode.Box;
-                textView
-                    .Selection
+                textView.Selection
                     .Select(
                         new VirtualSnapshotPoint(snapshot, spans.First().Start),
                         new VirtualSnapshotPoint(snapshot, spans.Last().End)

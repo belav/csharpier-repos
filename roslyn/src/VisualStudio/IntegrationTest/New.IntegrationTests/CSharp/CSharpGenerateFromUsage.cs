@@ -35,15 +35,13 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
 }",
                 HangMitigatingCancellationToken
             );
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .CodeActionAsync(
                     "Generate local 'xyz'",
                     applyFix: true,
                     cancellationToken: HangMitigatingCancellationToken
                 );
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .TextContainsAsync(
                     @"class Program
 {

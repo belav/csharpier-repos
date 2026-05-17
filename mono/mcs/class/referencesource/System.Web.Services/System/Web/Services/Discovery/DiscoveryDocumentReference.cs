@@ -110,8 +110,7 @@ namespace System.Web.Services.Discovery
         /// </devdoc>
         public override void WriteDocument(object document, Stream stream)
         {
-            WebServicesSection
-                .Current
+            WebServicesSection.Current
                 .DiscoveryDocumentSerializer
                 .Serialize(new StreamWriter(stream, new UTF8Encoding(false)), document);
         }

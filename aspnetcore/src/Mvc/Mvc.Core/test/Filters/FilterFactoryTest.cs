@@ -247,8 +247,7 @@ public class FilterFactoryTest
                 var filter = new TestFilter(
                     providerContext.ActionContext.HttpContext.Items["name"] as string
                 );
-                providerContext
-                    .Results
+                providerContext.Results
                     .Add(
                         new FilterItem(new FilterDescriptor(filter, FilterScope.Global), filter)
                         {

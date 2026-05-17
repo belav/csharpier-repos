@@ -168,8 +168,7 @@ namespace Mono
             if (!method.HasCustomAttributes)
                 return null;
 
-            return method
-                .CustomAttributes
+            return method.CustomAttributes
                 .FirstOrDefault(l =>
                     l.AttributeType.Name == "AsyncStateMachineAttribute"
                     && l.AttributeType.Namespace == "System.Runtime.CompilerServices"

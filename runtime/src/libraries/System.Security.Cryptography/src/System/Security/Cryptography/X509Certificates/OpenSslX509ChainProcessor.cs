@@ -117,11 +117,9 @@ namespace System.Security.Cryptography.X509Certificates
             try
             {
                 untrusted = Interop.Crypto.NewX509Stack();
-                Interop
-                    .Crypto
+                Interop.Crypto
                     .X509StackAddMultiple(untrusted, s_userIntermediateStore.GetNativeCollection());
-                Interop
-                    .Crypto
+                Interop.Crypto
                     .X509StackAddMultiple(untrusted, s_userPersonalStore.GetNativeCollection());
 
                 store = GetTrustStore(trustMode, customTrustStore, untrusted, systemTrust);
@@ -182,8 +180,7 @@ namespace System.Security.Cryptography.X509Certificates
                         }
                     }
 
-                    return Interop
-                        .Crypto
+                    return Interop.Crypto
                         .X509ChainNew(customTrust, SafeX509StackHandle.InvalidHandle);
                 }
             }
@@ -199,8 +196,7 @@ namespace System.Security.Cryptography.X509Certificates
 
             // While this returns true/false, at this stage we care more about the detailed error code.
             Interop.Crypto.X509VerifyCert(storeCtx);
-            Interop.Crypto.X509VerifyStatusCode statusCode = Interop
-                .Crypto
+            Interop.Crypto.X509VerifyStatusCode statusCode = Interop.Crypto
                 .X509StoreCtxGetError(storeCtx);
 
             if (IsCompleteChain(statusCode))
@@ -404,8 +400,7 @@ namespace System.Security.Cryptography.X509Certificates
 
                 if (OpenSslX509ChainEventSource.Log.IsEnabled())
                 {
-                    OpenSslX509ChainEventSource
-                        .Log
+                    OpenSslX509ChainEventSource.Log
                         .RevocationCheckStart(revocationMode, revocationFlag, chainSize);
                 }
 
@@ -437,8 +432,7 @@ namespace System.Security.Cryptography.X509Certificates
                         else
                         {
                             using (
-                                SafeX509Handle cert = Interop
-                                    .Crypto
+                                SafeX509Handle cert = Interop.Crypto
                                     .X509UpRef(Interop.Crypto.GetX509StackField(chainStack, i))
                             )
                             {
@@ -458,8 +452,7 @@ namespace System.Security.Cryptography.X509Certificates
                 Interop.Crypto.X509StoreCtxRebuildChain(_storeCtx);
             }
 
-            Interop.Crypto.X509VerifyStatusCode errorCode = Interop
-                .Crypto
+            Interop.Crypto.X509VerifyStatusCode errorCode = Interop.Crypto
                 .X509StoreCtxGetError(_storeCtx);
 
             if (OpenSslX509ChainEventSource.Log.IsEnabled())
@@ -507,8 +500,7 @@ namespace System.Security.Cryptography.X509Certificates
             {
                 for (int logDepth = 0; logDepth <= workingChain.LastError; logDepth++)
                 {
-                    OpenSslX509ChainEventSource
-                        .Log
+                    OpenSslX509ChainEventSource.Log
                         .RawElementStatus(
                             logDepth,
                             workingChain[logDepth],
@@ -594,8 +586,7 @@ namespace System.Security.Cryptography.X509Certificates
                         if (chainSize == 1)
                         {
                             using (
-                                SafeSharedX509StackHandle untrusted = Interop
-                                    .Crypto
+                                SafeSharedX509StackHandle untrusted = Interop.Crypto
                                     .X509StoreCtxGetSharedUntrusted(_storeCtx)
                             )
                             using (SafeX509Handle upref = Interop.Crypto.X509UpRef(_leafHandle))
@@ -693,8 +684,7 @@ namespace System.Security.Cryptography.X509Certificates
             {
                 for (int logDepth = 0; logDepth <= workingChain.LastError; logDepth++)
                 {
-                    OpenSslX509ChainEventSource
-                        .Log
+                    OpenSslX509ChainEventSource.Log
                         .FinalElementStatus(
                             logDepth,
                             workingChain[logDepth],
@@ -752,8 +742,7 @@ namespace System.Security.Cryptography.X509Certificates
                 extraDispose = workingChain;
                 workingChain = new WorkingChain(abortOnSignatureError: false);
 
-                Interop
-                    .Crypto
+                Interop.Crypto
                     .X509StoreCtxSetVerifyCallback(_storeCtx, &VerifyCallback, &workingChain);
 
                 verify = Interop.Crypto.X509VerifyCert(_storeCtx);
@@ -826,8 +815,7 @@ namespace System.Security.Cryptography.X509Certificates
             }
 
             string ocspCache = OpenSslCrlCache.GetCachedOcspResponseDirectory();
-            Interop.Crypto.X509VerifyStatusCode status = Interop
-                .Crypto
+            Interop.Crypto.X509VerifyStatusCode status = Interop.Crypto
                 .X509ChainGetCachedOcspStatus(_storeCtx, ocspCache, chainDepth);
 
             if (OpenSslX509ChainEventSource.Log.IsEnabled())
@@ -853,13 +841,11 @@ namespace System.Security.Cryptography.X509Certificates
             }
 
             using (
-                SafeOcspRequestHandle req = Interop
-                    .Crypto
+                SafeOcspRequestHandle req = Interop.Crypto
                     .X509ChainBuildOcspRequest(_storeCtx, chainDepth)
             )
             {
-                ArraySegment<byte> encoded = Interop
-                    .Crypto
+                ArraySegment<byte> encoded = Interop.Crypto
                     .OpenSslRentEncode(
                         Interop.Crypto.GetOcspRequestDerSize,
                         Interop.Crypto.EncodeOcspRequest,
@@ -902,14 +888,12 @@ namespace System.Security.Cryptography.X509Certificates
                         // Opportunistic create, suppress all errors.
                     }
 
-                    status = Interop
-                        .Crypto
+                    status = Interop.Crypto
                         .X509ChainVerifyOcsp(_storeCtx, req, resp, ocspCache, chainDepth);
 
                     if (OpenSslX509ChainEventSource.Log.IsEnabled())
                     {
-                        OpenSslX509ChainEventSource
-                            .Log
+                        OpenSslX509ChainEventSource.Log
                             .OcspResponseFromDownload(chainDepth, status);
                     }
 
@@ -1502,8 +1486,7 @@ namespace System.Security.Cryptography.X509Certificates
 
             internal int VerifyCallback(SafeX509StoreCtxHandle storeCtx)
             {
-                Interop.Crypto.X509VerifyStatusCode errorCode = Interop
-                    .Crypto
+                Interop.Crypto.X509VerifyStatusCode errorCode = Interop.Crypto
                     .X509StoreCtxGetError(storeCtx);
                 int errorDepth = Interop.Crypto.X509StoreCtxGetErrorDepth(storeCtx);
 

@@ -46,8 +46,7 @@ namespace System.Net.NetworkInformation.Tests
             )
             {
                 if (
-                    outputLine
-                        .Data
+                    outputLine.Data
                         ?.Contains(
                             "Destination Net Unreachable",
                             StringComparison.OrdinalIgnoreCase

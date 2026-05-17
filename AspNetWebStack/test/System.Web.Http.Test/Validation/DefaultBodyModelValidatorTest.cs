@@ -245,8 +245,7 @@ namespace System.Web.Http.Validation
                 .Returns(false);
 
             // Act
-            mockValidator
-                .Object
+            mockValidator.Object
                 .Validate(
                     new Person(),
                     typeof(Person),
@@ -272,8 +271,7 @@ namespace System.Web.Http.Validation
                 .Returns(false);
 
             // Act
-            mockValidator
-                .Object
+            mockValidator.Object
                 .Validate(new Pet(), typeof(Pet), metadataProvider, actionContext, string.Empty);
 
             // Assert

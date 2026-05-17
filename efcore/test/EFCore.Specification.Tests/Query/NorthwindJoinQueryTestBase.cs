@@ -816,11 +816,12 @@ public abstract class NorthwindJoinQueryTestBase<TFixture> : QueryTestBase<TFixt
                 ss.Set<Customer>()
                     .Where(c => c.CustomerID.StartsWith("F"))
                     .SelectMany(c =>
-                        c.Orders.Select(o => new
-                        {
-                            OrderProperty = ClientMethod(o),
-                            CustomerProperty = c.ContactName,
-                        })
+                        c.Orders
+                            .Select(o => new
+                            {
+                                OrderProperty = ClientMethod(o),
+                                CustomerProperty = c.ContactName,
+                            })
                     ),
             elementSorter: e => e.OrderProperty
         );
@@ -834,12 +835,13 @@ public abstract class NorthwindJoinQueryTestBase<TFixture> : QueryTestBase<TFixt
                 ss.Set<Customer>()
                     .Where(c => c.CustomerID.StartsWith("F"))
                     .SelectMany(c =>
-                        c.Orders.Select(o => new
-                        {
-                            OrderProperty = ClientMethod(o),
-                            o.OrderDetails,
-                            CustomerProperty = c.ContactName,
-                        })
+                        c.Orders
+                            .Select(o => new
+                            {
+                                OrderProperty = ClientMethod(o),
+                                o.OrderDetails,
+                                CustomerProperty = c.ContactName,
+                            })
                     ),
             elementSorter: e => e.OrderProperty,
             elementAsserter: (e, a) =>
@@ -859,12 +861,13 @@ public abstract class NorthwindJoinQueryTestBase<TFixture> : QueryTestBase<TFixt
                 ss.Set<Customer>()
                     .Where(c => c.CustomerID.StartsWith("F"))
                     .SelectMany(c =>
-                        c.Orders.Select(o => new
-                        {
-                            OrderProperty = ClientMethod(o),
-                            o.OrderDetails,
-                            CustomerProperty = c.ContactName,
-                        })
+                        c.Orders
+                            .Select(o => new
+                            {
+                                OrderProperty = ClientMethod(o),
+                                o.OrderDetails,
+                                CustomerProperty = c.ContactName,
+                            })
                     )
                     .Select(e => new { e.OrderProperty, e.CustomerProperty }),
             elementSorter: e => e.OrderProperty

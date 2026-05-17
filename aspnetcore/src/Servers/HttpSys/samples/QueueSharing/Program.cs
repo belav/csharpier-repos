@@ -64,8 +64,7 @@ public static class Program
                             // This seems related to the default MaxAccepts (5 * processor count).
                             // I'm told this connection affinity does not apply to HTTP/2.
                             context.Response.Headers["Connection"] = "close";
-                            await context
-                                .Response
+                            await context.Response
                                 .WriteAsync(
                                     "Hello world from "
                                         + context.Request.Host

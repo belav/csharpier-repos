@@ -322,9 +322,8 @@ namespace ComInterfaceGenerator.Unit.Tests
                 string userDefinedInterfaceMetadataName
             )
             {
-                INamedTypeSymbol? userDefinedInterface = comp.Assembly.GetTypeByMetadataName(
-                    userDefinedInterfaceMetadataName
-                );
+                INamedTypeSymbol? userDefinedInterface = comp.Assembly
+                    .GetTypeByMetadataName(userDefinedInterfaceMetadataName);
                 Assert.NotNull(userDefinedInterface);
 
                 INamedTypeSymbol? iUnknownDerivedAttributeType = comp.GetTypeByMetadataName(
@@ -336,8 +335,7 @@ namespace ComInterfaceGenerator.Unit.Tests
                 AttributeData iUnknownDerivedAttribute = Assert.Single(
                     userDefinedInterface.GetAttributes(),
                     attr =>
-                        SymbolEqualityComparer
-                            .Default
+                        SymbolEqualityComparer.Default
                             .Equals(
                                 attr.AttributeClass?.OriginalDefinition,
                                 iUnknownDerivedAttributeType

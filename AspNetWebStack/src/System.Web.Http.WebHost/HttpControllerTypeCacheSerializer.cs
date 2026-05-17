@@ -31,9 +31,8 @@ namespace System.Web.Http.WebHost
     /// </summary>
     internal sealed class HttpControllerTypeCacheSerializer
     {
-        private static readonly Guid _mvcVersionId = typeof(HttpControllerTypeCacheSerializer)
-            .Module
-            .ModuleVersionId;
+        private static readonly Guid _mvcVersionId =
+            typeof(HttpControllerTypeCacheSerializer).Module.ModuleVersionId;
 
         // used for unit testing
 

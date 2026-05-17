@@ -57,19 +57,20 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Utilities
                 Task task;
                 lock (_tasks)
                 {
-                    task = Task.Factory.StartNew(
-                        () =>
-                        {
-                            while (true)
+                    task = Task.Factory
+                        .StartNew(
+                            () =>
                             {
-                                _tokenSource.Token.ThrowIfCancellationRequested();
-                                Thread.Sleep(TimeSpan.FromMilliseconds(10));
-                            }
-                        },
-                        _tokenSource.Token,
-                        TaskCreationOptions.LongRunning,
-                        TaskScheduler.Default
-                    );
+                                while (true)
+                                {
+                                    _tokenSource.Token.ThrowIfCancellationRequested();
+                                    Thread.Sleep(TimeSpan.FromMilliseconds(10));
+                                }
+                            },
+                            _tokenSource.Token,
+                            TaskCreationOptions.LongRunning,
+                            TaskScheduler.Default
+                        );
 
                     _tasks.Add(task);
                 }
@@ -309,32 +310,34 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Utilities
             var secondDone = false;
 
             var asyncToken1 = listener.BeginAsyncOperation("Test");
-            var firstTask = Task.Factory.StartNew(
-                () =>
-                {
-                    signal1.Set();
-                    sleepHelper.Sleep(TimeSpan.FromMilliseconds(500));
-                    firstDone = true;
-                },
-                CancellationToken.None,
-                TaskCreationOptions.None,
-                TaskScheduler.Default
-            );
+            var firstTask = Task.Factory
+                .StartNew(
+                    () =>
+                    {
+                        signal1.Set();
+                        sleepHelper.Sleep(TimeSpan.FromMilliseconds(500));
+                        firstDone = true;
+                    },
+                    CancellationToken.None,
+                    TaskCreationOptions.None,
+                    TaskScheduler.Default
+                );
             firstTask.CompletesAsyncOperation(asyncToken1);
             firstTask.Wait();
 
             var asyncToken2 = listener.BeginAsyncOperation("Test");
-            var secondTask = Task.Factory.StartNew(
-                () =>
-                {
-                    signal2.Set();
-                    sleepHelper.Sleep(TimeSpan.FromMilliseconds(500));
-                    secondDone = true;
-                },
-                CancellationToken.None,
-                TaskCreationOptions.None,
-                TaskScheduler.Default
-            );
+            var secondTask = Task.Factory
+                .StartNew(
+                    () =>
+                    {
+                        signal2.Set();
+                        sleepHelper.Sleep(TimeSpan.FromMilliseconds(500));
+                        secondDone = true;
+                    },
+                    CancellationToken.None,
+                    TaskCreationOptions.None,
+                    TaskScheduler.Default
+                );
             secondTask.CompletesAsyncOperation(asyncToken2);
 
             // give it two signals since second one might not have started when WaitTask.Wait is called - race condition

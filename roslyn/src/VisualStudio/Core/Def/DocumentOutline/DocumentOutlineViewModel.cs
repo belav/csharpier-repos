@@ -512,8 +512,7 @@ namespace Microsoft.VisualStudio.LanguageServices.DocumentOutline
             // Map the caret back to the snapshot used to create the last set of items.
             var modelTree = this.LastPresentedViewState.ViewModelItemsTree;
             var textView = _codeWindowViewTracker.GetActiveView();
-            var caretPosition = textView
-                .Caret
+            var caretPosition = textView.Caret
                 .Position
                 .BufferPosition
                 .TranslateTo(this.LastPresentedViewState.TextSnapshot, PointTrackingMode.Positive);

@@ -110,8 +110,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
                     AddError(
                         ErrorCode.InvalidEndEntitySet,
                         EdmSchemaErrorSeverity.Error,
-                        System
-                            .Data
+                        System.Data
                             .Entity
                             .Strings
                             .InvalidEntitySetNameReference(_unresolvedEntitySetName, Name)
@@ -147,8 +146,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
                 AddError(
                     ErrorCode.InvalidEndEntitySet,
                     EdmSchemaErrorSeverity.Error,
-                    System
-                        .Data
+                    System.Data
                         .Entity
                         .Strings
                         .InvalidEndEntitySetTypeMismatch(_relationshipEnd.Name)

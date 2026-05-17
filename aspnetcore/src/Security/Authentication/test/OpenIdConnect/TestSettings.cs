@@ -162,8 +162,7 @@ internal class TestSettings
         // Convert query to dictionary
         var queryDict = string.IsNullOrEmpty(redirectUri.Query)
             ? new Dictionary<string, string>()
-            : redirectUri
-                .Query
+            : redirectUri.Query
                 .TrimStart('?')
                 .Split('&')
                 .Select(part => part.Split('='))
@@ -480,8 +479,7 @@ internal class TestSettings
         )
         {
             if (
-                request
-                    .RequestUri
+                request.RequestUri
                     .AbsoluteUri
                     .Equals(
                         "https://login.microsoftonline.com/common/.well-known/openid-configuration"
@@ -491,8 +489,7 @@ internal class TestSettings
                 return await ReturnResource("wellknownconfig.json");
             }
             if (
-                request
-                    .RequestUri
+                request.RequestUri
                     .AbsoluteUri
                     .Equals("https://login.microsoftonline.com/common/discovery/keys")
             )
@@ -507,8 +504,7 @@ internal class TestSettings
         {
             var resourceName = "Microsoft.AspNetCore.Authentication.Test.OpenIdConnect." + resource;
             using (
-                var stream = typeof(MockBackchannel)
-                    .Assembly
+                var stream = typeof(MockBackchannel).Assembly
                     .GetManifestResourceStream(resourceName)
             )
             using (var reader = new StreamReader(stream))

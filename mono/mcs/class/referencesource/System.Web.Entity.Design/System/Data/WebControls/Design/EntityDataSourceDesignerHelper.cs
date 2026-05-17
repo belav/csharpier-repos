@@ -767,8 +767,7 @@ namespace System.Web.UI.Design.WebControls
                         );
                     if (webConfig != null)
                     {
-                        ConnectionStringSettings connStrSettings = webConfig
-                            .ConnectionStrings
+                        ConnectionStringSettings connStrSettings = webConfig.ConnectionStrings
                             .ConnectionStrings[namedConnStrBuilder.Name];
                         if (
                             connStrSettings != null
@@ -1432,8 +1431,8 @@ namespace System.Web.UI.Design.WebControls
                 new List<EntityDataSourceContainerNameItem>();
             if (this.EdmItemCollection != null)
             {
-                ReadOnlyCollection<EntityContainer> entityContainers =
-                    this.EdmItemCollection.GetItems<EntityContainer>();
+                ReadOnlyCollection<EntityContainer> entityContainers = this.EdmItemCollection
+                    .GetItems<EntityContainer>();
                 foreach (EntityContainer entityContainer in entityContainers)
                 {
                     entityContainerItems.Add(
@@ -1461,12 +1460,13 @@ namespace System.Web.UI.Design.WebControls
             EntityContainer container = null;
             if (
                 this.EdmItemCollection != null
-                && this.EdmItemCollection.TryGetEntityContainer(
-                    entityContainerName,
-                    true /*ignoreCase*/
-                    ,
-                    out container
-                )
+                && this.EdmItemCollection
+                    .TryGetEntityContainer(
+                        entityContainerName,
+                        true /*ignoreCase*/
+                        ,
+                        out container
+                    )
                 && container != null
             )
             {
@@ -1483,12 +1483,13 @@ namespace System.Web.UI.Design.WebControls
             EntityContainer container = null;
             if (this.EdmItemCollection != null)
             {
-                this.EdmItemCollection.TryGetEntityContainer(
-                    entityContainerName,
-                    true /*ignoreCase*/
-                    ,
-                    out container
-                );
+                this.EdmItemCollection
+                    .TryGetEntityContainer(
+                        entityContainerName,
+                        true /*ignoreCase*/
+                        ,
+                        out container
+                    );
             }
             return GetEntitySets(
                 container,
@@ -1541,8 +1542,7 @@ namespace System.Web.UI.Design.WebControls
                 try
                 {
                     foreach (
-                        ConnectionStringSettings connStrSettings in webConfig
-                            .ConnectionStrings
+                        ConnectionStringSettings connStrSettings in webConfig.ConnectionStrings
                             .ConnectionStrings
                     )
                     {
@@ -1624,12 +1624,13 @@ namespace System.Web.UI.Design.WebControls
             {
                 EntityContainer container;
                 if (
-                    this.EdmItemCollection.TryGetEntityContainer(
-                        entityContainerName,
-                        true /*ignoreCase*/
-                        ,
-                        out container
-                    ) && (container != null)
+                    this.EdmItemCollection
+                        .TryGetEntityContainer(
+                            entityContainerName,
+                            true /*ignoreCase*/
+                            ,
+                            out container
+                        ) && (container != null)
                 )
                 {
                     EntitySet entitySet;

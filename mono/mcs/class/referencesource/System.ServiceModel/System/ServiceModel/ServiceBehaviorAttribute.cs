@@ -75,8 +75,7 @@ namespace System.ServiceModel
             {
                 if (!AddressFilterModeHelper.IsDefined(value))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new ArgumentOutOfRangeException("value"));
                 }
 
@@ -103,8 +102,7 @@ namespace System.ServiceModel
                 }
                 if (value == string.Empty)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentOutOfRangeException(
                                 "value",
@@ -133,8 +131,7 @@ namespace System.ServiceModel
                         break;
 
                     default:
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(new ArgumentOutOfRangeException("value"));
                 }
 
@@ -168,8 +165,7 @@ namespace System.ServiceModel
             {
                 if (!ConcurrencyModeHelper.IsDefined(value))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new ArgumentOutOfRangeException("value"));
                 }
 
@@ -192,8 +188,7 @@ namespace System.ServiceModel
             {
                 if (!InstanceContextModeHelper.IsDefined(value))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new ArgumentOutOfRangeException("value"));
                 }
 
@@ -253,8 +248,7 @@ namespace System.ServiceModel
             {
                 if (value == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new ArgumentNullException("value"));
                 }
 
@@ -265,8 +259,7 @@ namespace System.ServiceModel
                     if (timeout < TimeSpan.Zero)
                     {
                         string message = SR.GetString(SR.SFxTimeoutOutOfRange0);
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new ArgumentOutOfRangeException("value", value, message)
                             );
@@ -278,8 +271,7 @@ namespace System.ServiceModel
                 }
                 catch (FormatException e)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentException(
                                 SR.GetString(SR.SFxTimeoutInvalidStringFormat),
@@ -290,8 +282,7 @@ namespace System.ServiceModel
                 }
                 catch (OverflowException)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new ArgumentOutOfRangeException("value"));
                 }
             }
@@ -370,8 +361,7 @@ namespace System.ServiceModel
         void SetIsolationLevel(ChannelDispatcher channelDispatcher)
         {
             if (channelDispatcher == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("channelDispatcher");
 
             channelDispatcher.TransactionIsolationLevel = this.transactionIsolationLevel;
@@ -384,8 +374,7 @@ namespace System.ServiceModel
         {
             if (this.concurrencyMode != ConcurrencyMode.Single && this.ensureOrderedDispatch)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(
@@ -503,8 +492,7 @@ namespace System.ServiceModel
                             if (instanceProvider == null)
                             {
                                 if (serviceType == null && this.wellKnownSingleton == null)
-                                    throw DiagnosticUtility
-                                        .ExceptionUtility
+                                    throw DiagnosticUtility.ExceptionUtility
                                         .ThrowHelperError(
                                             new InvalidOperationException(
                                                 SR.GetString(
@@ -517,8 +505,7 @@ namespace System.ServiceModel
                                     this.instanceMode != InstanceContextMode.Single
                                     && this.wellKnownSingleton != null
                                 )
-                                    throw DiagnosticUtility
-                                        .ExceptionUtility
+                                    throw DiagnosticUtility.ExceptionUtility
                                         .ThrowHelperError(
                                             new InvalidOperationException(
                                                 SR.GetString(SR.SFxWellKnownNonSingleton0)

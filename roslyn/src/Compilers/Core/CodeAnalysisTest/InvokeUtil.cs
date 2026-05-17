@@ -143,8 +143,7 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
                 testOutputHelper.WriteLine($"Loaded Assemblies");
                 foreach (
-                    var assembly in AppDomain
-                        .CurrentDomain
+                    var assembly in AppDomain.CurrentDomain
                         .GetAssemblies()
                         .OrderByDescending(x => x.FullName)
                 )

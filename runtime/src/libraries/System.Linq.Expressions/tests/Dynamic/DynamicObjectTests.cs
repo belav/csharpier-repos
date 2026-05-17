@@ -267,8 +267,7 @@ namespace System.Dynamic.Tests
             )
             {
                 if (
-                    binder
-                        .Name
+                    binder.Name
                         .Equals(
                             "Power",
                             binder.IgnoreCase

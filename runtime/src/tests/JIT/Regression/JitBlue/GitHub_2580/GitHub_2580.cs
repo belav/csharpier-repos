@@ -61,8 +61,7 @@ public static class MicrsoftNETBug
     [Fact]
     public static int TestEntryPoint()
     {
-        System
-            .Console
+        System.Console
             .WriteLine(
                 ".NET 4.6.01055 bug repro: unshort comparison below incorrectly outputs False (only) when code is optimized"
             );

@@ -71,9 +71,10 @@ namespace TestUtil
             if (this._outLimit > 0 && this.ToString().Length > this._outLimit)
             {
                 this._bufferIsFull = true;
-                this._outStream.WriteLine(
-                    "ERROR: Output exceeded maximum limit, extra output will be discarded!"
-                );
+                this._outStream
+                    .WriteLine(
+                        "ERROR: Output exceeded maximum limit, extra output will be discarded!"
+                    );
             }
         }
     }

@@ -117,8 +117,7 @@ namespace System.Configuration
             {
                 FactoryRecord parentFactoryRecord = null;
                 if (!configRecord.Parent.IsRootConfig)
-                    parentFactoryRecord = configRecord
-                        .Parent
+                    parentFactoryRecord = configRecord.Parent
                         .FindFactoryRecord(factoryRecord.ConfigKey, true);
 
                 IsDeclarationRequired = parentFactoryRecord?.FactoryTypeName == null;
@@ -145,8 +144,7 @@ namespace System.Configuration
             FactoryRecord factoryRecord = null;
 
             if ((_configRecord != null) && !_configRecord.Parent.IsRootConfig)
-                factoryRecord = _configRecord
-                    .Parent
+                factoryRecord = _configRecord.Parent
                     .FindFactoryRecord(SectionGroupName, permitErrors);
 
             return factoryRecord;

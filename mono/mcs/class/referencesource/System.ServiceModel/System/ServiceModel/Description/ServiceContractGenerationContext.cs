@@ -36,16 +36,13 @@ namespace System.ServiceModel.Description
         )
         {
             if (serviceContractGenerator == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("serviceContractGenerator"));
             if (contract == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("contract"));
             if (contractType == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("contractType"));
 
             this.serviceContractGenerator = serviceContractGenerator;

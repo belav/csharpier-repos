@@ -690,8 +690,7 @@ public class ValidationSummaryTagHelperTest
         );
         validationSummaryTagHelper.ViewContext = viewContext;
 
-        viewContext
-            .ModelState
+        viewContext.ModelState
             .AddModelError(key: nameof(FormMetadata.ID), errorMessage: expectedError);
 
         // Act

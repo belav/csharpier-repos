@@ -47,28 +47,23 @@ namespace Mono.Linker.Tests.TestCasesRunner
             Options.InitAssemblies.Add("System.Private.TypeLoader");
             Options.InitAssemblies.Add("System.Private.Reflection.Execution");
 
-            Options
-                .FeatureSwitches
+            Options.FeatureSwitches
                 .Add(
                     "System.Runtime.Serialization.EnableUnsafeBinaryFormatterSerialization",
                     false
                 );
-            Options
-                .FeatureSwitches
+            Options.FeatureSwitches
                 .Add("System.Resources.ResourceManager.AllowCustomResourceTypes", false);
-            Options
-                .FeatureSwitches
+            Options.FeatureSwitches
                 .Add("System.Linq.Expressions.CanEmitObjectArrayDelegate", false);
-            Options
-                .FeatureSwitches
+            Options.FeatureSwitches
                 .Add(
                     "System.Runtime.CompilerServices.RuntimeFeature.IsDynamicCodeSupported",
                     false
                 );
             Options.FeatureSwitches.Add("System.Diagnostics.Debugger.IsSupported", false);
             Options.FeatureSwitches.Add("System.Text.Encoding.EnableUnsafeUTF7Encoding", false);
-            Options
-                .FeatureSwitches
+            Options.FeatureSwitches
                 .Add("System.Diagnostics.Tracing.EventSource.IsSupported", false);
             Options.FeatureSwitches.Add("System.Globalization.Invariant", true);
             Options.FeatureSwitches.Add("System.Resources.UseSystemResourceKeys", true);

@@ -110,13 +110,14 @@ namespace System.Data.Services.Client
         {
             string sourceEntitySet;
             string targetEntitySet;
-            this.bindingGraph.GetEntityCollectionInfo(
-                collection,
-                out parentEntity,
-                out parentProperty,
-                out sourceEntitySet,
-                out targetEntitySet
-            );
+            this.bindingGraph
+                .GetEntityCollectionInfo(
+                    collection,
+                    out parentEntity,
+                    out parentProperty,
+                    out sourceEntitySet,
+                    out targetEntitySet
+                );
 
             return parentEntity != null;
         }
@@ -184,12 +185,13 @@ namespace System.Data.Services.Client
                                 try
                                 {
                                     this.AttachBehavior = true;
-                                    this.bindingGraph.AddCollection(
-                                        source,
-                                        sourceProperty,
-                                        sourcePropertyValue,
-                                        null
-                                    );
+                                    this.bindingGraph
+                                        .AddCollection(
+                                            source,
+                                            sourceProperty,
+                                            sourcePropertyValue,
+                                            null
+                                        );
                                 }
                                 finally
                                 {
@@ -200,13 +202,14 @@ namespace System.Data.Services.Client
                             break;
 
                         case BindingPropertyKind.BindingPropertyKindEntity:
-                            this.bindingGraph.AddEntity(
-                                source,
-                                sourceProperty,
-                                sourcePropertyValue,
-                                null,
-                                source
-                            );
+                            this.bindingGraph
+                                .AddEntity(
+                                    source,
+                                    sourceProperty,
+                                    sourcePropertyValue,
+                                    null,
+                                    source
+                                );
                             break;
 
                         default:
@@ -217,11 +220,12 @@ namespace System.Data.Services.Client
 
                             if (sourcePropertyValue != null)
                             {
-                                this.bindingGraph.AddComplexProperty(
-                                    source,
-                                    sourceProperty,
-                                    sourcePropertyValue
-                                );
+                                this.bindingGraph
+                                    .AddComplexProperty(
+                                        source,
+                                        sourceProperty,
+                                        sourcePropertyValue
+                                    );
                             }
 
                             this.HandleUpdateEntity(source, sourceProperty, sourcePropertyValue);
@@ -258,13 +262,14 @@ namespace System.Data.Services.Client
             string sourceEntitySet;
             string targetEntitySet;
 
-            this.bindingGraph.GetEntityCollectionInfo(
-                collection,
-                out source,
-                out sourceProperty,
-                out sourceEntitySet,
-                out targetEntitySet
-            );
+            this.bindingGraph
+                .GetEntityCollectionInfo(
+                    collection,
+                    out source,
+                    out sourceProperty,
+                    out sourceEntitySet,
+                    out targetEntitySet
+                );
 
             switch (eventArgs.Action)
             {
@@ -661,11 +666,12 @@ namespace System.Data.Services.Client
 
             if (!BindingEntityInfo.IsEntityType(entity.GetType()))
             {
-                this.bindingGraph.GetAncestorEntityForComplexProperty(
-                    ref entity,
-                    ref propertyName,
-                    ref propertyValue
-                );
+                this.bindingGraph
+                    .GetAncestorEntityForComplexProperty(
+                        ref entity,
+                        ref propertyName,
+                        ref propertyValue
+                    );
             }
 
             Debug.Assert(entity != null, "entity must be provided for update operations.");
@@ -737,13 +743,8 @@ namespace System.Data.Services.Client
                         );
                     }
 
-                    this.bindingGraph.AddEntity(
-                        source,
-                        sourceProperty,
-                        target,
-                        targetEntitySet,
-                        collection
-                    );
+                    this.bindingGraph
+                        .AddEntity(source, sourceProperty, target, targetEntitySet, collection);
                 }
             }
         }
@@ -785,13 +786,14 @@ namespace System.Data.Services.Client
             string sourceEntitySet = null;
             string targetEntitySet = null;
 
-            this.bindingGraph.GetEntityCollectionInfo(
-                collection,
-                out source,
-                out sourceProperty,
-                out sourceEntitySet,
-                out targetEntitySet
-            );
+            this.bindingGraph
+                .GetEntityCollectionInfo(
+                    collection,
+                    out source,
+                    out sourceProperty,
+                    out sourceEntitySet,
+                    out targetEntitySet
+                );
 
             this.DeepRemoveCollection(
                 this.bindingGraph.GetCollectionItems(collection),

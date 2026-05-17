@@ -222,13 +222,11 @@ namespace Microsoft.Extensions.Diagnostics.Metrics
                 }
 
                 if (
-                    !instrument
-                        .Meter
+                    !instrument.Meter
                         .Name
                         .AsSpan()
                         .StartsWith(prefix, StringComparison.OrdinalIgnoreCase)
-                    || !instrument
-                        .Meter
+                    || !instrument.Meter
                         .Name
                         .AsSpan()
                         .EndsWith(suffix, StringComparison.OrdinalIgnoreCase)

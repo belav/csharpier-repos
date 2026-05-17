@@ -176,16 +176,14 @@ namespace System.ServiceModel.Dispatcher
         {
             object customPrincipal;
             if (
-                securityContext
-                    .AuthorizationContext
+                securityContext.AuthorizationContext
                     .Properties
                     .TryGetValue(SecurityUtils.Principal, out customPrincipal)
                 && customPrincipal is IPrincipal
             )
                 return (IPrincipal)customPrincipal;
             else
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(SR.NoPrincipalSpecifiedInAuthorizationContext)
@@ -284,8 +282,7 @@ namespace System.ServiceModel.Dispatcher
                         WindowsSidIdentity sidIdentity = (WindowsSidIdentity)
                             securityContext.PrimaryIdentity;
                         if (
-                            sidIdentity
-                                .SecurityIdentifier
+                            sidIdentity.SecurityIdentifier
                                 .IsWellKnown(WellKnownSidType.AnonymousSid)
                         )
                         {
@@ -493,8 +490,7 @@ namespace System.ServiceModel.Dispatcher
                 || (delimiterPos == downlevelName.Length - 1)
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperWarning(
                         new InvalidOperationException(
                             SR.GetString(SR.DownlevelNameCannotMapToUpn, downlevelName)
@@ -542,8 +538,7 @@ namespace System.ServiceModel.Dispatcher
                         )
                         {
                             errorCode = Marshal.GetLastWin32Error();
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperWarning(
                                     new InvalidOperationException(
                                         SR.GetString(SR.DownlevelNameCannotMapToUpn, downlevelName),
@@ -554,8 +549,7 @@ namespace System.ServiceModel.Dispatcher
                     }
                     else
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperWarning(
                                 new InvalidOperationException(
                                     SR.GetString(SR.DownlevelNameCannotMapToUpn, downlevelName),
@@ -661,8 +655,7 @@ namespace System.ServiceModel.Dispatcher
                     }
                     else
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(new Win32Exception(error));
                     }
                 }
@@ -670,8 +663,7 @@ namespace System.ServiceModel.Dispatcher
                 if (!SafeNativeMethods.ImpersonateAnonymousUserOnCurrentThread(threadHandle))
                 {
                     int error = Marshal.GetLastWin32Error();
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new Win32Exception(error));
                 }
 
@@ -701,8 +693,7 @@ namespace System.ServiceModel.Dispatcher
                     if (!SafeNativeMethods.SetCurrentThreadToken(IntPtr.Zero, this.tokenHandle))
                     {
                         int error = Marshal.GetLastWin32Error();
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new SecurityException(
                                     SR.GetString(

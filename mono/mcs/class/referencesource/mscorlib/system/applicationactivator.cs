@@ -116,8 +116,7 @@ namespace System.Runtime.Hosting
         [System.Security.SecurityCritical] // auto-generated
         internal int ExecuteAsAssembly()
         {
-            Object[] attrs = EntryAssembly
-                .EntryPoint
+            Object[] attrs = EntryAssembly.EntryPoint
                 .GetCustomAttributes(typeof(STAThreadAttribute), false);
             if (attrs.Length > 0)
                 m_apt = ApartmentState.STA;

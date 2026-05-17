@@ -90,8 +90,7 @@ namespace Microsoft.CodeAnalysis.Options
             );
             Debug.Assert(
                 LanguageName is LanguageNames.CSharp
-                    == Definition
-                        .ConfigName
+                    == Definition.ConfigName
                         .StartsWith(
                             OptionDefinition.CSharpConfigNamePrefix,
                             StringComparison.Ordinal
@@ -99,8 +98,7 @@ namespace Microsoft.CodeAnalysis.Options
             );
             Debug.Assert(
                 LanguageName is LanguageNames.VisualBasic
-                    == Definition
-                        .ConfigName
+                    == Definition.ConfigName
                         .StartsWith(
                             OptionDefinition.VisualBasicConfigNamePrefix,
                             StringComparison.Ordinal

@@ -20,8 +20,7 @@ internal partial class EndpointHtmlRenderer
     {
         SetHttpContext(httpContext);
 
-        var manager = _httpContext
-            .RequestServices
+        var manager = _httpContext.RequestServices
             .GetRequiredService<ComponentStatePersistenceManager>();
 
         var renderModesMetadata = httpContext
@@ -151,8 +150,7 @@ internal partial class EndpointHtmlRenderer
             }
         }
 
-        var manager = _httpContext
-            .RequestServices
+        var manager = _httpContext.RequestServices
             .GetRequiredService<ComponentStatePersistenceManager>();
 
         // Now given the mode, we obtain a particular store for that mode

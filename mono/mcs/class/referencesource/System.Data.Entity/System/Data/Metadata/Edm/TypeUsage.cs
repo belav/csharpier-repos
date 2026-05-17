@@ -446,8 +446,7 @@ namespace System.Data.Metadata.Edm
                     MetadataCollection<Facet> facets = new MetadataCollection<Facet>(GetFacets());
                     // we never modify the collection so we can set it readonly from the start
                     facets.SetReadOnly();
-                    System
-                        .Threading
+                    System.Threading
                         .Interlocked
                         .CompareExchange(ref _facets, facets.AsReadOnlyMetadataCollection(), null);
                 }
@@ -495,8 +494,7 @@ namespace System.Data.Metadata.Edm
                 }
                 else if (Helper.IsRefType(edmType))
                 {
-                    System
-                        .Diagnostics
+                    System.Diagnostics
                         .Debug
                         .Assert(((RefType)edmType).ElementType.DataSpace == DataSpace.CSpace);
                     result = this;
@@ -508,8 +506,7 @@ namespace System.Data.Metadata.Edm
                     if (result == null)
                     {
                         throw EntityUtil.ProviderIncompatible(
-                            System
-                                .Data
+                            System.Data
                                 .Entity
                                 .Strings
                                 .Mapping_ProviderReturnsNullType(this.ToString())
@@ -530,8 +527,7 @@ namespace System.Data.Metadata.Edm
                 }
                 else
                 {
-                    System
-                        .Diagnostics
+                    System.Diagnostics
                         .Debug
                         .Assert(false, "Unexpected type found in entity data reader");
                     return null;

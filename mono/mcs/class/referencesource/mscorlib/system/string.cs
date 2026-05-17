@@ -683,32 +683,28 @@ namespace System
             {
                 case StringComparison.CurrentCulture:
                     return (
-                        CultureInfo
-                            .CurrentCulture
+                        CultureInfo.CurrentCulture
                             .CompareInfo
                             .Compare(this, value, CompareOptions.None) == 0
                     );
 
                 case StringComparison.CurrentCultureIgnoreCase:
                     return (
-                        CultureInfo
-                            .CurrentCulture
+                        CultureInfo.CurrentCulture
                             .CompareInfo
                             .Compare(this, value, CompareOptions.IgnoreCase) == 0
                     );
 
                 case StringComparison.InvariantCulture:
                     return (
-                        CultureInfo
-                            .InvariantCulture
+                        CultureInfo.InvariantCulture
                             .CompareInfo
                             .Compare(this, value, CompareOptions.None) == 0
                     );
 
                 case StringComparison.InvariantCultureIgnoreCase:
                     return (
-                        CultureInfo
-                            .InvariantCulture
+                        CultureInfo.InvariantCulture
                             .CompareInfo
                             .Compare(this, value, CompareOptions.IgnoreCase) == 0
                     );
@@ -792,8 +788,7 @@ namespace System
 
                 case StringComparison.CurrentCultureIgnoreCase:
                     return (
-                        CultureInfo
-                            .CurrentCulture
+                        CultureInfo.CurrentCulture
                             .CompareInfo
                             .Compare(a, b, CompareOptions.IgnoreCase) == 0
                     );
@@ -806,8 +801,7 @@ namespace System
 
                 case StringComparison.InvariantCultureIgnoreCase:
                     return (
-                        CultureInfo
-                            .InvariantCulture
+                        CultureInfo.InvariantCulture
                             .CompareInfo
                             .Compare(a, b, CompareOptions.IgnoreCase) == 0
                     );
@@ -2217,8 +2211,7 @@ namespace System
         {
             if (ignoreCase)
             {
-                return CultureInfo
-                    .CurrentCulture
+                return CultureInfo.CurrentCulture
                     .CompareInfo
                     .Compare(strA, strB, CompareOptions.IgnoreCase);
             }
@@ -2263,26 +2256,22 @@ namespace System
             switch (comparisonType)
             {
                 case StringComparison.CurrentCulture:
-                    return CultureInfo
-                        .CurrentCulture
+                    return CultureInfo.CurrentCulture
                         .CompareInfo
                         .Compare(strA, strB, CompareOptions.None);
 
                 case StringComparison.CurrentCultureIgnoreCase:
-                    return CultureInfo
-                        .CurrentCulture
+                    return CultureInfo.CurrentCulture
                         .CompareInfo
                         .Compare(strA, strB, CompareOptions.IgnoreCase);
 
                 case StringComparison.InvariantCulture:
-                    return CultureInfo
-                        .InvariantCulture
+                    return CultureInfo.InvariantCulture
                         .CompareInfo
                         .Compare(strA, strB, CompareOptions.None);
 
                 case StringComparison.InvariantCultureIgnoreCase:
-                    return CultureInfo
-                        .InvariantCulture
+                    return CultureInfo.InvariantCulture
                         .CompareInfo
                         .Compare(strA, strB, CompareOptions.IgnoreCase);
 
@@ -2379,8 +2368,7 @@ namespace System
                     lengthB = (strB.Length - indexB);
                 }
             }
-            return CultureInfo
-                .CurrentCulture
+            return CultureInfo.CurrentCulture
                 .CompareInfo
                 .Compare(strA, indexA, lengthA, strB, indexB, lengthB, CompareOptions.None);
         }
@@ -2420,8 +2408,7 @@ namespace System
 
             if (ignoreCase)
             {
-                return CultureInfo
-                    .CurrentCulture
+                return CultureInfo.CurrentCulture
                     .CompareInfo
                     .Compare(
                         strA,
@@ -2433,8 +2420,7 @@ namespace System
                         CompareOptions.IgnoreCase
                     );
             }
-            return CultureInfo
-                .CurrentCulture
+            return CultureInfo.CurrentCulture
                 .CompareInfo
                 .Compare(strA, indexA, lengthA, strB, indexB, lengthB, CompareOptions.None);
         }
@@ -2482,8 +2468,7 @@ namespace System
 
             if (ignoreCase)
             {
-                return culture
-                    .CompareInfo
+                return culture.CompareInfo
                     .Compare(
                         strA,
                         indexA,
@@ -2496,8 +2481,7 @@ namespace System
             }
             else
             {
-                return culture
-                    .CompareInfo
+                return culture.CompareInfo
                     .Compare(strA, indexA, lengthA, strB, indexB, lengthB, CompareOptions.None);
             }
         }
@@ -2542,8 +2526,7 @@ namespace System
                 }
             }
 
-            return culture
-                .CompareInfo
+            return culture.CompareInfo
                 .Compare(strA, indexA, lengthA, strB, indexB, lengthB, options);
         }
 
@@ -2648,14 +2631,12 @@ namespace System
             switch (comparisonType)
             {
                 case StringComparison.CurrentCulture:
-                    return CultureInfo
-                        .CurrentCulture
+                    return CultureInfo.CurrentCulture
                         .CompareInfo
                         .Compare(strA, indexA, lengthA, strB, indexB, lengthB, CompareOptions.None);
 
                 case StringComparison.CurrentCultureIgnoreCase:
-                    return CultureInfo
-                        .CurrentCulture
+                    return CultureInfo.CurrentCulture
                         .CompareInfo
                         .Compare(
                             strA,
@@ -2668,14 +2649,12 @@ namespace System
                         );
 
                 case StringComparison.InvariantCulture:
-                    return CultureInfo
-                        .InvariantCulture
+                    return CultureInfo.InvariantCulture
                         .CompareInfo
                         .Compare(strA, indexA, lengthA, strB, indexB, lengthB, CompareOptions.None);
 
                 case StringComparison.InvariantCultureIgnoreCase:
-                    return CultureInfo
-                        .InvariantCulture
+                    return CultureInfo.InvariantCulture
                         .CompareInfo
                         .Compare(
                             strA,
@@ -2854,26 +2833,22 @@ namespace System
             switch (comparisonType)
             {
                 case StringComparison.CurrentCulture:
-                    return CultureInfo
-                        .CurrentCulture
+                    return CultureInfo.CurrentCulture
                         .CompareInfo
                         .IsSuffix(this, value, CompareOptions.None);
 
                 case StringComparison.CurrentCultureIgnoreCase:
-                    return CultureInfo
-                        .CurrentCulture
+                    return CultureInfo.CurrentCulture
                         .CompareInfo
                         .IsSuffix(this, value, CompareOptions.IgnoreCase);
 
                 case StringComparison.InvariantCulture:
-                    return CultureInfo
-                        .InvariantCulture
+                    return CultureInfo.InvariantCulture
                         .CompareInfo
                         .IsSuffix(this, value, CompareOptions.None);
 
                 case StringComparison.InvariantCultureIgnoreCase:
-                    return CultureInfo
-                        .InvariantCulture
+                    return CultureInfo.InvariantCulture
                         .CompareInfo
                         .IsSuffix(this, value, CompareOptions.IgnoreCase);
 
@@ -2932,8 +2907,7 @@ namespace System
             else
                 referenceCulture = culture;
 
-            return referenceCulture
-                .CompareInfo
+            return referenceCulture.CompareInfo
                 .IsSuffix(
                     this,
                     value,
@@ -3083,39 +3057,33 @@ namespace System
             switch (comparisonType)
             {
                 case StringComparison.CurrentCulture:
-                    return CultureInfo
-                        .CurrentCulture
+                    return CultureInfo.CurrentCulture
                         .CompareInfo
                         .IndexOf(this, value, startIndex, count, CompareOptions.None);
 
                 case StringComparison.CurrentCultureIgnoreCase:
-                    return CultureInfo
-                        .CurrentCulture
+                    return CultureInfo.CurrentCulture
                         .CompareInfo
                         .IndexOf(this, value, startIndex, count, CompareOptions.IgnoreCase);
 
                 case StringComparison.InvariantCulture:
-                    return CultureInfo
-                        .InvariantCulture
+                    return CultureInfo.InvariantCulture
                         .CompareInfo
                         .IndexOf(this, value, startIndex, count, CompareOptions.None);
 
                 case StringComparison.InvariantCultureIgnoreCase:
-                    return CultureInfo
-                        .InvariantCulture
+                    return CultureInfo.InvariantCulture
                         .CompareInfo
                         .IndexOf(this, value, startIndex, count, CompareOptions.IgnoreCase);
 
                 case StringComparison.Ordinal:
-                    return CultureInfo
-                        .InvariantCulture
+                    return CultureInfo.InvariantCulture
                         .CompareInfo
                         .IndexOf(this, value, startIndex, count, CompareOptions.Ordinal);
 
                 case StringComparison.OrdinalIgnoreCase:
                     if (value.IsAscii() && this.IsAscii())
-                        return CultureInfo
-                            .InvariantCulture
+                        return CultureInfo.InvariantCulture
                             .CompareInfo
                             .IndexOf(this, value, startIndex, count, CompareOptions.IgnoreCase);
                     else
@@ -3282,38 +3250,32 @@ namespace System
             switch (comparisonType)
             {
                 case StringComparison.CurrentCulture:
-                    return CultureInfo
-                        .CurrentCulture
+                    return CultureInfo.CurrentCulture
                         .CompareInfo
                         .LastIndexOf(this, value, startIndex, count, CompareOptions.None);
 
                 case StringComparison.CurrentCultureIgnoreCase:
-                    return CultureInfo
-                        .CurrentCulture
+                    return CultureInfo.CurrentCulture
                         .CompareInfo
                         .LastIndexOf(this, value, startIndex, count, CompareOptions.IgnoreCase);
 
                 case StringComparison.InvariantCulture:
-                    return CultureInfo
-                        .InvariantCulture
+                    return CultureInfo.InvariantCulture
                         .CompareInfo
                         .LastIndexOf(this, value, startIndex, count, CompareOptions.None);
 
                 case StringComparison.InvariantCultureIgnoreCase:
-                    return CultureInfo
-                        .InvariantCulture
+                    return CultureInfo.InvariantCulture
                         .CompareInfo
                         .LastIndexOf(this, value, startIndex, count, CompareOptions.IgnoreCase);
                 case StringComparison.Ordinal:
-                    return CultureInfo
-                        .InvariantCulture
+                    return CultureInfo.InvariantCulture
                         .CompareInfo
                         .LastIndexOf(this, value, startIndex, count, CompareOptions.Ordinal);
 
                 case StringComparison.OrdinalIgnoreCase:
                     if (value.IsAscii() && this.IsAscii())
-                        return CultureInfo
-                            .InvariantCulture
+                        return CultureInfo.InvariantCulture
                             .CompareInfo
                             .LastIndexOf(this, value, startIndex, count, CompareOptions.IgnoreCase);
                     else
@@ -3412,26 +3374,22 @@ namespace System
             switch (comparisonType)
             {
                 case StringComparison.CurrentCulture:
-                    return CultureInfo
-                        .CurrentCulture
+                    return CultureInfo.CurrentCulture
                         .CompareInfo
                         .IsPrefix(this, value, CompareOptions.None);
 
                 case StringComparison.CurrentCultureIgnoreCase:
-                    return CultureInfo
-                        .CurrentCulture
+                    return CultureInfo.CurrentCulture
                         .CompareInfo
                         .IsPrefix(this, value, CompareOptions.IgnoreCase);
 
                 case StringComparison.InvariantCulture:
-                    return CultureInfo
-                        .InvariantCulture
+                    return CultureInfo.InvariantCulture
                         .CompareInfo
                         .IsPrefix(this, value, CompareOptions.None);
 
                 case StringComparison.InvariantCultureIgnoreCase:
-                    return CultureInfo
-                        .InvariantCulture
+                    return CultureInfo.InvariantCulture
                         .CompareInfo
                         .IsPrefix(this, value, CompareOptions.IgnoreCase);
 
@@ -3487,8 +3445,7 @@ namespace System
             else
                 referenceCulture = culture;
 
-            return referenceCulture
-                .CompareInfo
+            return referenceCulture.CompareInfo
                 .IsPrefix(
                     this,
                     value,

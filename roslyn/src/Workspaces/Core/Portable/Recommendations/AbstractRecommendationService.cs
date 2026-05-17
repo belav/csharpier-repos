@@ -72,8 +72,7 @@ namespace Microsoft.CodeAnalysis.Recommendations
             CancellationToken cancellationToken
         )
         {
-            var enclosingSymbol = context
-                .SemanticModel
+            var enclosingSymbol = context.SemanticModel
                 .GetEnclosingSymbol(context.LeftToken.SpanStart, cancellationToken);
             if (enclosingSymbol != null)
             {
@@ -145,8 +144,7 @@ namespace Microsoft.CodeAnalysis.Recommendations
                 if (_context.IsAttributeNameContext)
                 {
                     return symbol.IsOrContainsAccessibleAttribute(
-                        _context
-                            .SemanticModel
+                        _context.SemanticModel
                             .GetEnclosingNamedType(
                                 _context.LeftToken.SpanStart,
                                 _cancellationToken
@@ -202,8 +200,7 @@ namespace Microsoft.CodeAnalysis.Recommendations
             {
                 if (_lazyEnclosingTypeBases.IsDefault)
                 {
-                    var enclosingType = _context
-                        .SemanticModel
+                    var enclosingType = _context.SemanticModel
                         .GetEnclosingNamedType(_context.LeftToken.SpanStart, _cancellationToken);
                     _lazyEnclosingTypeBases =
                         enclosingType == null

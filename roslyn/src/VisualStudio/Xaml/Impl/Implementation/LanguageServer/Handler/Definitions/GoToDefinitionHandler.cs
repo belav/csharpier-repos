@@ -68,8 +68,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.Implementation.LanguageSe
                 return locations.ToArray();
             }
 
-            var xamlGoToDefinitionService = document
-                .Project
+            var xamlGoToDefinitionService = document.Project
                 .Services
                 .GetService<IXamlGoToDefinitionService>();
             if (xamlGoToDefinitionService == null)
@@ -167,8 +166,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.Implementation.LanguageSe
             if (sourceDefinition.Span != null)
             {
                 // If the Span is not null, use the span.
-                var document = context
-                    .Solution
+                var document = context.Solution
                     ?.GetDocuments(ProtocolConversions.CreateAbsoluteUri(sourceDefinition.FilePath))
                     .FirstOrDefault();
                 if (document != null)

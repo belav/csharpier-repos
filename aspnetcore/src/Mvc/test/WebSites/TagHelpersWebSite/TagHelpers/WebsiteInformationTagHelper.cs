@@ -14,8 +14,7 @@ public class WebsiteInformationTagHelper : TagHelper
     public override void Process(TagHelperContext context, TagHelperOutput output)
     {
         output.TagName = "section";
-        output
-            .PostContent
+        output.PostContent
             .AppendHtml(
                 string.Format(
                     CultureInfo.InvariantCulture,

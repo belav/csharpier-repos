@@ -217,11 +217,9 @@ namespace System.Net.Http.Functional.Tests
                 {
                     using (HttpClient client = CreateHttpClient())
                     {
-                        client
-                            .DefaultRequestHeaders
+                        client.DefaultRequestHeaders
                             .TryAddWithoutValidation("Accept-Language", "en-US,en;q=0.5"); // validation would add spaces
-                        client
-                            .DefaultRequestHeaders
+                        client.DefaultRequestHeaders
                             .TryAddWithoutValidation("From", "invalidemail"); // would fail to parse if validated
 
                         var m = new HttpRequestMessage(HttpMethod.Get, uri)
@@ -594,8 +592,7 @@ namespace System.Net.Http.Functional.Tests
                         ValidateResponseHeaders(response1, totalSize, mode);
 
                         // Read part but not all of response
-                        Stream responseStream = await response1
-                            .Content
+                        Stream responseStream = await response1.Content
                             .ReadAsStreamAsync(TestAsync);
                         await ReadToByteCount(responseStream, readSize);
 
@@ -907,8 +904,7 @@ namespace System.Net.Http.Functional.Tests
                         {
                             // client will send CONNECT and if that succeeds it will negotiate TLS
 
-                            var sslConnection = await LoopbackServer
-                                .Connection
+                            var sslConnection = await LoopbackServer.Connection
                                 .CreateAsync(
                                     null,
                                     connection.Stream,
@@ -1219,8 +1215,7 @@ namespace System.Net.Http.Functional.Tests
                             response.TrailingHeaders.GetValues("MyCoolTrailerHeader")
                         );
                         Assert.False(
-                            response
-                                .TrailingHeaders
+                            response.TrailingHeaders
                                 .TryGetValues(name, out IEnumerable<string> values)
                         );
                         Assert.Contains("Loopback", response.TrailingHeaders.GetValues("Server"));
@@ -1984,8 +1979,7 @@ namespace System.Net.Http.Functional.Tests
             bool lineFolds
         )
         {
-            Memory<byte> responsePrefix = Encoding
-                .ASCII
+            Memory<byte> responsePrefix = Encoding.ASCII
                 .GetBytes(
                     trailingHeaders
                         ? "HTTP/1.1 200 OK\r\nTransfer-Encoding: chunked\r\n\r\n0\r\nLong-Header: "
@@ -2155,8 +2149,7 @@ namespace System.Net.Http.Functional.Tests
                                 );
 
                                 using (
-                                    Stream clientStream = await (await getResponseTask)
-                                        .Content
+                                    Stream clientStream = await (await getResponseTask).Content
                                         .ReadAsStreamAsync(TestAsync)
                                 )
                                 {
@@ -2281,22 +2274,22 @@ namespace System.Net.Http.Functional.Tests
                                     );
                                     Assert.Equal("and", await connection.ReadLineAsync());
 
-                                    await Task.Factory.FromAsync(
-                                        clientStream.BeginWrite,
-                                        clientStream.EndWrite,
-                                        "beyond\r\n"u8.ToArray(),
-                                        0,
-                                        8,
-                                        null
-                                    );
+                                    await Task.Factory
+                                        .FromAsync(
+                                            clientStream.BeginWrite,
+                                            clientStream.EndWrite,
+                                            "beyond\r\n"u8.ToArray(),
+                                            0,
+                                            8,
+                                            null
+                                        );
                                     Assert.Equal("beyond", await connection.ReadLineAsync());
 
                                     clientStream.Flush();
                                     await clientStream.FlushAsync();
 
                                     // Validate reading APIs on clientStream
-                                    await connection
-                                        .Stream
+                                    await connection.Stream
                                         .WriteAsync("abcdefghijklmnopqrstuvwxyz"u8.ToArray());
                                     var buffer = new byte[1];
 
@@ -2322,14 +2315,15 @@ namespace System.Net.Http.Functional.Tests
 
                                     Assert.Equal(
                                         1,
-                                        await Task.Factory.FromAsync(
-                                            clientStream.BeginRead,
-                                            clientStream.EndRead,
-                                            buffer,
-                                            0,
-                                            1,
-                                            null
-                                        )
+                                        await Task.Factory
+                                            .FromAsync(
+                                                clientStream.BeginRead,
+                                                clientStream.EndRead,
+                                                buffer,
+                                                0,
+                                                1,
+                                                null
+                                            )
                                     );
                                     Assert.Equal((byte)'f', buffer[0]);
 
@@ -3326,8 +3320,7 @@ namespace System.Net.Http.Functional.Tests
     [SkipOnPlatform(TestPlatforms.Browser, "Headers.Location are not supported on Browser")]
     public sealed class SocketsHttpHandlerTest_LocationHeader
     {
-        private static readonly byte[] s_redirectResponseBefore = Encoding
-            .ASCII
+        private static readonly byte[] s_redirectResponseBefore = Encoding.ASCII
             .GetBytes(
                 "HTTP/1.1 301 Moved Permanently\r\n"
                     + "Connection: close\r\n"
@@ -3335,8 +3328,7 @@ namespace System.Net.Http.Functional.Tests
                     + "Location: "
             );
 
-        private static readonly byte[] s_redirectResponseAfter = Encoding
-            .ASCII
+        private static readonly byte[] s_redirectResponseAfter = Encoding.ASCII
             .GetBytes("\r\n" + "Server: Loopback\r\n" + "\r\n" + "0\r\n\r\n");
 
         [Theory]
@@ -5022,8 +5014,7 @@ namespace System.Net.Http.Functional.Tests
                     );
 
                     using (
-                        X509Certificate2 cert = System
-                            .Net
+                        X509Certificate2 cert = System.Net
                             .Test
                             .Common
                             .Configuration
@@ -5361,8 +5352,7 @@ namespace System.Net.Http.Functional.Tests
                     using HttpResponseMessage response = await client.GetAsync(uri);
 
                     Assert.True(
-                        response
-                            .Headers
+                        response.Headers
                             .NonValidated
                             .TryGetValues("foo", out HeaderStringValues values)
                     );
@@ -5667,8 +5657,7 @@ namespace System.Net.Http.Functional.Tests
         public async Task SslOptions_CustomTrust_Ok()
         {
             X509Certificate2Collection caCerts = new X509Certificate2Collection();
-            X509Certificate2 certificate = Configuration
-                .Certificates
+            X509Certificate2 certificate = Configuration.Certificates
                 .GetDynamicServerCerttificate(caCerts);
 
             GenericLoopbackOptions options = new GenericLoopbackOptions()
@@ -5725,8 +5714,7 @@ namespace System.Net.Http.Functional.Tests
         public async Task SslOptions_InvalidName_Throws()
         {
             X509Certificate2Collection caCerts = new X509Certificate2Collection();
-            using X509Certificate2 certificate = Configuration
-                .Certificates
+            using X509Certificate2 certificate = Configuration.Certificates
                 .GetDynamicServerCerttificate(caCerts);
 
             GenericLoopbackOptions options = new GenericLoopbackOptions()
@@ -5774,8 +5762,7 @@ namespace System.Net.Http.Functional.Tests
         public async Task SslOptions_CustomPolicy_IgnoresNameMismatch()
         {
             X509Certificate2Collection caCerts = new X509Certificate2Collection();
-            X509Certificate2 certificate = Configuration
-                .Certificates
+            X509Certificate2 certificate = Configuration.Certificates
                 .GetDynamicServerCerttificate(caCerts);
 
             GenericLoopbackOptions options = new GenericLoopbackOptions()
@@ -6031,8 +6018,7 @@ namespace System.Net.Http.Functional.Tests
         [Fact]
         public async Task VersionNegitioationError()
         {
-            await Http11LoopbackServerFactory
-                .Singleton
+            await Http11LoopbackServerFactory.Singleton
                 .CreateClientAndServerAsync(
                     async uri =>
                     {

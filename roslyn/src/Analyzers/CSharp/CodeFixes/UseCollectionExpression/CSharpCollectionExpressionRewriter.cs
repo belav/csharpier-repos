@@ -143,8 +143,7 @@ internal static class CSharpCollectionExpressionRewriter
                 );
 
                 // Update the doc with the new object (now with initializer).
-                var updatedRoot = document
-                    .Root
+                var updatedRoot = document.Root
                     .ReplaceNode(
                         expressionToReplace,
                         withInitializer(expressionToReplace, initializer)
@@ -240,8 +239,7 @@ internal static class CSharpCollectionExpressionRewriter
             // preserve the formatting of the original initializer and the new collection expression.
 
             if (
-                !document
-                    .Text
+                !document.Text
                     .AreOnSameLine(initializer.GetFirstToken(), initializer.GetLastToken())
             )
             {
@@ -256,8 +254,7 @@ internal static class CSharpCollectionExpressionRewriter
 
                 if (
                     !makeMultiLineCollectionExpression
-                    && document
-                        .Text
+                    && document.Text
                         .AreOnSameLine(
                             initializer.Expressions.First().GetFirstToken(),
                             initializer.Expressions.Last().GetLastToken()
@@ -287,8 +284,7 @@ internal static class CSharpCollectionExpressionRewriter
                 {
                     // We want the new items to be multiline *or* existing items were on different lines already.
                     // Figure out what the preferred indentation is, and prepend each new item with it.
-                    var preferredIndentation = initializer
-                        .Expressions
+                    var preferredIndentation = initializer.Expressions
                         .First()
                         .GetFirstToken()
                         .GetPreferredIndentation(document, indentationOptions, cancellationToken);
@@ -319,8 +315,7 @@ internal static class CSharpCollectionExpressionRewriter
                     );
 
                 if (
-                    document
-                        .Text
+                    document.Text
                         .AreOnSameLine(
                             initializer.OpenBraceToken.GetPreviousToken(),
                             initializer.OpenBraceToken
@@ -328,11 +323,9 @@ internal static class CSharpCollectionExpressionRewriter
                 )
                 {
                     // Determine where both the braces and the items would like to be wrapped to.
-                    var preferredBraceIndentation = initializer
-                        .OpenBraceToken
+                    var preferredBraceIndentation = initializer.OpenBraceToken
                         .GetPreferredIndentation(document, indentationOptions, cancellationToken);
-                    var preferredItemIndentation = initializer
-                        .Expressions
+                    var preferredItemIndentation = initializer.Expressions
                         .First()
                         .GetFirstToken()
                         .GetPreferredIndentation(document, indentationOptions, cancellationToken);
@@ -340,16 +333,14 @@ internal static class CSharpCollectionExpressionRewriter
                     // Update both the braces and initial elements to the right location.
                     initialCollection = initialCollection.Update(
                         RemoveTrailingWhitespace(
-                            initialCollection
-                                .OpenBracketToken
+                            initialCollection.OpenBracketToken
                                 .WithLeadingTrivia(endOfLine, Whitespace(preferredBraceIndentation))
                         ),
                         FixLeadingAndTrailingWhitespace(
                             initialCollection.Elements,
                             preferredItemIndentation
                         ),
-                        initialCollection
-                            .CloseBracketToken
+                        initialCollection.CloseBracketToken
                             .WithLeadingTrivia(endOfLine, Whitespace(preferredBraceIndentation))
                     );
 
@@ -375,8 +366,7 @@ internal static class CSharpCollectionExpressionRewriter
 
                     // Here, the brace is already in the right location.  So all we need to do is determine the preferred indentation for the items.
                     var braceIndentation = GetIndentationStringForToken(initializer.OpenBraceToken);
-                    var preferredItemIndentation = initializer
-                        .Expressions
+                    var preferredItemIndentation = initializer.Expressions
                         .First()
                         .GetFirstToken()
                         .GetPreferredIndentation(document, indentationOptions, cancellationToken);
@@ -387,8 +377,7 @@ internal static class CSharpCollectionExpressionRewriter
                             initialCollection.Elements,
                             preferredItemIndentation
                         ),
-                        initialCollection
-                            .CloseBracketToken
+                        initialCollection.CloseBracketToken
                             .WithLeadingTrivia(endOfLine, Whitespace(braceIndentation))
                     );
 
@@ -690,8 +679,7 @@ internal static class CSharpCollectionExpressionRewriter
             if (preferredIndentation is null)
                 return expression.WithoutLeadingTrivia();
 
-            var startLine = document
-                .Text
+            var startLine = document.Text
                 .Lines
                 .GetLineFromPosition(GetAnchorNode(expression).SpanStart);
             var firstTokenOnLineIndentationString = GetIndentationStringForToken(
@@ -943,8 +931,7 @@ internal static class CSharpCollectionExpressionRewriter
                 {
                     // if any of the expressions we're adding are multiline, then make things multiline.
                     if (
-                        !document
-                            .Text
+                        !document.Text
                             .AreOnSameLine(component.GetFirstToken(), component.GetLastToken())
                     )
                         return true;

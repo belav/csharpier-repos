@@ -234,8 +234,7 @@ namespace System.Media
                 IsLoadCompleted = true;
 
                 ValidateSoundFile(localPath);
-                Interop
-                    .WinMM
+                Interop.WinMM
                     .PlaySound(localPath, IntPtr.Zero, Interop.WinMM.SND_NODEFAULT | flags);
             }
             else
@@ -243,8 +242,7 @@ namespace System.Media
                 LoadSync();
                 Debug.Assert(_streamData != null);
                 ValidateSoundData(_streamData);
-                Interop
-                    .WinMM
+                Interop.WinMM
                     .PlaySound(
                         _streamData,
                         IntPtr.Zero,
@@ -558,8 +556,7 @@ namespace System.Media
 
         private unsafe void ValidateSoundFile(string fileName)
         {
-            IntPtr hMIO = Interop
-                .WinMM
+            IntPtr hMIO = Interop.WinMM
                 .mmioOpen(
                     fileName,
                     IntPtr.Zero,

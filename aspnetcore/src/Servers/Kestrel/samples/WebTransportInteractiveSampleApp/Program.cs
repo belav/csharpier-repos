@@ -19,8 +19,7 @@ var hash = SHA256.HashData(certificate.RawData);
 var certStr = Convert.ToBase64String(hash);
 
 // configure the ports
-builder
-    .WebHost
+builder.WebHost
     .ConfigureKestrel(
         (context, options) =>
         {
@@ -157,8 +156,7 @@ static async Task ApplySpecialCommands(IWebTransportSession session, string mess
             var stream = await session.OpenUnidirectionalStreamAsync();
             if (stream is not null)
             {
-                await stream
-                    .Transport
+                await stream.Transport
                     .Output
                     .WriteAsync(
                         new(
@@ -203,19 +201,19 @@ static X509Certificate2 GenerateManualCertificate()
     using var ec = ECDsa.Create(ECCurve.NamedCurves.nistP256);
     CertificateRequest req = new("CN=localhost", ec, HashAlgorithmName.SHA256);
     // Adds purpose
-    req.CertificateExtensions.Add(
-        new X509EnhancedKeyUsageExtension(
-            new OidCollection
-            {
-                new("1.3.6.1.5.5.7.3.1"), // serverAuth
-            },
-            false
-        )
-    );
+    req.CertificateExtensions
+        .Add(
+            new X509EnhancedKeyUsageExtension(
+                new OidCollection
+                {
+                    new("1.3.6.1.5.5.7.3.1"), // serverAuth
+                },
+                false
+            )
+        );
     // Adds usage
-    req.CertificateExtensions.Add(
-        new X509KeyUsageExtension(X509KeyUsageFlags.DigitalSignature, false)
-    );
+    req.CertificateExtensions
+        .Add(new X509KeyUsageExtension(X509KeyUsageFlags.DigitalSignature, false));
     // Adds subject alternate names
     req.CertificateExtensions.Add(sanBuilder.Build());
     // Sign

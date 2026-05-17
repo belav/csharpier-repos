@@ -143,8 +143,7 @@ internal static class IdentityComponentsEndpointRouteBuilderExtensions
                 );
                 var fileBytes = JsonSerializer.SerializeToUtf8Bytes(personalData);
 
-                context
-                    .Response
+                context.Response
                     .Headers
                     .TryAdd("Content-Disposition", "attachment; filename=PersonalData.json");
                 return TypedResults.File(

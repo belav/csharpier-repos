@@ -219,8 +219,7 @@ namespace System.Security.Cryptography
                 {
                     // If Seed is not present, back fill both counter and seed with 0xff. Do not use parameters.Counter as CNG is more strict than CAPI and will reject
                     // anything other than 0xffffffff. That could complicate efforts to switch usage of DSACryptoServiceProvider to DSACng.
-                    Interop
-                        .BCrypt
+                    Interop.BCrypt
                         .EmitByte(blob, ref offset, 0xff, Sha1HashOutputSize + sizeof(int));
                 }
 
@@ -393,30 +392,24 @@ namespace System.Security.Cryptography
                         dsaParams.Counter = BinaryPrimitives.ReadInt32BigEndian(
                             Interop.BCrypt.Consume(dsaBlob, ref offset, 4)
                         );
-                        dsaParams.Seed = Interop
-                            .BCrypt
+                        dsaParams.Seed = Interop.BCrypt
                             .Consume(dsaBlob, ref offset, Sha1HashOutputSize);
-                        dsaParams.Q = Interop
-                            .BCrypt
+                        dsaParams.Q = Interop.BCrypt
                             .Consume(dsaBlob, ref offset, Sha1HashOutputSize);
 
                         Debug.Assert(
                             offset == sizeof(BCRYPT_DSA_KEY_BLOB),
                             $"Expected offset = sizeof(BCRYPT_DSA_KEY_BLOB), got {offset} != {sizeof(BCRYPT_DSA_KEY_BLOB)}"
                         );
-                        dsaParams.P = Interop
-                            .BCrypt
+                        dsaParams.P = Interop.BCrypt
                             .Consume(dsaBlob, ref offset, pBcryptBlob->cbKey);
-                        dsaParams.G = Interop
-                            .BCrypt
+                        dsaParams.G = Interop.BCrypt
                             .Consume(dsaBlob, ref offset, pBcryptBlob->cbKey);
-                        dsaParams.Y = Interop
-                            .BCrypt
+                        dsaParams.Y = Interop.BCrypt
                             .Consume(dsaBlob, ref offset, pBcryptBlob->cbKey);
                         if (includePrivateParameters)
                         {
-                            dsaParams.X = Interop
-                                .BCrypt
+                            dsaParams.X = Interop.BCrypt
                                 .Consume(dsaBlob, ref offset, Sha1HashOutputSize);
                         }
                     }
@@ -453,25 +446,19 @@ namespace System.Security.Cryptography
                             $"Expected offset = sizeof(BCRYPT_DSA_KEY_BLOB_V2), got {offset} != {sizeof(BCRYPT_DSA_KEY_BLOB_V2)}"
                         );
 
-                        dsaParams.Seed = Interop
-                            .BCrypt
+                        dsaParams.Seed = Interop.BCrypt
                             .Consume(dsaBlob, ref offset, pBcryptBlob->cbSeedLength);
-                        dsaParams.Q = Interop
-                            .BCrypt
+                        dsaParams.Q = Interop.BCrypt
                             .Consume(dsaBlob, ref offset, pBcryptBlob->cbGroupSize);
-                        dsaParams.P = Interop
-                            .BCrypt
+                        dsaParams.P = Interop.BCrypt
                             .Consume(dsaBlob, ref offset, pBcryptBlob->cbKey);
-                        dsaParams.G = Interop
-                            .BCrypt
+                        dsaParams.G = Interop.BCrypt
                             .Consume(dsaBlob, ref offset, pBcryptBlob->cbKey);
-                        dsaParams.Y = Interop
-                            .BCrypt
+                        dsaParams.Y = Interop.BCrypt
                             .Consume(dsaBlob, ref offset, pBcryptBlob->cbKey);
                         if (includePrivateParameters)
                         {
-                            dsaParams.X = Interop
-                                .BCrypt
+                            dsaParams.X = Interop.BCrypt
                                 .Consume(dsaBlob, ref offset, pBcryptBlob->cbGroupSize);
                         }
                     }

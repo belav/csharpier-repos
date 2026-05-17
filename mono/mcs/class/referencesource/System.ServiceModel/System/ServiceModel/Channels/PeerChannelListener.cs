@@ -43,8 +43,7 @@ namespace System.ServiceModel.Channels
             this.port = bindingElement.Port;
             this.resolver = peerResolver;
             this.readerQuotas = new XmlDictionaryReaderQuotas();
-            BinaryMessageEncodingBindingElement encoder = context
-                .Binding
+            BinaryMessageEncodingBindingElement encoder = context.Binding
                 .Elements
                 .Find<BinaryMessageEncodingBindingElement>();
             if (encoder != null)
@@ -265,8 +264,7 @@ namespace System.ServiceModel.Channels
                 if (foundPeerNode.MaxReceivedMessageSize < MaxReceivedMessageSize)
                 {
                     foundPeerNode.Release();
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(

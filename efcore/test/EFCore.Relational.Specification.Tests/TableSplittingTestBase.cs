@@ -601,8 +601,7 @@ public abstract class TableSplittingTestBase : NonSharedModelTestBase
 
         using (var context = CreateContext())
         {
-            var transport = context
-                .Vehicles
+            var transport = context.Vehicles
                 .Include(v => v.Operator)
                 .Single(v => v.Name == "Fuel transport");
             var tank = context
@@ -636,8 +635,7 @@ public abstract class TableSplittingTestBase : NonSharedModelTestBase
 
         using (var context = CreateContext())
         {
-            var bike = context
-                .Vehicles
+            var bike = context.Vehicles
                 .Include(v => v.Operator)
                 .Single(v => v.Name == "Trek Pro Fit Madone 6 Series");
 
@@ -657,8 +655,7 @@ public abstract class TableSplittingTestBase : NonSharedModelTestBase
 
         using (var context = CreateContext())
         {
-            var bike = context
-                .Vehicles
+            var bike = context.Vehicles
                 .Include(v => v.Operator)
                 .Single(v => v.Name == "Trek Pro Fit Madone 6 Series");
             Assert.Equal("repairman", bike.Operator.Name);
@@ -709,8 +706,7 @@ public abstract class TableSplittingTestBase : NonSharedModelTestBase
 
         using (var context = CreateContext())
         {
-            var bike = context
-                .Vehicles
+            var bike = context.Vehicles
                 .Include(v => v.Operator)
                 .Single(v => v.Name == "Trek Pro Fit Madone 6 Series");
 
@@ -740,8 +736,7 @@ public abstract class TableSplittingTestBase : NonSharedModelTestBase
 
         using (var context = CreateContext())
         {
-            var bike = context
-                .Vehicles
+            var bike = context.Vehicles
                 .Include(v => v.Operator)
                 .Single(v => v.Name == "Trek Pro Fit Madone 6 Series");
 
@@ -765,8 +760,7 @@ public abstract class TableSplittingTestBase : NonSharedModelTestBase
 
         using (var context = CreateContext())
         {
-            var bike = context
-                .Vehicles
+            var bike = context.Vehicles
                 .Include(v => v.Operator)
                 .Single(v => v.Name == "Trek Pro Fit Madone 6 Series");
             Assert.Equal(2, bike.SeatingCapacity);

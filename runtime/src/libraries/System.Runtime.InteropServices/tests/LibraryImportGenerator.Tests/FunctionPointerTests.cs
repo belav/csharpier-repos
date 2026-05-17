@@ -95,13 +95,11 @@ namespace LibraryImportGenerator.IntegrationTests
             result = NativeExportsNE.FunctionPointer.InvokeWithBlittableArgument(&Callback, a, b);
             Assert.Equal(expected, result);
 
-            result = NativeExportsNE
-                .FunctionPointer
+            result = NativeExportsNE.FunctionPointer
                 .InvokeWithBlittableArgument(&CallbackUnmanaged, a, b);
             Assert.Equal(expected, result);
 
-            result = NativeExportsNE
-                .FunctionPointer
+            result = NativeExportsNE.FunctionPointer
                 .InvokeWithBlittableArgument(&CallbackUnmanagedStdcall, a, b);
             Assert.Equal(expected, result);
 
@@ -109,13 +107,11 @@ namespace LibraryImportGenerator.IntegrationTests
             result = NativeExportsNE.FunctionPointer.InvokeWithBlittableArgument(&Callback, b, a);
             Assert.Equal(expected, result);
 
-            result = NativeExportsNE
-                .FunctionPointer
+            result = NativeExportsNE.FunctionPointer
                 .InvokeWithBlittableArgument(&CallbackUnmanaged, b, a);
             Assert.Equal(expected, result);
 
-            result = NativeExportsNE
-                .FunctionPointer
+            result = NativeExportsNE.FunctionPointer
                 .InvokeWithBlittableArgument(&CallbackUnmanagedStdcall, b, a);
             Assert.Equal(expected, result);
 

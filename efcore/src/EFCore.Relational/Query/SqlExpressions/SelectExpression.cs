@@ -441,8 +441,7 @@ public sealed partial class SelectExpression : TableExpressionBase
                             for (var j = 0; j < properties.Length; j++)
                             {
                                 var property = properties[j];
-                                var declaringEntityType = property
-                                    .DeclaringType
+                                var declaringEntityType = property.DeclaringType
                                     .ContainingEntityType;
                                 var projection = declaringEntityType.IsAssignableFrom(
                                     concreteEntityType
@@ -459,13 +458,11 @@ public sealed partial class SelectExpression : TableExpressionBase
                                             property.ClrType.MakeNullable(),
                                             property.GetRelationalTypeMapping()
                                         );
-                                selectExpression
-                                    ._projection
+                                selectExpression._projection
                                     .Add(new ProjectionExpression(projection, propertyNames[j]));
                             }
 
-                            selectExpression
-                                ._projection
+                            selectExpression._projection
                                 .Add(
                                     new ProjectionExpression(
                                         sqlExpressionFactory.ApplyDefaultTypeMapping(
@@ -894,8 +891,7 @@ public sealed partial class SelectExpression : TableExpressionBase
                 .FindPrimaryKey()!
                 .Properties
                 .Take(jsonQueryExpression.KeyPropertyMap.Count);
-            var sourcePrimaryKeyProperties = jsonQueryExpression
-                .EntityType
+            var sourcePrimaryKeyProperties = jsonQueryExpression.EntityType
                 .FindPrimaryKey()!
                 .Properties
                 .Take(jsonQueryExpression.KeyPropertyMap.Count);
@@ -984,8 +980,7 @@ public sealed partial class SelectExpression : TableExpressionBase
 
             for (var i = 0; i < keyPropertiesCount; i++)
             {
-                var correspondingParentKeyProperty = ownedJsonNavigation
-                    .ForeignKey
+                var correspondingParentKeyProperty = ownedJsonNavigation.ForeignKey
                     .PrincipalKey
                     .Properties[i];
                 keyPropertiesMap[keyProperties[i]] = propertyExpressions[
@@ -1186,8 +1181,7 @@ public sealed partial class SelectExpression : TableExpressionBase
                             );
                         }
 
-                        var primaryKeyProperties = jsonQueryExpression
-                            .EntityType
+                        var primaryKeyProperties = jsonQueryExpression.EntityType
                             .FindPrimaryKey()!
                             .Properties;
                         var primaryKeyPropertiesCount = jsonQueryExpression.IsCollection
@@ -1847,8 +1841,7 @@ public sealed partial class SelectExpression : TableExpressionBase
                         var count = innerSelectExpression._clientProjections.Count;
 
                         _clientProjections.AddRange(
-                            innerSelectExpression
-                                ._clientProjections
+                            innerSelectExpression._clientProjections
                                 .Select(e => MakeNullable(e, nullable: true))
                         );
 
@@ -1965,11 +1958,9 @@ public sealed partial class SelectExpression : TableExpressionBase
                                 ref innerSelectExpression,
                                 out var pushdownOccurredWhenJoining
                             );
-                            outerSelectExpression
-                                ._clientProjections
+                            outerSelectExpression._clientProjections
                                 .AddRange(innerSelectExpression._clientProjections);
-                            outerSelectExpression
-                                ._aliasForClientProjections
+                            outerSelectExpression._aliasForClientProjections
                                 .AddRange(innerSelectExpression._aliasForClientProjections);
                             innerSelectExpression = outerSelectExpression;
 
@@ -2169,8 +2160,7 @@ public sealed partial class SelectExpression : TableExpressionBase
                                 GetIdentifierAccessor(
                                     this,
                                     newClientProjections,
-                                    innerSelectExpression
-                                        ._identifier
+                                    innerSelectExpression._identifier
                                         .Except(
                                             innerSelectExpression._childIdentifiers,
                                             IdentifierComparerInstance
@@ -2241,8 +2231,7 @@ public sealed partial class SelectExpression : TableExpressionBase
                                 var index = selectExpression.AddToProjection(column, null);
                                 var clientProjectionToAdd = Constant(index);
                                 var existingIndex = clientProjectionList.FindIndex(e =>
-                                    ExpressionEqualityComparer
-                                        .Instance
+                                    ExpressionEqualityComparer.Instance
                                         .Equals(e, clientProjectionToAdd)
                                 );
                                 if (existingIndex == -1)
@@ -2302,8 +2291,7 @@ public sealed partial class SelectExpression : TableExpressionBase
                             Tables: [SelectExpression rowNumberSubquery],
                             Predicate: not null
                         } joinedSubquery
-                    && rowNumberSubquery
-                        .Projection
+                    && rowNumberSubquery.Projection
                         .Select(pe => pe.Expression)
                         .OfType<RowNumberExpression>()
                         .SingleOrDefault()
@@ -2682,8 +2670,7 @@ public sealed partial class SelectExpression : TableExpressionBase
             }
 
             foreach (
-                var elementAccessSegment in jsonScalarExpression
-                    .Path
+                var elementAccessSegment in jsonScalarExpression.Path
                     .Where(x => x.ArrayIndex != null)
             )
             {
@@ -3425,8 +3412,7 @@ public sealed partial class SelectExpression : TableExpressionBase
 
         var aliasUniquifier = new AliasUniquifier(_usedAliases);
         foreach (
-            var (projectionMember, expression1, expression2) in select1
-                ._projectionMapping
+            var (projectionMember, expression1, expression2) in select1._projectionMapping
                 .Join(
                     select2._projectionMapping,
                     kv => kv.Key,
@@ -3700,8 +3686,7 @@ public sealed partial class SelectExpression : TableExpressionBase
                 "Set operation over entity projections with table map discrepancy"
             );
 
-            var tableMap = projection1
-                .TableMap
+            var tableMap = projection1.TableMap
                 .ToDictionary(kvp => kvp.Key, kvp => tableReferenceExpression);
 
             var discriminatorExpression = projection1.DiscriminatorExpression;
@@ -3716,8 +3701,7 @@ public sealed partial class SelectExpression : TableExpressionBase
                     alias
                 );
                 select1._projection.Add(innerProjection);
-                select2
-                    ._projection
+                select2._projection
                     .Add(new ProjectionExpression(projection2.DiscriminatorExpression, alias));
                 discriminatorExpression = new ConcreteColumnExpression(
                     innerProjection,
@@ -3758,8 +3742,7 @@ public sealed partial class SelectExpression : TableExpressionBase
             var currentAlias = baseAlias;
             var counter = 0;
             while (
-                select1
-                    ._projection
+                select1._projection
                     .Any(pe =>
                         string.Equals(pe.Alias, currentAlias, StringComparison.OrdinalIgnoreCase)
                     )
@@ -3909,8 +3892,7 @@ public sealed partial class SelectExpression : TableExpressionBase
                 // If identifying column is from a subquery then the owner table is inside subquery
                 // so we need to traverse in
                 var subqueryIdentifyingColumn = (ColumnExpression)
-                    subquery
-                        .Projection
+                    subquery.Projection
                         .Single(e =>
                             string.Equals(
                                 e.Alias,
@@ -3928,8 +3910,7 @@ public sealed partial class SelectExpression : TableExpressionBase
                 );
                 var changeNullability =
                     identifyingColumn.IsNullable && !subqueryIdentifyingColumn.IsNullable;
-                var tableIndex = selectExpression
-                    ._tables
+                var tableIndex = selectExpression._tables
                     .FindIndex(e => ReferenceEquals(e, identifyingColumn.Table));
                 var subqueryTableReferenceExpression = selectExpression._tableReferences[
                     tableIndex
@@ -3983,8 +3964,7 @@ public sealed partial class SelectExpression : TableExpressionBase
 
             var principalTables = principalMappings.ToList();
             var dependentTables = entityType.GetViewOrTableMappings().Select(e => e.Table).ToList();
-            var baseTableIndex = selectExpression
-                ._tables
+            var baseTableIndex = selectExpression._tables
                 .FindIndex(teb => ReferenceEquals(teb, identifyingColumn.Table));
             var dependentMainTable = dependentTables[0];
             var tableReferenceExpressionMap =
@@ -4005,8 +3985,7 @@ public sealed partial class SelectExpression : TableExpressionBase
                     // This may not be table which originates Owned type
                     if (derivedTpt)
                     {
-                        baseTableIndex = selectExpression
-                            ._tables
+                        baseTableIndex = selectExpression._tables
                             .FindIndex(teb =>
                                 ((TableExpression)UnwrapJoinExpression(teb)).Table
                                 == principalTables[0]
@@ -4078,8 +4057,7 @@ public sealed partial class SelectExpression : TableExpressionBase
                                     tableExpression,
                                     joinPredicate
                                 );
-                                selectExpression
-                                    ._removableJoinTables
+                                selectExpression._removableJoinTables
                                     .Add(selectExpression._tables.Count);
                                 selectExpression.AddTable(joinExpression, tableReferenceExpression);
                             }
@@ -4143,8 +4121,7 @@ public sealed partial class SelectExpression : TableExpressionBase
             );
             var outerJoinPredicate = ownerJoinColumns
                 .Zip(
-                    navigation
-                        .ForeignKey
+                    navigation.ForeignKey
                         .Properties
                         .Select(p =>
                             CreateColumnExpression(
@@ -4229,8 +4206,7 @@ public sealed partial class SelectExpression : TableExpressionBase
 
             foreach (var property in keyProperties)
             {
-                selectExpression
-                    ._identifier
+                selectExpression._identifier
                     .Add((propertyExpressions[property], property.GetKeyValueComparer()));
             }
 
@@ -4531,8 +4507,7 @@ public sealed partial class SelectExpression : TableExpressionBase
                                 innerSelectExpression.Orderings.Count > 0
                                     ? innerSelectExpression.Orderings
                                 : innerSelectExpression._identifier.Count > 0
-                                    ? innerSelectExpression
-                                        ._identifier
+                                    ? innerSelectExpression._identifier
                                         .Select(e => new OrderingExpression(e.Column, true))
                                 : new[]
                                 {
@@ -4553,8 +4528,7 @@ public sealed partial class SelectExpression : TableExpressionBase
                                 .PushdownIntoSubqueryInternal()
                                 .Remap(joinPredicate);
 
-                            var subqueryTableReference = innerSelectExpression
-                                ._tableReferences
+                            var subqueryTableReference = innerSelectExpression._tableReferences
                                 .Single();
                             var outerColumn = (
                                 (SelectExpression)innerSelectExpression.Tables[0]
@@ -4695,8 +4669,7 @@ public sealed partial class SelectExpression : TableExpressionBase
             if (joinType is JoinType.LeftJoin or JoinType.OuterApply)
             {
                 _identifier.AddRange(
-                    innerSelectExpression
-                        ._identifier
+                    innerSelectExpression._identifier
                         .Select(e => (e.Column.MakeNullable(), e.Comparer))
                 );
             }
@@ -5579,8 +5552,7 @@ public sealed partial class SelectExpression : TableExpressionBase
                 projectionMap[projection.DiscriminatorExpression] = discriminatorExpression;
             }
 
-            var tableMap = projection
-                .TableMap
+            var tableMap = projection.TableMap
                 .ToDictionary(kvp => kvp.Key, _ => subqueryTableReference);
 
             var newEntityProjection = new StructuralTypeProjectionExpression(
@@ -6278,13 +6250,11 @@ public sealed partial class SelectExpression : TableExpressionBase
                     newSelectExpression._tpcDiscriminatorValues[kvp.Key] = kvp.Value;
                 }
 
-                newSelectExpression
-                    ._identifier
+                newSelectExpression._identifier
                     .AddRange(
                         identifier.Zip(_identifier).Select(e => (e.First, e.Second.Comparer))
                     );
-                newSelectExpression
-                    ._childIdentifiers
+                newSelectExpression._childIdentifiers
                     .AddRange(
                         childIdentifier
                             .Zip(_childIdentifiers)

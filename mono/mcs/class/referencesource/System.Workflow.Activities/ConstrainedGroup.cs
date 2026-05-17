@@ -812,8 +812,7 @@ namespace System.Workflow.Activities
 
             // if there are any execution contexts, 1 or more children still doing something
             foreach (
-                ActivityExecutionContext activeContext in context
-                    .ExecutionContextManager
+                ActivityExecutionContext activeContext in context.ExecutionContextManager
                     .ExecutionContexts
             )
             {

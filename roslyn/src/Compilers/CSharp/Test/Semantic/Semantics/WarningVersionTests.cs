@@ -52,8 +52,7 @@ struct S
             };
             CreateCompilation(
                     source,
-                    options: TestOptions
-                        .ReleaseDll
+                    options: TestOptions.ReleaseDll
                         .WithWarningLevel(CodeAnalysis.Diagnostic.DefaultWarningLevel)
                 )
                 .VerifyDiagnostics();
@@ -97,8 +96,7 @@ static class SC { }
             };
             CreateCompilation(
                     source,
-                    options: TestOptions
-                        .ReleaseDll
+                    options: TestOptions.ReleaseDll
                         .WithWarningLevel(CodeAnalysis.Diagnostic.DefaultWarningLevel)
                 )
                 .VerifyDiagnostics();
@@ -149,8 +147,7 @@ class P
             };
             CreateCompilation(
                     source,
-                    options: TestOptions
-                        .ReleaseDll
+                    options: TestOptions.ReleaseDll
                         .WithWarningLevel(CodeAnalysis.Diagnostic.DefaultWarningLevel)
                 )
                 .VerifyDiagnostics();
@@ -197,8 +194,7 @@ public struct Struct
             var verifier = CompileAndVerify(
                 source2,
                 references: moduleReference,
-                options: TestOptions
-                    .DebugDll
+                options: TestOptions.DebugDll
                     .WithWarningLevel(CodeAnalysis.Diagnostic.DefaultWarningLevel),
                 parseOptions: TestOptions.Regular10,
                 verify: Verification.Skipped
@@ -236,8 +232,7 @@ public struct Struct
             verifier = CompileAndVerify(
                 source2,
                 references: moduleReference,
-                options: TestOptions
-                    .DebugDll
+                options: TestOptions.DebugDll
                     .WithWarningLevel(5)
                     .WithSpecificDiagnosticOptions(ReportStructInitializationWarnings),
                 parseOptions: TestOptions.Regular11,
@@ -290,8 +285,7 @@ public struct Struct
             var verifier = CompileAndVerify(
                 source2,
                 references: moduleReference,
-                options: TestOptions
-                    .DebugDll
+                options: TestOptions.DebugDll
                     .WithWarningLevel(CodeAnalysis.Diagnostic.DefaultWarningLevel),
                 parseOptions: TestOptions.Regular10,
                 verify: Verification.Skipped
@@ -329,8 +323,7 @@ public struct Struct
             verifier = CompileAndVerify(
                 source2,
                 references: moduleReference,
-                options: TestOptions
-                    .DebugDll
+                options: TestOptions.DebugDll
                     .WithWarningLevel(5)
                     .WithSpecificDiagnosticOptions(ReportStructInitializationWarnings),
                 parseOptions: TestOptions.Regular11,
@@ -390,8 +383,7 @@ public struct Struct
             var verifier = CompileAndVerify(
                 source2,
                 references: moduleReference,
-                options: TestOptions
-                    .DebugDll
+                options: TestOptions.DebugDll
                     .WithWarningLevel(CodeAnalysis.Diagnostic.DefaultWarningLevel),
                 parseOptions: TestOptions.Regular10,
                 verify: Verification.Skipped
@@ -440,8 +432,7 @@ public struct Struct
             verifier = CompileAndVerify(
                 source2,
                 references: moduleReference,
-                options: TestOptions
-                    .DebugDll
+                options: TestOptions.DebugDll
                     .WithWarningLevel(5)
                     .WithSpecificDiagnosticOptions(ReportStructInitializationWarnings),
                 parseOptions: TestOptions.Regular11,
@@ -485,8 +476,7 @@ public struct Struct
             CreateCompilation(
                     source2,
                     references: new MetadataReference[] { moduleReference },
-                    options: TestOptions
-                        .ReleaseDll
+                    options: TestOptions.ReleaseDll
                         .WithWarningLevel(CodeAnalysis.Diagnostic.DefaultWarningLevel)
                 )
                 .VerifyDiagnostics();
@@ -550,8 +540,7 @@ public struct Struct
             var verifier = CompileAndVerify(
                 source2,
                 references: moduleReference,
-                options: TestOptions
-                    .DebugDll
+                options: TestOptions.DebugDll
                     .WithWarningLevel(CodeAnalysis.Diagnostic.DefaultWarningLevel),
                 parseOptions: TestOptions.Regular10,
                 verify: Verification.Skipped
@@ -589,8 +578,7 @@ public struct Struct
             verifier = CompileAndVerify(
                 source2,
                 references: moduleReference,
-                options: TestOptions
-                    .DebugDll
+                options: TestOptions.DebugDll
                     .WithWarningLevel(5)
                     .WithSpecificDiagnosticOptions(ReportStructInitializationWarnings),
                 parseOptions: TestOptions.Regular11,
@@ -652,8 +640,7 @@ public struct Struct
             var verifier = CompileAndVerify(
                 source2,
                 references: moduleReference,
-                options: TestOptions
-                    .DebugDll
+                options: TestOptions.DebugDll
                     .WithWarningLevel(CodeAnalysis.Diagnostic.DefaultWarningLevel),
                 parseOptions: TestOptions.Regular10,
                 verify: Verification.Skipped
@@ -691,8 +678,7 @@ public struct Struct
             verifier = CompileAndVerify(
                 source2,
                 references: moduleReference,
-                options: TestOptions
-                    .DebugDll
+                options: TestOptions.DebugDll
                     .WithWarningLevel(5)
                     .WithSpecificDiagnosticOptions(ReportStructInitializationWarnings),
                 parseOptions: TestOptions.Regular11,
@@ -754,8 +740,7 @@ public struct Struct
             var verifier = CompileAndVerify(
                 source2,
                 references: moduleReference,
-                options: TestOptions
-                    .DebugDll
+                options: TestOptions.DebugDll
                     .WithWarningLevel(CodeAnalysis.Diagnostic.DefaultWarningLevel),
                 parseOptions: TestOptions.Regular10,
                 verify: Verification.Skipped
@@ -793,8 +778,7 @@ public struct Struct
             verifier = CompileAndVerify(
                 source2,
                 references: moduleReference,
-                options: TestOptions
-                    .DebugDll
+                options: TestOptions.DebugDll
                     .WithWarningLevel(5)
                     .WithSpecificDiagnosticOptions(ReportStructInitializationWarnings),
                 parseOptions: TestOptions.Regular11,
@@ -834,8 +818,7 @@ public struct Struct
             CreateCompilation(
                     source2,
                     references: new MetadataReference[] { moduleReference },
-                    options: TestOptions
-                        .ReleaseDll
+                    options: TestOptions.ReleaseDll
                         .WithWarningLevel(CodeAnalysis.Diagnostic.DefaultWarningLevel)
                 )
                 .VerifyDiagnostics();
@@ -878,8 +861,7 @@ public struct Struct
             CreateCompilation(
                     source2,
                     references: new MetadataReference[] { moduleReference },
-                    options: TestOptions
-                        .ReleaseDll
+                    options: TestOptions.ReleaseDll
                         .WithWarningLevel(CodeAnalysis.Diagnostic.DefaultWarningLevel)
                 )
                 .VerifyDiagnostics();

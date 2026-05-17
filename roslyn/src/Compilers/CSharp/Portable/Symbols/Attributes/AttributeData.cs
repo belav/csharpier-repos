@@ -95,8 +95,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             int argumentCount =
                 (attributeSyntax.ArgumentList != null)
-                    ? attributeSyntax
-                        .ArgumentList
+                    ? attributeSyntax.ArgumentList
                         .Arguments
                         .Count<AttributeArgumentSyntax>((arg) => arg.NameEquals == null)
                     : 0;
@@ -152,9 +151,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             if (this.AttributeClass is object)
             {
-                string className = this.AttributeClass.ToDisplayString(
-                    SymbolDisplayFormat.TestFormat
-                );
+                string className = this.AttributeClass
+                    .ToDisplayString(SymbolDisplayFormat.TestFormat);
 
                 if (!this.CommonConstructorArguments.Any() & !this.CommonNamedArguments.Any())
                 {
@@ -388,8 +386,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 return;
             }
 
-            var sense = arguments
-                .Attribute
+            var sense = arguments.Attribute
                 .CommonConstructorArguments[0]
                 .DecodeValue<bool>(SpecialType.System_Boolean);
             if (value.Kind != TypedConstantKind.Array)

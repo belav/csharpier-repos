@@ -115,8 +115,7 @@ namespace System.ServiceModel.Security
         {
             if (incomingNego == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new SecurityNegotiationException(SR.GetString(SR.NoBinaryNegoToReceive))
                     );
@@ -256,8 +255,7 @@ namespace System.ServiceModel.Security
             negotiationState.Context = requestSecurityToken.Context;
             if (requestSecurityToken.KeySize != 0)
             {
-                WSTrust
-                    .Driver
+                WSTrust.Driver
                     .ValidateRequestedKeySize(
                         requestSecurityToken.KeySize,
                         this.SecurityAlgorithmSuite
@@ -295,8 +293,7 @@ namespace System.ServiceModel.Security
                 }
                 else
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ProtocolException(
                                 SR.GetString(
@@ -400,15 +397,17 @@ namespace System.ServiceModel.Security
                 negotiationState.SetServiceToken(serviceToken);
 
                 SecurityKeyIdentifierClause externalTokenReference =
-                    this.IssuedSecurityTokenParameters.CreateKeyIdentifierClause(
-                        serviceToken,
-                        SecurityTokenReferenceStyle.External
-                    );
+                    this.IssuedSecurityTokenParameters
+                        .CreateKeyIdentifierClause(
+                            serviceToken,
+                            SecurityTokenReferenceStyle.External
+                        );
                 SecurityKeyIdentifierClause internalTokenReference =
-                    this.IssuedSecurityTokenParameters.CreateKeyIdentifierClause(
-                        serviceToken,
-                        SecurityTokenReferenceStyle.Internal
-                    );
+                    this.IssuedSecurityTokenParameters
+                        .CreateKeyIdentifierClause(
+                            serviceToken,
+                            SecurityTokenReferenceStyle.Internal
+                        );
 
                 RequestSecurityTokenResponse dummyRstr = new RequestSecurityTokenResponse(
                     this.StandardsManager
@@ -446,8 +445,7 @@ namespace System.ServiceModel.Security
                     }
                     else
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new ProtocolException(
                                     SR.GetString(
@@ -498,8 +496,7 @@ namespace System.ServiceModel.Security
                     }
                     else
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new ProtocolException(
                                     SR.GetString(

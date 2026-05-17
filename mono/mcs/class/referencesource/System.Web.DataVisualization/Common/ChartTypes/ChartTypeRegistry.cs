@@ -225,8 +225,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             if (!_createdChartTypes.Contains(name))
             {
                 // Create chart type object
-                _createdChartTypes[name] = ((Type)registeredChartTypes[name])
-                    .Assembly
+                _createdChartTypes[name] = ((Type)registeredChartTypes[name]).Assembly
                     .CreateInstance(((Type)registeredChartTypes[name]).ToString());
             }
 

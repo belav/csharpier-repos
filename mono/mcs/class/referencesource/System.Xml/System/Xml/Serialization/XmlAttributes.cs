@@ -95,8 +95,7 @@ namespace System.Xml.Serialization
             {
                 if (ignoreAttributeType == null)
                 {
-                    ignoreAttributeType = typeof(object)
-                        .Assembly
+                    ignoreAttributeType = typeof(object).Assembly
                         .GetType("System.XmlIgnoreMemberAttribute");
                     if (ignoreAttributeType == null)
                     {

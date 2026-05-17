@@ -123,8 +123,7 @@ public class ElementType
         IConventionAnnotation? annotation,
         IConventionAnnotation? oldAnnotation
     ) =>
-        CollectionProperty
-            .DeclaringType
+        CollectionProperty.DeclaringType
             .Model
             .ConventionDispatcher
             .OnElementTypeAnnotationChanged(Builder, name, annotation, oldAnnotation);
@@ -214,8 +213,7 @@ public class ElementType
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     protected virtual bool? OnElementTypeNullableChanged() =>
-        CollectionProperty
-            .DeclaringType
+        CollectionProperty.DeclaringType
             .Model
             .ConventionDispatcher
             .OnElementTypeNullabilityChanged(Builder);
@@ -526,8 +524,7 @@ public class ElementType
                     ref _typeMapping,
                     (IElementType)this,
                     static elementType =>
-                        elementType
-                            .CollectionProperty
+                        elementType.CollectionProperty
                             .DeclaringType
                             .Model
                             .GetModelDependencies()

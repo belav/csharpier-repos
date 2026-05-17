@@ -373,8 +373,7 @@ namespace System.ComponentModel.Design.Serialization
                     member.Name
                 );
                 if (descriptor.Arguments != null && descriptor.Arguments.Count > 0)
-                    methodInvoke
-                        .Parameters
+                    methodInvoke.Parameters
                         .AddRange(SerializeParameters(manager, descriptor.Arguments));
                 expression = methodInvoke;
             }
@@ -384,8 +383,7 @@ namespace System.ComponentModel.Design.Serialization
                     member.DeclaringType
                 );
                 if (descriptor.Arguments != null && descriptor.Arguments.Count > 0)
-                    createExpr
-                        .Parameters
+                    createExpr.Parameters
                         .AddRange(SerializeParameters(manager, descriptor.Arguments));
                 expression = createExpr;
             }

@@ -66,11 +66,9 @@ namespace Microsoft.CodeAnalysis.Editor.InlineHints
             _buffer = buffer;
 
             _tagAggregator = tagAggregator;
-            _formatMap = taggerProvider
-                .ClassificationFormatMapService
+            _formatMap = taggerProvider.ClassificationFormatMapService
                 .GetClassificationFormatMap(textView);
-            _hintClassification = taggerProvider
-                .ClassificationTypeRegistryService
+            _hintClassification = taggerProvider.ClassificationTypeRegistryService
                 .GetClassificationType(InlineHintsTag.TagId);
             _formatMap.ClassificationFormatMappingChanged +=
                 this.OnClassificationFormatMappingChanged;
@@ -184,8 +182,7 @@ namespace Microsoft.CodeAnalysis.Editor.InlineHints
                 var document = snapshot.GetOpenDocumentInCurrentContextWithChanges();
                 var classify =
                     document != null
-                    && _taggerProvider
-                        .EditorOptionsService
+                    && _taggerProvider.EditorOptionsService
                         .GlobalOptions
                         .GetOption(
                             InlineHintsViewOptionsStorage.ColorHints,

@@ -52,8 +52,7 @@ namespace Castle.DynamicProxy.Generators
 
             if (MethodToOverride.DeclaringType.IsInterface)
             {
-                @class
-                    .TypeBuilder
+                @class.TypeBuilder
                     .DefineMethodOverride(proxiedMethod.MethodBuilder, MethodToOverride);
             }
 

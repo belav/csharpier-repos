@@ -157,11 +157,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             }
 
             // Remember prev. series parameters
-            series["OldXValueIndexed"] = series
-                .IsXValueIndexed
+            series["OldXValueIndexed"] = series.IsXValueIndexed
                 .ToString(CultureInfo.InvariantCulture);
-            series["OldYValuesPerPoint"] = series
-                .YValuesPerPoint
+            series["OldYValuesPerPoint"] = series.YValuesPerPoint
                 .ToString(CultureInfo.InvariantCulture);
             series.IsXValueIndexed = true;
 
@@ -704,8 +702,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                         coord[2 * i + 1] = pointNew.Y;
                     }
 
-                    common
-                        .HotRegionsList
+                    common.HotRegionsList
                         .AddHotRegion(path, false, coord, point, series.Name, pointIndex);
                 }
             }

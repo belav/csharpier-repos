@@ -70,8 +70,7 @@ namespace Microsoft.CodeAnalysis.Remote.Testing
         public override RemoteServiceConnection<T> CreateConnection<T>(object? callbackTarget)
             where T : class
         {
-            var descriptor = ServiceDescriptors
-                .Instance
+            var descriptor = ServiceDescriptors.Instance
                 .GetServiceDescriptor(
                     typeof(T),
                     RemoteProcessConfiguration.ServerGC
@@ -291,8 +290,7 @@ namespace Microsoft.CodeAnalysis.Remote.Testing
 
             public void RegisterRemoteBrokeredService(BrokeredServiceBase.IFactory serviceFactory)
             {
-                var moniker = ServiceDescriptors
-                    .Instance
+                var moniker = ServiceDescriptors.Instance
                     .GetServiceDescriptorForServiceFactory(serviceFactory.ServiceType)
                     .Moniker;
                 _remoteBrokeredServicesMap.Add(moniker, serviceFactory);

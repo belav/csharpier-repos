@@ -35,8 +35,7 @@ namespace Microsoft.CodeAnalysis.UnitTests
         {
             using var workspace = new AdhocWorkspace();
 
-            var service = workspace
-                .Services
+            var service = workspace.Services
                 .GetLanguageServices(LanguageNames.CSharp)
                 .GetService<ISyntaxFormattingService>();
             var rules = service.GetDefaultFormattingRules();
@@ -67,8 +66,7 @@ End Class
         public void TestVisualBasicDefaultFormattingRules()
         {
             using var workspace = new AdhocWorkspace();
-            var service = workspace
-                .Services
+            var service = workspace.Services
                 .GetLanguageServices(LanguageNames.VisualBasic)
                 .GetService<ISyntaxFormattingService>();
             var rules = service.GetDefaultFormattingRules();

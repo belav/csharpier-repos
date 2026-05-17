@@ -1270,8 +1270,7 @@ namespace System.Net
         public static void LeaveException(string func, Exception exception)
         {
 #if TRAVE
-            GlobalLog
-                .Logobject
+            GlobalLog.Logobject
                 .LeaveFunc(
                     func + " exception " + ((exception != null) ? exception.Message : String.Empty)
                 );
@@ -1428,8 +1427,7 @@ namespace System.Net
                                 " flags:" + monitorEntry.m_Flags);
 
 #endif
-                            monitorEntry
-                                .m_Connection
+                            monitorEntry.m_Connection
                                 .DebugMembers(monitorEntry.m_Request.GetHashCode());
                         }
                     }

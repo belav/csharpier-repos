@@ -169,8 +169,7 @@ public class RelationalScaffoldingModelFactory : IScaffoldingModelFactory
 
         if (!string.IsNullOrEmpty(databaseModel.DatabaseName))
         {
-            modelBuilder
-                .Model
+            modelBuilder.Model
                 .SetDatabaseName(
                     !_options.UseDatabaseNames && !string.IsNullOrEmpty(databaseModel.DatabaseName)
                         ? _candidateNamingService.GenerateCandidateIdentifier(
@@ -192,8 +191,7 @@ public class RelationalScaffoldingModelFactory : IScaffoldingModelFactory
             databaseModel.Tables.SelectMany(table => table.ForeignKeys).ToList()
         );
 
-        modelBuilder
-            .Model
+        modelBuilder.Model
             .AddAnnotations(
                 databaseModel
                     .GetAnnotations()
@@ -534,8 +532,7 @@ public class RelationalScaffoldingModelFactory : IScaffoldingModelFactory
 
         property.Metadata.SetColumnOrder(column.Table.Columns.IndexOf(column));
 
-        property
-            .Metadata
+        property.Metadata
             .AddAnnotations(
                 column
                     .GetAnnotations()
@@ -558,8 +555,7 @@ public class RelationalScaffoldingModelFactory : IScaffoldingModelFactory
     {
         var primaryKey = table.PrimaryKey!;
 
-        var unmappedColumns = primaryKey
-            .Columns
+        var unmappedColumns = primaryKey.Columns
             .Where(c => _unmappedColumns.Contains(c))
             .Select(c => c.Name)
             .ToList();
@@ -634,8 +630,7 @@ public class RelationalScaffoldingModelFactory : IScaffoldingModelFactory
         DatabaseUniqueConstraint uniqueConstraint
     )
     {
-        var unmappedColumns = uniqueConstraint
-            .Columns
+        var unmappedColumns = uniqueConstraint.Columns
             .Where(c => _unmappedColumns.Contains(c))
             .Select(c => c.Name)
             .ToList();
@@ -687,8 +682,7 @@ public class RelationalScaffoldingModelFactory : IScaffoldingModelFactory
     /// </summary>
     protected virtual IndexBuilder? VisitIndex(EntityTypeBuilder builder, DatabaseIndex index)
     {
-        var unmappedColumns = index
-            .Columns
+        var unmappedColumns = index.Columns
             .Where(c => _unmappedColumns.Contains(c))
             .Select(c => c.Name)
             .ToList();
@@ -842,16 +836,14 @@ public class RelationalScaffoldingModelFactory : IScaffoldingModelFactory
             return null;
         }
 
-        var dependentEntityType = modelBuilder
-            .Model
+        var dependentEntityType = modelBuilder.Model
             .FindEntityType(GetEntityTypeName(foreignKey.Table));
         if (dependentEntityType == null)
         {
             return null;
         }
 
-        var unmappedDependentColumns = foreignKey
-            .Columns
+        var unmappedDependentColumns = foreignKey.Columns
             .Where(c => _unmappedColumns.Contains(c))
             .Select(c => c.Name)
             .ToList();
@@ -869,15 +861,13 @@ public class RelationalScaffoldingModelFactory : IScaffoldingModelFactory
             return null;
         }
 
-        var dependentProperties = foreignKey
-            .Columns
+        var dependentProperties = foreignKey.Columns
             .Select(GetPropertyName)
             .Select(name => dependentEntityType.FindProperty(name)!)
             .ToList()
             .AsReadOnly();
 
-        var principalEntityType = modelBuilder
-            .Model
+        var principalEntityType = modelBuilder.Model
             .FindEntityType(GetEntityTypeName(foreignKey.PrincipalTable));
         if (principalEntityType == null)
         {
@@ -890,8 +880,7 @@ public class RelationalScaffoldingModelFactory : IScaffoldingModelFactory
             return null;
         }
 
-        var unmappedPrincipalColumns = foreignKey
-            .PrincipalColumns
+        var unmappedPrincipalColumns = foreignKey.PrincipalColumns
             .Where(pc => principalEntityType.FindProperty(GetPropertyName(pc)) == null)
             .Select(pc => pc.Name)
             .ToList();
@@ -909,8 +898,7 @@ public class RelationalScaffoldingModelFactory : IScaffoldingModelFactory
             return null;
         }
 
-        var principalPropertiesMap = foreignKey
-            .PrincipalColumns
+        var principalPropertiesMap = foreignKey.PrincipalColumns
             .Select(fc =>
                 (property: principalEntityType.FindProperty(GetPropertyName(fc))!, column: fc)
             )

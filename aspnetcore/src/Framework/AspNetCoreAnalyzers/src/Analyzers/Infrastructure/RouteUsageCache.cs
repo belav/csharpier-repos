@@ -77,8 +77,7 @@ internal sealed class RouteUsageCache
                     cancellationToken
                 );
 
-                var virtualChars = CSharpVirtualCharService
-                    .Instance
+                var virtualChars = CSharpVirtualCharService.Instance
                     .TryConvertToVirtualChars(token);
                 var isMvc =
                     usageContext.UsageType == RouteUsageType.MvcAction

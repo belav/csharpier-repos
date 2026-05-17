@@ -36,8 +36,7 @@ namespace System.ServiceModel.Security.Tokens
         {
             if (securityContextCacheCapacity <= 0)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentOutOfRangeException(
                             "securityContextCacheCapacity",
@@ -48,8 +47,7 @@ namespace System.ServiceModel.Security.Tokens
 
             if (clockSkew < TimeSpan.Zero)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentOutOfRangeException(
                             "clockSkew",

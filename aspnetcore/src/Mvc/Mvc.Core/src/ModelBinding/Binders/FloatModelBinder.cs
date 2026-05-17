@@ -81,8 +81,7 @@ public class FloatModelBinder : IModelBinder
             {
                 modelState.TryAddModelError(
                     modelName,
-                    metadata
-                        .ModelBindingMessageProvider
+                    metadata.ModelBindingMessageProvider
                         .ValueMustNotBeNullAccessor(valueProviderResult.ToString())
                 );
             }

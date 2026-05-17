@@ -310,8 +310,7 @@ public partial class SystemTextJsonOutputFormatterTest : JsonOutputFormatterTest
     )
     {
         var options = new RemoteInvokeOptions();
-        options
-            .RuntimeConfigurationOptions
+        options.RuntimeConfigurationOptions
             .Add(
                 "System.Text.Json.JsonSerializer.IsReflectionEnabledByDefault",
                 isReflectionEnabledByDefault.ToString()

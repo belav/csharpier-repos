@@ -65,8 +65,7 @@ namespace System.Net.Http.Formatting
         [Fact]
         public void BufferSize_RoundTrips()
         {
-            Assert
-                .Reflection
+            Assert.Reflection
                 .IntegerProperty(
                     new MockBufferedMediaTypeFormatter(),
                     c => c.BufferSize,

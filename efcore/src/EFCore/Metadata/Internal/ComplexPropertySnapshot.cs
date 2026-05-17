@@ -182,8 +182,7 @@ public class ComplexPropertySnapshot
 
         if (ComplexType.GetChangeTrackingStrategyConfigurationSource() != null)
         {
-            complexTypeBuilder
-                .Metadata
+            complexTypeBuilder.Metadata
                 .SetChangeTrackingStrategy(
                     ComplexType.GetChangeTrackingStrategy(),
                     ComplexType.GetChangeTrackingStrategyConfigurationSource()!.Value
@@ -194,8 +193,7 @@ public class ComplexPropertySnapshot
 
         if (ComplexType.GetConstructorBindingConfigurationSource() != null)
         {
-            complexTypeBuilder
-                .Metadata
+            complexTypeBuilder.Metadata
                 .SetConstructorBinding(
                     Create(ComplexType.ConstructorBinding, complexTypeBuilder.Metadata),
                     ComplexType.GetConstructorBindingConfigurationSource()!.Value
@@ -204,8 +202,7 @@ public class ComplexPropertySnapshot
 
         if (ComplexType.GetServiceOnlyConstructorBindingConfigurationSource() != null)
         {
-            complexTypeBuilder
-                .Metadata
+            complexTypeBuilder.Metadata
                 .SetServiceOnlyConstructorBinding(
                     Create(ComplexType.ServiceOnlyConstructorBinding, complexTypeBuilder.Metadata),
                     ComplexType.GetServiceOnlyConstructorBindingConfigurationSource()!.Value
@@ -220,8 +217,7 @@ public class ComplexPropertySnapshot
         ComplexType complexType
     ) =>
         instantiationBinding?.With(
-            instantiationBinding
-                .ParameterBindings
+            instantiationBinding.ParameterBindings
                 .Select(binding => Create(binding, complexType))
                 .ToList()
         );
@@ -231,8 +227,7 @@ public class ComplexPropertySnapshot
         ComplexType complexType
     ) =>
         parameterBinding.With(
-            parameterBinding
-                .ConsumedProperties
+            parameterBinding.ConsumedProperties
                 .Select(property =>
                     (IPropertyBase?)complexType.FindProperty(property.Name)
                     ?? complexType.FindComplexProperty(property.Name)!

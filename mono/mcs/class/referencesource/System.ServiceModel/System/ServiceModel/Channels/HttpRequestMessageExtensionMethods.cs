@@ -214,8 +214,7 @@ namespace System.ServiceModel.Channels
             Fx.Assert(httpHeaders != null, "httpHeaders should not be null.");
             if (!httpHeaders.TryAddWithoutValidation(header.Key, header.Value))
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new InvalidOperationException(
                             SR.GetString(
@@ -279,8 +278,7 @@ namespace System.ServiceModel.Channels
                 && headerInfo.IsResponseHeader
             )
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new InvalidOperationException(
                             SR.GetString(

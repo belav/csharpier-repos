@@ -46,8 +46,7 @@ namespace Microsoft.CodeAnalysis.Collections
             IEnumerable<KeyValuePair<TKey, TValue>> items
         )
             where TKey : notnull =>
-            ImmutableSegmentedDictionary<TKey, TValue>
-                .Empty
+            ImmutableSegmentedDictionary<TKey, TValue>.Empty
                 .WithComparer(keyComparer)
                 .AddRange(items);
 
@@ -81,8 +80,7 @@ namespace Microsoft.CodeAnalysis.Collections
             if (items is ImmutableSegmentedDictionary<TKey, TValue> existingDictionary)
                 return existingDictionary.WithComparer(keyComparer);
 
-            return ImmutableSegmentedDictionary<TKey, TValue>
-                .Empty
+            return ImmutableSegmentedDictionary<TKey, TValue>.Empty
                 .WithComparer(keyComparer)
                 .AddRange(items);
         }
@@ -118,8 +116,7 @@ namespace Microsoft.CodeAnalysis.Collections
             if (elementSelector is null)
                 throw new ArgumentNullException(nameof(elementSelector));
 
-            return ImmutableSegmentedDictionary<TKey, TValue>
-                .Empty
+            return ImmutableSegmentedDictionary<TKey, TValue>.Empty
                 .WithComparer(keyComparer)
                 .AddRange(
                     source.Select(element => new KeyValuePair<TKey, TValue>(

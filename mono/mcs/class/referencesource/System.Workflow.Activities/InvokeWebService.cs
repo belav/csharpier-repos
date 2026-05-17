@@ -194,10 +194,8 @@ namespace System.Workflow.Activities
             );
 
             // Get the parameters.
-            MethodInfo methodInfo = this.ProxyClass.GetMethod(
-                this.MethodName,
-                BindingFlags.Instance | BindingFlags.Public
-            );
+            MethodInfo methodInfo = this.ProxyClass
+                .GetMethod(this.MethodName, BindingFlags.Instance | BindingFlags.Public);
 
             object[] actualParameters = InvokeHelper.GetParameters(
                 methodInfo,
@@ -214,14 +212,15 @@ namespace System.Workflow.Activities
             try
             {
                 //Invoke the Web Service.
-                result = this.ProxyClass.InvokeMember(
-                    this.MethodName,
-                    BindingFlags.Instance | BindingFlags.Public | BindingFlags.InvokeMethod,
-                    null,
-                    proxyInstance,
-                    actualParameters,
-                    System.Globalization.CultureInfo.InvariantCulture
-                );
+                result = this.ProxyClass
+                    .InvokeMember(
+                        this.MethodName,
+                        BindingFlags.Instance | BindingFlags.Public | BindingFlags.InvokeMethod,
+                        null,
+                        proxyInstance,
+                        actualParameters,
+                        System.Globalization.CultureInfo.InvariantCulture
+                    );
             }
             catch (TargetInvocationException e)
             {
@@ -500,8 +499,7 @@ namespace System.Workflow.Activities
                                 prop = new ParameterInfoBasedPropertyDescriptor(
                                     typeof(InvokeWebServiceActivity),
                                     paramInfo,
-                                    InvokeWebServiceActivity
-                                        .ReservedParameterNames
+                                    InvokeWebServiceActivity.ReservedParameterNames
                                         .Contains(paramInfo.Name),
                                     DesignOnlyAttribute.Yes
                                 );
@@ -610,8 +608,7 @@ namespace System.Workflow.Activities
                                 ValidationError validationError =
                                     ValidationError.GetNotSetValidationError(paramName);
                                 if (
-                                    InvokeWebServiceActivity
-                                        .ReservedParameterNames
+                                    InvokeWebServiceActivity.ReservedParameterNames
                                         .Contains(paramName)
                                 )
                                     validationError.PropertyName =
@@ -648,8 +645,7 @@ namespace System.Workflow.Activities
                                         )
                                     );
                                 if (
-                                    InvokeWebServiceActivity
-                                        .ReservedParameterNames
+                                    InvokeWebServiceActivity.ReservedParameterNames
                                         .Contains(paramName)
                                 )
                                 {

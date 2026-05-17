@@ -1360,11 +1360,9 @@ public abstract class CompiledModelTestBase : NonSharedModelTestBase
         build.References.Add(BuildReference.ByName("Microsoft.EntityFrameworkCore"));
         build.References.Add(BuildReference.ByName("Microsoft.EntityFrameworkCore.Abstractions"));
         build.References.Add(BuildReference.ByName("Microsoft.EntityFrameworkCore.Proxies"));
-        build
-            .References
+        build.References
             .Add(BuildReference.ByName("Microsoft.EntityFrameworkCore.Specification.Tests"));
-        build
-            .References
+        build.References
             .Add(BuildReference.ByName(typeof(CompiledModelTestBase).Assembly.GetName().Name));
         build.References.Add(BuildReference.ByName(GetType().Assembly.GetName().Name));
         return build;

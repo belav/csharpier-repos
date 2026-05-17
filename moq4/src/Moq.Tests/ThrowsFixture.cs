@@ -170,16 +170,8 @@ namespace Moq.Tests
                 );
 
             var exception = Assert.Throws<Exception>(() =>
-                mock.Object.Execute(
-                    "blah1",
-                    "blah2",
-                    "blah3",
-                    "blah4",
-                    "blah5",
-                    "blah6",
-                    "blah7",
-                    "blah8"
-                )
+                mock.Object
+                    .Execute("blah1", "blah2", "blah3", "blah4", "blah5", "blah6", "blah7", "blah8")
             );
             Assert.Equal("blah1blah2blah3blah4blah5blah6blah7blah8", exception.Message);
         }

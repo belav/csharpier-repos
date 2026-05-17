@@ -977,8 +977,7 @@ namespace System.Net
                     {
                         using (currentUser.Impersonate())
                         {
-                            return Task<Stream>
-                                .Factory
+                            return Task<Stream>.Factory
                                 .FromAsync(
                                     this.BeginGetRequestStream,
                                     this.EndGetRequestStream,
@@ -991,8 +990,7 @@ namespace System.Net
             else
             {
                 return Task.Run(() =>
-                    Task<Stream>
-                        .Factory
+                    Task<Stream>.Factory
                         .FromAsync(this.BeginGetRequestStream, this.EndGetRequestStream, null)
                 );
             }
@@ -1030,8 +1028,7 @@ namespace System.Net
                     {
                         using (currentUser.Impersonate())
                         {
-                            return Task<WebResponse>
-                                .Factory
+                            return Task<WebResponse>.Factory
                                 .FromAsync(this.BeginGetResponse, this.EndGetResponse, null);
                         }
                     }
@@ -1040,8 +1037,7 @@ namespace System.Net
             else
             {
                 return Task.Run(() =>
-                    Task<WebResponse>
-                        .Factory
+                    Task<WebResponse>.Factory
                         .FromAsync(this.BeginGetResponse, this.EndGetResponse, null)
                 );
             }

@@ -43,8 +43,7 @@ namespace System.IdentityModel.Protocols.WSTrust
         {
             if (string.IsNullOrEmpty(claimType))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentException(SR.GetString(SR.ID0006), "claimType"));
             }
 

@@ -43,8 +43,7 @@ namespace System.Threading
             SafeWaitHandle threadHandle;
 
             if (
-                Interop
-                    .Kernel32
+                Interop.Kernel32
                     .DuplicateHandle(
                         currentProcHandle,
                         currentThreadHandle,
@@ -213,8 +212,7 @@ namespace System.Threading
                 stackSize = AllocationGranularity;
             }
 
-            _osHandle = Interop
-                .Kernel32
+            _osHandle = Interop.Kernel32
                 .CreateThread(
                     IntPtr.Zero,
                     (IntPtr)stackSize,
@@ -354,16 +352,14 @@ namespace System.Threading
                 return;
 
 #if ENABLE_WINRT
-            int hr = Interop
-                .WinRT
+            int hr = Interop.WinRT
                 .RoInitialize(
                     (state == ApartmentState.STA)
                         ? Interop.WinRT.RO_INIT_SINGLETHREADED
                         : Interop.WinRT.RO_INIT_MULTITHREADED
                 );
 #else
-            int hr = Interop
-                .Ole32
+            int hr = Interop.Ole32
                 .CoInitializeEx(
                     IntPtr.Zero,
                     (state == ApartmentState.STA)

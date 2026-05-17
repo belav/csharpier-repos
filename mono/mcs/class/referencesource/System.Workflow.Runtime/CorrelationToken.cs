@@ -186,8 +186,7 @@ namespace System.Workflow.Runtime
                 }
             }
             SetValue(InitializedProperty, true);
-            WorkflowTrace
-                .Runtime
+            WorkflowTrace.Runtime
                 .TraceEvent(
                     TraceEventType.Information,
                     0,
@@ -224,8 +223,7 @@ namespace System.Workflow.Runtime
                 }
             }
             //SetValue(InitializedProperty, false);
-            WorkflowTrace
-                .Runtime
+            WorkflowTrace.Runtime
                 .TraceEvent(
                     TraceEventType.Information,
                     0,

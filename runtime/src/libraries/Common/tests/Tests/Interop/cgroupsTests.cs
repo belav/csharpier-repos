@@ -55,8 +55,7 @@ namespace Common.Tests
         {
             Assert.Equal(
                 expectedResult,
-                Interop
-                    .cgroups
+                Interop.cgroups
                     .FindCGroupPath(hierarchyRoot, hierarchyMount, cgroupPathRelativeToMount)
             );
         }
@@ -149,8 +148,7 @@ namespace Common.Tests
 
             Assert.Equal(
                 expectedFound,
-                Interop
-                    .cgroups
+                Interop.cgroups
                     .TryFindHierarchyMount(
                         (Interop.cgroups.CGroupVersion)cgroupVersion,
                         path,
@@ -191,8 +189,7 @@ namespace Common.Tests
 
             Assert.Equal(
                 expectedFound,
-                Interop
-                    .cgroups
+                Interop.cgroups
                     .TryFindCGroupPathForSubsystem(
                         (Interop.cgroups.CGroupVersion)cgroupVersion,
                         path,

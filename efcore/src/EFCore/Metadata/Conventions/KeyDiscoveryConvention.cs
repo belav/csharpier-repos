@@ -92,8 +92,7 @@ public class KeyDiscoveryConvention
             keyProperties = DiscoverKeyProperties(entityType, candidateProperties).ToList();
             if (keyProperties.Count > 1)
             {
-                Dependencies
-                    .Logger
+                Dependencies.Logger
                     .MultiplePrimaryKeyCandidates(keyProperties[0], keyProperties[1]);
                 return;
             }
@@ -357,8 +356,7 @@ public class KeyDiscoveryConvention
         IConventionContext<IConventionForeignKey> context
     )
     {
-        var joinEntityTypeBuilder = skipNavigationBuilder
-            .Metadata
+        var joinEntityTypeBuilder = skipNavigationBuilder.Metadata
             .ForeignKey
             ?.DeclaringEntityType
             .Builder;

@@ -94,8 +94,7 @@ namespace ILCompiler.DependencyAnalysis
                 case ReadyToRunHelperId.ObjectAllocator:
                     return factory.GenericLookup.ObjectAllocator((TypeDesc)target);
                 case ReadyToRunHelperId.ConstrainedDirectCall:
-                    return factory
-                        .GenericLookup
+                    return factory.GenericLookup
                         .ConstrainedMethodUse(
                             ((ConstrainedCallInfo)target).Method,
                             ((ConstrainedCallInfo)target).ConstrainedType,
@@ -142,8 +141,7 @@ namespace ILCompiler.DependencyAnalysis
         private bool TriggersLazyStaticConstructor(NodeFactory factory)
         {
             TypeDesc type = (TypeDesc)_target;
-            return factory
-                .PreinitializationManager
+            return factory.PreinitializationManager
                 .HasLazyStaticConstructor(type.ConvertToCanonForm(CanonicalFormKind.Specific));
         }
 
@@ -172,8 +170,7 @@ namespace ILCompiler.DependencyAnalysis
                         {
                             result.Add(
                                 new DependencyListEntry(
-                                    factory
-                                        .GenericLookup
+                                    factory.GenericLookup
                                         .TypeNonGCStaticBase((TypeDesc)_target)
                                         .GetTarget(factory, lookupContext),
                                     "Dictionary dependency"
@@ -188,8 +185,7 @@ namespace ILCompiler.DependencyAnalysis
                         DelegateCreationInfo createInfo = (DelegateCreationInfo)_target;
                         if (createInfo.NeedsVirtualMethodUseTracking)
                         {
-                            MethodDesc instantiatedTargetMethod = createInfo
-                                .TargetMethod
+                            MethodDesc instantiatedTargetMethod = createInfo.TargetMethod
                                 .GetNonRuntimeDeterminedMethodFromRuntimeDeterminedMethodViaSubstitution(
                                     typeInstantiation,
                                     methodInstantiation
@@ -204,8 +200,7 @@ namespace ILCompiler.DependencyAnalysis
                                 );
                             }
 
-                            factory
-                                .MetadataManager
+                            factory.MetadataManager
                                 .GetDependenciesDueToVirtualMethodReflectability(
                                     ref result,
                                     factory,
@@ -241,8 +236,7 @@ namespace ILCompiler.DependencyAnalysis
         private static IMethodNode GetBadSlotHelper(NodeFactory factory)
         {
             return factory.MethodEntrypoint(
-                factory
-                    .TypeSystemContext
+                factory.TypeSystemContext
                     .GetHelperEntryPoint("ThrowHelpers", "ThrowUnavailableType")
             );
         }
@@ -288,11 +282,11 @@ namespace ILCompiler.DependencyAnalysis
 
             if (_id == ReadyToRunHelperId.DelegateCtor)
             {
-                MethodDesc targetMethod = ((DelegateCreationInfo)_target)
-                    .PossiblyUnresolvedTargetMethod
+                MethodDesc targetMethod = (
+                    (DelegateCreationInfo)_target
+                ).PossiblyUnresolvedTargetMethod
                     .GetCanonMethodTarget(CanonicalFormKind.Specific);
-                factory
-                    .MetadataManager
+                factory.MetadataManager
                     .GetDependenciesDueToDelegateCreation(ref dependencies, factory, targetMethod);
             }
 
@@ -310,8 +304,7 @@ namespace ILCompiler.DependencyAnalysis
             NativeLayoutSavedVertexNode templateLayout;
             if (_dictionaryOwner is MethodDesc)
             {
-                templateLayout = factory
-                    .NativeLayout
+                templateLayout = factory.NativeLayout
                     .TemplateMethodLayout((MethodDesc)_dictionaryOwner);
                 conditionalDependencies.Add(
                     new CombinedDependencyListEntry(
@@ -323,8 +316,7 @@ namespace ILCompiler.DependencyAnalysis
             }
             else
             {
-                templateLayout = factory
-                    .NativeLayout
+                templateLayout = factory.NativeLayout
                     .TemplateTypeLayout((TypeDesc)_dictionaryOwner);
                 conditionalDependencies.Add(
                     new CombinedDependencyListEntry(
@@ -346,8 +338,7 @@ namespace ILCompiler.DependencyAnalysis
                 Debug.Assert(templateLayout != null);
                 if (TriggersLazyStaticConstructor(factory))
                 {
-                    GenericLookupResult nonGcRegionLookup = factory
-                        .GenericLookup
+                    GenericLookupResult nonGcRegionLookup = factory.GenericLookup
                         .TypeNonGCStaticBase(type);
                     conditionalDependencies.Add(
                         new CombinedDependencyListEntry(

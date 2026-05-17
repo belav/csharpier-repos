@@ -358,8 +358,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 );
                 Debug.Assert(originatingSyntax != null);
 
-                bool diagnose = originatingSyntax
-                    .SyntaxTree
+                bool diagnose = originatingSyntax.SyntaxTree
                     .ReportDocumentationCommentDiagnostics();
 
                 if (!EnterIncludeElement(location))
@@ -881,8 +880,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     // NOTE: treelessSyntax doesn't have its own SyntaxTree, so we have to access the diagnostics
                     // via the Dummy tree.
                     foreach (
-                        Diagnostic diagnostic in CSharpSyntaxTree
-                            .Dummy
+                        Diagnostic diagnostic in CSharpSyntaxTree.Dummy
                             .GetDiagnostics(treelessSyntax)
                     )
                     {

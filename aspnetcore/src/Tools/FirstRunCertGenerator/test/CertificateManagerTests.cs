@@ -289,8 +289,7 @@ public class CertificateManagerTests : IClassFixture<CertFixture>
 
         Assert.Equal(
             "plaintext",
-            Encoding
-                .ASCII
+            Encoding.ASCII
                 .GetString(
                     exportedCertificate
                         .GetRSAPrivateKey()
@@ -544,8 +543,7 @@ public class CertificateManagerTests : IClassFixture<CertFixture>
 
         Assert.Equal(
             "plaintext",
-            Encoding
-                .ASCII
+            Encoding.ASCII
                 .GetString(
                     exportedCertificate
                         .GetRSAPrivateKey()

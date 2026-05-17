@@ -42,8 +42,7 @@ namespace Microsoft.Interop
         public void Initialize(IncrementalGeneratorInitializationContext context)
         {
             // Collect all methods adorned with LibraryImportAttribute
-            var attributedMethods = context
-                .SyntaxProvider
+            var attributedMethods = context.SyntaxProvider
                 .ForAttributeWithMetadataName(
                     TypeNames.LibraryImportAttribute,
                     static (node, ct) => node is MethodDeclarationSyntax,
@@ -79,22 +78,22 @@ namespace Microsoft.Interop
             var methodsToGenerate = context.FilterAndReportDiagnostics(methodsWithDiagnostics);
 
             // Compute generator options
-            IncrementalValueProvider<LibraryImportGeneratorOptions> stubOptions = context
-                .AnalyzerConfigOptionsProvider
-                .Select(
-                    static (options, ct) => new LibraryImportGeneratorOptions(options.GlobalOptions)
-                );
+            IncrementalValueProvider<LibraryImportGeneratorOptions> stubOptions =
+                context.AnalyzerConfigOptionsProvider
+                    .Select(
+                        static (options, ct) =>
+                            new LibraryImportGeneratorOptions(options.GlobalOptions)
+                    );
 
-            IncrementalValueProvider<TargetFrameworkSettings> targetFramework = context
-                .AnalyzerConfigOptionsProvider
-                .Select((options, ct) => options.GlobalOptions.GetTargetFrameworkSettings());
+            IncrementalValueProvider<TargetFrameworkSettings> targetFramework =
+                context.AnalyzerConfigOptionsProvider
+                    .Select((options, ct) => options.GlobalOptions.GetTargetFrameworkSettings());
             IncrementalValueProvider<StubEnvironment> stubEnvironment =
                 context.CreateStubEnvironmentProvider();
 
             // Validate environment that is being used to generate stubs.
             context.RegisterDiagnostics(
-                context
-                    .CompilationProvider
+                context.CompilationProvider
                     .Combine(attributedMethods.Collect())
                     .Combine(targetFramework)
                     .SelectMany(
@@ -343,8 +342,7 @@ namespace Microsoft.Interop
                 }
                 else if (
                     lcidConversionAttrType is not null
-                    && SymbolEqualityComparer
-                        .Default
+                    && SymbolEqualityComparer.Default
                         .Equals(attr.AttributeClass, lcidConversionAttrType)
                 )
                 {
@@ -352,8 +350,7 @@ namespace Microsoft.Interop
                 }
                 else if (
                     suppressGCTransitionAttrType is not null
-                    && SymbolEqualityComparer
-                        .Default
+                    && SymbolEqualityComparer.Default
                         .Equals(attr.AttributeClass, suppressGCTransitionAttrType)
                 )
                 {
@@ -361,8 +358,7 @@ namespace Microsoft.Interop
                 }
                 else if (
                     unmanagedCallConvAttrType is not null
-                    && SymbolEqualityComparer
-                        .Default
+                    && SymbolEqualityComparer.Default
                         .Equals(attr.AttributeClass, unmanagedCallConvAttrType)
                 )
                 {
@@ -370,8 +366,7 @@ namespace Microsoft.Interop
                 }
                 else if (
                     defaultDllImportSearchPathsAttrType is not null
-                    && SymbolEqualityComparer
-                        .Default
+                    && SymbolEqualityComparer.Default
                         .Equals(attr.AttributeClass, defaultDllImportSearchPathsAttrType)
                 )
                 {
@@ -553,8 +548,7 @@ namespace Microsoft.Interop
                 );
             }
 
-            ImmutableArray<AttributeSyntax> forwardedAttributes = pinvokeStub
-                .ForwardedAttributes
+            ImmutableArray<AttributeSyntax> forwardedAttributes = pinvokeStub.ForwardedAttributes
                 .Array;
 
             const string innerPInvokeName = "__PInvoke";
@@ -580,8 +574,7 @@ namespace Microsoft.Interop
             code = code.AddStatements(dllImport);
 
             return (
-                pinvokeStub
-                    .ContainingSyntaxContext
+                pinvokeStub.ContainingSyntaxContext
                     .WrapMemberInContainingSyntaxWithUnsafeModifier(
                         PrintGeneratedSource(
                             pinvokeStub.StubMethodSyntaxTemplate,
@@ -629,8 +622,7 @@ namespace Microsoft.Interop
             }
 
             if (
-                pinvokeData
-                    .IsUserDefined
+                pinvokeData.IsUserDefined
                     .HasFlag(InteropAttributeMember.StringMarshallingCustomType)
             )
             {
@@ -668,10 +660,8 @@ namespace Microsoft.Interop
                     AttributeList(SingletonSeparatedList(CreateForwarderDllImport(pinvokeData)))
                 );
 
-            MemberDeclarationSyntax toPrint =
-                stub.ContainingSyntaxContext.WrapMemberInContainingSyntaxWithUnsafeModifier(
-                    stubMethod
-                );
+            MemberDeclarationSyntax toPrint = stub.ContainingSyntaxContext
+                .WrapMemberInContainingSyntaxWithUnsafeModifier(stubMethod);
 
             return toPrint;
         }

@@ -98,8 +98,7 @@ namespace System.ServiceModel.Channels
             const string privatePart = "/private";
 
             if (relativePath.StartsWith("/private$", StringComparison.OrdinalIgnoreCase))
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(SR.GetString(SR.MsmqWrongPrivateQueueSyntax))
                     );
@@ -139,22 +138,18 @@ namespace System.ServiceModel.Channels
             public string UriToFormatName(Uri uri)
             {
                 if (null == uri)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new ArgumentNullException("uri"));
                 if (uri.Scheme != this.Scheme)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentException(SR.GetString(SR.MsmqInvalidScheme), "uri")
                         );
                 if (String.IsNullOrEmpty(uri.Host))
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgument(SR.GetString(SR.MsmqWrongUri));
                 if (-1 != uri.Port)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgument(SR.GetString(SR.MsmqUnexpectedPort));
 
                 StringBuilder builder = new StringBuilder();
@@ -199,22 +194,18 @@ namespace System.ServiceModel.Channels
             public virtual string UriToFormatName(Uri uri)
             {
                 if (null == uri)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new ArgumentNullException("uri"));
                 if (uri.Scheme != this.Scheme)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentException(SR.GetString(SR.MsmqInvalidScheme), "uri")
                         );
                 if (String.IsNullOrEmpty(uri.Host))
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgument(SR.GetString(SR.MsmqWrongUri));
                 if (-1 != uri.Port)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgument(SR.GetString(SR.MsmqUnexpectedPort));
 
                 uri = PostVerify(uri);
@@ -280,8 +271,7 @@ namespace System.ServiceModel.Channels
                 {
                     MsmqDiagnostics.ExpectedException(ex);
                 }
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentException(SR.GetString(SR.MsmqDLQNotLocal), "uri")
                     );
@@ -300,18 +290,15 @@ namespace System.ServiceModel.Channels
             public string UriToFormatName(Uri uri)
             {
                 if (null == uri)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new ArgumentNullException("uri"));
                 if (uri.Scheme != this.Scheme)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentException(SR.GetString(SR.MsmqInvalidScheme), "uri")
                         );
                 if (String.IsNullOrEmpty(uri.Host))
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgument(SR.GetString(SR.MsmqWrongUri));
 
                 StringBuilder builder = new StringBuilder();
@@ -371,12 +358,10 @@ namespace System.ServiceModel.Channels
             public string UriToFormatName(Uri uri)
             {
                 if (null == uri)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new ArgumentNullException("uri"));
                 if (uri.Scheme != this.Scheme)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentException(SR.GetString(SR.MsmqInvalidScheme), "uri")
                         );

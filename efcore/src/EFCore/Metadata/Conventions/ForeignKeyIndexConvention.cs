@@ -214,8 +214,7 @@ public class ForeignKeyIndexConvention
         var baseKeys = newBaseType?.GetKeys().ToList();
         var baseIndexes = newBaseType?.GetIndexes().ToList();
         foreach (
-            var foreignKey in entityTypeBuilder
-                .Metadata
+            var foreignKey in entityTypeBuilder.Metadata
                 .GetDeclaredForeignKeys()
                 .Concat(entityTypeBuilder.Metadata.GetDerivedForeignKeys())
         )
@@ -274,8 +273,7 @@ public class ForeignKeyIndexConvention
     {
         var index = indexBuilder.Metadata;
         foreach (
-            var otherIndex in index
-                .DeclaringEntityType
+            var otherIndex in index.DeclaringEntityType
                 .GetDerivedTypesInclusive()
                 .SelectMany(t => t.GetDeclaredIndexes())
                 .Where(i =>
@@ -307,8 +305,7 @@ public class ForeignKeyIndexConvention
         }
 
         foreach (
-            var foreignKey in index
-                .DeclaringEntityType
+            var foreignKey in index.DeclaringEntityType
                 .GetDerivedTypesInclusive()
                 .SelectMany(t => t.GetDeclaredForeignKeys())
                 .Where(fk =>
@@ -351,8 +348,7 @@ public class ForeignKeyIndexConvention
         {
             if (!foreignKey.IsUnique)
             {
-                var coveringKey = foreignKey
-                    .DeclaringEntityType
+                var coveringKey = foreignKey.DeclaringEntityType
                     .GetKeys()
                     .FirstOrDefault(k =>
                         AreIndexedBy(
@@ -368,8 +364,7 @@ public class ForeignKeyIndexConvention
                     return;
                 }
 
-                var coveringIndex = foreignKey
-                    .DeclaringEntityType
+                var coveringIndex = foreignKey.DeclaringEntityType
                     .GetIndexes()
                     .FirstOrDefault(i =>
                         AreIndexedBy(foreignKey.Properties, false, i.Properties, i.IsUnique)
@@ -399,8 +394,7 @@ public class ForeignKeyIndexConvention
         if (index.IsUnique)
         {
             foreach (
-                var otherIndex in index
-                    .DeclaringEntityType
+                var otherIndex in index.DeclaringEntityType
                     .GetDerivedTypesInclusive()
                     .SelectMany(t => t.GetDeclaredIndexes())
                     .Where(i =>
@@ -421,8 +415,7 @@ public class ForeignKeyIndexConvention
         else
         {
             foreach (
-                var foreignKey in index
-                    .DeclaringEntityType
+                var foreignKey in index.DeclaringEntityType
                     .GetDerivedTypesInclusive()
                     .SelectMany(t => t.GetDeclaredForeignKeys())
                     .Where(fk =>
@@ -539,8 +532,7 @@ public class ForeignKeyIndexConvention
                     {
                         if (declaredForeignKey.Properties.Count != key.Properties.Count)
                         {
-                            Dependencies
-                                .Logger
+                            Dependencies.Logger
                                 .RedundantIndexRemoved(
                                     declaredForeignKey.Properties,
                                     key.Properties
@@ -562,8 +554,7 @@ public class ForeignKeyIndexConvention
                     {
                         if (declaredForeignKey.Properties.Count != existingIndex.Properties.Count)
                         {
-                            Dependencies
-                                .Logger
+                            Dependencies.Logger
                                 .RedundantIndexRemoved(
                                     declaredForeignKey.Properties,
                                     existingIndex.Properties

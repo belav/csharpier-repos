@@ -24,8 +24,7 @@ public class NullCheckCollectionsFirstOrDefault
     public class DatabaseInitializer : DropCreateDatabaseAlways<TestContext>
     {
         protected override void Seed(TestContext context) =>
-            context
-                .SourceTypes
+            context.SourceTypes
                 .Add(
                     new SourceType
                     {

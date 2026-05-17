@@ -716,8 +716,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             : base(originalDefinition)
         {
             _containingSymbol = containingSymbol;
-            _map = containingSymbol
-                .TypeSubstitution
+            _map = containingSymbol.TypeSubstitution
                 .WithAlphaRename(originalDefinition, this, out _typeParameters);
         }
 

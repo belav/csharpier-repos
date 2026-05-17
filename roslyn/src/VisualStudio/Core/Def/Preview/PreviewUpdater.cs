@@ -61,8 +61,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Preview
                     _previewWorkspace,
                     "We shouldn't have a current document if we don't have a workspace."
                 );
-                var existingDocument = _previewWorkspace
-                    .CurrentSolution
+                var existingDocument = _previewWorkspace.CurrentSolution
                     .GetRequiredTextDocument(_currentDocumentId);
                 if (
                     existingDocument
@@ -81,8 +80,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Preview
                     _previewWorkspace,
                     "We shouldn't have a current document if we don't have a workspace."
                 );
-                var currentDocument = _previewWorkspace
-                    .CurrentSolution
+                var currentDocument = _previewWorkspace.CurrentSolution
                     .GetRequiredTextDocument(_currentDocumentId);
                 var currentDocumentText = currentDocument.GetTextSynchronously(
                     CancellationToken.None
@@ -99,8 +97,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Preview
 
         private void ApplyDocumentToBuffer(TextDocument document, out SourceTextContainer container)
         {
-            var contentTypeService = document
-                .Project
+            var contentTypeService = document.Project
                 .Services
                 .GetRequiredService<IContentTypeLanguageService>();
             var contentType = contentTypeService.GetDefaultContentType();

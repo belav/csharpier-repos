@@ -125,8 +125,7 @@ namespace System.Deployment.Internal.Isolation.Manifest
         {
             if (activationContext1 == null || activationContext2 == null)
                 return activationContext1 == activationContext2;
-            return IsolationInterop
-                .AppIdAuthority
+            return IsolationInterop.AppIdAuthority
                 .AreDefinitionsEqual(
                     0,
                     activationContext1.Identity.Identity,
@@ -158,8 +157,7 @@ namespace System.Deployment.Internal.Isolation.Manifest
                         "versionMatch"
                     );
             }
-            return IsolationInterop
-                .AppIdAuthority
+            return IsolationInterop.AppIdAuthority
                 .AreDefinitionsEqual(
                     flags,
                     applicationIdentity1.Identity,

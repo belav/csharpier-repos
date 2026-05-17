@@ -104,8 +104,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
                 AddError(
                     ErrorCode.InvalidRoleInRelationshipConstraint,
                     EdmSchemaErrorSeverity.Error,
-                    System
-                        .Data
+                    System.Data
                         .Entity
                         .Strings
                         .InvalidEndRoleInRelationshipConstraint(this.Name, relationship.Name)
@@ -139,8 +138,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
                     AddError(
                         ErrorCode.InvalidPropertyInRelationshipConstraint,
                         EdmSchemaErrorSeverity.Error,
-                        System
-                            .Data
+                        System.Data
                             .Entity
                             .Strings
                             .InvalidPropertyInRelationshipConstraint(property.Name, this.Name)

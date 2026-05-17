@@ -103,9 +103,8 @@ namespace System.Data.Mapping.Update.Internal
                     // find all related entries corresponding to collocated association types
                     from end in functionMapping.CollocatedAssociationSetEnds
                     join candidateEntry in translator.GetRelationships(entityKey)
-                        on end.CorrespondingAssociationEndMember.DeclaringType equals candidateEntry
-                            .EntitySet
-                            .ElementType
+                        on end.CorrespondingAssociationEndMember
+                            .DeclaringType equals candidateEntry.EntitySet.ElementType
                     select Tuple.Create(end.CorrespondingAssociationEndMember, candidateEntry);
 
                 var currentReferenceEnds =
@@ -164,8 +163,7 @@ namespace System.Data.Mapping.Update.Internal
                             StorageModificationFunctionResultBinding resultBinding in functionMapping.ResultBindings
                         )
                         {
-                            PropagatorResult result = stateEntry
-                                .Current
+                            PropagatorResult result = stateEntry.Current
                                 .GetMemberValue(resultBinding.Property);
                             command.AddResultColumn(translator, resultBinding.ColumnName, result);
                         }
@@ -316,8 +314,7 @@ namespace System.Data.Mapping.Update.Internal
                     if (null != parameterBinding.MemberPath.AssociationSetEnd)
                     {
                         // find the relationship entry corresponding to the navigation
-                        AssociationEndMember endMember = parameterBinding
-                            .MemberPath
+                        AssociationEndMember endMember = parameterBinding.MemberPath
                             .AssociationSetEnd
                             .CorrespondingAssociationEndMember;
                         IEntityStateEntry relationshipEntry;
@@ -329,8 +326,7 @@ namespace System.Data.Mapping.Update.Internal
                             if (endMember.RelationshipMultiplicity == RelationshipMultiplicity.One)
                             {
                                 string entitySetName = stateEntry.Source.EntitySet.Name;
-                                string associationSetName = parameterBinding
-                                    .MemberPath
+                                string associationSetName = parameterBinding.MemberPath
                                     .AssociationSetEnd
                                     .ParentAssociationSet
                                     .Name;
@@ -355,14 +351,12 @@ namespace System.Data.Mapping.Update.Internal
                         {
                             // get the actual value
                             PropagatorResult relationshipResult = parameterBinding.IsCurrent
-                                ? translator
-                                    .RecordConverter
+                                ? translator.RecordConverter
                                     .ConvertCurrentValuesToPropagatorResult(
                                         relationshipEntry,
                                         ModifiedPropertiesBehavior.AllModified
                                     )
-                                : translator
-                                    .RecordConverter
+                                : translator.RecordConverter
                                     .ConvertOriginalValuesToPropagatorResult(
                                         relationshipEntry,
                                         ModifiedPropertiesBehavior.AllModified

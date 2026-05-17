@@ -212,8 +212,7 @@ namespace System.Web.Security
                     ApplicationServicesStrings.Can_not_use_encrypted_passwords_with_autogen_keys
                 );
 
-            return SystemWebProxy
-                .Membership
+            return SystemWebProxy.Membership
                 .EncryptOrDecryptData(
                     true,
                     password,
@@ -231,8 +230,7 @@ namespace System.Web.Security
 
             try
             {
-                return SystemWebProxy
-                    .Membership
+                return SystemWebProxy.Membership
                     .EncryptOrDecryptData(false, encodedPassword, false);
             }
             catch

@@ -643,8 +643,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
 
             // RenameSymbolAsync may be implemented using OOP, which has known cases for requiring the UI thread to do work. Use JTF
             // to keep the rename action from deadlocking.
-            var newSolution = _threadingContext
-                .JoinableTaskFactory
+            var newSolution = _threadingContext.JoinableTaskFactory
                 .Run(() =>
                     Renamer.RenameSymbolAsync(
                         oldSolution,
@@ -1413,8 +1412,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
                 formattingRules = additionalRules.Concat(formattingRules).ToImmutableArray();
             }
 
-            return _threadingContext
-                .JoinableTaskFactory
+            return _threadingContext.JoinableTaskFactory
                 .Run(async () =>
                 {
                     var options = await document
@@ -1473,8 +1471,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
 
             if (!batchMode)
             {
-                document = _threadingContext
-                    .JoinableTaskFactory
+                document = _threadingContext.JoinableTaskFactory
                     .Run(async () =>
                     {
                         var simplifierOptions = await document

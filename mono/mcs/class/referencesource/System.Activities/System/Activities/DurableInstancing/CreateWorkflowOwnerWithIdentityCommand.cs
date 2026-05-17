@@ -17,8 +17,7 @@ namespace System.Activities.DurableInstancing
 
         public CreateWorkflowOwnerWithIdentityCommand()
             : base(
-                InstancePersistence
-                    .ActivitiesCommandNamespace
+                InstancePersistence.ActivitiesCommandNamespace
                     .GetName("CreateWorkflowOwnerWithIdentity")
             ) { }
 
@@ -47,8 +46,7 @@ namespace System.Activities.DurableInstancing
         {
             if (view.IsBoundToInstanceOwner)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(new InvalidOperationException(SRCore.AlreadyBoundToOwner));
             }
 

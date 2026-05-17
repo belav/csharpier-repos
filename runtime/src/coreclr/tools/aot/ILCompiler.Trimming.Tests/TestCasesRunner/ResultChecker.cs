@@ -145,8 +145,7 @@ namespace Mono.Linker.Tests.TestCasesRunner
             TrimmedTestCaseResult testResult
         )
         {
-            var assembliesToCheck = original
-                .MainModule
+            var assembliesToCheck = original.MainModule
                 .Types
                 .SelectMany(t => t.CustomAttributes)
                 .Where(ExpectationsProvider.IsAssemblyAssertion);
@@ -375,8 +374,7 @@ namespace Mono.Linker.Tests.TestCasesRunner
                                         {
                                             // Note: string.Compare(string, StringComparison) doesn't exist in .NET Framework API set
                                             if (
-                                                actualOrigin
-                                                    .FileName
+                                                actualOrigin.FileName
                                                     .IndexOf(
                                                         fileName,
                                                         StringComparison.OrdinalIgnoreCase
@@ -687,8 +685,7 @@ namespace Mono.Linker.Tests.TestCasesRunner
         {
             if (caProvider is AssemblyDefinition assembly && assembly.EntryPoint != null)
             {
-                customAttribute = assembly
-                    .EntryPoint
+                customAttribute = assembly.EntryPoint
                     .DeclaringType
                     .CustomAttributes
                     .FirstOrDefault(attr => attr!.AttributeType.Name == attributeName, null);
@@ -697,10 +694,8 @@ namespace Mono.Linker.Tests.TestCasesRunner
 
             if (caProvider is TypeDefinition type)
             {
-                customAttribute = type.CustomAttributes.FirstOrDefault(
-                    attr => attr!.AttributeType.Name == attributeName,
-                    null
-                );
+                customAttribute = type.CustomAttributes
+                    .FirstOrDefault(attr => attr!.AttributeType.Name == attributeName, null);
                 return customAttribute is not null;
             }
             customAttribute = null;
@@ -713,16 +708,14 @@ namespace Mono.Linker.Tests.TestCasesRunner
         )
         {
             if (caProvider is AssemblyDefinition assembly && assembly.EntryPoint != null)
-                return assembly
-                    .EntryPoint
+                return assembly.EntryPoint
                     .DeclaringType
                     .CustomAttributes
                     .Where(attr => attr!.AttributeType.Name == attributeName);
 
             if (caProvider is TypeDefinition type)
-                return type.CustomAttributes.Where(attr =>
-                    attr!.AttributeType.Name == attributeName
-                );
+                return type.CustomAttributes
+                    .Where(attr => attr!.AttributeType.Name == attributeName);
 
             return Enumerable.Empty<CustomAttribute>();
         }

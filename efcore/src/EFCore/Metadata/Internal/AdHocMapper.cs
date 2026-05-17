@@ -33,8 +33,7 @@ public class AdHocMapper : IAdHocMapper
         {
             if (_conventionSet == null)
             {
-                _conventionSet = _modelCreationDependencies
-                    .ConventionSetBuilder
+                _conventionSet = _modelCreationDependencies.ConventionSetBuilder
                     .CreateConventionSet();
                 _conventionSet.Remove(typeof(DbSetFindingConvention));
                 _conventionSet.Remove(typeof(RelationshipDiscoveryConvention));
@@ -92,8 +91,7 @@ public class AdHocMapper : IAdHocMapper
         modelBuilder.HasAnnotation(CoreAnnotationNames.AdHocModel, true);
         modelBuilder.Entity(clrType).HasNoKey();
         var finalizedModel = modelBuilder.FinalizeModel();
-        var runtimeModel = _modelCreationDependencies
-            .ModelRuntimeInitializer
+        var runtimeModel = _modelCreationDependencies.ModelRuntimeInitializer
             .Initialize(
                 finalizedModel,
                 designTime: false,

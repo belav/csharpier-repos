@@ -85,8 +85,7 @@ namespace System.Web.Http
             HttpConfiguration config = new HttpConfiguration();
             HttpControllerDescriptor controllerDescriptor = new HttpControllerDescriptor();
 
-            Assert
-                .Reflection
+            Assert.Reflection
                 .Property<HttpControllerDescriptor, HttpConfiguration>(
                     instance: controllerDescriptor,
                     propertyGetter: cd => cd.Configuration,
@@ -102,8 +101,7 @@ namespace System.Web.Http
             string controllerName = "UsersController";
             HttpControllerDescriptor controllerDescriptor = new HttpControllerDescriptor();
 
-            Assert
-                .Reflection
+            Assert.Reflection
                 .Property<HttpControllerDescriptor, string>(
                     instance: controllerDescriptor,
                     propertyGetter: cd => cd.ControllerName,
@@ -119,8 +117,7 @@ namespace System.Web.Http
             Type controllerType = typeof(UsersController);
             HttpControllerDescriptor controllerDescriptor = new HttpControllerDescriptor();
 
-            Assert
-                .Reflection
+            Assert.Reflection
                 .Property<HttpControllerDescriptor, Type>(
                     instance: controllerDescriptor,
                     propertyGetter: cd => cd.ControllerType,
@@ -334,11 +331,9 @@ namespace System.Web.Http
                 HttpControllerDescriptor controllerDescriptor
             )
             {
-                settings
-                    .Services
+                settings.Services
                     .Replace(typeof(IActionValueBinder), MyBaseController.ActionValueBinderBase);
-                settings
-                    .Services
+                settings.Services
                     .Replace(typeof(IHttpActionSelector), MyBaseController.SelectorBase);
             }
         }
@@ -365,8 +360,7 @@ namespace System.Web.Http
                 );
 
                 // Also overwrite them
-                settings
-                    .Services
+                settings.Services
                     .Replace(
                         typeof(IActionValueBinder),
                         MyDerived1Controller.ActionValueBinderDerived1
@@ -388,8 +382,7 @@ namespace System.Web.Http
                 );
 
                 // Also overwrite them
-                settings
-                    .Services
+                settings.Services
                     .Replace(
                         typeof(IActionValueBinder),
                         MyDerived3Controller.ActionValueBinderDerived3

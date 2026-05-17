@@ -71,8 +71,7 @@ namespace System.ServiceModel.Channels
             {
 #if DEBUG_EXPENSIVE
                 String originalStack = closeStack.ToString().Replace("\r\n", "\r\n    ");
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ObjectDisposedException(
                             this.GetType().ToString()
@@ -81,8 +80,7 @@ namespace System.ServiceModel.Channels
                         )
                     );
 #else
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ObjectDisposedException(this.GetType().ToString()));
 #endif
             }
@@ -245,8 +243,7 @@ namespace System.ServiceModel.Channels
                             this.aborted,
                             "LifetimeManager.OnBeginClose: (this.aborted == true)"
                         );
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new ObjectDisposedException(this.GetType().ToString())
                             );
@@ -284,14 +281,12 @@ namespace System.ServiceModel.Channels
             switch (CloseCore(timeout, false))
             {
                 case CommunicationWaitResult.Expired:
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new TimeoutException(SR.GetString(SR.SFxCloseTimedOut1, timeout))
                         );
                 case CommunicationWaitResult.Aborted:
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new ObjectDisposedException(this.GetType().ToString()));
             }
         }
@@ -349,8 +344,7 @@ namespace System.ServiceModel.Channels
             this.mutex = mutex;
 
             if (timeout < TimeSpan.Zero)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new TimeoutException(SR.GetString(SR.SFxCloseTimedOut1, timeout))
                     );

@@ -253,8 +253,7 @@ namespace System.ServiceModel
                 if (ident != null && ident.Certificates.Count > 0)
                     cert = ident.Certificates[0];
                 if (cert == null)
-                    credentials
-                        .ServiceCertificate
+                    credentials.ServiceCertificate
                         .ScopedCertificates
                         .TryGetValue(address.Uri, out cert);
             }

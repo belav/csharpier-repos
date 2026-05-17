@@ -21,8 +21,7 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
         public void MuxerExec_MissingAppAssembly_Fails()
         {
             string assemblyName = Path.Combine(GetNonexistentAndUnnormalizedPath(), "foo.dll");
-            TestContext
-                .BuiltDotNet
+            TestContext.BuiltDotNet
                 .Exec("exec", assemblyName)
                 .CaptureStdOut()
                 .CaptureStdErr()
@@ -39,8 +38,7 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
         public void MuxerExec_MissingAppAssembly_BadExtension_Fails()
         {
             string assemblyName = Path.Combine(GetNonexistentAndUnnormalizedPath(), "foo.xzy");
-            TestContext
-                .BuiltDotNet
+            TestContext.BuiltDotNet
                 .Exec("exec", assemblyName)
                 .CaptureStdOut()
                 .CaptureStdErr()
@@ -60,8 +58,7 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             string fxDir = TestContext.BuiltDotNet.GreatestVersionSharedFxPath;
             string assemblyName = Path.Combine(fxDir, "Microsoft.NETCore.App.deps.json");
 
-            TestContext
-                .BuiltDotNet
+            TestContext.BuiltDotNet
                 .Exec("exec", assemblyName)
                 .CaptureStdOut()
                 .CaptureStdErr()
@@ -77,8 +74,7 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
         [Fact]
         public void MissingArgumentValue_Fails()
         {
-            TestContext
-                .BuiltDotNet
+            TestContext.BuiltDotNet
                 .Exec("--fx-version")
                 .CaptureStdOut()
                 .CaptureStdErr()
@@ -93,8 +89,7 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
         public void InvalidFileOrCommand_NoSDK_ListsPossibleIssues()
         {
             string fileName = "NonExistent";
-            TestContext
-                .BuiltDotNet
+            TestContext.BuiltDotNet
                 .Exec(fileName)
                 .WorkingDirectory(sharedTestState.BaseDirectory.Location)
                 .CaptureStdOut()
@@ -111,8 +106,7 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
         [Fact]
         public void DotNetInfo_NoSDK()
         {
-            TestContext
-                .BuiltDotNet
+            TestContext.BuiltDotNet
                 .Exec("--info")
                 .CaptureStdOut()
                 .CaptureStdErr()

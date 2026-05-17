@@ -180,8 +180,7 @@ namespace System.Text.Json.Serialization.Metadata
                             {
                                 // Exceptions should only be propagated by the resuming converter
 #if NET8_0_OR_GREATER
-                                await state
-                                    .PendingTask
+                                await state.PendingTask
                                     .ConfigureAwait(ConfigureAwaitOptions.SuppressThrowing);
 #else
                                 try

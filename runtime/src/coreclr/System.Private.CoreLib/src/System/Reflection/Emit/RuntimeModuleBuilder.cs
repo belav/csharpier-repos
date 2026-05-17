@@ -565,8 +565,7 @@ namespace System.Reflection.Emit
                     Debug.Assert(masmi != null);
 
                     methDef = masmi.GetGenericMethodDefinition()!;
-                    methDef = methDef
-                        .Module
+                    methDef = methDef.Module
                         .ResolveMethod(
                             methodBase.MetadataToken,
                             methDef.DeclaringType?.GetGenericArguments(),
@@ -575,8 +574,7 @@ namespace System.Reflection.Emit
                 }
                 else
                 {
-                    methDef = methodBase
-                        .Module
+                    methDef = methodBase.Module
                         .ResolveMethod(
                             methodBase.MetadataToken,
                             methodBase.DeclaringType?.GetGenericArguments(),

@@ -25,24 +25,18 @@ namespace System.Net.Http.Functional.Tests
 
         public const int TestTimeoutMilliseconds = 15 * 1000;
 
-        public static X509Certificate2 serverCertificateServerEku = Configuration
-            .Certificates
+        public static X509Certificate2 serverCertificateServerEku = Configuration.Certificates
             .GetServerCertificate();
-        public static X509Certificate2 serverCertificateNoEku = Configuration
-            .Certificates
+        public static X509Certificate2 serverCertificateNoEku = Configuration.Certificates
             .GetNoEKUCertificate();
-        public static X509Certificate2 serverCertificateWrongEku = Configuration
-            .Certificates
+        public static X509Certificate2 serverCertificateWrongEku = Configuration.Certificates
             .GetClientCertificate();
 
-        public static X509Certificate2 clientCertificateWrongEku = Configuration
-            .Certificates
+        public static X509Certificate2 clientCertificateWrongEku = Configuration.Certificates
             .GetServerCertificate();
-        public static X509Certificate2 clientCertificateNoEku = Configuration
-            .Certificates
+        public static X509Certificate2 clientCertificateNoEku = Configuration.Certificates
             .GetNoEKUCertificate();
-        public static X509Certificate2 clientCertificateClientEku = Configuration
-            .Certificates
+        public static X509Certificate2 clientCertificateClientEku = Configuration.Certificates
             .GetClientCertificate();
 
         private VerboseTestLogging _log = VerboseTestLogging.GetInstance();

@@ -211,11 +211,9 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
 
                         title = CodeFixesResources.Use_discard_underscore;
 
-                        var syntaxFacts = context
-                            .Document
+                        var syntaxFacts = context.Document
                             .GetRequiredLanguageService<ISyntaxFactsService>();
-                        var root = await context
-                            .Document
+                        var root = await context.Document
                             .GetRequiredSyntaxRootAsync(context.CancellationToken)
                             .ConfigureAwait(false);
                         var node = root.FindNode(context.Span, getInnermostNodeForTie: true);
@@ -629,8 +627,7 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                                     node
                                 );
                                 // Add Simplifier annotation so that 'var'/explicit type is correctly added based on user options.
-                                var localDecl = editor
-                                    .Generator
+                                var localDecl = editor.Generator
                                     .LocalDeclarationStatement(
                                         name: name,
                                         initializer: expression.WithoutLeadingTrivia()
@@ -989,8 +986,7 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                 string name
             ) =>
                 (TLocalDeclarationStatementSyntax)
-                    editor
-                        .Generator
+                    editor.Generator
                         .LocalDeclarationStatement(type, name)
                         .WithLeadingTrivia(syntaxFacts.ElasticCarriageReturnLineFeed)
                         .WithAdditionalAnnotations(

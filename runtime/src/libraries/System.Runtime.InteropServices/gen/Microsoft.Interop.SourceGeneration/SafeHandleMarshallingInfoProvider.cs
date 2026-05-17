@@ -104,8 +104,7 @@ namespace Microsoft.Interop
             {
                 marshallers = marshallers.Value with
                 {
-                    Modes = ImmutableDictionary<MarshalMode, CustomTypeMarshallerData>
-                        .Empty
+                    Modes = ImmutableDictionary<MarshalMode, CustomTypeMarshallerData>.Empty
                         .Add(
                             MarshalMode.ManagedToUnmanagedIn,
                             marshallers.Value.GetModeOrDefault(MarshalMode.ManagedToUnmanagedIn)

@@ -700,8 +700,7 @@ namespace Mono.CSharp
                     }
                 }
 
-                compiled
-                    .Compiler
+                compiled.Compiler
                     .Report
                     .Warning(
                         3005,
@@ -896,8 +895,7 @@ namespace Mono.CSharp
         {
             if (DeclarationFound)
             {
-                Compiler
-                    .Report
+                Compiler.Report
                     .Error(
                         1529,
                         un.Location,
@@ -915,8 +913,7 @@ namespace Mono.CSharp
         {
             if (DeclarationFound)
             {
-                Compiler
-                    .Report
+                Compiler.Report
                     .Error(
                         1529,
                         un.Location,
@@ -941,8 +938,7 @@ namespace Mono.CSharp
                     if (a != null && a.Alias.Value == un.Alias.Value)
                     {
                         Compiler.Report.SymbolRelatedToPreviousError(a.Location, "");
-                        Compiler
-                            .Report
+                        Compiler.Report
                             .Error(
                                 1537,
                                 un.Location,
@@ -1192,11 +1188,8 @@ namespace Mono.CSharp
                 {
                     foreach (var t in types_using_table)
                     {
-                        var res = t.MemberCache.FindExtensionMethods(
-                            invocationContext,
-                            name,
-                            arity
-                        );
+                        var res = t.MemberCache
+                            .FindExtensionMethods(invocationContext, name, arity);
                         if (res == null)
                             continue;
 
@@ -1351,8 +1344,7 @@ namespace Mono.CSharp
                         // TODO: Namespace has broken location
                         //Report.SymbolRelatedToPreviousError (fne.Location, null);
                         Compiler.Report.SymbolRelatedToPreviousError(uan.Location, null);
-                        Compiler
-                            .Report
+                        Compiler.Report
                             .Error(
                                 576,
                                 loc,
@@ -1735,8 +1727,7 @@ namespace Mono.CSharp
 
         void Warning_DuplicateEntry(UsingClause entry)
         {
-            Compiler
-                .Report
+            Compiler.Report
                 .Warning(
                     105,
                     3,
@@ -1772,8 +1763,7 @@ namespace Mono.CSharp
                 resolved = null;
 
                 compiler.Report.SymbolRelatedToPreviousError(type);
-                compiler
-                    .Report
+                compiler.Report
                     .Error(
                         138,
                         Location,
@@ -1800,8 +1790,7 @@ namespace Mono.CSharp
             if (ns != null)
             {
                 var compiler = ctx.Module.Compiler;
-                compiler
-                    .Report
+                compiler.Report
                     .Error(
                         7007,
                         Location,

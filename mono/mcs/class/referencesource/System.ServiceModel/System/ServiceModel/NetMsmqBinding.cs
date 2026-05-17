@@ -32,8 +32,7 @@ namespace System.ServiceModel
         public NetMsmqBinding(NetMsmqSecurityMode securityMode)
         {
             if (!NetMsmqSecurityModeHelper.IsDefined(securityMode))
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidEnumArgumentException(
                             "mode",
@@ -210,14 +209,12 @@ namespace System.ServiceModel
 
         void ApplyConfiguration(string configurationName)
         {
-            Config.NetMsmqBindingCollectionElement section = Config
-                .NetMsmqBindingCollectionElement
+            Config.NetMsmqBindingCollectionElement section = Config.NetMsmqBindingCollectionElement
                 .GetBindingCollectionElement();
             Config.NetMsmqBindingElement element = section.Bindings[configurationName];
             if (element == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ConfigurationErrorsException(
                             SR.GetString(

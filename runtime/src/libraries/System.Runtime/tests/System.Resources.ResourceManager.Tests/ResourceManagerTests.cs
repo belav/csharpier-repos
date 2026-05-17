@@ -298,12 +298,13 @@ namespace System.Resources.Tests
             Task[] tasks = Enumerable
                 .Range(0, Threads)
                 .Select(_ =>
-                    Task.Factory.StartNew(
-                        WaitForBarrierThenEnumerateResources,
-                        CancellationToken.None,
-                        TaskCreationOptions.LongRunning,
-                        TaskScheduler.Default
-                    )
+                    Task.Factory
+                        .StartNew(
+                            WaitForBarrierThenEnumerateResources,
+                            CancellationToken.None,
+                            TaskCreationOptions.LongRunning,
+                            TaskScheduler.Default
+                        )
                 )
                 .ToArray();
 

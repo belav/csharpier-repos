@@ -94,8 +94,7 @@ public static class OAuthExtensions
         where TOptions : OAuthOptions, new()
         where THandler : OAuthHandler<TOptions>
     {
-        builder
-            .Services
+        builder.Services
             .TryAddEnumerable(
                 ServiceDescriptor.Singleton<
                     IPostConfigureOptions<TOptions>,

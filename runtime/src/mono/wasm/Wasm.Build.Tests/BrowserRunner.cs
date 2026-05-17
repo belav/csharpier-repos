@@ -97,8 +97,7 @@ internal class BrowserRunner : IAsyncDisposable
         _testOutput.WriteLine(
             $"Launching chrome ('{s_chromePath.Value}') via playwright with args = {string.Join(',', chromeArgs)}"
         );
-        return Browser = await Playwright
-            .Chromium
+        return Browser = await Playwright.Chromium
             .LaunchAsync(
                 new BrowserTypeLaunchOptions
                 {

@@ -111,9 +111,10 @@ namespace System.Activities.Core.Presentation
             {
                 IEnumerable<ConnectionPoint> availablePoints = destConnPoints.Where(p =>
                     p.PointType != excludePointType
-                    && p.AttachedConnectors.Any(connector =>
-                        FreeFormPanel.GetDestinationConnectionPoint(connector).Equals(p)
-                    )
+                    && p.AttachedConnectors
+                        .Any(connector =>
+                            FreeFormPanel.GetDestinationConnectionPoint(connector).Equals(p)
+                        )
                 );
 
                 candidateDestConnPoints = availablePoints.Any()
@@ -298,8 +299,7 @@ namespace System.Activities.Core.Presentation
                 if (connPoint != null)
                 {
                     outGoingConnectors.AddRange(
-                        connPoint
-                            .AttachedConnectors
+                        connPoint.AttachedConnectors
                             .Where(p => FreeFormPanel.GetSourceConnectionPoint(p).Equals(connPoint))
                     );
                 }
@@ -316,8 +316,7 @@ namespace System.Activities.Core.Presentation
                 if (connPoint != null)
                 {
                     inComingConnectors.AddRange(
-                        connPoint
-                            .AttachedConnectors
+                        connPoint.AttachedConnectors
                             .Where(p =>
                                 FreeFormPanel.GetDestinationConnectionPoint(p).Equals(connPoint)
                             )

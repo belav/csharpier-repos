@@ -211,8 +211,7 @@ public class CustomParsingTests
         CliConfiguration simpleConfig = new(command);
         command.Parse("", simpleConfig);
 
-        argumentResult
-            .Parent
+        argumentResult.Parent
             .Should()
             .BeOfType<OptionResult>()
             .Which
@@ -240,8 +239,7 @@ public class CustomParsingTests
 
         command.Parse("");
 
-        argumentResult
-            .Parent
+        argumentResult.Parent
             .Parent
             .Should()
             .BeOfType<CommandResult>()
@@ -294,8 +292,7 @@ public class CustomParsingTests
 
         command.Parse("");
 
-        argumentResult
-            .Parent
+        argumentResult.Parent
             .Should()
             .BeOfType<CommandResult>()
             .Which
@@ -411,8 +408,7 @@ public class CustomParsingTests
 
         var parseResult = command.Parse(commandLine);
 
-        parseResult
-            .Errors
+        parseResult.Errors
             .Single(e =>
                 e.SymbolResult is OptionResult optResult
                 && optResult.Option == optionThatDependsOnOptionWithError
@@ -641,8 +637,7 @@ public class CustomParsingTests
 
         ParseResult parseResult = new CliRootCommand() { option }.Parse("-ip a.b.c.d");
 
-        parseResult
-            .Errors
+        parseResult.Errors
             .Should()
             .Contain(error => error.Message == "'a.b.c.d' is not a valid value");
     }
@@ -669,8 +664,7 @@ public class CustomParsingTests
 
         var parseResult = command.Parse("1 2 3 4 5 6 7 8");
 
-        parseResult
-            .UnmatchedTokens
+        parseResult.UnmatchedTokens
             .Should()
             .BeEquivalentTo(
                 new[] { "4", "5", "6", "7", "8" },

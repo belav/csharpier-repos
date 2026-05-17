@@ -79,8 +79,7 @@ namespace System.IO
             attrList.commonAttr = Interop.libc.AttrList.ATTR_CMN_CRTIME;
 
             int result = handle is not null
-                ? Interop
-                    .libc
+                ? Interop.libc
                     .fsetattrlist(
                         handle,
                         &attrList,
@@ -88,8 +87,7 @@ namespace System.IO
                         sizeof(Interop.Sys.TimeSpec),
                         new CULong(Interop.libc.FSOPT_NOFOLLOW)
                     )
-                : Interop
-                    .libc
+                : Interop.libc
                     .setattrlist(
                         path!,
                         &attrList,

@@ -198,8 +198,7 @@ namespace System.ServiceModel.Security.Tokens
 
         SecurityContextSecurityToken(SecurityContextSecurityToken from)
         {
-            ReadOnlyCollection<IAuthorizationPolicy> authorizationPolicies = System
-                .IdentityModel
+            ReadOnlyCollection<IAuthorizationPolicy> authorizationPolicies = System.IdentityModel
                 .SecurityUtils
                 .CloneAuthorizationPoliciesIfNecessary(from.authorizationPolicies);
             this.id = from.id;
@@ -364,8 +363,7 @@ namespace System.ServiceModel.Security.Tokens
             DateTime tokenExpirationTimeUtc = validTo.ToUniversalTime();
             if (tokenEffectiveTimeUtc > tokenExpirationTimeUtc)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(
                         "validFrom",
                         SR.GetString(SR.EffectiveGreaterThanExpiration)
@@ -378,8 +376,7 @@ namespace System.ServiceModel.Security.Tokens
             this.keyExpirationTime = keyExpirationTime.ToUniversalTime();
             if (this.keyEffectiveTime > this.keyExpirationTime)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(
                         "keyEffectiveTime",
                         SR.GetString(SR.EffectiveGreaterThanExpiration)
@@ -390,8 +387,7 @@ namespace System.ServiceModel.Security.Tokens
                 || (this.keyExpirationTime > tokenExpirationTimeUtc)
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(SR.GetString(SR.KeyLifetimeNotWithinTokenLifetime));
             }
 
@@ -515,8 +511,7 @@ namespace System.ServiceModel.Security.Tokens
             if (!this.disposed)
             {
                 this.disposed = true;
-                System
-                    .IdentityModel
+                System.IdentityModel
                     .SecurityUtils
                     .DisposeAuthorizationPoliciesIfNecessary(this.authorizationPolicies);
                 if (this.bootstrapMessageProperty != null)
@@ -530,8 +525,7 @@ namespace System.ServiceModel.Security.Tokens
         {
             if (this.disposed)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ObjectDisposedException(this.GetType().FullName));
             }
         }

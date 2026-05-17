@@ -141,8 +141,7 @@ namespace System.Windows.Forms
                     bounds.Width - 1,
                     bounds.Height - 1
                 );
-                ThemeEngine
-                    .Current
+                ThemeEngine.Current
                     .CPDrawFocusRectangle(graphics, rect, subItem.ForeColor, subItem.BackColor);
             }
         }

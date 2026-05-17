@@ -15,8 +15,7 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Pythia.Api
             int position,
             CancellationToken cancellationToken
         ) =>
-            CSharp
-                .Extensions
+            CSharp.Extensions
                 .SyntaxTreeExtensions
                 .IsInNonUserCode(syntaxTree, position, cancellationToken);
 
@@ -34,8 +33,7 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Pythia.Api
             bool includeDirectives = false,
             bool includeDocumentationComments = false
         ) =>
-            Shared
-                .Extensions
+            Shared.Extensions
                 .SyntaxTreeExtensions
                 .FindTokenOnLeftOfPosition(
                     syntaxTree,

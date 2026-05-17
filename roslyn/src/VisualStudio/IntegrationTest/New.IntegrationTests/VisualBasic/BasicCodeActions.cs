@@ -22,8 +22,7 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.VisualBasic
         [IdeFact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
         public async Task GenerateMethodInClosedFile()
         {
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .AddFileAsync(
                     ProjectName,
                     "Goo.vb",
@@ -49,8 +48,7 @@ End Class
             );
 
             await TestServices.Editor.InvokeCodeActionListAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .CodeActionAsync(
                     "Generate method 'Bar'",
                     applyFix: true,
@@ -64,8 +62,7 @@ Class Goo
     End Sub
 End Class
 ",
-                await TestServices
-                    .SolutionExplorer
+                await TestServices.SolutionExplorer
                     .GetFileContentsAsync(ProjectName, "Goo.vb", HangMitigatingCancellationToken)
             );
         }

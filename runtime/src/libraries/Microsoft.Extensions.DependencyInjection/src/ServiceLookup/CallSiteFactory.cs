@@ -163,12 +163,11 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
                     );
                 }
 
-                bool serviceHasNewConstraint = serviceGenericType
-                    .GenericParameterAttributes
+                bool serviceHasNewConstraint = serviceGenericType.GenericParameterAttributes
                     .HasFlag(GenericParameterAttributes.DefaultConstructorConstraint);
-                bool implementationHasNewConstraint = implementationGenericType
-                    .GenericParameterAttributes
-                    .HasFlag(GenericParameterAttributes.DefaultConstructorConstraint);
+                bool implementationHasNewConstraint =
+                    implementationGenericType.GenericParameterAttributes
+                        .HasFlag(GenericParameterAttributes.DefaultConstructorConstraint);
                 if (implementationHasNewConstraint && !serviceHasNewConstraint)
                 {
                     throw new ArgumentException(
@@ -658,8 +657,7 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
                 Type closedType;
                 try
                 {
-                    Type[] genericTypeArguments = serviceIdentifier
-                        .ServiceType
+                    Type[] genericTypeArguments = serviceIdentifier.ServiceType
                         .GenericTypeArguments;
                     if (ServiceProvider.VerifyAotCompatibility)
                     {

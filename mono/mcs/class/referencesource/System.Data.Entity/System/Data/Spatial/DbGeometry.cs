@@ -99,8 +99,7 @@ namespace System.Data.Spatial
         public static DbGeometry FromBinary(byte[] wellKnownBinary, int coordinateSystemId)
         {
             wellKnownBinary.CheckNull("wellKnownBinary");
-            return DbSpatialServices
-                .Default
+            return DbSpatialServices.Default
                 .GeometryFromBinary(wellKnownBinary, coordinateSystemId);
         }
 
@@ -115,8 +114,7 @@ namespace System.Data.Spatial
         public static DbGeometry LineFromBinary(byte[] lineWellKnownBinary, int coordinateSystemId)
         {
             lineWellKnownBinary.CheckNull("lineWellKnownBinary");
-            return DbSpatialServices
-                .Default
+            return DbSpatialServices.Default
                 .GeometryLineFromBinary(lineWellKnownBinary, coordinateSystemId);
         }
 
@@ -134,8 +132,7 @@ namespace System.Data.Spatial
         )
         {
             pointWellKnownBinary.CheckNull("pointWellKnownBinary");
-            return DbSpatialServices
-                .Default
+            return DbSpatialServices.Default
                 .GeometryPointFromBinary(pointWellKnownBinary, coordinateSystemId);
         }
 
@@ -153,8 +150,7 @@ namespace System.Data.Spatial
         )
         {
             polygonWellKnownBinary.CheckNull("polygonWellKnownBinary");
-            return DbSpatialServices
-                .Default
+            return DbSpatialServices.Default
                 .GeometryPolygonFromBinary(polygonWellKnownBinary, coordinateSystemId);
         }
 
@@ -196,8 +192,7 @@ namespace System.Data.Spatial
         )
         {
             multiLineWellKnownBinary.CheckNull("multiLineWellKnownBinary");
-            return DbSpatialServices
-                .Default
+            return DbSpatialServices.Default
                 .GeometryMultiLineFromBinary(multiLineWellKnownBinary, coordinateSystemId);
         }
 
@@ -239,8 +234,7 @@ namespace System.Data.Spatial
         )
         {
             multiPointWellKnownBinary.CheckNull("multiPointWellKnownBinary");
-            return DbSpatialServices
-                .Default
+            return DbSpatialServices.Default
                 .GeometryMultiPointFromBinary(multiPointWellKnownBinary, coordinateSystemId);
         }
 
@@ -270,8 +264,7 @@ namespace System.Data.Spatial
         )
         {
             multiPolygonWellKnownBinary.CheckNull("multiPolygonWellKnownBinary");
-            return DbSpatialServices
-                .Default
+            return DbSpatialServices.Default
                 .GeometryMultiPolygonFromBinary(multiPolygonWellKnownBinary, coordinateSystemId);
         }
 
@@ -289,8 +282,7 @@ namespace System.Data.Spatial
         )
         {
             geometryCollectionWellKnownBinary.CheckNull("geometryCollectionWellKnownBinary");
-            return DbSpatialServices
-                .Default
+            return DbSpatialServices.Default
                 .GeometryCollectionFromBinary(
                     geometryCollectionWellKnownBinary,
                     coordinateSystemId
@@ -378,8 +370,7 @@ namespace System.Data.Spatial
         public static DbGeometry LineFromText(string lineWellKnownText, int coordinateSystemId)
         {
             lineWellKnownText.CheckNull("lineWellKnownText");
-            return DbSpatialServices
-                .Default
+            return DbSpatialServices.Default
                 .GeometryLineFromText(lineWellKnownText, coordinateSystemId);
         }
 
@@ -394,8 +385,7 @@ namespace System.Data.Spatial
         public static DbGeometry PointFromText(string pointWellKnownText, int coordinateSystemId)
         {
             pointWellKnownText.CheckNull("pointWellKnownText");
-            return DbSpatialServices
-                .Default
+            return DbSpatialServices.Default
                 .GeometryPointFromText(pointWellKnownText, coordinateSystemId);
         }
 
@@ -413,8 +403,7 @@ namespace System.Data.Spatial
         )
         {
             polygonWellKnownText.CheckNull("polygonWellKnownText");
-            return DbSpatialServices
-                .Default
+            return DbSpatialServices.Default
                 .GeometryPolygonFromText(polygonWellKnownText, coordinateSystemId);
         }
 
@@ -456,8 +445,7 @@ namespace System.Data.Spatial
         )
         {
             multiLineWellKnownText.CheckNull("multiLineWellKnownText");
-            return DbSpatialServices
-                .Default
+            return DbSpatialServices.Default
                 .GeometryMultiLineFromText(multiLineWellKnownText, coordinateSystemId);
         }
 
@@ -499,8 +487,7 @@ namespace System.Data.Spatial
         )
         {
             multiPointWellKnownText.CheckNull("multiPointWellKnownText");
-            return DbSpatialServices
-                .Default
+            return DbSpatialServices.Default
                 .GeometryMultiPointFromText(multiPointWellKnownText, coordinateSystemId);
         }
 
@@ -530,8 +517,7 @@ namespace System.Data.Spatial
         )
         {
             multiPolygonWellKnownText.CheckNull("multiPolygonWellKnownText");
-            return DbSpatialServices
-                .Default
+            return DbSpatialServices.Default
                 .GeometryMultiPolygonFromText(multiPolygonWellKnownText, coordinateSystemId);
         }
 
@@ -549,8 +535,7 @@ namespace System.Data.Spatial
         )
         {
             geometryCollectionWellKnownText.CheckNull("geometryCollectionWellKnownText");
-            return DbSpatialServices
-                .Default
+            return DbSpatialServices.Default
                 .GeometryCollectionFromText(geometryCollectionWellKnownText, coordinateSystemId);
         }
 

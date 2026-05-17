@@ -331,8 +331,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         AnonymousTypePropertySymbol property = anonymousType.Properties[i];
 
                         // build format string
-                        formatString
-                            .Builder
+                        formatString.Builder
                             .AppendFormat(
                                 i == 0 ? "{{{{ {0} = {{{1}}}" : ", {0} = {{{1}}}",
                                 property.Name,

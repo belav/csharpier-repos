@@ -32,9 +32,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
     [UseExportProvider]
     public class EditSessionActiveStatementsTests : TestBase
     {
-        private static readonly TestComposition s_composition = EditorTestCompositions
-            .EditorFeatures
-            .AddParts(typeof(NoCompilationLanguageService));
+        private static readonly TestComposition s_composition =
+            EditorTestCompositions.EditorFeatures.AddParts(typeof(NoCompilationLanguageService));
 
         private static EditSession CreateEditSession(
             Solution solution,
@@ -231,8 +230,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
                 "dummy_proj",
                 NoCompilationConstants.LanguageName
             );
-            solution = dummyProject
-                .Solution
+            solution = dummyProject.Solution
                 .AddDocument(
                     DocumentId.CreateNewId(dummyProject.Id, NoCompilationConstants.LanguageName),
                     "a.dummy",
@@ -243,15 +241,13 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
             var document2 = project.Documents.Single(d => d.Name == "test2.cs");
 
             var editSession = CreateEditSession(solution, activeStatements);
-            var baseActiveStatementsMap = await editSession
-                .BaseActiveStatements
+            var baseActiveStatementsMap = await editSession.BaseActiveStatements
                 .GetValueAsync(CancellationToken.None)
                 .ConfigureAwait(false);
 
             // Active Statements
 
-            var statements = baseActiveStatementsMap
-                .InstructionMap
+            var statements = baseActiveStatementsMap.InstructionMap
                 .Values
                 .OrderBy(v => v.Ordinal)
                 .ToArray();
@@ -459,15 +455,13 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
             var document = project.Documents.Single();
 
             var editSession = CreateEditSession(solution, baseActiveStatementInfos);
-            var baseActiveStatementMap = await editSession
-                .BaseActiveStatements
+            var baseActiveStatementMap = await editSession.BaseActiveStatements
                 .GetValueAsync(CancellationToken.None)
                 .ConfigureAwait(false);
 
             // Active Statements
 
-            var baseActiveStatements = baseActiveStatementMap
-                .InstructionMap
+            var baseActiveStatements = baseActiveStatementMap.InstructionMap
                 .Values
                 .OrderBy(v => v.Ordinal)
                 .ToArray();
@@ -740,15 +734,13 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
                 activeStatementsPreRemap,
                 initialNonRemappableRegions
             );
-            var baseActiveStatementMap = await editSession
-                .BaseActiveStatements
+            var baseActiveStatementMap = await editSession.BaseActiveStatements
                 .GetValueAsync(CancellationToken.None)
                 .ConfigureAwait(false);
 
             // Active Statements
 
-            var baseActiveStatements = baseActiveStatementMap
-                .InstructionMap
+            var baseActiveStatements = baseActiveStatementMap.InstructionMap
                 .Values
                 .OrderBy(v => v.Ordinal)
                 .ToArray();
@@ -940,8 +932,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
             var document = project.Documents.Single();
 
             var editSession = CreateEditSession(solution, activeStatements);
-            var baseActiveStatementMap = await editSession
-                .BaseActiveStatements
+            var baseActiveStatementMap = await editSession.BaseActiveStatements
                 .GetValueAsync(CancellationToken.None)
                 .ConfigureAwait(false);
 
@@ -962,8 +953,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
 
             Assert.Equal(2, baseActiveStatementMap.InstructionMap.Count);
 
-            var statements = baseActiveStatementMap
-                .InstructionMap
+            var statements = baseActiveStatementMap.InstructionMap
                 .Values
                 .OrderBy(v => v.InstructionId.Method.Token)
                 .ToArray();

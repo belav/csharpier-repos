@@ -121,12 +121,13 @@ namespace System.Workflow.Runtime.Hosting
             }
             else
             {
-                this.channelPool.ReturnConnection(
-                    key,
-                    channel,
-                    connectionIsStillGood,
-                    ServiceDefaults.CloseTimeout
-                );
+                this.channelPool
+                    .ReturnConnection(
+                        key,
+                        channel,
+                        connectionIsStillGood,
+                        ServiceDefaults.CloseTimeout
+                    );
             }
         }
 
@@ -178,27 +179,30 @@ namespace System.Workflow.Runtime.Hosting
                             );
                         }
 
-                        channel = this.channelPool.TakeConnection(
-                            cacheAddress,
-                            via,
-                            ServiceDefaults.OpenTimeout,
-                            out key
-                        );
-                        while (channel != null && channel.State != CommunicationState.Opened)
-                        {
-                            // Loop will exit because non-opened channels are returned with 'connectionStillGood=false'
-                            this.channelPool.ReturnConnection(
-                                key,
-                                channel,
-                                false,
-                                ServiceDefaults.CloseTimeout
-                            );
-                            channel = this.channelPool.TakeConnection(
+                        channel = this.channelPool
+                            .TakeConnection(
                                 cacheAddress,
                                 via,
                                 ServiceDefaults.OpenTimeout,
                                 out key
                             );
+                        while (channel != null && channel.State != CommunicationState.Opened)
+                        {
+                            // Loop will exit because non-opened channels are returned with 'connectionStillGood=false'
+                            this.channelPool
+                                .ReturnConnection(
+                                    key,
+                                    channel,
+                                    false,
+                                    ServiceDefaults.CloseTimeout
+                                );
+                            channel = this.channelPool
+                                .TakeConnection(
+                                    cacheAddress,
+                                    via,
+                                    ServiceDefaults.OpenTimeout,
+                                    out key
+                                );
                         }
 
                         if (channel == null)
@@ -351,8 +355,7 @@ namespace System.Workflow.Runtime.Hosting
                 this.channelFactory = channelFactory;
                 this.contractType = contractType;
 
-                ISecurityCapabilities securityCapabilities = channelFactory
-                    .Endpoint
+                ISecurityCapabilities securityCapabilities = channelFactory.Endpoint
                     .Binding
                     .GetProperty<ISecurityCapabilities>(new BindingParameterCollection());
                 if (securityCapabilities != null)

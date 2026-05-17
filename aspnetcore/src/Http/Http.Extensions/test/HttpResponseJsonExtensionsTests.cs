@@ -114,8 +114,7 @@ public class HttpResponseJsonExtensionsTests
         context.Response.Body = body;
 
         // Act
-        await context
-            .Response
+        await context.Response
             .WriteAsJsonAsync(1, options: null, contentType: "application/custom-type");
 
         // Assert
@@ -396,8 +395,7 @@ public class HttpResponseJsonExtensionsTests
 
         // Act
         await Assert.ThrowsAnyAsync<OperationCanceledException>(() =>
-            context
-                .Response
+            context.Response
                 .WriteAsJsonAsync(AsyncEnumerable(), typeof(IAsyncEnumerable<int>), cts.Token)
         );
 
@@ -473,8 +471,7 @@ public class HttpResponseJsonExtensionsTests
         var options = new JsonSerializerOptions();
         options.TypeInfoResolver = new DefaultJsonTypeInfoResolver();
 
-        await context
-            .Response
+        await context.Response
             .WriteAsJsonAsync(
                 new int[] { 1, 2, 3 },
                 (JsonTypeInfo<int[]>)options.GetTypeInfo(typeof(int[]))

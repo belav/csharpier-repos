@@ -647,8 +647,7 @@ public class ClientHandlerTests
             PathString.Empty,
             new DummyApplication(context =>
             {
-                context
-                    .Response
+                context.Response
                     .OnStarting(() =>
                     {
                         throw new InvalidOperationException(new string('a', 1024 * 32));
@@ -669,8 +668,7 @@ public class ClientHandlerTests
             PathString.Empty,
             new DummyApplication(context =>
             {
-                context
-                    .Response
+                context.Response
                     .OnStarting(() =>
                     {
                         throw new InvalidOperationException(new string('a', 1024 * 32));
@@ -691,8 +689,7 @@ public class ClientHandlerTests
             PathString.Empty,
             new DummyApplication(async context =>
             {
-                context
-                    .Response
+                context.Response
                     .OnStarting(() =>
                     {
                         throw new InvalidOperationException(new string('a', 1024 * 32));

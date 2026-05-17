@@ -251,8 +251,7 @@ public static partial class RelationalEntityTypeBuilderExtensions
 
         ownedNavigationBuilder.OwnedEntityType.SetViewName(name);
         ownedNavigationBuilder.OwnedEntityType.SetViewSchema(schema);
-        ownedNavigationBuilder
-            .OwnedEntityType
+        ownedNavigationBuilder.OwnedEntityType
             .SetAnnotation(RelationalAnnotationNames.ViewDefinitionSql, null);
 
         return ownedNavigationBuilder;
@@ -345,8 +344,7 @@ public static partial class RelationalEntityTypeBuilderExtensions
 
         ownedNavigationBuilder.OwnedEntityType.SetViewName(name);
         ownedNavigationBuilder.OwnedEntityType.SetViewSchema(schema);
-        ownedNavigationBuilder
-            .OwnedEntityType
+        ownedNavigationBuilder.OwnedEntityType
             .SetAnnotation(RelationalAnnotationNames.ViewDefinitionSql, null);
         buildAction(
             new OwnedNavigationViewBuilder(
@@ -391,8 +389,7 @@ public static partial class RelationalEntityTypeBuilderExtensions
 
         ownedNavigationBuilder.OwnedEntityType.SetViewName(name);
         ownedNavigationBuilder.OwnedEntityType.SetViewSchema(schema);
-        ownedNavigationBuilder
-            .OwnedEntityType
+        ownedNavigationBuilder.OwnedEntityType
             .SetAnnotation(RelationalAnnotationNames.ViewDefinitionSql, null);
         buildAction(
             new OwnedNavigationViewBuilder<TOwnerEntity, TDependentEntity>(

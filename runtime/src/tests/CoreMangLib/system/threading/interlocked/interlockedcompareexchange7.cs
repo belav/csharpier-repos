@@ -52,8 +52,7 @@ public class InterlockedCompareExchange7
         bool retVal = true;
         object location;
 
-        TestLibrary
-            .TestFramework
+        TestLibrary.TestFramework
             .BeginScenario(
                 "PosTest1: object Interlocked.CompareExchange<object>(object&,object, object) where comparand is equal"
             );
@@ -145,8 +144,7 @@ public class InterlockedCompareExchange7
                 ) && retVal;
 
             TestLibrary.TestFramework.BeginScenario("PosTest1: object == string");
-            location = TestLibrary
-                .Generator
+            location = TestLibrary.Generator
                 .GetString(-55, false, c_MIN_STRING_LEN, c_MAX_STRING_LEN);
             retVal =
                 ExchangeObjects(
@@ -154,8 +152,7 @@ public class InterlockedCompareExchange7
                     location,
                     location,
                     (object)
-                        TestLibrary
-                            .Generator
+                        TestLibrary.Generator
                             .GetString(-55, false, c_MIN_STRING_LEN, c_MAX_STRING_LEN)
                 ) && retVal;
 
@@ -186,8 +183,7 @@ public class InterlockedCompareExchange7
         object location;
         object other;
 
-        TestLibrary
-            .TestFramework
+        TestLibrary.TestFramework
             .BeginScenario(
                 "PosTest2: object Interlocked.CompareExchange<object>(object&,object, object) where comparand are not equal"
             );
@@ -247,8 +243,7 @@ public class InterlockedCompareExchange7
                 ExchangeObjects(false, location, (object)((Double)location + 1), other) && retVal;
 
             TestLibrary.TestFramework.BeginScenario("PosTest1: object == string");
-            location = TestLibrary
-                .Generator
+            location = TestLibrary.Generator
                 .GetString(-55, false, c_MIN_STRING_LEN, c_MAX_STRING_LEN);
             retVal =
                 ExchangeObjects(
@@ -290,15 +285,13 @@ public class InterlockedCompareExchange7
 
         if (!exchange && comparand == location)
         {
-            TestLibrary
-                .TestFramework
+            TestLibrary.TestFramework
                 .LogError("003", "Comparand and location are equal unexpectedly!!!!");
             retVal = false;
         }
         if (exchange && comparand != location)
         {
-            TestLibrary
-                .TestFramework
+            TestLibrary.TestFramework
                 .LogError("004", "Comparand and location are not equal unexpectadly!!!!");
             retVal = false;
         }
@@ -321,8 +314,7 @@ public class InterlockedCompareExchange7
         {
             if (!Object.ReferenceEquals(value, location))
             {
-                TestLibrary
-                    .TestFramework
+                TestLibrary.TestFramework
                     .LogError(
                         "005",
                         "Interlocked.CompareExchange() did not do the exchange correctly: Expected location("
@@ -335,8 +327,7 @@ public class InterlockedCompareExchange7
             }
             if (!Object.ReferenceEquals(oldLocation, originalLocation))
             {
-                TestLibrary
-                    .TestFramework
+                TestLibrary.TestFramework
                     .LogError(
                         "006",
                         "Interlocked.CompareExchange() did not return the expected value: Expected oldLocation("
@@ -356,8 +347,7 @@ public class InterlockedCompareExchange7
         {
             if (!Object.ReferenceEquals(location, originalLocation))
             {
-                TestLibrary
-                    .TestFramework
+                TestLibrary.TestFramework
                     .LogError(
                         "007",
                         "Interlocked.CompareExchange() should not change the location: Expected location("
@@ -370,8 +360,7 @@ public class InterlockedCompareExchange7
             }
             if (!Object.ReferenceEquals(oldLocation, originalLocation))
             {
-                TestLibrary
-                    .TestFramework
+                TestLibrary.TestFramework
                     .LogError(
                         "008",
                         "Interlocked.CompareExchange() did not return the expected value: Expected oldLocation("

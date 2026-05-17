@@ -70,8 +70,7 @@ public class Startup
                                             userPath,
                                             StringComparison.OrdinalIgnoreCase
                                         )
-                                        || directory
-                                            .FullName
+                                        || directory.FullName
                                             .StartsWith(
                                                 userPath + Path.DirectorySeparatorChar,
                                                 StringComparison.OrdinalIgnoreCase

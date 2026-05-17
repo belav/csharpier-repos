@@ -168,8 +168,7 @@ namespace System.Xaml
             )
             {
                 if (type == typeof(DateTime))
-                    return System
-                        .Xml
+                    return System.Xml
                         .XmlConvert
                         .ToDateTime(
                             (string)value,

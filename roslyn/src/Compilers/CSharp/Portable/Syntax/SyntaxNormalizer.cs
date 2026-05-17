@@ -959,8 +959,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
                     // No spacing between the calling convention specifier and the opening angle
                     // delegate* unmanaged[Cdecl]<
                     case SyntaxKind.CloseBracketToken
-                        when token
-                            .Parent
+                        when token.Parent
                             .IsKind(SyntaxKind.FunctionPointerUnmanagedCallingConventionList):
                         return false;
                 }

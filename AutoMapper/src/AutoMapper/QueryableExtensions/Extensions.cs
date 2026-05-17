@@ -14,8 +14,7 @@ public static class Extensions
     );
 
     static IQueryable Select(IQueryable source, LambdaExpression lambda) =>
-        source
-            .Provider
+        source.Provider
             .CreateQuery(
                 Call(
                     SelectMethod.MakeGenericMethod(source.ElementType, lambda.ReturnType),

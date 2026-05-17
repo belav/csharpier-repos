@@ -18,8 +18,7 @@ namespace System.ServiceModel.MsmqIntegration
             if (null == message)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("message");
             if (null == message.Properties)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("message.Properties");
 
             return message.Properties[Name] as MsmqIntegrationMessageProperty;
@@ -180,8 +179,7 @@ namespace System.ServiceModel.MsmqIntegration
                     || priority.Value > MessagePriority.Highest
                 )
             )
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidEnumArgumentException(
                             "priority",
@@ -195,8 +193,7 @@ namespace System.ServiceModel.MsmqIntegration
         {
             if (timeout.HasValue && timeout.Value < TimeSpan.Zero)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentOutOfRangeException(
                             "value",
@@ -208,8 +205,7 @@ namespace System.ServiceModel.MsmqIntegration
 
             if (timeout.HasValue && TimeoutHelper.IsTooLarge(timeout.Value))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentOutOfRangeException(
                             "value",

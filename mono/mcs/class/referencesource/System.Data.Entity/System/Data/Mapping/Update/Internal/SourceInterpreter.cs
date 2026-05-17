@@ -75,8 +75,7 @@ namespace System.Data.Mapping.Update.Internal
                             // Return the owner as well if the owner is also mapped to this table.
                             PropagatorResult owner;
                             if (
-                                m_translator
-                                    .KeyManager
+                                m_translator.KeyManager
                                     .TryGetIdentifierOwner(source.Identifier, out owner)
                                 && null != owner.StateEntry
                                 && ExtentInScope(owner.StateEntry.EntitySet)
@@ -89,8 +88,7 @@ namespace System.Data.Mapping.Update.Internal
                             // implies that the dependent relationship instance is also being
                             // handled in this result.
                             foreach (
-                                IEntityStateEntry stateEntry in m_translator
-                                    .KeyManager
+                                IEntityStateEntry stateEntry in m_translator.KeyManager
                                     .GetDependentStateEntries(source.Identifier)
                             )
                             {
@@ -121,8 +119,7 @@ namespace System.Data.Mapping.Update.Internal
                 return false;
             }
             // determine if the extent is mapped to this table
-            return m_translator
-                .ViewLoader
+            return m_translator.ViewLoader
                 .GetAffectedTables(extent, m_translator.MetadataWorkspace)
                 .Contains(m_sourceTable);
         }

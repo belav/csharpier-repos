@@ -64,15 +64,13 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
                     (context) =>
                     {
                         if (
-                            context
-                                .Symbol
+                            context.Symbol
                                 .Name
                                 .StartsWith(_errorSymbolPrefix, StringComparison.Ordinal)
                         )
                         {
                             context.ReportDiagnostic(
-                                CodeAnalysis
-                                    .Diagnostic
+                                CodeAnalysis.Diagnostic
                                     .Create(
                                         s_rule,
                                         context.Symbol.Locations.First(),
@@ -108,8 +106,7 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
                     (context) =>
                     {
                         context.ReportDiagnostic(
-                            CodeAnalysis
-                                .Diagnostic
+                            CodeAnalysis.Diagnostic
                                 .Create(
                                     s_rule,
                                     context.Symbol.Locations.First(),
@@ -171,8 +168,7 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
                         (context) =>
                         {
                             context.ReportDiagnostic(
-                                CodeAnalysis
-                                    .Diagnostic
+                                CodeAnalysis.Diagnostic
                                     .Create(
                                         s_rule,
                                         context.OwningSymbol.Locations.First(),
@@ -186,8 +182,7 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
                         (context) =>
                         {
                             context.ReportDiagnostic(
-                                CodeAnalysis
-                                    .Diagnostic
+                                CodeAnalysis.Diagnostic
                                     .Create(
                                         s_rule,
                                         context.Node.GetLocation(),
@@ -210,8 +205,7 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
                         (context) =>
                         {
                             context.ReportDiagnostic(
-                                CodeAnalysis
-                                    .Diagnostic
+                                CodeAnalysis.Diagnostic
                                     .Create(
                                         s_rule,
                                         context.OwningSymbol.Locations.First(),
@@ -225,8 +219,7 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
                         (context) =>
                         {
                             context.ReportDiagnostic(
-                                CodeAnalysis
-                                    .Diagnostic
+                                CodeAnalysis.Diagnostic
                                     .Create(
                                         s_rule,
                                         context.Node.GetLocation(),
@@ -256,8 +249,7 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
                 analysisContext.RegisterSyntaxTreeAction(
                     (context) =>
                     {
-                        var comments = context
-                            .Tree
+                        var comments = context.Tree
                             .GetRoot()
                             .DescendantTrivia()
                             .Where(t =>
@@ -269,8 +261,7 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
                         foreach (var comment in comments)
                         {
                             context.ReportDiagnostic(
-                                CodeAnalysis
-                                    .Diagnostic
+                                CodeAnalysis.Diagnostic
                                     .Create(
                                         s_rule,
                                         comment.GetLocation(),
@@ -315,8 +306,7 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
                             )
                             {
                                 context.ReportDiagnostic(
-                                    CodeAnalysis
-                                        .Diagnostic
+                                    CodeAnalysis.Diagnostic
                                         .Create(
                                             s_rule,
                                             nodeOrToken.GetLocation(),

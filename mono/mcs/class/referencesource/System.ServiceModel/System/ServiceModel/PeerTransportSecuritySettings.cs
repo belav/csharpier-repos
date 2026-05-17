@@ -40,8 +40,7 @@ namespace System.ServiceModel
             {
                 if (!PeerTransportCredentialTypeHelper.IsDefined(value))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidEnumArgumentException(
                                 "value",
@@ -93,8 +92,7 @@ namespace System.ServiceModel
                     break;
                 default:
                     Fx.Assert("Unsupported value for PeerTransportSecuritySettings.CredentialType");
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new NotSupportedException());
             }
             XmlDocument doc = new XmlDocument();

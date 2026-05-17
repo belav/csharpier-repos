@@ -120,8 +120,7 @@ public class Tests
     {
         string name = "CustomModifiersOverride";
         AssemblyName asmName = new AssemblyName(name);
-        AssemblyBuilder ab = AppDomain
-            .CurrentDomain
+        AssemblyBuilder ab = AppDomain.CurrentDomain
             .DefineDynamicAssembly(asmName, AssemblyBuilderAccess.RunAndSave);
         ModuleBuilder mb = ab.DefineDynamicModule(name, name + ".dll");
 

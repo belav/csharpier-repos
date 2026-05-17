@@ -99,24 +99,21 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options.Style.N
         private void HandleSymbolKindsPreviewKeyDown(object sender, KeyEventArgs e) =>
             HandlePreviewKeyDown(
                 e,
-                symbolKindsListView
-                    .SelectedItems
+                symbolKindsListView.SelectedItems
                     .OfType<SymbolSpecificationViewModel.SymbolKindViewModel>()
             );
 
         private void HandleAccessibilitiesPreviewKeyDown(object sender, KeyEventArgs e) =>
             HandlePreviewKeyDown(
                 e,
-                accessibilitiesListView
-                    .SelectedItems
+                accessibilitiesListView.SelectedItems
                     .OfType<SymbolSpecificationViewModel.AccessibilityViewModel>()
             );
 
         private void HandleModifiersPreviewKeyDown(object sender, KeyEventArgs e) =>
             HandlePreviewKeyDown(
                 e,
-                modifiersListView
-                    .SelectedItems
+                modifiersListView.SelectedItems
                     .OfType<SymbolSpecificationViewModel.ModifierViewModel>()
             );
 
@@ -138,8 +135,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options.Style.N
         private void SelectAllSymbolKinds(object sender, RoutedEventArgs e)
         {
             foreach (
-                var item in symbolKindsListView
-                    .Items
+                var item in symbolKindsListView.Items
                     .OfType<SymbolSpecificationViewModel.SymbolKindViewModel>()
             )
             {
@@ -150,8 +146,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options.Style.N
         private void DeselectAllSymbolKinds(object sender, RoutedEventArgs e)
         {
             foreach (
-                var item in symbolKindsListView
-                    .Items
+                var item in symbolKindsListView.Items
                     .OfType<SymbolSpecificationViewModel.SymbolKindViewModel>()
             )
             {
@@ -162,8 +157,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options.Style.N
         private void SelectAllAccessibilities(object sender, RoutedEventArgs e)
         {
             foreach (
-                var item in accessibilitiesListView
-                    .Items
+                var item in accessibilitiesListView.Items
                     .OfType<SymbolSpecificationViewModel.AccessibilityViewModel>()
             )
             {
@@ -174,8 +168,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options.Style.N
         private void DeselectAllAccessibilities(object sender, RoutedEventArgs e)
         {
             foreach (
-                var item in accessibilitiesListView
-                    .Items
+                var item in accessibilitiesListView.Items
                     .OfType<SymbolSpecificationViewModel.AccessibilityViewModel>()
             )
             {
@@ -186,8 +179,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options.Style.N
         private void SelectAllModifiers(object sender, RoutedEventArgs e)
         {
             foreach (
-                var item in modifiersListView
-                    .Items
+                var item in modifiersListView.Items
                     .OfType<SymbolSpecificationViewModel.ModifierViewModel>()
             )
             {
@@ -198,8 +190,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options.Style.N
         private void DeselectAllModifiers(object sender, RoutedEventArgs e)
         {
             foreach (
-                var item in modifiersListView
-                    .Items
+                var item in modifiersListView.Items
                     .OfType<SymbolSpecificationViewModel.ModifierViewModel>()
             )
             {

@@ -149,8 +149,7 @@ namespace System.Text.Json
             {
                 // Create the appropriate dictionary type. We already verified the types.
 #if DEBUG
-                Type underlyingIDictionaryType = jsonPropertyInfo
-                    .PropertyType
+                Type underlyingIDictionaryType = jsonPropertyInfo.PropertyType
                     .GetCompatibleGenericInterface(typeof(IDictionary<,>))!;
                 Type[] genericArgs = underlyingIDictionaryType.GetGenericArguments();
 

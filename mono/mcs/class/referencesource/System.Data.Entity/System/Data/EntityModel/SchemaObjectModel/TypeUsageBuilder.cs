@@ -121,8 +121,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
                             ErrorCode.ConstantFacetSpecifiedInSchema,
                             EdmSchemaErrorSeverity.Error,
                             _element,
-                            System
-                                .Data
+                            System.Data
                                 .Entity
                                 .Strings
                                 .ConstantFacetSpecifiedInSchema(defaultFacet.Name, edmType.Name)
@@ -147,8 +146,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
                     _element.AddError(
                         ErrorCode.RequiredFacetMissing,
                         EdmSchemaErrorSeverity.Error,
-                        System
-                            .Data
+                        System.Data
                             .Entity
                             .Strings
                             .RequiredFacetMissing(defaultFacet.Name, edmType.Name)
@@ -222,10 +220,11 @@ namespace System.Data.EntityModel.SchemaObjectModel
                 && !this._element.Schema.UseStrongSpatialTypes
             )
             {
-                this._facetValues.Add(
-                    EdmProviderManifest.IsStrictFacetName,
-                    false /* only possible value */
-                );
+                this._facetValues
+                    .Add(
+                        EdmProviderManifest.IsStrictFacetName,
+                        false /* only possible value */
+                    );
             }
 
             bool noErrors = TryGetFacets(scalar.Type, complainOnMissingFacet, out calculatedFacets);
@@ -438,8 +437,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
                     _element.AddError(
                         ErrorCode.PrecisionOutOfRange,
                         EdmSchemaErrorSeverity.Error,
-                        System
-                            .Data
+                        System.Data
                             .Entity
                             .Strings
                             .PrecisionOutOfRange(
@@ -472,8 +470,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
                     _element.AddError(
                         ErrorCode.ScaleOutOfRange,
                         EdmSchemaErrorSeverity.Error,
-                        System
-                            .Data
+                        System.Data
                             .Entity
                             .Strings
                             .ScaleOutOfRange(
@@ -536,8 +533,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
                     _element.AddError(
                         ErrorCode.PrecisionOutOfRange,
                         EdmSchemaErrorSeverity.Error,
-                        System
-                            .Data
+                        System.Data
                             .Entity
                             .Strings
                             .PrecisionOutOfRange(
@@ -595,8 +591,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
                 _element.AddError(
                     ErrorCode.InvalidSize,
                     EdmSchemaErrorSeverity.Error,
-                    System
-                        .Data
+                    System.Data
                         .Entity
                         .Strings
                         .InvalidSize(length, minLength, maxLength, primitiveType.Name)
@@ -615,8 +610,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
                 _element.AddError(
                     ErrorCode.FacetNotAllowedByType,
                     EdmSchemaErrorSeverity.Error,
-                    System
-                        .Data
+                    System.Data
                         .Entity
                         .Strings
                         .FacetNotAllowed(
@@ -670,8 +664,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
                 _element.AddError(
                     ErrorCode.InvalidSystemReferenceId,
                     EdmSchemaErrorSeverity.Error,
-                    System
-                        .Data
+                    System.Data
                         .Entity
                         .Strings
                         .InvalidSystemReferenceId(srid, minSrid, maxSrid, primitiveType.Name)
@@ -1029,8 +1022,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
                 _element.AddError(
                     ErrorCode.InvalidDefault,
                     EdmSchemaErrorSeverity.Error,
-                    System
-                        .Data
+                    System.Data
                         .Entity
                         .Strings
                         .InvalidDefaultFloatingPoint(_default, minValue, maxValue)

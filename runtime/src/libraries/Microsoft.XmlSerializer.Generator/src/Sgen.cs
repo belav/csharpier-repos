@@ -183,8 +183,7 @@ namespace Microsoft.XmlSerializer.Generator
                 {
                     foreach (string err in errs)
                     {
-                        Console
-                            .Error
+                        Console.Error
                             .WriteLine(
                                 FormatMessage(parsableErrors, true, SR.Format(SR.Warning, err))
                             );
@@ -195,8 +194,7 @@ namespace Microsoft.XmlSerializer.Generator
                 {
                     if (assembly == null)
                     {
-                        Console
-                            .Error
+                        Console.Error
                             .WriteLine(
                                 FormatMessage(
                                     parsableErrors,
@@ -301,8 +299,7 @@ namespace Microsoft.XmlSerializer.Generator
                     Type type = assembly.GetType(typeName);
                     if (type == null)
                     {
-                        Console
-                            .Error
+                        Console.Error
                             .WriteLine(
                                 FormatMessage(
                                     parsableerrors,
@@ -363,8 +360,7 @@ namespace Microsoft.XmlSerializer.Generator
                 {
                     if (verbose)
                     {
-                        Console
-                            .Out
+                        Console.Out
                             .WriteLine(
                                 FormatMessage(
                                     parsableerrors,
@@ -462,9 +458,9 @@ namespace Microsoft.XmlSerializer.Generator
                         }
                         else
                         {
-                            Type tempAssemblyType = typeof(System.Xml.Serialization.XmlSerializer)
-                                .Assembly
-                                .GetType("System.Xml.Serialization.TempAssembly");
+                            Type tempAssemblyType =
+                                typeof(System.Xml.Serialization.XmlSerializer).Assembly
+                                    .GetType("System.Xml.Serialization.TempAssembly");
                             method = tempAssemblyType.GetMethod(
                                 "GenerateSerializerToStream",
                                 BindingFlags.Static | BindingFlags.NonPublic
@@ -473,8 +469,7 @@ namespace Microsoft.XmlSerializer.Generator
 
                         if (method == null)
                         {
-                            Console
-                                .Error
+                            Console.Error
                                 .WriteLine(
                                     FormatMessage(
                                         parsableerrors: false,
@@ -532,8 +527,7 @@ namespace Microsoft.XmlSerializer.Generator
                     if (!silent)
                     {
                         Console.Out.WriteLine(SR.Format(SR.InfoFileName, codePath));
-                        Console
-                            .Out
+                        Console.Out
                             .WriteLine(
                                 SR.Format(SR.InfoGeneratedFile, assembly.Location, codePath)
                             );
@@ -541,8 +535,7 @@ namespace Microsoft.XmlSerializer.Generator
                 }
                 else
                 {
-                    Console
-                        .Out
+                    Console.Out
                         .WriteLine(
                             FormatMessage(
                                 parsableerrors,
@@ -554,8 +547,7 @@ namespace Microsoft.XmlSerializer.Generator
             }
             else
             {
-                Console
-                    .Out
+                Console.Out
                     .WriteLine(
                         FormatMessage(
                             parsableerrors,
@@ -617,8 +609,7 @@ namespace Microsoft.XmlSerializer.Generator
 
                 if (verbose)
                 {
-                    Console
-                        .Out
+                    Console.Out
                         .WriteLine(
                             FormatMessage(
                                 parsableerrors,
@@ -665,8 +656,7 @@ namespace Microsoft.XmlSerializer.Generator
         private void WriteHelp()
         {
             Console.Out.WriteLine(SR.HelpDescription);
-            Console
-                .Out
+            Console.Out
                 .WriteLine(
                     SR.Format(
                         SR.HelpUsage,

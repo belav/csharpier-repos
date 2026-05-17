@@ -5683,8 +5683,7 @@ public class C { }
             var warnDict = new Dictionary<string, ReportDiagnostic>
             {
                 {
-                    MessageProvider
-                        .Instance
+                    MessageProvider.Instance
                         .GetIdForErrorCode((int)ErrorCode.WRN_MissingXMLComment),
                     ReportDiagnostic.Suppress
                 },
@@ -6955,8 +6954,7 @@ public class C { }
 
             // Don't embed.
             {
-                var reference = TestReferences
-                    .SymbolsTests
+                var reference = TestReferences.SymbolsTests
                     .NoPia
                     .GeneralPia
                     .WithEmbedInteropTypes(false);
@@ -6969,8 +6967,7 @@ public class C { }
 
             // Do embed.
             {
-                var reference = TestReferences
-                    .SymbolsTests
+                var reference = TestReferences.SymbolsTests
                     .NoPia
                     .GeneralPia
                     .WithEmbedInteropTypes(true);
@@ -7160,8 +7157,7 @@ public class C {} // CS1587
 ";
 
             var tree = Parse(source, options: TestOptions.RegularWithDocumentationComments);
-            var compOptions = TestOptions
-                .ReleaseDll
+            var compOptions = TestOptions.ReleaseDll
                 .WithGeneralDiagnosticOption(ReportDiagnostic.Error);
             CreateCompilation(tree, options: compOptions)
                 .VerifyDiagnostics(
@@ -7443,8 +7439,7 @@ class C { }
                     options: TestOptions.RegularWithDocumentationComments,
                     filename: sourcePath
                 ),
-                options: TestOptions
-                    .ReleaseDll
+                options: TestOptions.ReleaseDll
                     .WithSourceReferenceResolver(SourceFileResolver.Default)
                     .WithXmlReferenceResolver(XmlFileResolver.Default),
                 assemblyName: "Test"

@@ -66,8 +66,7 @@ namespace System.Web.DynamicData
 
             // Rely on the ASP.NET cache for file change notifications, since FileSystemWatcher
             // doesn't work in medium trust
-            HttpRuntime
-                .Cache
+            HttpRuntime.Cache
                 .Insert(
                     virtualPath /*key*/
                     ,

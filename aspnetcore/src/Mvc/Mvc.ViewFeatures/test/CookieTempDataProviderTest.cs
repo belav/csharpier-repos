@@ -38,8 +38,7 @@ public class CookieTempDataProviderTest
         var responseCookies = new MockResponseCookieCollection();
         var httpContext = new DefaultHttpContext();
         httpContext.Request.PathBase = "/";
-        httpContext
-            .Features
+        httpContext.Features
             .Set<IResponseCookiesFeature>(new FakeResponseCookiesFeature(responseCookies));
 
         // Act
@@ -128,8 +127,7 @@ public class CookieTempDataProviderTest
         var responseCookies = new MockResponseCookieCollection();
         var httpContext = new DefaultHttpContext();
         httpContext.Request.PathBase = "/";
-        httpContext
-            .Features
+        httpContext.Features
             .Set<IResponseCookiesFeature>(new FakeResponseCookiesFeature(responseCookies));
 
         // Act
@@ -166,8 +164,7 @@ public class CookieTempDataProviderTest
         var responseCookies = new MockResponseCookieCollection();
         var httpContext = new DefaultHttpContext();
         httpContext.Request.PathBase = "/";
-        httpContext
-            .Features
+        httpContext.Features
             .Set<IResponseCookiesFeature>(new FakeResponseCookiesFeature(responseCookies));
         httpContext.Request.IsHttps = isRequestSecure;
 
@@ -205,8 +202,7 @@ public class CookieTempDataProviderTest
         var responseCookies = new MockResponseCookieCollection();
         var httpContext = new DefaultHttpContext();
         httpContext.Request.PathBase = pathBase;
-        httpContext
-            .Features
+        httpContext.Features
             .Set<IResponseCookiesFeature>(new FakeResponseCookiesFeature(responseCookies));
 
         // Act
@@ -254,8 +250,7 @@ public class CookieTempDataProviderTest
         var responseCookies = new MockResponseCookieCollection();
         var httpContext = new DefaultHttpContext();
         httpContext.Request.PathBase = requestPathBase;
-        httpContext
-            .Features
+        httpContext.Features
             .Set<IResponseCookiesFeature>(new FakeResponseCookiesFeature(responseCookies));
 
         // Act

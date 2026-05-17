@@ -573,12 +573,10 @@ namespace System.Web.Profile
                                                     SR.Annoymous_id_module_not_enabled,
                                                     prop.Name
                                                 ),
-                                                config
-                                                    .ElementInformation
+                                                config.ElementInformation
                                                     .Properties["inherits"]
                                                     .Source,
-                                                config
-                                                    .ElementInformation
+                                                config.ElementInformation
                                                     .Properties["inherits"]
                                                     .LineNumber
                                             );
@@ -610,12 +608,10 @@ namespace System.Web.Profile
                                                     SR.Profile_provider_not_found,
                                                     ((ProfileProviderAttribute)attrib).ProviderName
                                                 ),
-                                                config
-                                                    .ElementInformation
+                                                config.ElementInformation
                                                     .Properties["inherits"]
                                                     .Source,
-                                                config
-                                                    .ElementInformation
+                                                config.ElementInformation
                                                     .Properties["inherits"]
                                                     .LineNumber
                                             );
@@ -905,8 +901,7 @@ namespace System.Web.Profile
             if (_DatesRetrieved || ProfileManager.Provider == null)
                 return;
             int totalRecords;
-            ProfileInfoCollection coll = ProfileManager
-                .Provider
+            ProfileInfoCollection coll = ProfileManager.Provider
                 .FindProfilesByUserName(
                     ProfileAuthenticationOption.All,
                     _UserName,

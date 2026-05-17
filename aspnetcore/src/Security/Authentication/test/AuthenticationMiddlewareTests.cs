@@ -227,8 +227,7 @@ public class AuthenticationMiddlewareTests
     public async Task WebApplicationBuilder_RegistersAuthenticationAndAuthorizationMiddlewares()
     {
         var builder = WebApplication.CreateBuilder();
-        builder
-            .Configuration
+        builder.Configuration
             .AddInMemoryCollection(
                 new[]
                 {

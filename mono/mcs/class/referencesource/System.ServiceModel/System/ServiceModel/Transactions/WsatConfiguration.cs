@@ -107,8 +107,7 @@ namespace System.ServiceModel.Transactions
             catch (UriFormatException e)
             {
                 // UriBuilder.Uri can throw this if the URI is ultimately invalid
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new TransactionManagerConfigurationException(
                             SR.GetString(SR.WsatUriCreationFailed),
@@ -119,8 +118,7 @@ namespace System.ServiceModel.Transactions
             catch (ArgumentOutOfRangeException e)
             {
                 // UriBuilder constructor can throw this if port < 0
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new TransactionManagerConfigurationException(
                             SR.GetString(SR.WsatUriCreationFailed),
@@ -161,8 +159,7 @@ namespace System.ServiceModel.Transactions
                     return this.protocolService11Enabled;
 
                 default:
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentException(SR.GetString(SR.InvalidWsatProtocolVersion))
                         );
@@ -180,8 +177,7 @@ namespace System.ServiceModel.Transactions
                     return this.localActivationService11;
 
                 default:
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentException(SR.GetString(SR.InvalidWsatProtocolVersion))
                         );
@@ -199,8 +195,7 @@ namespace System.ServiceModel.Transactions
                     return this.remoteActivationService11;
 
                 default:
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentException(SR.GetString(SR.InvalidWsatProtocolVersion))
                         );
@@ -221,8 +216,7 @@ namespace System.ServiceModel.Transactions
                     return new EndpointAddress(this.registrationServiceAddress11, refParam);
 
                 default:
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentException(SR.GetString(SR.InvalidWsatProtocolVersion))
                         );
@@ -244,8 +238,7 @@ namespace System.ServiceModel.Transactions
                 case ProtocolVersion.Version11:
                     return endpoint.Uri == this.registrationServiceAddress11;
                 default:
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentException(SR.GetString(SR.InvalidWsatProtocolVersion))
                         );
@@ -269,8 +262,7 @@ namespace System.ServiceModel.Transactions
             }
             catch (SerializationException e)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new TransactionManagerConfigurationException(
                             SR.GetString(SR.WhereaboutsReadFailed),
@@ -498,8 +490,7 @@ namespace System.ServiceModel.Transactions
             }
             catch (SecurityException e)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new TransactionManagerConfigurationException(
                             SR.GetString(SR.WsatRegistryValueReadError, value),
@@ -509,8 +500,7 @@ namespace System.ServiceModel.Transactions
             }
             catch (IOException e)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new TransactionManagerConfigurationException(
                             SR.GetString(SR.WsatRegistryValueReadError, value),

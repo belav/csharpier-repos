@@ -96,16 +96,14 @@ namespace Microsoft.CodeAnalysis.ErrorReporting
 
         private void LogGlobalErrorToActivityLog(string message, string? detailedError)
         {
-            _ = _threadingContext
-                .JoinableTaskFactory
+            _ = _threadingContext.JoinableTaskFactory
                 .RunAsync(async () =>
                 {
                     using var _ = _listener.BeginAsyncOperation(
                         nameof(LogGlobalErrorToActivityLog)
                     );
 
-                    await _threadingContext
-                        .JoinableTaskFactory
+                    await _threadingContext.JoinableTaskFactory
                         .SwitchToMainThreadAsync(_threadingContext.DisposalToken);
 
                     var activityLog = await _activityLog

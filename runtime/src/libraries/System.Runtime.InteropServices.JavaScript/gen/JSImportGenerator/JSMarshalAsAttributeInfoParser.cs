@@ -25,8 +25,7 @@ namespace Microsoft.Interop.JavaScript
 
         public bool CanParseAttributeType(INamedTypeSymbol attributeType) =>
             attributeType.IsGenericType
-            && SymbolEqualityComparer
-                .Default
+            && SymbolEqualityComparer.Default
                 .Equals(_jsMarshalAsAttribute, attributeType.ConstructUnboundGenericType());
 
         public MarshallingInfo ParseAttribute(
@@ -50,8 +49,7 @@ namespace Microsoft.Interop.JavaScript
                 Enum.TryParse(name, out jsType);
 
                 foreach (
-                    var ta in jsTypeArgs
-                        .TypeArguments
+                    var ta in jsTypeArgs.TypeArguments
                         .Cast<INamedTypeSymbol>()
                         .Select(x => x.ToDisplayString())
                 )

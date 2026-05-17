@@ -100,8 +100,7 @@ namespace System.Net
                     asyncResult.Reset(numBytes + pClientCertInfo->CertEncodedSize);
 
                     uint bytesReceived = 0;
-                    errorCode = Interop
-                        .HttpApi
+                    errorCode = Interop.HttpApi
                         .HttpReceiveClientCertificate(
                             httpListenerRequest.HttpListenerContext.RequestQueueHandle,
                             httpListenerRequest._connectionId,

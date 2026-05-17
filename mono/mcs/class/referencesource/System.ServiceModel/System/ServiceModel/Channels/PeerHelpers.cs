@@ -543,8 +543,7 @@ namespace System.ServiceModel.Channels
                 || IPAddress.IsLoopback(address)
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentException(
                             SR.GetString(SR.PeerListenIPAddressInvalid, address),
@@ -564,8 +563,7 @@ namespace System.ServiceModel.Channels
                     PeerTransportConstants.MinMessageSize,
                     long.MaxValue
                 );
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentOutOfRangeException("value", value, message));
             }
         }
@@ -579,8 +577,7 @@ namespace System.ServiceModel.Channels
                     PeerTransportConstants.MinPort,
                     PeerTransportConstants.MaxPort
                 );
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentOutOfRangeException("value", value, message));
             }
         }
@@ -695,8 +692,7 @@ namespace System.ServiceModel.Channels
             Exception innerException
         )
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(
                     new InvalidOperationException(
                         SR.GetString(SR.InsufficientCryptoSupport),
@@ -707,8 +703,7 @@ namespace System.ServiceModel.Channels
 
         internal static void ThrowArgument_InsufficientCredentials(string property)
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(
                     new ArgumentException(SR.GetString(SR.InsufficientCredentials, property))
                 );
@@ -716,8 +711,7 @@ namespace System.ServiceModel.Channels
 
         internal static void ThrowArgumentOutOfRange_InvalidTransportCredentialType(int value)
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(
                     new ArgumentOutOfRangeException(
                         "CredentialType",
@@ -733,8 +727,7 @@ namespace System.ServiceModel.Channels
 
         internal static void ThrowArgumentOutOfRange_InvalidSecurityMode(int value)
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(
                     new ArgumentOutOfRangeException(
                         "Mode",
@@ -750,8 +743,7 @@ namespace System.ServiceModel.Channels
 
         internal static void ThrowInvalidOperation_UnexpectedSecurityTokensDuringHandshake()
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(
                     new InvalidOperationException(
                         SR.GetString(SR.UnexpectedSecurityTokensDuringHandshake)
@@ -761,22 +753,19 @@ namespace System.ServiceModel.Channels
 
         internal static void ThrowArgument_PnrpAddressesExceedLimit()
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(new ArgumentException(SR.GetString(SR.PnrpAddressesExceedLimit)));
         }
 
         internal static void ThrowInvalidOperation_PnrpNoClouds()
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(new InvalidOperationException(SR.GetString(SR.PnrpNoClouds)));
         }
 
         internal static void ThrowInvalidOperation_PnrpAddressesUnsupported()
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(
                     new InvalidOperationException(SR.GetString(SR.PnrpAddressesUnsupported))
                 );
@@ -784,8 +773,7 @@ namespace System.ServiceModel.Channels
 
         internal static void ThrowArgument_InsufficientResolverSettings()
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(
                     new ArgumentException(SR.GetString(SR.InsufficientResolverSettings))
                 );
@@ -793,15 +781,13 @@ namespace System.ServiceModel.Channels
 
         internal static void ThrowArgument_MustOverrideInitialize()
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(new ArgumentException(SR.GetString(SR.MustOverrideInitialize)));
         }
 
         internal static void ThrowArgument_InvalidResolverMode(PeerResolverMode mode)
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(
                     new ArgumentException(SR.GetString(SR.InvalidResolverMode, mode))
                 );
@@ -809,8 +795,7 @@ namespace System.ServiceModel.Channels
 
         internal static void ThrowInvalidOperation_NotValidWhenOpen(string operation)
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(
                     new InvalidOperationException(SR.GetString(SR.NotValidWhenOpen, operation))
                 );
@@ -818,8 +803,7 @@ namespace System.ServiceModel.Channels
 
         internal static void ThrowInvalidOperation_NotValidWhenClosed(string operation)
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(
                     new InvalidOperationException(SR.GetString(SR.NotValidWhenClosed, operation))
                 );
@@ -827,8 +811,7 @@ namespace System.ServiceModel.Channels
 
         internal static void ThrowInvalidOperation_DuplicatePeerRegistration(string servicepath)
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(
                     new InvalidOperationException(
                         SR.GetString(SR.DuplicatePeerRegistration, servicepath)
@@ -843,8 +826,7 @@ namespace System.ServiceModel.Channels
 
         internal static void ThrowPnrpError(int errorCode, string cloud, bool trace)
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelper(
                     new System.ServiceModel.Channels.PnrpPeerResolver.PnrpException(
                         errorCode,
@@ -858,8 +840,7 @@ namespace System.ServiceModel.Channels
             string propertyName
         )
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(
                     new InvalidOperationException(
                         SR.GetString(SR.PeerConflictingPeerNodeSettings, propertyName)
@@ -869,8 +850,7 @@ namespace System.ServiceModel.Channels
 
         internal static void ThrowInvalidOperation_PeerCertGenFailure(Exception innerException)
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(
                     new InvalidOperationException(
                         SR.GetString(SR.PeerCertGenFailure),
@@ -881,8 +861,7 @@ namespace System.ServiceModel.Channels
 
         internal static void ThrowInvalidOperation_ConflictingHeader(string headerName)
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(
                     new InvalidOperationException(
                         SR.GetString(SR.PeerConflictingHeader, headerName, PeerStrings.Namespace)
@@ -941,8 +920,7 @@ namespace System.ServiceModel.Channels
 
         public static void TurnOffSecurityHeader(Message message)
         {
-            int i = message
-                .Headers
+            int i = message.Headers
                 .FindHeader(SecurityJan2004Strings.Security, SecurityJan2004Strings.Namespace);
             if (i >= 0)
             {
@@ -1010,11 +988,8 @@ namespace System.ServiceModel.Channels
                         TurnOffSecurityHeader(message);
                     }
                     if (
-                        this.messageHandler.IsNotSeenBefore(
-                            message,
-                            out id,
-                            out peerProperty.CacheMiss
-                        )
+                        this.messageHandler
+                            .IsNotSeenBefore(message, out id, out peerProperty.CacheMiss)
                     )
                     {
                         peerProperty.MessageVerified = true;

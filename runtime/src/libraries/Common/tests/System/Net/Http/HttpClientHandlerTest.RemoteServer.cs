@@ -32,8 +32,7 @@ namespace System.Net.Http.Functional.Tests
         private readonly NetworkCredential _credential = new NetworkCredential(Username, Password);
 
         public static readonly object[][] Http2Servers = Configuration.Http.Http2Servers;
-        public static readonly object[][] Http2NoPushServers = Configuration
-            .Http
+        public static readonly object[][] Http2NoPushServers = Configuration.Http
             .Http2NoPushServers;
 
         // Standard HTTP methods defined in RFC7231: http://tools.ietf.org/html/rfc7231#section-4.3
@@ -1015,8 +1014,7 @@ namespace System.Net.Http.Functional.Tests
 
                     if (expectRedirectToPost)
                     {
-                        IEnumerable<string> headerValue = response
-                            .Headers
+                        IEnumerable<string> headerValue = response.Headers
                             .GetValues("X-HttpRequest-Method");
                         Assert.Equal("POST", headerValue.First());
                     }
@@ -1238,8 +1236,7 @@ namespace System.Net.Http.Functional.Tests
                             $"\"Content-Length\": \"{request.Content.Headers.ContentLength.Value}\"",
                             responseContent
                         );
-                        string bodyContent = System
-                            .Text
+                        string bodyContent = System.Text
                             .Json
                             .JsonDocument
                             .Parse(responseContent)
@@ -1347,8 +1344,7 @@ namespace System.Net.Http.Functional.Tests
             handler.AllowAutoRedirect = true;
             using (HttpClient client = CreateHttpClient(handler))
             {
-                Uri uri = Configuration
-                    .Http
+                Uri uri = Configuration.Http
                     .RemoteHttp11Server
                     .RedirectUriForDestinationUri(
                         statusCode: 302,
@@ -1376,8 +1372,7 @@ namespace System.Net.Http.Functional.Tests
             handler.AllowAutoRedirect = true;
             using (HttpClient client = CreateHttpClient(handler))
             {
-                Uri uri = Configuration
-                    .Http
+                Uri uri = Configuration.Http
                     .RemoteSecureHttp11Server
                     .RedirectUriForDestinationUri(
                         statusCode: 302,
@@ -1443,8 +1438,7 @@ namespace System.Net.Http.Functional.Tests
             using (HttpClient client = CreateHttpClient(handler))
             {
                 Task<HttpResponseMessage> t = client.GetAsync(
-                    Configuration
-                        .Http
+                    Configuration.Http
                         .RemoteHttp11Server
                         .RedirectUriForDestinationUri(
                             statusCode: 302,

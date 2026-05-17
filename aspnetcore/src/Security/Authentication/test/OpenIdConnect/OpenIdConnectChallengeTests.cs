@@ -455,8 +455,7 @@ public class OpenIdConnectChallengeTests
         var challengeCookies = SetCookieHeaderValue.ParseList(transaction.SetCookie);
         var nonceCookie = challengeCookies
             .Where(cookie =>
-                cookie
-                    .Name
+                cookie.Name
                     .StartsWith(OpenIdConnectDefaults.CookieNoncePrefix, StringComparison.Ordinal)
             )
             .Single();

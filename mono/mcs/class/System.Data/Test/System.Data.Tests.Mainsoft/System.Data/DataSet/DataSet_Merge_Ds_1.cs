@@ -129,11 +129,12 @@ namespace tests.system_data_dll.System_Data
                 );
 
             //add relation
-            ds.Relations.Add(
-                "Parent_Child",
-                ds.Tables["Parent"].Columns["ParentId"],
-                ds.Tables["Child"].Columns["ParentId"]
-            );
+            ds.Relations
+                .Add(
+                    "Parent_Child",
+                    ds.Tables["Parent"].Columns["ParentId"],
+                    ds.Tables["Child"].Columns["ParentId"]
+                );
 
             //add allow null constraint
             ds.Tables["Parent"].Columns["ParentBool"].AllowDBNull = false; //will not be merged

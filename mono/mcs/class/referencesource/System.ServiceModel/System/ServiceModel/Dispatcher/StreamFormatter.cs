@@ -224,8 +224,7 @@ namespace System.ServiceModel.Dispatcher
             if (HasStream(messageDescription))
             {
                 if (messageDescription.IsTypedMessage)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(
@@ -235,16 +234,14 @@ namespace System.ServiceModel.Dispatcher
                             )
                         );
                 else if (isRequest)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(SR.SFxInvalidStreamInRequest, operationName)
                             )
                         );
                 else
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(SR.SFxInvalidStreamInResponse, operationName)
@@ -389,8 +386,7 @@ namespace System.ServiceModel.Dispatcher
                 {
                     if (Fx.IsFatal(ex))
                         throw;
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new IOException(SR.GetString(SR.SFxStreamIOException), ex)
                         );
@@ -400,8 +396,7 @@ namespace System.ServiceModel.Dispatcher
             private void EnsureStreamIsOpen()
             {
                 if (message.State == MessageState.Closed)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ObjectDisposedException(
                                 SR.GetString(

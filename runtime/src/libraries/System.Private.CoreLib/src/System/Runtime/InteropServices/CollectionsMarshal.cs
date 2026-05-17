@@ -52,8 +52,7 @@ namespace System.Runtime.InteropServices
             out bool exists
         )
             where TKey : notnull =>
-            ref Dictionary<TKey, TValue>
-                .CollectionsMarshalHelper
+            ref Dictionary<TKey, TValue>.CollectionsMarshalHelper
                 .GetValueRefOrAddDefault(dictionary, key, out exists);
 
         /// <summary>

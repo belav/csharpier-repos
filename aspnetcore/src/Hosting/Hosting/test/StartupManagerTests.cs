@@ -185,8 +185,7 @@ public class StartupManagerTests
     {
         public void ConfigureContainer(MyContainer services)
         {
-            services
-                .Services
+            services.Services
                 .TryAddSingleton(new ServiceBefore { Message = "Configure container" });
             services.Services.TryAddSingleton(new ServiceAfter { Message = "Configure container" });
         }
@@ -204,8 +203,7 @@ public class StartupManagerTests
 
         public void ConfigureContainer(MyContainer services)
         {
-            services
-                .Services
+            services.Services
                 .TryAddSingleton(new ServiceBefore { Message = "Configure container" });
             services.Services.TryAddSingleton(new ServiceAfter { Message = "Configure container" });
         }
@@ -230,8 +228,7 @@ public class StartupManagerTests
         {
             return services =>
             {
-                services
-                    .Services
+                services.Services
                     .TryAddSingleton(
                         new ServiceBefore
                         {
@@ -244,8 +241,7 @@ public class StartupManagerTests
                 // Ensures we can always override.
                 if (OverrideAfterService)
                 {
-                    services
-                        .Services
+                    services.Services
                         .AddSingleton(
                             new ServiceAfter
                             {
@@ -255,8 +251,7 @@ public class StartupManagerTests
                 }
                 else
                 {
-                    services
-                        .Services
+                    services.Services
                         .TryAddSingleton(
                             new ServiceAfter
                             {

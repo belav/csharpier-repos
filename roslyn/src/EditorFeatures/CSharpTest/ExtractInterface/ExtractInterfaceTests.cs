@@ -574,8 +574,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractInterface
             using var testState = ExtractInterfaceTestState.Create(
                 markup,
                 LanguageNames.CSharp,
-                parseOptions: CSharpParseOptions
-                    .Default
+                parseOptions: CSharpParseOptions.Default
                     .WithLanguageVersion(LanguageVersion.CSharp10),
                 options: new OptionsCollection(LanguageNames.CSharp)
                 {
@@ -589,8 +588,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractInterface
 
             var result = await testState.ExtractViaCommandAsync();
 
-            var interfaceDocument = result
-                .UpdatedSolution
+            var interfaceDocument = result.UpdatedSolution
                 .GetRequiredDocument(result.NavigationDocumentId);
             var interfaceCode = (await interfaceDocument.GetTextAsync()).ToString();
 
@@ -627,8 +625,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractInterface
             using var testState = ExtractInterfaceTestState.Create(
                 markup,
                 LanguageNames.CSharp,
-                parseOptions: CSharpParseOptions
-                    .Default
+                parseOptions: CSharpParseOptions.Default
                     .WithLanguageVersion(LanguageVersion.CSharp9),
                 options: new OptionsCollection(LanguageNames.CSharp)
                 {
@@ -642,8 +639,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractInterface
 
             var result = await testState.ExtractViaCommandAsync();
 
-            var interfaceDocument = result
-                .UpdatedSolution
+            var interfaceDocument = result.UpdatedSolution
                 .GetRequiredDocument(result.NavigationDocumentId);
             var interfaceCode = (await interfaceDocument.GetTextAsync()).ToString();
 
@@ -681,8 +677,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractInterface
             using var testState = ExtractInterfaceTestState.Create(
                 markup,
                 LanguageNames.CSharp,
-                parseOptions: CSharpParseOptions
-                    .Default
+                parseOptions: CSharpParseOptions.Default
                     .WithLanguageVersion(LanguageVersion.CSharp10),
                 options: new OptionsCollection(LanguageNames.CSharp)
                 {
@@ -696,8 +691,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractInterface
 
             var result = await testState.ExtractViaCommandAsync();
 
-            var interfaceDocument = result
-                .UpdatedSolution
+            var interfaceDocument = result.UpdatedSolution
                 .GetRequiredDocument(result.NavigationDocumentId);
             var interfaceCode = (await interfaceDocument.GetTextAsync()).ToString();
 
@@ -1041,8 +1035,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractInterface
             using var testState = ExtractInterfaceTestState.Create(
                 markup,
                 LanguageNames.CSharp,
-                parseOptions: CSharpParseOptions
-                    .Default
+                parseOptions: CSharpParseOptions.Default
                     .WithLanguageVersion(LanguageVersion.CSharp10),
                 options: new OptionsCollection(LanguageNames.CSharp)
                 {
@@ -1055,8 +1048,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractInterface
 
             var result = await testState.ExtractViaCommandAsync();
 
-            var interfaceDocument = result
-                .UpdatedSolution
+            var interfaceDocument = result.UpdatedSolution
                 .GetRequiredDocument(result.NavigationDocumentId);
             var interfaceCode = (await interfaceDocument.GetTextAsync()).ToString();
 
@@ -1236,8 +1228,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractInterface
 
             var result = await testState.ExtractViaCommandAsync();
 
-            var interfaceDocument = result
-                .UpdatedSolution
+            var interfaceDocument = result.UpdatedSolution
                 .GetRequiredDocument(result.NavigationDocumentId);
             var interfaceCode = (await interfaceDocument.GetTextAsync()).ToString();
 
@@ -1738,8 +1729,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractInterface
 
             var textView = workspace.Documents.Single().GetTextView();
 
-            var handler = workspace
-                .ExportProvider
+            var handler = workspace.ExportProvider
                 .GetCommandHandler<ExtractInterfaceCommandHandler>(
                     PredefinedCommandHandlerNames.ExtractInterface,
                     ContentTypeNames.CSharpContentType

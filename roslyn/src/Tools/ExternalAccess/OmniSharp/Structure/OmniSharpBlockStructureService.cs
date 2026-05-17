@@ -28,8 +28,7 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.OmniSharp.Structure
             if (blockStructure != null)
             {
                 return new OmniSharpBlockStructure(
-                    blockStructure
-                        .Spans
+                    blockStructure.Spans
                         .SelectAsArray(x => new OmniSharpBlockSpan(
                             x.Type,
                             x.IsCollapsible,

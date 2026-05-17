@@ -586,8 +586,7 @@ public class Program {
             CompileAndVerify(comp, expectedOutput: expectedOutput);
             comp = CreateCompilation(
                     source,
-                    parseOptions: TestOptions
-                        .Regular
+                    parseOptions: TestOptions.Regular
                         .WithLanguageVersion(
                             MessageID.IDS_FeatureTargetTypedConditional.RequiredVersion()
                         ),
@@ -618,8 +617,7 @@ public class Program {
                 .VerifyEmitDiagnostics();
             CreateCompilation(
                     source,
-                    parseOptions: TestOptions
-                        .Regular
+                    parseOptions: TestOptions.Regular
                         .WithLanguageVersion(
                             MessageID.IDS_FeatureTargetTypedConditional.RequiredVersion()
                         ),
@@ -650,8 +648,7 @@ public class Program {
                 .VerifyEmitDiagnostics();
             CreateCompilation(
                     source,
-                    parseOptions: TestOptions
-                        .Regular
+                    parseOptions: TestOptions.Regular
                         .WithLanguageVersion(
                             MessageID.IDS_FeatureTargetTypedConditional.RequiredVersion()
                         ),
@@ -700,8 +697,7 @@ public class Program {
             );
             CompileAndVerify(
                 source,
-                parseOptions: TestOptions
-                    .Regular
+                parseOptions: TestOptions.Regular
                     .WithLanguageVersion(
                         MessageID.IDS_FeatureTargetTypedConditional.RequiredVersion()
                     ),
@@ -749,8 +745,7 @@ public class Program {
                 .VerifyDiagnostics(expectedDiagnostics);
             CreateCompilation(
                     source,
-                    parseOptions: TestOptions
-                        .Regular
+                    parseOptions: TestOptions.Regular
                         .WithLanguageVersion(
                             MessageID.IDS_FeatureTargetTypedConditional.RequiredVersion()
                         )
@@ -792,8 +787,7 @@ System.Char: A";
             );
             CompileAndVerify(
                 source,
-                parseOptions: TestOptions
-                    .Regular
+                parseOptions: TestOptions.Regular
                     .WithLanguageVersion(
                         MessageID.IDS_FeatureTargetTypedConditional.RequiredVersion()
                     ),
@@ -835,8 +829,7 @@ System.Int32: 65";
             );
             CompileAndVerify(
                 source,
-                parseOptions: TestOptions
-                    .Regular
+                parseOptions: TestOptions.Regular
                     .WithLanguageVersion(
                         MessageID.IDS_FeatureTargetTypedConditional.RequiredVersion()
                     ),
@@ -873,8 +866,7 @@ class Program
                 .VerifyDiagnostics();
             CreateCompilation(
                     source,
-                    parseOptions: TestOptions
-                        .Regular
+                    parseOptions: TestOptions.Regular
                         .WithLanguageVersion(
                             MessageID.IDS_FeatureTargetTypedConditional.RequiredVersion()
                         )
@@ -923,8 +915,7 @@ class Program
 
             CreateCompilation(
                     source,
-                    parseOptions: TestOptions
-                        .Regular
+                    parseOptions: TestOptions.Regular
                         .WithLanguageVersion(
                             MessageID.IDS_FeatureTargetTypedConditional.RequiredVersion()
                         )

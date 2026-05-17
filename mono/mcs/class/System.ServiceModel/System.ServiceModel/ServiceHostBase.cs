@@ -259,8 +259,7 @@ namespace System.ServiceModel
                 throw new ArgumentException("Binding on the argument endpoint is null");
 
             if (
-                !ImplementedContracts
-                    .Values
+                !ImplementedContracts.Values
                     .Any(cd => cd.ContractType == endpoint.Contract.ContractType)
                 && endpoint.Binding.Namespace
                     != "http://schemas.microsoft.com/ws/2005/02/mex/bindings"
@@ -602,8 +601,7 @@ namespace System.ServiceModel
             }
 
             if (
-                Description
-                    .Endpoints
+                Description.Endpoints
                     .FirstOrDefault(e => e.Contract != mex_contract && !e.IsSystemEndpoint) == null
             )
                 throw new InvalidOperationException(

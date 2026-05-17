@@ -109,8 +109,7 @@ namespace Mono.CodeContracts.Static.Analysis.ExpressionAnalysis
             FlatDomain<Expr<TSymbolicValue>> aExpr = ifFound[expr.Symbol];
             if (aExpr.IsNormal())
             {
-                return aExpr
-                    .Value
+                return aExpr.Value
                     .Decode<
                         Data,
                         Result,
@@ -179,11 +178,12 @@ namespace Mono.CodeContracts.Static.Analysis.ExpressionAnalysis
                     Result
                 >
         {
-            return this.value_decoder.ForwardDecode<
-                Data,
-                Result,
-                ILDecoderAdapter<TSymbolicValue, Data, Result, Visitor>
-            >(pc, new ILDecoderAdapter<TSymbolicValue, Data, Result, Visitor>(visitor), state);
+            return this.value_decoder
+                .ForwardDecode<
+                    Data,
+                    Result,
+                    ILDecoderAdapter<TSymbolicValue, Data, Result, Visitor>
+                >(pc, new ILDecoderAdapter<TSymbolicValue, Data, Result, Visitor>(visitor), state);
         }
 
         public bool IsUnreachable(APC pc)

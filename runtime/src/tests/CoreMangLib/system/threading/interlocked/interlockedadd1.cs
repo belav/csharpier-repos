@@ -212,8 +212,7 @@ public class InterlockedAdd1
     {
         if (totalInc != totalMan || location != totalMan)
         {
-            TestLibrary
-                .TestFramework
+            TestLibrary.TestFramework
                 .LogError(
                     "005",
                     "Interlocked.Add() returned wrong value. Expected("

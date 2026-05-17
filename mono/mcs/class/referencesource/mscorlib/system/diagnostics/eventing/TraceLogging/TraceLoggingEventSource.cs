@@ -464,8 +464,7 @@ namespace System.Diagnostics.Tracing
 #endif
                 try
                 {
-                    DataCollector
-                        .ThreadInstance
+                    DataCollector.ThreadInstance
                         .Enable(
                             scratch,
                             eventTypes.scratchSize,
@@ -693,8 +692,7 @@ namespace System.Diagnostics.Tracing
 
                         try
                         {
-                            DataCollector
-                                .ThreadInstance
+                            DataCollector.ThreadInstance
                                 .Enable(
                                     scratch,
                                     eventTypes.scratchSize,
@@ -704,8 +702,7 @@ namespace System.Diagnostics.Tracing
                                     pinCount
                                 );
 
-                            eventTypes
-                                .typeInfo
+                            eventTypes.typeInfo
                                 .WriteData(TraceLoggingDataCollector.Instance, ref data);
 
                             this.WriteEventRaw(

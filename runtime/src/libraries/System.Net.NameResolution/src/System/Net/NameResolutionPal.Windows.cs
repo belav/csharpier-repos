@@ -32,8 +32,7 @@ namespace System.Net
                 {
                     Interop.Winsock.EnsureInitialized();
 
-                    IntPtr libHandle = Interop
-                        .Kernel32
+                    IntPtr libHandle = Interop.Kernel32
                         .LoadLibraryEx(
                             Interop.Libraries.Ws2_32,
                             IntPtr.Zero,
@@ -124,8 +123,7 @@ namespace System.Net
 
             fixed (byte* addressBufferPtr = addressBuffer)
             {
-                errorCode = Interop
-                    .Winsock
+                errorCode = Interop.Winsock
                     .GetNameInfoW(
                         addressBufferPtr,
                         address.Size,
@@ -196,8 +194,7 @@ namespace System.Net
             GetAddrInfoExContext* context = state.Context;
 
             SocketError errorCode = (SocketError)
-                Interop
-                    .Winsock
+                Interop.Winsock
                     .GetAddrInfoExW(
                         hostName,
                         null,
@@ -544,8 +541,7 @@ namespace System.Net
                             // An outstanding operation will be completed with WSA_E_CANCELLED, and GetAddrInfoExCancel will return NO_ERROR.
                             // If this thread has lost the race between cancellation and completion, this will be a NOP
                             // with GetAddrInfoExCancel returning WSA_INVALID_HANDLE.
-                            int cancelResult = Interop
-                                .Winsock
+                            int cancelResult = Interop.Winsock
                                 .GetAddrInfoExCancel(&context->CancelHandle);
                             if (
                                 cancelResult != Interop.Winsock.WSA_INVALID_HANDLE

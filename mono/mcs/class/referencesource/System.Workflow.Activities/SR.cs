@@ -20,8 +20,7 @@ internal sealed class SRDescriptionAttribute : DescriptionAttribute
     {
         ResourceManager rm = new ResourceManager(resourceSet, Assembly.GetExecutingAssembly());
         DescriptionValue = rm.GetString(description);
-        System
-            .Diagnostics
+        System.Diagnostics
             .Debug
             .Assert(
                 DescriptionValue != null,
@@ -54,8 +53,7 @@ internal sealed class SRCategoryAttribute : CategoryAttribute
         {
             ResourceManager rm = new ResourceManager(resourceSet, Assembly.GetExecutingAssembly());
             String localizedString = rm.GetString(value);
-            System
-                .Diagnostics
+            System.Diagnostics
                 .Debug
                 .Assert(
                     localizedString != null,
@@ -86,8 +84,7 @@ internal sealed class SRDisplayNameAttribute : DisplayNameAttribute
     {
         ResourceManager rm = new ResourceManager(resourceSet, Assembly.GetExecutingAssembly());
         DisplayNameValue = rm.GetString(name);
-        System
-            .Diagnostics
+        System.Diagnostics
             .Debug
             .Assert(
                 DisplayNameValue != null,
@@ -141,8 +138,7 @@ internal sealed class SR
         if (sys == null)
             return null;
         string res = sys.resources.GetString(name, culture);
-        System
-            .Diagnostics
+        System.Diagnostics
             .Debug
             .Assert(
                 res != null,
@@ -169,8 +165,7 @@ internal sealed class SR
         if (sys == null)
             return null;
         string res = sys.resources.GetString(name, culture);
-        System
-            .Diagnostics
+        System.Diagnostics
             .Debug
             .Assert(
                 res != null,

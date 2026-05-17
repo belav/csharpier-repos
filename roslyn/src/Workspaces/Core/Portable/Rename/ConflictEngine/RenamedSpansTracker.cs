@@ -105,9 +105,8 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
                 else
                 {
                     foreach (
-                        var (oldSpan, newSpan) in c.ModifiedSubSpans.OrderByDescending(t =>
-                            t.oldSpan.Start
-                        )
+                        var (oldSpan, newSpan) in c.ModifiedSubSpans
+                            .OrderByDescending(t => t.oldSpan.Start)
                     )
                     {
                         if (!appliedTextSpans.Any(s => s.Contains(oldSpan)))
@@ -173,8 +172,7 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
         {
             get
             {
-                return _documentToModifiedSpansMap
-                    .Keys
+                return _documentToModifiedSpansMap.Keys
                     .Concat(_documentToComplexifiedSpansMap.Keys)
                     .Distinct();
             }

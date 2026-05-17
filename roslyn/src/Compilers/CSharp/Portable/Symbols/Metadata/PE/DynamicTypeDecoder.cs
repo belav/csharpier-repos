@@ -78,8 +78,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
 
             ImmutableArray<bool> dynamicTransformFlags;
             if (
-                containingModule
-                    .Module
+                containingModule.Module
                     .HasDynamicAttribute(targetSymbolToken, out dynamicTransformFlags)
             )
             {
@@ -312,8 +311,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                     return namedType.ConstructIfGeneric(transformedTypeArguments);
                 }
 
-                return namedType
-                    .ConstructedFrom
+                return namedType.ConstructedFrom
                     .Construct(transformedTypeArguments, unbound: false)
                     .WithTupleDataFrom(namedType);
             }
@@ -388,8 +386,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                 : arrayType.IsSZArray
                     ? ArrayTypeSymbol.CreateSZArray(
                         _containingAssembly,
-                        arrayType
-                            .ElementTypeWithAnnotations
+                        arrayType.ElementTypeWithAnnotations
                             .WithTypeAndModifiers(
                                 transformedElementType,
                                 arrayType.ElementTypeWithAnnotations.CustomModifiers
@@ -397,8 +394,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                     )
                 : ArrayTypeSymbol.CreateMDArray(
                     _containingAssembly,
-                    arrayType
-                        .ElementTypeWithAnnotations
+                    arrayType.ElementTypeWithAnnotations
                         .WithTypeAndModifiers(
                             transformedElementType,
                             arrayType.ElementTypeWithAnnotations.CustomModifiers
@@ -436,8 +432,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             )
                 ? pointerType
                 : new PointerTypeSymbol(
-                    pointerType
-                        .PointedAtTypeWithAnnotations
+                    pointerType.PointedAtTypeWithAnnotations
                         .WithTypeAndModifiers(
                             transformedPointedAtType,
                             pointerType.PointedAtTypeWithAnnotations.CustomModifiers

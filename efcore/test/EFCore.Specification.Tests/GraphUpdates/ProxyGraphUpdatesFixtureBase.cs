@@ -697,8 +697,7 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
         {
             var tracker = new KeyValueEntityTracker();
 
-            context
-                .ChangeTracker
+            context.ChangeTracker
                 .TrackGraph(CreateFullGraph(context), e => tracker.TrackEntity(e.Entry));
 
             context.Add(

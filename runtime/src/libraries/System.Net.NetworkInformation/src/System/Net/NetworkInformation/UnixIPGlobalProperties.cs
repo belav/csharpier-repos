@@ -79,13 +79,14 @@ namespace System.Net.NetworkInformation
 
         public sealed override Task<UnicastIPAddressInformationCollection> GetUnicastAddressesAsync()
         {
-            return Task.Factory.StartNew(
-                s => ((UnixIPGlobalProperties)s!).GetUnicastAddresses(),
-                this,
-                CancellationToken.None,
-                TaskCreationOptions.DenyChildAttach,
-                TaskScheduler.Default
-            );
+            return Task.Factory
+                .StartNew(
+                    s => ((UnixIPGlobalProperties)s!).GetUnicastAddresses(),
+                    this,
+                    CancellationToken.None,
+                    TaskCreationOptions.DenyChildAttach,
+                    TaskScheduler.Default
+                );
         }
 
         private struct Context
@@ -113,8 +114,7 @@ namespace System.Net.NetworkInformation
                 IPAddress ipAddress = IPAddressUtil.GetIPAddressFromNativeInfo(ipAddr);
                 if (!IPAddressUtil.IsMulticast(ipAddress))
                 {
-                    context
-                        ->_collection
+                    context->_collection
                         .InternalAdd(
                             new UnixUnicastIPAddressInformation(ipAddress, ipAddr->PrefixLength)
                         );
@@ -140,8 +140,7 @@ namespace System.Net.NetworkInformation
                 IPAddress ipAddress = IPAddressUtil.GetIPAddressFromNativeInfo(ipAddr);
                 if (!IPAddressUtil.IsMulticast(ipAddress))
                 {
-                    context
-                        ->_collection
+                    context->_collection
                         .InternalAdd(
                             new UnixUnicastIPAddressInformation(ipAddress, ipAddr->PrefixLength)
                         );
@@ -160,8 +159,7 @@ namespace System.Net.NetworkInformation
             context._exceptions = null;
 
             // Ignore link-layer addresses that are discovered; don't create a callback.
-            Interop
-                .Sys
+            Interop.Sys
                 .EnumerateInterfaceAddresses(
                     &context,
                     &ProcessIpv4Address,

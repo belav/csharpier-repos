@@ -188,8 +188,7 @@ namespace System.Activities.Statements
                 context.GetExtension<CompensationExtension>();
             if (compensationExtension == null)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new InvalidOperationException(
                             SR.ConfirmWithoutCompensableActivity(this.DisplayName)
@@ -216,8 +215,7 @@ namespace System.Activities.Statements
                 }
                 else
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(
                             new InvalidOperationException(
                                 SR.InvalidConfirmActivityUsage(this.DisplayName)
@@ -235,8 +233,7 @@ namespace System.Activities.Statements
 
                 if (compensationToken == null)
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .Argument("Target", SR.InvalidCompensationToken(this.DisplayName));
                 }
 
@@ -248,8 +245,7 @@ namespace System.Activities.Statements
 
                 if (tokenData == null || tokenData.CompensationState != CompensationState.Completed)
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(
                             new InvalidOperationException(
                                 SR.CompensableActivityAlreadyConfirmedOrCompensated

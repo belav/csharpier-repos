@@ -81,10 +81,11 @@ namespace System.ServiceModel.Activities.Description
                         NetDataContractSerializerOperationBehavior.ApplyTo(operation);
                 }
 
-                this.extensionProvider.PopulateExtensions(
-                    serviceHost,
-                    endpointDispatcher.EndpointAddress.Uri.AbsoluteUri
-                );
+                this.extensionProvider
+                    .PopulateExtensions(
+                        serviceHost,
+                        endpointDispatcher.EndpointAddress.Uri.AbsoluteUri
+                    );
             }
         }
 

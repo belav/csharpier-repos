@@ -104,8 +104,7 @@ internal sealed partial class WebAssemblyNavigationManager : NavigationManager
     }
 
     protected override void SetNavigationLockState(bool value) =>
-        InternalJSImportMethods
-            .Instance
+        InternalJSImportMethods.Instance
             .NavigationManager_SetHasLocationChangingListeners(
                 (int)WebRendererId.WebAssembly,
                 value

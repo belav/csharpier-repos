@@ -95,8 +95,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             {
                 // Filter out those members that have already been typed as simple (not extended) properties
                 var alreadyTestedMembers = new HashSet<string>(
-                    propertyPatternClause
-                        .Subpatterns
+                    propertyPatternClause.Subpatterns
                         .Select(p => p.NameColon?.Name.Identifier.ValueText)
                         .Where(s => !string.IsNullOrEmpty(s))!
                 );

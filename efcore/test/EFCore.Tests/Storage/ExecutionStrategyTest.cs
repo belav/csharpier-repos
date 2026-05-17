@@ -779,11 +779,9 @@ public class ExecutionStrategyTest : IDisposable
     }
 
     protected DbContext CreateContext() =>
-        InMemoryTestHelpers
-            .Instance
+        InMemoryTestHelpers.Instance
             .CreateContext(
-                InMemoryTestHelpers
-                    .Instance
+                InMemoryTestHelpers.Instance
                     .CreateServiceProvider(
                         new ServiceCollection().AddScoped<
                             IDbContextTransactionManager,

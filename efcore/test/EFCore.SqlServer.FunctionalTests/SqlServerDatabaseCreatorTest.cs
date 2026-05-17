@@ -60,8 +60,7 @@ public class SqlServerDatabaseCreatorExistsTest : SqlServerDatabaseCreatorTest
         using var context = new BloggingContext(testDatabase);
         var creator = GetDatabaseCreator(context);
 
-        await context
-            .Database
+        await context.Database
             .CreateExecutionStrategy()
             .ExecuteAsync(async () =>
             {
@@ -131,8 +130,7 @@ public class SqlServerDatabaseCreatorExistsTest : SqlServerDatabaseCreatorTest
         using var context = new BloggingContext(testDatabase);
         var creator = GetDatabaseCreator(context);
 
-        await context
-            .Database
+        await context.Database
             .CreateExecutionStrategy()
             .ExecuteAsync(async () =>
             {
@@ -437,8 +435,7 @@ public class SqlServerDatabaseCreatorHasTablesTest : SqlServerDatabaseCreatorTes
     {
         using var testDatabase = SqlServerTestStore.GetOrCreate("NonExisting");
         var databaseCreator = GetDatabaseCreator(testDatabase);
-        await databaseCreator
-            .ExecutionStrategy
+        await databaseCreator.ExecutionStrategy
             .ExecuteAsync(
                 databaseCreator,
                 async creator =>

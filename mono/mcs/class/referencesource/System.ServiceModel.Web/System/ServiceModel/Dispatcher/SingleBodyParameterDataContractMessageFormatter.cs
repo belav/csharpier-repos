@@ -124,8 +124,7 @@ namespace System.ServiceModel.Dispatcher
         {
             if (this.useJsonFormat)
             {
-                message
-                    .Properties
+                message.Properties
                     .Add(
                         WebBodyFormatMessageProperty.Name,
                         WebBodyFormatMessageProperty.JsonProperty
@@ -151,8 +150,7 @@ namespace System.ServiceModel.Dispatcher
                         // if the parameterType is a collection interface, ensure the type implements it
                         if (!this.parameterDataContractType.IsAssignableFrom(type))
                         {
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
                                     new SerializationException(
                                         SR2.GetString(
@@ -217,8 +215,7 @@ namespace System.ServiceModel.Dispatcher
                 );
                 if (formatProperty == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperWarning(
                             new InvalidOperationException(
                                 SR2.GetString(
@@ -232,8 +229,7 @@ namespace System.ServiceModel.Dispatcher
                 }
                 if (formatProperty.Format != WebContentFormat.Json)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperWarning(
                             new InvalidOperationException(
                                 SR2.GetString(

@@ -35,14 +35,8 @@ namespace System.Xml
 
         public override Task WriteBase64Async(byte[] buffer, int index, int count)
         {
-            return Task.Factory.FromAsync(
-                this.BeginWriteBase64,
-                this.EndWriteBase64,
-                buffer,
-                index,
-                count,
-                null
-            );
+            return Task.Factory
+                .FromAsync(this.BeginWriteBase64, this.EndWriteBase64, buffer, index, count, null);
         }
 
         internal virtual IAsyncResult BeginWriteBase64(
@@ -163,8 +157,7 @@ namespace System.Xml
         public static XmlDictionaryWriter CreateDictionaryWriter(XmlWriter writer)
         {
             if (writer == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -234,8 +227,7 @@ namespace System.Xml
         public virtual void WriteXmlnsAttribute(string prefix, string namespaceUri)
         {
             if (namespaceUri == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -250,8 +242,7 @@ namespace System.Xml
                         ? string.Empty
                         : string.Concat(
                             "d",
-                            namespaceUri
-                                .Length
+                            namespaceUri.Length
                                 .ToString(System.Globalization.NumberFormatInfo.InvariantInfo)
                         );
             }
@@ -323,8 +314,7 @@ namespace System.Xml
         )
         {
             if (localName == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -343,8 +333,7 @@ namespace System.Xml
         public virtual void WriteValue(IStreamProvider value)
         {
             if (value == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -352,8 +341,7 @@ namespace System.Xml
 
             Stream stream = value.GetStream();
             if (stream == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -389,8 +377,7 @@ namespace System.Xml
         )
         {
             if (value == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -447,8 +434,7 @@ namespace System.Xml
                 this.stream = value.GetStream();
                 if (this.stream == null)
                 {
-                    throw System
-                        .Runtime
+                    throw System.Runtime
                         .Serialization
                         .DiagnosticUtility
                         .ExceptionUtility
@@ -532,13 +518,8 @@ namespace System.Xml
 
             AsyncCompletionResult ReadAsync()
             {
-                IAsyncResult result = this.stream.BeginRead(
-                    this.block,
-                    0,
-                    blockSize,
-                    onReadComplete,
-                    this
-                );
+                IAsyncResult result = this.stream
+                    .BeginRead(this.block, 0, blockSize, onReadComplete, this);
                 if (result.CompletedSynchronously)
                 {
                     this.HandleReadComplete(result);
@@ -725,8 +706,7 @@ namespace System.Xml
                 this.stream = value.GetStream();
                 if (this.stream == null)
                 {
-                    throw System
-                        .Runtime
+                    throw System.Runtime
                         .Serialization
                         .DiagnosticUtility
                         .ExceptionUtility
@@ -834,8 +814,7 @@ namespace System.Xml
             {
                 if (result == null)
                 {
-                    result = thisPtr
-                        .writer
+                    result = thisPtr.writer
                         .BeginWriteBase64(
                             thisPtr.block,
                             0,
@@ -912,8 +891,7 @@ namespace System.Xml
         public virtual void WriteValue(UniqueId value)
         {
             if (value == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -1023,44 +1001,34 @@ namespace System.Xml
         )
         {
             if (type == typeof(bool))
-                BooleanArrayHelperWithString
-                    .Instance
+                BooleanArrayHelperWithString.Instance
                     .WriteArray(this, prefix, localName, namespaceUri, reader);
             else if (type == typeof(Int16))
-                Int16ArrayHelperWithString
-                    .Instance
+                Int16ArrayHelperWithString.Instance
                     .WriteArray(this, prefix, localName, namespaceUri, reader);
             else if (type == typeof(Int32))
-                Int32ArrayHelperWithString
-                    .Instance
+                Int32ArrayHelperWithString.Instance
                     .WriteArray(this, prefix, localName, namespaceUri, reader);
             else if (type == typeof(Int64))
-                Int64ArrayHelperWithString
-                    .Instance
+                Int64ArrayHelperWithString.Instance
                     .WriteArray(this, prefix, localName, namespaceUri, reader);
             else if (type == typeof(float))
-                SingleArrayHelperWithString
-                    .Instance
+                SingleArrayHelperWithString.Instance
                     .WriteArray(this, prefix, localName, namespaceUri, reader);
             else if (type == typeof(double))
-                DoubleArrayHelperWithString
-                    .Instance
+                DoubleArrayHelperWithString.Instance
                     .WriteArray(this, prefix, localName, namespaceUri, reader);
             else if (type == typeof(decimal))
-                DecimalArrayHelperWithString
-                    .Instance
+                DecimalArrayHelperWithString.Instance
                     .WriteArray(this, prefix, localName, namespaceUri, reader);
             else if (type == typeof(DateTime))
-                DateTimeArrayHelperWithString
-                    .Instance
+                DateTimeArrayHelperWithString.Instance
                     .WriteArray(this, prefix, localName, namespaceUri, reader);
             else if (type == typeof(Guid))
-                GuidArrayHelperWithString
-                    .Instance
+                GuidArrayHelperWithString.Instance
                     .WriteArray(this, prefix, localName, namespaceUri, reader);
             else if (type == typeof(TimeSpan))
-                TimeSpanArrayHelperWithString
-                    .Instance
+                TimeSpanArrayHelperWithString.Instance
                     .WriteArray(this, prefix, localName, namespaceUri, reader);
             else
             {
@@ -1078,44 +1046,34 @@ namespace System.Xml
         )
         {
             if (type == typeof(bool))
-                BooleanArrayHelperWithDictionaryString
-                    .Instance
+                BooleanArrayHelperWithDictionaryString.Instance
                     .WriteArray(this, prefix, localName, namespaceUri, reader);
             else if (type == typeof(Int16))
-                Int16ArrayHelperWithDictionaryString
-                    .Instance
+                Int16ArrayHelperWithDictionaryString.Instance
                     .WriteArray(this, prefix, localName, namespaceUri, reader);
             else if (type == typeof(Int32))
-                Int32ArrayHelperWithDictionaryString
-                    .Instance
+                Int32ArrayHelperWithDictionaryString.Instance
                     .WriteArray(this, prefix, localName, namespaceUri, reader);
             else if (type == typeof(Int64))
-                Int64ArrayHelperWithDictionaryString
-                    .Instance
+                Int64ArrayHelperWithDictionaryString.Instance
                     .WriteArray(this, prefix, localName, namespaceUri, reader);
             else if (type == typeof(float))
-                SingleArrayHelperWithDictionaryString
-                    .Instance
+                SingleArrayHelperWithDictionaryString.Instance
                     .WriteArray(this, prefix, localName, namespaceUri, reader);
             else if (type == typeof(double))
-                DoubleArrayHelperWithDictionaryString
-                    .Instance
+                DoubleArrayHelperWithDictionaryString.Instance
                     .WriteArray(this, prefix, localName, namespaceUri, reader);
             else if (type == typeof(decimal))
-                DecimalArrayHelperWithDictionaryString
-                    .Instance
+                DecimalArrayHelperWithDictionaryString.Instance
                     .WriteArray(this, prefix, localName, namespaceUri, reader);
             else if (type == typeof(DateTime))
-                DateTimeArrayHelperWithDictionaryString
-                    .Instance
+                DateTimeArrayHelperWithDictionaryString.Instance
                     .WriteArray(this, prefix, localName, namespaceUri, reader);
             else if (type == typeof(Guid))
-                GuidArrayHelperWithDictionaryString
-                    .Instance
+                GuidArrayHelperWithDictionaryString.Instance
                     .WriteArray(this, prefix, localName, namespaceUri, reader);
             else if (type == typeof(TimeSpan))
-                TimeSpanArrayHelperWithDictionaryString
-                    .Instance
+                TimeSpanArrayHelperWithDictionaryString.Instance
                     .WriteArray(this, prefix, localName, namespaceUri, reader);
             else
             {
@@ -1166,8 +1124,7 @@ namespace System.Xml
         public virtual void WriteNode(XmlDictionaryReader reader, bool defattr)
         {
             if (reader == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -1234,15 +1191,13 @@ namespace System.Xml
         void CheckArray(Array array, int offset, int count)
         {
             if (array == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("array"));
             if (offset < 0)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -1253,8 +1208,7 @@ namespace System.Xml
                         )
                     );
             if (offset > array.Length)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -1265,8 +1219,7 @@ namespace System.Xml
                         )
                     );
             if (count < 0)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -1277,8 +1230,7 @@ namespace System.Xml
                         )
                     );
             if (count > array.Length - offset)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -1937,8 +1889,7 @@ namespace System.Xml
             public override void WriteXmlnsAttribute(string prefix, string namespaceUri)
             {
                 if (namespaceUri == null)
-                    throw System
-                        .Runtime
+                    throw System.Runtime
                         .Serialization
                         .DiagnosticUtility
                         .ExceptionUtility
@@ -1954,12 +1905,10 @@ namespace System.Xml
                     }
                     else
                     {
-                        string depthStr = this.depth.ToString(
-                            System.Globalization.NumberFormatInfo.InvariantInfo
-                        );
-                        string prefixStr = this.prefix.ToString(
-                            System.Globalization.NumberFormatInfo.InvariantInfo
-                        );
+                        string depthStr = this.depth
+                            .ToString(System.Globalization.NumberFormatInfo.InvariantInfo);
+                        string prefixStr = this.prefix
+                            .ToString(System.Globalization.NumberFormatInfo.InvariantInfo);
                         prefix = string.Concat("d", depthStr, "p", prefixStr);
                     }
                 }

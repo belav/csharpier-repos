@@ -147,8 +147,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.DebuggerIntelli
         {
             // Get the workspace, and from there, the solution and document containing this buffer.
             // If there's an ExternalSource, we won't get a document. Give up in that case.
-            var document = ContextBuffer
-                .CurrentSnapshot
+            var document = ContextBuffer.CurrentSnapshot
                 .GetOpenDocumentInCurrentContextWithChanges();
             if (document == null)
             {
@@ -169,17 +168,18 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.DebuggerIntelli
                 : viewSnapshot.CreateFullTrackingSpan(SpanTrackingMode.EdgeInclusive);
 
             // Wrap the original ContextBuffer in a projection buffer that we can make read-only
-            this.ContextBuffer = this.ProjectionBufferFactoryService.CreateProjectionBuffer(
-                null,
-                new object[]
-                {
-                    this.ContextBuffer
-                        .CurrentSnapshot
-                        .CreateFullTrackingSpan(SpanTrackingMode.EdgeInclusive),
-                },
-                ProjectionBufferOptions.None,
-                _contentType
-            );
+            this.ContextBuffer = this.ProjectionBufferFactoryService
+                .CreateProjectionBuffer(
+                    null,
+                    new object[]
+                    {
+                        this.ContextBuffer
+                            .CurrentSnapshot
+                            .CreateFullTrackingSpan(SpanTrackingMode.EdgeInclusive),
+                    },
+                    ProjectionBufferOptions.None,
+                    _contentType
+                );
 
             // Make projection readonly so we can't edit it by mistake.
             using (var regionEdit = this.ContextBuffer.CreateReadOnlyRegionEdit())
@@ -209,26 +209,26 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.DebuggerIntelli
             );
 
             // Build the tracking span that includes the rest of the file
-            var restOfFileSpan = ContextBuffer
-                .CurrentSnapshot
+            var restOfFileSpan = ContextBuffer.CurrentSnapshot
                 .CreateTrackingSpanFromIndexToEnd(
                     adjustedContextPoint,
                     SpanTrackingMode.EdgePositive
                 );
 
             // Put it all into a projection buffer
-            _projectionBuffer = this.ProjectionBufferFactoryService.CreateProjectionBuffer(
-                null,
-                new object[]
-                {
-                    previousStatementSpan,
-                    debuggerMappedSpan,
-                    this.StatementTerminator,
-                    restOfFileSpan,
-                },
-                ProjectionBufferOptions.None,
-                _contentType
-            );
+            _projectionBuffer = this.ProjectionBufferFactoryService
+                .CreateProjectionBuffer(
+                    null,
+                    new object[]
+                    {
+                        previousStatementSpan,
+                        debuggerMappedSpan,
+                        this.StatementTerminator,
+                        restOfFileSpan,
+                    },
+                    ProjectionBufferOptions.None,
+                    _contentType
+                );
 
             // Fork the solution using this new primary buffer for the document and all of its linked documents.
             var forkedSolution = solution.WithDocumentText(
@@ -281,30 +281,28 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.DebuggerIntelli
         )
         {
             var caretLine = _textView.Caret.ContainingTextViewLine.Extent;
-            var currentLineIndex = _textView
-                .TextSnapshot
+            var currentLineIndex = _textView.TextSnapshot
                 .GetLineNumberFromPosition(caretLine.Start.Position);
 
-            var debuggerMappedSpan = _textView
-                .TextSnapshot
+            var debuggerMappedSpan = _textView.TextSnapshot
                 .CreateFullTrackingSpan(SpanTrackingMode.EdgeInclusive);
-            var projectionBuffer = this.ProjectionBufferFactoryService.CreateProjectionBuffer(
-                null,
-                new object[] { debuggerMappedSpan },
-                ProjectionBufferOptions.PermissiveEdgeInclusiveSourceSpans,
-                _contentType
-            );
+            var projectionBuffer = this.ProjectionBufferFactoryService
+                .CreateProjectionBuffer(
+                    null,
+                    new object[] { debuggerMappedSpan },
+                    ProjectionBufferOptions.PermissiveEdgeInclusiveSourceSpans,
+                    _contentType
+                );
 
             // There's currently a bug in the editor (515925) where an elision buffer can't be projected into
             // another projection buffer.  So workaround by using a second projection buffer that only
             // projects the text we care about
-            var elisionProjectionBuffer =
-                this.ProjectionBufferFactoryService.CreateProjectionBuffer(
+            var elisionProjectionBuffer = this.ProjectionBufferFactoryService
+                .CreateProjectionBuffer(
                     null,
                     new object[]
                     {
-                        projectionBuffer
-                            .CurrentSnapshot
+                        projectionBuffer.CurrentSnapshot
                             .CreateFullTrackingSpan(SpanTrackingMode.EdgeInclusive),
                     },
                     ProjectionBufferOptions.None,
@@ -321,8 +319,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.DebuggerIntelli
 
             SetupImmediateWindowProjectionBuffer();
 
-            return elisionProjectionBuffer
-                .CurrentSnapshot
+            return elisionProjectionBuffer.CurrentSnapshot
                 .CreateFullTrackingSpan(SpanTrackingMode.EdgeInclusive);
         }
 
@@ -335,8 +332,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.DebuggerIntelli
         private void SetupImmediateWindowProjectionBuffer()
         {
             var caretLine = _textView.Caret.ContainingTextViewLine.Extent;
-            var currentLineIndex = _textView
-                .TextSnapshot
+            var currentLineIndex = _textView.TextSnapshot
                 .GetLineNumberFromPosition(caretLine.Start.Position);
             var questionIndex = GetQuestionIndex(caretLine.GetText());
 
@@ -347,18 +343,15 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.DebuggerIntelli
             {
                 _immediateWindowContext.QuestionIndex = questionIndex;
                 _immediateWindowContext.CurrentLineIndex = currentLineIndex;
-                _immediateWindowContext
-                    .ProjectionBuffer
+                _immediateWindowContext.ProjectionBuffer
                     .DeleteSpans(
                         0,
                         _immediateWindowContext.ProjectionBuffer.CurrentSnapshot.SpanCount
                     );
-                _immediateWindowContext
-                    .ProjectionBuffer
+                _immediateWindowContext.ProjectionBuffer
                     .InsertSpan(
                         0,
-                        _textView
-                            .TextSnapshot
+                        _textView.TextSnapshot
                             .CreateTrackingSpanFromIndexToEnd(
                                 caretLine.Start.Position + questionIndex + 1,
                                 SpanTrackingMode.EdgeInclusive

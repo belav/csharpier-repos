@@ -38,8 +38,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SpellCheck
         protected override ImmutableArray<PreviousPullResult>? GetPreviousResults(
             VSInternalWorkspaceSpellCheckableParams requestParams
         ) =>
-            requestParams
-                .PreviousResults
+            requestParams.PreviousResults
                 ?.Where(d => d.PreviousResultId != null)
                 .Select(d => new PreviousPullResult(d.PreviousResultId!, d.TextDocument!))
                 .ToImmutableArray();
@@ -55,8 +54,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SpellCheck
 
             var solution = context.Solution;
 
-            var documentTrackingService = solution
-                .Services
+            var documentTrackingService = solution.Services
                 .GetRequiredService<IDocumentTrackingService>();
 
             // Collect all the documents from the solution in the order we'd like to get spans for.  This will

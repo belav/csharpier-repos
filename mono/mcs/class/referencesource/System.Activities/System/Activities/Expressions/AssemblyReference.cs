@@ -327,8 +327,7 @@ namespace System.Activities.Expressions
         {
             if (this.isImmutable)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(new NotSupportedException(SR.AssemblyReferenceIsImmutable));
             }
         }

@@ -31,8 +31,7 @@ namespace DefaultNamespace
                     Mv_LivingObject[j] = new LivingObject();
                 }
 
-                Console
-                    .Out
+                Console.Out
                     .WriteLine("+++++++++++++++++++++++++++++++++++Nest {0} of {1}", i, iNum);
                 Console.Out.WriteLine();
             }

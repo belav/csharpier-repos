@@ -582,8 +582,7 @@ namespace System.Diagnostics.Metrics
                                 {
                                     // If the clientId protocol is not followed, we can't tell which session is configured incorrectly
                                     if (
-                                        command
-                                            .Arguments!
+                                        command.Arguments!
                                             .TryGetValue(ClientIdKey, out string? clientId)
                                     )
                                     {
@@ -596,8 +595,7 @@ namespace System.Diagnostics.Metrics
                                                 maxHistograms.ToString(),
                                                 _aggregationManager.MaxTimeSeries.ToString(),
                                                 maxTimeSeries.ToString(),
-                                                _aggregationManager
-                                                    .CollectionPeriod
+                                                _aggregationManager.CollectionPeriod
                                                     .TotalSeconds
                                                     .ToString(),
                                                 refreshInterval.ToString()

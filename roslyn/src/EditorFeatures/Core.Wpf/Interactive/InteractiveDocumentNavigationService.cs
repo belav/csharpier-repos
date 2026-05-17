@@ -93,13 +93,11 @@ namespace Microsoft.CodeAnalysis.Interactive
             return new NavigableLocation(
                 async (options, cancellationToken) =>
                 {
-                    await _threadingContext
-                        .JoinableTaskFactory
+                    await _threadingContext.JoinableTaskFactory
                         .SwitchToMainThreadAsync(cancellationToken);
 
                     textView.Selection.Select(surfaceBufferSpan.Start, surfaceBufferSpan.End);
-                    textView
-                        .ViewScroller
+                    textView.ViewScroller
                         .EnsureSpanVisible(
                             surfaceBufferSpan.SnapshotSpan,
                             EnsureSpanVisibleOptions.AlwaysCenter

@@ -163,8 +163,7 @@ namespace System.IdentityModel.Configuration
 
                 if (!typeof(System.IdentityModel.SecurityTokenService).IsAssignableFrom(value))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgument("value", SR.GetString(SR.ID2069));
                 }
 
@@ -275,8 +274,7 @@ namespace System.IdentityModel.Configuration
 
                 if (SecurityTokenHandlers[value] == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgument("value", SR.GetString(SR.ID2015, value));
                 }
 

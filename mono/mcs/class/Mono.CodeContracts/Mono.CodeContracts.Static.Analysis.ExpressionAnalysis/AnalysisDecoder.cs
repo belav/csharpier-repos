@@ -56,8 +56,7 @@ namespace Mono.CodeContracts.Static.Analysis.ExpressionAnalysis
             if (aExpression.IsNormal())
             {
                 bool truth = tag != EdgeTag.False;
-                data = aExpression
-                    .Value
+                data = aExpression.Value
                     .Decode<ExprDomain<TSymValue>, ExprDomain<TSymValue>, AssumeDecoder<TSymValue>>(
                         pc,
                         condition,
@@ -79,8 +78,7 @@ namespace Mono.CodeContracts.Static.Analysis.ExpressionAnalysis
             FlatDomain<Expr<TSymValue>> expression = data[condition];
             if (expression.IsNormal())
             {
-                data = expression
-                    .Value
+                data = expression.Value
                     .Decode<ExprDomain<TSymValue>, ExprDomain<TSymValue>, AssumeDecoder<TSymValue>>(
                         pc,
                         condition,

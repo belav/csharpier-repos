@@ -361,8 +361,7 @@ namespace System.Web.ClientServices.Providers
         {
             HttpRequestMessageProperty httpRequestProperty = null;
             if (
-                OperationContext
-                    .Current
+                OperationContext.Current
                     .OutgoingMessageProperties
                     .ContainsKey(HttpRequestMessageProperty.Name)
             )
@@ -374,8 +373,7 @@ namespace System.Web.ClientServices.Providers
             if (httpRequestProperty == null)
             {
                 httpRequestProperty = new HttpRequestMessageProperty();
-                OperationContext
-                    .Current
+                OperationContext.Current
                     .OutgoingMessageProperties
                     .Add(HttpRequestMessageProperty.Name, httpRequestProperty);
             }

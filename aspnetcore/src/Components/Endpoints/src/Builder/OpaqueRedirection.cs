@@ -45,8 +45,7 @@ internal partial class OpaqueRedirection
     )
     {
         var protector = CreateProtector(httpContext);
-        var options = httpContext
-            .RequestServices
+        var options = httpContext.RequestServices
             .GetRequiredService<IOptions<RazorComponentsServiceOptions>>();
         var lifetime = options.Value.TemporaryRedirectionUrlValidityDuration;
         var protectedUrl = protector.Protect(destinationUrl, lifetime);
@@ -94,8 +93,7 @@ internal partial class OpaqueRedirection
 
     private static ITimeLimitedDataProtector CreateProtector(HttpContext httpContext)
     {
-        var dataProtectionProvider = httpContext
-            .RequestServices
+        var dataProtectionProvider = httpContext.RequestServices
             .GetRequiredService<IDataProtectionProvider>();
         return dataProtectionProvider
             .CreateProtector(RedirectionDataProtectionProviderPurpose)

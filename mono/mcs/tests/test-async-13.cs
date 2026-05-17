@@ -241,9 +241,8 @@ class Tester : Base
     async Task<int> ArrayAccessTest_8()
     {
         var s = new byte?[] { 3, 2, 1 };
-        var r = s[await Task.Factory.StartNew(() => 1)] += await Task.Factory.StartNew(() =>
-            (byte)30
-        );
+        var r = s[await Task.Factory.StartNew(() => 1)] += await Task.Factory
+            .StartNew(() => (byte)30);
         if (r != 32)
             return 1;
 
@@ -257,20 +256,16 @@ class Tester : Base
     {
         var s = new Base();
         s.CreateArray<int>(await Task.Factory.StartNew(() => 5))[2] += 9;
-        s.CreateArray<int>(await Task.Factory.StartNew(() => 5))[2] += await Task.Factory.StartNew(
-            () =>
-                9
-        );
+        s.CreateArray<int>(await Task.Factory.StartNew(() => 5))[2] += await Task.Factory
+            .StartNew(() => 9);
 
-        var res = s.CreateArray<int>(await Task.Factory.StartNew(() => 5))[2] +=
-            await Task.Factory.StartNew(() => 9);
+        var res = s.CreateArray<int>(await Task.Factory.StartNew(() => 5))[2] += await Task.Factory
+            .StartNew(() => 9);
         if (res != 9)
             return 1;
 
-        s.CreateArray<S>(await Task.Factory.StartNew(() => 5))[2] += await Task.Factory.StartNew(
-            () =>
-                new S() { Value = 4 }
-        );
+        s.CreateArray<S>(await Task.Factory.StartNew(() => 5))[2] += await Task.Factory
+            .StartNew(() => new S() { Value = 4 });
         return 0;
     }
 
@@ -315,11 +310,12 @@ class Tester : Base
 
     async Task<int> BinaryTest_1()
     {
-        return await Task.Factory.StartNew(() =>
-            {
-                Thread.Sleep(10);
-                return 5;
-            })
+        return await Task.Factory
+                .StartNew(() =>
+                {
+                    Thread.Sleep(10);
+                    return 5;
+                })
             + await Task.Factory.StartNew(() => -3)
             + await Task.Factory.StartNew(() => -2);
     }
@@ -328,21 +324,24 @@ class Tester : Base
     {
         int i = 1;
         var b =
-            await Task.Factory.StartNew(() =>
-            {
-                i += 3;
-                return true;
-            })
-            && await Task.Factory.StartNew(() =>
-            {
-                i += 4;
-                return false;
-            })
-            && await Task.Factory.StartNew(() =>
-            {
-                i += 5;
-                return true;
-            });
+            await Task.Factory
+                .StartNew(() =>
+                {
+                    i += 3;
+                    return true;
+                })
+            && await Task.Factory
+                .StartNew(() =>
+                {
+                    i += 4;
+                    return false;
+                })
+            && await Task.Factory
+                .StartNew(() =>
+                {
+                    i += 5;
+                    return true;
+                });
 
         return b ? -1
             : i == 8 ? 0
@@ -414,11 +413,12 @@ class Tester : Base
     async Task<int> CallTest_1()
     {
         return Call(
-            await Task.Factory.StartNew(() =>
-            {
-                Thread.Sleep(10);
-                return 5;
-            }),
+            await Task.Factory
+                .StartNew(() =>
+                {
+                    Thread.Sleep(10);
+                    return 5;
+                }),
             await Task.Factory.StartNew(() => -3),
             await Task.Factory.StartNew(() => 6)
         );
@@ -429,11 +429,12 @@ class Tester : Base
         char ch = 'a';
         var r = Call(
             ref ch,
-            await Task.Factory.StartNew(() =>
-            {
-                Thread.Sleep(10);
-                return 5;
-            })
+            await Task.Factory
+                .StartNew(() =>
+                {
+                    Thread.Sleep(10);
+                    return 5;
+                })
         );
 
         return ch == 'z' && r == 5;
@@ -520,14 +521,15 @@ class Tester : Base
     async Task<int> EventInvoke_1()
     {
         int value = 0;
-        Event += await Task.Factory.StartNew(() =>
-        {
-            Action a = () =>
+        Event += await Task.Factory
+            .StartNew(() =>
             {
-                value = 5;
-            };
-            return a;
-        });
+                Action a = () =>
+                {
+                    value = 5;
+                };
+                return a;
+            });
 
         CallEvent();
         return value - 5;
@@ -572,10 +574,8 @@ class Tester : Base
     async Task<int> IndexerTest_4()
     {
         int value = 3;
-        PropertyThis[await Task.Factory.StartNew(() => value++)] += await Task.Factory.StartNew(
-            () =>
-                -5
-        );
+        PropertyThis[await Task.Factory.StartNew(() => value++)] += await Task.Factory
+            .StartNew(() => -5);
         return PropertyThis[3] + value + 11;
     }
 
@@ -817,8 +817,8 @@ class Tester : Base
 
         PropertyThis.PropertyInt = 4;
         int[] a = new int[4];
-        a[await Task.Factory.StartNew(() => 1)] = PropertyThis.PropertyInt +=
-            await Task.Factory.StartNew(() => 8);
+        a[await Task.Factory.StartNew(() => 1)] = PropertyThis.PropertyInt += await Task.Factory
+            .StartNew(() => 8);
         if (a[1] != 21)
             return 2;
 

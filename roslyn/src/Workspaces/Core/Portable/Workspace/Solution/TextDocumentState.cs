@@ -161,19 +161,15 @@ namespace Microsoft.CodeAnalysis
 
         public SourceText GetTextSynchronously(CancellationToken cancellationToken)
         {
-            var textAndVersion = this.TextAndVersionSource.GetValue(
-                LoadTextOptions,
-                cancellationToken
-            );
+            var textAndVersion = this.TextAndVersionSource
+                .GetValue(LoadTextOptions, cancellationToken);
             return textAndVersion.Text;
         }
 
         public VersionStamp GetTextVersionSynchronously(CancellationToken cancellationToken)
         {
-            var textAndVersion = this.TextAndVersionSource.GetValue(
-                LoadTextOptions,
-                cancellationToken
-            );
+            var textAndVersion = this.TextAndVersionSource
+                .GetValue(LoadTextOptions, cancellationToken);
             return textAndVersion.Version;
         }
 

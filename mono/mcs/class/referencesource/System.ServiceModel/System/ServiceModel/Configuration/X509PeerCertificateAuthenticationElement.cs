@@ -76,8 +76,7 @@ namespace System.ServiceModel.Configuration
         {
             if (this.IsReadOnly())
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ConfigurationErrorsException(SR.GetString(SR.ConfigReadOnly))
                     );
@@ -108,8 +107,7 @@ namespace System.ServiceModel.Configuration
                 Type validatorType = System.Type.GetType(this.CustomCertificateValidatorType, true);
                 if (!typeof(X509CertificateValidator).IsAssignableFrom(validatorType))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ConfigurationErrorsException(
                                 SR.GetString(

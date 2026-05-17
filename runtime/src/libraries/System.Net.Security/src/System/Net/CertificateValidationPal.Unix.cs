@@ -45,8 +45,7 @@ namespace System.Net
             }
 
             X509Certificate2? result = null;
-            IntPtr remoteCertificate = Interop
-                .OpenSsl
+            IntPtr remoteCertificate = Interop.OpenSsl
                 .GetPeerCertificate((SafeSslHandle)securityContext);
             try
             {
@@ -66,8 +65,7 @@ namespace System.Net
                     }
 
                     using (
-                        SafeSharedX509StackHandle chainStack = Interop
-                            .OpenSsl
+                        SafeSharedX509StackHandle chainStack = Interop.OpenSsl
                             .GetPeerCertificateChain((SafeSslHandle)securityContext)
                     )
                     {
@@ -123,8 +121,7 @@ namespace System.Net
         internal static string[] GetRequestCertificateAuthorities(SafeDeleteContext securityContext)
         {
             using (
-                SafeSharedX509NameStackHandle names = Interop
-                    .Ssl
+                SafeSharedX509NameStackHandle names = Interop.Ssl
                     .SslGetClientCAList((SafeSslHandle)securityContext)
             )
             {
@@ -145,8 +142,7 @@ namespace System.Net
                 for (int i = 0; i < nameCount; i++)
                 {
                     using (
-                        SafeSharedX509NameHandle nameHandle = Interop
-                            .Crypto
+                        SafeSharedX509NameHandle nameHandle = Interop.Crypto
                             .GetX509NameStackField(names, i)
                     )
                     {

@@ -87,8 +87,7 @@ namespace System.IdentityModel
             }
             else
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new NotSupportedException(
                             SR.GetString(SR.UnsupportedInputTypeForTransform, input.GetType())
@@ -136,8 +135,7 @@ namespace System.IdentityModel
             }
             else
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new NotSupportedException(
                             SR.GetString(SR.UnsupportedInputTypeForTransform, input.GetType())
@@ -192,8 +190,7 @@ namespace System.IdentityModel
             );
             if (algorithm != this.Algorithm)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new CryptographicException(SR.GetString(SR.AlgorithmMismatchForTransform))
                     );
@@ -314,8 +311,7 @@ namespace System.IdentityModel
 
                 if (algorithm == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new CryptographicException(
                                 SR.GetString(
@@ -329,8 +325,7 @@ namespace System.IdentityModel
 
                 if (algorithm != this.CanonicalizationAlgorithm)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new CryptographicException(
                                 SR.GetString(SR.AlgorithmMismatchForTransform)

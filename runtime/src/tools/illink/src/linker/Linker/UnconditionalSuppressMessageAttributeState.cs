@@ -92,8 +92,7 @@ namespace Mono.Linker
 
             MethodDefinition? owningMethod;
             while (
-                _context
-                    .CompilerGeneratedState
+                _context.CompilerGeneratedState
                     .TryGetOwningMethodForCompilerGeneratedMember(member, out owningMethod)
             )
             {
@@ -350,8 +349,7 @@ namespace Mono.Linker
             ICustomAttributeProvider provider
         )
         {
-            var attributes = _context
-                .CustomAttributes
+            var attributes = _context.CustomAttributes
                 .GetCustomAttributes(provider)
                 .Where(a => TypeRefHasUnconditionalSuppressions(a.AttributeType));
             foreach (var instance in attributes)
@@ -410,8 +408,7 @@ namespace Mono.Linker
         public MessageOrigin GetSuppressionOrigin(Suppression suppression)
         {
             if (
-                _context
-                    .CustomAttributes
+                _context.CustomAttributes
                     .TryGetCustomAttributeOrigin(
                         suppression.Provider,
                         suppression.OriginAttribute,

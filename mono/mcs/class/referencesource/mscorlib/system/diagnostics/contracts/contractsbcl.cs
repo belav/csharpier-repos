@@ -60,8 +60,7 @@ namespace System.Diagnostics.Contracts
         {
 #if !NETCORE
             if (_assertingMustUseRewriter)
-                System
-                    .Diagnostics
+                System.Diagnostics
                     .Assert
                     .Fail(
                         "Asserting that we must use the rewriter went reentrant.",
@@ -88,8 +87,7 @@ namespace System.Diagnostics.Contracts
             if (probablyNotRewritten == null)
                 probablyNotRewritten = thisAssembly;
             String simpleName = probablyNotRewritten.GetName().Name;
-            System
-                .Runtime
+            System.Runtime
                 .CompilerServices
                 .ContractHelper
                 .TriggerFailure(
@@ -140,8 +138,7 @@ namespace System.Diagnostics.Contracts
             Contract.EndContractBlock();
 
             // displayMessage == null means: yes we handled it. Otherwise it is the localized failure message
-            var displayMessage = System
-                .Runtime
+            var displayMessage = System.Runtime
                 .CompilerServices
                 .ContractHelper
                 .RaiseContractFailedEvent(failureKind, userMessage, conditionText, innerException);
@@ -149,8 +146,7 @@ namespace System.Diagnostics.Contracts
             if (displayMessage == null)
                 return;
 
-            System
-                .Runtime
+            System.Runtime
                 .CompilerServices
                 .ContractHelper
                 .TriggerFailure(
@@ -419,8 +415,7 @@ namespace System.Runtime.CompilerServices
                 // would be a perf hit and wouldn't significantly improve reliability.
                 // UE: Please mention reliable event handlers should also be marked with the
                 // PrePrepareMethodAttribute to avoid CER eager preparation work when ngen'ed.
-                System
-                    .Runtime
+                System.Runtime
                     .CompilerServices
                     .RuntimeHelpers
                     .PrepareContractedDelegate(value);
@@ -622,8 +617,7 @@ namespace System.Runtime.CompilerServices
             // Optional info like string for collapsed text vs. expanded text.
             String windowTitle = Environment.GetResourceString(GetResourceNameForFailure(kind));
             const int numStackFramesToSkip = 2; // To make stack traces easier to read
-            System
-                .Diagnostics
+            System.Diagnostics
                 .Assert
                 .Fail(
                     conditionText,

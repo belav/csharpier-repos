@@ -174,8 +174,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             );
 
             if (syntax is PropertyDeclarationSyntax { Initializer: { } initializer })
-                MessageID
-                    .IDS_FeatureAutoPropertyInitializer
+                MessageID.IDS_FeatureAutoPropertyInitializer
                     .CheckFeatureAvailability(diagnostics, initializer.EqualsToken);
         }
 

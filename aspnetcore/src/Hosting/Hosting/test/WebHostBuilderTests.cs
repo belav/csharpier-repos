@@ -329,8 +329,7 @@ public class WebHostBuilderTests
         using (var host = builder.Build())
         {
             await host.StartAsync();
-            var context = provider
-                .Sink
+            var context = provider.Sink
                 .Writes
                 .Where(s => s.EventId.Id == LoggerEventIds.HostingStartupAssemblyException);
             Assert.NotNull(context);
@@ -1311,8 +1310,7 @@ public class WebHostBuilderTests
         using (var host = builder.Build())
         {
             await host.StartAsync();
-            var context = provider
-                .Sink
+            var context = provider.Sink
                 .Writes
                 .FirstOrDefault(s =>
                     s.EventId.Id == LoggerEventIds.HostingStartupAssemblyException

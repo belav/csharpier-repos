@@ -205,8 +205,7 @@ class GeneratedClass { }
             Assert.Equal(2, outputCompilation.SyntaxTrees.Count());
             Assert.NotEqual(compilation, outputCompilation);
 
-            var generatedClass = outputCompilation
-                .GlobalNamespace
+            var generatedClass = outputCompilation.GlobalNamespace
                 .GetTypeMembers("GeneratedClass")
                 .Single();
             Assert.True(generatedClass.Locations.Single().IsInSource);
@@ -668,8 +667,7 @@ class C { }
                 isEnabledByDefault: true,
                 description: description
             );
-            var diagnostic = Microsoft
-                .CodeAnalysis
+            var diagnostic = Microsoft.CodeAnalysis
                 .Diagnostic
                 .Create(generatorDiagnostic, Location.None);
 
@@ -1051,16 +1049,13 @@ class C { }
                 description: description
             );
 
-            var diagnostic1 = Microsoft
-                .CodeAnalysis
+            var diagnostic1 = Microsoft.CodeAnalysis
                 .Diagnostic
                 .Create(generatorDiagnostic1, Location.None);
-            var diagnostic2 = Microsoft
-                .CodeAnalysis
+            var diagnostic2 = Microsoft.CodeAnalysis
                 .Diagnostic
                 .Create(generatorDiagnostic2, Location.None);
-            var diagnostic3 = Microsoft
-                .CodeAnalysis
+            var diagnostic3 = Microsoft.CodeAnalysis
                 .Diagnostic
                 .Create(generatorDiagnostic3, Location.None);
 
@@ -1152,16 +1147,13 @@ class C { }
                 description: description
             );
 
-            var diagnostic1 = Microsoft
-                .CodeAnalysis
+            var diagnostic1 = Microsoft.CodeAnalysis
                 .Diagnostic
                 .Create(generatorDiagnostic1, Location.None);
-            var diagnostic2 = Microsoft
-                .CodeAnalysis
+            var diagnostic2 = Microsoft.CodeAnalysis
                 .Diagnostic
                 .Create(generatorDiagnostic2, Location.None);
-            var diagnostic3 = Microsoft
-                .CodeAnalysis
+            var diagnostic3 = Microsoft.CodeAnalysis
                 .Diagnostic
                 .Create(generatorDiagnostic3, Location.None);
 
@@ -2168,9 +2160,8 @@ class C { }
                     var start = source.IndexOf(x.Location);
                     Assert.True(start >= 0, $"Not found in source: '{x.Location}'");
                     var end = start + x.Location.Length;
-                    return x.Diagnostic.WithLocation(
-                        Location.Create(syntaxTree, TextSpan.FromBounds(start, end))
-                    );
+                    return x.Diagnostic
+                        .WithLocation(Location.Create(syntaxTree, TextSpan.FromBounds(start, end)));
                 });
 
                 var gen = new CallbackGenerator(
@@ -3100,9 +3091,8 @@ class C { }
             var generator = new IncrementalGeneratorWrapper(
                 new PipelineCallbackGenerator(ctx =>
                 {
-                    var compilationSource = ctx.CompilationProvider.WithComparer(
-                        new LambdaComparer<Compilation>((c1, c2) => true, 0)
-                    );
+                    var compilationSource = ctx.CompilationProvider
+                        .WithComparer(new LambdaComparer<Compilation>((c1, c2) => true, 0));
                     ctx.RegisterSourceOutput(
                         compilationSource,
                         (spc, c) =>
@@ -3905,14 +3895,15 @@ class C { }
                 new PipelineCallbackGenerator(
                     (ctx) =>
                     {
-                        var step1 = ctx.CompilationProvider.Select(
-                            (c, ct) =>
-                            {
-                                generatorCancelled = true;
-                                cts.Cancel();
-                                return c;
-                            }
-                        );
+                        var step1 = ctx.CompilationProvider
+                            .Select(
+                                (c, ct) =>
+                                {
+                                    generatorCancelled = true;
+                                    cts.Cancel();
+                                    return c;
+                                }
+                            );
                         var step2 = step1.Select(
                             (c, ct) =>
                             {
@@ -4044,9 +4035,8 @@ class C { }
                     IncrementalValueProvider<(
                         Compilation,
                         ImmutableArray<ClassDeclarationSyntax>
-                    )> compilationAndClasses = ctx.CompilationProvider.Combine(
-                        classDeclarations.Collect()
-                    );
+                    )> compilationAndClasses = ctx.CompilationProvider
+                        .Combine(classDeclarations.Collect());
 
                     ctx.RegisterSourceOutput(
                         compilationAndClasses,
@@ -4138,10 +4128,8 @@ class C { }
                             .Select(
                                 (p, ct) =>
                                 {
-                                    p.GlobalOptions.TryGetValue(
-                                        "test",
-                                        out var analyzerOptionsValue
-                                    );
+                                    p.GlobalOptions
+                                        .TryGetValue("test", out var analyzerOptionsValue);
                                     return analyzerOptionsValue;
                                 }
                             )
@@ -5595,8 +5583,7 @@ class D {  (int, bool) _field; }";
                             path: "/detached"
                         );
                         ctx.ReportDiagnostic(
-                            CodeAnalysis
-                                .Diagnostic
+                            CodeAnalysis.Diagnostic
                                 .Create(
                                     "TEST0001",
                                     "Test",
@@ -5656,8 +5643,7 @@ class D {  (int, bool) _field; }";
                             path: "/detached"
                         );
                         ctx.ReportDiagnostic(
-                            CodeAnalysis
-                                .Diagnostic
+                            CodeAnalysis.Diagnostic
                                 .Create(
                                     "TEST0001",
                                     "Test",
@@ -5724,8 +5710,7 @@ class D {  (int, bool) _field; }";
                         path: "/detached"
                     );
                     ctx.ReportDiagnostic(
-                        CodeAnalysis
-                            .Diagnostic
+                        CodeAnalysis.Diagnostic
                             .Create(
                                 "TEST0001",
                                 "Test",
@@ -5782,8 +5767,7 @@ class D {  (int, bool) _field; }";
                         path: "/detached"
                     );
                     ctx.ReportDiagnostic(
-                        CodeAnalysis
-                            .Diagnostic
+                        CodeAnalysis.Diagnostic
                             .Create(
                                 "TEST0001",
                                 "Test",
@@ -5845,8 +5829,7 @@ class D {  (int, bool) _field; }";
                     {
                         var syntaxTree = comp.SyntaxTrees.Single();
                         ctx.ReportDiagnostic(
-                            CodeAnalysis
-                                .Diagnostic
+                            CodeAnalysis.Diagnostic
                                 .Create(
                                     "TEST0001",
                                     "Test",
@@ -5905,8 +5888,7 @@ class D {  (int, bool) _field; }";
                     {
                         var syntaxTree = comp.SyntaxTrees.Single();
                         ctx.ReportDiagnostic(
-                            CodeAnalysis
-                                .Diagnostic
+                            CodeAnalysis.Diagnostic
                                 .Create(
                                     "TEST0001",
                                     "Test",
@@ -5967,8 +5949,7 @@ class D {  (int, bool) _field; }";
                 {
                     var syntaxTree = ctx.Compilation.SyntaxTrees.Single();
                     ctx.ReportDiagnostic(
-                        CodeAnalysis
-                            .Diagnostic
+                        CodeAnalysis.Diagnostic
                             .Create(
                                 "TEST0001",
                                 "Test",
@@ -6021,8 +6002,7 @@ class D {  (int, bool) _field; }";
                 {
                     var syntaxTree = ctx.Compilation.SyntaxTrees.Single();
                     ctx.ReportDiagnostic(
-                        CodeAnalysis
-                            .Diagnostic
+                        CodeAnalysis.Diagnostic
                             .Create(
                                 "TEST0001",
                                 "Test",
@@ -6080,8 +6060,7 @@ class D {  (int, bool) _field; }";
                     {
                         var syntaxTree = comp.SyntaxTrees.Single();
                         ctx.ReportDiagnostic(
-                            CodeAnalysis
-                                .Diagnostic
+                            CodeAnalysis.Diagnostic
                                 .Create(
                                     "TEST 0001",
                                     "Test",
@@ -6134,8 +6113,7 @@ class D {  (int, bool) _field; }";
                 {
                     var syntaxTree = ctx.Compilation.SyntaxTrees.Single();
                     ctx.ReportDiagnostic(
-                        CodeAnalysis
-                            .Diagnostic
+                        CodeAnalysis.Diagnostic
                             .Create(
                                 "TEST 0001",
                                 "Test",
@@ -6305,10 +6283,8 @@ class C { }
             var generator = new IncrementalGeneratorWrapper(
                 new PipelineCallbackGenerator(ctx =>
                 {
-                    var syntax = ctx.SyntaxProvider.CreateSyntaxProvider(
-                        (s, _) => true,
-                        (s, _) => s.Node
-                    );
+                    var syntax = ctx.SyntaxProvider
+                        .CreateSyntaxProvider((s, _) => true, (s, _) => s.Node);
                     ctx.RegisterSourceOutput(
                         syntax,
                         (spc, c) =>
@@ -6333,10 +6309,8 @@ class C { }
             var generator2 = new IncrementalGeneratorWrapper(
                 new PipelineCallbackGenerator2(ctx =>
                 {
-                    var syntax = ctx.SyntaxProvider.CreateSyntaxProvider(
-                        (s, _) => true,
-                        (s, _) => s.Node
-                    );
+                    var syntax = ctx.SyntaxProvider
+                        .CreateSyntaxProvider((s, _) => true, (s, _) => s.Node);
                     ctx.RegisterSourceOutput(
                         syntax,
                         (spc, c) =>

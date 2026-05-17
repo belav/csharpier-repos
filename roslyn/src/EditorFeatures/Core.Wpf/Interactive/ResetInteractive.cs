@@ -111,8 +111,7 @@ namespace Microsoft.CodeAnalysis.Interactive
             // If the user hits the cancel button on the wait indicator, then we want to stop the
             // build.
             using (
-                uiThreadOperationContext
-                    .UserCancellationToken
+                uiThreadOperationContext.UserCancellationToken
                     .Register(() => CancelBuildProject(), useSynchronizationContext: true)
             )
             {
@@ -140,8 +139,7 @@ namespace Microsoft.CodeAnalysis.Interactive
                 .SetPathsAsync(referenceSearchPaths, sourceSearchPaths, projectDirectory)
                 .ConfigureAwait(true);
 
-            var editorOptions = _editorOptionsService
-                .Factory
+            var editorOptions = _editorOptionsService.Factory
                 .GetOptions(interactiveWindow.CurrentLanguageBuffer);
             var importReferencesCommand = referencePaths.Select(_createReference);
             await interactiveWindow.SubmitAsync(importReferencesCommand).ConfigureAwait(true);

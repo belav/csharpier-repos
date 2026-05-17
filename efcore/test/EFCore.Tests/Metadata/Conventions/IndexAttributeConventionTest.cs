@@ -171,8 +171,7 @@ public class IndexAttributeConventionTest
 
         // assert that the base type is not part of the model
         Assert.Empty(
-            modelBuilder
-                .Model
+            modelBuilder.Model
                 .GetEntityTypes()
                 .Where(e => e.ClrType == typeof(BaseUnmappedEntityWithIndex))
         );
@@ -374,8 +373,7 @@ public class IndexAttributeConventionTest
     private IndexAttributeConvention CreateIndexAttributeConvention() => new(CreateDependencies());
 
     private ProviderConventionSetBuilderDependencies CreateDependencies() =>
-        InMemoryTestHelpers
-            .Instance
+        InMemoryTestHelpers.Instance
             .CreateContextServices()
             .GetRequiredService<ProviderConventionSetBuilderDependencies>();
 

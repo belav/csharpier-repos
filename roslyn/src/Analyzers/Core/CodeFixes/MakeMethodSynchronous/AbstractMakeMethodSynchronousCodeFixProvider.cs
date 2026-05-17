@@ -148,8 +148,7 @@ namespace Microsoft.CodeAnalysis.MakeMethodSynchronous
             CancellationToken cancellationToken
         )
         {
-            var compilation = await document
-                .Project
+            var compilation = await document.Project
                 .GetRequiredCompilationAsync(cancellationToken)
                 .ConfigureAwait(false);
             var knownTypes = new KnownTypes(compilation);

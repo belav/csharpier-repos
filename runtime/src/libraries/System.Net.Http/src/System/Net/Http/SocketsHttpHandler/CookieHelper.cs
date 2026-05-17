@@ -15,8 +15,7 @@ namespace System.Net.Http
         )
         {
             if (
-                response
-                    .Headers
+                response.Headers
                     .TryGetValues(
                         KnownHeaders.SetCookie.Descriptor,
                         out IEnumerable<string>? values

@@ -161,10 +161,8 @@ public class SnapshotModelProcessor : ISnapshotModelProcessor
             .GetAnnotations()
 #pragma warning disable CS0618 // Type or member is obsolete
             .Where(a =>
-                a.Name.StartsWith(
-                    RelationalAnnotationNames.SequencePrefix,
-                    StringComparison.Ordinal
-                )
+                a.Name
+                    .StartsWith(RelationalAnnotationNames.SequencePrefix, StringComparison.Ordinal)
             )
             .Select(a => new Sequence(model, a.Name));
 #pragma warning restore CS0618 // Type or member is obsolete

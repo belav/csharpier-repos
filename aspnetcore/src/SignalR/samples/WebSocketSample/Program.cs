@@ -14,8 +14,7 @@ public class Program
         {
             Console.Error.WriteLine("Usage: WebSocketSample <URL>");
             Console.Error.WriteLine("");
-            Console
-                .Error
+            Console.Error
                 .WriteLine(
                     "To connect to an ASP.NET Connection Handler, use 'ws://example.com/path/to/hub' or 'wss://example.com/path/to/hub' (for HTTPS)"
                 );

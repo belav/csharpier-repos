@@ -144,8 +144,7 @@ namespace System.ServiceModel.Discovery
             {
                 if (value <= 0)
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .ArgumentOutOfRange(
                             "value",
                             value,
@@ -163,8 +162,7 @@ namespace System.ServiceModel.Discovery
             {
                 if (value.CompareTo(TimeSpan.Zero) <= 0)
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .ArgumentOutOfRange(
                             "duration",
                             value,
@@ -379,8 +377,7 @@ namespace System.ServiceModel.Discovery
                 Uri scopeMatchBy = SerializationUtility.ReadScopes(this.scopes, reader);
                 if (scopeMatchBy != null)
                 {
-                    this.scopeMatchBy = discoveryVersion
-                        .Implementation
+                    this.scopeMatchBy = discoveryVersion.Implementation
                         .ToVersionIndependentScopeMatchBy(scopeMatchBy);
                 }
             }
@@ -506,8 +503,7 @@ namespace System.ServiceModel.Discovery
 
             foreach (XmlQualifiedName contractTypeName in this.ContractTypeNames)
             {
-                findCriteriaClone
-                    .ContractTypeNames
+                findCriteriaClone.ContractTypeNames
                     .Add(new XmlQualifiedName(contractTypeName.Name, contractTypeName.Namespace));
             }
 

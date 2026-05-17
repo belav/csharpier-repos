@@ -50,8 +50,7 @@ namespace SampleSynthesisTests
         private static string DumpRegistry()
         {
             StringBuilder sb = new();
-            RegistryKey key = Registry
-                .LocalMachine
+            RegistryKey key = Registry.LocalMachine
                 .OpenSubKey(@"SOFTWARE\Microsoft\Speech\Voices\Tokens");
             Traverse(key);
 

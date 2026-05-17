@@ -28,8 +28,7 @@ namespace System.ServiceModel
             {
                 if (!ProtectionLevelHelper.IsDefined(value))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new ArgumentOutOfRangeException("value"));
                 }
                 this.protectionLevel = value;

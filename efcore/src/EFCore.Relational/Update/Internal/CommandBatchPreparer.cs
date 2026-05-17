@@ -31,8 +31,7 @@ public class CommandBatchPreparer : ICommandBatchPreparer
     public CommandBatchPreparer(CommandBatchPreparerDependencies dependencies)
     {
         _minBatchSize =
-            dependencies
-                .Options
+            dependencies.Options
                 .Extensions
                 .OfType<RelationalOptionsExtension>()
                 .FirstOrDefault()
@@ -150,8 +149,7 @@ public class CommandBatchPreparer : ICommandBatchPreparer
                 {
                     if (batch.ModificationCommands.Count > 1)
                     {
-                        Dependencies
-                            .UpdateLogger
+                        Dependencies.UpdateLogger
                             .BatchReadyForExecution(
                                 batch.ModificationCommands.SelectMany(c => c.Entries),
                                 batch.ModificationCommands.Count
@@ -164,8 +162,7 @@ public class CommandBatchPreparer : ICommandBatchPreparer
                 }
                 else
                 {
-                    Dependencies
-                        .UpdateLogger
+                    Dependencies.UpdateLogger
                         .BatchSmallerThanMinBatchSize(
                             batch.ModificationCommands.SelectMany(c => c.Entries),
                             batch.ModificationCommands.Count,
@@ -192,8 +189,7 @@ public class CommandBatchPreparer : ICommandBatchPreparer
         {
             if (batch.ModificationCommands.Count > 1)
             {
-                Dependencies
-                    .UpdateLogger
+                Dependencies.UpdateLogger
                     .BatchReadyForExecution(
                         batch.ModificationCommands.SelectMany(c => c.Entries),
                         batch.ModificationCommands.Count
@@ -206,8 +202,7 @@ public class CommandBatchPreparer : ICommandBatchPreparer
         }
         else
         {
-            Dependencies
-                .UpdateLogger
+            Dependencies.UpdateLogger
                 .BatchSmallerThanMinBatchSize(
                     batch.ModificationCommands.SelectMany(c => c.Entries),
                     batch.ModificationCommands.Count,
@@ -383,8 +378,7 @@ public class CommandBatchPreparer : ICommandBatchPreparer
                 command = sharedCommandsMap.GetOrAddValue(
                     entry,
                     (t, comparer) =>
-                        Dependencies
-                            .ModificationCommandFactory
+                        Dependencies.ModificationCommandFactory
                             .CreateModificationCommand(
                                 new ModificationCommandParameters(
                                     t,
@@ -400,8 +394,7 @@ public class CommandBatchPreparer : ICommandBatchPreparer
             }
             else
             {
-                command = Dependencies
-                    .ModificationCommandFactory
+                command = Dependencies.ModificationCommandFactory
                     .CreateModificationCommand(
                         new ModificationCommandParameters(
                             table,
@@ -584,8 +577,7 @@ public class CommandBatchPreparer : ICommandBatchPreparer
         StringBuilder builder
     )
     {
-        var reverseDependency = !source
-            .Entries
+        var reverseDependency = !source.Entries
             .Any(e => foreignKey.DeclaringEntityType.IsAssignableFrom(e.EntityType));
         if (reverseDependency)
         {
@@ -599,8 +591,7 @@ public class CommandBatchPreparer : ICommandBatchPreparer
         builder.Append("ForeignKey ");
 
         var dependentCommand = reverseDependency ? target : source;
-        var dependentEntry = dependentCommand
-            .Entries
+        var dependentEntry = dependentCommand.Entries
             .First(e => foreignKey.DeclaringEntityType.IsAssignableFrom(e.EntityType));
         builder.Append(dependentEntry.BuildCurrentValuesString(foreignKey.Properties)).Append(' ');
 
@@ -666,8 +657,7 @@ public class CommandBatchPreparer : ICommandBatchPreparer
 
         builder.Append("Key ");
         var dependentCommand = reverseDependency ? target : source;
-        var dependentEntry = dependentCommand
-            .Entries
+        var dependentEntry = dependentCommand.Entries
             .First(e => key.DeclaringEntityType.IsAssignableFrom(e.EntityType));
         builder.Append(
             reverseDependency
@@ -1117,8 +1107,7 @@ public class CommandBatchPreparer : ICommandBatchPreparer
         if (command.StoreStoredProcedure != null)
         {
             if (
-                command
-                    .StoreStoredProcedure
+                command.StoreStoredProcedure
                     .StoredProcedures
                     .Any(sp => foreignKey.IsRowInternal(sp.GetStoreIdentifier()))
             )

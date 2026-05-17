@@ -123,8 +123,7 @@ public partial class RouteHandlerAnalyzer : DiagnosticAnalyzer
         var method = invocationOperation.TargetMethod;
 
         if (
-            SymbolEqualityComparer
-                .Default
+            SymbolEqualityComparer.Default
                 .Equals(
                     method.ContainingType,
                     wellKnownTypes.Get(
@@ -144,8 +143,7 @@ public partial class RouteHandlerAnalyzer : DiagnosticAnalyzer
             };
         }
         else if (
-            SymbolEqualityComparer
-                .Default
+            SymbolEqualityComparer.Default
                 .Equals(
                     method.ContainingType,
                     wellKnownTypes.Get(
@@ -157,8 +155,7 @@ public partial class RouteHandlerAnalyzer : DiagnosticAnalyzer
             return method.Name is "RequireAuthorization" or "AllowAnonymous";
         }
         else if (
-            SymbolEqualityComparer
-                .Default
+            SymbolEqualityComparer.Default
                 .Equals(
                     method.ContainingType,
                     wellKnownTypes.Get(
@@ -181,8 +178,7 @@ public partial class RouteHandlerAnalyzer : DiagnosticAnalyzer
             };
         }
         else if (
-            SymbolEqualityComparer
-                .Default
+            SymbolEqualityComparer.Default
                 .Equals(
                     method.ContainingType,
                     wellKnownTypes.Get(
@@ -194,8 +190,7 @@ public partial class RouteHandlerAnalyzer : DiagnosticAnalyzer
             return method.Name == "RequireCors";
         }
         else if (
-            SymbolEqualityComparer
-                .Default
+            SymbolEqualityComparer.Default
                 .Equals(
                     method.ContainingType,
                     wellKnownTypes.Get(
@@ -207,8 +202,7 @@ public partial class RouteHandlerAnalyzer : DiagnosticAnalyzer
             return method.Name == "CacheOutput";
         }
         else if (
-            SymbolEqualityComparer
-                .Default
+            SymbolEqualityComparer.Default
                 .Equals(
                     method.ContainingType,
                     wellKnownTypes.Get(
@@ -259,8 +253,7 @@ public partial class RouteHandlerAnalyzer : DiagnosticAnalyzer
             return ParentOperation != null
                 && Equals(ParentOperation, other.ParentOperation)
                 && Builder != null
-                && SymbolEqualityComparer
-                    .Default
+                && SymbolEqualityComparer.Default
                     .Equals(
                         (Builder as ILocalReferenceOperation)?.Local,
                         (other.Builder as ILocalReferenceOperation)?.Local

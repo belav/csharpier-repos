@@ -98,8 +98,7 @@ namespace System.ServiceModel.Channels
             {
                 if (message == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new ArgumentNullException("message"));
                 }
                 if (bufferManager == null)
@@ -148,8 +147,7 @@ namespace System.ServiceModel.Channels
                     MessageLogger.LogMessage(ref message, MessageLoggingSource.TransportSend);
                 }
                 if (
-                    System
-                        .ServiceModel
+                    System.ServiceModel
                         .Diagnostics
                         .Application
                         .TD
@@ -157,8 +155,7 @@ namespace System.ServiceModel.Channels
                     && messageData != null
                 )
                 {
-                    System
-                        .ServiceModel
+                    System.ServiceModel
                         .Diagnostics
                         .Application
                         .TD
@@ -175,8 +172,7 @@ namespace System.ServiceModel.Channels
             {
                 if (message == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new ArgumentNullException("message"));
                 }
                 if (stream == null)

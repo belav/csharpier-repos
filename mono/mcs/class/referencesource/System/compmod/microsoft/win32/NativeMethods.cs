@@ -281,8 +281,7 @@ namespace Microsoft.Win32
         [ResourceConsumption(ResourceScope.Machine)]
         internal static string GetLocalPath(string fileName)
         {
-            System
-                .Diagnostics
+            System.Diagnostics
                 .Debug
                 .Assert(
                     fileName != null && fileName.Length > 0,

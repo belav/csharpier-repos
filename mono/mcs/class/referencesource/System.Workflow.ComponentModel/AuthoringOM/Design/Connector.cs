@@ -130,9 +130,8 @@ namespace System.Workflow.ComponentModel.Design
         {
             get
             {
-                IList<Point> connections = this.associatedDesigner.GetConnections(
-                    this.designerEdge
-                );
+                IList<Point> connections = this.associatedDesigner
+                    .GetConnections(this.designerEdge);
                 if (this.connectionIndex < connections.Count)
                     return connections[this.connectionIndex];
                 else
@@ -144,9 +143,8 @@ namespace System.Workflow.ComponentModel.Design
         {
             get
             {
-                IList<Point> connections = this.associatedDesigner.GetConnections(
-                    DesignerEdges.All
-                );
+                IList<Point> connections = this.associatedDesigner
+                    .GetConnections(DesignerEdges.All);
                 if (connections.Count > 0)
                 {
                     Point location = Location;
@@ -1090,9 +1088,8 @@ namespace System.Workflow.ComponentModel.Design
                 //Make sure that we apply the edit points to the connector
                 if (updateSegments)
                 {
-                    this.editedConnector.SetConnectorSegments(
-                        GetPointsFromEditPoints(this.editPoints)
-                    );
+                    this.editedConnector
+                        .SetConnectorSegments(GetPointsFromEditPoints(this.editPoints));
                     if (this.editedConnector.ParentDesigner != null)
                     {
                         this.editedConnector
@@ -1146,18 +1143,12 @@ namespace System.Workflow.ComponentModel.Design
 
             //If the editing is in progress then we want to draw the dashed lines
             if (drawSelected)
-                this.editedConnector.OnPaintSelected(
-                    e,
-                    drawPrimarySelection,
-                    segmentEditPoints.ToArray()
-                );
+                this.editedConnector
+                    .OnPaintSelected(e, drawPrimarySelection, segmentEditPoints.ToArray());
 
             if (this.activeEditPoint != null)
-                this.editedConnector.OnPaintEdited(
-                    e,
-                    segments.ToArray(),
-                    segmentEditPoints.ToArray()
-                );
+                this.editedConnector
+                    .OnPaintEdited(e, segments.ToArray(), segmentEditPoints.ToArray());
 
             //
 #if DISPLAYESCAPEREGIONS
@@ -1191,8 +1182,8 @@ namespace System.Workflow.ComponentModel.Design
                     out pointsToExclude
                 );
 
-                ICollection<Rectangle> userDefinedObstacles =
-                    this.editedConnector.ExcludedRoutingRectangles;
+                ICollection<Rectangle> userDefinedObstacles = this.editedConnector
+                    .ExcludedRoutingRectangles;
                 if (userDefinedObstacles != null)
                 {
                     foreach (Rectangle rectangle in userDefinedObstacles)
@@ -1203,11 +1194,8 @@ namespace System.Workflow.ComponentModel.Design
                     e.Graphics.DrawRectangle(Pens.Red, rectangle);
 
                 for (int i = 0; i < linesToExclude.Count / 2; i++)
-                    e.Graphics.DrawLine(
-                        Pens.Red,
-                        linesToExclude[i * 2],
-                        linesToExclude[(i * 2) + 1]
-                    );
+                    e.Graphics
+                        .DrawLine(Pens.Red, linesToExclude[i * 2], linesToExclude[(i * 2) + 1]);
             }
 #endif
         }
@@ -1329,18 +1317,19 @@ namespace System.Workflow.ComponentModel.Design
                         EditPoint.EditPointTypes.MultiSegmentEditPoint,
                         editPointLocation
                     );
-                    this.editPoints.InsertRange(
-                        activeEditPointIndex,
-                        new EditPoint[]
-                        {
-                            new EditPoint(
-                                this,
-                                EditPoint.EditPointTypes.MultiSegmentEditPoint,
-                                editPointLocation
-                            ),
-                            previous,
-                        }
-                    );
+                    this.editPoints
+                        .InsertRange(
+                            activeEditPointIndex,
+                            new EditPoint[]
+                            {
+                                new EditPoint(
+                                    this,
+                                    EditPoint.EditPointTypes.MultiSegmentEditPoint,
+                                    editPointLocation
+                                ),
+                                previous,
+                            }
+                        );
                 }
 
                 if (next != null && next.Type == EditPoint.EditPointTypes.ConnectionEditPoint)
@@ -1378,18 +1367,19 @@ namespace System.Workflow.ComponentModel.Design
                         EditPoint.EditPointTypes.MultiSegmentEditPoint,
                         editPointLocation
                     );
-                    this.editPoints.InsertRange(
-                        activeEditPointIndex + 1,
-                        new EditPoint[]
-                        {
-                            next,
-                            new EditPoint(
-                                this,
-                                EditPoint.EditPointTypes.MultiSegmentEditPoint,
-                                editPointLocation
-                            ),
-                        }
-                    );
+                    this.editPoints
+                        .InsertRange(
+                            activeEditPointIndex + 1,
+                            new EditPoint[]
+                            {
+                                next,
+                                new EditPoint(
+                                    this,
+                                    EditPoint.EditPointTypes.MultiSegmentEditPoint,
+                                    editPointLocation
+                                ),
+                            }
+                        );
                 }
 
                 //STEP2: UPDATE THE EDIT POINTS
@@ -1574,14 +1564,15 @@ namespace System.Workflow.ComponentModel.Design
                             this.editPoints[i].Location,
                             this.editPoints[i + 1].Location
                         );
-                        this.editPoints.Insert(
-                            i + 1,
-                            new EditPoint(
-                                this,
-                                EditPoint.EditPointTypes.MidSegmentEditPoint,
-                                midPoint
-                            )
-                        );
+                        this.editPoints
+                            .Insert(
+                                i + 1,
+                                new EditPoint(
+                                    this,
+                                    EditPoint.EditPointTypes.MidSegmentEditPoint,
+                                    midPoint
+                                )
+                            );
                     }
                 }
             }
@@ -1604,10 +1595,8 @@ namespace System.Workflow.ComponentModel.Design
                                 segments[i]
                             )
                         );
-                    this.editPoints.InsertRange(
-                        this.editPoints.Count - 1,
-                        editPointsToAdd.ToArray()
-                    );
+                    this.editPoints
+                        .InsertRange(this.editPoints.Count - 1, editPointsToAdd.ToArray());
                 }
                 else
                 {
@@ -1772,14 +1761,15 @@ namespace System.Workflow.ComponentModel.Design
                         (slope < 1)
                             ? new Point(next.Location.X, current.Location.Y)
                             : new Point(current.Location.X, next.Location.Y);
-                    this.editPoints.Insert(
-                        i + 1,
-                        new EditPoint(
-                            this,
-                            EditPoint.EditPointTypes.MultiSegmentEditPoint,
-                            location
-                        )
-                    );
+                    this.editPoints
+                        .Insert(
+                            i + 1,
+                            new EditPoint(
+                                this,
+                                EditPoint.EditPointTypes.MultiSegmentEditPoint,
+                                location
+                            )
+                        );
                 }
             }
         }
@@ -1793,9 +1783,8 @@ namespace System.Workflow.ComponentModel.Design
             if (sourceConnection == null || !sourceConnection.Equals(Source))
                 return false;
 
-            ConnectionPoint targetConnection = this.editPoints[
-                this.editPoints.Count - 1
-            ].EditedConnectionPoint;
+            ConnectionPoint targetConnection = this.editPoints[this.editPoints.Count - 1]
+                .EditedConnectionPoint;
             if (targetConnection == null || !targetConnection.Equals(Target))
                 return false;
 

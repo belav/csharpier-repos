@@ -23,8 +23,7 @@ namespace ILCompiler
         )
         {
             _supportsLazyCctors =
-                context
-                    .SystemModule
+                context.SystemModule
                     .GetType(
                         "System.Runtime.CompilerServices",
                         "ClassConstructorRunner",
@@ -129,8 +128,7 @@ namespace ILCompiler
                     var item in LockFreeReaderHashtable<
                         MetadataType,
                         TypePreinit.PreinitializationInfo
-                    >
-                        .Enumerator
+                    >.Enumerator
                         .Get(_preinitHashTable)
                 )
                 {

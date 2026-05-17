@@ -331,8 +331,7 @@ namespace System.Web.Security
                         );
                         CacheDependency dependency = new CacheDependency(0, cacheDependencyPath);
                         TimeSpan slidingExp = CachedPathData.UrlMetadataSlidingExpiration;
-                        HttpRuntime
-                            .Cache
+                        HttpRuntime.Cache
                             .InternalCache
                             .Insert(
                                 oCacheKey,
@@ -361,8 +360,7 @@ namespace System.Web.Security
         {
             if (!context.IsCustomErrorEnabled)
             {
-                context
-                    .Response
+                context.Response
                     .Write(
                         (
                             new FileAccessFailedErrorFormatter(context.Request.PhysicalPathInternal)
@@ -371,8 +369,7 @@ namespace System.Web.Security
             }
             else
             {
-                context
-                    .Response
+                context.Response
                     .Write(
                         (new FileAccessFailedErrorFormatter(null)).GetErrorMessage(context, true)
                     );

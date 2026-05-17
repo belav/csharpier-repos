@@ -2040,8 +2040,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
             dynamic index = 0;
             do
             {
-                result += ((MyEnum?)dy.Method_ReturnMyEnumNullable(new MyClass[0]))
-                    .Value
+                result += ((MyEnum?)dy.Method_ReturnMyEnumNullable(new MyClass[0])).Value
                     .GetHashCode();
             } while (index++ < 2);
             if (result == 9)

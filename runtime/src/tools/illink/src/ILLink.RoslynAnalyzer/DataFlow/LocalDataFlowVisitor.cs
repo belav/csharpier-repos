@@ -542,8 +542,7 @@ namespace ILLink.RoslynAnalyzer.DataFlow
             Debug.Assert(
                 flowCaptureReference.GetValueUsageInfo(OwningSymbol).HasFlag(ValueUsageInfo.Write)
             );
-            var capturedReferences = state
-                .Current
+            var capturedReferences = state.Current
                 .LocalState
                 .CapturedReferences
                 .Get(flowCaptureReference.Id);
@@ -582,8 +581,7 @@ namespace ILLink.RoslynAnalyzer.DataFlow
                     state,
                     merge: true
                 );
-                value = LocalStateAndContextLattice
-                    .LocalStateLattice
+                value = LocalStateAndContextLattice.LocalStateLattice
                     .Lattice
                     .ValueLattice
                     .Meet(value, singleValue);
@@ -733,8 +731,7 @@ namespace ILLink.RoslynAnalyzer.DataFlow
                         // If an r-value captures an l-value, we must dereference the l-value
                         // and copy out the value to capture.
                         capturedValue = TopValue;
-                        var capturedReferences = state
-                            .Current
+                        var capturedReferences = state.Current
                             .LocalState
                             .CapturedReferences
                             .Get(captureRef.Id);
@@ -742,8 +739,7 @@ namespace ILLink.RoslynAnalyzer.DataFlow
                         foreach (var capturedReference in capturedReferences.GetKnownValues())
                         {
                             var value = Visit(capturedReference.Reference, state);
-                            capturedValue = LocalStateAndContextLattice
-                                .LocalStateLattice
+                            capturedValue = LocalStateAndContextLattice.LocalStateLattice
                                 .Lattice
                                 .ValueLattice
                                 .Meet(capturedValue, value);

@@ -65,8 +65,7 @@ namespace System.Text.Json.SourceGeneration
                         return type;
                     }
 
-                    ImmutableArray<ITypeSymbol> erasedElements = namedType
-                        .TupleElements
+                    ImmutableArray<ITypeSymbol> erasedElements = namedType.TupleElements
                         .Select(e => compilation.EraseCompileTimeMetadata(e.Type))
                         .ToImmutableArray();
 
@@ -132,10 +131,13 @@ namespace System.Text.Json.SourceGeneration
         public static IEnumerable<IMethodSymbol> GetExplicitlyDeclaredInstanceConstructors(
             this INamedTypeSymbol type
         ) =>
-            type.Constructors.Where(ctor =>
-                !ctor.IsStatic
-                && !(ctor.IsImplicitlyDeclared && type.IsValueType && ctor.Parameters.Length == 0)
-            );
+            type.Constructors
+                .Where(ctor =>
+                    !ctor.IsStatic
+                    && !(
+                        ctor.IsImplicitlyDeclared && type.IsValueType && ctor.Parameters.Length == 0
+                    )
+                );
 
         public static bool ContainsAttribute(
             this ISymbol memberInfo,

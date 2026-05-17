@@ -82,8 +82,7 @@ namespace System.Security.Cryptography
             // It's entirely possible that this line will cause the key to be generated in the first place.
             SafeDsaHandle key = GetKey();
 
-            DSAParameters dsaParameters = Interop
-                .Crypto
+            DSAParameters dsaParameters = Interop.Crypto
                 .ExportDsaParameters(key, includePrivateParameters);
             bool hasPrivateKey = dsaParameters.X != null;
 
@@ -121,8 +120,7 @@ namespace System.Security.Cryptography
 
             SafeDsaHandle key;
             if (
-                !Interop
-                    .Crypto
+                !Interop.Crypto
                     .DsaKeyCreateByExplicitParameters(
                         out key,
                         parameters.P,

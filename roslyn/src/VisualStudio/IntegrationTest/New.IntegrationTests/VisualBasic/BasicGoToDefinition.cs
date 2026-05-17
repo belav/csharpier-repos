@@ -31,61 +31,51 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.VisualBasic
         public async Task GoToClassDeclaration()
         {
             var project = ProjectName;
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .AddFileAsync(
                     project,
                     "FileDef.vb",
                     cancellationToken: HangMitigatingCancellationToken
                 );
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .OpenFileAsync(project, "FileDef.vb", HangMitigatingCancellationToken);
-            await TestServices
-                .Editor
+            await TestServices.Editor
                 .SetTextAsync(
                     @"Class SomeClass
 End Class",
                     HangMitigatingCancellationToken
                 );
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .AddFileAsync(
                     project,
                     "FileConsumer.vb",
                     cancellationToken: HangMitigatingCancellationToken
                 );
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .OpenFileAsync(project, "FileConsumer.vb", HangMitigatingCancellationToken);
-            await TestServices
-                .Editor
+            await TestServices.Editor
                 .SetTextAsync(
                     @"Class SomeOtherClass
     Dim gibberish As SomeClass
 End Class",
                     HangMitigatingCancellationToken
                 );
-            await TestServices
-                .Editor
+            await TestServices.Editor
                 .PlaceCaretAsync("SomeClass", charsOffset: 0, HangMitigatingCancellationToken);
             await TestServices.Editor.GoToDefinitionAsync(HangMitigatingCancellationToken);
             Assert.Equal(
                 $"FileDef.vb",
-                await TestServices
-                    .Shell
+                await TestServices.Shell
                     .GetActiveDocumentFileNameAsync(HangMitigatingCancellationToken)
             );
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .TextContainsAsync(
                     @"Class SomeClass$$",
                     assertCaretPosition: true,
                     HangMitigatingCancellationToken
                 );
             Assert.False(
-                await TestServices
-                    .Shell
+                await TestServices.Shell
                     .IsActiveTabProvisionalAsync(HangMitigatingCancellationToken)
             );
         }
@@ -93,22 +83,19 @@ End Class",
         [IdeTheory, CombinatorialData]
         public async Task ObjectBrowserNavigation(bool navigateToObjectBrowser)
         {
-            var globalOptions = await TestServices
-                .Shell
+            var globalOptions = await TestServices.Shell
                 .GetComponentModelServiceAsync<IGlobalOptionService>(
                     HangMitigatingCancellationToken
                 );
 
             var project = ProjectName;
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .AddFileAsync(
                     project,
                     "ObjBrowser.vb",
                     cancellationToken: HangMitigatingCancellationToken
                 );
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .OpenFileAsync(project, "ObjBrowser.vb", HangMitigatingCancellationToken);
             await TestServices.Editor.SetTextAsync(@"", HangMitigatingCancellationToken);
 
@@ -144,8 +131,7 @@ End Class",
             {
                 Assert.Equal(
                     "Object Browser",
-                    await TestServices
-                        .Shell
+                    await TestServices.Shell
                         .GetActiveWindowCaptionAsync(HangMitigatingCancellationToken)
                 );
             }
@@ -154,12 +140,10 @@ End Class",
                 await TestServices.Editor.GoToDefinitionAsync(HangMitigatingCancellationToken);
                 Assert.Contains(
                     "Int32",
-                    await TestServices
-                        .Shell
+                    await TestServices.Shell
                         .GetActiveWindowCaptionAsync(HangMitigatingCancellationToken)
                 );
-                await TestServices
-                    .EditorVerifier
+                await TestServices.EditorVerifier
                     .TextContainsAsync(
                         "Public Structure Int32",
                         cancellationToken: HangMitigatingCancellationToken
@@ -171,18 +155,15 @@ End Class",
         public async Task GoToBaseFromMetadataAsSource()
         {
             var project = ProjectName;
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .AddFileAsync(
                     project,
                     "SomeClass.vb",
                     cancellationToken: HangMitigatingCancellationToken
                 );
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .OpenFileAsync(project, "SomeClass.vb", HangMitigatingCancellationToken);
-            await TestServices
-                .Editor
+            await TestServices.Editor
                 .SetTextAsync(
                     @"Class SomeClass
     Public Overrides Function ToString() As String
@@ -191,18 +172,15 @@ End Class",
 End Class",
                     HangMitigatingCancellationToken
                 );
-            await TestServices
-                .Editor
+            await TestServices.Editor
                 .PlaceCaretAsync("Overrides", charsOffset: -1, HangMitigatingCancellationToken);
             await TestServices.Editor.GoToDefinitionAsync(HangMitigatingCancellationToken);
             Assert.Equal(
                 "Object [from metadata] [Read Only]",
-                await TestServices
-                    .Shell
+                await TestServices.Shell
                     .GetActiveWindowCaptionAsync(HangMitigatingCancellationToken)
             );
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .TextContainsAsync(
                     @"Public Overridable Function ToString$$() As String",
                     assertCaretPosition: true

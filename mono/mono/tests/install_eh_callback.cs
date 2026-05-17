@@ -191,8 +191,7 @@ public class Tests
         }
         if (!Caller2.return_from_inner_managed_callback)
         {
-            Console
-                .Error
+            Console.Error
                 .WriteLine("managed callback called from native eh callback did not return");
             return 4;
         }

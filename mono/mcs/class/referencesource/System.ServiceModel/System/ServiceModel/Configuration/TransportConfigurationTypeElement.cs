@@ -26,8 +26,7 @@ namespace System.ServiceModel.Configuration
         {
             if (String.IsNullOrEmpty(transportConfigurationTypeName))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("transportConfigurationTypeName");
             }
             this.TransportConfigurationType = transportConfigurationTypeName;

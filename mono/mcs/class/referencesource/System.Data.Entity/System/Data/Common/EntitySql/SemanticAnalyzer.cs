@@ -236,24 +236,27 @@ namespace System.Data.Common.EntitySql
             // Add resolved user-defined imports to the type resolver.
             // Before adding user-defined namespace imports, add EDM namespace import to make canonical functions and types available in the command text.
             //
-            sr.TypeResolver.AddNamespaceImport(
-                new MetadataNamespace(EdmConstants.EdmNamespace),
-                nsImportList != null ? nsImportList.ErrCtx : cmdErrCtx
-            );
+            sr.TypeResolver
+                .AddNamespaceImport(
+                    new MetadataNamespace(EdmConstants.EdmNamespace),
+                    nsImportList != null ? nsImportList.ErrCtx : cmdErrCtx
+                );
             foreach (var resolvedAliasedNamespaceImport in aliasedNamespaceImports)
             {
-                sr.TypeResolver.AddAliasedNamespaceImport(
-                    resolvedAliasedNamespaceImport.Item1,
-                    resolvedAliasedNamespaceImport.Item2,
-                    resolvedAliasedNamespaceImport.Item3
-                );
+                sr.TypeResolver
+                    .AddAliasedNamespaceImport(
+                        resolvedAliasedNamespaceImport.Item1,
+                        resolvedAliasedNamespaceImport.Item2,
+                        resolvedAliasedNamespaceImport.Item3
+                    );
             }
             foreach (var resolvedNamespaceImport in namespaceImports)
             {
-                sr.TypeResolver.AddNamespaceImport(
-                    resolvedNamespaceImport.Item1,
-                    resolvedNamespaceImport.Item2
-                );
+                sr.TypeResolver
+                    .AddNamespaceImport(
+                        resolvedNamespaceImport.Item1,
+                        resolvedNamespaceImport.Item2
+                    );
             }
         }
 
@@ -598,8 +601,7 @@ namespace System.Data.Common.EntitySql
             //
             // Add function parameters to the scope.
             //
-            functionInfo
-                .Parameters
+            functionInfo.Parameters
                 .ForEach(p => sr.CurrentScope.Add(p.VariableName, new FreeVariableScopeEntry(p)));
 
             //
@@ -943,8 +945,7 @@ namespace System.Data.Common.EntitySql
                 //
                 // Project the argument off the DbGroupAggregate binding.
                 //
-                DbExpression definition = aggregateInfo
-                    .EvaluatingScopeRegion
+                DbExpression definition = aggregateInfo.EvaluatingScopeRegion
                     .GroupAggregateBinding
                     .Project(arg);
 
@@ -1536,8 +1537,7 @@ namespace System.Data.Common.EntitySql
             // Later, when the outer max(...) is processed as an aggregate, processing of the inner max(...) gets into TryConvertAsResolvedGroupAggregate(...)
             // and at this point we finally wire up the two aggregates.
             //
-            groupAggregateExpr
-                .AggregateInfo
+            groupAggregateExpr.AggregateInfo
                 .SetContainingAggregate(sr.CurrentGroupAggregateInfo);
 
             if (
@@ -2093,13 +2093,13 @@ namespace System.Data.Common.EntitySql
             if (relshipExpr.ToEndIdentifier != null)
             {
                 toEnd = (RelationshipEndMember)
-                    relationshipType
-                        .Members
+                    relationshipType.Members
                         .FirstOrDefault(m =>
-                            m.Name.Equals(
-                                relshipExpr.ToEndIdentifier.Name,
-                                StringComparison.OrdinalIgnoreCase
-                            )
+                            m.Name
+                                .Equals(
+                                    relshipExpr.ToEndIdentifier.Name,
+                                    StringComparison.OrdinalIgnoreCase
+                                )
                         );
                 if (toEnd == null)
                 {
@@ -2145,8 +2145,7 @@ namespace System.Data.Common.EntitySql
             }
             else
             {
-                var toEndCandidates = relationshipType
-                    .Members
+                var toEndCandidates = relationshipType.Members
                     .Select(m => (RelationshipEndMember)m)
                     .Where(e =>
                         TypeSemantics.IsStructurallyEqualOrPromotableTo(
@@ -2185,13 +2184,13 @@ namespace System.Data.Common.EntitySql
             if (relshipExpr.FromEndIdentifier != null)
             {
                 fromEnd = (RelationshipEndMember)
-                    relationshipType
-                        .Members
+                    relationshipType.Members
                         .FirstOrDefault(m =>
-                            m.Name.Equals(
-                                relshipExpr.FromEndIdentifier.Name,
-                                StringComparison.OrdinalIgnoreCase
-                            )
+                            m.Name
+                                .Equals(
+                                    relshipExpr.FromEndIdentifier.Name,
+                                    StringComparison.OrdinalIgnoreCase
+                                )
                         );
                 if (fromEnd == null)
                 {
@@ -2228,8 +2227,7 @@ namespace System.Data.Common.EntitySql
             }
             else
             {
-                var fromEndCandidates = relationshipType
-                    .Members
+                var fromEndCandidates = relationshipType.Members
                     .Select(m => (RelationshipEndMember)m)
                     .Where(e =>
                         TypeSemantics.IsStructurallyEqualOrPromotableTo(
@@ -2317,13 +2315,13 @@ namespace System.Data.Common.EntitySql
             if (relshipExpr.ToEndIdentifier != null)
             {
                 toEnd = (RelationshipEndMember)
-                    relationshipType
-                        .Members
+                    relationshipType.Members
                         .FirstOrDefault(m =>
-                            m.Name.Equals(
-                                relshipExpr.ToEndIdentifier.Name,
-                                StringComparison.OrdinalIgnoreCase
-                            )
+                            m.Name
+                                .Equals(
+                                    relshipExpr.ToEndIdentifier.Name,
+                                    StringComparison.OrdinalIgnoreCase
+                                )
                         );
                 if (toEnd == null)
                 {
@@ -2348,13 +2346,13 @@ namespace System.Data.Common.EntitySql
             if (relshipExpr.FromEndIdentifier != null)
             {
                 fromEnd = (RelationshipEndMember)
-                    relationshipType
-                        .Members
+                    relationshipType.Members
                         .FirstOrDefault(m =>
-                            m.Name.Equals(
-                                relshipExpr.FromEndIdentifier.Name,
-                                StringComparison.OrdinalIgnoreCase
-                            )
+                            m.Name
+                                .Equals(
+                                    relshipExpr.FromEndIdentifier.Name,
+                                    StringComparison.OrdinalIgnoreCase
+                                )
                         );
                 if (fromEnd == null)
                 {
@@ -2391,8 +2389,7 @@ namespace System.Data.Common.EntitySql
             }
             else
             {
-                var fromEndCandidates = relationshipType
-                    .Members
+                var fromEndCandidates = relationshipType.Members
                     .Select(m => (RelationshipEndMember)m)
                     .Where(e =>
                         TypeSemantics.IsStructurallyEqualOrPromotableTo(
@@ -2426,8 +2423,7 @@ namespace System.Data.Common.EntitySql
             //
             if (toEnd == null)
             {
-                var toEndCandidates = relationshipType
-                    .Members
+                var toEndCandidates = relationshipType.Members
                     .Select(m => (RelationshipEndMember)m)
                     .Where(e => !e.EdmEquals(fromEnd))
                     .ToArray();
@@ -3215,8 +3211,7 @@ namespace System.Data.Common.EntitySql
             {
                 typeName = methodExpr.Expr;
                 typeName.ErrCtx.ErrorContextInfo = methodExpr.ErrCtx.ErrorContextInfo;
-                typeName.ErrCtx.UseContextInfoAsResourceIdentifier = methodExpr
-                    .ErrCtx
+                typeName.ErrCtx.UseContextInfoAsResourceIdentifier = methodExpr.ErrCtx
                     .UseContextInfoAsResourceIdentifier;
 
                 typeSpecArgs = methodExpr.Args;
@@ -3478,8 +3473,7 @@ namespace System.Data.Common.EntitySql
                 );
 
                 converted = TypeHelpers.CreateRowTypeUsage(
-                    rowTypeDefExpr
-                        .Properties
+                    rowTypeDefExpr.Properties
                         .Select(p => new KeyValuePair<string, TypeUsage>(
                             p.Name.Name,
                             ConvertTypeDefinition(p.Type, sr)
@@ -3574,8 +3568,7 @@ namespace System.Data.Common.EntitySql
                 throw EntityUtil.EntitySqlError(expr.ErrCtx, Strings.CannotCreateEmptyMultiset);
             }
 
-            var mSetExprs = msetCtor
-                .ExprList
+            var mSetExprs = msetCtor.ExprList
                 .Select(e => ConvertValueExpressionAllowUntypedNulls(e, sr))
                 .ToArray();
 
@@ -4608,19 +4601,20 @@ namespace System.Data.Common.EntitySql
             //
             // Fixup Bindings.
             //
-            sr.CurrentScopeRegion.ApplyToScopeEntries(scopeEntry =>
-            {
-                Debug.Assert(
-                    scopeEntry.EntryKind == ScopeEntryKind.SourceVar
-                        || scopeEntry.EntryKind == ScopeEntryKind.InvalidGroupInputRef,
-                    "scopeEntry.EntryKind == ScopeEntryKind.SourceVar || scopeEntry.EntryKind == ScopeEntryKind.InvalidGroupInputRef"
-                );
-
-                if (scopeEntry.EntryKind == ScopeEntryKind.SourceVar)
+            sr.CurrentScopeRegion
+                .ApplyToScopeEntries(scopeEntry =>
                 {
-                    ((SourceScopeEntry)scopeEntry).ReplaceParentVar(whereBinding.Variable);
-                }
-            });
+                    Debug.Assert(
+                        scopeEntry.EntryKind == ScopeEntryKind.SourceVar
+                            || scopeEntry.EntryKind == ScopeEntryKind.InvalidGroupInputRef,
+                        "scopeEntry.EntryKind == ScopeEntryKind.SourceVar || scopeEntry.EntryKind == ScopeEntryKind.InvalidGroupInputRef"
+                    );
+
+                    if (scopeEntry.EntryKind == ScopeEntryKind.SourceVar)
+                    {
+                        ((SourceScopeEntry)scopeEntry).ReplaceParentVar(whereBinding.Variable);
+                    }
+                });
 
             Debug.Assert(whereBinding != null, "whereBinding != null");
 
@@ -4662,16 +4656,14 @@ namespace System.Data.Common.EntitySql
             //
             // Create input binding for DbGroupByExpression.
             //
-            DbGroupExpressionBinding groupInputBinding = source
-                .Expression
+            DbGroupExpressionBinding groupInputBinding = source.Expression
                 .GroupBindAs(sr.GenerateInternalName("geb"), sr.GenerateInternalName("group"));
 
             //
             // Create group partition (DbGroupAggregate) and projection template.
             //
             DbGroupAggregate groupAggregateDefinition = groupInputBinding.GroupAggregate;
-            DbVariableReferenceExpression groupAggregateVarRef = groupAggregateDefinition
-                .ResultType
+            DbVariableReferenceExpression groupAggregateVarRef = groupAggregateDefinition.ResultType
                 .Variable(sr.GenerateInternalName("groupAggregate"));
             DbExpressionBinding groupAggregateBinding = groupAggregateVarRef.BindAs(
                 sr.GenerateInternalName("groupPartitionItem")
@@ -4685,20 +4677,21 @@ namespace System.Data.Common.EntitySql
             //
             // Update group input bindings.
             //
-            sr.CurrentScopeRegion.ApplyToScopeEntries(
-                (scopeEntry) =>
-                {
-                    Debug.Assert(
-                        scopeEntry.EntryKind == ScopeEntryKind.SourceVar,
-                        "scopeEntry.EntryKind == ScopeEntryKind.SourceVar"
-                    );
-                    ((SourceScopeEntry)scopeEntry).AdjustToGroupVar(
-                        groupInputBinding.Variable,
-                        groupInputBinding.GroupVariable,
-                        groupAggregateBinding.Variable
-                    );
-                }
-            );
+            sr.CurrentScopeRegion
+                .ApplyToScopeEntries(
+                    (scopeEntry) =>
+                    {
+                        Debug.Assert(
+                            scopeEntry.EntryKind == ScopeEntryKind.SourceVar,
+                            "scopeEntry.EntryKind == ScopeEntryKind.SourceVar"
+                        );
+                        ((SourceScopeEntry)scopeEntry).AdjustToGroupVar(
+                            groupInputBinding.Variable,
+                            groupInputBinding.GroupVariable,
+                            groupAggregateBinding.Variable
+                        );
+                    }
+                );
 
             //
             // This set will include names of keys, aggregates and the group partition name if specified.
@@ -4896,30 +4889,32 @@ namespace System.Data.Common.EntitySql
             //
             foreach (GroupKeyInfo groupKeyInfo in groupKeys)
             {
-                sr.CurrentScope.Add(
-                    groupKeyInfo.Name,
-                    new GroupKeyDefinitionScopeEntry(
-                        groupKeyInfo.VarBasedKeyExpr,
-                        groupKeyInfo.GroupVarBasedKeyExpr,
-                        groupKeyInfo.GroupAggBasedKeyExpr,
-                        null
-                    )
-                );
+                sr.CurrentScope
+                    .Add(
+                        groupKeyInfo.Name,
+                        new GroupKeyDefinitionScopeEntry(
+                            groupKeyInfo.VarBasedKeyExpr,
+                            groupKeyInfo.GroupVarBasedKeyExpr,
+                            groupKeyInfo.GroupAggBasedKeyExpr,
+                            null
+                        )
+                    );
 
                 if (groupKeyInfo.AlternativeName != null)
                 {
                     string strAlternativeName = TypeResolver.GetFullName(
                         groupKeyInfo.AlternativeName
                     );
-                    sr.CurrentScope.Add(
-                        strAlternativeName,
-                        new GroupKeyDefinitionScopeEntry(
-                            groupKeyInfo.VarBasedKeyExpr,
-                            groupKeyInfo.GroupVarBasedKeyExpr,
-                            groupKeyInfo.GroupAggBasedKeyExpr,
-                            groupKeyInfo.AlternativeName
-                        )
-                    );
+                    sr.CurrentScope
+                        .Add(
+                            strAlternativeName,
+                            new GroupKeyDefinitionScopeEntry(
+                                groupKeyInfo.VarBasedKeyExpr,
+                                groupKeyInfo.GroupVarBasedKeyExpr,
+                                groupKeyInfo.GroupAggBasedKeyExpr,
+                                groupKeyInfo.AlternativeName
+                            )
+                        );
                 }
             }
 
@@ -5062,18 +5057,19 @@ namespace System.Data.Common.EntitySql
                     //
                     // Undo any group source fixups: re-applying the source var and remove the group var.
                     //
-                    sr.CurrentScopeRegion.ApplyToScopeEntries(
-                        (scopeEntry) =>
-                        {
-                            Debug.Assert(
-                                scopeEntry.EntryKind == ScopeEntryKind.SourceVar,
-                                "scopeEntry.EntryKind == ScopeEntryKind.SourceVar"
-                            );
-                            ((SourceScopeEntry)scopeEntry).RollbackAdjustmentToGroupVar(
-                                source.Variable
-                            );
-                        }
-                    );
+                    sr.CurrentScopeRegion
+                        .ApplyToScopeEntries(
+                            (scopeEntry) =>
+                            {
+                                Debug.Assert(
+                                    scopeEntry.EntryKind == ScopeEntryKind.SourceVar,
+                                    "scopeEntry.EntryKind == ScopeEntryKind.SourceVar"
+                                );
+                                ((SourceScopeEntry)scopeEntry).RollbackAdjustmentToGroupVar(
+                                    source.Variable
+                                );
+                            }
+                        );
 
                     //
                     // Remove the group operation flag.
@@ -5216,16 +5212,17 @@ namespace System.Data.Common.EntitySql
             // they are no longer available for proper referencing and only to be used for user error messages.
             //
             sr.RollbackToScope(groupInputScope);
-            sr.CurrentScopeRegion.ApplyToScopeEntries(
-                (scopeEntry) =>
-                {
-                    Debug.Assert(
-                        scopeEntry.EntryKind == ScopeEntryKind.SourceVar,
-                        "scopeEntry.EntryKind == ScopeEntryKind.SourceVar"
-                    );
-                    return new InvalidGroupInputRefScopeEntry();
-                }
-            );
+            sr.CurrentScopeRegion
+                .ApplyToScopeEntries(
+                    (scopeEntry) =>
+                    {
+                        Debug.Assert(
+                            scopeEntry.EntryKind == ScopeEntryKind.SourceVar,
+                            "scopeEntry.EntryKind == ScopeEntryKind.SourceVar"
+                        );
+                        return new InvalidGroupInputRefScopeEntry();
+                    }
+                );
 
             //
             // Add final group scope.
@@ -5240,10 +5237,13 @@ namespace System.Data.Common.EntitySql
                 //
                 // Add new scope entry
                 //
-                sr.CurrentScope.Add(
-                    groupKeyInfo.VarRef.VariableName,
-                    new SourceScopeEntry(groupKeyInfo.VarRef).AddParentVar(groupBinding.Variable)
-                );
+                sr.CurrentScope
+                    .Add(
+                        groupKeyInfo.VarRef.VariableName,
+                        new SourceScopeEntry(groupKeyInfo.VarRef).AddParentVar(
+                            groupBinding.Variable
+                        )
+                    );
 
                 //
                 // Handle the alternative name entry.
@@ -5257,13 +5257,14 @@ namespace System.Data.Common.EntitySql
                     string strAlternativeName = TypeResolver.GetFullName(
                         groupKeyInfo.AlternativeName
                     );
-                    sr.CurrentScope.Add(
-                        strAlternativeName,
-                        new SourceScopeEntry(
-                            groupKeyInfo.VarRef,
-                            groupKeyInfo.AlternativeName
-                        ).AddParentVar(groupBinding.Variable)
-                    );
+                    sr.CurrentScope
+                        .Add(
+                            strAlternativeName,
+                            new SourceScopeEntry(
+                                groupKeyInfo.VarRef,
+                                groupKeyInfo.AlternativeName
+                            ).AddParentVar(groupBinding.Variable)
+                        );
                 }
             }
 
@@ -5274,8 +5275,7 @@ namespace System.Data.Common.EntitySql
                 GroupAggregateInfo groupAggregateInfo in sr.CurrentScopeRegion.GroupAggregateInfos
             )
             {
-                DbVariableReferenceExpression aggVarRef = groupAggregateInfo
-                    .AggregateStubExpression
+                DbVariableReferenceExpression aggVarRef = groupAggregateInfo.AggregateStubExpression
                     .ResultType
                     .Variable(groupAggregateInfo.AggregateName);
 
@@ -5287,10 +5287,11 @@ namespace System.Data.Common.EntitySql
 
                 if (!sr.CurrentScope.Contains(aggVarRef.VariableName))
                 {
-                    sr.CurrentScope.Add(
-                        aggVarRef.VariableName,
-                        new SourceScopeEntry(aggVarRef).AddParentVar(groupBinding.Variable)
-                    );
+                    sr.CurrentScope
+                        .Add(
+                            aggVarRef.VariableName,
+                            new SourceScopeEntry(aggVarRef).AddParentVar(groupBinding.Variable)
+                        );
                     sr.CurrentScopeRegion.RegisterGroupAggregateName(aggVarRef.VariableName);
                 }
 
@@ -5351,8 +5352,7 @@ namespace System.Data.Common.EntitySql
                             new KeyValuePair<string, DbExpression>(
                                 groupAggregateInfo.AggregateName,
                                 gpExpressionLambda.Invoke(
-                                    groupBinding
-                                        .Variable
+                                    groupBinding.Variable
                                         .Property(groupAggregateVarRef.VariableName)
                                 )
                             )
@@ -5605,10 +5605,11 @@ namespace System.Data.Common.EntitySql
             int savedScope = sr.CurrentScopeIndex;
             sr.EnterScope();
             projectionItems.ForEach(projectionItem =>
-                sr.CurrentScope.Add(
-                    projectionItem.Key,
-                    new ProjectionItemDefinitionScopeEntry(projectionItem.Value)
-                )
+                sr.CurrentScope
+                    .Add(
+                        projectionItem.Key,
+                        new ProjectionItemDefinitionScopeEntry(projectionItem.Value)
+                    )
             );
 
             //
@@ -5639,10 +5640,8 @@ namespace System.Data.Common.EntitySql
                 if (selectClause.SelectKind == AST.SelectKind.Value)
                 {
                     Debug.Assert(projectionItems.Count == 1, "projectionItems.Count == 1");
-                    sr.CurrentScope.Replace(
-                        projectionItems[0].Key,
-                        new SourceScopeEntry(source.Variable)
-                    );
+                    sr.CurrentScope
+                        .Replace(projectionItems[0].Key, new SourceScopeEntry(source.Variable));
                 }
                 else
                 {
@@ -5652,17 +5651,18 @@ namespace System.Data.Common.EntitySql
                     );
                     foreach (var projectionExpression in projectionItems)
                     {
-                        DbVariableReferenceExpression projectionExpressionRef = projectionExpression
-                            .Value
-                            .ResultType
-                            .Variable(projectionExpression.Key);
+                        DbVariableReferenceExpression projectionExpressionRef =
+                            projectionExpression.Value
+                                .ResultType
+                                .Variable(projectionExpression.Key);
 
-                        sr.CurrentScope.Replace(
-                            projectionExpressionRef.VariableName,
-                            new SourceScopeEntry(projectionExpressionRef).AddParentVar(
-                                source.Variable
-                            )
-                        );
+                        sr.CurrentScope
+                            .Replace(
+                                projectionExpressionRef.VariableName,
+                                new SourceScopeEntry(projectionExpressionRef).AddParentVar(
+                                    source.Variable
+                                )
+                            );
                     }
                 }
 
@@ -5820,19 +5820,20 @@ namespace System.Data.Common.EntitySql
             }
             else
             {
-                sr.CurrentScopeRegion.ApplyToScopeEntries(scopeEntry =>
-                {
-                    Debug.Assert(
-                        scopeEntry.EntryKind == ScopeEntryKind.SourceVar
-                            || scopeEntry.EntryKind == ScopeEntryKind.InvalidGroupInputRef,
-                        "scopeEntry.EntryKind == ScopeEntryKind.SourceVar || scopeEntry.EntryKind == ScopeEntryKind.InvalidGroupInputRef"
-                    );
-
-                    if (scopeEntry.EntryKind == ScopeEntryKind.SourceVar)
+                sr.CurrentScopeRegion
+                    .ApplyToScopeEntries(scopeEntry =>
                     {
-                        ((SourceScopeEntry)scopeEntry).ReplaceParentVar(sortBinding.Variable);
-                    }
-                });
+                        Debug.Assert(
+                            scopeEntry.EntryKind == ScopeEntryKind.SourceVar
+                                || scopeEntry.EntryKind == ScopeEntryKind.InvalidGroupInputRef,
+                            "scopeEntry.EntryKind == ScopeEntryKind.SourceVar || scopeEntry.EntryKind == ScopeEntryKind.InvalidGroupInputRef"
+                        );
+
+                        if (scopeEntry.EntryKind == ScopeEntryKind.SourceVar)
+                        {
+                            ((SourceScopeEntry)scopeEntry).ReplaceParentVar(sortBinding.Variable);
+                        }
+                    });
             }
 
             Debug.Assert(null != sortBinding, "null != sortBinding");
@@ -5868,8 +5869,7 @@ namespace System.Data.Common.EntitySql
 
             var predicates = rightColl.Arguments.Select(arg => left.Equal(arg));
             List<DbExpression> args = new List<DbExpression>(predicates);
-            DbExpression orExpr = Utils
-                .Helpers
+            DbExpression orExpr = Utils.Helpers
                 .BuildBalancedTreeInPlace(args, (prev, next) => prev.Or(next));
 
             return orExpr;
@@ -5993,11 +5993,8 @@ namespace System.Data.Common.EntitySql
                         //
                         MetadataFunctionGroup function;
                         if (
-                            !sr.TypeResolver.TryGetFunctionFromMetadata(
-                                "Edm",
-                                "Concat",
-                                out function
-                            )
+                            !sr.TypeResolver
+                                .TryGetFunctionFromMetadata("Edm", "Concat", out function)
                         )
                         {
                             throw EntityUtil.EntitySqlError(
@@ -6444,8 +6441,7 @@ namespace System.Data.Common.EntitySql
                         sr.GenerateInternalName("l_flatten")
                     );
 
-                    DbExpressionBinding rightExpr = leftExpr
-                        .Variable
+                    DbExpressionBinding rightExpr = leftExpr.Variable
                         .BindAs(sr.GenerateInternalName("r_flatten"));
 
                     DbExpressionBinding applyBinding = leftExpr
@@ -6478,9 +6474,8 @@ namespace System.Data.Common.EntitySql
                     }
                     else
                     {
-                        DbExpressionBinding rSet = args.Right.BindAs(
-                            sr.GenerateInternalName("in-filter")
-                        );
+                        DbExpressionBinding rSet = args.Right
+                            .BindAs(sr.GenerateInternalName("in-filter"));
 
                         DbExpression leftIn = args.Left;
                         DbExpression rightSet = rSet.Variable;
@@ -6522,9 +6517,8 @@ namespace System.Data.Common.EntitySql
                     }
                     else
                     {
-                        DbExpressionBinding rSet = args.Right.BindAs(
-                            sr.GenerateInternalName("in-filter")
-                        );
+                        DbExpressionBinding rSet = args.Right
+                            .BindAs(sr.GenerateInternalName("in-filter"));
 
                         DbExpression leftIn = args.Left;
                         DbExpression rightSet = rSet.Variable;

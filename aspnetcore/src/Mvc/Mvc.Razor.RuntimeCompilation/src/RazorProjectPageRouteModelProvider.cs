@@ -53,8 +53,7 @@ internal sealed class RazorProjectPageRouteModelProvider : IPageRouteModelProvid
         {
             var relativePath = item.CombinedPath;
             if (
-                context
-                    .RouteModels
+                context.RouteModels
                     .Any(m =>
                         string.Equals(
                             relativePath,
@@ -92,8 +91,7 @@ internal sealed class RazorProjectPageRouteModelProvider : IPageRouteModelProvid
         {
             var relativePath = item.CombinedPath;
             if (
-                context
-                    .RouteModels
+                context.RouteModels
                     .Any(m =>
                         string.Equals(
                             relativePath,

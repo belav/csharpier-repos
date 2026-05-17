@@ -69,8 +69,7 @@ public class ComponentStatePersistenceManagerTest
         var renderer = new TestRenderer();
         var data = new byte[] { 1, 2, 3, 4 };
 
-        lifetime
-            .State
+        lifetime.State
             .RegisterOnPersisting(() =>
             {
                 lifetime.State.PersistAsJson("MyState", new byte[] { 1, 2, 3, 4 });
@@ -97,8 +96,7 @@ public class ComponentStatePersistenceManagerTest
         var renderer = new TestRenderer();
         var data = new byte[] { 1, 2, 3, 4 };
 
-        lifetime
-            .State
+        lifetime.State
             .RegisterOnPersisting(
                 () =>
                 {
@@ -129,8 +127,7 @@ public class ComponentStatePersistenceManagerTest
         var data = new byte[] { 1, 2, 3, 4 };
         var invoked = false;
 
-        lifetime
-            .State
+        lifetime.State
             .RegisterOnPersisting(
                 () =>
                 {
@@ -163,8 +160,7 @@ public class ComponentStatePersistenceManagerTest
         var tcs = new TaskCompletionSource();
         var tcs2 = new TaskCompletionSource();
 
-        lifetime
-            .State
+        lifetime.State
             .RegisterOnPersisting(
                 async () =>
                 {
@@ -174,8 +170,7 @@ public class ComponentStatePersistenceManagerTest
                 },
                 new TestRenderMode()
             );
-        lifetime
-            .State
+        lifetime.State
             .RegisterOnPersisting(
                 async () =>
                 {
@@ -213,16 +208,14 @@ public class ComponentStatePersistenceManagerTest
         var tcs = new TaskCompletionSource();
         var tcs2 = new TaskCompletionSource();
 
-        var subscription1 = lifetime
-            .State
+        var subscription1 = lifetime.State
             .RegisterOnPersisting(async () =>
             {
                 sequence.Add(1);
                 await tcs.Task;
                 sequence.Add(3);
             });
-        var subscription2 = lifetime
-            .State
+        var subscription2 = lifetime.State
             .RegisterOnPersisting(async () =>
             {
                 sequence.Add(2);
@@ -258,14 +251,12 @@ public class ComponentStatePersistenceManagerTest
         var data = new byte[] { 1, 2, 3, 4 };
         var invoked = false;
 
-        lifetime
-            .State
+        lifetime.State
             .RegisterOnPersisting(
                 () => throw new InvalidOperationException(),
                 new TestRenderMode()
             );
-        lifetime
-            .State
+        lifetime.State
             .RegisterOnPersisting(
                 () =>
                 {
@@ -298,8 +289,7 @@ public class ComponentStatePersistenceManagerTest
         var invoked = false;
         var tcs = new TaskCompletionSource();
 
-        lifetime
-            .State
+        lifetime.State
             .RegisterOnPersisting(
                 async () =>
                 {
@@ -308,8 +298,7 @@ public class ComponentStatePersistenceManagerTest
                 },
                 new TestRenderMode()
             );
-        lifetime
-            .State
+        lifetime.State
             .RegisterOnPersisting(
                 () =>
                 {

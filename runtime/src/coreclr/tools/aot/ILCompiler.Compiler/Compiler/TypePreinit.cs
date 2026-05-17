@@ -2537,8 +2537,7 @@ namespace ILCompiler
                         && fieldHandle.Field is Internal.TypeSystem.Ecma.EcmaField ecmaField
                     )
                     {
-                        byte[] rvaData = Internal
-                            .TypeSystem
+                        byte[] rvaData = Internal.TypeSystem
                             .Ecma
                             .EcmaFieldExtensions
                             .GetFieldRvaData(ecmaField);
@@ -2561,8 +2560,7 @@ namespace ILCompiler
                     {
                         var elementType = (MetadataType)method.Instantiation[0];
                         int elementSize = elementType.InstanceFieldSize.AsInt;
-                        byte[] rvaData = Internal
-                            .TypeSystem
+                        byte[] rvaData = Internal.TypeSystem
                             .Ecma
                             .EcmaFieldExtensions
                             .GetFieldRvaData(createSpanEcmaField);
@@ -3210,13 +3208,11 @@ namespace ILCompiler
             )
             {
                 if (
-                    !preinitContext
-                        ._internedTypes
+                    !preinitContext._internedTypes
                         .TryGetValue(TypeRepresented, out RuntimeTypeValue result)
                 )
                 {
-                    preinitContext
-                        ._internedTypes
+                    preinitContext._internedTypes
                         .Add(TypeRepresented, result = new RuntimeTypeValue(TypeRepresented));
                 }
                 return result;
@@ -3590,11 +3586,9 @@ namespace ILCompiler
             {
                 DelegateCreationInfo creationInfo = GetDelegateCreationInfo(factory);
 
-                MethodDesc targetMethod = creationInfo
-                    .PossiblyUnresolvedTargetMethod
+                MethodDesc targetMethod = creationInfo.PossiblyUnresolvedTargetMethod
                     .GetCanonMethodTarget(CanonicalFormKind.Specific);
-                factory
-                    .MetadataManager
+                factory.MetadataManager
                     .GetDependenciesDueToDelegateCreation(ref dependencies, factory, targetMethod);
             }
 
@@ -3898,8 +3892,7 @@ namespace ILCompiler
                 string value = ValueAsString;
                 if (!preinitContext._internedStrings.TryGetValue(value, out StringInstance result))
                 {
-                    preinitContext
-                        ._internedStrings
+                    preinitContext._internedStrings
                         .Add(value, result = new StringInstance(Type, value));
                 }
                 return result;

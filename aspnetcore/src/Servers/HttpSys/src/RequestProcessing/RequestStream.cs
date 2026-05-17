@@ -123,8 +123,7 @@ internal sealed partial class RequestStream : Stream
 
         if (_dataChunkIndex != -1)
         {
-            dataRead = _requestContext
-                .Request
+            dataRead = _requestContext.Request
                 .GetChunks(ref _dataChunkIndex, ref _dataChunkOffset, buffer, offset, size);
         }
 
@@ -234,8 +233,7 @@ internal sealed partial class RequestStream : Stream
         uint dataRead = 0;
         if (_dataChunkIndex != -1)
         {
-            dataRead = _requestContext
-                .Request
+            dataRead = _requestContext.Request
                 .GetChunks(ref _dataChunkIndex, ref _dataChunkOffset, buffer, offset, size);
             if (dataRead > 0)
             {

@@ -68,8 +68,7 @@ public class InputNumber<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTy
         builder.AddAttribute(
             7,
             "onchange",
-            EventCallback
-                .Factory
+            EventCallback.Factory
                 .CreateBinder<string?>(
                     this,
                     __value => CurrentValueAsString = __value,

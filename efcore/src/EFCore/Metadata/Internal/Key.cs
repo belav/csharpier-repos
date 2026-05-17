@@ -133,8 +133,7 @@ public class Key : ConventionAnnotatable, IMutableKey, IConventionKey, IRuntimeK
         IConventionAnnotation? annotation,
         IConventionAnnotation? oldAnnotation
     ) =>
-        Builder
-            .ModelBuilder
+        Builder.ModelBuilder
             .Metadata
             .ConventionDispatcher
             .OnKeyAnnotationChanged(Builder, name, annotation, oldAnnotation);

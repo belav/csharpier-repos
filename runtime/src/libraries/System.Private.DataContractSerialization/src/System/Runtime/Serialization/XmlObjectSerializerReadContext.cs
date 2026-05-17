@@ -1045,8 +1045,7 @@ namespace System.Runtime.Serialization
                     );
                 case XmlNodeType.Element:
                     if (
-                        xmlReader
-                            .NamespaceURI
+                        xmlReader.NamespaceURI
                             .StartsWith(
                                 Globals.DataContractXsdBaseNamespace,
                                 StringComparison.Ordinal
@@ -1382,8 +1381,7 @@ namespace System.Runtime.Serialization
                 if (namespaces == null)
                 {
                     if (_attributesInXmlData.XsiTypeName != null)
-                        childNode
-                            .Attributes!
+                        childNode.Attributes!
                             .Append(
                                 AddNamespaceDeclaration(
                                     _attributesInXmlData.XsiTypePrefix,
@@ -1391,8 +1389,7 @@ namespace System.Runtime.Serialization
                                 )
                             );
                     if (_attributesInXmlData.FactoryTypeName != null)
-                        childNode
-                            .Attributes!
+                        childNode.Attributes!
                             .Append(
                                 AddNamespaceDeclaration(
                                     _attributesInXmlData.FactoryTypePrefix,

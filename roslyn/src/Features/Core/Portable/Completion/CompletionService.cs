@@ -180,8 +180,7 @@ namespace Microsoft.CodeAnalysis.Completion
                 return char.IsLetterOrDigit(trigger.Character) || trigger.Character == '.';
             }
 
-            var extensionManager = languageServices
-                .SolutionServices
+            var extensionManager = languageServices.SolutionServices
                 .GetRequiredService<IExtensionManager>();
 
             var providers = _providerManager.GetFilteredProviders(project, roles, trigger, options);
@@ -269,8 +268,7 @@ namespace Microsoft.CodeAnalysis.Completion
             if (provider is null)
                 return CompletionDescription.Empty;
 
-            var extensionManager = document
-                .Project
+            var extensionManager = document.Project
                 .Solution
                 .Workspace
                 .Services
@@ -319,8 +317,7 @@ namespace Microsoft.CodeAnalysis.Completion
             var provider = GetProvider(item, document.Project);
             if (provider != null)
             {
-                var extensionManager = document
-                    .Project
+                var extensionManager = document.Project
                     .Solution
                     .Workspace
                     .Services
@@ -514,16 +511,14 @@ namespace Microsoft.CodeAnalysis.Completion
             public ImmutableArray<CompletionProvider> GetImportedAndBuiltInProviders(
                 ImmutableHashSet<string> roles
             ) =>
-                _completionServiceWithProviders
-                    ._providerManager
+                _completionServiceWithProviders._providerManager
                     .GetTestAccessor()
                     .GetImportedAndBuiltInProviders(roles);
 
             public Task<ImmutableArray<CompletionProvider>> GetProjectProvidersAsync(
                 Project project
             ) =>
-                _completionServiceWithProviders
-                    ._providerManager
+                _completionServiceWithProviders._providerManager
                     .GetTestAccessor()
                     .GetProjectProvidersAsync(project);
 

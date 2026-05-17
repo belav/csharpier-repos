@@ -189,8 +189,7 @@ namespace System.ServiceModel.MonoInternal
         {
             bool isReply =
                 message != null
-                && Contract
-                    .Operations
+                && Contract.Operations
                     .Any(od =>
                         (
                             od.DeclaringContract.CallbackContractType

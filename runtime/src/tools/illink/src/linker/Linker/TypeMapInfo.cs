@@ -172,8 +172,7 @@ namespace Mono.Linker
             foreach (var interfaceImpl in type.GetInflatedInterfaces(context))
             {
                 foreach (
-                    MethodReference interfaceMethod in interfaceImpl
-                        .InflatedInterface
+                    MethodReference interfaceMethod in interfaceImpl.InflatedInterface
                         .GetMethods(context)
                 )
                 {

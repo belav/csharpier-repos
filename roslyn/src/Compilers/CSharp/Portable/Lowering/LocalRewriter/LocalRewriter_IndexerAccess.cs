@@ -474,8 +474,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                         or WellKnownMember.System_ReadOnlySpan_T__get_Item
                 )
                 {
-                    createSpan = _factory
-                        .ModuleBuilderOpt
+                    createSpan = _factory.ModuleBuilderOpt
                         .EnsureInlineArrayAsReadOnlySpanExists(
                             node.Syntax,
                             spanType,
@@ -485,8 +484,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 }
                 else
                 {
-                    createSpan = _factory
-                        .ModuleBuilderOpt
+                    createSpan = _factory.ModuleBuilderOpt
                         .EnsureInlineArrayAsSpanExists(
                             node.Syntax,
                             spanType,
@@ -526,8 +524,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                         if (node.GetItemOrSliceHelper is WellKnownMember.System_Span_T__get_Item)
                         {
-                            elementRef = _factory
-                                .ModuleBuilderOpt
+                            elementRef = _factory.ModuleBuilderOpt
                                 .EnsureInlineArrayFirstElementRefExists(
                                     node.Syntax,
                                     _diagnostics.DiagnosticBag
@@ -539,8 +536,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 node.GetItemOrSliceHelper
                                     is WellKnownMember.System_ReadOnlySpan_T__get_Item
                             );
-                            elementRef = _factory
-                                .ModuleBuilderOpt
+                            elementRef = _factory.ModuleBuilderOpt
                                 .EnsureInlineArrayFirstElementRefReadOnlyExists(
                                     node.Syntax,
                                     _diagnostics.DiagnosticBag
@@ -566,8 +562,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                         if (node.GetItemOrSliceHelper is WellKnownMember.System_Span_T__get_Item)
                         {
-                            elementRef = _factory
-                                .ModuleBuilderOpt
+                            elementRef = _factory.ModuleBuilderOpt
                                 .EnsureInlineArrayElementRefExists(
                                     node.Syntax,
                                     intType,
@@ -580,8 +575,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 node.GetItemOrSliceHelper
                                     is WellKnownMember.System_ReadOnlySpan_T__get_Item
                             );
-                            elementRef = _factory
-                                .ModuleBuilderOpt
+                            elementRef = _factory.ModuleBuilderOpt
                                 .EnsureInlineArrayElementRefReadOnlyExists(
                                     node.Syntax,
                                     intType,

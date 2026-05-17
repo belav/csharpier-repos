@@ -995,9 +995,10 @@ public class MessageBodyTests : LoggedTest
                 TestSink.Writes,
                 m =>
                     m.EventId.Name == "RequestBodyStart"
-                    && m.Message.Contains(
-                        @"Connection id ""ConnectionId"", Request id ""RequestId"": started reading request body."
-                    )
+                    && m.Message
+                        .Contains(
+                            @"Connection id ""ConnectionId"", Request id ""RequestId"": started reading request body."
+                        )
             );
 
             input.Fin();

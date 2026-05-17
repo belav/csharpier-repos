@@ -213,11 +213,8 @@ namespace System.Data.Linq.SqlClient
                         valueType =
                             null == valueType
                                 ? value.SqlType
-                                : this.typeProvider.PredictTypeForBinary(
-                                    SqlNodeType.EQ,
-                                    value.SqlType,
-                                    valueType
-                                );
+                                : this.typeProvider
+                                    .PredictTypeForBinary(SqlNodeType.EQ, value.SqlType, valueType);
                         requiresCoercion = true;
                     }
                     newValues.Add(value);
@@ -228,11 +225,8 @@ namespace System.Data.Linq.SqlClient
                 }
                 if (requiresCoercion)
                 {
-                    ProviderType providerType = this.typeProvider.PredictTypeForBinary(
-                        SqlNodeType.EQ,
-                        test.SqlType,
-                        valueType
-                    );
+                    ProviderType providerType = this.typeProvider
+                        .PredictTypeForBinary(SqlNodeType.EQ, test.SqlType, valueType);
                     sin = new SqlIn(
                         sin.ClrType,
                         providerType,
@@ -290,9 +284,8 @@ namespace System.Data.Linq.SqlClient
 
                 // coerce each one
                 foreach (
-                    SqlWhen when in c.Whens.Where(w =>
-                        w.Value.SqlType != type && !w.Value.SqlType.IsRuntimeOnlyType
-                    )
+                    SqlWhen when in c.Whens
+                        .Where(w => w.Value.SqlType != type && !w.Value.SqlType.IsRuntimeOnlyType)
                 )
                 {
                     when.Value = sql.UnaryConvert(
@@ -330,9 +323,8 @@ namespace System.Data.Linq.SqlClient
 
                 // coerce each one
                 foreach (
-                    SqlWhen when in c.Whens.Where(w =>
-                        w.Value.SqlType != type && !w.Value.SqlType.IsRuntimeOnlyType
-                    )
+                    SqlWhen when in c.Whens
+                        .Where(w => w.Value.SqlType != type && !w.Value.SqlType.IsRuntimeOnlyType)
                 )
                 {
                     when.Value = sql.UnaryConvert(

@@ -45,21 +45,34 @@ namespace System.Net.Configuration
 
         protected override void InitializeDefault()
         {
-            this.WebRequestModules.Add(
-                new WebRequestModuleElement(ConfigurationStrings.Https, typeof(HttpRequestCreator))
-            );
-            this.WebRequestModules.Add(
-                new WebRequestModuleElement(ConfigurationStrings.Http, typeof(HttpRequestCreator))
-            );
-            this.WebRequestModules.Add(
-                new WebRequestModuleElement(
-                    ConfigurationStrings.File,
-                    typeof(FileWebRequestCreator)
-                )
-            );
-            this.WebRequestModules.Add(
-                new WebRequestModuleElement(ConfigurationStrings.Ftp, typeof(FtpWebRequestCreator))
-            );
+            this.WebRequestModules
+                .Add(
+                    new WebRequestModuleElement(
+                        ConfigurationStrings.Https,
+                        typeof(HttpRequestCreator)
+                    )
+                );
+            this.WebRequestModules
+                .Add(
+                    new WebRequestModuleElement(
+                        ConfigurationStrings.Http,
+                        typeof(HttpRequestCreator)
+                    )
+                );
+            this.WebRequestModules
+                .Add(
+                    new WebRequestModuleElement(
+                        ConfigurationStrings.File,
+                        typeof(FileWebRequestCreator)
+                    )
+                );
+            this.WebRequestModules
+                .Add(
+                    new WebRequestModuleElement(
+                        ConfigurationStrings.Ftp,
+                        typeof(FtpWebRequestCreator)
+                    )
+                );
         }
 
         protected override ConfigurationPropertyCollection Properties
@@ -96,12 +109,13 @@ namespace System.Net.Configuration
                 {
                     try
                     {
-                        this.webRequestModules.Add(
-                            new WebRequestPrefixElement(
-                                webRequestModuleElement.Prefix,
-                                webRequestModuleElement.Type
-                            )
-                        );
+                        this.webRequestModules
+                            .Add(
+                                new WebRequestPrefixElement(
+                                    webRequestModuleElement.Prefix,
+                                    webRequestModuleElement.Type
+                                )
+                            );
                     }
                     catch (Exception exception)
                     {

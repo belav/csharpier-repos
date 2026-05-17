@@ -165,8 +165,7 @@ namespace Microsoft.CodeAnalysis.GenerateType
                                 : TargetProjectChangeInLanguage.CSharpToVisualBasic;
 
                         // Get the cross language service
-                        _targetLanguageService = _generateTypeOptionsResult
-                            .Project
+                        _targetLanguageService = _generateTypeOptionsResult.Project
                             .Services
                             .GetService<IGenerateTypeService>();
                     }
@@ -347,8 +346,7 @@ namespace Microsoft.CodeAnalysis.GenerateType
                     projectToBeUpdated.Id,
                     debugName: documentName
                 );
-                var newSolution = projectToBeUpdated
-                    .Solution
+                var newSolution = projectToBeUpdated.Solution
                     .AddDocument(newDocumentId, documentName, string.Empty, folders, fullFilePath);
 
                 // Now we get the semantic model for that file we just added.  We do that to get the
@@ -459,8 +457,7 @@ namespace Microsoft.CodeAnalysis.GenerateType
                 // TODO(cyrusn): make sure documentId is unique.
                 var documentId = DocumentId.CreateNewId(projectToBeUpdated.Id, documentName);
 
-                var updatedSolution = projectToBeUpdated
-                    .Solution
+                var updatedSolution = projectToBeUpdated.Solution
                     .AddDocument(
                         DocumentInfo.Create(documentId, documentName, containers, sourceCodeKind)
                     );
@@ -509,8 +506,7 @@ namespace Microsoft.CodeAnalysis.GenerateType
                 if (projectToBeUpdated != triggeringProject)
                 {
                     if (
-                        !triggeringProject
-                            .ProjectReferences
+                        !triggeringProject.ProjectReferences
                             .Any(pr => pr.ProjectId == projectToBeUpdated.Id)
                     )
                     {
@@ -528,8 +524,7 @@ namespace Microsoft.CodeAnalysis.GenerateType
                 ImmutableArray<CodeActionOperation>
             > GetGenerateIntoContainingNamespaceOperationsAsync(INamedTypeSymbol namedType)
             {
-                var enclosingNamespace = _semanticDocument
-                    .SemanticModel
+                var enclosingNamespace = _semanticDocument.SemanticModel
                     .GetEnclosingNamespace(_state.SimpleName.SpanStart, _cancellationToken);
 
                 var solution = _semanticDocument.Project.Solution;
@@ -538,8 +533,7 @@ namespace Microsoft.CodeAnalysis.GenerateType
                         new CodeGenerationSolutionContext(
                             solution,
                             new CodeGenerationContext(
-                                afterThisLocation: _semanticDocument
-                                    .SyntaxTree
+                                afterThisLocation: _semanticDocument.SyntaxTree
                                     .GetLocation(_state.SimpleName.Span)
                             ),
                             _fallbackOptions
@@ -564,8 +558,7 @@ namespace Microsoft.CodeAnalysis.GenerateType
                 bool isDialog
             )
             {
-                var root = await generateTypeOptionsResult
-                    .ExistingDocument
+                var root = await generateTypeOptionsResult.ExistingDocument
                     .GetSyntaxRootAsync(_cancellationToken)
                     .ConfigureAwait(false);
                 var folders = generateTypeOptionsResult.ExistingDocument.Folders;
@@ -833,8 +826,7 @@ namespace Microsoft.CodeAnalysis.GenerateType
                 IList<TArgumentSyntax> argumentList
             )
             {
-                var syntaxFacts = _semanticDocument
-                    .Document
+                var syntaxFacts = _semanticDocument.Document
                     .GetRequiredLanguageService<ISyntaxFactsService>();
                 return argumentList.SelectAsArray(a =>
                     (TExpressionSyntax)syntaxFacts.GetExpressionOfArgument(a)
@@ -879,8 +871,7 @@ namespace Microsoft.CodeAnalysis.GenerateType
                     }
                 }
 
-                var fieldNamingRule = await _semanticDocument
-                    .Document
+                var fieldNamingRule = await _semanticDocument.Document
                     .GetApplicableNamingRuleAsync(
                         SymbolKind.Field,
                         Accessibility.Private,
@@ -888,8 +879,7 @@ namespace Microsoft.CodeAnalysis.GenerateType
                         _cancellationToken
                     )
                     .ConfigureAwait(false);
-                var nameToUse = fieldNamingRule
-                    .NamingStyle
+                var nameToUse = fieldNamingRule.NamingStyle
                     .MakeCompliant(parameterName.NameBasedOnArgument)
                     .First();
                 parameterToNewFieldMap[parameterName.BestNameForParameter] = nameToUse;
@@ -940,8 +930,7 @@ namespace Microsoft.CodeAnalysis.GenerateType
                     case Accessibility.ProtectedAndInternal:
                     case Accessibility.Internal:
                         // TODO: Code coverage
-                        return _semanticDocument
-                            .SemanticModel
+                        return _semanticDocument.SemanticModel
                             .Compilation
                             .Assembly
                             .IsSameAssemblyOrHasFriendAccessTo(symbol.ContainingAssembly);

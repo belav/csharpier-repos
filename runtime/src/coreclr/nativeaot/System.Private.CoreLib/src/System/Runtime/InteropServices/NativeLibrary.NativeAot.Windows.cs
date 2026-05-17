@@ -19,8 +19,7 @@ namespace System.Runtime.InteropServices
 
             // Disable the OS dialogs when failing to load. This matches CoreCLR.
             uint prev;
-            bool set = Interop
-                .Kernel32
+            bool set = Interop.Kernel32
                 .SetThreadErrorMode(
                     Interop.Kernel32.SEM_FAILCRITICALERRORS
                         | Interop.Kernel32.SEM_NOOPENFILEERRORBOX,
@@ -28,8 +27,7 @@ namespace System.Runtime.InteropServices
                 );
             if (((uint)flags & 0xFFFFFF00) != 0)
             {
-                hmod = Interop
-                    .Kernel32
+                hmod = Interop.Kernel32
                     .LoadLibraryEx(libraryName, IntPtr.Zero, (int)((uint)flags & 0xFFFFFF00));
                 if (hmod != IntPtr.Zero)
                 {

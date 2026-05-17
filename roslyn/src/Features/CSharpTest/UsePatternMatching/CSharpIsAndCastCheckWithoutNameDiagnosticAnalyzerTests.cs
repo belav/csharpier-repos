@@ -73,8 +73,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                 }
                 """,
                 parameters: new TestParameters(
-                    parseOptions: CSharpParseOptions
-                        .Default
+                    parseOptions: CSharpParseOptions.Default
                         .WithLanguageVersion(LanguageVersion.CSharp6)
                 )
             );

@@ -566,21 +566,18 @@ namespace Mono.Linker.Tests.Cases.Reflection
         {
             // Just a basic test that these are all recognized, we're not testing that it marks correctly as it has the exact same implementation
             // as the above tested Activator.CreateInstance overloads
-            AppDomain
-                .CurrentDomain
+            AppDomain.CurrentDomain
                 .CreateInstance(
                     "test",
                     "Mono.Linker.Tests.Cases.Reflection.ActivatorCreateInstance+AppDomainCreateInstanceType"
                 );
-            AppDomain
-                .CurrentDomain
+            AppDomain.CurrentDomain
                 .CreateInstance(
                     "test",
                     "Mono.Linker.Tests.Cases.Reflection.ActivatorCreateInstance+AppDomainCreateInstanceType",
                     new object[] { }
                 );
-            AppDomain
-                .CurrentDomain
+            AppDomain.CurrentDomain
                 .CreateInstance(
                     "test",
                     "Mono.Linker.Tests.Cases.Reflection.ActivatorCreateInstance+AppDomainCreateInstanceType",
@@ -592,21 +589,18 @@ namespace Mono.Linker.Tests.Cases.Reflection
                     null
                 );
 
-            AppDomain
-                .CurrentDomain
+            AppDomain.CurrentDomain
                 .CreateInstanceAndUnwrap(
                     "test",
                     "Mono.Linker.Tests.Cases.Reflection.ActivatorCreateInstance+AppDomainCreateInstanceType"
                 );
-            AppDomain
-                .CurrentDomain
+            AppDomain.CurrentDomain
                 .CreateInstanceAndUnwrap(
                     "test",
                     "Mono.Linker.Tests.Cases.Reflection.ActivatorCreateInstance+AppDomainCreateInstanceType",
                     new object[] { }
                 );
-            AppDomain
-                .CurrentDomain
+            AppDomain.CurrentDomain
                 .CreateInstanceAndUnwrap(
                     "test",
                     "Mono.Linker.Tests.Cases.Reflection.ActivatorCreateInstance+AppDomainCreateInstanceType",
@@ -618,21 +612,18 @@ namespace Mono.Linker.Tests.Cases.Reflection
                     null
                 );
 
-            AppDomain
-                .CurrentDomain
+            AppDomain.CurrentDomain
                 .CreateInstanceFrom(
                     "test",
                     "Mono.Linker.Tests.Cases.Reflection.ActivatorCreateInstance+AppDomainCreateInstanceType"
                 );
-            AppDomain
-                .CurrentDomain
+            AppDomain.CurrentDomain
                 .CreateInstanceFrom(
                     "test",
                     "Mono.Linker.Tests.Cases.Reflection.ActivatorCreateInstance+AppDomainCreateInstanceType",
                     new object[] { }
                 );
-            AppDomain
-                .CurrentDomain
+            AppDomain.CurrentDomain
                 .CreateInstanceFrom(
                     "test",
                     "Mono.Linker.Tests.Cases.Reflection.ActivatorCreateInstance+AppDomainCreateInstanceType",
@@ -644,21 +635,18 @@ namespace Mono.Linker.Tests.Cases.Reflection
                     null
                 );
 
-            AppDomain
-                .CurrentDomain
+            AppDomain.CurrentDomain
                 .CreateInstanceFromAndUnwrap(
                     "test",
                     "Mono.Linker.Tests.Cases.Reflection.ActivatorCreateInstance+AppDomainCreateInstanceType"
                 );
-            AppDomain
-                .CurrentDomain
+            AppDomain.CurrentDomain
                 .CreateInstanceFromAndUnwrap(
                     "test",
                     "Mono.Linker.Tests.Cases.Reflection.ActivatorCreateInstance+AppDomainCreateInstanceType",
                     new object[] { }
                 );
-            AppDomain
-                .CurrentDomain
+            AppDomain.CurrentDomain
                 .CreateInstanceFromAndUnwrap(
                     "test",
                     "Mono.Linker.Tests.Cases.Reflection.ActivatorCreateInstance+AppDomainCreateInstanceType",
@@ -688,11 +676,9 @@ namespace Mono.Linker.Tests.Cases.Reflection
         private static void UnsupportedCreateInstance()
         {
             typeof(ActivatorCreateInstance).Assembly.CreateInstance("NonExistent");
-            typeof(ActivatorCreateInstance)
-                .Assembly
+            typeof(ActivatorCreateInstance).Assembly
                 .CreateInstance("NonExistent", ignoreCase: false);
-            typeof(ActivatorCreateInstance)
-                .Assembly
+            typeof(ActivatorCreateInstance).Assembly
                 .CreateInstance(
                     "NonExistent",
                     false,

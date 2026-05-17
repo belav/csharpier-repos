@@ -178,13 +178,11 @@ namespace Tracing.Tests.ProcessInfoValidation
                 end <= totalSize,
                 $"String end can't exceed payload size. Expected: <{totalSize}, Received: {end} (decoded length: {commandLineLength})"
             );
-            Logger
-                .logger
+            Logger.logger
                 .Log(
                     $"commandLine bytes: [ {response.Payload[start..end].Select(b => b.ToString("X2") + " ").Aggregate(string.Concat)}]"
                 );
-            string commandLine = System
-                .Text
+            string commandLine = System.Text
                 .Encoding
                 .Unicode
                 .GetString(response.Payload[start..end])
@@ -230,13 +228,11 @@ namespace Tracing.Tests.ProcessInfoValidation
                 end <= totalSize,
                 $"String end can't exceed payload size. Expected: <{totalSize}, Received: {end} (decoded length: {OSLength})"
             );
-            Logger
-                .logger
+            Logger.logger
                 .Log(
                     $"OS bytes: [ {response.Payload[start..end].Select(b => b.ToString("X2") + " ").Aggregate(string.Concat)}]"
                 );
-            string OS = System
-                .Text
+            string OS = System.Text
                 .Encoding
                 .Unicode
                 .GetString(response.Payload[start..end])
@@ -294,13 +290,11 @@ namespace Tracing.Tests.ProcessInfoValidation
                 end <= totalSize,
                 $"String end can't exceed payload size. Expected: <{totalSize}, Received: {end} (decoded length: {archLength})"
             );
-            Logger
-                .logger
+            Logger.logger
                 .Log(
                     $"arch bytes: [ {response.Payload[start..end].Select(b => b.ToString("X2") + " ").Aggregate(string.Concat)}]"
                 );
-            string arch = System
-                .Text
+            string arch = System.Text
                 .Encoding
                 .Unicode
                 .GetString(response.Payload[start..end])
@@ -331,8 +325,7 @@ namespace Tracing.Tests.ProcessInfoValidation
             UInt32 managedEntrypointAssemblyNameLength = BitConverter.ToUInt32(
                 response.Payload[start..end]
             );
-            Logger
-                .logger
+            Logger.logger
                 .Log($"managedEntrypointAssemblyNameLength: {managedEntrypointAssemblyNameLength}");
 
             start = end;
@@ -341,23 +334,19 @@ namespace Tracing.Tests.ProcessInfoValidation
                 end <= totalSize,
                 $"String end can't exceed payload size. Expected: <{totalSize}, Received: {end} (decoded length: {managedEntrypointAssemblyNameLength})"
             );
-            Logger
-                .logger
+            Logger.logger
                 .Log(
                     $"ManagedEntrypointAssemblyName bytes: [ {response.Payload[start..end].Select(b => b.ToString("X2") + " ").Aggregate(string.Concat)}]"
                 );
-            string managedEntrypointAssemblyName = System
-                .Text
+            string managedEntrypointAssemblyName = System.Text
                 .Encoding
                 .Unicode
                 .GetString(response.Payload[start..end])
                 .TrimEnd('\0');
-            Logger
-                .logger
+            Logger.logger
                 .Log($"ManagedEntrypointAssemblyName: \"{managedEntrypointAssemblyName}\"");
 
-            string expectedManagedEntrypointAssemblyName = System
-                .Reflection
+            string expectedManagedEntrypointAssemblyName = System.Reflection
                 .Assembly
                 .GetExecutingAssembly()
                 .GetName()
@@ -383,21 +372,18 @@ namespace Tracing.Tests.ProcessInfoValidation
                 end <= totalSize,
                 $"String end can't exceed payload size. Expected: <{totalSize}, Received: {end} (decoded length: {clrProductVersionSize})"
             );
-            Logger
-                .logger
+            Logger.logger
                 .Log(
                     $"ClrProductVersion bytes: [ {response.Payload[start..end].Select(b => b.ToString("X2") + " ").Aggregate(string.Concat)}]"
                 );
-            string clrProductVersion = System
-                .Text
+            string clrProductVersion = System.Text
                 .Encoding
                 .Unicode
                 .GetString(response.Payload[start..end])
                 .TrimEnd('\0');
             Logger.logger.Log($"ClrProductVersion: \"{clrProductVersion}\"");
 
-            string expectedClrProductVersion = typeof(object)
-                .Assembly
+            string expectedClrProductVersion = typeof(object).Assembly
                 .GetCustomAttribute<AssemblyInformationalVersionAttribute>()
                 ?.InformationalVersion;
 
@@ -421,13 +407,11 @@ namespace Tracing.Tests.ProcessInfoValidation
                 end <= totalSize,
                 $"String end can't exceed payload size. Expected: <{totalSize}, Received: {end} (decoded length: {portableRidSize})"
             );
-            Logger
-                .logger
+            Logger.logger
                 .Log(
                     $"PortableRid bytes: [ {response.Payload[start..end].Select(b => b.ToString("X2") + " ").Aggregate(string.Concat)}]"
                 );
-            string portableRid = System
-                .Text
+            string portableRid = System.Text
                 .Encoding
                 .Unicode
                 .GetString(response.Payload[start..end])
@@ -485,8 +469,7 @@ namespace Tracing.Tests.ProcessInfoValidation
                 $"Unable to calculate expected portable RID OS."
             );
 
-            string expectedPortableRidArch = RuntimeInformation
-                .ProcessArchitecture
+            string expectedPortableRidArch = RuntimeInformation.ProcessArchitecture
                 .ToString("G")
                 .ToLowerInvariant();
             string expectedPortableRid = $"{expectedPortableRidOs}-{expectedPortableRidArch}";
@@ -501,8 +484,7 @@ namespace Tracing.Tests.ProcessInfoValidation
                 $"Full payload should have been read. Expected: {totalSize}, Received: {end}"
             );
 
-            Logger
-                .logger
+            Logger.logger
                 .Log(
                     $"\n{{\n\tprocessId: {processId},\n\truntimeCookie: {runtimeCookie},\n\tcommandLine: {commandLine},\n\tOS: {OS},\n\tArch: {arch},\n\tManagedEntrypointAssemblyName: {managedEntrypointAssemblyName},\n\tClrProductVersion: {clrProductVersion},\n\tPortableRid: {portableRid}\n}}"
                 );

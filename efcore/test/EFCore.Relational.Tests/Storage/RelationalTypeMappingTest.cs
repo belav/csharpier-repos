@@ -688,8 +688,7 @@ public abstract class RelationalTypeMappingTest
         using var context = new MismatchedFruityContext(ContextOptions);
         Assert.Equal(
             typeof(short),
-            context
-                .Model
+            context.Model
                 .FindEntityType(typeof(Banana))
                 .FindProperty("Id")
                 .GetTypeMapping()

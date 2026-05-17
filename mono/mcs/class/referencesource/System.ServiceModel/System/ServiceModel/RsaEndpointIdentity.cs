@@ -31,8 +31,7 @@ namespace System.ServiceModel
 #pragma warning suppress 56506 // A Certificate Public key can never be null.
             RSA rsa = certificate.PublicKey.Key as RSA;
             if (rsa == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new NotSupportedException(SR.GetString(SR.PublicKeyNotRSA)));
 
             base.Initialize(Claim.CreateRsaClaim(rsa));
@@ -46,8 +45,7 @@ namespace System.ServiceModel
             // PreSharp Bug: Parameter 'identity.ClaimType' to this public method must be validated: A null-dereference can occur here.
 #pragma warning suppress 56506 // Claim.ClaimType will never return null
             if (!identity.ClaimType.Equals(ClaimTypes.Rsa))
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(
                         SR.GetString(
                             SR.UnrecognizedClaimTypeForIdentity,

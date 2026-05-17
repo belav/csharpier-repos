@@ -126,10 +126,8 @@ namespace Mono.Configuration.Crypto
                 }
             }
 
-            section = doc.DocumentElement.SelectSingleNode(
-                BuildXPathExpression(configSection),
-                nsmgr
-            );
+            section = doc.DocumentElement
+                .SelectSingleNode(BuildXPathExpression(configSection), nsmgr);
             // This check is necessary even though IsValidSection returned true - it's
             // because the section might have been found in files other than the one
             // we're processing.

@@ -38,8 +38,7 @@ internal static class ValidationHelpers
 
         // Default in the ValidationMessage case is a fallback error message.
         var attemptedValue = containingEntry.AttemptedValue ?? "null";
-        return modelExplorer
-            .Metadata
+        return modelExplorer.Metadata
             .ModelBindingMessageProvider
             .ValueIsInvalidAccessor(attemptedValue);
     }

@@ -23,8 +23,7 @@
         {
             ModelBinderUtil.ValidateBindingContext(bindingContext);
 
-            ValueProviderResult vpResult = bindingContext
-                .UnvalidatedValueProvider
+            ValueProviderResult vpResult = bindingContext.UnvalidatedValueProvider
                 .GetValue(
                     bindingContext.ModelName,
                     skipValidation: !bindingContext.ValidateRequest
@@ -53,8 +52,7 @@
                         );
                     if (errorString != null)
                     {
-                        bindingContext
-                            .ModelState
+                        bindingContext.ModelState
                             .AddModelError(bindingContext.ModelName, errorString);
                     }
                 }

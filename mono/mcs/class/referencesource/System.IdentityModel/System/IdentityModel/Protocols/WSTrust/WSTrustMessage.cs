@@ -163,8 +163,7 @@ namespace System.IdentityModel.Protocols.WSTrust
             {
                 if (string.IsNullOrEmpty(value))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgumentNull("IssuedTokenEncryptionAlgorithm");
                 }
 
@@ -209,8 +208,7 @@ namespace System.IdentityModel.Protocols.WSTrust
             {
                 if (value.HasValue && value.Value < 0)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new ArgumentOutOfRangeException("value"));
                 }
 

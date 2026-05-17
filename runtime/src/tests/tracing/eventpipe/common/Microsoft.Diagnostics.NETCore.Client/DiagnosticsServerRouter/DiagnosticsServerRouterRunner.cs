@@ -202,8 +202,7 @@ namespace Microsoft.Diagnostics.NETCore.Client
                         // reconnect using same or different runtime instance.
                         if (ex is BackendStreamTimeoutException && runningRouters.Count == 0)
                         {
-                            routerFactory
-                                .Logger
+                            routerFactory.Logger
                                 ?.LogDebug("No backend stream available before timeout.");
                             routerFactory.Reset();
                         }
@@ -212,8 +211,7 @@ namespace Microsoft.Diagnostics.NETCore.Client
                         // Shutdown router to prevent instances to outlive runtime process (if auto shutdown is enabled).
                         if (ex is RuntimeTimeoutException)
                         {
-                            routerFactory
-                                .Logger
+                            routerFactory.Logger
                                 ?.LogInformation("No runtime connected before timeout.");
                             routerFactory.Logger?.LogInformation("Starting automatic shutdown.");
                             throw;
@@ -228,8 +226,7 @@ namespace Microsoft.Diagnostics.NETCore.Client
             finally
             {
                 if (token.IsCancellationRequested)
-                    routerFactory
-                        .Logger
+                    routerFactory.Logger
                         ?.LogInformation("Shutting down due to cancelation request.");
 
                 runningRouters.RemoveAll(IsRouterDead);

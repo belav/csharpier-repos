@@ -18,8 +18,7 @@ namespace Microsoft.Interop
             this IncrementalGeneratorInitializationContext context
         )
         {
-            var isModuleSkipLocalsInit = context
-                .SyntaxProvider
+            var isModuleSkipLocalsInit = context.SyntaxProvider
                 .ForAttributeWithMetadataName(
                     TypeNames.System_Runtime_CompilerServices_SkipLocalsInitAttribute,
                     (node, ct) => node is ICompilationUnitSyntax,
@@ -36,8 +35,7 @@ namespace Microsoft.Interop
                             : EnvironmentFlags.None
                 );
 
-            var disabledRuntimeMarshalling = context
-                .SyntaxProvider
+            var disabledRuntimeMarshalling = context.SyntaxProvider
                 .ForAttributeWithMetadataName(
                     TypeNames.System_Runtime_CompilerServices_DisableRuntimeMarshallingAttribute,
                     // DisableRuntimeMarshalling is only available at the top level.
@@ -45,12 +43,10 @@ namespace Microsoft.Interop
                     // Only allow DisableRuntimeMarshalling attributes from the attribute type in the core assembly.
                     // Otherwise the runtime isn't going to respect it and invalid behavior can happen.
                     (context, ct) =>
-                        SymbolEqualityComparer
-                            .Default
+                        SymbolEqualityComparer.Default
                             .Equals(
                                 context.Attributes[0].AttributeClass.ContainingAssembly,
-                                context
-                                    .SemanticModel
+                                context.SemanticModel
                                     .Compilation
                                     .GetSpecialType(SpecialType.System_Object)
                                     .ContainingAssembly
@@ -74,8 +70,7 @@ namespace Microsoft.Interop
             this IncrementalGeneratorInitializationContext context
         )
         {
-            return context
-                .CompilationProvider
+            return context.CompilationProvider
                 .Combine(context.CreateEnvironmentFlagsProvider())
                 .Select((data, ct) => new StubEnvironment(data.Left, data.Right));
         }

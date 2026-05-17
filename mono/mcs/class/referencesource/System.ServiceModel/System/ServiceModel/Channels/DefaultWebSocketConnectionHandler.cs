@@ -125,8 +125,7 @@ namespace System.ServiceModel.Channels
 
                 if (negotiatedProtocol == null)
                 {
-                    FxTrace
-                        .Exception
+                    FxTrace.Exception
                         .AsWarning(
                             new WebException(
                                 SR.GetString(
@@ -154,8 +153,7 @@ namespace System.ServiceModel.Channels
             {
                 if (!string.IsNullOrEmpty(this.subProtocol))
                 {
-                    FxTrace
-                        .Exception
+                    FxTrace.Exception
                         .AsWarning(
                             new WebException(
                                 SR.GetString(
@@ -182,8 +180,7 @@ namespace System.ServiceModel.Channels
             IEnumerable<string> clientProtocols = null;
 
             if (
-                request
-                    .Headers
+                request.Headers
                     .TryGetValues(WebSocketHelper.SecWebSocketProtocol, out clientProtocols)
             )
             {
@@ -297,13 +294,11 @@ namespace System.ServiceModel.Channels
         {
             Fx.Assert(this.needToCheckContentType, "needToCheckContentType should be true.");
             HttpResponseMessage response = GetBadRequestResponseMessage(request);
-            response
-                .Headers
+            response.Headers
                 .Add(WebSocketTransportSettings.SoapContentTypeHeader, this.encoder.ContentType);
             if (this.needToCheckTransferMode)
             {
-                response
-                    .Headers
+                response.Headers
                     .Add(
                         WebSocketTransportSettings.BinaryEncoderTransferModeHeader,
                         this.transferMode.ToString()

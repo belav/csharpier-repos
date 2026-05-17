@@ -168,8 +168,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                 var hostStateSetMap = hostStateSets.StateSetMap;
 
                 // create project analyzer reference identity map
-                var projectAnalyzerReferenceIds = project
-                    .AnalyzerReferences
+                var projectAnalyzerReferenceIds = project.AnalyzerReferences
                     .Select(r => r.Id)
                     .ToSet();
 

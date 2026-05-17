@@ -670,11 +670,9 @@ namespace MonoTests.System.CodeDom.Compiler
 
             attrDec = new CodeAttributeDeclaration();
             attrDec.Name = "C";
-            attrDec
-                .Arguments
+            attrDec.Arguments
                 .Add(new CodeAttributeArgument("A1", new CodePrimitiveExpression(false)));
-            attrDec
-                .Arguments
+            attrDec.Arguments
                 .Add(new CodeAttributeArgument("A2", new CodePrimitiveExpression(true)));
             param.CustomAttributes.Add(attrDec);
 
@@ -870,11 +868,9 @@ namespace MonoTests.System.CodeDom.Compiler
             // return TypeDeclaration custom attributes
             attrDec = new CodeAttributeDeclaration();
             attrDec.Name = "C";
-            attrDec
-                .Arguments
+            attrDec.Arguments
                 .Add(new CodeAttributeArgument("A1", new CodePrimitiveExpression(false)));
-            attrDec
-                .Arguments
+            attrDec.Arguments
                 .Add(new CodeAttributeArgument("A2", new CodePrimitiveExpression(true)));
             method.ReturnTypeCustomAttributes.Add(attrDec);
 
@@ -992,11 +988,9 @@ namespace MonoTests.System.CodeDom.Compiler
 
             attrDec = new CodeAttributeDeclaration();
             attrDec.Name = "C";
-            attrDec
-                .Arguments
+            attrDec.Arguments
                 .Add(new CodeAttributeArgument("A1", new CodePrimitiveExpression(false)));
-            attrDec
-                .Arguments
+            attrDec.Arguments
                 .Add(new CodeAttributeArgument("A2", new CodePrimitiveExpression(true)));
             param.CustomAttributes.Add(attrDec);
 
@@ -1127,11 +1121,9 @@ namespace MonoTests.System.CodeDom.Compiler
             // return TypeDeclaration custom attributes
             attrDec = new CodeAttributeDeclaration();
             attrDec.Name = "A";
-            attrDec
-                .Arguments
+            attrDec.Arguments
                 .Add(new CodeAttributeArgument("A1", new CodePrimitiveExpression(false)));
-            attrDec
-                .Arguments
+            attrDec.Arguments
                 .Add(new CodeAttributeArgument("A2", new CodePrimitiveExpression(true)));
             typeCtor.ReturnTypeCustomAttributes.Add(attrDec);
 

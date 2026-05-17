@@ -595,8 +595,7 @@ namespace System.ComponentModel.Composition.Hosting
             IEnumerable<Export>? exports = null;
 
             if (
-                !definition
-                    .Metadata
+                !definition.Metadata
                     .TryGetValue(CompositionConstants.ImportSourceMetadataName, out object? source)
             )
             {

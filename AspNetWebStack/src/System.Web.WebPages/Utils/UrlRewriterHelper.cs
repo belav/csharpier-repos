@@ -38,14 +38,12 @@ namespace System.Web.WebPages
 
                 if (requestWasRewritten)
                 {
-                    httpContext
-                        .Items
+                    httpContext.Items
                         .Add(UrlWasRewrittenServerVar, UrlWasRequestRewrittenTrueValue);
                 }
                 else
                 {
-                    httpContext
-                        .Items
+                    httpContext.Items
                         .Add(UrlWasRewrittenServerVar, UrlWasRequestRewrittenFalseValue);
                 }
 

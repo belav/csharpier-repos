@@ -94,8 +94,7 @@ namespace Microsoft.Extensions.Options.Tests
             // Snapshot only updated once per scope
             using (var scope = sp.CreateScope())
             {
-                var snapshot = scope
-                    .ServiceProvider
+                var snapshot = scope.ServiceProvider
                     .GetRequiredService<IOptionsSnapshot<FakeOptions>>();
                 Assert.Equal("1", snapshot.Value.Message);
                 config.Reload();
@@ -104,8 +103,7 @@ namespace Microsoft.Extensions.Options.Tests
 
             using (var scope = sp.CreateScope())
             {
-                var snapshot = scope
-                    .ServiceProvider
+                var snapshot = scope.ServiceProvider
                     .GetRequiredService<IOptionsSnapshot<FakeOptions>>();
                 Assert.Equal("2", snapshot.Value.Message);
                 config.Reload();
@@ -145,8 +143,7 @@ namespace Microsoft.Extensions.Options.Tests
             FakeOptions namedOne = null;
             using (var scope = factory.CreateScope())
             {
-                options = scope
-                    .ServiceProvider
+                options = scope.ServiceProvider
                     .GetRequiredService<IOptionsSnapshot<FakeOptions>>()
                     .Value;
                 Assert.Equal(
@@ -154,14 +151,12 @@ namespace Microsoft.Extensions.Options.Tests
                     scope.ServiceProvider.GetRequiredService<IOptionsSnapshot<FakeOptions>>().Value
                 );
                 Assert.Equal(1, TestConfigure.ConfigureCount);
-                namedOne = scope
-                    .ServiceProvider
+                namedOne = scope.ServiceProvider
                     .GetRequiredService<IOptionsSnapshot<FakeOptions>>()
                     .Get("1");
                 Assert.Equal(
                     namedOne,
-                    scope
-                        .ServiceProvider
+                    scope.ServiceProvider
                         .GetRequiredService<IOptionsSnapshot<FakeOptions>>()
                         .Get("1")
                 );
@@ -170,14 +165,12 @@ namespace Microsoft.Extensions.Options.Tests
             Assert.Equal(1, TestConfigure.CtorCount);
             using (var scope = factory.CreateScope())
             {
-                var options2 = scope
-                    .ServiceProvider
+                var options2 = scope.ServiceProvider
                     .GetRequiredService<IOptionsSnapshot<FakeOptions>>()
                     .Value;
                 Assert.NotEqual(options, options2);
                 Assert.Equal(3, TestConfigure.ConfigureCount);
-                var namedOne2 = scope
-                    .ServiceProvider
+                var namedOne2 = scope.ServiceProvider
                     .GetRequiredService<IOptionsSnapshot<FakeOptions>>()
                     .Get("1");
                 Assert.NotEqual(namedOne2, namedOne);
@@ -270,8 +263,7 @@ namespace Microsoft.Extensions.Options.Tests
             >();
 
             // from the created scope
-            var scopedOptions = scope
-                .ServiceProvider
+            var scopedOptions = scope.ServiceProvider
                 .GetRequiredService<
                     IOptionsSnapshot<RemoteAuthenticationOptions<OidcProviderOptions>>
                 >();

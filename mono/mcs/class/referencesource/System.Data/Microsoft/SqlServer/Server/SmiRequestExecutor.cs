@@ -30,8 +30,7 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V2- and hasn't implemented V3 yet.
             //  2) Server didn't implement V3 on some interface, but negotiated V3+.
-            throw System
-                .Data
+            throw System.Data
                 .Common
                 .ADP
                 .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
@@ -50,8 +49,7 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V200- and hasn't implemented V210 yet.
             //  2) Server didn't implement V210 on some interface, but negotiated V210+.
-            throw System
-                .Data
+            throw System.Data
                 .Common
                 .ADP
                 .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
@@ -102,8 +100,7 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V210+ (and doesn't implement it).
             //  2) Server doesn't implement this method, but negotiated V200-.
-            throw System
-                .Data
+            throw System.Data
                 .Common
                 .ADP
                 .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
@@ -123,8 +120,7 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System
-                .Data
+            throw System.Data
                 .Common
                 .ADP
                 .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
@@ -139,8 +135,7 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System
-                .Data
+            throw System.Data
                 .Common
                 .ADP
                 .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
@@ -157,8 +152,7 @@ namespace Microsoft.SqlServer.Server
                 // Implement body with throw because there are only a couple of ways to get to this code:
                 //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
                 //  2) Server didn't implement V2- on some interface and negotiated V2-.
-                throw System
-                    .Data
+                throw System.Data
                     .Common
                     .ADP
                     .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
@@ -174,8 +168,7 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System
-                .Data
+            throw System.Data
                 .Common
                 .ADP
                 .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
@@ -192,8 +185,7 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System
-                .Data
+            throw System.Data
                 .Common
                 .ADP
                 .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
@@ -207,8 +199,7 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System
-                .Data
+            throw System.Data
                 .Common
                 .ADP
                 .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
@@ -222,8 +213,7 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System
-                .Data
+            throw System.Data
                 .Common
                 .ADP
                 .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
@@ -237,8 +227,7 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System
-                .Data
+            throw System.Data
                 .Common
                 .ADP
                 .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
@@ -258,8 +247,7 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System
-                .Data
+            throw System.Data
                 .Common
                 .ADP
                 .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
@@ -273,8 +261,7 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System
-                .Data
+            throw System.Data
                 .Common
                 .ADP
                 .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
@@ -294,8 +281,7 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System
-                .Data
+            throw System.Data
                 .Common
                 .ADP
                 .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
@@ -309,8 +295,7 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System
-                .Data
+            throw System.Data
                 .Common
                 .ADP
                 .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
@@ -324,8 +309,7 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System
-                .Data
+            throw System.Data
                 .Common
                 .ADP
                 .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
@@ -339,8 +323,7 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System
-                .Data
+            throw System.Data
                 .Common
                 .ADP
                 .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
@@ -354,8 +337,7 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System
-                .Data
+            throw System.Data
                 .Common
                 .ADP
                 .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
@@ -369,8 +351,7 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System
-                .Data
+            throw System.Data
                 .Common
                 .ADP
                 .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
@@ -384,8 +365,7 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System
-                .Data
+            throw System.Data
                 .Common
                 .ADP
                 .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
@@ -399,8 +379,7 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System
-                .Data
+            throw System.Data
                 .Common
                 .ADP
                 .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
@@ -414,8 +393,7 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System
-                .Data
+            throw System.Data
                 .Common
                 .ADP
                 .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
@@ -429,8 +407,7 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System
-                .Data
+            throw System.Data
                 .Common
                 .ADP
                 .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
@@ -444,8 +421,7 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System
-                .Data
+            throw System.Data
                 .Common
                 .ADP
                 .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
@@ -459,8 +435,7 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System
-                .Data
+            throw System.Data
                 .Common
                 .ADP
                 .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
@@ -474,8 +449,7 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System
-                .Data
+            throw System.Data
                 .Common
                 .ADP
                 .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
@@ -489,8 +463,7 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System
-                .Data
+            throw System.Data
                 .Common
                 .ADP
                 .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
@@ -504,8 +477,7 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System
-                .Data
+            throw System.Data
                 .Common
                 .ADP
                 .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
@@ -519,8 +491,7 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System
-                .Data
+            throw System.Data
                 .Common
                 .ADP
                 .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
@@ -534,8 +505,7 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System
-                .Data
+            throw System.Data
                 .Common
                 .ADP
                 .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
@@ -549,8 +519,7 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System
-                .Data
+            throw System.Data
                 .Common
                 .ADP
                 .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
@@ -564,8 +533,7 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System
-                .Data
+            throw System.Data
                 .Common
                 .ADP
                 .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
@@ -579,8 +547,7 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System
-                .Data
+            throw System.Data
                 .Common
                 .ADP
                 .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
@@ -594,8 +561,7 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System
-                .Data
+            throw System.Data
                 .Common
                 .ADP
                 .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
@@ -609,8 +575,7 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System
-                .Data
+            throw System.Data
                 .Common
                 .ADP
                 .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
@@ -624,8 +589,7 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System
-                .Data
+            throw System.Data
                 .Common
                 .ADP
                 .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
@@ -639,8 +603,7 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System
-                .Data
+            throw System.Data
                 .Common
                 .ADP
                 .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
@@ -654,8 +617,7 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System
-                .Data
+            throw System.Data
                 .Common
                 .ADP
                 .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
@@ -669,8 +631,7 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System
-                .Data
+            throw System.Data
                 .Common
                 .ADP
                 .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
@@ -684,8 +645,7 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System
-                .Data
+            throw System.Data
                 .Common
                 .ADP
                 .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
@@ -699,8 +659,7 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System
-                .Data
+            throw System.Data
                 .Common
                 .ADP
                 .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
@@ -714,8 +673,7 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System
-                .Data
+            throw System.Data
                 .Common
                 .ADP
                 .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
@@ -732,8 +690,7 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System
-                .Data
+            throw System.Data
                 .Common
                 .ADP
                 .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
@@ -747,8 +704,7 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System
-                .Data
+            throw System.Data
                 .Common
                 .ADP
                 .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
@@ -762,8 +718,7 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System
-                .Data
+            throw System.Data
                 .Common
                 .ADP
                 .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
@@ -783,8 +738,7 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System
-                .Data
+            throw System.Data
                 .Common
                 .ADP
                 .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
@@ -798,8 +752,7 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System
-                .Data
+            throw System.Data
                 .Common
                 .ADP
                 .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
@@ -819,8 +772,7 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System
-                .Data
+            throw System.Data
                 .Common
                 .ADP
                 .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
@@ -834,8 +786,7 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System
-                .Data
+            throw System.Data
                 .Common
                 .ADP
                 .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
@@ -849,8 +800,7 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System
-                .Data
+            throw System.Data
                 .Common
                 .ADP
                 .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
@@ -864,8 +814,7 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System
-                .Data
+            throw System.Data
                 .Common
                 .ADP
                 .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
@@ -879,8 +828,7 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System
-                .Data
+            throw System.Data
                 .Common
                 .ADP
                 .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
@@ -894,8 +842,7 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System
-                .Data
+            throw System.Data
                 .Common
                 .ADP
                 .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
@@ -908,8 +855,7 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V2 and dropped support for V1.
             //  2) Server didn't implement V1 on some interface and negotiated V1.
-            throw System
-                .Data
+            throw System.Data
                 .Common
                 .ADP
                 .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
@@ -923,8 +869,7 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System
-                .Data
+            throw System.Data
                 .Common
                 .ADP
                 .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
@@ -938,8 +883,7 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System
-                .Data
+            throw System.Data
                 .Common
                 .ADP
                 .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
@@ -953,8 +897,7 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System
-                .Data
+            throw System.Data
                 .Common
                 .ADP
                 .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
@@ -968,8 +911,7 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System
-                .Data
+            throw System.Data
                 .Common
                 .ADP
                 .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
@@ -983,8 +925,7 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System
-                .Data
+            throw System.Data
                 .Common
                 .ADP
                 .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
@@ -998,8 +939,7 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System
-                .Data
+            throw System.Data
                 .Common
                 .ADP
                 .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
@@ -1013,8 +953,7 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System
-                .Data
+            throw System.Data
                 .Common
                 .ADP
                 .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
@@ -1028,8 +967,7 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System
-                .Data
+            throw System.Data
                 .Common
                 .ADP
                 .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
@@ -1043,8 +981,7 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System
-                .Data
+            throw System.Data
                 .Common
                 .ADP
                 .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
@@ -1058,8 +995,7 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System
-                .Data
+            throw System.Data
                 .Common
                 .ADP
                 .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
@@ -1073,8 +1009,7 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System
-                .Data
+            throw System.Data
                 .Common
                 .ADP
                 .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
@@ -1088,8 +1023,7 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System
-                .Data
+            throw System.Data
                 .Common
                 .ADP
                 .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
@@ -1103,8 +1037,7 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System
-                .Data
+            throw System.Data
                 .Common
                 .ADP
                 .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
@@ -1118,8 +1051,7 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System
-                .Data
+            throw System.Data
                 .Common
                 .ADP
                 .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
@@ -1132,8 +1064,7 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V2 and dropped support for V1.
             //  2) Server didn't implement V1 on some interface and negotiated V1.
-            throw System
-                .Data
+            throw System.Data
                 .Common
                 .ADP
                 .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
@@ -1147,8 +1078,7 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System
-                .Data
+            throw System.Data
                 .Common
                 .ADP
                 .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
@@ -1161,8 +1091,7 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V2 and dropped support for V1.
             //  2) Server didn't implement V1 on some interface and negotiated V1.
-            throw System
-                .Data
+            throw System.Data
                 .Common
                 .ADP
                 .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
@@ -1176,8 +1105,7 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System
-                .Data
+            throw System.Data
                 .Common
                 .ADP
                 .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
@@ -1191,8 +1119,7 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System
-                .Data
+            throw System.Data
                 .Common
                 .ADP
                 .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
@@ -1205,8 +1132,7 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V2 and dropped support for V1.
             //  2) Server didn't implement V1 on some interface and negotiated V1.
-            throw System
-                .Data
+            throw System.Data
                 .Common
                 .ADP
                 .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
@@ -1220,8 +1146,7 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System
-                .Data
+            throw System.Data
                 .Common
                 .ADP
                 .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
@@ -1234,8 +1159,7 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V2 and dropped support for V1.
             //  2) Server didn't implement V1 on some interface and negotiated V1.
-            throw System
-                .Data
+            throw System.Data
                 .Common
                 .ADP
                 .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
@@ -1249,8 +1173,7 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System
-                .Data
+            throw System.Data
                 .Common
                 .ADP
                 .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
@@ -1264,8 +1187,7 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            throw System
-                .Data
+            throw System.Data
                 .Common
                 .ADP
                 .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);

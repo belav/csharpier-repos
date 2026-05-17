@@ -99,8 +99,7 @@ public class SqlServerTemporalConvention
         {
             if (oldAnnotation?.Value is string oldPeriodPropertyName)
             {
-                var oldPeriodProperty = entityTypeBuilder
-                    .Metadata
+                var oldPeriodProperty = entityTypeBuilder.Metadata
                     .GetProperty(oldPeriodPropertyName);
                 entityTypeBuilder.RemoveUnusedImplicitProperties(new[] { oldPeriodProperty });
 

@@ -229,13 +229,14 @@ namespace System.Threading.Tasks.Tests
         public IAsyncResult BeginDoTask(AsyncCallback callback, object state)
         {
             // Create IAsyncResult object identifying the asynchronous operation
-            Task task = Task.Factory.StartNew(
-                delegate
-                {
-                    DoTask(); //simulates workload
-                },
-                state
-            );
+            Task task = Task.Factory
+                .StartNew(
+                    delegate
+                    {
+                        DoTask(); //simulates workload
+                    },
+                    state
+                );
 
             if (callback != null)
             {
@@ -278,8 +279,7 @@ namespace System.Threading.Tasks.Tests
         public IAsyncResult BeginDoTask(T input, AsyncCallback callback, object state)
         {
             // Create IAsyncResult object identifying the asynchronous operation
-            Task<T> task = Task<T>
-                .Factory
+            Task<T> task = Task<T>.Factory
                 .StartNew(
                     delegate
                     {

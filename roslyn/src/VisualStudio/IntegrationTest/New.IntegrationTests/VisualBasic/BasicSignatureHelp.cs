@@ -77,8 +77,7 @@ End Class
 
             await TestServices.Input.SendAsync("Dim m=Method(1,", HangMitigatingCancellationToken);
             await TestServices.Editor.InvokeSignatureHelpAsync(HangMitigatingCancellationToken);
-            var signature = await TestServices
-                .Editor
+            var signature = await TestServices.Editor
                 .GetCurrentSignatureAsync(HangMitigatingCancellationToken);
             Assert.Equal(
                 "C.Method(i As Integer, i2 As Integer) As C\r\nHello World 2.0!",
@@ -111,15 +110,12 @@ End Class
         {
             await SetUpEditorAsync(Baseline, HangMitigatingCancellationToken);
 
-            await TestServices
-                .Input
+            await TestServices.Input
                 .SendAsync("Dim gm = GenericMethod", HangMitigatingCancellationToken);
-            await TestServices
-                .Input
+            await TestServices.Input
                 .SendAsync(VirtualKeyCode.ESCAPE, HangMitigatingCancellationToken);
             await TestServices.Input.SendAsync("(", HangMitigatingCancellationToken);
-            var signature = await TestServices
-                .Editor
+            var signature = await TestServices.Editor
                 .GetCurrentSignatureAsync(HangMitigatingCancellationToken);
             Assert.Equal(
                 "C.GenericMethod(Of T1)(i As T1) As C\r\nHello Generic World!",
@@ -175,12 +171,10 @@ End Class",
             );
 
             await TestServices.Input.SendAsync("GenericMethod", HangMitigatingCancellationToken);
-            await TestServices
-                .Input
+            await TestServices.Input
                 .SendAsync(VirtualKeyCode.ESCAPE, HangMitigatingCancellationToken);
             await TestServices.Input.SendAsync("(Of ", HangMitigatingCancellationToken);
-            var signature = await TestServices
-                .Editor
+            var signature = await TestServices.Editor
                 .GetCurrentSignatureAsync(HangMitigatingCancellationToken);
             Assert.Equal(
                 "C(Of T, R).GenericMethod(Of T1)(i As T1)\r\nGeneric Method with 1 Type Param",
@@ -223,8 +217,7 @@ End Class",
             );
 
             await TestServices.Editor.InvokeSignatureHelpAsync(HangMitigatingCancellationToken);
-            var signature = await TestServices
-                .Editor
+            var signature = await TestServices.Editor
                 .GetCurrentSignatureAsync(HangMitigatingCancellationToken);
             Assert.Equal("C.GenericMethod(Of T1, T2)(i As T1, i2 As T2) As C", signature.Content);
             Assert.Equal("T2", signature.CurrentParameter.Name);
@@ -260,15 +253,13 @@ End Module",
             );
 
             await TestServices.Input.SendAsync("Method(", HangMitigatingCancellationToken);
-            var signature = await TestServices
-                .Editor
+            var signature = await TestServices.Editor
                 .GetCurrentSignatureAsync(HangMitigatingCancellationToken);
             Assert.Equal("M.Method(a As Integer, b As Integer)", signature.Content);
             Assert.Equal("a", signature.CurrentParameter.Name);
             Assert.Equal("", signature.CurrentParameter.Documentation);
             await TestServices.Input.SendAsync("1, ", HangMitigatingCancellationToken);
-            signature = await TestServices
-                .Editor
+            signature = await TestServices.Editor
                 .GetCurrentSignatureAsync(HangMitigatingCancellationToken);
             Assert.Equal("b", signature.CurrentParameter.Name);
             Assert.Equal("", signature.CurrentParameter.Documentation);
@@ -293,13 +284,11 @@ End Class",
             );
 
             await TestServices.Input.SendAsync("Goo(", HangMitigatingCancellationToken);
-            var signature = await TestServices
-                .Editor
+            var signature = await TestServices.Editor
                 .GetCurrentSignatureAsync(HangMitigatingCancellationToken);
             Assert.Equal("C.Goo()", signature.Content);
 
-            await TestServices
-                .Editor
+            await TestServices.Editor
                 .SetTextAsync(
                     @"
 Class C
@@ -308,8 +297,7 @@ Class C
                 );
 
             Assert.False(
-                await TestServices
-                    .Editor
+                await TestServices.Editor
                     .IsSignatureHelpActiveAsync(HangMitigatingCancellationToken)
             );
         }
@@ -319,11 +307,9 @@ Class C
         {
             await SetUpEditorAsync(Baseline, HangMitigatingCancellationToken);
 
-            await TestServices
-                .Input
+            await TestServices.Input
                 .SendAsync("Dim op = OutAndParam(", HangMitigatingCancellationToken);
-            var signature = await TestServices
-                .Editor
+            var signature = await TestServices.Editor
                 .GetCurrentSignatureAsync(HangMitigatingCancellationToken);
             Assert.Equal(
                 "C.OutAndParam(ByRef strings As String()(,), ByRef outArr As String(), ParamArray d As Object)\r\nComplex Method Params",

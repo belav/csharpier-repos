@@ -2672,16 +2672,14 @@ namespace Microsoft.CodeAnalysis.CSharp
                     }
 
                     ids.Add(
-                        CSharp
-                            .MessageProvider
+                        CSharp.MessageProvider
                             .Instance
                             .GetIdForErrorCode(
                                 (int)ErrorCode.WRN_MissingNonNullTypesContextForAnnotation
                             )
                     );
                     ids.Add(
-                        CSharp
-                            .MessageProvider
+                        CSharp.MessageProvider
                             .Instance
                             .GetIdForErrorCode(
                                 (int)

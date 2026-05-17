@@ -113,8 +113,7 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveConfusingSuppression
 
                 // Remove the suppression operator.
                 var suppression = (PostfixUnaryExpressionSyntax)left;
-                var withoutSuppression = suppression
-                    .Operand
+                var withoutSuppression = suppression.Operand
                     .WithAppendedTrailingTrivia(suppression.OperatorToken.GetAllTrivia());
                 var isWithoutSuppression = updatedNode.ReplaceNode(suppression, withoutSuppression);
 

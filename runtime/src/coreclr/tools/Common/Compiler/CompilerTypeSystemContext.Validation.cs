@@ -366,8 +366,7 @@ namespace ILCompiler
                     // Check for illegal recursion
                     if (
                         type is EcmaType ecmaType
-                        && ILCompiler
-                            .LazyGenericsSupport
+                        && ILCompiler.LazyGenericsSupport
                             .CheckForECMAIllegalGenericRecursion(ecmaType)
                     )
                     {

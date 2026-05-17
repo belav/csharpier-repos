@@ -38,8 +38,7 @@ public class IEnumerableMemberProjections
     {
         protected override void Seed(Context context)
         {
-            context
-                .Customers
+            context.Customers
                 .Add(
                     new Customer
                     {

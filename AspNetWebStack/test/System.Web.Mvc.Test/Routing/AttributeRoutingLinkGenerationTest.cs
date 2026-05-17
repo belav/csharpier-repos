@@ -73,8 +73,7 @@ namespace System.Web.Mvc.Routing.Test
             RequestContext requestContext = GetRequestContext();
 
             requestContext.RouteData.DataTokens.Add("area", "Administration");
-            requestContext
-                .RouteData
+            requestContext.RouteData
                 .DataTokens
                 .Add("controller", "AreaWithPrefixWithControllerRoute");
 

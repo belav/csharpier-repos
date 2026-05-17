@@ -86,8 +86,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
             if (newSolution != null)
             {
                 var solutionChanges = newSolution.GetChanges(oldSolution);
-                var ignoreUnchangeableDocuments = oldSolution
-                    .Workspace
+                var ignoreUnchangeableDocuments = oldSolution.Workspace
                     .IgnoreUnchangeableDocumentsWhenApplyingChanges;
 
                 foreach (var projectChanges in solutionChanges.GetProjectChanges())
@@ -429,19 +428,16 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
 
         private bool ProjectReferencesChanged(ProjectChanges projectChanges)
         {
-            var oldProjectReferences = projectChanges
-                .OldProject
+            var oldProjectReferences = projectChanges.OldProject
                 .ProjectReferences
                 .ToDictionary(r => r.ProjectId);
-            var newProjectReferences = projectChanges
-                .NewProject
+            var newProjectReferences = projectChanges.NewProject
                 .ProjectReferences
                 .ToDictionary(r => r.ProjectId);
 
             // These are the set of project reference that remained in the project. We don't care
             // about project references that were added or removed.  Those will already be reported.
-            var preservedProjectIds = oldProjectReferences
-                .Keys
+            var preservedProjectIds = oldProjectReferences.Keys
                 .Intersect(newProjectReferences.Keys);
 
             foreach (var projectId in preservedProjectIds)
@@ -1048,20 +1044,17 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
         )
         {
             // Attach the spans to the buffer.
-            newBuffer
-                .Properties
+            newBuffer.Properties
                 .AddProperty(
                     PredefinedPreviewTaggerKeys.ConflictSpansKey,
                     new NormalizedSnapshotSpanCollection(newBuffer.CurrentSnapshot, conflictSpans)
                 );
-            newBuffer
-                .Properties
+            newBuffer.Properties
                 .AddProperty(
                     PredefinedPreviewTaggerKeys.WarningSpansKey,
                     new NormalizedSnapshotSpanCollection(newBuffer.CurrentSnapshot, warningSpans)
                 );
-            newBuffer
-                .Properties
+            newBuffer.Properties
                 .AddProperty(
                     PredefinedPreviewTaggerKeys.SuppressDiagnosticsSpansKey,
                     new NormalizedSnapshotSpanCollection(
@@ -1192,8 +1185,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
             };
 
             if (
-                _editorOptionsService
-                    .GlobalOptions
+                _editorOptionsService.GlobalOptions
                     .GetOption(SolutionCrawlerRegistrationService.EnableSolutionCrawler)
             )
             {
@@ -1283,8 +1275,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
 
             // Defer to the editor to figure out what changes the client made.
             var diffService = _differenceSelectorService.GetTextDifferencingService(
-                oldDocument
-                    .Project
+                oldDocument.Project
                     .Services
                     .GetRequiredService<IContentTypeLanguageService>()
                     .GetDefaultContentType()

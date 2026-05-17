@@ -28,8 +28,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             if (SyntaxFacts.IsCheckedOperator(name))
             {
-                MessageID
-                    .IDS_FeatureCheckedUserDefinedOperators
+                MessageID.IDS_FeatureCheckedUserDefinedOperators
                     .CheckFeatureAvailability(diagnostics, syntax.CheckedKeyword);
             }
             else if (
@@ -46,8 +45,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             if (name == WellKnownMemberNames.UnsignedRightShiftOperatorName)
             {
-                MessageID
-                    .IDS_FeatureUnsignedRightShift
+                MessageID.IDS_FeatureUnsignedRightShift
                     .CheckFeatureAvailability(diagnostics, syntax.OperatorToken);
             }
 
@@ -134,8 +132,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
 
             if (syntax.ExplicitInterfaceSpecifier != null)
-                MessageID
-                    .IDS_FeatureStaticAbstractMembersInInterfaces
+                MessageID.IDS_FeatureStaticAbstractMembersInInterfaces
                     .CheckFeatureAvailability(diagnostics, syntax.ExplicitInterfaceSpecifier);
         }
 

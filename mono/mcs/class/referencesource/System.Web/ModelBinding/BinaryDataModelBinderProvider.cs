@@ -48,8 +48,7 @@
             )
             {
                 ModelBinderUtil.ValidateBindingContext(bindingContext);
-                ValueProviderResult vpResult = bindingContext
-                    .UnvalidatedValueProvider
+                ValueProviderResult vpResult = bindingContext.UnvalidatedValueProvider
                     .GetValue(bindingContext.ModelName);
 
                 // case 1: there was no <input ... /> element containing this data

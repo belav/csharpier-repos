@@ -85,8 +85,7 @@ namespace System.IdentityModel.Tokens
             {
                 if (null != value && !value.IsAbsoluteUri)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgument("value", SR.GetString(SR.ID0013));
                 }
 

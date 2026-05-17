@@ -136,8 +136,7 @@ namespace System.Security.Cryptography.Pkcs.Tests
             SignedCms cms = new SignedCms(content, false);
 
             using (
-                X509Certificate2 signerCert = Certificates
-                    .RSAKeyTransferCapi1
+                X509Certificate2 signerCert = Certificates.RSAKeyTransferCapi1
                     .TryGetCertificateWithPrivateKey()
             )
             {

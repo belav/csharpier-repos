@@ -108,14 +108,12 @@ namespace System.ServiceModel.Channels
                 {
                     if (!PeerTransportDefaults.ResolverInstalled)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperArgument("value", SR.GetString(SR.PeerPnrpNotInstalled));
                     }
                     else if (!PeerTransportDefaults.ResolverAvailable)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperArgument("value", SR.GetString(SR.PeerPnrpNotAvailable));
                     }
                 }
@@ -174,8 +172,7 @@ namespace System.ServiceModel.Channels
                 ((IPolicyExportExtension)encodingBindingElement).ExportPolicy(exporter, context);
             }
 
-            WsdlExporter
-                .WSAddressingHelper
+            WsdlExporter.WSAddressingHelper
                 .AddWSAddressingAssertion(
                     exporter,
                     context,
@@ -233,8 +230,7 @@ namespace System.ServiceModel.Channels
             out bool createdNew
         )
         {
-            BindingElementCollection bindingElements = endpointContext
-                .Endpoint
+            BindingElementCollection bindingElements = endpointContext.Endpoint
                 .Binding
                 .CreateBindingElements();
             return FindMessageEncodingBindingElement(bindingElements, out createdNew);
@@ -246,15 +242,13 @@ namespace System.ServiceModel.Channels
         {
             if (context == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("context"));
             }
 
             if (!this.CanBuildChannelFactory<TChannel>(context))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(
                         "TChannel",
                         SR.GetString(SR.ChannelTypeNotSupported, typeof(TChannel))
@@ -263,8 +257,7 @@ namespace System.ServiceModel.Channels
 
             if (this.ManualAddressing)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(SR.GetString(SR.ManualAddressingNotSupported))
                     );
@@ -295,8 +288,7 @@ namespace System.ServiceModel.Channels
             }
             else
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(
                         "TChannel",
                         SR.GetString(SR.ChannelTypeNotSupported, typeof(TChannel))
@@ -365,14 +357,12 @@ namespace System.ServiceModel.Channels
                 return this.resolver;
             }
 
-            Collection<PeerCustomResolverBindingElement> customResolverElements = context
-                .BindingParameters
-                .FindAll<PeerCustomResolverBindingElement>();
+            Collection<PeerCustomResolverBindingElement> customResolverElements =
+                context.BindingParameters.FindAll<PeerCustomResolverBindingElement>();
 
             if (customResolverElements.Count > 1)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(SR.MultiplePeerCustomResolverBindingElementsInParameters)
@@ -387,14 +377,12 @@ namespace System.ServiceModel.Channels
 
             // If resolver binding element is included in the context, use it to create the resolver. elementToBeClonedwise,
             // if default resolver is available, use it.
-            Collection<PeerResolverBindingElement> resolverBindingElements = context
-                .BindingParameters
-                .FindAll<PeerResolverBindingElement>();
+            Collection<PeerResolverBindingElement> resolverBindingElements =
+                context.BindingParameters.FindAll<PeerResolverBindingElement>();
 
             if (resolverBindingElements.Count > 1)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(SR.MultiplePeerResolverBindingElementsinParameters)
@@ -409,8 +397,7 @@ namespace System.ServiceModel.Channels
                 }
                 else
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(
@@ -428,16 +415,14 @@ namespace System.ServiceModel.Channels
             {
                 if (!PeerTransportDefaults.ResolverInstalled)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(SR.GetString(SR.PeerPnrpNotInstalled))
                         );
                 }
                 else if (!PeerTransportDefaults.ResolverAvailable)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(SR.GetString(SR.PeerPnrpNotAvailable))
                         );

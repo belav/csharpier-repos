@@ -1065,14 +1065,12 @@ namespace System.DirectoryServices.AccountManagement
             // Since this is SAM, the remote principal must be an AD principal.
             // Build a PrincipalContext for the store which owns the principal
             // Use the ad default options so we turn sign and seal back on.
-            PrincipalContext remoteCtx = SDSCache
-                .Domain
+            PrincipalContext remoteCtx = SDSCache.Domain
                 .GetContext(domainName, _credentials, DefaultContextOptions.ADDefaultContextOption);
 
             SecurityIdentifier sidObj = new SecurityIdentifier(sid, 0);
 
-            Principal p = remoteCtx
-                .QueryCtx
+            Principal p = remoteCtx.QueryCtx
                 .FindPrincipalByIdentRef(
                     typeof(Principal),
                     UrnScheme.SidScheme,

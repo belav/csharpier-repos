@@ -276,10 +276,8 @@ namespace System.Data.Linq
                         this.trackedObject.Type,
                         this.original
                     );
-                    this.database = ctxt.Services.GetObjectByKey(
-                        this.trackedObject.Type,
-                        keyValues
-                    );
+                    this.database = ctxt.Services
+                        .GetObjectByKey(this.trackedObject.Type, keyValues);
                 }
                 return this.database;
             }
@@ -483,8 +481,7 @@ namespace System.Data.Linq
             this.metaMember = metaMember;
             this.originalValue = metaMember.StorageAccessor.GetBoxedValue(conflict.Original);
             this.databaseValue = metaMember.StorageAccessor.GetBoxedValue(conflict.Database);
-            this.currentValue = metaMember
-                .StorageAccessor
+            this.currentValue = metaMember.StorageAccessor
                 .GetBoxedValue(conflict.TrackedObject.Current);
         }
 

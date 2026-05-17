@@ -74,8 +74,7 @@ namespace System.Text.Unicode
             // Finally, get the grapheme cluster break value.
 
             if (
-                parsedData
-                    .GraphemeBreakPropertyData
+                parsedData.GraphemeBreakPropertyData
                     .TryGetValue(value, out GraphemeClusterBreakProperty graphemeProperty)
             )
             {

@@ -130,8 +130,7 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
             var errorList = await GetRequiredGlobalServiceAsync<SVsErrorList, IErrorList>(
                 cancellationToken
             );
-            var args = await errorList
-                .TableControl
+            var args = await errorList.TableControl
                 .ForceUpdateAsync()
                 .WithCancellation(cancellationToken);
             return args.AllEntries

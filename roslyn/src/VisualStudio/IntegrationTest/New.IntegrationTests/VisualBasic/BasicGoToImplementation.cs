@@ -27,8 +27,7 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.VisualBasic
         [CombinatorialData]
         public async Task SimpleGoToImplementation(bool asyncNavigation)
         {
-            await TestServices
-                .Editor
+            await TestServices.Editor
                 .ConfigureAsyncNavigation(
                     asyncNavigation
                         ? AsyncNavigationKind.Asynchronous
@@ -37,43 +36,36 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.VisualBasic
                 );
 
             var project = ProjectName;
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .AddFileAsync(
                     project,
                     "FileImplementation.vb",
                     cancellationToken: HangMitigatingCancellationToken
                 );
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .OpenFileAsync(project, "FileImplementation.vb", HangMitigatingCancellationToken);
-            await TestServices
-                .Editor
+            await TestServices.Editor
                 .SetTextAsync(
                     @"Class Implementation
   Implements IGoo
 End Class",
                     HangMitigatingCancellationToken
                 );
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .AddFileAsync(
                     project,
                     "FileInterface.vb",
                     cancellationToken: HangMitigatingCancellationToken
                 );
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .OpenFileAsync(project, "FileInterface.vb", HangMitigatingCancellationToken);
-            await TestServices
-                .Editor
+            await TestServices.Editor
                 .SetTextAsync(
                     @"Interface IGoo 
 End Interface",
                     HangMitigatingCancellationToken
                 );
-            await TestServices
-                .Editor
+            await TestServices.Editor
                 .PlaceCaretAsync("Interface IGoo", charsOffset: 0, HangMitigatingCancellationToken);
             await TestServices.Editor.GoToImplementationAsync(HangMitigatingCancellationToken);
 
@@ -88,12 +80,10 @@ End Interface",
                 // The navigation completed asynchronously, so navigate to the first item in the results list
                 Assert.Equal(
                     $"'IGoo' implementations - Entire solution",
-                    await TestServices
-                        .Shell
+                    await TestServices.Shell
                         .GetActiveWindowCaptionAsync(HangMitigatingCancellationToken)
                 );
-                var results = await TestServices
-                    .FindReferencesWindow
+                var results = await TestServices.FindReferencesWindow
                     .GetContentsAsync(HangMitigatingCancellationToken);
                 AssertEx.EqualOrDiff(
                     $"<unknown>: Class Implementation",
@@ -106,8 +96,7 @@ End Interface",
                 );
                 results[0].NavigateTo(isPreview: false, shouldActivate: true);
 
-                await TestServices
-                    .Workarounds
+                await TestServices.Workarounds
                     .WaitForNavigationAsync(HangMitigatingCancellationToken);
 
                 identifierWithCaret = "$$Implementation";
@@ -115,16 +104,13 @@ End Interface",
 
             Assert.Equal(
                 $"FileImplementation.vb",
-                await TestServices
-                    .Shell
+                await TestServices.Shell
                     .GetActiveDocumentFileNameAsync(HangMitigatingCancellationToken)
             );
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .TextContainsAsync($@"Class {identifierWithCaret}", assertCaretPosition: true);
             Assert.False(
-                await TestServices
-                    .Shell
+                await TestServices.Shell
                     .IsActiveTabProvisionalAsync(HangMitigatingCancellationToken)
             );
         }

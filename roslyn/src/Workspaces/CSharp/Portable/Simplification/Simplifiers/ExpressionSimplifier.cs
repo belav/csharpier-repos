@@ -49,8 +49,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
             )
             {
                 if (
-                    !MemberAccessExpressionSimplifier
-                        .Instance
+                    !MemberAccessExpressionSimplifier.Instance
                         .ShouldSimplifyThisMemberAccessExpression(
                             memberAccessExpression,
                             semanticModel,
@@ -123,8 +122,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
                 );
 
             if (expression is NameSyntax name)
-                return NameSimplifier
-                    .Instance
+                return NameSimplifier.Instance
                     .TrySimplify(
                         name,
                         semanticModel,
@@ -216,8 +214,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
                     {
                         var declIdentifier = (
                             (UsingDirectiveSyntax)syntaxRef.GetSyntax(cancellationToken)
-                        )
-                            .Alias
+                        ).Alias
                             .Name
                             .Identifier;
                         text = declIdentifier.IsVerbatimIdentifier()
@@ -226,8 +223,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
                     }
 
                     replacementNode = SyntaxFactory.IdentifierName(
-                        memberAccess
-                            .Name
+                        memberAccess.Name
                             .Identifier
                             .CopyAnnotationsTo(
                                 SyntaxFactory.Identifier(

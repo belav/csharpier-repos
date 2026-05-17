@@ -133,12 +133,10 @@ namespace MonoTests.System.ServiceModel.Syndication
         {
             SyndicationFeed feed = new SyndicationFeed();
             feed.Categories.Add(new SyndicationCategory("myname", "myscheme", "mylabel"));
-            feed.Authors.Add(
-                new SyndicationPerson("john@doe.com", "John Doe", "http://john.doe.name")
-            );
-            feed.Contributors.Add(
-                new SyndicationPerson("jane@doe.com", "Jane Doe", "http://jane.doe.name")
-            );
+            feed.Authors
+                .Add(new SyndicationPerson("john@doe.com", "John Doe", "http://john.doe.name"));
+            feed.Contributors
+                .Add(new SyndicationPerson("jane@doe.com", "Jane Doe", "http://jane.doe.name"));
             StringWriter sw = new StringWriter();
             using (XmlWriter w = CreateWriter(sw))
                 new Rss20FeedFormatter(feed).WriteTo(w);
@@ -176,9 +174,8 @@ namespace MonoTests.System.ServiceModel.Syndication
         public void SerializeExtensionsAsAtomFalse()
         {
             SyndicationFeed feed = new SyndicationFeed();
-            feed.Contributors.Add(
-                new SyndicationPerson("jane@doe.com", "Jane Doe", "http://jane.doe.name")
-            );
+            feed.Contributors
+                .Add(new SyndicationPerson("jane@doe.com", "Jane Doe", "http://jane.doe.name"));
             StringWriter sw = new StringWriter();
             using (XmlWriter w = CreateWriter(sw))
                 new Rss20FeedFormatter(feed, false).WriteTo(w);

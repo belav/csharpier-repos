@@ -40,8 +40,7 @@ namespace System.ServiceModel.Security
         {
             if (tokenAuthenticator == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("tokenAuthenticator");
             }
 

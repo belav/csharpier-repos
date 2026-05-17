@@ -75,8 +75,7 @@ namespace Internal.Reflection.Execution
             uint cbBlob;
 
             if (
-                !resourceInfo
-                    .Module
+                !resourceInfo.Module
                     .TryFindBlob((int)ReflectionMapBlob.BlobIdResourceData, out pBlob, out cbBlob)
             )
             {

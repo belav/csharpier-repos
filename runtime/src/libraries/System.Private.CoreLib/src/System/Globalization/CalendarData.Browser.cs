@@ -18,8 +18,7 @@ namespace System.Globalization
             char* buffer = stackalloc char[CALENDAR_INFO_BUFFER_LEN];
             int exception;
             object exResult;
-            int resultLength = Interop
-                .JsGlobalization
+            int resultLength = Interop.JsGlobalization
                 .GetCalendarInfo(
                     localeName,
                     calendarId,

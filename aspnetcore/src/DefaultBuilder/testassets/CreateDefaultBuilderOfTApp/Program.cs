@@ -49,9 +49,8 @@ public class Program
                 app.Run(context =>
                 {
                     // Verify allowed hosts were loaded
-                    var hostFilteringOptions = app.ApplicationServices.GetRequiredService<
-                        IOptions<HostFilteringOptions>
-                    >();
+                    var hostFilteringOptions = app.ApplicationServices
+                        .GetRequiredService<IOptions<HostFilteringOptions>>();
                     var hosts = string.Join(',', hostFilteringOptions.Value.AllowedHosts);
                     if (
                         responseMessage == null
@@ -61,10 +60,9 @@ public class Program
                         responseMessage = "AllowedHosts not loaded into Options.";
                     }
 
-                    var hostingEnvironment =
-                        app.ApplicationServices.GetRequiredService<IHostEnvironment>();
-                    return context
-                        .Response
+                    var hostingEnvironment = app.ApplicationServices
+                        .GetRequiredService<IHostEnvironment>();
+                    return context.Response
                         .WriteAsync(responseMessage ?? hostingEnvironment.ApplicationName);
                 })
             )

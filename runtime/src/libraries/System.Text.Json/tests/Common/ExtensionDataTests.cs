@@ -862,10 +862,11 @@ namespace System.Text.Json.Serialization.Tests
             obj.MyOverflow.Add("test2", "text");
             obj.MyOverflow.Add("test3", new DummyObj() { Prop = "ObjectProp" });
             obj.MyOverflow.Add("test4", new DummyStruct() { Prop = "StructProp" });
-            obj.MyOverflow.Add(
-                "test5",
-                new Dictionary<string, object>() { { "Key", "Value" }, { "Key1", "Value1" } }
-            );
+            obj.MyOverflow
+                .Add(
+                    "test5",
+                    new Dictionary<string, object>() { { "Key", "Value" }, { "Key1", "Value1" } }
+                );
 
             string json = await Serializer.SerializeWrapper(obj);
             ClassWithExtensionPropertyAlreadyInstantiated roundTripObj =
@@ -1136,8 +1137,7 @@ namespace System.Text.Json.Serialization.Tests
         public async Task NestedClassWithJsonElementExtensionDataProperty()
         {
             var child = new ChildClassWithJsonElement { Number = 4 };
-            child
-                .ExtensionData
+            child.ExtensionData
                 .Add(
                     "SpecialInformation",
                     JsonDocument
@@ -1146,8 +1146,7 @@ namespace System.Text.Json.Serialization.Tests
                 );
 
             var parent = new ParentClassWithJsonElement { Text = "Hello World" };
-            parent
-                .ExtensionData
+            parent.ExtensionData
                 .Add(
                     "SpecialInformation",
                     JsonDocument

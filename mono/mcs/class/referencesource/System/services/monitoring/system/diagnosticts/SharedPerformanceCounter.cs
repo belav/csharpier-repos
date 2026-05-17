@@ -772,8 +772,7 @@ namespace System.Diagnostics
                         RegistryKey categoryKey = null;
                         try
                         {
-                            categoryKey = Registry
-                                .LocalMachine
+                            categoryKey = Registry.LocalMachine
                                 .OpenSubKey(
                                     PerformanceCounterLib.ServicePath
                                         + "\\"

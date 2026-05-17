@@ -64,8 +64,7 @@ namespace Mono.Btls
             }
             catch (Exception ex)
             {
-                Console
-                    .Error
+                Console.Error
                     .WriteLine("MonoBtlsX509StoreManager.Initialize() threw exception: {0}", ex);
             }
             finally

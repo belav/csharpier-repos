@@ -575,8 +575,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                 // Hot Regions mode used for image maps, tool tips and
                 // hit test function
                 //************************************************************
-                common
-                    .HotRegionsList
+                common.HotRegionsList
                     .AddHotRegion(mapAreaPath, false, coord, point, series.Name, pointIndex);
 
                 //**************************************************************
@@ -628,8 +627,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                     // Hot Regions mode used for image maps, tool tips and
                     // hit test function
                     //************************************************************
-                    common
-                        .HotRegionsList
+                    common.HotRegionsList
                         .AddHotRegion(mapAreaPath, false, coord, point, series.Name, pointIndex);
                 }
                 mapAreaPath.Dispose();

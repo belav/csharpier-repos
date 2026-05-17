@@ -761,8 +761,7 @@ public static partial class XmlSerializerTests
 
         Assert.StrictEqual(actual.EnumType, value.EnumType);
         Assert.StrictEqual(actual.MyChoice, value.MyChoice);
-        object[] stringArray = actual
-            .XmlArrayProperty
+        object[] stringArray = actual.XmlArrayProperty
             .Where(x => x != null)
             .Select(x => x.ToString())
             .ToArray();
@@ -1030,8 +1029,7 @@ public static partial class XmlSerializerTests
     [Fact]
     public static void Xml_TypeWithNonPublicDefaultConstructor()
     {
-        System.Reflection.TypeInfo ti = System
-            .Reflection
+        System.Reflection.TypeInfo ti = System.Reflection
             .IntrospectionExtensions
             .GetTypeInfo(typeof(TypeWithNonPublicDefaultConstructor));
         TypeWithNonPublicDefaultConstructor value = null;

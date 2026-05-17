@@ -78,8 +78,7 @@ namespace System.Runtime.Serialization.Json
                     dataNode = ReadNumericalPrimitiveExtensionDataValue(xmlReader);
                     break;
                 default:
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             XmlObjectSerializer.CreateSerializationException(
                                 SR.GetString(
@@ -309,8 +308,7 @@ namespace System.Runtime.Serialization.Json
 
             if (missingMembersCount == 1)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new SerializationException(
                             SR.GetString(
@@ -323,8 +321,7 @@ namespace System.Runtime.Serialization.Json
             }
             else
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new SerializationException(
                             SR.GetString(
@@ -343,8 +340,7 @@ namespace System.Runtime.Serialization.Json
             int memberIndex
         )
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(
                     new SerializationException(
                         SR.GetString(

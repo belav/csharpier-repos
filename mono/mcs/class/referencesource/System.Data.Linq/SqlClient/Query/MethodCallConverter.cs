@@ -186,8 +186,7 @@ namespace System.Data.Linq.SqlClient
                     SqlMethodCall call = (SqlMethodCall)bo.Left;
                     if (IsCompareToMethod(call))
                     {
-                        int iValue = System
-                            .Convert
+                        int iValue = System.Convert
                             .ToInt32(
                                 this.Eval(bo.Right),
                                 Globalization.CultureInfo.InvariantCulture
@@ -198,8 +197,7 @@ namespace System.Data.Linq.SqlClient
                     }
                     else if (IsCompareMethod(call))
                     {
-                        int iValue = System
-                            .Convert
+                        int iValue = System.Convert
                             .ToInt32(
                                 this.Eval(bo.Right),
                                 Globalization.CultureInfo.InvariantCulture
@@ -216,8 +214,7 @@ namespace System.Data.Linq.SqlClient
                 else if (IsVbCompareStringEqualsValue(bo))
                 {
                     SqlMethodCall call = (SqlMethodCall)bo.Left;
-                    int iValue = System
-                        .Convert
+                    int iValue = System.Convert
                         .ToInt32(this.Eval(bo.Right), Globalization.CultureInfo.InvariantCulture);
                     //in VB, comparing a string with Nothing means comparing with ""
                     SqlValue strValue = call.Arguments[1] as SqlValue;

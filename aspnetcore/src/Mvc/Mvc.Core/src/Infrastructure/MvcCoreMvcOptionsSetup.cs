@@ -51,8 +51,7 @@ internal sealed class MvcCoreMvcOptionsSetup
         // Set up ModelBinding
         options.ModelBinderProviders.Add(new BinderTypeModelBinderProvider());
         options.ModelBinderProviders.Add(new ServicesModelBinderProvider());
-        options
-            .ModelBinderProviders
+        options.ModelBinderProviders
             .Add(
                 new BodyModelBinderProvider(
                     options.InputFormatters,
@@ -81,8 +80,7 @@ internal sealed class MvcCoreMvcOptionsSetup
         options.Filters.Add(new UnsupportedContentTypeFilter());
 
         // Set up default input formatters.
-        options
-            .InputFormatters
+        options.InputFormatters
             .Add(
                 new SystemTextJsonInputFormatter(
                     _jsonOptions.Value,
@@ -91,8 +89,7 @@ internal sealed class MvcCoreMvcOptionsSetup
             );
 
         // Media type formatter mappings for JSON
-        options
-            .FormatterMappings
+        options.FormatterMappings
             .SetMediaTypeMappingForFormat("json", MediaTypeHeaderValues.ApplicationJson);
 
         // Set up default output formatters.
@@ -123,8 +120,7 @@ internal sealed class MvcCoreMvcOptionsSetup
         // validation. It is imperative that this executes later than all other metadata provider. We'll register it as part of PostConfigure.
         // This should ensure it appears later than all of the details provider registered by MVC and user configured details provider registered
         // as part of ConfigureOptions.
-        options
-            .ModelMetadataDetailsProviders
+        options.ModelMetadataDetailsProviders
             .Add(new HasValidatorsValidationMetadataProvider(options.ModelValidatorProviders));
     }
 

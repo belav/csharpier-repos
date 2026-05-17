@@ -40,8 +40,7 @@ namespace System.ServiceModel.Security
                 }
                 else
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentOutOfRangeException(
                                 "securityVersion",
@@ -65,8 +64,7 @@ namespace System.ServiceModel.Security
                 }
                 else
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new NotSupportedException());
                 }
 
@@ -117,8 +115,7 @@ namespace System.ServiceModel.Security
             {
                 if (tokenEntryList == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgumentNull("tokenEntryList");
                 }
                 tokenEntryList.Add(new DerivedKeyTokenEntry(this));
@@ -160,13 +157,11 @@ namespace System.ServiceModel.Security
                     }
                     if (
                         reader.IsStartElement(
-                            parent
-                                .SecurityTokenSerializer
+                            parent.SecurityTokenSerializer
                                 .DictionaryManager
                                 .SecurityJan2004Dictionary
                                 .Reference,
-                            parent
-                                .SecurityTokenSerializer
+                            parent.SecurityTokenSerializer
                                 .DictionaryManager
                                 .SecurityJan2004Dictionary
                                 .Namespace
@@ -174,8 +169,7 @@ namespace System.ServiceModel.Security
                     )
                     {
                         string valueType = reader.GetAttribute(
-                            parent
-                                .SecurityTokenSerializer
+                            parent.SecurityTokenSerializer
                                 .DictionaryManager
                                 .SecurityJan2004Dictionary
                                 .ValueType,
@@ -184,8 +178,7 @@ namespace System.ServiceModel.Security
                         if (
                             valueType != null
                             && valueType
-                                != parent
-                                    .SerializerDictionary
+                                != parent.SerializerDictionary
                                     .SecurityContextTokenReferenceValueType
                                     .Value
                         )
@@ -193,8 +186,7 @@ namespace System.ServiceModel.Security
                             return false;
                         }
                         string uri = reader.GetAttribute(
-                            parent
-                                .SecurityTokenSerializer
+                            parent.SecurityTokenSerializer
                                 .DictionaryManager
                                 .SecurityJan2004Dictionary
                                 .URI,

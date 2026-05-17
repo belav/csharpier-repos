@@ -226,8 +226,7 @@ namespace Roslyn.Test.Performance.Utilities
         /// </summary>
         public static void LogProcessResult(ProcessResult result)
         {
-            RuntimeSettings
-                .Logger
+            RuntimeSettings.Logger
                 .Log(
                     String.Format(
                         "The process \"{0}\" {1} with code {2}",

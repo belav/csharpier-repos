@@ -69,8 +69,7 @@ namespace System.ServiceModel.Channels
             {
                 if (value == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new ArgumentNullException("value"));
                 }
                 this.binaryVersion = value;
@@ -94,8 +93,7 @@ namespace System.ServiceModel.Channels
                         BinaryEncoderDefaults.EnvelopeVersion,
                         value.Envelope
                     );
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new InvalidOperationException(errorMsg));
                 }
 
@@ -114,8 +112,7 @@ namespace System.ServiceModel.Channels
             {
                 if (value <= 0)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentOutOfRangeException(
                                 "value",
@@ -136,8 +133,7 @@ namespace System.ServiceModel.Channels
             {
                 if (value <= 0)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentOutOfRangeException(
                                 "value",
@@ -169,8 +165,7 @@ namespace System.ServiceModel.Channels
             {
                 if (value < 0)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentOutOfRangeException(
                                 "value",
@@ -195,8 +190,7 @@ namespace System.ServiceModel.Channels
                     || !compressionSupport.IsCompressionFormatSupported(this.compressionFormat)
                 )
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(
                             new NotSupportedException(
                                 SR.GetString(
@@ -213,8 +207,7 @@ namespace System.ServiceModel.Channels
 
         void SetMaxReceivedMessageSizeFromTransport(BindingContext context)
         {
-            TransportBindingElement transport = context
-                .Binding
+            TransportBindingElement transport = context.Binding
                 .Elements
                 .Find<TransportBindingElement>();
             if (transport != null)

@@ -488,8 +488,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             }
 
             if (
-                !pragmaWarningDirectiveTrivia
-                    .DisableOrRestoreKeyword
+                !pragmaWarningDirectiveTrivia.DisableOrRestoreKeyword
                     .IsKind(disableOrRestoreKeyword)
             )
             {
@@ -504,12 +503,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                 }
 
                 if (
-                    identifierName
-                        .Identifier
+                    identifierName.Identifier
                         .ValueText
                         .Equals(FormattingDiagnosticIds.FormatDocumentControlDiagnosticId)
-                    || identifierName
-                        .Identifier
+                    || identifierName.Identifier
                         .ValueText
                         .Equals(FormattingDiagnosticIds.FormattingDiagnosticId)
                 )
@@ -532,8 +529,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                 var arrayOrCollectionInitializer = (InitializerExpressionSyntax)node;
                 AddSuppressAllOperationIfOnMultipleLine(
                     list,
-                    arrayOrCollectionInitializer
-                        .OpenBraceToken
+                    arrayOrCollectionInitializer.OpenBraceToken
                         .GetPreviousToken(includeZeroWidth: true),
                     arrayOrCollectionInitializer.CloseBraceToken
                 );

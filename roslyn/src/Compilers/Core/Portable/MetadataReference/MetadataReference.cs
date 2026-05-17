@@ -276,8 +276,7 @@ namespace Microsoft.CodeAnalysis
             DocumentationProvider? documentation = null
         ) =>
             CreateFromFile(
-                StandardFileSystem
-                    .Instance
+                StandardFileSystem.Instance
                     .OpenFileWithNormalizedException(
                         path,
                         FileMode.Open,
@@ -413,8 +412,7 @@ namespace Microsoft.CodeAnalysis
                 );
             }
 
-            Stream peStream = StandardFileSystem
-                .Instance
+            Stream peStream = StandardFileSystem.Instance
                 .OpenFileWithNormalizedException(
                     location,
                     FileMode.Open,

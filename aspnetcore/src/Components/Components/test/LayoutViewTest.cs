@@ -24,8 +24,7 @@ public class LayoutViewTest
     public void GivenNoParameters_RendersNothing()
     {
         // Arrange/Act
-        var setParametersTask = _renderer
-            .Dispatcher
+        var setParametersTask = _renderer.Dispatcher
             .InvokeAsync(() => _layoutViewComponent.SetParametersAsync(ParameterView.Empty));
         Assert.True(setParametersTask.IsCompletedSuccessfully);
         var frames = _renderer.GetCurrentRenderTreeFrames(_layoutViewComponentId).AsEnumerable();
@@ -39,8 +38,7 @@ public class LayoutViewTest
     public void GivenContentButNoLayout_RendersContent()
     {
         // Arrange/Act
-        var setParametersTask = _renderer
-            .Dispatcher
+        var setParametersTask = _renderer.Dispatcher
             .InvokeAsync(() =>
                 _layoutViewComponent.SetParametersAsync(
                     ParameterView.FromDictionary(
@@ -76,8 +74,7 @@ public class LayoutViewTest
     public void GivenLayoutButNoContent_RendersLayoutWithEmptyBody()
     {
         // Arrange/Act
-        var setParametersTask = _renderer
-            .Dispatcher
+        var setParametersTask = _renderer.Dispatcher
             .InvokeAsync(() =>
                 _layoutViewComponent.SetParametersAsync(
                     ParameterView.FromDictionary(
@@ -118,8 +115,7 @@ public class LayoutViewTest
     public void RendersContentInsideLayout()
     {
         // Arrange/Act
-        var setParametersTask = _renderer
-            .Dispatcher
+        var setParametersTask = _renderer.Dispatcher
             .InvokeAsync(() =>
                 _layoutViewComponent.SetParametersAsync(
                     ParameterView.FromDictionary(
@@ -172,8 +168,7 @@ public class LayoutViewTest
     public void RendersContentInsideNestedLayout()
     {
         // Arrange/Act
-        var setParametersTask = _renderer
-            .Dispatcher
+        var setParametersTask = _renderer.Dispatcher
             .InvokeAsync(() =>
                 _layoutViewComponent.SetParametersAsync(
                     ParameterView.FromDictionary(
@@ -239,8 +234,7 @@ public class LayoutViewTest
     public void CanChangeContentWithSameLayout()
     {
         // Arrange
-        var setParametersTask = _renderer
-            .Dispatcher
+        var setParametersTask = _renderer.Dispatcher
             .InvokeAsync(() =>
                 _layoutViewComponent.SetParametersAsync(
                     ParameterView.FromDictionary(
@@ -263,8 +257,7 @@ public class LayoutViewTest
 
         // Act
         Assert.True(setParametersTask.IsCompletedSuccessfully);
-        _renderer
-            .Dispatcher
+        _renderer.Dispatcher
             .InvokeAsync(() =>
                 _layoutViewComponent.SetParametersAsync(
                     ParameterView.FromDictionary(
@@ -317,8 +310,7 @@ public class LayoutViewTest
     public void CanChangeLayout()
     {
         // Arrange
-        var setParametersTask1 = _renderer
-            .Dispatcher
+        var setParametersTask1 = _renderer.Dispatcher
             .InvokeAsync(() =>
                 _layoutViewComponent.SetParametersAsync(
                     ParameterView.FromDictionary(
@@ -341,8 +333,7 @@ public class LayoutViewTest
         Assert.True(setParametersTask1.IsCompletedSuccessfully);
 
         // Act
-        var setParametersTask2 = _renderer
-            .Dispatcher
+        var setParametersTask2 = _renderer.Dispatcher
             .InvokeAsync(() =>
                 _layoutViewComponent.SetParametersAsync(
                     ParameterView.FromDictionary(

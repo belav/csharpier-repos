@@ -16,8 +16,7 @@ namespace System.IO.Tests
             Interop.Kernel32.FILE_STANDARD_INFO info;
 
             Assert.True(
-                Interop
-                    .Kernel32
+                Interop.Kernel32
                     .GetFileInformationByHandleEx(
                         fileStream.SafeFileHandle,
                         Interop.Kernel32.FileStandardInfo,

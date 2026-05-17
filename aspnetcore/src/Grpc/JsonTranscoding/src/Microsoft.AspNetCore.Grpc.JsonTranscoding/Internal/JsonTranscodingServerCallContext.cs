@@ -191,8 +191,7 @@ internal sealed class JsonTranscodingServerCallContext
                         continue;
                     }
                     else if (
-                        header
-                            .Key
+                        header.Key
                             .EndsWith(
                                 Metadata.BinaryHeaderSuffix,
                                 StringComparison.OrdinalIgnoreCase

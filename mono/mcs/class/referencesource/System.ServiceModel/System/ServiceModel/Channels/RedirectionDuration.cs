@@ -128,8 +128,7 @@ namespace System.ServiceModel.Channels
             }
             else if (duration.Length == 0)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument("duration", SR.GetString(SR.ParameterCannotBeEmpty));
             }
 

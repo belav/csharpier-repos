@@ -32,8 +32,7 @@ internal sealed unsafe partial class ResponseStreamAsyncResult : IAsyncResult, I
         var cancellationRegistration = default(CancellationTokenRegistration);
         if (cancellationToken.CanBeCanceled)
         {
-            cancellationRegistration = _responseStream
-                .RequestContext
+            cancellationRegistration = _responseStream.RequestContext
                 .RegisterForCancellation(cancellationToken);
         }
         _cancellationToken = cancellationToken;

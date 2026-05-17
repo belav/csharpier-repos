@@ -857,8 +857,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             // Call Back Paint event
             if (!selection)
             {
-                common
-                    .Chart
+                common.Chart
                     .CallOnPrePaint(
                         new ChartPaintEventArgs(
                             dataSeries[typeSeries[0]],
@@ -984,12 +983,8 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                         rect.Y = (rect.Y - area.Position.Y) / area.Position.Height * 100f;
                         rect.Width = rect.Width / area.Position.Width * 100f;
                         rect.Height = rect.Height / area.Position.Height * 100f;
-                        area.InnerPlotPosition.SetPositionNoAuto(
-                            rect.X,
-                            rect.Y,
-                            rect.Width,
-                            rect.Height
-                        );
+                        area.InnerPlotPosition
+                            .SetPositionNoAuto(rect.X, rect.Y, rect.Width, rect.Height);
                     }
                 }
 
@@ -1315,8 +1310,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             // Call Paint event
             if (!selection)
             {
-                common
-                    .Chart
+                common.Chart
                     .CallOnPostPaint(
                         new ChartPaintEventArgs(
                             dataSeries[typeSeries[0]],
@@ -2418,8 +2412,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                 if (point.IsCustomPropertySet("_COLLECTED_DATA_POINT"))
                 {
                     // Add point to the map area
-                    common
-                        .HotRegionsList
+                    common.HotRegionsList
                         .AddHotRegion(
                             graph,
                             path,
@@ -2442,8 +2435,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                 }
 
                 // Add points to the map area
-                common
-                    .HotRegionsList
+                common.HotRegionsList
                     .AddHotRegion(path, false, coord, point, point.series.Name, pointIndex);
             }
         }
@@ -3028,8 +3020,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             // Call Back Paint event
             if (!selection)
             {
-                common
-                    .Chart
+                common.Chart
                     .CallOnPrePaint(
                         new ChartPaintEventArgs(
                             dataSeries[typeSeries[0]],
@@ -3156,14 +3147,8 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             }
 
             // Initialize Matrix 3D
-            area.matrix3D.Initialize(
-                plotingRectangle,
-                pieWidth,
-                area.Area3DStyle.Inclination,
-                0F,
-                0,
-                false
-            );
+            area.matrix3D
+                .Initialize(plotingRectangle, pieWidth, area.Area3DStyle.Inclination, 0F, 0, false);
 
             //***********************************************************
             //** Initialize Lighting
@@ -3287,12 +3272,8 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                         rect.Y = (rect.Y - area.Position.Y) / area.Position.Height * 100f;
                         rect.Width = rect.Width / area.Position.Width * 100f;
                         rect.Height = rect.Height / area.Position.Height * 100f;
-                        area.InnerPlotPosition.SetPositionNoAuto(
-                            rect.X,
-                            rect.Y,
-                            rect.Width,
-                            rect.Height
-                        );
+                        area.InnerPlotPosition
+                            .SetPositionNoAuto(rect.X, rect.Y, rect.Width, rect.Height);
                     }
 
                     // Start Svg Selection mode
@@ -3356,8 +3337,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             // Call Paint event
             if (!selection)
             {
-                common
-                    .Chart
+                common.Chart
                     .CallOnPostPaint(
                         new ChartPaintEventArgs(
                             dataSeries[typeSeries[0]],

@@ -135,8 +135,7 @@ namespace MonoTests.System.ServiceModel
             Assert.IsNotNull(factory.Endpoint.Behaviors.Find<CallbackDebugBehavior>(), "#04");
             Assert.AreEqual(
                 true,
-                factory
-                    .Endpoint
+                factory.Endpoint
                     .Behaviors
                     .Find<CallbackDebugBehavior>()
                     .IncludeExceptionDetailInFaults,
@@ -146,8 +145,7 @@ namespace MonoTests.System.ServiceModel
             Assert.IsNotNull(factory.Endpoint.Behaviors.Find<CallbackDebugBehavior>(), "#04");
             Assert.AreEqual(
                 false,
-                factory
-                    .Endpoint
+                factory.Endpoint
                     .Behaviors
                     .Find<CallbackDebugBehavior>()
                     .IncludeExceptionDetailInFaults,

@@ -612,8 +612,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
                     ? candidates.FirstOrDefault()
                     : candidates.FirstOrDefault(c =>
                         parameterTypeNames.SequenceEqual(
-                            ((MethodSymbol)c)
-                                .Parameters
+                            ((MethodSymbol)c).Parameters
                                 .Select(p => p.TypeWithAnnotations.Type.Name)
                         )
                     );
@@ -717,17 +716,14 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
             int ilOffset = 0
         )
         {
-            var peCompilation = runtime
-                .Modules
+            var peCompilation = runtime.Modules
                 .SelectAsArray(m => m.MetadataBlock)
                 .ToCompilation(default(Guid), MakeAssemblyReferencesKind.AllAssemblies);
-            var peMethod = peCompilation
-                .GlobalNamespace
+            var peMethod = peCompilation.GlobalNamespace
                 .GetMember<PEMethodSymbol>(qualifiedMethodName);
             var peModule = (PEModuleSymbol)peMethod.ContainingModule;
 
-            var symReader = runtime
-                .Modules
+            var symReader = runtime.Modules
                 .Single(mi => mi.ModuleVersionId == peModule.Module.GetModuleVersionIdOrThrow())
                 .SymReader;
             var symbolProvider = new CSharpEESymbolProvider(
@@ -756,8 +752,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
             var module = AssemblyMetadata.CreateFromImage(assembly).GetModules().Single().Module;
 
             var typeName = method.ContainingType.Name;
-            var typeHandle = module
-                .MetadataReader
+            var typeHandle = module.MetadataReader
                 .TypeDefinitions
                 .Single(handle => module.GetTypeDefNameOrThrow(handle) == typeName);
 

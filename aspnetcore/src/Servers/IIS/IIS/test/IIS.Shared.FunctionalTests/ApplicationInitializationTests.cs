@@ -78,8 +78,7 @@ public class ApplicationInitializationTests : IISFunctionalTestBase
             var baseDeploymentParameters = Fixture.GetBaseDeploymentParameters(hostingModel);
             EnablePreload(baseDeploymentParameters);
 
-            baseDeploymentParameters
-                .ServerConfigActionList
+            baseDeploymentParameters.ServerConfigActionList
                 .Add(
                     (config, _) =>
                     {
@@ -105,8 +104,7 @@ public class ApplicationInitializationTests : IISFunctionalTestBase
     private static void EnablePreload(IISDeploymentParameters baseDeploymentParameters)
     {
         baseDeploymentParameters.EnsureSection("applicationInitialization", "system.webServer");
-        baseDeploymentParameters
-            .ServerConfigActionList
+        baseDeploymentParameters.ServerConfigActionList
             .Add(
                 (config, _) =>
                 {

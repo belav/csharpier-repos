@@ -80,8 +80,7 @@ namespace System.Data.Metadata.Edm
                 "LoadAssembly shouldn't be called with assembly having no schema attribute"
             );
             Debug.Assert(
-                !SessionData
-                    .KnownAssemblies
+                !SessionData.KnownAssemblies
                     .Contains(
                         SourceAssembly,
                         SessionData.ObjectItemAssemblyLoaderFactory,
@@ -115,12 +114,10 @@ namespace System.Data.Metadata.Edm
                 // Check to make sure the CLR type we got is the same as the given one
                 if (edmType.ClrType != clrType)
                 {
-                    SessionData
-                        .EdmItemErrors
+                    SessionData.EdmItemErrors
                         .Add(
                             new EdmItemError(
-                                System
-                                    .Data
+                                System.Data
                                     .Entity
                                     .Strings
                                     .NewTypeConflictsWithExistingType(
@@ -191,14 +188,12 @@ namespace System.Data.Metadata.Edm
 
             ImmutableAssemblyCacheEntry immutableCacheEntry;
             if (
-                SessionData
-                    .LockedAssemblyCache
+                SessionData.LockedAssemblyCache
                     .TryGetValue(clrType.Assembly, out immutableCacheEntry)
             )
             {
                 Debug.Assert(
-                    SessionData
-                        .KnownAssemblies
+                    SessionData.KnownAssemblies
                         .Contains(
                             clrType.Assembly,
                             SessionData.LoaderCookie,
@@ -239,8 +234,7 @@ namespace System.Data.Metadata.Edm
                 // failing at a much later point of OC type mapping lookup with a super generic error message
                 if (type.IsGenericType)
                 {
-                    SessionData
-                        .EdmItemErrors
+                    SessionData.EdmItemErrors
                         .Add(
                             new EdmItemError(
                                 System.Data.Entity.Strings.GenericTypeNotSupported(type.FullName),
@@ -291,12 +285,10 @@ namespace System.Data.Metadata.Edm
                 // return error if the role names are the same
                 if (roleAttribute.Role1Name == roleAttribute.Role2Name)
                 {
-                    SessionData
-                        .EdmItemErrors
+                    SessionData.EdmItemErrors
                         .Add(
                             new EdmItemError(
-                                System
-                                    .Data
+                                System.Data
                                     .Entity
                                     .Strings
                                     .SameRoleNameOnRelationshipAttribute(
@@ -357,12 +349,10 @@ namespace System.Data.Metadata.Edm
             EntityType entityType;
             if (!TryGetRelationshipEndEntityType(clrType, out entityType))
             {
-                SessionData
-                    .EdmItemErrors
+                SessionData.EdmItemErrors
                     .Add(
                         new EdmItemError(
-                            System
-                                .Data
+                            System.Data
                                 .Entity
                                 .Strings
                                 .RoleTypeInEdmRelationshipAttributeIsInvalidType(
@@ -413,12 +403,10 @@ namespace System.Data.Metadata.Edm
             {
                 if (clrType.IsNested)
                 {
-                    SessionData
-                        .EdmItemErrors
+                    SessionData.EdmItemErrors
                         .Add(
                             new EdmItemError(
-                                System
-                                    .Data
+                                System.Data
                                     .Entity
                                     .Strings
                                     .NestedClassNotSupported(
@@ -436,8 +424,7 @@ namespace System.Data.Metadata.Edm
                     : typeAttribute.Name;
                 if (String.IsNullOrEmpty(typeAttribute.NamespaceName) && clrType.Namespace == null)
                 {
-                    SessionData
-                        .EdmItemErrors
+                    SessionData.EdmItemErrors
                         .Add(new EdmItemError(Strings.Validator_TypeHasNoNamespace, edmType));
                     return;
                 }
@@ -466,16 +453,14 @@ namespace System.Data.Metadata.Edm
                     // a valid Edm primitive types (e.g. ulong)
                     PrimitiveType underlyingEnumType;
                     if (
-                        !ClrProviderManifest
-                            .Instance
+                        !ClrProviderManifest.Instance
                             .TryGetPrimitiveType(
                                 clrType.GetEnumUnderlyingType(),
                                 out underlyingEnumType
                             )
                     )
                     {
-                        SessionData
-                            .EdmItemErrors
+                        SessionData.EdmItemErrors
                             .Add(
                                 new EdmItemError(
                                     Strings.Validator_UnsupportedEnumUnderlyingType(
@@ -548,12 +533,10 @@ namespace System.Data.Metadata.Edm
         {
             if (roleAttribute.RelationshipName == null)
             {
-                SessionData
-                    .EdmItemErrors
+                SessionData.EdmItemErrors
                     .Add(
                         new EdmItemError(
-                            System
-                                .Data
+                            System.Data
                                 .Entity
                                 .Strings
                                 .NullRelationshipNameforEdmRelationshipAttribute(
@@ -569,12 +552,10 @@ namespace System.Data.Metadata.Edm
 
             if (roleAttribute.RelationshipNamespaceName == null)
             {
-                SessionData
-                    .EdmItemErrors
+                SessionData.EdmItemErrors
                     .Add(
                         new EdmItemError(
-                            System
-                                .Data
+                            System.Data
                                 .Entity
                                 .Strings
                                 .NullParameterForEdmRelationshipAttribute(
@@ -589,12 +570,10 @@ namespace System.Data.Metadata.Edm
 
             if (roleAttribute.Role1Name == null)
             {
-                SessionData
-                    .EdmItemErrors
+                SessionData.EdmItemErrors
                     .Add(
                         new EdmItemError(
-                            System
-                                .Data
+                            System.Data
                                 .Entity
                                 .Strings
                                 .NullParameterForEdmRelationshipAttribute(
@@ -609,12 +588,10 @@ namespace System.Data.Metadata.Edm
 
             if (roleAttribute.Role1Type == null)
             {
-                SessionData
-                    .EdmItemErrors
+                SessionData.EdmItemErrors
                     .Add(
                         new EdmItemError(
-                            System
-                                .Data
+                            System.Data
                                 .Entity
                                 .Strings
                                 .NullParameterForEdmRelationshipAttribute(
@@ -629,12 +606,10 @@ namespace System.Data.Metadata.Edm
 
             if (roleAttribute.Role2Name == null)
             {
-                SessionData
-                    .EdmItemErrors
+                SessionData.EdmItemErrors
                     .Add(
                         new EdmItemError(
-                            System
-                                .Data
+                            System.Data
                                 .Entity
                                 .Strings
                                 .NullParameterForEdmRelationshipAttribute(
@@ -649,12 +624,10 @@ namespace System.Data.Metadata.Edm
 
             if (roleAttribute.Role2Type == null)
             {
-                SessionData
-                    .EdmItemErrors
+                SessionData.EdmItemErrors
                     .Add(
                         new EdmItemError(
-                            System
-                                .Data
+                            System.Data
                                 .Entity
                                 .Strings
                                 .NullParameterForEdmRelationshipAttribute(
@@ -698,8 +671,7 @@ namespace System.Data.Metadata.Edm
         {
             // Look at both public, internal, and private instanced properties declared at this type, inherited members
             // are not looked at.  Internal and private properties are also looked at because they are also schematized fields
-            PropertyInfo[] properties = structuralType
-                .ClrType
+            PropertyInfo[] properties = structuralType.ClrType
                 .GetProperties(PropertyReflectionBindingFlags);
 
             foreach (PropertyInfo property in properties)
@@ -813,12 +785,10 @@ namespace System.Data.Metadata.Edm
             {
                 // Once an error is detected the property does not need to be validated further, just add to the errors
                 // collection and continue with the next property. The failure will cause an exception to be thrown later during validation of all of the types.
-                SessionData
-                    .EdmItemErrors
+                SessionData.EdmItemErrors
                     .Add(
                         new EdmItemError(
-                            System
-                                .Data
+                            System.Data
                                 .Entity
                                 .Strings
                                 .Validator_OSpace_InvalidNavPropReturnType(
@@ -842,8 +812,7 @@ namespace System.Data.Metadata.Edm
             EdmMember member = null;
             EdmType type;
             if (
-                SessionData
-                    .TypesInLoading
+                SessionData.TypesInLoading
                     .TryGetValue(
                         attribute.RelationshipNamespaceName + "." + attribute.RelationshipName,
                         out type
@@ -878,12 +847,10 @@ namespace System.Data.Metadata.Edm
                     }
                     else
                     {
-                        SessionData
-                            .EdmItemErrors
+                        SessionData.EdmItemErrors
                             .Add(
                                 new EdmItemError(
-                                    System
-                                        .Data
+                                    System.Data
                                         .Entity
                                         .Strings
                                         .TargetRoleNameInNavigationPropertyNotValid(
@@ -900,17 +867,14 @@ namespace System.Data.Metadata.Edm
 
                     if (
                         member != null
-                        && ((RefType)navigationProperty.FromEndMember.TypeUsage.EdmType)
-                            .ElementType
+                        && ((RefType)navigationProperty.FromEndMember.TypeUsage.EdmType).ElementType
                             .ClrType != declaringType.ClrType
                     )
                     {
-                        SessionData
-                            .EdmItemErrors
+                        SessionData.EdmItemErrors
                             .Add(
                                 new EdmItemError(
-                                    System
-                                        .Data
+                                    System.Data
                                         .Entity
                                         .Strings
                                         .NavigationPropertyRelationshipEndTypeMismatch(
@@ -920,12 +884,10 @@ namespace System.Data.Metadata.Edm
                                             navigationProperty.FromEndMember.Name,
                                             (
                                                 (RefType)
-                                                    navigationProperty
-                                                        .FromEndMember
+                                                    navigationProperty.FromEndMember
                                                         .TypeUsage
                                                         .EdmType
-                                            )
-                                                .ElementType
+                                            ).ElementType
                                                 .ClrType
                                         ),
                                     navigationProperty
@@ -937,12 +899,10 @@ namespace System.Data.Metadata.Edm
             }
             else
             {
-                SessionData
-                    .EdmItemErrors
+                SessionData.EdmItemErrors
                     .Add(
                         new EdmItemError(
-                            System
-                                .Data
+                            System.Data
                                 .Entity
                                 .Strings
                                 .RelationshipNameInNavigationPropertyNotValid(
@@ -992,12 +952,10 @@ namespace System.Data.Metadata.Edm
             {
                 // This property does not need to be validated further, just add to the errors collection and continue with the next property
                 // This failure will cause an exception to be thrown later during validation of all of the types
-                SessionData
-                    .EdmItemErrors
+                SessionData.EdmItemErrors
                     .Add(
                         new EdmItemError(
-                            System
-                                .Data
+                            System.Data
                                 .Entity
                                 .Strings
                                 .Validator_OSpace_ScalarPropertyNotPrimitive(
@@ -1057,12 +1015,10 @@ namespace System.Data.Metadata.Edm
                 || !Helper.IsEnumType(propertyType)
             )
             {
-                SessionData
-                    .EdmItemErrors
+                SessionData.EdmItemErrors
                     .Add(
                         new EdmItemError(
-                            System
-                                .Data
+                            System.Data
                                 .Entity
                                 .Strings
                                 .Validator_OSpace_ScalarPropertyNotPrimitive(
@@ -1116,12 +1072,10 @@ namespace System.Data.Metadata.Edm
             {
                 // This property does not need to be validated further, just add to the errors collection and continue with the next property
                 // This failure will cause an exception to be thrown later during validation of all of the types
-                SessionData
-                    .EdmItemErrors
+                SessionData.EdmItemErrors
                     .Add(
                         new EdmItemError(
-                            System
-                                .Data
+                            System.Data
                                 .Entity
                                 .Strings
                                 .Validator_OSpace_ComplexPropertyNotComplex(

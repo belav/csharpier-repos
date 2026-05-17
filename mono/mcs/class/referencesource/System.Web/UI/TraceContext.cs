@@ -362,8 +362,7 @@ namespace System.Web
                 // Send to IIS tracing
                 if (_context != null && _context.WorkerRequest != null)
                 {
-                    _context
-                        .WorkerRequest
+                    _context.WorkerRequest
                         .RaiseTraceEvent(
                             isWarning
                                 ? IntegratedTraceType.TraceWarn
@@ -637,8 +636,7 @@ namespace System.Web
 
             // request cookie info
             HttpCookieCollection cookieCollection = new HttpCookieCollection();
-            _context
-                .Request
+            _context.Request
                 .FillInCookiesCollection(
                     cookieCollection,
                     false /*includeResponse */

@@ -57,11 +57,9 @@ namespace System.ServiceModel.Administration
                     string host = uri.Host;
 
                     if (
-                        !AdministrationStrings
-                            .Localhost
+                        !AdministrationStrings.Localhost
                             .Equals(host, StringComparison.OrdinalIgnoreCase)
-                        && !AppDomainInfo
-                            .Current
+                        && !AppDomainInfo.Current
                             .MachineName
                             .Equals(host, StringComparison.OrdinalIgnoreCase)
                     )
@@ -1106,8 +1104,7 @@ namespace System.ServiceModel.Administration
                     string operationName = argument as string;
                     if (String.IsNullOrEmpty(operationName))
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new WbemInvalidParameterException(AdministrationStrings.Operation)
                             );

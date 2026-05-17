@@ -90,8 +90,7 @@ namespace MonoTests.System.Data.OracleClient
 
             oleDBda.SelectCommand.Parameters.Add(new OracleParameter("@EmployeeId", DbType.Int32));
             oleDBda.SelectCommand.Parameters["@EmployeeId"].SourceColumn = "EmployeeId";
-            oleDBda
-                .SelectCommand
+            oleDBda.SelectCommand
                 .Parameters
                 .Add(new OracleParameter("@FirstName", OracleType.VarChar, 10));
 

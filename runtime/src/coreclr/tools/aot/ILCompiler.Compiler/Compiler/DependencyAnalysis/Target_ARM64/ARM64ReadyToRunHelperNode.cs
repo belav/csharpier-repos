@@ -59,8 +59,7 @@ namespace ILCompiler.DependencyAnalysis
                     {
                         MetadataType target = (MetadataType)Target;
 
-                        bool hasLazyStaticConstructor = factory
-                            .PreinitializationManager
+                        bool hasLazyStaticConstructor = factory.PreinitializationManager
                             .HasLazyStaticConstructor(target);
                         encoder.EmitMOV(
                             encoder.TargetRegister.Result,
@@ -375,14 +374,12 @@ namespace ILCompiler.DependencyAnalysis
                     encoder.Builder.EmitUInt(0xd53bd040);
 
                     // add  x0, x0, #:tprel_hi12:tlsRoot, lsl #12
-                    encoder
-                        .Builder
+                    encoder.Builder
                         .EmitReloc(tlsRoot, RelocType.IMAGE_REL_AARCH64_TLSLE_ADD_TPREL_HI12);
                     encoder.Builder.EmitUInt(0x91400000);
 
                     // add  x1, x0, #:tprel_lo12_nc:tlsRoot, lsl #0
-                    encoder
-                        .Builder
+                    encoder.Builder
                         .EmitReloc(tlsRoot, RelocType.IMAGE_REL_AARCH64_TLSLE_ADD_TPREL_LO12_NC);
                     encoder.Builder.EmitUInt(0x91000001);
                 }
@@ -397,20 +394,17 @@ namespace ILCompiler.DependencyAnalysis
                     encoder.Builder.EmitUInt(0xd53bd041);
 
                     // adrp    x0, :tlsdesc:tlsRoot
-                    encoder
-                        .Builder
+                    encoder.Builder
                         .EmitReloc(tlsRoot, RelocType.IMAGE_REL_AARCH64_TLSDESC_ADR_PAGE21);
                     encoder.Builder.EmitUInt(0x90000000);
 
                     // ldr     x2, [x0, #:tlsdesc_lo12:tlsRoot]
-                    encoder
-                        .Builder
+                    encoder.Builder
                         .EmitReloc(tlsRoot, RelocType.IMAGE_REL_AARCH64_TLSDESC_LD64_LO12);
                     encoder.Builder.EmitUInt(0xf9400002);
 
                     // add     x0, x0, :tlsdesc_lo12:tlsRoot
-                    encoder
-                        .Builder
+                    encoder.Builder
                         .EmitReloc(tlsRoot, RelocType.IMAGE_REL_AARCH64_TLSDESC_ADD_LO12);
                     encoder.Builder.EmitUInt(0x91000000);
 

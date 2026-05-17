@@ -702,8 +702,7 @@ public class FormFeatureTests
     private Stream CreateFile(int size)
     {
         var stream = new MemoryStream(size);
-        var bytes = Encoding
-            .ASCII
+        var bytes = Encoding.ASCII
             .GetBytes(
                 "HelloWorld_ABCDEFGHIJKLMNOPQRSTUVWXYZ.abcdefghijklmnopqrstuvwxyz,0123456789;"
             );

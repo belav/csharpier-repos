@@ -112,8 +112,7 @@ namespace System.Security.Cryptography.Asn1
                     new Asn1Tag(TagClass.ContextSpecific, 0)
                 );
                 System.Security.Cryptography.Asn1.DirectoryStringAsn tmpNameAssigner;
-                System
-                    .Security
+                System.Security
                     .Cryptography
                     .Asn1
                     .DirectoryStringAsn
@@ -124,8 +123,7 @@ namespace System.Security.Cryptography.Asn1
             }
 
             explicitReader = sequenceReader.ReadSequence(new Asn1Tag(TagClass.ContextSpecific, 1));
-            System
-                .Security
+            System.Security
                 .Cryptography
                 .Asn1
                 .DirectoryStringAsn

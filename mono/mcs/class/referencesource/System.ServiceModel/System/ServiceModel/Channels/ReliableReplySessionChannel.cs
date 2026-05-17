@@ -250,13 +250,14 @@ namespace System.ServiceModel.Channels
 
         IAsyncResult BeginUnregisterChannel(TimeSpan timeout, AsyncCallback callback, object state)
         {
-            return this.listener.OnReliableChannelBeginClose(
-                this.session.InputID,
-                this.session.OutputID,
-                timeout,
-                callback,
-                state
-            );
+            return this.listener
+                .OnReliableChannelBeginClose(
+                    this.session.InputID,
+                    this.session.OutputID,
+                    timeout,
+                    callback,
+                    state
+                );
         }
 
         Message CreateAcknowledgement(SequenceRangeCollection ranges)
@@ -349,9 +350,8 @@ namespace System.ServiceModel.Channels
         {
             lock (this.ThisLock)
             {
-                bool haveRequestInDictionary = this.requestsByRequestSequenceNumber.ContainsKey(
-                    requestSeqNum
-                );
+                bool haveRequestInDictionary = this.requestsByRequestSequenceNumber
+                    .ContainsKey(requestSeqNum);
 
                 if (
                     this.listener.ReliableMessagingVersion
@@ -587,11 +587,12 @@ namespace System.ServiceModel.Channels
             }
             this.session.Close(timeoutHelper.RemainingTime());
             this.binder.Close(timeoutHelper.RemainingTime(), MaskingMode.Handled);
-            this.listener.OnReliableChannelClose(
-                this.session.InputID,
-                this.session.OutputID,
-                timeoutHelper.RemainingTime()
-            );
+            this.listener
+                .OnReliableChannelClose(
+                    this.session.InputID,
+                    this.session.OutputID,
+                    timeoutHelper.RemainingTime()
+                );
             base.OnClose(timeoutHelper.RemainingTime());
         }
 
@@ -713,8 +714,7 @@ namespace System.ServiceModel.Channels
                     MessageNumberRolloverFault fault = new MessageNumberRolloverFault(
                         this.session.OutputID
                     );
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(fault.CreateException());
                 }
                 context.SetReplySequenceNumber(++this.nextReplySequenceNumber);
@@ -789,9 +789,10 @@ namespace System.ServiceModel.Channels
                     for (int i = 0; i < this.acked.Count; i++)
                     {
                         reply = this.acked[i];
-                        this.requestsByRequestSequenceNumber.Remove(
-                            this.requestsByReplySequenceNumber[reply].RequestSequenceNumber
-                        );
+                        this.requestsByRequestSequenceNumber
+                            .Remove(
+                                this.requestsByReplySequenceNumber[reply].RequestSequenceNumber
+                            );
                         this.requestsByReplySequenceNumber.Remove(reply);
                     }
 
@@ -804,9 +805,8 @@ namespace System.ServiceModel.Channels
                             !this.lastReplyAcked && (this.lastReplySequenceNumber != Int64.MinValue)
                         )
                         {
-                            this.lastReplyAcked = info.Ranges.Contains(
-                                this.lastReplySequenceNumber
-                            );
+                            this.lastReplyAcked = info.Ranges
+                                .Contains(this.lastReplySequenceNumber);
                         }
                     }
                 }
@@ -873,10 +873,8 @@ namespace System.ServiceModel.Channels
                             if (isTerminate)
                             {
                                 if (
-                                    this.connection.SetTerminateSequenceLast(
-                                        last,
-                                        out isLastLargeEnough
-                                    )
+                                    this.connection
+                                        .SetTerminateSequenceLast(last, out isLastLargeEnough)
                                 )
                                 {
                                     scheduleShutdown = true;
@@ -1279,10 +1277,8 @@ namespace System.ServiceModel.Channels
                         PerformanceCounters.MessageDropped(this.perfCounterId);
 
                     if (
-                        !this.requestsByRequestSequenceNumber.TryGetValue(
-                            info.SequenceNumber,
-                            out reliableContext
-                        )
+                        !this.requestsByRequestSequenceNumber
+                            .TryGetValue(info.SequenceNumber, out reliableContext)
                     )
                     {
                         if (
@@ -1342,14 +1338,10 @@ namespace System.ServiceModel.Channels
 
                     if (!isLastOnly)
                     {
-                        needDispatch = this.deliveryStrategy.Enqueue(
-                            reliableContext,
-                            requestSequenceNumber
-                        );
-                        this.requestsByRequestSequenceNumber.Add(
-                            info.SequenceNumber,
-                            reliableContext
-                        );
+                        needDispatch = this.deliveryStrategy
+                            .Enqueue(reliableContext, requestSequenceNumber);
+                        this.requestsByRequestSequenceNumber
+                            .Add(info.SequenceNumber, reliableContext);
                     }
                     else
                     {
@@ -1476,11 +1468,8 @@ namespace System.ServiceModel.Channels
         {
             while (true)
             {
-                IAsyncResult result = this.binder.BeginTryReceive(
-                    TimeSpan.MaxValue,
-                    onReceiveCompleted,
-                    this
-                );
+                IAsyncResult result = this.binder
+                    .BeginTryReceive(TimeSpan.MaxValue, onReceiveCompleted, this);
 
                 if (!result.CompletedSynchronously)
                 {
@@ -1682,8 +1671,7 @@ namespace System.ServiceModel.Channels
                         if (this.Aborted)
                         {
                             needAbort = false;
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
                                     new CommunicationObjectAbortedException(
                                         SR.GetString(SR.RequestContextAborted)
@@ -1822,8 +1810,7 @@ namespace System.ServiceModel.Channels
                         if (this.Aborted)
                         {
                             needAbort = false;
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
                                     new CommunicationObjectAbortedException(
                                         SR.GetString(SR.RequestContextAborted)
@@ -1906,12 +1893,13 @@ namespace System.ServiceModel.Channels
                 if (this.bufferedReply != null)
                 {
                     reply = this.bufferedReply.CreateMessage();
-                    this.channel.PrepareReplyMessage(
-                        this.replySequenceNumber,
-                        this.isLastReply,
-                        this.ranges,
-                        reply
-                    );
+                    this.channel
+                        .PrepareReplyMessage(
+                            this.replySequenceNumber,
+                            this.isLastReply,
+                            this.ranges,
+                            reply
+                        );
                 }
                 else
                 {
@@ -2149,12 +2137,8 @@ namespace System.ServiceModel.Channels
                 try
                 {
                     this.channel.binder.SetMaskingMode(this.requestContext, MaskingMode.Handled);
-                    IAsyncResult result = this.requestContext.BeginReply(
-                        this.asyncMessage,
-                        timeout,
-                        callback,
-                        state
-                    );
+                    IAsyncResult result = this.requestContext
+                        .BeginReply(this.asyncMessage, timeout, callback, state);
                     throwing = false;
                     return result;
                 }

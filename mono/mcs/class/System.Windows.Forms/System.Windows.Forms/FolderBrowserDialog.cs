@@ -357,8 +357,7 @@ namespace System.Windows.Forms
                             break;
                         case Environment.SpecialFolder.Recent:
                             root_node = new FBTreeNode("My Recent Documents");
-                            root_node.RealPath = ThemeEngine
-                                .Current
+                            root_node.RealPath = ThemeEngine.Current
                                 .Places(UIIcon.PlacesRecentDocuments);
                             root_path = MWFVFS.RecentlyUsedPrefix;
                             break;

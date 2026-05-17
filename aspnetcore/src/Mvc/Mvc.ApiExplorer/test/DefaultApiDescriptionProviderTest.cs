@@ -1246,8 +1246,7 @@ public class DefaultApiDescriptionProviderTest
         Assert.Equal(typeof(Order), responseType.Type);
         Assert.NotNull(responseType.ModelMetadata);
         var apiResponseFormat = Assert.Single(
-            responseType
-                .ApiResponseFormats
+            responseType.ApiResponseFormats
                 .Where(responseFormat => responseFormat.MediaType == "text/json")
         );
         Assert.Same(formatters[0], apiResponseFormat.Formatter);
@@ -2409,8 +2408,7 @@ public class DefaultApiDescriptionProviderTest
                 );
                 if (bindingInfo != null)
                 {
-                    action
-                        .BoundProperties
+                    action.BoundProperties
                         .Add(
                             new ParameterDescriptor()
                             {
@@ -2434,8 +2432,7 @@ public class DefaultApiDescriptionProviderTest
         action.Parameters = new List<ParameterDescriptor>();
         foreach (var parameter in action.MethodInfo.GetParameters())
         {
-            action
-                .Parameters
+            action.Parameters
                 .Add(
                     new ControllerParameterDescriptor()
                     {
@@ -2454,8 +2451,7 @@ public class DefaultApiDescriptionProviderTest
 
     private IEnumerable<string> GetSortedMediaTypes(ApiResponseType apiResponseType)
     {
-        return apiResponseType
-            .ApiResponseFormats
+        return apiResponseType.ApiResponseFormats
             .OrderBy(responseType => responseType.MediaType)
             .Select(responseType => responseType.MediaType);
     }

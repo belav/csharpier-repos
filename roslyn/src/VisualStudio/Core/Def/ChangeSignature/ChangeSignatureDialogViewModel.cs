@@ -62,8 +62,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ChangeSignature
             _classificationFormatMap = classificationFormatMap;
             _classificationTypeMap = classificationTypeMap;
 
-            _notificationService = document
-                .Project
+            _notificationService = document.Project
                 .Solution
                 .Services
                 .GetRequiredService<INotificationService>();
@@ -406,8 +405,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ChangeSignature
                 {
                     case ExistingParameterViewModel existingParameter:
                         displayParts.AddRange(
-                            existingParameter
-                                .ParameterSymbol
+                            existingParameter.ParameterSymbol
                                 .ToDisplayParts(s_parameterDisplayFormat)
                         );
                         break;
@@ -560,8 +558,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ChangeSignature
                     .OfType<ExistingParameterViewModel>()
                     .Select(p => p.ParameterSymbol)
                     .SequenceEqual(
-                        _originalParameterConfiguration
-                            .ParametersWithoutDefaultValues
+                        _originalParameterConfiguration.ParametersWithoutDefaultValues
                             .Cast<ExistingParameter>()
                             .Select(p => p.Symbol)
                     )
@@ -569,8 +566,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ChangeSignature
                     .OfType<ExistingParameterViewModel>()
                     .Select(p => p.ParameterSymbol)
                     .SequenceEqual(
-                        _originalParameterConfiguration
-                            .RemainingEditableParameters
+                        _originalParameterConfiguration.RemainingEditableParameters
                             .Cast<ExistingParameter>()
                             .Select(p => p.Symbol)
                     );

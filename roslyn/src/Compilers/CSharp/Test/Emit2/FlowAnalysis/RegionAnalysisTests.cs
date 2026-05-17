@@ -3062,8 +3062,7 @@ class C
             var analysis = CompileAndGetModelAndConstructorInitializer(
                 program,
                 (model, constructorInitializer) =>
-                    global::Microsoft
-                        .CodeAnalysis
+                    global::Microsoft.CodeAnalysis
                         .ModelExtensions
                         .AnalyzeDataFlow(model, constructorInitializer)
             );
@@ -3209,8 +3208,7 @@ record C(int x, int y) /*<bind>*/ : Base(x + y) /*</bind>*/;
             var analysis = CompileAndGetModelAndPrimaryConstructorInitializer(
                 program,
                 (model, primaryConstructorInitializer) =>
-                    global::Microsoft
-                        .CodeAnalysis
+                    global::Microsoft.CodeAnalysis
                         .ModelExtensions
                         .AnalyzeDataFlow(model, primaryConstructorInitializer)
             );

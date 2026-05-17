@@ -51,8 +51,7 @@ namespace Microsoft.CodeAnalysis.UnitTests.EmbeddedLanguages.RegularExpressions.
             static void NoMatchWorker(string value)
             {
                 Assert.False(
-                    RegexLanguageDetector
-                        .CommentDetector
+                    RegexLanguageDetector.CommentDetector
                         .TryMatch(value, out _, out var stringOptions)
                         && EmbeddedLanguageCommentOptions<RegexOptions>.TryGetOptions(
                             stringOptions,

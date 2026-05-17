@@ -37,8 +37,7 @@ namespace System.Web.Http.ContentNegotiation
             };
             request.RequestUri = new Uri(baseAddress + "/CustomFormatterTests/EchoOrder");
             request.Method = HttpMethod.Post;
-            request
-                .Headers
+            request.Headers
                 .Accept
                 .Add(new MediaTypeWithQualityHeaderValue("text/plainwithversioninfo"));
 
@@ -119,8 +118,7 @@ namespace System.Web.Http.ContentNegotiation
         {
             baseAddress = "http://localhost/";
             config = new HttpSelfHostConfiguration(baseAddress);
-            config
-                .Routes
+            config.Routes
                 .MapHttpRoute(
                     "Default",
                     "{controller}/{action}",

@@ -69,8 +69,7 @@ namespace System.Runtime.InteropServices
 
             fixed (char* pwzChar = s)
             {
-                nb = Interop
-                    .Kernel32
+                nb = Interop.Kernel32
                     .WideCharToMultiByte(
                         Interop.Kernel32.CP_ACP,
                         flags,
@@ -105,8 +104,7 @@ namespace System.Runtime.InteropServices
             {
                 fixed (char* pChars = chars)
                 {
-                    byteLength = Interop
-                        .Kernel32
+                    byteLength = Interop.Kernel32
                         .WideCharToMultiByte(
                             Interop.Kernel32.CP_ACP,
                             Interop.Kernel32.WC_NO_BEST_FIT_CHARS,
@@ -139,8 +137,7 @@ namespace System.Runtime.InteropServices
                 fixed (char* pChars = chars)
                 fixed (byte* pBytes = bytes)
                 {
-                    byteLength = Interop
-                        .Kernel32
+                    byteLength = Interop.Kernel32
                         .WideCharToMultiByte(
                             Interop.Kernel32.CP_ACP,
                             Interop.Kernel32.WC_NO_BEST_FIT_CHARS,

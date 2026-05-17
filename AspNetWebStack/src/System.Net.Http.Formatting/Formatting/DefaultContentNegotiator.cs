@@ -95,8 +95,7 @@ namespace System.Net.Http.Formatting
                 }
 
                 MediaTypeHeaderValue bestMediaType = bestFormatterMatch.MediaType;
-                MediaTypeFormatter bestFormatter = bestFormatterMatch
-                    .Formatter
+                MediaTypeFormatter bestFormatter = bestFormatterMatch.Formatter
                     .GetPerRequestFormatterInstance(type, request, bestMediaType);
                 return new ContentNegotiationResult(bestFormatter, bestMediaType);
             }
@@ -368,11 +367,9 @@ namespace System.Net.Http.Formatting
                             encoding != null
                             && acceptCharset.Quality != FormattingUtilities.NoMatch
                             && (
-                                acceptCharset
-                                    .Value
+                                acceptCharset.Value
                                     .Equals(encoding.WebName, StringComparison.OrdinalIgnoreCase)
-                                || acceptCharset
-                                    .Value
+                                || acceptCharset.Value
                                     .Equals("*", StringComparison.OrdinalIgnoreCase)
                             )
                         )

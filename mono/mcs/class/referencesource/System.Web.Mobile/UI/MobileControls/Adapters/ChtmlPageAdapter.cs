@@ -219,8 +219,7 @@ namespace System.Web.UI.MobileControls.Adapters
                     collection.Add(postEventArgumentID, queryString.Get(i));
                 }
                 else if (
-                    Constants
-                        .UniqueFilePathSuffixVariable
+                    Constants.UniqueFilePathSuffixVariable
                         .StartsWith(name, StringComparison.Ordinal)
                 )
                 {

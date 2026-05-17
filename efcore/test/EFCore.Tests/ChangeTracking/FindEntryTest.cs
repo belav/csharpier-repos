@@ -945,24 +945,18 @@ public class FindEntryTest
 
         var entities = new[]
         {
-            setA.Attach(
-                new AlternateNullableIntKey { Id = Guid.NewGuid(), AlternateId = 87 }
-            ).Entity,
-            setA.Attach(
-                new AlternateNullableIntKey { Id = Guid.NewGuid(), AlternateId = 88 }
-            ).Entity,
-            setA.Attach(
-                new AlternateNullableIntKey { Id = Guid.NewGuid(), AlternateId = 89 }
-            ).Entity,
-            setB.Attach(
-                new AlternateNullableIntKey { Id = Guid.NewGuid(), AlternateId = 87 }
-            ).Entity,
-            setB.Attach(
-                new AlternateNullableIntKey { Id = Guid.NewGuid(), AlternateId = 88 }
-            ).Entity,
-            setB.Attach(
-                new AlternateNullableIntKey { Id = Guid.NewGuid(), AlternateId = 89 }
-            ).Entity,
+            setA.Attach(new AlternateNullableIntKey { Id = Guid.NewGuid(), AlternateId = 87 })
+                .Entity,
+            setA.Attach(new AlternateNullableIntKey { Id = Guid.NewGuid(), AlternateId = 88 })
+                .Entity,
+            setA.Attach(new AlternateNullableIntKey { Id = Guid.NewGuid(), AlternateId = 89 })
+                .Entity,
+            setB.Attach(new AlternateNullableIntKey { Id = Guid.NewGuid(), AlternateId = 87 })
+                .Entity,
+            setB.Attach(new AlternateNullableIntKey { Id = Guid.NewGuid(), AlternateId = 88 })
+                .Entity,
+            setB.Attach(new AlternateNullableIntKey { Id = Guid.NewGuid(), AlternateId = 89 })
+                .Entity,
         };
 
         AssertSingle(
@@ -1008,30 +1002,22 @@ public class FindEntryTest
         var setB = context.Set<ForeignNullableIntKey>("ForeignNullableIntKeyB");
         var entities = new[]
         {
-            setA.Attach(
-                new ForeignNullableIntKey { Id = Guid.NewGuid(), NullableIntKeyId = 87 }
-            ).Entity,
-            setA.Attach(
-                new ForeignNullableIntKey { Id = Guid.NewGuid(), NullableIntKeyId = 88 }
-            ).Entity,
-            setA.Attach(
-                new ForeignNullableIntKey { Id = Guid.NewGuid(), NullableIntKeyId = 88 }
-            ).Entity,
-            setA.Attach(
-                new ForeignNullableIntKey { Id = Guid.NewGuid(), NullableIntKeyId = 89 }
-            ).Entity,
-            setB.Attach(
-                new ForeignNullableIntKey { Id = Guid.NewGuid(), NullableIntKeyId = 87 }
-            ).Entity,
-            setB.Attach(
-                new ForeignNullableIntKey { Id = Guid.NewGuid(), NullableIntKeyId = 88 }
-            ).Entity,
-            setB.Attach(
-                new ForeignNullableIntKey { Id = Guid.NewGuid(), NullableIntKeyId = 88 }
-            ).Entity,
-            setB.Attach(
-                new ForeignNullableIntKey { Id = Guid.NewGuid(), NullableIntKeyId = 89 }
-            ).Entity,
+            setA.Attach(new ForeignNullableIntKey { Id = Guid.NewGuid(), NullableIntKeyId = 87 })
+                .Entity,
+            setA.Attach(new ForeignNullableIntKey { Id = Guid.NewGuid(), NullableIntKeyId = 88 })
+                .Entity,
+            setA.Attach(new ForeignNullableIntKey { Id = Guid.NewGuid(), NullableIntKeyId = 88 })
+                .Entity,
+            setA.Attach(new ForeignNullableIntKey { Id = Guid.NewGuid(), NullableIntKeyId = 89 })
+                .Entity,
+            setB.Attach(new ForeignNullableIntKey { Id = Guid.NewGuid(), NullableIntKeyId = 87 })
+                .Entity,
+            setB.Attach(new ForeignNullableIntKey { Id = Guid.NewGuid(), NullableIntKeyId = 88 })
+                .Entity,
+            setB.Attach(new ForeignNullableIntKey { Id = Guid.NewGuid(), NullableIntKeyId = 88 })
+                .Entity,
+            setB.Attach(new ForeignNullableIntKey { Id = Guid.NewGuid(), NullableIntKeyId = 89 })
+                .Entity,
         };
 
         AssertMultiple(
@@ -2773,10 +2759,8 @@ public class FindEntryTest
             CoreStrings.FindWrongType("int", "Foo", "string"),
             Assert
                 .Throws<ArgumentException>(() =>
-                    set.Local.FindEntry(
-                        new[] { property1.Name, property2.Name },
-                        new object?[] { 1, 2 }
-                    )
+                    set.Local
+                        .FindEntry(new[] { property1.Name, property2.Name }, new object?[] { 1, 2 })
                 )
                 .Message
         );

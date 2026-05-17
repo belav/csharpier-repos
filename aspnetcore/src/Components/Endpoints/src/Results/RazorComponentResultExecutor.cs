@@ -46,11 +46,9 @@ internal static class RazorComponentResultExecutor
         bool preventStreamingRendering
     )
     {
-        var endpointHtmlRenderer = httpContext
-            .RequestServices
+        var endpointHtmlRenderer = httpContext.RequestServices
             .GetRequiredService<EndpointHtmlRenderer>();
-        return endpointHtmlRenderer
-            .Dispatcher
+        return endpointHtmlRenderer.Dispatcher
             .InvokeAsync(async () =>
             {
                 var isErrorHandler =

@@ -153,8 +153,7 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.Api
                 return (EmptyUpdate, EmptyDiagnostic.Add(results.SyntaxError));
             }
 
-            var updates = results
-                .ModuleUpdates
+            var updates = results.ModuleUpdates
                 .Updates
                 .SelectAsArray(update => new Update(
                     update.Module,

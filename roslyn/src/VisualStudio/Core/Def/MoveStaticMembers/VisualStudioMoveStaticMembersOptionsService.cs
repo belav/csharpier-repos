@@ -93,8 +93,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.MoveStaticMembe
                     typeName,
                     language == LanguageNames.CSharp ? ".cs" : ".vb"
                 );
-                var selectedMembers = viewModel
-                    .MemberSelectionViewModel
+                var selectedMembers = viewModel.MemberSelectionViewModel
                     .CheckedMembers
                     .SelectAsArray(vm => vm.Symbol);
 
@@ -152,8 +151,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.MoveStaticMembe
                 cancellationTokenSource.Token
             );
 
-            var existingTypes = selectedType
-                .ContainingNamespace
+            var existingTypes = selectedType.ContainingNamespace
                 .GetAllTypes(cancellationTokenSource.Token)
                 .ToImmutableArray();
             var existingTypeNames = existingTypes.SelectAsArray(t => t.ToDisplayString());

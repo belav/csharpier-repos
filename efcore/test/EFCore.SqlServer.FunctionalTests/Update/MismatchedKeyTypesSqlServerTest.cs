@@ -83,8 +83,7 @@ public class MismatchedKeyTypesSqlServerTest
         }
 
         IQueryable<PrincipalIntLong> Load() =>
-            context
-                .IntLongs
+            context.IntLongs
                 .Include(e => e.OptionalMany)
                 .Include(e => e.OptionalSingle)
                 .Include(e => e.RequiredMany)
@@ -157,8 +156,7 @@ public class MismatchedKeyTypesSqlServerTest
         }
 
         IQueryable<PrincipalShortByte> Load() =>
-            context
-                .ShortBytes
+            context.ShortBytes
                 .Include(e => e.OptionalMany)
                 .Include(e => e.OptionalSingle)
                 .Include(e => e.RequiredMany)
@@ -231,8 +229,7 @@ public class MismatchedKeyTypesSqlServerTest
         }
 
         IQueryable<PrincipalStringGuid> Load() =>
-            context
-                .StringGuids
+            context.StringGuids
                 .Include(e => e.OptionalMany)
                 .Include(e => e.OptionalSingle)
                 .Include(e => e.RequiredMany)
@@ -305,8 +302,7 @@ public class MismatchedKeyTypesSqlServerTest
         }
 
         IQueryable<PrincipalComposite> Load() =>
-            context
-                .Composites
+            context.Composites
                 .Include(e => e.OptionalMany)
                 .Include(e => e.OptionalSingle)
                 .Include(e => e.RequiredMany)
@@ -319,15 +315,13 @@ public class MismatchedKeyTypesSqlServerTest
         using var _ = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled);
         using var context = new MismatchedKeyTypesContext(Fixture);
 
-        context
-            .Database
+        context.Database
             .ExecuteSqlRaw(
                 @"INSERT INTO PrincipalBadComposite (Id1, Id2, Id3)
               VALUES (1, '833e6739-6ffb-4901-835c-b46d3f440c47', 1)"
             );
 
-        context
-            .Database
+        context.Database
             .ExecuteSqlRaw(
                 @"INSERT INTO OptionalSingleBadComposite (Id, PrincipalId1, PrincipalId2, PrincipalId3)
               VALUES (1, 1, '833e6739-6ffb-4901-835c-b46d3f440c47', '4161c5b5-0b6c-4907-8534-2263737843a4')"
@@ -358,15 +352,13 @@ public class MismatchedKeyTypesSqlServerTest
         using var _ = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled);
         using var context = new MismatchedKeyTypesContext(Fixture);
 
-        context
-            .Database
+        context.Database
             .ExecuteSqlRaw(
                 @"INSERT INTO PrincipalBad (Id)
               VALUES (1)"
             );
 
-        context
-            .Database
+        context.Database
             .ExecuteSqlRaw(
                 @"INSERT INTO OptionalSingleBad (Id, PrincipalId)
               VALUES (1, '4161c5b5-0b6c-4907-8534-2263737843a4')"

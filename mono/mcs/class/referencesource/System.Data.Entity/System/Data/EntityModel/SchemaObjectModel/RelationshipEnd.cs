@@ -83,8 +83,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
                     AddError(
                         ErrorCode.InvalidRelationshipEndType,
                         EdmSchemaErrorSeverity.Error,
-                        System
-                            .Data
+                        System.Data
                             .Entity
                             .Strings
                             .InvalidRelationshipEndType(ParentElement.Name, element.FQName)
@@ -103,8 +102,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
                 AddError(
                     ErrorCode.EndWithManyMultiplicityCannotHaveOperationsSpecified,
                     EdmSchemaErrorSeverity.Error,
-                    System
-                        .Data
+                    System.Data
                         .Entity
                         .Strings
                         .EndWithManyMultiplicityCannotHaveOperationsSpecified(
@@ -120,8 +118,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
                 AddError(
                     ErrorCode.EndWithoutMultiplicity,
                     EdmSchemaErrorSeverity.Error,
-                    System
-                        .Data
+                    System.Data
                         .Entity
                         .Strings
                         .EndWithoutMultiplicity(this.Name, ParentElement.FQName)
@@ -223,8 +220,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
                     ErrorCode.InvalidMultiplicity,
                     EdmSchemaErrorSeverity.Error,
                     reader,
-                    System
-                        .Data
+                    System.Data
                         .Entity
                         .Strings
                         .InvalidRelationshipEndMultiplicity(ParentElement.Name, reader.Value)

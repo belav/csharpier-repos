@@ -47,8 +47,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
             if (semanticModel.IsSpeculativeSemanticModel && context.AnnotationsInherited())
             {
                 // Work around bug where GetNullableContext() on a speculative model doesn't inherit automatically
-                context = semanticModel
-                    .ParentModel
+                context = semanticModel.ParentModel
                     .GetNullableContext(semanticModel.OriginalPositionForSpeculation);
             }
 

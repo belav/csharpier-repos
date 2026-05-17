@@ -779,8 +779,7 @@ namespace System.Data
             get { return _enforceConstraints; }
             set
             {
-                long logScopeId = DataCommonEventSource
-                    .Log
+                long logScopeId = DataCommonEventSource.Log
                     .EnterScope(
                         "<ds.DataSet.set_EnforceConstraints|API> {0}, {1}",
                         ObjectID,
@@ -811,8 +810,7 @@ namespace System.Data
 
         internal void EnableConstraints()
         {
-            long logScopeId = DataCommonEventSource
-                .Log
+            long logScopeId = DataCommonEventSource.Log
                 .EnterScope("<ds.DataSet.EnableConstraints|INFO> {0}", ObjectID);
             try
             {
@@ -862,8 +860,7 @@ namespace System.Data
             get { return _dataSetName; }
             set
             {
-                DataCommonEventSource
-                    .Log
+                DataCommonEventSource.Log
                     .Trace("<ds.DataSet.set_DataSetName|API> {0}, '{1}'", ObjectID, value);
                 if (value != _dataSetName)
                 {
@@ -891,8 +888,7 @@ namespace System.Data
             get { return _namespaceURI; }
             set
             {
-                DataCommonEventSource
-                    .Log
+                DataCommonEventSource.Log
                     .Trace("<ds.DataSet.set_Namespace|API> {0}, '{1}'", ObjectID, value);
                 value ??= string.Empty;
 
@@ -1000,8 +996,7 @@ namespace System.Data
             }
             set
             {
-                long logScopeId = DataCommonEventSource
-                    .Log
+                long logScopeId = DataCommonEventSource.Log
                     .EnterScope("<ds.DataSet.set_Locale|API> {0}", ObjectID);
                 try
                 {
@@ -1181,8 +1176,7 @@ namespace System.Data
         /// </summary>
         public void AcceptChanges()
         {
-            long logScopeId = DataCommonEventSource
-                .Log
+            long logScopeId = DataCommonEventSource.Log
                 .EnterScope("<ds.DataSet.AcceptChanges|API> {0}", ObjectID);
             try
             {
@@ -1238,8 +1232,7 @@ namespace System.Data
         /// </summary>
         public void Clear()
         {
-            long logScopeId = DataCommonEventSource
-                .Log
+            long logScopeId = DataCommonEventSource.Log
                 .EnterScope("<ds.DataSet.Clear|API> {0}", ObjectID);
             try
             {
@@ -1271,8 +1264,7 @@ namespace System.Data
         [MethodImpl(MethodImplOptions.NoInlining)]
         public virtual DataSet Clone()
         {
-            long logScopeId = DataCommonEventSource
-                .Log
+            long logScopeId = DataCommonEventSource.Log
                 .EnterScope("<ds.DataSet.Clone|API> {0}", ObjectID);
             try
             {
@@ -1377,8 +1369,7 @@ namespace System.Data
         /// </summary>
         public DataSet Copy()
         {
-            long logScopeId = DataCommonEventSource
-                .Log
+            long logScopeId = DataCommonEventSource.Log
                 .EnterScope("<ds.DataSet.Copy|API> {0}", ObjectID);
             try
             {
@@ -1456,8 +1447,7 @@ namespace System.Data
 
         public DataSet? GetChanges(DataRowState rowStates)
         {
-            long logScopeId = DataCommonEventSource
-                .Log
+            long logScopeId = DataCommonEventSource.Log
                 .EnterScope("<ds.DataSet.GetChanges|API> {0}, rowStates={1}", ObjectID, rowStates);
             try
             {
@@ -1614,8 +1604,7 @@ namespace System.Data
         [RequiresUnreferencedCode(RequiresUnreferencedCodeMessage)]
         public string GetXml()
         {
-            long logScopeId = DataCommonEventSource
-                .Log
+            long logScopeId = DataCommonEventSource.Log
                 .EnterScope("<ds.DataSet.GetXml|API> {0}", ObjectID);
             try
             {
@@ -1636,8 +1625,7 @@ namespace System.Data
         [RequiresUnreferencedCode(RequiresUnreferencedCodeMessage)]
         public string GetXmlSchema()
         {
-            long logScopeId = DataCommonEventSource
-                .Log
+            long logScopeId = DataCommonEventSource.Log
                 .EnterScope("<ds.DataSet.GetXmlSchema|API> {0}", ObjectID);
             try
             {
@@ -1693,8 +1681,7 @@ namespace System.Data
         /// </summary>
         public bool HasChanges(DataRowState rowStates)
         {
-            long logScopeId = DataCommonEventSource
-                .Log
+            long logScopeId = DataCommonEventSource.Log
                 .EnterScope(
                     "<ds.DataSet.HasChanges|API> {0}, rowStates={1}",
                     ObjectID,
@@ -1741,8 +1728,7 @@ namespace System.Data
         [RequiresUnreferencedCode(RequiresUnreferencedCodeMessage)]
         public void InferXmlSchema(XmlReader? reader, string[]? nsArray)
         {
-            long logScopeId = DataCommonEventSource
-                .Log
+            long logScopeId = DataCommonEventSource.Log
                 .EnterScope("<ds.DataSet.InferXmlSchema|API> {0}", ObjectID);
             try
             {
@@ -1829,8 +1815,7 @@ namespace System.Data
         [RequiresUnreferencedCode(RequiresUnreferencedCodeMessage)]
         internal void ReadXmlSchema(XmlReader? reader, bool denyResolving)
         {
-            long logScopeId = DataCommonEventSource
-                .Log
+            long logScopeId = DataCommonEventSource.Log
                 .EnterScope(
                     "<ds.DataSet.ReadXmlSchema|INFO> {0}, reader, denyResolving={1}",
                     ObjectID,
@@ -1884,8 +1869,7 @@ namespace System.Data
 
                     if (
                         reader.LocalName == Keywords.XSD_SCHEMA
-                        && reader
-                            .NamespaceURI
+                        && reader.NamespaceURI
                             .StartsWith(Keywords.XSD_NS_START, StringComparison.Ordinal)
                     )
                     {
@@ -1946,8 +1930,7 @@ namespace System.Data
 
                         if (
                             reader.LocalName == Keywords.XSD_SCHEMA
-                            && reader
-                                .NamespaceURI
+                            && reader.NamespaceURI
                                 .StartsWith(Keywords.XSD_NS_START, StringComparison.Ordinal)
                         )
                         {
@@ -2251,8 +2234,7 @@ namespace System.Data
             Converter<Type, string>? multipleTargetConverter
         )
         {
-            long logScopeId = DataCommonEventSource
-                .Log
+            long logScopeId = DataCommonEventSource.Log
                 .EnterScope(
                     "<ds.DataSet.WriteXmlSchema|INFO> {0}, schemaFormat={1}",
                     ObjectID,
@@ -2294,8 +2276,7 @@ namespace System.Data
         internal XmlReadMode ReadXml(XmlReader? reader, bool denyResolving)
         {
             IDisposable? restrictedScope = null;
-            long logScopeId = DataCommonEventSource
-                .Log
+            long logScopeId = DataCommonEventSource.Log
                 .EnterScope(
                     "<ds.DataSet.ReadXml|INFO> {0}, denyResolving={1}",
                     ObjectID,
@@ -2381,8 +2362,7 @@ namespace System.Data
 
                         if (
                             reader.LocalName == Keywords.XSD_SCHEMA
-                            && reader
-                                .NamespaceURI
+                            && reader.NamespaceURI
                                 .StartsWith(Keywords.XSD_NS_START, StringComparison.Ordinal)
                         )
                         {
@@ -2462,8 +2442,7 @@ namespace System.Data
 
                             if (
                                 reader.LocalName == Keywords.XSD_SCHEMA
-                                && reader
-                                    .NamespaceURI
+                                && reader.NamespaceURI
                                     .StartsWith(Keywords.XSD_NS_START, StringComparison.Ordinal)
                             )
                             {
@@ -2679,8 +2658,7 @@ namespace System.Data
         [RequiresUnreferencedCode(RequiresUnreferencedCodeMessage)]
         internal void InferSchema(XmlDocument xdoc, string[]? excludedNamespaces, XmlReadMode mode)
         {
-            long logScopeId = DataCommonEventSource
-                .Log
+            long logScopeId = DataCommonEventSource.Log
                 .EnterScope("<ds.DataSet.InferSchema|INFO> {0}, mode={1}", ObjectID, mode);
             try
             {
@@ -2734,8 +2712,7 @@ namespace System.Data
         [RequiresUnreferencedCode(RequiresUnreferencedCodeMessage)]
         private void ReadXmlDiffgram(XmlReader reader)
         {
-            long logScopeId = DataCommonEventSource
-                .Log
+            long logScopeId = DataCommonEventSource.Log
                 .EnterScope("<ds.DataSet.ReadXmlDiffgram|INFO> {0}", ObjectID);
             try
             {
@@ -2902,8 +2879,7 @@ namespace System.Data
         internal XmlReadMode ReadXml(XmlReader? reader, XmlReadMode mode, bool denyResolving)
         {
             IDisposable? restictedScope = null;
-            long logScopeId = DataCommonEventSource
-                .Log
+            long logScopeId = DataCommonEventSource.Log
                 .EnterScope(
                     "<ds.DataSet.ReadXml|INFO> {0}, mode={1}, denyResolving={2}",
                     ObjectID,
@@ -3029,8 +3005,7 @@ namespace System.Data
 
                             if (
                                 reader.LocalName == Keywords.XSD_SCHEMA
-                                && reader
-                                    .NamespaceURI
+                                && reader.NamespaceURI
                                     .StartsWith(Keywords.XSD_NS_START, StringComparison.Ordinal)
                             )
                             {
@@ -3137,8 +3112,7 @@ namespace System.Data
 
                             if (
                                 reader.LocalName == Keywords.XSD_SCHEMA
-                                && reader
-                                    .NamespaceURI
+                                && reader.NamespaceURI
                                     .StartsWith(Keywords.XSD_NS_START, StringComparison.Ordinal)
                             )
                                 throw ExceptionBuilder.DataSetUnsupportedSchema(Keywords.XSDNS);
@@ -3325,8 +3299,7 @@ namespace System.Data
         [RequiresUnreferencedCode(RequiresUnreferencedCodeMessage)]
         public void WriteXml(XmlWriter? writer, XmlWriteMode mode)
         {
-            long logScopeId = DataCommonEventSource
-                .Log
+            long logScopeId = DataCommonEventSource.Log
                 .EnterScope("<ds.DataSet.WriteXml|API> {0}, mode={1}", ObjectID, mode);
             try
             {
@@ -3354,8 +3327,7 @@ namespace System.Data
         [RequiresUnreferencedCode(RequiresUnreferencedCodeMessage)]
         public void WriteXml(string fileName, XmlWriteMode mode)
         {
-            long logScopeId = DataCommonEventSource
-                .Log
+            long logScopeId = DataCommonEventSource.Log
                 .EnterScope(
                     "<ds.DataSet.WriteXml|API> {0}, fileName='{1}', mode={2}",
                     ObjectID,
@@ -3398,8 +3370,7 @@ namespace System.Data
         /// </summary>
         public void Merge(DataSet dataSet)
         {
-            long logScopeId = DataCommonEventSource
-                .Log
+            long logScopeId = DataCommonEventSource.Log
                 .EnterScope(
                     "<ds.DataSet.Merge|API> {0}, dataSet={1}",
                     ObjectID,
@@ -3422,8 +3393,7 @@ namespace System.Data
         /// </summary>
         public void Merge(DataSet dataSet, bool preserveChanges)
         {
-            long logScopeId = DataCommonEventSource
-                .Log
+            long logScopeId = DataCommonEventSource.Log
                 .EnterScope(
                     "<ds.DataSet.Merge|API> {0}, dataSet={1}, preserveChanges={2}",
                     ObjectID,
@@ -3452,8 +3422,7 @@ namespace System.Data
             MissingSchemaAction missingSchemaAction
         )
         {
-            long logScopeId = DataCommonEventSource
-                .Log
+            long logScopeId = DataCommonEventSource.Log
                 .EnterScope(
                     "<ds.DataSet.Merge|API> {0}, dataSet={1}, preserveChanges={2}, missingSchemaAction={3}",
                     ObjectID,
@@ -3493,8 +3462,7 @@ namespace System.Data
         /// </summary>
         public void Merge(DataTable table)
         {
-            long logScopeId = DataCommonEventSource
-                .Log
+            long logScopeId = DataCommonEventSource.Log
                 .EnterScope(
                     "<ds.DataSet.Merge|API> {0}, table={1}",
                     ObjectID,
@@ -3521,8 +3489,7 @@ namespace System.Data
             MissingSchemaAction missingSchemaAction
         )
         {
-            long logScopeId = DataCommonEventSource
-                .Log
+            long logScopeId = DataCommonEventSource.Log
                 .EnterScope(
                     "<ds.DataSet.Merge|API> {0}, table={1}, preserveChanges={2}, missingSchemaAction={3}",
                     ObjectID,
@@ -3559,8 +3526,7 @@ namespace System.Data
 
         public void Merge(DataRow[] rows)
         {
-            long logScopeId = DataCommonEventSource
-                .Log
+            long logScopeId = DataCommonEventSource.Log
                 .EnterScope("<ds.DataSet.Merge|API> {0}, rows", ObjectID);
             try
             {
@@ -3578,8 +3544,7 @@ namespace System.Data
             MissingSchemaAction missingSchemaAction
         )
         {
-            long logScopeId = DataCommonEventSource
-                .Log
+            long logScopeId = DataCommonEventSource.Log
                 .EnterScope(
                     "<ds.DataSet.Merge|API> {0}, preserveChanges={1}, missingSchemaAction={2}",
                     ObjectID,
@@ -3716,8 +3681,7 @@ namespace System.Data
         /// </summary>
         public virtual void RejectChanges()
         {
-            long logScopeId = DataCommonEventSource
-                .Log
+            long logScopeId = DataCommonEventSource.Log
                 .EnterScope("<ds.DataSet.RejectChanges|API> {0}", ObjectID);
             try
             {
@@ -3741,8 +3705,7 @@ namespace System.Data
         /// </summary>
         public virtual void Reset()
         {
-            long logScopeId = DataCommonEventSource
-                .Log
+            long logScopeId = DataCommonEventSource.Log
                 .EnterScope("<ds.DataSet.Reset|API> {0}", ObjectID);
             try
             {
@@ -3774,8 +3737,7 @@ namespace System.Data
 
         internal bool ValidateCaseConstraint()
         {
-            long logScopeId = DataCommonEventSource
-                .Log
+            long logScopeId = DataCommonEventSource.Log
                 .EnterScope("<ds.DataSet.ValidateCaseConstraint|INFO> {0}", ObjectID);
             try
             {
@@ -3819,8 +3781,7 @@ namespace System.Data
 
         internal bool ValidateLocaleConstraint()
         {
-            long logScopeId = DataCommonEventSource
-                .Log
+            long logScopeId = DataCommonEventSource.Log
                 .EnterScope("<ds.DataSet.ValidateLocaleConstraint|INFO> {0}", ObjectID);
             try
             {
@@ -4104,8 +4065,7 @@ namespace System.Data
             params DataTable[] tables
         )
         {
-            long logScopeId = DataCommonEventSource
-                .Log
+            long logScopeId = DataCommonEventSource.Log
                 .EnterScope("<ds.DataSet.Load|API> reader, loadOption={0}", loadOption);
             try
             {
@@ -4181,8 +4141,7 @@ namespace System.Data
 
         public DataTableReader CreateDataReader(params DataTable[] dataTables)
         {
-            long logScopeId = DataCommonEventSource
-                .Log
+            long logScopeId = DataCommonEventSource.Log
                 .EnterScope("<ds.DataSet.GetDataReader|API> {0}", ObjectID);
             try
             {

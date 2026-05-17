@@ -425,8 +425,7 @@ public class ResponseSendFileTests : LoggedTest
                 out address,
                 httpContext =>
                 {
-                    httpContext
-                        .Response
+                    httpContext.Response
                         .OnStarting(
                             state =>
                             {
@@ -473,12 +472,10 @@ public class ResponseSendFileTests : LoggedTest
                     out var address,
                     async httpContext =>
                     {
-                        await httpContext
-                            .Response
+                        await httpContext.Response
                             .SendFileAsync(emptyFilePath, 0, null, CancellationToken.None);
                         Assert.True(httpContext.Response.HasStarted);
-                        await httpContext
-                            .Response
+                        await httpContext.Response
                             .Body
                             .WriteAsync(new byte[10], 0, 10, CancellationToken.None);
                     },
@@ -565,8 +562,7 @@ public class ResponseSendFileTests : LoggedTest
                         var cts = new CancellationTokenSource();
                         cts.Cancel();
                         // First write sends headers
-                        var writeTask = httpContext
-                            .Response
+                        var writeTask = httpContext.Response
                             .SendFileAsync(AbsoluteFilePath, 0, null, cts.Token);
                         Assert.True(writeTask.IsCanceled);
                         testComplete.SetResult();
@@ -604,8 +600,7 @@ public class ResponseSendFileTests : LoggedTest
                         var cts = new CancellationTokenSource();
                         cts.Cancel();
                         // First write sends headers
-                        var writeTask = httpContext
-                            .Response
+                        var writeTask = httpContext.Response
                             .SendFileAsync(AbsoluteFilePath, 0, null, cts.Token);
                         Assert.True(writeTask.IsCanceled);
                         testComplete.SetResult();
@@ -641,12 +636,10 @@ public class ResponseSendFileTests : LoggedTest
                     {
                         var cts = new CancellationTokenSource();
                         // First write sends headers
-                        await httpContext
-                            .Response
+                        await httpContext.Response
                             .SendFileAsync(AbsoluteFilePath, 0, null, cts.Token);
                         cts.Cancel();
-                        var writeTask = httpContext
-                            .Response
+                        var writeTask = httpContext.Response
                             .SendFileAsync(AbsoluteFilePath, 0, null, cts.Token);
                         Assert.True(writeTask.IsCanceled);
                         testComplete.SetResult();
@@ -681,12 +674,10 @@ public class ResponseSendFileTests : LoggedTest
                     {
                         var cts = new CancellationTokenSource();
                         // First write sends headers
-                        await httpContext
-                            .Response
+                        await httpContext.Response
                             .SendFileAsync(AbsoluteFilePath, 0, null, cts.Token);
                         cts.Cancel();
-                        var writeTask = httpContext
-                            .Response
+                        var writeTask = httpContext.Response
                             .SendFileAsync(AbsoluteFilePath, 0, null, cts.Token);
                         Assert.True(writeTask.IsCanceled);
                         testComplete.SetResult();
@@ -740,8 +731,7 @@ public class ResponseSendFileTests : LoggedTest
                             // It can take several tries before Send notices the disconnect.
                             for (int i = 0; i < Utilities.WriteRetryLimit; i++)
                             {
-                                await httpContext
-                                    .Response
+                                await httpContext.Response
                                     .SendFileAsync(AbsoluteFilePath, 0, null, cts.Token);
                             }
                         });
@@ -868,8 +858,7 @@ public class ResponseSendFileTests : LoggedTest
                             // It can take several tries before Write notices the disconnect.
                             for (int i = 0; i < Utilities.WriteRetryLimit; i++)
                             {
-                                await httpContext
-                                    .Response
+                                await httpContext.Response
                                     .SendFileAsync(AbsoluteFilePath, 0, null, cts.Token);
                             }
                         });
@@ -938,8 +927,7 @@ public class ResponseSendFileTests : LoggedTest
                         // It can take several tries before Write notices the disconnect.
                         for (int i = 0; i < Utilities.WriteRetryLimit; i++)
                         {
-                            await httpContext
-                                .Response
+                            await httpContext.Response
                                 .SendFileAsync(AbsoluteFilePath, 0, null, CancellationToken.None);
                         }
 

@@ -363,8 +363,7 @@ namespace WebMatrix.Data
             string providerName;
             // Get the default provider name from config if there is any
             if (
-                !_configurationManager
-                    .AppSettings
+                !_configurationManager.AppSettings
                     .TryGetValue(DefaultDataProviderAppSetting, out providerName)
             )
             {

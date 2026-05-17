@@ -411,8 +411,7 @@ class C
             expectedDiagnostic = Diagnostic(analyzer.Descriptor.Id, source, isSuppressed: true);
             VerifySuppressedDiagnostics(compilation, analyzersAndSuppressors, expectedDiagnostic);
 
-            var specificDiagnosticOptions = compilation
-                .Options
+            var specificDiagnosticOptions = compilation.Options
                 .SpecificDiagnosticOptions
                 .Add(suppressionId, ReportDiagnostic.Suppress);
             compilation = compilation.WithOptions(
@@ -487,8 +486,7 @@ class C { }";
                             value: DiagnosticDescriptor.MapSeverityToReport(effectiveSeverity)
                         );
                         compilation = compilation.WithOptions(
-                            compilation
-                                .Options
+                            compilation.Options
                                 .WithSpecificDiagnosticOptions(specificDiagnosticOptions)
                         );
 
@@ -895,8 +893,7 @@ class C { }";
                 .Select(d => d.ProgrammaticSuppressionInfo)
                 .Single();
             Assert.Equal(2, programmaticSuppression.Suppressions.Count);
-            var orderedSuppressions = programmaticSuppression
-                .Suppressions
+            var orderedSuppressions = programmaticSuppression.Suppressions
                 .Order()
                 .ToImmutableArrayOrEmpty();
             Assert.Equal(suppressionId, orderedSuppressions[0].Id);

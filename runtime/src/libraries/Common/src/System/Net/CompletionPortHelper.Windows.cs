@@ -9,8 +9,7 @@ namespace System.Net.Sockets
     {
         internal static bool SkipCompletionPortOnSuccess(SafeHandle handle)
         {
-            return Interop
-                .Kernel32
+            return Interop.Kernel32
                 .SetFileCompletionNotificationModes(
                     handle,
                     Interop.Kernel32.FileCompletionNotificationModes.SkipCompletionPortOnSuccess

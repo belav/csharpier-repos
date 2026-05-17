@@ -79,8 +79,7 @@ namespace Newtonsoft.Json.Serialization
             {
                 if (_parameterizedCreator == null && _parameterizedConstructor != null)
                 {
-                    _parameterizedCreator = JsonTypeReflector
-                        .ReflectionDelegateFactory
+                    _parameterizedCreator = JsonTypeReflector.ReflectionDelegateFactory
                         .CreateParameterizedConstructor(_parameterizedConstructor);
                 }
 
@@ -390,8 +389,7 @@ namespace Newtonsoft.Json.Serialization
                 ConstructorInfo genericWrapperConstructor = _genericWrapperType.GetConstructor(
                     new[] { constructorArgument }
                 )!;
-                _genericWrapperCreator = JsonTypeReflector
-                    .ReflectionDelegateFactory
+                _genericWrapperCreator = JsonTypeReflector.ReflectionDelegateFactory
                     .CreateParameterizedConstructor(genericWrapperConstructor);
             }
 
@@ -409,8 +407,7 @@ namespace Newtonsoft.Json.Serialization
                         : CollectionItemType;
 
                 Type temporaryListType = typeof(List<>).MakeGenericType(collectionItemType);
-                _genericTemporaryCollectionCreator = JsonTypeReflector
-                    .ReflectionDelegateFactory
+                _genericTemporaryCollectionCreator = JsonTypeReflector.ReflectionDelegateFactory
                     .CreateDefaultConstructor<object>(temporaryListType);
             }
 

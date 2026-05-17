@@ -73,8 +73,7 @@ internal partial class RazorComponentEndpointInvoker : IRazorComponentEndpointIn
             return;
         }
 
-        context
-            .Response
+        context.Response
             .OnStarting(() =>
             {
                 // Generate the antiforgery tokens before we start streaming the response, as it needs
@@ -229,8 +228,7 @@ internal partial class RazorComponentEndpointInvoker : IRazorComponentEndpointIn
 
                 if (context.RequestServices.GetService<IHostEnvironment>()?.IsDevelopment() == true)
                 {
-                    await context
-                        .Response
+                    await context.Response
                         .WriteAsync(
                             "A valid antiforgery token was not provided with the request. Add an antiforgery token, or disable antiforgery validation for this endpoint."
                         );

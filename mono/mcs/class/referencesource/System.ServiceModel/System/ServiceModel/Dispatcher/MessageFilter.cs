@@ -117,8 +117,7 @@ namespace System.ServiceModel.Dispatcher
                         Collection<MessageFilter> f = new Collection<MessageFilter>();
                         f.Add(filter);
                         f.Add(item.Key);
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new MultipleFilterMatchesException(
                                     SR.GetString(SR.FilterMultipleMatches),
@@ -204,8 +203,7 @@ namespace System.ServiceModel.Dispatcher
                         Collection<MessageFilter> f = new Collection<MessageFilter>();
                         f.Add(filter);
                         f.Add(item.Key);
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new MultipleFilterMatchesException(
                                     SR.GetString(SR.FilterMultipleMatches),

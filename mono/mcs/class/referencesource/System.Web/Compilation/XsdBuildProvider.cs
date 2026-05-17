@@ -67,9 +67,8 @@ namespace System.Web.Compilation
 
             if (isVer35OrAbove)
             {
-                TypedDataSetGenerator.GenerateOption generateOptions = TypedDataSetGenerator
-                    .GenerateOption
-                    .None;
+                TypedDataSetGenerator.GenerateOption generateOptions =
+                    TypedDataSetGenerator.GenerateOption.None;
                 generateOptions |= TypedDataSetGenerator.GenerateOption.HierarchicalUpdate;
                 generateOptions |= TypedDataSetGenerator.GenerateOption.LinqOverTypedDatasets;
                 Hashtable customDBProviders = null;

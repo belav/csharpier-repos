@@ -163,8 +163,7 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
 
         public ConflictResolution ToConflictResolution()
         {
-            var documentIds = renamedSpansTracker
-                .DocumentIds
+            var documentIds = renamedSpansTracker.DocumentIds
                 .Concat(this.RelatedLocations.Select(l => l.DocumentId))
                 .Distinct()
                 .ToImmutableArray();

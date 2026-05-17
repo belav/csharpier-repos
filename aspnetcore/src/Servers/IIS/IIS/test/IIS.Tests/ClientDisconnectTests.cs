@@ -52,15 +52,13 @@ public class ClientDisconnectTests : StrictTestServerTests
             using (var connection = testServer.CreateConnection())
             {
                 await SendContentLength1Post(connection);
-                await requestStartedCompletionSource
-                    .Task
+                await requestStartedCompletionSource.Task
                     .TimeoutAfter(TimeoutExtensions.DefaultTimeoutValue);
             }
 
             await requestAborted.Task.TimeoutAfter(TimeoutExtensions.DefaultTimeoutValue);
 
-            await requestCompletedCompletionSource
-                .Task
+            await requestCompletedCompletionSource.Task
                 .TimeoutAfter(TimeoutExtensions.DefaultTimeoutValue);
         }
 
@@ -104,13 +102,11 @@ public class ClientDisconnectTests : StrictTestServerTests
             {
                 await SendContentLength1Post(connection);
 
-                await requestStartedCompletionSource
-                    .Task
+                await requestStartedCompletionSource.Task
                     .TimeoutAfter(TimeoutExtensions.DefaultTimeoutValue);
             }
 
-            await requestCompletedCompletionSource
-                .Task
+            await requestCompletedCompletionSource.Task
                 .TimeoutAfter(TimeoutExtensions.DefaultTimeoutValue);
 
             Assert.IsType<OperationCanceledException>(exception);
@@ -151,13 +147,11 @@ public class ClientDisconnectTests : StrictTestServerTests
             using (var connection = testServer.CreateConnection())
             {
                 await SendContentLength1Post(connection);
-                await requestStartedCompletionSource
-                    .Task
+                await requestStartedCompletionSource.Task
                     .TimeoutAfter(TimeoutExtensions.DefaultTimeoutValue);
             }
 
-            await requestCompletedCompletionSource
-                .Task
+            await requestCompletedCompletionSource.Task
                 .TimeoutAfter(TimeoutExtensions.DefaultTimeoutValue);
         }
 
@@ -204,12 +198,10 @@ public class ClientDisconnectTests : StrictTestServerTests
             {
                 await SendContentLength1Post(connection);
 
-                await requestStartedCompletionSource
-                    .Task
+                await requestStartedCompletionSource.Task
                     .TimeoutAfter(TimeoutExtensions.DefaultTimeoutValue);
                 cancellationTokenSource.Cancel();
-                await requestCompletedCompletionSource
-                    .Task
+                await requestCompletedCompletionSource.Task
                     .TimeoutAfter(TimeoutExtensions.DefaultTimeoutValue);
             }
 
@@ -252,12 +244,10 @@ public class ClientDisconnectTests : StrictTestServerTests
             using (var connection = testServer.CreateConnection())
             {
                 await SendContentLength1Post(connection);
-                await readIsAsyncCompletionSource
-                    .Task
+                await readIsAsyncCompletionSource.Task
                     .TimeoutAfter(TimeoutExtensions.DefaultTimeoutValue);
                 cancellationTokenSource.Cancel();
-                await requestCompletedCompletionSource
-                    .Task
+                await requestCompletedCompletionSource.Task
                     .TimeoutAfter(TimeoutExtensions.DefaultTimeoutValue);
             }
 
@@ -317,8 +307,7 @@ public class ClientDisconnectTests : StrictTestServerTests
 
                 await connection.Receive("HTTP/1.1 400 Bad Request", "");
             }
-            await requestCompletedCompletionSource
-                .Task
+            await requestCompletedCompletionSource.Task
                 .TimeoutAfter(TimeoutExtensions.DefaultTimeoutValue);
         }
 
@@ -362,8 +351,7 @@ public class ClientDisconnectTests : StrictTestServerTests
 
                     await connection.Receive("HTTP/1.1 200 OK", "");
                 }
-                await requestCompletedCompletionSource
-                    .Task
+                await requestCompletedCompletionSource.Task
                     .TimeoutAfter(TimeoutExtensions.DefaultTimeoutValue);
             }
         }

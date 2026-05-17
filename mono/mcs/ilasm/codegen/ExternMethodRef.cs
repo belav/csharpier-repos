@@ -57,8 +57,7 @@ namespace Mono.ILASM
             if (owner.UseTypeSpec)
             {
                 PEAPI.Type owner_ref = owner.PeapiType;
-                peapi_method = code_gen
-                    .PEFile
+                peapi_method = code_gen.PEFile
                     .AddMethodToTypeSpec(
                         owner_ref,
                         write_name,
@@ -127,8 +126,7 @@ namespace Mono.ILASM
             if (owner.UseTypeSpec)
             {
                 PEAPI.Type owner_ref = owner.PeapiType;
-                peapi_method = code_gen
-                    .PEFile
+                peapi_method = code_gen.PEFile
                     .AddVarArgMethodToTypeSpec(
                         owner_ref,
                         write_name,

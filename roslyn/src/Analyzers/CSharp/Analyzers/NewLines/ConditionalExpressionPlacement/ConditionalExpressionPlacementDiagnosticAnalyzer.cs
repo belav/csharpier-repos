@@ -135,8 +135,7 @@ namespace Microsoft.CodeAnalysis.CSharp.NewLines.ConditionalExpressionPlacement
                     return true;
 
                 if (
-                    nextToken
-                        .LeadingTrivia
+                    nextToken.LeadingTrivia
                         .Any(static t =>
                             t.Kind()
                                 is SyntaxKind.IfDirectiveTrivia

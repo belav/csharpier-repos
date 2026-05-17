@@ -31,8 +31,7 @@ namespace Microsoft.CodeAnalysis.CSharp.DocumentationComments
                     ref lazyDocComment,
                     Tuple.Create(
                         preferredCulture,
-                        containingPEModule
-                            .DocumentationProvider
+                        containingPEModule.DocumentationProvider
                             .GetDocumentationForSymbol(
                                 symbol.GetDocumentationCommentId(),
                                 preferredCulture,
@@ -50,8 +49,7 @@ namespace Microsoft.CodeAnalysis.CSharp.DocumentationComments
             }
 
             // We've already cached a different culture - create a fresh version.
-            return containingPEModule
-                .DocumentationProvider
+            return containingPEModule.DocumentationProvider
                 .GetDocumentationForSymbol(
                     symbol.GetDocumentationCommentId(),
                     preferredCulture,

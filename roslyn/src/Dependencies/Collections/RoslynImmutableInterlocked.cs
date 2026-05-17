@@ -119,8 +119,7 @@ namespace Microsoft.CodeAnalysis.Collections
             ImmutableSegmentedList<T> value
         )
         {
-            return ImmutableSegmentedList<T>
-                .PrivateInterlocked
+            return ImmutableSegmentedList<T>.PrivateInterlocked
                 .InterlockedExchange(ref location, value);
         }
 
@@ -139,8 +138,7 @@ namespace Microsoft.CodeAnalysis.Collections
             ImmutableSegmentedList<T> comparand
         )
         {
-            return ImmutableSegmentedList<T>
-                .PrivateInterlocked
+            return ImmutableSegmentedList<T>.PrivateInterlocked
                 .InterlockedCompareExchange(ref location, value, comparand);
         }
 
@@ -189,8 +187,7 @@ namespace Microsoft.CodeAnalysis.Collections
             if (transformer is null)
                 throw new ArgumentNullException(nameof(transformer));
 
-            var oldValue = ImmutableSegmentedHashSet<T>
-                .PrivateInterlocked
+            var oldValue = ImmutableSegmentedHashSet<T>.PrivateInterlocked
                 .VolatileRead(in location);
             while (true)
             {
@@ -240,8 +237,7 @@ namespace Microsoft.CodeAnalysis.Collections
             if (transformer is null)
                 throw new ArgumentNullException(nameof(transformer));
 
-            var oldValue = ImmutableSegmentedHashSet<T>
-                .PrivateInterlocked
+            var oldValue = ImmutableSegmentedHashSet<T>.PrivateInterlocked
                 .VolatileRead(in location);
             while (true)
             {
@@ -277,8 +273,7 @@ namespace Microsoft.CodeAnalysis.Collections
             ImmutableSegmentedHashSet<T> value
         )
         {
-            return ImmutableSegmentedHashSet<T>
-                .PrivateInterlocked
+            return ImmutableSegmentedHashSet<T>.PrivateInterlocked
                 .InterlockedExchange(ref location, value);
         }
 
@@ -297,8 +292,7 @@ namespace Microsoft.CodeAnalysis.Collections
             ImmutableSegmentedHashSet<T> comparand
         )
         {
-            return ImmutableSegmentedHashSet<T>
-                .PrivateInterlocked
+            return ImmutableSegmentedHashSet<T>.PrivateInterlocked
                 .InterlockedCompareExchange(ref location, value, comparand);
         }
 
@@ -352,8 +346,7 @@ namespace Microsoft.CodeAnalysis.Collections
             if (transformer is null)
                 throw new ArgumentNullException(nameof(transformer));
 
-            var oldValue = ImmutableSegmentedDictionary<TKey, TValue>
-                .PrivateInterlocked
+            var oldValue = ImmutableSegmentedDictionary<TKey, TValue>.PrivateInterlocked
                 .VolatileRead(in location);
             while (true)
             {
@@ -409,8 +402,7 @@ namespace Microsoft.CodeAnalysis.Collections
             if (transformer is null)
                 throw new ArgumentNullException(nameof(transformer));
 
-            var oldValue = ImmutableSegmentedDictionary<TKey, TValue>
-                .PrivateInterlocked
+            var oldValue = ImmutableSegmentedDictionary<TKey, TValue>.PrivateInterlocked
                 .VolatileRead(in location);
             while (true)
             {
@@ -448,8 +440,7 @@ namespace Microsoft.CodeAnalysis.Collections
         )
             where TKey : notnull
         {
-            return ImmutableSegmentedDictionary<TKey, TValue>
-                .PrivateInterlocked
+            return ImmutableSegmentedDictionary<TKey, TValue>.PrivateInterlocked
                 .InterlockedExchange(ref location, value);
         }
 
@@ -473,8 +464,7 @@ namespace Microsoft.CodeAnalysis.Collections
         )
             where TKey : notnull
         {
-            return ImmutableSegmentedDictionary<TKey, TValue>
-                .PrivateInterlocked
+            return ImmutableSegmentedDictionary<TKey, TValue>.PrivateInterlocked
                 .InterlockedCompareExchange(ref location, value, comparand);
         }
 
@@ -513,8 +503,7 @@ namespace Microsoft.CodeAnalysis.Collections
             if (valueFactory is null)
                 throw new ArgumentNullException(nameof(valueFactory));
 
-            var map = ImmutableSegmentedDictionary<TKey, TValue>
-                .PrivateInterlocked
+            var map = ImmutableSegmentedDictionary<TKey, TValue>.PrivateInterlocked
                 .VolatileRead(in location);
             if (map.IsDefault)
                 throw new ArgumentNullException(nameof(location));
@@ -539,8 +528,7 @@ namespace Microsoft.CodeAnalysis.Collections
             if (valueFactory is null)
                 throw new ArgumentNullException(nameof(valueFactory));
 
-            var map = ImmutableSegmentedDictionary<TKey, TValue>
-                .PrivateInterlocked
+            var map = ImmutableSegmentedDictionary<TKey, TValue>.PrivateInterlocked
                 .VolatileRead(in location);
             if (map.IsDefault)
                 throw new ArgumentNullException(nameof(location));
@@ -562,8 +550,7 @@ namespace Microsoft.CodeAnalysis.Collections
         )
             where TKey : notnull
         {
-            var priorCollection = ImmutableSegmentedDictionary<TKey, TValue>
-                .PrivateInterlocked
+            var priorCollection = ImmutableSegmentedDictionary<TKey, TValue>.PrivateInterlocked
                 .VolatileRead(in location);
             while (true)
             {
@@ -607,8 +594,7 @@ namespace Microsoft.CodeAnalysis.Collections
                 throw new ArgumentNullException(nameof(updateValueFactory));
 
             TValue newValue;
-            var priorCollection = ImmutableSegmentedDictionary<TKey, TValue>
-                .PrivateInterlocked
+            var priorCollection = ImmutableSegmentedDictionary<TKey, TValue>.PrivateInterlocked
                 .VolatileRead(in location);
             while (true)
             {
@@ -654,8 +640,7 @@ namespace Microsoft.CodeAnalysis.Collections
                 throw new ArgumentNullException(nameof(updateValueFactory));
 
             TValue newValue;
-            var priorCollection = ImmutableSegmentedDictionary<TKey, TValue>
-                .PrivateInterlocked
+            var priorCollection = ImmutableSegmentedDictionary<TKey, TValue>.PrivateInterlocked
                 .VolatileRead(in location);
             while (true)
             {
@@ -696,8 +681,7 @@ namespace Microsoft.CodeAnalysis.Collections
         )
             where TKey : notnull
         {
-            var priorCollection = ImmutableSegmentedDictionary<TKey, TValue>
-                .PrivateInterlocked
+            var priorCollection = ImmutableSegmentedDictionary<TKey, TValue>.PrivateInterlocked
                 .VolatileRead(in location);
             while (true)
             {
@@ -734,8 +718,7 @@ namespace Microsoft.CodeAnalysis.Collections
             where TKey : notnull
         {
             var valueComparer = EqualityComparer<TValue>.Default;
-            var priorCollection = ImmutableSegmentedDictionary<TKey, TValue>
-                .PrivateInterlocked
+            var priorCollection = ImmutableSegmentedDictionary<TKey, TValue>.PrivateInterlocked
                 .VolatileRead(in location);
             while (true)
             {
@@ -774,8 +757,7 @@ namespace Microsoft.CodeAnalysis.Collections
         )
             where TKey : notnull
         {
-            var priorCollection = ImmutableSegmentedDictionary<TKey, TValue>
-                .PrivateInterlocked
+            var priorCollection = ImmutableSegmentedDictionary<TKey, TValue>.PrivateInterlocked
                 .VolatileRead(in location);
             while (true)
             {

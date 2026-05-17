@@ -165,8 +165,7 @@ namespace System.Net.Http
             uint resultSize = sizeof(uint);
 
             if (
-                !Interop
-                    .WinHttp
+                !Interop.WinHttp
                     .WinHttpQueryHeaders(
                         requestHandle,
                         infoLevel | Interop.WinHttp.WINHTTP_QUERY_FLAG_NUMBER,
@@ -356,8 +355,7 @@ namespace System.Net.Http
 
             // The WinHttpQueryHeaders buffer length is in bytes,
             // but the API actually returns Unicode characters.
-            bool result = Interop
-                .WinHttp
+            bool result = Interop.WinHttp
                 .WinHttpQueryHeaders(
                     requestHandle,
                     infoLevel,
@@ -478,8 +476,7 @@ namespace System.Net.Http
             uint dataSize = sizeof(uint);
 
             if (
-                Interop
-                    .WinHttp
+                Interop.WinHttp
                     .WinHttpQueryOption(
                         requestHandle,
                         Interop.WinHttp.WINHTTP_OPTION_HTTP_PROTOCOL_USED,

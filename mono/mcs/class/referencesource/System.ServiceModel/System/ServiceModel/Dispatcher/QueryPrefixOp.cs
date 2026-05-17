@@ -448,11 +448,8 @@ namespace System.ServiceModel.Dispatcher
 
                 if (this.length > 0)
                 {
-                    this.segmentIndex = this.segment.GetChildPosition(
-                        this.prefix,
-                        this.offset,
-                        this.length
-                    );
+                    this.segmentIndex = this.segment
+                        .GetChildPosition(this.prefix, this.offset, this.length);
                     if (this.segmentIndex > -1)
                     {
                         this.segment = this.segment.GetChild(this.segmentIndex);
@@ -579,8 +576,7 @@ namespace System.ServiceModel.Dispatcher
                         null != parent
                         && -1
                             != (
-                                indexDivergence = traverser
-                                    .Segment
+                                indexDivergence = traverser.Segment
                                     .FindDivergence(newPrefix, traverser.Offset, traverser.Length)
                             )
                     )
@@ -820,8 +816,7 @@ namespace System.ServiceModel.Dispatcher
         internal override IEnumerator GetEnumerator()
         {
             //return new TrieBreadthFirstEnum(this.trie);
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(new NotImplementedException("TODO"));
         }
 #endif

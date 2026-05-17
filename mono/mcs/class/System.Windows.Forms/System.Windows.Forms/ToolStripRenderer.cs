@@ -260,10 +260,11 @@ namespace System.Windows.Forms
                 // Only paint the BackColor if it's not the default one,
                 // to avoid painting a solid background color over the parent ToolStrip gradient.
                 Rectangle item_bounds = new Rectangle(0, 0, e.Item.Width, e.Item.Height);
-                e.Graphics.FillRectangle(
-                    ThemeEngine.Current.ResPool.GetSolidBrush(e.Item.BackColor),
-                    item_bounds
-                );
+                e.Graphics
+                    .FillRectangle(
+                        ThemeEngine.Current.ResPool.GetSolidBrush(e.Item.BackColor),
+                        item_bounds
+                    );
             }
 
             if (e.Item.BackgroundImage != null)
@@ -306,16 +307,17 @@ namespace System.Windows.Forms
             {
                 ImageAttributes ia = new ImageAttributes();
                 ia.SetColorKey(e.Item.ImageTransparentColor, e.Item.ImageTransparentColor);
-                e.Graphics.DrawImage(
-                    i,
-                    e.ImageRectangle,
-                    0,
-                    0,
-                    i.Width,
-                    i.Height,
-                    GraphicsUnit.Pixel,
-                    ia
-                );
+                e.Graphics
+                    .DrawImage(
+                        i,
+                        e.ImageRectangle,
+                        0,
+                        0,
+                        i.Width,
+                        i.Height,
+                        GraphicsUnit.Pixel,
+                        ia
+                    );
                 ia.Dispose();
             }
             else
@@ -350,13 +352,14 @@ namespace System.Windows.Forms
                 StringFormat sf = new StringFormat();
                 sf.Alignment = StringAlignment.Center;
 
-                e.Graphics.DrawString(
-                    e.Text,
-                    e.TextFont,
-                    ThemeEngine.Current.ResPool.GetSolidBrush(e.TextColor),
-                    r,
-                    sf
-                );
+                e.Graphics
+                    .DrawString(
+                        e.Text,
+                        e.TextFont,
+                        ThemeEngine.Current.ResPool.GetSolidBrush(e.TextColor),
+                        r,
+                        sf
+                    );
 
                 e.Graphics.Restore(gs);
             }
@@ -378,13 +381,14 @@ namespace System.Windows.Forms
                 StringFormat sf = new StringFormat();
                 sf.Alignment = StringAlignment.Center;
 
-                e.Graphics.DrawString(
-                    e.Text,
-                    e.TextFont,
-                    ThemeEngine.Current.ResPool.GetSolidBrush(e.TextColor),
-                    r,
-                    sf
-                );
+                e.Graphics
+                    .DrawString(
+                        e.Text,
+                        e.TextFont,
+                        ThemeEngine.Current.ResPool.GetSolidBrush(e.TextColor),
+                        r,
+                        sf
+                    );
 
                 e.Graphics.Restore(gs);
             }

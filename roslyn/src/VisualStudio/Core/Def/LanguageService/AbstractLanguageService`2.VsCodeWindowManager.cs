@@ -55,8 +55,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
                 _languageService = languageService;
                 _codeWindow = codeWindow;
 
-                _globalOptions = languageService
-                    .Package
+                _globalOptions = languageService.Package
                     .ComponentModel
                     .GetService<IGlobalOptionService>();
 
@@ -91,8 +90,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
                     return;
                 }
 
-                var textBuffer = _languageService
-                    .EditorAdaptersFactoryService
+                var textBuffer = _languageService.EditorAdaptersFactoryService
                     .GetDataBuffer(buffer);
                 var document = textBuffer
                     ?.AsTextContainer()
@@ -199,11 +197,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
                     _languageService.SystemServiceProvider,
                     _languageService.Workspace
                 );
-                var textBuffer = _languageService
-                    .EditorAdaptersFactoryService
+                var textBuffer = _languageService.EditorAdaptersFactoryService
                     .GetDataBuffer(buffer);
-                var controllerFactoryService = _languageService
-                    .Package
+                var controllerFactoryService = _languageService.Package
                     .ComponentModel
                     .GetService<INavigationBarControllerFactoryService>();
                 var newController = controllerFactoryService.CreateController(
@@ -306,8 +302,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
                 if (!enabled)
                     return;
 
-                var threadingContext = _languageService
-                    .Package
+                var threadingContext = _languageService.Package
                     .ComponentModel
                     .GetService<IThreadingContext>();
                 threadingContext.ThrowIfNotOnUIThread();
@@ -315,26 +310,21 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
                 var uiShell = (IVsUIShell4)
                     _languageService.SystemServiceProvider.GetService(typeof(SVsUIShell));
                 var windowSearchHostFactory = (IVsWindowSearchHostFactory)
-                    _languageService
-                        .SystemServiceProvider
+                    _languageService.SystemServiceProvider
                         .GetService(typeof(SVsWindowSearchHostFactory));
-                var languageServiceBroker = _languageService
-                    .Package
+                var languageServiceBroker = _languageService.Package
                     .ComponentModel
                     .GetService<ILanguageServiceBroker2>();
-                var asyncListenerProvider = _languageService
-                    .Package
+                var asyncListenerProvider = _languageService.Package
                     .ComponentModel
                     .GetService<IAsynchronousOperationListenerProvider>();
                 var asyncListener = asyncListenerProvider.GetListener(
                     FeatureAttribute.DocumentOutline
                 );
-                var editorAdaptersFactoryService = _languageService
-                    .Package
+                var editorAdaptersFactoryService = _languageService.Package
                     .ComponentModel
                     .GetService<IVsEditorAdaptersFactoryService>();
-                var outliningManagerService = _languageService
-                    .Package
+                var outliningManagerService = _languageService.Package
                     .ComponentModel
                     .GetService<IOutliningManagerService>();
 
@@ -375,8 +365,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
 
             int IVsDocOutlineProvider.ReleaseOutline(IntPtr hwnd, IOleCommandTarget pCmdTarget)
             {
-                var threadingContext = _languageService
-                    .Package
+                var threadingContext = _languageService.Package
                     .ComponentModel
                     .GetService<IThreadingContext>();
                 threadingContext.ThrowIfNotOnUIThread();

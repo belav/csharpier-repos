@@ -95,8 +95,7 @@ namespace System.Security.Cryptography
                 {
                     const int Success = 1;
                     uint length = (uint)destination.Length;
-                    int ret = Interop
-                        .Crypto
+                    int ret = Interop.Crypto
                         .EvpDigestOneShot(evpType, pSource, source.Length, pDestination, &length);
 
                     if (ret != Success)

@@ -166,8 +166,7 @@ namespace Microsoft.Extensions.Logging
             ThrowHelper.ThrowIfNull(builder);
             ThrowHelper.ThrowIfNull(sourceSwitch);
 
-            builder
-                .Services
+            builder.Services
                 .AddSingleton<ILoggerProvider>(_ => new TraceSourceLoggerProvider(sourceSwitch));
 
             return builder;
@@ -190,8 +189,7 @@ namespace Microsoft.Extensions.Logging
             ThrowHelper.ThrowIfNull(sourceSwitch);
             ThrowHelper.ThrowIfNull(listener);
 
-            builder
-                .Services
+            builder.Services
                 .AddSingleton<ILoggerProvider>(_ => new TraceSourceLoggerProvider(
                     sourceSwitch,
                     listener

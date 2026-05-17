@@ -127,8 +127,7 @@ namespace System.ServiceModel.Configuration
                 behavior.RoleProvider = SystemWebHelper.GetRoleProvider(roleProviderName);
                 if (behavior.RoleProvider == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ConfigurationErrorsException(
                                 SR.GetString(
@@ -149,8 +148,7 @@ namespace System.ServiceModel.Configuration
                 Type type = Type.GetType(serviceAuthorizationManagerType, true);
                 if (!typeof(ServiceAuthorizationManager).IsAssignableFrom(type))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ConfigurationErrorsException(
                                 SR.GetString(
@@ -176,8 +174,7 @@ namespace System.ServiceModel.Configuration
                     Type type = Type.GetType(authorizationPolicies[i].PolicyType, true);
                     if (!typeof(IAuthorizationPolicy).IsAssignableFrom(type))
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new ConfigurationErrorsException(
                                     SR.GetString(

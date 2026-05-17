@@ -116,8 +116,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.ConvertLocalFunctionToM
             );
 
             // Exclude local function parameters in case they were captured inside the function body
-            var captures = dataFlow
-                .CapturedInside
+            var captures = dataFlow.CapturedInside
                 .Except(dataFlow.VariablesDeclared)
                 .Except(declaredSymbol.Parameters)
                 .ToList();
@@ -254,8 +253,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.ConvertLocalFunctionToM
 
                 if (hasAdditionalTypeArguments)
                 {
-                    var existingTypeArguments = symbol
-                        .TypeArguments
+                    var existingTypeArguments = symbol.TypeArguments
                         .Select(s => s.GenerateTypeSyntax());
                     // Prepend additional type arguments to preserve lexical order in which they are defined
                     var typeArguments = additionalTypeArguments.Concat(existingTypeArguments);
@@ -363,8 +361,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.ConvertLocalFunctionToM
             string name,
             bool shouldUseNamedArguments = false
         ) =>
-            CSharpSyntaxGenerator
-                .Instance
+            CSharpSyntaxGenerator.Instance
                 .Argument(
                     shouldUseNamedArguments ? name : null,
                     p.RefKind,

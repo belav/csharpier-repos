@@ -14,8 +14,7 @@ namespace System.ServiceModel
             set
             {
                 if (value < 0)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentOutOfRangeException(
                                 "value",

@@ -864,8 +864,7 @@ namespace System.Xml.XPath
         {
             if (s_XmlNamespaceDeclaration == null)
             {
-                System
-                    .Threading
+                System.Threading
                     .Interlocked
                     .CompareExchange(
                         ref s_XmlNamespaceDeclaration,

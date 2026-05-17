@@ -112,19 +112,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
                             action: waitContext =>
                             {
                                 var cancellationToken = waitContext.UserCancellationToken;
-                                var textBuffer = _languageService
-                                    .EditorAdaptersFactoryService
+                                var textBuffer = _languageService.EditorAdaptersFactoryService
                                     .GetDataBuffer(pBuffer);
                                 if (textBuffer != null)
                                 {
-                                    var nullablePoint = textBuffer
-                                        .CurrentSnapshot
+                                    var nullablePoint = textBuffer.CurrentSnapshot
                                         .TryGetPoint(iLine, iCol);
                                     if (nullablePoint.HasValue)
                                     {
                                         var point = nullablePoint.Value;
-                                        var document = point
-                                            .Snapshot
+                                        var document = point.Snapshot
                                             .GetOpenDocumentInCurrentContextWithChanges();
 
                                         if (document != null)
@@ -132,8 +129,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
                                             // NOTE(cyrusn): We have to wait here because the debuggers'
                                             // GetNameOfLocation is a blocking call.  In the future, it
                                             // would be nice if they could make it async.
-                                            _threadingContext
-                                                .JoinableTaskFactory
+                                            _threadingContext.JoinableTaskFactory
                                                 .Run(async () =>
                                                 {
                                                     var debugLocationInfo = await _languageDebugInfo
@@ -199,8 +195,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
                             showProgress: false,
                             action: context =>
                             {
-                                var textBuffer = _languageService
-                                    .EditorAdaptersFactoryService
+                                var textBuffer = _languageService.EditorAdaptersFactoryService
                                     .GetDataBuffer(pBuffer);
 
                                 if (textBuffer != null)
@@ -268,8 +263,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
                         showProgress: false,
                         action: waitContext =>
                         {
-                            _threadingContext
-                                .JoinableTaskFactory
+                            _threadingContext.JoinableTaskFactory
                                 .Run(async () =>
                                 {
                                     var cancellationToken = waitContext.UserCancellationToken;
@@ -380,8 +374,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
                     return VSConstants.E_FAIL;
                 }
 
-                var textBuffer = _languageService
-                    .EditorAdaptersFactoryService
+                var textBuffer = _languageService.EditorAdaptersFactoryService
                     .GetDataBuffer(pBuffer);
                 if (textBuffer != null)
                 {
@@ -478,8 +471,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
                         // There should be a breakpoint at the location passed back.
                         if (pCodeSpan != null && pCodeSpan.Length > 0)
                         {
-                            pCodeSpan[0] = breakpoint
-                                .TextSpan
+                            pCodeSpan[0] = breakpoint.TextSpan
                                 .ToSnapshotSpan(snapshot)
                                 .ToVsTextSpan();
                         }

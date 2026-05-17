@@ -95,8 +95,7 @@ namespace System.Data.Metadata.Edm
                     {
                         itemAttributes.SetReadOnly();
                     }
-                    System
-                        .Threading
+                    System.Threading
                         .Interlocked
                         .CompareExchange<MetadataCollection<MetadataProperty>>(
                             ref _itemAttributes,
@@ -288,8 +287,7 @@ namespace System.Data.Metadata.Edm
             if ((flag & MetadataFlags.Readonly) == MetadataFlags.Readonly)
             {
                 Debug.Assert(
-                    System
-                        .Convert
+                    System.Convert
                         .ToInt32(flag & ~MetadataFlags.Readonly, CultureInfo.InvariantCulture) == 0,
                     "SetFlag() invoked with Readonly and additional flags."
                 );

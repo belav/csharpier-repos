@@ -35,8 +35,7 @@ namespace System.ServiceModel.Dispatcher
         {
             if (operationDescription == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("operationDescription");
             }
 
@@ -47,8 +46,7 @@ namespace System.ServiceModel.Dispatcher
 
             if (workflowOperationBehavior == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("workflowOperationBehavior");
             }
 
@@ -133,8 +131,7 @@ namespace System.ServiceModel.Dispatcher
 
         public object Invoke(object instance, object[] inputs, out object[] outputs)
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(new NotImplementedException());
         }
 
@@ -161,8 +158,7 @@ namespace System.ServiceModel.Dispatcher
                 catch (SecurityException exception)
                 {
                     DiagnosticUtility.TraceHandledException(exception, TraceEventType.Warning);
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new SecurityException(
                                 SR.GetString("PartialTrustPerformanceCountersNotEnabled"),
@@ -294,8 +290,7 @@ namespace System.ServiceModel.Dispatcher
             {
                 if (!this.serviceAuthorizationManager.CheckAccess(OperationContext.Current))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(AuthorizationBehavior.CreateAccessDeniedFaultException());
                 }
             }

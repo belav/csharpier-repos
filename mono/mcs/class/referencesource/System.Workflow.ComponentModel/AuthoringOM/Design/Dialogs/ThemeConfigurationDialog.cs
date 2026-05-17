@@ -630,13 +630,14 @@ namespace System.Workflow.ComponentModel.Design
 
         private void OnThemePanelPaint(object sender, PaintEventArgs e)
         {
-            e.Graphics.DrawRectangle(
-                SystemPens.ControlDark,
-                0,
-                0,
-                this.themePanel.ClientSize.Width - 1,
-                this.themePanel.ClientSize.Height - 2
-            );
+            e.Graphics
+                .DrawRectangle(
+                    SystemPens.ControlDark,
+                    0,
+                    0,
+                    this.themePanel.ClientSize.Width - 1,
+                    this.themePanel.ClientSize.Height - 2
+                );
 
             if (this.previewShown)
             {
@@ -656,34 +657,38 @@ namespace System.Workflow.ComponentModel.Design
             using (Pen framePen = new Pen(Color.Black, 1))
             {
                 framePen.DashStyle = DashStyle.Dot;
-                e.Graphics.DrawLine(
-                    framePen,
-                    this.designerPreview.Left - margin.Width,
-                    this.designerPreview.Top - 1,
-                    this.designerPreview.Right + margin.Width,
-                    this.designerPreview.Top - 1
-                );
-                e.Graphics.DrawLine(
-                    framePen,
-                    this.designerPreview.Left - margin.Width,
-                    this.designerPreview.Bottom + 1,
-                    this.designerPreview.Right + margin.Width,
-                    this.designerPreview.Bottom + 1
-                );
-                e.Graphics.DrawLine(
-                    framePen,
-                    this.designerPreview.Left - 1,
-                    this.designerPreview.Top - margin.Height,
-                    this.designerPreview.Left - 1,
-                    this.designerPreview.Bottom + margin.Height
-                );
-                e.Graphics.DrawLine(
-                    framePen,
-                    this.designerPreview.Right + 1,
-                    this.designerPreview.Top - margin.Height,
-                    this.designerPreview.Right + 1,
-                    this.designerPreview.Bottom + margin.Height
-                );
+                e.Graphics
+                    .DrawLine(
+                        framePen,
+                        this.designerPreview.Left - margin.Width,
+                        this.designerPreview.Top - 1,
+                        this.designerPreview.Right + margin.Width,
+                        this.designerPreview.Top - 1
+                    );
+                e.Graphics
+                    .DrawLine(
+                        framePen,
+                        this.designerPreview.Left - margin.Width,
+                        this.designerPreview.Bottom + 1,
+                        this.designerPreview.Right + margin.Width,
+                        this.designerPreview.Bottom + 1
+                    );
+                e.Graphics
+                    .DrawLine(
+                        framePen,
+                        this.designerPreview.Left - 1,
+                        this.designerPreview.Top - margin.Height,
+                        this.designerPreview.Left - 1,
+                        this.designerPreview.Bottom + margin.Height
+                    );
+                e.Graphics
+                    .DrawLine(
+                        framePen,
+                        this.designerPreview.Right + 1,
+                        this.designerPreview.Top - margin.Height,
+                        this.designerPreview.Right + 1,
+                        this.designerPreview.Bottom + margin.Height
+                    );
             }
         }
 
@@ -718,9 +723,8 @@ namespace System.Workflow.ComponentModel.Design
                     (previewedDesigner != null)
                         ? new object[]
                         {
-                            this.bufferedTheme.GetDesignerTheme(
-                                previewedDesigner as ActivityDesigner
-                            ),
+                            this.bufferedTheme
+                                .GetDesignerTheme(previewedDesigner as ActivityDesigner),
                         }
                         : null;
             }
@@ -860,14 +864,12 @@ namespace System.Workflow.ComponentModel.Design
                             foreach (ToolboxItemFilterAttribute filter in toolboxItem.Filter)
                             {
                                 if (
-                                    filter
-                                        .FilterString
+                                    filter.FilterString
                                         .StartsWith(
                                             "Microsoft.Workflow.VSDesigner",
                                             StringComparison.OrdinalIgnoreCase
                                         )
-                                    || filter
-                                        .FilterString
+                                    || filter.FilterString
                                         .StartsWith(
                                             "System.Workflow.ComponentModel",
                                             StringComparison.OrdinalIgnoreCase
@@ -908,10 +910,11 @@ namespace System.Workflow.ComponentModel.Design
                 {
                     Type designerBaseType =
                         (
-                            type.FullName.Equals(
-                                DesignerHelpers.SequentialWorkflowTypeRef,
-                                StringComparison.OrdinalIgnoreCase
-                            )
+                            type.FullName
+                                .Equals(
+                                    DesignerHelpers.SequentialWorkflowTypeRef,
+                                    StringComparison.OrdinalIgnoreCase
+                                )
                         )
                             ? typeof(IRootDesigner)
                             : typeof(IDesigner);
@@ -938,8 +941,7 @@ namespace System.Workflow.ComponentModel.Design
                                 treeView.ImageList = new ImageList();
                                 treeView.ImageList.ColorDepth = ColorDepth.Depth32Bit;
                                 Image standardImage = DR.GetImage(DR.Activity) as Image;
-                                treeView
-                                    .ImageList
+                                treeView.ImageList
                                     .Images
                                     .Add(standardImage, AmbientTheme.TransparentColor);
                             }
@@ -952,8 +954,7 @@ namespace System.Workflow.ComponentModel.Design
                             {
                                 int imageIndex =
                                     (image != null)
-                                        ? treeView
-                                            .ImageList
+                                        ? treeView.ImageList
                                             .Images
                                             .Add(image, AmbientTheme.TransparentColor)
                                         : 0;
@@ -1085,8 +1086,7 @@ namespace System.Workflow.ComponentModel.Design
                     {
                         Type designerBaseType =
                             (
-                                activityType
-                                    .FullName
+                                activityType.FullName
                                     .Equals(
                                         DesignerHelpers.SequentialWorkflowTypeRef,
                                         StringComparison.OrdinalIgnoreCase
@@ -1150,8 +1150,7 @@ namespace System.Workflow.ComponentModel.Design
                     {
                         Type designerBaseType =
                             (
-                                activityType
-                                    .FullName
+                                activityType.FullName
                                     .Equals(
                                         DesignerHelpers.SequentialWorkflowTypeRef,
                                         StringComparison.OrdinalIgnoreCase
@@ -1298,8 +1297,7 @@ namespace System.Workflow.ComponentModel.Design
                     //Add new activities to preview
                     if (
                         activityType == null
-                        || activityType
-                            .FullName
+                        || activityType.FullName
                             .Equals(
                                 DesignerHelpers.SequentialWorkflowTypeRef,
                                 StringComparison.OrdinalIgnoreCase

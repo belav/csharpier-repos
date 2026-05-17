@@ -24,8 +24,7 @@ namespace System.Web.Mvc.Async.Test
             // Assert
             Assert.Equal(3, selector.AliasedMethods.Length);
 
-            List<MethodInfo> sortedAliasedMethods = selector
-                .AliasedMethods
+            List<MethodInfo> sortedAliasedMethods = selector.AliasedMethods
                 .OrderBy(methodInfo => methodInfo.Name)
                 .ToList();
             Assert.Equal("Bar", sortedAliasedMethods[0].Name);

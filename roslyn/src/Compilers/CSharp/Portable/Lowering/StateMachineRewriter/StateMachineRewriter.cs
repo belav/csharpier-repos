@@ -255,11 +255,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 mapToPreviousFields
                                 && slotAllocatorOpt.TryGetPreviousHoistedLocalSlotIndex(
                                     declaratorSyntax,
-                                    F.ModuleBuilderOpt.Translate(
-                                        fieldType,
-                                        declaratorSyntax,
-                                        diagnostics.DiagnosticBag
-                                    ),
+                                    F.ModuleBuilderOpt
+                                        .Translate(
+                                            fieldType,
+                                            declaratorSyntax,
+                                            diagnostics.DiagnosticBag
+                                        ),
                                     synthesizedKind,
                                     id,
                                     diagnostics.DiagnosticBag,

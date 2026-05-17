@@ -127,19 +127,21 @@ namespace Mono.ServiceContractTool
                     if (co.GenerateMoonlightProxy)
                     {
                         var moonctx = new MoonlightChannelBaseContext();
-                        cd.Behaviors.Add(
-                            new MoonlightChannelBaseContractExtension(
-                                moonctx,
-                                co.GenerateMonoTouchProxy
-                            )
-                        );
-                        foreach (var od in cd.Operations)
-                            od.Behaviors.Add(
-                                new MoonlightChannelBaseOperationExtension(
+                        cd.Behaviors
+                            .Add(
+                                new MoonlightChannelBaseContractExtension(
                                     moonctx,
                                     co.GenerateMonoTouchProxy
                                 )
                             );
+                        foreach (var od in cd.Operations)
+                            od.Behaviors
+                                .Add(
+                                    new MoonlightChannelBaseOperationExtension(
+                                        moonctx,
+                                        co.GenerateMonoTouchProxy
+                                    )
+                                );
                         generator.GenerateServiceContractType(cd);
                         moonctx.Fixup();
                     }
@@ -206,8 +208,7 @@ namespace Mono.ServiceContractTool
             {
                 if (o is WSServiceDescrition)
                 {
-                    metadata
-                        .MetadataSections
+                    metadata.MetadataSections
                         .Add(
                             new MetadataSection(
                                 MetadataSection.ServiceDescriptionDialect,
@@ -218,8 +219,7 @@ namespace Mono.ServiceContractTool
                 }
                 if (o is XmlSchema)
                 {
-                    metadata
-                        .MetadataSections
+                    metadata.MetadataSections
                         .Add(
                             new MetadataSection(MetadataSection.XmlSchemaDialect, "", (XmlSchema)o)
                         );

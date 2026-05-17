@@ -2127,8 +2127,7 @@ public class Tests : TestsBase, ITest2
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
     public static void unhandled_exception_user()
     {
-        System
-            .Threading
+        System.Threading
             .Tasks
             .Task
             .Factory

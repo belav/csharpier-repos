@@ -182,8 +182,7 @@ public class DefaultAntiforgeryTest
         );
 
         // Exception will cause the cookieToken to be null.
-        context
-            .TokenSerializer
+        context.TokenSerializer
             .Setup(o => o.Deserialize(context.TestTokenSet.OldCookieTokenString))
             .Throws(new Exception("should be swallowed"));
         context.TokenGenerator.Setup(o => o.IsCookieTokenValid(null)).Returns(false);
@@ -282,8 +281,7 @@ public class DefaultAntiforgeryTest
 
         // Assert
         // We shouldn't have saved the cookie because it already existed.
-        context
-            .TokenStore
+        context.TokenStore
             .Verify(
                 t => t.SaveCookieToken(It.IsAny<HttpContext>(), It.IsAny<string>()),
                 Times.Never
@@ -322,8 +320,7 @@ public class DefaultAntiforgeryTest
 
         // Assert
         // We shouldn't have saved the cookie because it already existed.
-        context
-            .TokenStore
+        context.TokenStore
             .Verify(
                 t => t.SaveCookieToken(It.IsAny<HttpContext>(), It.IsAny<string>()),
                 Times.Never
@@ -357,8 +354,7 @@ public class DefaultAntiforgeryTest
 
         // Assert
         // We shouldn't have saved the cookie because it already existed.
-        context
-            .TokenStore
+        context.TokenStore
             .Verify(
                 t => t.SaveCookieToken(It.IsAny<HttpContext>(), It.IsAny<string>()),
                 Times.Never
@@ -422,8 +418,7 @@ public class DefaultAntiforgeryTest
         // Assert
         Assert.Equal(headerValue, actualHeaderValue);
 
-        var hasWarningMessage = testSink
-            .Writes
+        var hasWarningMessage = testSink.Writes
             .Where(wc => wc.LogLevel == LogLevel.Warning)
             .Select(wc => wc.State?.ToString())
             .Contains(ResponseCacheHeadersOverrideWarningMessage);
@@ -448,8 +443,7 @@ public class DefaultAntiforgeryTest
         // Assert
         Assert.NotEqual(headerValue, actualHeaderValue);
 
-        var hasWarningMessage = testSink
-            .Writes
+        var hasWarningMessage = testSink.Writes
             .Where(wc => wc.LogLevel == LogLevel.Warning)
             .Select(wc => wc.State?.ToString())
             .Contains(ResponseCacheHeadersOverrideWarningMessage);
@@ -474,8 +468,7 @@ public class DefaultAntiforgeryTest
         // Assert
         Assert.NotEqual(headerValue, actualHeaderValue);
 
-        var hasWarningMessage = testSink
-            .Writes
+        var hasWarningMessage = testSink.Writes
             .Where(wc => wc.LogLevel == LogLevel.Warning)
             .Select(wc => wc.State?.ToString())
             .Contains(ResponseCacheHeadersOverrideWarningMessage);
@@ -500,8 +493,7 @@ public class DefaultAntiforgeryTest
         // Assert
         Assert.Equal(headerValue, actualHeaderValue);
 
-        var hasWarningMessage = testSink
-            .Writes
+        var hasWarningMessage = testSink.Writes
             .Where(wc => wc.LogLevel == LogLevel.Warning)
             .Select(wc => wc.State?.ToString())
             .Contains(ResponseCacheHeadersOverrideWarningMessage);
@@ -525,8 +517,7 @@ public class DefaultAntiforgeryTest
         var tokenSet = antiforgery.GetAndStoreTokens(context.HttpContext);
 
         // Assert
-        context
-            .TokenStore
+        context.TokenStore
             .Verify(
                 t =>
                     t.SaveCookieToken(
@@ -573,8 +564,7 @@ public class DefaultAntiforgeryTest
         var tokenSet = antiforgery.GetAndStoreTokens(context.HttpContext);
 
         // Assert
-        context
-            .TokenStore
+        context.TokenStore
             .Verify(
                 t =>
                     t.SaveCookieToken(
@@ -615,8 +605,7 @@ public class DefaultAntiforgeryTest
         );
         var antiforgery = GetAntiforgery(context);
 
-        context
-            .TokenStore
+        context.TokenStore
             .Setup(t =>
                 t.SaveCookieToken(context.HttpContext, "serialized-cookie-token-from-context")
             )
@@ -628,8 +617,7 @@ public class DefaultAntiforgeryTest
         // Assert
         // Token store used once, with expected arguments.
         // Passed context's cookie token though request's cookie token was valid.
-        context
-            .TokenStore
+        context.TokenStore
             .Verify(
                 t => t.SaveCookieToken(context.HttpContext, "serialized-cookie-token-from-context"),
                 Times.Once
@@ -672,8 +660,7 @@ public class DefaultAntiforgeryTest
 
         // Assert
         // Token store not used.
-        context
-            .TokenStore
+        context.TokenStore
             .Verify(
                 t => t.SaveCookieToken(It.IsAny<HttpContext>(), It.IsAny<string>()),
                 Times.Never
@@ -698,8 +685,7 @@ public class DefaultAntiforgeryTest
         );
 
         string? message;
-        context
-            .TokenGenerator
+        context.TokenGenerator
             .Setup(o =>
                 o.TryValidateTokenSet(
                     context.HttpContext,
@@ -739,8 +725,7 @@ public class DefaultAntiforgeryTest
         context.HttpContext.Request.Method = "POST";
 
         string? message;
-        context
-            .TokenGenerator
+        context.TokenGenerator
             .Setup(o =>
                 o.TryValidateTokenSet(
                     context.HttpContext,
@@ -786,8 +771,7 @@ public class DefaultAntiforgeryTest
         context.HttpContext.Request.Method = "POST";
 
         string? message;
-        context
-            .TokenGenerator
+        context.TokenGenerator
             .Setup(o =>
                 o.TryValidateTokenSet(
                     context.HttpContext,
@@ -825,8 +809,7 @@ public class DefaultAntiforgeryTest
         context.HttpContext.Request.Method = httpMethod;
 
         string? message;
-        context
-            .TokenGenerator
+        context.TokenGenerator
             .Setup(o =>
                 o.TryValidateTokenSet(
                     context.HttpContext,
@@ -845,8 +828,7 @@ public class DefaultAntiforgeryTest
 
         // Assert
         Assert.True(result);
-        context
-            .TokenGenerator
+        context.TokenGenerator
             .Verify(
                 o =>
                     o.TryValidateTokenSet(
@@ -873,8 +855,7 @@ public class DefaultAntiforgeryTest
         context.HttpContext.Request.Method = httpMethod;
 
         string? message;
-        context
-            .TokenGenerator
+        context.TokenGenerator
             .Setup(o =>
                 o.TryValidateTokenSet(
                     context.HttpContext,
@@ -907,8 +888,7 @@ public class DefaultAntiforgeryTest
         );
 
         var message = "my-message";
-        context
-            .TokenGenerator
+        context.TokenGenerator
             .Setup(o =>
                 o.TryValidateTokenSet(
                     context.HttpContext,
@@ -947,8 +927,7 @@ public class DefaultAntiforgeryTest
         );
 
         string? message;
-        context
-            .TokenGenerator
+        context.TokenGenerator
             .Setup(o =>
                 o.TryValidateTokenSet(
                     context.HttpContext,
@@ -989,8 +968,7 @@ public class DefaultAntiforgeryTest
         );
 
         var tokenSet = new AntiforgeryTokenSet(null, null, "form-field-name", null);
-        context
-            .TokenStore
+        context.TokenStore
             .Setup(s => s.GetRequestTokensAsync(context.HttpContext))
             .Returns(Task.FromResult(tokenSet));
 
@@ -1020,8 +998,7 @@ public class DefaultAntiforgeryTest
         );
 
         var tokenSet = new AntiforgeryTokenSet(null, "cookie-token", "form-field-name", null);
-        context
-            .TokenStore
+        context.TokenStore
             .Setup(s => s.GetRequestTokensAsync(context.HttpContext))
             .Returns(Task.FromResult(tokenSet));
 
@@ -1058,8 +1035,7 @@ public class DefaultAntiforgeryTest
             "form-field-name",
             "header-name"
         );
-        context
-            .TokenStore
+        context.TokenStore
             .Setup(s => s.GetRequestTokensAsync(context.HttpContext))
             .Returns(Task.FromResult(tokenSet));
 
@@ -1096,8 +1072,7 @@ public class DefaultAntiforgeryTest
             "form-field-name",
             "header-name"
         );
-        context
-            .TokenStore
+        context.TokenStore
             .Setup(s => s.GetRequestTokensAsync(context.HttpContext))
             .Returns(Task.FromResult(tokenSet));
 
@@ -1131,8 +1106,7 @@ public class DefaultAntiforgeryTest
         );
 
         string? message;
-        context
-            .TokenGenerator
+        context.TokenGenerator
             .Setup(o =>
                 o.TryValidateTokenSet(
                     context.HttpContext,
@@ -1320,8 +1294,7 @@ public class DefaultAntiforgeryTest
         );
         var antiforgery = GetAntiforgery(context);
 
-        context
-            .TokenStore
+        context.TokenStore
             .Setup(t =>
                 t.SaveCookieToken(context.HttpContext, "serialized-cookie-token-from-context")
             )
@@ -1333,8 +1306,7 @@ public class DefaultAntiforgeryTest
         // Assert
         // Token store used once, with expected arguments.
         // Passed context's cookie token though request's cookie token was valid.
-        context
-            .TokenStore
+        context.TokenStore
             .Verify(
                 t => t.SaveCookieToken(context.HttpContext, "serialized-cookie-token-from-context"),
                 Times.Once
@@ -1376,8 +1348,7 @@ public class DefaultAntiforgeryTest
         context.TokenSerializer.Verify(o => o.Serialize(It.IsAny<AntiforgeryToken>()), Times.Never);
 
         // Token store not used.
-        context
-            .TokenStore
+        context.TokenStore
             .Verify(
                 t => t.SaveCookieToken(It.IsAny<HttpContext>(), It.IsAny<string>()),
                 Times.Never
@@ -1485,8 +1456,7 @@ public class DefaultAntiforgeryTest
         var tokenSet = antiforgery.GetAndStoreTokens(context.HttpContext);
 
         // Assert
-        var hasWarningMessage = testSink
-            .Writes
+        var hasWarningMessage = testSink.Writes
             .Where(wc => wc.LogLevel == LogLevel.Warning)
             .Select(wc => wc.State?.ToString())
             .Contains(ResponseCacheHeadersOverrideWarningMessage);
@@ -1529,8 +1499,7 @@ public class DefaultAntiforgeryTest
         var tokenSet = antiforgery.GetAndStoreTokens(context.HttpContext);
 
         // Assert
-        var hasWarningMessage = testSink
-            .Writes
+        var hasWarningMessage = testSink.Writes
             .Where(wc => wc.LogLevel == LogLevel.Warning)
             .Select(wc => wc.State?.ToString())
             .Contains(ResponseCacheHeadersOverrideWarningMessage);
@@ -1568,8 +1537,7 @@ public class DefaultAntiforgeryTest
         var tokenSet = antiforgery.GetAndStoreTokens(context.HttpContext);
 
         // Assert
-        var hasWarningMessage = testSink
-            .Writes
+        var hasWarningMessage = testSink.Writes
             .Where(wc => wc.LogLevel == LogLevel.Warning)
             .Select(wc => wc.State?.ToString())
             .Contains(ResponseCacheHeadersOverrideWarningMessage);

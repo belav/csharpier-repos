@@ -242,8 +242,7 @@ namespace System.Web.Util
                                     out _dontUsePercentUUrlEncoding
                                 )
                             )
-                                _dontUsePercentUUrlEncoding = BinaryCompatibility
-                                    .Current
+                                _dontUsePercentUUrlEncoding = BinaryCompatibility.Current
                                     .TargetsAtLeastFramework452; // default value is keyed off of <httpRuntime targetFramework="4.5.2" />
 
                             if (
@@ -327,8 +326,7 @@ namespace System.Web.Util
                                     out _enableAsyncModelBinding
                                 )
                             )
-                                _enableAsyncModelBinding = BinaryCompatibility
-                                    .Current
+                                _enableAsyncModelBinding = BinaryCompatibility.Current
                                     .TargetsAtLeastFramework46;
 
                             if (
@@ -339,8 +337,7 @@ namespace System.Web.Util
                                 )
                                 || _requestQueueLimitPerSession < 0
                             )
-                                _requestQueueLimitPerSession = BinaryCompatibility
-                                    .Current
+                                _requestQueueLimitPerSession = BinaryCompatibility.Current
                                     .TargetsAtLeastFramework463
                                     ? DefaultRequestQueueLimitPerSession
                                     : UnlimitedRequestsPerSession;

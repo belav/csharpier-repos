@@ -390,8 +390,7 @@ namespace System.Data.Common.Utils
             Debug.Assert(function != null);
             MetadataProperty isComposableProperty;
             if (
-                function
-                    .MetadataProperties
+                function.MetadataProperties
                     .TryGetValue("IsComposableAttribute", false, out isComposableProperty)
             )
             {
@@ -435,14 +434,13 @@ namespace System.Data.Common.Utils
                 );
 
             //find EntitySetMappings where one of the mapping fragment maps some type to the given table
-            return containerMapping
-                .EntitySetMaps
+            return containerMapping.EntitySetMaps
                 .Where(map =>
-                    map.TypeMappings.Any(typeMap =>
-                        typeMap
-                            .MappingFragments
-                            .Any(mappingFrag => mappingFrag.TableSet.EdmEquals(table))
-                    )
+                    map.TypeMappings
+                        .Any(typeMap =>
+                            typeMap.MappingFragments
+                                .Any(mappingFrag => mappingFrag.TableSet.EdmEquals(table))
+                        )
                 )
                 .Select(m => m.Set)
                 .Cast<EntitySet>()
@@ -660,8 +658,7 @@ namespace System.Data.Common.Utils
             HashSet<Pair<EdmMember, EntityType>> thisEndKeys = new HashSet<
                 Pair<EdmMember, EntityType>
             >(
-                thisEndsEntityType
-                    .KeyMembers
+                thisEndsEntityType.KeyMembers
                     .Select(edmMember => new Pair<EdmMember, EntityType>(
                         edmMember,
                         thisEndsEntityType
@@ -982,8 +979,7 @@ namespace System.Data.Common.Utils
         {
             Facet concurrencyFacet;
             if (
-                typeUsage
-                    .Facets
+                typeUsage.Facets
                     .TryGetValue(
                         EdmProviderManifest.ConcurrencyModeFacetName,
                         false,
@@ -1003,8 +999,7 @@ namespace System.Data.Common.Utils
         {
             Facet storeGeneratedFacet;
             if (
-                member
-                    .TypeUsage
+                member.TypeUsage
                     .Facets
                     .TryGetValue(
                         EdmProviderManifest.StoreGeneratedPatternFacetName,

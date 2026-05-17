@@ -423,16 +423,13 @@ namespace JIT.HardwareIntrinsics.X86
 
             if (!Succeeded)
             {
-                TestLibrary
-                    .TestFramework
+                TestLibrary.TestFramework
                     .LogInformation(
                         $"{nameof(Avx)}.{nameof(Avx.ExtendToVector256)}<Int32>(Vector128<Int32>): {method} failed:"
                     );
-                TestLibrary
-                    .TestFramework
+                TestLibrary.TestFramework
                     .LogInformation($"  firstOp: ({string.Join(", ", firstOp)})");
-                TestLibrary
-                    .TestFramework
+                TestLibrary.TestFramework
                     .LogInformation($"   result: ({string.Join(", ", result)})");
                 TestLibrary.TestFramework.LogInformation(string.Empty);
             }

@@ -51,8 +51,7 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
                 structuralTypeDisplayService,
                 method.IsParams(),
                 c =>
-                    method
-                        .OriginalDefinition
+                    method.OriginalDefinition
                         .GetDocumentationParts(
                             semanticModel,
                             position,
@@ -62,8 +61,7 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
                 GetMethodGroupPreambleParts(method, semanticModel, position),
                 GetSeparatorParts(),
                 GetMethodGroupPostambleParts(),
-                method
-                    .Parameters
+                method.Parameters
                     .Select(p =>
                         Convert(p, semanticModel, position, documentationCommentFormattingService)
                     )

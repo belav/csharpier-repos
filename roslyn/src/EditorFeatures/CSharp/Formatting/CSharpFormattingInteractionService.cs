@@ -42,8 +42,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
         public bool SupportsFormattingOnTypedCharacter(Document document, char ch)
         {
             var isSmartIndent =
-                _editorOptionsService
-                    .GlobalOptions
+                _editorOptionsService.GlobalOptions
                     .GetOption(IndentationOptionsStorage.SmartIndent, LanguageNames.CSharp)
                 == FormattingOptions2.IndentStyle.Smart;
 
@@ -58,8 +57,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                 return true;
             }
 
-            var options = _editorOptionsService
-                .GlobalOptions
+            var options = _editorOptionsService.GlobalOptions
                 .GetAutoFormattingOptions(LanguageNames.CSharp);
 
             // If format-on-typing is not on, then we don't support formatting on any other characters.
@@ -134,8 +132,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                 parsedDocument.LanguageServices,
                 explicitFormat: true
             );
-            var service = parsedDocument
-                .LanguageServices
+            var service = parsedDocument.LanguageServices
                 .GetRequiredService<ISyntaxFormattingService>();
             return Task.FromResult(
                 service.GetFormattingChangesOnPaste(
@@ -162,8 +159,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
         )
         {
             var parsedDocument = ParsedDocument.CreateSynchronously(document, cancellationToken);
-            var service = parsedDocument
-                .LanguageServices
+            var service = parsedDocument.LanguageServices
                 .GetRequiredService<ISyntaxFormattingService>();
 
             if (

@@ -62,8 +62,7 @@ public class ControllerActionInvokerProviderTest
 
         foreach (var filterAttribute in method.GetCustomAttributes().OfType<IFilterMetadata>())
         {
-            actionDescriptor
-                .FilterDescriptors
+            actionDescriptor.FilterDescriptors
                 .Add(new FilterDescriptor(filterAttribute, FilterScope.Action));
         }
 

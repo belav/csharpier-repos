@@ -81,8 +81,7 @@ namespace System.ServiceModel.Description
         {
             if (endpointConfigurationName == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("endpointConfigurationName");
             }
             this.factory = new ChannelFactory<IMetadataExchange>(endpointConfigurationName);
@@ -127,8 +126,7 @@ namespace System.ServiceModel.Description
             {
                 if (value < TimeSpan.Zero)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentOutOfRangeException(
                                 "value",
@@ -140,8 +138,7 @@ namespace System.ServiceModel.Description
 
                 if (TimeoutHelper.IsTooLarge(value))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentOutOfRangeException(
                                 "value",
@@ -161,8 +158,7 @@ namespace System.ServiceModel.Description
             {
                 if (value < 1)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentOutOfRangeException(
                                 "value",
@@ -263,8 +259,7 @@ namespace System.ServiceModel.Description
                 }
                 else
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgument(
                             "scheme",
                             SR.GetString(
@@ -286,8 +281,7 @@ namespace System.ServiceModel.Description
 
             if (!address.IsAbsoluteUri)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(
                         "address",
                         SR.GetString(SR.SFxCannotGetMetadataFromRelativeAddress, address)
@@ -296,8 +290,7 @@ namespace System.ServiceModel.Description
 
             if (mode == MetadataExchangeClientMode.HttpGet && !IsHttpOrHttps(address))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(
                         "address",
                         SR.GetString(SR.SFxCannotHttpGetMetadataFromAddress, address)
@@ -319,8 +312,7 @@ namespace System.ServiceModel.Description
             if (ctorEndpointAddress != null)
                 return BeginGetMetadata(ctorEndpointAddress, callback, asyncState);
             else
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(SR.SFxMetadataExchangeClientNoMetadataAddress)
@@ -400,8 +392,7 @@ namespace System.ServiceModel.Description
             if (ctorEndpointAddress != null)
                 return GetMetadataAsync(ctorEndpointAddress);
             else
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(SR.SFxMetadataExchangeClientNoMetadataAddress)
@@ -419,12 +410,13 @@ namespace System.ServiceModel.Description
                     : (MetadataRetriever)
                         new MetadataReferenceRetriever(new EndpointAddress(address), this);
 
-            return Task.Factory.FromAsync<MetadataRetriever, MetadataSet>(
-                this.BeginGetMetadata,
-                this.EndGetMetadata,
-                retriever, /* state */
-                null
-            );
+            return Task.Factory
+                .FromAsync<MetadataRetriever, MetadataSet>(
+                    this.BeginGetMetadata,
+                    this.EndGetMetadata,
+                    retriever, /* state */
+                    null
+                );
         }
 
         public Task<MetadataSet> GetMetadataAsync(EndpointAddress address)
@@ -434,12 +426,13 @@ namespace System.ServiceModel.Description
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("address");
             }
 
-            return Task.Factory.FromAsync<MetadataRetriever, MetadataSet>(
-                this.BeginGetMetadata,
-                this.EndGetMetadata,
-                new MetadataReferenceRetriever(address, this), /* state */
-                null
-            );
+            return Task.Factory
+                .FromAsync<MetadataRetriever, MetadataSet>(
+                    this.BeginGetMetadata,
+                    this.EndGetMetadata,
+                    new MetadataReferenceRetriever(address, this), /* state */
+                    null
+                );
         }
 
         public Task<MetadataSet> GetMetadataAsync(EndpointAddress address, Uri via)
@@ -454,12 +447,13 @@ namespace System.ServiceModel.Description
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("via");
             }
 
-            return Task.Factory.FromAsync<MetadataRetriever, MetadataSet>(
-                this.BeginGetMetadata,
-                this.EndGetMetadata,
-                new MetadataReferenceRetriever(address, via, this), /* state */
-                null
-            );
+            return Task.Factory
+                .FromAsync<MetadataRetriever, MetadataSet>(
+                    this.BeginGetMetadata,
+                    this.EndGetMetadata,
+                    new MetadataReferenceRetriever(address, via, this), /* state */
+                    null
+                );
         }
 
         public MetadataSet GetMetadata()
@@ -469,8 +463,7 @@ namespace System.ServiceModel.Description
             if (ctorEndpointAddress != null)
                 return GetMetadata(ctorEndpointAddress);
             else
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(SR.SFxMetadataExchangeClientNoMetadataAddress)
@@ -553,8 +546,7 @@ namespace System.ServiceModel.Description
                 {
                     if (resolveCallState.ResolvedMaxResolvedReferences)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(
                                     SR.GetString(SR.SFxResolvedMaxResolvedReferences)
@@ -587,8 +579,7 @@ namespace System.ServiceModel.Description
                 bindingElementCollection.Find<TransportBindingElement>();
             if (bindingElement == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(SR.SFxBindingDoesNotHaveATransportBindingElement)
@@ -884,8 +875,7 @@ namespace System.ServiceModel.Description
                 {
                     if (Fx.IsFatal(e))
                         throw;
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(SR.SFxBadMetadataReference, this.SourceUrl),
@@ -994,8 +984,7 @@ namespace System.ServiceModel.Description
 
                 if (location.Scheme != Uri.UriSchemeHttp && location.Scheme != Uri.UriSchemeHttps)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgument(
                             "location",
                             SR.GetString(SR.SFxCannotGetMetadataFromLocation, location.ToString())
@@ -1020,11 +1009,8 @@ namespace System.ServiceModel.Description
                 HttpWebRequest request;
                 try
                 {
-                    request = this.resolver.GetWebRequest(
-                        this.location,
-                        this.dialect,
-                        this.identifier
-                    );
+                    request = this.resolver
+                        .GetWebRequest(this.location, this.dialect, this.identifier);
                 }
 #pragma warning suppress 56500 // covered by FxCOP
                 catch (Exception e)
@@ -1032,8 +1018,7 @@ namespace System.ServiceModel.Description
                     if (Fx.IsFatal(e))
                         throw;
 
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(
@@ -1091,19 +1076,15 @@ namespace System.ServiceModel.Description
                     HttpWebRequest request;
                     try
                     {
-                        request = this.resolver.GetWebRequest(
-                            this.location,
-                            this.dialect,
-                            this.identifier
-                        );
+                        request = this.resolver
+                            .GetWebRequest(this.location, this.dialect, this.identifier);
                     }
 #pragma warning suppress 56500 // covered by FxCOP
                     catch (Exception e)
                     {
                         if (Fx.IsFatal(e))
                             throw;
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(
                                     SR.GetString(
@@ -1132,8 +1113,7 @@ namespace System.ServiceModel.Description
                 {
                     if (Fx.IsFatal(e))
                         throw;
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(SR.SFxBadMetadataReference, this.SourceUrl),
@@ -1155,8 +1135,7 @@ namespace System.ServiceModel.Description
                 {
                     if (Fx.IsFatal(e))
                         throw;
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(SR.SFxBadMetadataReference, this.SourceUrl),
@@ -1334,19 +1313,15 @@ namespace System.ServiceModel.Description
                         ChannelFactory<IMetadataExchange> channelFactory;
                         try
                         {
-                            channelFactory = this.resolver.GetChannelFactory(
-                                this.address,
-                                this.dialect,
-                                this.identifier
-                            );
+                            channelFactory = this.resolver
+                                .GetChannelFactory(this.address, this.dialect, this.identifier);
                         }
 #pragma warning suppress 56500 // covered by FxCOP
                         catch (Exception e)
                         {
                             if (Fx.IsFatal(e))
                                 throw;
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
                                     new InvalidOperationException(
                                         SR.GetString(
@@ -1376,8 +1351,7 @@ namespace System.ServiceModel.Description
                 {
                     if (Fx.IsFatal(e))
                         throw;
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(SR.SFxBadMetadataReference, this.SourceUrl),
@@ -1414,19 +1388,15 @@ namespace System.ServiceModel.Description
                     ChannelFactory<IMetadataExchange> channelFactory;
                     try
                     {
-                        channelFactory = this.resolver.GetChannelFactory(
-                            this.address,
-                            this.dialect,
-                            this.identifier
-                        );
+                        channelFactory = this.resolver
+                            .GetChannelFactory(this.address, this.dialect, this.identifier);
                     }
 #pragma warning suppress 56500 // covered by FxCOP
                     catch (Exception e)
                     {
                         if (Fx.IsFatal(e))
                             throw;
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(
                                     SR.GetString(
@@ -1470,8 +1440,7 @@ namespace System.ServiceModel.Description
                     XmlWriter xmlWriter = XmlWriter.Create(stringWriter);
                     fault.WriteTo(xmlWriter, response.Version.Envelope);
                     xmlWriter.Flush();
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new InvalidOperationException(stringWriter.ToString()));
                 }
 
@@ -1489,8 +1458,7 @@ namespace System.ServiceModel.Description
                 {
                     if (Fx.IsFatal(e))
                         throw;
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(SR.SFxBadMetadataReference, this.SourceUrl),
@@ -1578,14 +1546,12 @@ namespace System.ServiceModel.Description
                     {
                         if (response.IsFault)
                         {
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
                                     new InvalidOperationException(
                                         SR.GetString(
                                             SR.SFxBadMetadataReference,
-                                            ((IClientChannel)metadataClient)
-                                                .RemoteAddress
+                                            ((IClientChannel)metadataClient).RemoteAddress
                                                 .Uri
                                                 .ToString()
                                         )
@@ -1620,8 +1586,7 @@ namespace System.ServiceModel.Description
             {
                 if (resolveCallState == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgumentNull("resolveCallState");
                 }
 
@@ -1663,8 +1628,7 @@ namespace System.ServiceModel.Description
                     {
                         if (resolveCallState.ResolvedMaxResolvedReferences)
                         {
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
                                     new InvalidOperationException(
                                         SR.GetString(SR.SFxResolvedMaxResolvedReferences)
@@ -1819,8 +1783,7 @@ namespace System.ServiceModel.Description
         {
             if (!IsDefined(value))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidEnumArgumentException(
                             "value",

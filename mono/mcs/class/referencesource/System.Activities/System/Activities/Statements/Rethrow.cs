@@ -19,24 +19,25 @@ namespace System.Activities.Statements
             };
             DelegateInArgument<ValidationContext> validationContext =
                 new DelegateInArgument<ValidationContext>() { Name = "validationContext" };
-            base.Constraints.Add(
-                new Constraint<Rethrow>
-                {
-                    Body = new ActivityAction<Rethrow, ValidationContext>
+            base.Constraints
+                .Add(
+                    new Constraint<Rethrow>
                     {
-                        Argument1 = element,
-                        Argument2 = validationContext,
-                        Handler = new RethrowBuildConstraint
+                        Body = new ActivityAction<Rethrow, ValidationContext>
                         {
-                            ParentChain = new GetParentChain
+                            Argument1 = element,
+                            Argument2 = validationContext,
+                            Handler = new RethrowBuildConstraint
                             {
-                                ValidationContext = validationContext,
+                                ParentChain = new GetParentChain
+                                {
+                                    ValidationContext = validationContext,
+                                },
+                                RethrowActivity = element,
                             },
-                            RethrowActivity = element,
                         },
-                    },
-                }
-            );
+                    }
+                );
         }
 
         protected override void CacheMetadata(NativeActivityMetadata metadata) { }
@@ -48,8 +49,7 @@ namespace System.Activities.Statements
 
             if (faultContext == null)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new InvalidOperationException(SR.FaultContextNotFound(this.DisplayName))
                     );

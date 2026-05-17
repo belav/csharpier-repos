@@ -49,8 +49,7 @@ namespace System.IdentityModel
 
             if (CipherData == null || CipherData.CipherValue == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ID6000)));
             }
 
@@ -81,8 +80,7 @@ namespace System.IdentityModel
             //
             if (cipherText.Length - offset < iv.Length)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(SR.ID6019, cipherText.Length - offset, iv.Length)
@@ -191,15 +189,13 @@ namespace System.IdentityModel
 
             if (securityTokenSerializer == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("securityTokenSerializer");
             }
 
             if (KeyIdentifier == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ID6001)));
             }
 

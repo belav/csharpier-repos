@@ -87,8 +87,7 @@ namespace System.Web.Http
         [Fact]
         public void Configuration_Property()
         {
-            Assert
-                .Reflection
+            Assert.Reflection
                 .Property<HttpControllerContext, HttpConfiguration>(
                     instance: new HttpControllerContext(),
                     propertyGetter: cc => cc.Configuration,
@@ -101,8 +100,7 @@ namespace System.Web.Http
         [Fact]
         public void Controller_Property()
         {
-            Assert
-                .Reflection
+            Assert.Reflection
                 .Property<HttpControllerContext, IHttpController>(
                     instance: new HttpControllerContext(),
                     propertyGetter: cc => cc.Controller,
@@ -115,8 +113,7 @@ namespace System.Web.Http
         [Fact]
         public void ControllerDescriptor_Property()
         {
-            Assert
-                .Reflection
+            Assert.Reflection
                 .Property<HttpControllerContext, HttpControllerDescriptor>(
                     instance: new HttpControllerContext(),
                     propertyGetter: cc => cc.ControllerDescriptor,
@@ -129,8 +126,7 @@ namespace System.Web.Http
         [Fact]
         public void RouteData_Property()
         {
-            Assert
-                .Reflection
+            Assert.Reflection
                 .Property<HttpControllerContext, IHttpRouteData>(
                     instance: new HttpControllerContext(),
                     propertyGetter: cc => cc.RouteData,

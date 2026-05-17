@@ -144,8 +144,7 @@ public class ServicePropertyDiscoveryConvention
             return false;
         }
 
-        factory = Dependencies
-            .MemberClassifier
+        factory = Dependencies.MemberClassifier
             .FindServicePropertyCandidateBindingFactory(memberInfo, model, UseAttributes);
         if (factory == null)
         {

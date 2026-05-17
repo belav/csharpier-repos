@@ -40,8 +40,7 @@ namespace ComInterfaceGenerator.Unit.Tests
                 new Microsoft.Interop.VtableIndexStubGenerator()
             );
 
-            INamedTypeSymbol? userDefinedInterface = newComp
-                .Assembly
+            INamedTypeSymbol? userDefinedInterface = newComp.Assembly
                 .GetTypeByMetadataName("INativeAPI");
             Assert.NotNull(userDefinedInterface);
 
@@ -72,8 +71,7 @@ namespace ComInterfaceGenerator.Unit.Tests
                 new Microsoft.Interop.VtableIndexStubGenerator()
             );
 
-            INamedTypeSymbol? userDefinedInterface = newComp
-                .Assembly
+            INamedTypeSymbol? userDefinedInterface = newComp.Assembly
                 .GetTypeByMetadataName("INativeAPI");
             Assert.NotNull(userDefinedInterface);
 
@@ -140,8 +138,7 @@ namespace ComInterfaceGenerator.Unit.Tests
                 new Microsoft.Interop.VtableIndexStubGenerator()
             );
 
-            INamedTypeSymbol? userDefinedInterface = newComp
-                .Assembly
+            INamedTypeSymbol? userDefinedInterface = newComp.Assembly
                 .GetTypeByMetadataName("INativeAPI");
             Assert.NotNull(userDefinedInterface);
 
@@ -184,8 +181,7 @@ namespace ComInterfaceGenerator.Unit.Tests
                 new Microsoft.Interop.VtableIndexStubGenerator()
             );
 
-            INamedTypeSymbol? userDefinedInterface = newComp
-                .Assembly
+            INamedTypeSymbol? userDefinedInterface = newComp.Assembly
                 .GetTypeByMetadataName("INativeAPI");
             Assert.NotNull(userDefinedInterface);
 

@@ -275,14 +275,12 @@ namespace Microsoft.CodeAnalysis.GenerateType
             CancellationToken cancellationToken
         )
         {
-            var containingNamespace = semanticDocument
-                .SemanticModel
+            var containingNamespace = semanticDocument.SemanticModel
                 .GetEnclosingNamespace(node.SpanStart, cancellationToken);
 
             // Only allow if the containing namespace is one that can be generated
             // into.
-            var declarationService = semanticDocument
-                .Document
+            var declarationService = semanticDocument.Document
                 .GetLanguageService<ISymbolDeclarationService>();
             var decl = declarationService
                 .GetDeclarations(containingNamespace)
@@ -291,8 +289,7 @@ namespace Microsoft.CodeAnalysis.GenerateType
                 .FirstOrDefault(node.GetAncestorsOrThis<SyntaxNode>().Contains);
 
             return decl != null
-                && semanticDocument
-                    .Document
+                && semanticDocument.Document
                     .GetLanguageService<ICodeGenerationService>()
                     .CanAddTo(decl, semanticDocument.Project.Solution, cancellationToken);
         }
@@ -304,8 +301,7 @@ namespace Microsoft.CodeAnalysis.GenerateType
             CancellationToken cancellationToken
         )
         {
-            var containingNamespace = document
-                .SemanticModel
+            var containingNamespace = document.SemanticModel
                 .GetEnclosingNamespace(node.SpanStart, cancellationToken);
             if (containingNamespace != null)
             {

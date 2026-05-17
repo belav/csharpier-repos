@@ -72,8 +72,7 @@ namespace System.ServiceModel.Discovery.Configuration
             {
                 if (string.IsNullOrEmpty(channelEndpointElement.Kind))
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(
                             new ConfigurationErrorsException(
                                 SR2.DiscoveryConfigAnnouncementEndpointMissingKind(
@@ -89,8 +88,7 @@ namespace System.ServiceModel.Discovery.Configuration
                 );
                 if (serviceEndpoint == null)
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(
                             new ConfigurationErrorsException(
                                 SR2.DiscoveryConfigInvalidEndpointConfiguration(
@@ -103,8 +101,7 @@ namespace System.ServiceModel.Discovery.Configuration
                 announcementEndpoint = serviceEndpoint as AnnouncementEndpoint;
                 if (announcementEndpoint == null)
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(
                             new InvalidOperationException(
                                 SR2.DiscoveryConfigInvalidAnnouncementEndpoint(

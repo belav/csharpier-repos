@@ -79,8 +79,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     }
                     else
                     {
-                        SeparatedSyntaxList<ArgumentSyntax> arguments = declarator
-                            .ArgumentList
+                        SeparatedSyntaxList<ArgumentSyntax> arguments = declarator.ArgumentList
                             .Arguments;
 
                         if (
@@ -106,8 +105,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
                             ExpressionSyntax sizeExpression = arguments[0].Expression;
 
-                            BinderFactory binderFactory =
-                                this.DeclaringCompilation.GetBinderFactory(SyntaxTree);
+                            BinderFactory binderFactory = this.DeclaringCompilation
+                                .GetBinderFactory(SyntaxTree);
                             Binder binder = binderFactory.GetBinder(sizeExpression);
                             binder = new ExecutableCodeBinder(
                                 sizeExpression,

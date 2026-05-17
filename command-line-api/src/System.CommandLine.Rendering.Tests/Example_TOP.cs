@@ -237,8 +237,7 @@ PID    COMMAND      %CPU TIME     #TH   #WQ  #PORT MEM    PURG   CMPRS  PGRP  PP
         [Fact]
         public void EXAMPLE_Table_view_emulating_top()
         {
-            consoleRenderer
-                .Formatter
+            consoleRenderer.Formatter
                 .AddFormatter<TimeSpan>(t => new ContentSpan(t.ToString(@"hh\:mm\:ss")));
 
             var view = new ProcessesTableView(Processes);

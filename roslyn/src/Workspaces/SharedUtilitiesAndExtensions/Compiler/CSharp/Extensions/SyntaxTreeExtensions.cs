@@ -595,10 +595,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             // work at the end of a file.
             if (position == root.FullWidth())
             {
-                token = root.EndOfFileToken.GetPreviousToken(
-                    includeSkipped: true,
-                    includeDirectives: true
-                );
+                token = root.EndOfFileToken
+                    .GetPreviousToken(includeSkipped: true, includeDirectives: true);
             }
 
             if (token.Kind() == SyntaxKind.CharacterLiteralToken)

@@ -40,8 +40,7 @@ namespace System.Runtime.Serialization
                 if (source.IsValueType)
                 {
                     if (!CanConvert(Type.GetTypeCode(target)))
-                        throw System
-                            .Runtime
+                        throw System.Runtime
                             .Serialization
                             .DiagnosticUtility
                             .ExceptionUtility
@@ -59,8 +58,7 @@ namespace System.Runtime.Serialization
                 else if (source.IsAssignableFrom(target))
                     return arg;
                 else
-                    throw System
-                        .Runtime
+                    throw System.Runtime
                         .Serialization
                         .DiagnosticUtility
                         .ExceptionUtility
@@ -81,8 +79,7 @@ namespace System.Runtime.Serialization
             else if (target.IsInterface || source.IsInterface)
                 return arg;
             else
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility

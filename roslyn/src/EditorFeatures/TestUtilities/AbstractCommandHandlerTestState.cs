@@ -72,8 +72,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests
             if (makeSeparateBufferForCursor)
             {
                 var languageName = Workspace.Projects.First().Language;
-                var contentType = Workspace
-                    .Services
+                var contentType = Workspace.Services
                     .GetLanguageServices(languageName)
                     .GetRequiredService<IContentTypeLanguageService>()
                     .GetDefaultContentType();
@@ -87,8 +86,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests
             }
             else
             {
-                var cursorDocument = Workspace
-                    .Documents
+                var cursorDocument = Workspace.Documents
                     .First(d => d.CursorPosition.HasValue || d.SelectedSpans.Any(ss => ss.IsEmpty));
                 _textView = cursorDocument.GetTextView();
                 _subjectBuffer = cursorDocument.GetTextBuffer();
@@ -96,13 +94,11 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests
                 var cursorPosition =
                     cursorDocument.CursorPosition
                     ?? cursorDocument.SelectedSpans.First(ss => ss.IsEmpty).Start;
-                _textView
-                    .Caret
+                _textView.Caret
                     .MoveTo(new SnapshotPoint(_subjectBuffer.CurrentSnapshot, cursorPosition));
 
                 if (
-                    cursorDocument
-                        .AnnotatedSpans
+                    cursorDocument.AnnotatedSpans
                         .TryGetValue("Selection", out var selectionSpanList)
                 )
                 {
@@ -153,8 +149,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests
                         isReversed = cursorPosition == firstSpan.End;
                     }
 
-                    _textView
-                        .Selection
+                    _textView.Selection
                         .Select(
                             new SnapshotSpan(boxSelectionStart, boxSelectionEnd),
                             isReversed: isReversed
@@ -166,8 +161,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests
                 .GetEditorOperations(_textView);
             this.UndoHistoryRegistry = GetService<ITextUndoHistoryRegistry>();
 
-            _textView
-                .Options
+            _textView.Options
                 .GlobalOptions
                 .SetOptionValue(DefaultOptions.IndentStyleId, IndentingStyle.Smart);
         }
@@ -278,8 +272,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests
         /// </summary>
         public void AssertNoAsynchronousOperationsRunning()
         {
-            var provider = Workspace
-                .ExportProvider
+            var provider = Workspace.ExportProvider
                 .GetExportedValue<AsynchronousOperationListenerProvider>();
             Assert.False(
                 provider.HasPendingWaiter(
@@ -294,8 +287,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests
         // This one is not used by the completion but used by SignatureHelp.
         public async Task WaitForAsynchronousOperationsAsync()
         {
-            var provider = Workspace
-                .ExportProvider
+            var provider = Workspace.ExportProvider
                 .GetExportedValue<AsynchronousOperationListenerProvider>();
             await provider.WaitAllDispatcherOperationAndTasksAsync(
                 Workspace,

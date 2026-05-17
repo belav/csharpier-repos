@@ -93,16 +93,14 @@ public static class CookieExtensions
         Action<CookieAuthenticationOptions> configureOptions
     )
     {
-        builder
-            .Services
+        builder.Services
             .TryAddEnumerable(
                 ServiceDescriptor.Singleton<
                     IPostConfigureOptions<CookieAuthenticationOptions>,
                     PostConfigureCookieAuthenticationOptions
                 >()
             );
-        builder
-            .Services
+        builder.Services
             .AddOptions<CookieAuthenticationOptions>(authenticationScheme)
             .Validate(
                 o => o.Cookie.Expiration == null,

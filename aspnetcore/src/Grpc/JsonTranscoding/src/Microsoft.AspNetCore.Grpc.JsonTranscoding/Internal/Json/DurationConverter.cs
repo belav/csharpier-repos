@@ -36,8 +36,7 @@ internal sealed class DurationConverter<TMessage> : SettingsConverterBase<TMessa
         }
         else
         {
-            message
-                .Descriptor
+            message.Descriptor
                 .Fields[Duration.SecondsFieldNumber]
                 .Accessor
                 .SetValue(message, seconds);

@@ -48,8 +48,7 @@ namespace System
 
             SafeTokenHandle token;
             if (
-                !Interop
-                    .Advapi32
+                !Interop.Advapi32
                     .OpenProcessToken(
                         Interop.Kernel32.GetCurrentProcess(),
                         (int)TokenAccessLevels.Read,
@@ -65,8 +64,7 @@ namespace System
                 Interop.Advapi32.TOKEN_ELEVATION elevation = new Interop.Advapi32.TOKEN_ELEVATION();
                 uint ignore;
                 if (
-                    !Interop
-                        .Advapi32
+                    !Interop.Advapi32
                         .GetTokenInformation(
                             token,
                             Interop.Advapi32.TOKEN_INFORMATION_CLASS.TokenElevation,

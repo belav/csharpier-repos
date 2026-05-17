@@ -112,8 +112,7 @@ namespace DbMetal_Test_Sqlite
             var testdir = Path.Combine(bd, Path.Combine("..", "tests"));
             var expectedDir = Path.Combine(testdir, "expected");
 
-            DbMetal
-                .Program
+            DbMetal.Program
                 .Main(
                     new[]
                     {

@@ -131,8 +131,7 @@ internal partial class PrimaryConstructorBaseTypeSignatureHelpProvider
         )
             return null;
 
-        var accessibleConstructors = baseType
-            .InstanceConstructors
+        var accessibleConstructors = baseType.InstanceConstructors
             .WhereAsArray(c => c.IsAccessibleWithin(within))
             .WhereAsArray(c =>
                 c.IsEditorBrowsable(options.HideAdvancedMembers, semanticModel.Compilation)
@@ -221,8 +220,7 @@ internal partial class PrimaryConstructorBaseTypeSignatureHelpProvider
             GetPreambleParts(constructor, semanticModel, position),
             GetSeparatorParts(),
             GetPostambleParts(),
-            constructor
-                .Parameters
+            constructor.Parameters
                 .Select(p =>
                     Convert(p, semanticModel, position, documentationCommentFormattingService)
                 )

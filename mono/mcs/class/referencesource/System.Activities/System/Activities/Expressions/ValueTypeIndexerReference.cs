@@ -185,8 +185,7 @@ namespace System.Activities.Expressions
                     {
                         return (TItem)this.getMethod.Invoke(this.operandLocation.Value, indices);
                     }
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(
                             new InvalidOperationException(
                                 SR.SpecialMethodNotFound("get_Item", typeof(TOperand).Name)

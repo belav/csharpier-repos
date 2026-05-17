@@ -41,14 +41,12 @@ namespace System.ServiceModel.Syndication
         {
             if (inlineDocumentType == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("inlineDocumentType");
             }
             if (!typeof(InlineCategoriesDocument).IsAssignableFrom(inlineDocumentType))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(
                         "inlineDocumentType",
                         SR.GetString(
@@ -60,14 +58,12 @@ namespace System.ServiceModel.Syndication
             }
             if (referencedDocumentType == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("referencedDocumentType");
             }
             if (!typeof(ReferencedCategoriesDocument).IsAssignableFrom(referencedDocumentType))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(
                         "referencedDocumentType",
                         SR.GetString(
@@ -156,8 +152,7 @@ namespace System.ServiceModel.Syndication
             }
             if (this.Document == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(SR.DocumentFormatterDoesNotHaveDocument)
@@ -177,8 +172,7 @@ namespace System.ServiceModel.Syndication
             }
             if (!CanRead(reader))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new XmlException(
                             SR.GetString(
@@ -202,8 +196,7 @@ namespace System.ServiceModel.Syndication
             }
             if (this.Document == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(SR.DocumentFormatterDoesNotHaveDocument)
@@ -320,16 +313,14 @@ namespace System.ServiceModel.Syndication
             }
             catch (FormatException e)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new XmlException(FeedUtils.AddLineInfo(reader, SR.ErrorParsingDocument), e)
                     );
             }
             catch (ArgumentException e)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new XmlException(FeedUtils.AddLineInfo(reader, SR.ErrorParsingDocument), e)
                     );

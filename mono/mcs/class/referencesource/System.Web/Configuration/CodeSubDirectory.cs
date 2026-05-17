@@ -97,8 +97,7 @@ namespace System.Web.Configuration
                 );
             }
 
-            VirtualPath codeVirtualSubDir = HttpRuntime
-                .CodeDirectoryVirtualPath
+            VirtualPath codeVirtualSubDir = HttpRuntime.CodeDirectoryVirtualPath
                 .SimpleCombineWithDir(directoryName);
 
             // Make sure the specified directory exists

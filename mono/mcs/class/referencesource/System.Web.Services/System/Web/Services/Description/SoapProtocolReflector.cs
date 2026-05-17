@@ -88,8 +88,7 @@ namespace System.Web.Services.Description
             }
             WebMethodAttribute methodAttr = Method.MethodAttribute;
 
-            OperationBinding
-                .Extensions
+            OperationBinding.Extensions
                 .Add(
                     CreateSoapOperationBinding(
                         soapMethod.rpc ? SoapBindingStyle.Rpc : SoapBindingStyle.Document,
@@ -273,8 +272,7 @@ namespace System.Web.Services.Description
                 }
             }
 
-            messageBinding
-                .Extensions
+            messageBinding.Extensions
                 .Add(CreateSoapBodyBinding(SoapBindingUse.Encoded, members.Namespace));
         }
 
@@ -344,8 +342,7 @@ namespace System.Web.Services.Description
                     }
                 }
             }
-            messageBinding
-                .Extensions
+            messageBinding.Extensions
                 .Add(CreateSoapBodyBinding(SoapBindingUse.Literal, rpc ? members.Namespace : null));
         }
 
@@ -385,8 +382,7 @@ namespace System.Web.Services.Description
         {
             if (extensions == null)
             {
-                TypeElementCollection extensionTypes = WebServicesSection
-                    .Current
+                TypeElementCollection extensionTypes = WebServicesSection.Current
                     .SoapExtensionReflectorTypes;
                 extensions = new SoapExtensionReflector[extensionTypes.Count];
                 for (int i = 0; i < extensions.Length; i++)
@@ -407,8 +403,7 @@ namespace System.Web.Services.Description
         {
             if (extensions == null)
             {
-                TypeElementCollection extensionTypes = WebServicesSection
-                    .Current
+                TypeElementCollection extensionTypes = WebServicesSection.Current
                     .SoapExtensionReflectorTypes;
                 extensions = new SoapExtensionReflector[extensionTypes.Count];
                 for (int i = 0; i < extensions.Length; i++)
@@ -439,15 +434,16 @@ namespace System.Web.Services.Description
             soapAddress.Location = serviceUrl;
             if (this.UriFixups != null)
             {
-                this.UriFixups.Add(
-                    delegate(Uri current)
-                    {
-                        soapAddress.Location = DiscoveryServerType.CombineUris(
-                            current,
-                            soapAddress.Location
-                        );
-                    }
-                );
+                this.UriFixups
+                    .Add(
+                        delegate(Uri current)
+                        {
+                            soapAddress.Location = DiscoveryServerType.CombineUris(
+                                current,
+                                soapAddress.Location
+                            );
+                        }
+                    );
             }
             return soapAddress;
         }

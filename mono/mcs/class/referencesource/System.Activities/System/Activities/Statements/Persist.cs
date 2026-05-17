@@ -23,8 +23,7 @@ namespace System.Activities.Statements
         {
             if (context.IsInNoPersistScope)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(new InvalidOperationException(SR.CannotPersistInsideNoPersist));
             }
 

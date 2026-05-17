@@ -138,8 +138,7 @@ namespace System.Reflection.Emit
         {
             // Use this delegate to avoid a linker dependency between RuntimeType and SRE code when SRE is not used
             if (RuntimeType.MakeTypeBuilderInstantiation == null)
-                RuntimeType.MakeTypeBuilderInstantiation = System
-                    .Reflection
+                RuntimeType.MakeTypeBuilderInstantiation = System.Reflection
                     .Emit
                     .TypeBuilderInstantiation
                     .MakeGenericType;

@@ -172,8 +172,7 @@ namespace System.Reflection.Emit
 
             new BlobEncoder(propertySignature)
                 .PropertySignature(
-                    isInstanceProperty: property
-                        .CallingConventions
+                    isInstanceProperty: property.CallingConventions
                         .HasFlag(CallingConventions.HasThis)
                 )
                 .Parameters(

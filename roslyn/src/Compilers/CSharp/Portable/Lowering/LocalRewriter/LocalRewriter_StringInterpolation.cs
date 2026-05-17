@@ -58,8 +58,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             Debug.Assert(rewrittenOperand.Type is object);
 
             CompoundUseSiteInfo<AssemblySymbol> useSiteInfo = GetNewCompoundUseSiteInfo();
-            Conversion conversion = _compilation
-                .Conversions
+            Conversion conversion = _compilation.Conversions
                 .ClassifyConversionFromType(
                     rewrittenOperand.Type,
                     rewrittenType,
@@ -544,8 +543,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     {
                         var data = operand.GetInterpolatedStringHandlerData();
                         Debug.Assert(
-                            ((BoundObjectCreationExpression)data.Construction)
-                                .Arguments
+                            ((BoundObjectCreationExpression)data.Construction).Arguments
                                 .All(a =>
                                     a
                                         is BoundInterpolatedStringArgumentPlaceholder

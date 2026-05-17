@@ -59,8 +59,7 @@ namespace System.Web.Http.ModelBinding
 
             HttpSelfHostConfiguration config = new HttpSelfHostConfiguration(baseAddress);
             config.HostNameComparisonMode = HostNameComparisonMode.Exact;
-            config
-                .Routes
+            config.Routes
                 .MapHttpRoute(
                     "Default",
                     "{controller}/{action}",

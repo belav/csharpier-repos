@@ -27,8 +27,7 @@ namespace Tracing.Tests.ExceptionThrown_V1
             };
 
             bool enableRundown = TestLibrary.Utilities.IsNativeAot ? false : true;
-            Dictionary<string, ExpectedEventCount> _expectedEventCounts = TestLibrary
-                .Utilities
+            Dictionary<string, ExpectedEventCount> _expectedEventCounts = TestLibrary.Utilities
                 .IsNativeAot
                 ? _expectedEventCountsNativeAOT
                 : _expectedEventCountsCoreCLR;

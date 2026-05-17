@@ -362,8 +362,7 @@ public static class MvcServiceCollectionExtensions
     {
         var mvcTagHelpersAssembly = typeof(InputTagHelper).Assembly;
         if (
-            !partManager
-                .ApplicationParts
+            !partManager.ApplicationParts
                 .OfType<AssemblyPart>()
                 .Any(p => p.Assembly == mvcTagHelpersAssembly)
         )
@@ -373,8 +372,7 @@ public static class MvcServiceCollectionExtensions
 
         var mvcRazorAssembly = typeof(UrlResolutionTagHelper).Assembly;
         if (
-            !partManager
-                .ApplicationParts
+            !partManager.ApplicationParts
                 .OfType<AssemblyPart>()
                 .Any(p => p.Assembly == mvcRazorAssembly)
         )

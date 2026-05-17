@@ -100,8 +100,7 @@ public class InputDate<[DynamicallyAccessedMembers(DynamicallyAccessedMemberType
         builder.AddAttribute(
             6,
             "onchange",
-            EventCallback
-                .Factory
+            EventCallback.Factory
                 .CreateBinder<string?>(
                     this,
                     __value => CurrentValueAsString = __value,

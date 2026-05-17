@@ -318,8 +318,7 @@ namespace System.Web.Http.ModelBinding
         )
         {
             HttpConfiguration config = new HttpConfiguration();
-            config
-                .Routes
+            config.Routes
                 .MapHttpRoute(
                     "DefaultApi",
                     "api/{controller}/{id}",
@@ -366,8 +365,7 @@ namespace System.Web.Http.ModelBinding
                     response = await client.SendAsync(request);
                     Assert.Equal(HttpStatusCode.OK, response.StatusCode);
                     string expectedGetQueryStringResponse = valuesController.Get(5);
-                    string actualGetQueryStringResponse = await response
-                        .Content
+                    string actualGetQueryStringResponse = await response.Content
                         .ReadAsAsync<string>();
                     Assert.Equal(expectedGetQueryStringResponse, actualGetQueryStringResponse);
                     if (traceWriter != null)
@@ -482,8 +480,7 @@ namespace System.Web.Http.ModelBinding
         public async Task ValuesController_Get_Id_Writes_Expected_Traces()
         {
             HttpConfiguration config = new HttpConfiguration();
-            config
-                .Routes
+            config.Routes
                 .MapHttpRoute(
                     "DefaultApi",
                     "api/{controller}/{id}",
@@ -543,8 +540,7 @@ namespace System.Web.Http.ModelBinding
         public async Task ValuesController_Get_Id_Writes_Expected_Traces_InTheCorrectOrder()
         {
             HttpConfiguration config = new HttpConfiguration();
-            config
-                .Routes
+            config.Routes
                 .MapHttpRoute(
                     "DefaultApi",
                     "api/{controller}/{id}",
@@ -681,26 +677,22 @@ namespace System.Web.Http.ModelBinding
                     && actualRecord.Exception is ReflectionTypeLoadException
                     && actualRecord.Message != null
                     && (
-                        actualRecord
-                            .Message
+                        actualRecord.Message
                             .StartsWith(
                                 "Exception thrown while getting types from 'xunit.runner.visualstudio.testadapter, ",
                                 StringComparison.Ordinal
                             )
-                        || actualRecord
-                            .Message
+                        || actualRecord.Message
                             .StartsWith(
                                 "Exception thrown while getting types from 'xunit.runner.msbuild.",
                                 StringComparison.Ordinal
                             )
-                        || actualRecord
-                            .Message
+                        || actualRecord.Message
                             .StartsWith(
                                 "Exception thrown while getting types from 'System.Web, ",
                                 StringComparison.Ordinal
                             )
-                        || actualRecord
-                            .Message
+                        || actualRecord.Message
                             .StartsWith(
                                 "Exception thrown while getting types from 'Microsoft.Build.Utilities.",
                                 StringComparison.Ordinal
@@ -789,26 +781,22 @@ namespace System.Web.Http.ModelBinding
                     && actualRecord.Exception is ReflectionTypeLoadException
                     && actualRecord.Message != null
                     && (
-                        actualRecord
-                            .Message
+                        actualRecord.Message
                             .StartsWith(
                                 "Exception thrown while getting types from 'xunit.runner.visualstudio.testadapter, ",
                                 StringComparison.Ordinal
                             )
-                        || actualRecord
-                            .Message
+                        || actualRecord.Message
                             .StartsWith(
                                 "Exception thrown while getting types from 'xunit.runner.msbuild.",
                                 StringComparison.Ordinal
                             )
-                        || actualRecord
-                            .Message
+                        || actualRecord.Message
                             .StartsWith(
                                 "Exception thrown while getting types from 'System.Web, ",
                                 StringComparison.Ordinal
                             )
-                        || actualRecord
-                            .Message
+                        || actualRecord.Message
                             .StartsWith(
                                 "Exception thrown while getting types from 'Microsoft.Build.Utilities.",
                                 StringComparison.Ordinal

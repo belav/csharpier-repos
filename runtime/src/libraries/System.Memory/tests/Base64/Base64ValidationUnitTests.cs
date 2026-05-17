@@ -144,8 +144,7 @@ namespace System.Buffers.Text.Tests
             byte[] expectedBytes
         )
         {
-            byte[] utf8BytesWithByteToBeIgnored = UTF8Encoding
-                .UTF8
+            byte[] utf8BytesWithByteToBeIgnored = UTF8Encoding.UTF8
                 .GetBytes(utf8WithByteToBeIgnored);
 
             Assert.True(Base64.IsValid(utf8BytesWithByteToBeIgnored));
@@ -171,8 +170,7 @@ namespace System.Buffers.Text.Tests
         [MemberData(nameof(StringsOnlyWithCharsToBeIgnored))]
         public void ValidateWithOnlyCharsToBeIgnoredBytes(string utf8WithByteToBeIgnored)
         {
-            byte[] utf8BytesWithByteToBeIgnored = UTF8Encoding
-                .UTF8
+            byte[] utf8BytesWithByteToBeIgnored = UTF8Encoding.UTF8
                 .GetBytes(utf8WithByteToBeIgnored);
 
             Assert.True(Base64.IsValid(utf8BytesWithByteToBeIgnored));
@@ -210,8 +208,7 @@ namespace System.Buffers.Text.Tests
             int expectedLength
         )
         {
-            byte[] utf8BytesWithByteToBeIgnored = UTF8Encoding
-                .UTF8
+            byte[] utf8BytesWithByteToBeIgnored = UTF8Encoding.UTF8
                 .GetBytes(utf8WithByteToBeIgnored);
 
             Assert.True(Base64.IsValid(utf8BytesWithByteToBeIgnored));
@@ -264,8 +261,7 @@ namespace System.Buffers.Text.Tests
         [InlineData("Y")]
         public void InvalidSizeBytes(string utf8WithByteToBeIgnored)
         {
-            byte[] utf8BytesWithByteToBeIgnored = UTF8Encoding
-                .UTF8
+            byte[] utf8BytesWithByteToBeIgnored = UTF8Encoding.UTF8
                 .GetBytes(utf8WithByteToBeIgnored);
 
             Assert.False(Base64.IsValid(utf8BytesWithByteToBeIgnored));
@@ -279,8 +275,7 @@ namespace System.Buffers.Text.Tests
         [InlineData("Y")]
         public void InvalidSizeChars(string utf8WithByteToBeIgnored)
         {
-            byte[] utf8BytesWithByteToBeIgnored = UTF8Encoding
-                .UTF8
+            byte[] utf8BytesWithByteToBeIgnored = UTF8Encoding.UTF8
                 .GetBytes(utf8WithByteToBeIgnored);
 
             Assert.False(Base64.IsValid(utf8BytesWithByteToBeIgnored));
@@ -306,8 +301,7 @@ namespace System.Buffers.Text.Tests
         [InlineData("aYQ==a ")]
         public void InvalidBase64Bytes(string utf8WithByteToBeIgnored)
         {
-            byte[] utf8BytesWithByteToBeIgnored = UTF8Encoding
-                .UTF8
+            byte[] utf8BytesWithByteToBeIgnored = UTF8Encoding.UTF8
                 .GetBytes(utf8WithByteToBeIgnored);
 
             Assert.False(Base64.IsValid(utf8BytesWithByteToBeIgnored));
@@ -345,8 +339,7 @@ namespace System.Buffers.Text.Tests
         [InlineData("    a    ")]
         public void InvalidBase64Chars(string utf8WithByteToBeIgnored)
         {
-            byte[] utf8BytesWithByteToBeIgnored = UTF8Encoding
-                .UTF8
+            byte[] utf8BytesWithByteToBeIgnored = UTF8Encoding.UTF8
                 .GetBytes(utf8WithByteToBeIgnored);
 
             Assert.False(Base64.IsValid(utf8BytesWithByteToBeIgnored));

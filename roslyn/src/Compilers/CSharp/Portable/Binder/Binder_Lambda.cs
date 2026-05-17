@@ -58,8 +58,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             if (syntax is LambdaExpressionSyntax lambdaSyntax)
             {
-                MessageID
-                    .IDS_FeatureLambda
+                MessageID.IDS_FeatureLambda
                     .CheckFeatureAvailability(diagnostics, lambdaSyntax.ArrowToken);
 
                 checkAttributes(syntax, lambdaSyntax.AttributeLists, diagnostics);
@@ -93,8 +92,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     // delegate (int x) { }
                     // delegate { }
                     var anon = (AnonymousMethodExpressionSyntax)syntax;
-                    MessageID
-                        .IDS_FeatureAnonDelegates
+                    MessageID.IDS_FeatureAnonDelegates
                         .CheckFeatureAvailability(diagnostics, anon.DelegateKeyword);
 
                     hasSignature = anon.ParameterList != null;
@@ -119,8 +117,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 }
                 else if (modifier.IsKind(SyntaxKind.StaticKeyword))
                 {
-                    MessageID
-                        .IDS_FeatureStaticAnonymousFunction
+                    MessageID.IDS_FeatureStaticAnonymousFunction
                         .CheckFeatureAvailability(diagnostics, modifier);
                     isStatic = true;
                 }
@@ -170,8 +167,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                         }
                         else
                         {
-                            MessageID
-                                .IDS_FeatureLambdaOptionalParameters
+                            MessageID.IDS_FeatureLambdaOptionalParameters
                                 .CheckFeatureAvailability(diagnostics, p.Default.EqualsToken);
                         }
                     }
@@ -325,8 +321,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     if (syntax.Kind() == SyntaxKind.ParenthesizedLambdaExpression)
                     {
-                        MessageID
-                            .IDS_FeatureLambdaAttributes
+                        MessageID.IDS_FeatureLambdaAttributes
                             .CheckFeatureAvailability(diagnostics, attributeList);
                     }
                     else
@@ -497,8 +492,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (data.HasSignature)
             {
                 var binder = new LocalScopeBinder(this);
-                bool allowShadowingNames = binder
-                    .Compilation
+                bool allowShadowingNames = binder.Compilation
                     .IsFeatureEnabled(MessageID.IDS_FeatureNameShadowingInNestedFunctions);
                 var pNames = PooledHashSet<string>.GetInstance();
                 bool seenDiscard = false;
@@ -517,8 +511,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                         if (seenDiscard)
                         {
                             // We only report the diagnostic on the second and subsequent underscores
-                            MessageID
-                                .IDS_FeatureLambdaDiscardParameters
+                            MessageID.IDS_FeatureLambdaDiscardParameters
                                 .CheckFeatureAvailability(
                                     diagnostics,
                                     binder.Compilation,

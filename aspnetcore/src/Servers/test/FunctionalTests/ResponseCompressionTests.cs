@@ -127,8 +127,7 @@ public class ResponseCompressionTests : LoggedTest
             else if (variant.Server == ServerType.IISExpress && !hostCompression)
             {
                 var iisDeploymentParameters = new IISDeploymentParameters(deploymentParameters);
-                iisDeploymentParameters
-                    .ServerConfigActionList
+                iisDeploymentParameters.ServerConfigActionList
                     .Add(
                         (element, _) =>
                         {

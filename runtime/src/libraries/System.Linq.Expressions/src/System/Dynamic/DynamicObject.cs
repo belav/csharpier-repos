@@ -669,8 +669,7 @@ namespace System.Dynamic
                     Debug.Assert(convert.Method == null);
 
                     // Prepare a good exception message in case the convert will fail
-                    string convertFailed = System
-                        .Linq
+                    string convertFailed = System.Linq
                         .Expressions
                         .Strings
                         .DynamicObjectResultNotAssignable(

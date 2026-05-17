@@ -104,11 +104,12 @@ namespace ComInterfaceGenerator.Unit.Tests
 
             var test = new UnsafeBlocksNotAllowedTest(false);
             test.TestState.Sources.Add(source);
-            test.ExpectedDiagnostics.Add(
-                new DiagnosticResult(GeneratorDiagnostics.RequiresAllowUnsafeBlocks)
-                    .WithLocation(0)
-                    .WithArguments("Test.C")
-            );
+            test.ExpectedDiagnostics
+                .Add(
+                    new DiagnosticResult(GeneratorDiagnostics.RequiresAllowUnsafeBlocks)
+                        .WithLocation(0)
+                        .WithArguments("Test.C")
+                );
 
             await test.RunAsync();
         }

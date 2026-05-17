@@ -138,8 +138,7 @@ namespace DbLinq.Vendor.Implementation
             {
                 //try case-insensitive match
                 //reason: MySql's Key_Column_Usage table contains both 'Northwind' and 'northwind'
-                referencedTable = schema
-                    .Tables
+                referencedTable = schema.Tables
                     .FirstOrDefault(t => referencedFullDbName.ToLower() == t.Name.ToLower());
             }
 

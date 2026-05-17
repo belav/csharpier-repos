@@ -84,8 +84,7 @@ namespace System.Text.Json.Serialization.Tests
             JsonSerializerOptions options = JsonSerializerOptions.Default;
 
             // Sanity check: type returns polymorphism options using the default resolver
-            JsonTypeInfo jti = options
-                .TypeInfoResolver
+            JsonTypeInfo jti = options.TypeInfoResolver
                 .GetTypeInfo(typeof(PolymorphicClass), options);
             Assert.NotNull(jti.PolymorphismOptions);
 
@@ -130,8 +129,7 @@ namespace System.Text.Json.Serialization.Tests
 
             JsonSerializer.Serialize(42); // Ensure default converters have been rooted
             var options = JsonSerializerOptions.Default;
-            JsonTypeInfo jsonTypeInfo = options
-                .TypeInfoResolver
+            JsonTypeInfo jsonTypeInfo = options.TypeInfoResolver
                 .GetTypeInfo(polymorphicType, options);
 
             Assert.Equal(polymorphicType, jsonTypeInfo.Type);
@@ -161,8 +159,7 @@ namespace System.Text.Json.Serialization.Tests
                     expected: derivedTypeAttributes.Select(attr =>
                         (attr.DerivedType, attr.TypeDiscriminator)
                     ),
-                    actual: polyOptions
-                        .DerivedTypes
+                    actual: polyOptions.DerivedTypes
                         .Select(attr => (attr.DerivedType, attr.TypeDiscriminator))
                 );
             }

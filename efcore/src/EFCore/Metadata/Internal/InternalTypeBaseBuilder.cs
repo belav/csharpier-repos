@@ -612,8 +612,7 @@ public abstract class InternalTypeBaseBuilder
                         newProperties![i] = propertyBuilder.Metadata;
                     }
                     else if (
-                        Metadata
-                            .Model
+                        Metadata.Model
                             .Builder
                             .CanBeConfigured(
                                 clrType,
@@ -719,8 +718,7 @@ public abstract class InternalTypeBaseBuilder
                     && property.ClrType.IsNullableType()
                 )
                 {
-                    property = property
-                        .DeclaringType
+                    property = property.DeclaringType
                         .Builder
                         .Property(
                             property.ClrType.MakeNullable(false),
@@ -731,8 +729,7 @@ public abstract class InternalTypeBaseBuilder
                 }
                 else
                 {
-                    property = property
-                        .DeclaringType
+                    property = property.DeclaringType
                         .Builder
                         .Property(property.Name, configurationSource.Value)!
                         .Metadata;
@@ -874,8 +871,7 @@ public abstract class InternalTypeBaseBuilder
         var detachedProperties = new List<InternalPropertyBuilder>();
         foreach (var propertyToDetach in propertiesToDetach)
         {
-            var property = propertyToDetach
-                .DeclaringType
+            var property = propertyToDetach.DeclaringType
                 .FindDeclaredProperty(propertyToDetach.Name);
             if (property != null)
             {
@@ -887,8 +883,7 @@ public abstract class InternalTypeBaseBuilder
                 ConfigurationSource? removedConfigurationSource;
                 if (property.DeclaringType.IsInModel)
                 {
-                    removedConfigurationSource = property
-                        .DeclaringType
+                    removedConfigurationSource = property.DeclaringType
                         .Builder
                         .RemoveProperty(property, property.GetConfigurationSource());
                 }
@@ -941,8 +936,7 @@ public abstract class InternalTypeBaseBuilder
         {
             if (conflictingComplexProperty.GetConfigurationSource() != ConfigurationSource.Explicit)
             {
-                conflictingComplexProperty
-                    .DeclaringType
+                conflictingComplexProperty.DeclaringType
                     .RemoveComplexProperty(conflictingComplexProperty);
             }
         }
@@ -1072,8 +1066,7 @@ public abstract class InternalTypeBaseBuilder
 
             foreach (var index in property.GetContainingIndexes().ToList())
             {
-                var removed = index
-                    .DeclaringEntityType
+                var removed = index.DeclaringEntityType
                     .Builder
                     .HasNoIndex(index, configurationSource);
                 Check.DebugAssert(removed != null, "removed is null");

@@ -3037,10 +3037,11 @@ namespace System.Web.UI.WebControls
             if (ce != null)
             {
                 if (
-                    ce.CommandName.Equals(
-                        ContinueButtonCommandName,
-                        StringComparison.CurrentCultureIgnoreCase
-                    )
+                    ce.CommandName
+                        .Equals(
+                            ContinueButtonCommandName,
+                            StringComparison.CurrentCultureIgnoreCase
+                        )
                 )
                 {
                     OnContinueButtonClick(EventArgs.Empty);

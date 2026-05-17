@@ -43,8 +43,7 @@ namespace System.Data.Objects
             _property = property;
             _isReadOnly = isReadOnly;
             _fieldType = DetermineClrType(_property.TypeUsage);
-            System
-                .Diagnostics
+            System.Diagnostics
                 .Debug
                 .Assert(
                     _fieldType != null,
@@ -85,8 +84,7 @@ namespace System.Data.Objects
                     Facet nullable;
                     if (
                         result.IsValueType
-                        && typeUsage
-                            .Facets
+                        && typeUsage.Facets
                             .TryGetValue(DbProviderManifest.NullableFacetName, false, out nullable)
                         && ((bool)nullable.Value)
                     )

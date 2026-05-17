@@ -20,16 +20,14 @@ namespace Microsoft.CodeAnalysis.SignatureHelp
     internal abstract partial class AbstractSignatureHelpProvider : ISignatureHelpProvider
     {
         protected static readonly SymbolDisplayFormat MinimallyQualifiedWithoutParametersFormat =
-            SymbolDisplayFormat
-                .MinimallyQualifiedFormat
+            SymbolDisplayFormat.MinimallyQualifiedFormat
                 .WithMemberOptions(
                     SymbolDisplayFormat.MinimallyQualifiedFormat.MemberOptions
                         & ~SymbolDisplayMemberOptions.IncludeParameters
                 );
 
         protected static readonly SymbolDisplayFormat MinimallyQualifiedWithoutTypeParametersFormat =
-            SymbolDisplayFormat
-                .MinimallyQualifiedFormat
+            SymbolDisplayFormat.MinimallyQualifiedFormat
                 .WithGenericsOptions(
                     SymbolDisplayFormat.MinimallyQualifiedFormat.GenericsOptions
                         & ~SymbolDisplayGenericsOptions.IncludeTypeParameters

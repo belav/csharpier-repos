@@ -18,8 +18,7 @@ namespace System.Net.Security.Tests
         [Fact]
         public static void EventSource_ExistsWithCorrectId()
         {
-            Type esType = typeof(SslStream)
-                .Assembly
+            Type esType = typeof(SslStream).Assembly
                 .GetType(
                     "System.Net.Security.NetSecurityTelemetry",
                     throwOnError: true,

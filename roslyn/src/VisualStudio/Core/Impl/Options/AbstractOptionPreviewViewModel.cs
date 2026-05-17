@@ -145,8 +145,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             project = project.WithMetadataReferences(referenceAssemblies);
 
             var document = project.AddDocument("document", SourceText.From(text, Encoding.UTF8));
-            var fallbackFormattingOptions = OptionStore
-                .GlobalOptions
+            var fallbackFormattingOptions = OptionStore.GlobalOptions
                 .GetSyntaxFormattingOptions(document.Project.Services);
             var formattingService = document.GetRequiredLanguageService<ISyntaxFormattingService>();
             var formattingOptions = formattingService.GetFormattingOptions(

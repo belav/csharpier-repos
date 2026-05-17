@@ -867,8 +867,7 @@ namespace System.Text.Json
             @"
 ";
 
-        private static readonly bool s_replaceNewlines = !StringComparer
-            .Ordinal
+        private static readonly bool s_replaceNewlines = !StringComparer.Ordinal
             .Equals(CompiledNewline, Environment.NewLine);
 
         // Should be called only on compile-time strings

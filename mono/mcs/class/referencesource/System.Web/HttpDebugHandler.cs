@@ -188,8 +188,7 @@ namespace System.Web
 
                 if (!HttpRuntime.DebuggingEnabled)
                 {
-                    context
-                        .Response
+                    context.Response
                         .Write(SR.GetString(SR.Debugging_forbidden, context.Request.Path));
                     context.Response.StatusCode = 403;
                     return;
@@ -241,8 +240,7 @@ namespace System.Web
                 )
                 {
                     Debug.Trace("AutoAttach", "Invalid logon_user or auth_type string.");
-                    context
-                        .Response
+                    context.Response
                         .Write(SR.GetString(SR.Debug_Access_Denied, context.Request.Path));
                     context.Response.StatusCode = 401;
                     return;
@@ -283,8 +281,7 @@ namespace System.Web
                 }
                 if (isClsIdOk == false)
                 {
-                    context
-                        .Response
+                    context.Response
                         .Write(SR.GetString(SR.Debug_Access_Denied, context.Request.Path));
                     context.Response.StatusCode = 401;
                     Debug.Trace(
@@ -313,8 +310,7 @@ namespace System.Web
                 if (rc != 0)
                 {
                     Debug.Trace("AutoAttach", "Debug attach failed! Return code: " + rc);
-                    context
-                        .Response
+                    context.Response
                         .Write(
                             SR.GetString(
                                 SR.Error_Attaching_with_MDM,

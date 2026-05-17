@@ -203,8 +203,7 @@ namespace System.Reflection.Metadata
                 Assert.NotNull(ty);
                 MethodInfo mi = ty.GetMethod(
                     nameof(
-                        System
-                            .Reflection
+                        System.Reflection
                             .Metadata
                             .ApplyUpdate
                             .Test
@@ -265,8 +264,7 @@ namespace System.Reflection.Metadata
 
                 MethodInfo mi1 = ty.GetMethod(
                     nameof(
-                        System
-                            .Reflection
+                        System.Reflection
                             .Metadata
                             .ApplyUpdate
                             .Test
@@ -282,8 +280,7 @@ namespace System.Reflection.Metadata
 
                 MethodInfo mi2 = ty.GetMethod(
                     nameof(
-                        System
-                            .Reflection
+                        System.Reflection
                             .Metadata
                             .ApplyUpdate
                             .Test
@@ -299,8 +296,7 @@ namespace System.Reflection.Metadata
 
                 MethodInfo mi3 = ty.GetMethod(
                     nameof(
-                        System
-                            .Reflection
+                        System.Reflection
                             .Metadata
                             .ApplyUpdate
                             .Test
@@ -343,8 +339,7 @@ namespace System.Reflection.Metadata
                 );
                 Assert.NotNull(mi);
 
-                string result = ApplyUpdate
-                    .Test
+                string result = ApplyUpdate.Test
                     .AsyncMethodChange
                     .TestTaskMethod()
                     .GetAwaiter()
@@ -951,8 +946,7 @@ namespace System.Reflection.Metadata
 
                 Assert.Equal("123", i.ItfMethod(123));
 
-                System
-                    .Reflection
+                System.Reflection
                     .Metadata
                     .ApplyUpdate
                     .Test

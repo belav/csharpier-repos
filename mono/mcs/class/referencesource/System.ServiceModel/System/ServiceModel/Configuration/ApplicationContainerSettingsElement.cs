@@ -118,8 +118,7 @@ namespace System.ServiceModel.Configuration
                         throw;
                     }
 
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(
                             new InvalidEnumArgumentException(
                                 SR.GetString(SR.SessionValueInvalid, value)

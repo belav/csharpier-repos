@@ -6479,15 +6479,13 @@ class Program
 
             void validateMetadata(ModuleSymbol module)
             {
-                var methodParam = module
-                    .GlobalNamespace
+                var methodParam = module.GlobalNamespace
                     .GetMember<MethodSymbol>("Program.M")
                     .Parameters[0];
                 Assert.True(methodParam.IsMetadataIn);
                 Assert.True(methodParam.IsMetadataOut);
 
-                var localFunctionParam = module
-                    .GlobalNamespace
+                var localFunctionParam = module.GlobalNamespace
                     .GetMember<MethodSymbol>("Program.<M>g__local|0_0")
                     .Parameters[0];
                 Assert.True(localFunctionParam.IsMetadataIn);
@@ -6547,15 +6545,13 @@ class Program
 
             void validateMetadata(ModuleSymbol module)
             {
-                var methodParam = module
-                    .GlobalNamespace
+                var methodParam = module.GlobalNamespace
                     .GetMember<MethodSymbol>("Program.M")
                     .Parameters[0];
                 Assert.True(methodParam.IsMetadataIn);
                 Assert.False(methodParam.IsMetadataOut);
 
-                var localFunctionParam = module
-                    .GlobalNamespace
+                var localFunctionParam = module.GlobalNamespace
                     .GetMember<MethodSymbol>("Program.<M>g__local|0_0")
                     .Parameters[0];
                 Assert.True(localFunctionParam.IsMetadataIn);
@@ -6616,15 +6612,13 @@ class Program
 
             void validateMetadata(ModuleSymbol module)
             {
-                var methodParam = module
-                    .GlobalNamespace
+                var methodParam = module.GlobalNamespace
                     .GetMember<MethodSymbol>("Program.M")
                     .Parameters[0];
                 Assert.False(methodParam.IsMetadataIn);
                 Assert.True(methodParam.IsMetadataOut);
 
-                var localFunctionParam = module
-                    .GlobalNamespace
+                var localFunctionParam = module.GlobalNamespace
                     .GetMember<MethodSymbol>("Program.<M>g__local|0_0")
                     .Parameters[0];
                 Assert.False(localFunctionParam.IsMetadataIn);

@@ -5395,8 +5395,7 @@ class Program
                 }
                 """,
                 parameters: new TestParameters(
-                    parseOptions: CSharpParseOptions
-                        .Default
+                    parseOptions: CSharpParseOptions.Default
                         .WithLanguageVersion(LanguageVersion.CSharp9)
                 )
             );
@@ -5431,8 +5430,7 @@ class Program
                 }
                 """,
                 parameters: new TestParameters(
-                    parseOptions: CSharpParseOptions
-                        .Default
+                    parseOptions: CSharpParseOptions.Default
                         .WithLanguageVersion(LanguageVersion.CSharp9)
                 )
             );

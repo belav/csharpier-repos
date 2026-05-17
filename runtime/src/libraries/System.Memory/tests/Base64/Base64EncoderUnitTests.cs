@@ -165,8 +165,7 @@ namespace System.Buffers.Text.Tests
             Assert.Equal(expectedConsumed, consumed);
             Assert.Equal(expectedWritten, encodedBytesCount);
 
-            string encodedText = Encoding
-                .ASCII
+            string encodedText = Encoding.ASCII
                 .GetString(encodedBytes.Slice(0, expectedWritten).ToArray());
             Assert.Equal(expectedText, encodedText);
         }
@@ -208,8 +207,7 @@ namespace System.Buffers.Text.Tests
             Assert.Equal(expectedConsumed, consumed);
             Assert.Equal(expectedWritten, encodedBytesCount);
 
-            string encodedText = Encoding
-                .ASCII
+            string encodedText = Encoding.ASCII
                 .GetString(encodedBytes.Slice(0, expectedWritten).ToArray());
             Assert.Equal(expectedText, encodedText);
         }
@@ -464,8 +462,7 @@ namespace System.Buffers.Text.Tests
                 );
                 Assert.Equal(Base64.GetMaxEncodedToUtf8Length(numberOfBytesToTest), bytesWritten);
 
-                var encodedText = Encoding
-                    .ASCII
+                var encodedText = Encoding.ASCII
                     .GetString(testBytes.Slice(0, bytesWritten).ToArray());
                 Assert.Equal(expectedText, encodedText);
             }

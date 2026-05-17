@@ -40,8 +40,7 @@ public class EnumIConvertibleToUint32
             UInt32 u1 = i1.ToUInt32(null);
             if (u1 != 0)
             {
-                TestLibrary
-                    .TestFramework
+                TestLibrary.TestFramework
                     .LogError("001", "The result is not the value as expected");
                 retVal = false;
             }
@@ -67,8 +66,7 @@ public class EnumIConvertibleToUint32
             UInt32 l2 = (e2 as IConvertible).ToUInt32(null);
             if (l2 != 5)
             {
-                TestLibrary
-                    .TestFramework
+                TestLibrary.TestFramework
                     .LogError("003", "The result is not the value as expected");
                 retVal = false;
             }
@@ -86,8 +84,7 @@ public class EnumIConvertibleToUint32
     {
         bool retVal = true;
 
-        TestLibrary
-            .TestFramework
+        TestLibrary.TestFramework
             .BeginScenario("PosTest3: Convert an enum of Uint32.maxvalue to Uint32");
 
         try
@@ -97,8 +94,7 @@ public class EnumIConvertibleToUint32
             UInt32 u1 = i1.ToUInt32(null);
             if (u1 != UInt32.MaxValue)
             {
-                TestLibrary
-                    .TestFramework
+                TestLibrary.TestFramework
                     .LogError("005", "The result is not the value as expected");
                 retVal = false;
             }
@@ -116,8 +112,7 @@ public class EnumIConvertibleToUint32
     {
         bool retVal = true;
 
-        TestLibrary
-            .TestFramework
+        TestLibrary.TestFramework
             .BeginScenario("PosTest4: Convert an enum of negative zero to Uint32 ");
 
         try
@@ -127,8 +122,7 @@ public class EnumIConvertibleToUint32
             UInt32 u1 = i1.ToUInt32(null);
             if (u1 != 0)
             {
-                TestLibrary
-                    .TestFramework
+                TestLibrary.TestFramework
                     .LogError("007", "The result is not the value as expected");
                 retVal = false;
             }
@@ -148,8 +142,7 @@ public class EnumIConvertibleToUint32
     {
         bool retVal = true;
 
-        TestLibrary
-            .TestFramework
+        TestLibrary.TestFramework
             .BeginScenario("NegTest1: Convert an enum of negative value to Uint32");
 
         try
@@ -157,8 +150,7 @@ public class EnumIConvertibleToUint32
             e_test e1 = e_test.itemA;
             IConvertible i1 = e1 as IConvertible;
             UInt32 u1 = i1.ToUInt32(null);
-            TestLibrary
-                .TestFramework
+            TestLibrary.TestFramework
                 .LogError("101", "The OverflowException was not thrown as expected");
             retVal = false;
         }
@@ -176,8 +168,7 @@ public class EnumIConvertibleToUint32
     {
         bool retVal = true;
 
-        TestLibrary
-            .TestFramework
+        TestLibrary.TestFramework
             .BeginScenario(
                 "NegTest2: Convert an enum of the value which is bigger than uint32.maxvalue to Uint32"
             );
@@ -187,8 +178,7 @@ public class EnumIConvertibleToUint32
             e_test e1 = e_test.itemB;
             IConvertible i1 = e1 as IConvertible;
             UInt32 u1 = i1.ToUInt32(null);
-            TestLibrary
-                .TestFramework
+            TestLibrary.TestFramework
                 .LogError("103", "The OverflowException was not thrown as expected");
             retVal = false;
         }

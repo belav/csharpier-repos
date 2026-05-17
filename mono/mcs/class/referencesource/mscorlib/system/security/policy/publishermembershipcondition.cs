@@ -170,8 +170,7 @@ namespace System.Security.Policy
                 ParseCertificate();
 
             SecurityElement root = new SecurityElement("IMembershipCondition");
-            System
-                .Security
+            System.Security
                 .Util
                 .XMLUtil
                 .AddClassAttribute(

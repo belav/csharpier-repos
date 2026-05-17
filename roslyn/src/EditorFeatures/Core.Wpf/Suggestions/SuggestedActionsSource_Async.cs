@@ -91,8 +91,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
                     return;
 
                 var selection = TryGetCodeRefactoringSelection(state, range);
-                await workspace
-                    .Services
+                await workspace.Services
                     .GetRequiredService<IWorkspaceStatusService>()
                     .WaitUntilFullyLoadedAsync(cancellationToken)
                     .ConfigureAwait(false);
@@ -265,8 +264,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
                 var owner = target.Owner;
                 var subjectBuffer = target.SubjectBuffer;
                 var workspace = document.Project.Solution.Workspace;
-                var supportsFeatureService = workspace
-                    .Services
+                var supportsFeatureService = workspace.Services
                     .GetRequiredService<ITextBufferSupportsFeatureService>();
 
                 var options = GlobalOptions.GetCodeActionOptionsProvider();
@@ -389,8 +387,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
 
                     return new SuggestedActionSet(
                         unifiedSuggestedActionSet.CategoryName,
-                        unifiedSuggestedActionSet
-                            .Actions
+                        unifiedSuggestedActionSet.Actions
                             .SelectAsArray(set => ConvertToSuggestedAction(set)),
                         unifiedSuggestedActionSet.Title,
                         ConvertToSuggestedActionSetPriority(unifiedSuggestedActionSet.Priority),
@@ -455,8 +452,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
                                     subjectBuffer,
                                     nestedAction.Provider ?? this,
                                     nestedAction.OriginalCodeAction,
-                                    nestedAction
-                                        .NestedActionSets
+                                    nestedAction.NestedActionSets
                                         .SelectAsArray(s => ConvertToSuggestedActionSet(s))
                                 ),
                             _ => throw ExceptionUtilities.Unreachable(),

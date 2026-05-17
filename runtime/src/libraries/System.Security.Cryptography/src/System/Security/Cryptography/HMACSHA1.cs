@@ -165,8 +165,7 @@ namespace System.Security.Cryptography
                 return false;
             }
 
-            bytesWritten = HashProviderDispenser
-                .OneShotHashProvider
+            bytesWritten = HashProviderDispenser.OneShotHashProvider
                 .MacData(HashAlgorithmNames.SHA1, key, source, destination);
             Debug.Assert(bytesWritten == HashSizeInBytes);
 

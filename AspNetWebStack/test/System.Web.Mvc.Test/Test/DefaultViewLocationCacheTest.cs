@@ -87,8 +87,7 @@ namespace System.Web.Mvc.Test
         public void NullViewLocationCacheReturnsNullLocations()
         {
             // Act
-            DefaultViewLocationCache
-                .Null
+            DefaultViewLocationCache.Null
                 .InsertViewLocation(
                     null /* httpContext */
                     ,
@@ -98,8 +97,7 @@ namespace System.Web.Mvc.Test
 
             // Assert
             Assert.Null(
-                DefaultViewLocationCache
-                    .Null
+                DefaultViewLocationCache.Null
                     .GetViewLocation(
                         null /* httpContext */
                         ,

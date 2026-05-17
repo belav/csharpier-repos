@@ -43,8 +43,7 @@ namespace ILCompiler.Metadata
 
             if (adderHasMetadata)
             {
-                result
-                    .MethodSemantics
+                result.MethodSemantics
                     .Add(
                         new MethodSemantics
                         {
@@ -56,8 +55,7 @@ namespace ILCompiler.Metadata
 
             if (raiserHasMetadata)
             {
-                result
-                    .MethodSemantics
+                result.MethodSemantics
                     .Add(
                         new MethodSemantics
                         {
@@ -69,8 +67,7 @@ namespace ILCompiler.Metadata
 
             if (removerHasMetadata)
             {
-                result
-                    .MethodSemantics
+                result.MethodSemantics
                     .Add(
                         new MethodSemantics
                         {

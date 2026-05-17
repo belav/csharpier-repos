@@ -226,8 +226,7 @@ namespace Microsoft.CodeAnalysis.SplitOrMergeIfStatements
             //        Foo();
             //    }
             if (
-                !System
-                    .Linq
+                !System.Linq
                     .ImmutableArrayExtensions
                     .SequenceEqual(
                         ifGenerator.GetElseIfAndElseClauses(outerIfOrElseIf),

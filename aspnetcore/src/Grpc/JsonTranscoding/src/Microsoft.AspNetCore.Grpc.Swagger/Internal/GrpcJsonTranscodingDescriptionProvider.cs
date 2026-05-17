@@ -96,8 +96,7 @@ internal sealed class GrpcJsonTranscodingDescriptionProvider : IApiDescriptionPr
             },
             EndpointMetadata = routeEndpoint.Metadata.ToList(),
         };
-        apiDescription
-            .SupportedRequestFormats
+        apiDescription.SupportedRequestFormats
             .Add(new ApiRequestFormat { MediaType = "application/json" });
 
         var responseBodyDescriptor = ServiceDescriptorHelpers.ResolveResponseBodyDescriptor(
@@ -108,8 +107,7 @@ internal sealed class GrpcJsonTranscodingDescriptionProvider : IApiDescriptionPr
             responseBodyDescriptor != null
                 ? MessageDescriptorHelpers.ResolveFieldType(responseBodyDescriptor)
                 : methodDescriptor.OutputType.ClrType;
-        apiDescription
-            .SupportedResponseTypes
+        apiDescription.SupportedResponseTypes
             .Add(
                 new ApiResponseType
                 {
@@ -123,8 +121,7 @@ internal sealed class GrpcJsonTranscodingDescriptionProvider : IApiDescriptionPr
                     StatusCode = 200,
                 }
             );
-        apiDescription
-            .SupportedResponseTypes
+        apiDescription.SupportedResponseTypes
             .Add(
                 new ApiResponseType
                 {
@@ -175,8 +172,7 @@ internal sealed class GrpcJsonTranscodingDescriptionProvider : IApiDescriptionPr
                         MessageDescriptorHelpers.ResolveFieldType(field)
                     );
 
-            apiDescription
-                .ParameterDescriptions
+            apiDescription.ParameterDescriptions
                 .Add(
                     new ApiParameterDescription
                     {
@@ -214,8 +210,7 @@ internal sealed class GrpcJsonTranscodingDescriptionProvider : IApiDescriptionPr
                     }
                     : null;
 
-            apiDescription
-                .ParameterDescriptions
+            apiDescription.ParameterDescriptions
                 .Add(
                     new ApiParameterDescription
                     {
@@ -237,8 +232,7 @@ internal sealed class GrpcJsonTranscodingDescriptionProvider : IApiDescriptionPr
         {
             var fieldType = MessageDescriptorHelpers.ResolveFieldType(queryDescription.Value);
 
-            apiDescription
-                .ParameterDescriptions
+            apiDescription.ParameterDescriptions
                 .Add(
                     new ApiParameterDescription
                     {

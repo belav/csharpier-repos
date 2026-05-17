@@ -390,11 +390,11 @@ namespace System.Data.Mapping.ViewGeneration.Structures
                                     );
                                 foreach (
                                     var association in associations.Where(association =>
-                                        association
-                                            .AssociationSetEnds
+                                        association.AssociationSetEnds
                                             .Any(end =>
                                                 (
-                                                    end.CorrespondingAssociationEndMember.RelationshipMultiplicity
+                                                    end.CorrespondingAssociationEndMember
+                                                        .RelationshipMultiplicity
                                                         == RelationshipMultiplicity.One
                                                     && (
                                                         MetadataHelper
@@ -431,13 +431,11 @@ namespace System.Data.Mapping.ViewGeneration.Structures
                         {
                             // condition of NotNull and slot not being projected
                             builder.AppendLine(
-                                System
-                                    .Data
+                                System.Data
                                     .Entity
                                     .Strings
                                     .ViewGen_NotNull_No_Projected_Slot(
-                                        restriction
-                                            .RestrictedMemberSlot
+                                        restriction.RestrictedMemberSlot
                                             .MemberPath
                                             .PathToString(false)
                                     )

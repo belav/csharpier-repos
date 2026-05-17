@@ -40,8 +40,7 @@ namespace System.ServiceModel.Channels
             }
             if (!ListenUriModeHelper.IsDefined(listenUriMode))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentOutOfRangeException("listenUriMode"));
             }
 
@@ -180,8 +179,7 @@ namespace System.ServiceModel.Channels
             BindingElement element = this.remainingBindingElements.Remove<BindingElement>();
             if (element != null)
                 return element;
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(
                     new InvalidOperationException(
                         SR.GetString(
@@ -208,8 +206,7 @@ namespace System.ServiceModel.Channels
                     string typeString = bindingElement.GetType().ToString();
                     builder.Append(typeString.Substring(typeString.LastIndexOf('.') + 1));
                 }
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(SR.NotAllBindingElementsBuilt, builder.ToString())

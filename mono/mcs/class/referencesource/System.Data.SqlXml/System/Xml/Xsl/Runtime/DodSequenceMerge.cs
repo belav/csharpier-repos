@@ -126,10 +126,8 @@ namespace System.Xml.Xsl.Runtime
         {
             for (int i = this.sequencesToMerge.Count - 1; i >= 0; i--)
             {
-                int cmp = this.runtime.ComparePosition(
-                    sequence.Current,
-                    this.sequencesToMerge[i].Current
-                );
+                int cmp = this.runtime
+                    .ComparePosition(sequence.Current, this.sequencesToMerge[i].Current);
 
                 if (cmp == -1)
                 {

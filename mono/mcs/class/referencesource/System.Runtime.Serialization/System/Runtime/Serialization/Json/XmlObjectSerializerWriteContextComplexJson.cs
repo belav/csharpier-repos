@@ -185,8 +185,7 @@ namespace System.Runtime.Serialization.Json
                     // Without __type, the resulting JSON cannot be deserialized since a number cannot be directly assigned to System.Enum.
                     if (declaredContract.UnderlyingType == typeof(Enum))
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new SerializationException(
                                     SR.GetString(
@@ -219,8 +218,7 @@ namespace System.Runtime.Serialization.Json
             GetObjectData(obj, serInfo, GetStreamingContext());
             if (DataContract.GetClrTypeFullName(objType) != serInfo.FullTypeName)
             {
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -433,8 +431,7 @@ namespace System.Runtime.Serialization.Json
                 && !Globals.TypeOfIXmlSerializable.IsAssignableFrom(declaredType)
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         XmlObjectSerializer.CreateSerializationException(
                             SR.GetString(
@@ -451,8 +448,7 @@ namespace System.Runtime.Serialization.Json
                 && !CollectionDataContract.IsCollectionInterface(declaredType)
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         XmlObjectSerializer.CreateSerializationException(
                             SR.GetString(
@@ -551,8 +547,7 @@ namespace System.Runtime.Serialization.Json
 
             if (!IsKnownType(dataContract, declaredType))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         XmlObjectSerializer.CreateSerializationException(
                             SR.GetString(
@@ -620,8 +615,7 @@ namespace System.Runtime.Serialization.Json
                 )
                 {
                     itemContract = context.GetDataContract(
-                        Globals
-                            .TypeOfKeyValuePair
+                        Globals.TypeOfKeyValuePair
                             .MakeGenericType(collectionContract.ItemType.GetGenericArguments())
                     );
                 }

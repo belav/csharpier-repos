@@ -112,8 +112,7 @@ namespace Microsoft.CodeAnalysis.Remote
                 // global services that need it.
                 GlobalServiceBroker.RegisterServiceBroker(serviceBroker);
 
-                var descriptor = ServiceDescriptors
-                    .Instance
+                var descriptor = ServiceDescriptors.Instance
                     .GetServiceDescriptorForServiceFactory(typeof(TService));
                 var serviceHubTraceSource = (TraceSource?)
                     hostProvidedServices.GetService(typeof(TraceSource));

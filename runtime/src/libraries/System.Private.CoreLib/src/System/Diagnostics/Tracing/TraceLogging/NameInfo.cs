@@ -86,8 +86,7 @@ namespace System.Diagnostics.Tracing
                 {
                     if ((eventHandle = eventHandleTable[descriptor.EventId]) == IntPtr.Zero)
                     {
-                        byte[]? metadata = EventPipeMetadataGenerator
-                            .Instance
+                        byte[]? metadata = EventPipeMetadataGenerator.Instance
                             .GenerateEventMetadata(
                                 descriptor.EventId,
                                 name,
@@ -104,8 +103,7 @@ namespace System.Diagnostics.Tracing
                             fixed (byte* pMetadataBlob = metadata)
                             {
                                 // Define the event.
-                                eventHandle = provider
-                                    ._eventProvider
+                                eventHandle = provider._eventProvider
                                     .DefineEventHandle(
                                         (uint)descriptor.EventId,
                                         name,

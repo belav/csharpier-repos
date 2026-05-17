@@ -70,8 +70,7 @@ namespace Microsoft.VisualBasic.Activities.XamlIntegration
                     )
                 )
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(new InvalidOperationException(SR.InvalidVisualBasicSettingsValue));
                 }
 

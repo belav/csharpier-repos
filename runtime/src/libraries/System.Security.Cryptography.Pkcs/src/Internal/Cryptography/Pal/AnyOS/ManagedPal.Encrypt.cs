@@ -110,8 +110,7 @@ namespace Internal.Cryptography.Pal.AnyOS
                 CmsRecipient recipient = recipients[i];
                 bool v0Recipient;
 
-                envelopedData.RecipientInfos[i].Ktri = recipient
-                    .Certificate
+                envelopedData.RecipientInfos[i].Ktri = recipient.Certificate
                     .GetKeyAlgorithm() switch
                 {
                     Oids.Rsa => MakeKtri(cek, recipient, out v0Recipient),
@@ -199,8 +198,7 @@ namespace Internal.Cryptography.Pal.AnyOS
                             out _
                         );
 
-                        ReadOnlySpan<byte> content = contentInfo
-                            .Content
+                        ReadOnlySpan<byte> content = contentInfo.Content
                             .AsSpan(contentOffset, contentLength);
                         return EncryptOneShot(alg, content);
                     }

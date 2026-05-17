@@ -462,41 +462,34 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     if (dataFlow.Succeeded)
                     {
                         Assert.False(
-                            dataFlow
-                                .VariablesDeclared
+                            dataFlow.VariablesDeclared
                                 .Contains(symbol, ReferenceEqualityComparer.Instance)
                         );
                         Assert.False(
-                            dataFlow
-                                .AlwaysAssigned
+                            dataFlow.AlwaysAssigned
                                 .Contains(symbol, ReferenceEqualityComparer.Instance)
                         );
                         Assert.False(
-                            dataFlow
-                                .WrittenInside
+                            dataFlow.WrittenInside
                                 .Contains(symbol, ReferenceEqualityComparer.Instance)
                         );
                         Assert.False(
-                            dataFlow
-                                .DataFlowsIn
+                            dataFlow.DataFlowsIn
                                 .Contains(symbol, ReferenceEqualityComparer.Instance)
                         );
                         Assert.False(
                             dataFlow.ReadInside.Contains(symbol, ReferenceEqualityComparer.Instance)
                         );
                         Assert.False(
-                            dataFlow
-                                .DataFlowsOut
+                            dataFlow.DataFlowsOut
                                 .Contains(symbol, ReferenceEqualityComparer.Instance)
                         );
                         Assert.False(
-                            dataFlow
-                                .ReadOutside
+                            dataFlow.ReadOutside
                                 .Contains(symbol, ReferenceEqualityComparer.Instance)
                         );
                         Assert.False(
-                            dataFlow
-                                .WrittenOutside
+                            dataFlow.WrittenOutside
                                 .Contains(symbol, ReferenceEqualityComparer.Instance)
                         );
                     }

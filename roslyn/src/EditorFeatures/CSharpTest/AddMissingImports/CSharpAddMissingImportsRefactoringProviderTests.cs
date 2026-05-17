@@ -29,8 +29,7 @@ namespace Microsoft.CodeAnalysis.AddMissingImports
         )
         {
             var testWorkspace = (TestWorkspace)workspace;
-            var pasteTrackingService = testWorkspace
-                .ExportProvider
+            var pasteTrackingService = testWorkspace.ExportProvider
                 .GetExportedValue<PasteTrackingService>();
             return new CSharpAddMissingImportsRefactoringProvider(pasteTrackingService);
         }
@@ -46,8 +45,7 @@ namespace Microsoft.CodeAnalysis.AddMissingImports
 
             if (!pastedTextSpan.IsEmpty)
             {
-                var pasteTrackingService = workspace
-                    .ExportProvider
+                var pasteTrackingService = workspace.ExportProvider
                     .GetExportedValue<PasteTrackingService>();
 
                 // This tests the paste tracking service's resiliancy to failing when multiple pasted spans are

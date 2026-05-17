@@ -55,8 +55,7 @@ namespace System.Activities.Expressions
             Activity<TResult> result;
             if (expression == null)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new ArgumentNullException("expression", SR.ExpressionRequiredForConversion)
                     );
@@ -276,8 +275,7 @@ namespace System.Activities.Expressions
             }
             if (throwOnError)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new NotSupportedException(SR.UnsupportedExpressionType(body.NodeType))
                     );
@@ -300,8 +298,7 @@ namespace System.Activities.Expressions
             Activity<Location<TResult>> result;
             if (expression == null)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new ArgumentNullException("expression", SR.ExpressionRequiredForConversion)
                     );
@@ -459,8 +456,7 @@ namespace System.Activities.Expressions
             }
             if (throwOnError)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new NotSupportedException(
                             SR.UnsupportedReferenceExpressionType(body.NodeType)
@@ -486,8 +482,7 @@ namespace System.Activities.Expressions
                 {
                     if (throwOnError)
                     {
-                        throw FxTrace
-                            .Exception
+                        throw FxTrace.Exception
                             .AsError(
                                 new ValidationException(SR.InstanceMethodCallRequiresTargetObject)
                             );
@@ -602,8 +597,7 @@ namespace System.Activities.Expressions
             {
                 if (throwOnError)
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(
                             new ValidationException(SR.InstanceMethodCallRequiresTargetObject)
                         );
@@ -757,8 +751,7 @@ namespace System.Activities.Expressions
             {
                 if (throwOnError)
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(
                             new NotSupportedException(
                                 SR.DoNotSupportArrayIndexerOnNonArrayType(leftType)
@@ -776,8 +769,7 @@ namespace System.Activities.Expressions
             {
                 if (throwOnError)
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(
                             new NotSupportedException(
                                 SR.DoNotSupportArrayIndexerReferenceWithDifferentArrayTypeAndResultType(
@@ -799,8 +791,7 @@ namespace System.Activities.Expressions
             {
                 if (throwOnError)
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(
                             new NotSupportedException(
                                 SR.DoNotSupportArrayIndexerWithNonIntIndex(rightType)
@@ -1086,8 +1077,7 @@ namespace System.Activities.Expressions
                 {
                     if (throwOnError)
                     {
-                        throw FxTrace
-                            .Exception
+                        throw FxTrace.Exception
                             .AsError(new ValidationException(SR.RuntimeArgumentNotCreated));
                     }
                     else
@@ -1107,8 +1097,7 @@ namespace System.Activities.Expressions
                 }
                 if (throwOnError)
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(
                             new ValidationException(SR.ArgumentMustbePropertyofWorkflowElement)
                         );
@@ -1140,8 +1129,7 @@ namespace System.Activities.Expressions
             }
             if (throwOnError)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(new ValidationException(SR.ArgumentMustbePropertyofWorkflowElement));
             }
             else
@@ -1192,8 +1180,7 @@ namespace System.Activities.Expressions
             {
                 if (throwOnError)
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(
                             new NotSupportedException(
                                 SR.DoNotSupportArrayIndexerOnNonArrayType(leftType)
@@ -1209,8 +1196,7 @@ namespace System.Activities.Expressions
             {
                 if (throwOnError)
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(
                             new NotSupportedException(
                                 SR.DoNotSupportArrayIndexerValueWithIncompatibleArrayTypeAndResultType(
@@ -1232,8 +1218,7 @@ namespace System.Activities.Expressions
             {
                 if (throwOnError)
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(
                             new NotSupportedException(
                                 SR.DoNotSupportArrayIndexerWithNonIntIndex(rightType)
@@ -1458,8 +1443,7 @@ namespace System.Activities.Expressions
                 default:
                     if (throwOnError)
                     {
-                        throw FxTrace
-                            .Exception
+                        throw FxTrace.Exception
                             .AsError(
                                 new NotSupportedException(
                                     SR.UnsupportedExpressionType(binaryExpressionBody.NodeType)
@@ -1545,8 +1529,7 @@ namespace System.Activities.Expressions
                 default:
                     if (throwOnError)
                     {
-                        throw FxTrace
-                            .Exception
+                        throw FxTrace.Exception
                             .AsError(
                                 new NotSupportedException(
                                     SR.UnsupportedExpressionType(unaryExpressionBody.NodeType)
@@ -1647,8 +1630,7 @@ namespace System.Activities.Expressions
             }
             if (throwOnError)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new NotSupportedException(
                             SR.UnsupportedMemberExpressionWithType(
@@ -1810,8 +1792,7 @@ namespace System.Activities.Expressions
             }
             if (throwOnError)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new NotSupportedException(
                             SR.UnsupportedMemberExpressionWithType(
@@ -1840,8 +1821,7 @@ namespace System.Activities.Expressions
             {
                 if (throwOnError)
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(new ValidationException(SR.OverloadingMethodMustBeStatic));
                 }
                 else
@@ -1872,8 +1852,7 @@ namespace System.Activities.Expressions
             {
                 if (throwOnError)
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(new ValidationException(SR.OverloadingMethodMustBeStatic));
                 }
                 else
@@ -1908,8 +1887,7 @@ namespace System.Activities.Expressions
             {
                 if (throwOnError)
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(
                             new ValidationException(
                                 SR.MethodInfoRequired(methodCallExpression.GetType().Name)
@@ -1926,8 +1904,7 @@ namespace System.Activities.Expressions
             {
                 if (throwOnError)
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(
                             new ValidationException(
                                 SR.MethodNameRequired(methodInfo.GetType().Name)
@@ -1949,8 +1926,7 @@ namespace System.Activities.Expressions
             {
                 if (throwOnError)
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(
                             new ValidationException(
                                 SR.ArgumentNumberRequiresTheSameAsParameterNumber(
@@ -1986,8 +1962,7 @@ namespace System.Activities.Expressions
                 {
                     if (throwOnError)
                     {
-                        throw FxTrace
-                            .Exception
+                        throw FxTrace.Exception
                             .AsError(
                                 new ValidationException(
                                     SR.InvalidGenericTypeInfo(methodCallExpression.GetType().Name)
@@ -2011,8 +1986,7 @@ namespace System.Activities.Expressions
                 {
                     if (throwOnError)
                     {
-                        throw FxTrace
-                            .Exception
+                        throw FxTrace.Exception
                             .AsError(
                                 new ValidationException(SR.InstanceMethodCallRequiresTargetObject)
                             );
@@ -2059,8 +2033,7 @@ namespace System.Activities.Expressions
             {
                 if (throwOnError)
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(
                             new ValidationException(
                                 SR.InvalidExpressionProperty(invocationExpression.GetType().Name)
@@ -2162,8 +2135,7 @@ namespace System.Activities.Expressions
                 {
                     if (throwOnError)
                     {
-                        throw FxTrace
-                            .Exception
+                        throw FxTrace.Exception
                             .AsError(
                                 new ValidationException(
                                     SR.ArgumentNumberRequiresTheSameAsParameterNumber(
@@ -2243,8 +2215,7 @@ namespace System.Activities.Expressions
                     {
                         if (throwOnError)
                         {
-                            throw FxTrace
-                                .Exception
+                            throw FxTrace.Exception
                                 .AsError(
                                     new ValidationException(
                                         SR.InvalidParameterInfo(i, expressionType.Name)
@@ -2287,8 +2258,7 @@ namespace System.Activities.Expressions
             {
                 if (throwOnError)
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(
                             new ValidationException(
                                 SR.UnexpectedExpressionNodeType(
@@ -2330,8 +2300,7 @@ namespace System.Activities.Expressions
             {
                 if (throwOnError)
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(new NotSupportedException(SR.UnsupportedLocationReferenceValue));
                 }
                 else
@@ -2356,8 +2325,7 @@ namespace System.Activities.Expressions
             {
                 if (throwOnError)
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(
                             new ValidationException(
                                 SR.UnexpectedExpressionNodeType(
@@ -2402,8 +2370,7 @@ namespace System.Activities.Expressions
             {
                 if (throwOnError)
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(new NotSupportedException(SR.UnsupportedLocationReferenceValue));
                 }
                 else

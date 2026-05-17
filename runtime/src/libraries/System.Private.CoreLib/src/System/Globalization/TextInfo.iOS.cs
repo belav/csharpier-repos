@@ -21,12 +21,10 @@ namespace System.Globalization
             int result;
 
             if (HasEmptyCultureName)
-                result = Interop
-                    .Globalization
+                result = Interop.Globalization
                     .ChangeCaseInvariantNative(src, srcLen, dstBuffer, dstBufferCapacity, toUpper);
             else
-                result = Interop
-                    .Globalization
+                result = Interop.Globalization
                     .ChangeCaseNative(
                         _cultureName,
                         _cultureName.Length,

@@ -173,8 +173,7 @@ namespace System.Security
             if (secObj == null)
             {
                 // Security: REQ_SQ flag is missing. Bad compiler ?
-                System
-                    .Environment
+                System.Environment
                     .FailFast(
                         Environment.GetResourceString("ExecutionEngine_MissingSecurityDescriptor")
                     );
@@ -205,8 +204,7 @@ namespace System.Security
             if (secObj == null)
             {
                 // Security: REQ_SQ flag is missing. Bad compiler ?
-                System
-                    .Environment
+                System.Environment
                     .FailFast(
                         Environment.GetResourceString("ExecutionEngine_MissingSecurityDescriptor")
                     );
@@ -244,8 +242,7 @@ namespace System.Security
             if (secObj == null)
             {
                 // Security: REQ_SQ flag is missing. Bad compiler ?
-                System
-                    .Environment
+                System.Environment
                     .FailFast(
                         Environment.GetResourceString("ExecutionEngine_MissingSecurityDescriptor")
                     );
@@ -276,8 +273,7 @@ namespace System.Security
             if (secObj == null)
             {
                 // Security: REQ_SQ flag is missing. Bad compiler ?
-                System
-                    .Environment
+                System.Environment
                     .FailFast(
                         Environment.GetResourceString("ExecutionEngine_MissingSecurityDescriptor")
                     );

@@ -123,8 +123,7 @@ internal static partial class Interop
             ref int pcbStructInfo
         )
         {
-            return Interop
-                .Crypt32
+            return Interop.Crypt32
                 .CryptDecodeObject(
                     dwCertEncodingType,
                     (IntPtr)lpszStructType,
@@ -146,8 +145,7 @@ internal static partial class Interop
             ref int pcbStructInfo
         )
         {
-            return Interop
-                .Crypt32
+            return Interop.Crypt32
                 .CryptDecodeObjectPointer(
                     dwCertEncodingType,
                     (IntPtr)lpszStructType,
@@ -170,8 +168,7 @@ internal static partial class Interop
         {
             fixed (byte* pEncoded = encoded)
             {
-                return Interop
-                    .Crypt32
+                return Interop.Crypt32
                     .CryptDecodeObjectPointer(
                         dwCertEncodingType,
                         (IntPtr)lpszStructType,
@@ -192,8 +189,7 @@ internal static partial class Interop
             ref int pcbEncoded
         )
         {
-            return Interop
-                .Crypt32
+            return Interop.Crypt32
                 .CryptEncodeObject(
                     dwCertEncodingType,
                     (IntPtr)lpszStructType,
@@ -210,8 +206,7 @@ internal static partial class Interop
         {
             int cb = 0;
             if (
-                !Interop
-                    .crypt32
+                !Interop.crypt32
                     .CryptEncodeObject(
                         Interop.Crypt32.CertEncodingType.All,
                         lpszStructType,
@@ -224,8 +219,7 @@ internal static partial class Interop
 
             byte[] encoded = new byte[cb];
             if (
-                !Interop
-                    .crypt32
+                !Interop.crypt32
                     .CryptEncodeObject(
                         Interop.Crypt32.CertEncodingType.All,
                         lpszStructType,
@@ -243,8 +237,7 @@ internal static partial class Interop
         {
             int cb = 0;
             if (
-                !Interop
-                    .Crypt32
+                !Interop.Crypt32
                     .CryptEncodeObject(
                         Interop.Crypt32.CertEncodingType.All,
                         lpszStructType,
@@ -257,8 +250,7 @@ internal static partial class Interop
 
             byte[] encoded = new byte[cb];
             if (
-                !Interop
-                    .Crypt32
+                !Interop.Crypt32
                     .CryptEncodeObject(
                         Interop.Crypt32.CertEncodingType.All,
                         lpszStructType,
@@ -277,8 +269,7 @@ internal static partial class Interop
         )
         {
             if (
-                !Interop
-                    .Crypt32
+                !Interop.Crypt32
                     .CertCreateCertificateChainEngine(
                         ref config,
                         out SafeChainEngineHandle chainEngineHandle
@@ -314,8 +305,7 @@ internal static partial class Interop
                 pCertContext.Dispose();
             }
 
-            pCertContext = Interop
-                .Crypt32
+            pCertContext = Interop.Crypt32
                 .CertFindCertificateInStore(
                     hCertStore,
                     Interop.Crypt32.CertEncodingType.All,
@@ -334,8 +324,7 @@ internal static partial class Interop
             int cbKeyUsage
         )
         {
-            bool result = Interop
-                .Crypt32
+            bool result = Interop.Crypt32
                 .CertGetIntendedKeyUsage(
                     dwCertEncodingType,
                     pCertInfo,
@@ -353,8 +342,7 @@ internal static partial class Interop
             ref Interop.Crypt32.CERT_CHAIN_POLICY_STATUS pPolicyStatus
         )
         {
-            return Interop
-                .Crypt32
+            return Interop.Crypt32
                 .CertVerifyCertificateChainPolicy(
                     (IntPtr)pszPolicyOID,
                     pChainContext,
@@ -372,8 +360,7 @@ internal static partial class Interop
             out bool pfCallerFreeProvOrNCryptKey
         )
         {
-            bool result = Interop
-                .Crypt32
+            bool result = Interop.Crypt32
                 .CryptAcquireCertificatePrivateKey(
                     pCert,
                     dwFlags,

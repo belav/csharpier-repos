@@ -147,8 +147,7 @@ internal sealed class EndpointComparer : IComparer<Endpoint>, IEqualityComparer<
             {
                 if (routeEndpointY != null)
                 {
-                    return routeEndpointX
-                        .RoutePattern
+                    return routeEndpointX.RoutePattern
                         .InboundPrecedence
                         .CompareTo(routeEndpointY.RoutePattern.InboundPrecedence);
                 }

@@ -122,8 +122,7 @@ namespace System.Workflow.ComponentModel.Compiler
 
             string compilerVersion;
             if (
-                !MultiTargetingInfo
-                    .KnownSupportedTargetFrameworksAndRelatedCompilerVersions
+                !MultiTargetingInfo.KnownSupportedTargetFrameworksAndRelatedCompilerVersions
                     .TryGetValue(versionKey, out compilerVersion)
             )
             {

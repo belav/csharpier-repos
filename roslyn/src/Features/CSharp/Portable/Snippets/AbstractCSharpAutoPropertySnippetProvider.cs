@@ -61,8 +61,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Snippets
             CancellationToken cancellationToken
         )
         {
-            var compilation = await document
-                .Project
+            var compilation = await document.Project
                 .GetRequiredCompilationAsync(cancellationToken)
                 .ConfigureAwait(false);
             var semanticModel = await document

@@ -90,8 +90,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 inNamespaceOrType
             );
 
-            _escapeKeywordIdentifiers = format
-                .MiscellaneousOptions
+            _escapeKeywordIdentifiers = format.MiscellaneousOptions
                 .IncludesOption(SymbolDisplayMiscellaneousOptions.EscapeKeywordIdentifiers);
         }
 
@@ -201,8 +200,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             if (
                 IsFirstSymbolVisited
-                && Format
-                    .KindOptions
+                && Format.KindOptions
                     .IncludesOption(SymbolDisplayKindOptions.IncludeNamespaceKeyword)
             )
             {
@@ -512,8 +510,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             if (
                 namedType.IsScriptClass
-                && !Format
-                    .CompilerInternalOptions
+                && !Format.CompilerInternalOptions
                     .IncludesOption(SymbolDisplayCompilerInternalOptions.IncludeScriptType)
             )
             {

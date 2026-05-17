@@ -20,8 +20,7 @@ public class ResultsOfTHelperTests
     )
     {
         var options = new RemoteInvokeOptions();
-        options
-            .RuntimeConfigurationOptions
+        options.RuntimeConfigurationOptions
             .Add(
                 "System.Runtime.CompilerServices.RuntimeFeature.IsDynamicCodeSupported",
                 isDynamicCodeSupported.ToString()
@@ -47,8 +46,7 @@ public class ResultsOfTHelperTests
     )
     {
         var options = new RemoteInvokeOptions();
-        options
-            .RuntimeConfigurationOptions
+        options.RuntimeConfigurationOptions
             .Add(
                 "System.Runtime.CompilerServices.RuntimeFeature.IsDynamicCodeSupported",
                 isDynamicCodeSupported.ToString()
@@ -74,8 +72,7 @@ public class ResultsOfTHelperTests
     )
     {
         var options = new RemoteInvokeOptions();
-        options
-            .RuntimeConfigurationOptions
+        options.RuntimeConfigurationOptions
             .Add(
                 "System.Runtime.CompilerServices.RuntimeFeature.IsDynamicCodeSupported",
                 isDynamicCodeSupported.ToString()
@@ -97,8 +94,7 @@ public class ResultsOfTHelperTests
     public void PopulateMetadataIfTargetIsIEndpointMetadataProvider_DefaultInterfaceMethod_NoDynamicCode_Throws()
     {
         var options = new RemoteInvokeOptions();
-        options
-            .RuntimeConfigurationOptions
+        options.RuntimeConfigurationOptions
             .Add(
                 "System.Runtime.CompilerServices.RuntimeFeature.IsDynamicCodeSupported",
                 false.ToString()

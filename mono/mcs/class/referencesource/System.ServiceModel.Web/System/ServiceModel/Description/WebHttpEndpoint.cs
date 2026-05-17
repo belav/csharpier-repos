@@ -58,8 +58,7 @@ namespace System.ServiceModel.Description
                 WebHttpBehavior webHttpBehavior = this.Behaviors.Find<WebHttpBehavior>();
                 if (webHttpBehavior == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR2.GetString(

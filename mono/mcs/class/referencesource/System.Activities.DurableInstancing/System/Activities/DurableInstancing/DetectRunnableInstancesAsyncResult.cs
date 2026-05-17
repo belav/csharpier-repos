@@ -47,8 +47,7 @@ namespace System.Activities.DurableInstancing
 
         protected override void GenerateSqlCommand(SqlCommand sqlCommand)
         {
-            sqlCommand
-                .Parameters
+            sqlCommand.Parameters
                 .Add(
                     new SqlParameter
                     {
@@ -59,8 +58,7 @@ namespace System.Activities.DurableInstancing
                 );
             if (base.Store.DatabaseVersion >= StoreUtilities.Version45)
             {
-                sqlCommand
-                    .Parameters
+                sqlCommand.Parameters
                     .Add(
                         new SqlParameter
                         {

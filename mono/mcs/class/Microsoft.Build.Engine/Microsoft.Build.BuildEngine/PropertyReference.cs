@@ -75,10 +75,8 @@ namespace Microsoft.Build.BuildEngine
             {
                 List<ITaskItem> list = new List<ITaskItem>();
                 foreach (
-                    string s in bp.FinalValue.Split(
-                        new char[] { ';' },
-                        StringSplitOptions.RemoveEmptyEntries
-                    )
+                    string s in bp.FinalValue
+                        .Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries)
                 )
                     list.Add(new TaskItem(s));
                 return list.ToArray();

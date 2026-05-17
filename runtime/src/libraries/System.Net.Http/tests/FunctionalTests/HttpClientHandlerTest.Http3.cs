@@ -2012,8 +2012,7 @@ namespace System.Net.Http.Functional.Tests
                 // abort the control stream
                 if (closeType == CloseOutboundControlStream.BogusData)
                 {
-                    await connection
-                        .OutboundControlStream
+                    await connection.OutboundControlStream
                         .SendResponseBodyAsync(Array.Empty<byte>(), isFinal: true);
                 }
                 else if (closeType == CloseOutboundControlStream.Dispose)
@@ -2025,8 +2024,7 @@ namespace System.Net.Http.Functional.Tests
                     int iterations = 5;
                     while (iterations-- > 0)
                     {
-                        connection
-                            .OutboundControlStream
+                        connection.OutboundControlStream
                             .Abort(Http3LoopbackConnection.H3_INTERNAL_ERROR);
                         // This sends RESET_FRAME which might cause complete discard of any data including stream type, leading to client ignoring the stream.
                         // Attempt to establish the control stream again then.

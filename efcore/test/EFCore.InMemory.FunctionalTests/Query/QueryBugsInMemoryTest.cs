@@ -1061,8 +1061,7 @@ public class QueryBugsInMemoryTest : IClassFixture<InMemoryFixture>
 
     private static void Seed20729(MyContext20729 context)
     {
-        context
-            .Owners
+        context.Owners
             .Add(new Owner20729 { Owned1 = new Owned120729(), Owned2 = new Owned220729() });
 
         context.SaveChanges();
@@ -1120,8 +1119,7 @@ public class QueryBugsInMemoryTest : IClassFixture<InMemoryFixture>
             Expression<Func<A19253, string>> leftKeySelector = x => x.forkey;
             Expression<Func<B19253, string>> rightKeySelector = y => y.forkey;
 
-            var query = context
-                .A
+            var query = context.A
                 .GroupJoin(
                     context.B,
                     leftKeySelector,
@@ -1133,8 +1131,7 @@ public class QueryBugsInMemoryTest : IClassFixture<InMemoryFixture>
                     (x, y) => new JoinResult19253<A19253, B19253> { Left = x.left, Right = y }
                 )
                 .Concat(
-                    context
-                        .B
+                    context.B
                         .GroupJoin(
                             context.A,
                             rightKeySelector,
@@ -1164,8 +1161,7 @@ public class QueryBugsInMemoryTest : IClassFixture<InMemoryFixture>
             Expression<Func<A19253, string>> leftKeySelector = x => x.forkey;
             Expression<Func<B19253, string>> rightKeySelector = y => y.forkey;
 
-            var query = context
-                .A
+            var query = context.A
                 .GroupJoin(
                     context.B,
                     leftKeySelector,
@@ -1177,8 +1173,7 @@ public class QueryBugsInMemoryTest : IClassFixture<InMemoryFixture>
                     (x, y) => new JoinResult19253<A19253, B19253> { Left = x.left, Right = y }
                 )
                 .Union(
-                    context
-                        .B
+                    context.B
                         .GroupJoin(
                             context.A,
                             rightKeySelector,
@@ -1208,8 +1203,7 @@ public class QueryBugsInMemoryTest : IClassFixture<InMemoryFixture>
             Expression<Func<A19253, string>> leftKeySelector = x => x.forkey;
             Expression<Func<B19253, string>> rightKeySelector = y => y.forkey;
 
-            var query = context
-                .A
+            var query = context.A
                 .GroupJoin(
                     context.B,
                     leftKeySelector,
@@ -1221,8 +1215,7 @@ public class QueryBugsInMemoryTest : IClassFixture<InMemoryFixture>
                     (x, y) => new JoinResult19253<A19253, B19253> { Left = x.left, Right = y }
                 )
                 .Except(
-                    context
-                        .B
+                    context.B
                         .GroupJoin(
                             context.A,
                             rightKeySelector,
@@ -1251,8 +1244,7 @@ public class QueryBugsInMemoryTest : IClassFixture<InMemoryFixture>
             Expression<Func<A19253, string>> leftKeySelector = x => x.forkey;
             Expression<Func<B19253, string>> rightKeySelector = y => y.forkey;
 
-            var query = context
-                .A
+            var query = context.A
                 .GroupJoin(
                     context.B,
                     leftKeySelector,
@@ -1264,8 +1256,7 @@ public class QueryBugsInMemoryTest : IClassFixture<InMemoryFixture>
                     (x, y) => new JoinResult19253<A19253, B19253> { Left = x.left, Right = y }
                 )
                 .Intersect(
-                    context
-                        .B
+                    context.B
                         .GroupJoin(
                             context.A,
                             rightKeySelector,
@@ -1445,8 +1436,7 @@ public class QueryBugsInMemoryTest : IClassFixture<InMemoryFixture>
 
     private static void Seed23687(MyContext23687 context)
     {
-        context
-            .Table
+        context.Table
             .Add(
                 new Root23687
                 {
@@ -1665,8 +1655,7 @@ public class QueryBugsInMemoryTest : IClassFixture<InMemoryFixture>
         {
             using var context = new MyContext18435();
 
-            var result = context
-                .TestEntities
+            var result = context.TestEntities
                 .Select(x => new
                 {
                     x.Value,
@@ -1807,8 +1796,7 @@ public class QueryBugsInMemoryTest : IClassFixture<InMemoryFixture>
         {
             using var context = new MyContext19667();
 
-            var query = context
-                .Entities
+            var query = context.Entities
                 .OrderByDescending(e => e.Id)
                 .FirstOrDefault(p => p.Type.Date.Year == 2020);
 
@@ -1818,8 +1806,7 @@ public class QueryBugsInMemoryTest : IClassFixture<InMemoryFixture>
 
     private static void Seed19667(MyContext19667 context)
     {
-        context
-            .Entities
+        context.Entities
             .Add(
                 new MyEntity19667
                 {
@@ -1827,8 +1814,7 @@ public class QueryBugsInMemoryTest : IClassFixture<InMemoryFixture>
                     Type = new MyType19667 { Date = new DateTime(2020, 1, 1) },
                 }
             );
-        context
-            .Entities
+        context.Entities
             .Add(
                 new MyEntity19667
                 {
@@ -1962,8 +1948,7 @@ public class QueryBugsInMemoryTest : IClassFixture<InMemoryFixture>
         {
             using var context = new MyContext23360();
 
-            var userQuery = context
-                .User
+            var userQuery = context.User
                 .Select(u => new CommonSelectType23360
                 {
                     // 1. FirstName, 2. LastName
@@ -1971,8 +1956,7 @@ public class QueryBugsInMemoryTest : IClassFixture<InMemoryFixture>
                     LastName = u.Surname,
                 });
 
-            var customerQuery = context
-                .Customer
+            var customerQuery = context.Customer
                 .Select(c => new CommonSelectType23360
                 {
                     // 1. LastName, 2. FirstName
@@ -2044,8 +2028,7 @@ public class QueryBugsInMemoryTest : IClassFixture<InMemoryFixture>
         {
             using var context = new MyContext18394();
 
-            var myA = context
-                .As
+            var myA = context.As
                 .Where(x => x.Id == 1)
                 .Select(x => new ADto18394
                 {
@@ -2160,8 +2143,7 @@ public class QueryBugsInMemoryTest : IClassFixture<InMemoryFixture>
 
             var criteria = new DateTime(2020, 1, 1);
 
-            var data = context
-                .Outers
+            var data = context.Outers
                 .Where(x => x.OwnedProp.At >= criteria || x.Inner.OwnedProp.At >= criteria)
                 .ToList();
 

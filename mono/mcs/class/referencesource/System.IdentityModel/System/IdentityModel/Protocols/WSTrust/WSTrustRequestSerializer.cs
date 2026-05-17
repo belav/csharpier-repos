@@ -100,8 +100,7 @@ namespace System.IdentityModel.Protocols.WSTrust
             // Validate the RequestSecurityToken required parameters.
             if (
                 (
-                    StringComparer
-                        .Ordinal
+                    StringComparer.Ordinal
                         .Equals(requestSecurityToken.RequestType, RequestTypes.Issue)
                     || requestSecurityToken.RequestType == null
                 )
@@ -115,8 +114,7 @@ namespace System.IdentityModel.Protocols.WSTrust
                 )
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ID3091)));
             }
         }
@@ -138,8 +136,7 @@ namespace System.IdentityModel.Protocols.WSTrust
             WSTrustSerializationContext context
         )
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(
                     new NotSupportedException(SR.GetString(SR.ID2072, reader.LocalName))
                 );

@@ -307,8 +307,7 @@ namespace System.Web.Http.ModelBinding
 
         public ValueProviderResult GetValue(string key)
         {
-            string result = _actionContext
-                .ControllerContext
+            string result = _actionContext.ControllerContext
                 .Request
                 .Headers
                 .GetValues(key)

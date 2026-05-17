@@ -31,8 +31,7 @@ End Class",
             );
 
             await TestServices.Editor.InvokeCodeActionListAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .CodeActionAsync(
                     "Extract interface...",
                     applyFix: true,
@@ -40,20 +39,16 @@ End Class",
                     cancellationToken: HangMitigatingCancellationToken
                 );
 
-            await TestServices
-                .ExtractInterfaceDialog
+            await TestServices.ExtractInterfaceDialog
                 .VerifyOpenAsync(HangMitigatingCancellationToken);
             await TestServices.ExtractInterfaceDialog.ClickOKAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .ExtractInterfaceDialog
+            await TestServices.ExtractInterfaceDialog
                 .VerifyClosedAsync(HangMitigatingCancellationToken);
 
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .OpenFileAsync(ProjectName, "Class1.vb", HangMitigatingCancellationToken);
 
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .TextContainsAsync(
                     @"Class C
     Implements IC
@@ -64,12 +59,10 @@ End Class",
                     cancellationToken: HangMitigatingCancellationToken
                 );
 
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .OpenFileAsync(ProjectName, "IC.vb", HangMitigatingCancellationToken);
 
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .TextContainsAsync(
                     @"Interface IC
     Sub M()
@@ -90,8 +83,7 @@ End Class",
             );
 
             await TestServices.Editor.InvokeCodeActionListAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .CodeActionAsync(
                     "Extract interface...",
                     applyFix: true,
@@ -99,18 +91,15 @@ End Class",
                     cancellationToken: HangMitigatingCancellationToken
                 );
 
-            await TestServices
-                .ExtractInterfaceDialog
+            await TestServices.ExtractInterfaceDialog
                 .VerifyOpenAsync(HangMitigatingCancellationToken);
 
-            var fileName = await TestServices
-                .ExtractInterfaceDialog
+            var fileName = await TestServices.ExtractInterfaceDialog
                 .GetTargetFileNameAsync(HangMitigatingCancellationToken);
 
             Assert.Equal(expected: "IC2.vb", actual: fileName);
 
-            await TestServices
-                .ExtractInterfaceDialog
+            await TestServices.ExtractInterfaceDialog
                 .ClickCancelAsync(HangMitigatingCancellationToken);
         }
 
@@ -125,8 +114,7 @@ End Class",
                 HangMitigatingCancellationToken
             );
             await TestServices.Editor.InvokeCodeActionListAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .CodeActionAsync(
                     "Extract interface...",
                     applyFix: true,
@@ -134,21 +122,17 @@ End Class",
                     cancellationToken: HangMitigatingCancellationToken
                 );
 
-            await TestServices
-                .ExtractInterfaceDialog
+            await TestServices.ExtractInterfaceDialog
                 .VerifyOpenAsync(HangMitigatingCancellationToken);
 
-            await TestServices
-                .ExtractInterfaceDialog
+            await TestServices.ExtractInterfaceDialog
                 .SelectSameFileAsync(HangMitigatingCancellationToken);
 
             await TestServices.ExtractInterfaceDialog.ClickOKAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .ExtractInterfaceDialog
+            await TestServices.ExtractInterfaceDialog
                 .VerifyClosedAsync(HangMitigatingCancellationToken);
 
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .TextContainsAsync(
                     @"Interface IC
     Sub M()
@@ -177,8 +161,7 @@ End Class",
             );
 
             await TestServices.Editor.InvokeCodeActionListAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .CodeActionAsync(
                     "Extract interface...",
                     applyFix: true,
@@ -186,25 +169,19 @@ End Class",
                     cancellationToken: HangMitigatingCancellationToken
                 );
 
-            await TestServices
-                .ExtractInterfaceDialog
+            await TestServices.ExtractInterfaceDialog
                 .VerifyOpenAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .ExtractInterfaceDialog
+            await TestServices.ExtractInterfaceDialog
                 .ClickDeselectAllAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .ExtractInterfaceDialog
+            await TestServices.ExtractInterfaceDialog
                 .ToggleItemAsync("M2()", HangMitigatingCancellationToken);
-            await TestServices
-                .ExtractInterfaceDialog
+            await TestServices.ExtractInterfaceDialog
                 .SelectSameFileAsync(HangMitigatingCancellationToken);
             await TestServices.ExtractInterfaceDialog.ClickOKAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .ExtractInterfaceDialog
+            await TestServices.ExtractInterfaceDialog
                 .VerifyClosedAsync(HangMitigatingCancellationToken);
 
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .TextContainsAsync(
                     @"Interface IC
     Sub M2()
@@ -234,8 +211,7 @@ End Namespace",
             );
 
             await TestServices.Editor.InvokeCodeActionListAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .CodeActionAsync(
                     "Extract interface...",
                     applyFix: true,
@@ -243,21 +219,17 @@ End Namespace",
                     cancellationToken: HangMitigatingCancellationToken
                 );
 
-            await TestServices
-                .ExtractInterfaceDialog
+            await TestServices.ExtractInterfaceDialog
                 .VerifyOpenAsync(HangMitigatingCancellationToken);
 
-            await TestServices
-                .ExtractInterfaceDialog
+            await TestServices.ExtractInterfaceDialog
                 .SelectSameFileAsync(HangMitigatingCancellationToken);
 
             await TestServices.ExtractInterfaceDialog.ClickOKAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .ExtractInterfaceDialog
+            await TestServices.ExtractInterfaceDialog
                 .VerifyClosedAsync(HangMitigatingCancellationToken);
 
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .TextContainsAsync(
                     @"Namespace A
     Interface IC

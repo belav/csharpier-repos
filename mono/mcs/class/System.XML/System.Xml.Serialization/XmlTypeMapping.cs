@@ -227,8 +227,7 @@ namespace System.Xml.Serialization
                 }
 
                 string method = schemaProvider.MethodName;
-                MethodInfo mi = typeData
-                    .Type
+                MethodInfo mi = typeData.Type
                     .GetMethod(
                         method,
                         BindingFlags.Static | BindingFlags.Public | BindingFlags.FlattenHierarchy

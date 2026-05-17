@@ -77,8 +77,7 @@ namespace System.Web.Http.ModelBinding.Binders
         {
             ModelBindingHelper.ValidateBindingContext(bindingContext);
 
-            ValueProviderResult valueProviderResult = bindingContext
-                .ValueProvider
+            ValueProviderResult valueProviderResult = bindingContext.ValueProvider
                 .GetValue(bindingContext.ModelName);
             if (valueProviderResult == null)
             {

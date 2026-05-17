@@ -1301,14 +1301,15 @@ class C : A::I, B::I
             // Simple verification that the test infrastructure supports such methods.
             var testData = verifier2.TestData;
             var pair = testData.Methods.Single(m => m.Key.Name == "A::I.M");
-            pair.Value.VerifyIL(
-                @"
+            pair.Value
+                .VerifyIL(
+                    @"
 {
   // Code size        1 (0x1)
   .maxstack  0
   IL_0000:  ret
 }"
-            );
+                );
         }
     }
 }

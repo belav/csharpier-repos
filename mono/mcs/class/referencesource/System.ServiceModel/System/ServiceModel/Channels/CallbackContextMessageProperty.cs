@@ -54,16 +54,14 @@ namespace System.ServiceModel.Channels
         {
             if (
                 listenAddress != null
-                && listenAddress
-                    .Headers
+                && listenAddress.Headers
                     .FindHeader(
                         ContextMessageHeader.ContextHeaderName,
                         ContextMessageHeader.ContextHeaderNamespace
                     ) != null
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(SR.GetString(SR.ListenAddressAlreadyContainsContext));
             }
             this.listenAddress = listenAddress;
@@ -224,8 +222,7 @@ namespace System.ServiceModel.Channels
                 {
                     if (contextHeader != null)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new ProtocolException(
                                     SR.GetString(SR.MultipleContextHeadersFoundInCallbackAddress)

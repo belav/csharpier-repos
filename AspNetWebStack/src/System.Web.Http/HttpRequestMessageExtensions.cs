@@ -99,8 +99,7 @@ namespace System.Net.Http
 
             IDependencyScope result;
             if (
-                !request
-                    .Properties
+                !request.Properties
                     .TryGetValue<IDependencyScope>(HttpPropertyKeys.DependencyScope, out result)
             )
             {
@@ -220,8 +219,7 @@ namespace System.Net.Http
                 Func<HttpRequestMessage, X509Certificate2> retrieveCertificate;
 
                 if (
-                    request
-                        .Properties
+                    request.Properties
                         .TryGetValue(
                             HttpPropertyKeys.RetrieveClientCertificateDelegateKey,
                             out retrieveCertificate
@@ -728,8 +726,7 @@ namespace System.Net.Http
                 );
             }
 
-            MediaTypeFormatter formatter = configuration
-                .Formatters
+            MediaTypeFormatter formatter = configuration.Formatters
                 .FindWriter(typeof(T), mediaType);
             if (formatter == null)
             {
@@ -898,8 +895,7 @@ namespace System.Net.Http
 
             List<IDisposable> resourcesToDispose;
             if (
-                request
-                    .Properties
+                request.Properties
                     .TryGetValue(
                         HttpPropertyKeys.DisposableRequestResourcesKey,
                         out resourcesToDispose
@@ -937,8 +933,7 @@ namespace System.Net.Http
 
             Guid correlationId;
             if (
-                !request
-                    .Properties
+                !request.Properties
                     .TryGetValue<Guid>(HttpPropertyKeys.RequestCorrelationKey, out correlationId)
             )
             {
@@ -985,14 +980,12 @@ namespace System.Net.Http
             IEnumerable<KeyValuePair<string, string>> queryStringData;
             string cachedQueryString;
 
-            request
-                .Properties
+            request.Properties
                 .TryGetValue<IEnumerable<KeyValuePair<string, string>>>(
                     HttpPropertyKeys.RequestQueryNameValuePairsKey,
                     out queryStringData
                 );
-            request
-                .Properties
+            request.Properties
                 .TryGetValue<string>(HttpPropertyKeys.CachedRequestQueryKey, out cachedQueryString);
 
             if (
@@ -1163,8 +1156,7 @@ namespace System.Net.Http
         {
             List<IDisposable> registeredResourcesForDispose;
             if (
-                !request
-                    .Properties
+                !request.Properties
                     .TryGetValue(
                         HttpPropertyKeys.DisposableRequestResourcesKey,
                         out registeredResourcesForDispose

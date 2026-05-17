@@ -545,8 +545,7 @@ public class LinkTagHelper : UrlResolutionTagHelper
     {
         if (FileVersionProvider == null)
         {
-            FileVersionProvider = ViewContext
-                .HttpContext
+            FileVersionProvider = ViewContext.HttpContext
                 .RequestServices
                 .GetRequiredService<IFileVersionProvider>();
         }

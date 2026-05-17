@@ -9,8 +9,7 @@ namespace System
     {
         public static long WorkingSet =>
             (long)(
-                Interop
-                    .procfs
+                Interop.procfs
                     .TryReadProcessStatusInfo(
                         ProcessId,
                         out Interop.procfs.ProcessStatusInfo status

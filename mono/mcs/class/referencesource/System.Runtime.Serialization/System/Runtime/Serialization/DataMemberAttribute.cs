@@ -40,8 +40,7 @@ namespace System.Runtime.Serialization
             set
             {
                 if (value < 0)
-                    throw System
-                        .Runtime
+                    throw System.Runtime
                         .Serialization
                         .DiagnosticUtility
                         .ExceptionUtility

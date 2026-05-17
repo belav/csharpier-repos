@@ -55,8 +55,7 @@ internal sealed partial class CSharpInitializeMemberFromPrimaryConstructorParame
         )
         {
             var currentDocument = currentSolution.GetRequiredDocument(document.Id);
-            var currentCompilation = await currentDocument
-                .Project
+            var currentCompilation = await currentDocument.Project
                 .GetRequiredCompilationAsync(cancellationToken)
                 .ConfigureAwait(false);
             var currentRoot = await currentDocument
@@ -233,8 +232,7 @@ internal sealed partial class CSharpInitializeMemberFromPrimaryConstructorParame
     {
         var solution = solutionEditor.OriginalSolution;
         var namedType = parameter.ContainingType;
-        var documents = namedType
-            .DeclaringSyntaxReferences
+        var documents = namedType.DeclaringSyntaxReferences
             .Select(r => solution.GetRequiredDocument(r.SyntaxTree))
             .ToImmutableHashSet();
 
@@ -258,8 +256,7 @@ internal sealed partial class CSharpInitializeMemberFromPrimaryConstructorParame
                 var location in group.Distinct(LinkedFileReferenceLocationEqualityComparer.Instance)
             )
             {
-                var node = location
-                    .Location
+                var node = location.Location
                     .FindNode(getInnermostNodeForTie: true, cancellationToken);
                 if (
                     node is IdentifierNameSyntax { Parent: not NameColonSyntax } identifierName

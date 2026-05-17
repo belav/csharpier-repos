@@ -388,8 +388,7 @@ namespace System.Runtime.Serialization
 #if MONO
         private static Object nativeGetUninitializedObject(RuntimeType type)
         {
-            return System
-                .Runtime
+            return System.Runtime
                 .Remoting
                 .Activation
                 .ActivationServices
@@ -398,8 +397,7 @@ namespace System.Runtime.Serialization
 
         private static Object nativeGetSafeUninitializedObject(RuntimeType type)
         {
-            return System
-                .Runtime
+            return System.Runtime
                 .Remoting
                 .Activation
                 .ActivationServices

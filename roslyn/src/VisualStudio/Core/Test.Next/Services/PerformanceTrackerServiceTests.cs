@@ -172,8 +172,7 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Services
         {
             var analyzerInfo = analyzerInfos.Single(i => i.AnalyzerId.Contains(analyzerName));
             Assert.True(
-                analyzerInfo
-                    .PIISafeAnalyzerId
+                analyzerInfo.PIISafeAnalyzerId
                     .IndexOf(analyzerName, StringComparison.OrdinalIgnoreCase) >= 0
             );
             Assert.Equal(mean, analyzerInfo.Average, precision: 4);

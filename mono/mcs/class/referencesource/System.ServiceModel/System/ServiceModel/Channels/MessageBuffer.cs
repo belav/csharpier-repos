@@ -25,8 +25,7 @@ namespace System.ServiceModel.Channels
         public virtual void WriteMessage(Stream stream)
         {
             if (stream == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("stream"));
             Message message = CreateMessage();
             using (message)
@@ -74,8 +73,7 @@ namespace System.ServiceModel.Channels
         public XPathNavigator CreateNavigator(int nodeQuota, XmlSpace space)
         {
             if (nodeQuota <= 0)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentOutOfRangeException(
                             "nodeQuota",
@@ -148,8 +146,7 @@ namespace System.ServiceModel.Channels
         public override Message CreateMessage()
         {
             if (closed)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(CreateBufferDisposedException());
 
             Message msg;
@@ -218,8 +215,7 @@ namespace System.ServiceModel.Channels
                 {
                     if (closed)
 #pragma warning suppress 56503 // Microsoft, Invalid State after dispose
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(CreateBufferDisposedException());
                     return messageData.Buffer.Count;
                 }
@@ -229,14 +225,12 @@ namespace System.ServiceModel.Channels
         public override void WriteMessage(Stream stream)
         {
             if (stream == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("stream"));
             lock (ThisLock)
             {
                 if (closed)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(CreateBufferDisposedException());
                 ArraySegment<byte> buffer = messageData.Buffer;
                 stream.Write(buffer.Array, buffer.Offset, buffer.Count);
@@ -251,8 +245,7 @@ namespace System.ServiceModel.Channels
                 {
                     if (closed)
 #pragma warning suppress 56503 // Microsoft, Invalid State after dispose
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(CreateBufferDisposedException());
                     return messageData.MessageEncoder.ContentType;
                 }
@@ -282,8 +275,7 @@ namespace System.ServiceModel.Channels
             lock (ThisLock)
             {
                 if (closed)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(CreateBufferDisposedException());
                 RecycledMessageState recycledMessageState = messageData.TakeMessageState();
                 if (recycledMessageState == null)
@@ -349,8 +341,7 @@ namespace System.ServiceModel.Channels
             lock (ThisLock)
             {
                 if (closed)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(CreateBufferDisposedException());
                 return new BodyWriterMessage(headers, properties, bodyWriter);
             }

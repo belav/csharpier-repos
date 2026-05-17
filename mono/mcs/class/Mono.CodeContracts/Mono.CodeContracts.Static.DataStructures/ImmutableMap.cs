@@ -149,11 +149,12 @@ namespace Mono.CodeContracts.Static.DataStructures
 
         public void Visit(Func<K, V, VisitStatus> func)
         {
-            this.immutable_int_map.Visit(list =>
-            {
-                foreach (var pair in list.AsEnumerable())
-                    func(pair.Key, pair.Value);
-            });
+            this.immutable_int_map
+                .Visit(list =>
+                {
+                    foreach (var pair in list.AsEnumerable())
+                        func(pair.Key, pair.Value);
+                });
         }
 
         private Sequence<Pair<K, V>> Remove(Sequence<Pair<K, V>> from, K key)

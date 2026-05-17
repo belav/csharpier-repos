@@ -875,12 +875,8 @@ namespace System.ServiceModel.Activities
 
                 if (this.isTransacted)
                 {
-                    result = this.channel.BeginTransactedSuspend(
-                        instanceId,
-                        reason,
-                        callback,
-                        this
-                    );
+                    result = this.channel
+                        .BeginTransactedSuspend(instanceId, reason, callback, this);
                 }
                 else
                 {
@@ -1015,12 +1011,8 @@ namespace System.ServiceModel.Activities
 
                 if (this.isTransacted)
                 {
-                    result = this.channel.BeginTransactedTerminate(
-                        instanceId,
-                        reason,
-                        callback,
-                        this
-                    );
+                    result = this.channel
+                        .BeginTransactedTerminate(instanceId, reason, callback, this);
                 }
                 else
                 {

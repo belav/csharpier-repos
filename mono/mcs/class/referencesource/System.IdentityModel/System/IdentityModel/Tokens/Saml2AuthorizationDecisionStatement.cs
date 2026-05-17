@@ -57,15 +57,13 @@ namespace System.IdentityModel.Tokens
             // an empty relative uri before passing through to the rest of the constructor.
             if (!(resource.IsAbsoluteUri || resource.Equals(EmptyResource)))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument("resource", SR.GetString(SR.ID4121));
             }
 
             if (decision < SamlAccessDecision.Permit || decision > SamlAccessDecision.Indeterminate)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentOutOfRangeException("decision"));
             }
 
@@ -101,8 +99,7 @@ namespace System.IdentityModel.Tokens
             {
                 if (value < SamlAccessDecision.Permit || value > SamlAccessDecision.Indeterminate)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new ArgumentOutOfRangeException("value"));
                 }
 
@@ -141,8 +138,7 @@ namespace System.IdentityModel.Tokens
 
                 if (!(value.IsAbsoluteUri || value.Equals(EmptyResource)))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgument("value", SR.GetString(SR.ID4121));
                 }
 

@@ -94,8 +94,7 @@ public abstract class PageModel : IAsyncPageFilter, IPageFilter
         {
             if (_tempData == null)
             {
-                var factory = HttpContext
-                    ?.RequestServices
+                var factory = HttpContext?.RequestServices
                     ?.GetRequiredService<ITempDataDictionaryFactory>();
                 _tempData = factory?.GetTempData(HttpContext);
             }
@@ -140,8 +139,7 @@ public abstract class PageModel : IAsyncPageFilter, IPageFilter
     {
         get
         {
-            _metadataProvider ??= HttpContext
-                ?.RequestServices
+            _metadataProvider ??= HttpContext?.RequestServices
                 ?.GetRequiredService<IModelMetadataProvider>();
             return _metadataProvider!;
         }
@@ -159,8 +157,7 @@ public abstract class PageModel : IAsyncPageFilter, IPageFilter
         {
             if (_objectValidator == null)
             {
-                _objectValidator = HttpContext
-                    ?.RequestServices
+                _objectValidator = HttpContext?.RequestServices
                     ?.GetRequiredService<IObjectModelValidator>();
             }
 
@@ -174,8 +171,7 @@ public abstract class PageModel : IAsyncPageFilter, IPageFilter
         {
             if (_modelBinderFactory == null)
             {
-                _modelBinderFactory = HttpContext
-                    ?.RequestServices
+                _modelBinderFactory = HttpContext?.RequestServices
                     ?.GetRequiredService<IModelBinderFactory>();
             }
 

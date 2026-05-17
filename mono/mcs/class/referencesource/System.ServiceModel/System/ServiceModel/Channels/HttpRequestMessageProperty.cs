@@ -138,8 +138,7 @@ namespace System.ServiceModel.Channels
         {
             HttpRequestMessage httpRequestMessage = null;
 
-            HttpRequestMessageProperty property = message
-                .Properties
+            HttpRequestMessageProperty property = message.Properties
                 .GetValue<HttpRequestMessageProperty>(HttpRequestMessageProperty.Name);
             if (property != null)
             {
@@ -181,9 +180,8 @@ namespace System.ServiceModel.Channels
                 {
                     if (!requestProperty.useHttpBackedProperty)
                     {
-                        this.httpBackedProperty.MergeWithTraditionalProperty(
-                            requestProperty.traditionalProperty
-                        );
+                        this.httpBackedProperty
+                            .MergeWithTraditionalProperty(requestProperty.traditionalProperty);
                         requestProperty.traditionalProperty = null;
                         requestProperty.httpBackedProperty = this.httpBackedProperty;
                         requestProperty.useHttpBackedProperty = true;

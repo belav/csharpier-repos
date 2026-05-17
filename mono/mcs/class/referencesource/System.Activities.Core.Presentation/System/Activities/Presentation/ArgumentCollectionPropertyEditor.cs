@@ -21,8 +21,7 @@ namespace System.Activities.Presentation
     {
         public ArgumentCollectionPropertyEditor()
         {
-            this.InlineEditorTemplate = EditorCategoryTemplateDictionary
-                .Instance
+            this.InlineEditorTemplate = EditorCategoryTemplateDictionary.Instance
                 .GetCategoryTemplate("ArgumentCollection_InlineTemplate");
         }
 
@@ -59,8 +58,7 @@ namespace System.Activities.Presentation
             };
 
             using (
-                EditingScope scope = context
-                    .Services
+                EditingScope scope = context.Services
                     .GetRequiredService<ModelTreeManager>()
                     .CreateEditingScope(
                         StringResourceDictionary.Instance.GetString("InvokeMethodParameterEditing"),

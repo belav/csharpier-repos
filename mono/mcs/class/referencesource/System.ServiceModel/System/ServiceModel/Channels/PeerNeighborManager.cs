@@ -138,9 +138,8 @@ namespace System.ServiceModel.Channels
             // handler if the neighbor manager is still open.
 
             // Sort the IP addresses
-            ReadOnlyCollection<IPAddress> sortedAddresses = this.ipHelper.SortAddresses(
-                remoteAddress.IPAddresses
-            );
+            ReadOnlyCollection<IPAddress> sortedAddresses = this.ipHelper
+                .SortAddresses(remoteAddress.IPAddresses);
             PeerNodeAddress address = new PeerNodeAddress(
                 remoteAddress.EndpointAddress,
                 sortedAddresses
@@ -855,8 +854,7 @@ namespace System.ServiceModel.Channels
                 if (!TimeoutHelper.WaitOne(this.shutdownEvent, timeoutHelper.RemainingTime()))
                 {
                     Abort(neighbors); // abort neighbors that haven't been closed yet
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new TimeoutException());
                 }
             }
@@ -870,8 +868,7 @@ namespace System.ServiceModel.Channels
             }
             if (Closed())
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ObjectDisposedException(this.ToString()));
             }
         }
@@ -1196,11 +1193,8 @@ namespace System.ServiceModel.Channels
                 this.channelFactory.Open(timeoutHelper.RemainingTime());
                 this.Proxy = this.channelFactory.CreateChannel();
 
-                IAsyncResult result = this.proxyChannel.BeginOpen(
-                    timeoutHelper.RemainingTime(),
-                    callback,
-                    state
-                );
+                IAsyncResult result = this.proxyChannel
+                    .BeginOpen(timeoutHelper.RemainingTime(), callback, state);
                 if (result.CompletedSynchronously)
                     this.proxyChannel.EndOpen(result);
 
@@ -1453,8 +1447,7 @@ namespace System.ServiceModel.Channels
             {
                 if (this.state == PeerNeighborState.Closed)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new ObjectDisposedException(this.ToString()));
                 }
             }
@@ -1467,14 +1460,12 @@ namespace System.ServiceModel.Channels
             {
                 if (this.state == PeerNeighborState.Closed)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new ObjectDisposedException(this.ToString()));
                 }
                 if (this.state >= newState)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(
@@ -1678,8 +1669,7 @@ namespace System.ServiceModel.Channels
                             );
                             if (this.closed())
                             {
-                                throw DiagnosticUtility
-                                    .ExceptionUtility
+                                throw DiagnosticUtility.ExceptionUtility
                                     .ThrowHelperError(
                                         new ObjectDisposedException(this.GetType().ToString())
                                     );
@@ -1689,14 +1679,15 @@ namespace System.ServiceModel.Channels
                                 this.neighbor.ConnectIPAddress = this.remoteAddress.IPAddresses[
                                     this.currentIndex
                                 ];
-                                IAsyncResult result = this.neighbor.BeginOpenProxy(
-                                    remoteAddress,
-                                    binding,
-                                    new InstanceContext(null, service, false),
-                                    this.timeoutHelper.RemainingTime(),
-                                    onOpen,
-                                    null
-                                );
+                                IAsyncResult result = this.neighbor
+                                    .BeginOpenProxy(
+                                        remoteAddress,
+                                        binding,
+                                        new InstanceContext(null, service, false),
+                                        this.timeoutHelper.RemainingTime(),
+                                        onOpen,
+                                        null
+                                    );
                                 if (!result.CompletedSynchronously)
                                 {
                                     return;

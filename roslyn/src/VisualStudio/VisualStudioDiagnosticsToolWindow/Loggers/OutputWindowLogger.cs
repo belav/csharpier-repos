@@ -124,8 +124,7 @@ namespace Microsoft.CodeAnalysis.Internal.Log
             {
                 if (_doNotAccessDirectlyOutputPane == null)
                 {
-                    _threadingContext
-                        .JoinableTaskFactory
+                    _threadingContext.JoinableTaskFactory
                         .Run(async () =>
                         {
                             await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync();

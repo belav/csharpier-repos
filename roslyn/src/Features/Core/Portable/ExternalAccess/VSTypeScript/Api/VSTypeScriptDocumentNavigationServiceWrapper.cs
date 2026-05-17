@@ -52,8 +52,7 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript.Api
         )
         {
             var obj = _underlyingObject;
-            return _threadingProvider
-                .Service
+            return _threadingProvider.Service
                 .Run(async () =>
                 {
                     var location = await obj.GetLocationForPositionAsync(
@@ -80,8 +79,7 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript.Api
         )
         {
             var obj = _underlyingObject;
-            return _threadingProvider
-                .Service
+            return _threadingProvider.Service
                 .Run(async () =>
                 {
                     var location = await obj.GetLocationForPositionAsync(

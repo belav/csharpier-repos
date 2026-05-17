@@ -38,33 +38,36 @@ public class Test
         var t = typeof(C<>);
         if (
             t.GetFields(
-                BindingFlags.Public
-                    | BindingFlags.NonPublic
-                    | BindingFlags.Instance
-                    | BindingFlags.Static
-            ).Length != 1
+                    BindingFlags.Public
+                        | BindingFlags.NonPublic
+                        | BindingFlags.Instance
+                        | BindingFlags.Static
+                )
+                .Length != 1
         )
             return 1;
 
         t = typeof(C2<>);
         if (
             t.GetFields(
-                BindingFlags.Public
-                    | BindingFlags.NonPublic
-                    | BindingFlags.Instance
-                    | BindingFlags.Static
-            ).Length != 1
+                    BindingFlags.Public
+                        | BindingFlags.NonPublic
+                        | BindingFlags.Instance
+                        | BindingFlags.Static
+                )
+                .Length != 1
         )
             return 1;
 
         t = typeof(N1);
         if (
             t.GetFields(
-                BindingFlags.Public
-                    | BindingFlags.NonPublic
-                    | BindingFlags.Instance
-                    | BindingFlags.Static
-            ).Length != 0
+                    BindingFlags.Public
+                        | BindingFlags.NonPublic
+                        | BindingFlags.Instance
+                        | BindingFlags.Static
+                )
+                .Length != 0
         )
             return 1;
 

@@ -143,8 +143,7 @@ namespace System.ServiceModel.Channels
                 // it happens when there is no ChannelFactory<T>.
                 cred = new ClientCredentials();
             SecurityTokenManager manager = cred.CreateSecurityTokenManager();
-            ChannelProtectionRequirements requirements = context
-                .BindingParameters
+            ChannelProtectionRequirements requirements = context.BindingParameters
                 .Find<ChannelProtectionRequirements>();
 
             return new SecurityChannelFactory<TChannel>(
@@ -176,8 +175,7 @@ namespace System.ServiceModel.Channels
                 cred = new ServiceCredentials();
             ServiceCredentialsSecurityTokenManager manager =
                 (ServiceCredentialsSecurityTokenManager)cred.CreateSecurityTokenManager();
-            ChannelProtectionRequirements requirements = context
-                .BindingParameters
+            ChannelProtectionRequirements requirements = context.BindingParameters
                 .Find<ChannelProtectionRequirements>();
 
             return new SecurityChannelListener<TChannel>(

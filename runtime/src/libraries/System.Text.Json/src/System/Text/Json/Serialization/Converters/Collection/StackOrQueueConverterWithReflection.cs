@@ -23,8 +23,7 @@ namespace System.Text.Json.Serialization.Converters
             JsonSerializerOptions options
         )
         {
-            jsonTypeInfo.AddMethodDelegate = DefaultJsonTypeInfoResolver
-                .MemberAccessor
+            jsonTypeInfo.AddMethodDelegate = DefaultJsonTypeInfoResolver.MemberAccessor
                 .CreateAddMethodDelegate<TCollection>();
         }
     }

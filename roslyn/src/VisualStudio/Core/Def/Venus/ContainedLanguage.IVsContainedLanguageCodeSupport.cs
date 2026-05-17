@@ -61,9 +61,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
         )
         {
             var thisDocument = GetThisDocument();
-            var targetDocumentId = this.ContainedDocument.FindProjectDocumentIdWithItemId(
-                itemidInsertionPoint
-            );
+            var targetDocumentId = this.ContainedDocument
+                .FindProjectDocumentIdWithItemId(itemidInsertionPoint);
             var targetDocument = thisDocument.Project.Solution.GetDocument(targetDocumentId);
             if (targetDocument == null)
             {
@@ -92,8 +91,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
                         pszEventHandlerName,
                         itemidInsertionPoint,
                         useHandlesClause: false,
-                        additionalFormattingRule: targetDocument
-                            .Project
+                        additionalFormattingRule: targetDocument.Project
                             .Services
                             .GetService<IAdditionalFormattingRuleLanguageService>()
                             .GetAdditionalCodeGenerationRule(),

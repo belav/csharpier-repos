@@ -35,8 +35,7 @@ namespace System.ServiceModel.Configuration
         {
             if (this.IsReadOnly())
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ConfigurationErrorsException(SR.GetString(SR.ConfigReadOnly))
                     );
@@ -52,8 +51,7 @@ namespace System.ServiceModel.Configuration
         {
             if (secureConversation == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("secureConversation");
             }
             if (!string.IsNullOrEmpty(this.SecurityStateEncoderType))
@@ -61,8 +59,7 @@ namespace System.ServiceModel.Configuration
                 Type type = System.Type.GetType(this.SecurityStateEncoderType, true);
                 if (!typeof(SecurityStateEncoder).IsAssignableFrom(type))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ConfigurationErrorsException(
                                 SR.GetString(

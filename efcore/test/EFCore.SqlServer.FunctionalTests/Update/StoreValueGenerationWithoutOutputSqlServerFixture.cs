@@ -15,8 +15,7 @@ public abstract class StoreValueGenerationWithoutOutputSqlServerFixture
         // Add triggers to all tables
         foreach (var table in context.Model.GetEntityTypes().Select(e => e.GetTableName()))
         {
-            context
-                .Database
+            context.Database
                 .ExecuteSqlRaw(
                     $@"
 CREATE OR ALTER TRIGGER [{table}_Trigger]

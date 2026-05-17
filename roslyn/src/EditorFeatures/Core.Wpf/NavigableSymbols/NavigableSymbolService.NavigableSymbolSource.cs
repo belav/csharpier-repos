@@ -49,8 +49,7 @@ internal partial class NavigableSymbolService
             if (definitionLocation == null)
                 return null;
 
-            var indicatorFactory = document
-                .Project
+            var indicatorFactory = document.Project
                 .Solution
                 .Services
                 .GetRequiredService<IBackgroundWorkIndicatorFactory>();

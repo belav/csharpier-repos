@@ -77,9 +77,10 @@ namespace System.Runtime
         {
             if (isScheduled)
             {
-                throw Fx.Exception.AsError(
-                    new InvalidOperationException(InternalSR.ActionItemIsAlreadyScheduled)
-                );
+                throw Fx.Exception
+                    .AsError(
+                        new InvalidOperationException(InternalSR.ActionItemIsAlreadyScheduled)
+                    );
             }
 
             this.isScheduled = true;
@@ -114,9 +115,10 @@ namespace System.Runtime
             }
             if (isScheduled)
             {
-                throw Fx.Exception.AsError(
-                    new InvalidOperationException(InternalSR.ActionItemIsAlreadyScheduled)
-                );
+                throw Fx.Exception
+                    .AsError(
+                        new InvalidOperationException(InternalSR.ActionItemIsAlreadyScheduled)
+                    );
             }
 
             this.isScheduled = true;
@@ -134,9 +136,10 @@ namespace System.Runtime
         {
             if (isScheduled)
             {
-                throw Fx.Exception.AsError(
-                    new InvalidOperationException(InternalSR.ActionItemIsAlreadyScheduled)
-                );
+                throw Fx.Exception
+                    .AsError(
+                        new InvalidOperationException(InternalSR.ActionItemIsAlreadyScheduled)
+                    );
             }
 
             this.isScheduled = true;
@@ -374,8 +377,8 @@ namespace System.Runtime
                         {
                             previous = Trace.CorrelationManager.ActivityId;
                             restoreActivityId = true;
-                            Trace.CorrelationManager.ActivityId =
-                                this.eventTraceActivity.ActivityId;
+                            Trace.CorrelationManager.ActivityId = this.eventTraceActivity
+                                .ActivityId;
                             if (TraceCore.ActionItemCallbackInvokedIsEnabled(Fx.Trace))
                             {
                                 TraceCore.ActionItemCallbackInvoked(

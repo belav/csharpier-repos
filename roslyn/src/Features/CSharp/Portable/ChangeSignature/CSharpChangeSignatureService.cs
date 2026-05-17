@@ -373,8 +373,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeSignature
                     CreateNewParameterSyntax
                 );
                 return method.WithParameterList(
-                    method
-                        .ParameterList
+                    method.ParameterList
                         .WithParameters(updatedParameters)
                         .WithAdditionalAnnotations(changeSignatureFormattingAnnotation)
                 );
@@ -388,8 +387,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeSignature
                     CreateNewParameterSyntax
                 );
                 return typeWithParameters.WithParameterList(
-                    typeWithParameters
-                        .ParameterList
+                    typeWithParameters.ParameterList
                         .WithParameters(updatedParameters)
                         .WithAdditionalAnnotations(changeSignatureFormattingAnnotation)
                 );
@@ -403,8 +401,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeSignature
                     CreateNewParameterSyntax
                 );
                 return localFunction.WithParameterList(
-                    localFunction
-                        .ParameterList
+                    localFunction.ParameterList
                         .WithParameters(updatedParameters)
                         .WithAdditionalAnnotations(changeSignatureFormattingAnnotation)
                 );
@@ -418,8 +415,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeSignature
                     CreateNewParameterSyntax
                 );
                 return constructor.WithParameterList(
-                    constructor
-                        .ParameterList
+                    constructor.ParameterList
                         .WithParameters(updatedParameters)
                         .WithAdditionalAnnotations(changeSignatureFormattingAnnotation)
                 );
@@ -433,8 +429,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeSignature
                     CreateNewParameterSyntax
                 );
                 return indexer.WithParameterList(
-                    indexer
-                        .ParameterList
+                    indexer.ParameterList
                         .WithParameters(updatedParameters)
                         .WithAdditionalAnnotations(changeSignatureFormattingAnnotation)
                 );
@@ -448,8 +443,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeSignature
                     CreateNewParameterSyntax
                 );
                 return delegateDeclaration.WithParameterList(
-                    delegateDeclaration
-                        .ParameterList
+                    delegateDeclaration.ParameterList
                         .WithParameters(updatedParameters)
                         .WithAdditionalAnnotations(changeSignatureFormattingAnnotation)
                 );
@@ -469,8 +463,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeSignature
                     CreateNewParameterSyntax
                 );
                 return anonymousMethod.WithParameterList(
-                    anonymousMethod
-                        .ParameterList
+                    anonymousMethod.ParameterList
                         .WithParameters(updatedParameters)
                         .WithAdditionalAnnotations(changeSignatureFormattingAnnotation)
                 );
@@ -1098,8 +1091,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeSignature
             var i = 0;
             foreach (var paramNode in paramNodes)
             {
-                var nameAttribute = paramNode
-                    .StartTag
+                var nameAttribute = paramNode.StartTag
                     .Attributes
                     .FirstOrDefault(a =>
                         a.Name.ToString().Equals("name", StringComparison.OrdinalIgnoreCase)

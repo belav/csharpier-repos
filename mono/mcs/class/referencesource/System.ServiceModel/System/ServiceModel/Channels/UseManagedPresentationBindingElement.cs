@@ -39,8 +39,7 @@ namespace System.ServiceModel.Channels
 
             if (context.BindingElements != null)
             {
-                UseManagedPresentationBindingElement settings = context
-                    .BindingElements
+                UseManagedPresentationBindingElement settings = context.BindingElements
                     .Find<UseManagedPresentationBindingElement>();
 
                 if (settings != null)

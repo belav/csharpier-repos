@@ -211,9 +211,8 @@ namespace System.Web.Handlers
         private static Pair GetAssemblyInfoWithAssertInternal(Assembly assembly)
         {
             AssemblyName assemblyName = assembly.GetName();
-            long assemblyDate = File.GetLastWriteTime(
-                new Uri(assemblyName.CodeBase).LocalPath
-            ).Ticks;
+            long assemblyDate = File.GetLastWriteTime(new Uri(assemblyName.CodeBase).LocalPath)
+                .Ticks;
             Pair assemblyInfo = new Pair(assemblyName, assemblyDate);
             return assemblyInfo;
         }
@@ -481,8 +480,7 @@ namespace System.Web.Handlers
                 IScriptResourceDefinition definition = null;
                 if (ClientScriptManager._scriptResourceMapping != null)
                 {
-                    definition = ClientScriptManager
-                        ._scriptResourceMapping
+                    definition = ClientScriptManager._scriptResourceMapping
                         .GetDefinition(resourceName, assembly);
                     if (definition != null)
                     {

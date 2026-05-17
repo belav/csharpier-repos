@@ -52,8 +52,7 @@ namespace System.Reflection
         {
             if (s_assemblyCount == 0)
                 s_assemblyCount = (uint)
-                    Internal
-                        .Reflection
+                    Internal.Reflection
                         .Core
                         .Execution
                         .ReflectionCoreExecution

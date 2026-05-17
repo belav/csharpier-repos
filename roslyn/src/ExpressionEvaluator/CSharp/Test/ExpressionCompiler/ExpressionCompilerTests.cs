@@ -5848,8 +5848,7 @@ struct S
                     var methodData = testData.GetMethodData("<>x.<>m0");
                     Assert.Equal(
                         "int?",
-                        ((MethodSymbol)methodData.Method)
-                            .ReturnTypeWithAnnotations
+                        ((MethodSymbol)methodData.Method).ReturnTypeWithAnnotations
                             .ToDisplayString()
                     );
                     methodData.VerifyIL(
@@ -5875,8 +5874,7 @@ struct S
                     methodData = testData.GetMethodData("<>x.<>m0");
                     Assert.Equal(
                         "int?",
-                        ((MethodSymbol)methodData.Method)
-                            .ReturnTypeWithAnnotations
+                        ((MethodSymbol)methodData.Method).ReturnTypeWithAnnotations
                             .ToDisplayString()
                     );
 
@@ -6252,8 +6250,7 @@ class C
                 {
                     var context = CreateMethodContext(runtime, "C.M");
 
-                    var actionType = context
-                        .Compilation
+                    var actionType = context.Compilation
                         .GetWellKnownType(WellKnownType.System_Action);
 
                     ResultProperties resultProperties;
@@ -6949,8 +6946,7 @@ public class C
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1089688")]
         public void UseSiteWarning()
         {
-            var signedDllOptions = TestOptions
-                .SigningReleaseDll
+            var signedDllOptions = TestOptions.SigningReleaseDll
                 .WithCryptoKeyFile(SigningTestHelpers.KeyPairFile);
 
             var libBTemplate =
@@ -8059,15 +8055,13 @@ public delegate void D(in int p);",
                 symbolValidator: module =>
                 {
                     Assert.NotNull(
-                        module
-                            .ContainingAssembly
+                        module.ContainingAssembly
                             .GetTypeByMetadataName(
                                 AttributeDescription.CodeAnalysisEmbeddedAttribute.FullName
                             )
                     );
                     Assert.NotNull(
-                        module
-                            .ContainingAssembly
+                        module.ContainingAssembly
                             .GetTypeByMetadataName(
                                 AttributeDescription.IsReadOnlyAttribute.FullName
                             )
@@ -8092,15 +8086,13 @@ public class Test
                 symbolValidator: module =>
                 {
                     Assert.Null(
-                        module
-                            .ContainingAssembly
+                        module.ContainingAssembly
                             .GetTypeByMetadataName(
                                 AttributeDescription.CodeAnalysisEmbeddedAttribute.FullName
                             )
                     );
                     Assert.Null(
-                        module
-                            .ContainingAssembly
+                        module.ContainingAssembly
                             .GetTypeByMetadataName(
                                 AttributeDescription.IsReadOnlyAttribute.FullName
                             )
@@ -8136,15 +8128,13 @@ public delegate ref readonly int D();",
                 symbolValidator: module =>
                 {
                     Assert.NotNull(
-                        module
-                            .ContainingAssembly
+                        module.ContainingAssembly
                             .GetTypeByMetadataName(
                                 AttributeDescription.CodeAnalysisEmbeddedAttribute.FullName
                             )
                     );
                     Assert.NotNull(
-                        module
-                            .ContainingAssembly
+                        module.ContainingAssembly
                             .GetTypeByMetadataName(
                                 AttributeDescription.IsReadOnlyAttribute.FullName
                             )
@@ -8170,15 +8160,13 @@ public class Test
                 symbolValidator: module =>
                 {
                     Assert.Null(
-                        module
-                            .ContainingAssembly
+                        module.ContainingAssembly
                             .GetTypeByMetadataName(
                                 AttributeDescription.CodeAnalysisEmbeddedAttribute.FullName
                             )
                     );
                     Assert.Null(
-                        module
-                            .ContainingAssembly
+                        module.ContainingAssembly
                             .GetTypeByMetadataName(
                                 AttributeDescription.IsReadOnlyAttribute.FullName
                             )

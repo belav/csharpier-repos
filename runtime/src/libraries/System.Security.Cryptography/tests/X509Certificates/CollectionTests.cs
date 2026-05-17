@@ -2078,8 +2078,7 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                 Assert.Equal("PKCS7", new string(pemActual[fields.Label]));
                 byte[] data = Convert.FromBase64String(new string(actualBase64));
 
-                (int locationOffset, int locationLength) = fields
-                    .Location
+                (int locationOffset, int locationLength) = fields.Location
                     .GetOffsetAndLength(pemActual.Length);
                 Assert.Equal(0, locationOffset);
                 Assert.Equal(pemActual.Length, locationLength);
@@ -2089,8 +2088,7 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     X509Certificate2[] expectedCollection = expected
                         .OrderBy(c => c.Thumbprint)
                         .ToArray();
-                    X509Certificate2[] actualCollection = imported
-                        .Collection
+                    X509Certificate2[] actualCollection = imported.Collection
                         .OrderBy(c => c.Thumbprint)
                         .ToArray();
                     Assert.Equal(

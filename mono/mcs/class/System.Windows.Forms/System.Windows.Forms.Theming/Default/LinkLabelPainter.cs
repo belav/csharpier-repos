@@ -65,8 +65,7 @@ namespace System.Windows.Forms.Theming.Default
             if (!label.Enabled)
             {
                 dc.SetClip(clip_rectangle);
-                ThemeEngine
-                    .Current
+                ThemeEngine.Current
                     .CPDrawStringDisabled(
                         dc,
                         label.Text,

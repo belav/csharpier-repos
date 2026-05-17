@@ -82,8 +82,7 @@ namespace System.ServiceModel.Channels
                     {
                         if (cacheEntry.HostEntry == null)
                         {
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
                                     new EndpointNotFoundException(
                                         SR.GetString(SR.DnsResolveFailed, hostName)
@@ -116,8 +115,7 @@ namespace System.ServiceModel.Channels
 
                 if (dnsException != null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new EndpointNotFoundException(
                                 SR.GetString(SR.DnsResolveFailed, hostName),

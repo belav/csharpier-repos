@@ -131,8 +131,7 @@ namespace Microsoft.CodeAnalysis.CSharp.NewLines.ArrowExpressionClausePlacement
                     return true;
 
                 if (
-                    nextToken
-                        .LeadingTrivia
+                    nextToken.LeadingTrivia
                         .Any(static t =>
                             t.Kind()
                                 is SyntaxKind.IfDirectiveTrivia

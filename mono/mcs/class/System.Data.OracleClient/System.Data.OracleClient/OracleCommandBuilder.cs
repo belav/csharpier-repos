@@ -235,8 +235,7 @@ namespace System.Data.OracleClient
 
                 if (!isKey)
                 {
-                    parameter = deleteCommand
-                        .Parameters
+                    parameter = deleteCommand.Parameters
                         .Add(CreateParameter(parmIndex++, schemaRow));
                     parameter.SourceVersion = DataRowVersion.Original;
 
@@ -326,8 +325,7 @@ namespace System.Data.OracleClient
                     values.Append(" , ");
                 }
 
-                OracleParameter parameter = insertCommand
-                    .Parameters
+                OracleParameter parameter = insertCommand.Parameters
                     .Add(CreateParameter(parmIndex++, schemaRow));
                 parameter.SourceVersion = DataRowVersion.Current;
 
@@ -390,8 +388,7 @@ namespace System.Data.OracleClient
                 if (columns.Length > 0)
                     columns.Append(" , ");
 
-                OracleParameter parameter = updateCommand
-                    .Parameters
+                OracleParameter parameter = updateCommand.Parameters
                     .Add(CreateParameter(parmIndex++, schemaRow));
                 parameter.SourceVersion = DataRowVersion.Current;
 
@@ -431,8 +428,7 @@ namespace System.Data.OracleClient
 
                 if (!isKey)
                 {
-                    parameter = updateCommand
-                        .Parameters
+                    parameter = updateCommand.Parameters
                         .Add(CreateParameter(parmIndex++, schemaRow));
                     parameter.SourceVersion = DataRowVersion.Original;
 

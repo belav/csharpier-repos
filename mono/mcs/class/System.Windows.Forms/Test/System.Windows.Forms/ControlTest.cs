@@ -884,12 +884,8 @@ namespace MonoTests.System.Windows.Forms
                 Height = Height + 1;
                 try
                 {
-                    e.Graphics.DrawString(
-                        Size.ToString(),
-                        Font,
-                        Brushes.AliceBlue,
-                        new Point(2, 2)
-                    );
+                    e.Graphics
+                        .DrawString(Size.ToString(), Font, Brushes.AliceBlue, new Point(2, 2));
                 }
                 catch (Exception exception)
                 {

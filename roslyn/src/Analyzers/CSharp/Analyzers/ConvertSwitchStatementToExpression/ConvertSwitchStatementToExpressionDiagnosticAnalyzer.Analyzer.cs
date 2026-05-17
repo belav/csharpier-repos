@@ -216,8 +216,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertSwitchStatementToExpression
             {
                 // Check if we have a catch-all label anywhere.  If so we don't need to pull in the next statements.
                 if (
-                    switchStatement
-                        .Sections
+                    switchStatement.Sections
                         .Any(section => section.Labels.Any(label => IsDefaultSwitchLabel(label)))
                 )
                 {

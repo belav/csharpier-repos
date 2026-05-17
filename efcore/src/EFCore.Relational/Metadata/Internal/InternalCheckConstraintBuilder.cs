@@ -120,8 +120,7 @@ public class InternalCheckConstraintBuilder
             foreach (var checkConstraintToBeDetached in checkConstraintsToBeDetached)
             {
                 detachedCheckConstraints.Add(
-                    checkConstraintToBeDetached
-                        .EntityType
+                    checkConstraintToBeDetached.EntityType
                         .RemoveCheckConstraint(checkConstraintToBeDetached.ModelName)!
                 );
             }

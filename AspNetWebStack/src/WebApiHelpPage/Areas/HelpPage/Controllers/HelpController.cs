@@ -51,8 +51,7 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage.Controllers
                     Configuration.GetModelDescriptionGenerator();
                 ModelDescription modelDescription;
                 if (
-                    modelDescriptionGenerator
-                        .GeneratedModels
+                    modelDescriptionGenerator.GeneratedModels
                         .TryGetValue(modelName, out modelDescription)
                 )
                 {

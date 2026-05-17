@@ -194,8 +194,7 @@ namespace Microsoft.Extensions.DependencyModel
             IEnumerable<RuntimeAssetGroup> assets
         )
         {
-            RuntimeFallbacks? fallbacks = context
-                .RuntimeGraph
+            RuntimeFallbacks? fallbacks = context.RuntimeGraph
                 .FirstOrDefault(f => f.Runtime == runtimeIdentifier);
             IEnumerable<string?> rids = Enumerable.Concat(
                 new[] { runtimeIdentifier },
@@ -210,8 +209,7 @@ namespace Microsoft.Extensions.DependencyModel
             IEnumerable<RuntimeAssetGroup> assets
         )
         {
-            RuntimeFallbacks? fallbacks = context
-                .RuntimeGraph
+            RuntimeFallbacks? fallbacks = context.RuntimeGraph
                 .FirstOrDefault(f => f.Runtime == runtimeIdentifier);
             IEnumerable<string?> rids = Enumerable.Concat(
                 new[] { runtimeIdentifier },

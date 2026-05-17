@@ -41,8 +41,7 @@ namespace System.ServiceModel
             // PreSharp Bug: Parameter 'identity.ResourceType' to this public method must be validated: A null-dereference can occur here.
 #pragma warning suppress 56506 // Claim.ResourceType will never return null
             if (!identity.ClaimType.Equals(ClaimTypes.Upn))
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(
                         SR.GetString(
                             SR.UnrecognizedClaimTypeForIdentity,
@@ -152,8 +151,7 @@ namespace System.ServiceModel
                 || (delimiterPos == downlevelName.Length - 1)
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperWarning(
                         new InvalidOperationException(
                             SR.GetString(SR.DownlevelNameCannotMapToUpn, downlevelName)
@@ -192,15 +190,13 @@ namespace System.ServiceModel
                     )
                     {
                         errorCode = Marshal.GetLastWin32Error();
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperWarning(new Win32Exception(errorCode));
                     }
                 }
                 else
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperWarning(new Win32Exception(errorCode));
                 }
             }

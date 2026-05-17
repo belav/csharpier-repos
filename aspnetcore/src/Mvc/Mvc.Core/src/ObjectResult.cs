@@ -59,8 +59,7 @@ public class ObjectResult : ActionResult, IStatusCodeActionResult
     /// <inheritdoc/>
     public override Task ExecuteResultAsync(ActionContext context)
     {
-        var executor = context
-            .HttpContext
+        var executor = context.HttpContext
             .RequestServices
             .GetRequiredService<IActionResultExecutor<ObjectResult>>();
         return executor.ExecuteAsync(context, this);

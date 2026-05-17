@@ -518,8 +518,7 @@ public static class EndpointRouteBuilderExtensions
         if (routeEndpointDataSource is null)
         {
             // ServiceProvider isn't nullable, but it is being called by methods that historically did not access this property, so we null check anyway.
-            var routeHandlerOptions = endpoints
-                .ServiceProvider
+            var routeHandlerOptions = endpoints.ServiceProvider
                 ?.GetService<IOptions<RouteHandlerOptions>>();
             var throwOnBadRequest = routeHandlerOptions?.Value.ThrowOnBadRequest ?? false;
 

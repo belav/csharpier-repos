@@ -82,13 +82,11 @@ namespace Microsoft.CodeAnalysis.MoveToNamespace
         {
             Debug.Assert(moveToNamespaceResult.Succeeded);
 
-            using var _ = PooledObjects
-                .ArrayBuilder<CodeActionOperation>
+            using var _ = PooledObjects.ArrayBuilder<CodeActionOperation>
                 .GetInstance(out var operations);
             operations.Add(new ApplyChangesOperation(moveToNamespaceResult.UpdatedSolution));
 
-            var symbolRenameCodeActionOperationFactory = moveToNamespaceResult
-                .UpdatedSolution
+            var symbolRenameCodeActionOperationFactory = moveToNamespaceResult.UpdatedSolution
                 .Services
                 .GetService<ISymbolRenamedCodeActionOperationFactoryWorkspaceService>();
 

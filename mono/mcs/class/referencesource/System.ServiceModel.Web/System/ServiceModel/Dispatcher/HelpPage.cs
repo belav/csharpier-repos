@@ -92,8 +92,7 @@ namespace System.ServiceModel.Dispatcher
                 }
                 else
                 {
-                    throw System
-                        .ServiceModel
+                    throw System.ServiceModel
                         .DiagnosticUtility
                         .ExceptionUtility
                         .ThrowHelperError(new WebFaultException(HttpStatusCode.NotFound));
@@ -123,8 +122,7 @@ namespace System.ServiceModel.Dispatcher
             {
                 HttpContext.Current.Response.Cache.SetCacheability(HttpCacheability.Public);
                 HttpContext.Current.Response.Cache.SetMaxAge(TimeSpan.MaxValue);
-                HttpContext
-                    .Current
+                HttpContext.Current
                     .Response
                     .Cache
                     .AddValidationCallback(
@@ -400,9 +398,8 @@ namespace System.ServiceModel.Dispatcher
             {
                 try
                 {
-                    bool usesXmlSerializer = od.Behaviors.Contains(
-                        typeof(XmlSerializerOperationBehavior)
-                    );
+                    bool usesXmlSerializer = od.Behaviors
+                        .Contains(typeof(XmlSerializerOperationBehavior));
                     XmlQualifiedName name;
                     this.SchemaSet = new XmlSchemaSet();
                     IDictionary<XmlQualifiedName, Type> knownTypes =
@@ -447,8 +444,7 @@ namespace System.ServiceModel.Dispatcher
                         if (typeDataContract.KnownDataContracts != null)
                         {
                             foreach (
-                                XmlQualifiedName dataContractName in typeDataContract
-                                    .KnownDataContracts
+                                XmlQualifiedName dataContractName in typeDataContract.KnownDataContracts
                                     .Keys
                             )
                             {

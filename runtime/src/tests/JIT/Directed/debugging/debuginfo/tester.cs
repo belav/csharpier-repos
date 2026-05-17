@@ -171,8 +171,7 @@ public unsafe class DebugInfoTest
 
     static DebugInfoTest()
     {
-        Type runtimeMethodHandleInternalType = typeof(RuntimeMethodHandle)
-            .Assembly
+        Type runtimeMethodHandleInternalType = typeof(RuntimeMethodHandle).Assembly
             .GetType("System.RuntimeMethodHandleInternal");
         Type runtimeTypeType = typeof(RuntimeMethodHandle).Assembly.GetType("System.RuntimeType");
         MethodInfo getMethodBaseMethod = runtimeTypeType.GetMethod(

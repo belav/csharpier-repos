@@ -198,8 +198,7 @@ internal static class QPackHeaderWriter
             buffer[0] = 0b01011111;
             buffer[1] = 0b00110000;
 
-            ReadOnlySpan<byte> statusBytes = System
-                .Net
+            ReadOnlySpan<byte> statusBytes = System.Net
                 .Http
                 .HPack
                 .StatusCodes

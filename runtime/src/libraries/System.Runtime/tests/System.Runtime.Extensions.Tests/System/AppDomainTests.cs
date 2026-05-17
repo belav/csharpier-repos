@@ -321,20 +321,17 @@ namespace System.Tests
                     );
                     Assert.Equal(
                         10,
-                        AppDomain
-                            .CurrentDomain
+                        AppDomain.CurrentDomain
                             .ExecuteAssemblyByName(assembly.FullName, new string[2] { "2", "3" })
                     );
                     Assert.Throws<FormatException>(() =>
-                        AppDomain
-                            .CurrentDomain
+                        AppDomain.CurrentDomain
                             .ExecuteAssemblyByName(assembly.FullName, new string[1] { "a" })
                     );
                     AssemblyName assemblyName = assembly.GetName();
                     Assert.Equal(
                         105,
-                        AppDomain
-                            .CurrentDomain
+                        AppDomain.CurrentDomain
                             .ExecuteAssemblyByName(assemblyName, new string[3] { "50", "25", "25" })
                     );
                 })
@@ -362,8 +359,7 @@ namespace System.Tests
 
 #pragma warning disable SYSLIB0003 // Code Access Security is not supported or honored by the runtime.
             Func<int> executeAssembly = () =>
-                AppDomain
-                    .CurrentDomain
+                AppDomain.CurrentDomain
                     .ExecuteAssembly(
                         name,
                         new string[2] { "2", "3" },
@@ -661,8 +657,7 @@ namespace System.Tests
                         assemblies.Length > 0,
                         "There must be assemblies already loaded in the process"
                     );
-                    AppDomain
-                        .CurrentDomain
+                    AppDomain.CurrentDomain
                         .Load(typeof(AppDomainTests).Assembly.GetName().FullName);
                     Assembly[] assemblies1 = AppDomain.CurrentDomain.GetAssemblies();
                     // Another thread could have loaded an assembly hence not checking for equality
@@ -1092,27 +1087,23 @@ namespace System.Tests
                 Assert.Throws(
                     exceptionType,
                     () =>
-                        AppDomain
-                            .CurrentDomain
+                        AppDomain.CurrentDomain
                             .CreateInstanceFrom(assemblyFile: assemblyFile, typeName: type)
                 );
                 Assert.Throws(
                     exceptionType,
                     () =>
-                        AppDomain
-                            .CurrentDomain
+                        AppDomain.CurrentDomain
                             .CreateInstanceFromAndUnwrap(assemblyFile: assemblyFile, typeName: type)
                 );
             }
             else
             {
-                oh = AppDomain
-                    .CurrentDomain
+                oh = AppDomain.CurrentDomain
                     .CreateInstanceFrom(assemblyFile: assemblyFile, typeName: type);
                 CheckValidity(oh, returnedFullNameType);
 
-                obj = AppDomain
-                    .CurrentDomain
+                obj = AppDomain.CurrentDomain
                     .CreateInstanceFromAndUnwrap(assemblyFile: assemblyFile, typeName: type);
                 CheckValidity(obj, returnedFullNameType);
             }
@@ -1122,15 +1113,13 @@ namespace System.Tests
                 Assert.Throws(
                     exceptionType,
                     () =>
-                        AppDomain
-                            .CurrentDomain
+                        AppDomain.CurrentDomain
                             .CreateInstanceFrom(assemblyFile: assemblyFile, typeName: type, null)
                 );
                 Assert.Throws(
                     exceptionType,
                     () =>
-                        AppDomain
-                            .CurrentDomain
+                        AppDomain.CurrentDomain
                             .CreateInstanceFromAndUnwrap(
                                 assemblyFile: assemblyFile,
                                 typeName: type,
@@ -1140,13 +1129,11 @@ namespace System.Tests
             }
             else
             {
-                oh = AppDomain
-                    .CurrentDomain
+                oh = AppDomain.CurrentDomain
                     .CreateInstanceFrom(assemblyFile: assemblyFile, typeName: type, null);
                 CheckValidity(oh, returnedFullNameType);
 
-                obj = AppDomain
-                    .CurrentDomain
+                obj = AppDomain.CurrentDomain
                     .CreateInstanceFromAndUnwrap(assemblyFile: assemblyFile, typeName: type, null);
                 CheckValidity(obj, returnedFullNameType);
             }
@@ -1239,27 +1226,23 @@ namespace System.Tests
                 Assert.Throws(
                     exceptionType,
                     () =>
-                        AppDomain
-                            .CurrentDomain
+                        AppDomain.CurrentDomain
                             .CreateInstance(assemblyName: assemblyName, typeName: type)
                 );
                 Assert.Throws(
                     exceptionType,
                     () =>
-                        AppDomain
-                            .CurrentDomain
+                        AppDomain.CurrentDomain
                             .CreateInstanceAndUnwrap(assemblyName: assemblyName, typeName: type)
                 );
             }
             else
             {
-                oh = AppDomain
-                    .CurrentDomain
+                oh = AppDomain.CurrentDomain
                     .CreateInstance(assemblyName: assemblyName, typeName: type);
                 CheckValidity(oh, returnedFullNameType);
 
-                obj = AppDomain
-                    .CurrentDomain
+                obj = AppDomain.CurrentDomain
                     .CreateInstanceAndUnwrap(assemblyName: assemblyName, typeName: type);
                 CheckValidity(obj, returnedFullNameType);
             }
@@ -1269,15 +1252,13 @@ namespace System.Tests
                 Assert.Throws(
                     exceptionType,
                     () =>
-                        AppDomain
-                            .CurrentDomain
+                        AppDomain.CurrentDomain
                             .CreateInstance(assemblyName: assemblyName, typeName: type, null)
                 );
                 Assert.Throws(
                     exceptionType,
                     () =>
-                        AppDomain
-                            .CurrentDomain
+                        AppDomain.CurrentDomain
                             .CreateInstanceAndUnwrap(
                                 assemblyName: assemblyName,
                                 typeName: type,
@@ -1287,13 +1268,11 @@ namespace System.Tests
             }
             else
             {
-                oh = AppDomain
-                    .CurrentDomain
+                oh = AppDomain.CurrentDomain
                     .CreateInstance(assemblyName: assemblyName, typeName: type, null);
                 CheckValidity(oh, returnedFullNameType);
 
-                obj = AppDomain
-                    .CurrentDomain
+                obj = AppDomain.CurrentDomain
                     .CreateInstanceAndUnwrap(assemblyName: assemblyName, typeName: type, null);
                 CheckValidity(obj, returnedFullNameType);
             }
@@ -1364,8 +1343,7 @@ namespace System.Tests
             string returnedFullNameType
         )
         {
-            ObjectHandle oh = AppDomain
-                .CurrentDomain
+            ObjectHandle oh = AppDomain.CurrentDomain
                 .CreateInstanceFrom(
                     assemblyFile: assemblyFile,
                     typeName: type,
@@ -1378,8 +1356,7 @@ namespace System.Tests
                 );
             CheckValidity(oh, returnedFullNameType);
 
-            object obj = AppDomain
-                .CurrentDomain
+            object obj = AppDomain.CurrentDomain
                 .CreateInstanceFromAndUnwrap(
                     assemblyFile: assemblyFile,
                     typeName: type,
@@ -1525,8 +1502,7 @@ namespace System.Tests
             string returnedFullNameType
         )
         {
-            ObjectHandle oh = AppDomain
-                .CurrentDomain
+            ObjectHandle oh = AppDomain.CurrentDomain
                 .CreateInstance(
                     assemblyName: assemblyName,
                     typeName: type,
@@ -1539,8 +1515,7 @@ namespace System.Tests
                 );
             CheckValidity(oh, returnedFullNameType);
 
-            object obj = AppDomain
-                .CurrentDomain
+            object obj = AppDomain.CurrentDomain
                 .CreateInstanceAndUnwrap(
                     assemblyName: assemblyName,
                     typeName: type,

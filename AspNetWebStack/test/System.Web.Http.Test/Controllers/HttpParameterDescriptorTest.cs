@@ -37,8 +37,7 @@ namespace System.Web.Http
                 CallBase = true,
             }.Object;
 
-            Assert
-                .Reflection
+            Assert.Reflection
                 .Property<HttpParameterDescriptor, HttpConfiguration>(
                     instance: parameterDescriptor,
                     propertyGetter: pd => pd.Configuration,
@@ -57,8 +56,7 @@ namespace System.Web.Http
             }.Object;
             HttpActionDescriptor actionDescriptor = new Mock<HttpActionDescriptor>().Object;
 
-            Assert
-                .Reflection
+            Assert.Reflection
                 .Property<HttpParameterDescriptor, HttpActionDescriptor>(
                     instance: parameterDescriptor,
                     propertyGetter: pd => pd.ActionDescriptor,

@@ -310,11 +310,8 @@ public class Program
                     )
                     {
                         var cts = new CancellationTokenSource();
-                        Task<HttpResponseMessage> t = ctx.HttpClient.SendAsync(
-                            req,
-                            HttpCompletionOption.ResponseHeadersRead,
-                            cts.Token
-                        );
+                        Task<HttpResponseMessage> t = ctx.HttpClient
+                            .SendAsync(req, HttpCompletionOption.ResponseHeadersRead, cts.Token);
                         await Task.Delay(1);
                         cts.Cancel();
                         try
@@ -367,10 +364,8 @@ public class Program
                         }
                     )
                     using (
-                        HttpResponseMessage m = await ctx.HttpClient.SendAsync(
-                            req,
-                            HttpCompletionOption.ResponseHeadersRead
-                        )
+                        HttpResponseMessage m = await ctx.HttpClient
+                            .SendAsync(req, HttpCompletionOption.ResponseHeadersRead)
                     )
                     {
                         ValidateResponse(m, httpVersion);
@@ -395,10 +390,8 @@ public class Program
                         }
                     )
                     using (
-                        HttpResponseMessage m = await ctx.HttpClient.SendAsync(
-                            req,
-                            HttpCompletionOption.ResponseHeadersRead
-                        )
+                        HttpResponseMessage m = await ctx.HttpClient
+                            .SendAsync(req, HttpCompletionOption.ResponseHeadersRead)
                     )
                     {
                         ValidateResponse(m, httpVersion);
@@ -423,10 +416,8 @@ public class Program
                     {
                         req.Headers.ExpectContinue = true;
                         using (
-                            HttpResponseMessage m = await ctx.HttpClient.SendAsync(
-                                req,
-                                HttpCompletionOption.ResponseHeadersRead
-                            )
+                            HttpResponseMessage m = await ctx.HttpClient
+                                .SendAsync(req, HttpCompletionOption.ResponseHeadersRead)
                         )
                         {
                             ValidateResponse(m, httpVersion);
@@ -452,11 +443,8 @@ public class Program
                     {
                         var cts = new CancellationTokenSource();
                         req.Content = new CancelableContent(cts.Token);
-                        Task<HttpResponseMessage> t = ctx.HttpClient.SendAsync(
-                            req,
-                            HttpCompletionOption.ResponseHeadersRead,
-                            cts.Token
-                        );
+                        Task<HttpResponseMessage> t = ctx.HttpClient
+                            .SendAsync(req, HttpCompletionOption.ResponseHeadersRead, cts.Token);
                         await Task.Delay(1);
                         cts.Cancel();
                         try
@@ -591,8 +579,7 @@ public class Program
                                         HashAlgorithmName.SHA256,
                                         RSASignaturePadding.Pkcs1
                                     );
-                                    certReq
-                                        .CertificateExtensions
+                                    certReq.CertificateExtensions
                                         .Add(
                                             new X509BasicConstraintsExtension(
                                                 false,
@@ -601,16 +588,14 @@ public class Program
                                                 false
                                             )
                                         );
-                                    certReq
-                                        .CertificateExtensions
+                                    certReq.CertificateExtensions
                                         .Add(
                                             new X509EnhancedKeyUsageExtension(
                                                 new OidCollection { new Oid("1.3.6.1.5.5.7.3.1") },
                                                 false
                                             )
                                         );
-                                    certReq
-                                        .CertificateExtensions
+                                    certReq.CertificateExtensions
                                         .Add(
                                             new X509KeyUsageExtension(
                                                 X509KeyUsageFlags.DigitalSignature,
@@ -661,8 +646,7 @@ public class Program
                                     // Sends back the content a character at a time.
                                     for (int i = 0; i < contentSource.Length; i++)
                                     {
-                                        await context
-                                            .Response
+                                        await context.Response
                                             .WriteAsync(contentSource[i].ToString());
                                         await context.Response.Body.FlushAsync();
                                     }
@@ -675,8 +659,7 @@ public class Program
                                     // Get request but with a bunch of extra headers
                                     for (int i = 0; i < 20; i++)
                                     {
-                                        context
-                                            .Response
+                                        context.Response
                                             .Headers
                                             .Add(
                                                 "CustomHeader" + i,
@@ -693,8 +676,7 @@ public class Program
                                     {
                                         for (int i = 0; i < 10; i++)
                                         {
-                                            context
-                                                .Response
+                                            context.Response
                                                 .AppendTrailer(
                                                     "CustomTrailer" + i,
                                                     new StringValues(
@@ -713,8 +695,7 @@ public class Program
                                 async context =>
                                 {
                                     // Server writes some content, then aborts the connection
-                                    await context
-                                        .Response
+                                    await context.Response
                                         .WriteAsync(
                                             contentSource.Substring(0, contentSource.Length / 2)
                                         );
@@ -726,8 +707,7 @@ public class Program
                                 async context =>
                                 {
                                     // Server writes some content and aborts the connection in the background.
-                                    var writeTask = context
-                                        .Response
+                                    var writeTask = context.Response
                                         .WriteAsync(
                                             contentSource.Substring(0, contentSource.Length)
                                         );

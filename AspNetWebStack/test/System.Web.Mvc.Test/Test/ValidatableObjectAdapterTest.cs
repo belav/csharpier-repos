@@ -20,8 +20,7 @@ namespace System.Web.Mvc.Test
             // Arrange
             var context = new ControllerContext();
             var validatable = new Mock<IValidatableObject>();
-            var metadata = ModelMetadataProviders
-                .Current
+            var metadata = ModelMetadataProviders.Current
                 .GetMetadataForType(() => 42, typeof(IValidatableObject));
             var validator = new ValidatableObjectAdapter(metadata, context);
 
@@ -38,8 +37,7 @@ namespace System.Web.Mvc.Test
             // Arrange
             var context = new ControllerContext();
             var validatable = new Mock<IValidatableObject>();
-            var metadata = ModelMetadataProviders
-                .Current
+            var metadata = ModelMetadataProviders.Current
                 .GetMetadataForType(() => validatable.Object, validatable.Object.GetType());
             var validator = new ValidatableObjectAdapter(metadata, context);
             ValidationContext validationContext = null;
@@ -64,8 +62,7 @@ namespace System.Web.Mvc.Test
             // Arrange
             var context = new ControllerContext();
             var validatable = new Mock<IValidatableObject>();
-            var metadata = ModelMetadataProviders
-                .Current
+            var metadata = ModelMetadataProviders.Current
                 .GetMetadataForType(() => validatable.Object, validatable.Object.GetType());
             var validator = new ValidatableObjectAdapter(metadata, context);
             validatable
@@ -85,8 +82,7 @@ namespace System.Web.Mvc.Test
             // Arrange
             var context = new ControllerContext();
             var validatable = new Mock<IValidatableObject>();
-            var metadata = ModelMetadataProviders
-                .Current
+            var metadata = ModelMetadataProviders.Current
                 .GetMetadataForType(() => validatable.Object, validatable.Object.GetType());
             var validator = new ValidatableObjectAdapter(metadata, context);
             validatable
@@ -107,8 +103,7 @@ namespace System.Web.Mvc.Test
             // Arrange
             var context = new ControllerContext();
             var validatable = new Mock<IValidatableObject>();
-            var metadata = ModelMetadataProviders
-                .Current
+            var metadata = ModelMetadataProviders.Current
                 .GetMetadataForType(() => validatable.Object, validatable.Object.GetType());
             var validator = new ValidatableObjectAdapter(metadata, context);
             validatable
@@ -136,8 +131,7 @@ namespace System.Web.Mvc.Test
             // Arrange
             var context = new ControllerContext();
             var validatable = new Mock<IValidatableObject>();
-            var metadata = ModelMetadataProviders
-                .Current
+            var metadata = ModelMetadataProviders.Current
                 .GetMetadataForType(() => validatable.Object, validatable.Object.GetType());
             var validator = new ValidatableObjectAdapter(metadata, context);
             validatable
@@ -167,8 +161,7 @@ namespace System.Web.Mvc.Test
         {
             // Arrange
             var context = new ControllerContext();
-            var metadata = ModelMetadataProviders
-                .Current
+            var metadata = ModelMetadataProviders.Current
                 .GetMetadataForType(() => null, typeof(IValidatableObject));
             var validator = new ValidatableObjectAdapter(metadata, context);
 
@@ -185,8 +178,7 @@ namespace System.Web.Mvc.Test
             // Arrange
             var context = new ControllerContext();
             var validatable = new Mock<IValidatableObject>();
-            var metadata = ModelMetadataProviders
-                .Current
+            var metadata = ModelMetadataProviders.Current
                 .GetMetadataForType(() => validatable.Object, validatable.Object.GetType());
             var validator = new ValidatableObjectAdapter(metadata, context);
             validatable

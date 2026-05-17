@@ -35,8 +35,7 @@ namespace Castle.DynamicProxy.Generators.Emitters
         {
             this.parentTypeEmitter = parentTypeEmitter;
 
-            builder = parentTypeEmitter
-                .TypeBuilder
+            builder = parentTypeEmitter.TypeBuilder
                 .DefineProperty(
                     name,
                     attributes,

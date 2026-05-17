@@ -376,8 +376,7 @@ namespace System.ServiceModel.Configuration
                 }
                 if (Security.Transport != null)
                 {
-                    n.Security.Transport.ClientCredentialType = Security
-                        .Transport
+                    n.Security.Transport.ClientCredentialType = Security.Transport
                         .ClientCredentialType;
                     n.Security.Transport.ProtectionLevel = Security.Transport.ProtectionLevel;
                 }

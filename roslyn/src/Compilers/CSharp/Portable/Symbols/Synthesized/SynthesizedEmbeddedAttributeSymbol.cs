@@ -207,8 +207,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             AddSynthesizedAttribute(
                 ref attributes,
-                moduleBuilder
-                    .Compilation
+                moduleBuilder.Compilation
                     .TrySynthesizeAttribute(
                         WellKnownMember.System_Runtime_CompilerServices_CompilerGeneratedAttribute__ctor
                     )
@@ -221,8 +220,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             {
                 AddSynthesizedAttribute(
                     ref attributes,
-                    moduleBuilder
-                        .Compilation
+                    moduleBuilder.Compilation
                         .SynthesizeAttributeUsageAttribute(
                             usageInfo.ValidTargets,
                             usageInfo.AllowMultiple,

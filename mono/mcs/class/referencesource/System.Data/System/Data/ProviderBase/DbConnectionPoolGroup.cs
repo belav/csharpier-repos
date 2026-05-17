@@ -43,8 +43,7 @@ namespace System.Data.ProviderBase
         private DbMetaDataFactory _metaDataFactory;
 
         private static int _objectTypeCount; // Bid counter
-        internal readonly int _objectID = System
-            .Threading
+        internal readonly int _objectID = System.Threading
             .Interlocked
             .Increment(ref _objectTypeCount);
 
@@ -153,8 +152,7 @@ namespace System.Data.ProviderBase
 
                         DbConnectionFactory connectionFactory = pool.ConnectionFactory;
 #if !MOBILE
-                        connectionFactory
-                            .PerformanceCounters
+                        connectionFactory.PerformanceCounters
                             .NumberOfActiveConnectionPools
                             .Decrement();
 #endif
@@ -234,8 +232,7 @@ namespace System.Data.ProviderBase
                                         "No other pool with current identity should exist at this point"
                                     );
 #if !MOBILE
-                                    connectionFactory
-                                        .PerformanceCounters
+                                    connectionFactory.PerformanceCounters
                                         .NumberOfActiveConnectionPools
                                         .Increment();
 #endif
@@ -332,8 +329,7 @@ namespace System.Data.ProviderBase
                                 DbConnectionFactory connectionFactory = pool.ConnectionFactory;
 
 #if !MOBILE
-                                connectionFactory
-                                    .PerformanceCounters
+                                connectionFactory.PerformanceCounters
                                     .NumberOfActiveConnectionPools
                                     .Decrement();
 #endif

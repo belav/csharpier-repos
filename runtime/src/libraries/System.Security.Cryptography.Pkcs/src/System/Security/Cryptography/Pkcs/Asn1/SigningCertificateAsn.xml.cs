@@ -117,8 +117,7 @@ namespace System.Security.Cryptography.Pkcs.Asn1
 
                 while (collectionReader.HasData)
                 {
-                    System
-                        .Security
+                    System.Security
                         .Cryptography
                         .Pkcs
                         .Asn1
@@ -144,8 +143,7 @@ namespace System.Security.Cryptography.Pkcs.Asn1
 
                     while (collectionReader.HasData)
                     {
-                        System
-                            .Security
+                        System.Security
                             .Cryptography
                             .Pkcs
                             .Asn1

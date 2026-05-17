@@ -260,8 +260,7 @@ namespace System.ServiceModel.Dispatcher
             {
                 if (value <= 0)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentOutOfRangeException(
                                 "NodeQuota",
@@ -430,8 +429,7 @@ namespace System.ServiceModel.Dispatcher
 
             if (!reader.IsStartElement())
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument("reader", SR.GetString(SR.FilterReaderNotStartElem));
             }
 
@@ -447,8 +445,7 @@ namespace System.ServiceModel.Dispatcher
                         || reader.NamespaceURI != WSEventingNamespace
                     )
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(
                                     SR.GetString(SR.FilterInvalidAttribute)
@@ -466,8 +463,7 @@ namespace System.ServiceModel.Dispatcher
 
             if (dialect != null && dialect != XPathDialect)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(SR.FilterInvalidDialect, XPathDialect)
@@ -503,15 +499,13 @@ namespace System.ServiceModel.Dispatcher
 
             if (!reader.IsStartElement())
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument("reader", SR.GetString(SR.FilterReaderNotStartElem));
             }
 
             if (reader.IsEmptyElement)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument("reader", SR.GetString(SR.FilterInvalidInner, InnerElem));
             }
 
@@ -550,8 +544,7 @@ namespace System.ServiceModel.Dispatcher
 
             if (reader.LocalName != InnerElem)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument("reader", SR.GetString(SR.FilterInvalidInner, InnerElem));
             }
             ReadFrom(reader, new XPathMessageContext());
@@ -753,8 +746,7 @@ namespace System.ServiceModel.Dispatcher
 
             if (localName.Length == 0)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument("localName", SR.GetString(SR.FilterEmptyString));
             }
 

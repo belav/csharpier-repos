@@ -387,13 +387,14 @@ namespace System.Threading.Tasks.Sources
                 Action<object?> continuation,
                 object? state
             ) =>
-                Task.Factory.StartNew(
-                    continuation,
-                    state,
-                    CancellationToken.None,
-                    TaskCreationOptions.DenyChildAttach,
-                    scheduler
-                );
+                Task.Factory
+                    .StartNew(
+                        continuation,
+                        state,
+                        CancellationToken.None,
+                        TaskCreationOptions.DenyChildAttach,
+                        scheduler
+                    );
         }
 
         internal static void InvokeContinuationWithContext(

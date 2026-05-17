@@ -474,8 +474,7 @@ namespace System.Transactions
             lock (_internalTransaction)
             {
                 Debug.Assert(_internalTransaction.State != null);
-                internalPromotedToken = _internalTransaction
-                    .State
+                internalPromotedToken = _internalTransaction.State
                     .PromotedToken(_internalTransaction);
             }
 
@@ -524,8 +523,7 @@ namespace System.Transactions
             lock (_internalTransaction)
             {
                 Debug.Assert(_internalTransaction.State != null);
-                Enlistment enlistment = _internalTransaction
-                    .State
+                Enlistment enlistment = _internalTransaction.State
                     .EnlistDurable(
                         _internalTransaction,
                         resourceManagerIdentifier,
@@ -585,8 +583,7 @@ namespace System.Transactions
             lock (_internalTransaction)
             {
                 Debug.Assert(_internalTransaction.State != null);
-                Enlistment enlistment = _internalTransaction
-                    .State
+                Enlistment enlistment = _internalTransaction.State
                     .EnlistDurable(
                         _internalTransaction,
                         resourceManagerIdentifier,
@@ -690,8 +687,7 @@ namespace System.Transactions
             lock (_internalTransaction)
             {
                 Debug.Assert(_internalTransaction.State != null);
-                Enlistment enlistment = _internalTransaction
-                    .State
+                Enlistment enlistment = _internalTransaction.State
                     .EnlistVolatile(
                         _internalTransaction,
                         enlistmentNotification,
@@ -740,8 +736,7 @@ namespace System.Transactions
             lock (_internalTransaction)
             {
                 Debug.Assert(_internalTransaction.State != null);
-                Enlistment enlistment = _internalTransaction
-                    .State
+                Enlistment enlistment = _internalTransaction.State
                     .EnlistVolatile(
                         _internalTransaction,
                         singlePhaseNotification,
@@ -879,8 +874,7 @@ namespace System.Transactions
                 {
                     _internalTransaction._transactionCompletedDelegate =
                         (TransactionCompletedEventHandler?)
-                            System
-                                .Delegate
+                            System.Delegate
                                 .Remove(_internalTransaction._transactionCompletedDelegate, value);
                 }
             }
@@ -1034,8 +1028,7 @@ namespace System.Transactions
             lock (_internalTransaction)
             {
                 Debug.Assert(_internalTransaction.State != null);
-                succeeded = _internalTransaction
-                    .State
+                succeeded = _internalTransaction.State
                     .EnlistPromotableSinglePhase(
                         _internalTransaction,
                         promotableSinglePhaseNotification,
@@ -1094,8 +1087,7 @@ namespace System.Transactions
             lock (_internalTransaction)
             {
                 Debug.Assert(_internalTransaction.State != null);
-                Enlistment enlistment = _internalTransaction
-                    .State
+                Enlistment enlistment = _internalTransaction.State
                     .PromoteAndEnlistDurable(
                         _internalTransaction,
                         resourceManagerIdentifier,
@@ -1142,8 +1134,7 @@ namespace System.Transactions
             lock (_internalTransaction)
             {
                 Debug.Assert(_internalTransaction.State != null);
-                _internalTransaction
-                    .State
+                _internalTransaction.State
                     .SetDistributedTransactionId(
                         _internalTransaction,
                         promotableNotification,

@@ -128,8 +128,7 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             Debug.Assert(analyzerConfigPath != null);
             Debug.Assert(PathUtilities.IsAbsolute(analyzerConfigPath));
 
-            return project
-                .AnalyzerConfigDocuments
+            return project.AnalyzerConfigDocuments
                 .FirstOrDefault(d => d.FilePath == analyzerConfigPath);
         }
 

@@ -73,8 +73,7 @@ public class RequireHttpsAttribute : Attribute, IAuthorizationFilter, IOrderedFi
         }
         else
         {
-            var optionsAccessor = filterContext
-                .HttpContext
+            var optionsAccessor = filterContext.HttpContext
                 .RequestServices
                 .GetRequiredService<IOptions<MvcOptions>>();
 

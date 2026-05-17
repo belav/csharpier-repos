@@ -142,8 +142,7 @@ namespace MonoTests.System
                     BindingFlags.Static | BindingFlags.GetField | BindingFlags.NonPublic
                 );
 
-                localField = cachedDataField
-                    .FieldType
+                localField = cachedDataField.FieldType
                     .GetField(
                         "_localTimeZone",
                         BindingFlags.Instance | BindingFlags.GetField | BindingFlags.NonPublic
@@ -257,19 +256,16 @@ namespace MonoTests.System
             [ExpectedException(typeof(InvalidTimeZoneException))]
             public void AdjustmentRulesOverlap()
             {
-                TimeZoneInfo.TransitionTime s1 = TimeZoneInfo
-                    .TransitionTime
+                TimeZoneInfo.TransitionTime s1 = TimeZoneInfo.TransitionTime
                     .CreateFloatingDateRule(new DateTime(1, 1, 1, 4, 0, 0), 3, 2, DayOfWeek.Sunday);
-                TimeZoneInfo.TransitionTime e1 = TimeZoneInfo
-                    .TransitionTime
+                TimeZoneInfo.TransitionTime e1 = TimeZoneInfo.TransitionTime
                     .CreateFloatingDateRule(
                         new DateTime(1, 1, 1, 4, 0, 0),
                         10,
                         2,
                         DayOfWeek.Sunday
                     );
-                TimeZoneInfo.AdjustmentRule r1 = TimeZoneInfo
-                    .AdjustmentRule
+                TimeZoneInfo.AdjustmentRule r1 = TimeZoneInfo.AdjustmentRule
                     .CreateAdjustmentRule(
                         new DateTime(2000, 1, 1),
                         new DateTime(2005, 1, 1),
@@ -277,19 +273,16 @@ namespace MonoTests.System
                         s1,
                         e1
                     );
-                TimeZoneInfo.TransitionTime s2 = TimeZoneInfo
-                    .TransitionTime
+                TimeZoneInfo.TransitionTime s2 = TimeZoneInfo.TransitionTime
                     .CreateFloatingDateRule(new DateTime(1, 1, 1, 4, 0, 0), 2, 2, DayOfWeek.Sunday);
-                TimeZoneInfo.TransitionTime e2 = TimeZoneInfo
-                    .TransitionTime
+                TimeZoneInfo.TransitionTime e2 = TimeZoneInfo.TransitionTime
                     .CreateFloatingDateRule(
                         new DateTime(1, 1, 1, 4, 0, 0),
                         11,
                         2,
                         DayOfWeek.Sunday
                     );
-                TimeZoneInfo.AdjustmentRule r2 = TimeZoneInfo
-                    .AdjustmentRule
+                TimeZoneInfo.AdjustmentRule r2 = TimeZoneInfo.AdjustmentRule
                     .CreateAdjustmentRule(
                         new DateTime(2004, 1, 1),
                         new DateTime(2007, 1, 1),
@@ -311,19 +304,16 @@ namespace MonoTests.System
             [ExpectedException(typeof(InvalidTimeZoneException))]
             public void RulesNotOrdered()
             {
-                TimeZoneInfo.TransitionTime s1 = TimeZoneInfo
-                    .TransitionTime
+                TimeZoneInfo.TransitionTime s1 = TimeZoneInfo.TransitionTime
                     .CreateFloatingDateRule(new DateTime(1, 1, 1, 4, 0, 0), 3, 2, DayOfWeek.Sunday);
-                TimeZoneInfo.TransitionTime e1 = TimeZoneInfo
-                    .TransitionTime
+                TimeZoneInfo.TransitionTime e1 = TimeZoneInfo.TransitionTime
                     .CreateFloatingDateRule(
                         new DateTime(1, 1, 1, 4, 0, 0),
                         10,
                         2,
                         DayOfWeek.Sunday
                     );
-                TimeZoneInfo.AdjustmentRule r1 = TimeZoneInfo
-                    .AdjustmentRule
+                TimeZoneInfo.AdjustmentRule r1 = TimeZoneInfo.AdjustmentRule
                     .CreateAdjustmentRule(
                         new DateTime(2000, 1, 1),
                         new DateTime(2005, 1, 1),
@@ -331,19 +321,16 @@ namespace MonoTests.System
                         s1,
                         e1
                     );
-                TimeZoneInfo.TransitionTime s2 = TimeZoneInfo
-                    .TransitionTime
+                TimeZoneInfo.TransitionTime s2 = TimeZoneInfo.TransitionTime
                     .CreateFloatingDateRule(new DateTime(1, 1, 1, 4, 0, 0), 2, 2, DayOfWeek.Sunday);
-                TimeZoneInfo.TransitionTime e2 = TimeZoneInfo
-                    .TransitionTime
+                TimeZoneInfo.TransitionTime e2 = TimeZoneInfo.TransitionTime
                     .CreateFloatingDateRule(
                         new DateTime(1, 1, 1, 4, 0, 0),
                         11,
                         2,
                         DayOfWeek.Sunday
                     );
-                TimeZoneInfo.AdjustmentRule r2 = TimeZoneInfo
-                    .AdjustmentRule
+                TimeZoneInfo.AdjustmentRule r2 = TimeZoneInfo.AdjustmentRule
                     .CreateAdjustmentRule(
                         new DateTime(2006, 1, 1),
                         new DateTime(2007, 1, 1),
@@ -365,19 +352,16 @@ namespace MonoTests.System
             [ExpectedException(typeof(InvalidTimeZoneException))]
             public void OffsetOutOfRange()
             {
-                TimeZoneInfo.TransitionTime startTransition = TimeZoneInfo
-                    .TransitionTime
+                TimeZoneInfo.TransitionTime startTransition = TimeZoneInfo.TransitionTime
                     .CreateFloatingDateRule(new DateTime(1, 1, 1, 4, 0, 0), 3, 2, DayOfWeek.Sunday);
-                TimeZoneInfo.TransitionTime endTransition = TimeZoneInfo
-                    .TransitionTime
+                TimeZoneInfo.TransitionTime endTransition = TimeZoneInfo.TransitionTime
                     .CreateFloatingDateRule(
                         new DateTime(1, 1, 1, 4, 0, 0),
                         10,
                         2,
                         DayOfWeek.Sunday
                     );
-                TimeZoneInfo.AdjustmentRule rule = TimeZoneInfo
-                    .AdjustmentRule
+                TimeZoneInfo.AdjustmentRule rule = TimeZoneInfo.AdjustmentRule
                     .CreateAdjustmentRule(
                         new DateTime(2000, 1, 1),
                         new DateTime(2005, 1, 1),
@@ -413,19 +397,16 @@ namespace MonoTests.System
             [ExpectedException(typeof(InvalidTimeZoneException))]
             public void MultiplesRulesForDate()
             {
-                TimeZoneInfo.TransitionTime s1 = TimeZoneInfo
-                    .TransitionTime
+                TimeZoneInfo.TransitionTime s1 = TimeZoneInfo.TransitionTime
                     .CreateFloatingDateRule(new DateTime(1, 1, 1, 4, 0, 0), 3, 2, DayOfWeek.Sunday);
-                TimeZoneInfo.TransitionTime e1 = TimeZoneInfo
-                    .TransitionTime
+                TimeZoneInfo.TransitionTime e1 = TimeZoneInfo.TransitionTime
                     .CreateFloatingDateRule(
                         new DateTime(1, 1, 1, 4, 0, 0),
                         10,
                         2,
                         DayOfWeek.Sunday
                     );
-                TimeZoneInfo.AdjustmentRule r1 = TimeZoneInfo
-                    .AdjustmentRule
+                TimeZoneInfo.AdjustmentRule r1 = TimeZoneInfo.AdjustmentRule
                     .CreateAdjustmentRule(
                         new DateTime(2000, 1, 1),
                         new DateTime(2005, 1, 1),
@@ -433,19 +414,16 @@ namespace MonoTests.System
                         s1,
                         e1
                     );
-                TimeZoneInfo.TransitionTime s2 = TimeZoneInfo
-                    .TransitionTime
+                TimeZoneInfo.TransitionTime s2 = TimeZoneInfo.TransitionTime
                     .CreateFloatingDateRule(new DateTime(1, 1, 1, 4, 0, 0), 2, 2, DayOfWeek.Sunday);
-                TimeZoneInfo.TransitionTime e2 = TimeZoneInfo
-                    .TransitionTime
+                TimeZoneInfo.TransitionTime e2 = TimeZoneInfo.TransitionTime
                     .CreateFloatingDateRule(
                         new DateTime(1, 1, 1, 4, 0, 0),
                         11,
                         2,
                         DayOfWeek.Sunday
                     );
-                TimeZoneInfo.AdjustmentRule r2 = TimeZoneInfo
-                    .AdjustmentRule
+                TimeZoneInfo.AdjustmentRule r2 = TimeZoneInfo.AdjustmentRule
                     .CreateAdjustmentRule(
                         new DateTime(2005, 1, 1),
                         new DateTime(2007, 1, 1),
@@ -466,19 +444,16 @@ namespace MonoTests.System
             [Test]
             public void SupportsDaylightSavingTime_NonEmptyAdjustmentRule()
             {
-                TimeZoneInfo.TransitionTime s1 = TimeZoneInfo
-                    .TransitionTime
+                TimeZoneInfo.TransitionTime s1 = TimeZoneInfo.TransitionTime
                     .CreateFloatingDateRule(new DateTime(1, 1, 1, 4, 0, 0), 3, 2, DayOfWeek.Sunday);
-                TimeZoneInfo.TransitionTime e1 = TimeZoneInfo
-                    .TransitionTime
+                TimeZoneInfo.TransitionTime e1 = TimeZoneInfo.TransitionTime
                     .CreateFloatingDateRule(
                         new DateTime(1, 1, 1, 4, 0, 0),
                         10,
                         2,
                         DayOfWeek.Sunday
                     );
-                TimeZoneInfo.AdjustmentRule r1 = TimeZoneInfo
-                    .AdjustmentRule
+                TimeZoneInfo.AdjustmentRule r1 = TimeZoneInfo.AdjustmentRule
                     .CreateAdjustmentRule(
                         new DateTime(2000, 1, 1),
                         new DateTime(2005, 1, 1),
@@ -514,19 +489,16 @@ namespace MonoTests.System
             [Test]
             public void SupportsDaylightSavingTime_NonEmptyAdjustmentRule_DisableDaylightSavingTime()
             {
-                TimeZoneInfo.TransitionTime s1 = TimeZoneInfo
-                    .TransitionTime
+                TimeZoneInfo.TransitionTime s1 = TimeZoneInfo.TransitionTime
                     .CreateFloatingDateRule(new DateTime(1, 1, 1, 4, 0, 0), 3, 2, DayOfWeek.Sunday);
-                TimeZoneInfo.TransitionTime e1 = TimeZoneInfo
-                    .TransitionTime
+                TimeZoneInfo.TransitionTime e1 = TimeZoneInfo.TransitionTime
                     .CreateFloatingDateRule(
                         new DateTime(1, 1, 1, 4, 0, 0),
                         10,
                         2,
                         DayOfWeek.Sunday
                     );
-                TimeZoneInfo.AdjustmentRule r1 = TimeZoneInfo
-                    .AdjustmentRule
+                TimeZoneInfo.AdjustmentRule r1 = TimeZoneInfo.AdjustmentRule
                     .CreateAdjustmentRule(
                         new DateTime(2000, 1, 1),
                         new DateTime(2005, 1, 1),
@@ -571,19 +543,16 @@ namespace MonoTests.System
             [SetUp]
             public void CreateTimeZones()
             {
-                TimeZoneInfo.TransitionTime start = TimeZoneInfo
-                    .TransitionTime
+                TimeZoneInfo.TransitionTime start = TimeZoneInfo.TransitionTime
                     .CreateFloatingDateRule(new DateTime(1, 1, 1, 1, 0, 0), 3, 5, DayOfWeek.Sunday);
-                TimeZoneInfo.TransitionTime end = TimeZoneInfo
-                    .TransitionTime
+                TimeZoneInfo.TransitionTime end = TimeZoneInfo.TransitionTime
                     .CreateFloatingDateRule(
                         new DateTime(1, 1, 1, 2, 0, 0),
                         10,
                         5,
                         DayOfWeek.Sunday
                     );
-                TimeZoneInfo.AdjustmentRule rule = TimeZoneInfo
-                    .AdjustmentRule
+                TimeZoneInfo.AdjustmentRule rule = TimeZoneInfo.AdjustmentRule
                     .CreateAdjustmentRule(
                         DateTime.MinValue.Date,
                         DateTime.MaxValue.Date,
@@ -701,19 +670,16 @@ namespace MonoTests.System
             {
                 // Construct a custom time zone where daylight saving time starts on the
                 // 2nd Sunday in March.
-                var transitionToDaylight = TimeZoneInfo
-                    .TransitionTime
+                var transitionToDaylight = TimeZoneInfo.TransitionTime
                     .CreateFloatingDateRule(new DateTime(1, 1, 1, 2, 0, 0), 3, 2, DayOfWeek.Sunday);
-                var transitionToStandard = TimeZoneInfo
-                    .TransitionTime
+                var transitionToStandard = TimeZoneInfo.TransitionTime
                     .CreateFloatingDateRule(
                         new DateTime(1, 1, 1, 2, 0, 0),
                         11,
                         1,
                         DayOfWeek.Sunday
                     );
-                var adjustment = TimeZoneInfo
-                    .AdjustmentRule
+                var adjustment = TimeZoneInfo.AdjustmentRule
                     .CreateAdjustmentRule(
                         DateTime.MinValue.Date,
                         DateTime.MaxValue.Date,
@@ -1315,19 +1281,16 @@ namespace MonoTests.System
             [SetUp]
             public void CreateTimeZones()
             {
-                TimeZoneInfo.TransitionTime start = TimeZoneInfo
-                    .TransitionTime
+                TimeZoneInfo.TransitionTime start = TimeZoneInfo.TransitionTime
                     .CreateFloatingDateRule(new DateTime(1, 1, 1, 1, 0, 0), 3, 5, DayOfWeek.Sunday);
-                TimeZoneInfo.TransitionTime end = TimeZoneInfo
-                    .TransitionTime
+                TimeZoneInfo.TransitionTime end = TimeZoneInfo.TransitionTime
                     .CreateFloatingDateRule(
                         new DateTime(1, 1, 1, 2, 0, 0),
                         10,
                         5,
                         DayOfWeek.Sunday
                     );
-                TimeZoneInfo.AdjustmentRule rule = TimeZoneInfo
-                    .AdjustmentRule
+                TimeZoneInfo.AdjustmentRule rule = TimeZoneInfo.AdjustmentRule
                     .CreateAdjustmentRule(
                         DateTime.MinValue.Date,
                         DateTime.MaxValue.Date,
@@ -1649,19 +1612,16 @@ namespace MonoTests.System
             [SetUp]
             public void CreateTimeZones()
             {
-                TimeZoneInfo.TransitionTime start = TimeZoneInfo
-                    .TransitionTime
+                TimeZoneInfo.TransitionTime start = TimeZoneInfo.TransitionTime
                     .CreateFloatingDateRule(new DateTime(1, 1, 1, 1, 0, 0), 3, 5, DayOfWeek.Sunday);
-                TimeZoneInfo.TransitionTime end = TimeZoneInfo
-                    .TransitionTime
+                TimeZoneInfo.TransitionTime end = TimeZoneInfo.TransitionTime
                     .CreateFloatingDateRule(
                         new DateTime(1, 1, 1, 2, 0, 0),
                         10,
                         5,
                         DayOfWeek.Sunday
                     );
-                TimeZoneInfo.AdjustmentRule rule = TimeZoneInfo
-                    .AdjustmentRule
+                TimeZoneInfo.AdjustmentRule rule = TimeZoneInfo.AdjustmentRule
                     .CreateAdjustmentRule(
                         DateTime.MinValue.Date,
                         DateTime.MaxValue.Date,
@@ -1714,19 +1674,16 @@ namespace MonoTests.System
             [SetUp]
             public void CreateTimeZones()
             {
-                TimeZoneInfo.TransitionTime start = TimeZoneInfo
-                    .TransitionTime
+                TimeZoneInfo.TransitionTime start = TimeZoneInfo.TransitionTime
                     .CreateFloatingDateRule(new DateTime(1, 1, 1, 1, 0, 0), 3, 5, DayOfWeek.Sunday);
-                TimeZoneInfo.TransitionTime end = TimeZoneInfo
-                    .TransitionTime
+                TimeZoneInfo.TransitionTime end = TimeZoneInfo.TransitionTime
                     .CreateFloatingDateRule(
                         new DateTime(1, 1, 1, 2, 0, 0),
                         10,
                         5,
                         DayOfWeek.Sunday
                     );
-                TimeZoneInfo.AdjustmentRule rule = TimeZoneInfo
-                    .AdjustmentRule
+                TimeZoneInfo.AdjustmentRule rule = TimeZoneInfo.AdjustmentRule
                     .CreateAdjustmentRule(
                         DateTime.MinValue.Date,
                         DateTime.MaxValue.Date,
@@ -1987,19 +1944,16 @@ namespace MonoTests.System
             [Test]
             public void BrusselsAdjustments()
             {
-                TimeZoneInfo.TransitionTime start = TimeZoneInfo
-                    .TransitionTime
+                TimeZoneInfo.TransitionTime start = TimeZoneInfo.TransitionTime
                     .CreateFloatingDateRule(new DateTime(1, 1, 1, 2, 0, 0), 3, 5, DayOfWeek.Sunday);
-                TimeZoneInfo.TransitionTime end = TimeZoneInfo
-                    .TransitionTime
+                TimeZoneInfo.TransitionTime end = TimeZoneInfo.TransitionTime
                     .CreateFloatingDateRule(
                         new DateTime(1, 1, 1, 3, 0, 0),
                         10,
                         5,
                         DayOfWeek.Sunday
                     );
-                TimeZoneInfo.AdjustmentRule rule = TimeZoneInfo
-                    .AdjustmentRule
+                TimeZoneInfo.AdjustmentRule rule = TimeZoneInfo.AdjustmentRule
                     .CreateAdjustmentRule(
                         DateTime.MinValue.Date,
                         DateTime.MaxValue.Date,
@@ -2124,19 +2078,16 @@ namespace MonoTests.System
             [Test]
             public void Serialization_Deserialization()
             {
-                TimeZoneInfo.TransitionTime start = TimeZoneInfo
-                    .TransitionTime
+                TimeZoneInfo.TransitionTime start = TimeZoneInfo.TransitionTime
                     .CreateFloatingDateRule(new DateTime(1, 1, 1, 1, 0, 0), 3, 5, DayOfWeek.Sunday);
-                TimeZoneInfo.TransitionTime end = TimeZoneInfo
-                    .TransitionTime
+                TimeZoneInfo.TransitionTime end = TimeZoneInfo.TransitionTime
                     .CreateFloatingDateRule(
                         new DateTime(1, 1, 1, 2, 0, 0),
                         10,
                         5,
                         DayOfWeek.Sunday
                     );
-                TimeZoneInfo.AdjustmentRule rule = TimeZoneInfo
-                    .AdjustmentRule
+                TimeZoneInfo.AdjustmentRule rule = TimeZoneInfo.AdjustmentRule
                     .CreateAdjustmentRule(
                         DateTime.MinValue.Date,
                         DateTime.MaxValue.Date,
@@ -2198,8 +2149,7 @@ namespace MonoTests.System
                 dstUtcOffset = new TimeSpan(3, 0, 0);
                 dstOffset = dstUtcOffset - baseUtcOffset;
 
-                var rule1 = TimeZoneInfo
-                    .AdjustmentRule
+                var rule1 = TimeZoneInfo.AdjustmentRule
                     .CreateAdjustmentRule(
                         new DateTime(2014, 1, 1),
                         new DateTime(2014, 6, 30),
@@ -2208,8 +2158,7 @@ namespace MonoTests.System
                         CreateFixedDateRule(dst1End)
                     );
 
-                var rule2 = TimeZoneInfo
-                    .AdjustmentRule
+                var rule2 = TimeZoneInfo.AdjustmentRule
                     .CreateAdjustmentRule(
                         new DateTime(2014, 7, 1),
                         new DateTime(2014, 12, 31),
@@ -2231,8 +2180,7 @@ namespace MonoTests.System
             private static TimeZoneInfo.TransitionTime CreateFixedDateRule(DateTime dateTime)
             {
                 var time = new DateTime(dateTime.Ticks - dateTime.Date.Ticks);
-                return TimeZoneInfo
-                    .TransitionTime
+                return TimeZoneInfo.TransitionTime
                     .CreateFixedDateRule(time, dateTime.Month, dateTime.Day);
             }
 
@@ -2418,16 +2366,14 @@ namespace MonoTests.System
             {
                 TimeZoneInfo.TransitionTime startTransition,
                     endTransition;
-                startTransition = TimeZoneInfo
-                    .TransitionTime
+                startTransition = TimeZoneInfo.TransitionTime
                     .CreateFloatingDateRule(
                         new DateTime(1, 1, 1, 4, 0, 0),
                         10,
                         2,
                         DayOfWeek.Sunday
                     );
-                endTransition = TimeZoneInfo
-                    .TransitionTime
+                endTransition = TimeZoneInfo.TransitionTime
                     .CreateFloatingDateRule(new DateTime(1, 1, 1, 3, 0, 0), 3, 2, DayOfWeek.Sunday);
 
                 var ctz = TimeZoneInfo.CreateCustomTimeZone(
@@ -2438,8 +2384,7 @@ namespace MonoTests.System
                     "dst",
                     new[]
                     {
-                        TimeZoneInfo
-                            .AdjustmentRule
+                        TimeZoneInfo.AdjustmentRule
                             .CreateAdjustmentRule(
                                 DateTime.MinValue,
                                 DateTime.MaxValue.Date,

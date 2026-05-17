@@ -172,12 +172,10 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             {
                 // If we support patterns then we can do "return obj is MyType myType && ..."
                 expressions.Add(
-                    factory
-                        .SyntaxGeneratorInternal
+                    factory.SyntaxGeneratorInternal
                         .IsPatternExpression(
                             objNameExpression,
-                            factory
-                                .SyntaxGeneratorInternal
+                            factory.SyntaxGeneratorInternal
                                 .DeclarationPattern(containingType, localName)
                         )
                 );
@@ -513,8 +511,7 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 // We compare ignoring nested nullability here, as it's possible the underlying object could have implemented IEquatable<Type>
                 // or IEquatable<Type?>. From the perspective of this, either is allowable.
                 var constructed = iequatableType.Construct(memberType);
-                return memberType
-                    .AllInterfaces
+                return memberType.AllInterfaces
                     .Contains(constructed, equalityComparer: SymbolEqualityComparer.Default);
             }
 

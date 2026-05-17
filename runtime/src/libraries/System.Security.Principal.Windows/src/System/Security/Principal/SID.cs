@@ -1120,8 +1120,7 @@ namespace System.Security.Principal
 
                 someFailed = false;
                 uint ReturnCode;
-                ReturnCode = Interop
-                    .Advapi32
+                ReturnCode = Interop.Advapi32
                     .LsaLookupSids(
                         LsaHandle,
                         sourceSids.Count,

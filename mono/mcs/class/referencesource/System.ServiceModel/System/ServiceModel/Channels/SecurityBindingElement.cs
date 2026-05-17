@@ -80,8 +80,7 @@ namespace System.ServiceModel.Channels
             : base(elementToBeCloned)
         {
             if (elementToBeCloned == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("elementToBeCloned");
 
             this.defaultAlgorithmSuite = elementToBeCloned.defaultAlgorithmSuite;
@@ -159,8 +158,7 @@ namespace System.ServiceModel.Channels
             set
             {
                 if (!SecurityHeaderLayoutHelper.IsDefined(value))
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new ArgumentOutOfRangeException("value"));
 
                 this.securityHeaderLayout = value;
@@ -173,8 +171,7 @@ namespace System.ServiceModel.Channels
             set
             {
                 if (value == null)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new ArgumentNullException("value"));
                 this.messageSecurityVersion = value;
             }
@@ -204,8 +201,7 @@ namespace System.ServiceModel.Channels
             set
             {
                 if (value == null)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new ArgumentNullException("value"));
                 this.defaultAlgorithmSuite = value;
             }
@@ -234,8 +230,7 @@ namespace System.ServiceModel.Channels
             {
                 if (!SecurityKeyEntropyModeHelper.IsDefined(value))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new ArgumentOutOfRangeException("value"));
                 }
                 this.keyEntropyMode = value;
@@ -389,8 +384,7 @@ namespace System.ServiceModel.Channels
 
         internal void ApplyPropertiesOnDemuxer(ChannelBuilder builder, BindingContext context)
         {
-            Collection<ChannelDemuxerBindingElement> demuxerElements = builder
-                .Binding
+            Collection<ChannelDemuxerBindingElement> demuxerElements = builder.Binding
                 .Elements
                 .FindAll<ChannelDemuxerBindingElement>();
             foreach (ChannelDemuxerBindingElement element in demuxerElements)
@@ -407,13 +401,11 @@ namespace System.ServiceModel.Channels
             BindingContext issuerBindingContext
         )
         {
-            TransportBindingElement transport = issuerBindingContext
-                .RemainingBindingElements
+            TransportBindingElement transport = issuerBindingContext.RemainingBindingElements
                 .Find<TransportBindingElement>();
             if (transport == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(SR.TransportBindingElementNotFound)
@@ -434,8 +426,7 @@ namespace System.ServiceModel.Channels
             }
             if (demuxer == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(SR.ChannelDemuxerBindingElementNotFound)
@@ -532,13 +523,15 @@ namespace System.ServiceModel.Channels
                 issuerBindingContext
             );
             foreach (
-                SupportingTokenParameters parameters in this.OperationSupportingTokenParameters.Values
+                SupportingTokenParameters parameters in this.OperationSupportingTokenParameters
+                    .Values
             )
             {
                 SetIssuerBindingContextIfRequired(parameters, issuerBindingContext);
             }
             foreach (
-                SupportingTokenParameters parameters in this.OptionalOperationSupportingTokenParameters.Values
+                SupportingTokenParameters parameters in this.OptionalOperationSupportingTokenParameters
+                    .Values
             )
             {
                 SetIssuerBindingContextIfRequired(parameters, issuerBindingContext);
@@ -663,12 +656,10 @@ namespace System.ServiceModel.Channels
         )
         {
             if (factory == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("factory"));
             if (credentialsManager == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("credentialsManager"));
 
             factory.AddTimestamp = this.IncludeTimestamp;
@@ -678,8 +669,8 @@ namespace System.ServiceModel.Channels
 
             if (!isForService)
             {
-                factory.TimestampValidityDuration =
-                    this.LocalClientSettings.TimestampValidityDuration;
+                factory.TimestampValidityDuration = this.LocalClientSettings
+                    .TimestampValidityDuration;
                 factory.DetectReplays = this.LocalClientSettings.DetectReplays;
                 factory.MaxCachedNonces = this.LocalClientSettings.ReplayCacheSize;
                 factory.MaxClockSkew = this.LocalClientSettings.MaxClockSkew;
@@ -692,8 +683,8 @@ namespace System.ServiceModel.Channels
             }
             else
             {
-                factory.TimestampValidityDuration =
-                    this.LocalServiceSettings.TimestampValidityDuration;
+                factory.TimestampValidityDuration = this.LocalServiceSettings
+                    .TimestampValidityDuration;
                 factory.DetectReplays = this.LocalServiceSettings.DetectReplays;
                 factory.MaxCachedNonces = this.LocalServiceSettings.ReplayCacheSize;
                 factory.MaxClockSkew = this.LocalServiceSettings.MaxClockSkew;
@@ -708,8 +699,7 @@ namespace System.ServiceModel.Channels
             factory.SecurityBindingElement = (SecurityBindingElement)this.Clone();
             factory.SecurityBindingElement.SetIssuerBindingContextIfRequired(issuerBindingContext);
             factory.SecurityTokenManager = credentialsManager.CreateSecurityTokenManager();
-            SecurityTokenSerializer tokenSerializer = factory
-                .SecurityTokenManager
+            SecurityTokenSerializer tokenSerializer = factory.SecurityTokenManager
                 .CreateSecurityTokenSerializer(this.messageSecurityVersion.SecurityTokenVersion);
             factory.StandardsManager = new SecurityStandardsManager(
                 this.messageSecurityVersion,
@@ -737,8 +727,7 @@ namespace System.ServiceModel.Channels
 
             if (!this.CanBuildChannelFactory<TChannel>(context))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentException(
                             SR.GetString(SR.ChannelTypeNotSupported, typeof(TChannel)),
@@ -750,8 +739,7 @@ namespace System.ServiceModel.Channels
             this.readerQuotas = context.GetInnerProperty<XmlDictionaryReaderQuotas>();
             if (readerQuotas == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(SR.EncodingBindingElementDoesNotHandleReaderQuotas)
@@ -762,8 +750,7 @@ namespace System.ServiceModel.Channels
             TransportBindingElement transportBindingElement = null;
 
             if (context.RemainingBindingElements != null)
-                transportBindingElement = context
-                    .RemainingBindingElements
+                transportBindingElement = context.RemainingBindingElements
                     .Find<TransportBindingElement>();
 
             if (transportBindingElement != null)
@@ -871,8 +858,7 @@ namespace System.ServiceModel.Channels
 
             if (!this.CanBuildChannelListener<TChannel>(context))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentException(
                             SR.GetString(SR.ChannelTypeNotSupported, typeof(TChannel)),
@@ -884,8 +870,7 @@ namespace System.ServiceModel.Channels
             this.readerQuotas = context.GetInnerProperty<XmlDictionaryReaderQuotas>();
             if (readerQuotas == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(SR.EncodingBindingElementDoesNotHandleReaderQuotas)
@@ -895,8 +880,7 @@ namespace System.ServiceModel.Channels
 
             TransportBindingElement transportBindingElement = null;
             if (context.RemainingBindingElements != null)
-                transportBindingElement = context
-                    .RemainingBindingElements
+                transportBindingElement = context.RemainingBindingElements
                     .Find<TransportBindingElement>();
 
             if (transportBindingElement != null)
@@ -990,7 +974,8 @@ namespace System.ServiceModel.Channels
             foreach (SupportingTokenParameters t in this.OperationSupportingTokenParameters.Values)
                 t.SetKeyDerivation(requireDerivedKeys);
             foreach (
-                SupportingTokenParameters t in this.OptionalOperationSupportingTokenParameters.Values
+                SupportingTokenParameters t in this.OptionalOperationSupportingTokenParameters
+                    .Values
             )
             {
                 t.SetKeyDerivation(requireDerivedKeys);
@@ -1003,9 +988,8 @@ namespace System.ServiceModel.Channels
                 return false;
 
             if (
-                !this.OptionalEndpointSupportingTokenParameters.IsSetKeyDerivation(
-                    requireDerivedKeys
-                )
+                !this.OptionalEndpointSupportingTokenParameters
+                    .IsSetKeyDerivation(requireDerivedKeys)
             )
                 return false;
 
@@ -1015,7 +999,8 @@ namespace System.ServiceModel.Channels
                     return false;
             }
             foreach (
-                SupportingTokenParameters t in this.OptionalOperationSupportingTokenParameters.Values
+                SupportingTokenParameters t in this.OptionalOperationSupportingTokenParameters
+                    .Values
             )
             {
                 if (!t.IsSetKeyDerivation(requireDerivedKeys))
@@ -1036,7 +1021,8 @@ namespace System.ServiceModel.Channels
             ProtectionLevel supportedRequestProtectionLevel =
                 this.GetIndividualProperty<ISecurityCapabilities>().SupportedRequestProtectionLevel;
             ProtectionLevel supportedResponseProtectionLevel =
-                this.GetIndividualProperty<ISecurityCapabilities>().SupportedResponseProtectionLevel;
+                this.GetIndividualProperty<ISecurityCapabilities>()
+                    .SupportedResponseProtectionLevel;
 
             bool canSupportMoreThanTheDefault = (
                 ProtectionLevelHelper.IsStrongerOrEqual(
@@ -1073,31 +1059,23 @@ namespace System.ServiceModel.Channels
                 if (addressing.DefaultFaultAction != null)
                 {
                     // Faults that do not specify a particular action
-                    result
-                        .IncomingSignatureParts
+                    result.IncomingSignatureParts
                         .AddParts(signedParts, addressing.DefaultFaultAction);
-                    result
-                        .OutgoingSignatureParts
+                    result.OutgoingSignatureParts
                         .AddParts(signedParts, addressing.DefaultFaultAction);
-                    result
-                        .IncomingEncryptionParts
+                    result.IncomingEncryptionParts
                         .AddParts(encryptedParts, addressing.DefaultFaultAction);
-                    result
-                        .OutgoingEncryptionParts
+                    result.OutgoingEncryptionParts
                         .AddParts(encryptedParts, addressing.DefaultFaultAction);
                 }
                 // Infrastructure faults
-                result
-                    .IncomingSignatureParts
+                result.IncomingSignatureParts
                     .AddParts(signedParts, FaultCodeConstants.Actions.NetDispatcher);
-                result
-                    .OutgoingSignatureParts
+                result.OutgoingSignatureParts
                     .AddParts(signedParts, FaultCodeConstants.Actions.NetDispatcher);
-                result
-                    .IncomingEncryptionParts
+                result.IncomingEncryptionParts
                     .AddParts(encryptedParts, FaultCodeConstants.Actions.NetDispatcher);
-                result
-                    .OutgoingEncryptionParts
+                result.OutgoingEncryptionParts
                     .AddParts(encryptedParts, FaultCodeConstants.Actions.NetDispatcher);
             }
 
@@ -1248,8 +1226,7 @@ namespace System.ServiceModel.Channels
                         SecurityTokenInclusionMode.Never
                     )
                 );
-                result
-                    .EndpointSupportingTokenParameters
+                result.EndpointSupportingTokenParameters
                     .Endorsing
                     .Add(
                         new X509SecurityTokenParameters(
@@ -1489,8 +1466,7 @@ namespace System.ServiceModel.Channels
                     SecurityTokenInclusionMode.Never
                 )
             );
-            result
-                .EndpointSupportingTokenParameters
+            result.EndpointSupportingTokenParameters
                 .SignedEncrypted
                 .Add(new UserNameSecurityTokenParameters());
             result.MessageSecurityVersion =
@@ -1656,12 +1632,10 @@ namespace System.ServiceModel.Channels
         )
         {
             if (issuedTokenParameters == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("issuedTokenParameters");
             if (issuedTokenParameters.KeyType != SecurityKeyType.SymmetricKey)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(
                         SR.GetString(SR.IssuedTokenAuthenticationModeRequiresSymmetricIssuedKey)
                     );
@@ -1678,8 +1652,7 @@ namespace System.ServiceModel.Channels
         )
         {
             if (issuedTokenParameters == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("issuedTokenParameters");
 
             SymmetricSecurityBindingElement result = new SymmetricSecurityBindingElement(
@@ -1793,8 +1766,7 @@ namespace System.ServiceModel.Channels
         )
         {
             if (issuedTokenParameters == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("issuedTokenParameters");
 
             SymmetricSecurityBindingElement result = new SymmetricSecurityBindingElement(
@@ -1891,8 +1863,7 @@ namespace System.ServiceModel.Channels
             SymmetricSecurityBindingElement result = new SymmetricSecurityBindingElement(
                 new SslSecurityTokenParameters(false, requireCancellation)
             );
-            result
-                .EndpointSupportingTokenParameters
+            result.EndpointSupportingTokenParameters
                 .SignedEncrypted
                 .Add(new UserNameSecurityTokenParameters());
             result.MessageSecurityVersion =
@@ -1939,8 +1910,7 @@ namespace System.ServiceModel.Channels
         public static TransportSecurityBindingElement CreateUserNameOverTransportBindingElement()
         {
             TransportSecurityBindingElement result = new TransportSecurityBindingElement();
-            result
-                .EndpointSupportingTokenParameters
+            result.EndpointSupportingTokenParameters
                 .SignedEncrypted
                 .Add(new UserNameSecurityTokenParameters());
             result.IncludeTimestamp = true;
@@ -2169,8 +2139,7 @@ namespace System.ServiceModel.Channels
         )
         {
             if (issuedTokenParameters == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("issuedTokenParameters");
 
             issuedTokenParameters.RequireDerivedKeys = false;
@@ -2290,8 +2259,7 @@ namespace System.ServiceModel.Channels
         )
         {
             if (bootstrapSecurity == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("bootstrapBinding");
 
             SecurityBindingElement result;
@@ -2525,8 +2493,7 @@ namespace System.ServiceModel.Channels
         )
         {
             if (parameterCollection == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("parameterCollection");
             if (bindingElements == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("bindingElements");
@@ -2600,8 +2567,7 @@ namespace System.ServiceModel.Channels
             SecurityProtocolFactory factory
         )
         {
-            ServiceSecurityAuditBehavior auditBehavior = context
-                .BindingParameters
+            ServiceSecurityAuditBehavior auditBehavior = context.BindingParameters
                 .Find<ServiceSecurityAuditBehavior>();
             if (auditBehavior != null)
             {
@@ -2791,8 +2757,7 @@ namespace System.ServiceModel.Channels
             {
                 try
                 {
-                    exporter
-                        .State
+                    exporter.State
                         .Remove(
                             SecurityPolicyStrings.SecureConversationBootstrapBindingElementsBelowSecurityKey
                         );
@@ -2864,8 +2829,7 @@ namespace System.ServiceModel.Channels
                 {
                     if (transportTokenAssertionProvider == null && !binding.AllowInsecureTransport)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(
                                     SR.GetString(
@@ -2917,8 +2881,7 @@ namespace System.ServiceModel.Channels
             {
                 try
                 {
-                    exporter
-                        .State
+                    exporter.State
                         .Remove(
                             SecurityPolicyStrings.SecureConversationBootstrapBindingElementsBelowSecurityKey
                         );
@@ -3032,8 +2995,7 @@ namespace System.ServiceModel.Channels
                 }
 
                 if (transportTokenAssertion == null)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(
@@ -3045,9 +3007,8 @@ namespace System.ServiceModel.Channels
             }
 
             AddressingVersion addressingVersion = AddressingVersion.WSAddressing10;
-            MessageEncodingBindingElement messageEncoderBindingElement = policyContext
-                .BindingElements
-                .Find<MessageEncodingBindingElement>();
+            MessageEncodingBindingElement messageEncoderBindingElement =
+                policyContext.BindingElements.Find<MessageEncodingBindingElement>();
             if (messageEncoderBindingElement != null)
             {
                 addressingVersion = messageEncoderBindingElement.MessageVersion.Addressing;
@@ -3156,8 +3117,7 @@ namespace System.ServiceModel.Channels
             bindingParameters.Add(
                 ChannelProtectionRequirements.CreateFromContract(
                     policyContext.Contract,
-                    policyContext
-                        .BindingElements
+                    policyContext.BindingElements
                         .Find<SecurityBindingElement>()
                         .GetIndividualProperty<ISecurityCapabilities>(),
                     false
@@ -3230,8 +3190,7 @@ namespace System.ServiceModel.Channels
 
                     // integrity
                     if (
-                        protectionRequirements
-                            .OutgoingSignatureParts
+                        protectionRequirements.OutgoingSignatureParts
                             .TryGetParts(fault.Action, out parts)
                     )
                     {
@@ -3244,8 +3203,7 @@ namespace System.ServiceModel.Channels
 
                     // confidentiality
                     if (
-                        protectionRequirements
-                            .OutgoingEncryptionParts
+                        protectionRequirements.OutgoingEncryptionParts
                             .TryGetParts(fault.Action, out parts)
                     )
                     {
@@ -3293,8 +3251,7 @@ namespace System.ServiceModel.Channels
                             ];
                         }
                         if (
-                            binding
-                                .OptionalOperationSupportingTokenParameters
+                            binding.OptionalOperationSupportingTokenParameters
                                 .ContainsKey(message.Action)
                         )
                         {

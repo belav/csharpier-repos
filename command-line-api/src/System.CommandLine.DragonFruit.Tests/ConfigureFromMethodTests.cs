@@ -90,8 +90,7 @@ namespace System.CommandLine.DragonFruit.Tests
 
             var rootCommandArgument = config.RootCommand.Arguments.Single();
 
-            rootCommandArgument
-                .Arity
+            rootCommandArgument.Arity
                 .Should()
                 .BeEquivalentTo(new ArgumentArity(minNumberOfValues, maxNumberOfValues));
         }

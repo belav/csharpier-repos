@@ -31,8 +31,7 @@ namespace Microsoft.CodeAnalysis.Editor
                 underlyingItem.Text,
                 underlyingItem.Glyph,
                 GetSpans(underlyingItem),
-                underlyingItem
-                    .ChildItems
+                underlyingItem.ChildItems
                     .SelectAsArray(v =>
                         (NavigationBarItem)new WrappedNavigationBarItem(textVersion, v)
                     ),

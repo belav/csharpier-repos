@@ -103,8 +103,7 @@ namespace System.ServiceModel.Channels
 
                 if (text != null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new InvalidOperationException(text));
                 }
             }
@@ -146,8 +145,7 @@ namespace System.ServiceModel.Channels
 
                 if (text != null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new InvalidOperationException(text));
                 }
             }

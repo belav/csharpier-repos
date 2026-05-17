@@ -1056,14 +1056,12 @@ public class WebSocketMiddlewareTests : LoggedTest
                 {
                     request.Headers.Connection.Clear();
                     request.Headers.Connection.Add("Upgrade");
-                    request
-                        .Headers
+                    request.Headers
                         .Upgrade
                         .Add(new System.Net.Http.Headers.ProductHeaderValue("websocket"));
                     request.Headers.Add(HeaderNames.SecWebSocketVersion, "13");
                     // SecWebSocketKey required to be 16 bytes
-                    request
-                        .Headers
+                    request.Headers
                         .Add(
                             HeaderNames.SecWebSocketKey,
                             Convert.ToBase64String(
@@ -1199,18 +1197,15 @@ public class WebSocketMiddlewareTests : LoggedTest
                     request.Headers.Connection.Clear();
                     request.Headers.Connection.Add("Upgrade");
                     request.Headers.Connection.Add("keep-alive");
-                    request
-                        .Headers
+                    request.Headers
                         .Upgrade
                         .Add(new System.Net.Http.Headers.ProductHeaderValue("websocket"));
-                    request
-                        .Headers
+                    request.Headers
                         .Upgrade
                         .Add(new System.Net.Http.Headers.ProductHeaderValue("example"));
                     request.Headers.Add(HeaderNames.SecWebSocketVersion, "13");
                     // SecWebSocketKey required to be 16 bytes
-                    request
-                        .Headers
+                    request.Headers
                         .Add(
                             HeaderNames.SecWebSocketKey,
                             Convert.ToBase64String(
@@ -1253,8 +1248,7 @@ public class WebSocketMiddlewareTests : LoggedTest
                 out var port,
                 async context =>
                 {
-                    context
-                        .Features
+                    context.Features
                         .Set<IHttpRequestTimeoutFeature>(new HttpRequestTimeoutFeature());
                     Assert.True(context.WebSockets.IsWebSocketRequest);
                     var feature = Assert.IsType<HttpRequestTimeoutFeature>(

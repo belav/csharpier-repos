@@ -52,8 +52,7 @@ namespace System.Activities.Expressions
             TItem[] items = this.Array.Get(context);
             if (items == null)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new InvalidOperationException(
                             SR.MemberCannotBeNull("Array", this.GetType().Name, this.DisplayName)

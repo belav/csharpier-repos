@@ -49,8 +49,7 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
             }.Select(path => new AnalyzerFileReference(path, analyzerAssemblyLoader));
 
             var analyzersByLanguage = new Dictionary<string, AnalyzersAndFixers>();
-            return solution
-                .Projects
+            return solution.Projects
                 .ToImmutableDictionary(
                     project => project.Id,
                     project =>

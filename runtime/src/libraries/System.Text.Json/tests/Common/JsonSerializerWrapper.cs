@@ -108,8 +108,7 @@ namespace System.Text.Json.Serialization.Tests
 
             if (modifier != null && options.TypeInfoResolver != null)
             {
-                options.TypeInfoResolver = DefaultOptions
-                    .TypeInfoResolver
+                options.TypeInfoResolver = DefaultOptions.TypeInfoResolver
                     .WithAddedModifier(modifier);
             }
 

@@ -19,13 +19,11 @@ public static class ParameterBinderExtensions
         ControllerContext context
     )
     {
-        var optionsAccessor = context
-            .HttpContext
+        var optionsAccessor = context.HttpContext
             .RequestServices
             .GetService<IOptions<MvcOptions>>();
         Assert.NotNull(optionsAccessor?.Value); // Guard
-        var modelMetadataProvider = context
-            .HttpContext
+        var modelMetadataProvider = context.HttpContext
             .RequestServices
             .GetService<IModelMetadataProvider>();
         Assert.NotNull(modelMetadataProvider); // Guard

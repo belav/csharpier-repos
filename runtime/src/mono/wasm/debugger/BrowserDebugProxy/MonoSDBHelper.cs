@@ -629,8 +629,7 @@ namespace Microsoft.WebAssembly.Diagnostics
                 case "valuetype":
                 {
                     if (
-                        !SdbHelper
-                            .ValueCreator
+                        !SdbHelper.ValueCreator
                             .TryGetValueTypeById(objectId.Value, out ValueTypeClass vt)
                     )
                         throw new ArgumentException(
@@ -990,8 +989,7 @@ namespace Microsoft.WebAssembly.Diagnostics
                 string displayVarName = varName;
                 if (int.TryParse(varName, out _))
                     displayVarName = $"[{varName}]";
-                _value = await sdbHelper
-                    .ValueCreator
+                _value = await sdbHelper.ValueCreator
                     .ReadAsVariableValue(retDebuggerCmdReader, "*" + displayVarName, token);
             }
 
@@ -2569,8 +2567,7 @@ namespace Microsoft.WebAssembly.Diagnostics
                     var typeInfo = await GetTypeInfo(typeId, token);
                     if (typeInfo == null || (typeInfo.Name == "object" && !invokeToStringInObject))
                         continue;
-                    Microsoft.WebAssembly.Diagnostics.MethodInfo methodInfo = typeInfo
-                        .Info
+                    Microsoft.WebAssembly.Diagnostics.MethodInfo methodInfo = typeInfo.Info
                         .Methods
                         .FirstOrDefault(m => m.Name == "ToString");
                     if (isEnum != true && methodInfo == null)
@@ -2751,8 +2748,7 @@ namespace Microsoft.WebAssembly.Diagnostics
                     if (match.Success)
                     {
                         if (
-                            !method
-                                .Info
+                            !method.Info
                                 .ContainsAsyncScope(
                                     Convert.ToInt32(match.Groups["scopeId"].Value),
                                     offset
@@ -2773,8 +2769,7 @@ namespace Microsoft.WebAssembly.Diagnostics
                     if (match.Success)
                     {
                         if (
-                            !method
-                                .Info
+                            !method.Info
                                 .ContainsAsyncScope(
                                     Convert.ToInt32(match.Groups["scopeId"].Value) + 1,
                                     offset
@@ -3489,9 +3484,13 @@ namespace Microsoft.WebAssembly.Diagnostics
             {
                 var algorithmName = retDebuggerCmdReader.ReadString();
                 var pdbChecksumSize = retDebuggerCmdReader.ReadInt32();
-                data.PdbChecksums.Add(
-                    new PdbChecksum(algorithmName, retDebuggerCmdReader.ReadBytes(pdbChecksumSize))
-                );
+                data.PdbChecksums
+                    .Add(
+                        new PdbChecksum(
+                            algorithmName,
+                            retDebuggerCmdReader.ReadBytes(pdbChecksumSize)
+                        )
+                    );
             }
             return data;
         }

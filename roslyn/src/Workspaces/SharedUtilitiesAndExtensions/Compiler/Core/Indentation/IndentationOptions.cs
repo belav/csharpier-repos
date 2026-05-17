@@ -22,9 +22,8 @@ namespace Microsoft.CodeAnalysis.Indentation
         [DataMember(Order = 2)]
         public FormattingOptions2.IndentStyle IndentStyle { get; init; } = DefaultIndentStyle;
 
-        public const FormattingOptions2.IndentStyle DefaultIndentStyle = FormattingOptions2
-            .IndentStyle
-            .Smart;
+        public const FormattingOptions2.IndentStyle DefaultIndentStyle =
+            FormattingOptions2.IndentStyle.Smart;
 
 #if !CODE_STYLE
         public static IndentationOptions GetDefault(LanguageServices languageServices) =>

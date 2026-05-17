@@ -17,8 +17,7 @@ namespace System
             uint length;
             while (
                 (
-                    length = Interop
-                        .Kernel32
+                    length = Interop.Kernel32
                         .GetEnvironmentVariable(
                             variable,
                             ref builder.GetPinnableReference(),
@@ -47,8 +46,7 @@ namespace System
         internal static string? GetEnvironmentVariableCore_NoArrayPool(string variable)
         {
             Span<char> span = stackalloc char[128];
-            uint length = Interop
-                .Kernel32
+            uint length = Interop.Kernel32
                 .GetEnvironmentVariable(
                     variable,
                     ref MemoryMarshal.GetReference(span),

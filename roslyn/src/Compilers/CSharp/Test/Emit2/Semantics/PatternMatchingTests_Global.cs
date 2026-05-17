@@ -1100,8 +1100,9 @@ class H
                 VerifyModelForDeclarationField(model, x1Decl, x1Ref);
                 Assert.Equal(
                     "System.Int32",
-                    ((IFieldSymbol)compilation.GetSemanticModel(tree).GetDeclaredSymbol(x1Decl))
-                        .Type
+                    (
+                        (IFieldSymbol)compilation.GetSemanticModel(tree).GetDeclaredSymbol(x1Decl)
+                    ).Type
                         .ToTestDisplayString()
                 );
 
@@ -1798,8 +1799,9 @@ class H
                 VerifyModelForDeclarationField(model, x1Decl, x1Ref);
                 Assert.Equal(
                     "System.Int32",
-                    ((IFieldSymbol)compilation.GetSemanticModel(tree).GetDeclaredSymbol(x1Decl))
-                        .Type
+                    (
+                        (IFieldSymbol)compilation.GetSemanticModel(tree).GetDeclaredSymbol(x1Decl)
+                    ).Type
                         .ToTestDisplayString()
                 );
 

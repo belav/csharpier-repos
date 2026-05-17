@@ -73,8 +73,7 @@ namespace System.ServiceModel.Channels
 
         protected override Task SerializeToStreamAsync(Stream stream, TransportContext context)
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(
                     new NotSupportedException(
                         SR.GetString(SR.WebSocketOpaqueStreamContentNotSupportError)

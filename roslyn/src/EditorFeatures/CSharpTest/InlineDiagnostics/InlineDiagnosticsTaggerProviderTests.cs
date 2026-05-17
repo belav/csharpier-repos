@@ -70,8 +70,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDiagnostics
             TestWorkspace workspace
         )
         {
-            workspace
-                .GlobalOptions
+            workspace.GlobalOptions
                 .SetGlobalOption(
                     InlineDiagnosticsOptionsStorage.EnableInlineDiagnostics,
                     LanguageNames.CSharp,

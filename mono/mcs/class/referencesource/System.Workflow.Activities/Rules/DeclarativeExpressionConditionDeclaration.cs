@@ -282,8 +282,7 @@ namespace System.Workflow.Activities.Rules
             RuleCondition conditionDefinitionToEvaluate = defs.Conditions[this._condition];
             if (conditionDefinitionToEvaluate != null)
             {
-                Activity contextActivity = System
-                    .Workflow
+                Activity contextActivity = System.Workflow
                     .Activities
                     .Common
                     .Helpers

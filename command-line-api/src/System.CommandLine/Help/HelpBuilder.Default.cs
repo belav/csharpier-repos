@@ -141,11 +141,12 @@ public partial class HelpBuilder
         public static Func<HelpContext, bool> SynopsisSection() =>
             ctx =>
             {
-                ctx.HelpBuilder.WriteHeading(
-                    LocalizationResources.HelpDescriptionTitle(),
-                    ctx.Command.Description,
-                    ctx.Output
-                );
+                ctx.HelpBuilder
+                    .WriteHeading(
+                        LocalizationResources.HelpDescriptionTitle(),
+                        ctx.Command.Description,
+                        ctx.Output
+                    );
                 return true;
             };
 
@@ -155,11 +156,12 @@ public partial class HelpBuilder
         public static Func<HelpContext, bool> CommandUsageSection() =>
             ctx =>
             {
-                ctx.HelpBuilder.WriteHeading(
-                    LocalizationResources.HelpUsageTitle(),
-                    ctx.HelpBuilder.GetUsage(ctx.Command),
-                    ctx.Output
-                );
+                ctx.HelpBuilder
+                    .WriteHeading(
+                        LocalizationResources.HelpUsageTitle(),
+                        ctx.HelpBuilder.GetUsage(ctx.Command),
+                        ctx.Output
+                    );
                 return true;
             };
 
@@ -175,11 +177,8 @@ public partial class HelpBuilder
 
                 if (commandArguments.Length > 0)
                 {
-                    ctx.HelpBuilder.WriteHeading(
-                        LocalizationResources.HelpArgumentsTitle(),
-                        null,
-                        ctx.Output
-                    );
+                    ctx.HelpBuilder
+                        .WriteHeading(LocalizationResources.HelpArgumentsTitle(), null, ctx.Output);
                     ctx.HelpBuilder.WriteColumns(commandArguments, ctx);
                     return true;
                 }
@@ -252,11 +251,8 @@ public partial class HelpBuilder
 
                 if (optionRows.Count > 0)
                 {
-                    ctx.HelpBuilder.WriteHeading(
-                        LocalizationResources.HelpOptionsTitle(),
-                        null,
-                        ctx.Output
-                    );
+                    ctx.HelpBuilder
+                        .WriteHeading(LocalizationResources.HelpOptionsTitle(), null, ctx.Output);
                     ctx.HelpBuilder.WriteColumns(optionRows, ctx);
                     return true;
                 }

@@ -132,8 +132,7 @@ namespace IdeBenchmarks.InheritanceMargin
                 .GenerateInheritanceMarginItemsAsync(workspace.CurrentSolution, cancellationToken)
                 .ConfigureAwait(false);
 
-            using var _ = Microsoft
-                .CodeAnalysis
+            using var _ = Microsoft.CodeAnalysis
                 .PooledObjects
                 .ArrayBuilder<InheritanceMarginTag>
                 .GetInstance(out var builder);
@@ -162,8 +161,7 @@ namespace IdeBenchmarks.InheritanceMargin
         private void RunOnUIThread(Action action)
         {
 #pragma warning disable VSTHRD001 // Only used for Benchmark purpose
-            _wpfApp
-                .Dispatcher
+            _wpfApp.Dispatcher
                 .Invoke(() =>
 #pragma warning restore VSTHRD001
                 {

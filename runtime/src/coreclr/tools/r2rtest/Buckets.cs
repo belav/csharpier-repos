@@ -62,8 +62,7 @@ namespace R2RTest
                 _bucketMap.OrderByDescending(bucket => bucket.Value.Count);
             foreach (KeyValuePair<string, List<ProcessInfo>> bucketKvp in orderedBuckets)
             {
-                bucketKvp
-                    .Value
+                bucketKvp.Value
                     .Sort(
                         (a, b) => a.Parameters.OutputFileName.CompareTo(b.Parameters.OutputFileName)
                     );

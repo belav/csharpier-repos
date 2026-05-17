@@ -54,8 +54,7 @@ namespace System.Net.WebSockets
 #endif
 
 #if FEATURE_WASM_THREADS
-                return FastState = _innerWebSocket!
-                    .SynchronizationContext
+                return FastState = _innerWebSocket!.SynchronizationContext
                     .Send(
                         static (BrowserWebSocket self) =>
                         {
@@ -116,8 +115,7 @@ namespace System.Net.WebSockets
 #endif
 
 #if FEATURE_WASM_THREADS
-                return _innerWebSocket
-                    .SynchronizationContext
+                return _innerWebSocket.SynchronizationContext
                     .Send(BrowserInterop.GetProtocol, _innerWebSocket);
 #else
                 return BrowserInterop.GetProtocol(_innerWebSocket);
@@ -139,8 +137,7 @@ namespace System.Net.WebSockets
                 throw new InvalidOperationException(SR.net_WebSockets_AlreadyStarted);
             }
 #if FEATURE_WASM_THREADS
-            JSHost
-                .CurrentOrMainJSSynchronizationContext!
+            JSHost.CurrentOrMainJSSynchronizationContext!
                 .Send(
                     _ =>
                     {
@@ -154,8 +151,7 @@ namespace System.Net.WebSockets
                     null
                 );
 
-            return JSHost
-                .CurrentOrMainJSSynchronizationContext
+            return JSHost.CurrentOrMainJSSynchronizationContext
                 .Send(() =>
                 {
                     return ConnectAsyncCore(cancellationToken);
@@ -205,8 +201,7 @@ namespace System.Net.WebSockets
             WebSocketValidate.ValidateArraySegment(buffer, nameof(buffer));
 
 #if FEATURE_WASM_THREADS
-            return _innerWebSocket!
-                .SynchronizationContext
+            return _innerWebSocket!.SynchronizationContext
                 .Send(() =>
                 {
                     Task promise;
@@ -253,8 +248,7 @@ namespace System.Net.WebSockets
             WebSocketValidate.ValidateArraySegment(buffer, nameof(buffer));
 
 #if FEATURE_WASM_THREADS
-            return _innerWebSocket!
-                .SynchronizationContext
+            return _innerWebSocket!.SynchronizationContext
                 .Send(() =>
                 {
                     Task<WebSocketReceiveResult> promise;
@@ -294,8 +288,7 @@ namespace System.Net.WebSockets
             }
 
 #if FEATURE_WASM_THREADS
-            return _innerWebSocket!
-                .SynchronizationContext
+            return _innerWebSocket!.SynchronizationContext
                 .Send(() =>
                 {
                     Task promise;
@@ -363,8 +356,7 @@ namespace System.Net.WebSockets
             }
 
 #if FEATURE_WASM_THREADS
-            return _innerWebSocket!
-                .SynchronizationContext
+            return _innerWebSocket!.SynchronizationContext
                 .Send(() =>
                 {
                     Task promise;
@@ -421,8 +413,7 @@ namespace System.Net.WebSockets
             {
                 return;
             }
-            _innerWebSocket
-                ?.SynchronizationContext
+            _innerWebSocket?.SynchronizationContext
                 .Send(
                     static (BrowserWebSocket self) =>
                     {
@@ -445,8 +436,7 @@ namespace System.Net.WebSockets
             {
                 return;
             }
-            _innerWebSocket
-                ?.SynchronizationContext
+            _innerWebSocket?.SynchronizationContext
                 .Send(
                     static (BrowserWebSocket self) =>
                     {

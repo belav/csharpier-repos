@@ -220,8 +220,7 @@ namespace System.Activities.Core.Presentation
                         Argument delegateArgument = null;
 
                         if (
-                            activity
-                                .DelegateArguments
+                            activity.DelegateArguments
                                 .TryGetValue(expectedArgument.Name, out delegateArgument)
                         )
                         {

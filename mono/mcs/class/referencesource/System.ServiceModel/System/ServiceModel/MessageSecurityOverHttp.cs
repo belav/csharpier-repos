@@ -35,8 +35,7 @@ namespace System.ServiceModel
             {
                 if (!MessageCredentialTypeHelper.IsDefined(value))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new ArgumentOutOfRangeException("value"));
                 }
                 this.clientCredentialType = value;
@@ -82,8 +81,7 @@ namespace System.ServiceModel
         {
             if (isReliableSession && !this.IsSecureConversationEnabled())
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(SR.SecureConversationRequiredByReliableSession)
@@ -101,8 +99,7 @@ namespace System.ServiceModel
                 switch (this.clientCredentialType)
                 {
                     case MessageCredentialType.None:
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(
                                     SR.GetString(SR.ClientCredentialTypeMustBeSpecifiedForMixedMode)
@@ -135,8 +132,7 @@ namespace System.ServiceModel
                         break;
                     default:
                         Fx.Assert("unknown ClientCredentialType");
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(new NotSupportedException());
                 }
                 if (this.IsSecureConversationEnabled())
@@ -193,8 +189,7 @@ namespace System.ServiceModel
                             break;
                         default:
                             Fx.Assert("unknown ClientCredentialType");
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(new NotSupportedException());
                     }
                 }
@@ -231,8 +226,7 @@ namespace System.ServiceModel
                             break;
                         default:
                             Fx.Assert("unknown ClientCredentialType");
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(new NotSupportedException());
                     }
                 }

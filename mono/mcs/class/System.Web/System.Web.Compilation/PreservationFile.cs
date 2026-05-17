@@ -249,8 +249,7 @@ namespace System.Web.Compilation
 
         string GetNonEmptyRequiredAttribute(XmlNode n, string name)
         {
-            return System
-                .Web
+            return System.Web
                 .Configuration
                 .HandlersUtil
                 .ExtractAttributeValue(name, n, false, false);

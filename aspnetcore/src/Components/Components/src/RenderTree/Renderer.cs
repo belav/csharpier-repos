@@ -558,8 +558,7 @@ public abstract partial class Renderer : IDisposable, IAsyncDisposable
             );
         }
 
-        var callerSpecifiedRenderMode = frame
-            .ComponentFrameFlags
+        var callerSpecifiedRenderMode = frame.ComponentFrameFlags
             .HasFlag(ComponentFrameFlags.HasCallerSpecifiedRenderMode)
             ? FindCallerSpecifiedRenderMode(frames, frameIndex)
             : null;
@@ -702,8 +701,7 @@ public abstract partial class Renderer : IDisposable, IAsyncDisposable
             return;
         }
 
-        _batchBuilder
-            .ComponentRenderQueue
+        _batchBuilder.ComponentRenderQueue
             .Enqueue(new RenderQueueEntry(componentState, renderFragment));
 
         if (!_isBatchInProgress)

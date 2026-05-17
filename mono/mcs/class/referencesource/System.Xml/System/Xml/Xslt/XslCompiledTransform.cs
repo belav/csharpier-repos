@@ -379,8 +379,7 @@ namespace System.Xml.Xsl
                 if (fldData != null && fldTypes != null)
                 {
                     if (
-                        System
-                            .Xml
+                        System.Xml
                             .XmlConfiguration
                             .XsltConfigSection
                             .EnableMemberAccessForXslCompiledTransform
@@ -435,8 +434,7 @@ namespace System.Xml.Xsl
             // earlyBoundTypes may be null
 
             if (
-                !System
-                    .Xml
+                !System.Xml
                     .XmlConfiguration
                     .XsltConfigSection
                     .EnableMemberAccessForXslCompiledTransform
@@ -667,12 +665,8 @@ namespace System.Xml.Xsl
         {
             CheckArguments(input, results);
             CheckCommand();
-            this.command.Execute(
-                (object)input.CreateNavigator(),
-                documentResolver,
-                arguments,
-                results
-            );
+            this.command
+                .Execute((object)input.CreateNavigator(), documentResolver, arguments, results);
         }
 
         //------------------------------------------------

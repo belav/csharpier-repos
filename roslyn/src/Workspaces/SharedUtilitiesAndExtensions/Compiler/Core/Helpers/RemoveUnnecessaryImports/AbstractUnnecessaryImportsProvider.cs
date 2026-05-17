@@ -45,8 +45,7 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessaryImports
             if (span.HasValue)
             {
                 // Bail out if there are no usings/imports in the filter span.
-                var node = model
-                    .SyntaxTree
+                var node = model.SyntaxTree
                     .FindNode(
                         span,
                         findInTrivia: false,

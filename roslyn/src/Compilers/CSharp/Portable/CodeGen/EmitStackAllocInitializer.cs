@@ -59,8 +59,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
                 else if (elementType.EnumUnderlyingTypeOrSelf().SpecialType.SizeInBytes() == 1)
                 {
                     // Initialize the stackalloc by copying the data from a metadata blob
-                    var field = _builder
-                        .module
+                    var field = _builder.module
                         .GetFieldForData(
                             data,
                             alignment: 1,

@@ -324,8 +324,7 @@ namespace Microsoft.CodeAnalysis
         public static ModuleMetadata CreateFromFile(string path)
         {
             return CreateFromStream(
-                StandardFileSystem
-                    .Instance
+                StandardFileSystem.Instance
                     .OpenFileWithNormalizedException(
                         path,
                         FileMode.Open,

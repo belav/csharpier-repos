@@ -270,10 +270,11 @@ namespace Mono.Tools.CertView
             //
             // subjectAltNameLinkLabel
             //
-            this.helpProvider.SetHelpString(
-                this.subjectAltNameLinkLabel,
-                "Subject Alternative Name (e.g. email)"
-            );
+            this.helpProvider
+                .SetHelpString(
+                    this.subjectAltNameLinkLabel,
+                    "Subject Alternative Name (e.g. email)"
+                );
             this.subjectAltNameLinkLabel.Location = new System.Drawing.Point(73, 208);
             this.subjectAltNameLinkLabel.Name = "subjectAltNameLinkLabel";
             this.helpProvider.SetShowHelp(this.subjectAltNameLinkLabel, true);
@@ -680,9 +681,8 @@ namespace Mono.Tools.CertView
             this.AutoScaleBaseSize = new System.Drawing.Size(5, 14);
             this.CancelButton = this.okButton;
             this.ClientSize = new System.Drawing.Size(400, 453);
-            this.Controls.AddRange(
-                new System.Windows.Forms.Control[] { this.okButton, this.tabControl1 }
-            );
+            this.Controls
+                .AddRange(new System.Windows.Forms.Control[] { this.okButton, this.tabControl1 });
             this.Font = new System.Drawing.Font(
                 "Tahoma",
                 8.25F,
@@ -885,8 +885,7 @@ namespace Mono.Tools.CertView
                 fieldListView.Items.Add(itemVersion);
 
             if (filter < 2)
-                fieldListView
-                    .Items
+                fieldListView.Items
                     .AddRange(
                         new ListViewItem[]
                         {

@@ -412,8 +412,7 @@ namespace MonoTests.SystemWeb.Framework
         {
             // It is assumed WebTest is included in the same assembly which contains the
             // tests themselves
-            object[] attributes = typeof(WebTest)
-                .Assembly
+            object[] attributes = typeof(WebTest).Assembly
                 .GetCustomAttributes(typeof(WebTestResourcesSetupAttribute), true);
             if (attributes == null || attributes.Length == 0)
                 return null;

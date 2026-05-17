@@ -46,8 +46,7 @@ namespace Mono.ILASM
                 write_name = name;
 
             owner.Resolve(code_gen);
-            peapi_method = code_gen
-                .PEFile
+            peapi_method = code_gen.PEFile
                 .AddMethodToTypeSpec(
                     owner.PeapiType,
                     write_name,

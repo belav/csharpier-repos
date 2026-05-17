@@ -70,8 +70,7 @@ internal static class SigningKeysHandler
     )
     {
         // Create signing material and save to user secrets
-        var newKeyMaterial = System
-            .Security
+        var newKeyMaterial = System.Security
             .Cryptography
             .RandomNumberGenerator
             .GetBytes(signingKeyLength);

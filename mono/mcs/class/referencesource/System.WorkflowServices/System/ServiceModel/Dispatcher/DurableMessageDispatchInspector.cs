@@ -20,8 +20,7 @@ namespace System.ServiceModel.Dispatcher
         {
             if (operationContext == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("operationContext");
             }
             operationContext.OutgoingMessageProperties[suppressContextOnReply] = true;
@@ -97,16 +96,14 @@ namespace System.ServiceModel.Dispatcher
             }
             finally
             {
-                DurableInstance durableInstance = OperationContext
-                    .Current
+                DurableInstance durableInstance = OperationContext.Current
                     .InstanceContext
                     .Extensions
                     .Find<DurableInstance>();
 
                 if (durableInstance == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR2.GetString(

@@ -58,8 +58,7 @@ public class RequestTests : LoggedTest
                         Assert.NotNull(connectionInfo.ConnectionId);
 
                         // Trace identifier
-                        var requestIdentifierFeature = httpContext
-                            .Features
+                        var requestIdentifierFeature = httpContext.Features
                             .Get<IHttpRequestIdentifierFeature>();
                         Assert.NotNull(requestIdentifierFeature);
                         Assert.NotNull(requestIdentifierFeature.TraceIdentifier);
@@ -130,8 +129,7 @@ public class RequestTests : LoggedTest
                         Assert.Equal("CustomId", connectionInfo.ConnectionId);
 
                         // Trace identifier
-                        var requestIdentifierFeature = httpContext
-                            .Features
+                        var requestIdentifierFeature = httpContext.Features
                             .Get<IHttpRequestIdentifierFeature>();
                         Assert.NotNull(requestIdentifierFeature);
                         requestIdentifierFeature.TraceIdentifier = "customTrace";
@@ -202,8 +200,7 @@ public class RequestTests : LoggedTest
                         Assert.Null(connectionInfo.ConnectionId);
 
                         // Trace identifier
-                        var requestIdentifierFeature = httpContext
-                            .Features
+                        var requestIdentifierFeature = httpContext.Features
                             .Get<IHttpRequestIdentifierFeature>();
                         Assert.NotNull(requestIdentifierFeature);
                         requestIdentifierFeature.TraceIdentifier = null;
@@ -254,8 +251,7 @@ public class RequestTests : LoggedTest
                     {
                         var requestInfo = httpContext.Features.Get<IHttpRequestFeature>();
                         var connectionInfo = httpContext.Features.Get<IHttpConnectionFeature>();
-                        var requestIdentifierFeature = httpContext
-                            .Features
+                        var requestIdentifierFeature = httpContext.Features
                             .Get<IHttpRequestIdentifierFeature>();
 
                         // Request Keys
@@ -392,8 +388,7 @@ public class RequestTests : LoggedTest
                 httpContext =>
                 {
                     var requestInfo = httpContext.Features.Get<IHttpRequestFeature>();
-                    var requestIdentifierFeature = httpContext
-                        .Features
+                    var requestIdentifierFeature = httpContext.Features
                         .Get<IHttpRequestIdentifierFeature>();
                     try
                     {
@@ -729,8 +724,7 @@ public class RequestTests : LoggedTest
 
         foreach (string path in new[] { "/", "/11", "/2/3", "/2", "/11/2" })
         {
-            server
-                .Listener
+            server.Listener
                 .Options
                 .UrlPrefixes
                 .Add(UrlPrefix.Create(rootUri.Scheme, rootUri.Host, rootUri.Port, path));

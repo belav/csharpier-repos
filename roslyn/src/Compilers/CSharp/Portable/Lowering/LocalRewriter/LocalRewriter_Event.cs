@@ -477,8 +477,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             var module = this.EmitModule;
             if (module != null)
             {
-                module
-                    .EmbeddedTypesManagerOpt
+                module.EmbeddedTypesManagerOpt
                     .EmbedEventIfNeedTo(
                         node.Event.GetCciAdapter(),
                         node.Syntax,

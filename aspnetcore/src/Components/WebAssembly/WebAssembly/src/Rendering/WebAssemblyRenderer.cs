@@ -81,8 +81,7 @@ internal sealed partial class WebAssemblyRenderer : WebRenderer
 
     public static void NotifyEndUpdateRootComponents(long batchId)
     {
-        DefaultWebAssemblyJSRuntime
-            .Instance
+        DefaultWebAssemblyJSRuntime.Instance
             .InvokeVoid("Blazor._internal.endUpdateRootComponents", batchId);
     }
 
@@ -102,8 +101,7 @@ internal sealed partial class WebAssemblyRenderer : WebRenderer
 
     protected override void AttachRootComponentToBrowser(int componentId, string domElementSelector)
     {
-        DefaultWebAssemblyJSRuntime
-            .Instance
+        DefaultWebAssemblyJSRuntime.Instance
             .InvokeVoid(
                 "Blazor._internal.attachRootComponentToElement",
                 domElementSelector,

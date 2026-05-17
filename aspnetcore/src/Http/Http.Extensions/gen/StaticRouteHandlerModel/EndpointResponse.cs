@@ -121,11 +121,9 @@ internal class EndpointResponse
     public override bool Equals(object obj)
     {
         return obj is EndpointResponse otherEndpointResponse
-            && SymbolEqualityComparer
-                .Default
+            && SymbolEqualityComparer.Default
                 .Equals(otherEndpointResponse.ResponseType, ResponseType)
-            && otherEndpointResponse
-                .WrappedResponseType
+            && otherEndpointResponse.WrappedResponseType
                 .Equals(WrappedResponseType, StringComparison.Ordinal)
             && otherEndpointResponse.IsAwaitable == IsAwaitable
             && otherEndpointResponse.HasNoResponse == HasNoResponse

@@ -140,8 +140,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
                     {
                         var declIdentifier = (
                             (UsingDirectiveSyntax)syntaxRef.GetSyntax(cancellationToken)
-                        )
-                            .Alias
+                        ).Alias
                             .Name
                             .Identifier;
                         text = declIdentifier.IsVerbatimIdentifier()
@@ -412,21 +411,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
             switch (name.Kind())
             {
                 case SyntaxKind.AliasQualifiedName:
-                    var simpleName = ((AliasQualifiedNameSyntax)name)
-                        .Name
+                    var simpleName = ((AliasQualifiedNameSyntax)name).Name
                         .WithLeadingTrivia(name.GetLeadingTrivia());
 
                     simpleName = simpleName.ReplaceToken(
                         simpleName.Identifier,
-                        ((AliasQualifiedNameSyntax)name)
-                            .Name
+                        ((AliasQualifiedNameSyntax)name).Name
                             .Identifier
                             .CopyAnnotationsTo(
-                                simpleName
-                                    .Identifier
+                                simpleName.Identifier
                                     .WithLeadingTrivia(
-                                        ((AliasQualifiedNameSyntax)name)
-                                            .Alias
+                                        ((AliasQualifiedNameSyntax)name).Alias
                                             .Identifier
                                             .LeadingTrivia
                                     )
@@ -440,8 +435,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
                     break;
 
                 case SyntaxKind.QualifiedName:
-                    replacementNode = ((QualifiedNameSyntax)name)
-                        .Right
+                    replacementNode = ((QualifiedNameSyntax)name).Right
                         .WithLeadingTrivia(name.GetLeadingTrivia());
                     issueSpan = ((QualifiedNameSyntax)name).Left.Span;
 
@@ -653,8 +647,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
                     // an attribute that should keep it (unnecessary "Attribute" suffix should be annotated with a DoNotSimplifyAnnotation
                     if (
                         identifierToken.ValueText != AttributeName
-                        && identifierToken
-                            .ValueText
+                        && identifierToken.ValueText
                             .EndsWith(AttributeName, StringComparison.Ordinal)
                         && !identifierToken.HasAnnotation(
                             SimplificationHelpers.DoNotSimplifyAnnotation

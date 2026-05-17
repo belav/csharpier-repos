@@ -227,8 +227,7 @@ namespace System.ServiceModel.Dispatcher
                     throw Fx.AssertAndThrow("Unexpected result type.");
             }
 
-            context
-                .Processor
+            context.Processor
                 .ResultSet
                 .Add(
                     new KeyValuePair<MessageQuery, XPathResult>(
@@ -239,8 +238,7 @@ namespace System.ServiceModel.Dispatcher
 
             for (int i = 1; i < this.results.Count; i++)
             {
-                context
-                    .Processor
+                context.Processor
                     .ResultSet
                     .Add(
                         new KeyValuePair<MessageQuery, XPathResult>(

@@ -44,8 +44,7 @@ namespace System.ServiceModel.Dispatcher
 #pragma warning disable 56506 // Microsoft, message.Properties is never null
             if (message == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR2.GetString(SR2.HttpUnhandledOperationInvokerCalledWithoutMessage)
@@ -56,8 +55,7 @@ namespace System.ServiceModel.Dispatcher
             Uri newLocation = null;
             Uri to = message.Headers.To;
             if (
-                message
-                    .Properties
+                message.Properties
                     .ContainsKey(WebHttpDispatchOperationSelector.RedirectPropertyName)
             )
             {
@@ -68,8 +66,7 @@ namespace System.ServiceModel.Dispatcher
             if (newLocation != null && to != null)
             {
                 // ...redirect
-                Message redirectResult = WebOperationContext
-                    .Current
+                Message redirectResult = WebOperationContext.Current
                     .CreateStreamResponse(
                         s =>
                             HelpHtmlBuilder
@@ -96,8 +93,7 @@ namespace System.ServiceModel.Dispatcher
             // otherwise we are here to issue either a 404 or a 405
             bool uriMatched = false;
             if (
-                message
-                    .Properties
+                message.Properties
                     .ContainsKey(
                         WebHttpDispatchOperationSelector.HttpOperationSelectorUriMatchedPropertyName
                     )
@@ -121,8 +117,7 @@ namespace System.ServiceModel.Dispatcher
             {
                 WebHttpDispatchOperationSelectorData allowedMethodsData = null;
                 if (
-                    message
-                        .Properties
+                    message.Properties
                         .TryGetValue(
                             WebHttpDispatchOperationSelector.HttpOperationSelectorDataPropertyName,
                             out allowedMethodsData
@@ -132,8 +127,7 @@ namespace System.ServiceModel.Dispatcher
                     WebOperationContext.Current.OutgoingResponse.Headers[HttpResponseHeader.Allow] =
                         allowedMethodsData.AllowHeader;
                 }
-                result = WebOperationContext
-                    .Current
+                result = WebOperationContext.Current
                     .CreateStreamResponse(
                         s =>
                             HelpHtmlBuilder
@@ -144,8 +138,7 @@ namespace System.ServiceModel.Dispatcher
             }
             else
             {
-                result = WebOperationContext
-                    .Current
+                result = WebOperationContext.Current
                     .CreateStreamResponse(
                         s =>
                             HelpHtmlBuilder
@@ -165,8 +158,7 @@ namespace System.ServiceModel.Dispatcher
                 {
                     if (Debugger.IsAttached)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperWarning(
                                 new InvalidOperationException(
                                     SR2.GetString(
@@ -193,8 +185,7 @@ namespace System.ServiceModel.Dispatcher
                 {
                     if (Debugger.IsAttached)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperWarning(
                                 new InvalidOperationException(
                                     SR2.GetString(

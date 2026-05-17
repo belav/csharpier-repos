@@ -195,8 +195,7 @@ namespace System.Net
             addr.TryWriteBytes(new Span<byte>(rawAddress, rawAddressLength), out int bytesWritten);
             Debug.Assert(bytesWritten == rawAddressLength);
 
-            int error = Interop
-                .Sys
+            int error = Interop.Sys
                 .GetNameInfo(
                     rawAddress,
                     (uint)rawAddressLength,

@@ -26,8 +26,7 @@ public class QueryableInterfaceInheritanceIssue
     {
         protected override void Seed(ClientContext context)
         {
-            context
-                .Entities
+            context.Entities
                 .AddRange(
                     new[]
                     {

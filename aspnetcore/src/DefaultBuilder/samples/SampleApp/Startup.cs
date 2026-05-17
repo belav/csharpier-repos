@@ -14,8 +14,7 @@ public class Startup
         app.Run(
             async (context) =>
             {
-                await context
-                    .Response
+                await context.Response
                     .WriteAsync($"Hello from {context.Request.GetDisplayUrl()}\r\n");
                 await context.Response.WriteAsync("\r\n");
 
@@ -27,20 +26,15 @@ public class Startup
                 await context.Response.WriteAsync("\r\n");
 
                 await context.Response.WriteAsync("Connection:\r\n");
-                await context
-                    .Response
+                await context.Response
                     .WriteAsync("RemoteIp: " + context.Connection.RemoteIpAddress + "\r\n");
-                await context
-                    .Response
+                await context.Response
                     .WriteAsync("RemotePort: " + context.Connection.RemotePort + "\r\n");
-                await context
-                    .Response
+                await context.Response
                     .WriteAsync("LocalIp: " + context.Connection.LocalIpAddress + "\r\n");
-                await context
-                    .Response
+                await context.Response
                     .WriteAsync("LocalPort: " + context.Connection.LocalPort + "\r\n");
-                await context
-                    .Response
+                await context.Response
                     .WriteAsync("ClientCert: " + context.Connection.ClientCertificate + "\r\n");
                 await context.Response.WriteAsync("\r\n");
 

@@ -231,8 +231,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
                             AddErrorBadParameterDirection(
                                 value,
                                 reader,
-                                System
-                                    .Data
+                                System.Data
                                     .Entity
                                     .Strings
                                     .BadParameterDirectionForComposableFunctions
@@ -246,8 +245,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
                             AddErrorBadParameterDirection(
                                 value,
                                 reader,
-                                System
-                                    .Data
+                                System.Data
                                     .Entity
                                     .Strings
                                     .BadParameterDirectionForComposableFunctions
@@ -435,8 +433,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
                             ErrorCode.FunctionWithNonEdmTypeNotSupported,
                             EdmSchemaErrorSeverity.Error,
                             this,
-                            System
-                                .Data
+                            System.Data
                                 .Entity
                                 .Strings
                                 .FunctionWithNonEdmPrimitiveTypeNotSupported(
@@ -451,8 +448,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
                             ErrorCode.FunctionWithNonPrimitiveTypeNotSupported,
                             EdmSchemaErrorSeverity.Error,
                             this,
-                            System
-                                .Data
+                            System.Data
                                 .Entity
                                 .Strings
                                 .FunctionWithNonPrimitiveTypeNotSupported(

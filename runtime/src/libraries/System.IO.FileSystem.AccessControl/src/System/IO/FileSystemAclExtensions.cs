@@ -409,8 +409,7 @@ namespace System.IO
                 {
                     // The Inheritable bit is only set in the SECURITY_ATTRIBUTES struct,
                     // and should not be passed to the CreateFile P/Invoke.
-                    handle = Interop
-                        .Kernel32
+                    handle = Interop.Kernel32
                         .CreateFile(
                             fullPath,
                             (int)rights,

@@ -96,8 +96,7 @@ namespace System.CommandLine.Tests
             };
 
             var midCommand1 = new CliCommand("midCommand1") { leafCommand };
-            midCommand1
-                .Options
+            midCommand1.Options
                 .Add(
                     new CliOption<string>("--three1")
                     {
@@ -107,8 +106,7 @@ namespace System.CommandLine.Tests
                 );
 
             var midCommand2 = new CliCommand("midCommand2") { leafCommand };
-            midCommand2
-                .Options
+            midCommand2.Options
                 .Add(
                     new CliOption<string>("--three2")
                     {

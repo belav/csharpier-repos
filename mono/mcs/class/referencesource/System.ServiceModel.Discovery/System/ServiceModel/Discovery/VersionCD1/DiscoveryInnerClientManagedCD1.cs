@@ -85,12 +85,15 @@ namespace System.ServiceModel.Discovery.VersionCD1
             AsyncOperationContext context = (AsyncOperationContext)result.AsyncState;
             if ((response != null) && (response.ProbeMatches != null))
             {
-                this.responseReceiver.ProbeMatchOperation(
-                    context.OperationId,
-                    DiscoveryUtility.ToDiscoveryMessageSequenceOrNull(response.MessageSequence),
-                    DiscoveryUtility.ToEndpointDiscoveryMetadataCollection(response.ProbeMatches),
-                    true
-                );
+                this.responseReceiver
+                    .ProbeMatchOperation(
+                        context.OperationId,
+                        DiscoveryUtility.ToDiscoveryMessageSequenceOrNull(response.MessageSequence),
+                        DiscoveryUtility.ToEndpointDiscoveryMetadataCollection(
+                            response.ProbeMatches
+                        ),
+                        true
+                    );
             }
             else
             {
@@ -108,19 +111,17 @@ namespace System.ServiceModel.Discovery.VersionCD1
                 && (response.ResolveMatches.ResolveMatch != null)
             )
             {
-                this.responseReceiver.ResolveMatchOperation(
-                    context.OperationId,
-                    DiscoveryUtility.ToDiscoveryMessageSequenceOrNull(response.MessageSequence),
-                    response.ResolveMatches.ResolveMatch.ToEndpointDiscoveryMetadata()
-                );
+                this.responseReceiver
+                    .ResolveMatchOperation(
+                        context.OperationId,
+                        DiscoveryUtility.ToDiscoveryMessageSequenceOrNull(response.MessageSequence),
+                        response.ResolveMatches.ResolveMatch.ToEndpointDiscoveryMetadata()
+                    );
             }
             else
             {
-                this.responseReceiver.PostResolveCompletedAndRemove(
-                    context.OperationId,
-                    false,
-                    null
-                );
+                this.responseReceiver
+                    .PostResolveCompletedAndRemove(context.OperationId, false, null);
             }
         }
 
@@ -132,20 +133,24 @@ namespace System.ServiceModel.Discovery.VersionCD1
             ProbeMatchesMessageCD1 response = base.Channel.ProbeOperation(request);
             if ((response != null) && (response.ProbeMatches != null))
             {
-                this.responseReceiver.ProbeMatchOperation(
-                    OperationContext.Current.IncomingMessageHeaders.RelatesTo,
-                    DiscoveryUtility.ToDiscoveryMessageSequenceOrNull(response.MessageSequence),
-                    DiscoveryUtility.ToEndpointDiscoveryMetadataCollection(response.ProbeMatches),
-                    true
-                );
+                this.responseReceiver
+                    .ProbeMatchOperation(
+                        OperationContext.Current.IncomingMessageHeaders.RelatesTo,
+                        DiscoveryUtility.ToDiscoveryMessageSequenceOrNull(response.MessageSequence),
+                        DiscoveryUtility.ToEndpointDiscoveryMetadataCollection(
+                            response.ProbeMatches
+                        ),
+                        true
+                    );
             }
             else
             {
-                this.responseReceiver.PostFindCompletedAndRemove(
-                    OperationContext.Current.IncomingMessageHeaders.RelatesTo,
-                    false,
-                    null
-                );
+                this.responseReceiver
+                    .PostFindCompletedAndRemove(
+                        OperationContext.Current.IncomingMessageHeaders.RelatesTo,
+                        false,
+                        null
+                    );
             }
         }
 
@@ -161,19 +166,21 @@ namespace System.ServiceModel.Discovery.VersionCD1
                 && (response.ResolveMatches.ResolveMatch != null)
             )
             {
-                this.responseReceiver.ResolveMatchOperation(
-                    OperationContext.Current.IncomingMessageHeaders.RelatesTo,
-                    DiscoveryUtility.ToDiscoveryMessageSequenceOrNull(response.MessageSequence),
-                    response.ResolveMatches.ResolveMatch.ToEndpointDiscoveryMetadata()
-                );
+                this.responseReceiver
+                    .ResolveMatchOperation(
+                        OperationContext.Current.IncomingMessageHeaders.RelatesTo,
+                        DiscoveryUtility.ToDiscoveryMessageSequenceOrNull(response.MessageSequence),
+                        response.ResolveMatches.ResolveMatch.ToEndpointDiscoveryMetadata()
+                    );
             }
             else
             {
-                this.responseReceiver.PostResolveCompletedAndRemove(
-                    OperationContext.Current.IncomingMessageHeaders.RelatesTo,
-                    false,
-                    null
-                );
+                this.responseReceiver
+                    .PostResolveCompletedAndRemove(
+                        OperationContext.Current.IncomingMessageHeaders.RelatesTo,
+                        false,
+                        null
+                    );
             }
         }
     }

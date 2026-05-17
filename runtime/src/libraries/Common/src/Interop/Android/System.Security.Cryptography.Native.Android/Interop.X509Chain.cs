@@ -59,8 +59,7 @@ internal static partial class Interop
             int count = Interop.AndroidCrypto.X509ChainGetCertificateCount(ctx);
             var certPtrs = new IntPtr[count];
 
-            int res = Interop
-                .AndroidCrypto
+            int res = Interop.AndroidCrypto
                 .X509ChainGetCertificates(ctx, certPtrs, certPtrs.Length);
             if (res == 0)
                 throw new CryptographicException();

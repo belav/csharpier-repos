@@ -158,8 +158,7 @@ namespace System.Data.Mapping.ViewGeneration.Validation
 
                     //Not Null may have been optimized into NOT(1, 2, NULL). SO look into negated cell constants
                     foreach (
-                        NegatedConstant negatedConst in condition
-                            .Domain
+                        NegatedConstant negatedConst in condition.Domain
                             .Values
                             .Select(cellConstant => cellConstant as NegatedConstant)
                             .Where(negated => negated != null)
@@ -239,8 +238,7 @@ namespace System.Data.Mapping.ViewGeneration.Validation
             {
                 CompositeCondition condMembersValues = new CompositeCondition();
 
-                CellQuery cellQuery = leftCellWrapper
-                    .OnlyInputCell
+                CellQuery cellQuery = leftCellWrapper.OnlyInputCell
                     .GetLeftQuery(m_viewgenContext.ViewTarget);
 
                 foreach (MemberRestriction condition in cellQuery.GetConjunctsFromWhereClause())
@@ -258,8 +256,7 @@ namespace System.Data.Mapping.ViewGeneration.Validation
                         scalarCond != null
                         && !mappedConditionMembers.Contains(memberPath)
                         && /* prevents duplicate errors */
-                        !leftCellWrapper
-                            .OnlyInputCell
+                        !leftCellWrapper.OnlyInputCell
                             .CQuery
                             .WhereClause
                             .Equals(leftCellWrapper.OnlyInputCell.SQuery.WhereClause)
@@ -388,8 +385,7 @@ namespace System.Data.Mapping.ViewGeneration.Validation
             LeftCellWrapper leftCellWrapper
         )
         {
-            CellQuery rightCellQuery = leftCellWrapper
-                .OnlyInputCell
+            CellQuery rightCellQuery = leftCellWrapper.OnlyInputCell
                 .GetRightQuery(ViewTarget.QueryView);
             var projectPositions = rightCellQuery.GetProjectedPositions(conditionMember);
             //Make the case simple. If the member is mapped more than once in the same cell wrapper
@@ -399,8 +395,7 @@ namespace System.Data.Mapping.ViewGeneration.Validation
                 return null;
             }
             int firstProjectedPosition = projectPositions.First();
-            CellQuery leftCellQuery = leftCellWrapper
-                .OnlyInputCell
+            CellQuery leftCellQuery = leftCellWrapper.OnlyInputCell
                 .GetLeftQuery(ViewTarget.QueryView);
             return (
                 (MemberProjectedSlot)leftCellQuery.ProjectedSlotAt(firstProjectedPosition)
@@ -1087,8 +1082,7 @@ namespace System.Data.Mapping.ViewGeneration.Validation
             FragmentQuery rightFragmentQuery1 = CreateRightFragmentQuery(wrapper1);
             FragmentQuery rightFragmentQuery2 = CreateRightFragmentQuery(wrapper2);
 
-            return m_viewgenContext
-                .RightFragmentQP
+            return m_viewgenContext.RightFragmentQP
                 .IsEquivalentTo(rightFragmentQuery1, rightFragmentQuery2);
         }
 

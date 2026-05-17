@@ -40,13 +40,11 @@ internal static class AngularCliMiddleware
 
         // Start Angular CLI and attach to middleware pipeline
         var appBuilder = spaBuilder.ApplicationBuilder;
-        var applicationStoppingToken = appBuilder
-            .ApplicationServices
+        var applicationStoppingToken = appBuilder.ApplicationServices
             .GetRequiredService<IHostApplicationLifetime>()
             .ApplicationStopping;
         var logger = LoggerFinder.GetOrCreateLogger(appBuilder, LogCategoryName);
-        var diagnosticSource = appBuilder
-            .ApplicationServices
+        var diagnosticSource = appBuilder.ApplicationServices
             .GetRequiredService<DiagnosticSource>();
         var angularCliServerInfoTask = StartAngularCliServerAsync(
             sourcePath,
@@ -110,8 +108,7 @@ internal static class AngularCliMiddleware
         {
             try
             {
-                openBrowserLine = await scriptRunner
-                    .StdOut
+                openBrowserLine = await scriptRunner.StdOut
                     .WaitForMatch(
                         new Regex(
                             "open your browser on (http\\S+)",

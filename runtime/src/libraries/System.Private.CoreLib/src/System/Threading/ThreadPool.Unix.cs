@@ -33,33 +33,28 @@ namespace System.Threading
             PortableThreadPool.ThreadPoolInstance.GetOrCreateThreadLocalCompletionCountObject();
 
         public static bool SetMaxThreads(int workerThreads, int completionPortThreads) =>
-            PortableThreadPool
-                .ThreadPoolInstance
+            PortableThreadPool.ThreadPoolInstance
                 .SetMaxThreads(workerThreads, completionPortThreads);
 
         public static void GetMaxThreads(out int workerThreads, out int completionPortThreads)
         {
-            PortableThreadPool
-                .ThreadPoolInstance
+            PortableThreadPool.ThreadPoolInstance
                 .GetMaxThreads(out workerThreads, out completionPortThreads);
         }
 
         public static bool SetMinThreads(int workerThreads, int completionPortThreads) =>
-            PortableThreadPool
-                .ThreadPoolInstance
+            PortableThreadPool.ThreadPoolInstance
                 .SetMinThreads(workerThreads, completionPortThreads);
 
         public static void GetMinThreads(out int workerThreads, out int completionPortThreads)
         {
-            PortableThreadPool
-                .ThreadPoolInstance
+            PortableThreadPool.ThreadPoolInstance
                 .GetMinThreads(out workerThreads, out completionPortThreads);
         }
 
         public static void GetAvailableThreads(out int workerThreads, out int completionPortThreads)
         {
-            PortableThreadPool
-                .ThreadPoolInstance
+            PortableThreadPool.ThreadPoolInstance
                 .GetAvailableThreads(out workerThreads, out completionPortThreads);
         }
 
@@ -82,8 +77,7 @@ namespace System.Threading
             object threadLocalCompletionCountObject,
             int currentTimeMs
         ) =>
-            PortableThreadPool
-                .ThreadPoolInstance
+            PortableThreadPool.ThreadPoolInstance
                 .NotifyWorkItemComplete(threadLocalCompletionCountObject, currentTimeMs);
 
         /// <summary>

@@ -58,23 +58,20 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
                 || IsUnsafeDefaultExpressionContext(context)
                 || IsUnsafeUsingDirectiveContext(context)
                 || context.IsFixedVariableDeclarationContext
-                || context
-                    .SyntaxTree
+                || context.SyntaxTree
                     .IsGlobalMemberDeclarationContext(
                         position,
                         SyntaxKindSet.AllGlobalMemberModifiers,
                         cancellationToken
                     )
-                || context
-                    .SyntaxTree
+                || context.SyntaxTree
                     .IsLocalFunctionDeclarationContext(position, cancellationToken);
         }
 
         private static bool IsUnsafeDefaultExpressionContext(CSharpSyntaxContext context)
         {
             return context.TargetToken.IsUnsafeContext()
-                && context
-                    .SyntaxTree
+                && context.SyntaxTree
                     .IsDefaultExpressionContext(context.Position, context.LeftToken);
         }
 
@@ -126,8 +123,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             CSharpSyntaxContext context,
             CancellationToken cancellationToken
         ) =>
-            context
-                .SyntaxTree
+            context.SyntaxTree
                 .IsGlobalMemberDeclarationContext(
                     position,
                     SyntaxKindSet.AllGlobalMemberModifiers,

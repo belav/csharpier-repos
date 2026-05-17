@@ -257,8 +257,7 @@ namespace System.Activities.Core.Presentation
                 if (connPoint != null)
                 {
                     outgoingConnectors.AddRange(
-                        connPoint
-                            .AttachedConnectors
+                        connPoint.AttachedConnectors
                             .Where(p => FreeFormPanel.GetSourceConnectionPoint(p).Equals(connPoint))
                     );
                 }
@@ -275,8 +274,7 @@ namespace System.Activities.Core.Presentation
                 if (connPoint != null)
                 {
                     incomingConnectors.AddRange(
-                        connPoint
-                            .AttachedConnectors
+                        connPoint.AttachedConnectors
                             .Where(p =>
                                 FreeFormPanel.GetDestinationConnectionPoint(p).Equals(connPoint)
                             )
@@ -347,8 +345,7 @@ namespace System.Activities.Core.Presentation
             ModelItem parent = GetStateMachineModelItem(stateModelItem);
             if (parent.View is StateMachineDesigner)
             {
-                return ((StateMachineDesigner)parent.View)
-                    .StateContainerEditor
+                return ((StateMachineDesigner)parent.View).StateContainerEditor
                     .modelItemToUIElement[stateModelItem];
             }
             return null;
@@ -596,8 +593,7 @@ namespace System.Activities.Core.Presentation
             {
                 State state = statesToProcess.Dequeue();
 
-                IEnumerable<Transition> toRemove = state
-                    .Transitions
+                IEnumerable<Transition> toRemove = state.Transitions
                     .Where<Transition>(
                         (p) =>
                         {

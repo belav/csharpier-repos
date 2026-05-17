@@ -127,12 +127,13 @@ namespace System.Threading.Tasks.Tests.Status
                             scheduler.Cancellation = cts;
 
                             // Replace _task with a task that has a custom scheduler
-                            _task = Task.Factory.StartNew(
-                                () => { },
-                                cts.Token,
-                                TaskCreationOptions.None,
-                                scheduler
-                            );
+                            _task = Task.Factory
+                                .StartNew(
+                                    () => { },
+                                    cts.Token,
+                                    TaskCreationOptions.None,
+                                    scheduler
+                                );
 
                             try
                             {

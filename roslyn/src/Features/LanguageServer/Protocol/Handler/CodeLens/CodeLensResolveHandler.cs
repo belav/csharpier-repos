@@ -66,8 +66,7 @@ internal sealed class CodeLensResolveHandler
             .ConfigureAwait(false);
 
         var memberToResolve = members[resolveData.ListIndex];
-        var codeLensReferencesService = document
-            .Project
+        var codeLensReferencesService = document.Project
             .Solution
             .Services
             .GetRequiredService<ICodeLensReferencesService>();

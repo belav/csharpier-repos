@@ -424,10 +424,8 @@ namespace MonoTests.System.ServiceModel
                 ChannelDispatcher cd = (ChannelDispatcher)host.ChannelDispatchers[0];
                 DispatchRuntime dr = cd.Endpoints[0].DispatchRuntime;
                 Assert.IsNotNull(dr.InstanceContextProvider, "#2");
-                InstanceContext ctx = dr.InstanceContextProvider.GetExistingInstanceContext(
-                    null,
-                    null
-                );
+                InstanceContext ctx = dr.InstanceContextProvider
+                    .GetExistingInstanceContext(null, null);
                 Assert.IsNotNull(ctx, "#3");
                 Assert.AreEqual(instance, ctx.GetServiceInstance(), "#4");
             }

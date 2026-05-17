@@ -262,9 +262,8 @@ namespace System.Activities.Core.Presentation
                     {
                         // the purpose of re-setting the link value during Undo/Redo is to update the FlowSwitch label
                         using (
-                            ModelEditingScope scope = this.ModelItem.BeginEdit(
-                                SR.FlowSwitchDefaultCaseDisplayNameEditingScopeDesc
-                            )
+                            ModelEditingScope scope = this.ModelItem
+                                .BeginEdit(SR.FlowSwitchDefaultCaseDisplayNameEditingScopeDesc)
                         )
                         {
                             linkModelItem

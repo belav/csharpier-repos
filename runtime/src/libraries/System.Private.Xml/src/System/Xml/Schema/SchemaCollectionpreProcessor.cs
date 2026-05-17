@@ -607,8 +607,7 @@ namespace System.Xml.Schema
                     }
 
                     foreach (
-                        XmlSchemaAttributeGroup? attributeGroup in includedSchema
-                            .AttributeGroups
+                        XmlSchemaAttributeGroup? attributeGroup in includedSchema.AttributeGroups
                             .Values
                     )
                     {
@@ -811,24 +810,21 @@ namespace System.Xml.Schema
 
             foreach (DictionaryEntry entry in redefine.Groups)
             {
-                redefine
-                    .Schema!
+                redefine.Schema!
                     .Groups
                     .Insert((XmlQualifiedName)entry.Key!, (XmlSchemaObject)entry.Value!);
             }
 
             foreach (DictionaryEntry entry in redefine.AttributeGroups)
             {
-                redefine
-                    .Schema!
+                redefine.Schema!
                     .AttributeGroups
                     .Insert((XmlQualifiedName)entry.Key!, (XmlSchemaObject)entry.Value!);
             }
 
             foreach (DictionaryEntry entry in redefine.SchemaTypes)
             {
-                redefine
-                    .Schema!
+                redefine.Schema!
                     .SchemaTypes
                     .Insert((XmlQualifiedName)entry.Key!, (XmlSchemaObject)entry.Value!);
             }

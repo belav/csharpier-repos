@@ -292,8 +292,9 @@ namespace R2RDump
 
                 if (
                     _r2r.Machine == Machine.Amd64
-                    && ((ILCompiler.Reflection.ReadyToRun.Amd64.UnwindInfo)rtf.UnwindInfo)
-                        .CodeOffsetToUnwindCodeIndex
+                    && (
+                        (ILCompiler.Reflection.ReadyToRun.Amd64.UnwindInfo)rtf.UnwindInfo
+                    ).CodeOffsetToUnwindCodeIndex
                         .TryGetValue(codeOffset, out int unwindCodeIndex)
                 )
                 {
@@ -311,8 +312,7 @@ namespace R2RDump
                 if (
                     gcInfo != null
                     && gcInfo.Transitions != null
-                    && gcInfo
-                        .Transitions
+                    && gcInfo.Transitions
                         .TryGetValue(codeOffset, out List<BaseGcTransition> transitionsForOffset)
                 )
                 {
@@ -437,9 +437,8 @@ namespace R2RDump
                     {
                         _writer.WriteLine();
                         foreach (
-                            ReadyToRunMethod method in _r2r.ReadyToRunAssemblies[
-                                assemblyIndex2
-                            ].Methods
+                            ReadyToRunMethod method in _r2r.ReadyToRunAssemblies[assemblyIndex2]
+                                .Methods
                         )
                         {
                             _writer.WriteLine(

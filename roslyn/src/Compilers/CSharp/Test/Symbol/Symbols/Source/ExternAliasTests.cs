@@ -434,8 +434,7 @@ class A : Bar::NS.Goo {}
                 assemblyName: "A3.dll"
             );
 
-            var targets = comp3
-                .SyntaxTrees
+            var targets = comp3.SyntaxTrees
                 .AsParallel()
                 .Select(tree =>
                 {
@@ -470,8 +469,7 @@ class A : Bar::NS.Goo {}
                 assemblyName: "A3.dll"
             );
 
-            var targets = comp3
-                .SyntaxTrees
+            var targets = comp3.SyntaxTrees
                 .AsParallel()
                 .Select(tree =>
                 {

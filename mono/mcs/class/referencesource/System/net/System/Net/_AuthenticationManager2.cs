@@ -68,8 +68,7 @@ namespace System.Net
             HttpWebRequest httpWebRequest = request as HttpWebRequest;
             if (httpWebRequest != null && httpWebRequest.CurrentAuthenticationState.Module != null)
             {
-                response = httpWebRequest
-                    .CurrentAuthenticationState
+                response = httpWebRequest.CurrentAuthenticationState
                     .Module
                     .Authenticate(challenge, request, credentials);
             }
@@ -154,10 +153,8 @@ namespace System.Net
             }
 
             if (
-                !this.moduleList.TryGetValue(
-                    moduleName.ToUpperInvariant(),
-                    out authenticationModule
-                )
+                !this.moduleList
+                    .TryGetValue(moduleName.ToUpperInvariant(), out authenticationModule)
             )
             {
                 // The module could have been unregistered
@@ -175,8 +172,7 @@ namespace System.Net
                 // as well
 
                 // If the authentication module does CBT, we require that it also caches channel bindings.
-                System
-                    .Diagnostics
+                System.Diagnostics
                     .Debug
                     .Assert(
                         !(binding == null && ModuleRequiresChannelBinding(authenticationModule))
@@ -230,15 +226,15 @@ namespace System.Net
                     + "]"
             );
 
-            string normalizedAuthenticationType = authenticationModule
-                .AuthenticationType
+            string normalizedAuthenticationType = authenticationModule.AuthenticationType
                 .ToUpperInvariant();
 
-            this.moduleList.AddOrUpdate(
-                normalizedAuthenticationType,
-                authenticationModule,
-                (key, value) => authenticationModule
-            );
+            this.moduleList
+                .AddOrUpdate(
+                    normalizedAuthenticationType,
+                    authenticationModule,
+                    (key, value) => authenticationModule
+                );
         }
 
         /// <devdoc>
@@ -257,8 +253,7 @@ namespace System.Net
                     + "]"
             );
 
-            string normalizedAuthenticationType = authenticationModule
-                .AuthenticationType
+            string normalizedAuthenticationType = authenticationModule.AuthenticationType
                 .ToUpperInvariant();
             UnregisterInternal(normalizedAuthenticationType);
         }
@@ -396,15 +391,15 @@ namespace System.Net
                                 + moduleToRegister.AuthenticationType
                         );
 
-                        string normalizedAuthenticationType = moduleToRegister
-                            .AuthenticationType
+                        string normalizedAuthenticationType = moduleToRegister.AuthenticationType
                             .ToUpperInvariant();
 
-                        this.moduleList.AddOrUpdate(
-                            normalizedAuthenticationType,
-                            moduleToRegister,
-                            (key, value) => moduleToRegister
-                        );
+                        this.moduleList
+                            .AddOrUpdate(
+                                normalizedAuthenticationType,
+                                moduleToRegister,
+                                (key, value) => moduleToRegister
+                            );
                     }
                 }
                 catch (Exception exception)

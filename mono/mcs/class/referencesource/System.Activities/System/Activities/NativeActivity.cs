@@ -61,8 +61,7 @@ namespace System.Activities
         {
             if (!context.IsCancellationRequested)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new InvalidOperationException(
                             SR.DefaultCancelationRequiresCancelHasBeenRequested
@@ -85,8 +84,7 @@ namespace System.Activities
 
         protected sealed override void CacheMetadata(ActivityMetadata metadata)
         {
-            throw FxTrace
-                .Exception
+            throw FxTrace.Exception
                 .AsError(new InvalidOperationException(SR.WrongCacheMetadataForNativeActivity));
         }
 
@@ -127,8 +125,7 @@ namespace System.Activities
             Activity originalActivity
         )
         {
-            throw FxTrace
-                .Exception
+            throw FxTrace.Exception
                 .AsError(
                     new InvalidOperationException(SR.WrongOnCreateDynamicUpdateMapForNativeActivity)
                 );
@@ -302,8 +299,7 @@ namespace System.Activities
         {
             if (!context.IsCancellationRequested)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new InvalidOperationException(
                             SR.DefaultCancelationRequiresCancelHasBeenRequested
@@ -326,8 +322,7 @@ namespace System.Activities
 
         protected sealed override void CacheMetadata(ActivityMetadata metadata)
         {
-            throw FxTrace
-                .Exception
+            throw FxTrace.Exception
                 .AsError(new InvalidOperationException(SR.WrongCacheMetadataForNativeActivity));
         }
 
@@ -368,8 +363,7 @@ namespace System.Activities
             Activity originalActivity
         )
         {
-            throw FxTrace
-                .Exception
+            throw FxTrace.Exception
                 .AsError(
                     new InvalidOperationException(SR.WrongOnCreateDynamicUpdateMapForNativeActivity)
                 );

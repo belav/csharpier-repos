@@ -118,8 +118,7 @@ namespace System.Management
 
             try
             {
-                status = parent
-                    .wbemObject
+                status = parent.wbemObject
                     .GetMethod_(methodName, 0, out wmiInParams, out wmiOutParams);
             }
             catch (COMException e)

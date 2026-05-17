@@ -78,8 +78,7 @@ namespace System
         )
         {
 #if TRAVE
-            System
-                .Net
+            System.Net
                 .GlobalLog
                 .Assert(
                     name != null && pos <= returnedEnd,
@@ -167,8 +166,7 @@ namespace System
         )
         {
 #if TRAVE
-            System
-                .Net
+            System.Net
                 .GlobalLog
                 .Assert(
                     name != null && pos <= returnedEnd,

@@ -101,11 +101,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
                 .CodeStyleItems
                 .OfType<AbstractCodeStyleOptionViewModel>()
                 .First();
-            this.ViewModel.SetOptionAndUpdatePreview(
-                firstItem.SelectedPreference.IsChecked,
-                firstItem.Option,
-                firstItem.GetPreview()
-            );
+            this.ViewModel
+                .SetOptionAndUpdatePreview(
+                    firstItem.SelectedPreference.IsChecked,
+                    firstItem.Option,
+                    firstItem.GetPreview()
+                );
 
             DataContext = ViewModel;
         }

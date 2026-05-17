@@ -106,12 +106,10 @@ namespace Microsoft.VisualStudio.LanguageServices.ValueTracking
                 return false;
             }
 
-            _threadingContext
-                .JoinableTaskFactory
+            _threadingContext.JoinableTaskFactory
                 .RunAsync(async () =>
                 {
-                    var service = document
-                        .Project
+                    var service = document.Project
                         .Solution
                         .Services
                         .GetRequiredService<IValueTrackingService>();
@@ -147,16 +145,14 @@ namespace Microsoft.VisualStudio.LanguageServices.ValueTracking
             var classificationFormatMap =
                 _classificationFormatMapService.GetClassificationFormatMap(textView);
             var solution = document.Project.Solution;
-            var valueTrackingService = solution
-                .Services
+            var valueTrackingService = solution.Services
                 .GetRequiredService<IValueTrackingService>();
             var rootItemMap = items.GroupBy(
                 i => i.Parent,
                 resultSelector: (key, items) => (parent: key, children: items)
             );
 
-            using var _ = CodeAnalysis
-                .PooledObjects
+            using var _ = CodeAnalysis.PooledObjects
                 .ArrayBuilder<TreeItemViewModel>
                 .GetInstance(out var rootItems);
 
@@ -186,8 +182,7 @@ namespace Microsoft.VisualStudio.LanguageServices.ValueTracking
                 }
                 else
                 {
-                    using var _1 = CodeAnalysis
-                        .PooledObjects
+                    using var _1 = CodeAnalysis.PooledObjects
                         .ArrayBuilder<TreeItemViewModel>
                         .GetInstance(out var childItems);
                     foreach (var child in children)

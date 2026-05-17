@@ -268,8 +268,7 @@ public class GlobalVersionTests : IISFunctionalTestBase
                 foreach (var element in moduleNodes)
                 {
                     var imageAttribute = element.Attribute("image");
-                    imageAttribute.Value = imageAttribute
-                        .Value
+                    imageAttribute.Value = imageAttribute.Value
                         .Replace(sourceDirectory.FullName, destinationDirectory.FullName);
                 }
                 CopyFiles(sourceDirectory, destinationDirectory);

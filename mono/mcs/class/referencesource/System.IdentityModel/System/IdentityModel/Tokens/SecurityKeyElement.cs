@@ -32,8 +32,7 @@ namespace System.IdentityModel.Tokens
         {
             if (securityKeyIdentifierClause == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("securityKeyIdentifierClause");
             }
 
@@ -56,8 +55,7 @@ namespace System.IdentityModel.Tokens
         {
             if (securityKeyIdentifier == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("securityKeyIdentifier");
             }
 
@@ -239,8 +237,7 @@ namespace System.IdentityModel.Tokens
                             return;
                         }
 
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelper(
                                 new SecurityTokenException(
                                     SR.GetString(

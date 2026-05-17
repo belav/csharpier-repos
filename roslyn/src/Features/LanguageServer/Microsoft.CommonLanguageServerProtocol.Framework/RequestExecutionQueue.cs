@@ -427,8 +427,7 @@ public class RequestExecutionQueue<TRequestContext> : IRequestExecutionQueue<TRe
         {
             while (!_queue._queue.IsEmpty)
             {
-                var (_, _, cancellationToken) = await _queue
-                    ._queue
+                var (_, _, cancellationToken) = await _queue._queue
                     .DequeueAsync()
                     .ConfigureAwait(false);
                 if (!cancellationToken.IsCancellationRequested)

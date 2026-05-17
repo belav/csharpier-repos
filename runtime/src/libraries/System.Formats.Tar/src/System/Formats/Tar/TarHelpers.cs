@@ -63,8 +63,7 @@ namespace System.Formats.Tar
             }
             else if (bytesToDiscard > 0)
             {
-                byte[] buffer = ArrayPool<byte>
-                    .Shared
+                byte[] buffer = ArrayPool<byte>.Shared
                     .Rent(minimumLength: (int)Math.Min(MaxBufferLength, bytesToDiscard));
                 while (bytesToDiscard > 0)
                 {
@@ -91,8 +90,7 @@ namespace System.Formats.Tar
             }
             else if (bytesToDiscard > 0)
             {
-                byte[] buffer = ArrayPool<byte>
-                    .Shared
+                byte[] buffer = ArrayPool<byte>.Shared
                     .Rent(minimumLength: (int)Math.Min(MaxBufferLength, bytesToDiscard));
                 while (bytesToDiscard > 0)
                 {
@@ -109,8 +107,7 @@ namespace System.Formats.Tar
         // Helps copy a specific number of bytes from one stream into another.
         internal static void CopyBytes(Stream origin, Stream destination, long bytesToCopy)
         {
-            byte[] buffer = ArrayPool<byte>
-                .Shared
+            byte[] buffer = ArrayPool<byte>.Shared
                 .Rent(minimumLength: (int)Math.Min(MaxBufferLength, bytesToCopy));
             while (bytesToCopy > 0)
             {
@@ -132,8 +129,7 @@ namespace System.Formats.Tar
         {
             cancellationToken.ThrowIfCancellationRequested();
 
-            byte[] buffer = ArrayPool<byte>
-                .Shared
+            byte[] buffer = ArrayPool<byte>.Shared
                 .Rent(minimumLength: (int)Math.Min(MaxBufferLength, bytesToCopy));
             while (bytesToCopy > 0)
             {

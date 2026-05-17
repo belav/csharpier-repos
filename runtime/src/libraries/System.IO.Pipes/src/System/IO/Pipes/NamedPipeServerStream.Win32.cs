@@ -29,8 +29,7 @@ namespace System.IO.Pipes
                 ) && Environment.Is64BitProcess
             )
             {
-                Interop
-                    .Kernel32
+                Interop.Kernel32
                     .LoadLibraryEx(
                         "sspicli.dll",
                         IntPtr.Zero,
@@ -38,8 +37,7 @@ namespace System.IO.Pipes
                     );
 
                 if (
-                    Interop
-                        .Kernel32
+                    Interop.Kernel32
                         .GetNamedPipeHandleStateW(
                             InternalHandle!,
                             null,

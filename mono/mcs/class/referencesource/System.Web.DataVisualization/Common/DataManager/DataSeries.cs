@@ -674,8 +674,7 @@ namespace System.Web.UI.DataVisualization.Charting
                             SR.ExceptionCustomAttributeMustBeInRange(
                                 "PixelPointDepth",
                                 (0).ToString(CultureInfo.CurrentCulture),
-                                CustomPropertyRegistry
-                                    .MaxValueOfPixelAttribute
+                                CustomPropertyRegistry.MaxValueOfPixelAttribute
                                     .ToString(CultureInfo.CurrentCulture)
                             )
                         )
@@ -727,8 +726,7 @@ namespace System.Web.UI.DataVisualization.Charting
                             SR.ExceptionCustomAttributeMustBeInRange(
                                 "PixelPointGapDepth",
                                 (0).ToString(CultureInfo.CurrentCulture),
-                                CustomPropertyRegistry
-                                    .MaxValueOfPixelAttribute
+                                CustomPropertyRegistry.MaxValueOfPixelAttribute
                                     .ToString(CultureInfo.CurrentCulture)
                             )
                         )
@@ -818,8 +816,7 @@ namespace System.Web.UI.DataVisualization.Charting
                             SR.ExceptionCustomAttributeMustBeInRange(
                                 "MinPixelPointWidth",
                                 (0).ToString(CultureInfo.CurrentCulture),
-                                CustomPropertyRegistry
-                                    .MaxValueOfPixelAttribute
+                                CustomPropertyRegistry.MaxValueOfPixelAttribute
                                     .ToString(CultureInfo.CurrentCulture)
                             )
                         )
@@ -899,8 +896,7 @@ namespace System.Web.UI.DataVisualization.Charting
                             SR.ExceptionCustomAttributeMustBeInRange(
                                 "PixelPointWidth",
                                 (0).ToString(CultureInfo.CurrentCulture),
-                                CustomPropertyRegistry
-                                    .MaxValueOfPixelAttribute
+                                CustomPropertyRegistry.MaxValueOfPixelAttribute
                                     .ToString(CultureInfo.CurrentCulture)
                             )
                         )

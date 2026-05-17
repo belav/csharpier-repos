@@ -234,8 +234,7 @@ namespace System.ServiceModel.Security
                 if (this.Factory.ActAsInitiator != true)
                 {
                     Fx.Assert("Unexpected code path for server security application");
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(SR.ProtocolMustBeInitiator, this.GetType().ToString())
@@ -560,8 +559,8 @@ namespace System.ServiceModel.Security
                         this.Factory.SecurityTokenParameters,
                         supportingAuthenticators
                     );
-                    securityHeader.WrappedKeySecurityTokenAuthenticator =
-                        this.Factory.WrappedKeySecurityTokenAuthenticator;
+                    securityHeader.WrappedKeySecurityTokenAuthenticator = this.Factory
+                        .WrappedKeySecurityTokenAuthenticator;
                 }
                 securityHeader.ConfigureOutOfBandTokenResolver(
                     MergeOutOfBandResolvers(

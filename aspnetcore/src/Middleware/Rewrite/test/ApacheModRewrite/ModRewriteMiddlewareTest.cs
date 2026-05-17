@@ -345,8 +345,7 @@ public class ModRewriteMiddlewareTest
                     {
                         app.UseRewriter(options);
                         app.Run(context =>
-                            context
-                                .Response
+                            context.Response
                                 .WriteAsync(
                                     context.Request.Scheme
                                         + "://"
@@ -385,8 +384,7 @@ public class ModRewriteMiddlewareTest
                     {
                         app.UseRewriter(options);
                         app.Run(context =>
-                            context
-                                .Response
+                            context.Response
                                 .WriteAsync(
                                     context.Request.Scheme
                                         + "://"
@@ -428,8 +426,7 @@ public class ModRewriteMiddlewareTest
                     {
                         app.UseRewriter(options);
                         app.Run(context =>
-                            context
-                                .Response
+                            context.Response
                                 .WriteAsync(
                                     context.Request.Scheme
                                         + "://"
@@ -470,8 +467,7 @@ public class ModRewriteMiddlewareTest
                     {
                         app.UseRewriter(options);
                         app.Run(context =>
-                            context
-                                .Response
+                            context.Response
                                 .WriteAsync(
                                     context.Request.Scheme
                                         + "://"
@@ -510,8 +506,7 @@ public class ModRewriteMiddlewareTest
                     {
                         app.UseRewriter(options);
                         app.Run(context =>
-                            context
-                                .Response
+                            context.Response
                                 .WriteAsync(context.Request.Path + context.Request.QueryString)
                         );
                     });
@@ -541,8 +536,7 @@ public class ModRewriteMiddlewareTest
                     {
                         app.UseRewriter(options);
                         app.Run(context =>
-                            context
-                                .Response
+                            context.Response
                                 .WriteAsync(context.Request.Path + context.Request.QueryString)
                         );
                     });
@@ -578,8 +572,7 @@ RewriteRule (.*) http://localhost:80/home/report/%1 [R=301,L,QSD]"
                     {
                         app.UseRewriter(options);
                         app.Run(context =>
-                            context
-                                .Response
+                            context.Response
                                 .WriteAsync(context.Request.Path + context.Request.QueryString)
                         );
                     });

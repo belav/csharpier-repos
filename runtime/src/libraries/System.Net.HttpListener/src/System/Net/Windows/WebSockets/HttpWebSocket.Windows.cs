@@ -74,8 +74,7 @@ namespace System.Net.WebSockets
                 if (shouldSendSecWebSocketProtocolHeader)
                 {
                     secWebSocketProtocols.Add(outgoingSecWebSocketProtocolString);
-                    response
-                        .Headers
+                    response.Headers
                         .Add(
                             HttpKnownHeaderNames.SecWebSocketProtocol,
                             outgoingSecWebSocketProtocolString

@@ -103,8 +103,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 methodOrdinal,
                 typeKind
             );
-            compilationState
-                .ModuleBuilderOpt
+            compilationState.ModuleBuilderOpt
                 .CompilationState
                 .SetStateMachineType(method, stateMachineType);
 
@@ -368,8 +367,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             // local.$builder.Start(ref local) -- binding to the method AsyncTaskMethodBuilder<typeArgs>.Start()
-            var startMethod = methodScopeAsyncMethodBuilderMemberCollection
-                .Start
+            var startMethod = methodScopeAsyncMethodBuilderMemberCollection.Start
                 .Construct(frameType);
             if (methodScopeAsyncMethodBuilderMemberCollection.CheckGenericMethodConstraints)
             {

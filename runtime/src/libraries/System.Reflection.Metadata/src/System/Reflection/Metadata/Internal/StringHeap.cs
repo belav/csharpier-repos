@@ -259,8 +259,7 @@ namespace System.Reflection.Metadata.Ecma335
                 {
                     byte[] bytes = handle.StringKind switch
                     {
-                        StringKind.Virtual => Encoding
-                            .UTF8
+                        StringKind.Virtual => Encoding.UTF8
                             .GetBytes(GetVirtualString(handle.GetVirtualIndex())),
                         StringKind.WinRTPrefixed => GetNonVirtualStringBytes(
                             handle,
@@ -321,13 +320,14 @@ namespace System.Reflection.Metadata.Ecma335
             }
 
             char otherTerminator = handle.StringKind == StringKind.DotTerminated ? '.' : '\0';
-            return this.Block.Utf8NullTerminatedEquals(
-                handle.GetHeapOffset(),
-                value,
-                utf8Decoder,
-                otherTerminator,
-                ignoreCase
-            );
+            return this.Block
+                .Utf8NullTerminatedEquals(
+                    handle.GetHeapOffset(),
+                    value,
+                    utf8Decoder,
+                    otherTerminator,
+                    ignoreCase
+                );
         }
 
         internal bool StartsWith(
@@ -355,13 +355,14 @@ namespace System.Reflection.Metadata.Ecma335
             }
 
             char otherTerminator = handle.StringKind == StringKind.DotTerminated ? '.' : '\0';
-            return this.Block.Utf8NullTerminatedStartsWith(
-                handle.GetHeapOffset(),
-                value,
-                utf8Decoder,
-                otherTerminator,
-                ignoreCase
-            );
+            return this.Block
+                .Utf8NullTerminatedStartsWith(
+                    handle.GetHeapOffset(),
+                    value,
+                    utf8Decoder,
+                    otherTerminator,
+                    ignoreCase
+                );
         }
 
         /// <summary>
@@ -371,10 +372,11 @@ namespace System.Reflection.Metadata.Ecma335
         {
             Debug.Assert(!rawHandle.IsVirtual);
             Debug.Assert(rawHandle.StringKind != StringKind.DotTerminated, "Not supported");
-            return this.Block.CompareUtf8NullTerminatedStringWithAsciiString(
-                    rawHandle.GetHeapOffset(),
-                    asciiString
-                ) == 0;
+            return this.Block
+                    .CompareUtf8NullTerminatedStringWithAsciiString(
+                        rawHandle.GetHeapOffset(),
+                        asciiString
+                    ) == 0;
         }
 
         /// <summary>
@@ -393,10 +395,11 @@ namespace System.Reflection.Metadata.Ecma335
         {
             Debug.Assert(!rawHandle.IsVirtual);
             Debug.Assert(rawHandle.StringKind != StringKind.DotTerminated, "Not supported");
-            return this.Block.Utf8NullTerminatedStringStartsWithAsciiPrefix(
-                rawHandle.GetHeapOffset(),
-                asciiPrefix
-            );
+            return this.Block
+                .Utf8NullTerminatedStringStartsWithAsciiPrefix(
+                    rawHandle.GetHeapOffset(),
+                    asciiPrefix
+                );
         }
 
         /// <summary>

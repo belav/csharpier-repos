@@ -38,22 +38,19 @@ namespace System.ServiceModel.Configuration
                 }
                 if (callbackObject == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgumentNull("callbackObject");
                 }
 
                 if (endpointConfigurationName == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgumentNull("endpointConfigurationName");
                 }
 
                 if (configuration == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgumentNull("configuration");
                 }
 

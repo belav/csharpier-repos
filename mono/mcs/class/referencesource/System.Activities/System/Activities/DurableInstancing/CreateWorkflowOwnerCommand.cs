@@ -43,8 +43,7 @@ namespace System.Activities.DurableInstancing
         {
             if (view.IsBoundToInstanceOwner)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(new InvalidOperationException(SRCore.AlreadyBoundToOwner));
             }
             InstancePersistence.ValidatePropertyBag(this.instanceOwnerMetadata);

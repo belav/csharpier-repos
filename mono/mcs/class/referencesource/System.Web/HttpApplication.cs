@@ -4425,8 +4425,7 @@ namespace System.Web
                 {
                     bool stepCalled = false;
 
-                    _application
-                        ._stepInvoker
+                    _application._stepInvoker
                         .Invoke(() =>
                         {
                             if (!stepCalled)
@@ -4854,8 +4853,7 @@ namespace System.Web
                 {
                     bool stepCalled = false;
 
-                    _application
-                        ._stepInvoker
+                    _application._stepInvoker
                         .Invoke(() =>
                         {
                             if (!stepCalled)
@@ -5087,8 +5085,7 @@ namespace System.Web
                 {
                     // DevDiv #273639: Let the HttpRequest instance maintain a reference to the response
                     // cookie collection, as the HttpResponse instance won't be available after the transition.
-                    context
-                        .Request
+                    context.Request
                         .StoreReferenceToResponseCookies(context.Response.GetCookiesNoCreate());
 
                     // If this is a WebSocket request, mark as transitioned so that asynchronous events (like SendRequest)
@@ -5138,8 +5135,7 @@ namespace System.Web
                         )
                     )
                     {
-                        _application
-                            .Context
+                        _application.Context
                             .DisableNotifications(
                                 RequestNotification.LogRequest,
                                 0 /*postNotifications*/
@@ -5788,8 +5784,7 @@ namespace System.Web
                                         (RequestNotification)currentNotification;
                                     context.CurrentModuleEventIndex = -1;
                                     currentModuleLastEventIndex =
-                                        _application
-                                            .CurrentModuleContainer
+                                        _application.CurrentModuleContainer
                                             .GetEventCount(
                                                 context.CurrentNotification,
                                                 context.IsPostNotification
@@ -5798,8 +5793,7 @@ namespace System.Web
 
                                 context.CurrentModuleEventIndex++;
 
-                                IExecutionStep step = _application
-                                    .CurrentModuleContainer
+                                IExecutionStep step = _application.CurrentModuleContainer
                                     .GetNextEvent(
                                         context.CurrentNotification,
                                         context.IsPostNotification,
@@ -5953,8 +5947,7 @@ namespace System.Web
                         if (needToComplete)
                         {
                             // call HttpRuntime::OnRequestNotificationCompletion
-                            _application
-                                .AsyncResult
+                            _application.AsyncResult
                                 .Complete(
                                     isSynchronousCompletion,
                                     null /*result*/

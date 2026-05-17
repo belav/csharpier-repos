@@ -251,8 +251,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
 
             return snippets.SelectAsArray(snippet =>
             {
-                var rules = CompletionItemRules
-                    .Default
+                var rules = CompletionItemRules.Default
                     .WithFormatOnCommit(service.ShouldFormatSnippet(snippet));
 
                 return CommonCompletionItem.Create(

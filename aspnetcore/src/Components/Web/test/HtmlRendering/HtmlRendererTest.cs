@@ -40,8 +40,7 @@ public class HtmlRendererTest
             collection.AddSingleton(new RenderFragment(_ => { }))
         );
         var htmlRenderer = GetHtmlRenderer(serviceProvider);
-        var htmlContent = await htmlRenderer
-            .Dispatcher
+        var htmlContent = await htmlRenderer.Dispatcher
             .InvokeAsync(htmlRenderer.BeginRenderingComponent<TestComponent>);
 
         // Act
@@ -66,8 +65,7 @@ public class HtmlRendererTest
         );
 
         var htmlRenderer = GetHtmlRenderer(serviceProvider);
-        await htmlRenderer
-            .Dispatcher
+        await htmlRenderer.Dispatcher
             .InvokeAsync(async () =>
             {
                 // Act
@@ -95,8 +93,7 @@ public class HtmlRendererTest
         );
 
         var htmlRenderer = GetHtmlRenderer(serviceProvider);
-        await htmlRenderer
-            .Dispatcher
+        await htmlRenderer.Dispatcher
             .InvokeAsync(async () =>
             {
                 // Act
@@ -124,8 +121,7 @@ public class HtmlRendererTest
         );
 
         var htmlRenderer = GetHtmlRenderer(serviceProvider);
-        await htmlRenderer
-            .Dispatcher
+        await htmlRenderer.Dispatcher
             .InvokeAsync(async () =>
             {
                 // Act
@@ -153,8 +149,7 @@ public class HtmlRendererTest
         );
 
         var htmlRenderer = GetHtmlRenderer(serviceProvider);
-        await htmlRenderer
-            .Dispatcher
+        await htmlRenderer.Dispatcher
             .InvokeAsync(async () =>
             {
                 // Act
@@ -198,8 +193,7 @@ public class HtmlRendererTest
         );
 
         var htmlRenderer = GetHtmlRenderer(serviceProvider);
-        await htmlRenderer
-            .Dispatcher
+        await htmlRenderer.Dispatcher
             .InvokeAsync(async () =>
             {
                 // Act
@@ -254,8 +248,7 @@ public class HtmlRendererTest
         );
 
         var htmlRenderer = GetHtmlRenderer(serviceProvider);
-        await htmlRenderer
-            .Dispatcher
+        await htmlRenderer.Dispatcher
             .InvokeAsync(async () =>
             {
                 // Act
@@ -299,8 +292,7 @@ public class HtmlRendererTest
         );
 
         var htmlRenderer = GetHtmlRenderer(serviceProvider);
-        await htmlRenderer
-            .Dispatcher
+        await htmlRenderer.Dispatcher
             .InvokeAsync(async () =>
             {
                 // Act
@@ -328,8 +320,7 @@ public class HtmlRendererTest
         );
 
         var htmlRenderer = GetHtmlRenderer(serviceProvider);
-        await htmlRenderer
-            .Dispatcher
+        await htmlRenderer.Dispatcher
             .InvokeAsync(async () =>
             {
                 // Act
@@ -357,8 +348,7 @@ public class HtmlRendererTest
         );
 
         var htmlRenderer = GetHtmlRenderer(serviceProvider);
-        await htmlRenderer
-            .Dispatcher
+        await htmlRenderer.Dispatcher
             .InvokeAsync(async () =>
             {
                 // Act
@@ -403,8 +393,7 @@ public class HtmlRendererTest
         );
 
         var htmlRenderer = GetHtmlRenderer(serviceProvider);
-        await htmlRenderer
-            .Dispatcher
+        await htmlRenderer.Dispatcher
             .InvokeAsync(async () =>
             {
                 // Act
@@ -459,8 +448,7 @@ public class HtmlRendererTest
         );
 
         var htmlRenderer = GetHtmlRenderer(serviceProvider);
-        await htmlRenderer
-            .Dispatcher
+        await htmlRenderer.Dispatcher
             .InvokeAsync(async () =>
             {
                 // Act
@@ -514,8 +502,7 @@ public class HtmlRendererTest
         );
 
         var htmlRenderer = GetHtmlRenderer(serviceProvider);
-        await htmlRenderer
-            .Dispatcher
+        await htmlRenderer.Dispatcher
             .InvokeAsync(async () =>
             {
                 // Act
@@ -546,8 +533,7 @@ public class HtmlRendererTest
         );
 
         var htmlRenderer = GetHtmlRenderer(serviceProvider);
-        await htmlRenderer
-            .Dispatcher
+        await htmlRenderer.Dispatcher
             .InvokeAsync(async () =>
             {
                 // Act
@@ -578,8 +564,7 @@ public class HtmlRendererTest
         );
 
         var htmlRenderer = GetHtmlRenderer(serviceProvider);
-        await htmlRenderer
-            .Dispatcher
+        await htmlRenderer.Dispatcher
             .InvokeAsync(async () =>
             {
                 // Act
@@ -608,8 +593,7 @@ public class HtmlRendererTest
         );
 
         var htmlRenderer = GetHtmlRenderer(serviceProvider);
-        await htmlRenderer
-            .Dispatcher
+        await htmlRenderer.Dispatcher
             .InvokeAsync(async () =>
             {
                 // Act
@@ -638,8 +622,7 @@ public class HtmlRendererTest
         );
 
         var htmlRenderer = GetHtmlRenderer(serviceProvider);
-        await htmlRenderer
-            .Dispatcher
+        await htmlRenderer.Dispatcher
             .InvokeAsync(async () =>
             {
                 // Act
@@ -668,8 +651,7 @@ public class HtmlRendererTest
         );
 
         var htmlRenderer = GetHtmlRenderer(serviceProvider);
-        await htmlRenderer
-            .Dispatcher
+        await htmlRenderer.Dispatcher
             .InvokeAsync(async () =>
             {
                 // Act
@@ -697,8 +679,7 @@ public class HtmlRendererTest
         );
 
         var htmlRenderer = GetHtmlRenderer(serviceProvider);
-        await htmlRenderer
-            .Dispatcher
+        await htmlRenderer.Dispatcher
             .InvokeAsync(async () =>
             {
                 // Act
@@ -728,8 +709,7 @@ public class HtmlRendererTest
         );
 
         var htmlRenderer = GetHtmlRenderer(serviceProvider);
-        await htmlRenderer
-            .Dispatcher
+        await htmlRenderer.Dispatcher
             .InvokeAsync(async () =>
             {
                 // Act
@@ -773,8 +753,7 @@ public class HtmlRendererTest
         );
 
         var htmlRenderer = GetHtmlRenderer(serviceProvider);
-        await htmlRenderer
-            .Dispatcher
+        await htmlRenderer.Dispatcher
             .InvokeAsync(async () =>
             {
                 // Act
@@ -829,8 +808,7 @@ public class HtmlRendererTest
         );
 
         var htmlRenderer = GetHtmlRenderer(serviceProvider);
-        await htmlRenderer
-            .Dispatcher
+        await htmlRenderer.Dispatcher
             .InvokeAsync(async () =>
             {
                 // Act
@@ -886,8 +864,7 @@ public class HtmlRendererTest
         );
 
         var htmlRenderer = GetHtmlRenderer(serviceProvider);
-        await htmlRenderer
-            .Dispatcher
+        await htmlRenderer.Dispatcher
             .InvokeAsync(async () =>
             {
                 // Act
@@ -945,8 +922,7 @@ public class HtmlRendererTest
             throw new InvalidOperationException();
 
         var htmlRenderer = GetHtmlRenderer(serviceProvider);
-        await htmlRenderer
-            .Dispatcher
+        await htmlRenderer.Dispatcher
             .InvokeAsync(async () =>
             {
                 // Act
@@ -995,8 +971,7 @@ public class HtmlRendererTest
         );
 
         var htmlRenderer = GetHtmlRenderer(serviceProvider);
-        await htmlRenderer
-            .Dispatcher
+        await htmlRenderer.Dispatcher
             .InvokeAsync(async () =>
             {
                 // Act
@@ -1042,8 +1017,7 @@ public class HtmlRendererTest
         );
 
         var htmlRenderer = GetHtmlRenderer(serviceProvider);
-        await htmlRenderer
-            .Dispatcher
+        await htmlRenderer.Dispatcher
             .InvokeAsync(async () =>
             {
                 // Act
@@ -1083,8 +1057,7 @@ public class HtmlRendererTest
         );
 
         var htmlRenderer = GetHtmlRenderer(serviceProvider);
-        await htmlRenderer
-            .Dispatcher
+        await htmlRenderer.Dispatcher
             .InvokeAsync(async () =>
             {
                 // Act
@@ -1124,8 +1097,7 @@ public class HtmlRendererTest
         );
 
         var htmlRenderer = GetHtmlRenderer(serviceProvider);
-        await htmlRenderer
-            .Dispatcher
+        await htmlRenderer.Dispatcher
             .InvokeAsync(async () =>
             {
                 // Act
@@ -1148,8 +1120,7 @@ public class HtmlRendererTest
         // even though they are not within the same root component.
 
         var htmlRenderer = GetHtmlRenderer();
-        await htmlRenderer
-            .Dispatcher
+        await htmlRenderer.Dispatcher
             .InvokeAsync(async () =>
             {
                 // Arrange/Act/Assert 1: initially get some empty output
@@ -1209,8 +1180,7 @@ public class HtmlRendererTest
         using var ms = new MemoryStream();
         using var writer = new StreamWriter(ms, new UTF8Encoding(false));
 
-        await htmlRenderer
-            .Dispatcher
+        await htmlRenderer.Dispatcher
             .InvokeAsync(async () =>
             {
                 // Act
@@ -1236,8 +1206,7 @@ public class HtmlRendererTest
         );
 
         var htmlRenderer = GetHtmlRenderer(services);
-        await htmlRenderer
-            .Dispatcher
+        await htmlRenderer.Dispatcher
             .InvokeAsync(async () =>
             {
                 // Act/Assert: state before quiescence
@@ -1264,8 +1233,7 @@ public class HtmlRendererTest
         );
 
         var htmlRenderer = GetHtmlRenderer(services);
-        await htmlRenderer
-            .Dispatcher
+        await htmlRenderer.Dispatcher
             .InvokeAsync(async () =>
             {
                 // Act/Assert
@@ -1294,8 +1262,7 @@ public class HtmlRendererTest
         );
 
         var htmlRenderer = GetHtmlRenderer(services);
-        await htmlRenderer
-            .Dispatcher
+        await htmlRenderer.Dispatcher
             .InvokeAsync(async () =>
             {
                 // Act/Assert
@@ -1324,8 +1291,7 @@ public class HtmlRendererTest
         );
 
         var htmlRenderer = GetHtmlRenderer(services);
-        await htmlRenderer
-            .Dispatcher
+        await htmlRenderer.Dispatcher
             .InvokeAsync(() =>
             {
                 // Act/Assert
@@ -1356,8 +1322,7 @@ public class HtmlRendererTest
         );
 
         var htmlRenderer = GetHtmlRenderer(services);
-        await htmlRenderer
-            .Dispatcher
+        await htmlRenderer.Dispatcher
             .InvokeAsync(async () =>
             {
                 // Act/Assert
@@ -1411,8 +1376,7 @@ public class HtmlRendererTest
         );
 
         var htmlRenderer = GetHtmlRenderer(serviceProvider);
-        await htmlRenderer
-            .Dispatcher
+        await htmlRenderer.Dispatcher
             .InvokeAsync(async () =>
             {
                 // Act
@@ -1448,8 +1412,7 @@ And now with HTML encoding: Person with special chars like &#x27; &quot; &lt;/sc
         );
 
         var htmlRenderer = GetHtmlRenderer(serviceProvider);
-        await htmlRenderer
-            .Dispatcher
+        await htmlRenderer.Dispatcher
             .InvokeAsync(async () =>
             {
                 // Act
@@ -1477,8 +1440,7 @@ And now with HTML encoding: Person with special chars like &#x27; &quot; &lt;/sc
         );
 
         var htmlRenderer = GetHtmlRenderer(serviceProvider);
-        await htmlRenderer
-            .Dispatcher
+        await htmlRenderer.Dispatcher
             .InvokeAsync(async () =>
             {
                 // Act
@@ -1511,8 +1473,7 @@ And now with HTML encoding: Person with special chars like &#x27; &quot; &lt;/sc
         );
 
         var htmlRenderer = GetHtmlRenderer(serviceProvider);
-        await htmlRenderer
-            .Dispatcher
+        await htmlRenderer.Dispatcher
             .InvokeAsync(async () =>
             {
                 // Act
@@ -1557,8 +1518,7 @@ And now with HTML encoding: Person with special chars like &#x27; &quot; &lt;/sc
         );
 
         var htmlRenderer = GetHtmlRenderer(serviceProvider);
-        await htmlRenderer
-            .Dispatcher
+        await htmlRenderer.Dispatcher
             .InvokeAsync(async () =>
             {
                 // Act
@@ -1610,8 +1570,7 @@ And now with HTML encoding: Person with special chars like &#x27; &quot; &lt;/sc
         );
 
         var htmlRenderer = GetHtmlRenderer(serviceProvider);
-        await htmlRenderer
-            .Dispatcher
+        await htmlRenderer.Dispatcher
             .InvokeAsync(async () =>
             {
                 // Act
@@ -1643,8 +1602,7 @@ And now with HTML encoding: Person with special chars like &#x27; &quot; &lt;/sc
         );
 
         var htmlRenderer = GetHtmlRenderer(serviceProvider);
-        await htmlRenderer
-            .Dispatcher
+        await htmlRenderer.Dispatcher
             .InvokeAsync(async () =>
             {
                 // Act
@@ -1676,8 +1634,7 @@ And now with HTML encoding: Person with special chars like &#x27; &quot; &lt;/sc
         );
 
         var htmlRenderer = GetHtmlRenderer(serviceProvider);
-        await htmlRenderer
-            .Dispatcher
+        await htmlRenderer.Dispatcher
             .InvokeAsync(async () =>
             {
                 // Act
@@ -1706,8 +1663,7 @@ And now with HTML encoding: Person with special chars like &#x27; &quot; &lt;/sc
         );
 
         var htmlRenderer = GetHtmlRenderer(serviceProvider);
-        await htmlRenderer
-            .Dispatcher
+        await htmlRenderer.Dispatcher
             .InvokeAsync(async () =>
             {
                 // Act

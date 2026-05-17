@@ -52,8 +52,7 @@ namespace System.ServiceModel.Description
                 || dispatch.Parent.ChannelDispatcher.Host.Description.Behaviors == null
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR2.GetString(SR2.DispatchOperationInInvalidState)
@@ -61,8 +60,7 @@ namespace System.ServiceModel.Description
                     );
             }
 
-            WorkflowRuntimeBehavior workflowRuntimeBehavior = dispatch
-                .Parent
+            WorkflowRuntimeBehavior workflowRuntimeBehavior = dispatch.Parent
                 .ChannelDispatcher
                 .Host
                 .Description
@@ -71,8 +69,7 @@ namespace System.ServiceModel.Description
 
             if (workflowRuntimeBehavior == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(SR2.GetString(SR2.NoWorkflowRuntimeBehavior))
                     );

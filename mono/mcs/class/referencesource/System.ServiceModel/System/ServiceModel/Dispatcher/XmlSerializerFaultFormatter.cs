@@ -42,8 +42,7 @@ namespace System.ServiceModel.Dispatcher
         {
             if (xmlSerializerFaultContractInfos == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("xmlSerializerFaultContractInfos");
             }
             this.xmlSerializerFaultContractInfos = xmlSerializerFaultContractInfos;

@@ -368,9 +368,10 @@ namespace System.ComponentModel.Composition.Hosting
                     : removedDefinitions.Value
             );
 
-            this._onChanging.Invoke(
-                new ComposablePartCatalogChangeEventArgs(added, removed, atomicComposition)
-            );
+            this._onChanging
+                .Invoke(
+                    new ComposablePartCatalogChangeEventArgs(added, removed, atomicComposition)
+                );
         }
 
         public void OnChanging(object sender, ComposablePartCatalogChangeEventArgs e)

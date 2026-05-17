@@ -64,8 +64,7 @@ namespace System.ServiceModel.Dispatcher
                     context.OutgoingResponse.StatusCode = webFaultException.StatusCode;
                     string operationName;
                     if (
-                        OperationContext
-                            .Current
+                        OperationContext.Current
                             .IncomingMessageProperties
                             .TryGetValue<string>(
                                 WebHttpDispatchOperationSelector.HttpOperationNamePropertyName,
@@ -84,8 +83,7 @@ namespace System.ServiceModel.Dispatcher
                                 == WebMessageFormat.Json
                         )
                         {
-                            throw System
-                                .ServiceModel
+                            throw System.ServiceModel
                                 .DiagnosticUtility
                                 .ExceptionUtility
                                 .ThrowHelperError(
@@ -146,8 +144,7 @@ namespace System.ServiceModel.Dispatcher
                         {
                             HttpResponseMessageProperty property;
                             if (
-                                OperationContext
-                                    .Current
+                                OperationContext.Current
                                     .OutgoingMessageProperties
                                     .TryGetValue<HttpResponseMessageProperty>(
                                         HttpResponseMessageProperty.Name,
@@ -160,8 +157,7 @@ namespace System.ServiceModel.Dispatcher
                             }
                             if (format == WebMessageFormat.Json)
                             {
-                                fault
-                                    .Properties
+                                fault.Properties
                                     .Add(
                                         WebBodyFormatMessageProperty.Name,
                                         WebBodyFormatMessageProperty.JsonProperty
@@ -171,8 +167,7 @@ namespace System.ServiceModel.Dispatcher
                     }
                     else
                     {
-                        throw System
-                            .ServiceModel
+                        throw System.ServiceModel
                             .DiagnosticUtility
                             .ExceptionUtility
                             .ThrowHelperError(
@@ -193,8 +188,7 @@ namespace System.ServiceModel.Dispatcher
                 }
                 if (System.ServiceModel.DiagnosticUtility.ShouldTraceWarning)
                 {
-                    System
-                        .ServiceModel
+                    System.ServiceModel
                         .DiagnosticUtility
                         .TraceHandledException(
                             new InvalidOperationException(
@@ -243,8 +237,7 @@ namespace System.ServiceModel.Dispatcher
                 );
             }
             Message response = new HttpStreamMessage(bodyWriter);
-            response
-                .Properties
+            response.Properties
                 .Add(WebBodyFormatMessageProperty.Name, WebBodyFormatMessageProperty.RawProperty);
 
             HttpResponseMessageProperty responseProperty = GetResponseProperty(

@@ -70,10 +70,8 @@ namespace System.Web.Util
                 string pid = SafeNativeMethods
                     .GetCurrentProcessId()
                     .ToString(CultureInfo.InstalledUICulture);
-                string description = SR.Resources.GetString(
-                    SR.Unhandled_Exception,
-                    CultureInfo.InstalledUICulture
-                );
+                string description = SR.Resources
+                    .GetString(SR.Unhandled_Exception, CultureInfo.InstalledUICulture);
                 Misc.ReportUnhandledException(
                     exception,
                     new string[5] { description, APPLICATION_ID, appId, PROCESS_ID, pid }
@@ -129,8 +127,7 @@ namespace System.Web.Util
         )
         {
             //
-            System
-                .Runtime
+            System.Runtime
                 .InteropServices
                 .Marshal
                 .Copy(new IntPtr(src.ToInt64() + srcOffset), dest, destOffset, size);
@@ -145,8 +142,7 @@ namespace System.Web.Util
         )
         {
             //
-            System
-                .Runtime
+            System.Runtime
                 .InteropServices
                 .Marshal
                 .Copy(src, srcOffset, new IntPtr(dest.ToInt64() + destOffset), size);

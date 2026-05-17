@@ -16,8 +16,7 @@ internal sealed class WebViewJSRuntime : JSRuntime
     public WebViewJSRuntime()
     {
         ElementReferenceContext = new WebElementReferenceContext(this);
-        JsonSerializerOptions
-            .Converters
+        JsonSerializerOptions.Converters
             .Add(new ElementReferenceJsonConverter(new WebElementReferenceContext(this)));
     }
 

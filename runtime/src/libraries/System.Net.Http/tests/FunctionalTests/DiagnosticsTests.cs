@@ -41,8 +41,7 @@ namespace System.Net.Http.Functional.Tests
         [ActiveIssue("https://github.com/dotnet/runtime/issues/71877", TestPlatforms.Browser)]
         public void EventSource_ExistsWithCorrectId()
         {
-            Type esType = typeof(HttpClient)
-                .Assembly
+            Type esType = typeof(HttpClient).Assembly
                 .GetType("System.Net.NetEventSource", throwOnError: true, ignoreCase: false);
             Assert.NotNull(esType);
 
@@ -581,8 +580,7 @@ namespace System.Net.Http.Functional.Tests
                                     request.Headers.TryGetValues("Request-Id", out var requestId)
                                 );
                                 Assert.True(
-                                    request
-                                        .Headers
+                                    request.Headers
                                         .TryGetValues(
                                             "Correlation-Context",
                                             out var correlationContext
@@ -1541,8 +1539,7 @@ namespace System.Net.Http.Functional.Tests
                                 || diagnosticListenerActivityEnabled.Value
                             );
 
-                            listenerSubscription = DiagnosticListener
-                                .AllListeners
+                            listenerSubscription = DiagnosticListener.AllListeners
                                 .Subscribe(diagnosticListenerObserver);
                         }
 
@@ -1635,8 +1632,7 @@ namespace System.Net.Http.Functional.Tests
 
         private static string GetHeaderValue(HttpRequestData request, string name)
         {
-            return request
-                .Headers
+            return request.Headers
                 .SingleOrDefault(h => h.Name.Equals(name, StringComparison.OrdinalIgnoreCase))
                 .Value;
         }

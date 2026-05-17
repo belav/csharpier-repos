@@ -106,8 +106,7 @@ namespace Microsoft.Scripting
                 {
                     if (IsStrongBoxArg(curArgument))
                     {
-                        var restrictions = curArgument
-                            .Restrictions
+                        var restrictions = curArgument.Restrictions
                             .Merge(GetTypeRestrictionForDynamicMetaObject(curArgument));
 
                         // we have restricted this argument to LimitType so we can convert and conversion will be trivial cast.

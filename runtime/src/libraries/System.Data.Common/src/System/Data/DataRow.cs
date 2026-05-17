@@ -37,8 +37,7 @@ namespace System.Data
         private int _rbTreeNodeId; // if row is not detached, Id used for computing index in rows collection
 
         private static int s_objectTypeCount; // Bid counter
-        internal readonly int _objectID = System
-            .Threading
+        internal readonly int _objectID = System.Threading
             .Interlocked
             .Increment(ref s_objectTypeCount);
 
@@ -80,8 +79,7 @@ namespace System.Data
             get { return _rbTreeNodeId; }
             set
             {
-                DataCommonEventSource
-                    .Log
+                DataCommonEventSource.Log
                     .Trace("<ds.DataRow.set_RBTreeNodeId|INFO> {0}, value={1}", _objectID, value);
                 _rbTreeNodeId = value;
             }
@@ -96,8 +94,7 @@ namespace System.Data
             get { return _error == null ? string.Empty : _error.Text; }
             set
             {
-                DataCommonEventSource
-                    .Log
+                DataCommonEventSource.Log
                     .Trace("<ds.DataRow.set_RowError|API> {0}, value='{1}'", _objectID, value);
                 if (_error == null)
                 {
@@ -558,8 +555,7 @@ namespace System.Data
         /// </summary>
         public void AcceptChanges()
         {
-            long logScopeId = DataCommonEventSource
-                .Log
+            long logScopeId = DataCommonEventSource.Log
                 .EnterScope("<ds.DataRow.AcceptChanges|API> {0}", _objectID);
             try
             {
@@ -752,8 +748,7 @@ namespace System.Data
         {
             CheckColumn(column);
 
-            long logScopeId = DataCommonEventSource
-                .Log
+            long logScopeId = DataCommonEventSource.Log
                 .EnterScope(
                     "<ds.DataRow.SetColumnError|API> {0}, column={1}, error='{2}'",
                     _objectID,
@@ -1238,8 +1233,7 @@ namespace System.Data
         /// </summary>
         public void RejectChanges()
         {
-            long logScopeId = DataCommonEventSource
-                .Log
+            long logScopeId = DataCommonEventSource.Log
                 .EnterScope("<ds.DataRow.RejectChanges|API> {0}", _objectID);
             try
             {

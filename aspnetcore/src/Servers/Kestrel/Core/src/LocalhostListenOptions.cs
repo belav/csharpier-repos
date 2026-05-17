@@ -44,8 +44,7 @@ internal sealed class LocalhostListenOptions : ListenOptions
         {
             if (context.Logger.IsEnabled(LogLevel.Information))
             {
-                context
-                    .Logger
+                context.Logger
                     .LogInformation(
                         0,
                         CoreStrings.NetworkInterfaceBindingFailed,
@@ -68,8 +67,7 @@ internal sealed class LocalhostListenOptions : ListenOptions
         {
             if (context.Logger.IsEnabled(LogLevel.Information))
             {
-                context
-                    .Logger
+                context.Logger
                     .LogInformation(
                         0,
                         CoreStrings.NetworkInterfaceBindingFailed,

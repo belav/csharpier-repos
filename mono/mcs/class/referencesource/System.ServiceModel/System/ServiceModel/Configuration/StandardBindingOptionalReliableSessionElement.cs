@@ -29,8 +29,7 @@ namespace System.ServiceModel.Configuration
         {
             if (null == optionalReliableSession)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("optionalReliableSession");
             }
             base.InitializeFrom(optionalReliableSession);
@@ -44,8 +43,7 @@ namespace System.ServiceModel.Configuration
         {
             if (null == optionalReliableSession)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("optionalReliableSession");
             }
             base.ApplyConfiguration(optionalReliableSession);

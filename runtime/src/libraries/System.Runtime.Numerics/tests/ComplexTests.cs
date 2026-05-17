@@ -2722,8 +2722,7 @@ namespace System.Numerics.Tests
                 {
                     foreach (string format in s_supportedStandardNumericFormats.Append(null))
                     {
-                        byte[] expected = Encoding
-                            .UTF8
+                        byte[] expected = Encoding.UTF8
                             .GetBytes(
                                 $"<{real.ToString(format, numberFormatInfo)}; {imaginary.ToString(format, numberFormatInfo)}>"
                             );

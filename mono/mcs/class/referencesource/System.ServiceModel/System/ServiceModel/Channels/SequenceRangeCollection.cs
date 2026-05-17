@@ -203,8 +203,7 @@ namespace System.ServiceModel.Channels
             {
                 get
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new ArgumentOutOfRangeException("index"));
                 }
             }
@@ -244,8 +243,7 @@ namespace System.ServiceModel.Channels
                 get
                 {
                     if (index < 0 || index >= ranges.Length)
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new ArgumentOutOfRangeException(
                                     "index",
@@ -321,8 +319,7 @@ namespace System.ServiceModel.Channels
                 get
                 {
                     if (index != 0)
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(new ArgumentOutOfRangeException("index"));
                     return this.range;
                 }

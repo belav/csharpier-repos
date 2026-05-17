@@ -115,8 +115,7 @@ public class RequestLocalizationMiddleware
             }
         }
 
-        context
-            .Features
+        context.Features
             .Set<IRequestCultureFeature>(
                 new RequestCultureFeature(requestCulture, winningProvider)
             );

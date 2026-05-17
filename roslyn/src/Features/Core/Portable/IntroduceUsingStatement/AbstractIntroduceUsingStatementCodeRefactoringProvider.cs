@@ -109,8 +109,7 @@ namespace Microsoft.CodeAnalysis.IntroduceUsingStatement
                 .GetRequiredSemanticModelAsync(cancellationToken)
                 .ConfigureAwait(false);
 
-            var disposableType = semanticModel
-                .Compilation
+            var disposableType = semanticModel.Compilation
                 .GetSpecialType(SpecialType.System_IDisposable);
             if (disposableType is null)
                 return default;

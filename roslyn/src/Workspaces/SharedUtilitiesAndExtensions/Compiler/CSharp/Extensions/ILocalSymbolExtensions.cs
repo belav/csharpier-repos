@@ -58,8 +58,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                 }
 
                 return typeParameters.HasValue
-                    && typeParameters
-                        .Value
+                    && typeParameters.Value
                         .Any(typeParameter => typeParameter.Identifier.ValueText == name);
             }
         }

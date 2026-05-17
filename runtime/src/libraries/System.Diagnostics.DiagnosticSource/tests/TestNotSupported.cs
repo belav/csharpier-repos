@@ -19,8 +19,7 @@ namespace System.Diagnostics.Metrics.Tests
         public void IsSupportedSwitch(bool value)
         {
             RemoteInvokeOptions options = new RemoteInvokeOptions();
-            options
-                .RuntimeConfigurationOptions
+            options.RuntimeConfigurationOptions
                 .Add("System.Diagnostics.Metrics.Meter.IsSupported", value);
 
             RemoteExecutor

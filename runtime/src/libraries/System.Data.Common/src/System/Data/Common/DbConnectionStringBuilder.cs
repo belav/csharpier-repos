@@ -39,8 +39,7 @@ namespace System.Data.Common
         private readonly bool _useOdbcRules;
 
         private static int s_objectTypeCount; // Bid counter
-        internal readonly int _objectID = System
-            .Threading
+        internal readonly int _objectID = System.Threading
             .Interlocked
             .Increment(ref s_objectTypeCount);
 
@@ -86,8 +85,7 @@ namespace System.Data.Common
         {
             get
             {
-                DataCommonEventSource
-                    .Log
+                DataCommonEventSource.Log
                     .Trace(
                         "<comm.DbConnectionStringBuilder.get_Item|API> {0}, keyword='{1}'",
                         ObjectID,
@@ -147,8 +145,7 @@ namespace System.Data.Common
         {
             get
             {
-                DataCommonEventSource
-                    .Log
+                DataCommonEventSource.Log
                     .Trace(
                         "<comm.DbConnectionStringBuilder.get_ConnectionString|API> {0}",
                         ObjectID
@@ -174,8 +171,7 @@ namespace System.Data.Common
             }
             set
             {
-                DataCommonEventSource
-                    .Log
+                DataCommonEventSource.Log
                     .Trace(
                         "<comm.DbConnectionStringBuilder.set_ConnectionString|API> {0}",
                         ObjectID
@@ -237,8 +233,7 @@ namespace System.Data.Common
         {
             get
             {
-                DataCommonEventSource
-                    .Log
+                DataCommonEventSource.Log
                     .Trace("<comm.DbConnectionStringBuilder.Keys|API> {0}", ObjectID);
                 return Dictionary.Keys;
             }
@@ -259,8 +254,7 @@ namespace System.Data.Common
         {
             get
             {
-                DataCommonEventSource
-                    .Log
+                DataCommonEventSource.Log
                     .Trace("<comm.DbConnectionStringBuilder.Values|API> {0}", ObjectID);
                 ICollection<string> keys = (ICollection<string>)Keys;
                 IEnumerator<string> keylist = keys.GetEnumerator();
@@ -332,8 +326,7 @@ namespace System.Data.Common
 
         void ICollection.CopyTo(Array array, int index)
         {
-            DataCommonEventSource
-                .Log
+            DataCommonEventSource.Log
                 .Trace("<comm.DbConnectionStringBuilder.ICollection.CopyTo|API> {0}", ObjectID);
             Collection.CopyTo(array, index);
         }
@@ -342,8 +335,7 @@ namespace System.Data.Common
         {
             ADP.CheckArgumentNull(connectionStringBuilder, nameof(connectionStringBuilder));
 
-            DataCommonEventSource
-                .Log
+            DataCommonEventSource.Log
                 .Trace(
                     "<comm.DbConnectionStringBuilder.EquivalentTo|API> {0}, connectionStringBuilder={1}",
                     ObjectID,
@@ -372,8 +364,7 @@ namespace System.Data.Common
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            DataCommonEventSource
-                .Log
+            DataCommonEventSource.Log
                 .Trace(
                     "<comm.DbConnectionStringBuilder.IEnumerable.GetEnumerator|API> {0}",
                     ObjectID
@@ -383,8 +374,7 @@ namespace System.Data.Common
 
         IDictionaryEnumerator IDictionary.GetEnumerator()
         {
-            DataCommonEventSource
-                .Log
+            DataCommonEventSource.Log
                 .Trace(
                     "<comm.DbConnectionStringBuilder.IDictionary.GetEnumerator|API> {0}",
                     ObjectID
@@ -412,8 +402,7 @@ namespace System.Data.Common
 
         public virtual bool Remove(string keyword)
         {
-            DataCommonEventSource
-                .Log
+            DataCommonEventSource.Log
                 .Trace(
                     "<comm.DbConnectionStringBuilder.Remove|API> {0}, keyword='{1}'",
                     ObjectID,
@@ -468,8 +457,7 @@ namespace System.Data.Common
             PropertyDescriptorCollection? propertyDescriptors = _propertyDescriptors;
             if (null == propertyDescriptors)
             {
-                long logScopeId = DataCommonEventSource
-                    .Log
+                long logScopeId = DataCommonEventSource.Log
                     .EnterScope(
                         "<comm.DbConnectionStringBuilder.GetProperties|INFO> {0}",
                         ObjectID
@@ -504,8 +492,7 @@ namespace System.Data.Common
         )]
         protected virtual void GetProperties(Hashtable propertyDescriptors)
         {
-            long logScopeId = DataCommonEventSource
-                .Log
+            long logScopeId = DataCommonEventSource.Log
                 .EnterScope("<comm.DbConnectionStringBuilder.GetProperties|API> {0}", ObjectID);
             try
             {
@@ -585,11 +572,9 @@ namespace System.Data.Common
 
                             Attribute[]? useAttributes = null;
                             if (
-                                StringComparer
-                                    .OrdinalIgnoreCase
+                                StringComparer.OrdinalIgnoreCase
                                     .Equals(DbConnectionStringKeywords.Password, keyword)
-                                || StringComparer
-                                    .OrdinalIgnoreCase
+                                || StringComparer.OrdinalIgnoreCase
                                     .Equals(DbConnectionStringSynonyms.Pwd, keyword)
                             )
                             {

@@ -67,8 +67,7 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting
             CancellationToken cancellationToken
         )
         {
-            var location = await definitionItem
-                .UnderlyingObject
+            var location = await definitionItem.UnderlyingObject
                 .GetNavigableLocationAsync(workspace, cancellationToken)
                 .ConfigureAwait(false);
             return location != null

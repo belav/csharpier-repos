@@ -41,8 +41,7 @@ namespace System.Net
         {
             Listener = listener;
 
-            uint statusCode = Interop
-                .HttpApi
+            uint statusCode = Interop.HttpApi
                 .HttpCreateRequestQueue(
                     Interop.HttpApi.s_version,
                     null!,
@@ -59,8 +58,7 @@ namespace System.Net
             // Disabling callbacks when IO operation completes synchronously (returns ErrorCodes.ERROR_SUCCESS)
             if (
                 HttpListener.SkipIOCPCallbackOnSuccess
-                && !Interop
-                    .Kernel32
+                && !Interop.Kernel32
                     .SetFileCompletionNotificationModes(
                         requestQueueHandle,
                         Interop.Kernel32.FileCompletionNotificationModes.SkipCompletionPortOnSuccess

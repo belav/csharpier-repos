@@ -30,8 +30,7 @@ namespace Microsoft.VisualStudio.Extensibility.Testing
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
-            await TestServices
-                .Shell
+            await TestServices.Shell
                 .ExecuteCommandAsync(VSConstants.VSStd12CmdID.NavigateTo, cancellationToken);
 
             return await WaitForNavigateToFocusAsync(cancellationToken);
@@ -45,8 +44,7 @@ namespace Microsoft.VisualStudio.Extensibility.Testing
                     cancellationToken.ThrowIfCancellationRequested();
 
                     // Take no direct action regarding activation, but assert the correct item already has focus
-                    TestServices
-                        .JoinableTaskFactory
+                    TestServices.JoinableTaskFactory
                         .Run(async () =>
                         {
                             await TestServices.JoinableTaskFactory.SwitchToMainThreadAsync();
@@ -182,8 +180,7 @@ namespace Microsoft.VisualStudio.Extensibility.Testing
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
-            var dispatcher = await TestServices
-                .Shell
+            var dispatcher = await TestServices.Shell
                 .GetRequiredGlobalServiceAsync<SUIHostCommandDispatcher, IOleCommandTarget>(
                     cancellationToken
                 );
@@ -251,8 +248,7 @@ namespace Microsoft.VisualStudio.Extensibility.Testing
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
-            var dispatcher = await TestServices
-                .Shell
+            var dispatcher = await TestServices.Shell
                 .GetRequiredGlobalServiceAsync<SUIHostCommandDispatcher, IOleCommandTarget>(
                     cancellationToken
                 );

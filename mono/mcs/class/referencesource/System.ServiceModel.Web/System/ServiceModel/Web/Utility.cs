@@ -204,8 +204,7 @@ namespace System.ServiceModel.Web
             catch (FormatException e)
             {
                 // Return null to indicate that the content type creation failed
-                System
-                    .ServiceModel
+                System.ServiceModel
                     .DiagnosticUtility
                     .TraceHandledException(e, TraceEventType.Warning);
             }

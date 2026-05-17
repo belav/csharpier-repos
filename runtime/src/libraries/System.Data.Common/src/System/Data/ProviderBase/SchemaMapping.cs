@@ -382,12 +382,10 @@ namespace System.Data.ProviderBase
                                 case SqlXml: // turn string into a SqlXml value for DataColumn
                                     System.Xml.XmlReaderSettings settings =
                                         new System.Xml.XmlReaderSettings();
-                                    settings.ConformanceLevel = System
-                                        .Xml
+                                    settings.ConformanceLevel = System.Xml
                                         .ConformanceLevel
                                         .Fragment;
-                                    System.Xml.XmlReader reader = System
-                                        .Xml
+                                    System.Xml.XmlReader reader = System.Xml
                                         .XmlReader
                                         .Create(
                                             new System.IO.StringReader(xml),

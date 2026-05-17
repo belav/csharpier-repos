@@ -27,8 +27,7 @@ namespace System.ServiceModel.Dispatcher
         {
             if (workflowDefinition == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("workflowDefinition");
             }
 
@@ -53,9 +52,8 @@ namespace System.ServiceModel.Dispatcher
                     {
                         if (canCreateInstance)
                         {
-                            this.workflowInstance = this.workflowDefinition.CreateWorkflow(
-                                this.InstanceId
-                            );
+                            this.workflowInstance = this.workflowDefinition
+                                .CreateWorkflow(this.InstanceId);
                             shouldCreateNew = false;
 
                             if (DiagnosticUtility.ShouldTraceInformation)
@@ -89,8 +87,7 @@ namespace System.ServiceModel.Dispatcher
                                     .InstanceLifeTimeManager
                                     .CleanUp(this.InstanceId);
                             }
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
                                     new FaultException(new DurableDispatcherAddressingFault())
                                 );

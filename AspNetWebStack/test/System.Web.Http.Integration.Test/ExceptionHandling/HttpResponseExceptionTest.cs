@@ -64,8 +64,7 @@ namespace System.Web.Http.ExceptionHandling
                         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
                         Assert.Equal(
                             "Hello World!",
-                            await response
-                                .Content
+                            await response.Content
                                 .ReadAsAsync<string>(
                                     new List<MediaTypeFormatter>() { new JsonMediaTypeFormatter() }
                                 )
@@ -76,8 +75,7 @@ namespace System.Web.Http.ExceptionHandling
                         Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
                         Assert.Equal(
                             String.Format("Error at {0}", throwAt),
-                            await response
-                                .Content
+                            await response.Content
                                 .ReadAsAsync<string>(
                                     new List<MediaTypeFormatter>() { new JsonMediaTypeFormatter() }
                                 )
@@ -86,8 +84,7 @@ namespace System.Web.Http.ExceptionHandling
                 },
                 config =>
                 {
-                    config
-                        .Services
+                    config.Services
                         .Replace(typeof(IContentNegotiator), new CustomContentNegotiator(throwAt));
 
                     config.MessageHandlers.Add(new CustomMessageHandler(throwAt));

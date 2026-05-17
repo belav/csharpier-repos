@@ -22,8 +22,7 @@ internal static partial class AddImportPlacementOptionsProviders
         var syntaxTree = await document
             .GetRequiredSyntaxTreeAsync(cancellationToken)
             .ConfigureAwait(false);
-        var configOptions = document
-            .Project
+        var configOptions = document.Project
             .AnalyzerOptions
             .AnalyzerConfigOptionsProvider
             .GetOptions(syntaxTree)

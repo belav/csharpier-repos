@@ -33,8 +33,7 @@ namespace System.Web.UI
                 if (!_resourceLoaded)
                 {
                     _resourceLoaded = true;
-                    DescriptionValue = AtlasWeb
-                        .ResourceManager
+                    DescriptionValue = AtlasWeb.ResourceManager
                         .GetString(_descriptionResourceName, AtlasWeb.Culture);
                 }
                 return base.Description;

@@ -101,8 +101,7 @@ public class InterlockedIncrement1
     {
         if (exValue != nwValue)
         {
-            TestLibrary
-                .TestFramework
+            TestLibrary.TestFramework
                 .LogError(
                     "003",
                     "Interlocked.Increment() returned wrong value. Expected("
@@ -115,8 +114,7 @@ public class InterlockedIncrement1
         }
         if (exValue != value)
         {
-            TestLibrary
-                .TestFramework
+            TestLibrary.TestFramework
                 .LogError(
                     "003",
                     "Interlocked.Increment() did not update value. Expected("

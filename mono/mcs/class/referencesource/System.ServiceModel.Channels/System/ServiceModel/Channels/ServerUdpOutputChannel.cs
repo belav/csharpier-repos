@@ -348,8 +348,7 @@ namespace System.ServiceModel.Channels
             {
                 if (isVia)
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(
                             new InvalidOperationException(
                                 SR.ViaUriIsNotValid(
@@ -361,8 +360,7 @@ namespace System.ServiceModel.Channels
                 }
                 else
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(
                             new InvalidOperationException(
                                 SR.ToAddressIsNotValid(
@@ -378,8 +376,7 @@ namespace System.ServiceModel.Channels
             {
                 if (isVia)
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(
                             new InvalidOperationException(
                                 SR.ViaUriIsNotValid(
@@ -391,8 +388,7 @@ namespace System.ServiceModel.Channels
                 }
                 else
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(
                             new InvalidOperationException(
                                 SR.ToAddressIsNotValid(

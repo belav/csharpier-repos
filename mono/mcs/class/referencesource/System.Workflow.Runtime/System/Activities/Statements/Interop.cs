@@ -224,8 +224,7 @@ namespace System.Activities.Statements
                 //Create matched pair of RuntimeArguments for every property: Property (InArgument) & PropertyOut (Argument)
                 PropertyInfo[] bodyProperties = this.ActivityType.GetProperties();
                 // recheck for name collisions
-                this.hasNameCollision = InteropEnvironment
-                    .ParameterHelper
+                this.hasNameCollision = InteropEnvironment.ParameterHelper
                     .HasPropertyNameCollision(bodyProperties);
                 foreach (PropertyInfo propertyInfo in bodyProperties)
                 {
@@ -446,11 +445,9 @@ namespace System.Activities.Statements
 
             //Register the Handle as an execution property so that we can call GetCurrentTransaction or
             //RequestTransactionContext on it later
-            RuntimeTransactionHandle runtimeTransactionHandle = this.runtimeTransactionHandle.Get(
-                context
-            );
-            context
-                .Properties
+            RuntimeTransactionHandle runtimeTransactionHandle = this.runtimeTransactionHandle
+                .Get(context);
+            context.Properties
                 .Add(runtimeTransactionHandle.ExecutionPropertyName, runtimeTransactionHandle);
 
             try
@@ -737,16 +734,14 @@ namespace System.Activities.Statements
                     //Create matched pair of RuntimeArguments for every property: Property (InArgument) & PropertyOut (Argument)
                     PropertyInfo[] bodyProperties = this.ActivityType.GetProperties();
                     // recheck for name collisions
-                    this.hasNameCollision = InteropEnvironment
-                        .ParameterHelper
+                    this.hasNameCollision = InteropEnvironment.ParameterHelper
                         .HasPropertyNameCollision(bodyProperties);
                     for (int i = 0; i < bodyProperties.Length; i++)
                     {
                         PropertyInfo property = bodyProperties[i];
                         bool isMetaProperty;
                         if (
-                            InteropEnvironment
-                                .ParameterHelper
+                            InteropEnvironment.ParameterHelper
                                 .IsBindableOrMetaProperty(property, out isMetaProperty)
                         )
                         {
@@ -1034,8 +1029,7 @@ namespace System.Activities.Statements
                 if (enlistment == null || !enlistment.IsValid)
                 {
                     enlistment = new InteropEnlistment(Transaction.Current, resourceManager);
-                    Transaction
-                        .Current
+                    Transaction.Current
                         .EnlistVolatile(enlistment, EnlistmentOptions.EnlistDuringPrepareRequired);
                     this.interopEnlistment.Set(context, enlistment);
                 }
@@ -1280,9 +1274,8 @@ namespace System.Activities.Statements
 
             protected override bool Execute(CodeActivityContext context)
             {
-                HashSet<InteropValidationEnum> validationResults = this.ValidationResults.Get(
-                    context
-                );
+                HashSet<InteropValidationEnum> validationResults = this.ValidationResults
+                    .Get(context);
                 if (validationResults.Contains(InteropValidationEnum.TransactionScope))
                 {
                     return false;
@@ -1304,8 +1297,8 @@ namespace System.Activities.Statements
             {
                 HashSet<InteropValidationEnum> nestedValidationData =
                     this.NestedChildrenValidationData.Get(context);
-                HashSet<InteropValidationEnum> rootValidationData =
-                    this.RootLevelValidationData.Get(context);
+                HashSet<InteropValidationEnum> rootValidationData = this.RootLevelValidationData
+                    .Get(context);
 
                 if (
                     nestedValidationData.Contains(InteropValidationEnum.PersistOnClose)
@@ -1336,9 +1329,8 @@ namespace System.Activities.Statements
                 Interop activity = this.Interop.Get(context);
 
                 foreach (
-                    InteropValidationEnum validationEnum in this.RootLevelValidationData.Get(
-                        context
-                    )
+                    InteropValidationEnum validationEnum in this.RootLevelValidationData
+                        .Get(context)
                 )
                 {
                     //We care to mark PersistOnClose during the walking algorithm because we need to check if it happens under a 4.0 TransactionScopActivity and flag that
@@ -1356,9 +1348,8 @@ namespace System.Activities.Statements
                 }
 
                 foreach (
-                    InteropValidationEnum validationEnum in this.NestedChildrenValidationData.Get(
-                        context
-                    )
+                    InteropValidationEnum validationEnum in this.NestedChildrenValidationData
+                        .Get(context)
                 )
                 {
                     //We care to mark PersistOnClose or TransactionScope during the walking algorithm because we need to check if it happens under a 4.0 TransactionScopActivity and flag that
@@ -2048,9 +2039,8 @@ namespace System.Activities.Statements
                 if (e.Transaction.TransactionInformation.Status == TransactionStatus.Committed)
                 {
                     foreach (
-                        VolatileResourceManager rm in this.CommittedResourceManagers[
-                            e.Transaction
-                        ].Values
+                        VolatileResourceManager rm in this.CommittedResourceManagers[e.Transaction]
+                            .Values
                     )
                     {
                         rm.Complete();
@@ -2059,9 +2049,8 @@ namespace System.Activities.Statements
                 else
                 {
                     foreach (
-                        VolatileResourceManager rm in this.CommittedResourceManagers[
-                            e.Transaction
-                        ].Values
+                        VolatileResourceManager rm in this.CommittedResourceManagers[e.Transaction]
+                            .Values
                     )
                     {
                         rm.ClearAllBatchedWork();

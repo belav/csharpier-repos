@@ -94,8 +94,7 @@ namespace Microsoft.Extensions.Hosting.Internal
         {
             if (!Options.SuppressStatusMessages)
             {
-                _applicationStartedRegistration = ApplicationLifetime
-                    .ApplicationStarted
+                _applicationStartedRegistration = ApplicationLifetime.ApplicationStarted
                     .Register(
                         state =>
                         {
@@ -103,8 +102,7 @@ namespace Microsoft.Extensions.Hosting.Internal
                         },
                         this
                     );
-                _applicationStoppingRegistration = ApplicationLifetime
-                    .ApplicationStopping
+                _applicationStoppingRegistration = ApplicationLifetime.ApplicationStopping
                     .Register(
                         state =>
                         {

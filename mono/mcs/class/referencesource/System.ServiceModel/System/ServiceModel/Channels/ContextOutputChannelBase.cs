@@ -158,12 +158,13 @@ namespace System.ServiceModel.Channels
 
                         if (this.correlationCallback.IsFullyDefined)
                         {
-                            IAsyncResult result = this.correlationCallback.BeginFinalizeCorrelation(
-                                this.message,
-                                this.timeoutHelper.RemainingTime(),
-                                onFinalizeCorrelation,
-                                this
-                            );
+                            IAsyncResult result = this.correlationCallback
+                                .BeginFinalizeCorrelation(
+                                    this.message,
+                                    this.timeoutHelper.RemainingTime(),
+                                    onFinalizeCorrelation,
+                                    this
+                                );
                             if (result.CompletedSynchronously)
                             {
                                 if (OnFinalizeCorrelationCompleted(result))

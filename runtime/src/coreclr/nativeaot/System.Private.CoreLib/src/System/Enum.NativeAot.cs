@@ -52,8 +52,7 @@ namespace System
             );
 
             return (EnumInfo<TStorage>)
-                ReflectionAugments
-                    .ReflectionCoreCallbacks
+                ReflectionAugments.ReflectionCoreCallbacks
                     .GetEnumInfo(
                         enumType,
                         static (underlyingType, names, valuesAsObject, isFlags) =>

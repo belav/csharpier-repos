@@ -389,8 +389,7 @@ public class AuthorizeRouteViewTest
 
         // Assert
         var batch = _renderer.Batches.Single();
-        var componentInstances = batch
-            .ReferenceFrames
+        var componentInstances = batch.ReferenceFrames
             .Where(f => f.FrameType == RenderTreeFrameType.Component)
             .Select(f => f.Component);
 
@@ -425,8 +424,7 @@ public class AuthorizeRouteViewTest
 
         // Assert
         var batch = _renderer.Batches.Single();
-        var componentInstances = batch
-            .ReferenceFrames
+        var componentInstances = batch.ReferenceFrames
             .Where(f => f.FrameType == RenderTreeFrameType.Component)
             .Select(f => f.Component);
 
@@ -468,8 +466,7 @@ public class AuthorizeRouteViewTest
             typeof(TestPageRequiringAuthorization),
             EmptyParametersDictionary
         );
-        var render2Task = _renderer
-            .Dispatcher
+        var render2Task = _renderer.Dispatcher
             .InvokeAsync(() =>
                 _authorizeRouteViewComponent.SetParametersAsync(
                     ParameterView.FromDictionary(

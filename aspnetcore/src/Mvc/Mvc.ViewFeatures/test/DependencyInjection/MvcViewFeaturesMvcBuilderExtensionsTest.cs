@@ -144,8 +144,7 @@ public class MvcViewFeaturesMvcBuilderExtensionsTest
         var services = new ServiceCollection();
 
         var manager = new ApplicationPartManager();
-        manager
-            .ApplicationParts
+        manager.ApplicationParts
             .Add(
                 new TestApplicationPart(
                     typeof(ConventionsViewComponent),

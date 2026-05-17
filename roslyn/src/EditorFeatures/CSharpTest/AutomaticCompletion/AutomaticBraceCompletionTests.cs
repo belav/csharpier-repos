@@ -838,8 +838,7 @@ class C
             {
                 {
                     CSharpFormattingOptions2.NewLineBeforeOpenBrace,
-                    CSharpFormattingOptions2
-                        .NewLineBeforeOpenBrace
+                    CSharpFormattingOptions2.NewLineBeforeOpenBrace
                         .DefaultValue
                         .WithFlagValue(
                             NewLineBeforeOpenBracePlacement.ObjectCollectionArrayInitializers,
@@ -927,8 +926,7 @@ class Goo
             {
                 {
                     CSharpFormattingOptions2.NewLineBeforeOpenBrace,
-                    CSharpFormattingOptions2
-                        .NewLineBeforeOpenBrace
+                    CSharpFormattingOptions2.NewLineBeforeOpenBrace
                         .DefaultValue
                         .WithFlagValue(
                             NewLineBeforeOpenBracePlacement.ObjectCollectionArrayInitializers,
@@ -1012,8 +1010,7 @@ class Goo
             {
                 {
                     CSharpFormattingOptions2.NewLineBeforeOpenBrace,
-                    CSharpFormattingOptions2
-                        .NewLineBeforeOpenBrace
+                    CSharpFormattingOptions2.NewLineBeforeOpenBrace
                         .DefaultValue
                         .WithFlagValue(
                             NewLineBeforeOpenBracePlacement.ObjectCollectionArrayInitializers,
@@ -1087,8 +1084,7 @@ class Goo
             {
                 {
                     CSharpFormattingOptions2.NewLineBeforeOpenBrace,
-                    CSharpFormattingOptions2
-                        .NewLineBeforeOpenBrace
+                    CSharpFormattingOptions2.NewLineBeforeOpenBrace
                         .DefaultValue
                         .WithFlagValue(
                             NewLineBeforeOpenBracePlacement.ObjectCollectionArrayInitializers,
@@ -1162,8 +1158,7 @@ class Goo
             {
                 {
                     CSharpFormattingOptions2.NewLineBeforeOpenBrace,
-                    CSharpFormattingOptions2
-                        .NewLineBeforeOpenBrace
+                    CSharpFormattingOptions2.NewLineBeforeOpenBrace
                         .DefaultValue
                         .WithFlagValue(
                             NewLineBeforeOpenBracePlacement.ObjectCollectionArrayInitializers,
@@ -1521,8 +1516,7 @@ record R
             {
                 {
                     CSharpFormattingOptions2.NewLineBeforeOpenBrace,
-                    CSharpFormattingOptions2
-                        .NewLineBeforeOpenBrace
+                    CSharpFormattingOptions2.NewLineBeforeOpenBrace
                         .DefaultValue
                         .WithFlagValue(
                             NewLineBeforeOpenBracePlacement.ObjectCollectionArrayInitializers,
@@ -1577,8 +1571,7 @@ class C
             {
                 {
                     CSharpFormattingOptions2.NewLineBeforeOpenBrace,
-                    CSharpFormattingOptions2
-                        .NewLineBeforeOpenBrace
+                    CSharpFormattingOptions2.NewLineBeforeOpenBrace
                         .DefaultValue
                         .WithFlagValue(
                             NewLineBeforeOpenBracePlacement.ObjectCollectionArrayInitializers,
@@ -1633,8 +1626,7 @@ class C
             {
                 {
                     CSharpFormattingOptions2.NewLineBeforeOpenBrace,
-                    CSharpFormattingOptions2
-                        .NewLineBeforeOpenBrace
+                    CSharpFormattingOptions2.NewLineBeforeOpenBrace
                         .DefaultValue
                         .WithFlagValue(NewLineBeforeOpenBracePlacement.Accessors, bracesOnNewLine)
                 },
@@ -1686,8 +1678,7 @@ class C
             {
                 {
                     CSharpFormattingOptions2.NewLineBeforeOpenBrace,
-                    CSharpFormattingOptions2
-                        .NewLineBeforeOpenBrace
+                    CSharpFormattingOptions2.NewLineBeforeOpenBrace
                         .DefaultValue
                         .WithFlagValue(
                             NewLineBeforeOpenBracePlacement.AnonymousMethods,
@@ -1742,8 +1733,7 @@ class C
             {
                 {
                     CSharpFormattingOptions2.NewLineBeforeOpenBrace,
-                    CSharpFormattingOptions2
-                        .NewLineBeforeOpenBrace
+                    CSharpFormattingOptions2.NewLineBeforeOpenBrace
                         .DefaultValue
                         .WithFlagValue(
                             NewLineBeforeOpenBracePlacement.AnonymousTypes,
@@ -1799,8 +1789,7 @@ class C
             {
                 {
                     CSharpFormattingOptions2.NewLineBeforeOpenBrace,
-                    CSharpFormattingOptions2
-                        .NewLineBeforeOpenBrace
+                    CSharpFormattingOptions2.NewLineBeforeOpenBrace
                         .DefaultValue
                         .WithFlagValue(
                             NewLineBeforeOpenBracePlacement.ControlBlocks,
@@ -1862,8 +1851,7 @@ class C
             {
                 {
                     CSharpFormattingOptions2.NewLineBeforeOpenBrace,
-                    CSharpFormattingOptions2
-                        .NewLineBeforeOpenBrace
+                    CSharpFormattingOptions2.NewLineBeforeOpenBrace
                         .DefaultValue
                         .WithFlagValue(
                             NewLineBeforeOpenBracePlacement.ControlBlocks,

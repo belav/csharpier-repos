@@ -44,10 +44,11 @@ namespace System.Threading.Tasks.Dataflow.Tests
                         new DataflowLinkOptions { PropagateCompletion = false }
                     );
                 }
-                _ = Task.Factory.ContinueWhenAll(
-                    transformBlocks.Select(b => b.Completion).ToArray(),
-                    _ => actionBlock.Complete()
-                );
+                _ = Task.Factory
+                    .ContinueWhenAll(
+                        transformBlocks.Select(b => b.Completion).ToArray(),
+                        _ => actionBlock.Complete()
+                    );
 
                 const int ItemCount = 40;
                 for (int item = 0; item < ItemCount; item++)

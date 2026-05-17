@@ -72,8 +72,7 @@ namespace System.Data.Services.Common
             Debug.Assert(targetSegment.HasContent, "Must have content for attributes");
 
             EpmCustomContentWriterNodeData currentContent = this.visitorContent[targetSegment];
-            currentContent
-                .XmlContentWriter
+            currentContent.XmlContentWriter
                 .WriteAttributeString(
                     targetSegment.SegmentNamespacePrefix,
                     targetSegment.SegmentName.Substring(1),
@@ -86,8 +85,7 @@ namespace System.Data.Services.Common
         {
             EpmCustomContentWriterNodeData currentContent = this.visitorContent[targetSegment];
 
-            currentContent
-                .XmlContentWriter
+            currentContent.XmlContentWriter
                 .WriteStartElement(
                     targetSegment.SegmentNamespacePrefix,
                     targetSegment.SegmentName,
@@ -119,10 +117,11 @@ namespace System.Data.Services.Common
 
             foreach (EpmTargetPathSegment subSegmentOfRoot in this.Root.SubSegments)
             {
-                this.visitorContent.Add(
-                    subSegmentOfRoot,
-                    new EpmCustomContentWriterNodeData(subSegmentOfRoot, this.Element)
-                );
+                this.visitorContent
+                    .Add(
+                        subSegmentOfRoot,
+                        new EpmCustomContentWriterNodeData(subSegmentOfRoot, this.Element)
+                    );
                 this.InitializeSubSegmentVisitorContent(subSegmentOfRoot);
             }
         }
@@ -131,14 +130,15 @@ namespace System.Data.Services.Common
         {
             foreach (EpmTargetPathSegment segment in subSegment.SubSegments)
             {
-                this.visitorContent.Add(
-                    segment,
-                    new EpmCustomContentWriterNodeData(
-                        this.visitorContent[subSegment],
+                this.visitorContent
+                    .Add(
                         segment,
-                        this.Element
-                    )
-                );
+                        new EpmCustomContentWriterNodeData(
+                            this.visitorContent[subSegment],
+                            segment,
+                            this.Element
+                        )
+                    );
                 this.InitializeSubSegmentVisitorContent(segment);
             }
         }

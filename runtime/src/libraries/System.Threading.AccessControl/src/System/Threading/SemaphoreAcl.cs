@@ -66,8 +66,7 @@ namespace System.Threading
                     lpSecurityDescriptor = pSecurityDescriptor,
                 };
 
-                SafeWaitHandle handle = Interop
-                    .Kernel32
+                SafeWaitHandle handle = Interop.Kernel32
                     .CreateSemaphoreEx(
                         (IntPtr)(&secAttrs),
                         initialCount,

@@ -93,8 +93,7 @@ namespace System.IO.Strategies
             }
 
             CheckFileCall(
-                Interop
-                    .Sys
+                Interop.Sys
                     .LockFileRegion(
                         handle,
                         position,

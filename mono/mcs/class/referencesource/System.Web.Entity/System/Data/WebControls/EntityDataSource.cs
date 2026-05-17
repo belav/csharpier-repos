@@ -277,8 +277,7 @@ namespace System.Web.UI.WebControls
 
                 if (!String.IsNullOrEmpty(value) && System.Web.Hosting.HostingEnvironment.IsHosted)
                 {
-                    _contextType = System
-                        .Web
+                    _contextType = System.Web
                         .Compilation
                         .BuildManager
                         .GetType(

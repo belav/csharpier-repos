@@ -426,8 +426,7 @@ namespace System.Security.Policy
                 {
                     try
                     {
-                        membershipCondition = System
-                            .Security
+                        membershipCondition = System.Security
                             .Util
                             .XMLUtil
                             .CreateMembershipCondition(elMembershipCondition);
@@ -601,8 +600,7 @@ namespace System.Security.Policy
                         CodeGroupPositionMarker marker = (CodeGroupPositionMarker)
                             enumerator.Current;
 
-                        CodeGroup group = System
-                            .Security
+                        CodeGroup group = System.Security
                             .Util
                             .XMLUtil
                             .CreateCodeGroup(marker.element);
@@ -624,8 +622,7 @@ namespace System.Security.Policy
 
                             // Add the element back into the child list in the proper spot.
 
-                            m_element
-                                .InternalChildren
+                            m_element.InternalChildren
                                 .Insert(marker.elementIndex, marker.element);
                         }
                         else

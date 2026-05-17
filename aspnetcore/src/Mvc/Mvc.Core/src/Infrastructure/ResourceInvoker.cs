@@ -106,8 +106,7 @@ internal abstract partial class ResourceInvoker
             {
                 var logger = invoker._logger;
 
-                invoker
-                    ._diagnosticListener
+                invoker._diagnosticListener
                     .BeforeAction(
                         actionContext.ActionDescriptor,
                         actionContext.HttpContext,
@@ -143,8 +142,7 @@ internal abstract partial class ResourceInvoker
             }
             finally
             {
-                invoker
-                    ._diagnosticListener
+                invoker._diagnosticListener
                     .AfterAction(
                         actionContext.ActionDescriptor,
                         actionContext.HttpContext,

@@ -37,8 +37,7 @@ namespace System.ServiceModel.Activities.Description
             {
                 if (value < TimeSpan.Zero)
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .ArgumentOutOfRange("value", value, SR.ErrorTimeToPersistLessThanZero);
                 }
                 this.timeToPersist = value;
@@ -52,8 +51,7 @@ namespace System.ServiceModel.Activities.Description
             {
                 if (value < TimeSpan.Zero)
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .ArgumentOutOfRange("value", value, SR.ErrorTimeToUnloadLessThanZero);
                 }
                 this.timeToUnload = value;

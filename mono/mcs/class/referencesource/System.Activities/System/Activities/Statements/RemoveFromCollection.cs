@@ -63,8 +63,7 @@ namespace System.Activities.Statements
             ICollection<T> collection = this.Collection.Get(context);
             if (collection == null)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new InvalidOperationException(
                             SR.CollectionActivityRequiresCollection(this.DisplayName)

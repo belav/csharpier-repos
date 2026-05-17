@@ -294,15 +294,13 @@ namespace Internal.TypeSystem
             {
                 protected override int GetKeyHashCode(InstantiatedTypeKey key)
                 {
-                    return key._instantiation.ComputeGenericInstanceHashCode(
-                        key._typeDef.GetHashCode()
-                    );
+                    return key._instantiation
+                        .ComputeGenericInstanceHashCode(key._typeDef.GetHashCode());
                 }
 
                 protected override int GetValueHashCode(InstantiatedType value)
                 {
-                    return value
-                        .Instantiation
+                    return value.Instantiation
                         .ComputeGenericInstanceHashCode(value.GetTypeDefinition().GetHashCode());
                 }
 

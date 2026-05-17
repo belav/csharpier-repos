@@ -55,8 +55,7 @@ namespace System.Activities
             ValidateAccessor(context);
             if (!this.allowGetLocation)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new InvalidOperationException(
                             SR.GetLocationOnPublicAccessReference(context.Activity)
@@ -71,8 +70,7 @@ namespace System.Activities
             ValidateAccessor(context);
             if (!this.allowReads)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new InvalidOperationException(
                             SR.ReadAccessToWriteOnlyPublicReference(context.Activity)
@@ -87,8 +85,7 @@ namespace System.Activities
             ValidateAccessor(context);
             if (!this.allowWrites)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new InvalidOperationException(
                             SR.WriteAccessToReadOnlyPublicReference(context.Activity)
@@ -106,8 +103,7 @@ namespace System.Activities
 
             if (!object.ReferenceEquals(context.Activity, this.validAccessor))
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new InvalidOperationException(
                             SR.InlinedLocationReferenceOnlyAccessibleByOwner(

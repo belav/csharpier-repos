@@ -1784,8 +1784,7 @@ namespace System.Web.UI.DataVisualization.Charting
                     // Insert area
                     if (angle == 0)
                     {
-                        common
-                            .HotRegionsList
+                        common.HotRegionsList
                             .AddHotRegion(backPosition, point, series.Name, pointIndex);
                     }
                     else
@@ -1797,8 +1796,7 @@ namespace System.Web.UI.DataVisualization.Charting
                             path.Transform(_myMatrix);
 
                             // Add hot region
-                            common
-                                .HotRegionsList
+                            common.HotRegionsList
                                 .AddHotRegion(path, false, this, point, series.Name, pointIndex);
                         }
                     }
@@ -2010,8 +2008,7 @@ namespace System.Web.UI.DataVisualization.Charting
                 CommonElements common = axis.Common;
                 if (common.ProcessModeRegions)
                 {
-                    common
-                        .HotRegionsList
+                    common.HotRegionsList
                         .AddHotRegion(
                             Rectangle.Round(absPosition),
                             label,
@@ -2501,8 +2498,7 @@ namespace System.Web.UI.DataVisualization.Charting
                         mapAreaAttributes = label.MapAreaAttributes;
                         postbackValue = label.PostBackValue;
 #endif // !Microsoft_CONTROL
-                        common
-                            .HotRegionsList
+                        common.HotRegionsList
                             .AddHotRegion(
                                 this,
                                 path,
@@ -2611,8 +2607,7 @@ namespace System.Web.UI.DataVisualization.Charting
                             imageMapAreaAttributes = label.ImageMapAreaAttributes;
                             postbackValue = label.PostBackValue;
 #endif // !Microsoft_CONTROL
-                            common
-                                .HotRegionsList
+                            common.HotRegionsList
                                 .AddHotRegion(
                                     this,
                                     path,
@@ -5661,8 +5656,7 @@ namespace System.Web.UI.DataVisualization.Charting
             }
 
             // Find required border interface
-            IBorderType borderTypeInterface = _common
-                .BorderTypeRegistry
+            IBorderType borderTypeInterface = _common.BorderTypeRegistry
                 .GetBorderType(borderSkin.SkinStyle.ToString());
             if (borderTypeInterface != null)
             {
@@ -6529,29 +6523,25 @@ namespace System.Web.UI.DataVisualization.Charting
         public double GetPositionFromAxis(string chartAreaName, AxisName axis, double axisValue)
         {
             if (axis == AxisName.X)
-                return _common
-                    .ChartPicture
+                return _common.ChartPicture
                     .ChartAreas[chartAreaName]
                     .AxisX
                     .GetLinearPosition(axisValue);
 
             if (axis == AxisName.X2)
-                return _common
-                    .ChartPicture
+                return _common.ChartPicture
                     .ChartAreas[chartAreaName]
                     .AxisX2
                     .GetLinearPosition(axisValue);
 
             if (axis == AxisName.Y)
-                return _common
-                    .ChartPicture
+                return _common.ChartPicture
                     .ChartAreas[chartAreaName]
                     .AxisY
                     .GetLinearPosition(axisValue);
 
             if (axis == AxisName.Y2)
-                return _common
-                    .ChartPicture
+                return _common.ChartPicture
                     .ChartAreas[chartAreaName]
                     .AxisY2
                     .GetLinearPosition(axisValue);

@@ -14,8 +14,7 @@ internal static partial class Interop
         {
             foreach (string name in Enum.GetNames<UnixFileSystemTypes>())
             {
-                System
-                    .Diagnostics
+                System.Diagnostics
                     .Debug
                     .Assert(
                         GetDriveType(name) != DriveType.Unknown,

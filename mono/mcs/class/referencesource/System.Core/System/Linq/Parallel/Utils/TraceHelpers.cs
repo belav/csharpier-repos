@@ -46,8 +46,7 @@ namespace System.Linq.Parallel
             );
             if (traceOutput != null && !String.IsNullOrEmpty(traceOutput.Trim()))
             {
-                s_traceSource
-                    .Listeners
+                s_traceSource.Listeners
                     .Add(
                         new TextWriterTraceListener(
                             new StreamWriter(

@@ -3039,8 +3039,7 @@ public class Test
             Assert.Equal((int)ErrorCode.ERR_ErrorDirective, error.Code);
             Assert.Equal(
                 "error CS1029: #error: '\u0444\u0430\u0439\u043B'",
-                CSharpDiagnosticFormatter
-                    .Instance
+                CSharpDiagnosticFormatter.Instance
                     .Format(
                         error.WithLocation(Location.None),
                         EnsureEnglishUICulture.PreferredOrNull
@@ -4571,8 +4570,7 @@ public class Test
                     .Single(node => node is AnonymousMethodExpressionSyntax);
             Assert.Equal(
                 SyntaxKind.InKeyword,
-                anonymousMethodExpression
-                    .ParameterList
+                anonymousMethodExpression.ParameterList
                     .Parameters
                     .Single()
                     .Modifiers
@@ -7261,8 +7259,7 @@ partial class X
 ";
             CreateCompilation(
                     test,
-                    parseOptions: CSharpParseOptions
-                        .Default
+                    parseOptions: CSharpParseOptions.Default
                         .WithLanguageVersion(LanguageVersion.CSharp2)
                 )
                 .VerifyDiagnostics(
@@ -7847,8 +7844,7 @@ class C
             SyntaxFactory
                 .ParseSyntaxTree(
                     text,
-                    options: TestOptions
-                        .RegularWithDocumentationComments
+                    options: TestOptions.RegularWithDocumentationComments
                         .WithLanguageVersion(LanguageVersion.CSharp2)
                 )
                 .GetDiagnostics()
@@ -7856,8 +7852,7 @@ class C
             SyntaxFactory
                 .ParseSyntaxTree(
                     text,
-                    options: TestOptions
-                        .RegularWithDocumentationComments
+                    options: TestOptions.RegularWithDocumentationComments
                         .WithLanguageVersion(LanguageVersion.CSharp1)
                 )
                 .GetDiagnostics()
@@ -7888,8 +7883,7 @@ class C { }
             SyntaxFactory
                 .ParseSyntaxTree(
                     text,
-                    options: TestOptions
-                        .RegularWithDocumentationComments
+                    options: TestOptions.RegularWithDocumentationComments
                         .WithLanguageVersion(LanguageVersion.CSharp2)
                 )
                 .GetDiagnostics()
@@ -7897,8 +7891,7 @@ class C { }
             SyntaxFactory
                 .ParseSyntaxTree(
                     text,
-                    options: TestOptions
-                        .RegularWithDocumentationComments
+                    options: TestOptions.RegularWithDocumentationComments
                         .WithLanguageVersion(LanguageVersion.CSharp1)
                 )
                 .GetDiagnostics()
@@ -7940,8 +7933,7 @@ class C { }
             SyntaxFactory
                 .ParseSyntaxTree(
                     text,
-                    options: TestOptions
-                        .RegularWithDocumentationComments
+                    options: TestOptions.RegularWithDocumentationComments
                         .WithLanguageVersion(LanguageVersion.CSharp2)
                 )
                 .GetDiagnostics()
@@ -7949,8 +7941,7 @@ class C { }
             SyntaxFactory
                 .ParseSyntaxTree(
                     text,
-                    options: TestOptions
-                        .RegularWithDocumentationComments
+                    options: TestOptions.RegularWithDocumentationComments
                         .WithLanguageVersion(LanguageVersion.CSharp1)
                 )
                 .GetDiagnostics()
@@ -7980,8 +7971,7 @@ class C { }
             SyntaxFactory
                 .ParseSyntaxTree(
                     text,
-                    options: TestOptions
-                        .RegularWithDocumentationComments
+                    options: TestOptions.RegularWithDocumentationComments
                         .WithLanguageVersion(LanguageVersion.CSharp2)
                 )
                 .GetDiagnostics()
@@ -7989,8 +7979,7 @@ class C { }
             SyntaxFactory
                 .ParseSyntaxTree(
                     text,
-                    options: TestOptions
-                        .RegularWithDocumentationComments
+                    options: TestOptions.RegularWithDocumentationComments
                         .WithLanguageVersion(LanguageVersion.CSharp1)
                 )
                 .GetDiagnostics()

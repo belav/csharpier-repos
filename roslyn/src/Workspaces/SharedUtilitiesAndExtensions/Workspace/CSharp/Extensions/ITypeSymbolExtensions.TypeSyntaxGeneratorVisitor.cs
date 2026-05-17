@@ -181,13 +181,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                         System.Reflection.Metadata.SignatureCallingConvention.Unmanaged =>
                         // All types that come from CallingConventionTypes start with "CallConv". We don't want the prefix for the actual
                         // syntax, so strip it off
-                        symbol
-                            .Signature
+                        symbol.Signature
                             .UnmanagedCallingConventionTypes
                             .IsEmpty
                             ? null
-                            : symbol
-                                .Signature
+                            : symbol.Signature
                                 .UnmanagedCallingConventionTypes
                                 .Select(type =>
                                     GetConventionForString(type.Name["CallConv".Length..])
@@ -215,8 +213,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                         );
                 }
 
-                var parameters = symbol
-                    .Signature
+                var parameters = symbol.Signature
                     .Parameters
                     .Select(p =>
                         (

@@ -35,8 +35,7 @@ namespace System.ServiceModel.Security
             foreach (RequestSecurityTokenResponse rstr in rstrCollection)
             {
                 if (rstr == null)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgumentNull(
                             String.Format(
                                 CultureInfo.InvariantCulture,
@@ -49,8 +48,7 @@ namespace System.ServiceModel.Security
             this.rstrCollection = rstrCollection;
             if (standardsManager == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("standardsManager"));
             }
             this.standardsManager = standardsManager;

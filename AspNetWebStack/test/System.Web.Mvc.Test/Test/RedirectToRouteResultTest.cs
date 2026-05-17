@@ -190,8 +190,7 @@ namespace System.Web.Mvc.Test
             // Act
             object value = tempData["Foo"];
             result.ExecuteResult(mockControllerContext.Object);
-            mockController
-                .Object
+            mockController.Object
                 .TempData
                 .Save(mockControllerContext.Object, new Mock<ITempDataProvider>().Object);
 

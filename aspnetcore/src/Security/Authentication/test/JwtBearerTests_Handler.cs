@@ -402,11 +402,9 @@ public class JwtBearerTests_Handler : SharedAuthenticationTests<JwtBearerOptions
         using var host = await CreateHost(options =>
         {
             options.TokenHandlers.Clear();
-            options
-                .TokenHandlers
+            options.TokenHandlers
                 .Add(new InvalidTokenValidator(typeof(SecurityTokenInvalidAudienceException)));
-            options
-                .TokenHandlers
+            options.TokenHandlers
                 .Add(new InvalidTokenValidator(typeof(SecurityTokenSignatureKeyNotFoundException)));
         });
 
@@ -544,8 +542,7 @@ public class JwtBearerTests_Handler : SharedAuthenticationTests<JwtBearerOptions
                 },
             };
             options.TokenHandlers.Clear();
-            options
-                .TokenHandlers
+            options.TokenHandlers
                 .Add(new BlobTokenValidator(JwtBearerDefaults.AuthenticationScheme));
         });
 
@@ -569,8 +566,7 @@ public class JwtBearerTests_Handler : SharedAuthenticationTests<JwtBearerOptions
                 },
             };
             options.TokenHandlers.Clear();
-            options
-                .TokenHandlers
+            options.TokenHandlers
                 .Add(
                     new BlobTokenValidator(
                         "JWT",
@@ -1190,8 +1186,7 @@ public class JwtBearerTests_Handler : SharedAuthenticationTests<JwtBearerOptions
         Assert.Equal(
             firstKey,
             Convert.ToBase64String(
-                jwtBearerOptions
-                    .TokenValidationParameters
+                jwtBearerOptions.TokenValidationParameters
                     .IssuerSigningKeys
                     .OfType<SymmetricSecurityKey>()
                     .FirstOrDefault()
@@ -1201,8 +1196,7 @@ public class JwtBearerTests_Handler : SharedAuthenticationTests<JwtBearerOptions
         Assert.Equal(
             secondKey,
             Convert.ToBase64String(
-                jwtBearerOptions
-                    .TokenValidationParameters
+                jwtBearerOptions.TokenValidationParameters
                     .IssuerSigningKeys
                     .OfType<SymmetricSecurityKey>()
                     .LastOrDefault()
@@ -1412,8 +1406,7 @@ public class JwtBearerTests_Handler : SharedAuthenticationTests<JwtBearerOptions
                                         return;
                                     }
 
-                                    var identifier = context
-                                        .User
+                                    var identifier = context.User
                                         .FindFirst(ClaimTypes.NameIdentifier);
                                     if (identifier == null)
                                     {
@@ -1465,13 +1458,11 @@ public class JwtBearerTests_Handler : SharedAuthenticationTests<JwtBearerOptions
                                     var authenticationResult = await context.AuthenticateAsync(
                                         JwtBearerDefaults.AuthenticationScheme
                                     );
-                                    await context
-                                        .Response
+                                    await context.Response
                                         .WriteAsJsonAsync(
                                             new
                                             {
-                                                Expires = authenticationResult
-                                                    .Properties
+                                                Expires = authenticationResult.Properties
                                                     ?.ExpiresUtc,
                                                 Issued = authenticationResult.Properties?.IssuedUtc,
                                             }

@@ -46,8 +46,7 @@ namespace System.ServiceModel.Dispatcher
                 && HttpContext.Current.User.Identity.IsAuthenticated
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new NotSupportedException(SR2.CrossDomainJavascriptAuthNotSupported)
                     );
@@ -61,8 +60,7 @@ namespace System.ServiceModel.Dispatcher
             JavascriptCallbackResponseMessageProperty javascriptCallbackResponseMessageProperty =
                 null;
             if (
-                reply
-                    .Properties
+                reply.Properties
                     .TryGetValue<WebBodyFormatMessageProperty>(
                         WebBodyFormatMessageProperty.Name,
                         out formatProperty
@@ -72,8 +70,7 @@ namespace System.ServiceModel.Dispatcher
             )
             {
                 if (
-                    !reply
-                        .Properties
+                    !reply.Properties
                         .TryGetValue<JavascriptCallbackResponseMessageProperty>(
                             JavascriptCallbackResponseMessageProperty.Name,
                             out javascriptCallbackResponseMessageProperty
@@ -85,8 +82,7 @@ namespace System.ServiceModel.Dispatcher
                         WebHttpBehavior.TrySetupJavascriptCallback(this.CallbackParameterName);
                     if (javascriptCallbackResponseMessageProperty != null)
                     {
-                        reply
-                            .Properties
+                        reply.Properties
                             .Add(
                                 JavascriptCallbackResponseMessageProperty.Name,
                                 javascriptCallbackResponseMessageProperty
@@ -97,8 +93,7 @@ namespace System.ServiceModel.Dispatcher
                 {
                     HttpResponseMessageProperty property;
                     if (
-                        reply
-                            .Properties
+                        reply.Properties
                             .TryGetValue<HttpResponseMessageProperty>(
                                 HttpResponseMessageProperty.Name,
                                 out property
@@ -118,8 +113,7 @@ namespace System.ServiceModel.Dispatcher
                         if (property.SuppressEntityBody)
                         {
                             property.SuppressEntityBody = false;
-                            Message nullJsonMessage = WebOperationContext
-                                .Current
+                            Message nullJsonMessage = WebOperationContext.Current
                                 .CreateJsonResponse<object>(null);
                             nullJsonMessage.Properties.CopyProperties(reply.Properties);
                             reply = nullJsonMessage;

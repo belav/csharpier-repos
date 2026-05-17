@@ -71,8 +71,7 @@ namespace Microsoft.CodeAnalysis
                     // Avoid boxing when reading typed value:
                     if (typeof(T) != typeof(object))
                     {
-                        return ((OptionDefinition<T>)option.Definition)
-                            .Serializer
+                        return ((OptionDefinition<T>)option.Definition).Serializer
                             .TryParseValue(stringValue, out value!);
                     }
 

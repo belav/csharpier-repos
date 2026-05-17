@@ -19,8 +19,7 @@ public class AuthorizationBuilderTests
             // Act
             .SetFallbackPolicy(policy);
 
-        var options = builder
-            .Services
+        var options = builder.Services
             .BuildServiceProvider()
             .GetRequiredService<IOptions<AuthorizationOptions>>()
             .Value;
@@ -40,8 +39,7 @@ public class AuthorizationBuilderTests
             // Act
             .SetFallbackPolicy(null);
 
-        var options = builder
-            .Services
+        var options = builder.Services
             .BuildServiceProvider()
             .GetRequiredService<IOptions<AuthorizationOptions>>()
             .Value;
@@ -60,8 +58,7 @@ public class AuthorizationBuilderTests
             // Act
             .SetDefaultPolicy(policy);
 
-        var options = builder
-            .Services
+        var options = builder.Services
             .BuildServiceProvider()
             .GetRequiredService<IOptions<AuthorizationOptions>>()
             .Value;
@@ -81,8 +78,7 @@ public class AuthorizationBuilderTests
             // Act
             .SetInvokeHandlersAfterFailure(invoke);
 
-        var options = builder
-            .Services
+        var options = builder.Services
             .BuildServiceProvider()
             .GetRequiredService<IOptions<AuthorizationOptions>>()
             .Value;
@@ -101,8 +97,7 @@ public class AuthorizationBuilderTests
             // Act
             .AddPolicy("name", policy);
 
-        var options = builder
-            .Services
+        var options = builder.Services
             .BuildServiceProvider()
             .GetRequiredService<IOptions<AuthorizationOptions>>()
             .Value;
@@ -120,8 +115,7 @@ public class AuthorizationBuilderTests
             // Act
             .AddPolicy("name", p => p.RequireAssertion(_ => true));
 
-        var options = builder
-            .Services
+        var options = builder.Services
             .BuildServiceProvider()
             .GetRequiredService<IOptions<AuthorizationOptions>>()
             .Value;

@@ -21,8 +21,7 @@ namespace System.Security.Cryptography.X509Certificates
             if (handle == IntPtr.Zero)
                 throw new ArgumentException(SR.Arg_InvalidHandle, nameof(handle));
 
-            SafeCertContextHandle safeCertContextHandle = Interop
-                .Crypt32
+            SafeCertContextHandle safeCertContextHandle = Interop.Crypt32
                 .CertDuplicateCertificateContext(handle);
             if (safeCertContextHandle.IsInvalid)
             {
@@ -32,8 +31,7 @@ namespace System.Security.Cryptography.X509Certificates
             }
 
             int cbData = 0;
-            bool deleteKeyContainer = Interop
-                .Crypt32
+            bool deleteKeyContainer = Interop.Crypt32
                 .CertGetCertificateContextProperty(
                     safeCertContextHandle,
                     Interop.Crypt32.CertContextPropId.CERT_CLR_DELETE_KEY_PROP_ID,
@@ -73,8 +71,7 @@ namespace System.Security.Cryptography.X509Certificates
             {
                 int cbData = 0;
                 if (
-                    !Interop
-                        .Crypt32
+                    !Interop.Crypt32
                         .CertGetCertificateContextProperty(
                             _certContext,
                             Interop.Crypt32.CertContextPropId.CERT_SHA1_HASH_PROP_ID,
@@ -86,8 +83,7 @@ namespace System.Security.Cryptography.X509Certificates
 
                 byte[] thumbprint = new byte[cbData];
                 if (
-                    !Interop
-                        .Crypt32
+                    !Interop.Crypt32
                         .CertGetCertificateContextProperty(
                             _certContext,
                             Interop.Crypt32.CertContextPropId.CERT_SHA1_HASH_PROP_ID,
@@ -132,8 +128,7 @@ namespace System.Security.Cryptography.X509Certificates
                         if (keyAlgorithmOid == Oids.Rsa)
                             algId = AlgId.CALG_RSA_KEYX; // Fast-path for the most common case.
                         else
-                            algId = Interop
-                                .Crypt32
+                            algId = Interop.Crypt32
                                 .FindOidInfo(
                                     Interop.Crypt32.CryptOidInfoKeyType.CRYPT_OID_INFO_OID_KEY,
                                     keyAlgorithmOid,
@@ -150,14 +145,12 @@ namespace System.Security.Cryptography.X509Certificates
 
                             if (
                                 algId == AlgId.CALG_DSS_SIGN
-                                && pCertContext
-                                    ->pCertInfo
+                                && pCertContext->pCertInfo
                                     ->SubjectPublicKeyInfo
                                     .Algorithm
                                     .Parameters
                                     .cbData == 0
-                                && pCertContext
-                                    ->pCertInfo
+                                && pCertContext->pCertInfo
                                     ->SubjectPublicKeyInfo
                                     .Algorithm
                                     .Parameters
@@ -173,8 +166,7 @@ namespace System.Security.Cryptography.X509Certificates
                             }
                             else
                             {
-                                keyAlgorithmParameters = pCertContext
-                                    ->pCertInfo
+                                keyAlgorithmParameters = pCertContext->pCertInfo
                                     ->SubjectPublicKeyInfo
                                     .Algorithm
                                     .Parameters
@@ -197,8 +189,7 @@ namespace System.Security.Cryptography.X509Certificates
                 {
                     int cbData = 0;
                     if (
-                        !Interop
-                            .Crypt32
+                        !Interop.Crypt32
                             .CertGetCertificateContextProperty(
                                 _certContext,
                                 Interop.Crypt32.CertContextPropId.CERT_PUBKEY_ALG_PARA_PROP_ID,
@@ -210,8 +201,7 @@ namespace System.Security.Cryptography.X509Certificates
                         Interop.Crypt32.CERT_CHAIN_PARA chainPara = default;
                         chainPara.cbSize = sizeof(Interop.Crypt32.CERT_CHAIN_PARA);
                         if (
-                            !Interop
-                                .Crypt32
+                            !Interop.Crypt32
                                 .CertGetCertificateChain(
                                     (IntPtr)Interop.Crypt32.ChainEngine.HCCE_CURRENT_USER,
                                     _certContext,
@@ -225,8 +215,7 @@ namespace System.Security.Cryptography.X509Certificates
                         )
                             throw Marshal.GetHRForLastWin32Error().ToCryptographicException();
                         if (
-                            !Interop
-                                .Crypt32
+                            !Interop.Crypt32
                                 .CertGetCertificateContextProperty(
                                     _certContext,
                                     Interop.Crypt32.CertContextPropId.CERT_PUBKEY_ALG_PARA_PROP_ID,
@@ -239,8 +228,7 @@ namespace System.Security.Cryptography.X509Certificates
 
                     byte[] keyAlgorithmParameters = new byte[cbData];
                     if (
-                        !Interop
-                            .Crypt32
+                        !Interop.Crypt32
                             .CertGetCertificateContextProperty(
                                 _certContext,
                                 Interop.Crypt32.CertContextPropId.CERT_PUBKEY_ALG_PARA_PROP_ID,
@@ -267,8 +255,7 @@ namespace System.Security.Cryptography.X509Certificates
                 {
                     return InvokeWithCertContext(static pCertContext =>
                     {
-                        return pCertContext
-                            ->pCertInfo
+                        return pCertContext->pCertInfo
                             ->SubjectPublicKeyInfo
                             .PublicKey
                             .ToByteArray();
@@ -370,8 +357,7 @@ namespace System.Security.Cryptography.X509Certificates
             get
             {
                 int uninteresting = 0;
-                bool archivePropertyExists = Interop
-                    .Crypt32
+                bool archivePropertyExists = Interop.Crypt32
                     .CertGetCertificateContextProperty(
                         _certContext,
                         Interop.Crypt32.CertContextPropId.CERT_ARCHIVED_PROP_ID,
@@ -389,8 +375,7 @@ namespace System.Security.Cryptography.X509Certificates
                         ? &blob
                         : (Interop.Crypt32.DATA_BLOB*)null;
                     if (
-                        !Interop
-                            .Crypt32
+                        !Interop.Crypt32
                             .CertSetCertificateContextProperty(
                                 _certContext,
                                 Interop.Crypt32.CertContextPropId.CERT_ARCHIVED_PROP_ID,
@@ -411,8 +396,7 @@ namespace System.Security.Cryptography.X509Certificates
                 {
                     uint cbData = 0;
                     if (
-                        !Interop
-                            .Crypt32
+                        !Interop.Crypt32
                             .CertGetCertificateContextPropertyString(
                                 _certContext,
                                 Interop.Crypt32.CertContextPropId.CERT_FRIENDLY_NAME_PROP_ID,
@@ -431,8 +415,7 @@ namespace System.Security.Cryptography.X509Certificates
                     fixed (char* ptr = &MemoryMarshal.GetReference(buffer))
                     {
                         if (
-                            !Interop
-                                .Crypt32
+                            !Interop.Crypt32
                                 .CertGetCertificateContextPropertyString(
                                     _certContext,
                                     Interop.Crypt32.CertContextPropId.CERT_FRIENDLY_NAME_PROP_ID,
@@ -459,8 +442,7 @@ namespace System.Security.Cryptography.X509Certificates
                             checked(2 * ((uint)friendlyName.Length + 1))
                         );
                         if (
-                            !Interop
-                                .Crypt32
+                            !Interop.Crypt32
                                 .CertSetCertificateContextProperty(
                                     _certContext,
                                     Interop.Crypt32.CertContextPropId.CERT_FRIENDLY_NAME_PROP_ID,
@@ -486,8 +468,7 @@ namespace System.Security.Cryptography.X509Certificates
                 {
                     return InvokeWithCertContext(static certContext =>
                     {
-                        ReadOnlySpan<byte> encodedSubjectName = certContext
-                            ->pCertInfo
+                        ReadOnlySpan<byte> encodedSubjectName = certContext->pCertInfo
                             ->Subject
                             .DangerousAsSpan();
                         X500DistinguishedName subjectName = new X500DistinguishedName(
@@ -507,8 +488,7 @@ namespace System.Security.Cryptography.X509Certificates
                 {
                     return InvokeWithCertContext(static certContext =>
                     {
-                        ReadOnlySpan<byte> encodedIssuerName = certContext
-                            ->pCertInfo
+                        ReadOnlySpan<byte> encodedIssuerName = certContext->pCertInfo
                             ->Issuer
                             .DangerousAsSpan();
                         X500DistinguishedName issuerName = new X500DistinguishedName(
@@ -558,8 +538,7 @@ namespace System.Security.Cryptography.X509Certificates
         }
 
         public unsafe string GetNameInfo(X509NameType nameType, bool forIssuer) =>
-            Interop
-                .crypt32
+            Interop.crypt32
                 .CertGetNameString(
                     _certContext,
                     MapNameType(nameType),
@@ -689,8 +668,7 @@ namespace System.Security.Cryptography.X509Certificates
         }
 
         private unsafe string GetIssuerOrSubject(bool issuer, bool reverse) =>
-            Interop
-                .crypt32
+            Interop.crypt32
                 .CertGetNameString(
                     _certContext,
                     Interop.Crypt32.CertNameType.CERT_NAME_RDN_TYPE,
@@ -720,8 +698,7 @@ namespace System.Security.Cryptography.X509Certificates
                 // Release() method performs the key container deletion.
                 using (SafeCertContextHandle oldCertContext = certContext)
                 {
-                    certContext = Interop
-                        .Crypt32
+                    certContext = Interop.Crypt32
                         .CertDuplicateCertificateContextWithKeyContainerDeletion(
                             oldCertContext.DangerousGetHandle()
                         );

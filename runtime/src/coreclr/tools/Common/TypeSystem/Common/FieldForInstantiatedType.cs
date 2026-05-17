@@ -36,8 +36,7 @@ namespace Internal.TypeSystem
         {
             get
             {
-                return _fieldDef
-                    .FieldType
+                return _fieldDef.FieldType
                     .InstantiateSignature(_instantiatedType.Instantiation, default(Instantiation));
             }
         }

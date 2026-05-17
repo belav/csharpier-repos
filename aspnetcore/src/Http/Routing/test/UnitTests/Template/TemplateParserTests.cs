@@ -1117,13 +1117,14 @@ public class TemplateRouteParserTests
             foreach (var xconstraint in x.InlineConstraints)
             {
                 if (
-                    !y.InlineConstraints.Any<InlineConstraint>(c =>
-                        string.Equals(
-                            c.Constraint,
-                            xconstraint.Constraint,
-                            StringComparison.Ordinal
+                    !y.InlineConstraints
+                        .Any<InlineConstraint>(c =>
+                            string.Equals(
+                                c.Constraint,
+                                xconstraint.Constraint,
+                                StringComparison.Ordinal
+                            )
                         )
-                    )
                 )
                 {
                     return false;

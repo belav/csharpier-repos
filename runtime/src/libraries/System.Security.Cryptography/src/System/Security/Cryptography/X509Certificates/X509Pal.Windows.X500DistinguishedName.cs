@@ -29,8 +29,7 @@ namespace System.Security.Cryptography.X509Certificates
                     nameBlob.cbData = (uint)encodedDistinguishedName.Length;
                     nameBlob.pbData = new IntPtr(pbEncoded);
 
-                    int cchDecoded = Interop
-                        .Crypt32
+                    int cchDecoded = Interop.Crypt32
                         .CertNameToStr(
                             (int)Interop.Crypt32.CertEncodingType.All,
                             &nameBlob,
@@ -46,8 +45,7 @@ namespace System.Security.Cryptography.X509Certificates
                     fixed (char* ptr = buffer)
                     {
                         if (
-                            Interop
-                                .Crypt32
+                            Interop.Crypt32
                                 .CertNameToStr(
                                     (int)Interop.Crypt32.CertEncodingType.All,
                                     &nameBlob,
@@ -76,8 +74,7 @@ namespace System.Security.Cryptography.X509Certificates
 
             int cbEncoded = 0;
             if (
-                !Interop
-                    .Crypt32
+                !Interop.Crypt32
                     .CertStrToName(
                         Interop.Crypt32.CertEncodingType.All,
                         distinguishedName,
@@ -92,8 +89,7 @@ namespace System.Security.Cryptography.X509Certificates
 
             byte[] encodedName = new byte[cbEncoded];
             if (
-                !Interop
-                    .Crypt32
+                !Interop.Crypt32
                     .CertStrToName(
                         Interop.Crypt32.CertEncodingType.All,
                         distinguishedName,
@@ -123,8 +119,7 @@ namespace System.Security.Cryptography.X509Certificates
 
             int cbFormat = 0;
             if (
-                !Interop
-                    .Crypt32
+                !Interop.Crypt32
                     .CryptFormatObject(
                         (int)Interop.Crypt32.CertEncodingType.X509_ASN_ENCODING,
                         (int)FormatObjectType.None,
@@ -147,8 +142,7 @@ namespace System.Security.Cryptography.X509Certificates
             fixed (char* ptr = buffer)
             {
                 if (
-                    !Interop
-                        .Crypt32
+                    !Interop.Crypt32
                         .CryptFormatObject(
                             (int)Interop.Crypt32.CertEncodingType.X509_ASN_ENCODING,
                             (int)FormatObjectType.None,
@@ -191,8 +185,7 @@ namespace System.Security.Cryptography.X509Certificates
                     (flag & X500DistinguishedNameFlags.UseSemicolons)
                     == X500DistinguishedNameFlags.UseSemicolons
                 )
-                    dwStrType |= Interop
-                        .Crypt32
+                    dwStrType |= Interop.Crypt32
                         .CertNameStrTypeAndFlags
                         .CERT_NAME_STR_SEMICOLON_FLAG;
                 else if (
@@ -215,8 +208,7 @@ namespace System.Security.Cryptography.X509Certificates
                     (flag & X500DistinguishedNameFlags.DoNotUseQuotes)
                     == X500DistinguishedNameFlags.DoNotUseQuotes
                 )
-                    dwStrType |= Interop
-                        .Crypt32
+                    dwStrType |= Interop.Crypt32
                         .CertNameStrTypeAndFlags
                         .CERT_NAME_STR_NO_QUOTING_FLAG;
 
@@ -224,8 +216,7 @@ namespace System.Security.Cryptography.X509Certificates
                     (flag & X500DistinguishedNameFlags.ForceUTF8Encoding)
                     == X500DistinguishedNameFlags.ForceUTF8Encoding
                 )
-                    dwStrType |= Interop
-                        .Crypt32
+                    dwStrType |= Interop.Crypt32
                         .CertNameStrTypeAndFlags
                         .CERT_NAME_STR_FORCE_UTF8_DIR_STR_FLAG;
 
@@ -233,16 +224,14 @@ namespace System.Security.Cryptography.X509Certificates
                     (flag & X500DistinguishedNameFlags.UseUTF8Encoding)
                     == X500DistinguishedNameFlags.UseUTF8Encoding
                 )
-                    dwStrType |= Interop
-                        .Crypt32
+                    dwStrType |= Interop.Crypt32
                         .CertNameStrTypeAndFlags
                         .CERT_NAME_STR_ENABLE_UTF8_UNICODE_FLAG;
                 else if (
                     (flag & X500DistinguishedNameFlags.UseT61Encoding)
                     == X500DistinguishedNameFlags.UseT61Encoding
                 )
-                    dwStrType |= Interop
-                        .Crypt32
+                    dwStrType |= Interop.Crypt32
                         .CertNameStrTypeAndFlags
                         .CERT_NAME_STR_ENABLE_T61_UNICODE_FLAG;
             }

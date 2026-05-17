@@ -56,15 +56,13 @@ namespace System.IdentityModel
             {
                 if (null == requestorEntropy)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgumentNull("requestorEntropy");
                 }
 
                 if (null == issuerEntropy)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgumentNull("issuerEntropy");
                 }
 
@@ -206,8 +204,7 @@ namespace System.IdentityModel
             {
                 if (senderEntropy == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgumentNull("senderEntropy");
                 }
 
@@ -241,8 +238,7 @@ namespace System.IdentityModel
                 {
                     if (tries > _maxKeyIterations)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new CryptographicException(
                                     SR.GetString(SR.ID6048, _maxKeyIterations)
@@ -281,8 +277,7 @@ namespace System.IdentityModel
                 {
                     if (tries > _maxKeyIterations)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new CryptographicException(
                                     SR.GetString(SR.ID6048, _maxKeyIterations)
@@ -305,8 +300,7 @@ namespace System.IdentityModel
 
                 if (keySizeInBits <= 0)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentOutOfRangeException(
                                 "keySizeInBits",
@@ -316,8 +310,7 @@ namespace System.IdentityModel
                 }
                 else if (keySizeInBytes * 8 != keySizeInBits)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentException(
                                 SR.GetString(SR.ID6002, keySizeInBits),
@@ -345,8 +338,7 @@ namespace System.IdentityModel
 
                 if (secret.Length == 0)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgument("secret", SR.GetString(SR.ID6031));
                 }
 
@@ -362,8 +354,7 @@ namespace System.IdentityModel
                     //
                     // EncryptedKey case
                     //
-                    byte[] wrappedKey = wrappingCredentials
-                        .SecurityKey
+                    byte[] wrappedKey = wrappingCredentials.SecurityKey
                         .EncryptKey(wrappingCredentials.Algorithm, secret);
 
                     return new SecurityKeyIdentifier(
@@ -480,8 +471,7 @@ namespace System.IdentityModel
                 GetAlgorithmFromConfig(SecurityAlgorithms.HmacSha1Signature) as KeyedHashAlgorithm;
             if (algorithm == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(
                         "algorithm",
                         SR.GetString(SR.ID6037, SecurityAlgorithms.HmacSha1Signature)
@@ -510,8 +500,7 @@ namespace System.IdentityModel
             );
             if (rijndael != null)
                 return rijndael;
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperWarning(
                     new InvalidOperationException(
                         SR.GetString(
@@ -536,8 +525,7 @@ namespace System.IdentityModel
                 }
                 //NOTE: KeyedHashAlgorithms are symmetric in nature but we still throw if it is passed as an argument.
 
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperWarning(
                         new InvalidOperationException(
                             SR.GetString(
@@ -557,8 +545,7 @@ namespace System.IdentityModel
                 case SecurityAlgorithms.Aes256Encryption:
                     return Rijndael.CreateDecryptor(key, iv);
                 default:
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperWarning(
                             new InvalidOperationException(
                                 SR.GetString(SR.UnsupportedEncryptionAlgorithm, algorithm)
@@ -578,8 +565,7 @@ namespace System.IdentityModel
                 {
                     return symmetricAlgorithm.CreateEncryptor(key, iv);
                 }
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperWarning(
                         new InvalidOperationException(
                             SR.GetString(
@@ -599,8 +585,7 @@ namespace System.IdentityModel
                 case SecurityAlgorithms.Aes256Encryption:
                     return Rijndael.CreateEncryptor(key, iv);
                 default:
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperWarning(
                             new InvalidOperationException(
                                 SR.GetString(SR.UnsupportedEncryptionAlgorithm, algorithm)
@@ -620,8 +605,7 @@ namespace System.IdentityModel
                 {
                     return hashAlgorithm;
                 }
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperWarning(
                         new InvalidOperationException(
                             SR.GetString(SR.CustomCryptoAlgorithmIsNotValidHashAlgorithm, algorithm)
@@ -646,8 +630,7 @@ namespace System.IdentityModel
                     else
                         return new SHA256Managed();
                 default:
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperWarning(
                             new InvalidOperationException(
                                 SR.GetString(SR.UnsupportedCryptoAlgorithm, algorithm)
@@ -669,8 +652,7 @@ namespace System.IdentityModel
                     return keyedHashAlgorithm;
                 }
 
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperWarning(
                         new InvalidOperationException(
                             SR.GetString(
@@ -689,16 +671,14 @@ namespace System.IdentityModel
                     if (!SecurityUtils.RequiresFipsCompliance)
                         return new HMACSHA256(key);
                     else
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperWarning(
                                 new InvalidOperationException(
                                     SR.GetString(SR.CryptoAlgorithmIsNotFipsCompliant, algorithm)
                                 )
                             );
                 default:
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperWarning(
                             new InvalidOperationException(
                                 SR.GetString(SR.UnsupportedCryptoAlgorithm, algorithm)
@@ -729,8 +709,7 @@ namespace System.IdentityModel
                 && (algorithm != SecurityAlgorithms.Psha1KeyDerivationDec2005)
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperWarning(
                         new InvalidOperationException(
                             SR.GetString(SR.UnsupportedKeyDerivationAlgorithm, algorithm)
@@ -756,8 +735,7 @@ namespace System.IdentityModel
                 {
                     return symmetricAlgorithm.BlockSize;
                 }
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperWarning(
                         new InvalidOperationException(
                             SR.GetString(
@@ -777,8 +755,7 @@ namespace System.IdentityModel
                 case SecurityAlgorithms.Aes256Encryption:
                     return Rijndael.BlockSize;
                 default:
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperWarning(
                             new InvalidOperationException(
                                 SR.GetString(SR.UnsupportedEncryptionAlgorithm, algorithm)
@@ -812,8 +789,7 @@ namespace System.IdentityModel
             int sizeInBytes = sizeInBits / 8;
             if (sizeInBits <= 0)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentOutOfRangeException(
                             "sizeInBits",
@@ -823,8 +799,7 @@ namespace System.IdentityModel
             }
             else if (sizeInBytes * 8 != sizeInBits)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentException(SR.GetString(SR.ID6002, sizeInBits), "sizeInBits")
                     );
@@ -853,8 +828,7 @@ namespace System.IdentityModel
                     }
                     return symmetricAlgorithm;
                 }
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperWarning(
                         new InvalidOperationException(
                             SR.GetString(
@@ -885,8 +859,7 @@ namespace System.IdentityModel
                         : new RijndaelManaged();
                     break;
                 default:
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperWarning(
                             new InvalidOperationException(
                                 SR.GetString(SR.UnsupportedEncryptionAlgorithm, algorithm)
@@ -1237,8 +1210,7 @@ namespace System.IdentityModel
                 symmetricAlgorithm = algorithmObject as SymmetricAlgorithm;
                 if (symmetricAlgorithm == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperWarning(
                             new InvalidOperationException(
                                 SR.GetString(SR.InvalidCustomKeyWrapAlgorithm, algorithm)
@@ -1264,8 +1236,7 @@ namespace System.IdentityModel
                         : new RijndaelManaged();
                     break;
                 default:
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperWarning(
                             new InvalidOperationException(
                                 SR.GetString(SR.UnsupportedKeyWrapAlgorithm, algorithm)
@@ -1289,8 +1260,7 @@ namespace System.IdentityModel
                 symmetricAlgorithm = algorithmObject as SymmetricAlgorithm;
                 if (symmetricAlgorithm == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperWarning(
                             new InvalidOperationException(
                                 SR.GetString(SR.InvalidCustomKeyWrapAlgorithm, algorithm)
@@ -1317,8 +1287,7 @@ namespace System.IdentityModel
                         : new RijndaelManaged();
                     break;
                 default:
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperWarning(
                             new InvalidOperationException(
                                 SR.GetString(SR.UnsupportedKeyWrapAlgorithm, algorithm)
@@ -1337,14 +1306,12 @@ namespace System.IdentityModel
         {
             if (buffer == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("buffer"));
             }
             if (count < 0 || count > buffer.Length)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentOutOfRangeException(
                             "count",
@@ -1354,8 +1321,7 @@ namespace System.IdentityModel
             }
             if (offset < 0 || offset > buffer.Length - count)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentOutOfRangeException(
                             "offset",
@@ -1391,8 +1357,7 @@ namespace System.IdentityModel
         {
             if (string.IsNullOrEmpty(algorithm))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("algorithm"));
             }
 
@@ -1460,8 +1425,7 @@ namespace System.IdentityModel
         {
             if (string.IsNullOrEmpty(algorithm))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("algorithm"));
             }
 
@@ -1510,11 +1474,11 @@ namespace System.IdentityModel
                                 Type algorithmType = algorithmObject.GetType();
                                 System.Linq.Expressions.NewExpression algorithmCreationExpression =
                                     System.Linq.Expressions.Expression.New(algorithmType);
-                                System.Linq.Expressions.LambdaExpression creationFunction = System
-                                    .Linq
-                                    .Expressions
-                                    .Expression
-                                    .Lambda<Func<object>>(algorithmCreationExpression);
+                                System.Linq.Expressions.LambdaExpression creationFunction =
+                                    System.Linq
+                                        .Expressions
+                                        .Expression
+                                        .Lambda<Func<object>>(algorithmCreationExpression);
                                 delegateFunction = creationFunction.Compile() as Func<object>;
 
                                 if (delegateFunction != null)

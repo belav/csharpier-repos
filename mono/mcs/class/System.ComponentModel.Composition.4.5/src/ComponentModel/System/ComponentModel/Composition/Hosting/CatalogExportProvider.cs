@@ -876,8 +876,7 @@ namespace System.ComponentModel.Composition.Hosting
                     }
 
                     foreach (
-                        var import in definition
-                            .ImportDefinitions
+                        var import in definition.ImportDefinitions
                             .Where(ImportEngine.IsRequiredImportForPreview)
                     )
                     {

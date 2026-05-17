@@ -78,8 +78,7 @@ namespace System.ServiceModel.Web
                     se.Behaviors.Add(new WebHttpBehavior());
 
             // disable help page.
-            ServiceDebugBehavior serviceDebugBehavior = Description
-                .Behaviors
+            ServiceDebugBehavior serviceDebugBehavior = Description.Behaviors
                 .Find<ServiceDebugBehavior>();
             if (serviceDebugBehavior != null)
             {

@@ -29,8 +29,7 @@ namespace System.Net.NetworkInformation
             Interop.Sys.IpAddressInfo* addressInfo = null;
 
             if (
-                Interop
-                    .Sys
+                Interop.Sys
                     .GetNetworkInterfaces(
                         &interfaceCount,
                         &networkInterfaceInfo,

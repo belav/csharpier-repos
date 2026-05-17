@@ -95,8 +95,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIsNullCheck
             // be `DeclarationPattern`, not `TypePattern`.
             if (
                 negatedPattern.Pattern is ITypePatternOperation typePatternOperation
-                && typePatternOperation
-                    .InputType
+                && typePatternOperation.InputType
                     .InheritsFromOrEquals(typePatternOperation.MatchedType)
             )
             {
@@ -130,8 +129,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIsNullCheck
                 return;
 
             if (
-                CSharpSemanticFacts
-                    .Instance
+                CSharpSemanticFacts.Instance
                     .IsInExpressionTree(
                         semanticModel,
                         syntax,
@@ -150,8 +148,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIsNullCheck
             // This doesn't match `x is MyType y` because in such case, we have an IsPattern instead of IsType operation.
             if (
                 isTypeOperation.ValueOperand.Type is not null
-                && isTypeOperation
-                    .ValueOperand
+                && isTypeOperation.ValueOperand
                     .Type
                     .InheritsFromOrEquals(isTypeOperation.TypeOperand)
             )

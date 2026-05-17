@@ -127,8 +127,7 @@ public sealed class TableMappingBaseComparer
                 y.ColumnMappings,
                 (xc, yc) =>
                 {
-                    var columnResult = StringComparer
-                        .Ordinal
+                    var columnResult = StringComparer.Ordinal
                         .Compare(xc.Property.Name, yc.Property.Name);
                     return columnResult != 0
                         ? columnResult

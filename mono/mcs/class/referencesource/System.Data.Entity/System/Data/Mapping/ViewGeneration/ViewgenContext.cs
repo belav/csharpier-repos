@@ -72,8 +72,7 @@ namespace System.Data.Mapping.ViewGeneration
             m_extent = extent;
             m_viewTarget = viewTarget;
             m_config = config;
-            m_edmItemCollection = entityContainerMapping
-                .StorageMappingItemCollection
+            m_edmItemCollection = entityContainerMapping.StorageMappingItemCollection
                 .EdmItemCollection;
             m_entityContainerMapping = entityContainerMapping;
             m_identifiers = identifiers;
@@ -175,18 +174,18 @@ namespace System.Data.Mapping.ViewGeneration
             oneToOneForeignKeyAssociationsForThisWrapper =
                 oneToOneForeignKeyAssociationsForThisWrapper.Where(it =>
                     (
-                        it.AssociationEndMembers.All(endMember =>
-                            endMember.RelationshipMultiplicity == RelationshipMultiplicity.One
-                        )
+                        it.AssociationEndMembers
+                            .All(endMember =>
+                                endMember.RelationshipMultiplicity == RelationshipMultiplicity.One
+                            )
                     )
                 );
             //Filter the 1:1 foreign key associations to the ones relating the sets used in these cell wrappers.
             oneToOneForeignKeyAssociationsForThisWrapper =
                 oneToOneForeignKeyAssociationsForThisWrapper.Where(it =>
                     (
-                        it.AssociationEndMembers.All(endMember =>
-                            entityTypes.Contains(endMember.GetEntityType())
-                        )
+                        it.AssociationEndMembers
+                            .All(endMember => entityTypes.Contains(endMember.GetEntityType()))
                     )
                 );
 
@@ -304,8 +303,7 @@ namespace System.Data.Mapping.ViewGeneration
             {
                 if (!tokenMember.DeclaringType.IsAssignableFrom(extentType))
                 {
-                    string message = System
-                        .Data
+                    string message = System.Data
                         .Entity
                         .Strings
                         .ViewGen_Concurrency_Derived_Class(
@@ -330,8 +328,7 @@ namespace System.Data.Mapping.ViewGeneration
                 foreach (LeftCellWrapper wrapper in m_cellWrappers)
                 {
                     Set<MemberPath> conditionMembers = new Set<MemberPath>(
-                        wrapper
-                            .OnlyInputCell
+                        wrapper.OnlyInputCell
                             .CQuery
                             .WhereClause
                             .MemberRestrictions

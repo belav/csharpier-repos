@@ -215,24 +215,20 @@ namespace System.ServiceModel.Description
             );
             CodeTypeReference contractTypeRef = context.ContractTypeReference;
             if (context.DuplexCallbackType == null)
-                clientType
-                    .BaseTypes
+                clientType.BaseTypes
                     .Add(
                         new CodeTypeReference(
-                            context
-                                .ServiceContractGenerator
+                            context.ServiceContractGenerator
                                 .GetCodeTypeReference(typeof(ClientBase<>))
                                 .BaseType,
                             context.ContractTypeReference
                         )
                     );
             else
-                clientType
-                    .BaseTypes
+                clientType.BaseTypes
                     .Add(
                         new CodeTypeReference(
-                            context
-                                .ServiceContractGenerator
+                            context.ServiceContractGenerator
                                 .GetCodeTypeReference(typeof(DuplexClientBase<>))
                                 .BaseType,
                             context.ContractTypeReference
@@ -244,8 +240,7 @@ namespace System.ServiceModel.Description
             if (!(ClientCtorParamNames.Length == ClientCtorParamTypes.Length))
             {
                 Fx.Assert("Invalid client generation constructor table initialization");
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             String.Format(
@@ -261,8 +256,7 @@ namespace System.ServiceModel.Description
                 if (!(ClientCtorParamNames[i].Length == ClientCtorParamTypes[i].Length))
                 {
                     Fx.Assert("Invalid client generation constructor table initialization");
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 String.Format(
@@ -277,27 +271,27 @@ namespace System.ServiceModel.Description
                 ctor.Attributes = MemberAttributes.Public;
                 if (context.DuplexCallbackType != null)
                 {
-                    ctor.Parameters.Add(
-                        new CodeParameterDeclarationExpression(
-                            typeof(InstanceContext),
-                            inputInstanceName
-                        )
-                    );
-                    ctor.BaseConstructorArgs.Add(
-                        new CodeVariableReferenceExpression(inputInstanceName)
-                    );
+                    ctor.Parameters
+                        .Add(
+                            new CodeParameterDeclarationExpression(
+                                typeof(InstanceContext),
+                                inputInstanceName
+                            )
+                        );
+                    ctor.BaseConstructorArgs
+                        .Add(new CodeVariableReferenceExpression(inputInstanceName));
                 }
                 for (int j = 0; j < ClientCtorParamNames[i].Length; j++)
                 {
-                    ctor.Parameters.Add(
-                        new CodeParameterDeclarationExpression(
-                            ClientCtorParamTypes[i][j],
-                            ClientCtorParamNames[i][j]
-                        )
-                    );
-                    ctor.BaseConstructorArgs.Add(
-                        new CodeVariableReferenceExpression(ClientCtorParamNames[i][j])
-                    );
+                    ctor.Parameters
+                        .Add(
+                            new CodeParameterDeclarationExpression(
+                                ClientCtorParamTypes[i][j],
+                                ClientCtorParamNames[i][j]
+                            )
+                        );
+                    ctor.BaseConstructorArgs
+                        .Add(new CodeVariableReferenceExpression(ClientCtorParamNames[i][j]));
                 }
                 clientType.Members.Add(ctor);
             }
@@ -360,8 +354,7 @@ namespace System.ServiceModel.Description
 
             context.Namespace.Types.Add(clientType);
             context.ClientType = clientType;
-            context.ClientTypeReference = ServiceContractGenerator
-                .NamespaceHelper
+            context.ClientTypeReference = ServiceContractGenerator.NamespaceHelper
                 .GetCodeTypeReference(context.Namespace, clientType);
         }
 
@@ -432,8 +425,7 @@ namespace System.ServiceModel.Description
             bool hasTypedMessage = false;
             foreach (CodeParameterDeclarationExpression param in method.Parameters)
             {
-                CodeTypeDeclaration paramTypeDecl = ServiceContractGenerator
-                    .NamespaceHelper
+                CodeTypeDeclaration paramTypeDecl = ServiceContractGenerator.NamespaceHelper
                     .GetCodeType(param.Type);
                 if (paramTypeDecl != null)
                 {
@@ -441,8 +433,7 @@ namespace System.ServiceModel.Description
                     CodeVariableReferenceExpression inValue = new CodeVariableReferenceExpression(
                         "inValue"
                     );
-                    helperMethod
-                        .Statements
+                    helperMethod.Statements
                         .Add(
                             new CodeVariableDeclarationStatement(
                                 param.Type,
@@ -455,8 +446,7 @@ namespace System.ServiceModel.Description
                 }
                 else
                 {
-                    helperMethod
-                        .Parameters
+                    helperMethod.Parameters
                         .Add(new CodeParameterDeclarationExpression(param.Type, param.Name));
                     invokeMethod.Parameters.Add(new CodeArgumentReferenceExpression(param.Name));
                 }
@@ -465,8 +455,7 @@ namespace System.ServiceModel.Description
                 helperMethod.Statements.Add(invokeMethod);
             else
             {
-                CodeTypeDeclaration returnTypeDecl = ServiceContractGenerator
-                    .NamespaceHelper
+                CodeTypeDeclaration returnTypeDecl = ServiceContractGenerator.NamespaceHelper
                     .GetCodeType(method.ReturnType);
                 if (returnTypeDecl != null)
                 {
@@ -475,8 +464,7 @@ namespace System.ServiceModel.Description
                         "retVal"
                     );
 
-                    helperMethod
-                        .Statements
+                    helperMethod.Statements
                         .Add(
                             new CodeVariableDeclarationStatement(
                                 method.ReturnType,
@@ -521,14 +509,12 @@ namespace System.ServiceModel.Description
                     target,
                     field.Name
                 );
-                CodeTypeDeclaration bodyTypeDecl = ServiceContractGenerator
-                    .NamespaceHelper
+                CodeTypeDeclaration bodyTypeDecl = ServiceContractGenerator.NamespaceHelper
                     .GetCodeType(field.Type);
                 if (bodyTypeDecl != null)
                 {
                     if (dir == FieldDirection.In)
-                        helperMethod
-                            .Statements
+                        helperMethod.Statements
                             .Add(
                                 new CodeAssignStatement(
                                     fieldRef,
@@ -568,8 +554,7 @@ namespace System.ServiceModel.Description
                         helperMethod.Parameters.Add(param);
                     }
                     if (dir == FieldDirection.Out)
-                        helperMethod
-                            .Statements
+                        helperMethod.Statements
                             .Add(
                                 new CodeAssignStatement(
                                     new CodeArgumentReferenceExpression(param.Name),
@@ -577,8 +562,7 @@ namespace System.ServiceModel.Description
                                 )
                             );
                     else
-                        helperMethod
-                            .Statements
+                        helperMethod.Statements
                             .Add(
                                 new CodeAssignStatement(
                                     fieldRef,
@@ -741,8 +725,7 @@ namespace System.ServiceModel.Description
             );
             foreach (CodeParameterDeclarationExpression parameter in method.Parameters)
             {
-                methodInvoke
-                    .Parameters
+                methodInvoke.Parameters
                     .Add(
                         new CodeDirectionExpression(
                             parameter.Direction,
@@ -846,11 +829,9 @@ namespace System.ServiceModel.Description
             CreateEventAsyncMethodOverload(clientType, eventAsyncMethod);
 
             // hide the normal async methods from intellisense
-            beginMethod
-                .CustomAttributes
+            beginMethod.CustomAttributes
                 .Add(CreateEditorBrowsableAttribute(EditorBrowsableState.Advanced));
-            endMethod
-                .CustomAttributes
+            endMethod.CustomAttributes
                 .Add(CreateEditorBrowsableAttribute(EditorBrowsableState.Advanced));
         }
 
@@ -884,26 +865,27 @@ namespace System.ServiceModel.Description
             ctor.Attributes = MemberAttributes.Public;
             for (int i = 0; i < EventArgsCtorParamTypes.Length; i++)
             {
-                ctor.Parameters.Add(
-                    new CodeParameterDeclarationExpression(
-                        EventArgsCtorParamTypes[i],
-                        EventArgsCtorParamNames[i]
-                    )
-                );
+                ctor.Parameters
+                    .Add(
+                        new CodeParameterDeclarationExpression(
+                            EventArgsCtorParamTypes[i],
+                            EventArgsCtorParamNames[i]
+                        )
+                    );
                 if (i > 0)
                 {
-                    ctor.BaseConstructorArgs.Add(
-                        new CodeVariableReferenceExpression(EventArgsCtorParamNames[i])
-                    );
+                    ctor.BaseConstructorArgs
+                        .Add(new CodeVariableReferenceExpression(EventArgsCtorParamNames[i]));
                 }
             }
             argsType.Members.Add(ctor);
-            ctor.Statements.Add(
-                new CodeAssignStatement(
-                    resultsFieldReference,
-                    new CodeVariableReferenceExpression(EventArgsCtorParamNames[0])
-                )
-            );
+            ctor.Statements
+                .Add(
+                    new CodeAssignStatement(
+                        resultsFieldReference,
+                        new CodeVariableReferenceExpression(EventArgsCtorParamNames[0])
+                    )
+                );
 
             // create properties for the out parameters
             int asyncResultParamIndex = GetAsyncResultParamIndex(endMethod);
@@ -989,8 +971,7 @@ namespace System.ServiceModel.Description
             CodeCastExpression castExpr = new CodeCastExpression(propertyType, propertyValueExpr);
             CodeMethodReturnStatement returnStmt = new CodeMethodReturnStatement(castExpr);
 
-            property
-                .GetStatements
+            property.GetStatements
                 .Add(
                     new CodeMethodInvokeExpression(
                         new CodeBaseReferenceExpression(),
@@ -1020,8 +1001,7 @@ namespace System.ServiceModel.Description
             }
             else
             {
-                operationCompletedEvent
-                    .Type
+                operationCompletedEvent.Type
                     .TypeArguments
                     .Add(operationCompletedEventArgsType.Name);
             }
@@ -1099,8 +1079,7 @@ namespace System.ServiceModel.Description
                 );
 
                 onBeginOperationMethod.Statements.Add(variableDecl);
-                invokeBegin
-                    .Parameters
+                invokeBegin.Parameters
                     .Add(
                         new CodeDirectionExpression(
                             beginMethod.Parameters[i].Direction,
@@ -1111,16 +1090,14 @@ namespace System.ServiceModel.Description
 
             for (int i = beginMethod.Parameters.Count - 2; i < beginMethod.Parameters.Count; i++)
             {
-                onBeginOperationMethod
-                    .Parameters
+                onBeginOperationMethod.Parameters
                     .Add(
                         new CodeParameterDeclarationExpression(
                             beginMethod.Parameters[i].Type,
                             beginMethod.Parameters[i].Name
                         )
                     );
-                invokeBegin
-                    .Parameters
+                invokeBegin.Parameters
                     .Add(new CodeVariableReferenceExpression(beginMethod.Parameters[i].Name));
             }
 
@@ -1175,16 +1152,14 @@ namespace System.ServiceModel.Description
             {
                 if (i == asyncResultParamIndex)
                 {
-                    onEndOperationMethod
-                        .Parameters
+                    onEndOperationMethod.Parameters
                         .Add(
                             new CodeParameterDeclarationExpression(
                                 endMethod.Parameters[i].Type,
                                 endMethod.Parameters[i].Name
                             )
                         );
-                    invokeEnd
-                        .Parameters
+                    invokeEnd.Parameters
                         .Add(new CodeVariableReferenceExpression(endMethod.Parameters[i].Name));
                 }
                 else
@@ -1205,8 +1180,7 @@ namespace System.ServiceModel.Description
                     );
                     onEndOperationMethod.Statements.Add(variableDecl);
 
-                    invokeEnd
-                        .Parameters
+                    invokeEnd.Parameters
                         .Add(
                             new CodeDirectionExpression(
                                 endMethod.Parameters[i].Direction,
@@ -1214,8 +1188,7 @@ namespace System.ServiceModel.Description
                             )
                         );
 
-                    retArray
-                        .Initializers
+                    retArray.Initializers
                         .Add(new CodeVariableReferenceExpression(variableDecl.Name));
                 }
             }
@@ -1246,8 +1219,7 @@ namespace System.ServiceModel.Description
             }
             else
             {
-                onEndOperationMethod
-                    .Statements
+                onEndOperationMethod.Statements
                     .Add(new CodeMethodReturnStatement(new CodePrimitiveExpression(null)));
             }
 
@@ -1290,8 +1262,7 @@ namespace System.ServiceModel.Description
                 context.Operations
             );
 
-            operationCompletedMethod
-                .Parameters
+            operationCompletedMethod.Parameters
                 .Add(
                     new CodeParameterDeclarationExpression(
                         new CodeTypeReference(objectType),
@@ -1397,8 +1368,7 @@ namespace System.ServiceModel.Description
 
                 eventAsyncMethodParameter.Direction = FieldDirection.In;
                 eventAsyncMethod.Parameters.Add(eventAsyncMethodParameter);
-                invokeAsyncInValues
-                    .Initializers
+                invokeAsyncInValues.Initializers
                     .Add(new CodeVariableReferenceExpression(eventAsyncMethodParameter.Name));
             }
 
@@ -1407,8 +1377,7 @@ namespace System.ServiceModel.Description
                 DoesParameterNameExist,
                 eventAsyncMethod
             );
-            eventAsyncMethod
-                .Parameters
+            eventAsyncMethod.Parameters
                 .Add(
                     new CodeParameterDeclarationExpression(
                         new CodeTypeReference(objectType),
@@ -1416,22 +1385,18 @@ namespace System.ServiceModel.Description
                     )
                 );
 
-            eventAsyncMethod
-                .Statements
+            eventAsyncMethod.Statements
                 .Add(CreateDelegateIfNotNull(beginOperationDelegate, beginOperationMethod));
-            eventAsyncMethod
-                .Statements
+            eventAsyncMethod.Statements
                 .Add(CreateDelegateIfNotNull(endOperationDelegate, endOperationMethod));
-            eventAsyncMethod
-                .Statements
+            eventAsyncMethod.Statements
                 .Add(CreateDelegateIfNotNull(operationCompletedDelegate, operationCompletedMethod));
 
             CodeMethodInvokeExpression invokeAsync = new CodeMethodInvokeExpression(
                 new CodeBaseReferenceExpression(),
                 invokeAsyncMethodName
             );
-            invokeAsync
-                .Parameters
+            invokeAsync.Parameters
                 .Add(
                     new CodeFieldReferenceExpression(
                         new CodeThisReferenceExpression(),
@@ -1446,16 +1411,14 @@ namespace System.ServiceModel.Description
             {
                 invokeAsync.Parameters.Add(new CodePrimitiveExpression(null));
             }
-            invokeAsync
-                .Parameters
+            invokeAsync.Parameters
                 .Add(
                     new CodeFieldReferenceExpression(
                         new CodeThisReferenceExpression(),
                         endOperationDelegate.Name
                     )
                 );
-            invokeAsync
-                .Parameters
+            invokeAsync.Parameters
                 .Add(
                     new CodeFieldReferenceExpression(
                         new CodeThisReferenceExpression(),
@@ -1487,8 +1450,7 @@ namespace System.ServiceModel.Description
 
             for (int i = 0; i < eventAsyncMethod.Parameters.Count - 1; i++)
             {
-                eventAsyncMethodOverload
-                    .Parameters
+                eventAsyncMethodOverload.Parameters
                     .Add(
                         new CodeParameterDeclarationExpression(
                             eventAsyncMethod.Parameters[i].Type,
@@ -1496,8 +1458,7 @@ namespace System.ServiceModel.Description
                         )
                     );
 
-                invokeEventAsyncMethod
-                    .Parameters
+                invokeEventAsyncMethod.Parameters
                     .Add(new CodeVariableReferenceExpression(eventAsyncMethod.Parameters[i].Name));
             }
             invokeEventAsyncMethod.Parameters.Add(new CodePrimitiveExpression(null));

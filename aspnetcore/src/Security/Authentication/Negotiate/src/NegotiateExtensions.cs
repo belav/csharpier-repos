@@ -83,16 +83,14 @@ public static class NegotiateExtensions
         Action<NegotiateOptions> configureOptions
     )
     {
-        builder
-            .Services
+        builder.Services
             .TryAddEnumerable(
                 ServiceDescriptor.Singleton<
                     IPostConfigureOptions<NegotiateOptions>,
                     PostConfigureNegotiateOptions
                 >()
             );
-        builder
-            .Services
+        builder.Services
             .TryAddEnumerable(
                 ServiceDescriptor.Singleton<IStartupFilter>(
                     new NegotiateOptionsValidationStartupFilter(authenticationScheme)

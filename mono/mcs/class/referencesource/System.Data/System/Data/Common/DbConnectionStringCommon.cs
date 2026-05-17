@@ -693,8 +693,7 @@ namespace System.Data.Common
                 isSuccess = true;
             }
             else if (
-                StringComparer
-                    .InvariantCultureIgnoreCase
+                StringComparer.InvariantCultureIgnoreCase
                     .Equals(value, ActiveDirectoryPasswordString)
             )
             {
@@ -702,8 +701,7 @@ namespace System.Data.Common
                 isSuccess = true;
             }
             else if (
-                StringComparer
-                    .InvariantCultureIgnoreCase
+                StringComparer.InvariantCultureIgnoreCase
                     .Equals(value, ActiveDirectoryIntegratedString)
             )
             {
@@ -737,8 +735,7 @@ namespace System.Data.Common
             bool isSuccess = false;
 
             if (
-                StringComparer
-                    .InvariantCultureIgnoreCase
+                StringComparer.InvariantCultureIgnoreCase
                     .Equals(value, ColumnEncryptionSettingEnabledString)
             )
             {
@@ -746,8 +743,7 @@ namespace System.Data.Common
                 isSuccess = true;
             }
             else if (
-                StringComparer
-                    .InvariantCultureIgnoreCase
+                StringComparer.InvariantCultureIgnoreCase
                     .Equals(value, ColumnEncryptionSettingDisabledString)
             )
             {
@@ -1028,8 +1024,7 @@ namespace System.Data.Common
         internal const bool OmitOracleConnectionName = false;
 
         // SqlClient
-        internal const ApplicationIntent ApplicationIntent = System
-            .Data
+        internal const ApplicationIntent ApplicationIntent = System.Data
             .SqlClient
             .ApplicationIntent
             .ReadWrite;

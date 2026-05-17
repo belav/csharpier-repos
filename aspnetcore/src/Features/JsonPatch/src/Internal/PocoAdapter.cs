@@ -244,8 +244,7 @@ public class PocoAdapter : IAdapter
             is JsonObjectContract jsonObjectContract
         )
         {
-            var pocoProperty = jsonObjectContract
-                .Properties
+            var pocoProperty = jsonObjectContract.Properties
                 .FirstOrDefault(p =>
                     string.Equals(p.PropertyName, segment, StringComparison.OrdinalIgnoreCase)
                 );

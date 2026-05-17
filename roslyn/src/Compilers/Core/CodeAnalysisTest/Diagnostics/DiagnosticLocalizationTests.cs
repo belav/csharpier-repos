@@ -126,8 +126,7 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
 
             Assert.Equal(
                 fixedTitle,
-                localizableDiagnostic
-                    .Descriptor
+                localizableDiagnostic.Descriptor
                     .Title
                     .ToString(CustomResourceManager.DefaultCulture)
             );
@@ -137,8 +136,7 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
             );
             Assert.Equal(
                 fixedDescription,
-                localizableDiagnostic
-                    .Descriptor
+                localizableDiagnostic.Descriptor
                     .Description
                     .ToString(CustomResourceManager.DefaultCulture)
             );

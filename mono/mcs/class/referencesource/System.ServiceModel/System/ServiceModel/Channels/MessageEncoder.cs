@@ -84,8 +84,7 @@ namespace System.ServiceModel.Channels
                 {
                     if (currentBufferSize >= maxBufferSize)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 MaxMessageSizeStream.CreateMaxReceivedMessageSizeExceededException(
                                     maxBufferSize
@@ -166,8 +165,7 @@ namespace System.ServiceModel.Channels
         public virtual bool IsContentTypeSupported(string contentType)
         {
             if (contentType == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("contentType"));
 
             return IsContentTypeSupported(contentType, this.ContentType, this.MediaType);

@@ -11,8 +11,7 @@ namespace System.Runtime.Serialization.Configuration
         {
             if (config == null)
             {
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility

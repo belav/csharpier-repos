@@ -55,8 +55,7 @@ namespace System.Web.UI
             }
             catch
             {
-                System
-                    .Diagnostics
+                System.Diagnostics
                     .Debug
                     .Fail(
                         "ControlValuePropertyAttribute: Default value of type "
@@ -107,8 +106,7 @@ namespace System.Web.UI
 
         public override int GetHashCode()
         {
-            return System
-                .Web
+            return System.Web
                 .Util
                 .HashCodeCombiner
                 .CombineHashCodes(

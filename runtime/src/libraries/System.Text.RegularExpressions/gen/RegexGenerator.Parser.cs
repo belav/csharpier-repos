@@ -62,8 +62,7 @@ namespace System.Text.RegularExpressions.Generator
             AttributeData generatedRegexAttr = boundAttributes[0];
 
             if (
-                generatedRegexAttr
-                    .ConstructorArguments
+                generatedRegexAttr.ConstructorArguments
                     .Any(ca => ca.Kind == TypedConstantKind.Error)
             )
             {
@@ -219,12 +218,10 @@ namespace System.Text.RegularExpressions.Generator
             }
 
             // Determine the namespace the class is declared in, if any
-            string? ns = regexMethodSymbol
-                .ContainingType
+            string? ns = regexMethodSymbol.ContainingType
                 ?.ContainingNamespace
                 ?.ToDisplayString(
-                    SymbolDisplayFormat
-                        .FullyQualifiedFormat
+                    SymbolDisplayFormat.FullyQualifiedFormat
                         .WithGlobalNamespaceStyle(SymbolDisplayGlobalNamespaceStyle.Omitted)
                 );
 

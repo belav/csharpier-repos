@@ -780,8 +780,7 @@ namespace System.Security.Cryptography
             try
             {
                 using (
-                    RegistryKey fipsAlgorithmPolicyKey = Registry
-                        .LocalMachine
+                    RegistryKey fipsAlgorithmPolicyKey = Registry.LocalMachine
                         .OpenSubKey(@"System\CurrentControlSet\Control\Lsa", false)
                 )
                 {

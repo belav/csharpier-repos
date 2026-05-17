@@ -44,13 +44,11 @@ namespace System.ServiceModel.Channels
                 HttpRequestMessageProperty.GetHttpRequestMessageFromMessage(message);
             if (httpRequestMessage == null)
             {
-                HttpRequestMessageProperty requestMessageProperty = message
-                    .Properties
+                HttpRequestMessageProperty requestMessageProperty = message.Properties
                     .GetValue<HttpRequestMessageProperty>(HttpRequestMessageProperty.Name);
                 if (requestMessageProperty == null)
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(
                             new InvalidOperationException(
                                 SR.MissingHttpMessageProperty(
@@ -85,13 +83,11 @@ namespace System.ServiceModel.Channels
                 HttpResponseMessageProperty.GetHttpResponseMessageFromMessage(message);
             if (httpResponseMessage == null)
             {
-                HttpResponseMessageProperty responseMessageProperty = message
-                    .Properties
+                HttpResponseMessageProperty responseMessageProperty = message.Properties
                     .GetValue<HttpResponseMessageProperty>(HttpResponseMessageProperty.Name);
                 if (responseMessageProperty == null)
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(
                             new InvalidOperationException(
                                 SR.MissingHttpMessageProperty(
@@ -119,8 +115,7 @@ namespace System.ServiceModel.Channels
                 "The 'httpRequestMessage' parameter should never be null."
             );
 
-            message
-                .Properties
+            message.Properties
                 .Add(
                     HttpRequestMessageProperty.Name,
                     new HttpRequestMessageProperty(httpRequestMessage)
@@ -139,8 +134,7 @@ namespace System.ServiceModel.Channels
                 "The 'httpResponseMessage' parameter should never be null."
             );
 
-            message
-                .Properties
+            message.Properties
                 .Add(
                     HttpResponseMessageProperty.Name,
                     new HttpResponseMessageProperty(httpResponseMessage)

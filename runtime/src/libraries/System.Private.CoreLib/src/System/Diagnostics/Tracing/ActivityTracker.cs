@@ -62,8 +62,7 @@ namespace System.Diagnostics.Tracing
                 m_checkedForEnable = true;
                 if (
                     useTplSource
-                    && TplEventSource
-                        .Log
+                    && TplEventSource.Log
                         .IsEnabled(
                             EventLevel.Informational,
                             TplEventSource.Keywords.TasksFlowActivityIds

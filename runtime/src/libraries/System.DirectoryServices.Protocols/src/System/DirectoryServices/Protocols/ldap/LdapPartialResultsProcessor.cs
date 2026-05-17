@@ -225,8 +225,7 @@ namespace System.DirectoryServices.Protocols
                         {
                             for (int i = 0; i < asyncResult._response.References.Count; i++)
                             {
-                                ldapException
-                                    .PartialResults
+                                ldapException.PartialResults
                                     .Add(asyncResult._response.References[i]);
                             }
                         }

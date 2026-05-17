@@ -254,12 +254,10 @@ public static class ListenOptionsHttpsExtensions
         HttpsConnectionAdapterOptions httpsOptions
     )
     {
-        var loggerFactory = listenOptions
-            .KestrelServerOptions
+        var loggerFactory = listenOptions.KestrelServerOptions
             .ApplicationServices
             .GetRequiredService<ILoggerFactory>();
-        var metrics = listenOptions
-            .KestrelServerOptions
+        var metrics = listenOptions.KestrelServerOptions
             .ApplicationServices
             .GetRequiredService<KestrelMetrics>();
 
@@ -355,12 +353,10 @@ public static class ListenOptionsHttpsExtensions
             );
         }
 
-        var loggerFactory = listenOptions
-            .KestrelServerOptions
+        var loggerFactory = listenOptions.KestrelServerOptions
             .ApplicationServices
             .GetRequiredService<ILoggerFactory>();
-        var metrics = listenOptions
-            .KestrelServerOptions
+        var metrics = listenOptions.KestrelServerOptions
             .ApplicationServices
             .GetRequiredService<KestrelMetrics>();
 

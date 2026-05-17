@@ -158,8 +158,7 @@ namespace System.CommandLine.Parsing
                     }
 
                     foreach (
-                        SymbolResult child in symbolResult
-                            .SymbolResultTree
+                        SymbolResult child in symbolResult.SymbolResultTree
                             .GetChildren(symbolResult)
                     )
                     {

@@ -426,8 +426,7 @@ namespace Internal.Runtime.TypeLoader
 
                 if (state.ThreadDataSize != 0)
                 {
-                    state.ThreadStaticOffset = TypeLoaderEnvironment
-                        .Instance
+                    state.ThreadStaticOffset = TypeLoaderEnvironment.Instance
                         .GetNextThreadStaticsOffsetValue(pEEType->TypeManager);
 
                     threadStaticIndex = MemoryHelpers.AllocateMemory(IntPtr.Size * 2);
@@ -778,8 +777,7 @@ namespace Internal.Runtime.TypeLoader
                 state.HalfBakedRuntimeTypeHandle.ToEETypePtr()->NumFunctionPointerParameters
                     == parameterHandles.Length
             );
-            MethodTableList paramList = state
-                .HalfBakedRuntimeTypeHandle
+            MethodTableList paramList = state.HalfBakedRuntimeTypeHandle
                 .ToEETypePtr()
                 ->FunctionPointerParameters;
             for (int i = 0; i < parameterHandles.Length; i++)

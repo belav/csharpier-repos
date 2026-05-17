@@ -129,8 +129,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Squiggles
             );
             var language = workspace.Projects.Single().Language;
 
-            workspace
-                .GlobalOptions
+            workspace.GlobalOptions
                 .SetGlobalOption(
                     CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInDeclaration,
                     language,
@@ -154,8 +153,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Squiggles
                 IErrorTag
             >.GetDiagnosticsAndErrorSpans(workspace, analyzerMap);
 
-            var spans = diagnosticsAndSpans
-                .Item1
+            var spans = diagnosticsAndSpans.Item1
                 .Zip(diagnosticsAndSpans.Item2, (diagnostic, span) => (diagnostic, span))
                 .OrderBy(s => s.span.Span.Span.Start)
                 .ToImmutableArray();
@@ -172,8 +170,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Squiggles
                     new ClassifiedTextRun(
                         ClassificationTypeNames.Text,
                         "IDE0005",
-                        QuickInfoHyperLink
-                            .TestAccessor
+                        QuickInfoHyperLink.TestAccessor
                             .CreateNavigationAction(
                                 new Uri(
                                     "https://learn.microsoft.com/dotnet/fundamentals/code-analysis/style-rules/ide0005",
@@ -203,8 +200,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Squiggles
                     new ClassifiedTextRun(
                         ClassificationTypeNames.Text,
                         "IDE0005",
-                        QuickInfoHyperLink
-                            .TestAccessor
+                        QuickInfoHyperLink.TestAccessor
                             .CreateNavigationAction(
                                 new Uri(
                                     "https://learn.microsoft.com/dotnet/fundamentals/code-analysis/style-rules/ide0005",
@@ -234,8 +230,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Squiggles
                     new ClassifiedTextRun(
                         ClassificationTypeNames.Text,
                         "id",
-                        QuickInfoHyperLink
-                            .TestAccessor
+                        QuickInfoHyperLink.TestAccessor
                             .CreateNavigationAction(
                                 new Uri("https://github.com/dotnet/roslyn", UriKind.Absolute)
                             ),
@@ -259,8 +254,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Squiggles
                     new ClassifiedTextRun(
                         ClassificationTypeNames.Text,
                         "IDE0049",
-                        QuickInfoHyperLink
-                            .TestAccessor
+                        QuickInfoHyperLink.TestAccessor
                             .CreateNavigationAction(
                                 new Uri(
                                     "https://learn.microsoft.com/dotnet/fundamentals/code-analysis/style-rules/ide0049",
@@ -317,8 +311,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Squiggles
                     new ClassifiedTextRun(
                         ClassificationTypeNames.Text,
                         "CS0246",
-                        QuickInfoHyperLink
-                            .TestAccessor
+                        QuickInfoHyperLink.TestAccessor
                             .CreateNavigationAction(
                                 new Uri(
                                     "https://msdn.microsoft.com/query/roslyn.query?appId=roslyn&k=k(CS0246)",
@@ -347,8 +340,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Squiggles
             >(workspace);
 
             var firstDocument = workspace.Documents.First();
-            var tagger = wrapper
-                .TaggerProvider
+            var tagger = wrapper.TaggerProvider
                 .CreateTagger<IErrorTag>(firstDocument.GetTextBuffer());
             using var disposable = tagger as IDisposable;
             await wrapper.WaitForTags();
@@ -380,8 +372,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Squiggles
             >(workspace);
 
             var firstDocument = workspace.Documents.First();
-            var tagger = wrapper
-                .TaggerProvider
+            var tagger = wrapper.TaggerProvider
                 .CreateTagger<IErrorTag>(firstDocument.GetTextBuffer());
             using var disposable = tagger as IDisposable;
             await wrapper.WaitForTags();
@@ -404,10 +395,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Squiggles
             Assert.True(spans.Count == 0);
         }
 
-        private static readonly TestComposition s_mockComposition = EditorTestCompositions
-            .EditorFeatures
-            .AddExcludedPartTypes(typeof(IDiagnosticAnalyzerService))
-            .AddParts(typeof(MockDiagnosticAnalyzerService));
+        private static readonly TestComposition s_mockComposition =
+            EditorTestCompositions.EditorFeatures
+                .AddExcludedPartTypes(typeof(IDiagnosticAnalyzerService))
+                .AddParts(typeof(MockDiagnosticAnalyzerService));
 
         [WpfFact]
         public async Task BuildErrorZeroLengthSpan()

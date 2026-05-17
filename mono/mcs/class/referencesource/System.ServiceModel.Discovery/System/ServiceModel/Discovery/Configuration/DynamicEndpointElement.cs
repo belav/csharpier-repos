@@ -77,8 +77,7 @@ namespace System.ServiceModel.Discovery.Configuration
         {
             if (string.IsNullOrEmpty(channelEndpointElement.Contract))
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new ConfigurationErrorsException(
                             SR.DiscoveryConfigContractNotSpecified(channelEndpointElement.Kind)
@@ -88,13 +87,11 @@ namespace System.ServiceModel.Discovery.Configuration
 
             if (
                 channelEndpointElement.Address != null
-                && !channelEndpointElement
-                    .Address
+                && !channelEndpointElement.Address
                     .Equals(DiscoveryClientBindingElement.DiscoveryEndpointAddress.Uri)
             )
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new ConfigurationErrorsException(
                             SR.DiscoveryEndpointAddressIncorrect(
@@ -111,8 +108,7 @@ namespace System.ServiceModel.Discovery.Configuration
             ServiceEndpointElement serviceEndpointElement
         )
         {
-            throw FxTrace
-                .Exception
+            throw FxTrace.Exception
                 .AsError(
                     new InvalidOperationException(
                         SR.DiscoveryConfigDynamicEndpointInService(serviceEndpointElement.Kind)
@@ -138,8 +134,7 @@ namespace System.ServiceModel.Discovery.Configuration
                 )
             )
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new ConfigurationErrorsException(
                             SR.DiscoveryClientBindingElementPresentInDynamicEndpoint
@@ -172,8 +167,7 @@ namespace System.ServiceModel.Discovery.Configuration
 
             if (dynamicEndpoint.FindCriteria.ContractTypeNames.Count == 0)
             {
-                dynamicEndpoint
-                    .FindCriteria
+                dynamicEndpoint.FindCriteria
                     .ContractTypeNames
                     .Add(
                         new XmlQualifiedName(

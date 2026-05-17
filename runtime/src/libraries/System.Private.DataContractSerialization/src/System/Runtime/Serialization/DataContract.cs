@@ -2533,8 +2533,7 @@ namespace System.Runtime.Serialization.DataContracts
                         )
                         {
                             DataContract itemDataContract = DataContract.GetDataContract(
-                                Globals
-                                    .TypeOfKeyValuePair
+                                Globals.TypeOfKeyValuePair
                                     .MakeGenericType(
                                         collectionDataContract.ItemType.GetGenericArguments()
                                     )

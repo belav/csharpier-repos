@@ -122,16 +122,14 @@ class A
                 mutatingLspWorkspace,
                 CapabilitiesWithVSExtensions
             );
-            testLspServer
-                .TestWorkspace
+            testLspServer.TestWorkspace
                 .GlobalOptions
                 .SetGlobalOption(
                     InlineHintsOptionsStorage.EnabledForParameters,
                     LanguageNames.CSharp,
                     true
                 );
-            testLspServer
-                .TestWorkspace
+            testLspServer.TestWorkspace
                 .GlobalOptions
                 .SetGlobalOption(
                     InlineHintsOptionsStorage.EnabledForTypes,
@@ -219,16 +217,14 @@ class A
                     },
                 }
             );
-            testLspServer
-                .TestWorkspace
+            testLspServer.TestWorkspace
                 .GlobalOptions
                 .SetGlobalOption(
                     InlineHintsOptionsStorage.EnabledForParameters,
                     LanguageNames.CSharp,
                     true
                 );
-            testLspServer
-                .TestWorkspace
+            testLspServer.TestWorkspace
                 .GlobalOptions
                 .SetGlobalOption(
                     InlineHintsOptionsStorage.EnabledForTypes,

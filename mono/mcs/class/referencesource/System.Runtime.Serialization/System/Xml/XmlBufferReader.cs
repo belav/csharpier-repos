@@ -278,8 +278,7 @@ namespace System.Xml
                 this.buffer = newBuffer;
                 this.streamBuffer = newBuffer;
             }
-            System
-                .Buffer
+            System.Buffer
                 .BlockCopy(
                     this.buffer,
                     this.offset,
@@ -524,8 +523,7 @@ namespace System.Xml
             }
             catch (ArgumentException exception)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         XmlExceptionHelper.CreateConversionException(
                             value.ToString(CultureInfo.InvariantCulture),
@@ -536,8 +534,7 @@ namespace System.Xml
             }
             catch (FormatException exception)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         XmlExceptionHelper.CreateConversionException(
                             value.ToString(CultureInfo.InvariantCulture),
@@ -548,8 +545,7 @@ namespace System.Xml
             }
             catch (OverflowException exception)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         XmlExceptionHelper.CreateConversionException(
                             value.ToString(CultureInfo.InvariantCulture),
@@ -570,8 +566,7 @@ namespace System.Xml
             }
             catch (ArgumentException exception)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         XmlExceptionHelper.CreateConversionException(
                             value.ToString(CultureInfo.InvariantCulture),
@@ -582,8 +577,7 @@ namespace System.Xml
             }
             catch (FormatException exception)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         XmlExceptionHelper.CreateConversionException(
                             value.ToString(CultureInfo.InvariantCulture),
@@ -594,8 +588,7 @@ namespace System.Xml
             }
             catch (OverflowException exception)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         XmlExceptionHelper.CreateConversionException(
                             value.ToString(CultureInfo.InvariantCulture),

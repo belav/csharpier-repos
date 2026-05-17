@@ -577,11 +577,8 @@ namespace System.ServiceModel.Channels
 
                 try
                 {
-                    IAsyncResult result = this.listener.BeginAcceptChannel(
-                        TimeSpan.MaxValue,
-                        onAcceptChannelComplete,
-                        this
-                    );
+                    IAsyncResult result = this.listener
+                        .BeginAcceptChannel(TimeSpan.MaxValue, onAcceptChannelComplete, this);
 
                     if (!result.CompletedSynchronously)
                     {
@@ -717,11 +714,8 @@ namespace System.ServiceModel.Channels
                 try
                 {
                     TChannel channel;
-                    bool success = !this.Synchronizer.TryGetChannelForInput(
-                        true,
-                        timeoutHelper.RemainingTime(),
-                        out channel
-                    );
+                    bool success = !this.Synchronizer
+                        .TryGetChannelForInput(true, timeoutHelper.RemainingTime(), out channel);
 
                     if (channel == null)
                     {

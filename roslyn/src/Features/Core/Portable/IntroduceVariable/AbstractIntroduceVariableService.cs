@@ -511,8 +511,7 @@ namespace Microsoft.CodeAnalysis.IntroduceVariable
             CancellationToken cancellationToken
         )
         {
-            var semanticFacts = semanticDocument
-                .Document
+            var semanticFacts = semanticDocument.Document
                 .GetLanguageService<ISemanticFactsService>();
 
             var semanticModel = semanticDocument.SemanticModel;
@@ -543,8 +542,7 @@ namespace Microsoft.CodeAnalysis.IntroduceVariable
         {
             var semanticModel = semanticDocument.SemanticModel;
 
-            var semanticFacts = semanticDocument
-                .Document
+            var semanticFacts = semanticDocument.Document
                 .GetLanguageService<ISemanticFactsService>();
             var baseName = semanticFacts.GenerateNameForExpression(
                 semanticModel,
@@ -752,8 +750,7 @@ namespace Microsoft.CodeAnalysis.IntroduceVariable
             var semanticModel = document.SemanticModel;
             var semanticMap = semanticModel.GetSemanticMap(expression, cancellationToken);
 
-            var anonymousMethodParameters = semanticMap
-                .AllReferencedSymbols
+            var anonymousMethodParameters = semanticMap.AllReferencedSymbols
                 .OfType<IParameterSymbol>()
                 .Where(p => p.ContainingSymbol.IsAnonymousFunction());
             return anonymousMethodParameters;
@@ -774,8 +771,7 @@ namespace Microsoft.CodeAnalysis.IntroduceVariable
             var newSemanticDocument = await SemanticDocument
                 .CreateAsync(newDocument, cancellationToken)
                 .ConfigureAwait(false);
-            var newMatches = newSemanticDocument
-                .Root
+            var newMatches = newSemanticDocument.Root
                 .GetCurrentNodes(matches.AsEnumerable())
                 .ToSet();
 
@@ -785,8 +781,7 @@ namespace Microsoft.CodeAnalysis.IntroduceVariable
                 .Select(m => m.AncestorsAndSelf().OfType<TExpressionSyntax>().Last())
                 .Distinct();
 
-            newRoot = await newSemanticDocument
-                .Root
+            newRoot = await newSemanticDocument.Root
                 .ReplaceNodesAsync(
                     topMostExpressions,
                     computeReplacementAsync: async (oldNode, newNode, ct) =>

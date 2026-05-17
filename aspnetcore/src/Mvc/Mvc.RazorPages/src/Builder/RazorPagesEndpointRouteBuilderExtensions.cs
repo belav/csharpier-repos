@@ -397,17 +397,14 @@ public static class RazorPagesEndpointRouteBuilderExtensions
         IEndpointRouteBuilder endpoints
     )
     {
-        var dataSource = endpoints
-            .DataSources
+        var dataSource = endpoints.DataSources
             .OfType<PageActionEndpointDataSource>()
             .FirstOrDefault();
         if (dataSource == null)
         {
-            var orderProviderCache = endpoints
-                .ServiceProvider
+            var orderProviderCache = endpoints.ServiceProvider
                 .GetRequiredService<OrderedEndpointsSequenceProviderCache>();
-            var factory = endpoints
-                .ServiceProvider
+            var factory = endpoints.ServiceProvider
                 .GetRequiredService<PageActionEndpointDataSourceFactory>();
             dataSource = factory.Create(
                 orderProviderCache.GetOrCreateOrderedEndpointsSequenceProvider(endpoints)

@@ -317,8 +317,7 @@ namespace System.Linq.Parallel.Tests
             _ = count;
 
             AssertThrows.Wrapped<DeliberateTestException>(() =>
-                labeled
-                    .Item
+                labeled.Item
                     .ToDictionary(
                         (Func<int, int>)(
                             x =>
@@ -329,8 +328,7 @@ namespace System.Linq.Parallel.Tests
                     )
             );
             AssertThrows.Wrapped<DeliberateTestException>(() =>
-                labeled
-                    .Item
+                labeled.Item
                     .ToDictionary(
                         (Func<int, int>)(
                             x =>
@@ -342,8 +340,7 @@ namespace System.Linq.Parallel.Tests
                     )
             );
             AssertThrows.Wrapped<DeliberateTestException>(() =>
-                labeled
-                    .Item
+                labeled.Item
                     .ToDictionary(
                         x => x,
                         (Func<int, int>)(
@@ -356,8 +353,7 @@ namespace System.Linq.Parallel.Tests
             );
 
             AssertThrows.Wrapped<DeliberateTestException>(() =>
-                labeled
-                    .Item
+                labeled.Item
                     .ToDictionary(
                         (Func<int, int>)(
                             x =>
@@ -369,8 +365,7 @@ namespace System.Linq.Parallel.Tests
                     )
             );
             AssertThrows.Wrapped<DeliberateTestException>(() =>
-                labeled
-                    .Item
+                labeled.Item
                     .ToDictionary(
                         (Func<int, int>)(
                             x =>
@@ -383,8 +378,7 @@ namespace System.Linq.Parallel.Tests
                     )
             );
             AssertThrows.Wrapped<DeliberateTestException>(() =>
-                labeled
-                    .Item
+                labeled.Item
                     .ToDictionary(
                         x => x,
                         (Func<int, int>)(

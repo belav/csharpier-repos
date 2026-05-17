@@ -37,8 +37,7 @@ namespace System.ServiceModel.Description
             {
                 if (value != webScriptBodyStyle)
                 {
-                    throw System
-                        .ServiceModel
+                    throw System.ServiceModel
                         .DiagnosticUtility
                         .ExceptionUtility
                         .ThrowHelperError(
@@ -62,8 +61,7 @@ namespace System.ServiceModel.Description
             {
                 if (!WebMessageFormatHelper.IsDefined(value))
                 {
-                    throw System
-                        .ServiceModel
+                    throw System.ServiceModel
                         .DiagnosticUtility
                         .ExceptionUtility
                         .ThrowHelperError(new ArgumentOutOfRangeException("value"));
@@ -79,8 +77,7 @@ namespace System.ServiceModel.Description
             {
                 if (!WebMessageFormatHelper.IsDefined(value))
                 {
-                    throw System
-                        .ServiceModel
+                    throw System.ServiceModel
                         .DiagnosticUtility
                         .ExceptionUtility
                         .ThrowHelperError(new ArgumentOutOfRangeException("value"));
@@ -96,8 +93,7 @@ namespace System.ServiceModel.Description
             {
                 if (value)
                 {
-                    throw System
-                        .ServiceModel
+                    throw System.ServiceModel
                         .DiagnosticUtility
                         .ExceptionUtility
                         .ThrowHelperError(
@@ -116,8 +112,7 @@ namespace System.ServiceModel.Description
             {
                 if (value)
                 {
-                    throw System
-                        .ServiceModel
+                    throw System.ServiceModel
                         .DiagnosticUtility
                         .ExceptionUtility
                         .ThrowHelperError(
@@ -136,8 +131,7 @@ namespace System.ServiceModel.Description
             {
                 if (value)
                 {
-                    throw System
-                        .ServiceModel
+                    throw System.ServiceModel
                         .DiagnosticUtility
                         .ExceptionUtility
                         .ThrowHelperError(
@@ -175,8 +169,7 @@ namespace System.ServiceModel.Description
             catch (XmlException exception)
             {
                 // Microsoft, need to reference this resource string although fix for 13332 was removed
-                throw System
-                    .ServiceModel
+                throw System.ServiceModel
                     .DiagnosticUtility
                     .ExceptionUtility
                     .ThrowHelperError(
@@ -203,8 +196,7 @@ namespace System.ServiceModel.Description
             {
                 if (operation.Behaviors.Find<XmlSerializerOperationBehavior>() != null)
                 {
-                    throw System
-                        .ServiceModel
+                    throw System.ServiceModel
                         .DiagnosticUtility
                         .ExceptionUtility
                         .ThrowHelperError(
@@ -220,8 +212,7 @@ namespace System.ServiceModel.Description
                 string method = WebHttpBehavior.GetWebMethod(operation);
                 if (method != WebHttpBehavior.GET && method != WebHttpBehavior.POST)
                 {
-                    throw System
-                        .ServiceModel
+                    throw System.ServiceModel
                         .DiagnosticUtility
                         .ExceptionUtility
                         .ThrowHelperError(
@@ -239,8 +230,7 @@ namespace System.ServiceModel.Description
                 WebGetAttribute webGetAttribute = operation.Behaviors.Find<WebGetAttribute>();
                 if (webGetAttribute != null && webGetAttribute.UriTemplate != null)
                 {
-                    throw System
-                        .ServiceModel
+                    throw System.ServiceModel
                         .DiagnosticUtility
                         .ExceptionUtility
                         .ThrowHelperError(
@@ -253,13 +243,11 @@ namespace System.ServiceModel.Description
                             )
                         );
                 }
-                WebInvokeAttribute webInvokeAttribute = operation
-                    .Behaviors
+                WebInvokeAttribute webInvokeAttribute = operation.Behaviors
                     .Find<WebInvokeAttribute>();
                 if (webInvokeAttribute != null && webInvokeAttribute.UriTemplate != null)
                 {
-                    throw System
-                        .ServiceModel
+                    throw System.ServiceModel
                         .DiagnosticUtility
                         .ExceptionUtility
                         .ThrowHelperError(
@@ -275,8 +263,7 @@ namespace System.ServiceModel.Description
                 WebMessageBodyStyle bodyStyle = GetBodyStyle(operation);
                 if (bodyStyle != webScriptBodyStyle)
                 {
-                    throw System
-                        .ServiceModel
+                    throw System.ServiceModel
                         .DiagnosticUtility
                         .ExceptionUtility
                         .ThrowHelperError(
@@ -299,8 +286,7 @@ namespace System.ServiceModel.Description
                         && (messageDescription.Body.Parts.Count > 0)
                     )
                     {
-                        throw System
-                            .ServiceModel
+                        throw System.ServiceModel
                             .DiagnosticUtility
                             .ExceptionUtility
                             .ThrowHelperError(
@@ -374,8 +360,7 @@ namespace System.ServiceModel.Description
         {
             if (endpointDispatcher.ChannelDispatcher == null)
             {
-                throw System
-                    .ServiceModel
+                throw System.ServiceModel
                     .DiagnosticUtility
                     .ExceptionUtility
                     .ThrowHelperArgument(
@@ -384,8 +369,7 @@ namespace System.ServiceModel.Description
                     );
             }
 #pragma warning disable 56506 // Microsoft, endpointDispatcher.ChannelDispatcher.ErrorHandlers never null
-            endpointDispatcher
-                .ChannelDispatcher
+            endpointDispatcher.ChannelDispatcher
                 .ErrorHandlers
                 .Add(
                     new JsonErrorHandler(
@@ -434,8 +418,7 @@ namespace System.ServiceModel.Description
                     )
                 ) //  ignoreCase //  includeHostNameInComparison
                 {
-                    throw System
-                        .ServiceModel
+                    throw System.ServiceModel
                         .DiagnosticUtility
                         .ExceptionUtility
                         .ThrowHelperError(
@@ -453,8 +436,7 @@ namespace System.ServiceModel.Description
             }
 
             HttpTransportBindingElement transportBindingElement;
-            HttpTransportBindingElement existingTransportBindingElement = endpoint
-                .Binding
+            HttpTransportBindingElement existingTransportBindingElement = endpoint.Binding
                 .CreateBindingElements()
                 .Find<HttpTransportBindingElement>();
 
@@ -561,8 +543,7 @@ namespace System.ServiceModel.Description
                             {
                                 if (faultDetail.ExceptionDetail != null)
                                 {
-                                    throw System
-                                        .ServiceModel
+                                    throw System.ServiceModel
                                         .DiagnosticUtility
                                         .ExceptionUtility
                                         .ThrowHelperError(
@@ -575,8 +556,7 @@ namespace System.ServiceModel.Description
                                 }
                                 else
                                 {
-                                    throw System
-                                        .ServiceModel
+                                    throw System.ServiceModel
                                         .DiagnosticUtility
                                         .ExceptionUtility
                                         .ThrowHelperError(
@@ -591,20 +571,17 @@ namespace System.ServiceModel.Description
                             }
                             else
                             {
-                                throw System
-                                    .ServiceModel
+                                throw System.ServiceModel
                                     .DiagnosticUtility
                                     .ExceptionUtility
                                     .ThrowHelperError(
                                         new FaultException(
                                             MessageFault.CreateFault(
                                                 faultCode,
-                                                System
-                                                    .ServiceModel
+                                                System.ServiceModel
                                                     .SR
                                                     .GetString(
-                                                        System
-                                                            .ServiceModel
+                                                        System.ServiceModel
                                                             .SR
                                                             .SFxInternalServerError
                                                     )
@@ -629,8 +606,7 @@ namespace System.ServiceModel.Description
 
             public JsonErrorHandler(ServiceEndpoint endpoint, bool includeExceptionDetailInFaults)
             {
-                WebMessageEncodingBindingElement webMEBE = endpoint
-                    .Binding
+                WebMessageEncodingBindingElement webMEBE = endpoint.Binding
                     .CreateBindingElements()
                     .Find<WebMessageEncodingBindingElement>();
                 outgoingContentType = JsonMessageEncoderFactory.GetContentType(webMEBE);
@@ -685,8 +661,7 @@ namespace System.ServiceModel.Description
 
                     object property = null;
                     if (
-                        newMessage
-                            .Properties
+                        newMessage.Properties
                             .TryGetValue(HttpResponseMessageProperty.Name, out property)
                     )
                     {
@@ -695,8 +670,7 @@ namespace System.ServiceModel.Description
                     else
                     {
                         responseProperty = new HttpResponseMessageProperty();
-                        newMessage
-                            .Properties
+                        newMessage.Properties
                             .Add(HttpResponseMessageProperty.Name, responseProperty);
                     }
 
@@ -709,8 +683,7 @@ namespace System.ServiceModel.Description
 
                 object bodyFormatPropertyObject;
                 if (
-                    fault
-                        .Properties
+                    fault.Properties
                         .TryGetValue(
                             WebBodyFormatMessageProperty.Name,
                             out bodyFormatPropertyObject
@@ -730,8 +703,7 @@ namespace System.ServiceModel.Description
                 }
                 else
                 {
-                    fault
-                        .Properties
+                    fault.Properties
                         .Add(
                             WebBodyFormatMessageProperty.Name,
                             WebBodyFormatMessageProperty.JsonProperty
@@ -762,8 +734,7 @@ namespace System.ServiceModel.Description
                             }
                             catch (SerializationException exception)
                             {
-                                System
-                                    .ServiceModel
+                                System.ServiceModel
                                     .DiagnosticUtility
                                     .TraceHandledException(exception, TraceEventType.Information);
                                 // A SerializationException will be thrown if the detail isn't of type ExceptionDetail
@@ -771,8 +742,7 @@ namespace System.ServiceModel.Description
                             }
                             catch (SecurityException exception)
                             {
-                                System
-                                    .ServiceModel
+                                System.ServiceModel
                                     .DiagnosticUtility
                                     .TraceHandledException(exception, TraceEventType.Information);
                                 // A SecurityException will be thrown if the detail can't be obtained in partial trust
@@ -784,8 +754,7 @@ namespace System.ServiceModel.Description
                     }
                     else
                     {
-                        faultDetail.Message = System
-                            .ServiceModel
+                        faultDetail.Message = System.ServiceModel
                             .SR
                             .GetString(System.ServiceModel.SR.SFxInternalServerError);
                     }

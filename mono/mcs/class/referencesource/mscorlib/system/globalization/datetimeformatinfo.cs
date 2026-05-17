@@ -593,8 +593,7 @@ namespace System.Globalization
             get
             {
                 Contract.Ensures(Contract.Result<DateTimeFormatInfo>() != null);
-                System.Globalization.CultureInfo culture = System
-                    .Threading
+                System.Globalization.CultureInfo culture = System.Threading
                     .Thread
                     .CurrentThread
                     .CurrentCulture;
@@ -997,9 +996,8 @@ namespace System.Globalization
                         Calendar.ID > 0,
                         "[DateTimeFormatInfo.AbbreviatedEnglishEraNames] Expected Calendar.ID > 0"
                     );
-                    this.m_abbrevEnglishEraNames = this.m_cultureData.AbbreviatedEnglishEraNames(
-                        Calendar.ID
-                    );
+                    this.m_abbrevEnglishEraNames = this.m_cultureData
+                        .AbbreviatedEnglishEraNames(Calendar.ID);
                 }
                 return (this.m_abbrevEnglishEraNames);
             }
@@ -1867,8 +1865,8 @@ namespace System.Globalization
             {
                 if (this.m_genitiveAbbreviatedMonthNames == null)
                 {
-                    this.m_genitiveAbbreviatedMonthNames =
-                        this.m_cultureData.AbbreviatedGenitiveMonthNames(this.Calendar.ID);
+                    this.m_genitiveAbbreviatedMonthNames = this.m_cultureData
+                        .AbbreviatedGenitiveMonthNames(this.Calendar.ID);
                     Contract.Assert(
                         this.m_genitiveAbbreviatedMonthNames.Length == 13,
                         "[DateTimeFormatInfo.GetGenitiveMonthNames] Expected 13 abbreviated genitive month names in a year"

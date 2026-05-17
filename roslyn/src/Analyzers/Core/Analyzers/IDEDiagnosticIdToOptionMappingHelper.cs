@@ -51,8 +51,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
         public static bool IsKnownIDEDiagnosticId(string diagnosticId) =>
             s_diagnosticIdToOptionMap.ContainsKey(diagnosticId)
-            || s_diagnosticIdToLanguageSpecificOptionsMap
-                .Values
+            || s_diagnosticIdToLanguageSpecificOptionsMap.Values
                 .Any(map => map.ContainsKey(diagnosticId));
 
         public static void AddOptionMapping(string diagnosticId, ImmutableHashSet<IOption2> options)

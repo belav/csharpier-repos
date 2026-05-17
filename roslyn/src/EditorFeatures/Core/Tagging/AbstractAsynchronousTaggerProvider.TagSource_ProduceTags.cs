@@ -34,8 +34,7 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
                 _dataSource.ThreadingContext.ThrowIfNotOnUIThread();
 
                 Debug.Assert(
-                    _dataSource
-                        .CaretChangeBehavior
+                    _dataSource.CaretChangeBehavior
                         .HasFlag(TaggerCaretChangeBehavior.RemoveAllTagsOnCaretMoveOutsideOfTag)
                 );
 
@@ -112,9 +111,12 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
                             this.AccumulatedTextChanges =
                                 this.AccumulatedTextChanges == null
                                     ? textChangeRange
-                                    : this.AccumulatedTextChanges.Accumulate(
-                                        SpecializedCollections.SingletonEnumerable(textChangeRange)
-                                    );
+                                    : this.AccumulatedTextChanges
+                                        .Accumulate(
+                                            SpecializedCollections.SingletonEnumerable(
+                                                textChangeRange
+                                            )
+                                        );
                         }
 
                         break;
@@ -133,9 +135,8 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
                                 )
                             );
 
-                        this.AccumulatedTextChanges = this.AccumulatedTextChanges.Accumulate(
-                            textChangeRanges
-                        );
+                        this.AccumulatedTextChanges = this.AccumulatedTextChanges
+                            .Accumulate(textChangeRanges);
                         break;
                     }
                 }
@@ -153,8 +154,7 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
 
                 // Don't bother going forward if we're not going adjust any tags based on edits.
                 if (
-                    _dataSource
-                        .TextChangeBehavior
+                    _dataSource.TextChangeBehavior
                         .HasFlag(TaggerTextChangeBehavior.RemoveTagsThatIntersectEdits)
                 )
                 {
@@ -174,9 +174,10 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
 
                 var snapshot = e.After;
 
-                var tagsToRemove = e.Changes.SelectMany(c =>
-                    treeForBuffer.GetIntersectingSpans(new SnapshotSpan(snapshot, c.NewSpan))
-                );
+                var tagsToRemove = e.Changes
+                    .SelectMany(c =>
+                        treeForBuffer.GetIntersectingSpans(new SnapshotSpan(snapshot, c.NewSpan))
+                    );
                 if (!tagsToRemove.Any())
                     return;
 
@@ -249,8 +250,7 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
                 CancellationToken cancellationToken
             )
             {
-                await _dataSource
-                    .ThreadingContext
+                await _dataSource.ThreadingContext
                     .JoinableTaskFactory
                     .SwitchToMainThreadAsync(cancellationToken)
                     .NoThrowAwaitable();
@@ -328,8 +328,7 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
                     );
 
                     // Then switch back to the UI thread to update our state and kick off the work to notify the editor.
-                    await _dataSource
-                        .ThreadingContext
+                    await _dataSource.ThreadingContext
                         .JoinableTaskFactory
                         .SwitchToMainThreadAsync(cancellationToken)
                         .NoThrowAwaitable();
@@ -416,8 +415,7 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
                 var buffersToTag = spansToTag
                     .Select(dss => dss.SnapshotSpan.Snapshot.TextBuffer)
                     .ToSet();
-                var newTagsByBuffer = context
-                    .TagSpans
+                var newTagsByBuffer = context.TagSpans
                     .Where(ts => buffersToTag.Contains(ts.Span.Snapshot.TextBuffer))
                     .ToLookup(t => t.Span.Snapshot.TextBuffer);
                 var spansTagged = context._spansTagged;
@@ -524,16 +522,14 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
             private bool ShouldSkipTagProduction()
             {
                 if (
-                    _dataSource
-                        .Options
+                    _dataSource.Options
                         .OfType<Option2<bool>>()
                         .Any(option => !_dataSource.GlobalOptions.GetOption(option))
                 )
                     return true;
 
                 var languageName = _subjectBuffer.GetLanguageName();
-                return _dataSource
-                    .Options
+                return _dataSource.Options
                     .OfType<PerLanguageOption2<bool>>()
                     .Any(option =>
                         languageName == null
@@ -712,8 +708,7 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
                 )
                 {
                     // Compute this as a high priority work item to have the lease amount of blocking as possible.
-                    _dataSource
-                        .ThreadingContext
+                    _dataSource.ThreadingContext
                         .JoinableTaskFactory
                         .Run(() =>
                             this.RecomputeTagsAsync(highPriority: true, _disposalTokenSource.Token)

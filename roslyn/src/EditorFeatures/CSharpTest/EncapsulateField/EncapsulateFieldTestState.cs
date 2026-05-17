@@ -31,8 +31,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.EncapsulateField
         public EncapsulateFieldTestState(TestWorkspace workspace)
         {
             Workspace = workspace;
-            _testDocument = Workspace
-                .Documents
+            _testDocument = Workspace.Documents
                 .Single(d => d.CursorPosition.HasValue || d.SelectedSpans.Any());
             TargetDocument = Workspace.CurrentSolution.GetDocument(_testDocument.Id);
 
@@ -52,14 +51,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.EncapsulateField
                 composition: EditorTestCompositions.EditorFeatures
             );
 
-            workspace
-                .GlobalOptions
+            workspace.GlobalOptions
                 .SetGlobalOption(
                     CSharpCodeStyleOptions.PreferExpressionBodiedAccessors,
                     CSharpCodeStyleOptions.NeverWithSilentEnforcement
                 );
-            workspace
-                .GlobalOptions
+            workspace.GlobalOptions
                 .SetGlobalOption(
                     CSharpCodeStyleOptions.PreferExpressionBodiedProperties,
                     CSharpCodeStyleOptions.NeverWithSilentEnforcement
@@ -74,14 +71,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.EncapsulateField
                 _testDocument.GetTextView(),
                 _testDocument.GetTextBuffer()
             );
-            var commandHandler = Workspace
-                .ExportProvider
+            var commandHandler = Workspace.ExportProvider
                 .GetCommandHandler<EncapsulateFieldCommandHandler>(
                     PredefinedCommandHandlerNames.EncapsulateField,
                     ContentTypeNames.CSharpContentType
                 );
-            var provider = Workspace
-                .ExportProvider
+            var provider = Workspace.ExportProvider
                 .GetExportedValue<IAsynchronousOperationListenerProvider>();
             var waiter = (IAsynchronousOperationWaiter)
                 provider.GetListener(FeatureAttribute.EncapsulateField);

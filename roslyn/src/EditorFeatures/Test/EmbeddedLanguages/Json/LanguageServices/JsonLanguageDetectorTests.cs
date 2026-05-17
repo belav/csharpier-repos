@@ -51,8 +51,7 @@ namespace Microsoft.CodeAnalysis.UnitTests.EmbeddedLanguages.Json.LanguageServic
             static void NoMatchWorker(string value)
             {
                 Assert.False(
-                    JsonLanguageDetector
-                        .CommentDetector
+                    JsonLanguageDetector.CommentDetector
                         .TryMatch(value, out _, out var stringOptions)
                         && EmbeddedLanguageCommentOptions<JsonOptions>.TryGetOptions(
                             stringOptions,

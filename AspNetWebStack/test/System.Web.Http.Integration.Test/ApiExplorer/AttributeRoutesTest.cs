@@ -571,8 +571,7 @@ namespace System.Web.Http.ApiExplorer
         {
             HttpConfiguration config = new HttpConfiguration();
             config.MapHttpAttributeRoutes();
-            config
-                .Routes
+            config.Routes
                 .MapHttpRoute(
                     "Default",
                     "api/{controller}/{id}",
@@ -592,8 +591,7 @@ namespace System.Web.Http.ApiExplorer
         public void NoDescription_OnAttributeRoutedAction_UsingStandardControllerRoute()
         {
             HttpConfiguration config = new HttpConfiguration();
-            var route = config
-                .Routes
+            var route = config.Routes
                 .MapHttpRoute("Default", "api/someController", new { controller = "DefaultRoute" });
             config.MapHttpAttributeRoutes();
 
@@ -613,8 +611,7 @@ namespace System.Web.Http.ApiExplorer
         public void NoDescription_OnAttributeRoutedAction_UsingStandardRoute()
         {
             HttpConfiguration config = new HttpConfiguration();
-            var route = config
-                .Routes
+            var route = config.Routes
                 .MapHttpRoute(
                     "Default",
                     "api/someAction/{id}",

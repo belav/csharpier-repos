@@ -45,8 +45,7 @@ namespace System.Web.Http
             // Add a provider so that we can use this type recursively
             // Be sure to insert at position 0 to preempt any eager binders (eg, MutableObjectBinder) that
             // may eagerly claim all types.
-            configuration
-                .Services
+            configuration.Services
                 .Insert(
                     typeof(ModelBinderProvider),
                     0,
@@ -57,8 +56,7 @@ namespace System.Web.Http
             // This ensures that the parameter binding will actually use model binding instead of Formatters.
             // Without this, the parameter binding system may see the parameter type is complex and choose
             // to use formatters instead, in which case it would ignore the registered model binders.
-            configuration
-                .ParameterBindingRules
+            configuration.ParameterBindingRules
                 .Insert(0, type, param => param.BindWithModelBinding(binder));
         }
 

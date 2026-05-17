@@ -105,8 +105,7 @@ namespace Microsoft.CodeAnalysis.OrderModifiers
                     context.ReportDiagnostic(
                         Diagnostic.Create(
                             Descriptor,
-                            context
-                                .Tree
+                            context.Tree
                                 .GetLocation(
                                     TextSpan.FromBounds(
                                         modifiers.First().SpanStart,

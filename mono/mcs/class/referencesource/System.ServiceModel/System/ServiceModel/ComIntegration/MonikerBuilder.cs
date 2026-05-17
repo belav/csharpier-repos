@@ -19,8 +19,7 @@ namespace System.ServiceModel.ComIntegration
         ComProxy IProxyCreator.CreateProxy(IntPtr outer, ref Guid riid)
         {
             if ((riid != typeof(IMoniker).GUID) && (riid != typeof(IParseDisplayName).GUID))
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new InvalidCastException(SR.GetString(SR.NoInterface, riid)));
             if (outer == IntPtr.Zero)
             {

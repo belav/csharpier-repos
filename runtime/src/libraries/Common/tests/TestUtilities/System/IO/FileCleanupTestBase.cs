@@ -241,8 +241,7 @@ namespace System.IO
 
             try
             {
-                using SafeFileHandle handle = Interop
-                    .Kernel32
+                using SafeFileHandle handle = Interop.Kernel32
                     .CreateFile(
                         TestDirectory,
                         dwDesiredAccess: 0,
@@ -258,8 +257,7 @@ namespace System.IO
                     uint result;
                     fixed (char* bufPtr = buffer)
                     {
-                        result = Interop
-                            .Kernel32
+                        result = Interop.Kernel32
                             .GetFinalPathNameByHandle(
                                 handle,
                                 bufPtr,

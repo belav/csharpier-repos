@@ -69,8 +69,7 @@ public class SqlServerModelValidatorTest : RelationalModelValidatorTest
 
         Validate(modelBuilder);
 
-        var keyProperty = modelBuilder
-            .Model
+        var keyProperty = modelBuilder.Model
             .FindEntityType(typeof(Animal))!
             .FindProperty(nameof(Animal.Id))!;
         Assert.Equal(ValueGenerated.OnAdd, keyProperty.ValueGenerated);

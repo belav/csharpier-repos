@@ -832,9 +832,8 @@ namespace System.Data.Query.PlanCompiler
                 if (null != rootType.DiscriminatorMap)
                 {
                     rootType.TypeIdKind = TypeIdKind.UserSpecified;
-                    rootType.TypeIdType = md.Helper.GetModelTypeUsage(
-                        rootType.DiscriminatorMap.DiscriminatorProperty
-                    );
+                    rootType.TypeIdType = md.Helper
+                        .GetModelTypeUsage(rootType.DiscriminatorMap.DiscriminatorProperty);
                 }
                 else
                 {

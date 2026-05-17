@@ -228,10 +228,11 @@ namespace System.Collections.Tests
             DebuggerAttributeInfo info = DebuggerAttributes.ValidateDebuggerTypeProxyProperties(
                 obj
             );
-            PropertyInfo itemProperty = info.Properties.Single(pr =>
-                pr.GetCustomAttribute<DebuggerBrowsableAttribute>().State
-                == DebuggerBrowsableState.RootHidden
-            );
+            PropertyInfo itemProperty = info.Properties
+                .Single(pr =>
+                    pr.GetCustomAttribute<DebuggerBrowsableAttribute>().State
+                    == DebuggerBrowsableState.RootHidden
+                );
             Array itemArray = (Array)itemProperty.GetValue(info.Instance);
             List<KeyValuePair<string, string>> formatted = itemArray
                 .Cast<object>()
@@ -256,10 +257,11 @@ namespace System.Collections.Tests
             DebuggerAttributeInfo info = DebuggerAttributes.ValidateDebuggerTypeProxyProperties(
                 obj
             );
-            PropertyInfo itemProperty = info.Properties.Single(pr =>
-                pr.GetCustomAttribute<DebuggerBrowsableAttribute>().State
-                == DebuggerBrowsableState.RootHidden
-            );
+            PropertyInfo itemProperty = info.Properties
+                .Single(pr =>
+                    pr.GetCustomAttribute<DebuggerBrowsableAttribute>().State
+                    == DebuggerBrowsableState.RootHidden
+                );
             Array items = itemProperty.GetValue(info.Instance) as Array;
             Assert.Equal((obj as IEnumerable).Cast<object>().ToArray(), items.Cast<object>());
         }

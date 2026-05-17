@@ -188,8 +188,7 @@ namespace System.Data.EntityModel.Emitters
                     )
                     {
                         Generator.AddError(
-                            System
-                                .Data
+                            System.Data
                                 .Entity
                                 .Design
                                 .Strings
@@ -264,8 +263,7 @@ namespace System.Data.EntityModel.Emitters
             CodeParameterDeclarationExpression connectionStringParam =
                 new CodeParameterDeclarationExpression(TypeReference.String, "connectionString");
             connectionStringCtor.Parameters.Add(connectionStringParam);
-            connectionStringCtor
-                .BaseConstructorArgs
+            connectionStringCtor.BaseConstructorArgs
                 .Add(new CodeArgumentReferenceExpression(connectionStringParam.Name));
             connectionStringCtor.BaseConstructorArgs.Add(new CodePrimitiveExpression(Item.Name));
             CommentEmitter.EmitSummaryComments(
@@ -292,8 +290,7 @@ namespace System.Data.EntityModel.Emitters
                     "connection"
                 );
             connectionWorkspaceCtor.Parameters.Add(connectionParam);
-            connectionWorkspaceCtor
-                .BaseConstructorArgs
+            connectionWorkspaceCtor.BaseConstructorArgs
                 .Add(new CodeArgumentReferenceExpression(connectionParam.Name));
             connectionWorkspaceCtor.BaseConstructorArgs.Add(new CodePrimitiveExpression(Item.Name));
             CommentEmitter.EmitSummaryComments(
@@ -317,8 +314,7 @@ namespace System.Data.EntityModel.Emitters
                 MemberAttributes.Abstract | MemberAttributes.Public;
             typeDecl.Members.Add(onContextCreatedPartialMethod);
 
-            Generator
-                .FixUps
+            Generator.FixUps
                 .Add(
                     new FixUp(
                         Item.Name + "." + _onContextCreatedString,
@@ -450,8 +446,7 @@ namespace System.Data.EntityModel.Emitters
                 }
             }
 
-            codeProperty
-                .GetStatements
+            codeProperty.GetStatements
                 .Add(
                     new CodeConditionStatement(
                         EmitExpressionEqualsNull(
@@ -471,8 +466,7 @@ namespace System.Data.EntityModel.Emitters
                     )
                 );
 
-            codeProperty
-                .GetStatements
+            codeProperty.GetStatements
                 .Add(
                     new CodeMethodReturnStatement(
                         new CodeFieldReferenceExpression(ThisRef, fieldName)
@@ -514,8 +508,7 @@ namespace System.Data.EntityModel.Emitters
 
             codeMethod.ReturnType = new CodeTypeReference(typeof(void));
 
-            codeMethod
-                .Statements
+            codeMethod.Statements
                 .Add(
                     new CodeMethodInvokeExpression(
                         new CodeBaseReferenceExpression(),
@@ -642,8 +635,7 @@ namespace System.Data.EntityModel.Emitters
                 "ExecuteFunction",
                 new CodeTypeReference[] { elementType }
             );
-            method
-                .Statements
+            method.Statements
                 .Add(
                     new CodeMethodReturnStatement(
                         new CodeMethodInvokeExpression(
@@ -686,8 +678,7 @@ namespace System.Data.EntityModel.Emitters
             // {
             //     variableName = new ObjectParameter("parameterName", typeof(parameterType));
             // }
-            method
-                .Statements
+            method.Statements
                 .Add(
                     new CodeVariableDeclarationStatement(
                         TypeReference.ForType(typeof(ObjectParameter)),
@@ -736,8 +727,7 @@ namespace System.Data.EntityModel.Emitters
                     NullExpression
                 );
             }
-            method
-                .Statements
+            method.Statements
                 .Add(
                     new CodeConditionStatement(
                         notNullCondition,

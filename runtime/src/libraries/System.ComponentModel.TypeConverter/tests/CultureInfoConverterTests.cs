@@ -203,8 +203,7 @@ namespace System.ComponentModel.Tests
         public void CultureInfoConverterForDefaultValue(bool useSystemResourceKeys)
         {
             RemoteInvokeOptions options = new RemoteInvokeOptions();
-            options
-                .RuntimeConfigurationOptions
+            options.RuntimeConfigurationOptions
                 .Add("System.Resources.UseSystemResourceKeys", useSystemResourceKeys);
 
             RemoteExecutor

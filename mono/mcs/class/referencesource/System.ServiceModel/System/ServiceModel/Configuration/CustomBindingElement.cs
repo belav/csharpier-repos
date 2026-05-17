@@ -95,8 +95,7 @@ namespace System.ServiceModel.Configuration
             BindingElementExtensionElement existingElement = null;
             if (!this.CanAddEncodingElement(element, ref existingElement))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ConfigurationErrorsException(
                             SR.GetString(
@@ -109,8 +108,7 @@ namespace System.ServiceModel.Configuration
             }
             else if (!this.CanAddStreamUpgradeElement(element, ref existingElement))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ConfigurationErrorsException(
                             SR.GetString(
@@ -123,8 +121,7 @@ namespace System.ServiceModel.Configuration
             }
             else if (!this.CanAddTransportElement(element, ref existingElement))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ConfigurationErrorsException(
                             SR.GetString(
@@ -149,8 +146,7 @@ namespace System.ServiceModel.Configuration
             }
             if (binding.GetType() != typeof(CustomBinding))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(
                         SR.GetString(
                             SR.ConfigInvalidTypeForBinding,

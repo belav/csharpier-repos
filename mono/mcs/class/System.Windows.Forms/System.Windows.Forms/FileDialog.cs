@@ -177,8 +177,7 @@ namespace System.Windows.Forms
             imageListTopToolbar.Images.Add(ResourceImageLoader.Get("go-previous.png"));
             imageListTopToolbar.Images.Add(ResourceImageLoader.Get("go-top.png"));
             imageListTopToolbar.Images.Add(ResourceImageLoader.Get("folder-new.png"));
-            imageListTopToolbar
-                .Images
+            imageListTopToolbar.Images
                 .Add(ResourceImageLoader.Get("preferences-system-windows.png"));
             imageListTopToolbar.TransparentColor = Color.Transparent;
 
@@ -201,8 +200,7 @@ namespace System.Windows.Forms
             smallButtonToolBar.Anchor = ((AnchorStyles)((AnchorStyles.Top | AnchorStyles.Right)));
             smallButtonToolBar.Appearance = ToolBarAppearance.Flat;
             smallButtonToolBar.AutoSize = false;
-            smallButtonToolBar
-                .Buttons
+            smallButtonToolBar.Buttons
                 .AddRange(
                     new ToolBarButton[]
                     {

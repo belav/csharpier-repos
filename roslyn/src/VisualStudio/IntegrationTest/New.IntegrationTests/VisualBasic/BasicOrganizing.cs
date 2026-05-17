@@ -33,20 +33,17 @@ Class Test
 End Class",
                 HangMitigatingCancellationToken
             );
-            await TestServices
-                .Shell
+            await TestServices.Shell
                 .ExecuteCommandAsync(
                     WellKnownCommands.Edit.RemoveAndSort,
                     HangMitigatingCancellationToken
                 );
-            await TestServices
-                .Workspace
+            await TestServices.Workspace
                 .WaitForAsyncOperationsAsync(
                     FeatureAttribute.OrganizeDocument,
                     HangMitigatingCancellationToken
                 );
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .TextContainsAsync(
                     @"Imports System.Runtime.CompilerServices
 Imports System.Runtime.InteropServices

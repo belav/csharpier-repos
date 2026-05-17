@@ -15,8 +15,7 @@ namespace System.Net.Mail.Tests
         [Fact]
         public void EventSource_ExistsWithCorrectId()
         {
-            Type esType = typeof(SmtpClient)
-                .Assembly
+            Type esType = typeof(SmtpClient).Assembly
                 .GetType("System.Net.NetEventSource", throwOnError: true, ignoreCase: false);
             Assert.NotNull(esType);
 

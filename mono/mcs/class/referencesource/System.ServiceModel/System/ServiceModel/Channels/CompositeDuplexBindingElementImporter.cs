@@ -36,8 +36,7 @@ namespace System.ServiceModel.Channels
 
             if (
                 compositeDuplexAssertion != null
-                || WsdlImporter
-                    .WSAddressingHelper
+                || WsdlImporter.WSAddressingHelper
                     .DetermineSupportedAddressingMode(importer, context)
                     == SupportedAddressingMode.NonAnonymous
             )

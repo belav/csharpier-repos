@@ -35,8 +35,7 @@ namespace System.ServiceModel.Dispatcher
         )
         {
             if (capacity <= 0)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(SR.SFxThrottleLimitMustBeGreaterThanZero0)
@@ -59,8 +58,7 @@ namespace System.ServiceModel.Dispatcher
             set
             {
                 if (value <= 0)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(SR.SFxThrottleLimitMustBeGreaterThanZero0)

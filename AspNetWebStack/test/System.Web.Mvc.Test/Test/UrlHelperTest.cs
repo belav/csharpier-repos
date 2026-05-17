@@ -605,8 +605,7 @@ namespace System.Web.Mvc.Test
 
             // Arrange
             UrlHelper urlHelper = GetUrlHelper();
-            urlHelper
-                .RouteCollection
+            urlHelper.RouteCollection
                 .MapRoute("MyRouteName", "any/url", new { controller = "Charlie" });
 
             // Act

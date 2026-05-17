@@ -242,8 +242,7 @@ namespace System.Text.Json.Serialization
                             options.ReferenceHandlingStrategy == ReferenceHandlingStrategy.Preserve
                         );
                         Debug.Assert(state.Current.ReturnValue is TCollection);
-                        state
-                            .ReferenceResolver
+                        state.ReferenceResolver
                             .AddReference(state.ReferenceId, state.Current.ReturnValue);
                         state.ReferenceId = null;
                     }
@@ -380,8 +379,7 @@ namespace System.Text.Json.Serialization
 
                     // Writing the start of the array must happen after any metadata
                     writer.WriteStartArray();
-                    state.Current.JsonPropertyInfo = state
-                        .Current
+                    state.Current.JsonPropertyInfo = state.Current
                         .JsonTypeInfo
                         .ElementTypeInfo!
                         .PropertyInfoForTypeInfo;

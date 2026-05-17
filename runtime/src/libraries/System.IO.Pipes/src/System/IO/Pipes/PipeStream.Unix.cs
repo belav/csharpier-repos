@@ -363,8 +363,7 @@ namespace System.IO.Pipes
         {
             try
             {
-                return await InternalHandle!
-                    .PipeSocket
+                return await InternalHandle!.PipeSocket
                     .ReceiveAsync(destination, SocketFlags.None, cancellationToken)
                     .ConfigureAwait(false);
             }
@@ -383,8 +382,7 @@ namespace System.IO.Pipes
             {
                 while (source.Length > 0)
                 {
-                    int bytesWritten = await _handle!
-                        .PipeSocket
+                    int bytesWritten = await _handle!.PipeSocket
                         .SendAsync(source, SocketFlags.None, cancellationToken)
                         .ConfigureAwait(false);
                     Debug.Assert(bytesWritten > 0 && bytesWritten <= source.Length);

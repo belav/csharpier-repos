@@ -317,8 +317,7 @@ public class RequestTimeoutsMiddlewareTests
                 }
                 : null,
         };
-        options
-            .Policies
+        options.Policies
             .Add(
                 "policy1",
                 new RequestTimeoutPolicy
@@ -332,8 +331,7 @@ public class RequestTimeoutsMiddlewareTests
                     },
                 }
             );
-        options
-            .Policies
+        options.Policies
             .Add(
                 "policy2",
                 new RequestTimeoutPolicy

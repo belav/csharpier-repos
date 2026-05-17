@@ -43,8 +43,7 @@ namespace System.ServiceModel.Dispatcher
             Fx.Assert(
                 "EndpointAddressMessageFilter cannot be added to PrefixEndpointAddressMessageFilterTable"
             );
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(
                     new InvalidOperationException(
                         "EndpointAddressMessageFilter cannot be added to PrefixEndpointAddressMessageFilterTable"
@@ -142,8 +141,7 @@ namespace System.ServiceModel.Dispatcher
             Fx.Assert(
                 "EndpointAddressMessageFilter cannot be removed from PrefixEndpointAddressMessageFilterTable"
             );
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(
                     new InvalidOperationException(
                         "EndpointAddressMessageFilter cannot be removed from PrefixEndpointAddressMessageFilterTable"

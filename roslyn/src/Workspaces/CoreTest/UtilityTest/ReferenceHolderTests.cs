@@ -58,8 +58,7 @@ namespace Microsoft.CodeAnalysis.UnitTests
         {
             var strongNull = ReferenceHolder<object?>.Strong(null);
             var weakNull = ReferenceHolder<object?>.Weak(null);
-            var expired = ReferenceHolder<object?>
-                .TestAccessor
+            var expired = ReferenceHolder<object?>.TestAccessor
                 .ReleasedWeak(hashCode: EqualityComparer<object?>.Default.GetHashCode(null!));
 
             Assert.Equal(strongNull.GetHashCode(), expired.GetHashCode());

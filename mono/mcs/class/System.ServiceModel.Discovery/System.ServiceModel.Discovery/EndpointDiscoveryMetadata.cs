@@ -16,9 +16,8 @@ namespace System.ServiceModel.Discovery
         public static EndpointDiscoveryMetadata FromServiceEndpoint(ServiceEndpoint endpoint)
         {
             var ret = new EndpointDiscoveryMetadata();
-            ret.ContractTypeNames.Add(
-                new XmlQualifiedName(endpoint.Contract.Name, endpoint.Contract.Namespace)
-            );
+            ret.ContractTypeNames
+                .Add(new XmlQualifiedName(endpoint.Contract.Name, endpoint.Contract.Namespace));
             ret.Address = endpoint.Address;
             if (endpoint.Address != null)
                 ret.ListenUris.Add(endpoint.Address.Uri);
@@ -195,8 +194,7 @@ namespace System.ServiceModel.Discovery
             };
 
             var probePart = new XmlSchemaSequence();
-            probePart
-                .Items
+            probePart.Items
                 .Add(
                     new XmlSchemaElement()
                     {
@@ -204,8 +202,7 @@ namespace System.ServiceModel.Discovery
                         MinOccurs = 0,
                     }
                 );
-            probePart
-                .Items
+            probePart.Items
                 .Add(
                     new XmlSchemaElement()
                     {
@@ -213,8 +210,7 @@ namespace System.ServiceModel.Discovery
                         MinOccurs = 0,
                     }
                 );
-            probePart
-                .Items
+            probePart.Items
                 .Add(
                     new XmlSchemaElement()
                     {
@@ -222,8 +218,7 @@ namespace System.ServiceModel.Discovery
                         MinOccurs = 0,
                     }
                 );
-            probePart
-                .Items
+            probePart.Items
                 .Add(
                     new XmlSchemaElement()
                     {
@@ -231,8 +226,7 @@ namespace System.ServiceModel.Discovery
                         MinOccurs = 0,
                     }
                 );
-            probePart
-                .Items
+            probePart.Items
                 .Add(
                     new XmlSchemaAny()
                     {
@@ -250,8 +244,7 @@ namespace System.ServiceModel.Discovery
             };
             schema.Items.Add(ct);
 
-            schema
-                .Items
+            schema.Items
                 .Add(
                     new XmlSchemaSimpleType()
                     {
@@ -268,15 +261,15 @@ namespace System.ServiceModel.Discovery
                 BaseTypeName = new XmlQualifiedName("UriListType", version.Namespace),
                 AnyAttribute = anyAttr,
             };
-            scr.Attributes.Add(
-                new XmlSchemaAttribute()
-                {
-                    Name = "matchBy",
-                    SchemaTypeName = new XmlQualifiedName("anyURI", XmlSchema.Namespace),
-                }
-            );
-            schema
-                .Items
+            scr.Attributes
+                .Add(
+                    new XmlSchemaAttribute()
+                    {
+                        Name = "matchBy",
+                        SchemaTypeName = new XmlQualifiedName("anyURI", XmlSchema.Namespace),
+                    }
+                );
+            schema.Items
                 .Add(
                     new XmlSchemaComplexType()
                     {
@@ -285,8 +278,7 @@ namespace System.ServiceModel.Discovery
                     }
                 );
 
-            schema
-                .Items
+            schema.Items
                 .Add(
                     new XmlSchemaSimpleType()
                     {
@@ -298,8 +290,7 @@ namespace System.ServiceModel.Discovery
                     }
                 );
 
-            schema
-                .Items
+            schema.Items
                 .Add(
                     new XmlSchemaElement()
                     {
@@ -307,8 +298,7 @@ namespace System.ServiceModel.Discovery
                         SchemaTypeName = new XmlQualifiedName("QNameListType", version.Namespace),
                     }
                 );
-            schema
-                .Items
+            schema.Items
                 .Add(
                     new XmlSchemaElement()
                     {
@@ -316,8 +306,7 @@ namespace System.ServiceModel.Discovery
                         SchemaTypeName = new XmlQualifiedName("ScopesType", version.Namespace),
                     }
                 );
-            schema
-                .Items
+            schema.Items
                 .Add(
                     new XmlSchemaElement()
                     {
@@ -325,8 +314,7 @@ namespace System.ServiceModel.Discovery
                         SchemaTypeName = new XmlQualifiedName("UriListType", version.Namespace),
                     }
                 );
-            schema
-                .Items
+            schema.Items
                 .Add(
                     new XmlSchemaElement()
                     {

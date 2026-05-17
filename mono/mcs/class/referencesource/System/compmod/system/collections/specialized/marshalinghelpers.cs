@@ -97,8 +97,7 @@ namespace System.Runtime.InteropServices.WindowsRuntime
             if (managedArgs == null)
                 return IntPtr.Zero;
 
-            return System
-                .StubHelpers
+            return System.StubHelpers
                 .EventArgsMarshaler
                 .CreateNativeNCCEventArgsInstance(
                     (int)managedArgs.Action,
@@ -118,8 +117,7 @@ namespace System.Runtime.InteropServices.WindowsRuntime
             if (nativeArgsIP == IntPtr.Zero)
                 return null;
 
-            object obj = System
-                .StubHelpers
+            object obj = System.StubHelpers
                 .InterfaceMarshaler
                 .ConvertToManagedWithoutUnboxing(nativeArgsIP);
             INotifyCollectionChangedEventArgs nativeArgs = (INotifyCollectionChangedEventArgs)obj;
@@ -145,8 +143,7 @@ namespace System.Runtime.InteropServices.WindowsRuntime
             if (managedArgs == null)
                 return IntPtr.Zero;
 
-            return System
-                .StubHelpers
+            return System.StubHelpers
                 .EventArgsMarshaler
                 .CreateNativePCEventArgsInstance(managedArgs.PropertyName);
         }
@@ -160,8 +157,7 @@ namespace System.Runtime.InteropServices.WindowsRuntime
             if (nativeArgsIP == IntPtr.Zero)
                 return null;
 
-            object obj = System
-                .StubHelpers
+            object obj = System.StubHelpers
                 .InterfaceMarshaler
                 .ConvertToManagedWithoutUnboxing(nativeArgsIP);
             IPropertyChangedEventArgs nativeArgs = (IPropertyChangedEventArgs)obj;

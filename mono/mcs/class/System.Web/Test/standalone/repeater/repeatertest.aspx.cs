@@ -28,37 +28,35 @@ namespace test
     {
         public override void DataBind()
         {
-            Page.Response.Write(
-                String.Format("<pre>In DataBind, from {0}</pre>", Environment.StackTrace)
-            );
+            Page.Response
+                .Write(String.Format("<pre>In DataBind, from {0}</pre>", Environment.StackTrace));
             base.DataBind();
         }
 
         protected override void CreateControlHierarchy(bool useDataSource)
         {
-            Page.Response.Write(
-                String.Format(
-                    "<pre>In CreateControlHierarchy({0}), from {1}</pre>",
-                    useDataSource,
-                    Environment.StackTrace
-                )
-            );
+            Page.Response
+                .Write(
+                    String.Format(
+                        "<pre>In CreateControlHierarchy({0}), from {1}</pre>",
+                        useDataSource,
+                        Environment.StackTrace
+                    )
+                );
             base.CreateControlHierarchy(useDataSource);
         }
 
         protected override void OnInit(EventArgs e)
         {
-            Page.Response.Write(
-                String.Format("<pre>In OnInit, from {0}</pre>", Environment.StackTrace)
-            );
+            Page.Response
+                .Write(String.Format("<pre>In OnInit, from {0}</pre>", Environment.StackTrace));
             base.OnInit(e);
         }
 
         protected override IEnumerable GetData()
         {
-            Page.Response.Write(
-                String.Format("<pre>In GetData, from {0}</pre>", Environment.StackTrace)
-            );
+            Page.Response
+                .Write(String.Format("<pre>In GetData, from {0}</pre>", Environment.StackTrace));
 
             IEnumerable data = base.GetData();
 
@@ -68,9 +66,10 @@ namespace test
             {
                 Page.Response.Write(String.Format(" + {0}<br/>", e.Current));
                 IXPathNavigable desc = (IXPathNavigable)e.Current;
-                Page.Response.Write(
-                    String.Format("+ + navigator = {0}<br/>", desc.CreateNavigator().GetType())
-                );
+                Page.Response
+                    .Write(
+                        String.Format("+ + navigator = {0}<br/>", desc.CreateNavigator().GetType())
+                    );
             }
 
             return data;
@@ -86,28 +85,29 @@ namespace test
 #endif
         protected override void OnDataSourceViewChanged(object sender, EventArgs e)
         {
-            Page.Response.Write(
-                String.Format(
-                    "<pre>In OnDataSourceViewChanged, from {0}</pre>",
-                    Environment.StackTrace
-                )
-            );
+            Page.Response
+                .Write(
+                    String.Format(
+                        "<pre>In OnDataSourceViewChanged, from {0}</pre>",
+                        Environment.StackTrace
+                    )
+                );
             base.OnDataSourceViewChanged(sender, e);
         }
 
         protected override RepeaterItem CreateItem(int itemIndex, ListItemType itemType)
         {
-            Page.Response.Write(
-                String.Format("<pre>In CreateItem, from {0}</pre>", Environment.StackTrace)
-            );
+            Page.Response
+                .Write(String.Format("<pre>In CreateItem, from {0}</pre>", Environment.StackTrace));
             return base.CreateItem(itemIndex, itemType);
         }
 
         protected override void InitializeItem(RepeaterItem item)
         {
-            Page.Response.Write(
-                String.Format("<pre>In InitializeItem, from {0}</pre>", Environment.StackTrace)
-            );
+            Page.Response
+                .Write(
+                    String.Format("<pre>In InitializeItem, from {0}</pre>", Environment.StackTrace)
+                );
             base.InitializeItem(item);
         }
     }

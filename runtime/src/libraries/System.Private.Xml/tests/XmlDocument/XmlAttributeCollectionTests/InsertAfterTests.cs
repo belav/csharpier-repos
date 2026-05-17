@@ -106,8 +106,7 @@ namespace System.Xml.XmlDocumentTests
             Assert.True(element.HasAttribute(attributeName));
 
             XmlElement destinationElement = doc.CreateElement("anotherElement");
-            XmlAttribute refAttr = destinationElement
-                .Attributes
+            XmlAttribute refAttr = destinationElement.Attributes
                 .Append(doc.CreateAttribute("anotherAttr"));
             XmlAttributeCollection target = destinationElement.Attributes;
             target.InsertAfter(attr, refAttr);
@@ -121,8 +120,7 @@ namespace System.Xml.XmlDocumentTests
         {
             XmlDocument doc = CreateDocumentWithElement();
             XmlElement element = doc.DocumentElement;
-            XmlAttribute refAttr = element
-                .Attributes
+            XmlAttribute refAttr = element.Attributes
                 .Append(doc.CreateAttribute("attr1", "some:uri1"));
             element.Attributes.Append(doc.CreateAttribute("attr2", "some:uri2"));
             element.Attributes.Append(doc.CreateAttribute("attr3", "some:uri3"));
@@ -143,8 +141,7 @@ namespace System.Xml.XmlDocumentTests
             XmlElement element = doc.DocumentElement;
             element.Attributes.Append(doc.CreateAttribute("attr1", "some:uri1"));
             element.Attributes.Append(doc.CreateAttribute("attr2", "some:uri2"));
-            XmlAttribute refAttr = element
-                .Attributes
+            XmlAttribute refAttr = element.Attributes
                 .Append(doc.CreateAttribute("attr3", "some:uri3"));
             XmlAttribute newAttr = doc.CreateAttribute("newAttr");
 
@@ -162,8 +159,7 @@ namespace System.Xml.XmlDocumentTests
             XmlDocument doc = CreateDocumentWithElement();
             XmlElement element = doc.DocumentElement;
             element.Attributes.Append(doc.CreateAttribute("attr1", "some:uri1"));
-            XmlAttribute refAttr = element
-                .Attributes
+            XmlAttribute refAttr = element.Attributes
                 .Append(doc.CreateAttribute("attr2", "some:uri2"));
             element.Attributes.Append(doc.CreateAttribute("attr3", "some:uri3"));
             XmlAttribute newAttr = doc.CreateAttribute("newAttr");
@@ -183,12 +179,10 @@ namespace System.Xml.XmlDocumentTests
             const string attributeUri = "some:existingUri";
             XmlDocument doc = CreateDocumentWithElement();
             XmlElement element = doc.DocumentElement;
-            XmlAttribute refAttr = element
-                .Attributes
+            XmlAttribute refAttr = element.Attributes
                 .Append(doc.CreateAttribute("attr1", "some:uri1"));
             element.Attributes.Append(doc.CreateAttribute(attributeName, attributeUri)); //dup
-            XmlAttribute anotherAttr = element
-                .Attributes
+            XmlAttribute anotherAttr = element.Attributes
                 .Append(doc.CreateAttribute("attr2", "some:uri2"));
             XmlAttribute newAttr = doc.CreateAttribute(attributeName, attributeUri);
 
@@ -208,12 +202,10 @@ namespace System.Xml.XmlDocumentTests
             const string attributeUri = "some:existingUri";
             XmlDocument doc = CreateDocumentWithElement();
             XmlElement element = doc.DocumentElement;
-            XmlAttribute anotherAttr = element
-                .Attributes
+            XmlAttribute anotherAttr = element.Attributes
                 .Append(doc.CreateAttribute("attr1", "some:uri1"));
             element.Attributes.Append(doc.CreateAttribute(attributeName, attributeUri)); //dup
-            XmlAttribute refAttr = element
-                .Attributes
+            XmlAttribute refAttr = element.Attributes
                 .Append(doc.CreateAttribute("attr2", "some:uri2"));
             XmlAttribute newAttr = doc.CreateAttribute(attributeName, attributeUri);
 
@@ -231,8 +223,7 @@ namespace System.Xml.XmlDocumentTests
         {
             XmlDocument doc = CreateDocumentWithElement();
             XmlElement element = doc.DocumentElement;
-            XmlAttribute refAttr = element
-                .Attributes
+            XmlAttribute refAttr = element.Attributes
                 .Append(doc.CreateAttribute("attr1", "some:uri1"));
             XmlAttribute newAttr = doc.CreateAttribute("attr2", "some:uri2");
 
@@ -247,14 +238,11 @@ namespace System.Xml.XmlDocumentTests
             const string attributeUri = "some:existingUri";
             XmlDocument doc = CreateDocumentWithElement();
             XmlElement element = doc.DocumentElement;
-            XmlAttribute anotherAttr1 = element
-                .Attributes
+            XmlAttribute anotherAttr1 = element.Attributes
                 .Append(doc.CreateAttribute("attr1", "some:uri1"));
-            XmlAttribute anotherAttr2 = element
-                .Attributes
+            XmlAttribute anotherAttr2 = element.Attributes
                 .Append(doc.CreateAttribute("attr2", "some:uri2"));
-            XmlAttribute refAttr = element
-                .Attributes
+            XmlAttribute refAttr = element.Attributes
                 .Append(doc.CreateAttribute(attributeName, attributeUri)); //dup
             XmlAttribute newAttr = doc.CreateAttribute(attributeName, attributeUri);
 
@@ -274,17 +262,13 @@ namespace System.Xml.XmlDocumentTests
             const string attributeUri = "some:existingUri";
             XmlDocument doc = CreateDocumentWithElement();
             XmlElement element = doc.DocumentElement;
-            XmlAttribute anotherAttr1 = element
-                .Attributes
+            XmlAttribute anotherAttr1 = element.Attributes
                 .Append(doc.CreateAttribute("attr1", "some:uri1"));
-            XmlAttribute anotherAttr2 = element
-                .Attributes
+            XmlAttribute anotherAttr2 = element.Attributes
                 .Append(doc.CreateAttribute("attr2", "some:uri2"));
-            XmlAttribute refAttr = element
-                .Attributes
+            XmlAttribute refAttr = element.Attributes
                 .Append(doc.CreateAttribute(attributeName, attributeUri)); //dup
-            XmlAttribute anotherAttr3 = element
-                .Attributes
+            XmlAttribute anotherAttr3 = element.Attributes
                 .Append(doc.CreateAttribute("attr3", "some:uri3"));
             XmlAttribute newAttr = doc.CreateAttribute(attributeName, attributeUri);
 
@@ -305,15 +289,12 @@ namespace System.Xml.XmlDocumentTests
             const string attributeUri = "some:existingUri";
             XmlDocument doc = CreateDocumentWithElement();
             XmlElement element = doc.DocumentElement;
-            XmlAttribute refAttr = element
-                .Attributes
+            XmlAttribute refAttr = element.Attributes
                 .Append(doc.CreateAttribute("attr1", "some:uri1"));
-            XmlAttribute anotherAttr2 = element
-                .Attributes
+            XmlAttribute anotherAttr2 = element.Attributes
                 .Append(doc.CreateAttribute("attr2", "some:uri2"));
             element.Attributes.Append(doc.CreateAttribute(attributeName, attributeUri)); //dup
-            XmlAttribute anotherAttr3 = element
-                .Attributes
+            XmlAttribute anotherAttr3 = element.Attributes
                 .Append(doc.CreateAttribute("attr3", "some:uri3"));
             XmlAttribute newAttr = doc.CreateAttribute(attributeName, attributeUri);
 

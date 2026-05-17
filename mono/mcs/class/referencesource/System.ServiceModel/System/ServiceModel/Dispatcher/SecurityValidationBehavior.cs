@@ -58,8 +58,7 @@ namespace System.ServiceModel.Dispatcher
                 BindingParameterCollection parameters
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new NotSupportedException());
             }
 
@@ -67,8 +66,7 @@ namespace System.ServiceModel.Dispatcher
                 params object[] parameters
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new NotSupportedException());
             }
 
@@ -77,8 +75,7 @@ namespace System.ServiceModel.Dispatcher
                 params object[] parameters
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new NotSupportedException());
             }
 
@@ -88,8 +85,7 @@ namespace System.ServiceModel.Dispatcher
                 params object[] parameters
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new NotSupportedException());
             }
 
@@ -100,8 +96,7 @@ namespace System.ServiceModel.Dispatcher
                 params object[] parameters
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new NotSupportedException());
             }
 
@@ -109,8 +104,7 @@ namespace System.ServiceModel.Dispatcher
                 BindingParameterCollection parameters
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new NotSupportedException());
             }
 
@@ -119,8 +113,7 @@ namespace System.ServiceModel.Dispatcher
                 BindingParameterCollection parameters
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new NotSupportedException());
             }
 
@@ -130,8 +123,7 @@ namespace System.ServiceModel.Dispatcher
                 BindingParameterCollection parameters
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new NotSupportedException());
             }
 
@@ -142,8 +134,7 @@ namespace System.ServiceModel.Dispatcher
                 BindingParameterCollection parameters
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new NotSupportedException());
             }
 
@@ -151,8 +142,7 @@ namespace System.ServiceModel.Dispatcher
                 BindingParameterCollection parameters
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new NotSupportedException());
             }
 
@@ -160,8 +150,7 @@ namespace System.ServiceModel.Dispatcher
                 BindingParameterCollection parameters
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new NotSupportedException());
             }
         }
@@ -319,8 +308,7 @@ namespace System.ServiceModel.Dispatcher
                 if (element is SecurityBindingElement)
                 {
                     if (sbe != null)
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(
                                     SR.GetString(
@@ -366,8 +354,7 @@ namespace System.ServiceModel.Dispatcher
                     if (GetTransferMode(binding) != TransferMode.Buffered)
                     {
                         // throw
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(
                                     SR.GetString(
@@ -406,8 +393,7 @@ namespace System.ServiceModel.Dispatcher
             public static void Validate(ServiceDescription description)
             {
                 bool impersonateCallerForAllServiceMethods = false;
-                ServiceAuthorizationBehavior authorizationBehavior = description
-                    .Behaviors
+                ServiceAuthorizationBehavior authorizationBehavior = description.Behaviors
                     .Find<ServiceAuthorizationBehavior>();
                 if (authorizationBehavior != null)
                 {
@@ -428,8 +414,7 @@ namespace System.ServiceModel.Dispatcher
                     for (int j = 0; j < endpoint.Contract.Operations.Count; j++)
                     {
                         OperationDescription operation = endpoint.Contract.Operations[j];
-                        OperationBehaviorAttribute operationBehavior = operation
-                            .Behaviors
+                        OperationBehaviorAttribute operationBehavior = operation.Behaviors
                             .Find<OperationBehaviorAttribute>();
                         if (
                             impersonateCallerForAllServiceMethods
@@ -440,8 +425,7 @@ namespace System.ServiceModel.Dispatcher
                             )
                         )
                         {
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
                                     new InvalidOperationException(
                                         SR.GetString(
@@ -489,8 +473,7 @@ namespace System.ServiceModel.Dispatcher
 
                 if (!windowsIdentityProvided)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(
@@ -549,8 +532,7 @@ namespace System.ServiceModel.Dispatcher
 
             public static void Validate(ServiceDescription description)
             {
-                ServiceAuthorizationBehavior behavior = description
-                    .Behaviors
+                ServiceAuthorizationBehavior behavior = description.Behaviors
                     .Find<ServiceAuthorizationBehavior>();
                 bool impersonateCallerForAllMethods =
                     (behavior != null) ? behavior.ImpersonateCallerForAllOperations : false;
@@ -571,8 +553,7 @@ namespace System.ServiceModel.Dispatcher
                     }
                     if (isImpersonationRequested)
                     {
-                        ICollection<BindingElement> bindingElements = endpoint
-                            .Binding
+                        ICollection<BindingElement> bindingElements = endpoint.Binding
                             .CreateBindingElements();
                         foreach (BindingElement element in bindingElements)
                         {
@@ -590,8 +571,7 @@ namespace System.ServiceModel.Dispatcher
                                         )
                                     )
                                     {
-                                        throw DiagnosticUtility
-                                            .ExceptionUtility
+                                        throw DiagnosticUtility.ExceptionUtility
                                             .ThrowHelperError(
                                                 new InvalidOperationException(
                                                     SR.GetString(
@@ -628,8 +608,10 @@ namespace System.ServiceModel.Dispatcher
                     ValidateContract(
                         binding,
                         contract,
-                        sbe.GetIndividualProperty<ISecurityCapabilities>().SupportedRequestProtectionLevel,
-                        sbe.GetIndividualProperty<ISecurityCapabilities>().SupportedResponseProtectionLevel
+                        sbe.GetIndividualProperty<ISecurityCapabilities>()
+                            .SupportedRequestProtectionLevel,
+                        sbe.GetIndividualProperty<ISecurityCapabilities>()
+                            .SupportedResponseProtectionLevel
                     );
                 else
                     ValidateContract(binding, contract, ProtectionLevel.None, ProtectionLevel.None);
@@ -651,8 +633,7 @@ namespace System.ServiceModel.Dispatcher
             )
             {
                 if (contract == null)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new ArgumentNullException("contract"));
 
                 ProtectionLevel contractScopeDefaultRequestProtectionLevel;
@@ -722,8 +703,7 @@ namespace System.ServiceModel.Dispatcher
                                 && headerScopeDefaultProtectionLevel != ProtectionLevel.None
                             )
                             {
-                                throw DiagnosticUtility
-                                    .ExceptionUtility
+                                throw DiagnosticUtility.ExceptionUtility
                                     .ThrowHelperError(
                                         new InvalidOperationException(
                                             SR.GetString(
@@ -757,8 +737,10 @@ namespace System.ServiceModel.Dispatcher
                     ValidateContract(
                         binding,
                         contract,
-                        sbe.GetIndividualProperty<ISecurityCapabilities>().SupportedRequestProtectionLevel,
-                        sbe.GetIndividualProperty<ISecurityCapabilities>().SupportedResponseProtectionLevel
+                        sbe.GetIndividualProperty<ISecurityCapabilities>()
+                            .SupportedRequestProtectionLevel,
+                        sbe.GetIndividualProperty<ISecurityCapabilities>()
+                            .SupportedResponseProtectionLevel
                     );
                 else
                     ValidateContract(binding, contract, ProtectionLevel.None, ProtectionLevel.None);
@@ -875,8 +857,7 @@ namespace System.ServiceModel.Dispatcher
 
                 if (!requestValidated)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(
@@ -891,8 +872,7 @@ namespace System.ServiceModel.Dispatcher
                 }
                 if (!responseValidated)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(
@@ -938,8 +918,7 @@ namespace System.ServiceModel.Dispatcher
                                 )
                             )
                             {
-                                throw DiagnosticUtility
-                                    .ExceptionUtility
+                                throw DiagnosticUtility.ExceptionUtility
                                     .ThrowHelperError(
                                         new InvalidOperationException(
                                             SR.GetString(
@@ -967,8 +946,7 @@ namespace System.ServiceModel.Dispatcher
                                 )
                             )
                             {
-                                throw DiagnosticUtility
-                                    .ExceptionUtility
+                                throw DiagnosticUtility.ExceptionUtility
                                     .ThrowHelperError(
                                         new InvalidOperationException(
                                             SR.GetString(
@@ -981,13 +959,13 @@ namespace System.ServiceModel.Dispatcher
                             }
 
                             foreach (
-                                SecurityTokenParameters tokenParam in sbe.EndpointSupportingTokenParameters.Endorsing
+                                SecurityTokenParameters tokenParam in sbe.EndpointSupportingTokenParameters
+                                    .Endorsing
                             )
                             {
                                 if (IsBearerKeyType(tokenParam))
                                 {
-                                    throw DiagnosticUtility
-                                        .ExceptionUtility
+                                    throw DiagnosticUtility.ExceptionUtility
                                         .ThrowHelperError(
                                             new InvalidOperationException(
                                                 SR.GetString(
@@ -1001,13 +979,13 @@ namespace System.ServiceModel.Dispatcher
                             }
 
                             foreach (
-                                SecurityTokenParameters tokenParam in sbe.EndpointSupportingTokenParameters.SignedEndorsing
+                                SecurityTokenParameters tokenParam in sbe.EndpointSupportingTokenParameters
+                                    .SignedEndorsing
                             )
                             {
                                 if (IsBearerKeyType(tokenParam))
                                 {
-                                    throw DiagnosticUtility
-                                        .ExceptionUtility
+                                    throw DiagnosticUtility.ExceptionUtility
                                         .ThrowHelperError(
                                             new InvalidOperationException(
                                                 SR.GetString(
@@ -1084,9 +1062,9 @@ namespace System.ServiceModel.Dispatcher
                             stp as SecureConversationSecurityTokenParameters;
                         if (scstp != null)
                         {
-                            ISecurityCapabilities bootstrapSecurityCapabilities = scstp
-                                .BootstrapSecurityBindingElement
-                                .GetIndividualProperty<ISecurityCapabilities>();
+                            ISecurityCapabilities bootstrapSecurityCapabilities =
+                                scstp.BootstrapSecurityBindingElement
+                                    .GetIndividualProperty<ISecurityCapabilities>();
                             if (
                                 bootstrapSecurityCapabilities != null
                                 && bootstrapSecurityCapabilities.SupportedRequestProtectionLevel
@@ -1098,8 +1076,7 @@ namespace System.ServiceModel.Dispatcher
                                 continue;
                             }
 
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
                                     new InvalidOperationException(
                                         SR.GetString(
@@ -1175,8 +1152,7 @@ namespace System.ServiceModel.Dispatcher
 
                     if (!isTransportProtected)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(
                                     SR.GetString(
@@ -1221,9 +1197,8 @@ namespace System.ServiceModel.Dispatcher
                             if (
                                 issuedParameters.KeyType
                                     == System.IdentityModel.Tokens.SecurityKeyType.SymmetricKey
-                                && !sbe.DefaultAlgorithmSuite.IsSymmetricKeyLengthSupported(
-                                    issuedParameters.KeySize
-                                )
+                                && !sbe.DefaultAlgorithmSuite
+                                    .IsSymmetricKeyLengthSupported(issuedParameters.KeySize)
                             )
                             {
                                 isCompatible = false;
@@ -1231,17 +1206,15 @@ namespace System.ServiceModel.Dispatcher
                             else if (
                                 issuedParameters.KeyType
                                     == System.IdentityModel.Tokens.SecurityKeyType.AsymmetricKey
-                                && !sbe.DefaultAlgorithmSuite.IsAsymmetricKeyLengthSupported(
-                                    issuedParameters.KeySize
-                                )
+                                && !sbe.DefaultAlgorithmSuite
+                                    .IsAsymmetricKeyLengthSupported(issuedParameters.KeySize)
                             )
                             {
                                 isCompatible = false;
                             }
                             if (!isCompatible)
                             {
-                                throw DiagnosticUtility
-                                    .ExceptionUtility
+                                throw DiagnosticUtility.ExceptionUtility
                                     .ThrowHelperError(
                                         new InvalidOperationException(
                                             SR.GetString(
@@ -1294,8 +1267,7 @@ namespace System.ServiceModel.Dispatcher
                 }
                 if (!isMatch)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(
@@ -1425,8 +1397,7 @@ namespace System.ServiceModel.Dispatcher
                     && ssbe.ProtectionTokenParameters.HasAsymmetricKey
                 )
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(
@@ -1467,8 +1438,7 @@ namespace System.ServiceModel.Dispatcher
                             x509 != null
                             && x509.X509ReferenceStyle == X509KeyIdentifierClauseType.Thumbprint
                         )
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
                                     new InvalidOperationException(
                                         SR.GetString(
@@ -1504,8 +1474,7 @@ namespace System.ServiceModel.Dispatcher
                     .Find<TransportBindingElement>();
                 if (transport != null && transport.ManualAddressing)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(
@@ -1541,8 +1510,7 @@ namespace System.ServiceModel.Dispatcher
                     {
                         OperationDescription operation = contract.Operations[i];
                         if (!operation.IsOneWay)
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
                                     new InvalidOperationException(
                                         SR.GetString(
@@ -1605,8 +1573,7 @@ namespace System.ServiceModel.Dispatcher
                             );
 
                             if (responseProtectionLevel == ProtectionLevel.EncryptAndSign)
-                                throw DiagnosticUtility
-                                    .ExceptionUtility
+                                throw DiagnosticUtility.ExceptionUtility
                                     .ThrowHelperError(
                                         new InvalidOperationException(
                                             SR.GetString(
@@ -1646,8 +1613,7 @@ namespace System.ServiceModel.Dispatcher
                     return;
                 }
 
-                ServiceAuthorizationBehavior behavior = description
-                    .Behaviors
+                ServiceAuthorizationBehavior behavior = description.Behaviors
                     .Find<ServiceAuthorizationBehavior>();
                 bool impersonateCallerForAllMethods =
                     (behavior != null) ? behavior.ImpersonateCallerForAllOperations : false;
@@ -1670,8 +1636,7 @@ namespace System.ServiceModel.Dispatcher
                         }
                         if (isImpersonationRequested)
                         {
-                            ICollection<BindingElement> bindingElements = endpoint
-                                .Binding
+                            ICollection<BindingElement> bindingElements = endpoint.Binding
                                 .CreateBindingElements();
                             foreach (BindingElement element in bindingElements)
                             {
@@ -1712,8 +1677,7 @@ namespace System.ServiceModel.Dispatcher
                 {
                     if (stp is UserNameSecurityTokenParameters)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(
                                     SR.GetString(
@@ -1749,8 +1713,7 @@ namespace System.ServiceModel.Dispatcher
                 for (int i = 0; i < endpoint.Contract.Operations.Count; ++i)
                 {
                     OperationDescription operation = endpoint.Contract.Operations[i];
-                    OperationBehaviorAttribute operationBehavior = operation
-                        .Behaviors
+                    OperationBehaviorAttribute operationBehavior = operation.Behaviors
                         .Find<OperationBehaviorAttribute>();
                     if (
                         operationBehavior != null

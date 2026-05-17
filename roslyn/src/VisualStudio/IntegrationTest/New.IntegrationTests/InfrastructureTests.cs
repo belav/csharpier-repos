@@ -34,8 +34,7 @@ $$
             );
 
             // Trigger a call to File.Close to ensure we can recover from it
-            await TestServices
-                .Input
+            await TestServices.Input
                 .SendAsync(
                     [(VirtualKeyCode.VK_F, VirtualKeyCode.MENU), VirtualKeyCode.VK_C],
                     HangMitigatingCancellationToken
@@ -51,8 +50,7 @@ $$
                 IntegrationHelper.GetTitleForWindow(modalWindow)
             );
 
-            await TestServices
-                .Input
+            await TestServices.Input
                 .SendWithoutActivateAsync(VirtualKeyCode.ESCAPE, HangMitigatingCancellationToken);
 
             modalWindow = IntegrationHelper.GetModalWindowFromParentWindow(

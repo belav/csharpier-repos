@@ -3316,15 +3316,13 @@ class C
 ";
             var compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
                 source,
-                parseOptions: TestOptions
-                    .RegularPreview
+                parseOptions: TestOptions.RegularPreview
                     .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             compilation.VerifyDiagnostics();
 
             var crefSyntax = CrefTests.GetCrefSyntaxes(compilation).Single();
-            var expectedSymbol = compilation
-                .SourceModule
+            var expectedSymbol = compilation.SourceModule
                 .GlobalNamespace
                 .GetTypeMember("C")
                 .GetMembers()
@@ -3336,8 +3334,7 @@ class C
 
             compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
                 source,
-                parseOptions: TestOptions
-                    .Regular10
+                parseOptions: TestOptions.Regular10
                     .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             compilation.VerifyDiagnostics(
@@ -3362,8 +3359,7 @@ class C
             );
 
             crefSyntax = CrefTests.GetCrefSyntaxes(compilation).Single();
-            expectedSymbol = compilation
-                .SourceModule
+            expectedSymbol = compilation.SourceModule
                 .GlobalNamespace
                 .GetTypeMember("C")
                 .GetMembers()
@@ -3375,15 +3371,13 @@ class C
 
             compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
                 source,
-                parseOptions: TestOptions
-                    .Regular11
+                parseOptions: TestOptions.Regular11
                     .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             compilation.VerifyDiagnostics();
 
             crefSyntax = CrefTests.GetCrefSyntaxes(compilation).Single();
-            expectedSymbol = compilation
-                .SourceModule
+            expectedSymbol = compilation.SourceModule
                 .GlobalNamespace
                 .GetTypeMember("C")
                 .GetMembers()
@@ -3421,8 +3415,7 @@ class C
 
             var compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
                 source,
-                parseOptions: TestOptions
-                    .RegularPreview
+                parseOptions: TestOptions.RegularPreview
                     .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             compilation.VerifyDiagnostics(expected);
@@ -3459,8 +3452,7 @@ class C
 
             var compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
                 source,
-                parseOptions: TestOptions
-                    .RegularPreview
+                parseOptions: TestOptions.RegularPreview
                     .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             compilation.VerifyDiagnostics(expected);
@@ -3489,8 +3481,7 @@ class C
 
             var compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
                 source,
-                parseOptions: TestOptions
-                    .RegularPreview
+                parseOptions: TestOptions.RegularPreview
                     .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             compilation.VerifyDiagnostics(
@@ -3546,8 +3537,7 @@ class C
 
             var compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
                 source,
-                parseOptions: TestOptions
-                    .RegularPreview
+                parseOptions: TestOptions.RegularPreview
                     .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             compilation.VerifyDiagnostics(expected);
@@ -3575,15 +3565,13 @@ class C
 ";
             var compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
                 source,
-                parseOptions: TestOptions
-                    .RegularPreview
+                parseOptions: TestOptions.RegularPreview
                     .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             compilation.VerifyDiagnostics();
 
             var crefSyntax = CrefTests.GetCrefSyntaxes(compilation).Single();
-            var expectedSymbol = compilation
-                .SourceModule
+            var expectedSymbol = compilation.SourceModule
                 .GlobalNamespace
                 .GetTypeMember("C")
                 .GetMembers()
@@ -3595,8 +3583,7 @@ class C
 
             compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
                 source,
-                parseOptions: TestOptions
-                    .Regular10
+                parseOptions: TestOptions.Regular10
                     .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             compilation.VerifyDiagnostics(
@@ -3621,8 +3608,7 @@ class C
             );
 
             crefSyntax = CrefTests.GetCrefSyntaxes(compilation).Single();
-            expectedSymbol = compilation
-                .SourceModule
+            expectedSymbol = compilation.SourceModule
                 .GlobalNamespace
                 .GetTypeMember("C")
                 .GetMembers()
@@ -3634,15 +3620,13 @@ class C
 
             compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
                 source,
-                parseOptions: TestOptions
-                    .Regular11
+                parseOptions: TestOptions.Regular11
                     .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             compilation.VerifyDiagnostics();
 
             crefSyntax = CrefTests.GetCrefSyntaxes(compilation).Single();
-            expectedSymbol = compilation
-                .SourceModule
+            expectedSymbol = compilation.SourceModule
                 .GlobalNamespace
                 .GetTypeMember("C")
                 .GetMembers()
@@ -3680,8 +3664,7 @@ class C
 
             var compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
                 source,
-                parseOptions: TestOptions
-                    .RegularPreview
+                parseOptions: TestOptions.RegularPreview
                     .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             compilation.VerifyDiagnostics(expected);
@@ -3718,8 +3701,7 @@ class C
 
             var compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
                 source,
-                parseOptions: TestOptions
-                    .RegularPreview
+                parseOptions: TestOptions.RegularPreview
                     .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             compilation.VerifyDiagnostics(expected);
@@ -3748,8 +3730,7 @@ class C
 
             var compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
                 source,
-                parseOptions: TestOptions
-                    .RegularPreview
+                parseOptions: TestOptions.RegularPreview
                     .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             compilation.VerifyDiagnostics(
@@ -3805,8 +3786,7 @@ class C
 
             var compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
                 source,
-                parseOptions: TestOptions
-                    .RegularPreview
+                parseOptions: TestOptions.RegularPreview
                     .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             compilation.VerifyDiagnostics(expected);

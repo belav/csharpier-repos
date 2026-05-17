@@ -238,8 +238,7 @@ namespace System.ServiceModel.Channels
             if (this.preReadCount > 0)
             {
                 byte[] tempBuffer = this.preReadData;
-                this.preReadData = DiagnosticUtility
-                    .Utility
+                this.preReadData = DiagnosticUtility.Utility
                     .AllocateByteArray(initialSize + this.preReadCount);
                 Buffer.BlockCopy(
                     tempBuffer,
@@ -382,8 +381,7 @@ namespace System.ServiceModel.Channels
             {
                 if (value < -1)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentOutOfRangeException(
                                 "value",
@@ -404,8 +402,7 @@ namespace System.ServiceModel.Channels
             {
                 if (value < -1)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentOutOfRangeException(
                                 "value",
@@ -430,8 +427,7 @@ namespace System.ServiceModel.Channels
             get
             {
 #pragma warning suppress 56503 // Microsoft, required by the Stream.Length contract
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new NotSupportedException(SR.GetString(SR.SeekNotSupported)));
             }
         }
@@ -441,14 +437,12 @@ namespace System.ServiceModel.Channels
             get
             {
 #pragma warning suppress 56503 // Microsoft, required by the Stream.Position contract
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new NotSupportedException(SR.GetString(SR.SeekNotSupported)));
             }
             set
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new NotSupportedException(SR.GetString(SR.SeekNotSupported)));
             }
         }
@@ -551,15 +545,13 @@ namespace System.ServiceModel.Channels
 
         public override long Seek(long offset, SeekOrigin origin)
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(new NotSupportedException(SR.GetString(SR.SeekNotSupported)));
         }
 
         public override void SetLength(long value)
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(new NotSupportedException(SR.GetString(SR.SeekNotSupported)));
         }
 
@@ -748,8 +740,7 @@ namespace System.ServiceModel.Channels
                     {
                         if (this.asyncReadBuffer == null)
                         {
-                            this.asyncReadBuffer = DiagnosticUtility
-                                .Utility
+                            this.asyncReadBuffer = DiagnosticUtility.Utility
                                 .AllocateByteArray(innerStream.Connection.AsyncReadBufferSize);
                         }
                     }
@@ -785,8 +776,7 @@ namespace System.ServiceModel.Channels
             get
             {
 #pragma warning suppress 56503 // Not publicly accessible and this should never be called.
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new NotImplementedException());
             }
         }
@@ -828,8 +818,7 @@ namespace System.ServiceModel.Channels
             }
             catch (IOException ioException)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(ConvertIOException(ioException));
             }
         }
@@ -841,15 +830,13 @@ namespace System.ServiceModel.Channels
 
         public object DuplicateAndClose(int targetProcessId)
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(new NotImplementedException());
         }
 
         public virtual object GetCoreTransport()
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(new NotImplementedException());
         }
 
@@ -909,8 +896,7 @@ namespace System.ServiceModel.Channels
             }
             catch (IOException ioException)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(ConvertIOException(ioException));
             }
             finally
@@ -938,8 +924,7 @@ namespace System.ServiceModel.Channels
                 }
                 catch (IOException ioException)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(ConvertIOException(ioException));
                 }
             }
@@ -971,8 +956,7 @@ namespace System.ServiceModel.Channels
             }
             catch (IOException ioException)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(ConvertIOException(ioException));
             }
         }
@@ -1019,8 +1003,7 @@ namespace System.ServiceModel.Channels
             }
             catch (IOException ioException)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(ConvertIOException(ioException));
             }
         }
@@ -1056,8 +1039,7 @@ namespace System.ServiceModel.Channels
             }
             catch (IOException ioException)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(ConvertIOException(ioException));
             }
 
@@ -1077,8 +1059,7 @@ namespace System.ServiceModel.Channels
                 }
                 catch (IOException ioException)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(ConvertIOException(ioException));
                 }
             }
@@ -1173,8 +1154,7 @@ namespace System.ServiceModel.Channels
         {
             if (offset < 0)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentOutOfRangeException(
                             "offset",
@@ -1186,8 +1166,7 @@ namespace System.ServiceModel.Channels
 
             if (offset > bufferSize)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentOutOfRangeException(
                             "offset",
@@ -1199,8 +1178,7 @@ namespace System.ServiceModel.Channels
 
             if (size <= 0)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentOutOfRangeException(
                             "size",
@@ -1213,8 +1191,7 @@ namespace System.ServiceModel.Channels
             int remainingBufferSpace = bufferSize - offset;
             if (size > remainingBufferSpace)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentOutOfRangeException(
                             "size",

@@ -41,8 +41,7 @@ public class AntiforgeryMiddlewareTest
             HttpMethod.Post,
             "/Test/PostWithRequireAntiforgeryToken"
         );
-        request
-            .Headers
+        request.Headers
             .Add("Cookie", antiforgeryOptions.Value.Cookie.Name + "=" + tokens.CookieToken);
         var nameValueCollection = new List<KeyValuePair<string, string>>
         {
@@ -60,8 +59,7 @@ public class AntiforgeryMiddlewareTest
     public async Task Works_WithAntiforgeryMetadata_AndFilterAttribute_ValidToken()
     {
         var builder = WebApplication.CreateBuilder();
-        builder
-            .Services
+        builder.Services
             .AddMvcCore()
             .UseSpecificControllers(typeof(TestWithBothAttributesController))
             .AddViews();
@@ -118,8 +116,7 @@ public class AntiforgeryMiddlewareTest
         app.Use(
             (context, next) =>
             {
-                context
-                    .Features
+                context.Features
                     .Set<IHttpMaxRequestBodySizeFeature>(
                         new FakeHttpMaxRequestBodySizeFeature(5_000_000)
                     );
@@ -151,8 +148,7 @@ public class AntiforgeryMiddlewareTest
             HttpMethod.Post,
             "/Test/PostWithRequireAntiforgeryTokenAndSizeLimit"
         );
-        request
-            .Headers
+        request.Headers
             .Add("Cookie", antiforgeryOptions.Value.Cookie.Name + "=" + tokens.CookieToken);
         var nameValueCollection = new List<KeyValuePair<string, string>>
         {
@@ -190,8 +186,7 @@ public class AntiforgeryMiddlewareTest
             HttpMethod.Post,
             "/Test/PostWithRequireAntiforgeryTokenAndFormLimit"
         );
-        request
-            .Headers
+        request.Headers
             .Add("Cookie", antiforgeryOptions.Value.Cookie.Name + "=" + tokens.CookieToken);
         var nameValueCollection = new List<KeyValuePair<string, string>>
         {
@@ -209,8 +204,7 @@ public class AntiforgeryMiddlewareTest
     public async Task Works_WithAntiforgeryMetadata_ValidToken_DisableRequestSizeLimits()
     {
         var builder = WebApplication.CreateBuilder();
-        builder
-            .Services
+        builder.Services
             .AddMvcCore()
             .UseSpecificControllers(typeof(TestWithRequestSizeLimitController));
         builder.Services.AddAntiforgery();
@@ -230,8 +224,7 @@ public class AntiforgeryMiddlewareTest
             HttpMethod.Post,
             "/TestWithRequestSizeLimit/PostWithRequireAntiforgeryTokenAndDisableSizeLimit"
         );
-        request
-            .Headers
+        request.Headers
             .Add("Cookie", antiforgeryOptions.Value.Cookie.Name + "=" + tokens.CookieToken);
         var nameValueCollection = new List<KeyValuePair<string, string>>
         {

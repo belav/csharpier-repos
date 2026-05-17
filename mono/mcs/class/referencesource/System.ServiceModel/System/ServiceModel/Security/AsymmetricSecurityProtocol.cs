@@ -117,8 +117,8 @@ namespace System.ServiceModel.Security
                     this.Factory
                         .AsymmetricTokenParameters
                         .InitializeSecurityTokenRequirement(authenticatorRequirement);
-                    authenticatorRequirement.IsOutOfBandToken =
-                        !this.Factory.AllowSerializedSigningTokenOnReply;
+                    authenticatorRequirement.IsOutOfBandToken = !this.Factory
+                        .AllowSerializedSigningTokenOnReply;
                     authenticatorRequirement.KeyUsage = SecurityKeyUsage.Exchange;
                     authenticatorRequirement.Properties[
                         ServiceModelSecurityTokenRequirement.MessageDirectionProperty
@@ -241,8 +241,7 @@ namespace System.ServiceModel.Security
                 if (this.Factory.ActAsInitiator == false)
                 {
                     Fx.Assert("Unexpected code path for server security application");
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(SR.SendingOutgoingmessageOnRecipient)
@@ -467,8 +466,8 @@ namespace System.ServiceModel.Security
                     encryptionToken = GetCorrelationToken(correlationStates);
                     if (!SecurityUtils.HasSymmetricSecurityKey(encryptionToken))
                     {
-                        securityHeader.WrappedKeySecurityTokenAuthenticator =
-                            this.Factory.WrappedKeySecurityTokenAuthenticator;
+                        securityHeader.WrappedKeySecurityTokenAuthenticator = this.Factory
+                            .WrappedKeySecurityTokenAuthenticator;
                     }
                 }
                 SecurityTokenAuthenticator primaryTokenAuthenticator;
@@ -515,8 +514,8 @@ namespace System.ServiceModel.Security
                     this.Factory.AsymmetricTokenParameters,
                     supportingAuthenticators
                 );
-                securityHeader.WrappedKeySecurityTokenAuthenticator =
-                    this.Factory.WrappedKeySecurityTokenAuthenticator;
+                securityHeader.WrappedKeySecurityTokenAuthenticator = this.Factory
+                    .WrappedKeySecurityTokenAuthenticator;
 
                 securityHeader.ConfigureOutOfBandTokenResolver(
                     MergeOutOfBandResolvers(

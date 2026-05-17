@@ -135,8 +135,7 @@ internal class RoutePatternHighlighter : IAspNetCoreEmbeddedLanguageDocumentHigh
                 .Where(i => i.Identifier.Text == matchingParameter.Name)
                 .Where(i =>
                     semanticModel.GetSymbolInfo(i) is var symbolInfo
-                    && SymbolEqualityComparer
-                        .Default
+                    && SymbolEqualityComparer.Default
                         .Equals(
                             symbolInfo.Symbol ?? symbolInfo.CandidateSymbols.FirstOrDefault(),
                             matchingParameter

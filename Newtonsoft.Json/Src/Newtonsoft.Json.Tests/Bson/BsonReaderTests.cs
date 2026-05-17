@@ -541,8 +541,7 @@ namespace Newtonsoft.Json.Tests.Bson
             Assert.IsFalse(reader.Read());
             Assert.AreEqual(JsonToken.None, reader.TokenType);
 
-            string decodedString = Encoding
-                .UTF8
+            string decodedString = Encoding.UTF8
                 .GetString(encodedStringData, 0, encodedStringData.Length);
             Assert.AreEqual("Hello world!", decodedString);
         }
@@ -1543,8 +1542,7 @@ namespace Newtonsoft.Json.Tests.Bson
         [Test]
         public void Utf8Text()
         {
-            string badText = System
-                .IO
+            string badText = System.IO
                 .File
                 .ReadAllText(TestFixtureBase.ResolvePath(@"PoisonText.txt"));
             var j = new JObject();

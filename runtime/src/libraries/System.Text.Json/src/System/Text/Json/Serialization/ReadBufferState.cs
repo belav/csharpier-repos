@@ -22,8 +22,7 @@ namespace System.Text.Json.Serialization
 
         public ReadBufferState(int initialBufferSize)
         {
-            _buffer = ArrayPool<byte>
-                .Shared
+            _buffer = ArrayPool<byte>.Shared
                 .Rent(Math.Max(initialBufferSize, JsonConstants.Utf8Bom.Length));
             _maxCount = _count = _offset = 0;
             _isFirstBlock = true;
@@ -125,8 +124,7 @@ namespace System.Text.Json.Serialization
                     // We have less than half the buffer available, double the buffer size.
                     byte[] oldBuffer = _buffer;
                     int oldMaxCount = _maxCount;
-                    byte[] newBuffer = ArrayPool<byte>
-                        .Shared
+                    byte[] newBuffer = ArrayPool<byte>.Shared
                         .Rent(
                             (_buffer.Length < (int.MaxValue / 2))
                                 ? _buffer.Length * 2

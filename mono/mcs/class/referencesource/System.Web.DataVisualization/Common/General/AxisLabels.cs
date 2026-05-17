@@ -383,8 +383,7 @@ namespace System.Web.UI.DataVisualization.Charting
             }
 
             // Get chart type of the first series
-            IChartType chartType = Common
-                .ChartTypeRegistry
+            IChartType chartType = Common.ChartTypeRegistry
                 .GetChartType(ChartArea.GetFirstSeries().ChartTypeName);
             bool fromSeries = false;
             if (!chartType.RequireAxes)

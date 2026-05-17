@@ -39,8 +39,7 @@ public class AuthenticationMiddleware
     /// <param name="context">The <see cref="HttpContext"/>.</param>
     public async Task Invoke(HttpContext context)
     {
-        context
-            .Features
+        context.Features
             .Set<IAuthenticationFeature>(
                 new AuthenticationFeature
                 {

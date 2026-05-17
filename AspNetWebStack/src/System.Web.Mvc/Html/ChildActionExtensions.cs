@@ -217,8 +217,7 @@ namespace System.Web.Mvc.Html
             }
 
             bool usingAreas;
-            VirtualPathData vpd = htmlHelper
-                .RouteCollection
+            VirtualPathData vpd = htmlHelper.RouteCollection
                 .GetVirtualPathForArea(
                     htmlHelper.ViewContext.RequestContext,
                     null /* name */
@@ -258,8 +257,7 @@ namespace System.Web.Mvc.Html
             HttpContextBase httpContext = htmlHelper.ViewContext.HttpContext;
             RequestContext requestContext = new RequestContext(httpContext, routeData);
             ChildActionMvcHandler handler = new ChildActionMvcHandler(requestContext);
-            httpContext
-                .Server
+            httpContext.Server
                 .Execute(
                     HttpHandlerUtil.WrapForServerExecute(handler),
                     textWriter,

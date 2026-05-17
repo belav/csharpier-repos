@@ -95,8 +95,7 @@ namespace Microsoft.Interop
             diagnosticsBag.ReportGeneratorDiagnostics(bindingFailures);
 
             if (
-                _marshallers
-                    .ManagedReturnMarshaller
+                _marshallers.ManagedReturnMarshaller
                     .Generator
                     .UsesNativeIdentifier(_marshallers.ManagedReturnMarshaller.TypeInfo, _context)
             )
@@ -340,8 +339,7 @@ namespace Microsoft.Interop
             List<FunctionPointerParameterSyntax> functionPointerParameters = new();
             var (paramList, retType, _) = _marshallers.GenerateTargetMethodSignatureData(_context);
             functionPointerParameters.AddRange(
-                paramList
-                    .Parameters
+                paramList.Parameters
                     .Select(p =>
                         FunctionPointerParameter(attributeLists: default, p.Modifiers, p.Type)
                     )

@@ -110,8 +110,7 @@ namespace Mono.CodeContracts.Static.Analysis.ExpressionAnalysis.Decoding
 
         public Sequence<PathElement> GetVariableAccessPath(E expr)
         {
-            return ContextProvider
-                .ValueContext
+            return ContextProvider.ValueContext
                 .AccessPathList(
                     ContextProvider.ExpressionContext.GetPC(expr),
                     ContextProvider.ExpressionContext.Unrefine(expr),

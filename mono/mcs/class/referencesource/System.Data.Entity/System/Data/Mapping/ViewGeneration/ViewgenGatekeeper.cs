@@ -115,8 +115,7 @@ namespace System.Data.Mapping.ViewGeneration
 
             List<ForeignConstraint> foreignKeyConstraints = result.ForeignKeyConstraints;
             // Get a Clone of cell groups from cache since cells are modified during viewgen, and we dont want the cached copy to change
-            List<CellGroup> cellGroups = cellGroups = result
-                .CellGroups
+            List<CellGroup> cellGroups = cellGroups = result.CellGroups
                 .Select(setOfcells => new CellGroup(setOfcells.Select(cell => new Cell(cell))))
                 .ToList();
             List<Cell> cells = result.Cells;
@@ -332,8 +331,7 @@ namespace System.Data.Mapping.ViewGeneration
                     isFirst = false;
                     extentBuilder.Append(extent.Name);
                 }
-                string message = System
-                    .Data
+                string message = System.Data
                     .Entity
                     .Strings
                     .ViewGen_Missing_Set_Mapping(extentBuilder);

@@ -103,8 +103,7 @@ public class StoreKeyConvention
                     }
                     else
                     {
-                        idProperty
-                            .Builder
+                        idProperty.Builder
                             .HasValueGeneratorFactory(typeof(IdValueGeneratorFactory));
                     }
                 }
@@ -248,8 +247,7 @@ public class StoreKeyConvention
             )
             || (
                 previousPrimaryKey != null
-                && previousPrimaryKey
-                    .Properties
+                && previousPrimaryKey.Properties
                     .Any(p => p.GetJsonPropertyName() == IdPropertyJsonName)
             )
         )

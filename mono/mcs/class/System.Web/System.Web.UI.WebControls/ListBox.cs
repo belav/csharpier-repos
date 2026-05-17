@@ -135,10 +135,8 @@ namespace System.Web.UI.WebControls
 
             if (AutoPostBack)
             {
-                string onchange = Page.ClientScript.GetPostBackEventReference(
-                    GetPostBackOptions(),
-                    true
-                );
+                string onchange = Page.ClientScript
+                    .GetPostBackEventReference(GetPostBackOptions(), true);
                 onchange = String.Concat(
                     "setTimeout('",
                     onchange.Replace("\\", "\\\\").Replace("'", "\\'"),

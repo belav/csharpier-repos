@@ -266,8 +266,7 @@ class C
 }";
             CompileAndVerify(
                 source,
-                options: TestOptions
-                    .ReleaseDll
+                options: TestOptions.ReleaseDll
                     .WithMetadataImportOptions(MetadataImportOptions.All),
                 symbolValidator: module =>
                 {
@@ -321,8 +320,7 @@ class C
 }";
             CompileAndVerify(
                 source,
-                options: TestOptions
-                    .ReleaseDll
+                options: TestOptions.ReleaseDll
                     .WithMetadataImportOptions(MetadataImportOptions.All),
                 symbolValidator: module =>
                 {
@@ -1039,8 +1037,7 @@ class Test
             var comp = CreateCompilationWithMscorlib45(
                 "",
                 new[] { reference },
-                options: TestOptions
-                    .ReleaseDll
+                options: TestOptions.ReleaseDll
                     .WithMetadataImportOptions(MetadataImportOptions.Internal)
             );
             var testClass = comp.GlobalNamespace.GetMember<NamedTypeSymbol>("Test");
@@ -1367,8 +1364,7 @@ public class C
                 source,
                 targetFramework: TargetFramework.Empty,
                 references: s_asyncRefs,
-                options: TestOptions
-                    .ReleaseDll
+                options: TestOptions.ReleaseDll
                     .WithMetadataImportOptions(MetadataImportOptions.All),
                 symbolValidator: module =>
                 {

@@ -54,8 +54,7 @@ namespace System.ServiceModel.Channels
         {
             if (maxSizeOfHeaders < 0)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentOutOfRangeException(
                             "maxSizeOfHeaders",
@@ -66,12 +65,10 @@ namespace System.ServiceModel.Channels
             }
 
             if (version == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("version"));
             if (reader == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("reader"));
             if (reader.IsEmptyElement)
             {
@@ -366,8 +363,7 @@ namespace System.ServiceModel.Channels
             {
                 if (index < 0 || index >= headerCount)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentOutOfRangeException(
                                 "index",
@@ -430,8 +426,7 @@ namespace System.ServiceModel.Channels
         internal void AddUnderstood(MessageHeaderInfo headerInfo)
         {
             if (headerInfo == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("headerInfo"));
             for (int i = 0; i < headerCount; i++)
             {
@@ -439,8 +434,7 @@ namespace System.ServiceModel.Channels
                 {
                     if ((headers[i].HeaderProcessing & HeaderProcessing.Understood) != 0)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new ArgumentException(
                                     SR.GetString(
@@ -546,8 +540,7 @@ namespace System.ServiceModel.Channels
         public void CopyHeaderFrom(Message message, int headerIndex)
         {
             if (message == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("message"));
             CopyHeaderFrom(message.Headers, headerIndex);
         }
@@ -562,8 +555,7 @@ namespace System.ServiceModel.Channels
             if (collection.version != version)
             {
 #pragma warning suppress 56506 // Microsoft, collection.version is never null
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentException(
                             SR.GetString(
@@ -578,8 +570,7 @@ namespace System.ServiceModel.Channels
 
             if (headerIndex < 0 || headerIndex >= collection.headerCount)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentOutOfRangeException(
                             "headerIndex",
@@ -619,8 +610,7 @@ namespace System.ServiceModel.Channels
                     AddHeader(new Header(header.HeaderKind, header.MessageHeader, processing));
                     break;
                 default:
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(SR.InvalidEnumValue, header.HeaderType)
@@ -632,8 +622,7 @@ namespace System.ServiceModel.Channels
         public void CopyHeadersFrom(Message message)
         {
             if (message == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("message"));
             CopyHeadersFrom(message.Headers);
         }
@@ -641,8 +630,7 @@ namespace System.ServiceModel.Channels
         public void CopyHeadersFrom(MessageHeaders collection)
         {
             if (collection == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("collection"));
             for (int i = 0; i < collection.headerCount; i++)
                 CopyHeaderFrom(collection, i);
@@ -657,8 +645,7 @@ namespace System.ServiceModel.Channels
 
             if (index < 0 || (index + headerCount) > array.Length)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentOutOfRangeException(
                             "index",
@@ -695,8 +682,7 @@ namespace System.ServiceModel.Channels
                     name = AddressingStrings.To;
                     break;
                 default:
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(SR.GetString(SR.InvalidEnumValue, kind))
                         );
@@ -713,12 +699,10 @@ namespace System.ServiceModel.Channels
         public int FindHeader(string name, string ns)
         {
             if (name == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("name"));
             if (ns == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("ns"));
 
             if (ns == this.version.Addressing.Namespace)
@@ -747,8 +731,7 @@ namespace System.ServiceModel.Channels
                     {
                         if (foundAt >= 0)
                         {
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
                                     new MessageHeaderException(
                                         SR.GetString(SR.MultipleMessageHeaders, name, ns),
@@ -782,8 +765,7 @@ namespace System.ServiceModel.Channels
                                 if (foundAt >= 0)
                                 {
                                     if (actors.Length == 1)
-                                        throw DiagnosticUtility
-                                            .ExceptionUtility
+                                        throw DiagnosticUtility.ExceptionUtility
                                             .ThrowHelperError(
                                                 new MessageHeaderException(
                                                     SR.GetString(
@@ -797,8 +779,7 @@ namespace System.ServiceModel.Channels
                                                     true
                                                 )
                                             );
-                                    throw DiagnosticUtility
-                                        .ExceptionUtility
+                                    throw DiagnosticUtility.ExceptionUtility
                                         .ThrowHelperError(
                                             new MessageHeaderException(
                                                 SR.GetString(SR.MultipleMessageHeaders, name, ns),
@@ -820,16 +801,13 @@ namespace System.ServiceModel.Channels
         public int FindHeader(string name, string ns, params string[] actors)
         {
             if (name == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("name"));
             if (ns == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("ns"));
             if (actors == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("actors"));
             int foundAt = -1;
             for (int i = 0; i < headerCount; i++)
@@ -844,8 +822,7 @@ namespace System.ServiceModel.Channels
                             if (foundAt >= 0)
                             {
                                 if (actors.Length == 1)
-                                    throw DiagnosticUtility
-                                        .ExceptionUtility
+                                    throw DiagnosticUtility.ExceptionUtility
                                         .ThrowHelperError(
                                             new MessageHeaderException(
                                                 SR.GetString(
@@ -859,8 +836,7 @@ namespace System.ServiceModel.Channels
                                                 true
                                             )
                                         );
-                                throw DiagnosticUtility
-                                    .ExceptionUtility
+                                throw DiagnosticUtility.ExceptionUtility
                                     .ThrowHelperError(
                                         new MessageHeaderException(
                                             SR.GetString(SR.MultipleMessageHeaders, name, ns),
@@ -886,8 +862,7 @@ namespace System.ServiceModel.Channels
                 if (headers[i].HeaderKind == kind)
                 {
                     if (index >= 0)
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(CreateDuplicateHeaderException(kind));
                     index = i;
                 }
@@ -911,8 +886,7 @@ namespace System.ServiceModel.Channels
                     {
                         if (foundValue != null)
                         {
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
                                     new MessageHeaderException(
                                         SR.GetString(
@@ -1059,8 +1033,7 @@ namespace System.ServiceModel.Channels
         {
             int index = FindHeader(name, ns, actors);
             if (index < 0)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new MessageHeaderException(
                             SR.GetString(SR.HeaderNotFound, name, ns),
@@ -1074,13 +1047,11 @@ namespace System.ServiceModel.Channels
         public T GetHeader<T>(string name, string ns, XmlObjectSerializer serializer)
         {
             if (serializer == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("serializer"));
             int index = FindHeader(name, ns);
             if (index < 0)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new MessageHeaderException(
                             SR.GetString(SR.HeaderNotFound, name, ns),
@@ -1095,8 +1066,7 @@ namespace System.ServiceModel.Channels
         {
             if (index < 0 || index >= headerCount)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentOutOfRangeException(
                             "index",
@@ -1121,8 +1091,7 @@ namespace System.ServiceModel.Channels
         public T GetHeader<T>(int index, XmlObjectSerializer serializer)
         {
             if (serializer == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("serializer"));
             using (XmlDictionaryReader reader = GetReaderAtHeader(index))
             {
@@ -1196,8 +1165,7 @@ namespace System.ServiceModel.Channels
             {
                 if (headerKind != HeaderKind.Action && headerKind != HeaderKind.To)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(
@@ -1217,8 +1185,7 @@ namespace System.ServiceModel.Channels
                     && headerKind != HeaderKind.To
                 )
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(
@@ -1235,8 +1202,7 @@ namespace System.ServiceModel.Channels
         {
             if (headerIndex < 0 || headerIndex >= headerCount)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentOutOfRangeException(
                             "headerIndex",
@@ -1263,8 +1229,7 @@ namespace System.ServiceModel.Channels
                 case HeaderType.BufferedMessageHeader:
                     return GetBufferedMessageHeaderReader(bufferedMessageData, headerIndex);
                 default:
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(SR.InvalidEnumValue, headers[headerIndex].HeaderType)
@@ -1276,8 +1241,7 @@ namespace System.ServiceModel.Channels
         internal UniqueId GetRelatesTo(Uri relationshipType)
         {
             if (relationshipType == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("relationshipType"));
 
             UniqueId messageId;
@@ -1358,8 +1322,7 @@ namespace System.ServiceModel.Channels
         {
             if (index < 0 || index >= headerCount)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentOutOfRangeException(
                             "headerIndex",
@@ -1388,8 +1351,7 @@ namespace System.ServiceModel.Channels
                     collectionVersion++;
                     return messageHeader;
                 default:
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(SR.InvalidEnumValue, headers[index].HeaderType)
@@ -1437,8 +1399,7 @@ namespace System.ServiceModel.Channels
         public bool HaveMandatoryHeadersBeenUnderstood(params string[] actors)
         {
             if (actors == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("actors"));
 
             for (int headerIndex = 0; headerIndex < headerCount; headerIndex++)
@@ -1464,8 +1425,7 @@ namespace System.ServiceModel.Channels
             this.attrCount = 0;
             if (initialSize < 0)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentOutOfRangeException(
                             "initialSize",
@@ -1560,12 +1520,10 @@ namespace System.ServiceModel.Channels
         public void Insert(int headerIndex, MessageHeader header)
         {
             if (header == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("header"));
             if (!header.IsMessageVersionSupported(this.version))
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentException(
                             SR.GetString(
@@ -1599,8 +1557,7 @@ namespace System.ServiceModel.Channels
 
             if (headerIndex < 0 || headerIndex > headerCount)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentOutOfRangeException(
                             "headerIndex",
@@ -1657,8 +1614,7 @@ namespace System.ServiceModel.Channels
         internal bool IsUnderstood(MessageHeaderInfo headerInfo)
         {
             if (headerInfo == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("headerInfo"));
             for (int i = 0; i < headerCount; i++)
             {
@@ -1689,8 +1645,7 @@ namespace System.ServiceModel.Channels
                 && reader.NamespaceURI == AddressingVersion.None.Namespace
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(
@@ -1795,8 +1750,7 @@ namespace System.ServiceModel.Channels
 
             if (info == null)
             {
-                info = recycledMessageState
-                    .HeaderInfoCache
+                info = recycledMessageState.HeaderInfoCache
                     .TakeHeaderInfo(reader, actor, mustUnderstand, relay, isRefParam);
                 reader.Skip();
             }
@@ -1830,8 +1784,7 @@ namespace System.ServiceModel.Channels
         internal void RemoveUnderstood(MessageHeaderInfo headerInfo)
         {
             if (headerInfo == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("headerInfo"));
             for (int i = 0; i < headerCount; i++)
             {
@@ -1839,8 +1792,7 @@ namespace System.ServiceModel.Channels
                 {
                     if ((headers[i].HeaderProcessing & HeaderProcessing.Understood) == 0)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new ArgumentException(
                                     SR.GetString(
@@ -1861,12 +1813,10 @@ namespace System.ServiceModel.Channels
         public void RemoveAll(string name, string ns)
         {
             if (name == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("name"));
             if (ns == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("ns"));
             for (int i = headerCount - 1; i >= 0; i--)
             {
@@ -1882,8 +1832,7 @@ namespace System.ServiceModel.Channels
         {
             if (headerIndex < 0 || headerIndex >= headerCount)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentOutOfRangeException(
                             "headerIndex",
@@ -1912,8 +1861,7 @@ namespace System.ServiceModel.Channels
         {
             if (headerIndex < 0 || headerIndex >= headerCount)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentOutOfRangeException(
                             "headerIndex",
@@ -1978,8 +1926,7 @@ namespace System.ServiceModel.Channels
         {
             if (relationshipType == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("relationshipType");
             }
 
@@ -2077,8 +2024,7 @@ namespace System.ServiceModel.Channels
 
             if (headerIndex < 0 || headerIndex >= headerCount)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentOutOfRangeException(
                             "headerIndex",
@@ -2097,8 +2043,7 @@ namespace System.ServiceModel.Channels
                     WriteStartBufferedMessageHeader(bufferedMessageData, headerIndex, writer);
                     break;
                 default:
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(SR.InvalidEnumValue, headers[headerIndex].HeaderType)
@@ -2121,8 +2066,7 @@ namespace System.ServiceModel.Channels
 
             if (headerIndex < 0 || headerIndex >= headerCount)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentOutOfRangeException(
                             "headerIndex",
@@ -2141,8 +2085,7 @@ namespace System.ServiceModel.Channels
                     WriteBufferedMessageHeaderContents(bufferedMessageData, headerIndex, writer);
                     break;
                 default:
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(SR.InvalidEnumValue, headers[headerIndex].HeaderType)

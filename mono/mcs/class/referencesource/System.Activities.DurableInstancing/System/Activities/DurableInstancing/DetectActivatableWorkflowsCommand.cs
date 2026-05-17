@@ -10,8 +10,7 @@ namespace System.Activities.DurableInstancing
     {
         public DetectActivatableWorkflowsCommand()
             : base(
-                SqlWorkflowInstanceStoreConstants
-                    .DurableInstancingNamespace
+                SqlWorkflowInstanceStoreConstants.DurableInstancingNamespace
                     .GetName("DetectActivatableWorkflows")
             ) { }
     }

@@ -77,8 +77,7 @@ namespace System.Xml.XmlDocumentTests
             XmlDocument doc = CreateDocumentWithElement();
             XmlElement element = doc.DocumentElement;
             element.Attributes.Append(doc.CreateAttribute("someAttr", attrUri1));
-            XmlAttribute expectedAttr = element
-                .Attributes
+            XmlAttribute expectedAttr = element.Attributes
                 .Append(doc.CreateAttribute(attrName, attrUri2));
             element.Attributes.Append(doc.CreateAttribute(attrName, attrUri3));
 
@@ -97,8 +96,7 @@ namespace System.Xml.XmlDocumentTests
             XmlDocument doc = CreateDocumentWithElement();
             XmlElement element = doc.DocumentElement;
             element.Attributes.Append(doc.CreateAttribute(attrName1, attrUri));
-            XmlAttribute expectedAttr = element
-                .Attributes
+            XmlAttribute expectedAttr = element.Attributes
                 .Append(doc.CreateAttribute(attrName2, attrUri));
             element.Attributes.Append(doc.CreateAttribute(attrName3, attrUri));
 
@@ -156,8 +154,7 @@ namespace System.Xml.XmlDocumentTests
             XmlDocument doc = CreateDocumentWithElement();
             XmlElement element = doc.DocumentElement;
             element.Attributes.Append(doc.CreateAttribute(attrName1, attrUri1));
-            XmlAttribute expectedAttr = element
-                .Attributes
+            XmlAttribute expectedAttr = element.Attributes
                 .Append(doc.CreateAttribute(attrName2, attrUri2));
             element.Attributes.Append(doc.CreateAttribute(attrName3, attrUri3));
 

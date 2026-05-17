@@ -59,8 +59,7 @@ namespace Microsoft.CodeAnalysis.UnitTests
         {
             var pid = ProjectId.CreateNewId();
             var did = DocumentId.CreateNewId(pid);
-            return workspace
-                .CurrentSolution
+            return workspace.CurrentSolution
                 .AddProject(pid, "goo", "goo", languageName)
                 .AddMetadataReference(pid, MscorlibRef)
                 .AddDocument(did, "goo.cs", SourceText.From(sourceText));
@@ -73,8 +72,7 @@ namespace Microsoft.CodeAnalysis.UnitTests
         {
             var pid = ProjectId.CreateNewId();
 
-            var solution = workspace
-                .CurrentSolution
+            var solution = workspace.CurrentSolution
                 .AddProject(pid, "goo", "goo", LanguageNames.CSharp)
                 .AddMetadataReference(pid, MscorlibRef);
 
@@ -132,8 +130,7 @@ public class C {
             using var workspace = CreateWorkspace();
             var pid = ProjectId.CreateNewId();
             var did = DocumentId.CreateNewId(pid);
-            var solution = workspace
-                .CurrentSolution
+            var solution = workspace.CurrentSolution
                 .AddProject(pid, "goo", "goo.dll", LanguageNames.CSharp)
                 .AddMetadataReference(pid, MscorlibRef)
                 .AddMetadataReference(
@@ -161,8 +158,7 @@ public class C {
         [Fact]
         public async Task PinvokeMethodReferences_VB()
         {
-            var tree = Microsoft
-                .CodeAnalysis
+            var tree = Microsoft.CodeAnalysis
                 .VisualBasic
                 .VisualBasicSyntaxTree
                 .ParseText(
@@ -243,8 +239,7 @@ Module Module1
         [Fact, WorkItem("https://devdiv.visualstudio.com/DevDiv/_workitems/edit/1744118")]
         public async Task TestSymbolWithEmptyIdentifier()
         {
-            var tree = Microsoft
-                .CodeAnalysis
+            var tree = Microsoft.CodeAnalysis
                 .VisualBasic
                 .VisualBasicSyntaxTree
                 .ParseText(
@@ -295,8 +290,7 @@ End Class
         [Fact]
         public async Task PinvokeMethodReferences_CS()
         {
-            var tree = Microsoft
-                .CodeAnalysis
+            var tree = Microsoft.CodeAnalysis
                 .CSharp
                 .CSharpSyntaxTree
                 .ParseText(
@@ -602,15 +596,13 @@ namespace M
             );
 
             // get symbols for methods
-            var portableCompilation = await solution
-                .Projects
+            var portableCompilation = await solution.Projects
                 .Single(p => p.Name == "PortableProject")
                 .GetCompilationAsync();
             var baseType = portableCompilation.GetTypeByMetadataName("N.BaseClass");
             var baseVirtualMethodSymbol = baseType.GetMembers("SomeMethod").Single();
 
-            var normalCompilation = await solution
-                .Projects
+            var normalCompilation = await solution.Projects
                 .Single(p => p.Name == "NormalProject")
                 .GetCompilationAsync();
             var derivedType = normalCompilation.GetTypeByMetadataName("M.DerivedClass");
@@ -786,8 +778,7 @@ namespace Test
 
             // those locations should not be the same
             Assert.True(
-                typeResult
-                    .Locations
+                typeResult.Locations
                     .All(loc =>
                         loc.Location.SourceSpan
                         != constructorResult.Locations.Single().Location.SourceSpan

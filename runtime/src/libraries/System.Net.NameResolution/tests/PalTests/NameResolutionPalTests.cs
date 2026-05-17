@@ -24,8 +24,7 @@ namespace System.Net.NameResolution.PalTests
             if (PlatformDetection.IsWindows)
             {
                 // Equivalent of `Get-DnsClientNrptRule -Name .ip6.arpa`
-                using RegistryKey? key = Registry
-                    .LocalMachine
+                using RegistryKey? key = Registry.LocalMachine
                     .OpenSubKey(
                         @"SYSTEM\CurrentControlSet\Services\Dnscache\Parameters\DnsPolicyConfig"
                     );

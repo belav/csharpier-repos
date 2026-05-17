@@ -77,8 +77,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
                 .ConfigureAwait(false);
             if (menuCommandService != null)
             {
-                await _threadingContext
-                    .JoinableTaskFactory
+                await _threadingContext.JoinableTaskFactory
                     .SwitchToMainThreadAsync(cancellationToken);
                 VisualStudioCommandHandlerHelpers.AddCommand(
                     menuCommandService,
@@ -280,15 +279,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
             CancellationToken cancellationToken
         )
         {
-            var unusedReferences = _threadingContext
-                .JoinableTaskFactory
+            var unusedReferences = _threadingContext.JoinableTaskFactory
                 .Run(async () =>
                 {
                     var projectReferences = await this.ReferenceCleanupService
                         .GetProjectReferencesAsync(projectFilePath, cancellationToken)
                         .ConfigureAwait(true);
-                    var unusedReferenceAnalysisService = solution
-                        .Services
+                    var unusedReferenceAnalysisService = solution.Services
                         .GetRequiredService<IUnusedReferenceAnalysisService>();
                     return await unusedReferenceAnalysisService
                         .GetUnusedReferencesAsync(

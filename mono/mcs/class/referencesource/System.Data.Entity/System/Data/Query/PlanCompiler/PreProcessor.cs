@@ -214,10 +214,8 @@ namespace System.Data.Query.PlanCompiler
                 // ensure that we can handle their nullability.
                 //
                 PhysicalProjectOp ppOp = (PhysicalProjectOp)m_command.Root.Op; // this better be the case or we have other problems.
-                ppOp.ColumnMap.Accept(
-                    StructuredTypeNullabilityAnalyzer.Instance,
-                    m_typesNeedingNullSentinel
-                );
+                ppOp.ColumnMap
+                    .Accept(StructuredTypeNullabilityAnalyzer.Instance, m_typesNeedingNullSentinel);
             }
 
             tvfResultKeys = m_tvfResultKeys;
@@ -378,8 +376,7 @@ namespace System.Data.Query.PlanCompiler
                 requiredType = (EntityTypeBase)typeFilter.IsOfType.EdmType;
                 includeSubtypes = !typeFilter.IsOfOnly;
                 if (
-                    m_command
-                        .MetadataWorkspace
+                    m_command.MetadataWorkspace
                         .TryGetGeneratedViewOfType(
                             entitySet,
                             requiredType,
@@ -1356,14 +1353,12 @@ namespace System.Data.Query.PlanCompiler
 
                 FunctionImportMapping functionImportMapping = null;
                 if (
-                    !m_command
-                        .MetadataWorkspace
+                    !m_command.MetadataWorkspace
                         .TryGetFunctionImportMapping(op.Function, out functionImportMapping)
                 )
                 {
                     throw EntityUtil.Metadata(
-                        System
-                            .Data
+                        System.Data
                             .Entity
                             .Strings
                             .EntityClient_UnmappedFunctionImport(op.Function.FullName)
@@ -1529,8 +1524,7 @@ namespace System.Data.Query.PlanCompiler
             if (!TypeSemantics.IsStructurallyEqualOrPromotableTo(resultType, op.Type))
             {
                 throw EntityUtil.Metadata(
-                    System
-                        .Data
+                    System.Data
                         .Entity
                         .Strings
                         .EntityClient_IncompatibleNavigationPropertyResult(

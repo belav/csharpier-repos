@@ -165,8 +165,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                     return true;
 
                 return isOpenDocument
-                    && previousData
-                        .Items
+                    && previousData.Items
                         .Any(static d =>
                             d.Severity
                                 is DiagnosticSeverity.Error
@@ -454,8 +453,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                 return result;
             }
 
-            var compilerAnalyzer = project
-                .Solution
+            var compilerAnalyzer = project.Solution
                 .State
                 .Analyzers
                 .GetCompilerDiagnosticAnalyzer(project.Language);
@@ -591,8 +589,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                                     project,
                                     ideOptions,
                                     analyzersToRun,
-                                    compilationWithAnalyzers
-                                        .AnalysisOptions
+                                    compilationWithAnalyzers.AnalysisOptions
                                         .ReportSuppressedDiagnostics,
                                     cancellationToken
                                 )
@@ -841,8 +838,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
 
             foreach (var document in project.Documents)
             {
-                var loadDiagnostic = await document
-                    .State
+                var loadDiagnostic = await document.State
                     .GetLoadDiagnosticAsync(cancellationToken)
                     .ConfigureAwait(false);
                 if (loadDiagnostic != null)

@@ -349,8 +349,7 @@ namespace System.ServiceModel.Channels
                 set
                 {
                     if (value > this.buffer.Length)
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(new ArgumentOutOfRangeException("value"));
                     this.Variants[this.Index].byteArrayValue.size = value;
                 }
@@ -476,8 +475,7 @@ namespace System.ServiceModel.Channels
         {
             string[] pieces = messageId.Split(new char[] { '\\' });
             if (pieces.Length != 2)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentException(
                             SR.GetString(SR.MsmqInvalidMessageId, messageId),
@@ -488,8 +486,7 @@ namespace System.ServiceModel.Channels
             Guid guid;
             if (!DiagnosticUtility.Utility.TryCreateGuid(pieces[0], out guid))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentException(
                             SR.GetString(SR.MsmqInvalidMessageId, messageId),
@@ -505,8 +502,7 @@ namespace System.ServiceModel.Channels
             }
             catch (FormatException)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentException(
                             SR.GetString(SR.MsmqInvalidMessageId, messageId),
@@ -534,8 +530,7 @@ namespace System.ServiceModel.Channels
         {
             long totalSeconds = (long)timeSpan.TotalSeconds;
             if (totalSeconds > int.MaxValue)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(SR.GetString(SR.MsmqTimeSpanTooLarge))
                     );

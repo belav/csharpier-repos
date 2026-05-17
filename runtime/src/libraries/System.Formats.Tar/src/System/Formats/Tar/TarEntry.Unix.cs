@@ -15,8 +15,7 @@ namespace System.Formats.Tar
         {
             Debug.Assert(EntryType is TarEntryType.BlockDevice);
             Interop.CheckIo(
-                Interop
-                    .Sys
+                Interop.Sys
                     .CreateBlockDevice(
                         destinationFileName,
                         (uint)Mode,
@@ -32,8 +31,7 @@ namespace System.Formats.Tar
         {
             Debug.Assert(EntryType is TarEntryType.CharacterDevice);
             Interop.CheckIo(
-                Interop
-                    .Sys
+                Interop.Sys
                     .CreateCharacterDevice(
                         destinationFileName,
                         (uint)Mode,

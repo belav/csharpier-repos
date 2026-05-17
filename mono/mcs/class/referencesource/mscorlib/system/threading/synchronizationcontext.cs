@@ -190,8 +190,7 @@ namespace System.Threading
             {
                 fixed (IntPtr* pWaitHandles = waitHandles)
                 {
-                    return System
-                        .Threading
+                    return System.Threading
                         .WaitHandle
                         .Wait_internal(
                             pWaitHandles,

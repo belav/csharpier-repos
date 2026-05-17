@@ -37,8 +37,7 @@ namespace System.IdentityModel
         public bool TryLookup(string key, out XmlDictionaryString value)
         {
             if (key == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("key"));
             if (this.dictionary == null)
             {
@@ -76,8 +75,7 @@ namespace System.IdentityModel
         public bool TryLookup(XmlDictionaryString key, out XmlDictionaryString value)
         {
             if (key == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("key"));
             if (key.Dictionary == this)
             {

@@ -23,8 +23,7 @@ namespace Microsoft.CodeAnalysis.Editor.QuickInfo
             Workspace workspace
         )
         {
-            var cloneServices = workspace
-                .Services
+            var cloneServices = workspace.Services
                 .SolutionServices
                 .ExportProvider
                 .GetExports<ITextBufferCloneService>();
@@ -40,14 +39,12 @@ namespace Microsoft.CodeAnalysis.Editor.QuickInfo
         /// </summary>
         public static ITextBuffer CloneTextBuffer(this Document document, SourceText sourceText)
         {
-            var contentTypeService = document
-                .Project
+            var contentTypeService = document.Project
                 .Services
                 .GetService<IContentTypeLanguageService>();
             var contentType = contentTypeService.GetDefaultContentType();
 
-            var cloneServices = document
-                .Project
+            var cloneServices = document.Project
                 .Solution
                 .Services
                 .ExportProvider

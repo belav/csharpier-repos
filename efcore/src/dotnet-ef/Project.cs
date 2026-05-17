@@ -59,8 +59,7 @@ internal class Project
             Path.GetFileName(file) + ".EntityFrameworkCore.targets"
         );
         using (
-            var input = typeof(Resources)
-                .Assembly
+            var input = typeof(Resources).Assembly
                 .GetManifestResourceStream(
                     "Microsoft.EntityFrameworkCore.Tools.Resources.EntityFrameworkCore.targets"
                 )!

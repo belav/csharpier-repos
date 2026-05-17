@@ -1165,8 +1165,7 @@ namespace System.Xml
                     ArraySegment<byte> arraySegment;
                     bool result = _captureStream.TryGetBuffer(out arraySegment);
                     Debug.Assert(result);
-                    _captureText = DataContractSerializer
-                        .Base64Encoding
+                    _captureText = DataContractSerializer.Base64Encoding
                         .GetString(arraySegment.Array!, arraySegment.Offset, arraySegment.Count);
                     _captureStream = null;
                 }
@@ -1212,8 +1211,7 @@ namespace System.Xml
                     if (trailByteCount > 0)
                     {
                         WriteText(
-                            DataContractSerializer
-                                .Base64Encoding
+                            DataContractSerializer.Base64Encoding
                                 .GetString(trailBytes!, 0, trailByteCount)
                         );
                     }

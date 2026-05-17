@@ -669,8 +669,7 @@ namespace Microsoft.CodeAnalysis.MSBuild
 
         private static bool IsInGAC(string filePath)
         {
-            return GlobalAssemblyCacheLocation
-                .RootLocations
+            return GlobalAssemblyCacheLocation.RootLocations
                 .Any(
                     static (gloc, filePath) => PathUtilities.IsChildPath(gloc, filePath),
                     filePath
@@ -684,8 +683,7 @@ namespace Microsoft.CodeAnalysis.MSBuild
             {
                 if (RoslynString.IsNullOrEmpty(s_frameworkRoot))
                 {
-                    var runtimeDir = System
-                        .Runtime
+                    var runtimeDir = System.Runtime
                         .InteropServices
                         .RuntimeEnvironment
                         .GetRuntimeDirectory();

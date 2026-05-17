@@ -54,8 +54,7 @@ namespace System.ServiceModel.Dispatcher
             if (!added)
             {
                 instanceContext.Abort();
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ObjectDisposedException(this.GetType().ToString()));
             }
         }
@@ -227,8 +226,7 @@ namespace System.ServiceModel.Dispatcher
         public bool Remove(InstanceContext instanceContext)
         {
             if (instanceContext == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("instanceContext"));
 
             lock (this.ThisLock)

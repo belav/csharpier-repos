@@ -59,8 +59,7 @@ namespace MonoTests.System.Reflection.Emit
             AssemblyName assemblyName = new AssemblyName();
             assemblyName.Name = ASSEMBLY_NAME;
 
-            assembly = AppDomain
-                .CurrentDomain
+            assembly = AppDomain.CurrentDomain
                 .DefineDynamicAssembly(assemblyName, access, Path.GetTempPath());
 
             module = assembly.DefineDynamicModule("module1");

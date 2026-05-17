@@ -24,8 +24,7 @@ namespace System.Net.Http.Formatting
         [Fact]
         public void MediaTypeProperty()
         {
-            Assert
-                .Reflection
+            Assert.Reflection
                 .Property(
                     new ContentNegotiationResult(_formatter, _mediaType),
                     nr => nr.MediaType,
@@ -38,8 +37,7 @@ namespace System.Net.Http.Formatting
         [Fact]
         public void FormatterProperty()
         {
-            Assert
-                .Reflection
+            Assert.Reflection
                 .Property(
                     new ContentNegotiationResult(_formatter, _mediaType),
                     nr => nr.Formatter,

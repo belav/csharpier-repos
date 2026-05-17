@@ -70,8 +70,7 @@ namespace System.CommandLine.Tests.Binding
             var option = new CliOption<FileInfo>("--file");
             var result = new CliRootCommand { option }.Parse(new string[] { "--file", "" });
 
-            result
-                .Errors
+            result.Errors
                 .Should()
                 .ContainSingle()
                 .Which
@@ -690,8 +689,7 @@ namespace System.CommandLine.Tests.Binding
 
             var value = new CliRootCommand { option }.Parse("-x Notaday");
 
-            value
-                .Errors
+            value.Errors
                 .Should()
                 .ContainSingle()
                 .Which

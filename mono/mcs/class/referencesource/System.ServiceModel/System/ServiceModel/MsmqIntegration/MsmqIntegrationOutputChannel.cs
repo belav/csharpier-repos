@@ -152,8 +152,7 @@ namespace System.ServiceModel.MsmqIntegration
 
             MsmqIntegrationMessageProperty property = MsmqIntegrationMessageProperty.Get(message);
             if (null == property)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new CommunicationException(
                             SR.GetString(SR.MsmqMessageDoesntHaveIntegrationProperty)

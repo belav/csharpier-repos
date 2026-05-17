@@ -35,8 +35,7 @@ namespace NStruct
                 GC.WaitForPendingFinalizers();
                 GC.Collect();
 
-                Console
-                    .Out
+                Console.Out
                     .WriteLine(
                         FinalizeCount.icCreat
                             + " NStruct Objects were deleted and "

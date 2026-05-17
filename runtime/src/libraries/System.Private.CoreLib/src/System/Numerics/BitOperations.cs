@@ -500,8 +500,7 @@ namespace System.Numerics
                 // PopCount works on vector so convert input value to vector first.
 
                 Vector64<uint> input = Vector64.CreateScalar(value);
-                Vector64<byte> aggregated = AdvSimd
-                    .Arm64
+                Vector64<byte> aggregated = AdvSimd.Arm64
                     .AddAcross(AdvSimd.PopCount(input.AsByte()));
                 return aggregated.ToScalar();
             }
@@ -542,8 +541,7 @@ namespace System.Numerics
             {
                 // PopCount works on vector so convert input value to vector first.
                 Vector64<ulong> input = Vector64.Create(value);
-                Vector64<byte> aggregated = AdvSimd
-                    .Arm64
+                Vector64<byte> aggregated = AdvSimd.Arm64
                     .AddAcross(AdvSimd.PopCount(input.AsByte()));
                 return aggregated.ToScalar();
             }

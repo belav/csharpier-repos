@@ -89,8 +89,7 @@ namespace Microsoft.Diagnostics.Tools.Pgo.TypeRefTypeSystem
                     typeSpec.DecodeSignature(parserHelper, null);
                 }
 
-                int standAloneSigRowCount = peInfo
-                    .reader
+                int standAloneSigRowCount = peInfo.reader
                     .GetTableRowCount(TableIndex.StandAloneSig);
                 for (int row = 1; row <= standAloneSigRowCount; row++)
                 {

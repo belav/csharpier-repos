@@ -424,8 +424,7 @@ namespace System.Data.Entity.Design
                             targetFrameworkVersion
                         ),
                         (int)
-                            System
-                                .Data
+                            System.Data
                                 .Entity
                                 .Design
                                 .SsdlGenerator
@@ -492,8 +491,7 @@ namespace System.Data.Entity.Design
                 #region Class Declaration
 
                 string edmContainerName = storageEntityContainerMapping.EdmEntityContainer.Name;
-                string storeContainerName = storageEntityContainerMapping
-                    .StorageEntityContainer
+                string storeContainerName = storageEntityContainerMapping.StorageEntityContainer
                     .Name;
 
                 string hashOverMappingClosure = MetadataMappingHasherVisitor.GetMappingClosureHash(
@@ -611,8 +609,7 @@ namespace System.Data.Entity.Design
         )
         {
             foreach (
-                EntitySetBase extent in storageEntityContainerMapping
-                    .EdmEntityContainer
+                EntitySetBase extent in storageEntityContainerMapping.EdmEntityContainer
                     .BaseEntitySets
             )
             {
@@ -679,24 +676,21 @@ namespace System.Data.Entity.Design
                 "index"
             );
             getViewAtMethod.Parameters.Add(parameter);
-            getViewAtMethod
-                .Comments
+            getViewAtMethod.Comments
                 .Add(
                     new CodeCommentStatement(
                         EntityViewGenerationConstants.SummaryStartElement,
                         true /*docComment*/
                     )
                 );
-            getViewAtMethod
-                .Comments
+            getViewAtMethod.Comments
                 .Add(
                     new CodeCommentStatement(
                         Strings.GetViewAtMethodComments,
                         true /*docComment*/
                     )
                 );
-            getViewAtMethod
-                .Comments
+            getViewAtMethod.Comments
                 .Add(
                     new CodeCommentStatement(
                         EntityViewGenerationConstants.SummaryEndElement,
@@ -754,8 +748,7 @@ namespace System.Data.Entity.Design
             }
 
             // if an invalid index is asked for throw
-            getViewAtMethod
-                .Statements
+            getViewAtMethod.Statements
                 .Add(
                     new CodeThrowExceptionStatement(
                         new CodeObjectCreateExpression(
@@ -781,24 +774,21 @@ namespace System.Data.Entity.Design
                     new Type[] { typeof(string), typeof(string) }
                 )
             );
-            viewMethod
-                .Comments
+            viewMethod.Comments
                 .Add(
                     new CodeCommentStatement(
                         EntityViewGenerationConstants.SummaryStartElement,
                         true /*docComment*/
                     )
                 );
-            viewMethod
-                .Comments
+            viewMethod.Comments
                 .Add(
                     new CodeCommentStatement(
                         Strings.IndividualViewComments(extentFullName),
                         true /*docComment*/
                     )
                 );
-            viewMethod
-                .Comments
+            viewMethod.Comments
                 .Add(
                     new CodeCommentStatement(
                         EntityViewGenerationConstants.SummaryEndElement,
@@ -941,24 +931,21 @@ namespace System.Data.Entity.Design
             //Mark it as public
             constructor.Attributes = MemberAttributes.Public;
             //Add constructor comments
-            constructor
-                .Comments
+            constructor.Comments
                 .Add(
                     new CodeCommentStatement(
                         EntityViewGenerationConstants.SummaryStartElement,
                         true /*docComment*/
                     )
                 );
-            constructor
-                .Comments
+            constructor.Comments
                 .Add(
                     new CodeCommentStatement(
                         Strings.ConstructorComments,
                         true /*docComment*/
                     )
                 );
-            constructor
-                .Comments
+            constructor.Comments
                 .Add(
                     new CodeCommentStatement(
                         EntityViewGenerationConstants.SummaryEndElement,
@@ -980,24 +967,21 @@ namespace System.Data.Entity.Design
             //of generated code
             typeDecl.BaseTypes.Add(EntityViewGenerationConstants.BaseTypeName);
             //Add type comments
-            typeDecl
-                .Comments
+            typeDecl.Comments
                 .Add(
                     new CodeCommentStatement(
                         EntityViewGenerationConstants.SummaryStartElement,
                         true /*docComment*/
                     )
                 );
-            typeDecl
-                .Comments
+            typeDecl.Comments
                 .Add(
                     new CodeCommentStatement(
                         Strings.TypeComments,
                         true /*docComment*/
                     )
                 );
-            typeDecl
-                .Comments
+            typeDecl.Comments
                 .Add(
                     new CodeCommentStatement(
                         EntityViewGenerationConstants.SummaryEndElement,

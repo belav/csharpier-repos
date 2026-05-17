@@ -985,8 +985,7 @@ public class C
 ";
             CompileAndVerify(
                 source,
-                options: TestOptions
-                    .ReleaseDll
+                options: TestOptions.ReleaseDll
                     .WithMetadataImportOptions(MetadataImportOptions.All),
                 symbolValidator: module =>
                 {

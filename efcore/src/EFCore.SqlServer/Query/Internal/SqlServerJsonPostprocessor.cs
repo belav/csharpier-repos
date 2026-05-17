@@ -96,15 +96,13 @@ public class SqlServerJsonPostprocessor : ExpressionVisitor
                             } openJsonExpression
                         && (
                             // Condition 1: an ordering still refers to the OPENJSON's [key] column - ordering needs to be preserved.
-                            selectExpression
-                                .Orderings
+                            selectExpression.Orderings
                                 .Select(o => o.Expression)
                                 .Concat(selectExpression.Projection.Select(p => p.Expression))
                                 .Any(x => IsKeyColumn(x, table))
                             ||
                             // Condition 2: a column type in the WITH clause is a SQL Server "CLR type" (e.g. hierarchy id).
-                            openJsonExpression
-                                .ColumnInfos
+                            openJsonExpression.ColumnInfos
                                 .Any(c => c.TypeMapping.StoreType is "hierarchyid")
                         )
                     )

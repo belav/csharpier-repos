@@ -163,13 +163,11 @@ namespace System.Web.WebPages
         {
             var virtualPathDependencies = new List<string>();
             virtualPathDependencies.Add(virtualPath);
-            CacheDependency cacheDependency = HostingEnvironment
-                .VirtualPathProvider
+            CacheDependency cacheDependency = HostingEnvironment.VirtualPathProvider
                 .GetCacheDependency(virtualPath, virtualPathDependencies, DateTime.UtcNow);
             var key = CacheKeyPrefix + virtualPath;
 
-            HttpRuntime
-                .Cache
+            HttpRuntime.Cache
                 .Insert(
                     key,
                     virtualPath,

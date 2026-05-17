@@ -3675,8 +3675,7 @@ namespace Microsoft.CSharp
                 CodeAttributeDeclaration current = (CodeAttributeDeclaration)en.Current;
 
                 if (
-                    current
-                        .Name
+                    current.Name
                         .Equals("system.paramarrayattribute", StringComparison.OrdinalIgnoreCase)
                 )
                 {
@@ -4080,8 +4079,7 @@ namespace Microsoft.CSharp
             if (options.OutputAssembly == null || options.OutputAssembly.Length == 0)
             {
                 string extension = (options.GenerateExecutable) ? "exe" : "dll";
-                options.OutputAssembly = results
-                    .TempFiles
+                options.OutputAssembly = results.TempFiles
                     .AddExtension(extension, !options.GenerateInMemory);
 
                 // Create an empty assembly.  This is so that the file will have permissions that
@@ -4104,8 +4102,7 @@ namespace Microsoft.CSharp
             if (
                 options.CompilerOptions != null
                 && -1
-                    != CultureInfo
-                        .InvariantCulture
+                    != CultureInfo.InvariantCulture
                         .CompareInfo
                         .IndexOf(
                             options.CompilerOptions,

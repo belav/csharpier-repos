@@ -91,8 +91,7 @@ namespace System.IO.Enumeration
             );
 
             Interop.NtDll.IO_STATUS_BLOCK statusBlock;
-            int status = Interop
-                .NtDll
+            int status = Interop.NtDll
                 .NtQueryDirectoryFile(
                     FileHandle: _directoryHandle,
                     Event: IntPtr.Zero,
@@ -101,8 +100,7 @@ namespace System.IO.Enumeration
                     IoStatusBlock: &statusBlock,
                     FileInformation: _buffer,
                     Length: (uint)_bufferLength,
-                    FileInformationClass: Interop
-                        .NtDll
+                    FileInformationClass: Interop.NtDll
                         .FILE_INFORMATION_CLASS
                         .FileFullDirectoryInformation,
                     ReturnSingleEntry: Interop.BOOLEAN.FALSE,
@@ -143,8 +141,7 @@ namespace System.IO.Enumeration
             string fullPath
         )
         {
-            (uint status, IntPtr handle) = Interop
-                .NtDll
+            (uint status, IntPtr handle) = Interop.NtDll
                 .CreateFile(
                     relativePath,
                     _directoryHandle,
@@ -189,8 +186,7 @@ namespace System.IO.Enumeration
         /// </summary>
         private IntPtr CreateDirectoryHandle(string path, bool ignoreNotFound = false)
         {
-            IntPtr handle = Interop
-                .Kernel32
+            IntPtr handle = Interop.Kernel32
                 .CreateFile_IntPtr(
                     path,
                     Interop.Kernel32.FileOperations.FILE_LIST_DIRECTORY,

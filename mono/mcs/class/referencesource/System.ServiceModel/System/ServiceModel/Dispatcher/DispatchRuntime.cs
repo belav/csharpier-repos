@@ -64,8 +64,7 @@ namespace System.ServiceModel.Dispatcher
         {
             if (endpointDispatcher == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("endpointDispatcher");
             }
 
@@ -133,8 +132,7 @@ namespace System.ServiceModel.Dispatcher
             {
                 if (value == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new ArgumentNullException("value"));
                 }
 
@@ -153,8 +151,7 @@ namespace System.ServiceModel.Dispatcher
             {
                 if (value == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new ArgumentNullException("value"));
                 }
 
@@ -199,8 +196,7 @@ namespace System.ServiceModel.Dispatcher
             {
                 if (!AuditLogLocationHelper.IsDefined(value))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new ArgumentOutOfRangeException("value"));
                 }
 
@@ -232,8 +228,7 @@ namespace System.ServiceModel.Dispatcher
             {
                 if (!AuditLevelHelper.IsDefined(value))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new ArgumentOutOfRangeException("value"));
                 }
 
@@ -252,8 +247,7 @@ namespace System.ServiceModel.Dispatcher
             {
                 if (!AuditLevelHelper.IsDefined(value))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new ArgumentOutOfRangeException("value"));
                 }
 
@@ -480,8 +474,7 @@ namespace System.ServiceModel.Dispatcher
             {
                 if (!PrincipalPermissionModeHelper.IsDefined(value))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new ArgumentOutOfRangeException("value"));
                 }
 
@@ -652,8 +645,7 @@ namespace System.ServiceModel.Dispatcher
 
                     for (int i = 0; i < this.operations.Count; i++)
                     {
-                        max = System
-                            .Math
+                        max = System.Math
                             .Max(max, this.operations[i].CallContextInitializers.Count);
                     }
                     max = System.Math.Max(max, this.unhandled.CallContextInitializers.Count);
@@ -742,8 +734,7 @@ namespace System.ServiceModel.Dispatcher
             this.shared.LockDownProperties();
             if (this.concurrencyMode != ConcurrencyMode.Single && this.ensureOrderedDispatch)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(SR.SfxDispatchRuntimeNonConcurrentOrEnsureOrderedDispatch)
@@ -864,15 +855,13 @@ namespace System.ServiceModel.Dispatcher
                 object state
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new NotImplementedException());
             }
 
             public object InvokeEnd(object instance, out object[] outputs, IAsyncResult result)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new NotImplementedException());
             }
         }
@@ -951,8 +940,7 @@ namespace System.ServiceModel.Dispatcher
                 }
                 if (item.Parent != this.outer)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgument(SR.GetString(SR.SFxMismatchedOperationParent));
                 }
 
@@ -974,8 +962,7 @@ namespace System.ServiceModel.Dispatcher
                 }
                 if (item.Parent != this.outer)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgument(SR.GetString(SR.SFxMismatchedOperationParent));
                 }
 
@@ -988,8 +975,7 @@ namespace System.ServiceModel.Dispatcher
         {
             object IInstanceProvider.GetInstance(InstanceContext instanceContext)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(SR.SFxCannotActivateCallbackInstace)
@@ -1009,8 +995,7 @@ namespace System.ServiceModel.Dispatcher
 
             void IInstanceProvider.ReleaseInstance(InstanceContext instanceContext, object instance)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(SR.SFxCannotActivateCallbackInstace)

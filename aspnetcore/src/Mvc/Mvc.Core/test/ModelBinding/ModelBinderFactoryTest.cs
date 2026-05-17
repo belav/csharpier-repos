@@ -67,8 +67,7 @@ public class ModelBinderFactoryTest
 
         // There isn't a provider that can handle WidgetId.
         var options = Options.Create(new MvcOptions());
-        options
-            .Value
+        options.Value
             .ModelBinderProviders
             .Add(
                 new TestModelBinderProvider(c =>
@@ -109,8 +108,7 @@ public class ModelBinderFactoryTest
         var modelBinder = new ByteArrayModelBinder(NullLoggerFactory.Instance);
 
         var options = Options.Create(new MvcOptions());
-        options
-            .Value
+        options.Value
             .ModelBinderProviders
             .Add(
                 new TestModelBinderProvider(c =>
@@ -146,8 +144,7 @@ public class ModelBinderFactoryTest
         var metadataProvider = new TestModelMetadataProvider();
 
         var options = Options.Create(new MvcOptions());
-        options
-            .Value
+        options.Value
             .ModelBinderProviders
             .Add(
                 new TestModelBinderProvider(c =>
@@ -189,8 +186,7 @@ public class ModelBinderFactoryTest
         var callCount = 0;
 
         var options = Options.Create(new MvcOptions());
-        options
-            .Value
+        options.Value
             .ModelBinderProviders
             .Add(
                 new TestModelBinderProvider(c =>
@@ -229,8 +225,7 @@ public class ModelBinderFactoryTest
         var metadataProvider = new TestModelMetadataProvider();
 
         var options = Options.Create(new MvcOptions());
-        options
-            .Value
+        options.Value
             .ModelBinderProviders
             .Add(
                 new TestModelBinderProvider(c =>
@@ -262,8 +257,7 @@ public class ModelBinderFactoryTest
         var metadataProvider = new TestModelMetadataProvider();
 
         var options = Options.Create(new MvcOptions());
-        options
-            .Value
+        options.Value
             .ModelBinderProviders
             .Add(
                 new TestModelBinderProvider(c =>

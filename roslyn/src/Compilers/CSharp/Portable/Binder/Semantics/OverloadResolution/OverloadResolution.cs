@@ -725,8 +725,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     }
 
                     if (
-                        expectedConvention
-                            .CallKind
+                        expectedConvention.CallKind
                             .IsCallingConvention(Cci.CallingConvention.Unmanaged)
                     )
                     {
@@ -1397,15 +1396,13 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (
                 !moreDerivedOverride.IsOverride
                 || checkOverrideContainingType
-                    && !moreDerivedOverride
-                        .ContainingType
+                    && !moreDerivedOverride.ContainingType
                         .IsDerivedFrom(
                             member.ContainingType,
                             TypeCompareKind.ConsiderEverything,
                             ref useSiteInfo
                         )
-                || !MemberSignatureComparer
-                    .SloppyOverrideComparer
+                || !MemberSignatureComparer.SloppyOverrideComparer
                     .Equals(member, moreDerivedOverride)
             )
             {
@@ -1864,8 +1861,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             foreach (MemberResolutionResult<TMember> result in results)
             {
-                result
-                    .Member
+                result.Member
                     .AddUseSiteInfo(
                         ref useSiteInfo,
                         addDiagnostics: result.HasUseSiteDiagnosticToReport
@@ -3107,8 +3103,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             // choice after we received customer reports of problems in the space.
             // https://github.com/dotnet/roslyn/issues/55345
             if (
-                _binder
-                    .Compilation
+                _binder.Compilation
                     .IsFeatureEnabled(MessageID.IDS_FeatureImprovedInterpolatedStrings)
                 && node
                     is BoundUnconvertedInterpolatedString { ConstantValueOpt: null }
@@ -4144,8 +4139,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                     if (
                         argRefKind == RefKind.Ref
-                        && binder
-                            .Compilation
+                        && binder.Compilation
                             .IsFeatureEnabled(MessageID.IDS_FeatureRefReadonlyParameters)
                     )
                     {

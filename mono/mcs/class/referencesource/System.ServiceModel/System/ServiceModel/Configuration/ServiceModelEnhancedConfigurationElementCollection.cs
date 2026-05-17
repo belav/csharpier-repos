@@ -39,8 +39,7 @@ namespace System.ServiceModel.Configuration
                     // being manipulated (i.e. duplicate in same config file)
                     if (oldElement.ElementInformation.IsPresent)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new ConfigurationErrorsException(
                                     SR.GetString(
@@ -59,16 +58,14 @@ namespace System.ServiceModel.Configuration
                         values.Add("OldElementLocation", oldElement.ElementInformation.Source);
                         values.Add(
                             "OldElementLineNumber",
-                            oldElement
-                                .ElementInformation
+                            oldElement.ElementInformation
                                 .LineNumber
                                 .ToString(NumberFormatInfo.CurrentInfo)
                         );
                         values.Add("NewElementLocation", element.ElementInformation.Source);
                         values.Add(
                             "NewElementLineNumber",
-                            element
-                                .ElementInformation
+                            element.ElementInformation
                                 .LineNumber
                                 .ToString(NumberFormatInfo.CurrentInfo)
                         );

@@ -27,8 +27,7 @@
         {
             ModelBinderUtil.ValidateBindingContext(bindingContext);
 
-            ValueProviderResult vpResult = bindingContext
-                .UnvalidatedValueProvider
+            ValueProviderResult vpResult = bindingContext.UnvalidatedValueProvider
                 .GetValue(
                     bindingContext.ModelName,
                     skipValidation: !bindingContext.ValidateRequest

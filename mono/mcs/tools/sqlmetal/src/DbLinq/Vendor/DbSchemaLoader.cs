@@ -85,8 +85,7 @@ namespace DbLinq.Vendor
                 var fromColumn = UnquoteSqlName(GetValue<string>(r, iFromColumn, null));
 
                 string fullFromTable = GetFullDbName(fromTable, fromSchema);
-                DbLinq.Schema.Dbml.Table table = schema
-                    .Tables
+                DbLinq.Schema.Dbml.Table table = schema.Tables
                     .FirstOrDefault(t => fullFromTable == t.Name);
                 if (table == null)
                 {
@@ -197,8 +196,7 @@ namespace DbLinq.Vendor
                     // Column has no type; wtf are we supposed to do?
                     // This happens w/ SQLite while processing Northwind.db3 for the
                     // 'Customer and Suppliers by City' view, Relationship column.
-                    Console
-                        .Error
+                    Console.Error
                         .WriteLine(
                             "Warning: The column '{0}.{1}.{2}' could not be imported because the column's DATA_TYPE is empty.",
                             tableSchema,
@@ -276,8 +274,7 @@ namespace DbLinq.Vendor
             var dataTypes = connection.GetSchema("DataTypes");
             var iSqlType = dataTypes.Columns.IndexOf("TypeName");
             var iNetType = dataTypes.Columns.IndexOf("DataType");
-            return dataTypes
-                .Rows
+            return dataTypes.Rows
                 .Cast<DataRow>()
                 .ToDictionary(r => r[iSqlType].ToString(), r => r[iNetType].ToString());
         }

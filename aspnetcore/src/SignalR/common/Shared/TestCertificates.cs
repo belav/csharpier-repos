@@ -15,8 +15,7 @@ internal static class TestCertificateHelper
         if (OperatingSystem.IsWindows())
         {
             // Detect Win10+
-            var key = Registry
-                .LocalMachine
+            var key = Registry.LocalMachine
                 .OpenSubKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion");
             var major = key.GetValue("CurrentMajorVersionNumber") as int?;
             var minor = key.GetValue("CurrentMinorVersionNumber") as int?;

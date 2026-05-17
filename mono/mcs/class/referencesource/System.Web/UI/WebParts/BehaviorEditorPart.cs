@@ -336,8 +336,7 @@ namespace System.Web.UI.WebControls.WebParts
                 typeof(WebPartExportMode)
             );
             _exportMode = new DropDownList();
-            _exportMode
-                .Items
+            _exportMode.Items
                 .AddRange(
                     new ListItem[]
                     {
@@ -359,8 +358,7 @@ namespace System.Web.UI.WebControls.WebParts
 
             TypeConverter helpModeConverter = TypeDescriptor.GetConverter(typeof(WebPartHelpMode));
             _helpMode = new DropDownList();
-            _helpMode
-                .Items
+            _helpMode.Items
                 .AddRange(
                     new ListItem[]
                     {

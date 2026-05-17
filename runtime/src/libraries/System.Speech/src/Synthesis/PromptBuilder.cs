@@ -169,8 +169,7 @@ namespace System.Speech.Synthesis
             if (emphasis != PromptEmphasis.NotSet)
             {
                 emphasisElement._attributes = new Collection<AttributeItem>();
-                emphasisElement
-                    ._attributes
+                emphasisElement._attributes
                     .Add(new AttributeItem("level", emphasis.ToString().ToLowerInvariant()));
             }
         }
@@ -195,8 +194,7 @@ namespace System.Speech.Synthesis
                 _elements.Add(emphasisElement);
 
                 emphasisElement._attributes = new Collection<AttributeItem>();
-                emphasisElement
-                    ._attributes
+                emphasisElement._attributes
                     .Add(new AttributeItem("level", style.Emphasis.ToString().ToLowerInvariant()));
 
                 // Set the expected children and mark the element used
@@ -323,15 +321,13 @@ namespace System.Speech.Synthesis
 
             if (voice.Gender != VoiceGender.NotSet)
             {
-                startVoice
-                    ._attributes
+                startVoice._attributes
                     .Add(new AttributeItem("gender", voice.Gender.ToString().ToLowerInvariant()));
             }
 
             if (voice.Age != VoiceAge.NotSet)
             {
-                startVoice
-                    ._attributes
+                startVoice._attributes
                     .Add(
                         new AttributeItem(
                             "age",
@@ -342,8 +338,7 @@ namespace System.Speech.Synthesis
 
             if (voice.Variant >= 0)
             {
-                startVoice
-                    ._attributes
+                startVoice._attributes
                     .Add(
                         new AttributeItem(
                             "variant",
@@ -720,8 +715,7 @@ namespace System.Speech.Synthesis
             _elements.Add(breakElement);
 
             breakElement._attributes = new Collection<AttributeItem>();
-            breakElement
-                ._attributes
+            breakElement._attributes
                 .Add(new AttributeItem("time", duration.TotalMilliseconds + "ms"));
         }
 

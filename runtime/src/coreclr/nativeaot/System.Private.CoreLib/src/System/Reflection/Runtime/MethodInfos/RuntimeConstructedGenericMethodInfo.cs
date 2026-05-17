@@ -176,8 +176,7 @@ namespace System.Reflection.Runtime.MethodInfos
             get
             {
                 if (
-                    _genericMethodDefinition
-                        .ReflectedType
+                    _genericMethodDefinition.ReflectedType
                         .Equals(_genericMethodDefinition.DeclaringType)
                 )
                     return this;

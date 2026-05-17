@@ -17,8 +17,7 @@ namespace ILCompiler.DependencyAnalysis
             MethodIL methodIL
         )
         {
-            factory
-                .MetadataManager
+            factory.MetadataManager
                 .GetDependenciesDueToMethodCodePresence(
                     ref dependencies,
                     factory,
@@ -26,8 +25,7 @@ namespace ILCompiler.DependencyAnalysis
                     methodIL
                 );
 
-            factory
-                .InteropStubManager
+            factory.InteropStubManager
                 .AddDependenciesDueToMethodCodePresence(ref dependencies, factory, method);
 
             if (method.OwningType is MetadataType mdType)
@@ -58,16 +56,14 @@ namespace ILCompiler.DependencyAnalysis
 
                                 if (owningType.Name == "Comparer`1")
                                 {
-                                    templateDependencies = Internal
-                                        .IL
+                                    templateDependencies = Internal.IL
                                         .Stubs
                                         .ComparerIntrinsics
                                         .GetPotentialComparersForType(owningType.Instantiation[0]);
                                 }
                                 else if (owningType.Name == "EqualityComparer`1")
                                 {
-                                    templateDependencies = Internal
-                                        .IL
+                                    templateDependencies = Internal.IL
                                         .Stubs
                                         .ComparerIntrinsics
                                         .GetPotentialEqualityComparersForType(
@@ -105,8 +101,7 @@ namespace ILCompiler.DependencyAnalysis
             MethodDesc method
         )
         {
-            factory
-                .MetadataManager
+            factory.MetadataManager
                 .GetConditionalDependenciesDueToMethodCodePresence(
                     ref dependencies,
                     factory,

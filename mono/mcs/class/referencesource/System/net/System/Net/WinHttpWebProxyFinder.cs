@@ -18,8 +18,7 @@ namespace System.Net
         {
             // Don't specify a user agent and dont' specify proxy settings. This is the same behavior WinHttp
             // uses when downloading the PAC file.
-            session = UnsafeNclNativeMethods
-                .WinHttp
+            session = UnsafeNclNativeMethods.WinHttp
                 .WinHttpOpen(
                     null,
                     UnsafeNclNativeMethods.WinHttp.AccessType.NoProxy,
@@ -49,8 +48,7 @@ namespace System.Net
                 int timeout = SettingsSectionInternal.Section.DownloadTimeout;
 
                 if (
-                    !UnsafeNclNativeMethods
-                        .WinHttp
+                    !UnsafeNclNativeMethods.WinHttp
                         .WinHttpSetTimeouts(session, timeout, timeout, timeout, timeout)
                 )
                 {
@@ -199,13 +197,11 @@ namespace System.Net
             else
             {
                 // Use the provided script location for the PAC file.
-                autoProxyOptions.Flags = UnsafeNclNativeMethods
-                    .WinHttp
+                autoProxyOptions.Flags = UnsafeNclNativeMethods.WinHttp
                     .AutoProxyFlags
                     .AutoProxyConfigUrl;
                 autoProxyOptions.AutoConfigUrl = scriptLocation.ToString();
-                autoProxyOptions.AutoDetectFlags = UnsafeNclNativeMethods
-                    .WinHttp
+                autoProxyOptions.AutoDetectFlags = UnsafeNclNativeMethods.WinHttp
                     .AutoDetectType
                     .None;
             }
@@ -277,8 +273,7 @@ namespace System.Net
             RuntimeHelpers.PrepareConstrainedRegions();
             try
             {
-                success = UnsafeNclNativeMethods
-                    .WinHttp
+                success = UnsafeNclNativeMethods.WinHttp
                     .WinHttpGetProxyForUrl(
                         session,
                         destination,

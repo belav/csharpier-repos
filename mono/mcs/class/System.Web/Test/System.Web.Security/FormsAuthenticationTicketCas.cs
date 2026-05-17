@@ -127,18 +127,19 @@ namespace MonoCasTests.System.Web.Security
         )
         {
             // we can't take the simpler (3 params) ctor as it fails under 1.x (NRE)
-            ConstructorInfo ci = this.Type.GetConstructor(
-                new Type[7]
-                {
-                    typeof(int),
-                    typeof(string),
-                    typeof(DateTime),
-                    typeof(DateTime),
-                    typeof(bool),
-                    typeof(string),
-                    typeof(string),
-                }
-            );
+            ConstructorInfo ci = this.Type
+                .GetConstructor(
+                    new Type[7]
+                    {
+                        typeof(int),
+                        typeof(string),
+                        typeof(DateTime),
+                        typeof(DateTime),
+                        typeof(bool),
+                        typeof(string),
+                        typeof(string),
+                    }
+                );
             Assert.IsNotNull(ci, ".ctor(string,bool,int)");
             return ci.Invoke(
                 new object[7]

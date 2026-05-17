@@ -18,8 +18,7 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
         public override async Task InitializeAsync()
         {
             await base.InitializeAsync();
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .CreateSolutionAsync(
                     nameof(CSharpProjectExistsUIContext),
                     HangMitigatingCancellationToken
@@ -29,21 +28,18 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
         [IdeFact]
         public async Task ProjectContextChanges()
         {
-            var workspace = await TestServices
-                .Shell
+            var workspace = await TestServices.Shell
                 .GetComponentModelServiceAsync<VisualStudioWorkspace>(
                     HangMitigatingCancellationToken
                 );
-            var contextProvider = workspace
-                .Services
+            var contextProvider = workspace.Services
                 .GetLanguageServices(LanguageNames.CSharp)
                 .GetRequiredService<IProjectExistsUIContextProviderLanguageService>();
             var context = contextProvider.GetUIContext();
 
             Assert.False(context.IsActive);
 
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .AddProjectAsync(
                     "TestCSharpProject",
                     WellKnownProjectTemplates.ConsoleApplication,
@@ -54,8 +50,7 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
             Assert.True(context.IsActive);
 
             await TestServices.SolutionExplorer.CloseSolutionAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .Workspace
+            await TestServices.Workspace
                 .WaitForAllAsyncOperationsAsync(
                     [FeatureAttribute.Workspace],
                     HangMitigatingCancellationToken

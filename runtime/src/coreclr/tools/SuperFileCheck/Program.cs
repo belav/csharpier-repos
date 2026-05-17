@@ -258,8 +258,7 @@ namespace SuperFileCheck
                 .FirstOrDefault();
             if (namespaceDecl != null)
             {
-                var identifiers = namespaceDecl
-                    .Name
+                var identifiers = namespaceDecl.Name
                     .DescendantTokens()
                     .Where(x => x.IsKind(SyntaxKind.IdentifierToken))
                     .Select(x => x.ValueText);
@@ -576,8 +575,7 @@ namespace SuperFileCheck
         static void PrintErrorMethodNoInlining(string methodName)
         {
             Console.ForegroundColor = ConsoleColor.Red;
-            Console
-                .Error
+            Console.Error
                 .WriteLine(
                     $"'{methodName}' is not marked with attribute 'MethodImpl(MethodImplOptions.NoInlining)'."
                 );
@@ -591,8 +589,7 @@ namespace SuperFileCheck
         static void PrintErrorNoMethodsFound(string[] checkPrefixes)
         {
             Console.ForegroundColor = ConsoleColor.Red;
-            Console
-                .Error
+            Console.Error
                 .WriteLine(
                     "No methods were found. Check if any method bodies are using one or more of the following FileCheck prefixes:"
                 );

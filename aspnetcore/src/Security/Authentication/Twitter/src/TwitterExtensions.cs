@@ -76,8 +76,7 @@ public static class TwitterExtensions
         Action<TwitterOptions> configureOptions
     )
     {
-        builder
-            .Services
+        builder.Services
             .TryAddEnumerable(
                 ServiceDescriptor.Singleton<
                     IPostConfigureOptions<TwitterOptions>,

@@ -1119,8 +1119,7 @@ namespace Microsoft.CodeAnalysis
             bool includeDocumentationComments = false
         )
         {
-            return SyntaxNavigator
-                .Instance
+            return SyntaxNavigator.Instance
                 .GetFirstToken(
                     this,
                     includeZeroWidth,
@@ -1141,8 +1140,7 @@ namespace Microsoft.CodeAnalysis
             bool includeDocumentationComments = false
         )
         {
-            return SyntaxNavigator
-                .Instance
+            return SyntaxNavigator.Instance
                 .GetLastToken(
                     this,
                     includeZeroWidth,

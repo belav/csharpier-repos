@@ -102,8 +102,7 @@ namespace System.Web.Configuration
 
             if (sublist.Count > 0)
             {
-                parseState
-                    .RuleList
+                parseState.RuleList
                     .Add(new CapabilitiesSection(CapabilitiesRule.Filter, null, null, sublist));
             }
 
@@ -455,8 +454,7 @@ namespace System.Web.Configuration
 
                 if (sublist.Count > 0)
                 {
-                    parseState
-                        .RuleList
+                    parseState.RuleList
                         .Add(new CapabilitiesSection(CapabilitiesRule.Filter, null, null, sublist));
                 }
             }
@@ -498,8 +496,7 @@ namespace System.Web.Configuration
 
                 if ((match = wsRegex.Match(text, textpos)).Success)
                 {
-                    lineNumber += System
-                        .Web
+                    lineNumber += System.Web
                         .UI
                         .Util
                         .LineCount(text, textpos, match.Index + match.Length);
@@ -518,8 +515,7 @@ namespace System.Web.Configuration
                         )
                     );
 
-                    lineNumber += System
-                        .Web
+                    lineNumber += System.Web
                         .UI
                         .Util
                         .LineCount(text, textpos, match.Index + match.Length);

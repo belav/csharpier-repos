@@ -41,8 +41,7 @@ public class UsePathBaseMiddleware
         ArgumentNullException.ThrowIfNull(context);
 
         if (
-            context
-                .Request
+            context.Request
                 .Path
                 .StartsWithSegments(_pathBase, out var matchedPath, out var remainingPath)
         )

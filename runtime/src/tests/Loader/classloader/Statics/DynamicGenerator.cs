@@ -28,8 +28,7 @@ public class DynamicGenerator<G> : IDynGen
 
     public DynamicGenerator()
     {
-        asmb = AppDomain
-            .CurrentDomain
+        asmb = AppDomain.CurrentDomain
             .DefineDynamicAssembly(
                 new AssemblyName("tempasm" + (tcount++)),
                 AssemblyBuilderAccess.Run

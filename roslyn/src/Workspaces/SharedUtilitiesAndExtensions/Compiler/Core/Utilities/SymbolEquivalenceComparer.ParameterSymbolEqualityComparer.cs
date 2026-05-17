@@ -57,8 +57,7 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                             y.CustomModifiers,
                             equivalentTypesWithDifferingAssemblies
                         )
-                    && symbolEqualityComparer
-                        .SignatureTypeEquivalenceComparer
+                    && symbolEqualityComparer.SignatureTypeEquivalenceComparer
                         .Equals(x.Type, y.Type, equivalentTypesWithDifferingAssemblies);
             }
 

@@ -266,8 +266,7 @@ namespace System.ServiceModel.Dispatcher
                     if (this.IsOnServer)
                     {
                         string text = SR.GetString(SR.SFxSetEnableFaultsOnChannelDispatcher0);
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(new InvalidOperationException(text));
                     }
                     else
@@ -319,8 +318,7 @@ namespace System.ServiceModel.Dispatcher
                     if (this.IsOnServer)
                     {
                         string text = SR.GetString(SR.SFxSetManualAddresssingOnChannelDispatcher0);
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(new InvalidOperationException(text));
                     }
                     else
@@ -574,8 +572,7 @@ namespace System.ServiceModel.Dispatcher
                 if (item == null)
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("item");
                 if (item.Parent != this.outer)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgument(SR.GetString(SR.SFxMismatchedOperationParent));
 
                 this.outer.InvalidateRuntime();
@@ -593,8 +590,7 @@ namespace System.ServiceModel.Dispatcher
                 if (item == null)
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("item");
                 if (item.Parent != this.outer)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgument(SR.GetString(SR.SFxMismatchedOperationParent));
 
                 this.outer.InvalidateRuntime();

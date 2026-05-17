@@ -106,8 +106,7 @@ namespace Microsoft.CodeAnalysis
                     _writer.WriteObjectStart("customProperties");
 
                     foreach (
-                        var pair in diagnostic
-                            .Properties
+                        var pair in diagnostic.Properties
                             .OrderBy(x => x.Key, StringComparer.Ordinal)
                     )
                     {

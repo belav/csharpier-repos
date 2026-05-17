@@ -32,8 +32,7 @@ namespace System.ServiceModel.Channels
                 factory.MessageEncoderFactory.Encoder.ContentType
             );
 
-            this.preamble = DiagnosticUtility
-                .Utility
+            this.preamble = DiagnosticUtility.Utility
                 .AllocateByteArray(
                     modeBytes.Length
                         + ClientSingletonSizedEncoder.CalcStartSize(encodedVia, encodedContentType)

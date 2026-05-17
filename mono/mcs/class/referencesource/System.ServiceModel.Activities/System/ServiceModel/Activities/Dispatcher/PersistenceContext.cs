@@ -139,14 +139,15 @@ namespace System.ServiceModel.Activities.Dispatcher
                     definitionIdentity = null;
                 }
 
-                this.workflowInstance = this.directory.InitializeInstance(
-                    InstanceId,
-                    this,
-                    definitionIdentity,
-                    updatedIdentity,
-                    view.InstanceData,
-                    null
-                );
+                this.workflowInstance = this.directory
+                    .InitializeInstance(
+                        InstanceId,
+                        this,
+                        definitionIdentity,
+                        updatedIdentity,
+                        view.InstanceData,
+                        null
+                    );
             }
         }
 
@@ -369,28 +370,23 @@ namespace System.ServiceModel.Activities.Dispatcher
                             {
                                 WorkflowHostingResponseContext responseContext =
                                     new WorkflowHostingResponseContext();
-                                WorkflowCreationContext creationContext = parameters
-                                    .WorkflowHostingEndpoint
-                                    .OnGetCreationContext(
-                                        parameters.Inputs,
-                                        parameters.OperationContext,
-                                        InstanceId,
-                                        responseContext
-                                    );
+                                WorkflowCreationContext creationContext =
+                                    parameters.WorkflowHostingEndpoint
+                                        .OnGetCreationContext(
+                                            parameters.Inputs,
+                                            parameters.OperationContext,
+                                            InstanceId,
+                                            responseContext
+                                        );
                                 if (creationContext == null)
                                 {
-                                    throw FxTrace
-                                        .Exception
+                                    throw FxTrace.Exception
                                         .AsError(
                                             WorkflowHostingEndpoint.CreateDispatchFaultException()
                                         );
                                 }
-                                result = this.directory.InitializeInstance(
-                                    InstanceId,
-                                    this,
-                                    null,
-                                    creationContext
-                                );
+                                result = this.directory
+                                    .InitializeInstance(InstanceId, this, null, creationContext);
 
                                 // Return args
                                 parameters.WorkflowCreationContext = creationContext;
@@ -398,12 +394,8 @@ namespace System.ServiceModel.Activities.Dispatcher
                             }
                             else
                             {
-                                result = this.directory.InitializeInstance(
-                                    InstanceId,
-                                    this,
-                                    null,
-                                    null
-                                );
+                                result = this.directory
+                                    .InitializeInstance(InstanceId, this, null, null);
                             }
                             this.workflowInstance = result;
                         }
@@ -548,8 +540,7 @@ namespace System.ServiceModel.Activities.Dispatcher
             {
                 if (exception is OperationCanceledException)
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(
                             new CommunicationObjectAbortedException(
                                 SR.HandleFreedInDirectory,
@@ -619,8 +610,7 @@ namespace System.ServiceModel.Activities.Dispatcher
                 {
                     if (instanceValue.Value == null)
                     {
-                        throw FxTrace
-                            .Exception
+                        throw FxTrace.Exception
                             .AsError(
                                 new InstancePersistenceException(
                                     SRCore.NullAssignedToValueType(typeof(T))
@@ -629,8 +619,7 @@ namespace System.ServiceModel.Activities.Dispatcher
                     }
                     else
                     {
-                        throw FxTrace
-                            .Exception
+                        throw FxTrace.Exception
                             .AsError(
                                 new InstancePersistenceException(
                                     SRCore.IncorrectValueType(
@@ -779,8 +768,8 @@ namespace System.ServiceModel.Activities.Dispatcher
                         // there won't be any waiters left in the queue at this point.
                         while (0 < this.transactionWaiterQueue.Count)
                         {
-                            TransactionWaitAsyncResult nextWaiter =
-                                this.transactionWaiterQueue.Peek();
+                            TransactionWaitAsyncResult nextWaiter = this.transactionWaiterQueue
+                                .Peek();
                             if (0 == this.lockingTransaction)
                             {
                                 // We dequeue this waiter because we shouldn't block transactional waiters
@@ -790,8 +779,8 @@ namespace System.ServiceModel.Activities.Dispatcher
                                 if (null != nextWaiter.Transaction)
                                 {
                                     this.lockingTransactionObject = nextWaiter.Transaction;
-                                    this.lockingTransaction =
-                                        this.lockingTransactionObject.GetHashCode();
+                                    this.lockingTransaction = this.lockingTransactionObject
+                                        .GetHashCode();
                                 }
                             }
                             else if (null != nextWaiter.Transaction)
@@ -856,10 +845,8 @@ namespace System.ServiceModel.Activities.Dispatcher
                     "We should always be non-null here."
                 );
                 foreach (
-                    KeyValuePair<
-                        XName,
-                        InstanceValue
-                    > pair in this.directory.InstanceMetadataChanges
+                    KeyValuePair<XName, InstanceValue> pair in this.directory
+                        .InstanceMetadataChanges
                 )
                 {
                     saveCommand.InstanceMetadataChanges.Add(pair.Key, pair.Value);
@@ -875,8 +862,7 @@ namespace System.ServiceModel.Activities.Dispatcher
             {
                 if (this.workflowInstance.DefinitionIdentity != null)
                 {
-                    saveCommand
-                        .InstanceMetadataChanges
+                    saveCommand.InstanceMetadataChanges
                         .Add(
                             Workflow45Namespace.DefinitionIdentity,
                             new InstanceValue(
@@ -887,8 +873,7 @@ namespace System.ServiceModel.Activities.Dispatcher
                 }
                 else
                 {
-                    saveCommand
-                        .InstanceMetadataChanges
+                    saveCommand.InstanceMetadataChanges
                         .Add(Workflow45Namespace.DefinitionIdentity, InstanceValue.DeletedValue);
                 }
             }
@@ -1009,8 +994,7 @@ namespace System.ServiceModel.Activities.Dispatcher
                         this.persistenceContext.PopulateActivationMetadata(saveCommand);
                         if (this.persistenceContext.IsSuspended)
                         {
-                            saveCommand
-                                .InstanceMetadataChanges
+                            saveCommand.InstanceMetadataChanges
                                 .Add(
                                     WorkflowServiceNamespace.SuspendReason,
                                     new InstanceValue(this.persistenceContext.SuspendedReason)
@@ -1018,14 +1002,12 @@ namespace System.ServiceModel.Activities.Dispatcher
                         }
                         else
                         {
-                            saveCommand
-                                .InstanceMetadataChanges
+                            saveCommand.InstanceMetadataChanges
                                 .Add(
                                     WorkflowServiceNamespace.SuspendReason,
                                     InstanceValue.DeletedValue
                                 );
-                            saveCommand
-                                .InstanceMetadataChanges
+                            saveCommand.InstanceMetadataChanges
                                 .Add(
                                     WorkflowServiceNamespace.SuspendException,
                                     InstanceValue.DeletedValue
@@ -1087,8 +1069,7 @@ namespace System.ServiceModel.Activities.Dispatcher
                 }
                 catch (OperationCanceledException exception)
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(
                             new CommunicationObjectAbortedException(
                                 SR.HandleFreedInDirectory,
@@ -1143,11 +1124,12 @@ namespace System.ServiceModel.Activities.Dispatcher
                     IAsyncResult result;
                     using (PrepareTransactionalCall(this.transaction))
                     {
-                        result = this.persistenceContext.BeginEnlist(
-                            this.timeoutHelper.RemainingTime(),
-                            PrepareAsyncCompletion(SaveAsyncResult.handleEndEnlist),
-                            this
-                        );
+                        result = this.persistenceContext
+                            .BeginEnlist(
+                                this.timeoutHelper.RemainingTime(),
+                                PrepareAsyncCompletion(SaveAsyncResult.handleEndEnlist),
+                                this
+                            );
                     }
                     return SyncContinue(result);
                 }
@@ -1273,8 +1255,7 @@ namespace System.ServiceModel.Activities.Dispatcher
                 }
                 catch (OperationCanceledException exception)
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(
                             new CommunicationObjectAbortedException(
                                 SR.HandleFreedInDirectory,
@@ -1325,11 +1306,12 @@ namespace System.ServiceModel.Activities.Dispatcher
                 IAsyncResult result;
                 using (PrepareTransactionalCall(this.transaction))
                 {
-                    result = this.persistenceContext.BeginEnlist(
-                        this.timeoutHelper.RemainingTime(),
-                        PrepareAsyncCompletion(ReleaseAsyncResult.handleEndEnlist),
-                        this
-                    );
+                    result = this.persistenceContext
+                        .BeginEnlist(
+                            this.timeoutHelper.RemainingTime(),
+                            PrepareAsyncCompletion(ReleaseAsyncResult.handleEndEnlist),
+                            this
+                        );
                 }
                 return SyncContinue(result);
             }
@@ -1439,8 +1421,7 @@ namespace System.ServiceModel.Activities.Dispatcher
                 }
                 catch (OperationCanceledException exception)
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(
                             new CommunicationObjectAbortedException(
                                 SR.HandleFreedInDirectory,
@@ -1492,8 +1473,7 @@ namespace System.ServiceModel.Activities.Dispatcher
                 bool returnValue = false;
 
                 if (
-                    !thisPtr
-                        .persistenceContext
+                    !thisPtr.persistenceContext
                         .directory
                         .TryAddAssociations(
                             thisPtr.persistenceContext,
@@ -1549,8 +1529,7 @@ namespace System.ServiceModel.Activities.Dispatcher
                             IAsyncResult beginExecuteResult = null;
                             using (thisPtr.PrepareTransactionalCall(thisPtr.transaction))
                             {
-                                beginExecuteResult = thisPtr
-                                    .persistenceContext
+                                beginExecuteResult = thisPtr.persistenceContext
                                     .store
                                     .BeginExecute(
                                         thisPtr.persistenceContext.handle,
@@ -1687,8 +1666,7 @@ namespace System.ServiceModel.Activities.Dispatcher
                 }
                 catch (OperationCanceledException exception)
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(
                             new CommunicationObjectAbortedException(
                                 SR.HandleFreedInDirectory,

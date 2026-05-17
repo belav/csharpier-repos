@@ -226,10 +226,11 @@ public class MicrosoftAccountTests : RemoteAuthenticationTests<MicrosoftAccountO
                         );
                     }
                     else if (
-                        req.RequestUri.GetComponents(
-                            UriComponents.SchemeAndServer | UriComponents.Path,
-                            UriFormat.UriEscaped
-                        ) == "https://graph.microsoft.com/v1.0/me"
+                        req.RequestUri
+                            .GetComponents(
+                                UriComponents.SchemeAndServer | UriComponents.Path,
+                                UriFormat.UriEscaped
+                            ) == "https://graph.microsoft.com/v1.0/me"
                     )
                     {
                         return ReturnJsonResponse(
@@ -252,8 +253,7 @@ public class MicrosoftAccountTests : RemoteAuthenticationTests<MicrosoftAccountO
                 OnCreatingTicket = context =>
                 {
                     var refreshToken = context.RefreshToken;
-                    context
-                        .Principal
+                    context.Principal
                         .AddIdentity(
                             new ClaimsIdentity(
                                 new Claim[]
@@ -373,10 +373,11 @@ public class MicrosoftAccountTests : RemoteAuthenticationTests<MicrosoftAccountO
                         );
                     }
                     else if (
-                        req.RequestUri.GetComponents(
-                            UriComponents.SchemeAndServer | UriComponents.Path,
-                            UriFormat.UriEscaped
-                        ) == "https://graph.microsoft.com/v1.0/me"
+                        req.RequestUri
+                            .GetComponents(
+                                UriComponents.SchemeAndServer | UriComponents.Path,
+                                UriFormat.UriEscaped
+                            ) == "https://graph.microsoft.com/v1.0/me"
                     )
                     {
                         return ReturnJsonResponse(

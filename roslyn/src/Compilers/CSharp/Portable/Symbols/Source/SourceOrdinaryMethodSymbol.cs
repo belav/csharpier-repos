@@ -310,9 +310,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             var asValueType =
                                 args.declaredConstraints.IsDefault
                                 || (
-                                    args.declaredConstraints[
-                                        typeParameterSymbol.Ordinal
-                                    ].Constraints
+                                    args.declaredConstraints[typeParameterSymbol.Ordinal]
+                                        .Constraints
                                     & (
                                         TypeParameterConstraintKind.ReferenceType
                                         | TypeParameterConstraintKind.Default
@@ -394,8 +393,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         out var useSiteInfo
                     );
 
-                    var thisKeyword = syntax
-                        .ParameterList
+                    var thisKeyword = syntax.ParameterList
                         .Parameters[0]
                         .Modifiers
                         .FirstOrDefault(SyntaxKind.ThisKeyword);
@@ -626,11 +624,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             // list, we need to ensure we complete the implementation part when needed.
             Debug.Assert(this.DeclaringSyntaxReferences.Length == 1);
             return IsDefinedInSourceTree(this.SyntaxRef, tree, definedWithinSpan)
-                || this.SourcePartialImplementation?.IsDefinedInSourceTree(
-                    tree,
-                    definedWithinSpan,
-                    cancellationToken
-                ) == true;
+                || this.SourcePartialImplementation
+                    ?.IsDefinedInSourceTree(tree, definedWithinSpan, cancellationToken) == true;
         }
 
         protected abstract override void CheckConstraintsForExplicitInterfaceType(
@@ -665,8 +660,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     implementation.TypeParameters
                 )
             );
-            bool hasTypeDifferences = !constructedDefinition
-                .ReturnTypeWithAnnotations
+            bool hasTypeDifferences = !constructedDefinition.ReturnTypeWithAnnotations
                 .Equals(implementation.ReturnTypeWithAnnotations, TypeCompareKind.AllIgnoreOptions);
             if (hasTypeDifferences)
             {
@@ -842,8 +836,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             if (
                 (
                     !hasTypeDifferences
-                    && !MemberSignatureComparer
-                        .PartialMethodsStrictComparer
+                    && !MemberSignatureComparer.PartialMethodsStrictComparer
                         .Equals(definition, implementation)
                 ) || hasDifferencesInParameterOrTypeParameterName(definition, implementation)
             )
@@ -864,11 +857,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 SourceOrdinaryMethodSymbol implementation
             )
             {
-                return !definition
-                        .Parameters
+                return !definition.Parameters
                         .SequenceEqual(implementation.Parameters, (a, b) => a.Name == b.Name)
-                    || !definition
-                        .TypeParameters
+                    || !definition.TypeParameters
                         .SequenceEqual(implementation.TypeParameters, (a, b) => a.Name == b.Name);
             }
         }
@@ -1616,8 +1607,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
                 Debug.Assert(syntax.TypeParameterList != null);
 
-                MessageID
-                    .IDS_FeatureGenerics
+                MessageID.IDS_FeatureGenerics
                     .CheckFeatureAvailability(diagnostics, syntax.TypeParameterList.LessThanToken);
 
                 OverriddenMethodTypeParameterMapBase typeMap = null;

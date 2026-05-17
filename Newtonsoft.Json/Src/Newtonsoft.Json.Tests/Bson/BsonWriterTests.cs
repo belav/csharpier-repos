@@ -259,15 +259,16 @@ namespace Newtonsoft.Json.Tests.Bson
             s1.Cost = 999.59m;
             s1.Employees = int.MaxValue - 1;
             s1.Open = true;
-            s1.product.Add(
-                new Product
-                {
-                    ExpiryDate = new DateTime(2000, 9, 28, 3, 59, 58, DateTimeKind.Local),
-                    Name = "BSON!",
-                    Price = -0.1m,
-                    Sizes = new[] { "First", "Second" },
-                }
-            );
+            s1.product
+                .Add(
+                    new Product
+                    {
+                        ExpiryDate = new DateTime(2000, 9, 28, 3, 59, 58, DateTimeKind.Local),
+                        Name = "BSON!",
+                        Price = -0.1m,
+                        Sizes = new[] { "First", "Second" },
+                    }
+                );
             s1.Establised = new DateTime(2000, 1, 1, 0, 0, 0, DateTimeKind.Local);
 
             JsonSerializer serializer = new JsonSerializer();
@@ -410,8 +411,7 @@ namespace Newtonsoft.Json.Tests.Bson
             );
             Assert.AreEqual(
                 "Santa Clara",
-                placemark
-                    .AddressDetails
+                placemark.AddressDetails
                     .Country
                     .AdministrativeArea
                     .SubAdministrativeArea
@@ -419,8 +419,7 @@ namespace Newtonsoft.Json.Tests.Bson
             );
             Assert.AreEqual(
                 "Mountain View",
-                placemark
-                    .AddressDetails
+                placemark.AddressDetails
                     .Country
                     .AdministrativeArea
                     .SubAdministrativeArea
@@ -429,8 +428,7 @@ namespace Newtonsoft.Json.Tests.Bson
             );
             Assert.AreEqual(
                 "1600 Amphitheatre Pkwy",
-                placemark
-                    .AddressDetails
+                placemark.AddressDetails
                     .Country
                     .AdministrativeArea
                     .SubAdministrativeArea
@@ -440,8 +438,7 @@ namespace Newtonsoft.Json.Tests.Bson
             );
             Assert.AreEqual(
                 "94043",
-                placemark
-                    .AddressDetails
+                placemark.AddressDetails
                     .Country
                     .AdministrativeArea
                     .SubAdministrativeArea

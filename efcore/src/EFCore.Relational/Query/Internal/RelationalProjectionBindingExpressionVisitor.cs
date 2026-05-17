@@ -123,8 +123,7 @@ public class RelationalProjectionBindingExpressionVisitor : ExpressionVisitor
 
                     case ParameterExpression parameterExpression:
                         return
-                            parameterExpression
-                                .Name
+                            parameterExpression.Name
                                 ?.StartsWith(
                                     QueryCompilationContext.QueryParameterPrefix,
                                     StringComparison.Ordinal
@@ -158,8 +157,7 @@ public class RelationalProjectionBindingExpressionVisitor : ExpressionVisitor
 
                     case MaterializeCollectionNavigationExpression materializeCollectionNavigationExpression:
                         if (
-                            materializeCollectionNavigationExpression
-                                .Navigation
+                            materializeCollectionNavigationExpression.Navigation
                                 .TargetEntityType
                                 .IsMappedToJson()
                         )
@@ -209,8 +207,7 @@ public class RelationalProjectionBindingExpressionVisitor : ExpressionVisitor
                                         jsonQueryExpression.Type
                                     ),
                                     materializeCollectionNavigationExpression.Navigation,
-                                    materializeCollectionNavigationExpression
-                                        .Navigation
+                                    materializeCollectionNavigationExpression.Navigation
                                         .ClrType
                                         .GetSequenceType()
                                 );
@@ -231,8 +228,7 @@ public class RelationalProjectionBindingExpressionVisitor : ExpressionVisitor
                                 expression.Type
                             ),
                             materializeCollectionNavigationExpression.Navigation,
-                            materializeCollectionNavigationExpression
-                                .Navigation
+                            materializeCollectionNavigationExpression.Navigation
                                 .ClrType
                                 .GetSequenceType()
                         );

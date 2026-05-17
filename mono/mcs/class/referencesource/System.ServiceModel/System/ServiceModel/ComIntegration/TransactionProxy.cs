@@ -26,8 +26,7 @@ namespace System.ServiceModel.ComIntegration
         ComProxy IProxyCreator.CreateProxy(IntPtr outer, ref Guid riid)
         {
             if ((riid != typeof(ITransactionProxy).GUID))
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new InvalidCastException(SR.GetString(SR.NoInterface, riid)));
             if (outer == IntPtr.Zero)
             {
@@ -128,8 +127,7 @@ namespace System.ServiceModel.ComIntegration
                 }
                 else if (this.currentTransaction != transaction)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(Error.TransactionMismatch());
                 }
             }
@@ -250,8 +248,7 @@ namespace System.ServiceModel.ComIntegration
             lock (this.syncRoot)
             {
                 if (this.currentTransaction == null)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new COMException(null, HR.CONTEXT_E_NOTRANSACTION));
             }
         }
@@ -378,8 +375,7 @@ namespace System.ServiceModel.ComIntegration
             {
                 if (this.preparingEnlistment == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(SR.GetString(SR.NoVoteIssued))
                         );

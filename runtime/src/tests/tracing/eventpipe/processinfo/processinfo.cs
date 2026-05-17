@@ -160,13 +160,11 @@ namespace Tracing.Tests.ProcessInfoValidation
                 end <= totalSize,
                 $"String end can't exceed payload size. Expected: <{totalSize}, Received: {end} (decoded length: {commandLineLength})"
             );
-            Logger
-                .logger
+            Logger.logger
                 .Log(
                     $"commandLine bytes: [ {response.Payload[start..end].Select(b => b.ToString("X2") + " ").Aggregate(string.Concat)}]"
                 );
-            string commandLine = System
-                .Text
+            string commandLine = System.Text
                 .Encoding
                 .Unicode
                 .GetString(response.Payload[start..end])
@@ -212,13 +210,11 @@ namespace Tracing.Tests.ProcessInfoValidation
                 end <= totalSize,
                 $"String end can't exceed payload size. Expected: <{totalSize}, Received: {end} (decoded length: {OSLength})"
             );
-            Logger
-                .logger
+            Logger.logger
                 .Log(
                     $"OS bytes: [ {response.Payload[start..end].Select(b => b.ToString("X2") + " ").Aggregate(string.Concat)}]"
                 );
-            string OS = System
-                .Text
+            string OS = System.Text
                 .Encoding
                 .Unicode
                 .GetString(response.Payload[start..end])
@@ -276,13 +272,11 @@ namespace Tracing.Tests.ProcessInfoValidation
                 end <= totalSize,
                 $"String end can't exceed payload size. Expected: <{totalSize}, Received: {end} (decoded length: {archLength})"
             );
-            Logger
-                .logger
+            Logger.logger
                 .Log(
                     $"arch bytes: [ {response.Payload[start..end].Select(b => b.ToString("X2") + " ").Aggregate(string.Concat)}]"
                 );
-            string arch = System
-                .Text
+            string arch = System.Text
                 .Encoding
                 .Unicode
                 .GetString(response.Payload[start..end])
@@ -309,8 +303,7 @@ namespace Tracing.Tests.ProcessInfoValidation
                 $"Full payload should have been read. Expected: {totalSize}, Received: {end}"
             );
 
-            Logger
-                .logger
+            Logger.logger
                 .Log(
                     $"\n{{\n\tprocessId: {processId},\n\truntimeCookie: {runtimeCookie},\n\tcommandLine: {commandLine},\n\tOS: {OS},\n\tArch: {arch}\n}}"
                 );

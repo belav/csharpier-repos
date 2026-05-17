@@ -59,8 +59,7 @@ public class RegistryPolicyResolverTests
     public void ResolvePolicy_MissingKeyEscrowSinks()
     {
         // Arrange
-        var typeName = typeof(MyKeyEscrowSink1)
-            .AssemblyQualifiedName
+        var typeName = typeof(MyKeyEscrowSink1).AssemblyQualifiedName
             .Replace("MyKeyEscrowSink1", "MyKeyEscrowSinkDontExist");
         var registryEntries = new Dictionary<string, object>() { ["KeyEscrowSinks"] = typeName };
 

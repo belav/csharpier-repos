@@ -41,17 +41,15 @@ namespace System.Activities.Core.Presentation
             ConnectionPoint falseConnectionPoint = null;
 
             if (
-                this.connectionPoints.Contains(
-                    FlowchartDesigner.GetTrueConnectionPoint(this.AdornedElement)
-                )
+                this.connectionPoints
+                    .Contains(FlowchartDesigner.GetTrueConnectionPoint(this.AdornedElement))
             )
             {
                 trueConnectionPoint = FlowchartDesigner.GetTrueConnectionPoint(this.AdornedElement);
             }
             if (
-                this.connectionPoints.Contains(
-                    FlowchartDesigner.GetFalseConnectionPoint(this.AdornedElement)
-                )
+                this.connectionPoints
+                    .Contains(FlowchartDesigner.GetFalseConnectionPoint(this.AdornedElement))
             )
             {
                 falseConnectionPoint = FlowchartDesigner.GetFalseConnectionPoint(

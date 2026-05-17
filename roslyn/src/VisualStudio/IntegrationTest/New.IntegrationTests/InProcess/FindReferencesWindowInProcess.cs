@@ -32,8 +32,7 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
-            await TestServices
-                .Workspace
+            await TestServices.Workspace
                 .WaitForAsyncOperationsAsync(FeatureAttribute.FindReferences, cancellationToken);
 
             // Find the tool window
@@ -80,8 +79,7 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
             referenceInGeneratedFile.NavigateTo(isPreview, shouldActivate);
 
             // Navigation operations handled by Roslyn are tracked by FeatureAttribute.FindReferences
-            await TestServices
-                .Workspace
+            await TestServices.Workspace
                 .WaitForAllAsyncOperationsAsync(
                     [FeatureAttribute.Workspace, FeatureAttribute.FindReferences],
                     cancellationToken

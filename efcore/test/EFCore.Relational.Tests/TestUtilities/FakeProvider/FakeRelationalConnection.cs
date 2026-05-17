@@ -45,8 +45,7 @@ public class FakeRelationalConnection : RelationalConnection
                     new RelationalCommandBuilderDependencies(
                         new TestRelationalTypeMappingSource(
                             TestServiceFactory.Instance.Create<TypeMappingSourceDependencies>(),
-                            TestServiceFactory
-                                .Instance
+                            TestServiceFactory.Instance
                                 .Create<RelationalTypeMappingSourceDependencies>()
                         ),
                         new ExceptionDetector()

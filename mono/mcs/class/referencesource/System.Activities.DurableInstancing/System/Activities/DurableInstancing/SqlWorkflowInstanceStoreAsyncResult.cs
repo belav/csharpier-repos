@@ -170,8 +170,7 @@ namespace System.Activities.DurableInstancing
             instanceLockTracking.TrackStoreLock(instanceId, lockVersion, null);
             thisPtr.InstancePersistenceContext.InstanceHandle.Free();
 
-            throw FxTrace
-                .Exception
+            throw FxTrace.Exception
                 .AsError(
                     new InstanceLockLostException(
                         thisPtr.InstancePersistenceCommand.Name,
@@ -223,13 +222,11 @@ namespace System.Activities.DurableInstancing
 
                 if (!thisPtr.InstancePersistenceContext.InstanceView.IsBoundToInstance)
                 {
-                    thisPtr
-                        .InstancePersistenceContext
+                    thisPtr.InstancePersistenceContext
                         .BindInstance(alreadyLockedException.InstanceId);
                 }
 
-                IAsyncResult bindReclaimedAsyncResult = thisPtr
-                    .InstancePersistenceContext
+                IAsyncResult bindReclaimedAsyncResult = thisPtr.InstancePersistenceContext
                     .BeginBindReclaimedLock(
                         reclaimLockAtVersion,
                         thisPtr.TimeoutHelper.RemainingTime(),

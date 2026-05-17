@@ -24,8 +24,7 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var roslynCompilersLocation = typeof(Compilation).Assembly.Location;
             var roslynCompilersXmlFilePath = Path.ChangeExtension(roslynCompilersLocation, ".xml");
             var documentationProvider = XmlDocumentationProvider.CreateFromBytes(
-                Encoding
-                    .UTF8
+                Encoding.UTF8
                     .GetBytes(
                         """
 <?xml version="1.0"?>

@@ -90,8 +90,7 @@ namespace System.Web.Http.ContentNegotiation
             baseAddress = "http://localhost/";
 
             HttpSelfHostConfiguration config = new HttpSelfHostConfiguration(baseAddress);
-            config
-                .Routes
+            config.Routes
                 .MapHttpRoute(
                     "Default",
                     "{controller}/{action}",

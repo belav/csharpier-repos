@@ -88,11 +88,9 @@ internal sealed class DynamicControllerEndpointMatcherPolicy
 
             // We don't expect both of these to be provided, and they are internal so there's
             // no realistic way this could happen.
-            var dynamicControllerMetadata = endpoint
-                .Metadata
+            var dynamicControllerMetadata = endpoint.Metadata
                 .GetMetadata<DynamicControllerMetadata>();
-            var transformerMetadata = endpoint
-                .Metadata
+            var transformerMetadata = endpoint.Metadata
                 .GetMetadata<DynamicControllerRouteValueTransformerMetadata>();
 
             DynamicRouteValueTransformer? transformer = null;
@@ -103,8 +101,7 @@ internal sealed class DynamicControllerEndpointMatcherPolicy
             else if (transformerMetadata != null)
             {
                 transformer = (DynamicRouteValueTransformer)
-                    httpContext
-                        .RequestServices
+                    httpContext.RequestServices
                         .GetRequiredService(transformerMetadata.SelectorType);
                 if (transformer.State != null)
                 {

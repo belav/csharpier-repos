@@ -110,8 +110,7 @@ namespace System.Security.Cryptography
                     unsafe
                     {
                         ErrorCode errorCode = _encrypting
-                            ? Interop
-                                .NCrypt
+                            ? Interop.NCrypt
                                 .NCryptEncrypt(
                                     keyHandle,
                                     input,
@@ -122,8 +121,7 @@ namespace System.Security.Cryptography
                                     out bytesWritten,
                                     AsymmetricPaddingMode.None
                                 )
-                            : Interop
-                                .NCrypt
+                            : Interop.NCrypt
                                 .NCryptDecrypt(
                                     keyHandle,
                                     input,
@@ -155,8 +153,7 @@ namespace System.Security.Cryptography
                     // The Handle property duplicates the handle.
                     using (SafeNCryptKeyHandle keyHandle = _key.Handle)
                     {
-                        ErrorCode errorCode = Interop
-                            .NCrypt
+                        ErrorCode errorCode = Interop.NCrypt
                             .NCryptSetProperty(
                                 keyHandle,
                                 KeyPropertyName.InitializationVector,

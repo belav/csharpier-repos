@@ -154,8 +154,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
 
                 Contract.ThrowIfFalse(
                     firstStatementToRemove.Parent == lastStatementToRemove.Parent
-                        || CSharpSyntaxFacts
-                            .Instance
+                        || CSharpSyntaxFacts.Instance
                             .AreStatementsInSameContainer(
                                 firstStatementToRemove,
                                 lastStatementToRemove
@@ -519,8 +518,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                                     declarationStatement.Declaration.Type,
                                     SyntaxFactory.SeparatedList(list)
                                 ),
-                                declarationStatement
-                                    .SemicolonToken
+                                declarationStatement.SemicolonToken
                                     .WithPrependedLeadingTrivia(triviaList)
                             )
                         );
@@ -765,8 +763,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                     if (this.SelectionResult.ShouldCallConfigureAwaitFalse())
                     {
                         if (
-                            AnalyzerResult
-                                .ReturnType
+                            AnalyzerResult.ReturnType
                                 .GetMembers()
                                 .Any(static x =>
                                     x
@@ -904,19 +901,19 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                 {
                     return method.ReplaceToken(
                         body.OpenBraceToken,
-                        body.OpenBraceToken.WithAppendedTrailingTrivia(
-                            SpecializedCollections.SingletonEnumerable(
-                                SyntaxFactory.ElasticCarriageReturnLineFeed
+                        body.OpenBraceToken
+                            .WithAppendedTrailingTrivia(
+                                SpecializedCollections.SingletonEnumerable(
+                                    SyntaxFactory.ElasticCarriageReturnLineFeed
+                                )
                             )
-                        )
                     );
                 }
                 else if (expressionBody != null)
                 {
                     return method.ReplaceToken(
                         expressionBody.ArrowToken,
-                        expressionBody
-                            .ArrowToken
+                        expressionBody.ArrowToken
                             .WithPrependedLeadingTrivia(
                                 SpecializedCollections.SingletonEnumerable(
                                     SyntaxFactory.ElasticCarriageReturnLineFeed
@@ -953,8 +950,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                 if (methodSymbol.ReturnType.NullableAnnotation != NullableAnnotation.Annotated)
                     return originalDocument;
 
-                var syntaxNode = originalDocument
-                    .Root
+                var syntaxNode = originalDocument.Root
                     .GetAnnotatedNodesAndTokens(MethodDefinitionAnnotation)
                     .FirstOrDefault()
                     .AsNode();
@@ -1050,12 +1046,10 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                 )
                 {
                     // Return type can be updated to not be null
-                    var newType = methodSymbol
-                        .ReturnType
+                    var newType = methodSymbol.ReturnType
                         .WithNullableAnnotation(NullableAnnotation.NotAnnotated);
 
-                    var oldRoot = await originalDocument
-                        .Document
+                    var oldRoot = await originalDocument.Document
                         .GetSyntaxRootAsync(cancellationToken)
                         .ConfigureAwait(false);
                     var newRoot = oldRoot.ReplaceNode(returnType, newType.GenerateTypeSyntax());
@@ -1093,8 +1087,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                 }
 
                 // For local functions, pascal case and camel case should be the most common and therefore we only consider those cases.
-                var localFunctionPreferences = Options
-                    .NamingStyle
+                var localFunctionPreferences = Options.NamingStyle
                     .SymbolSpecifications
                     .Where(symbol =>
                         symbol.AppliesTo(
@@ -1116,11 +1109,12 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                                 rule.NamingStyle
                                     .CapitalizationScheme
                                     .Equals(Capitalization.CamelCase)
-                                && rule.SymbolSpecification.AppliesTo(
-                                    arg.localFunctionKind,
-                                    arg.self.CreateMethodModifiers(),
-                                    null
-                                ),
+                                && rule.SymbolSpecification
+                                    .AppliesTo(
+                                        arg.localFunctionKind,
+                                        arg.self.CreateMethodModifiers(),
+                                        null
+                                    ),
                             (self: this, localFunctionKind)
                         )
                     )

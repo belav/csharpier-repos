@@ -216,8 +216,7 @@ namespace System.Net.WebSockets.Client.Wasm.Tests
             List<TTestCase> result = testCases.ToList();
             result.Sort(
                 (x, y) =>
-                    StringComparer
-                        .Ordinal
+                    StringComparer.Ordinal
                         .Compare(x.TestMethod.Method.Name, y.TestMethod.Method.Name)
             );
             return result;

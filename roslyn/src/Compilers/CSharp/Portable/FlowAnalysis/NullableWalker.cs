@@ -735,8 +735,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                         // not warn for members named in such attributes.
                         var membersWithStateEnforcedByRequiredMembers =
                             constructorEnforcesRequiredMembers
-                                ? method
-                                    .ContainingType
+                                ? method.ContainingType
                                     .GetMembersUnordered()
                                     .SelectManyAsArray(
                                         predicate: member =>
@@ -1271,8 +1270,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 includeAllMembers: false,
                                 includeCurrentTypeRequiredMembers: true,
                                 includeBaseRequiredMembers: true
-                            ) => containingType
-                                .AllRequiredMembers
+                            ) => containingType.AllRequiredMembers
                                 .SelectManyAsArray(static kvp =>
                                     getAllMembersToBeDefaulted(kvp.Value)
                                 ),
@@ -1347,8 +1345,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 )
                                 {
                                     foreach (
-                                        var member in property
-                                            .ContainingType
+                                        var member in property.ContainingType
                                             .GetMembers(notNullMemberName)
                                     )
                                     {
@@ -2049,8 +2046,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     return true;
                 }
-                return compilation
-                    .SyntaxTrees
+                return compilation.SyntaxTrees
                     .Any(static tree =>
                         ((CSharpSyntaxTree)tree).IsNullableAnalysisEnabled(
                             new Text.TextSpan(0, tree.Length)
@@ -3021,8 +3017,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 // Check IDS_FeatureDefaultTypeParameterConstraint feature since `T?` and `where ... : default`
                 // are treated as a single feature, even though the errors reported for the two cases are distinct.
-                var requiredVersion = MessageID
-                    .IDS_FeatureDefaultTypeParameterConstraint
+                var requiredVersion = MessageID.IDS_FeatureDefaultTypeParameterConstraint
                     .RequiredVersion();
                 return requiredVersion <= compilation.LanguageVersion;
             }
@@ -3335,8 +3330,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         )
         {
             Debug.Assert(
-                ErrorFacts
-                    .NullableWarnings
+                ErrorFacts.NullableWarnings
                     .Contains(MessageProvider.Instance.GetIdForErrorCode((int)errorCode))
             );
             if (IsReachable() && !_disableDiagnostics)
@@ -3910,8 +3904,9 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             if (method.IsAsyncEffectivelyReturningGenericTask(compilation))
             {
-                type = ((NamedTypeSymbol)returnType.Type)
-                    .TypeArgumentsWithAnnotationsNoUseSiteDiagnostics
+                type = (
+                    (NamedTypeSymbol)returnType.Type
+                ).TypeArgumentsWithAnnotationsNoUseSiteDiagnostics
                     .Single();
                 annotations = FlowAnalysisAnnotations.None;
                 return true;
@@ -3943,12 +3938,13 @@ namespace Microsoft.CodeAnalysis.CSharp
             var type = GetDeclaredLocalResult(local);
 
             if (
-                !node.Type.Equals(
-                    type.Type,
-                    TypeCompareKind.ConsiderEverything
-                        | TypeCompareKind.IgnoreNullableModifiersForReferenceTypes
-                        | TypeCompareKind.IgnoreDynamicAndTupleNames
-                )
+                !node.Type
+                    .Equals(
+                        type.Type,
+                        TypeCompareKind.ConsiderEverything
+                            | TypeCompareKind.IgnoreNullableModifiersForReferenceTypes
+                            | TypeCompareKind.IgnoreDynamicAndTupleNames
+                    )
             )
             {
                 // When the local is used before or during initialization, there can potentially be a mismatch between node.LocalSymbol.Type and node.Type. We
@@ -4452,8 +4448,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                         ContainingType: { IsTupleType: true },
                         TupleElementIndex: var ui
                     } updatedField
-                ) => originalField
-                    .Type
+                ) => originalField.Type
                     .Equals(
                         updatedField.Type,
                         TypeCompareKind.AllNullableIgnoreOptions | TypeCompareKind.IgnoreTupleNames
@@ -4470,19 +4465,18 @@ namespace Microsoft.CodeAnalysis.CSharp
         private static bool AreLambdaAndNewDelegateSimilar(LambdaSymbol l, NamedTypeSymbol n)
         {
             var invokeMethod = n.DelegateInvokeMethod;
-            return invokeMethod!
-                    .Parameters
+            return invokeMethod!.Parameters
                     .SequenceEqual(
                         l.Parameters,
                         (p1, p2) =>
-                            p1.Type.Equals(
-                                p2.Type,
-                                TypeCompareKind.AllNullableIgnoreOptions
-                                    | TypeCompareKind.IgnoreTupleNames
-                            )
+                            p1.Type
+                                .Equals(
+                                    p2.Type,
+                                    TypeCompareKind.AllNullableIgnoreOptions
+                                        | TypeCompareKind.IgnoreTupleNames
+                                )
                     )
-                && invokeMethod
-                    .ReturnType
+                && invokeMethod.ReturnType
                     .Equals(
                         l.ReturnType,
                         TypeCompareKind.AllNullableIgnoreOptions | TypeCompareKind.IgnoreTupleNames
@@ -5957,8 +5951,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 // Note: so long as we have a best type, we can proceed.
                 var bestTypeWithObliviousAnnotation = TypeWithAnnotations.Create(bestType);
-                Conversions conversionsWithoutNullability = walker
-                    ._conversions
+                Conversions conversionsWithoutNullability = walker._conversions
                     .WithNullability(false);
                 for (int i = 0; i < n; i++)
                 {
@@ -6085,8 +6078,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             )
             {
                 type = TypeWithAnnotations.Create(
-                    ((NamedTypeSymbol)node.Type)
-                        .OriginalDefinition
+                    ((NamedTypeSymbol)node.Type).OriginalDefinition
                         .Construct(ImmutableArray.Create(type))
                 );
             }
@@ -6120,14 +6112,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                     if (
                         (
                             leftType.IsNotNull
-                            && methodOpt
-                                .ReturnNotNullIfParameterNotNull
+                            && methodOpt.ReturnNotNullIfParameterNotNull
                                 .Contains(methodOpt.Parameters[0].Name)
                         )
                         || (
                             rightType.IsNotNull
-                            && methodOpt
-                                .ReturnNotNullIfParameterNotNull
+                            && methodOpt.ReturnNotNullIfParameterNotNull
                                 .Contains(methodOpt.Parameters[1].Name)
                         )
                     )
@@ -7515,13 +7505,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                 }
                 else if (!node.HasErrors)
                 {
-                    refResultType = consequenceRValue
-                        .Type!
+                    refResultType = consequenceRValue.Type!
                         .MergeEquivalentTypes(alternativeRValue.Type, VarianceKind.None);
                 }
 
-                var lValueAnnotation = consequenceLValue
-                    .NullableAnnotation
+                var lValueAnnotation = consequenceLValue.NullableAnnotation
                     .EnsureCompatible(alternativeLValue.NullableAnnotation);
                 var rValueState = consequenceRValue.State.Join(alternativeRValue.State);
 
@@ -7670,8 +7658,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                             alternativeEndReachable
                         );
 
-                    resultState = convertedConsequenceResult
-                        .State
+                    resultState = convertedConsequenceResult.State
                         .Join(convertedAlternativeResult.State);
                     var typeWithState = TypeWithState.Create(
                         resultTypeWithAnnotations.Type,
@@ -8275,8 +8262,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     ),
                     SymbolEqualityComparer.ConsiderEverything.CompareKind
                 )
-                || method
-                    .OriginalDefinition
+                || method.OriginalDefinition
                     .Equals(
                         compilation.GetWellKnownTypeMember(
                             WellKnownMember.System_Threading_Interlocked__CompareExchange_T
@@ -9008,8 +8994,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                         Debug.Assert(
                             parametersOpt.IsDefault || arguments.Length == parametersOpt.Length
                         );
-                        ImmutableArray<BoundExpression> elements = ((BoundArrayCreation)argument)
-                            .InitializerOpt!
+                        ImmutableArray<BoundExpression> elements = (
+                            (BoundArrayCreation)argument
+                        ).InitializerOpt!
                             .Initializers;
 
                         if (elements.Length == 0)
@@ -10193,8 +10180,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 var visitArgumentResult = argumentResults[i];
                 var lambdaState = visitArgumentResult.StateForLambda;
                 // Note: for `out` arguments, the argument result contains the declaration type (see `VisitArgumentEvaluate`)
-                var argumentResult = visitArgumentResult
-                    .RValueType
+                var argumentResult = visitArgumentResult.RValueType
                     .ToTypeWithAnnotations(compilation);
                 builder.Add(
                     getArgumentForMethodTypeInference(arguments[i], argumentResult, lambdaState)
@@ -10852,8 +10838,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 tupleOpt = tupleOpt.WithElementTypes(elementTypesWithAnnotations);
                 if (!_disableDiagnostics)
                 {
-                    var locations = tupleOpt
-                        .TupleElements
+                    var locations = tupleOpt.TupleElements
                         .SelectAsArray(
                             (element, location) => element.TryGetFirstLocation() ?? location,
                             node.Syntax.Location
@@ -11126,8 +11111,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 parameterOpt,
                                 reportTopLevelWarnings: reportWarnings,
                                 reportRemainingWarnings: reportWarnings,
-                                diagnosticLocation: (conversionOpt ?? convertedNode)
-                                    .Syntax
+                                diagnosticLocation: (conversionOpt ?? convertedNode).Syntax
                                     .GetLocation()
                             );
                             int targetFieldSlot = GetOrCreateSlot(targetField, slot);
@@ -11414,8 +11398,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     )
                     {
                         operandType = completion(
-                            targetTypeWithNullability
-                                .Type
+                            targetTypeWithNullability.Type
                                 .GetNullableUnderlyingTypeWithAnnotations()
                         );
                         conversion = Conversion.MakeNullableConversion(
@@ -12227,8 +12210,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             if (operandType.Type.IsNullableType() && !parameterType.IsNullableType())
             {
-                var underlyingOperandTypeWithAnnotations = operandType
-                    .Type
+                var underlyingOperandTypeWithAnnotations = operandType.Type
                     .GetNullableUnderlyingTypeWithAnnotations();
                 underlyingOperandType = underlyingOperandTypeWithAnnotations.ToTypeWithState();
                 isLiftedConversion = parameterType.Equals(
@@ -13155,8 +13137,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             var annotations = expr switch
             {
-                BoundPropertyAccess property => property
-                    .PropertySymbol
+                BoundPropertyAccess property => property.PropertySymbol
                     .GetFlowAnalysisAnnotations(),
                 BoundIndexerAccess indexer => indexer.Indexer.GetFlowAnalysisAnnotations(),
                 BoundFieldAccess field => GetFieldAnnotations(field.FieldSymbol),
@@ -13733,8 +13714,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     && operandConversion.Method?.ParameterCount == 1
                 )
                 {
-                    targetTypeOfOperandConversion = operandConversion
-                        .Method
+                    targetTypeOfOperandConversion = operandConversion.Method
                         .ReturnTypeWithAnnotations;
                 }
                 else if (incrementOperator is object)
@@ -13783,8 +13763,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 }
                 else
                 {
-                    resultOfIncrementType = incrementOperator
-                        .ReturnTypeWithAnnotations
+                    resultOfIncrementType = incrementOperator.ReturnTypeWithAnnotations
                         .ToTypeWithState();
                 }
 
@@ -14437,8 +14416,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 // Even though arrays use the IEnumerator pattern, we use the array element type as the foreach target type, so
                 // directly get our source type from there instead of doing method reinference.
-                currentPropertyGetterTypeWithState = arrayType
-                    .ElementTypeWithAnnotations
+                currentPropertyGetterTypeWithState = arrayType.ElementTypeWithAnnotations
                     .ToTypeWithState();
             }
             else if (resultType.SpecialType == SpecialType.System_String)
@@ -14470,8 +14448,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                         NamedTypeSymbol spanType = compilation.GetWellKnownType(wellKnownSpan);
                         getEnumeratorType = spanType.Construct(
                             ImmutableArray.Create(
-                                convertedResult
-                                    .Type!
+                                convertedResult.Type!
                                     .TryGetInlineArrayElementField()!
                                     .TypeWithAnnotations
                             )
@@ -14587,8 +14564,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             var variableLocation = node.Syntax switch
             {
                 ForEachStatementSyntax statement => statement.Identifier.GetLocation(),
-                ForEachVariableStatementSyntax variableStatement => variableStatement
-                    .Variable
+                ForEachVariableStatementSyntax variableStatement => variableStatement.Variable
                     .GetLocation(),
                 _ => throw ExceptionUtilities.UnexpectedValue(node.Syntax),
             };

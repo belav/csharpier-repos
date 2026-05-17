@@ -67,8 +67,7 @@ namespace MonoTests.System.Data.Utils
             oleDBda.InsertCommand.Connection = Conn;
             oleDBda.UpdateCommand.Connection = Conn;
 
-            oleDBda
-                .DeleteCommand
+            oleDBda.DeleteCommand
                 .Parameters
                 .Add(
                     new Sys.Data.OracleClient.OracleParameter(
@@ -79,8 +78,7 @@ namespace MonoTests.System.Data.Utils
             oleDBda.DeleteCommand.Parameters["EmployeeID"].SourceVersion = DataRowVersion.Original;
             oleDBda.DeleteCommand.Parameters["EmployeeID"].SourceColumn = "EmployeeID";
 
-            oleDBda
-                .InsertCommand
+            oleDBda.InsertCommand
                 .Parameters
                 .Add(
                     new Sys.Data.OracleClient.OracleParameter(
@@ -89,8 +87,7 @@ namespace MonoTests.System.Data.Utils
                         20
                     )
                 );
-            oleDBda
-                .InsertCommand
+            oleDBda.InsertCommand
                 .Parameters
                 .Add(
                     new Sys.Data.OracleClient.OracleParameter(
@@ -99,8 +96,7 @@ namespace MonoTests.System.Data.Utils
                         10
                     )
                 );
-            oleDBda
-                .InsertCommand
+            oleDBda.InsertCommand
                 .Parameters
                 .Add(
                     new Sys.Data.OracleClient.OracleParameter(
@@ -112,8 +108,7 @@ namespace MonoTests.System.Data.Utils
             oleDBda.InsertCommand.Parameters["LastName"].SourceColumn = "LastName";
             oleDBda.InsertCommand.Parameters["FirstName"].SourceColumn = "FirstName";
 
-            oleDBda
-                .UpdateCommand
+            oleDBda.UpdateCommand
                 .Parameters
                 .Add(
                     new Sys.Data.OracleClient.OracleParameter(
@@ -122,8 +117,7 @@ namespace MonoTests.System.Data.Utils
                         30
                     )
                 );
-            oleDBda
-                .UpdateCommand
+            oleDBda.UpdateCommand
                 .Parameters
                 .Add(
                     new Sys.Data.OracleClient.OracleParameter(
@@ -447,8 +441,7 @@ namespace MonoTests.System.Data.Utils
             IDbCommand ICmd = Ida.SelectCommand;
             IDbConnection IConn = ICmd.Connection;
             IDataReader Idr;
-            IConn.ConnectionString = MonoTests
-                .System
+            IConn.ConnectionString = MonoTests.System
                 .Data
                 .Utils
                 .ConnectedDataProvider
@@ -600,8 +593,7 @@ namespace MonoTests.System.Data.Utils
             IDbDataAdapter Ida = (IDbDataAdapter)dbDA;
             IDbCommand ICmd = Ida.SelectCommand;
             IDbConnection IConn = ICmd.Connection;
-            IConn.ConnectionString = MonoTests
-                .System
+            IConn.ConnectionString = MonoTests.System
                 .Data
                 .Utils
                 .ConnectedDataProvider
@@ -1775,8 +1767,7 @@ namespace MonoTests.System.Data.Utils
             IDbConnection IConn = ICmd.Connection;
             if (!sqlConnectionString)
             {
-                IConn.ConnectionString = MonoTests
-                    .System
+                IConn.ConnectionString = MonoTests.System
                     .Data
                     .Utils
                     .ConnectedDataProvider
@@ -1915,8 +1906,7 @@ namespace MonoTests.System.Data.Utils
             IDbDataAdapter Ida = (IDbDataAdapter)dbDA;
             IDbCommand ICmd = Ida.SelectCommand;
             IDbConnection IConn = ICmd.Connection;
-            IConn.ConnectionString = MonoTests
-                .System
+            IConn.ConnectionString = MonoTests.System
                 .Data
                 .Utils
                 .ConnectedDataProvider
@@ -2039,8 +2029,7 @@ namespace MonoTests.System.Data.Utils
             IDbDataAdapter Ida = (IDbDataAdapter)dbDA;
             IDbCommand ICmd = Ida.SelectCommand;
             IDbConnection IConn = ICmd.Connection;
-            IConn.ConnectionString = MonoTests
-                .System
+            IConn.ConnectionString = MonoTests.System
                 .Data
                 .Utils
                 .ConnectedDataProvider
@@ -2258,8 +2247,7 @@ namespace MonoTests.System.Data.Utils
             IDbDataAdapter Ida = (IDbDataAdapter)dbDA;
             IDbCommand ICmd = Ida.SelectCommand;
             IDbConnection IConn = ICmd.Connection;
-            IConn.ConnectionString = MonoTests
-                .System
+            IConn.ConnectionString = MonoTests.System
                 .Data
                 .Utils
                 .ConnectedDataProvider
@@ -2516,8 +2504,7 @@ namespace MonoTests.System.Data.Utils
             IDbDataAdapter Ida = (IDbDataAdapter)dbDA;
             IDbCommand ICmd = Ida.SelectCommand;
             IDbConnection IConn = ICmd.Connection;
-            IConn.ConnectionString = MonoTests
-                .System
+            IConn.ConnectionString = MonoTests.System
                 .Data
                 .Utils
                 .ConnectedDataProvider

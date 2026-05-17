@@ -238,8 +238,7 @@ public class RuntimeProperty : RuntimePropertyBase, IProperty
                 (IProperty)this,
                 static property =>
                     RuntimeFeature.IsDynamicCodeSupported
-                        ? property
-                            .DeclaringType
+                        ? property.DeclaringType
                             .Model
                             .GetModelDependencies()
                             .TypeMappingSource

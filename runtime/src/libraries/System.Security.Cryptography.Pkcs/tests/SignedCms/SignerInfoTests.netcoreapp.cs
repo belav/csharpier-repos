@@ -277,8 +277,7 @@ namespace System.Security.Cryptography.Pkcs.Tests
             SignedCms cms = new SignedCms(content);
 
             using (
-                X509Certificate2 signerCert = Certificates
-                    .RSA2048SignatureOnly
+                X509Certificate2 signerCert = Certificates.RSA2048SignatureOnly
                     .TryGetCertificateWithPrivateKey()
             )
             {
@@ -306,8 +305,7 @@ namespace System.Security.Cryptography.Pkcs.Tests
             }
 
             using (
-                X509Certificate2 counterSigner2cert = Certificates
-                    .ECDsaP256Win
+                X509Certificate2 counterSigner2cert = Certificates.ECDsaP256Win
                     .TryGetCertificateWithPrivateKey()
             )
             {

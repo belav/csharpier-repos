@@ -520,61 +520,43 @@ namespace Microsoft.CodeAnalysis
                 {
                     SymbolKeyType.Alias => AliasSymbolKey.Instance.Resolve(this, out failureReason),
                     SymbolKeyType.BodyLevel => BodyLevelSymbolKey.Resolve(this, out failureReason),
-                    SymbolKeyType.ConstructedMethod => ConstructedMethodSymbolKey
-                        .Instance
+                    SymbolKeyType.ConstructedMethod => ConstructedMethodSymbolKey.Instance
                         .Resolve(this, out failureReason),
-                    SymbolKeyType.NamedType => NamedTypeSymbolKey
-                        .Instance
+                    SymbolKeyType.NamedType => NamedTypeSymbolKey.Instance
                         .Resolve(this, out failureReason),
-                    SymbolKeyType.ErrorType => ErrorTypeSymbolKey
-                        .Instance
+                    SymbolKeyType.ErrorType => ErrorTypeSymbolKey.Instance
                         .Resolve(this, out failureReason),
                     SymbolKeyType.Field => FieldSymbolKey.Instance.Resolve(this, out failureReason),
-                    SymbolKeyType.FunctionPointer => FunctionPointerTypeSymbolKey
-                        .Instance
+                    SymbolKeyType.FunctionPointer => FunctionPointerTypeSymbolKey.Instance
                         .Resolve(this, out failureReason),
-                    SymbolKeyType.DynamicType => DynamicTypeSymbolKey
-                        .Instance
+                    SymbolKeyType.DynamicType => DynamicTypeSymbolKey.Instance
                         .Resolve(this, out failureReason),
-                    SymbolKeyType.BuiltinOperator => BuiltinOperatorSymbolKey
-                        .Instance
+                    SymbolKeyType.BuiltinOperator => BuiltinOperatorSymbolKey.Instance
                         .Resolve(this, out failureReason),
-                    SymbolKeyType.Method => MethodSymbolKey
-                        .Instance
+                    SymbolKeyType.Method => MethodSymbolKey.Instance
                         .Resolve(this, out failureReason),
-                    SymbolKeyType.Namespace => NamespaceSymbolKey
-                        .Instance
+                    SymbolKeyType.Namespace => NamespaceSymbolKey.Instance
                         .Resolve(this, out failureReason),
-                    SymbolKeyType.PointerType => PointerTypeSymbolKey
-                        .Instance
+                    SymbolKeyType.PointerType => PointerTypeSymbolKey.Instance
                         .Resolve(this, out failureReason),
-                    SymbolKeyType.Parameter => ParameterSymbolKey
-                        .Instance
+                    SymbolKeyType.Parameter => ParameterSymbolKey.Instance
                         .Resolve(this, out failureReason),
-                    SymbolKeyType.Property => PropertySymbolKey
-                        .Instance
+                    SymbolKeyType.Property => PropertySymbolKey.Instance
                         .Resolve(this, out failureReason),
-                    SymbolKeyType.ArrayType => ArrayTypeSymbolKey
-                        .Instance
+                    SymbolKeyType.ArrayType => ArrayTypeSymbolKey.Instance
                         .Resolve(this, out failureReason),
-                    SymbolKeyType.Assembly => AssemblySymbolKey
-                        .Instance
+                    SymbolKeyType.Assembly => AssemblySymbolKey.Instance
                         .Resolve(this, out failureReason),
-                    SymbolKeyType.TupleType => TupleTypeSymbolKey
-                        .Instance
+                    SymbolKeyType.TupleType => TupleTypeSymbolKey.Instance
                         .Resolve(this, out failureReason),
-                    SymbolKeyType.Module => ModuleSymbolKey
-                        .Instance
+                    SymbolKeyType.Module => ModuleSymbolKey.Instance
                         .Resolve(this, out failureReason),
                     SymbolKeyType.Event => EventSymbolKey.Instance.Resolve(this, out failureReason),
-                    SymbolKeyType.ReducedExtensionMethod => ReducedExtensionMethodSymbolKey
-                        .Instance
+                    SymbolKeyType.ReducedExtensionMethod => ReducedExtensionMethodSymbolKey.Instance
                         .Resolve(this, out failureReason),
-                    SymbolKeyType.TypeParameter => TypeParameterSymbolKey
-                        .Instance
+                    SymbolKeyType.TypeParameter => TypeParameterSymbolKey.Instance
                         .Resolve(this, out failureReason),
-                    SymbolKeyType.AnonymousType => AnonymousTypeSymbolKey
-                        .Instance
+                    SymbolKeyType.AnonymousType => AnonymousTypeSymbolKey.Instance
                         .Resolve(this, out failureReason),
                     SymbolKeyType.AnonymousFunctionOrDelegate =>
                         AnonymousFunctionOrDelegateSymbolKey.Resolve(this, out failureReason),
@@ -610,8 +592,7 @@ namespace Microsoft.CodeAnalysis
                     var nextContextualSymbol = contextualSymbol is null
                         ? null
                         : getContextualSymbol?.Invoke(contextualSymbol, i);
-                    builder
-                        .Builder
+                    builder.Builder
                         .Add(ReadSymbolKey(nextContextualSymbol, out var elementFailureReason));
 
                     if (elementFailureReason != null)

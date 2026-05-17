@@ -37,8 +37,7 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             this Project project,
             string filePath
         ) =>
-            project
-                .Solution
+            project.Solution
                 .GetDocumentIdsWithFilePath(filePath)
                 .FirstOrDefault(id => id.ProjectId == project.Id);
 

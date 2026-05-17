@@ -729,9 +729,8 @@ namespace MonoTests.System.Web.UI.WebControls
                 "INSERT INTO products (ProductID, Name, Description) VALUES (@ProductID, @Name, @Description)";
             view.InsertParameters.Add(new Parameter("ProductID", TypeCode.String, "p_15"));
             view.InsertParameters.Add(new Parameter("Name", TypeCode.String, "p_NewProduct"));
-            view.InsertParameters.Add(
-                new Parameter("Description", TypeCode.String, "p_Description")
-            );
+            view.InsertParameters
+                .Add(new Parameter("Description", TypeCode.String, "p_Description"));
             view.Inserting += new SqlDataSourceCommandEventHandler(view_Inserting);
 
             view.UpdateCommandType = SqlDataSourceCommandType.Text;
@@ -739,9 +738,8 @@ namespace MonoTests.System.Web.UI.WebControls
                 "UPDATE products SET Name = @Name, Description = @Description WHERE ProductID = @ProductID";
             view.UpdateParameters.Add(new Parameter("ProductID", TypeCode.String, "p_15"));
             view.UpdateParameters.Add(new Parameter("Name", TypeCode.String, "p_UpdatedProduct"));
-            view.UpdateParameters.Add(
-                new Parameter("Description", TypeCode.String, "p_UpdatedDescription")
-            );
+            view.UpdateParameters
+                .Add(new Parameter("Description", TypeCode.String, "p_UpdatedDescription"));
             view.Updating += new SqlDataSourceCommandEventHandler(view_Updating);
 
             view.OldValuesParameterFormatString = "origin_{0}";

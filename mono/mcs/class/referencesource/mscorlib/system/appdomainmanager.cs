@@ -103,8 +103,7 @@ namespace System
                 string inheritedDomainManagerAssembly;
                 string inheritedDomainManagerType;
 
-                AppDomain
-                    .CurrentDomain
+                AppDomain.CurrentDomain
                     .GetAppDomainManagerType(
                         out inheritedDomainManagerAssembly,
                         out inheritedDomainManagerType
@@ -122,8 +121,7 @@ namespace System
 
             // If there was no specified TargetFrameworkName for the new domain, default it to the current domain's.
             if (appDomainInfo.TargetFrameworkName == null)
-                appDomainInfo.TargetFrameworkName = AppDomain
-                    .CurrentDomain
+                appDomainInfo.TargetFrameworkName = AppDomain.CurrentDomain
                     .GetTargetFrameworkName();
 
             return AppDomain.nCreateDomain(

@@ -584,15 +584,13 @@ namespace System.Threading
 #if !MONO
                         if (
                             FrameworkEventSource.IsInitialized
-                            && FrameworkEventSource
-                                .Log
+                            && FrameworkEventSource.Log
                                 .IsEnabled(
                                     EventLevel.Informational,
                                     FrameworkEventSource.Keywords.ThreadTransfer
                                 )
                         )
-                            FrameworkEventSource
-                                .Log
+                            FrameworkEventSource.Log
                                 .ThreadTransferSendObj(this, 1, string.Empty, true);
 #endif
                         success = TimerQueue.Instance.UpdateTimer(this, dueTime, period);
@@ -715,8 +713,7 @@ namespace System.Threading
 #if !MONO
             if (
                 FrameworkEventSource.IsInitialized
-                && FrameworkEventSource
-                    .Log
+                && FrameworkEventSource.Log
                     .IsEnabled(
                         EventLevel.Informational,
                         FrameworkEventSource.Keywords.ThreadTransfer

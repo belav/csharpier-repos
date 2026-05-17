@@ -326,10 +326,8 @@ namespace System.Diagnostics.Eventing.Reader
 
         public override string FormatDescription()
         {
-            return this.cachedMetadataInformation.GetFormatDescription(
-                this.ProviderName,
-                this.handle
-            );
+            return this.cachedMetadataInformation
+                .GetFormatDescription(this.ProviderName, this.handle);
         }
 
         public override string FormatDescription(IEnumerable<object> values)
@@ -348,11 +346,8 @@ namespace System.Diagnostics.Eventing.Reader
                 i++;
             }
 
-            return this.cachedMetadataInformation.GetFormatDescription(
-                this.ProviderName,
-                this.handle,
-                theValues
-            );
+            return this.cachedMetadataInformation
+                .GetFormatDescription(this.ProviderName, this.handle, theValues);
         }
 
         public override string LevelDisplayName
@@ -366,10 +361,8 @@ namespace System.Diagnostics.Eventing.Reader
                     if (this.levelNameReady == false)
                     {
                         this.levelNameReady = true;
-                        this.levelName = this.cachedMetadataInformation.GetLevelDisplayName(
-                            this.ProviderName,
-                            this.handle
-                        );
+                        this.levelName = this.cachedMetadataInformation
+                            .GetLevelDisplayName(this.ProviderName, this.handle);
                     }
                     return this.levelName;
                 }
@@ -385,10 +378,8 @@ namespace System.Diagnostics.Eventing.Reader
                     if (this.opcodeNameReady == false)
                     {
                         this.opcodeNameReady = true;
-                        this.opcodeName = this.cachedMetadataInformation.GetOpcodeDisplayName(
-                            this.ProviderName,
-                            this.handle
-                        );
+                        this.opcodeName = this.cachedMetadataInformation
+                            .GetOpcodeDisplayName(this.ProviderName, this.handle);
                     }
                     return this.opcodeName;
                 }
@@ -406,10 +397,8 @@ namespace System.Diagnostics.Eventing.Reader
                     if (this.taskNameReady == false)
                     {
                         this.taskNameReady = true;
-                        this.taskName = this.cachedMetadataInformation.GetTaskDisplayName(
-                            this.ProviderName,
-                            this.handle
-                        );
+                        this.taskName = this.cachedMetadataInformation
+                            .GetTaskDisplayName(this.ProviderName, this.handle);
                     }
                     return this.taskName;
                 }
@@ -426,10 +415,8 @@ namespace System.Diagnostics.Eventing.Reader
                 {
                     if (this.keywordsNames == null)
                     {
-                        this.keywordsNames = this.cachedMetadataInformation.GetKeywordDisplayNames(
-                            this.ProviderName,
-                            this.handle
-                        );
+                        this.keywordsNames = this.cachedMetadataInformation
+                            .GetKeywordDisplayNames(this.ProviderName, this.handle);
                     }
                     return this.keywordsNames;
                 }

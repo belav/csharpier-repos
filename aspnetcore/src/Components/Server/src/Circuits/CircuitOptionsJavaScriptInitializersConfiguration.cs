@@ -19,8 +19,7 @@ internal sealed class CircuitOptionsJavaScriptInitializersConfiguration
 
     public void Configure(CircuitOptions options)
     {
-        var file = _environment
-            .WebRootFileProvider
+        var file = _environment.WebRootFileProvider
             .GetFileInfo($"{_environment.ApplicationName}.modules.json");
         if (file.Exists)
         {

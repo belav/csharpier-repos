@@ -37,8 +37,7 @@ namespace System.Runtime.InteropServices.JavaScript
 
         public static IntPtr CreateCSOwnedObject(string typeName, object[] parms)
         {
-            Interop
-                .Runtime
+            Interop.Runtime
                 .CreateCSOwnedObjectRef(typeName, parms, out int exception, out object res);
             if (exception != 0)
                 throw new JSException((string)res);

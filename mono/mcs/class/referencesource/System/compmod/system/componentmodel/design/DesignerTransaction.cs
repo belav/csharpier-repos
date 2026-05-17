@@ -134,8 +134,7 @@ namespace System.ComponentModel.Design
             //
             if (!suppressedFinalization)
             {
-                System
-                    .Diagnostics
+                System.Diagnostics
                     .Debug
                     .Fail(
                         "Invalid state. Dispose(true) should have called cancel which does the SuppressFinalize"
@@ -146,15 +145,13 @@ namespace System.ComponentModel.Design
 
         protected virtual void Dispose(bool disposing)
         {
-            System
-                .Diagnostics
+            System.Diagnostics
                 .Debug
                 .Assert(
                     disposing,
                     "Designer transaction garbage collected, unable to cancel, please Cancel, Close, or Dispose your transaction."
                 );
-            System
-                .Diagnostics
+            System.Diagnostics
                 .Debug
                 .Assert(
                     disposing || canceled || committed,

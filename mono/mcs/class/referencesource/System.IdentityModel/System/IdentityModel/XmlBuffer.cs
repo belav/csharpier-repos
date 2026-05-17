@@ -57,8 +57,7 @@ namespace System.IdentityModel
         public XmlBuffer(int maxBufferSize)
         {
             if (maxBufferSize < 0)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentOutOfRangeException(
                             "maxBufferSize",
@@ -96,8 +95,7 @@ namespace System.IdentityModel
         public XmlDictionaryWriter OpenSection(XmlDictionaryReaderQuotas quotas)
         {
             if (bufferState != BufferState.Created)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(CreateInvalidStateException());
             bufferState = BufferState.Writing;
             this.quotas = new XmlDictionaryReaderQuotas();
@@ -126,8 +124,7 @@ namespace System.IdentityModel
         public void CloseSection()
         {
             if (bufferState != BufferState.Writing)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(CreateInvalidStateException());
             this.writer.Close();
             bufferState = BufferState.Created;
@@ -139,8 +136,7 @@ namespace System.IdentityModel
         public void Close()
         {
             if (bufferState != BufferState.Created)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(CreateInvalidStateException());
             bufferState = BufferState.Reading;
             int bufferSize;
@@ -157,8 +153,7 @@ namespace System.IdentityModel
         public XmlDictionaryReader GetReader(int sectionIndex)
         {
             if (bufferState != BufferState.Reading)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(CreateInvalidStateException());
             Section section = sections[sectionIndex];
             XmlDictionaryReader reader = XmlDictionaryReader.CreateBinaryReader(
@@ -177,8 +172,7 @@ namespace System.IdentityModel
         public void WriteTo(int sectionIndex, XmlWriter writer)
         {
             if (bufferState != BufferState.Reading)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(CreateInvalidStateException());
             XmlDictionaryReader reader = GetReader(sectionIndex);
             try

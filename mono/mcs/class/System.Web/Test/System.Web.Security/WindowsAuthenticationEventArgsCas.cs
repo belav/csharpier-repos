@@ -89,9 +89,8 @@ namespace MonoCasTests.System.Web.Security
             AspNetHostingPermissionLevel level
         )
         {
-            ConstructorInfo ci = this.Type.GetConstructor(
-                new Type[2] { typeof(WindowsIdentity), typeof(HttpContext) }
-            );
+            ConstructorInfo ci = this.Type
+                .GetConstructor(new Type[2] { typeof(WindowsIdentity), typeof(HttpContext) });
             Assert.IsNotNull(ci, ".ctor(WindowsIdentity,HttpContext)");
             return ci.Invoke(new object[2] { null, context });
         }

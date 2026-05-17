@@ -74,8 +74,7 @@ namespace Microsoft.CodeAnalysis.CSharp.PopulateSwitch
             )
             {
                 return switchNode.WithArms(
-                    switchNode
-                        .Arms
+                    switchNode.Arms
                         .InsertRangeWithTrailingSeparator(
                             insertLocation,
                             newArms,

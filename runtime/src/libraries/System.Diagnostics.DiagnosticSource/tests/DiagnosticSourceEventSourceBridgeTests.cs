@@ -693,8 +693,7 @@ namespace System.Diagnostics.Tests
                     }
 
                     // Make sure that there are no Diagnostic Listeners left over.
-                    DiagnosticListener
-                        .AllListeners
+                    DiagnosticListener.AllListeners
                         .Subscribe(
                             DiagnosticSourceTest.MakeObserver(
                                 delegate(DiagnosticListener listen)
@@ -893,8 +892,7 @@ namespace System.Diagnostics.Tests
                     }
 
                     // Make sure that there are no Diagnostic Listeners left over.
-                    DiagnosticListener
-                        .AllListeners
+                    DiagnosticListener.AllListeners
                         .Subscribe(
                             DiagnosticSourceTest.MakeObserver(
                                 delegate(DiagnosticListener listen)
@@ -1826,8 +1824,7 @@ namespace System.Diagnostics.Tests
                         {
                             new Thread(() =>
                             {
-                                DateTime end = DateTime
-                                    .UtcNow
+                                DateTime end = DateTime.UtcNow
                                     .Add(TimeSpan.FromSeconds(StressTimeSeconds));
                                 while (DateTime.UtcNow < end)
                                 {
@@ -2270,8 +2267,7 @@ namespace System.Diagnostics.Tests
             }
 
             if (eventData.EventName == "EventSourceMessage" && 0 < eventData.Payload.Count)
-                System
-                    .Diagnostics
+                System.Diagnostics
                     .Debug
                     .WriteLine("EventSourceMessage: " + eventData.Payload[0].ToString());
 

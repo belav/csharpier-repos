@@ -12,8 +12,7 @@ namespace System.Diagnostics
         {
             _fileName = fileName;
 
-            uint infoSize = Interop
-                .Version
+            uint infoSize = Interop.Version
                 .GetFileVersionInfoSizeEx(
                     Interop.Version.FileVersionInfoType.FILE_VER_GET_LOCALISED,
                     _fileName,
@@ -25,8 +24,7 @@ namespace System.Diagnostics
                 try
                 {
                     if (
-                        Interop
-                            .Version
+                        Interop.Version
                             .GetFileVersionInfoEx(
                                 Interop.Version.FileVersionInfoType.FILE_VER_GET_LOCALISED
                                     | Interop.Version.FileVersionInfoType.FILE_VER_GET_NEUTRAL,
@@ -92,8 +90,7 @@ namespace System.Diagnostics
         private static unsafe uint GetLanguageAndCodePage(void* memPtr)
         {
             if (
-                Interop
-                    .Version
+                Interop.Version
                     .VerQueryValue(memPtr, "\\VarFileInfo\\Translation", out void* memRef, out _)
             )
             {

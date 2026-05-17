@@ -50,11 +50,9 @@ namespace System.ServiceModel.ComIntegration
                         if (Fx.IsFatal(e))
                             throw;
 
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
-                                System
-                                    .ServiceModel
+                                System.ServiceModel
                                     .ComIntegration
                                     .Error
                                     .CannotAccessDirectory(tempPath)
@@ -135,8 +133,7 @@ namespace System.ServiceModel.ComIntegration
                 default:
                     Fx.Assert("Unexpected threading model");
 
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(Error.UnexpectedThreadingModel());
             }
             threadPoolConfig.SetBindingInfo(BindingOption.BindingToPoolThread);
@@ -153,8 +150,7 @@ namespace System.ServiceModel.ComIntegration
                 IServiceSxsConfig sxsConfig = serviceConfig as IServiceSxsConfig;
                 if (sxsConfig == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(System.ServiceModel.ComIntegration.Error.QFENotPresent());
                 }
 
@@ -171,11 +167,9 @@ namespace System.ServiceModel.ComIntegration
                         if (Fx.IsFatal(e))
                             throw;
 
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
-                                System
-                                    .ServiceModel
+                                System.ServiceModel
                                     .ComIntegration
                                     .Error
                                     .CannotAccessDirectory(tempPath)
@@ -195,11 +189,9 @@ namespace System.ServiceModel.ComIntegration
                             if (Fx.IsFatal(e))
                                 throw;
 
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
-                                    System
-                                        .ServiceModel
+                                    System.ServiceModel
                                         .ComIntegration
                                         .Error
                                         .CannotAccessDirectory(manifestDirectory)

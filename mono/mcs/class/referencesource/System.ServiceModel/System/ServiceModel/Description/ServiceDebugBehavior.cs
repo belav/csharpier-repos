@@ -43,8 +43,7 @@ namespace System.ServiceModel.Description
             {
                 if (value != null && value.IsAbsoluteUri && value.Scheme != Uri.UriSchemeHttp)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgument(
                             SR.GetString(
                                 SR.SFxServiceMetadataBehaviorUrlMustBeHttpOrRelative,
@@ -75,8 +74,7 @@ namespace System.ServiceModel.Description
             {
                 if (value != null && value.IsAbsoluteUri && value.Scheme != Uri.UriSchemeHttps)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgument(
                             SR.GetString(
                                 SR.SFxServiceMetadataBehaviorUrlMustBeHttpOrRelative,
@@ -100,8 +98,7 @@ namespace System.ServiceModel.Description
                 {
                     if (!value.Scheme.Equals(Uri.UriSchemeHttp, StringComparison.OrdinalIgnoreCase))
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperArgument(
                                 SR.GetString(
                                     SR.SFxBindingSchemeDoesNotMatch,
@@ -116,13 +113,11 @@ namespace System.ServiceModel.Description
                         customBinding.Elements.Find<TextMessageEncodingBindingElement>();
                     if (
                         textMessageEncodingBindingElement != null
-                        && !textMessageEncodingBindingElement
-                            .MessageVersion
+                        && !textMessageEncodingBindingElement.MessageVersion
                             .IsMatch(MessageVersion.None)
                     )
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperArgument(
                                 SR.GetString(
                                     SR.SFxIncorrectMessageVersion,
@@ -131,8 +126,7 @@ namespace System.ServiceModel.Description
                                 )
                             );
                     }
-                    HttpTransportBindingElement httpTransportBindingElement = customBinding
-                        .Elements
+                    HttpTransportBindingElement httpTransportBindingElement = customBinding.Elements
                         .Find<HttpTransportBindingElement>();
                     if (httpTransportBindingElement != null)
                     {
@@ -154,8 +148,7 @@ namespace System.ServiceModel.Description
                         !value.Scheme.Equals(Uri.UriSchemeHttps, StringComparison.OrdinalIgnoreCase)
                     )
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperArgument(
                                 SR.GetString(
                                     SR.SFxBindingSchemeDoesNotMatch,
@@ -170,13 +163,11 @@ namespace System.ServiceModel.Description
                         customBinding.Elements.Find<TextMessageEncodingBindingElement>();
                     if (
                         textMessageEncodingBindingElement != null
-                        && !textMessageEncodingBindingElement
-                            .MessageVersion
+                        && !textMessageEncodingBindingElement.MessageVersion
                             .IsMatch(MessageVersion.None)
                     )
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperArgument(
                                 SR.GetString(
                                     SR.SFxIncorrectMessageVersion,
@@ -185,9 +176,8 @@ namespace System.ServiceModel.Description
                                 )
                             );
                     }
-                    HttpsTransportBindingElement httpsTransportBindingElement = customBinding
-                        .Elements
-                        .Find<HttpsTransportBindingElement>();
+                    HttpsTransportBindingElement httpsTransportBindingElement =
+                        customBinding.Elements.Find<HttpsTransportBindingElement>();
                     if (httpsTransportBindingElement != null)
                     {
                         httpsTransportBindingElement.Method = "GET";

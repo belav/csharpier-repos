@@ -64,8 +64,7 @@ namespace Mono.Linker.Steps
                     MarkAndPreserveAll(type, nav);
 
                 foreach (var exportedType in assembly.MainModule.ExportedTypes)
-                    _context
-                        .MarkingHelpers
+                    _context.MarkingHelpers
                         .MarkExportedType(
                             exportedType,
                             assembly.MainModule,
@@ -116,8 +115,7 @@ namespace Mono.Linker.Steps
 
         void MarkAndPreserveAll(TypeDefinition type, XPathNavigator nav)
         {
-            _context
-                .Annotations
+            _context.Annotations
                 .Mark(
                     type,
                     new DependencyInfo(DependencyKind.XmlDescriptor, _xmlDocumentLocation),
@@ -138,8 +136,7 @@ namespace Mono.Linker.Steps
             XPathNavigator nav
         )
         {
-            _context
-                .MarkingHelpers
+            _context.MarkingHelpers
                 .MarkExportedType(
                     exported,
                     assembly.MainModule,
@@ -177,8 +174,7 @@ namespace Mono.Linker.Steps
             if (!required)
                 return;
 
-            _context
-                .Annotations
+            _context.Annotations
                 .Mark(
                     type,
                     new DependencyInfo(DependencyKind.XmlDescriptor, _xmlDocumentLocation),
@@ -191,8 +187,7 @@ namespace Mono.Linker.Steps
                 while (currentType.IsNested)
                 {
                     var parent = currentType.DeclaringType;
-                    _context
-                        .Annotations
+                    _context.Annotations
                         .Mark(
                             parent,
                             new DependencyInfo(DependencyKind.DeclaringType, currentType),
@@ -223,8 +218,7 @@ namespace Mono.Linker.Steps
             if (_context.Annotations.IsMarked(field))
                 LogWarning(nav, DiagnosticId.XmlDuplicatePreserveMember, field.FullName);
 
-            _context
-                .Annotations
+            _context.Annotations
                 .Mark(
                     field,
                     new DependencyInfo(DependencyKind.XmlDescriptor, _xmlDocumentLocation),
@@ -251,8 +245,7 @@ namespace Mono.Linker.Steps
             }
             else
             {
-                _context
-                    .Annotations
+                _context.Annotations
                     .Mark(
                         method,
                         new DependencyInfo(DependencyKind.XmlDescriptor, _xmlDocumentLocation),

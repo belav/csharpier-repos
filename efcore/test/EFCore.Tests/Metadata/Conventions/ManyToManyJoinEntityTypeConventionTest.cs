@@ -48,8 +48,7 @@ public class ManyToManyJoinEntityTypeConventionTest
 
         RunConvention(firstSkipNav);
 
-        var joinEntityType = manyToManySelf
-            .Metadata
+        var joinEntityType = manyToManySelf.Metadata
             .Model
             .GetEntityTypes()
             .Single(et => et.IsImplicitlyCreatedJoinEntityType);
@@ -101,8 +100,7 @@ public class ManyToManyJoinEntityTypeConventionTest
         RunConvention(skipNavOnFirst);
 
         Assert.Empty(
-            manyToManyFirst
-                .Metadata
+            manyToManyFirst.Metadata
                 .Model
                 .GetEntityTypes()
                 .Where(et => et.IsImplicitlyCreatedJoinEntityType)
@@ -153,8 +151,7 @@ public class ManyToManyJoinEntityTypeConventionTest
         RunConvention(skipNavOnFirst);
 
         Assert.Empty(
-            manyToManyFirst
-                .Metadata
+            manyToManyFirst.Metadata
                 .Model
                 .GetEntityTypes()
                 .Where(et => et.IsImplicitlyCreatedJoinEntityType)
@@ -207,8 +204,7 @@ public class ManyToManyJoinEntityTypeConventionTest
         RunConvention(skipNavOnFirst);
 
         Assert.Empty(
-            manyToManyFirst
-                .Metadata
+            manyToManyFirst.Metadata
                 .Model
                 .GetEntityTypes()
                 .Where(et => et.IsImplicitlyCreatedJoinEntityType)
@@ -269,8 +265,7 @@ public class ManyToManyJoinEntityTypeConventionTest
         RunConvention(skipNavOnFirst);
 
         Assert.Empty(
-            manyToManyFirst
-                .Metadata
+            manyToManyFirst.Metadata
                 .Model
                 .GetEntityTypes()
                 .Where(et => et.IsImplicitlyCreatedJoinEntityType)
@@ -331,8 +326,7 @@ public class ManyToManyJoinEntityTypeConventionTest
         RunConvention(skipNavOnFirst);
 
         Assert.Empty(
-            manyToManyFirst
-                .Metadata
+            manyToManyFirst.Metadata
                 .Model
                 .GetEntityTypes()
                 .Where(et => et.IsImplicitlyCreatedJoinEntityType)
@@ -379,8 +373,7 @@ public class ManyToManyJoinEntityTypeConventionTest
 
         RunConvention(skipNavOnSecond);
 
-        var joinEntityType = manyToManyFirst
-            .Metadata
+        var joinEntityType = manyToManyFirst.Metadata
             .Model
             .GetEntityTypes()
             .Single(et => et.IsImplicitlyCreatedJoinEntityType);
@@ -437,8 +430,7 @@ public class ManyToManyJoinEntityTypeConventionTest
         new(CreateDependencies());
 
     private ProviderConventionSetBuilderDependencies CreateDependencies() =>
-        InMemoryTestHelpers
-            .Instance
+        InMemoryTestHelpers.Instance
             .CreateContextServices()
             .GetRequiredService<ProviderConventionSetBuilderDependencies>() with
         {

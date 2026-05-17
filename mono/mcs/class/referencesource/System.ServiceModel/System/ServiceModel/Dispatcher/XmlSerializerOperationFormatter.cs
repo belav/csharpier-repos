@@ -44,8 +44,7 @@ namespace System.ServiceModel.Dispatcher
                 xmlSerializerFormatAttribute.IsEncoded
                 && xmlSerializerFormatAttribute.Style != OperationFormatStyle.Rpc
             )
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(SR.SFxDocEncodedNotSupported, description.Name)
@@ -138,8 +137,7 @@ namespace System.ServiceModel.Dispatcher
                         MessageHeaderDescription matchingHeaderDescription =
                             headerDescriptionTable.Get(element.LocalName, element.NamespaceURI);
                         if (matchingHeaderDescription == null)
-                            message
-                                .Headers
+                            message.Headers
                                 .Add(
                                     new XmlElementMessageHeader(
                                         this,
@@ -170,8 +168,7 @@ namespace System.ServiceModel.Dispatcher
                                 relay = matchingHeaderDescription.Relay;
                                 actor = matchingHeaderDescription.Actor;
                             }
-                            message
-                                .Headers
+                            message.Headers
                                 .Add(
                                     new XmlElementMessageHeader(
                                         this,
@@ -205,8 +202,7 @@ namespace System.ServiceModel.Dispatcher
                             out actor
                         );
                         if (element != null)
-                            message
-                                .Headers
+                            message.Headers
                                 .Add(
                                     new XmlElementMessageHeader(
                                         this,
@@ -224,8 +220,7 @@ namespace System.ServiceModel.Dispatcher
             }
             catch (InvalidOperationException e)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new CommunicationException(
                             SR.GetString(
@@ -398,8 +393,7 @@ namespace System.ServiceModel.Dispatcher
             {
                 // all exceptions from XmlSerializer get wrapped in InvalidOperationException,
                 // so we must be conservative and never turn this into a fault
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new CommunicationException(
                             SR.GetString(
@@ -461,12 +455,10 @@ namespace System.ServiceModel.Dispatcher
         )
         {
             if (writer == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("writer"));
             if (parameters == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("parameters"));
             try
             {
@@ -494,8 +486,7 @@ namespace System.ServiceModel.Dispatcher
                 ];
                 object bodyObject = parameters[messageDescription.Body.Parts[0].Index];
                 if (bodyObject == null)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(SR.SFxBodyCannotBeNull, messageDescription.MessageName)
@@ -531,8 +522,7 @@ namespace System.ServiceModel.Dispatcher
             }
             catch (InvalidOperationException e)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new CommunicationException(
                             SR.GetString(
@@ -643,12 +633,10 @@ namespace System.ServiceModel.Dispatcher
             try
             {
                 if (reader == null)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new ArgumentNullException("reader"));
                 if (parameters == null)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new ArgumentNullException("parameters"));
                 object returnValue = null;
                 if (serializer == null)
@@ -680,8 +668,7 @@ namespace System.ServiceModel.Dispatcher
                     ? SR.SFxErrorDeserializingRequestBody
                     : SR.SFxErrorDeserializingReplyBody;
 
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new CommunicationException(SR.GetString(resourceKey, OperationName), e)
                     );
@@ -700,8 +687,7 @@ namespace System.ServiceModel.Dispatcher
             }
             else
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(
                         "version",
                         SR.GetString(SR.EnvelopeVersionNotSupported, version)

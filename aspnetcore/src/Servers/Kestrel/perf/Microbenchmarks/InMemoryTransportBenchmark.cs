@@ -79,8 +79,7 @@ public class InMemoryTransportBenchmark
     private async Task ValidateResponseAsync(byte[] request, string expectedResponse)
     {
         await _connection.SendRequestAsync(request);
-        var response = Encoding
-            .ASCII
+        var response = Encoding.ASCII
             .GetString(await _connection.GetResponseAsync(expectedResponse.Length));
 
         // Exclude date header since the value changes on every request

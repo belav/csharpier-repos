@@ -81,8 +81,7 @@ public class DoubleModelBinder : IModelBinder
             {
                 modelState.TryAddModelError(
                     modelName,
-                    metadata
-                        .ModelBindingMessageProvider
+                    metadata.ModelBindingMessageProvider
                         .ValueMustNotBeNullAccessor(valueProviderResult.ToString())
                 );
             }

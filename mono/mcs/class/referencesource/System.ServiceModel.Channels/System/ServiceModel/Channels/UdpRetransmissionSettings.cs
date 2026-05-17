@@ -46,8 +46,7 @@ namespace System.ServiceModel.Channels
         {
             if (maxUnicastRetransmitCount < 0)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .ArgumentOutOfRange(
                         "maxUnicastRetransmitCount",
                         maxUnicastRetransmitCount,
@@ -57,8 +56,7 @@ namespace System.ServiceModel.Channels
 
             if (maxMulticastRetransmitCount < 0)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .ArgumentOutOfRange(
                         "maxMulticastRetransmitCount",
                         maxMulticastRetransmitCount,
@@ -68,8 +66,7 @@ namespace System.ServiceModel.Channels
 
             if (delayLowerBound < TimeSpan.Zero)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .ArgumentOutOfRange(
                         "delayLowerBound",
                         delayLowerBound,
@@ -79,8 +76,7 @@ namespace System.ServiceModel.Channels
 
             if (delayUpperBound < TimeSpan.Zero)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .ArgumentOutOfRange(
                         "delayUpperBound",
                         delayUpperBound,
@@ -90,8 +86,7 @@ namespace System.ServiceModel.Channels
 
             if (maxDelayPerRetransmission < TimeSpan.Zero)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .ArgumentOutOfRange(
                         "maxDelayPerRetransmission",
                         maxDelayPerRetransmission,
@@ -132,8 +127,7 @@ namespace System.ServiceModel.Channels
                 const int min = 0;
                 if (value < min)
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .ArgumentOutOfRange("value", value, SR.ArgumentOutOfMinRange(min));
                 }
                 this.maxUnicastRetransmitCount = value;
@@ -149,8 +143,7 @@ namespace System.ServiceModel.Channels
                 const int min = 0;
                 if (value < min)
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .ArgumentOutOfRange("value", value, SR.ArgumentOutOfMinRange(min));
                 }
                 this.maxMulticastRetransmitCount = value;
@@ -164,8 +157,7 @@ namespace System.ServiceModel.Channels
             {
                 if (value < TimeSpan.Zero)
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .ArgumentOutOfRange(
                             "value",
                             value,
@@ -187,8 +179,7 @@ namespace System.ServiceModel.Channels
             {
                 if (value < TimeSpan.Zero)
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .ArgumentOutOfRange(
                             "value",
                             value,
@@ -210,8 +201,7 @@ namespace System.ServiceModel.Channels
             {
                 if (value < TimeSpan.Zero)
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .ArgumentOutOfRange(
                             "value",
                             value,
@@ -280,8 +270,7 @@ namespace System.ServiceModel.Channels
         {
             if (this.delayLowerBound > this.delayUpperBound)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .ArgumentOutOfRange(
                         "DelayLowerBound",
                         this.delayLowerBound,
@@ -296,8 +285,7 @@ namespace System.ServiceModel.Channels
 
             if (this.delayUpperBound > this.maxDelayPerRetransmission)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .ArgumentOutOfRange(
                         "DelayUpperBound",
                         this.delayUpperBound,

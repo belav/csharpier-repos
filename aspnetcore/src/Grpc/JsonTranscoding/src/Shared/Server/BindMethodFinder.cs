@@ -52,8 +52,7 @@ internal static class BindMethodFinder
             {
                 // Bind method will be public and static
                 // Two parameters: ServiceBinderBase and the service type
-                return bindServiceMethod
-                    .BindType
+                return bindServiceMethod.BindType
                     .GetMethod(
                         bindServiceMethod.BindMethodName,
                         BindMethodBindingFlags,

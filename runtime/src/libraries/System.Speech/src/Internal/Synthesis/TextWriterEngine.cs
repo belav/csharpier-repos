@@ -203,8 +203,7 @@ namespace System.Speech.Internal.Synthesis
                     "alphabet",
                     alphabet == AlphabetType.Sapi ? "x-microsoft-sapi" : "x-microsoft-ups"
                 );
-                System
-                    .Diagnostics
+                System.Diagnostics
                     .Debug
                     .Assert(alphabet == AlphabetType.Ups || alphabet == AlphabetType.Sapi);
             }

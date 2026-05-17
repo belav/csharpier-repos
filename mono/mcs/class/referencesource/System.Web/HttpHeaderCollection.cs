@@ -151,8 +151,7 @@ namespace System.Web
                 string encodedValue = value;
                 if (HttpRuntime.EnableHeaderChecking)
                 {
-                    HttpEncoder
-                        .Current
+                    HttpEncoder.Current
                         .HeaderNameValueEncode(name, value, out encodedName, out encodedValue);
                 }
 

@@ -50,8 +50,7 @@ namespace System.ServiceModel.Channels
             {
                 if (value < 0)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentOutOfRangeException(
                                 "value",
@@ -72,8 +71,7 @@ namespace System.ServiceModel.Channels
             {
                 if (value <= 0)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentOutOfRangeException(
                                 "value",
@@ -127,8 +125,7 @@ namespace System.ServiceModel.Channels
             // to cover all our bases, let's iterate through the BindingParameters to make sure
             // we haven't missed a query (since we're the Transport and we're at the bottom)
 #pragma warning suppress 56506 // Microsoft, BindingContext.BindingParameters cannot be null
-            Collection<BindingElement> bindingElements = context
-                .BindingParameters
+            Collection<BindingElement> bindingElements = context.BindingParameters
                 .FindAll<BindingElement>();
 
             T result = default(T);
@@ -167,8 +164,7 @@ namespace System.ServiceModel.Channels
         {
             AddressingVersion addressingVersion = AddressingVersion.WSAddressing10;
 #pragma warning suppress 56506 // Microsoft, CustomBinding.Elements can never be null
-            MessageEncodingBindingElement messageEncoderBindingElement = context
-                .Binding
+            MessageEncodingBindingElement messageEncoderBindingElement = context.Binding
                 .Elements
                 .Find<MessageEncodingBindingElement>();
             if (messageEncoderBindingElement != null)
@@ -214,8 +210,7 @@ namespace System.ServiceModel.Channels
 
             // Set SoapBinding Transport URI
 #pragma warning suppress 56506 // Microsoft, these properties cannot be null in this context
-            BindingElementCollection bindingElements = endpointContext
-                .Endpoint
+            BindingElementCollection bindingElements = endpointContext.Endpoint
                 .Binding
                 .CreateBindingElements();
             if (wsdlTransportUri != null)
@@ -233,8 +228,7 @@ namespace System.ServiceModel.Channels
 
             if (endpointContext.WsdlPort != null)
             {
-                WsdlExporter
-                    .WSAddressingHelper
+                WsdlExporter.WSAddressingHelper
                     .AddAddressToWsdlPort(endpointContext.WsdlPort, address, addressingVersion);
             }
         }

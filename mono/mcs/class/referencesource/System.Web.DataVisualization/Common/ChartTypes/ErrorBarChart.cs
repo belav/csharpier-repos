@@ -403,8 +403,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                     }
 
                     // All linked data series from chart area which have Error bar chart type
-                    string linkedSeriesChartType = common
-                        .DataManager
+                    string linkedSeriesChartType = common.DataManager
                         .Series[linkedSeriesName]
                         .ChartTypeName;
                     ChartArea linkedSeriesArea = common.ChartPicture.ChartAreas[
@@ -443,8 +442,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                     foreach (string seriesName in typeLinkedSeries)
                     {
                         if (
-                            common
-                                .DataManager
+                            common.DataManager
                                 .Series[seriesName]
                                 .IsCustomPropertySet(CustomPropertyName.DrawSideBySide)
                         )
@@ -514,8 +512,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
 
                         sideBySideWidth =
                             (float)(
-                                common
-                                    .DataManager
+                                common.DataManager
                                     .Series[linkedSeriesName]
                                     .GetPointWidth(graph, hAxis, interval, 0.8)
                             ) / numberOfLinkedSeries;
@@ -566,8 +563,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                 // Call Back Paint event
                 if (!selection)
                 {
-                    common
-                        .Chart
+                    common.Chart
                         .CallOnPrePaint(
                             new ChartPaintEventArgs(ser, graph, common, area.PlotAreaPosition)
                         );
@@ -930,8 +926,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                 // Call Paint event
                 if (!selection)
                 {
-                    common
-                        .Chart
+                    common.Chart
                         .CallOnPostPaint(
                             new ChartPaintEventArgs(ser, graph, common, area.PlotAreaPosition)
                         );
@@ -1267,18 +1262,19 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                             );
 
                             // Adjust label position using SmartLabelStyle algorithm
-                            position = area.smartLabels.AdjustSmartLabelPosition(
-                                common,
-                                graph,
-                                area,
-                                ser.SmartLabelStyle,
-                                position,
-                                sizeFont,
-                                format,
-                                position,
-                                markerSizes,
-                                LabelAlignmentStyles.Top
-                            );
+                            position = area.smartLabels
+                                .AdjustSmartLabelPosition(
+                                    common,
+                                    graph,
+                                    area,
+                                    ser.SmartLabelStyle,
+                                    position,
+                                    sizeFont,
+                                    format,
+                                    position,
+                                    markerSizes,
+                                    LabelAlignmentStyles.Top
+                                );
 
                             // Smart labels always use 0 degrees text angle
                             textAngle = 0;
@@ -1425,8 +1421,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                     }
 
                     // All linked data series from chart area which have Error bar chart type
-                    string linkedSeriesChartType = common
-                        .DataManager
+                    string linkedSeriesChartType = common.DataManager
                         .Series[attribValue]
                         .ChartTypeName;
                     List<string> typeLinkedSeries = area.GetSeriesFromChartType(
@@ -1462,8 +1457,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                     foreach (string seriesName in typeLinkedSeries)
                     {
                         if (
-                            common
-                                .DataManager
+                            common.DataManager
                                 .Series[seriesName]
                                 .IsCustomPropertySet(CustomPropertyName.DrawSideBySide)
                         )
@@ -1535,8 +1529,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                 // Call Back Paint event
                 if (!selection)
                 {
-                    common
-                        .Chart
+                    common.Chart
                         .CallOnPrePaint(
                             new ChartPaintEventArgs(ser, graph, common, area.PlotAreaPosition)
                         );
@@ -1951,8 +1944,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                 // Call Paint event
                 if (!selection)
                 {
-                    common
-                        .Chart
+                    common.Chart
                         .CallOnPostPaint(
                             new ChartPaintEventArgs(ser, graph, common, area.PlotAreaPosition)
                         );
@@ -2326,8 +2318,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                 case ErrorBarType.StandardError:
                     return 1.0;
                 default:
-                    System
-                        .Diagnostics
+                    System.Diagnostics
                         .Debug
                         .Fail("Unknown ErrorBarType=" + errorBarType.ToString());
                     break;

@@ -31,8 +31,7 @@ namespace System.Activities.Core.Presentation
         void CreateStartSymbol()
         {
             //Instantiate the start symbol
-            StartSymbol start = System
-                .Activities
+            StartSymbol start = System.Activities
                 .Core
                 .Presentation
                 .StartSymbol
@@ -48,10 +47,8 @@ namespace System.Activities.Core.Presentation
             this.StartSymbol.MouseLeave += new MouseEventHandler(ChildElement_MouseLeave);
 
             //Getting the View state information.
-            object locationOfShape = this.ViewStateService.RetrieveViewState(
-                this.ModelItem,
-                shapeLocation
-            );
+            object locationOfShape = this.ViewStateService
+                .RetrieveViewState(this.ModelItem, shapeLocation);
             object sizeOfShape = this.ViewStateService.RetrieveViewState(this.ModelItem, shapeSize);
             if (locationOfShape != null)
             {
@@ -61,9 +58,8 @@ namespace System.Activities.Core.Presentation
             else
             {
                 //Set the location of the start symbol.
-                this.StartSymbol.Measure(
-                    new Size(Double.PositiveInfinity, Double.PositiveInfinity)
-                );
+                this.StartSymbol
+                    .Measure(new Size(Double.PositiveInfinity, Double.PositiveInfinity));
                 double startHeight = this.StartSymbol.DesiredSize.Height;
                 double startWidth = this.StartSymbol.DesiredSize.Width;
                 Point startPoint = new Point(
@@ -214,10 +210,11 @@ namespace System.Activities.Core.Presentation
                         )
                         {
                             if (
-                                e.Key.Equals(
-                                    FlowchartDesigner.FlowSwitchDefaultViewStateKey,
-                                    StringComparison.CurrentCulture
-                                )
+                                e.Key
+                                    .Equals(
+                                        FlowchartDesigner.FlowSwitchDefaultViewStateKey,
+                                        StringComparison.CurrentCulture
+                                    )
                             )
                             {
                                 changedConnector = this.GetLinkOnCanvas(
@@ -227,16 +224,18 @@ namespace System.Activities.Core.Presentation
                                 );
                             }
                             else if (
-                                e.Key.EndsWith(
-                                    CaseViewStateKeyAppendString,
-                                    StringComparison.CurrentCulture
-                                )
+                                e.Key
+                                    .EndsWith(
+                                        CaseViewStateKeyAppendString,
+                                        StringComparison.CurrentCulture
+                                    )
                             )
                             {
-                                string switchCaseName = e.Key.Substring(
-                                    0,
-                                    e.Key.Length - CaseViewStateKeyAppendString.Length
-                                );
+                                string switchCaseName = e.Key
+                                    .Substring(
+                                        0,
+                                        e.Key.Length - CaseViewStateKeyAppendString.Length
+                                    );
                                 object switchCase = switchCaseName;
                                 Type genericType = e.ParentModelItem.ItemType.GetGenericArguments()[
                                     0
@@ -333,8 +332,7 @@ namespace System.Activities.Core.Presentation
                 {
                     CollectionChange collectionChange = change as CollectionChange;
                     if (
-                        collectionChange
-                            .Collection
+                        collectionChange.Collection
                             .Equals(this.ModelItem.Properties["Nodes"].Collection)
                     )
                     {
@@ -367,8 +365,7 @@ namespace System.Activities.Core.Presentation
                             .Collection
                             .Contains(collectionChange.Collection.Parent.Parent)
                         && collectionChange.Collection.Parent.Parent.ItemType.IsGenericType
-                        && collectionChange
-                            .Collection
+                        && collectionChange.Collection
                             .Parent
                             .Parent
                             .ItemType
@@ -773,20 +770,21 @@ namespace System.Activities.Core.Presentation
             // connection between flownode should be create only after all flownodes have been loaded on the canvas
             if (addConnectorAfterLoaded)
             {
-                this.Dispatcher.BeginInvoke(
-                    DispatcherPriority.Loaded,
-                    new Action(() =>
-                    {
-                        if (this.isLoaded)
+                this.Dispatcher
+                    .BeginInvoke(
+                        DispatcherPriority.Loaded,
+                        new Action(() =>
                         {
-                            AddConnectorsToPanel(
-                                startNodeModelItem,
-                                elem2elemConnections,
-                                point2elemConnections
-                            );
-                        }
-                    })
-                );
+                            if (this.isLoaded)
+                            {
+                                AddConnectorsToPanel(
+                                    startNodeModelItem,
+                                    elem2elemConnections,
+                                    point2elemConnections
+                                );
+                            }
+                        })
+                    );
             }
             else
             {
@@ -886,10 +884,8 @@ namespace System.Activities.Core.Presentation
             }
 
             //Update this.shapeLocations.
-            object locationOfShape = this.ViewStateService.RetrieveViewState(
-                flowNodeMI,
-                shapeLocation
-            );
+            object locationOfShape = this.ViewStateService
+                .RetrieveViewState(flowNodeMI, shapeLocation);
             if (locationOfShape != null)
             {
                 this.shapeLocations.Remove((Point)locationOfShape);
@@ -1052,8 +1048,7 @@ namespace System.Activities.Core.Presentation
                                     connectorCaseMI != null
                                     && caseName.Equals(
                                         propertyName.Substring(
-                                            GenericFlowSwitchHelper
-                                                .FlowSwitchCasesKeyIdentifier
+                                            GenericFlowSwitchHelper.FlowSwitchCasesKeyIdentifier
                                                 .Length
                                         )
                                     )
@@ -1065,12 +1060,10 @@ namespace System.Activities.Core.Presentation
                                 else if (connectorCaseMI == null)
                                 {
                                     if (
-                                        GenericFlowSwitchHelper
-                                            .FlowSwitchNullCaseKeyIdentifier
+                                        GenericFlowSwitchHelper.FlowSwitchNullCaseKeyIdentifier
                                             .Equals(
                                                 propertyName.Substring(
-                                                    GenericFlowSwitchHelper
-                                                        .FlowSwitchCasesKeyIdentifier
+                                                    GenericFlowSwitchHelper.FlowSwitchCasesKeyIdentifier
                                                         .Length
                                                 )
                                             )

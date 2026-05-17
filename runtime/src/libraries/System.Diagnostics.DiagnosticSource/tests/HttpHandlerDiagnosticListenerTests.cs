@@ -27,8 +27,7 @@ namespace System.Diagnostics.Tests
         {
             bool listenerFound = false;
             using (
-                DiagnosticListener
-                    .AllListeners
+                DiagnosticListener.AllListeners
                     .Subscribe(
                         new CallbackObserver<DiagnosticListener>(diagnosticListener =>
                         {
@@ -322,8 +321,7 @@ namespace System.Diagnostics.Tests
                             )
                         )
                         {
-                            request
-                                .Headers
+                            request.Headers
                                 .Add(
                                     "traceparent",
                                     "00-abcdef0123456789abcdef0123456789-abcdef0123456789-01"
@@ -412,8 +410,7 @@ namespace System.Diagnostics.Tests
             {
                 using (var client = new HttpClient())
                 {
-                    Uri uriWithRedirect = Configuration
-                        .Http
+                    Uri uriWithRedirect = Configuration.Http
                         .RemoteSecureHttp11Server
                         .RedirectUriForDestinationUri(302, Configuration.Http.RemoteEchoServer, 10);
                     (await client.GetAsync(uriWithRedirect)).Dispose();
@@ -675,8 +672,7 @@ namespace System.Diagnostics.Tests
                             new Dictionary<Uri, Tuple<WebRequest, WebResponse>>();
                         for (int i = 0; i < 10; i++)
                         {
-                            Uri uriWithRedirect = Configuration
-                                .Http
+                            Uri uriWithRedirect = Configuration.Http
                                 .RemoteSecureHttp11Server
                                 .RedirectUriForDestinationUri(
                                     302,
@@ -868,8 +864,7 @@ namespace System.Diagnostics.Tests
 
             public EventObserverAndRecorder(Action<KeyValuePair<string, object>> onEvent = null)
             {
-                listSubscription = DiagnosticListener
-                    .AllListeners
+                listSubscription = DiagnosticListener.AllListeners
                     .Subscribe(
                         new CallbackObserver<DiagnosticListener>(diagnosticListener =>
                         {
@@ -885,8 +880,7 @@ namespace System.Diagnostics.Tests
 
             public EventObserverAndRecorder(Predicate<string> isEnabled)
             {
-                listSubscription = DiagnosticListener
-                    .AllListeners
+                listSubscription = DiagnosticListener.AllListeners
                     .Subscribe(
                         new CallbackObserver<DiagnosticListener>(diagnosticListener =>
                         {
@@ -900,8 +894,7 @@ namespace System.Diagnostics.Tests
 
             public EventObserverAndRecorder(Func<string, object, object, bool> isEnabled)
             {
-                listSubscription = DiagnosticListener
-                    .AllListeners
+                listSubscription = DiagnosticListener.AllListeners
                     .Subscribe(
                         new CallbackObserver<DiagnosticListener>(diagnosticListener =>
                         {

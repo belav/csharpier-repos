@@ -44,8 +44,7 @@ public class BrowserFixture : IAsyncLifetime
     {
         // We emit an assemblymetadata attribute that reflects the value of SeleniumE2ETestsSupported at build
         // time and we use that to conditionally skip Selenium tests parts.
-        var attribute = typeof(BrowserFixture)
-            .Assembly
+        var attribute = typeof(BrowserFixture).Assembly
             .GetCustomAttributes<AssemblyMetadataAttribute>()
             .SingleOrDefault(a =>
                 a.Key == "Microsoft.AspNetCore.InternalTesting.Selenium.Supported"

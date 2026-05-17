@@ -301,13 +301,11 @@ namespace Microsoft.CodeAnalysis.Rename
                         var projectIdOfLocation = sourceDocument.Project.Id;
 
                         if (
-                            solution
-                                .Projects
+                            solution.Projects
                                 .Any(p =>
                                     p.IsSubmission
-                                    && p.ProjectReferences.Any(r =>
-                                        r.ProjectId == projectIdOfLocation
-                                    )
+                                    && p.ProjectReferences
+                                        .Any(r => r.ProjectId == projectIdOfLocation)
                                 )
                         )
                             return new SymbolicRenameInfo(

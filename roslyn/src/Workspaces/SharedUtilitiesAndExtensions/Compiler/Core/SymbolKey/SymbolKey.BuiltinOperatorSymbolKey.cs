@@ -62,14 +62,12 @@ namespace Microsoft.CodeAnalysis
                     {
                         case 1:
                             failureReason = null;
-                            var unaryOperator = reader
-                                .Compilation
+                            var unaryOperator = reader.Compilation
                                 .CreateBuiltinOperator(name, returnTypeSymbol, parameterTypes[0]);
                             return new SymbolKeyResolution(unaryOperator);
                         case 2:
                             failureReason = null;
-                            var binaryOperator = reader
-                                .Compilation
+                            var binaryOperator = reader.Compilation
                                 .CreateBuiltinOperator(
                                     name,
                                     returnTypeSymbol,

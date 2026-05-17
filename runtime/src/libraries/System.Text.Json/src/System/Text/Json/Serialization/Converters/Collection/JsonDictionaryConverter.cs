@@ -266,8 +266,7 @@ namespace System.Text.Json.Serialization
                             options.ReferenceHandlingStrategy == ReferenceHandlingStrategy.Preserve
                         );
                         Debug.Assert(state.Current.ReturnValue is TDictionary);
-                        state
-                            .ReferenceResolver
+                        state.ReferenceResolver
                             .AddReference(state.ReferenceId, state.Current.ReturnValue);
                         state.ReferenceId = null;
                     }
@@ -432,8 +431,7 @@ namespace System.Text.Json.Serialization
                     JsonSerializer.WriteMetadataForObject(this, ref state, writer);
                 }
 
-                state.Current.JsonPropertyInfo = state
-                    .Current
+                state.Current.JsonPropertyInfo = state.Current
                     .JsonTypeInfo
                     .ElementTypeInfo!
                     .PropertyInfoForTypeInfo;

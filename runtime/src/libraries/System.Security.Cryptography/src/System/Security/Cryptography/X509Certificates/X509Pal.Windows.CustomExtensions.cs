@@ -24,8 +24,7 @@ namespace System.Security.Cryptography.X509Certificates
                     pbData = new IntPtr((byte*)&keyUsagesAsShort),
                     cUnusedBits = 0,
                 };
-                return Interop
-                    .crypt32
+                return Interop.crypt32
                     .EncodeObject(CryptDecodeObjectStructType.X509_KEY_USAGE, &blob);
             }
         }
@@ -263,8 +262,7 @@ namespace System.Security.Cryptography.X509Certificates
                             int cb = 20;
                             byte[] buffer = new byte[cb];
                             if (
-                                !Interop
-                                    .Crypt32
+                                !Interop.Crypt32
                                     .CryptHashPublicKeyInfo(
                                         IntPtr.Zero,
                                         AlgId.CALG_SHA1,

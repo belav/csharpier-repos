@@ -26,8 +26,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.PullMemberUp.Wa
 
             if (
                 !options.Destination.IsAbstract
-                && options
-                    .MemberAnalysisResults
+                && options.MemberAnalysisResults
                     .Any(static result => result.ChangeDestinationTypeToAbstract)
             )
             {

@@ -178,8 +178,7 @@ public class QuerySqlGenerator : SqlExpressionVisitor
                 GroupBy: []
             }
         && selectExpression.Projection.Count == setOperation.Source1.Projection.Count
-        && selectExpression
-            .Projection
+        && selectExpression.Projection
             .Select(
                 (pe, index) =>
                     pe.Expression is ColumnExpression column
@@ -337,8 +336,7 @@ public class QuerySqlGenerator : SqlExpressionVisitor
                     GroupBy.Count: 0,
                 }
             && selectExpression.Projection.Count == valuesExpression.ColumnNames.Count
-            && selectExpression
-                .Projection
+            && selectExpression.Projection
                 .Select(
                     (pe, index) =>
                         pe.Expression is ColumnExpression column
@@ -519,8 +517,7 @@ public class QuerySqlGenerator : SqlExpressionVisitor
                     }
                     else if (value is SqlConstantExpression sqlConstantExpression)
                     {
-                        substitutions[i] = sqlConstantExpression
-                            .TypeMapping!
+                        substitutions[i] = sqlConstantExpression.TypeMapping!
                             .GenerateSqlLiteral(sqlConstantExpression.Value);
                     }
                 }
@@ -699,8 +696,7 @@ public class QuerySqlGenerator : SqlExpressionVisitor
         // TODO: Note that we perform Equals comparison on the value converter. We should be able to do reference comparison, but for
         // that we need to ensure that there's only ever one type mapping instance (i.e. no type mappings are ever instantiated out of the
         // type mapping source). See #30677.
-        var parameter = _relationalCommandBuilder
-            .Parameters
+        var parameter = _relationalCommandBuilder.Parameters
             .FirstOrDefault(p =>
                 p.InvariantName == parameterName
                 && p

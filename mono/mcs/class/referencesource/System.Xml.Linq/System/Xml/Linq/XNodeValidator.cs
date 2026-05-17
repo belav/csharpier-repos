@@ -49,8 +49,7 @@ namespace System.Xml.Schema
                     source = ((XDocument)source).Root;
                     if (source == null)
                         throw new InvalidOperationException(
-                            System
-                                .Xml
+                            System.Xml
                                 .Linq
                                 .Res
                                 .GetString(System.Xml.Linq.Res.InvalidOperation_MissingRoot)
@@ -64,8 +63,7 @@ namespace System.Xml.Schema
                         goto default;
                     if (source.Parent == null)
                         throw new InvalidOperationException(
-                            System
-                                .Xml
+                            System.Xml
                                 .Linq
                                 .Res
                                 .GetString(System.Xml.Linq.Res.InvalidOperation_MissingParent)
@@ -73,8 +71,7 @@ namespace System.Xml.Schema
                     break;
                 default:
                     throw new InvalidOperationException(
-                        System
-                            .Xml
+                        System.Xml
                             .Linq
                             .Res
                             .GetString(System.Xml.Linq.Res.InvalidOperation_BadNodeType, nt)
@@ -130,11 +127,8 @@ namespace System.Xml.Schema
                     object typedValue = null;
                     try
                     {
-                        typedValue = mt.Datatype.ParseValue(
-                            value,
-                            schemas.NameTable,
-                            namespaceManager
-                        );
+                        typedValue = mt.Datatype
+                            .ParseValue(value, schemas.NameTable, namespaceManager);
                     }
                     catch (XmlSchemaException) { }
                     if (typedValue != null)

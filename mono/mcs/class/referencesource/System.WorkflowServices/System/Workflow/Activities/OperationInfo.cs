@@ -220,8 +220,7 @@ namespace System.Workflow.Activities
                 Activity owner = this.ParentDependencyObject as Activity;
                 if (owner != null)
                 {
-                    owner
-                        .RootActivity
+                    owner.RootActivity
                         .RemoveProperty(DynamicContractTypeBuilder.DynamicContractTypesProperty);
                 }
 
@@ -265,8 +264,7 @@ namespace System.Workflow.Activities
                 Activity owner = this.ParentDependencyObject as Activity;
                 if (owner != null)
                 {
-                    owner
-                        .RootActivity
+                    owner.RootActivity
                         .RemoveProperty(DynamicContractTypeBuilder.DynamicContractTypesProperty);
                 }
                 methodInfo = InternalGetMethodInfo(provider);

@@ -1087,14 +1087,15 @@ namespace System.Workflow.ComponentModel.Design
                         viewablePageLocation,
                         viewablePageSize
                     );
-                    this.pageLayoutInfo.Add(
-                        new PageLayoutData(
-                            logicalBounds,
-                            pageBounds,
-                            viewablePageBounds,
-                            new Point(column, row)
-                        )
-                    );
+                    this.pageLayoutInfo
+                        .Add(
+                            new PageLayoutData(
+                                logicalBounds,
+                                pageBounds,
+                                viewablePageBounds,
+                                new Point(column, row)
+                            )
+                        );
                 }
             }
         }

@@ -318,8 +318,7 @@ namespace System.Web.UI
             if (filter == null)
                 filter = String.Empty;
 
-            _parser
-                .RootBuilder
+            _parser.RootBuilder
                 .PreprocessAttribute(
                     filter,
                     name,

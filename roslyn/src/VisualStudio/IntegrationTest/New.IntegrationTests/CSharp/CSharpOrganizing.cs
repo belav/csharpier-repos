@@ -40,21 +40,18 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
                 """,
                 HangMitigatingCancellationToken
             );
-            await TestServices
-                .Shell
+            await TestServices.Shell
                 .ExecuteCommandAsync(
                     WellKnownCommands.Edit.RemoveAndSort,
                     HangMitigatingCancellationToken
                 );
-            await TestServices
-                .Workspace
+            await TestServices.Workspace
                 .WaitForAsyncOperationsAsync(
                     FeatureAttribute.OrganizeDocument,
                     HangMitigatingCancellationToken
                 );
 
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .TextContainsAsync(
                     """
                     using A;

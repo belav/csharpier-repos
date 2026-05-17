@@ -99,8 +99,7 @@ internal sealed class SourceGeneratorTelemetryCollectorWorkspaceService
                         AnalyzerNameForTelemetry.ComputeSha256Hash(
                             telemetryKey.Identity.AssemblyName
                         );
-                    map[nameof(telemetryKey.Identity.AssemblyVersion)] = telemetryKey
-                        .Identity
+                    map[nameof(telemetryKey.Identity.AssemblyVersion)] = telemetryKey.Identity
                         .AssemblyVersion
                         .ToString();
                     map[nameof(telemetryKey.Identity.TypeName) + "Hashed"] =

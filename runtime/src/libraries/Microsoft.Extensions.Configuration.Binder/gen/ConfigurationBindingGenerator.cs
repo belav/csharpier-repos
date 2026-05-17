@@ -27,8 +27,7 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
                 System.Diagnostics.Debugger.Launch();
             }
 #endif
-            IncrementalValueProvider<CompilationData?> compilationData = context
-                .CompilationProvider
+            IncrementalValueProvider<CompilationData?> compilationData = context.CompilationProvider
                 .Select(
                     (compilation, _) =>
                         compilation.Options is CSharpCompilationOptions options
@@ -39,8 +38,7 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
             IncrementalValueProvider<(
                 SourceGenerationSpec?,
                 ImmutableEquatableArray<DiagnosticInfo>?
-            )> genSpec = context
-                .SyntaxProvider
+            )> genSpec = context.SyntaxProvider
                 .CreateSyntaxProvider(
                     (node, _) => BinderInvocation.IsCandidateSyntaxNode(node),
                     BinderInvocation.Create
@@ -63,9 +61,8 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
                                 tuple.Left,
                                 cancellationToken
                             );
-                            ImmutableEquatableArray<DiagnosticInfo>? diagnostics = parser
-                                .Diagnostics
-                                ?.ToImmutableEquatableArray();
+                            ImmutableEquatableArray<DiagnosticInfo>? diagnostics =
+                                parser.Diagnostics?.ToImmutableEquatableArray();
                             return (spec, diagnostics);
                         }
                         catch (Exception ex)

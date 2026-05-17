@@ -364,8 +364,7 @@ namespace System.Security.Cryptography.X509Certificates
                         publicKeyInfos[i].Dispose();
                     }
 
-                    ArrayPool<RentedSubjectPublicKeyInfo>
-                        .Shared
+                    ArrayPool<RentedSubjectPublicKeyInfo>.Shared
                         .Return(publicKeyInfos, clearArray: true);
                 }
 
@@ -717,8 +716,7 @@ namespace System.Security.Cryptography.X509Certificates
                 throw new CryptographicException(SR.Cryptography_Der_Invalid_Encoding);
             }
 
-            int encryptedValueLength = encryptedData
-                .EncryptedContentInfo
+            int encryptedValueLength = encryptedData.EncryptedContentInfo
                 .EncryptedContent
                 .Value
                 .Length;

@@ -2028,30 +2028,30 @@ namespace System.Web.UI.WebControls
             {
                 CommandEventArgs ce = (CommandEventArgs)e;
                 if (
-                    ce.CommandName.Equals(
-                        ChangePasswordButtonCommandName,
-                        StringComparison.CurrentCultureIgnoreCase
-                    )
+                    ce.CommandName
+                        .Equals(
+                            ChangePasswordButtonCommandName,
+                            StringComparison.CurrentCultureIgnoreCase
+                        )
                 )
                 {
                     AttemptChangePassword();
                     handled = true;
                 }
                 else if (
-                    ce.CommandName.Equals(
-                        CancelButtonCommandName,
-                        StringComparison.CurrentCultureIgnoreCase
-                    )
+                    ce.CommandName
+                        .Equals(CancelButtonCommandName, StringComparison.CurrentCultureIgnoreCase)
                 )
                 {
                     OnCancelButtonClick(ce);
                     handled = true;
                 }
                 else if (
-                    ce.CommandName.Equals(
-                        ContinueButtonCommandName,
-                        StringComparison.CurrentCultureIgnoreCase
-                    )
+                    ce.CommandName
+                        .Equals(
+                            ContinueButtonCommandName,
+                            StringComparison.CurrentCultureIgnoreCase
+                        )
                 )
                 {
                     OnContinueButtonClick(ce);

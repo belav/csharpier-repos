@@ -40,18 +40,17 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.NavigateTo
     [UseExportProvider]
     public abstract class AbstractNavigateToTests
     {
-        protected static readonly TestComposition DefaultComposition = EditorTestCompositions
-            .EditorFeatures
-            .AddParts(typeof(TestWorkspaceNavigateToSearchHostService));
-        protected static readonly TestComposition FirstVisibleComposition = EditorTestCompositions
-            .EditorFeatures
-            .AddParts(
-                typeof(TestWorkspaceNavigateToSearchHostService),
-                typeof(FirstDocIsVisibleDocumentTrackingService.Factory)
-            );
+        protected static readonly TestComposition DefaultComposition =
+            EditorTestCompositions.EditorFeatures
+                .AddParts(typeof(TestWorkspaceNavigateToSearchHostService));
+        protected static readonly TestComposition FirstVisibleComposition =
+            EditorTestCompositions.EditorFeatures
+                .AddParts(
+                    typeof(TestWorkspaceNavigateToSearchHostService),
+                    typeof(FirstDocIsVisibleDocumentTrackingService.Factory)
+                );
         protected static readonly TestComposition FirstActiveAndVisibleComposition =
-            EditorTestCompositions
-                .EditorFeatures
+            EditorTestCompositions.EditorFeatures
                 .AddParts(
                     typeof(TestWorkspaceNavigateToSearchHostService),
                     typeof(FirstDocIsActiveAndVisibleDocumentTrackingService.Factory)

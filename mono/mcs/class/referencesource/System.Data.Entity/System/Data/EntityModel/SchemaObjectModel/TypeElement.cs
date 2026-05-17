@@ -218,8 +218,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
             {
                 _primitiveType.PrimitiveTypeKind = (PrimitiveTypeKind)
                     Enum.Parse(typeof(PrimitiveTypeKind), value);
-                _primitiveType.BaseType = MetadataItem
-                    .EdmProviderManifest
+                _primitiveType.BaseType = MetadataItem.EdmProviderManifest
                     .GetPrimitiveType(_primitiveType.PrimitiveTypeKind);
             }
             catch (ArgumentException)
@@ -312,8 +311,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
                     AddError(
                         ErrorCode.BadPrecisionAndScale,
                         EdmSchemaErrorSeverity.Error,
-                        System
-                            .Data
+                        System.Data
                             .Entity
                             .Strings
                             .BadPrecisionAndScale(
@@ -351,8 +349,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
                     AddError(
                         ErrorCode.RequiredFacetMissing,
                         EdmSchemaErrorSeverity.Error,
-                        System
-                            .Data
+                        System.Data
                             .Entity
                             .Strings
                             .MissingFacetDescription(

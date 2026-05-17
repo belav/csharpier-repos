@@ -48,8 +48,7 @@ namespace System.Net.Http.Formatting
                 request.Headers.Accept.Count == 0
                 || (
                     request.Headers.Accept.Count == 1
-                    && request
-                        .Headers
+                    && request.Headers
                         .Accept
                         .First()
                         .MediaType

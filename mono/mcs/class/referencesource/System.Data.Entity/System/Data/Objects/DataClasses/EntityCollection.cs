@@ -843,8 +843,7 @@ namespace System.Data.Objects.DataClasses
                 if (!(value is IEnumerable))
                 {
                     throw new EntityException(
-                        System
-                            .Data
+                        System.Data
                             .Entity
                             .Strings
                             .ObjectStateEntry_UnableToEnumerateCollection(

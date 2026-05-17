@@ -163,8 +163,7 @@ public static class SqlServerIndexExtensions
                     duplicateIndex
                         .GetIncludeProperties()!
                         .Select(p =>
-                            duplicateIndex
-                                .DeclaringEntityType
+                            duplicateIndex.DeclaringEntityType
                                 .FindProperty(p)!
                                 .GetColumnName(storeObject)
                         )

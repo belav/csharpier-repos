@@ -103,8 +103,7 @@ public class EntitySplittingConvention : IModelFinalizingConvention, IEntityType
                     )
             )
             {
-                entityType
-                    .Builder
+                entityType.Builder
                     .HasRelationship(entityType, pk.Properties, pk)
                     ?.IsUnique(true)
                     ?.IsRequiredDependent(true);

@@ -1020,8 +1020,7 @@ namespace System.Text.Json.Serialization.Tests
 #if BUILDING_SOURCE_GENERATOR_TESTS
             JsonSerializer.Deserialize(
                 s_json,
-                System
-                    .Text
+                System.Text
                     .Json
                     .SourceGeneration
                     .Tests

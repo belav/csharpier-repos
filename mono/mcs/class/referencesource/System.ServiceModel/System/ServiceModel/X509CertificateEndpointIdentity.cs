@@ -34,13 +34,11 @@ namespace System.ServiceModel
         )
         {
             if (primaryCertificate == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("primaryCertificate");
 
             if (supportingCertificates == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("supportingCertificates");
 
             base.Initialize(
@@ -66,8 +64,7 @@ namespace System.ServiceModel
 
             reader.MoveToContent();
             if (reader.IsEmptyElement)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new XmlException(
                             SR.GetString(
@@ -111,8 +108,7 @@ namespace System.ServiceModel
             reader.ReadEndElement();
 
             if (this.certificateCollection.Count == 0)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new XmlException(
                             SR.GetString(

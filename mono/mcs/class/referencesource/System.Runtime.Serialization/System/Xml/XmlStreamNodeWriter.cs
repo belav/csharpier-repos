@@ -152,8 +152,7 @@ namespace System.Xml
         {
             if (Interlocked.CompareExchange(ref this.hasPendingWrite, 1, 0) != 0)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new InvalidOperationException(SR.GetString(SR.FlushBufferAlreadyInUse))
                     );
@@ -184,8 +183,7 @@ namespace System.Xml
 
             if (Interlocked.CompareExchange(ref this.hasPendingWrite, 0, 1) != 1)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(new InvalidOperationException(SR.GetString(SR.NoAsyncWritePending)));
             }
 
@@ -207,8 +205,7 @@ namespace System.Xml
                 thisPtr.offset = 0;
                 if (Interlocked.CompareExchange(ref thisPtr.hasPendingWrite, 0, 1) != 1)
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(
                             new InvalidOperationException(SR.GetString(SR.NoAsyncWritePending))
                         );
@@ -505,8 +502,7 @@ namespace System.Xml
             {
                 if (result == null)
                 {
-                    result = writer
-                        .stream
+                    result = writer.stream
                         .BeginWrite(
                             this.byteBuffer,
                             this.byteOffset,

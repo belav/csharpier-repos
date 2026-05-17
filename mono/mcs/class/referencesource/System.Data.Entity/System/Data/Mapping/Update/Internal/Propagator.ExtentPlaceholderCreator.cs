@@ -165,8 +165,7 @@ namespace System.Data.Mapping.Update.Internal
                 }
 
                 throw EntityUtil.NotSupported(
-                    System
-                        .Data
+                    System.Data
                         .Entity
                         .Strings
                         .Update_UnsupportedExtentType(extent.Name, extent.GetType().Name)

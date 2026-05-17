@@ -22,8 +22,7 @@ namespace System.Web.Http.ModelBinding.Binders
                 bindingContext.ModelName,
                 "index"
             );
-            ValueProviderResult valueProviderResultIndex = bindingContext
-                .ValueProvider
+            ValueProviderResult valueProviderResultIndex = bindingContext.ValueProvider
                 .GetValue(indexPropertyName);
             IEnumerable<string> indexNames =
                 CollectionModelBinderUtil.GetIndexNamesFromValueProviderResult(
@@ -72,8 +71,7 @@ namespace System.Web.Http.ModelBinding.Binders
                     boundValue = childBindingContext.Model;
 
                     // merge validation up
-                    bindingContext
-                        .ValidationNode
+                    bindingContext.ValidationNode
                         .ChildNodes
                         .Add(childBindingContext.ValidationNode);
                 }
@@ -102,8 +100,7 @@ namespace System.Web.Http.ModelBinding.Binders
                 return false;
             }
 
-            ValueProviderResult valueProviderResult = bindingContext
-                .ValueProvider
+            ValueProviderResult valueProviderResult = bindingContext.ValueProvider
                 .GetValue(bindingContext.ModelName);
             List<TElement> boundCollection =
                 (valueProviderResult != null)
@@ -159,8 +156,7 @@ namespace System.Web.Http.ModelBinding.Binders
                 if (actionContext.Bind(innerBindingContext))
                 {
                     boundValue = innerBindingContext.Model;
-                    bindingContext
-                        .ValidationNode
+                    bindingContext.ValidationNode
                         .ChildNodes
                         .Add(innerBindingContext.ValidationNode);
                 }

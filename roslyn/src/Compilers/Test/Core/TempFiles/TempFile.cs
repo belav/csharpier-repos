@@ -45,8 +45,7 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                         + "_";
                 }
 
-                _path = System
-                    .IO
+                _path = System.IO
                     .Path
                     .Combine(
                         directory ?? TempRoot.Root,

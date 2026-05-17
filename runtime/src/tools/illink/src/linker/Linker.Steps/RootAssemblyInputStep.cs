@@ -82,8 +82,7 @@ namespace Mono.Linker.Steps
 
                     // Assembly root mode wins over any enabled optimization which
                     // could conflict with library rooting behaviour
-                    Context
-                        .Optimizations
+                    Context.Optimizations
                         .Disable(
                             CodeOptimizations.Sealer
                                 | CodeOptimizations.UnusedTypeChecks
@@ -221,14 +220,12 @@ namespace Mono.Linker.Steps
             foreach (CustomAttribute attribute in assembly.CustomAttributes)
             {
                 if (
-                    attribute
-                        .Constructor
+                    attribute.Constructor
                         .DeclaringType
                         .IsTypeOf("System.Runtime.CompilerServices", "InternalsVisibleToAttribute")
                 )
                 {
-                    Context
-                        .Annotations
+                    Context.Annotations
                         .Mark(attribute, new DependencyInfo(DependencyKind.RootAssembly, assembly));
                     return true;
                 }

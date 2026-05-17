@@ -245,8 +245,7 @@ namespace System.Security.Cryptography.Asn1
             if (tag.HasSameClassAndValue(new Asn1Tag(TagClass.ContextSpecific, 0)))
             {
                 System.Security.Cryptography.Asn1.OtherNameAsn tmpOtherName;
-                System
-                    .Security
+                System.Security
                     .Cryptography
                     .Asn1
                     .OtherNameAsn
@@ -291,8 +290,7 @@ namespace System.Security.Cryptography.Asn1
             else if (tag.HasSameClassAndValue(new Asn1Tag(TagClass.ContextSpecific, 5)))
             {
                 System.Security.Cryptography.Asn1.EdiPartyNameAsn tmpEdiPartyName;
-                System
-                    .Security
+                System.Security
                     .Cryptography
                     .Asn1
                     .EdiPartyNameAsn

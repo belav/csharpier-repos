@@ -41,15 +41,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddUsing
             TestParameters parameters
         )
         {
-            workspace
-                .GlobalOptions
+            workspace.GlobalOptions
                 .SetGlobalOption(
                     SymbolSearchOptionsStorage.SearchNuGetPackages,
                     LanguageNames.CSharp,
                     true
                 );
-            workspace
-                .GlobalOptions
+            workspace.GlobalOptions
                 .SetGlobalOption(
                     SymbolSearchOptionsStorage.SearchReferenceAssemblies,
                     LanguageNames.CSharp,

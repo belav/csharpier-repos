@@ -1198,8 +1198,7 @@ namespace Newtonsoft.Json.Serialization
                 Type specifiedType;
                 try
                 {
-                    specifiedType = Serializer
-                        ._serializationBinder
+                    specifiedType = Serializer._serializationBinder
                         .BindToType(typeNameKey.Value1, typeNameKey.Value2);
                 }
                 catch (Exception ex)
@@ -1702,8 +1701,7 @@ namespace Newtonsoft.Json.Serialization
                 property.PropertyContract = GetContractSafe(property.PropertyType);
             }
 
-            ObjectCreationHandling objectCreationHandling = property
-                .ObjectCreationHandling
+            ObjectCreationHandling objectCreationHandling = property.ObjectCreationHandling
                 .GetValueOrDefault(Serializer._objectCreationHandling);
 
             if (
@@ -1767,14 +1765,12 @@ namespace Newtonsoft.Json.Serialization
             // test tokenType here because default value might not be convertible to actual type, e.g. default of "" for DateTime
             if (
                 HasFlag(
-                    property
-                        .DefaultValueHandling
+                    property.DefaultValueHandling
                         .GetValueOrDefault(Serializer._defaultValueHandling),
                     DefaultValueHandling.Ignore
                 )
                 && !HasFlag(
-                    property
-                        .DefaultValueHandling
+                    property.DefaultValueHandling
                         .GetValueOrDefault(Serializer._defaultValueHandling),
                     DefaultValueHandling.Populate
                 )
@@ -1865,14 +1861,12 @@ namespace Newtonsoft.Json.Serialization
 
             if (
                 HasFlag(
-                    property
-                        .DefaultValueHandling
+                    property.DefaultValueHandling
                         .GetValueOrDefault(Serializer._defaultValueHandling),
                     DefaultValueHandling.Ignore
                 )
                 && !HasFlag(
-                    property
-                        .DefaultValueHandling
+                    property.DefaultValueHandling
                         .GetValueOrDefault(Serializer._defaultValueHandling),
                     DefaultValueHandling.Populate
                 )
@@ -2930,8 +2924,7 @@ namespace Newtonsoft.Json.Serialization
                             }
 
                             // first attempt to find a settable property, otherwise fall back to a dynamic set without type
-                            JsonProperty? property = contract
-                                .Properties
+                            JsonProperty? property = contract.Properties
                                 .GetClosestMatchProperty(memberName);
 
                             if (property != null && property.Writable && !property.Ignored)
@@ -3176,8 +3169,7 @@ namespace Newtonsoft.Json.Serialization
                 JsonProperty? constructorProperty = context.ConstructorProperty;
                 if (constructorProperty == null && context.Property != null)
                 {
-                    constructorProperty = contract
-                        .CreatorParameters
+                    constructorProperty = contract.CreatorParameters
                         .ForgivingCaseSensitiveFind(
                             p => p.PropertyName!,
                             context.Property.UnderlyingName!
@@ -3204,8 +3196,7 @@ namespace Newtonsoft.Json.Serialization
 
                             if (
                                 HasFlag(
-                                    constructorProperty
-                                        .DefaultValueHandling
+                                    constructorProperty.DefaultValueHandling
                                         .GetValueOrDefault(Serializer._defaultValueHandling),
                                     DefaultValueHandling.Populate
                                 )
@@ -3262,8 +3253,7 @@ namespace Newtonsoft.Json.Serialization
                 else if (!property.Writable && value != null)
                 {
                     // handle readonly collection/dictionary properties
-                    JsonContract propertyContract = Serializer
-                        ._contractResolver
+                    JsonContract propertyContract = Serializer._contractResolver
                         .ResolveContract(property.PropertyType!);
 
                     if (propertyContract.ContractType == JsonContractType.Array)
@@ -3276,8 +3266,7 @@ namespace Newtonsoft.Json.Serialization
                             && !propertyArrayContract.IsReadOnlyOrFixedSize
                         )
                         {
-                            object? createdObjectCollection = property
-                                .ValueProvider!
+                            object? createdObjectCollection = property.ValueProvider!
                                 .GetValue(createdObject);
                             if (createdObjectCollection != null)
                             {
@@ -3315,8 +3304,7 @@ namespace Newtonsoft.Json.Serialization
 
                         if (!dictionaryContract.IsReadOnlyOrFixedSize)
                         {
-                            object? createdObjectDictionary = property
-                                .ValueProvider!
+                            object? createdObjectDictionary = property.ValueProvider!
                                 .GetValue(createdObject);
                             if (createdObjectDictionary != null)
                             {
@@ -3462,8 +3450,7 @@ namespace Newtonsoft.Json.Serialization
                             memberName
                         )
                         {
-                            ConstructorProperty = contract
-                                .CreatorParameters
+                            ConstructorProperty = contract.CreatorParameters
                                 .GetClosestMatchProperty(memberName),
                             Property = contract.Properties.GetClosestMatchProperty(memberName),
                         };
@@ -3759,8 +3746,7 @@ namespace Newtonsoft.Json.Serialization
                         {
                             // attempt exact case match first
                             // then try match ignoring case
-                            JsonProperty? property = contract
-                                .Properties
+                            JsonProperty? property = contract.Properties
                                 .GetClosestMatchProperty(propertyName);
 
                             if (property == null)
@@ -4096,15 +4082,13 @@ namespace Newtonsoft.Json.Serialization
 
                                 if (
                                     HasFlag(
-                                        property
-                                            .DefaultValueHandling
+                                        property.DefaultValueHandling
                                             .GetValueOrDefault(Serializer._defaultValueHandling),
                                         DefaultValueHandling.Populate
                                     ) && property.Writable
                                 )
                                 {
-                                    property
-                                        .ValueProvider!
+                                    property.ValueProvider!
                                         .SetValue(
                                             newObject,
                                             EnsureType(

@@ -57,8 +57,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             )
             {
                 // '<' should not filter the completion list, even though it's in generic items like IList<>
-                var generalBaseline = CompletionItemRules
-                    .Default
+                var generalBaseline = CompletionItemRules.Default
                     .WithFilterCharacterRule(
                         CharacterSetModificationRule.Create(
                             CharacterSetModificationKind.Remove,
@@ -365,8 +364,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             // e.g. Action c = = Bar;
             if (symbol.IsKind(SymbolKind.Method) && !context.IsNameOfContext)
             {
-                var isInferredTypeDelegateOrFunctionPointer = context
-                    .InferredTypes
+                var isInferredTypeDelegateOrFunctionPointer = context.InferredTypes
                     .Any(static type => type.IsDelegateType() || type.IsFunctionPointerType());
                 if (!isInferredTypeDelegateOrFunctionPointer)
                 {

@@ -856,8 +856,7 @@ namespace ILCompiler
                         IsConst = 0,
                         IsReference = 0,
                         ElementType = GetTypeIndex(
-                            defType
-                                .Context
+                            defType.Context
                                 .SystemModule
                                 .GetType("Internal.Runtime.CompilerHelpers", "TypeManagerSlot"),
                             true
@@ -877,8 +876,7 @@ namespace ILCompiler
                         new DataFieldDescriptor
                         {
                             FieldTypeIndex = GetVariableTypeIndex(
-                                defType
-                                    .Context
+                                defType.Context
                                     .GetWellKnownType(
                                         Is64Bit ? WellKnownType.Int64 : WellKnownType.Int32
                                     ),

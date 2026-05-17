@@ -347,11 +347,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                                     if (
                                         !closures.Contains(closure)
                                         && (
-                                            closure
-                                                .CapturedVariables
+                                            closure.CapturedVariables
                                                 .Overlaps(scope.DeclaredVariables)
-                                            || closure
-                                                .CapturedVariables
+                                            || closure.CapturedVariables
                                                 .Overlaps(
                                                     closures.Select(c => c.OriginalMethodSymbol)
                                                 )

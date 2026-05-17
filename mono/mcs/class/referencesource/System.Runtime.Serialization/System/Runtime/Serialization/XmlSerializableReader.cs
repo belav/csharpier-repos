@@ -24,8 +24,7 @@ namespace System.Runtime.Serialization
         internal void BeginRead(XmlReaderDelegator xmlReader)
         {
             if (xmlReader.NodeType != XmlNodeType.Element)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         XmlObjectSerializerReadContext.CreateUnexpectedStateException(
                             XmlNodeType.Element,
@@ -49,8 +48,7 @@ namespace System.Runtime.Serialization
                 while (xmlReader.Depth > startDepth)
                 {
                     if (!xmlReader.Read())
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 XmlObjectSerializerReadContext.CreateUnexpectedStateException(
                                     XmlNodeType.EndElement,
@@ -79,8 +77,7 @@ namespace System.Runtime.Serialization
 
         public override void Close()
         {
-            throw System
-                .Runtime
+            throw System.Runtime
                 .Serialization
                 .DiagnosticUtility
                 .ExceptionUtility

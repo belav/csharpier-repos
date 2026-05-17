@@ -124,8 +124,7 @@ public sealed class ComponentParameterAnalyzer : DiagnosticAnalyzer
                                 captureUnmatchedValuesParameters.Add(property);
 
                                 // Check the type, we need to be able to assign a Dictionary<string, object>
-                                var conversion = context
-                                    .Compilation
+                                var conversion = context.Compilation
                                     .ClassifyConversion(
                                         symbols.ParameterCaptureUnmatchedValuesRuntimeType,
                                         property.Type
@@ -139,13 +138,11 @@ public sealed class ComponentParameterAnalyzer : DiagnosticAnalyzer
                                             property.ToDisplayString(
                                                 SymbolDisplayFormat.CSharpErrorMessageFormat
                                             ),
-                                            property
-                                                .Type
+                                            property.Type
                                                 .ToDisplayString(
                                                     SymbolDisplayFormat.CSharpErrorMessageFormat
                                                 ),
-                                            symbols
-                                                .ParameterCaptureUnmatchedValuesRuntimeType
+                                            symbols.ParameterCaptureUnmatchedValuesRuntimeType
                                                 .ToDisplayString(
                                                     SymbolDisplayFormat.CSharpErrorMessageFormat
                                                 )
@@ -210,8 +207,7 @@ public sealed class ComponentParameterAnalyzer : DiagnosticAnalyzer
     /// TODO: Remove this helper when https://github.com/dotnet/roslyn/issues/46682 is handled.
     /// </summary>
     private static bool IsAutoProperty(IPropertySymbol propertySymbol) =>
-        propertySymbol
-            .ContainingType
+        propertySymbol.ContainingType
             .GetMembers()
             .OfType<IFieldSymbol>()
             .Any(f =>

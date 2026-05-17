@@ -467,8 +467,7 @@ app.MapPost("/", TestAction);
         var httpContext = CreateHttpContext();
         httpContext.Request.Headers["Content-Type"] = "application/xml";
         httpContext.Request.Headers["Content-Length"] = "1";
-        httpContext
-            .Features
+        httpContext.Features
             .Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
 
         var request = endpoint.RequestDelegate(httpContext);
@@ -586,8 +585,7 @@ app.MapPost("/", TestAction);
         httpContext.Request.Headers["Content-Type"] = "application/json";
         httpContext.Request.Headers["Content-Length"] = "1";
         httpContext.Request.Body = new ExceptionThrowingRequestBodyStream(ioException);
-        httpContext
-            .Features
+        httpContext.Features
             .Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
 
         await endpoint.RequestDelegate(httpContext);
@@ -626,8 +624,7 @@ app.MapPost("/", TestAction);
         httpContext.Request.Headers["Content-Type"] = "application/json";
         httpContext.Request.Headers["Content-Length"] = "1";
         httpContext.Request.Body = new ExceptionThrowingRequestBodyStream(jsonException);
-        httpContext
-            .Features
+        httpContext.Features
             .Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
 
         await endpoint.RequestDelegate(httpContext);
@@ -676,8 +673,7 @@ app.MapPost("/", TestAction);
         httpContext.Request.Headers["Content-Type"] = "application/json";
         httpContext.Request.Headers["Content-Length"] = "1";
         httpContext.Request.Body = new ExceptionThrowingRequestBodyStream(jsonException);
-        httpContext
-            .Features
+        httpContext.Features
             .Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
 
         var badHttpRequestException = await Assert.ThrowsAsync<BadHttpRequestException>(() =>
@@ -724,8 +720,7 @@ app.MapPost("/", TestAction);
         httpContext.Request.Headers["Content-Type"] = "application/json";
         httpContext.Request.Headers["Content-Length"] = "1";
         httpContext.Request.Body = new MemoryStream(Encoding.UTF8.GetBytes("{"));
-        httpContext
-            .Features
+        httpContext.Features
             .Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
 
         await endpoint.RequestDelegate(httpContext);
@@ -773,8 +768,7 @@ app.MapPost("/", TestAction);
         httpContext.Request.Headers["Content-Type"] = "application/json";
         httpContext.Request.Headers["Content-Length"] = "1";
         httpContext.Request.Body = new MemoryStream(Encoding.UTF8.GetBytes("{"));
-        httpContext
-            .Features
+        httpContext.Features
             .Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
 
         var badHttpRequestException = await Assert.ThrowsAsync<BadHttpRequestException>(() =>

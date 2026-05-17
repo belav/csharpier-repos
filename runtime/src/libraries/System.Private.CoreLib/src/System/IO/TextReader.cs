@@ -220,8 +220,7 @@ namespace System.IO
             new ValueTask<string?>(ReadLineCoreAsync(cancellationToken));
 
         private Task<string?> ReadLineCoreAsync(CancellationToken cancellationToken) =>
-            Task<string?>
-                .Factory
+            Task<string?>.Factory
                 .StartNew(
                     static state => ((TextReader)state!).ReadLine(),
                     this,
@@ -289,8 +288,7 @@ namespace System.IO
             new ValueTask<int>(
                 MemoryMarshal.TryGetArray(buffer, out ArraySegment<char> array)
                     ? ReadAsync(array.Array!, array.Offset, array.Count)
-                    : Task<int>
-                        .Factory
+                    : Task<int>.Factory
                         .StartNew(
                             static state =>
                             {
@@ -309,8 +307,7 @@ namespace System.IO
             CancellationToken cancellationToken
         ) =>
             new ValueTask<int>(
-                Task<int>
-                    .Factory
+                Task<int>.Factory
                     .StartNew(
                         static state =>
                         {
@@ -345,8 +342,7 @@ namespace System.IO
             new ValueTask<int>(
                 MemoryMarshal.TryGetArray(buffer, out ArraySegment<char> array)
                     ? ReadBlockAsync(array.Array!, array.Offset, array.Count)
-                    : Task<int>
-                        .Factory
+                    : Task<int>.Factory
                         .StartNew(
                             static state =>
                             {

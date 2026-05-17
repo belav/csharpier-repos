@@ -166,21 +166,22 @@ namespace System.Collections.Immutable.Tests
                 var barrier = new Barrier(tasks.Length);
                 for (int i = 0; i < tasks.Length; i++)
                 {
-                    tasks[i] = Task.Factory.StartNew(
-                        delegate
-                        {
-                            // Maximize concurrency by blocking this thread until all the other threads are ready to go as well.
-                            barrier.SignalAndWait();
-
-                            for (int j = 0; j < iterations; j++)
+                    tasks[i] = Task.Factory
+                        .StartNew(
+                            delegate
                             {
-                                Assert.True(func(ref list, l => l.Add(l.Count)));
-                            }
-                        },
-                        CancellationToken.None,
-                        TaskCreationOptions.LongRunning,
-                        TaskScheduler.Default
-                    );
+                                // Maximize concurrency by blocking this thread until all the other threads are ready to go as well.
+                                barrier.SignalAndWait();
+
+                                for (int j = 0; j < iterations; j++)
+                                {
+                                    Assert.True(func(ref list, l => l.Add(l.Count)));
+                                }
+                            },
+                            CancellationToken.None,
+                            TaskCreationOptions.LongRunning,
+                            TaskScheduler.Default
+                        );
                 }
 
                 Task.WaitAll(tasks);
@@ -204,21 +205,22 @@ namespace System.Collections.Immutable.Tests
                 var barrier = new Barrier(tasks.Length);
                 for (int i = 0; i < tasks.Length; i++)
                 {
-                    tasks[i] = Task.Factory.StartNew(
-                        delegate
-                        {
-                            // Maximize concurrency by blocking this thread until all the other threads are ready to go as well.
-                            barrier.SignalAndWait();
-
-                            for (int j = 0; j < iterations; j++)
+                    tasks[i] = Task.Factory
+                        .StartNew(
+                            delegate
                             {
-                                Assert.True(func(ref array, l => l.Add(l.Length)));
-                            }
-                        },
-                        CancellationToken.None,
-                        TaskCreationOptions.LongRunning,
-                        TaskScheduler.Default
-                    );
+                                // Maximize concurrency by blocking this thread until all the other threads are ready to go as well.
+                                barrier.SignalAndWait();
+
+                                for (int j = 0; j < iterations; j++)
+                                {
+                                    Assert.True(func(ref array, l => l.Add(l.Length)));
+                                }
+                            },
+                            CancellationToken.None,
+                            TaskCreationOptions.LongRunning,
+                            TaskScheduler.Default
+                        );
                 }
 
                 Task.WaitAll(tasks);

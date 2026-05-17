@@ -49,8 +49,7 @@ namespace System.IdentityModel.Tokens
                 {
                     if (!UriUtil.CanCreateValidUri(value, UriKind.Absolute))
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(SR.GetString(SR.ID2002))
                             );
@@ -242,17 +241,19 @@ namespace System.IdentityModel.Tokens
         /// <param name="time">Specifies the authentication instant in UTC. If the input is not in UTC, it is converted to UTC.</param>
         public void AddAuthenticationClaims(string authType, DateTime time)
         {
-            this.Subject.AddClaim(
-                new Claim(ClaimTypes.AuthenticationMethod, authType, ClaimValueTypes.String)
-            );
+            this.Subject
+                .AddClaim(
+                    new Claim(ClaimTypes.AuthenticationMethod, authType, ClaimValueTypes.String)
+                );
 
-            this.Subject.AddClaim(
-                new Claim(
-                    ClaimTypes.AuthenticationInstant,
-                    XmlConvert.ToString(time.ToUniversalTime(), DateTimeFormats.Generated),
-                    ClaimValueTypes.DateTime
-                )
-            );
+            this.Subject
+                .AddClaim(
+                    new Claim(
+                        ClaimTypes.AuthenticationInstant,
+                        XmlConvert.ToString(time.ToUniversalTime(), DateTimeFormats.Generated),
+                        ClaimValueTypes.DateTime
+                    )
+                );
         }
     }
 }

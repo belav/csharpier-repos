@@ -89,8 +89,7 @@ namespace System.Data.Common.Utils
                         }
                     }
                     updatedCache.Add(prefix, cache);
-                    System
-                        .Threading
+                    System.Threading
                         .Interlocked
                         .CompareExchange(ref _prefixCounter, updatedCache, prefixCounter);
                 }

@@ -161,8 +161,7 @@ public class ClientHandler : HttpMessageHandler
                         );
                     }
                 }
-                context
-                    .Features
+                context.Features
                     .Set<IHttpRequestBodyDetectionFeature>(
                         new RequestBodyDetectionFeature(canHaveBody)
                     );
@@ -221,8 +220,7 @@ public class ClientHandler : HttpMessageHandler
             {
                 foreach (var trailer in responseTrailersFeature.Trailers)
                 {
-                    bool success = response
-                        .TrailingHeaders
+                    bool success = response.TrailingHeaders
                         .TryAddWithoutValidation(trailer.Key, (IEnumerable<string>)trailer.Value);
                     Contract.Assert(success, "Bad trailer");
                 }
@@ -232,8 +230,7 @@ public class ClientHandler : HttpMessageHandler
         var httpContext = await contextBuilder.SendAsync(cancellationToken);
 
         response.StatusCode = (HttpStatusCode)httpContext.Response.StatusCode;
-        response.ReasonPhrase = httpContext
-            .Features
+        response.ReasonPhrase = httpContext.Features
             .GetRequiredFeature<IHttpResponseFeature>()
             .ReasonPhrase;
         response.RequestMessage = request;
@@ -244,13 +241,11 @@ public class ClientHandler : HttpMessageHandler
         foreach (var header in httpContext.Response.Headers)
         {
             if (
-                !response
-                    .Headers
+                !response.Headers
                     .TryAddWithoutValidation(header.Key, (IEnumerable<string>)header.Value)
             )
             {
-                bool success = response
-                    .Content
+                bool success = response.Content
                     .Headers
                     .TryAddWithoutValidation(header.Key, (IEnumerable<string>)header.Value);
                 Contract.Assert(success, "Bad header");

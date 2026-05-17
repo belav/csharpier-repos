@@ -536,8 +536,7 @@ namespace MonoTests.System.Web
         {
             Assert.AreEqual(
                 "http://127.0.0.1:8080/appDir/page.aspx?foo=bar",
-                Encoding
-                    .UTF8
+                Encoding.UTF8
                     .GetString(
                         HttpUtility.UrlDecodeToBytes(
                             "http://127.0.0.1:8080/appDir/page.aspx?foo=b%61r"
@@ -548,8 +547,7 @@ namespace MonoTests.System.Web
 
             Assert.AreEqual(
                 "http://127.0.0.1:8080/appDir/page.aspx?foo=b%ar",
-                Encoding
-                    .UTF8
+                Encoding.UTF8
                     .GetString(
                         HttpUtility.UrlDecodeToBytes(
                             "http://127.0.0.1:8080/appDir/page.aspx?foo=b%%61r"
@@ -560,8 +558,7 @@ namespace MonoTests.System.Web
 
             Assert.AreEqual(
                 "http://127.0.0.1:8080/app%Dir/page.aspx?foo=b%ar",
-                Encoding
-                    .UTF8
+                Encoding.UTF8
                     .GetString(
                         HttpUtility.UrlDecodeToBytes(
                             "http://127.0.0.1:8080/app%Dir/page.aspx?foo=b%%61r"
@@ -572,8 +569,7 @@ namespace MonoTests.System.Web
 
             Assert.AreEqual(
                 "http://127.0.0.1:8080/app%%Dir/page.aspx?foo=b%%r",
-                Encoding
-                    .UTF8
+                Encoding.UTF8
                     .GetString(
                         HttpUtility.UrlDecodeToBytes(
                             "http://127.0.0.1:8080/app%%Dir/page.aspx?foo=b%%r"
@@ -584,8 +580,7 @@ namespace MonoTests.System.Web
 
             Assert.AreEqual(
                 "http://127.0.0.1:8080/appDir/page.aspx?foo=ba%r",
-                Encoding
-                    .UTF8
+                Encoding.UTF8
                     .GetString(
                         HttpUtility.UrlDecodeToBytes(
                             "http://127.0.0.1:8080/appDir/page.aspx?foo=b%61%r"
@@ -596,8 +591,7 @@ namespace MonoTests.System.Web
 
             Assert.AreEqual(
                 "http://127.0.0.1:8080/appDir/page.aspx?foo=b%u0061r",
-                Encoding
-                    .UTF8
+                Encoding.UTF8
                     .GetString(
                         HttpUtility.UrlDecodeToBytes(
                             "http://127.0.0.1:8080/appDir/page.aspx?foo=b%u0061r"
@@ -608,8 +602,7 @@ namespace MonoTests.System.Web
 
             Assert.AreEqual(
                 "http://127.0.0.1:8080/appDir/page.aspx?foo=b%%u0061r",
-                Encoding
-                    .UTF8
+                Encoding.UTF8
                     .GetString(
                         HttpUtility.UrlDecodeToBytes(
                             "http://127.0.0.1:8080/appDir/page.aspx?foo=b%%u0061r"
@@ -620,8 +613,7 @@ namespace MonoTests.System.Web
 
             Assert.AreEqual(
                 "http://127.0.0.1:8080/appDir/page.aspx?foo=b%uu0061r",
-                Encoding
-                    .UTF8
+                Encoding.UTF8
                     .GetString(
                         HttpUtility.UrlDecodeToBytes(
                             "http://127.0.0.1:8080/appDir/page.aspx?foo=b%uu0061r"

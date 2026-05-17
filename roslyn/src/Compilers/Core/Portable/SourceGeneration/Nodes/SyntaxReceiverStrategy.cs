@@ -79,8 +79,7 @@ namespace Microsoft.CodeAnalysis
                     EntryState.Modified,
                     lastElapsedTime,
                     TrackIncrementalSteps
-                        ? System
-                            .Collections
+                        ? System.Collections
                             .Immutable
                             .ImmutableArray<(IncrementalGeneratorRunStep, int)>
                             .Empty

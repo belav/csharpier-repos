@@ -99,8 +99,7 @@
 
                 ModelBindingContext arrayBindingContext = new ModelBindingContext()
                 {
-                    ModelMetadata = ModelMetadataProviders
-                        .Current
+                    ModelMetadata = ModelMetadataProviders.Current
                         .GetMetadataForType(() => collection, listType),
                     ModelName = bindingContext.ModelName,
                     ModelState = bindingContext.ModelState,
@@ -141,8 +140,7 @@
 
                 ModelBindingContext dictionaryBindingContext = new ModelBindingContext()
                 {
-                    ModelMetadata = ModelMetadataProviders
-                        .Current
+                    ModelMetadata = ModelMetadataProviders.Current
                         .GetMetadataForType(() => model, modelType),
                     ModelName = bindingContext.ModelName,
                     ModelState = bindingContext.ModelState,
@@ -171,8 +169,7 @@
                 {
                     ModelBindingContext collectionBindingContext = new ModelBindingContext()
                     {
-                        ModelMetadata = ModelMetadataProviders
-                            .Current
+                        ModelMetadata = ModelMetadataProviders.Current
                             .GetMetadataForType(() => model, modelType),
                         ModelName = bindingContext.ModelName,
                         ModelState = bindingContext.ModelState,
@@ -238,8 +235,7 @@
                     controllerContext,
                     bindingContext
                 );
-                ValueProviderResult vpResult = bindingContext
-                    .UnvalidatedValueProvider
+                ValueProviderResult vpResult = bindingContext.UnvalidatedValueProvider
                     .GetValue(bindingContext.ModelName, skipValidation: !performRequestValidation);
                 if (vpResult != null)
                 {
@@ -345,8 +341,7 @@
 
                 // Convert FormatExceptions (type conversion failures) into InvalidValue messages
                 foreach (
-                    ModelError error in modelState
-                        .Errors
+                    ModelError error in modelState.Errors
                         .Where(err =>
                             String.IsNullOrEmpty(err.ErrorMessage) && err.Exception != null
                         )
@@ -531,8 +526,7 @@
 
             ModelBindingContext newBindingContext = new ModelBindingContext()
             {
-                ModelMetadata = ModelMetadataProviders
-                    .Current
+                ModelMetadata = ModelMetadataProviders.Current
                     .GetMetadataForType(() => model, bindingContext.ModelType),
                 ModelName = bindingContext.ModelName,
                 ModelState = bindingContext.ModelState,
@@ -702,8 +696,7 @@
             )
             {
                 result =
-                    controllerContext
-                        .HttpContext
+                    controllerContext.HttpContext
                         .GetGlobalResourceObject(
                             ResourceClassKey,
                             resourceName,
@@ -769,15 +762,13 @@
 
                 if (!startedValid.ContainsKey(subPropertyName))
                 {
-                    startedValid[subPropertyName] = bindingContext
-                        .ModelState
+                    startedValid[subPropertyName] = bindingContext.ModelState
                         .IsValidField(subPropertyName);
                 }
 
                 if (startedValid[subPropertyName])
                 {
-                    bindingContext
-                        .ModelState
+                    bindingContext.ModelState
                         .AddModelError(subPropertyName, validationResult.Message);
                 }
             }
@@ -844,8 +835,7 @@
             // methods, which are really the old-school validation hooks.
             if (value == null && bindingContext.ModelState.IsValidField(modelStateKey))
             {
-                ModelValidator requiredValidator = ModelValidatorProviders
-                    .Providers
+                ModelValidator requiredValidator = ModelValidatorProviders.Providers
                     .GetValidators(propertyMetadata, controllerContext)
                     .Where(v => v.IsRequired)
                     .FirstOrDefault();
@@ -857,8 +847,7 @@
                         )
                     )
                     {
-                        bindingContext
-                            .ModelState
+                        bindingContext.ModelState
                             .AddModelError(modelStateKey, validationResult.Message);
                     }
                 }
@@ -892,8 +881,7 @@
                 && bindingContext.ModelState.IsValidField(modelStateKey)
             )
             {
-                bindingContext
-                    .ModelState
+                bindingContext.ModelState
                     .AddModelError(modelStateKey, GetValueRequiredResource(controllerContext));
             }
         }
@@ -975,8 +963,7 @@
 
                 ModelBindingContext innerContext = new ModelBindingContext()
                 {
-                    ModelMetadata = ModelMetadataProviders
-                        .Current
+                    ModelMetadata = ModelMetadataProviders.Current
                         .GetMetadataForType(null, elementType),
                     ModelName = subIndexKey,
                     ModelState = bindingContext.ModelState,
@@ -1051,8 +1038,7 @@
                 // bind the key
                 ModelBindingContext keyBindingContext = new ModelBindingContext()
                 {
-                    ModelMetadata = ModelMetadataProviders
-                        .Current
+                    ModelMetadata = ModelMetadataProviders.Current
                         .GetMetadataForType(null, keyType),
                     ModelName = keyFieldKey,
                     ModelState = bindingContext.ModelState,
@@ -1077,8 +1063,7 @@
                 // bind the value
                 ModelBindingContext valueBindingContext = new ModelBindingContext()
                 {
-                    ModelMetadata = ModelMetadataProviders
-                        .Current
+                    ModelMetadata = ModelMetadataProviders.Current
                         .GetMetadataForType(null, valueType),
                     ModelName = valueFieldKey,
                     ModelState = bindingContext.ModelState,

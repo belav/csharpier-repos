@@ -63,8 +63,7 @@ public class SwitchStatementBenchmarks
 
         using var workspace = new AdhocWorkspace();
 
-        var solution = workspace
-            .CurrentSolution
+        var solution = workspace.CurrentSolution
             .AddProject(projectId, "ProjectName", "AssemblyName", LanguageNames.CSharp)
             .AddDocument(documentId, "DocumentName", CreateSourceFile(SwitchCount));
 

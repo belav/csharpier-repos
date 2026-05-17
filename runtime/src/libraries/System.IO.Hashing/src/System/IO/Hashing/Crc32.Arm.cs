@@ -22,8 +22,7 @@ namespace System.IO.Hashing
 
                 for (int i = 0; i < longLength; i += sizeof(ulong))
                 {
-                    crc = ArmCrc
-                        .Arm64
+                    crc = ArmCrc.Arm64
                         .ComputeCrc32(crc, Unsafe.ReadUnaligned<ulong>(ref Unsafe.Add(ref ptr, i)));
                 }
 

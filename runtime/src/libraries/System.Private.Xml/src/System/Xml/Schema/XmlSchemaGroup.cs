@@ -73,8 +73,7 @@ namespace System.Xml.Schema
 
         internal override XmlSchemaObject Clone()
         {
-            System
-                .Diagnostics
+            System.Diagnostics
                 .Debug
                 .Fail(
                     "Should never call Clone() on XmlSchemaGroup. Call Clone(XmlSchema) instead."

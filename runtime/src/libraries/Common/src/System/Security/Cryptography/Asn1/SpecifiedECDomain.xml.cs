@@ -126,14 +126,12 @@ namespace System.Security.Cryptography.Asn1
                 sequenceReader.ThrowIfNotEmpty();
             }
 
-            System
-                .Security
+            System.Security
                 .Cryptography
                 .Asn1
                 .FieldID
                 .Decode(ref sequenceReader, rebind, out decoded.FieldID);
-            System
-                .Security
+            System.Security
                 .Cryptography
                 .Asn1
                 .CurveAsn

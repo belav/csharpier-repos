@@ -42,8 +42,7 @@ namespace System.IO
                 using (DisableMediaInsertionPrompt.Create())
                 {
                     if (
-                        !Interop
-                            .Kernel32
+                        !Interop.Kernel32
                             .GetVolumeInformation(
                                 name,
                                 null,
@@ -82,8 +81,7 @@ namespace System.IO
                     // For a number of error codes (sharing violation, path not found, etc) we don't know if the problem was with
                     // the source or dest file.  Try reading the source file.
                     using (
-                        SafeFileHandle handle = Interop
-                            .Kernel32
+                        SafeFileHandle handle = Interop.Kernel32
                             .CreateFile(
                                 sourceFullPath,
                                 Interop.Kernel32.GenericOperations.GENERIC_READ,
@@ -121,8 +119,7 @@ namespace System.IO
             int flags = ignoreMetadataErrors ? Interop.Kernel32.REPLACEFILE_IGNORE_MERGE_ERRORS : 0;
 
             if (
-                !Interop
-                    .Kernel32
+                !Interop.Kernel32
                     .ReplaceFile(
                         destFullPath,
                         sourceFullPath,
@@ -204,8 +201,7 @@ namespace System.IO
         )
         {
             if (
-                !Interop
-                    .Kernel32
+                !Interop.Kernel32
                     .GetFileInformationByHandle(
                         fileHandle,
                         out Interop.Kernel32.BY_HANDLE_FILE_INFORMATION fileInformationData
@@ -298,8 +294,7 @@ namespace System.IO
                 dwFlagsAndAttributes |= Interop.Kernel32.FileOperations.FILE_FLAG_BACKUP_SEMANTICS;
             }
 
-            SafeFileHandle handle = Interop
-                .Kernel32
+            SafeFileHandle handle = Interop.Kernel32
                 .CreateFile(
                     fullPath,
                     Interop.Kernel32.FileOperations.FILE_WRITE_ATTRIBUTES,
@@ -362,8 +357,7 @@ namespace System.IO
             ref Interop.Kernel32.WIN32_FIND_DATA findData
         )
         {
-            using SafeFindHandle handle = Interop
-                .Kernel32
+            using SafeFindHandle handle = Interop.Kernel32
                 .FindFirstFile(Path.TrimEndingDirectorySeparator(fullPath), ref findData);
             if (handle.IsInvalid)
             {
@@ -403,8 +397,7 @@ namespace System.IO
             Exception? exception = null;
 
             using (
-                SafeFindHandle handle = Interop
-                    .Kernel32
+                SafeFindHandle handle = Interop.Kernel32
                     .FindFirstFile(Path.Join(fullPath, "*"), ref findData)
             )
             {
@@ -596,8 +589,7 @@ namespace System.IO
             };
 
             if (
-                !Interop
-                    .Kernel32
+                !Interop.Kernel32
                     .SetFileInformationByHandle(
                         fileHandle,
                         Interop.Kernel32.FileBasicInfo,
@@ -653,8 +645,7 @@ namespace System.IO
             };
 
             if (
-                !Interop
-                    .Kernel32
+                !Interop.Kernel32
                     .SetFileInformationByHandle(
                         fileHandle,
                         Interop.Kernel32.FileBasicInfo,
@@ -763,8 +754,7 @@ namespace System.IO
                 throw Win32Marshal.GetExceptionForWin32Error(error, linkPath);
             }
 
-            byte[] buffer = ArrayPool<byte>
-                .Shared
+            byte[] buffer = ArrayPool<byte>.Shared
                 .Rent(Interop.Kernel32.MAXIMUM_REPARSE_DATA_BUFFER_SIZE);
             try
             {
@@ -772,8 +762,7 @@ namespace System.IO
 
                 fixed (byte* pBuffer = buffer)
                 {
-                    success = Interop
-                        .Kernel32
+                    success = Interop.Kernel32
                         .DeviceIoControl(
                             handle,
                             dwIoControlCode: Interop.Kernel32.FSCTL_GET_REPARSE_POINT,
@@ -971,8 +960,7 @@ namespace System.IO
             {
                 fixed (char* bufPtr = buffer)
                 {
-                    return Interop
-                        .Kernel32
+                    return Interop.Kernel32
                         .GetFinalPathNameByHandle(
                             handle,
                             bufPtr,
@@ -1013,8 +1001,7 @@ namespace System.IO
 
         private static unsafe SafeFileHandle OpenSafeFileHandle(string path, int flags)
         {
-            SafeFileHandle handle = Interop
-                .Kernel32
+            SafeFileHandle handle = Interop.Kernel32
                 .CreateFile(
                     path,
                     dwDesiredAccess: 0,

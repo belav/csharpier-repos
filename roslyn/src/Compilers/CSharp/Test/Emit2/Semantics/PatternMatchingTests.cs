@@ -1289,8 +1289,7 @@ True"
 
             Assert.Equal(
                 "System.Int32",
-                ((ILocalSymbol)compilation.GetSemanticModel(tree).GetDeclaredSymbol(x1Decl[0]))
-                    .Type
+                ((ILocalSymbol)compilation.GetSemanticModel(tree).GetDeclaredSymbol(x1Decl[0])).Type
                     .ToTestDisplayString()
             );
 

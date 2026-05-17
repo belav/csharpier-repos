@@ -85,15 +85,13 @@ namespace System.Xml
         public void CopyTo(XmlDictionaryReaderQuotas quotas)
         {
             if (quotas == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("quotas"));
             if (quotas.readOnly)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -121,8 +119,7 @@ namespace System.Xml
             set
             {
                 if (readOnly)
-                    throw System
-                        .Runtime
+                    throw System.Runtime
                         .Serialization
                         .DiagnosticUtility
                         .ExceptionUtility
@@ -132,8 +129,7 @@ namespace System.Xml
                             )
                         );
                 if (value <= 0)
-                    throw System
-                        .Runtime
+                    throw System.Runtime
                         .Serialization
                         .DiagnosticUtility
                         .ExceptionUtility
@@ -153,8 +149,7 @@ namespace System.Xml
             set
             {
                 if (readOnly)
-                    throw System
-                        .Runtime
+                    throw System.Runtime
                         .Serialization
                         .DiagnosticUtility
                         .ExceptionUtility
@@ -164,8 +159,7 @@ namespace System.Xml
                             )
                         );
                 if (value <= 0)
-                    throw System
-                        .Runtime
+                    throw System.Runtime
                         .Serialization
                         .DiagnosticUtility
                         .ExceptionUtility
@@ -185,8 +179,7 @@ namespace System.Xml
             set
             {
                 if (readOnly)
-                    throw System
-                        .Runtime
+                    throw System.Runtime
                         .Serialization
                         .DiagnosticUtility
                         .ExceptionUtility
@@ -196,8 +189,7 @@ namespace System.Xml
                             )
                         );
                 if (value <= 0)
-                    throw System
-                        .Runtime
+                    throw System.Runtime
                         .Serialization
                         .DiagnosticUtility
                         .ExceptionUtility
@@ -217,8 +209,7 @@ namespace System.Xml
             set
             {
                 if (readOnly)
-                    throw System
-                        .Runtime
+                    throw System.Runtime
                         .Serialization
                         .DiagnosticUtility
                         .ExceptionUtility
@@ -228,8 +219,7 @@ namespace System.Xml
                             )
                         );
                 if (value <= 0)
-                    throw System
-                        .Runtime
+                    throw System.Runtime
                         .Serialization
                         .DiagnosticUtility
                         .ExceptionUtility
@@ -249,8 +239,7 @@ namespace System.Xml
             set
             {
                 if (readOnly)
-                    throw System
-                        .Runtime
+                    throw System.Runtime
                         .Serialization
                         .DiagnosticUtility
                         .ExceptionUtility
@@ -260,8 +249,7 @@ namespace System.Xml
                             )
                         );
                 if (value <= 0)
-                    throw System
-                        .Runtime
+                    throw System.Runtime
                         .Serialization
                         .DiagnosticUtility
                         .ExceptionUtility

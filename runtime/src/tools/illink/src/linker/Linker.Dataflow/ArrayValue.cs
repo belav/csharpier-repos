@@ -101,8 +101,7 @@ namespace ILLink.Shared.TrimAnalysis
                 }
 #endif
 
-                newValue
-                    .IndexValues
+                newValue.IndexValues
                     .Add(
                         kvp.Key,
                         new ValueBasicBlockPair(

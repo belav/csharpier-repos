@@ -115,12 +115,15 @@ namespace System.ServiceModel.Discovery.VersionCD1
             Fx.Assert(response != null, "The response message cannot be null.");
             if ((response.MessageSequence != null) && (response.ProbeMatches != null))
             {
-                this.responseReceiver.ProbeMatchOperation(
-                    OperationContext.Current.IncomingMessageHeaders.RelatesTo,
-                    response.MessageSequence.ToDiscoveryMessageSequence(),
-                    DiscoveryUtility.ToEndpointDiscoveryMetadataCollection(response.ProbeMatches),
-                    false
-                );
+                this.responseReceiver
+                    .ProbeMatchOperation(
+                        OperationContext.Current.IncomingMessageHeaders.RelatesTo,
+                        response.MessageSequence.ToDiscoveryMessageSequence(),
+                        DiscoveryUtility.ToEndpointDiscoveryMetadataCollection(
+                            response.ProbeMatches
+                        ),
+                        false
+                    );
             }
             else
             {
@@ -157,11 +160,12 @@ namespace System.ServiceModel.Discovery.VersionCD1
                 && (response.ResolveMatches.ResolveMatch != null)
             )
             {
-                this.responseReceiver.ResolveMatchOperation(
-                    OperationContext.Current.IncomingMessageHeaders.RelatesTo,
-                    response.MessageSequence.ToDiscoveryMessageSequence(),
-                    response.ResolveMatches.ResolveMatch.ToEndpointDiscoveryMetadata()
-                );
+                this.responseReceiver
+                    .ResolveMatchOperation(
+                        OperationContext.Current.IncomingMessageHeaders.RelatesTo,
+                        response.MessageSequence.ToDiscoveryMessageSequence(),
+                        response.ResolveMatches.ResolveMatch.ToEndpointDiscoveryMetadata()
+                    );
             }
             else
             {
@@ -193,11 +197,12 @@ namespace System.ServiceModel.Discovery.VersionCD1
             Fx.Assert(message != null, "The message cannot be null.");
             if ((message.MessageSequence != null) && (message.Hello != null))
             {
-                this.responseReceiver.HelloOperation(
-                    OperationContext.Current.IncomingMessageHeaders.RelatesTo,
-                    message.MessageSequence.ToDiscoveryMessageSequence(),
-                    message.Hello.ToEndpointDiscoveryMetadata()
-                );
+                this.responseReceiver
+                    .HelloOperation(
+                        OperationContext.Current.IncomingMessageHeaders.RelatesTo,
+                        message.MessageSequence.ToDiscoveryMessageSequence(),
+                        message.Hello.ToEndpointDiscoveryMetadata()
+                    );
             }
             else
             {

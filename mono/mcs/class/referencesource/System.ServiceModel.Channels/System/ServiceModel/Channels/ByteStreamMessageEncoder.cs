@@ -243,8 +243,7 @@ namespace System.ServiceModel.Channels
             }
             if (maxMessageSize < 0)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .ArgumentOutOfRange(
                         "maxMessageSize",
                         maxMessageSize,
@@ -253,8 +252,7 @@ namespace System.ServiceModel.Channels
             }
             if (messageOffset < 0)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .ArgumentOutOfRange(
                         "messageOffset",
                         messageOffset,

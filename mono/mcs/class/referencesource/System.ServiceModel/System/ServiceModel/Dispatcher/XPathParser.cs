@@ -466,11 +466,8 @@ namespace System.ServiceModel.Dispatcher
                     argTypes[i] = XPathXsltFunctionExpr.ConvertTypeToXslt(args[i].ReturnType);
                 }
                 string prefix = this.context.LookupPrefix(functionName.Namespace);
-                IXsltContextFunction xsltFun = this.context.ResolveFunction(
-                    prefix,
-                    functionName.Name,
-                    argTypes
-                );
+                IXsltContextFunction xsltFun = this.context
+                    .ResolveFunction(prefix, functionName.Name, argTypes);
                 if (xsltFun != null)
                 {
                     functionImpl = new XPathXsltFunctionExpr(this.context, xsltFun, args);
@@ -1077,8 +1074,7 @@ namespace System.ServiceModel.Dispatcher
 
         internal void ThrowError(QueryCompileError error)
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(new QueryCompileException(error, this.lexer.ConsumedSubstring()));
         }
 

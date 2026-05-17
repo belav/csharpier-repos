@@ -65,8 +65,7 @@ namespace System.Workflow.ComponentModel.Compiler
 
                     codeAddMethod.Name = "add_" + this.name;
                     codeAddMethod.ReturnType = new CodeTypeReference(typeof(void));
-                    codeAddMethod
-                        .Parameters
+                    codeAddMethod.Parameters
                         .Add(
                             new CodeParameterDeclarationExpression(
                                 this.codeDomEvent.Type,
@@ -100,8 +99,7 @@ namespace System.Workflow.ComponentModel.Compiler
 
                     codeRemoveMethod.Name = "remove_" + this.name;
                     codeRemoveMethod.ReturnType = new CodeTypeReference(typeof(void));
-                    codeRemoveMethod
-                        .Parameters
+                    codeRemoveMethod.Parameters
                         .Add(new CodeParameterDeclarationExpression(handlerType, "Handler"));
                     codeRemoveMethod.Attributes = this.memberAttributes;
                     this.removeMethod = new DesignTimeMethodInfo(

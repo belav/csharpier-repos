@@ -84,8 +84,7 @@ namespace System.Diagnostics
                 () => new ConcurrentDictionary<(string, string), PerformanceCounterLib>()
             );
 
-            return PerformanceCounterLib
-                .s_libraryTable
+            return PerformanceCounterLib.s_libraryTable
                 .GetOrAdd(
                     (machineName, lcidString),
                     (key) => new PerformanceCounterLib(key.machineName, key.lcidString)

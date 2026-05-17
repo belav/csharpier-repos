@@ -986,8 +986,7 @@ namespace System.Web.Security
                     //
                     // we set the username as the cn
                     //
-                    userEntry = containerEntry
-                        .Children
+                    userEntry = containerEntry.Children
                         .Add(GetEscapedRdn("CN=" + username), "user");
 
                     //
@@ -4569,8 +4568,7 @@ namespace System.Web.Security
 
             byte[] bAll = DecryptPassword(bEncryptedData);
 
-            return Encoding
-                .Unicode
+            return Encoding.Unicode
                 .GetString(bAll, AD_SALT_SIZE_IN_BYTES, bAll.Length - AD_SALT_SIZE_IN_BYTES);
         }
     }
@@ -5016,8 +5014,7 @@ namespace System.Web.Security
 
             try
             {
-                tempConnection.SessionOptions.ReferralChasing = System
-                    .DirectoryServices
+                tempConnection.SessionOptions.ReferralChasing = System.DirectoryServices
                     .Protocols
                     .ReferralChasingOptions
                     .None;

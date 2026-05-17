@@ -96,10 +96,11 @@ namespace System.Workflow.ComponentModel
         )
         {
             ActivityExecutionContext context = sender as ActivityExecutionContext;
-            e.Activity.UnregisterForStatusChange(
-                Activity.ClosedEvent,
-                (IActivityEventListener<ActivityExecutionStatusChangedEventArgs>)activity
-            );
+            e.Activity
+                .UnregisterForStatusChange(
+                    Activity.ClosedEvent,
+                    (IActivityEventListener<ActivityExecutionStatusChangedEventArgs>)activity
+                );
 
             if (
                 activity.ExecutionStatus == ActivityExecutionStatus.Canceling

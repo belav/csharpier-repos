@@ -140,15 +140,13 @@ public partial class ProblemDetailsServiceCollectionExtensionsTest
         Assert.NotNull(jsonOptions.Value);
         Assert.NotNull(jsonOptions.Value.SerializerOptions.TypeInfoResolver);
         Assert.NotNull(
-            jsonOptions
-                .Value
+            jsonOptions.Value
                 .SerializerOptions
                 .TypeInfoResolver
                 .GetTypeInfo(typeof(ProblemDetails), jsonOptions.Value.SerializerOptions)
         );
         Assert.NotNull(
-            jsonOptions
-                .Value
+            jsonOptions.Value
                 .SerializerOptions
                 .TypeInfoResolver
                 .GetTypeInfo(typeof(TypeA), jsonOptions.Value.SerializerOptions)
@@ -199,8 +197,7 @@ public partial class ProblemDetailsServiceCollectionExtensionsTest
         if (behavior == CustomContextBehavior.Prepend)
         {
             collection.ConfigureAll<JsonOptions>(options =>
-                options
-                    .SerializerOptions
+                options.SerializerOptions
                     .TypeInfoResolverChain
                     .Insert(0, TestExtensionsJsonContext.Default)
             );
@@ -208,8 +205,7 @@ public partial class ProblemDetailsServiceCollectionExtensionsTest
         else if (behavior == CustomContextBehavior.Append)
         {
             collection.ConfigureAll<JsonOptions>(options =>
-                options
-                    .SerializerOptions
+                options.SerializerOptions
                     .TypeInfoResolverChain
                     .Add(TestExtensionsJsonContext.Default)
             );
@@ -231,15 +227,13 @@ public partial class ProblemDetailsServiceCollectionExtensionsTest
         Assert.NotNull(jsonOptions.Value);
         Assert.NotNull(jsonOptions.Value.SerializerOptions.TypeInfoResolver);
         Assert.NotNull(
-            jsonOptions
-                .Value
+            jsonOptions.Value
                 .SerializerOptions
                 .TypeInfoResolver
                 .GetTypeInfo(typeof(ProblemDetails), jsonOptions.Value.SerializerOptions)
         );
         Assert.NotNull(
-            jsonOptions
-                .Value
+            jsonOptions.Value
                 .SerializerOptions
                 .TypeInfoResolver
                 .GetTypeInfo(typeof(TypeA), jsonOptions.Value.SerializerOptions)
@@ -266,8 +260,7 @@ public partial class ProblemDetailsServiceCollectionExtensionsTest
         Assert.NotNull(jsonOptions.Value);
         Assert.NotNull(jsonOptions.Value.SerializerOptions.TypeInfoResolver);
         Assert.NotNull(
-            jsonOptions
-                .Value
+            jsonOptions.Value
                 .SerializerOptions
                 .TypeInfoResolver
                 .GetTypeInfo(typeof(ProblemDetails), jsonOptions.Value.SerializerOptions)
@@ -297,15 +290,13 @@ public partial class ProblemDetailsServiceCollectionExtensionsTest
             jsonOptions.Value.SerializerOptions.TypeInfoResolver
         );
         Assert.NotNull(
-            jsonOptions
-                .Value
+            jsonOptions.Value
                 .SerializerOptions
                 .TypeInfoResolver
                 .GetTypeInfo(typeof(ProblemDetails), jsonOptions.Value.SerializerOptions)
         );
         Assert.NotNull(
-            jsonOptions
-                .Value
+            jsonOptions.Value
                 .SerializerOptions
                 .TypeInfoResolver
                 .GetTypeInfo(typeof(TypeA), jsonOptions.Value.SerializerOptions)

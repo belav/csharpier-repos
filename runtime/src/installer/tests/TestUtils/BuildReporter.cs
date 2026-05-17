@@ -12,8 +12,7 @@ namespace Microsoft.DotNet.Cli.Build.Framework
 
         public static void BeginSection(string type, string name)
         {
-            Reporter
-                .Output
+            Reporter.Output
                 .WriteLine(
                     $"[{type.PadRight(10)} >]".Green()
                         + $" [....] [{(DateTime.Now - _initialTime).ToString(TimeSpanFormat)}]".Blue()
@@ -23,8 +22,7 @@ namespace Microsoft.DotNet.Cli.Build.Framework
 
         public static void SectionComment(string type, string comment)
         {
-            Reporter
-                .Output
+            Reporter.Output
                 .WriteLine(
                     $"[{type.PadRight(10)} -]".Green()
                         + $" [....] [{(DateTime.Now - _initialTime).ToString(TimeSpanFormat)}]".Blue()
@@ -44,8 +42,7 @@ namespace Microsoft.DotNet.Cli.Build.Framework
                 header = header.Red();
             }
             var successString = success ? " OK " : "FAIL";
-            Reporter
-                .Output
+            Reporter.Output
                 .WriteLine(
                     header
                         + $" [{successString}] [{(DateTime.Now - _initialTime).ToString(TimeSpanFormat)}]".Blue()

@@ -40,8 +40,7 @@ namespace System.ServiceModel.Presentation
             var serviceType = typeof(WorkflowService);
             var advancedAttribute = new EditorBrowsableAttribute(EditorBrowsableState.Advanced);
             var categoryAttribute = new CategoryAttribute(
-                EditorCategoryTemplateDictionary
-                    .Instance
+                EditorCategoryTemplateDictionary.Instance
                     .GetCategoryTitle(MiscellaneousCategoryLabelKey)
             );
 

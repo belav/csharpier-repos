@@ -19,8 +19,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.EditorAdapter
     {
         private static Tuple<ITextSnapshot, SourceText> Create(params string[] lines)
         {
-            var exportProvider = EditorTestCompositions
-                .EditorFeatures
+            var exportProvider = EditorTestCompositions.EditorFeatures
                 .ExportProviderFactory
                 .CreateExportProvider();
             var buffer = EditorFactory.CreateBuffer(exportProvider, lines);

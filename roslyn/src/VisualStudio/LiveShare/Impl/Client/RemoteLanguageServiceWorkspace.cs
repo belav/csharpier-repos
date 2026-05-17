@@ -299,8 +299,7 @@ namespace Microsoft.VisualStudio.LanguageServices.LiveShare.Client
         /// </summary>
         public async Task RefreshAllFilesAsync()
         {
-            await _threadingContext
-                .JoinableTaskFactory
+            await _threadingContext.JoinableTaskFactory
                 .SwitchToMainThreadAsync(CancellationToken.None);
             var documents = _openTextBufferProvider.EnumerateDocumentSet();
             foreach (var (moniker, textBuffer, _) in documents)
@@ -398,8 +397,7 @@ namespace Microsoft.VisualStudio.LanguageServices.LiveShare.Client
 
         private Document AddDocumentToProject(string filePath, string language, string projectName)
         {
-            var project = CurrentSolution
-                .Projects
+            var project = CurrentSolution.Projects
                 .FirstOrDefault(p => p.Name == projectName && p.Language == language);
             if (project == null)
             {
@@ -495,8 +493,7 @@ namespace Microsoft.VisualStudio.LanguageServices.LiveShare.Client
                     return;
                 }
 
-                _threadingContext
-                    .JoinableTaskFactory
+                _threadingContext.JoinableTaskFactory
                     .Run(async () =>
                     {
 #pragma warning disable CS8604 // Possible null reference argument. (Can ConvertLocalPathToSharedUri return null here?)

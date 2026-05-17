@@ -163,8 +163,7 @@ namespace System.Security.Cryptography
                 }
 
                 using (
-                    SafeEvpPKeyCtxHandle ctx = Interop
-                        .Crypto
+                    SafeEvpPKeyCtxHandle ctx = Interop.Crypto
                         .EvpPKeyCtxCreate(ourKey, theirKey, out uint secretLengthU)
                 )
                 {

@@ -1829,8 +1829,7 @@ namespace System.Xml.Xsl.IlGen
                     );
                 else
                     _helper.LoadInteger(
-                        _helper
-                            .StaticData
+                        _helper.StaticData
                             .DeclarePrefixMappings(new QilNode[] { ndParsedTagName.Right })
                     );
 
@@ -4314,8 +4313,7 @@ namespace System.Xml.Xsl.IlGen
                     _helper.LoadXsltLibrary();
                 else
                     _helper.CallGetEarlyBoundObject(
-                        _helper
-                            .StaticData
+                        _helper.StaticData
                             .DeclareEarlyBound(ndName.NamespaceUri, extFunc.Method.DeclaringType!),
                         extFunc.Method.DeclaringType!
                     );

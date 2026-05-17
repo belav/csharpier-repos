@@ -384,12 +384,13 @@ namespace System.ServiceModel.Channels
             TimeoutHelper timeoutHelper = new TimeoutHelper(timeout);
             if (this.SessionMode)
             {
-                this.SessionClientSettings.Open(
-                    this,
-                    this.InnerChannelFactory,
-                    this.ChannelBuilder,
-                    timeoutHelper.RemainingTime()
-                );
+                this.SessionClientSettings
+                    .Open(
+                        this,
+                        this.InnerChannelFactory,
+                        this.ChannelBuilder,
+                        timeoutHelper.RemainingTime()
+                    );
             }
             else
             {
@@ -402,8 +403,7 @@ namespace System.ServiceModel.Channels
         {
             if (!this.SupportsDuplex)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(
@@ -419,8 +419,7 @@ namespace System.ServiceModel.Channels
         {
             if (this.securityProtocolFactory == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(SR.SecurityProtocolFactoryShouldBeSetBeforeThisOperation)
@@ -433,8 +432,7 @@ namespace System.ServiceModel.Channels
         {
             if (!this.SupportsRequestReply)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(
@@ -523,8 +521,8 @@ namespace System.ServiceModel.Channels
                 TimeoutHelper timeoutHelper = new TimeoutHelper(timeout);
                 EnableChannelBindingSupport();
 
-                SecurityProtocol securityProtocol =
-                    this.SecurityProtocolFactory.CreateSecurityProtocol(
+                SecurityProtocol securityProtocol = this.SecurityProtocolFactory
+                    .CreateSecurityProtocol(
                         this.to,
                         this.Via,
                         null,
@@ -545,8 +543,7 @@ namespace System.ServiceModel.Channels
                         != null
                 )
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new NotSupportedException(
                                 SR.GetString(
@@ -662,8 +659,7 @@ namespace System.ServiceModel.Channels
                     OpenAsyncResult self = result.AsyncState as OpenAsyncResult;
                     if (self == null)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new ArgumentException(SR.GetString(SR.InvalidAsyncResult), "result")
                             );
@@ -712,8 +708,7 @@ namespace System.ServiceModel.Channels
                 {
                     if (result == null)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(new ArgumentNullException("result"));
                     }
                     if (result.CompletedSynchronously)
@@ -723,8 +718,7 @@ namespace System.ServiceModel.Channels
                     OpenAsyncResult self = result.AsyncState as OpenAsyncResult;
                     if (self == null)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new ArgumentException(SR.GetString(SR.InvalidAsyncResult), "result")
                             );
@@ -798,10 +792,8 @@ namespace System.ServiceModel.Channels
                 ThrowIfFaulted();
                 ThrowIfDisposedOrNotOpen(message);
                 TimeoutHelper timeoutHelper = new TimeoutHelper(timeout);
-                this.SecurityProtocol.SecureOutgoingMessage(
-                    ref message,
-                    timeoutHelper.RemainingTime()
-                );
+                this.SecurityProtocol
+                    .SecureOutgoingMessage(ref message, timeoutHelper.RemainingTime());
                 this.InnerChannel.Send(message, timeoutHelper.RemainingTime());
             }
         }
@@ -909,11 +901,8 @@ namespace System.ServiceModel.Channels
                         Exception faultException = null;
                         try
                         {
-                            this.SecurityProtocol.VerifyIncomingMessage(
-                                ref reply,
-                                timeout,
-                                correlationState
-                            );
+                            this.SecurityProtocol
+                                .VerifyIncomingMessage(ref reply, timeout, correlationState);
                         }
                         catch (MessageSecurityException)
                         {
@@ -926,8 +915,7 @@ namespace System.ServiceModel.Channels
                         if (faultException != null)
                         {
                             this.Fault(faultException);
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperWarning(faultException);
                         }
                     }
@@ -940,12 +928,8 @@ namespace System.ServiceModel.Channels
                 ThrowIfFaulted();
                 ThrowIfDisposedOrNotOpen(message);
                 TimeoutHelper timeoutHelper = new TimeoutHelper(timeout);
-                SecurityProtocolCorrelationState correlationState =
-                    this.SecurityProtocol.SecureOutgoingMessage(
-                        ref message,
-                        timeoutHelper.RemainingTime(),
-                        null
-                    );
+                SecurityProtocolCorrelationState correlationState = this.SecurityProtocol
+                    .SecureOutgoingMessage(ref message, timeoutHelper.RemainingTime(), null);
                 Message reply = this.InnerChannel.Request(message, timeoutHelper.RemainingTime());
                 return ProcessReply(reply, correlationState, timeoutHelper.RemainingTime());
             }

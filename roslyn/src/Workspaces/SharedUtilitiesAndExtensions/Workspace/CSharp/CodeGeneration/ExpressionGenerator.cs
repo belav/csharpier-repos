@@ -48,8 +48,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                             SyntaxFactory.InitializerExpression(
                                 SyntaxKind.ArrayInitializerExpression,
                                 SyntaxFactory.SeparatedList(
-                                    typedConstant
-                                        .Values
+                                    typedConstant.Values
                                         .Select(v => GenerateExpression(generator, v))
                                 )
                             )
@@ -74,8 +73,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             {
                 if (type is INamedTypeSymbol { TypeKind: TypeKind.Enum } enumType)
                     return (ExpressionSyntax)
-                        CSharpFlagsEnumGenerator
-                            .Instance
+                        CSharpFlagsEnumGenerator.Instance
                             .CreateEnumConstantValue(generator, enumType, value);
 
                 if (type.IsNullable(out var underlyingType))

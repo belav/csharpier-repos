@@ -52,8 +52,7 @@ namespace System.Xml.XmlDocumentTests
             const string attributeUri = "existingUri";
             XmlDocument doc = CreateDocumentWithElement();
             XmlElement element = doc.DocumentElement;
-            XmlAttribute anotherAttr = element
-                .Attributes
+            XmlAttribute anotherAttr = element.Attributes
                 .Append(doc.CreateAttribute("anotherAttribute"));
             element.Attributes.Append(doc.CreateAttribute(attributeName, attributeUri));
             // assert on implicitly set preconditions

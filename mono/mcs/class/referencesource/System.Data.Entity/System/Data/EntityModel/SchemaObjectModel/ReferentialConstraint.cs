@@ -62,8 +62,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
                     AddError(
                         ErrorCode.SameRoleReferredInReferentialConstraint,
                         EdmSchemaErrorSeverity.Error,
-                        System
-                            .Data
+                        System.Data
                             .Entity
                             .Strings
                             .SameRoleReferredInReferentialConstraint(this.ParentElement.Name)
@@ -107,8 +106,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
                     AddError(
                         ErrorCode.InvalidPropertyInRelationshipConstraint,
                         EdmSchemaErrorSeverity.Error,
-                        System
-                            .Data
+                        System.Data
                             .Entity
                             .Strings
                             .InvalidFromPropertyInRelationshipConstraint(
@@ -153,8 +151,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
                         AddError(
                             ErrorCode.InvalidMultiplicityInRoleInRelationshipConstraint,
                             EdmSchemaErrorSeverity.Error,
-                            System
-                                .Data
+                            System.Data
                                 .Entity
                                 .Strings
                                 .InvalidMultiplicityFromRoleUpperBoundMustBeOne(
@@ -168,8 +165,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
                         && principalRoleEnd.Multiplicity == RelationshipMultiplicity.One
                     )
                     {
-                        string message = System
-                            .Data
+                        string message = System.Data
                             .Entity
                             .Strings
                             .InvalidMultiplicityFromRoleToPropertyNullableV1(
@@ -193,8 +189,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
                         string message;
                         if (v1Behavior)
                         {
-                            message = System
-                                .Data
+                            message = System.Data
                                 .Entity
                                 .Strings
                                 .InvalidMultiplicityFromRoleToPropertyNonNullableV1(
@@ -204,8 +199,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
                         }
                         else
                         {
-                            message = System
-                                .Data
+                            message = System.Data
                                 .Entity
                                 .Strings
                                 .InvalidMultiplicityFromRoleToPropertyNonNullableV2(
@@ -231,8 +225,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
                         AddError(
                             ErrorCode.InvalidMultiplicityInRoleInRelationshipConstraint,
                             EdmSchemaErrorSeverity.Error,
-                            System
-                                .Data
+                            System.Data
                                 .Entity
                                 .Strings
                                 .InvalidMultiplicityToRoleLowerBoundMustBeZero(
@@ -253,8 +246,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
                         AddError(
                             ErrorCode.InvalidPropertyInRelationshipConstraint,
                             EdmSchemaErrorSeverity.Error,
-                            System
-                                .Data
+                            System.Data
                                 .Entity
                                 .Strings
                                 .InvalidToPropertyInRelationshipConstraint(
@@ -274,8 +266,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
                             AddError(
                                 ErrorCode.InvalidMultiplicityInRoleInRelationshipConstraint,
                                 EdmSchemaErrorSeverity.Error,
-                                System
-                                    .Data
+                                System.Data
                                     .Entity
                                     .Strings
                                     .InvalidMultiplicityToRoleUpperBoundMustBeOne(
@@ -292,8 +283,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
                         AddError(
                             ErrorCode.InvalidMultiplicityInRoleInRelationshipConstraint,
                             EdmSchemaErrorSeverity.Error,
-                            System
-                                .Data
+                            System.Data
                                 .Entity
                                 .Strings
                                 .InvalidMultiplicityToRoleUpperBoundMustBeMany(
@@ -308,8 +298,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
                         AddError(
                             ErrorCode.MismatchNumberOfPropertiesInRelationshipConstraint,
                             EdmSchemaErrorSeverity.Error,
-                            System
-                                .Data
+                            System.Data
                                 .Entity
                                 .Strings
                                 .MismatchNumberOfPropertiesinRelationshipConstraint
@@ -327,8 +316,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
                                 AddError(
                                     ErrorCode.TypeMismatchRelationshipConstaint,
                                     EdmSchemaErrorSeverity.Error,
-                                    System
-                                        .Data
+                                    System.Data
                                         .Entity
                                         .Strings
                                         .TypeMismatchRelationshipConstaint(

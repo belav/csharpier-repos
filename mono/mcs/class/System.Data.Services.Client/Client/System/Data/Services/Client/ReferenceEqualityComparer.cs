@@ -62,8 +62,7 @@ namespace System.Data.Services.Client
                 if (nonGenericInstance == null)
                 {
                     ReferenceEqualityComparer comparer = new ReferenceEqualityComparer();
-                    System
-                        .Threading
+                    System.Threading
                         .Interlocked
                         .CompareExchange(ref nonGenericInstance, comparer, null);
                 }

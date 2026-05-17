@@ -197,8 +197,7 @@ public class InMemoryQueryableMethodTranslatingExpressionVisitor
         inMemoryQueryExpression.UpdateServerQueryExpression(
             Expression.Not(
                 Expression.Call(
-                    EnumerableMethods
-                        .AnyWithoutPredicate
+                    EnumerableMethods.AnyWithoutPredicate
                         .MakeGenericMethod(inMemoryQueryExpression.CurrentParameter.Type),
                     inMemoryQueryExpression.ServerQueryExpression
                 )
@@ -243,8 +242,7 @@ public class InMemoryQueryableMethodTranslatingExpressionVisitor
 
         inMemoryQueryExpression.UpdateServerQueryExpression(
             Expression.Call(
-                EnumerableMethods
-                    .AnyWithoutPredicate
+                EnumerableMethods.AnyWithoutPredicate
                     .MakeGenericMethod(inMemoryQueryExpression.CurrentParameter.Type),
                 inMemoryQueryExpression.ServerQueryExpression
             )
@@ -345,8 +343,7 @@ public class InMemoryQueryableMethodTranslatingExpressionVisitor
 
         inMemoryQueryExpression.UpdateServerQueryExpression(
             Expression.Call(
-                EnumerableMethods
-                    .CountWithoutPredicate
+                EnumerableMethods.CountWithoutPredicate
                     .MakeGenericMethod(inMemoryQueryExpression.CurrentParameter.Type),
                 inMemoryQueryExpression.ServerQueryExpression
             )
@@ -867,8 +864,7 @@ public class InMemoryQueryableMethodTranslatingExpressionVisitor
 
         inMemoryQueryExpression.UpdateServerQueryExpression(
             Expression.Call(
-                EnumerableMethods
-                    .LongCountWithoutPredicate
+                EnumerableMethods.LongCountWithoutPredicate
                     .MakeGenericMethod(inMemoryQueryExpression.CurrentParameter.Type),
                 inMemoryQueryExpression.ServerQueryExpression
             )
@@ -1023,8 +1019,7 @@ public class InMemoryQueryableMethodTranslatingExpressionVisitor
 
         inMemoryQueryExpression.UpdateServerQueryExpression(
             Expression.Call(
-                EnumerableMethods
-                    .Reverse
+                EnumerableMethods.Reverse
                     .MakeGenericMethod(inMemoryQueryExpression.CurrentParameter.Type),
                 inMemoryQueryExpression.ServerQueryExpression
             )
@@ -1187,8 +1182,7 @@ public class InMemoryQueryableMethodTranslatingExpressionVisitor
 
         inMemoryQueryExpression.UpdateServerQueryExpression(
             Expression.Call(
-                EnumerableMethods
-                    .Skip
+                EnumerableMethods.Skip
                     .MakeGenericMethod(inMemoryQueryExpression.CurrentParameter.Type),
                 inMemoryQueryExpression.ServerQueryExpression,
                 count
@@ -1243,8 +1237,7 @@ public class InMemoryQueryableMethodTranslatingExpressionVisitor
 
         inMemoryQueryExpression.UpdateServerQueryExpression(
             Expression.Call(
-                EnumerableMethods
-                    .Take
+                EnumerableMethods.Take
                     .MakeGenericMethod(inMemoryQueryExpression.CurrentParameter.Type),
                 inMemoryQueryExpression.ServerQueryExpression,
                 count
@@ -1335,8 +1328,7 @@ public class InMemoryQueryableMethodTranslatingExpressionVisitor
 
         inMemoryQueryExpression.UpdateServerQueryExpression(
             Expression.Call(
-                EnumerableMethods
-                    .Where
+                EnumerableMethods.Where
                     .MakeGenericMethod(inMemoryQueryExpression.CurrentParameter.Type),
                 inMemoryQueryExpression.ServerQueryExpression,
                 predicate
@@ -1522,8 +1514,7 @@ public class InMemoryQueryableMethodTranslatingExpressionVisitor
                 var innerQueryExpression = (InMemoryQueryExpression)
                     innerShapedQuery.QueryExpression;
 
-                var makeNullable = foreignKey
-                    .PrincipalKey
+                var makeNullable = foreignKey.PrincipalKey
                     .Properties
                     .Concat(foreignKey.Properties)
                     .Select(p => p.ClrType)
@@ -1535,8 +1526,7 @@ public class InMemoryQueryableMethodTranslatingExpressionVisitor
                         : foreignKey.PrincipalKey.Properties,
                     makeNullable
                 );
-                var innerKey = innerShapedQuery
-                    .ShaperExpression
+                var innerKey = innerShapedQuery.ShaperExpression
                     .CreateKeyValuesExpression(
                         navigation.IsOnDependent
                             ? foreignKey.PrincipalKey.Properties
@@ -1549,8 +1539,7 @@ public class InMemoryQueryableMethodTranslatingExpressionVisitor
                 var predicate = makeNullable
                     ? Expression.AndAlso(
                         outerKey is NewArrayExpression newArrayExpression
-                            ? newArrayExpression
-                                .Expressions
+                            ? newArrayExpression.Expressions
                                 .Select(e =>
                                 {
                                     var left = (e as UnaryExpression)?.Operand ?? e;
@@ -1572,8 +1561,7 @@ public class InMemoryQueryableMethodTranslatingExpressionVisitor
                 var correlationPredicate = _expressionTranslator.Translate(predicate)!;
                 innerQueryExpression.UpdateServerQueryExpression(
                     Expression.Call(
-                        EnumerableMethods
-                            .Where
+                        EnumerableMethods.Where
                             .MakeGenericMethod(innerQueryExpression.CurrentParameter.Type),
                         innerQueryExpression.ServerQueryExpression,
                         Expression.Lambda(
@@ -1598,8 +1586,7 @@ public class InMemoryQueryableMethodTranslatingExpressionVisitor
                 var innerQueryExpression = (InMemoryQueryExpression)
                     innerShapedQuery.QueryExpression;
 
-                var makeNullable = foreignKey
-                    .PrincipalKey
+                var makeNullable = foreignKey.PrincipalKey
                     .Properties
                     .Concat(foreignKey.Properties)
                     .Select(p => p.ClrType)
@@ -1611,8 +1598,7 @@ public class InMemoryQueryableMethodTranslatingExpressionVisitor
                         : foreignKey.PrincipalKey.Properties,
                     makeNullable
                 );
-                var innerKey = innerShapedQuery
-                    .ShaperExpression
+                var innerKey = innerShapedQuery.ShaperExpression
                     .CreateKeyValuesExpression(
                         navigation.IsOnDependent
                             ? foreignKey.PrincipalKey.Properties

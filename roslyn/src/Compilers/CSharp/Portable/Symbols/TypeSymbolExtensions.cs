@@ -459,8 +459,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 case TypeKind.TypeParameter:
                 {
                     var typeParameter = (TypeParameterSymbol)type;
-                    return typeParameter
-                        .EffectiveBaseClassNoUseSiteDiagnostics
+                    return typeParameter.EffectiveBaseClassNoUseSiteDiagnostics
                         .AllInterfacesNoUseSiteDiagnostics
                         .Concat(typeParameter.AllEffectiveInterfacesNoUseSiteDiagnostics);
                 }
@@ -1775,8 +1774,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     return true;
 
                 case TypeKind.Enum:
-                    return ((NamedTypeSymbol)type)
-                        .EnumUnderlyingType
+                    return ((NamedTypeSymbol)type).EnumUnderlyingType
                         .SpecialType
                         .IsValidVolatileFieldType();
 

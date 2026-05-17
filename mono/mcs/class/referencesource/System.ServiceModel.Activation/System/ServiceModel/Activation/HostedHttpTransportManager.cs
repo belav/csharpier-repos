@@ -190,8 +190,7 @@ namespace System.ServiceModel.Activation
                             SR.TraceCodeHttpChannelMessageReceiveFailed,
                             new StringTraceRecord(
                                 "IsRecycling",
-                                ServiceHostingEnvironment
-                                    .IsRecycling
+                                ServiceHostingEnvironment.IsRecycling
                                     .ToString(CultureInfo.CurrentCulture)
                             ),
                             this,
@@ -201,8 +200,7 @@ namespace System.ServiceModel.Activation
 
                     if (ServiceHostingEnvironment.IsRecycling)
                     {
-                        throw FxTrace
-                            .Exception
+                        throw FxTrace.Exception
                             .AsError(
                                 new EndpointNotFoundException(
                                     SR.Hosting_ListenerNotFoundForActivationInRecycling(
@@ -213,8 +211,7 @@ namespace System.ServiceModel.Activation
                     }
                     else
                     {
-                        throw FxTrace
-                            .Exception
+                        throw FxTrace.Exception
                             .AsError(
                                 new EndpointNotFoundException(
                                     SR.Hosting_ListenerNotFoundForActivation(

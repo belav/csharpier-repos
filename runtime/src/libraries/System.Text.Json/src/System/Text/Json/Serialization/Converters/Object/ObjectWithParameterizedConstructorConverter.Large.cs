@@ -24,8 +24,7 @@ namespace System.Text.Json.Serialization.Converters
         {
             Debug.Assert(jsonParameterInfo.ShouldDeserialize);
 
-            bool success = jsonParameterInfo
-                .EffectiveConverter
+            bool success = jsonParameterInfo.EffectiveConverter
                 .TryReadAsObject(
                     ref reader,
                     jsonParameterInfo.ParameterType,

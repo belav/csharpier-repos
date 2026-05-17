@@ -45,8 +45,7 @@ public static class IdentityApiEndpointRouteBuilderExtensions
         ArgumentNullException.ThrowIfNull(endpoints);
 
         var timeProvider = endpoints.ServiceProvider.GetRequiredService<TimeProvider>();
-        var bearerTokenOptions = endpoints
-            .ServiceProvider
+        var bearerTokenOptions = endpoints.ServiceProvider
             .GetRequiredService<IOptionsMonitor<BearerTokenOptions>>();
         var emailSender = endpoints.ServiceProvider.GetRequiredService<IEmailSender<TUser>>();
         var linkGenerator = endpoints.ServiceProvider.GetRequiredService<LinkGenerator>();
@@ -321,8 +320,7 @@ public static class IdentityApiEndpointRouteBuilderExtensions
                 IdentityResult result;
                 try
                 {
-                    var code = Encoding
-                        .UTF8
+                    var code = Encoding.UTF8
                         .GetString(WebEncoders.Base64UrlDecode(resetRequest.ResetCode));
                     result = await userManager.ResetPasswordAsync(
                         user,

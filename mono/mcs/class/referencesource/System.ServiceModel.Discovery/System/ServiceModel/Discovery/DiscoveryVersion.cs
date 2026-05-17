@@ -158,8 +158,7 @@ namespace System.ServiceModel.Discovery
                 return WSDiscoveryApril2005;
             }
 
-            throw FxTrace
-                .Exception
+            throw FxTrace.Exception
                 .AsError(
                     new ArgumentOutOfRangeException(
                         SR2.DiscoveryIncorrectVersion(

@@ -32,8 +32,7 @@ namespace System.ServiceModel.Description
         {
             if (name == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("name", SR.GetString(SR.SFxParameterNameCannotBeNull));
             }
 
@@ -122,8 +121,7 @@ namespace System.ServiceModel.Description
             set
             {
                 if (!ProtectionLevelHelper.IsDefined(value))
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new ArgumentOutOfRangeException("value"));
                 this.protectionLevel = value;
                 this.hasProtectionLevel = true;

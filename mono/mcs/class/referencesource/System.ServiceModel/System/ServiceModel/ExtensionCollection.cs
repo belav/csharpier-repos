@@ -113,8 +113,7 @@ namespace System.ServiceModel
 
         protected override void SetItem(int index, IExtension<T> item)
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(
                     new InvalidOperationException(SR.GetString(SR.SFxCannotSetExtensionsByIndex))
                 );

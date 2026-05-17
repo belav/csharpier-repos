@@ -60,8 +60,7 @@ namespace System.Net.Http
             if (IsMimeMultipartContent(content))
             {
                 if (
-                    content
-                        .Headers
+                    content.Headers
                         .ContentType
                         .MediaType
                         .Equals("multipart/" + subtype, StringComparison.OrdinalIgnoreCase)
@@ -253,8 +252,7 @@ namespace System.Net.Http
                 int bytesRead;
                 try
                 {
-                    bytesRead = await context
-                        .ContentStream
+                    bytesRead = await context.ContentStream
                         .ReadAsync(context.Data, 0, context.Data.Length, cancellationToken);
                 }
                 catch (Exception e)
@@ -262,8 +260,7 @@ namespace System.Net.Http
                     throw new IOException(Properties.Resources.ReadAsMimeMultipartErrorReading, e);
                 }
 
-                IEnumerable<MimeBodyPart> parts = context
-                    .MimeParser
+                IEnumerable<MimeBodyPart> parts = context.MimeParser
                     .ParseBuffer(context.Data, bytesRead);
 
                 foreach (MimeBodyPart part in parts)

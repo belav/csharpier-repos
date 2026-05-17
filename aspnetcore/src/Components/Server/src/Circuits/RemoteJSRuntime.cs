@@ -48,8 +48,7 @@ internal partial class RemoteJSRuntime : JSRuntime
         _logger = logger;
         DefaultAsyncTimeout = _options.JSInteropDefaultCallTimeout;
         ElementReferenceContext = new WebElementReferenceContext(this);
-        JsonSerializerOptions
-            .Converters
+        JsonSerializerOptions.Converters
             .Add(new ElementReferenceJsonConverter(ElementReferenceContext));
     }
 

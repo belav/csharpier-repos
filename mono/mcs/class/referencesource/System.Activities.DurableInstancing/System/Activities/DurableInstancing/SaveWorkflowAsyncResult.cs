@@ -60,8 +60,7 @@ namespace System.Activities.DurableInstancing
         {
             if (((SaveWorkflowCommand)command).InstanceKeyMetadataChanges.Count > 0)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new InstancePersistenceCommandException(
                             SR.InstanceKeyMetadataChangesNotSupported
@@ -301,9 +300,8 @@ namespace System.Activities.DurableInstancing
 
                     if (saveWorkflowCommand.InstanceData.Count > 0)
                     {
-                        base.InstancePersistenceContext.PersistedInstance(
-                            saveWorkflowCommand.InstanceData
-                        );
+                        base.InstancePersistenceContext
+                            .PersistedInstance(saveWorkflowCommand.InstanceData);
                     }
 
                     SaveWorkflowAsyncResult.UpdateKeyData(
@@ -318,10 +316,8 @@ namespace System.Activities.DurableInstancing
                         > property in saveWorkflowCommand.InstanceMetadataChanges
                     )
                     {
-                        base.InstancePersistenceContext.WroteInstanceMetadataValue(
-                            property.Key,
-                            property.Value
-                        );
+                        base.InstancePersistenceContext
+                            .WroteInstanceMetadataValue(property.Key, property.Value);
                     }
 
                     if (saveWorkflowCommand.CompleteInstance)
@@ -386,8 +382,7 @@ namespace System.Activities.DurableInstancing
             InstanceValue binaryBlockingBookmarks;
 
             if (
-                saveWorkflowCommand
-                    .InstanceData
+                saveWorkflowCommand.InstanceData
                     .TryGetValue(
                         SqlWorkflowInstanceStoreConstants.BinaryBlockingBookmarksPropertyName,
                         out binaryBlockingBookmarks
@@ -423,8 +418,7 @@ namespace System.Activities.DurableInstancing
             InstanceValue executionStatusProperty;
 
             if (
-                saveWorkflowCommand
-                    .InstanceData
+                saveWorkflowCommand.InstanceData
                     .TryGetValue(
                         SqlWorkflowInstanceStoreConstants.StatusPropertyName,
                         out executionStatusProperty
@@ -442,8 +436,7 @@ namespace System.Activities.DurableInstancing
             InstanceValue pendingTimerExpirationPropertyValue;
 
             if (
-                saveWorkflowCommand
-                    .InstanceData
+                saveWorkflowCommand.InstanceData
                     .TryGetValue(
                         SqlWorkflowInstanceStoreConstants.PendingTimerExpirationPropertyName,
                         out pendingTimerExpirationPropertyValue
@@ -511,8 +504,7 @@ namespace System.Activities.DurableInstancing
         {
             InstanceValue instanceValue;
             if (
-                saveWorkflowCommand
-                    .InstanceMetadataChanges
+                saveWorkflowCommand.InstanceMetadataChanges
                     .TryGetValue(WorkflowNamespace.WorkflowHostType, out instanceValue)
             )
             {
@@ -520,8 +512,7 @@ namespace System.Activities.DurableInstancing
 
                 if (workflowHostType == null)
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(
                             new InstancePersistenceCommandException(
                                 SR.InvalidMetadataValue(
@@ -531,8 +522,7 @@ namespace System.Activities.DurableInstancing
                             )
                         );
                 }
-                byte[] workflowHostTypeBuffer = Encoding
-                    .Unicode
+                byte[] workflowHostTypeBuffer = Encoding.Unicode
                     .GetBytes(((XName)instanceValue.Value).ToString());
                 return new Guid(HashHelper.ComputeHash(workflowHostTypeBuffer));
             }
@@ -544,8 +534,7 @@ namespace System.Activities.DurableInstancing
             InstanceValue statusPropertyValue;
 
             if (
-                saveWorkflowCommand
-                    .InstanceData
+                saveWorkflowCommand.InstanceData
                     .TryGetValue(
                         SqlWorkflowInstanceStoreConstants.StatusPropertyName,
                         out statusPropertyValue
@@ -665,16 +654,14 @@ namespace System.Activities.DurableInstancing
             string relativeServicePath = null;
 
             if (
-                saveWorkflowCommand
-                    .InstanceMetadataChanges
+                saveWorkflowCommand.InstanceMetadataChanges
                     .TryGetValue(PersistenceMetadataNamespace.ActivationType, out instanceValue)
             )
             {
                 if (PersistenceMetadataNamespace.ActivationTypes.WAS.Equals(instanceValue.Value))
                 {
                     if (
-                        saveWorkflowCommand
-                            .InstanceMetadataChanges
+                        saveWorkflowCommand.InstanceMetadataChanges
                             .TryGetValue(WorkflowServiceNamespace.Service, out instanceValue)
                     )
                     {
@@ -682,16 +669,14 @@ namespace System.Activities.DurableInstancing
                         serviceNamespace = ((XName)instanceValue.Value).Namespace.NamespaceName;
                     }
                     if (
-                        saveWorkflowCommand
-                            .InstanceMetadataChanges
+                        saveWorkflowCommand.InstanceMetadataChanges
                             .TryGetValue(WorkflowServiceNamespace.SiteName, out instanceValue)
                     )
                     {
                         site = (string)instanceValue.Value;
                     }
                     if (
-                        saveWorkflowCommand
-                            .InstanceMetadataChanges
+                        saveWorkflowCommand.InstanceMetadataChanges
                             .TryGetValue(
                                 WorkflowServiceNamespace.RelativeApplicationPath,
                                 out instanceValue
@@ -701,8 +686,7 @@ namespace System.Activities.DurableInstancing
                         relativeApplicationPath = (string)instanceValue.Value;
                     }
                     if (
-                        saveWorkflowCommand
-                            .InstanceMetadataChanges
+                        saveWorkflowCommand.InstanceMetadataChanges
                             .TryGetValue(
                                 WorkflowServiceNamespace.RelativeServicePath,
                                 out instanceValue
@@ -712,8 +696,7 @@ namespace System.Activities.DurableInstancing
                         relativeServicePath = (string)instanceValue.Value;
                     }
 
-                    byte[] serviceDeploymentHashBuffer = Encoding
-                        .Unicode
+                    byte[] serviceDeploymentHashBuffer = Encoding.Unicode
                         .GetBytes(
                             string.Format(
                                 CultureInfo.InvariantCulture,
@@ -734,8 +717,7 @@ namespace System.Activities.DurableInstancing
                 }
                 else
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(
                             new InstancePersistenceCommandException(SR.NonWASActivationNotSupported)
                         );
@@ -830,8 +812,7 @@ namespace System.Activities.DurableInstancing
             try
             {
                 SaveWorkflowAsyncResult.serviceDeploymentIdsCacheLock.EnterReadLock();
-                SaveWorkflowAsyncResult
-                    .serviceDeploymentIdsCache
+                SaveWorkflowAsyncResult.serviceDeploymentIdsCache
                     .TryGetValue(this.serviceDeploymentHash, out this.serviceDeploymentId);
             }
             finally
@@ -1145,10 +1126,8 @@ namespace System.Activities.DurableInstancing
             int promotionNumber = 0;
 
             foreach (
-                KeyValuePair<
-                    string,
-                    Tuple<List<XName>, List<XName>>
-                > promotion in base.Store.Promotions
+                KeyValuePair<string, Tuple<List<XName>, List<XName>>> promotion in base.Store
+                    .Promotions
             )
             {
                 StringBuilder storedProcInvocationBuilder = new StringBuilder(
@@ -1192,8 +1171,7 @@ namespace System.Activities.DurableInstancing
                             )
                         )
                         {
-                            throw FxTrace
-                                .Exception
+                            throw FxTrace.Exception
                                 .AsError(
                                     new InstancePersistenceException(
                                         SR.CannotPromoteAsSqlVariant(

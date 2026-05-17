@@ -249,8 +249,7 @@ namespace Microsoft.CodeAnalysis.CSharp.EncapsulateField
         }
 
         private static bool IsNew(IFieldSymbol field) =>
-            field
-                .DeclaringSyntaxReferences
+            field.DeclaringSyntaxReferences
                 .Any(static d =>
                     d.GetSyntax()
                         .GetAncestor<FieldDeclarationSyntax>()
@@ -276,8 +275,7 @@ namespace Microsoft.CodeAnalysis.CSharp.EncapsulateField
         internal override IEnumerable<SyntaxNode> GetConstructorNodes(
             INamedTypeSymbol containingType
         ) =>
-            containingType
-                .Constructors
+            containingType.Constructors
                 .SelectMany(c => c.DeclaringSyntaxReferences.Select(d => d.GetSyntax()));
     }
 }

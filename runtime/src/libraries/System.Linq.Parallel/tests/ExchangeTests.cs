@@ -257,8 +257,7 @@ namespace System.Linq.Parallel.Tests
             };
             Assert.Equal(
                 0,
-                labeled
-                    .Item
+                labeled.Item
                     .WithDegreeOfParallelism(count - 1)
                     .WithMergeOptions(options)
                     .Select(down)

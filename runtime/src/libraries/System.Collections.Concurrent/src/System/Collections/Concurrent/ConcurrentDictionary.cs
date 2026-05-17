@@ -495,8 +495,7 @@ namespace System.Collections.Concurrent
                             {
                                 if (matchValue)
                                 {
-                                    bool valuesMatch = EqualityComparer<TValue>
-                                        .Default
+                                    bool valuesMatch = EqualityComparer<TValue>.Default
                                         .Equals(oldValue, curr._value);
                                     if (!valuesMatch)
                                     {
@@ -2281,8 +2280,7 @@ namespace System.Collections.Concurrent
         {
             if (CDSCollectionETWBCLProvider.Log.IsEnabled())
             {
-                CDSCollectionETWBCLProvider
-                    .Log
+                CDSCollectionETWBCLProvider.Log
                     .ConcurrentDictionary_AcquiringAllLocks(_tables._buckets.Length);
             }
 

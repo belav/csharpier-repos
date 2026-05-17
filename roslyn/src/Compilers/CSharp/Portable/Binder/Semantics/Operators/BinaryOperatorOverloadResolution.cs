@@ -534,8 +534,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     case BinaryOperatorKind.Equal:
                     case BinaryOperatorKind.NotEqual:
-                        TypeSymbol systemDelegateType = _binder
-                            .Compilation
+                        TypeSymbol systemDelegateType = _binder.Compilation
                             .GetSpecialType(SpecialType.System_Delegate);
                         systemDelegateType.AddUseSiteInfo(ref useSiteInfo);
 

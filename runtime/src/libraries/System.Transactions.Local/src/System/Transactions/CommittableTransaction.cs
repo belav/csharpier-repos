@@ -70,8 +70,7 @@ namespace System.Transactions
                 Debug.Assert(_internalTransaction.State != null);
                 // this.complete will get set to true when the transaction enters a state that is
                 // beyond Phase0.
-                _internalTransaction
-                    .State
+                _internalTransaction.State
                     .BeginCommit(_internalTransaction, true, asyncCallback, asyncState);
             }
 

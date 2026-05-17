@@ -22,8 +22,7 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
                 provider,
                 isRootScope: true
             );
-            serviceProviderEngineScope
-                .ResolvedServices
+            serviceProviderEngineScope.ResolvedServices
                 .Add(
                     new ServiceCacheKey(ServiceIdentifier.FromServiceType(typeof(IFakeService)), 0),
                     null

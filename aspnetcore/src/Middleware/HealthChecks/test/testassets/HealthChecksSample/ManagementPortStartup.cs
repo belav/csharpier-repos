@@ -38,8 +38,7 @@ public class ManagementPortStartup
         app.Run(
             async (context) =>
             {
-                await context
-                    .Response
+                await context.Response
                     .WriteAsync(
                         $"Go to http://localhost:{Configuration["ManagementPort"]}/health to see the health status"
                     );

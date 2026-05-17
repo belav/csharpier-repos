@@ -1208,10 +1208,11 @@ public class AddressRegistrationTests : TestApplicationErrorLoggerLoggedTest
                         LogMessages.Count(log =>
                             log.LogLevel == LogLevel.Critical
                             && log.Exception is null
-                            && log.Message.EndsWith(
-                                CoreStrings.FormatEndpointAlreadyInUse(thisAddressString),
-                                StringComparison.Ordinal
-                            )
+                            && log.Message
+                                .EndsWith(
+                                    CoreStrings.FormatEndpointAlreadyInUse(thisAddressString),
+                                    StringComparison.Ordinal
+                                )
                         )
                     );
                     break;

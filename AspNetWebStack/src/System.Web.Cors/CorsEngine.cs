@@ -112,8 +112,7 @@ namespace System.Web.Cors
             }
             else
             {
-                result
-                    .ErrorMessages
+                result.ErrorMessages
                     .Add(
                         String.Format(
                             CultureInfo.CurrentCulture,
@@ -168,8 +167,7 @@ namespace System.Web.Cors
             }
             else
             {
-                result
-                    .ErrorMessages
+                result.ErrorMessages
                     .Add(
                         String.Format(
                             CultureInfo.CurrentCulture,
@@ -234,8 +232,7 @@ namespace System.Web.Cors
                 }
                 else
                 {
-                    result
-                        .ErrorMessages
+                    result.ErrorMessages
                         .Add(
                             String.Format(
                                 CultureInfo.CurrentCulture,

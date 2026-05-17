@@ -91,8 +91,7 @@ namespace System.ServiceModel.Channels
                     if (listener == null)
                     {
                         // The listener has been stopped.
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new CommunicationObjectAbortedException(
                                     SR.GetString(SR.Sharing_ListenerProxyStopped)
@@ -199,8 +198,7 @@ namespace System.ServiceModel.Channels
 
         void Unregister()
         {
-            TcpChannelListener
-                .StaticTransportManagerTable
+            TcpChannelListener.StaticTransportManagerTable
                 .UnregisterUri(this.ListenUri, this.HostNameComparisonMode);
         }
 

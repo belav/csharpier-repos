@@ -28,8 +28,7 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Pythia.Api
             ServiceBrokerClient client,
             CancellationToken cancellationToken
         ) =>
-            RemoteWorkspaceManager
-                .Default
+            RemoteWorkspaceManager.Default
                 .GetSolutionAsync(client, solutionInfo.UnderlyingObject, cancellationToken);
 
         public static ValueTask<T> RunServiceAsync<T>(
@@ -38,8 +37,7 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Pythia.Api
             Func<Solution, ValueTask<T>> implementation,
             CancellationToken cancellationToken
         ) =>
-            RemoteWorkspaceManager
-                .Default
+            RemoteWorkspaceManager.Default
                 .RunServiceAsync(
                     client,
                     solutionInfo.UnderlyingObject,

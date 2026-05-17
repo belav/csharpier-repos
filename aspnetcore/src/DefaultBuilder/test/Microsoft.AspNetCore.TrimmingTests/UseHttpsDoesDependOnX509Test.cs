@@ -8,8 +8,7 @@ using Microsoft.AspNetCore.Hosting;
 
 var builder = WebApplication.CreateSlimBuilder(args);
 
-builder
-    .WebHost
+builder.WebHost
     .UseKestrel(serverOptions =>
     {
         serverOptions.ListenLocalhost(

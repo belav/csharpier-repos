@@ -112,8 +112,7 @@ namespace System.ServiceModel.Configuration
         {
             if (this.IsReadOnly())
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ConfigurationErrorsException(SR.GetString(SR.ConfigReadOnly))
                     );
@@ -153,8 +152,7 @@ namespace System.ServiceModel.Configuration
                     this.MembershipProviderName
                 );
                 if (userName.MembershipProvider == null)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ConfigurationErrorsException(
                                 SR.GetString(
@@ -173,13 +171,11 @@ namespace System.ServiceModel.Configuration
             }
             if (!string.IsNullOrEmpty(this.CustomUserNamePasswordValidatorType))
             {
-                Type validatorType = System
-                    .Type
+                Type validatorType = System.Type
                     .GetType(this.CustomUserNamePasswordValidatorType, true);
                 if (!typeof(UserNamePasswordValidator).IsAssignableFrom(validatorType))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ConfigurationErrorsException(
                                 SR.GetString(

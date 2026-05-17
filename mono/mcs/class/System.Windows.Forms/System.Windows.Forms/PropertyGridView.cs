@@ -190,10 +190,11 @@ namespace System.Windows.Forms.PropertyGridInternal
         protected override void OnPaint(PaintEventArgs e)
         {
             // Background
-            e.Graphics.FillRectangle(
-                ThemeEngine.Current.ResPool.GetSolidBrush(BackColor),
-                ClientRectangle
-            );
+            e.Graphics
+                .FillRectangle(
+                    ThemeEngine.Current.ResPool.GetSolidBrush(BackColor),
+                    ClientRectangle
+                );
 
             int yLoc = -vbar.Value * row_height;
             if (this.RootGridItem != null)
@@ -703,8 +704,7 @@ namespace System.Windows.Forms.PropertyGridInternal
                 font = bold_font;
                 brush = ThemeEngine.Current.ResPool.GetSolidBrush(property_grid.CategoryForeColor);
 
-                pevent
-                    .Graphics
+                pevent.Graphics
                     .DrawString(grid_item.Label, font, brush, rect.X + 1, rect.Y + ENTRY_SPACING);
                 if (grid_item == this.SelectedGridItem)
                 {
@@ -739,8 +739,7 @@ namespace System.Windows.Forms.PropertyGridInternal
                     brush = grid_item.IsReadOnly ? inactive_text_brush : SystemBrushes.ControlText;
                 }
             }
-            pevent
-                .Graphics
+            pevent.Graphics
                 .DrawString(
                     grid_item.Label,
                     font,
@@ -768,8 +767,7 @@ namespace System.Windows.Forms.PropertyGridInternal
             int xLoc = SplitterLocation + ENTRY_SPACING;
             if (grid_item.PaintValueSupported)
             {
-                pevent
-                    .Graphics
+                pevent.Graphics
                     .DrawRectangle(
                         Pens.Black,
                         SplitterLocation + ENTRY_SPACING,
@@ -801,8 +799,7 @@ namespace System.Windows.Forms.PropertyGridInternal
                 else
                     valueText = grid_item.ValueText;
             }
-            pevent
-                .Graphics
+            pevent.Graphics
                 .DrawString(
                     valueText,
                     font,
@@ -827,8 +824,7 @@ namespace System.Windows.Forms.PropertyGridInternal
             if (yLoc > -row_height && yLoc < ClientRectangle.Height)
             {
                 // Left column
-                pevent
-                    .Graphics
+                pevent.Graphics
                     .FillRectangle(
                         ThemeEngine.Current.ResPool.GetSolidBrush(property_grid.LineColor),
                         0,
@@ -839,8 +835,7 @@ namespace System.Windows.Forms.PropertyGridInternal
 
                 if (grid_item.GridItemType == GridItemType.Category)
                 {
-                    pevent
-                        .Graphics
+                    pevent.Graphics
                         .FillRectangle(
                             ThemeEngine.Current.ResPool.GetSolidBrush(property_grid.LineColor),
                             depth * V_INDENT,
@@ -880,13 +875,11 @@ namespace System.Windows.Forms.PropertyGridInternal
                 {
                     Pen pen = ThemeEngine.Current.ResPool.GetPen(property_grid.LineColor);
                     // vertical divider line
-                    pevent
-                        .Graphics
+                    pevent.Graphics
                         .DrawLine(pen, SplitterLocation, yLoc, SplitterLocation, yLoc + row_height);
 
                     // draw the horizontal line
-                    pevent
-                        .Graphics
+                    pevent.Graphics
                         .DrawLine(
                             pen,
                             0,

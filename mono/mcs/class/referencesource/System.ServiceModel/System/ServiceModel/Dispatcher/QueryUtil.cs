@@ -674,8 +674,7 @@ namespace System.ServiceModel.Dispatcher
 
             if (i >= 0)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperCritical(
                         new ArgumentException(SR.GetString(SR.QueryItemAlreadyExists))
                     );

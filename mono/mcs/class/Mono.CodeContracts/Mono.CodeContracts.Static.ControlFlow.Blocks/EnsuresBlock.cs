@@ -208,9 +208,8 @@ namespace Mono.CodeContracts.Static.ControlFlow.Blocks
         {
             int endOldIndex = this.overridingLabels.Count;
             CFGBlock beginBlock;
-            this.overridingLabels.Add(
-                (uint)(EndOldMask | PatchPriorBeginOld(this, endOldIndex, out beginBlock))
-            );
+            this.overridingLabels
+                .Add((uint)(EndOldMask | PatchPriorBeginOld(this, endOldIndex, out beginBlock)));
             Subroutine.AddInferredOldMap(this.Index, endOldIndex, beginBlock, nextEndOldType);
         }
 
@@ -251,8 +250,7 @@ namespace Mono.CodeContracts.Static.ControlFlow.Blocks
             var ensuresBlock = current as EnsuresBlock<Label>;
             if (ensuresBlock != null)
                 return ensuresBlock.PatchPriorBeginOld(endBlock, endOldIndex, out beginBlock);
-            IEnumerator<CFGBlock> enumerator = current
-                .Subroutine
+            IEnumerator<CFGBlock> enumerator = current.Subroutine
                 .PredecessorBlocks(current)
                 .GetEnumerator();
             if (!enumerator.MoveNext())

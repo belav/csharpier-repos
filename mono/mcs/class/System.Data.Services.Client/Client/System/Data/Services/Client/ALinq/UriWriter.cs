@@ -167,9 +167,8 @@ namespace System.Data.Services.Client
                 this.uriBuilder.Append(UriHelper.LEFTPAREN);
                 if (rse.KeyPredicate.Count == 1)
                 {
-                    this.uriBuilder.Append(
-                        this.ExpressionToString(rse.KeyPredicate.Values.First())
-                    );
+                    this.uriBuilder
+                        .Append(this.ExpressionToString(rse.KeyPredicate.Values.First()));
                 }
                 else
                 {

@@ -50,15 +50,13 @@ namespace System.IdentityModel.Tokens
             // Must be absolute URIs
             if (null != classReference && !classReference.IsAbsoluteUri)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument("classReference", SR.GetString(SR.ID0013));
             }
 
             if (null != declarationReference && !declarationReference.IsAbsoluteUri)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument("declarationReference", SR.GetString(SR.ID0013));
             }
 
@@ -89,8 +87,7 @@ namespace System.IdentityModel.Tokens
             {
                 if (null != value && !value.IsAbsoluteUri)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgument("value", SR.GetString(SR.ID0013));
                 }
 
@@ -109,8 +106,7 @@ namespace System.IdentityModel.Tokens
             {
                 if (null != value && !value.IsAbsoluteUri)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgument("value", SR.GetString(SR.ID0013));
                 }
 

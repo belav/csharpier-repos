@@ -41,8 +41,7 @@ namespace System.Security.Cryptography
 
             SafeNCryptProviderHandle providerHandle = provider.OpenStorageProvider();
             SafeNCryptKeyHandle keyHandle;
-            ErrorCode errorCode = Interop
-                .NCrypt
+            ErrorCode errorCode = Interop.NCrypt
                 .NCryptOpenKey(providerHandle, out keyHandle, keyName, 0, openOptions);
             if (errorCode != ErrorCode.ERROR_SUCCESS)
             {

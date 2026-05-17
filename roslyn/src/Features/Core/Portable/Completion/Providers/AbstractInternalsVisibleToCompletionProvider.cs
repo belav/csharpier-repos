@@ -69,12 +69,10 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             try
             {
                 var cancellationToken = context.CancellationToken;
-                var syntaxTree = await context
-                    .Document
+                var syntaxTree = await context.Document
                     .GetSyntaxTreeAsync(cancellationToken)
                     .ConfigureAwait(false);
-                var syntaxFactsService = context
-                    .Document
+                var syntaxFactsService = context.Document
                     .GetRequiredLanguageService<ISyntaxFactsService>();
                 if (
                     syntaxFactsService.IsEntirelyWithinStringOrCharOrNumericLiteral(
@@ -176,8 +174,7 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                 return false;
             }
 
-            var internalsVisibleToAttributeSymbol = semanticModel
-                .Compilation
+            var internalsVisibleToAttributeSymbol = semanticModel.Compilation
                 .GetTypeByMetadataName(typeof(InternalsVisibleToAttribute).FullName!);
             return type.Equals(internalsVisibleToAttributeSymbol);
         }

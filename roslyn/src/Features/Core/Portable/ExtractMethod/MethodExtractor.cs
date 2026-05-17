@@ -251,8 +251,7 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                     cancellationToken: cancellationToken
                 )
                 .ConfigureAwait(false);
-            return await selection
-                .SemanticDocument
+            return await selection.SemanticDocument
                 .WithSyntaxRootAsync(
                     selection.SemanticDocument.Root.ReplaceNode(lastExpression, newExpression),
                     cancellationToken
@@ -342,8 +341,7 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
 
             var insertionPointAnnotation = new SyntaxAnnotation();
 
-            var finalRoot = document
-                .Root
+            var finalRoot = document.Root
                 .ReplaceSyntax(
                     nodes: new[] { insertionPointNode },
                     // intentionally using 'n' (new) here.  We want to see any updated sub tokens that were updated in computeReplacementToken
@@ -467,8 +465,7 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                     .Type;
                 if (
                     currentType == null
-                    || !SymbolEqualityComparer
-                        .Default
+                    || !SymbolEqualityComparer.Default
                         .Equals(currentType, semanticModel.ResolveType(typeParameter))
                 )
                 {

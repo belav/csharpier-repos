@@ -114,8 +114,7 @@ namespace System.Workflow.Runtime
             // runtime gets a reference to the correct object
             clonedRootActivity.SetValue(
                 WorkflowExecutor.TrackingListenerBrokerProperty,
-                workflowExecutor
-                    .RootActivity
+                workflowExecutor.RootActivity
                     .GetValue(WorkflowExecutor.TrackingListenerBrokerProperty)
             );
 

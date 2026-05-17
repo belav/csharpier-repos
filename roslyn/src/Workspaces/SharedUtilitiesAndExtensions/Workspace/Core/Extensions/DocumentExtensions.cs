@@ -212,8 +212,7 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             if (node == null)
                 return document.GetRequiredSemanticModelAsync(cancellationToken);
 
-            var semanticModelService = document
-                .Project
+            var semanticModelService = document.Project
                 .Solution
                 .Services
                 .GetRequiredService<ISemanticModelReuseWorkspaceService>();
@@ -325,8 +324,7 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             var syntaxTree = await document
                 .GetRequiredSyntaxTreeAsync(cancellationToken)
                 .ConfigureAwait(false);
-            return document
-                .Project
+            return document.Project
                 .AnalyzerOptions
                 .AnalyzerConfigOptionsProvider
                 .GetOptions(syntaxTree);

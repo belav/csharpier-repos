@@ -140,36 +140,31 @@ namespace System.Web.WebPages.Test
             store.SetOverriddenUserAgent(context, "testUserAgent");
             Assert.True(
                 DateTime.Now.AddDays(6.5)
-                    < context
-                        .Response
+                    < context.Response
                         .Cookies[CookieBrowserOverrideStore.BrowserOverrideCookieName]
                         .Expires
-                    && context
-                        .Response
+                    && context.Response
                         .Cookies[CookieBrowserOverrideStore.BrowserOverrideCookieName]
                         .Expires < DateTime.Now.AddDays(7.5)
             );
 
             sessionStore.SetOverriddenUserAgent(context, "testUserAgent");
             Assert.True(
-                context
-                    .Response
+                context.Response
                     .Cookies[CookieBrowserOverrideStore.BrowserOverrideCookieName]
                     .Expires < DateTime.Now
             );
 
             longTermStore.SetOverriddenUserAgent(context, "testUserAgent");
             Assert.True(
-                context
-                    .Response
+                context.Response
                     .Cookies[CookieBrowserOverrideStore.BrowserOverrideCookieName]
                     .Expires > DateTime.Now.AddDays(99)
             );
 
             negativeTermStore.SetOverriddenUserAgent(context, "testUserAgent");
             Assert.True(
-                context
-                    .Response
+                context.Response
                     .Cookies[CookieBrowserOverrideStore.BrowserOverrideCookieName]
                     .Expires < DateTime.Now
             );

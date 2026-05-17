@@ -10,8 +10,8 @@ namespace System.ServiceModel.Security
 
     class EncryptedData : EncryptedType
     {
-        internal static readonly XmlDictionaryString ElementName =
-            XD.XmlEncryptionDictionary.EncryptedData;
+        internal static readonly XmlDictionaryString ElementName = XD.XmlEncryptionDictionary
+            .EncryptedData;
         internal static readonly string ElementType = XmlEncryptionStrings.ElementType;
         internal static readonly string ContentType = XmlEncryptionStrings.ContentType;
         SymmetricAlgorithm algorithm;
@@ -33,8 +33,7 @@ namespace System.ServiceModel.Security
             }
             else if (this.State != EncryptionState.Decrypted)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new MessageSecurityException(SR.GetString(SR.BadEncryptionState))
                     );
@@ -84,8 +83,7 @@ namespace System.ServiceModel.Security
         {
             if (this.State != EncryptionState.Read)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new MessageSecurityException(SR.GetString(SR.BadEncryptionState))
                     );
@@ -102,8 +100,7 @@ namespace System.ServiceModel.Security
         {
             if (this.State != EncryptionState.New)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new MessageSecurityException(SR.GetString(SR.BadEncryptionState))
                     );

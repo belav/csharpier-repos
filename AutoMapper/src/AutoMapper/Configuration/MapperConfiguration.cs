@@ -180,8 +180,7 @@ public class MapperConfiguration : IGlobalConfiguration
     public void CompileMappings()
     {
         foreach (
-            var request in _resolvedMaps
-                .Keys
+            var request in _resolvedMaps.Keys
                 .Where(t => !t.ContainsGenericParameters)
                 .Select(types => new MapRequest(types, types, MemberMap.Instance))
                 .ToArray()

@@ -300,8 +300,7 @@ public class LinqToCSharpSyntaxTranslator : ExpressionVisitor, ILinqToCSharpSynt
         )
         {
             var name = UniquifyVariableName("lifted");
-            _liftedState
-                .Statements
+            _liftedState.Statements
                 .Insert(liftedStatementLeftPosition, GenerateVarDeclaration(name, left));
             _liftedState.VariableNames.Add(name);
             left = IdentifierName(name);
@@ -659,8 +658,7 @@ public class LinqToCSharpSyntaxTranslator : ExpressionVisitor, ILinqToCSharpSynt
 
             if (blockContext == ExpressionContext.Expression)
             {
-                _liftedState
-                    .UnassignedVariableDeclarations
+                _liftedState.UnassignedVariableDeclarations
                     .AddRange(unassignedVariableDeclarations);
             }
             else
@@ -930,8 +928,7 @@ public class LinqToCSharpSyntaxTranslator : ExpressionVisitor, ILinqToCSharpSynt
 
                 if (lowerableAssignmentVariable is null)
                 {
-                    _liftedState
-                        .Statements
+                    _liftedState.Statements
                         .Add(
                             LocalDeclarationStatement(
                                 VariableDeclaration(loweredAssignmentVariableType!)
@@ -944,8 +941,7 @@ public class LinqToCSharpSyntaxTranslator : ExpressionVisitor, ILinqToCSharpSynt
                         );
                 }
 
-                _liftedState
-                    .Statements
+                _liftedState.Statements
                     .Add(IfStatement(test, ifTrueStatement, ElseClause(ifFalseStatement)));
                 return assignmentVariable;
 
@@ -963,8 +959,7 @@ public class LinqToCSharpSyntaxTranslator : ExpressionVisitor, ILinqToCSharpSynt
                     // in this case we get back the lowered assignment variable, and don't need the assignment (i = i)
                     if (translatedBody != assignmentVariable)
                     {
-                        _liftedState
-                            .Statements
+                        _liftedState.Statements
                             .Add(
                                 ExpressionStatement(
                                     AssignmentExpression(
@@ -1262,8 +1257,7 @@ public class LinqToCSharpSyntaxTranslator : ExpressionVisitor, ILinqToCSharpSynt
             // Need to lift
             var name = UniquifyVariableName(lambda.Parameters[i].Name ?? "lifted");
             var parameter = E.Parameter(argument.Type, name);
-            _liftedState
-                .Statements
+            _liftedState.Statements
                 .Add(GenerateVarDeclaration(name, Translate<ExpressionSyntax>(argument)));
             arguments[i] = parameter;
         }
@@ -1468,8 +1462,7 @@ public class LinqToCSharpSyntaxTranslator : ExpressionVisitor, ILinqToCSharpSynt
         Result = ParenthesizedLambdaExpression(
             ParameterList(
                 SeparatedList(
-                    lambda
-                        .Parameters
+                    lambda.Parameters
                         .Select(p =>
                             Parameter(Identifier(LookupVariableName(p)))
                                 .WithType(p.Type.IsAnonymousType() ? null : Translate(p.Type))
@@ -1596,8 +1589,7 @@ public class LinqToCSharpSyntaxTranslator : ExpressionVisitor, ILinqToCSharpSynt
                 Expression: ConstantExpression constantExpression
             }
                 when constantExpression.Type.Attributes.HasFlag(TypeAttributes.NestedPrivate)
-                    && System
-                        .Attribute
+                    && System.Attribute
                         .IsDefined(
                             constantExpression.Type,
                             typeof(CompilerGeneratedAttribute),
@@ -1986,14 +1978,14 @@ public class LinqToCSharpSyntaxTranslator : ExpressionVisitor, ILinqToCSharpSynt
                 );
 
                 var cases = List(
-                    switchNode
-                        .Cases
+                    switchNode.Cases
                         .Select(c =>
                             SwitchSection(
                                 labels: List<SwitchLabelSyntax>(
-                                    c.TestValues.Select(tv =>
-                                        CaseSwitchLabel(Translate<ExpressionSyntax>(tv))
-                                    )
+                                    c.TestValues
+                                        .Select(tv =>
+                                            CaseSwitchLabel(Translate<ExpressionSyntax>(tv))
+                                        )
                                 ),
                                 statements: ProcessArmBody(c.Body)
                             )
@@ -2004,9 +1996,11 @@ public class LinqToCSharpSyntaxTranslator : ExpressionVisitor, ILinqToCSharpSynt
                 // nested ConditionalExpressions.
                 if (
                     cases.Any(c =>
-                        c.Labels.Any(l =>
-                            l is CaseSwitchLabelSyntax l2 && !_constantDetector.IsConstant(l2.Value)
-                        )
+                        c.Labels
+                            .Any(l =>
+                                l is CaseSwitchLabelSyntax l2
+                                && !_constantDetector.IsConstant(l2.Value)
+                            )
                     )
                 )
                 {
@@ -2068,8 +2062,7 @@ public class LinqToCSharpSyntaxTranslator : ExpressionVisitor, ILinqToCSharpSynt
 
                 // Translate all arms
                 var arms = SeparatedList(
-                    switchNode
-                        .Cases
+                    switchNode.Cases
                         .SelectMany(
                             c => c.TestValues,
                             (c, tv) =>
@@ -2134,14 +2127,14 @@ public class LinqToCSharpSyntaxTranslator : ExpressionVisitor, ILinqToCSharpSynt
                 }
 
                 var cases = List(
-                    switchNode
-                        .Cases
+                    switchNode.Cases
                         .Select(c =>
                             SwitchSection(
                                 labels: List<SwitchLabelSyntax>(
-                                    c.TestValues.Select(tv =>
-                                        CaseSwitchLabel(Translate<LiteralExpressionSyntax>(tv))
-                                    )
+                                    c.TestValues
+                                        .Select(tv =>
+                                            CaseSwitchLabel(Translate<LiteralExpressionSyntax>(tv))
+                                        )
                                 ),
                                 statements: ProcessArmBody(c.Body)
                             )
@@ -2158,8 +2151,7 @@ public class LinqToCSharpSyntaxTranslator : ExpressionVisitor, ILinqToCSharpSynt
 
                 if (lowerableAssignmentVariable is null)
                 {
-                    _liftedState
-                        .Statements
+                    _liftedState.Statements
                         .Add(
                             LocalDeclarationStatement(
                                 VariableDeclaration(loweredAssignmentVariableType!)
@@ -2205,8 +2197,7 @@ public class LinqToCSharpSyntaxTranslator : ExpressionVisitor, ILinqToCSharpSynt
                     // in this case we get back the lowered assignment variable, and don't need the assignment (i = i)
                     if (translatedBody != assignmentVariable)
                     {
-                        _liftedState
-                            .Statements
+                        _liftedState.Statements
                             .Add(
                                 ExpressionStatement(
                                     AssignmentExpression(
@@ -2447,8 +2438,7 @@ public class LinqToCSharpSyntaxTranslator : ExpressionVisitor, ILinqToCSharpSynt
                 binding is MemberListBinding listBinding
                 && (
                     !listBinding.Member.GetMemberType().IsAssignableTo(typeof(IEnumerable))
-                    || listBinding
-                        .Initializers
+                    || listBinding.Initializers
                         .Any(e => e.AddMethod.Name != "Add" || e.Arguments.Count != 1)
                 )
             )
@@ -2502,8 +2492,7 @@ public class LinqToCSharpSyntaxTranslator : ExpressionVisitor, ILinqToCSharpSynt
             // methods. Skip these, we'll add them later outside the initializer
             if (
                 !listInit.NewExpression.Type.IsAssignableTo(typeof(IEnumerable))
-                || listInit
-                    .Initializers
+                || listInit.Initializers
                     .Any(e => e.AddMethod.Name != "Add" || e.Arguments.Count != 1)
             )
             {
@@ -2575,8 +2564,7 @@ public class LinqToCSharpSyntaxTranslator : ExpressionVisitor, ILinqToCSharpSynt
             InitializerExpression(
                 SyntaxKind.ObjectInitializerExpression,
                 SeparatedList(
-                    memberMemberBinding
-                        .Bindings
+                    memberMemberBinding.Bindings
                         .Select(b =>
                         {
                             VisitMemberBinding(b);
@@ -2598,8 +2586,7 @@ public class LinqToCSharpSyntaxTranslator : ExpressionVisitor, ILinqToCSharpSynt
             InitializerExpression(
                 SyntaxKind.CollectionInitializerExpression,
                 SeparatedList(
-                    memberListBinding
-                        .Initializers
+                    memberListBinding.Initializers
                         .Select(i =>
                         {
                             VisitElementInit(i);
@@ -2696,8 +2683,7 @@ public class LinqToCSharpSyntaxTranslator : ExpressionVisitor, ILinqToCSharpSynt
                     {
                         var name = UniquifyVariableName("liftedArg");
 
-                        _liftedState
-                            .Statements
+                        _liftedState.Statements
                             .Insert(
                                 liftedStatementsPosition++,
                                 GenerateVarDeclaration(name, argumentExpression)

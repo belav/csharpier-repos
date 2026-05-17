@@ -435,8 +435,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                                             {
                                                 diagnostics.Add(
                                                     ErrorCode.HDN_DuplicateWithGlobalUsing,
-                                                    namespaceOrType
-                                                        .UsingDirective!
+                                                    namespaceOrType.UsingDirective!
                                                         .NamespaceOrType
                                                         .Location,
                                                     namespaceOrType.NamespaceOrType
@@ -889,8 +888,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                                 )
                             );
                             Debug.Assert(
-                                calculated
-                                    .UsingNamespacesOrTypes
+                                calculated.UsingNamespacesOrTypes
                                     .SequenceEqual(result.UsingNamespacesOrTypes)
                             );
                             Debug.Assert(calculated.Diagnostics?.IsEmptyWithoutResolution ?? true);
@@ -1072,8 +1070,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             var flags = BinderFlags.SuppressConstraintChecks;
                             if (usingDirective.UnsafeKeyword != default)
                             {
-                                var unsafeKeywordLocation = usingDirective
-                                    .UnsafeKeyword
+                                var unsafeKeywordLocation = usingDirective.UnsafeKeyword
                                     .GetLocation();
                                 if (usingDirective.StaticKeyword == default)
                                 {
@@ -1084,8 +1081,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                                 }
                                 else
                                 {
-                                    MessageID
-                                        .IDS_FeatureUsingTypeAlias
+                                    MessageID.IDS_FeatureUsingTypeAlias
                                         .CheckFeatureAvailability(
                                             diagnostics,
                                             usingDirective,
@@ -1244,8 +1240,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                                                 new NamespaceOrTypeAndUsingDirective(
                                                     importedType,
                                                     usingDirective,
-                                                    directiveDiagnostics
-                                                        .DependenciesBag
+                                                    directiveDiagnostics.DependenciesBag
                                                         .ToImmutableArray()
                                                 )
                                             );
@@ -1508,8 +1503,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             continue;
                         }
 
-                        NamespaceOrTypeSymbol target = alias
-                            .Alias
+                        NamespaceOrTypeSymbol target = alias.Alias
                             .GetAliasTarget(basesBeingResolved: null);
 
                         diagnostics.Clear();

@@ -660,8 +660,7 @@ namespace System.Web.Util
                     // note that HttpExceptions are ExternalExceptions
                     errorCode =
                         "_hr=0x"
-                        + ((ExternalException)e)
-                            .ErrorCode
+                        + ((ExternalException)e).ErrorCode
                             .ToString("x", CultureInfo.InvariantCulture);
                 }
 

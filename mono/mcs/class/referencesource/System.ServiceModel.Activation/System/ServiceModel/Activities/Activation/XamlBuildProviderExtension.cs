@@ -245,8 +245,7 @@ namespace System.ServiceModel.Activities.Activation
             codeMemberMethod.Name = CreateExpressionRootMethodName;
             codeMemberMethod.Attributes = MemberAttributes.Public | MemberAttributes.Static;
             codeMemberMethod.ReturnType = new CodeTypeReference(typeof(ICompiledExpressionRoot));
-            codeMemberMethod
-                .Parameters
+            codeMemberMethod.Parameters
                 .Add(
                     new CodeParameterDeclarationExpression(
                         new CodeTypeReference(typeof(Activity)),
@@ -328,8 +327,7 @@ namespace System.ServiceModel.Activities.Activation
                         throw;
                     }
 
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(
                             new HttpCompileException(
                                 SR.XamlBuildProviderExtensionException(ex.Message)

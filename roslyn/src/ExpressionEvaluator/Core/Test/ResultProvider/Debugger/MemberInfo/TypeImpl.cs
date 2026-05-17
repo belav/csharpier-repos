@@ -319,13 +319,14 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             // be an explicit interface implementation, but will not have a dot.  Therefore, this is
             // good enough for our mock implementation.
             var infos = interfaceMaps.SelectMany(map =>
-                map.InterfaceMethods.Zip(
-                    map.TargetMethods,
-                    (interfaceMethod, implementingMethod) =>
-                        implementingMethod.Name.Contains(".")
-                            ? MakeExplicitInterfaceInfo(interfaceMethod, implementingMethod)
-                            : null
-                )
+                map.InterfaceMethods
+                    .Zip(
+                        map.TargetMethods,
+                        (interfaceMethod, implementingMethod) =>
+                            implementingMethod.Name.Contains(".")
+                                ? MakeExplicitInterfaceInfo(interfaceMethod, implementingMethod)
+                                : null
+                    )
             );
             return infos.Where(i => i != null).ToArray();
         }

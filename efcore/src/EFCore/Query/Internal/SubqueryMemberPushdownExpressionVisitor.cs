@@ -182,8 +182,7 @@ public class SubqueryMemberPushdownExpressionVisitor : ExpressionVisitor
             );
 
             return Expression.Call(
-                QueryableMethods
-                    .AsQueryable
+                QueryableMethods.AsQueryable
                     .MakeGenericMethod(updatedMemberExpression.Type.GetSequenceType()),
                 updatedMemberExpression
             );
@@ -236,8 +235,7 @@ public class SubqueryMemberPushdownExpressionVisitor : ExpressionVisitor
             );
 
             source = Expression.Call(
-                QueryableMethods
-                    .Select
+                QueryableMethods.Select
                     .MakeGenericMethod(
                         sourceMethodCallExpression.Arguments[0].Type.GetSequenceType(),
                         memberAccessExpression.Type
@@ -257,8 +255,7 @@ public class SubqueryMemberPushdownExpressionVisitor : ExpressionVisitor
             );
 
             source = Expression.Call(
-                QueryableMethods
-                    .Select
+                QueryableMethods.Select
                     .MakeGenericMethod(queryableType, memberAccessExpression.Type),
                 source,
                 Expression.Quote(Expression.Lambda(memberAccessExpression, parameter))

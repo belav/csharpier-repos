@@ -59,8 +59,7 @@ namespace System.ServiceModel.Channels
             }
 
             if (null != this.customDeadLetterQueue)
-                this.deadLetterQueuePathName = MsmqUri
-                    .DeadLetterQueueAddressTranslator
+                this.deadLetterQueuePathName = MsmqUri.DeadLetterQueueAddressTranslator
                     .UriToFormatName(this.customDeadLetterQueue);
         }
 
@@ -138,8 +137,7 @@ namespace System.ServiceModel.Channels
         [MethodImpl(MethodImplOptions.NoInlining)]
         void InitializeSecurityTokenManager(BindingContext context)
         {
-            SecurityCredentialsManager credentials = context
-                .BindingParameters
+            SecurityCredentialsManager credentials = context.BindingParameters
                 .Find<SecurityCredentialsManager>();
             if (credentials != null)
                 this.securityTokenManager = credentials.CreateSecurityTokenManager();

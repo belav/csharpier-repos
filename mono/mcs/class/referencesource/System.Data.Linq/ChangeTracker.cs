@@ -454,8 +454,7 @@ namespace System.Data.Linq
                 internal override void ConvertToNew()
                 {
                     // must be new or unmodified or removed to convert to new
-                    System
-                        .Diagnostics
+                    System.Diagnostics
                         .Debug
                         .Assert(this.IsNew || this.IsRemoved || this.IsUnmodified);
                     this.original = null;
@@ -472,8 +471,7 @@ namespace System.Data.Linq
                 internal override void ConvertToModified()
                 {
                     System.Diagnostics.Debug.Assert(this.IsPossiblyModified);
-                    System
-                        .Diagnostics
+                    System.Diagnostics
                         .Debug
                         .Assert(this.type.VersionMember != null || !this.type.HasUpdateCheck);
                     this.state = State.Modified;
@@ -790,11 +788,9 @@ namespace System.Data.Linq
                                     {
                                         MetaDataMember accThis = assoc.ThisKey[i];
                                         MetaDataMember accParent = assoc.OtherKey[i];
-                                        object parentValue = accParent
-                                            .StorageAccessor
+                                        object parentValue = accParent.StorageAccessor
                                             .GetBoxedValue(parent);
-                                        accThis
-                                            .StorageAccessor
+                                        accThis.StorageAccessor
                                             .SetBoxedValue(ref this.current, parentValue);
                                         valueWasSet = true;
                                     }
@@ -822,8 +818,7 @@ namespace System.Data.Linq
                                                 )
                                                 {
                                                     if (
-                                                        accThis
-                                                            .StorageAccessor
+                                                        accThis.StorageAccessor
                                                             .GetBoxedValue(this.current) != null
                                                     )
                                                     {
@@ -835,8 +830,7 @@ namespace System.Data.Linq
                                                 }
                                                 else
                                                 {
-                                                    accThis
-                                                        .StorageAccessor
+                                                    accThis.StorageAccessor
                                                         .SetBoxedValue(ref this.current, null);
                                                     valueWasSet = true;
                                                 }
@@ -985,9 +979,8 @@ namespace System.Data.Linq
                             object currentValue = mm.MemberAccessor.GetBoxedValue(this.current);
                             if (this.original != null && mm.StorageAccessor.HasValue(this.original))
                             {
-                                object originalValue = mm.MemberAccessor.GetBoxedValue(
-                                    this.original
-                                );
+                                object originalValue = mm.MemberAccessor
+                                    .GetBoxedValue(this.original);
                                 yield return new ModifiedMemberInfo(
                                     mm.Member,
                                     currentValue,
@@ -1156,15 +1149,13 @@ namespace System.Data.Linq
                                 object otherItem = null;
                                 if (assoc.ThisMember.IsDeferred)
                                 {
-                                    otherItem = assoc
-                                        .ThisMember
+                                    otherItem = assoc.ThisMember
                                         .DeferredValueAccessor
                                         .GetBoxedValue(this.current);
                                 }
                                 else
                                 {
-                                    otherItem = assoc
-                                        .ThisMember
+                                    otherItem = assoc.ThisMember
                                         .StorageAccessor
                                         .GetBoxedValue(this.current);
                                 }

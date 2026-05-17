@@ -48,8 +48,7 @@ namespace System.Workflow.ComponentModel.Design
         {
             if (highlightedDesigners == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("hightlightedDesigners");
             }
 
@@ -212,8 +211,7 @@ namespace System.Workflow.ComponentModel.Design
             {
                 if (activityDesigner == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgumentNull("activityDesigner");
                 }
 

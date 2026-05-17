@@ -11,8 +11,7 @@ namespace VectorWiden
 {
     public class Program
     {
-        private static byte[] _asciiBytes = Encoding
-            .ASCII
+        private static byte[] _asciiBytes = Encoding.ASCII
             .GetBytes(
                 "text/plain,text/html;q=0.9,application/xhtml+xml;q=0.9,application/xml;q=0.8,*/*;q=0.7"
             );

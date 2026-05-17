@@ -430,10 +430,8 @@ namespace System.Data.Mapping
                 }
 
                 // Get the CDM EntityContainer by this name from the metadata workspace.
-                this.EdmItemCollection.TryGetEntityContainer(
-                    entityContainerName,
-                    out entityContainerType
-                );
+                this.EdmItemCollection
+                    .TryGetEntityContainer(entityContainerName, out entityContainerType);
                 if (entityContainerType == null)
                 {
                     AddToSchemaErrorsWithMemberInfo(
@@ -446,10 +444,11 @@ namespace System.Data.Mapping
                     );
                 }
 
-                this.StoreItemCollection.TryGetEntityContainer(
-                    storageEntityContainerName,
-                    out storageEntityContainerType
-                );
+                this.StoreItemCollection
+                    .TryGetEntityContainer(
+                        storageEntityContainerName,
+                        out storageEntityContainerType
+                    );
                 if (storageEntityContainerType == null)
                 {
                     AddToSchemaErrorsWithMemberInfo(
@@ -928,8 +927,7 @@ namespace System.Data.Mapping
 
                 // Register all association sets referencing known entity sets
                 foreach (
-                    EntitySetBase entitySetBase in entityContainerMapping
-                        .EdmEntityContainer
+                    EntitySetBase entitySetBase in entityContainerMapping.EdmEntityContainer
                         .BaseEntitySets
                 )
                 {
@@ -1068,8 +1066,7 @@ namespace System.Data.Mapping
             {
                 //Try to find the EntitySet with the given name in the EntityContainer.
                 if (
-                    !entityContainerMapping
-                        .EdmEntityContainer
+                    !entityContainerMapping.EdmEntityContainer
                         .TryGetEntitySetByName(
                             entitySetName, /*ignoreCase*/
                             false,
@@ -1693,14 +1690,12 @@ namespace System.Data.Mapping
             {
                 if (null != parameterBinding.MemberPath.AssociationSetEnd)
                 {
-                    AssociationSet associationSet = parameterBinding
-                        .MemberPath
+                    AssociationSet associationSet = parameterBinding.MemberPath
                         .AssociationSetEnd
                         .ParentAssociationSet;
                     // the "end" corresponds to the second member in the path, e.g.
                     // ID<-Manager where Manager is the end
-                    AssociationEndMember currentEnd = parameterBinding
-                        .MemberPath
+                    AssociationEndMember currentEnd = parameterBinding.MemberPath
                         .AssociationSetEnd
                         .CorrespondingAssociationEndMember;
 
@@ -1981,8 +1976,7 @@ namespace System.Data.Mapping
             );
             //Try to find the AssociationSet with the given name in the EntityContainer.
             RelationshipSet relationshipSet;
-            entityContainerMapping
-                .EdmEntityContainer
+            entityContainerMapping.EdmEntityContainer
                 .TryGetRelationshipSetByName(
                     associationSetName,
                     false /*ignoreCase*/
@@ -2007,16 +2001,14 @@ namespace System.Data.Mapping
 
             if (associationSet.ElementType.IsForeignKey)
             {
-                ReferentialConstraint constraint = associationSet
-                    .ElementType
+                ReferentialConstraint constraint = associationSet.ElementType
                     .ReferentialConstraints
                     .Single();
                 IEnumerable<EdmMember> dependentKeys = MetadataHelper
                     .GetEntityTypeForEnd((AssociationEndMember)constraint.ToRole)
                     .KeyMembers;
                 if (
-                    associationSet
-                        .ElementType
+                    associationSet.ElementType
                         .ReferentialConstraints
                         .Single()
                         .ToProperties
@@ -2270,16 +2262,13 @@ namespace System.Data.Mapping
                 //
 
                 // Function mapping is allowed only for TVFs on the s-space.
-                var cTypeTargetFunction = this.StoreItemCollection.ConvertToCTypeFunction(
-                    targetFunction
-                );
-                var cTypeTvfElementType = System
-                    .Data
+                var cTypeTargetFunction = this.StoreItemCollection
+                    .ConvertToCTypeFunction(targetFunction);
+                var cTypeTvfElementType = System.Data
                     .Common
                     .TypeHelpers
                     .GetTvfReturnType(cTypeTargetFunction);
-                var sTypeTvfElementType = System
-                    .Data
+                var sTypeTvfElementType = System.Data
                     .Common
                     .TypeHelpers
                     .GetTvfReturnType(targetFunction);
@@ -2437,8 +2426,8 @@ namespace System.Data.Mapping
             );
 
             // Try to find the function definition
-            ReadOnlyCollection<EdmFunction> functionOverloads =
-                this.StoreItemCollection.GetFunctions(functionName);
+            ReadOnlyCollection<EdmFunction> functionOverloads = this.StoreItemCollection
+                .GetFunctions(functionName);
 
             if (functionOverloads.Count == 0)
             {
@@ -2544,8 +2533,7 @@ namespace System.Data.Mapping
                 // find corresponding import parameter
                 FunctionParameter importParameter;
                 if (
-                    !functionImport
-                        .Parameters
+                    !functionImport.Parameters
                         .TryGetValue(targetParameter.Name, false, out importParameter)
                 )
                 {
@@ -2591,8 +2579,7 @@ namespace System.Data.Mapping
                     }
 
                     PrimitiveType cspaceTargetType = (PrimitiveType)
-                        StoreItemCollection
-                            .StoreProviderManifest
+                        StoreItemCollection.StoreProviderManifest
                             .GetEdmType(targetParameter.TypeUsage)
                             .EdmType;
                     if (cspaceTargetType == null)
@@ -2647,8 +2634,7 @@ namespace System.Data.Mapping
                 // find corresponding target parameter
                 FunctionParameter targetParameter;
                 if (
-                    !targetFunction
-                        .Parameters
+                    !targetFunction.Parameters
                         .TryGetValue(importParameter.Name, false, out targetParameter)
                 )
                 {
@@ -3524,8 +3510,7 @@ namespace System.Data.Mapping
 
             // Gather and validate entity type conditions from the type-producing fragments.
             foreach (
-                var entityTypeMapping in functionImportKB
-                    .NormalizedEntityTypeMappings
+                var entityTypeMapping in functionImportKB.NormalizedEntityTypeMappings
                     .Where(f => f.ImpliedEntityTypes[typeID])
             )
             {
@@ -3533,8 +3518,7 @@ namespace System.Data.Mapping
                 {
                     EdmProperty column;
                     if (
-                        sTypeTvfElementType
-                            .Properties
+                        sTypeTvfElementType.Properties
                             .TryGetValue(condition.ColumnName, false, out column)
                     )
                     {
@@ -3678,8 +3662,7 @@ namespace System.Data.Mapping
                 FunctionImportReturnTypeStructuralTypeColumnRenameMapping columnRenameMapping;
                 bool explicitPropertyMapping;
                 if (
-                    functionImportKB
-                        .ReturnTypeColumnsRenameMapping
+                    functionImportKB.ReturnTypeColumnsRenameMapping
                         .TryGetValue(property.Name, out columnRenameMapping)
                 )
                 {
@@ -3769,8 +3752,7 @@ namespace System.Data.Mapping
                 errorFound
                     || Common.TypeHelpers.GetAllStructuralMembers(structuralType).Count
                         == propertyMappings.Count
-                        && Common
-                            .TypeHelpers
+                        && Common.TypeHelpers
                             .GetAllStructuralMembers(structuralType)
                             .Cast<EdmMember>()
                             .Zip(propertyMappings)
@@ -3804,10 +3786,8 @@ namespace System.Data.Mapping
             //Get the association type for association type name specified in MSL
             //If no AssociationType with the given name exists, add a schema error and return
             AssociationType associationType;
-            this.EdmItemCollection.TryGetItem<AssociationType>(
-                associationTypeName,
-                out associationType
-            );
+            this.EdmItemCollection
+                .TryGetItem<AssociationType>(associationTypeName, out associationType);
             if (associationType == null)
             {
                 //There is no point in continuing loading if the AssociationType is null
@@ -4155,8 +4135,7 @@ namespace System.Data.Mapping
                             StorageMslConstructs.EndPropertyMappingNameAttribute
                         );
                         EdmMember endMember = null;
-                        typeMapping
-                            .AssociationType
+                        typeMapping.AssociationType
                             .Members
                             .TryGetValue(endName, false, out endMember);
                         AssociationEndMember end = endMember as AssociationEndMember;
@@ -4271,8 +4250,7 @@ namespace System.Data.Mapping
                         if (Helper.IsRefType(containerType))
                         {
                             RefType refType = (RefType)containerType;
-                            ((EntityType)refType.ElementType)
-                                .Properties
+                            ((EntityType)refType.ElementType).Properties
                                 .TryGetValue(
                                     propertyName,
                                     false /*ignoreCase*/
@@ -4283,8 +4261,7 @@ namespace System.Data.Mapping
                         else
                         {
                             EdmMember tempMember;
-                            (containerType as StructuralType)
-                                .Members
+                            (containerType as StructuralType).Members
                                 .TryGetValue(propertyName, false, out tempMember);
                             member = tempMember as EdmProperty;
                         }
@@ -4384,8 +4361,7 @@ namespace System.Data.Mapping
                     if (containerStructuralType != null)
                     {
                         EdmMember tempMember;
-                        containerStructuralType
-                            .Members
+                        containerStructuralType.Members
                             .TryGetValue(
                                 propertyName,
                                 false /*ignoreCase*/
@@ -4429,8 +4405,7 @@ namespace System.Data.Mapping
                 if (containerType != null)
                 {
                     EdmMember tempMember;
-                    containerStructuralType
-                        .Members
+                    containerStructuralType.Members
                         .TryGetValue(
                             propertyName,
                             false /*ignoreCase*/
@@ -4570,10 +4545,8 @@ namespace System.Data.Mapping
                         currentTypeName = GetAliasResolvedValue(currentTypeName);
                     }
                     ComplexType complexType;
-                    this.EdmItemCollection.TryGetItem<ComplexType>(
-                        currentTypeName,
-                        out complexType
-                    );
+                    this.EdmItemCollection
+                        .TryGetItem<ComplexType>(currentTypeName, out complexType);
                     if (complexType == null)
                     {
                         AddToSchemaErrorsWithMemberInfo(
@@ -4789,8 +4762,7 @@ namespace System.Data.Mapping
                 //If container type is null that means we have not found the member in any of the IsOfTypes.
                 if (containerType != null)
                 {
-                    ((StructuralType)containerType)
-                        .Members
+                    ((StructuralType)containerType).Members
                         .TryGetValue(
                             propertyName,
                             false /*ignoreCase*/
@@ -4840,8 +4812,7 @@ namespace System.Data.Mapping
                 TypeUsage cspaceTypeUsage;
                 if (conditionMember.DeclaringType.DataSpace == DataSpace.SSpace)
                 {
-                    cspaceTypeUsage = StoreItemCollection
-                        .StoreProviderManifest
+                    cspaceTypeUsage = StoreItemCollection.StoreProviderManifest
                         .GetEdmType(conditionMember.TypeUsage);
                     if (cspaceTypeUsage == null)
                     {
@@ -5017,8 +4988,7 @@ namespace System.Data.Mapping
         private static void AddResourceXsdToSchemaSet(XmlSchemaSet set, string resourceName)
         {
             using (
-                XmlReader xsdReader = System
-                    .Data
+                XmlReader xsdReader = System.Data
                     .Common
                     .DbProviderServices
                     .GetXmlResource(resourceName)
@@ -5292,15 +5262,13 @@ namespace System.Data.Mapping
 
         private XmlReaderSettings GetXmlReaderSettings()
         {
-            XmlReaderSettings readerSettings = System
-                .Data
+            XmlReaderSettings readerSettings = System.Data
                 .EntityModel
                 .SchemaObjectModel
                 .Schema
                 .CreateEdmStandardXmlReaderSettings();
 
-            readerSettings.ValidationFlags |= System
-                .Xml
+            readerSettings.ValidationFlags |= System.Xml
                 .Schema
                 .XmlSchemaValidationFlags
                 .ReportValidationWarnings;
@@ -5684,8 +5652,7 @@ namespace System.Data.Mapping
                             EdmProperty property = null;
                             if (
                                 null == propertyName
-                                || !entityType
-                                    .Properties
+                                || !entityType.Properties
                                     .TryGetValue(propertyName, false, out property)
                             )
                             {
@@ -6006,8 +5973,7 @@ namespace System.Data.Mapping
                 // (all dependent properties are part of the primary key)
                 if (associationSet.ElementType.IsForeignKey)
                 {
-                    ReferentialConstraint constraint = associationSet
-                        .ElementType
+                    ReferentialConstraint constraint = associationSet.ElementType
                         .ReferentialConstraints
                         .Single();
                     EdmSchemaError error = StorageMappingItemLoader.AddToSchemaErrorsWithMemberInfo(
@@ -6021,8 +5987,7 @@ namespace System.Data.Mapping
 
                     if (
                         fromEnd.CorrespondingAssociationEndMember == constraint.ToRole
-                        && constraint
-                            .ToProperties
+                        && constraint.ToProperties
                             .All(p => m_entitySet.ElementType.KeyMembers.Contains(p))
                     )
                     {
@@ -6244,8 +6209,7 @@ namespace System.Data.Mapping
                 {
                     if (
                         null == propertyName
-                        || !((EntityType)type)
-                            .KeyMembers
+                        || !((EntityType)type).KeyMembers
                             .TryGetValue(propertyName, false, out property)
                     )
                     {
@@ -6340,13 +6304,11 @@ namespace System.Data.Mapping
                     AssociationType associationType = (AssociationType)targetEnd.DeclaringType;
                     if (associationType.IsForeignKey)
                     {
-                        ReferentialConstraint constraint = associationType
-                            .ReferentialConstraints
+                        ReferentialConstraint constraint = associationType.ReferentialConstraints
                             .Single();
                         if (constraint.FromRole == targetEnd)
                         {
-                            int ordinal = constraint
-                                .FromProperties
+                            int ordinal = constraint.FromProperties
                                 .IndexOf((EdmProperty)m_members.First());
 
                             // rebind to the foreign key (no longer an association set navigation)
@@ -6449,8 +6411,7 @@ namespace System.Data.Mapping
                 {
                     // check that the parameter exists
                     if (
-                        !function
-                            .Parameters
+                        !function.Parameters
                             .TryGetValue(
                                 rowsAffectedParameterName,
                                 false,

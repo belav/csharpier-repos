@@ -49,9 +49,8 @@ namespace MonoTests.System
         public void MatchSingle()
         {
             var t = new UriTemplateTable(new Uri("http://localhost:37564"));
-            t.KeyValuePairs.Add(
-                new KeyValuePair<UriTemplate, object>(new UriTemplate("/jsdebug"), null)
-            );
+            t.KeyValuePairs
+                .Add(new KeyValuePair<UriTemplate, object>(new UriTemplate("/jsdebug"), null));
             Assert.IsNull(t.MatchSingle(new Uri("http://localhost:37564/js")), "#1");
             Assert.IsNotNull(t.MatchSingle(new Uri("http://localhost:37564/jsdebug")), "#2");
         }

@@ -219,8 +219,7 @@ namespace System.Data.Services.Client
                         null,
                         System.Globalization.CultureInfo.InvariantCulture
                     );
-            return System
-                .Data
+            return System.Data
                 .Services
                 .Parsing
                 .WebConvert
@@ -237,8 +236,7 @@ namespace System.Data.Services.Client
                 return TryKeyBinaryToString(value, out result);
             }
 #endif
-            return System
-                .Data
+            return System.Data
                 .Services
                 .Parsing
                 .WebConvert
@@ -488,8 +486,7 @@ namespace System.Data.Services.Client
             if (
                 (type.Namespace == "System.Data.Linq")
                 && (
-                    System
-                        .Reflection
+                    System.Reflection
                         .AssemblyName
                         .ReferenceMatchesDefinition(
                             type.Assembly.GetName(),

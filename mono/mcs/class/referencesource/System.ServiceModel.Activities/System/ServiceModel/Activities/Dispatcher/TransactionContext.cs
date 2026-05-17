@@ -36,10 +36,8 @@ namespace System.ServiceModel.Activities.Dispatcher
 
             this.currentTransaction = currentTransaction.Clone();
             this.durableInstance = durableInstance;
-            this.currentTransaction.EnlistVolatile(
-                this,
-                EnlistmentOptions.EnlistDuringPrepareRequired
-            );
+            this.currentTransaction
+                .EnlistVolatile(this, EnlistmentOptions.EnlistDuringPrepareRequired);
         }
 
         public Transaction CurrentTransaction

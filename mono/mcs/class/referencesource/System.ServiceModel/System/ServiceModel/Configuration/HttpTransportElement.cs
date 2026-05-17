@@ -384,8 +384,7 @@ namespace System.ServiceModel.Configuration
             this.WebSocketSettings.InitializeFrom(source.WebSocketSettings);
             if (source.MessageHandlerFactory != null)
             {
-                this.MessageHandlerFactory = source
-                    .MessageHandlerFactory
+                this.MessageHandlerFactory = source.MessageHandlerFactory
                     .GenerateConfigurationElement();
             }
 

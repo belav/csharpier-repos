@@ -139,8 +139,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
         }
 
         private LineFormattingOptions GetLineFormattingOptions() =>
-            State
-                .ThreadingContext
+            State.ThreadingContext
                 .JoinableTaskFactory
                 .Run(() =>
                     GetDocument()

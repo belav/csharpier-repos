@@ -15,8 +15,7 @@ public class cs1
         return i * 100;
     }
 
-    public const System.Runtime.CompilerServices.MethodImplOptions s_enum2 = System
-        .Runtime
+    public const System.Runtime.CompilerServices.MethodImplOptions s_enum2 = System.Runtime
         .CompilerServices
         .MethodImplOptions
         .NoInlining;

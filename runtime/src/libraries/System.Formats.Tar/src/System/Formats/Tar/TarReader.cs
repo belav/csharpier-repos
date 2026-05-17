@@ -217,8 +217,7 @@ namespace System.Formats.Tar
             if (_archiveStream.CanSeek)
             {
                 Debug.Assert(_previouslyReadEntry._header._endOfHeaderAndDataAndBlockAlignment > 0);
-                _archiveStream.Position = _previouslyReadEntry
-                    ._header
+                _archiveStream.Position = _previouslyReadEntry._header
                     ._endOfHeaderAndDataAndBlockAlignment;
             }
             else if (_previouslyReadEntry._header._size > 0)
@@ -264,8 +263,7 @@ namespace System.Formats.Tar
             if (_archiveStream.CanSeek)
             {
                 Debug.Assert(_previouslyReadEntry._header._endOfHeaderAndDataAndBlockAlignment > 0);
-                _archiveStream.Position = _previouslyReadEntry
-                    ._header
+                _archiveStream.Position = _previouslyReadEntry._header
                     ._endOfHeaderAndDataAndBlockAlignment;
             }
             else if (_previouslyReadEntry._header._size > 0)

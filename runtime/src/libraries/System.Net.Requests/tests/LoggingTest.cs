@@ -12,8 +12,7 @@ namespace System.Net.Tests
         [SkipOnCoreClr("System.Net.Tests are flaky", ~RuntimeConfiguration.Release)]
         public void EventSource_ExistsWithCorrectId()
         {
-            Type esType = typeof(WebRequest)
-                .Assembly
+            Type esType = typeof(WebRequest).Assembly
                 .GetType("System.Net.NetEventSource", throwOnError: true, ignoreCase: false);
             Assert.NotNull(esType);
 

@@ -119,16 +119,13 @@ namespace Microsoft.CodeAnalysis.Remote
 
                     return new SerializableRenameLocations(
                         options,
-                        renameLocations
-                            .Locations
+                        renameLocations.Locations
                             .SelectAsArray(SerializableRenameLocation.Dehydrate),
-                        renameLocations
-                            .ImplicitLocations
+                        renameLocations.ImplicitLocations
                             .SelectAsArray(loc =>
                                 SerializableReferenceLocation.Dehydrate(loc, cancellationToken)
                             ),
-                        renameLocations
-                            .ReferencedSymbols
+                        renameLocations.ReferencedSymbols
                             .SelectAsArray(sym =>
                                 SerializableSymbolAndProjectId.Dehydrate(
                                     solution,

@@ -475,8 +475,8 @@ namespace System.ComponentModel.Composition.Hosting
                 if (this._innerCatalog == null)
                 {
 #if FEATURE_REFLECTIONCONTEXT
-                    var catalogReflectionContextAttribute =
-                        this._assembly.GetFirstAttribute<CatalogReflectionContextAttribute>();
+                    var catalogReflectionContextAttribute = this._assembly
+                        .GetFirstAttribute<CatalogReflectionContextAttribute>();
                     var assembly =
                         (catalogReflectionContextAttribute != null)
                             ? catalogReflectionContextAttribute

@@ -228,8 +228,7 @@ namespace System.Workflow.ComponentModel.Compiler
                     foreach (AttributeInfoAttribute attribInfo in attributes)
                     {
                         if (
-                            attribInfo
-                                .AttributeInfo
+                            attribInfo.AttributeInfo
                                 .AttributeType
                                 .FullName
                                 .Equals(attributeType.FullName)
@@ -331,8 +330,7 @@ namespace System.Workflow.ComponentModel.Compiler
                             !(baseAttribute is AttributeInfoAttribute)
                             || (
                                 !attributeTypes.Contains(
-                                    ((AttributeInfoAttribute)baseAttribute)
-                                        .AttributeInfo
+                                    ((AttributeInfoAttribute)baseAttribute).AttributeInfo
                                         .AttributeType
                                 )
                             )

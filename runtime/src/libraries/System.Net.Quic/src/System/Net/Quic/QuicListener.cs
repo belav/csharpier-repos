@@ -132,8 +132,7 @@ public sealed partial class QuicListener : IAsyncDisposable
         {
             QUIC_HANDLE* handle;
             ThrowHelper.ThrowIfMsQuicError(
-                MsQuicApi
-                    .Api
+                MsQuicApi.Api
                     .ListenerOpen(
                         MsQuicApi.Api.Registration,
                         &NativeCallback,
@@ -170,8 +169,7 @@ public sealed partial class QuicListener : IAsyncDisposable
             address.Family = QUIC_ADDRESS_FAMILY_UNSPEC;
         }
         ThrowHelper.ThrowIfMsQuicError(
-            MsQuicApi
-                .Api
+            MsQuicApi.Api
                 .ListenerStart(_handle, alpnBuffers.Buffers, (uint)alpnBuffers.Count, &address),
             "ListenerStart failed"
         );
@@ -202,8 +200,7 @@ public sealed partial class QuicListener : IAsyncDisposable
         GCHandle keepObject = GCHandle.Alloc(this);
         try
         {
-            object item = await _acceptQueue
-                .Reader
+            object item = await _acceptQueue.Reader
                 .ReadAsync(cancellationToken)
                 .ConfigureAwait(false);
             Interlocked.Increment(ref _pendingConnectionsCapacity);
@@ -363,8 +360,7 @@ public sealed partial class QuicListener : IAsyncDisposable
 
             await connection.DisposeAsync().ConfigureAwait(false);
             if (
-                !_acceptQueue
-                    .Writer
+                !_acceptQueue.Writer
                     .TryWrite(
                         wrapException
                             ? ExceptionDispatchInfo.SetCurrentStackTrace(
@@ -509,8 +505,7 @@ public sealed partial class QuicListener : IAsyncDisposable
 
         // Flush the queue and dispose all remaining connections.
         await _disposeCts.CancelAsync().ConfigureAwait(false);
-        _acceptQueue
-            .Writer
+        _acceptQueue.Writer
             .TryComplete(
                 ExceptionDispatchInfo.SetCurrentStackTrace(
                     new ObjectDisposedException(GetType().FullName)

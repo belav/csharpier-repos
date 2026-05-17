@@ -240,9 +240,8 @@ namespace Microsoft.Build.Evaluation
                 // FIXME: this is kind of workaround for unavoidable issue that PLATFORM=* is actually given
                 // on some platforms and that prevents setting default "PLATFORM=AnyCPU" property.
                 if (!string.Equals("PLATFORM", (string)p.Key, StringComparison.OrdinalIgnoreCase))
-                    this.properties.Add(
-                        new EnvironmentProjectProperty(this, (string)p.Key, (string)p.Value)
-                    );
+                    this.properties
+                        .Add(new EnvironmentProjectProperty(this, (string)p.Key, (string)p.Value));
             foreach (var p in GlobalProperties)
                 this.properties.Add(new GlobalProjectProperty(this, p.Key, p.Value));
             var tools =
@@ -290,23 +289,23 @@ namespace Microsoft.Build.Evaluation
                     foreach (var p in pge.Properties)
                         // do not allow overwriting reserved or well-known properties by user
                         if (
-                            !this.properties.Any(_ =>
-                                (_.IsReservedProperty || _.IsWellKnownProperty)
-                                && _.Name.Equals(
-                                    p.Name,
-                                    StringComparison.InvariantCultureIgnoreCase
+                            !this.properties
+                                .Any(_ =>
+                                    (_.IsReservedProperty || _.IsWellKnownProperty)
+                                    && _.Name
+                                        .Equals(p.Name, StringComparison.InvariantCultureIgnoreCase)
                                 )
-                            )
                         )
                             if (Evaluate(p.Condition))
-                                this.properties.Add(
-                                    new XmlProjectProperty(
-                                        this,
-                                        p,
-                                        PropertyType.Normal,
-                                        ProjectCollection.OngoingImports.Any()
-                                    )
-                                );
+                                this.properties
+                                    .Add(
+                                        new XmlProjectProperty(
+                                            this,
+                                            p,
+                                            PropertyType.Normal,
+                                            ProjectCollection.OngoingImports.Any()
+                                        )
+                                    );
 
                 var ige = child as ProjectImportGroupElement;
                 if (ige != null && Evaluate(ige.Condition))
@@ -711,17 +710,15 @@ namespace Microsoft.Build.Evaluation
 
         public static string GetMetadataValueEscaped(ProjectItem item, string name)
         {
-            var md = item.Metadata.FirstOrDefault(m =>
-                m.Name.Equals(name, StringComparison.OrdinalIgnoreCase)
-            );
+            var md = item.Metadata
+                .FirstOrDefault(m => m.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
             return md != null ? ProjectCollection.Escape(md.EvaluatedValue) : null;
         }
 
         public static string GetMetadataValueEscaped(ProjectItemDefinition item, string name)
         {
-            var md = item.Metadata.FirstOrDefault(m =>
-                m.Name.Equals(name, StringComparison.OrdinalIgnoreCase)
-            );
+            var md = item.Metadata
+                .FirstOrDefault(m => m.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
             return md != null ? ProjectCollection.Escape(md.EvaluatedValue) : null;
         }
 

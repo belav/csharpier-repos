@@ -135,8 +135,7 @@ namespace System.DirectoryServices.Protocols
             Marshal.StructureToPtr(defaults, ptrToDefaults, false);
             try
             {
-                return Interop
-                    .Ldap
+                return Interop.Ldap
                     .ldap_sasl_interactive_bind(
                         _ldapHandle,
                         null,
@@ -159,22 +158,19 @@ namespace System.DirectoryServices.Protocols
         {
             var defaults = new SaslDefaultCredentials { mech = Interop.KerberosDefaultMechanism };
             IntPtr outValue = IntPtr.Zero;
-            int error = Interop
-                .Ldap
+            int error = Interop.Ldap
                 .ldap_get_option_ptr(_ldapHandle, LdapOption.LDAP_OPT_X_SASL_REALM, ref outValue);
             if (error == 0 && outValue != IntPtr.Zero)
             {
                 defaults.realm = Marshal.PtrToStringAnsi(outValue);
             }
-            error = Interop
-                .Ldap
+            error = Interop.Ldap
                 .ldap_get_option_ptr(_ldapHandle, LdapOption.LDAP_OPT_X_SASL_AUTHCID, ref outValue);
             if (error == 0 && outValue != IntPtr.Zero)
             {
                 defaults.authcid = Marshal.PtrToStringAnsi(outValue);
             }
-            error = Interop
-                .Ldap
+            error = Interop.Ldap
                 .ldap_get_option_ptr(_ldapHandle, LdapOption.LDAP_OPT_X_SASL_AUTHZID, ref outValue);
             if (error == 0 && outValue != IntPtr.Zero)
             {

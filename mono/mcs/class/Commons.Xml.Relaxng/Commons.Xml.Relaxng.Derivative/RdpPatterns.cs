@@ -1862,14 +1862,15 @@ namespace Commons.Xml.Relaxng.Derivative
         {
             if (dataExcept)
                 throw new RelaxngException("oneOrMore is not allowed under except of a data.");
-            this.Child.CheckConstraints(
-                attribute,
-                true,
-                oneOrMoreGroup,
-                oneOrMoreInterleave,
-                list,
-                dataExcept
-            );
+            this.Child
+                .CheckConstraints(
+                    attribute,
+                    true,
+                    oneOrMoreGroup,
+                    oneOrMoreInterleave,
+                    list,
+                    dataExcept
+                );
         }
     }
 
@@ -1955,14 +1956,15 @@ namespace Commons.Xml.Relaxng.Derivative
                 throw new RelaxngException("list is not allowed uner another list.");
             if (dataExcept)
                 throw new RelaxngException("list is not allowed under except of a data.");
-            this.Child.CheckConstraints(
-                attribute,
-                oneOrMore,
-                oneOrMoreGroup,
-                oneOrMoreInterleave,
-                true,
-                dataExcept
-            );
+            this.Child
+                .CheckConstraints(
+                    attribute,
+                    oneOrMore,
+                    oneOrMoreGroup,
+                    oneOrMoreInterleave,
+                    true,
+                    dataExcept
+                );
         }
     }
 
@@ -2110,14 +2112,15 @@ namespace Commons.Xml.Relaxng.Derivative
             bool dataExcept
         )
         {
-            this.except.CheckConstraints(
-                attribute,
-                oneOrMore,
-                oneOrMoreGroup,
-                oneOrMoreInterleave,
-                list,
-                true
-            );
+            this.except
+                .CheckConstraints(
+                    attribute,
+                    oneOrMore,
+                    oneOrMoreGroup,
+                    oneOrMoreInterleave,
+                    list,
+                    true
+                );
         }
 
         internal override bool ContainsText()

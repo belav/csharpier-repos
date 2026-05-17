@@ -54,8 +54,7 @@ internal sealed class DefaultWebSocketManager : WebSocketManager
     {
         get
         {
-            return HttpRequestFeature
-                .Headers
+            return HttpRequestFeature.Headers
                 .GetCommaSeparatedValues(HeaderNames.WebSocketSubProtocols);
         }
     }

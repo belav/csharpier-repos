@@ -225,8 +225,7 @@ namespace System.Net.Sockets
                             {
                                 try
                                 {
-                                    bool canceled = Interop
-                                        .Kernel32
+                                    bool canceled = Interop.Kernel32
                                         .CancelIoEx(
                                             handle,
                                             thisRef._pendingOverlappedForCancellation
@@ -457,8 +456,7 @@ namespace System.Net.Sockets
                     };
 
                     SocketFlags flags = _socketFlags;
-                    SocketError socketError = Interop
-                        .Winsock
+                    SocketError socketError = Interop.Winsock
                         .WSARecv(
                             handle,
                             &wsaBuffer,
@@ -496,8 +494,7 @@ namespace System.Net.Sockets
             try
             {
                 SocketFlags flags = _socketFlags;
-                SocketError socketError = Interop
-                    .Winsock
+                SocketError socketError = Interop.Winsock
                     .WSARecv(
                         handle,
                         _wsaBufferArrayPinned,
@@ -562,8 +559,7 @@ namespace System.Net.Sockets
                     };
 
                     SocketFlags flags = _socketFlags;
-                    SocketError socketError = Interop
-                        .Winsock
+                    SocketError socketError = Interop.Winsock
                         .WSARecvFrom(
                             handle,
                             ref wsaBuffer,
@@ -603,8 +599,7 @@ namespace System.Net.Sockets
             try
             {
                 SocketFlags flags = _socketFlags;
-                SocketError socketError = Interop
-                    .Winsock
+                SocketError socketError = Interop.Winsock
                     .WSARecvFrom(
                         handle,
                         _wsaBufferArrayPinned!,
@@ -808,8 +803,7 @@ namespace System.Net.Sockets
                         Pointer = (IntPtr)(bufferPtr + _offset),
                     };
 
-                    SocketError socketError = Interop
-                        .Winsock
+                    SocketError socketError = Interop.Winsock
                         .WSASend(
                             handle,
                             &wsaBuffer,
@@ -846,8 +840,7 @@ namespace System.Net.Sockets
             NativeOverlapped* overlapped = AllocateNativeOverlapped();
             try
             {
-                SocketError socketError = Interop
-                    .Winsock
+                SocketError socketError = Interop.Winsock
                     .WSASend(
                         handle,
                         _wsaBufferArrayPinned,
@@ -1037,8 +1030,7 @@ namespace System.Net.Sockets
                         Pointer = (IntPtr)(bufferPtr + _offset),
                     };
 
-                    SocketError socketError = Interop
-                        .Winsock
+                    SocketError socketError = Interop.Winsock
                         .WSASendTo(
                             handle,
                             ref wsaBuffer,
@@ -1076,8 +1068,7 @@ namespace System.Net.Sockets
             NativeOverlapped* overlapped = AllocateNativeOverlapped();
             try
             {
-                SocketError socketError = Interop
-                    .Winsock
+                SocketError socketError = Interop.Winsock
                     .WSASendTo(
                         handle,
                         _wsaBufferArrayPinned!,
@@ -1414,8 +1405,7 @@ namespace System.Net.Sockets
                     remoteSocketAddress.Size = size;
                 }
 
-                socketError = Interop
-                    .Winsock
+                socketError = Interop.Winsock
                     .setsockopt(
                         _acceptSocket!.SafeHandle,
                         SocketOptionLevel.Socket,
@@ -1456,8 +1446,7 @@ namespace System.Net.Sockets
                 }
 
                 // Update the socket context.
-                SocketError socketError = Interop
-                    .Winsock
+                SocketError socketError = Interop.Winsock
                     .setsockopt(
                         _currentSocket!.SafeHandle,
                         SocketOptionLevel.Socket,
@@ -1638,8 +1627,7 @@ namespace System.Net.Sockets
                     try
                     {
                         // Call WSAGetOverlappedResult() so GetLastSocketError() will return the correct error.
-                        Interop
-                            .Winsock
+                        Interop.Winsock
                             .WSAGetOverlappedResult(
                                 _currentSocket.SafeHandle,
                                 nativeOverlapped,

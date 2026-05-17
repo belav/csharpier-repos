@@ -327,8 +327,7 @@ namespace Moq.Protected
 
         LambdaExpression ReconstructAndReplaceSetter(Action<TAnalog> setterExpression)
         {
-            var expression = ExpressionReconstructor
-                .Instance
+            var expression = ExpressionReconstructor.Instance
                 .ReconstructExpression(setterExpression, mock.ConstructorArguments);
             return ReplaceDuck(expression);
 

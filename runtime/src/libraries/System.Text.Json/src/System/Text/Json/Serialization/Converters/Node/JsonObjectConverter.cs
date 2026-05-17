@@ -26,8 +26,7 @@ namespace System.Text.Json.Serialization.Converters
             scoped ref ReadStack state
         )
         {
-            bool success = JsonNodeConverter
-                .Instance
+            bool success = JsonNodeConverter.Instance
                 .TryRead(
                     ref reader,
                     typeof(JsonNode),

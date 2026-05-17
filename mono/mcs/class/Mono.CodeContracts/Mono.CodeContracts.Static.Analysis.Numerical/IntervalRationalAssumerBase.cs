@@ -43,8 +43,7 @@ namespace Mono.CodeContracts.Static.Analysis.Numerical
         )
         {
             bool isBottom;
-            var constraints = IntervalInference
-                .ConstraintsFor
+            var constraints = IntervalInference.ConstraintsFor
                 .LessThan<
                     IIntervalEnvironment<TVar, TExpr, TInterval, Rational>,
                     TVar,
@@ -77,8 +76,7 @@ namespace Mono.CodeContracts.Static.Analysis.Numerical
         )
         {
             bool isBottom;
-            var constraints = IntervalInference
-                .ConstraintsFor
+            var constraints = IntervalInference.ConstraintsFor
                 .LessEqualThan<
                     IntervalEnvironmentBase<TVar, TExpr, TInterval, Rational>,
                     TVar,
@@ -101,8 +99,7 @@ namespace Mono.CodeContracts.Static.Analysis.Numerical
             IntervalEnvironmentBase<TVar, TExpr, TInterval, Rational> env
         )
         {
-            var constraints = IntervalInference
-                .ConstraintsFor
+            var constraints = IntervalInference.ConstraintsFor
                 .GreaterEqualThanZero<
                     IntervalEnvironmentBase<TVar, TExpr, TInterval, Rational>,
                     TVar,
@@ -120,8 +117,7 @@ namespace Mono.CodeContracts.Static.Analysis.Numerical
         {
             TInterval refined;
             if (
-                !IntervalInference
-                    .ConstraintsFor
+                !IntervalInference.ConstraintsFor
                     .TryRefineLessEqualThan<
                         IntervalEnvironmentBase<TVar, TExpr, TInterval, Rational>,
                         TVar,
@@ -147,8 +143,7 @@ namespace Mono.CodeContracts.Static.Analysis.Numerical
         {
             TInterval refined;
             if (
-                !IntervalInference
-                    .ConstraintsFor
+                !IntervalInference.ConstraintsFor
                     .TryRefineLessEqualThan<
                         IntervalEnvironmentBase<TVar, TExpr, TInterval, Rational>,
                         TVar,

@@ -41,8 +41,7 @@ namespace ILCompiler.DependencyAnalysis
         {
             DependencyList dependencies = null;
 
-            factory
-                .MetadataManager
+            factory.MetadataManager
                 .GetDependenciesDueToVirtualMethodReflectability(
                     ref dependencies,
                     factory,

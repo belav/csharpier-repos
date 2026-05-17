@@ -411,12 +411,13 @@ namespace System.Net.Http.Functional.Tests
         private sealed class ThreadPerTaskScheduler : TaskScheduler
         {
             protected override void QueueTask(Task task) =>
-                Task.Factory.StartNew(
-                    () => TryExecuteTask(task),
-                    CancellationToken.None,
-                    TaskCreationOptions.LongRunning,
-                    TaskScheduler.Default
-                );
+                Task.Factory
+                    .StartNew(
+                        () => TryExecuteTask(task),
+                        CancellationToken.None,
+                        TaskCreationOptions.LongRunning,
+                        TaskScheduler.Default
+                    );
 
             protected override bool TryExecuteTaskInline(Task task, bool taskWasPreviouslyQueued) =>
                 TryExecuteTask(task);

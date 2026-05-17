@@ -294,8 +294,7 @@ namespace System.Security.Cryptography.Pkcs
                     newSignerInfo.Version = 1;
                     break;
                 case SubjectIdentifierType.SubjectKeyIdentifier:
-                    newSignerInfo.Sid.SubjectKeyIdentifier = PkcsPal
-                        .Instance
+                    newSignerInfo.Sid.SubjectKeyIdentifier = PkcsPal.Instance
                         .GetSubjectKeyIdentifier(Certificate!);
                     newSignerInfo.Version = 3;
                     break;

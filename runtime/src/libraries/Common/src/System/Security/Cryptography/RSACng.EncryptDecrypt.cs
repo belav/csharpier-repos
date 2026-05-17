@@ -421,8 +421,7 @@ namespace System.Security.Cryptography
         )
         {
             ErrorCode errorCode = encrypt
-                ? Interop
-                    .NCrypt
+                ? Interop.NCrypt
                     .NCryptEncrypt(
                         key,
                         input,
@@ -433,8 +432,7 @@ namespace System.Security.Cryptography
                         out bytesNeeded,
                         paddingMode
                     )
-                : Interop
-                    .NCrypt
+                : Interop.NCrypt
                     .NCryptDecrypt(
                         key,
                         input,

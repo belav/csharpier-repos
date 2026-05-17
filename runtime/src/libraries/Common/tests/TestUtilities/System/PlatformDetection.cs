@@ -34,8 +34,7 @@ namespace System
 
         public static bool IsNetCore =>
             Environment.Version.Major >= 5
-            || RuntimeInformation
-                .FrameworkDescription
+            || RuntimeInformation.FrameworkDescription
                 .StartsWith(".NET Core", StringComparison.OrdinalIgnoreCase);
         public static bool IsMonoRuntime => Type.GetType("Mono.RuntimeStructs") != null;
         public static bool IsNotMonoRuntime => !IsMonoRuntime;
@@ -310,8 +309,7 @@ namespace System
         }
 
         public static bool IsDomainJoinedMachine =>
-            !Environment
-                .MachineName
+            !Environment.MachineName
                 .Equals(Environment.UserDomainName, StringComparison.OrdinalIgnoreCase);
         public static bool IsNotDomainJoinedMachine => !IsDomainJoinedMachine;
 
@@ -796,8 +794,7 @@ namespace System
 
         private static bool AssemblyConfigurationEquals(string configuration)
         {
-            AssemblyConfigurationAttribute assemblyConfigurationAttribute = typeof(string)
-                .Assembly
+            AssemblyConfigurationAttribute assemblyConfigurationAttribute = typeof(string).Assembly
                 .GetCustomAttribute<AssemblyConfigurationAttribute>();
 
             return assemblyConfigurationAttribute != null

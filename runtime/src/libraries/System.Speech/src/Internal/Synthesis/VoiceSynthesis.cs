@@ -1097,8 +1097,7 @@ namespace System.Speech.Internal.Synthesis
                     if (_pendingSpeakQueue.Count == 0)
                     {
                         _currentPrompt = null;
-                        System
-                            .Diagnostics
+                        System.Diagnostics
                             .Debug
                             .Assert(
                                 State == SynthesizerState.Speaking

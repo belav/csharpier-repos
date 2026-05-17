@@ -309,14 +309,15 @@ namespace MonoTests.System.ServiceModel.Security.Tokens
                 "http://schemas.xmlsoap.org/ws/2005/02/trust/RST/IssueResponse",
                 doc.DocumentElement
             );
-            msg.Headers.Add(
-                MessageHeader.CreateHeader(
-                    "Security",
-                    "http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd",
-                    null,
-                    true
-                )
-            );
+            msg.Headers
+                .Add(
+                    MessageHeader.CreateHeader(
+                        "Security",
+                        "http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd",
+                        null,
+                        true
+                    )
+                );
 
             return msg;
         }
@@ -346,14 +347,15 @@ namespace MonoTests.System.ServiceModel.Security.Tokens
                 "http://schemas.xmlsoap.org/ws/2005/02/trust/RSTR/Issue",
                 sxml.GetXml()
             );
-            msg.Headers.Add(
-                MessageHeader.CreateHeader(
-                    "Security",
-                    "http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd",
-                    null,
-                    true
-                )
-            );
+            msg.Headers
+                .Add(
+                    MessageHeader.CreateHeader(
+                        "Security",
+                        "http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd",
+                        null,
+                        true
+                    )
+                );
 
             return msg;
             //*/
@@ -423,8 +425,7 @@ namespace MonoTests.System.ServiceModel.Security.Tokens
             //   <e:CipherData> {{....}} </e:CipherData>
             //  </e:EncryptedData>
             // </o:Security>
-            int i = input
-                .Headers
+            int i = input.Headers
                 .FindHeader(
                     "Security",
                     "http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd"

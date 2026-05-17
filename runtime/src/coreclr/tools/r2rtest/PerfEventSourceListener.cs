@@ -41,8 +41,7 @@ public sealed class PerfEventSourceListener
         traceEventSession.EnableProvider(providerName, TraceEventLevel.Verbose);
         traceEventSession.EnableProvider(graphProviderName, TraceEventLevel.Verbose);
 
-        traceEventSession
-            .Source
+        traceEventSession.Source
             .Dynamic
             .AddCallbackForProviderEvent(
                 providerName,
@@ -54,8 +53,7 @@ public sealed class PerfEventSourceListener
                 }
             );
         // Use the Compilation/Stop events to count when a run ends, since events arrive in order.
-        traceEventSession
-            .Source
+        traceEventSession.Source
             .Dynamic
             .AddCallbackForProviderEvent(
                 providerName,
@@ -85,8 +83,7 @@ public sealed class PerfEventSourceListener
         // For all of the events below, we only want to process them after the warmup is complete. We can't just start this listener after
         // we have started the warmup because those runs might take some time, and we don't want to erroneously process warmup events when
         // trying to measure the real runs.
-        traceEventSession
-            .Source
+        traceEventSession.Source
             .Dynamic
             .AddCallbackForProviderEvent(
                 providerName,
@@ -97,8 +94,7 @@ public sealed class PerfEventSourceListener
                         _commandlineParseMsec -= traceEvent.TimeStampRelativeMSec;
                 }
             );
-        traceEventSession
-            .Source
+        traceEventSession.Source
             .Dynamic
             .AddCallbackForProviderEvent(
                 providerName,
@@ -109,8 +105,7 @@ public sealed class PerfEventSourceListener
                         _commandlineParseMsec += traceEvent.TimeStampRelativeMSec;
                 }
             );
-        traceEventSession
-            .Source
+        traceEventSession.Source
             .Dynamic
             .AddCallbackForProviderEvent(
                 providerName,
@@ -121,8 +116,7 @@ public sealed class PerfEventSourceListener
                         _loadingMsec -= traceEvent.TimeStampRelativeMSec;
                 }
             );
-        traceEventSession
-            .Source
+        traceEventSession.Source
             .Dynamic
             .AddCallbackForProviderEvent(
                 providerName,
@@ -134,8 +128,7 @@ public sealed class PerfEventSourceListener
                 }
             );
 
-        traceEventSession
-            .Source
+        traceEventSession.Source
             .Dynamic
             .AddCallbackForProviderEvent(
                 graphProviderName,
@@ -146,8 +139,7 @@ public sealed class PerfEventSourceListener
                         _graphProcessingMsec -= traceEvent.TimeStampRelativeMSec;
                 }
             );
-        traceEventSession
-            .Source
+        traceEventSession.Source
             .Dynamic
             .AddCallbackForProviderEvent(
                 graphProviderName,
@@ -159,8 +151,7 @@ public sealed class PerfEventSourceListener
                 }
             );
 
-        traceEventSession
-            .Source
+        traceEventSession.Source
             .Dynamic
             .AddCallbackForProviderEvent(
                 providerName,
@@ -171,8 +162,7 @@ public sealed class PerfEventSourceListener
                         _emittingMsec -= traceEvent.TimeStampRelativeMSec;
                 }
             );
-        traceEventSession
-            .Source
+        traceEventSession.Source
             .Dynamic
             .AddCallbackForProviderEvent(
                 providerName,
@@ -184,8 +174,7 @@ public sealed class PerfEventSourceListener
                 }
             );
 
-        traceEventSession
-            .Source
+        traceEventSession.Source
             .Dynamic
             .AddCallbackForProviderEvent(
                 providerName,
@@ -196,8 +185,7 @@ public sealed class PerfEventSourceListener
                         _jitMsec -= traceEvent.TimeStampRelativeMSec;
                 }
             );
-        traceEventSession
-            .Source
+        traceEventSession.Source
             .Dynamic
             .AddCallbackForProviderEvent(
                 providerName,
@@ -209,8 +197,7 @@ public sealed class PerfEventSourceListener
                 }
             );
 
-        traceEventSession
-            .Source
+        traceEventSession.Source
             .Dynamic
             .AddCallbackForProviderEvent(
                 providerName,
@@ -224,8 +211,7 @@ public sealed class PerfEventSourceListener
                     }
                 }
             );
-        traceEventSession
-            .Source
+        traceEventSession.Source
             .Dynamic
             .AddCallbackForProviderEvent(
                 providerName,
@@ -237,8 +223,7 @@ public sealed class PerfEventSourceListener
                 }
             );
 
-        traceEventSession
-            .Source
+        traceEventSession.Source
             .Dynamic
             .AddCallbackForProviderEvent(
                 graphProviderName,
@@ -249,8 +234,7 @@ public sealed class PerfEventSourceListener
                         _dependencyAnalysisMsec -= traceEvent.TimeStampRelativeMSec;
                 }
             );
-        traceEventSession
-            .Source
+        traceEventSession.Source
             .Dynamic
             .AddCallbackForProviderEvent(
                 graphProviderName,
@@ -262,8 +246,7 @@ public sealed class PerfEventSourceListener
                 }
             );
 
-        traceEventSession
-            .Source
+        traceEventSession.Source
             .Dynamic
             .AddCallbackForProviderEvent(
                 graphProviderName,

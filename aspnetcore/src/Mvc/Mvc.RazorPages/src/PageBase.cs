@@ -69,8 +69,7 @@ public abstract class PageBase : RazorPageBase
     {
         get
         {
-            _metadataProvider ??= HttpContext
-                ?.RequestServices
+            _metadataProvider ??= HttpContext?.RequestServices
                 ?.GetRequiredService<IModelMetadataProvider>();
             return _metadataProvider!;
         }
@@ -83,8 +82,7 @@ public abstract class PageBase : RazorPageBase
         {
             if (_objectValidator == null)
             {
-                _objectValidator = HttpContext
-                    ?.RequestServices
+                _objectValidator = HttpContext?.RequestServices
                     ?.GetRequiredService<IObjectModelValidator>();
             }
 
@@ -98,8 +96,7 @@ public abstract class PageBase : RazorPageBase
         {
             if (_modelBinderFactory == null)
             {
-                _modelBinderFactory = HttpContext
-                    ?.RequestServices
+                _modelBinderFactory = HttpContext?.RequestServices
                     ?.GetRequiredService<IModelBinderFactory>();
             }
 

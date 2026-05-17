@@ -32,20 +32,17 @@ namespace System.ServiceModel.Security
         {
             if (innerTokenSerializer == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("innerTokenSerializer");
             }
             if (secureConversation == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("secureConversation");
             }
             if (cacheSize <= 0)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentOutOfRangeException(
                             "cacheSize",
@@ -94,19 +91,20 @@ namespace System.ServiceModel.Security
                 int generation;
                 SecurityKeyIdentifierClause tokenToDeriveIdentifier;
                 SecurityToken tokenToDerive;
-                this.secureConversation.ReadDerivedKeyTokenParameters(
-                    dictionaryReader,
-                    tokenResolver,
-                    out id,
-                    out derivationAlgorithm,
-                    out label,
-                    out length,
-                    out nonce,
-                    out offset,
-                    out generation,
-                    out tokenToDeriveIdentifier,
-                    out tokenToDerive
-                );
+                this.secureConversation
+                    .ReadDerivedKeyTokenParameters(
+                        dictionaryReader,
+                        tokenResolver,
+                        out id,
+                        out derivationAlgorithm,
+                        out label,
+                        out length,
+                        out nonce,
+                        out offset,
+                        out generation,
+                        out tokenToDeriveIdentifier,
+                        out tokenToDerive
+                    );
 
                 DerivedKeySecurityToken cachedToken = GetCachedToken(
                     id,
@@ -141,17 +139,18 @@ namespace System.ServiceModel.Security
                     {
                         return cachedToken;
                     }
-                    SecurityToken result = this.secureConversation.CreateDerivedKeyToken(
-                        id,
-                        derivationAlgorithm,
-                        label,
-                        length,
-                        nonce,
-                        offset,
-                        generation,
-                        tokenToDeriveIdentifier,
-                        tokenToDerive
-                    );
+                    SecurityToken result = this.secureConversation
+                        .CreateDerivedKeyToken(
+                            id,
+                            derivationAlgorithm,
+                            label,
+                            length,
+                            nonce,
+                            offset,
+                            generation,
+                            tokenToDeriveIdentifier,
+                            tokenToDerive
+                        );
                     DerivedKeySecurityToken newToken = result as DerivedKeySecurityToken;
                     if (newToken != null)
                     {

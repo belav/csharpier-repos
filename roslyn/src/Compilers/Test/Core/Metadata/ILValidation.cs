@@ -350,8 +350,7 @@ namespace Roslyn.Test.Utilities
                     }
                     else
                     {
-                        ILVisualizer
-                            .Default
+                        ILVisualizer.Default
                             .DumpMethod(
                                 result,
                                 methodIL.MaxStack,

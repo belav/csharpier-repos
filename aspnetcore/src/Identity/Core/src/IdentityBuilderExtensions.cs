@@ -56,20 +56,17 @@ public static class IdentityBuilderExtensions
     private static void AddSignInManagerDeps(this IdentityBuilder builder)
     {
         builder.Services.AddHttpContextAccessor();
-        builder
-            .Services
+        builder.Services
             .AddScoped(
                 typeof(ISecurityStampValidator),
                 typeof(SecurityStampValidator<>).MakeGenericType(builder.UserType)
             );
-        builder
-            .Services
+        builder.Services
             .AddScoped(
                 typeof(ITwoFactorSecurityStampValidator),
                 typeof(TwoFactorSecurityStampValidator<>).MakeGenericType(builder.UserType)
             );
-        builder
-            .Services
+        builder.Services
             .TryAddEnumerable(
                 ServiceDescriptor.Singleton<
                     IPostConfigureOptions<SecurityStampValidatorOptions>,
@@ -128,8 +125,7 @@ public static class IdentityBuilderExtensions
         }
         if (managerType != customType)
         {
-            builder
-                .Services
+            builder.Services
                 .AddScoped(
                     typeof(TSignInManager),
                     services => services.GetRequiredService(managerType)
@@ -152,12 +148,10 @@ public static class IdentityBuilderExtensions
 
         builder.AddSignInManager();
         builder.AddDefaultTokenProviders();
-        builder
-            .Services
+        builder.Services
             .TryAddTransient(typeof(IEmailSender<>), typeof(DefaultMessageEmailSender<>));
         builder.Services.TryAddTransient<IEmailSender, NoOpEmailSender>();
-        builder
-            .Services
+        builder.Services
             .TryAddEnumerable(
                 ServiceDescriptor.Singleton<
                     IConfigureOptions<JsonOptions>,

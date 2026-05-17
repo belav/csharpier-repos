@@ -150,8 +150,7 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
 
                 // Add ourselves as the source of results for the window.
                 // Additionally, add applicable custom columns to display custom reference information
-                _findReferencesWindow
-                    .Manager
+                _findReferencesWindow.Manager
                     .AddSource(
                         this,
                         SelectCustomColumnsToInclude(
@@ -445,8 +444,7 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
                 CancellationToken cancellationToken
             )
             {
-                var excerptService = documentSpan
-                    .Document
+                var excerptService = documentSpan.Document
                     .Services
                     .GetService<IDocumentExcerptService>();
                 if (excerptService != null)

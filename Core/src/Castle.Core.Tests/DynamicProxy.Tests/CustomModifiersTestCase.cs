@@ -79,26 +79,22 @@ namespace Castle.DynamicProxy.Tests
         }
 
         public static IEnumerable<string> AsModoptOnParamTypeNames =>
-            CustomModifiersTestCase
-                .customModifiers
+            CustomModifiersTestCase.customModifiers
                 .Keys
                 .Select(typeName => typeName + "_AsModoptOnParamType");
 
         public static IEnumerable<string> AsModreqOnParamTypeNames =>
-            CustomModifiersTestCase
-                .customModifiers
+            CustomModifiersTestCase.customModifiers
                 .Keys
                 .Select(typeName => typeName + "_AsModreqOnParamType");
 
         public static IEnumerable<string> AsModoptOnReturnTypeNames =>
-            CustomModifiersTestCase
-                .customModifiers
+            CustomModifiersTestCase.customModifiers
                 .Keys
                 .Select(typeName => typeName + "_AsModoptOnReturnType");
 
         public static IEnumerable<string> AsModreqOnReturnTypeNames =>
-            CustomModifiersTestCase
-                .customModifiers
+            CustomModifiersTestCase.customModifiers
                 .Keys
                 .Select(typeName => typeName + "_AsModreqOnReturnType");
 

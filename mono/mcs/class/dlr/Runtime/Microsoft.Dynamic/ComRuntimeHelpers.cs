@@ -559,8 +559,7 @@ namespace Microsoft.Scripting
                 return;
             }
 
-            System
-                .Runtime
+            System.Runtime
                 .InteropServices
                 .Marshal
                 .GetNativeVariantForObject(
@@ -783,8 +782,7 @@ namespace Microsoft.Scripting
                         };
 
                         string name = typeof(VariantArray).Namespace + ".DynamicAssembly";
-                        var assembly = AppDomain
-                            .CurrentDomain
+                        var assembly = AppDomain.CurrentDomain
                             .DefineDynamicAssembly(
                                 new AssemblyName(name),
                                 AssemblyBuilderAccess.Run,

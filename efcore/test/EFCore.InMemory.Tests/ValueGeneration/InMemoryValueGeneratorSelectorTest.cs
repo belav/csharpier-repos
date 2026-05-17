@@ -15,8 +15,7 @@ public class InMemoryValueGeneratorSelectorTest
         var model = BuildModel();
         var entityType = model.FindEntityType(typeof(AnEntity));
 
-        var selector = InMemoryTestHelpers
-            .Instance
+        var selector = InMemoryTestHelpers.Instance
             .CreateContextServices(model)
             .GetRequiredService<IValueGeneratorSelector>();
 
@@ -110,8 +109,7 @@ public class InMemoryValueGeneratorSelectorTest
     {
         var model = BuildModel();
 
-        var selector = InMemoryTestHelpers
-            .Instance
+        var selector = InMemoryTestHelpers.Instance
             .CreateContextServices(model)
             .GetRequiredService<IValueGeneratorSelector>();
 
@@ -124,8 +122,7 @@ public class InMemoryValueGeneratorSelectorTest
         var model = BuildModel();
         var entityType = model.FindEntityType(typeof(AnEntity));
 
-        var selector = InMemoryTestHelpers
-            .Instance
+        var selector = InMemoryTestHelpers.Instance
             .CreateContextServices(model)
             .GetRequiredService<IValueGeneratorSelector>();
 

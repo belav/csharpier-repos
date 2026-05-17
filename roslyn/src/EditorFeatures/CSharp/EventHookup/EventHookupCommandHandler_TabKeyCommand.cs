@@ -102,8 +102,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.EventHookup
                 == TaskStatus.RanToCompletion
             )
             {
-                eventHandlerMethodName = EventHookupSessionManager
-                    .CurrentSession
+                eventHandlerMethodName = EventHookupSessionManager.CurrentSession
                     .GetEventNameTask
                     .WaitAndGetResult(cancellationToken);
             }
@@ -256,8 +255,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.EventHookup
                 .Span
                 .End;
 
-            return document
-                .Project
+            return document.Project
                 .Solution
                 .WithDocumentText(
                     formattedDocument.Id,
@@ -344,8 +342,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.EventHookup
             var container =
                 (SyntaxNode)typeDecl ?? eventHookupExpression.GetAncestor<CompilationUnitSyntax>();
 
-            var codeGenerator = document
-                .Document
+            var codeGenerator = document.Document
                 .GetRequiredLanguageService<ICodeGenerationService>();
             var codeGenOptions = codeGenerator.GetInfo(
                 new CodeGenerationContext(afterThisLocation: eventHookupExpression.GetLocation()),
@@ -381,8 +378,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.EventHookup
                 return null;
             }
 
-            var typeInference = semanticDocument
-                .Document
+            var typeInference = semanticDocument.Document
                 .GetLanguageService<ITypeInferenceService>();
             var delegateType = typeInference.InferDelegateType(
                 semanticModel,
@@ -395,8 +391,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.EventHookup
             }
 
             var syntaxFactory = semanticDocument.Document.GetLanguageService<SyntaxGenerator>();
-            var delegateInvokeMethod = delegateType
-                .DelegateInvokeMethod
+            var delegateInvokeMethod = delegateType.DelegateInvokeMethod
                 .RemoveInaccessibleAttributesAndAttributesOfTypes(
                     semanticDocument.SemanticModel.Compilation.Assembly
                 );

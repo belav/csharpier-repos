@@ -760,8 +760,7 @@ namespace System.Net.Security.Tests
             using (clientStream)
             using (serverStream)
             using (
-                X509Certificate2 serverCert = Configuration
-                    .Certificates
+                X509Certificate2 serverCert = Configuration.Certificates
                     .GetSelfSignedServerCertificate()
             )
             using (

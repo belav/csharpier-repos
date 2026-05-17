@@ -104,8 +104,7 @@ namespace Mono.ILASM
 
             LocalVariableEntry[] locals = method.GetLocalVars();
 
-            MethodEntry entry = writer
-                .SymbolFile
+            MethodEntry entry = writer.SymbolFile
                 .DefineMethod(file, Token, null, locals, the_lines, null, null, 0, 0);
         }
     }

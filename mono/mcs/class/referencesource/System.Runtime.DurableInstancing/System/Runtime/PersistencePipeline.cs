@@ -96,12 +96,16 @@ namespace System.Runtime
                         }
                         catch (ArgumentException exception)
                         {
-                            throw Fx.Exception.AsError(
-                                new InvalidOperationException(
-                                    SRCore.NameCollisionOnCollect(value.Key, module.GetType().Name),
-                                    exception
-                                )
-                            );
+                            throw Fx.Exception
+                                .AsError(
+                                    new InvalidOperationException(
+                                        SRCore.NameCollisionOnCollect(
+                                            value.Key,
+                                            module.GetType().Name
+                                        ),
+                                        exception
+                                    )
+                                );
                         }
                     }
                 }
@@ -111,22 +115,28 @@ namespace System.Runtime
                     {
                         try
                         {
-                            this.values.Add(
-                                value.Key,
-                                new InstanceValue(
-                                    value.Value,
-                                    InstanceValueOptions.Optional | InstanceValueOptions.WriteOnly
-                                )
-                            );
+                            this.values
+                                .Add(
+                                    value.Key,
+                                    new InstanceValue(
+                                        value.Value,
+                                        InstanceValueOptions.Optional
+                                            | InstanceValueOptions.WriteOnly
+                                    )
+                                );
                         }
                         catch (ArgumentException exception)
                         {
-                            throw Fx.Exception.AsError(
-                                new InvalidOperationException(
-                                    SRCore.NameCollisionOnCollect(value.Key, module.GetType().Name),
-                                    exception
-                                )
-                            );
+                            throw Fx.Exception
+                                .AsError(
+                                    new InvalidOperationException(
+                                        SRCore.NameCollisionOnCollect(
+                                            value.Key,
+                                            module.GetType().Name
+                                        ),
+                                        exception
+                                    )
+                                );
                         }
                     }
                 }
@@ -180,25 +190,28 @@ namespace System.Runtime
                     {
                         try
                         {
-                            this.values.Add(
-                                value.Key,
-                                new InstanceValue(
-                                    value.Value,
-                                    InstanceValueOptions.Optional | InstanceValueOptions.WriteOnly
-                                )
-                            );
+                            this.values
+                                .Add(
+                                    value.Key,
+                                    new InstanceValue(
+                                        value.Value,
+                                        InstanceValueOptions.Optional
+                                            | InstanceValueOptions.WriteOnly
+                                    )
+                                );
                         }
                         catch (ArgumentException exception)
                         {
-                            throw Fx.Exception.AsError(
-                                new InvalidOperationException(
-                                    SRCore.NameCollisionOnMap(
-                                        value.Key,
-                                        writeOnlyValues.Item1.GetType().Name
-                                    ),
-                                    exception
-                                )
-                            );
+                            throw Fx.Exception
+                                .AsError(
+                                    new InvalidOperationException(
+                                        SRCore.NameCollisionOnMap(
+                                            value.Key,
+                                            writeOnlyValues.Item1.GetType().Name
+                                        ),
+                                        exception
+                                    )
+                                );
                         }
                     }
                 }
@@ -280,12 +293,13 @@ namespace System.Runtime
                     {
                         throw;
                     }
-                    throw Fx.Exception.AsError(
-                        new CallbackException(
-                            SRCore.PersistencePipelineAbortThrew(module.GetType().Name),
-                            exception
-                        )
-                    );
+                    throw Fx.Exception
+                        .AsError(
+                            new CallbackException(
+                                SRCore.PersistencePipelineAbortThrew(module.GetType().Name),
+                                exception
+                            )
+                        );
                 }
             }
         }
@@ -641,12 +655,13 @@ namespace System.Runtime
                             {
                                 throw;
                             }
-                            throw Fx.Exception.AsError(
-                                new CallbackException(
-                                    SRCore.PersistencePipelineAbortThrew(module.GetType().Name),
-                                    exception
-                                )
-                            );
+                            throw Fx.Exception
+                                .AsError(
+                                    new CallbackException(
+                                        SRCore.PersistencePipelineAbortThrew(module.GetType().Name),
+                                        exception
+                                    )
+                                );
                         }
                     }
                 }

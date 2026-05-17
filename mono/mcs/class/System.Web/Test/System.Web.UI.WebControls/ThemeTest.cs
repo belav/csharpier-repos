@@ -124,8 +124,7 @@ namespace MonoTests.System.Web.UI.WebControls
                 "RedImage Theme#2"
             );
             Assert.IsTrue(
-                ((MyWebControl.Image)p.FindControl("ImageYellow"))
-                    .ImageUrl
+                ((MyWebControl.Image)p.FindControl("ImageYellow")).ImageUrl
                     .IndexOf("myyellowimageurl") >= 0,
                 "YellowImage Theme#3"
             );
@@ -192,14 +191,12 @@ namespace MonoTests.System.Web.UI.WebControls
                 "RedImage Theme#2"
             );
             Assert.IsTrue(
-                ((MyWebControl.Image)p.FindControl("ImageYellow"))
-                    .ImageUrl
+                ((MyWebControl.Image)p.FindControl("ImageYellow")).ImageUrl
                     .IndexOf("myyellowimageurl") >= 0,
                 "YellowImage Theme#3"
             );
             Assert.IsTrue(
-                ((MyWebControl.Image)p.FindControl("ImageOverride"))
-                    .ImageUrl
+                ((MyWebControl.Image)p.FindControl("ImageOverride")).ImageUrl
                     .IndexOf("overridedurl") >= 0,
                 "OverrideImage Theme#3"
             );
@@ -254,8 +251,7 @@ namespace MonoTests.System.Web.UI.WebControls
                 "RedImage Theme#2"
             );
             Assert.IsTrue(
-                ((MyWebControl.Image)p.FindControl("ImageYellow"))
-                    .ImageUrl
+                ((MyWebControl.Image)p.FindControl("ImageYellow")).ImageUrl
                     .IndexOf("myyellowimageurl") >= 0,
                 "YellowImage Theme#3"
             );

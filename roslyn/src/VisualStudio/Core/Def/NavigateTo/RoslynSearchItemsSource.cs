@@ -20,16 +20,14 @@ internal sealed partial class RoslynSearchItemsSourceProvider
     /// </summary>
     private sealed class RoslynSearchItemsSource : CodeSearchItemsSourceBase
     {
-        private static readonly IImmutableSet<string> s_typeKinds = ImmutableHashSet<string>
-            .Empty
+        private static readonly IImmutableSet<string> s_typeKinds = ImmutableHashSet<string>.Empty
             .Add(NavigateToItemKind.Class)
             .Add(NavigateToItemKind.Enum)
             .Add(NavigateToItemKind.Structure)
             .Add(NavigateToItemKind.Interface)
             .Add(NavigateToItemKind.Delegate)
             .Add(NavigateToItemKind.Module);
-        private static readonly IImmutableSet<string> s_memberKinds = ImmutableHashSet<string>
-            .Empty
+        private static readonly IImmutableSet<string> s_memberKinds = ImmutableHashSet<string>.Empty
             .Add(NavigateToItemKind.Constant)
             .Add(NavigateToItemKind.EnumItem)
             .Add(NavigateToItemKind.Field)
@@ -51,8 +49,7 @@ internal sealed partial class RoslynSearchItemsSourceProvider
             CancellationToken cancellationToken
         )
         {
-            using var token = _provider
-                ._asyncListener
+            using var token = _provider._asyncListener
                 .BeginAsyncOperation(nameof(PerformSearchAsync));
 
             try
@@ -61,11 +58,9 @@ internal sealed partial class RoslynSearchItemsSourceProvider
                 if (string.IsNullOrWhiteSpace(searchValue))
                     return;
 
-                var includeTypeResults = searchQuery
-                    .FiltersStates
+                var includeTypeResults = searchQuery.FiltersStates
                     .Any(f => f is { Key: "Types", Value: "True" });
-                var includeMembersResults = searchQuery
-                    .FiltersStates
+                var includeMembersResults = searchQuery.FiltersStates
                     .Any(f => f is { Key: "Members", Value: "True" });
 
                 var kinds = (includeTypeResults, includeMembersResults) switch

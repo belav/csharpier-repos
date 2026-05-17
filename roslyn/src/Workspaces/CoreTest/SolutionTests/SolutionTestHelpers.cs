@@ -19,8 +19,7 @@ namespace Microsoft.CodeAnalysis.UnitTests
             TestHost testHost = TestHost.InProcess
         ) =>
             new AdhocWorkspace(
-                FeaturesTestCompositions
-                    .Features
+                FeaturesTestCompositions.Features
                     .AddParts(additionalParts)
                     .WithTestHostParts(testHost)
                     .GetHostServices()

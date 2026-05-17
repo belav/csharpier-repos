@@ -1567,11 +1567,12 @@ namespace Microsoft.Cci
                 this.Context
                     .Diagnostics
                     .Add(
-                        this.messageProvider.CreateDiagnostic(
-                            this.messageProvider.ERR_MetadataNameTooLong,
-                            location,
-                            name
-                        )
+                        this.messageProvider
+                            .CreateDiagnostic(
+                                this.messageProvider.ERR_MetadataNameTooLong,
+                                location,
+                                name
+                            )
                     );
             }
         }
@@ -1584,11 +1585,12 @@ namespace Microsoft.Cci
                 this.Context
                     .Diagnostics
                     .Add(
-                        this.messageProvider.CreateDiagnostic(
-                            this.messageProvider.ERR_MetadataNameTooLong,
-                            location,
-                            path
-                        )
+                        this.messageProvider
+                            .CreateDiagnostic(
+                                this.messageProvider.ERR_MetadataNameTooLong,
+                                location,
+                                path
+                            )
                     );
             }
         }
@@ -1621,11 +1623,12 @@ namespace Microsoft.Cci
                     this.Context
                         .Diagnostics
                         .Add(
-                            this.messageProvider.CreateDiagnostic(
-                                this.messageProvider.ERR_MetadataNameTooLong,
-                                location,
-                                namespaceName + "." + mangledTypeName
-                            )
+                            this.messageProvider
+                                .CreateDiagnostic(
+                                    this.messageProvider.ERR_MetadataNameTooLong,
+                                    location,
+                                    namespaceName + "." + mangledTypeName
+                                )
                         );
                 }
             }
@@ -1639,11 +1642,12 @@ namespace Microsoft.Cci
                 this.Context
                     .Diagnostics
                     .Add(
-                        this.messageProvider.CreateDiagnostic(
-                            this.messageProvider.WRN_PdbUsingNameTooLong,
-                            location,
-                            usingString
-                        )
+                        this.messageProvider
+                            .CreateDiagnostic(
+                                this.messageProvider.WRN_PdbUsingNameTooLong,
+                                location,
+                                usingString
+                            )
                     );
                 return true;
             }
@@ -1659,11 +1663,12 @@ namespace Microsoft.Cci
                 this.Context
                     .Diagnostics
                     .Add(
-                        this.messageProvider.CreateDiagnostic(
-                            this.messageProvider.WRN_PdbLocalNameTooLong,
-                            localDefinition.Location,
-                            name
-                        )
+                        this.messageProvider
+                            .CreateDiagnostic(
+                                this.messageProvider.WRN_PdbLocalNameTooLong,
+                                localDefinition.Location,
+                                name
+                            )
                     );
                 return true;
             }
@@ -2090,8 +2095,7 @@ namespace Microsoft.Cci
                 if (Context.RebuildData is { } rebuildData)
                 {
                     _usingNonSourceDocumentNameEnumerator = true;
-                    _nonSourceDocumentNameEnumerator = rebuildData
-                        .NonSourceFileDocumentNames
+                    _nonSourceDocumentNameEnumerator = rebuildData.NonSourceFileDocumentNames
                         .GetEnumerator();
                 }
 
@@ -3684,10 +3688,11 @@ namespace Microsoft.Cci
                     this.Context
                         .Diagnostics
                         .Add(
-                            this.messageProvider.CreateDiagnostic(
-                                this.messageProvider.ERR_TooManyUserStrings,
-                                NoLocation.Singleton
-                            )
+                            this.messageProvider
+                                .CreateDiagnostic(
+                                    this.messageProvider.ERR_TooManyUserStrings,
+                                    NoLocation.Singleton
+                                )
                         );
                     _userStringTokenOverflow = true;
                 }
@@ -3709,10 +3714,11 @@ namespace Microsoft.Cci
                     this.Context
                         .Diagnostics
                         .Add(
-                            this.messageProvider.CreateDiagnostic(
-                                this.messageProvider.ERR_TooManyUserStrings,
-                                NoLocation.Singleton
-                            )
+                            this.messageProvider
+                                .CreateDiagnostic(
+                                    this.messageProvider.ERR_TooManyUserStrings,
+                                    NoLocation.Singleton
+                                )
                         );
                     _userStringTokenOverflow = true;
                 }
@@ -4733,8 +4739,7 @@ namespace Microsoft.Cci
                     // "void" is handled specifically for "void*" with custom modifiers.
                     // If SignatureTypeEncoder supports such cases directly, this can
                     // be removed. See https://github.com/dotnet/corefx/issues/14571.
-                    encoder
-                        .Builder
+                    encoder.Builder
                         .WriteByte((byte)System.Reflection.Metadata.PrimitiveTypeCode.Void);
                     break;
 

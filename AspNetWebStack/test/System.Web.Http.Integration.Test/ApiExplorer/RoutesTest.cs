@@ -188,8 +188,7 @@ namespace System.Web.Http.ApiExplorer
         )
         {
             HttpConfiguration config = new HttpConfiguration();
-            config
-                .Routes
+            config.Routes
                 .MapHttpRoute("Default", "{controller}/{id}", new { id = RouteParameter.Optional });
 
             DefaultHttpControllerSelector controllerSelector =
@@ -252,8 +251,7 @@ namespace System.Web.Http.ApiExplorer
         )
         {
             HttpConfiguration config = new HttpConfiguration();
-            config
-                .Routes
+            config.Routes
                 .MapHttpRoute(
                     "Default",
                     "myitem/{id}",
@@ -422,8 +420,7 @@ namespace System.Web.Http.ApiExplorer
         )
         {
             HttpConfiguration config = new HttpConfiguration();
-            config
-                .Routes
+            config.Routes
                 .MapHttpRoute(
                     "Default",
                     "{controller}/{action}/{id}",
@@ -466,8 +463,7 @@ namespace System.Web.Http.ApiExplorer
         )
         {
             HttpConfiguration config = new HttpConfiguration();
-            config
-                .Routes
+            config.Routes
                 .MapHttpRoute(
                     "Default",
                     "{controller}/{id}",
@@ -487,8 +483,7 @@ namespace System.Web.Http.ApiExplorer
         {
             Type controllerType = typeof(OverloadsController);
             HttpConfiguration config = new HttpConfiguration();
-            config
-                .Routes
+            config.Routes
                 .MapHttpRoute(
                     "Default",
                     "{controller}/{id}",
@@ -508,8 +503,7 @@ namespace System.Web.Http.ApiExplorer
         {
             Type controllerType = typeof(OverloadsController);
             HttpConfiguration config = new HttpConfiguration();
-            config
-                .Routes
+            config.Routes
                 .MapHttpRoute(
                     "Default",
                     "mycontroller/{id}",
@@ -529,15 +523,13 @@ namespace System.Web.Http.ApiExplorer
         {
             Type controllerType = typeof(ItemController);
             HttpConfiguration config = new HttpConfiguration();
-            IHttpRoute matchingRoute = config
-                .Routes
+            IHttpRoute matchingRoute = config.Routes
                 .MapHttpRoute(
                     "Item",
                     "Item/{id}",
                     new { id = RouteParameter.Optional, controller = "Item" }
                 );
-            config
-                .Routes
+            config.Routes
                 .MapHttpRoute("Default", "{controller}/{id}", new { id = RouteParameter.Optional });
             DefaultHttpControllerSelector controllerSelector =
                 ApiExplorerHelper.GetStrictControllerSelector(config, controllerType);
@@ -593,8 +585,7 @@ namespace System.Web.Http.ApiExplorer
         {
             Type controllerType = typeof(AmbiguousActionController);
             HttpConfiguration config = new HttpConfiguration();
-            config
-                .Routes
+            config.Routes
                 .MapHttpRoute("Default", "{controller}/{id}", new { id = RouteParameter.Optional });
             DefaultHttpControllerSelector controllerSelector =
                 ApiExplorerHelper.GetStrictControllerSelector(config, controllerType);
@@ -622,15 +613,13 @@ namespace System.Web.Http.ApiExplorer
         {
             Type controllerType = typeof(ItemController);
             HttpConfiguration config = new HttpConfiguration();
-            config
-                .Routes
+            config.Routes
                 .MapHttpRoute(
                     "Custom",
                     "{majorVersion}/{minorVersion}/custom",
                     new { controller = "Item" }
                 );
-            config
-                .Routes
+            config.Routes
                 .MapHttpRoute(
                     "Default",
                     "{version}/{controller}/{id}",

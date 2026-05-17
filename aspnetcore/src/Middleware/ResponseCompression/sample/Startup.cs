@@ -19,8 +19,7 @@ public class Startup
             options.Providers.Add<GzipCompressionProvider>();
             options.Providers.Add<CustomCompressionProvider>();
             // .Append(TItem) is only available on Core.
-            options.MimeTypes = ResponseCompressionDefaults
-                .MimeTypes
+            options.MimeTypes = ResponseCompressionDefaults.MimeTypes
                 .Concat(new[] { "image/svg+xml" });
 
             ////Example of using excluded and wildcard MIME types:

@@ -151,8 +151,7 @@ namespace System.ServiceModel.Dispatcher
         {
             if (message != null)
             {
-                message
-                    .Properties
+                message.Properties
                     .Add(
                         WebBodyFormatMessageProperty.Name,
                         WebBodyFormatMessageProperty.JsonProperty
@@ -172,16 +171,14 @@ namespace System.ServiceModel.Dispatcher
         {
             if (reader == null)
             {
-                throw System
-                    .ServiceModel
+                throw System.ServiceModel
                     .DiagnosticUtility
                     .ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("reader"));
             }
             if (parameters == null)
             {
-                throw System
-                    .ServiceModel
+                throw System.ServiceModel
                     .DiagnosticUtility
                     .ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("parameters"));
@@ -248,18 +245,15 @@ namespace System.ServiceModel.Dispatcher
                         }
                         catch (System.InvalidOperationException e)
                         {
-                            throw System
-                                .ServiceModel
+                            throw System.ServiceModel
                                 .DiagnosticUtility
                                 .ExceptionUtility
                                 .ThrowHelperError(
                                     new InvalidOperationException(
-                                        System
-                                            .ServiceModel
+                                        System.ServiceModel
                                             .SR
                                             .GetString(
-                                                System
-                                                    .ServiceModel
+                                                System.ServiceModel
                                                     .SR
                                                     .SFxInvalidMessageBodyErrorDeserializingParameter,
                                                 part.Description.Namespace,
@@ -271,18 +265,15 @@ namespace System.ServiceModel.Dispatcher
                         }
                         catch (System.Runtime.Serialization.InvalidDataContractException e)
                         {
-                            throw System
-                                .ServiceModel
+                            throw System.ServiceModel
                                 .DiagnosticUtility
                                 .ExceptionUtility
                                 .ThrowHelperError(
                                     new System.Runtime.Serialization.InvalidDataContractException(
-                                        System
-                                            .ServiceModel
+                                        System.ServiceModel
                                             .SR
                                             .GetString(
-                                                System
-                                                    .ServiceModel
+                                                System.ServiceModel
                                                     .SR
                                                     .SFxInvalidMessageBodyErrorDeserializingParameter,
                                                 part.Description.Namespace,
@@ -294,18 +285,15 @@ namespace System.ServiceModel.Dispatcher
                         }
                         catch (System.FormatException e)
                         {
-                            throw System
-                                .ServiceModel
+                            throw System.ServiceModel
                                 .DiagnosticUtility
                                 .ExceptionUtility
                                 .ThrowHelperError(
                                     OperationFormatter.CreateDeserializationFailedFault(
-                                        System
-                                            .ServiceModel
+                                        System.ServiceModel
                                             .SR
                                             .GetString(
-                                                System
-                                                    .ServiceModel
+                                                System.ServiceModel
                                                     .SR
                                                     .SFxInvalidMessageBodyErrorDeserializingParameterMore,
                                                 part.Description.Namespace,
@@ -318,18 +306,15 @@ namespace System.ServiceModel.Dispatcher
                         }
                         catch (System.Runtime.Serialization.SerializationException e)
                         {
-                            throw System
-                                .ServiceModel
+                            throw System.ServiceModel
                                 .DiagnosticUtility
                                 .ExceptionUtility
                                 .ThrowHelperError(
                                     OperationFormatter.CreateDeserializationFailedFault(
-                                        System
-                                            .ServiceModel
+                                        System.ServiceModel
                                             .SR
                                             .GetString(
-                                                System
-                                                    .ServiceModel
+                                                System.ServiceModel
                                                     .SR
                                                     .SFxInvalidMessageBodyErrorDeserializingParameterMore,
                                                 part.Description.Namespace,
@@ -378,8 +363,7 @@ namespace System.ServiceModel.Dispatcher
                 );
                 if (formatProperty == null)
                 {
-                    throw System
-                        .ServiceModel
+                    throw System.ServiceModel
                         .DiagnosticUtility
                         .ExceptionUtility
                         .ThrowHelperError(
@@ -393,8 +377,7 @@ namespace System.ServiceModel.Dispatcher
                 }
                 if (formatProperty.Format != WebContentFormat.Json)
                 {
-                    throw System
-                        .ServiceModel
+                    throw System.ServiceModel
                         .DiagnosticUtility
                         .ExceptionUtility
                         .ThrowHelperError(
@@ -485,18 +468,15 @@ namespace System.ServiceModel.Dispatcher
                         }
                         catch (SerializationException sx)
                         {
-                            throw System
-                                .ServiceModel
+                            throw System.ServiceModel
                                 .DiagnosticUtility
                                 .ExceptionUtility
                                 .ThrowHelperError(
                                     new CommunicationException(
-                                        System
-                                            .ServiceModel
+                                        System.ServiceModel
                                             .SR
                                             .GetString(
-                                                System
-                                                    .ServiceModel
+                                                System.ServiceModel
                                                     .SR
                                                     .SFxInvalidMessageBodyErrorSerializingParameter,
                                                 replyMessageInfo.ReturnPart.Description.Namespace,
@@ -597,18 +577,15 @@ namespace System.ServiceModel.Dispatcher
                         }
                         catch (System.InvalidOperationException e)
                         {
-                            throw System
-                                .ServiceModel
+                            throw System.ServiceModel
                                 .DiagnosticUtility
                                 .ExceptionUtility
                                 .ThrowHelperError(
                                     new InvalidOperationException(
-                                        System
-                                            .ServiceModel
+                                        System.ServiceModel
                                             .SR
                                             .GetString(
-                                                System
-                                                    .ServiceModel
+                                                System.ServiceModel
                                                     .SR
                                                     .SFxInvalidMessageBodyErrorDeserializingParameter,
                                                 part.Description.Namespace,
@@ -620,18 +597,15 @@ namespace System.ServiceModel.Dispatcher
                         }
                         catch (System.Runtime.Serialization.InvalidDataContractException e)
                         {
-                            throw System
-                                .ServiceModel
+                            throw System.ServiceModel
                                 .DiagnosticUtility
                                 .ExceptionUtility
                                 .ThrowHelperError(
                                     new InvalidDataContractException(
-                                        System
-                                            .ServiceModel
+                                        System.ServiceModel
                                             .SR
                                             .GetString(
-                                                System
-                                                    .ServiceModel
+                                                System.ServiceModel
                                                     .SR
                                                     .SFxInvalidMessageBodyErrorDeserializingParameter,
                                                 part.Description.Namespace,
@@ -643,18 +617,15 @@ namespace System.ServiceModel.Dispatcher
                         }
                         catch (System.FormatException e)
                         {
-                            throw System
-                                .ServiceModel
+                            throw System.ServiceModel
                                 .DiagnosticUtility
                                 .ExceptionUtility
                                 .ThrowHelperError(
                                     OperationFormatter.CreateDeserializationFailedFault(
-                                        System
-                                            .ServiceModel
+                                        System.ServiceModel
                                             .SR
                                             .GetString(
-                                                System
-                                                    .ServiceModel
+                                                System.ServiceModel
                                                     .SR
                                                     .SFxInvalidMessageBodyErrorDeserializingParameterMore,
                                                 part.Description.Namespace,
@@ -667,18 +638,15 @@ namespace System.ServiceModel.Dispatcher
                         }
                         catch (System.Runtime.Serialization.SerializationException e)
                         {
-                            throw System
-                                .ServiceModel
+                            throw System.ServiceModel
                                 .DiagnosticUtility
                                 .ExceptionUtility
                                 .ThrowHelperError(
                                     OperationFormatter.CreateDeserializationFailedFault(
-                                        System
-                                            .ServiceModel
+                                        System.ServiceModel
                                             .SR
                                             .GetString(
-                                                System
-                                                    .ServiceModel
+                                                System.ServiceModel
                                                     .SR
                                                     .SFxInvalidMessageBodyErrorDeserializingParameterMore,
                                                 part.Description.Namespace,
@@ -768,18 +736,15 @@ namespace System.ServiceModel.Dispatcher
             }
             catch (System.InvalidOperationException e)
             {
-                throw System
-                    .ServiceModel
+                throw System.ServiceModel
                     .DiagnosticUtility
                     .ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
-                            System
-                                .ServiceModel
+                            System.ServiceModel
                                 .SR
                                 .GetString(
-                                    System
-                                        .ServiceModel
+                                    System.ServiceModel
                                         .SR
                                         .SFxInvalidMessageBodyErrorDeserializingParameter,
                                     part.Description.Namespace,
@@ -791,18 +756,15 @@ namespace System.ServiceModel.Dispatcher
             }
             catch (System.Runtime.Serialization.InvalidDataContractException e)
             {
-                throw System
-                    .ServiceModel
+                throw System.ServiceModel
                     .DiagnosticUtility
                     .ExceptionUtility
                     .ThrowHelperError(
                         new InvalidDataContractException(
-                            System
-                                .ServiceModel
+                            System.ServiceModel
                                 .SR
                                 .GetString(
-                                    System
-                                        .ServiceModel
+                                    System.ServiceModel
                                         .SR
                                         .SFxInvalidMessageBodyErrorDeserializingParameter,
                                     part.Description.Namespace,
@@ -814,18 +776,15 @@ namespace System.ServiceModel.Dispatcher
             }
             catch (System.FormatException e)
             {
-                throw System
-                    .ServiceModel
+                throw System.ServiceModel
                     .DiagnosticUtility
                     .ExceptionUtility
                     .ThrowHelperError(
                         OperationFormatter.CreateDeserializationFailedFault(
-                            System
-                                .ServiceModel
+                            System.ServiceModel
                                 .SR
                                 .GetString(
-                                    System
-                                        .ServiceModel
+                                    System.ServiceModel
                                         .SR
                                         .SFxInvalidMessageBodyErrorDeserializingParameterMore,
                                     part.Description.Namespace,
@@ -838,18 +797,15 @@ namespace System.ServiceModel.Dispatcher
             }
             catch (System.Runtime.Serialization.SerializationException e)
             {
-                throw System
-                    .ServiceModel
+                throw System.ServiceModel
                     .DiagnosticUtility
                     .ExceptionUtility
                     .ThrowHelperError(
                         OperationFormatter.CreateDeserializationFailedFault(
-                            System
-                                .ServiceModel
+                            System.ServiceModel
                                 .SR
                                 .GetString(
-                                    System
-                                        .ServiceModel
+                                    System.ServiceModel
                                         .SR
                                         .SFxInvalidMessageBodyErrorDeserializingParameterMore,
                                     part.Description.Namespace,
@@ -927,14 +883,12 @@ namespace System.ServiceModel.Dispatcher
         {
             if (!IsStartElement(reader, JsonGlobals.rootString))
             {
-                throw System
-                    .ServiceModel
+                throw System.ServiceModel
                     .DiagnosticUtility
                     .ExceptionUtility
                     .ThrowHelperError(
                         new SerializationException(
-                            System
-                                .ServiceModel
+                            System.ServiceModel
                                 .SR
                                 .GetString(
                                     System.ServiceModel.SR.SFxInvalidMessageBody,
@@ -950,8 +904,7 @@ namespace System.ServiceModel.Dispatcher
             string typeAttribute = reader.GetAttribute(JsonGlobals.typeString);
             if (!typeAttribute.Equals(JsonGlobals.objectString, StringComparison.Ordinal))
             {
-                throw System
-                    .ServiceModel
+                throw System.ServiceModel
                     .DiagnosticUtility
                     .ExceptionUtility
                     .ThrowHelperError(
@@ -975,8 +928,7 @@ namespace System.ServiceModel.Dispatcher
             string typeAttribute = reader.GetAttribute(JsonGlobals.typeString);
             if (!typeAttribute.Equals(JsonGlobals.nullString, StringComparison.Ordinal))
             {
-                throw System
-                    .ServiceModel
+                throw System.ServiceModel
                     .DiagnosticUtility
                     .ExceptionUtility
                     .ThrowHelperError(
@@ -1000,8 +952,7 @@ namespace System.ServiceModel.Dispatcher
 
             if (writer == null)
             {
-                throw System
-                    .ServiceModel
+                throw System.ServiceModel
                     .DiagnosticUtility
                     .ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("writer"));
@@ -1009,8 +960,7 @@ namespace System.ServiceModel.Dispatcher
 
             if (parameters == null)
             {
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -1062,18 +1012,15 @@ namespace System.ServiceModel.Dispatcher
                 }
                 catch (SerializationException sx)
                 {
-                    throw System
-                        .ServiceModel
+                    throw System.ServiceModel
                         .DiagnosticUtility
                         .ExceptionUtility
                         .ThrowHelperError(
                             new CommunicationException(
-                                System
-                                    .ServiceModel
+                                System.ServiceModel
                                     .SR
                                     .GetString(
-                                        System
-                                            .ServiceModel
+                                        System.ServiceModel
                                             .SR
                                             .SFxInvalidMessageBodyErrorSerializingParameter,
                                         part.Description.Namespace,
@@ -1100,8 +1047,7 @@ namespace System.ServiceModel.Dispatcher
         {
             if (writer == null)
             {
-                throw System
-                    .ServiceModel
+                throw System.ServiceModel
                     .DiagnosticUtility
                     .ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("writer"));
@@ -1109,8 +1055,7 @@ namespace System.ServiceModel.Dispatcher
 
             if (parameters == null)
             {
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -1178,18 +1123,15 @@ namespace System.ServiceModel.Dispatcher
             }
             catch (SerializationException sx)
             {
-                throw System
-                    .ServiceModel
+                throw System.ServiceModel
                     .DiagnosticUtility
                     .ExceptionUtility
                     .ThrowHelperError(
                         new CommunicationException(
-                            System
-                                .ServiceModel
+                            System.ServiceModel
                                 .SR
                                 .GetString(
-                                    System
-                                        .ServiceModel
+                                    System.ServiceModel
                                         .SR
                                         .SFxInvalidMessageBodyErrorSerializingParameter,
                                     part.Description.Namespace,
@@ -1219,14 +1161,12 @@ namespace System.ServiceModel.Dispatcher
             {
                 if (!IsStartElement(reader, messageInfo.WrapperName, messageInfo.WrapperNamespace))
                 {
-                    throw System
-                        .ServiceModel
+                    throw System.ServiceModel
                         .DiagnosticUtility
                         .ExceptionUtility
                         .ThrowHelperError(
                             new SerializationException(
-                                System
-                                    .ServiceModel
+                                System.ServiceModel
                                     .SR
                                     .GetString(
                                         System.ServiceModel.SR.SFxInvalidMessageBody,
@@ -1242,8 +1182,7 @@ namespace System.ServiceModel.Dispatcher
                 string typeAttribute = reader.GetAttribute(JsonGlobals.typeString);
                 if (!typeAttribute.Equals(JsonGlobals.objectString, StringComparison.Ordinal))
                 {
-                    throw System
-                        .ServiceModel
+                    throw System.ServiceModel
                         .DiagnosticUtility
                         .ExceptionUtility
                         .ThrowHelperError(
@@ -1275,14 +1214,12 @@ namespace System.ServiceModel.Dispatcher
             }
             if (!foundElement)
             {
-                throw System
-                    .ServiceModel
+                throw System.ServiceModel
                     .DiagnosticUtility
                     .ExceptionUtility
                     .ThrowHelperError(
                         new SerializationException(
-                            System
-                                .ServiceModel
+                            System.ServiceModel
                                 .SR
                                 .GetString(
                                     System.ServiceModel.SR.SFxInvalidMessageBody,
@@ -1318,14 +1255,12 @@ namespace System.ServiceModel.Dispatcher
             }
             if (!foundElement)
             {
-                throw System
-                    .ServiceModel
+                throw System.ServiceModel
                     .DiagnosticUtility
                     .ExceptionUtility
                     .ThrowHelperError(
                         new SerializationException(
-                            System
-                                .ServiceModel
+                            System.ServiceModel
                                 .SR
                                 .GetString(
                                     System.ServiceModel.SR.SFxInvalidMessageBody,

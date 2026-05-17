@@ -104,8 +104,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                 // Session.Commit can throw if it can't commit
                 // rename operation.
                 // handle that case gracefully
-                var notificationService = activeSession
-                    .Workspace
+                var notificationService = activeSession.Workspace
                     .Services
                     .GetService<INotificationService>();
                 notificationService?.SendNotification(
@@ -117,8 +116,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             catch (Exception ex) when (FatalError.ReportAndCatch(ex, ErrorSeverity.Critical))
             {
                 // Show a nice error to the user via an info bar
-                var errorReportingService = activeSession
-                    .Workspace
+                var errorReportingService = activeSession.Workspace
                     .Services
                     .GetService<IErrorReportingService>();
                 if (errorReportingService is null)

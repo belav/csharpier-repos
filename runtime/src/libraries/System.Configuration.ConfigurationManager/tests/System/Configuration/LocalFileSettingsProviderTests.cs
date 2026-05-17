@@ -19,8 +19,7 @@ namespace System.ConfigurationTests
         public void GetPropertyValues_NotStoredProperty_ValueEqualsNull()
         {
             var property = new SettingsProperty("PropertyName");
-            property
-                .Attributes
+            property.Attributes
                 .Add(typeof(UserScopedSettingAttribute), new UserScopedSettingAttribute());
             var properties = new SettingsPropertyCollection();
             properties.Add(property);
@@ -39,14 +38,12 @@ namespace System.ConfigurationTests
         {
             var property = new SettingsProperty("PropertyName");
             property.PropertyType = typeof(string);
-            property
-                .Attributes
+            property.Attributes
                 .Add(
                     typeof(ApplicationScopedSettingAttribute),
                     new ApplicationScopedSettingAttribute()
                 );
-            property
-                .Attributes
+            property.Attributes
                 .Add(
                     typeof(SpecialSettingAttribute),
                     new SpecialSettingAttribute(SpecialSetting.ConnectionString)

@@ -127,8 +127,7 @@ public class Program
         }
         else
         {
-            Console
-                .Error
+            Console.Error
                 .WriteLine(
                     $@"unbox != box: original {LineCount}, boxed {intAsObject:X8}, unboxed {unboxedInt:X8}"
                 );
@@ -145,8 +144,7 @@ public class Program
         }
         else
         {
-            Console
-                .Error
+            Console.Error
                 .WriteLine(
                     $@"unbox_nullable != box_nullable: original {nullableInt:X8}, boxed {nullableIntAsObject:X8}, unboxed {unboxedNullable:X8}"
                 );
@@ -237,8 +235,7 @@ public class Program
         {
             return true;
         }
-        Console
-            .Error
+        Console.Error
             .WriteLine(
                 "val = {0} = 0x{1:x2}, val1 = {2} = 0x{3:x2}",
                 val,

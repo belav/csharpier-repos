@@ -3586,18 +3586,17 @@ namespace System.Security.Cryptography.Xml.Tests
 
                 Assert.Equal(
                     expectedSignatureMethod,
-                    xp.SelectSingleNode(
-                        "/ds:SignedInfo/ds:SignatureMethod/@Algorithm",
-                        nsMgr
-                    )?.Value
+                    xp.SelectSingleNode("/ds:SignedInfo/ds:SignatureMethod/@Algorithm", nsMgr)
+                        ?.Value
                 );
 
                 Assert.Equal(
                     expectedDigestMethod,
                     xp.SelectSingleNode(
-                        "/ds:SignedInfo/ds:Reference/ds:DigestMethod/@Algorithm",
-                        nsMgr
-                    )?.Value
+                            "/ds:SignedInfo/ds:Reference/ds:DigestMethod/@Algorithm",
+                            nsMgr
+                        )
+                        ?.Value
                 );
             }
         }

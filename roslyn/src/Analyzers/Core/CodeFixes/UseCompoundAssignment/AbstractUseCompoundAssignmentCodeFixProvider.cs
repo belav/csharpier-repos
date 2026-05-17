@@ -112,8 +112,7 @@ namespace Microsoft.CodeAnalysis.UseCompoundAssignment
                         );
 
                         if (
-                            diagnostic
-                                .Properties
+                            diagnostic.Properties
                                 .ContainsKey(UseCompoundAssignmentUtilities.Increment)
                         )
                             return Increment(
@@ -123,8 +122,7 @@ namespace Microsoft.CodeAnalysis.UseCompoundAssignment
                                 .WithTriviaFrom(currentAssignment);
 
                         if (
-                            diagnostic
-                                .Properties
+                            diagnostic.Properties
                                 .ContainsKey(UseCompoundAssignmentUtilities.Decrement)
                         )
                             return Decrement(

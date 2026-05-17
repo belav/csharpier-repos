@@ -40,8 +40,7 @@ namespace System.ServiceModel.Channels
         {
             if (channelParameters == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("channelParameters");
             }
 
@@ -315,17 +314,17 @@ namespace System.ServiceModel.Channels
                 TChannel channel;
 
                 if (
-                    !this.Synchronizer.TryGetChannelForOutput(
-                        timeoutHelper.RemainingTime(),
-                        maskingMode,
-                        out channel
-                    )
+                    !this.Synchronizer
+                        .TryGetChannelForOutput(
+                            timeoutHelper.RemainingTime(),
+                            maskingMode,
+                            out channel
+                        )
                 )
                 {
                     if (!ReliableChannelBinderHelper.MaskHandled(maskingMode))
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new TimeoutException(SR.GetString(SR.TimeoutOnRequest, timeout))
                             );

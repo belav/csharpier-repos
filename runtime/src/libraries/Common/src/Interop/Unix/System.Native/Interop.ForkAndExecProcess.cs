@@ -112,8 +112,7 @@ internal static partial class Interop
                 int byteLength = Encoding.UTF8.GetByteCount(str);
                 arrPtr[i] = (byte*)NativeMemory.Alloc((nuint)byteLength + 1); //+1 for null termination
 
-                int bytesWritten = Encoding
-                    .UTF8
+                int bytesWritten = Encoding.UTF8
                     .GetBytes(str, new Span<byte>(arrPtr[i], byteLength));
                 Debug.Assert(bytesWritten == byteLength);
 

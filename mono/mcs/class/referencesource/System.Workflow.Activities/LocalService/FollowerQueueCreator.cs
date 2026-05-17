@@ -51,8 +51,7 @@ namespace System.Workflow.Activities
 
                 // create the queue after extracting the correlation values from the message
                 EventQueueName staticId = (EventQueueName)queue.QueueName;
-                WorkflowActivityTrace
-                    .Activity
+                WorkflowActivityTrace.Activity
                     .TraceEvent(
                         TraceEventType.Information,
                         0,
@@ -78,8 +77,7 @@ namespace System.Workflow.Activities
                 );
                 if (!queue.QueuingService.Exists(queueName))
                 {
-                    WorkflowActivityTrace
-                        .Activity
+                    WorkflowActivityTrace.Activity
                         .TraceEvent(
                             TraceEventType.Information,
                             0,

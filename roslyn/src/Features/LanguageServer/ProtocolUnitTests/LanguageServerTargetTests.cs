@@ -25,10 +25,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests
             : base(testOutputHelper) { }
 
         protected override TestComposition Composition =>
-            base.Composition.AddParts(
-                typeof(StatefulLspServiceFactory),
-                typeof(StatelessLspService)
-            );
+            base.Composition
+                .AddParts(typeof(StatefulLspServiceFactory), typeof(StatelessLspService));
 
         [Theory, CombinatorialData]
         public async Task LanguageServerQueueEmptyOnShutdownMessage(bool mutatingLspWorkspace)

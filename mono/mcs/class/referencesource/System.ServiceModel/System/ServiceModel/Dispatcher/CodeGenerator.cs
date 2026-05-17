@@ -396,8 +396,7 @@ namespace System.ServiceModel.Dispatcher
             else if (var is LocalBuilder)
                 Stloc((LocalBuilder)var);
             else
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(
@@ -529,8 +528,7 @@ namespace System.ServiceModel.Dispatcher
                     case TypeCode.Empty:
                     case TypeCode.DBNull:
                     default:
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(
                                     SR.GetString(
@@ -785,8 +783,7 @@ namespace System.ServiceModel.Dispatcher
             {
                 OpCode opCode = GetLdelemOpCode(Type.GetTypeCode(arrayElementType));
                 if (opCode.Equals(OpCodes.Nop))
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(
@@ -820,8 +817,7 @@ namespace System.ServiceModel.Dispatcher
             {
                 OpCode opCode = GetStelemOpCode(Type.GetTypeCode(arrayElementType));
                 if (opCode.Equals(OpCodes.Nop))
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(
@@ -913,8 +909,7 @@ namespace System.ServiceModel.Dispatcher
                 {
                     OpCode opCode = GetConvOpCode(Type.GetTypeCode(target));
                     if (opCode.Equals(OpCodes.Nop))
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(
                                     SR.GetString(
@@ -937,8 +932,7 @@ namespace System.ServiceModel.Dispatcher
                         Ldobj(target);
                 }
                 else
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(
@@ -977,8 +971,7 @@ namespace System.ServiceModel.Dispatcher
                 Castclass(target);
             }
             else
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(
@@ -1012,8 +1005,7 @@ namespace System.ServiceModel.Dispatcher
 
             if (saveAssembly)
             {
-                assemblyBuilder = AppDomain
-                    .CurrentDomain
+                assemblyBuilder = AppDomain.CurrentDomain
                     .DefineDynamicAssembly(name, AssemblyBuilderAccess.RunAndSave);
                 moduleBuilder = assemblyBuilder.DefineDynamicModule(
                     name.Name,
@@ -1023,8 +1015,7 @@ namespace System.ServiceModel.Dispatcher
             }
             else
             {
-                assemblyBuilder = AppDomain
-                    .CurrentDomain
+                assemblyBuilder = AppDomain.CurrentDomain
                     .DefineDynamicAssembly(name, AssemblyBuilderAccess.Run);
                 moduleBuilder = assemblyBuilder.DefineDynamicModule(name.Name, false);
             }
@@ -1034,8 +1025,7 @@ namespace System.ServiceModel.Dispatcher
 
         void ThrowMismatchException(object expected)
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(
                     new InvalidOperationException(
                         SR.GetString(SR.SFxCodeGenExpectingEnd, expected.ToString())

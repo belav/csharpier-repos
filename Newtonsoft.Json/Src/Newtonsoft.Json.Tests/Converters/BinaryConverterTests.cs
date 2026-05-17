@@ -48,8 +48,7 @@ namespace Newtonsoft.Json.Tests.Converters
     [TestFixture]
     public class BinaryConverterTests : TestFixtureBase
     {
-        private static readonly byte[] TestData = Encoding
-            .UTF8
+        private static readonly byte[] TestData = Encoding.UTF8
             .GetBytes("This is some test data!!!");
 
         public class ByteArrayClass

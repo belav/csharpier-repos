@@ -134,8 +134,7 @@ public class VisualStudioSettingsOptionPersisterTests
     [Fact]
     public void SettingsChangeEvent()
     {
-        var exportProvider = VisualStudioTestCompositions
-            .LanguageServices
+        var exportProvider = VisualStudioTestCompositions.LanguageServices
             .ExportProviderFactory
             .CreateExportProvider();
         var fallbacks = exportProvider
@@ -189,8 +188,7 @@ public class VisualStudioSettingsOptionPersisterTests
                 _ => (GetValueResult.Missing, null),
             };
 
-        settingsManager
-            .Subset
+        settingsManager.Subset
             .TriggerSettingChanged("TextEditor.CSharp.Specific.NewLinesForBracesInMethods");
 
         Assert.Equal(
@@ -224,8 +222,7 @@ public class VisualStudioSettingsOptionPersisterTests
                 _ => (GetValueResult.Missing, null),
             };
 
-        settingsManager
-            .Subset
+        settingsManager.Subset
             .TriggerSettingChanged("TextEditor.CSharp.Specific.csharp_new_line_before_open_brace");
 
         Assert.Equal(

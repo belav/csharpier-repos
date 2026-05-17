@@ -214,8 +214,7 @@ namespace Mono.Util
                             if (attribute_type == typeof(System.Xml.Schema.XmlSchemaAnyAttribute))
                                 complexType.AnyAttribute = new XmlSchemaAnyAttribute();
                             else
-                                complexType
-                                    .Attributes
+                                complexType.Attributes
                                     .Add(WriteSchemaAttribute(member, attribute_type));
                         }
                     }

@@ -514,8 +514,8 @@ namespace Mono.Globalization.Unicode
             bool ifndef_inside = false;
             foreach (IndexEntry ie in index.entries)
             {
-                int index_value =
-                    ie.page.number /* * page_size */
+                int index_value = ie.page
+                    .number /* * page_size */
                 ;
 
                 Debug.Assert(index_value < (1 << index_bits));

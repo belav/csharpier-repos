@@ -33,8 +33,7 @@ namespace System.CommandLine.Tests
         {
             var result = _outerCommand.Parse("outer inner --option argument1");
 
-            result
-                .CommandResult
+            result.CommandResult
                 .Parent
                 .Should()
                 .BeOfType<CommandResult>()
@@ -50,8 +49,7 @@ namespace System.CommandLine.Tests
         {
             var result = _outerCommand.Parse("outer inner --option argument1");
 
-            result
-                .CommandResult
+            result.CommandResult
                 .Should()
                 .BeOfType<CommandResult>()
                 .Which
@@ -66,8 +64,7 @@ namespace System.CommandLine.Tests
         {
             var result = _outerCommand.Parse("outer inner --option argument1");
 
-            result
-                .CommandResult
+            result.CommandResult
                 .Children
                 .ElementAt(0)
                 .Should()
@@ -84,8 +81,7 @@ namespace System.CommandLine.Tests
         {
             var result = _outerCommand.Parse("outer inner --option argument1");
 
-            result
-                .CommandResult
+            result.CommandResult
                 .Children
                 .ElementAt(0)
                 .Tokens
@@ -98,16 +94,14 @@ namespace System.CommandLine.Tests
         public void Commands_at_multiple_levels_can_have_their_own_arguments()
         {
             var outer = new CliCommand("outer") { new CliArgument<string>("outer_arg") };
-            outer
-                .Subcommands
+            outer.Subcommands
                 .Add(new CliCommand("inner") { new CliArgument<string[]>("inner_arg") });
 
             var result = outer.Parse("outer arg1 inner arg2 arg3");
 
             result.CommandResult.Parent.Tokens.Select(t => t.Value).Should().BeEquivalentTo("arg1");
 
-            result
-                .CommandResult
+            result.CommandResult
                 .Tokens
                 .Select(t => t.Value)
                 .Should()

@@ -1559,8 +1559,7 @@ namespace System.Web.UI.DataVisualization.Charting
                                 Series axisSeries = null;
                                 if (_axis.axisType == AxisName.X || _axis.axisType == AxisName.X2)
                                 {
-                                    List<string> seriesArray = _axis
-                                        .ChartArea
+                                    List<string> seriesArray = _axis.ChartArea
                                         .GetXAxesSeries(
                                             (_axis.axisType == AxisName.X)
                                                 ? AxisType.Primary
@@ -1615,8 +1614,7 @@ namespace System.Web.UI.DataVisualization.Charting
                         // on the label middle point position.
                         if (_axis.ScaleSegments.Count > 0)
                         {
-                            AxisScaleSegment scaleSegment = _axis
-                                .ScaleSegments
+                            AxisScaleSegment scaleSegment = _axis.ScaleSegments
                                 .FindScaleSegmentForAxisValue(middlePoint);
                             _axis.ScaleSegments.AllowOutOfScaleValues = true;
                             _axis.ScaleSegments.EnforceSegment(scaleSegment);

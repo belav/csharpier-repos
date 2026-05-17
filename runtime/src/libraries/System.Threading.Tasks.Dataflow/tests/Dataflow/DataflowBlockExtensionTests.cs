@@ -592,11 +592,9 @@ namespace System.Threading.Tasks.Dataflow.Tests
                     new GroupingDataflowBlockOptions { MaxNumberOfGroups = 1, Greedy = greedy }
                 );
 
-                var ignored = source1
-                    .Completion
+                var ignored = source1.Completion
                     .ContinueWith(_ => jb.Target1.Complete(), TaskScheduler.Default);
-                ignored = source2
-                    .Completion
+                ignored = source2.Completion
                     .ContinueWith(_ => jb.Target2.Complete(), TaskScheduler.Default);
 
                 using (source1.LinkTo(jb.Target1))
@@ -737,8 +735,7 @@ namespace System.Threading.Tasks.Dataflow.Tests
             {
                 source.PostRange(0, 6);
                 source.Complete();
-                await source
-                    .Completion
+                await source.Completion
                     .ContinueWith(
                         delegate
                         {
@@ -2173,8 +2170,7 @@ namespace System.Threading.Tasks.Dataflow.Tests
         {
             var buffer = new BufferBlock<int>();
             var action = new ActionBlock<int>(i => buffer.Post(i));
-            action
-                .Completion
+            action.Completion
                 .ContinueWith(
                     delegate
                     {
@@ -2219,8 +2215,7 @@ namespace System.Threading.Tasks.Dataflow.Tests
 
             var buffer = new BufferBlock<int>();
             transform.LinkTo(buffer);
-            var ignored = transform
-                .Completion
+            var ignored = transform.Completion
                 .ContinueWith(completion => buffer.Complete(), TaskScheduler.Default);
 
             IPropagatorBlock<int, int> encapsulated = DataflowBlock.Encapsulate(transform, buffer);
@@ -2228,8 +2223,7 @@ namespace System.Threading.Tasks.Dataflow.Tests
 
             var source = new BufferBlock<int>();
             source.LinkTo(encapsulated);
-            ignored = source
-                .Completion
+            ignored = source.Completion
                 .ContinueWith(completion => encapsulated.Complete(), TaskScheduler.Default);
 
             // Feed
@@ -2246,8 +2240,7 @@ namespace System.Threading.Tasks.Dataflow.Tests
         {
             var buffer1 = new BufferBlock<int>();
             var action1 = new ActionBlock<int>(i => buffer1.Post(i));
-            var ignored = action1
-                .Completion
+            var ignored = action1.Completion
                 .ContinueWith(
                     delegate
                     {
@@ -2259,8 +2252,7 @@ namespace System.Threading.Tasks.Dataflow.Tests
 
             var buffer2 = new BufferBlock<string>();
             var action2 = new ActionBlock<string>(i => buffer2.Post(i));
-            ignored = action2
-                .Completion
+            ignored = action2.Completion
                 .ContinueWith(
                     delegate
                     {

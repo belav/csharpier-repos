@@ -56,8 +56,7 @@ public static class ScaffoldingModelExtensions
     ///     many-to-many relationship from both of its ends.
     /// </remarks>
     public static bool IsLeftNavigation(this ISkipNavigation skipNavigation) =>
-        skipNavigation
-            .JoinEntityType
+        skipNavigation.JoinEntityType
             .FindPrimaryKey()!
             .Properties[0]
             .GetContainingForeignKeys()
@@ -82,8 +81,7 @@ public static class ScaffoldingModelExtensions
     /// <returns><see langword="true" /> if the key would be configured by conventions.</returns>
     public static bool IsHandledByConvention(this IKey key) =>
         key is IConventionKey conventionKey
-        && conventionKey
-            .Properties
+        && conventionKey.Properties
             .SequenceEqual(
                 KeyDiscoveryConvention.DiscoverKeyProperties(
                     conventionKey.DeclaringEntityType,
@@ -830,8 +828,7 @@ public static class ScaffoldingModelExtensions
 
             if (useStrings)
             {
-                hasPrincipalKey.Arguments = foreignKey
-                    .PrincipalKey
+                hasPrincipalKey.Arguments = foreignKey.PrincipalKey
                     .Properties
                     .Select(p => p.Name)
                     .Cast<object?>()
@@ -839,8 +836,7 @@ public static class ScaffoldingModelExtensions
             }
             else
             {
-                hasPrincipalKey
-                    .Arguments
+                hasPrincipalKey.Arguments
                     .Add(
                         new PropertyAccessorCodeFragment(
                             "p",
@@ -872,16 +868,14 @@ public static class ScaffoldingModelExtensions
 
         if (useStrings)
         {
-            hasForeignKey.Arguments = foreignKey
-                .Properties
+            hasForeignKey.Arguments = foreignKey.Properties
                 .Select(p => p.Name)
                 .Cast<object?>()
                 .ToList();
         }
         else
         {
-            hasForeignKey
-                .Arguments
+            hasForeignKey.Arguments
                 .Add(
                     new PropertyAccessorCodeFragment(
                         "d",

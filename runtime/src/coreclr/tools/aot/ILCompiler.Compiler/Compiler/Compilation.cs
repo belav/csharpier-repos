@@ -60,8 +60,7 @@ namespace ILCompiler
             foreach (var rootProvider in compilationRoots)
                 rootProvider.AddCompilationRoots(rootingService);
 
-            MetadataType globalModuleGeneratedType = nodeFactory
-                .TypeSystemContext
+            MetadataType globalModuleGeneratedType = nodeFactory.TypeSystemContext
                 .GeneratedAssembly
                 .GetGlobalModuleType();
             _typeGetTypeMethodThunks = new TypeGetTypeMethodThunkCache(globalModuleGeneratedType);
@@ -303,11 +302,9 @@ namespace ILCompiler
                     return ((FieldDesc)targetOfLookup).OwningType.IsRuntimeDeterminedSubtype;
 
                 case ReadyToRunHelperId.ConstrainedDirectCall:
-                    return ((ConstrainedCallInfo)targetOfLookup)
-                            .Method
+                    return ((ConstrainedCallInfo)targetOfLookup).Method
                             .IsRuntimeDeterminedExactMethod
-                        || ((ConstrainedCallInfo)targetOfLookup)
-                            .ConstrainedType
+                        || ((ConstrainedCallInfo)targetOfLookup).ConstrainedType
                             .IsRuntimeDeterminedSubtype;
 
                 default:
@@ -438,8 +435,7 @@ namespace ILCompiler
                 if (
                     !type.IsRuntimeDeterminedType
                     || (
-                        !((RuntimeDeterminedType)type)
-                            .CanonicalType
+                        !((RuntimeDeterminedType)type).CanonicalType
                             .IsCanonicalDefinitionType(CanonicalFormKind.Universal)
                         && !((RuntimeDeterminedType)type).CanonicalType.IsNullable
                     )
@@ -599,8 +595,7 @@ namespace ILCompiler
                 Debug.Assert(!runtimeDeterminedOwningType.IsInterface);
 
                 while (
-                    !slotNormalizedMethod
-                        .OwningType
+                    !slotNormalizedMethod.OwningType
                         .HasSameTypeDefinition(runtimeDeterminedOwningType)
                 )
                 {

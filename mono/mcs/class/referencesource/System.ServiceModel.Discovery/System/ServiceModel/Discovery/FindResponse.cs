@@ -37,14 +37,11 @@ namespace System.ServiceModel.Discovery
 
             DiscoveryMessageSequence messageSequence = null;
             if (
-                !this.messageSequenceTable.TryGetValue(
-                    endpointDiscoveryMetadata,
-                    out messageSequence
-                )
+                !this.messageSequenceTable
+                    .TryGetValue(endpointDiscoveryMetadata, out messageSequence)
             )
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .Argument(
                         "endpointDiscoveryMetadata",
                         SR2.DiscoveryFindResponseMessageSequenceNotFound

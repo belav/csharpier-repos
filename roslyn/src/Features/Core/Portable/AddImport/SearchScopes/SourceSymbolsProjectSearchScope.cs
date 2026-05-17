@@ -37,8 +37,7 @@ namespace Microsoft.CodeAnalysis.AddImport
                 CancellationToken cancellationToken
             )
             {
-                var service = _project
-                    .Solution
+                var service = _project.Solution
                     .Services
                     .GetRequiredService<ISymbolTreeInfoCacheService>();
                 var info = await service

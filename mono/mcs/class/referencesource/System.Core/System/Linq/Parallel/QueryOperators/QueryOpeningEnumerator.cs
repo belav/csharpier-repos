@@ -161,8 +161,7 @@ namespace System.Linq.Parallel
             try
             {
                 // stuff in appropriate defaults for unspecified options.
-                m_querySettings = m_queryOperator
-                    .SpecifiedQuerySettings
+                m_querySettings = m_queryOperator.SpecifiedQuerySettings
                     .WithPerExecutionSettings(
                         m_topLevelCancellationTokenSource,
                         m_topLevelDisposedFlag

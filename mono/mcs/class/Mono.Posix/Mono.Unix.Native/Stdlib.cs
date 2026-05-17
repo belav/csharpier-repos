@@ -526,22 +526,19 @@ namespace Mono.Unix.Native
 
         private static void _ErrorHandler(int signum)
         {
-            Console
-                .Error
+            Console.Error
                 .WriteLine("Error handler invoked for signum " + signum + ".  Don't do that.");
         }
 
         private static void _DefaultHandler(int signum)
         {
-            Console
-                .Error
+            Console.Error
                 .WriteLine("Default handler invoked for signum " + signum + ".  Don't do that.");
         }
 
         private static void _IgnoreHandler(int signum)
         {
-            Console
-                .Error
+            Console.Error
                 .WriteLine("Ignore handler invoked for signum " + signum + ".  Don't do that.");
         }
 

@@ -63,8 +63,7 @@ namespace System.CommandLine.Tests
 
             var rootCommand = new CliCommand("root") { subcommand1 };
 
-            rootCommand
-                .Options
+            rootCommand.Options
                 .Add(
                     new CliOption<string>("--three")
                     {
@@ -218,8 +217,7 @@ namespace System.CommandLine.Tests
             var originOption = new CliOption<string>("--origin");
             var cloneOption = new CliOption<string>("--clone");
 
-            cloneOption
-                .CompletionSources
+            cloneOption.CompletionSources
                 .Add(ctx =>
                 {
                     var opt1Value = ctx.ParseResult.GetValue(originOption);
@@ -852,8 +850,7 @@ namespace System.CommandLine.Tests
         {
             var argument = new CliArgument<DayOfWeek>("day");
             argument.CompletionSources.Clear();
-            argument
-                .CompletionSources
+            argument.CompletionSources
                 .Add(new[] { "mon", "tues", "wed", "thur", "fri", "sat", "sun" });
             var command = new CliCommand("the-command") { argument };
             CliConfiguration simpleConfig = new(command);
@@ -926,8 +923,7 @@ namespace System.CommandLine.Tests
 
             var result = rootCommand.Parse("--day SleepyDay", simpleConfig);
 
-            result
-                .Errors
+            result.Errors
                 .Should()
                 .ContainSingle()
                 .Which

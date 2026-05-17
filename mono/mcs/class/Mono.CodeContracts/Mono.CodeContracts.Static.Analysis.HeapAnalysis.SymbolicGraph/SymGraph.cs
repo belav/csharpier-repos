@@ -975,8 +975,7 @@ namespace Mono.CodeContracts.Static.Analysis.HeapAnalysis.SymbolicGraph
             int lastCommonId
         )
         {
-            IEnumerable<SymValue> symValues = thisGraph
-                .EqualTermsMap
+            IEnumerable<SymValue> symValues = thisGraph.EqualTermsMap
                 .Keys
                 .Concat(thisGraph.EqualMultiTermsMap.Keys);
             foreach (SymValue sv in symValues)

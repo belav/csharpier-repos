@@ -140,8 +140,7 @@ namespace System.Data.Mapping.ViewGeneration
             )
             {
                 EdmSchemaError error = new EdmSchemaError(
-                    System
-                        .Data
+                    System.Data
                         .Entity
                         .Strings
                         .Mapping_Invalid_QueryView2(setMapping.Set.Name, parserException.Message),
@@ -179,16 +178,14 @@ namespace System.Data.Mapping.ViewGeneration
                 if (
                     (queryResultType == null)
                     || (
-                        !setMapping
-                            .Set
+                        !setMapping.Set
                             .ElementType
                             .IsAssignableFrom(queryResultType.TypeUsage.EdmType)
                     )
                 )
                 {
                     EdmSchemaError error = new EdmSchemaError(
-                        System
-                            .Data
+                        System.Data
                             .Entity
                             .Strings
                             .Mapping_Invalid_QueryView_Type(setMapping.Set.Name),
@@ -305,8 +302,7 @@ namespace System.Data.Mapping.ViewGeneration
                 else
                 {
                     throw new MappingException(
-                        System
-                            .Data
+                        System.Data
                             .Entity
                             .Strings
                             .Mapping_Invalid_QueryView(m_extent.Name, parserException.Message)
@@ -367,8 +363,7 @@ namespace System.Data.Mapping.ViewGeneration
             try
             {
                 // If it is a user specified view, allow all queries. Otherwise parse the view in the restricted mode.
-                ParserOptions.CompilationMode compilationMode = ParserOptions
-                    .CompilationMode
+                ParserOptions.CompilationMode compilationMode = ParserOptions.CompilationMode
                     .RestrictedViewGenerationMode;
                 if (isUserSpecified)
                 {

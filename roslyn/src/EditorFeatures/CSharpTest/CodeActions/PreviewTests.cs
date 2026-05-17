@@ -27,13 +27,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings
 {
     public partial class PreviewTests : AbstractCSharpCodeActionTest
     {
-        private static readonly TestComposition s_composition = EditorTestCompositions
-            .EditorFeaturesWpf
-            .AddExcludedPartTypes(typeof(IDiagnosticUpdateSourceRegistrationService))
-            .AddParts(
-                typeof(MockDiagnosticUpdateSourceRegistrationService),
-                typeof(MockPreviewPaneService)
-            );
+        private static readonly TestComposition s_composition =
+            EditorTestCompositions.EditorFeaturesWpf
+                .AddExcludedPartTypes(typeof(IDiagnosticUpdateSourceRegistrationService))
+                .AddParts(
+                    typeof(MockDiagnosticUpdateSourceRegistrationService),
+                    typeof(MockPreviewPaneService)
+                );
 
         private const string AddedDocumentName = "AddedDocument";
         private const string AddedDocumentText = "class C1 {}";
@@ -134,8 +134,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings
             );
             provider.ComputeRefactoringsAsync(context).Wait();
             var action = refactorings.Single();
-            var editHandler = workspace
-                .ExportProvider
+            var editHandler = workspace.ExportProvider
                 .GetExportedValue<ICodeActionEditHandlerService>();
             var previews = await editHandler.GetPreviewsAsync(
                 workspace,
@@ -160,8 +159,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings
             Assert.NotNull(preview);
             Assert.True(preview is DifferenceViewerPreview);
             var diffView = preview as DifferenceViewerPreview;
-            var text = diffView
-                .Viewer
+            var text = diffView.Viewer
                 .RightView
                 .TextBuffer
                 .AsTextContainer()

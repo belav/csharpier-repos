@@ -133,8 +133,7 @@ namespace System.ServiceModel.Channels
             }
             else if (scope.Length == 0)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument("scope", SR.GetString(SR.ParameterCannotBeEmpty));
             }
 

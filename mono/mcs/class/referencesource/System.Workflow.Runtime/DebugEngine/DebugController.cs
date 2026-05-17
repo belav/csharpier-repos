@@ -597,8 +597,7 @@ namespace System.Workflow.Runtime.DebugEngine
                 {
                     try
                     {
-                        RegistryKey debugEngineSubKey = Registry
-                            .LocalMachine
+                        RegistryKey debugEngineSubKey = Registry.LocalMachine
                             .OpenSubKey(RegistryKeys.DebuggerSubKey);
                         if (debugEngineSubKey != null)
                         {
@@ -683,11 +682,12 @@ namespace System.Workflow.Runtime.DebugEngine
                             && !(string.IsNullOrEmpty(assembly.Location))
                         )
                         {
-                            this.controllerConduit.AssemblyLoaded(
-                                this.programId,
-                                assembly.Location,
-                                assembly.GlobalAssemblyCache
-                            );
+                            this.controllerConduit
+                                .AssemblyLoaded(
+                                    this.programId,
+                                    assembly.Location,
+                                    assembly.GlobalAssemblyCache
+                                );
                         }
                     }
                     this.serviceContainer.DefinitionDispenser.WorkflowDefinitionLoaded +=
@@ -950,8 +950,7 @@ namespace System.Workflow.Runtime.DebugEngine
             {
                 if (args.WorkflowType != null)
                 {
-                    Activity rootActivity = ((WorkflowRuntime)sender)
-                        .DefinitionDispenser
+                    Activity rootActivity = ((WorkflowRuntime)sender).DefinitionDispenser
                         .GetWorkflowDefinition(args.WorkflowType);
                     LoadExistingScheduleType(
                         GetScheduleTypeId(args.WorkflowType),
@@ -962,8 +961,7 @@ namespace System.Workflow.Runtime.DebugEngine
                 }
                 else
                 {
-                    Activity rootActivity = ((WorkflowRuntime)sender)
-                        .DefinitionDispenser
+                    Activity rootActivity = ((WorkflowRuntime)sender).DefinitionDispenser
                         .GetWorkflowDefinition(args.WorkflowDefinitionHashCode);
                     LoadExistingScheduleType(
                         GetScheduleTypeId(args.WorkflowDefinitionHashCode),
@@ -997,24 +995,26 @@ namespace System.Workflow.Runtime.DebugEngine
 
                     // When the activity starts executing, update its handler list for stepping.
                     EnumerateEventHandlersForActivity(scheduleTypeId, eventArgs.Activity);
-                    this.controllerConduit.BeforeActivityStatusChanged(
-                        this.programId,
-                        scheduleTypeId,
-                        workflowCoreRuntime.InstanceID,
-                        eventArgs.Activity.QualifiedName,
-                        GetHierarchicalId(eventArgs.Activity),
-                        eventArgs.Activity.ExecutionStatus,
-                        GetContextId(eventArgs.Activity)
-                    );
-                    this.controllerConduit.ActivityStatusChanged(
-                        this.programId,
-                        scheduleTypeId,
-                        workflowCoreRuntime.InstanceID,
-                        eventArgs.Activity.QualifiedName,
-                        GetHierarchicalId(eventArgs.Activity),
-                        eventArgs.Activity.ExecutionStatus,
-                        GetContextId(eventArgs.Activity)
-                    );
+                    this.controllerConduit
+                        .BeforeActivityStatusChanged(
+                            this.programId,
+                            scheduleTypeId,
+                            workflowCoreRuntime.InstanceID,
+                            eventArgs.Activity.QualifiedName,
+                            GetHierarchicalId(eventArgs.Activity),
+                            eventArgs.Activity.ExecutionStatus,
+                            GetContextId(eventArgs.Activity)
+                        );
+                    this.controllerConduit
+                        .ActivityStatusChanged(
+                            this.programId,
+                            scheduleTypeId,
+                            workflowCoreRuntime.InstanceID,
+                            eventArgs.Activity.QualifiedName,
+                            GetHierarchicalId(eventArgs.Activity),
+                            eventArgs.Activity.ExecutionStatus,
+                            GetContextId(eventArgs.Activity)
+                        );
                 }
             }
             catch
@@ -1047,24 +1047,26 @@ namespace System.Workflow.Runtime.DebugEngine
                     if (eventArgs.Activity.ExecutionStatus == ActivityExecutionStatus.Executing)
                         EnumerateEventHandlersForActivity(scheduleTypeId, eventArgs.Activity);
 
-                    this.controllerConduit.BeforeActivityStatusChanged(
-                        this.programId,
-                        scheduleTypeId,
-                        workflowCoreRuntime.InstanceID,
-                        eventArgs.Activity.QualifiedName,
-                        GetHierarchicalId(eventArgs.Activity),
-                        eventArgs.Activity.ExecutionStatus,
-                        GetContextId(eventArgs.Activity)
-                    );
-                    this.controllerConduit.ActivityStatusChanged(
-                        this.programId,
-                        scheduleTypeId,
-                        workflowCoreRuntime.InstanceID,
-                        eventArgs.Activity.QualifiedName,
-                        GetHierarchicalId(eventArgs.Activity),
-                        eventArgs.Activity.ExecutionStatus,
-                        GetContextId(eventArgs.Activity)
-                    );
+                    this.controllerConduit
+                        .BeforeActivityStatusChanged(
+                            this.programId,
+                            scheduleTypeId,
+                            workflowCoreRuntime.InstanceID,
+                            eventArgs.Activity.QualifiedName,
+                            GetHierarchicalId(eventArgs.Activity),
+                            eventArgs.Activity.ExecutionStatus,
+                            GetContextId(eventArgs.Activity)
+                        );
+                    this.controllerConduit
+                        .ActivityStatusChanged(
+                            this.programId,
+                            scheduleTypeId,
+                            workflowCoreRuntime.InstanceID,
+                            eventArgs.Activity.QualifiedName,
+                            GetHierarchicalId(eventArgs.Activity),
+                            eventArgs.Activity.ExecutionStatus,
+                            GetContextId(eventArgs.Activity)
+                        );
                 }
             }
             catch
@@ -1091,12 +1093,13 @@ namespace System.Workflow.Runtime.DebugEngine
                 lock (this.eventLock)
                 {
                     IWorkflowCoreRuntime workflowCoreRuntime = sender as IWorkflowCoreRuntime;
-                    this.controllerConduit.HandlerInvoked(
-                        this.programId,
-                        workflowCoreRuntime.InstanceID,
-                        NativeMethods.GetCurrentThreadId(),
-                        GetHierarchicalId(workflowCoreRuntime.CurrentActivity)
-                    );
+                    this.controllerConduit
+                        .HandlerInvoked(
+                            this.programId,
+                            workflowCoreRuntime.InstanceID,
+                            NativeMethods.GetCurrentThreadId(),
+                            GetHierarchicalId(workflowCoreRuntime.CurrentActivity)
+                        );
                 }
             }
             catch
@@ -1118,9 +1121,8 @@ namespace System.Workflow.Runtime.DebugEngine
                     IWorkflowCoreRuntime workflowCoreRuntime = (IWorkflowCoreRuntime)sender;
 
                     // Get cached old root activity.
-                    Activity oldRootActivity = this.instanceTable.GetRootActivity(
-                        workflowCoreRuntime.InstanceID
-                    );
+                    Activity oldRootActivity = this.instanceTable
+                        .GetRootActivity(workflowCoreRuntime.InstanceID);
 
                     Guid scheduleTypeId = workflowCoreRuntime.InstanceID; // From now on we will treat the instance id as a dynamic schedule type id.
                     LoadExistingScheduleType(
@@ -1131,18 +1133,17 @@ namespace System.Workflow.Runtime.DebugEngine
                     );
 
                     // And now reload the instance.
-                    this.instanceTable.UpdateRootActivity(
-                        workflowCoreRuntime.InstanceID,
-                        oldRootActivity
-                    );
+                    this.instanceTable
+                        .UpdateRootActivity(workflowCoreRuntime.InstanceID, oldRootActivity);
 
                     // The DE will update the schedule type on the thread that is running the instance.
                     // DE should be called after the instance table entry is replaced.
-                    this.controllerConduit.InstanceDynamicallyUpdated(
-                        this.programId,
-                        workflowCoreRuntime.InstanceID,
-                        scheduleTypeId
-                    );
+                    this.controllerConduit
+                        .InstanceDynamicallyUpdated(
+                            this.programId,
+                            workflowCoreRuntime.InstanceID,
+                            scheduleTypeId
+                        );
                 }
             }
             catch
@@ -1180,11 +1181,8 @@ namespace System.Workflow.Runtime.DebugEngine
             // Add to the InstanceTable before firing the DE event !
             this.instanceTable.AddInstance(instance.InstanceId, rootActivity);
 
-            this.controllerConduit.InstanceCreated(
-                this.programId,
-                instance.InstanceId,
-                scheduleTypeId
-            );
+            this.controllerConduit
+                .InstanceCreated(this.programId, instance.InstanceId, scheduleTypeId);
 
             // Take a lock so that SetInitialActivityStatus is always called before next status events.
             lock (this.eventLock)
@@ -1239,15 +1237,16 @@ namespace System.Workflow.Runtime.DebugEngine
             {
                 Activity contextActivity = ContextActivityUtils.ContextActivity(activity);
                 int context = ContextActivityUtils.ContextId(contextActivity);
-                this.controllerConduit.SetInitialActivityStatus(
-                    this.programId,
-                    scheduleTypeId,
-                    instanceId,
-                    activity.QualifiedName,
-                    GetHierarchicalId(activity),
-                    activity.ExecutionStatus,
-                    context
-                );
+                this.controllerConduit
+                    .SetInitialActivityStatus(
+                        this.programId,
+                        scheduleTypeId,
+                        instanceId,
+                        activity.QualifiedName,
+                        GetHierarchicalId(activity),
+                        activity.ExecutionStatus,
+                        context
+                    );
             }
         }
 
@@ -1278,8 +1277,7 @@ namespace System.Workflow.Runtime.DebugEngine
             yield return rootContext;
 
             foreach (
-                ActivityExecutionContext executionContext in rootContext
-                    .ExecutionContextManager
+                ActivityExecutionContext executionContext in rootContext.ExecutionContextManager
                     .ExecutionContexts
             )
             {
@@ -1329,17 +1327,18 @@ namespace System.Workflow.Runtime.DebugEngine
                         md5Digest = ((WorkflowMarkupSourceAttribute)attributes[0]).MD5Digest;
                     }
 
-                    this.controllerConduit.ScheduleTypeLoaded(
-                        this.programId,
-                        scheduleTypeId,
-                        scheduleType.Assembly.FullName,
-                        fileName,
-                        md5Digest,
-                        isDynamic,
-                        scheduleType.FullName,
-                        scheduleType.Name,
-                        stringWriter.ToString()
-                    );
+                    this.controllerConduit
+                        .ScheduleTypeLoaded(
+                            this.programId,
+                            scheduleTypeId,
+                            scheduleType.Assembly.FullName,
+                            fileName,
+                            md5Digest,
+                            isDynamic,
+                            scheduleType.FullName,
+                            scheduleType.Name,
+                            stringWriter.ToString()
+                        );
                 }
             }
         }
@@ -1427,11 +1426,12 @@ namespace System.Workflow.Runtime.DebugEngine
             {
                 try
                 {
-                    this.controllerConduit.AssemblyLoaded(
-                        this.programId,
-                        args.LoadedAssembly.Location,
-                        args.LoadedAssembly.GlobalAssemblyCache
-                    );
+                    this.controllerConduit
+                        .AssemblyLoaded(
+                            this.programId,
+                            args.LoadedAssembly.Location,
+                            args.LoadedAssembly.GlobalAssemblyCache
+                        );
                 }
                 catch
                 {
@@ -1501,12 +1501,13 @@ namespace System.Workflow.Runtime.DebugEngine
                 }
             }
 
-            this.controllerConduit.UpdateHandlerMethodsForActivity(
-                this.programId,
-                scheduleTypeId,
-                activity.QualifiedName,
-                handlerMethods
-            );
+            this.controllerConduit
+                .UpdateHandlerMethodsForActivity(
+                    this.programId,
+                    scheduleTypeId,
+                    activity.QualifiedName,
+                    handlerMethods
+                );
         }
 
         #endregion

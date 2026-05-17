@@ -152,8 +152,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
                 // We don't want to block up file removal on the UI thread since we want that path to stay asynchronous.
                 CodeModelService.DetachFormatTrackingToBuffer(_invisibleEditor.TextBuffer);
 
-                State
-                    .ProjectCodeModelFactory
+                State.ProjectCodeModelFactory
                     .ScheduleDeferredCleanupTask(cancellationToken =>
                     {
                         // Ignore cancellationToken: we always need to call Dispose since it triggers the file save.
@@ -188,8 +187,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
                 return false;
             }
 
-            documentId = project
-                .Solution
+            documentId = project.Solution
                 .GetDocumentIdsWithFilePath(_incomingFilePath)
                 .FirstOrDefault(d => d.ProjectId == project.Id);
             if (documentId == null)
@@ -382,8 +380,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
 
                 var result = action(document);
 
-                var formatted = State
-                    .ThreadingContext
+                var formatted = State.ThreadingContext
                     .JoinableTaskFactory
                     .Run(async () =>
                     {
@@ -475,12 +472,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             }
             else if (_isSourceGeneratedOutput)
             {
-                document = State
-                    .ThreadingContext
+                document = State.ThreadingContext
                     .JoinableTaskFactory
                     .Run(() =>
-                        Workspace
-                            .CurrentSolution
+                        Workspace.CurrentSolution
                             .GetSourceGeneratedDocumentAsync(
                                 GetDocumentId(),
                                 CancellationToken.None
@@ -507,8 +502,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
         }
 
         internal SemanticModel GetSemanticModel() =>
-            State
-                .ThreadingContext
+            State.ThreadingContext
                 .JoinableTaskFactory
                 .Run(() =>
                 {
@@ -518,8 +512,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
                 });
 
         internal CodeGenerationOptions GetDocumentOptions() =>
-            State
-                .ThreadingContext
+            State.ThreadingContext
                 .JoinableTaskFactory
                 .Run(() =>
                 {
@@ -529,8 +522,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
                 });
 
         internal Compilation GetCompilation() =>
-            State
-                .ThreadingContext
+            State.ThreadingContext
                 .JoinableTaskFactory
                 .Run(() =>
                 {
@@ -859,8 +851,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
                     if (_batchDocument != null)
                     {
                         // perform expensive operations at once
-                        var newDocument = State
-                            .ThreadingContext
+                        var newDocument = State.ThreadingContext
                             .JoinableTaskFactory
                             .Run(async () =>
                             {
@@ -880,8 +871,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
                                     .ConfigureAwait(false);
                             });
 
-                        _batchDocument
-                            .Project
+                        _batchDocument.Project
                             .Solution
                             .Workspace
                             .TryApplyChanges(newDocument.Project.Solution);
@@ -905,8 +895,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
                                 )
                             )
                             {
-                                elementAndPath
-                                    .Item1
+                                elementAndPath.Item1
                                     .ReacquireNodeKey(elementAndPath.Item2, CancellationToken.None);
                             }
 

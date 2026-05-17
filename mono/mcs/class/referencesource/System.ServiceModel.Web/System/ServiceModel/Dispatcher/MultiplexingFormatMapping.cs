@@ -58,8 +58,7 @@ namespace System.ServiceModel.Dispatcher
         {
             if (acceptHeaderElement == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("acceptHeaderElement");
             }
 

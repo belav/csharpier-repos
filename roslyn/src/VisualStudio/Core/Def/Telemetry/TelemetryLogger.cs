@@ -244,8 +244,7 @@ namespace Microsoft.CodeAnalysis.Telemetry
                 //
                 // numeric data will show up in ES with measurement prefix.
 
-                telemetryEvent
-                    .Properties
+                telemetryEvent.Properties
                     .Add(
                         GetPropertyName(functionId, name),
                         value switch

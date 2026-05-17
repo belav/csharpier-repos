@@ -206,8 +206,7 @@ namespace System.Net.Http.Functional.Tests
                     callbackCalled = true;
                     Assert.NotNull(request);
 
-                    X509ChainStatusFlags flags = chain
-                        .ChainStatus
+                    X509ChainStatusFlags flags = chain.ChainStatus
                         .Aggregate(
                             X509ChainStatusFlags.NoError,
                             (cur, status) => cur | status.Status

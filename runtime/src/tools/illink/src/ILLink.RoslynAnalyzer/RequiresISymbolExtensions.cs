@@ -33,8 +33,7 @@ namespace ILLink.RoslynAnalyzer
 
             // Also check the containing type
             if (member.IsStatic || member.IsConstructor())
-                return member
-                    .ContainingType
+                return member.ContainingType
                     .TryGetAttribute(requiresAttribute, out requiresAttributeData);
 
             return false;

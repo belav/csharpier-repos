@@ -38,8 +38,7 @@ namespace System.ServiceModel.Syndication
         {
             if (length < 0)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentOutOfRangeException("length"));
             }
             this.baseUri = null;
@@ -91,8 +90,7 @@ namespace System.ServiceModel.Syndication
             {
                 if (value < 0)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new ArgumentOutOfRangeException("value"));
                 }
                 this.length = value;

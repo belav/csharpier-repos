@@ -47,8 +47,7 @@ namespace Mono.CodeContracts.Static.Analysis.NonNull
             where Var : IEquatable<Var>
         {
             var analysis = new Analysis<Expr, Var>(methodDriver);
-            methodDriver
-                .HybridLayer
+            methodDriver.HybridLayer
                 .CreateForward(analysis)(analysis.InitialValue(methodDriver.KeyConverter));
             analysis.MethodAnalysis = this;
 

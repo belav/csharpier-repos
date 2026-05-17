@@ -60,8 +60,7 @@ namespace DbLinq.Data.Linq.Sugar
             foreach (var inputParameter in InputParameters)
             {
                 var dbParameter = command.Command.CreateParameter();
-                dbParameter.ParameterName = DataContext
-                    .Vendor
+                dbParameter.ParameterName = DataContext.Vendor
                     .SqlProvider
                     .GetParameterName(inputParameter.Alias);
                 object value = NormalizeDbType(inputParameter.GetValue(Target));

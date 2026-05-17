@@ -144,8 +144,7 @@ namespace System.ServiceModel.Channels
             ThrowIfDisposed();
             if (this.State != CommunicationState.Opened)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(

@@ -214,8 +214,7 @@ internal class TestDiagnosticAnalyzerRunner : DiagnosticAnalyzerRunner
         foreach (var assembly in Directory.EnumerateFiles(AppContext.BaseDirectory, "*.dll"))
         {
             if (
-                !project
-                    .MetadataReferences
+                !project.MetadataReferences
                     .Any(c =>
                         string.Equals(
                             Path.GetFileNameWithoutExtension(c.Display),

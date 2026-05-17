@@ -22,8 +22,7 @@ namespace ILCompiler.DependencyAnalysis
                     "Module with a static constructor"
                 );
             }
-            factory
-                .MetadataManager
+            factory.MetadataManager
                 .GetDependenciesDueToModuleUse(ref dependencyList, factory, module);
         }
     }

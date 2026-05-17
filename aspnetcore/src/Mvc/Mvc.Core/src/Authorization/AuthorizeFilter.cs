@@ -147,8 +147,7 @@ public class AuthorizeFilter : IAsyncAuthorizationFilter, IFilterFactory
             // and produce a policy using this. This would mean we would have effectively run some auth twice, but it maintains compat.
             var policyProvider =
                 PolicyProvider
-                ?? context
-                    .HttpContext
+                ?? context.HttpContext
                     .RequestServices
                     .GetRequiredService<IAuthorizationPolicyProvider>();
             var endpointAuthorizeData =
@@ -185,8 +184,7 @@ public class AuthorizeFilter : IAsyncAuthorizationFilter, IFilterFactory
             return;
         }
 
-        var policyEvaluator = context
-            .HttpContext
+        var policyEvaluator = context.HttpContext
             .RequestServices
             .GetRequiredService<IPolicyEvaluator>();
 

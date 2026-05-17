@@ -238,8 +238,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                 .WithPrependedLeadingTrivia(leadingTrivia)
                 .WithTrailingTrivia(
                     (
-                        token
-                            .TrailingTrivia
+                        token.TrailingTrivia
                             .Concat(
                                 SyntaxNodeOrTokenExtensions
                                     .GetTrivia(trailingNodesOrTokens)

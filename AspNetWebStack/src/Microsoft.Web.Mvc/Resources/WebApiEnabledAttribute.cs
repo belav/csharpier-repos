@@ -61,16 +61,14 @@ namespace Microsoft.Web.Mvc.Resources
                 {
                     bool handled = false;
                     foreach (
-                        ContentType responseFormat in filterContext
-                            .RequestContext
+                        ContentType responseFormat in filterContext.RequestContext
                             .GetResponseFormats()
                     )
                     {
                         // CONSIDER: making this lookup optional if perf is an issue
                         for (int i = 0; i < FormatManager.Current.ResponseFormatHandlers.Count; ++i)
                         {
-                            IResponseFormatHandler handler = FormatManager
-                                .Current
+                            IResponseFormatHandler handler = FormatManager.Current
                                 .ResponseFormatHandlers[i];
                             if (handler.CanSerialize(responseFormat))
                             {
@@ -86,8 +84,7 @@ namespace Microsoft.Web.Mvc.Resources
                                 viewName = viewName + "." + friendlyName;
                                 // CONSIDER: ViewEngineCollection queries view engines in registration order and returns 1st match,
                                 // would it make sense to let the client provide a hint in case
-                                ViewEngineResult result = viewResult
-                                    .ViewEngineCollection
+                                ViewEngineResult result = viewResult.ViewEngineCollection
                                     .FindView(filterContext, viewName, null);
                                 // ignore errors and fallback to default behavior
                                 if (result != null && result.View != null)

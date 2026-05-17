@@ -312,9 +312,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
 
         internal void AddAdditionalDocument(TestHostDocument document)
         {
-            this.AdditionalDocuments = this.AdditionalDocuments.Concat(
-                new TestHostDocument[] { document }
-            );
+            this.AdditionalDocuments = this.AdditionalDocuments
+                .Concat(new TestHostDocument[] { document });
             document.SetProject(this);
         }
 
@@ -323,9 +322,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
 
         internal void AddAnalyzerConfigDocument(TestHostDocument document)
         {
-            this.AnalyzerConfigDocuments = this.AnalyzerConfigDocuments.Concat(
-                new TestHostDocument[] { document }
-            );
+            this.AnalyzerConfigDocuments = this.AnalyzerConfigDocuments
+                .Concat(new TestHostDocument[] { document });
             document.SetProject(this);
         }
 

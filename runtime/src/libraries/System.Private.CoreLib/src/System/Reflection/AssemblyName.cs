@@ -453,8 +453,7 @@ namespace System.Reflection
                         );
 
                         short numberOfBytes = (short)
-                            Encoding
-                                .UTF8
+                            Encoding.UTF8
                                 .GetBytes(
                                     pStr + i,
                                     count,

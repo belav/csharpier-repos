@@ -298,8 +298,7 @@ namespace DefaultNamespace
             while (temp2 != null)
             {
                 TestLibrary.Logging.WriteLine("Edge " + edge++);
-                TestLibrary
-                    .Logging
+                TestLibrary.Logging
                     .WriteLine(
                         "Weight: {0}, v1: {1}, v2: {2}",
                         temp2.Weight,

@@ -21,8 +21,7 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
 
                 if (
                     !targetMethod.IsGenericMethod
-                    || !SymbolEqualityComparer
-                        .Default
+                    || !SymbolEqualityComparer.Default
                         .Equals(_typeSymbols.IServiceCollection, @params[0].Type)
                 )
                 {
@@ -38,8 +37,7 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
 
                 if (
                     paramCount is 2
-                    && SymbolEqualityComparer
-                        .Default
+                    && SymbolEqualityComparer.Default
                         .Equals(_typeSymbols.IConfiguration, @params[1].Type)
                 )
                 {
@@ -52,19 +50,16 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
 
                     if (
                         secondParamType.SpecialType is SpecialType.System_String
-                        && SymbolEqualityComparer
-                            .Default
+                        && SymbolEqualityComparer.Default
                             .Equals(_typeSymbols.IConfiguration, thirdParamType)
                     )
                     {
                         overload = MethodsToGen.ServiceCollectionExt_Configure_T_name;
                     }
                     else if (
-                        SymbolEqualityComparer
-                            .Default
+                        SymbolEqualityComparer.Default
                             .Equals(_typeSymbols.IConfiguration, secondParamType)
-                        && SymbolEqualityComparer
-                            .Default
+                        && SymbolEqualityComparer.Default
                             .Equals(_typeSymbols.ActionOfBinderOptions, thirdParamType)
                     )
                     {
@@ -78,11 +73,9 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
                 else if (
                     paramCount is 4
                     && @params[1].Type.SpecialType is SpecialType.System_String
-                    && SymbolEqualityComparer
-                        .Default
+                    && SymbolEqualityComparer.Default
                         .Equals(_typeSymbols.IConfiguration, @params[2].Type)
-                    && SymbolEqualityComparer
-                        .Default
+                    && SymbolEqualityComparer.Default
                         .Equals(_typeSymbols.ActionOfBinderOptions, @params[3].Type)
                 )
                 {

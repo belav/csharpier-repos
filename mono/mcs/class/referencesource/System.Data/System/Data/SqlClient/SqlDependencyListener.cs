@@ -73,8 +73,7 @@ internal class SqlDependencyProcessDispatcher : MarshalByRefObject
         // BID members
         // -----------
 
-        private readonly int _objectID = System
-            .Threading
+        private readonly int _objectID = System.Threading
             .Interlocked
             .Increment(ref _objectTypeCount);
         private static int _objectTypeCount; // Bid counter

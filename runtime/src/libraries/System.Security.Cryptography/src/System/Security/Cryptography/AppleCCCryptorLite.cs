@@ -41,8 +41,7 @@ namespace System.Security.Cryptography
             fixed (byte* pbKey = key)
             fixed (byte* pbIv = iv)
             {
-                ret = Interop
-                    .AppleCrypto
+                ret = Interop.AppleCrypto
                     .CryptorCreate(
                         encrypting
                             ? Interop.AppleCrypto.PAL_SymmetricOperation.Encrypt
@@ -174,8 +173,7 @@ namespace System.Security.Cryptography
             fixed (byte* pInput = input)
             fixed (byte* pOutput = output)
             {
-                ret = Interop
-                    .AppleCrypto
+                ret = Interop.AppleCrypto
                     .CryptorUpdate(
                         _cryptor,
                         pInput,
@@ -224,8 +222,7 @@ namespace System.Security.Cryptography
                     ccStatus != 0,
                     "Interop function returned 0 but a system code of success"
                 );
-                throw Interop
-                    .AppleCrypto
+                throw Interop.AppleCrypto
                     .CreateExceptionForCCError(ccStatus, Interop.AppleCrypto.CCCryptorStatus);
             }
 

@@ -132,8 +132,7 @@ namespace System.ServiceModel.Dispatcher
 
             if (this.filters.ContainsKey(filter))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument("filter", SR.GetString(SR.FilterExists));
             }
 
@@ -161,8 +160,7 @@ namespace System.ServiceModel.Dispatcher
                     ValidateTable(table);
                     if (!table.GetType().Equals(tableType))
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(
                                     SR.GetString(SR.FilterTableTypeMismatch)
@@ -273,8 +271,7 @@ namespace System.ServiceModel.Dispatcher
                 }
             }
 
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperCritical(
                     new InvalidOperationException(SR.GetString(SR.FilterTableInvalidForLookup))
                 );
@@ -426,8 +423,7 @@ namespace System.ServiceModel.Dispatcher
                 {
                     if (dataSet)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new MultipleFilterMatchesException(
                                     SR.GetString(SR.FilterMultipleMatches),
@@ -554,8 +550,7 @@ namespace System.ServiceModel.Dispatcher
                         Collection<MessageFilter> c = new Collection<MessageFilter>();
                         c.Add(filter);
                         c.Add(f);
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new MultipleFilterMatchesException(
                                     SR.GetString(SR.FilterMultipleMatches),
@@ -651,8 +646,7 @@ namespace System.ServiceModel.Dispatcher
             Type t = this.GetType();
             if (t.IsInstanceOfType(table))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(SR.GetString(SR.FilterBadTableType))
                     );

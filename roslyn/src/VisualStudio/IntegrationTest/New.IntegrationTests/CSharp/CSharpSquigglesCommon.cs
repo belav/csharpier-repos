@@ -22,8 +22,7 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
         [IdeFact(Skip = "https://github.com/dotnet/roslyn/issues/63042")]
         public virtual async Task VerifySyntaxErrorSquiggles()
         {
-            await TestServices
-                .Editor
+            await TestServices.Editor
                 .SetTextAsync(
                     @"using System;
 using System.Collections.Generic;
@@ -64,8 +63,7 @@ using System.Text;",
                     "IDE0005: Using directive is unnecessary."
                 );
 
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .ErrorTagsAsync(
                     new[]
                     {
@@ -80,8 +78,7 @@ using System.Text;",
         [IdeFact(Skip = "https://github.com/dotnet/roslyn/issues/61367")]
         public virtual async Task VerifySemanticErrorSquiggles()
         {
-            await TestServices
-                .Editor
+            await TestServices.Editor
                 .SetTextAsync(
                     @"using System;
 
@@ -90,8 +87,7 @@ class C  : Bar
 }",
                     HangMitigatingCancellationToken
                 );
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .ErrorTagsAsync(
                     new[]
                     {

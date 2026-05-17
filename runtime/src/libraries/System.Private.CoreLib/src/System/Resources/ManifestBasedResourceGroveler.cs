@@ -450,8 +450,7 @@ namespace System.Resources
             Debug.Assert(_mediator.MainAssembly != null);
             if (!_mediator.LookedForSatelliteContractVersion)
             {
-                _mediator.SatelliteContractVersion = ResourceManager
-                    .ResourceManagerMediator
+                _mediator.SatelliteContractVersion = ResourceManager.ResourceManagerMediator
                     .ObtainSatelliteContractVersion(_mediator.MainAssembly);
                 _mediator.LookedForSatelliteContractVersion = true;
             }

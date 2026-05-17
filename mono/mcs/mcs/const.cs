@@ -63,8 +63,7 @@ namespace Mono.CSharp
                 field_attr |= FieldAttributes.Literal;
             }
 
-            FieldBuilder = Parent
-                .TypeBuilder
+            FieldBuilder = Parent.TypeBuilder
                 .DefineField(Name, MemberType.GetMetaInfo(), field_attr);
             spec = new ConstSpec(
                 Parent.Definition,
@@ -78,8 +77,7 @@ namespace Mono.CSharp
             Parent.MemberCache.AddMember(spec);
 
             if ((field_attr & FieldAttributes.InitOnly) != 0)
-                Parent
-                    .PartialContainer
+                Parent.PartialContainer
                     .RegisterFieldForInitialization(
                         this,
                         new FieldInitializer(this, initializer, Location)
@@ -121,8 +119,7 @@ namespace Mono.CSharp
             var c = ((ConstSpec)spec).Value as Constant;
             if (c.Type.BuiltinType == BuiltinTypeSpec.Type.Decimal)
             {
-                Module
-                    .PredefinedAttributes
+                Module.PredefinedAttributes
                     .DecimalConstant
                     .EmitAttribute(FieldBuilder, (decimal)c.GetValue(), c.Location);
             }
@@ -244,8 +241,7 @@ namespace Mono.CSharp
         {
             if (in_transit)
             {
-                field
-                    .Compiler
+                field.Compiler
                     .Report
                     .Error(
                         110,

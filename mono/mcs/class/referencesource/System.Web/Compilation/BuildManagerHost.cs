@@ -215,8 +215,7 @@ namespace System.Web.Compilation
 
             try
             {
-                return BrowserCapabilitiesCompiler
-                    .BrowserCapabilitiesFactory
+                return BrowserCapabilitiesCompiler.BrowserCapabilitiesFactory
                     .InternalGetBrowserElements();
             }
             finally
@@ -381,8 +380,7 @@ namespace System.Web.Compilation
             try
             {
                 // Performs reverse hashtable lookup to find the filePath in the Value collection.
-                Dictionary<String, String>.Enumerator e = BuildManager
-                    .GenerateFileTable
+                Dictionary<String, String>.Enumerator e = BuildManager.GenerateFileTable
                     .GetEnumerator();
                 while (e.MoveNext())
                 {

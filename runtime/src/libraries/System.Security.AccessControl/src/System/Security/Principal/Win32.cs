@@ -27,8 +27,7 @@ namespace System.Security.Principal
                 openAsSelf = false;
 
             if (
-                !Interop
-                    .Advapi32
+                !Interop.Advapi32
                     .OpenThreadToken((IntPtr)(-2), dwDesiredAccess, openAsSelf, out phThreadToken)
             )
             {
@@ -38,8 +37,7 @@ namespace System.Security.Principal
                     hr = 0;
                     phThreadToken.Dispose();
                     if (
-                        !Interop
-                            .Advapi32
+                        !Interop.Advapi32
                             .OpenThreadToken(
                                 (IntPtr)(-2),
                                 dwDesiredAccess,

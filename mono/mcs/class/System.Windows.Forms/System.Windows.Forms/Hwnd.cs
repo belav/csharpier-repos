@@ -426,8 +426,7 @@ namespace System.Windows.Forms
             {
                 int menu_height = menu.Rect.Height;
                 if (menu_height == 0)
-                    menu_height = ThemeEngine
-                        .Current
+                    menu_height = ThemeEngine.Current
                         .CalcMenuBarSize(GraphicsContext, menu, cp.Width);
                 borders.top += menu_height;
             }

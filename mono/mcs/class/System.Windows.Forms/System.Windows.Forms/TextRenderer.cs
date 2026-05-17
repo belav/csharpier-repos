@@ -398,8 +398,7 @@ namespace System.Windows.Forms
 
                 IntPtr hdc = dc.GetHdc();
 
-                XplatUIWin32.RECT r = XplatUIWin32
-                    .RECT
+                XplatUIWin32.RECT r = XplatUIWin32.RECT
                     .FromRectangle(new Rectangle(Point.Empty, proposedSize));
 
                 IntPtr prevobj;
@@ -757,14 +756,15 @@ namespace System.Windows.Forms
             out int linesFilled
         )
         {
-            return Hwnd.GraphicsContext.MeasureString(
-                text,
-                font,
-                layoutArea,
-                stringFormat,
-                out charactersFitted,
-                out linesFilled
-            );
+            return Hwnd.GraphicsContext
+                .MeasureString(
+                    text,
+                    font,
+                    layoutArea,
+                    stringFormat,
+                    out charactersFitted,
+                    out linesFilled
+                );
         }
 
         internal static Region[] MeasureCharacterRanges(
@@ -774,12 +774,8 @@ namespace System.Windows.Forms
             StringFormat stringFormat
         )
         {
-            return Hwnd.GraphicsContext.MeasureCharacterRanges(
-                text,
-                font,
-                layoutRect,
-                stringFormat
-            );
+            return Hwnd.GraphicsContext
+                .MeasureCharacterRanges(text, font, layoutRect, stringFormat);
         }
 
         internal static SizeF GetDpi()

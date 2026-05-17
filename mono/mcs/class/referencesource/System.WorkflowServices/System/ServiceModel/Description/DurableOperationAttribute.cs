@@ -71,15 +71,13 @@ namespace System.ServiceModel.Description
         {
             if (dispatchOperation == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("dispatchOperation");
             }
 
             if (dispatchOperation.Invoker == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR2.GetString(
@@ -92,15 +90,13 @@ namespace System.ServiceModel.Description
 
             if (operationDescription == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("operationDescription");
             }
 
             if (operationDescription.DeclaringContract == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(
                         "operationDescription",
                         SR2.GetString(SR2.OperationDescriptionNeedsDeclaringContract)

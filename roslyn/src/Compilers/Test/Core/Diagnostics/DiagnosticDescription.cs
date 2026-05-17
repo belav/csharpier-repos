@@ -422,8 +422,7 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
 
                 if (
                     !d._syntaxPredicate(
-                        _location
-                            .SourceTree
+                        _location.SourceTree
                             .GetRoot()
                             .FindToken(_location.SourceSpan.Start, true)
                             .Parent

@@ -67,8 +67,7 @@ namespace System.Workflow.ComponentModel
             if (contextActivity.WorkflowCoreRuntime != null)
             {
                 if (useCurrentContext)
-                    this.contextId = contextActivity
-                        .WorkflowCoreRuntime
+                    this.contextId = contextActivity.WorkflowCoreRuntime
                         .CurrentActivity
                         .ContextActivity
                         .ContextId;
@@ -97,8 +96,7 @@ namespace System.Workflow.ComponentModel
             if (contextActivity.WorkflowCoreRuntime != null)
             {
                 if (useCurrentContext)
-                    this.contextId = contextActivity
-                        .WorkflowCoreRuntime
+                    this.contextId = contextActivity.WorkflowCoreRuntime
                         .CurrentActivity
                         .ContextActivity
                         .ContextId;
@@ -146,8 +144,7 @@ namespace System.Workflow.ComponentModel
             bool transacted
         )
         {
-            Activity targetContextActivity = currentContextActivity
-                .WorkflowCoreRuntime
+            Activity targetContextActivity = currentContextActivity.WorkflowCoreRuntime
                 .GetContextActivityForId(this.contextId);
             if (targetContextActivity == null)
             {
@@ -227,8 +224,7 @@ namespace System.Workflow.ComponentModel
                 Activity targetActivity = targetContextActivity.GetActivityByName(
                     this.activityQualifiedName
                 );
-                currentContextActivity
-                    .WorkflowCoreRuntime
+                currentContextActivity.WorkflowCoreRuntime
                     .ScheduleItem(
                         delegateOperation,
                         ActivityExecutionContext.IsInAtomicTransaction(targetActivity),
@@ -255,8 +251,7 @@ namespace System.Workflow.ComponentModel
 
             // Has not started executing yet, queue it up for now
             // Not letting it leak out for recv case any more
-            Activity targetContextActivity = currentContextActivity
-                .WorkflowCoreRuntime
+            Activity targetContextActivity = currentContextActivity.WorkflowCoreRuntime
                 .GetContextActivityForId(this.contextId);
             if (targetContextActivity == null)
                 return false;
@@ -473,8 +468,7 @@ namespace System.Workflow.ComponentModel
                 catch (Exception e)
                 {
                     if (activity != null)
-                        System
-                            .Workflow
+                        System.Workflow
                             .Runtime
                             .WorkflowTrace
                             .Runtime
@@ -486,8 +480,7 @@ namespace System.Workflow.ComponentModel
                                 e.ToString()
                             );
                     else
-                        System
-                            .Workflow
+                        System.Workflow
                             .Runtime
                             .WorkflowTrace
                             .Runtime

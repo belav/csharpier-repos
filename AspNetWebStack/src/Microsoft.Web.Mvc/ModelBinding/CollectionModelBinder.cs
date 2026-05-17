@@ -19,8 +19,7 @@ namespace Microsoft.Web.Mvc.ModelBinding
                 bindingContext.ModelName,
                 "index"
             );
-            ValueProviderResult valueProviderResultIndex = bindingContext
-                .ValueProvider
+            ValueProviderResult valueProviderResultIndex = bindingContext.ValueProvider
                 .GetValue(indexPropertyName);
             IEnumerable<string> indexNames =
                 CollectionModelBinderUtil.GetIndexNamesFromValueProviderResult(
@@ -56,15 +55,13 @@ namespace Microsoft.Web.Mvc.ModelBinding
                 ExtensibleModelBindingContext childBindingContext =
                     new ExtensibleModelBindingContext(bindingContext)
                     {
-                        ModelMetadata = ModelMetadataProviders
-                            .Current
+                        ModelMetadata = ModelMetadataProviders.Current
                             .GetMetadataForType(null, typeof(TElement)),
                         ModelName = fullChildName,
                     };
 
                 object boundValue = null;
-                IExtensibleModelBinder childBinder = bindingContext
-                    .ModelBinderProviders
+                IExtensibleModelBinder childBinder = bindingContext.ModelBinderProviders
                     .GetBinder(controllerContext, childBindingContext);
                 if (childBinder != null)
                 {
@@ -73,8 +70,7 @@ namespace Microsoft.Web.Mvc.ModelBinding
                         boundValue = childBindingContext.Model;
 
                         // merge validation up
-                        bindingContext
-                            .ValidationNode
+                        bindingContext.ValidationNode
                             .ChildNodes
                             .Add(childBindingContext.ValidationNode);
                     }
@@ -101,8 +97,7 @@ namespace Microsoft.Web.Mvc.ModelBinding
         {
             ModelBinderUtil.ValidateBindingContext(bindingContext);
 
-            ValueProviderResult valueProviderResult = bindingContext
-                .ValueProvider
+            ValueProviderResult valueProviderResult = bindingContext.ValueProvider
                 .GetValue(bindingContext.ModelName);
             List<TElement> boundCollection =
                 (valueProviderResult != null)
@@ -144,8 +139,7 @@ namespace Microsoft.Web.Mvc.ModelBinding
                 ExtensibleModelBindingContext innerBindingContext =
                     new ExtensibleModelBindingContext(bindingContext)
                     {
-                        ModelMetadata = ModelMetadataProviders
-                            .Current
+                        ModelMetadata = ModelMetadataProviders.Current
                             .GetMetadataForType(null, typeof(TElement)),
                         ModelName = bindingContext.ModelName,
                         ValueProvider = new ValueProviderCollection
@@ -161,16 +155,14 @@ namespace Microsoft.Web.Mvc.ModelBinding
                     };
 
                 object boundValue = null;
-                IExtensibleModelBinder childBinder = bindingContext
-                    .ModelBinderProviders
+                IExtensibleModelBinder childBinder = bindingContext.ModelBinderProviders
                     .GetBinder(controllerContext, innerBindingContext);
                 if (childBinder != null)
                 {
                     if (childBinder.BindModel(controllerContext, innerBindingContext))
                     {
                         boundValue = innerBindingContext.Model;
-                        bindingContext
-                            .ValidationNode
+                        bindingContext.ValidationNode
                             .ChildNodes
                             .Add(innerBindingContext.ValidationNode);
                     }

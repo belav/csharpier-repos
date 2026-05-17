@@ -71,8 +71,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq.ConvertForEachToLinqQuery
                 switch (previous.Kind())
                 {
                     case SyntaxKind.LocalDeclarationStatement:
-                        var variables = ((LocalDeclarationStatementSyntax)previous)
-                            .Declaration
+                        var variables = ((LocalDeclarationStatementSyntax)previous).Declaration
                             .Variables;
                         var lastDeclaration = variables.Last();
                         // Check if
@@ -81,8 +80,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq.ConvertForEachToLinqQuery
                         // If so, join the declaration with the query.
                         if (
                             _modifyingExpression is IdentifierNameSyntax identifierName
-                            && lastDeclaration
-                                .Identifier
+                            && lastDeclaration.Identifier
                                 .ValueText
                                 .Equals(identifierName.Identifier.ValueText)
                             && CanReplaceInitialization(
@@ -108,15 +106,12 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq.ConvertForEachToLinqQuery
                         if (
                             ((ExpressionStatementSyntax)previous).Expression
                                 is AssignmentExpressionSyntax assignmentExpression
-                            && SymbolEquivalenceComparer
-                                .Instance
+                            && SymbolEquivalenceComparer.Instance
                                 .Equals(
-                                    ForEachInfo
-                                        .SemanticModel
+                                    ForEachInfo.SemanticModel
                                         .GetSymbolInfo(assignmentExpression.Left, cancellationToken)
                                         .Symbol,
-                                    ForEachInfo
-                                        .SemanticModel
+                                    ForEachInfo.SemanticModel
                                         .GetSymbolInfo(_modifyingExpression, cancellationToken)
                                         .Symbol
                                 )
@@ -152,8 +147,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq.ConvertForEachToLinqQuery
                 SyntaxTrivia[] leadingTrivia;
 
                 // Check if expressionAssigning is followed by a return statement.
-                var expresisonSymbol = ForEachInfo
-                    .SemanticModel
+                var expresisonSymbol = ForEachInfo.SemanticModel
                     .GetSymbolInfo(_modifyingExpression, cancellationToken)
                     .Symbol;
                 if (
@@ -161,12 +155,10 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq.ConvertForEachToLinqQuery
                     && ForEachInfo.ForEachStatement.GetNextStatement()
                         is ReturnStatementSyntax returnStatement
                     && !returnStatement.ContainsDirectives
-                    && SymbolEquivalenceComparer
-                        .Instance
+                    && SymbolEquivalenceComparer.Instance
                         .Equals(
                             expresisonSymbol,
-                            ForEachInfo
-                                .SemanticModel
+                            ForEachInfo.SemanticModel
                                 .GetSymbolInfo(returnStatement.Expression, cancellationToken)
                                 .Symbol
                         )

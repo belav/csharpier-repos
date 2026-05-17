@@ -111,8 +111,7 @@ namespace Microsoft.CodeAnalysis.Wrapping
                 };
 
                 var indentationService = Wrapper.IndentationService;
-                var originalLineNumber = newSourceText
-                    .Lines
+                var originalLineNumber = newSourceText.Lines
                     .GetLineFromPosition(nodeOrToken.Span.End)
                     .LineNumber;
 
@@ -283,8 +282,7 @@ namespace Microsoft.CodeAnalysis.Wrapping
                 var root = await OriginalDocument
                     .GetRequiredSyntaxRootAsync(CancellationToken)
                     .ConfigureAwait(false);
-                var tokens = leftTokenToTrailingTrivia
-                    .Keys
+                var tokens = leftTokenToTrailingTrivia.Keys
                     .Concat(rightTokenToLeadingTrivia.Keys)
                     .Distinct()
                     .ToImmutableArray();
@@ -309,8 +307,7 @@ namespace Microsoft.CodeAnalysis.Wrapping
                     nodes: new[] { nodeToFormat },
                     computeReplacementNode: (oldNode, newNode) =>
                         newNode.WithAdditionalAnnotations(s_toFormatAnnotation),
-                    tokens: leftTokenToTrailingTrivia
-                        .Keys
+                    tokens: leftTokenToTrailingTrivia.Keys
                         .Concat(rightTokenToLeadingTrivia.Keys)
                         .Distinct(),
                     computeReplacementToken: (oldToken, newToken) =>
@@ -348,8 +345,7 @@ namespace Microsoft.CodeAnalysis.Wrapping
                     foreach (var group in wrappingGroups)
                     {
                         // if a group is empty just ignore it.
-                        var wrappingActions = group
-                            .WrappingActions
+                        var wrappingActions = group.WrappingActions
                             .WhereNotNull()
                             .ToImmutableArray();
                         if (wrappingActions.Length == 0)

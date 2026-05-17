@@ -54,8 +54,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.HideBase
                 var newModifiers = modifiers.Add(SyntaxFactory.Token(SyntaxKind.NewKeyword));
 
                 if (
-                    !CSharpOrderModifiersHelper
-                        .Instance
+                    !CSharpOrderModifiersHelper.Instance
                         .TryGetOrComputePreferredOrder(
                             preferredModifierOrder,
                             out var preferredOrder

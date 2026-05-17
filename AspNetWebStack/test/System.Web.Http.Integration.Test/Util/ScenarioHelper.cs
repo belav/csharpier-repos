@@ -25,8 +25,7 @@ namespace System.Web.Http
                 IncludeErrorDetailPolicy = IncludeErrorDetailPolicy.Always,
             };
 
-            config
-                .Routes
+            config.Routes
                 .MapHttpRoute(
                     "Default",
                     "{controller}" + routeSuffix,

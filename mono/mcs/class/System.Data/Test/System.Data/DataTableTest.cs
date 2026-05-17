@@ -3214,8 +3214,7 @@ namespace MonoTests.System.Data
             dtParent.Columns.Add("ParentDouble", typeof(double));
             dtParent.Columns.Add("ParentBool", typeof(bool));
 
-            dtParent
-                .Rows
+            dtParent.Rows
                 .Add(
                     new object[]
                     {
@@ -3227,8 +3226,7 @@ namespace MonoTests.System.Data
                         true,
                     }
                 );
-            dtParent
-                .Rows
+            dtParent.Rows
                 .Add(
                     new object[]
                     {
@@ -3240,8 +3238,7 @@ namespace MonoTests.System.Data
                         true,
                     }
                 );
-            dtParent
-                .Rows
+            dtParent.Rows
                 .Add(
                     new object[]
                     {
@@ -3253,8 +3250,7 @@ namespace MonoTests.System.Data
                         false,
                     }
                 );
-            dtParent
-                .Rows
+            dtParent.Rows
                 .Add(
                     new object[]
                     {
@@ -3266,8 +3262,7 @@ namespace MonoTests.System.Data
                         true,
                     }
                 );
-            dtParent
-                .Rows
+            dtParent.Rows
                 .Add(
                     new object[]
                     {
@@ -3279,8 +3274,7 @@ namespace MonoTests.System.Data
                         true,
                     }
                 );
-            dtParent
-                .Rows
+            dtParent.Rows
                 .Add(
                     new object[]
                     {
@@ -3972,11 +3966,12 @@ namespace MonoTests.System.Data
             dt3.Columns.Add(new DataColumn("Title", typeof(string), "", MappingType.Attribute));
             dt3.Columns["Title"].AllowDBNull = false;
 
-            dt3.Constraints.Add(
-                "PK_Element",
-                new DataColumn[] { dt3.Columns["Dimension"], dt3.Columns["Number"] },
-                true
-            );
+            dt3.Constraints
+                .Add(
+                    "PK_Element",
+                    new DataColumn[] { dt3.Columns["Dimension"], dt3.Columns["Number"] },
+                    true
+                );
 
             ds.AcceptChanges();
 
@@ -4128,27 +4123,27 @@ namespace MonoTests.System.Data
             DataColumn col2_6 = table2.Columns.Add("col 6", typeof(int));
             DataColumn col2_7 = table2.Columns.Add("col 7", typeof(int));
 
-            ds1.Relations.Add(
-                "rel 1",
-                new DataColumn[] { col1_1, col1_2 },
-                new DataColumn[] { col2_1, col2_2 },
-                false
-            );
-            ds1.Relations.Add(
-                "rel 2",
-                new DataColumn[] { col1_3, col1_4 },
-                new DataColumn[] { col2_3, col2_4 },
-                true
-            );
-            table2
-                .Constraints
+            ds1.Relations
+                .Add(
+                    "rel 1",
+                    new DataColumn[] { col1_1, col1_2 },
+                    new DataColumn[] { col2_1, col2_2 },
+                    false
+                );
+            ds1.Relations
+                .Add(
+                    "rel 2",
+                    new DataColumn[] { col1_3, col1_4 },
+                    new DataColumn[] { col2_3, col2_4 },
+                    true
+                );
+            table2.Constraints
                 .Add(
                     "fk 1",
                     new DataColumn[] { col1_5, col1_6 },
                     new DataColumn[] { col2_5, col2_6 }
                 );
-            table1
-                .Constraints
+            table1.Constraints
                 .Add(
                     "fk 2",
                     new DataColumn[] { col2_5, col2_6 },
@@ -4260,12 +4255,13 @@ namespace MonoTests.System.Data
             table2.PrimaryKey = new DataColumn[] { table2.Columns[0] };
             ds.Tables.Add(table1);
             ds.Tables.Add(table2);
-            ds.Relations.Add(
-                "CustomerOrder",
-                new DataColumn[] { table1.Columns[0] },
-                new DataColumn[] { table2.Columns[1] },
-                true
-            );
+            ds.Relations
+                .Add(
+                    "CustomerOrder",
+                    new DataColumn[] { table1.Columns[0] },
+                    new DataColumn[] { table2.Columns[1] },
+                    true
+                );
 
             StringWriter writer1 = new StringWriter();
             table1.WriteXmlSchema(writer1, false);

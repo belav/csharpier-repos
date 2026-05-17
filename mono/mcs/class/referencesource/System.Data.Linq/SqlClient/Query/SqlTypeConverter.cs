@@ -126,10 +126,11 @@ namespace System.Data.Linq.SqlClient
                     {
                         // set the new size to the (potentially smaller) oldSqlType.Size
                         uo.SetSqlType(
-                            sql.TypeProvider.From(
-                                uo.ClrType,
-                                oldSqlType.HasSizeOrIsLarge ? oldSqlType.Size : (int?)null
-                            )
+                            sql.TypeProvider
+                                .From(
+                                    uo.ClrType,
+                                    oldSqlType.HasSizeOrIsLarge ? oldSqlType.Size : (int?)null
+                                )
                         );
                     }
                 }
@@ -174,10 +175,11 @@ namespace System.Data.Linq.SqlClient
                     {
                         // set the new size to the (potentially smaller) oldSqlType.Size
                         uo.SetSqlType(
-                            sql.TypeProvider.From(
-                                uo.ClrType,
-                                oldSqlType.HasSizeOrIsLarge ? oldSqlType.Size : (int?)null
-                            )
+                            sql.TypeProvider
+                                .From(
+                                    uo.ClrType,
+                                    oldSqlType.HasSizeOrIsLarge ? oldSqlType.Size : (int?)null
+                                )
                         );
                     }
                 }

@@ -90,8 +90,7 @@ namespace System.Data
         internal SimpleType simpleType = null;
 
         private static int _objectTypeCount; // Bid counter
-        private readonly int _objectID = System
-            .Threading
+        private readonly int _objectID = System.Threading
             .Interlocked
             .Increment(ref _objectTypeCount);
 
@@ -485,8 +484,7 @@ namespace System.Data
                         encodedColumnName = null;
                         if (table != null)
                         {
-                            table
-                                .Columns
+                            table.Columns
                                 .OnColumnPropertyChanged(
                                     new CollectionChangeEventArgs(
                                         CollectionChangeAction.Refresh,
@@ -502,8 +500,7 @@ namespace System.Data
                         encodedColumnName = null;
                         if (table != null)
                         {
-                            table
-                                .Columns
+                            table.Columns
                                 .OnColumnPropertyChanged(
                                     new CollectionChangeEventArgs(
                                         CollectionChangeAction.Refresh,
@@ -837,11 +834,12 @@ namespace System.Data
                         );
                     else if (this.implementsINullable)
                     {
-                        System.Reflection.PropertyInfo propInfo = this.dataType.GetProperty(
-                            "Null",
-                            System.Reflection.BindingFlags.Public
-                                | System.Reflection.BindingFlags.Static
-                        );
+                        System.Reflection.PropertyInfo propInfo = this.dataType
+                            .GetProperty(
+                                "Null",
+                                System.Reflection.BindingFlags.Public
+                                    | System.Reflection.BindingFlags.Static
+                            );
                         if (propInfo != null)
                             defaultValue = propInfo.GetValue(null, null);
                     }
@@ -1564,8 +1562,7 @@ namespace System.Data
                             else
                             {
                                 for (
-                                    System.Collections.IEnumerator e = Table
-                                        .Constraints
+                                    System.Collections.IEnumerator e = Table.Constraints
                                         .GetEnumerator();
                                     e.MoveNext();
 

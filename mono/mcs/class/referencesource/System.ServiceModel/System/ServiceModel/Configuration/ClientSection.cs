@@ -86,8 +86,7 @@ namespace System.ServiceModel.Configuration
                     {
                         if (!string.IsNullOrEmpty(endpoint.EndpointConfiguration))
                         {
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
                                     new ConfigurationErrorsException(
                                         SR.GetString(
@@ -101,8 +100,7 @@ namespace System.ServiceModel.Configuration
                         }
                         if (string.IsNullOrEmpty(endpoint.Binding))
                         {
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
                                     new ConfigurationErrorsException(
                                         SR.GetString(
@@ -115,8 +113,7 @@ namespace System.ServiceModel.Configuration
                         }
                         if (string.IsNullOrEmpty(endpoint.Contract))
                         {
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
                                     new ConfigurationErrorsException(
                                         SR.GetString(
@@ -133,8 +130,7 @@ namespace System.ServiceModel.Configuration
                         && !string.IsNullOrEmpty(endpoint.BindingConfiguration)
                     )
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new ConfigurationErrorsException(
                                     SR.GetString(

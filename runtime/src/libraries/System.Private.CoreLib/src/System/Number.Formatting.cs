@@ -1061,8 +1061,7 @@ namespace System
             }
             else
             {
-                return Encoding
-                    .UTF8
+                return Encoding.UTF8
                     .TryGetBytes(
                         source,
                         MemoryMarshal.Cast<TChar, byte>(destination),

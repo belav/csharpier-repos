@@ -359,8 +359,7 @@ namespace System.Data.Mapping.Update.Internal
                         {
                             // wrap the exception
                             throw EntityUtil.Update(
-                                System
-                                    .Data
+                                System.Data
                                     .Entity
                                     .Strings
                                     .Update_UnableToConvertRowsAffectedParameterToInt32(
@@ -449,15 +448,13 @@ namespace System.Data.Mapping.Update.Internal
             }
 
             // order by entity set
-            result = StringComparer
-                .Ordinal
+            result = StringComparer.Ordinal
                 .Compare(thisParent.EntitySet.Name, otherParent.EntitySet.Name);
             if (0 != result)
             {
                 return result;
             }
-            result = StringComparer
-                .Ordinal
+            result = StringComparer.Ordinal
                 .Compare(
                     thisParent.EntitySet.EntityContainer.Name,
                     otherParent.EntitySet.EntityContainer.Name

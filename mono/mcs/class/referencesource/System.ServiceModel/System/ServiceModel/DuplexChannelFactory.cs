@@ -113,8 +113,7 @@ namespace System.ServiceModel
                 }
                 if (callbackObject == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgumentNull("callbackObject");
                 }
 
@@ -154,15 +153,13 @@ namespace System.ServiceModel
                 }
                 if (callbackObject == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgumentNull("callbackObject");
                 }
 
                 if (endpointConfigurationName == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgumentNull("endpointConfigurationName");
                 }
 
@@ -206,8 +203,7 @@ namespace System.ServiceModel
                 }
                 if (callbackObject == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgumentNull("callbackObject");
                 }
 
@@ -244,8 +240,7 @@ namespace System.ServiceModel
                 }
                 if (callbackObject == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgumentNull("callbackObject");
                 }
 
@@ -308,8 +303,7 @@ namespace System.ServiceModel
 
             if (this.CallbackType != null && callbackInstance == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(SR.SFxCreateDuplexChannelNoCallback1)
@@ -318,8 +312,7 @@ namespace System.ServiceModel
             }
             if (callbackInstance == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(SR.SFxCreateDuplexChannelNoCallback)
@@ -329,8 +322,7 @@ namespace System.ServiceModel
 
             if (callbackInstance.UserObject == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(SR.SFxCreateDuplexChannelNoCallbackUserObject)
@@ -340,8 +332,7 @@ namespace System.ServiceModel
 
             if (!this.HasDuplexOperations())
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(SR.SFxCreateDuplexChannel1, this.Endpoint.Contract.Name)
@@ -353,8 +344,7 @@ namespace System.ServiceModel
             Type callbackType = this.Endpoint.Contract.CallbackContractType;
             if (callbackType != null && !callbackType.IsAssignableFrom(userObjectType))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(

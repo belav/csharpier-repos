@@ -326,8 +326,7 @@ namespace System.Configuration
                     ConfigurationSection configSection = (ConfigurationSection)
                         TypeUtil.InvokeCtorWithReflectionPermission(_sectionCtor);
 
-                    configSection
-                        .SectionInformation
+                    configSection.SectionInformation
                         .SetRuntimeConfigurationInformation(
                             configRecord,
                             factoryRecord,
@@ -380,8 +379,7 @@ namespace System.Configuration
                         CheckForLockAttributes(factoryRecord.ConfigKey, xmlNode);
 
                         // In v1, our old section handler expects a context that contains the virtualPath from the configPath
-                        object configContext = configRecord
-                            .Host
+                        object configContext = configRecord.Host
                             .CreateDeprecatedConfigContext(configRecord.ConfigPath);
 
                         config = _sectionHandler.Create(parentConfig, configContext, xmlNode);

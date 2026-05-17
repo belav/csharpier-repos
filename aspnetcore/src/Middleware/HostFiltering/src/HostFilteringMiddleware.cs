@@ -18,8 +18,7 @@ namespace Microsoft.AspNetCore.HostFiltering;
 public class HostFilteringMiddleware
 {
     // Matches Http.Sys.
-    private static readonly byte[] DefaultResponse = Encoding
-        .ASCII
+    private static readonly byte[] DefaultResponse = Encoding.ASCII
         .GetBytes(
             "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\"\"http://www.w3.org/TR/html4/strict.dtd\">\r\n"
                 + "<HTML><HEAD><TITLE>Bad Request</TITLE>\r\n"

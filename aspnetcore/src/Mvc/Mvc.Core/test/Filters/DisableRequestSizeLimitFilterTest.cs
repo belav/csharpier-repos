@@ -24,8 +24,7 @@ public class DisableRequestSizeLimitFilterTest
         );
 
         var httpMaxRequestBodySize = new TestHttpMaxRequestBodySizeFeature();
-        authorizationFilterContext
-            .HttpContext
+        authorizationFilterContext.HttpContext
             .Features
             .Set<IHttpMaxRequestBodySizeFeature>(httpMaxRequestBodySize);
 
@@ -55,8 +54,7 @@ public class DisableRequestSizeLimitFilterTest
         );
 
         var httpMaxRequestBodySize = new TestHttpMaxRequestBodySizeFeature();
-        authorizationFilterContext
-            .HttpContext
+        authorizationFilterContext.HttpContext
             .Features
             .Set<IHttpMaxRequestBodySizeFeature>(httpMaxRequestBodySize);
 
@@ -110,8 +108,7 @@ public class DisableRequestSizeLimitFilterTest
 
         var httpMaxRequestBodySize = new TestHttpMaxRequestBodySizeFeature();
         httpMaxRequestBodySize.IsReadOnly = true;
-        authorizationFilterContext
-            .HttpContext
+        authorizationFilterContext.HttpContext
             .Features
             .Set<IHttpMaxRequestBodySizeFeature>(httpMaxRequestBodySize);
 
@@ -141,8 +138,7 @@ public class DisableRequestSizeLimitFilterTest
         );
 
         var httpMaxRequestBodySize = new TestHttpMaxRequestBodySizeFeature();
-        authorizationFilterContext
-            .HttpContext
+        authorizationFilterContext.HttpContext
             .Features
             .Set<IHttpMaxRequestBodySizeFeature>(httpMaxRequestBodySize);
 

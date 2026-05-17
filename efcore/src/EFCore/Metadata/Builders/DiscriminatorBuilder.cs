@@ -103,8 +103,7 @@ public class DiscriminatorBuilder : IConventionDiscriminatorBuilder
         object? value
     )
     {
-        var entityTypeBuilder = EntityTypeBuilder
-            .ModelBuilder
+        var entityTypeBuilder = EntityTypeBuilder.ModelBuilder
             .Entity(entityType, ConfigurationSource.Explicit);
 
         return HasValue(entityTypeBuilder, value, ConfigurationSource.Explicit)!;
@@ -118,8 +117,7 @@ public class DiscriminatorBuilder : IConventionDiscriminatorBuilder
     /// <returns>The same builder so that multiple calls can be chained.</returns>
     public virtual DiscriminatorBuilder HasValue(string entityTypeName, object? value)
     {
-        var entityTypeBuilder = EntityTypeBuilder
-            .ModelBuilder
+        var entityTypeBuilder = EntityTypeBuilder.ModelBuilder
             .Entity(entityTypeName, ConfigurationSource.Explicit);
 
         return HasValue(entityTypeBuilder, value, ConfigurationSource.Explicit)!;
@@ -140,8 +138,7 @@ public class DiscriminatorBuilder : IConventionDiscriminatorBuilder
         if (
             !baseEntityTypeBuilder.Metadata.IsAssignableFrom(entityTypeBuilder.Metadata)
             && (
-                !baseEntityTypeBuilder
-                    .Metadata
+                !baseEntityTypeBuilder.Metadata
                     .ClrType
                     .IsAssignableFrom(entityTypeBuilder.Metadata.ClrType)
                 || entityTypeBuilder.HasBaseType(

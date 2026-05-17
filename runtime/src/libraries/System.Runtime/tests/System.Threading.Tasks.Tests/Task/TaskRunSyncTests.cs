@@ -379,12 +379,13 @@ namespace System.Threading.Tasks.Tests
                     {
                         case WorkloadType.CreateChildTask:
                         case WorkloadType.CreateDetachedChildTask:
-                            Task.Factory.StartNew(
-                                () => { },
-                                _workloadType == WorkloadType.CreateDetachedChildTask
-                                    ? TaskCreationOptions.None
-                                    : TaskCreationOptions.AttachedToParent
-                            );
+                            Task.Factory
+                                .StartNew(
+                                    () => { },
+                                    _workloadType == WorkloadType.CreateDetachedChildTask
+                                        ? TaskCreationOptions.None
+                                        : TaskCreationOptions.AttachedToParent
+                                );
                             break;
 
                         case WorkloadType.ContinueInside:

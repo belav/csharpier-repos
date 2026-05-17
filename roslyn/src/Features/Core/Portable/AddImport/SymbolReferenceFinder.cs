@@ -302,11 +302,12 @@ namespace Microsoft.CodeAnalysis.AddImport
                         hasIncompleteParentMember,
                         looksGeneric
                     )
-                    && s.Symbol.IsEditorBrowsable(
-                        _options.HideAdvancedMembers,
-                        _semanticModel.Compilation,
-                        editorBrowserInfo
-                    )
+                    && s.Symbol
+                        .IsEditorBrowsable(
+                            _options.HideAdvancedMembers,
+                            _semanticModel.Compilation,
+                            editorBrowserInfo
+                        )
                 );
 
                 // These types may be contained within namespaces, or they may be nested

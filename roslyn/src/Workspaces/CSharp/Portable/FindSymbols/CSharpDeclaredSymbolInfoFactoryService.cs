@@ -668,8 +668,7 @@ namespace Microsoft.CodeAnalysis.CSharp.FindSymbols
         }
 
         protected override string GetContainerDisplayName(MemberDeclarationSyntax node) =>
-            CSharpSyntaxFacts
-                .Instance
+            CSharpSyntaxFacts.Instance
                 .GetDisplayName(node, DisplayNameOptions.IncludeTypeParameters);
 
         protected override string GetFullyQualifiedContainerName(
@@ -793,8 +792,7 @@ namespace Microsoft.CodeAnalysis.CSharp.FindSymbols
         {
             Debug.Assert(IsExtensionMethod(methodDeclaration));
 
-            var typeParameterNames = methodDeclaration
-                .TypeParameterList
+            var typeParameterNames = methodDeclaration.TypeParameterList
                 ?.Parameters
                 .SelectAsArray(p => p.Identifier.Text);
             TryGetSimpleTypeName(

@@ -346,8 +346,7 @@ namespace System.ServiceModel.Channels
                 if (this.retransmitSettings.Enabled == true)
                 {
                     // we should only get here if some channel above us starts producing messages that don't match the encoder's message version.
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(
                             new ProtocolException(
                                 SR.RetransmissionRequiresAddressingOnMessage(

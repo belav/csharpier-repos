@@ -36,8 +36,7 @@ namespace System.Security.Cryptography.X509Certificates
                 HashSet<X509Certificate2> dedupedCerts = new HashSet<X509Certificate2>();
 
                 using (
-                    SafeCFArrayHandle identities = Interop
-                        .AppleCrypto
+                    SafeCFArrayHandle identities = Interop.AppleCrypto
                         .KeychainEnumerateIdentities(_keychainHandle)
                 )
                 {
@@ -45,8 +44,7 @@ namespace System.Security.Cryptography.X509Certificates
                 }
 
                 using (
-                    SafeCFArrayHandle certs = Interop
-                        .AppleCrypto
+                    SafeCFArrayHandle certs = Interop.AppleCrypto
                         .KeychainEnumerateCerts(_keychainHandle)
                 )
                 {
@@ -102,8 +100,7 @@ namespace System.Security.Cryptography.X509Certificates
             )
             {
                 return new AppleKeychainStore(
-                    Interop
-                        .AppleCrypto
+                    Interop.AppleCrypto
                         .CreateOrOpenKeychain(
                             keychainPath,
                             !openFlags.HasFlag(OpenFlags.OpenExistingOnly)

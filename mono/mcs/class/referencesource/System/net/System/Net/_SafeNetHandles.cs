@@ -309,8 +309,7 @@ namespace System.Net
             out SafeFreeAddrInfo outAddrInfo
         )
         {
-            return UnsafeNclNativeMethods
-                .SafeNetHandlesXPOrLater
+            return UnsafeNclNativeMethods.SafeNetHandlesXPOrLater
                 .GetAddrInfoW(nodename, servicename, ref hints, out outAddrInfo);
         }
 
@@ -582,8 +581,7 @@ namespace System.Net
             {
                 case SecurDll.SECURITY:
                     SafeFreeContextBuffer_SECURITY pkgArray_SECURITY = null;
-                    res = UnsafeNclNativeMethods
-                        .SafeNetHandles_SECURITY
+                    res = UnsafeNclNativeMethods.SafeNetHandles_SECURITY
                         .EnumerateSecurityPackagesW(out pkgnum, out pkgArray_SECURITY);
                     pkgArray = pkgArray_SECURITY;
                     break;
@@ -678,8 +676,7 @@ namespace System.Net
             {
                 if (b)
                 {
-                    status = UnsafeNclNativeMethods
-                        .SafeNetHandles_SECURITY
+                    status = UnsafeNclNativeMethods.SafeNetHandles_SECURITY
                         .QueryContextAttributesW(ref phContext._handle, contextAttribute, buffer);
                     phContext.DangerousRelease();
                 }
@@ -752,8 +749,7 @@ namespace System.Net
             {
                 if (b)
                 {
-                    status = UnsafeNclNativeMethods
-                        .SafeNetHandles_SECURITY
+                    status = UnsafeNclNativeMethods.SafeNetHandles_SECURITY
                         .SetContextAttributesW(
                             ref phContext._handle,
                             contextAttribute,
@@ -812,8 +808,7 @@ namespace System.Net
 
         public static SafeLocalFree LocalAlloc(int cb)
         {
-            SafeLocalFree result = UnsafeNclNativeMethods
-                .SafeNetHandles
+            SafeLocalFree result = UnsafeNclNativeMethods.SafeNetHandles
                 .LocalAlloc(LMEM_FIXED, (UIntPtr)cb);
             if (result.IsInvalid)
             {
@@ -877,8 +872,7 @@ namespace System.Net
 
         public static SafeOverlappedFree Alloc()
         {
-            SafeOverlappedFree result = UnsafeNclNativeMethods
-                .SafeNetHandlesSafeOverlappedFree
+            SafeOverlappedFree result = UnsafeNclNativeMethods.SafeNetHandlesSafeOverlappedFree
                 .LocalAlloc(LPTR, (UIntPtr)Win32.OverlappedSize);
             if (result.IsInvalid)
             {
@@ -948,8 +942,7 @@ namespace System.Net
 
         public static unsafe SafeLoadLibrary LoadLibraryEx(string library)
         {
-            SafeLoadLibrary result = UnsafeNclNativeMethods
-                .SafeNetHandles
+            SafeLoadLibrary result = UnsafeNclNativeMethods.SafeNetHandles
                 .LoadLibraryExW(library, null, 0);
             if (result.IsInvalid)
             {
@@ -1281,8 +1274,7 @@ namespace System.Net
                     try { }
                     finally
                     {
-                        errorCode = UnsafeNclNativeMethods
-                            .SafeNetHandles_SECURITY
+                        errorCode = UnsafeNclNativeMethods.SafeNetHandles_SECURITY
                             .AcquireCredentialsHandleW(
                                 null,
                                 package,
@@ -1348,8 +1340,7 @@ namespace System.Net
                     try { }
                     finally
                     {
-                        errorCode = UnsafeNclNativeMethods
-                            .SafeNetHandles_SECURITY
+                        errorCode = UnsafeNclNativeMethods.SafeNetHandles_SECURITY
                             .AcquireCredentialsHandleW(
                                 null,
                                 package,
@@ -1405,8 +1396,7 @@ namespace System.Net
             try { }
             finally
             {
-                errorCode = UnsafeNclNativeMethods
-                    .SafeNetHandles_SECURITY
+                errorCode = UnsafeNclNativeMethods.SafeNetHandles_SECURITY
                     .AcquireCredentialsHandleW(
                         null,
                         package,
@@ -1470,8 +1460,7 @@ namespace System.Net
                         try { }
                         finally
                         {
-                            errorCode = UnsafeNclNativeMethods
-                                .SafeNetHandles_SECURITY
+                            errorCode = UnsafeNclNativeMethods.SafeNetHandles_SECURITY
                                 .AcquireCredentialsHandleW(
                                     null,
                                     package,
@@ -1748,8 +1737,7 @@ namespace System.Net
                                 // use the unmanaged token if it's not null; otherwise use the managed buffer
                                 if (securityBuffer.unmanagedToken != null)
                                 {
-                                    inUnmanagedBuffer[index].token = securityBuffer
-                                        .unmanagedToken
+                                    inUnmanagedBuffer[index].token = securityBuffer.unmanagedToken
                                         .DangerousGetHandle();
                                 }
                                 else if (
@@ -1949,8 +1937,7 @@ namespace System.Net
                 }
                 else if (b1 && b2)
                 {
-                    errorCode = UnsafeNclNativeMethods
-                        .SafeNetHandles_SECURITY
+                    errorCode = UnsafeNclNativeMethods.SafeNetHandles_SECURITY
                         .InitializeSecurityContextW(
                             ref credentialHandle,
                             inContextPtr,
@@ -2112,8 +2099,7 @@ namespace System.Net
                                 // use the unmanaged token if it's not null; otherwise use the managed buffer
                                 if (securityBuffer.unmanagedToken != null)
                                 {
-                                    inUnmanagedBuffer[index].token = securityBuffer
-                                        .unmanagedToken
+                                    inUnmanagedBuffer[index].token = securityBuffer.unmanagedToken
                                         .DangerousGetHandle();
                                 }
                                 else if (
@@ -2301,8 +2287,7 @@ namespace System.Net
                 }
                 else if (b1 && b2)
                 {
-                    errorCode = UnsafeNclNativeMethods
-                        .SafeNetHandles_SECURITY
+                    errorCode = UnsafeNclNativeMethods.SafeNetHandles_SECURITY
                         .AcceptSecurityContext(
                             ref credentialHandle,
                             inContextPtr,
@@ -2409,8 +2394,7 @@ namespace System.Net
                         // use the unmanaged token if it's not null; otherwise use the managed buffer
                         if (securityBuffer.unmanagedToken != null)
                         {
-                            inUnmanagedBuffer[index].token = securityBuffer
-                                .unmanagedToken
+                            inUnmanagedBuffer[index].token = securityBuffer.unmanagedToken
                                 .DangerousGetHandle();
                         }
                         else if (securityBuffer.token == null || securityBuffer.token.Length == 0)
@@ -2474,8 +2458,7 @@ namespace System.Net
                         {
                             if (b)
                             {
-                                errorCode = UnsafeNclNativeMethods
-                                    .SafeNetHandles_SECURITY
+                                errorCode = UnsafeNclNativeMethods.SafeNetHandles_SECURITY
                                     .CompleteAuthToken(
                                         contextHandle.IsZero ? null : &contextHandle,
                                         inSecurityBufferDescriptor
@@ -2564,8 +2547,7 @@ namespace System.Net
                         // use the unmanaged token if it's not null; otherwise use the managed buffer
                         if (securityBuffer.unmanagedToken != null)
                         {
-                            inUnmanagedBuffer[index].token = securityBuffer
-                                .unmanagedToken
+                            inUnmanagedBuffer[index].token = securityBuffer.unmanagedToken
                                 .DangerousGetHandle();
                         }
                         else if (securityBuffer.token == null || securityBuffer.token.Length == 0)
@@ -2629,8 +2611,7 @@ namespace System.Net
                         {
                             if (b)
                             {
-                                errorCode = UnsafeNclNativeMethods
-                                    .SafeNetHandles_SECURITY
+                                errorCode = UnsafeNclNativeMethods.SafeNetHandles_SECURITY
                                     .ApplyControlToken(
                                         contextHandle.IsZero ? null : &contextHandle,
                                         inSecurityBufferDescriptor
@@ -2987,8 +2968,7 @@ namespace System.Net
                     // The socket must be non-blocking with a linger timeout set.
                     // We have to set the socket to blocking.
                     int nonBlockCmd = 0;
-                    errorCode = UnsafeNclNativeMethods
-                        .SafeNetHandles
+                    errorCode = UnsafeNclNativeMethods.SafeNetHandles
                         .ioctlsocket(handle, IoctlSocketConstants.FIONBIO, ref nonBlockCmd);
                     if (errorCode == SocketError.SocketError)
                         errorCode = (SocketError)Marshal.GetLastWin32Error();
@@ -3002,8 +2982,7 @@ namespace System.Net
                     // This can fail if there's a pending WSAEventSelect.  Try canceling it.
                     if (errorCode == SocketError.InvalidArgument)
                     {
-                        errorCode = UnsafeNclNativeMethods
-                            .SafeNetHandles
+                        errorCode = UnsafeNclNativeMethods.SafeNetHandles
                             .WSAEventSelect(handle, IntPtr.Zero, AsyncEventBits.FdNone);
                         GlobalLog.Print(
                             "SafeCloseSocket::ReleaseHandle(handle:"
@@ -3017,8 +2996,7 @@ namespace System.Net
                         );
 
                         // Now retry the ioctl.
-                        errorCode = UnsafeNclNativeMethods
-                            .SafeNetHandles
+                        errorCode = UnsafeNclNativeMethods.SafeNetHandles
                             .ioctlsocket(handle, IoctlSocketConstants.FIONBIO, ref nonBlockCmd);
                         GlobalLog.Print(
                             "SafeCloseSocket::ReleaseHandle(handle:"
@@ -3064,8 +3042,7 @@ namespace System.Net
                 lingerStruct.OnOff = 1;
                 lingerStruct.Time = 0;
 
-                errorCode = UnsafeNclNativeMethods
-                    .SafeNetHandles
+                errorCode = UnsafeNclNativeMethods.SafeNetHandles
                     .setsockopt(
                         handle,
                         SocketOptionLevel.Socket,
@@ -3159,8 +3136,7 @@ namespace System.Net
             internal static unsafe InnerSafeCloseSocket CreateWSASocket(byte* pinnedBuffer)
             {
                 //-1 is the value for FROM_PROTOCOL_INFO
-                InnerSafeCloseSocket result = UnsafeNclNativeMethods
-                    .OSSOCK
+                InnerSafeCloseSocket result = UnsafeNclNativeMethods.OSSOCK
                     .WSASocket(
                         (AddressFamily)(-1),
                         (SocketType)(-1),
@@ -3182,8 +3158,7 @@ namespace System.Net
                 ProtocolType protocolType
             )
             {
-                InnerSafeCloseSocket result = UnsafeNclNativeMethods
-                    .OSSOCK
+                InnerSafeCloseSocket result = UnsafeNclNativeMethods.OSSOCK
                     .WSASocket(
                         addressFamily,
                         socketType,
@@ -3205,8 +3180,7 @@ namespace System.Net
                 ref int socketAddressSize
             )
             {
-                InnerSafeCloseSocket result = UnsafeNclNativeMethods
-                    .SafeNetHandles
+                InnerSafeCloseSocket result = UnsafeNclNativeMethods.SafeNetHandles
                     .accept(
                         socketHandle.DangerousGetHandle(),
                         socketAddress,
@@ -3321,8 +3295,7 @@ namespace System.Net
         {
             SafeLocalFreeChannelBinding result;
 
-            result = UnsafeNclNativeMethods
-                .SafeNetHandles
+            result = UnsafeNclNativeMethods.SafeNetHandles
                 .LocalAllocChannelBinding(LMEM_FIXED, (UIntPtr)cb);
             if (result.IsInvalid)
             {
@@ -3435,8 +3408,7 @@ namespace System.Net
             {
                 if (b)
                 {
-                    status = UnsafeNclNativeMethods
-                        .SafeNetHandles_SECURITY
+                    status = UnsafeNclNativeMethods.SafeNetHandles_SECURITY
                         .QueryContextAttributesW(ref phContext._handle, contextAttribute, buffer);
                     phContext.DangerousRelease();
                 }
@@ -3546,8 +3518,7 @@ namespace System.Net
             finally
             {
                 if (
-                    !UnsafeNclNativeMethods
-                        .SafeNetHandles
+                    !UnsafeNclNativeMethods.SafeNetHandles
                         .RetrieveUrlCacheEntryFileW(key, entryPtr, ref entryBufSize, 0)
                 )
                 {
@@ -3585,8 +3556,7 @@ namespace System.Net
             out SafeRegistryHandle resultSubKey
         )
         {
-            return UnsafeNclNativeMethods
-                .RegistryHelper
+            return UnsafeNclNativeMethods.RegistryHelper
                 .RegOpenKeyEx(key, subKey, ulOptions, samDesired, out resultSubKey);
         }
 
@@ -3597,8 +3567,7 @@ namespace System.Net
             out SafeRegistryHandle resultSubKey
         )
         {
-            return UnsafeNclNativeMethods
-                .RegistryHelper
+            return UnsafeNclNativeMethods.RegistryHelper
                 .RegOpenKeyEx(this, subKey, ulOptions, samDesired, out resultSubKey);
         }
 
@@ -3619,8 +3588,7 @@ namespace System.Net
 
             while (true)
             {
-                errorCode = UnsafeNclNativeMethods
-                    .RegistryHelper
+                errorCode = UnsafeNclNativeMethods.RegistryHelper
                     .RegQueryValueEx(this, name, IntPtr.Zero, out type, blob, ref size);
                 if (
                     errorCode != UnsafeNclNativeMethods.ErrorCodes.ERROR_MORE_DATA
@@ -3664,15 +3632,13 @@ namespace System.Net
             bool async
         )
         {
-            return UnsafeNclNativeMethods
-                .RegistryHelper
+            return UnsafeNclNativeMethods.RegistryHelper
                 .RegNotifyChangeKeyValue(this, watchSubTree, notifyFilter, regEvent, async);
         }
 
         internal static uint RegOpenCurrentUser(uint samDesired, out SafeRegistryHandle resultKey)
         {
-            return UnsafeNclNativeMethods
-                .RegistryHelper
+            return UnsafeNclNativeMethods.RegistryHelper
                 .RegOpenCurrentUser(samDesired, out resultKey);
         }
 

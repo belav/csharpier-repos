@@ -610,16 +610,14 @@ namespace System.Activities
 
                 if (!currentInstance.HasNotExecuted)
                 {
-                    currentInstance
-                        .Activity
+                    currentInstance.Activity
                         .InternalAbort(currentInstance, executor, terminationReason);
                     executor.DebugActivityCompleted(currentInstance);
                 }
 
                 if (currentInstance.PropertyManager != null)
                 {
-                    currentInstance
-                        .PropertyManager
+                    currentInstance.PropertyManager
                         .UnregisterProperties(
                             currentInstance,
                             currentInstance.Activity.MemberOf,
@@ -673,8 +671,7 @@ namespace System.Activities
         {
             if (this.initializationIncomplete)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(new InvalidOperationException(SR.InitializationIncomplete));
             }
 
@@ -731,8 +728,7 @@ namespace System.Activities
 
             if (this.Activity == null)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(new InvalidOperationException(SR.ActivityInstanceFixupFailed));
             }
 
@@ -1213,8 +1209,7 @@ namespace System.Activities
         {
             if (activity.GetType().Name != this.OwnerName)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new ValidationException(
                             SR.ActivityTypeMismatch(activity.DisplayName, this.OwnerName)
@@ -1224,8 +1219,7 @@ namespace System.Activities
 
             if (activity.ImplementationVersion != this.ImplementationVersion)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new VersionMismatchException(
                             SR.ImplementationVersionMismatch(
@@ -1367,11 +1361,8 @@ namespace System.Activities
                         {
                             Location location;
                             if (
-                                this.environment.TryGetLocation(
-                                    argument.Id,
-                                    this.Activity,
-                                    out location
-                                )
+                                this.environment
+                                    .TryGetLocation(argument.Id, this.Activity, out location)
                             )
                             {
                                 string argumentValue = null;

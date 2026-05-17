@@ -451,8 +451,7 @@ End Module";
 
                     root = root.ReplaceToken(
                         previousToken,
-                        CSharp
-                            .SyntaxFactory
+                        CSharp.SyntaxFactory
                             .Identifier(
                                 previousToken.LeadingTrivia,
                                 previousToken.ValueText,
@@ -461,8 +460,7 @@ End Module";
                     );
                     root = root.ReplaceToken(
                         nextToken,
-                        CSharp
-                            .SyntaxFactory
+                        CSharp.SyntaxFactory
                             .Token(
                                 nextToken.LeadingTrivia,
                                 CSharp.CSharpExtensions.Kind(nextToken),
@@ -487,8 +485,7 @@ End Module";
             string returnType = "void",
             string methodName = "Method"
         ) =>
-            CSharp
-                .SyntaxFactory
+            CSharp.SyntaxFactory
                 .MethodDeclaration(
                     CSharp.SyntaxFactory.ParseTypeName(returnType),
                     CSharp.SyntaxFactory.Identifier(methodName)

@@ -403,8 +403,7 @@ namespace System.Web.Services.Protocols
         )
         {
             if (
-                System
-                    .Web
+                System.Web
                     .Services
                     .Configuration
                     .WebServicesSection
@@ -441,8 +440,7 @@ namespace System.Web.Services.Protocols
         )
         {
             if (
-                System
-                    .Web
+                System.Web
                     .Services
                     .Configuration
                     .WebServicesSection

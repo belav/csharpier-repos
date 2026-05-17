@@ -5,15 +5,13 @@ using System.Security.Claims;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder
-    .Services
+builder.Services
     .AddAuthentication()
     .AddJwtBearer()
     .AddJwtBearer("ClaimedDetails")
     .AddJwtBearer("InvalidScheme");
 
-builder
-    .Services
+builder.Services
     .AddAuthorization(options =>
         options.AddPolicy(
             "is_admin",

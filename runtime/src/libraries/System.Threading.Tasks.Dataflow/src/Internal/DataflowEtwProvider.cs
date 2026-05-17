@@ -178,8 +178,7 @@ namespace System.Threading.Tasks.Dataflow.Internal
                         {
                             exceptionData = string.Join(
                                 Environment.NewLine,
-                                completionTask
-                                    .Exception!
+                                completionTask.Exception!
                                     .InnerExceptions
                                     .Select(static e => e.ToString())
                             );

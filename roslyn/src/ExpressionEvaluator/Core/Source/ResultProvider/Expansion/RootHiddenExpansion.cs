@@ -44,8 +44,7 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
         )
         {
             var memberValue = value.GetMemberValue(_member, inspectionContext);
-            var isDynamicDebugViewEmptyException = memberValue
-                .Type
+            var isDynamicDebugViewEmptyException = memberValue.Type
                 .GetLmrType()
                 .IsDynamicDebugViewEmptyException();
             if (isDynamicDebugViewEmptyException || memberValue.IsError())

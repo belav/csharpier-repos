@@ -215,13 +215,8 @@ namespace System.Data.EntityClient
             int length
         )
         {
-            return this._storeDataReader.GetBytes(
-                ordinal,
-                dataOffset,
-                buffer,
-                bufferOffset,
-                length
-            );
+            return this._storeDataReader
+                .GetBytes(ordinal, dataOffset, buffer, bufferOffset, length);
         }
 
         /// <summary>
@@ -251,13 +246,8 @@ namespace System.Data.EntityClient
             int length
         )
         {
-            return this._storeDataReader.GetChars(
-                ordinal,
-                dataOffset,
-                buffer,
-                bufferOffset,
-                length
-            );
+            return this._storeDataReader
+                .GetChars(ordinal, dataOffset, buffer, bufferOffset, length);
         }
 
         /// <summary>

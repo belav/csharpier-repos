@@ -142,9 +142,8 @@ namespace System
                     }
                     else
                     {
-                        this.segments.Add(
-                            UriTemplatePathSegment.CreateFromUriTemplate(segment, this)
-                        );
+                        this.segments
+                            .Add(UriTemplatePathSegment.CreateFromUriTemplate(segment, this));
                     }
                 }
             }
@@ -165,8 +164,7 @@ namespace System
                         startIndex = endIndex + 1;
                         if (startIndex >= queryTemplate.Length)
                         {
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
                                     new InvalidOperationException(
                                         SR.GetString(
@@ -211,8 +209,7 @@ namespace System
                     }
                     if (string.IsNullOrEmpty(key))
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(
                                     SR.GetString(
@@ -224,8 +221,7 @@ namespace System
                     }
                     if (UriTemplateHelpers.IdentifyPartType(key) != UriTemplatePartType.Literal)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperArgument(
                                 "template",
                                 SR.GetString(SR.UTQueryMustHaveLiteralNames, this.originalTemplate)
@@ -235,8 +231,7 @@ namespace System
                     key = UrlUtility.UrlDecode(key, Encoding.UTF8);
                     if (this.queries.ContainsKey(key))
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(
                                     SR.GetString(SR.UTQueryNamesMustBeUnique, this.originalTemplate)
@@ -270,8 +265,7 @@ namespace System
                             && this.variables.DefaultValues.ContainsKey(uppercaseKey)
                         )
                         {
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperArgument(
                                     "additionalDefaults",
                                     SR.GetString(
@@ -287,8 +281,7 @@ namespace System
                         }
                         else if (this.variables.QueryValueVariableNames.Contains(uppercaseKey))
                         {
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
                                     new InvalidOperationException(
                                         SR.GetString(
@@ -307,8 +300,7 @@ namespace System
                             ) == 0
                         )
                         {
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
                                     new InvalidOperationException(
                                         SR.GetString(
@@ -420,8 +412,7 @@ namespace System
             }
             if (!baseAddress.IsAbsoluteUri)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument("baseAddress", SR.GetString(SR.UTBadBaseAddress));
             }
 
@@ -450,8 +441,7 @@ namespace System
             }
             if (!baseAddress.IsAbsoluteUri)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument("baseAddress", SR.GetString(SR.UTBadBaseAddress));
             }
 
@@ -475,8 +465,7 @@ namespace System
             }
             if (!baseAddress.IsAbsoluteUri)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument("baseAddress", SR.GetString(SR.UTBadBaseAddress));
             }
 
@@ -485,8 +474,7 @@ namespace System
             {
                 if (values.Length > 0)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new FormatException(
                                 SR.GetString(
@@ -555,8 +543,7 @@ namespace System
             }
             if (!baseAddress.IsAbsoluteUri)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument("baseAddress", SR.GetString(SR.UTBadBaseAddress));
             }
             if (candidate == null)
@@ -639,11 +626,8 @@ namespace System
             {
                 this.variables = new VariablesCollection(this);
             }
-            return this.variables.AddPathVariable(
-                sourceNature,
-                varDeclaration,
-                out hasDefaultValue
-            );
+            return this.variables
+                .AddPathVariable(sourceNature, varDeclaration, out hasDefaultValue);
         }
 
         internal string AddQueryVariable(string varDeclaration)
@@ -680,11 +664,8 @@ namespace System
             }
             if (this.wildcard != null)
             {
-                this.wildcard.Lookup(
-                    numMatchedSegments,
-                    result.RelativePathSegments,
-                    result.BoundVariables
-                );
+                this.wildcard
+                    .Lookup(numMatchedSegments, result.RelativePathSegments, result.BoundVariables);
             }
             else if (numMatchedSegments < this.segments.Count)
             {
@@ -895,8 +876,7 @@ namespace System
                         if (this.queries.ContainsKey(key.ToUpperInvariant()))
                         {
                             // This can only be if the key passed has the same name as some literal key
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperArgument(
                                     "parameters",
                                     SR.GetString(SR.UTBothLiteralAndNameValueCollectionKey, key)
@@ -1093,8 +1073,7 @@ namespace System
             {
                 if (string.IsNullOrEmpty(kvp.Key))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgument(
                             "parameters",
                             SR.GetString(SR.UTBindByNameCalledWithEmptyKey)
@@ -1122,8 +1101,7 @@ namespace System
             {
                 if (string.IsNullOrEmpty(key))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgument(
                             "parameters",
                             SR.GetString(SR.UTBindByNameCalledWithEmptyKey)
@@ -1299,8 +1277,7 @@ namespace System
                 get { return this.defaults[key]; }
                 set
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new NotSupportedException(SR.GetString(SR.UTDefaultValuesAreImmutable))
                         );
@@ -1309,8 +1286,7 @@ namespace System
 
             public void Add(string key, string value)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new NotSupportedException(SR.GetString(SR.UTDefaultValuesAreImmutable))
                     );
@@ -1318,8 +1294,7 @@ namespace System
 
             public void Add(KeyValuePair<string, string> item)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new NotSupportedException(SR.GetString(SR.UTDefaultValuesAreImmutable))
                     );
@@ -1327,8 +1302,7 @@ namespace System
 
             public void Clear()
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new NotSupportedException(SR.GetString(SR.UTDefaultValuesAreImmutable))
                     );
@@ -1360,8 +1334,7 @@ namespace System
 
             public bool Remove(string key)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new NotSupportedException(SR.GetString(SR.UTDefaultValuesAreImmutable))
                     );
@@ -1369,8 +1342,7 @@ namespace System
 
             public bool Remove(KeyValuePair<string, string> item)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new NotSupportedException(SR.GetString(SR.UTDefaultValuesAreImmutable))
                     );
@@ -1466,8 +1438,7 @@ namespace System
                     && (varIndex == this.pathSegmentVariableNames.Count - 1)
                 )
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(
@@ -1480,8 +1451,7 @@ namespace System
                 }
                 if (this.pathSegmentVariableNature[varIndex] != UriTemplatePartType.Variable)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(
@@ -1528,8 +1498,7 @@ namespace System
                 hasDefaultValue = (defaultValue != null);
                 if (varName.IndexOf(UriTemplate.WildcardPath, StringComparison.Ordinal) != -1)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new FormatException(
                                 SR.GetString(
@@ -1546,8 +1515,7 @@ namespace System
                     || this.queryValueVariableNames.Contains(uppercaseVarName)
                 )
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(
@@ -1564,8 +1532,7 @@ namespace System
                 {
                     if (defaultValue == string.Empty)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(
                                     SR.GetString(
@@ -1603,8 +1570,7 @@ namespace System
                 ParseVariableDeclaration(varDeclaration, out varName, out defaultValue);
                 if (varName.IndexOf(UriTemplate.WildcardPath, StringComparison.Ordinal) != -1)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new FormatException(
                                 SR.GetString(
@@ -1617,8 +1583,7 @@ namespace System
                 }
                 if (defaultValue != null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(
@@ -1636,8 +1601,7 @@ namespace System
                     || this.queryValueVariableNames.Contains(uppercaseVarName)
                 )
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(
@@ -1740,8 +1704,7 @@ namespace System
                     )
                 )
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new FormatException(
                                 SR.GetString(
@@ -1832,8 +1795,7 @@ namespace System
                         {
                             if (defaultValue == null)
                             {
-                                throw DiagnosticUtility
-                                    .ExceptionUtility
+                                throw DiagnosticUtility.ExceptionUtility
                                     .ThrowHelperError(
                                         new InvalidOperationException(
                                             SR.GetString(
@@ -1857,8 +1819,7 @@ namespace System
                 {
                     if (this.owner.HasWildcard)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(
                                     SR.GetString(
@@ -1883,8 +1844,7 @@ namespace System
                             this.owner.segments[segmentIndex].Nature != UriTemplatePartType.Variable
                         )
                         {
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
                                     new InvalidOperationException(
                                         SR.GetString(
@@ -1961,10 +1921,11 @@ namespace System
                         && (this.defaultValues != null)
                     )
                     {
-                        this.defaultValues.TryGetValue(
-                            this.pathSegmentVariableNames[i],
-                            out normalizedParameters[i]
-                        );
+                        this.defaultValues
+                            .TryGetValue(
+                                this.pathSegmentVariableNames[i],
+                                out normalizedParameters[i]
+                            );
                     }
                 }
                 // Second step - calculating bind constrains
@@ -1982,10 +1943,11 @@ namespace System
                     {
                         string defaultValue;
                         if (
-                            this.defaultValues.TryGetValue(
-                                this.pathSegmentVariableNames[lastNonDefaultPathParameter],
-                                out defaultValue
-                            )
+                            this.defaultValues
+                                .TryGetValue(
+                                    this.pathSegmentVariableNames[lastNonDefaultPathParameter],
+                                    out defaultValue
+                                )
                         )
                         {
                             if (
@@ -2032,8 +1994,7 @@ namespace System
                     // Validate
                     if (string.IsNullOrEmpty(normalizedParameters[i]))
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperArgument(
                                 "parameters",
                                 SR.GetString(
@@ -2053,8 +2014,7 @@ namespace System
             {
                 if ((varDeclaration.IndexOf('{') != -1) || (varDeclaration.IndexOf('}') != -1))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new FormatException(
                                 SR.GetString(
@@ -2074,8 +2034,7 @@ namespace System
                         break;
 
                     case 0:
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new FormatException(
                                     SR.GetString(
@@ -2091,8 +2050,7 @@ namespace System
                         defaultValue = varDeclaration.Substring(equalSignIndex + 1);
                         if (defaultValue.IndexOf('=') != -1)
                         {
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
                                     new FormatException(
                                         SR.GetString(
@@ -2128,8 +2086,7 @@ namespace System
             {
                 if (string.IsNullOrEmpty(name))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgument(
                             "parameters",
                             SR.GetString(SR.UTBindByNameCalledWithEmptyKey)
@@ -2252,8 +2209,7 @@ namespace System
                 // Since this is a terminating star segment there shouldn't be a default
                 if (hasDefault)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(

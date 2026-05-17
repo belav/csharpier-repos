@@ -125,8 +125,7 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
 
             if (!_nodeFactory.CompilationModuleGroup.IsCompositeBuildMode)
             {
-                MetadataReader mdReader = _nodeFactory
-                    .CompilationModuleGroup
+                MetadataReader mdReader = _nodeFactory.CompilationModuleGroup
                     .CompilationModuleSet
                     .Single()
                     .MetadataReader;
@@ -160,8 +159,7 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 // Fill in entries for all input modules right away to make sure they have parallel indices
                 int nextExpectedId = 2;
                 foreach (
-                    EcmaModule inputModule in _nodeFactory
-                        .CompilationModuleGroup
+                    EcmaModule inputModule in _nodeFactory.CompilationModuleGroup
                         .CompilationModuleSet
                 )
                 {
@@ -285,8 +283,7 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 if (_nodeFactory.CompilationModuleGroup.VersionsWithModule(emodule))
                 {
                     _manifestAssemblyMvids.Add(
-                        module
-                            .MetadataReader
+                        module.MetadataReader
                             .GetGuid(module.MetadataReader.GetModuleDefinition().Mvid)
                     );
                 }

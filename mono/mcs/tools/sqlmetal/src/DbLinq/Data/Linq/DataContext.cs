@@ -599,8 +599,7 @@ namespace DbLinq.Data.Linq
                 var oks = memberData.Association.OtherKey.Select(m => m.StorageMember).ToList();
                 if (oks.Count == 0)
                     continue;
-                var pks = memberData
-                    .Association
+                var pks = memberData.Association
                     .ThisKey
                     .Select(m => m.StorageMember.GetMemberValue(root))
                     .ToList();
@@ -788,8 +787,7 @@ namespace DbLinq.Data.Linq
                         }
                         else
                         {
-                            var ValueProperty = thisForeignKeyProperty
-                                .PropertyType
+                            var ValueProperty = thisForeignKeyProperty.PropertyType
                                 .GetProperty("Value");
                             keyPredicate = Expression.Equal(
                                 Expression.MakeMemberAccess(p, otherPKEnumerator.Current.Member),
@@ -950,8 +948,7 @@ namespace DbLinq.Data.Linq
         )
         {
             if (_WhereMethod == null)
-                System
-                    .Threading
+                System.Threading
                     .Interlocked
                     .CompareExchange(
                         ref _WhereMethod,

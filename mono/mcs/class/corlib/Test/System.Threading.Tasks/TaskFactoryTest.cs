@@ -196,10 +196,11 @@ namespace MonoTests.System.Threading.Tasks
             );
             bool ran = false;
 
-            var cont = Task.Factory.ContinueWhenAll(
-                new Task[] { contFailed, contCanceled, contSuccess },
-                _ => ran = true
-            );
+            var cont = Task.Factory
+                .ContinueWhenAll(
+                    new Task[] { contFailed, contCanceled, contSuccess },
+                    _ => ran = true
+                );
 
             mre.Set();
             cont.Wait(3000);
@@ -273,14 +274,16 @@ namespace MonoTests.System.Threading.Tasks
         [Category("MultiThreaded")]
         public void ContinueWhenAll_WithExceptions()
         {
-            var t1 = Task.Factory.StartNew(() =>
-            {
-                throw new ApplicationException("Foo");
-            });
-            var t2 = Task.Factory.StartNew(() =>
-            {
-                throw new ApplicationException("Bar");
-            });
+            var t1 = Task.Factory
+                .StartNew(() =>
+                {
+                    throw new ApplicationException("Foo");
+                });
+            var t2 = Task.Factory
+                .StartNew(() =>
+                {
+                    throw new ApplicationException("Bar");
+                });
 
             var cont = Task.Factory.ContinueWhenAll(new[] { t1, t2 }, delegate { });
             cont.Wait(200);
@@ -299,14 +302,16 @@ namespace MonoTests.System.Threading.Tasks
 
             var tasks = new Task[2]
             {
-                Task.Factory.StartNew(() =>
-                {
-                    t1.WaitOne(5000);
-                }),
-                Task.Factory.StartNew(() =>
-                {
-                    t2.WaitOne(5000);
-                }),
+                Task.Factory
+                    .StartNew(() =>
+                    {
+                        t1.WaitOne(5000);
+                    }),
+                Task.Factory
+                    .StartNew(() =>
+                    {
+                        t2.WaitOne(5000);
+                    }),
             };
 
             bool ran = false;

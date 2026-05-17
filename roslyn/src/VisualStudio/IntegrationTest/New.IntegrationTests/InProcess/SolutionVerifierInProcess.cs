@@ -20,8 +20,7 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
             CancellationToken cancellationToken
         )
         {
-            var assemblyReferences = await TestServices
-                .SolutionExplorer
+            var assemblyReferences = await TestServices.SolutionExplorer
                 .GetAssemblyReferencesAsync(projectName, cancellationToken);
             var expectedAssemblyReference =
                 assemblyName + "," + assemblyVersion + "," + assemblyPublicKeyToken.ToUpper();
@@ -34,8 +33,7 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
             CancellationToken cancellationToken
         )
         {
-            var projectReferences = await TestServices
-                .SolutionExplorer
+            var projectReferences = await TestServices.SolutionExplorer
                 .GetProjectReferencesAsync(projectName, cancellationToken);
             Assert.Contains(referencedProjectName, projectReferences);
         }
@@ -47,8 +45,7 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
             CancellationToken cancellationToken
         )
         {
-            var actualContents = await TestServices
-                .SolutionExplorer
+            var actualContents = await TestServices.SolutionExplorer
                 .GetFileContentsAsync(projectName, fileName, cancellationToken);
             Assert.Equal(expectedContents, actualContents);
         }

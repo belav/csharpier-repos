@@ -31,15 +31,13 @@ namespace Roslyn.VisualStudio.IntegrationTests.VisualBasic
 End Module",
                 HangMitigatingCancellationToken
             );
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .CodeActionAsync(
                     "Generate local 'xyz'",
                     applyFix: true,
                     cancellationToken: HangMitigatingCancellationToken
                 );
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .TextContainsAsync(
                     @"Module Program
     Sub Main(args As String())
@@ -62,18 +60,15 @@ End Module",
 End Module",
                 HangMitigatingCancellationToken
             );
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .CodeActionAsync(
                     "Generate class 'ClassInNewFile' in new file",
                     applyFix: true,
                     cancellationToken: HangMitigatingCancellationToken
                 );
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .OpenFileAsync(ProjectName, "ClassInNewFile.vb", HangMitigatingCancellationToken);
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .TextContainsAsync(
                     @"Friend Class ClassInNewFile
     Public Sub New()

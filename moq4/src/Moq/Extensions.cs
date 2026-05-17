@@ -72,8 +72,7 @@ namespace Moq
                 var baseSetter = setter.GetBaseDefinition();
                 if (baseSetter != setter)
                 {
-                    var baseProperty = baseSetter
-                        .DeclaringType
+                    var baseProperty = baseSetter.DeclaringType
                         .GetMember(
                             property.Name,
                             MemberTypes.Property,
@@ -122,8 +121,7 @@ namespace Moq
                 var baseGetter = getter.GetBaseDefinition();
                 if (baseGetter != getter)
                 {
-                    var baseProperty = baseGetter
-                        .DeclaringType
+                    var baseProperty = baseGetter.DeclaringType
                         .GetMember(
                             property.Name,
                             MemberTypes.Property,

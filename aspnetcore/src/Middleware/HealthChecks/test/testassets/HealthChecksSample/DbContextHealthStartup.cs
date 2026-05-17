@@ -59,8 +59,7 @@ public class DbContextHealthStartup
                         await myContext.Database.EnsureCreatedAsync();
 
                         await context.Response.WriteAsync("Done\n");
-                        await context
-                            .Response
+                        await context.Response
                             .WriteAsync("Go to /health to see the health status\n");
                     }
                 )
@@ -79,8 +78,7 @@ public class DbContextHealthStartup
                         await myContext.Database.EnsureDeletedAsync();
 
                         await context.Response.WriteAsync("Done\n");
-                        await context
-                            .Response
+                        await context.Response
                             .WriteAsync("Go to /health to see the health status\n");
                     }
                 )

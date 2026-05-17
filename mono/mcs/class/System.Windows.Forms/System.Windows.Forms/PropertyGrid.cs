@@ -175,8 +175,7 @@ namespace System.Windows.Forms
             toolbar.Size = new System.Drawing.Size(256, 27);
             toolbar.TabIndex = 0;
 
-            toolbar
-                .Items
+            toolbar.Items
                 .AddRange(
                     new ToolStripItem[]
                     {
@@ -1187,8 +1186,7 @@ namespace System.Windows.Forms
 
         protected override void OnPaint(PaintEventArgs pevent)
         {
-            pevent
-                .Graphics
+            pevent.Graphics
                 .FillRectangle(
                     ThemeEngine.Current.ResPool.GetSolidBrush(BackColor),
                     pevent.ClipRectangle
@@ -1790,17 +1788,19 @@ namespace System.Windows.Forms
 
         private void help_panel_Paint(object sender, PaintEventArgs e)
         {
-            e.Graphics.FillRectangle(
-                ThemeEngine.Current.ResPool.GetSolidBrush(help_panel.BackColor),
-                help_panel.ClientRectangle
-            );
-            e.Graphics.DrawRectangle(
-                SystemPens.ControlDark,
-                0,
-                0,
-                help_panel.Width - 1,
-                help_panel.Height - 1
-            );
+            e.Graphics
+                .FillRectangle(
+                    ThemeEngine.Current.ResPool.GetSolidBrush(help_panel.BackColor),
+                    help_panel.ClientRectangle
+                );
+            e.Graphics
+                .DrawRectangle(
+                    SystemPens.ControlDark,
+                    0,
+                    0,
+                    help_panel.Width - 1,
+                    help_panel.Height - 1
+                );
         }
 
         #endregion	// Private Helper Methods

@@ -312,8 +312,7 @@ namespace System.Configuration
             {
                 if (!_flags[flag])
                 {
-                    OverrideMode modeLocation = sectionInput
-                        .SectionXmlInfo
+                    OverrideMode modeLocation = sectionInput.SectionXmlInfo
                         .OverrideModeSetting
                         .OverrideMode;
 

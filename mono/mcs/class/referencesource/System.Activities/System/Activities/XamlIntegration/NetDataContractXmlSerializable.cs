@@ -24,8 +24,7 @@ namespace System.Activities.XamlIntegration
 
         public XmlSchema GetSchema()
         {
-            throw FxTrace
-                .Exception
+            throw FxTrace.Exception
                 .AsError(
                     new NotSupportedException(
                         SR.CannotGenerateSchemaForXmlSerializable(typeof(T).Name)

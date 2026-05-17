@@ -322,17 +322,17 @@ internal readonly struct UpdateExpressionState<TExpressionSyntax, TStatementSynt
         if (requiredArgumentName != null && arguments.Count != 1)
             return false;
 
-        var memberAccess = this.SyntaxFacts.GetExpressionOfInvocationExpression(
-            invocationExpression
-        );
+        var memberAccess = this.SyntaxFacts
+            .GetExpressionOfInvocationExpression(invocationExpression);
         if (!this.SyntaxFacts.IsSimpleMemberAccessExpression(memberAccess))
             return false;
 
-        this.SyntaxFacts.GetPartsOfMemberAccessExpression(
-            memberAccess,
-            out var localInstance,
-            out var memberName
-        );
+        this.SyntaxFacts
+            .GetPartsOfMemberAccessExpression(
+                memberAccess,
+                out var localInstance,
+                out var memberName
+            );
         this.SyntaxFacts.GetNameAndArityOfSimpleName(memberName, out var name, out var arity);
 
         if (arity != 0 || !Equals(name, methodName))
@@ -372,11 +372,8 @@ internal readonly struct UpdateExpressionState<TExpressionSyntax, TStatementSynt
                 if (!this.SyntaxFacts.IsIdentifierName(argumentExpression))
                     return false;
 
-                this.SyntaxFacts.GetNameAndArityOfSimpleName(
-                    argumentExpression,
-                    out var suppliedName,
-                    out _
-                );
+                this.SyntaxFacts
+                    .GetNameAndArityOfSimpleName(argumentExpression, out var suppliedName, out _);
                 if (requiredArgumentName != suppliedName)
                     return false;
             }
@@ -511,8 +508,7 @@ internal readonly struct UpdateExpressionState<TExpressionSyntax, TStatementSynt
                 if (whenFalse is null)
                 {
                     // add the form `.. x ? [y] : []` to the result
-                    return @this
-                        .SyntaxFacts
+                    return @this.SyntaxFacts
                         .SupportsCollectionExpressionNaturalType(ifStatement.SyntaxTree.Options)
                         ? new Match<TStatementSyntax>(ifStatement, UseSpread: true)
                         : null;
@@ -524,8 +520,7 @@ internal readonly struct UpdateExpressionState<TExpressionSyntax, TStatementSynt
                     && @this.SyntaxFacts.IsExpressionStatement(falseChildStatement)
                     && @this.TryAnalyzeAddInvocation(
                         (TExpressionSyntax)
-                            @this
-                                .SyntaxFacts
+                            @this.SyntaxFacts
                                 .GetExpressionOfExpressionStatement(falseChildStatement),
                         requiredArgumentName: null,
                         forCollectionExpression: true,

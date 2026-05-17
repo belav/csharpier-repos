@@ -38,8 +38,7 @@ namespace System.ServiceModel.Channels
 
             RemoteEndpointMessageProperty remoteEndpointMessageProperty;
             if (
-                !requestMessage
-                    .Properties
+                !requestMessage.Properties
                     .TryGetValue(
                         RemoteEndpointMessageProperty.Name,
                         out remoteEndpointMessageProperty

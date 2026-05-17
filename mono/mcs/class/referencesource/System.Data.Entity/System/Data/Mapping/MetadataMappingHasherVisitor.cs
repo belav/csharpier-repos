@@ -51,16 +51,13 @@ namespace System.Data.Mapping
                     == storageEntityContainerMapping.StorageMappingItemCollection.MappingVersion,
                 "the original version and the mapping collection version are not the same"
             );
-            this.m_MappingVersion = storageEntityContainerMapping
-                .StorageMappingItemCollection
+            this.m_MappingVersion = storageEntityContainerMapping.StorageMappingItemCollection
                 .MappingVersion;
-            this.m_EdmVersion = storageEntityContainerMapping
-                .StorageMappingItemCollection
+            this.m_EdmVersion = storageEntityContainerMapping.StorageMappingItemCollection
                 .EdmItemCollection
                 .EdmVersion;
 
-            this.m_EdmItemCollection = storageEntityContainerMapping
-                .StorageMappingItemCollection
+            this.m_EdmItemCollection = storageEntityContainerMapping.StorageMappingItemCollection
                 .EdmItemCollection;
 
             int index;
@@ -820,9 +817,8 @@ namespace System.Data.Mapping
                     // if the content is formattable, the following code made it culture invariant,
                     // for instance, the int, "30,000" can be formatted to "30-000" if the user
                     // has a different language and region setting
-                    this.m_hashSourceBuilder.AppendLine(
-                        formatContent.ToString(null, CultureInfo.InvariantCulture)
-                    );
+                    this.m_hashSourceBuilder
+                        .AppendLine(formatContent.ToString(null, CultureInfo.InvariantCulture));
                 }
                 else
                 {

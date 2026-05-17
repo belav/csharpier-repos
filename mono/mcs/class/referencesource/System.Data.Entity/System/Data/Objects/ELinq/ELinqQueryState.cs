@@ -61,8 +61,7 @@ namespace System.Data.Objects.ELinq
             // closure bindings and initializers are explicitly allowed to be null
 
             _expression = expression;
-            _useCSharpNullComparisonBehavior = context
-                .ContextOptions
+            _useCSharpNullComparisonBehavior = context.ContextOptions
                 .UseCSharpNullComparisonBehavior;
         }
 

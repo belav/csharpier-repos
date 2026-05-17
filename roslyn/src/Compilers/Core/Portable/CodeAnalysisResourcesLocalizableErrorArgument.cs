@@ -28,8 +28,7 @@ namespace Microsoft.CodeAnalysis
         {
             if (_targetResourceId != null)
             {
-                return CodeAnalysisResources
-                        .ResourceManager
+                return CodeAnalysisResources.ResourceManager
                         .GetString(
                             _targetResourceId,
                             formatProvider as System.Globalization.CultureInfo

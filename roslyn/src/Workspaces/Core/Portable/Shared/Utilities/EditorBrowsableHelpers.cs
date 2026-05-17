@@ -47,8 +47,7 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                 return null;
             }
 
-            var candidateConstructors = editorBrowsableAttributeType
-                .Constructors
+            var candidateConstructors = editorBrowsableAttributeType.Constructors
                 .Where(c =>
                     c.Parameters.Length == 1
                     && Equals(c.Parameters[0].Type, editorBrowsableStateType)
@@ -130,8 +129,7 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                 return ImmutableArray<IMethodSymbol>.Empty;
             }
 
-            var candidateConstructors = typeLibAttributeType
-                .Constructors
+            var candidateConstructors = typeLibAttributeType.Constructors
                 .Where(c =>
                     c.Parameters.Length == 1
                     && (

@@ -38,8 +38,7 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
             protected override string GetProjectName() => _projectName;
 
             protected override IList<Inline> CreateLineTextInlines() =>
-                DefinitionBucket
-                    .DefinitionItem
+                DefinitionBucket.DefinitionItem
                     .DisplayParts
                     .ToInlines(Presenter.ClassificationFormatMap, Presenter.TypeMap);
         }

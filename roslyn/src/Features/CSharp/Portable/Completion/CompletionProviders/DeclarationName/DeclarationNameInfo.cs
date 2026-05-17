@@ -217,8 +217,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers.DeclarationName
                     );
                     if (type != null)
                     {
-                        var parameter = CSharpSemanticFacts
-                            .Instance
+                        var parameter = CSharpSemanticFacts.Instance
                             .FindParameterForArgument(
                                 semanticModel,
                                 argument,

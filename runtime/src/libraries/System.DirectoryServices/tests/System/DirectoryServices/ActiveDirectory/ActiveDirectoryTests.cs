@@ -88,8 +88,7 @@ namespace System.DirectoryServices.Tests
                 Assert.False(orgClass.IsDefunct);
 
                 Assert.True(
-                    orgClass
-                        .AuxiliaryClasses
+                    orgClass.AuxiliaryClasses
                         .Contains(
                             ActiveDirectorySchemaClass.FindByName(
                                 ActiveDirectoryContext,
@@ -98,8 +97,7 @@ namespace System.DirectoryServices.Tests
                         )
                 );
                 Assert.True(
-                    orgClass
-                        .PossibleInferiors
+                    orgClass.PossibleInferiors
                         .Contains(
                             ActiveDirectorySchemaClass.FindByName(ActiveDirectoryContext, "user")
                         )
@@ -114,8 +112,7 @@ namespace System.DirectoryServices.Tests
                 Assert.Equal(country.Name, orgClass.PossibleSuperiors[index].Name);
 
                 Assert.True(
-                    orgClass
-                        .MandatoryProperties
+                    orgClass.MandatoryProperties
                         .Contains(
                             ActiveDirectorySchemaProperty.FindByName(
                                 ActiveDirectoryContext,
@@ -124,8 +121,7 @@ namespace System.DirectoryServices.Tests
                         )
                 );
                 Assert.True(
-                    orgClass
-                        .OptionalProperties
+                    orgClass.OptionalProperties
                         .Contains(
                             ActiveDirectorySchemaProperty.FindByName(
                                 ActiveDirectoryContext,
@@ -134,8 +130,7 @@ namespace System.DirectoryServices.Tests
                         )
                 );
                 Assert.True(
-                    orgClass
-                        .MandatoryProperties
+                    orgClass.MandatoryProperties
                         .Contains(
                             ActiveDirectorySchemaProperty.FindByName(
                                 ActiveDirectoryContext,

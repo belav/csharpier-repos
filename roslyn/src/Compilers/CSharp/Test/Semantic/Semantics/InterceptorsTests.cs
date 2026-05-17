@@ -33,8 +33,7 @@ public class InterceptorsTests : CSharpTestBase
         "attributes.cs"
     );
 
-    private static readonly CSharpParseOptions RegularWithInterceptors = TestOptions
-        .Regular
+    private static readonly CSharpParseOptions RegularWithInterceptors = TestOptions.Regular
         .WithFeature("InterceptorsPreviewNamespaces", "global");
 
     [Fact]
@@ -152,8 +151,7 @@ public class InterceptorsTests : CSharpTestBase
 
         comp = CreateCompilation(
             new[] { (source, "Program.cs"), s_attributesSource },
-            parseOptions: TestOptions
-                .Regular
+            parseOptions: TestOptions.Regular
                 .WithFeature("InterceptorsPreviewNamespaces", "NS1.NS2")
         );
         comp.VerifyEmitDiagnostics(
@@ -178,8 +176,7 @@ public class InterceptorsTests : CSharpTestBase
 
         verifier = CompileAndVerify(
             new[] { (source, "Program.cs"), s_attributesSource },
-            parseOptions: TestOptions
-                .Regular
+            parseOptions: TestOptions.Regular
                 .WithFeature("InterceptorsPreviewNamespaces", "NS1;NS2"),
             expectedOutput: "1"
         );
@@ -231,8 +228,7 @@ public class InterceptorsTests : CSharpTestBase
         {
             var comp = CreateCompilation(
                 new[] { (source, "Program.cs"), s_attributesSource },
-                parseOptions: TestOptions
-                    .Regular
+                parseOptions: TestOptions.Regular
                     .WithFeature("InterceptorsPreviewNamespaces", featureValue)
             );
             comp.VerifyEmitDiagnostics(
@@ -253,8 +249,7 @@ public class InterceptorsTests : CSharpTestBase
         {
             var verifier = CompileAndVerify(
                 new[] { (source, "Program.cs"), s_attributesSource },
-                parseOptions: TestOptions
-                    .Regular
+                parseOptions: TestOptions.Regular
                     .WithFeature("InterceptorsPreviewNamespaces", featureValue),
                 expectedOutput: "1"
             );
@@ -324,8 +319,7 @@ public class InterceptorsTests : CSharpTestBase
 
         var verifier = CompileAndVerify(
             new[] { (source, "Program.cs"), s_attributesSource },
-            parseOptions: TestOptions
-                .Regular
+            parseOptions: TestOptions.Regular
                 .WithFeature("InterceptorsPreviewNamespaces", "global"),
             expectedOutput: "1"
         );
@@ -333,8 +327,7 @@ public class InterceptorsTests : CSharpTestBase
 
         verifier = CompileAndVerify(
             new[] { (source, "Program.cs"), s_attributesSource },
-            parseOptions: TestOptions
-                .Regular
+            parseOptions: TestOptions.Regular
                 .WithFeature("interceptorspreviewnamespaces", "global"),
             expectedOutput: "1"
         );
@@ -367,8 +360,7 @@ public class InterceptorsTests : CSharpTestBase
 
         var comp = CreateCompilation(
             new[] { (source, "Program.cs"), s_attributesSource },
-            parseOptions: TestOptions
-                .Regular
+            parseOptions: TestOptions.Regular
                 .WithFeature("InterceptorsPreviewNamespaces", "global.A")
         );
         comp.VerifyEmitDiagnostics(
@@ -5471,8 +5463,7 @@ partial struct CustomHandler
         var verifier = CompileAndVerify(
             new[] { (source, path), s_attributesSource },
             parseOptions: RegularWithInterceptors,
-            options: TestOptions
-                .DebugExe
+            options: TestOptions.DebugExe
                 .WithSourceReferenceResolver(
                     new SourceFileResolver(ImmutableArray<string>.Empty, null, pathMap)
                 ),
@@ -5510,8 +5501,7 @@ partial struct CustomHandler
         var comp = CreateCompilation(
             new[] { (source, path), s_attributesSource },
             parseOptions: RegularWithInterceptors,
-            options: TestOptions
-                .DebugExe
+            options: TestOptions.DebugExe
                 .WithSourceReferenceResolver(
                     new SourceFileResolver(ImmutableArray<string>.Empty, null, pathMap)
                 )
@@ -5555,8 +5545,7 @@ partial struct CustomHandler
         var comp = CreateCompilation(
             new[] { (source, path), s_attributesSource },
             parseOptions: RegularWithInterceptors,
-            options: TestOptions
-                .DebugExe
+            options: TestOptions.DebugExe
                 .WithSourceReferenceResolver(
                     new SourceFileResolver(ImmutableArray<string>.Empty, null, pathMap)
                 )
@@ -5632,8 +5621,7 @@ partial struct CustomHandler
         var comp = CreateCompilation(
             new[] { (source1, path1), (source2, path2), s_attributesSource },
             parseOptions: RegularWithInterceptors,
-            options: TestOptions
-                .DebugDll
+            options: TestOptions.DebugDll
                 .WithSourceReferenceResolver(
                     new SourceFileResolver(ImmutableArray<string>.Empty, null, pathMap)
                 )
@@ -5675,8 +5663,7 @@ partial struct CustomHandler
         var verifier = CompileAndVerify(
             new[] { (source, path), s_attributesSource },
             parseOptions: RegularWithInterceptors,
-            options: TestOptions
-                .DebugExe
+            options: TestOptions.DebugExe
                 .WithSourceReferenceResolver(
                     new SourceFileResolver(ImmutableArray<string>.Empty, null, pathMap)
                 ),
@@ -5713,8 +5700,7 @@ partial struct CustomHandler
         var comp = CreateCompilation(
             new[] { (source, path), s_attributesSource },
             parseOptions: RegularWithInterceptors,
-            options: TestOptions
-                .DebugExe
+            options: TestOptions.DebugExe
                 .WithSourceReferenceResolver(
                     new SourceFileResolver(ImmutableArray<string>.Empty, null, pathMap)
                 )
@@ -5759,8 +5745,7 @@ partial struct CustomHandler
         var verifier = CompileAndVerify(
             new[] { (source, path), s_attributesSource },
             parseOptions: RegularWithInterceptors,
-            options: TestOptions
-                .DebugExe
+            options: TestOptions.DebugExe
                 .WithSourceReferenceResolver(
                     new SourceFileResolver(ImmutableArray<string>.Empty, null, pathMap)
                 ),

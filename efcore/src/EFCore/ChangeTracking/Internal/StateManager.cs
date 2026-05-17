@@ -70,8 +70,7 @@ public class StateManager : IStateManager
         UpdateLogger = dependencies.UpdateLogger;
         _changeTrackingLogger = dependencies.ChangeTrackingLogger;
 
-        _resolutionInterceptor = dependencies
-            .Interceptors
+        _resolutionInterceptor = dependencies.Interceptors
             .Aggregate<IIdentityResolutionInterceptor>();
     }
 
@@ -1467,8 +1466,7 @@ public class StateManager : IStateManager
     public virtual int SaveChanges(bool acceptAllChangesOnSuccess) =>
         Context.Database.AutoTransactionBehavior == AutoTransactionBehavior.Never
             ? SaveChanges(this, acceptAllChangesOnSuccess)
-            : Dependencies
-                .ExecutionStrategy
+            : Dependencies.ExecutionStrategy
                 .Execute(
                     (StateManager: this, AcceptAllChangesOnSuccess: acceptAllChangesOnSuccess),
                     static (_, t) => SaveChanges(t.StateManager, t.AcceptAllChangesOnSuccess),
@@ -1527,8 +1525,7 @@ public class StateManager : IStateManager
     ) =>
         Context.Database.AutoTransactionBehavior == AutoTransactionBehavior.Never
             ? SaveChangesAsync(this, acceptAllChangesOnSuccess, cancellationToken)
-            : Dependencies
-                .ExecutionStrategy
+            : Dependencies.ExecutionStrategy
                 .ExecuteAsync(
                     (StateManager: this, AcceptAllChangesOnSuccess: acceptAllChangesOnSuccess),
                     static (_, t, cancellationToken) =>

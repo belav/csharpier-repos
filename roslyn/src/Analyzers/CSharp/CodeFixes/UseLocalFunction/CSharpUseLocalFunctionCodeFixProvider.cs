@@ -375,8 +375,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UseLocalFunction
                 )
                 : SyntaxFactory.ParameterList(
                     SyntaxFactory.SeparatedList(
-                        delegateMethod
-                            .Parameters
+                        delegateMethod.Parameters
                             .Select(parameter =>
                                 PromoteParameter(
                                     generator,
@@ -454,8 +453,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UseLocalFunction
                         return argumentNode;
                     }
 
-                    var newParameter = newParameterList
-                        .Parameters
+                    var newParameter = newParameterList.Parameters
                         .ElementAtOrDefault(parameterIndex);
                     if (newParameter == null || newParameter.Identifier.IsMissing)
                     {
@@ -463,8 +461,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UseLocalFunction
                     }
 
                     return argumentNode.WithNameColon(
-                        argumentNode
-                            .NameColon
+                        argumentNode.NameColon
                             .WithName(SyntaxFactory.IdentifierName(newParameter.Identifier))
                     );
                 }

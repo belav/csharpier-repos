@@ -1868,19 +1868,20 @@ namespace System.Web.UI.DataVisualization.Charting
                 }
 
                 // Fire an event for custom cell back drawing
-                this.Chart.CallOnPrePaint(
-                    new ChartPaintEventArgs(
-                        this,
-                        chartGraph,
-                        this.Common,
-                        new ElementPosition(
-                            rectRelative.X,
-                            rectRelative.Y,
-                            rectRelative.Width,
-                            rectRelative.Height
+                this.Chart
+                    .CallOnPrePaint(
+                        new ChartPaintEventArgs(
+                            this,
+                            chartGraph,
+                            this.Common,
+                            new ElementPosition(
+                                rectRelative.X,
+                                rectRelative.Y,
+                                rectRelative.Width,
+                                rectRelative.Height
+                            )
                         )
-                    )
-                );
+                    );
 
                 // Check legend cell type
                 switch (this.CellType)
@@ -1903,19 +1904,20 @@ namespace System.Web.UI.DataVisualization.Charting
                 }
 
                 // Fire an event for custom cell drawing
-                this.Chart.CallOnPostPaint(
-                    new ChartPaintEventArgs(
-                        this,
-                        chartGraph,
-                        this.Common,
-                        new ElementPosition(
-                            rectRelative.X,
-                            rectRelative.Y,
-                            rectRelative.Width,
-                            rectRelative.Height
+                this.Chart
+                    .CallOnPostPaint(
+                        new ChartPaintEventArgs(
+                            this,
+                            chartGraph,
+                            this.Common,
+                            new ElementPosition(
+                                rectRelative.X,
+                                rectRelative.Y,
+                                rectRelative.Width,
+                                rectRelative.Height
+                            )
                         )
-                    )
-                );
+                    );
             }
 #if DEBUG
             // Draw bounding rectangle for debug purpose

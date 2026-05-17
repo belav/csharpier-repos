@@ -52,8 +52,7 @@ namespace System.Activities
 
             if (this.hasCompleted)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(new InvalidOperationException(SR.OperationAlreadyCompleted));
             }
 
@@ -100,13 +99,14 @@ namespace System.Activities
 
             try
             {
-                IAsyncResult result = this.executor.BeginResumeBookmark(
-                    Bookmark.AsyncOperationCompletionBookmark,
-                    completeData,
-                    TimeSpan.MaxValue,
-                    onResumeAsyncCodeActivityBookmark,
-                    this.executor
-                );
+                IAsyncResult result = this.executor
+                    .BeginResumeBookmark(
+                        Bookmark.AsyncOperationCompletionBookmark,
+                        completeData,
+                        TimeSpan.MaxValue,
+                        onResumeAsyncCodeActivityBookmark,
+                        this.executor
+                    );
                 if (result.CompletedSynchronously)
                 {
                     this.executor.EndResumeBookmark(result);

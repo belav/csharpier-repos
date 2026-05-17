@@ -200,14 +200,12 @@ namespace System.Data.Common.Internal.Materialization
                     RegisterMaterializedEntityForEvent(result);
                     if (null == existingEntry)
                     {
-                        Context
-                            .ObjectStateManager
+                        Context.ObjectStateManager
                             .AddEntry(wrappedEntity, entityKey, entitySet, "HandleEntity", false);
                     }
                     else
                     {
-                        Context
-                            .ObjectStateManager
+                        Context.ObjectStateManager
                             .PromoteKeyEntry(
                                 existingEntry,
                                 wrappedEntity,
@@ -292,14 +290,12 @@ namespace System.Data.Common.Internal.Materialization
                     RegisterMaterializedEntityForEvent(result);
                     if (null == existingEntry)
                     {
-                        Context
-                            .ObjectStateManager
+                        Context.ObjectStateManager
                             .AddEntry(result, entityKey, entitySet, "HandleEntity", false);
                     }
                     else
                     {
-                        Context
-                            .ObjectStateManager
+                        Context.ObjectStateManager
                             .PromoteKeyEntry(
                                 existingEntry,
                                 result,
@@ -1047,12 +1043,10 @@ namespace System.Data.Common.Internal.Materialization
                         existingEntry.RevertDelete();
                     }
                     existingEntry.UpdateCurrentValueRecord(wrappedEntity.Entity);
-                    Context
-                        .ObjectStateManager
+                    Context.ObjectStateManager
                         .ForgetEntryWithConceptualNull(existingEntry, resetAllKeys: true);
                     existingEntry.AcceptChanges();
-                    Context
-                        .ObjectStateManager
+                    Context.ObjectStateManager
                         .FixupReferencesByForeignKeys(existingEntry, replaceAddedRefs: true);
                 }
                 else
@@ -1065,12 +1059,10 @@ namespace System.Data.Common.Internal.Materialization
                     {
                         // same behavior as MergeOption.OverwriteChanges
                         existingEntry.UpdateCurrentValueRecord(wrappedEntity.Entity);
-                        Context
-                            .ObjectStateManager
+                        Context.ObjectStateManager
                             .ForgetEntryWithConceptualNull(existingEntry, resetAllKeys: true);
                         existingEntry.AcceptChanges();
-                        Context
-                            .ObjectStateManager
+                        Context.ObjectStateManager
                             .FixupReferencesByForeignKeys(existingEntry, replaceAddedRefs: true);
                     }
                     else
@@ -1259,8 +1251,7 @@ namespace System.Data.Common.Internal.Materialization
             protected override Exception CreateNullValueException()
             {
                 return EntityUtil.Constraint(
-                    System
-                        .Data
+                    System.Data
                         .Entity
                         .Strings
                         .Materializer_SetInvalidValue(
@@ -1277,8 +1268,7 @@ namespace System.Data.Common.Internal.Materialization
             protected override Exception CreateWrongTypeException(Type resultType)
             {
                 return EntityUtil.InvalidOperation(
-                    System
-                        .Data
+                    System.Data
                         .Entity
                         .Strings
                         .Materializer_SetInvalidValue(

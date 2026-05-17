@@ -76,12 +76,10 @@ public class KeyValuePairModelBinder<TKey, TValue> : IModelBinder
 
         if (!keyResult.IsModelSet && valueResult.IsModelSet)
         {
-            bindingContext
-                .ModelState
+            bindingContext.ModelState
                 .TryAddModelError(
                     keyModelName,
-                    bindingContext
-                        .ModelMetadata
+                    bindingContext.ModelMetadata
                         .ModelBindingMessageProvider
                         .MissingKeyOrValueAccessor()
                 );
@@ -91,12 +89,10 @@ public class KeyValuePairModelBinder<TKey, TValue> : IModelBinder
 
         if (keyResult.IsModelSet && !valueResult.IsModelSet)
         {
-            bindingContext
-                .ModelState
+            bindingContext.ModelState
                 .TryAddModelError(
                     valueModelName,
-                    bindingContext
-                        .ModelMetadata
+                    bindingContext.ModelMetadata
                         .ModelBindingMessageProvider
                         .MissingKeyOrValueAccessor()
                 );

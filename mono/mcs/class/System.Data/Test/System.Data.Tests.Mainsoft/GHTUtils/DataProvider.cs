@@ -59,8 +59,7 @@ namespace GHTUtils
             dtChild.Columns.Add("ChildDateTime", typeof(DateTime));
             dtChild.Columns.Add("ChildDouble", typeof(double));
 
-            dtChild
-                .Rows
+            dtChild.Rows
                 .Add(
                     new object[]
                     {
@@ -72,11 +71,9 @@ namespace GHTUtils
                         1.534,
                     }
                 );
-            dtChild
-                .Rows
+            dtChild.Rows
                 .Add(new object[] { 1, 2, "2-String1", "2-String2", DateTime.MaxValue, -1.534 });
-            dtChild
-                .Rows
+            dtChild.Rows
                 .Add(
                     new object[]
                     {
@@ -88,8 +85,7 @@ namespace GHTUtils
                         double.MaxValue / 10000,
                     }
                 );
-            dtChild
-                .Rows
+            dtChild.Rows
                 .Add(
                     new object[]
                     {
@@ -101,8 +97,7 @@ namespace GHTUtils
                         double.MinValue * 10000,
                     }
                 );
-            dtChild
-                .Rows
+            dtChild.Rows
                 .Add(
                     new object[]
                     {
@@ -114,8 +109,7 @@ namespace GHTUtils
                         0.45,
                     }
                 );
-            dtChild
-                .Rows
+            dtChild.Rows
                 .Add(
                     new object[]
                     {
@@ -127,8 +121,7 @@ namespace GHTUtils
                         0.55,
                     }
                 );
-            dtChild
-                .Rows
+            dtChild.Rows
                 .Add(
                     new object[]
                     {
@@ -140,8 +133,7 @@ namespace GHTUtils
                         0,
                     }
                 );
-            dtChild
-                .Rows
+            dtChild.Rows
                 .Add(
                     new object[]
                     {
@@ -153,8 +145,7 @@ namespace GHTUtils
                         10,
                     }
                 );
-            dtChild
-                .Rows
+            dtChild.Rows
                 .Add(
                     new object[]
                     {
@@ -166,8 +157,7 @@ namespace GHTUtils
                         20,
                     }
                 );
-            dtChild
-                .Rows
+            dtChild.Rows
                 .Add(
                     new object[]
                     {
@@ -179,8 +169,7 @@ namespace GHTUtils
                         25,
                     }
                 );
-            dtChild
-                .Rows
+            dtChild.Rows
                 .Add(
                     new object[]
                     {
@@ -192,8 +181,7 @@ namespace GHTUtils
                         30,
                     }
                 );
-            dtChild
-                .Rows
+            dtChild.Rows
                 .Add(
                     new object[]
                     {
@@ -221,8 +209,7 @@ namespace GHTUtils
             dtParent.Columns.Add("ParentDouble", typeof(double));
             dtParent.Columns.Add("ParentBool", typeof(bool));
 
-            dtParent
-                .Rows
+            dtParent.Rows
                 .Add(
                     new object[]
                     {
@@ -234,8 +221,7 @@ namespace GHTUtils
                         true,
                     }
                 );
-            dtParent
-                .Rows
+            dtParent.Rows
                 .Add(
                     new object[]
                     {
@@ -247,8 +233,7 @@ namespace GHTUtils
                         true,
                     }
                 );
-            dtParent
-                .Rows
+            dtParent.Rows
                 .Add(
                     new object[]
                     {
@@ -260,8 +245,7 @@ namespace GHTUtils
                         false,
                     }
                 );
-            dtParent
-                .Rows
+            dtParent.Rows
                 .Add(
                     new object[]
                     {
@@ -273,8 +257,7 @@ namespace GHTUtils
                         true,
                     }
                 );
-            dtParent
-                .Rows
+            dtParent.Rows
                 .Add(
                     new object[]
                     {
@@ -286,8 +269,7 @@ namespace GHTUtils
                         true,
                     }
                 );
-            dtParent
-                .Rows
+            dtParent.Rows
                 .Add(
                     new object[]
                     {

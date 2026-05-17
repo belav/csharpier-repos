@@ -761,14 +761,15 @@ namespace System.ServiceModel.Channels
                 catch (TimeoutException)
                 {
                     if (isLast)
-                        this.connection.RaiseFault(
-                            null,
-                            SequenceTerminatedFault.CreateCommunicationFault(
-                                this.connection.id,
-                                SR.GetString(SR.SequenceTerminatedAddLastToWindowTimedOut),
-                                null
-                            )
-                        );
+                        this.connection
+                            .RaiseFault(
+                                null,
+                                SequenceTerminatedFault.CreateCommunicationFault(
+                                    this.connection.id,
+                                    SR.GetString(SR.SequenceTerminatedAddLastToWindowTimedOut),
+                                    null
+                                )
+                            );
                     // else - RM does not fault the channel based on a timeout exception trying to add a sequenced message to the window.
 
                     throw;
@@ -776,14 +777,15 @@ namespace System.ServiceModel.Channels
                 catch (Exception e)
                 {
                     if (!Fx.IsFatal(e))
-                        this.connection.RaiseFault(
-                            null,
-                            SequenceTerminatedFault.CreateCommunicationFault(
-                                this.connection.id,
-                                SR.GetString(SR.SequenceTerminatedUnknownAddToWindowError),
-                                null
-                            )
-                        );
+                        this.connection
+                            .RaiseFault(
+                                null,
+                                SequenceTerminatedFault.CreateCommunicationFault(
+                                    this.connection.id,
+                                    SR.GetString(SR.SequenceTerminatedUnknownAddToWindowError),
+                                    null
+                                )
+                            );
 
                     throw;
                 }
@@ -841,14 +843,15 @@ namespace System.ServiceModel.Channels
                 catch (TimeoutException)
                 {
                     if (this.isLast)
-                        this.connection.RaiseFault(
-                            null,
-                            SequenceTerminatedFault.CreateCommunicationFault(
-                                this.connection.id,
-                                SR.GetString(SR.SequenceTerminatedAddLastToWindowTimedOut),
-                                null
-                            )
-                        );
+                        this.connection
+                            .RaiseFault(
+                                null,
+                                SequenceTerminatedFault.CreateCommunicationFault(
+                                    this.connection.id,
+                                    SR.GetString(SR.SequenceTerminatedAddLastToWindowTimedOut),
+                                    null
+                                )
+                            );
                     // else - RM does not fault the channel based on a timeout exception trying to add a sequenced message to the window.
 
                     throw;
@@ -856,14 +859,15 @@ namespace System.ServiceModel.Channels
                 catch (Exception e)
                 {
                     if (!Fx.IsFatal(e))
-                        this.connection.RaiseFault(
-                            null,
-                            SequenceTerminatedFault.CreateCommunicationFault(
-                                this.connection.id,
-                                SR.GetString(SR.SequenceTerminatedUnknownAddToWindowError),
-                                null
-                            )
-                        );
+                        this.connection
+                            .RaiseFault(
+                                null,
+                                SequenceTerminatedFault.CreateCommunicationFault(
+                                    this.connection.id,
+                                    SR.GetString(SR.SequenceTerminatedUnknownAddToWindowError),
+                                    null
+                                )
+                            );
 
                     throw;
                 }
@@ -874,21 +878,23 @@ namespace System.ServiceModel.Channels
 
                     try
                     {
-                        result = this.connection.beginSendHandler(
-                            attemptInfo,
-                            this.timeoutHelper.RemainingTime(),
-                            false,
-                            sendCompleteStatic,
-                            this
-                        );
+                        result = this.connection
+                            .beginSendHandler(
+                                attemptInfo,
+                                this.timeoutHelper.RemainingTime(),
+                                false,
+                                sendCompleteStatic,
+                                this
+                            );
                         throwing = false;
                     }
                     catch (QuotaExceededException)
                     {
-                        this.connection.RaiseFault(
-                            null,
-                            SequenceTerminatedFault.CreateQuotaExceededFault(this.connection.id)
-                        );
+                        this.connection
+                            .RaiseFault(
+                                null,
+                                SequenceTerminatedFault.CreateQuotaExceededFault(this.connection.id)
+                            );
                         throw;
                     }
                     finally
@@ -921,10 +927,11 @@ namespace System.ServiceModel.Channels
                 }
                 catch (QuotaExceededException)
                 {
-                    this.connection.RaiseFault(
-                        null,
-                        SequenceTerminatedFault.CreateQuotaExceededFault(this.connection.id)
-                    );
+                    this.connection
+                        .RaiseFault(
+                            null,
+                            SequenceTerminatedFault.CreateQuotaExceededFault(this.connection.id)
+                        );
                     throw;
                 }
                 finally

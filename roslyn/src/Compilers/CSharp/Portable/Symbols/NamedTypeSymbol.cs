@@ -29,8 +29,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         private static readonly ImmutableSegmentedDictionary<
             string,
             Symbol
-        > RequiredMembersErrorSentinel = ImmutableSegmentedDictionary<string, Symbol>
-            .Empty
+        > RequiredMembersErrorSentinel = ImmutableSegmentedDictionary<string, Symbol>.Empty
             .Add("<error sentinel>", null!);
 
         /// <summary>

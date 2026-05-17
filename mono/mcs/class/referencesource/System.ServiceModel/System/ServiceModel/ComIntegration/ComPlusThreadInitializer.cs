@@ -58,8 +58,7 @@ namespace System.ServiceModel.ComIntegration
                         if (operationRoleMembers == null)
                         {
                             // Did not find the operation
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
                                     Error.ListenerInitFailed(
                                         SR.GetString(
@@ -134,8 +133,7 @@ namespace System.ServiceModel.ComIntegration
                     {
                         if (!this.comAuth.IsAuthorizedForOperation(identity))
                         {
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(Error.CallAccessDenied());
                         }
                     }
@@ -168,8 +166,7 @@ namespace System.ServiceModel.ComIntegration
                             }
                             else
                             {
-                                throw DiagnosticUtility
-                                    .ExceptionUtility
+                                throw DiagnosticUtility.ExceptionUtility
                                     .ThrowHelperError(Error.TransactionMismatch());
                             }
                             ComPlusMethodCallTrace.Trace(
@@ -190,8 +187,7 @@ namespace System.ServiceModel.ComIntegration
                             Transaction txProxy = proxy.CurrentTransaction;
                             Guid currentTransactionID = Guid.Empty;
                             if (txProxy != null)
-                                currentTransactionID = txProxy
-                                    .TransactionInformation
+                                currentTransactionID = txProxy.TransactionInformation
                                     .DistributedIdentifier;
 
                             string identityName = String.Empty;
@@ -199,14 +195,12 @@ namespace System.ServiceModel.ComIntegration
                             if (null != identity)
                                 identityName = identity.Name;
 
-                            DiagnosticUtility
-                                .EventLog
+                            DiagnosticUtility.EventLog
                                 .LogEvent(
                                     TraceEventType.Error,
                                     (ushort)System.Runtime.Diagnostics.EventLogCategory.ComPlus,
                                     (uint)
-                                        System
-                                            .Runtime
+                                        System.Runtime
                                             .Diagnostics
                                             .EventLogEventId
                                             .ComPlusInvokingMethodFailedMismatchedTransactions,
@@ -218,8 +212,7 @@ namespace System.ServiceModel.ComIntegration
                                     iid.ToString(),
                                     action,
                                     instanceID.ToString(CultureInfo.InvariantCulture),
-                                    System
-                                        .Threading
+                                    System.Threading
                                         .Thread
                                         .CurrentThread
                                         .ManagedThreadId
@@ -287,14 +280,12 @@ namespace System.ServiceModel.ComIntegration
                 {
                     if (DiagnosticUtility.ShouldTraceError)
                     {
-                        DiagnosticUtility
-                            .EventLog
+                        DiagnosticUtility.EventLog
                             .LogEvent(
                                 TraceEventType.Error,
                                 (ushort)System.Runtime.Diagnostics.EventLogCategory.ComPlus,
                                 (uint)
-                                    System
-                                        .Runtime
+                                    System.Runtime
                                         .Diagnostics
                                         .EventLogEventId
                                         .ComPlusInvokingMethodFailed,
@@ -304,8 +295,7 @@ namespace System.ServiceModel.ComIntegration
                                 iid.ToString("B").ToUpperInvariant(),
                                 action,
                                 instanceID.ToString(CultureInfo.InvariantCulture),
-                                System
-                                    .Threading
+                                System.Threading
                                     .Thread
                                     .CurrentThread
                                     .ManagedThreadId

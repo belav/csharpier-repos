@@ -172,8 +172,7 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 {
                     sb.Append(" [");
                     sb.Append(
-                        _methodArgument
-                            .Token
+                        _methodArgument.Token
                             .MetadataReader
                             .GetString(
                                 _methodArgument.Token.MetadataReader.GetAssemblyDefinition().Name

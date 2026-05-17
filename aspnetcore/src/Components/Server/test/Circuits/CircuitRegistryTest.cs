@@ -216,8 +216,7 @@ public class CircuitRegistryTest
         // Arrange
         var registry = CreateRegistry();
         var circuitHost = TestCircuitHost.Create();
-        registry
-            .DisconnectedCircuits
+        registry.DisconnectedCircuits
             .Set(
                 circuitHost.CircuitId.Secret,
                 circuitHost,

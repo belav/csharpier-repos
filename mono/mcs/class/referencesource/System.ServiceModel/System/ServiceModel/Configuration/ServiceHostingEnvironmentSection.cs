@@ -36,8 +36,7 @@ namespace System.ServiceModel.Configuration
                 }
                 catch (SecurityException)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ConfigurationErrorsException(
                                 SR.GetString(SR.Hosting_MemoryGatesCheckFailedUnderPartialTrust)

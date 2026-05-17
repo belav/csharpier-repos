@@ -417,8 +417,7 @@ namespace System.ComponentModel.DataAnnotations
                             throw new ArgumentException(
                                 string.Format(
                                     CultureInfo.CurrentCulture,
-                                    Resources
-                                        .DataAnnotationsResources
+                                    Resources.DataAnnotationsResources
                                         .ValidationContextServiceContainer_ItemAlreadyExists,
                                     serviceType
                                 ),
@@ -457,8 +456,7 @@ namespace System.ComponentModel.DataAnnotations
                             throw new ArgumentException(
                                 string.Format(
                                     CultureInfo.CurrentCulture,
-                                    Resources
-                                        .DataAnnotationsResources
+                                    Resources.DataAnnotationsResources
                                         .ValidationContextServiceContainer_ItemAlreadyExists,
                                     serviceType
                                 ),

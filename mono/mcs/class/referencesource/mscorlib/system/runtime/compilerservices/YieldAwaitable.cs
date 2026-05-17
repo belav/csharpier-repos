@@ -132,12 +132,13 @@ namespace System.Runtime.CompilerServices
                     // We're targeting a custom scheduler, so queue a task.
                     else
                     {
-                        Task.Factory.StartNew(
-                            continuation,
-                            default(CancellationToken),
-                            TaskCreationOptions.PreferFairness,
-                            scheduler
-                        );
+                        Task.Factory
+                            .StartNew(
+                                continuation,
+                                default(CancellationToken),
+                                TaskCreationOptions.PreferFairness,
+                                scheduler
+                            );
                     }
                 }
             }
@@ -148,8 +149,7 @@ namespace System.Runtime.CompilerServices
                 int continuationId = Task.NewId();
                 Task currentTask = Task.InternalCurrent;
                 // fire the correlation ETW event
-                TplEtwProvider
-                    .Log
+                TplEtwProvider.Log
                     .AwaitTaskContinuationScheduled(
                         TaskScheduler.Current.Id,
                         (currentTask != null) ? currentTask.Id : 0,

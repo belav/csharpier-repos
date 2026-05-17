@@ -65,18 +65,15 @@ namespace Mono.CodeContracts.Static.ControlFlow
         public TResult ForwardDecode<TData, TResult, TVisitor>(APC pc, TVisitor visitor, TData data)
             where TVisitor : IILVisitor<APC, Dummy, Dummy, TData, TResult>
         {
-            return this.subroutine_facade.ForwardDecode<
-                TData,
-                TResult,
-                RemoveBranchDelegator<TData, TResult, TVisitor>
-            >(
-                pc,
-                new RemoveBranchDelegator<TData, TResult, TVisitor>(
-                    visitor,
-                    this.meta_data_provider
-                ),
-                data
-            );
+            return this.subroutine_facade
+                .ForwardDecode<TData, TResult, RemoveBranchDelegator<TData, TResult, TVisitor>>(
+                    pc,
+                    new RemoveBranchDelegator<TData, TResult, TVisitor>(
+                        visitor,
+                        this.meta_data_provider
+                    ),
+                    data
+                );
         }
 
         public bool IsUnreachable(APC pc)

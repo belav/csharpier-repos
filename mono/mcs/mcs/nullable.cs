@@ -124,8 +124,7 @@ namespace Mono.CSharp.Nullable
 
         public static TypeSpec MakeType(ModuleContainer module, TypeSpec underlyingType)
         {
-            return module
-                .PredefinedTypes
+            return module.PredefinedTypes
                 .Nullable
                 .TypeSpec
                 .MakeGenericType(module, new[] { underlyingType });
@@ -427,13 +426,14 @@ namespace Mono.CSharp.Nullable
         {
             if (!rc.HasSet(ResolveContext.Options.ExpressionTreeConversion))
             {
-                rc.Report.Warning(
-                    458,
-                    2,
-                    e.Location,
-                    "The result of the expression is always `null' of type `{0}'",
-                    e.Type.GetSignatureForError()
-                );
+                rc.Report
+                    .Warning(
+                        458,
+                        2,
+                        e.Location,
+                        "The result of the expression is always `null' of type `{0}'",
+                        e.Type.GetSignatureForError()
+                    );
             }
 
             return ReducedExpression.Create(Create(e.Type, e.Location), e);
@@ -1278,11 +1278,12 @@ namespace Mono.CSharp.Nullable
         public override Expression CreateExpressionTree(ResolveContext ec)
         {
             if (left is NullLiteral)
-                ec.Report.Error(
-                    845,
-                    loc,
-                    "An expression tree cannot contain a coalescing operator with null left side"
-                );
+                ec.Report
+                    .Error(
+                        845,
+                        loc,
+                        "An expression tree cannot contain a coalescing operator with null left side"
+                    );
 
             UserCast uc = left as UserCast;
             Expression conversion = null;

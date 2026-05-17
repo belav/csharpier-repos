@@ -344,8 +344,7 @@ namespace System.Data.EntityModel.Emitters
                 }
                 catch (ArgumentNullException e)
                 {
-                    emitter
-                        .Generator
+                    emitter.Generator
                         .AddError(
                             Strings.InvalidAttributeSuppliedForProperty(emitter.Item.Name),
                             ModelBuilderErrorCode.InvalidAttributeSuppliedForProperty,
@@ -451,8 +450,7 @@ namespace System.Data.EntityModel.Emitters
                 CodeExpression expression = arguments[i] as CodeExpression;
                 if (expression == null)
                     expression = new CodePrimitiveExpression(arguments[i]);
-                attribute
-                    .Arguments
+                attribute.Arguments
                     .Add(new CodeAttributeArgument(arguments[i - 1].ToString(), expression));
             }
         }

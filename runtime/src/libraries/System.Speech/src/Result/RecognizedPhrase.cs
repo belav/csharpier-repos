@@ -1151,8 +1151,7 @@ namespace System.Speech.Recognition
                         if (grammar._proxy != null)
                         {
                             Exception appDomainException;
-                            newValue = grammar
-                                ._proxy
+                            newValue = grammar._proxy
                                 .OnParse(
                                     script._rule,
                                     script._sMethod,
@@ -1207,8 +1206,7 @@ namespace System.Speech.Recognition
                         if (grammar._proxy != null)
                         {
                             Exception appDomainException;
-                            grammar
-                                ._proxy
+                            grammar._proxy
                                 .OnError(
                                     script._rule,
                                     script._sMethod,
@@ -1268,8 +1266,7 @@ namespace System.Speech.Recognition
                             if (grammar._proxy != null)
                             {
                                 Exception appDomainException;
-                                resultValue = grammar
-                                    ._proxy
+                                resultValue = grammar._proxy
                                     .OnRecognition(
                                         script._sMethod,
                                         parameters,

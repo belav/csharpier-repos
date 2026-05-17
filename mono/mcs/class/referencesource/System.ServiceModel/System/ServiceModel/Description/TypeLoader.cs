@@ -105,8 +105,7 @@ namespace System.ServiceModel.Description
                             && serviceImplementation is IContractBehavior
                         )
                         {
-                            contractDescription
-                                .Behaviors
+                            contractDescription.Behaviors
                                 .Add((IContractBehavior)serviceImplementation);
                         }
                         if (serviceType != null)
@@ -154,8 +153,7 @@ namespace System.ServiceModel.Description
                         != null
                     )
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(
                                     SR.GetString(
@@ -196,8 +194,7 @@ namespace System.ServiceModel.Description
                     {
                         if (operationContractProviderType == OperationContractAttributeType)
                         {
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
                                     new InvalidOperationException(
                                         SR.GetString(
@@ -210,8 +207,7 @@ namespace System.ServiceModel.Description
                         }
                         else
                         {
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
                                     new InvalidOperationException(
                                         SR.GetString(
@@ -409,8 +405,7 @@ namespace System.ServiceModel.Description
             for (int i = 0; i < contractDesc.Operations.Count; i++)
             {
                 OperationDescription opDesc = contractDesc.Operations[i];
-                OperationBehaviorAttribute operationBehavior = opDesc
-                    .Behaviors
+                OperationBehaviorAttribute operationBehavior = opDesc.Behaviors
                     .Find<OperationBehaviorAttribute>();
                 if (operationBehavior == null)
                 {
@@ -447,8 +442,7 @@ namespace System.ServiceModel.Description
                 {
                     if (!isInherited)
                     {
-                        operationDescription
-                            .Behaviors
+                        operationDescription.Behaviors
                             .Add(
                                 new DataContractSerializerOperationBehavior(
                                     operationDescription,
@@ -456,8 +450,7 @@ namespace System.ServiceModel.Description
                                     true
                                 )
                             );
-                        operationDescription
-                            .Behaviors
+                        operationDescription.Behaviors
                             .Add(new DataContractSerializerOperationGenerator());
                     }
                 }
@@ -593,8 +586,7 @@ namespace System.ServiceModel.Description
                         null
                     );
                     if (method == null)
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(
                                     SR.GetString(
@@ -607,8 +599,7 @@ namespace System.ServiceModel.Description
                             );
 
                     if (!typeof(IEnumerable<Type>).IsAssignableFrom(method.ReturnType))
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(
                                     SR.GetString(
@@ -630,8 +621,7 @@ namespace System.ServiceModel.Description
                 ServiceKnownTypeAttribute knownTypeAttribute = (ServiceKnownTypeAttribute)
                     knownTypeAttributes[i];
                 if (knownTypeAttribute.Type == null)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(SR.SFxKnownTypeAttributeInvalid1, provider.ToString())
@@ -733,8 +723,7 @@ namespace System.ServiceModel.Description
                 {
                     if (opDesc.SyncMethod != null && opDesc.BeginMethod != null)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(
                                     SR.GetString(
@@ -751,8 +740,7 @@ namespace System.ServiceModel.Description
                     }
                     else if (opDesc.SyncMethod != null && opDesc.TaskMethod != null)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(
                                     SR.GetString(
@@ -768,8 +756,7 @@ namespace System.ServiceModel.Description
                     }
                     else if (opDesc.TaskMethod != null && opDesc.BeginMethod != null)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(
                                     SR.GetString(
@@ -793,8 +780,7 @@ namespace System.ServiceModel.Description
         {
             if (serviceEndpoint.Contract.IsDuplex())
             {
-                CallbackBehaviorAttribute attr = serviceEndpoint
-                    .Behaviors
+                CallbackBehaviorAttribute attr = serviceEndpoint.Behaviors
                     .Find<CallbackBehaviorAttribute>();
                 if (attr == null)
                 {
@@ -929,8 +915,7 @@ namespace System.ServiceModel.Description
             )
             {
                 Fx.Assert("bad contract inheritance");
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             String.Format(
@@ -956,8 +941,7 @@ namespace System.ServiceModel.Description
                     );
                     if (attrs.Length != 0)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(
                                     SR.GetString(
@@ -991,8 +975,7 @@ namespace System.ServiceModel.Description
         {
             if (callbackType != null && !callbackType.IsInterface && !callbackType.IsMarshalByRef)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentException(
                             SR.GetString(SR.SFxInvalidCallbackContractType, callbackType.Name)
@@ -1022,8 +1005,7 @@ namespace System.ServiceModel.Description
                 {
                     if (callbackType == null)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(
                                     SR.GetString(
@@ -1037,8 +1019,7 @@ namespace System.ServiceModel.Description
                     }
                     if (!inheritedContractAttr.CallbackContract.IsAssignableFrom(callbackType))
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(
                                     SR.GetString(
@@ -1113,15 +1094,13 @@ namespace System.ServiceModel.Description
                     if (!contractDescription.Operations.Contains(op)) // in a diamond hierarchy, ensure we don't add same op twice from two different parents
                     {
                         // ensure two different parents don't try to add conflicting operations
-                        Collection<OperationDescription> existingOps = contractDescription
-                            .Operations
-                            .FindAll(op.Name);
+                        Collection<OperationDescription> existingOps =
+                            contractDescription.Operations.FindAll(op.Name);
                         foreach (OperationDescription existingOp in existingOps)
                         {
                             if (existingOp.Messages[0].Direction == op.Messages[0].Direction)
                             {
-                                throw DiagnosticUtility
-                                    .ExceptionUtility
+                                throw DiagnosticUtility.ExceptionUtility
                                     .ThrowHelperError(
                                         new InvalidOperationException(
                                             SR.GetString(
@@ -1233,8 +1212,7 @@ namespace System.ServiceModel.Description
 
             if (ServiceReflector.HasEndMethodShape(methodInfo))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(
@@ -1257,8 +1235,7 @@ namespace System.ServiceModel.Description
 
             opAttr.EnsureInvariants(methodInfo, operationName.EncodedName);
 
-            Collection<OperationDescription> operations = contractDescription
-                .Operations
+            Collection<OperationDescription> operations = contractDescription.Operations
                 .FindAll(operationName.EncodedName);
             for (int i = 0; i < operations.Count; i++)
             {
@@ -1270,8 +1247,7 @@ namespace System.ServiceModel.Description
                     {
                         string method1Name = existingOp.OperationMethod.Name;
                         string method2Name = methodInfo.Name;
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(
                                     SR.GetString(
@@ -1287,8 +1263,7 @@ namespace System.ServiceModel.Description
                     {
                         string method1Name = existingOp.BeginMethod.Name;
                         string method2Name = methodInfo.Name;
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(
                                     SR.GetString(
@@ -1304,8 +1279,7 @@ namespace System.ServiceModel.Description
                     {
                         string method1Name = existingOp.SyncMethod.Name;
                         string method2Name = methodInfo.Name;
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(
                                     SR.GetString(
@@ -1426,8 +1400,7 @@ namespace System.ServiceModel.Description
 
             if (opAttr.IsOneWay && methodAttributes.Length > 0)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(
@@ -1541,8 +1514,7 @@ namespace System.ServiceModel.Description
                     || ServiceReflector.HasOutputParameters(outputMethod, isAsync)
                 )
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(SR.ServiceOperationsMarkedWithIsOneWayTrueMust0)
@@ -1552,8 +1524,7 @@ namespace System.ServiceModel.Description
 
                 if (opAttr.ReplyAction != null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(
@@ -1572,8 +1543,7 @@ namespace System.ServiceModel.Description
                     && (requestDescription.IsUntypedMessage || requestDescription.IsTypedMessage)
                 )
                 {
-                    responseDescription.Body.WrapperName = responseDescription
-                        .Body
+                    responseDescription.Body.WrapperName = responseDescription.Body
                         .WrapperNamespace = null;
                 }
                 else if (
@@ -1601,8 +1571,7 @@ namespace System.ServiceModel.Description
                     && XmlName.IsNullOrEmpty(fault.ElementName)
                     && existingFault.DetailType == fault.DetailType
                 )
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(
@@ -1618,8 +1587,7 @@ namespace System.ServiceModel.Description
                     && existingFault.ElementName == fault.ElementName
                     && existingFault.Namespace == fault.Namespace
                 )
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(
@@ -1763,8 +1731,7 @@ namespace System.ServiceModel.Description
                 {
                     if (hasUnknownHeaders)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(
                                     SR.GetString(
@@ -1807,8 +1774,7 @@ namespace System.ServiceModel.Description
                         )
                 )
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(SR.SFxInvalidMessageContractSignature, methodName)
@@ -1824,8 +1790,7 @@ namespace System.ServiceModel.Description
                 )
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(SR.SFxInvalidMessageContractSignature, methodName)
@@ -1834,8 +1799,7 @@ namespace System.ServiceModel.Description
             }
 
             MessageDescription messageDescription = new MessageDescription(action, direction);
-            MessagePartDescriptionCollection partDescriptionCollection = messageDescription
-                .Body
+            MessagePartDescriptionCollection partDescriptionCollection = messageDescription.Body
                 .Parts;
             for (int index = 0; index < parameters.Length; index++)
             {
@@ -1851,8 +1815,7 @@ namespace System.ServiceModel.Description
                         new XmlQualifiedName(partDescription.Name, partDescription.Namespace)
                     )
                 )
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidMessageContractException(
                                 SR.GetString(
@@ -1965,8 +1928,7 @@ namespace System.ServiceModel.Description
                     )
                 )
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(
@@ -2073,8 +2035,7 @@ namespace System.ServiceModel.Description
                 }
                 else if (memberInfo.IsDefined(typeof(MessagePropertyAttribute), false))
                 {
-                    messageDescription
-                        .Properties
+                    messageDescription.Properties
                         .Add(
                             CreateMessagePropertyDescription(
                                 memberInfo,
@@ -2199,8 +2160,7 @@ namespace System.ServiceModel.Description
             {
                 if (!headerParameterType.IsArray || headerParameterType.GetArrayRank() != 1)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(SR.SFxInvalidMessageHeaderArrayType, defaultName)
@@ -2220,8 +2180,7 @@ namespace System.ServiceModel.Description
                     || headerAttr.Actor != null
                 )
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(
@@ -2329,8 +2288,7 @@ namespace System.ServiceModel.Description
                     )
                 )
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidMessageContractException(
                                 SR.GetString(
@@ -2405,8 +2363,7 @@ namespace System.ServiceModel.Description
                     || this.syncOutputs.Length != this.asyncOutputs.Length
                 )
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(
@@ -2428,8 +2385,7 @@ namespace System.ServiceModel.Description
                 {
                     if (this.syncInputs[i].ParameterType != this.asyncInputs[i].ParameterType)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(
                                     SR.GetString(
@@ -2452,8 +2408,7 @@ namespace System.ServiceModel.Description
                 {
                     if (this.syncOutputs[i].ParameterType != this.asyncOutputs[i].ParameterType)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(
                                     SR.GetString(
@@ -2477,8 +2432,7 @@ namespace System.ServiceModel.Description
                     != this.syncOperation.EndMethod.ReturnType
                 )
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(
@@ -2498,8 +2452,7 @@ namespace System.ServiceModel.Description
             {
                 if (this.asyncOperation.Faults.Count != 0)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(
@@ -2520,8 +2473,7 @@ namespace System.ServiceModel.Description
             {
                 if (this.asyncOperation.KnownTypes.Count != 0)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(
@@ -2542,8 +2494,7 @@ namespace System.ServiceModel.Description
             {
                 if (this.syncOperation.Messages.Count != this.asyncOperation.Messages.Count)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(
@@ -2569,8 +2520,7 @@ namespace System.ServiceModel.Description
                         != this.asyncOperation.Messages[index].Action
                     )
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(
                                     SR.GetString(
@@ -2617,8 +2567,7 @@ namespace System.ServiceModel.Description
             {
                 if (this.syncInputs.Length != this.taskInputs.Length)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(
@@ -2639,8 +2588,7 @@ namespace System.ServiceModel.Description
                 {
                     if (this.syncInputs[i].ParameterType != this.taskInputs[i].ParameterType)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(
                                     SR.GetString(
@@ -2660,8 +2608,7 @@ namespace System.ServiceModel.Description
             {
                 if (this.syncOperation.SyncMethod.ReturnType != this.syncOperation.TaskTResult)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(
@@ -2680,8 +2627,7 @@ namespace System.ServiceModel.Description
             {
                 if (this.taskOperation.Faults.Count != 0)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(
@@ -2701,8 +2647,7 @@ namespace System.ServiceModel.Description
             {
                 if (this.taskOperation.KnownTypes.Count != 0)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(
@@ -2722,8 +2667,7 @@ namespace System.ServiceModel.Description
             {
                 if (this.syncOperation.Messages.Count != this.taskOperation.Messages.Count)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(
@@ -2748,8 +2692,7 @@ namespace System.ServiceModel.Description
                         != this.taskOperation.Messages[index].Action
                     )
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(
                                     SR.GetString(
@@ -2795,8 +2738,7 @@ namespace System.ServiceModel.Description
             {
                 if (this.taskInputs.Length != this.asyncInputs.Length)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(
@@ -2818,8 +2760,7 @@ namespace System.ServiceModel.Description
                 {
                     if (this.taskInputs[i].ParameterType != this.asyncInputs[i].ParameterType)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(
                                     SR.GetString(
@@ -2840,8 +2781,7 @@ namespace System.ServiceModel.Description
             {
                 if (this.taskOperation.TaskTResult != this.asyncOperation.EndMethod.ReturnType)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(
@@ -2861,8 +2801,7 @@ namespace System.ServiceModel.Description
             {
                 if (this.asyncOperation.Faults.Count != 0)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(
@@ -2883,8 +2822,7 @@ namespace System.ServiceModel.Description
             {
                 if (this.asyncOperation.KnownTypes.Count != 0)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(
@@ -2905,8 +2843,7 @@ namespace System.ServiceModel.Description
             {
                 if (this.taskOperation.Messages.Count != this.asyncOperation.Messages.Count)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(
@@ -2932,8 +2869,7 @@ namespace System.ServiceModel.Description
                         != this.asyncOperation.Messages[index].Action
                     )
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(
                                     SR.GetString(

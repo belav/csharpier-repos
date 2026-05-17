@@ -396,8 +396,7 @@ namespace System.Workflow.Activities
                             {
                                 if (
                                     ((CallExternalMethodActivity)currentActivity).MethodName == null
-                                    || ((CallExternalMethodActivity)currentActivity)
-                                        .MethodName
+                                    || ((CallExternalMethodActivity)currentActivity).MethodName
                                         .Length == 0
                                 )
                                     return;
@@ -415,8 +414,7 @@ namespace System.Workflow.Activities
                             {
                                 if (
                                     ((HandleExternalEventActivity)currentActivity).EventName == null
-                                    || ((HandleExternalEventActivity)currentActivity)
-                                        .EventName
+                                    || ((HandleExternalEventActivity)currentActivity).EventName
                                         .Length == 0
                                 )
                                     return;
@@ -967,8 +965,7 @@ namespace System.Workflow.Activities
                             ),
                             ErrorNumbers.Error_CorrelationInvalid
                         );
-                        error
-                            .UserData
+                        error.UserData
                             .Add(
                                 typeof(CorrelationParameterAttribute),
                                 (memberInfo.DeclaringType == interfaceType)
@@ -999,8 +996,7 @@ namespace System.Workflow.Activities
                             ),
                             ErrorNumbers.Error_CorrelationTypeNotConsistent
                         );
-                        error
-                            .UserData
+                        error.UserData
                             .Add(
                                 typeof(CorrelationAliasAttribute),
                                 (memberInfo.DeclaringType == interfaceType)

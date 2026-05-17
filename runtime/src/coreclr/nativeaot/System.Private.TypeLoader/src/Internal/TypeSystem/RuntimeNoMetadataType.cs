@@ -353,8 +353,7 @@ namespace Internal.TypeSystem.NoMetadata
 
             return (clone == null)
                 ? this
-                : _genericTypeDefinitionAsDefType
-                    .Context
+                : _genericTypeDefinitionAsDefType.Context
                     .ResolveGenericInstantiation(
                         _genericTypeDefinitionAsDefType,
                         new Instantiation(clone)

@@ -625,8 +625,7 @@ public ref struct TypeMapPlanBuilder
     )
     {
         var valueResolverFunc =
-            memberMap
-                .Resolver
+            memberMap.Resolver
                 ?.GetExpression(
                     _configuration,
                     memberMap,
@@ -879,8 +878,7 @@ public class ClassValueResolver : ValueResolverConfig, IValueResolver
         var iValueResolver = InterfaceType;
         if (iValueResolver.ContainsGenericParameters)
         {
-            var typeArgs = iValueResolver
-                .GenericTypeArguments
+            var typeArgs = iValueResolver.GenericTypeArguments
                 .Zip(
                     new[]
                     {

@@ -58,8 +58,7 @@ public class Finally
             {
                 if (2 != stage)
                 {
-                    TestLibrary
-                        .TestFramework
+                    TestLibrary.TestFramework
                         .LogError(
                             "000",
                             "Catch block executed in wrong order: Expected(2) Actual(" + stage + ")"
@@ -73,8 +72,7 @@ public class Finally
         {
             if (3 != stage)
             {
-                TestLibrary
-                    .TestFramework
+                TestLibrary.TestFramework
                     .LogError(
                         "000",
                         "Finally block executed in wrong order: Expected(3) Actual(" + stage + ")"
@@ -86,8 +84,7 @@ public class Finally
 
         if (4 != stage)
         {
-            TestLibrary
-                .TestFramework
+            TestLibrary.TestFramework
                 .LogError(
                     "000",
                     "Finally/Catch block executed too many times: Expected(4) Actual(" + stage + ")"
@@ -114,8 +111,7 @@ public class Finally
         {
             if (1 != stage)
             {
-                TestLibrary
-                    .TestFramework
+                TestLibrary.TestFramework
                     .LogError(
                         "000",
                         "Catch block executed in wrong order: Expected(1) Actual(" + stage + ")"
@@ -128,8 +124,7 @@ public class Finally
         {
             if (2 != stage)
             {
-                TestLibrary
-                    .TestFramework
+                TestLibrary.TestFramework
                     .LogError(
                         "000",
                         "Finally block executed in wrong order: Expected(2) Actual(" + stage + ")"
@@ -141,8 +136,7 @@ public class Finally
 
         if (3 != stage)
         {
-            TestLibrary
-                .TestFramework
+            TestLibrary.TestFramework
                 .LogError(
                     "000",
                     "Finally/Catch block executed too many times: Expected(3) Actual(" + stage + ")"
@@ -169,8 +163,7 @@ public class Finally
         {
             if (1 != stage)
             {
-                TestLibrary
-                    .TestFramework
+                TestLibrary.TestFramework
                     .LogError(
                         "000",
                         "Catch block executed in wrong order: Expected(1) Actual(" + stage + ")"
@@ -188,8 +181,7 @@ public class Finally
             {
                 if (3 != stage)
                 {
-                    TestLibrary
-                        .TestFramework
+                    TestLibrary.TestFramework
                         .LogError(
                             "000",
                             "Catch block executed in wrong order: Expected(3) Actual(" + stage + ")"
@@ -202,8 +194,7 @@ public class Finally
             {
                 if (4 != stage)
                 {
-                    TestLibrary
-                        .TestFramework
+                    TestLibrary.TestFramework
                         .LogError(
                             "000",
                             "Finally block executed in wrong order: Expected(4) Actual("
@@ -219,8 +210,7 @@ public class Finally
         {
             if (5 != stage)
             {
-                TestLibrary
-                    .TestFramework
+                TestLibrary.TestFramework
                     .LogError(
                         "000",
                         "Finally block executed in wrong order: Expected(5) Actual(" + stage + ")"
@@ -232,8 +222,7 @@ public class Finally
 
         if (6 != stage)
         {
-            TestLibrary
-                .TestFramework
+            TestLibrary.TestFramework
                 .LogError(
                     "000",
                     "Finally/Catch block executed too many times: Expected(6) Actual(" + stage + ")"

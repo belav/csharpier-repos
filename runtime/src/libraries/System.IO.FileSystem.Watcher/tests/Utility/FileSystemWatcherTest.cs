@@ -432,8 +432,7 @@ namespace System.IO.Tests
             if (verifyCreated)
             {
                 bool Created_expected = ((expectedEvents & WatcherChangeTypes.Created) > 0);
-                bool Created_actual = created
-                    .EventOccurred
+                bool Created_actual = created.EventOccurred
                     .WaitOne(verifyChanged ? SubsequentExpectedWait : timeout);
                 watcher.Created -= created.Handler;
                 result = result && Created_expected == Created_actual;
@@ -448,8 +447,7 @@ namespace System.IO.Tests
             if (verifyDeleted)
             {
                 bool Deleted_expected = ((expectedEvents & WatcherChangeTypes.Deleted) > 0);
-                bool Deleted_actual = deleted
-                    .EventOccurred
+                bool Deleted_actual = deleted.EventOccurred
                     .WaitOne(verifyChanged || verifyCreated ? SubsequentExpectedWait : timeout);
                 watcher.Deleted -= deleted.Handler;
                 result = result && Deleted_expected == Deleted_actual;
@@ -464,8 +462,7 @@ namespace System.IO.Tests
             if (verifyRenamed)
             {
                 bool Renamed_expected = ((expectedEvents & WatcherChangeTypes.Renamed) > 0);
-                bool Renamed_actual = renamed
-                    .EventOccurred
+                bool Renamed_actual = renamed.EventOccurred
                     .WaitOne(
                         verifyChanged || verifyCreated || verifyDeleted
                             ? SubsequentExpectedWait

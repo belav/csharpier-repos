@@ -183,8 +183,7 @@ namespace System.ServiceModel.Description
             string policyIdStringPrefixFormat = "{0}_";
             foreach (XmlElement policyElement in bindingPolicies)
             {
-                XmlNode policyId = policyElement
-                    .Attributes
+                XmlNode policyId = policyElement.Attributes
                     .GetNamedItem(
                         MetadataStrings.Wsu.Attributes.Id,
                         MetadataStrings.Wsu.NamespaceUri
@@ -258,8 +257,7 @@ namespace System.ServiceModel.Description
             string policyReferencePrefixFormat = "#{0}_";
             foreach (XmlElement policyReferenceElement in bindingPolicyReferences)
             {
-                XmlNode policyReference = policyReferenceElement
-                    .Attributes
+                XmlNode policyReference = policyReferenceElement.Attributes
                     .GetNamedItem(MetadataStrings.WSPolicy.Attributes.URI);
                 string policyReferenceValue = policyReference.Value;
                 string policyReferenceValueWithOldBindingName = string.Format(
@@ -283,8 +281,7 @@ namespace System.ServiceModel.Description
                 {
                     policyReference.Value =
                         policyReferenceValueWithNewBindingName
-                        + policyReference
-                            .Value
+                        + policyReference.Value
                             .Substring(policyReferenceValueWithOldBindingName.Length);
                 }
             }
@@ -320,8 +317,7 @@ namespace System.ServiceModel.Description
                     string
                 >(wsdl => wsdl.TargetNamespace);
                 string contractNamespaces = string.Join(", ", namespaces);
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new NotSupportedException(
                             SR.GetString(SR.SingleWsdlNotGenerated, contractNamespaces)

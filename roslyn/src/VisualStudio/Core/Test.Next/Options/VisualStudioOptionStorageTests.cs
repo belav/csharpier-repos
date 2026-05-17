@@ -91,13 +91,11 @@ public class VisualStudioOptionStorageTests
         Assert.True(info.Option.IsPerLanguage);
 
         var anyInCSharpNamespace = info.Accessors.Any(a => a.namespaceName.Contains("CSharp"));
-        var anyInVisualBasicNamespace = info.Accessors.Any(a =>
-            a.namespaceName.Contains("VisualBasic")
-        );
+        var anyInVisualBasicNamespace = info.Accessors
+            .Any(a => a.namespaceName.Contains("VisualBasic"));
         var allInCSharpNamespace = info.Accessors.All(a => a.namespaceName.Contains("CSharp"));
-        var allInVisualBasicNamespace = info.Accessors.All(a =>
-            a.namespaceName.Contains("VisualBasic")
-        );
+        var allInVisualBasicNamespace = info.Accessors
+            .All(a => a.namespaceName.Contains("VisualBasic"));
         if (anyInCSharpNamespace == allInCSharpNamespace)
             return;
 

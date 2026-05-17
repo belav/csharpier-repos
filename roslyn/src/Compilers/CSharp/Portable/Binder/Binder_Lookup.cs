@@ -2153,8 +2153,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             var binderFileIdentifier = getFileIdentifierForFileTypes();
             return !binderFileIdentifier.FilePathChecksumOpt.IsDefault
-                && binderFileIdentifier
-                    .FilePathChecksumOpt
+                && binderFileIdentifier.FilePathChecksumOpt
                     .SequenceEqual(symbolFileIdentifier.FilePathChecksumOpt);
 
             FileIdentifier getFileIdentifierForFileTypes()
@@ -2390,8 +2389,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     {
                         return false;
                     }
-                    var keys = unwrappedSymbol
-                        .ContainingAssembly
+                    var keys = unwrappedSymbol.ContainingAssembly
                         .GetInternalsVisibleToPublicKeys(assemblyName);
                     if (!keys.Any())
                     {

@@ -209,10 +209,8 @@ namespace System.ComponentModel.Composition.Hosting
             // overwrite by design and can now be completed or rolled back together
             for (var index = 0; index < this._valueCount; index++)
             {
-                this._outerAtomicComposition.SetValueInternal(
-                    this._values[index].Key,
-                    this._values[index].Value
-                );
+                this._outerAtomicComposition
+                    .SetValueInternal(this._values[index].Key, this._values[index].Value);
             }
         }
 
@@ -247,11 +245,8 @@ namespace System.ComponentModel.Composition.Hosting
             // scope, where upon we go ahead and return null
             if (!localAtomicCompositionOnly && this._outerAtomicComposition != null)
             {
-                return this._outerAtomicComposition.TryGetValueInternal<T>(
-                    key,
-                    localAtomicCompositionOnly,
-                    out value
-                );
+                return this._outerAtomicComposition
+                    .TryGetValueInternal<T>(key, localAtomicCompositionOnly, out value);
             }
 
             value = default(T);

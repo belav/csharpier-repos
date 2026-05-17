@@ -39,8 +39,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.GenerateTyp
 
         // TODO: Requires WPF due to IInlineRenameService dependency (https://github.com/dotnet/roslyn/issues/46153)
         protected override TestComposition GetComposition() =>
-            EditorTestCompositions
-                .EditorFeaturesWpf
+            EditorTestCompositions.EditorFeaturesWpf
                 .AddExcludedPartTypes(typeof(IDiagnosticUpdateSourceRegistrationService))
                 .AddParts(typeof(MockDiagnosticUpdateSourceRegistrationService));
 
@@ -5127,8 +5126,7 @@ public class ClassB
                 expectedContainers: ImmutableArray<string>.Empty,
                 expectedDocumentName: "ClassB.cs",
                 new TestParameters(
-                    parseOptions: CSharpParseOptions
-                        .Default
+                    parseOptions: CSharpParseOptions.Default
                         .WithLanguageVersion(LanguageVersion.CSharp10),
                     options: Option(
                         CSharpCodeStyleOptions.NamespaceDeclarations,

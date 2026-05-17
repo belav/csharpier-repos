@@ -232,8 +232,7 @@ public class TryValidateModelIntegrationTest
         Action<MvcOptions> optionsConfigurator
     )
     {
-        var options = actionContext
-            .HttpContext
+        var options = actionContext.HttpContext
             .RequestServices
             .GetRequiredService<IOptions<MvcOptions>>();
         optionsConfigurator.Invoke(options.Value);

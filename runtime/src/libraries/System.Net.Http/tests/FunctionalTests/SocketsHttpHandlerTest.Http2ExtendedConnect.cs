@@ -39,8 +39,7 @@ namespace System.Net.Http.Functional.Tests
                 TaskCreationOptions.RunContinuationsAsynchronously
             );
 
-            await Http2LoopbackServerFactory
-                .Singleton
+            await Http2LoopbackServerFactory.Singleton
                 .CreateClientAndServerAsync(
                     async uri =>
                     {

@@ -141,8 +141,7 @@ public partial class NewtonsoftJsonOutputFormatter : TextOutputFormatter
         ArgumentNullException.ThrowIfNull(selectedEncoding);
 
         // Compat mode for derived options
-        _jsonOptions ??= context
-            .HttpContext
+        _jsonOptions ??= context.HttpContext
             .RequestServices
             .GetRequiredService<IOptions<MvcNewtonsoftJsonOptions>>()
             .Value;
@@ -165,8 +164,7 @@ public partial class NewtonsoftJsonOutputFormatter : TextOutputFormatter
             && _asyncEnumerableReaderFactory.TryGetReader(value.GetType(), out var reader)
         )
         {
-            var logger = context
-                .HttpContext
+            var logger = context.HttpContext
                 .RequestServices
                 .GetRequiredService<ILogger<NewtonsoftJsonOutputFormatter>>();
             Log.BufferingAsyncEnumerable(logger, value);

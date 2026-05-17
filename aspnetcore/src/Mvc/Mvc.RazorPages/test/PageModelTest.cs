@@ -1951,8 +1951,7 @@ public class PageModelTest
         testPageModel.Setup(p => p.OnPageHandlerExecuted(pageHandlerExecutedContext)).Verifiable();
 
         // Act
-        await testPageModel
-            .Object
+        await testPageModel.Object
             .OnPageHandlerExecutionAsync(
                 pageHandlerExecutingContext,
                 () => Task.FromResult(pageHandlerExecutedContext)
@@ -1996,8 +1995,7 @@ public class PageModelTest
             .Throws(new Exception("Shouldn't be called"));
 
         // Act
-        await testPageModel
-            .Object
+        await testPageModel.Object
             .OnPageHandlerExecutionAsync(
                 pageHandlerExecutingContext,
                 () => Task.FromResult(pageHandlerExecutedContext)

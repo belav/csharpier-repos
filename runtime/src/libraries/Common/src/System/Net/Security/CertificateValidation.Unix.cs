@@ -61,8 +61,7 @@ namespace System.Net.Security
                 if (IPAddress.TryParse(hostName, out hostnameAsIp))
                 {
                     byte[] addressBytes = hostnameAsIp.GetAddressBytes();
-                    hostNameMatch = Interop
-                        .Crypto
+                    hostNameMatch = Interop.Crypto
                         .CheckX509IpAddress(
                             certHandle,
                             addressBytes,
@@ -77,8 +76,7 @@ namespace System.Net.Security
                     // It also does host case normalization.  The bypass logic would be something
                     // like "all characters being within [a-z0-9.-]+"
                     string matchName = s_idnMapping.GetAscii(hostName);
-                    hostNameMatch = Interop
-                        .Crypto
+                    hostNameMatch = Interop.Crypto
                         .CheckX509Hostname(certHandle, matchName, matchName.Length);
 
                     if (hostNameMatch < 0)

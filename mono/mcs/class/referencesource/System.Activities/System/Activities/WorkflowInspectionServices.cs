@@ -29,8 +29,7 @@ namespace System.Activities
 
             if (rootActivity.HasBeenAssociatedWithAnInstance)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new InvalidOperationException(
                             SR.RootActivityAlreadyAssociatedWithInstance(rootActivity.DisplayName)

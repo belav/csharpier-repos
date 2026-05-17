@@ -85,8 +85,7 @@ namespace System.Threading.Tasks.Dataflow
             // In those cases we need to fault the target half to drop its buffered messages and to release its
             // reservations. This should not create an infinite loop, because all our implementations are designed
             // to handle multiple completion requests and to carry over only one.
-            _source
-                .Completion
+            _source.Completion
                 .ContinueWith(
                     static (completed, state) =>
                     {
@@ -380,18 +379,19 @@ namespace System.Threading.Tasks.Dataflow
                 if (exception != null)
                 {
                     // Get out from under currently held locks. CompleteCore re-acquires the locks it needs.
-                    Task.Factory.StartNew(
-                        exc =>
-                            CompleteCore(
-                                exception: (Exception)exc!,
-                                storeExceptionEvenIfAlreadyCompleting: true,
-                                revertProcessingState: true
-                            ),
-                        exception,
-                        CancellationToken.None,
-                        Common.GetCreationOptionsForTask(),
-                        TaskScheduler.Default
-                    );
+                    Task.Factory
+                        .StartNew(
+                            exc =>
+                                CompleteCore(
+                                    exception: (Exception)exc!,
+                                    storeExceptionEvenIfAlreadyCompleting: true,
+                                    revertProcessingState: true
+                                ),
+                            exception,
+                            CancellationToken.None,
+                            Common.GetCreationOptionsForTask(),
+                            TaskScheduler.Default
+                        );
                 }
             }
         }
@@ -484,8 +484,7 @@ namespace System.Threading.Tasks.Dataflow
                 bool consumed = false;
                 try
                 {
-                    T? consumedValue = sourceAndMessage
-                        .Key
+                    T? consumedValue = sourceAndMessage.Key
                         .ConsumeMessage(sourceAndMessage.Value, this, out consumed);
                     if (consumed)
                     {
@@ -521,37 +520,38 @@ namespace System.Threading.Tasks.Dataflow
                 // which means calling back to the source, which means we need to escape the incoming lock.
                 if (_boundingState != null && _boundingState.PostponedMessages.Count > 0)
                 {
-                    Task.Factory.StartNew(
-                        static state =>
-                        {
-                            var thisBufferBlock = (BufferBlock<T>)state!;
-
-                            // Release any postponed messages
-                            List<Exception>? exceptions = null;
-                            if (thisBufferBlock._boundingState != null)
+                    Task.Factory
+                        .StartNew(
+                            static state =>
                             {
-                                // Note: No locks should be held at this point
-                                Common.ReleaseAllPostponedMessages(
-                                    thisBufferBlock,
-                                    thisBufferBlock._boundingState.PostponedMessages,
-                                    ref exceptions
-                                );
-                            }
+                                var thisBufferBlock = (BufferBlock<T>)state!;
 
-                            if (exceptions != null)
-                            {
-                                // It is important to migrate these exceptions to the source part of the owning batch,
-                                // because that is the completion task that is publicly exposed.
-                                thisBufferBlock._source.AddExceptions(exceptions);
-                            }
+                                // Release any postponed messages
+                                List<Exception>? exceptions = null;
+                                if (thisBufferBlock._boundingState != null)
+                                {
+                                    // Note: No locks should be held at this point
+                                    Common.ReleaseAllPostponedMessages(
+                                        thisBufferBlock,
+                                        thisBufferBlock._boundingState.PostponedMessages,
+                                        ref exceptions
+                                    );
+                                }
 
-                            thisBufferBlock._source.Complete();
-                        },
-                        this,
-                        CancellationToken.None,
-                        Common.GetCreationOptionsForTask(),
-                        TaskScheduler.Default
-                    );
+                                if (exceptions != null)
+                                {
+                                    // It is important to migrate these exceptions to the source part of the owning batch,
+                                    // because that is the completion task that is publicly exposed.
+                                    thisBufferBlock._source.AddExceptions(exceptions);
+                                }
+
+                                thisBufferBlock._source.Complete();
+                            },
+                            this,
+                            CancellationToken.None,
+                            Common.GetCreationOptionsForTask(),
+                            TaskScheduler.Default
+                        );
                 }
                 // Otherwise, we can just decline the source directly.
                 else

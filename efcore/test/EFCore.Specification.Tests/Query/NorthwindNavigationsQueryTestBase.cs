@@ -920,12 +920,15 @@ public abstract class NorthwindNavigationsQueryTestBase<TFixture> : QueryTestBas
                         ss =>
                             from p in ss.Set<Product>()
                             where
-                                p.OrderDetails.Contains(
-                                    ss.Set<OrderDetail>()
-                                        .OrderByDescending(o => o.OrderID)
-                                        .ThenBy(o => o.ProductID)
-                                        .FirstOrDefault(orderDetail => orderDetail.Quantity == 1)
-                                )
+                                p.OrderDetails
+                                    .Contains(
+                                        ss.Set<OrderDetail>()
+                                            .OrderByDescending(o => o.OrderID)
+                                            .ThenBy(o => o.ProductID)
+                                            .FirstOrDefault(orderDetail =>
+                                                orderDetail.Quantity == 1
+                                            )
+                                    )
                             select p
                     )
                 )
@@ -949,12 +952,13 @@ public abstract class NorthwindNavigationsQueryTestBase<TFixture> : QueryTestBas
                         ss =>
                             from p in ss.Set<Product>()
                             where
-                                p.OrderDetails.Contains(
-                                    ss.Set<OrderDetail>()
-                                        .OrderByDescending(o => o.OrderID)
-                                        .ThenBy(o => o.ProductID)
-                                        .FirstOrDefault()
-                                )
+                                p.OrderDetails
+                                    .Contains(
+                                        ss.Set<OrderDetail>()
+                                            .OrderByDescending(o => o.OrderID)
+                                            .ThenBy(o => o.ProductID)
+                                            .FirstOrDefault()
+                                    )
                             select p
                     )
                 )

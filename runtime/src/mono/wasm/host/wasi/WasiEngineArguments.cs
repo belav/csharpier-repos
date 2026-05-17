@@ -15,8 +15,7 @@ internal sealed class WasiEngineArguments
     public IEnumerable<string> AppArgs => CommonConfig.RemainingArgs;
 
     public bool IsSingleFileBundle =>
-        CommonConfig
-            .HostProperties
+        CommonConfig.HostProperties
             .Extra
             ?.TryGetValue("singleFileBundle", out JsonElement singleFileValue) == true
         && singleFileValue.GetBoolean();

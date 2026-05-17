@@ -40,8 +40,7 @@ namespace System.ServiceModel.Activities.Description
 
                 if (AspNetEnvironment.Enabled)
                 {
-                    VirtualPathExtension virtualPathExtension = serviceHostBase
-                        .Extensions
+                    VirtualPathExtension virtualPathExtension = serviceHostBase.Extensions
                         .Find<VirtualPathExtension>();
                     if (virtualPathExtension != null && virtualPathExtension.VirtualPath != null)
                     {
@@ -51,8 +50,7 @@ namespace System.ServiceModel.Activities.Description
                         string application = virtualPathExtension.ApplicationVirtualPath;
 
                         //If the application is the root, do not include it in servicePath
-                        string servicePath = virtualPathExtension
-                            .VirtualPath
+                        string servicePath = virtualPathExtension.VirtualPath
                             .Replace("~", application + "|");
                         hostReference = string.Format(
                             CultureInfo.InvariantCulture,
@@ -68,8 +66,7 @@ namespace System.ServiceModel.Activities.Description
                     this.ProfileName,
                     workflowDisplayName
                 );
-                workflowServiceHost
-                    .WorkflowExtensions
+                workflowServiceHost.WorkflowExtensions
                     .Add(() =>
                         new EtwTrackingParticipant
                         {

@@ -65,10 +65,8 @@ namespace Microsoft.Extensions.Options.Generators
             );
             if (unconditionalSuppressMessageAttributeSymbol is not null)
             {
-                var containingAssemblyName = unconditionalSuppressMessageAttributeSymbol
-                    .ContainingAssembly
-                    .Identity
-                    .Name;
+                var containingAssemblyName =
+                    unconditionalSuppressMessageAttributeSymbol.ContainingAssembly.Identity.Name;
                 if (
                     !containingAssemblyName.Equals(
                         "System.Private.CoreLib",

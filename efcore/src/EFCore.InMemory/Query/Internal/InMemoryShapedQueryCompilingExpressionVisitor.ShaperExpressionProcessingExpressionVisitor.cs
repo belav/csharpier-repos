@@ -127,8 +127,7 @@ public partial class InMemoryShapedQueryCompilingExpressionVisitor
                         _expressions.Add(
                             Assign(
                                 variable,
-                                queryExpression
-                                    .CurrentParameter
+                                queryExpression.CurrentParameter
                                     .CreateValueBufferReadValueExpression(
                                         projectionBindingExpression.Type,
                                         projectionIndex,
@@ -148,8 +147,7 @@ public partial class InMemoryShapedQueryCompilingExpressionVisitor
                     var entityClrType = includeExpression.EntityExpression.Type;
                     var includingClrType = includeExpression.Navigation.DeclaringEntityType.ClrType;
                     var inverseNavigation = includeExpression.Navigation.Inverse;
-                    var relatedEntityClrType = includeExpression
-                        .Navigation
+                    var relatedEntityClrType = includeExpression.Navigation
                         .TargetEntityType
                         .ClrType;
                     if (

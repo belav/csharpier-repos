@@ -263,9 +263,8 @@ namespace System.Data.Tests
 
             dtChild.Constraints.Clear();
             dtParent.Constraints.Clear();
-            ds.Relations.Add(
-                new DataRelation("myRelation", dtParent.Columns[0], dtChild.Columns[0])
-            );
+            ds.Relations
+                .Add(new DataRelation("myRelation", dtParent.Columns[0], dtChild.Columns[0]));
 
             // Relation - Child Table Constraints Count
             Assert.Equal(1, dtChild.Constraints.Count);
@@ -465,9 +464,8 @@ namespace System.Data.Tests
 
             dtChild.Constraints.Clear();
             dtParent.Constraints.Clear();
-            ds.Relations.Add(
-                new DataRelation("myRelation", dtParent.Columns[0], dtChild.Columns[0])
-            );
+            ds.Relations
+                .Add(new DataRelation("myRelation", dtParent.Columns[0], dtChild.Columns[0]));
 
             Assert.Equal(1, dtChild.Constraints.Count);
 
@@ -667,8 +665,7 @@ namespace System.Data.Tests
             DataColumn colParentID = dataTable.Columns.Add("ParentID", typeof(int));
 
             // table PK (ID, Culture)
-            dataTable
-                .Constraints
+            dataTable.Constraints
                 .Add(new UniqueConstraint("MenuPK", new DataColumn[] { colID, colCulture }, true));
 
             // add a FK referencing the same table: (ID, Culture) <- (ParentID, Culture)

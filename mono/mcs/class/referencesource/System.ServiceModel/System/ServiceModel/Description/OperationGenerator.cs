@@ -95,12 +95,10 @@ namespace System.ServiceModel.Description
         )
         {
             if (context == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("context"));
             if (context.Operation == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(SR.OperationPropertyIsRequiredForAttributeGeneration)
@@ -181,8 +179,7 @@ namespace System.ServiceModel.Description
                 this.IsEncoded = isEncoded;
                 this.WrappedBodyTypeGenerator = wrappedBodyTypeGenerator;
                 this.KnownTypes = knownTypes;
-                this.MessageContractType = context
-                    .ServiceContractGenerator
+                this.MessageContractType = context.ServiceContractGenerator
                     .OptionsInternal
                     .IsSet(ServiceContractGenerationOptions.TypedMessages)
                     ? MessageContractType.WrappedMessageContract
@@ -309,8 +306,7 @@ namespace System.ServiceModel.Description
                 {
                     this.MessageContractType = ex.MessageContractType;
                     CodeMemberMethod method = this.Method;
-                    method
-                        .Comments
+                    method.Comments
                         .Add(
                             new CodeCommentStatement(SR.GetString(SR.SFxCodeGenWarning, ex.Message))
                         );
@@ -335,8 +331,7 @@ namespace System.ServiceModel.Description
                 if (this.HasUntypedMessages)
                 {
                     if (!this.IsCompletelyUntyped)
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new ParameterModeException(
                                     SR.GetString(
@@ -472,8 +467,7 @@ namespace System.ServiceModel.Description
                 {
                     UniqueCodeNamespaceScope namespaceScope = new UniqueCodeNamespaceScope(ns);
 
-                    CodeTypeDeclaration typedMessageDecl = Context
-                        .Contract
+                    CodeTypeDeclaration typedMessageDecl = Context.Contract
                         .TypeFactory
                         .CreateClassType();
                     string messageName = XmlName.IsNullOrEmpty(message.MessageName)
@@ -579,15 +573,13 @@ namespace System.ServiceModel.Description
                         .Insert(
                             0,
                             new CodeParameterDeclarationExpression(
-                                Context
-                                    .ServiceContractGenerator
+                                Context.ServiceContractGenerator
                                     .GetCodeTypeReference((typeof(Message))),
                                 "request"
                             )
                         );
                 if (isResponseMessage)
-                    this.EndMethod.ReturnType = Context
-                        .ServiceContractGenerator
+                    this.EndMethod.ReturnType = Context.ServiceContractGenerator
                         .GetCodeTypeReference(typeof(Message));
             }
 
@@ -659,8 +651,7 @@ namespace System.ServiceModel.Description
                 )
                 {
                     Fx.Assert(
-                        System
-                            .CodeDom
+                        System.CodeDom
                             .Compiler
                             .CodeGenerator
                             .IsValidLanguageIndependentIdentifier(name),
@@ -867,8 +858,7 @@ namespace System.ServiceModel.Description
             {
                 Fx.Assert(
                     String.IsNullOrEmpty(typeName)
-                        || System
-                            .CodeDom
+                        || System.CodeDom
                             .Compiler
                             .CodeGenerator
                             .IsValidLanguageIndependentIdentifier(typeName),
@@ -879,8 +869,7 @@ namespace System.ServiceModel.Description
                     )
                 );
                 UniqueCodeNamespaceScope namespaceScope = new UniqueCodeNamespaceScope(ns);
-                CodeTypeDeclaration wrapperTypeDecl = Context
-                    .Contract
+                CodeTypeDeclaration wrapperTypeDecl = Context.Contract
                     .TypeFactory
                     .CreateClassType();
                 CodeTypeReference wrapperTypeRef = namespaceScope.AddUnique(
@@ -900,18 +889,18 @@ namespace System.ServiceModel.Description
                 string messageName = XmlName.IsNullOrEmpty(messageDescription.MessageName)
                     ? null
                     : messageDescription.MessageName.DecodedName;
-                this.WrappedBodyTypeGenerator.AddTypeAttributes(
-                    messageName,
-                    defaultNS,
-                    wrapperTypeDecl.CustomAttributes,
-                    this.IsEncoded
-                );
+                this.WrappedBodyTypeGenerator
+                    .AddTypeAttributes(
+                        messageName,
+                        defaultNS,
+                        wrapperTypeDecl.CustomAttributes,
+                        this.IsEncoded
+                    );
 
                 IPartCodeGenerator partGenerator = new TypedMessagePartCodeGenerator(
                     wrapperTypeDecl
                 );
-                System.Net.Security.ProtectionLevel protectionLevel = System
-                    .Net
+                System.Net.Security.ProtectionLevel protectionLevel = System.Net
                     .Security
                     .ProtectionLevel
                     .None;
@@ -1147,8 +1136,7 @@ namespace System.ServiceModel.Description
                 else if (this.Parent.parameterTypes.ContainsKey(setting))
                     return this.Parent.parameterTypes[setting];
                 else
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(SR.SfxNoTypeSpecifiedForParameter, setting.Name)
@@ -1167,15 +1155,14 @@ namespace System.ServiceModel.Description
                     && this.Parent.parameterAttributes.ContainsKey(setting)
                 )
                 {
-                    CodeAttributeDeclarationCollection localAttributes =
-                        this.Parent.parameterAttributes[setting];
+                    CodeAttributeDeclarationCollection localAttributes = this.Parent
+                        .parameterAttributes[setting];
                     if (localAttributes != null && localAttributes.Count > 0)
                     {
                         if (isAdditionalAttributesAllowed)
                             attributes.AddRange(localAttributes);
                         else
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
                                     new ParameterModeException(
                                         SR.GetString(
@@ -1202,8 +1189,7 @@ namespace System.ServiceModel.Description
                         );
                     if (message.HasProtectionLevel)
                     {
-                        messageContractAttr
-                            .Arguments
+                        messageContractAttr.Arguments
                             .Add(
                                 new CodeAttributeArgument(
                                     "ProtectionLevel",
@@ -1228,8 +1214,7 @@ namespace System.ServiceModel.Description
                     if (message.Body.WrapperName != null)
                     {
                         // use encoded name to specify exactly what goes on the wire.
-                        messageContractAttr
-                            .Arguments
+                        messageContractAttr.Arguments
                             .Add(
                                 new CodeAttributeArgument(
                                     "WrapperName",
@@ -1238,16 +1223,14 @@ namespace System.ServiceModel.Description
                                     )
                                 )
                             );
-                        messageContractAttr
-                            .Arguments
+                        messageContractAttr.Arguments
                             .Add(
                                 new CodeAttributeArgument(
                                     "WrapperNamespace",
                                     new CodePrimitiveExpression(message.Body.WrapperNamespace)
                                 )
                             );
-                        messageContractAttr
-                            .Arguments
+                        messageContractAttr.Arguments
                             .Add(
                                 new CodeAttributeArgument(
                                     "IsWrapped",
@@ -1256,8 +1239,7 @@ namespace System.ServiceModel.Description
                             );
                     }
                     else
-                        messageContractAttr
-                            .Arguments
+                        messageContractAttr.Arguments
                             .Add(
                                 new CodeAttributeArgument(
                                     "IsWrapped",
@@ -1285,8 +1267,7 @@ namespace System.ServiceModel.Description
                 {
                     if (message.XsdTypeName != null && !message.XsdTypeName.IsEmpty)
                     {
-                        contract
-                            .ServiceContractGenerator
+                        contract.ServiceContractGenerator
                             .GeneratedTypedMessages
                             .Add(message, codeTypeReference);
                     }
@@ -1303,8 +1284,7 @@ namespace System.ServiceModel.Description
                         codeTypeReference = null;
                         return false;
                     }
-                    return contract
-                        .ServiceContractGenerator
+                    return contract.ServiceContractGenerator
                         .GeneratedTypedMessages
                         .TryGetValue(message, out codeTypeReference);
                 }
@@ -1324,8 +1304,7 @@ namespace System.ServiceModel.Description
                         CodeParameterDeclarationExpression param =
                             new CodeParameterDeclarationExpression(field.Type, field.Name);
                         otherCtor.Parameters.Add(param);
-                        otherCtor
-                            .Statements
+                        otherCtor.Statements
                             .Add(
                                 new CodeAssignStatement(
                                     new CodeFieldReferenceExpression(
@@ -1441,8 +1420,7 @@ namespace System.ServiceModel.Description
                         );
                     }
                     if (setting.Namespace != defaultNS)
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new ParameterModeException(
                                     SR.GetString(
@@ -1458,8 +1436,7 @@ namespace System.ServiceModel.Description
                 {
                     if (parent.Request != null && parent.Request.HasProtectionLevel)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new ParameterModeException(
                                     SR.GetString(
@@ -1471,8 +1448,7 @@ namespace System.ServiceModel.Description
                     }
                     if (parent.Response != null && parent.Response.HasProtectionLevel)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new ParameterModeException(
                                     SR.GetString(
@@ -1490,8 +1466,7 @@ namespace System.ServiceModel.Description
                         parent.Request.Body.WrapperName == null
                         || (parent.Response != null && parent.Response.Body.WrapperName == null)
                     )
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new ParameterModeException(
                                     SR.GetString(
@@ -1502,8 +1477,7 @@ namespace System.ServiceModel.Description
                             );
 
                     if (!StringEqualOrNull(parent.Request.Body.WrapperNamespace, parent.ContractNS))
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new ParameterModeException(
                                     SR.GetString(
@@ -1523,8 +1497,7 @@ namespace System.ServiceModel.Description
                             StringComparison.Ordinal
                         )
                     )
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new ParameterModeException(
                                     SR.GetString(
@@ -1544,8 +1517,7 @@ namespace System.ServiceModel.Description
                                 parent.ContractNS
                             )
                         )
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
                                     new ParameterModeException(
                                         SR.GetString(
@@ -1564,8 +1536,7 @@ namespace System.ServiceModel.Description
                                 StringComparison.Ordinal
                             )
                         )
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
                                     new ParameterModeException(
                                         SR.GetString(
@@ -1585,8 +1556,7 @@ namespace System.ServiceModel.Description
                     {
                         if (parent.IsEncoded)
                         {
-                            parent
-                                .Context
+                            parent.Context
                                 .Contract
                                 .ServiceContractGenerator
                                 .Errors
@@ -1601,8 +1571,7 @@ namespace System.ServiceModel.Description
                                 );
                         }
                         else
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
                                     new ParameterModeException(
                                         SR.GetString(
@@ -1616,8 +1585,7 @@ namespace System.ServiceModel.Description
                     if (!parent.Oneway && parent.Response.Headers.Count > 0)
                     {
                         if (parent.IsEncoded)
-                            parent
-                                .Context
+                            parent.Context
                                 .Contract
                                 .ServiceContractGenerator
                                 .Errors
@@ -1631,8 +1599,7 @@ namespace System.ServiceModel.Description
                                     )
                                 );
                         else
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
                                     new ParameterModeException(
                                         SR.GetString(
@@ -1736,9 +1703,10 @@ namespace System.ServiceModel.Description
                         object defaultValue = field.GetValue(defaultAttribute);
 
                         if (!object.Equals(fieldValue, defaultValue))
-                            attr.Arguments.Add(
-                                new CodeAttributeArgument(field.Name, GetArgValue(fieldValue))
-                            );
+                            attr.Arguments
+                                .Add(
+                                    new CodeAttributeArgument(field.Name, GetArgValue(fieldValue))
+                                );
                         continue;
                     }
                     PropertyInfo property = member as PropertyInfo;
@@ -1747,9 +1715,13 @@ namespace System.ServiceModel.Description
                         object propertyValue = property.GetValue(attribute, null);
                         object defaultValue = property.GetValue(defaultAttribute, null);
                         if (!object.Equals(propertyValue, defaultValue))
-                            attr.Arguments.Add(
-                                new CodeAttributeArgument(property.Name, GetArgValue(propertyValue))
-                            );
+                            attr.Arguments
+                                .Add(
+                                    new CodeAttributeArgument(
+                                        property.Name,
+                                        GetArgValue(propertyValue)
+                                    )
+                                );
                         continue;
                     }
                 }

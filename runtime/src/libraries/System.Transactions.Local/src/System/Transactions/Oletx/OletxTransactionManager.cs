@@ -474,8 +474,7 @@ internal sealed class OletxTransactionManager
             outcomeEnlistment = new OutcomeEnlistment();
             try
             {
-                _dtcTransactionManager
-                    .ProxyShimFactory
+                _dtcTransactionManager.ProxyShimFactory
                     .BeginTransaction(
                         oletxTimeout,
                         oletxIsoLevel,
@@ -816,8 +815,7 @@ internal sealed class OletxInternalResourceManager
         Hashtable? rmHashTable = null;
         if (OletxTransactionManager._resourceManagerHashTable != null)
         {
-            OletxTransactionManager
-                .ResourceManagerHashTableLock
+            OletxTransactionManager.ResourceManagerHashTableLock
                 .AcquireReaderLock(Timeout.Infinite);
             try
             {

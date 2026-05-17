@@ -440,10 +440,11 @@ namespace System.Web.Http.SelfHost
 
             protected override Task SerializeToStreamAsync(Stream stream, TransportContext context)
             {
-                return Task.Factory.StartNew(() =>
-                {
-                    throw new InvalidOperationException("ThrowBeforeWrite");
-                });
+                return Task.Factory
+                    .StartNew(() =>
+                    {
+                        throw new InvalidOperationException("ThrowBeforeWrite");
+                    });
             }
         }
 
@@ -454,12 +455,13 @@ namespace System.Web.Http.SelfHost
 
             protected override Task SerializeToStreamAsync(Stream stream, TransportContext context)
             {
-                return Task.Factory.StartNew(() =>
-                {
-                    byte[] buffer = Encoding.UTF8.GetBytes("ThrowAfterWrite");
-                    stream.Write(buffer, 0, buffer.Length);
-                    throw new InvalidOperationException("ThrowAfterWrite");
-                });
+                return Task.Factory
+                    .StartNew(() =>
+                    {
+                        byte[] buffer = Encoding.UTF8.GetBytes("ThrowAfterWrite");
+                        stream.Write(buffer, 0, buffer.Length);
+                        throw new InvalidOperationException("ThrowAfterWrite");
+                    });
             }
         }
 
@@ -502,8 +504,7 @@ namespace System.Web.Http.SelfHost
             if (ignoreRoute)
             {
                 config.Routes.IgnoreRoute("Ignore", "{controller}/{action}");
-                config
-                    .Routes
+                config.Routes
                     .IgnoreRoute(
                         "IgnoreWithConstraints",
                         "constraint/values/{id}",

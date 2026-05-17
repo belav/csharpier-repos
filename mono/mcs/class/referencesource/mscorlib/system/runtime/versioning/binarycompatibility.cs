@@ -608,8 +608,7 @@ namespace System.Runtime.Versioning
 #endif //FEATURE_CORECLR
             String targetFrameworkName = AppDomain.CurrentDomain.GetTargetFrameworkName();
 
-            var overrideValue = System
-                .Runtime
+            var overrideValue = System.Runtime
                 .Versioning
                 .CompatibilitySwitch
                 .GetValueInternal("TargetFrameworkMoniker");

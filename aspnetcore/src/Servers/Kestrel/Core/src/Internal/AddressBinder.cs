@@ -182,8 +182,7 @@ internal sealed class AddressBinder
 
             if (context.Logger.IsEnabled(LogLevel.Debug))
             {
-                context
-                    .Logger
+                context.Logger
                     .LogDebug(CoreStrings.BindingToDefaultAddress, Constants.DefaultServerAddress);
             }
         }
@@ -205,8 +204,7 @@ internal sealed class AddressBinder
             var joined = string.Join(", ", _addresses);
             if (context.Logger.IsEnabled(LogLevel.Information))
             {
-                context
-                    .Logger
+                context.Logger
                     .LogInformation(
                         CoreStrings.OverridingWithPreferHostingUrls,
                         nameof(IServerAddressesFeature.PreferHostingUrls),
@@ -238,8 +236,7 @@ internal sealed class AddressBinder
         {
             if (context.Logger.IsEnabled(LogLevel.Warning))
             {
-                context
-                    .Logger
+                context.Logger
                     .LogWarning(
                         CoreStrings.OverridingWithKestrelOptions,
                         string.Join(", ", _originalAddresses)

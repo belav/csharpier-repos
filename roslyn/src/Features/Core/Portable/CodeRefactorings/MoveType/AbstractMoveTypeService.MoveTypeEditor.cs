@@ -198,8 +198,7 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.MoveType
                     .ConfigureAwait(false);
 
                 // add an empty document to solution, so that we'll have options from the right context.
-                var solutionWithNewDocument = projectToBeUpdated
-                    .Solution
+                var solutionWithNewDocument = projectToBeUpdated.Solution
                     .AddDocument(
                         newDocumentId,
                         FileName,
@@ -353,8 +352,7 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.MoveType
                 bool removeTypeInheritance
             )
             {
-                var semanticFacts = State
-                    .SemanticDocument
+                var semanticFacts = State.SemanticDocument
                     .Document
                     .GetRequiredLanguageService<ISemanticFactsService>();
                 var typeChain = State.TypeNode.Ancestors().OfType<TTypeDeclarationSyntax>();
@@ -362,8 +360,7 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.MoveType
                 foreach (var node in typeChain)
                 {
                     var symbol = (INamedTypeSymbol?)
-                        State
-                            .SemanticDocument
+                        State.SemanticDocument
                             .SemanticModel
                             .GetDeclaredSymbol(node, CancellationToken);
                     Contract.ThrowIfNull(symbol);
@@ -405,12 +402,10 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.MoveType
                 TTypeDeclarationSyntax currentTypeNode
             )
             {
-                var syntaxFacts = State
-                    .SemanticDocument
+                var syntaxFacts = State.SemanticDocument
                     .Document
                     .GetRequiredLanguageService<ISyntaxFactsService>();
-                var bannerService = State
-                    .SemanticDocument
+                var bannerService = State.SemanticDocument
                     .Document
                     .GetRequiredLanguageService<IFileBannerFactsService>();
 

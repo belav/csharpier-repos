@@ -19,15 +19,13 @@ namespace System.IdentityModel.Configuration
         {
             if (customTypeElement == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("customTypeElement");
             }
 
             if (customType == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new TypeLoadException(
                             SR.GetString(SR.ID8030, customTypeElement.ElementAsXml.OuterXml)
@@ -97,8 +95,7 @@ namespace System.IdentityModel.Configuration
                 }
                 else if (inner is TargetInvocationException)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ConfigurationErrorsException(
                                 SR.GetString(SR.ID0012, customType.AssemblyQualifiedName),

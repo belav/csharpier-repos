@@ -144,8 +144,7 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
         {
             if (token.TokenType == CorTokenType.mdtMethodSpec)
             {
-                MethodSpecification methodSpec = token
-                    .MetadataReader
+                MethodSpecification methodSpec = token.MetadataReader
                     .GetMethodSpecification((MethodSpecificationHandle)token.Handle);
                 DecodeMethodSpecificationSignatureToDiscoverUsedTypeTokens(
                     methodSpec.Signature,
@@ -156,8 +155,7 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
 
             if (token.TokenType == CorTokenType.mdtMemberRef)
             {
-                MemberReference memberRef = token
-                    .MetadataReader
+                MemberReference memberRef = token.MetadataReader
                     .GetMemberReference((MemberReferenceHandle)token.Handle);
                 EntityHandle owningTypeHandle = memberRef.Parent;
                 TypeDesc owningType = (TypeDesc)
@@ -167,8 +165,7 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             }
             if (token.TokenType == CorTokenType.mdtMethodDef)
             {
-                MethodDefinition methodDef = token
-                    .MetadataReader
+                MethodDefinition methodDef = token.MetadataReader
                     .GetMethodDefinition((MethodDefinitionHandle)token.Handle);
                 TokenResolverProvider rentedProvider = TokenResolverProvider.Rent(
                     this,
@@ -285,8 +282,7 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
 
         private void AddModuleTokenForFieldReference(TypeDesc owningType, ModuleToken token)
         {
-            MemberReference memberRef = token
-                .MetadataReader
+            MemberReference memberRef = token.MetadataReader
                 .GetMemberReference((MemberReferenceHandle)token.Handle);
             EntityHandle owningTypeHandle = memberRef.Parent;
             AddModuleTokenForType(owningType, new ModuleToken(token.Module, owningTypeHandle));
@@ -336,8 +332,7 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             // Collect underlying type tokens for type specifications
             if (token.TokenType == CorTokenType.mdtTypeSpec)
             {
-                TypeSpecification typeSpec = token
-                    .MetadataReader
+                TypeSpecification typeSpec = token.MetadataReader
                     .GetTypeSpecification((TypeSpecificationHandle)token.Handle);
                 TokenResolverProvider rentedProvider = TokenResolverProvider.Rent(
                     this,

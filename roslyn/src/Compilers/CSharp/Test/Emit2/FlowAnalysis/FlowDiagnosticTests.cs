@@ -1598,8 +1598,7 @@ struct Program
 
             comp = CreateCompilation(
                 text,
-                options: TestOptions
-                    .DebugDll
+                options: TestOptions.DebugDll
                     .WithSpecificDiagnosticOptions(ReportStructInitializationWarnings),
                 parseOptions: TestOptions.Regular11
             );

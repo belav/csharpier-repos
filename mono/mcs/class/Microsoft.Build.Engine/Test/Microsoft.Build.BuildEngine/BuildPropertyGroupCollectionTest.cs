@@ -102,8 +102,7 @@ namespace MonoTests.Microsoft.Build.BuildEngine
             project = engine.CreateNewProject();
             project.LoadXml(documentString);
 
-            project
-                .PropertyGroups
+            project.PropertyGroups
                 .CopyTo(
                     new BuildPropertyGroup[][]
                     {

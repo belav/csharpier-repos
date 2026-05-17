@@ -126,8 +126,7 @@ namespace System.IdentityModel
             }
             if (wrappingSecurityKey == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(
                         SR.GetString(SR.CannotFindMatchingCrypto, encryptionMethod)
                     );
@@ -259,8 +258,7 @@ namespace System.IdentityModel
         {
             int fipsAlgorithmPolicy = -1;
             using (
-                RegistryKey fipsAlgorithmPolicyKey = Registry
-                    .LocalMachine
+                RegistryKey fipsAlgorithmPolicyKey = Registry.LocalMachine
                     .OpenSubKey(fipsPolicyRegistryKey, false)
             )
             {
@@ -464,8 +462,7 @@ namespace System.IdentityModel
                     read += actual;
                 }
                 if (totalRead > maxBufferSize - read)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new LimitExceededException(
                                 SR.GetString(SR.BufferQuotaExceededReadingBase64, maxBufferSize)
@@ -508,8 +505,7 @@ namespace System.IdentityModel
             }
             if (unwrappingSecurityKey == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperWarning(
                         new SecurityMessageSerializationException(
                             SR.GetString(SR.CannotFindMatchingCrypto, encryptionMethod)
@@ -549,8 +545,7 @@ namespace System.IdentityModel
             }
 
             if (length < 2)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new FormatException(SR.GetString(SR.InvalidHexString)));
 
             byte[] sArray;
@@ -558,8 +553,7 @@ namespace System.IdentityModel
             if (length >= 3 && hexString[i + 2] == ' ')
             {
                 if (length % 3 != 2)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new FormatException(SR.GetString(SR.InvalidHexString)));
 
                 spaceSkippingMode = true;
@@ -570,8 +564,7 @@ namespace System.IdentityModel
             else
             {
                 if (length % 2 != 0)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new FormatException(SR.GetString(SR.InvalidHexString)));
 
                 spaceSkippingMode = false;
@@ -602,8 +595,7 @@ namespace System.IdentityModel
             else if (val >= 'A' && val <= 'F')
                 return ((val - 'A') + 10);
             else
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new FormatException(SR.GetString(SR.InvalidHexString)));
         }
 
@@ -969,8 +961,7 @@ namespace System.IdentityModel
                     && statusCode != (int)SecurityStatus.Unsupported
                 )
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new SecurityTokenException(
                                 SR.GetString(
@@ -983,8 +974,7 @@ namespace System.IdentityModel
                 // if policyEnforcement is Always we needed to see a TargetName (SPN)
                 if (_policyEnforcement == PolicyEnforcement.Always)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new SecurityTokenException(
                                 SR.GetString(
@@ -1001,8 +991,7 @@ namespace System.IdentityModel
                 }
 
                 // guard against futures, force failure and fix as necessary
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new SecurityTokenException(
                             SR.GetString(SR.InvalidServiceBindingInSspiNegotiationNoServiceBinding)
@@ -1022,8 +1011,7 @@ namespace System.IdentityModel
                     // serviceBinding == null => client is not patched
                     // serviceBinding == "" => SB was not specified
                     if (string.IsNullOrEmpty(serviceBinding))
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new SecurityTokenException(
                                     SR.GetString(
@@ -1039,8 +1027,7 @@ namespace System.IdentityModel
             if (_serviceNameCollection == null || _serviceNameCollection.Count < 1)
             {
                 if (defaultServiceBinding == null)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new SecurityTokenException(
                                 SR.GetString(
@@ -1060,8 +1047,7 @@ namespace System.IdentityModel
                     return;
 
                 if (string.IsNullOrEmpty(serviceBinding))
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new SecurityTokenException(
                                 SR.GetString(
@@ -1071,8 +1057,7 @@ namespace System.IdentityModel
                             )
                         );
                 else
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new SecurityTokenException(
                                 SR.GetString(
@@ -1092,8 +1077,7 @@ namespace System.IdentityModel
             }
 
             if (string.IsNullOrEmpty(serviceBinding))
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new SecurityTokenException(
                             SR.GetString(
@@ -1103,8 +1087,7 @@ namespace System.IdentityModel
                         )
                     );
             else
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new SecurityTokenException(
                             SR.GetString(

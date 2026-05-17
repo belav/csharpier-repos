@@ -68,8 +68,7 @@ namespace ILCompiler.Metadata
             {
                 record.GenericParameters.Capacity = entity.Instantiation.Length;
                 foreach (var p in entity.Instantiation)
-                    record
-                        .GenericParameters
+                    record.GenericParameters
                         .Add(HandleGenericParameter((Cts.GenericParameterDesc)p));
             }
 

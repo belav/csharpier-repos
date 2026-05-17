@@ -167,8 +167,7 @@ namespace System.Linq.Parallel
             if (querySettings.CancellationState.MergedCancellationToken.IsCancellationRequested)
             {
                 if (
-                    querySettings
-                        .CancellationState
+                    querySettings.CancellationState
                         .ExternalCancellationToken
                         .IsCancellationRequested
                 )

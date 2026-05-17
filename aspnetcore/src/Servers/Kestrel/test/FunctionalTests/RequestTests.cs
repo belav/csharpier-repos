@@ -99,8 +99,7 @@ public class RequestTests : LoggedTest
                             var received = 0;
                             while (
                                 (
-                                    received = await context
-                                        .Request
+                                    received = await context.Request
                                         .Body
                                         .ReadAsync(receivedBytes, 0, receivedBytes.Length)
                                 ) > 0
@@ -723,8 +722,7 @@ public class RequestTests : LoggedTest
                     var abortedTcs = new TaskCompletionSource(
                         TaskCreationOptions.RunContinuationsAsynchronously
                     );
-                    context
-                        .RequestAborted
+                    context.RequestAborted
                         .Register(() =>
                         {
                             abortedTcs.SetResult();
@@ -834,11 +832,9 @@ public class RequestTests : LoggedTest
                 {
                     appStartedTcs.SetResult();
 
-                    var connectionLifetimeFeature = context
-                        .Features
+                    var connectionLifetimeFeature = context.Features
                         .Get<IConnectionLifetimeFeature>();
-                    connectionLifetimeFeature
-                        .ConnectionClosed
+                    connectionLifetimeFeature.ConnectionClosed
                         .Register(() => connectionClosedTcs.SetResult());
 
                     return Task.CompletedTask;
@@ -874,11 +870,9 @@ public class RequestTests : LoggedTest
             var server = new TestServer(
                 context =>
                 {
-                    var connectionLifetimeFeature = context
-                        .Features
+                    var connectionLifetimeFeature = context.Features
                         .Get<IConnectionLifetimeFeature>();
-                    connectionLifetimeFeature
-                        .ConnectionClosed
+                    connectionLifetimeFeature.ConnectionClosed
                         .Register(() => connectionClosedTcs.SetResult());
 
                     return Task.CompletedTask;
@@ -919,11 +913,9 @@ public class RequestTests : LoggedTest
             var server = new TestServer(
                 context =>
                 {
-                    var connectionLifetimeFeature = context
-                        .Features
+                    var connectionLifetimeFeature = context.Features
                         .Get<IConnectionLifetimeFeature>();
-                    connectionLifetimeFeature
-                        .ConnectionClosed
+                    connectionLifetimeFeature.ConnectionClosed
                         .Register(() => connectionClosedTcs.SetResult());
 
                     context.Abort();
@@ -1042,8 +1034,7 @@ public class RequestTests : LoggedTest
         Assert.Equal(2, abortedRequestId);
 
         Assert.Single(
-            TestSink
-                .Writes
+            TestSink.Writes
                 .Where(w =>
                     w.LoggerName == "Microsoft.AspNetCore.Server.Kestrel.Connections"
                     && w.EventId == applicationAbortedConnectionId
@@ -1258,14 +1249,12 @@ public class RequestTests : LoggedTest
                         app.Run(async context =>
                         {
                             var connection = context.Connection;
-                            await context
-                                .Response
+                            await context.Response
                                 .WriteAsync(
                                     JsonConvert.SerializeObject(
                                         new
                                         {
-                                            RemoteIPAddress = connection
-                                                .RemoteIpAddress
+                                            RemoteIPAddress = connection.RemoteIpAddress
                                                 ?.ToString(),
                                             RemotePort = connection.RemotePort,
                                             LocalIPAddress = connection.LocalIpAddress?.ToString(),

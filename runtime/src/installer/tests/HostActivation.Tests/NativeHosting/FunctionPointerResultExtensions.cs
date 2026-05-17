@@ -31,8 +31,7 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
             var constraint = assertion.ExecuteFunctionPointer(methodName, callCount);
             if (OperatingSystem.IsWindows())
             {
-                return constraint
-                    .And
+                return constraint.And
                     .HaveStdOutContaining(
                         $"{methodName} delegate threw exception: 0x{Constants.ErrorCode.COMPlusException.ToString("x")}"
                     );
@@ -40,8 +39,7 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
             else
             {
                 // Exception is unhandled by native host on non-Windows systems
-                return constraint
-                    .And
+                return constraint.And
                     .ExitWith(Constants.ErrorCode.SIGABRT)
                     .And
                     .HaveStdErrContaining(

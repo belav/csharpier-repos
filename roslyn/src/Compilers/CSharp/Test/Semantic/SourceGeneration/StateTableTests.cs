@@ -2521,8 +2521,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Semantic.UnitTests.SourceGeneration
             return new DriverStateTable.Builder(
                 c,
                 state,
-                SyntaxStore
-                    .Empty
+                SyntaxStore.Empty
                     .ToBuilder(
                         c,
                         ImmutableArray<SyntaxInputNode>.Empty,

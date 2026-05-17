@@ -59,8 +59,7 @@ namespace System.ServiceModel.Activation
             {
                 fileMapping.SetHandleAsInvalid();
                 fileMapping.Close();
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new Win32Exception(errorCode));
             }
 
@@ -122,8 +121,7 @@ namespace System.ServiceModel.Activation
                     return false;
                 }
 
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new Win32Exception(errorCode));
             }
         }
@@ -137,8 +135,7 @@ namespace System.ServiceModel.Activation
                 return content;
             }
 
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(new Win32Exception(UnsafeNativeMethods.ERROR_FILE_NOT_FOUND));
         }
 
@@ -163,8 +160,7 @@ namespace System.ServiceModel.Activation
                     return false;
                 }
 
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new Win32Exception(errorCode));
             }
 

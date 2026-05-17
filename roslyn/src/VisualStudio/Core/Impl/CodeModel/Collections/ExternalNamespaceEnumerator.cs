@@ -100,8 +100,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Colle
                     {
                         if (namedType.Locations.Any(static l => l.IsInMetadata || l.IsInSource))
                         {
-                            yield return state
-                                .CodeModelService
+                            yield return state.CodeModelService
                                 .CreateCodeType(state, projectId, namedType);
                         }
                     }

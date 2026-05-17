@@ -151,8 +151,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
                         var mid = (low + high) / 2;
 
                         if (
-                            StringComparer
-                                .OrdinalIgnoreCase
+                            StringComparer.OrdinalIgnoreCase
                                 .Compare(
                                     document.HintName,
                                     ((SourceGeneratedFileItem)_items[mid]).HintName
@@ -283,8 +282,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
                         _asyncListener,
                         cancellationToken
                     );
-                    _resettableDelay
-                        .Task
+                    _resettableDelay.Task
                         .ContinueWith(
                             _ =>
                             {

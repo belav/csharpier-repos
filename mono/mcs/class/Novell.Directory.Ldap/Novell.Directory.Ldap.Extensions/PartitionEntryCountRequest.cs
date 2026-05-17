@@ -68,15 +68,13 @@ namespace Novell.Directory.Ldap.Extensions
             {
                 LdapExtendedResponse.register(
                     ReplicationConstants.NAMING_CONTEXT_COUNT_RES,
-                    System
-                        .Type
+                    System.Type
                         .GetType("Novell.Directory.Ldap.Extensions.PartitionEntryCountResponse")
                 );
             }
             catch (System.Exception e)
             {
-                System
-                    .Console
+                System.Console
                     .Error
                     .WriteLine("Could not register Extended Response -" + " Class not found");
             }

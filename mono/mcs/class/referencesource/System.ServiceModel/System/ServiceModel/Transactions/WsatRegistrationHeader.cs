@@ -131,8 +131,7 @@ namespace System.ServiceModel.Transactions
                 catch (XmlException e)
                 {
                     DiagnosticUtility.TraceHandledException(e, TraceEventType.Error);
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new InvalidEnlistmentHeaderException(e.Message, e));
                 }
             }
@@ -162,8 +161,7 @@ namespace System.ServiceModel.Transactions
             Guid transactionId = reader.ReadElementContentAsGuid();
             if (transactionId == Guid.Empty)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new XmlException(SR.GetString(SR.InvalidRegistrationHeaderTransactionId))
                     );
@@ -186,8 +184,7 @@ namespace System.ServiceModel.Transactions
                     || !Uri.TryCreate(contextId, UriKind.Absolute, out uri)
                 )
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new XmlException(SR.GetString(SR.InvalidRegistrationHeaderIdentifier))
                         );
@@ -210,8 +207,7 @@ namespace System.ServiceModel.Transactions
                 tokenId = reader.ReadElementContentAsString().Trim();
                 if (tokenId.Length == 0)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new XmlException(SR.GetString(SR.InvalidRegistrationHeaderTokenId))
                         );

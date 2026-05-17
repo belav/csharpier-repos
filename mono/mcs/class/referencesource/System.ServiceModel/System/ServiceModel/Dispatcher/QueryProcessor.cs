@@ -455,16 +455,13 @@ namespace System.ServiceModel.Dispatcher
                 {
                     if (null != this.message)
                     {
-                        this.contextNode = this.matcher.CreateMessageNavigator(
-                            this.message,
-                            this.matchMessageBody
-                        );
+                        this.contextNode = this.matcher
+                            .CreateMessageNavigator(this.message, this.matchMessageBody);
                     }
                     else
                     {
 #pragma warning suppress 56503 // Microsoft, property is more readable for this
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperCritical(
                                 new QueryProcessingException(QueryProcessingError.Unexpected)
                             );

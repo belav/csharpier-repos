@@ -1238,8 +1238,7 @@ namespace System
                     permSet.Assert();
 
                     using (
-                        RegistryKey reg = Registry
-                            .LocalMachine
+                        RegistryKey reg = Registry.LocalMachine
                             .OpenSubKey(c_timeZonesRegistryHive,
 #if FEATURE_MACL
                                 RegistryKeyPermissionCheck.Default,
@@ -1852,8 +1851,7 @@ namespace System
                 permSet.Assert();
 
                 using (
-                    RegistryKey key = Registry
-                        .LocalMachine
+                    RegistryKey key = Registry.LocalMachine
                         .OpenSubKey(c_timeZonesRegistryHive,
 #if FEATURE_MACL
                             RegistryKeyPermissionCheck.Default,
@@ -3021,8 +3019,7 @@ namespace System
             try
             {
                 using (
-                    RegistryKey dynamicKey = Registry
-                        .LocalMachine
+                    RegistryKey dynamicKey = Registry.LocalMachine
                         .OpenSubKey(
                             String.Format(
                                 CultureInfo.InvariantCulture,
@@ -3267,8 +3264,7 @@ namespace System
                 permSet.Assert();
 
                 using (
-                    RegistryKey key = Registry
-                        .LocalMachine
+                    RegistryKey key = Registry.LocalMachine
                         .OpenSubKey(
                             String.Format(
                                 CultureInfo.InvariantCulture,
@@ -3649,8 +3645,7 @@ namespace System
                 permSet.Assert();
 
                 using (
-                    RegistryKey key = Registry
-                        .LocalMachine
+                    RegistryKey key = Registry.LocalMachine
                         .OpenSubKey(
                             String.Format(
                                 CultureInfo.InvariantCulture,
@@ -4712,19 +4707,15 @@ namespace System
                         serializedText.Append(lhs);
                         serializedText.Append(
                             SerializeSubstitute(
-                                rule.DateStart.ToString(
-                                    dateTimeFormat,
-                                    DateTimeFormatInfo.InvariantInfo
-                                )
+                                rule.DateStart
+                                    .ToString(dateTimeFormat, DateTimeFormatInfo.InvariantInfo)
                             )
                         );
                         serializedText.Append(sep);
                         serializedText.Append(
                             SerializeSubstitute(
-                                rule.DateEnd.ToString(
-                                    dateTimeFormat,
-                                    DateTimeFormatInfo.InvariantInfo
-                                )
+                                rule.DateEnd
+                                    .ToString(dateTimeFormat, DateTimeFormatInfo.InvariantInfo)
                             )
                         );
                         serializedText.Append(sep);
@@ -4857,10 +4848,8 @@ namespace System
                 {
                     serializedText.Append(
                         SerializeSubstitute(
-                            time.TimeOfDay.ToString(
-                                timeOfDayFormat,
-                                DateTimeFormatInfo.InvariantInfo
-                            )
+                            time.TimeOfDay
+                                .ToString(timeOfDayFormat, DateTimeFormatInfo.InvariantInfo)
                         )
                     );
                     serializedText.Append(sep);
@@ -4877,10 +4866,8 @@ namespace System
                 {
                     serializedText.Append(
                         SerializeSubstitute(
-                            time.TimeOfDay.ToString(
-                                timeOfDayFormat,
-                                DateTimeFormatInfo.InvariantInfo
-                            )
+                            time.TimeOfDay
+                                .ToString(timeOfDayFormat, DateTimeFormatInfo.InvariantInfo)
                         )
                     );
                     serializedText.Append(sep);

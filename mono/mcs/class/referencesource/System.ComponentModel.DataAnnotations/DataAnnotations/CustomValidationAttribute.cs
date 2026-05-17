@@ -154,8 +154,7 @@ namespace System.ComponentModel.DataAnnotations
                 return new ValidationResult(
                     String.Format(
                         CultureInfo.CurrentCulture,
-                        Resources
-                            .DataAnnotationsResources
+                        Resources.DataAnnotationsResources
                             .CustomValidationAttribute_Type_Conversion_Failed,
                         (value != null ? value.GetType().ToString() : "null"),
                         this._valuesType,
@@ -264,10 +263,8 @@ namespace System.ComponentModel.DataAnnotations
             }
 
             // Named method must be public and static
-            MethodInfo methodInfo = this._validatorType.GetMethod(
-                this._method,
-                BindingFlags.Public | BindingFlags.Static
-            );
+            MethodInfo methodInfo = this._validatorType
+                .GetMethod(this._method, BindingFlags.Public | BindingFlags.Static);
             if (methodInfo == null)
             {
                 return String.Format(

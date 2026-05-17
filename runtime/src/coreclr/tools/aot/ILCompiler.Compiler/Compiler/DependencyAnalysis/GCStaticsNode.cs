@@ -87,8 +87,7 @@ namespace ILCompiler.DependencyAnalysis
             {
                 new CombinedDependencyListEntry(
                     factory.NecessaryTypeSymbol(_type),
-                    factory
-                        .NativeLayout
+                    factory.NativeLayout
                         .TemplateTypeLayout(_type.ConvertToCanonForm(CanonicalFormKind.Specific)),
                     "Keeping track of template-constructable type static bases"
                 ),

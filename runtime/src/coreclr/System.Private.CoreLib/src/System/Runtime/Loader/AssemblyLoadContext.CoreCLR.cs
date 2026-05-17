@@ -326,8 +326,7 @@ namespace System.Runtime.Loader
             ActivityTracker.Instance.Enable();
 
             // Don't use trace to TPL event source in ActivityTracker - that event source is a singleton and its instantiation may have triggered the load.
-            ActivityTracker
-                .Instance
+            ActivityTracker.Instance
                 .OnStart(
                     NativeRuntimeEventSource.Log.Name,
                     AssemblyLoadName,
@@ -345,8 +344,7 @@ namespace System.Runtime.Loader
         private static void StopAssemblyLoad(ref Guid activityId)
         {
             // Don't use trace to TPL event source in ActivityTracker - that event source is a singleton and its instantiation may have triggered the load.
-            ActivityTracker
-                .Instance
+            ActivityTracker.Instance
                 .OnStop(
                     NativeRuntimeEventSource.Log.Name,
                     AssemblyLoadName,

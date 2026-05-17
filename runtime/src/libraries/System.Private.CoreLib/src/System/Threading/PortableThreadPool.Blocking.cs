@@ -160,8 +160,7 @@ namespace System.Threading
                 _numThreadsAddedDueToBlocking -= toSubtract;
                 numThreadsGoal -= toSubtract;
                 _separated.counts.InterlockedSetNumThreadsGoal(numThreadsGoal);
-                HillClimbing
-                    .ThreadPoolHillClimber
+                HillClimbing.ThreadPoolHillClimber
                     .ForceChange(
                         numThreadsGoal,
                         HillClimbing.StateOrTransition.CooperativeBlocking
@@ -256,8 +255,7 @@ namespace System.Threading
 
                 _numThreadsAddedDueToBlocking += (short)(newNumThreadsGoal - numThreadsGoal);
                 counts = _separated.counts.InterlockedSetNumThreadsGoal(newNumThreadsGoal);
-                HillClimbing
-                    .ThreadPoolHillClimber
+                HillClimbing.ThreadPoolHillClimber
                     .ForceChange(
                         newNumThreadsGoal,
                         HillClimbing.StateOrTransition.CooperativeBlocking

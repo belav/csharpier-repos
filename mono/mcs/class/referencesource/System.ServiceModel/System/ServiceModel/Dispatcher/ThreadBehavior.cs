@@ -132,8 +132,7 @@ namespace System.ServiceModel.Dispatcher
                     SR.SFxMultipleCallbackFromSynchronizationContext,
                     context.GetType().ToString()
                 );
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new InvalidOperationException(text));
             }
         }

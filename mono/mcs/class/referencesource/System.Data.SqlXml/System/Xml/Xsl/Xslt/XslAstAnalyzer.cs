@@ -1373,8 +1373,7 @@ namespace System.Xml.Xsl.Xslt
                         funcFlags = XslFlags.AnyType;
                         if (compiler.Settings.EnableScript && ns != null)
                         {
-                            XmlExtensionFunction scrFunc = compiler
-                                .Scripts
+                            XmlExtensionFunction scrFunc = compiler.Scripts
                                 .ResolveFunction(name, ns, args.Count, new NullErrorHelper());
                             if (scrFunc != null)
                             {

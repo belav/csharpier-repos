@@ -466,8 +466,7 @@ namespace System.IO.Compression
                 [SecurityCritical]
                 private static DT CreateDelegate<DT>(String entryPointName)
                 {
-                    IntPtr entryPoint = ZLibNative
-                        .NativeMethods
+                    IntPtr entryPoint = ZLibNative.NativeMethods
                         .GetProcAddress(ZLibStreamHandle.zlibLibraryHandle, entryPointName);
 
                     if (IntPtr.Zero == entryPoint)

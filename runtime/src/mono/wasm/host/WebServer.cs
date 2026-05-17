@@ -90,8 +90,7 @@ public static class ServerURLsProvider
         string? debugPath = null
     )
     {
-        applicationLifetime
-            .ApplicationStarted
+        applicationLifetime.ApplicationStarted
             .Register(() =>
             {
                 TaskCompletionSource<ServerURLs> tcs = realUrlsAvailableTcs;

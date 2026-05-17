@@ -384,8 +384,7 @@ namespace System.Linq.Expressions
 #if SILVERLIGHT
 #if !CLR2
         // Quirks mode for Expression Trees as they existed in Silverlight 2 and 3
-        internal readonly static bool SilverlightQuirks = System
-            .CompatibilitySwitches
+        internal readonly static bool SilverlightQuirks = System.CompatibilitySwitches
             .IsAppEarlierThanSilverlight4;
 #else
         internal readonly static bool SilverlightQuirks = true;

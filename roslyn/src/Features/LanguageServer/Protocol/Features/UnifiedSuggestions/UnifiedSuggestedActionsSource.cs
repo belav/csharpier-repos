@@ -579,8 +579,7 @@ namespace Microsoft.CodeAnalysis.UnifiedSuggestions
                         group.ToImmutableArray(),
                         title: null,
                         priority,
-                        applicableToSpan: groupKey
-                            .Item1
+                        applicableToSpan: groupKey.Item1
                             .DataLocation
                             .UnmappedFileSpan
                             .GetClampedTextSpan(text)

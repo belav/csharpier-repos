@@ -358,8 +358,7 @@ namespace System.Windows.Forms
         )
         {
             if (
-                ThemeEngine
-                    .Current
+                ThemeEngine.Current
                     .DataGridViewColumnHeaderCellDrawBorder(this, graphics, cellBounds)
             )
                 return;
@@ -441,8 +440,7 @@ namespace System.Windows.Forms
         )
         {
             if (
-                ThemeEngine
-                    .Current
+                ThemeEngine.Current
                     .DataGridViewColumnHeaderCellDrawBackground(this, graphics, cellBounds)
             )
                 return;

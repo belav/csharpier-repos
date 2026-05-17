@@ -350,8 +350,7 @@ public class Navigation : PropertyBase, IMutableNavigation, IConventionNavigatio
         IConventionAnnotation? annotation,
         IConventionAnnotation? oldAnnotation
     ) =>
-        DeclaringType
-            .Model
+        DeclaringType.Model
             .ConventionDispatcher
             .OnNavigationAnnotationChanged(
                 ForeignKey.Builder,

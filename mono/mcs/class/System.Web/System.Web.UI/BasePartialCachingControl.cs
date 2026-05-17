@@ -208,8 +208,7 @@ namespace System.Web.UI
             DateTime utcExpire = DateTime.UtcNow.AddSeconds(duration);
             provider.Set(cacheKey, text, utcExpire);
             ;
-            context
-                .InternalCache
+            context.InternalCache
                 .Insert(
                     cacheKey,
                     text,
@@ -276,8 +275,7 @@ namespace System.Web.UI
 
             if (varyby_custom != null)
             {
-                string val = context
-                    .ApplicationInstance
+                string val = context.ApplicationInstance
                     .GetVaryByCustomString(context, varyby_custom);
                 builder.Append("VC:");
                 builder.Append(varyby_custom);

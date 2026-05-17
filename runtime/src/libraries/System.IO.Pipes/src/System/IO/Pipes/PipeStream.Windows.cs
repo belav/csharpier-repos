@@ -360,8 +360,7 @@ namespace System.IO.Pipes
             {
                 int bytesRead = 0;
                 if (
-                    Interop
-                        .Kernel32
+                    Interop.Kernel32
                         .ReadFile(_handle!, p, buffer.Length, out bytesRead, IntPtr.Zero) != 0
                 )
                 {
@@ -406,8 +405,7 @@ namespace System.IO.Pipes
 
                 // Queue an async ReadFile operation.
                 if (
-                    Interop
-                        .Kernel32
+                    Interop.Kernel32
                         .ReadFile(
                             _handle!,
                             (byte*)vts._memoryHandle.Pointer,
@@ -474,8 +472,7 @@ namespace System.IO.Pipes
             {
                 int bytesWritten = 0;
                 if (
-                    Interop
-                        .Kernel32
+                    Interop.Kernel32
                         .WriteFile(_handle!, p, buffer.Length, out bytesWritten, IntPtr.Zero) == 0
                 )
                 {
@@ -501,8 +498,7 @@ namespace System.IO.Pipes
 
                 // Queue an async WriteFile operation.
                 if (
-                    Interop
-                        .Kernel32
+                    Interop.Kernel32
                         .WriteFile(
                             _handle!,
                             (byte*)vts._memoryHandle.Pointer,
@@ -675,8 +671,7 @@ namespace System.IO.Pipes
                 {
                     int pipeReadType = (int)value << 1;
                     if (
-                        !Interop
-                            .Kernel32
+                        !Interop.Kernel32
                             .SetNamedPipeHandleState(
                                 _handle!,
                                 &pipeReadType,
@@ -739,8 +734,7 @@ namespace System.IO.Pipes
         {
             uint flags;
             if (
-                !Interop
-                    .Kernel32
+                !Interop.Kernel32
                     .GetNamedPipeHandleStateW(SafePipeHandle, &flags, null, null, null, null, 0)
             )
             {

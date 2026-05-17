@@ -126,8 +126,7 @@ namespace System.Security.Cryptography.Asn1
             else if (tag.HasSameClassAndValue(Asn1Tag.Sequence))
             {
                 System.Security.Cryptography.Asn1.AlgorithmIdentifierAsn tmpOtherSource;
-                System
-                    .Security
+                System.Security
                     .Cryptography
                     .Asn1
                     .AlgorithmIdentifierAsn

@@ -83,8 +83,7 @@ namespace ILCompiler.DependencyAnalysis
                 {
                     TypeDesc owningType = owningMethodDefinition.OwningType;
                     Debug.Assert(owningType.Instantiation.Length == TypeInstantiation.Length);
-                    concreteMethod = owningType
-                        .Context
+                    concreteMethod = owningType.Context
                         .GetMethodForInstantiatedType(
                             owningMethodDefinition,
                             ((MetadataType)owningType).MakeInstantiatedType(TypeInstantiation)
@@ -596,8 +595,7 @@ namespace ILCompiler.DependencyAnalysis
             bool getUnboxingStubNode =
                 _isUnboxingThunk && !canonMethod.IsCanonicalMethod(CanonicalFormKind.Universal);
 
-            return factory
-                .NativeLayout
+            return factory.NativeLayout
                 .MethodEntrypointDictionarySlot(
                     _method,
                     _isUnboxingThunk,
@@ -1151,8 +1149,7 @@ namespace ILCompiler.DependencyAnalysis
 
         public override NativeLayoutVertexNode TemplateDictionaryNode(NodeFactory factory)
         {
-            return factory
-                .NativeLayout
+            return factory.NativeLayout
                 .ConstrainedMethodUse(_constrainedMethod, _constraintType, _directCall);
         }
 

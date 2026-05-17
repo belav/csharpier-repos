@@ -175,8 +175,7 @@ namespace Microsoft.CodeAnalysis.UnitTests
             string methodName
         )
         {
-            var type = typeof(AnalyzerAssemblyLoaderTests)
-                .Assembly
+            var type = typeof(AnalyzerAssemblyLoaderTests).Assembly
                 .GetType(typeName, throwOnError: false)!;
             var member = type.GetMethod(
                 methodName,
@@ -517,8 +516,7 @@ Delta: Gamma: Beta: Test B
 
             // The assemblies in the LoadFrom context are the assemblies loaded from
             // analyzer dependencies.
-            loadedAssemblies = AppDomain
-                .CurrentDomain
+            loadedAssemblies = AppDomain.CurrentDomain
                 .GetAssemblies()
                 .Where(x => isInLoadFromContext(loader, x));
 
@@ -645,8 +643,7 @@ Delta: Gamma: Beta: Test B
                     var tempDir = temp.CreateDirectory();
 
                     var externalAccessRazorPath =
-                        typeof(Microsoft.CodeAnalysis.ExternalAccess.RazorCompiler.GeneratorExtensions)
-                            .Assembly
+                        typeof(Microsoft.CodeAnalysis.ExternalAccess.RazorCompiler.GeneratorExtensions).Assembly
                             .Location;
                     var alternatePath = tempDir
                         .CreateDirectory("a")
@@ -684,8 +681,7 @@ Delta: Gamma: Beta: Test B
                     var tempDir = temp.CreateDirectory();
 
                     var externalAccessRazorPath =
-                        typeof(Microsoft.CodeAnalysis.ExternalAccess.RazorCompiler.GeneratorExtensions)
-                            .Assembly
+                        typeof(Microsoft.CodeAnalysis.ExternalAccess.RazorCompiler.GeneratorExtensions).Assembly
                             .Location;
                     var dir = tempDir.CreateDirectory("a");
                     var alternatePath = dir.CreateFile(
@@ -1515,8 +1511,7 @@ Delta.2: Test D2
 
                     var copiedAssembly = loader.LoadFromPath(destFile);
                     Assert.Single(
-                        AppDomain
-                            .CurrentDomain
+                        AppDomain.CurrentDomain
                             .GetAssemblies()
                             .Where(x => x.FullName == assembly.FullName)
                     );

@@ -59,8 +59,7 @@ namespace System.Web.Http.Filters
         [Fact]
         public void ActionContext_Property()
         {
-            Assert
-                .Reflection
+            Assert.Reflection
                 .Property<HttpActionExecutedContext, HttpActionContext>(
                     instance: new HttpActionExecutedContext(),
                     propertyGetter: aec => aec.ActionContext,
@@ -73,8 +72,7 @@ namespace System.Web.Http.Filters
         [Fact]
         public void Exception_Property()
         {
-            Assert
-                .Reflection
+            Assert.Reflection
                 .Property<HttpActionExecutedContext, Exception>(
                     instance: new HttpActionExecutedContext(),
                     propertyGetter: aec => aec.Exception,
@@ -87,8 +85,7 @@ namespace System.Web.Http.Filters
         [Fact]
         public void Result_Property()
         {
-            Assert
-                .Reflection
+            Assert.Reflection
                 .Property<HttpActionExecutedContext, HttpResponseMessage>(
                     instance: new HttpActionExecutedContext(
                         actionContext: ContextUtil.CreateActionContext(),

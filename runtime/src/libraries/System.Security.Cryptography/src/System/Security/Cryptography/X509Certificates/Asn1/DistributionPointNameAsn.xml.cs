@@ -154,8 +154,7 @@ namespace System.Security.Cryptography.X509Certificates.Asn1
 
                     while (collectionReader.HasData)
                     {
-                        System
-                            .Security
+                        System.Security
                             .Cryptography
                             .Asn1
                             .GeneralNameAsn

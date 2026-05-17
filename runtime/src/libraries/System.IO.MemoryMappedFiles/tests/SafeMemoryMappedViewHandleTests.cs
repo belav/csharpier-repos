@@ -22,8 +22,7 @@ namespace System.IO.MemoryMappedFiles.Tests
             const int BUF_SIZE = 256;
 
             Interop.Kernel32.SECURITY_ATTRIBUTES secAttrs = default;
-            using SafeMemoryMappedFileHandle fileHandle = Interop
-                .Kernel32
+            using SafeMemoryMappedFileHandle fileHandle = Interop.Kernel32
                 .CreateFileMapping(
                     new IntPtr(-1),
                     ref secAttrs,
@@ -33,8 +32,7 @@ namespace System.IO.MemoryMappedFiles.Tests
                     CreateUniqueMapName()
                 );
 
-            using SafeMemoryMappedViewHandle handle = Interop
-                .Kernel32
+            using SafeMemoryMappedViewHandle handle = Interop.Kernel32
                 .MapViewOfFile(
                     fileHandle,
                     Interop.Kernel32.FileMapOptions.FILE_MAP_READ,

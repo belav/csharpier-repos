@@ -76,8 +76,7 @@ namespace DbLinq.MySql
             var members = new Dictionary<string, MemberInfo>();
             var tableName = table.Context.Mapping.GetTable(typeof(T)).TableName;
             foreach (
-                var dataMember in table
-                    .Context
+                var dataMember in table.Context
                     .Mapping
                     .GetTable(typeof(T))
                     .RowType

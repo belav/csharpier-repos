@@ -212,8 +212,7 @@ namespace System.Web.Configuration
                         isRootApp = (vPath == appPathVirtualPath);
                     }
 
-                    configFileMap
-                        .VirtualDirectories
+                    configFileMap.VirtualDirectories
                         .Add(
                             vPathString,
                             new VirtualDirectoryMapping(

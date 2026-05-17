@@ -240,9 +240,9 @@ namespace System.Reflection.Runtime.General
         {
             RuntimeTypeInfo contextTypeInfo =
                 declaringTypeHandle.GetRuntimeTypeInfoForRuntimeTypeHandle();
-            NativeFormatRuntimeNamedTypeInfo definingTypeInfo = contextTypeInfo
-                .AnchoringTypeDefinitionForDeclaredMembers
-                .CastToNativeFormatRuntimeNamedTypeInfo();
+            NativeFormatRuntimeNamedTypeInfo definingTypeInfo =
+                contextTypeInfo.AnchoringTypeDefinitionForDeclaredMembers
+                    .CastToNativeFormatRuntimeNamedTypeInfo();
 
             // RuntimeFieldHandles always yield FieldInfo's whose ReflectedType equals the DeclaringType.
             RuntimeTypeInfo reflectedType = contextTypeInfo;
@@ -582,8 +582,7 @@ namespace System.Reflection.Runtime.General
             if (info != null)
                 return info;
 
-            ReflectionCoreExecution
-                .ExecutionEnvironment
+            ReflectionCoreExecution.ExecutionEnvironment
                 .GetEnumInfo(
                     runtimeType.TypeHandle,
                     out string[] unsortedNames,
@@ -639,8 +638,7 @@ namespace System.Reflection.Runtime.General
             RuntimeMethodInfo invokeMethod = runtimeType.GetInvokeMethod();
 
             MethodBaseInvoker methodInvoker = invokeMethod.MethodInvoker;
-            IntPtr invokeThunk = ReflectionCoreExecution
-                .ExecutionEnvironment
+            IntPtr invokeThunk = ReflectionCoreExecution.ExecutionEnvironment
                 .GetDynamicInvokeThunk(methodInvoker);
 
             info = new DynamicInvokeInfo(invokeMethod, invokeThunk);
@@ -657,8 +655,7 @@ namespace System.Reflection.Runtime.General
             IntPtr methodStartAddress
         )
         {
-            return ReflectionCoreExecution
-                .ExecutionEnvironment
+            return ReflectionCoreExecution.ExecutionEnvironment
                 .GetMethodBaseFromStartAddressIfAvailable(methodStartAddress);
         }
 
@@ -669,8 +666,7 @@ namespace System.Reflection.Runtime.General
 
         public sealed override void RunClassConstructor(RuntimeTypeHandle typeHandle)
         {
-            IntPtr pStaticClassConstructionContext = ReflectionCoreExecution
-                .ExecutionEnvironment
+            IntPtr pStaticClassConstructionContext = ReflectionCoreExecution.ExecutionEnvironment
                 .GetStaticClassConstructionContext(typeHandle);
             if (pStaticClassConstructionContext != IntPtr.Zero)
             {

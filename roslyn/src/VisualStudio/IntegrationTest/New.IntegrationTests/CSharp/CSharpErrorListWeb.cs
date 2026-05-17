@@ -29,18 +29,15 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
     var x = "Hello"
 }
 """;
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .OpenFileAsync(ProjectName, @"Pages\\Index.razor", HangMitigatingCancellationToken);
             await TestServices.Editor.SetTextAsync(source, HangMitigatingCancellationToken);
             await TestServices.SolutionExplorer.SaveAllAsync(HangMitigatingCancellationToken);
             await TestServices.SolutionExplorer.CloseActiveWindow(HangMitigatingCancellationToken);
 
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .BuildSolutionAndWaitAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .Workspace
+            await TestServices.Workspace
                 .WaitForAllAsyncOperationsAsync(
                     [
                         FeatureAttribute.Workspace,
@@ -54,8 +51,7 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
 
             await TestServices.ErrorList.ShowErrorListAsync(HangMitigatingCancellationToken);
 
-            var actualContents = await TestServices
-                .ErrorList
+            var actualContents = await TestServices.ErrorList
                 .GetErrorsAsync(HangMitigatingCancellationToken);
 
             string[] expectedContents =

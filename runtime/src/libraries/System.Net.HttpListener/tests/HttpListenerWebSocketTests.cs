@@ -53,8 +53,7 @@ namespace System.Net.Tests
             const string Text = "Hello Web Socket";
             byte[] sentBytes = Encoding.ASCII.GetBytes(Text);
 
-            await context
-                .WebSocket
+            await context.WebSocket
                 .SendAsync(
                     new ArraySegment<byte>(sentBytes),
                     messageType,
@@ -83,8 +82,7 @@ namespace System.Net.Tests
             await AssertExtensions.ThrowsAsync<ArgumentNullException>(
                 "buffer.Array",
                 () =>
-                    context
-                        .WebSocket
+                    context.WebSocket
                         .SendAsync(
                             new ArraySegment<byte>(),
                             WebSocketMessageType.Text,
@@ -105,8 +103,7 @@ namespace System.Net.Tests
             await AssertExtensions.ThrowsAsync<ArgumentException>(
                 "messageType",
                 () =>
-                    context
-                        .WebSocket
+                    context.WebSocket
                         .SendAsync(
                             new ArraySegment<byte>(),
                             messageType,
@@ -123,8 +120,7 @@ namespace System.Net.Tests
             context.WebSocket.Dispose();
 
             await Assert.ThrowsAsync<ObjectDisposedException>(() =>
-                context
-                    .WebSocket
+                context.WebSocket
                     .SendAsync(
                         new ArraySegment<byte>(new byte[10]),
                         WebSocketMessageType.Text,
@@ -226,8 +222,7 @@ namespace System.Net.Tests
             await AssertExtensions.ThrowsAsync<ArgumentNullException>(
                 "buffer.Array",
                 () =>
-                    context
-                        .WebSocket
+                    context.WebSocket
                         .ReceiveAsync(new ArraySegment<byte>(), new CancellationToken())
             );
         }
@@ -240,8 +235,7 @@ namespace System.Net.Tests
 
             context.WebSocket.Dispose();
             await Assert.ThrowsAsync<ObjectDisposedException>(() =>
-                context
-                    .WebSocket
+                context.WebSocket
                     .ReceiveAsync(new ArraySegment<byte>(new byte[10]), new CancellationToken())
             );
         }
@@ -281,8 +275,7 @@ namespace System.Net.Tests
             await ClientConnectTask;
 
             // Close the server output.
-            Task serverCloseTask = context
-                .WebSocket
+            Task serverCloseTask = context.WebSocket
                 .CloseOutputAsync(status, statusDescription, new CancellationToken());
             byte[] receivedClientBytes = new byte[10];
             Task<WebSocketReceiveResult> clientReceiveTask = Client.ReceiveAsync(
@@ -306,8 +299,7 @@ namespace System.Net.Tests
 
             // Trying to send if the socket initiated a close should fail.
             await Assert.ThrowsAsync<WebSocketException>(() =>
-                context
-                    .WebSocket
+                context.WebSocket
                     .SendAsync(
                         new ArraySegment<byte>(new byte[10]),
                         WebSocketMessageType.Binary,
@@ -323,8 +315,7 @@ namespace System.Net.Tests
                 new CancellationToken()
             );
             byte[] receivedServerBytes = new byte[10];
-            Task<WebSocketReceiveResult> serverReceiveTask = context
-                .WebSocket
+            Task<WebSocketReceiveResult> serverReceiveTask = context.WebSocket
                 .ReceiveAsync(new ArraySegment<byte>(receivedServerBytes), new CancellationToken());
 
             await Task.WhenAll(clientCloseTask, serverReceiveTask);
@@ -342,16 +333,14 @@ namespace System.Net.Tests
 
             // Trying to read or write if closed should fail.
             await Assert.ThrowsAsync<WebSocketException>(() =>
-                context
-                    .WebSocket
+                context.WebSocket
                     .ReceiveAsync(
                         new ArraySegment<byte>(receivedServerBytes),
                         new CancellationToken()
                     )
             );
             await Assert.ThrowsAsync<WebSocketException>(() =>
-                context
-                    .WebSocket
+                context.WebSocket
                     .SendAsync(
                         new ArraySegment<byte>(receivedServerBytes),
                         WebSocketMessageType.Binary,
@@ -361,11 +350,9 @@ namespace System.Net.Tests
             );
 
             // Trying to close again should be a nop.
-            await context
-                .WebSocket
+            await context.WebSocket
                 .CloseAsync(WebSocketCloseStatus.Empty, null, new CancellationToken());
-            await context
-                .WebSocket
+            await context.WebSocket
                 .CloseOutputAsync(WebSocketCloseStatus.Empty, null, new CancellationToken());
         }
 
@@ -394,8 +381,7 @@ namespace System.Net.Tests
                 new CancellationToken()
             );
             byte[] receivedServerBytes = new byte[10];
-            Task<WebSocketReceiveResult> serverReceiveTask = context
-                .WebSocket
+            Task<WebSocketReceiveResult> serverReceiveTask = context.WebSocket
                 .ReceiveAsync(new ArraySegment<byte>(receivedServerBytes), new CancellationToken());
 
             await Task.WhenAll(clientCloseTask, serverReceiveTask);
@@ -413,8 +399,7 @@ namespace System.Net.Tests
 
             // Trying to read if the server received a close handshake should fail.
             await Assert.ThrowsAsync<WebSocketException>(() =>
-                context
-                    .WebSocket
+                context.WebSocket
                     .ReceiveAsync(
                         new ArraySegment<byte>(receivedServerBytes),
                         new CancellationToken()
@@ -422,8 +407,7 @@ namespace System.Net.Tests
             );
 
             // Close the server.
-            Task serverCloseTask = context
-                .WebSocket
+            Task serverCloseTask = context.WebSocket
                 .CloseAsync(status, statusDescription, new CancellationToken());
 
             byte[] receivedClientBytes = new byte[10];
@@ -447,16 +431,14 @@ namespace System.Net.Tests
 
             // Trying to read or write if closed should fail.
             await Assert.ThrowsAsync<WebSocketException>(() =>
-                context
-                    .WebSocket
+                context.WebSocket
                     .ReceiveAsync(
                         new ArraySegment<byte>(receivedServerBytes),
                         new CancellationToken()
                     )
             );
             await Assert.ThrowsAsync<WebSocketException>(() =>
-                context
-                    .WebSocket
+                context.WebSocket
                     .SendAsync(
                         new ArraySegment<byte>(receivedServerBytes),
                         WebSocketMessageType.Binary,
@@ -466,11 +448,9 @@ namespace System.Net.Tests
             );
 
             // Trying to close again should be a nop.
-            await context
-                .WebSocket
+            await context.WebSocket
                 .CloseAsync(WebSocketCloseStatus.Empty, null, new CancellationToken());
-            await context
-                .WebSocket
+            await context.WebSocket
                 .CloseOutputAsync(WebSocketCloseStatus.Empty, null, new CancellationToken());
         }
 
@@ -512,8 +492,7 @@ namespace System.Net.Tests
             await Assert.ThrowsAsync<ArgumentException>(
                 paramName,
                 () =>
-                    context
-                        .WebSocket
+                    context.WebSocket
                         .CloseOutputAsync(status, statusDescription, new CancellationToken())
             );
         }
@@ -524,11 +503,9 @@ namespace System.Net.Tests
             HttpListenerWebSocketContext context = await GetWebSocketContext();
             context.WebSocket.Dispose();
 
-            await context
-                .WebSocket
+            await context.WebSocket
                 .CloseOutputAsync(WebSocketCloseStatus.Empty, null, new CancellationToken());
-            await context
-                .WebSocket
+            await context.WebSocket
                 .CloseAsync(WebSocketCloseStatus.Empty, null, new CancellationToken());
         }
 
@@ -538,11 +515,9 @@ namespace System.Net.Tests
             HttpListenerWebSocketContext context = await GetWebSocketContext();
             context.WebSocket.Abort();
 
-            await context
-                .WebSocket
+            await context.WebSocket
                 .CloseOutputAsync(WebSocketCloseStatus.Empty, null, new CancellationToken());
-            await context
-                .WebSocket
+            await context.WebSocket
                 .CloseAsync(WebSocketCloseStatus.Empty, null, new CancellationToken());
         }
 

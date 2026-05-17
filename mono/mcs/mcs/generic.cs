@@ -175,8 +175,7 @@ namespace Mono.CSharp
         {
             if (spec.HasSpecialClass && bb.IsStruct)
             {
-                context
-                    .Module
+                context.Module
                     .Compiler
                     .Report
                     .Error(
@@ -220,8 +219,7 @@ namespace Mono.CSharp
             Location loc
         )
         {
-            context
-                .Module
+            context.Module
                 .Compiler
                 .Report
                 .Error(
@@ -294,8 +292,7 @@ namespace Mono.CSharp
 
                 if (type.Arity > 0 && ((InflatedTypeSpec)type).HasDynamicArgument())
                 {
-                    context
-                        .Module
+                    context.Module
                         .Compiler
                         .Report
                         .Error(
@@ -310,8 +307,7 @@ namespace Mono.CSharp
                 if (!context.CurrentMemberDefinition.IsAccessibleAs(type))
                 {
                     context.Module.Compiler.Report.SymbolRelatedToPreviousError(type);
-                    context
-                        .Module
+                    context.Module
                         .Compiler
                         .Report
                         .Error(
@@ -327,8 +323,7 @@ namespace Mono.CSharp
                 {
                     if (!spec.AddInterface(type))
                     {
-                        context
-                            .Module
+                        context.Module
                             .Compiler
                             .Report
                             .Error(
@@ -353,8 +348,7 @@ namespace Mono.CSharp
                     }
                     else if (tparam_types.Contains(constraint_tp))
                     {
-                        context
-                            .Module
+                        context.Module
                             .Compiler
                             .Report
                             .Error(
@@ -379,8 +373,7 @@ namespace Mono.CSharp
                     var tp_def = constraint_tp.MemberDefinition as TypeParameter;
                     if (tp_def != null && !tp_def.ResolveConstraints(context))
                     {
-                        context
-                            .Module
+                        context.Module
                             .Compiler
                             .Report
                             .Error(
@@ -455,8 +448,7 @@ namespace Mono.CSharp
 
                     if (constraint_tp.HasSpecialStruct)
                     {
-                        context
-                            .Module
+                        context.Module
                             .Compiler
                             .Report
                             .Error(
@@ -475,8 +467,7 @@ namespace Mono.CSharp
 
                 if (iface_found || spec.HasTypeConstraint)
                 {
-                    context
-                        .Module
+                    context.Module
                         .Compiler
                         .Report
                         .Error(
@@ -489,8 +480,7 @@ namespace Mono.CSharp
 
                 if (spec.HasSpecialStruct || spec.HasSpecialClass)
                 {
-                    context
-                        .Module
+                    context.Module
                         .Compiler
                         .Report
                         .Error(
@@ -509,8 +499,7 @@ namespace Mono.CSharp
                     case BuiltinTypeSpec.Type.Enum:
                     case BuiltinTypeSpec.Type.ValueType:
                     case BuiltinTypeSpec.Type.Object:
-                        context
-                            .Module
+                        context.Module
                             .Compiler
                             .Report
                             .Error(
@@ -521,8 +510,7 @@ namespace Mono.CSharp
                             );
                         continue;
                     case BuiltinTypeSpec.Type.Dynamic:
-                        context
-                            .Module
+                        context.Module
                             .Compiler
                             .Report
                             .Error(
@@ -535,8 +523,7 @@ namespace Mono.CSharp
 
                 if (type.IsSealed || !type.IsClass)
                 {
-                    context
-                        .Module
+                    context.Module
                         .Compiler
                         .Report
                         .Error(
@@ -550,8 +537,7 @@ namespace Mono.CSharp
 
                 if (type.IsStatic)
                 {
-                    context
-                        .Module
+                    context.Module
                         .Compiler
                         .Report
                         .Error(
@@ -998,8 +984,7 @@ namespace Mono.CSharp
         public void WarningParentNameConflict(TypeParameter conflict)
         {
             conflict.Report.SymbolRelatedToPreviousError(conflict.Location, null);
-            conflict
-                .Report
+            conflict.Report
                 .Warning(
                     693,
                     3,
@@ -2863,8 +2848,7 @@ namespace Mono.CSharp
                     )
                 )
                 {
-                    parent
-                        .Compiler
+                    parent.Compiler
                         .Report
                         .Error(
                             1960,

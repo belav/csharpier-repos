@@ -260,8 +260,7 @@ namespace System.Web.Http.Controllers
             {
                 // the key should always be present, even if the parameter value is null
                 throw new HttpResponseException(
-                    controllerContext
-                        .Request
+                    controllerContext.Request
                         .CreateErrorResponse(
                             HttpStatusCode.BadRequest,
                             SRResources.BadRequest,
@@ -280,8 +279,7 @@ namespace System.Web.Http.Controllers
             {
                 // tried to pass a null value for a non-nullable parameter type
                 throw new HttpResponseException(
-                    controllerContext
-                        .Request
+                    controllerContext.Request
                         .CreateErrorResponse(
                             HttpStatusCode.BadRequest,
                             SRResources.BadRequest,
@@ -300,8 +298,7 @@ namespace System.Web.Http.Controllers
             {
                 // value was supplied but is not of the proper type
                 throw new HttpResponseException(
-                    controllerContext
-                        .Request
+                    controllerContext.Request
                         .CreateErrorResponse(
                             HttpStatusCode.BadRequest,
                             SRResources.BadRequest,
@@ -353,8 +350,7 @@ namespace System.Web.Http.Controllers
                 for (int i = 0; i < _supportedHttpMethodsByConvention.Length; i++)
                 {
                     if (
-                        methodInfo
-                            .Name
+                        methodInfo.Name
                             .StartsWith(
                                 _supportedHttpMethodsByConvention[i].Method,
                                 StringComparison.OrdinalIgnoreCase

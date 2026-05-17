@@ -476,8 +476,7 @@ namespace System.Xml.Schema
                         {
                             for (int j = 0; j < atomicValues.Length; j++)
                             {
-                                _hashcode += ((XmlAtomicValue)atomicValues.GetValue(j)!)
-                                    .TypedValue
+                                _hashcode += ((XmlAtomicValue)atomicValues.GetValue(j)!).TypedValue
                                     .GetHashCode();
                             }
                         }

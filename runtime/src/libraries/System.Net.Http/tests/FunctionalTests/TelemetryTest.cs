@@ -30,8 +30,7 @@ namespace System.Net.Http.Functional.Tests
         )]
         public void EventSource_ExistsWithCorrectId()
         {
-            Type esType = typeof(HttpClient)
-                .Assembly
+            Type esType = typeof(HttpClient).Assembly
                 .GetType("System.Net.Http.HttpTelemetry", throwOnError: true, ignoreCase: false);
             Assert.NotNull(esType);
 
@@ -139,8 +138,7 @@ namespace System.Net.Http.Functional.Tests
                                                                     HttpCompletionOption.ResponseHeadersRead
                                                                 )
                                                             );
-                                                        response
-                                                            .Content
+                                                        response.Content
                                                             .CopyTo(Stream.Null, null, default);
                                                     }
                                                     break;
@@ -160,8 +158,7 @@ namespace System.Net.Http.Functional.Tests
                                                                 request,
                                                                 HttpCompletionOption.ResponseHeadersRead
                                                             );
-                                                        await response
-                                                            .Content
+                                                        await response.Content
                                                             .CopyToAsync(Stream.Null);
                                                     }
                                                     break;
@@ -201,8 +198,7 @@ namespace System.Net.Http.Functional.Tests
                                                                     cancellationToken: default
                                                                 )
                                                             );
-                                                        await response
-                                                            .Content
+                                                        await response.Content
                                                             .CopyToAsync(Stream.Null);
                                                     }
                                                     break;
@@ -215,8 +211,7 @@ namespace System.Net.Http.Functional.Tests
                                                                 request,
                                                                 cancellationToken: default
                                                             );
-                                                        await response
-                                                            .Content
+                                                        await response.Content
                                                             .CopyToAsync(Stream.Null);
                                                     }
                                                     break;
@@ -520,8 +515,7 @@ namespace System.Net.Http.Functional.Tests
                                             };
 
                                             var content = new ByteArrayContent(
-                                                Encoding
-                                                    .ASCII
+                                                Encoding.ASCII
                                                     .GetBytes(new string('a', RequestContentLength))
                                             );
                                             request.Content = content;
@@ -553,8 +547,7 @@ namespace System.Net.Http.Functional.Tests
                                                                 cancellationToken: default
                                                             )
                                                         );
-                                                    await syncResponse
-                                                        .Content
+                                                    await syncResponse.Content
                                                         .CopyToAsync(Stream.Null);
                                                     break;
 
@@ -564,8 +557,7 @@ namespace System.Net.Http.Functional.Tests
                                                             request,
                                                             cancellationToken: default
                                                         );
-                                                    await asyncResponse
-                                                        .Content
+                                                    await asyncResponse.Content
                                                         .CopyToAsync(Stream.Null);
                                                     break;
                                             }
@@ -1431,8 +1423,7 @@ namespace System.Net.Http.Functional.Tests
                         e => events.Enqueue((e, e.ActivityId)),
                         async () =>
                         {
-                            await Http11LoopbackServerFactory
-                                .Singleton
+                            await Http11LoopbackServerFactory.Singleton
                                 .CreateClientAndServerAsync(
                                     async uri =>
                                     {
@@ -1482,8 +1473,7 @@ namespace System.Net.Http.Functional.Tests
                                                 allConnectionsOpen.SetResult();
                                             }
 
-                                            await allConnectionsOpen
-                                                .Task
+                                            await allConnectionsOpen.Task
                                                 .WaitAsync(TestHelper.PassingTestTimeout);
 
                                             await connection.SendResponseAsync(HttpStatusCode.OK);

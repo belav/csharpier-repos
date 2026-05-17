@@ -256,8 +256,7 @@ namespace System.Activities.Runtime
             try
             {
                 // disassociation is local-only so we don't need to yield
-                ICollection<InstanceKey> keysToDisassociate = executor
-                    .BookmarkScopeManager
+                ICollection<InstanceKey> keysToDisassociate = executor.BookmarkScopeManager
                     .GetKeysToDisassociate();
                 if (keysToDisassociate != null && keysToDisassociate.Count > 0)
                 {
@@ -265,8 +264,7 @@ namespace System.Activities.Runtime
                 }
 
                 // if we have keys to associate, provide them for an asynchronous association
-                ICollection<InstanceKey> keysToAssociate = executor
-                    .BookmarkScopeManager
+                ICollection<InstanceKey> keysToAssociate = executor.BookmarkScopeManager
                     .GetKeysToAssociate();
 
                 // It could be that we only had keys to Disassociate. We should only do BeginAssociateKeys

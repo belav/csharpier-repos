@@ -257,8 +257,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             var startingSpan = triggerSpan.Span;
 
             // Select this span if we didn't already have something selected
-            var selections = _triggerView
-                .Selection
+            var selections = _triggerView.Selection
                 .GetSnapshotSpansOnBuffer(triggerSpan.Snapshot.TextBuffer);
             if (
                 !selections.Any()
@@ -269,11 +268,12 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                 _triggerView.SetSelection(new SnapshotSpan(triggerSpan.Snapshot, startingSpan));
             }
 
-            this.UndoManager.CreateInitialState(
-                this.ReplacementText,
-                _triggerView.Selection,
-                new SnapshotSpan(triggerSpan.Snapshot, startingSpan)
-            );
+            this.UndoManager
+                .CreateInitialState(
+                    this.ReplacementText,
+                    _triggerView.Selection,
+                    new SnapshotSpan(triggerSpan.Snapshot, startingSpan)
+                );
             _openTextBuffers[triggerSpan.Snapshot.TextBuffer]
                 .SetReferenceSpans(
                     SpecializedCollections.SingletonEnumerable(startingSpan.ToTextSpan())
@@ -347,8 +347,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             var currentRenameLocationsTask = _allRenameLocationsTask;
             var cancellationToken = _cancellationTokenSource.Token;
 
-            _allRenameLocationsTask = _threadingContext
-                .JoinableTaskFactory
+            _allRenameLocationsTask = _threadingContext.JoinableTaskFactory
                 .RunAsync(async () =>
                 {
                     // Join prior work before proceeding, since it performs a required state update.
@@ -367,8 +366,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                     // from running prior to the completion of the UI operation), but the implementation does not currently
                     // follow the originally-intended design.
                     // https://github.com/dotnet/roslyn/issues/40890
-                    await _threadingContext
-                        .JoinableTaskFactory
+                    await _threadingContext.JoinableTaskFactory
                         .SwitchToMainThreadAsync(alwaysYield: true, cancellationToken);
 
                     RaiseSessionSpansUpdated(inlineRenameLocations.Locations.ToImmutableArray());
@@ -573,12 +571,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             else
             {
                 // When responding to a text edit, we delay propagating the edit until the first transaction completes.
-                _threadingContext
-                    .JoinableTaskFactory
+                _threadingContext.JoinableTaskFactory
                     .RunAsync(async () =>
                     {
-                        await _threadingContext
-                            .JoinableTaskFactory
+                        await _threadingContext.JoinableTaskFactory
                             .SwitchToMainThreadAsync(alwaysYield: true);
                         propagateEditAction();
                     });
@@ -607,8 +603,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                 nameof(UpdateConflictResolutionTask)
             );
 
-            _conflictResolutionTask = _threadingContext
-                .JoinableTaskFactory
+            _conflictResolutionTask = _threadingContext.JoinableTaskFactory
                 .RunAsync(async () =>
                 {
                     // Join prior work before proceeding, since it performs a required state update.
@@ -646,8 +641,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
 
             var cancellationToken = _conflictResolutionTaskCancellationSource.Token;
             var asyncToken = _asyncListener.BeginAsyncOperation(nameof(QueueApplyReplacements));
-            var replacementOperation = _threadingContext
-                .JoinableTaskFactory
+            var replacementOperation = _threadingContext.JoinableTaskFactory
                 .RunAsync(async () =>
                 {
                     var replacementInfo = await _conflictResolutionTask
@@ -664,8 +658,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                         replacementInfo,
                         cancellationToken
                     );
-                    await _threadingContext
-                        .JoinableTaskFactory
+                    await _threadingContext.JoinableTaskFactory
                         .SwitchToMainThreadAsync(alwaysYield: true, cancellationToken);
                     ApplyReplacements(
                         computedMergeResult.replacementInfo,
@@ -849,8 +842,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
 
                 foreach (var textBuffer in _openTextBuffers.Keys)
                 {
-                    var document = textBuffer
-                        .CurrentSnapshot
+                    var document = textBuffer.CurrentSnapshot
                         .GetOpenDocumentInCurrentContextWithChanges();
                     var isClosed = document == null;
 
@@ -880,8 +872,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             // which at least will allow the user to cancel the rename if they want.
             //
             // In the future we should remove this entrypoint and have all callers use CommitAsync instead.
-            return _threadingContext
-                .JoinableTaskFactory
+            return _threadingContext.JoinableTaskFactory
                 .Run(() =>
                     CommitWorkerAsync(
                         previewChanges,
@@ -940,8 +931,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                     // locations with the final renamed text).  Ideally though, once we start comitting, we would cancel
                     // any of that work and then only have the work of rolling back to the original state of the world
                     // and applying the desired edits ourselves.
-                    var factory = _workspace
-                        .Services
+                    var factory = _workspace.Services
                         .GetRequiredService<IBackgroundWorkIndicatorFactory>();
                     using var context = factory.Create(
                         _triggerView,
@@ -1009,8 +999,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                     var previewService = _workspace.Services.GetService<IPreviewDialogService>();
 
                     // The preview service needs to be called from the UI thread, since it's doing COM calls underneath.
-                    await _threadingContext
-                        .JoinableTaskFactory
+                    await _threadingContext.JoinableTaskFactory
                         .SwitchToMainThreadAsync(cancellationToken);
                     newSolution = previewService.PreviewChanges(
                         string.Format(
@@ -1052,11 +1041,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
 
                             if (error is not null)
                             {
-                                await _threadingContext
-                                    .JoinableTaskFactory
+                                await _threadingContext.JoinableTaskFactory
                                     .SwitchToMainThreadAsync(cancellationToken);
-                                var notificationService = _workspace
-                                    .Services
+                                var notificationService = _workspace.Services
                                     .GetService<INotificationService>();
                                 notificationService.SendNotification(
                                     error.Value.message,

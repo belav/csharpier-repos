@@ -38,8 +38,7 @@ public class OAuthPostConfigureOptions<TOptions, THandler> : IPostConfigureOptio
             options.Backchannel = new HttpClient(
                 options.BackchannelHttpHandler ?? new HttpClientHandler()
             );
-            options
-                .Backchannel
+            options.Backchannel
                 .DefaultRequestHeaders
                 .UserAgent
                 .ParseAdd("Microsoft ASP.NET Core OAuth handler");
@@ -49,8 +48,7 @@ public class OAuthPostConfigureOptions<TOptions, THandler> : IPostConfigureOptio
 
         if (options.StateDataFormat == null)
         {
-            var dataProtector = options
-                .DataProtectionProvider
+            var dataProtector = options.DataProtectionProvider
                 .CreateProtector(typeof(THandler).FullName!, name, "v1");
             options.StateDataFormat = new PropertiesDataFormat(dataProtector);
         }

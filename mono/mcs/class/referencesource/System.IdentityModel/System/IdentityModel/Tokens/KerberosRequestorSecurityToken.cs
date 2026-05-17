@@ -68,16 +68,14 @@ namespace System.IdentityModel.Tokens
         )
         {
             if (servicePrincipalName == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("servicePrincipalName");
             if (
                 tokenImpersonationLevel != TokenImpersonationLevel.Identification
                 && tokenImpersonationLevel != TokenImpersonationLevel.Impersonation
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentOutOfRangeException(
                             "tokenImpersonationLevel",
@@ -96,8 +94,7 @@ namespace System.IdentityModel.Tokens
             {
                 if (string.IsNullOrEmpty(networkCredential.UserName))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgument(
                             SR.GetString(SR.ProvidedNetworkCredentialsForKerberosHasInvalidUserName)
                         );
@@ -117,8 +114,7 @@ namespace System.IdentityModel.Tokens
             }
             catch (Win32Exception e)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new SecurityTokenValidationException(
                             SR.GetString(SR.UnableToCreateKerberosCredentials),
@@ -128,8 +124,7 @@ namespace System.IdentityModel.Tokens
             }
             catch (SecurityTokenException ste)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new SecurityTokenValidationException(
                             SR.GetString(SR.UnableToCreateKerberosCredentials),
@@ -267,8 +262,7 @@ namespace System.IdentityModel.Tokens
                 {
                     if (statusCode == (int)SecurityStatus.ContinueNeeded)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new SecurityTokenException(
                                     SR.GetString(SR.KerberosMultilegsNotSupported),
@@ -278,8 +272,7 @@ namespace System.IdentityModel.Tokens
                     }
                     else
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new SecurityTokenException(
                                     SR.GetString(SR.FailInitializeSecurityContext),

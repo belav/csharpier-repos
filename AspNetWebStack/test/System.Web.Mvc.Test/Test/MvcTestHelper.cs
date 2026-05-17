@@ -29,8 +29,7 @@ namespace System.Web.Mvc.Test
 
         private static void CreateMvcTestAssembly1()
         {
-            AssemblyBuilder assemblyBuilder = AppDomain
-                .CurrentDomain
+            AssemblyBuilder assemblyBuilder = AppDomain.CurrentDomain
                 .DefineDynamicAssembly(
                     new AssemblyName("MvcAssembly1"),
                     AssemblyBuilderAccess.Save
@@ -48,8 +47,7 @@ namespace System.Web.Mvc.Test
 
         private static void CreateMvcTestAssembly2()
         {
-            AssemblyBuilder assemblyBuilder = AppDomain
-                .CurrentDomain
+            AssemblyBuilder assemblyBuilder = AppDomain.CurrentDomain
                 .DefineDynamicAssembly(
                     new AssemblyName("MvcAssembly2"),
                     AssemblyBuilderAccess.Save
@@ -67,8 +65,7 @@ namespace System.Web.Mvc.Test
 
         private static void CreateMvcTestAssembly3()
         {
-            AssemblyBuilder assemblyBuilder = AppDomain
-                .CurrentDomain
+            AssemblyBuilder assemblyBuilder = AppDomain.CurrentDomain
                 .DefineDynamicAssembly(
                     new AssemblyName("MvcAssembly3"),
                     AssemblyBuilderAccess.Save
@@ -87,8 +84,7 @@ namespace System.Web.Mvc.Test
 
         private static void CreateMvcTestAssembly4()
         {
-            AssemblyBuilder assemblyBuilder = AppDomain
-                .CurrentDomain
+            AssemblyBuilder assemblyBuilder = AppDomain.CurrentDomain
                 .DefineDynamicAssembly(
                     new AssemblyName("MvcAssembly4"),
                     AssemblyBuilderAccess.Save

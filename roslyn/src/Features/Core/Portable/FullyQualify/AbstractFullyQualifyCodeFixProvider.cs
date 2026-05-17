@@ -22,8 +22,7 @@ namespace Microsoft.CodeAnalysis.CodeFixes.FullyQualify
         {
             var cancellationToken = context.CancellationToken;
             var document = context.Document;
-            var hideAdvancedMembers = context
-                .Options
+            var hideAdvancedMembers = context.Options
                 .GetOptions(document.Project.Services)
                 .HideAdvancedMembers;
 
@@ -38,8 +37,7 @@ namespace Microsoft.CodeAnalysis.CodeFixes.FullyQualify
             if (fixData.IndividualFixData.Length == 0)
                 return;
 
-            var codeActions = fixData
-                .IndividualFixData
+            var codeActions = fixData.IndividualFixData
                 .SelectAsArray(d =>
                     CodeAction.Create(
                         d.Title,

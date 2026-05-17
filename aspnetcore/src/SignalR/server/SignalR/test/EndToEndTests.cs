@@ -366,11 +366,9 @@ public class EndToEndTests : FunctionalTestBase
                 logger.LogInformation("Receiving message");
                 Assert.Equal(
                     message,
-                    Encoding
-                        .UTF8
+                    Encoding.UTF8
                         .GetString(
-                            await connection
-                                .Transport
+                            await connection.Transport
                                 .Input
                                 .ReadAsync(bytes.Length)
                                 .DefaultTimeout()
@@ -432,8 +430,7 @@ public class EndToEndTests : FunctionalTestBase
                 {
                     logger.LogInformation("Receiving message");
                     // Big timeout here because it can take a while to receive all the bytes
-                    var receivedData = await connection
-                        .Transport
+                    var receivedData = await connection.Transport
                         .Input
                         .ReadAsync(bytes.Length)
                         .DefaultTimeout();

@@ -146,8 +146,7 @@ namespace System.Web.Http.Validation
 
             if (validators == null)
             {
-                validators = validationContext
-                    .ActionContext
+                validators = validationContext.ActionContext
                     .GetValidators(metadata, validationContext.ValidatorCache);
             }
 
@@ -220,8 +219,7 @@ namespace System.Web.Http.Validation
             PropertyScope propertyScope = new PropertyScope();
             validationContext.KeyBuilders.Push(propertyScope);
             foreach (
-                ModelMetadata childMetadata in validationContext
-                    .MetadataProvider
+                ModelMetadata childMetadata in validationContext.MetadataProvider
                     .GetMetadataForProperties(metadata.Model, metadata.RealModelType)
             )
             {
@@ -267,14 +265,12 @@ namespace System.Web.Http.Validation
 
             bool isValid = true;
             Type elementType = GetElementType(model.GetType());
-            ModelMetadata elementMetadata = validationContext
-                .MetadataProvider
+            ModelMetadata elementMetadata = validationContext.MetadataProvider
                 .GetMetadataForType(null, elementType);
 
             ElementScope elementScope = new ElementScope() { Index = 0 };
             validationContext.KeyBuilders.Push(elementScope);
-            IEnumerable<ModelValidator> validators = validationContext
-                .ActionContext
+            IEnumerable<ModelValidator> validators = validationContext.ActionContext
                 .GetValidators(elementMetadata, validationContext.ValidatorCache);
 
             // if there are no validators or the object is null we bail out quickly
@@ -359,8 +355,7 @@ namespace System.Web.Http.Validation
                     {
                         modelKey = validationContext.RootPrefix;
                         foreach (
-                            IBodyModelValidatorKeyBuilder keyBuilder in validationContext
-                                .KeyBuilders
+                            IBodyModelValidatorKeyBuilder keyBuilder in validationContext.KeyBuilders
                                 .Reverse()
                         )
                         {

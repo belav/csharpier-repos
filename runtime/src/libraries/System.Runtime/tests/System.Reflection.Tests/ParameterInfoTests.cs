@@ -527,8 +527,7 @@ namespace System.Reflection.Tests
                 "MethodWithOptionalDefaultOutInMarshalParam",
                 0
             );
-            CustomAttributeData attribute = parameterInfo
-                .CustomAttributes
+            CustomAttributeData attribute = parameterInfo.CustomAttributes
                 .SingleOrDefault(a => a.AttributeType.Equals(attrType));
             Assert.NotNull(attribute);
 
@@ -562,8 +561,7 @@ namespace System.Reflection.Tests
                 "VirtualMethodWithCustomAttributes",
                 paramIndex
             );
-            CustomAttributeData attribute = parameterInfo
-                .CustomAttributes
+            CustomAttributeData attribute = parameterInfo.CustomAttributes
                 .SingleOrDefault(a => a.AttributeType.Equals(typeof(MyAttribute)));
             Assert.Equal(exists, attribute != null);
 

@@ -33,8 +33,7 @@ namespace NAMESPACE
         private int _closeCount; // used to distinguish between different uses of this object, so we don't have to maintain a list of it's children
 
         private static int _objectTypeCount; // Bid counter
-        internal readonly int ObjectID = System
-            .Threading
+        internal readonly int ObjectID = System.Threading
             .Interlocked
             .Increment(ref _objectTypeCount);
 
@@ -244,8 +243,7 @@ namespace NAMESPACE
         private static System.Security.CodeAccessPermission CreateExecutePermission()
         {
             DBDataPermission p = (DBDataPermission)
-                CONNECTIONFACTORYOBJECTNAME
-                    .ProviderFactory
+                CONNECTIONFACTORYOBJECTNAME.ProviderFactory
                     .CreatePermission(System.Security.Permissions.PermissionState.None);
             p.Add(String.Empty, String.Empty, KeyRestrictionBehavior.AllowOnly);
             return p;
@@ -292,8 +290,7 @@ namespace NAMESPACE
 
             if (null != transaction)
             {
-                indigoTransaction = SysTx
-                    .TransactionInterop
+                indigoTransaction = SysTx.TransactionInterop
                     .GetTransactionFromDtcTransaction((SysTx.IDtcTransaction)transaction);
             }
 
@@ -508,8 +505,7 @@ namespace NAMESPACE
             }
             catch (System.Security.SecurityException)
             {
-                System
-                    .Diagnostics
+                System.Diagnostics
                     .Debug
                     .Assert(false, "unexpected SecurityException for current codepath");
                 throw;

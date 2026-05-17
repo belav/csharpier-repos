@@ -213,8 +213,7 @@ namespace System.Web
             }
             catch (Exception ex)
             {
-                Console
-                    .Error
+                Console.Error
                     .WriteLine("An exception has occurred while generating HttpException page:");
                 Console.Error.WriteLine(ex);
                 Console.Error.WriteLine();

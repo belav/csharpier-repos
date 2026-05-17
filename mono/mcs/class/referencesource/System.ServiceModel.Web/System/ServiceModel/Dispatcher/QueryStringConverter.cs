@@ -172,8 +172,7 @@ namespace System.ServiceModel.Dispatcher
                         TypeConverter stringConverter = GetStringConverter(parameterType);
                         if (stringConverter == null)
                         {
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
                                     new NotSupportedException(
                                         SR2.GetString(
@@ -279,8 +278,7 @@ namespace System.ServiceModel.Dispatcher
                         TypeConverter stringConverter = GetStringConverter(parameterType);
                         if (stringConverter == null)
                         {
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
                                     new NotSupportedException(
                                         SR2.GetString(
@@ -354,8 +352,7 @@ namespace System.ServiceModel.Dispatcher
                             {
                                 if (Fx.IsFatal(handledException))
                                 {
-                                    throw DiagnosticUtility
-                                        .ExceptionUtility
+                                    throw DiagnosticUtility.ExceptionUtility
                                         .ThrowHelperError(handledException);
                                 }
                                 DiagnosticUtility.TraceHandledException(

@@ -35,8 +35,7 @@ namespace System.IO
                 using (DisableMediaInsertionPrompt.Create())
                 {
                     if (
-                        !Interop
-                            .Kernel32
+                        !Interop.Kernel32
                             .GetVolumeInformation(
                                 Name,
                                 null,
@@ -64,13 +63,11 @@ namespace System.IO
                     totalBytes,
                     freeBytes;
                 uint oldMode;
-                bool success = Interop
-                    .Kernel32
+                bool success = Interop.Kernel32
                     .SetThreadErrorMode(Interop.Kernel32.SEM_FAILCRITICALERRORS, out oldMode);
                 try
                 {
-                    bool r = Interop
-                        .Kernel32
+                    bool r = Interop.Kernel32
                         .GetDiskFreeSpaceEx(Name, out userBytes, out totalBytes, out freeBytes);
                     if (!r)
                         throw Error.GetExceptionForLastWin32DriveError(Name);
@@ -92,13 +89,11 @@ namespace System.IO
                     totalBytes,
                     freeBytes;
                 uint oldMode;
-                bool success = Interop
-                    .Kernel32
+                bool success = Interop.Kernel32
                     .SetThreadErrorMode(Interop.Kernel32.SEM_FAILCRITICALERRORS, out oldMode);
                 try
                 {
-                    bool r = Interop
-                        .Kernel32
+                    bool r = Interop.Kernel32
                         .GetDiskFreeSpaceEx(Name, out userBytes, out totalBytes, out freeBytes);
                     if (!r)
                         throw Error.GetExceptionForLastWin32DriveError(Name);
@@ -122,13 +117,11 @@ namespace System.IO
                     totalBytes,
                     freeBytes;
                 uint oldMode;
-                Interop
-                    .Kernel32
+                Interop.Kernel32
                     .SetThreadErrorMode(Interop.Kernel32.SEM_FAILCRITICALERRORS, out oldMode);
                 try
                 {
-                    bool r = Interop
-                        .Kernel32
+                    bool r = Interop.Kernel32
                         .GetDiskFreeSpaceEx(Name, out userBytes, out totalBytes, out freeBytes);
                     if (!r)
                         throw Error.GetExceptionForLastWin32DriveError(Name);
@@ -163,8 +156,7 @@ namespace System.IO
                 using (DisableMediaInsertionPrompt.Create())
                 {
                     if (
-                        !Interop
-                            .Kernel32
+                        !Interop.Kernel32
                             .GetVolumeInformation(
                                 Name,
                                 volumeName,
@@ -187,8 +179,7 @@ namespace System.IO
             set
             {
                 uint oldMode;
-                bool success = Interop
-                    .Kernel32
+                bool success = Interop.Kernel32
                     .SetThreadErrorMode(Interop.Kernel32.SEM_FAILCRITICALERRORS, out oldMode);
                 try
                 {

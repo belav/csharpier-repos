@@ -61,8 +61,7 @@ namespace ILCompiler.DependencyAnalysis
                 // not unifying to the same System.Type at runtime.
                 if (
                     !factory.MetadataManager.TypeGeneratesEEType(mappingEntry.Entity)
-                    && !factory
-                        .CompilationModuleGroup
+                    && !factory.CompilationModuleGroup
                         .ShouldReferenceThroughImportTable(mappingEntry.Entity)
                 )
                     continue;

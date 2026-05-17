@@ -128,8 +128,7 @@ public static class MapRouteRouteBuilderExtensions
             );
         }
 
-        routeBuilder
-            .Routes
+        routeBuilder.Routes
             .Add(
                 new Route(
                     routeBuilder.DefaultHandler,

@@ -32,8 +32,7 @@ namespace R2RTest
 
             if (options.OutputDirectory.IsParentOf(options.InputDirectory))
             {
-                Console
-                    .Error
+                Console.Error
                     .WriteLine(
                         "Error: Input and output folders must be distinct, and the output directory (which gets deleted) better not be a parent of the input directory."
                     );
@@ -60,8 +59,7 @@ namespace R2RTest
             );
             if (folder == null)
             {
-                Console
-                    .Error
+                Console.Error
                     .WriteLine($"No managed app found in {options.InputDirectory.FullName}");
             }
 

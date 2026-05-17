@@ -25,8 +25,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
             // {
             //   void M(object, object);
             // }
-            var reference = Roslyn
-                .Test
+            var reference = Roslyn.Test
                 .Utilities
                 .Desktop
                 .DesktopRuntimeUtil

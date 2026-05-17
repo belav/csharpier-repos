@@ -211,8 +211,7 @@ public class SkipNavigation
 
             return isChanging
                 ? (ForeignKey?)
-                    DeclaringEntityType
-                        .Model
+                    DeclaringEntityType.Model
                         .ConventionDispatcher
                         .OnSkipNavigationForeignKeyChanged(Builder, foreignKey, oldForeignKey)
                 : foreignKey;
@@ -257,8 +256,7 @@ public class SkipNavigation
 
         return isChanging
             ? (ForeignKey?)
-                DeclaringEntityType
-                    .Model
+                DeclaringEntityType.Model
                     .ConventionDispatcher
                     .OnSkipNavigationForeignKeyChanged(Builder, foreignKey, oldForeignKey!)
             : foreignKey;
@@ -305,8 +303,7 @@ public class SkipNavigation
 
             return isChanging
                 ? (SkipNavigation?)
-                    DeclaringEntityType
-                        .Model
+                    DeclaringEntityType.Model
                         .ConventionDispatcher
                         .OnSkipNavigationInverseChanged(Builder, inverse!, oldInverse!)
                 : inverse;
@@ -345,8 +342,7 @@ public class SkipNavigation
 
         return isChanging
             ? (SkipNavigation?)
-                DeclaringEntityType
-                    .Model
+                DeclaringEntityType.Model
                     .ConventionDispatcher
                     .OnSkipNavigationInverseChanged(Builder, inverse, oldInverse!)
             : inverse;
@@ -399,8 +395,7 @@ public class SkipNavigation
         IConventionAnnotation? annotation,
         IConventionAnnotation? oldAnnotation
     ) =>
-        DeclaringType
-            .Model
+        DeclaringType.Model
             .ConventionDispatcher
             .OnSkipNavigationAnnotationChanged(Builder, name, annotation, oldAnnotation);
 

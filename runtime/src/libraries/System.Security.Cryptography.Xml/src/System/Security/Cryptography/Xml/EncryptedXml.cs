@@ -961,8 +961,7 @@ namespace System.Security.Cryptography.Xml
                     }
                 }
 
-                XmlNode importedNode = inputElement
-                    .OwnerDocument
+                XmlNode importedNode = inputElement.OwnerDocument
                     .ImportNode(importDocument.DocumentElement!, true);
 
                 parent.RemoveChild(inputElement);
@@ -970,8 +969,7 @@ namespace System.Security.Cryptography.Xml
             }
             else
             {
-                XmlNode dummy = parent
-                    .OwnerDocument!
+                XmlNode dummy = parent.OwnerDocument!
                     .CreateElement(parent.Prefix, parent.LocalName, parent.NamespaceURI);
 
                 try

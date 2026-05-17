@@ -530,8 +530,7 @@ namespace System.Globalization
                 if (m_eraNames![i].Length > 0)
                 {
                     if (
-                        Culture
-                            .CompareInfo
+                        Culture.CompareInfo
                             .Compare(eraName, m_eraNames[i], CompareOptions.IgnoreCase) == 0
                     )
                     {
@@ -543,8 +542,7 @@ namespace System.Globalization
             {
                 // Compare the abbreviated era name in a case-insensitive way for the appropriate culture.
                 if (
-                    Culture
-                        .CompareInfo
+                    Culture.CompareInfo
                         .Compare(eraName, m_abbrevEraNames![i], CompareOptions.IgnoreCase) == 0
                 )
                 {
@@ -556,8 +554,7 @@ namespace System.Globalization
                 // this comparison should use the InvariantCulture.  The English name could have linguistically
                 // interesting characters.
                 if (
-                    CompareInfo
-                        .Invariant
+                    CompareInfo.Invariant
                         .Compare(eraName, m_abbrevEnglishEraNames![i], CompareOptions.IgnoreCase)
                     == 0
                 )
@@ -2730,8 +2727,7 @@ namespace System.Globalization
                                 value.tokenString.Length == 1
                                 && str.Value[str.Index] == value.tokenString[0]
                             )
-                            || Culture
-                                .CompareInfo
+                            || Culture.CompareInfo
                                 .Compare(
                                     str.Value.Slice(str.Index, value.tokenString.Length),
                                     value.tokenString,
@@ -2944,8 +2940,7 @@ namespace System.Globalization
                 return true;
             }
 
-            return Culture
-                    .CompareInfo
+            return Culture.CompareInfo
                     .Compare(
                         string1,
                         offset1,

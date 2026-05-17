@@ -113,8 +113,7 @@ internal sealed class FindReferenceCache
         )
         {
             var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
-            var root = await cache
-                ._semanticModel
+            var root = await cache._semanticModel
                 .SyntaxTree
                 .GetRootAsync(cancellationToken)
                 .ConfigureAwait(false);
@@ -125,8 +124,7 @@ internal sealed class FindReferenceCache
             // otherwise, we can use the text of the document to quickly find candidates and test those directly.
             if (info.ProbablyContainsEscapedIdentifier(identifier))
             {
-                return cache
-                    ._identifierCache
+                return cache._identifierCache
                     .GetOrAdd(
                         identifier,
                         _ => FindMatchingIdentifierTokensFromTree(syntaxFacts, identifier, root)
@@ -137,8 +135,7 @@ internal sealed class FindReferenceCache
                 var text = await document
                     .GetValueTextAsync(cancellationToken)
                     .ConfigureAwait(false);
-                return cache
-                    ._identifierCache
+                return cache._identifierCache
                     .GetOrAdd(
                         identifier,
                         _ =>

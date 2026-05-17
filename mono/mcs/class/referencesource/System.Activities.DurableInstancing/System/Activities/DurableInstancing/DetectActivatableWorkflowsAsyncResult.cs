@@ -47,8 +47,7 @@ namespace System.Activities.DurableInstancing
 
         protected override void GenerateSqlCommand(SqlCommand sqlCommand)
         {
-            sqlCommand
-                .Parameters
+            sqlCommand.Parameters
                 .Add(
                     new SqlParameter
                     {

@@ -29,8 +29,7 @@ public class ServerStreamingTests : IntegrationTestBase
         {
             await writer.WriteAsync(new HelloReply { Message = $"Hello {request.Name}!" });
         }
-        var method = Fixture
-            .DynamicGrpc
+        var method = Fixture.DynamicGrpc
             .AddServerStreamingMethod<HelloRequest, HelloReply>(
                 ServerStreamingMethod,
                 Greeter.Descriptor.FindMethodByName("SayHello")
@@ -62,8 +61,7 @@ public class ServerStreamingTests : IntegrationTestBase
             await tcs.Task;
             await writer.WriteAsync(new HelloReply { Message = $"Hello {request.Name} 2!" });
         }
-        var method = Fixture
-            .DynamicGrpc
+        var method = Fixture.DynamicGrpc
             .AddServerStreamingMethod<HelloRequest, HelloReply>(
                 ServerStreamingMethod,
                 Greeter.Descriptor.FindMethodByName("SayHello")
@@ -111,8 +109,7 @@ public class ServerStreamingTests : IntegrationTestBase
                 new CancellationToken(canceled: true)
             );
         }
-        var method = Fixture
-            .DynamicGrpc
+        var method = Fixture.DynamicGrpc
             .AddServerStreamingMethod<HelloRequest, HelloReply>(
                 ServerStreamingMethod,
                 Greeter.Descriptor.FindMethodByName("SayHello")

@@ -1005,8 +1005,7 @@ namespace System.Net
                     SocketAddress.IPv6AddressSize
                 );
                 //Parse the string to a v6 address structure
-                SocketError errorCode = UnsafeNclNativeMethods
-                    .OSSOCK
+                SocketError errorCode = UnsafeNclNativeMethods.OSSOCK
                     .WSAStringToAddress(
                         IPAddressStrings[i],
                         AddressFamily.InterNetworkV6,
@@ -1022,8 +1021,7 @@ namespace System.Net
                         AddressFamily.InterNetwork,
                         SocketAddress.IPv4AddressSize
                     );
-                    errorCode = UnsafeNclNativeMethods
-                        .OSSOCK
+                    errorCode = UnsafeNclNativeMethods.OSSOCK
                         .WSAStringToAddress(
                             IPAddressStrings[i],
                             AddressFamily.InterNetwork,

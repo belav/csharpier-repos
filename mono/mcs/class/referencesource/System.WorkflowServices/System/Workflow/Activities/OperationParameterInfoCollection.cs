@@ -118,8 +118,7 @@ namespace System.Workflow.Activities
             {
                 if (!(value is OperationParameterInfo))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgument(
                             "value",
                             SR2.GetString(
@@ -223,8 +222,7 @@ namespace System.Workflow.Activities
         {
             if (!(value is OperationParameterInfo))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(
                         "value",
                         SR2.GetString(
@@ -246,8 +244,7 @@ namespace System.Workflow.Activities
         {
             if (!(value is OperationParameterInfo))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(
                         "value",
                         SR2.GetString(
@@ -268,8 +265,7 @@ namespace System.Workflow.Activities
         {
             if (!(value is OperationParameterInfo))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(
                         "value",
                         SR2.GetString(
@@ -285,8 +281,7 @@ namespace System.Workflow.Activities
         {
             if (index < 0 || index > base.Count)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentOutOfRangeException("index"));
             }
             if (item == null)
@@ -301,8 +296,7 @@ namespace System.Workflow.Activities
         {
             if (!(value is OperationParameterInfo))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(
                         "value",
                         SR2.GetString(
@@ -318,8 +312,7 @@ namespace System.Workflow.Activities
         {
             if (!(value is OperationParameterInfo))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(
                         "value",
                         SR2.GetString(
@@ -335,8 +328,7 @@ namespace System.Workflow.Activities
         {
             if (index < 0 || index >= base.Count)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentOutOfRangeException("index"));
             }
 

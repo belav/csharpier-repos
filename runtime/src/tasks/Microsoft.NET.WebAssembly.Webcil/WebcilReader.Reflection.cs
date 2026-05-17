@@ -92,8 +92,7 @@ public sealed partial class WebcilReader
             ImmutableArray<byte> checksum
         ) =>
             (PdbChecksumDebugDirectoryData)
-                s_pdbChecksumDebugDirectoryDataCtor
-                    .Value
+                s_pdbChecksumDebugDirectoryDataCtor.Value
                     .Invoke(new object[] { algorithmName, checksum });
     }
 }

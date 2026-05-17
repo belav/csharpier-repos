@@ -71,8 +71,7 @@ internal sealed class EndpointMetadataApiDescriptionProvider : IApiDescriptionPr
             )
             {
                 // We need to detect if any of the methods allow inferred body
-                var disableInferredBody = httpMethodMetadata
-                    .HttpMethods
+                var disableInferredBody = httpMethodMetadata.HttpMethods
                     .Any(ShouldDisableInferredBody);
 
                 // REVIEW: Should we add an ApiDescription for endpoints without IHttpMethodMetadata? Swagger doesn't handle
@@ -80,8 +79,7 @@ internal sealed class EndpointMetadataApiDescriptionProvider : IApiDescriptionPr
                 // In practice, the Delegate will be called for any HTTP method if there is no IHttpMethodMetadata.
                 foreach (var httpMethod in httpMethodMetadata.HttpMethods)
                 {
-                    context
-                        .Results
+                    context.Results
                         .Add(
                             CreateApiDescription(
                                 routeEndpoint,
@@ -125,8 +123,7 @@ internal sealed class EndpointMetadataApiDescriptionProvider : IApiDescriptionPr
         var apiDescription = new ApiDescription
         {
             HttpMethod = httpMethod,
-            GroupName = routeEndpoint
-                .Metadata
+            GroupName = routeEndpoint.Metadata
                 .GetMetadata<IEndpointGroupNameMetadata>()
                 ?.EndpointGroupName,
             RelativePath = routeEndpoint.RoutePattern.RawText?.TrimStart('/'),
@@ -368,8 +365,7 @@ internal sealed class EndpointMetadataApiDescriptionProvider : IApiDescriptionPr
             );
         }
         else if (
-            parameter
-                .CustomAttributes
+            parameter.CustomAttributes
                 .Any(a =>
                     typeof(IFromServiceMetadata).IsAssignableFrom(a.AttributeType)
                     || typeof(FromKeyedServicesAttribute) == a.AttributeType
@@ -494,8 +490,7 @@ internal sealed class EndpointMetadataApiDescriptionProvider : IApiDescriptionPr
 
         // We favor types added via the extension methods (which implements IProducesResponseTypeMetadata)
         // over those that are added via attributes.
-        var responseMetadataTypes = producesResponseMetadataTypes
-            .Values
+        var responseMetadataTypes = producesResponseMetadataTypes.Values
             .Concat(responseProviderMetadataTypes.Values);
 
         if (responseMetadataTypes.Any())

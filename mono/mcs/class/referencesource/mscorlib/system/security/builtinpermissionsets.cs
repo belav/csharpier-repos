@@ -455,8 +455,7 @@ namespace System.Security
             // minimal parsing.
             SecurityElement firstPermission = (SecurityElement)se.Children[0];
             if (
-                System
-                    .Security
+                System.Security
                     .Util
                     .XMLUtil
                     .GetClassFromElement(

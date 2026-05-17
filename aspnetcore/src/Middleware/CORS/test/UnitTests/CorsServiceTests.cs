@@ -958,8 +958,7 @@ public class CorsServiceTests
 
         if (accessControlRequestMethod != null)
         {
-            context
-                .Request
+            context.Request
                 .Headers
                 .Add(
                     CorsConstants.AccessControlRequestMethod,
@@ -969,8 +968,7 @@ public class CorsServiceTests
 
         if (accessControlRequestHeaders != null)
         {
-            context
-                .Request
+            context.Request
                 .Headers
                 .Add(CorsConstants.AccessControlRequestHeaders, accessControlRequestHeaders);
         }

@@ -29,8 +29,7 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
         [CombinatorialData]
         public async Task SimpleGoToImplementation(bool asyncNavigation)
         {
-            await TestServices
-                .Editor
+            await TestServices.Editor
                 .ConfigureAsyncNavigation(
                     asyncNavigation
                         ? AsyncNavigationKind.Asynchronous
@@ -39,44 +38,37 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
                 );
 
             var project = ProjectName;
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .AddFileAsync(
                     project,
                     "FileImplementation.cs",
                     cancellationToken: HangMitigatingCancellationToken
                 );
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .OpenFileAsync(project, "FileImplementation.cs", HangMitigatingCancellationToken);
-            await TestServices
-                .Editor
+            await TestServices.Editor
                 .SetTextAsync(
                     @"class Implementation : IGoo
 {
 }",
                     HangMitigatingCancellationToken
                 );
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .AddFileAsync(
                     project,
                     "FileInterface.cs",
                     cancellationToken: HangMitigatingCancellationToken
                 );
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .OpenFileAsync(project, "FileInterface.cs", HangMitigatingCancellationToken);
-            await TestServices
-                .Editor
+            await TestServices.Editor
                 .SetTextAsync(
                     @"interface IGoo 
 {
 }",
                     HangMitigatingCancellationToken
                 );
-            await TestServices
-                .Editor
+            await TestServices.Editor
                 .PlaceCaretAsync("interface IGoo", charsOffset: 0, HangMitigatingCancellationToken);
             await TestServices.Editor.GoToImplementationAsync(HangMitigatingCancellationToken);
 
@@ -91,12 +83,10 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
                 // The navigation completed asynchronously, so navigate to the first item in the results list
                 Assert.Equal(
                     $"'IGoo' implementations - Entire solution",
-                    await TestServices
-                        .Shell
+                    await TestServices.Shell
                         .GetActiveWindowCaptionAsync(HangMitigatingCancellationToken)
                 );
-                var results = await TestServices
-                    .FindReferencesWindow
+                var results = await TestServices.FindReferencesWindow
                     .GetContentsAsync(HangMitigatingCancellationToken);
                 AssertEx.EqualOrDiff(
                     $"<unknown>: class Implementation : IGoo",
@@ -109,8 +99,7 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
                 );
                 results[0].NavigateTo(isPreview: false, shouldActivate: true);
 
-                await TestServices
-                    .Workarounds
+                await TestServices.Workarounds
                     .WaitForNavigationAsync(HangMitigatingCancellationToken);
 
                 identifierWithCaret = "$$Implementation";
@@ -118,20 +107,17 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
 
             Assert.Equal(
                 $"FileImplementation.cs",
-                await TestServices
-                    .Shell
+                await TestServices.Shell
                     .GetActiveDocumentFileNameAsync(HangMitigatingCancellationToken)
             );
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .TextContainsAsync(
                     $@"class {identifierWithCaret}",
                     assertCaretPosition: true,
                     HangMitigatingCancellationToken
                 );
             Assert.False(
-                await TestServices
-                    .Shell
+                await TestServices.Shell
                     .IsActiveTabProvisionalAsync(HangMitigatingCancellationToken)
             );
         }
@@ -142,8 +128,7 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
             bool asyncNavigation
         )
         {
-            await TestServices
-                .Editor
+            await TestServices.Editor
                 .ConfigureAsyncNavigation(
                     asyncNavigation
                         ? AsyncNavigationKind.Asynchronous
@@ -152,18 +137,15 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
                 );
 
             var project = ProjectName;
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .AddFileAsync(
                     project,
                     "FileImplementation.cs",
                     cancellationToken: HangMitigatingCancellationToken
                 );
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .OpenFileAsync(project, "FileImplementation.cs", HangMitigatingCancellationToken);
-            await TestServices
-                .Editor
+            await TestServices.Editor
                 .SetTextAsync(
                     @"class Implementation : IBar
 {
@@ -171,34 +153,29 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
 ",
                     HangMitigatingCancellationToken
                 );
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .CloseCodeFileAsync(
                     project,
                     "FileImplementation.cs",
                     saveFile: true,
                     HangMitigatingCancellationToken
                 );
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .AddFileAsync(
                     project,
                     "FileInterface.cs",
                     cancellationToken: HangMitigatingCancellationToken
                 );
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .OpenFileAsync(project, "FileInterface.cs", HangMitigatingCancellationToken);
-            await TestServices
-                .Editor
+            await TestServices.Editor
                 .SetTextAsync(
                     @"interface IBar
 {
 }",
                     HangMitigatingCancellationToken
                 );
-            await TestServices
-                .Editor
+            await TestServices.Editor
                 .PlaceCaretAsync("interface IBar", charsOffset: 0, HangMitigatingCancellationToken);
             await TestServices.Editor.GoToImplementationAsync(HangMitigatingCancellationToken);
 
@@ -213,12 +190,10 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
                 // The navigation completed asynchronously, so navigate to the first item in the results list
                 Assert.Equal(
                     $"'IBar' implementations - Entire solution",
-                    await TestServices
-                        .Shell
+                    await TestServices.Shell
                         .GetActiveWindowCaptionAsync(HangMitigatingCancellationToken)
                 );
-                var results = await TestServices
-                    .FindReferencesWindow
+                var results = await TestServices.FindReferencesWindow
                     .GetContentsAsync(HangMitigatingCancellationToken);
                 AssertEx.EqualOrDiff(
                     $"<unknown>: class Implementation : IBar",
@@ -231,8 +206,7 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
                 );
                 results[0].NavigateTo(isPreview: true, shouldActivate: true);
 
-                await TestServices
-                    .Workarounds
+                await TestServices.Workarounds
                     .WaitForNavigationAsync(HangMitigatingCancellationToken);
 
                 identifierWithCaret = "$$Implementation";
@@ -240,20 +214,17 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
 
             Assert.Equal(
                 "FileImplementation.cs",
-                await TestServices
-                    .Shell
+                await TestServices.Shell
                     .GetActiveWindowCaptionAsync(HangMitigatingCancellationToken)
             );
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .TextContainsAsync(
                     $@"class {identifierWithCaret}",
                     assertCaretPosition: true,
                     HangMitigatingCancellationToken
                 );
             Assert.True(
-                await TestServices
-                    .Shell
+                await TestServices.Shell
                     .IsActiveTabProvisionalAsync(HangMitigatingCancellationToken)
             );
         }
@@ -262,8 +233,7 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
         [CombinatorialData]
         public async Task GoToImplementationFromMetadataAsSource(bool asyncNavigation)
         {
-            await TestServices
-                .Editor
+            await TestServices.Editor
                 .ConfigureAsyncNavigation(
                     asyncNavigation
                         ? AsyncNavigationKind.Asynchronous
@@ -272,18 +242,15 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
                 );
 
             var project = ProjectName;
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .AddFileAsync(
                     project,
                     "FileImplementation.cs",
                     cancellationToken: HangMitigatingCancellationToken
                 );
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .OpenFileAsync(project, "FileImplementation.cs", HangMitigatingCancellationToken);
-            await TestServices
-                .Editor
+            await TestServices.Editor
                 .SetTextAsync(
                     @"using System;
 
@@ -296,14 +263,12 @@ class Implementation : IDisposable
 }",
                     HangMitigatingCancellationToken
                 );
-            await TestServices
-                .Editor
+            await TestServices.Editor
                 .PlaceCaretAsync("IDisposable d", charsOffset: -1, HangMitigatingCancellationToken);
             await TestServices.Editor.GoToDefinitionAsync(HangMitigatingCancellationToken);
             Assert.Equal(
                 "IDisposable [decompiled] [Read Only]",
-                await TestServices
-                    .Shell
+                await TestServices.Shell
                     .GetActiveWindowCaptionAsync(HangMitigatingCancellationToken)
             );
             await TestServices.Editor.GoToImplementationAsync(HangMitigatingCancellationToken);
@@ -319,12 +284,10 @@ class Implementation : IDisposable
                 // The navigation completed asynchronously, so navigate to the first item in the results list
                 Assert.Equal(
                     $"'IDisposable' implementations - Entire solution",
-                    await TestServices
-                        .Shell
+                    await TestServices.Shell
                         .GetActiveWindowCaptionAsync(HangMitigatingCancellationToken)
                 );
-                var results = await TestServices
-                    .FindReferencesWindow
+                var results = await TestServices.FindReferencesWindow
                     .GetContentsAsync(HangMitigatingCancellationToken);
 
                 // This test includes results from metadata on this path, so filter those out
@@ -343,8 +306,7 @@ class Implementation : IDisposable
                 );
                 results[0].NavigateTo(isPreview: false, shouldActivate: true);
 
-                await TestServices
-                    .Workarounds
+                await TestServices.Workarounds
                     .WaitForNavigationAsync(HangMitigatingCancellationToken);
 
                 identifierWithCaret = "$$Implementation";
@@ -352,12 +314,10 @@ class Implementation : IDisposable
 
             Assert.Equal(
                 $"FileImplementation.cs",
-                await TestServices
-                    .Shell
+                await TestServices.Shell
                     .GetActiveDocumentFileNameAsync(HangMitigatingCancellationToken)
             );
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .TextContainsAsync(
                     $@"class {identifierWithCaret} : IDisposable",
                     assertCaretPosition: true,
@@ -369,8 +329,7 @@ class Implementation : IDisposable
         [CombinatorialData]
         public async Task GoToImplementationFromSourceAndMetadata(bool asyncNavigation)
         {
-            await TestServices
-                .Editor
+            await TestServices.Editor
                 .ConfigureAsyncNavigation(
                     asyncNavigation
                         ? AsyncNavigationKind.Asynchronous
@@ -379,18 +338,15 @@ class Implementation : IDisposable
                 );
 
             var project = ProjectName;
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .AddFileAsync(
                     project,
                     "FileImplementation.cs",
                     cancellationToken: HangMitigatingCancellationToken
                 );
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .OpenFileAsync(project, "FileImplementation.cs", HangMitigatingCancellationToken);
-            await TestServices
-                .Editor
+            await TestServices.Editor
                 .SetTextAsync(
                     @"using System;
 
@@ -402,8 +358,7 @@ class Implementation : IDisposable
 }",
                     HangMitigatingCancellationToken
                 );
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .CloseCodeFileAsync(
                     project,
                     "FileImplementation.cs",
@@ -411,18 +366,15 @@ class Implementation : IDisposable
                     HangMitigatingCancellationToken
                 );
 
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .AddFileAsync(
                     project,
                     "FileUsage.cs",
                     cancellationToken: HangMitigatingCancellationToken
                 );
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .OpenFileAsync(project, "FileUsage.cs", HangMitigatingCancellationToken);
-            await TestServices
-                .Editor
+            await TestServices.Editor
                 .SetTextAsync(
                     @"using System;
 
@@ -444,27 +396,23 @@ class C
                     HangMitigatingCancellationToken
                 );
 
-            await TestServices
-                .Editor
+            await TestServices.Editor
                 .PlaceCaretAsync("Dispose", charsOffset: -1, HangMitigatingCancellationToken);
 
             // This one won't automatically navigate to the implementation
             Assert.Equal(
                 $"FileUsage.cs",
-                await TestServices
-                    .Shell
+                await TestServices.Shell
                     .GetActiveDocumentFileNameAsync(HangMitigatingCancellationToken)
             );
             await TestServices.Editor.GoToImplementationAsync(HangMitigatingCancellationToken);
             Assert.Equal(
                 "'Dispose' implementations - Entire solution",
-                await TestServices
-                    .Shell
+                await TestServices.Shell
                     .GetActiveWindowCaptionAsync(HangMitigatingCancellationToken)
             );
 
-            var results = await TestServices
-                .FindReferencesWindow
+            var results = await TestServices.FindReferencesWindow
                 .GetContentsAsync(HangMitigatingCancellationToken);
 
             // There are a lot of results, no point transcribing them all into a test

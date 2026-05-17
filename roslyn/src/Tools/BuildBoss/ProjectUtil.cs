@@ -66,8 +66,7 @@ namespace BuildBoss
             var targetFrameworks = GetTargetFrameworks();
             if (targetFrameworks != null)
             {
-                var all = targetFrameworks
-                    .Value
+                var all = targetFrameworks.Value
                     .ToString()
                     .Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
                 return all;

@@ -223,8 +223,7 @@ namespace System
                 bool minimalFailFast = (exception == PreallocatedOutOfMemoryException.Instance);
                 if (!minimalFailFast)
                 {
-                    Internal
-                        .Console
+                    Internal.Console
                         .Error
                         .Write(
                             (
@@ -328,8 +327,7 @@ namespace System
             exceptionRecord.ExceptionInformation[3] = (uint)triageBufferSize;
 
 #if TARGET_WINDOWS
-            Interop
-                .Kernel32
+            Interop.Kernel32
                 .RaiseFailFastException(
                     new IntPtr(&exceptionRecord),
                     pExContext,

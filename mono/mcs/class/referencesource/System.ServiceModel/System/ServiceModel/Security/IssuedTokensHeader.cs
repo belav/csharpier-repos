@@ -62,8 +62,7 @@ namespace System.ServiceModel.Security
             {
                 if (rstr == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgumentNull(
                             String.Format(
                                 CultureInfo.InvariantCulture,
@@ -85,8 +84,7 @@ namespace System.ServiceModel.Security
         {
             if (standardsManager == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("standardsManager"));
             }
             this.standardsManager = standardsManager;
@@ -109,8 +107,7 @@ namespace System.ServiceModel.Security
             }
             if (standardsManager == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("standardsManager"));
             }
             this.standardsManager = standardsManager;

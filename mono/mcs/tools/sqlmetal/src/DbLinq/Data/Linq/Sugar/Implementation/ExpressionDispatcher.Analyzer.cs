@@ -586,8 +586,7 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
                     if (tier == ExpressionTier.Clr)
                     {
                         parsed = RegisterParameter(
-                            System
-                                .Linq
+                            System.Linq
                                 .Expressions
                                 .Expression
                                 .Call(method, inputParameterToParse.Expression),
@@ -906,9 +905,11 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
                     RegisterWhere(anyClause, projectionQueryBuilderContext);
                 }
 
-                projectionQueryBuilderContext.CurrentSelect = projectionQueryBuilderContext
-                    .CurrentSelect
-                    .ChangeOperands(new SpecialExpression(specialExpressionType, tableExpression));
+                projectionQueryBuilderContext.CurrentSelect =
+                    projectionQueryBuilderContext.CurrentSelect
+                        .ChangeOperands(
+                            new SpecialExpression(specialExpressionType, tableExpression)
+                        );
 
                 // we now switch back to current context, and compare the result with 0
                 return projectionQueryBuilderContext.CurrentSelect;
@@ -1894,8 +1895,7 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
             // TODO (later...): see if some vendors support native All operator and avoid this substitution
             var whereExpression = Expression.Not(allClause);
             RegisterWhere(whereExpression, allBuilderContext);
-            allBuilderContext.CurrentSelect = allBuilderContext
-                .CurrentSelect
+            allBuilderContext.CurrentSelect = allBuilderContext.CurrentSelect
                 .ChangeOperands(
                     new SpecialExpression(SpecialExpressionType.Count, tableExpression)
                 );
@@ -2010,8 +2010,7 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
                     var anyClause = Analyze(parameters[1], tableExpression, anyBuilderContext);
                     RegisterWhere(anyClause, anyBuilderContext);
                 }
-                anyBuilderContext.CurrentSelect = anyBuilderContext
-                    .CurrentSelect
+                anyBuilderContext.CurrentSelect = anyBuilderContext.CurrentSelect
                     .ChangeOperands(
                         new SpecialExpression(SpecialExpressionType.Count, tableExpression)
                     );

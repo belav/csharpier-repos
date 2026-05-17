@@ -52,8 +52,7 @@ namespace Microsoft.AspNet.Facebook.ModelBinders
             {
                 if (!originUrl.StartsWith(_config.AppUrl, StringComparison.OrdinalIgnoreCase))
                 {
-                    bindingContext
-                        .ModelState
+                    bindingContext.ModelState
                         .AddModelError(
                             bindingContext.ModelName,
                             String.Format(
@@ -67,8 +66,7 @@ namespace Microsoft.AspNet.Facebook.ModelBinders
             }
             else
             {
-                bindingContext
-                    .ModelState
+                bindingContext.ModelState
                     .AddModelError(
                         bindingContext.ModelName,
                         String.Format(

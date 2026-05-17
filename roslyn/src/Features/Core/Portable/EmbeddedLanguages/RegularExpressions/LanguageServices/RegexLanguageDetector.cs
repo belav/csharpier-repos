@@ -227,13 +227,14 @@ internal sealed class RegexLanguageDetector(
     {
         options = default;
 
-        var parameter = Info.SemanticFacts.FindParameterForArgument(
-            semanticModel,
-            argumentNode,
-            allowUncertainCandidates: true,
-            allowParams: true,
-            cancellationToken
-        );
+        var parameter = Info.SemanticFacts
+            .FindParameterForArgument(
+                semanticModel,
+                argumentNode,
+                allowUncertainCandidates: true,
+                allowParams: true,
+                cancellationToken
+            );
         if (parameter?.Name != _patternName)
         {
             return false;

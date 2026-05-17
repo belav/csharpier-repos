@@ -23,9 +23,8 @@ namespace System.ServiceModel.Channels
 
         IOutputChannel GetOutputChannel(Uri to, TimeoutHelper timeoutHelper)
         {
-            IOutputChannel channel = this.innerChannelFactory.CreateChannel(
-                new EndpointAddress(to)
-            );
+            IOutputChannel channel = this.innerChannelFactory
+                .CreateChannel(new EndpointAddress(to));
             channel.Open(timeoutHelper.RemainingTime());
             return channel;
         }

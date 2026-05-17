@@ -88,8 +88,7 @@ namespace Microsoft.Cci
                 if (typeReference is IFunctionPointerTypeReference)
                 {
                     var messageProvider = context.Module.CommonCompilation.MessageProvider;
-                    context
-                        .Diagnostics
+                    context.Diagnostics
                         .Add(
                             messageProvider.CreateDiagnostic(
                                 messageProvider.ERR_FunctionPointerTypesInAttributeNotSupported,

@@ -107,8 +107,7 @@ namespace System.Windows.Forms
             private void redraw(Graphics graphics)
             {
                 VisualStyles.PushButtonState top_button_state = VisualStyles.PushButtonState.Normal;
-                VisualStyles.PushButtonState bottom_button_state = VisualStyles
-                    .PushButtonState
+                VisualStyles.PushButtonState bottom_button_state = VisualStyles.PushButtonState
                     .Normal;
 
                 if (owner.Enabled)
@@ -134,11 +133,9 @@ namespace System.Windows.Forms
                     top_button_state = VisualStyles.PushButtonState.Disabled;
                     bottom_button_state = VisualStyles.PushButtonState.Disabled;
                 }
-                ThemeEngine
-                    .Current
+                ThemeEngine.Current
                     .UpDownBaseDrawButton(graphics, top_button_rect, true, top_button_state);
-                ThemeEngine
-                    .Current
+                ThemeEngine.Current
                     .UpDownBaseDrawButton(graphics, bottom_button_rect, false, bottom_button_state);
             }
 
@@ -475,10 +472,11 @@ namespace System.Windows.Forms
 
         internal override void OnPaintInternal(PaintEventArgs e)
         {
-            e.Graphics.FillRectangle(
-                ThemeEngine.Current.ResPool.GetSolidBrush(BackColor),
-                ClientRectangle
-            );
+            e.Graphics
+                .FillRectangle(
+                    ThemeEngine.Current.ResPool.GetSolidBrush(BackColor),
+                    ClientRectangle
+                );
         }
 
         #endregion	// Private Methods

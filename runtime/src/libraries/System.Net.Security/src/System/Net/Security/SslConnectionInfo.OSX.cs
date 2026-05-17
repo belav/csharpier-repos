@@ -32,24 +32,21 @@ namespace System.Net.Security
                 if (context.SelectedApplicationProtocol.Protocol.Length > 0)
                 {
                     if (
-                        context
-                            .SelectedApplicationProtocol
+                        context.SelectedApplicationProtocol
                             .Equals(SslApplicationProtocol.Http11.Protocol)
                     )
                     {
                         ApplicationProtocol = s_http1;
                     }
                     else if (
-                        context
-                            .SelectedApplicationProtocol
+                        context.SelectedApplicationProtocol
                             .Equals(SslApplicationProtocol.Http2.Protocol)
                     )
                     {
                         ApplicationProtocol = s_http2;
                     }
                     else if (
-                        context
-                            .SelectedApplicationProtocol
+                        context.SelectedApplicationProtocol
                             .Equals(SslApplicationProtocol.Http3.Protocol)
                     )
                     {
@@ -57,8 +54,7 @@ namespace System.Net.Security
                     }
                     else
                     {
-                        ApplicationProtocol = context
-                            .SelectedApplicationProtocol
+                        ApplicationProtocol = context.SelectedApplicationProtocol
                             .Protocol
                             .ToArray();
                     }

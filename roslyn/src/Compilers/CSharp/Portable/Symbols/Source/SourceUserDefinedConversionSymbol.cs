@@ -28,8 +28,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             if (name == WellKnownMemberNames.CheckedExplicitConversionName)
             {
-                MessageID
-                    .IDS_FeatureCheckedUserDefinedOperators
+                MessageID.IDS_FeatureCheckedUserDefinedOperators
                     .CheckFeatureAvailability(diagnostics, syntax.CheckedKeyword);
             }
             else if (syntax.CheckedKeyword.IsKind(SyntaxKind.CheckedKeyword))
@@ -124,8 +123,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
 
             if (syntax.ExplicitInterfaceSpecifier != null)
-                MessageID
-                    .IDS_FeatureStaticAbstractMembersInInterfaces
+                MessageID.IDS_FeatureStaticAbstractMembersInInterfaces
                     .CheckFeatureAvailability(diagnostics, syntax.ExplicitInterfaceSpecifier);
         }
 

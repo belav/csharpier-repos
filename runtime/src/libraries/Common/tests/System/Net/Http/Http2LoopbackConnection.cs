@@ -527,8 +527,7 @@ namespace System.Net.Test.Common
             }
             else
             {
-                string value = Encoding
-                    .ASCII
+                string value = Encoding.ASCII
                     .GetString(headerBlock.Slice(bytesConsumed, stringLength).ToArray());
                 return (bytesConsumed + stringLength, value);
             }

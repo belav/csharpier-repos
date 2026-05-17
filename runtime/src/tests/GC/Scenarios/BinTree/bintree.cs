@@ -83,8 +83,7 @@ namespace DefaultNamespace
             {
                 m_pRoot = Insert(m_pRoot, m_Random.Next(100));
             }
-            Console
-                .Out
+            Console.Out
                 .WriteLine(
                     "Thread "
                         + ThreadId
@@ -101,8 +100,7 @@ namespace DefaultNamespace
             {
                 m_pRoot = Delete(m_pRoot, m_Random.Next(100));
             }
-            Console
-                .Out
+            Console.Out
                 .WriteLine(
                     "Thread "
                         + ThreadId

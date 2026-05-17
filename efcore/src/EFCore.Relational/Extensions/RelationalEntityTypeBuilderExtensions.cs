@@ -187,8 +187,7 @@ public static partial class RelationalEntityTypeBuilderExtensions
             return null;
         }
 
-        entityTypeBuilder
-            .Metadata
+        entityTypeBuilder.Metadata
             .SetIsTableExcludedFromMigrations(excludedFromMigrations, fromDataAnnotation);
         return entityTypeBuilder;
     }
@@ -802,8 +801,7 @@ public static partial class RelationalEntityTypeBuilderExtensions
 
         if (name is not null)
         {
-            entityType
-                .Model
+            entityType.Model
                 .Builder
                 .HasDbFunction(
                     name,

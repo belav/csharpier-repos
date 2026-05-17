@@ -11,8 +11,7 @@ public class TestExceptionFilter : ExceptionFilterAttribute
     public override void OnException(ExceptionContext context)
     {
         if (
-            context
-                .HttpContext
+            context.HttpContext
                 .Request
                 .Query
                 .TryGetValue("handleException", out var handleException)

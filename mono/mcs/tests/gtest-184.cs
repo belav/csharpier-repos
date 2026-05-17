@@ -3,8 +3,7 @@ class X
     public static void Main()
     {
         string[] s = { "a", "b", "a" };
-        System
-            .Array
+        System.Array
             .FindAll(
                 s,
                 delegate(string str)

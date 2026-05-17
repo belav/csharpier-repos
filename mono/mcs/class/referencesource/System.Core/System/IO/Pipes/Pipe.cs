@@ -1063,11 +1063,8 @@ namespace System.IO.Pipes
             IOCancellationHelper cancellationHelper = cancellationToken.CanBeCanceled
                 ? new IOCancellationHelper(cancellationToken)
                 : null;
-            return Task.Factory.FromAsync(
-                BeginWaitForConnection,
-                EndWaitForConnection,
-                cancellationHelper
-            );
+            return Task.Factory
+                .FromAsync(BeginWaitForConnection, EndWaitForConnection, cancellationHelper);
         }
 
         public Task WaitForConnectionAsync()
@@ -1969,10 +1966,11 @@ namespace System.IO.Pipes
 
             // We need to measure time here, not in the lambda
             int startTime = Environment.TickCount;
-            return Task.Factory.StartNew(
-                () => ConnectInternal(timeout, cancellationToken, startTime),
-                cancellationToken
-            );
+            return Task.Factory
+                .StartNew(
+                    () => ConnectInternal(timeout, cancellationToken, startTime),
+                    cancellationToken
+                );
         }
 
         // Waits for a pipe instance to become available. This method may return before WaitForConnection is called

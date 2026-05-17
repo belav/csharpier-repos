@@ -65,8 +65,7 @@ namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
             await using var rpcPair = new RpcPair();
 
             rpcPair.Server.AddTarget(new ObjectWithHelloMethod());
-            var result = await rpcPair
-                .Client
+            var result = await rpcPair.Client
                 .InvokeAsync<string>(
                     targetObject: 0,
                     nameof(ObjectWithHelloMethod.Hello),
@@ -83,8 +82,7 @@ namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
             await using var rpcPair = new RpcPair();
 
             rpcPair.Server.AddTarget(new ObjectWithAddMethod());
-            var result = await rpcPair
-                .Client
+            var result = await rpcPair.Client
                 .InvokeAsync<int>(
                     targetObject: 0,
                     nameof(ObjectWithAddMethod.Add),
@@ -103,8 +101,7 @@ namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
             rpcPair.Server.AddTarget(new ObjectWithNullableHelloMethod());
 
             // Test the InvokeNullableAsync with non-nulls
-            var result = await rpcPair
-                .Client
+            var result = await rpcPair.Client
                 .InvokeNullableAsync<string>(
                     targetObject: 0,
                     nameof(ObjectWithNullableHelloMethod.TryHello),
@@ -114,8 +111,7 @@ namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
             Assert.Equal("Hello World", result);
 
             // And with nulls
-            result = await rpcPair
-                .Client
+            result = await rpcPair.Client
                 .InvokeNullableAsync<string>(
                     targetObject: 0,
                     nameof(ObjectWithNullableHelloMethod.TryHello),
@@ -133,8 +129,7 @@ namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
             var rpcTarget = new ObjectWithVoidMethod();
             rpcPair.Server.AddTarget(rpcTarget);
 
-            await rpcPair
-                .Client
+            await rpcPair.Client
                 .InvokeAsync(
                     targetObject: 0,
                     nameof(ObjectWithVoidMethod.SetMessage),
@@ -152,8 +147,7 @@ namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
             var rpcTarget = new ObjectWithAsyncHelloMethods();
             rpcPair.Server.AddTarget(rpcTarget);
 
-            var result = await rpcPair
-                .Client
+            var result = await rpcPair.Client
                 .InvokeAsync<string>(
                     targetObject: 0,
                     nameof(ObjectWithAsyncHelloMethods.HelloAsync),
@@ -162,8 +156,7 @@ namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
                 );
             Assert.Equal("Hello World", result);
 
-            result = await rpcPair
-                .Client
+            result = await rpcPair.Client
                 .InvokeAsync<string>(
                     targetObject: 0,
                     nameof(ObjectWithAsyncHelloMethods.HelloWithCancellationAsync),
@@ -181,8 +174,7 @@ namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
             var rpcTarget = new ObjectWithRealAsyncMethod();
             rpcPair.Server.AddTarget(rpcTarget);
 
-            var call1 = rpcPair
-                .Client
+            var call1 = rpcPair.Client
                 .InvokeAsync(
                     targetObject: 0,
                     nameof(ObjectWithRealAsyncMethod.WaitAsync),
@@ -195,8 +187,7 @@ namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
             // and our test is awaiting the wrong tasks.
             rpcTarget.WaitUntilRequest(index: 0);
 
-            var call2 = rpcPair
-                .Client
+            var call2 = rpcPair.Client
                 .InvokeAsync(
                     targetObject: 0,
                     nameof(ObjectWithRealAsyncMethod.WaitAsync),
@@ -225,8 +216,7 @@ namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
             var rpcTarget = new ObjectWithRealAsyncMethod();
             rpcPair.Server.AddTarget(rpcTarget);
 
-            var call1 = rpcPair
-                .Client
+            var call1 = rpcPair.Client
                 .InvokeAsync(
                     targetObject: 0,
                     nameof(ObjectWithRealAsyncMethod.WaitAsync),
@@ -239,8 +229,7 @@ namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
             // and our test is awaiting the wrong targets.
             rpcTarget.WaitUntilRequest(index: 0);
 
-            var call2 = rpcPair
-                .Client
+            var call2 = rpcPair.Client
                 .InvokeAsync(
                     targetObject: 0,
                     nameof(ObjectWithRealAsyncMethod.WaitAsync),
@@ -269,8 +258,7 @@ namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
             rpcPair.Server.AddTarget(new ObjectWithThrowingMethod());
 
             var exception = await Assert.ThrowsAsync<RemoteInvocationException>(() =>
-                rpcPair
-                    .Client
+                rpcPair.Client
                     .InvokeAsync(
                         targetObject: 0,
                         nameof(ObjectWithThrowingMethod.ThrowException),

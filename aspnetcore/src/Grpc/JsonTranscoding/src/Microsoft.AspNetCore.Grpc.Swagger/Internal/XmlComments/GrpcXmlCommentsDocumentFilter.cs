@@ -26,8 +26,7 @@ internal sealed class GrpcXmlCommentsDocumentFilter : IDocumentFilter
     public void Apply(OpenApiDocument swaggerDoc, DocumentFilterContext context)
     {
         // Get unique services
-        var nameAndServiceDescriptor = context
-            .ApiDescriptions
+        var nameAndServiceDescriptor = context.ApiDescriptions
             .Select(apiDesc => apiDesc.ActionDescriptor)
             .Where(actionDesc =>
                 actionDesc != null
@@ -38,8 +37,7 @@ internal sealed class GrpcXmlCommentsDocumentFilter : IDocumentFilter
 
         foreach (var nameAndType in nameAndServiceDescriptor)
         {
-            var grpcMethodMetadata = nameAndType
-                .Value
+            var grpcMethodMetadata = nameAndType.Value
                 .EndpointMetadata
                 .OfType<GrpcMethodMetadata>()
                 .First();
@@ -79,8 +77,7 @@ internal sealed class GrpcXmlCommentsDocumentFilter : IDocumentFilter
                     swaggerDoc.Tags = new List<OpenApiTag>();
                 }
 
-                swaggerDoc
-                    .Tags
+                swaggerDoc.Tags
                     .Add(
                         new OpenApiTag
                         {

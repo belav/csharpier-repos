@@ -15,8 +15,7 @@ public class ServerProtocolSegmentTests
         // Arrange
         var segement = new ServerProtocolSegment();
         var context = new RewriteContext { HttpContext = new DefaultHttpContext() };
-        context
-            .HttpContext
+        context.HttpContext
             .Features
             .Set<IHttpRequestFeature>(new HttpRequestFeature { Protocol = "http" });
 

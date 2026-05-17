@@ -37,8 +37,7 @@ namespace ILCompiler.DependencyAnalysis
             if (_type.IsInterface)
                 return Array.Empty<DependencyListEntry>();
 
-            return Dataflow
-                .ReflectionMethodBodyScanner
+            return Dataflow.ReflectionMethodBodyScanner
                 .ProcessTypeGetTypeDataflow(
                     factory,
                     mdManager.FlowAnnotations,

@@ -27,8 +27,7 @@ namespace System.ServiceModel.ComIntegration
             String path = Path.GetDirectoryName(strAssemblyManifestFileName);
             if (!String.IsNullOrEmpty(path) && !Directory.Exists(path))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         System.ServiceModel.ComIntegration.Error.DirectoryNotFound(path)
                     );
@@ -76,11 +75,9 @@ namespace System.ServiceModel.ComIntegration
 
                 s.Close();
                 File.Delete(strAssemblyManifestFileName);
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
-                        System
-                            .ServiceModel
+                        System.ServiceModel
                             .ComIntegration
                             .Error
                             .ManifestCreationFailed(strAssemblyManifestFileName, e.Message)
@@ -103,8 +100,7 @@ namespace System.ServiceModel.ComIntegration
             String path = Path.GetDirectoryName(strAssemblyManifestFileName);
             if (!String.IsNullOrEmpty(path) && !Directory.Exists(path))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         System.ServiceModel.ComIntegration.Error.DirectoryNotFound(path)
                     );
@@ -134,11 +130,9 @@ namespace System.ServiceModel.ComIntegration
 
                 s.Close();
                 File.Delete(strAssemblyManifestFileName);
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
-                        System
-                            .ServiceModel
+                        System.ServiceModel
                             .ComIntegration
                             .Error
                             .ManifestCreationFailed(strAssemblyManifestFileName, e.Message)

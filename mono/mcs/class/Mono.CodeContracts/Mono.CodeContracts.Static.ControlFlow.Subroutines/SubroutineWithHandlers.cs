@@ -111,8 +111,7 @@ namespace Mono.CodeContracts.Static.ControlFlow.Subroutines
         )
         {
             if (current.Subroutine != this)
-                return current
-                    .Subroutine
+                return current.Subroutine
                     .EdgeSubroutinesOuterToInner(
                         current,
                         succ,

@@ -141,8 +141,7 @@ namespace System.Data.Objects.Internal
             }
 
             EntityCommandDefinition entityDefinition = (EntityCommandDefinition)definition;
-            QueryCacheManager cacheManager = context
-                .Perspective
+            QueryCacheManager cacheManager = context.Perspective
                 .MetadataWorkspace
                 .GetQueryCacheManager();
 
@@ -171,8 +170,7 @@ namespace System.Data.Objects.Internal
                         if (null != entitySet)
                         {
                             if (
-                                entitySet
-                                    .ElementType
+                                entitySet.ElementType
                                     .IsAssignableFrom(
                                         ((CollectionType)treeResultType.EdmType).TypeUsage.EdmType
                                     )

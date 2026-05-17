@@ -100,8 +100,7 @@ namespace System.Web.UI.MobileControls
         {
             // Don't need to synchronize, as this is only being called
             // from one thread -- the configuration section handler.
-            _controlAdapterTypes[controlType] = FactoryGenerator
-                .StaticFactoryGenerator
+            _controlAdapterTypes[controlType] = FactoryGenerator.StaticFactoryGenerator
                 .GetFactory(adapterType);
         }
 

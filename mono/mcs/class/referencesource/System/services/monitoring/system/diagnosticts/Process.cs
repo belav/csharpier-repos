@@ -2290,10 +2290,8 @@ namespace System.Diagnostics
             if (exited != null)
             {
                 if (this.SynchronizingObject != null && this.SynchronizingObject.InvokeRequired)
-                    this.SynchronizingObject.BeginInvoke(
-                        exited,
-                        new object[] { this, EventArgs.Empty }
-                    );
+                    this.SynchronizingObject
+                        .BeginInvoke(exited, new object[] { this, EventArgs.Empty });
                 else
                     exited(this, EventArgs.Empty);
             }

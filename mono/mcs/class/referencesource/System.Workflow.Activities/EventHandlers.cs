@@ -158,8 +158,7 @@ namespace System.Workflow.Activities
 
                 if (!scopeCompleted) //UnSubscribe from event.
                 {
-                    childActivity
-                        .EventActivity
+                    childActivity.EventActivity
                         .Unsubscribe(executionContext, eventActivitySubscriber);
                 }
             }
@@ -200,8 +199,7 @@ namespace System.Workflow.Activities
             )
             {
                 eda.EventActivity.Subscribe(executionContext, eventActivitySubscriber);
-                activity
-                    .ActivityState
+                activity.ActivityState
                     .Insert(
                         activity.EnabledActivities.IndexOf(addedActivity),
                         eventActivitySubscriber
@@ -235,8 +233,7 @@ namespace System.Workflow.Activities
                 {
                     EventHandlerEventActivitySubscriber eventSubscriber = activity.ActivityState[i];
                     if (
-                        eventSubscriber
-                            .eventDrivenActivity
+                        eventSubscriber.eventDrivenActivity
                             .QualifiedName
                             .Equals(removedActivity.QualifiedName)
                     )
@@ -331,8 +328,7 @@ namespace System.Workflow.Activities
                                     contextManager.CreateExecutionContext(
                                         eventHandlers.EnabledActivities[i]
                                     );
-                                childContext
-                                    .Activity
+                                childContext.Activity
                                     .RegisterForStatusChange(Activity.ClosedEvent, this);
                                 childContext.ExecuteActivity(childContext.Activity);
                             }

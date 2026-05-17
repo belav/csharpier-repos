@@ -109,8 +109,7 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
                     .GetMembers(IdentifierToken.ValueText)
                     .OfType<IMethodSymbol>();
 
-                var destinationProvider = document
-                    .Project
+                var destinationProvider = document.Project
                     .Solution
                     .Services
                     .GetLanguageServices(TypeToGenerateIn.Language);
@@ -123,8 +122,7 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
                     .GenerateMethodAsync(syntaxFactory, false, cancellationToken)
                     .ConfigureAwait(false);
                 return !existingMethods.Any(m =>
-                    SignatureComparer
-                        .Instance
+                    SignatureComparer.Instance
                         .HaveSameSignature(
                             m,
                             generatedMethod,

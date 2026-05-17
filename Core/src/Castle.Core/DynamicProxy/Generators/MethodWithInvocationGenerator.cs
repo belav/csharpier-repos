@@ -123,8 +123,7 @@ namespace Castle.DynamicProxy.Generators
                     namingScope.GetUniqueName("token_" + MethodToOverride.Name),
                     typeof(MethodInfo)
                 );
-                @class
-                    .ClassConstructor
+                @class.ClassConstructor
                     .CodeBuilder
                     .AddStatement(
                         new AssignStatement(
@@ -155,8 +154,7 @@ namespace Castle.DynamicProxy.Generators
             var ctorArguments = ModifyArguments(@class, arguments);
 
             var invocationLocal = emitter.CodeBuilder.DeclareLocal(invocationType);
-            emitter
-                .CodeBuilder
+            emitter.CodeBuilder
                 .AddStatement(
                     new AssignStatement(
                         invocationLocal,
@@ -214,8 +212,7 @@ namespace Castle.DynamicProxy.Generators
                     LocalReference returnValue = emitter.CodeBuilder.DeclareLocal(typeof(object));
                     emitter.CodeBuilder.AddStatement(new AssignStatement(returnValue, getRetVal));
 
-                    emitter
-                        .CodeBuilder
+                    emitter.CodeBuilder
                         .AddStatement(
                             new IfNullExpression(
                                 returnValue,
@@ -228,8 +225,7 @@ namespace Castle.DynamicProxy.Generators
                 }
 
                 // Emit code to return with cast from ReturnValue
-                emitter
-                    .CodeBuilder
+                emitter.CodeBuilder
                     .AddStatement(
                         new ReturnStatement(new ConvertExpression(emitter.ReturnType, getRetVal))
                     );
@@ -287,8 +283,7 @@ namespace Castle.DynamicProxy.Generators
                 VirtualCall = true,
             };
 
-            emitter
-                .CodeBuilder
+            emitter.CodeBuilder
                 .AddStatement(
                     new IfNullExpression(
                         methodInterceptorsField,
@@ -316,8 +311,7 @@ namespace Castle.DynamicProxy.Generators
                 t => t.IsGenericParameter
             );
             var genericParamsArrayLocal = methodEmitter.CodeBuilder.DeclareLocal(typeof(Type[]));
-            methodEmitter
-                .CodeBuilder
+            methodEmitter.CodeBuilder
                 .AddStatement(
                     new AssignStatement(
                         genericParamsArrayLocal,
@@ -327,8 +321,7 @@ namespace Castle.DynamicProxy.Generators
 
             for (var i = 0; i < genericParameters.Length; ++i)
             {
-                methodEmitter
-                    .CodeBuilder
+                methodEmitter.CodeBuilder
                     .AddStatement(
                         new AssignArrayStatement(
                             genericParamsArrayLocal,
@@ -337,8 +330,7 @@ namespace Castle.DynamicProxy.Generators
                         )
                     );
             }
-            methodEmitter
-                .CodeBuilder
+            methodEmitter.CodeBuilder
                 .AddStatement(
                     new MethodInvocationExpression(
                         invocationLocal,

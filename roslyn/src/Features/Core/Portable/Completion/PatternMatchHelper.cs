@@ -58,8 +58,7 @@ namespace Microsoft.CodeAnalysis.Completion
             // Now we escaping from the second check for English languages.
             // Maybe we can escape as well for more similar languages in case if we meet performance issues.
             if (
-                culture
-                    .ThreeLetterWindowsLanguageName
+                culture.ThreeLetterWindowsLanguageName
                     .Equals(EnUSCultureInfo.ThreeLetterWindowsLanguageName)
             )
             {

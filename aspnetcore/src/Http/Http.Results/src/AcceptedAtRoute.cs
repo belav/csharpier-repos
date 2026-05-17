@@ -108,8 +108,7 @@ public sealed class AcceptedAtRoute : IResult, IEndpointMetadataProvider, IStatu
         ArgumentNullException.ThrowIfNull(method);
         ArgumentNullException.ThrowIfNull(builder);
 
-        builder
-            .Metadata
+        builder.Metadata
             .Add(new ProducesResponseTypeMetadata(StatusCodes.Status202Accepted, typeof(void)));
     }
 }

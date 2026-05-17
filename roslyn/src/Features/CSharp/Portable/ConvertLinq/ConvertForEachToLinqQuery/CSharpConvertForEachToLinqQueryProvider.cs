@@ -212,8 +212,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq.ConvertForEachToLinqQuery
                 // Do not support declarations without initialization.
                 // int a = 0, b, c = 0;
                 if (
-                    localDeclarationStatement
-                        .Declaration
+                    localDeclarationStatement.Declaration
                         .Variables
                         .All(variable => variable.Initializer != null)
                 )
@@ -228,8 +227,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq.ConvertForEachToLinqQuery
                     var localDeclarationTrailingTrivia = SyntaxNodeOrTokenExtensions.GetTrivia(
                         localDeclarationStatement.SemicolonToken
                     );
-                    var separators = localDeclarationStatement
-                        .Declaration
+                    var separators = localDeclarationStatement.Declaration
                         .Variables
                         .GetSeparators()
                         .ToArray();
@@ -323,8 +321,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq.ConvertForEachToLinqQuery
                                 // }
                                 // Output:
                                 // (from x in a ... select x).ToList();
-                                var selectExpression = invocationExpression
-                                    .ArgumentList
+                                var selectExpression = invocationExpression.ArgumentList
                                     .Arguments
                                     .Single()
                                     .Expression;
@@ -354,8 +351,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq.ConvertForEachToLinqQuery
                     )!;
 
                     // Using Single() is valid even for partial methods.
-                    var memberDeclarationSyntax = memberDeclarationSymbol
-                        .DeclaringSyntaxReferences
+                    var memberDeclarationSyntax = memberDeclarationSymbol.DeclaringSyntaxReferences
                         .Single()
                         .GetSyntax();
 
@@ -382,8 +378,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq.ConvertForEachToLinqQuery
                         // Check that
                         // a. There are either just a single 'yield return' or 'yield return' with 'yield break' just after.
                         // b. Those foreach and 'yield break' (if exists) are last statements in the method (do not count local function declaration statements).
-                        var statementsOnBlockWithForEach = block
-                            .Statements
+                        var statementsOnBlockWithForEach = block.Statements
                             .Where(statement =>
                                 statement.Kind() != SyntaxKind.LocalFunctionStatement
                             )

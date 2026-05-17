@@ -110,8 +110,7 @@ namespace System.Workflow.ComponentModel
                                 }
                                 catch (Exception e)
                                 {
-                                    System
-                                        .Workflow
+                                    System.Workflow
                                         .Runtime
                                         .WorkflowTrace
                                         .Runtime
@@ -149,8 +148,7 @@ namespace System.Workflow.ComponentModel
                                 }
                                 catch (Exception e)
                                 {
-                                    System
-                                        .Workflow
+                                    System.Workflow
                                         .Runtime
                                         .WorkflowTrace
                                         .Runtime
@@ -188,8 +186,7 @@ namespace System.Workflow.ComponentModel
                                 }
                                 catch (Exception e)
                                 {
-                                    System
-                                        .Workflow
+                                    System.Workflow
                                         .Runtime
                                         .WorkflowTrace
                                         .Runtime
@@ -229,8 +226,7 @@ namespace System.Workflow.ComponentModel
                                 }
                                 catch (Exception e)
                                 {
-                                    System
-                                        .Workflow
+                                    System.Workflow
                                         .Runtime
                                         .WorkflowTrace
                                         .Runtime

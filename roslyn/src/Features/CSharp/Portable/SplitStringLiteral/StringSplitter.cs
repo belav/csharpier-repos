@@ -151,11 +151,9 @@ namespace Microsoft.CodeAnalysis.CSharp.SplitStringLiteral
 
         private string GetIndentString(SyntaxNode newRoot)
         {
-            var indentationService = Document
-                .LanguageServices
+            var indentationService = Document.LanguageServices
                 .GetRequiredService<IIndentationService>();
-            var originalLineNumber = Document
-                .Text
+            var originalLineNumber = Document.Text
                 .Lines
                 .GetLineFromPosition(CursorPosition)
                 .LineNumber;

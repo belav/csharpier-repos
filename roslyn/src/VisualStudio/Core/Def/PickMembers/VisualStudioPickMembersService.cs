@@ -44,8 +44,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.PickMembers
             if (result == true)
             {
                 return new PickMembersResult(
-                    viewModel
-                        .MemberContainers
+                    viewModel.MemberContainers
                         .Where(c => c.IsChecked)
                         .Select(c => c.Symbol)
                         .ToImmutableArray(),

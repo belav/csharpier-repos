@@ -200,8 +200,7 @@ public class CosmosSingletonOptions : ICosmosSingletonOptions
                 || TokenCredential != cosmosOptions.TokenCredential
                 || ConnectionString != cosmosOptions.ConnectionString
                 || Region != cosmosOptions.Region
-                || !StructuralComparisons
-                    .StructuralEqualityComparer
+                || !StructuralComparisons.StructuralEqualityComparer
                     .Equals(PreferredRegions, cosmosOptions.PreferredRegions)
                 || LimitToEndpoint != cosmosOptions.LimitToEndpoint
                 || ConnectionMode != cosmosOptions.ConnectionMode

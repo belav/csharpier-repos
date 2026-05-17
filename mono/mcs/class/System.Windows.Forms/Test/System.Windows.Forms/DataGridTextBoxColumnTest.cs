@@ -1170,8 +1170,7 @@ namespace MonoTests.System.Windows.Forms
 
                 table = new DataTable();
                 view = table.DefaultView;
-                table
-                    .Columns
+                table.Columns
                     .Add(new DataColumn("Amount", typeof(MockNumericNonStringConvertable)));
 
                 DataRow row = table.NewRow();

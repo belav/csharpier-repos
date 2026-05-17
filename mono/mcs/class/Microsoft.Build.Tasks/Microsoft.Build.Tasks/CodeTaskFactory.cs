@@ -164,9 +164,8 @@ namespace Microsoft.Build.Tasks
             { // 'code' contains parts of the class that implements the task
                 ccu = new CodeCompileUnit();
                 var nsp = new CodeNamespace();
-                nsp.Imports.AddRange(
-                    namespace_uses.Select(x => new CodeNamespaceImport(x)).ToArray()
-                );
+                nsp.Imports
+                    .AddRange(namespace_uses.Select(x => new CodeNamespaceImport(x)).ToArray());
                 ccu.Namespaces.Add(nsp);
 
                 var taskClass = new CodeTypeDeclaration
@@ -197,23 +196,25 @@ namespace Microsoft.Build.Tasks
                     };
 
                     // add getter and setter to the property
-                    prop.GetStatements.Add(
-                        new CodeMethodReturnStatement(
-                            new CodeFieldReferenceExpression(
-                                new CodeThisReferenceExpression(),
-                                propBf.Name
+                    prop.GetStatements
+                        .Add(
+                            new CodeMethodReturnStatement(
+                                new CodeFieldReferenceExpression(
+                                    new CodeThisReferenceExpression(),
+                                    propBf.Name
+                                )
                             )
-                        )
-                    );
-                    prop.SetStatements.Add(
-                        new CodeAssignStatement(
-                            new CodeFieldReferenceExpression(
-                                new CodeThisReferenceExpression(),
-                                propBf.Name
-                            ),
-                            new CodePropertySetValueReferenceExpression()
-                        )
-                    );
+                        );
+                    prop.SetStatements
+                        .Add(
+                            new CodeAssignStatement(
+                                new CodeFieldReferenceExpression(
+                                    new CodeThisReferenceExpression(),
+                                    propBf.Name
+                                ),
+                                new CodePropertySetValueReferenceExpression()
+                            )
+                        );
 
                     parameters.Add(prop);
                     parametersBackingFields.Add(propBf);
@@ -238,8 +239,7 @@ namespace Microsoft.Build.Tasks
 
                     // add the code and a 'return true' at the end of the method
                     method.Statements.Add(new CodeSnippetStatement(code));
-                    method
-                        .Statements
+                    method.Statements
                         .Add(new CodeMethodReturnStatement(new CodePrimitiveExpression(true)));
 
                     taskClass.Members.Add(method);
@@ -255,8 +255,7 @@ namespace Microsoft.Build.Tasks
             var cscParams = new CompilerParameters();
             cscParams.ReferencedAssemblies.Add("Microsoft.Build.Framework.dll");
             cscParams.ReferencedAssemblies.Add("Microsoft.Build.Utilities.v4.0.dll"); // since we use Task, it depends on this dll.
-            cscParams
-                .ReferencedAssemblies
+            cscParams.ReferencedAssemblies
                 .AddRange(GetReferences(references, taskFactoryLoggingHost));
             cscParams.GenerateInMemory = true;
             var results = CodeDomProvider

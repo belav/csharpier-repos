@@ -73,8 +73,7 @@ namespace tests.system_data_dll.System_Data
             Exception exp = null;
 
             DataSet ds = new DataSet("MyDataSet");
-            System.Globalization.CultureInfo culInfo = System
-                .Globalization
+            System.Globalization.CultureInfo culInfo = System.Globalization
                 .CultureInfo
                 .CurrentCulture;
 

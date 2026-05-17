@@ -146,8 +146,7 @@ namespace System.Web.Http.Description
             IList<HttpMethod> supportedMethods = new List<HttpMethod>();
             IList<HttpMethod> actionHttpMethods = actionDescriptor.SupportedHttpMethods;
             HttpMethodConstraint httpMethodConstraint =
-                route
-                    .Constraints
+                route.Constraints
                     .Values
                     .FirstOrDefault(c => typeof(HttpMethodConstraint).IsAssignableFrom(c.GetType()))
                 as HttpMethodConstraint;
@@ -158,8 +157,7 @@ namespace System.Web.Http.Description
             }
             else
             {
-                supportedMethods = httpMethodConstraint
-                    .AllowedMethods
+                supportedMethods = httpMethodConstraint.AllowedMethods
                     .Intersect(actionHttpMethods)
                     .ToList();
             }
@@ -220,8 +218,7 @@ namespace System.Web.Http.Description
         private Collection<ApiDescription> InitializeApiDescriptions()
         {
             Collection<ApiDescription> apiDescriptions = new Collection<ApiDescription>();
-            IHttpControllerSelector controllerSelector = _config
-                .Services
+            IHttpControllerSelector controllerSelector = _config.Services
                 .GetHttpControllerSelector();
             IDictionary<string, HttpControllerDescriptor> controllerMappings =
                 controllerSelector.GetControllerMapping();
@@ -506,8 +503,7 @@ namespace System.Web.Http.Description
             );
             IEnumerable<MediaTypeFormatter> supportedRequestBodyFormatters =
                 bodyParameter != null
-                    ? actionDescriptor
-                        .Configuration
+                    ? actionDescriptor.Configuration
                         .Formatters
                         .Where(f => f.CanReadType(bodyParameter.ParameterDescriptor.ParameterType))
                     : Enumerable.Empty<MediaTypeFormatter>();
@@ -517,8 +513,7 @@ namespace System.Web.Http.Description
             Type returnType = responseDescription.ResponseType ?? responseDescription.DeclaredType;
             IEnumerable<MediaTypeFormatter> supportedResponseFormatters =
                 (returnType != null && returnType != typeof(void))
-                    ? actionDescriptor
-                        .Configuration
+                    ? actionDescriptor.Configuration
                         .Formatters
                         .Where(f => f.CanWriteType(returnType))
                     : Enumerable.Empty<MediaTypeFormatter>();
@@ -634,8 +629,7 @@ namespace System.Web.Http.Description
                         IsBindableCollection(parameterDescription.ParameterDescriptor.ParameterType)
                     )
                     {
-                        string parameterName = parameterDescription
-                            .ParameterDescriptor
+                        string parameterName = parameterDescription.ParameterDescriptor
                             .ParameterName;
                         Type innerType = GetCollectionElementType(
                             parameterDescription.ParameterDescriptor.ParameterType
@@ -685,8 +679,7 @@ namespace System.Web.Http.Description
                         // Dictionary generates query string like
                         // "?dict[0].key={dict[0].key}&dict[0].value={dict[0].value}
                         //  &dict[1].key={dict[1].key}&dict[1].value={dict[1].value}"
-                        string parameterName = parameterDescription
-                            .ParameterDescriptor
+                        string parameterName = parameterDescription.ParameterDescriptor
                             .ParameterName;
                         AddPlaceholder(parameterValuesForRoute, parameterName + "[0].key");
                         AddPlaceholder(parameterValuesForRoute, parameterName + "[0].value");

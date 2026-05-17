@@ -33,8 +33,7 @@ public partial class RequestDelegateReturnTypeAnalyzer : DiagnosticAnalyzer
                     if (
                         methodReference.Parent is { } parent
                         && parent.Kind == OperationKind.DelegateCreation
-                        && SymbolEqualityComparer
-                            .Default
+                        && SymbolEqualityComparer.Default
                             .Equals(
                                 parent.Type,
                                 wellKnownTypes.Get(
@@ -47,8 +46,7 @@ public partial class RequestDelegateReturnTypeAnalyzer : DiagnosticAnalyzer
                         var returnType = methodReference.Method.ReturnType;
 
                         if (
-                            SymbolEqualityComparer
-                                .Default
+                            SymbolEqualityComparer.Default
                                 .Equals(
                                     returnType.OriginalDefinition,
                                     wellKnownTypes.Get(WellKnownType.System_Threading_Tasks_Task_T)
@@ -72,8 +70,7 @@ public partial class RequestDelegateReturnTypeAnalyzer : DiagnosticAnalyzer
                     if (
                         anonymousFunction.Parent is { } parent
                         && parent.Kind == OperationKind.DelegateCreation
-                        && SymbolEqualityComparer
-                            .Default
+                        && SymbolEqualityComparer.Default
                             .Equals(
                                 parent.Type,
                                 wellKnownTypes.Get(
@@ -99,8 +96,7 @@ public partial class RequestDelegateReturnTypeAnalyzer : DiagnosticAnalyzer
                                 // 2. The method throws an exception.
                                 if (
                                     returnType != null
-                                    && SymbolEqualityComparer
-                                        .Default
+                                    && SymbolEqualityComparer.Default
                                         .Equals(
                                             returnType.OriginalDefinition,
                                             wellKnownTypes.Get(

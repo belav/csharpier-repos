@@ -135,8 +135,7 @@ namespace System.ServiceModel.Channels
             }
             else if (type.Length == 0)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument("type", SR.GetString(SR.ParameterCannotBeEmpty));
             }
 

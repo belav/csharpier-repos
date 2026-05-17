@@ -326,8 +326,7 @@ namespace System.Web
 
             table.Rows.Add(AltRow("Request Details:"));
             table.Rows.Add(InfoRow2("Session Id:", session_id, "Request Type", request_type));
-            table
-                .Rows
+            table.Rows
                 .Add(
                     InfoRow2(
                         "Time of Request:",
@@ -336,8 +335,7 @@ namespace System.Web
                         status_code.ToString()
                     )
                 );
-            table
-                .Rows
+            table.Rows
                 .Add(
                     InfoRow2(
                         "Request Encoding:",
@@ -382,8 +380,7 @@ namespace System.Web
 
             int page_vs_size = page == null ? 0 : GetViewStateSize(page, page.GetSavedViewState());
             table.Rows.Add(AltRow("Control Tree"));
-            table
-                .Rows
+            table.Rows
                 .Add(
                     SubHeadRow(
                         "Control Id",

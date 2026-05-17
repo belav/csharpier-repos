@@ -174,16 +174,14 @@ namespace System.Net.PeerToPeer
             m_MaxRecords = MaxRecords;
             m_PeerNameResolverWeakReference = new WeakReference(parent);
             m_TraceEventId = NewTraceEventId;
-            Logging
-                .P2PTraceSource
+            Logging.P2PTraceSource
                 .TraceEvent(
                     TraceEventType.Information,
                     m_TraceEventId,
                     "New PeerNameResolverHelper created with TraceEventID {0}",
                     m_TraceEventId
                 );
-            Logging
-                .P2PTraceSource
+            Logging.P2PTraceSource
                 .TraceEvent(
                     TraceEventType.Information,
                     m_TraceEventId,
@@ -250,8 +248,7 @@ namespace System.Net.PeerToPeer
                     SR.GetString(SR.Pnrp_CouldNotStartNameResolution),
                     result
                 );
-                Logging
-                    .P2PTraceSource
+                Logging.P2PTraceSource
                     .TraceEvent(
                         TraceEventType.Error,
                         m_TraceEventId,
@@ -266,8 +263,7 @@ namespace System.Net.PeerToPeer
             //------------------------------------------
             m_AsyncOp = AsyncOperationManager.CreateOperation(m_userState);
 
-            Logging
-                .P2PTraceSource
+            Logging.P2PTraceSource
                 .TraceEvent(
                     TraceEventType.Information,
                     m_TraceEventId,
@@ -297,8 +293,7 @@ namespace System.Net.PeerToPeer
             //This callback is called whenever there is an endpoint info
             //available or the resultion is completed
             //------------------------------------------
-            Logging
-                .P2PTraceSource
+            Logging.P2PTraceSource
                 .TraceEvent(
                     TraceEventType.Information,
                     m_TraceEventId,
@@ -310,8 +305,7 @@ namespace System.Net.PeerToPeer
             PeerNameResolver parent = null;
             if (m_Cancelled)
             {
-                Logging
-                    .P2PTraceSource
+                Logging.P2PTraceSource
                     .TraceEvent(
                         TraceEventType.Information,
                         m_TraceEventId,
@@ -323,8 +317,7 @@ namespace System.Net.PeerToPeer
             {
                 if (m_Cancelled)
                 {
-                    Logging
-                        .P2PTraceSource
+                    Logging.P2PTraceSource
                         .TraceEvent(
                             TraceEventType.Information,
                             m_TraceEventId,
@@ -340,8 +333,7 @@ namespace System.Net.PeerToPeer
                 {
                     if (result == PEER_E_NO_MORE)
                     {
-                        Logging
-                            .P2PTraceSource
+                        Logging.P2PTraceSource
                             .TraceEvent(
                                 TraceEventType.Information,
                                 m_TraceEventId,
@@ -353,8 +345,7 @@ namespace System.Net.PeerToPeer
                 }
                 else
                 {
-                    Logging
-                        .P2PTraceSource
+                    Logging.P2PTraceSource
                         .TraceEvent(
                             TraceEventType.Information,
                             m_TraceEventId,
@@ -427,8 +418,7 @@ namespace System.Net.PeerToPeer
                     ResolveProgressChangedEventArgs resolveProgressChangedEventArgs =
                         new ResolveProgressChangedEventArgs(record, m_AsyncOp.UserSuppliedState);
 
-                    Logging
-                        .P2PTraceSource
+                    Logging.P2PTraceSource
                         .TraceEvent(
                             TraceEventType.Information,
                             m_TraceEventId,
@@ -462,8 +452,7 @@ namespace System.Net.PeerToPeer
                     SR.GetString(SR.Pnrp_ExceptionWhileResolvingAPeerName),
                     result
                 );
-                Logging
-                    .P2PTraceSource
+                Logging.P2PTraceSource
                     .TraceEvent(
                         TraceEventType.Information,
                         m_TraceEventId,
@@ -479,8 +468,7 @@ namespace System.Net.PeerToPeer
             parent = m_PeerNameResolverWeakReference.Target as PeerNameResolver;
             if (parent != null)
             {
-                Logging
-                    .P2PTraceSource
+                Logging.P2PTraceSource
                     .TraceEvent(
                         TraceEventType.Information,
                         m_TraceEventId,
@@ -498,8 +486,7 @@ namespace System.Net.PeerToPeer
         [System.Security.SecurityCritical]
         public void ContineCancelCallback(object state)
         {
-            Logging
-                .P2PTraceSource
+            Logging.P2PTraceSource
                 .TraceEvent(
                     TraceEventType.Information,
                     m_TraceEventId,
@@ -509,8 +496,7 @@ namespace System.Net.PeerToPeer
             {
                 if (m_CompletedOrException)
                 {
-                    Logging
-                        .P2PTraceSource
+                    Logging.P2PTraceSource
                         .TraceEvent(
                             TraceEventType.Information,
                             m_TraceEventId,
@@ -522,8 +508,7 @@ namespace System.Net.PeerToPeer
                 {
                     if (m_Cancelled)
                     {
-                        Logging
-                            .P2PTraceSource
+                        Logging.P2PTraceSource
                             .TraceEvent(
                                 TraceEventType.Information,
                                 m_TraceEventId,
@@ -533,8 +518,7 @@ namespace System.Net.PeerToPeer
                     }
                     if (m_CompletedOrException)
                     {
-                        Logging
-                            .P2PTraceSource
+                        Logging.P2PTraceSource
                             .TraceEvent(
                                 TraceEventType.Information,
                                 m_TraceEventId,
@@ -544,8 +528,7 @@ namespace System.Net.PeerToPeer
                     }
                     else
                     {
-                        Logging
-                            .P2PTraceSource
+                        Logging.P2PTraceSource
                             .TraceEvent(
                                 TraceEventType.Information,
                                 m_TraceEventId,
@@ -570,8 +553,7 @@ namespace System.Net.PeerToPeer
             }
             catch
             {
-                Logging
-                    .P2PTraceSource
+                Logging.P2PTraceSource
                     .TraceEvent(
                         TraceEventType.Critical,
                         m_TraceEventId,
@@ -792,8 +774,7 @@ namespace System.Net.PeerToPeer
             //---------------------------------------------------------------
             //Trace log
             //---------------------------------------------------------------
-            Logging
-                .P2PTraceSource
+            Logging.P2PTraceSource
                 .TraceEvent(
                     TraceEventType.Information,
                     0,
@@ -903,8 +884,7 @@ namespace System.Net.PeerToPeer
                     shEndPointInfoArray.Dispose();
                 }
             }
-            Logging
-                .P2PTraceSource
+            Logging.P2PTraceSource
                 .TraceEvent(
                     TraceEventType.Information,
                     0,
@@ -998,8 +978,7 @@ namespace System.Net.PeerToPeer
                 {
                     throw new ArgumentException(SR.GetString(SR.DuplicateUserToken));
                 }
-                Logging
-                    .P2PTraceSource
+                Logging.P2PTraceSource
                     .TraceEvent(
                         TraceEventType.Information,
                         newTraceEventId,
@@ -1033,8 +1012,7 @@ namespace System.Net.PeerToPeer
                 lock (m_PeerNameResolverHelperListLock)
                 {
                     m_PeerNameResolverHelperList.Remove(userState);
-                    Logging
-                        .P2PTraceSource
+                    Logging.P2PTraceSource
                         .TraceEvent(
                             TraceEventType.Error,
                             newTraceEventId,
@@ -1091,8 +1069,7 @@ namespace System.Net.PeerToPeer
                 PeerNameResolverHelper helper = m_PeerNameResolverHelperList[args.UserState];
                 if (helper == null)
                 {
-                    Logging
-                        .P2PTraceSource
+                    Logging.P2PTraceSource
                         .TraceEvent(
                             TraceEventType.Critical,
                             0,
@@ -1101,8 +1078,7 @@ namespace System.Net.PeerToPeer
                 }
                 else
                 {
-                    Logging
-                        .P2PTraceSource
+                    Logging.P2PTraceSource
                         .TraceEvent(
                             TraceEventType.Information,
                             helper.TraceEventId,
@@ -1130,8 +1106,7 @@ namespace System.Net.PeerToPeer
             {
                 if (!m_PeerNameResolverHelperList.TryGetValue(userState, out helper))
                 {
-                    Logging
-                        .P2PTraceSource
+                    Logging.P2PTraceSource
                         .TraceEvent(
                             TraceEventType.Warning,
                             0,
@@ -1140,8 +1115,7 @@ namespace System.Net.PeerToPeer
                     return;
                 }
             }
-            Logging
-                .P2PTraceSource
+            Logging.P2PTraceSource
                 .TraceEvent(
                     TraceEventType.Information,
                     helper.TraceEventId,

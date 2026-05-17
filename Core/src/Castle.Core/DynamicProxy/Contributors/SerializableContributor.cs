@@ -53,8 +53,7 @@ namespace Castle.DynamicProxy.Contributors
 
             var typeLocal = getObjectData.CodeBuilder.DeclareLocal(typeof(Type));
 
-            getObjectData
-                .CodeBuilder
+            getObjectData.CodeBuilder
                 .AddStatement(
                     new AssignStatement(
                         typeLocal,
@@ -70,8 +69,7 @@ namespace Castle.DynamicProxy.Contributors
                     )
                 );
 
-            getObjectData
-                .CodeBuilder
+            getObjectData.CodeBuilder
                 .AddStatement(
                     new MethodInvocationExpression(
                         info,
@@ -95,8 +93,7 @@ namespace Castle.DynamicProxy.Contributors
 
             var interfacesLocal = getObjectData.CodeBuilder.DeclareLocal(typeof(string[]));
 
-            getObjectData
-                .CodeBuilder
+            getObjectData.CodeBuilder
                 .AddStatement(
                     new AssignStatement(
                         interfacesLocal,
@@ -106,8 +103,7 @@ namespace Castle.DynamicProxy.Contributors
 
             for (var i = 0; i < interfaces.Length; i++)
             {
-                getObjectData
-                    .CodeBuilder
+                getObjectData.CodeBuilder
                     .AddStatement(
                         new AssignArrayStatement(
                             interfacesLocal,
@@ -117,8 +113,7 @@ namespace Castle.DynamicProxy.Contributors
                     );
             }
 
-            getObjectData
-                .CodeBuilder
+            getObjectData.CodeBuilder
                 .AddStatement(
                     new MethodInvocationExpression(
                         info,
@@ -128,8 +123,7 @@ namespace Castle.DynamicProxy.Contributors
                     )
                 );
 
-            getObjectData
-                .CodeBuilder
+            getObjectData.CodeBuilder
                 .AddStatement(
                     new MethodInvocationExpression(
                         info,
@@ -139,8 +133,7 @@ namespace Castle.DynamicProxy.Contributors
                     )
                 );
 
-            getObjectData
-                .CodeBuilder
+            getObjectData.CodeBuilder
                 .AddStatement(
                     new MethodInvocationExpression(
                         info,
@@ -150,8 +143,7 @@ namespace Castle.DynamicProxy.Contributors
                     )
                 );
 
-            getObjectData
-                .CodeBuilder
+            getObjectData.CodeBuilder
                 .AddStatement(
                     new MethodInvocationExpression(
                         info,
@@ -177,8 +169,7 @@ namespace Castle.DynamicProxy.Contributors
             FieldReference field
         )
         {
-            getObjectData
-                .CodeBuilder
+            getObjectData.CodeBuilder
                 .AddStatement(
                     new MethodInvocationExpression(
                         serializationInfo,

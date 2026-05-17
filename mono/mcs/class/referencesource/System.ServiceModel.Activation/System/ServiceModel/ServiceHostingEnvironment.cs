@@ -72,8 +72,7 @@ namespace System.ServiceModel
             if (DiagnosticUtility.ShouldTraceError)
             {
                 Exception exception = e.ExceptionObject as Exception;
-                DiagnosticUtility
-                    .UnsafeEventLog
+                DiagnosticUtility.UnsafeEventLog
                     .UnsafeLogEvent(
                         TraceEventType.Error,
                         (ushort)System.Runtime.Diagnostics.EventLogCategory.WebHost,
@@ -174,8 +173,7 @@ namespace System.ServiceModel
 
             if (virtualPath.IndexOf(UriSchemeSeparator) > 0)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .Argument("virtualPath", SR2.Hosting_AddressIsAbsoluteUri(virtualPath));
             }
 
@@ -226,8 +224,7 @@ namespace System.ServiceModel
                 {
                     messageAsString = exception.Message;
                 }
-                DiagnosticUtility
-                    .UnsafeEventLog
+                DiagnosticUtility.UnsafeEventLog
                     .UnsafeLogEvent(
                         TraceEventType.Error,
                         (ushort)System.Runtime.Diagnostics.EventLogCategory.WebHost,
@@ -280,14 +277,12 @@ namespace System.ServiceModel
                 if (shouldLog)
                 {
                     //The lock above ensures that this line is hit no more than MaxInsufficientMemoryLogCount per time interval.
-                    DiagnosticUtility
-                        .UnsafeEventLog
+                    DiagnosticUtility.UnsafeEventLog
                         .UnsafeLogEvent(
                             TraceEventType.Error,
                             (ushort)System.Runtime.Diagnostics.EventLogCategory.WebHost,
                             (uint)
-                                System
-                                    .Runtime
+                                System.Runtime
                                     .Diagnostics
                                     .EventLogEventId
                                     .WebHostFailedToProcessRequest,
@@ -299,14 +294,12 @@ namespace System.ServiceModel
                     //The lock above ensures that this if statement is entered exactly once if >= MaxInsufficientMemoryLogCount InsufficientMemoryExceptions are thrown in one time interval.
                     if (reachedMax)
                     {
-                        DiagnosticUtility
-                            .UnsafeEventLog
+                        DiagnosticUtility.UnsafeEventLog
                             .UnsafeLogEvent(
                                 TraceEventType.Warning,
                                 (ushort)System.Runtime.Diagnostics.EventLogCategory.WebHost,
                                 (uint)
-                                    System
-                                        .Runtime
+                                    System.Runtime
                                         .Diagnostics
                                         .EventLogEventId
                                         .WebHostNotLoggingInsufficientMemoryExceptionsOnActivationForNextTimeInterval,
@@ -321,14 +314,12 @@ namespace System.ServiceModel
             }
             else
             {
-                DiagnosticUtility
-                    .UnsafeEventLog
+                DiagnosticUtility.UnsafeEventLog
                     .UnsafeLogEvent(
                         TraceEventType.Error,
                         (ushort)System.Runtime.Diagnostics.EventLogCategory.WebHost,
                         (uint)
-                            System
-                                .Runtime
+                            System.Runtime
                                 .Diagnostics
                                 .EventLogEventId
                                 .WebHostFailedToProcessRequest,
@@ -626,11 +617,9 @@ namespace System.ServiceModel
                 return;
             }
 
-            FxTrace
-                .Trace
+            FxTrace.Trace
                 .SetAnnotation(() =>
-                    System
-                        .ServiceModel
+                    System.ServiceModel
                         .Diagnostics
                         .TraceUtility
                         .GetAnnotation(OperationContext.Current)
@@ -645,8 +634,7 @@ namespace System.ServiceModel
 
                 if (!HostingEnvironmentWrapper.IsHosted)
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(
                             new InvalidOperationException(
                                 SR.GetString(
@@ -722,8 +710,7 @@ namespace System.ServiceModel
             catch (HttpException exception)
             {
                 // We want to throw an ArgumentException.
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(new ArgumentException(exception.Message, "virtualPath", exception));
             }
 
@@ -735,8 +722,7 @@ namespace System.ServiceModel
                 )
             )
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .Argument(
                         "virtualPath",
                         SR2.Hosting_AddressPointsOutsideTheVirtualDirectory(
@@ -767,8 +753,7 @@ namespace System.ServiceModel
                 }
             }
 
-            throw FxTrace
-                .Exception
+            throw FxTrace.Exception
                 .AsError(new EndpointNotFoundException(SR2.Hosting_ServiceNotExist(virtualPath)));
         }
 
@@ -881,8 +866,7 @@ namespace System.ServiceModel
                         && string.IsNullOrEmpty(element.Service)
                     )
                     {
-                        throw FxTrace
-                            .Exception
+                        throw FxTrace.Exception
                             .AsError(
                                 new ConfigurationErrorsException(
                                     SR2.Hosting_NoServiceAndFactorySpecifiedForFilelessService(
@@ -916,8 +900,7 @@ namespace System.ServiceModel
                     }
                     catch (ArgumentException)
                     {
-                        throw FxTrace
-                            .Exception
+                        throw FxTrace.Exception
                             .AsError(
                                 new ConfigurationErrorsException(
                                     SR2.Hosting_RelativeAddressHasBeenAdded(
@@ -1004,8 +987,7 @@ namespace System.ServiceModel
                 {
                     if (VirtualPathUtility.IsAbsolute(relativeAddress))
                     {
-                        throw FxTrace
-                            .Exception
+                        throw FxTrace.Exception
                             .AsError(
                                 new ConfigurationErrorsException(
                                     SR2.Hosting_RelativeAddressFormatError(relativeAddress)
@@ -1017,8 +999,7 @@ namespace System.ServiceModel
                     string extension = VirtualPathUtility.GetExtension(relativeAddress);
                     if (string.IsNullOrEmpty(extension))
                     {
-                        throw FxTrace
-                            .Exception
+                        throw FxTrace.Exception
                             .AsError(
                                 new ConfigurationErrorsException(
                                     SR2.Hosting_NoValidExtensionFoundForRegistedFilelessService(
@@ -1030,8 +1011,7 @@ namespace System.ServiceModel
                     }
                     else if (GetServiceType(extension) == ServiceType.Unknown)
                     {
-                        throw FxTrace
-                            .Exception
+                        throw FxTrace.Exception
                             .AsError(
                                 new ConfigurationErrorsException(
                                     SR2.Hosting_RelativeAddressExtensionNotSupportError(
@@ -1046,8 +1026,7 @@ namespace System.ServiceModel
                 // since we did Empty/Null string checking in configuration element validator, we should not hit ArgumentException, just catch HttpException for invalid characher
                 catch (HttpException ex)
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(
                             new ConfigurationErrorsException(
                                 SR2.Hosting_RelativeAddressFormatError(originalRelativeAddress),
@@ -1122,8 +1101,7 @@ namespace System.ServiceModel
                     && !HostingEnvironmentWrapper.ServiceFileExists(normalizedVirtualPath)
                 )
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new EndpointNotFoundException(
                                 SR2.Hosting_ServiceNotExist(
@@ -1328,12 +1306,10 @@ namespace System.ServiceModel
                             int totalCount = directory.Count;
                             if (!directory.UnsafeBeginBatchCollect())
                             {
-                                throw FxTrace
-                                    .Exception
+                                throw FxTrace.Exception
                                     .AsError(
                                         new InsufficientMemoryException(
-                                            System
-                                                .ServiceModel
+                                            System.ServiceModel
                                                 .Activation
                                                 .SR
                                                 .Hosting_MemoryGatesCheckFailed(
@@ -1510,8 +1486,7 @@ namespace System.ServiceModel
                     }
                     else
                     {
-                        throw FxTrace
-                            .Exception
+                        throw FxTrace.Exception
                             .AsError(
                                 new InvalidOperationException(
                                     SR.GetString(SR.BaseAddressDuplicateScheme, filterUri.Scheme)
@@ -1626,8 +1601,7 @@ namespace System.ServiceModel
                         );
                         if (compiledStrings.Length < 3)
                         {
-                            throw FxTrace
-                                .Exception
+                            throw FxTrace.Exception
                                 .AsError(
                                     new InvalidOperationException(
                                         SR2.Hosting_CompilationResultInvalid(normalizedVirtualPath)
@@ -1744,8 +1718,7 @@ namespace System.ServiceModel
                         }
                         if (compiledType == null)
                         {
-                            throw FxTrace
-                                .Exception
+                            throw FxTrace.Exception
                                 .AsError(
                                     new InvalidOperationException(
                                         SR2.Hosting_FactoryTypeNotResolved(factoryType)
@@ -1754,8 +1727,7 @@ namespace System.ServiceModel
                         }
                         if (!typeof(ServiceHostFactoryBase).IsAssignableFrom(compiledType))
                         {
-                            throw FxTrace
-                                .Exception
+                            throw FxTrace.Exception
                                 .AsError(
                                     new InvalidOperationException(
                                         SR2.Hosting_IServiceHostNotImplemented(factoryType)
@@ -1765,8 +1737,7 @@ namespace System.ServiceModel
                         ConstructorInfo ctor = compiledType.GetConstructor(new Type[] { });
                         if (ctor == null)
                         {
-                            throw FxTrace
-                                .Exception
+                            throw FxTrace.Exception
                                 .AsError(
                                     new InvalidOperationException(
                                         SR2.Hosting_NoDefaultCtor(factoryType)
@@ -1815,8 +1786,7 @@ namespace System.ServiceModel
 
                 if (service == null)
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(
                             new InvalidOperationException(
                                 SR2.Hosting_ServiceHostBaseIsNull(constructorString)
@@ -1825,8 +1795,7 @@ namespace System.ServiceModel
                 }
 
                 // 4. Create VirtualPathExtension for ServiceHostBase
-                service
-                    .Extensions
+                service.Extensions
                     .Add(
                         new VirtualPathExtension(
                             normalizedVirtualPath,
@@ -1840,14 +1809,12 @@ namespace System.ServiceModel
                     service.Description.Behaviors.Add(new ApplyHostConfigurationBehavior());
                     if (
                         this.multipleSiteBindingsEnabled
-                        && service
-                            .Description
+                        && service.Description
                             .Behaviors
                             .Find<UseRequestHeadersForMetadataAddressBehavior>() == null
                     )
                     {
-                        service
-                            .Description
+                        service.Description
                             .Behaviors
                             .Add(new UseRequestHeadersForMetadataAddressBehavior());
                     }
@@ -1878,8 +1845,7 @@ namespace System.ServiceModel
                             HostingEnvironmentWrapper.ApplicationVirtualPath
                         )
                     );
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(new ServiceActivationException(exception.Message, exception));
                 }
             }
@@ -2447,8 +2413,7 @@ namespace System.ServiceModel
                     }
                     else
                     {
-                        throw FxTrace
-                            .Exception
+                        throw FxTrace.Exception
                             .AsError(
                                 new EndpointNotFoundException(SR2.Hosting_ServiceNotExist(path))
                             );
@@ -2492,8 +2457,7 @@ namespace System.ServiceModel
                         {
                             //The control can come here when the hosted file is a valid XAML (service OR otherwise) but is configured with
                             //a handler that does NOT implement IServiceModelActivationHandler and aspnetCompat=true
-                            throw FxTrace
-                                .Exception
+                            throw FxTrace.Exception
                                 .AsError(
                                     new EndpointNotFoundException(
                                         SR2.Hosting_InvalidHandlerForWorkflowService(

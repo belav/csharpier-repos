@@ -181,11 +181,12 @@ namespace System.ServiceModel.Security
                     if (String.IsNullOrEmpty(keyIdentifierClause.Id))
                         keyIdentifierClause.Id = SecurityUniqueId.Create().Value;
                     this.ElementContainer.MapSecurityTokenToStrClause(token, keyIdentifierClause);
-                    this.signedInfo.AddReference(
-                        keyIdentifierClause.Id,
-                        hashStream.FlushHashAndGetValue(),
-                        true
-                    );
+                    this.signedInfo
+                        .AddReference(
+                            keyIdentifierClause.Id,
+                            hashStream.FlushHashAndGetValue(),
+                            true
+                        );
                 }
                 else
                     throw TraceUtility.ThrowHelperError(
@@ -242,15 +243,17 @@ namespace System.ServiceModel.Security
                             if (String.IsNullOrEmpty(keyIdentifierClause.Id))
                                 keyIdentifierClause.Id = SecurityUniqueId.Create().Value;
 
-                            this.ElementContainer.MapSecurityTokenToStrClause(
-                                signedEncryptedTokenElement.Token,
-                                keyIdentifierClause
-                            );
-                            this.signedInfo.AddReference(
-                                keyIdentifierClause.Id,
-                                hashStream.FlushHashAndGetValue(),
-                                true
-                            );
+                            this.ElementContainer
+                                .MapSecurityTokenToStrClause(
+                                    signedEncryptedTokenElement.Token,
+                                    keyIdentifierClause
+                                );
+                            this.signedInfo
+                                .AddReference(
+                                    keyIdentifierClause.Id,
+                                    hashStream.FlushHashAndGetValue(),
+                                    true
+                                );
                         }
                         else
                             throw TraceUtility.ThrowHelperError(
@@ -261,10 +264,8 @@ namespace System.ServiceModel.Security
                             );
                     }
                     else
-                        this.signedInfo.AddReference(
-                            elements[i].Id,
-                            hashStream.FlushHashAndGetValue()
-                        );
+                        this.signedInfo
+                            .AddReference(elements[i].Id, hashStream.FlushHashAndGetValue());
                 }
             }
         }
@@ -371,8 +372,7 @@ namespace System.ServiceModel.Security
                     }
                     else
                         // More than one 'To' header is specified in the message.
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new MessageSecurityException(
                                     SR.GetString(SR.TransportSecuredMessageHasMoreThanOneToHeader)
@@ -672,8 +672,7 @@ namespace System.ServiceModel.Security
             {
                 if (timestamp.Id == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(SR.GetString(SR.TimestampToSignHasNoId))
                         );
@@ -698,8 +697,7 @@ namespace System.ServiceModel.Security
                 if (this.toHeaderHash != null)
                     signedInfo.AddReference(this.toHeaderId, this.toHeaderHash);
                 else
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(SR.TransportSecurityRequireToHeader)
@@ -822,8 +820,7 @@ namespace System.ServiceModel.Security
             MemoryStream stream
         )
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(
                     new InvalidOperationException(
                         SR.GetString(
@@ -886,8 +883,7 @@ namespace System.ServiceModel.Security
             );
             if (this.encryptingSymmetricAlgorithm == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new MessageSecurityException(
                             SR.GetString(
@@ -914,8 +910,7 @@ namespace System.ServiceModel.Security
                 suite.DefaultCanonicalizationAlgorithmDictionaryString;
             if (canonicalizationAlgorithm != SecurityAlgorithms.ExclusiveC14n)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new MessageSecurityException(
                             SR.GetString(
@@ -1000,8 +995,7 @@ namespace System.ServiceModel.Security
 
             if (elementToSign.Id == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(SR.GetString(SR.ElementToSignMustHaveId))
                     );
@@ -1046,10 +1040,8 @@ namespace System.ServiceModel.Security
                 return;
 
             if (
-                this.ElementContainer.TryGetIdentifierClauseFromSecurityToken(
-                    securityToken,
-                    out keyIdentifierClause
-                )
+                this.ElementContainer
+                    .TryGetIdentifierClauseFromSecurityToken(securityToken, out keyIdentifierClause)
             )
             {
                 if (keyIdentifierClause != null && !String.IsNullOrEmpty(keyIdentifierClause.Id))
@@ -1114,12 +1106,13 @@ namespace System.ServiceModel.Security
             {
                 if (id != null)
                 {
-                    this.innerWriter.WriteAttributeString(
-                        XD.UtilityDictionary.Prefix.Value,
-                        XD.UtilityDictionary.IdAttribute,
-                        XD.UtilityDictionary.Namespace,
-                        id
-                    );
+                    this.innerWriter
+                        .WriteAttributeString(
+                            XD.UtilityDictionary.Prefix.Value,
+                            XD.UtilityDictionary.IdAttribute,
+                            XD.UtilityDictionary.Namespace,
+                            id
+                        );
                 }
 
                 isStrReferenceElement = false;

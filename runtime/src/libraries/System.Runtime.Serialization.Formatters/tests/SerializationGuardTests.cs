@@ -109,10 +109,8 @@ namespace System.Runtime.Serialization.Formatters.Tests
         {
             try
             {
-                Task t = Task.Factory.StartNew(
-                    LoadAssemblyOnBackgroundThread,
-                    TaskCreationOptions.LongRunning
-                );
+                Task t = Task.Factory
+                    .StartNew(LoadAssemblyOnBackgroundThread, TaskCreationOptions.LongRunning);
                 t.Wait();
             }
             catch (AggregateException ex)

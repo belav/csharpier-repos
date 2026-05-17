@@ -105,8 +105,7 @@ namespace System.Speech.Internal.SrgsCompiler
                             _endArc.End = newStartState;
 
                             // reset the _endArc
-                            System
-                                .Diagnostics
+                            System.Diagnostics
                                 .Debug
                                 .Assert(
                                     newEndState.OutArcs.CountIsOne

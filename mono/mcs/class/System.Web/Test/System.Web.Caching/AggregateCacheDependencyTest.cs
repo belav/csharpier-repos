@@ -78,8 +78,7 @@ namespace MonoTests.System.Web.Caching
 
             string original = "MONO";
 
-            HttpRuntime
-                .Cache
+            HttpRuntime.Cache
                 .Insert(
                     "key",
                     original,
@@ -123,8 +122,7 @@ namespace MonoTests.System.Web.Caching
 
             string original = "MONO";
 
-            HttpRuntime
-                .Cache
+            HttpRuntime.Cache
                 .Insert(
                     "key",
                     original,
@@ -167,8 +165,7 @@ namespace MonoTests.System.Web.Caching
 
             string original = "MONO";
 
-            HttpRuntime
-                .Cache
+            HttpRuntime.Cache
                 .Insert(
                     "key",
                     original,

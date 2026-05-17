@@ -78,8 +78,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIsNullCheck
                     continue;
 
                 var binary = (BinaryExpressionSyntax)
-                    diagnostic
-                        .Location
+                    diagnostic.Location
                         .FindNode(
                             getInnermostNodeForTie: true,
                             cancellationToken: cancellationToken

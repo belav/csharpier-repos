@@ -326,8 +326,7 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                     return DoesTypeReferenceTypeParameter(@event.Type, typeParameter, checkedTypes);
                 case SymbolKind.Method:
                     var method = member as IMethodSymbol;
-                    return method
-                            .Parameters
+                    return method.Parameters
                             .Any(
                                 static (t, arg) =>
                                     DoesTypeReferenceTypeParameter(
@@ -337,19 +336,19 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                                     ),
                                 (typeParameter, checkedTypes)
                             )
-                        || method
-                            .TypeParameters
+                        || method.TypeParameters
                             .Any(
                                 static (t, arg) =>
-                                    t.ConstraintTypes.Any(
-                                        static (c, arg) =>
-                                            DoesTypeReferenceTypeParameter(
-                                                c,
-                                                arg.typeParameter,
-                                                arg.checkedTypes
-                                            ),
-                                        (arg.typeParameter, arg.checkedTypes)
-                                    ),
+                                    t.ConstraintTypes
+                                        .Any(
+                                            static (c, arg) =>
+                                                DoesTypeReferenceTypeParameter(
+                                                    c,
+                                                    arg.typeParameter,
+                                                    arg.checkedTypes
+                                                ),
+                                            (arg.typeParameter, arg.checkedTypes)
+                                        ),
                                 (typeParameter, checkedTypes)
                             )
                         || DoesTypeReferenceTypeParameter(
@@ -359,8 +358,7 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                         );
                 case SymbolKind.Property:
                     var property = member as IPropertySymbol;
-                    return property
-                            .Parameters
+                    return property.Parameters
                             .Any(
                                 static (t, arg) =>
                                     DoesTypeReferenceTypeParameter(

@@ -51,8 +51,7 @@ namespace System.ServiceModel.Dispatcher
 
             if (operationContext != null)
             {
-                DurableOperationContext.IsInOperation isInOperation = operationContext
-                    .Extensions
+                DurableOperationContext.IsInOperation isInOperation = operationContext.Extensions
                     .Find<DurableOperationContext.IsInOperation>();
 
                 if (isInOperation != null)
@@ -68,8 +67,7 @@ namespace System.ServiceModel.Dispatcher
 
             if (operationContext == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR2.GetString(
@@ -84,8 +82,7 @@ namespace System.ServiceModel.Dispatcher
 
             if (isInOperation == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR2.GetString(
@@ -100,8 +97,7 @@ namespace System.ServiceModel.Dispatcher
 
             if (currentInstanceContext == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR2.GetString(
@@ -112,14 +108,12 @@ namespace System.ServiceModel.Dispatcher
                     );
             }
 
-            ServiceDurableInstance durableInstance = currentInstanceContext
-                .Extensions
+            ServiceDurableInstance durableInstance = currentInstanceContext.Extensions
                 .Find<ServiceDurableInstance>();
 
             if (durableInstance == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR2.GetString(

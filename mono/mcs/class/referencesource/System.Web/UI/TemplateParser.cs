@@ -836,8 +836,7 @@ namespace System.Web.UI
             // Always set the culture to Invariant when parsing (ASURT 99071)
             Thread currentThread = Thread.CurrentThread;
             CultureInfo prevCulture = currentThread.CurrentCulture;
-            System
-                .Web
+            System.Web
                 .Util
                 .Debug
                 .Trace("Culture", "Before parsing, culture is " + prevCulture.DisplayName);
@@ -855,8 +854,7 @@ namespace System.Web.UI
                 finally
                 {
                     // Restore the previous culture
-                    System
-                        .Web
+                    System.Web
                         .Util
                         .Debug
                         .Trace(
@@ -864,8 +862,7 @@ namespace System.Web.UI
                             "After parsing, culture is " + currentThread.CurrentCulture.DisplayName
                         );
                     currentThread.CurrentCulture = prevCulture;
-                    System
-                        .Web
+                    System.Web
                         .Util
                         .Debug
                         .Trace("Culture", "Restored culture to " + prevCulture.DisplayName);
@@ -3432,8 +3429,7 @@ namespace System.Web.UI
                 try
                 {
                     builder.SetTagInnerText(
-                        stackEntry
-                            ._inputText
+                        stackEntry._inputText
                             .Substring(stackEntry._textPos, match.Index - stackEntry._textPos)
                     );
                 }

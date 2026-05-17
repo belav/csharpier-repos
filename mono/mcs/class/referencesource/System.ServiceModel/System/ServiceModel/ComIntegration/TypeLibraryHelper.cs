@@ -176,8 +176,7 @@ namespace System.ServiceModel.ComIntegration
             }
             catch (ReflectionTypeLoadException)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(SR.FailedToConvertTypelibraryToAssembly)

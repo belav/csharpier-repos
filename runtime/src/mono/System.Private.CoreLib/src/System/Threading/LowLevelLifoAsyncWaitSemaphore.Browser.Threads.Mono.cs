@@ -95,8 +95,7 @@ internal sealed partial class LowLevelLifoAsyncWaitSemaphore
                 newCounts.IncrementWaiterCount();
             }
 
-            Counts countsBeforeUpdate = _separated
-                ._counts
+            Counts countsBeforeUpdate = _separated._counts
                 .InterlockedCompareExchange(newCounts, counts);
             if (countsBeforeUpdate == counts)
             {

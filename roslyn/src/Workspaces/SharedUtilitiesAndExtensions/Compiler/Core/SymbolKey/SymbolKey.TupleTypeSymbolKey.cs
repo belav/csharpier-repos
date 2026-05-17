@@ -97,8 +97,7 @@ namespace Microsoft.CodeAnalysis
                 {
                     // Suppression on elementLocations due to https://github.com/dotnet/roslyn/issues/46527
                     result.AddIfNotNull(
-                        reader
-                            .Compilation
+                        reader.Compilation
                             .CreateTupleTypeSymbol(namedType, elementNamesArray, elementLocations!)
                     );
                 }
@@ -148,8 +147,7 @@ namespace Microsoft.CodeAnalysis
                 }
 
                 // Suppression on elementLocations due to https://github.com/dotnet/roslyn/issues/46527
-                var result = reader
-                    .Compilation
+                var result = reader.Compilation
                     .CreateTupleTypeSymbol(
                         elementTypes.ToImmutable(),
                         elementNames.ToImmutable(),

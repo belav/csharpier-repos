@@ -858,11 +858,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
         ) GetAssembliesForForwardedType(ref MetadataTypeName fullName)
         {
             string matchedName;
-            (int firstIndex, int secondIndex) = this.Module.GetAssemblyRefsForForwardedType(
-                fullName.FullName,
-                ignoreCase: false,
-                matchedName: out matchedName
-            );
+            (int firstIndex, int secondIndex) = this.Module
+                .GetAssemblyRefsForForwardedType(
+                    fullName.FullName,
+                    ignoreCase: false,
+                    matchedName: out matchedName
+                );
 
             if (firstIndex < 0)
             {

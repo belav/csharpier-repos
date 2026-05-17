@@ -58,8 +58,7 @@ namespace System.ServiceModel.Web
             AuthenticationSchemes supportedSchemes = AuthenticationSchemes.None;
             if (host.BaseAddresses.Count > 0)
             {
-                supportedSchemes = AspNetEnvironment
-                    .Current
+                supportedSchemes = AspNetEnvironment.Current
                     .GetAuthenticationSchemes(host.BaseAddresses[0]);
 
                 if (AspNetEnvironment.Current.IsSimpleApplicationHost)
@@ -121,16 +120,14 @@ namespace System.ServiceModel.Web
                     {
                         if (implementedContracts.Count > 1)
                         {
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
                                     new InvalidOperationException(multipleContractsErrorMessage)
                                 );
                         }
                         else if (implementedContracts.Count == 0)
                         {
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
                                     new InvalidOperationException(noContractErrorMessage)
                                 );
@@ -156,8 +153,7 @@ namespace System.ServiceModel.Web
                         protocolMappingItem != null
                         && string.Equals(
                             protocolMappingItem.Binding,
-                            WebHttpBinding
-                                .WebHttpBindingConfigurationStrings
+                            WebHttpBinding.WebHttpBindingConfigurationStrings
                                 .WebHttpBindingCollectionElementName,
                             StringComparison.Ordinal
                         )
@@ -307,8 +303,7 @@ namespace System.ServiceModel.Web
             {
                 if (
                     serviceEndpoint.Binding != null
-                    && serviceEndpoint
-                        .Binding
+                    && serviceEndpoint.Binding
                         .CreateBindingElements()
                         .Find<WebMessageEncodingBindingElement>() != null
                 )

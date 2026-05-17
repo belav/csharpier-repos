@@ -31,8 +31,7 @@ namespace WebApiHelpPageWebHost.UnitTest
         public void Index_ReturnsCachedModels()
         {
             HttpConfiguration config = new HttpConfiguration();
-            config
-                .Routes
+            config.Routes
                 .MapHttpRoute("Default", "{controller}/{id}", new { id = RouteParameter.Optional });
             HelpController controller = new HelpController(config);
 
@@ -71,8 +70,7 @@ namespace WebApiHelpPageWebHost.UnitTest
         public void API_ReturnsCachedModels(string apiDescriptionId)
         {
             HttpConfiguration config = new HttpConfiguration();
-            config
-                .Routes
+            config.Routes
                 .MapHttpRoute("Default", "{controller}/{id}", new { id = RouteParameter.Optional });
             HelpController controller = new HelpController(config);
 
@@ -94,8 +92,7 @@ namespace WebApiHelpPageWebHost.UnitTest
         public void API_ReturnsNullModels_WhenApiIdIsInvalid(string apiDescriptionId)
         {
             HttpConfiguration config = new HttpConfiguration();
-            config
-                .Routes
+            config.Routes
                 .MapHttpRoute("Default", "{controller}/{id}", new { id = RouteParameter.Optional });
             HelpController controller = new HelpController(config);
 
@@ -118,15 +115,13 @@ namespace WebApiHelpPageWebHost.UnitTest
         public void ResourceModel_ReturnsCachedModels(string modelName)
         {
             HttpConfiguration config = new HttpConfiguration();
-            config
-                .Routes
+            config.Routes
                 .MapHttpRoute("Default", "{controller}/{id}", new { id = RouteParameter.Optional });
             HelpController controller = new HelpController(config);
             ModelDescriptionGenerator modelDescriptionGenerator =
                 config.GetModelDescriptionGenerator();
             ModelDescription expectedModelDescription;
-            modelDescriptionGenerator
-                .GeneratedModels
+            modelDescriptionGenerator.GeneratedModels
                 .TryGetValue(modelName, out expectedModelDescription);
 
             ViewResult result = Assert.IsType<ViewResult>(controller.ResourceModel(modelName));
@@ -148,8 +143,7 @@ namespace WebApiHelpPageWebHost.UnitTest
         public void ResourceModel_ReturnsCachedModels_UnusedParameters(string modelName)
         {
             HttpConfiguration config = new HttpConfiguration();
-            config
-                .Routes
+            config.Routes
                 .MapHttpRoute(
                     "Default",
                     "{controller}/{unused}/{id}",
@@ -159,8 +153,7 @@ namespace WebApiHelpPageWebHost.UnitTest
             ModelDescriptionGenerator modelDescriptionGenerator =
                 config.GetModelDescriptionGenerator();
             ModelDescription expectedModelDescription;
-            modelDescriptionGenerator
-                .GeneratedModels
+            modelDescriptionGenerator.GeneratedModels
                 .TryGetValue(modelName, out expectedModelDescription);
 
             ViewResult result = Assert.IsType<ViewResult>(controller.ResourceModel(modelName));
@@ -177,8 +170,7 @@ namespace WebApiHelpPageWebHost.UnitTest
         public void ResourceModel_ReturnsNullModels_WhenAModelNameIsInvalid(string modelName)
         {
             HttpConfiguration config = new HttpConfiguration();
-            config
-                .Routes
+            config.Routes
                 .MapHttpRoute("Default", "{controller}/{id}", new { id = RouteParameter.Optional });
             HelpController controller = new HelpController(config);
 

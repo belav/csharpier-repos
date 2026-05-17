@@ -373,8 +373,7 @@ namespace System.IO.Packaging
 
             propertiesPart = _package.GetPart(propertiesPartUri);
             if (
-                !propertiesPart
-                    .ValidatedContentType
+                !propertiesPart.ValidatedContentType
                     .AreTypeAndSubTypeEqual(s_coreDocumentPropertiesContentType)
             )
             {

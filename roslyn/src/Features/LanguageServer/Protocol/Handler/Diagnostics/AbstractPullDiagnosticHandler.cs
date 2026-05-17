@@ -513,8 +513,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Diagnostics
                     diagnostic.Tags != null
                         ? diagnostic.Tags.Append(DiagnosticTag.Unnecessary)
                         : [DiagnosticTag.Unnecessary];
-                var diagnosticRelatedInformation = unnecessaryLocations
-                    .Value
+                var diagnosticRelatedInformation = unnecessaryLocations.Value
                     .Select(l => new DiagnosticRelatedInformation
                     {
                         Location = new LSP.Location
@@ -650,8 +649,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Diagnostics
         private static VSDiagnosticRank? ConvertRank(DiagnosticData diagnosticData)
         {
             if (
-                diagnosticData
-                    .Properties
+                diagnosticData.Properties
                     .TryGetValue(PullDiagnosticConstants.Priority, out var priority)
             )
             {

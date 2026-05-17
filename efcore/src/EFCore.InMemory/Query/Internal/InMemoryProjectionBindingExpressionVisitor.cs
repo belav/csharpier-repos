@@ -154,8 +154,7 @@ public class InMemoryProjectionBindingExpressionVisitor : ExpressionVisitor
                             ),
                             subquery.ShaperExpression,
                             materializeCollectionNavigationExpression.Navigation,
-                            materializeCollectionNavigationExpression
-                                .Navigation
+                            materializeCollectionNavigationExpression.Navigation
                                 .ClrType
                                 .GetSequenceType()
                         );

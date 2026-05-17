@@ -193,8 +193,7 @@ namespace System.IO
             long preallocationSize = 0
         )
         {
-            Strategies
-                .FileStreamHelpers
+            Strategies.FileStreamHelpers
                 .ValidateArguments(
                     path,
                     mode,
@@ -1093,8 +1092,7 @@ namespace System.IO
             try
             {
                 cancellationToken.ThrowIfCancellationRequested();
-                buffer = ArrayPool<char>
-                    .Shared
+                buffer = ArrayPool<char>.Shared
                     .Rent(sr.CurrentEncoding.GetMaxCharCount(DefaultBufferSize));
                 StringBuilder sb = new StringBuilder();
                 while (true)
@@ -1641,8 +1639,7 @@ namespace System.IO
                 return;
             }
 
-            byte[] bytes = ArrayPool<byte>
-                .Shared
+            byte[] bytes = ArrayPool<byte>.Shared
                 .Rent(
                     preambleSize + encoding.GetMaxByteCount(Math.Min(contents.Length, ChunkSize))
                 );

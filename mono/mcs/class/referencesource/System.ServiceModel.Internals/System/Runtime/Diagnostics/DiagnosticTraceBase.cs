@@ -503,8 +503,7 @@ namespace System.Runtime.Diagnostics
                                 TraceEventType.Error,
                                 TracingEventLogCategory,
                                 (uint)
-                                    System
-                                        .Runtime
+                                    System.Runtime
                                         .Diagnostics
                                         .EventLogEventId
                                         .FailedToTraceEventWithException,

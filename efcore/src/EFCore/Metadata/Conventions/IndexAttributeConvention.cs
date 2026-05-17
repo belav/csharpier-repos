@@ -68,16 +68,14 @@ public class IndexAttributeConvention
     )
     {
         foreach (
-            var indexAttribute in entityType
-                .ClrType
+            var indexAttribute in entityType.ClrType
                 .GetCustomAttributes<IndexAttribute>(inherit: true)
         )
         {
             IConventionIndexBuilder? indexBuilder;
             if (
                 !shouldThrow
-                && !entityType
-                    .Builder
+                && !entityType.Builder
                     .CanHaveIndex(indexAttribute.PropertyNames, fromDataAnnotation: true)
             )
             {
@@ -88,11 +86,9 @@ public class IndexAttributeConvention
             {
                 indexBuilder =
                     indexAttribute.Name == null
-                        ? entityType
-                            .Builder
+                        ? entityType.Builder
                             .HasIndex(indexAttribute.PropertyNames, fromDataAnnotation: true)
-                        : entityType
-                            .Builder
+                        : entityType.Builder
                             .HasIndex(
                                 indexAttribute.PropertyNames,
                                 indexAttribute.Name,

@@ -106,8 +106,7 @@ namespace System
                     return Interop.Sys.SearchPath(NSSearchPathDirectory.NSDesktopDirectory);
                 case SpecialFolder.ApplicationData:
                 case SpecialFolder.LocalApplicationData:
-                    return Interop
-                        .Sys
+                    return Interop.Sys
                         .SearchPath(NSSearchPathDirectory.NSApplicationSupportDirectory);
                 case SpecialFolder.MyDocuments: // same value as Personal
                     return Interop.Sys.SearchPath(NSSearchPathDirectory.NSDocumentDirectory);

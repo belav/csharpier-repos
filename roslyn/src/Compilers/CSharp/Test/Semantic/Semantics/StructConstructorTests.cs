@@ -4590,8 +4590,7 @@ public struct S
 
             CreateCompilation(
                     source,
-                    options: TestOptions
-                        .DebugDll
+                    options: TestOptions.DebugDll
                         .WithSpecificDiagnosticOptions(ReportStructInitializationWarnings),
                     parseOptions: TestOptions.Regular11
                 )
@@ -4605,8 +4604,7 @@ public struct S
 
             CreateCompilation(
                     source,
-                    options: TestOptions
-                        .DebugDll
+                    options: TestOptions.DebugDll
                         .WithSpecificDiagnosticOptions(
                             GetIdForErrorCode(ErrorCode.WRN_UnassignedThisSupportedVersion),
                             ReportDiagnostic.Error
@@ -4727,8 +4725,7 @@ public struct S
 
             CreateCompilation(
                     source,
-                    options: TestOptions
-                        .DebugDll
+                    options: TestOptions.DebugDll
                         .WithSpecificDiagnosticOptions(ReportStructInitializationWarnings),
                     parseOptions: TestOptions.Regular11
                 )
@@ -4775,8 +4772,7 @@ public struct S
 
             var verifier = CompileAndVerify(
                 source,
-                options: TestOptions
-                    .DebugDll
+                options: TestOptions.DebugDll
                     .WithSpecificDiagnosticOptions(ReportStructInitializationWarnings),
                 parseOptions: TestOptions.Regular11
             );
@@ -4836,8 +4832,7 @@ public struct S
 
             var verifier = CompileAndVerify(
                 source,
-                options: TestOptions
-                    .DebugDll
+                options: TestOptions.DebugDll
                     .WithSpecificDiagnosticOptions(ReportStructInitializationWarnings),
                 parseOptions: TestOptions.Regular11
             );
@@ -5007,8 +5002,7 @@ public struct S2
 }";
             var verifier = CompileAndVerify(
                 source,
-                options: TestOptions
-                    .DebugDll
+                options: TestOptions.DebugDll
                     .WithSpecificDiagnosticOptions(ReportStructInitializationWarnings)
             );
             verifier.VerifyDiagnostics();
@@ -5055,8 +5049,7 @@ public struct S2
 }";
             var verifier = CompileAndVerify(
                 source,
-                options: TestOptions
-                    .DebugDll
+                options: TestOptions.DebugDll
                     .WithSpecificDiagnosticOptions(ReportStructInitializationWarnings)
             );
             verifier.VerifyDiagnostics();
@@ -5097,8 +5090,7 @@ public struct S2
 }";
             var verifier = CompileAndVerify(
                 source,
-                options: TestOptions
-                    .DebugDll
+                options: TestOptions.DebugDll
                     .WithSpecificDiagnosticOptions(ReportStructInitializationWarnings)
             );
             verifier.VerifyDiagnostics();
@@ -5141,8 +5133,7 @@ public struct S2
 }";
             var verifier = CompileAndVerify(
                 source,
-                options: TestOptions
-                    .DebugDll
+                options: TestOptions.DebugDll
                     .WithSpecificDiagnosticOptions(ReportStructInitializationWarnings)
             );
             verifier.VerifyDiagnostics(
@@ -5193,8 +5184,7 @@ public struct S
 }";
             var verifier = CompileAndVerify(
                 source,
-                options: TestOptions
-                    .DebugDll
+                options: TestOptions.DebugDll
                     .WithSpecificDiagnosticOptions(ReportStructInitializationWarnings)
             );
             verifier.VerifyDiagnostics(
@@ -5255,8 +5245,7 @@ public struct S2
 }";
             var verifier = CompileAndVerify(
                 source,
-                options: TestOptions
-                    .DebugDll
+                options: TestOptions.DebugDll
                     .WithSpecificDiagnosticOptions(ReportStructInitializationWarnings)
             );
             verifier.VerifyDiagnostics(
@@ -5311,8 +5300,7 @@ public struct S
 }";
             var verifier = CompileAndVerify(
                 source,
-                options: TestOptions
-                    .DebugDll
+                options: TestOptions.DebugDll
                     .WithSpecificDiagnosticOptions(ReportStructInitializationWarnings)
             );
             verifier.VerifyDiagnostics(
@@ -5368,8 +5356,7 @@ public struct S
 }";
             var verifier = CompileAndVerify(
                 source,
-                options: TestOptions
-                    .DebugDll
+                options: TestOptions.DebugDll
                     .WithSpecificDiagnosticOptions(ReportStructInitializationWarnings)
             );
             verifier.VerifyDiagnostics(
@@ -5423,8 +5410,7 @@ public struct S
 }";
             var comp = CreateCompilation(
                 source,
-                options: TestOptions
-                    .DebugDll
+                options: TestOptions.DebugDll
                     .WithSpecificDiagnosticOptions(ReportStructInitializationWarnings)
             );
             comp.VerifyDiagnostics(
@@ -5454,8 +5440,7 @@ public struct S
 }";
             var comp = CreateCompilation(
                 source,
-                options: TestOptions
-                    .DebugDll
+                options: TestOptions.DebugDll
                     .WithSpecificDiagnosticOptions(ReportStructInitializationWarnings)
             );
             comp.VerifyDiagnostics();
@@ -5502,8 +5487,7 @@ public struct S<T>
 }";
             var verifier = CompileAndVerify(
                 source,
-                options: TestOptions
-                    .DebugDll
+                options: TestOptions.DebugDll
                     .WithSpecificDiagnosticOptions(ReportStructInitializationWarnings)
             );
             verifier.VerifyDiagnostics(

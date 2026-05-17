@@ -79,8 +79,7 @@ namespace System.Diagnostics
             }
 
             // Create a threadinfo for each thread in the process
-            List<KeyValuePair<ulong, Interop.libproc.proc_threadinfo?>> lstThreads = Interop
-                .libproc
+            List<KeyValuePair<ulong, Interop.libproc.proc_threadinfo?>> lstThreads = Interop.libproc
                 .GetAllThreadsInProcess(pid);
             foreach (KeyValuePair<ulong, Interop.libproc.proc_threadinfo?> t in lstThreads)
             {

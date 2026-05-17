@@ -162,12 +162,10 @@ internal abstract class AbstractWorkspacePullDiagnosticsHandler<
 
         var solution = context.Solution;
         var enableDiagnosticsInSourceGeneratedFiles =
-            solution
-                .Services
+            solution.Services
                 .GetService<ISolutionCrawlerOptionsService>()
                 ?.EnableDiagnosticsInSourceGeneratedFiles == true;
-        var codeAnalysisService = solution
-            .Workspace
+        var codeAnalysisService = solution.Workspace
             .Services
             .GetRequiredService<ICodeAnalysisDiagnosticAnalyzerService>();
 
@@ -203,8 +201,7 @@ internal abstract class AbstractWorkspacePullDiagnosticsHandler<
             )
                 return;
 
-            var documents = ImmutableArray<TextDocument>
-                .Empty
+            var documents = ImmutableArray<TextDocument>.Empty
                 .AddRange(project.Documents)
                 .AddRange(project.AdditionalDocuments);
 
@@ -272,8 +269,7 @@ internal abstract class AbstractWorkspacePullDiagnosticsHandler<
 
         static IEnumerable<Project?> GetProjectsInPriorityOrderWorker(Solution solution)
         {
-            var documentTrackingService = solution
-                .Services
+            var documentTrackingService = solution.Services
                 .GetRequiredService<IDocumentTrackingService>();
 
             // Collect all the documents from the solution in the order we'd like to get diagnostics for.  This will

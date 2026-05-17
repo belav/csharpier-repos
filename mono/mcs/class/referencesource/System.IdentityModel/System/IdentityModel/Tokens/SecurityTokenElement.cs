@@ -66,15 +66,13 @@ namespace System.IdentityModel.Tokens
         {
             if (securityTokenXml == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("securityTokenXml");
             }
 
             if (securityTokenHandlers == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("securityTokenHandlers");
             }
 
@@ -142,8 +140,7 @@ namespace System.IdentityModel.Tokens
         {
             if (securityTokenXml == null || securityTokenHandlers == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ID4052)));
             }
 
@@ -171,8 +168,7 @@ namespace System.IdentityModel.Tokens
             securityToken = securityTokenHandlers.ReadToken(reader);
             if (securityToken == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(

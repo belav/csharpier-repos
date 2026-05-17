@@ -217,8 +217,7 @@ internal class CommandLineApplication
 
         if (isLongOption)
         {
-            option = command
-                .Options
+            option = command.Options
                 .SingleOrDefault(opt =>
                     string.Equals(opt.LongName, optionName, StringComparison.Ordinal)
                 );
@@ -226,13 +225,11 @@ internal class CommandLineApplication
         else
         {
             option =
-                command
-                    .Options
+                command.Options
                     .SingleOrDefault(opt =>
                         string.Equals(opt.ShortName, optionName, StringComparison.Ordinal)
                     )
-                ?? command
-                    .Options
+                ?? command.Options
                     .SingleOrDefault(opt =>
                         string.Equals(opt.SymbolName, optionName, StringComparison.Ordinal)
                     );

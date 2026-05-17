@@ -183,8 +183,7 @@ namespace System.Security.Cryptography
                     }
 
                     if (
-                        !Interop
-                            .AndroidCrypto
+                        !Interop.AndroidCrypto
                             .EcdhDeriveKey(ourKey, theirKey, secret, out int usedBufferLength)
                     )
                     {

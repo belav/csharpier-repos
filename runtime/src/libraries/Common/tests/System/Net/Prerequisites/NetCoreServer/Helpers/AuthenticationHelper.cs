@@ -72,8 +72,7 @@ namespace NetCoreServer
             if (split.Length < 2)
             {
                 context.Response.StatusCode = 500;
-                context
-                    .Response
+                context.Response
                     .SetStatusDescription("Invalid Authorization header: " + authHeader);
                 ;
                 return false;
@@ -126,8 +125,7 @@ namespace NetCoreServer
 
             // We don't fully support this authentication method.
             context.Response.StatusCode = 501;
-            context
-                .Response
+            context.Response
                 .SetStatusDescription(
                     "Attempt to use unsupported challenge/response auth type. "
                         + authType

@@ -67,8 +67,7 @@ namespace Newtonsoft.Json.Serialization
             {
                 if (_setter == null)
                 {
-                    _setter = ExpressionReflectionDelegateFactory
-                        .Instance
+                    _setter = ExpressionReflectionDelegateFactory.Instance
                         .CreateSet<object>(_memberInfo);
                 }
 
@@ -133,8 +132,7 @@ namespace Newtonsoft.Json.Serialization
             {
                 if (_getter == null)
                 {
-                    _getter = ExpressionReflectionDelegateFactory
-                        .Instance
+                    _getter = ExpressionReflectionDelegateFactory.Instance
                         .CreateGet<object>(_memberInfo);
                 }
 

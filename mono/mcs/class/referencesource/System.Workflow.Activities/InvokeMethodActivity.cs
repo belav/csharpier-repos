@@ -184,9 +184,10 @@ namespace System.Workflow.Activities
             if (context.PropertyDescriptor.Name == "MethodName")
             {
                 foreach (
-                    MethodInfo method in this.InterfaceType.GetMethods(
-                        BindingFlags.DeclaredOnly | BindingFlags.Instance | BindingFlags.Public
-                    )
+                    MethodInfo method in this.InterfaceType
+                        .GetMethods(
+                            BindingFlags.DeclaredOnly | BindingFlags.Instance | BindingFlags.Public
+                        )
                 )
                 {
                     if (method.IsSpecialName)

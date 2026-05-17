@@ -44,8 +44,7 @@ namespace System.ServiceModel.Security
         )
         {
             if (messageSecurityVersion == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("messageSecurityVersion"));
             if (tokenSerializer == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("tokenSerializer");
@@ -69,8 +68,7 @@ namespace System.ServiceModel.Security
             }
             else
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentOutOfRangeException(
                             "messageSecurityVersion",
@@ -175,11 +173,12 @@ namespace System.ServiceModel.Security
             out SecurityKeyIdentifierClause securityKeyIdentifierClause
         )
         {
-            return this.WSSecurityTokenSerializer.TryCreateKeyIdentifierClauseFromTokenXml(
-                element,
-                tokenReferenceStyle,
-                out securityKeyIdentifierClause
-            );
+            return this.WSSecurityTokenSerializer
+                .TryCreateKeyIdentifierClauseFromTokenXml(
+                    element,
+                    tokenReferenceStyle,
+                    out securityKeyIdentifierClause
+                );
         }
 
         internal SecurityKeyIdentifierClause CreateKeyIdentifierClauseFromTokenXml(
@@ -187,10 +186,8 @@ namespace System.ServiceModel.Security
             SecurityTokenReferenceStyle tokenReferenceStyle
         )
         {
-            return this.WSSecurityTokenSerializer.CreateKeyIdentifierClauseFromTokenXml(
-                element,
-                tokenReferenceStyle
-            );
+            return this.WSSecurityTokenSerializer
+                .CreateKeyIdentifierClauseFromTokenXml(element, tokenReferenceStyle);
         }
 
         internal SendSecurityHeader CreateSendSecurityHeader(
@@ -202,15 +199,16 @@ namespace System.ServiceModel.Security
             MessageDirection direction
         )
         {
-            return this.SecurityVersion.CreateSendSecurityHeader(
-                message,
-                actor,
-                mustUnderstand,
-                relay,
-                this,
-                algorithmSuite,
-                direction
-            );
+            return this.SecurityVersion
+                .CreateSendSecurityHeader(
+                    message,
+                    actor,
+                    mustUnderstand,
+                    relay,
+                    this,
+                    algorithmSuite,
+                    direction
+                );
         }
 
         internal ReceiveSecurityHeader CreateReceiveSecurityHeader(
@@ -229,8 +227,7 @@ namespace System.ServiceModel.Security
             if (header == null)
             {
                 if (String.IsNullOrEmpty(actor))
-                    throw System
-                        .ServiceModel
+                    throw System.ServiceModel
                         .Diagnostics
                         .TraceUtility
                         .ThrowHelperError(
@@ -240,8 +237,7 @@ namespace System.ServiceModel.Security
                             message
                         );
                 else
-                    throw System
-                        .ServiceModel
+                    throw System.ServiceModel
                         .Diagnostics
                         .TraceUtility
                         .ThrowHelperError(
@@ -261,13 +257,8 @@ namespace System.ServiceModel.Security
             MessageDirection direction
         )
         {
-            return this.SecurityVersion.TryCreateReceiveSecurityHeader(
-                message,
-                actor,
-                this,
-                algorithmSuite,
-                direction
-            );
+            return this.SecurityVersion
+                .TryCreateReceiveSecurityHeader(message, actor, this, algorithmSuite, direction);
         }
 
         internal bool DoesMessageContainSecurityHeader(Message message)
@@ -287,10 +278,8 @@ namespace System.ServiceModel.Security
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("results");
             }
             SecureConversationDriver driver = this.SecureConversationDriver;
-            int securityHeaderIndex = this.SecurityVersion.FindIndexOfSecurityHeader(
-                message,
-                actors
-            );
+            int securityHeaderIndex = this.SecurityVersion
+                .FindIndexOfSecurityHeader(message, actors);
             if (securityHeaderIndex < 0)
             {
                 return false;

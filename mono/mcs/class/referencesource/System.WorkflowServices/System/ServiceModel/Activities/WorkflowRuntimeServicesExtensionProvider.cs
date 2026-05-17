@@ -44,10 +44,8 @@ namespace System.ServiceModel.Activities
             {
                 object dataExchangeService;
                 if (
-                    this.services.TryGetValue(
-                        typeof(ExternalDataExchangeService),
-                        out dataExchangeService
-                    )
+                    this.services
+                        .TryGetValue(typeof(ExternalDataExchangeService), out dataExchangeService)
                 )
                 {
                     Fx.Assert(

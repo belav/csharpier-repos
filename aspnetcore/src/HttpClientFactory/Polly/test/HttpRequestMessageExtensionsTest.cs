@@ -18,8 +18,7 @@ public class HttpRequestMessageExtensionsTest
 #if USE_OBSOLETED
         request.Properties[HttpRequestMessageExtensions.PolicyExecutionContextKey] = expected;
 #else
-        request
-            .Options
+        request.Options
             .Set(
                 new HttpRequestOptionsKey<Context>(
                     HttpRequestMessageExtensions.PolicyExecutionContextKey
@@ -56,8 +55,7 @@ public class HttpRequestMessageExtensionsTest
 #if USE_OBSOLETED
         request.Properties[HttpRequestMessageExtensions.PolicyExecutionContextKey] = null;
 #else
-        request
-            .Options
+        request.Options
             .Set(
                 new HttpRequestOptionsKey<Context>(
                     HttpRequestMessageExtensions.PolicyExecutionContextKey
@@ -87,8 +85,7 @@ public class HttpRequestMessageExtensionsTest
 #if USE_OBSOLETED
         var actual = request.Properties[HttpRequestMessageExtensions.PolicyExecutionContextKey];
 #else
-        request
-            .Options
+        request.Options
             .TryGetValue(
                 new HttpRequestOptionsKey<Context>(
                     HttpRequestMessageExtensions.PolicyExecutionContextKey
@@ -109,8 +106,7 @@ public class HttpRequestMessageExtensionsTest
             Guid.NewGuid().ToString()
         );
 #else
-        request
-            .Options
+        request.Options
             .Set(
                 new HttpRequestOptionsKey<Context>(
                     HttpRequestMessageExtensions.PolicyExecutionContextKey
@@ -126,8 +122,7 @@ public class HttpRequestMessageExtensionsTest
 #if USE_OBSOLETED
         var actual = request.Properties[HttpRequestMessageExtensions.PolicyExecutionContextKey];
 #else
-        request
-            .Options
+        request.Options
             .TryGetValue(
                 new HttpRequestOptionsKey<Context>(
                     HttpRequestMessageExtensions.PolicyExecutionContextKey

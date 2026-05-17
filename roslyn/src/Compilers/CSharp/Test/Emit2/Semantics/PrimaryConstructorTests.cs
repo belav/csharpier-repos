@@ -2763,8 +2763,7 @@ interface I {}
 
                 SemanticModel speculativeModel;
                 speculativePrimaryInitializer = baseWithargs.WithArgumentList(
-                    baseWithargs
-                        .ArgumentList
+                    baseWithargs.ArgumentList
                         .WithArguments(baseWithargs.ArgumentList.Arguments.RemoveAt(1))
                 );
 
@@ -3119,8 +3118,7 @@ interface I {}
                 Assert.Empty(model.GetMemberGroup(baseWithargs));
 
                 speculativePrimaryInitializer = baseWithargs.WithArgumentList(
-                    baseWithargs
-                        .ArgumentList
+                    baseWithargs.ArgumentList
                         .WithArguments(baseWithargs.ArgumentList.Arguments.RemoveAt(1))
                 );
 
@@ -3454,8 +3452,7 @@ struct R3(int X) : Error3
             Assert.Equal("Error1(0, 1)", baseWithargs.ToString());
 
             var speculativeBase = baseWithargs.WithArgumentList(
-                baseWithargs
-                    .ArgumentList
+                baseWithargs.ArgumentList
                     .WithArguments(baseWithargs.ArgumentList.Arguments.RemoveAt(1))
             );
             Assert.Equal("Error1(0)", speculativeBase.ToString());
@@ -4181,8 +4178,7 @@ public "
             {
                 var @class = moduleSymbol.GlobalNamespace.GetMember<NamedTypeSymbol>("Test");
 
-                var param1 = @class
-                    .InstanceConstructors
+                var param1 = @class.InstanceConstructors
                     .Where(c => !c.IsDefaultValueTypeConstructor())
                     .Single()
                     .Parameters[0];
@@ -7827,8 +7823,7 @@ public "
 
             var comp = CreateCompilation(
                 src,
-                parseOptions: TestOptions
-                    .RegularPreview
+                parseOptions: TestOptions.RegularPreview
                     .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             comp.VerifyDiagnostics();
@@ -7890,8 +7885,7 @@ public "
 
             var comp = CreateCompilation(
                 src,
-                parseOptions: TestOptions
-                    .RegularPreview
+                parseOptions: TestOptions.RegularPreview
                     .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             comp.VerifyDiagnostics(
@@ -7941,8 +7935,7 @@ public "
 
             var comp = CreateCompilation(
                 src,
-                parseOptions: TestOptions
-                    .RegularPreview
+                parseOptions: TestOptions.RegularPreview
                     .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             comp.VerifyDiagnostics(
@@ -7977,8 +7970,7 @@ public "
 
             var comp = CreateCompilation(
                 src,
-                parseOptions: TestOptions
-                    .RegularPreview
+                parseOptions: TestOptions.RegularPreview
                     .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             comp.VerifyDiagnostics(
@@ -8012,8 +8004,7 @@ public "
 
             var comp = CreateCompilation(
                 src,
-                parseOptions: TestOptions
-                    .RegularPreview
+                parseOptions: TestOptions.RegularPreview
                     .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             comp.VerifyDiagnostics();
@@ -8050,8 +8041,7 @@ public "
 
             var comp = CreateCompilation(
                 src,
-                parseOptions: TestOptions
-                    .RegularPreview
+                parseOptions: TestOptions.RegularPreview
                     .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             comp.VerifyDiagnostics(
@@ -8093,8 +8083,7 @@ public "
 
             var comp = CreateCompilation(
                 src,
-                parseOptions: TestOptions
-                    .RegularPreview
+                parseOptions: TestOptions.RegularPreview
                     .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             comp.VerifyDiagnostics(
@@ -8134,8 +8123,7 @@ public "
 
             var comp = CreateCompilation(
                 src,
-                parseOptions: TestOptions
-                    .RegularPreview
+                parseOptions: TestOptions.RegularPreview
                     .WithDocumentationMode(DocumentationMode.Diagnose)
             );
 
@@ -8193,8 +8181,7 @@ public "
 
             var comp = CreateCompilation(
                 src,
-                parseOptions: TestOptions
-                    .RegularPreview
+                parseOptions: TestOptions.RegularPreview
                     .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             comp.VerifyDiagnostics();
@@ -8245,8 +8232,7 @@ public partial "
 
             var comp = CreateCompilation(
                 src,
-                parseOptions: TestOptions
-                    .RegularPreview
+                parseOptions: TestOptions.RegularPreview
                     .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             comp.VerifyDiagnostics();
@@ -8299,8 +8285,7 @@ public partial "
 
             var comp = CreateCompilation(
                 src,
-                parseOptions: TestOptions
-                    .RegularPreview
+                parseOptions: TestOptions.RegularPreview
                     .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             comp.VerifyDiagnostics();
@@ -8353,8 +8338,7 @@ public partial "
 
             var comp = CreateCompilation(
                 src,
-                parseOptions: TestOptions
-                    .RegularPreview
+                parseOptions: TestOptions.RegularPreview
                     .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             comp.VerifyDiagnostics(
@@ -8410,8 +8394,7 @@ public partial "
 
             var comp = CreateCompilation(
                 src,
-                parseOptions: TestOptions
-                    .RegularPreview
+                parseOptions: TestOptions.RegularPreview
                     .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             comp.VerifyDiagnostics(
@@ -8467,8 +8450,7 @@ public partial "
 
             var comp = CreateCompilation(
                 src,
-                parseOptions: TestOptions
-                    .RegularPreview
+                parseOptions: TestOptions.RegularPreview
                     .WithDocumentationMode(DocumentationMode.Diagnose)
             );
 
@@ -8530,8 +8512,7 @@ public partial "
 
             var comp = CreateCompilation(
                 src,
-                parseOptions: TestOptions
-                    .RegularPreview
+                parseOptions: TestOptions.RegularPreview
                     .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             comp.VerifyDiagnostics(
@@ -8591,8 +8572,7 @@ public partial "
 
             var comp = CreateCompilation(
                 src,
-                parseOptions: TestOptions
-                    .RegularPreview
+                parseOptions: TestOptions.RegularPreview
                     .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             comp.VerifyDiagnostics(
@@ -8657,8 +8637,7 @@ public partial "
 
             var comp = CreateCompilation(
                 src,
-                parseOptions: TestOptions
-                    .RegularPreview
+                parseOptions: TestOptions.RegularPreview
                     .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             comp.VerifyDiagnostics(
@@ -8721,8 +8700,7 @@ public partial "
 
             var comp = CreateCompilation(
                 src,
-                parseOptions: TestOptions
-                    .RegularPreview
+                parseOptions: TestOptions.RegularPreview
                     .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             comp.VerifyDiagnostics(
@@ -8785,8 +8763,7 @@ public class Outer
 
             var comp = CreateCompilation(
                 src,
-                parseOptions: TestOptions
-                    .RegularPreview
+                parseOptions: TestOptions.RegularPreview
                     .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             comp.VerifyDiagnostics();
@@ -8848,8 +8825,7 @@ public "
 ";
             var comp = CreateCompilation(
                 src,
-                parseOptions: TestOptions
-                    .RegularPreview
+                parseOptions: TestOptions.RegularPreview
                     .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             comp.VerifyDiagnostics(
@@ -8974,8 +8950,7 @@ class Attr : System.Attribute {}
 
             var comp = CreateCompilation(
                 source,
-                parseOptions: TestOptions
-                    .RegularPreview
+                parseOptions: TestOptions.RegularPreview
                     .WithFeature("run-nullable-analysis", "never"),
                 targetFramework: TargetFramework.NetCoreApp
             );
@@ -9018,8 +8993,7 @@ class Attr : System.Attribute {}
 
             var comp = CreateCompilation(
                 source,
-                parseOptions: TestOptions
-                    .RegularPreview
+                parseOptions: TestOptions.RegularPreview
                     .WithFeature("run-nullable-analysis", "never"),
                 targetFramework: TargetFramework.NetCoreApp
             );
@@ -17336,8 +17310,7 @@ class Program
             var comp = CreateCompilation(source, options: TestOptions.ReleaseExe);
 
             var verifier = CompileAndVerify(comp, expectedOutput: methodName);
-            var diagnostics = verifier
-                .Diagnostics
+            var diagnostics = verifier.Diagnostics
                 .Where(d => d.Code is not (int)ErrorCode.HDN_UnusedUsingDirective);
 
             if (isStatic)

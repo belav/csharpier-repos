@@ -57,8 +57,7 @@ namespace System
             );
             if (firstLiteral.IndexOf(UriTemplate.WildcardPath, StringComparison.Ordinal) != -1)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new FormatException(
                             SR.GetString(
@@ -83,8 +82,7 @@ namespace System
                 int nextVarEnd = segment.IndexOf("}", nextVarStart + 1, StringComparison.Ordinal);
                 if (nextVarEnd < nextVarStart + 2)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new FormatException(
                                 SR.GetString(SR.UTInvalidFormatSegmentOrQueryPart, segment)
@@ -99,8 +97,7 @@ namespace System
                 );
                 if (hasDefault)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(
@@ -118,8 +115,7 @@ namespace System
                 {
                     if (nextVarStart == nextVarEnd + 1)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperArgument(
                                 "template",
                                 SR.GetString(
@@ -141,8 +137,7 @@ namespace System
                 }
                 if (literal.IndexOf(UriTemplate.WildcardPath, StringComparison.Ordinal) != -1)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new FormatException(
                                 SR.GetString(
@@ -155,16 +150,14 @@ namespace System
                 }
                 if (literal.IndexOf('}') != -1)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new FormatException(
                                 SR.GetString(SR.UTInvalidFormatSegmentOrQueryPart, segment)
                             )
                         );
                 }
-                result
-                    .varLitPairs
+                result.varLitPairs
                     .Add(
                         new VarAndLitPair(
                             varName,
@@ -244,8 +237,7 @@ namespace System
                 return false;
             }
             if (
-                StringComparer
-                    .OrdinalIgnoreCase
+                StringComparer.OrdinalIgnoreCase
                     .Compare(this.firstLiteral, otherAsCompound.firstLiteral) != 0
             )
             {
@@ -254,8 +246,7 @@ namespace System
             for (int pairIndex = 0; pairIndex < this.varLitPairs.Count; pairIndex++)
             {
                 if (
-                    StringComparer
-                        .OrdinalIgnoreCase
+                    StringComparer.OrdinalIgnoreCase
                         .Compare(
                             this.varLitPairs[pairIndex].Literal,
                             otherAsCompound.varLitPairs[pairIndex].Literal
@@ -286,8 +277,7 @@ namespace System
             if (!TryLookup(segment, boundParameters))
             {
                 Fx.Assert("How can that be? Lookup is expected to be called after IsMatch");
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(SR.GetString(SR.UTCSRLookupBeforeMatch))
                     );

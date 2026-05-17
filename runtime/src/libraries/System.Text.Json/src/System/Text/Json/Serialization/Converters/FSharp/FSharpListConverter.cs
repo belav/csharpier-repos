@@ -18,8 +18,7 @@ namespace System.Text.Json.Serialization.Converters
         [RequiresDynamicCode(FSharpCoreReflectionProxy.FSharpCoreUnreferencedCodeMessage)]
         public FSharpListConverter()
         {
-            _listConstructor = FSharpCoreReflectionProxy
-                .Instance
+            _listConstructor = FSharpCoreReflectionProxy.Instance
                 .CreateFSharpListConstructor<TList, TElement>();
         }
 

@@ -87,8 +87,7 @@ namespace System.IdentityModel.Tokens
 
             if (tokenLifetime <= TimeSpan.Zero)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ID0016)));
             }
 
@@ -106,8 +105,7 @@ namespace System.IdentityModel.Tokens
         {
             if (customConfigElements == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("customConfigElements");
             }
 
@@ -118,8 +116,7 @@ namespace System.IdentityModel.Tokens
             foreach (XmlElement customConfigElement in configNodes)
             {
                 if (
-                    !StringComparer
-                        .Ordinal
+                    !StringComparer.Ordinal
                         .Equals(
                             customConfigElement.LocalName,
                             ConfigurationStrings.SessionTokenRequirement
@@ -131,8 +128,7 @@ namespace System.IdentityModel.Tokens
 
                 if (foundValidConfig)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(
@@ -148,16 +144,14 @@ namespace System.IdentityModel.Tokens
                 foreach (XmlAttribute attribute in customConfigElement.Attributes)
                 {
                     if (
-                        StringComparer
-                            .OrdinalIgnoreCase
+                        StringComparer.OrdinalIgnoreCase
                             .Equals(attribute.LocalName, ConfigurationStrings.Lifetime)
                     )
                     {
                         TimeSpan outTokenLifetime = DefaultLifetime;
                         if (!TimeSpan.TryParse(attribute.Value, out outTokenLifetime))
                         {
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
                                     new InvalidOperationException(
                                         SR.GetString(SR.ID7017, attribute.Value)
@@ -166,8 +160,7 @@ namespace System.IdentityModel.Tokens
                         }
                         if (outTokenLifetime < TimeSpan.Zero)
                         {
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
                                     new InvalidOperationException(SR.GetString(SR.ID7018))
                                 );
@@ -176,8 +169,7 @@ namespace System.IdentityModel.Tokens
                     }
                     else
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(
                                     SR.GetString(
@@ -222,8 +214,7 @@ namespace System.IdentityModel.Tokens
 
             if (Transforms == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ID4296)));
             }
 
@@ -302,8 +293,7 @@ namespace System.IdentityModel.Tokens
 
             if (this.Configuration == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ID4272)));
             }
 
@@ -315,8 +305,7 @@ namespace System.IdentityModel.Tokens
                     CreateBootstrapTokenHandlerCollection();
                 if (!bootstrapTokenCollection.CanWriteToken(tokenDescriptor.Token))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(SR.ID4010, tokenDescriptor.Token.GetType().ToString())
@@ -366,8 +355,7 @@ namespace System.IdentityModel.Tokens
 
             if (this.Configuration == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ID4272)));
             }
 
@@ -481,8 +469,7 @@ namespace System.IdentityModel.Tokens
                 //
                 // Something is wrong
                 //
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new SecurityTokenException(
                             SR.GetString(
@@ -502,8 +489,7 @@ namespace System.IdentityModel.Tokens
             dicReader.ReadFullStartElement();
             if (!dicReader.IsStartElement(identifier, ns))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new SecurityTokenException(
                             SR.GetString(
@@ -518,8 +504,7 @@ namespace System.IdentityModel.Tokens
             contextId = dicReader.ReadElementContentAsUniqueId();
             if (contextId == null || string.IsNullOrEmpty(contextId.ToString()))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new SecurityTokenException(SR.GetString(SR.ID4242)));
             }
 
@@ -565,8 +550,7 @@ namespace System.IdentityModel.Tokens
 
                     if (encodedCookie == null)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(new SecurityTokenException(SR.GetString(SR.ID4237)));
                     }
                     //
@@ -584,8 +568,7 @@ namespace System.IdentityModel.Tokens
                         securityContextToken as SessionSecurityToken;
                     if (sessionToken != null && sessionToken.ContextId != contextId)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new SecurityTokenException(
                                     SR.GetString(SR.ID4229, sessionToken.ContextId, contextId)
@@ -595,8 +578,7 @@ namespace System.IdentityModel.Tokens
 
                     if (sessionToken != null && sessionToken.Id != id)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new SecurityTokenException(
                                     SR.GetString(SR.ID4227, sessionToken.Id, id)
@@ -636,8 +618,7 @@ namespace System.IdentityModel.Tokens
 
             if (securityContextToken == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new SecurityTokenException(SR.GetString(SR.ID4243)));
             }
 
@@ -654,8 +635,7 @@ namespace System.IdentityModel.Tokens
             {
                 if (value <= TimeSpan.Zero)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgument("value", SR.GetString(SR.ID0016));
                 }
 
@@ -729,8 +709,7 @@ namespace System.IdentityModel.Tokens
             SessionSecurityToken sessionToken = token as SessionSecurityToken;
             if (sessionToken == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(
@@ -809,8 +788,7 @@ namespace System.IdentityModel.Tokens
                 {
                     string errorMessage = SR.GetString(SR.ID4291, token);
                     this.TraceTokenValidationFailure(token, errorMessage);
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new SecurityTokenException(errorMessage));
                 }
             }
@@ -838,8 +816,7 @@ namespace System.IdentityModel.Tokens
 
             if (this.Configuration == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ID4274)));
             }
 
@@ -853,8 +830,7 @@ namespace System.IdentityModel.Tokens
 
             if (securityToken.ValidFrom > maxTime)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new SecurityTokenNotYetValidException(
                             SR.GetString(
@@ -869,8 +845,7 @@ namespace System.IdentityModel.Tokens
 
             if (securityToken.ValidTo < minTime)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new SecurityTokenExpiredException(
                             SR.GetString(
@@ -932,8 +907,7 @@ namespace System.IdentityModel.Tokens
             SessionSecurityToken sessionToken = token as SessionSecurityToken;
             if (sessionToken == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(SR.GetString(SR.ID4046, token, TokenType))
                     );
@@ -966,8 +940,7 @@ namespace System.IdentityModel.Tokens
             }
             else
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ID4050)));
             }
 

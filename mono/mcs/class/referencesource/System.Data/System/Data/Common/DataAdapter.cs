@@ -29,16 +29,14 @@ namespace System.Data.Common
         private bool _acceptChangesDuringFill = true;
         private LoadOption _fillLoadOption;
 
-        private MissingMappingAction _missingMappingAction = System
-            .Data
+        private MissingMappingAction _missingMappingAction = System.Data
             .MissingMappingAction
             .Passthrough;
         private MissingSchemaAction _missingSchemaAction = System.Data.MissingSchemaAction.Add;
         private DataTableMappingCollection _tableMappings;
 
         private static int _objectTypeCount; // Bid counter
-        internal readonly int _objectID = System
-            .Threading
+        internal readonly int _objectID = System.Threading
             .Interlocked
             .Increment(ref _objectTypeCount);
 

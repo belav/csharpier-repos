@@ -24,8 +24,7 @@ namespace Microsoft.VisualStudio.IntegrationTest.Setup
             if (
                 exception is ArgumentException argumentException
                 && argumentException.Message.Contains("SnapshotPoint")
-                && argumentException
-                    .StackTrace
+                && argumentException.StackTrace
                     .Contains(
                         "Microsoft.VisualStudio.Text.Editor.Implementation.WpfTextView.ValidateBufferPosition"
                     )
@@ -37,8 +36,7 @@ namespace Microsoft.VisualStudio.IntegrationTest.Setup
 
             if (
                 exception is TaskCanceledException taskCanceledException
-                && taskCanceledException
-                    .StackTrace
+                && taskCanceledException.StackTrace
                     .Contains(
                         "Microsoft.CodeAnalysis.Editor.Implementation.Suggestions.SuggestedActionsSourceProvider.SuggestedActionsSource.GetSuggestedActions"
                     )

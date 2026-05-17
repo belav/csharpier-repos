@@ -33,8 +33,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.LanguageServices
             )
         {
             private static readonly SymbolDisplayFormat s_minimallyQualifiedFormat =
-                SymbolDisplayFormat
-                    .MinimallyQualifiedFormat
+                SymbolDisplayFormat.MinimallyQualifiedFormat
                     .AddLocalOptions(SymbolDisplayLocalOptions.IncludeRef)
                     .AddMiscellaneousOptions(
                         SymbolDisplayMiscellaneousOptions.UseErrorTypeSymbolName
@@ -134,16 +133,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.LanguageServices
                 int position,
                 SymbolDisplayFormat format
             ) =>
-                CodeAnalysis
-                    .CSharp
+                CodeAnalysis.CSharp
                     .SymbolDisplay
                     .ToMinimalDisplayParts(symbol, semanticModel, position, format);
 
             protected override string? GetNavigationHint(ISymbol symbol) =>
                 symbol == null
                     ? null
-                    : CodeAnalysis
-                        .CSharp
+                    : CodeAnalysis.CSharp
                         .SymbolDisplay
                         .ToDisplayString(symbol, SymbolDisplayFormat.MinimallyQualifiedFormat);
 

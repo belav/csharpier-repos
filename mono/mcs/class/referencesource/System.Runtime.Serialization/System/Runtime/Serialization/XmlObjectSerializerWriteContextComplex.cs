@@ -89,8 +89,7 @@ namespace System.Runtime.Serialization
             {
                 if (this.IsGetOnlyCollection && dataContract is SurrogateDataContract)
                 {
-                    throw System
-                        .Runtime
+                    throw System.Runtime
                         .Serialization
                         .DiagnosticUtility
                         .ExceptionUtility
@@ -128,8 +127,7 @@ namespace System.Runtime.Serialization
             {
                 if (this.IsGetOnlyCollection && dataContract is SurrogateDataContract)
                 {
-                    throw System
-                        .Runtime
+                    throw System.Runtime
                         .Serialization
                         .DiagnosticUtility
                         .ExceptionUtility
@@ -171,8 +169,7 @@ namespace System.Runtime.Serialization
             {
                 if (this.IsGetOnlyCollection && dataContract is SurrogateDataContract)
                 {
-                    throw System
-                        .Runtime
+                    throw System.Runtime
                         .Serialization
                         .DiagnosticUtility
                         .ExceptionUtility
@@ -559,8 +556,7 @@ namespace System.Runtime.Serialization
                         memberType
                     );
                     if (!DataContract.IsTypeSerializable(memberType))
-                        throw System
-                            .Runtime
+                        throw System.Runtime
                             .Serialization
                             .DiagnosticUtility
                             .ExceptionUtility
@@ -591,8 +587,7 @@ namespace System.Runtime.Serialization
                 );
                 if (this.IsGetOnlyCollection && surrogateType != type)
                 {
-                    throw System
-                        .Runtime
+                    throw System.Runtime
                         .Serialization
                         .DiagnosticUtility
                         .ExceptionUtility

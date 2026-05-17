@@ -43,8 +43,7 @@ public static class CosmosQueryableExtensions
         Check.NotNull(partitionKey, nameof(partitionKey));
 
         return source.Provider is EntityQueryProvider
-            ? source
-                .Provider
+            ? source.Provider
                 .CreateQuery<TEntity>(
                     Expression.Call(
                         instance: null,

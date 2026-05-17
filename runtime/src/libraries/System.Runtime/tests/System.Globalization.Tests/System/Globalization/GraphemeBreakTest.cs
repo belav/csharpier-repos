@@ -221,8 +221,7 @@ namespace System.Globalization.Tests
 
         private static IEnumerable<(Rune[][] clusters, string line)> GetGraphemeBreakTestData()
         {
-            using Stream stream = typeof(GraphemeBreakTest)
-                .Assembly
+            using Stream stream = typeof(GraphemeBreakTest).Assembly
                 .GetManifestResourceStream("GraphemeBreakTest.txt");
             using StreamReader reader = new StreamReader(stream);
 

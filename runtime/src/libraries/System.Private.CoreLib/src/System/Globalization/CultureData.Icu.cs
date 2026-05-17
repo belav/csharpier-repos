@@ -262,8 +262,7 @@ namespace System.Globalization
             }
 
             char* buffer = stackalloc char[ICU_ULOC_KEYWORD_AND_VALUES_CAPACITY];
-            bool result = Interop
-                .Globalization
+            bool result = Interop.Globalization
                 .GetLocaleInfoString(
                     localeName,
                     (uint)type,
@@ -297,8 +296,7 @@ namespace System.Globalization
             }
 
             int value = 0;
-            bool result = Interop
-                .Globalization
+            bool result = Interop.Globalization
                 .GetLocaleInfoInt(_sWindowsName, (uint)type, ref value);
             if (!result)
             {
@@ -319,8 +317,7 @@ namespace System.Globalization
 
             int primaryGroupingSize = 0;
             int secondaryGroupingSize = 0;
-            bool result = Interop
-                .Globalization
+            bool result = Interop.Globalization
                 .GetLocaleInfoGroupingSizes(
                     _sWindowsName,
                     (uint)type,
@@ -352,8 +349,7 @@ namespace System.Globalization
 
             char* buffer = stackalloc char[ICU_ULOC_KEYWORD_AND_VALUES_CAPACITY];
 
-            bool result = Interop
-                .Globalization
+            bool result = Interop.Globalization
                 .GetLocaleTimeFormat(
                     _sWindowsName,
                     shortFormat,

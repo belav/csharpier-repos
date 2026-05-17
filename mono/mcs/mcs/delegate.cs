@@ -447,30 +447,26 @@ namespace Mono.CSharp
             {
                 if (rtype.BuiltinType == BuiltinTypeSpec.Type.Dynamic)
                 {
-                    Module
-                        .PredefinedAttributes
+                    Module.PredefinedAttributes
                         .Dynamic
                         .EmitAttribute(CreateReturnBuilder().Builder);
                 }
                 else if (rtype.HasDynamicElement)
                 {
-                    Module
-                        .PredefinedAttributes
+                    Module.PredefinedAttributes
                         .Dynamic
                         .EmitAttribute(CreateReturnBuilder().Builder, rtype, Location);
                 }
                 else if (rtype is ReadOnlyReferenceContainer)
                 {
-                    Module
-                        .PredefinedAttributes
+                    Module.PredefinedAttributes
                         .IsReadOnly
                         .EmitAttribute(CreateReturnBuilder().Builder);
                 }
 
                 if (rtype.HasNamedTupleElement)
                 {
-                    Module
-                        .PredefinedAttributes
+                    Module.PredefinedAttributes
                         .TupleElementNames
                         .EmitAttribute(CreateReturnBuilder().Builder, rtype, Location);
                 }
@@ -487,15 +483,12 @@ namespace Mono.CSharp
 
             if (BeginInvokeBuilder != null)
             {
-                BeginInvokeBuilder
-                    .ParameterInfo
+                BeginInvokeBuilder.ParameterInfo
                     .ApplyAttributes(this, BeginInvokeBuilder.MethodBuilder);
-                EndInvokeBuilder
-                    .ParameterInfo
+                EndInvokeBuilder.ParameterInfo
                     .ApplyAttributes(this, EndInvokeBuilder.MethodBuilder);
 
-                BeginInvokeBuilder
-                    .MethodBuilder
+                BeginInvokeBuilder.MethodBuilder
                     .SetImplementationFlags(MethodImplAttributes.Runtime);
                 EndInvokeBuilder.MethodBuilder.SetImplementationFlags(MethodImplAttributes.Runtime);
             }
@@ -748,12 +741,13 @@ namespace Mono.CSharp
 
             if (delegate_method.DeclaringType.IsNullableType)
             {
-                ec.Report.Error(
-                    1728,
-                    loc,
-                    "Cannot create delegate from method `{0}' because it is a member of System.Nullable<T> type",
-                    delegate_method.GetSignatureForError()
-                );
+                ec.Report
+                    .Error(
+                        1728,
+                        loc,
+                        "Cannot create delegate from method `{0}' because it is a member of System.Nullable<T> type",
+                        delegate_method.GetSignatureForError()
+                    );
                 return null;
             }
 
@@ -767,13 +761,14 @@ namespace Mono.CSharp
                 TypeSpec e_type = emg.ExtensionExpression.Type;
                 if (TypeSpec.IsValueType(e_type))
                 {
-                    ec.Report.Error(
-                        1113,
-                        loc,
-                        "Extension method `{0}' of value type `{1}' cannot be used to create delegates",
-                        delegate_method.GetSignatureForError(),
-                        e_type.GetSignatureForError()
-                    );
+                    ec.Report
+                        .Error(
+                            1113,
+                            loc,
+                            "Extension method `{0}' of value type `{1}' cannot be used to create delegates",
+                            delegate_method.GetSignatureForError(),
+                            e_type.GetSignatureForError()
+                        );
                 }
             }
 
@@ -792,21 +787,23 @@ namespace Mono.CSharp
                 MethodOrOperator m = delegate_method.MemberDefinition as MethodOrOperator;
                 if (m != null && m.IsPartialDefinition)
                 {
-                    ec.Report.Error(
-                        762,
-                        loc,
-                        "Cannot create delegate from partial method declaration `{0}'",
-                        delegate_method.GetSignatureForError()
-                    );
+                    ec.Report
+                        .Error(
+                            762,
+                            loc,
+                            "Cannot create delegate from partial method declaration `{0}'",
+                            delegate_method.GetSignatureForError()
+                        );
                 }
                 else
                 {
-                    ec.Report.Error(
-                        1618,
-                        loc,
-                        "Cannot create delegate with `{0}' because it has a Conditional attribute",
-                        TypeManager.CSharpSignature(delegate_method)
-                    );
+                    ec.Report
+                        .Error(
+                            1618,
+                            loc,
+                            "Cannot create delegate with `{0}' because it has a Conditional attribute",
+                            TypeManager.CSharpSignature(delegate_method)
+                        );
                 }
             }
 
@@ -879,50 +876,54 @@ namespace Mono.CSharp
             ec.Report.SymbolRelatedToPreviousError(method);
             if (ec.Module.Compiler.Settings.Version == LanguageVersion.ISO_1)
             {
-                ec.Report.Error(
-                    410,
-                    loc,
-                    "A method or delegate `{0} {1}' parameters and return type must be same as delegate `{2} {3}' parameters and return type",
-                    method.ReturnType.GetSignatureForError(),
-                    member_name,
-                    invoke_method.ReturnType.GetSignatureForError(),
-                    Delegate.FullDelegateDesc(invoke_method)
-                );
+                ec.Report
+                    .Error(
+                        410,
+                        loc,
+                        "A method or delegate `{0} {1}' parameters and return type must be same as delegate `{2} {3}' parameters and return type",
+                        method.ReturnType.GetSignatureForError(),
+                        member_name,
+                        invoke_method.ReturnType.GetSignatureForError(),
+                        Delegate.FullDelegateDesc(invoke_method)
+                    );
                 return;
             }
 
             if (return_type == null)
             {
-                ec.Report.Error(
-                    123,
-                    loc,
-                    "A method or delegate `{0}' parameters do not match delegate `{1}' parameters",
-                    member_name,
-                    Delegate.FullDelegateDesc(invoke_method)
-                );
+                ec.Report
+                    .Error(
+                        123,
+                        loc,
+                        "A method or delegate `{0}' parameters do not match delegate `{1}' parameters",
+                        member_name,
+                        Delegate.FullDelegateDesc(invoke_method)
+                    );
                 return;
             }
 
             if (invoke_method.ReturnType.Kind == MemberKind.ByRef)
             {
-                ec.Report.Error(
-                    8189,
-                    loc,
-                    "By reference return delegate does not match `{0}' return type",
-                    Delegate.FullDelegateDesc(invoke_method)
-                );
+                ec.Report
+                    .Error(
+                        8189,
+                        loc,
+                        "By reference return delegate does not match `{0}' return type",
+                        Delegate.FullDelegateDesc(invoke_method)
+                    );
                 return;
             }
 
-            ec.Report.Error(
-                407,
-                loc,
-                "A method or delegate `{0} {1}' return type does not match delegate `{2} {3}' return type",
-                return_type.GetSignatureForError(),
-                member_name,
-                invoke_method.ReturnType.GetSignatureForError(),
-                Delegate.FullDelegateDesc(invoke_method)
-            );
+            ec.Report
+                .Error(
+                    407,
+                    loc,
+                    "A method or delegate `{0} {1}' return type does not match delegate `{2} {3}' return type",
+                    return_type.GetSignatureForError(),
+                    member_name,
+                    invoke_method.ReturnType.GetSignatureForError(),
+                    Delegate.FullDelegateDesc(invoke_method)
+                );
         }
 
         public static bool ImplicitStandardConversionExists(

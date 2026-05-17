@@ -42,8 +42,7 @@ namespace Internal.TypeSystem.NoMetadata
             {
                 if (_instantiation.IsNull)
                 {
-                    uint genericArgCount = TypeLoaderEnvironment
-                        .Instance
+                    uint genericArgCount = TypeLoaderEnvironment.Instance
                         .GetGenericArgumentCountFromMethodNameAndSignature(_nameAndSignature);
                     if (genericArgCount == 0)
                     {
@@ -130,8 +129,7 @@ namespace Internal.TypeSystem.NoMetadata
                 methodInstantiation
             );
             if (owningType != instantiatedOwningType)
-                method = instantiatedOwningType
-                    .Context
+                method = instantiatedOwningType.Context
                     .ResolveRuntimeMethod(
                         UnboxingStub,
                         (DefType)instantiatedOwningType,
@@ -163,8 +161,7 @@ namespace Internal.TypeSystem.NoMetadata
 
             return (clone == null)
                 ? method
-                : method
-                    .Context
+                : method.Context
                     .GetInstantiatedMethod(method.GetMethodDefinition(), new Instantiation(clone));
         }
 

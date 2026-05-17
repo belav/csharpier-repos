@@ -45,8 +45,7 @@ namespace System.Globalization.Tests
         {
             Assert.True(
                 format.CurrencyGroupSizes.AsSpan().SequenceEqual(expected.AsSpan())
-                    || format
-                        .CurrencyGroupSizes
+                    || format.CurrencyGroupSizes
                         .AsSpan()
                         .SequenceEqual(expectedAlternative.AsSpan()),
                 $"Expected {string.Join(", ", expected)} or {string.Join(", ", expectedAlternative ?? Array.Empty<int>())}, got {string.Join(", ", format.CurrencyGroupSizes)}"

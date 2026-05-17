@@ -547,8 +547,7 @@ namespace Castle.Components.DictionaryAdapter
                     propertyDescriptor.Fetch = propertyFetch.GetValueOrDefault(defaultFetch);
 
                     foreach (
-                        var descriptorInitializer in propertyDescriptor
-                            .Behaviors
+                        var descriptorInitializer in propertyDescriptor.Behaviors
                             .OfType<IPropertyDescriptorInitializer>()
                     )
                     {

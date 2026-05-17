@@ -693,14 +693,12 @@ namespace System
                     Type[] paramTypes = new Type[parameters.Length];
                     for (int i = 0; i < paramTypes.Length; i++)
                         paramTypes[i] = parameters[i].ParameterType;
-                    return baseMethod
-                        .DeclaringType
+                    return baseMethod.DeclaringType
                         .GetProperty(property.Name, property.PropertyType, paramTypes);
                 }
                 else
                 {
-                    return baseMethod
-                        .DeclaringType
+                    return baseMethod.DeclaringType
                         .GetProperty(property.Name, property.PropertyType);
                 }
             }

@@ -86,8 +86,7 @@ namespace System.Web.Security
             {
                 if (HttpRuntime.UseIntegratedPipeline)
                 {
-                    ((HttpApplication)source)
-                        .Context
+                    ((HttpApplication)source).Context
                         .DisableNotifications(RequestNotification.EndRequest, 0);
                 }
                 return;

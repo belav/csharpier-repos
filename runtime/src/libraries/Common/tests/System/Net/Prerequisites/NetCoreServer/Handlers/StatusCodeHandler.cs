@@ -16,8 +16,7 @@ namespace NetCoreServer
             {
                 int statusCode = int.Parse(statusCodeString);
                 context.Response.StatusCode = statusCode;
-                context
-                    .Response
+                context.Response
                     .SetStatusDescription(
                         string.IsNullOrWhiteSpace(statusDescription) ? " " : statusDescription
                     );
@@ -25,8 +24,7 @@ namespace NetCoreServer
             catch (Exception)
             {
                 context.Response.StatusCode = 400;
-                context
-                    .Response
+                context.Response
                     .SetStatusDescription("Error parsing statuscode: " + statusCodeString);
             }
         }

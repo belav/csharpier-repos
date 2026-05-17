@@ -92,8 +92,7 @@ namespace Microsoft.VisualStudio.LanguageServices.ValueTracking
                 e.Kind is WorkspaceChangeKind.SolutionCleared or WorkspaceChangeKind.SolutionRemoved
             )
             {
-                _ = _threadingContext
-                    .JoinableTaskFactory
+                _ = _threadingContext.JoinableTaskFactory
                     .RunAsync(async () =>
                     {
                         await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync();

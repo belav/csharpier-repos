@@ -102,8 +102,7 @@ namespace Microsoft.Build.Tasks.Xaml
         {
             CodeTypeDeclaration result = GenerateClassDeclaration(classData);
 
-            result
-                .Members
+            result.Members
                 .Add(
                     new CodeMemberField()
                     {
@@ -169,8 +168,7 @@ namespace Microsoft.Build.Tasks.Xaml
         {
             if (!this.codeDomProvider.IsValidIdentifier(classData.Name))
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new InvalidOperationException(SR.InvalidIdentifiers(classData.Name)),
                         classData.FileName
@@ -213,8 +211,7 @@ namespace Microsoft.Build.Tasks.Xaml
                 )
             )
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new InvalidOperationException(
                             SR.TaskCannotResolveType(
@@ -264,8 +261,7 @@ namespace Microsoft.Build.Tasks.Xaml
                     )
                 )
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(
                             new InvalidOperationException(
                                 SR.TaskCannotResolveType(
@@ -456,8 +452,7 @@ namespace Microsoft.Build.Tasks.Xaml
 
             if (!GetCodeTypeReferenceFromXamlType(fieldData.Type, classData, out fieldCodeType))
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new InvalidOperationException(
                             SR.TaskCannotResolveFieldType(
@@ -471,8 +466,7 @@ namespace Microsoft.Build.Tasks.Xaml
 
             if (!this.codeDomProvider.IsValidIdentifier(fieldData.Name))
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new InvalidOperationException(SR.InvalidIdentifiers(fieldData.Name)),
                         classData.FileName
@@ -517,8 +511,7 @@ namespace Microsoft.Build.Tasks.Xaml
             initializeMethod.Comments.AddRange(GenerateXmlComments(initializeMethod.Name));
 
             // if (__contentLoaded) { return; }
-            initializeMethod
-                .Statements
+            initializeMethod.Statements
                 .Add(
                     new CodeConditionStatement()
                     {
@@ -537,8 +530,7 @@ namespace Microsoft.Build.Tasks.Xaml
                 );
 
             // __contentLoaded = true;
-            initializeMethod
-                .Statements
+            initializeMethod.Statements
                 .Add(
                     new CodeAssignStatement()
                     {
@@ -559,8 +551,7 @@ namespace Microsoft.Build.Tasks.Xaml
                 //    AfterInitializeComponent();
                 //    return;
                 // }
-                initializeMethod
-                    .Statements
+                initializeMethod.Statements
                     .Add(
                         new CodeVariableDeclarationStatement(
                             typeof(bool),
@@ -568,8 +559,7 @@ namespace Microsoft.Build.Tasks.Xaml
                             new CodePrimitiveExpression(false)
                         )
                     );
-                initializeMethod
-                    .Statements
+                initializeMethod.Statements
                     .Add(
                         new CodeMethodInvokeExpression(
                             new CodeThisReferenceExpression(),
@@ -580,8 +570,7 @@ namespace Microsoft.Build.Tasks.Xaml
                             )
                         )
                     );
-                initializeMethod
-                    .Statements
+                initializeMethod.Statements
                     .Add(
                         new CodeConditionStatement
                         {
@@ -603,8 +592,7 @@ namespace Microsoft.Build.Tasks.Xaml
             }
 
             //     string resourceName = FindResource();
-            CodeVariableReferenceExpression resourceNameVar = initializeMethod
-                .Statements
+            CodeVariableReferenceExpression resourceNameVar = initializeMethod.Statements
                 .DeclareVar(
                     typeof(string),
                     "resourceName",
@@ -620,8 +608,7 @@ namespace Microsoft.Build.Tasks.Xaml
 
             //     Stream initializeXaml = typeof(<%= className %>).Assembly.GetManifestResourceStream(resourceName);
             //
-            CodeVariableReferenceExpression initializeXamlVar = initializeMethod
-                .Statements
+            CodeVariableReferenceExpression initializeXamlVar = initializeMethod.Statements
                 .DeclareVar(
                     typeof(Stream),
                     "initializeXaml",
@@ -648,16 +635,13 @@ namespace Microsoft.Build.Tasks.Xaml
 
             //     var reader = new System.Xaml.XamlXmlReader(new System.IO.StreamReader(initializeXaml));
             //
-            CodeVariableReferenceExpression xmlReaderVar = initializeMethod
-                .Statements
+            CodeVariableReferenceExpression xmlReaderVar = initializeMethod.Statements
                 .DeclareVar(typeof(XmlReader), "xmlReader", new CodePrimitiveExpression(null));
 
-            CodeVariableReferenceExpression xamlReaderVar = initializeMethod
-                .Statements
+            CodeVariableReferenceExpression xamlReaderVar = initializeMethod.Statements
                 .DeclareVar(typeof(XamlReader), "reader", new CodePrimitiveExpression(null));
 
-            CodeVariableReferenceExpression objWriterVar = initializeMethod
-                .Statements
+            CodeVariableReferenceExpression objWriterVar = initializeMethod.Statements
                 .DeclareVar(
                     typeof(XamlObjectWriter),
                     "objectWriter",
@@ -667,8 +651,7 @@ namespace Microsoft.Build.Tasks.Xaml
             // Enclose in try finally block
             // This is to call Dispose on the xmlReader in the finally block, which is the CodeDom way of the C# "using" block
             CodeTryCatchFinallyStatement tryCatchFinally = new CodeTryCatchFinallyStatement();
-            tryCatchFinally
-                .TryStatements
+            tryCatchFinally.TryStatements
                 .AddRange(
                     GetInitializeMethodTryStatements(
                         xmlReaderVar,
@@ -679,8 +662,7 @@ namespace Microsoft.Build.Tasks.Xaml
                         memberFields
                     )
                 );
-            tryCatchFinally
-                .FinallyStatements
+            tryCatchFinally.FinallyStatements
                 .AddRange(
                     GetInitializeMethodFinallyStatements(xmlReaderVar, xamlReaderVar, objWriterVar)
                 );
@@ -689,8 +671,7 @@ namespace Microsoft.Build.Tasks.Xaml
             if (ArePartialMethodsSupported())
             {
                 // AfterInitializeComponent();
-                initializeMethod
-                    .Statements
+                initializeMethod.Statements
                     .Add(
                         new CodeMethodInvokeExpression(
                             new CodeThisReferenceExpression(),
@@ -868,8 +849,7 @@ namespace Microsoft.Build.Tasks.Xaml
                 typeof(IDisposable),
                 xmlReaderVar
             );
-            xmlReaderNotNull
-                .TrueStatements
+            xmlReaderNotNull.TrueStatements
                 .Add(new CodeMethodInvokeExpression(iDisposibleCastXmlReader, "Dispose"));
             finallyStatements.Add(xmlReaderNotNull);
 
@@ -883,8 +863,7 @@ namespace Microsoft.Build.Tasks.Xaml
                 typeof(IDisposable),
                 xamlReaderVar
             );
-            xamlReaderNotNull
-                .TrueStatements
+            xamlReaderNotNull.TrueStatements
                 .Add(new CodeMethodInvokeExpression(iDisposibleCastXamlReader, "Dispose"));
             finallyStatements.Add(xamlReaderNotNull);
 
@@ -898,8 +877,7 @@ namespace Microsoft.Build.Tasks.Xaml
                 typeof(IDisposable),
                 objWriterVar
             );
-            objWriterNotNull
-                .TrueStatements
+            objWriterNotNull.TrueStatements
                 .Add(new CodeMethodInvokeExpression(iDisposibleCastObjWriter, "Dispose"));
             finallyStatements.Add(objWriterNotNull);
 
@@ -964,8 +942,7 @@ namespace Microsoft.Build.Tasks.Xaml
 
             //     string[] resources = typeof(<%= className %>).Assembly.GetManifestResourceNames();
             //
-            CodeVariableReferenceExpression resourcesVar = findResourceMethod
-                .Statements
+            CodeVariableReferenceExpression resourcesVar = findResourceMethod.Statements
                 .DeclareVar(
                     typeof(string[]),
                     "resources",
@@ -992,8 +969,7 @@ namespace Microsoft.Build.Tasks.Xaml
             //         return resource;
             //     }
             // }
-            findResourceMethod
-                .Statements
+            findResourceMethod.Statements
                 .Add(
                     new CodeIterationStatement()
                     {
@@ -1090,8 +1066,7 @@ namespace Microsoft.Build.Tasks.Xaml
 
             // throw new InvalidOperationException("Resource not found.");
             //
-            findResourceMethod
-                .Statements
+            findResourceMethod.Statements
                 .Add(
                     new CodeThrowExceptionStatement()
                     {
@@ -1179,8 +1154,7 @@ namespace Microsoft.Build.Tasks.Xaml
 
             if (!GetCodeTypeReferenceFromXamlType(property.Type, classData, out propertyCodeType))
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new InvalidOperationException(
                             SR.TaskCannotResolvePropertyType(
@@ -1194,8 +1168,7 @@ namespace Microsoft.Build.Tasks.Xaml
 
             if (!this.codeDomProvider.IsValidIdentifier(property.Name))
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new InvalidOperationException(SR.InvalidIdentifiers(property.Name)),
                         classData.FileName
@@ -1500,8 +1473,7 @@ namespace Microsoft.Build.Tasks.Xaml
                 Attributes = MemberAttributes.Assembly | MemberAttributes.Static,
             };
 
-            CodeVariableReferenceExpression xsc = SchemaContext
-                .GetStatements
+            CodeVariableReferenceExpression xsc = SchemaContext.GetStatements
                 .DeclareVar(typeof(XamlSchemaContext), "xsc", new CodePrimitiveExpression(null));
 
             CodeConditionStatement getSchemaContextIfNotNull = new CodeConditionStatement();
@@ -1539,11 +1511,9 @@ namespace Microsoft.Build.Tasks.Xaml
                 CodeBinaryOperatorType.GreaterThan,
                 new CodePrimitiveExpression(0)
             );
-            initSchemaContext
-                .TrueStatements
+            initSchemaContext.TrueStatements
                 .Add(new CodeAssignStatement(xsc, typeof(XamlSchemaContext).New(AssemblyList)));
-            initSchemaContext
-                .FalseStatements
+            initSchemaContext.FalseStatements
                 .Add(new CodeAssignStatement(xsc, typeof(XamlSchemaContext).New()));
             SchemaContext.GetStatements.Add(initSchemaContext);
 
@@ -1585,20 +1555,17 @@ namespace Microsoft.Build.Tasks.Xaml
                 Attributes = MemberAttributes.Private | MemberAttributes.Static,
                 ReturnType = new CodeTypeReference(typeof(Assembly)),
             };
-            loadMethod
-                .Parameters
+            loadMethod.Parameters
                 .Add(new CodeParameterDeclarationExpression(typeof(string), "assemblyNameVal"));
             CodeVariableReferenceExpression assemblyNameVal = new CodeVariableReferenceExpression(
                 "assemblyNameVal"
             );
 
             CodeExpression initAssemblyName = typeof(AssemblyName).New(assemblyNameVal);
-            CodeVariableReferenceExpression assemblyName = loadMethod
-                .Statements
+            CodeVariableReferenceExpression assemblyName = loadMethod.Statements
                 .DeclareVar(typeof(AssemblyName), "assemblyName", initAssemblyName);
 
-            CodeVariableReferenceExpression publicKeyToken = loadMethod
-                .Statements
+            CodeVariableReferenceExpression publicKeyToken = loadMethod.Statements
                 .DeclareVar(
                     typeof(byte[]),
                     "publicKeyToken",
@@ -1611,8 +1578,7 @@ namespace Microsoft.Build.Tasks.Xaml
                         },
                     }
                 );
-            CodeVariableReferenceExpression asm = loadMethod
-                .Statements
+            CodeVariableReferenceExpression asm = loadMethod.Statements
                 .DeclareVar(typeof(Assembly), "asm", new CodePrimitiveExpression(null));
 
             CodeExpression publicKeyTokenNotNullExp = new CodeBinaryOperatorExpression(
@@ -1623,8 +1589,7 @@ namespace Microsoft.Build.Tasks.Xaml
 
             CodeTryCatchFinallyStatement tryCatchExp = new CodeTryCatchFinallyStatement();
 
-            tryCatchExp
-                .TryStatements
+            tryCatchExp.TryStatements
                 .Add(
                     new CodeAssignStatement(
                         asm,
@@ -1639,8 +1604,7 @@ namespace Microsoft.Build.Tasks.Xaml
                 );
 
             CodeCatchClause catchClause = new CodeCatchClause();
-            CodeVariableReferenceExpression shortName = catchClause
-                .Statements
+            CodeVariableReferenceExpression shortName = catchClause.Statements
                 .DeclareVar(
                     typeof(AssemblyName),
                     "shortName",
@@ -1650,8 +1614,7 @@ namespace Microsoft.Build.Tasks.Xaml
                 );
             CodeConditionStatement setPublicKeyTokenExp = new CodeConditionStatement();
             setPublicKeyTokenExp.Condition = publicKeyTokenNotNullExp;
-            setPublicKeyTokenExp
-                .TrueStatements
+            setPublicKeyTokenExp.TrueStatements
                 .Add(
                     new CodeMethodInvokeExpression(
                         new CodeMethodReferenceExpression(shortName, "SetPublicKeyToken"),
@@ -1659,8 +1622,7 @@ namespace Microsoft.Build.Tasks.Xaml
                     )
                 );
             catchClause.Statements.Add(setPublicKeyTokenExp);
-            catchClause
-                .Statements
+            catchClause.Statements
                 .Add(
                     new CodeAssignStatement(
                         asm,
@@ -1700,14 +1662,12 @@ namespace Microsoft.Build.Tasks.Xaml
                 ReturnType = new CodeTypeReference(typeof(IList<Assembly>)),
             };
 
-            CodeVariableReferenceExpression assemblyList = loadAssembliesMethod
-                .Statements
+            CodeVariableReferenceExpression assemblyList = loadAssembliesMethod.Statements
                 .DeclareVar(typeof(IList<Assembly>), "assemblyList", typeof(List<Assembly>).New());
 
             foreach (var reference in references)
             {
-                loadAssembliesMethod
-                    .Statements
+                loadAssembliesMethod.Statements
                     .Add(
                         new CodeMethodInvokeExpression(
                             assemblyList,
@@ -1720,8 +1680,7 @@ namespace Microsoft.Build.Tasks.Xaml
                     );
             }
 
-            loadAssembliesMethod
-                .Statements
+            loadAssembliesMethod.Statements
                 .Add(
                     new CodeMethodInvokeExpression(
                         assemblyList,

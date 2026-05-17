@@ -58,8 +58,7 @@ namespace System.Net.Http.WinHttpHandlerFunctional.Tests
             string cookieValue
         )
         {
-            Uri uri = System
-                .Net
+            Uri uri = System.Net
                 .Test
                 .Common
                 .Configuration
@@ -80,8 +79,7 @@ namespace System.Net.Http.WinHttpHandlerFunctional.Tests
 
             using (HttpClient client = new HttpClient(handler))
             {
-                client
-                    .DefaultRequestHeaders
+                client.DefaultRequestHeaders
                     .Add("X-SetCookie", string.Format("{0}={1};Path=/", cookieName, cookieValue));
                 using (HttpResponseMessage httpResponse = await client.GetAsync(uri))
                 {
@@ -215,8 +213,7 @@ namespace System.Net.Http.WinHttpHandlerFunctional.Tests
                 Assert.Equal(HttpStatusCode.OK, response.StatusCode);
                 Assert.Equal(HttpVersion20.Value, response.Version);
                 string responsePayload = await response.Content.ReadAsStringAsync();
-                var responseContent = Newtonsoft
-                    .Json
+                var responseContent = Newtonsoft.Json
                     .JsonConvert
                     .DeserializeAnonymousType(
                         responsePayload,
@@ -306,8 +303,7 @@ namespace System.Net.Http.WinHttpHandlerFunctional.Tests
                 HttpResponseMessage response = task.Result;
                 Assert.True(response.IsSuccessStatusCode);
                 Assert.Equal(HttpVersion20.Value, response.Version);
-                string responsePayload = await response
-                    .Content
+                string responsePayload = await response.Content
                     .ReadAsStringAsync()
                     .WaitAsync(TestHelper.PassingTestTimeout);
                 Assert.Contains(payloadText, responsePayload);
@@ -347,8 +343,7 @@ namespace System.Net.Http.WinHttpHandlerFunctional.Tests
             HttpResponseMessage response = task.Result;
             Assert.True(response.IsSuccessStatusCode);
             Assert.Equal(HttpVersion20.Value, response.Version);
-            string responsePayload = await response
-                .Content
+            string responsePayload = await response.Content
                 .ReadAsStringAsync()
                 .WaitAsync(TestHelper.PassingTestTimeout);
             Assert.Contains(payloadText, responsePayload);

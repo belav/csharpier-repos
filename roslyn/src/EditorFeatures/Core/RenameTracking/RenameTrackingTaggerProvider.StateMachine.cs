@@ -255,8 +255,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
                     && this.TrackingSession.IsDefinitelyRenamableIdentifier()
                 )
                 {
-                    var document = _buffer
-                        .CurrentSnapshot
+                    var document = _buffer.CurrentSnapshot
                         .GetOpenDocumentInCurrentContextWithChanges();
                     if (document != null)
                     {
@@ -351,8 +350,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
                         )
                     )
                     {
-                        var snapshotSpan = trackingSession
-                            .TrackingSpan
+                        var snapshotSpan = trackingSession.TrackingSpan
                             .GetSpan(Buffer.CurrentSnapshot);
 
                         // user needs to be on the same line as the diagnostic location.

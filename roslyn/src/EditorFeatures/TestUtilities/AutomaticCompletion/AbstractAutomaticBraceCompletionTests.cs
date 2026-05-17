@@ -36,8 +36,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.AutomaticCompletion
 
             if (expectValidSession)
             {
-                var closingPoint = session
-                    .ClosingPoint
+                var closingPoint = session.ClosingPoint
                     .GetPoint(session.SubjectBuffer.CurrentSnapshot)
                     .Subtract(1);
                 Assert.Equal(closingPoint.GetChar(), session.ClosingBrace);
@@ -51,8 +50,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.AutomaticCompletion
 
         internal static void CheckBackspace(IBraceCompletionSession session)
         {
-            session
-                .TextView
+            session.TextView
                 .TryMoveCaretToAndEnsureVisible(
                     session.OpeningPoint.GetPoint(session.SubjectBuffer.CurrentSnapshot).Add(1)
                 );
@@ -144,8 +142,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.AutomaticCompletion
             bool allowOverType = true
         )
         {
-            var preClosingPoint = session
-                .ClosingPoint
+            var preClosingPoint = session.ClosingPoint
                 .GetPoint(session.SubjectBuffer.CurrentSnapshot);
             Assert.Equal(session.ClosingBrace, preClosingPoint.Subtract(1).GetChar());
             session.PreOverType(out var handled);
@@ -154,8 +151,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.AutomaticCompletion
                 session.PostOverType();
             }
 
-            var postClosingPoint = session
-                .ClosingPoint
+            var postClosingPoint = session.ClosingPoint
                 .GetPoint(session.SubjectBuffer.CurrentSnapshot);
             Assert.Equal(postClosingPoint.Subtract(1).GetChar(), session.ClosingBrace);
 
@@ -202,8 +198,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.AutomaticCompletion
             var textView = document.GetTextView();
 
             globalOptions?.SetGlobalOptions(workspace.GlobalOptions);
-            workspace
-                .GlobalOptions
+            workspace.GlobalOptions
                 .SetEditorOptions(textView.Options.GlobalOptions, document.Project.Language);
 
             if (

@@ -436,8 +436,7 @@ public class ClientCertificateAuthenticationTests
 
         using var server = host.GetTestServer();
         var client = server.CreateClient();
-        client
-            .DefaultRequestHeaders
+        client.DefaultRequestHeaders
             .Add(
                 "X-Client-Cert",
                 Convert.ToBase64String(Certificates.SelfSignedValidWithNoEku.RawData)
@@ -456,8 +455,7 @@ public class ClientCertificateAuthenticationTests
 
         using var server = host.GetTestServer();
         var client = server.CreateClient();
-        client
-            .DefaultRequestHeaders
+        client.DefaultRequestHeaders
             .Add(
                 "X-Client-Cert",
                 "OOPS" + Convert.ToBase64String(Certificates.SelfSignedValidWithNoEku.RawData)
@@ -481,8 +479,7 @@ public class ClientCertificateAuthenticationTests
 
         using var server = host.GetTestServer();
         var client = server.CreateClient();
-        client
-            .DefaultRequestHeaders
+        client.DefaultRequestHeaders
             .Add(
                 "X-ARR-ClientCert",
                 Convert.ToBase64String(Certificates.SelfSignedValidWithNoEku.RawData)
@@ -502,8 +499,7 @@ public class ClientCertificateAuthenticationTests
 
         using var server = host.GetTestServer();
         var client = server.CreateClient();
-        client
-            .DefaultRequestHeaders
+        client.DefaultRequestHeaders
             .Add(
                 "random-Weird-header",
                 Convert.ToBase64String(Certificates.SelfSignedValidWithNoEku.RawData)
@@ -616,8 +612,7 @@ public class ClientCertificateAuthenticationTests
             {
                 Assert.Single(actual);
                 Assert.Equal(
-                    Certificates
-                        .SelfSignedValidWithNoEku
+                    Certificates.SelfSignedValidWithNoEku
                         .GetNameInfo(X509NameType.EmailName, false),
                     actual.First().Value
                 );
@@ -637,8 +632,7 @@ public class ClientCertificateAuthenticationTests
             {
                 Assert.Single(actual);
                 Assert.Equal(
-                    Certificates
-                        .SelfSignedValidWithNoEku
+                    Certificates.SelfSignedValidWithNoEku
                         .GetNameInfo(X509NameType.SimpleName, false),
                     actual.First().Value
                 );

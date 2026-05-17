@@ -13,8 +13,7 @@ namespace Monotests_Mono.Data.SqlExpressions
             DataTable table = new DataTable();
             table.Columns.Add("Col_0.Value", Type.GetType("System.Int32"));
             table.Columns.Add("Col_1", Type.GetType("System.Int32"));
-            table
-                .Columns
+            table.Columns
                 .Add("Result", Type.GetType("System.Int32"), "IIF(Col_0.Value <> 0, Col_1 + 5, 0)");
 
             DataRow row = table.NewRow();
@@ -59,8 +58,7 @@ namespace Monotests_Mono.Data.SqlExpressions
             DataTable table = new DataTable();
             table.Columns.Add("Col_0.Value", Type.GetType("System.Int32"));
             table.Columns.Add("Col_1", Type.GetType("System.Int32"));
-            table
-                .Columns
+            table.Columns
                 .Add("Result", Type.GetType("System.Int32"), "IIF(Col_0.Value > 10, Col_1 + 5, 0)");
 
             DataRow row = table.NewRow();
@@ -77,8 +75,7 @@ namespace Monotests_Mono.Data.SqlExpressions
             DataTable table = new DataTable();
             table.Columns.Add("Col_0.Value", Type.GetType("System.Int32"));
             table.Columns.Add("Col_1", Type.GetType("System.Int32"));
-            table
-                .Columns
+            table.Columns
                 .Add("Result", Type.GetType("System.Int32"), "IIF(Col_0.Value > 10, Col_1 + 5, 0)");
 
             DataRow row = table.NewRow();
@@ -94,8 +91,7 @@ namespace Monotests_Mono.Data.SqlExpressions
         {
             DataTable table = new DataTable();
             table.Columns.Add("Col_0", Type.GetType("System.String"));
-            table
-                .Columns
+            table.Columns
                 .Add("Result", Type.GetType("System.String"), "SUBSTRING(Col_0+'K?', 2+2, 2)");
 
             DataRow row = table.NewRow();

@@ -352,8 +352,7 @@ namespace System.Resources
             {
                 for (int i = lo; i <= hi; i++)
                 {
-                    _store
-                        .BaseStream
+                    _store.BaseStream
                         .Seek(_nameSectionOffset + GetNamePosition(i), SeekOrigin.Begin);
                     if (CompareStringEqualsName(name))
                     {

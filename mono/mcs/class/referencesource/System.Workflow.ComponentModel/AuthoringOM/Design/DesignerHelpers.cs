@@ -2788,16 +2788,14 @@ namespace System.Workflow.ComponentModel.Design
                             {
                                 string rulesText =
                                     (expression != null)
-                                        ? expressionPropertyDescriptor
-                                            .Converter
+                                        ? expressionPropertyDescriptor.Converter
                                             .ConvertTo(
                                                 new TypeDescriptorContext(
                                                     activity.Site,
                                                     null,
                                                     value
                                                 ),
-                                                System
-                                                    .Threading
+                                                System.Threading
                                                     .Thread
                                                     .CurrentThread
                                                     .CurrentUICulture,

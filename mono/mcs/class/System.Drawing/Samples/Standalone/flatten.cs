@@ -84,8 +84,7 @@ namespace Samples
             int fcount = path.PointCount;
             path.Dispose();
 
-            infoLabel.Text = System
-                .String
+            infoLabel.Text = System.String
                 .Format("Path Points: {0}, Flat Points: {1}", pcount, fcount);
         }
 

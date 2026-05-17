@@ -61,8 +61,7 @@ namespace System.ServiceModel.Activities
                     ambientHandle = this.declaredHandle.Get(context);
                 }
 
-                context
-                    .Properties
+                context.Properties
                     .Add(CorrelationHandle.StaticExecutionPropertyName, ambientHandle);
 
                 context.ScheduleActivity(this.Body);

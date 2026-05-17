@@ -16,8 +16,7 @@ namespace MonoDelta
             byte[] dpdb_data
         )
         {
-            System
-                .Reflection
+            System.Reflection
                 .Metadata
                 .MetadataUpdater
                 .ApplyUpdate(assm, dmeta_data, dil_data, dpdb_data);

@@ -424,8 +424,7 @@ namespace System.Net.Mail
             {
                 do
                 {
-                    IAsyncResult result = _parent
-                        ._bufferedStream
+                    IAsyncResult result = _parent._bufferedStream
                         .BeginRead(
                             _parent._byteBuffer!,
                             0,
@@ -513,8 +512,7 @@ namespace System.Net.Mail
 
                         if (_oneLine)
                         {
-                            _parent
-                                ._bufferedStream
+                            _parent._bufferedStream
                                 .Push(_parent._byteBuffer!, start, _read - start);
                             InvokeCallback();
                             return false;

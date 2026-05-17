@@ -145,8 +145,7 @@ namespace CoreXml.Test.XLinq
                         );
                         filteredReader.MoveToAttribute(i);
                         TestLog.Compare(
-                            SAEqComparer
-                                .Instance
+                            SAEqComparer.Instance
                                 .Equals(filteredReader.GetSAData(), filteredAttrs[i]),
                             "Move to attribute int - wrong position"
                         );
@@ -346,8 +345,7 @@ namespace CoreXml.Test.XLinq
                 "Move to next attribute :: " + message
             );
             TestLog.Compare(
-                SAEqComparer
-                    .Instance
+                SAEqComparer.Instance
                     .Equals(
                         shouldNAWork ? filteredAttrs[attrPosition + 1] : orig,
                         filteredReader.GetSAData()

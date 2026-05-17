@@ -57,9 +57,8 @@ namespace Mono.Http.Modules
             string username = up[0];
             string password = up[1];
 
-            string userFileName = app.Request.MapPath(
-                ConfigurationSettings.AppSettings["Basic.Users"]
-            );
+            string userFileName = app.Request
+                .MapPath(ConfigurationSettings.AppSettings["Basic.Users"]);
             if (userFileName == null || !File.Exists(userFileName))
                 return false;
 

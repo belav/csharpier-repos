@@ -721,8 +721,7 @@ public class RelationalScaffoldingModelFactoryTest
                 Columns = { c1 },
             },
         };
-        table
-            .Indexes
+        table.Indexes
             .Add(
                 new DatabaseIndex
                 {
@@ -732,8 +731,7 @@ public class RelationalScaffoldingModelFactoryTest
                     IsUnique = false,
                 }
             );
-        table
-            .Indexes
+        table.Indexes
             .Add(
                 new DatabaseIndex
                 {
@@ -743,8 +741,7 @@ public class RelationalScaffoldingModelFactoryTest
                     IsUnique = true,
                 }
             );
-        table
-            .Indexes
+        table.Indexes
             .Add(
                 new DatabaseIndex
                 {
@@ -754,8 +751,7 @@ public class RelationalScaffoldingModelFactoryTest
                     IsUnique = true,
                 }
             );
-        table
-            .Indexes
+        table.Indexes
             .Add(
                 new DatabaseIndex
                 {
@@ -765,8 +761,7 @@ public class RelationalScaffoldingModelFactoryTest
                     IsUnique = false,
                 }
             );
-        table
-            .Indexes
+        table.Indexes
             .Add(
                 new DatabaseIndex
                 {
@@ -775,8 +770,7 @@ public class RelationalScaffoldingModelFactoryTest
                     IsUnique = false,
                 }
             );
-        table
-            .Indexes
+        table.Indexes
             .Add(
                 new DatabaseIndex
                 {
@@ -871,8 +865,7 @@ public class RelationalScaffoldingModelFactoryTest
             },
             PrimaryKey = IdPrimaryKey,
         };
-        childrenTable
-            .ForeignKeys
+        childrenTable.ForeignKeys
             .Add(
                 new DatabaseForeignKey
                 {
@@ -932,8 +925,7 @@ public class RelationalScaffoldingModelFactoryTest
             StoreType = "int",
         };
         detailTable.Columns.Add(masterIdColumn);
-        detailTable
-            .ForeignKeys
+        detailTable.ForeignKeys
             .Add(
                 new DatabaseForeignKey
                 {
@@ -973,8 +965,7 @@ public class RelationalScaffoldingModelFactoryTest
             PrimaryKey = IdPrimaryKey,
         };
 
-        parentTable
-            .UniqueConstraints
+        parentTable.UniqueConstraints
             .Add(
                 new DatabaseUniqueConstraint
                 {
@@ -992,8 +983,7 @@ public class RelationalScaffoldingModelFactoryTest
             PrimaryKey = IdPrimaryKey,
         };
 
-        childrenTable
-            .ForeignKeys
+        childrenTable.ForeignKeys
             .Add(
                 new DatabaseForeignKey
                 {
@@ -1043,8 +1033,7 @@ public class RelationalScaffoldingModelFactoryTest
             Columns = { IdColumn },
             PrimaryKey = IdPrimaryKey,
         };
-        childrenTable
-            .ForeignKeys
+        childrenTable.ForeignKeys
             .Add(
                 new DatabaseForeignKey
                 {
@@ -1118,8 +1107,7 @@ public class RelationalScaffoldingModelFactoryTest
             },
             PrimaryKey = IdPrimaryKey,
         };
-        childrenTable
-            .ForeignKeys
+        childrenTable.ForeignKeys
             .Add(
                 new DatabaseForeignKey
                 {
@@ -1182,8 +1170,7 @@ public class RelationalScaffoldingModelFactoryTest
             },
             PrimaryKey = IdPrimaryKey,
         };
-        table
-            .ForeignKeys
+        table.ForeignKeys
             .Add(
                 new DatabaseForeignKey
                 {
@@ -1246,8 +1233,7 @@ public class RelationalScaffoldingModelFactoryTest
             },
             PrimaryKey = IdPrimaryKey,
         };
-        childrenTable
-            .ForeignKeys
+        childrenTable.ForeignKeys
             .Add(
                 new DatabaseForeignKey
                 {
@@ -1302,8 +1288,7 @@ public class RelationalScaffoldingModelFactoryTest
             },
             PrimaryKey = IdPrimaryKey,
         };
-        childrenTable
-            .ForeignKeys
+        childrenTable.ForeignKeys
             .Add(
                 new DatabaseForeignKey
                 {
@@ -1314,8 +1299,7 @@ public class RelationalScaffoldingModelFactoryTest
                     PrincipalColumns = { parentTable.Columns.ElementAt(0) },
                 }
             );
-        childrenTable
-            .ForeignKeys
+        childrenTable.ForeignKeys
             .Add(
                 new DatabaseForeignKey
                 {
@@ -1363,8 +1347,7 @@ public class RelationalScaffoldingModelFactoryTest
             },
             PrimaryKey = IdPrimaryKey,
         };
-        table
-            .Indexes
+        table.Indexes
             .Add(
                 new DatabaseIndex
                 {
@@ -1374,8 +1357,7 @@ public class RelationalScaffoldingModelFactoryTest
                     Columns = { table.Columns.ElementAt(1) },
                 }
             );
-        table
-            .ForeignKeys
+        table.ForeignKeys
             .Add(
                 new DatabaseForeignKey
                 {
@@ -1425,8 +1407,7 @@ public class RelationalScaffoldingModelFactoryTest
             },
             PrimaryKey = IdPrimaryKey,
         };
-        table
-            .Indexes
+        table.Indexes
             .Add(
                 new DatabaseIndex
                 {
@@ -1436,8 +1417,7 @@ public class RelationalScaffoldingModelFactoryTest
                     IsUnique = true,
                 }
             );
-        table
-            .ForeignKeys
+        table.ForeignKeys
             .Add(
                 new DatabaseForeignKey
                 {
@@ -1527,8 +1507,7 @@ public class RelationalScaffoldingModelFactoryTest
             },
             PrimaryKey = IdPrimaryKey,
         };
-        childrenTable
-            .Indexes
+        childrenTable.Indexes
             .Add(
                 new DatabaseIndex
                 {
@@ -1542,8 +1521,7 @@ public class RelationalScaffoldingModelFactoryTest
                     },
                 }
             );
-        childrenTable
-            .ForeignKeys
+        childrenTable.ForeignKeys
             .Add(
                 new DatabaseForeignKey
                 {
@@ -1606,8 +1584,7 @@ public class RelationalScaffoldingModelFactoryTest
             },
         };
 
-        table
-            .Indexes
+        table.Indexes
             .Add(
                 new DatabaseIndex
                 {
@@ -1617,8 +1594,7 @@ public class RelationalScaffoldingModelFactoryTest
                 }
             );
 
-        table
-            .Indexes
+        table.Indexes
             .Add(
                 new DatabaseIndex
                 {
@@ -1629,8 +1605,7 @@ public class RelationalScaffoldingModelFactoryTest
                 }
             );
 
-        table
-            .Indexes
+        table.Indexes
             .Add(
                 new DatabaseIndex
                 {
@@ -1641,8 +1616,7 @@ public class RelationalScaffoldingModelFactoryTest
                 }
             );
 
-        table
-            .Indexes
+        table.Indexes
             .Add(
                 new DatabaseIndex
                 {
@@ -1944,8 +1918,7 @@ public class RelationalScaffoldingModelFactoryTest
             PrimaryKey = IdPrimaryKey,
         };
 
-        postTable
-            .ForeignKeys
+        postTable.ForeignKeys
             .Add(
                 new DatabaseForeignKey
                 {
@@ -2005,8 +1978,7 @@ public class RelationalScaffoldingModelFactoryTest
             PrimaryKey = IdPrimaryKey,
         };
 
-        postTable
-            .ForeignKeys
+        postTable.ForeignKeys
             .Add(
                 new DatabaseForeignKey
                 {
@@ -3035,8 +3007,7 @@ public class RelationalScaffoldingModelFactoryTest
             PrimaryKey = IdPrimaryKey,
         };
 
-        postTable
-            .ForeignKeys
+        postTable.ForeignKeys
             .Add(
                 new DatabaseForeignKey
                 {
@@ -3120,8 +3091,7 @@ public class RelationalScaffoldingModelFactoryTest
             PrimaryKey = IdPrimaryKey,
         };
 
-        blogTable
-            .UniqueConstraints
+        blogTable.UniqueConstraints
             .Add(
                 new DatabaseUniqueConstraint
                 {
@@ -3131,8 +3101,7 @@ public class RelationalScaffoldingModelFactoryTest
                 }
             );
 
-        postTable
-            .ForeignKeys
+        postTable.ForeignKeys
             .Add(
                 new DatabaseForeignKey
                 {
@@ -3173,8 +3142,7 @@ public class RelationalScaffoldingModelFactoryTest
     {
         var bookDetailsTable = new DatabaseTable { Database = Database, Name = "Book_Details" };
 
-        bookDetailsTable
-            .Columns
+        bookDetailsTable.Columns
             .Add(
                 new DatabaseColumn
                 {
@@ -3184,8 +3152,7 @@ public class RelationalScaffoldingModelFactoryTest
                 }
             );
 
-        bookDetailsTable
-            .Columns
+        bookDetailsTable.Columns
             .Add(
                 new DatabaseColumn
                 {
@@ -3195,8 +3162,7 @@ public class RelationalScaffoldingModelFactoryTest
                 }
             );
 
-        bookDetailsTable
-            .Columns
+        bookDetailsTable.Columns
             .Add(
                 new DatabaseColumn
                 {
@@ -3219,8 +3185,7 @@ public class RelationalScaffoldingModelFactoryTest
             Name = "Student_Details",
         };
 
-        studentDetailsTable
-            .Columns
+        studentDetailsTable.Columns
             .Add(
                 new DatabaseColumn
                 {
@@ -3230,8 +3195,7 @@ public class RelationalScaffoldingModelFactoryTest
                 }
             );
 
-        studentDetailsTable
-            .Columns
+        studentDetailsTable.Columns
             .Add(
                 new DatabaseColumn
                 {
@@ -3248,8 +3212,7 @@ public class RelationalScaffoldingModelFactoryTest
             Columns = { studentDetailsTable.Columns.Single(c => c.Name == "ID") },
         };
 
-        bookDetailsTable
-            .ForeignKeys
+        bookDetailsTable.ForeignKeys
             .Add(
                 new DatabaseForeignKey
                 {
@@ -3302,8 +3265,7 @@ public class RelationalScaffoldingModelFactoryTest
     {
         var seasonTable = new DatabaseTable { Database = Database, Name = "TmTvSeason" };
 
-        seasonTable
-            .Columns
+        seasonTable.Columns
             .Add(
                 new DatabaseColumn
                 {
@@ -3313,8 +3275,7 @@ public class RelationalScaffoldingModelFactoryTest
                 }
             );
 
-        seasonTable
-            .Columns
+        seasonTable.Columns
             .Add(
                 new DatabaseColumn
                 {
@@ -3324,8 +3285,7 @@ public class RelationalScaffoldingModelFactoryTest
                 }
             );
 
-        seasonTable
-            .Columns
+        seasonTable.Columns
             .Add(
                 new DatabaseColumn
                 {
@@ -3348,8 +3308,7 @@ public class RelationalScaffoldingModelFactoryTest
 
         var episodeTable = new DatabaseTable { Database = Database, Name = "TmTvEpisode" };
 
-        episodeTable
-            .Columns
+        episodeTable.Columns
             .Add(
                 new DatabaseColumn
                 {
@@ -3359,8 +3318,7 @@ public class RelationalScaffoldingModelFactoryTest
                 }
             );
 
-        episodeTable
-            .Columns
+        episodeTable.Columns
             .Add(
                 new DatabaseColumn
                 {
@@ -3370,8 +3328,7 @@ public class RelationalScaffoldingModelFactoryTest
                 }
             );
 
-        episodeTable
-            .Columns
+        episodeTable.Columns
             .Add(
                 new DatabaseColumn
                 {
@@ -3381,8 +3338,7 @@ public class RelationalScaffoldingModelFactoryTest
                 }
             );
 
-        episodeTable
-            .Columns
+        episodeTable.Columns
             .Add(
                 new DatabaseColumn
                 {
@@ -3404,8 +3360,7 @@ public class RelationalScaffoldingModelFactoryTest
             },
         };
 
-        episodeTable
-            .ForeignKeys
+        episodeTable.ForeignKeys
             .Add(
                 new DatabaseForeignKey
                 {

@@ -219,8 +219,7 @@ public abstract class RazorPage : RazorPageBase
         // b) if no sections are defined, then the body is rendered if it's available.
         if (PreviousSectionWriters != null && PreviousSectionWriters.Count > 0)
         {
-            var sectionsNotRendered = PreviousSectionWriters
-                .Keys
+            var sectionsNotRendered = PreviousSectionWriters.Keys
                 .Except(_renderedSections, StringComparer.OrdinalIgnoreCase);
 
             string[] sectionsNotIgnored;

@@ -113,11 +113,12 @@ namespace Mono.CSharp
         public virtual Expression CreateExpressionTree(ResolveContext rc)
         {
             if (ArgType == AType.Default)
-                rc.Report.Error(
-                    854,
-                    Expr.Location,
-                    "An expression tree cannot contain an invocation which uses optional parameter"
-                );
+                rc.Report
+                    .Error(
+                        854,
+                        Expr.Location,
+                        "An expression tree cannot contain an invocation which uses optional parameter"
+                    );
 
             return Expr.CreateExpressionTree(rc);
         }
@@ -466,20 +467,22 @@ namespace Mono.CSharp
                     MethodGroupExpr mg = a.Expr as MethodGroupExpr;
                     if (mg != null)
                     {
-                        rc.Report.Error(
-                            1976,
-                            a.Expr.Location,
-                            "The method group `{0}' cannot be used as an argument of dynamic operation. Consider using parentheses to invoke the method",
-                            mg.Name
-                        );
+                        rc.Report
+                            .Error(
+                                1976,
+                                a.Expr.Location,
+                                "The method group `{0}' cannot be used as an argument of dynamic operation. Consider using parentheses to invoke the method",
+                                mg.Name
+                            );
                     }
                     else if (arg_type == InternalType.AnonymousMethod)
                     {
-                        rc.Report.Error(
-                            1977,
-                            a.Expr.Location,
-                            "An anonymous method or lambda expression cannot be used as an argument of dynamic operation. Consider using a cast"
-                        );
+                        rc.Report
+                            .Error(
+                                1977,
+                                a.Expr.Location,
+                                "An anonymous method or lambda expression cannot be used as an argument of dynamic operation. Consider using a cast"
+                            );
                     }
                     else if (
                         arg_type.Kind == MemberKind.Void
@@ -487,12 +490,13 @@ namespace Mono.CSharp
                         || arg_type.IsPointer
                     )
                     {
-                        rc.Report.Error(
-                            1978,
-                            a.Expr.Location,
-                            "An expression of type `{0}' cannot be used as an argument of dynamic operation",
-                            arg_type.GetSignatureForError()
-                        );
+                        rc.Report
+                            .Error(
+                                1978,
+                                a.Expr.Location,
+                                "An expression of type `{0}' cannot be used as an argument of dynamic operation",
+                                arg_type.GetSignatureForError()
+                            );
                     }
 
                     info_flags = new Binary(
@@ -582,12 +586,13 @@ namespace Mono.CSharp
                     continue;
 
                 if (arg.Type.IsArray)
-                    ctx.Report.Warning(
-                        3016,
-                        1,
-                        arg.Expr.Location,
-                        "Arrays as attribute arguments are not CLS-compliant"
-                    );
+                    ctx.Report
+                        .Warning(
+                            3016,
+                            1,
+                            arg.Expr.Location,
+                            "Arrays as attribute arguments are not CLS-compliant"
+                        );
             }
         }
 
@@ -854,12 +859,13 @@ namespace Mono.CSharp
                     var lvr = a.Expr as LocalVariableReference;
                     if (lvr != null && var_locals != null && var_locals.Contains(lvr.local_info))
                     {
-                        rc.Report.Error(
-                            8196,
-                            lvr.Location,
-                            "Reference to an implicitly typed out variable `{0}' is not permitted in the same argument list",
-                            lvr.Name
-                        );
+                        rc.Report
+                            .Error(
+                                8196,
+                                lvr.Location,
+                                "Reference to an implicitly typed out variable `{0}' is not permitted in the same argument list",
+                                lvr.Name
+                            );
                         lvr.Type = InternalType.ErrorType;
                     }
                 }

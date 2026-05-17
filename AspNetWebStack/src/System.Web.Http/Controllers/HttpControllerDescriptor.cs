@@ -131,8 +131,7 @@ namespace System.Web.Http.Controllers
             }
 
             // Invoke the controller activator
-            IHttpControllerActivator activator = Configuration
-                .Services
+            IHttpControllerActivator activator = Configuration.Services
                 .GetHttpControllerActivator();
             IHttpController instance = activator.Create(request, this, ControllerType);
             return instance;

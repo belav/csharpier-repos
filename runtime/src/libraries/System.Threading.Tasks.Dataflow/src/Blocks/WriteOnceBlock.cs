@@ -177,18 +177,19 @@ namespace System.Threading.Tasks.Dataflow
             else
             {
                 // Complete the block asynchronously to avoid blocking the caller
-                Task.Factory.StartNew(
-                    static state =>
-                    {
-                        Tuple<WriteOnceBlock<T>, IList<Exception>> blockAndList =
-                            (Tuple<WriteOnceBlock<T>, IList<Exception>>)state!;
-                        blockAndList.Item1.CompleteBlock(blockAndList.Item2);
-                    },
-                    Tuple.Create(this, exceptions),
-                    CancellationToken.None,
-                    Common.GetCreationOptionsForTask(),
-                    TaskScheduler.Default
-                );
+                Task.Factory
+                    .StartNew(
+                        static state =>
+                        {
+                            Tuple<WriteOnceBlock<T>, IList<Exception>> blockAndList =
+                                (Tuple<WriteOnceBlock<T>, IList<Exception>>)state!;
+                            blockAndList.Item1.CompleteBlock(blockAndList.Item2);
+                        },
+                        Tuple.Create(this, exceptions),
+                        CancellationToken.None,
+                        Common.GetCreationOptionsForTask(),
+                        TaskScheduler.Default
+                    );
             }
         }
 

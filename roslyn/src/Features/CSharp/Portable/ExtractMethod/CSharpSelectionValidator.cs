@@ -188,8 +188,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                 return selectionInfo;
             }
 
-            var expressionNode = selectionInfo
-                .FirstTokenInFinalSpan
+            var expressionNode = selectionInfo.FirstTokenInFinalSpan
                 .GetCommonRoot(selectionInfo.LastTokenInFinalSpan);
             if (!expressionNode.IsAnyAssignExpression())
             {
@@ -238,8 +237,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
             }
 
             // get the node that covers the selection
-            var node = selectionInfo
-                .FirstTokenInFinalSpan
+            var node = selectionInfo.FirstTokenInFinalSpan
                 .GetCommonRoot(selectionInfo.LastTokenInFinalSpan);
 
             var validNode = Check(semanticModel, node, cancellationToken);
@@ -415,8 +413,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
             }
 
             // get the node that covers the selection
-            var commonNode = selectionInfo
-                .FirstTokenInFinalSpan
+            var commonNode = selectionInfo.FirstTokenInFinalSpan
                 .GetCommonRoot(selectionInfo.LastTokenInFinalSpan);
 
             if (
@@ -518,14 +515,12 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                 // simple expression case
                 return selectionInfo
                     .With(s =>
-                        s.FirstTokenInFinalSpan = s.CommonRootFromOriginalSpan.GetFirstToken(
-                            includeZeroWidth: true
-                        )
+                        s.FirstTokenInFinalSpan = s.CommonRootFromOriginalSpan
+                            .GetFirstToken(includeZeroWidth: true)
                     )
                     .With(s =>
-                        s.LastTokenInFinalSpan = s.CommonRootFromOriginalSpan.GetLastToken(
-                            includeZeroWidth: true
-                        )
+                        s.LastTokenInFinalSpan = s.CommonRootFromOriginalSpan
+                            .GetLastToken(includeZeroWidth: true)
                     );
             }
 
@@ -555,8 +550,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
             if (statement1 == statement2)
             {
                 // check one more time to see whether it is an expression case
-                var expression = selectionInfo
-                    .CommonRootFromOriginalSpan
+                var expression = selectionInfo.CommonRootFromOriginalSpan
                     .GetAncestor<ExpressionSyntax>();
                 if (expression != null && statement1.Span.Contains(expression.Span))
                 {

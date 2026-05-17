@@ -124,8 +124,7 @@ namespace System.ServiceModel.Security
                 if (emitBspAttributes)
                     return MessageSecurityTokenVersion.WSSecurity10WSTrustFebruary2005WSSecureConversationFebruary2005BasicSecurityProfile10;
                 else
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new NotSupportedException());
             }
             else if (version == SecurityVersion.WSSecurity11)
@@ -137,8 +136,7 @@ namespace System.ServiceModel.Security
             }
             else
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new NotSupportedException());
             }
         }

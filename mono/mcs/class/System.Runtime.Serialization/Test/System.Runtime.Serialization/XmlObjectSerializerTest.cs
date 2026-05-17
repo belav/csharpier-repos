@@ -999,10 +999,8 @@ namespace MonoTests.System.Runtime.Serialization
 
             Assert.AreEqual(
                 1,
-                doc.SelectNodes(
-                    "/s:SerializeNonDCArrayType/s:IPAddresses/s:NonDCItem",
-                    nsmgr
-                ).Count,
+                doc.SelectNodes("/s:SerializeNonDCArrayType/s:IPAddresses/s:NonDCItem", nsmgr)
+                    .Count,
                 "#1"
             );
             XmlElement el =
@@ -2009,8 +2007,7 @@ namespace MonoTests.System.Runtime.Serialization
             var serializer = new DataContractSerializer(typeof(MyData));
             using (
                 var stream = new MemoryStream(
-                    Encoding
-                        .UTF8
+                    Encoding.UTF8
                         .GetBytes(whatItGets.Replace("ID-GOES-HERE", Guid.NewGuid().ToString()))
                 )
             )

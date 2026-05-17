@@ -95,8 +95,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Completion
                 string[]
             >(CommitCharacterArrayComparer.Instance);
 
-            var creationService = document
-                .Project
+            var creationService = document.Project
                 .Solution
                 .Services
                 .GetRequiredService<ILspCompletionResultCreationService>();
@@ -222,8 +221,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Completion
                 foreach (var tag in tags)
                 {
                     if (
-                        ProtocolConversions
-                            .RoslynTagToCompletionItemKinds
+                        ProtocolConversions.RoslynTagToCompletionItemKinds
                             .TryGetValue(tag, out var completionItemKinds)
                     )
                     {
@@ -569,8 +567,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Completion
             {
                 if (
                     SnippetCompletionItem.IsSnippet(selectedItem)
-                    && completionChange
-                        .Properties
+                    && completionChange.Properties
                         .TryGetValue(
                             SnippetCompletionItem.LSPSnippetKey,
                             out var lspSnippetChangeText

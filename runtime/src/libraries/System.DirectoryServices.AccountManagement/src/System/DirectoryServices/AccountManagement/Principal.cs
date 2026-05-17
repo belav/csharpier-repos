@@ -1101,8 +1101,7 @@ namespace System.DirectoryServices.AccountManagement
         )
         {
             // Ask the store to find a Principal based on this IdentityReference info.
-            Principal p = context
-                .QueryCtx
+            Principal p = context.QueryCtx
                 .FindPrincipalByIdentRef(
                     principalType,
                     (identityType == null)

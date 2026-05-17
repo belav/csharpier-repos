@@ -732,8 +732,7 @@ public partial class HubConnectionTests
 
             await hubConnection.StartAsync().DefaultTimeout();
 
-            await innerConnection
-                .Application
+            await innerConnection.Application
                 .Output
                 .WriteAsync(Encoding.UTF8.GetBytes(new[] { '{' }))
                 .DefaultTimeout();

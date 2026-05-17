@@ -86,8 +86,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer.Handler
                     cancellationToken
                 )
                 .ConfigureAwait(false);
-            var completionService = document
-                .Project
+            var completionService = document.Project
                 .Services
                 .GetRequiredService<IXamlCompletionService>();
             var symbol = await completionService

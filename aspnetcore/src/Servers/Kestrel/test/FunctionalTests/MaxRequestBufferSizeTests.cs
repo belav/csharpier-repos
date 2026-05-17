@@ -385,22 +385,19 @@ public class MaxRequestBufferSizeTests : LoggedTest
                     .Configure(app =>
                         app.Run(async context =>
                         {
-                            await startReadingRequestBody
-                                .Task
+                            await startReadingRequestBody.Task
                                 .TimeoutAfter(TimeSpan.FromSeconds(120));
 
                             var buffer = new byte[expectedBody.Length];
                             var bytesRead = 0;
                             while (bytesRead < buffer.Length)
                             {
-                                bytesRead += await context
-                                    .Request
+                                bytesRead += await context.Request
                                     .Body
                                     .ReadAsync(buffer, bytesRead, buffer.Length - bytesRead);
                             }
 
-                            await clientFinishedSendingRequestBody
-                                .Task
+                            await clientFinishedSendingRequestBody.Task
                                 .TimeoutAfter(TimeSpan.FromSeconds(120));
 
                             // Verify client didn't send extra bytes
@@ -408,8 +405,7 @@ public class MaxRequestBufferSizeTests : LoggedTest
                             {
                                 context.Response.StatusCode =
                                     StatusCodes.Status500InternalServerError;
-                                await context
-                                    .Response
+                                await context.Response
                                     .WriteAsync("Client sent more bytes than expectedBody.Length");
                                 return;
                             }

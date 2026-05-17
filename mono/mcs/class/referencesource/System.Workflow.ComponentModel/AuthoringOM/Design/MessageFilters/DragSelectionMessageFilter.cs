@@ -134,20 +134,22 @@
                 )
                 {
                     Rectangle dragRectangle = DragRectangle;
-                    e.Graphics.FillRectangle(
-                        dragRectangleBrush,
-                        dragRectangle.X,
-                        dragRectangle.Y,
-                        dragRectangle.Width - 1,
-                        dragRectangle.Height - 1
-                    );
-                    e.Graphics.DrawRectangle(
-                        ambientTheme.SelectionForegroundPen,
-                        dragRectangle.X,
-                        dragRectangle.Y,
-                        dragRectangle.Width - 1,
-                        dragRectangle.Height - 1
-                    );
+                    e.Graphics
+                        .FillRectangle(
+                            dragRectangleBrush,
+                            dragRectangle.X,
+                            dragRectangle.Y,
+                            dragRectangle.Width - 1,
+                            dragRectangle.Height - 1
+                        );
+                    e.Graphics
+                        .DrawRectangle(
+                            ambientTheme.SelectionForegroundPen,
+                            dragRectangle.X,
+                            dragRectangle.Y,
+                            dragRectangle.Width - 1,
+                            dragRectangle.Height - 1
+                        );
                 }
             }
             return false;

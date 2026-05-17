@@ -27,8 +27,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.PDB
                 GetUniqueName(),
                 new[] { Parse(source, filePath) },
                 new[] { MscorlibRef },
-                TestOptions
-                    .DebugDll
+                TestOptions.DebugDll
                     .WithSourceReferenceResolver(
                         new SourceFileResolver(ImmutableArray.Create<string>(), baseDirectory)
                     )

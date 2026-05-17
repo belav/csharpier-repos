@@ -26,11 +26,9 @@ public class ChunkedResponseTests : LoggedTest
                 async httpContext =>
                 {
                     var response = httpContext.Response;
-                    await response
-                        .BodyWriter
+                    await response.BodyWriter
                         .WriteAsync(new Memory<byte>(Encoding.ASCII.GetBytes("Hello "), 0, 6));
-                    await response
-                        .BodyWriter
+                    await response.BodyWriter
                         .WriteAsync(new Memory<byte>(Encoding.ASCII.GetBytes("World!"), 0, 6));
                 },
                 testContext
@@ -98,11 +96,9 @@ public class ChunkedResponseTests : LoggedTest
                 {
                     httpContext.Request.Protocol = "HTTP/2"; // Doesn't support chunking. This change should be ignored.
                     var response = httpContext.Response;
-                    await response
-                        .BodyWriter
+                    await response.BodyWriter
                         .WriteAsync(new Memory<byte>(Encoding.ASCII.GetBytes("Hello "), 0, 6));
-                    await response
-                        .BodyWriter
+                    await response.BodyWriter
                         .WriteAsync(new Memory<byte>(Encoding.ASCII.GetBytes("World!"), 0, 6));
                 },
                 testContext
@@ -338,12 +334,10 @@ public class ChunkedResponseTests : LoggedTest
                 async httpContext =>
                 {
                     var response = httpContext.Response;
-                    await response
-                        .BodyWriter
+                    await response.BodyWriter
                         .WriteAsync(new Memory<byte>(Encoding.ASCII.GetBytes("Hello "), 0, 6));
                     await response.BodyWriter.WriteAsync(new Memory<byte>(new byte[0], 0, 0));
-                    await response
-                        .BodyWriter
+                    await response.BodyWriter
                         .WriteAsync(new Memory<byte>(Encoding.ASCII.GetBytes("World!"), 0, 6));
                 },
                 testContext
@@ -453,8 +447,7 @@ public class ChunkedResponseTests : LoggedTest
                 async httpContext =>
                 {
                     var response = httpContext.Response;
-                    await response
-                        .BodyWriter
+                    await response.BodyWriter
                         .WriteAsync(
                             new Memory<byte>(Encoding.ASCII.GetBytes("Hello World!"), 0, 12)
                         );
@@ -528,15 +521,13 @@ public class ChunkedResponseTests : LoggedTest
                 async httpContext =>
                 {
                     var response = httpContext.Response;
-                    await response
-                        .BodyWriter
+                    await response.BodyWriter
                         .WriteAsync(new Memory<byte>(Encoding.ASCII.GetBytes("Hello "), 0, 6));
 
                     // Don't complete response until client has received the first chunk.
                     await flushWh.Task.DefaultTimeout();
 
-                    await response
-                        .BodyWriter
+                    await response.BodyWriter
                         .WriteAsync(new Memory<byte>(Encoding.ASCII.GetBytes("World!"), 0, 6));
                 },
                 testContext
@@ -575,18 +566,15 @@ public class ChunkedResponseTests : LoggedTest
                     var response = httpContext.Response;
                     response.Headers["Transfer-Encoding"] = "chunked";
 
-                    await response
-                        .BodyWriter
+                    await response.BodyWriter
                         .WriteAsync(
                             new Memory<byte>(Encoding.ASCII.GetBytes("6\r\nHello \r\n"), 0, 11)
                         );
-                    await response
-                        .BodyWriter
+                    await response.BodyWriter
                         .WriteAsync(
                             new Memory<byte>(Encoding.ASCII.GetBytes("6\r\nWorld!\r\n"), 0, 11)
                         );
-                    await response
-                        .BodyWriter
+                    await response.BodyWriter
                         .WriteAsync(new Memory<byte>(Encoding.ASCII.GetBytes("0\r\n\r\n"), 0, 5));
                 },
                 testContext
@@ -721,8 +709,7 @@ public class ChunkedResponseTests : LoggedTest
                     length.Value = memory.Length;
                     semaphore.Release();
 
-                    var fisrtPartOfResponse = Encoding
-                        .ASCII
+                    var fisrtPartOfResponse = Encoding.ASCII
                         .GetBytes(new string('a', memory.Length));
                     fisrtPartOfResponse.CopyTo(memory);
                     response.BodyWriter.Advance(memory.Length);
@@ -781,8 +768,7 @@ public class ChunkedResponseTests : LoggedTest
                     length.Value = memory.Length;
                     semaphore.Release();
 
-                    var fisrtPartOfResponse = Encoding
-                        .ASCII
+                    var fisrtPartOfResponse = Encoding.ASCII
                         .GetBytes(new string('a', memory.Length));
                     fisrtPartOfResponse.CopyTo(memory);
                     response.BodyWriter.Advance(memory.Length);

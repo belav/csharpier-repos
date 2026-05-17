@@ -100,8 +100,7 @@ internal sealed class HttpContextStreamWriter<TResponse> : IServerStreamWriter<T
         if (message is HttpBody httpBody)
         {
             _context.EnsureResponseHeaders(httpBody.ContentType);
-            await _context
-                .HttpContext
+            await _context.HttpContext
                 .Response
                 .Body
                 .WriteAsync(httpBody.Data.Memory, cancellationToken);
@@ -117,8 +116,7 @@ internal sealed class HttpContextStreamWriter<TResponse> : IServerStreamWriter<T
             );
         }
 
-        await _context
-            .HttpContext
+        await _context.HttpContext
             .Response
             .Body
             .WriteAsync(GrpcProtocolConstants.StreamingDelimiter, cancellationToken);

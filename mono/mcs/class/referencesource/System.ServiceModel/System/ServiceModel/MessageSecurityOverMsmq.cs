@@ -33,8 +33,7 @@ namespace System.ServiceModel
             {
                 if (!MessageCredentialTypeHelper.IsDefined(value))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new ArgumentOutOfRangeException("value"));
                 }
                 this.clientCredentialType = value;
@@ -95,8 +94,7 @@ namespace System.ServiceModel
                     break;
                 default:
                     Fx.Assert("unknown ClientCredentialType");
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new NotSupportedException());
             }
 

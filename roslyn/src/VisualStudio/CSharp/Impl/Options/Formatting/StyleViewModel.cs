@@ -2288,8 +2288,7 @@ class C2
         {
             var collectionView = (ListCollectionView)
                 CollectionViewSource.GetDefaultView(CodeStyleItems);
-            collectionView
-                .GroupDescriptions
+            collectionView.GroupDescriptions
                 .Add(
                     new PropertyGroupDescription(nameof(AbstractCodeStyleOptionViewModel.GroupName))
                 );

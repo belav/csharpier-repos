@@ -74,8 +74,7 @@ namespace System.Security.Cryptography
                 bufferDesc.cBuffers = BCryptBufferLength;
                 bufferDesc.pBuffers = (IntPtr)buffers;
 
-                NTSTATUS deriveStatus = Interop
-                    .BCrypt
+                NTSTATUS deriveStatus = Interop.BCrypt
                     .BCryptKeyDerivation(
                         _keyHandle,
                         &bufferDesc,
@@ -186,8 +185,7 @@ namespace System.Security.Cryptography
 
             if (s_sp800108CtrHmacAlgorithmHandle is not null)
             {
-                generateKeyStatus = Interop
-                    .BCrypt
+                generateKeyStatus = Interop.BCrypt
                     .BCryptGenerateSymmetricKey(
                         s_sp800108CtrHmacAlgorithmHandle,
                         out keyHandle,
@@ -200,8 +198,7 @@ namespace System.Security.Cryptography
             }
             else
             {
-                generateKeyStatus = Interop
-                    .BCrypt
+                generateKeyStatus = Interop.BCrypt
                     .BCryptGenerateSymmetricKey(
                         BCRYPT_SP800108_CTR_HMAC_ALG_HANDLE,
                         out keyHandle,
@@ -229,8 +226,7 @@ namespace System.Security.Cryptography
         {
             if (!Interop.BCrypt.PseudoHandlesSupported)
             {
-                NTSTATUS openStatus = Interop
-                    .BCrypt
+                NTSTATUS openStatus = Interop.BCrypt
                     .BCryptOpenAlgorithmProvider(
                         out SafeBCryptAlgorithmHandle sp800108CtrHmacAlgorithmHandle,
                         BCRYPT_SP800108_CTR_HMAC_ALGORITHM,

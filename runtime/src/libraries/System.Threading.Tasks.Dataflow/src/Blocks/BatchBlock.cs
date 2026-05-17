@@ -84,8 +84,7 @@ namespace System.Threading.Tasks.Dataflow
                 this,
                 dataflowBlockOptions,
                 static owningSource =>
-                    ((BatchBlock<T>)owningSource)
-                        ._target
+                    ((BatchBlock<T>)owningSource)._target
                         .Complete(
                             exception: null,
                             dropPendingMessages: true,
@@ -104,8 +103,7 @@ namespace System.Threading.Tasks.Dataflow
             );
 
             // When the target is done, let the source know it won't be getting any more data
-            _target
-                .Completion
+            _target.Completion
                 .ContinueWith(
                     delegate
                     {
@@ -120,8 +118,7 @@ namespace System.Threading.Tasks.Dataflow
             // In those cases we need to fault the target half to drop its buffered messages and to release its
             // reservations. This should not create an infinite loop, because all our implementations are designed
             // to handle multiple completion requests and to carry over only one.
-            _source
-                .Completion
+            _source.Completion
                 .ContinueWith(
                     static (completed, state) =>
                     {
@@ -793,40 +790,41 @@ namespace System.Threading.Tasks.Dataflow
                         // We need to complete the block, but we may have arrived here from an external
                         // call to the block.  To avoid running arbitrary code in the form of
                         // completion task continuations in that case, do it in a separate task.
-                        Task.Factory.StartNew(
-                            thisTargetCore =>
-                            {
-                                var targetCore = (BatchBlockTargetCore)thisTargetCore!;
-
-                                // Release any postponed messages
-                                List<Exception>? exceptions = null;
-                                if (targetCore._nonGreedyState != null)
+                        Task.Factory
+                            .StartNew(
+                                thisTargetCore =>
                                 {
-                                    // Note: No locks should be held at this point
-                                    Common.ReleaseAllPostponedMessages(
-                                        targetCore._owningBatch,
-                                        targetCore._nonGreedyState.PostponedMessages,
-                                        ref exceptions
-                                    );
-                                }
+                                    var targetCore = (BatchBlockTargetCore)thisTargetCore!;
 
-                                if (exceptions != null)
-                                {
-                                    // It is important to migrate these exceptions to the source part of the owning batch,
-                                    // because that is the completion task that is publicly exposed.
-                                    targetCore._owningBatch._source.AddExceptions(exceptions);
-                                }
+                                    // Release any postponed messages
+                                    List<Exception>? exceptions = null;
+                                    if (targetCore._nonGreedyState != null)
+                                    {
+                                        // Note: No locks should be held at this point
+                                        Common.ReleaseAllPostponedMessages(
+                                            targetCore._owningBatch,
+                                            targetCore._nonGreedyState.PostponedMessages,
+                                            ref exceptions
+                                        );
+                                    }
 
-                                // Target's completion task is only available internally with the sole purpose
-                                // of releasing the task that completes the parent. Hence the actual reason
-                                // for completing this task doesn't matter.
-                                targetCore._completionTask.TrySetResult(default(VoidResult));
-                            },
-                            this,
-                            CancellationToken.None,
-                            Common.GetCreationOptionsForTask(),
-                            TaskScheduler.Default
-                        );
+                                    if (exceptions != null)
+                                    {
+                                        // It is important to migrate these exceptions to the source part of the owning batch,
+                                        // because that is the completion task that is publicly exposed.
+                                        targetCore._owningBatch._source.AddExceptions(exceptions);
+                                    }
+
+                                    // Target's completion task is only available internally with the sole purpose
+                                    // of releasing the task that completes the parent. Hence the actual reason
+                                    // for completing this task doesn't matter.
+                                    targetCore._completionTask.TrySetResult(default(VoidResult));
+                                },
+                                this,
+                                CancellationToken.None,
+                                Common.GetCreationOptionsForTask(),
+                                TaskScheduler.Default
+                            );
                     }
                 }
             }
@@ -961,19 +959,20 @@ namespace System.Threading.Tasks.Dataflow
                 if (exception != null)
                 {
                     // Get out from under currently held locks. Complete re-acquires the locks it needs.
-                    Task.Factory.StartNew(
-                        exc =>
-                            Complete(
-                                exception: (Exception)exc!,
-                                dropPendingMessages: true,
-                                releaseReservedMessages: true,
-                                revertProcessingState: true
-                            ),
-                        exception,
-                        CancellationToken.None,
-                        Common.GetCreationOptionsForTask(),
-                        TaskScheduler.Default
-                    );
+                    Task.Factory
+                        .StartNew(
+                            exc =>
+                                Complete(
+                                    exception: (Exception)exc!,
+                                    dropPendingMessages: true,
+                                    releaseReservedMessages: true,
+                                    revertProcessingState: true
+                                ),
+                            exception,
+                            CancellationToken.None,
+                            Common.GetCreationOptionsForTask(),
+                            TaskScheduler.Default
+                        );
                 }
             }
 
@@ -1432,8 +1431,7 @@ namespace System.Threading.Tasks.Dataflow
                         KeyValuePair<DataflowMessageHeader, T>
                     >); // in case of exception from ConsumeMessage
                     bool consumed;
-                    T? consumedValue = sourceAndMessage
-                        .Key
+                    T? consumedValue = sourceAndMessage.Key
                         .ConsumeMessage(sourceAndMessage.Value.Key, _owningBatch, out consumed);
                     if (!consumed)
                     {
@@ -1521,8 +1519,7 @@ namespace System.Threading.Tasks.Dataflow
                         KeyValuePair<DataflowMessageHeader, T>
                     >); // in case of exception from ConsumeMessage
                     bool consumed;
-                    T? consumedValue = sourceAndMessage
-                        .Key
+                    T? consumedValue = sourceAndMessage.Key
                         .ConsumeMessage(sourceAndMessage.Value.Key, _owningBatch, out consumed);
                     if (consumed)
                     {

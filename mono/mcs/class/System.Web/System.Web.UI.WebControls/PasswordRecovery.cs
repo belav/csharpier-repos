@@ -1356,8 +1356,7 @@ namespace System.Web.UI.WebControls
                 bool twoCells = _owner.TextLayout == LoginTextLayout.TextOnLeft;
 
                 // row 0
-                table
-                    .Rows
+                table.Rows
                     .Add(
                         TemplateUtils.CreateRow(
                             new LiteralControl(_owner.UserNameTitleText),
@@ -1369,8 +1368,7 @@ namespace System.Web.UI.WebControls
                     );
 
                 // row 1
-                table
-                    .Rows
+                table.Rows
                     .Add(
                         TemplateUtils.CreateRow(
                             new LiteralControl(_owner.UserNameInstructionText),
@@ -1416,8 +1414,7 @@ namespace System.Web.UI.WebControls
                 }
                 else
                 {
-                    table
-                        .Rows
+                    table.Rows
                         .Add(TemplateUtils.CreateRow(UserNameLabel, null, null, null, twoCells));
                     TableRow row = TemplateUtils.CreateRow(
                         UserNameTextBox,
@@ -1435,8 +1432,7 @@ namespace System.Web.UI.WebControls
                 FailureText.ID = "FailureText";
                 if (_owner.FailureTextStyle.ForeColor.IsEmpty)
                     _owner.FailureTextStyle.ForeColor = System.Drawing.Color.Red;
-                table
-                    .Rows
+                table.Rows
                     .Add(
                         TemplateUtils.CreateRow(
                             FailureText,
@@ -1480,8 +1476,7 @@ namespace System.Web.UI.WebControls
                 table.Rows.Add(buttonRow);
 
                 // row 5
-                table
-                    .Rows
+                table.Rows
                     .Add(
                         TemplateUtils.CreateHelpRow(
                             _owner.HelpPageUrl,
@@ -1513,8 +1508,7 @@ namespace System.Web.UI.WebControls
                 bool twoCells = _owner.TextLayout == LoginTextLayout.TextOnLeft;
 
                 // row 0
-                table
-                    .Rows
+                table.Rows
                     .Add(
                         TemplateUtils.CreateRow(
                             new LiteralControl(_owner.QuestionTitleText),
@@ -1526,8 +1520,7 @@ namespace System.Web.UI.WebControls
                     );
 
                 // row 1
-                table
-                    .Rows
+                table.Rows
                     .Add(
                         TemplateUtils.CreateRow(
                             new LiteralControl(_owner.QuestionInstructionText),
@@ -1542,8 +1535,7 @@ namespace System.Web.UI.WebControls
                 Literal UserNameLiteral = new Literal();
                 UserNameLiteral.ID = "UserName";
 
-                table
-                    .Rows
+                table.Rows
                     .Add(
                         TemplateUtils.CreateRow(
                             new LiteralControl(_owner.UserNameLabelText),
@@ -1558,8 +1550,7 @@ namespace System.Web.UI.WebControls
                 Literal QuestionLiteral = new Literal();
                 QuestionLiteral.ID = "Question";
 
-                table
-                    .Rows
+                table.Rows
                     .Add(
                         TemplateUtils.CreateRow(
                             new LiteralControl(_owner.QuestionLabelText),
@@ -1604,8 +1595,7 @@ namespace System.Web.UI.WebControls
                 }
                 else
                 {
-                    table
-                        .Rows
+                    table.Rows
                         .Add(TemplateUtils.CreateRow(AnswerLabel, null, null, null, twoCells));
                     TableRow row = TemplateUtils.CreateRow(
                         AnswerTextBox,
@@ -1623,8 +1613,7 @@ namespace System.Web.UI.WebControls
                 FailureText.ID = "FailureText";
                 if (_owner.FailureTextStyle.ForeColor.IsEmpty)
                     _owner.FailureTextStyle.ForeColor = System.Drawing.Color.Red;
-                table
-                    .Rows
+                table.Rows
                     .Add(
                         TemplateUtils.CreateRow(
                             FailureText,
@@ -1668,8 +1657,7 @@ namespace System.Web.UI.WebControls
                 table.Rows.Add(buttonRow);
 
                 // row 8
-                table
-                    .Rows
+                table.Rows
                     .Add(
                         TemplateUtils.CreateHelpRow(
                             _owner.HelpPageUrl,
@@ -1701,8 +1689,7 @@ namespace System.Web.UI.WebControls
                 bool twoCells = _owner.TextLayout == LoginTextLayout.TextOnLeft;
 
                 // row 0
-                table
-                    .Rows
+                table.Rows
                     .Add(
                         TemplateUtils.CreateRow(
                             new LiteralControl(_owner.SuccessText),

@@ -38,8 +38,7 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor
             CancellationToken cancellationToken
         )
         {
-            var diffService = newDocument
-                .Project
+            var diffService = newDocument.Project
                 .Solution
                 .Services
                 .GetRequiredService<IDocumentTextDifferencingService>();

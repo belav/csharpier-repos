@@ -22,8 +22,7 @@ namespace System.ServiceModel
                 auditLogLocation == AuditLogLocation.Security
                 && !SecurityAuditHelper.IsSecurityAuditSupported
             )
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new PlatformNotSupportedException(
                             SR.GetString(SR.SecurityAuditPlatformNotSupported)
@@ -39,8 +38,7 @@ namespace System.ServiceModel
         {
             if (!IsDefined(value))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidEnumArgumentException(
                             "value",

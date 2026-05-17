@@ -242,8 +242,7 @@ internal partial struct RoutePatternParser
                             // e.g. {filename}.{ext?}
                             if (
                                 previousNode.Kind != RoutePatternKind.Literal
-                                || ((RoutePatternLiteralNode)previousNode)
-                                    .LiteralToken
+                                || ((RoutePatternLiteralNode)previousNode).LiteralToken
                                     .Value!
                                     .ToString() != "."
                             )
@@ -312,8 +311,7 @@ internal partial struct RoutePatternParser
                                             parameterPart.Node;
                                         if (!parameterNameNode.ParameterNameToken.IsMissing)
                                         {
-                                            name = parameterNameNode
-                                                .ParameterNameToken
+                                            name = parameterNameNode.ParameterNameToken
                                                 .Value!
                                                 .ToString();
                                         }
@@ -327,8 +325,7 @@ internal partial struct RoutePatternParser
                                                 parameterPart.Node;
                                         if (!defaultValueNode.DefaultValueToken.IsMissing)
                                         {
-                                            defaultValue = defaultValueNode
-                                                .DefaultValueToken
+                                            defaultValue = defaultValueNode.DefaultValueToken
                                                 .Value!
                                                 .ToString();
                                         }
@@ -585,8 +582,7 @@ internal partial struct RoutePatternParser
             {
                 ConsumeCurrentToken();
 
-                replacementToken = replacementToken
-                    .Value
+                replacementToken = replacementToken.Value
                     .AddDiagnosticIfNone(
                         new EmbeddedDiagnostic(
                             Resources.AttributeRoute_TokenReplacement_EmptyTokenNotAllowed,

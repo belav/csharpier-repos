@@ -295,8 +295,7 @@ namespace System.Net
         internal UnsafeNclNativeMethods.HttpApi.HTTP_VERB GetKnownMethod()
         {
             GlobalLog.Print("HttpListenerContext::GetKnownMethod()");
-            return UnsafeNclNativeMethods
-                .HttpApi
+            return UnsafeNclNativeMethods.HttpApi
                 .GetKnownVerb(Request.RequestBuffer, Request.OriginalBlobAddress);
         }
 
@@ -309,16 +308,14 @@ namespace System.Net
         )]
         internal static void CancelRequest(CriticalHandle requestQueueHandle, ulong requestId)
         {
-            uint statusCode = UnsafeNclNativeMethods
-                .HttpApi
+            uint statusCode = UnsafeNclNativeMethods.HttpApi
                 .HttpCancelHttpRequest(requestQueueHandle, requestId, IntPtr.Zero);
         }
 
         // The request is being aborted, but large writes may be in progress. Cancel them.
         internal void ForceCancelRequest(CriticalHandle requestQueueHandle, ulong requestId)
         {
-            uint statusCode = UnsafeNclNativeMethods
-                .HttpApi
+            uint statusCode = UnsafeNclNativeMethods.HttpApi
                 .HttpCancelHttpRequest(requestQueueHandle, requestId, IntPtr.Zero);
 
             // Either the connection has already dropped, or the last write is in progress.

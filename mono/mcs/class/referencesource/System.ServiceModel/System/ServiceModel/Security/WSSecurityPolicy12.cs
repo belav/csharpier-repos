@@ -620,8 +620,7 @@ namespace System.ServiceModel.Security
                 && assertion != null
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(SR.UnsupportedSecurityPolicyAssertion, assertion.OuterXml)
@@ -641,8 +640,7 @@ namespace System.ServiceModel.Security
                 && assertion != null
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(SR.UnsupportedSecurityPolicyAssertion, assertion.OuterXml)
@@ -662,8 +660,7 @@ namespace System.ServiceModel.Security
                 && assertion != null
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(SR.UnsupportedSecurityPolicyAssertion, assertion.OuterXml)
@@ -683,8 +680,7 @@ namespace System.ServiceModel.Security
                 && assertion != null
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(SR.UnsupportedSecurityPolicyAssertion, assertion.OuterXml)
@@ -776,8 +772,7 @@ namespace System.ServiceModel.Security
             }
             if (optionalSignedEncrypted == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("optionalSignedEncrypted");
             }
 
@@ -860,8 +855,7 @@ namespace System.ServiceModel.Security
                         out assertion
                     )
                 )
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(

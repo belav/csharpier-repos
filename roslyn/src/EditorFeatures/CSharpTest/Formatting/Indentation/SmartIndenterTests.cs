@@ -28,8 +28,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Formatting.Indentation
     public partial class SmartIndenterTests : CSharpFormatterTestsBase
     {
         private static readonly TestComposition s_compositionWithTestFormattingRules =
-            EditorTestCompositions
-                .EditorFeatures
+            EditorTestCompositions.EditorFeatures
                 .AddParts(typeof(TestFormattingRuleFactoryServiceFactory));
 
         public SmartIndenterTests(ITestOutputHelper output)
@@ -3224,8 +3223,7 @@ namespace NS
                     .GetLineFromPosition(projectedDocument.CursorPosition.Value);
                 var textView = projectedDocument.GetTextView();
                 var buffer = subjectDocument.GetTextBuffer();
-                var point = textView
-                    .BufferGraph
+                var point = textView.BufferGraph
                     .MapDownToBuffer(
                         indentationLine.Start,
                         PointTrackingMode.Negative,
@@ -3335,8 +3333,7 @@ namespace NS
                 using var workspace = TestWorkspace.CreateCSharp(code, parseOptions: option);
 
                 var wpfTextView = workspace.Documents.First().GetTextView();
-                var line = wpfTextView
-                    .TextBuffer
+                var line = wpfTextView.TextBuffer
                     .CurrentSnapshot
                     .GetLineFromPosition(wpfTextView.Caret.Position.BufferPosition)
                     .LineNumber;

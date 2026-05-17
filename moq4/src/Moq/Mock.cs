@@ -297,9 +297,8 @@ namespace Moq
             var errors = new List<MockException>();
 
             foreach (
-                var setup in this.MutableSetups.FindAll(setup =>
-                    !setup.IsConditional && predicate(setup)
-                )
+                var setup in this.MutableSetups
+                    .FindAll(setup => !setup.IsConditional && predicate(setup))
             )
             {
                 try
@@ -448,9 +447,8 @@ namespace Moq
             if (!verifiedMocks.Add(mock))
                 return;
 
-            var unverifiedInvocations = mock.MutableInvocations.ToArray(invocation =>
-                !invocation.IsVerified
-            );
+            var unverifiedInvocations = mock.MutableInvocations
+                .ToArray(invocation => !invocation.IsVerified);
 
             var innerMocks = mock.MutableSetups.FindAllInnerMocks();
 
@@ -469,9 +467,8 @@ namespace Moq
                         // sub-object (inner mock); and that sub-object has to have received at least
                         // one call:
                         var wasTransitiveInvocation =
-                            mock.MutableSetups.FindLastInnerMock(setup =>
-                                setup.Matches(unverifiedInvocations[i])
-                            )
+                            mock.MutableSetups
+                                .FindLastInnerMock(setup => setup.Matches(unverifiedInvocations[i]))
                                 is Mock innerMock
                             && innerMock.MutableInvocations.Any();
                         if (wasTransitiveInvocation)
@@ -713,8 +710,7 @@ namespace Moq
                                 if (
                                     setter.CanOverride()
                                     && ProxyFactory.Instance.IsMethodVisible(setter, out _)
-                                    && targetMock
-                                        .MutableSetups
+                                    && targetMock.MutableSetups
                                         .FindLast(s => s is StubbedPropertiesSetup)
                                         is StubbedPropertiesSetup sps
                                 )
@@ -964,8 +960,7 @@ namespace Moq
         {
             Guard.NotNull(action, nameof(action));
 
-            var expression = ExpressionReconstructor
-                .Instance
+            var expression = ExpressionReconstructor.Instance
                 .ReconstructExpression(action, mock.ConstructorArguments);
             var parts = expression.Split();
             Mock.RaiseEvent(mock, expression, parts, arguments);
@@ -975,8 +970,7 @@ namespace Moq
         {
             Guard.NotNull(action, nameof(action));
 
-            var expression = ExpressionReconstructor
-                .Instance
+            var expression = ExpressionReconstructor.Instance
                 .ReconstructExpression(action, mock.ConstructorArguments);
             var parts = expression.Split();
             return (Task)Mock.RaiseEvent(mock, expression, parts, arguments);
@@ -1004,8 +998,7 @@ namespace Moq
                 if (method.IsEventAddAccessor())
                 {
                     var implementingMethod = method.GetImplementingMethod(mock.Object.GetType());
-                    @event = implementingMethod
-                        .DeclaringType
+                    @event = implementingMethod.DeclaringType
                         .GetEvents(bindingFlags)
                         .SingleOrDefault(e => e.GetAddMethod(true) == implementingMethod);
                     if (@event == null)
@@ -1022,8 +1015,7 @@ namespace Moq
                 else if (method.IsEventRemoveAccessor())
                 {
                     var implementingMethod = method.GetImplementingMethod(mock.Object.GetType());
-                    @event = implementingMethod
-                        .DeclaringType
+                    @event = implementingMethod.DeclaringType
                         .GetEvents(bindingFlags)
                         .SingleOrDefault(e => e.GetRemoveMethod(true) == implementingMethod);
                     if (@event == null)
@@ -1144,10 +1136,8 @@ namespace Moq
             Debug.Assert(method.ReturnType != typeof(void));
 
             if (
-                this.ConfiguredDefaultValues.TryGetValue(
-                    method.ReturnType,
-                    out object configuredDefaultValue
-                )
+                this.ConfiguredDefaultValues
+                    .TryGetValue(method.ReturnType, out object configuredDefaultValue)
             )
             {
                 candidateInnerMock = null;

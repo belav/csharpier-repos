@@ -109,9 +109,8 @@ namespace Mono.CodeContracts.Rewrite
 
                 // Prepare type references
                 TypeReference typeVoid = this.module.Import(typeof(void));
-                TypeReference typeContractFailureKind = this.module.Import(
-                    typeof(ContractFailureKind)
-                );
+                TypeReference typeContractFailureKind = this.module
+                    .Import(typeof(ContractFailureKind));
                 TypeReference typeString = this.module.Import(typeof(string));
                 TypeReference typeException = this.module.Import(typeof(Exception));
                 // Create type
@@ -133,32 +132,34 @@ namespace Mono.CodeContracts.Rewrite
                         | MethodAttributes.RTSpecialName,
                     typeVoid
                 );
-                cons.Parameters.Add(
-                    new ParameterDefinition(
-                        "kind",
-                        ParameterAttributes.None,
-                        typeContractFailureKind
-                    )
-                );
-                cons.Parameters.Add(
-                    new ParameterDefinition("failure", ParameterAttributes.None, typeString)
-                );
-                cons.Parameters.Add(
-                    new ParameterDefinition("usermsg", ParameterAttributes.None, typeString)
-                );
-                cons.Parameters.Add(
-                    new ParameterDefinition("condition", ParameterAttributes.None, typeString)
-                );
-                cons.Parameters.Add(
-                    new ParameterDefinition("inner", ParameterAttributes.None, typeException)
-                );
+                cons.Parameters
+                    .Add(
+                        new ParameterDefinition(
+                            "kind",
+                            ParameterAttributes.None,
+                            typeContractFailureKind
+                        )
+                    );
+                cons.Parameters
+                    .Add(new ParameterDefinition("failure", ParameterAttributes.None, typeString));
+                cons.Parameters
+                    .Add(new ParameterDefinition("usermsg", ParameterAttributes.None, typeString));
+                cons.Parameters
+                    .Add(
+                        new ParameterDefinition("condition", ParameterAttributes.None, typeString)
+                    );
+                cons.Parameters
+                    .Add(new ParameterDefinition("inner", ParameterAttributes.None, typeException));
                 var il = cons.Body.GetILProcessor();
                 il.Emit(OpCodes.Ldarg_0);
                 il.Emit(OpCodes.Ldarg_2);
                 il.Emit(OpCodes.Ldarg_S, cons.Parameters[4]);
-                MethodReference mExceptionCons = this.module.Import(
-                    typeof(Exception).GetConstructor(new[] { typeof(string), typeof(Exception) })
-                );
+                MethodReference mExceptionCons = this.module
+                    .Import(
+                        typeof(Exception).GetConstructor(
+                            new[] { typeof(string), typeof(Exception) }
+                        )
+                    );
                 il.Emit(OpCodes.Call, mExceptionCons);
                 il.Emit(OpCodes.Ret);
                 type.Methods.Add(cons);
@@ -194,9 +195,8 @@ namespace Mono.CodeContracts.Rewrite
 
                 // Prepare type references
                 TypeReference typeVoid = this.module.Import(typeof(void));
-                TypeReference typeContractFailureKind = this.module.Import(
-                    typeof(ContractFailureKind)
-                );
+                TypeReference typeContractFailureKind = this.module
+                    .Import(typeof(ContractFailureKind));
                 TypeReference typeString = this.module.Import(typeof(string));
                 TypeReference typeException = this.module.Import(typeof(Exception));
                 // Create method
@@ -205,8 +205,7 @@ namespace Mono.CodeContracts.Rewrite
                     MethodAttributes.Assembly | MethodAttributes.Static,
                     typeVoid
                 );
-                method
-                    .Parameters
+                method.Parameters
                     .Add(
                         new ParameterDefinition(
                             "kind",
@@ -214,16 +213,13 @@ namespace Mono.CodeContracts.Rewrite
                             typeContractFailureKind
                         )
                     );
-                method
-                    .Parameters
+                method.Parameters
                     .Add(new ParameterDefinition("message", ParameterAttributes.None, typeString));
-                method
-                    .Parameters
+                method.Parameters
                     .Add(
                         new ParameterDefinition("userMessage", ParameterAttributes.None, typeString)
                     );
-                method
-                    .Parameters
+                method.Parameters
                     .Add(
                         new ParameterDefinition(
                             "conditionText",
@@ -231,8 +227,7 @@ namespace Mono.CodeContracts.Rewrite
                             typeString
                         )
                     );
-                method
-                    .Parameters
+                method.Parameters
                     .Add(new ParameterDefinition("inner", ParameterAttributes.None, typeException));
                 var il = method.Body.GetILProcessor();
                 if (this.options.ThrowOnFailure)
@@ -276,23 +271,20 @@ namespace Mono.CodeContracts.Rewrite
 
                 // Prepare type references
                 TypeReference typeVoid = this.module.Import(typeof(void));
-                TypeReference typeContractFailureKind = this.module.Import(
-                    typeof(ContractFailureKind)
-                );
+                TypeReference typeContractFailureKind = this.module
+                    .Import(typeof(ContractFailureKind));
                 TypeReference typeString = this.module.Import(typeof(string));
                 TypeReference typeException = this.module.Import(typeof(Exception));
                 var helper = typeof(ContractHelper);
-                MethodReference mRaiseContractFailedEvent = this.module.Import(
-                    helper.GetMethod("RaiseContractFailedEvent")
-                );
+                MethodReference mRaiseContractFailedEvent = this.module
+                    .Import(helper.GetMethod("RaiseContractFailedEvent"));
                 // Create method
                 MethodDefinition method = new MethodDefinition(
                     "ReportFailure",
                     MethodAttributes.Assembly | MethodAttributes.Static,
                     typeVoid
                 );
-                method
-                    .Parameters
+                method.Parameters
                     .Add(
                         new ParameterDefinition(
                             "kind",
@@ -300,11 +292,9 @@ namespace Mono.CodeContracts.Rewrite
                             typeContractFailureKind
                         )
                     );
-                method
-                    .Parameters
+                method.Parameters
                     .Add(new ParameterDefinition("message", ParameterAttributes.None, typeString));
-                method
-                    .Parameters
+                method.Parameters
                     .Add(
                         new ParameterDefinition(
                             "conditionText",
@@ -312,8 +302,7 @@ namespace Mono.CodeContracts.Rewrite
                             typeString
                         )
                     );
-                method
-                    .Parameters
+                method.Parameters
                     .Add(new ParameterDefinition("inner", ParameterAttributes.None, typeException));
                 VariableDefinition vMsg = new VariableDefinition(typeString);
                 method.Body.Variables.Add(vMsg);
@@ -372,16 +361,13 @@ namespace Mono.CodeContracts.Rewrite
                     MethodAttributes.Assembly | MethodAttributes.Static,
                     typeVoid
                 );
-                method
-                    .Parameters
+                method.Parameters
                     .Add(
                         new ParameterDefinition("condition", ParameterAttributes.None, typeBoolean)
                     );
-                method
-                    .Parameters
+                method.Parameters
                     .Add(new ParameterDefinition("message", ParameterAttributes.None, typeString));
-                method
-                    .Parameters
+                method.Parameters
                     .Add(
                         new ParameterDefinition(
                             "conditionText",

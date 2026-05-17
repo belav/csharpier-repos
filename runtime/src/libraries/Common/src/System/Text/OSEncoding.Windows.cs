@@ -290,8 +290,7 @@ namespace System.Text
             int byteCount
         )
         {
-            int result = Interop
-                .Kernel32
+            int result = Interop.Kernel32
                 .WideCharToMultiByte(
                     (uint)codePage,
                     0,
@@ -315,8 +314,7 @@ namespace System.Text
             int count
         )
         {
-            int result = Interop
-                .Kernel32
+            int result = Interop.Kernel32
                 .MultiByteToWideChar((uint)codePage, 0, pBytes, byteCount, pChars, count);
             if (result <= 0)
                 throw new ArgumentException(SR.Argument_InvalidCharSequenceNoIndex);

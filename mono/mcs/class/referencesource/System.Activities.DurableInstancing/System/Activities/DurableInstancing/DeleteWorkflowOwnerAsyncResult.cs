@@ -36,8 +36,7 @@ namespace System.Activities.DurableInstancing
         {
             base.GenerateSqlCommand(sqlCommand);
             this.surrogateLockOwnerId = base.StoreLock.SurrogateLockOwnerId;
-            sqlCommand
-                .Parameters
+            sqlCommand.Parameters
                 .Add(
                     new SqlParameter
                     {

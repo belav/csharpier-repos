@@ -1024,8 +1024,7 @@ label3:
             {
                 {
                     NewLineBeforeOpenBrace,
-                    NewLineBeforeOpenBrace
-                        .DefaultValue
+                    NewLineBeforeOpenBrace.DefaultValue
                         .WithFlagValue(
                             NewLineBeforeOpenBracePlacement.ObjectCollectionArrayInitializers,
                             false
@@ -1120,8 +1119,7 @@ class D
                 { IndentSwitchCaseSection, false },
                 {
                     NewLineBeforeOpenBrace,
-                    NewLineBeforeOpenBrace
-                        .DefaultValue
+                    NewLineBeforeOpenBrace.DefaultValue
                         .WithFlagValue(NewLineBeforeOpenBracePlacement.LambdaExpressionBody, false)
                 },
                 { LabelPositioning, LabelPositionOptions.LeftMost },
@@ -2288,8 +2286,7 @@ else
                 { NewLineForElse, false },
                 {
                     NewLineBeforeOpenBrace,
-                    NewLineBeforeOpenBrace
-                        .DefaultValue
+                    NewLineBeforeOpenBrace.DefaultValue
                         .WithFlagValue(NewLineBeforeOpenBracePlacement.ControlBlocks, false)
                 },
             };
@@ -6838,8 +6835,7 @@ class Program
             {
                 {
                     SpaceBetweenParentheses,
-                    SpaceBetweenParentheses
-                        .DefaultValue
+                    SpaceBetweenParentheses.DefaultValue
                         .WithFlagValue(SpacePlacementWithinParentheses.ControlFlowStatements, true)
                 },
             };
@@ -8082,8 +8078,7 @@ class Program
             {
                 {
                     NewLineBeforeOpenBrace,
-                    NewLineBeforeOpenBrace
-                        .DefaultValue
+                    NewLineBeforeOpenBrace.DefaultValue
                         .WithFlagValue(NewLineBeforeOpenBracePlacement.ControlBlocks, false)
                 },
             };
@@ -8128,8 +8123,7 @@ class Program
             {
                 {
                     NewLineBeforeOpenBrace,
-                    NewLineBeforeOpenBrace
-                        .DefaultValue
+                    NewLineBeforeOpenBrace.DefaultValue
                         .WithFlagValue(NewLineBeforeOpenBracePlacement.ControlBlocks, false)
                 },
             };
@@ -9415,8 +9409,7 @@ class Program
             {
                 {
                     NewLineBeforeOpenBrace,
-                    NewLineBeforeOpenBrace
-                        .DefaultValue
+                    NewLineBeforeOpenBrace.DefaultValue
                         .WithFlagValue(NewLineBeforeOpenBracePlacement.ControlBlocks, false)
                 },
             };
@@ -9593,8 +9586,7 @@ class Program
             {
                 {
                     NewLineBeforeOpenBrace,
-                    NewLineBeforeOpenBrace
-                        .DefaultValue
+                    NewLineBeforeOpenBrace.DefaultValue
                         .WithFlagValue(NewLineBeforeOpenBracePlacement.Properties, false)
                 },
             };
@@ -9641,8 +9633,7 @@ class Program
             {
                 {
                     NewLineBeforeOpenBrace,
-                    NewLineBeforeOpenBrace
-                        .DefaultValue
+                    NewLineBeforeOpenBrace.DefaultValue
                         .WithFlagValue(NewLineBeforeOpenBracePlacement.Accessors, false)
                 },
             };
@@ -9689,8 +9680,7 @@ class Program
             {
                 {
                     NewLineBeforeOpenBrace,
-                    NewLineBeforeOpenBrace
-                        .DefaultValue
+                    NewLineBeforeOpenBrace.DefaultValue
                         .WithFlagValue(NewLineBeforeOpenBracePlacement.Properties, false)
                         .WithFlagValue(NewLineBeforeOpenBracePlacement.Accessors, false)
                 },
@@ -10871,8 +10861,7 @@ class A
             {
                 {
                     NewLineBeforeOpenBrace,
-                    NewLineBeforeOpenBrace
-                        .DefaultValue
+                    NewLineBeforeOpenBrace.DefaultValue
                         .WithFlagValue(
                             NewLineBeforeOpenBracePlacement.ObjectCollectionArrayInitializers,
                             false
@@ -10942,8 +10931,7 @@ class C
             {
                 {
                     NewLineBeforeOpenBrace,
-                    NewLineBeforeOpenBrace
-                        .DefaultValue
+                    NewLineBeforeOpenBrace.DefaultValue
                         .WithFlagValue(
                             NewLineBeforeOpenBracePlacement.ObjectCollectionArrayInitializers,
                             false
@@ -11067,8 +11055,7 @@ class A
             {
                 {
                     NewLineBeforeOpenBrace,
-                    NewLineBeforeOpenBrace
-                        .DefaultValue
+                    NewLineBeforeOpenBrace.DefaultValue
                         .WithFlagValue(
                             NewLineBeforeOpenBracePlacement.ObjectCollectionArrayInitializers,
                             false
@@ -11113,8 +11100,7 @@ class A
             {
                 {
                     NewLineBeforeOpenBrace,
-                    NewLineBeforeOpenBrace
-                        .DefaultValue
+                    NewLineBeforeOpenBrace.DefaultValue
                         .WithFlagValue(
                             NewLineBeforeOpenBracePlacement.ObjectCollectionArrayInitializers,
                             option

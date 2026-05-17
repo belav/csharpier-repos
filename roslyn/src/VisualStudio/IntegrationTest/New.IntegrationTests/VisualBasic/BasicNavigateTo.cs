@@ -26,8 +26,7 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.VisualBasic
         {
             var project = ProjectName;
             var csProject = "CSProject";
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .AddFileAsync(
                     project,
                     "test1.vb",
@@ -40,8 +39,7 @@ End Class",
                     cancellationToken: HangMitigatingCancellationToken
                 );
 
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .AddFileAsync(
                     project,
                     "test2.vb",
@@ -51,8 +49,7 @@ End Class",
                     cancellationToken: HangMitigatingCancellationToken
                 );
             await TestServices.Shell.ShowNavigateToDialogAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .Input
+            await TestServices.Input
                 .SendToNavigateToAsync(
                     ["FirstMethod", VirtualKeyCode.RETURN],
                     HangMitigatingCancellationToken
@@ -61,8 +58,7 @@ End Class",
 
             Assert.Equal(
                 $"test1.vb",
-                await TestServices
-                    .Shell
+                await TestServices.Shell
                     .GetActiveWindowCaptionAsync(HangMitigatingCancellationToken)
             );
             Assert.Equal(
@@ -71,16 +67,14 @@ End Class",
             );
 
             // Verify C# files are found when navigating from VB
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .AddProjectAsync(
                     csProject,
                     WellKnownProjectTemplates.ClassLibrary,
                     LanguageNames.CSharp,
                     HangMitigatingCancellationToken
                 );
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .AddFileAsync(
                     csProject,
                     "csfile.cs",
@@ -89,8 +83,7 @@ End Class",
                 );
 
             await TestServices.Shell.ShowNavigateToDialogAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .Input
+            await TestServices.Input
                 .SendToNavigateToAsync(
                     ["FirstClass", VirtualKeyCode.RETURN],
                     HangMitigatingCancellationToken
@@ -99,8 +92,7 @@ End Class",
 
             Assert.Equal(
                 $"test1.vb",
-                await TestServices
-                    .Shell
+                await TestServices.Shell
                     .GetActiveWindowCaptionAsync(HangMitigatingCancellationToken)
             );
             Assert.Equal(

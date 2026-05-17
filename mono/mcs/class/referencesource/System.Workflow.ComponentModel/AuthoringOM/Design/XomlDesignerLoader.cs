@@ -873,11 +873,8 @@ namespace System.Workflow.ComponentModel.Design
                         Type updatedType = typeProvider.GetType(((Type)args.CurrentValue).FullName);
                         if (updatedType != null)
                         {
-                            args.CurrentProperty.SetValue(
-                                args.CurrentPropertyOwner,
-                                updatedType,
-                                null
-                            );
+                            args.CurrentProperty
+                                .SetValue(args.CurrentPropertyOwner, updatedType, null);
 
                             if (args.CurrentActivity != null)
                                 TypeDescriptor.Refresh(args.CurrentActivity);

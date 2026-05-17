@@ -18,8 +18,7 @@ public class SqlServerValueGeneratorCacheTest
         var entityType = model.FindEntityType(typeof(Led));
         var property1 = GetProperty1(model);
         var property2 = GetProperty2(model);
-        var cache = SqlServerTestHelpers
-            .Instance
+        var cache = SqlServerTestHelpers.Instance
             .CreateContextServices(model)
             .GetRequiredService<ISqlServerValueGeneratorCache>();
 
@@ -54,8 +53,7 @@ public class SqlServerValueGeneratorCacheTest
         var property1 = GetProperty1(model);
         var property2 = GetProperty2(model);
         var property3 = GetProperty3(model);
-        var cache = SqlServerTestHelpers
-            .Instance
+        var cache = SqlServerTestHelpers.Instance
             .CreateContextServices(model)
             .GetRequiredService<ISqlServerValueGeneratorCache>();
         var connection = CreateConnection();
@@ -80,8 +78,7 @@ public class SqlServerValueGeneratorCacheTest
     {
         var model = CreateModel();
         var property1 = GetProperty1(model);
-        var cache = SqlServerTestHelpers
-            .Instance
+        var cache = SqlServerTestHelpers.Instance
             .CreateContextServices(model)
             .GetRequiredService<ISqlServerValueGeneratorCache>();
         var connection1 = CreateConnection("DbOne");
@@ -102,8 +99,7 @@ public class SqlServerValueGeneratorCacheTest
     {
         var model = CreateModel();
         var property1 = GetProperty1(model);
-        var cache = SqlServerTestHelpers
-            .Instance
+        var cache = SqlServerTestHelpers.Instance
             .CreateContextServices(model)
             .GetRequiredService<ISqlServerValueGeneratorCache>();
         var connection1 = CreateConnection(serverName: "ServerOne");

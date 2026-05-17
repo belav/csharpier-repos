@@ -452,8 +452,7 @@ namespace System.Web.Services.Description
                 WriteAttribute(
                     @"required",
                     @"http://schemas.xmlsoap.org/wsdl/",
-                    System
-                        .Xml
+                    System.Xml
                         .XmlConvert
                         .ToString((global::System.Boolean)((global::System.Boolean)o.@Required))
                 );
@@ -493,8 +492,7 @@ namespace System.Web.Services.Description
                 WriteAttribute(
                     @"required",
                     @"http://schemas.xmlsoap.org/wsdl/",
-                    System
-                        .Xml
+                    System.Xml
                         .XmlConvert
                         .ToString((global::System.Boolean)((global::System.Boolean)o.@Required))
                 );
@@ -534,8 +532,7 @@ namespace System.Web.Services.Description
                 WriteAttribute(
                     @"required",
                     @"http://schemas.xmlsoap.org/wsdl/",
-                    System
-                        .Xml
+                    System.Xml
                         .XmlConvert
                         .ToString((global::System.Boolean)((global::System.Boolean)o.@Required))
                 );
@@ -1008,8 +1005,7 @@ namespace System.Web.Services.Description
                 WriteAttribute(
                     @"required",
                     @"http://schemas.xmlsoap.org/wsdl/",
-                    System
-                        .Xml
+                    System.Xml
                         .XmlConvert
                         .ToString((global::System.Boolean)((global::System.Boolean)o.@Required))
                 );
@@ -1092,8 +1088,7 @@ namespace System.Web.Services.Description
                 WriteAttribute(
                     @"required",
                     @"http://schemas.xmlsoap.org/wsdl/",
-                    System
-                        .Xml
+                    System.Xml
                         .XmlConvert
                         .ToString((global::System.Boolean)((global::System.Boolean)o.@Required))
                 );
@@ -1371,8 +1366,7 @@ namespace System.Web.Services.Description
                 WriteAttribute(
                     @"required",
                     @"http://schemas.xmlsoap.org/wsdl/",
-                    System
-                        .Xml
+                    System.Xml
                         .XmlConvert
                         .ToString((global::System.Boolean)((global::System.Boolean)o.@Required))
                 );
@@ -1428,8 +1422,7 @@ namespace System.Web.Services.Description
                 WriteAttribute(
                     @"required",
                     @"http://schemas.xmlsoap.org/wsdl/",
-                    System
-                        .Xml
+                    System.Xml
                         .XmlConvert
                         .ToString((global::System.Boolean)((global::System.Boolean)o.@Required))
                 );
@@ -1561,8 +1554,7 @@ namespace System.Web.Services.Description
                 WriteAttribute(
                     @"required",
                     @"http://schemas.xmlsoap.org/wsdl/",
-                    System
-                        .Xml
+                    System.Xml
                         .XmlConvert
                         .ToString((global::System.Boolean)((global::System.Boolean)o.@Required))
                 );
@@ -1620,8 +1612,7 @@ namespace System.Web.Services.Description
                 WriteAttribute(
                     @"group",
                     @"",
-                    System
-                        .Xml
+                    System.Xml
                         .XmlConvert
                         .ToString((global::System.Int32)((global::System.Int32)o.@Group))
                 );
@@ -1631,8 +1622,7 @@ namespace System.Web.Services.Description
                 WriteAttribute(
                     @"capture",
                     @"",
-                    System
-                        .Xml
+                    System.Xml
                         .XmlConvert
                         .ToString((global::System.Int32)((global::System.Int32)o.@Capture))
                 );
@@ -1645,8 +1635,7 @@ namespace System.Web.Services.Description
             WriteAttribute(
                 @"ignoreCase",
                 @"",
-                System
-                    .Xml
+                System.Xml
                     .XmlConvert
                     .ToString((global::System.Boolean)((global::System.Boolean)o.@IgnoreCase))
             );
@@ -1701,8 +1690,7 @@ namespace System.Web.Services.Description
                 WriteAttribute(
                     @"required",
                     @"http://schemas.xmlsoap.org/wsdl/",
-                    System
-                        .Xml
+                    System.Xml
                         .XmlConvert
                         .ToString((global::System.Boolean)((global::System.Boolean)o.@Required))
                 );
@@ -1742,8 +1730,7 @@ namespace System.Web.Services.Description
                 WriteAttribute(
                     @"required",
                     @"http://schemas.xmlsoap.org/wsdl/",
-                    System
-                        .Xml
+                    System.Xml
                         .XmlConvert
                         .ToString((global::System.Boolean)((global::System.Boolean)o.@Required))
                 );
@@ -1784,8 +1771,7 @@ namespace System.Web.Services.Description
                 WriteAttribute(
                     @"required",
                     @"http://schemas.xmlsoap.org/wsdl/",
-                    System
-                        .Xml
+                    System.Xml
                         .XmlConvert
                         .ToString((global::System.Boolean)((global::System.Boolean)o.@Required))
                 );
@@ -1852,8 +1838,7 @@ namespace System.Web.Services.Description
                 WriteAttribute(
                     @"required",
                     @"http://schemas.xmlsoap.org/wsdl/",
-                    System
-                        .Xml
+                    System.Xml
                         .XmlConvert
                         .ToString((global::System.Boolean)((global::System.Boolean)o.@Required))
                 );
@@ -1920,8 +1905,7 @@ namespace System.Web.Services.Description
                 WriteAttribute(
                     @"required",
                     @"http://schemas.xmlsoap.org/wsdl/",
-                    System
-                        .Xml
+                    System.Xml
                         .XmlConvert
                         .ToString((global::System.Boolean)((global::System.Boolean)o.@Required))
                 );
@@ -2000,8 +1984,7 @@ namespace System.Web.Services.Description
                 WriteAttribute(
                     @"required",
                     @"http://schemas.xmlsoap.org/wsdl/",
-                    System
-                        .Xml
+                    System.Xml
                         .XmlConvert
                         .ToString((global::System.Boolean)((global::System.Boolean)o.@Required))
                 );
@@ -2073,8 +2056,7 @@ namespace System.Web.Services.Description
                 WriteAttribute(
                     @"required",
                     @"http://schemas.xmlsoap.org/wsdl/",
-                    System
-                        .Xml
+                    System.Xml
                         .XmlConvert
                         .ToString((global::System.Boolean)((global::System.Boolean)o.@Required))
                 );
@@ -2153,8 +2135,7 @@ namespace System.Web.Services.Description
                 WriteAttribute(
                     @"required",
                     @"http://schemas.xmlsoap.org/wsdl/",
-                    System
-                        .Xml
+                    System.Xml
                         .XmlConvert
                         .ToString((global::System.Boolean)((global::System.Boolean)o.@Required))
                 );
@@ -2445,8 +2426,7 @@ namespace System.Web.Services.Description
                 WriteAttribute(
                     @"required",
                     @"http://schemas.xmlsoap.org/wsdl/",
-                    System
-                        .Xml
+                    System.Xml
                         .XmlConvert
                         .ToString((global::System.Boolean)((global::System.Boolean)o.@Required))
                 );
@@ -2489,8 +2469,7 @@ namespace System.Web.Services.Description
                 WriteAttribute(
                     @"required",
                     @"http://schemas.xmlsoap.org/wsdl/",
-                    System
-                        .Xml
+                    System.Xml
                         .XmlConvert
                         .ToString((global::System.Boolean)((global::System.Boolean)o.@Required))
                 );
@@ -2529,8 +2508,7 @@ namespace System.Web.Services.Description
                 WriteAttribute(
                     @"required",
                     @"http://schemas.xmlsoap.org/wsdl/",
-                    System
-                        .Xml
+                    System.Xml
                         .XmlConvert
                         .ToString((global::System.Boolean)((global::System.Boolean)o.@Required))
                 );
@@ -2605,8 +2583,7 @@ namespace System.Web.Services.Description
                 WriteAttribute(
                     @"required",
                     @"http://schemas.xmlsoap.org/wsdl/",
-                    System
-                        .Xml
+                    System.Xml
                         .XmlConvert
                         .ToString((global::System.Boolean)((global::System.Boolean)o.@Required))
                 );
@@ -2646,8 +2623,7 @@ namespace System.Web.Services.Description
                 WriteAttribute(
                     @"required",
                     @"http://schemas.xmlsoap.org/wsdl/",
-                    System
-                        .Xml
+                    System.Xml
                         .XmlConvert
                         .ToString((global::System.Boolean)((global::System.Boolean)o.@Required))
                 );
@@ -2671,8 +2647,7 @@ namespace System.Web.Services.Description
                 WriteAttribute(
                     @"soapActionRequired",
                     @"",
-                    System
-                        .Xml
+                    System.Xml
                         .XmlConvert
                         .ToString(
                             (global::System.Boolean)((global::System.Boolean)o.@SoapActionRequired)
@@ -2735,8 +2710,7 @@ namespace System.Web.Services.Description
                 WriteAttribute(
                     @"required",
                     @"http://schemas.xmlsoap.org/wsdl/",
-                    System
-                        .Xml
+                    System.Xml
                         .XmlConvert
                         .ToString((global::System.Boolean)((global::System.Boolean)o.@Required))
                 );
@@ -2789,8 +2763,7 @@ namespace System.Web.Services.Description
                 WriteAttribute(
                     @"required",
                     @"http://schemas.xmlsoap.org/wsdl/",
-                    System
-                        .Xml
+                    System.Xml
                         .XmlConvert
                         .ToString((global::System.Boolean)((global::System.Boolean)o.@Required))
                 );
@@ -2830,8 +2803,7 @@ namespace System.Web.Services.Description
                 WriteAttribute(
                     @"required",
                     @"http://schemas.xmlsoap.org/wsdl/",
-                    System
-                        .Xml
+                    System.Xml
                         .XmlConvert
                         .ToString((global::System.Boolean)((global::System.Boolean)o.@Required))
                 );
@@ -4432,8 +4404,7 @@ namespace System.Web.Services.Description
                 WriteAttribute(
                     @"abstract",
                     @"",
-                    System
-                        .Xml
+                    System.Xml
                         .XmlConvert
                         .ToString((global::System.Boolean)((global::System.Boolean)o.@IsAbstract))
                 );
@@ -4489,8 +4460,7 @@ namespace System.Web.Services.Description
                 WriteAttribute(
                     @"nillable",
                     @"",
-                    System
-                        .Xml
+                    System.Xml
                         .XmlConvert
                         .ToString((global::System.Boolean)((global::System.Boolean)o.@IsNillable))
                 );
@@ -5304,8 +5274,7 @@ namespace System.Web.Services.Description
                 WriteAttribute(
                     @"fixed",
                     @"",
-                    System
-                        .Xml
+                    System.Xml
                         .XmlConvert
                         .ToString((global::System.Boolean)((global::System.Boolean)o.@IsFixed))
                 );
@@ -5366,8 +5335,7 @@ namespace System.Web.Services.Description
                 WriteAttribute(
                     @"fixed",
                     @"",
-                    System
-                        .Xml
+                    System.Xml
                         .XmlConvert
                         .ToString((global::System.Boolean)((global::System.Boolean)o.@IsFixed))
                 );
@@ -5428,8 +5396,7 @@ namespace System.Web.Services.Description
                 WriteAttribute(
                     @"fixed",
                     @"",
-                    System
-                        .Xml
+                    System.Xml
                         .XmlConvert
                         .ToString((global::System.Boolean)((global::System.Boolean)o.@IsFixed))
                 );
@@ -5490,8 +5457,7 @@ namespace System.Web.Services.Description
                 WriteAttribute(
                     @"fixed",
                     @"",
-                    System
-                        .Xml
+                    System.Xml
                         .XmlConvert
                         .ToString((global::System.Boolean)((global::System.Boolean)o.@IsFixed))
                 );
@@ -5552,8 +5518,7 @@ namespace System.Web.Services.Description
                 WriteAttribute(
                     @"fixed",
                     @"",
-                    System
-                        .Xml
+                    System.Xml
                         .XmlConvert
                         .ToString((global::System.Boolean)((global::System.Boolean)o.@IsFixed))
                 );
@@ -5614,8 +5579,7 @@ namespace System.Web.Services.Description
                 WriteAttribute(
                     @"fixed",
                     @"",
-                    System
-                        .Xml
+                    System.Xml
                         .XmlConvert
                         .ToString((global::System.Boolean)((global::System.Boolean)o.@IsFixed))
                 );
@@ -5676,8 +5640,7 @@ namespace System.Web.Services.Description
                 WriteAttribute(
                     @"fixed",
                     @"",
-                    System
-                        .Xml
+                    System.Xml
                         .XmlConvert
                         .ToString((global::System.Boolean)((global::System.Boolean)o.@IsFixed))
                 );
@@ -5738,8 +5701,7 @@ namespace System.Web.Services.Description
                 WriteAttribute(
                     @"fixed",
                     @"",
-                    System
-                        .Xml
+                    System.Xml
                         .XmlConvert
                         .ToString((global::System.Boolean)((global::System.Boolean)o.@IsFixed))
                 );
@@ -5800,8 +5762,7 @@ namespace System.Web.Services.Description
                 WriteAttribute(
                     @"fixed",
                     @"",
-                    System
-                        .Xml
+                    System.Xml
                         .XmlConvert
                         .ToString((global::System.Boolean)((global::System.Boolean)o.@IsFixed))
                 );
@@ -5862,8 +5823,7 @@ namespace System.Web.Services.Description
                 WriteAttribute(
                     @"fixed",
                     @"",
-                    System
-                        .Xml
+                    System.Xml
                         .XmlConvert
                         .ToString((global::System.Boolean)((global::System.Boolean)o.@IsFixed))
                 );
@@ -5924,8 +5884,7 @@ namespace System.Web.Services.Description
                 WriteAttribute(
                     @"fixed",
                     @"",
-                    System
-                        .Xml
+                    System.Xml
                         .XmlConvert
                         .ToString((global::System.Boolean)((global::System.Boolean)o.@IsFixed))
                 );
@@ -5986,8 +5945,7 @@ namespace System.Web.Services.Description
                 WriteAttribute(
                     @"fixed",
                     @"",
-                    System
-                        .Xml
+                    System.Xml
                         .XmlConvert
                         .ToString((global::System.Boolean)((global::System.Boolean)o.@IsFixed))
                 );
@@ -6206,8 +6164,7 @@ namespace System.Web.Services.Description
                 WriteAttribute(
                     @"abstract",
                     @"",
-                    System
-                        .Xml
+                    System.Xml
                         .XmlConvert
                         .ToString((global::System.Boolean)((global::System.Boolean)o.@IsAbstract))
                 );
@@ -6230,8 +6187,7 @@ namespace System.Web.Services.Description
                 WriteAttribute(
                     @"mixed",
                     @"",
-                    System
-                        .Xml
+                    System.Xml
                         .XmlConvert
                         .ToString((global::System.Boolean)((global::System.Boolean)o.@IsMixed))
                 );
@@ -6922,8 +6878,7 @@ namespace System.Web.Services.Description
             WriteAttribute(
                 @"mixed",
                 @"",
-                System
-                    .Xml
+                System.Xml
                     .XmlConvert
                     .ToString((global::System.Boolean)((global::System.Boolean)o.@IsMixed))
             );
@@ -22736,8 +22691,7 @@ namespace System.Web.Services.Description
             id73_Soap12OperationBinding = Reader.NameTable.Add(@"Soap12OperationBinding");
             id131_restriction = Reader.NameTable.Add(@"restriction");
             id152_XmlSchemaMaxExclusiveFacet = Reader.NameTable.Add(@"XmlSchemaMaxExclusiveFacet");
-            id135_XmlSchemaSimpleTypeRestriction = Reader
-                .NameTable
+            id135_XmlSchemaSimpleTypeRestriction = Reader.NameTable
                 .Add(@"XmlSchemaSimpleTypeRestriction");
             id188_XmlSchemaAll = Reader.NameTable.Add(@"XmlSchemaAll");
             id116_appinfo = Reader.NameTable.Add(@"appinfo");
@@ -22796,8 +22750,7 @@ namespace System.Web.Services.Description
             id181_XmlSchemaComplexType = Reader.NameTable.Add(@"XmlSchemaComplexType");
             id164_minOccurs = Reader.NameTable.Add(@"minOccurs");
             id144_maxExclusive = Reader.NameTable.Add(@"maxExclusive");
-            id160_XmlSchemaFractionDigitsFacet = Reader
-                .NameTable
+            id160_XmlSchemaFractionDigitsFacet = Reader.NameTable
                 .Add(@"XmlSchemaFractionDigitsFacet");
             id124_XmlSchemaAttribute = Reader.NameTable.Add(@"XmlSchemaAttribute");
             id209_Import = Reader.NameTable.Add(@"Import");

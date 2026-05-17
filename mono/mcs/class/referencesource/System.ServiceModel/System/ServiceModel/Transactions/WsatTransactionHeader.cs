@@ -134,8 +134,7 @@ namespace System.ServiceModel.Transactions
             catch (InvalidCoordinationContextException e)
             {
                 DiagnosticUtility.TraceHandledException(e, TraceEventType.Error);
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new TransactionException(SR.GetString(SR.WsatHeaderCorrupt), e)
                     );

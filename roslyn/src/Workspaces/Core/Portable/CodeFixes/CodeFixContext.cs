@@ -169,8 +169,7 @@ namespace Microsoft.CodeAnalysis.CodeFixes
         )
             : this(
                 document,
-                (diagnostic ?? throw new ArgumentNullException(nameof(diagnostic)))
-                    .Location
+                (diagnostic ?? throw new ArgumentNullException(nameof(diagnostic))).Location
                     .SourceSpan,
                 ImmutableArray.Create(diagnostic),
                 registerCodeFix,
@@ -197,8 +196,7 @@ namespace Microsoft.CodeAnalysis.CodeFixes
         )
             : this(
                 document,
-                (diagnostic ?? throw new ArgumentNullException(nameof(diagnostic)))
-                    .Location
+                (diagnostic ?? throw new ArgumentNullException(nameof(diagnostic))).Location
                     .SourceSpan,
                 ImmutableArray.Create(diagnostic),
                 registerCodeFix,

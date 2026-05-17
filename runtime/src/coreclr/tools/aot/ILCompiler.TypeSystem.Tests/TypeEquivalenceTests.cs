@@ -163,8 +163,7 @@ namespace TypeSystemTests
                     )
                 )
                 {
-                    var typeIdentifierAttribute = module
-                        .MetadataReader
+                    var typeIdentifierAttribute = module.MetadataReader
                         .GetCustomAttribute(attributeHandle)
                         .DecodeValue(customAttributeTypeProvider);
 

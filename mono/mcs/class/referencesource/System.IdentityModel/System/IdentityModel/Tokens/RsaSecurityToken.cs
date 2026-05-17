@@ -104,8 +104,7 @@ namespace System.IdentityModel.Tokens
                         int error = Marshal.GetLastWin32Error();
                         try
                         {
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
                                     new InvalidOperationException(
                                         SR.GetString(SR.FailedToDeleteKeyContainerFile),
@@ -198,8 +197,7 @@ namespace System.IdentityModel.Tokens
             if (typeof(T) == typeof(RsaKeyIdentifierClause))
                 return (T)((object)new RsaKeyIdentifierClause(this.rsa));
 
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(
                     new NotSupportedException(
                         SR.GetString(

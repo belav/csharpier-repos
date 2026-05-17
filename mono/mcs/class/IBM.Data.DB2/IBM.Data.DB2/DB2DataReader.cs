@@ -706,8 +706,7 @@ namespace IBM.Data.DB2
             for (int i = 0; i < _schemaTable.Rows.Count; i++)
             {
                 if (
-                    CultureInfo
-                        .CurrentCulture
+                    CultureInfo.CurrentCulture
                         .CompareInfo
                         .Compare(
                             name,

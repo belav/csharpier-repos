@@ -24,8 +24,7 @@ namespace BoundTreeGenerator
 
             if (args.Length != 3)
             {
-                Console
-                    .Error
+                Console.Error
                     .WriteLine(
                         "Usage: \"{0} <language> <input> <output>\", where <language> is \"VB\" or \"CSharp\"",
                         Path.GetFileNameWithoutExtension(args[0])

@@ -686,8 +686,7 @@ namespace System.Data
                         );
 
                         int parentKeyValuesRecord = childRow.Table.NewRecord();
-                        childRow
-                            .Table
+                        childRow.Table
                             .SetKeyValues(childKey, parentKeyValues, parentKeyValuesRecord);
                         if (childKey.RecordsEqual(childRow.tempRecord, parentKeyValuesRecord))
                         {
@@ -841,8 +840,7 @@ namespace System.Data
             }
             else
             {
-                iDest = destination
-                    .Tables
+                iDest = destination.Tables
                     .IndexOf(RelatedTable.TableName, RelatedTable.Namespace, false); // pass false for last param
             }
             if (iDest < 0)

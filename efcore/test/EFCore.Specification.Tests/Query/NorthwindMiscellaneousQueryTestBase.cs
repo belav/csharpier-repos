@@ -3568,8 +3568,7 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
         {
             try
             {
-                context
-                    .Customers
+                context.Customers
                     .Select(c => Process(c, synchronizationEvent, blockingSemaphore))
                     .ToList();
             }
@@ -3614,8 +3613,7 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
         {
             try
             {
-                context
-                    .Customers
+                context.Customers
                     .Select(c => Process(c, synchronizationEvent, blockingSemaphore))
                     .ToList();
             }
@@ -6301,8 +6299,7 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
     )
     {
         using var context = CreateContext();
-        var orderIds = context
-            .Customers
+        var orderIds = context.Customers
             .Where(c => c.CustomerID == "ALFKI")
             .SelectMany(c => c.Orders)
             .Select(o => o.OrderID)
@@ -6745,8 +6742,7 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
         await Assert.ThrowsAsync<InvalidOperationException>(async () =>
         {
             var results = (
-                await context
-                    .Customers
+                await context.Customers
                     .Select(c => new
                     {
                         c.CustomerID,
@@ -6756,12 +6752,13 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
             )
                 .Select(x => new
                 {
-                    Orders = x.Orders.GroupJoin(
-                        new[] { "ALFKI" },
-                        y => x.CustomerID,
-                        y => y,
-                        (h, id) => new { h.Customer }
-                    ),
+                    Orders = x.Orders
+                        .GroupJoin(
+                            new[] { "ALFKI" },
+                            y => x.CustomerID,
+                            y => y,
+                            (h, id) => new { h.Customer }
+                        ),
                 })
                 .ToList();
 
@@ -6774,10 +6771,8 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
     )
     {
         using var ctx = CreateContext();
-        var result = await ctx.Customers.SingleAsync(
-            c => c.CustomerID == "ALFKI",
-            cancellationToken
-        );
+        var result = await ctx.Customers
+            .SingleAsync(c => c.CustomerID == "ALFKI", cancellationToken);
 
         Assert.Equal("ALFKI", result.CustomerID);
     }

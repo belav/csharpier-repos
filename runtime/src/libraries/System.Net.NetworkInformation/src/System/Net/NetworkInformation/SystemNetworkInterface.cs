@@ -87,8 +87,7 @@ namespace System.Net.NetworkInformation
                 | Interop.IpHlpApi.GetAdaptersAddressesFlags.IncludeWins;
 
             // Figure out the right buffer size for the adapter information.
-            uint result = Interop
-                .IpHlpApi
+            uint result = Interop.IpHlpApi
                 .GetAdaptersAddresses(family, (uint)flags, IntPtr.Zero, IntPtr.Zero, &bufferSize);
 
             while (result == Interop.IpHlpApi.ERROR_BUFFER_OVERFLOW)
@@ -97,8 +96,7 @@ namespace System.Net.NetworkInformation
                 IntPtr buffer = Marshal.AllocHGlobal((int)bufferSize);
                 try
                 {
-                    result = Interop
-                        .IpHlpApi
+                    result = Interop.IpHlpApi
                         .GetAdaptersAddresses(
                             family,
                             (uint)flags,

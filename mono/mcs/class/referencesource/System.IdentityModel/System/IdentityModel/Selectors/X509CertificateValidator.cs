@@ -109,8 +109,7 @@ namespace System.IdentityModel.Selectors
         /// <param name="nodelist">Custom configuration elements</param>
         public virtual void LoadCustomConfiguration(XmlNodeList nodelist)
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(
                     new NotImplementedException(
                         SR.GetString(SR.ID0023, this.GetType().AssemblyQualifiedName)
@@ -258,8 +257,7 @@ namespace System.IdentityModel.Selectors
 
                 if (!chain.Build(certificate))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new SecurityTokenValidationException(
                                 SR.GetString(
@@ -323,8 +321,7 @@ namespace System.IdentityModel.Selectors
                 }
                 catch (SecurityTokenValidationException ex)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new SecurityTokenValidationException(
                                 exception.Message + " " + ex.Message

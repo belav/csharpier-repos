@@ -17,8 +17,7 @@ namespace Microsoft.Extensions.Hosting.WindowsServices.Internal
             try
             {
                 // Get a list of all processes
-                snapshotHandle = Interop
-                    .Kernel32
+                snapshotHandle = Interop.Kernel32
                     .CreateToolhelp32Snapshot(Interop.Kernel32.SnapshotFlags.Process, 0);
 
                 Interop.Kernel32.PROCESSENTRY32 procEntry = default;

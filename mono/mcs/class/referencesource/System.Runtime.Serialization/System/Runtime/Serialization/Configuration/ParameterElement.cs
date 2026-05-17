@@ -18,8 +18,7 @@ namespace System.Runtime.Serialization.Configuration
         {
             if (String.IsNullOrEmpty(typeName))
             {
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -94,8 +93,7 @@ namespace System.Runtime.Serialization.Configuration
                 )
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ConfigurationErrorsException(SR.GetString(SR.ConfigMustSetTypeOrIndex))
                     );
@@ -112,8 +110,7 @@ namespace System.Runtime.Serialization.Configuration
                 )
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ConfigurationErrorsException(
                             SR.GetString(SR.ConfigMustOnlySetTypeOrIndex)
@@ -129,8 +126,7 @@ namespace System.Runtime.Serialization.Configuration
                 && this.Parameters.Count > 0
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ConfigurationErrorsException(
                             SR.GetString(SR.ConfigMustOnlyAddParamsWithType)

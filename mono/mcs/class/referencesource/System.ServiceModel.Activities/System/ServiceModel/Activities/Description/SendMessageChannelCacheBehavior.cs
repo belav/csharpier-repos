@@ -33,8 +33,7 @@ namespace System.ServiceModel.Activities.Description
             WorkflowServiceHost workflowServiceHost = serviceHostBase as WorkflowServiceHost;
             if (workflowServiceHost != null)
             {
-                workflowServiceHost
-                    .WorkflowExtensions
+                workflowServiceHost.WorkflowExtensions
                     .Add(
                         new SendMessageChannelCache(
                             this.FactorySettings,

@@ -29,8 +29,7 @@ namespace System.Net
             {
                 byte[] newBuffer = new byte[size];
 
-                System
-                    .Buffer
+                System.Buffer
                     .BlockCopy(
                         buffer, // src
                         offset, // src index

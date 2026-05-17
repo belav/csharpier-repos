@@ -111,8 +111,7 @@ namespace DbMetal.Generator.Implementation
                 {
                     string connectionString = parameters.Conn;
                     if (string.IsNullOrEmpty(connectionString))
-                        connectionString = loader
-                            .Vendor
+                        connectionString = loader.Vendor
                             .BuildConnectionString(
                                 parameters.Server,
                                 parameters.Database,

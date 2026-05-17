@@ -84,8 +84,7 @@ namespace System.ServiceModel
             WSAddressing10ProblemHeaderQNameFault phf = new WSAddressing10ProblemHeaderQNameFault(
                 this
             );
-            Message message = System
-                .ServiceModel
+            Message message = System.ServiceModel
                 .Channels
                 .Message
                 .CreateMessage(messageVersion, phf, AddressingVersion.WSAddressing10.FaultAction);

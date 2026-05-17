@@ -23,15 +23,13 @@ namespace System.Web.Compilation
 
         internal static VirtualPath GetAppThemeVirtualDir(string themeName)
         {
-            return HttpRuntime
-                .AppDomainAppVirtualPathObject
+            return HttpRuntime.AppDomainAppVirtualPathObject
                 .SimpleCombineWithDir(HttpRuntime.ThemesDirectoryName + "/" + themeName);
         }
 
         internal static VirtualPath GetGlobalThemeVirtualDir(string themeName)
         {
-            return BuildManager
-                .ScriptVirtualDir
+            return BuildManager.ScriptVirtualDir
                 .SimpleCombineWithDir(HttpRuntime.GlobalThemesDirectoryName + "/" + themeName);
         }
 

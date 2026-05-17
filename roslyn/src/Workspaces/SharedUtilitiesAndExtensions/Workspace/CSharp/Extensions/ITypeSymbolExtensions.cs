@@ -141,8 +141,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                     semanticModel = semanticModel.ParentModel;
                 }
 
-                var root = await semanticModel
-                    .SyntaxTree
+                var root = await semanticModel.SyntaxTree
                     .GetRootAsync(cancellationToken)
                     .ConfigureAwait(false);
 

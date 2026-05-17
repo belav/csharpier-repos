@@ -552,8 +552,7 @@ namespace System.ServiceModel.Diagnostics
             }
             if (shouldLogError)
             {
-                DiagnosticUtility
-                    .EventLog
+                DiagnosticUtility.EventLog
                     .LogEvent(
                         TraceEventType.Error,
                         (ushort)System.Runtime.Diagnostics.EventLogCategory.MessageLogging,
@@ -635,8 +634,7 @@ namespace System.ServiceModel.Diagnostics
                         MessageLogger.Filters.Remove(filter);
                         PlainXmlWriter writer = new PlainXmlWriter();
                         filter.WriteXPathTo(writer, null, ConfigurationStrings.Filter, null, true);
-                        DiagnosticUtility
-                            .EventLog
+                        DiagnosticUtility.EventLog
                             .LogEvent(
                                 TraceEventType.Error,
                                 (ushort)System.Runtime.Diagnostics.EventLogCategory.MessageLogging,
@@ -840,11 +838,9 @@ namespace System.ServiceModel.Diagnostics
                     && MachineSettingsSection.EnableLoggingKnownPii;
                 MessageLogger.LogMalformedMessages = section.MessageLogging.LogMalformedMessages;
                 MessageLogger.LogMessageBody = section.MessageLogging.LogEntireMessage;
-                MessageLogger.LogMessagesAtServiceLevel = section
-                    .MessageLogging
+                MessageLogger.LogMessagesAtServiceLevel = section.MessageLogging
                     .LogMessagesAtServiceLevel;
-                MessageLogger.LogMessagesAtTransportLevel = section
-                    .MessageLogging
+                MessageLogger.LogMessagesAtTransportLevel = section.MessageLogging
                     .LogMessagesAtTransportLevel;
                 MessageLogger.MaxNumberOfMessagesToLog = section.MessageLogging.MaxMessagesToLog;
                 MessageLogger.MaxMessageSize = section.MessageLogging.MaxSizeOfMessageToLog;
@@ -927,14 +923,12 @@ namespace System.ServiceModel.Diagnostics
         [SecuritySafeCritical]
         static void LogNonFatalInitializationException(Exception e)
         {
-            DiagnosticUtility
-                .UnsafeEventLog
+            DiagnosticUtility.UnsafeEventLog
                 .UnsafeLogEvent(
                     TraceEventType.Critical,
                     (ushort)System.Runtime.Diagnostics.EventLogCategory.MessageLogging,
                     (uint)
-                        System
-                            .Runtime
+                        System.Runtime
                             .Diagnostics
                             .EventLogEventId
                             .FailedToCreateMessageLoggingTraceSource,
@@ -960,8 +954,7 @@ namespace System.ServiceModel.Diagnostics
         {
             if ((source & MessageLoggingSource.Malformed) == 0)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentException(
                             SR.GetString(SR.OnlyMalformedMessagesAreSupported),
@@ -977,8 +970,7 @@ namespace System.ServiceModel.Diagnostics
             {
                 if (null != MessageLogger.messageTraceSource)
                 {
-                    DiagnosticUtility
-                        .EventLog
+                    DiagnosticUtility.EventLog
                         .LogEvent(
                             TraceEventType.Information,
                             (ushort)System.Runtime.Diagnostics.EventLogCategory.MessageLogging,
@@ -988,8 +980,7 @@ namespace System.ServiceModel.Diagnostics
             }
             else
             {
-                DiagnosticUtility
-                    .EventLog
+                DiagnosticUtility.EventLog
                     .LogEvent(
                         TraceEventType.Information,
                         (ushort)System.Runtime.Diagnostics.EventLogCategory.MessageLogging,

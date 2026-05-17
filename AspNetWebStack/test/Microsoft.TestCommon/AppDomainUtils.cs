@@ -64,8 +64,7 @@ namespace System.Web.WebPages.TestUtils
             );
             var value = (
                 (FieldInfo)
-                    typeof(BuildManager)
-                        .Assembly
+                    typeof(BuildManager).Assembly
                         .GetType("System.Web.Compilation.PreStartInitStage")
                         .GetMember("DuringPreStartInit")[0]
             ).GetValue(null);

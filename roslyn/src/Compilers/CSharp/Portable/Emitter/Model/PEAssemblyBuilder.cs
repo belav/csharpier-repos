@@ -174,8 +174,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
                                 )
                             )
                             {
-                                context
-                                    .Diagnostics
+                                context.Diagnostics
                                     .Add(
                                         new CSDiagnostic(
                                             new CSDiagnosticInfo(ErrorCode.ERR_CryptoHashFailed),
@@ -212,8 +211,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
                     foreach (
                         EmbeddedResource resource in (
                             (Symbols.Metadata.PE.PEModuleSymbol)modules[i]
-                        )
-                            .Module
+                        ).Module
                             .GetEmbeddedResourcesOrThrow()
                     )
                     {
@@ -703,8 +701,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
         )
         {
             var attributeMetadataName = MetadataTypeName.FromFullName(description.FullName);
-            var userDefinedAttribute = _sourceAssembly
-                .SourceModule
+            var userDefinedAttribute = _sourceAssembly.SourceModule
                 .LookupTopLevelMetadataType(ref attributeMetadataName);
             Debug.Assert(
                 userDefinedAttribute is null

@@ -807,8 +807,7 @@ namespace System.Security.Cryptography.X509Certificates.Tests
 
                 Assert.Equal(
                     X509ChainStatusFlags.NotValidForUsage,
-                    holder
-                        .Chain
+                    holder.Chain
                         .ChainStatus
                         .Aggregate(X509ChainStatusFlags.NoError, (a, status) => a | status.Status)
                 );
@@ -826,8 +825,7 @@ namespace System.Security.Cryptography.X509Certificates.Tests
 
                 Assert.Equal(
                     X509ChainStatusFlags.NotValidForUsage,
-                    holder
-                        .Chain
+                    holder.Chain
                         .ChainElements[0]
                         .ChainElementStatus
                         .Aggregate(X509ChainStatusFlags.NoError, (a, status) => a | status.Status)
@@ -835,8 +833,7 @@ namespace System.Security.Cryptography.X509Certificates.Tests
 
                 Assert.Equal(
                     X509ChainStatusFlags.NotValidForUsage,
-                    holder
-                        .Chain
+                    holder.Chain
                         .ChainElements[1]
                         .ChainElementStatus
                         .Aggregate(X509ChainStatusFlags.NoError, (a, status) => a | status.Status)
@@ -844,8 +841,7 @@ namespace System.Security.Cryptography.X509Certificates.Tests
 
                 Assert.Equal(
                     X509ChainStatusFlags.NotValidForUsage,
-                    holder
-                        .Chain
+                    holder.Chain
                         .ChainElements[2]
                         .ChainElementStatus
                         .Aggregate(X509ChainStatusFlags.NoError, (a, status) => a | status.Status)
@@ -1084,8 +1080,7 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             //
             // These certificates have been hard-coded to enable the scenario on
             // netstandard.
-            byte[] endEntityBytes = Encoding
-                .ASCII
+            byte[] endEntityBytes = Encoding.ASCII
                 .GetBytes(
                     @"
 -----BEGIN CERTIFICATE-----
@@ -1105,8 +1100,7 @@ psHHsU9xg0o7L2WXD5qYhD2JCQIVWNRmRZCf1luWlKqUaqWWONMJ44hk8Md+ohxpyCRmbtLRZPzd
 wlkQzPsc9A==
 -----END CERTIFICATE-----"
                 );
-            byte[] intermediateBytes = Encoding
-                .ASCII
+            byte[] intermediateBytes = Encoding.ASCII
                 .GetBytes(
                     @"
 -----BEGIN CERTIFICATE-----
@@ -1125,8 +1119,7 @@ ueuTl2qTtbBh015GuEld61EBXSBLIUqwOAeFYrNJbC4J2mXgnLTWC380cBf5KWeSdjLYgk2sZ1V4
 FKKQecZIhxdlDGzMAbbmEV+2EqS+As2C7+y4dkpG4nnbQe/4AFr8vekHdrI=
 -----END CERTIFICATE-----"
                 );
-            byte[] rootBytes = Encoding
-                .ASCII
+            byte[] rootBytes = Encoding.ASCII
                 .GetBytes(
                     @"
 -----BEGIN CERTIFICATE-----
@@ -1352,8 +1345,7 @@ mLgOGT78BTHjFtn9kAUDhsZXAR9/eKDPM2qqZmsi0KdJIw=="
                 }
                 else
                 {
-                    X509ChainElement certElement = chain
-                        .ChainElements
+                    X509ChainElement certElement = chain.ChainElements
                         .Single(e => e.Certificate.Subject == cert.Subject);
 
                     const X509ChainStatusFlags ExpectedFlag = X509ChainStatusFlags.ExplicitDistrust;
@@ -1446,8 +1438,7 @@ yY1kePIfwE+GFWvagZ2ehANB/6LgBTT8jFhR95Tw2oE3N0I="
                 }
                 else
                 {
-                    X509ChainElement certElement = chain
-                        .ChainElements
+                    X509ChainElement certElement = chain.ChainElements
                         .Single(e => e.Certificate.Subject == intermediateCert.Subject);
 
                     const X509ChainStatusFlags ExpectedFlag = X509ChainStatusFlags.ExplicitDistrust;
@@ -1548,15 +1539,13 @@ LjCvFGJ+RiZCbxIZfUZEuJ5vAH5WOa2S0tYoEAeyfzuLMIqY9xK74nlZ/vzz1cY="
 
         internal static X509ChainStatusFlags AllStatusFlags(this X509Chain chain)
         {
-            return chain
-                .ChainStatus
+            return chain.ChainStatus
                 .Aggregate(X509ChainStatusFlags.NoError, (f, s) => f | s.Status);
         }
 
         internal static X509ChainStatusFlags AllStatusFlags(this X509ChainElement chainElement)
         {
-            return chainElement
-                .ChainElementStatus
+            return chainElement.ChainElementStatus
                 .Aggregate(X509ChainStatusFlags.NoError, (f, s) => f | s.Status);
         }
 

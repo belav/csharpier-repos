@@ -284,8 +284,7 @@ namespace Internal.TypeSystem.Interop
             LoadManagedAddr(codeStream);
             codeStream.Emit(
                 ILOpcode.ldfld,
-                _ilCodeStreams
-                    .Emitter
+                _ilCodeStreams.Emitter
                     .NewToken(InteropTypes.GetHandleRef(Context).GetKnownField("_handle"))
             );
             StoreNativeValue(codeStream);
@@ -306,14 +305,12 @@ namespace Internal.TypeSystem.Interop
             LoadManagedAddr(codeStream);
             codeStream.Emit(
                 ILOpcode.ldfld,
-                _ilCodeStreams
-                    .Emitter
+                _ilCodeStreams.Emitter
                     .NewToken(InteropTypes.GetHandleRef(Context).GetKnownField("_wrapper"))
             );
             codeStream.Emit(
                 ILOpcode.call,
-                _ilCodeStreams
-                    .Emitter
+                _ilCodeStreams.Emitter
                     .NewToken(InteropTypes.GetGC(Context).GetKnownMethod("KeepAlive", null))
             );
         }
@@ -333,8 +330,7 @@ namespace Internal.TypeSystem.Interop
             LoadNativeAddr(codeStream);
             codeStream.Emit(
                 ILOpcode.call,
-                _ilCodeStreams
-                    .Emitter
+                _ilCodeStreams.Emitter
                     .NewToken(
                         InteropStateManager.GetStructMarshallingManagedToNativeThunk(ManagedType)
                     )
@@ -347,8 +343,7 @@ namespace Internal.TypeSystem.Interop
             LoadManagedAddr(codeStream);
             codeStream.Emit(
                 ILOpcode.call,
-                _ilCodeStreams
-                    .Emitter
+                _ilCodeStreams.Emitter
                     .NewToken(
                         InteropStateManager.GetStructMarshallingNativeToManagedThunk(ManagedType)
                     )
@@ -366,8 +361,7 @@ namespace Internal.TypeSystem.Interop
             LoadNativeAddr(codeStream);
             codeStream.Emit(
                 ILOpcode.call,
-                _ilCodeStreams
-                    .Emitter
+                _ilCodeStreams.Emitter
                     .NewToken(InteropStateManager.GetStructMarshallingCleanupThunk(ManagedType))
             );
         }
@@ -740,8 +734,7 @@ namespace Internal.TypeSystem.Interop
             LoadNativeAddr(codeStream);
             codeStream.Emit(
                 ILOpcode.call,
-                _ilCodeStreams
-                    .Emitter
+                _ilCodeStreams.Emitter
                     .NewToken(
                         InteropStateManager.GetStructMarshallingManagedToNativeThunk(ManagedType)
                     )
@@ -770,8 +763,7 @@ namespace Internal.TypeSystem.Interop
             LoadManagedValue(codeStream);
             codeStream.Emit(
                 ILOpcode.call,
-                _ilCodeStreams
-                    .Emitter
+                _ilCodeStreams.Emitter
                     .NewToken(
                         InteropStateManager.GetStructMarshallingNativeToManagedThunk(ManagedType)
                     )
@@ -789,8 +781,7 @@ namespace Internal.TypeSystem.Interop
             LoadNativeAddr(codeStream);
             codeStream.Emit(
                 ILOpcode.call,
-                _ilCodeStreams
-                    .Emitter
+                _ilCodeStreams.Emitter
                     .NewToken(InteropStateManager.GetStructMarshallingCleanupThunk(ManagedType))
             );
         }
@@ -847,8 +838,7 @@ namespace Internal.TypeSystem.Interop
             LoadNativeValue(codeStream);
             codeStream.Emit(
                 ILOpcode.call,
-                _ilCodeStreams
-                    .Emitter
+                _ilCodeStreams.Emitter
                     .NewToken(
                         InteropStateManager.GetStructMarshallingManagedToNativeThunk(ManagedType)
                     )
@@ -869,8 +859,7 @@ namespace Internal.TypeSystem.Interop
             LoadManagedValue(codeStream);
             codeStream.Emit(
                 ILOpcode.call,
-                _ilCodeStreams
-                    .Emitter
+                _ilCodeStreams.Emitter
                     .NewToken(
                         InteropStateManager.GetStructMarshallingNativeToManagedThunk(ManagedType)
                     )
@@ -955,8 +944,7 @@ namespace Internal.TypeSystem.Interop
             LoadNativeValue(codeStream);
             codeStream.Emit(
                 ILOpcode.call,
-                _ilCodeStreams
-                    .Emitter
+                _ilCodeStreams.Emitter
                     .NewToken(
                         Context.GetHelperEntryPoint("InteropHelpers", "AsAnyMarshalManagedToNative")
                     )
@@ -977,8 +965,7 @@ namespace Internal.TypeSystem.Interop
             LoadManagedValue(codeStream);
             codeStream.Emit(
                 ILOpcode.call,
-                _ilCodeStreams
-                    .Emitter
+                _ilCodeStreams.Emitter
                     .NewToken(
                         Context.GetHelperEntryPoint("InteropHelpers", "AsAnyMarshalNativeToManaged")
                     )
@@ -1313,8 +1300,7 @@ namespace Internal.TypeSystem.Interop
                 ThrowHelper.ThrowTypeLoadException(marshallerType);
             }
 
-            var customMarshallerType = Context
-                .SystemModule
+            var customMarshallerType = Context.SystemModule
                 .GetKnownType("System.Runtime.InteropServices", "ICustomMarshaler");
             var getInstanceMethod = marshallerType.GetMethod(
                 "GetInstance",
@@ -1363,8 +1349,7 @@ namespace Internal.TypeSystem.Interop
         {
             var lMarshaller = InitializeMarshallerVariable();
 
-            var customMarshallerType = Context
-                .SystemModule
+            var customMarshallerType = Context.SystemModule
                 .GetKnownType("System.Runtime.InteropServices", "ICustomMarshaler");
             ILEmitter emitter = _ilCodeStreams.Emitter;
             var manageToNativeMethod = customMarshallerType.GetKnownMethod(
@@ -1400,8 +1385,7 @@ namespace Internal.TypeSystem.Interop
         {
             var lMarshaller = InitializeMarshallerVariable();
 
-            var customMarshallerType = Context
-                .SystemModule
+            var customMarshallerType = Context.SystemModule
                 .GetKnownType("System.Runtime.InteropServices", "ICustomMarshaler");
             ILEmitter emitter = _ilCodeStreams.Emitter;
             var marshalNativeToManagedMethod = customMarshallerType.GetKnownMethod(
@@ -1424,8 +1408,7 @@ namespace Internal.TypeSystem.Interop
         {
             var lMarshaller = InitializeMarshallerVariable();
 
-            var customMarshallerType = Context
-                .SystemModule
+            var customMarshallerType = Context.SystemModule
                 .GetKnownType("System.Runtime.InteropServices", "ICustomMarshaler");
             ILEmitter emitter = _ilCodeStreams.Emitter;
 
@@ -1449,8 +1432,7 @@ namespace Internal.TypeSystem.Interop
         {
             var lMarshaller = InitializeMarshallerVariable();
 
-            var customMarshallerType = Context
-                .SystemModule
+            var customMarshallerType = Context.SystemModule
                 .GetKnownType("System.Runtime.InteropServices", "ICustomMarshaler");
             ILEmitter emitter = _ilCodeStreams.Emitter;
 

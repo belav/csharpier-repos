@@ -313,8 +313,7 @@ namespace System.Data.Mapping.Update.Internal
                 )
                 {
                     foreach (
-                        StorageModificationFunctionResultBinding binding in typeFunctionMapping
-                            .InsertFunctionMapping
+                        StorageModificationFunctionResultBinding binding in typeFunctionMapping.InsertFunctionMapping
                             .ResultBindings
                     )
                     {
@@ -327,8 +326,7 @@ namespace System.Data.Mapping.Update.Internal
                 )
                 {
                     foreach (
-                        StorageModificationFunctionResultBinding binding in typeFunctionMapping
-                            .UpdateFunctionMapping
+                        StorageModificationFunctionResultBinding binding in typeFunctionMapping.UpdateFunctionMapping
                             .ResultBindings
                     )
                     {

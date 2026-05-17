@@ -35,8 +35,7 @@ public partial class RefReadonlyParameterTests : CSharpTestBase
 
     private static void VerifyRequiresLocationAttributeSynthesized(ModuleSymbol module)
     {
-        var attributeType = module
-            .GlobalNamespace
+        var attributeType = module.GlobalNamespace
             .GetMember<NamedTypeSymbol>(RequiresLocationAttributeQualifiedName);
         if (module is SourceModuleSymbol)
         {
@@ -165,9 +164,8 @@ public partial class RefReadonlyParameterTests : CSharpTestBase
 
         static void verify(ModuleSymbol m)
         {
-            var attribute = m.GlobalNamespace.GetMember<NamedTypeSymbol>(
-                RequiresLocationAttributeQualifiedName
-            );
+            var attribute = m.GlobalNamespace
+                .GetMember<NamedTypeSymbol>(RequiresLocationAttributeQualifiedName);
             Assert.NotNull(attribute);
 
             var p = m.GlobalNamespace.GetMember<MethodSymbol>("C.M").Parameters.Single();
@@ -8557,8 +8555,7 @@ public partial class RefReadonlyParameterTests : CSharpTestBase
             """;
         var comp = CreateCompilation(
                 source,
-                parseOptions: TestOptions
-                    .RegularPreview
+                parseOptions: TestOptions.RegularPreview
                     .WithDocumentationMode(DocumentationMode.Diagnose)
             )
             .VerifyDiagnostics(
@@ -8604,8 +8601,7 @@ public partial class RefReadonlyParameterTests : CSharpTestBase
             """;
         var comp = CreateCompilation(
                 source,
-                parseOptions: TestOptions
-                    .RegularPreview
+                parseOptions: TestOptions.RegularPreview
                     .WithDocumentationMode(DocumentationMode.Diagnose)
             )
             .VerifyDiagnostics(
@@ -8669,8 +8665,7 @@ public partial class RefReadonlyParameterTests : CSharpTestBase
         static void verify(ModuleSymbol module)
         {
             Assert.Null(
-                module
-                    .GlobalNamespace
+                module.GlobalNamespace
                     .GetMember<NamedTypeSymbol>(RequiresLocationAttributeQualifiedName)
             );
 

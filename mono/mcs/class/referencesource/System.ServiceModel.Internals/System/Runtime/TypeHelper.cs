@@ -114,9 +114,12 @@ namespace System.Runtime
             {
                 if (typeof(T).IsValueType && !IsNullableType(typeof(T)))
                 {
-                    throw Fx.Exception.AsError(
-                        new InvalidCastException(InternalSR.CannotConvertObject(source, typeof(T)))
-                    );
+                    throw Fx.Exception
+                        .AsError(
+                            new InvalidCastException(
+                                InternalSR.CannotConvertObject(source, typeof(T))
+                            )
+                        );
                 }
 
                 return default(T);
@@ -128,9 +131,10 @@ namespace System.Runtime
                 return result;
             }
 
-            throw Fx.Exception.AsError(
-                new InvalidCastException(InternalSR.CannotConvertObject(source, typeof(T)))
-            );
+            throw Fx.Exception
+                .AsError(
+                    new InvalidCastException(InternalSR.CannotConvertObject(source, typeof(T)))
+                );
         }
 
         // get all of the types that this Type implements (based classes, interfaces, etc)

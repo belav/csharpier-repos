@@ -235,8 +235,7 @@ public abstract class AffectedCountModificationCommandBatch : ReaderModification
 
                     commandIndex = lastHandledCommandIndex + 1;
 
-                    onResultSet = await reader
-                        .DbDataReader
+                    onResultSet = await reader.DbDataReader
                         .NextResultAsync(cancellationToken)
                         .ConfigureAwait(false);
                 }
@@ -676,8 +675,7 @@ public abstract class AffectedCountModificationCommandBatch : ReaderModification
         );
 
         if (
-            !Dependencies
-                .UpdateLogger
+            !Dependencies.UpdateLogger
                 .OptimisticConcurrencyException(
                     Dependencies.CurrentContext.Context,
                     entries,
@@ -717,8 +715,7 @@ public abstract class AffectedCountModificationCommandBatch : ReaderModification
 
         if (
             !(
-                await Dependencies
-                    .UpdateLogger
+                await Dependencies.UpdateLogger
                     .OptimisticConcurrencyExceptionAsync(
                         Dependencies.CurrentContext.Context,
                         entries,

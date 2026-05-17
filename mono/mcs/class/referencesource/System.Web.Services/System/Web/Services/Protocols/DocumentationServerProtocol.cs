@@ -274,8 +274,7 @@ namespace System.Web.Services.Protocols
                         Context.Items.Add("wsdlsWithPost", serverType.ServiceDescriptionsWithPost);
                         Context.Items.Add("schemasWithPost", serverType.SchemasWithPost);
                     }
-                    Context
-                        .Items
+                    Context.Items
                         .Add(
                             "conformanceWarnings",
                             WebServicesSection.Current.EnabledConformanceWarnings

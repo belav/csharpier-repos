@@ -867,8 +867,7 @@ RETURNING 1;
     {
         var model = BuildModel(generateKeyValues, computeNonKeyValue);
 
-        return FakeRelationalTestHelpers
-            .Instance
+        return FakeRelationalTestHelpers.Instance
             .CreateInternalEntry(
                 model,
                 entityState,
@@ -918,8 +917,7 @@ RETURNING 1;
             var logger = new FakeRelationalCommandDiagnosticsLogger();
 
             sqlGenerator ??= new FakeSqlGenerator(
-                FakeRelationalTestHelpers
-                    .Instance
+                FakeRelationalTestHelpers.Instance
                     .CreateContextServices()
                     .GetRequiredService<UpdateSqlGeneratorDependencies>()
             );

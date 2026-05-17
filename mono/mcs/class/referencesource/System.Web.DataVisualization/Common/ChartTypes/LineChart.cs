@@ -453,8 +453,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                 // Call Back Paint event
                 if (!selection)
                 {
-                    common
-                        .Chart
+                    common.Chart
                         .CallOnPrePaint(
                             new ChartPaintEventArgs(ser, graph, common, area.PlotAreaPosition)
                         );
@@ -809,8 +808,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                 // Call Paint event
                 if (!selection)
                 {
-                    common
-                        .Chart
+                    common.Chart
                         .CallOnPostPaint(
                             new ChartPaintEventArgs(ser, graph, common, area.PlotAreaPosition)
                         );
@@ -1102,8 +1100,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                         coord[2 * i + 1] = pointNew.Y;
                     }
 
-                    common
-                        .HotRegionsList
+                    common.HotRegionsList
                         .AddHotRegion(path, false, coord, point, series.Name, pointIndex);
                 }
             }
@@ -1518,8 +1515,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             this.lineTension = GetDefaultTension();
             if (dataPointDrawingOrder.Count > 0)
             {
-                Series firstSeries = firstSeries = ((DataPoint3D)dataPointDrawingOrder[0])
-                    .dataPoint
+                Series firstSeries = firstSeries = ((DataPoint3D)dataPointDrawingOrder[0]).dataPoint
                     .series;
                 if (
                     IsLineTensionSupported()
@@ -1628,8 +1624,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                             // Check if point markers lines should be drawn
                             this.showPointLines = false;
                             if (
-                                pointAttr
-                                    .dataPoint
+                                pointAttr.dataPoint
                                     .IsCustomPropertySet(CustomPropertyName.ShowMarkerLines)
                             )
                             {
@@ -1647,8 +1642,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                             else
                             {
                                 if (
-                                    pointAttr
-                                        .dataPoint
+                                    pointAttr.dataPoint
                                         .series
                                         .IsCustomPropertySet(CustomPropertyName.ShowMarkerLines)
                                 )
@@ -1703,8 +1697,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                         //************************************************************
                         if (common.ProcessModeRegions && rectPath != null)
                         {
-                            common
-                                .HotRegionsList
+                            common.HotRegionsList
                                 .AddHotRegion(
                                     rectPath,
                                     false,

@@ -184,12 +184,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Indentation
                         list.Add(
                             FormattingOperations.CreateRelativeIndentBlockOperation(
                                 constructorInitializer.ThisOrBaseKeyword,
-                                constructorInitializer
-                                    .ArgumentList
+                                constructorInitializer.ArgumentList
                                     .OpenParenToken
                                     .GetNextToken(includeZeroWidth: true),
-                                constructorInitializer
-                                    .ArgumentList
+                                constructorInitializer.ArgumentList
                                     .CloseParenToken
                                     .GetPreviousToken(includeZeroWidth: true),
                                 indentationDelta: 1,

@@ -110,8 +110,7 @@ namespace System.Data.EntityClient
                         if (null == providerCommandDefinition)
                         {
                             throw EntityUtil.ProviderIncompatible(
-                                System
-                                    .Data
+                                System.Data
                                     .Entity
                                     .Strings
                                     .ProviderReturnedNullForCreateCommandDefinition
@@ -132,8 +131,7 @@ namespace System.Data.EntityClient
                     FunctionImportMappingNonComposable mapping = GetTargetFunctionMapping(
                         entityCommandTree
                     );
-                    IList<FunctionParameter> returnParameters = entityCommandTree
-                        .EdmFunction
+                    IList<FunctionParameter> returnParameters = entityCommandTree.EdmFunction
                         .ReturnParameters;
                     int resultSetCount = returnParameters.Count > 1 ? returnParameters.Count : 1;
                     _columnMapGenerators = new IColumnMapGenerator[resultSetCount];
@@ -179,8 +177,7 @@ namespace System.Data.EntityClient
                         storeCommandDefinition,
                     };
 
-                    EntitySet firstResultEntitySet = mapping
-                        .FunctionImport
+                    EntitySet firstResultEntitySet = mapping.FunctionImport
                         .EntitySets
                         .FirstOrDefault();
                     if (firstResultEntitySet != null)
@@ -349,8 +346,7 @@ namespace System.Data.EntityClient
                     if (property.TypeUsage.EdmType.BuiltInTypeKind == BuiltInTypeKind.ComplexType)
                     {
                         throw new NotSupportedException(
-                            System
-                                .Data
+                            System.Data
                                 .Entity
                                 .Strings
                                 .ComplexTypeAsReturnTypeAndNestedComplexProperty(
@@ -384,8 +380,7 @@ namespace System.Data.EntityClient
             // Find mapped store function.
             FunctionImportMapping targetFunctionMapping;
             if (
-                !functionCommandTree
-                    .MetadataWorkspace
+                !functionCommandTree.MetadataWorkspace
                     .TryGetFunctionImportMapping(
                         functionCommandTree.EdmFunction,
                         out targetFunctionMapping
@@ -393,8 +388,7 @@ namespace System.Data.EntityClient
             )
             {
                 throw EntityUtil.InvalidOperation(
-                    System
-                        .Data
+                    System.Data
                         .Entity
                         .Strings
                         .EntityClient_UnmappedFunctionImport(
@@ -520,8 +514,7 @@ namespace System.Data.EntityClient
                 }
                 else if (Helper.IsSpatialType(type, out primitiveTypeKind))
                 {
-                    parameter.EdmType = EdmProviderManifest
-                        .Instance
+                    parameter.EdmType = EdmProviderManifest.Instance
                         .GetPrimitiveType(primitiveTypeKind);
                 }
             }
@@ -647,8 +640,7 @@ namespace System.Data.EntityClient
                     // wouldn't be very meaningful.  Instead, I use the IndexOf method and
                     // if I don't find it, it's not a big deal (The store provider must
                     // have added it).
-                    int parameterOrdinal = entityCommand
-                        .Parameters
+                    int parameterOrdinal = entityCommand.Parameters
                         .IndexOf(storeParameter.ParameterName);
                     if (-1 != parameterOrdinal)
                     {

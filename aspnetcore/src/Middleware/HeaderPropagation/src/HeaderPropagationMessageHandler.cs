@@ -81,14 +81,12 @@ public class HeaderPropagationMessageHandler : DelegatingHandler
                     {
                         var value = stringValues.ToString();
                         if (
-                            !request
-                                .Headers
+                            !request.Headers
                                 .TryAddWithoutValidation(entry.OutboundHeaderName, value)
                             && hasContent
                         )
                         {
-                            request
-                                .Content!
+                            request.Content!
                                 .Headers
                                 .TryAddWithoutValidation(entry.OutboundHeaderName, value);
                         }
@@ -97,14 +95,12 @@ public class HeaderPropagationMessageHandler : DelegatingHandler
                     {
                         var values = stringValues.ToArray();
                         if (
-                            !request
-                                .Headers
+                            !request.Headers
                                 .TryAddWithoutValidation(entry.OutboundHeaderName, values)
                             && hasContent
                         )
                         {
-                            request
-                                .Content!
+                            request.Content!
                                 .Headers
                                 .TryAddWithoutValidation(entry.OutboundHeaderName, values);
                         }

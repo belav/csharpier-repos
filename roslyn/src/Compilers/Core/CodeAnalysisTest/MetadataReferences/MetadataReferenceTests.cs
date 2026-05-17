@@ -31,8 +31,7 @@ namespace Microsoft.CodeAnalysis.UnitTests
         [Fact]
         public void CreateFromAssembly_NoMetadata()
         {
-            var dynamicAssembly = AppDomain
-                .CurrentDomain
+            var dynamicAssembly = AppDomain.CurrentDomain
                 .DefineDynamicAssembly(
                     new AssemblyName { Name = "A" },
                     System.Reflection.Emit.AssemblyBuilderAccess.Run
@@ -69,8 +68,7 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 )
             );
 
-            var dynamicAssembly = AppDomain
-                .CurrentDomain
+            var dynamicAssembly = AppDomain.CurrentDomain
                 .DefineDynamicAssembly(
                     new AssemblyName { Name = "Goo" },
                     System.Reflection.Emit.AssemblyBuilderAccess.Run
@@ -660,8 +658,10 @@ namespace Microsoft.CodeAnalysis.UnitTests
         [Fact]
         public void Equivalence()
         {
-            var comparer = CommonReferenceManager<CS.CSharpCompilation, IAssemblySymbolInternal>
-                .MetadataReferenceEqualityComparer
+            var comparer = CommonReferenceManager<
+                CS.CSharpCompilation,
+                IAssemblySymbolInternal
+            >.MetadataReferenceEqualityComparer
                 .Instance;
 
             var f1 = MscorlibRef;
@@ -723,14 +723,15 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 .GetReference(display: "corlib", documentation: docProvider);
 
             var comp = (Compilation)
-                CS.CSharpCompilation.Create(
-                    "goo",
-                    syntaxTrees: new[]
-                    {
-                        CSharpTestSource.Parse("class C : System.Collections.ArrayList { }"),
-                    },
-                    references: new[] { corlib }
-                );
+                CS.CSharpCompilation
+                    .Create(
+                        "goo",
+                        syntaxTrees: new[]
+                        {
+                            CSharpTestSource.Parse("class C : System.Collections.ArrayList { }"),
+                        },
+                        references: new[] { corlib }
+                    );
 
             var c = (ITypeSymbol)comp.GlobalNamespace.GetMembers("C").Single();
             var list = c.BaseType;

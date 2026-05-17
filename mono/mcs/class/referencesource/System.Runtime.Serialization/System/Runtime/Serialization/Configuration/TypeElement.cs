@@ -20,8 +20,7 @@ namespace System.Runtime.Serialization.Configuration
         {
             if (String.IsNullOrEmpty(typeName))
             {
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -101,8 +100,7 @@ namespace System.Runtime.Serialization.Configuration
                     int typeArgsCount = typeArgs == null ? 0 : typeArgs.Length;
                     if (typeArgsCount == 0)
                     {
-                        throw System
-                            .Runtime
+                        throw System.Runtime
                             .Serialization
                             .DiagnosticUtility
                             .ExceptionUtility
@@ -117,8 +115,7 @@ namespace System.Runtime.Serialization.Configuration
                     }
                     else
                     {
-                        throw System
-                            .Runtime
+                        throw System.Runtime
                             .Serialization
                             .DiagnosticUtility
                             .ExceptionUtility
@@ -140,8 +137,7 @@ namespace System.Runtime.Serialization.Configuration
             if (t.IsGenericTypeDefinition)
             {
                 if (parameters.Count != t.GetGenericArguments().Length)
-                    throw System
-                        .Runtime
+                    throw System.Runtime
                         .Serialization
                         .DiagnosticUtility
                         .ExceptionUtility

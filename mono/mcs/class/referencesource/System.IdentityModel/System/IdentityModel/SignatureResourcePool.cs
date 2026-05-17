@@ -61,8 +61,7 @@ namespace System.IdentityModel
             {
                 if (string.IsNullOrEmpty(algorithm))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgument(
                             algorithm,
                             SR.GetString(SR.EmptyOrNullArgumentString, "algorithm")

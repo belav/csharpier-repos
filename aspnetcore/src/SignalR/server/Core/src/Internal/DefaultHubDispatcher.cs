@@ -202,8 +202,7 @@ internal sealed partial class DefaultHubDispatcher<THub> : HubDispatcher<THub>
                 // Check if there is an associated active stream and cancel it if it exists.
                 // The cts will be removed when the streaming method completes executing
                 if (
-                    connection
-                        .ActiveRequestCancellationSources
+                    connection.ActiveRequestCancellationSources
                         .TryGetValue(cancelInvocationMessage.InvocationId!, out var cts)
                 )
                 {
@@ -353,8 +352,7 @@ internal sealed partial class DefaultHubDispatcher<THub> : HubDispatcher<THub>
             bool isStreamCall = descriptor.StreamingParameters != null;
             if (!isStreamCall && !isStreamResponse)
             {
-                return connection
-                    .ActiveInvocationLimit
+                return connection.ActiveInvocationLimit
                     .RunAsync(
                         static state =>
                         {
@@ -1042,8 +1040,7 @@ internal sealed partial class DefaultHubDispatcher<THub> : HubDispatcher<THub>
                         hubMethodInvocationMessage.StreamIds![streamPointer]
                     );
                     var itemType = descriptor.StreamingParameters![streamPointer];
-                    arguments[parameterPointer] = connection
-                        .StreamTracker
+                    arguments[parameterPointer] = connection.StreamTracker
                         .AddStream(
                             hubMethodInvocationMessage.StreamIds[streamPointer],
                             itemType,
@@ -1075,8 +1072,7 @@ internal sealed partial class DefaultHubDispatcher<THub> : HubDispatcher<THub>
         IServiceProviderIsService? serviceProviderIsService = null;
         if (!disableImplicitFromServiceParameters)
         {
-            serviceProviderIsService = scope
-                .ServiceProvider
+            serviceProviderIsService = scope.ServiceProvider
                 .GetService<IServiceProviderIsService>();
         }
 

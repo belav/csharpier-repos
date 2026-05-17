@@ -266,8 +266,7 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
             );
 
             // present item and select
-            var structuralTypeDisplayService = document
-                .Project
+            var structuralTypeDisplayService = document.Project
                 .Services
                 .GetRequiredService<IStructuralTypeDisplayService>();
             var documentationCommentFormattingService =

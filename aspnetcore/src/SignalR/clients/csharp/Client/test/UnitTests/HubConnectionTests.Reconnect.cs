@@ -1100,8 +1100,7 @@ public partial class HubConnectionTests
                         new HandshakeResponseMessage("Error!"),
                         output
                     );
-                    await currentTestConnection
-                        .Application
+                    await currentTestConnection.Application
                         .Output
                         .WriteAsync(output.ToArray())
                         .DefaultTimeout();

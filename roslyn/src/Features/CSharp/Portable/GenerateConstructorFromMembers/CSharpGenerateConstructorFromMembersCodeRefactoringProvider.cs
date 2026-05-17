@@ -92,8 +92,7 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateConstructorFromMembers
             )
                 return null;
 
-            var getAccessor = propertyDeclaration
-                .AccessorList
+            var getAccessor = propertyDeclaration.AccessorList
                 ?.Accessors
                 .FirstOrDefault(a => a.Kind() == SyntaxKind.GetAccessorDeclaration);
             var body =

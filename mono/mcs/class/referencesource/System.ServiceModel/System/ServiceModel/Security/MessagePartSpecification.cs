@@ -49,8 +49,7 @@ namespace System.ServiceModel.Security
             set
             {
                 if (isReadOnly)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
                         );
@@ -81,8 +80,7 @@ namespace System.ServiceModel.Security
         public void Clear()
         {
             if (isReadOnly)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
                     );
@@ -95,8 +93,7 @@ namespace System.ServiceModel.Security
         public void Union(MessagePartSpecification specification)
         {
             if (isReadOnly)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
                     );

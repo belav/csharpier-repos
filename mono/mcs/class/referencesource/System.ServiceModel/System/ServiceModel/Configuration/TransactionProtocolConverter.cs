@@ -48,8 +48,7 @@ namespace System.ServiceModel.Configuration
                     case ConfigurationStrings.WSAtomicTransaction11:
                         return TransactionProtocol.WSAtomicTransaction11;
                     default:
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperArgument(
                                 SR.GetString(SR.ConfigInvalidTransactionFlowProtocolValue, protocol)
                             );

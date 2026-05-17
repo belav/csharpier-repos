@@ -307,8 +307,7 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             var roa = new string[] { "one:1", "two:2", "three:3" }.AsImmutableOrNull();
 
             // Call extension method directly to resolve the ambiguity with EnumerableExtensions.ToDictionary
-            var dict = System
-                .Linq
+            var dict = System.Linq
                 .ImmutableArrayExtensions
                 .ToDictionary(roa, s => s.Split(':').First());
             Assert.Equal("one:1", dict["one"]);
@@ -316,8 +315,7 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             Assert.Equal("three:3", dict["three"]);
             Assert.Throws<KeyNotFoundException>(() => dict["One"]);
 
-            dict = System
-                .Linq
+            dict = System.Linq
                 .ImmutableArrayExtensions
                 .ToDictionary(roa, s => s.Split(':').First(), StringComparer.OrdinalIgnoreCase);
             Assert.Equal("one:1", dict["one"]);
@@ -325,8 +323,7 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             Assert.Equal("three:3", dict["THREE"]);
             Assert.Throws<KeyNotFoundException>(() => dict[""]);
 
-            dict = System
-                .Linq
+            dict = System.Linq
                 .ImmutableArrayExtensions
                 .ToDictionary(roa, s => s.Split(':').First(), s => s.Split(':').Last());
             Assert.Equal("1", dict["one"]);
@@ -334,8 +331,7 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             Assert.Equal("3", dict["three"]);
             Assert.Throws<KeyNotFoundException>(() => dict["THREE"]);
 
-            dict = System
-                .Linq
+            dict = System.Linq
                 .ImmutableArrayExtensions
                 .ToDictionary(
                     roa,
@@ -415,8 +411,7 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         public void SelectAsArrayWithPredicate()
         {
             Assert.Empty(
-                ImmutableArray<object>
-                    .Empty
+                ImmutableArray<object>.Empty
                     .SelectAsArray<object, int>(item => throw null, item => throw null)
             );
 

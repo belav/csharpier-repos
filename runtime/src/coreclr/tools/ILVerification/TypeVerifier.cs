@@ -45,8 +45,7 @@ namespace Internal.TypeVerifier
 
         public void VerifyInterfaces()
         {
-            TypeDefinition typeDefinition = _module
-                .MetadataReader
+            TypeDefinition typeDefinition = _module.MetadataReader
                 .GetTypeDefinition(_typeDefinitionHandle);
             EcmaType type = (EcmaType)_module.GetType(_typeDefinitionHandle);
 
@@ -69,8 +68,7 @@ namespace Internal.TypeVerifier
                 new List<InterfaceMetadataObjects>();
             foreach (InterfaceImplementationHandle interfaceHandle in interfaceHandles)
             {
-                InterfaceImplementation interfaceImplementation = _module
-                    .MetadataReader
+                InterfaceImplementation interfaceImplementation = _module.MetadataReader
                     .GetInterfaceImplementation(interfaceHandle);
                 TypeDesc interfaceTypeDesc =
                     _module.GetType(interfaceImplementation.Interface) as TypeDesc;
@@ -194,8 +192,7 @@ namespace Internal.TypeVerifier
                     "{0}([{1}]0x{2:X8})",
                     methodDesc,
                     module,
-                    module
-                        .MetadataReader
+                    module.MetadataReader
                         .GetToken(((EcmaMethod)methodDesc.GetTypicalMethodDefinition()).Handle)
                 );
             }

@@ -3722,8 +3722,7 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
     {
         var modelBuilder = CreateConventionModelBuilder();
 
-        ((IConventionEntityType)modelBuilder.Entity<TestMethods>().HasNoKey().Metadata)
-            .Builder
+        ((IConventionEntityType)modelBuilder.Entity<TestMethods>().HasNoKey().Metadata).Builder
             .ToFunction(TestMethods.MethodBMi);
 
         VerifyError(

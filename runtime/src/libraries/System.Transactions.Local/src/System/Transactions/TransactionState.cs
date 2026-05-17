@@ -744,8 +744,7 @@ namespace System.Transactions
             enlistments._volatileEnlistmentCount++;
 
             // Make it's state active.
-            VolatileEnlistmentState
-                .VolatileEnlistmentActive
+            VolatileEnlistmentState.VolatileEnlistmentActive
                 .EnterState(
                     enlistments._volatileEnlistments[enlistments._volatileEnlistmentCount - 1]
                 );
@@ -768,8 +767,7 @@ namespace System.Transactions
         )
         {
             tx._transactionCompletedDelegate = (TransactionCompletedEventHandler?)
-                System
-                    .Delegate
+                System.Delegate
                     .Combine(tx._transactionCompletedDelegate, transactionCompletedDelegate);
         }
     }
@@ -793,13 +791,14 @@ namespace System.Transactions
             tx._promoteState.EnterState(tx);
             // Note that just because we did an EnterState above does not mean that the state will be
             // the same when the next method is called.
-            return tx.State!.EnlistDurable(
-                tx,
-                resourceManagerIdentifier,
-                enlistmentNotification,
-                enlistmentOptions,
-                atomicTransaction
-            );
+            return tx.State!
+                .EnlistDurable(
+                    tx,
+                    resourceManagerIdentifier,
+                    enlistmentNotification,
+                    enlistmentOptions,
+                    atomicTransaction
+                );
         }
 
         internal override Enlistment EnlistDurable(
@@ -819,13 +818,14 @@ namespace System.Transactions
             {
                 // These circumstances cause promotion
                 tx._promoteState.EnterState(tx);
-                return tx.State!.EnlistDurable(
-                    tx,
-                    resourceManagerIdentifier,
-                    enlistmentNotification,
-                    enlistmentOptions,
-                    atomicTransaction
-                );
+                return tx.State!
+                    .EnlistDurable(
+                        tx,
+                        resourceManagerIdentifier,
+                        enlistmentNotification,
+                        enlistmentOptions,
+                        atomicTransaction
+                    );
             }
 
             // Create a durable enlistment
@@ -1174,12 +1174,8 @@ namespace System.Transactions
         )
         {
             tx._promoteState.EnterState(tx);
-            return tx.State!.EnlistVolatile(
-                tx,
-                enlistmentNotification,
-                enlistmentOptions,
-                atomicTransaction
-            );
+            return tx.State!
+                .EnlistVolatile(tx, enlistmentNotification, enlistmentOptions, atomicTransaction);
         }
 
         internal override Enlistment EnlistVolatile(
@@ -1190,12 +1186,8 @@ namespace System.Transactions
         )
         {
             tx._promoteState.EnterState(tx);
-            return tx.State!.EnlistVolatile(
-                tx,
-                enlistmentNotification,
-                enlistmentOptions,
-                atomicTransaction
-            );
+            return tx.State!
+                .EnlistVolatile(tx, enlistmentNotification, enlistmentOptions, atomicTransaction);
         }
 
         // Every state derived from the base must override status
@@ -2116,10 +2108,8 @@ namespace System.Transactions
                 Enlistment en = new Enlistment(enlistmentNotification, tx, atomicTransaction);
                 EnlistmentState.EnlistmentStatePromoted.EnterState(en.InternalEnlistment);
 
-                en.InternalEnlistment.PromotedEnlistment = tx.PromotedTransaction.EnlistVolatile(
-                    en.InternalEnlistment,
-                    enlistmentOptions
-                );
+                en.InternalEnlistment.PromotedEnlistment = tx.PromotedTransaction
+                    .EnlistVolatile(en.InternalEnlistment, enlistmentOptions);
                 return en;
             }
             finally
@@ -2148,10 +2138,8 @@ namespace System.Transactions
                 Enlistment en = new Enlistment(enlistmentNotification, tx, atomicTransaction);
                 EnlistmentState.EnlistmentStatePromoted.EnterState(en.InternalEnlistment);
 
-                en.InternalEnlistment.PromotedEnlistment = tx.PromotedTransaction.EnlistVolatile(
-                    en.InternalEnlistment,
-                    enlistmentOptions
-                );
+                en.InternalEnlistment.PromotedEnlistment = tx.PromotedTransaction
+                    .EnlistVolatile(en.InternalEnlistment, enlistmentOptions);
                 return en;
             }
             finally
@@ -2188,12 +2176,13 @@ namespace System.Transactions
                 );
                 EnlistmentState.EnlistmentStatePromoted.EnterState(en.InternalEnlistment);
 
-                en.InternalEnlistment.PromotedEnlistment = tx.PromotedTransaction.EnlistDurable(
-                    resourceManagerIdentifier,
-                    (DurableInternalEnlistment)en.InternalEnlistment,
-                    false,
-                    enlistmentOptions
-                );
+                en.InternalEnlistment.PromotedEnlistment = tx.PromotedTransaction
+                    .EnlistDurable(
+                        resourceManagerIdentifier,
+                        (DurableInternalEnlistment)en.InternalEnlistment,
+                        false,
+                        enlistmentOptions
+                    );
                 return en;
             }
             finally
@@ -2230,12 +2219,13 @@ namespace System.Transactions
                 );
                 EnlistmentState.EnlistmentStatePromoted.EnterState(en.InternalEnlistment);
 
-                en.InternalEnlistment.PromotedEnlistment = tx.PromotedTransaction.EnlistDurable(
-                    resourceManagerIdentifier,
-                    (DurableInternalEnlistment)en.InternalEnlistment,
-                    true,
-                    enlistmentOptions
-                );
+                en.InternalEnlistment.PromotedEnlistment = tx.PromotedTransaction
+                    .EnlistDurable(
+                        resourceManagerIdentifier,
+                        (DurableInternalEnlistment)en.InternalEnlistment,
+                        true,
+                        enlistmentOptions
+                    );
                 return en;
             }
             finally
@@ -2285,8 +2275,7 @@ namespace System.Transactions
         {
             // Add this delegate to the list of delegates to be notified of the outcome.
             tx._transactionCompletedDelegate = (TransactionCompletedEventHandler?)
-                System
-                    .Delegate
+                System.Delegate
                     .Combine(tx._transactionCompletedDelegate, transactionCompletedDelegate);
         }
 
@@ -2649,8 +2638,7 @@ namespace System.Transactions
                 options.Timeout = newTimeout;
 
                 // Create a new distributed transaction.
-                distributedTx = TransactionManager
-                    .DistributedTransactionManager
+                distributedTx = TransactionManager.DistributedTransactionManager
                     .CreateTransaction(options);
                 distributedTx.SavedLtmPromotedTransaction = tx._outcomeSource;
 
@@ -2725,10 +2713,13 @@ namespace System.Transactions
                 }
 
                 Debug.Assert(tx.PromotedTransaction != null);
-                volatiles.VolatileDemux._promotedEnlistment = tx.PromotedTransaction.EnlistVolatile(
-                    volatiles.VolatileDemux,
-                    phase0 ? EnlistmentOptions.EnlistDuringPrepareRequired : EnlistmentOptions.None
-                );
+                volatiles.VolatileDemux._promotedEnlistment = tx.PromotedTransaction
+                    .EnlistVolatile(
+                        volatiles.VolatileDemux,
+                        phase0
+                            ? EnlistmentOptions.EnlistDuringPrepareRequired
+                            : EnlistmentOptions.None
+                    );
             }
 
             return true;
@@ -2742,12 +2733,13 @@ namespace System.Transactions
                 // Directly enlist the durable enlistment with the resource manager.
                 InternalEnlistment enlistment = tx._durableEnlistment;
                 Debug.Assert(tx.PromotedTransaction != null);
-                IPromotedEnlistment promotedEnlistment = tx.PromotedTransaction.EnlistDurable(
-                    enlistment.ResourceManagerIdentifier,
-                    (DurableInternalEnlistment)enlistment,
-                    enlistment.SinglePhaseNotification != null,
-                    EnlistmentOptions.None
-                );
+                IPromotedEnlistment promotedEnlistment = tx.PromotedTransaction
+                    .EnlistDurable(
+                        enlistment.ResourceManagerIdentifier,
+                        (DurableInternalEnlistment)enlistment,
+                        enlistment.SinglePhaseNotification != null,
+                        EnlistmentOptions.None
+                    );
 
                 // Promote the enlistment.
                 tx._durableEnlistment
@@ -4102,8 +4094,7 @@ namespace System.Transactions
         {
             // Add this guy to the list of people to be notified of the outcome.
             tx._transactionCompletedDelegate = (TransactionCompletedEventHandler?)
-                System
-                    .Delegate
+                System.Delegate
                     .Combine(tx._transactionCompletedDelegate, transactionCompletedDelegate);
         }
 
@@ -5363,13 +5354,14 @@ namespace System.Transactions
 
             // Now we need to create the durable enlistment that will replace the PSPE enlistment. Use the internalEnlistment of
             // this newly created durable enlistment as the tx.durableEnlistment.
-            enlistment = tx.State!.EnlistDurable(
-                tx,
-                resourceManagerIdentifier,
-                enlistmentNotification,
-                enlistmentOptions,
-                atomicTransaction
-            );
+            enlistment = tx.State!
+                .EnlistDurable(
+                    tx,
+                    resourceManagerIdentifier,
+                    enlistmentNotification,
+                    enlistmentOptions,
+                    atomicTransaction
+                );
             tx._durableEnlistment = enlistment.InternalEnlistment;
 
             return enlistment;

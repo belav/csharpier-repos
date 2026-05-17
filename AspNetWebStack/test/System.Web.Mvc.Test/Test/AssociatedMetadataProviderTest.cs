@@ -94,8 +94,7 @@ namespace System.Web.Mvc.Test
             provider.GetMetadataForProperties(model, typeof(PropertyModel)).ToList(); // Call ToList() to force the lazy evaluation to evaluate
 
             // Assert
-            CreateMetadataParams local = provider
-                .CreateMetadataLog
+            CreateMetadataParams local = provider.CreateMetadataLog
                 .Single(m =>
                     m.ContainerType == typeof(PropertyModel) && m.PropertyName == "LocalAttributes"
                 );
@@ -103,8 +102,7 @@ namespace System.Web.Mvc.Test
             Assert.Equal(42, local.Model);
             Assert.Contains(local.Attributes, a => a is RequiredAttribute);
 
-            CreateMetadataParams metadata = provider
-                .CreateMetadataLog
+            CreateMetadataParams metadata = provider.CreateMetadataLog
                 .Single(m =>
                     m.ContainerType == typeof(PropertyModel)
                     && m.PropertyName == "MetadataAttributes"
@@ -113,8 +111,7 @@ namespace System.Web.Mvc.Test
             Assert.Equal("hello", metadata.Model);
             Assert.Contains(metadata.Attributes, a => a is RangeAttribute);
 
-            CreateMetadataParams mixed = provider
-                .CreateMetadataLog
+            CreateMetadataParams mixed = provider.CreateMetadataLog
                 .Single(m =>
                     m.ContainerType == typeof(PropertyModel) && m.PropertyName == "MixedAttributes"
                 );
@@ -275,8 +272,7 @@ namespace System.Web.Mvc.Test
 
             // Assert
             Assert.Same(metadata, result);
-            CreateMetadataParams parms = provider
-                .CreateMetadataLog
+            CreateMetadataParams parms = provider.CreateMetadataLog
                 .Single(p => p.PropertyName == "MetadataAttributes");
             Assert.Contains(parms.Attributes, a => a is RangeAttribute);
         }
@@ -304,8 +300,7 @@ namespace System.Web.Mvc.Test
 
             // Assert
             Assert.Same(metadata, result);
-            CreateMetadataParams parms = provider
-                .CreateMetadataLog
+            CreateMetadataParams parms = provider.CreateMetadataLog
                 .Single(p => p.PropertyName == "MixedAttributes");
             Assert.Contains(parms.Attributes, a => a is RequiredAttribute);
             Assert.Contains(parms.Attributes, a => a is RangeAttribute);
@@ -344,8 +339,7 @@ namespace System.Web.Mvc.Test
 
             // Assert
             Assert.Same(metadata, result);
-            CreateMetadataParams parms = provider
-                .CreateMetadataLog
+            CreateMetadataParams parms = provider.CreateMetadataLog
                 .Single(p => p.ModelType == typeof(TypeModel));
             Assert.Contains(parms.Attributes, a => a is ReadOnlyAttribute);
         }

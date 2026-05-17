@@ -187,8 +187,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
         public override ImmutableHashSet<char> TriggerCharacters { get; } =
             CompletionUtilities.CommonTriggerCharacters.Add(' ');
 
-        private static readonly CompletionItemRules s_tupleRules = CompletionItemRules
-            .Default
+        private static readonly CompletionItemRules s_tupleRules = CompletionItemRules.Default
             .WithCommitCharacterRule(
                 CharacterSetModificationRule.Create(CharacterSetModificationKind.Remove, ':')
             );

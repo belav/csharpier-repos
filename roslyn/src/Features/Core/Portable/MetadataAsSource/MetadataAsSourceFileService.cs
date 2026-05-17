@@ -144,8 +144,7 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
 
         private static void AssertIsMainThread(MetadataAsSourceWorkspace workspace)
         {
-            var threadingService = workspace
-                .Services
+            var threadingService = workspace.Services
                 .GetRequiredService<IWorkspaceThreadingServiceProvider>()
                 .Service;
             Contract.ThrowIfFalse(threadingService.IsOnMainThread);
@@ -170,8 +169,7 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
                         continue;
 
                     if (
-                        provider
-                            .Value
+                        provider.Value
                             .TryAddDocumentToWorkspace(workspace, filePath, sourceTextContainer)
                     )
                         return true;

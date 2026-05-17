@@ -15,8 +15,7 @@ namespace System.Text.Json.Serialization.Tests
         public static void AddPrefixToEveryPropertyOfClass()
         {
             DefaultJsonTypeInfoResolver resolver = new();
-            resolver
-                .Modifiers
+            resolver.Modifiers
                 .Add(
                     (ti) =>
                     {
@@ -52,8 +51,7 @@ namespace System.Text.Json.Serialization.Tests
         public static void AppendCharacterWhenSerializingField()
         {
             DefaultJsonTypeInfoResolver resolver = new();
-            resolver
-                .Modifiers
+            resolver.Modifiers
                 .Add(
                     (ti) =>
                     {
@@ -101,8 +99,7 @@ namespace System.Text.Json.Serialization.Tests
         public static void DoNotSerializeValue42()
         {
             DefaultJsonTypeInfoResolver resolver = new();
-            resolver
-                .Modifiers
+            resolver.Modifiers
                 .Add(
                     (ti) =>
                     {
@@ -145,8 +142,7 @@ namespace System.Text.Json.Serialization.Tests
         public static void DoNotSerializePropertyWithNameButDeserializeIt()
         {
             DefaultJsonTypeInfoResolver resolver = new();
-            resolver
-                .Modifiers
+            resolver.Modifiers
                 .Add(
                     (ti) =>
                     {
@@ -184,8 +180,7 @@ namespace System.Text.Json.Serialization.Tests
         public static void DoNotDeserializePropertyWithNameButSerializeIt()
         {
             DefaultJsonTypeInfoResolver resolver = new();
-            resolver
-                .Modifiers
+            resolver.Modifiers
                 .Add(
                     (ti) =>
                     {
@@ -221,8 +216,7 @@ namespace System.Text.Json.Serialization.Tests
         public static void SetCustomNumberHandlingForAProperty()
         {
             DefaultJsonTypeInfoResolver resolver = new();
-            resolver
-                .Modifiers
+            resolver.Modifiers
                 .Add(
                     (ti) =>
                     {
@@ -260,8 +254,7 @@ namespace System.Text.Json.Serialization.Tests
         public static void SetCustomConverterForIntProperty()
         {
             DefaultJsonTypeInfoResolver resolver = new();
-            resolver
-                .Modifiers
+            resolver.Modifiers
                 .Add(
                     (ti) =>
                     {
@@ -297,8 +290,7 @@ namespace System.Text.Json.Serialization.Tests
         public static void SetCustomConverterForListProperty()
         {
             DefaultJsonTypeInfoResolver resolver = new();
-            resolver
-                .Modifiers
+            resolver.Modifiers
                 .Add(
                     (ti) =>
                     {
@@ -341,8 +333,7 @@ namespace System.Text.Json.Serialization.Tests
         public static void SetCustomConverterForDictionaryProperty()
         {
             DefaultJsonTypeInfoResolver resolver = new();
-            resolver
-                .Modifiers
+            resolver.Modifiers
                 .Add(
                     (ti) =>
                     {
@@ -391,8 +382,7 @@ namespace System.Text.Json.Serialization.Tests
         public static void CreateObjectWithDefaults(bool useTypedCreateObject)
         {
             DefaultJsonTypeInfoResolver resolver = new();
-            resolver
-                .Modifiers
+            resolver.Modifiers
                 .Add(
                     (ti) =>
                     {
@@ -450,8 +440,7 @@ namespace System.Text.Json.Serialization.Tests
         public static void CreateObjectForListWithDefaults(bool useTypedCreateObject)
         {
             DefaultJsonTypeInfoResolver resolver = new();
-            resolver
-                .Modifiers
+            resolver.Modifiers
                 .Add(
                     (ti) =>
                     {
@@ -511,8 +500,7 @@ namespace System.Text.Json.Serialization.Tests
         public static void CreateObjectForDictionaryWithDefaults(bool useTypedCreateObject)
         {
             DefaultJsonTypeInfoResolver resolver = new();
-            resolver
-                .Modifiers
+            resolver.Modifiers
                 .Add(
                     (ti) =>
                     {
@@ -587,8 +575,7 @@ namespace System.Text.Json.Serialization.Tests
         public static void SetCustomNumberHandlingForAType()
         {
             DefaultJsonTypeInfoResolver resolver = new();
-            resolver
-                .Modifiers
+            resolver.Modifiers
                 .Add(
                     (ti) =>
                     {

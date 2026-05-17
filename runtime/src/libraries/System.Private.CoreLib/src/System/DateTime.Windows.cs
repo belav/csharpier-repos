@@ -159,8 +159,7 @@ namespace System
         {
             Interop.NtDll.SYSTEM_LEAP_SECOND_INFORMATION slsi;
 
-            return Interop
-                    .NtDll
+            return Interop.NtDll
                     .NtQuerySystemInformation(
                         Interop.NtDll.SystemLeapSecondInformation,
                         &slsi,
@@ -174,8 +173,7 @@ namespace System
             ulong*,
             void> GetGetSystemTimeAsFileTimeFnPtr()
         {
-            IntPtr kernel32Lib = Interop
-                .Kernel32
+            IntPtr kernel32Lib = Interop.Kernel32
                 .LoadLibraryEx(
                     Interop.Libraries.Kernel32,
                     IntPtr.Zero,
@@ -291,8 +289,7 @@ namespace System
                 fileTimeNow + LeapSecondCache.ValidityPeriodInTicks;
             Interop.Kernel32.SYSTEMTIME systemTimeAtEndOfValidityPeriod;
             if (
-                Interop
-                    .Kernel32
+                Interop.Kernel32
                     .FileTimeToSystemTime(
                         &fileTimeAtEndOfValidityPeriod,
                         &systemTimeAtEndOfValidityPeriod
@@ -336,8 +333,7 @@ namespace System
 
                 ulong fileTimeAtBeginningOfDay;
                 if (
-                    Interop
-                        .Kernel32
+                    Interop.Kernel32
                         .SystemTimeToFileTime(
                             &systemTimeAtBeginningOfDay,
                             &fileTimeAtBeginningOfDay

@@ -388,8 +388,7 @@ namespace System.Net.Mail
         private static void AuthenticateCallback(object? state)
         {
             AuthenticateCallbackContext context = (AuthenticateCallbackContext)state!;
-            context._result = context
-                ._module
+            context._result = context._module
                 .Authenticate(
                     null,
                     context._credential,
@@ -866,8 +865,7 @@ namespace System.Net.Mail
                             continue;
                         }
 
-                        NetworkCredential? credential = _connection
-                            ._credentials
+                        NetworkCredential? credential = _connection._credentials
                             .GetCredential(_host, _port, module.AuthenticationType);
                         if (credential == null)
                             continue;
@@ -937,8 +935,7 @@ namespace System.Net.Mail
                         }
                         else if ((int)info.StatusCode == 235)
                         {
-                            thisPtr
-                                ._connection
+                            thisPtr._connection
                                 ._authenticationModules[thisPtr._currentModule]
                                 .CloseContext(thisPtr._connection);
                             thisPtr._connection._isConnected = true;
@@ -1015,8 +1012,7 @@ namespace System.Net.Mail
                         LineInfo info = AuthCommand.EndSend(result);
                         if ((int)info.StatusCode == 235)
                         {
-                            thisPtr
-                                ._connection
+                            thisPtr._connection
                                 ._authenticationModules[thisPtr._currentModule]
                                 .CloseContext(thisPtr._connection);
                             thisPtr._connection._isConnected = true;

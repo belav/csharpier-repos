@@ -345,8 +345,7 @@ public static class SqlServerModelBuilderExtensions
     {
         if (modelBuilder.CanSetValueGenerationStrategy(valueGenerationStrategy, fromDataAnnotation))
         {
-            modelBuilder
-                .Metadata
+            modelBuilder.Metadata
                 .SetValueGenerationStrategy(valueGenerationStrategy, fromDataAnnotation);
             if (valueGenerationStrategy != SqlServerValueGenerationStrategy.IdentityColumn)
             {

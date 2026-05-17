@@ -60,8 +60,7 @@ internal sealed class SwaggathererApplication : CommandLineApplication
 
         if (InputDirectory.HasValue())
         {
-            Input
-                .Values
+            Input.Values
                 .AddRange(
                     Directory.EnumerateFiles(
                         InputDirectory.Value(),

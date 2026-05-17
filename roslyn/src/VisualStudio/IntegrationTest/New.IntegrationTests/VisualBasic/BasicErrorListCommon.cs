@@ -24,8 +24,7 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.VisualBasic
         [IdeFact(Skip = "https://github.com/dotnet/roslyn/issues/63041")]
         public virtual async Task ErrorList()
         {
-            await TestServices
-                .Editor
+            await TestServices.Editor
                 .SetTextAsync(
                     @"
 Module Module1
@@ -48,8 +47,7 @@ End Module
                 "(Compiler) Class1.vb(4, 24): error BC30002: Type 'P' is not defined.",
                 "(Compiler) Class1.vb(9, 9): error BC30451: 'Goo' is not declared. It may be inaccessible due to its protection level.",
             };
-            await TestServices
-                .Workspace
+            await TestServices.Workspace
                 .WaitForAllAsyncOperationsAsync(
                     [
                         FeatureAttribute.Workspace,
@@ -60,31 +58,26 @@ End Module
                     ],
                     HangMitigatingCancellationToken
                 );
-            var actualContents = await TestServices
-                .ErrorList
+            var actualContents = await TestServices.ErrorList
                 .GetErrorsAsync(HangMitigatingCancellationToken);
             AssertEx.EqualOrDiff(
                 string.Join(Environment.NewLine, expectedContents),
                 string.Join(Environment.NewLine, actualContents)
             );
 
-            await TestServices
-                .ErrorList
+            await TestServices.ErrorList
                 .NavigateToErrorListItemAsync(
                     0,
                     isPreview: false,
                     shouldActivate: true,
                     HangMitigatingCancellationToken
                 );
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .CaretPositionAsync(43, HangMitigatingCancellationToken);
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .BuildSolutionAndWaitAsync(HangMitigatingCancellationToken);
             await TestServices.ErrorList.ShowErrorListAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .Workspace
+            await TestServices.Workspace
                 .WaitForAllAsyncOperationsAsync(
                     [
                         FeatureAttribute.Workspace,
@@ -95,8 +88,7 @@ End Module
                     ],
                     HangMitigatingCancellationToken
                 );
-            actualContents = await TestServices
-                .ErrorList
+            actualContents = await TestServices.ErrorList
                 .GetErrorsAsync(HangMitigatingCancellationToken);
             AssertEx.EqualOrDiff(
                 string.Join(Environment.NewLine, expectedContents),
@@ -109,8 +101,7 @@ End Module
         )]
         public virtual async Task ErrorsDuringMethodBodyEditing()
         {
-            await TestServices
-                .Editor
+            await TestServices.Editor
                 .SetTextAsync(
                     @"
 Namespace N
@@ -124,14 +115,12 @@ End Namespace
 ",
                     HangMitigatingCancellationToken
                 );
-            await TestServices
-                .Editor
+            await TestServices.Editor
                 .PlaceCaretAsync(" Comment", charsOffset: -2, HangMitigatingCancellationToken);
             await TestServices.Input.SendAsync("F = 0", HangMitigatingCancellationToken);
             await TestServices.ErrorList.ShowErrorListAsync(HangMitigatingCancellationToken);
             var expectedContents = Array.Empty<string>();
-            await TestServices
-                .Workspace
+            await TestServices.Workspace
                 .WaitForAllAsyncOperationsAsync(
                     [
                         FeatureAttribute.Workspace,
@@ -142,8 +131,7 @@ End Namespace
                     ],
                     HangMitigatingCancellationToken
                 );
-            var actualContents = await TestServices
-                .ErrorList
+            var actualContents = await TestServices.ErrorList
                 .GetErrorsAsync(HangMitigatingCancellationToken);
             AssertEx.EqualOrDiff(
                 string.Join(Environment.NewLine, expectedContents),
@@ -151,8 +139,7 @@ End Namespace
             );
 
             await TestServices.Editor.ActivateAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .Editor
+            await TestServices.Editor
                 .PlaceCaretAsync(
                     "F = 0 ' Comment",
                     charsOffset: -1,
@@ -164,8 +151,7 @@ End Namespace
             [
                 "(Compiler) Class1.vb(6, 13): error BC30451: 'FF' is not declared. It may be inaccessible due to its protection level.",
             ];
-            await TestServices
-                .Workspace
+            await TestServices.Workspace
                 .WaitForAllAsyncOperationsAsync(
                     [
                         FeatureAttribute.Workspace,
@@ -176,8 +162,7 @@ End Namespace
                     ],
                     HangMitigatingCancellationToken
                 );
-            actualContents = await TestServices
-                .ErrorList
+            actualContents = await TestServices.ErrorList
                 .GetErrorsAsync(HangMitigatingCancellationToken);
             AssertEx.EqualOrDiff(
                 string.Join(Environment.NewLine, expectedContents),
@@ -185,20 +170,17 @@ End Namespace
             );
 
             await TestServices.Editor.ActivateAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .Editor
+            await TestServices.Editor
                 .PlaceCaretAsync(
                     "FF = 0 ' Comment",
                     charsOffset: -1,
                     HangMitigatingCancellationToken
                 );
-            await TestServices
-                .Input
+            await TestServices.Input
                 .SendAsync(VirtualKeyCode.DELETE, HangMitigatingCancellationToken);
             await TestServices.ErrorList.ShowErrorListAsync(HangMitigatingCancellationToken);
             expectedContents = Array.Empty<string>();
-            await TestServices
-                .Workspace
+            await TestServices.Workspace
                 .WaitForAllAsyncOperationsAsync(
                     [
                         FeatureAttribute.Workspace,
@@ -209,8 +191,7 @@ End Namespace
                     ],
                     HangMitigatingCancellationToken
                 );
-            actualContents = await TestServices
-                .ErrorList
+            actualContents = await TestServices.ErrorList
                 .GetErrorsAsync(HangMitigatingCancellationToken);
             AssertEx.EqualOrDiff(
                 string.Join(Environment.NewLine, expectedContents),
@@ -222,8 +203,7 @@ End Namespace
         public virtual async Task BuildErrorsInClosedFiles()
         {
             // Enter code with compiler error.
-            await TestServices
-                .Editor
+            await TestServices.Editor
                 .SetTextAsync(
                     @"Class Class1
 ",
@@ -235,16 +215,14 @@ End Namespace
             await TestServices.SolutionExplorer.CloseActiveWindow(HangMitigatingCancellationToken);
 
             // Build and verify build failure in the output window.
-            var buildSummary = await TestServices
-                .SolutionExplorer
+            var buildSummary = await TestServices.SolutionExplorer
                 .BuildSolutionAndWaitAsync(HangMitigatingCancellationToken);
             Assert.Equal(
                 "========== Build: 0 succeeded, 1 failed, 0 up-to-date, 0 skipped ==========",
                 buildSummary
             );
 
-            await TestServices
-                .Workspace
+            await TestServices.Workspace
                 .WaitForAllAsyncOperationsAsync(
                     [
                         FeatureAttribute.Workspace,
@@ -258,8 +236,7 @@ End Namespace
 
             // Verify the build error is listed in the error list for closed file.
             await TestServices.ErrorList.ShowBuildErrorsAsync(HangMitigatingCancellationToken);
-            var actualErrors = await TestServices
-                .ErrorList
+            var actualErrors = await TestServices.ErrorList
                 .GetBuildErrorsAsync(HangMitigatingCancellationToken);
             var expectedErrors = new[]
             {

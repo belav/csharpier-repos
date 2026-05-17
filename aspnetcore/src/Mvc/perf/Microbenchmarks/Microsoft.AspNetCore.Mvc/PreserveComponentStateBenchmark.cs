@@ -78,8 +78,7 @@ public class PreserveComponentStateBenchmark
     public async Task PersistComponentStateTagHelperWebAssemblyAsync()
     {
         _tagHelper.ViewContext = GetViewContext();
-        var state = _tagHelper
-            .ViewContext
+        var state = _tagHelper.ViewContext
             .HttpContext
             .RequestServices
             .GetRequiredService<PersistentComponentState>();

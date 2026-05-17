@@ -277,29 +277,25 @@ namespace System.ServiceModel.Configuration
         {
             if (string.IsNullOrEmpty(channelEndpointElement.Binding))
             {
-                channelEndpointElement.Binding = WebHttpBinding
-                    .WebHttpBindingConfigurationStrings
+                channelEndpointElement.Binding = WebHttpBinding.WebHttpBindingConfigurationStrings
                     .WebHttpBindingCollectionElementName;
             }
             else if (
                 !string.Equals(
                     channelEndpointElement.Binding,
-                    WebHttpBinding
-                        .WebHttpBindingConfigurationStrings
+                    WebHttpBinding.WebHttpBindingConfigurationStrings
                         .WebHttpBindingCollectionElementName,
                     StringComparison.Ordinal
                 )
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new NotSupportedException(
                             SR2.GetString(
                                 SR2.WebEndpointRequiredBinding,
                                 typeof(WebScriptEndpoint).Name,
-                                WebHttpBinding
-                                    .WebHttpBindingConfigurationStrings
+                                WebHttpBinding.WebHttpBindingConfigurationStrings
                                     .WebHttpBindingCollectionElementName
                             )
                         )
@@ -313,29 +309,25 @@ namespace System.ServiceModel.Configuration
         {
             if (string.IsNullOrEmpty(serviceEndpointElement.Binding))
             {
-                serviceEndpointElement.Binding = WebHttpBinding
-                    .WebHttpBindingConfigurationStrings
+                serviceEndpointElement.Binding = WebHttpBinding.WebHttpBindingConfigurationStrings
                     .WebHttpBindingCollectionElementName;
             }
             else if (
                 !string.Equals(
                     serviceEndpointElement.Binding,
-                    WebHttpBinding
-                        .WebHttpBindingConfigurationStrings
+                    WebHttpBinding.WebHttpBindingConfigurationStrings
                         .WebHttpBindingCollectionElementName,
                     StringComparison.Ordinal
                 )
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new NotSupportedException(
                             SR2.GetString(
                                 SR2.WebEndpointRequiredBinding,
                                 typeof(WebScriptEndpoint).Name,
-                                WebHttpBinding
-                                    .WebHttpBindingConfigurationStrings
+                                WebHttpBinding.WebHttpBindingConfigurationStrings
                                     .WebHttpBindingCollectionElementName
                             )
                         )

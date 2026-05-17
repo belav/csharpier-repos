@@ -223,8 +223,7 @@ namespace Microsoft.Cci
                     }
 
                     sizeOfDirectoryTree += 24;
-                    typeDirectory
-                        .Entries
+                    typeDirectory.Entries
                         .Add(nameDirectory = new Directory(lastTypeName, lastTypeID));
                 }
 

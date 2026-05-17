@@ -20,8 +20,7 @@ namespace System.IdentityModel
             if (rgbIV == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("rgbIV");
             if (this.ModeValue != CipherMode.CBC)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new NotSupportedException(
                             SR.GetString(SR.AESCipherModeNotSupported, this.ModeValue)
@@ -44,8 +43,7 @@ namespace System.IdentityModel
             if (rgbIV == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("rgbIV");
             if (this.ModeValue != CipherMode.CBC)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new NotSupportedException(
                             SR.GetString(SR.AESCipherModeNotSupported, this.ModeValue)
@@ -92,24 +90,21 @@ namespace System.IdentityModel
             )
             {
                 if (rgbKey.Length != 16 && rgbKey.Length != 24 && rgbKey.Length != 32)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new NotSupportedException(
                                 SR.GetString(SR.AESKeyLengthNotSupported, rgbKey.Length * 8)
                             )
                         );
                 if (rgbIV.Length != 16)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new NotSupportedException(
                                 SR.GetString(SR.AESIVLengthNotSupported, rgbIV.Length * 8)
                             )
                         );
                 if (paddingMode != PaddingMode.PKCS7 && paddingMode != PaddingMode.ISO10126)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new NotSupportedException(
                                 SR.GetString(SR.AESPaddingModeNotSupported, paddingMode)
@@ -253,12 +248,10 @@ namespace System.IdentityModel
                 if (inputBuffer == null)
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("inputBuffer");
                 if (outputBuffer == null)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgumentNull("outputBuffer");
                 if (inputOffset < 0)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentOutOfRangeException(
                                 "inputOffset",
@@ -266,8 +259,7 @@ namespace System.IdentityModel
                             )
                         );
                 if (inputCount <= 0)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentOutOfRangeException(
                                 "inputCount",
@@ -275,8 +267,7 @@ namespace System.IdentityModel
                             )
                         );
                 if (outputOffset < 0)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentOutOfRangeException(
                                 "outputOffset",
@@ -284,8 +275,7 @@ namespace System.IdentityModel
                             )
                         );
                 if ((inputCount % this.blockSize) != 0)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentException(
                                 SR.GetString(
@@ -296,8 +286,7 @@ namespace System.IdentityModel
                             )
                         );
                 if ((inputBuffer.Length - inputCount) < inputOffset)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentOutOfRangeException(
                                 "inputOffset",
@@ -309,8 +298,7 @@ namespace System.IdentityModel
                             )
                         );
                 if (outputBuffer.Length < outputOffset)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentOutOfRangeException(
                                 "outputOffset",
@@ -414,8 +402,7 @@ namespace System.IdentityModel
                 if (inputBuffer == null)
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("inputBuffer");
                 if (inputOffset < 0)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentOutOfRangeException(
                                 "inputOffset",
@@ -423,8 +410,7 @@ namespace System.IdentityModel
                             )
                         );
                 if (inputCount < 0)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentOutOfRangeException(
                                 "inputCount",
@@ -432,8 +418,7 @@ namespace System.IdentityModel
                             )
                         );
                 if ((inputBuffer.Length - inputCount) < inputOffset)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentOutOfRangeException(
                                 "inputOffset",
@@ -531,8 +516,7 @@ namespace System.IdentityModel
             )
             {
                 if ((outputBuffer.Length - outputOffset) < inputCount)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentOutOfRangeException(
                                 "outputBuffer",
@@ -685,8 +669,7 @@ namespace System.IdentityModel
                 {
                     int err = Marshal.GetLastWin32Error();
                     string reason = (err != 0) ? new Win32Exception(err).Message : String.Empty;
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new CryptographicException(SR.GetString(sr, reason)));
                 }
             }

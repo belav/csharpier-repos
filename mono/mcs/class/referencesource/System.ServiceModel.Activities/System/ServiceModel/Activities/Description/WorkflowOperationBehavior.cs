@@ -66,16 +66,14 @@ namespace System.ServiceModel.Activities.Description
                 || dispatchOperation.Parent.ChannelDispatcher.Host.Description.Behaviors == null
             )
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(new InvalidOperationException(SR.DispatchOperationInInvalidState));
             }
 
             ServiceHostBase serviceHost = dispatchOperation.Parent.ChannelDispatcher.Host;
             if (!(serviceHost is WorkflowServiceHost))
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new InvalidOperationException(
                             SR.WorkflowBehaviorWithNonWorkflowHost(
@@ -99,8 +97,7 @@ namespace System.ServiceModel.Activities.Description
 
             if (endpoint != null)
             {
-                CorrelationQueryBehavior queryBehavior = endpoint
-                    .Behaviors
+                CorrelationQueryBehavior queryBehavior = endpoint.Behaviors
                     .Find<CorrelationQueryBehavior>();
 
                 if (queryBehavior != null)

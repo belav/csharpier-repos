@@ -32,8 +32,7 @@ namespace System.IdentityModel
         protected override void ClearItems()
         {
             if (this.isReadOnly)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
                     );
@@ -44,8 +43,7 @@ namespace System.IdentityModel
         protected override void InsertItem(int index, T item)
         {
             if (this.isReadOnly)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
                     );
@@ -56,8 +54,7 @@ namespace System.IdentityModel
         protected override void RemoveItem(int index)
         {
             if (this.isReadOnly)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
                     );
@@ -68,8 +65,7 @@ namespace System.IdentityModel
         protected override void SetItem(int index, T item)
         {
             if (this.isReadOnly)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
                     );

@@ -50,8 +50,7 @@ namespace System.Runtime.InteropServices
                     // If we are running an x64 process on a non-x64 windows machine, we will report x64 as OS architecture.
                     //
                     // IsWow64Process2 is only available on Windows 10+, so we will perform run-time introspection via indirect load
-                    IntPtr kernel32 = Interop
-                        .Kernel32
+                    IntPtr kernel32 = Interop.Kernel32
                         .LoadLibraryEx(
                             Interop.Libraries.Kernel32,
                             0,

@@ -166,8 +166,7 @@ public static class InMemoryDbContextOptionsExtensions
             ?? new CoreOptionsExtension();
 
         coreOptionsExtension = coreOptionsExtension.WithWarningsConfiguration(
-            coreOptionsExtension
-                .WarningsConfiguration
+            coreOptionsExtension.WarningsConfiguration
                 .TryWithExplicit(InMemoryEventId.TransactionIgnoredWarning, WarningBehavior.Throw)
         );
 

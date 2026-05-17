@@ -215,8 +215,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             bool hasAnyDiagnostics;
-            (attributeData, boundAttribute) = arguments
-                .Binder
+            (attributeData, boundAttribute) = arguments.Binder
                 .GetAttribute(
                     syntax,
                     type,
@@ -271,14 +270,12 @@ namespace Microsoft.CodeAnalysis.CSharp
             Debug.Assert(arguments.Diagnostics.DiagnosticBag is not null);
             Debug.Assert(arguments.AttributeSyntaxOpt is not null);
             if (
-                arguments
-                    .Attribute
+                arguments.Attribute
                     .IsTargetAttribute(AttributeDescription.CompilerFeatureRequiredAttribute)
             )
             {
                 // Do not use '{FullName}'. This is reserved for compiler usage.
-                arguments
-                    .Diagnostics
+                arguments.Diagnostics
                     .DiagnosticBag
                     .Add(
                         ErrorCode.ERR_ExplicitReservedAttr,
@@ -296,11 +293,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                     )
                 )
                 {
-                    var attrArgumentLocation = arguments
-                        .Attribute
+                    var attrArgumentLocation = arguments.Attribute
                         .GetAttributeArgumentLocation(parameterIndex: 0);
-                    arguments
-                        .Diagnostics
+                    arguments.Diagnostics
                         .DiagnosticBag
                         .Add(ErrorCode.ERR_InvalidExperimentalDiagID, attrArgumentLocation);
                 }
@@ -446,8 +441,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     {
                         if (attributeTypesBuilder[i].IsGenericType)
                         {
-                            MessageID
-                                .IDS_FeatureGenericAttributes
+                            MessageID.IDS_FeatureGenericAttributes
                                 .CheckFeatureAvailability(diagnostics, attributesToBind[i]);
                         }
                     }
@@ -599,8 +593,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     !boundAttributes.IsDefaultOrEmpty
                     && this is SourceAssemblySymbol
                     && !diagnostics.DiagnosticBag.IsEmptyWithoutResolution
-                    && diagnostics
-                        .DiagnosticBag
+                    && diagnostics.DiagnosticBag
                         .AsEnumerableWithoutResolution()
                         .OfType<DiagnosticWithInfo>()
                         .Where(isObsoleteDiagnostic)
@@ -653,8 +646,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                         //    2. Collect obsolete diagnostics reported within the span of those locations.
                         foreach (
-                            Diagnostic d in diagnostics
-                                .DiagnosticBag
+                            Diagnostic d in diagnostics.DiagnosticBag
                                 .AsEnumerableWithoutResolution()
                         )
                         {
@@ -684,8 +676,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                             filtered.AddDependencies(diagnostics);
 
                             foreach (
-                                Diagnostic d in diagnostics
-                                    .DiagnosticBag
+                                Diagnostic d in diagnostics.DiagnosticBag
                                     .AsEnumerableWithoutResolution()
                             )
                             {

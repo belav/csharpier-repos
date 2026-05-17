@@ -98,8 +98,7 @@ namespace System.Web.Razor.Generator
             context.Namespace.Types.Add(context.GeneratedClass);
             context.GeneratedClass.Members.Add(context.TargetMethod);
 
-            context
-                .Namespace
+            context.Namespace
                 .Imports
                 .AddRange(host.NamespaceImports.Select(s => new CodeNamespaceImport(s)).ToArray());
 
@@ -115,15 +114,13 @@ namespace System.Web.Razor.Generator
                     Name = DesignTimeHelperMethodName,
                     Attributes = MemberAttributes.Private,
                 };
-                _designTimeHelperMethod
-                    .Statements
+                _designTimeHelperMethod.Statements
                     .Add(
                         new CodeSnippetStatement(
                             BuildCodeString(cw => cw.WriteDisableUnusedFieldWarningPragma())
                         )
                     );
-                _designTimeHelperMethod
-                    .Statements
+                _designTimeHelperMethod.Statements
                     .Add(
                         new CodeSnippetStatement(
                             BuildCodeString(cw => cw.WriteRestoreUnusedFieldWarningPragma())
@@ -131,8 +128,7 @@ namespace System.Web.Razor.Generator
                     );
                 GeneratedClass.Members.Insert(0, _designTimeHelperMethod);
             }
-            _designTimeHelperMethod
-                .Statements
+            _designTimeHelperMethod.Statements
                 .Insert(_designTimeHelperMethod.Statements.Count - 1, statement);
         }
 
@@ -314,8 +310,7 @@ namespace System.Web.Razor.Generator
         {
             if (!_expressionHelperVariableWriten)
             {
-                GeneratedClass
-                    .Members
+                GeneratedClass.Members
                     .Insert(
                         0,
                         new CodeMemberField(typeof(object), "__o")

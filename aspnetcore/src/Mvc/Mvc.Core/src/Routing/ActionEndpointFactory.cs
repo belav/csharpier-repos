@@ -450,8 +450,7 @@ internal sealed class ActionEndpointFactory
         if (action.FilterDescriptors != null && action.FilterDescriptors.Count > 0)
         {
             foreach (
-                var filter in action
-                    .FilterDescriptors
+                var filter in action.FilterDescriptors
                     .OrderBy(f => f, FilterDescriptorOrderComparer.Comparer)
                     .Select(f => f.Filter)
             )
@@ -474,8 +473,7 @@ internal sealed class ActionEndpointFactory
                     && !builder.Metadata.OfType<HttpMethodMetadata>().Any()
                 )
                 {
-                    builder
-                        .Metadata
+                    builder.Metadata
                         .Add(new HttpMethodMetadata(httpMethodActionConstraint.HttpMethods));
                 }
                 else if (
@@ -483,8 +481,7 @@ internal sealed class ActionEndpointFactory
                     && !builder.Metadata.OfType<AcceptsMetadata>().Any()
                 )
                 {
-                    builder
-                        .Metadata
+                    builder.Metadata
                         .Add(new AcceptsMetadata(consumesAttribute.ContentTypes.ToArray()));
                 }
                 else if (!builder.Metadata.Contains(actionConstraint))
@@ -524,8 +521,7 @@ internal sealed class ActionEndpointFactory
                 // By the time this is called, we have the cache entry
                 var controllerInvocationContext =
                     (ControllerEndpointFilterInvocationContext)invocationContext;
-                return controllerInvocationContext
-                    .ActionDescriptor
+                return controllerInvocationContext.ActionDescriptor
                     .CacheEntry!
                     .InnerActionMethodExecutor
                     .Execute(controllerInvocationContext);
@@ -615,8 +611,7 @@ internal sealed class ActionEndpointFactory
 
             if (invokerFactory == null)
             {
-                invokerFactory = context
-                    .RequestServices
+                invokerFactory = context.RequestServices
                     .GetRequiredService<IActionInvokerFactory>();
             }
 

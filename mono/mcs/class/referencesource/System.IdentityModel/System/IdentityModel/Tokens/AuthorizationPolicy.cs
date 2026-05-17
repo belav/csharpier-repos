@@ -62,8 +62,7 @@ namespace System.IdentityModel.Tokens
         {
             if (identityCollection == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("identityCollection");
             }
 
@@ -97,8 +96,7 @@ namespace System.IdentityModel.Tokens
         {
             if (null == evaluationContext || null == evaluationContext.Properties)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("evaluationContext");
             }
 

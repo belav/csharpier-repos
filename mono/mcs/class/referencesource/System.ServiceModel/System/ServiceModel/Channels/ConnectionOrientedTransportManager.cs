@@ -149,8 +149,7 @@ namespace System.ServiceModel.Channels
                     serverSingletonPreambleReader.SendFault(
                         FramingEncodingString.UnsupportedModeFault
                     );
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ProtocolException(
                                 SR.GetString(SR.FramingModeNotSupported, FramingMode.Singleton)
@@ -163,8 +162,7 @@ namespace System.ServiceModel.Channels
                 serverSingletonPreambleReader.SendFault(
                     FramingEncodingString.EndpointNotFoundFault
                 );
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new EndpointNotFoundException(SR.GetString(SR.EndpointNotFound, via))
                     );
@@ -199,8 +197,7 @@ namespace System.ServiceModel.Channels
                     serverSessionPreambleReader.SendFault(
                         FramingEncodingString.UnsupportedModeFault
                     );
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ProtocolException(
                                 SR.GetString(SR.FramingModeNotSupported, FramingMode.Duplex)
@@ -211,8 +208,7 @@ namespace System.ServiceModel.Channels
             else
             {
                 serverSessionPreambleReader.SendFault(FramingEncodingString.EndpointNotFoundFault);
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new EndpointNotFoundException(
                             SR.GetString(SR.DuplexSessionListenerNotFound, via.ToString())

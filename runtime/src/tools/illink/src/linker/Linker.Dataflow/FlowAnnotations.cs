@@ -1186,8 +1186,9 @@ namespace ILLink.Shared.TrimAnalysis
             {
                 if (genericArgumentType.IsTypeOf(WellKnownType.System_Nullable_T))
                 {
-                    var innerGenericArgument = (genericArgument as IGenericInstance)
-                        ?.GenericArguments
+                    var innerGenericArgument = (
+                        genericArgument as IGenericInstance
+                    )?.GenericArguments
                         .FirstOrDefault();
                     switch (innerGenericArgument)
                     {
@@ -1196,8 +1197,7 @@ namespace ILLink.Shared.TrimAnalysis
                                 genericArgumentType,
                                 new GenericParameterValue(
                                     gp,
-                                    _context
-                                        .Annotations
+                                    _context.Annotations
                                         .FlowAnnotations
                                         .GetGenericParameterAnnotation(gp)
                                 )

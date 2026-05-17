@@ -147,16 +147,14 @@ class A
         );
 
         // Make sure the unimported types option is on by default.
-        testLspServer
-            .TestWorkspace
+        testLspServer.TestWorkspace
             .GlobalOptions
             .SetGlobalOption(
                 CompletionOptionsStorage.ShowItemsFromUnimportedNamespaces,
                 LanguageNames.CSharp,
                 true
             );
-        testLspServer
-            .TestWorkspace
+        testLspServer.TestWorkspace
             .GlobalOptions
             .SetGlobalOption(CompletionOptionsStorage.ForceExpandedCompletionIndexCreation, true);
 
@@ -267,16 +265,14 @@ namespace NS1
         );
 
         // Make sure the import completion option is on.
-        testLspServer
-            .TestWorkspace
+        testLspServer.TestWorkspace
             .GlobalOptions
             .SetGlobalOption(
                 CompletionOptionsStorage.ShowItemsFromUnimportedNamespaces,
                 LanguageNames.CSharp,
                 true
             );
-        testLspServer
-            .TestWorkspace
+        testLspServer.TestWorkspace
             .GlobalOptions
             .SetGlobalOption(CompletionOptionsStorage.ForceExpandedCompletionIndexCreation, true);
 
@@ -451,8 +447,7 @@ public class A
         var caretLocation = testLspServer.GetLocations("caret").Single();
         await testLspServer.OpenDocumentAsync(caretLocation.Uri);
 
-        testLspServer
-            .TestWorkspace
+        testLspServer.TestWorkspace
             .GlobalOptions
             .SetGlobalOption(
                 CompletionOptionsStorage.TriggerInArgumentLists,
@@ -566,13 +561,11 @@ class A
         );
 
         var mockService =
-            testLspServer
-                .TestWorkspace
+            testLspServer.TestWorkspace
                 .Services
                 .GetLanguageServices(LanguageNames.CSharp)
                 .GetRequiredService<CompletionService>() as CSharpLspMockCompletionService;
-        mockService.NonDefaultRule = CompletionItemRules
-            .Default
+        mockService.NonDefaultRule = CompletionItemRules.Default
             .WithCommitCharacterRule(
                 CharacterSetModificationRule.Create(CharacterSetModificationKind.Remove, ' ', '(')
             );
@@ -597,8 +590,7 @@ class A
         Assert.NotNull(results);
         Assert.NotEmpty(results.Items);
 
-        var defaultCharArray = CompletionRules
-            .Default
+        var defaultCharArray = CompletionRules.Default
             .DefaultCommitCharacters
             .Select(c => c.ToString())
             .ToArray();
@@ -641,13 +633,11 @@ class A
         );
 
         var mockService =
-            testLspServer
-                .TestWorkspace
+            testLspServer.TestWorkspace
                 .Services
                 .GetLanguageServices(LanguageNames.CSharp)
                 .GetRequiredService<CompletionService>() as CSharpLspMockCompletionService;
-        mockService.NonDefaultRule = CompletionItemRules
-            .Default
+        mockService.NonDefaultRule = CompletionItemRules.Default
             .WithCommitCharacterRule(
                 CharacterSetModificationRule.Create(CharacterSetModificationKind.Remove, ' ', '(')
             );
@@ -672,8 +662,7 @@ class A
         >(LSP.Methods.TextDocumentCompletionName, completionParams, CancellationToken.None);
         Assert.NotNull(results.ItemDefaults.CommitCharacters);
 
-        var defaultCharArray = CompletionRules
-            .Default
+        var defaultCharArray = CompletionRules.Default
             .DefaultCommitCharacters
             .Select(c => c.ToString())
             .ToArray();
@@ -765,22 +754,19 @@ class A
 
             for (var i = 0; i < ItemCounts.defaultItemCount; ++i)
                 builder.Add(
-                    CodeAnalysis
-                        .Completion
+                    CodeAnalysis.Completion
                         .CompletionItem
                         .Create($"ItemWithDefaultChar{i}", rules: CompletionItemRules.Default)
                 );
 
             for (var i = 0; i < ItemCounts.nonDefaultItemCount; ++i)
                 builder.Add(
-                    CodeAnalysis
-                        .Completion
+                    CodeAnalysis.Completion
                         .CompletionItem
                         .Create($"ItemNonDefaultChar{i}", rules: NonDefaultRule)
                 );
 
-            return CodeAnalysis
-                .Completion
+            return CodeAnalysis.Completion
                 .CompletionList
                 .Create(defaultItemSpan, builder.ToImmutable());
         }
@@ -887,16 +873,14 @@ namespace Program
         );
 
         // Make sure the unimported types option is on by default.
-        testLspServer
-            .TestWorkspace
+        testLspServer.TestWorkspace
             .GlobalOptions
             .SetGlobalOption(
                 CompletionOptionsStorage.ShowItemsFromUnimportedNamespaces,
                 LanguageNames.CSharp,
                 true
             );
-        testLspServer
-            .TestWorkspace
+        testLspServer.TestWorkspace
             .GlobalOptions
             .SetGlobalOption(CompletionOptionsStorage.ForceExpandedCompletionIndexCreation, true);
 
@@ -913,8 +897,7 @@ namespace Program
         Assert.NotNull(completionResult.ItemDefaults.Data);
         Assert.NotNull(completionResult.ItemDefaults.CommitCharacters);
 
-        var myClassItems = completionResult
-            .Items
+        var myClassItems = completionResult.Items
             .Where(i => i.Label == "MyClass")
             .ToImmutableArray();
         var itemFromNS1 = myClassItems.Single(i => i.LabelDetails?.Description == "Namespace1");
@@ -1025,13 +1008,11 @@ public class C
         );
 
         var mockService =
-            testLspServer
-                .TestWorkspace
+            testLspServer.TestWorkspace
                 .Services
                 .GetLanguageServices(LanguageNames.CSharp)
                 .GetRequiredService<CompletionService>() as CSharpLspMockCompletionService;
-        mockService.NonDefaultRule = CompletionItemRules
-            .Default
+        mockService.NonDefaultRule = CompletionItemRules.Default
             .WithMatchPriority(MatchPriority.Preselect);
         mockService.ItemCounts = (10, 10);
 
@@ -1080,8 +1061,7 @@ public class C
             )
             .ConfigureAwait(false);
         Assert.False(results.IsIncomplete);
-        var defaultCharArray = CompletionRules
-            .Default
+        var defaultCharArray = CompletionRules.Default
             .DefaultCommitCharacters
             .Select(c => c.ToString())
             .ToArray();
@@ -1200,8 +1180,7 @@ public class C
         );
 
         var mockService =
-            testLspServer
-                .TestWorkspace
+            testLspServer.TestWorkspace
                 .Services
                 .GetLanguageServices(LanguageNames.CSharp)
                 .GetRequiredService<CompletionService>()

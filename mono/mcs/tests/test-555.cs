@@ -8,8 +8,7 @@ public class Test
     {
         AssemblyName assemblyName = new AssemblyName();
         assemblyName.Name = "TestAssembly";
-        AssemblyBuilder assemblyBuilder = AppDomain
-            .CurrentDomain
+        AssemblyBuilder assemblyBuilder = AppDomain.CurrentDomain
             .DefineDynamicAssembly(assemblyName, AssemblyBuilderAccess.Run);
 
         ModuleBuilder moduleBuilder = assemblyBuilder.DefineDynamicModule("TestModule");

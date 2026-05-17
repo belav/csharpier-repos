@@ -72,8 +72,7 @@ namespace System.Security.Cryptography
                     throw new CryptographicException(SR.Cryptography_CSP_NoPrivateKey);
                 }
 
-                byte[] derFormatSignature = Interop
-                    .AppleCrypto
+                byte[] derFormatSignature = Interop.AppleCrypto
                     .CreateSignature(
                         keys.PrivateKey,
                         rgbHash,
@@ -108,8 +107,7 @@ namespace System.Security.Cryptography
                     signature
                 );
 
-                return Interop
-                    .AppleCrypto
+                return Interop.AppleCrypto
                     .VerifySignature(
                         GetKeys().PublicKey,
                         hash,

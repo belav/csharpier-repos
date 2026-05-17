@@ -39,16 +39,13 @@ namespace System.ServiceModel.Diagnostics
         )
         {
             if (String.IsNullOrEmpty(categoryName))
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNullOrEmptyString("categoryName");
             if (String.IsNullOrEmpty(instanceName))
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNullOrEmptyString("instanceName");
             if (String.IsNullOrEmpty(fullInstanceName))
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNullOrEmptyString("fullInstanceName");
 
             try
@@ -74,16 +71,13 @@ namespace System.ServiceModel.Diagnostics
         )
         {
             if (String.IsNullOrEmpty(categoryName))
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNullOrEmptyString("categoryName");
             if (String.IsNullOrEmpty(instanceName))
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNullOrEmptyString("instanceName");
             if (String.IsNullOrEmpty(fullInstanceName))
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNullOrEmptyString("fullInstanceName");
 
             try

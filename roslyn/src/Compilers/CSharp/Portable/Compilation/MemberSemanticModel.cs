@@ -603,8 +603,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             var discardedUseSiteInfo = CompoundUseSiteInfo<AssemblySymbol>.Discarded;
 
-            return binder
-                .Conversions
+            return binder.Conversions
                 .ClassifyConversionFromExpression(
                     boundExpression,
                     csdestination,
@@ -638,8 +637,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             var discardedUseSiteInfo = CompoundUseSiteInfo<AssemblySymbol>.Discarded;
 
-            return binder
-                .Conversions
+            return binder.Conversions
                 .ClassifyConversionFromExpression(
                     boundExpression,
                     destination,

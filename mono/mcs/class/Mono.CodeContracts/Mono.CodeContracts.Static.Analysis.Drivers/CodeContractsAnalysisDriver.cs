@@ -181,8 +181,7 @@ namespace Mono.CodeContracts.Static.Analysis.Drivers
                 if (DebugOptions.Debug)
                 {
                     Console.WriteLine("------------Value based CFG-----------------");
-                    ValueLayer
-                        .ILDecoder
+                    ValueLayer.ILDecoder
                         .ContextProvider
                         .MethodContext
                         .CFG
@@ -208,8 +207,7 @@ namespace Mono.CodeContracts.Static.Analysis.Drivers
                 if (DebugOptions.Debug)
                 {
                     Console.WriteLine("------------Expression based CFG-------------");
-                    ExpressionLayer
-                        .ILDecoder
+                    ExpressionLayer.ILDecoder
                         .ContextProvider
                         .MethodContext
                         .CFG

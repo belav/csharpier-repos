@@ -75,8 +75,7 @@ namespace Microsoft.CodeAnalysis.DocumentHighlighting
                     return ImmutableArray<DocumentHighlights>.Empty;
                 }
 
-                return await result
-                    .Value
+                return await result.Value
                     .SelectAsArrayAsync(h => h.RehydrateAsync(solution))
                     .ConfigureAwait(false);
             }
@@ -143,10 +142,11 @@ namespace Microsoft.CodeAnalysis.DocumentHighlighting
             if (
                 !tags.Any(
                     static (t, position) =>
-                        t.HighlightSpans.Any(
-                            static (hs, position) => hs.TextSpan.IntersectsWith(position),
-                            position
-                        ),
+                        t.HighlightSpans
+                            .Any(
+                                static (hs, position) => hs.TextSpan.IntersectsWith(position),
+                                position
+                            ),
                     position
                 )
             )
@@ -172,8 +172,7 @@ namespace Microsoft.CodeAnalysis.DocumentHighlighting
             );
             foreach (var service in embeddedHighlightsServices)
             {
-                var result = service
-                    .Value
+                var result = service.Value
                     .GetDocumentHighlights(
                         document,
                         semanticModel,

@@ -211,8 +211,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Diagnostics
             }
 
             AssertEx.NotNull(returnedResult);
-            return returnedResult
-                .Items
+            return returnedResult.Items
                 .Select(diagnostics => ConvertWorkspaceDiagnosticResult(diagnostics))
                 .ToImmutableArray();
         }
@@ -478,8 +477,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Diagnostics
                 return new DocumentDiagnosticParams
                 {
                     Identifier = testNonLocalDiagnostics
-                        ? DocumentPullDiagnosticHandler
-                            .DocumentNonLocalDiagnosticIdentifier
+                        ? DocumentPullDiagnosticHandler.DocumentNonLocalDiagnosticIdentifier
                             .ToString()
                         : null,
                     PreviousResultId = previousResultId,

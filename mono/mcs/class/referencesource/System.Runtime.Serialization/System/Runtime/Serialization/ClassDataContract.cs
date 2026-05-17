@@ -584,8 +584,7 @@ namespace System.Runtime.Serialization
             {
                 if (securityException != null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new SecurityException(
                                 SR.GetString(
@@ -609,8 +608,7 @@ namespace System.Runtime.Serialization
             {
                 if (securityException != null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new SecurityException(
                                 SR.GetString(
@@ -628,8 +626,7 @@ namespace System.Runtime.Serialization
             {
                 if (securityException != null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new SecurityException(
                                 SR.GetString(
@@ -647,8 +644,7 @@ namespace System.Runtime.Serialization
             {
                 if (securityException != null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new SecurityException(
                                 SR.GetString(
@@ -667,8 +663,7 @@ namespace System.Runtime.Serialization
             {
                 if (securityException != null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new SecurityException(
                                 SR.GetString(
@@ -693,8 +688,7 @@ namespace System.Runtime.Serialization
                         {
                             if (this.Members[i].MemberInfo is FieldInfo)
                             {
-                                throw DiagnosticUtility
-                                    .ExceptionUtility
+                                throw DiagnosticUtility.ExceptionUtility
                                     .ThrowHelperError(
                                         new SecurityException(
                                             SR.GetString(
@@ -708,8 +702,7 @@ namespace System.Runtime.Serialization
                             }
                             else
                             {
-                                throw DiagnosticUtility
-                                    .ExceptionUtility
+                                throw DiagnosticUtility.ExceptionUtility
                                     .ThrowHelperError(
                                         new SecurityException(
                                             SR.GetString(
@@ -744,8 +737,7 @@ namespace System.Runtime.Serialization
             {
                 if (securityException != null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new SecurityException(
                                 SR.GetString(
@@ -769,8 +761,7 @@ namespace System.Runtime.Serialization
             {
                 if (securityException != null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new SecurityException(
                                 SR.GetString(
@@ -789,8 +780,7 @@ namespace System.Runtime.Serialization
             {
                 if (securityException != null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new SecurityException(
                                 SR.GetString(
@@ -815,8 +805,7 @@ namespace System.Runtime.Serialization
                         {
                             if (this.Members[i].MemberInfo is FieldInfo)
                             {
-                                throw DiagnosticUtility
-                                    .ExceptionUtility
+                                throw DiagnosticUtility.ExceptionUtility
                                     .ThrowHelperError(
                                         new SecurityException(
                                             SR.GetString(
@@ -830,8 +819,7 @@ namespace System.Runtime.Serialization
                             }
                             else
                             {
-                                throw DiagnosticUtility
-                                    .ExceptionUtility
+                                throw DiagnosticUtility.ExceptionUtility
                                     .ThrowHelperError(
                                         new SecurityException(
                                             SR.GetString(
@@ -924,8 +912,7 @@ namespace System.Runtime.Serialization
                 if (this.isISerializable)
                 {
                     if (HasDataContract)
-                        throw System
-                            .Runtime
+                        throw System.Runtime
                             .Serialization
                             .DiagnosticUtility
                             .ExceptionUtility
@@ -967,8 +954,7 @@ namespace System.Runtime.Serialization
                         && !this.isNonAttributedType
                     )
                     {
-                        throw System
-                            .Runtime
+                        throw System.Runtime
                             .Serialization
                             .DiagnosticUtility
                             .ExceptionUtility
@@ -987,8 +973,7 @@ namespace System.Runtime.Serialization
                     this.BaseContract = null;
                 hasExtensionData = (Globals.TypeOfIExtensibleDataObject.IsAssignableFrom(type));
                 if (hasExtensionData && !HasDataContract && !IsNonAttributedType)
-                    throw System
-                        .Runtime
+                    throw System.Runtime
                         .Serialization
                         .DiagnosticUtility
                         .ExceptionUtility
@@ -1872,8 +1857,7 @@ namespace System.Runtime.Serialization
                     null
                 );
                 if (ctor == null)
-                    throw System
-                        .Runtime
+                    throw System.Runtime
                         .Serialization
                         .DiagnosticUtility
                         .ExceptionUtility
@@ -1906,8 +1890,7 @@ namespace System.Runtime.Serialization
                     null
                 );
                 if (ctor == null)
-                    throw System
-                        .Runtime
+                    throw System.Runtime
                         .Serialization
                         .DiagnosticUtility
                         .ExceptionUtility
@@ -2054,8 +2037,7 @@ namespace System.Runtime.Serialization
                 {
                     boundClassContract.Members = new List<DataMember>(Members.Count);
                     foreach (DataMember member in Members)
-                        boundClassContract
-                            .Members
+                        boundClassContract.Members
                             .Add(member.BindGenericParameters(paramContracts, boundContracts));
                 }
                 return boundClassContract;

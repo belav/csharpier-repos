@@ -33,8 +33,7 @@ namespace Microsoft.CodeAnalysis.CodeFixes
 
         protected sealed override bool IsInternalProvider(IFixAllState fixAllState)
         {
-            var exportAttributes = fixAllState
-                .Provider
+            var exportAttributes = fixAllState.Provider
                 .GetType()
                 .GetTypeInfo()
                 .GetCustomAttributes(typeof(ExportCodeFixProviderAttribute), false);

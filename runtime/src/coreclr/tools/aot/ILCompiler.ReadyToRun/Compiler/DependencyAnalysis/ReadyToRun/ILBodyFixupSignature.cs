@@ -51,8 +51,7 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             else
                 return new ModuleToken(
                     factory.ManifestMetadataTable._mutableModule,
-                    factory
-                        .ManifestMetadataTable
+                    factory.ManifestMetadataTable
                         ._mutableModule
                         .TryGetEntityHandle(_method.GetTypicalMethodDefinition())
                         .Value
@@ -84,8 +83,7 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 foreach (var typeRef in metadata.TypeRefs)
                 {
                     if (
-                        factory
-                            .SignatureContext
+                        factory.SignatureContext
                             .Resolver
                             .GetModuleTokenForType(
                                 (EcmaType)typeRef,

@@ -91,8 +91,7 @@ namespace Mono.CSharp
             }
             catch (ArgumentOutOfRangeException)
             {
-                method
-                    .Compiler
+                method.Compiler
                     .Report
                     .RuntimeMissingSupport(location, "custom attributes on the return type");
             }
@@ -107,8 +106,7 @@ namespace Mono.CSharp
         {
             if (a.Type == pa.CLSCompliant)
             {
-                method
-                    .Compiler
+                method.Compiler
                     .Report
                     .Warning(
                         3023,
@@ -377,11 +375,12 @@ namespace Mono.CSharp
 
             if (a.Type == pa.ParamArray)
             {
-                a.Report.Error(
-                    674,
-                    a.Location,
-                    "Do not use `System.ParamArrayAttribute'. Use the `params' keyword instead"
-                );
+                a.Report
+                    .Error(
+                        674,
+                        a.Location,
+                        "Do not use `System.ParamArrayAttribute'. Use the `params' keyword instead"
+                    );
                 return;
             }
 
@@ -391,34 +390,37 @@ namespace Mono.CSharp
                 && !OptAttributes.Contains(pa.In)
             )
             {
-                a.Report.Error(
-                    662,
-                    a.Location,
-                    "Cannot specify only `Out' attribute on a ref parameter. Use both `In' and `Out' attributes or neither"
-                );
+                a.Report
+                    .Error(
+                        662,
+                        a.Location,
+                        "Cannot specify only `Out' attribute on a ref parameter. Use both `In' and `Out' attributes or neither"
+                    );
                 return;
             }
 
             if (a.Type == pa.CLSCompliant)
             {
-                a.Report.Warning(
-                    3022,
-                    1,
-                    a.Location,
-                    "CLSCompliant attribute has no meaning when applied to parameters. Try putting it on the method instead"
-                );
+                a.Report
+                    .Warning(
+                        3022,
+                        1,
+                        a.Location,
+                        "CLSCompliant attribute has no meaning when applied to parameters. Try putting it on the method instead"
+                    );
             }
             else if (a.Type == pa.DefaultParameterValue || a.Type == pa.OptionalParameter)
             {
                 if (HasOptionalExpression)
                 {
-                    a.Report.Error(
-                        1745,
-                        a.Location,
-                        "Cannot specify `{0}' attribute on optional parameter `{1}'",
-                        a.Type.GetSignatureForError().Replace("Attribute", ""),
-                        Name
-                    );
+                    a.Report
+                        .Error(
+                            1745,
+                            a.Location,
+                            "Cannot specify `{0}' attribute on optional parameter `{1}'",
+                            a.Type.GetSignatureForError().Replace("Attribute", ""),
+                            Name
+                        );
                 }
 
                 if (a.Type == pa.DefaultParameterValue)
@@ -428,33 +430,36 @@ namespace Mono.CSharp
             {
                 if ((modFlags & Modifier.CallerMemberName) == 0)
                 {
-                    a.Report.Error(
-                        4022,
-                        a.Location,
-                        "The CallerMemberName attribute can only be applied to parameters with default value"
-                    );
+                    a.Report
+                        .Error(
+                            4022,
+                            a.Location,
+                            "The CallerMemberName attribute can only be applied to parameters with default value"
+                        );
                 }
             }
             else if (a.Type == pa.CallerLineNumberAttribute)
             {
                 if ((modFlags & Modifier.CallerLineNumber) == 0)
                 {
-                    a.Report.Error(
-                        4020,
-                        a.Location,
-                        "The CallerLineNumber attribute can only be applied to parameters with default value"
-                    );
+                    a.Report
+                        .Error(
+                            4020,
+                            a.Location,
+                            "The CallerLineNumber attribute can only be applied to parameters with default value"
+                        );
                 }
             }
             else if (a.Type == pa.CallerFilePathAttribute)
             {
                 if ((modFlags & Modifier.CallerFilePath) == 0)
                 {
-                    a.Report.Error(
-                        4021,
-                        a.Location,
-                        "The CallerFilePath attribute can only be applied to parameters with default value"
-                    );
+                    a.Report
+                        .Error(
+                            4021,
+                            a.Location,
+                            "The CallerFilePath attribute can only be applied to parameters with default value"
+                        );
                 }
             }
 
@@ -577,24 +582,26 @@ namespace Mono.CSharp
                         && !Convert.ImplicitReferenceConversionExists(caller_type, parameter_type)
                     )
                     {
-                        rc.Report.Error(
-                            4019,
-                            attr.Location,
-                            "The CallerMemberName attribute cannot be applied because there is no standard conversion from `{0}' to `{1}'",
-                            caller_type.GetSignatureForError(),
-                            parameter_type.GetSignatureForError()
-                        );
+                        rc.Report
+                            .Error(
+                                4019,
+                                attr.Location,
+                                "The CallerMemberName attribute cannot be applied because there is no standard conversion from `{0}' to `{1}'",
+                                caller_type.GetSignatureForError(),
+                                parameter_type.GetSignatureForError()
+                            );
                     }
 
                     if (!IsValidCallerContext(rc.CurrentMemberDefinition))
                     {
-                        rc.Report.Warning(
-                            4026,
-                            1,
-                            attr.Location,
-                            "The CallerMemberName applied to parameter `{0}' will have no effect because it applies to a member that is used in context that do not allow optional arguments",
-                            name
-                        );
+                        rc.Report
+                            .Warning(
+                                4026,
+                                1,
+                                attr.Location,
+                                "The CallerMemberName applied to parameter `{0}' will have no effect because it applies to a member that is used in context that do not allow optional arguments",
+                                name
+                            );
                     }
 
                     modFlags |= Modifier.CallerMemberName;
@@ -613,24 +620,26 @@ namespace Mono.CSharp
                         )
                     )
                     {
-                        rc.Report.Error(
-                            4017,
-                            attr.Location,
-                            "The CallerLineNumberAttribute attribute cannot be applied because there is no standard conversion from `{0}' to `{1}'",
-                            caller_type.GetSignatureForError(),
-                            parameter_type.GetSignatureForError()
-                        );
+                        rc.Report
+                            .Error(
+                                4017,
+                                attr.Location,
+                                "The CallerLineNumberAttribute attribute cannot be applied because there is no standard conversion from `{0}' to `{1}'",
+                                caller_type.GetSignatureForError(),
+                                parameter_type.GetSignatureForError()
+                            );
                     }
 
                     if (!IsValidCallerContext(rc.CurrentMemberDefinition))
                     {
-                        rc.Report.Warning(
-                            4024,
-                            1,
-                            attr.Location,
-                            "The CallerLineNumberAttribute applied to parameter `{0}' will have no effect because it applies to a member that is used in context that do not allow optional arguments",
-                            name
-                        );
+                        rc.Report
+                            .Warning(
+                                4024,
+                                1,
+                                attr.Location,
+                                "The CallerLineNumberAttribute applied to parameter `{0}' will have no effect because it applies to a member that is used in context that do not allow optional arguments",
+                                name
+                            );
                     }
 
                     modFlags |= Modifier.CallerLineNumber;
@@ -645,24 +654,26 @@ namespace Mono.CSharp
                         && !Convert.ImplicitReferenceConversionExists(caller_type, parameter_type)
                     )
                     {
-                        rc.Report.Error(
-                            4018,
-                            attr.Location,
-                            "The CallerFilePath attribute cannot be applied because there is no standard conversion from `{0}' to `{1}'",
-                            caller_type.GetSignatureForError(),
-                            parameter_type.GetSignatureForError()
-                        );
+                        rc.Report
+                            .Error(
+                                4018,
+                                attr.Location,
+                                "The CallerFilePath attribute cannot be applied because there is no standard conversion from `{0}' to `{1}'",
+                                caller_type.GetSignatureForError(),
+                                parameter_type.GetSignatureForError()
+                            );
                     }
 
                     if (!IsValidCallerContext(rc.CurrentMemberDefinition))
                     {
-                        rc.Report.Warning(
-                            4025,
-                            1,
-                            attr.Location,
-                            "The CallerFilePath applied to parameter `{0}' will have no effect because it applies to a member that is used in context that do not allow optional arguments",
-                            name
-                        );
+                        rc.Report
+                            .Warning(
+                                4025,
+                                1,
+                                attr.Location,
+                                "The CallerFilePath applied to parameter `{0}' will have no effect because it applies to a member that is used in context that do not allow optional arguments",
+                                name
+                            );
                     }
 
                     modFlags |= Modifier.CallerFilePath;
@@ -675,24 +686,26 @@ namespace Mono.CSharp
             {
                 if (callerMemberName != null)
                 {
-                    rc.Report.Warning(
-                        7081,
-                        1,
-                        callerMemberName.Location,
-                        "The CallerMemberNameAttribute applied to parameter `{0}' will have no effect. It is overridden by the CallerLineNumberAttribute",
-                        Name
-                    );
+                    rc.Report
+                        .Warning(
+                            7081,
+                            1,
+                            callerMemberName.Location,
+                            "The CallerMemberNameAttribute applied to parameter `{0}' will have no effect. It is overridden by the CallerLineNumberAttribute",
+                            Name
+                        );
                 }
 
                 if (callerFilePath != null)
                 {
-                    rc.Report.Warning(
-                        7082,
-                        1,
-                        callerFilePath.Location,
-                        "The CallerFilePathAttribute applied to parameter `{0}' will have no effect. It is overridden by the CallerLineNumberAttribute",
-                        name
-                    );
+                    rc.Report
+                        .Warning(
+                            7082,
+                            1,
+                            callerFilePath.Location,
+                            "The CallerFilePathAttribute applied to parameter `{0}' will have no effect. It is overridden by the CallerLineNumberAttribute",
+                            name
+                        );
                 }
             }
 
@@ -700,13 +713,14 @@ namespace Mono.CSharp
             {
                 if (callerFilePath != null)
                 {
-                    rc.Report.Warning(
-                        7080,
-                        1,
-                        callerFilePath.Location,
-                        "The CallerMemberNameAttribute applied to parameter `{0}' will have no effect. It is overridden by the CallerFilePathAttribute",
-                        name
-                    );
+                    rc.Report
+                        .Warning(
+                            7080,
+                            1,
+                            callerFilePath.Location,
+                            "The CallerMemberNameAttribute applied to parameter `{0}' will have no effect. It is overridden by the CallerFilePathAttribute",
+                            name
+                        );
                 }
             }
         }
@@ -750,21 +764,23 @@ namespace Mono.CSharp
                 {
                     if (parameter_type.BuiltinType == BuiltinTypeSpec.Type.Object)
                     {
-                        rc.Report.Error(
-                            1910,
-                            default_expr.Location,
-                            "Argument of type `{0}' is not applicable for the DefaultParameterValue attribute",
-                            default_expr.Type.GetSignatureForError()
-                        );
+                        rc.Report
+                            .Error(
+                                1910,
+                                default_expr.Location,
+                                "Argument of type `{0}' is not applicable for the DefaultParameterValue attribute",
+                                default_expr.Type.GetSignatureForError()
+                            );
                     }
                     else
                     {
-                        rc.Report.Error(
-                            1909,
-                            default_expr.Location,
-                            "The DefaultParameterValue attribute is not applicable on parameters of type `{0}'",
-                            default_expr.Type.GetSignatureForError()
-                        );
+                        rc.Report
+                            .Error(
+                                1909,
+                                default_expr.Location,
+                                "The DefaultParameterValue attribute is not applicable on parameters of type `{0}'",
+                                default_expr.Type.GetSignatureForError()
+                            );
                     }
 
                     default_expr = null;
@@ -805,11 +821,12 @@ namespace Mono.CSharp
                     return;
                 }
 
-                rc.Report.Error(
-                    1908,
-                    default_expr.Location,
-                    "The type of the default value should match the type of the parameter"
-                );
+                rc.Report
+                    .Error(
+                        1908,
+                        default_expr.Location,
+                        "The type of the default value should match the type of the parameter"
+                    );
                 return;
             }
 
@@ -944,11 +961,8 @@ namespace Mono.CSharp
                 {
                     if (c.Type.BuiltinType == BuiltinTypeSpec.Type.Decimal)
                     {
-                        pa.DecimalConstant.EmitAttribute(
-                            builder,
-                            (decimal)c.GetValue(),
-                            c.Location
-                        );
+                        pa.DecimalConstant
+                            .EmitAttribute(builder, (decimal)c.GetValue(), c.Location);
                     }
                     else
                     {
@@ -996,11 +1010,12 @@ namespace Mono.CSharp
         public ExpressionStatement CreateExpressionTreeVariable(BlockContext ec)
         {
             if ((modFlags & Modifier.RefOutMask) != 0)
-                ec.Report.Error(
-                    1951,
-                    Location,
-                    "An expression tree parameter cannot use `ref' or `out' modifier"
-                );
+                ec.Report
+                    .Error(
+                        1951,
+                        Location,
+                        "An expression tree parameter cannot use `ref' or `out' modifier"
+                    );
 
             expr_tree_variable = TemporaryVariableReference.Create(
                 ResolveParameterExpressionType(ec, Location).Type,
@@ -1648,12 +1663,13 @@ namespace Mono.CSharp
                     {
                         if (checkConflicts && i < userParams.Count)
                         {
-                            ctx.Report.Error(
-                                316,
-                                userParams[i].Location,
-                                "The parameter name `{0}' conflicts with a compiler generated name",
-                                p.Name
-                            );
+                            ctx.Report
+                                .Error(
+                                    316,
+                                    userParams[i].Location,
+                                    "The parameter name `{0}' conflicts with a compiler generated name",
+                                    p.Name
+                                );
                         }
                         p.Name = '_' + p.Name;
                     }
@@ -1776,11 +1792,12 @@ namespace Mono.CSharp
                 );
                 if (se.Resolve(ec))
                 {
-                    ec.CurrentBlock.AddScopeStatement(
-                        new TemporaryVariableReference.Declarator(
-                            p.ExpressionTreeVariableReference()
-                        )
-                    );
+                    ec.CurrentBlock
+                        .AddScopeStatement(
+                            new TemporaryVariableReference.Declarator(
+                                p.ExpressionTreeVariableReference()
+                            )
+                        );
                     ec.CurrentBlock.AddScopeStatement(se);
                 }
 
@@ -1840,12 +1857,13 @@ namespace Mono.CSharp
             {
                 if (!(expr is ErrorExpression))
                 {
-                    rc.Report.Error(
-                        1736,
-                        Location,
-                        "The expression being assigned to optional parameter `{0}' must be a constant or default value",
-                        p.Name
-                    );
+                    rc.Report
+                        .Error(
+                            1736,
+                            Location,
+                            "The expression being assigned to optional parameter `{0}' must be a constant or default value",
+                            p.Name
+                        );
                 }
 
                 return;
@@ -1864,12 +1882,13 @@ namespace Mono.CSharp
                     res = wrap.Child;
                     if (!(res is Constant))
                     {
-                        rc.Report.Error(
-                            1770,
-                            Location,
-                            "The expression being assigned to nullable optional parameter `{0}' must be default value",
-                            p.Name
-                        );
+                        rc.Report
+                            .Error(
+                                1770,
+                                Location,
+                                "The expression being assigned to nullable optional parameter `{0}' must be default value",
+                                p.Name
+                            );
                         return;
                     }
                 }
@@ -1880,13 +1899,14 @@ namespace Mono.CSharp
                     && parameter_type.BuiltinType != BuiltinTypeSpec.Type.String
                 )
                 {
-                    rc.Report.Error(
-                        1763,
-                        Location,
-                        "Optional parameter `{0}' of type `{1}' can only be initialized with default value",
-                        p.Name,
-                        parameter_type.GetSignatureForError()
-                    );
+                    rc.Report
+                        .Error(
+                            1763,
+                            Location,
+                            "Optional parameter `{0}' of type `{1}' can only be initialized with default value",
+                            p.Name,
+                            parameter_type.GetSignatureForError()
+                        );
 
                     return;
                 }
@@ -1895,13 +1915,14 @@ namespace Mono.CSharp
                 return;
             }
 
-            rc.Report.Error(
-                1750,
-                Location,
-                "Optional parameter expression of type `{0}' cannot be converted to parameter type `{1}'",
-                type.GetSignatureForError(),
-                parameter_type.GetSignatureForError()
-            );
+            rc.Report
+                .Error(
+                    1750,
+                    Location,
+                    "Optional parameter expression of type `{0}' cannot be converted to parameter type `{1}'",
+                    type.GetSignatureForError(),
+                    parameter_type.GetSignatureForError()
+                );
 
             this.expr = ErrorExpression.Instance;
         }

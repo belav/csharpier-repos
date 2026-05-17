@@ -17,8 +17,7 @@ namespace System.Net
             IntPtr socket = INVALID_SOCKET;
             try
             {
-                socket = Interop
-                    .Winsock
+                socket = Interop.Winsock
                     .WSASocketW(
                         af,
                         StreamSocketType,

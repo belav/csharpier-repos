@@ -80,9 +80,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     node.StringStartToken.Kind()
                     is SyntaxKind.InterpolatedSingleLineRawStringStartToken
                         or SyntaxKind.InterpolatedMultiLineRawStringStartToken;
-                var newLinesInInterpolationsAllowed = this.Compilation.IsFeatureEnabled(
-                    MessageID.IDS_FeatureNewLinesInInterpolations
-                );
+                var newLinesInInterpolationsAllowed = this.Compilation
+                    .IsFeatureEnabled(MessageID.IDS_FeatureNewLinesInInterpolations);
 
                 var intType = GetSpecialType(SpecialType.System_Int32, diagnostics, node);
                 foreach (var content in node.Contents)
@@ -128,8 +127,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                                         interpolation.CloseBraceToken.GetLocation(),
                                         this.Compilation.LanguageVersion.ToDisplayString(),
                                         new CSharpRequiredLanguageVersion(
-                                            MessageID
-                                                .IDS_FeatureNewLinesInInterpolations
+                                            MessageID.IDS_FeatureNewLinesInInterpolations
                                                 .RequiredVersion()
                                         )
                                     );
@@ -351,8 +349,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 // Case 1
                 Debug.Assert(
-                    unconvertedInterpolatedString
-                        .Parts
+                    unconvertedInterpolatedString.Parts
                         .All(static part =>
                             part.Type is null or { SpecialType: SpecialType.System_String }
                         )
@@ -438,8 +435,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundUnconvertedInterpolatedString unconvertedInterpolatedString
         ) =>
             !unconvertedInterpolatedString.Parts.ContainsAwaitExpression()
-            && unconvertedInterpolatedString
-                .Parts
+            && unconvertedInterpolatedString.Parts
                 .All(p => p is not BoundStringInsert { Value.Type.TypeKind: TypeKind.Dynamic });
 
         private static bool AllInterpolatedStringPartsAreStrings(
@@ -971,14 +967,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                     // resolution and attempting to determine which method considered was the best to report errors for.
 
                     var nonOutConstructorHasArityError =
-                        nonOutConstructorDiagnostics
-                            .DiagnosticBag
+                        nonOutConstructorDiagnostics.DiagnosticBag
                             ?.AsEnumerableWithoutResolution()
                             .Any(d => (ErrorCode)d.Code == ErrorCode.ERR_BadCtorArgCount)
                         ?? false;
                     var outConstructorHasArityError =
-                        outConstructorDiagnostics
-                            .DiagnosticBag
+                        outConstructorDiagnostics.DiagnosticBag
                             ?.AsEnumerableWithoutResolution()
                             .Any(d => (ErrorCode)d.Code == ErrorCode.ERR_BadCtorArgCount)
                         ?? false;

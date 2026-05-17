@@ -664,10 +664,8 @@ namespace System.ComponentModel
             {
                 if (bstrKey != (IntPtr)0)
                 {
-                    this.savedLicenseContext.SetSavedLicenseKey(
-                        this.savedType,
-                        Marshal.PtrToStringBSTR(bstrKey)
-                    );
+                    this.savedLicenseContext
+                        .SetSavedLicenseKey(this.savedType, Marshal.PtrToStringBSTR(bstrKey));
                 }
             }
 

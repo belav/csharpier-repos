@@ -130,9 +130,10 @@ namespace System.Web.Security
 
             ////////////////////////////////////////////////////////////
             // Step 6: Create a user object for the ticket
-            e.Context.SetPrincipalNoDemand(
-                new GenericPrincipal(new FormsIdentity(ticket2), new String[0])
-            );
+            e.Context
+                .SetPrincipalNoDemand(
+                    new GenericPrincipal(new FormsIdentity(ticket2), new String[0])
+                );
 
             ////////////////////////////////////////////////////////////
             // Step 7: Browser does not send us the correct cookie-path

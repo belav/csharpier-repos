@@ -128,12 +128,13 @@ namespace MonoTests.System.Runtime.Remoting.Messaging
             CallContext.SetData(SlotName, holder);
 
             bool passed = false;
-            var t = Task.Factory.StartNew(() =>
-            {
-                var h = CallContext.GetData(SlotName) as Holder;
-                passed = h == holder;
-                CallContext.FreeNamedDataSlot(SlotName);
-            });
+            var t = Task.Factory
+                .StartNew(() =>
+                {
+                    var h = CallContext.GetData(SlotName) as Holder;
+                    passed = h == holder;
+                    CallContext.FreeNamedDataSlot(SlotName);
+                });
 
             Assert.IsTrue(t.Wait(3000), "#1");
             Assert.IsTrue(passed, "#2");

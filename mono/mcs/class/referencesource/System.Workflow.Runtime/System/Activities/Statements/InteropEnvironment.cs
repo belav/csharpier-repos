@@ -76,11 +76,12 @@ namespace System.Activities.Statements
             Debug.Assert(!disposed, "Cannot access disposed object");
             try
             {
-                this.executor.Initialize(
-                    definition,
-                    this.Activity.GetInputArgumentValues(context),
-                    this.Activity.HasNameCollision
-                );
+                this.executor
+                    .Initialize(
+                        definition,
+                        this.Activity.GetInputArgumentValues(context),
+                        this.Activity.HasNameCollision
+                    );
                 ProcessExecutionStatus(this.executor.Execute());
             }
             catch (Exception e)
@@ -124,21 +125,22 @@ namespace System.Activities.Statements
             int eventCounter
         )
         {
-            this.nativeActivityContext.Track(
-                new InteropTrackingRecord(
-                    this.Activity.DisplayName,
-                    new ActivityTrackingRecord(
-                        activity.GetType(),
-                        activity.QualifiedName,
-                        activity.ContextGuid,
-                        activity.Parent == null ? Guid.Empty : activity.Parent.ContextGuid,
-                        activity.ExecutionStatus,
-                        DateTime.UtcNow,
-                        eventCounter,
-                        null
+            this.nativeActivityContext
+                .Track(
+                    new InteropTrackingRecord(
+                        this.Activity.DisplayName,
+                        new ActivityTrackingRecord(
+                            activity.GetType(),
+                            activity.QualifiedName,
+                            activity.ContextGuid,
+                            activity.Parent == null ? Guid.Empty : activity.Parent.ContextGuid,
+                            activity.ExecutionStatus,
+                            DateTime.UtcNow,
+                            eventCounter,
+                            null
+                        )
                     )
-                )
-            );
+                );
         }
 
         public void TrackData(
@@ -148,21 +150,22 @@ namespace System.Activities.Statements
             object data
         )
         {
-            this.nativeActivityContext.Track(
-                new InteropTrackingRecord(
-                    this.Activity.DisplayName,
-                    new UserTrackingRecord(
-                        activity.GetType(),
-                        activity.QualifiedName,
-                        activity.ContextGuid,
-                        activity.Parent == null ? Guid.Empty : activity.Parent.ContextGuid,
-                        DateTime.UtcNow,
-                        eventCounter,
-                        key,
-                        data
+            this.nativeActivityContext
+                .Track(
+                    new InteropTrackingRecord(
+                        this.Activity.DisplayName,
+                        new UserTrackingRecord(
+                            activity.GetType(),
+                            activity.QualifiedName,
+                            activity.ContextGuid,
+                            activity.Parent == null ? Guid.Empty : activity.Parent.ContextGuid,
+                            DateTime.UtcNow,
+                            eventCounter,
+                            key,
+                            data
+                        )
                     )
-                )
-            );
+                );
         }
 
         public void Resume()
@@ -243,10 +246,8 @@ namespace System.Activities.Statements
             {
                 this.Activity.OnClose(this.nativeActivityContext, this.uncaughtException);
 
-                this.Activity.SetOutputArgumentValues(
-                    this.executor.Outputs,
-                    this.nativeActivityContext
-                );
+                this.Activity
+                    .SetOutputArgumentValues(this.executor.Outputs, this.nativeActivityContext);
 
                 this.nativeActivityContext.RemoveAllBookmarks();
                 this.executor.BookmarkQueueMap.Clear();
@@ -284,11 +285,12 @@ namespace System.Activities.Statements
                     foreach (IComparable bookmark in newBookmarks)
                     {
                         //
-                        Bookmark v2Bookmark = this.nativeActivityContext.CreateBookmark(
-                            bookmark.ToString(),
-                            this.bookmarkCallback,
-                            BookmarkOptions.MultipleResume
-                        );
+                        Bookmark v2Bookmark = this.nativeActivityContext
+                            .CreateBookmark(
+                                bookmark.ToString(),
+                                this.bookmarkCallback,
+                                BookmarkOptions.MultipleResume
+                            );
                         this.executor.BookmarkQueueMap.Add(v2Bookmark, bookmark);
                     }
                 }
@@ -424,11 +426,11 @@ namespace System.Activities.Statements
                 //Validate whether there is DP(Meta) backup
                 string dependencyPropertyName = propertyInfo.Name;
 
-                System.Workflow.ComponentModel.DependencyProperty dependencyProperty = System
-                    .Workflow
-                    .ComponentModel
-                    .DependencyProperty
-                    .FromName(dependencyPropertyName, propertyInfo.DeclaringType);
+                System.Workflow.ComponentModel.DependencyProperty dependencyProperty =
+                    System.Workflow
+                        .ComponentModel
+                        .DependencyProperty
+                        .FromName(dependencyPropertyName, propertyInfo.DeclaringType);
 
                 if (dependencyProperty != null && dependencyProperty.DefaultMetadata.IsMetaProperty)
                 {

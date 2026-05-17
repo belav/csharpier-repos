@@ -12,8 +12,7 @@ namespace System.Reflection.Emit.Tests
         public static void ThrowsWhenDynamicCodeNotSupported()
         {
             RemoteInvokeOptions options = new RemoteInvokeOptions();
-            options
-                .RuntimeConfigurationOptions
+            options.RuntimeConfigurationOptions
                 .Add(
                     "System.Runtime.CompilerServices.RuntimeFeature.IsDynamicCodeSupported",
                     false.ToString()

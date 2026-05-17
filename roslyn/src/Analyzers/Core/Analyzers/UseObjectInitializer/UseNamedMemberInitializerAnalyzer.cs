@@ -92,9 +92,11 @@ internal abstract class AbstractUseNamedMemberInitializerAnalyzer<
     protected sealed override bool ShouldAnalyze(CancellationToken cancellationToken)
     {
         // Can't add member initializers if the object already has a collection initializer attached to it.
-        return !this.SyntaxFacts.IsObjectCollectionInitializer(
-            this.SyntaxFacts.GetInitializerOfBaseObjectCreationExpression(_objectCreationExpression)
-        );
+        return !this.SyntaxFacts
+            .IsObjectCollectionInitializer(
+                this.SyntaxFacts
+                    .GetInitializerOfBaseObjectCreationExpression(_objectCreationExpression)
+            );
     }
 
     protected sealed override bool TryAddMatches(
@@ -111,9 +113,8 @@ internal abstract class AbstractUseNamedMemberInitializerAnalyzer<
     {
         using var _1 = PooledHashSet<string>.GetInstance(out var seenNames);
 
-        var initializer = this.SyntaxFacts.GetInitializerOfBaseObjectCreationExpression(
-            _objectCreationExpression
-        );
+        var initializer = this.SyntaxFacts
+            .GetInitializerOfBaseObjectCreationExpression(_objectCreationExpression);
         if (initializer != null)
         {
             foreach (
@@ -189,10 +190,11 @@ internal abstract class AbstractUseNamedMemberInitializerAnalyzer<
             // In the second case we'd change semantics because we'd access the old value
             // before the new value got written.
             if (
-                this.State.NodeContainsValuePatternOrReferencesInitializedSymbol(
-                    rightExpression,
-                    cancellationToken
-                )
+                this.State
+                    .NodeContainsValuePatternOrReferencesInitializedSymbol(
+                        rightExpression,
+                        cancellationToken
+                    )
             )
                 break;
 
@@ -268,10 +270,8 @@ internal abstract class AbstractUseNamedMemberInitializerAnalyzer<
 
             if (this.SyntaxFacts.IsSimpleMemberAccessExpression(node))
             {
-                var expression = this.SyntaxFacts.GetExpressionOfMemberAccessExpression(
-                    node,
-                    allowImplicitTarget: true
-                );
+                var expression = this.SyntaxFacts
+                    .GetExpressionOfMemberAccessExpression(node, allowImplicitTarget: true);
 
                 // If we're implicitly referencing some target that is before the
                 // object creation expression, then our semantics will change.

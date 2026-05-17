@@ -29,8 +29,7 @@ namespace System.ServiceModel.Security
                     == ReceiveSecurityHeaderElementCategory.Timestamp
                 )
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new MessageSecurityException(
                                 SR.GetString(SR.TimestampMustOccurFirstInSecurityHeaderLayout)

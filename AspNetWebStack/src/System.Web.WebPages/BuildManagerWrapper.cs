@@ -130,8 +130,7 @@ namespace System.Web.WebPages
 
             if (
                 document.Root == null
-                || !document
-                    .Root
+                || !document.Root
                     .Name
                     .LocalName
                     .Equals("precompiledApp", StringComparison.OrdinalIgnoreCase)
@@ -164,8 +163,7 @@ namespace System.Web.WebPages
                     Exists = objectFactory != null,
                 };
                 // Cache the result with a sliding expiration for a long duration.
-                HttpRuntime
-                    .Cache
+                HttpRuntime.Cache
                     .Add(
                         key,
                         buildManagerResult,

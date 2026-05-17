@@ -14,8 +14,7 @@ namespace Internal.TypeSystem.Ecma
                 return 0;
 
             Guid thisMvid = _metadataReader.GetGuid(_metadataReader.GetModuleDefinition().Mvid);
-            Guid otherMvid = other
-                ._metadataReader
+            Guid otherMvid = other._metadataReader
                 .GetGuid(other.MetadataReader.GetModuleDefinition().Mvid);
 
             Debug.Assert(

@@ -8905,8 +8905,7 @@ class C : IDisposable
     }
 }",
                 options: PreferDiscard,
-                parseOptions: CSharpParseOptions
-                    .Default
+                parseOptions: CSharpParseOptions.Default
                     .WithLanguageVersion(LanguageVersion.CSharp9)
             );
         }
@@ -8930,8 +8929,7 @@ class C : IDisposable
     }
 }",
                 options: PreferDiscard,
-                parseOptions: CSharpParseOptions
-                    .Default
+                parseOptions: CSharpParseOptions.Default
                     .WithLanguageVersion(LanguageVersion.CSharp9)
             );
         }

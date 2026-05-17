@@ -863,11 +863,8 @@ removed relation 2
             ds.Relations.Add("Relation", dt.Columns["col1"], dt2.Columns["col1"]);
             eventWriter.WriteLine("added relation 1");
 
-            DataRelation dr = ds.Relations.Add(
-                "Relation2",
-                dt2.Columns["col2"],
-                dt.Columns["col2"]
-            );
+            DataRelation dr = ds.Relations
+                .Add("Relation2", dt2.Columns["col2"], dt.Columns["col2"]);
             eventWriter.WriteLine("added relation 2");
 
             ds.Relations.Remove(dr);

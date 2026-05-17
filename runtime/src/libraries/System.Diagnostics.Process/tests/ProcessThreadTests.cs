@@ -159,31 +159,32 @@ namespace System.Diagnostics.Tests
 
                 // Now add a thread, and from that thread, while it's still alive, verify
                 // that there's at least one thread greater than the current time we previously grabbed.
-                await Task.Factory.StartNew(
-                    () =>
-                    {
-                        p.Refresh();
-                        try
+                await Task.Factory
+                    .StartNew(
+                        () =>
                         {
-                            var newest = p.Threads
-                                .Cast<ProcessThread>()
-                                .OrderBy(t => t.StartTime.ToUniversalTime())
-                                .Last();
-                            Assert.InRange(
-                                newest.StartTime.ToUniversalTime(),
-                                curTime - allowedWindow,
-                                DateTime.Now.ToUniversalTime() + allowedWindow
-                            );
-                        }
-                        catch (InvalidOperationException)
-                        {
-                            // A thread may have gone away between our getting its info and attempting to access its StartTime
-                        }
-                    },
-                    CancellationToken.None,
-                    TaskCreationOptions.LongRunning,
-                    TaskScheduler.Default
-                );
+                            p.Refresh();
+                            try
+                            {
+                                var newest = p.Threads
+                                    .Cast<ProcessThread>()
+                                    .OrderBy(t => t.StartTime.ToUniversalTime())
+                                    .Last();
+                                Assert.InRange(
+                                    newest.StartTime.ToUniversalTime(),
+                                    curTime - allowedWindow,
+                                    DateTime.Now.ToUniversalTime() + allowedWindow
+                                );
+                            }
+                            catch (InvalidOperationException)
+                            {
+                                // A thread may have gone away between our getting its info and attempting to access its StartTime
+                            }
+                        },
+                        CancellationToken.None,
+                        TaskCreationOptions.LongRunning,
+                        TaskScheduler.Default
+                    );
             }
         }
 

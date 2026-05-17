@@ -319,8 +319,7 @@ namespace System.Xml.Xsl.Xslt
 
                 if (compiler.Settings.EnableScript)
                 {
-                    XmlExtensionFunction scrFunc = compiler
-                        .Scripts
+                    XmlExtensionFunction scrFunc = compiler.Scripts
                         .ResolveFunction(name, ns, args.Count, (IErrorHelper)this);
                     if (scrFunc != null)
                     {

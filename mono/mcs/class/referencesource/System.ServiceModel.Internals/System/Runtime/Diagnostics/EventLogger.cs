@@ -222,10 +222,8 @@ namespace System.Runtime.Diagnostics
                             );
                         }
 
-                        this.diagnosticTrace.TraceEventLogEvent(
-                            type,
-                            new DictionaryTraceRecord((eventValues))
-                        );
+                        this.diagnosticTrace
+                            .TraceEventLogEvent(type, new DictionaryTraceRecord((eventValues)));
                     }
                 }
                 catch (Exception e)

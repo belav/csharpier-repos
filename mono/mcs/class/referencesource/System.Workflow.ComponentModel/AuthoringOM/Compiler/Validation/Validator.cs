@@ -65,11 +65,8 @@ namespace System.Workflow.ComponentModel.Compiler
                     );
                     if (dependencyProperty == null)
                     {
-                        object[] validationVisibilityAtrributes =
-                            args.CurrentProperty.GetCustomAttributes(
-                                typeof(ValidationOptionAttribute),
-                                true
-                            );
+                        object[] validationVisibilityAtrributes = args.CurrentProperty
+                            .GetCustomAttributes(typeof(ValidationOptionAttribute), true);
                         ValidationOption validationVisibility =
                             (validationVisibilityAtrributes.Length > 0)
                                 ? (
@@ -173,8 +170,7 @@ namespace System.Workflow.ComponentModel.Compiler
                         }
                         finally
                         {
-                            System
-                                .Diagnostics
+                            System.Diagnostics
                                 .Debug
                                 .Assert(
                                     manager.Context.Current == childContext,
@@ -187,8 +183,7 @@ namespace System.Workflow.ComponentModel.Compiler
             }
             finally
             {
-                System
-                    .Diagnostics
+                System.Diagnostics
                     .Debug
                     .Assert(
                         manager.Context.Current == propertyValidationContext,

@@ -2294,8 +2294,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     (true, false) or (false, true) => false,
                     (true, true) => true,
-                    _ => sourceSignature
-                        .ParameterRefKinds
+                    _ => sourceSignature.ParameterRefKinds
                         .SequenceEqual(targetSignature.ParameterRefKinds),
                 };
         }

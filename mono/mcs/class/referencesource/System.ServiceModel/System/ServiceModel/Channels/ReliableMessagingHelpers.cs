@@ -252,8 +252,7 @@ namespace System.ServiceModel.Channels
                 try
                 {
                     if (!TimeoutHelper.WaitOne(this.closeEvent, timeout))
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new TimeoutException(SR.GetString(SR.TimeoutOnOperation, timeout))
                             );
@@ -633,8 +632,7 @@ namespace System.ServiceModel.Channels
                 if (set)
                 {
                     if (this.communicationObject != null)
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(this.GetException());
 
                     return true;
@@ -651,8 +649,7 @@ namespace System.ServiceModel.Channels
                 if (!TimeoutHelper.WaitOne(this.handle, timeout))
                 {
                     if (throwTimeoutException)
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new TimeoutException(SR.GetString(SR.TimeoutOnOperation, timeout))
                             );
@@ -1151,8 +1148,7 @@ namespace System.ServiceModel.Channels
             object state
         )
         {
-            return faultState
-                .RequestContext
+            return faultState.RequestContext
                 .BeginReply(faultState.FaultMessage, timeout, callback, state);
         }
 
@@ -1258,12 +1254,13 @@ namespace System.ServiceModel.Channels
         {
             OperationWithTimeoutComposer.EndComposeAsyncOperations(result);
 
-            result = this.binder.BeginClose(
-                this.timeoutHelper.RemainingTime(),
-                MaskingMode.Handled,
-                onBinderCloseComplete,
-                this
-            );
+            result = this.binder
+                .BeginClose(
+                    this.timeoutHelper.RemainingTime(),
+                    MaskingMode.Handled,
+                    onBinderCloseComplete,
+                    this
+                );
 
             if (result.CompletedSynchronously)
             {
@@ -1366,11 +1363,8 @@ namespace System.ServiceModel.Channels
 
             try
             {
-                IAsyncResult result = this.binder.BeginOpen(
-                    timeoutHelper.RemainingTime(),
-                    onBinderOpenComplete,
-                    this
-                );
+                IAsyncResult result = this.binder
+                    .BeginOpen(timeoutHelper.RemainingTime(), onBinderOpenComplete, this);
                 throwing = false;
                 if (result.CompletedSynchronously)
                 {
@@ -1397,11 +1391,12 @@ namespace System.ServiceModel.Channels
 
         bool CloseBinder(Exception e)
         {
-            IAsyncResult result = this.binder.BeginClose(
-                this.timeoutHelper.RemainingTime(),
-                Fx.ThunkCallback(new AsyncCallback(this.OnBinderCloseComplete)),
-                e
-            );
+            IAsyncResult result = this.binder
+                .BeginClose(
+                    this.timeoutHelper.RemainingTime(),
+                    Fx.ThunkCallback(new AsyncCallback(this.OnBinderCloseComplete)),
+                    e
+                );
 
             if (result.CompletedSynchronously)
             {
@@ -1437,11 +1432,8 @@ namespace System.ServiceModel.Channels
         bool CompleteBinderOpen(bool synchronous, IAsyncResult result)
         {
             this.binder.EndOpen(result);
-            result = this.session.BeginOpen(
-                this.timeoutHelper.RemainingTime(),
-                onSessionOpenComplete,
-                this
-            );
+            result = this.session
+                .BeginOpen(this.timeoutHelper.RemainingTime(), onSessionOpenComplete, this);
 
             if (result.CompletedSynchronously)
             {
@@ -1647,8 +1639,7 @@ namespace System.ServiceModel.Channels
                 }
                 else
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ProtocolException(
                                 SR.GetString(
@@ -1701,8 +1692,7 @@ namespace System.ServiceModel.Channels
             {
                 if (exception is QuotaExceededException)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new CommunicationException(exception.Message, exception));
                 }
 
@@ -1730,8 +1720,7 @@ namespace System.ServiceModel.Channels
         {
             if (this.timeoutString1Index != null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new TimeoutException(
                             SR.GetString(this.timeoutString1Index, this.originalTimeout)
@@ -1894,11 +1883,12 @@ namespace System.ServiceModel.Channels
 
                     TimeSpan requestTimeout =
                         (requestResult == null)
-                            ? this.requestor.GetNextRequestTimeout(
-                                this.timeoutHelper.RemainingTime(),
-                                out this.iterationTimeoutHelper,
-                                out this.lastIteration
-                            )
+                            ? this.requestor
+                                .GetNextRequestTimeout(
+                                    this.timeoutHelper.RemainingTime(),
+                                    out this.iterationTimeoutHelper,
+                                    out this.lastIteration
+                                )
                             : TimeSpan.Zero;
 
                     try
@@ -1908,12 +1898,13 @@ namespace System.ServiceModel.Channels
                             if (this.requestor.EnsureChannel())
                             {
                                 this.request = this.requestor.CreateRequestMessage();
-                                requestResult = this.requestor.OnBeginRequest(
-                                    this.request,
-                                    requestTimeout,
-                                    requestCallback,
-                                    this
-                                );
+                                requestResult = this.requestor
+                                    .OnBeginRequest(
+                                        this.request,
+                                        requestTimeout,
+                                        requestCallback,
+                                        this
+                                    );
 
                                 if (!requestResult.CompletedSynchronously)
                                 {
@@ -1925,10 +1916,8 @@ namespace System.ServiceModel.Channels
 
                         if (requestResult != null)
                         {
-                            this.response = this.requestor.OnEndRequest(
-                                this.lastIteration,
-                                requestResult
-                            );
+                            this.response = this.requestor
+                                .OnEndRequest(this.lastIteration, requestResult);
                             requestCompleted = true;
                         }
                     }
@@ -2111,13 +2100,8 @@ namespace System.ServiceModel.Channels
             object state
         )
         {
-            return this.ClientBinder.BeginRequest(
-                request,
-                timeout,
-                MaskingMode.None,
-                callback,
-                state
-            );
+            return this.ClientBinder
+                .BeginRequest(request, timeout, MaskingMode.None, callback, state);
         }
 
         protected override Message OnEndRequest(bool last, IAsyncResult result)
@@ -2263,9 +2247,8 @@ namespace System.ServiceModel.Channels
             {
                 this.requestor.Binder.EndSend(result);
 
-                TimeSpan receiveTimeout = this.requestor.GetReceiveTimeout(
-                    this.timeoutHelper.RemainingTime()
-                );
+                TimeSpan receiveTimeout = this.requestor
+                    .GetReceiveTimeout(this.timeoutHelper.RemainingTime());
                 IAsyncResult tryReceiveResult = this.requestor
                     .Binder
                     .BeginTryReceive(receiveTimeout, MaskingMode.None, tryReceiveCallback, this);
@@ -2454,13 +2437,8 @@ namespace System.ServiceModel.Channels
         {
             try
             {
-                return this.Binder.BeginSend(
-                    this.request,
-                    timeout,
-                    MaskingMode.None,
-                    callback,
-                    state
-                );
+                return this.Binder
+                    .BeginSend(this.request, timeout, MaskingMode.None, callback, state);
             }
             finally
             {
@@ -2735,13 +2713,8 @@ namespace System.ServiceModel.Channels
             object state
         )
         {
-            return this.ClientBinder.BeginRequest(
-                this.Message,
-                timeout,
-                this.MaskingMode,
-                callback,
-                state
-            );
+            return this.ClientBinder
+                .BeginRequest(this.Message, timeout, this.MaskingMode, callback, state);
         }
 
         protected override void EndOperation(IAsyncResult result)
@@ -2935,8 +2908,7 @@ namespace System.ServiceModel.Channels
 
             if (cache == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ProtocolException(
                             SR.GetString(SR.AddressingVersionNotSupported, addressingVersion)
@@ -3501,8 +3473,7 @@ namespace System.ServiceModel.Channels
             int bufferRemaining
         )
         {
-            message
-                .Headers
+            message.Headers
                 .Insert(
                     0,
                     new WsrmAcknowledgmentHeader(
@@ -3532,8 +3503,7 @@ namespace System.ServiceModel.Channels
             bool isLast
         )
         {
-            message
-                .Headers
+            message.Headers
                 .Insert(
                     0,
                     new WsrmSequencedMessageHeader(
@@ -4042,8 +4012,7 @@ namespace System.ServiceModel.Channels
 
             if (sequenceNumber < 0 || (sequenceNumber == 0 && !allowZero))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new XmlException(SR.GetString(SR.InvalidSequenceNumber, sequenceNumber))
                     );

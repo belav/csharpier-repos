@@ -90,8 +90,7 @@ namespace System.ServiceModel.Security
                     InfoCardHelper.GetBindingSecurityVersionOrDefault(binding);
                 WSSecurityTokenSerializer tokenSerializer =
                     WSSecurityTokenSerializer.DefaultInstance;
-                result = credentials
-                    .GetInfoCardTokenCallback
+                result = credentials.GetInfoCardTokenCallback
                     .BeginInvoke(
                         requiresInfoCard,
                         chain,

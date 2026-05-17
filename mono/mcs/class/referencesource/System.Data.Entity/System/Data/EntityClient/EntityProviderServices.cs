@@ -96,8 +96,7 @@ namespace System.Data.EntityClient
             if (connection.GetType() != typeof(EntityConnection))
             {
                 throw EntityUtil.Argument(
-                    System
-                        .Data
+                    System.Data
                         .Entity
                         .Strings
                         .Mapping_Provider_WrongConnectionType(typeof(EntityConnection))

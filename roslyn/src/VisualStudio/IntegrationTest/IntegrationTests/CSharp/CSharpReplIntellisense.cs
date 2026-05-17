@@ -24,8 +24,7 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
         public void VerifyCompletionListOnEmptyTextAtTopLevel()
         {
             VisualStudio.InteractiveWindow.InvokeCompletionList();
-            VisualStudio
-                .InteractiveWindow
+            VisualStudio.InteractiveWindow
                 .Verify
                 .CompletionItemsExist("var", "public", "readonly", "goto");
         }
@@ -52,8 +51,7 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
         [WpfFact]
         public void VerifyCompletionListForAmbiguousParsingCases()
         {
-            VisualStudio
-                .InteractiveWindow
+            VisualStudio.InteractiveWindow
                 .InsertCode(
                     @"class C { }
 public delegate R Del<T, R>(T arg);
@@ -96,8 +94,7 @@ Del<C, System"
                 "int x = 2; class Complex { public int goo() { return 4; } }"
             );
             temporaryTextFile.Create();
-            VisualStudio
-                .InteractiveWindow
+            VisualStudio.InteractiveWindow
                 .SubmitText(string.Format("#load \"{0}\"", temporaryTextFile.FullName));
             VisualStudio.InteractiveWindow.InvokeCompletionList();
             VisualStudio.InteractiveWindow.Verify.CompletionItemsExist("x", "Complex");

@@ -122,8 +122,7 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
                 DataGrid3.DataBind();
                 ;
                 GHTSubTestAddResult(
-                    ((System.Web.UI.WebControls.BoundColumn)DataGrid3.Columns[0])
-                        .ReadOnly
+                    ((System.Web.UI.WebControls.BoundColumn)DataGrid3.Columns[0]).ReadOnly
                         .ToString()
                 );
             }
@@ -139,8 +138,7 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
                 DataGrid4.DataBind();
                 ;
                 GHTSubTestAddResult(
-                    ((System.Web.UI.WebControls.BoundColumn)DataGrid4.Columns[0])
-                        .ReadOnly
+                    ((System.Web.UI.WebControls.BoundColumn)DataGrid4.Columns[0]).ReadOnly
                         .ToString()
                 );
             }

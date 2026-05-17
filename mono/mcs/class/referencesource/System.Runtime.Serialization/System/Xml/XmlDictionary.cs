@@ -86,8 +86,7 @@ namespace System.Xml
         public virtual bool TryLookup(XmlDictionaryString value, out XmlDictionaryString result)
         {
             if (value == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility

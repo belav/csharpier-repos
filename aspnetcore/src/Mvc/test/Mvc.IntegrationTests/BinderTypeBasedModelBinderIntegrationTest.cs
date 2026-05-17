@@ -314,8 +314,7 @@ public class BinderTypeBasedModelBinderIntegrationTest
 
             var address = new Address() { Street = "SomeStreet" };
 
-            bindingContext
-                .ModelState
+            bindingContext.ModelState
                 .SetModelValue(
                     ModelNames.CreatePropertyModelName(bindingContext.ModelName, "Street"),
                     new string[] { address.Street },
@@ -342,8 +341,7 @@ public class BinderTypeBasedModelBinderIntegrationTest
 
             var address = new Address3 { Street = "SomeStreet" };
 
-            bindingContext
-                .ModelState
+            bindingContext.ModelState
                 .SetModelValue(
                     ModelNames.CreatePropertyModelName(bindingContext.ModelName, "Street"),
                     new string[] { address.Street },
@@ -363,8 +361,7 @@ public class BinderTypeBasedModelBinderIntegrationTest
             Debug.Assert(bindingContext.Result == ModelBindingResult.Failed());
 
             var model = "Success";
-            bindingContext
-                .ModelState
+            bindingContext.ModelState
                 .SetModelValue(bindingContext.ModelName, new string[] { model }, model);
 
             bindingContext.Result = ModelBindingResult.Success(model);

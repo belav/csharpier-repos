@@ -804,8 +804,7 @@ namespace System.Data
             }
             else
             {
-                iDest = destination
-                    .Tables
+                iDest = destination.Tables
                     .IndexOf(RelatedTable.TableName, RelatedTable.Namespace, false); // pass false for last param
             }
             if (iDest < 0)

@@ -143,8 +143,7 @@ public class WarningsTest
 
         Assert.Null(entity.Nav);
 
-        var log = loggerFactory
-            .Log
+        var log = loggerFactory.Log
             .Single(l =>
                 l.Message
                 == CoreResources
@@ -192,8 +191,7 @@ public class WarningsTest
 
         Assert.Null(entity.Nav);
 
-        var log = loggerFactory
-            .Log
+        var log = loggerFactory.Log
             .Single(l =>
                 l.Message
                 == CoreResources

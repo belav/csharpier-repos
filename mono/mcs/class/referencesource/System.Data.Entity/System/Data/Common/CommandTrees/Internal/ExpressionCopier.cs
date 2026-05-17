@@ -72,8 +72,7 @@ namespace System.Data.Common.CommandTrees.Internal
                 }
 
                 throw EntityUtil.Argument(
-                    System
-                        .Data
+                    System.Data
                         .Entity
                         .Strings
                         .Cqt_Copier_EntitySetNotFound(
@@ -84,8 +83,7 @@ namespace System.Data.Common.CommandTrees.Internal
             }
 
             throw EntityUtil.Argument(
-                System
-                    .Data
+                System.Data
                     .Entity
                     .Strings
                     .Cqt_Copier_EntityContainerNotFound(entitySet.EntityContainer.Name)
@@ -153,8 +151,7 @@ namespace System.Data.Common.CommandTrees.Internal
             }
 
             throw EntityUtil.Argument(
-                System
-                    .Data
+                System.Data
                     .Entity
                     .Strings
                     .Cqt_Copier_FunctionNotFound(TypeHelpers.GetFullName(function))
@@ -196,8 +193,7 @@ namespace System.Data.Common.CommandTrees.Internal
                         if (mappedPropInfo == null)
                         {
                             mappedPropInfo = new List<KeyValuePair<string, TypeUsage>>(
-                                rowType
-                                    .Properties
+                                rowType.Properties
                                     .Select(prop => new KeyValuePair<string, TypeUsage>(
                                         prop.Name,
                                         prop.TypeUsage
@@ -231,8 +227,7 @@ namespace System.Data.Common.CommandTrees.Internal
                 )
                 {
                     throw EntityUtil.Argument(
-                        System
-                            .Data
+                        System.Data
                             .Entity
                             .Strings
                             .Cqt_Copier_TypeNotFound(TypeHelpers.GetFullName(type))
@@ -307,8 +302,7 @@ namespace System.Data.Common.CommandTrees.Internal
                     if (!TryGetMember(newInstance, expression.Property.Name, out endMember))
                     {
                         throw EntityUtil.Argument(
-                            System
-                                .Data
+                            System.Data
                                 .Entity
                                 .Strings
                                 .Cqt_Copier_EndNotFound(
@@ -325,8 +319,7 @@ namespace System.Data.Common.CommandTrees.Internal
                     if (!TryGetMember(newInstance, expression.Property.Name, out navProp))
                     {
                         throw EntityUtil.Argument(
-                            System
-                                .Data
+                            System.Data
                                 .Entity
                                 .Strings
                                 .Cqt_Copier_NavPropertyNotFound(
@@ -343,8 +336,7 @@ namespace System.Data.Common.CommandTrees.Internal
                     if (!TryGetMember(newInstance, expression.Property.Name, out prop))
                     {
                         throw EntityUtil.Argument(
-                            System
-                                .Data
+                            System.Data
                                 .Entity
                                 .Strings
                                 .Cqt_Copier_PropertyNotFound(

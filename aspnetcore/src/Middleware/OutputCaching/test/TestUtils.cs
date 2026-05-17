@@ -178,8 +178,7 @@ internal class TestUtils
                             else
                             {
                                 outputCachingOptions.BasePolicies = new();
-                                outputCachingOptions
-                                    .BasePolicies
+                                outputCachingOptions.BasePolicies
                                     .Add(new OutputCachePolicyBuilder().Build());
                             }
                         });

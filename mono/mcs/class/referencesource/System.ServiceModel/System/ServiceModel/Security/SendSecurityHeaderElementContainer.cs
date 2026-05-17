@@ -172,10 +172,8 @@ namespace System.ServiceModel.Security
             if (
                 securityToken == null
                 || this.securityTokenMappedToIdentifierClause == null
-                || !this.securityTokenMappedToIdentifierClause.TryGetValue(
-                    securityToken,
-                    out keyIdentifierClause
-                )
+                || !this.securityTokenMappedToIdentifierClause
+                    .TryGetValue(securityToken, out keyIdentifierClause)
             )
             {
                 return false;

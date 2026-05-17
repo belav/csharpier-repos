@@ -46,8 +46,7 @@ namespace MonoCasTests.System.Security.Policy
         [TestFixtureSetUp]
         public void FixtureSetUp()
         {
-            defaultTrustManagerTypeName = ApplicationSecurityManager
-                .ApplicationTrustManager
+            defaultTrustManagerTypeName = ApplicationSecurityManager.ApplicationTrustManager
                 .GetType()
                 .AssemblyQualifiedName;
         }
@@ -109,8 +108,7 @@ namespace MonoCasTests.System.Security.Policy
         [ExpectedException(typeof(SecurityException))]
         public void DefaultTrustManager_DetermineApplicationTrust_DenyControlPolicy()
         {
-            ApplicationSecurityManager
-                .ApplicationTrustManager
+            ApplicationSecurityManager.ApplicationTrustManager
                 .DetermineApplicationTrust(null, null);
         }
 
@@ -119,8 +117,7 @@ namespace MonoCasTests.System.Security.Policy
         [ExpectedException(typeof(ArgumentNullException))]
         public void DefaultTrustManager_DetermineApplicationTrust_PermitOnlyControlPolicy()
         {
-            ApplicationSecurityManager
-                .ApplicationTrustManager
+            ApplicationSecurityManager.ApplicationTrustManager
                 .DetermineApplicationTrust(null, null);
         }
 

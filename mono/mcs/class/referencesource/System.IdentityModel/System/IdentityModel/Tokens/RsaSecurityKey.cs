@@ -38,8 +38,7 @@ namespace System.IdentityModel.Tokens
                     if (IsSupportedAlgorithm(algorithm))
                         return EncryptedXml.DecryptKey(keyData, rsa, false);
 
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new CryptographicException(
                                 SR.GetString(
@@ -64,8 +63,7 @@ namespace System.IdentityModel.Tokens
                     if (IsSupportedAlgorithm(algorithm))
                         return EncryptedXml.EncryptKey(keyData, rsa, false);
 
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new CryptographicException(
                                 SR.GetString(
@@ -85,8 +83,7 @@ namespace System.IdentityModel.Tokens
         {
             if (requiresPrivateKey && !HasPrivateKey())
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new CryptographicException(SR.GetString(SR.NoPrivateKeyAvailable))
                     );
@@ -99,8 +96,7 @@ namespace System.IdentityModel.Tokens
         {
             if (string.IsNullOrEmpty(algorithm))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(
                         algorithm,
                         SR.GetString(SR.EmptyOrNullArgumentString, "algorithm")
@@ -119,8 +115,7 @@ namespace System.IdentityModel.Tokens
                 if (hashAlgorithm != null)
                     return hashAlgorithm;
 
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new CryptographicException(
                             SR.GetString(SR.UnsupportedCryptoAlgorithm, algorithm)
@@ -135,8 +130,7 @@ namespace System.IdentityModel.Tokens
                 case SecurityAlgorithms.RsaSha256Signature:
                     return CryptoHelper.NewSha256HashAlgorithm();
                 default:
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new CryptographicException(
                                 SR.GetString(
@@ -153,8 +147,7 @@ namespace System.IdentityModel.Tokens
         {
             if (string.IsNullOrEmpty(algorithm))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(
                         algorithm,
                         SR.GetString(SR.EmptyOrNullArgumentString, "algorithm")
@@ -180,8 +173,7 @@ namespace System.IdentityModel.Tokens
                 }
                 catch (InvalidCastException e)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new NotSupportedException(
                                 SR.GetString(SR.AlgorithmAndKeyMisMatch, algorithm),
@@ -190,8 +182,7 @@ namespace System.IdentityModel.Tokens
                         );
                 }
 
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new CryptographicException(
                             SR.GetString(
@@ -209,8 +200,7 @@ namespace System.IdentityModel.Tokens
                 case SecurityAlgorithms.RsaSha256Signature:
                     return new RSAPKCS1SignatureDeformatter(rsa);
                 default:
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new CryptographicException(
                                 SR.GetString(
@@ -227,8 +217,7 @@ namespace System.IdentityModel.Tokens
         {
             if (string.IsNullOrEmpty(algorithm))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(
                         algorithm,
                         SR.GetString(SR.EmptyOrNullArgumentString, "algorithm")
@@ -255,8 +244,7 @@ namespace System.IdentityModel.Tokens
                 }
                 catch (InvalidCastException e)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new NotSupportedException(
                                 SR.GetString(SR.AlgorithmAndKeyMisMatch, algorithm),
@@ -265,8 +253,7 @@ namespace System.IdentityModel.Tokens
                         );
                 }
 
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new CryptographicException(
                             SR.GetString(
@@ -285,8 +272,7 @@ namespace System.IdentityModel.Tokens
                     // Ensure that we have an RSA algorithm object.
                     return new RSAPKCS1SignatureFormatter(this.rsa);
                 default:
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new CryptographicException(
                                 SR.GetString(
@@ -332,8 +318,7 @@ namespace System.IdentityModel.Tokens
         {
             if (string.IsNullOrEmpty(algorithm))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(
                         algorithm,
                         SR.GetString(SR.EmptyOrNullArgumentString, "algorithm")
@@ -347,8 +332,7 @@ namespace System.IdentityModel.Tokens
         {
             if (string.IsNullOrEmpty(algorithm))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(
                         algorithm,
                         SR.GetString(SR.EmptyOrNullArgumentString, "algorithm")

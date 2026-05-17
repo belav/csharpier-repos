@@ -87,8 +87,7 @@ namespace Internal.Win32
             // Make sure that the name does not contain double slahes
             Debug.Assert(!name.Contains(@"\\"));
 
-            int ret = Interop
-                .Advapi32
+            int ret = Interop.Advapi32
                 .RegOpenKeyEx(
                     _hkey,
                     name,
@@ -131,8 +130,7 @@ namespace Internal.Win32
 
             while (
                 (
-                    result = Interop
-                        .Advapi32
+                    result = Interop.Advapi32
                         .RegEnumKeyEx(
                             _hkey,
                             names.Count,
@@ -183,8 +181,7 @@ namespace Internal.Win32
 
                 while (
                     (
-                        result = Interop
-                            .Advapi32
+                        result = Interop.Advapi32
                             .RegEnumValue(
                                 _hkey,
                                 names.Count,
@@ -259,8 +256,7 @@ namespace Internal.Win32
 
                     fixed (byte* lpData = &MemoryMarshal.GetReference(span))
                     {
-                        result = Interop
-                            .Advapi32
+                        result = Interop.Advapi32
                             .RegQueryValueEx(_hkey, name, null, &type, lpData, (uint*)&dataLength);
                         if (dataLength < 0)
                         {
@@ -438,8 +434,7 @@ namespace Internal.Win32
             if (name != null && name.Length > MaxValueLength)
                 throw new ArgumentException(SR.Arg_RegValStrLenBug, nameof(name));
 
-            int ret = Interop
-                .Advapi32
+            int ret = Interop.Advapi32
                 .RegSetValueEx(
                     _hkey,
                     name,

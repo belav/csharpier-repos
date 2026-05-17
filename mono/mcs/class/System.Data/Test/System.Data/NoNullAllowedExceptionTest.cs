@@ -67,9 +67,10 @@ namespace MonoTests.System.Data
             // NoNullAllowedException - Add Row
             try
             {
-                tbl.Rows.Add(
-                    new object[] { DBNull.Value, "value", "value", new DateTime(0), 0.5, true }
-                );
+                tbl.Rows
+                    .Add(
+                        new object[] { DBNull.Value, "value", "value", new DateTime(0), 0.5, true }
+                    );
                 Assert.Fail("NNAE3: Rows.Add failed to raise NoNullAllowedException.");
             }
             catch (NoNullAllowedException) { }
@@ -189,9 +190,19 @@ namespace MonoTests.System.Data
             // NoNullAllowedException - Add Row
             try
             {
-                tbl.Rows.Add(
-                    new object[] { 1, "value", "value", new DateTime(0), 0.5, true, DBNull.Value }
-                );
+                tbl.Rows
+                    .Add(
+                        new object[]
+                        {
+                            1,
+                            "value",
+                            "value",
+                            new DateTime(0),
+                            0.5,
+                            true,
+                            DBNull.Value,
+                        }
+                    );
                 Assert.Fail("NNAE13: Rows.Add failed to raise NoNullAllowedException.");
             }
             catch (NoNullAllowedException) { }

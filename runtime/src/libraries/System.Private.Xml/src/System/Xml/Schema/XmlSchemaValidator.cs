@@ -907,8 +907,7 @@ namespace System.Xml.Schema
                     );
                     return;
                 }
-                XmlSchemaContentType contentType = _context
-                    .ElementDecl!
+                XmlSchemaContentType contentType = _context.ElementDecl!
                     .ContentValidator!
                     .ContentType;
                 switch (contentType)
@@ -937,8 +936,7 @@ namespace System.Xml.Schema
                         {
                             break;
                         }
-                        ArrayList? names = _context
-                            .ElementDecl
+                        ArrayList? names = _context.ElementDecl
                             .ContentValidator
                             .ExpectedParticles(_context, false, _schemaSet);
                         if (names == null || names.Count == 0)
@@ -1014,8 +1012,7 @@ namespace System.Xml.Schema
                     );
                 }
 
-                XmlSchemaContentType contentType = _context
-                    .ElementDecl!
+                XmlSchemaContentType contentType = _context.ElementDecl!
                     .ContentValidator!
                     .ContentType;
                 switch (contentType)
@@ -1161,8 +1158,7 @@ namespace System.Xml.Schema
             }
             if (_context.ElementDecl != null)
             {
-                ArrayList? expected = _context
-                    .ElementDecl
+                ArrayList? expected = _context.ElementDecl
                     .ContentValidator!
                     .ExpectedParticles(_context, false, _schemaSet);
                 if (expected != null)
@@ -1285,8 +1281,7 @@ namespace System.Xml.Schema
                             attSchemaInfo.Validity = XmlSchemaValidity.Valid;
                             attSchemaInfo.SchemaType = attdef.SchemaType;
                             attSchemaInfo.SchemaAttribute = attdef.SchemaAttribute;
-                            attrData.RawValue = attSchemaInfo
-                                .XmlType!
+                            attrData.RawValue = attSchemaInfo.XmlType!
                                 .ValueConverter
                                 .ToString(attrValidInfo.typedAttributeValue);
 
@@ -1415,8 +1410,7 @@ namespace System.Xml.Schema
                 {
                     if (_context.NeedValidateChildren)
                     {
-                        XmlSchemaContentType contentType = contextElementDecl
-                            .ContentValidator!
+                        XmlSchemaContentType contentType = contextElementDecl.ContentValidator!
                             .ContentType;
                         switch (contentType)
                         {
@@ -1595,8 +1589,7 @@ namespace System.Xml.Schema
 
                 while (true)
                 {
-                    particle = _context
-                        .ElementDecl
+                    particle = _context.ElementDecl
                         .ContentValidator!
                         .ValidateElement(head, _context, out errorCode);
                     if (particle != null)
@@ -1722,8 +1715,7 @@ namespace System.Xml.Schema
                     if (declBeforeXsi != null && declBeforeXsi != currentElementDecl)
                     { //There was xsi:type
                         Debug.Assert(currentElementDecl.Datatype != null);
-                        Exception? exception = currentElementDecl
-                            .Datatype
+                        Exception? exception = currentElementDecl.Datatype
                             .TryParseValue(
                                 currentElementDecl.DefaultValueRaw,
                                 _nameTable,
@@ -3299,8 +3291,7 @@ namespace System.Xml.Schema
                 if (getParticles)
                 {
                     Debug.Assert(schemaSet != null);
-                    names = context
-                        .ElementDecl
+                    names = context.ElementDecl
                         .ContentValidator!
                         .ExpectedParticles(context, true, schemaSet);
                 }

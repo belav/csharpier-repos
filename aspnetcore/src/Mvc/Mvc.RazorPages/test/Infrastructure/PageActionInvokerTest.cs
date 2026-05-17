@@ -1853,8 +1853,7 @@ public class PageActionInvokerTest : CommonResourceInvokerTest
         if (result != null)
         {
             handlers.Add((obj, args) => Task.FromResult(result));
-            actionDescriptor
-                .HandlerMethods
+            actionDescriptor.HandlerMethods
                 .Add(
                     new HandlerMethodDescriptor()
                     {
@@ -1866,8 +1865,7 @@ public class PageActionInvokerTest : CommonResourceInvokerTest
         else if (exception != null)
         {
             handlers.Add((obj, args) => Task.FromException<IActionResult>(exception));
-            actionDescriptor
-                .HandlerMethods
+            actionDescriptor.HandlerMethods
                 .Add(
                     new HandlerMethodDescriptor()
                     {

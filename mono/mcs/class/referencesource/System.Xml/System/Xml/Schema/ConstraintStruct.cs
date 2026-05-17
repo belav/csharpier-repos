@@ -490,8 +490,7 @@ namespace System.Xml.Schema
                         {
                             for (int j = 0; j < atomicValues.Length; j++)
                             {
-                                hashcode += ((XmlAtomicValue)atomicValues.GetValue(j))
-                                    .TypedValue
+                                hashcode += ((XmlAtomicValue)atomicValues.GetValue(j)).TypedValue
                                     .GetHashCode();
                             }
                         }

@@ -110,8 +110,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 );
             }
 
-            var tagIndices = ImmutableDictionary<string, IEnumerable<int>>
-                .Empty
+            var tagIndices = ImmutableDictionary<string, IEnumerable<int>>.Empty
                 .Add(
                     WellKnownDiagnosticTags.Unnecessary,
                     Enumerable.Range(
@@ -175,8 +174,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 );
             }
 
-            var tagIndices = ImmutableDictionary<string, IEnumerable<int>>
-                .Empty
+            var tagIndices = ImmutableDictionary<string, IEnumerable<int>>.Empty
                 .Add(
                     WellKnownDiagnosticTags.Unnecessary,
                     Enumerable.Range(

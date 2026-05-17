@@ -45,15 +45,12 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.InlayHint
                 || e.Option.Equals(InlineHintsOptionsStorage.ForLiteralParameters)
                 || e.Option.Equals(InlineHintsOptionsStorage.ForOtherParameters)
                 || e.Option.Equals(InlineHintsOptionsStorage.ForObjectCreationParameters)
-                || e.Option.Equals(
-                    InlineHintsOptionsStorage.SuppressForParametersThatDifferOnlyBySuffix
-                )
-                || e.Option.Equals(
-                    InlineHintsOptionsStorage.SuppressForParametersThatMatchArgumentName
-                )
-                || e.Option.Equals(
-                    InlineHintsOptionsStorage.SuppressForParametersThatMatchMethodIntent
-                )
+                || e.Option
+                    .Equals(InlineHintsOptionsStorage.SuppressForParametersThatDifferOnlyBySuffix)
+                || e.Option
+                    .Equals(InlineHintsOptionsStorage.SuppressForParametersThatMatchArgumentName)
+                || e.Option
+                    .Equals(InlineHintsOptionsStorage.SuppressForParametersThatMatchMethodIntent)
                 || e.Option.Equals(InlineHintsOptionsStorage.EnabledForTypes)
                 || e.Option.Equals(InlineHintsOptionsStorage.ForImplicitVariableTypes)
                 || e.Option.Equals(InlineHintsOptionsStorage.ForLambdaParameterTypes)

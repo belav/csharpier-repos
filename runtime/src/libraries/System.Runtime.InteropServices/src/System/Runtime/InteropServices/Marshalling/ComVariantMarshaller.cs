@@ -99,24 +99,21 @@ namespace System.Runtime.InteropServices.Marshalling
                 }
                 variant = ComVariant.CreateRaw(
                     VarEnum.VT_UNKNOWN,
-                    StrategyBasedComWrappers
-                        .DefaultMarshallingInstance
+                    StrategyBasedComWrappers.DefaultMarshallingInstance
                         .GetOrCreateComInterfaceForObject(wrapped, CreateComInterfaceFlags.None)
                 );
                 return true;
             }
             else if (
                 managed is not null
-                && StrategyBasedComWrappers
-                    .DefaultIUnknownInterfaceDetailsStrategy
+                && StrategyBasedComWrappers.DefaultIUnknownInterfaceDetailsStrategy
                     .GetComExposedTypeDetails(managed.GetType().TypeHandle)
                     is not null
             )
             {
                 variant = ComVariant.CreateRaw(
                     VarEnum.VT_UNKNOWN,
-                    StrategyBasedComWrappers
-                        .DefaultMarshallingInstance
+                    StrategyBasedComWrappers.DefaultMarshallingInstance
                         .GetOrCreateComInterfaceForObject(managed, CreateComInterfaceFlags.None)
                 );
                 return true;
@@ -174,8 +171,7 @@ namespace System.Runtime.InteropServices.Marshalling
                     return unmanaged.As<CurrencyWrapper>()!.WrappedObject;
                 case VarEnum.VT_UNKNOWN:
                 case VarEnum.VT_DISPATCH:
-                    return StrategyBasedComWrappers
-                        .DefaultMarshallingInstance
+                    return StrategyBasedComWrappers.DefaultMarshallingInstance
                         .GetOrCreateObjectForComInstance(
                             unmanaged.GetRawDataRef<nint>(),
                             CreateObjectFlags.Unwrap
@@ -215,8 +211,7 @@ namespace System.Runtime.InteropServices.Marshalling
                 case VarEnum.VT_BYREF | VarEnum.VT_CY:
                     return decimal.FromOACurrency(*(long*)unmanaged.GetRawDataRef<nint>());
                 case VarEnum.VT_BYREF | VarEnum.VT_UNKNOWN:
-                    return StrategyBasedComWrappers
-                        .DefaultMarshallingInstance
+                    return StrategyBasedComWrappers.DefaultMarshallingInstance
                         .GetOrCreateObjectForComInstance(
                             *(nint*)unmanaged.GetRawDataRef<nint>(),
                             CreateObjectFlags.Unwrap
@@ -365,9 +360,12 @@ namespace System.Runtime.InteropServices.Marshalling
                         );
                         break;
                     case (VarEnum.VT_UNKNOWN, object unkObj):
-                        *(IntPtr*)_unmanaged.GetRawDataRef<nint>() = StrategyBasedComWrappers
-                            .DefaultMarshallingInstance
-                            .GetOrCreateComInterfaceForObject(unkObj, CreateComInterfaceFlags.None);
+                        *(IntPtr*)_unmanaged.GetRawDataRef<nint>() =
+                            StrategyBasedComWrappers.DefaultMarshallingInstance
+                                .GetOrCreateComInterfaceForObject(
+                                    unkObj,
+                                    CreateComInterfaceFlags.None
+                                );
                         break;
                     default:
                         throw new ArgumentException(

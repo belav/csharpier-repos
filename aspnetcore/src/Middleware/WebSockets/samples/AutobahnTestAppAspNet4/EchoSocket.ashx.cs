@@ -26,12 +26,10 @@ namespace AutobahnTestAppAspNet4
             }
             else
             {
-                context
-                    .Response
+                context.Response
                     .Write(
                         "Ready to accept WebSocket request at: "
-                            + context
-                                .Request
+                            + context.Request
                                 .Url
                                 .ToString()
                                 .Replace("https://", "wss://")

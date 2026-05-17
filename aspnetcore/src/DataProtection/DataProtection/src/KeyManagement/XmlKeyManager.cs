@@ -116,8 +116,7 @@ public sealed class XmlKeyManager : IKeyManager, IInternalXmlKeyManager
         KeyRepository = keyRepository;
         KeyEncryptor = keyEncryptor;
 
-        _authenticatedEncryptorConfiguration = keyManagementOptions
-            .Value
+        _authenticatedEncryptorConfiguration = keyManagementOptions.Value
             .AuthenticatedEncryptorConfiguration!;
 
         var escrowSinks = keyManagementOptions.Value.KeyEscrowSinks;
@@ -158,8 +157,7 @@ public sealed class XmlKeyManager : IKeyManager, IInternalXmlKeyManager
     private static string DateTimeOffsetToFilenameSafeString(DateTimeOffset dateTime)
     {
         // similar to the XML format for dates, but with punctuation stripped
-        return dateTime
-            .UtcDateTime
+        return dateTime.UtcDateTime
             .ToString("yyyyMMddTHHmmssFFFFFFFZ", CultureInfo.InvariantCulture);
     }
 

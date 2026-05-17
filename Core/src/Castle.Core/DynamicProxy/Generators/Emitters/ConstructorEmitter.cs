@@ -44,8 +44,7 @@ namespace Castle.DynamicProxy.Generators.Emitters
 
             var args = ArgumentsUtil.InitializeAndConvert(arguments);
 
-            builder = mainType
-                .TypeBuilder
+            builder = mainType.TypeBuilder
                 .DefineConstructor(MethodAttributes.Public, CallingConventions.Standard, args);
             codeBuilder = new CodeBuilder();
         }

@@ -165,8 +165,7 @@ namespace MonoTests.System.Threading.Tasks
         public void ContinuationTest()
         {
             bool result = false;
-            var t = completionSource
-                .Task
+            var t = completionSource.Task
                 .ContinueWith(
                     (p) =>
                     {

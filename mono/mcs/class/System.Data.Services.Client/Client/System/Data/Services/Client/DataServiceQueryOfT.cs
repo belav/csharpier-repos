@@ -116,16 +116,17 @@ namespace System.Data.Services.Client
 
             MethodInfo mi = typeof(DataServiceQuery<TElement>).GetMethod("Expand");
             return (DataServiceQuery<TElement>)
-                this.Provider.CreateQuery<TElement>(
-                    Expression.Call(
-                        Expression.Convert(
-                            this.Expression,
-                            typeof(DataServiceQuery<TElement>.DataServiceOrderedQuery)
-                        ),
-                        mi,
-                        new Expression[] { Expression.Constant(path) }
-                    )
-                );
+                this.Provider
+                    .CreateQuery<TElement>(
+                        Expression.Call(
+                            Expression.Convert(
+                                this.Expression,
+                                typeof(DataServiceQuery<TElement>.DataServiceOrderedQuery)
+                            ),
+                            mi,
+                            new Expression[] { Expression.Constant(path) }
+                        )
+                    );
         }
 
         public DataServiceQuery<TElement> IncludeTotalCount()
@@ -133,15 +134,16 @@ namespace System.Data.Services.Client
             MethodInfo mi = typeof(DataServiceQuery<TElement>).GetMethod("IncludeTotalCount");
 
             return (DataServiceQuery<TElement>)
-                this.Provider.CreateQuery<TElement>(
-                    Expression.Call(
-                        Expression.Convert(
-                            this.Expression,
-                            typeof(DataServiceQuery<TElement>.DataServiceOrderedQuery)
-                        ),
-                        mi
-                    )
-                );
+                this.Provider
+                    .CreateQuery<TElement>(
+                        Expression.Call(
+                            Expression.Convert(
+                                this.Expression,
+                                typeof(DataServiceQuery<TElement>.DataServiceOrderedQuery)
+                            ),
+                            mi
+                        )
+                    );
         }
 
         public DataServiceQuery<TElement> AddQueryOption(string name, object value)
@@ -150,20 +152,21 @@ namespace System.Data.Services.Client
             Util.CheckArgumentNull(value, "value");
             MethodInfo mi = typeof(DataServiceQuery<TElement>).GetMethod("AddQueryOption");
             return (DataServiceQuery<TElement>)
-                this.Provider.CreateQuery<TElement>(
-                    Expression.Call(
-                        Expression.Convert(
-                            this.Expression,
-                            typeof(DataServiceQuery<TElement>.DataServiceOrderedQuery)
-                        ),
-                        mi,
-                        new Expression[]
-                        {
-                            Expression.Constant(name),
-                            Expression.Constant(value, typeof(object)),
-                        }
-                    )
-                );
+                this.Provider
+                    .CreateQuery<TElement>(
+                        Expression.Call(
+                            Expression.Convert(
+                                this.Expression,
+                                typeof(DataServiceQuery<TElement>.DataServiceOrderedQuery)
+                            ),
+                            mi,
+                            new Expression[]
+                            {
+                                Expression.Constant(name),
+                                Expression.Constant(value, typeof(object)),
+                            }
+                        )
+                    );
         }
 
 #if !ASTORIA_LIGHT

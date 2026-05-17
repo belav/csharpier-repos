@@ -173,8 +173,7 @@ namespace System.ServiceModel.Channels
             {
                 if (requiredSize > this.remainingSize)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             MaxMessageSizeStream.CreateMaxReceivedMessageSizeExceededException(
                                 this.maxSize

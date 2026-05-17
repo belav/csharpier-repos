@@ -50,8 +50,7 @@ namespace System.ServiceModel.Administration
             catch (SecurityException)
             {
                 // WMI is not supported in PT, rethrow a meaningful exception (will fail the service activation)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(SR.GetString(SR.PartialTrustWMINotEnabled))
                     );
@@ -62,19 +61,11 @@ namespace System.ServiceModel.Administration
         {
             this.wbemRegistrar = (WbemNative.IWbemDecoupledRegistrar)
                 new WbemNative.WbemDecoupledRegistrar();
-            int hr = this.wbemRegistrar.Register(
-                0,
-                null,
-                null,
-                null,
-                this.nameSpace,
-                this.appName,
-                this
-            );
+            int hr = this.wbemRegistrar
+                .Register(0, null, null, null, this.nameSpace, this.appName, this);
             if ((int)WbemNative.WbemStatus.WBEM_S_NO_ERROR != hr)
             {
-                DiagnosticUtility
-                    .EventLog
+                DiagnosticUtility.EventLog
                     .LogEvent(
                         TraceEventType.Error,
                         (ushort)System.Runtime.Diagnostics.EventLogCategory.Wmi,
@@ -94,8 +85,7 @@ namespace System.ServiceModel.Administration
                 int hr = this.wbemRegistrar.UnRegister();
                 if ((int)WbemNative.WbemStatus.WBEM_S_NO_ERROR != hr)
                 {
-                    DiagnosticUtility
-                        .EventLog
+                    DiagnosticUtility.EventLog
                         .LogEvent(
                             TraceEventType.Error,
                             (ushort)System.Runtime.Diagnostics.EventLogCategory.Wmi,
@@ -280,8 +270,7 @@ namespace System.ServiceModel.Administration
                 }
                 catch (WbemException e)
                 {
-                    DiagnosticUtility
-                        .EventLog
+                    DiagnosticUtility.EventLog
                         .LogEvent(
                             TraceEventType.Error,
                             (ushort)System.Runtime.Diagnostics.EventLogCategory.Wmi,
@@ -300,8 +289,7 @@ namespace System.ServiceModel.Administration
 #pragma warning suppress 56500 // covered by FxCOP
                 catch (Exception e)
                 {
-                    DiagnosticUtility
-                        .EventLog
+                    DiagnosticUtility.EventLog
                         .LogEvent(
                             TraceEventType.Error,
                             (ushort)System.Runtime.Diagnostics.EventLogCategory.Wmi,
@@ -459,8 +447,7 @@ namespace System.ServiceModel.Administration
                 }
                 catch (WbemException e)
                 {
-                    DiagnosticUtility
-                        .EventLog
+                    DiagnosticUtility.EventLog
                         .LogEvent(
                             TraceEventType.Error,
                             (ushort)System.Runtime.Diagnostics.EventLogCategory.Wmi,
@@ -479,8 +466,7 @@ namespace System.ServiceModel.Administration
 #pragma warning suppress 56500 // covered by FxCOP
                 catch (Exception e)
                 {
-                    DiagnosticUtility
-                        .EventLog
+                    DiagnosticUtility.EventLog
                         .LogEvent(
                             TraceEventType.Error,
                             (ushort)System.Runtime.Diagnostics.EventLogCategory.Wmi,
@@ -551,8 +537,7 @@ namespace System.ServiceModel.Administration
             }
             catch (WbemException e)
             {
-                DiagnosticUtility
-                    .EventLog
+                DiagnosticUtility.EventLog
                     .LogEvent(
                         TraceEventType.Error,
                         (ushort)System.Runtime.Diagnostics.EventLogCategory.Wmi,
@@ -570,8 +555,7 @@ namespace System.ServiceModel.Administration
 #pragma warning suppress 56500 // covered by FxCOP
             catch (Exception e)
             {
-                DiagnosticUtility
-                    .EventLog
+                DiagnosticUtility.EventLog
                     .LogEvent(
                         TraceEventType.Error,
                         (ushort)System.Runtime.Diagnostics.EventLogCategory.Wmi,
@@ -642,8 +626,7 @@ namespace System.ServiceModel.Administration
                     null,
                     null
                 );
-                DiagnosticUtility
-                    .EventLog
+                DiagnosticUtility.EventLog
                     .LogEvent(
                         TraceEventType.Error,
                         (ushort)System.Runtime.Diagnostics.EventLogCategory.Wmi,
@@ -656,8 +639,7 @@ namespace System.ServiceModel.Administration
 #pragma warning suppress 56500 // covered by FxCOP
             catch (Exception e)
             {
-                DiagnosticUtility
-                    .EventLog
+                DiagnosticUtility.EventLog
                     .LogEvent(
                         TraceEventType.Error,
                         (ushort)System.Runtime.Diagnostics.EventLogCategory.Wmi,
@@ -727,8 +709,7 @@ namespace System.ServiceModel.Administration
             }
             catch (WbemException e)
             {
-                DiagnosticUtility
-                    .EventLog
+                DiagnosticUtility.EventLog
                     .LogEvent(
                         TraceEventType.Error,
                         (ushort)System.Runtime.Diagnostics.EventLogCategory.Wmi,
@@ -746,8 +727,7 @@ namespace System.ServiceModel.Administration
 #pragma warning suppress 56500 // covered by FxCOP
             catch (Exception e)
             {
-                DiagnosticUtility
-                    .EventLog
+                DiagnosticUtility.EventLog
                     .LogEvent(
                         TraceEventType.Error,
                         (ushort)System.Runtime.Diagnostics.EventLogCategory.Wmi,
@@ -858,8 +838,7 @@ namespace System.ServiceModel.Administration
             }
             catch (WbemException e)
             {
-                DiagnosticUtility
-                    .EventLog
+                DiagnosticUtility.EventLog
                     .LogEvent(
                         TraceEventType.Error,
                         (ushort)System.Runtime.Diagnostics.EventLogCategory.Wmi,
@@ -877,8 +856,7 @@ namespace System.ServiceModel.Administration
 #pragma warning suppress 56500 // covered by FxCOP
             catch (Exception e)
             {
-                DiagnosticUtility
-                    .EventLog
+                DiagnosticUtility.EventLog
                     .LogEvent(
                         TraceEventType.Error,
                         (ushort)System.Runtime.Diagnostics.EventLogCategory.Wmi,
@@ -979,8 +957,7 @@ namespace System.ServiceModel.Administration
 
                 WbemNative.IWbemClassObject wbemObject = null;
                 WbemException.ThrowIfFail(
-                    parms
-                        .WbemServices
+                    parms.WbemServices
                         .GetObject(
                             parms.ClassName,
                             0,
@@ -1070,10 +1047,11 @@ namespace System.ServiceModel.Administration
                 {
                     if (!String.IsNullOrEmpty(match.Groups["ival"].Value))
                     {
-                        this.keys.Add(
-                            match.Groups["key"].Value,
-                            Int32.Parse(match.Groups["ival"].Value, CultureInfo.CurrentCulture)
-                        );
+                        this.keys
+                            .Add(
+                                match.Groups["key"].Value,
+                                Int32.Parse(match.Groups["ival"].Value, CultureInfo.CurrentCulture)
+                            );
                     }
                     else
                     {
@@ -1183,8 +1161,7 @@ namespace System.ServiceModel.Administration
                 this.className = className;
                 WbemNative.IWbemClassObject tempObj = null;
                 WbemException.ThrowIfFail(
-                    parms
-                        .WbemServices
+                    parms.WbemServices
                         .GetObject(className, 0, parms.WbemContext, ref tempObj, IntPtr.Zero)
                 );
 
@@ -1277,8 +1254,7 @@ namespace System.ServiceModel.Administration
                         System.Runtime.Diagnostics.EventLogEventId eventId;
                         if ((int)WbemNative.WbemStatus.WBEM_E_TYPE_MISMATCH == hResult)
                         {
-                            eventId = System
-                                .Runtime
+                            eventId = System.Runtime
                                 .Diagnostics
                                 .EventLogEventId
                                 .WmiAdminTypeMismatch;
@@ -1287,8 +1263,7 @@ namespace System.ServiceModel.Administration
                         {
                             eventId = System.Runtime.Diagnostics.EventLogEventId.WmiPropertyMissing;
                         }
-                        DiagnosticUtility
-                            .EventLog
+                        DiagnosticUtility.EventLog
                             .LogEvent(
                                 TraceEventType.Error,
                                 (ushort)System.Runtime.Diagnostics.EventLogCategory.Wmi,
@@ -1385,8 +1360,7 @@ namespace System.ServiceModel.Administration
                     Exception exception = job.Wait();
                     if (null != exception)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new ApplicationException(
                                     SR.GetString(SR.AdminMTAWorkerThreadException),

@@ -145,8 +145,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Interactive
             var targetFrameworkMoniker = (string)
                 dteProject.Properties.Item("TargetFrameworkMoniker").Value;
             var relativeOutputPath = (string)
-                dteProject
-                    .ConfigurationManager
+                dteProject.ConfigurationManager
                     .ActiveConfiguration
                     .Properties
                     .Item("OutputPath")
@@ -198,8 +197,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Interactive
         }
 
         internal Project GetProjectFromHierarchy(IVsHierarchy hierarchy) =>
-            _workspace
-                .CurrentSolution
+            _workspace.CurrentSolution
                 .Projects
                 .FirstOrDefault(proj => _workspace.GetHierarchy(proj.Id) == hierarchy);
 
@@ -286,8 +284,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Interactive
             foreach (var possibleGacName in possibleGacNames)
             {
                 if (
-                    DesktopAssemblyIdentityComparer
-                        .Default
+                    DesktopAssemblyIdentityComparer.Default
                         .ReferenceMatchesDefinition(identity, possibleGacName)
                 )
                 {
@@ -358,8 +355,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Interactive
             IInteractiveWindow interactiveWindow
         )
         {
-            var document = interactiveWindow
-                .CurrentLanguageBuffer
+            var document = interactiveWindow.CurrentLanguageBuffer
                 .CurrentSnapshot
                 .GetOpenDocumentInCurrentContextWithChanges();
             var compilation = await document.Project.GetCompilationAsync().ConfigureAwait(true);

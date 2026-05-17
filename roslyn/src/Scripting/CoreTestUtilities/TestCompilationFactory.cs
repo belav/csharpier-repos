@@ -26,8 +26,7 @@ namespace Microsoft.CodeAnalysis.Scripting
                 assemblyName ?? Guid.NewGuid().ToString(),
                 new[]
                 {
-                    CSharp
-                        .SyntaxFactory
+                    CSharp.SyntaxFactory
                         .ParseSyntaxTree(
                             SourceText.From(source, encoding: null, SourceHashAlgorithms.Default)
                         ),
@@ -46,8 +45,7 @@ namespace Microsoft.CodeAnalysis.Scripting
                 assemblyName ?? Guid.NewGuid().ToString(),
                 new[]
                 {
-                    VisualBasic
-                        .SyntaxFactory
+                    VisualBasic.SyntaxFactory
                         .ParseSyntaxTree(
                             SourceText.From(source, encoding: null, SourceHashAlgorithms.Default)
                         ),
@@ -68,8 +66,7 @@ namespace Microsoft.CodeAnalysis.Scripting
                 assemblyName ?? Guid.NewGuid().ToString(),
                 new[]
                 {
-                    CSharp
-                        .SyntaxFactory
+                    CSharp.SyntaxFactory
                         .ParseSyntaxTree(
                             SourceText.From(source, encoding: null, SourceHashAlgorithms.Default)
                         ),

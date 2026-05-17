@@ -291,8 +291,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
             else if (
                 this.Flags.Includes(BinderFlags.InFinallyBlock)
-                && (nodeOrToken.SyntaxTree as CSharpSyntaxTree)
-                    ?.Options
+                && (nodeOrToken.SyntaxTree as CSharpSyntaxTree)?.Options
                     ?.IsFeatureEnabled(MessageID.IDS_AwaitInCatchAndFinally) == false
             )
             {
@@ -301,8 +300,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
             else if (
                 this.Flags.Includes(BinderFlags.InCatchBlock)
-                && (nodeOrToken.SyntaxTree as CSharpSyntaxTree)
-                    ?.Options
+                && (nodeOrToken.SyntaxTree as CSharpSyntaxTree)?.Options
                     ?.IsFeatureEnabled(MessageID.IDS_AwaitInCatchAndFinally) == false
             )
             {
@@ -580,11 +578,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                 diagnostics
             );
 
-            var conversion = this.Conversions.ClassifyImplicitConversionFromType(
-                awaiterType,
-                INotifyCompletion,
-                ref useSiteInfo
-            );
+            var conversion = this.Conversions
+                .ClassifyImplicitConversionFromType(
+                    awaiterType,
+                    INotifyCompletion,
+                    ref useSiteInfo
+                );
             if (!conversion.IsImplicit)
             {
                 diagnostics.Add(node, useSiteInfo);

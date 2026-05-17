@@ -35,8 +35,7 @@ namespace System.Collections.Generic
             : base(syncRoot)
         {
             if (comparer == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("comparer"));
 
             this.comparer = comparer;
@@ -51,13 +50,11 @@ namespace System.Collections.Generic
             : base(syncRoot)
         {
             if (comparer == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("comparer"));
 
             if (dictionaryCreationThreshold < -1)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentOutOfRangeException(
                             "dictionaryCreationThreshold",
@@ -78,8 +75,7 @@ namespace System.Collections.Generic
             get
             {
                 if (key == null)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new ArgumentNullException("key"));
 
                 lock (this.SyncRoot)
@@ -94,8 +90,7 @@ namespace System.Collections.Generic
                             return item;
                     }
 
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new KeyNotFoundException());
                 }
             }
@@ -118,8 +113,7 @@ namespace System.Collections.Generic
             else
             {
                 if (this.Contains(key))
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentException(
                                 SR.GetString(
@@ -136,8 +130,7 @@ namespace System.Collections.Generic
         {
             // check if the item exists in the collection
             if (!this.ContainsItem(item))
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentException(
                             SR.GetString(SR.ItemDoesNotExistInSynchronizedKeyedCollection0)
@@ -168,8 +161,7 @@ namespace System.Collections.Generic
         public bool Contains(K key)
         {
             if (key == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("key"));
 
             lock (this.SyncRoot)
@@ -231,8 +223,7 @@ namespace System.Collections.Generic
         public bool Remove(K key)
         {
             if (key == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("key"));
 
             lock (this.SyncRoot)

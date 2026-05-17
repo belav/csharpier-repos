@@ -27,15 +27,13 @@ namespace System.Activities.DurableInstancing
         {
             if (!view.IsBoundToInstanceOwner)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(new InvalidOperationException(SRCore.OwnerRequired));
             }
 
             if (view.IsBoundToInstance)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(new InvalidOperationException(SRCore.AlreadyBoundToInstance));
             }
         }

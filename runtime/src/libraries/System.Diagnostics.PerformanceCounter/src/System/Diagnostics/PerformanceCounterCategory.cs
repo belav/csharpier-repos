@@ -458,29 +458,25 @@ namespace System.Diagnostics
                             )
                             && (
                                 currentSampleType
-                                != Interop
-                                    .Kernel32
+                                != Interop.Kernel32
                                     .PerformanceCounterOptions
                                     .PERF_100NSEC_MULTI_TIMER
                             )
                             && (
                                 currentSampleType
-                                != Interop
-                                    .Kernel32
+                                != Interop.Kernel32
                                     .PerformanceCounterOptions
                                     .PERF_100NSEC_MULTI_TIMER_INV
                             )
                             && (
                                 currentSampleType
-                                != Interop
-                                    .Kernel32
+                                != Interop.Kernel32
                                     .PerformanceCounterOptions
                                     .PERF_COUNTER_MULTI_TIMER
                             )
                             && (
                                 currentSampleType
-                                != Interop
-                                    .Kernel32
+                                != Interop.Kernel32
                                     .PerformanceCounterOptions
                                     .PERF_COUNTER_MULTI_TIMER_INV
                             )

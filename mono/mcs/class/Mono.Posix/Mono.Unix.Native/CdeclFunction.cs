@@ -93,8 +93,7 @@ namespace Mono.Unix.Native
             this.overloads = new Hashtable();
             this.assemblyName = new AssemblyName();
             this.assemblyName.Name = "Mono.Posix.Imports." + library;
-            this.assemblyBuilder = AppDomain
-                .CurrentDomain
+            this.assemblyBuilder = AppDomain.CurrentDomain
                 .DefineDynamicAssembly(assemblyName, AssemblyBuilderAccess.Run);
             this.moduleBuilder = assemblyBuilder.DefineDynamicModule(assemblyName.Name);
         }

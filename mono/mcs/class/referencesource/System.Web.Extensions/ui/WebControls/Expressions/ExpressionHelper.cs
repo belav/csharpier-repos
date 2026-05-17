@@ -29,8 +29,7 @@
 
         public static object BuildObjectValue(object value, Type type)
         {
-            return System
-                .Web
+            return System.Web
                 .UI
                 .WebControls
                 .DataSourceHelper
@@ -84,8 +83,7 @@
             {
                 throw new ArgumentNullException("source");
             }
-            return source
-                .Provider
+            return source.Provider
                 .CreateQuery(
                     Expression.Call(typeof(Queryable), queryMethod, genericArgs, arguments)
                 );
@@ -102,8 +100,7 @@
             {
                 throw new ArgumentNullException("source");
             }
-            return source
-                .Provider
+            return source.Provider
                 .CreateQuery(
                     Expression.Call(
                         typeof(Queryable),

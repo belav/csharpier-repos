@@ -147,8 +147,7 @@ namespace Microsoft.CodeAnalysis.MoveDeclarationNearReference
             }
             else
             {
-                var statementIndex = state
-                    .OutermostBlockStatements
+                var statementIndex = state.OutermostBlockStatements
                     .IndexOf(state.DeclarationStatement);
                 if (
                     statementIndex + 1 < state.OutermostBlockStatements.Count
@@ -360,8 +359,7 @@ namespace Microsoft.CodeAnalysis.MoveDeclarationNearReference
                 out var right
             );
 
-            return state
-                .DeclarationStatement
+            return state.DeclarationStatement
                 .ReplaceNode(
                     state.VariableDeclarator,
                     generator

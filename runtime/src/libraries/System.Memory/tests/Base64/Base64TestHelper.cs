@@ -423,8 +423,7 @@ namespace System.Buffers.Text.Tests
             string expectedText = Convert.ToBase64String(
                 source.Slice(0, expectedConsumed).ToArray()
             );
-            string encodedText = Encoding
-                .ASCII
+            string encodedText = Encoding.ASCII
                 .GetString(encodedBytes.Slice(0, expectedWritten).ToArray());
             return expectedText.Equals(encodedText);
         }
@@ -436,8 +435,7 @@ namespace System.Buffers.Text.Tests
             Span<byte> decodedBytes
         )
         {
-            string sourceString = Encoding
-                .ASCII
+            string sourceString = Encoding.ASCII
                 .GetString(source.Slice(0, expectedConsumed).ToArray());
             byte[] expectedBytes = Convert.FromBase64String(sourceString);
             return expectedBytes.AsSpan().SequenceEqual(decodedBytes.Slice(0, expectedWritten));

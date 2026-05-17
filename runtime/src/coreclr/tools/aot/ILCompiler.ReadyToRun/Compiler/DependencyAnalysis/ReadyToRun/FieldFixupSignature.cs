@@ -65,8 +65,7 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                         MetadataType owningType = (MetadataType)_fieldWithToken.Field.OwningType;
                         baseOffset = (uint)owningType.FieldBaseOffset().AsInt;
                         if (
-                            factory
-                                .CompilationModuleGroup
+                            factory.CompilationModuleGroup
                                 .NeedsAlignmentBetweenBaseTypeAndDerived(
                                     (MetadataType)baseType,
                                     owningType

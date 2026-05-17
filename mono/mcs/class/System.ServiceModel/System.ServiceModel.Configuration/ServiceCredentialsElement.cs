@@ -172,8 +172,7 @@ namespace System.ServiceModel.Configuration
             foreach (
                 X509CertificateTrustedIssuerElement ce in IssuedTokenAuthentication.KnownCertificates
             )
-                behavior
-                    .IssuedTokenAuthentication
+                behavior.IssuedTokenAuthentication
                     .KnownCertificates
                     .Add(
                         GetCertificate(
@@ -190,8 +189,7 @@ namespace System.ServiceModel.Configuration
 
             // Peer
             if (!String.IsNullOrEmpty(Peer.Certificate.FindValue))
-                behavior
-                    .Peer
+                behavior.Peer
                     .SetCertificate(
                         Peer.Certificate.StoreLocation,
                         Peer.Certificate.StoreName,
@@ -213,12 +211,12 @@ namespace System.ServiceModel.Configuration
                 (X509CertificateValidator)CreateInstance(
                     Peer.PeerAuthentication.CustomCertificateValidatorType
                 );
-            behavior.Peer.PeerAuthentication.CertificateValidationMode =
-                Peer.PeerAuthentication.CertificateValidationMode;
-            behavior.Peer.PeerAuthentication.RevocationMode =
-                Peer.PeerAuthentication.RevocationMode;
-            behavior.Peer.PeerAuthentication.TrustedStoreLocation =
-                Peer.PeerAuthentication.TrustedStoreLocation;
+            behavior.Peer.PeerAuthentication.CertificateValidationMode = Peer.PeerAuthentication
+                .CertificateValidationMode;
+            behavior.Peer.PeerAuthentication.RevocationMode = Peer.PeerAuthentication
+                .RevocationMode;
+            behavior.Peer.PeerAuthentication.TrustedStoreLocation = Peer.PeerAuthentication
+                .TrustedStoreLocation;
 
             // WSSC
             behavior.SecureConversationAuthentication.SecurityStateEncoder =
@@ -228,8 +226,7 @@ namespace System.ServiceModel.Configuration
 
             // X509
             if (!String.IsNullOrEmpty(ServiceCertificate.FindValue))
-                behavior
-                    .ServiceCertificate
+                behavior.ServiceCertificate
                     .SetCertificate(
                         ServiceCertificate.StoreLocation,
                         ServiceCertificate.StoreName,

@@ -257,8 +257,7 @@ class A
         var document = testLspServer.GetCurrentSolution().GetDocuments(locationTyped.Uri).Single();
 
         // Verify we haven't parsed snippets until asked.
-        var snippetParser = testLspServer
-            .TestWorkspace
+        var snippetParser = testLspServer.TestWorkspace
             .ExportProvider
             .GetExportedValue<XmlSnippetParser>();
         Assert.Equal(0, snippetParser.GetTestAccessor().GetCachedSnippetsCount());

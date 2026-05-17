@@ -155,8 +155,7 @@ namespace System.Web.Configuration
             if (configPath == MachinePath)
             {
                 if (map == null)
-                    return System
-                        .Runtime
+                    return System.Runtime
                         .InteropServices
                         .RuntimeEnvironment
                         .SystemConfigurationFile;

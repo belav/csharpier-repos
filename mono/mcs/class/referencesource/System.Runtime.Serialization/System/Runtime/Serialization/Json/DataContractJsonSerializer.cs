@@ -502,12 +502,10 @@ namespace System.Runtime.Serialization.Json
         {
             if (MaxItemsInObjectGraph == 0)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         XmlObjectSerializer.CreateSerializationException(
-                            System
-                                .Runtime
+                            System.Runtime
                                 .Serialization
                                 .SR
                                 .GetString(
@@ -522,12 +520,10 @@ namespace System.Runtime.Serialization.Json
             {
                 if (!InternalIsStartObject(xmlReader))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             XmlObjectSerializer.CreateSerializationExceptionWithReaderDetails(
-                                System
-                                    .Runtime
+                                System.Runtime
                                     .Serialization
                                     .SR
                                     .GetString(
@@ -542,12 +538,10 @@ namespace System.Runtime.Serialization.Json
             }
             else if (!IsStartElement(xmlReader))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         XmlObjectSerializer.CreateSerializationExceptionWithReaderDetails(
-                            System
-                                .Runtime
+                            System.Runtime
                                 .Serialization
                                 .SR
                                 .GetString(
@@ -586,12 +580,10 @@ namespace System.Runtime.Serialization.Json
         {
             if (MaxItemsInObjectGraph == 0)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         XmlObjectSerializer.CreateSerializationException(
-                            System
-                                .Runtime
+                            System.Runtime
                                 .Serialization
                                 .SR
                                 .GetString(
@@ -710,8 +702,7 @@ namespace System.Runtime.Serialization.Json
                     && (itemType.GetGenericTypeDefinition() == Globals.TypeOfKeyValue)
                 )
                 {
-                    itemType = Globals
-                        .TypeOfKeyValuePair
+                    itemType = Globals.TypeOfKeyValuePair
                         .MakeGenericType(itemType.GetGenericArguments());
                 }
                 this.knownTypeList.Add(itemType);
@@ -749,13 +740,11 @@ namespace System.Runtime.Serialization.Json
 
             if (maxItemsInObjectGraph < 0)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentOutOfRangeException(
                             "maxItemsInObjectGraph",
-                            System
-                                .Runtime
+                            System.Runtime
                                 .Serialization
                                 .SR
                                 .GetString(System.Runtime.Serialization.SR.ValueMustBeNonNegative)
@@ -803,8 +792,7 @@ namespace System.Runtime.Serialization.Json
         {
             if (dataContract.IsReference)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         XmlObjectSerializer.CreateSerializationException(
                             SR.GetString(

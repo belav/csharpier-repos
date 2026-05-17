@@ -306,8 +306,7 @@ namespace System.Text.Unicode
                         nextEntry.Name[..^", Last>".Length]
                     );
 
-                    string baseName = entry
-                        .Name
+                    string baseName = entry.Name
                         .Remove(entry.Name.Length - ", First>".Length, ", First".Length); // remove the ", First" part of the name
                     for (
                         int i = entry.CodePoint;

@@ -46,9 +46,8 @@ namespace System.Workflow.ComponentModel
                 Activity activity = null;
                 if (this.workflowCoreRuntime != null)
                 {
-                    Activity contextActivity = this.workflowCoreRuntime.GetContextActivityForId(
-                        this.stateId
-                    );
+                    Activity contextActivity = this.workflowCoreRuntime
+                        .GetContextActivityForId(this.stateId);
                     if (contextActivity != null)
                         activity = contextActivity.GetActivityByName(this.activityQualifiedName);
                 }

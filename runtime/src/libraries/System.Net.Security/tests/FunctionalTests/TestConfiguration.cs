@@ -50,8 +50,7 @@ namespace System.Net.Security.Tests
             }
         }
 
-        public static readonly X509Certificate2 ServerCertificate = System
-            .Net
+        public static readonly X509Certificate2 ServerCertificate = System.Net
             .Test
             .Common
             .Configuration

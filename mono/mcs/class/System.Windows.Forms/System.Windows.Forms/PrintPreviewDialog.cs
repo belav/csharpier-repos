@@ -108,8 +108,7 @@ namespace System.Windows.Forms
             toolbar.ShowToolTips = true;
             toolbar.DropDownArrows = true;
             toolbar.TabStop = true;
-            toolbar
-                .Buttons
+            toolbar.Buttons
                 .AddRange(
                     new ToolBarButton[]
                     {

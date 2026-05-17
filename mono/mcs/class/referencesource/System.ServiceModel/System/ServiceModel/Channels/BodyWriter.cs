@@ -42,8 +42,7 @@ namespace System.ServiceModel.Channels
         public BodyWriter CreateBufferedCopy(int maxBufferSize)
         {
             if (maxBufferSize < 0)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentOutOfRangeException(
                             "maxBufferSize",
@@ -60,8 +59,7 @@ namespace System.ServiceModel.Channels
                 lock (this.thisLock)
                 {
                     if (!this.canWrite)
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(
                                     SR.GetString(SR.BodyWriterCanOnlyBeWrittenOnce)
@@ -71,8 +69,7 @@ namespace System.ServiceModel.Channels
                 }
                 BodyWriter bodyWriter = OnCreateBufferedCopy(maxBufferSize);
                 if (!bodyWriter.IsBuffered)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(SR.BodyWriterReturnedIsNotBuffered)
@@ -123,16 +120,14 @@ namespace System.ServiceModel.Channels
         void EnsureWriteBodyContentsState(XmlDictionaryWriter writer)
         {
             if (writer == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("writer"));
             if (!this.isBuffered)
             {
                 lock (this.thisLock)
                 {
                     if (!this.canWrite)
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(
                                     SR.GetString(SR.BodyWriterCanOnlyBeWrittenOnce)

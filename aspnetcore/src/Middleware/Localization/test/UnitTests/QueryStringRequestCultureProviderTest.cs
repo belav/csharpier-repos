@@ -38,8 +38,7 @@ public class QueryStringRequestCultureProviderTest
                         );
                         app.Run(context =>
                         {
-                            var requestCultureFeature = context
-                                .Features
+                            var requestCultureFeature = context.Features
                                 .Get<IRequestCultureFeature>();
                             var requestCulture = requestCultureFeature.RequestCulture;
                             Assert.Equal("ar-SA", requestCulture.Culture.Name);
@@ -77,8 +76,7 @@ public class QueryStringRequestCultureProviderTest
                         );
                         app.Run(context =>
                         {
-                            var requestCultureFeature = context
-                                .Features
+                            var requestCultureFeature = context.Features
                                 .Get<IRequestCultureFeature>();
                             var requestCulture = requestCultureFeature.RequestCulture;
                             Assert.Equal("en-US", requestCulture.Culture.Name);
@@ -124,8 +122,7 @@ public class QueryStringRequestCultureProviderTest
                         );
                         app.Run(context =>
                         {
-                            var requestCultureFeature = context
-                                .Features
+                            var requestCultureFeature = context.Features
                                 .Get<IRequestCultureFeature>();
                             var requestCulture = requestCultureFeature.RequestCulture;
                             Assert.Equal("en-US", requestCulture.Culture.Name);
@@ -170,8 +167,7 @@ public class QueryStringRequestCultureProviderTest
                         );
                         app.Run(context =>
                         {
-                            var requestCultureFeature = context
-                                .Features
+                            var requestCultureFeature = context.Features
                                 .Get<IRequestCultureFeature>();
                             var requestCulture = requestCultureFeature.RequestCulture;
                             Assert.Equal("en-US", requestCulture.UICulture.Name);
@@ -216,8 +212,7 @@ public class QueryStringRequestCultureProviderTest
                         );
                         app.Run(context =>
                         {
-                            var requestCultureFeature = context
-                                .Features
+                            var requestCultureFeature = context.Features
                                 .Get<IRequestCultureFeature>();
                             var requestCulture = requestCultureFeature.RequestCulture;
                             Assert.Equal("ar-SA", requestCulture.Culture.Name);
@@ -263,8 +258,7 @@ public class QueryStringRequestCultureProviderTest
                         );
                         app.Run(context =>
                         {
-                            var requestCultureFeature = context
-                                .Features
+                            var requestCultureFeature = context.Features
                                 .Get<IRequestCultureFeature>();
                             var requestCulture = requestCultureFeature.RequestCulture;
                             Assert.Equal("ar-SA", requestCulture.Culture.Name);
@@ -310,8 +304,7 @@ public class QueryStringRequestCultureProviderTest
                         app.UseRequestLocalization(options);
                         app.Run(context =>
                         {
-                            var requestCultureFeature = context
-                                .Features
+                            var requestCultureFeature = context.Features
                                 .Get<IRequestCultureFeature>();
                             var requestCulture = requestCultureFeature.RequestCulture;
                             Assert.Equal("ar-SA", requestCulture.Culture.Name);
@@ -355,8 +348,7 @@ public class QueryStringRequestCultureProviderTest
                         app.UseRequestLocalization(options);
                         app.Run(context =>
                         {
-                            var requestCultureFeature = context
-                                .Features
+                            var requestCultureFeature = context.Features
                                 .Get<IRequestCultureFeature>();
                             var requestCulture = requestCultureFeature.RequestCulture;
                             Assert.Equal("fr", requestCulture.Culture.ToString());

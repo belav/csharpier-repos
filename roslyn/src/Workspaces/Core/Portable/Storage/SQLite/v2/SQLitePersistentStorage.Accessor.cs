@@ -232,8 +232,7 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
 
                 if (!Storage._shutdownTokenSource.IsCancellationRequested)
                 {
-                    using var _ = Storage
-                        ._connectionPool
+                    using var _ = Storage._connectionPool
                         .Target
                         .GetPooledConnection(out var connection);
 
@@ -314,13 +313,8 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
             ) =>
                 Storage.PerformWriteAsync(
                     static t =>
-                        t.self.WriteStream(
-                            t.key,
-                            t.name,
-                            t.stream,
-                            t.checksum,
-                            t.cancellationToken
-                        ),
+                        t.self
+                            .WriteStream(t.key, t.name, t.stream, t.checksum, t.cancellationToken),
                     (self: this, key, name, stream, checksum, cancellationToken),
                     cancellationToken
                 );
@@ -343,8 +337,7 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
 
                 if (!Storage._shutdownTokenSource.IsCancellationRequested)
                 {
-                    using var _ = Storage
-                        ._connectionPool
+                    using var _ = Storage._connectionPool
                         .Target
                         .GetPooledConnection(out var connection);
 
@@ -406,22 +399,20 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
                         // out the data value at all.
                         if (
                             t.checksum != null
-                            && !t.self.ChecksumsMatch_MustRunInTransaction(
-                                t.connection,
-                                t.database,
-                                t.rowId,
-                                t.checksum.Value
-                            )
+                            && !t.self
+                                .ChecksumsMatch_MustRunInTransaction(
+                                    t.connection,
+                                    t.database,
+                                    t.rowId,
+                                    t.checksum.Value
+                                )
                         )
                         {
                             return default;
                         }
 
-                        return t.connection.ReadDataBlob_MustRunInTransaction(
-                            t.database,
-                            t.self.Table,
-                            t.rowId
-                        );
+                        return t.connection
+                            .ReadDataBlob_MustRunInTransaction(t.database, t.self.Table, t.rowId);
                     },
                     (self: this, connection, database, checksum, rowId),
                     throwOnSqlException: true
@@ -444,11 +435,8 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
                 // writing to the blob.
                 var (stream, exception) = connection.RunInTransaction(
                     static t =>
-                        t.connection.ReadChecksum_MustRunInTransaction(
-                            t.database,
-                            t.self.Table,
-                            t.rowId
-                        ),
+                        t.connection
+                            .ReadChecksum_MustRunInTransaction(t.database, t.self.Table, t.rowId),
                     (self: this, connection, database, rowId),
                     throwOnSqlException: true
                 );

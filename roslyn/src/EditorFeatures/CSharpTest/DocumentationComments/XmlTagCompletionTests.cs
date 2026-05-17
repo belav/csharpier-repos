@@ -20,8 +20,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments
         private protected override IChainedCommandHandler<TypeCharCommandArgs> CreateCommandHandler(
             TestWorkspace workspace
         ) =>
-            workspace
-                .ExportProvider
+            workspace.ExportProvider
                 .GetCommandHandler<XmlTagCompletionCommandHandler>(
                     nameof(XmlTagCompletionCommandHandler),
                     ContentTypeNames.CSharpContentType

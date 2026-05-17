@@ -207,8 +207,7 @@ namespace System.Workflow.ComponentModel.Compiler
                         {
                             CompositeActivity compositeActivity = activity as CompositeActivity;
                             if (compositeActivity.CanModifyActivities)
-                                results
-                                    .Errors
+                                results.Errors
                                     .Add(
                                         CreateXomlCompilerError(
                                             new ValidationError(
@@ -256,8 +255,7 @@ namespace System.Workflow.ComponentModel.Compiler
                             tie.InnerException is TypeInitializationException
                             && tie.InnerException.InnerException != null
                         )
-                            results
-                                .Errors
+                            results.Errors
                                 .Add(
                                     CreateXomlCompilerError(
                                         new ValidationError(
@@ -272,8 +270,7 @@ namespace System.Workflow.ComponentModel.Compiler
                                     )
                                 );
                         else if (tie.InnerException.InnerException != null)
-                            results
-                                .Errors
+                            results.Errors
                                 .Add(
                                     CreateXomlCompilerError(
                                         new ValidationError(
@@ -284,8 +281,7 @@ namespace System.Workflow.ComponentModel.Compiler
                                     )
                                 );
                         else
-                            results
-                                .Errors
+                            results.Errors
                                 .Add(
                                     CreateXomlCompilerError(
                                         new ValidationError(
@@ -303,8 +299,7 @@ namespace System.Workflow.ComponentModel.Compiler
                     }
                     catch (Exception e)
                     {
-                        results
-                            .Errors
+                        results.Errors
                             .Add(
                                 CreateXomlCompilerError(
                                     new ValidationError(
@@ -461,8 +456,7 @@ namespace System.Workflow.ComponentModel.Compiler
                         && parameters.GenerateInMemory
                         && (
                             string.IsNullOrEmpty(parameters.CompilerOptions)
-                            || !parameters
-                                .CompilerOptions
+                            || !parameters.CompilerOptions
                                 .ToLower(CultureInfo.InvariantCulture)
                                 .Contains("/delaysign")
                         )
@@ -747,8 +741,7 @@ namespace System.Workflow.ComponentModel.Compiler
                         string.Empty,
                         0,
                         0,
-                        ErrorNumbers
-                            .Error_InvalidReferencedAssembly
+                        ErrorNumbers.Error_InvalidReferencedAssembly
                             .ToString(CultureInfo.InvariantCulture),
                         SR.GetString(SR.Error_ReferencedAssemblyIsInvalid, reference)
                     );

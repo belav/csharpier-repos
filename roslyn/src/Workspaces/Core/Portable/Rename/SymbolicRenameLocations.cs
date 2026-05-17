@@ -120,8 +120,7 @@ namespace Microsoft.CodeAnalysis.Rename
                     mergedLocations.AddRange(
                         renameMethodGroupReferences
                             ? result.Locations
-                            : result
-                                .Locations
+                            : result.Locations
                                 .Where(x => x.CandidateReason != CandidateReason.MemberGroup)
                     );
 
@@ -200,8 +199,7 @@ namespace Microsoft.CodeAnalysis.Rename
                 );
 
                 locations.AddAll(
-                    await referencedSymbol
-                        .Locations
+                    await referencedSymbol.Locations
                         .SelectManyInParallelAsync(
                             (l, c) =>
                                 ReferenceProcessing.GetRenamableReferenceLocationsAsync(

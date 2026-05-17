@@ -214,8 +214,7 @@ namespace Microsoft.Extensions.Logging.Test
                 )
                 .Returns(new Mock<ILogger>().Object);
 
-            var logger = factory
-                .Object
+            var logger = factory.Object
                 .CreateLogger(typeof(GenericClass<TestType, SecondTestType>));
 
             // Assert

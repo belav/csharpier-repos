@@ -47,8 +47,7 @@ public class NestedDtos : IntegrationTest<NestedDtos.DatabaseInitializer>
     {
         protected override void Seed(TestContext context)
         {
-            context
-                .Arts
+            context.Arts
                 .AddRange(
                     new[]
                     {

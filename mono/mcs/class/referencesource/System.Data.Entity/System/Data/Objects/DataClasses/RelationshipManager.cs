@@ -443,21 +443,18 @@ namespace System.Data.Objects.DataClasses
             );
             Debug.Assert(wrappedOwner.Context.Perspective != null, "Perspective is null");
 
-            EntityType entityType = wrappedOwner
-                .Context
+            EntityType entityType = wrappedOwner.Context
                 .MetadataWorkspace
                 .GetItem<EntityType>(wrappedOwner.IdentityType.FullName, DataSpace.OSpace);
             EdmMember member;
             if (
-                !wrappedOwner
-                    .Context
+                !wrappedOwner.Context
                     .Perspective
                     .TryGetMember(entityType, navigationProperty, false, out member)
                 || !(member is NavigationProperty)
             )
             {
-                var message = System
-                    .Data
+                var message = System.Data
                     .Entity
                     .Strings
                     .RelationshipManager_NavigationPropertyNotFound(navigationProperty);
@@ -500,8 +497,7 @@ namespace System.Data.Objects.DataClasses
             if (wrappedOwner.Context == null && wrappedOwner.RequiresRelationshipChangeTracking)
             {
                 throw new InvalidOperationException(
-                    System
-                        .Data
+                    System.Data
                         .Entity
                         .Strings
                         .RelationshipManager_CannotGetRelatEndForDetachedPocoEntity
@@ -1067,8 +1063,7 @@ namespace System.Data.Objects.DataClasses
             // First, get the CSpace association type from the relationship name, since the helper method looks up
             // association set in the CSpace, since there is no Entity Container in the OSpace
             if (
-                wrappedOwner
-                    .Context
+                wrappedOwner.Context
                     .Perspective
                     .TryGetTypeByName(
                         relationship.FullName,
@@ -1079,8 +1074,7 @@ namespace System.Data.Objects.DataClasses
             )
             {
                 //Get the entity container first
-                EntityContainer entityContainer = wrappedOwner
-                    .Context
+                EntityContainer entityContainer = wrappedOwner.Context
                     .MetadataWorkspace
                     .GetEntityContainer(ownerKey.EntityContainerName, DataSpace.CSpace);
                 EntitySet entitySet;
@@ -1325,8 +1319,7 @@ namespace System.Data.Objects.DataClasses
                 // MEST: This returns RelatedEnds representing AssociationTypes which belongs to AssociationSets
                 // which have one end of EntitySet of wrappedOwner.Entity's EntitySet
                 Debug.Assert(wrappedOwner.EntityKey != null, "null entityKey on a attached entity");
-                EntitySet entitySet = wrappedOwner
-                    .Context
+                EntitySet entitySet = wrappedOwner.Context
                     .GetEntitySet(
                         wrappedOwner.EntityKey.EntitySetName,
                         wrappedOwner.EntityKey.EntityContainerName
@@ -1431,8 +1424,7 @@ namespace System.Data.Objects.DataClasses
                             "Null context or ObjectStateManager"
                         );
 
-                        TransactionManager transManager = wrappedOwner
-                            .Context
+                        TransactionManager transManager = wrappedOwner.Context
                             .ObjectStateManager
                             .TransactionManager;
 
@@ -1455,8 +1447,7 @@ namespace System.Data.Objects.DataClasses
 
                         if (
                             transManager.IsAttachTracking
-                            && transManager
-                                .PromotedKeyEntries
+                            && transManager.PromotedKeyEntries
                                 .TryGetValue(wrappedOwner.Entity, out entry)
                         )
                         {
@@ -1656,8 +1647,7 @@ namespace System.Data.Objects.DataClasses
                         // Properties couldn't be found in entities in collections or refrences.
                         // Try to find missing properties in related key entries.
                         // This process is slow but it is not a common case.
-                        EntityEntry entry = wrappedOwner
-                            .Context
+                        EntityEntry entry = wrappedOwner.Context
                             .ObjectStateManager
                             .FindEntityEntry(ownerKey);
                         Debug.Assert(
@@ -1683,8 +1673,7 @@ namespace System.Data.Objects.DataClasses
             {
                 // NOTE this part is never executed when the method is called from ObjectStateManager.AcceptChanges(),
                 //      so we don't try to "retrieve" properties from the the same (callers) entity.
-                EntityEntry entry = wrappedOwner
-                    .Context
+                EntityEntry entry = wrappedOwner.Context
                     .ObjectStateManager
                     .FindEntityEntry(ownerKey);
                 Debug.Assert(entry != null, "Owner entry not found in the object state manager");
@@ -1875,8 +1864,7 @@ namespace System.Data.Objects.DataClasses
                 else
                 {
                     foreach (
-                        ReferentialConstraint constraint in association
-                            .ElementType
+                        ReferentialConstraint constraint in association.ElementType
                             .ReferentialConstraints
                     )
                     {

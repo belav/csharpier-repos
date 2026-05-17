@@ -88,8 +88,7 @@ namespace System.Runtime.Serialization.Json
             if (context != null)
             {
                 List<XmlQualifiedName> xmlNames = new List<XmlQualifiedName>();
-                DataContractDictionary[] entries = context
-                    .scopedKnownTypes
+                DataContractDictionary[] entries = context.scopedKnownTypes
                     .dataContractDictionaries;
                 if (entries != null)
                 {

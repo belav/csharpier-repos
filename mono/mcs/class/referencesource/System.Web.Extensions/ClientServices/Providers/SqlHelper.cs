@@ -392,13 +392,14 @@ namespace System.Web.ClientServices.Providers
         {
             if (_SqlCeParamType == null)
                 _SqlCeParamType = GetSqlCeType("SqlCeParameter");
-            cmd.Parameters.Add(
-                (DbParameter)
-                    Activator.CreateInstance(
-                        _SqlCeParamType,
-                        new object[] { paramName, paramValue }
-                    )
-            );
+            cmd.Parameters
+                .Add(
+                    (DbParameter)
+                        Activator.CreateInstance(
+                            _SqlCeParamType,
+                            new object[] { paramName, paramValue }
+                        )
+                );
         }
 
         /////////////////////////////////////////////////////////////////////////////////

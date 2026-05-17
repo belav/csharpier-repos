@@ -1321,8 +1321,7 @@ namespace Mono.Globalization.Unicode
                     {
                         var diaidx = c - 'A';
                         if (diaidx < 0 || diaidx >= diacritical.Length)
-                            Console
-                                .Error
+                            Console.Error
                                 .WriteLine("!!!!! warning: unexpected LATIN character: {0:X}", cp);
                         else
                         {
@@ -1990,15 +1989,13 @@ namespace Mono.Globalization.Unicode
                 )
             )
                 doc.Load(xr);
-            s = doc.SelectSingleNode(
-                "/ldml/collations/collation[@type='pinyin']/rules/pc"
-            ).InnerText;
+            s = doc.SelectSingleNode("/ldml/collations/collation[@type='pinyin']/rules/pc")
+                .InnerText;
             v = 0x8008;
             foreach (char c in s)
             {
                 if (c < '\u3100')
-                    Console
-                        .Error
+                    Console.Error
                         .WriteLine(
                             "---- warning: for {0} {1:X04} is omitted which should be {2:X04}",
                             category,
@@ -2017,15 +2014,13 @@ namespace Mono.Globalization.Unicode
             category = "cht";
             arr = cjkCHT;
             offset = 0; //char.MaxValue - arr.Length;
-            s = doc.SelectSingleNode(
-                "/ldml/collations/collation[@type='stroke']/rules/pc"
-            ).InnerText;
+            s = doc.SelectSingleNode("/ldml/collations/collation[@type='stroke']/rules/pc")
+                .InnerText;
             v = 0x8002;
             foreach (char c in s)
             {
                 if (c < '\u4E00')
-                    Console
-                        .Error
+                    Console.Error
                         .WriteLine(
                             "---- warning: for {0} {1:X04} is omitted which should be {2:X04}",
                             category,

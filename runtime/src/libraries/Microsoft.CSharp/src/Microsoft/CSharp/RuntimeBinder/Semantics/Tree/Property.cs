@@ -55,8 +55,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 
         internal static bool HasIsExternalInitModifier(MethWithType mwtSet)
         {
-            var types = (mwtSet.Meth()?.AssociatedMemberInfo as MethodInfo)
-                ?.ReturnParameter
+            var types = (mwtSet.Meth()?.AssociatedMemberInfo as MethodInfo)?.ReturnParameter
                 .GetRequiredCustomModifiers();
             return types != null
                 && types.Any(type =>

@@ -30,13 +30,11 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.InProcess
             CancellationToken cancellationToken
         )
         {
-            await textViewWindow
-                .TestServices
+            await textViewWindow.TestServices
                 .JoinableTaskFactory
                 .SwitchToMainThreadAsync(cancellationToken);
 
-            var broker = await textViewWindow
-                .TestServices
+            var broker = await textViewWindow.TestServices
                 .Shell
                 .GetComponentModelServiceAsync<IAsyncQuickInfoBroker>(cancellationToken);
             var session = await broker.TriggerQuickInfoAsync(
@@ -51,17 +49,14 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.InProcess
             CancellationToken cancellationToken
         )
         {
-            await textViewWindow
-                .TestServices
+            await textViewWindow.TestServices
                 .JoinableTaskFactory
                 .SwitchToMainThreadAsync(cancellationToken);
 
-            var view = await textViewWindow
-                .TestServices
+            var view = await textViewWindow.TestServices
                 .Editor
                 .GetActiveTextViewAsync(cancellationToken);
-            var broker = await textViewWindow
-                .TestServices
+            var broker = await textViewWindow.TestServices
                 .Shell
                 .GetComponentModelServiceAsync<IAsyncQuickInfoBroker>(cancellationToken);
 
@@ -84,13 +79,11 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.InProcess
             CancellationToken cancellationToken
         )
         {
-            await textViewWindow
-                .TestServices
+            await textViewWindow.TestServices
                 .JoinableTaskFactory
                 .SwitchToMainThreadAsync(cancellationToken);
 
-            var shell = await textViewWindow
-                .TestServices
+            var shell = await textViewWindow.TestServices
                 .Shell
                 .GetRequiredGlobalServiceAsync<SVsUIShell, IVsUIShell>(cancellationToken);
             var cmdGroup = typeof(VSConstants.VSStd14CmdID).GUID;
@@ -101,8 +94,7 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.InProcess
             shell.PostExecCommand(cmdGroup, (uint)cmdID, (uint)cmdExecOpt, ref obj);
 
             var view = await textViewWindow.GetActiveTextViewAsync(cancellationToken);
-            var broker = await textViewWindow
-                .TestServices
+            var broker = await textViewWindow.TestServices
                 .Shell
                 .GetComponentModelServiceAsync<ILightBulbBroker>(cancellationToken);
             await LightBulbHelper.WaitForLightBulbSessionAsync(
@@ -118,17 +110,14 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.InProcess
             CancellationToken cancellationToken
         )
         {
-            await textViewWindow
-                .TestServices
+            await textViewWindow.TestServices
                 .JoinableTaskFactory
                 .SwitchToMainThreadAsync(cancellationToken);
 
-            await textViewWindow
-                .TestServices
+            await textViewWindow.TestServices
                 .Shell
                 .ExecuteCommandAsync(WellKnownCommands.Edit.ListMembers, cancellationToken);
-            await textViewWindow
-                .TestServices
+            await textViewWindow.TestServices
                 .Workspace
                 .WaitForAsyncOperationsAsync(FeatureAttribute.CompletionSet, cancellationToken);
         }
@@ -138,8 +127,7 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.InProcess
             CancellationToken cancellationToken
         )
         {
-            await textViewWindow
-                .TestServices
+            await textViewWindow.TestServices
                 .JoinableTaskFactory
                 .SwitchToMainThreadAsync(cancellationToken);
 
@@ -152,8 +140,7 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.InProcess
             if (view is null)
                 return ImmutableArray<Completion>.Empty;
 
-            var broker = await textViewWindow
-                .TestServices
+            var broker = await textViewWindow.TestServices
                 .Shell
                 .GetComponentModelServiceAsync<ICompletionBroker>(cancellationToken);
             var sessions = broker.GetSessions(view);
@@ -177,8 +164,7 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.InProcess
 
             await textViewWindow.InvokeCodeActionListWithoutWaitingAsync(cancellationToken);
 
-            await textViewWindow
-                .TestServices
+            await textViewWindow.TestServices
                 .Workspace
                 .WaitForAsyncOperationsAsync(FeatureAttribute.LightBulb, cancellationToken);
         }
@@ -195,8 +181,7 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.InProcess
             {
                 // Workaround for extremely unstable async lightbulb (can dismiss itself when SuggestedActionsChanged
                 // fires while expanding the light bulb).
-                await textViewWindow
-                    .TestServices
+                await textViewWindow.TestServices
                     .Input
                     .SendAsync(
                         (VirtualKeyCode.OEM_PERIOD, VirtualKeyCode.CONTROL),
@@ -204,8 +189,7 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.InProcess
                     );
                 await Task.Delay(5000, cancellationToken);
 
-                await textViewWindow
-                    .TestServices
+                await textViewWindow.TestServices
                     .Editor
                     .DismissLightBulbSessionAsync(cancellationToken);
                 await Task.Delay(5000, cancellationToken);
@@ -219,15 +203,13 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.InProcess
             CancellationToken cancellationToken
         )
         {
-            await textViewWindow
-                .TestServices
+            await textViewWindow.TestServices
                 .JoinableTaskFactory
                 .SwitchToMainThreadAsync(cancellationToken);
 
             var view = await textViewWindow.GetActiveTextViewAsync(cancellationToken);
 
-            var broker = await textViewWindow
-                .TestServices
+            var broker = await textViewWindow.TestServices
                 .Shell
                 .GetComponentModelServiceAsync<ILightBulbBroker>(cancellationToken);
             if (!broker.IsLightBulbSessionActive(view))
@@ -283,15 +265,13 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.InProcess
             CancellationToken cancellationToken
         )
         {
-            await textViewWindow
-                .TestServices
+            await textViewWindow.TestServices
                 .JoinableTaskFactory
                 .SwitchToMainThreadAsync(cancellationToken);
 
             var view = await textViewWindow.GetActiveTextViewAsync(cancellationToken);
 
-            var dte = await textViewWindow
-                .TestServices
+            var dte = await textViewWindow.TestServices
                 .Shell
                 .GetRequiredGlobalServiceAsync<SDTE, EnvDTE.DTE>(cancellationToken);
             dte.Find.FindWhat = marker;
@@ -300,17 +280,22 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.InProcess
             dte.Find.Target = EnvDTE.vsFindTarget.vsFindTargetCurrentDocument;
             dte.Find.Action = EnvDTE.vsFindAction.vsFindActionFind;
 
-            var originalPosition = (await textViewWindow.GetCaretPositionAsync(cancellationToken))
-                .BufferPosition
+            var originalPosition = (
+                await textViewWindow.GetCaretPositionAsync(cancellationToken)
+            ).BufferPosition
                 .Position;
-            view.Caret.MoveTo(
-                new SnapshotPoint(
-                    (
-                        await textViewWindow.GetBufferContainingCaretAsync(view, cancellationToken)
-                    )!.CurrentSnapshot,
-                    0
-                )
-            );
+            view.Caret
+                .MoveTo(
+                    new SnapshotPoint(
+                        (
+                            await textViewWindow.GetBufferContainingCaretAsync(
+                                view,
+                                cancellationToken
+                            )
+                        )!.CurrentSnapshot,
+                        0
+                    )
+                );
 
             if (occurrence > 0)
             {
@@ -356,12 +341,13 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.InProcess
             if (charsOffset < 0)
             {
                 // On the first negative charsOffset, move to anchor-point position, as if the user hit the LEFT key
-                view.Caret.MoveTo(
-                    new SnapshotPoint(
-                        view.TextSnapshot,
-                        view.Selection.AnchorPoint.Position.Position
-                    )
-                );
+                view.Caret
+                    .MoveTo(
+                        new SnapshotPoint(
+                            view.TextSnapshot,
+                            view.Selection.AnchorPoint.Position.Position
+                        )
+                    );
 
                 for (var i = 0; i < -charsOffset - 1; i++)
                 {
@@ -374,10 +360,11 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.InProcess
             if (extendSelection)
             {
                 var newPosition = view.Selection.ActivePoint.Position.Position;
-                view.Selection.Select(
-                    new VirtualSnapshotPoint(view.TextSnapshot, originalPosition),
-                    new VirtualSnapshotPoint(view.TextSnapshot, newPosition)
-                );
+                view.Selection
+                    .Select(
+                        new VirtualSnapshotPoint(view.TextSnapshot, originalPosition),
+                        new VirtualSnapshotPoint(view.TextSnapshot, newPosition)
+                    );
                 view.Selection.Mode = selectBlock
                     ? TextSelectionMode.Box
                     : TextSelectionMode.Stream;
@@ -389,8 +376,7 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.InProcess
             CancellationToken cancellationToken
         )
         {
-            await textViewWindow
-                .TestServices
+            await textViewWindow.TestServices
                 .JoinableTaskFactory
                 .SwitchToMainThreadAsync(cancellationToken);
 
@@ -410,8 +396,7 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.InProcess
             CancellationToken cancellationToken
         )
         {
-            await textViewWindow
-                .TestServices
+            await textViewWindow.TestServices
                 .Workspace
                 .WaitForAsyncOperationsAsync(FeatureAttribute.CompletionSet, cancellationToken);
         }

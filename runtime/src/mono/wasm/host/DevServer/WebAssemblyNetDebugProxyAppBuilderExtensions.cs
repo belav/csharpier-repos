@@ -82,8 +82,7 @@ internal static class WebAssemblyNetDebugProxyAppBuilderExtensions
                                 }
                                 break;
                             case "/ws-proxy":
-                                context
-                                    .Response
+                                context.Response
                                     .Redirect($"{debugProxyBaseUrl}{browserUrl!.PathAndQuery}");
                                 break;
                             default:
@@ -138,8 +137,7 @@ internal sealed class TargetPickerUi
         {
             var msg = JsonSerializer.Serialize(args);
             var bytes = Encoding.UTF8.GetBytes(msg);
-            var bytesWithHeader = Encoding
-                .UTF8
+            var bytesWithHeader = Encoding.UTF8
                 .GetBytes($"{bytes.Length}:")
                 .Concat(bytes)
                 .ToArray();
@@ -229,8 +227,7 @@ internal sealed class TargetPickerUi
             catch (Exception)
             {
                 context.Response.StatusCode = 404;
-                await context
-                    .Response
+                await context.Response
                     .WriteAsync(
                         $@"WARNING:
 Open about:config:
@@ -255,8 +252,7 @@ firefox --start-debugger-server 6000 -new-tab about:debugging"
             string? toCmd = null;
             while (browserDebugClientConnect.Connected)
             {
-                var res = System
-                    .Text
+                var res = System.Text
                     .Json
                     .JsonDocument
                     .Parse(await ReceiveMessageLoop(browserDebugClientConnect, token))
@@ -338,8 +334,7 @@ firefox --start-debugger-server 6000 -new-tab about:debugging"
                         if (!foundAboutDebugging)
                         {
                             context.Response.StatusCode = 404;
-                            await context
-                                .Response
+                            await context.Response
                                 .WriteAsync(
                                     "WARNING: Open about:debugging tab before pressing Debugging Hotkey"
                                 );
@@ -459,8 +454,7 @@ firefox --start-debugger-server 6000 -new-tab about:debugging"
         }
         catch (Exception ex)
         {
-            await context
-                .Response
+            await context.Response
                 .WriteAsync(
                     $@"
 <h1>Unable to find debuggable browser tab</h1>
@@ -505,20 +499,17 @@ firefox --start-debugger-server 6000 -new-tab about:debugging"
             var suffix = string.IsNullOrEmpty(targetApplicationUrl)
                 ? string.Empty
                 : $" matching the URL {WebUtility.HtmlEncode(targetApplicationUrl)}";
-            await context
-                .Response
+            await context.Response
                 .WriteAsync(
                     $"<p>The list of targets returned by {WebUtility.HtmlEncode(debuggerTabsListUrl)} contains no entries{suffix}.</p>"
                 );
-            await context
-                .Response
+            await context.Response
                 .WriteAsync("<p>Make sure your browser is displaying the target application.</p>");
         }
         else
         {
             await context.Response.WriteAsync("<h1>Inspectable pages</h1>");
-            await context
-                .Response
+            await context.Response
                 .WriteAsync(
                     @"
                     <style type='text/css'>
@@ -553,8 +544,7 @@ firefox --start-debugger-server 6000 -new-tab about:debugging"
             foreach (var tab in matchingTabs)
             {
                 var devToolsUrlWithProxy = GetDevToolsUrlWithProxy(tab);
-                await context
-                    .Response
+                await context.Response
                     .WriteAsync(
                         $"<a class='inspectable-page' href='{WebUtility.HtmlEncode(devToolsUrlWithProxy)}'>"
                             + $"<h3>{WebUtility.HtmlEncode(tab.Title)}</h3>{WebUtility.HtmlEncode(tab.Url)}"

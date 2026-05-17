@@ -123,8 +123,7 @@ namespace System.ServiceModel.Channels
                 {
                     if (!this.reconnectEvent.WaitOne(timeoutHelper.RemainingTime()))
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new TimeoutException(
                                     SR.GetString(SR.TimeoutOnClose, timeoutHelper.OriginalTimeout)
@@ -398,8 +397,7 @@ namespace System.ServiceModel.Channels
                 this.listenerEndPoint = HandleServiceStart(isReconnecting);
                 if (string.IsNullOrEmpty(listenerEndPoint))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new CommunicationException(
                                 SR.GetString(SR.Sharing_EmptyListenerEndpoint, this.serviceName)
@@ -445,8 +443,7 @@ namespace System.ServiceModel.Channels
                         );
                         if (!createdNew)
                         {
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
                                     new CommunicationException(
                                         SR.GetString(
@@ -463,8 +460,7 @@ namespace System.ServiceModel.Channels
                         bool signalled = securityEvent.WaitOne(0, false);
                         if (!signalled)
                         {
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
                                     new CommunicationException(
                                         SR.GetString(
@@ -648,8 +644,7 @@ namespace System.ServiceModel.Channels
                     }
                     catch (Win32Exception exception)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new CommunicationException(
                                     SR.GetString(
@@ -677,8 +672,7 @@ namespace System.ServiceModel.Channels
                     }
                     catch (Win32Exception exception)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new CommunicationException(
                                     SR.GetString(
@@ -703,8 +697,7 @@ namespace System.ServiceModel.Channels
                     }
                     catch (Win32Exception exception)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new CommunicationException(
                                     SR.GetString(
@@ -725,8 +718,7 @@ namespace System.ServiceModel.Channels
                     }
                     catch (Win32Exception exception)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new CommunicationException(
                                     SR.GetString(
@@ -767,8 +759,7 @@ namespace System.ServiceModel.Channels
                         epa
                     );
 
-                registerChannelFactory
-                    .Endpoint
+                registerChannelFactory.Endpoint
                     .Behaviors
                     .Add(new SharedListenerProxyBehavior(this));
 
@@ -817,8 +808,7 @@ namespace System.ServiceModel.Channels
                     switch (status)
                     {
                         case ListenerExceptionStatus.ConflictingRegistration:
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
                                     new AddressAlreadyInUseException(
                                         SR.GetString(
@@ -829,8 +819,7 @@ namespace System.ServiceModel.Channels
                                     )
                                 );
                         case ListenerExceptionStatus.FailedToListen:
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
                                     new AddressAlreadyInUseException(
                                         SR.GetString(
@@ -841,8 +830,7 @@ namespace System.ServiceModel.Channels
                                     )
                                 );
                         default:
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
                                     new CommunicationException(
                                         SR.GetString(
@@ -887,8 +875,7 @@ namespace System.ServiceModel.Channels
                 }
                 catch (Win32Exception exception)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new CommunicationException(
                                 SR.GetString(
@@ -927,8 +914,7 @@ namespace System.ServiceModel.Channels
                 }
                 catch (Win32Exception exception)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new CommunicationException(
                                 SR.GetString(
@@ -1407,13 +1393,8 @@ namespace System.ServiceModel.Channels
                         return new CompletedAsyncResult<bool>(true, callback, state);
                     }
 
-                    return this.listenerProxy.BeginValidateUriRoute(
-                        uri,
-                        this.ipAddress,
-                        this.port,
-                        callback,
-                        state
-                    );
+                    return this.listenerProxy
+                        .BeginValidateUriRoute(uri, this.ipAddress, this.port, callback, state);
                 }
 
                 public override bool EndValidate(IAsyncResult result)
@@ -1455,8 +1436,7 @@ namespace System.ServiceModel.Channels
                 catch (Win32Exception exception)
                 {
                     // Wrap unexpected Win32Exception.
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(WrapEndpointReadingException(exception));
                 }
             }
@@ -1583,8 +1563,7 @@ namespace System.ServiceModel.Channels
                                     )
                                     {
                                         // service is disabled in the SCM, be specific
-                                        throw DiagnosticUtility
-                                            .ExceptionUtility
+                                        throw DiagnosticUtility.ExceptionUtility
                                             .ThrowHelperError(
                                                 new CommunicationException(
                                                     SR.GetString(
@@ -1604,8 +1583,7 @@ namespace System.ServiceModel.Channels
                                         != UnsafeNativeMethods.ERROR_SERVICE_ALREADY_RUNNING
                                     )
                                     {
-                                        throw DiagnosticUtility
-                                            .ExceptionUtility
+                                        throw DiagnosticUtility.ExceptionUtility
                                             .ThrowHelperError(
                                                 new CommunicationException(
                                                     SR.GetString(
@@ -1623,8 +1601,7 @@ namespace System.ServiceModel.Channels
                                 }
                                 else
                                 {
-                                    throw DiagnosticUtility
-                                        .ExceptionUtility
+                                    throw DiagnosticUtility.ExceptionUtility
                                         .ThrowHelperError(
                                             new CommunicationException(
                                                 SR.GetString(
@@ -1679,8 +1656,7 @@ namespace System.ServiceModel.Channels
                     );
                     if (serviceStatus != ServiceControllerStatus.Running)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new CommunicationException(
                                     SR.GetString(
@@ -1709,8 +1685,7 @@ namespace System.ServiceModel.Channels
                             + " exception: "
                             + exception
                     );
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(WrapEndpointReadingException(exception));
                 }
             }
@@ -2057,8 +2032,7 @@ namespace System.ServiceModel.Channels
                     ListenerUnsafeNativeMethods.ICorRuntimeHost corRuntimeHost;
 
                     corRuntimeHost = (ListenerUnsafeNativeMethods.ICorRuntimeHost)
-                        System
-                            .Runtime
+                        System.Runtime
                             .InteropServices
                             .RuntimeEnvironment
                             .GetRuntimeInterfaceAsObject(rclsid, riid);

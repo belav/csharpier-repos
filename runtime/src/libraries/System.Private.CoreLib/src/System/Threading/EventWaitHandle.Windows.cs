@@ -36,8 +36,7 @@ namespace System.Threading
             if (mode == EventResetMode.ManualReset)
                 eventFlags |= (uint)Interop.Kernel32.CREATE_EVENT_MANUAL_RESET;
 
-            SafeWaitHandle handle = Interop
-                .Kernel32
+            SafeWaitHandle handle = Interop.Kernel32
                 .CreateEventEx(IntPtr.Zero, name, eventFlags, AccessRights);
 
             int errorCode = Marshal.GetLastPInvokeError();

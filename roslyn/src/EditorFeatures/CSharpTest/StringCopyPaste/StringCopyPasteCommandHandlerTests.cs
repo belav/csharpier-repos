@@ -31,13 +31,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
     {
         internal sealed class StringCopyPasteTestState : AbstractCommandHandlerTestState
         {
-            private static readonly TestComposition s_composition = EditorTestCompositions
-                .EditorFeaturesWpf
-                .AddParts(typeof(StringCopyPasteCommandHandler));
+            private static readonly TestComposition s_composition =
+                EditorTestCompositions.EditorFeaturesWpf
+                    .AddParts(typeof(StringCopyPasteCommandHandler));
 
             private static readonly TestComposition s_compositionWithMockCopyPasteService =
-                EditorTestCompositions
-                    .EditorFeaturesWpf
+                EditorTestCompositions.EditorFeaturesWpf
                     .RemoveExcludedPartTypes(typeof(WpfStringCopyPasteService))
                     .AddParts(typeof(TestStringCopyPasteService))
                     .AddParts(typeof(StringCopyPasteCommandHandler));

@@ -23,8 +23,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
 
         internal static ReadOnlyCollection<byte>? GetCustomTypeInfoPayload(this MethodSymbol method)
         {
-            return method
-                .DeclaringCompilation
+            return method.DeclaringCompilation
                 .GetCustomTypeInfoPayload(
                     method.ReturnType,
                     method.ReturnTypeWithAnnotations.CustomModifiers.Length

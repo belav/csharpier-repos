@@ -92,8 +92,7 @@ namespace System.Windows.Forms
             int maxNumberOfBitsOn
         )
         {
-            System
-                .Diagnostics
+            System.Diagnostics
                 .Debug
                 .Assert(
                     maxNumberOfBitsOn >= 0 && maxNumberOfBitsOn < 32,
@@ -157,8 +156,7 @@ namespace System.Windows.Forms
             params int[] enumValues
         )
         {
-            System
-                .Diagnostics
+            System.Diagnostics
                 .Debug
                 .Assert(
                     Enum.GetValues(enumValue.GetType()).Length == enumValues.Length,
@@ -245,8 +243,7 @@ namespace System.Windows.Forms
             if (minVal != sequentialEnumInfo.MinValue)
             {
                 // put string allocation in the IF block so the common case doesnt build up the string.
-                System
-                    .Diagnostics
+                System.Diagnostics
                     .Debug
                     .Fail(
                         "Minimum passed in is not the actual minimum for the enum.  Consider changing the parameters or using a different function."
@@ -304,8 +301,7 @@ namespace System.Windows.Forms
             if (minVal != actualMinimum)
             {
                 // put string allocation in the IF block so the common case doesnt build up the string.
-                System
-                    .Diagnostics
+                System.Diagnostics
                     .Debug
                     .Fail(
                         "Minimum passed in is not the actual minimum for the enum.  Consider changing the parameters or using a different function."
@@ -314,8 +310,7 @@ namespace System.Windows.Forms
             if (maxVal != actualMaximum)
             {
                 // put string allocation in the IF block so the common case doesnt build up the string.
-                System
-                    .Diagnostics
+                System.Diagnostics
                     .Debug
                     .Fail(
                         "Maximum passed in is not the actual maximum for the enum.  Consider changing the parameters or using a different function."
@@ -324,8 +319,7 @@ namespace System.Windows.Forms
 
             if (maxBitsFound != maxBitsOn)
             {
-                System
-                    .Diagnostics
+                System.Diagnostics
                     .Debug
                     .Fail(
                         "Incorrect usage of IsEnumValid function. The bits set to 1 in this enum was found to be: "
@@ -336,8 +330,7 @@ namespace System.Windows.Forms
             }
             if (foundValue != isValid)
             {
-                System
-                    .Diagnostics
+                System.Diagnostics
                     .Debug
                     .Fail(
                         String.Format(

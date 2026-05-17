@@ -821,8 +821,7 @@ namespace Microsoft.Extensions.Hosting.Internal
             lifetime.ApplicationStarted.Register(() => wasStartedCalled = true);
 
             var wasStoppingCalled = false;
-            lifetime
-                .ApplicationStopping
+            lifetime.ApplicationStopping
                 .Register(() =>
                 {
                     wasStoppingCalled = true;
@@ -880,15 +879,13 @@ namespace Microsoft.Extensions.Hosting.Internal
                 var applicationStoppingCompletedBeforeApplicationStopped = false;
                 var applicationStoppedCompletedBeforeRunCompleted = false;
 
-                lifetime
-                    .ApplicationStarted
+                lifetime.ApplicationStarted
                     .Register(() =>
                     {
                         applicationStartedEvent.Set();
                     });
 
-                lifetime
-                    .ApplicationStopping
+                lifetime.ApplicationStopping
                     .Register(() =>
                     {
                         // Check whether the applicationStartedEvent has been set
@@ -901,8 +898,7 @@ namespace Microsoft.Extensions.Hosting.Internal
                         applicationStoppingEvent.Set();
                     });
 
-                lifetime
-                    .ApplicationStopped
+                lifetime.ApplicationStopped
                     .Register(() =>
                     {
                         // Check whether the applicationStoppingEvent has been set
@@ -1117,8 +1113,7 @@ namespace Microsoft.Extensions.Hosting.Internal
                                     Assert.Equal(1, startedCalls);
                                     Assert.Equal(1, stoppingCalls);
                                     Assert.True(
-                                        applicationLifetime
-                                            .ApplicationStopped
+                                        applicationLifetime.ApplicationStopped
                                             .IsCancellationRequested
                                     );
                                 };

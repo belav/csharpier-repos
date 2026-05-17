@@ -573,8 +573,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                 // Call Back Paint event
                 if (!selection)
                 {
-                    common
-                        .Chart
+                    common.Chart
                         .CallOnPrePaint(
                             new ChartPaintEventArgs(ser, graph, common, area.PlotAreaPosition)
                         );
@@ -814,8 +813,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                                 coord[2 * i + 1] = pointNew.Y;
                             }
 
-                            common
-                                .HotRegionsList
+                            common.HotRegionsList
                                 .AddHotRegion(path, false, coord, point, ser.Name, index);
 
                             //**************************************************************
@@ -859,8 +857,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                                         coord[2 * i + 1] = pointNew.Y;
                                     }
 
-                                    common
-                                        .HotRegionsList
+                                    common.HotRegionsList
                                         .AddHotRegion(
                                             linePath,
                                             false,
@@ -915,8 +912,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                 // Call Paint event
                 if (!selection)
                 {
-                    common
-                        .Chart
+                    common.Chart
                         .CallOnPostPaint(
                             new ChartPaintEventArgs(ser, graph, common, area.PlotAreaPosition)
                         );

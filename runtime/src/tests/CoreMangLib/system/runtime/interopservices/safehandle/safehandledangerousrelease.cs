@@ -89,8 +89,7 @@ public class SafeHandleDangerousRelease
     {
         bool retVal = true;
 
-        TestLibrary
-            .TestFramework
+        TestLibrary.TestFramework
             .BeginScenario(
                 "PosTest1: Call DangerousRelease after call DangerousAddRef for valid handle"
             );
@@ -103,8 +102,7 @@ public class SafeHandleDangerousRelease
             handle.DangerousAddRef(ref success);
             if (!success)
             {
-                TestLibrary
-                    .TestFramework
+                TestLibrary.TestFramework
                     .LogInformation("WARNING: Calling DangerousAddRef returns false");
             }
 
@@ -126,8 +124,7 @@ public class SafeHandleDangerousRelease
         bool retVal = true;
         int randValue = 0;
 
-        TestLibrary
-            .TestFramework
+        TestLibrary.TestFramework
             .BeginScenario(
                 "PosTest2: Call DangerousRelease after call DangerousAddRef for valid handle"
             );
@@ -141,8 +138,7 @@ public class SafeHandleDangerousRelease
             handle.DangerousAddRef(ref success);
             if (!success)
             {
-                TestLibrary
-                    .TestFramework
+                TestLibrary.TestFramework
                     .LogInformation("WARNING: Calling DangerousAddRef returns false");
             }
 
@@ -151,8 +147,7 @@ public class SafeHandleDangerousRelease
         catch (Exception e)
         {
             TestLibrary.TestFramework.LogError("002", "Unexpected exception: " + e);
-            TestLibrary
-                .TestFramework
+            TestLibrary.TestFramework
                 .LogInformation("WARNING: [LOCAL VARIABLES] randValue = " + randValue.ToString());
             TestLibrary.TestFramework.LogInformation(e.StackTrace);
             retVal = false;
@@ -166,8 +161,7 @@ public class SafeHandleDangerousRelease
     {
         bool retVal = true;
 
-        TestLibrary
-            .TestFramework
+        TestLibrary.TestFramework
             .BeginScenario(
                 "PosTest3: Call DangerousRelease after call DangerousAddRef for invalid handle"
             );
@@ -180,8 +174,7 @@ public class SafeHandleDangerousRelease
             handle.DangerousAddRef(ref success);
             if (!success)
             {
-                TestLibrary
-                    .TestFramework
+                TestLibrary.TestFramework
                     .LogInformation("WARNING: Calling DangerousAddRef returns false");
             }
 
@@ -203,8 +196,7 @@ public class SafeHandleDangerousRelease
         bool retVal = true;
         int randValue = 0;
 
-        TestLibrary
-            .TestFramework
+        TestLibrary.TestFramework
             .BeginScenario(
                 "PosTest4: Call DangerousRelease after call DangerousAddRef for invalid handle"
             );
@@ -218,8 +210,7 @@ public class SafeHandleDangerousRelease
             handle.DangerousAddRef(ref success);
             if (!success)
             {
-                TestLibrary
-                    .TestFramework
+                TestLibrary.TestFramework
                     .LogInformation("WARNING: Calling DangerousAddRef returns false");
             }
 
@@ -228,8 +219,7 @@ public class SafeHandleDangerousRelease
         catch (Exception e)
         {
             TestLibrary.TestFramework.LogError("004", "Unexpected exception: " + e);
-            TestLibrary
-                .TestFramework
+            TestLibrary.TestFramework
                 .LogInformation("WARNING: [LOCAL VARIABLES] randValue = " + randValue.ToString());
             TestLibrary.TestFramework.LogInformation(e.StackTrace);
             retVal = false;
@@ -244,8 +234,7 @@ public class SafeHandleDangerousRelease
         bool retVal = true;
         int randValue = 0;
 
-        TestLibrary
-            .TestFramework
+        TestLibrary.TestFramework
             .BeginScenario(
                 "PosTest5: Call DangerousAddRef after call DangerousRelease for valid handle"
             );
@@ -259,8 +248,7 @@ public class SafeHandleDangerousRelease
             handle.DangerousAddRef(ref success);
             if (!success)
             {
-                TestLibrary
-                    .TestFramework
+                TestLibrary.TestFramework
                     .LogInformation("WARNING: Calling DangerousAddRef returns false");
             }
 
@@ -269,8 +257,7 @@ public class SafeHandleDangerousRelease
             handle.DangerousAddRef(ref success);
             if (!success)
             {
-                TestLibrary
-                    .TestFramework
+                TestLibrary.TestFramework
                     .LogError(
                         "005.1",
                         "Calling DangerousAddRef returns false after calling DangerousRelease"
@@ -282,8 +269,7 @@ public class SafeHandleDangerousRelease
         catch (Exception e)
         {
             TestLibrary.TestFramework.LogError("005.2", "Unexpected exception: " + e);
-            TestLibrary
-                .TestFramework
+            TestLibrary.TestFramework
                 .LogInformation("WARNING: [LOCAL VARIABLES] randValue = " + randValue.ToString());
             TestLibrary.TestFramework.LogInformation(e.StackTrace);
             retVal = false;
@@ -298,8 +284,7 @@ public class SafeHandleDangerousRelease
         bool retVal = true;
         int randValue = 0;
 
-        TestLibrary
-            .TestFramework
+        TestLibrary.TestFramework
             .BeginScenario(
                 "PosTest6: Call DangerousAddRef after call DangerousRelease for invalid handle"
             );
@@ -313,8 +298,7 @@ public class SafeHandleDangerousRelease
             handle.DangerousAddRef(ref success);
             if (!success)
             {
-                TestLibrary
-                    .TestFramework
+                TestLibrary.TestFramework
                     .LogInformation("WARNING: Calling DangerousAddRef returns false");
             }
 
@@ -323,8 +307,7 @@ public class SafeHandleDangerousRelease
             handle.DangerousAddRef(ref success);
             if (!success)
             {
-                TestLibrary
-                    .TestFramework
+                TestLibrary.TestFramework
                     .LogError(
                         "006.1",
                         "Calling DangerousAddRef returns false after calling DangerousRelease"
@@ -336,8 +319,7 @@ public class SafeHandleDangerousRelease
         catch (Exception e)
         {
             TestLibrary.TestFramework.LogError("006.2", "Unexpected exception: " + e);
-            TestLibrary
-                .TestFramework
+            TestLibrary.TestFramework
                 .LogInformation("WARNING: [LOCAL VARIABLES] randValue = " + randValue.ToString());
             TestLibrary.TestFramework.LogInformation(e.StackTrace);
             retVal = false;
@@ -356,8 +338,7 @@ public class SafeHandleDangerousRelease
         bool retVal = true;
         int randValue = 0;
 
-        TestLibrary
-            .TestFramework
+        TestLibrary.TestFramework
             .BeginScenario("NegTest1: Call DangerousRelease without call DangerousAddRef");
 
         try
@@ -373,8 +354,7 @@ public class SafeHandleDangerousRelease
         catch (Exception e)
         {
             TestLibrary.TestFramework.LogError("101", "Unexpected exception: " + e);
-            TestLibrary
-                .TestFramework
+            TestLibrary.TestFramework
                 .LogInformation("WARNING: [LOCAL VARIABLES] randValue = " + randValue.ToString());
             TestLibrary.TestFramework.LogInformation(e.StackTrace);
             retVal = false;
@@ -389,8 +369,7 @@ public class SafeHandleDangerousRelease
         bool retVal = true;
         int randValue = 0;
 
-        TestLibrary
-            .TestFramework
+        TestLibrary.TestFramework
             .BeginScenario(
                 "NegTest2: Call DangerousRelease twice with one call DangerousAddRef for valid handle"
             );
@@ -407,8 +386,7 @@ public class SafeHandleDangerousRelease
             handle.DangerousAddRef(ref success);
             if (!success)
             {
-                TestLibrary
-                    .TestFramework
+                TestLibrary.TestFramework
                     .LogInformation("WARNING: Calling DangerousAddRef returns false");
             }
 
@@ -418,8 +396,7 @@ public class SafeHandleDangerousRelease
         catch (Exception e)
         {
             TestLibrary.TestFramework.LogError("102.1", "Unexpected exception: " + e);
-            TestLibrary
-                .TestFramework
+            TestLibrary.TestFramework
                 .LogInformation("WARNING: [LOCAL VARIABLES] randValue = " + randValue.ToString());
             TestLibrary.TestFramework.LogInformation(e.StackTrace);
             retVal = false;

@@ -23,8 +23,7 @@ namespace System.Globalization
             }
 
             IntPtr handle;
-            int ret = Interop
-                .Kernel32
+            int ret = Interop.Kernel32
                 .LCMapStringEx(
                     cultureName,
                     Interop.Kernel32.LCMAP_SORTHANDLE,
@@ -43,8 +42,7 @@ namespace System.Globalization
                 // otherwise the whole framework app will not start.
                 int hashValue = 0;
                 char a = 'a';
-                ret = Interop
-                    .Kernel32
+                ret = Interop.Kernel32
                     .LCMapStringEx(
                         null,
                         Interop.Kernel32.LCMAP_HASH,
@@ -82,8 +80,7 @@ namespace System.Globalization
                 Debug.Assert(pSource != null);
                 Debug.Assert(pValue != null);
 
-                int ret = Interop
-                    .Kernel32
+                int ret = Interop.Kernel32
                     .FindStringOrdinal(
                         dwFindStringOrdinalFlags,
                         pSource,
@@ -185,8 +182,7 @@ namespace System.Globalization
 
             fixed (char* pSource = &MemoryMarshal.GetReference(source))
             {
-                int sortKeyLength = Interop
-                    .Kernel32
+                int sortKeyLength = Interop.Kernel32
                     .LCMapStringEx(
                         _sortHandle != IntPtr.Zero ? null : _sortName,
                         flags,
@@ -218,8 +214,7 @@ namespace System.Globalization
                 fixed (byte* pSortKey = &MemoryMarshal.GetReference(span))
                 {
                     if (
-                        Interop
-                            .Kernel32
+                        Interop.Kernel32
                             .LCMapStringEx(
                                 _sortHandle != IntPtr.Zero ? null : _sortName,
                                 flags,
@@ -270,8 +265,7 @@ namespace System.Globalization
                 Debug.Assert(char2 != null);
 
                 // Use the OS to compare and then convert the result to expected value by subtracting 2
-                int result = Interop
-                    .Kernel32
+                int result = Interop.Kernel32
                     .CompareStringOrdinal(char1, count1, char2, count2, bIgnoreCase: true);
                 if (result == 0)
                 {
@@ -316,8 +310,7 @@ namespace System.Globalization
                 Debug.Assert(*pString1 >= 0); // assert that we can always dereference this
                 Debug.Assert(*pString2 >= 0); // assert that we can always dereference this
 
-                int result = Interop
-                    .Kernel32
+                int result = Interop.Kernel32
                     .CompareStringEx(
                         pLocaleName,
                         (uint)GetNativeCompareFlags(options),
@@ -371,8 +364,7 @@ namespace System.Globalization
             {
                 Debug.Assert(pSource != null && pValue != null);
 
-                int result = Interop
-                    .Kernel32
+                int result = Interop.Kernel32
                     .FindNLSStringEx(
                         pLocaleName,
                         dwFindNLSStringFlags,
@@ -518,8 +510,7 @@ namespace System.Globalization
 
             fixed (char* pSource = source)
             {
-                int sortKeyLength = Interop
-                    .Kernel32
+                int sortKeyLength = Interop.Kernel32
                     .LCMapStringEx(
                         _sortHandle != IntPtr.Zero ? null : _sortName,
                         flags,
@@ -541,8 +532,7 @@ namespace System.Globalization
                 fixed (byte* pBytes = keyData)
                 {
                     if (
-                        Interop
-                            .Kernel32
+                        Interop.Kernel32
                             .LCMapStringEx(
                                 _sortHandle != IntPtr.Zero ? null : _sortName,
                                 flags,
@@ -621,8 +611,7 @@ namespace System.Globalization
                     // Manually check that the destination buffer is large enough to hold the full output.
                     // See earlier comment for reasoning.
 
-                    int requiredSortKeyLength = Interop
-                        .Kernel32
+                    int requiredSortKeyLength = Interop.Kernel32
                         .LCMapStringEx(
                             _sortHandle != IntPtr.Zero ? null : _sortName,
                             flags,
@@ -647,8 +636,7 @@ namespace System.Globalization
                 }
 #endif
 
-                actualSortKeyLength = Interop
-                    .Kernel32
+                actualSortKeyLength = Interop.Kernel32
                     .LCMapStringEx(
                         _sortHandle != IntPtr.Zero ? null : _sortName,
                         flags,
@@ -710,8 +698,7 @@ namespace System.Globalization
             fixed (char* pSource = &MemoryMarshal.GetReference(source))
             {
                 Debug.Assert(pSource != null);
-                sortKeyLength = Interop
-                    .Kernel32
+                sortKeyLength = Interop.Kernel32
                     .LCMapStringEx(
                         _sortHandle != IntPtr.Zero ? null : _sortName,
                         flags,
@@ -749,8 +736,7 @@ namespace System.Globalization
 
             fixed (char* pText = &MemoryMarshal.GetReference(text))
             {
-                return Interop
-                    .Kernel32
+                return Interop.Kernel32
                     .IsNLSDefinedString(
                         Interop.Kernel32.COMPARE_STRING,
                         0,
@@ -836,8 +822,7 @@ namespace System.Globalization
 
             Interop.Kernel32.NlsVersionInfoEx nlsVersion = default;
             nlsVersion.dwNLSVersionInfoSize = sizeof(Interop.Kernel32.NlsVersionInfoEx);
-            Interop
-                .Kernel32
+            Interop.Kernel32
                 .GetNLSVersionEx(Interop.Kernel32.COMPARE_STRING, _sortName, &nlsVersion);
             return new SortVersion(
                 nlsVersion.dwNLSVersion,

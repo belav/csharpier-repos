@@ -641,23 +641,24 @@ namespace System.Threading.Tasks.Dataflow.Internal
                 // However, we know that _decliningPermanently has been set, and thus the timing of
                 // CompleteBlockIfPossible doesn't matter, so we schedule it to run asynchronously
                 // and take the necessary locks in a situation where we're sure it won't cause a problem.
-                Task.Factory.StartNew(
-                    static state =>
-                    {
-                        var thisSourceCore = (SourceCore<TOutput>)state!;
-                        lock (thisSourceCore.OutgoingLock)
+                Task.Factory
+                    .StartNew(
+                        static state =>
                         {
-                            lock (thisSourceCore.ValueLock)
+                            var thisSourceCore = (SourceCore<TOutput>)state!;
+                            lock (thisSourceCore.OutgoingLock)
                             {
-                                thisSourceCore.CompleteBlockIfPossible();
+                                lock (thisSourceCore.ValueLock)
+                                {
+                                    thisSourceCore.CompleteBlockIfPossible();
+                                }
                             }
-                        }
-                    },
-                    this,
-                    CancellationToken.None,
-                    Common.GetCreationOptionsForTask(),
-                    TaskScheduler.Default
-                );
+                        },
+                        this,
+                        CancellationToken.None,
+                        Common.GetCreationOptionsForTask(),
+                        TaskScheduler.Default
+                    );
             }
         }
 
@@ -963,23 +964,24 @@ namespace System.Threading.Tasks.Dataflow.Internal
 
                     // Get out from under currently held locks - ValueLock is taken, but OutgoingLock may not be.
                     // Re-take the locks on a separate thread.
-                    Task.Factory.StartNew(
-                        static state =>
-                        {
-                            var thisSourceCore = (SourceCore<TOutput>)state!;
-                            lock (thisSourceCore.OutgoingLock)
+                    Task.Factory
+                        .StartNew(
+                            static state =>
                             {
-                                lock (thisSourceCore.ValueLock)
+                                var thisSourceCore = (SourceCore<TOutput>)state!;
+                                lock (thisSourceCore.OutgoingLock)
                                 {
-                                    thisSourceCore.CompleteBlockIfPossible();
+                                    lock (thisSourceCore.ValueLock)
+                                    {
+                                        thisSourceCore.CompleteBlockIfPossible();
+                                    }
                                 }
-                            }
-                        },
-                        this,
-                        CancellationToken.None,
-                        Common.GetCreationOptionsForTask(),
-                        TaskScheduler.Default
-                    );
+                            },
+                            this,
+                            CancellationToken.None,
+                            Common.GetCreationOptionsForTask(),
+                            TaskScheduler.Default
+                        );
                 }
             }
         }
@@ -1135,13 +1137,14 @@ namespace System.Threading.Tasks.Dataflow.Internal
                 // Get out from under currently held locks.  This is to avoid
                 // invoking synchronous continuations off of _completionTask.Task
                 // while holding a lock.
-                Task.Factory.StartNew(
-                    static state => ((SourceCore<TOutput>)state!).CompleteBlockOncePossible(),
-                    this,
-                    CancellationToken.None,
-                    Common.GetCreationOptionsForTask(),
-                    TaskScheduler.Default
-                );
+                Task.Factory
+                    .StartNew(
+                        static state => ((SourceCore<TOutput>)state!).CompleteBlockOncePossible(),
+                        this,
+                        CancellationToken.None,
+                        Common.GetCreationOptionsForTask(),
+                        TaskScheduler.Default
+                    );
             }
         }
 

@@ -416,8 +416,7 @@ public class WebApplicationTests
     )
     {
         var builder = createBuilder();
-        builder
-            .Services
+        builder.Services
             .AddSingleton<IServer>(new MockAddressesServer(new List<string>().AsReadOnly()));
         await using var app = builder.Build();
 
@@ -472,8 +471,7 @@ public class WebApplicationTests
             builder.WebHost.UseSetting(WebHostDefaults.HostingStartupAssembliesKey, "hosting")
         );
         Assert.Throws<NotSupportedException>(() =>
-            builder
-                .WebHost
+            builder.WebHost
                 .UseSetting(WebHostDefaults.HostingStartupExcludeAssembliesKey, "hostingexclude")
         );
         Assert.Throws<NotSupportedException>(() => builder.WebHost.UseEnvironment(envName));
@@ -493,8 +491,7 @@ public class WebApplicationTests
         var envName = $"{nameof(WebApplicationTests)}_ENV";
 
         Assert.Throws<NotSupportedException>(() =>
-            builder
-                .WebHost
+            builder.WebHost
                 .ConfigureAppConfiguration(builder =>
                 {
                     builder.AddInMemoryCollection(
@@ -507,8 +504,7 @@ public class WebApplicationTests
         );
 
         Assert.Throws<NotSupportedException>(() =>
-            builder
-                .WebHost
+            builder.WebHost
                 .ConfigureAppConfiguration(builder =>
                 {
                     builder.AddInMemoryCollection(
@@ -521,8 +517,7 @@ public class WebApplicationTests
         );
 
         Assert.Throws<NotSupportedException>(() =>
-            builder
-                .WebHost
+            builder.WebHost
                 .ConfigureAppConfiguration(builder =>
                 {
                     builder.AddInMemoryCollection(
@@ -535,8 +530,7 @@ public class WebApplicationTests
         );
 
         Assert.Throws<NotSupportedException>(() =>
-            builder
-                .WebHost
+            builder.WebHost
                 .ConfigureAppConfiguration(builder =>
                 {
                     builder.AddInMemoryCollection(
@@ -546,8 +540,7 @@ public class WebApplicationTests
         );
 
         Assert.Throws<NotSupportedException>(() =>
-            builder
-                .WebHost
+            builder.WebHost
                 .ConfigureAppConfiguration(builder =>
                 {
                     builder.AddInMemoryCollection(
@@ -560,8 +553,7 @@ public class WebApplicationTests
         );
 
         Assert.Throws<NotSupportedException>(() =>
-            builder
-                .WebHost
+            builder.WebHost
                 .ConfigureAppConfiguration(builder =>
                 {
                     builder.AddInMemoryCollection(
@@ -1180,8 +1172,7 @@ public class WebApplicationTests
         );
 
         Assert.Equal(assemblyName, builder.Environment.ApplicationName);
-        builder
-            .Host
+        builder.Host
             .ConfigureAppConfiguration(
                 (context, config) =>
                 {
@@ -1189,8 +1180,7 @@ public class WebApplicationTests
                 }
             );
 
-        builder
-            .WebHost
+        builder.WebHost
             .ConfigureAppConfiguration(
                 (context, config) =>
                 {
@@ -1232,8 +1222,7 @@ public class WebApplicationTests
         );
 
         Assert.Equal(assemblyName, builder.Environment.ApplicationName);
-        builder
-            .Host
+        builder.Host
             .ConfigureAppConfiguration(
                 (context, config) =>
                 {
@@ -1241,8 +1230,7 @@ public class WebApplicationTests
                 }
             );
 
-        builder
-            .WebHost
+        builder.WebHost
             .ConfigureAppConfiguration(
                 (context, config) =>
                 {
@@ -1315,8 +1303,7 @@ public class WebApplicationTests
         Assert.Equal("Testing", builder.Configuration["environment"]);
         Assert.Equal("Testing", builder.Environment.EnvironmentName);
 
-        builder
-            .WebHost
+        builder.WebHost
             .ConfigureAppConfiguration(
                 (context, config) =>
                 {
@@ -1324,8 +1311,7 @@ public class WebApplicationTests
                 }
             );
 
-        builder
-            .Host
+        builder.Host
             .ConfigureAppConfiguration(
                 (context, config) =>
                 {
@@ -1357,8 +1343,7 @@ public class WebApplicationTests
         var envName = $"{nameof(WebApplicationTests)}_ENV";
 
         Assert.Throws<NotSupportedException>(() =>
-            builder
-                .Host
+            builder.Host
                 .ConfigureHostConfiguration(builder =>
                 {
                     builder.AddInMemoryCollection(
@@ -1471,8 +1456,7 @@ public class WebApplicationTests
 
         var builder = createBuilder();
 
-        builder
-            .Configuration
+        builder.Configuration
             .AddInMemoryCollection(new Dictionary<string, string>() { { "C", "C" } });
 
         await using var app = builder.Build();
@@ -1520,8 +1504,7 @@ public class WebApplicationTests
             }
         );
 
-        builder
-            .Configuration
+        builder.Configuration
             .AddInMemoryCollection(new Dictionary<string, string>() { { "B", "B" } });
 
         await using var app = builder.Build();
@@ -1642,8 +1625,7 @@ public class WebApplicationTests
     )
     {
         var builder = createBuilder();
-        var host = builder
-            .WebHost
+        var host = builder.WebHost
             .ConfigureAppConfiguration(configBuilder =>
             {
                 configBuilder.Add(new ReloadableMemorySource());
@@ -1824,8 +1806,7 @@ public class WebApplicationTests
     {
         var builder = createBuilder();
 
-        builder
-            .Configuration
+        builder.Configuration
             .AddInMemoryCollection(new Dictionary<string, string> { ["foo"] = "bar" });
 
         Assert.Equal("bar", builder.Configuration["foo"]);
@@ -2085,21 +2066,18 @@ public class WebApplicationTests
         var builder = createBuilder();
 
         Assert.Single(
-            builder
-                .Services
+            builder.Services
                 .Where(descriptor =>
                     descriptor.ServiceType == typeof(IConfigureOptions<LoggerFactoryOptions>)
                 )
         );
         // IWebHostEnvironment is added by ConfigureWebHostDefaults
         Assert.Single(
-            builder
-                .Services
+            builder.Services
                 .Where(descriptor => descriptor.ServiceType == typeof(IWebHostEnvironment))
         );
         Assert.Single(
-            builder
-                .Services
+            builder.Services
                 .Where(descriptor =>
                     descriptor.ServiceType
                     == typeof(IOptionsChangeTokenSource<HostFilteringOptions>)
@@ -2109,8 +2087,7 @@ public class WebApplicationTests
             builder.Services.Where(descriptor => descriptor.ServiceType == typeof(IServer))
         );
         Assert.Single(
-            builder
-                .Services
+            builder.Services
                 .Where(descriptor => descriptor.ServiceType == typeof(EndpointDataSource))
         );
 
@@ -2121,9 +2098,8 @@ public class WebApplicationTests
         );
         Assert.Single(app.Services.GetRequiredService<IEnumerable<IWebHostEnvironment>>());
         Assert.Single(
-            app.Services.GetRequiredService<
-                IEnumerable<IOptionsChangeTokenSource<HostFilteringOptions>>
-            >()
+            app.Services
+                .GetRequiredService<IEnumerable<IOptionsChangeTokenSource<HostFilteringOptions>>>()
         );
         Assert.Single(app.Services.GetRequiredService<IEnumerable<IServer>>());
     }
@@ -2134,15 +2110,13 @@ public class WebApplicationTests
         var builder = WebApplication.CreateEmptyBuilder(new());
 
         Assert.Empty(
-            builder
-                .Services
+            builder.Services
                 .Where(descriptor =>
                     descriptor.ServiceType == typeof(IConfigureOptions<LoggerFactoryOptions>)
                 )
         );
         Assert.Empty(
-            builder
-                .Services
+            builder.Services
                 .Where(descriptor =>
                     descriptor.ServiceType
                     == typeof(IOptionsChangeTokenSource<HostFilteringOptions>)
@@ -2152,15 +2126,13 @@ public class WebApplicationTests
             builder.Services.Where(descriptor => descriptor.ServiceType == typeof(IServer))
         );
         Assert.Empty(
-            builder
-                .Services
+            builder.Services
                 .Where(descriptor => descriptor.ServiceType == typeof(EndpointDataSource))
         );
 
         // These services are still necessary
         Assert.Single(
-            builder
-                .Services
+            builder.Services
                 .Where(descriptor => descriptor.ServiceType == typeof(IWebHostEnvironment))
         );
     }
@@ -2682,8 +2654,7 @@ public class WebApplicationTests
         builder.Host.Properties["hello"] = "world";
         var callbacks = 0;
 
-        builder
-            .Host
+        builder.Host
             .ConfigureAppConfiguration(
                 (context, config) =>
                 {
@@ -2692,8 +2663,7 @@ public class WebApplicationTests
                 }
             );
 
-        builder
-            .Host
+        builder.Host
             .ConfigureServices(
                 (context, config) =>
                 {
@@ -2702,8 +2672,7 @@ public class WebApplicationTests
                 }
             );
 
-        builder
-            .Host
+        builder.Host
             .ConfigureContainer<IServiceCollection>(
                 (context, config) =>
                 {
@@ -2819,8 +2788,7 @@ public class WebApplicationTests
     {
         var builder = createBuilder();
 
-        builder
-            .Configuration
+        builder.Configuration
             .AddInMemoryCollection(new Dictionary<string, string> { ["foo"] = "bar" });
 
         var app = builder.Build();
@@ -2962,8 +2930,7 @@ public class WebApplicationTests
         var builder = createBuilder();
 
         builder.Services.AddAuthorization();
-        builder
-            .Services
+        builder.Services
             .AddAuthentication("testSchemeName")
             .AddScheme<AuthenticationSchemeOptions, UberHandler>(
                 "testSchemeName",
@@ -3012,8 +2979,7 @@ public class WebApplicationTests
     {
         var builder = createBuilder();
         builder.Services.AddAuthorization();
-        builder
-            .Services
+        builder.Services
             .AddAuthentication("testSchemeName")
             .AddScheme<AuthenticationSchemeOptions, UberHandler>(
                 "testSchemeName",
@@ -3205,8 +3171,7 @@ public class WebApplicationTests
     public async Task UsingCreateSlimBuilderWorksIfRegexConstraintAddedViaAddRoutingCoreWithActionDelegate()
     {
         var builder = WebApplication.CreateSlimBuilder();
-        builder
-            .Services
+        builder.Services
             .AddRoutingCore()
             .Configure<RouteOptions>(options =>
             {

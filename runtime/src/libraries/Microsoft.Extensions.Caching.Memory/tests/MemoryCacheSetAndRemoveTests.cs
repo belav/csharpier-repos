@@ -319,8 +319,7 @@ namespace Microsoft.Extensions.Caching.Memory
             var callback2Invoked = new ManualResetEvent(false);
 
             var options1 = new MemoryCacheEntryOptions();
-            options1
-                .PostEvictionCallbacks
+            options1.PostEvictionCallbacks
                 .Add(
                     new PostEvictionCallbackRegistration()
                     {
@@ -341,8 +340,7 @@ namespace Microsoft.Extensions.Caching.Memory
 
             var value2 = new object();
             var options2 = new MemoryCacheEntryOptions();
-            options2
-                .PostEvictionCallbacks
+            options2.PostEvictionCallbacks
                 .Add(
                     new PostEvictionCallbackRegistration()
                     {
@@ -376,8 +374,7 @@ namespace Microsoft.Extensions.Caching.Memory
             EvictionReason actualReason = EvictionReason.None;
 
             var options1 = new MemoryCacheEntryOptions();
-            options1
-                .PostEvictionCallbacks
+            options1.PostEvictionCallbacks
                 .Add(
                     new PostEvictionCallbackRegistration()
                     {
@@ -471,8 +468,7 @@ namespace Microsoft.Extensions.Caching.Memory
             var callbackInvoked = new ManualResetEvent(false);
 
             var options = new MemoryCacheEntryOptions();
-            options
-                .PostEvictionCallbacks
+            options.PostEvictionCallbacks
                 .Add(
                     new PostEvictionCallbackRegistration()
                     {
@@ -506,8 +502,7 @@ namespace Microsoft.Extensions.Caching.Memory
             var callbackInvoked = new ManualResetEvent(false);
 
             var options = new MemoryCacheEntryOptions();
-            options
-                .PostEvictionCallbacks
+            options.PostEvictionCallbacks
                 .Add(
                     new PostEvictionCallbackRegistration()
                     {
@@ -543,8 +538,7 @@ namespace Microsoft.Extensions.Caching.Memory
             var callbackInvoked = new ManualResetEvent(false);
 
             var options = new MemoryCacheEntryOptions();
-            options
-                .PostEvictionCallbacks
+            options.PostEvictionCallbacks
                 .Add(
                     new PostEvictionCallbackRegistration()
                     {
@@ -888,8 +882,7 @@ namespace Microsoft.Extensions.Caching.Memory
             ManualResetEvent mre = new ManualResetEvent(false);
 
             var options = new MemoryCacheEntryOptions();
-            options
-                .PostEvictionCallbacks
+            options.PostEvictionCallbacks
                 .Add(
                     new PostEvictionCallbackRegistration()
                     {
@@ -920,8 +913,7 @@ namespace Microsoft.Extensions.Caching.Memory
             ManualResetEvent mre = new ManualResetEvent(false);
 
             var options = new MemoryCacheEntryOptions();
-            options
-                .PostEvictionCallbacks
+            options.PostEvictionCallbacks
                 .Add(
                     new PostEvictionCallbackRegistration()
                     {

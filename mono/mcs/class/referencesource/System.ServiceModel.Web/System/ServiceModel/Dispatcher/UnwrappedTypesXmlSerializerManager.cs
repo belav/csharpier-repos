@@ -76,8 +76,7 @@ namespace System.ServiceModel.Dispatcher
                     Fx.Assert(
                         "An xml serializer type was added after the serializers were created"
                     );
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR2.GetString(SR2.XmlSerializersCreatedBeforeRegistration)
@@ -144,8 +143,7 @@ namespace System.ServiceModel.Dispatcher
             public override void WriteEndObject(XmlDictionaryWriter writer)
             {
                 Fx.Assert("This method should never get hit");
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new NotSupportedException());
             }
 
@@ -157,16 +155,14 @@ namespace System.ServiceModel.Dispatcher
             public override void WriteObjectContent(XmlDictionaryWriter writer, object graph)
             {
                 Fx.Assert("This method should never get hit");
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new NotSupportedException());
             }
 
             public override void WriteStartObject(XmlDictionaryWriter writer, object graph)
             {
                 Fx.Assert("This method should never get hit");
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new NotSupportedException());
             }
         }

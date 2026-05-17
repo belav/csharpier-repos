@@ -114,12 +114,10 @@ namespace Internal.Runtime.CompilerServices
                     (GenericMethodDescriptor*)s_genericFunctionPointerCollection[chunkIndex]
                 )[subChunkIndex];
 
-                System
-                    .Diagnostics
+                System.Diagnostics
                     .Debug
                     .Assert(canonFunctionPointer == genericFunctionPointer->MethodFunctionPointer);
-                System
-                    .Diagnostics
+                System.Diagnostics
                     .Debug
                     .Assert(instantiationArgument == genericFunctionPointer->InstantiationArgument);
 

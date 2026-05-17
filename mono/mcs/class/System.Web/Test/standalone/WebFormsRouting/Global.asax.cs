@@ -7,8 +7,7 @@ public partial class _Global : HttpApplication
 {
     void Application_Start(object sender, EventArgs e)
     {
-        RouteTable
-            .Routes
+        RouteTable.Routes
             .MapPageRoute(
                 "SearchRoute",
                 "search/{searchterm}",

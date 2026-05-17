@@ -218,8 +218,7 @@ namespace System.Net.Http.Functional.Tests
             var subContent = new ByteArrayContent("This is a ByteArrayContent"u8.ToArray());
             subContent.Headers.Add("someHeaderName", "andSomeHeaderValue");
             subContent.Headers.Add("someOtherHeaderName", new[] { "withNotOne", "ButTwoValues" });
-            subContent
-                .Headers
+            subContent.Headers
                 .Add("oneMoreHeader", new[] { "withNotOne", "AndNotTwo", "butThreeValues" });
 
             var mc = new MultipartContent("someSubtype", "theBoundary");

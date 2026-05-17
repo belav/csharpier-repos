@@ -113,8 +113,7 @@ class Program
         public override async Task InitializeAsync()
         {
             await base.InitializeAsync();
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .CreateSolutionAsync(
                     "ReferenceErrors",
                     solutionElement: XElement.Parse(
@@ -153,37 +152,30 @@ class Program
         public async Task VerifyAvailableCodeActions()
         {
             var consoleProject = ConsoleProjectName;
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .OpenFileAsync(consoleProject, "Program.cs", HangMitigatingCancellationToken);
-            await TestServices
-                .Editor
+            await TestServices.Editor
                 .PlaceCaretAsync("y.goo", charsOffset: 1, HangMitigatingCancellationToken);
             await TestServices.Editor.InvokeCodeActionListAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .CodeActionAsync(
                     "Add reference to 'System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'.",
                     applyFix: false,
                     cancellationToken: HangMitigatingCancellationToken
                 );
-            await TestServices
-                .Editor
+            await TestServices.Editor
                 .PlaceCaretAsync("y.ee", charsOffset: 1, HangMitigatingCancellationToken);
             await TestServices.Editor.InvokeCodeActionListAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .CodeActionAsync(
                     "Add reference to 'System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'.",
                     applyFix: false,
                     cancellationToken: HangMitigatingCancellationToken
                 );
-            await TestServices
-                .Editor
+            await TestServices.Editor
                 .PlaceCaretAsync("a.bar", charsOffset: 1, HangMitigatingCancellationToken);
             await TestServices.Editor.InvokeCodeActionListAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .CodeActionAsync(
                     "Add project reference to 'ClassLibrary3'.",
                     applyFix: false,
@@ -195,22 +187,18 @@ class Program
         public async Task InvokeSomeFixesInCSharpThenVerifyReferences()
         {
             var consoleProject = ConsoleProjectName;
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .OpenFileAsync(consoleProject, "Program.cs", HangMitigatingCancellationToken);
-            await TestServices
-                .Editor
+            await TestServices.Editor
                 .PlaceCaretAsync("y.goo", charsOffset: 1, HangMitigatingCancellationToken);
             await TestServices.Editor.InvokeCodeActionListAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .CodeActionAsync(
                     "Add reference to 'System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'.",
                     applyFix: true,
                     cancellationToken: HangMitigatingCancellationToken
                 );
-            await TestServices
-                .SolutionExplorerVerifier
+            await TestServices.SolutionExplorerVerifier
                 .AssemblyReferencePresentAsync(
                     projectName: consoleProject,
                     assemblyName: "System.Windows.Forms",
@@ -218,19 +206,16 @@ class Program
                     assemblyPublicKeyToken: "b77a5c561934e089",
                     HangMitigatingCancellationToken
                 );
-            await TestServices
-                .Editor
+            await TestServices.Editor
                 .PlaceCaretAsync("a.bar", charsOffset: 1, HangMitigatingCancellationToken);
             await TestServices.Editor.InvokeCodeActionListAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .CodeActionAsync(
                     "Add project reference to 'ClassLibrary3'.",
                     applyFix: true,
                     cancellationToken: HangMitigatingCancellationToken
                 );
-            await TestServices
-                .SolutionExplorerVerifier
+            await TestServices.SolutionExplorerVerifier
                 .ProjectReferencePresentAsync(
                     projectName: consoleProject,
                     referencedProjectName: ClassLibrary3Name,

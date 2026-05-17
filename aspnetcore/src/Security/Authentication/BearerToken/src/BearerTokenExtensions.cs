@@ -73,16 +73,14 @@ public static class BearerTokenExtensions
         ArgumentNullException.ThrowIfNull(authenticationScheme);
         ArgumentNullException.ThrowIfNull(configure);
 
-        builder
-            .Services
+        builder.Services
             .TryAddEnumerable(
                 ServiceDescriptor.Singleton<
                     IConfigureOptions<JsonOptions>,
                     BearerTokenConfigureJsonOptions
                 >()
             );
-        builder
-            .Services
+        builder.Services
             .TryAddEnumerable(
                 ServiceDescriptor.Singleton<
                     IConfigureOptions<BearerTokenOptions>,

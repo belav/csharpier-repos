@@ -146,8 +146,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 );
 
                 Location warningLocation = i == 0 ? attributeLocation : module.GetFirstLocation();
-                System
-                    .Diagnostics
+                System.Diagnostics
                     .Debug
                     .Assert(
                         warningLocation != null
@@ -339,8 +338,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     && IsAccessibleIfContainerIsAccessible(constructor)
                 )
                 {
-                    System
-                        .Diagnostics
+                    System.Diagnostics
                         .Debug
                         .Assert(
                             IsAccessibleOutsideAssembly(constructor),
@@ -420,8 +418,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     Location attributeLocation;
                     if (TryGetAttributeWarningLocation(attribute, out attributeLocation))
                     {
-                        AttributeUsageInfo attributeUsage = attribute
-                            .AttributeClass
+                        AttributeUsageInfo attributeUsage = attribute.AttributeClass
                             .GetAttributeUsageInfo();
                         this.AddDiagnostic(
                             ErrorCode.ERR_AttributeNotOnAccessor,
@@ -512,8 +509,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             SymbolKind symbolKind = symbol.Kind;
 
-            System
-                .Diagnostics
+            System.Diagnostics
                 .Debug
                 .Assert(
                     symbolKind == SymbolKind.NamedType
@@ -599,8 +595,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         private void CheckForNonCompliantAbstractMember(Symbol symbol)
         {
-            System
-                .Diagnostics
+            System.Diagnostics
                 .Debug
                 .Assert(
                     !IsTrue(GetDeclaredOrInheritedCompliance(symbol)),
@@ -628,8 +623,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         private void CheckBaseTypeCompliance(NamedTypeSymbol symbol)
         {
-            System
-                .Diagnostics
+            System.Diagnostics
                 .Debug
                 .Assert(
                     IsTrue(GetDeclaredOrInheritedCompliance(symbol)),
@@ -658,8 +652,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 NamedTypeSymbol baseType =
                     symbol.EnumUnderlyingType ?? symbol.BaseTypeNoUseSiteDiagnostics; // null for interfaces
-                System
-                    .Diagnostics
+                System.Diagnostics
                     .Debug
                     .Assert(
                         (object)baseType != null || symbol.SpecialType == SpecialType.System_Object,
@@ -680,8 +673,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         private void CheckForCompliantWithinNonCompliant(Symbol symbol)
         {
-            System
-                .Diagnostics
+            System.Diagnostics
                 .Debug
                 .Assert(
                     IsTrue(GetDeclaredOrInheritedCompliance(symbol)),
@@ -689,8 +681,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 );
 
             NamedTypeSymbol containingType = symbol.ContainingType;
-            System
-                .Diagnostics
+            System.Diagnostics
                 .Debug
                 .Assert((object)containingType == null || !containingType.IsImplicitClass);
             if (
@@ -712,8 +703,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             NamedTypeSymbol context
         )
         {
-            System
-                .Diagnostics
+            System.Diagnostics
                 .Debug
                 .Assert(
                     typeParameters.IsEmpty || IsTrue(GetDeclaredOrInheritedCompliance(context)),
@@ -746,8 +736,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             NamedTypeSymbol context
         )
         {
-            System
-                .Diagnostics
+            System.Diagnostics
                 .Debug
                 .Assert(
                     parameters.IsEmpty || IsTrue(GetDeclaredOrInheritedCompliance(context)),
@@ -769,8 +758,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         private void CheckForAttributeWithArrayArgument(Symbol symbol)
         {
-            System
-                .Diagnostics
+            System.Diagnostics
                 .Debug
                 .Assert(
                     IsTrue(GetDeclaredOrInheritedCompliance(symbol)),
@@ -933,8 +921,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         private void CheckReturnTypeCompliance(Symbol symbol)
         {
-            System
-                .Diagnostics
+            System.Diagnostics
                 .Debug
                 .Assert(
                     IsTrue(GetDeclaredOrInheritedCompliance(symbol)),
@@ -964,8 +951,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                     if (method.MethodKind == MethodKind.DelegateInvoke)
                     {
-                        System
-                            .Diagnostics
+                        System.Diagnostics
                             .Debug
                             .Assert(method.ContainingType.TypeKind == TypeKind.Delegate);
                         symbol = method.ContainingType; // Refer to the delegate type in diagnostics.
@@ -1059,7 +1045,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 // NOTE: It's not clear why dev11 is looking in interfaces at all. Maybe
                 // it was only supposed to happen for interface types?
                 foreach (
-                    NamedTypeSymbol @interface in type.InterfacesAndTheirBaseInterfacesNoUseSiteDiagnostics.Keys
+                    NamedTypeSymbol @interface in type.InterfacesAndTheirBaseInterfacesNoUseSiteDiagnostics
+                        .Keys
                 ) // NOTE: would be hand-rolled in a standalone component.
                 {
                     if (!IsAccessibleOutsideAssembly(@interface))
@@ -1229,8 +1216,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             // forbidden by the unicode spec.
 
             // NOTE: The parser won't actually accept '\uFF3F' as part of an identifier.
-            System
-                .Diagnostics
+            System.Diagnostics
                 .Debug
                 .Assert(name.Length == 0 || name[0] != '\uFF3F');
 
@@ -1416,8 +1402,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         private Compliance GetDeclaredOrInheritedCompliance(Symbol symbol)
         {
-            System
-                .Diagnostics
+            System.Diagnostics
                 .Debug
                 .Assert(
                     symbol.Kind == SymbolKind.NamedType || !((symbol is TypeSymbol)),
@@ -1523,8 +1508,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                         }
 
                         ImmutableArray<TypedConstant> args = data.CommonConstructorArguments;
-                        System
-                            .Diagnostics
+                        System.Diagnostics
                             .Debug
                             .Assert(
                                 args.Length == 1,

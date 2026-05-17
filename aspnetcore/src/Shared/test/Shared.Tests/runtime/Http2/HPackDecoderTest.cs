@@ -65,12 +65,10 @@ namespace System.Net.Http.Unit.Tests.HPack
             Enumerable.Range(0, 4100).Select(c => (char)('a' + (c % 26)))
         );
 
-        private static readonly byte[] _headerNameBytes = Encoding
-            .ASCII
+        private static readonly byte[] _headerNameBytes = Encoding.ASCII
             .GetBytes(_headerNameString);
 
-        private static readonly byte[] _literalHeaderNameBytes = Encoding
-            .ASCII
+        private static readonly byte[] _literalHeaderNameBytes = Encoding.ASCII
             .GetBytes(_literalHeaderNameString);
 
         // n     e     w       -      h     e     a     d     e     r      *
@@ -89,8 +87,7 @@ namespace System.Net.Http.Unit.Tests.HPack
 
         private const string _headerValueString = "value";
 
-        private static readonly byte[] _headerValueBytes = Encoding
-            .ASCII
+        private static readonly byte[] _headerValueBytes = Encoding.ASCII
             .GetBytes(_headerValueString);
 
         // v      a     l      u      e    *

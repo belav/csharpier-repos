@@ -49,8 +49,7 @@ namespace System.Net.Http
 
         public static IntPtr UnsafeAddrOfPinnedArrayElement<T>(T[] arr, int index)
         {
-            return System
-                .Runtime
+            return System.Runtime
                 .InteropServices
                 .Marshal
                 .UnsafeAddrOfPinnedArrayElement<T>(arr, index);

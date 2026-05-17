@@ -126,8 +126,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
 
                             if (document != null)
                             {
-                                var languageDebugInfo = document
-                                    .Project
+                                var languageDebugInfo = document.Project
                                     .Services
                                     .GetService<ILanguageDebugInfoService>();
                                 if (languageDebugInfo != null)
@@ -144,8 +143,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                                             .WaitAndGetResult(cancellationToken);
                                         if (!dataTipInfo.IsDefault)
                                         {
-                                            var resultSpan = dataTipInfo
-                                                .Span
+                                            var resultSpan = dataTipInfo.Span
                                                 .ToSnapshotSpan(textSnapshot);
                                             var textOpt = dataTipInfo.Text;
 
@@ -242,8 +240,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             if (subjectBuffer != null)
             {
                 // PointTrackingMode and PositionAffinity chosen arbitrarily.
-                var positionInSubjectBuffer = textView
-                    .BufferGraph
+                var positionInSubjectBuffer = textView.BufferGraph
                     .MapDownToBuffer(
                         pointInViewBuffer,
                         PointTrackingMode.Positive,
@@ -252,8 +249,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                     );
                 if (!positionInSubjectBuffer.HasValue)
                 {
-                    positionInSubjectBuffer = textView
-                        .BufferGraph
+                    positionInSubjectBuffer = textView.BufferGraph
                         .MapDownToBuffer(
                             pointInViewBuffer,
                             PointTrackingMode.Positive,
@@ -265,8 +261,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                 if (positionInSubjectBuffer.HasValue)
                 {
                     var position = positionInSubjectBuffer.Value;
-                    var document = subjectBuffer
-                        .CurrentSnapshot
+                    var document = subjectBuffer.CurrentSnapshot
                         .GetOpenDocumentInCurrentContextWithChanges();
                     if (document != null)
                     {
@@ -323,8 +318,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                                             .WaitAndGetResult(cancellationToken);
                                         var vsClosingSpans = textView
                                             .GetSpanInView(
-                                                closingSpans
-                                                    .Value
+                                                closingSpans.Value
                                                     .ToSnapshotSpan(subjectBuffer.CurrentSnapshot)
                                             )
                                             .First()
@@ -356,8 +350,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                                             .WaitAndGetResult(cancellationToken);
                                         var vsOpeningSpans = textView
                                             .GetSpanInView(
-                                                openingSpans
-                                                    .Value
+                                                openingSpans.Value
                                                     .ToSnapshotSpan(subjectBuffer.CurrentSnapshot)
                                             )
                                             .First()

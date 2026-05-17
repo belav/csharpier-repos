@@ -269,8 +269,7 @@ namespace System.Web.WebPages.Test
             // Assert
             vpp.Verify();
             Assert.False(exists);
-            object cachedValue = HttpRuntime
-                .Cache
+            object cachedValue = HttpRuntime.Cache
                 .Get(BuildManagerWrapper.KeyGuid + "_" + virtualPath);
             Assert.NotNull(cachedValue);
             Assert.False(

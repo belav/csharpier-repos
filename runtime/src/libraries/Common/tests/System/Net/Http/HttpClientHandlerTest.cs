@@ -517,26 +517,21 @@ namespace System.Net.Http.Functional.Tests
                             Version = UseVersion,
                         };
 
-                        request
-                            .Headers
+                        request.Headers
                             .Accept
                             .Add(new MediaTypeWithQualityHeaderValue("text/plain"));
                         if (PlatformDetection.IsNotBrowser)
                         {
-                            request
-                                .Headers
+                            request.Headers
                                 .AcceptCharset
                                 .Add(new StringWithQualityHeaderValue("utf-8"));
-                            request
-                                .Headers
+                            request.Headers
                                 .AcceptEncoding
                                 .Add(new StringWithQualityHeaderValue("gzip"));
-                            request
-                                .Headers
+                            request.Headers
                                 .AcceptEncoding
                                 .Add(new StringWithQualityHeaderValue("deflate"));
-                            request
-                                .Headers
+                            request.Headers
                                 .AcceptLanguage
                                 .Add(new StringWithQualityHeaderValue("en-US"));
                         }
@@ -559,8 +554,7 @@ namespace System.Net.Http.Functional.Tests
                         {
                             request.Content.Headers.ContentMD5 = MD5.Create()
                                 .ComputeHash(contentArray);
-                            request
-                                .Headers
+                            request.Headers
                                 .Expect
                                 .Add(new NameValueWithParametersHeaderValue("100-continue"));
                         }
@@ -570,20 +564,17 @@ namespace System.Net.Http.Functional.Tests
                         request.Headers.Date = DateTimeOffset.Parse(
                             "Tue, 15 Nov 1994 08:12:31 GMT"
                         );
-                        request
-                            .Headers
+                        request.Headers
                             .Add("Forwarded", "for=192.0.2.60;proto=http;by=203.0.113.43");
                         request.Headers.Add("From", "User Name <user@example.com>");
                         request.Headers.Host = "en.wikipedia.org:8080";
-                        request
-                            .Headers
+                        request.Headers
                             .IfMatch
                             .Add(new EntityTagHeaderValue("\"37060cd8c284d8af7ad3082f209582d\""));
                         request.Headers.IfModifiedSince = DateTimeOffset.Parse(
                             "Sat, 29 Oct 1994 19:43:31 GMT"
                         );
-                        request
-                            .Headers
+                        request.Headers
                             .IfNoneMatch
                             .Add(new EntityTagHeaderValue("\"737060cd8c284d8af7ad3082f209582d\""));
                         request.Headers.IfRange = new RangeConditionHeaderValue(
@@ -603,23 +594,20 @@ namespace System.Net.Http.Functional.Tests
                         request.Headers.Referrer = new Uri(
                             "http://en.wikipedia.org/wiki/Main_Page"
                         );
-                        request
-                            .Headers
+                        request.Headers
                             .TE
                             .Add(new TransferCodingWithQualityHeaderValue("trailers"));
                         request.Headers.TE.Add(new TransferCodingWithQualityHeaderValue("deflate"));
                         if (PlatformDetection.IsNotNodeJS)
                         {
                             request.Headers.Trailer.Add("MyTrailer");
-                            request
-                                .Headers
+                            request.Headers
                                 .TransferEncoding
                                 .Add(new TransferCodingHeaderValue("chunked"));
                         }
                         if (PlatformDetection.IsNotBrowser)
                         {
-                            request
-                                .Headers
+                            request.Headers
                                 .UserAgent
                                 .Add(
                                     new ProductInfoHeaderValue(
@@ -632,12 +620,10 @@ namespace System.Net.Http.Functional.Tests
                             request.Headers.Upgrade.Add(new ProductHeaderValue("websocket"));
                         }
                         request.Headers.Via.Add(new ViaHeaderValue("1.0", "fred"));
-                        request
-                            .Headers
+                        request.Headers
                             .Via
                             .Add(new ViaHeaderValue("1.1", "example.com", null, "(Apache/1.1)"));
-                        request
-                            .Headers
+                        request.Headers
                             .Warning
                             .Add(new WarningHeaderValue(199, "-", "\"Miscellaneous warning\""));
                         request.Headers.Add("X-Requested-With", "XMLHttpRequest");
@@ -653,8 +639,7 @@ namespace System.Net.Http.Functional.Tests
                         request.Headers.Add("Front-End-Https", "https");
                         request.Headers.Add("X-Http-Method-Override", "DELETE");
                         request.Headers.Add("X-ATT-DeviceId", "GT-P7320/P7320XXLPG");
-                        request
-                            .Headers
+                        request.Headers
                             .Add(
                                 "X-Wap-Profile",
                                 "http://wap.samsungmobile.com/uaprof/SGH-I777.xml"
@@ -665,8 +650,7 @@ namespace System.Net.Http.Functional.Tests
                         request.Headers.Add("X-Request-ID", "f058ebd6-02f7-4d3f-942e-904344e8cde5");
                         if (PlatformDetection.IsNotNodeJS)
                         {
-                            request
-                                .Headers
+                            request.Headers
                                 .Add("X-Request-ID", "f058ebd6-02f7-4d3f-942e-904344e8cde5");
                         }
                         request.Headers.Add("X-Empty", "");
@@ -1451,8 +1435,7 @@ namespace System.Net.Http.Functional.Tests
                             {
                                 var buffer = new byte[8000];
                                 using (
-                                    Stream clientStream = await response
-                                        .Content
+                                    Stream clientStream = await response.Content
                                         .ReadAsStreamAsync(TestAsync)
                                 )
                                 {
@@ -1522,8 +1505,7 @@ namespace System.Net.Http.Functional.Tests
                         if (enableWasmStreaming)
                         {
 #if !NETFRAMEWORK
-                            request
-                                .Options
+                            request.Options
                                 .Set(
                                     new HttpRequestOptionsKey<bool>(
                                         "WebAssemblyEnableStreamingResponse"
@@ -1544,8 +1526,7 @@ namespace System.Net.Http.Functional.Tests
                     )
                     {
                         using (
-                            Stream responseStream = await response
-                                .Content
+                            Stream responseStream = await response.Content
                                 .ReadAsStreamAsync(TestAsync)
                         )
                         {
@@ -1564,14 +1545,15 @@ namespace System.Net.Http.Functional.Tests
 
                             // Not supported operations
                             await Assert.ThrowsAsync<NotSupportedException>(async () =>
-                                await Task.Factory.FromAsync(
-                                    responseStream.BeginWrite,
-                                    responseStream.EndWrite,
-                                    new byte[1],
-                                    0,
-                                    1,
-                                    null
-                                )
+                                await Task.Factory
+                                    .FromAsync(
+                                        responseStream.BeginWrite,
+                                        responseStream.EndWrite,
+                                        new byte[1],
+                                        0,
+                                        1,
+                                        null
+                                    )
                             );
                             if (!responseStream.CanSeek)
                             {
@@ -1750,14 +1732,15 @@ namespace System.Net.Http.Functional.Tests
                                 Assert.Equal('h', responseStream.ReadByte());
                                 Assert.Equal(
                                     1,
-                                    await Task.Factory.FromAsync(
-                                        responseStream.BeginRead,
-                                        responseStream.EndRead,
-                                        buffer,
-                                        0,
-                                        1,
-                                        null
-                                    )
+                                    await Task.Factory
+                                        .FromAsync(
+                                            responseStream.BeginRead,
+                                            responseStream.EndRead,
+                                            buffer,
+                                            0,
+                                            1,
+                                            null
+                                        )
                                 );
                                 Assert.Equal((byte)'e', buffer[0]);
 
@@ -1787,14 +1770,15 @@ namespace System.Net.Http.Functional.Tests
                                 // Doing any of these 0-byte reads causes the connection to fail.
                                 Assert.Equal(
                                     0,
-                                    await Task.Factory.FromAsync(
-                                        responseStream.BeginRead,
-                                        responseStream.EndRead,
-                                        Array.Empty<byte>(),
-                                        0,
-                                        0,
-                                        null
-                                    )
+                                    await Task.Factory
+                                        .FromAsync(
+                                            responseStream.BeginRead,
+                                            responseStream.EndRead,
+                                            Array.Empty<byte>(),
+                                            0,
+                                            0,
+                                            null
+                                        )
                                 );
 #if !NETFRAMEWORK
                                 Assert.Equal(0, await responseStream.ReadAsync(Memory<byte>.Empty));
@@ -1832,14 +1816,15 @@ namespace System.Net.Http.Functional.Tests
 #endif
                                 Assert.Equal(
                                     0,
-                                    await Task.Factory.FromAsync(
-                                        responseStream.BeginRead,
-                                        responseStream.EndRead,
-                                        buffer,
-                                        0,
-                                        1,
-                                        null
-                                    )
+                                    await Task.Factory
+                                        .FromAsync(
+                                            responseStream.BeginRead,
+                                            responseStream.EndRead,
+                                            buffer,
+                                            0,
+                                            1,
+                                            null
+                                        )
                                 );
                             }
                         }
@@ -1935,8 +1920,7 @@ namespace System.Net.Http.Functional.Tests
                             )
                         )
                         using (
-                            Stream responseStream = await response
-                                .Content
+                            Stream responseStream = await response.Content
                                 .ReadAsStreamAsync(TestAsync)
                         )
                         {
@@ -2068,14 +2052,15 @@ namespace System.Net.Http.Functional.Tests
                             Assert.Equal(-1, responseStream.ReadByte());
                             Assert.Equal(
                                 0,
-                                await Task.Factory.FromAsync(
-                                    responseStream.BeginRead,
-                                    responseStream.EndRead,
-                                    buffer,
-                                    0,
-                                    1,
-                                    null
-                                )
+                                await Task.Factory
+                                    .FromAsync(
+                                        responseStream.BeginRead,
+                                        responseStream.EndRead,
+                                        buffer,
+                                        0,
+                                        1,
+                                        null
+                                    )
                             );
 #if !NETFRAMEWORK
                             Assert.Equal(
@@ -2120,8 +2105,7 @@ namespace System.Net.Http.Functional.Tests
                         Version = UseVersion,
                     };
 #if !NETFRAMEWORK
-                    request
-                        .Options
+                    request.Options
                         .Set(
                             new HttpRequestOptionsKey<bool>("WebAssemblyEnableStreamingResponse"),
                             true
@@ -2139,8 +2123,7 @@ namespace System.Net.Http.Functional.Tests
                     )
                     {
                         using (
-                            Stream responseStream = await response
-                                .Content
+                            Stream responseStream = await response.Content
                                 .ReadAsStreamAsync(TestAsync)
                         )
                         {
@@ -2973,8 +2956,7 @@ namespace System.Net.Http.Functional.Tests
                             if (enableWasmStreaming)
                             {
 #if !NETFRAMEWORK
-                                request
-                                    .Options
+                                request.Options
                                     .Set(
                                         new HttpRequestOptionsKey<bool>(
                                             "WebAssemblyEnableStreamingRequest"

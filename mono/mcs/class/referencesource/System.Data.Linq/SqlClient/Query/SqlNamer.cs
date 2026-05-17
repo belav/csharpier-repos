@@ -54,8 +54,7 @@ namespace System.Data.Linq.SqlClient
                 base.VisitScalarSubSelect(ss);
                 if (ss.Select.Row.Columns.Count > 0)
                 {
-                    System
-                        .Diagnostics
+                    System.Diagnostics
                         .Debug
                         .Assert(
                             ss != null

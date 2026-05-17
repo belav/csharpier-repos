@@ -26,8 +26,7 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
         private static IDictionary GetSharedServersDictionary()
         {
             var sharedServerFullName = typeof(NamedPipeServerStream).FullName + "+SharedServer";
-            var sharedServerType = typeof(NamedPipeServerStream)
-                .Assembly
+            var sharedServerType = typeof(NamedPipeServerStream).Assembly
                 .GetType(sharedServerFullName);
             var serversField = sharedServerType?.GetField(
                 "s_servers",

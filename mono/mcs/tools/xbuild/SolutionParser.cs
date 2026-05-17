@@ -580,8 +580,7 @@ namespace Mono.XBuild.CommandLine
                 // hack, what are they doing here?
                 if (projPlat == "Any CPU")
                     projPlat = "AnyCPU";
-                projectInfo
-                    .TargetMap
+                projectInfo.TargetMap
                     .Add(new TargetInfo(solConf, solPlat), new TargetInfo(projConf, projPlat));
                 projectConfigurationPlatform = projectConfigurationPlatform.NextMatch();
             }
@@ -886,9 +885,8 @@ namespace Mono.XBuild.CommandLine
         {
             string w_guid = webProjectInfo.Guid.ToString().ToUpper();
 
-            Target target = p.Targets.AddNewTarget(
-                GetTargetNameForProject(webProjectInfo.Name, buildTarget)
-            );
+            Target target = p.Targets
+                .AddNewTarget(GetTargetNameForProject(webProjectInfo.Name, buildTarget));
             target.Condition = "'$(CurrentSolutionConfigurationContents)' != ''";
             target.DependsOnTargets = GetWebsiteDependsOnTarget(depInfos, buildTarget);
 
@@ -1035,9 +1033,8 @@ namespace Mono.XBuild.CommandLine
             string buildTarget
         )
         {
-            Target target = p.Targets.AddNewTarget(
-                GetTargetNameForProject(webProjectInfo.Name, buildTarget)
-            );
+            Target target = p.Targets
+                .AddNewTarget(GetTargetNameForProject(webProjectInfo.Name, buildTarget));
             target.DependsOnTargets = GetWebsiteDependsOnTarget(depInfos, buildTarget);
 
             BuildTask task = target.AddNewTask("Message");
@@ -1127,8 +1124,7 @@ namespace Mono.XBuild.CommandLine
                     if (project.Dependencies.Count > 0)
                         target.DependsOnTargets = String.Join(
                             ";",
-                            project
-                                .Dependencies
+                            project.Dependencies
                                 .Values
                                 .Select(di => GetTargetNameForProject(di.Name, buildTarget))
                                 .ToArray()

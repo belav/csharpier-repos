@@ -85,8 +85,7 @@ namespace Microsoft.CodeAnalysis.BraceCompletion
             );
 
             // The caret location should be in between the braces.
-            var originalOpeningLinePosition = context
-                .Document
+            var originalOpeningLinePosition = context.Document
                 .Text
                 .Lines
                 .GetLinePosition(context.OpeningPoint);
@@ -122,8 +121,7 @@ namespace Microsoft.CodeAnalysis.BraceCompletion
             }
 
             // check that the user is not typing in a string literal or comment
-            var syntaxFactsService = document
-                .LanguageServices
+            var syntaxFactsService = document.LanguageServices
                 .GetRequiredService<ISyntaxFactsService>();
 
             return !syntaxFactsService.IsInNonUserCode(
@@ -192,8 +190,7 @@ namespace Microsoft.CodeAnalysis.BraceCompletion
         )
         {
             var tree = context.Document.SyntaxTree;
-            var syntaxFactsService = context
-                .Document
+            var syntaxFactsService = context.Document
                 .LanguageServices
                 .GetRequiredService<ISyntaxFactsService>();
 
@@ -224,8 +221,7 @@ namespace Microsoft.CodeAnalysis.BraceCompletion
         /// </summary>
         private bool CheckClosingTokenKind(ParsedDocument document, int closingPosition)
         {
-            var closingToken = document
-                .Root
+            var closingToken = document.Root
                 .FindTokenFromEnd(closingPosition, includeZeroWidth: false, findInsideTrivia: true);
             return IsValidClosingBraceToken(closingToken);
         }

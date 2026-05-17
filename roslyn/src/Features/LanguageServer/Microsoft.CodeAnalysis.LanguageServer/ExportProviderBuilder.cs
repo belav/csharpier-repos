@@ -103,8 +103,7 @@ internal sealed class ExportProviderBuilder
         //     but found 0.
         //         part definition Microsoft.CodeAnalysis.ExternalAccess.Pythia.PythiaSignatureHelpProvider
         var erroredParts =
-            configuration
-                .CompositionErrors
+            configuration.CompositionErrors
                 .FirstOrDefault()
                 ?.SelectMany(error => error.Parts)
                 .Select(part => part.Definition.Type.Name)

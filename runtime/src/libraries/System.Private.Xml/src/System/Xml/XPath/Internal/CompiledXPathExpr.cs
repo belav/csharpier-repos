@@ -237,8 +237,7 @@ namespace MS.Internal.Xml.XPath
                 case XmlDataType.Text:
                     string? s1 = Convert.ToString(x, _cinfo);
                     string? s2 = Convert.ToString(y, _cinfo);
-                    int result = _cinfo
-                        .CompareInfo
+                    int result = _cinfo.CompareInfo
                         .Compare(
                             s1,
                             s2,

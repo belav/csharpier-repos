@@ -35,15 +35,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata
             );
         private readonly MetadataReference _windowsRuntimeUIXamlRef =
             MetadataReference.CreateFromImage(
-                ProprietaryTestResources
-                    .v4_0_30319_17929
+                ProprietaryTestResources.v4_0_30319_17929
                     .System_Runtime_WindowsRuntime_UI_Xaml
                     .AsImmutableOrNull()
             );
         private readonly MetadataReference _interopServicesWindowsRuntimeRef =
             MetadataReference.CreateFromImage(
-                TestMetadata
-                    .ResourcesNet451
+                TestMetadata.ResourcesNet451
                     .SystemRuntimeInteropServicesWindowsRuntime
                     .AsImmutableOrNull()
             );
@@ -155,8 +153,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata
                         result.Append(".property ");
 
                         PropertyAttributes propertyAttrs;
-                        ((PEModuleSymbol)container.ContainingModule)
-                            .Module
+                        ((PEModuleSymbol)container.ContainingModule).Module
                             .GetPropertyDefPropsOrThrow(
                                 property.Handle,
                                 out propertyName,
@@ -204,8 +201,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata
                         string eventName;
                         EventAttributes eventAttrs;
                         EntityHandle type;
-                        ((PEModuleSymbol)container.ContainingModule)
-                            .Module
+                        ((PEModuleSymbol)container.ContainingModule).Module
                             .GetEventDefPropsOrThrow(
                                 evnt.Handle,
                                 out eventName,

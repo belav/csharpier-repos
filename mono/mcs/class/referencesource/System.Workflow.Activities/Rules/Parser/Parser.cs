@@ -514,8 +514,7 @@ namespace System.Workflow.Activities.Rules
             {
                 for (int m = 0; m < methods.Length; ++m)
                 {
-                    System
-                        .Diagnostics
+                    System.Diagnostics
                         .Debug
                         .Assert(methods[m].MemberType == MemberTypes.Method, "expect methods only");
                     MethodInfo method = (MethodInfo)methods[m];
@@ -1102,8 +1101,7 @@ namespace System.Workflow.Activities.Rules
                     if (parserContext.NumTokens == 2 && token.TokenID == TokenID.Identifier)
                     {
                         string ident = (string)token.Value;
-                        System
-                            .Diagnostics
+                        System.Diagnostics
                             .Debug
                             .Assert(parserContext.NextToken().TokenID == TokenID.EndOfInput);
 
@@ -2325,8 +2323,7 @@ namespace System.Workflow.Activities.Rules
                     {
                         // both specified
                         primaryExpr = new CodeArrayCreateExpression(type, size);
-                        ((CodeArrayCreateExpression)primaryExpr)
-                            .Initializers
+                        ((CodeArrayCreateExpression)primaryExpr).Initializers
                             .AddRange(initializers.ToArray());
                     }
                 }
@@ -3283,8 +3280,7 @@ namespace System.Workflow.Activities.Rules
                             else
                             {
                                 Type paramType = parms[p].ParameterType;
-                                System
-                                    .Diagnostics
+                                System.Diagnostics
                                     .Debug
                                     .Assert(
                                         paramType.IsArray,

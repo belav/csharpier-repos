@@ -170,8 +170,7 @@ namespace System.Net.Http.Unit.Tests.HPack
 
             while (insertedSize != insertSize)
             {
-                byte[] data = Encoding
-                    .ASCII
+                byte[] data = Encoding.ASCII
                     .GetBytes($"header-{dynamicTable.Size}".PadRight(16, ' '));
                 Debug.Assert(data.Length == 16);
 

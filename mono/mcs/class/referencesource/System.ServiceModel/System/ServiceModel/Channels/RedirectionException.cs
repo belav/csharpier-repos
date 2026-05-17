@@ -74,8 +74,7 @@ namespace System.ServiceModel.Channels
             }
             else if (message.Length == 0)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument("message", SR.GetString(SR.ParameterCannotBeEmpty));
             }
 
@@ -86,8 +85,7 @@ namespace System.ServiceModel.Channels
             {
                 if (locations == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgumentNull(
                             "locations",
                             SR.GetString(SR.RedirectMustProvideLocation)
@@ -95,8 +93,7 @@ namespace System.ServiceModel.Channels
                 }
                 else if (locations.Length == 0)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgument(
                             "locations",
                             SR.GetString(SR.RedirectMustProvideLocation)
@@ -110,8 +107,7 @@ namespace System.ServiceModel.Channels
                 && locations.Length > 0
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(SR.GetString(SR.RedirectCacheNoLocationAllowed));
             }
 

@@ -26,8 +26,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
                     TestReferences.SymbolsTests.Fields.VBFields.dll,
                     TestMetadata.Net40.mscorlib,
                 },
-                options: TestOptions
-                    .ReleaseDll
+                options: TestOptions.ReleaseDll
                     .WithMetadataImportOptions(MetadataImportOptions.Internal)
             );
 

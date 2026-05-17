@@ -153,8 +153,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
                 AddSynthesizedAttribute(
                     ref attributes,
-                    manager
-                        .Compilation
+                    manager.Compilation
                         .TrySynthesizeAttribute(
                             WellKnownMember.System_Diagnostics_DebuggerBrowsableAttribute__ctor,
                             ImmutableArray.Create(

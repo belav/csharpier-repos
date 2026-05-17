@@ -52,8 +52,7 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
     public class ServiceDescriptorTests
     {
         public static IEnumerable<object[]> AllServiceDescriptors =>
-            ServiceDescriptors
-                .Instance
+            ServiceDescriptors.Instance
                 .GetTestAccessor()
                 .Descriptors
                 .Select(descriptor =>
@@ -72,8 +71,7 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
             var interfaces = new List<Type>();
 
             foreach (
-                var (serviceType, (descriptor, _, _, _)) in ServiceDescriptors
-                    .Instance
+                var (serviceType, (descriptor, _, _, _)) in ServiceDescriptors.Instance
                     .GetTestAccessor()
                     .Descriptors
             )
@@ -191,8 +189,7 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
         [MemberData(nameof(GetEncodingTestCases))]
         public void EncodingIsMessagePackSerializable(Encoding original)
         {
-            var messagePackOptions = MessagePackSerializerOptions
-                .Standard
+            var messagePackOptions = MessagePackSerializerOptions.Standard
                 .WithResolver(MessagePackFormatters.DefaultResolver);
 
             using var stream = new MemoryStream();
@@ -223,8 +220,7 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
         [Fact]
         public void EncodingIsMessagePackSerializable_WithCustomFallbacks()
         {
-            var messagePackOptions = MessagePackSerializerOptions
-                .Standard
+            var messagePackOptions = MessagePackSerializerOptions.Standard
                 .WithResolver(MessagePackFormatters.DefaultResolver);
 
             var original = Encoding.GetEncoding(
@@ -249,8 +245,7 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
         [Fact]
         public void OptionsAreMessagePackSerializable_LanguageAgnostic()
         {
-            var messagePackOptions = MessagePackSerializerOptions
-                .Standard
+            var messagePackOptions = MessagePackSerializerOptions.Standard
                 .WithResolver(MessagePackFormatters.DefaultResolver);
             var options = new object[]
             {
@@ -282,13 +277,11 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
         [InlineData(LanguageNames.VisualBasic)]
         public void OptionsAreMessagePackSerializable(string language)
         {
-            var messagePackOptions = MessagePackSerializerOptions
-                .Standard
+            var messagePackOptions = MessagePackSerializerOptions.Standard
                 .WithResolver(MessagePackFormatters.DefaultResolver);
 
             using var workspace = new AdhocWorkspace();
-            var languageServices = workspace
-                .Services
+            var languageServices = workspace.Services
                 .SolutionServices
                 .GetLanguageServices(language);
 
@@ -421,8 +414,7 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
                     {
                         // custom abstract types must be explicitly listed in MessagePackFormatters.AbstractTypeFormatters
                         if (
-                            !MessagePackFormatters
-                                .Formatters
+                            !MessagePackFormatters.Formatters
                                 .Any(formatter =>
                                     formatter.GetType()
                                         is { IsGenericType: true }
@@ -480,8 +472,7 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
         [Fact]
         public void CallbackDispatchers()
         {
-            var hostServices = FeaturesTestCompositions
-                .Features
+            var hostServices = FeaturesTestCompositions.Features
                 .WithTestHostParts(Testing.TestHost.OutOfProcess)
                 .GetHostServices();
             var callbackDispatchers = ((IMefHostExportProvider)hostServices).GetExports<
@@ -489,8 +480,7 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
                 RemoteServiceCallbackDispatcherRegistry.ExportMetadata
             >();
 
-            var descriptorsWithCallbackServiceTypes = ServiceDescriptors
-                .Instance
+            var descriptorsWithCallbackServiceTypes = ServiceDescriptors.Instance
                 .GetTestAccessor()
                 .Descriptors
                 .Where(d => d.Value.descriptor64.ClientInterface != null)

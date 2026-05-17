@@ -17,8 +17,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Shared.Lightup
 
         static NullableSyntaxAnnotationEx()
         {
-            var nullableSyntaxAnnotation = typeof(Workspace)
-                .Assembly
+            var nullableSyntaxAnnotation = typeof(Workspace).Assembly
                 .GetType(
                     "Microsoft.CodeAnalysis.CodeGeneration.NullableSyntaxAnnotation",
                     throwOnError: false

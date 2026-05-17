@@ -40,8 +40,7 @@ namespace System.Workflow.Runtime.Hosting
 
         public WorkflowWebHostingModule()
         {
-            WorkflowTrace
-                .Host
+            WorkflowTrace.Host
                 .TraceEvent(TraceEventType.Information, 0, "Workflow Web Hosting Module Created");
         }
 
@@ -51,8 +50,7 @@ namespace System.Workflow.Runtime.Hosting
         /// <param name="application"></param>
         void IHttpModule.Init(HttpApplication application)
         {
-            WorkflowTrace
-                .Host
+            WorkflowTrace.Host
                 .TraceEvent(
                     TraceEventType.Information,
                     0,
@@ -71,20 +69,17 @@ namespace System.Workflow.Runtime.Hosting
         void OnAcquireRequestState(Object sender, EventArgs e)
         {
             //Performs Cookie based routing.
-            WorkflowTrace
-                .Host
+            WorkflowTrace.Host
                 .TraceEvent(TraceEventType.Information, 0, "WebHost Module Routing Begin");
 
-            HttpCookie routingCookie = HttpContext
-                .Current
+            HttpCookie routingCookie = HttpContext.Current
                 .Request
                 .Cookies
                 .Get("WF_WorkflowInstanceId");
 
             if (routingCookie != null)
             {
-                HttpContext
-                    .Current
+                HttpContext.Current
                     .Items
                     .Add("__WorkflowInstanceId__", new Guid(routingCookie.Value));
             }

@@ -32,8 +32,7 @@ namespace System.Workflow.Runtime
         {
             if (workflowDefinition == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("workflowDefinition");
             }
 
@@ -60,8 +59,7 @@ namespace System.Workflow.Runtime
 
             if (workflowDefinitionPath == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("workflowDefinitionPath");
             }
 
@@ -204,12 +202,8 @@ namespace System.Workflow.Runtime
                     ruleStream.Position = 0;
                     ruleReader = System.Xml.XmlReader.Create(ruleStream);
                 }
-                return this.WorkflowRuntime.CreateWorkflow(
-                    definitionReader,
-                    ruleReader,
-                    null,
-                    instanceId
-                );
+                return this.WorkflowRuntime
+                    .CreateWorkflow(definitionReader, ruleReader, null, instanceId);
             }
             finally
             {
@@ -353,8 +347,7 @@ namespace System.Workflow.Runtime
                                 ruleReader
                             );
                             root.SetValue(
-                                System
-                                    .Workflow
+                                System.Workflow
                                     .Activities
                                     .Rules
                                     .RuleDefinitions
@@ -392,8 +385,7 @@ namespace System.Workflow.Runtime
 
                 if (errors.HasErrors)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new WorkflowValidationFailedException(
                                 SR2.GetString(SR2.WorkflowValidationFailed),

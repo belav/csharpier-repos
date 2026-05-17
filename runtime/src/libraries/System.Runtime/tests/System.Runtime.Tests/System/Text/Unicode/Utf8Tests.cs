@@ -409,7 +409,8 @@ namespace System.Text.Unicode.Tests
                 ToBytes_Test_Core(
                     utf16Input: utf16Input,
                     destinationSize: expectedUtf8TranscodingHex.Length / 2
-                        + Rune.ReplacementChar.Utf8SequenceLength /* for replacement char */
+                        + Rune.ReplacementChar
+                            .Utf8SequenceLength /* for replacement char */
                     ,
                     replaceInvalidSequences: true,
                     isFinalChunk: true,

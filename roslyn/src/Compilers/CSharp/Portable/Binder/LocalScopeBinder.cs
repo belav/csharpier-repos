@@ -269,8 +269,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                         foreach (var parameter in decl.ParameterList.Parameters)
                         {
-                            parameter
-                                .Type
+                            parameter.Type
                                 ?.VisitRankSpecifiers(
                                     (rankSpecifier, args) =>
                                     {
@@ -296,8 +295,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                             {
                                 if (constraint is TypeConstraintSyntax typeConstraint)
                                 {
-                                    typeConstraint
-                                        .Type
+                                    typeConstraint.Type
                                         .VisitRankSpecifiers(
                                             (rankSpecifier, args) =>
                                             {

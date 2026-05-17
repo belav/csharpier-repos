@@ -241,8 +241,7 @@ public class RequestDecompressionMiddlewareTests
                         app.Use(
                             (context, next) =>
                             {
-                                context
-                                    .Features
+                                context.Features
                                     .Set<IHttpMaxRequestBodySizeFeature>(
                                         new FakeHttpMaxRequestBodySizeFeature()
                                     );
@@ -326,8 +325,7 @@ public class RequestDecompressionMiddlewareTests
                         app.Use(
                             (context, next) =>
                             {
-                                context
-                                    .Features
+                                context.Features
                                     .Set<IHttpMaxRequestBodySizeFeature>(
                                         new FakeHttpMaxRequestBodySizeFeature()
                                     );
@@ -409,8 +407,7 @@ public class RequestDecompressionMiddlewareTests
                         app.Use(
                             (context, next) =>
                             {
-                                context
-                                    .Features
+                                context.Features
                                     .Set<IHttpMaxRequestBodySizeFeature>(
                                         new FakeHttpMaxRequestBodySizeFeature()
                                     );
@@ -465,8 +462,7 @@ public class RequestDecompressionMiddlewareTests
             new[] { contentEncoding },
             configure: (RequestDecompressionOptions options) =>
             {
-                options
-                    .DecompressionProviders
+                options.DecompressionProviders
                     .Add(contentEncoding, new CustomDecompressionProvider());
             }
         );
@@ -513,13 +509,11 @@ public class RequestDecompressionMiddlewareTests
                         app.Use(
                             (context, next) =>
                             {
-                                context
-                                    .Features
+                                context.Features
                                     .Set<IEndpointFeature>(
                                         GetFakeEndpointFeature(attributeSizeLimit)
                                     );
-                                context
-                                    .Features
+                                context.Features
                                     .Set<IHttpMaxRequestBodySizeFeature>(
                                         new FakeHttpMaxRequestBodySizeFeature(featureSizeLimit)
                                     );
@@ -609,8 +603,7 @@ public class RequestDecompressionMiddlewareTests
                         app.Use(
                             (context, next) =>
                             {
-                                context
-                                    .Features
+                                context.Features
                                     .Set<IHttpMaxRequestBodySizeFeature>(
                                         new FakeHttpMaxRequestBodySizeFeature(featureSizeLimit)
                                     );
@@ -779,8 +772,7 @@ public class RequestDecompressionMiddlewareTests
                         app.Use(
                             (context, next) =>
                             {
-                                context
-                                    .Features
+                                context.Features
                                     .Set<IHttpMaxRequestBodySizeFeature>(
                                         new FakeHttpMaxRequestBodySizeFeature()
                                     );

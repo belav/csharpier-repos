@@ -18,8 +18,7 @@ namespace System.Web.Razor.Generator
         public override void GenerateCode(Span target, CodeGeneratorContext context)
         {
             context.GeneratedClass.BaseTypes.Clear();
-            context
-                .GeneratedClass
+            context.GeneratedClass
                 .BaseTypes
                 .Add(new CodeTypeReference(ResolveType(context, BaseType.Trim())));
 

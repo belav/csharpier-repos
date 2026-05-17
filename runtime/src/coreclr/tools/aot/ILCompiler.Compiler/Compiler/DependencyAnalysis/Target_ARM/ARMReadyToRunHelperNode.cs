@@ -58,8 +58,7 @@ namespace ILCompiler.DependencyAnalysis
                 case ReadyToRunHelperId.GetNonGCStaticBase:
                     {
                         MetadataType target = (MetadataType)Target;
-                        bool hasLazyStaticConstructor = factory
-                            .PreinitializationManager
+                        bool hasLazyStaticConstructor = factory.PreinitializationManager
                             .HasLazyStaticConstructor(target);
                         encoder.EmitMOV(
                             encoder.TargetRegister.Result,
@@ -91,8 +90,7 @@ namespace ILCompiler.DependencyAnalysis
                                 encoder.TargetRegister.Result
                             );
                             encoder.EmitMOV(
-                                encoder
-                                    .TargetRegister
+                                encoder.TargetRegister
                                     .Arg0 /*Result*/
                                 ,
                                 encoder.TargetRegister.Arg2
@@ -194,8 +192,7 @@ namespace ILCompiler.DependencyAnalysis
                                 encoder.TargetRegister.Result
                             );
                             encoder.EmitMOV(
-                                encoder
-                                    .TargetRegister
+                                encoder.TargetRegister
                                     .Arg0 /*Result*/
                                 ,
                                 encoder.TargetRegister.Arg2

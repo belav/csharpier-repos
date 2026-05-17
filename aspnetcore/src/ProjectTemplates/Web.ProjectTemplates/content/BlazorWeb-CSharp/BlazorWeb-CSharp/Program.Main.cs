@@ -44,34 +44,29 @@ public class Program
         builder.Services.AddScoped<IdentityUserAccessor>();
         builder.Services.AddScoped<IdentityRedirectManager>();
 #if (UseServer && UseWebAssembly)
-        builder
-            .Services
+        builder.Services
             .AddScoped<
                 AuthenticationStateProvider,
                 PersistingRevalidatingAuthenticationStateProvider
             >();
 #elif (UseServer)
-        builder
-            .Services
+        builder.Services
             .AddScoped<
                 AuthenticationStateProvider,
                 IdentityRevalidatingAuthenticationStateProvider
             >();
 #elif (UseWebAssembly)
-        builder
-            .Services
+        builder.Services
             .AddScoped<AuthenticationStateProvider, PersistingServerAuthenticationStateProvider>();
 #else
-        builder
-            .Services
+        builder.Services
             .AddScoped<AuthenticationStateProvider, ServerAuthenticationStateProvider>();
 #endif
 
 #if (!UseServer)
         builder.Services.AddAuthorization();
 #endif
-        builder
-            .Services
+        builder.Services
             .AddAuthentication(options =>
             {
                 options.DefaultScheme = IdentityConstants.ApplicationScheme;
@@ -84,8 +79,7 @@ public class Program
             ?? throw new InvalidOperationException(
                 "Connection string 'DefaultConnection' not found."
             );
-        builder
-            .Services
+        builder.Services
             .AddDbContext<ApplicationDbContext>(options =>
 #if (UseLocalDB)
                 options.UseSqlServer(connectionString));
@@ -94,8 +88,7 @@ public class Program
 #endif
         builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-        builder
-            .Services
+        builder.Services
             .AddIdentityCore<ApplicationUser>(options =>
                 options.SignIn.RequireConfirmedAccount = true
             )

@@ -62,8 +62,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             _editorAdaptersFactoryService = editorAdaptersFactoryService;
             ThreadingContext.RunWithShutdownBlockAsync(async cancellationToken =>
             {
-                await ThreadingContext
-                    .JoinableTaskFactory
+                await ThreadingContext.JoinableTaskFactory
                     .SwitchToMainThreadAsync(cancellationToken);
 
                 var monitorSelectionService = (IVsMonitorSelection?)
@@ -264,8 +263,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                     && (int)frameType == (int)__WindowFrameTypeFlags.WINDOWFRAMETYPE_Document
                 )
                 {
-                    var runningDocumentTable = ThreadingContext
-                        .JoinableTaskFactory
+                    var runningDocumentTable = ThreadingContext.JoinableTaskFactory
                         .Run(() =>
                             GetRunningDocumentTableAsync(ThreadingContext.DisposalToken).AsTask()
                         );
@@ -316,8 +314,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                 object sender,
                 TextContentChangedEventArgs e
             ) =>
-                _documentTracker
-                    .NonRoslynBufferTextChanged
+                _documentTracker.NonRoslynBufferTextChanged
                     ?.Invoke(_documentTracker, EventArgs.Empty);
 
             /// <summary>
@@ -349,8 +346,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                         {
                             // The current TextBuffer was initialized in the OnShow instead of being initialized in the
                             // constructor. For consumers, treat this the same way as when the active document changes.
-                            _documentTracker
-                                .DocumentsChanged
+                            _documentTracker.DocumentsChanged
                                 ?.Invoke(_documentTracker, EventArgs.Empty);
                         }
 
@@ -416,8 +412,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                 {
                     if (docData is IVsTextBuffer bufferAdapter)
                     {
-                        TextBuffer = _documentTracker
-                            ._editorAdaptersFactoryService
+                        TextBuffer = _documentTracker._editorAdaptersFactoryService
                             .GetDocumentBuffer(bufferAdapter);
 
                         if (

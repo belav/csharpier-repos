@@ -59,10 +59,8 @@ namespace Microsoft.AspNet.Facebook.Test.Helpers
                 .Returns(actionAuthorizeAttributes ?? new object[0]);
             actionDescriptor
                 .Setup(a =>
-                    a.ControllerDescriptor.GetCustomAttributes(
-                        typeof(FacebookAuthorizeAttribute),
-                        true
-                    )
+                    a.ControllerDescriptor
+                        .GetCustomAttributes(typeof(FacebookAuthorizeAttribute), true)
                 )
                 .Returns(controllerAuthorizeAttributes ?? new object[0]);
             return actionDescriptor.Object;

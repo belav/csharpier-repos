@@ -226,8 +226,7 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                     compilation,
                     cancellationToken
                 ) ?? DocumentationComment.Empty,
-                ITypeParameterSymbol typeParam => typeParam
-                    .ContainingSymbol
+                ITypeParameterSymbol typeParam => typeParam.ContainingSymbol
                     .GetDocumentationComment(
                         compilation,
                         expandIncludes: true,
@@ -241,8 +240,7 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                     compilation,
                     cancellationToken
                 ),
-                IAliasSymbol alias => alias
-                    .Target
+                IAliasSymbol alias => alias.Target
                     .GetDocumentationComment(
                         compilation,
                         expandIncludes: true,
@@ -297,8 +295,7 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             }
 
             // Get the comments from the original definition of the containing symbol.
-            return containingSymbol
-                .OriginalDefinition
+            return containingSymbol.OriginalDefinition
                 .GetDocumentationComment(
                     compilation,
                     expandIncludes: true,
@@ -349,8 +346,7 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 case MethodKind.EventRemove:
                 case MethodKind.PropertyGet:
                 case MethodKind.PropertySet:
-                    return method
-                            .AssociatedSymbol
+                    return method.AssociatedSymbol
                             ?.GetDocumentationComment(
                                 compilation,
                                 expandIncludes: true,

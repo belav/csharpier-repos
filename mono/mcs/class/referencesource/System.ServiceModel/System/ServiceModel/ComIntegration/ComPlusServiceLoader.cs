@@ -30,12 +30,13 @@ namespace System.ServiceModel.ComIntegration
             // ServiceBehaviorAttribute needs to go first in the behaviors collection (before config stuff)
             AddBehaviors(service);
 
-            this.configLoader.LoadServiceDescription(
-                host,
-                service,
-                this.info.ServiceElement,
-                host.LoadConfigurationSectionHelper
-            );
+            this.configLoader
+                .LoadServiceDescription(
+                    host,
+                    service,
+                    this.info.ServiceElement,
+                    host.LoadConfigurationSectionHelper
+                );
 
             ValidateConfigInstanceSettings(service);
 
@@ -74,9 +75,8 @@ namespace System.ServiceModel.ComIntegration
 
             if (AspNetEnvironment.Enabled)
             {
-                AspNetCompatibilityRequirementsAttribute aspNetCompatibilityRequirements = service
-                    .Behaviors
-                    .Find<AspNetCompatibilityRequirementsAttribute>();
+                AspNetCompatibilityRequirementsAttribute aspNetCompatibilityRequirements =
+                    service.Behaviors.Find<AspNetCompatibilityRequirementsAttribute>();
                 if (aspNetCompatibilityRequirements == null)
                 {
                     aspNetCompatibilityRequirements =
@@ -113,11 +113,9 @@ namespace System.ServiceModel.ComIntegration
                     if (endpoint.Contract.SessionMode == SessionMode.Required)
                     {
                         if (serviceBehavior.InstanceContextMode == InstanceContextMode.PerCall)
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
-                                    System
-                                        .ServiceModel
+                                    System.ServiceModel
                                         .ComIntegration
                                         .Error
                                         .InconsistentSessionRequirements()
@@ -128,11 +126,9 @@ namespace System.ServiceModel.ComIntegration
                     else
                     {
                         if (serviceBehavior.InstanceContextMode == InstanceContextMode.PerSession)
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
-                                    System
-                                        .ServiceModel
+                                    System.ServiceModel
                                         .ComIntegration
                                         .Error
                                         .InconsistentSessionRequirements()

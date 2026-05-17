@@ -41,8 +41,7 @@ namespace System.Workflow.ComponentModel.Design
         {
             if (activityDesigner == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("activityDesigner");
             }
             if (eventArgs == null)
@@ -81,8 +80,7 @@ namespace System.Workflow.ComponentModel.Design
             while (!currentDesigner.IsRootDesigner)
             {
                 if (
-                    !((CompositeActivityDesigner)parentDesigner)
-                        .ContainedDesigners
+                    !((CompositeActivityDesigner)parentDesigner).ContainedDesigners
                         .Contains(currentDesigner)
                 )
                 {

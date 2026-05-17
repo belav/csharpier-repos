@@ -509,8 +509,7 @@ namespace System.Security.Cryptography.Apple
                 return;
 
             using (
-                SafeKeychainHandle keychain = Interop
-                    .AppleCrypto
+                SafeKeychainHandle keychain = Interop.AppleCrypto
                     .SecKeychainItemCopyKeychain(keychainItem)
             )
             {
@@ -535,8 +534,7 @@ namespace System.Security.Cryptography.Apple
         internal static void UntrackItem(IntPtr keychainItem)
         {
             using (
-                SafeKeychainHandle keychain = Interop
-                    .AppleCrypto
+                SafeKeychainHandle keychain = Interop.AppleCrypto
                     .SecKeychainItemCopyKeychain(keychainItem)
             )
             {

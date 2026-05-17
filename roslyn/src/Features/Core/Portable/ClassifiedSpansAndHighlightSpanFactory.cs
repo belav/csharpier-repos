@@ -30,8 +30,7 @@ namespace Microsoft.CodeAnalysis.Classification
                 )
                 .ConfigureAwait(false);
 
-            var properties = ImmutableDictionary<string, object>
-                .Empty
+            var properties = ImmutableDictionary<string, object>.Empty
                 .Add(ClassifiedSpansAndHighlightSpan.Key, classifiedSpans);
 
             return new DocumentSpan(document, sourceSpan, properties);
@@ -48,8 +47,7 @@ namespace Microsoft.CodeAnalysis.Classification
             // the document span is on.
             if (
                 documentSpan.Properties != null
-                && documentSpan
-                    .Properties
+                && documentSpan.Properties
                     .TryGetValue(ClassifiedSpansAndHighlightSpan.Key, out var value)
             )
             {

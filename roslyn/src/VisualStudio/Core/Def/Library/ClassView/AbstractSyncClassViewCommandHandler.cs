@@ -52,8 +52,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ClassVi
 
             var snapshot = args.SubjectBuffer.CurrentSnapshot;
 
-            using var waitScope = context
-                .OperationContext
+            using var waitScope = context.OperationContext
                 .AddScope(
                     allowCancellation: true,
                     string.Format(ServicesVSResources.Synchronizing_with_0, ClassView)
@@ -85,8 +84,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ClassVi
                 .GetSemanticModelAsync(userCancellationToken)
                 .WaitAndGetResult(userCancellationToken);
 
-            var root = semanticModel
-                .SyntaxTree
+            var root = semanticModel.SyntaxTree
                 .GetRootAsync(userCancellationToken)
                 .WaitAndGetResult(userCancellationToken);
 
@@ -108,8 +106,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ClassVi
             IVsNavInfo navInfo = null;
             if (symbol != null)
             {
-                navInfo = libraryService
-                    .NavInfoFactory
+                navInfo = libraryService.NavInfoFactory
                     .CreateForSymbol(
                         symbol,
                         document.Project,

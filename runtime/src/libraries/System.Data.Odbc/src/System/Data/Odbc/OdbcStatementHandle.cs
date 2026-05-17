@@ -64,8 +64,7 @@ namespace System.Data.Odbc
             IntPtr srLen_or_Ind
         )
         {
-            ODBC32.SQLRETURN retcode = Interop
-                .Odbc
+            ODBC32.SQLRETURN retcode = Interop.Odbc
                 .SQLBindCol(
                     this,
                     checked((ushort)columnNumber),
@@ -84,8 +83,7 @@ namespace System.Data.Odbc
             IntPtr srLen_or_Ind
         )
         {
-            ODBC32.SQLRETURN retcode = Interop
-                .Odbc
+            ODBC32.SQLRETURN retcode = Interop.Odbc
                 .SQLBindCol(
                     this,
                     checked((ushort)columnNumber),
@@ -110,8 +108,7 @@ namespace System.Data.Odbc
             HandleRef intbuffer
         )
         {
-            ODBC32.SQLRETURN retcode = Interop
-                .Odbc
+            ODBC32.SQLRETURN retcode = Interop.Odbc
                 .SQLBindParameter(
                     this,
                     checked((ushort)ordinal), // Parameter Number
@@ -153,8 +150,7 @@ namespace System.Data.Odbc
         )
         {
             IntPtr result;
-            ODBC32.SQLRETURN retcode = Interop
-                .Odbc
+            ODBC32.SQLRETURN retcode = Interop.Odbc
                 .SQLColAttributeW(
                     this,
                     checked((short)columnNumber),
@@ -176,8 +172,7 @@ namespace System.Data.Odbc
             string columnName
         )
         {
-            ODBC32.SQLRETURN retcode = Interop
-                .Odbc
+            ODBC32.SQLRETURN retcode = Interop.Odbc
                 .SQLColumnsW(
                     this,
                     tableCatalog,
@@ -203,8 +198,7 @@ namespace System.Data.Odbc
 
         internal ODBC32.SQLRETURN ExecuteDirect(string commandText)
         {
-            ODBC32.SQLRETURN retcode = Interop
-                .Odbc
+            ODBC32.SQLRETURN retcode = Interop.Odbc
                 .SQLExecDirectW(this, commandText, ODBC32.SQL_NTS);
             ODBC.TraceODBC(3, "SQLExecDirectW", retcode);
             return retcode;
@@ -232,8 +226,7 @@ namespace System.Data.Odbc
             out IntPtr cbActual
         )
         {
-            ODBC32.SQLRETURN retcode = Interop
-                .Odbc
+            ODBC32.SQLRETURN retcode = Interop.Odbc
                 .SQLGetData(
                     this,
                     checked((ushort)index),
@@ -252,8 +245,7 @@ namespace System.Data.Odbc
             out int stringLength
         )
         {
-            ODBC32.SQLRETURN retcode = Interop
-                .Odbc
+            ODBC32.SQLRETURN retcode = Interop.Odbc
                 .SQLGetStmtAttrW(this, attribute, out value, ADP.PtrSize, out stringLength);
             ODBC.TraceODBC(3, "SQLGetStmtAttrW", retcode);
             return retcode;
@@ -293,8 +285,7 @@ namespace System.Data.Odbc
             string tableName
         )
         {
-            ODBC32.SQLRETURN retcode = Interop
-                .Odbc
+            ODBC32.SQLRETURN retcode = Interop.Odbc
                 .SQLPrimaryKeysW(
                     this,
                     catalogName,
@@ -314,8 +305,7 @@ namespace System.Data.Odbc
             string procedureName
         )
         {
-            ODBC32.SQLRETURN retcode = Interop
-                .Odbc
+            ODBC32.SQLRETURN retcode = Interop.Odbc
                 .SQLProceduresW(
                     this,
                     procedureCatalog,
@@ -337,8 +327,7 @@ namespace System.Data.Odbc
             string? columnName
         )
         {
-            ODBC32.SQLRETURN retcode = Interop
-                .Odbc
+            ODBC32.SQLRETURN retcode = Interop.Odbc
                 .SQLProcedureColumnsW(
                     this,
                     procedureCatalog,
@@ -370,8 +359,7 @@ namespace System.Data.Odbc
             ODBC32.SQL_IS stringLength
         )
         {
-            ODBC32.SQLRETURN retcode = Interop
-                .Odbc
+            ODBC32.SQLRETURN retcode = Interop.Odbc
                 .SQLSetStmtAttrW(this, (int)attribute, value, (int)stringLength);
             ODBC.TraceODBC(3, "SQLSetStmtAttrW", retcode);
             return retcode;
@@ -379,8 +367,7 @@ namespace System.Data.Odbc
 
         internal ODBC32.SQLRETURN SpecialColumns(string quotedTable)
         {
-            ODBC32.SQLRETURN retcode = Interop
-                .Odbc
+            ODBC32.SQLRETURN retcode = Interop.Odbc
                 .SQLSpecialColumnsW(
                     this,
                     ODBC32.SQL_SPECIALCOLS.ROWVER,
@@ -413,8 +400,7 @@ namespace System.Data.Odbc
             IntPtr pwszTableName = Marshal.StringToCoTaskMemUni(tableName);
             try
             {
-                retcode = Interop
-                    .Odbc
+                retcode = Interop.Odbc
                     .SQLStatisticsW(
                         this,
                         tableCatalog,
@@ -454,8 +440,7 @@ namespace System.Data.Odbc
             string tableType
         )
         {
-            ODBC32.SQLRETURN retcode = Interop
-                .Odbc
+            ODBC32.SQLRETURN retcode = Interop.Odbc
                 .SQLTablesW(
                     this,
                     tableCatalog,

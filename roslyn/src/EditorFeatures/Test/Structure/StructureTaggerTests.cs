@@ -514,16 +514,14 @@ End Module";
             var hostdoc = workspace.Documents.First();
             var view = hostdoc.GetTextView();
 
-            var provider = workspace
-                .ExportProvider
+            var provider = workspace.ExportProvider
                 .GetExportedValue<AbstractStructureTaggerProvider>();
 
             var document = workspace.CurrentSolution.GetDocument(hostdoc.Id);
             var context = new TaggerContext<IStructureTag2>(document, view.TextSnapshot);
             await provider.GetTestAccessor().ProduceTagsAsync(context);
 
-            return context
-                .TagSpans
+            return context.TagSpans
                 .Select(x => x.Tag)
                 .OrderBy(t => t.OutliningSpan.Value.Start)
                 .ToList();

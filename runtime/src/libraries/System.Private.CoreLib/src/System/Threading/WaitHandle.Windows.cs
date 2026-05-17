@@ -77,8 +77,7 @@ namespace System.Threading
             else
             {
                 result = (int)
-                    Interop
-                        .Kernel32
+                    Interop.Kernel32
                         .WaitForMultipleObjectsEx(
                             (uint)numHandles,
                             (IntPtr)pHandles,
@@ -89,8 +88,7 @@ namespace System.Threading
             }
 #else
             int result = (int)
-                Interop
-                    .Kernel32
+                Interop.Kernel32
                     .WaitForMultipleObjectsEx(
                         (uint)numHandles,
                         (IntPtr)pHandles,
@@ -148,8 +146,7 @@ namespace System.Threading
             Debug.Assert(millisecondsTimeout >= -1);
 
             int ret = (int)
-                Interop
-                    .Kernel32
+                Interop.Kernel32
                     .SignalObjectAndWait(
                         handleToSignal,
                         handleToWaitOn,

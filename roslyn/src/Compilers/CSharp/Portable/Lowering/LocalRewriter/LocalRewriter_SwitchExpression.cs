@@ -220,8 +220,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 bool implicitConversionExists(BoundExpression expression, TypeSymbol type)
                 {
                     var discardedUseSiteInfo = CompoundUseSiteInfo<AssemblySymbol>.Discarded;
-                    Conversion c = _localRewriter
-                        ._compilation
+                    Conversion c = _localRewriter._compilation
                         .Conversions
                         .ClassifyConversionFromExpression(
                             expression,

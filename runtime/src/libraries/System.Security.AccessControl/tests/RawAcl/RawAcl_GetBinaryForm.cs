@@ -35,8 +35,7 @@ namespace System.Security.AccessControl.Tests
             int errorCode;
             if (
                 0
-                == Utils
-                    .Win32AclLayer
+                == Utils.Win32AclLayer
                     .InitializeAclNative(
                         verifierBinaryForm,
                         (uint)rAcl.BinaryLength,
@@ -48,8 +47,7 @@ namespace System.Security.AccessControl.Tests
             }
             else if (
                 0
-                == Utils
-                    .Win32AclLayer
+                == Utils.Win32AclLayer
                     .AddAccessAllowedAceExNative(
                         verifierBinaryForm,
                         (uint)GenericAcl.AclRevision,
@@ -81,8 +79,7 @@ namespace System.Security.AccessControl.Tests
 
             if (
                 0
-                == Utils
-                    .Win32AclLayer
+                == Utils.Win32AclLayer
                     .InitializeAclNative(
                         verifierBinaryForm,
                         (uint)rAcl.BinaryLength,
@@ -94,8 +91,7 @@ namespace System.Security.AccessControl.Tests
             }
             else if (
                 0
-                == Utils
-                    .Win32AclLayer
+                == Utils.Win32AclLayer
                     .AddAccessDeniedAceExNative(
                         verifierBinaryForm,
                         (uint)GenericAcl.AclRevision,
@@ -127,8 +123,7 @@ namespace System.Security.AccessControl.Tests
 
             if (
                 0
-                == Utils
-                    .Win32AclLayer
+                == Utils.Win32AclLayer
                     .InitializeAclNative(
                         verifierBinaryForm,
                         (uint)rAcl.BinaryLength,
@@ -140,8 +135,7 @@ namespace System.Security.AccessControl.Tests
             }
             else if (
                 0
-                == Utils
-                    .Win32AclLayer
+                == Utils.Win32AclLayer
                     .AddAuditAccessAceExNative(
                         verifierBinaryForm,
                         (uint)GenericAcl.AclRevision,
@@ -289,8 +283,7 @@ namespace System.Security.AccessControl.Tests
             int errorCode;
             if (
                 0
-                == Utils
-                    .Win32AclLayer
+                == Utils.Win32AclLayer
                     .InitializeAclNative(verifierBinaryForm, (uint)8, (uint)GenericAcl.AclRevision)
             )
             {
@@ -344,8 +337,7 @@ namespace System.Security.AccessControl.Tests
 
             if (
                 0
-                == Utils
-                    .Win32AclLayer
+                == Utils.Win32AclLayer
                     .InitializeAclNative(
                         verifierBinaryForm,
                         (uint)rAcl.BinaryLength,
@@ -362,8 +354,7 @@ namespace System.Security.AccessControl.Tests
                 {
                     if (
                         0
-                        == Utils
-                            .Win32AclLayer
+                        == Utils.Win32AclLayer
                             .AddAccessAllowedAceExNative(
                                 verifierBinaryForm,
                                 (uint)GenericAcl.AclRevision,
@@ -378,8 +369,7 @@ namespace System.Security.AccessControl.Tests
                     }
                     if (
                         0
-                        == Utils
-                            .Win32AclLayer
+                        == Utils.Win32AclLayer
                             .AddAuditAccessAceExNative(
                                 verifierBinaryForm,
                                 (uint)GenericAcl.AclRevision,
@@ -396,8 +386,7 @@ namespace System.Security.AccessControl.Tests
                     }
                     if (
                         0
-                        == Utils
-                            .Win32AclLayer
+                        == Utils.Win32AclLayer
                             .AddAccessDeniedAceExNative(
                                 verifierBinaryForm,
                                 (uint)GenericAcl.AclRevision,

@@ -328,8 +328,7 @@ static class PathExtensions
         }
         else
         {
-            Console
-                .Error
+            Console.Error
                 .WriteLine(
                     "Failed deleting {0} output folders in {1} msecs",
                     outputFolders.Length,

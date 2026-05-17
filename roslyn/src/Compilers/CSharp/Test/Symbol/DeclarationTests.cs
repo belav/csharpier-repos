@@ -460,8 +460,7 @@ namespace N1
 
             var type1 = (SourceNamedTypeSymbol)compilation.GetTypeByMetadataName("N1.N2.N3.C");
             Assert.True(
-                type1
-                    .MergedDeclaration
+                type1.MergedDeclaration
                     .Declarations[0]
                     .MemberNames
                     .Value
@@ -472,8 +471,7 @@ namespace N1
 
             var type2 = (SourceNamedTypeSymbol)compilation.GetTypeByMetadataName("N1.N2.N3.C");
             Assert.True(
-                type2
-                    .MergedDeclaration
+                type2.MergedDeclaration
                     .Declarations[0]
                     .MemberNames
                     .Value
@@ -490,8 +488,7 @@ namespace N1
 
             var type3 = (SourceNamedTypeSymbol)compilation.GetTypeByMetadataName("N1.N2.N3.C");
             Assert.True(
-                type3
-                    .MergedDeclaration
+                type3.MergedDeclaration
                     .Declarations[0]
                     .MemberNames
                     .Value
@@ -544,8 +541,7 @@ namespace N1
 
             var type1 = (SourceNamedTypeSymbol)compilation.GetTypeByMetadataName("N1.N2.N3.C");
             Assert.True(
-                type1
-                    .MergedDeclaration
+                type1.MergedDeclaration
                     .Declarations[0]
                     .MemberNames
                     .Value
@@ -556,8 +552,7 @@ namespace N1
 
             var type2 = (SourceNamedTypeSymbol)compilation.GetTypeByMetadataName("N1.N2.N3.D");
             Assert.True(
-                type2
-                    .MergedDeclaration
+                type2.MergedDeclaration
                     .Declarations[0]
                     .MemberNames
                     .Value
@@ -608,8 +603,7 @@ namespace N1
 
             var type1 = (SourceNamedTypeSymbol)compilation.GetTypeByMetadataName("N1.N2.N3.C");
             Assert.True(
-                type1
-                    .MergedDeclaration
+                type1.MergedDeclaration
                     .Declarations[0]
                     .MemberNames
                     .Value
@@ -620,8 +614,7 @@ namespace N1
 
             var type2 = (SourceNamedTypeSymbol)compilation.GetTypeByMetadataName("N1.C");
             Assert.True(
-                type2
-                    .MergedDeclaration
+                type2.MergedDeclaration
                     .Declarations[0]
                     .MemberNames
                     .Value
@@ -682,8 +675,7 @@ namespace N1
 
             var type1a = (SourceNamedTypeSymbol)compilation.GetTypeByMetadataName("N1.N2.N3.C");
             Assert.True(
-                type1a
-                    .MergedDeclaration
+                type1a.MergedDeclaration
                     .Declarations[0]
                     .MemberNames
                     .Value
@@ -692,8 +684,7 @@ namespace N1
 
             var type1b = (SourceNamedTypeSymbol)compilation.GetTypeByMetadataName("N1.N2.N3.D");
             Assert.True(
-                type1b
-                    .MergedDeclaration
+                type1b.MergedDeclaration
                     .Declarations[0]
                     .MemberNames
                     .Value
@@ -704,8 +695,7 @@ namespace N1
 
             var type2a = (SourceNamedTypeSymbol)compilation.GetTypeByMetadataName("N1.C");
             Assert.True(
-                type2a
-                    .MergedDeclaration
+                type2a.MergedDeclaration
                     .Declarations[0]
                     .MemberNames
                     .Value
@@ -714,8 +704,7 @@ namespace N1
 
             var type2b = (SourceNamedTypeSymbol)compilation.GetTypeByMetadataName("N1.D");
             Assert.True(
-                type2b
-                    .MergedDeclaration
+                type2b.MergedDeclaration
                     .Declarations[0]
                     .MemberNames
                     .Value
@@ -775,8 +764,7 @@ namespace N1
 
             var type1a = (SourceNamedTypeSymbol)compilation.GetTypeByMetadataName("N1.N2.N3.C");
             Assert.True(
-                type1a
-                    .MergedDeclaration
+                type1a.MergedDeclaration
                     .Declarations[0]
                     .MemberNames
                     .Value
@@ -785,8 +773,7 @@ namespace N1
 
             var type1b = (SourceNamedTypeSymbol)compilation.GetTypeByMetadataName("N1.N2.N3.D");
             Assert.True(
-                type1b
-                    .MergedDeclaration
+                type1b.MergedDeclaration
                     .Declarations[0]
                     .MemberNames
                     .Value
@@ -797,8 +784,7 @@ namespace N1
 
             var type2a = (SourceNamedTypeSymbol)compilation.GetTypeByMetadataName("N1.C");
             Assert.True(
-                type2a
-                    .MergedDeclaration
+                type2a.MergedDeclaration
                     .Declarations[0]
                     .MemberNames
                     .Value
@@ -852,8 +838,7 @@ namespace N1
 
             var type1a = (SourceNamedTypeSymbol)compilation.GetTypeByMetadataName("N1.N2.N3.E");
             Assert.True(
-                type1a
-                    .MergedDeclaration
+                type1a.MergedDeclaration
                     .Declarations[0]
                     .MemberNames
                     .Value
@@ -864,8 +849,7 @@ namespace N1
 
             var type2a = (SourceNamedTypeSymbol)compilation.GetTypeByMetadataName("N1.E");
             Assert.True(
-                type2a
-                    .MergedDeclaration
+                type2a.MergedDeclaration
                     .Declarations[0]
                     .MemberNames
                     .Value
@@ -916,8 +900,7 @@ namespace N1
 
             var type1a = (SourceNamedTypeSymbol)compilation.GetTypeByMetadataName("N1.N2.N3.S");
             Assert.True(
-                type1a
-                    .MergedDeclaration
+                type1a.MergedDeclaration
                     .Declarations[0]
                     .MemberNames
                     .Value
@@ -928,8 +911,7 @@ namespace N1
 
             var type2a = (SourceNamedTypeSymbol)compilation.GetTypeByMetadataName("N1.S");
             Assert.True(
-                type2a
-                    .MergedDeclaration
+                type2a.MergedDeclaration
                     .Declarations[0]
                     .MemberNames
                     .Value
@@ -984,8 +966,7 @@ namespace N1
 
             var type1a = (SourceNamedTypeSymbol)compilation.GetTypeByMetadataName("N1.N2.N3.I");
             Assert.True(
-                type1a
-                    .MergedDeclaration
+                type1a.MergedDeclaration
                     .Declarations[0]
                     .MemberNames
                     .Value
@@ -996,8 +977,7 @@ namespace N1
 
             var type2a = (SourceNamedTypeSymbol)compilation.GetTypeByMetadataName("N1.I");
             Assert.True(
-                type2a
-                    .MergedDeclaration
+                type2a.MergedDeclaration
                     .Declarations[0]
                     .MemberNames
                     .Value
@@ -1050,8 +1030,7 @@ namespace N1
 
             var type1a = (SourceNamedTypeSymbol)compilation.GetTypeByMetadataName("N1.N2.N3.E");
             Assert.True(
-                type1a
-                    .MergedDeclaration
+                type1a.MergedDeclaration
                     .Declarations[0]
                     .MemberNames
                     .Value
@@ -1062,8 +1041,7 @@ namespace N1
 
             var type2a = (SourceNamedTypeSymbol)compilation.GetTypeByMetadataName("N1.E");
             Assert.True(
-                type2a
-                    .MergedDeclaration
+                type2a.MergedDeclaration
                     .Declarations[0]
                     .MemberNames
                     .Value
@@ -1116,8 +1094,7 @@ namespace N1
 
             var type1a = (SourceNamedTypeSymbol)compilation.GetTypeByMetadataName("N1.N2.N3.E");
             Assert.True(
-                type1a
-                    .MergedDeclaration
+                type1a.MergedDeclaration
                     .Declarations[0]
                     .MemberNames
                     .Value
@@ -1128,8 +1105,7 @@ namespace N1
 
             var type2a = (SourceNamedTypeSymbol)compilation.GetTypeByMetadataName("N1.E");
             Assert.True(
-                type2a
-                    .MergedDeclaration
+                type2a.MergedDeclaration
                     .Declarations[0]
                     .MemberNames
                     .Value
@@ -1169,16 +1145,14 @@ namespace N1
             var type1 = (SourceNamedTypeSymbol)compilation1.GetTypeByMetadataName("N1.N2.N3.E");
             var type2 = (SourceNamedTypeSymbol)compilation2.GetTypeByMetadataName("N1.N2.N3.E");
             Assert.True(
-                type1
-                    .MergedDeclaration
+                type1.MergedDeclaration
                     .Declarations[0]
                     .MemberNames
                     .Value
                     .SetEquals(new[] { "x", "y", "z" })
             );
             Assert.True(
-                type2
-                    .MergedDeclaration
+                type2.MergedDeclaration
                     .Declarations[0]
                     .MemberNames
                     .Value

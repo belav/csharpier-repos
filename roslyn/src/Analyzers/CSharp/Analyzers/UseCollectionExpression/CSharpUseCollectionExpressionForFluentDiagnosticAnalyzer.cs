@@ -212,8 +212,7 @@ internal sealed partial class CSharpUseCollectionExpressionForFluentDiagnosticAn
 
         // We don't want to offer this feature on top of some builder-type.  They will commonly end with something like
         // `builder.ToImmutable()`.  We want that case to be handled by the 'ForBuilder' analyzer instead.
-        var expressionType = state
-            .SemanticModel
+        var expressionType = state.SemanticModel
             .GetTypeInfo(memberAccess.Expression, cancellationToken)
             .Type;
         if (
@@ -382,8 +381,7 @@ internal sealed partial class CSharpUseCollectionExpressionForFluentDiagnosticAn
                     } innerInvocation
                 && text.Lines.GetLineFromPosition(expression.SpanStart).LineNumber + 1
                     == text.Lines.GetLineFromPosition(expression.Span.End).LineNumber
-                && memberAccess
-                    .Expression
+                && memberAccess.Expression
                     .GetTrailingTrivia()
                     .Concat(memberAccess.OperatorToken.GetAllTrivia())
                     .Concat(memberAccess.Name.GetLeadingTrivia())

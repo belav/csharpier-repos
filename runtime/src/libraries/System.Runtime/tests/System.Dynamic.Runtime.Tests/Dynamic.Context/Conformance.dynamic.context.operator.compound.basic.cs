@@ -752,8 +752,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
                 a2 = v1 *= v2 + 1,
                 a3 = v3 /= 1.1f,
             };
-            System
-                .Console
+            System.Console
                 .WriteLine("{0}, {1}, {2}", (object)arr.a1, (object)arr.a2, (object)arr.a3);
             ret &= (6.6 - arr.a1) < 0.0000001f; // delta ~ 0.00000009f
             ret &= (1.23 - arr.a2) < double.Epsilon;

@@ -26,8 +26,7 @@ namespace System.Security.Cryptography.Pkcs.Asn1
             AsnValueReader reader;
 
             reader = new AsnValueReader(DefaultHashAlgorithm, AsnEncodingRules.DER);
-            System
-                .Security
+            System.Security
                 .Cryptography
                 .Asn1
                 .AlgorithmIdentifierAsn
@@ -136,8 +135,7 @@ namespace System.Security.Cryptography.Pkcs.Asn1
                 && sequenceReader.PeekTag().HasSameClassAndValue(Asn1Tag.Sequence)
             )
             {
-                System
-                    .Security
+                System.Security
                     .Cryptography
                     .Asn1
                     .AlgorithmIdentifierAsn
@@ -146,8 +144,7 @@ namespace System.Security.Cryptography.Pkcs.Asn1
             else
             {
                 defaultReader = new AsnValueReader(DefaultHashAlgorithm, AsnEncodingRules.DER);
-                System
-                    .Security
+                System.Security
                     .Cryptography
                     .Asn1
                     .AlgorithmIdentifierAsn
@@ -171,8 +168,7 @@ namespace System.Security.Cryptography.Pkcs.Asn1
             )
             {
                 System.Security.Cryptography.Pkcs.Asn1.CadesIssuerSerial tmpIssuerSerial;
-                System
-                    .Security
+                System.Security
                     .Cryptography
                     .Pkcs
                     .Asn1

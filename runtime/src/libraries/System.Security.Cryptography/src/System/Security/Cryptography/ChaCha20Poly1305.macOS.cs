@@ -32,8 +32,7 @@ namespace System.Security.Cryptography
         )
         {
             CheckDisposed();
-            Interop
-                .AppleCrypto
+            Interop.AppleCrypto
                 .ChaCha20Poly1305Encrypt(_key, nonce, plaintext, ciphertext, tag, associatedData);
         }
 
@@ -46,8 +45,7 @@ namespace System.Security.Cryptography
         )
         {
             CheckDisposed();
-            Interop
-                .AppleCrypto
+            Interop.AppleCrypto
                 .ChaCha20Poly1305Decrypt(_key, nonce, ciphertext, tag, plaintext, associatedData);
         }
 

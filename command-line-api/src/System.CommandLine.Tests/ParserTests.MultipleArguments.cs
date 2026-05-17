@@ -241,8 +241,7 @@ namespace System.CommandLine.Tests
 
                 var result = CliParser.Parse(command, providedArgs);
 
-                result
-                    .Errors
+                result.Errors
                     .Count
                     .Should()
                     .Be(

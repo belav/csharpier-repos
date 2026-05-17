@@ -20,8 +20,7 @@ public class ControllerActionDescriptorBuilderTest
         );
 
         var propertyInfo = controller.ControllerType.AsType().GetProperty("BoundProperty");
-        controller
-            .ControllerProperties
+        controller.ControllerProperties
             .Add(
                 new PropertyModel(propertyInfo, new List<object>() { })
                 {
@@ -32,8 +31,7 @@ public class ControllerActionDescriptorBuilderTest
                 }
             );
 
-        controller
-            .ControllerProperties
+        controller.ControllerProperties
             .Add(
                 new PropertyModel(
                     controller.ControllerType.AsType().GetProperty("UnboundProperty"),

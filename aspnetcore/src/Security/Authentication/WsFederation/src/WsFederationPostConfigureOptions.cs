@@ -44,8 +44,7 @@ public class WsFederationPostConfigureOptions : IPostConfigureOptions<WsFederati
 
         if (options.StateDataFormat == null)
         {
-            var dataProtector = options
-                .DataProtectionProvider
+            var dataProtector = options.DataProtectionProvider
                 .CreateProtector(typeof(WsFederationHandler).FullName!, name, "v1");
             options.StateDataFormat = new PropertiesDataFormat(dataProtector);
         }
@@ -70,8 +69,7 @@ public class WsFederationPostConfigureOptions : IPostConfigureOptions<WsFederati
             options.Backchannel = new HttpClient(
                 options.BackchannelHttpHandler ?? new HttpClientHandler()
             );
-            options
-                .Backchannel
+            options.Backchannel
                 .DefaultRequestHeaders
                 .UserAgent
                 .ParseAdd("Microsoft ASP.NET Core WsFederation handler");
@@ -92,8 +90,7 @@ public class WsFederationPostConfigureOptions : IPostConfigureOptions<WsFederati
             {
                 if (
                     options.RequireHttpsMetadata
-                    && !options
-                        .MetadataAddress
+                    && !options.MetadataAddress
                         .StartsWith("https://", StringComparison.OrdinalIgnoreCase)
                 )
                 {

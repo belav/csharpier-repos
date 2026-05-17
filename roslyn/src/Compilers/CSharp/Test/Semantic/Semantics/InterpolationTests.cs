@@ -9819,8 +9819,7 @@ literal:text
 
             static void validate(ModuleSymbol module)
             {
-                var cParam = module
-                    .GlobalNamespace
+                var cParam = module.GlobalNamespace
                     .GetTypeMember("C")
                     .GetMethod("M")
                     .Parameters
@@ -10094,8 +10093,7 @@ public class C
 
             static void validate(ModuleSymbol module)
             {
-                var cParam = module
-                    .GlobalNamespace
+                var cParam = module.GlobalNamespace
                     .GetTypeMember("C")
                     .GetMethod("M")
                     .Parameters
@@ -10190,8 +10188,7 @@ public partial struct CustomHandler
 
             static void validate(ModuleSymbol module)
             {
-                var cParam = module
-                    .GlobalNamespace
+                var cParam = module.GlobalNamespace
                     .GetTypeMember("C")
                     .GetMethod("M")
                     .Parameters
@@ -10406,8 +10403,7 @@ public partial struct CustomHandler
 
             static void validate(ModuleSymbol module)
             {
-                var cParam = module
-                    .GlobalNamespace
+                var cParam = module.GlobalNamespace
                     .GetTypeMember("C")
                     .GetMethod("M")
                     .Parameters
@@ -10651,8 +10647,7 @@ public partial struct CustomHandler
 
             static void validate(ModuleSymbol module)
             {
-                var cParam = module
-                    .GlobalNamespace
+                var cParam = module.GlobalNamespace
                     .GetTypeMember("C")
                     .GetMethod("M")
                     .Parameters
@@ -10752,8 +10747,7 @@ literal:2"
 
             static void validator(ModuleSymbol module)
             {
-                var cParam = module
-                    .GlobalNamespace
+                var cParam = module.GlobalNamespace
                     .GetTypeMember("C")
                     .GetMethod("M")
                     .Parameters
@@ -10917,8 +10911,7 @@ literal:literal
 
             static void validator(ModuleSymbol verifier)
             {
-                var cParam = verifier
-                    .GlobalNamespace
+                var cParam = verifier.GlobalNamespace
                     .GetTypeMember("C")
                     .GetMethod("M")
                     .Parameters
@@ -11205,8 +11198,7 @@ o in M
 
             static void validator(ModuleSymbol module)
             {
-                var cParam = module
-                    .GlobalNamespace
+                var cParam = module.GlobalNamespace
                     .GetTypeMember("C")
                     .GetMethod("M")
                     .Parameters
@@ -11361,8 +11353,7 @@ literal:literal
 
             static void validator(ModuleSymbol module)
             {
-                var cParam = module
-                    .GlobalNamespace
+                var cParam = module.GlobalNamespace
                     .GetTypeMember("C")
                     .GetMethod("M")
                     .Parameters
@@ -11543,8 +11534,7 @@ literal:literal
 
             static void validator(ModuleSymbol module)
             {
-                var cParam = module
-                    .GlobalNamespace
+                var cParam = module.GlobalNamespace
                     .GetTypeMember("C")
                     .GetMethod("M")
                     .Parameters
@@ -11685,8 +11675,7 @@ literal:literal
 
             static void validator(ModuleSymbol module)
             {
-                var cParam = module
-                    .GlobalNamespace
+                var cParam = module.GlobalNamespace
                     .GetTypeMember("C")
                     .GetMethod("M")
                     .Parameters
@@ -11785,8 +11774,7 @@ public struct CustomHandler
 
             static void validator(ModuleSymbol module)
             {
-                var cParam = module
-                    .GlobalNamespace
+                var cParam = module.GlobalNamespace
                     .GetTypeMember("C")
                     .GetMethod("M")
                     .Parameters
@@ -11882,8 +11870,7 @@ public struct CustomHandler
 
             static void validate(ModuleSymbol module)
             {
-                var cParam = module
-                    .GlobalNamespace
+                var cParam = module.GlobalNamespace
                     .GetTypeMember("C")
                     .GetMethod("M")
                     .Parameters
@@ -12029,8 +12016,7 @@ literal:literal
 
             static void validator(ModuleSymbol module)
             {
-                var cParam = module
-                    .GlobalNamespace
+                var cParam = module.GlobalNamespace
                     .GetTypeMember("C")
                     .GetIndexer<PropertySymbol>("Item")
                     .Parameters
@@ -12176,8 +12162,7 @@ literal:literal
 
             static void validator(ModuleSymbol module)
             {
-                var cParam = module
-                    .GlobalNamespace
+                var cParam = module.GlobalNamespace
                     .GetTypeMember("C")
                     .GetIndexer<PropertySymbol>("Item")
                     .Parameters
@@ -12333,8 +12318,7 @@ literal:literal
 
             static void validator(ModuleSymbol module)
             {
-                var cParam = module
-                    .GlobalNamespace
+                var cParam = module.GlobalNamespace
                     .GetTypeMember("C")
                     .GetMethod("M")
                     .Parameters
@@ -12684,8 +12668,7 @@ public partial struct CustomHandler
 
             static void validator(ModuleSymbol module)
             {
-                var cParam = module
-                    .GlobalNamespace
+                var cParam = module.GlobalNamespace
                     .GetTypeMember("C")
                     .GetMethod("M")
                     .Parameters
@@ -12789,8 +12772,7 @@ public partial struct CustomHandler
 
             static void validator(ModuleSymbol module)
             {
-                var cParam = module
-                    .GlobalNamespace
+                var cParam = module.GlobalNamespace
                     .GetTypeMember("C")
                     .GetMethod("M")
                     .Parameters
@@ -15163,8 +15145,7 @@ literal:literal
 
             static void validator(ModuleSymbol module)
             {
-                var cParam = module
-                    .GlobalNamespace
+                var cParam = module.GlobalNamespace
                     .GetTypeMember("C")
                     .GetMethod("M")
                     .Parameters
@@ -22498,8 +22479,7 @@ class C
 
             CreateCompilation(
                     text,
-                    parseOptions: CSharpParseOptions
-                        .Default
+                    parseOptions: CSharpParseOptions.Default
                         .WithLanguageVersion(LanguageVersion.CSharp5)
                 )
                 .VerifyDiagnostics(
@@ -22527,8 +22507,7 @@ class C
 
             CreateCompilation(
                     text,
-                    parseOptions: CSharpParseOptions
-                        .Default
+                    parseOptions: CSharpParseOptions.Default
                         .WithLanguageVersion(LanguageVersion.CSharp5)
                 )
                 .VerifyDiagnostics(
@@ -22818,8 +22797,7 @@ class C
                 targetFramework: TargetFramework.NetCoreApp
             );
 
-            var a = compilation
-                .GlobalNamespace
+            var a = compilation.GlobalNamespace
                 .GetTypeMember("A")
                 .InstanceConstructors
                 .Where(c => !c.IsDefaultValueTypeConstructor())
@@ -22866,8 +22844,7 @@ class C
                 targetFramework: TargetFramework.NetCoreApp
             );
 
-            var a = compilation
-                .GlobalNamespace
+            var a = compilation.GlobalNamespace
                 .GetTypeMember("A")
                 .InstanceConstructors
                 .Where(c => !c.IsDefaultValueTypeConstructor())

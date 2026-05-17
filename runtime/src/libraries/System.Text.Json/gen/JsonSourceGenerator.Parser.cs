@@ -207,8 +207,7 @@ namespace System.Text.Json.SourceGeneration
                 ContextGenerationSpec contextGenSpec = new()
                 {
                     ContextType = new(contextTypeSymbol),
-                    GeneratedTypes = _generatedTypes
-                        .Values
+                    GeneratedTypes = _generatedTypes.Values
                         .OrderBy(t => t.TypeRef.FullyQualifiedName)
                         .ToImmutableEquatableArray(),
                     Namespace = contextTypeSymbol.ContainingNamespace
@@ -319,8 +318,7 @@ namespace System.Text.Json.SourceGeneration
                     INamedTypeSymbol? attributeClass = attributeData.AttributeClass;
 
                     if (
-                        SymbolEqualityComparer
-                            .Default
+                        SymbolEqualityComparer.Default
                             .Equals(attributeClass, _knownSymbols.JsonSerializableAttributeType)
                     )
                     {
@@ -335,8 +333,7 @@ namespace System.Text.Json.SourceGeneration
                         (rootSerializableTypes ??= new()).Add(typeToGenerate.Value);
                     }
                     else if (
-                        SymbolEqualityComparer
-                            .Default
+                        SymbolEqualityComparer.Default
                             .Equals(
                                 attributeClass,
                                 _knownSymbols.JsonSourceGenerationOptionsAttributeType
@@ -640,9 +637,8 @@ namespace System.Text.Json.SourceGeneration
                     if (options?.UseStringEnumConverter == true)
                     {
                         Debug.Assert(_knownSymbols.JsonStringEnumConverterOfTType != null);
-                        INamedTypeSymbol converterSymbol = _knownSymbols
-                            .JsonStringEnumConverterOfTType
-                            .Construct(type);
+                        INamedTypeSymbol converterSymbol =
+                            _knownSymbols.JsonStringEnumConverterOfTType.Construct(type);
 
                         customConverterType = new TypeRef(converterSymbol);
                         classType = ClassType.TypeWithDesignTimeProvidedCustomConverter;
@@ -739,11 +735,9 @@ namespace System.Text.Json.SourceGeneration
 
                     classType = ClassType.Object;
 
-                    implementsIJsonOnSerializing = _knownSymbols
-                        .IJsonOnSerializingType
+                    implementsIJsonOnSerializing = _knownSymbols.IJsonOnSerializingType
                         .IsAssignableFrom(type);
-                    implementsIJsonOnSerialized = _knownSymbols
-                        .IJsonOnSerializedType
+                    implementsIJsonOnSerialized = _knownSymbols.IJsonOnSerializedType
                         .IsAssignableFrom(type);
 
                     ctorParamSpecs = ParseConstructorParameters(
@@ -858,8 +852,7 @@ namespace System.Text.Json.SourceGeneration
                     INamedTypeSymbol? attributeType = attributeData.AttributeClass;
 
                     if (
-                        SymbolEqualityComparer
-                            .Default
+                        SymbolEqualityComparer.Default
                             .Equals(attributeType, _knownSymbols.JsonNumberHandlingAttributeType)
                     )
                     {
@@ -868,8 +861,7 @@ namespace System.Text.Json.SourceGeneration
                         continue;
                     }
                     else if (
-                        SymbolEqualityComparer
-                            .Default
+                        SymbolEqualityComparer.Default
                             .Equals(
                                 attributeType,
                                 _knownSymbols.JsonUnmappedMemberHandlingAttributeType
@@ -881,8 +873,7 @@ namespace System.Text.Json.SourceGeneration
                         continue;
                     }
                     else if (
-                        SymbolEqualityComparer
-                            .Default
+                        SymbolEqualityComparer.Default
                             .Equals(
                                 attributeType,
                                 _knownSymbols.JsonObjectCreationHandlingAttributeType
@@ -907,8 +898,7 @@ namespace System.Text.Json.SourceGeneration
                     }
 
                     if (
-                        SymbolEqualityComparer
-                            .Default
+                        SymbolEqualityComparer.Default
                             .Equals(attributeType, _knownSymbols.JsonDerivedTypeAttributeType)
                     )
                     {
@@ -950,8 +940,7 @@ namespace System.Text.Json.SourceGeneration
                 needsRuntimeType = false;
 
                 if (
-                    SymbolEqualityComparer
-                        .Default
+                    SymbolEqualityComparer.Default
                         .Equals(type.OriginalDefinition, _knownSymbols.MemoryType)
                 )
                 {
@@ -964,14 +953,12 @@ namespace System.Text.Json.SourceGeneration
                 }
 
                 if (
-                    SymbolEqualityComparer
-                        .Default
+                    SymbolEqualityComparer.Default
                         .Equals(type.OriginalDefinition, _knownSymbols.ReadOnlyMemoryType)
                 )
                 {
                     Debug.Assert(
-                        !SymbolEqualityComparer
-                            .Default
+                        !SymbolEqualityComparer.Default
                             .Equals(type, _knownSymbols.ReadOnlyMemoryByteType)
                     );
                     valueType = ((INamedTypeSymbol)type).TypeArguments[0];
@@ -1053,8 +1040,7 @@ namespace System.Text.Json.SourceGeneration
                     collectionType = CollectionType.IDictionaryOfTKeyTValue;
                     keyType = actualTypeToConvert.TypeArguments[0];
                     valueType = actualTypeToConvert.TypeArguments[1];
-                    needsRuntimeType = SymbolEqualityComparer
-                        .Default
+                    needsRuntimeType = SymbolEqualityComparer.Default
                         .Equals(type, actualTypeToConvert);
                 }
                 else if (
@@ -1068,8 +1054,7 @@ namespace System.Text.Json.SourceGeneration
                     collectionType = CollectionType.IReadOnlyDictionary;
                     keyType = actualTypeToConvert.TypeArguments[0];
                     valueType = actualTypeToConvert.TypeArguments[1];
-                    needsRuntimeType = SymbolEqualityComparer
-                        .Default
+                    needsRuntimeType = SymbolEqualityComparer.Default
                         .Equals(type, actualTypeToConvert);
                 }
                 else if (
@@ -1175,8 +1160,7 @@ namespace System.Text.Json.SourceGeneration
                     collectionType = CollectionType.IDictionary;
                     keyType = _knownSymbols.StringType;
                     valueType = _knownSymbols.ObjectType;
-                    needsRuntimeType = SymbolEqualityComparer
-                        .Default
+                    needsRuntimeType = SymbolEqualityComparer.Default
                         .Equals(type, actualTypeToConvert);
                 }
                 else if (_knownSymbols.IListType.IsAssignableFrom(type))
@@ -1205,8 +1189,7 @@ namespace System.Text.Json.SourceGeneration
 
             private TypeRef? GetDictionaryTypeRef(ITypeSymbol keyType, ITypeSymbol valueType)
             {
-                INamedTypeSymbol? dictionary = _knownSymbols
-                    .DictionaryOfTKeyTValueType
+                INamedTypeSymbol? dictionary = _knownSymbols.DictionaryOfTKeyTValueType
                     ?.Construct(keyType, valueType);
                 return dictionary is null ? null : new TypeRef(dictionary);
             }
@@ -1351,8 +1334,7 @@ namespace System.Text.Json.SourceGeneration
                         && ignoredMembers?.TryGetValue(property.Name, out ISymbol? ignoredMember)
                             == true
                         && ignoredMember.IsVirtual()
-                        && SymbolEqualityComparer
-                            .Default
+                        && SymbolEqualityComparer.Default
                             .Equals(property.Type, ignoredMember.GetMemberType());
                 }
             }
@@ -1392,8 +1374,7 @@ namespace System.Text.Json.SourceGeneration
                 string memberName = propertySpec.MemberName;
 
                 if (
-                    state
-                        .AddedProperties
+                    state.AddedProperties
                         .TryAdd(
                             propertySpec.EffectiveJsonPropertyName,
                             (propertySpec, memberInfo, state.Properties.Count)
@@ -1468,15 +1449,12 @@ namespace System.Text.Json.SourceGeneration
                     return false;
                 }
 
-                return SymbolEqualityComparer
-                        .Default
+                return SymbolEqualityComparer.Default
                         .Equals(actualDictionaryType.TypeArguments[0], _knownSymbols.StringType)
                     && (
-                        SymbolEqualityComparer
-                            .Default
+                        SymbolEqualityComparer.Default
                             .Equals(actualDictionaryType.TypeArguments[1], _knownSymbols.ObjectType)
-                        || SymbolEqualityComparer
-                            .Default
+                        || SymbolEqualityComparer.Default
                             .Equals(
                                 actualDictionaryType.TypeArguments[1],
                                 _knownSymbols.JsonElementType
@@ -1951,8 +1929,7 @@ namespace System.Text.Json.SourceGeneration
                             return paramGenSpecs?.FirstOrDefault(MatchesConstructorParameter);
 
                             bool MatchesConstructorParameter(ParameterGenerationSpec paramSpec) =>
-                                propSpec
-                                    .MemberName
+                                propSpec.MemberName
                                     .Equals(paramSpec.Name, StringComparison.OrdinalIgnoreCase);
                         }
                     }
@@ -1968,14 +1945,12 @@ namespace System.Text.Json.SourceGeneration
             )
             {
                 Debug.Assert(
-                    _knownSymbols
-                        .JsonConverterAttributeType
+                    _knownSymbols.JsonConverterAttributeType
                         .IsAssignableFrom(attributeData.AttributeClass)
                 );
 
                 if (
-                    !SymbolEqualityComparer
-                        .Default
+                    !SymbolEqualityComparer.Default
                         .Equals(
                             attributeData.AttributeClass,
                             _knownSymbols.JsonConverterAttributeType
@@ -2013,8 +1988,7 @@ namespace System.Text.Json.SourceGeneration
                 if (
                     converterType is not INamedTypeSymbol namedConverterType
                     || !_knownSymbols.JsonConverterType.IsAssignableFrom(namedConverterType)
-                    || !namedConverterType
-                        .Constructors
+                    || !namedConverterType.Constructors
                         .Any(c =>
                             c.Parameters.Length == 0
                             && IsSymbolAccessibleWithin(c, within: contextType)
@@ -2258,8 +2232,7 @@ namespace System.Text.Json.SourceGeneration
 
             private bool IsUnsupportedType(ITypeSymbol type)
             {
-                return SymbolEqualityComparer
-                        .Default
+                return SymbolEqualityComparer.Default
                         .Equals(_knownSymbols.SerializationInfoType, type)
                     || SymbolEqualityComparer.Default.Equals(_knownSymbols.IntPtrType, type)
                     || SymbolEqualityComparer.Default.Equals(_knownSymbols.UIntPtrType, type)

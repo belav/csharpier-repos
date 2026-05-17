@@ -59,8 +59,7 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 return 1;
             }
 
-            return _module
-                .Assembly
+            return _module.Assembly
                 .GetName()
                 .Name
                 .CompareTo(otherModuleSpecificHeaderTableNode._module.Assembly.GetName().Name);

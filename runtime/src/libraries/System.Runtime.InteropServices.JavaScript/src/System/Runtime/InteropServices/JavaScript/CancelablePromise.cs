@@ -23,8 +23,7 @@ namespace System.Runtime.InteropServices.JavaScript
                 throw new InvalidOperationException("Expected Task converted from JS Promise");
 
 #if FEATURE_WASM_THREADS
-            holder
-                .SynchronizationContext!
+            holder.SynchronizationContext!
                 .Send(
                     static (JSHostImplementation.PromiseHolder holder) =>
                     {
@@ -50,8 +49,7 @@ namespace System.Runtime.InteropServices.JavaScript
                 throw new InvalidOperationException("Expected Task converted from JS Promise");
 
 #if FEATURE_WASM_THREADS
-            holder
-                .SynchronizationContext!
+            holder.SynchronizationContext!
                 .Send(
                     (JSHostImplementation.PromiseHolder holder) =>
                     {

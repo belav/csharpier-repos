@@ -348,12 +348,13 @@ namespace System.Xml.Xsl.XsltOld
             else
             {
                 return new XPathSingletonIterator(
-                    this.processor.GetNavigator(
-                        ComposeUri(
-                            XmlConvert.ToXPathString(arg0),
-                            baseUri ?? this.manager.Navigator.BaseURI
+                    this.processor
+                        .GetNavigator(
+                            ComposeUri(
+                                XmlConvert.ToXPathString(arg0),
+                                baseUri ?? this.manager.Navigator.BaseURI
+                            )
                         )
-                    )
                 );
             }
         }

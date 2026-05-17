@@ -101,8 +101,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
 
             // first see if we need to re-order our primary constructor parameters.
             var propertiesToAssign = positionalParameterInfos.SelectAsArray(info => info.Symbol);
-            var primaryConstructor = typeDeclaration
-                .Members
+            var primaryConstructor = typeDeclaration.Members
                 .OfType<ConstructorDeclarationSyntax>()
                 .FirstOrDefault(constructor =>
                 {
@@ -114,8 +113,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
                     // to exactly one positional parameter type, but they don't need to be in the same order.
                     // We can't use something like set equality because some parameter types may be duplicate.
                     // So, we order the types in a consistent way (by name) and then compare the lists of types.
-                    return constructorSymbol
-                            .Parameters
+                    return constructorSymbol.Parameters
                             .SelectAsArray(parameter => parameter.Type)
                             .OrderBy(type => type.Name)
                             .SequenceEqual(
@@ -211,8 +209,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
                     positionalParameterInfos = propertiesToAssign.SelectAsArray(symbol =>
                         positionalParameterInfos.First(info => info.Symbol.Equals(symbol))
                     );
-                    defaults = constructor
-                        .ParameterList
+                    defaults = constructor.ParameterList
                         .Parameters
                         .SelectAsArray(param => param.Default);
                     documentEditor.RemoveNode(constructor);
@@ -245,8 +242,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
                     // If it wasn't already processed as the primary, it's too complex, and will
                     // already produce an error as the signatures conflict. Better to leave as is and show errors.
                     else if (
-                        !constructorSymbol
-                            .Parameters
+                        !constructorSymbol.Parameters
                             .Select(parameter => parameter.Type)
                             .SequenceEqual(propertiesToAssign.Select(property => property.Type))
                     )
@@ -288,8 +284,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
 
             // get equality operators and potentially remove them
             var equalsOp = (OperatorDeclarationSyntax?)
-                typeDeclaration
-                    .Members
+                typeDeclaration.Members
                     .FirstOrDefault(member =>
                         member
                             is OperatorDeclarationSyntax
@@ -298,8 +293,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
                             }
                     );
             var notEqualsOp = (OperatorDeclarationSyntax?)
-                typeDeclaration
-                    .Members
+                typeDeclaration.Members
                     .FirstOrDefault(member =>
                         member
                             is OperatorDeclarationSyntax
@@ -547,8 +541,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
                         : typeDeclaration.Keyword.WithTrailingTrivia(SyntaxFactory.ElasticMarker),
                     // remove trailing trivia from places where we would want to insert the parameter list before a line break
                     typeDeclaration.Identifier.WithTrailingTrivia(SyntaxFactory.ElasticMarker),
-                    typeDeclaration
-                        .TypeParameterList
+                    typeDeclaration.TypeParameterList
                         ?.WithTrailingTrivia(SyntaxFactory.ElasticMarker),
                     SyntaxFactory
                         .ParameterList(SyntaxFactory.SeparatedList(propertiesToAddAsParams))
@@ -584,8 +577,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
             }
 
             return SyntaxFactory.List(
-                result
-                    .Declaration
+                result.Declaration
                     .AttributeLists
                     .SelectAsArray(attributeList =>
                     {
@@ -645,8 +637,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
                 foreach (var objectCreationExpression in objectCreationExpressions)
                 {
                     var objectCreationOperation = (IObjectCreationOperation)
-                        documentEditor
-                            .SemanticModel
+                        documentEditor.SemanticModel
                             .GetRequiredOperation(objectCreationExpression, cancellationToken);
 
                     var expressions = ConvertToRecordHelpers.GetAssignmentValuesFromObjectCreation(
@@ -662,8 +653,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
                         // if initializer was null we wouldn't have found expressions
                         // any constructed nodes (default/null) should give -1 because parent is null
                         expression =>
-                            objectCreationExpression
-                                .Initializer!
+                            objectCreationExpression.Initializer!
                                 .Expressions
                                 .IndexOf(expression.Parent)
                     );
@@ -809,8 +799,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
             )
             {
                 // insert parameters after summary node and the extra newline or at start if no summary
-                var summaryIndex = originalClassDoc
-                    .Content
+                var summaryIndex = originalClassDoc.Content
                     .IndexOf(node =>
                         node is XmlElementSyntax element
                         && element.StartTag?.Name.LocalName.ValueText
@@ -819,8 +808,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
 
                 // if not found, summaryIndex + 1 = -1 + 1 = 0, so our params go to the start
                 newClassDocComment = originalClassDoc.WithContent(
-                    originalClassDoc
-                        .Content
+                    originalClassDoc.Content
                         .Replace(originalClassDoc.Content[0], originalClassDoc.Content[0])
                         .InsertRange(summaryIndex + 1, propertyParamComments)
                 );
@@ -834,8 +822,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
                         .SelectAsArray(
                             result => !result.IsInherited,
                             result =>
-                                result
-                                    .Declaration!
+                                result.Declaration!
                                     .GetLeadingTrivia()
                                     .FirstOrNull(trivia => trivia.IsDocComment())
                         )
@@ -1023,8 +1010,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
                 else
                 {
                     // get the documentation comment
-                    var potentialDocComment = result
-                        .Declaration
+                    var potentialDocComment = result.Declaration
                         .GetLeadingTrivia()
                         .FirstOrNull(trivia => trivia.IsDocComment());
                     var paramContent = ImmutableArray<XmlNodeSyntax>.Empty;
@@ -1034,8 +1020,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
                     )
                     {
                         // get the summary node if there is one
-                        var summaryNode = docComment
-                            .Content
+                        var summaryNode = docComment.Content
                             .FirstOrDefault(node =>
                                 node is XmlElementSyntax element
                                 && element.StartTag?.Name.LocalName.ValueText
@@ -1054,11 +1039,12 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
                                         if (node is XmlTextSyntax text)
                                         {
                                             // any text token that is not on it's own line should have replaced trivia
-                                            var tokens = text.TextTokens.SelectAsArray(token =>
-                                                token.IsKind(SyntaxKind.XmlTextLiteralToken)
-                                                    ? token.WithLeadingTrivia(exteriorTrivia)
-                                                    : token
-                                            );
+                                            var tokens = text.TextTokens
+                                                .SelectAsArray(token =>
+                                                    token.IsKind(SyntaxKind.XmlTextLiteralToken)
+                                                        ? token.WithLeadingTrivia(exteriorTrivia)
+                                                        : token
+                                                );
 
                                             if (
                                                 index == 0
@@ -1097,8 +1083,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
                                                             kind: SyntaxKind.XmlTextLiteralToken
                                                         ) textLiteral,
                                                     ]
-                                                && textLiteral
-                                                    .Text
+                                                && textLiteral.Text
                                                     .GetFirstNonWhitespaceIndexInString() == -1
                                             )
                                             {

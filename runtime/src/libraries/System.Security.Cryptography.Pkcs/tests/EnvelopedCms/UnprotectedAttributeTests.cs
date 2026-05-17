@@ -484,9 +484,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
             EnvelopedCms ecms = new EnvelopedCms(expectedContentInfo);
 
             if (addUnprotectedAttrs)
-                ecms.UnprotectedAttributes.Add(
-                    new AsnEncodedData(new Oid(Oids.DocumentName), docName)
-                );
+                ecms.UnprotectedAttributes
+                    .Add(new AsnEncodedData(new Oid(Oids.DocumentName), docName));
 
             using (X509Certificate2 cert = Certificates.RSAKeyTransfer1.GetCertificate())
             {

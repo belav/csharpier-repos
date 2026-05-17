@@ -320,9 +320,8 @@ namespace MonoCasTests.System.Web
             AspNetHostingPermissionLevel level
         )
         {
-            ConstructorInfo ci = this.Type.GetConstructor(
-                new Type[3] { typeof(string), typeof(string), typeof(string) }
-            );
+            ConstructorInfo ci = this.Type
+                .GetConstructor(new Type[3] { typeof(string), typeof(string), typeof(string) });
             Assert.IsNotNull(ci, ".ctor(string,string,string)");
             return ci.Invoke(new object[3] { String.Empty, "http://localhost/", String.Empty });
         }

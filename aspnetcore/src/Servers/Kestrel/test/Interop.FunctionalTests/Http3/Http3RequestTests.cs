@@ -153,8 +153,7 @@ public class Http3RequestTests : LoggedTest
             {
                 connectionIdFromFeature = context.Features.Get<IConnectionIdFeature>().ConnectionId;
 
-                var logger = context
-                    .RequestServices
+                var logger = context.RequestServices
                     .GetRequiredService<ILogger<Http3RequestTests>>();
                 logger.LogInformation(expectedLogMessage);
 
@@ -245,8 +244,7 @@ public class Http3RequestTests : LoggedTest
                     return;
                 }
 
-                _loggerProvider
-                    ._scopeProvider
+                _loggerProvider._scopeProvider
                     ?.ForEachScope(
                         (scopeObject, loggerPovider) =>
                         {
@@ -535,8 +533,7 @@ public class Http3RequestTests : LoggedTest
         var builder = CreateHostBuilder(
             async context =>
             {
-                context
-                    .RequestAborted
+                context.RequestAborted
                     .Register(() =>
                     {
                         Logger.LogInformation("Server received cancellation");
@@ -1029,8 +1026,7 @@ public class Http3RequestTests : LoggedTest
                     context =>
                     {
                         requestHeaders.Add(
-                            context
-                                .Request
+                            context.Request
                                 .Headers
                                 .ToDictionary(
                                     k => k.Key,
@@ -1145,8 +1141,7 @@ public class Http3RequestTests : LoggedTest
         var builder = CreateHostBuilder(
             async context =>
             {
-                context
-                    .RequestAborted
+                context.RequestAborted
                     .Register(() =>
                     {
                         Logger.LogInformation("Server received request aborted.");
@@ -1363,8 +1358,7 @@ public class Http3RequestTests : LoggedTest
         var builder = CreateHostBuilder(
             async context =>
             {
-                context
-                    .RequestAborted
+                context.RequestAborted
                     .Register(() =>
                     {
                         Logger.LogInformation("Server received request aborted.");
@@ -1716,8 +1710,7 @@ public class Http3RequestTests : LoggedTest
             response1.EnsureSuccessStatusCode();
 
             // Assert
-            var hasWriteLog = TestSink
-                .Writes
+            var hasWriteLog = TestSink.Writes
                 .Any(w =>
                     w.LoggerName
                         == "Microsoft.AspNetCore.Server.Kestrel.Core.Internal.LoggingConnectionMiddleware"
@@ -1725,8 +1718,7 @@ public class Http3RequestTests : LoggedTest
                 );
             Assert.True(hasWriteLog);
 
-            var hasReadLog = TestSink
-                .Writes
+            var hasReadLog = TestSink.Writes
                 .Any(w =>
                     w.LoggerName
                         == "Microsoft.AspNetCore.Server.Kestrel.Core.Internal.LoggingConnectionMiddleware"
@@ -1830,8 +1822,7 @@ public class Http3RequestTests : LoggedTest
                             return context =>
                             {
                                 connectionStartedTcs.SetResult();
-                                context
-                                    .ConnectionClosed
+                                context.ConnectionClosed
                                     .Register(() => connectionClosedTcs.SetResult());
                                 return next(context);
                             };
@@ -2077,8 +2068,7 @@ public class Http3RequestTests : LoggedTest
             // Assert
             const int applicationAbortedConnectionId = 6;
             Assert.Single(
-                TestSink
-                    .Writes
+                TestSink.Writes
                     .Where(w =>
                         w.LoggerName == "Microsoft.AspNetCore.Server.Kestrel.Transport.Quic"
                         && w.EventId == applicationAbortedConnectionId
@@ -2303,9 +2293,10 @@ public class Http3RequestTests : LoggedTest
             Assert.Contains(
                 TestSink.Writes,
                 m =>
-                    m.Message.Contains(
-                        "Some connections failed to close gracefully during server shutdown."
-                    )
+                    m.Message
+                        .Contains(
+                            "Some connections failed to close gracefully during server shutdown."
+                        )
             );
         }
     }
@@ -2393,9 +2384,10 @@ public class Http3RequestTests : LoggedTest
             Assert.DoesNotContain(
                 TestSink.Writes,
                 m =>
-                    m.Message.Contains(
-                        "Some connections failed to close gracefully during server shutdown."
-                    )
+                    m.Message
+                        .Contains(
+                            "Some connections failed to close gracefully during server shutdown."
+                        )
             );
         }
     }

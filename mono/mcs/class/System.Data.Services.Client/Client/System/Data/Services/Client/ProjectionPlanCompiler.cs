@@ -115,8 +115,7 @@ namespace System.Data.Services.Client
                 return this.Visit(original);
             }
 
-            var nullCheck = ResourceBinder
-                .PatternRules
+            var nullCheck = ResourceBinder.PatternRules
                 .MatchNullCheck(this.pathBuilder.LambdaParameterInScope, conditional);
             if (
                 !nullCheck.Match
@@ -387,10 +386,8 @@ namespace System.Data.Services.Client
                 entryType,
                 Expression.Constant(path, typeof(object))
             );
-            this.annotations.Add(
-                result,
-                new ExpressionAnnotation() { Segment = path[path.Count - 1] }
-            );
+            this.annotations
+                .Add(result, new ExpressionAnnotation() { Segment = path[path.Count - 1] });
             return result;
         }
 
@@ -410,10 +407,8 @@ namespace System.Data.Services.Client
                 entryType,
                 Expression.Constant(path, typeof(object))
             );
-            this.annotations.Add(
-                result,
-                new ExpressionAnnotation() { Segment = path[path.Count - 1] }
-            );
+            this.annotations
+                .Add(result, new ExpressionAnnotation() { Segment = path[path.Count - 1] });
             return result;
         }
 
@@ -429,10 +424,8 @@ namespace System.Data.Services.Client
 
             Expression value = this.CallValueForPath(entry, entryType, path);
             Expression result = Expression.Convert(value, type);
-            this.annotations.Add(
-                result,
-                new ExpressionAnnotation() { Segment = path[path.Count - 1] }
-            );
+            this.annotations
+                .Add(result, new ExpressionAnnotation() { Segment = path[path.Count - 1] });
             return result;
         }
 
@@ -538,19 +531,22 @@ namespace System.Data.Services.Client
                     expressions.Skip(1)
                 );
 
-                this.annotations.Add(
-                    entryToInitValue,
-                    new ExpressionAnnotation() { Segment = entryPath[entryPath.Count - 1] }
-                );
-                this.annotations.Add(
-                    entryParameterForMembers,
-                    new ExpressionAnnotation() { Segment = entryPath[entryPath.Count - 1] }
-                );
-                this.pathBuilder.RegisterRewrite(
-                    this.pathBuilder.LambdaParameterInScope,
-                    expressionNames,
-                    entryParameterForMembers
-                );
+                this.annotations
+                    .Add(
+                        entryToInitValue,
+                        new ExpressionAnnotation() { Segment = entryPath[entryPath.Count - 1] }
+                    );
+                this.annotations
+                    .Add(
+                        entryParameterForMembers,
+                        new ExpressionAnnotation() { Segment = entryPath[entryPath.Count - 1] }
+                    );
+                this.pathBuilder
+                    .RegisterRewrite(
+                        this.pathBuilder.LambdaParameterInScope,
+                        expressionNames,
+                        entryParameterForMembers
+                    );
             }
 
             for (int i = 0; i < init.Bindings.Count; i++)
@@ -580,10 +576,11 @@ namespace System.Data.Services.Client
                     ProjectionPath entryPath;
                     ExpressionAnnotation entryAnnotation;
                     if (
-                        this.annotations.TryGetValue(
-                            this.pathBuilder.ParameterEntryInScope,
-                            out entryAnnotation
-                        )
+                        this.annotations
+                            .TryGetValue(
+                                this.pathBuilder.ParameterEntryInScope,
+                                out entryAnnotation
+                            )
                     )
                     {
                         entryPath = new ProjectionPath(
@@ -615,15 +612,17 @@ namespace System.Data.Services.Client
                         entryPath.Where(m => m.Member != null).Select(m => m.Member)
                     ).ToArray();
 
-                    this.annotations.Add(
-                        nestedEntryParameter,
-                        new ExpressionAnnotation() { Segment = nestedSegment }
-                    );
-                    this.pathBuilder.RegisterRewrite(
-                        this.pathBuilder.LambdaParameterInScope,
-                        names,
-                        nestedEntryParameter
-                    );
+                    this.annotations
+                        .Add(
+                            nestedEntryParameter,
+                            new ExpressionAnnotation() { Segment = nestedSegment }
+                        );
+                    this.pathBuilder
+                        .RegisterRewrite(
+                            this.pathBuilder.LambdaParameterInScope,
+                            names,
+                            nestedEntryParameter
+                        );
                     Expression e = this.Visit(assignment.Expression);
                     this.pathBuilder.RevokeRewrite(this.pathBuilder.LambdaParameterInScope, names);
                     this.annotations.Remove(nestedEntryParameter);
@@ -677,10 +676,8 @@ namespace System.Data.Services.Client
 
             for (int i = 1; i < expressions.Length; i++)
             {
-                this.pathBuilder.RevokeRewrite(
-                    this.pathBuilder.LambdaParameterInScope,
-                    expressionNames
-                );
+                this.pathBuilder
+                    .RevokeRewrite(this.pathBuilder.LambdaParameterInScope, expressionNames);
                 this.annotations.Remove(entryToInitValue);
                 this.annotations.Remove(entryParameterForMembers);
             }

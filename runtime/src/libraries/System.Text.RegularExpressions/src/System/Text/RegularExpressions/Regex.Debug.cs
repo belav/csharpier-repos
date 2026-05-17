@@ -86,8 +86,7 @@ namespace System.Text.RegularExpressions
                 throw new NotSupportedException();
             }
 
-            srmFactory
-                ._matcher
+            srmFactory._matcher
                 .Explore(
                     includeDotStarred,
                     includeReverse,

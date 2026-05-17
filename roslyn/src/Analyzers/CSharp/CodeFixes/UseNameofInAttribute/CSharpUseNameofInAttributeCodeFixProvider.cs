@@ -55,8 +55,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.UseNameofInAttribute
         {
             foreach (var diagnostic in diagnostics)
             {
-                var expression = diagnostic
-                    .Location
+                var expression = diagnostic.Location
                     .FindNode(getInnermostNodeForTie: true, cancellationToken);
                 var name = diagnostic.Properties[
                     CSharpUseNameofInAttributeDiagnosticAnalyzer.NameKey
@@ -65,8 +64,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.UseNameofInAttribute
 
                 editor.ReplaceNode(
                     expression,
-                    editor
-                        .Generator
+                    editor.Generator
                         .NameOfExpression(editor.Generator.IdentifierName(name))
                         .WithTriviaFrom(expression)
                 );

@@ -255,8 +255,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertSwitchStatementToExpression
                     && !Equals(typeInfo.ConvertedType, typeInfo.Type)
                 )
                 {
-                    var conversion = _semanticModel
-                        .Compilation
+                    var conversion = _semanticModel.Compilation
                         .ClassifyConversion(typeInfo.Type, typeInfo.ConvertedType);
                     if (!conversion.IsIdentityOrImplicitReference())
                         return node.Cast(typeInfo.ConvertedType);
@@ -340,11 +339,12 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertSwitchStatementToExpression
                     ),
                     SeparatedList(
                         switchArms.Select(t =>
-                            t.armExpression.WithLeadingTrivia(
-                                t.tokensForLeadingTrivia
-                                    .GetTrivia()
-                                    .FilterComments(addElasticMarker: false)
-                            )
+                            t.armExpression
+                                .WithLeadingTrivia(
+                                    t.tokensForLeadingTrivia
+                                        .GetTrivia()
+                                        .FilterComments(addElasticMarker: false)
+                                )
                         ),
                         switchArms.Select(t =>
                             Token(SyntaxKind.CommaToken)
@@ -373,8 +373,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertSwitchStatementToExpression
 
                 if (
                     expressionConvertedType != null
-                    && !SymbolEqualityComparer
-                        .Default
+                    && !SymbolEqualityComparer.Default
                         .Equals(expressionConvertedType, expressionType)
                 )
                 {

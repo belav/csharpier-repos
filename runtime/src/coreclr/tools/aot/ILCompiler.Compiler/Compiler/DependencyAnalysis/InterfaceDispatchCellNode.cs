@@ -62,8 +62,7 @@ namespace ILCompiler.DependencyAnalysis
                 result.Add(factory.VirtualMethodUse(_targetMethod), "Interface method use");
             }
 
-            factory
-                .MetadataManager
+            factory.MetadataManager
                 .GetDependenciesDueToVirtualMethodReflectability(
                     ref result,
                     factory,

@@ -30,8 +30,7 @@ namespace System.Web.Http.Controllers
             }
 
             T value = (T)actionResult;
-            return controllerContext
-                .Request
+            return controllerContext.Request
                 .CreateResponse<T>(HttpStatusCode.OK, value, controllerContext.Configuration);
         }
     }

@@ -56,8 +56,7 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
             }
 
             public async ValueTask DisposeAsync() =>
-                await _testServices
-                    .Telemetry
+                await _testServices.Telemetry
                     .DisableTestTelemetryChannelAsync(CancellationToken.None);
 
             /// <summary>
@@ -70,8 +69,7 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
                 CancellationToken cancellationToken
             )
             {
-                var telemetryEnabled = await _testServices
-                    .Telemetry
+                var telemetryEnabled = await _testServices.Telemetry
                     .TryWaitForTelemetryEventsAsync(expectedEventNames, cancellationToken);
                 if (
                     string.Equals(

@@ -89,8 +89,7 @@ namespace MonoTests.System.Data.OleDb
 
             oleDBda.SelectCommand.Parameters.Add(new OleDbParameter("@EmployeeId", DbType.Int32));
             oleDBda.SelectCommand.Parameters["@EmployeeId"].SourceColumn = "EmployeeId";
-            oleDBda
-                .SelectCommand
+            oleDBda.SelectCommand
                 .Parameters
                 .Add(new OleDbParameter("@FirstName", OleDbType.VarWChar, 10));
 

@@ -232,8 +232,7 @@ internal sealed class TypedCollectionConverterFactory<TCollection, TElement>
                 // Some of the types above implement ICollection<T>, but do so in a very inneficient way, so we want to
                 // use special converters for them.
                 var _ when type.IsAssignableTo(typeof(ICollection<TElement>)) =>
-                    ConcreteTypeCollectionConverterFactory<TCollection, TElement>
-                        .Instance
+                    ConcreteTypeCollectionConverterFactory<TCollection, TElement>.Instance
                         .CreateConverter(typeof(TCollection), options),
                 _ => throw new InvalidOperationException(
                     $"Unable to create converter for '{typeof(TCollection).FullName}'."

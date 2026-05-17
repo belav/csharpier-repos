@@ -49,11 +49,9 @@ internal abstract class Http3ControlStream : IHttp3Stream, IThreadPoolWorkItem
         _context = context;
         _serverPeerSettings = context.ServerPeerSettings;
         _streamIdFeature = context.ConnectionFeatures.GetRequiredFeature<IStreamIdFeature>();
-        _streamClosedFeature = context
-            .ConnectionFeatures
+        _streamClosedFeature = context.ConnectionFeatures
             .GetRequiredFeature<IStreamClosedFeature>();
-        _errorCodeFeature = context
-            .ConnectionFeatures
+        _errorCodeFeature = context.ConnectionFeatures
             .GetRequiredFeature<IProtocolErrorCodeFeature>();
         _headerType = headerType ?? -1;
 
@@ -433,8 +431,7 @@ internal abstract class Http3ControlStream : IHttp3Stream, IThreadPoolWorkItem
             case (long)Http3SettingType.QPackBlockedStreams:
             case (long)Http3SettingType.EnableWebTransport:
             case (long)Http3SettingType.H3Datagram:
-                _context
-                    .StreamLifetimeHandler
+                _context.StreamLifetimeHandler
                     .OnInboundControlStreamSetting((Http3SettingType)id, value);
                 break;
             default:
@@ -450,8 +447,7 @@ internal abstract class Http3ControlStream : IHttp3Stream, IThreadPoolWorkItem
 
         // StopProcessingNextRequest must be called before RequestClose to ensure it's considered client initiated.
         _context.Connection.StopProcessingNextRequest(serverInitiated: false);
-        _context
-            .ConnectionContext
+        _context.ConnectionContext
             .Features
             .Get<IConnectionLifetimeNotificationFeature>()
             ?.RequestClose();

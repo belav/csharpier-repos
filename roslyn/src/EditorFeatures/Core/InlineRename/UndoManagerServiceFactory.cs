@@ -55,8 +55,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                 IInlineRenameSession inlineRenameSession
             )
             {
-                var textUndoHistoryService = workspace
-                    .Services
+                var textUndoHistoryService = workspace.Services
                     .GetService<ITextUndoHistoryWorkspaceService>();
                 Contract.ThrowIfFalse(
                     textUndoHistoryService.TryGetTextUndoHistory(

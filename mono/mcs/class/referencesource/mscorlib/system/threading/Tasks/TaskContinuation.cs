@@ -556,10 +556,8 @@ namespace System.Threading.Tasks
             TplEtwProvider etwLog = TplEtwProvider.Log;
             if (etwLog.TasksSetActivityIds && c.m_continuationId != 0)
             {
-                c.m_syncContext.Post(
-                    s_postCallback,
-                    GetActionLogDelegate(c.m_continuationId, c.m_action)
-                );
+                c.m_syncContext
+                    .Post(s_postCallback, GetActionLogDelegate(c.m_continuationId, c.m_action));
             }
             else
 #endif
@@ -575,8 +573,7 @@ namespace System.Threading.Tasks
             {
                 Guid savedActivityId;
                 Guid activityId = TplEtwProvider.CreateGuidForTaskID(continuationId);
-                System
-                    .Diagnostics
+                System.Diagnostics
                     .Tracing
                     .EventSource
                     .SetCurrentThreadActivityId(activityId, out savedActivityId);
@@ -586,8 +583,7 @@ namespace System.Threading.Tasks
                 }
                 finally
                 {
-                    System
-                        .Diagnostics
+                    System.Diagnostics
                         .Tracing
                         .EventSource
                         .SetCurrentThreadActivityId(savedActivityId);
@@ -849,8 +845,7 @@ namespace System.Threading.Tasks
             if (etwLog.TasksSetActivityIds && m_continuationId != 0)
             {
                 Guid activityId = TplEtwProvider.CreateGuidForTaskID(m_continuationId);
-                System
-                    .Diagnostics
+                System.Diagnostics
                     .Tracing
                     .EventSource
                     .SetCurrentThreadActivityId(activityId, out savedActivityId);
@@ -889,8 +884,7 @@ namespace System.Threading.Tasks
 #if !MONO
                 if (etwLog.TasksSetActivityIds && m_continuationId != 0)
                 {
-                    System
-                        .Diagnostics
+                    System.Diagnostics
                         .Tracing
                         .EventSource
                         .SetCurrentThreadActivityId(savedActivityId);

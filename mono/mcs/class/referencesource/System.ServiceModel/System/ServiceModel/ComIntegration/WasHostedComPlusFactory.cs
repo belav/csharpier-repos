@@ -14,8 +14,7 @@ namespace System.ServiceModel.ComIntegration
         {
             if (!AspNetEnvironment.Enabled)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(
@@ -28,8 +27,7 @@ namespace System.ServiceModel.ComIntegration
 
             if (string.IsNullOrEmpty(constructorString))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(SR.Hosting_ServiceTypeNotProvided)

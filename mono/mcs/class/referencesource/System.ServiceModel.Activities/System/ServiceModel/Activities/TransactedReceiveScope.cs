@@ -228,8 +228,7 @@ namespace System.ServiceModel.Activities
         {
             if (this.Request == null)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new ValidationException(
                             SR2.TransactedReceiveScopeRequiresReceive(this.DisplayName)
@@ -242,8 +241,7 @@ namespace System.ServiceModel.Activities
             Fx.Assert(handleInstance != null, "RuntimeTransactionHandle is null");
 
             //This is used by InternalReceiveMessage to update the InitiatingTransaction so that we can later call Commit/Complete on it
-            context
-                .Properties
+            context.Properties
                 .Add(
                     TransactedReceiveData.TransactedReceiveDataExecutionPropertyName,
                     new TransactedReceiveData()
@@ -261,8 +259,7 @@ namespace System.ServiceModel.Activities
                 //nested case
                 if (foundHandle.SuppressTransaction)
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(
                             new InvalidOperationException(
                                 SR2.CannotNestTransactedReceiveScopeWhenAmbientHandleIsSuppressed(
@@ -297,8 +294,7 @@ namespace System.ServiceModel.Activities
         void OnBodyCompleted(NativeActivityContext context, ActivityInstance completedInstance)
         {
             TransactedReceiveData transactedReceiveData =
-                context
-                    .Properties
+                context.Properties
                     .Find(TransactedReceiveData.TransactedReceiveDataExecutionPropertyName)
                 as TransactedReceiveData;
             Fx.Assert(

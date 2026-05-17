@@ -109,8 +109,7 @@ namespace System.ServiceModel
                     == HttpClientCredentialType.InheritedFromHost
             )
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new InvalidOperationException(
                             SR.GetString(
@@ -307,8 +306,7 @@ namespace System.ServiceModel
                 && UnsafeNativeMethods.IsTailoredApplication.Value
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new NotSupportedException(
                             SR.GetString(
@@ -378,8 +376,7 @@ namespace System.ServiceModel
             NetHttpBindingElement element = section.Bindings[configurationName];
             if (element == null)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new ConfigurationErrorsException(
                             SR.GetString(

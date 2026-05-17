@@ -214,8 +214,7 @@ namespace Microsoft.Build.Tasks.Xaml
                 }
                 if (!String.IsNullOrEmpty(requiredPropertiesNotSpecified))
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(
                             new InvalidOperationException(
                                 SR.MissingRequiredParametersCompilationPass2Task(

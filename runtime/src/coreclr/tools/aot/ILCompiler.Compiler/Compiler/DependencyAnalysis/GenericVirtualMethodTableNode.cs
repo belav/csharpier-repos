@@ -65,11 +65,9 @@ namespace ILCompiler.DependencyAnalysis
             MethodDesc openCallingMethod = callingMethod.GetTypicalMethodDefinition();
             MethodDesc openImplementationMethod = implementationMethod.GetTypicalMethodDefinition();
 
-            var openCallingMethodNameAndSig = factory
-                .NativeLayout
+            var openCallingMethodNameAndSig = factory.NativeLayout
                 .MethodNameAndSignatureVertex(openCallingMethod);
-            var openImplementationMethodNameAndSig = factory
-                .NativeLayout
+            var openImplementationMethodNameAndSig = factory.NativeLayout
                 .MethodNameAndSignatureVertex(openImplementationMethod);
 
             dependencies.Add(
@@ -163,8 +161,7 @@ namespace ILCompiler.DependencyAnalysis
                         nativeFormatWriter.GetUnsignedConstant(targetTypeId)
                     );
 
-                    var nameAndSig = factory
-                        .NativeLayout
+                    var nameAndSig = factory.NativeLayout
                         .PlacedSignatureVertex(
                             factory.NativeLayout.MethodNameAndSignatureVertex(callingMethod)
                         );
@@ -175,8 +172,7 @@ namespace ILCompiler.DependencyAnalysis
                         )
                     );
 
-                    nameAndSig = factory
-                        .NativeLayout
+                    nameAndSig = factory.NativeLayout
                         .PlacedSignatureVertex(
                             factory.NativeLayout.MethodNameAndSignatureVertex(implementationMethod)
                         );

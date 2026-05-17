@@ -197,8 +197,7 @@ namespace System.Data
             if (!EntityUtil.TryGetICollectionElementType(propertyType, out elementType))
             {
                 throw EntityUtil.InvalidOperation(
-                    System
-                        .Data
+                    System.Data
                         .Entity
                         .Strings
                         .PocoEntityWrapper_UnexpectedTypeForNavigationProperty(
@@ -233,8 +232,7 @@ namespace System.Data
             if (requestedType.IsArray)
             {
                 throw EntityUtil.InvalidOperation(
-                    System
-                        .Data
+                    System.Data
                         .Entity
                         .Strings
                         .ObjectQuery_UnableToMaterializeArray(
@@ -568,8 +566,7 @@ namespace System.Data
         )
         {
             return IndexOutOfRange(
-                System
-                    .Data
+                System.Data
                     .Entity
                     .Strings
                     .ADP_InvalidBufferSizeOrIndex(
@@ -582,8 +579,7 @@ namespace System.Data
         internal static IndexOutOfRangeException InvalidDataLength(long length)
         {
             return IndexOutOfRange(
-                System
-                    .Data
+                System.Data
                     .Entity
                     .Strings
                     .ADP_InvalidDataLength(length.ToString(CultureInfo.InvariantCulture))
@@ -597,8 +593,7 @@ namespace System.Data
         )
         {
             return ArgumentOutOfRange(
-                System
-                    .Data
+                System.Data
                     .Entity
                     .Strings
                     .ADP_InvalidDestinationBufferIndex(
@@ -616,8 +611,7 @@ namespace System.Data
         )
         {
             return ArgumentOutOfRange(
-                System
-                    .Data
+                System.Data
                     .Entity
                     .Strings
                     .ADP_InvalidSourceBufferIndex(
@@ -645,8 +639,7 @@ namespace System.Data
         )
         {
             return InvalidOperation(
-                System
-                    .Data
+                System.Data
                     .Entity
                     .Strings
                     .ADP_NonSequentialChunkAccess(
@@ -660,8 +653,7 @@ namespace System.Data
         internal static InvalidOperationException NonSequentialColumnAccess(int badCol, int currCol)
         {
             return InvalidOperation(
-                System
-                    .Data
+                System.Data
                     .Entity
                     .Strings
                     .ADP_NonSequentialColumnAccess(
@@ -689,8 +681,7 @@ namespace System.Data
         )
         {
             return NotSupported(
-                System
-                    .Data
+                System.Data
                     .Entity
                     .Strings
                     .ADP_NestingNotSupported(parentOp.OpType.ToString(), childOp.OpType.ToString())
@@ -715,8 +706,7 @@ namespace System.Data
         )
         {
             return CommandExecution(
-                System
-                    .Data
+                System.Data
                     .Entity
                     .Strings
                     .ADP_InvalidDataReaderMissingColumnForType(currentType.FullName, member.Name)
@@ -729,8 +719,7 @@ namespace System.Data
         )
         {
             return CommandExecution(
-                System
-                    .Data
+                System.Data
                     .Entity
                     .Strings
                     .ADP_InvalidDataReaderMissingDiscriminatorColumn(
@@ -956,8 +945,7 @@ namespace System.Data
         internal static ArgumentException InvalidEDMVersion(double edmVersion)
         {
             return Argument(
-                System
-                    .Data
+                System.Data
                     .Entity
                     .Strings
                     .InvalidEDMVersion(edmVersion.ToString(CultureInfo.CurrentCulture))
@@ -983,8 +971,7 @@ namespace System.Data
         )
         {
             return Argument(
-                System
-                    .Data
+                System.Data
                     .Entity
                     .Strings
                     .MinAndMaxValueMustBeSameForConstantFacet(facetName, typeName)
@@ -1007,8 +994,7 @@ namespace System.Data
         )
         {
             return Argument(
-                System
-                    .Data
+                System.Data
                     .Entity
                     .Strings
                     .BothMinAndMaxValueMustBeSpecifiedForNonConstantFacet(facetName, typeName)
@@ -1021,8 +1007,7 @@ namespace System.Data
         )
         {
             return Argument(
-                System
-                    .Data
+                System.Data
                     .Entity
                     .Strings
                     .MinAndMaxValueMustBeDifferentForNonConstantFacet(facetName, typeName)
@@ -1059,8 +1044,7 @@ namespace System.Data
         )
         {
             return Argument(
-                System
-                    .Data
+                System.Data
                     .Entity
                     .Strings
                     .TypeNotInEntitySet(entityTypeName, rootEntityTypeName, entitySetName)
@@ -1079,8 +1063,7 @@ namespace System.Data
         )
         {
             return Argument(
-                System
-                    .Data
+                System.Data
                     .Entity
                     .Strings
                     .TypeNotInAssociationSet(typeName, rootEntityTypeName, setName)
@@ -1313,8 +1296,7 @@ namespace System.Data
         internal static ArgumentException InvalidModifiedPropertyName(string propertyName)
         {
             return EntityUtil.Argument(
-                System
-                    .Data
+                System.Data
                     .Entity
                     .Strings
                     .ObjectStateEntry_SetModifiedOnInvalidProperty(propertyName)
@@ -1331,8 +1313,7 @@ namespace System.Data
         internal static ArgumentException DetachedObjectStateEntriesDoesNotExistInObjectStateManager()
         {
             return EntityUtil.Argument(
-                System
-                    .Data
+                System.Data
                     .Entity
                     .Strings
                     .ObjectStateManager_DetachedObjectStateEntriesDoesNotExistInObjectStateManager
@@ -1342,8 +1323,7 @@ namespace System.Data
         internal static InvalidOperationException ObjectStateManagerContainsThisEntityKey()
         {
             return EntityUtil.InvalidOperation(
-                System
-                    .Data
+                System.Data
                     .Entity
                     .Strings
                     .ObjectStateManager_ObjectStateManagerContainsThisEntityKey
@@ -1355,8 +1335,7 @@ namespace System.Data
         )
         {
             return EntityUtil.InvalidOperation(
-                System
-                    .Data
+                System.Data
                     .Entity
                     .Strings
                     .ObjectStateManager_DoesnotAllowToReAddUnchangedOrModifiedOrDeletedEntity(state)
@@ -1375,8 +1354,7 @@ namespace System.Data
             if (forAttach)
             {
                 return EntityUtil.InvalidOperation(
-                    System
-                        .Data
+                    System.Data
                         .Entity
                         .Strings
                         .ObjectStateManager_KeyPropertyDoesntMatchValueInKeyForAttach
@@ -1446,8 +1424,7 @@ namespace System.Data
         internal static InvalidOperationException ObjectDoesNotHaveAKey(object entity)
         {
             return EntityUtil.InvalidOperation(
-                System
-                    .Data
+                System.Data
                     .Entity
                     .Strings
                     .ObjectStateManager_GetEntityKeyRequiresObjectToHaveAKey(
@@ -1459,8 +1436,7 @@ namespace System.Data
         internal static InvalidOperationException EntityValueChangedWithoutEntityValueChanging()
         {
             return EntityUtil.InvalidOperation(
-                System
-                    .Data
+                System.Data
                     .Entity
                     .Strings
                     .ObjectStateEntry_EntityMemberChangedWithoutEntityMemberChanging
@@ -1473,8 +1449,7 @@ namespace System.Data
         )
         {
             return EntityUtil.InvalidOperation(
-                System
-                    .Data
+                System.Data
                     .Entity
                     .Strings
                     .ObjectStateEntry_ChangedInDifferentStateFromChanging(
@@ -1487,8 +1462,7 @@ namespace System.Data
         internal static ArgumentException ChangeOnUnmappedProperty(string entityPropertyName)
         {
             return EntityUtil.Argument(
-                System
-                    .Data
+                System.Data
                     .Entity
                     .Strings
                     .ObjectStateEntry_ChangeOnUnmappedProperty(entityPropertyName)
@@ -1500,8 +1474,7 @@ namespace System.Data
         )
         {
             return EntityUtil.Argument(
-                System
-                    .Data
+                System.Data
                     .Entity
                     .Strings
                     .ObjectStateEntry_ChangeOnUnmappedComplexProperty(complexPropertyName)
@@ -1515,8 +1488,7 @@ namespace System.Data
         )
         {
             return Argument(
-                System
-                    .Data
+                System.Data
                     .Entity
                     .Strings
                     .ObjectStateManager_EntityTypeDoesnotMatchtoEntitySetType(
@@ -1530,8 +1502,7 @@ namespace System.Data
         internal static InvalidOperationException NoEntryExistsForObject(object entity)
         {
             return EntityUtil.InvalidOperation(
-                System
-                    .Data
+                System.Data
                     .Entity
                     .Strings
                     .ObjectStateManager_NoEntryExistsForObject(entity.GetType().FullName)
@@ -1587,8 +1558,7 @@ namespace System.Data
             else
             {
                 throw EntityUtil.PropertyConstraint(
-                    System
-                        .Data
+                    System.Data
                         .Entity
                         .Strings
                         .Materializer_PropertyIsNotNullableWithName(propertyName),
@@ -1607,8 +1577,7 @@ namespace System.Data
             if (null == value)
             {
                 throw EntityUtil.Constraint(
-                    System
-                        .Data
+                    System.Data
                         .Entity
                         .Strings
                         .Materializer_SetInvalidValue(
@@ -1622,8 +1591,7 @@ namespace System.Data
             else
             {
                 throw EntityUtil.InvalidOperation(
-                    System
-                        .Data
+                    System.Data
                         .Entity
                         .Strings
                         .Materializer_SetInvalidValue(
@@ -1650,8 +1618,7 @@ namespace System.Data
             )
             {
                 return EntityUtil.InvalidOperation(
-                    System
-                        .Data
+                    System.Data
                         .Entity
                         .Strings
                         .Materializer_InvalidCastNullable(
@@ -1663,8 +1630,7 @@ namespace System.Data
             else
             {
                 return EntityUtil.InvalidOperation(
-                    System
-                        .Data
+                    System.Data
                         .Entity
                         .Strings
                         .Materializer_InvalidCastReference(valueType, destinationType)
@@ -1687,13 +1653,11 @@ namespace System.Data
         )
         {
             return NotSupported(
-                System
-                    .Data
+                System.Data
                     .Entity
                     .Strings
                     .Materializer_RecyclingEntity(
-                        System
-                            .Data
+                        System.Data
                             .Common
                             .TypeHelpers
                             .GetFullName(key.EntityContainerName, key.EntitySetName),
@@ -1707,8 +1671,7 @@ namespace System.Data
         internal static InvalidOperationException AddedEntityAlreadyExists(EntityKey key)
         {
             return InvalidOperation(
-                System
-                    .Data
+                System.Data
                     .Entity
                     .Strings
                     .Materializer_AddedEntityAlreadyExists(key.ConcatKeyValue())
@@ -1788,8 +1751,7 @@ namespace System.Data
         )
         {
             return InvalidOperation(
-                System
-                    .Data
+                System.Data
                     .Entity
                     .Strings
                     .Collections_ExpectedCollectionGotReference(
@@ -1824,8 +1786,7 @@ namespace System.Data
         )
         {
             return InvalidOperation(
-                System
-                    .Data
+                System.Data
                     .Entity
                     .Strings
                     .EntityReference_ExpectedReferenceGotCollection(
@@ -1842,8 +1803,7 @@ namespace System.Data
         )
         {
             return InvalidOperation(
-                System
-                    .Data
+                System.Data
                     .Entity
                     .Strings
                     .EntityReference_CannotAddMoreThanOneEntityToEntityReference(
@@ -1882,8 +1842,7 @@ namespace System.Data
         )
         {
             return InvalidOperation(
-                System
-                    .Data
+                System.Data
                     .Entity
                     .Strings
                     .RelatedEnd_CannotCreateRelationshipBetweenTrackedAndNoTrackedEntities(roleName)
@@ -1893,8 +1852,7 @@ namespace System.Data
         internal static InvalidOperationException CannotCreateRelationshipEntitiesInDifferentContexts()
         {
             return InvalidOperation(
-                System
-                    .Data
+                System.Data
                     .Entity
                     .Strings
                     .RelatedEnd_CannotCreateRelationshipEntitiesInDifferentContexts
@@ -1907,8 +1865,7 @@ namespace System.Data
         )
         {
             return InvalidOperation(
-                System
-                    .Data
+                System.Data
                     .Entity
                     .Strings
                     .RelatedEnd_InvalidContainedType_Collection(entityType, relatedEndType)
@@ -1921,8 +1878,7 @@ namespace System.Data
         )
         {
             return InvalidOperation(
-                System
-                    .Data
+                System.Data
                     .Entity
                     .Strings
                     .RelatedEnd_InvalidContainedType_Reference(entityType, relatedEndType)
@@ -1932,8 +1888,7 @@ namespace System.Data
         internal static InvalidOperationException CannotAddToFixedSizeArray(object collectionType)
         {
             return InvalidOperation(
-                System
-                    .Data
+                System.Data
                     .Entity
                     .Strings
                     .RelatedEnd_CannotAddToFixedSizeArray(collectionType.GetType())
@@ -1945,8 +1900,7 @@ namespace System.Data
         )
         {
             return InvalidOperation(
-                System
-                    .Data
+                System.Data
                     .Entity
                     .Strings
                     .RelatedEnd_CannotRemoveFromFixedSizeArray(collectionType.GetType())
@@ -1978,8 +1932,7 @@ namespace System.Data
         )
         {
             return InvalidOperation(
-                System
-                    .Data
+                System.Data
                     .Entity
                     .Strings
                     .RelatedEnd_InvalidRelationshipFixupDetected(propertyName, entityType)
@@ -2044,8 +1997,7 @@ namespace System.Data
         )
         {
             return InvalidOperation(
-                System
-                    .Data
+                System.Data
                     .Entity
                     .Strings
                     .RelatedEnd_EntitySetIsNotValidForRelationship(
@@ -2061,8 +2013,7 @@ namespace System.Data
         internal static InvalidOperationException UnableToRetrieveReferentialConstraintProperties()
         {
             return InvalidOperation(
-                System
-                    .Data
+                System.Data
                     .Entity
                     .Strings
                     .RelationshipManager_UnableToRetrieveReferentialConstraintProperties
@@ -2072,8 +2023,7 @@ namespace System.Data
         internal static InvalidOperationException InconsistentReferentialConstraintProperties()
         {
             return InvalidOperation(
-                System
-                    .Data
+                System.Data
                     .Entity
                     .Strings
                     .RelationshipManager_InconsistentReferentialConstraintProperties
@@ -2083,8 +2033,7 @@ namespace System.Data
         internal static InvalidOperationException CircularRelationshipsWithReferentialConstraints()
         {
             return InvalidOperation(
-                System
-                    .Data
+                System.Data
                     .Entity
                     .Strings
                     .RelationshipManager_CircularRelationshipsWithReferentialConstraints
@@ -2097,8 +2046,7 @@ namespace System.Data
         )
         {
             return Argument(
-                System
-                    .Data
+                System.Data
                     .Entity
                     .Strings
                     .RelationshipManager_UnableToFindRelationshipTypeInMetadata(relationshipName),
@@ -2113,8 +2061,7 @@ namespace System.Data
         )
         {
             return Argument(
-                System
-                    .Data
+                System.Data
                     .Entity
                     .Strings
                     .RelationshipManager_InvalidTargetRole(relationshipName, targetRoleName),
@@ -2130,8 +2077,7 @@ namespace System.Data
         )
         {
             return InvalidOperation(
-                System
-                    .Data
+                System.Data
                     .Entity
                     .Strings
                     .RelationshipManager_OwnerIsNotSourceType(
@@ -2153,13 +2099,11 @@ namespace System.Data
         internal static InvalidOperationException ReferenceAlreadyInitialized()
         {
             return InvalidOperation(
-                System
-                    .Data
+                System.Data
                     .Entity
                     .Strings
                     .RelationshipManager_ReferenceAlreadyInitialized(
-                        System
-                            .Data
+                        System.Data
                             .Entity
                             .Strings
                             .RelationshipManager_InitializeIsForDeserialization
@@ -2170,13 +2114,11 @@ namespace System.Data
         internal static InvalidOperationException RelationshipManagerAttached()
         {
             return InvalidOperation(
-                System
-                    .Data
+                System.Data
                     .Entity
                     .Strings
                     .RelationshipManager_RelationshipManagerAttached(
-                        System
-                            .Data
+                        System.Data
                             .Entity
                             .Strings
                             .RelationshipManager_InitializeIsForDeserialization
@@ -2187,13 +2129,11 @@ namespace System.Data
         internal static InvalidOperationException CollectionAlreadyInitialized()
         {
             return InvalidOperation(
-                System
-                    .Data
+                System.Data
                     .Entity
                     .Strings
                     .RelationshipManager_CollectionAlreadyInitialized(
-                        System
-                            .Data
+                        System.Data
                             .Entity
                             .Strings
                             .RelationshipManager_CollectionInitializeIsForDeserialization
@@ -2204,13 +2144,11 @@ namespace System.Data
         internal static InvalidOperationException CollectionRelationshipManagerAttached()
         {
             return InvalidOperation(
-                System
-                    .Data
+                System.Data
                     .Entity
                     .Strings
                     .RelationshipManager_CollectionRelationshipManagerAttached(
-                        System
-                            .Data
+                        System.Data
                             .Entity
                             .Strings
                             .RelationshipManager_CollectionInitializeIsForDeserialization
@@ -2324,8 +2262,7 @@ namespace System.Data
         )
         {
             return InvalidOperation(
-                System
-                    .Data
+                System.Data
                     .Entity
                     .Strings
                     .EntityProxyTypeInfo_ProxyMetadataIsUnavailable(type.FullName),
@@ -2409,8 +2346,7 @@ namespace System.Data
         )
         {
             return EntityUtil.Argument(
-                System
-                    .Data
+                System.Data
                     .Entity
                     .Strings
                     .ObjectContext_InvalidDefaultContainerName(defaultContainerName),
@@ -2494,8 +2430,7 @@ namespace System.Data
         )
         {
             return EntityUtil.InvalidOperation(
-                System
-                    .Data
+                System.Data
                     .Entity
                     .Strings
                     .ObjectContext_EntityContainerNotFoundForName(entityContainerName)
@@ -2525,8 +2460,7 @@ namespace System.Data
         )
         {
             return InvalidOperation(
-                System
-                    .Data
+                System.Data
                     .Entity
                     .Strings
                     .ObjectContext_InvalidEntitySetInKey(
@@ -2547,8 +2481,7 @@ namespace System.Data
         )
         {
             return InvalidOperation(
-                System
-                    .Data
+                System.Data
                     .Entity
                     .Strings
                     .ObjectContext_InvalidEntitySetInKeyFromName(
@@ -2588,8 +2521,7 @@ namespace System.Data
         )
         {
             return InvalidOperation(
-                System
-                    .Data
+                System.Data
                     .Entity
                     .Strings
                     .ObjectContext_ExecuteFunctionTypeMismatch(
@@ -2607,16 +2539,14 @@ namespace System.Data
             string message;
             if (null == functionImport.ReturnParameter)
             {
-                message = System
-                    .Data
+                message = System.Data
                     .Entity
                     .Strings
                     .ObjectContext_ExecuteFunctionCalledWithNonQueryFunction(functionImport.Name);
             }
             else
             {
-                message = System
-                    .Data
+                message = System.Data
                     .Entity
                     .Strings
                     .ObjectContext_ExecuteFunctionCalledWithScalarFunction(
@@ -2656,8 +2586,7 @@ namespace System.Data
         )
         {
             return Argument(
-                System
-                    .Data
+                System.Data
                     .Entity
                     .Strings
                     .ObjectContext_EntitiesHaveDifferentType(
@@ -2670,8 +2599,7 @@ namespace System.Data
         internal static InvalidOperationException EntityMustBeUnchangedOrModified(EntityState state)
         {
             return InvalidOperation(
-                System
-                    .Data
+                System.Data
                     .Entity
                     .Strings
                     .ObjectContext_EntityMustBeUnchangedOrModified(state.ToString())
@@ -2683,8 +2611,7 @@ namespace System.Data
         )
         {
             return InvalidOperation(
-                System
-                    .Data
+                System.Data
                     .Entity
                     .Strings
                     .ObjectContext_EntityMustBeUnchangedOrModifiedOrDeleted(state.ToString())
@@ -2712,8 +2639,7 @@ namespace System.Data
         )
         {
             return Argument(
-                System
-                    .Data
+                System.Data
                     .Entity
                     .Strings
                     .ObjectContext_InvalidEntitySetOnEntity(entitySetName, entityType),
@@ -2729,8 +2655,7 @@ namespace System.Data
         )
         {
             return Argument(
-                System
-                    .Data
+                System.Data
                     .Entity
                     .Strings
                     .ObjectContext_InvalidObjectSetTypeForEntitySet(
@@ -2756,8 +2681,7 @@ namespace System.Data
         )
         {
             return Argument(
-                System
-                    .Data
+                System.Data
                     .Entity
                     .Strings
                     .ObjectContext_MultipleEntitySetsFoundInSingleContainer(
@@ -2774,8 +2698,7 @@ namespace System.Data
         )
         {
             return Argument(
-                System
-                    .Data
+                System.Data
                     .Entity
                     .Strings
                     .ObjectContext_MultipleEntitySetsFoundInAllContainers(entityTypeName),
@@ -2802,8 +2725,7 @@ namespace System.Data
         )
         {
             return InvalidOperation(
-                System
-                    .Data
+                System.Data
                     .Entity
                     .Strings
                     .ObjectContext_EntityNotInObjectSet_Delete(
@@ -2823,8 +2745,7 @@ namespace System.Data
         )
         {
             return InvalidOperation(
-                System
-                    .Data
+                System.Data
                     .Entity
                     .Strings
                     .ObjectContext_EntityNotInObjectSet_Detach(
@@ -2855,8 +2776,7 @@ namespace System.Data
         )
         {
             return EntityUtil.InvalidOperation(
-                System
-                    .Data
+                System.Data
                     .Entity
                     .Strings
                     .ComplexObject_NullableComplexTypesNotSupported(propertyName)
@@ -2875,8 +2795,7 @@ namespace System.Data
         )
         {
             return EntityUtil.Argument(
-                System
-                    .Data
+                System.Data
                     .Entity
                     .Strings
                     .ComplexObject_ComplexChangeRequestedOnScalarProperty(propertyName)
@@ -2909,8 +2828,7 @@ namespace System.Data
         internal static ArgumentException InvalidSizeValue(int value)
         {
             return Argument(
-                System
-                    .Data
+                System.Data
                     .Entity
                     .Strings
                     .ADP_InvalidSizeValue(value.ToString(CultureInfo.InvariantCulture))
@@ -2944,8 +2862,7 @@ namespace System.Data
         )
         {
             return InvalidOperation(
-                System
-                    .Data
+                System.Data
                     .Entity
                     .Strings
                     .EntityKey_EntityTypesDoNotMatch(recordType, entitySetType)
@@ -2960,8 +2877,7 @@ namespace System.Data
         )
         {
             return Argument(
-                System
-                    .Data
+                System.Data
                     .Entity
                     .Strings
                     .EntityKey_IncorrectNumberOfKeyValuePairs(
@@ -2980,8 +2896,7 @@ namespace System.Data
         )
         {
             return InvalidOperation(
-                System
-                    .Data
+                System.Data
                     .Entity
                     .Strings
                     .EntityKey_IncorrectNumberOfKeyValuePairs(
@@ -3000,8 +2915,7 @@ namespace System.Data
         )
         {
             return Argument(
-                System
-                    .Data
+                System.Data
                     .Entity
                     .Strings
                     .EntityKey_IncorrectValueType(keyField, expectedTypeName, actualTypeName),
@@ -3016,8 +2930,7 @@ namespace System.Data
         )
         {
             return InvalidOperation(
-                System
-                    .Data
+                System.Data
                     .Entity
                     .Strings
                     .EntityKey_IncorrectValueType(keyField, expectedTypeName, actualTypeName)
@@ -3031,8 +2944,7 @@ namespace System.Data
         )
         {
             return Argument(
-                System
-                    .Data
+                System.Data
                     .Entity
                     .Strings
                     .EntityKey_NoCorrespondingOSpaceTypeForEnumKeyMember(keyField, cspaceTypeName),
@@ -3046,8 +2958,7 @@ namespace System.Data
         )
         {
             return InvalidOperation(
-                System
-                    .Data
+                System.Data
                     .Entity
                     .Strings
                     .EntityKey_NoCorrespondingOSpaceTypeForEnumKeyMember(keyField, cspaceTypeName)
@@ -3139,8 +3050,7 @@ namespace System.Data
         internal static InvalidOperationException EntityKeyDoesntMatchKeySetOnEntity(object entity)
         {
             return new InvalidOperationException(
-                System
-                    .Data
+                System.Data
                     .Entity
                     .Strings
                     .EntityKey_DoesntMatchKeyOnEntity(entity.GetType().FullName)
@@ -3269,8 +3179,7 @@ namespace System.Data
         internal static ArgumentException UnknownDataTypeCode(Type dataType, TypeCode typeCode)
         {
             return Argument(
-                System
-                    .Data
+                System.Data
                     .Entity
                     .Strings
                     .ADP_UnknownDataTypeCode(
@@ -3399,8 +3308,7 @@ namespace System.Data
             {
                 // Just one acceptable value and itis value is 1
                 return Update(
-                    System
-                        .Data
+                    System.Data
                         .Entity
                         .Strings
                         .Update_RelationshipCardinalityConstraintViolationSingleValue(
@@ -3418,8 +3326,7 @@ namespace System.Data
             {
                 // Range of acceptable values
                 return Update(
-                    System
-                        .Data
+                    System.Data
                         .Entity
                         .Strings
                         .Update_RelationshipCardinalityConstraintViolation(
@@ -3442,8 +3349,7 @@ namespace System.Data
             IEntityStateEntry stateEntry
         )
         {
-            string message = System
-                .Data
+            string message = System.Data
                 .Entity
                 .Strings
                 .Update_MissingRequiredEntity(relationshipSetName, stateEntry.State, endName);
@@ -3487,8 +3393,7 @@ namespace System.Data
         )
         {
             return Argument(
-                System
-                    .Data
+                System.Data
                     .Entity
                     .Strings
                     .ADP_CollectionParameterElementIsNullOrEmpty(parameterName)
@@ -3508,8 +3413,7 @@ namespace System.Data
         )
         {
             return InvalidOperation(
-                System
-                    .Data
+                System.Data
                     .Entity
                     .Strings
                     .Cqt_UDF_FunctionDefinitionResultTypeMismatch(
@@ -3523,8 +3427,7 @@ namespace System.Data
         internal static Exception EntityParameterCollectionInvalidIndex(int index, int count)
         {
             return new IndexOutOfRangeException(
-                System
-                    .Data
+                System.Data
                     .Entity
                     .Strings
                     .EntityParameterCollectionInvalidIndex(
@@ -3539,8 +3442,7 @@ namespace System.Data
         )
         {
             return new IndexOutOfRangeException(
-                System
-                    .Data
+                System.Data
                     .Entity
                     .Strings
                     .EntityParameterCollectionInvalidParameterName(parameterName)
@@ -3693,8 +3595,7 @@ namespace System.Data
         internal static ArgumentOutOfRangeException InvalidEnumerationValue(Type type, int value)
         {
             return EntityUtil.ArgumentOutOfRange(
-                System
-                    .Data
+                System.Data
                     .Entity
                     .Strings
                     .ADP_InvalidEnumerationValue(
@@ -3942,8 +3843,7 @@ namespace System.Data
 
         internal static int DstCompare(string strA, string strB)
         {
-            return CultureInfo
-                .CurrentCulture
+            return CultureInfo.CurrentCulture
                 .CompareInfo
                 .Compare(strA, strB, EntityUtil.StringCompareOptions);
         }

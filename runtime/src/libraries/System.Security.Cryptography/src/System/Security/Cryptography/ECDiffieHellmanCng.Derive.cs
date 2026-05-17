@@ -64,8 +64,7 @@ namespace System.Security.Cryptography
                 switch (KeyDerivationFunction)
                 {
                     case ECDiffieHellmanKeyDerivationFunction.Hash:
-                        return Interop
-                            .NCrypt
+                        return Interop.NCrypt
                             .DeriveKeyMaterialHash(
                                 handle,
                                 HashAlgorithm.Algorithm,
@@ -74,8 +73,7 @@ namespace System.Security.Cryptography
                                 flags
                             );
                     case ECDiffieHellmanKeyDerivationFunction.Hmac:
-                        return Interop
-                            .NCrypt
+                        return Interop.NCrypt
                             .DeriveKeyMaterialHmac(
                                 handle,
                                 HashAlgorithm.Algorithm,

@@ -178,10 +178,8 @@ namespace System.Data.Linq
             // perform post insert processing
             foreach (TrackedObject insertedItem in insertedItems)
             {
-                object lookup = this.services.InsertLookupCachedObject(
-                    insertedItem.Type,
-                    insertedItem.Current
-                );
+                object lookup = this.services
+                    .InsertLookupCachedObject(insertedItem.Type, insertedItem.Current);
                 if (lookup != insertedItem.Current)
                 {
                     throw new DuplicateKeyException(

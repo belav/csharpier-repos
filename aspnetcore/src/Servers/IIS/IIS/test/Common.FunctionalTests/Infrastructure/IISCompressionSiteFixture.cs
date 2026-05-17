@@ -20,8 +20,7 @@ public class IISCompressionSiteFixture : IISTestSiteFixture
     private static void Configure(IISDeploymentParameters deploymentParameters)
     {
         // Enable dynamic compression
-        deploymentParameters
-            .ServerConfigActionList
+        deploymentParameters.ServerConfigActionList
             .Add(
                 (element, _) =>
                 {

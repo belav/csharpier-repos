@@ -2287,8 +2287,7 @@ namespace System.Management
                 // (NOTE: This call is expected to always succeed)
                 if (
                     0
-                    != Interop
-                        .Ole32
+                    != Interop.Ole32
                         .CoGetObjectContext(IID_IComThreadingInfo, out pComThreadingInfo)
                 )
                     return false;

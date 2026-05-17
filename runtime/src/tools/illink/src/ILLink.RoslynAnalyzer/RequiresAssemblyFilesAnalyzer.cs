@@ -129,8 +129,7 @@ namespace ILLink.RoslynAnalyzer
             if (isDynamicCodeSupportedProperty == null)
                 return false;
 
-            return SymbolEqualityComparer
-                .Default
+            return SymbolEqualityComparer.Default
                 .Equals(propertySymbol, isDynamicCodeSupportedProperty);
         }
 

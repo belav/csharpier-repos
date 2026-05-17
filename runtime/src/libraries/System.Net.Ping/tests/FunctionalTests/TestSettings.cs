@@ -17,8 +17,7 @@ namespace System.Net.NetworkInformation.Tests
             "'Post hoc ergo propter hoc'. 'After it, therefore because of it'. It means one thing follows the other, therefore it was caused by the other. But it's not always true. In fact it's hardly ever true.";
 
         // By default, FreeBSD supports buffer only up to 56 bytes
-        public static readonly byte[] PayloadAsBytes = Encoding
-            .UTF8
+        public static readonly byte[] PayloadAsBytes = Encoding.UTF8
             .GetBytes(
                 OperatingSystem.IsFreeBSD()
                     ? TestSettings.PayloadAsString.Substring(0, 55)

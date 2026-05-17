@@ -131,8 +131,7 @@ namespace System.Text.Json.SourceGeneration.UnitTests
         {
             generator ??= new();
             CSharpParseOptions parseOptions =
-                compilation
-                    .SyntaxTrees
+                compilation.SyntaxTrees
                     .OfType<CSharpSyntaxTree>()
                     .Select(tree => tree.Options)
                     .FirstOrDefault()
@@ -888,8 +887,7 @@ namespace System.Text.Json.SourceGeneration.UnitTests
         private static string TrimCultureSensitiveMessage(string message) =>
             s_IsEnglishCulture ? message : "";
 
-        private static readonly bool s_IsEnglishCulture = CultureInfo
-            .CurrentUICulture
+        private static readonly bool s_IsEnglishCulture = CultureInfo.CurrentUICulture
             .Name
             .StartsWith("en", StringComparison.OrdinalIgnoreCase);
 

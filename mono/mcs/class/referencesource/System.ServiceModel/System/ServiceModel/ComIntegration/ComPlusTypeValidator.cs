@@ -44,8 +44,7 @@ namespace System.ServiceModel.ComIntegration
             bool allowReferences
         )
         {
-            object[] attributes = System
-                .ServiceModel
+            object[] attributes = System.ServiceModel
                 .Description
                 .ServiceReflector
                 .GetCustomAttributes(attributeProvider, typeof(MarshalAsAttribute), true);

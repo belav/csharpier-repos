@@ -172,8 +172,7 @@ namespace System.ServiceModel.Channels
                     || (uint)outTotal < total
                 )
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(SR.PeerLinkUtilityInvalidValues, useful, total)

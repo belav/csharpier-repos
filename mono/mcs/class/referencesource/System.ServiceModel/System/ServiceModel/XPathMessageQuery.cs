@@ -99,8 +99,7 @@ namespace System.ServiceModel
             }
             else
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(
                         "TResult",
                         SR.GetString(SR.UnsupportedMessageQueryResultType, typeof(TResult))
@@ -131,8 +130,7 @@ namespace System.ServiceModel
             }
             else
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(
                         "TResult",
                         SR.GetString(SR.UnsupportedMessageQueryResultType, typeof(TResult))

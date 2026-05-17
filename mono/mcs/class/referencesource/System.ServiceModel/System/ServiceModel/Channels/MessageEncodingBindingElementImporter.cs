@@ -38,8 +38,7 @@ namespace System.ServiceModel.Channels
 #pragma warning suppress 56506 // Microsoft, these properties cannot be null in this context
             if (context.Endpoint.Binding == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("context.Endpoint.Binding");
             }
 
@@ -106,8 +105,7 @@ namespace System.ServiceModel.Channels
             if (contractContext != null)
             {
                 OperationFault wsdlOperationFault = contractContext.GetOperationFault(fault);
-                string wsaAction = WsdlImporter
-                    .WSAddressingHelper
+                string wsaAction = WsdlImporter.WSAddressingHelper
                     .FindWsaActionAttribute(wsdlOperationFault);
                 if (wsaAction == null && soapAction != null)
                     fault.Action = soapAction;
@@ -133,8 +131,7 @@ namespace System.ServiceModel.Channels
                 OperationMessage wsdlOperationMessage = contractContext.GetOperationMessage(
                     message
                 );
-                string wsaAction = WsdlImporter
-                    .WSAddressingHelper
+                string wsaAction = WsdlImporter.WSAddressingHelper
                     .FindWsaActionAttribute(wsdlOperationMessage);
                 if (wsaAction == null && soapAction != null)
                 {
@@ -241,8 +238,7 @@ namespace System.ServiceModel.Channels
                 out encodingAssertion
             );
 
-            AddressingVersion addressingVersion = WsdlImporter
-                .WSAddressingHelper
+            AddressingVersion addressingVersion = WsdlImporter.WSAddressingHelper
                 .FindAddressingVersion(context);
             ApplyAddressingVersion(encodingBindingElement, addressingVersion);
 

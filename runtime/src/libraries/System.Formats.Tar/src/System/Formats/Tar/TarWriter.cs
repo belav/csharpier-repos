@@ -325,8 +325,7 @@ namespace System.Formats.Tar
                 case TarEntryFormat.Pax:
                     if (entry._header._typeFlag is TarEntryType.GlobalExtendedAttributes)
                     {
-                        entry
-                            ._header
+                        entry._header
                             .WriteAsPaxGlobalExtendedAttributes(
                                 _archiveStream,
                                 buffer,
@@ -365,26 +364,22 @@ namespace System.Formats.Tar
 
             Task task = entry.Format switch
             {
-                TarEntryFormat.V7 => entry
-                    ._header
+                TarEntryFormat.V7 => entry._header
                     .WriteAsV7Async(_archiveStream, buffer, cancellationToken),
-                TarEntryFormat.Ustar => entry
-                    ._header
+                TarEntryFormat.Ustar => entry._header
                     .WriteAsUstarAsync(_archiveStream, buffer, cancellationToken),
                 TarEntryFormat.Pax
-                    when entry._header._typeFlag is TarEntryType.GlobalExtendedAttributes => entry
-                    ._header
-                    .WriteAsPaxGlobalExtendedAttributesAsync(
-                        _archiveStream,
-                        buffer,
-                        _nextGlobalExtendedAttributesEntryNumber++,
-                        cancellationToken
-                    ),
-                TarEntryFormat.Pax => entry
-                    ._header
+                    when entry._header._typeFlag is TarEntryType.GlobalExtendedAttributes =>
+                    entry._header
+                        .WriteAsPaxGlobalExtendedAttributesAsync(
+                            _archiveStream,
+                            buffer,
+                            _nextGlobalExtendedAttributesEntryNumber++,
+                            cancellationToken
+                        ),
+                TarEntryFormat.Pax => entry._header
                     .WriteAsPaxAsync(_archiveStream, buffer, cancellationToken),
-                TarEntryFormat.Gnu => entry
-                    ._header
+                TarEntryFormat.Gnu => entry._header
                     .WriteAsGnuAsync(_archiveStream, buffer, cancellationToken),
                 _ => throw new InvalidDataException(SR.Format(SR.TarInvalidFormat, Format)),
             };

@@ -45,8 +45,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                         Interlocked.CompareExchange(
                             ref _mergedRoot,
                             MergedNamespaceDeclaration.Create(
-                                _table
-                                    ._allOlderRootDeclarations
+                                _table._allOlderRootDeclarations
                                     .InInsertionOrder
                                     .Select(static lazyRoot => lazyRoot.Value)
                                     .AsImmutable<SingleNamespaceDeclaration>()
@@ -97,8 +96,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     {
                         ImmutableInterlocked.InterlockedInitialize(
                             ref _referenceDirectives,
-                            MergedRoot
-                                .Declarations
+                            MergedRoot.Declarations
                                 .OfType<RootSingleNamespaceDeclaration>()
                                 .SelectMany(r => r.ReferenceDirectives)
                                 .AsImmutable()

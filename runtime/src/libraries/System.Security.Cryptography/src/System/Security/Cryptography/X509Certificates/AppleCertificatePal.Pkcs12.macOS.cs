@@ -73,8 +73,7 @@ namespace System.Security.Cryptography.X509Certificates
             byte[] smallPfx = exporter.Export(X509ContentType.Pkcs12, password)!;
 
             SafeSecIdentityHandle identityHandle;
-            SafeSecCertificateHandle certHandle = Interop
-                .AppleCrypto
+            SafeSecCertificateHandle certHandle = Interop.AppleCrypto
                 .X509ImportCertificate(
                     smallPfx,
                     X509ContentType.Pkcs12,

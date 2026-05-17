@@ -284,8 +284,7 @@ namespace Roslyn.Test.Utilities.Desktop
             {
                 var emitData = GetEmitData();
                 emitData.RuntimeData.ExecuteRequested = true;
-                var resultCode = emitData
-                    .Manager
+                var resultCode = emitData.Manager
                     .Execute(
                         moduleName,
                         args,
@@ -371,8 +370,7 @@ namespace Roslyn.Test.Utilities.Desktop
             try
             {
                 emitData.RuntimeData.PeverifyRequested = true;
-                emitData
-                    .Manager
+                emitData.Manager
                     .PeVerifyModules(new[] { emitData.MainModule.FullName }, throwOnError: true);
                 if (!shouldSucceed)
                 {
@@ -417,8 +415,7 @@ namespace Roslyn.Test.Utilities.Desktop
         )
         {
             var emitData = GetEmitData();
-            var searchIds = emitData
-                .AllModuleData
+            var searchIds = emitData.AllModuleData
                 .Select(x => new RuntimeModuleDataId(x.Id))
                 .ToList();
             return GetEmitData()

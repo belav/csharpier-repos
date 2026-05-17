@@ -318,13 +318,14 @@ namespace System.Windows.Forms
             using (var pen = new Pen(control.ForeColor, 2))
             {
                 var paintRect = control.DisplayRectangle;
-                e.Graphics.DrawRectangle(
-                    pen,
-                    paintRect.Left + 1,
-                    paintRect.Top + 1,
-                    paintRect.Width - 1,
-                    paintRect.Height - 1
-                );
+                e.Graphics
+                    .DrawRectangle(
+                        pen,
+                        paintRect.Left + 1,
+                        paintRect.Top + 1,
+                        paintRect.Width - 1,
+                        paintRect.Height - 1
+                    );
                 // NOTE: .NET's drawing of the red cross seems to have a bug
                 // that draws the bottom and right of the rectangle only 1 pixel
                 // wide. We would get a nicer rectangle using the following code,
@@ -332,12 +333,14 @@ namespace System.Windows.Forms
                 //var paintRect = control.DisplayRectangle;
                 //paintRect.Inflate (-1, -1);
                 //e.Graphics.DrawRectangle (pen, paintRect);
-                e.Graphics.DrawLine(pen, paintRect.Location, paintRect.Location + paintRect.Size);
-                e.Graphics.DrawLine(
-                    pen,
-                    new Point(paintRect.Left, paintRect.Bottom),
-                    new Point(paintRect.Right, paintRect.Top)
-                );
+                e.Graphics
+                    .DrawLine(pen, paintRect.Location, paintRect.Location + paintRect.Size);
+                e.Graphics
+                    .DrawLine(
+                        pen,
+                        new Point(paintRect.Left, paintRect.Bottom),
+                        new Point(paintRect.Right, paintRect.Top)
+                    );
             }
         }
 

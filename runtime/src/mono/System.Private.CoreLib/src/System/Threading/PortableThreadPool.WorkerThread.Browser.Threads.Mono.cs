@@ -31,12 +31,10 @@ namespace System.Threading
                     {
                         if (NativeRuntimeEventSource.Log.IsEnabled())
                         {
-                            NativeRuntimeEventSource
-                                .Log
+                            NativeRuntimeEventSource.Log
                                 .ThreadPoolWorkerThreadWait(
                                     (uint)
-                                        ThreadPoolInstance
-                                            ._separated
+                                        ThreadPoolInstance._separated
                                             .counts
                                             .VolatileRead()
                                             .NumExistingThreads
@@ -69,12 +67,10 @@ namespace System.Threading
 
                 if (NativeRuntimeEventSource.Log.IsEnabled())
                 {
-                    NativeRuntimeEventSource
-                        .Log
+                    NativeRuntimeEventSource.Log
                         .ThreadPoolWorkerThreadStart(
                             (uint)
-                                threadPoolInstance
-                                    ._separated
+                                threadPoolInstance._separated
                                     .counts
                                     .VolatileRead()
                                     .NumExistingThreads

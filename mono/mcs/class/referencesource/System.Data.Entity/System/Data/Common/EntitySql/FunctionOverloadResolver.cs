@@ -353,8 +353,7 @@ namespace System.Data.Common.EntitySql
                     return 0;
                 }
 
-                IList<PrimitiveType> promotions = EdmProviderManifest
-                    .Instance
+                IList<PrimitiveType> promotions = EdmProviderManifest.Instance
                     .GetPromotionTypes(primitiveFromType);
 
                 int promotionIndex = promotions.IndexOf(primitiveToType);

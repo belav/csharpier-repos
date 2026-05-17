@@ -29,8 +29,7 @@ namespace Microsoft.Extensions.Diagnostics.Metrics.Configuration
             foreach (var configurationSection in _configuration.GetChildren())
             {
                 if (
-                    configurationSection
-                        .Key
+                    configurationSection.Key
                         .Equals(EnabledMetricsKey, StringComparison.OrdinalIgnoreCase)
                 )
                 {
@@ -43,8 +42,7 @@ namespace Microsoft.Extensions.Diagnostics.Metrics.Configuration
                     );
                 }
                 else if (
-                    configurationSection
-                        .Key
+                    configurationSection.Key
                         .Equals(EnabledGlobalMetricsKey, StringComparison.OrdinalIgnoreCase)
                 )
                 {
@@ -52,8 +50,7 @@ namespace Microsoft.Extensions.Diagnostics.Metrics.Configuration
                     LoadMeterRules(options, configurationSection, MeterScope.Global, null);
                 }
                 else if (
-                    configurationSection
-                        .Key
+                    configurationSection.Key
                         .Equals(EnabledLocalMetricsKey, StringComparison.OrdinalIgnoreCase)
                 )
                 {
@@ -128,8 +125,7 @@ namespace Microsoft.Extensions.Diagnostics.Metrics.Configuration
                         meterName = null;
                     }
                     // Simple bool, enable/disable all instruments for this meter
-                    options
-                        .Rules
+                    options.Rules
                         .Add(
                             new InstrumentRule(
                                 meterName,
@@ -168,8 +164,7 @@ namespace Microsoft.Extensions.Diagnostics.Metrics.Configuration
                         instrumentName = null;
                     }
                     // Simple bool, enable/disable all instruments for this meter
-                    options
-                        .Rules
+                    options.Rules
                         .Add(
                             new InstrumentRule(
                                 meterSection.Key,

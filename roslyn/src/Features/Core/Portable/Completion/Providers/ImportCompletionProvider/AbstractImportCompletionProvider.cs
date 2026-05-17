@@ -221,17 +221,17 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                 .ConfigureAwait(false);
             var root = await tree.GetRootAsync(cancellationToken).ConfigureAwait(false);
             var addImportContextNode = root.FindToken(
-                completionItem.Span.Start,
-                findInsideTrivia: true
-            ).Parent;
+                    completionItem.Span.Start,
+                    findInsideTrivia: true
+                )
+                .Parent;
 
             // Add required using/imports directive.
             var addImportService = document.GetRequiredLanguageService<IAddImportsService>();
             var generator = document.GetRequiredLanguageService<SyntaxGenerator>();
 
             // TODO: fallback options https://github.com/dotnet/roslyn/issues/60786
-            var globalOptions = document
-                .Project
+            var globalOptions = document.Project
                 .Solution
                 .Services
                 .GetService<ILegacyGlobalCleanCodeGenerationOptionsWorkspaceService>();
@@ -246,8 +246,7 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
 
             var importNode = CreateImport(document, containingNamespace);
 
-            var compilation = await document
-                .Project
+            var compilation = await document.Project
                 .GetRequiredCompilationAsync(cancellationToken)
                 .ConfigureAwait(false);
             var rootWithImport = addImportService.AddImport(
@@ -364,8 +363,7 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
         {
             // Certain documents, e.g. Razor document, don't support adding imports
             return completionOptions?.CanAddImportStatement != false
-                && document
-                    .Project
+                && document.Project
                     .Solution
                     .Services
                     .GetRequiredService<IDocumentSupportsFeatureService>()

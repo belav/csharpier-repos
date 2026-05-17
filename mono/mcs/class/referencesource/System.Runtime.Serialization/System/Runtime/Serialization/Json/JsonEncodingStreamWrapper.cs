@@ -147,14 +147,12 @@ namespace System.Runtime.Serialization.Json
             get
             {
 #pragma warning suppress 56503 // The contract for non seekable stream is to throw exception
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new NotSupportedException());
             }
             set
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new NotSupportedException());
             }
         }
@@ -208,8 +206,7 @@ namespace System.Runtime.Serialization.Json
             }
             catch (DecoderFallbackException e)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new XmlException(SR.GetString(SR.JsonInvalidBytes), e));
             }
         }
@@ -267,8 +264,7 @@ namespace System.Runtime.Serialization.Json
             }
             catch (DecoderFallbackException ex)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new XmlException(SR.GetString(SR.JsonInvalidBytes), ex));
             }
         }
@@ -342,8 +338,7 @@ namespace System.Runtime.Serialization.Json
                     return ValidatingBEUTF16;
 
                 default:
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new XmlException(SR.GetString(SR.JsonEncodingNotSupported))
                         );
@@ -364,8 +359,7 @@ namespace System.Runtime.Serialization.Json
                     return "utf-16BE";
 
                 default:
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new XmlException(SR.GetString(SR.JsonEncodingNotSupported))
                         );
@@ -392,8 +386,7 @@ namespace System.Runtime.Serialization.Json
             }
             else
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new XmlException(SR.GetString(SR.JsonEncodingNotSupported)));
             }
         }
@@ -412,8 +405,7 @@ namespace System.Runtime.Serialization.Json
             else if (b1 == 0x00 && b2 == 0x00)
             {
                 // UTF-32BE not supported
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new XmlException(SR.GetString(SR.JsonInvalidBytes)));
             }
             else
@@ -427,8 +419,7 @@ namespace System.Runtime.Serialization.Json
             SupportedEncoding actualEnc
         )
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(
                     new XmlException(
                         SR.GetString(
@@ -450,8 +441,7 @@ namespace System.Runtime.Serialization.Json
                 int b = this.stream.ReadByte();
                 if (b < 0)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new XmlException(SR.GetString(SR.JsonUnexpectedEndOfFile))
                         );
@@ -477,8 +467,7 @@ namespace System.Runtime.Serialization.Json
                 int b2 = this.stream.ReadByte();
                 if (b2 < 0)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new XmlException(SR.GetString(SR.JsonUnexpectedEndOfFile))
                         );
@@ -555,8 +544,7 @@ namespace System.Runtime.Serialization.Json
             }
             catch (DecoderFallbackException ex)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new XmlException(SR.GetString(SR.JsonInvalidBytes), ex));
             }
         }

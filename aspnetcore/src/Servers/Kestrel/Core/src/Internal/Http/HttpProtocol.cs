@@ -25,17 +25,13 @@ using BadHttpRequestException = Microsoft.AspNetCore.Http.BadHttpRequestExceptio
 
 internal abstract partial class HttpProtocol : IHttpResponseControl
 {
-    private static readonly byte[] _bytesConnectionClose = Encoding
-        .ASCII
+    private static readonly byte[] _bytesConnectionClose = Encoding.ASCII
         .GetBytes("\r\nConnection: close");
-    private static readonly byte[] _bytesConnectionKeepAlive = Encoding
-        .ASCII
+    private static readonly byte[] _bytesConnectionKeepAlive = Encoding.ASCII
         .GetBytes("\r\nConnection: keep-alive");
-    private static readonly byte[] _bytesTransferEncodingChunked = Encoding
-        .ASCII
+    private static readonly byte[] _bytesTransferEncodingChunked = Encoding.ASCII
         .GetBytes("\r\nTransfer-Encoding: chunked");
-    private static readonly byte[] _bytesServer = Encoding
-        .ASCII
+    private static readonly byte[] _bytesServer = Encoding.ASCII
         .GetBytes("\r\nServer: " + Constants.ServerName);
     internal const string SchemeHttp = "http";
     internal const string SchemeHttps = "https";
@@ -508,8 +504,7 @@ internal abstract partial class HttpProtocol : IHttpResponseControl
         if (shouldScheduleCancellation)
         {
             // Potentially calling user code. CancelRequestAbortedToken logs any exceptions.
-            ServiceContext
-                .Scheduler
+            ServiceContext.Scheduler
                 .Schedule(
                     state => ((HttpProtocol)state!).CancelRequestAbortedTokenCallback(),
                     this
@@ -878,8 +873,7 @@ internal abstract partial class HttpProtocol : IHttpResponseControl
                 }
                 catch (Exception ex)
                 {
-                    protocol
-                        .Log
+                    protocol.Log
                         .ApplicationError(protocol.ConnectionId, protocol.TraceIdentifier, ex);
                 }
             }

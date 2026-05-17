@@ -100,8 +100,7 @@ public static class SqlServerTestModelBuilderExtensions
         switch (builder)
         {
             case IInfrastructure<TableBuilder<TEntity>> genericBuilder:
-                genericBuilder
-                    .Instance
+                genericBuilder.Instance
                     .IsTemporal(b =>
                         buildAction(
                             new SqlServerModelBuilderTestBase.GenericTestTemporalTableBuilder<TEntity>(
@@ -111,8 +110,7 @@ public static class SqlServerTestModelBuilderExtensions
                     );
                 break;
             case IInfrastructure<TableBuilder> nongenericBuilder:
-                nongenericBuilder
-                    .Instance
+                nongenericBuilder.Instance
                     .IsTemporal(b =>
                         buildAction(
                             new SqlServerModelBuilderTestBase.NonGenericTestTemporalTableBuilder<TEntity>(
@@ -175,8 +173,7 @@ public static class SqlServerTestModelBuilderExtensions
             case IInfrastructure<
                 OwnedNavigationTableBuilder<TOwnerEntity, TDependentEntity>
             > genericBuilder:
-                genericBuilder
-                    .Instance
+                genericBuilder.Instance
                     .IsTemporal(b =>
                         buildAction(
                             new SqlServerModelBuilderTestBase.GenericTestOwnedNavigationTemporalTableBuilder<
@@ -187,8 +184,7 @@ public static class SqlServerTestModelBuilderExtensions
                     );
                 break;
             case IInfrastructure<OwnedNavigationTableBuilder> nongenericBuilder:
-                nongenericBuilder
-                    .Instance
+                nongenericBuilder.Instance
                     .IsTemporal(b =>
                         buildAction(
                             new SqlServerModelBuilderTestBase.NonGenericTestOwnedNavigationTemporalTableBuilder<

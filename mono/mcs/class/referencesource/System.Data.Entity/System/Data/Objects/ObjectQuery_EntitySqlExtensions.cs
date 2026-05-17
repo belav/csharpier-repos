@@ -103,8 +103,7 @@ namespace System.Data.Objects
             // If the entities in the user's result spans multiple assemblies, the
             // user must manually call LoadFromAssembly. *GetCallingAssembly returns
             // the assembly of the method that invoked the currently executing method.
-            context
-                .MetadataWorkspace
+            context.MetadataWorkspace
                 .ImplicitLoadAssemblyForType(
                     typeof(T),
                     System.Reflection.Assembly.GetCallingAssembly()
@@ -149,8 +148,7 @@ namespace System.Data.Objects
             // If the entities in the user's result spans multiple assemblies, the
             // user must manually call LoadFromAssembly. *GetCallingAssembly returns
             // the assembly of the method that invoked the currently executing method.
-            context
-                .MetadataWorkspace
+            context.MetadataWorkspace
                 .ImplicitLoadAssemblyForType(
                     typeof(T),
                     System.Reflection.Assembly.GetCallingAssembly()
@@ -212,8 +210,7 @@ namespace System.Data.Objects
             // If the entities in the user's result spans multiple assemblies, the
             // user must manually call LoadFromAssembly. *GetCallingAssembly returns
             // the assembly of the method that invoked the currently executing method.
-            context
-                .MetadataWorkspace
+            context.MetadataWorkspace
                 .ImplicitLoadAssemblyForType(
                     typeof(T),
                     System.Reflection.Assembly.GetCallingAssembly()
@@ -434,8 +431,7 @@ namespace System.Data.Objects
             )
             {
                 throw EntityUtil.EntitySqlError(
-                    System
-                        .Data
+                    System.Data
                         .Entity
                         .Strings
                         .ObjectQuery_QueryBuilder_InvalidResultType(typeof(TResultType).FullName)

@@ -68,11 +68,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
                     reportAnError =
                         (object)leastOverridden
-                            != overriding
-                                .ContainingAssembly
+                            != overriding.ContainingAssembly
                                 .GetSpecialTypeMember(overriddenSpecialMember)
-                        && leastOverridden
-                            .ReturnType
+                        && leastOverridden.ReturnType
                             .Equals(overriding.ReturnType, TypeCompareKind.AllIgnoreOptions);
                 }
             }

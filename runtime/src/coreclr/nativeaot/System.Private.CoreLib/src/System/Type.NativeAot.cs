@@ -58,8 +58,7 @@ namespace System
                 if (runtimeTypeCache != null)
                     return runtimeTypeCache;
 
-                RuntimeType? type = FrozenObjectHeapManager
-                    .Instance
+                RuntimeType? type = FrozenObjectHeapManager.Instance
                     .TryAllocateObject<RuntimeType>();
                 if (type == null)
                     throw new OutOfMemoryException();

@@ -378,8 +378,7 @@ namespace System.Collections.ObjectModel
                     }
                     else
                     {
-                        System
-                            .Threading
+                        System.Threading
                             .Interlocked
                             .CompareExchange<Object>(ref m_syncRoot, new Object(), null);
                     }
@@ -568,8 +567,7 @@ namespace System.Collections.ObjectModel
                         }
                         else
                         {
-                            System
-                                .Threading
+                            System.Threading
                                 .Interlocked
                                 .CompareExchange<Object>(ref m_syncRoot, new Object(), null);
                         }
@@ -696,8 +694,7 @@ namespace System.Collections.ObjectModel
                         }
                         else
                         {
-                            System
-                                .Threading
+                            System.Threading
                                 .Interlocked
                                 .CompareExchange<Object>(ref m_syncRoot, new Object(), null);
                         }

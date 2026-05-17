@@ -979,8 +979,7 @@ namespace System.Json
         {
             try
             {
-                valueNumber = System
-                    .Convert
+                valueNumber = System.Convert
                     .ChangeType(valueObject, type, CultureInfo.InvariantCulture);
                 return ReadAsFailureKind.NoFailure;
             }

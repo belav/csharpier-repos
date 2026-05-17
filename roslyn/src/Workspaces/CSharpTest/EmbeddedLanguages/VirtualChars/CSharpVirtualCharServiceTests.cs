@@ -37,8 +37,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.VirtualChars
             }
             else if (expression is InterpolatedStringExpressionSyntax interpolation)
             {
-                return interpolation
-                    .Contents
+                return interpolation.Contents
                     .OfType<InterpolatedStringTextSyntax>()
                     .Select(t => t.TextToken);
             }
@@ -83,8 +82,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.VirtualChars
 
             foreach (var token in tokens)
             {
-                var virtualChars = CSharpVirtualCharService
-                    .Instance
+                var virtualChars = CSharpVirtualCharService.Instance
                     .TryConvertToVirtualChars(token);
                 Assert.True(virtualChars.IsDefault);
             }
@@ -135,12 +133,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.VirtualChars
             var tree = SyntaxFactory.ParseSyntaxTree(text);
             var compilationUnit = (CompilationUnitSyntax)tree.GetRoot();
             var namespaceDeclaration = (NamespaceDeclarationSyntax)compilationUnit.Members[0];
-            var skippedTrivia = namespaceDeclaration
-                .OpenBraceToken
+            var skippedTrivia = namespaceDeclaration.OpenBraceToken
                 .TrailingTrivia
                 .Single(t => t.Kind() is SyntaxKind.SkippedTokensTrivia);
-            var virtualChars = CSharpVirtualCharService
-                .Instance
+            var virtualChars = CSharpVirtualCharService.Instance
                 .TryConvertToVirtualChars(skippedTrivia.Token);
             Assert.True(virtualChars.IsDefault);
         }

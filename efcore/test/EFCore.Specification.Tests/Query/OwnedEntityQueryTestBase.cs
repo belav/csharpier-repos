@@ -19,8 +19,7 @@ public abstract class OwnedEntityQueryTestBase : NonSharedModelTestBase
 
         using (var context = contextFactory.CreateContext())
         {
-            var query = context
-                .Entities
+            var query = context.Entities
                 .AsNoTracking()
                 .Select(e => new
                 {
@@ -99,8 +98,7 @@ public abstract class OwnedEntityQueryTestBase : NonSharedModelTestBase
 
         using (var context = contextFactory.CreateContext())
         {
-            var results = await context
-                .Contacts
+            var results = await context.Contacts
                 .Select(contact => new ContactDto22089
                 {
                     Id = contact.Id,
@@ -163,11 +161,12 @@ public abstract class OwnedEntityQueryTestBase : NonSharedModelTestBase
             {
                 Id = b.Id,
                 TotalComments = b.Posts.Sum(p => p.CommentsCount),
-                Posts = b.Posts.Select(p => new PostDto24133
-                {
-                    Title = p.Title,
-                    CommentsCount = p.CommentsCount,
-                }),
+                Posts = b.Posts
+                    .Select(p => new PostDto24133
+                    {
+                        Title = p.Title,
+                        CommentsCount = p.CommentsCount,
+                    }),
             });
 
         var result = async ? await query.ToListAsync() : query.ToList();
@@ -230,8 +229,7 @@ public abstract class OwnedEntityQueryTestBase : NonSharedModelTestBase
         var contextFactory = await InitializeAsync<MyContext18582>(seed: c => c.Seed());
 
         using var context = contextFactory.CreateContext();
-        var query = context
-            .Warehouses
+        var query = context.Warehouses
             .Select(x => new WarehouseModel
             {
                 WarehouseCode = x.WarehouseCode,
@@ -308,8 +306,7 @@ public abstract class OwnedEntityQueryTestBase : NonSharedModelTestBase
         bool async
     )
     {
-        var query = context
-            .Companies
+        var query = context.Companies
             .Where(e => e.CustomerData != null)
             .OrderBy(e => e.Id)
             .Take(10);
@@ -326,8 +323,7 @@ public abstract class OwnedEntityQueryTestBase : NonSharedModelTestBase
         bool async
     )
     {
-        var query = context
-            .Owners
+        var query = context.Owners
             .Where(e => e.OwnedEntity.CustomerData != null)
             .OrderBy(e => e.Id)
             .Take(10);

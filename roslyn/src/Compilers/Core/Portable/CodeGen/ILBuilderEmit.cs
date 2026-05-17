@@ -75,10 +75,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
 
         internal void EmitGreatestMethodToken()
         {
-            var token = Cci.MetadataWriter.GetRawToken(
-                Cci.MetadataWriter.RawTokenEncoding.GreatestMethodDefinitionRowId,
-                0
-            );
+            var token = Cci.MetadataWriter
+                .GetRawToken(Cci.MetadataWriter.RawTokenEncoding.GreatestMethodDefinitionRowId, 0);
             this.GetCurrentWriter().WriteUInt32(token);
         }
 
@@ -90,10 +88,11 @@ namespace Microsoft.CodeAnalysis.CodeGen
 
         internal void EmitSourceDocumentIndexToken(Cci.DebugSourceDocument document)
         {
-            var token = Cci.MetadataWriter.GetRawToken(
-                Cci.MetadataWriter.RawTokenEncoding.DocumentRowId,
-                module?.GetSourceDocumentIndexForIL(document) ?? 0xFFFF
-            );
+            var token = Cci.MetadataWriter
+                .GetRawToken(
+                    Cci.MetadataWriter.RawTokenEncoding.DocumentRowId,
+                    module?.GetSourceDocumentIndexForIL(document) ?? 0xFFFF
+                );
             this.GetCurrentWriter().WriteUInt32(token);
         }
 

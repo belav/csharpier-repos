@@ -107,8 +107,7 @@ namespace System.ServiceModel.Configuration
             }
             if (binding.GetType() != this.BindingElementType)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(
                         SR.GetString(
                             SR.ConfigInvalidTypeForBinding,
@@ -142,8 +141,7 @@ namespace System.ServiceModel.Configuration
             }
             if (binding.GetType() != this.BindingElementType)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(
                         SR.GetString(
                             SR.ConfigInvalidTypeForBinding,

@@ -130,8 +130,7 @@ namespace System.Threading
                             && NativeRuntimeEventSource.Log.IsEnabled()
                         )
                         {
-                            NativeRuntimeEventSource
-                                .Log
+                            NativeRuntimeEventSource.Log
                                 .ThreadPoolWorkingThreadCount(
                                     (uint)
                                         threadPoolInstance.GetAndResetHighWatermarkCountOfThreadsProcessingUserCallbacks()
@@ -177,14 +176,12 @@ namespace System.Threading
                                     short newNumThreadsGoal = (short)(counts.NumProcessingWork + 1);
                                     newCounts.NumThreadsGoal = newNumThreadsGoal;
 
-                                    ThreadCounts countsBeforeUpdate = threadPoolInstance
-                                        ._separated
+                                    ThreadCounts countsBeforeUpdate = threadPoolInstance._separated
                                         .counts
                                         .InterlockedCompareExchange(newCounts, counts);
                                     if (countsBeforeUpdate == counts)
                                     {
-                                        HillClimbing
-                                            .ThreadPoolHillClimber
+                                        HillClimbing.ThreadPoolHillClimber
                                             .ForceChange(
                                                 newNumThreadsGoal,
                                                 HillClimbing.StateOrTransition.Starvation

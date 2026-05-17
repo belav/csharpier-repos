@@ -126,8 +126,7 @@ namespace System.Threading.Tasks.Dataflow
             Action<ISourceBlock<TOutput>, int>? onItemsRemoved = null;
             if (dataflowBlockOptions.BoundedCapacity > 0)
                 onItemsRemoved = static (owningSource, count) =>
-                    ((TransformBlock<TInput, TOutput>)owningSource)
-                        ._target
+                    ((TransformBlock<TInput, TOutput>)owningSource)._target
                         .ChangeBoundingCount(-count);
 
             // Initialize source component.
@@ -135,8 +134,7 @@ namespace System.Threading.Tasks.Dataflow
                 this,
                 dataflowBlockOptions,
                 static owningSource =>
-                    ((TransformBlock<TInput, TOutput>)owningSource)
-                        ._target
+                    ((TransformBlock<TInput, TOutput>)owningSource)._target
                         .Complete(exception: null, dropPendingMessages: true),
                 onItemsRemoved
             );
@@ -182,8 +180,7 @@ namespace System.Threading.Tasks.Dataflow
             // As the target has completed, and as the target synchronously pushes work
             // through the reordering buffer when async processing completes,
             // we know for certain that no more messages will need to be sent to the source.
-            _target
-                .Completion
+            _target.Completion
                 .ContinueWith(
                     static (completed, state) =>
                     {
@@ -202,8 +199,7 @@ namespace System.Threading.Tasks.Dataflow
             // In those cases we need to fault the target half to drop its buffered messages and to release its
             // reservations. This should not create an infinite loop, because all our implementations are designed
             // to handle multiple completion requests and to carry over only one.
-            _source
-                .Completion
+            _source.Completion
                 .ContinueWith(
                     static (completed, state) =>
                     {

@@ -114,8 +114,7 @@ namespace Microsoft.CodeAnalysis.GoToDefinition
         {
             bool succeeded;
 
-            var indicatorFactory = document
-                .Project
+            var indicatorFactory = document.Project
                 .Solution
                 .Services
                 .GetRequiredService<IBackgroundWorkIndicatorFactory>();
@@ -152,8 +151,7 @@ namespace Microsoft.CodeAnalysis.GoToDefinition
                 backgroundIndicator.CancelOnFocusLost = false;
                 succeeded =
                     definitionLocation != null
-                    && await definitionLocation
-                        .Location
+                    && await definitionLocation.Location
                         .TryNavigateToAsync(
                             _threadingContext,
                             new NavigationOptions(PreferProvisionalTab: true, ActivateTab: true),
@@ -164,12 +162,10 @@ namespace Microsoft.CodeAnalysis.GoToDefinition
 
             if (!succeeded)
             {
-                await _threadingContext
-                    .JoinableTaskFactory
+                await _threadingContext.JoinableTaskFactory
                     .SwitchToMainThreadAsync(CancellationToken.None);
 
-                var notificationService = document
-                    .Project
+                var notificationService = document.Project
                     .Solution
                     .Services
                     .GetRequiredService<INotificationService>();

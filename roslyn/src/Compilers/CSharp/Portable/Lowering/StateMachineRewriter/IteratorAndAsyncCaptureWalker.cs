@@ -178,8 +178,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 !parameter.Type.IsRestrictedType(),
                 LocalSymbol { IsConst: false, IsPinned: false, IsRef: false } local =>
                 // hoist all user-defined locals and long-lived temps that can be hoisted:
-                local
-                    .SynthesizedKind
+                local.SynthesizedKind
                     .MustSurviveStateMachineSuspension() && !local.Type.IsRestrictedType(),
                 _ => false,
             };

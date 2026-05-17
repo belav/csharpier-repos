@@ -60,8 +60,7 @@ namespace System.Workflow.Runtime.Hosting
 
         protected internal override void Start()
         {
-            WorkflowTrace
-                .Host
+            WorkflowTrace.Host
                 .TraceEvent(
                     TraceEventType.Information,
                     0,
@@ -73,8 +72,8 @@ namespace System.Workflow.Runtime.Hosting
             // check in the common section
             if ((!_ignoreCommonEnableRetries) && (null != base.Runtime))
             {
-                NameValueConfigurationCollection commonConfigurationParameters =
-                    base.Runtime.CommonParameters;
+                NameValueConfigurationCollection commonConfigurationParameters = base.Runtime
+                    .CommonParameters;
                 if (commonConfigurationParameters != null)
                 {
                     // Then scan for connection string in the common configuration parameters section
@@ -96,8 +95,7 @@ namespace System.Workflow.Runtime.Hosting
 
         protected override void OnStopped()
         {
-            WorkflowTrace
-                .Host
+            WorkflowTrace.Host
                 .TraceEvent(
                     TraceEventType.Information,
                     0,
@@ -131,8 +129,7 @@ namespace System.Workflow.Runtime.Hosting
                 }
                 catch (Exception e)
                 {
-                    WorkflowTrace
-                        .Host
+                    WorkflowTrace.Host
                         .TraceEvent(
                             TraceEventType.Error,
                             0,
@@ -142,8 +139,7 @@ namespace System.Workflow.Runtime.Hosting
 
                     if (dbRetry.TryDoRetry(ref retryCounter))
                     {
-                        WorkflowTrace
-                            .Host
+                        WorkflowTrace.Host
                             .TraceEvent(
                                 TraceEventType.Information,
                                 0,

@@ -47,8 +47,7 @@ namespace System.ServiceModel.Transactions
         {
             if (info.Context.ProtocolVersion != this.protocolVersion)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentException(SR.GetString(SR.InvalidWsatProtocolVersion))
                     );
@@ -86,17 +85,17 @@ namespace System.ServiceModel.Transactions
             CoordinationContext localContext = info.Context;
 
             if (
-                !this.wsatConfig.IsLocalRegistrationService(
-                    localContext.RegistrationService,
-                    this.protocolVersion
-                )
+                !this.wsatConfig
+                    .IsLocalRegistrationService(
+                        localContext.RegistrationService,
+                        this.protocolVersion
+                    )
             )
             {
                 // Our WS-AT protocol service for the context's protocol version should be enabled
                 if (!this.wsatConfig.IsProtocolServiceEnabled(this.protocolVersion))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new TransactionException(
                                 SR.GetString(SR.WsatProtocolServiceDisabled, this.protocolVersion)
@@ -107,8 +106,7 @@ namespace System.ServiceModel.Transactions
                 // We should have enabled inbound transactions
                 if (!this.wsatConfig.InboundEnabled)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new TransactionException(SR.GetString(SR.InboundTransactionsDisabled))
                         );
@@ -117,8 +115,7 @@ namespace System.ServiceModel.Transactions
                 // The sender should have enabled both WS-AT and outbound transactions
                 if (this.wsatConfig.IsDisabledRegistrationService(localContext.RegistrationService))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new TransactionException(SR.GetString(SR.SourceTransactionsDisabled))
                         );
@@ -131,8 +128,7 @@ namespace System.ServiceModel.Transactions
             Guid transactionId = localContext.LocalTransactionId;
             if (transactionId == Guid.Empty)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new TransactionException(
                             SR.GetString(SR.InvalidCoordinationContextTransactionId)
@@ -182,8 +178,7 @@ namespace System.ServiceModel.Transactions
             catch (WsatFaultException e)
             {
                 DiagnosticUtility.TraceHandledException(e, TraceEventType.Error);
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new TransactionException(
                             SR.GetString(SR.UnmarshalTransactionFaulted, e.Message),
@@ -194,8 +189,7 @@ namespace System.ServiceModel.Transactions
             catch (WsatSendFailureException e)
             {
                 DiagnosticUtility.TraceHandledException(e, TraceEventType.Error);
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new TransactionManagerCommunicationException(
                             SR.GetString(SR.TMCommunicationError),
@@ -218,12 +212,10 @@ namespace System.ServiceModel.Transactions
                 ActivationProxy proxy = GetActivationProxy();
                 EndpointAddress address = proxy.To;
 
-                EndpointAddress localActivationService = this.wsatConfig.LocalActivationService(
-                    this.protocolVersion
-                );
-                EndpointAddress remoteActivationService = this.wsatConfig.RemoteActivationService(
-                    this.protocolVersion
-                );
+                EndpointAddress localActivationService = this.wsatConfig
+                    .LocalActivationService(this.protocolVersion);
+                EndpointAddress remoteActivationService = this.wsatConfig
+                    .RemoteActivationService(this.protocolVersion);
 
                 try
                 {
@@ -366,8 +358,7 @@ namespace System.ServiceModel.Transactions
             catch (CreateChannelFailureException e)
             {
                 DiagnosticUtility.TraceHandledException(e, TraceEventType.Error);
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new TransactionException(SR.GetString(SR.WsatProxyCreationFailed), e)
                     );
@@ -407,8 +398,7 @@ namespace System.ServiceModel.Transactions
                         catch (MessagingInitializationException e)
                         {
                             DiagnosticUtility.TraceHandledException(e, TraceEventType.Error);
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
                                     new TransactionException(
                                         SR.GetString(SR.WsatMessagingInitializationFailed),

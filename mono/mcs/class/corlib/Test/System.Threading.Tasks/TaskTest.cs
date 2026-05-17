@@ -251,18 +251,20 @@ namespace MonoTests.System.Threading.Tasks
             var mre = new ManualResetEventSlim(false);
             var tasks = new Task[]
             {
-                Task.Factory.StartNew(
-                    delegate
-                    {
-                        mre.Wait(5000);
-                    }
-                ),
-                Task.Factory.StartNew(
-                    delegate
-                    {
-                        throw new ApplicationException();
-                    }
-                ),
+                Task.Factory
+                    .StartNew(
+                        delegate
+                        {
+                            mre.Wait(5000);
+                        }
+                    ),
+                Task.Factory
+                    .StartNew(
+                        delegate
+                        {
+                            throw new ApplicationException();
+                        }
+                    ),
             };
 
             Assert.AreEqual(1, Task.WaitAny(tasks, 3000), "#1");
@@ -276,15 +278,16 @@ namespace MonoTests.System.Threading.Tasks
         public void WaitAny_SingleCanceled()
         {
             var src = new CancellationTokenSource();
-            var t = Task.Factory.StartNew(
-                () =>
-                {
-                    Thread.Sleep(200);
-                    src.Cancel();
-                    src.Token.ThrowIfCancellationRequested();
-                },
-                src.Token
-            );
+            var t = Task.Factory
+                .StartNew(
+                    () =>
+                    {
+                        Thread.Sleep(200);
+                        src.Cancel();
+                        src.Token.ThrowIfCancellationRequested();
+                    },
+                    src.Token
+                );
             Assert.AreEqual(0, Task.WaitAny(new[] { t }));
         }
 
@@ -293,45 +296,48 @@ namespace MonoTests.System.Threading.Tasks
             CountdownEvent cde = new CountdownEvent(3);
             var tasks = new[]
             {
-                Task.Factory.StartNew(
-                    delegate
-                    {
-                        try
+                Task.Factory
+                    .StartNew(
+                        delegate
                         {
-                            throw new ApplicationException();
+                            try
+                            {
+                                throw new ApplicationException();
+                            }
+                            finally
+                            {
+                                cde.Signal();
+                            }
                         }
-                        finally
+                    ),
+                Task.Factory
+                    .StartNew(
+                        delegate
                         {
-                            cde.Signal();
+                            try
+                            {
+                                throw new ApplicationException();
+                            }
+                            finally
+                            {
+                                cde.Signal();
+                            }
                         }
-                    }
-                ),
-                Task.Factory.StartNew(
-                    delegate
-                    {
-                        try
+                    ),
+                Task.Factory
+                    .StartNew(
+                        delegate
                         {
-                            throw new ApplicationException();
+                            try
+                            {
+                                throw new ApplicationException();
+                            }
+                            finally
+                            {
+                                cde.Signal();
+                            }
                         }
-                        finally
-                        {
-                            cde.Signal();
-                        }
-                    }
-                ),
-                Task.Factory.StartNew(
-                    delegate
-                    {
-                        try
-                        {
-                            throw new ApplicationException();
-                        }
-                        finally
-                        {
-                            cde.Signal();
-                        }
-                    }
-                ),
+                    ),
             };
 
             Assert.IsTrue(cde.Wait(1000), "#1");
@@ -395,12 +401,13 @@ namespace MonoTests.System.Threading.Tasks
 
                 for (int i = 0; i < tasks.Length; i++)
                 {
-                    tasks[i] = Task.Factory.StartNew(
-                        delegate
-                        {
-                            Thread.Sleep(0);
-                        }
-                    );
+                    tasks[i] = Task.Factory
+                        .StartNew(
+                            delegate
+                            {
+                                Thread.Sleep(0);
+                            }
+                        );
                 }
                 AddToCleanup(tasks);
 
@@ -445,38 +452,41 @@ namespace MonoTests.System.Threading.Tasks
             var mre = new ManualResetEvent(false);
             var tasks = new[]
             {
-                Task.Factory.StartNew(
-                    delegate
-                    {
-                        Assert.IsTrue(mre.WaitOne(10000), "#0");
-                    }
-                ),
-                Task.Factory.StartNew(
-                    delegate
-                    {
-                        try
+                Task.Factory
+                    .StartNew(
+                        delegate
                         {
-                            throw new ApplicationException();
+                            Assert.IsTrue(mre.WaitOne(10000), "#0");
                         }
-                        finally
+                    ),
+                Task.Factory
+                    .StartNew(
+                        delegate
                         {
-                            cde.Signal();
+                            try
+                            {
+                                throw new ApplicationException();
+                            }
+                            finally
+                            {
+                                cde.Signal();
+                            }
                         }
-                    }
-                ),
-                Task.Factory.StartNew(
-                    delegate
-                    {
-                        try
+                    ),
+                Task.Factory
+                    .StartNew(
+                        delegate
                         {
-                            throw new ApplicationException();
+                            try
+                            {
+                                throw new ApplicationException();
+                            }
+                            finally
+                            {
+                                cde.Signal();
+                            }
                         }
-                        finally
-                        {
-                            cde.Signal();
-                        }
-                    }
-                ),
+                    ),
             };
 
             Assert.IsTrue(cde.Wait(5000), "#1");
@@ -502,38 +512,41 @@ namespace MonoTests.System.Threading.Tasks
             var mre = new ManualResetEvent(false);
             var tasks = new[]
             {
-                Task.Factory.StartNew(
-                    delegate
-                    {
-                        try
+                Task.Factory
+                    .StartNew(
+                        delegate
                         {
-                            throw new ApplicationException();
+                            try
+                            {
+                                throw new ApplicationException();
+                            }
+                            finally
+                            {
+                                cde.Signal();
+                            }
                         }
-                        finally
+                    ),
+                Task.Factory
+                    .StartNew(
+                        delegate
                         {
-                            cde.Signal();
+                            try
+                            {
+                                throw new ApplicationException();
+                            }
+                            finally
+                            {
+                                cde.Signal();
+                            }
                         }
-                    }
-                ),
-                Task.Factory.StartNew(
-                    delegate
-                    {
-                        try
+                    ),
+                Task.Factory
+                    .StartNew(
+                        delegate
                         {
-                            throw new ApplicationException();
+                            mre.WaitOne();
                         }
-                        finally
-                        {
-                            cde.Signal();
-                        }
-                    }
-                ),
-                Task.Factory.StartNew(
-                    delegate
-                    {
-                        mre.WaitOne();
-                    }
-                ),
+                    ),
             };
 
             Assert.IsTrue(cde.Wait(1000), "#1");
@@ -887,12 +900,13 @@ namespace MonoTests.System.Threading.Tasks
                 {
                     bool result = false;
 
-                    Task t = Task.Factory.StartNew(
-                        delegate
-                        {
-                            throw new Exception("foo");
-                        }
-                    );
+                    Task t = Task.Factory
+                        .StartNew(
+                            delegate
+                            {
+                                throw new Exception("foo");
+                            }
+                        );
                     Task cont = t.ContinueWith(
                         delegate
                         {
@@ -930,9 +944,10 @@ namespace MonoTests.System.Threading.Tasks
                 {
                     bool result = false;
 
-                    var t = Task.Factory.StartNew(() =>
-                        Task.Factory.StartNew(() => { }, TaskCreationOptions.AttachedToParent)
-                    );
+                    var t = Task.Factory
+                        .StartNew(() =>
+                            Task.Factory.StartNew(() => { }, TaskCreationOptions.AttachedToParent)
+                        );
 
                     var mre = new ManualResetEvent(false);
                     t.ContinueWith(l =>
@@ -981,24 +996,27 @@ namespace MonoTests.System.Threading.Tasks
                         r2 = false,
                         r3 = false;
 
-                    Task t1 = Task.Factory.StartNew(
-                        delegate
-                        {
-                            r1 = true;
-                        }
-                    );
-                    Task t2 = Task.Factory.StartNew(
-                        delegate
-                        {
-                            r2 = true;
-                        }
-                    );
-                    Task t3 = Task.Factory.StartNew(
-                        delegate
-                        {
-                            r3 = true;
-                        }
-                    );
+                    Task t1 = Task.Factory
+                        .StartNew(
+                            delegate
+                            {
+                                r1 = true;
+                            }
+                        );
+                    Task t2 = Task.Factory
+                        .StartNew(
+                            delegate
+                            {
+                                r2 = true;
+                            }
+                        );
+                    Task t3 = Task.Factory
+                        .StartNew(
+                            delegate
+                            {
+                                r3 = true;
+                            }
+                        );
 
                     t1.Wait(2000);
                     t2.Wait(2000);
@@ -1024,34 +1042,38 @@ namespace MonoTests.System.Threading.Tasks
                     var mre = new ManualResetEventSlim(false);
                     var mreStart = new ManualResetEventSlim(false);
 
-                    Task t = Task.Factory.StartNew(
-                        delegate
-                        {
-                            Task.Factory.StartNew(
-                                delegate
-                                {
-                                    mre.Wait(300);
-                                    r1 = true;
-                                },
-                                TaskCreationOptions.AttachedToParent
-                            );
-                            Task.Factory.StartNew(
-                                delegate
-                                {
-                                    r2 = true;
-                                },
-                                TaskCreationOptions.AttachedToParent
-                            );
-                            Task.Factory.StartNew(
-                                delegate
-                                {
-                                    r3 = true;
-                                },
-                                TaskCreationOptions.AttachedToParent
-                            );
-                            mreStart.Set();
-                        }
-                    );
+                    Task t = Task.Factory
+                        .StartNew(
+                            delegate
+                            {
+                                Task.Factory
+                                    .StartNew(
+                                        delegate
+                                        {
+                                            mre.Wait(300);
+                                            r1 = true;
+                                        },
+                                        TaskCreationOptions.AttachedToParent
+                                    );
+                                Task.Factory
+                                    .StartNew(
+                                        delegate
+                                        {
+                                            r2 = true;
+                                        },
+                                        TaskCreationOptions.AttachedToParent
+                                    );
+                                Task.Factory
+                                    .StartNew(
+                                        delegate
+                                        {
+                                            r3 = true;
+                                        },
+                                        TaskCreationOptions.AttachedToParent
+                                    );
+                                mreStart.Set();
+                            }
+                        );
 
                     mreStart.Wait(300);
                     Assert.IsFalse(t.Wait(10), "#0a");
@@ -1074,31 +1096,39 @@ namespace MonoTests.System.Threading.Tasks
             Task nested = null;
             var mre = new ManualResetEvent(false);
 
-            parent_wfc = Task.Factory.StartNew(() =>
-            {
-                nested = Task.Factory
-                    .StartNew(
-                        () =>
-                        {
-                            Assert.IsTrue(mre.WaitOne(4000), "parent_wfc needs to be set first");
-                            Assert.IsFalse(parent_wfc.Wait(10), "#1a");
-                            Assert.AreEqual(
-                                TaskStatus.WaitingForChildrenToComplete,
-                                parent_wfc.Status,
-                                "#1b"
-                            );
-                        },
-                        TaskCreationOptions.AttachedToParent
-                    )
-                    .ContinueWith(
-                        l =>
-                        {
-                            Assert.IsTrue(parent_wfc.Wait(2000), "#2a");
-                            Assert.AreEqual(TaskStatus.RanToCompletion, parent_wfc.Status, "#2b");
-                        },
-                        TaskContinuationOptions.ExecuteSynchronously
-                    );
-            });
+            parent_wfc = Task.Factory
+                .StartNew(() =>
+                {
+                    nested = Task.Factory
+                        .StartNew(
+                            () =>
+                            {
+                                Assert.IsTrue(
+                                    mre.WaitOne(4000),
+                                    "parent_wfc needs to be set first"
+                                );
+                                Assert.IsFalse(parent_wfc.Wait(10), "#1a");
+                                Assert.AreEqual(
+                                    TaskStatus.WaitingForChildrenToComplete,
+                                    parent_wfc.Status,
+                                    "#1b"
+                                );
+                            },
+                            TaskCreationOptions.AttachedToParent
+                        )
+                        .ContinueWith(
+                            l =>
+                            {
+                                Assert.IsTrue(parent_wfc.Wait(2000), "#2a");
+                                Assert.AreEqual(
+                                    TaskStatus.RanToCompletion,
+                                    parent_wfc.Status,
+                                    "#2b"
+                                );
+                            },
+                            TaskContinuationOptions.ExecuteSynchronously
+                        );
+                });
 
             mre.Set();
             Assert.IsTrue(parent_wfc.Wait(2000), "#3");
@@ -1159,23 +1189,26 @@ namespace MonoTests.System.Threading.Tasks
         public void WaitChildWithNesting()
         {
             var result = false;
-            var t = Task.Factory.StartNew(() =>
-            {
-                Task.Factory.StartNew(
-                    () =>
-                    {
-                        Task.Factory.StartNew(
+            var t = Task.Factory
+                .StartNew(() =>
+                {
+                    Task.Factory
+                        .StartNew(
                             () =>
                             {
-                                Thread.Sleep(500);
-                                result = true;
+                                Task.Factory
+                                    .StartNew(
+                                        () =>
+                                        {
+                                            Thread.Sleep(500);
+                                            result = true;
+                                        },
+                                        TaskCreationOptions.AttachedToParent
+                                    );
                             },
                             TaskCreationOptions.AttachedToParent
                         );
-                    },
-                    TaskCreationOptions.AttachedToParent
-                );
-            });
+                });
             Assert.IsTrue(t.Wait(4000), "#1");
             Assert.IsTrue(result, "#2");
         }
@@ -1189,18 +1222,19 @@ namespace MonoTests.System.Threading.Tasks
                     var evt = new ManualResetEventSlim();
                     var monitor = new object();
                     int finished = 0;
-                    var t = Task.Factory.StartNew(
-                        delegate
-                        {
-                            var r = evt.Wait(5000);
-                            lock (monitor)
+                    var t = Task.Factory
+                        .StartNew(
+                            delegate
                             {
-                                finished++;
-                                Monitor.Pulse(monitor);
+                                var r = evt.Wait(5000);
+                                lock (monitor)
+                                {
+                                    finished++;
+                                    Monitor.Pulse(monitor);
+                                }
+                                return r ? 1 : 10; //1 -> ok, 10 -> evt wait failed
                             }
-                            return r ? 1 : 10; //1 -> ok, 10 -> evt wait failed
-                        }
-                    );
+                        );
                     var cntd = new CountdownEvent(2);
                     var cntd2 = new CountdownEvent(2);
 
@@ -1366,14 +1400,15 @@ namespace MonoTests.System.Threading.Tasks
             var result = false;
             var t = new Task(() =>
             {
-                Task.Factory.StartNew(
-                    () =>
-                    {
-                        Thread.Sleep(500);
-                        result = true;
-                    },
-                    TaskCreationOptions.AttachedToParent
-                );
+                Task.Factory
+                    .StartNew(
+                        () =>
+                        {
+                            Thread.Sleep(500);
+                            result = true;
+                        },
+                        TaskCreationOptions.AttachedToParent
+                    );
             });
             t.RunSynchronously();
             Assert.IsTrue(result);
@@ -1406,10 +1441,11 @@ namespace MonoTests.System.Threading.Tasks
             Thread t = new Thread(
                 delegate()
                 {
-                    Task.Factory.StartNew(() =>
-                    {
-                        throw inner;
-                    });
+                    Task.Factory
+                        .StartNew(() =>
+                        {
+                            throw inner;
+                        });
                 }
             );
             t.Start();
@@ -1471,10 +1507,11 @@ namespace MonoTests.System.Threading.Tasks
             var evt = new ManualResetEventSlim();
             bool result = false;
 
-            var task = Task.Factory.StartNew(() =>
-            {
-                Assert.IsTrue(evt.Wait(2000), "#1");
-            });
+            var task = Task.Factory
+                .StartNew(() =>
+                {
+                    Assert.IsTrue(evt.Wait(2000), "#1");
+                });
             var cont = task.ContinueWith(
                 t => result = true,
                 token,
@@ -1648,14 +1685,15 @@ namespace MonoTests.System.Threading.Tasks
                     },
                     TaskCreationOptions.AttachedToParent
                 ).RunSynchronously();
-                Task.Factory.StartNew(
-                    () =>
-                    {
-                        Thread.Sleep(100);
-                        r2 = true;
-                    },
-                    TaskCreationOptions.AttachedToParent
-                );
+                Task.Factory
+                    .StartNew(
+                        () =>
+                        {
+                            Thread.Sleep(100);
+                            r2 = true;
+                        },
+                        TaskCreationOptions.AttachedToParent
+                    );
             });
             t.RunSynchronously();
 
@@ -2369,13 +2407,14 @@ namespace MonoTests.System.Threading.Tasks
         [Test]
         public void ContinueWith_StateValue()
         {
-            var t = Task.Factory.StartNew(
-                l =>
-                {
-                    Assert.AreEqual(1, l, "a-1");
-                },
-                1
-            );
+            var t = Task.Factory
+                .StartNew(
+                    l =>
+                    {
+                        Assert.AreEqual(1, l, "a-1");
+                    },
+                    1
+                );
 
             var c = t.ContinueWith(
                 (a, b) =>
@@ -2406,8 +2445,7 @@ namespace MonoTests.System.Threading.Tasks
         [Test]
         public void ContinueWith_StateValueGeneric()
         {
-            var t = Task<int>
-                .Factory
+            var t = Task<int>.Factory
                 .StartNew(
                     l =>
                     {
@@ -2588,16 +2626,15 @@ namespace MonoTests.System.Threading.Tasks
         {
             var mre = new ManualResetEventSlim();
             Task nested = null;
-            Task parent = Task.Factory.StartNew(
-                () =>
-                {
-                    nested = Task.Factory.StartNew(
-                        () => mre.Wait(2000),
-                        TaskCreationOptions.AttachedToParent
-                    );
-                },
-                TaskCreationOptions.DenyChildAttach
-            );
+            Task parent = Task.Factory
+                .StartNew(
+                    () =>
+                    {
+                        nested = Task.Factory
+                            .StartNew(() => mre.Wait(2000), TaskCreationOptions.AttachedToParent);
+                    },
+                    TaskCreationOptions.DenyChildAttach
+                );
             Assert.IsTrue(parent.Wait(1000), "#1");
             mre.Set();
             Assert.IsTrue(nested.Wait(2000), "#2");
@@ -2628,19 +2665,21 @@ namespace MonoTests.System.Threading.Tasks
             var ranOnDefault = false;
             var scheduler = new SynchronousScheduler();
 
-            Task parent = Task.Factory.StartNew(
-                () =>
-                {
-                    Task.Factory.StartNew(() =>
+            Task parent = Task.Factory
+                .StartNew(
+                    () =>
                     {
-                        ranOnDefault = Thread.CurrentThread.IsThreadPoolThread;
-                        mre.Set();
-                    });
-                },
-                CancellationToken.None,
-                TaskCreationOptions.HideScheduler,
-                scheduler
-            );
+                        Task.Factory
+                            .StartNew(() =>
+                            {
+                                ranOnDefault = Thread.CurrentThread.IsThreadPoolThread;
+                                mre.Set();
+                            });
+                    },
+                    CancellationToken.None,
+                    TaskCreationOptions.HideScheduler,
+                    scheduler
+                );
 
             Assert.IsTrue(mre.Wait(1000), "#1");
             Assert.IsTrue(ranOnDefault, "#2");
@@ -2676,19 +2715,20 @@ namespace MonoTests.System.Threading.Tasks
         public void ChildTaskWithUnscheduledContinuationAttachedToParent()
         {
             Task inner = null;
-            var child = Task.Factory.StartNew(() =>
-            {
-                inner = Task.Run(() =>
-                    {
-                        throw new ApplicationException();
-                    })
-                    .ContinueWith(
-                        task => { },
-                        TaskContinuationOptions.AttachedToParent
-                            | TaskContinuationOptions.NotOnFaulted
-                            | TaskContinuationOptions.ExecuteSynchronously
-                    );
-            });
+            var child = Task.Factory
+                .StartNew(() =>
+                {
+                    inner = Task.Run(() =>
+                        {
+                            throw new ApplicationException();
+                        })
+                        .ContinueWith(
+                            task => { },
+                            TaskContinuationOptions.AttachedToParent
+                                | TaskContinuationOptions.NotOnFaulted
+                                | TaskContinuationOptions.ExecuteSynchronously
+                        );
+                });
 
             int counter = 0;
             var t = child.ContinueWith(

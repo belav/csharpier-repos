@@ -18,8 +18,7 @@ namespace System.Text.Json.Serialization.Converters
         [RequiresDynamicCode(FSharpCoreReflectionProxy.FSharpCoreUnreferencedCodeMessage)]
         public FSharpSetConverter()
         {
-            _setConstructor = FSharpCoreReflectionProxy
-                .Instance
+            _setConstructor = FSharpCoreReflectionProxy.Instance
                 .CreateFSharpSetConstructor<TSet, TElement>();
         }
 

@@ -476,8 +476,7 @@ class Program
                 semanticModel.GetOperation(variableDeclaration);
             var variableTreeLambdaOperation = (
                 (IDelegateCreationOperation)
-                    variableDeclarationGroupOperation
-                        .Declarations
+                    variableDeclarationGroupOperation.Declarations
                         .Single()
                         .Declarators
                         .Single()
@@ -495,8 +494,7 @@ class Program
                 (IVariableDeclarationGroupOperation)semanticModel.GetOperation(variableDeclaration);
             var variableTreeLambdaOperationSecondRequest = (
                 (IDelegateCreationOperation)
-                    variableDeclarationGroupOperationSecondRequest
-                        .Declarations
+                    variableDeclarationGroupOperationSecondRequest.Declarations
                         .Single()
                         .Declarators
                         .Single()
@@ -1016,8 +1014,7 @@ struct C
 
             IFlowAnonymousFunctionOperation getLambda(ControlFlowGraph graph)
             {
-                return graph
-                    .Blocks
+                return graph.Blocks
                     .SelectMany(b => b.Operations.SelectMany(o => o.DescendantsAndSelf()))
                     .OfType<IFlowAnonymousFunctionOperation>()
                     .Single();
@@ -1094,8 +1091,7 @@ struct C
 
             IFlowAnonymousFunctionOperation getLambda(ControlFlowGraph graph, int index)
             {
-                return graph
-                    .Blocks
+                return graph.Blocks
                     .SelectMany(b => b.Operations.SelectMany(o => o.DescendantsAndSelf()))
                     .OfType<IFlowAnonymousFunctionOperation>()
                     .ElementAt(index);

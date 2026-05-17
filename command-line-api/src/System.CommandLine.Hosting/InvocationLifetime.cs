@@ -46,8 +46,7 @@ namespace System.CommandLine.Hosting
         {
             if (!Options.SuppressStatusMessages)
             {
-                appStartedReg = ApplicationLifetime
-                    .ApplicationStarted
+                appStartedReg = ApplicationLifetime.ApplicationStarted
                     .Register(
                         state =>
                         {
@@ -55,8 +54,7 @@ namespace System.CommandLine.Hosting
                         },
                         this
                     );
-                appStoppingReg = ApplicationLifetime
-                    .ApplicationStopping
+                appStoppingReg = ApplicationLifetime.ApplicationStopping
                     .Register(
                         state =>
                         {

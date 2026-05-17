@@ -100,8 +100,7 @@ namespace System.ServiceModel.Channels.Security
                     var commAuth =
                         support.TokenAuthenticator as CommunicationSecurityTokenAuthenticator;
                     if (commAuth != null)
-                        res = commAuth
-                            .Communication
+                        res = commAuth.Communication
                             .ProcessNegotiation(req, timeout - (DateTime.UtcNow - start));
                     else
                         throw new MessageSecurityException(

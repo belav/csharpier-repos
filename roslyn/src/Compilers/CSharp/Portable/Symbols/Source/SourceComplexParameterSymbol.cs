@@ -443,8 +443,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 return ConstantValue.NotAvailable;
             }
 
-            MessageID
-                .IDS_FeatureOptionalParameter
+            MessageID.IDS_FeatureOptionalParameter
                 .CheckFeatureAvailability(diagnostics, defaultSyntax.EqualsToken);
 
             binder = GetDefaultParameterValueBinder(defaultSyntax);
@@ -872,8 +871,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 )
                 {
                     var index = -1;
-                    var (attributeData, _) = arguments
-                        .Binder
+                    var (attributeData, _) = arguments.Binder
                         .GetAttribute(
                             arguments.AttributeSyntax,
                             arguments.AttributeType,
@@ -938,8 +936,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             );
 
             bool hasAnyDiagnostics;
-            var (attributeData, boundAttribute) = arguments
-                .Binder
+            var (attributeData, boundAttribute) = arguments.Binder
                 .GetAttribute(
                     arguments.AttributeSyntax,
                     arguments.AttributeType,
@@ -1389,8 +1386,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 }
             }
             else if (
-                !compilation
-                    .Conversions
+                !compilation.Conversions
                     .ClassifyConversionFromType(
                         (TypeSymbol)arg.TypeInternal,
                         this.Type,
@@ -1478,8 +1474,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 );
             }
             else if (
-                !compilation
-                    .Conversions
+                !compilation.Conversions
                     .HasCallerLineNumberConversion(TypeWithAnnotations.Type, ref useSiteInfo)
             )
             {
@@ -1528,8 +1523,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 );
             }
             else if (
-                !compilation
-                    .Conversions
+                !compilation.Conversions
                     .HasCallerInfoStringConversion(TypeWithAnnotations.Type, ref useSiteInfo)
             )
             {
@@ -1587,8 +1581,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 );
             }
             else if (
-                !compilation
-                    .Conversions
+                !compilation.Conversions
                     .HasCallerInfoStringConversion(TypeWithAnnotations.Type, ref useSiteInfo)
             )
             {
@@ -1659,8 +1652,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 );
             }
             else if (
-                !compilation
-                    .Conversions
+                !compilation.Conversions
                     .HasCallerInfoStringConversion(TypeWithAnnotations.Type, ref useSiteInfo)
             )
             {
@@ -1757,9 +1749,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             {
                 if (
                     !Type.Equals(
-                        this.DeclaringCompilation.GetWellKnownType(
-                            WellKnownType.System_Threading_CancellationToken
-                        )
+                        this.DeclaringCompilation
+                            .GetWellKnownType(WellKnownType.System_Threading_CancellationToken)
                     )
                 )
                 {
@@ -1768,13 +1759,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 else if (
                     this.ContainingSymbol is MethodSymbol method
                     && method.IsAsync
-                    && method
-                        .ReturnType
+                    && method.ReturnType
                         .OriginalDefinition
                         .Equals(
-                            this.DeclaringCompilation.GetWellKnownType(
-                                WellKnownType.System_Collections_Generic_IAsyncEnumerable_T
-                            )
+                            this.DeclaringCompilation
+                                .GetWellKnownType(
+                                    WellKnownType.System_Collections_Generic_IAsyncEnumerable_T
+                                )
                         )
                 )
                 {
@@ -1799,8 +1790,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             Debug.Assert(attributeIndex is 0 or 1);
             Debug.Assert(
-                arguments
-                    .Attribute
+                arguments.Attribute
                     .IsTargetAttribute(
                         AttributeDescription.InterpolatedStringHandlerArgumentAttribute
                     )

@@ -23,15 +23,13 @@ namespace System.ServiceModel
         {
             if (operationDescription == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("operationDescription");
             }
 
             if (dispatchOperation == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("dispatchOperation");
             }
 

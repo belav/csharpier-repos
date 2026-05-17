@@ -770,8 +770,7 @@ namespace MonoTests.System.Security.Cryptography
                 0xaa,
                 0xaa,
             };
-            byte[] data = Encoding
-                .Default
+            byte[] data = Encoding.Default
                 .GetBytes("Test Using Larger Than Block-Size Key - Hash Key First");
             byte[] digest =
             {
@@ -966,8 +965,7 @@ namespace MonoTests.System.Security.Cryptography
                 0xaa,
                 0xaa,
             };
-            byte[] data = Encoding
-                .Default
+            byte[] data = Encoding.Default
                 .GetBytes(
                     "This is a test using a larger than block-size key and a larger than block-size data. The key needs to be hashed before being used by the HMAC algorithm."
                 );
@@ -1633,8 +1631,7 @@ namespace MonoTests.System.Security.Cryptography
                 0xaa,
                 0xaa,
             };
-            byte[] data = Encoding
-                .Default
+            byte[] data = Encoding.Default
                 .GetBytes("Test Using Larger Than Block-Size Key - Hash Key First");
             byte[] digest =
             {
@@ -1829,8 +1826,7 @@ namespace MonoTests.System.Security.Cryptography
                 0xaa,
                 0xaa,
             };
-            byte[] data = Encoding
-                .Default
+            byte[] data = Encoding.Default
                 .GetBytes(
                     "This is a test using a larger than block-size key and a larger than block-size data. The key needs to be hashed before being used by the HMAC algorithm."
                 );

@@ -70,8 +70,7 @@ namespace System.Dynamic
                     && !TypeUtils.AreReferenceAssignable(returnLabel.Type, expectedResult)
                 )
                 {
-                    throw System
-                        .Linq
+                    throw System.Linq
                         .Expressions
                         .Error
                         .BinderNotCompatibleWithCallSite(expectedResult, this, returnLabel.Type);
@@ -109,8 +108,7 @@ namespace System.Dynamic
                 //
                 if (target.Value is IDynamicMetaObjectProvider)
                 {
-                    throw System
-                        .Linq
+                    throw System.Linq
                         .Expressions
                         .Error
                         .DynamicObjectResultNotAssignable(
@@ -122,8 +120,7 @@ namespace System.Dynamic
                 }
                 else
                 {
-                    throw System
-                        .Linq
+                    throw System.Linq
                         .Expressions
                         .Error
                         .DynamicBinderResultNotAssignable(body.Type, this, expectedResult);
@@ -137,8 +134,7 @@ namespace System.Dynamic
             {
                 if (restrictions == BindingRestrictions.Empty)
                 {
-                    throw System
-                        .Linq
+                    throw System.Linq
                         .Expressions
                         .Error
                         .DynamicBindingNeedsRestrictions(target.Value!.GetType(), this);

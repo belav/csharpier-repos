@@ -74,8 +74,7 @@ public class OutputCacheGetSetTests : IClassFixture<RedisConnectionFixture>
         RedisKey underlyingKey = "TestPrefix__MSOCV_" + key;
 
         // pre-check
-        await _fixture
-            .Database
+        await _fixture.Database
             .KeyDeleteAsync(
                 new RedisKey[]
                 {
@@ -233,8 +232,7 @@ public class OutputCacheGetSetTests : IClassFixture<RedisConnectionFixture>
             TimeSpan.FromSeconds(30),
             CancellationToken.None
         );
-        var originalScore = await _fixture
-            .Database
+        var originalScore = await _fixture.Database
             .SortedSetScoreAsync("TestPrefix__MSOCT", "gtonly");
         Assert.NotNull(originalScore);
 
@@ -453,8 +451,7 @@ public class OutputCacheGetSetTests : IClassFixture<RedisConnectionFixture>
     {
         var cache = await Cache().ConfigureAwait(false);
         var impl = Assert.IsAssignableFrom<RedisOutputCacheStore>(cache);
-        await _fixture
-            .Database
+        await _fixture.Database
             .StringSetAsync("TestPrefix__MSOCTGC", "dummy", TimeSpan.FromMinutes(1));
         try
         {
@@ -477,8 +474,7 @@ public class OutputCacheGetSetTests : IClassFixture<RedisConnectionFixture>
         var impl = Assert.IsAssignableFrom<RedisOutputCacheStore>(cache);
 
         // start vanilla
-        await _fixture
-            .Database
+        await _fixture.Database
             .KeyDeleteAsync(
                 new RedisKey[]
                 {

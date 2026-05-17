@@ -61,8 +61,7 @@ public class SqlServerDatabaseCreator : RelationalDatabaseCreator
     {
         using (var masterConnection = _connection.CreateMasterConnection())
         {
-            Dependencies
-                .MigrationCommandExecutor
+            Dependencies.MigrationCommandExecutor
                 .ExecuteNonQuery(CreateCreateOperations(), masterConnection);
 
             ClearPool();
@@ -82,8 +81,7 @@ public class SqlServerDatabaseCreator : RelationalDatabaseCreator
         var masterConnection = _connection.CreateMasterConnection();
         await using (masterConnection.ConfigureAwait(false))
         {
-            await Dependencies
-                .MigrationCommandExecutor
+            await Dependencies.MigrationCommandExecutor
                 .ExecuteNonQueryAsync(CreateCreateOperations(), masterConnection, cancellationToken)
                 .ConfigureAwait(false);
 
@@ -101,8 +99,7 @@ public class SqlServerDatabaseCreator : RelationalDatabaseCreator
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     public override bool HasTables() =>
-        Dependencies
-            .ExecutionStrategy
+        Dependencies.ExecutionStrategy
             .Execute(
                 _connection,
                 connection =>
@@ -132,8 +129,7 @@ public class SqlServerDatabaseCreator : RelationalDatabaseCreator
     ) =>
         (int)
             (
-                await Dependencies
-                    .ExecutionStrategy
+                await Dependencies.ExecutionStrategy
                     .ExecuteAsync(
                         _connection,
                         (connection, ct) =>
@@ -177,8 +173,7 @@ SELECT 1 ELSE SELECT 0"
     private IReadOnlyList<MigrationCommand> CreateCreateOperations()
     {
         var builder = new SqlConnectionStringBuilder(_connection.DbConnection.ConnectionString);
-        return Dependencies
-            .MigrationsSqlGenerator
+        return Dependencies.MigrationsSqlGenerator
             .Generate(
                 new[]
                 {
@@ -186,8 +181,7 @@ SELECT 1 ELSE SELECT 0"
                     {
                         Name = builder.InitialCatalog,
                         FileName = builder.AttachDBFilename,
-                        Collation = Dependencies
-                            .CurrentContext
+                        Collation = Dependencies.CurrentContext
                             .Context
                             .GetService<IDesignTimeModel>()
                             .Model
@@ -207,8 +201,7 @@ SELECT 1 ELSE SELECT 0"
     public override bool Exists() => Exists(retryOnNotExists: false);
 
     private bool Exists(bool retryOnNotExists) =>
-        Dependencies
-            .ExecutionStrategy
+        Dependencies.ExecutionStrategy
             .Execute(
                 DateTime.UtcNow + RetryTimeout,
                 giveUp =>
@@ -273,8 +266,7 @@ SELECT 1 ELSE SELECT 0"
         ExistsAsync(retryOnNotExists: false, cancellationToken: cancellationToken);
 
     private Task<bool> ExistsAsync(bool retryOnNotExists, CancellationToken cancellationToken) =>
-        Dependencies
-            .ExecutionStrategy
+        Dependencies.ExecutionStrategy
             .ExecuteAsync(
                 DateTime.UtcNow + RetryTimeout,
                 async (giveUp, ct) =>
@@ -387,8 +379,7 @@ SELECT 1 ELSE SELECT 0"
         ClearAllPools();
 
         using var masterConnection = _connection.CreateMasterConnection();
-        Dependencies
-            .MigrationCommandExecutor
+        Dependencies.MigrationCommandExecutor
             .ExecuteNonQuery(CreateDropCommands(), masterConnection);
     }
 
@@ -404,8 +395,7 @@ SELECT 1 ELSE SELECT 0"
 
         var masterConnection = _connection.CreateMasterConnection();
         await using var _ = masterConnection.ConfigureAwait(false);
-        await Dependencies
-            .MigrationCommandExecutor
+        await Dependencies.MigrationCommandExecutor
             .ExecuteNonQueryAsync(CreateDropCommands(), masterConnection, cancellationToken)
             .ConfigureAwait(false);
     }

@@ -241,8 +241,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             ImmutableArray<RefKind> parameterRefKinds,
             RefKind refKind
         ) =>
-            UnboundLambda
-                .Data
+            UnboundLambda.Data
                 .CreateLambdaSymbol(
                     containingSymbol,
                     returnType,
@@ -465,8 +464,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 var resultType =
                     taskType?.Arity == 0
                         ? taskType
-                        : binder
-                            .Compilation
+                        : binder.Compilation
                             .GetWellKnownType(WellKnownType.System_Threading_Tasks_Task);
                 return TypeWithAnnotations.Create(resultType);
             }
@@ -483,8 +481,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             var taskTypeT =
                 taskType?.Arity == 1
                     ? taskType
-                    : binder
-                        .Compilation
+                    : binder.Compilation
                         .GetWellKnownType(WellKnownType.System_Threading_Tasks_Task_T);
             return TypeWithAnnotations.Create(
                 taskTypeT.Construct(ImmutableArray.Create(bestResultType))
@@ -818,8 +815,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 _bindingCache = ImmutableDictionary<
                     (NamedTypeSymbol Type, bool IsExpressionLambda),
                     BoundLambda
-                >
-                    .Empty
+                >.Empty
                     .WithComparers(BindingCacheComparer.Instance);
                 _returnInferenceCache = ImmutableDictionary<
                     ReturnInferenceCacheKey,
@@ -915,12 +911,13 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeSymbol targetType
         )
         {
-            this.Binder.GenerateAnonymousFunctionConversionError(
-                diagnostics,
-                _unboundLambda.Syntax,
-                _unboundLambda,
-                targetType
-            );
+            this.Binder
+                .GenerateAnonymousFunctionConversionError(
+                    diagnostics,
+                    _unboundLambda.Syntax,
+                    _unboundLambda,
+                    targetType
+                );
         }
 
         // Returns the inferred return type, or null if none can be inferred.
@@ -1171,8 +1168,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 && GetLambdaExpressionBody(returnInferenceLambda.Body) is BoundExpression expression
                 && (lambdaSymbol = returnInferenceLambda.Symbol).RefKind == refKind
                 && (object)LambdaSymbol.InferenceFailureReturnType != lambdaSymbol.ReturnType
-                && lambdaSymbol
-                    .ReturnTypeWithAnnotations
+                && lambdaSymbol.ReturnTypeWithAnnotations
                     .Equals(returnType, TypeCompareKind.ConsiderEverything)
             )
             {
@@ -1395,10 +1391,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     if (targetParameterTypes[i].Type.ContainsPointer())
                     {
-                        this.Binder.ReportUnsafeIfNotAllowed(
-                            this.ParameterLocation(i),
-                            diagnostics
-                        );
+                        this.Binder
+                            .ReportUnsafeIfNotAllowed(this.ParameterLocation(i), diagnostics);
                     }
                 }
             }
@@ -1865,8 +1859,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             foreach (var parameter in lambda.Parameters)
             {
-                builder
-                    .Builder
+                builder.Builder
                     .Append(
                         parameter.ToDisplayString(
                             SymbolDisplayFormat.CSharpErrorMessageNoParameterNamesFormat
@@ -1876,11 +1869,9 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             if (lambda.ReturnTypeWithAnnotations.HasType)
             {
-                builder
-                    .Builder
+                builder.Builder
                     .Append(
-                        lambda
-                            .ReturnTypeWithAnnotations
+                        lambda.ReturnTypeWithAnnotations
                             .ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat)
                     );
             }
@@ -2156,19 +2147,16 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 default:
                 case SyntaxKind.SimpleLambdaExpression:
-                    return ((SimpleLambdaExpressionSyntax)syntax)
-                        .Parameter
+                    return ((SimpleLambdaExpressionSyntax)syntax).Parameter
                         .Identifier
                         .GetLocation();
                 case SyntaxKind.ParenthesizedLambdaExpression:
-                    return ((ParenthesizedLambdaExpressionSyntax)syntax)
-                        .ParameterList
+                    return ((ParenthesizedLambdaExpressionSyntax)syntax).ParameterList
                         .Parameters[index]
                         .Identifier
                         .GetLocation();
                 case SyntaxKind.AnonymousMethodExpression:
-                    return ((AnonymousMethodExpressionSyntax)syntax)
-                        .ParameterList!
+                    return ((AnonymousMethodExpressionSyntax)syntax).ParameterList!
                         .Parameters[index]
                         .Identifier
                         .GetLocation();

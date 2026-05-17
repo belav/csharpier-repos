@@ -113,8 +113,7 @@ namespace System
             var transitionEnd = DeserializeTransitionTime(ref input);
             input.Remove(0, 1); // ]
             var deltaSpan = TimeSpan.FromMinutes(delta);
-            return TimeZoneInfo
-                .AdjustmentRule
+            return TimeZoneInfo.AdjustmentRule
                 .CreateAdjustmentRule(
                     dateStart,
                     dateEnd,
@@ -140,8 +139,7 @@ namespace System
                 var week = DeserializeInt(ref input);
                 var dayOfWeek = DeserializeInt(ref input);
                 input.Remove(0, 2); // ];
-                return TimeZoneInfo
-                    .TransitionTime
+                return TimeZoneInfo.TransitionTime
                     .CreateFloatingDateRule(timeOfDay, month, week, (DayOfWeek)dayOfWeek);
             }
 

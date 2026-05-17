@@ -122,8 +122,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
                 AddError(
                     ErrorCode.BadNavigationProperty,
                     EdmSchemaErrorSeverity.Error,
-                    System
-                        .Data
+                    System.Data
                         .Entity
                         .Strings
                         .BadNavigationPropertyRelationshipNotRelationship(
@@ -139,8 +138,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
                 AddError(
                     ErrorCode.BadNavigationProperty,
                     EdmSchemaErrorSeverity.Error,
-                    System
-                        .Data
+                    System.Data
                         .Entity
                         .Strings
                         .BadNavigationPropertyUndefinedRole(
@@ -156,8 +154,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
                 AddError(
                     ErrorCode.BadNavigationProperty,
                     EdmSchemaErrorSeverity.Error,
-                    System
-                        .Data
+                    System.Data
                         .Entity
                         .Strings
                         .BadNavigationPropertyUndefinedRole(
@@ -186,8 +183,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
         {
             base.Validate();
 
-            System
-                .Diagnostics
+            System.Diagnostics
                 .Debug
                 .Assert(
                     _fromEnd != null && _toEnd != null,
@@ -199,8 +195,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
                 AddError(
                     ErrorCode.BadNavigationProperty,
                     EdmSchemaErrorSeverity.Error,
-                    System
-                        .Data
+                    System.Data
                         .Entity
                         .Strings
                         .BadNavigationPropertyBadFromRoleType(

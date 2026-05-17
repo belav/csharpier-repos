@@ -38,8 +38,7 @@ namespace Castle.DynamicProxy.Generators
             }
             else
             {
-                emitter
-                    .CodeBuilder
+                emitter.CodeBuilder
                     .AddStatement(
                         new ReturnStatement(new DefaultValueExpression(emitter.ReturnType))
                     );
@@ -55,8 +54,7 @@ namespace Castle.DynamicProxy.Generators
                 var parameter = parameters[index];
                 if (parameter.IsOut)
                 {
-                    emitter
-                        .CodeBuilder
+                    emitter.CodeBuilder
                         .AddStatement(
                             new AssignArgumentStatement(
                                 new ArgumentReference(parameter.ParameterType, index + 1),

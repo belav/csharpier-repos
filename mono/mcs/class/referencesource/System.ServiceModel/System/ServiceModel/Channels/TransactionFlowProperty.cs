@@ -59,8 +59,7 @@ namespace System.ServiceModel.Channels
         {
             if (message.Properties.ContainsKey(PropertyName))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new FaultException(SR.GetString(SR.SFxTryAddMultipleTransactionsOnMessage))
                     );
@@ -159,8 +158,7 @@ namespace System.ServiceModel.Channels
             {
                 if (property.flowedTransaction != null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new FaultException(
                                 SR.GetString(SR.SFxTryAddMultipleTransactionsOnMessage)

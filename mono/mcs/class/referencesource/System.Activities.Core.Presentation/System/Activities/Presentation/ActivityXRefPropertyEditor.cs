@@ -11,8 +11,7 @@ namespace System.Activities.Presentation
     {
         public ActivityXRefPropertyEditor()
         {
-            this.InlineEditorTemplate = EditorCategoryTemplateDictionary
-                .Instance
+            this.InlineEditorTemplate = EditorCategoryTemplateDictionary.Instance
                 .GetCategoryTemplate("ActivityXRef_InlineEditorTemplate");
         }
     }

@@ -108,20 +108,17 @@ namespace System.Speech.Internal.SrgsCompiler
             //  For the string blobs, we must explicitly report I/O error since the blobs don't
             //  use the error log facility.
             //
-            System
-                .Diagnostics
+            System.Diagnostics
                 .Debug
                 .Assert(streamBuffer.Stream.Position - startStreamPosition == header.pszWords);
             streamBuffer.WriteArrayChar(_words.SerializeData(), _words.SerializeSize());
 
-            System
-                .Diagnostics
+            System.Diagnostics
                 .Debug
                 .Assert(streamBuffer.Stream.Position - startStreamPosition == header.pszSymbols);
             streamBuffer.WriteArrayChar(_symbols.SerializeData(), _symbols.SerializeSize());
 
-            System
-                .Diagnostics
+            System.Diagnostics
                 .Debug
                 .Assert(streamBuffer.Stream.Position - startStreamPosition == header.pRules);
             foreach (Rule rule in _rules)
@@ -146,8 +143,7 @@ namespace System.Speech.Internal.SrgsCompiler
             //
             CfgArc dummyArc = new();
 
-            System
-                .Diagnostics
+            System.Diagnostics
                 .Debug
                 .Assert(streamBuffer.Stream.Position - startStreamPosition == header.pArcs);
             streamBuffer.WriteStream(dummyArc);
@@ -168,8 +164,7 @@ namespace System.Speech.Internal.SrgsCompiler
                 );
             }
 
-            System
-                .Diagnostics
+            System.Diagnostics
                 .Debug
                 .Assert(streamBuffer.Stream.Position - startStreamPosition == header.pWeights);
             if (_fNeedWeightTable)
@@ -177,8 +172,7 @@ namespace System.Speech.Internal.SrgsCompiler
                 streamBuffer.WriteArray<float>(pWeights, cArcs);
             }
 
-            System
-                .Diagnostics
+            System.Diagnostics
                 .Debug
                 .Assert(streamBuffer.Stream.Position - startStreamPosition == header.tags);
             if (!semanticInterpretation)
@@ -211,8 +205,7 @@ namespace System.Speech.Internal.SrgsCompiler
 
             // Write the script references and the IL write after the header so getting it for the grammar
             // Does not require a seek to the end of the file
-            System
-                .Diagnostics
+            System.Diagnostics
                 .Debug
                 .Assert(
                     header.pScripts == 0
@@ -414,8 +407,7 @@ namespace System.Speech.Internal.SrgsCompiler
                 {
                     int dwSymbolOffset = _symbols.OffsetFromId(iWord);
 
-                    System
-                        .Diagnostics
+                    System.Diagnostics
                         .Debug
                         .Assert(dwSymbolOffset == 0 || _symbols[iWord] == sRule);
 

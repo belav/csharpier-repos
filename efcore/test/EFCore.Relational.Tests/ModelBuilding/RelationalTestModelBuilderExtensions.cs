@@ -399,8 +399,7 @@ public static class RelationalTestModelBuilderExtensions
         switch (builder)
         {
             case IInfrastructure<EntityTypeBuilder<TEntity>> genericBuilder:
-                genericBuilder
-                    .Instance
+                genericBuilder.Instance
                     .ToTable(b =>
                         buildAction(
                             new RelationalModelBuilderTest.GenericTestTableBuilder<TEntity>(b)
@@ -408,8 +407,7 @@ public static class RelationalTestModelBuilderExtensions
                     );
                 break;
             case IInfrastructure<EntityTypeBuilder> nonGenericBuilder:
-                nonGenericBuilder
-                    .Instance
+                nonGenericBuilder.Instance
                     .ToTable(b =>
                         buildAction(
                             new RelationalModelBuilderTest.NonGenericTestTableBuilder<TEntity>(b)
@@ -431,8 +429,7 @@ public static class RelationalTestModelBuilderExtensions
         switch (builder)
         {
             case IInfrastructure<EntityTypeBuilder<TEntity>> genericBuilder:
-                genericBuilder
-                    .Instance
+                genericBuilder.Instance
                     .ToTable(
                         name,
                         b =>
@@ -442,8 +439,7 @@ public static class RelationalTestModelBuilderExtensions
                     );
                 break;
             case IInfrastructure<EntityTypeBuilder> nonGenericBuilder:
-                nonGenericBuilder
-                    .Instance
+                nonGenericBuilder.Instance
                     .ToTable(
                         name,
                         b =>
@@ -470,8 +466,7 @@ public static class RelationalTestModelBuilderExtensions
         switch (builder)
         {
             case IInfrastructure<EntityTypeBuilder<TEntity>> genericBuilder:
-                genericBuilder
-                    .Instance
+                genericBuilder.Instance
                     .ToTable(
                         name,
                         schema,
@@ -482,8 +477,7 @@ public static class RelationalTestModelBuilderExtensions
                     );
                 break;
             case IInfrastructure<EntityTypeBuilder> nonGenericBuilder:
-                nonGenericBuilder
-                    .Instance
+                nonGenericBuilder.Instance
                     .ToTable(
                         name,
                         schema,
@@ -569,8 +563,7 @@ public static class RelationalTestModelBuilderExtensions
             case IInfrastructure<
                 OwnedNavigationBuilder<TOwnerEntity, TDependentEntity>
             > genericBuilder:
-                genericBuilder
-                    .Instance
+                genericBuilder.Instance
                     .ToTable(b =>
                         buildAction(
                             new RelationalModelBuilderTest.GenericTestOwnedNavigationTableBuilder<
@@ -581,8 +574,7 @@ public static class RelationalTestModelBuilderExtensions
                     );
                 break;
             case IInfrastructure<OwnedNavigationBuilder> nonGenericBuilder:
-                nonGenericBuilder
-                    .Instance
+                nonGenericBuilder.Instance
                     .ToTable(b =>
                         buildAction(
                             new RelationalModelBuilderTest.NonGenericTestOwnedNavigationTableBuilder<
@@ -616,8 +608,7 @@ public static class RelationalTestModelBuilderExtensions
             case IInfrastructure<
                 OwnedNavigationBuilder<TOwnerEntity, TDependentEntity>
             > genericBuilder:
-                genericBuilder
-                    .Instance
+                genericBuilder.Instance
                     .ToTable(
                         name,
                         b =>
@@ -630,8 +621,7 @@ public static class RelationalTestModelBuilderExtensions
                     );
                 break;
             case IInfrastructure<OwnedNavigationBuilder> nonGenericBuilder:
-                nonGenericBuilder
-                    .Instance
+                nonGenericBuilder.Instance
                     .ToTable(
                         name,
                         b =>
@@ -668,8 +658,7 @@ public static class RelationalTestModelBuilderExtensions
             case IInfrastructure<
                 OwnedNavigationBuilder<TOwnerEntity, TDependentEntity>
             > genericBuilder:
-                genericBuilder
-                    .Instance
+                genericBuilder.Instance
                     .ToTable(
                         name,
                         schema,
@@ -683,8 +672,7 @@ public static class RelationalTestModelBuilderExtensions
                     );
                 break;
             case IInfrastructure<OwnedNavigationBuilder> nonGenericBuilder:
-                nonGenericBuilder
-                    .Instance
+                nonGenericBuilder.Instance
                     .ToTable(
                         name,
                         schema,
@@ -712,8 +700,7 @@ public static class RelationalTestModelBuilderExtensions
         switch (builder)
         {
             case IInfrastructure<EntityTypeBuilder<TEntity>> genericBuilder:
-                genericBuilder
-                    .Instance
+                genericBuilder.Instance
                     .SplitToTable(
                         name,
                         b =>
@@ -725,8 +712,7 @@ public static class RelationalTestModelBuilderExtensions
                     );
                 break;
             case IInfrastructure<EntityTypeBuilder> nonGenericBuilder:
-                nonGenericBuilder
-                    .Instance
+                nonGenericBuilder.Instance
                     .SplitToTable(
                         name,
                         b =>
@@ -753,8 +739,7 @@ public static class RelationalTestModelBuilderExtensions
         switch (builder)
         {
             case IInfrastructure<EntityTypeBuilder<TEntity>> genericBuilder:
-                genericBuilder
-                    .Instance
+                genericBuilder.Instance
                     .SplitToTable(
                         name,
                         schema,
@@ -767,8 +752,7 @@ public static class RelationalTestModelBuilderExtensions
                     );
                 break;
             case IInfrastructure<EntityTypeBuilder> nonGenericBuilder:
-                nonGenericBuilder
-                    .Instance
+                nonGenericBuilder.Instance
                     .SplitToTable(
                         name,
                         schema,
@@ -804,8 +788,7 @@ public static class RelationalTestModelBuilderExtensions
             case IInfrastructure<
                 OwnedNavigationBuilder<TOwnerEntity, TDependentEntity>
             > genericBuilder:
-                genericBuilder
-                    .Instance
+                genericBuilder.Instance
                     .SplitToTable(
                         name,
                         b =>
@@ -818,8 +801,7 @@ public static class RelationalTestModelBuilderExtensions
                     );
                 break;
             case IInfrastructure<OwnedNavigationBuilder> nonGenericBuilder:
-                nonGenericBuilder
-                    .Instance
+                nonGenericBuilder.Instance
                     .SplitToTable(
                         name,
                         b =>
@@ -856,8 +838,7 @@ public static class RelationalTestModelBuilderExtensions
             case IInfrastructure<
                 OwnedNavigationBuilder<TOwnerEntity, TDependentEntity>
             > genericBuilder:
-                genericBuilder
-                    .Instance
+                genericBuilder.Instance
                     .SplitToTable(
                         name,
                         schema,
@@ -871,8 +852,7 @@ public static class RelationalTestModelBuilderExtensions
                     );
                 break;
             case IInfrastructure<OwnedNavigationBuilder> nonGenericBuilder:
-                nonGenericBuilder
-                    .Instance
+                nonGenericBuilder.Instance
                     .SplitToTable(
                         name,
                         schema,
@@ -939,8 +919,7 @@ public static class RelationalTestModelBuilderExtensions
         switch (builder)
         {
             case IInfrastructure<EntityTypeBuilder<TEntity>> genericBuilder:
-                genericBuilder
-                    .Instance
+                genericBuilder.Instance
                     .ToView(
                         name,
                         b =>
@@ -950,8 +929,7 @@ public static class RelationalTestModelBuilderExtensions
                     );
                 break;
             case IInfrastructure<EntityTypeBuilder> nonGenericBuilder:
-                nonGenericBuilder
-                    .Instance
+                nonGenericBuilder.Instance
                     .ToView(
                         name,
                         b =>
@@ -976,8 +954,7 @@ public static class RelationalTestModelBuilderExtensions
         switch (builder)
         {
             case IInfrastructure<EntityTypeBuilder<TEntity>> genericBuilder:
-                genericBuilder
-                    .Instance
+                genericBuilder.Instance
                     .ToView(
                         name,
                         schema,
@@ -988,8 +965,7 @@ public static class RelationalTestModelBuilderExtensions
                     );
                 break;
             case IInfrastructure<EntityTypeBuilder> nonGenericBuilder:
-                nonGenericBuilder
-                    .Instance
+                nonGenericBuilder.Instance
                     .ToView(
                         name,
                         schema,
@@ -1074,8 +1050,7 @@ public static class RelationalTestModelBuilderExtensions
             case IInfrastructure<
                 OwnedNavigationBuilder<TOwnerEntity, TDependentEntity>
             > genericBuilder:
-                genericBuilder
-                    .Instance
+                genericBuilder.Instance
                     .ToView(
                         name,
                         b =>
@@ -1088,8 +1063,7 @@ public static class RelationalTestModelBuilderExtensions
                     );
                 break;
             case IInfrastructure<OwnedNavigationBuilder> nonGenericBuilder:
-                nonGenericBuilder
-                    .Instance
+                nonGenericBuilder.Instance
                     .ToView(
                         name,
                         b =>
@@ -1126,8 +1100,7 @@ public static class RelationalTestModelBuilderExtensions
             case IInfrastructure<
                 OwnedNavigationBuilder<TOwnerEntity, TDependentEntity>
             > genericBuilder:
-                genericBuilder
-                    .Instance
+                genericBuilder.Instance
                     .ToView(
                         name,
                         schema,
@@ -1141,8 +1114,7 @@ public static class RelationalTestModelBuilderExtensions
                     );
                 break;
             case IInfrastructure<OwnedNavigationBuilder> nonGenericBuilder:
-                nonGenericBuilder
-                    .Instance
+                nonGenericBuilder.Instance
                     .ToView(
                         name,
                         schema,
@@ -1170,8 +1142,7 @@ public static class RelationalTestModelBuilderExtensions
         switch (builder)
         {
             case IInfrastructure<EntityTypeBuilder<TEntity>> genericBuilder:
-                genericBuilder
-                    .Instance
+                genericBuilder.Instance
                     .SplitToView(
                         name,
                         b =>
@@ -1183,8 +1154,7 @@ public static class RelationalTestModelBuilderExtensions
                     );
                 break;
             case IInfrastructure<EntityTypeBuilder> nonGenericBuilder:
-                nonGenericBuilder
-                    .Instance
+                nonGenericBuilder.Instance
                     .SplitToView(
                         name,
                         b =>
@@ -1211,8 +1181,7 @@ public static class RelationalTestModelBuilderExtensions
         switch (builder)
         {
             case IInfrastructure<EntityTypeBuilder<TEntity>> genericBuilder:
-                genericBuilder
-                    .Instance
+                genericBuilder.Instance
                     .SplitToView(
                         name,
                         schema,
@@ -1225,8 +1194,7 @@ public static class RelationalTestModelBuilderExtensions
                     );
                 break;
             case IInfrastructure<EntityTypeBuilder> nonGenericBuilder:
-                nonGenericBuilder
-                    .Instance
+                nonGenericBuilder.Instance
                     .SplitToView(
                         name,
                         schema,
@@ -1262,8 +1230,7 @@ public static class RelationalTestModelBuilderExtensions
             case IInfrastructure<
                 OwnedNavigationBuilder<TOwnerEntity, TDependentEntity>
             > genericBuilder:
-                genericBuilder
-                    .Instance
+                genericBuilder.Instance
                     .SplitToView(
                         name,
                         b =>
@@ -1276,8 +1243,7 @@ public static class RelationalTestModelBuilderExtensions
                     );
                 break;
             case IInfrastructure<OwnedNavigationBuilder> nonGenericBuilder:
-                nonGenericBuilder
-                    .Instance
+                nonGenericBuilder.Instance
                     .SplitToView(
                         name,
                         b =>
@@ -1314,8 +1280,7 @@ public static class RelationalTestModelBuilderExtensions
             case IInfrastructure<
                 OwnedNavigationBuilder<TOwnerEntity, TDependentEntity>
             > genericBuilder:
-                genericBuilder
-                    .Instance
+                genericBuilder.Instance
                     .SplitToView(
                         name,
                         schema,
@@ -1329,8 +1294,7 @@ public static class RelationalTestModelBuilderExtensions
                     );
                 break;
             case IInfrastructure<OwnedNavigationBuilder> nonGenericBuilder:
-                nonGenericBuilder
-                    .Instance
+                nonGenericBuilder.Instance
                     .SplitToView(
                         name,
                         schema,
@@ -1364,8 +1328,7 @@ public static class RelationalTestModelBuilderExtensions
         switch (builder)
         {
             case IInfrastructure<EntityTypeBuilder<TEntity>> genericBuilder:
-                genericBuilder
-                    .Instance
+                genericBuilder.Instance
                     .UpdateUsingStoredProcedure(b =>
                         buildAction(
                             new RelationalModelBuilderTest.GenericTestStoredProcedureBuilder<TEntity>(
@@ -1375,8 +1338,7 @@ public static class RelationalTestModelBuilderExtensions
                     );
                 break;
             case IInfrastructure<EntityTypeBuilder> nonGenericBuilder:
-                nonGenericBuilder
-                    .Instance
+                nonGenericBuilder.Instance
                     .UpdateUsingStoredProcedure(b =>
                         buildAction(
                             new RelationalModelBuilderTest.NonGenericTestStoredProcedureBuilder<TEntity>(
@@ -1400,8 +1362,7 @@ public static class RelationalTestModelBuilderExtensions
         switch (builder)
         {
             case IInfrastructure<EntityTypeBuilder<TEntity>> genericBuilder:
-                genericBuilder
-                    .Instance
+                genericBuilder.Instance
                     .UpdateUsingStoredProcedure(
                         name,
                         b =>
@@ -1413,8 +1374,7 @@ public static class RelationalTestModelBuilderExtensions
                     );
                 break;
             case IInfrastructure<EntityTypeBuilder> nonGenericBuilder:
-                nonGenericBuilder
-                    .Instance
+                nonGenericBuilder.Instance
                     .UpdateUsingStoredProcedure(
                         name,
                         b =>
@@ -1441,8 +1401,7 @@ public static class RelationalTestModelBuilderExtensions
         switch (builder)
         {
             case IInfrastructure<EntityTypeBuilder<TEntity>> genericBuilder:
-                genericBuilder
-                    .Instance
+                genericBuilder.Instance
                     .UpdateUsingStoredProcedure(
                         name,
                         schema,
@@ -1455,8 +1414,7 @@ public static class RelationalTestModelBuilderExtensions
                     );
                 break;
             case IInfrastructure<EntityTypeBuilder> nonGenericBuilder:
-                nonGenericBuilder
-                    .Instance
+                nonGenericBuilder.Instance
                     .UpdateUsingStoredProcedure(
                         name,
                         schema,
@@ -1491,8 +1449,7 @@ public static class RelationalTestModelBuilderExtensions
             case IInfrastructure<
                 OwnedNavigationBuilder<TOwnerEntity, TDependentEntity>
             > genericBuilder:
-                genericBuilder
-                    .Instance
+                genericBuilder.Instance
                     .UpdateUsingStoredProcedure(b =>
                         buildAction(
                             new RelationalModelBuilderTest.GenericTestOwnedNavigationStoredProcedureBuilder<
@@ -1503,8 +1460,7 @@ public static class RelationalTestModelBuilderExtensions
                     );
                 break;
             case IInfrastructure<OwnedNavigationBuilder> nonGenericBuilder:
-                nonGenericBuilder
-                    .Instance
+                nonGenericBuilder.Instance
                     .UpdateUsingStoredProcedure(b =>
                         buildAction(
                             new RelationalModelBuilderTest.NonGenericTestOwnedNavigationStoredProcedureBuilder<
@@ -1538,8 +1494,7 @@ public static class RelationalTestModelBuilderExtensions
             case IInfrastructure<
                 OwnedNavigationBuilder<TOwnerEntity, TDependentEntity>
             > genericBuilder:
-                genericBuilder
-                    .Instance
+                genericBuilder.Instance
                     .UpdateUsingStoredProcedure(
                         name,
                         b =>
@@ -1552,8 +1507,7 @@ public static class RelationalTestModelBuilderExtensions
                     );
                 break;
             case IInfrastructure<OwnedNavigationBuilder> nonGenericBuilder:
-                nonGenericBuilder
-                    .Instance
+                nonGenericBuilder.Instance
                     .UpdateUsingStoredProcedure(
                         name,
                         b =>
@@ -1590,8 +1544,7 @@ public static class RelationalTestModelBuilderExtensions
             case IInfrastructure<
                 OwnedNavigationBuilder<TOwnerEntity, TDependentEntity>
             > genericBuilder:
-                genericBuilder
-                    .Instance
+                genericBuilder.Instance
                     .UpdateUsingStoredProcedure(
                         name,
                         schema,
@@ -1605,8 +1558,7 @@ public static class RelationalTestModelBuilderExtensions
                     );
                 break;
             case IInfrastructure<OwnedNavigationBuilder> nonGenericBuilder:
-                nonGenericBuilder
-                    .Instance
+                nonGenericBuilder.Instance
                     .UpdateUsingStoredProcedure(
                         name,
                         schema,
@@ -1633,8 +1585,7 @@ public static class RelationalTestModelBuilderExtensions
         switch (builder)
         {
             case IInfrastructure<EntityTypeBuilder<TEntity>> genericBuilder:
-                genericBuilder
-                    .Instance
+                genericBuilder.Instance
                     .InsertUsingStoredProcedure(b =>
                         buildAction(
                             new RelationalModelBuilderTest.GenericTestStoredProcedureBuilder<TEntity>(
@@ -1644,8 +1595,7 @@ public static class RelationalTestModelBuilderExtensions
                     );
                 break;
             case IInfrastructure<EntityTypeBuilder> nonGenericBuilder:
-                nonGenericBuilder
-                    .Instance
+                nonGenericBuilder.Instance
                     .InsertUsingStoredProcedure(b =>
                         buildAction(
                             new RelationalModelBuilderTest.NonGenericTestStoredProcedureBuilder<TEntity>(
@@ -1669,8 +1619,7 @@ public static class RelationalTestModelBuilderExtensions
         switch (builder)
         {
             case IInfrastructure<EntityTypeBuilder<TEntity>> genericBuilder:
-                genericBuilder
-                    .Instance
+                genericBuilder.Instance
                     .InsertUsingStoredProcedure(
                         name,
                         b =>
@@ -1682,8 +1631,7 @@ public static class RelationalTestModelBuilderExtensions
                     );
                 break;
             case IInfrastructure<EntityTypeBuilder> nonGenericBuilder:
-                nonGenericBuilder
-                    .Instance
+                nonGenericBuilder.Instance
                     .InsertUsingStoredProcedure(
                         name,
                         b =>
@@ -1710,8 +1658,7 @@ public static class RelationalTestModelBuilderExtensions
         switch (builder)
         {
             case IInfrastructure<EntityTypeBuilder<TEntity>> genericBuilder:
-                genericBuilder
-                    .Instance
+                genericBuilder.Instance
                     .InsertUsingStoredProcedure(
                         name,
                         schema,
@@ -1724,8 +1671,7 @@ public static class RelationalTestModelBuilderExtensions
                     );
                 break;
             case IInfrastructure<EntityTypeBuilder> nonGenericBuilder:
-                nonGenericBuilder
-                    .Instance
+                nonGenericBuilder.Instance
                     .InsertUsingStoredProcedure(
                         name,
                         schema,
@@ -1760,8 +1706,7 @@ public static class RelationalTestModelBuilderExtensions
             case IInfrastructure<
                 OwnedNavigationBuilder<TOwnerEntity, TDependentEntity>
             > genericBuilder:
-                genericBuilder
-                    .Instance
+                genericBuilder.Instance
                     .InsertUsingStoredProcedure(b =>
                         buildAction(
                             new RelationalModelBuilderTest.GenericTestOwnedNavigationStoredProcedureBuilder<
@@ -1772,8 +1717,7 @@ public static class RelationalTestModelBuilderExtensions
                     );
                 break;
             case IInfrastructure<OwnedNavigationBuilder> nonGenericBuilder:
-                nonGenericBuilder
-                    .Instance
+                nonGenericBuilder.Instance
                     .InsertUsingStoredProcedure(b =>
                         buildAction(
                             new RelationalModelBuilderTest.NonGenericTestOwnedNavigationStoredProcedureBuilder<
@@ -1807,8 +1751,7 @@ public static class RelationalTestModelBuilderExtensions
             case IInfrastructure<
                 OwnedNavigationBuilder<TOwnerEntity, TDependentEntity>
             > genericBuilder:
-                genericBuilder
-                    .Instance
+                genericBuilder.Instance
                     .InsertUsingStoredProcedure(
                         name,
                         b =>
@@ -1821,8 +1764,7 @@ public static class RelationalTestModelBuilderExtensions
                     );
                 break;
             case IInfrastructure<OwnedNavigationBuilder> nonGenericBuilder:
-                nonGenericBuilder
-                    .Instance
+                nonGenericBuilder.Instance
                     .InsertUsingStoredProcedure(
                         name,
                         b =>
@@ -1859,8 +1801,7 @@ public static class RelationalTestModelBuilderExtensions
             case IInfrastructure<
                 OwnedNavigationBuilder<TOwnerEntity, TDependentEntity>
             > genericBuilder:
-                genericBuilder
-                    .Instance
+                genericBuilder.Instance
                     .InsertUsingStoredProcedure(
                         name,
                         schema,
@@ -1874,8 +1815,7 @@ public static class RelationalTestModelBuilderExtensions
                     );
                 break;
             case IInfrastructure<OwnedNavigationBuilder> nonGenericBuilder:
-                nonGenericBuilder
-                    .Instance
+                nonGenericBuilder.Instance
                     .InsertUsingStoredProcedure(
                         name,
                         schema,
@@ -1902,8 +1842,7 @@ public static class RelationalTestModelBuilderExtensions
         switch (builder)
         {
             case IInfrastructure<EntityTypeBuilder<TEntity>> genericBuilder:
-                genericBuilder
-                    .Instance
+                genericBuilder.Instance
                     .DeleteUsingStoredProcedure(b =>
                         buildAction(
                             new RelationalModelBuilderTest.GenericTestStoredProcedureBuilder<TEntity>(
@@ -1913,8 +1852,7 @@ public static class RelationalTestModelBuilderExtensions
                     );
                 break;
             case IInfrastructure<EntityTypeBuilder> nonGenericBuilder:
-                nonGenericBuilder
-                    .Instance
+                nonGenericBuilder.Instance
                     .DeleteUsingStoredProcedure(b =>
                         buildAction(
                             new RelationalModelBuilderTest.NonGenericTestStoredProcedureBuilder<TEntity>(
@@ -1938,8 +1876,7 @@ public static class RelationalTestModelBuilderExtensions
         switch (builder)
         {
             case IInfrastructure<EntityTypeBuilder<TEntity>> genericBuilder:
-                genericBuilder
-                    .Instance
+                genericBuilder.Instance
                     .DeleteUsingStoredProcedure(
                         name,
                         b =>
@@ -1951,8 +1888,7 @@ public static class RelationalTestModelBuilderExtensions
                     );
                 break;
             case IInfrastructure<EntityTypeBuilder> nonGenericBuilder:
-                nonGenericBuilder
-                    .Instance
+                nonGenericBuilder.Instance
                     .DeleteUsingStoredProcedure(
                         name,
                         b =>
@@ -1979,8 +1915,7 @@ public static class RelationalTestModelBuilderExtensions
         switch (builder)
         {
             case IInfrastructure<EntityTypeBuilder<TEntity>> genericBuilder:
-                genericBuilder
-                    .Instance
+                genericBuilder.Instance
                     .DeleteUsingStoredProcedure(
                         name,
                         schema,
@@ -1993,8 +1928,7 @@ public static class RelationalTestModelBuilderExtensions
                     );
                 break;
             case IInfrastructure<EntityTypeBuilder> nonGenericBuilder:
-                nonGenericBuilder
-                    .Instance
+                nonGenericBuilder.Instance
                     .DeleteUsingStoredProcedure(
                         name,
                         schema,
@@ -2029,8 +1963,7 @@ public static class RelationalTestModelBuilderExtensions
             case IInfrastructure<
                 OwnedNavigationBuilder<TOwnerEntity, TDependentEntity>
             > genericBuilder:
-                genericBuilder
-                    .Instance
+                genericBuilder.Instance
                     .DeleteUsingStoredProcedure(b =>
                         buildAction(
                             new RelationalModelBuilderTest.GenericTestOwnedNavigationStoredProcedureBuilder<
@@ -2041,8 +1974,7 @@ public static class RelationalTestModelBuilderExtensions
                     );
                 break;
             case IInfrastructure<OwnedNavigationBuilder> nonGenericBuilder:
-                nonGenericBuilder
-                    .Instance
+                nonGenericBuilder.Instance
                     .DeleteUsingStoredProcedure(b =>
                         buildAction(
                             new RelationalModelBuilderTest.NonGenericTestOwnedNavigationStoredProcedureBuilder<
@@ -2076,8 +2008,7 @@ public static class RelationalTestModelBuilderExtensions
             case IInfrastructure<
                 OwnedNavigationBuilder<TOwnerEntity, TDependentEntity>
             > genericBuilder:
-                genericBuilder
-                    .Instance
+                genericBuilder.Instance
                     .DeleteUsingStoredProcedure(
                         name,
                         b =>
@@ -2090,8 +2021,7 @@ public static class RelationalTestModelBuilderExtensions
                     );
                 break;
             case IInfrastructure<OwnedNavigationBuilder> nonGenericBuilder:
-                nonGenericBuilder
-                    .Instance
+                nonGenericBuilder.Instance
                     .DeleteUsingStoredProcedure(
                         name,
                         b =>
@@ -2128,8 +2058,7 @@ public static class RelationalTestModelBuilderExtensions
             case IInfrastructure<
                 OwnedNavigationBuilder<TOwnerEntity, TDependentEntity>
             > genericBuilder:
-                genericBuilder
-                    .Instance
+                genericBuilder.Instance
                     .DeleteUsingStoredProcedure(
                         name,
                         schema,
@@ -2143,8 +2072,7 @@ public static class RelationalTestModelBuilderExtensions
                     );
                 break;
             case IInfrastructure<OwnedNavigationBuilder> nonGenericBuilder:
-                nonGenericBuilder
-                    .Instance
+                nonGenericBuilder.Instance
                     .DeleteUsingStoredProcedure(
                         name,
                         schema,

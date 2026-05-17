@@ -201,8 +201,7 @@ namespace Microsoft.Interop
             foreach (BoundGenerator marshaller in marshallers.NativeParameterMarshallers)
             {
                 // Get arguments for invocation
-                ArgumentSyntax argSyntax = marshaller
-                    .Generator
+                ArgumentSyntax argSyntax = marshaller.Generator
                     .AsArgument(marshaller.TypeInfo, context);
                 invoke = invoke.AddArgumentListArguments(argSyntax);
             }
@@ -216,8 +215,7 @@ namespace Microsoft.Interop
                 marshallers.NativeReturnMarshaller.TypeInfo
             );
 
-            string targetIdentifier = marshallers
-                .NativeReturnMarshaller
+            string targetIdentifier = marshallers.NativeReturnMarshaller
                 .Generator
                 .UsesNativeIdentifier(marshallers.NativeReturnMarshaller.TypeInfo, context)
                 ? native
@@ -247,8 +245,7 @@ namespace Microsoft.Interop
             foreach (BoundGenerator marshaller in marshallers.ManagedParameterMarshallers)
             {
                 // Get arguments for invocation
-                ArgumentSyntax argSyntax = marshaller
-                    .Generator
+                ArgumentSyntax argSyntax = marshaller.Generator
                     .AsManagedArgument(marshaller.TypeInfo, context);
                 invoke = invoke.AddArgumentListArguments(argSyntax);
             }
@@ -286,8 +283,7 @@ namespace Microsoft.Interop
             var (managed, _) = context.GetIdentifiers(managedExceptionMarshaller.TypeInfo);
 
             catchClauseBuilder.AddRange(
-                managedExceptionMarshaller
-                    .Generator
+                managedExceptionMarshaller.Generator
                     .Generate(
                         managedExceptionMarshaller.TypeInfo,
                         context with
@@ -297,8 +293,7 @@ namespace Microsoft.Interop
                     )
             );
             catchClauseBuilder.AddRange(
-                managedExceptionMarshaller
-                    .Generator
+                managedExceptionMarshaller.Generator
                     .Generate(
                         managedExceptionMarshaller.TypeInfo,
                         context with

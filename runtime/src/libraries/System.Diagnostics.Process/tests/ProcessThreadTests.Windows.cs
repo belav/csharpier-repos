@@ -33,8 +33,7 @@ namespace System.Diagnostics.Tests
                 try
                 {
                     // Find the relevant ProcessThread in this process
-                    ProcessThread targetThread = currentProcess
-                        .Threads
+                    ProcessThread targetThread = currentProcess.Threads
                         .Cast<ProcessThread>()
                         .Single(pt => pt.Id == targetThreadId);
 

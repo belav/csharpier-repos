@@ -82,8 +82,7 @@ namespace System.Runtime.Serialization
         public void Import(XmlSchemaSet schemas)
         {
             if (schemas == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -95,16 +94,14 @@ namespace System.Runtime.Serialization
         public void Import(XmlSchemaSet schemas, ICollection<XmlQualifiedName> typeNames)
         {
             if (schemas == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("schemas"));
 
             if (typeNames == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -116,16 +113,14 @@ namespace System.Runtime.Serialization
         public void Import(XmlSchemaSet schemas, XmlQualifiedName typeName)
         {
             if (schemas == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("schemas"));
 
             if (typeName == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -138,16 +133,14 @@ namespace System.Runtime.Serialization
         public XmlQualifiedName Import(XmlSchemaSet schemas, XmlSchemaElement element)
         {
             if (schemas == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("schemas"));
 
             if (element == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -167,8 +160,7 @@ namespace System.Runtime.Serialization
         public bool CanImport(XmlSchemaSet schemas)
         {
             if (schemas == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -180,16 +172,14 @@ namespace System.Runtime.Serialization
         public bool CanImport(XmlSchemaSet schemas, ICollection<XmlQualifiedName> typeNames)
         {
             if (schemas == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("schemas"));
 
             if (typeNames == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -201,16 +191,14 @@ namespace System.Runtime.Serialization
         public bool CanImport(XmlSchemaSet schemas, XmlQualifiedName typeName)
         {
             if (schemas == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("schemas"));
 
             if (typeName == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -227,16 +215,14 @@ namespace System.Runtime.Serialization
         public bool CanImport(XmlSchemaSet schemas, XmlSchemaElement element)
         {
             if (schemas == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("schemas"));
 
             if (element == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -269,12 +255,10 @@ namespace System.Runtime.Serialization
         )
         {
             if (element == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("element"));
             if (typeName == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("typeName"));
             DataContract dataContract = FindDataContract(typeName);
             CodeExporter codeExporter = new CodeExporter(
@@ -289,8 +273,7 @@ namespace System.Runtime.Serialization
         internal DataContract FindDataContract(XmlQualifiedName typeName)
         {
             if (typeName == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -304,8 +287,7 @@ namespace System.Runtime.Serialization
             {
                 dataContract = DataContractSet[typeName];
                 if (dataContract == null)
-                    throw System
-                        .Runtime
+                    throw System.Runtime
                         .Serialization
                         .DiagnosticUtility
                         .ExceptionUtility
@@ -325,8 +307,7 @@ namespace System.Runtime.Serialization
         public ICollection<CodeTypeReference> GetKnownTypeReferences(XmlQualifiedName typeName)
         {
             if (typeName == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -340,8 +321,7 @@ namespace System.Runtime.Serialization
             {
                 dataContract = DataContractSet[typeName];
                 if (dataContract == null)
-                    throw System
-                        .Runtime
+                    throw System.Runtime
                         .Serialization
                         .DiagnosticUtility
                         .ExceptionUtility

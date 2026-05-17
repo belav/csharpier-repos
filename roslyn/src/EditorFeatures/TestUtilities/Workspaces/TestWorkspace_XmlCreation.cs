@@ -150,8 +150,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
             {
                 return new XAttribute(
                     LanguageVersionAttributeName,
-                    CodeAnalysis
-                        .CSharp
+                    CodeAnalysis.CSharp
                         .LanguageVersionFacts
                         .ToDisplayString(csharpOptions.LanguageVersion)
                 );
@@ -160,8 +159,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
             {
                 return new XAttribute(
                     LanguageVersionAttributeName,
-                    CodeAnalysis
-                        .VisualBasic
+                    CodeAnalysis.VisualBasic
                         .LanguageVersionFacts
                         .ToDisplayString(vbOptions.LanguageVersion)
                 );
@@ -211,8 +209,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
             else if (options is CodeAnalysis.VisualBasic.VisualBasicCompilationOptions vbOptions)
             {
                 element.Add(
-                    vbOptions
-                        .GlobalImports
+                    vbOptions.GlobalImports
                         .AsEnumerable()
                         .Select(i => new XElement(GlobalImportElementName, i.Name))
                 );

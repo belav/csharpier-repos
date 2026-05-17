@@ -192,13 +192,14 @@ namespace MonoTests.System.ServiceProcess
             ServiceControllerPermission result = (ServiceControllerPermission)scp1.Intersect(scp2);
             Assert.IsNull(result, "Empty N Empty");
             // 2. None N Entry
-            scp2.PermissionEntries.Add(
-                new ServiceControllerPermissionEntry(
-                    ServiceControllerPermissionAccess.None,
-                    "localhost",
-                    "http"
-                )
-            );
+            scp2.PermissionEntries
+                .Add(
+                    new ServiceControllerPermissionEntry(
+                        ServiceControllerPermissionAccess.None,
+                        "localhost",
+                        "http"
+                    )
+                );
             result = (ServiceControllerPermission)scp1.Intersect(scp2);
             Assert.IsNull(result, "Empty N Entry");
             // 3. Entry N None
@@ -238,13 +239,14 @@ namespace MonoTests.System.ServiceProcess
             );
 
             // 4. Unrestricted N Entry
-            scp2.PermissionEntries.Add(
-                new ServiceControllerPermissionEntry(
-                    ServiceControllerPermissionAccess.None,
-                    "localhost",
-                    "http"
-                )
-            );
+            scp2.PermissionEntries
+                .Add(
+                    new ServiceControllerPermissionEntry(
+                        ServiceControllerPermissionAccess.None,
+                        "localhost",
+                        "http"
+                    )
+                );
             result = (ServiceControllerPermission)scp1.Intersect(scp2);
             Assert.IsFalse(result.IsUnrestricted(), "(Unrestricted N Entry).IsUnrestricted");
             Assert.AreEqual(1, result.PermissionEntries.Count, "(Unrestricted N Entry).Count");
@@ -255,13 +257,14 @@ namespace MonoTests.System.ServiceProcess
             Assert.AreEqual(1, result.PermissionEntries.Count, "(Entry N Unrestricted).Count");
 
             // 6. Unrestricted N Unrestricted
-            scp1.PermissionEntries.Add(
-                new ServiceControllerPermissionEntry(
-                    ServiceControllerPermissionAccess.None,
-                    "localhost",
-                    "http"
-                )
-            );
+            scp1.PermissionEntries
+                .Add(
+                    new ServiceControllerPermissionEntry(
+                        ServiceControllerPermissionAccess.None,
+                        "localhost",
+                        "http"
+                    )
+                );
             result = (ServiceControllerPermission)scp1.Intersect(scp1);
             Assert.IsTrue(result.IsUnrestricted(), "(Unrestricted N Unrestricted).IsUnrestricted");
             Assert.AreEqual(
@@ -302,9 +305,8 @@ namespace MonoTests.System.ServiceProcess
                 ServiceControllerPermission scp2 = new ServiceControllerPermission(
                     PermissionState.None
                 );
-                scp2.PermissionEntries.Add(
-                    new ServiceControllerPermissionEntry(scpa, "localhost", scpa.ToString())
-                );
+                scp2.PermissionEntries
+                    .Add(new ServiceControllerPermissionEntry(scpa, "localhost", scpa.ToString()));
                 Assert.IsTrue(scp1.IsSubsetOf(scp2), "target " + scpa.ToString());
                 Assert.IsFalse(scp2.IsSubsetOf(scp1), "source " + scpa.ToString());
             }
@@ -318,9 +320,8 @@ namespace MonoTests.System.ServiceProcess
                 ServiceControllerPermission scp = new ServiceControllerPermission(
                     PermissionState.None
                 );
-                scp.PermissionEntries.Add(
-                    new ServiceControllerPermissionEntry(scpa, "localhost", scpa.ToString())
-                );
+                scp.PermissionEntries
+                    .Add(new ServiceControllerPermissionEntry(scpa, "localhost", scpa.ToString()));
                 Assert.IsTrue(scp.IsSubsetOf(scp), scpa.ToString());
             }
         }
@@ -339,9 +340,8 @@ namespace MonoTests.System.ServiceProcess
                 ServiceControllerPermission scp2 = new ServiceControllerPermission(
                     PermissionState.None
                 );
-                scp2.PermissionEntries.Add(
-                    new ServiceControllerPermissionEntry(scpa, "localhost", scpa.ToString())
-                );
+                scp2.PermissionEntries
+                    .Add(new ServiceControllerPermissionEntry(scpa, "localhost", scpa.ToString()));
                 Assert.IsFalse(scp1.IsSubsetOf(scp2), "target " + scpa.ToString());
                 Assert.IsTrue(scp2.IsSubsetOf(scp1), "source " + scpa.ToString());
             }
@@ -365,13 +365,14 @@ namespace MonoTests.System.ServiceProcess
         public void Union_Null()
         {
             ServiceControllerPermission scp = new ServiceControllerPermission(PermissionState.None);
-            scp.PermissionEntries.Add(
-                new ServiceControllerPermissionEntry(
-                    ServiceControllerPermissionAccess.None,
-                    "localhost",
-                    "http"
-                )
-            );
+            scp.PermissionEntries
+                .Add(
+                    new ServiceControllerPermissionEntry(
+                        ServiceControllerPermissionAccess.None,
+                        "localhost",
+                        "http"
+                    )
+                );
             // Union with null is a simple copy
             ServiceControllerPermission union = (ServiceControllerPermission)scp.Union(null);
             Assert.AreEqual(1, union.PermissionEntries.Count, "Count");
@@ -388,9 +389,8 @@ namespace MonoTests.System.ServiceProcess
                 ServiceControllerPermission scp2 = new ServiceControllerPermission(
                     PermissionState.None
                 );
-                scp2.PermissionEntries.Add(
-                    new ServiceControllerPermissionEntry(scpa, "localhost", scpa.ToString())
-                );
+                scp2.PermissionEntries
+                    .Add(new ServiceControllerPermissionEntry(scpa, "localhost", scpa.ToString()));
                 ServiceControllerPermission union = (ServiceControllerPermission)scp1.Union(scp2);
                 Assert.IsFalse(union.IsUnrestricted(), "target.IsUnrestricted " + scpa.ToString());
                 Assert.AreEqual(
@@ -417,9 +417,8 @@ namespace MonoTests.System.ServiceProcess
                 ServiceControllerPermission scp = new ServiceControllerPermission(
                     PermissionState.None
                 );
-                scp.PermissionEntries.Add(
-                    new ServiceControllerPermissionEntry(scpa, "localhost", scpa.ToString())
-                );
+                scp.PermissionEntries
+                    .Add(new ServiceControllerPermissionEntry(scpa, "localhost", scpa.ToString()));
                 ServiceControllerPermission union = (ServiceControllerPermission)scp.Union(scp);
                 Assert.IsFalse(union.IsUnrestricted(), "IsUnrestricted " + scpa.ToString());
                 Assert.AreEqual(1, union.PermissionEntries.Count, "Count " + scpa.ToString());
@@ -438,9 +437,8 @@ namespace MonoTests.System.ServiceProcess
                 ServiceControllerPermission scp2 = new ServiceControllerPermission(
                     PermissionState.None
                 );
-                scp2.PermissionEntries.Add(
-                    new ServiceControllerPermissionEntry(scpa, "localhost", scpa.ToString())
-                );
+                scp2.PermissionEntries
+                    .Add(new ServiceControllerPermissionEntry(scpa, "localhost", scpa.ToString()));
                 ServiceControllerPermission union = (ServiceControllerPermission)scp1.Union(scp2);
                 Assert.IsTrue(union.IsUnrestricted(), "target.IsUnrestricted " + scpa.ToString());
                 Assert.AreEqual(

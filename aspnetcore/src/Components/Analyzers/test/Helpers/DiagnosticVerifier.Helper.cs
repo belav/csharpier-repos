@@ -166,8 +166,7 @@ public abstract partial class DiagnosticVerifier
 
         var projectId = ProjectId.CreateNewId(debugName: TestProjectName);
 
-        var solution = new AdhocWorkspace()
-            .CurrentSolution
+        var solution = new AdhocWorkspace().CurrentSolution
             .AddProject(projectId, TestProjectName, TestProjectName, language)
             .AddMetadataReference(projectId, CorlibReference)
             .AddMetadataReference(projectId, SystemCoreReference)

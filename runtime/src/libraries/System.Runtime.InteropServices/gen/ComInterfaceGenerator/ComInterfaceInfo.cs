@@ -169,8 +169,7 @@ namespace Microsoft.Interop
             var attrInfo = GeneratedComInterfaceData.From(attrSymbolInfo);
             if (
                 attrInfo.IsUserDefined.HasFlag(InteropAttributeMember.StringMarshalling)
-                || attrInfo
-                    .IsUserDefined
+                || attrInfo.IsUserDefined
                     .HasFlag(InteropAttributeMember.StringMarshallingCustomType)
             )
             {
@@ -187,16 +186,14 @@ namespace Microsoft.Interop
                         return false;
                     }
                     if (
-                        !attrSymbolInfo
-                            .StringMarshallingCustomType
+                        !attrSymbolInfo.StringMarshallingCustomType
                             .IsAccessibleFromFileScopedClass(out var details)
                     )
                     {
                         stringMarshallingDiagnostic = DiagnosticInfo.Create(
                             GeneratorDiagnostics.StringMarshallingCustomTypeNotAccessibleByGeneratedCode,
                             syntax.Identifier.GetLocation(),
-                            attrInfo
-                                .StringMarshallingCustomType
+                            attrInfo.StringMarshallingCustomType
                                 .FullTypeName
                                 .Replace(TypeNames.GlobalAlias, ""),
                             details
@@ -222,8 +219,7 @@ namespace Microsoft.Interop
                 if (
                     (
                         baseAttr.IsUserDefined.HasFlag(InteropAttributeMember.StringMarshalling)
-                        || baseAttr
-                            .IsUserDefined
+                        || baseAttr.IsUserDefined
                             .HasFlag(InteropAttributeMember.StringMarshallingCustomType)
                     )
                     && (baseAttr.StringMarshalling, baseAttr.StringMarshallingCustomType)

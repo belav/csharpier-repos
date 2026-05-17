@@ -56,8 +56,7 @@ namespace Microsoft.CodeAnalysis.Remote
                 newSolutionChecksum,
                 async (oldSolution, newSolution) =>
                 {
-                    var aggregationService = oldSolution
-                        .Services
+                    var aggregationService = oldSolution.Services
                         .GetRequiredService<ILegacySolutionEventsAggregationService>();
                     await aggregationService
                         .OnWorkspaceChangedAsync(

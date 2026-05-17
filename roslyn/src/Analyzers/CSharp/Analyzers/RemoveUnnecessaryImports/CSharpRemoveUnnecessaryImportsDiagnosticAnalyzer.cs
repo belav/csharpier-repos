@@ -73,8 +73,7 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnnecessaryImports
                 yield return nodeContainingUnnecessaryUsings
                     is BaseNamespaceDeclarationSyntax namespaceDeclaration
                     ? namespaceDeclaration.Usings.GetContainedSpan()
-                    : ((CompilationUnitSyntax)nodeContainingUnnecessaryUsings)
-                        .Usings
+                    : ((CompilationUnitSyntax)nodeContainingUnnecessaryUsings).Usings
                         .GetContainedSpan();
             }
         }

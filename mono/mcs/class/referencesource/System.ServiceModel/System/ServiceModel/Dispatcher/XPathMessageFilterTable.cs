@@ -29,8 +29,7 @@ namespace System.ServiceModel.Dispatcher
         public XPathMessageFilterTable(int capacity)
         {
             if (capacity < 0)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentOutOfRangeException(
                             "capacity",
@@ -136,8 +135,7 @@ namespace System.ServiceModel.Dispatcher
             {
                 if (value <= 0)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentOutOfRangeException(
                                 "NodeQuota",
@@ -325,8 +323,7 @@ namespace System.ServiceModel.Dispatcher
             this.GetMatchingFilters(messageBuffer, filters);
             if (filters.Count > 1)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new MultipleFilterMatchesException(
                             SR.GetString(SR.FilterMultipleMatches),
@@ -353,8 +350,7 @@ namespace System.ServiceModel.Dispatcher
             this.GetMatchingFilters(navigator, filters);
             if (filters.Count > 1)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new MultipleFilterMatchesException(
                             SR.GetString(SR.FilterMultipleMatches),
@@ -381,8 +377,7 @@ namespace System.ServiceModel.Dispatcher
             this.GetMatchingFilters(navigator, filters);
             if (filters.Count > 1)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new MultipleFilterMatchesException(
                             SR.GetString(SR.FilterMultipleMatches),

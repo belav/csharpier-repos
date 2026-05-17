@@ -35,8 +35,7 @@ namespace System.Runtime.Serialization.Configuration
                 {
                     if (value == null)
                     {
-                        throw System
-                            .Runtime
+                        throw System.Runtime
                             .Serialization
                             .DiagnosticUtility
                             .ExceptionUtility
@@ -59,8 +58,7 @@ namespace System.Runtime.Serialization.Configuration
             {
                 if (element == null)
                 {
-                    throw System
-                        .Runtime
+                    throw System.Runtime
                         .Serialization
                         .DiagnosticUtility
                         .ExceptionUtility
@@ -84,8 +82,7 @@ namespace System.Runtime.Serialization.Configuration
         {
             if (String.IsNullOrEmpty(typeName))
             {
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -109,8 +106,7 @@ namespace System.Runtime.Serialization.Configuration
         {
             if (element == null)
             {
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -124,8 +120,7 @@ namespace System.Runtime.Serialization.Configuration
         {
             if (element == null)
             {
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -142,8 +137,7 @@ namespace System.Runtime.Serialization.Configuration
             {
                 if (element == null)
                 {
-                    throw System
-                        .Runtime
+                    throw System.Runtime
                         .Serialization
                         .DiagnosticUtility
                         .ExceptionUtility

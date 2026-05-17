@@ -374,8 +374,7 @@ namespace System.Data.Mapping.Update.Internal
                         )
                         {
                             throw EntityUtil.NotSupported(
-                                System
-                                    .Data
+                                System.Data
                                     .Entity
                                     .Strings
                                     .Update_NotSupportedComputedKeyColumn(
@@ -424,8 +423,7 @@ namespace System.Data.Mapping.Update.Internal
                     );
 
                     if (
-                        !ByValueEqualityComparer
-                            .Default
+                        !ByValueEqualityComparer.Default
                             .Equals(
                                 originalPropertyResult.GetSimpleValue(),
                                 propertyResult.GetSimpleValue()
@@ -433,8 +431,7 @@ namespace System.Data.Mapping.Update.Internal
                     )
                     {
                         throw EntityUtil.InvalidOperation(
-                            System
-                                .Data
+                            System.Data
                                 .Entity
                                 .Strings
                                 .Update_ModifyingIdentityColumn(

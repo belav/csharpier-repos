@@ -35,8 +35,7 @@ namespace System.Diagnostics.PerformanceData
 
             Debug.Assert(sizeof(Interop.PerfCounter.PerfCounterSetInstanceStruct) == 32);
 
-            _nativeInst = Interop
-                .PerfCounter
+            _nativeInst = Interop.PerfCounter
                 .PerfCreateInstance(
                     _counterSet._provider._hProvider,
                     ref _counterSet._counterSet,
@@ -130,8 +129,7 @@ namespace System.Diagnostics.PerformanceData
                     {
                         if (_counterSet._provider != null)
                         {
-                            Interop
-                                .PerfCounter
+                            Interop.PerfCounter
                                 .PerfDeleteInstance(_counterSet._provider._hProvider, _nativeInst);
                         }
                         _nativeInst = null;

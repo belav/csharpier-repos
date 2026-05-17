@@ -129,8 +129,7 @@ namespace System.ServiceModel.Configuration
             XmlReader reader
         )
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(
                     new ConfigurationErrorsException(
                         SR.GetString(
@@ -294,8 +293,7 @@ namespace System.ServiceModel.Configuration
 
                 if (endpointCollectionElement == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ConfigurationErrorsException(
                                 SR.GetString(
@@ -312,8 +310,7 @@ namespace System.ServiceModel.Configuration
                 {
                     if (!endpointCollectionElement.ContainsKey(endpointConfiguration))
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new ConfigurationErrorsException(
                                     SR.GetString(

@@ -597,8 +597,7 @@ namespace System.Runtime.Serialization
                                 )
                             )
                             {
-                                throw DiagnosticUtility
-                                    .ExceptionUtility
+                                throw DiagnosticUtility.ExceptionUtility
                                     .ThrowHelperError(
                                         new InvalidDataContractException(
                                             SR.GetString(
@@ -716,8 +715,7 @@ namespace System.Runtime.Serialization
                                 collectionContractAttribute.ItemName == null
                                 || collectionContractAttribute.ItemName.Length == 0
                             )
-                                throw DiagnosticUtility
-                                    .ExceptionUtility
+                                throw DiagnosticUtility.ExceptionUtility
                                     .ThrowHelperError(
                                         new InvalidDataContractException(
                                             SR.GetString(
@@ -737,8 +735,7 @@ namespace System.Runtime.Serialization
                                 collectionContractAttribute.KeyName == null
                                 || collectionContractAttribute.KeyName.Length == 0
                             )
-                                throw DiagnosticUtility
-                                    .ExceptionUtility
+                                throw DiagnosticUtility.ExceptionUtility
                                     .ThrowHelperError(
                                         new InvalidDataContractException(
                                             SR.GetString(
@@ -748,8 +745,7 @@ namespace System.Runtime.Serialization
                                         )
                                     );
                             if (!isDictionary)
-                                throw DiagnosticUtility
-                                    .ExceptionUtility
+                                throw DiagnosticUtility.ExceptionUtility
                                     .ThrowHelperError(
                                         new InvalidDataContractException(
                                             SR.GetString(
@@ -769,8 +765,7 @@ namespace System.Runtime.Serialization
                                 collectionContractAttribute.ValueName == null
                                 || collectionContractAttribute.ValueName.Length == 0
                             )
-                                throw DiagnosticUtility
-                                    .ExceptionUtility
+                                throw DiagnosticUtility.ExceptionUtility
                                     .ThrowHelperError(
                                         new InvalidDataContractException(
                                             SR.GetString(
@@ -780,8 +775,7 @@ namespace System.Runtime.Serialization
                                         )
                                     );
                             if (!isDictionary)
-                                throw DiagnosticUtility
-                                    .ExceptionUtility
+                                throw DiagnosticUtility.ExceptionUtility
                                     .ThrowHelperError(
                                         new InvalidDataContractException(
                                             SR.GetString(
@@ -833,8 +827,7 @@ namespace System.Runtime.Serialization
                 if (type == Globals.TypeOfArray)
                     type = Globals.TypeOfObjectArray;
                 if (type.GetArrayRank() > 1)
-                    throw System
-                        .Runtime
+                    throw System.Runtime
                         .Serialization
                         .DiagnosticUtility
                         .ExceptionUtility
@@ -852,8 +845,7 @@ namespace System.Runtime.Serialization
                 : base(type)
             {
                 if (type.GetArrayRank() > 1)
-                    throw System
-                        .Runtime
+                    throw System.Runtime
                         .Serialization
                         .DiagnosticUtility
                         .ExceptionUtility
@@ -882,8 +874,7 @@ namespace System.Runtime.Serialization
                 : base(type)
             {
                 if (getEnumeratorMethod == null)
-                    throw System
-                        .Runtime
+                    throw System.Runtime
                         .Serialization
                         .DiagnosticUtility
                         .ExceptionUtility
@@ -896,8 +887,7 @@ namespace System.Runtime.Serialization
                             )
                         );
                 if (itemType == null)
-                    throw System
-                        .Runtime
+                    throw System.Runtime
                         .Serialization
                         .DiagnosticUtility
                         .ExceptionUtility
@@ -935,8 +925,7 @@ namespace System.Runtime.Serialization
                 : this(type, kind, itemType, getEnumeratorMethod, (string)null, (string)null)
             {
                 if (addMethod == null && !type.IsInterface)
-                    throw System
-                        .Runtime
+                    throw System.Runtime
                         .Serialization
                         .DiagnosticUtility
                         .ExceptionUtility
@@ -1391,8 +1380,7 @@ namespace System.Runtime.Serialization
                             {
                                 itemType = Globals.TypeOfKeyValue.MakeGenericType(genericArgs);
                                 addMethod = type.GetMethod(Globals.AddMethodName);
-                                getEnumeratorMethod = Globals
-                                    .TypeOfIEnumerableGeneric
+                                getEnumeratorMethod = Globals.TypeOfIEnumerableGeneric
                                     .MakeGenericType(
                                         Globals.TypeOfKeyValuePair.MakeGenericType(genericArgs)
                                     )
@@ -1406,13 +1394,11 @@ namespace System.Runtime.Serialization
                                     || interfaceTypeToCheck == Globals.TypeOfIListGeneric
                                 )
                                 {
-                                    addMethod = Globals
-                                        .TypeOfICollectionGeneric
+                                    addMethod = Globals.TypeOfICollectionGeneric
                                         .MakeGenericType(itemType)
                                         .GetMethod(Globals.AddMethodName);
                                 }
-                                getEnumeratorMethod = Globals
-                                    .TypeOfIEnumerableGeneric
+                                getEnumeratorMethod = Globals.TypeOfIEnumerableGeneric
                                     .MakeGenericType(itemType)
                                     .GetMethod(Globals.GetEnumeratorMethodName);
                             }
@@ -1429,13 +1415,11 @@ namespace System.Runtime.Serialization
                                 itemType = Globals.TypeOfObject;
                                 if (interfaceTypeToCheck == Globals.TypeOfIList)
                                 {
-                                    addMethod = Globals
-                                        .TypeOfIList
+                                    addMethod = Globals.TypeOfIList
                                         .GetMethod(Globals.AddMethodName);
                                 }
                             }
-                            getEnumeratorMethod = Globals
-                                .TypeOfIEnumerable
+                            getEnumeratorMethod = Globals.TypeOfIEnumerable
                                 .GetMethod(Globals.GetEnumeratorMethodName);
                         }
                         if (tryCreate)
@@ -1707,8 +1691,7 @@ namespace System.Runtime.Serialization
             if (hasCollectionDataContract)
             {
                 if (tryCreate)
-                    throw System
-                        .Runtime
+                    throw System.Runtime
                         .Serialization
                         .DiagnosticUtility
                         .ExceptionUtility
@@ -1926,12 +1909,9 @@ namespace System.Runtime.Serialization
 
             CollectionDataContract boundCollectionContract = new CollectionDataContract(Kind);
             boundContracts.Add(this, boundCollectionContract);
-            boundCollectionContract.ItemContract = this.ItemContract.BindGenericParameters(
-                paramContracts,
-                boundContracts
-            );
-            boundCollectionContract.IsItemTypeNullable = !boundCollectionContract
-                .ItemContract
+            boundCollectionContract.ItemContract = this.ItemContract
+                .BindGenericParameters(paramContracts, boundContracts);
+            boundCollectionContract.IsItemTypeNullable = !boundCollectionContract.ItemContract
                 .IsValueType;
             boundCollectionContract.ItemName = ItemNameSetExplicit
                 ? this.ItemName
@@ -1971,8 +1951,7 @@ namespace System.Runtime.Serialization
         void ThrowIfInvalid()
         {
             if (InvalidCollectionInSharedContractMessage != null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -1999,8 +1978,7 @@ namespace System.Runtime.Serialization
         {
             if (this.Constructor == null)
             {
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -2038,8 +2016,7 @@ namespace System.Runtime.Serialization
             {
                 if (securityException != null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new SecurityException(
                                 SR.GetString(
@@ -2056,8 +2033,7 @@ namespace System.Runtime.Serialization
             {
                 if (securityException != null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new SecurityException(
                                 SR.GetString(
@@ -2074,8 +2050,7 @@ namespace System.Runtime.Serialization
             {
                 if (securityException != null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new SecurityException(
                                 SR.GetString(
@@ -2092,8 +2067,7 @@ namespace System.Runtime.Serialization
             {
                 if (securityException != null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new SecurityException(
                                 SR.GetString(
@@ -2122,8 +2096,7 @@ namespace System.Runtime.Serialization
             {
                 if (securityException != null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new SecurityException(
                                 SR.GetString(
@@ -2140,8 +2113,7 @@ namespace System.Runtime.Serialization
             {
                 if (securityException != null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new SecurityException(
                                 SR.GetString(

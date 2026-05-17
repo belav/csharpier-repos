@@ -312,8 +312,7 @@ namespace System.Web.Mvc.Html
             string innerHtmlPrefix = null
         )
         {
-            string fullName = htmlHelper
-                .ViewContext
+            string fullName = htmlHelper.ViewContext
                 .ViewData
                 .TemplateInfo
                 .GetFullHtmlFieldName(name);

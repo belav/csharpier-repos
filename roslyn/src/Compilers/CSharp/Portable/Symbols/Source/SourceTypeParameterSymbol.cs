@@ -287,8 +287,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 return;
             }
 
-            var args = ConstraintsHelper
-                .CheckConstraintsArgsBoxed
+            var args = ConstraintsHelper.CheckConstraintsArgsBoxed
                 .Allocate(
                     DeclaringCompilation,
                     ContainingAssembly.CorLibrary.TypeConversions,
@@ -420,14 +419,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         //Debug.Assert(this.ContainingSymbol.IsContainingSymbolOfAllTypeParameters(this.ConstraintTypes));
                         //Debug.Assert(this.ContainingSymbol.IsContainingSymbolOfAllTypeParameters(ImmutableArray<TypeSymbol>.CreateFrom(this.Interfaces)));
                         Debug.Assert(
-                            this.ContainingSymbol.IsContainingSymbolOfAllTypeParameters(
-                                this.EffectiveBaseClassNoUseSiteDiagnostics
-                            )
+                            this.ContainingSymbol
+                                .IsContainingSymbolOfAllTypeParameters(
+                                    this.EffectiveBaseClassNoUseSiteDiagnostics
+                                )
                         );
                         Debug.Assert(
-                            this.ContainingSymbol.IsContainingSymbolOfAllTypeParameters(
-                                this.DeducedBaseTypeNoUseSiteDiagnostics
-                            )
+                            this.ContainingSymbol
+                                .IsContainingSymbolOfAllTypeParameters(
+                                    this.DeducedBaseTypeNoUseSiteDiagnostics
+                                )
                         );
                         break;
 

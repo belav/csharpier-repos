@@ -187,8 +187,7 @@ namespace System.Text.Json.Nodes.Tests
             );
             Assert.NotNull(jsonDictionaryField);
 
-            Type jsonPropertyDictionaryType = typeof(JsonObject)
-                .Assembly
+            Type jsonPropertyDictionaryType = typeof(JsonObject).Assembly
                 .GetType("System.Text.Json.JsonPropertyDictionary`1");
             Assert.NotNull(jsonPropertyDictionaryType);
 
@@ -274,8 +273,7 @@ namespace System.Text.Json.Nodes.Tests
         [Fact]
         public static async Task ReadSimpleObjectWithTrailingTrivia()
         {
-            byte[] data = Encoding
-                .UTF8
+            byte[] data = Encoding.UTF8
                 .GetBytes(SimpleTestClass.s_json + " /* Multi\r\nLine Comment */\t");
 
             var options = new JsonDocumentOptions { CommentHandling = JsonCommentHandling.Skip };

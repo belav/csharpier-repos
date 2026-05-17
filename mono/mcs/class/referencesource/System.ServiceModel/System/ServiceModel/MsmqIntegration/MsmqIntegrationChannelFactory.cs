@@ -82,8 +82,7 @@ namespace System.ServiceModel.MsmqIntegration
             lock (ThisLock)
             {
                 if (this.xmlSerializerTable.Count >= maxSerializerTableSize)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new CommunicationException(
                                 SR.GetString(SR.MsmqSerializationTableFull, maxSerializerTableSize)
@@ -144,8 +143,7 @@ namespace System.ServiceModel.MsmqIntegration
                 case MsmqMessageSerializationFormat.ActiveX:
                     if (property.BodyType.HasValue)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new ArgumentException(
                                     SR.GetString(SR.MsmqCannotUseBodyTypeWithActiveXSerialization)
@@ -167,8 +165,7 @@ namespace System.ServiceModel.MsmqIntegration
                     // body MUST be byte array
                     byte[] byteArray = property.Body as byte[];
                     if (byteArray == null)
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new SerializationException(
                                     SR.GetString(SR.MsmqByteArrayBodyExpected)
@@ -183,8 +180,7 @@ namespace System.ServiceModel.MsmqIntegration
                     // body MUST be a stream
                     Stream bodyStream = property.Body as Stream;
                     if (bodyStream == null)
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new SerializationException(SR.GetString(SR.MsmqStreamBodyExpected))
                             );
@@ -193,8 +189,7 @@ namespace System.ServiceModel.MsmqIntegration
                     return bodyStream;
 
                 default:
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new SerializationException(
                                 SR.GetString(

@@ -74,8 +74,7 @@ namespace System.ServiceModel.Security
         {
             if (securityTokenServiceConfiguration == null)
             {
-                throw System
-                    .ServiceModel
+                throw System.ServiceModel
                     .DiagnosticUtility
                     .ExceptionUtility
                     .ThrowHelperArgumentNull("securityTokenServiceConfiguration");
@@ -110,8 +109,7 @@ namespace System.ServiceModel.Security
         {
             if (requestContext == null)
             {
-                throw System
-                    .ServiceModel
+                throw System.ServiceModel
                     .DiagnosticUtility
                     .ExceptionUtility
                     .ThrowHelperArgumentNull("requestContext");
@@ -125,8 +123,7 @@ namespace System.ServiceModel.Security
             )
             {
                 // Add tokens in message
-                SecurityMessageProperty msgProperty = requestContext
-                    .RequestMessage
+                SecurityMessageProperty msgProperty = requestContext.RequestMessage
                     .Properties
                     .Security;
                 if (msgProperty.ProtectionToken != null)
@@ -183,10 +180,10 @@ namespace System.ServiceModel.Security
         {
             if (_securityTokenServiceConfiguration != null)
             {
-                SecurityTokenResolver tokenResolver = _securityTokenServiceConfiguration
-                    .SecurityTokenHandlers
-                    .Configuration
-                    .ServiceTokenResolver;
+                SecurityTokenResolver tokenResolver =
+                    _securityTokenServiceConfiguration.SecurityTokenHandlers
+                        .Configuration
+                        .ServiceTokenResolver;
 
                 if (
                     tokenResolver != null
@@ -203,8 +200,7 @@ namespace System.ServiceModel.Security
                 && OperationContext.Current.Host.Description != null
             )
             {
-                ServiceCredentials serviceCreds = OperationContext
-                    .Current
+                ServiceCredentials serviceCreds = OperationContext.Current
                     .Host
                     .Description
                     .Behaviors
@@ -304,8 +300,7 @@ namespace System.ServiceModel.Security
                         dispatchContext.ResponseMessage = sts.Validate(icp, rst);
                         break;
                     default:
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(
                                     SR.GetString(SR.ID3112, rst.RequestType)
@@ -315,8 +310,7 @@ namespace System.ServiceModel.Security
             }
             else
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new InvalidRequestException(SR.GetString(SR.ID3022)));
             }
         }
@@ -348,15 +342,13 @@ namespace System.ServiceModel.Security
 
             if (requestSerializer == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("requestSerializer");
             }
 
             if (responseSerializer == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("responseSerializer");
             }
 
@@ -490,8 +482,7 @@ namespace System.ServiceModel.Security
             }
             else
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new InvalidRequestException(SR.GetString(SR.ID3114)));
             }
 
@@ -516,8 +507,7 @@ namespace System.ServiceModel.Security
         {
             if (dispatchContext.RequestMessage is RST && !IsValidRSTAction(dispatchContext))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidRequestException(
                             SR.GetString(
@@ -531,8 +521,7 @@ namespace System.ServiceModel.Security
 
             if (dispatchContext.RequestMessage is RSTR && !IsValidRSTRAction(dispatchContext))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidRequestException(
                             SR.GetString(
@@ -627,8 +616,7 @@ namespace System.ServiceModel.Security
 
             if (sts == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ID3002)));
             }
 
@@ -666,15 +654,13 @@ namespace System.ServiceModel.Security
 
             if (requestSerializer == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("requestSerializer");
             }
 
             if (responseSerializer == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("responseSerializer");
             }
 
@@ -774,8 +760,7 @@ namespace System.ServiceModel.Security
             ProcessCoreAsyncResult asyncResult = ar as ProcessCoreAsyncResult;
             if (asyncResult == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentException(
                             SR.GetString(SR.ID2004, typeof(ProcessCoreAsyncResult), ar.GetType()),
@@ -846,8 +831,7 @@ namespace System.ServiceModel.Security
             }
 
             bool preserveOriginalException = false;
-            ServiceDebugBehavior debugBehavior = OperationContext
-                .Current
+            ServiceDebugBehavior debugBehavior = OperationContext.Current
                 .Host
                 .Description
                 .Behaviors
@@ -869,8 +853,7 @@ namespace System.ServiceModel.Security
             }
             else
             {
-                FaultException faultException = OperationContext
-                    .Current
+                FaultException faultException = OperationContext.Current
                     .Host
                     .Credentials
                     .ExceptionMapper
@@ -1843,22 +1826,19 @@ namespace System.ServiceModel.Security
 
                 if (dispatchContext == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgumentNull("dispatchContext");
                 }
 
                 if (responseSerializer == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgumentNull("responseSerializer");
                 }
 
                 if (serializationContext == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgumentNull("serializationContext");
                 }
 
@@ -1972,8 +1952,7 @@ namespace System.ServiceModel.Security
                 {
                     this.Complete(
                         true,
-                        DiagnosticUtility
-                            .ExceptionUtility
+                        DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(new InvalidRequestException(SR.GetString(SR.ID3023)))
                     );
                     return;
@@ -1996,8 +1975,7 @@ namespace System.ServiceModel.Security
                     default:
                         this.Complete(
                             true,
-                            DiagnosticUtility
-                                .ExceptionUtility
+                            DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
                                     new InvalidOperationException(
                                         SR.GetString(SR.ID3112, rst.RequestType)
@@ -2026,15 +2004,13 @@ namespace System.ServiceModel.Security
             {
                 try
                 {
-                    _dispatchContext.ResponseMessage = _dispatchContext
-                        .SecurityTokenService
+                    _dispatchContext.ResponseMessage = _dispatchContext.SecurityTokenService
                         .EndCancel(ar);
                     Complete(false);
                 }
                 catch (Exception e)
                 {
-                    System
-                        .ServiceModel
+                    System.ServiceModel
                         .DiagnosticUtility
                         .TraceHandledException(e, TraceEventType.Error);
 
@@ -2048,15 +2024,13 @@ namespace System.ServiceModel.Security
             {
                 try
                 {
-                    _dispatchContext.ResponseMessage = _dispatchContext
-                        .SecurityTokenService
+                    _dispatchContext.ResponseMessage = _dispatchContext.SecurityTokenService
                         .EndIssue(ar);
                     Complete(false);
                 }
                 catch (Exception e)
                 {
-                    System
-                        .ServiceModel
+                    System.ServiceModel
                         .DiagnosticUtility
                         .TraceHandledException(e, TraceEventType.Error);
 
@@ -2070,15 +2044,13 @@ namespace System.ServiceModel.Security
             {
                 try
                 {
-                    _dispatchContext.ResponseMessage = _dispatchContext
-                        .SecurityTokenService
+                    _dispatchContext.ResponseMessage = _dispatchContext.SecurityTokenService
                         .EndRenew(ar);
                     Complete(false);
                 }
                 catch (Exception e)
                 {
-                    System
-                        .ServiceModel
+                    System.ServiceModel
                         .DiagnosticUtility
                         .TraceHandledException(e, TraceEventType.Error);
 
@@ -2092,15 +2064,13 @@ namespace System.ServiceModel.Security
             {
                 try
                 {
-                    _dispatchContext.ResponseMessage = _dispatchContext
-                        .SecurityTokenService
+                    _dispatchContext.ResponseMessage = _dispatchContext.SecurityTokenService
                         .EndValidate(ar);
                     Complete(false);
                 }
                 catch (Exception e)
                 {
-                    System
-                        .ServiceModel
+                    System.ServiceModel
                         .DiagnosticUtility
                         .TraceHandledException(e, TraceEventType.Error);
 
@@ -2232,8 +2202,7 @@ namespace System.ServiceModel.Security
                 throw DiagnosticUtility.ThrowHelperInvalidOperation(SR.GetString(SR.ID3148));
             }
 
-            System.Web.Services.Description.ServiceDescription serviceDescription = context
-                .WsdlPort
+            System.Web.Services.Description.ServiceDescription serviceDescription = context.WsdlPort
                 .Service
                 .ServiceDescription;
 
@@ -2242,8 +2211,7 @@ namespace System.ServiceModel.Security
             foreach (PortType portType in serviceDescription.PortTypes)
             {
                 if (
-                    StringComparer
-                        .Ordinal
+                    StringComparer.Ordinal
                         .Equals(
                             portType.Name,
                             WSTrustServiceContractConstants.Contracts.IWSTrustFeb2005Sync
@@ -2318,8 +2286,7 @@ namespace System.ServiceModel.Security
                     );
                 }
                 else if (
-                    StringComparer
-                        .OrdinalIgnoreCase
+                    StringComparer.OrdinalIgnoreCase
                         .Equals(
                             portType.Name,
                             WSTrustServiceContractConstants.Contracts.IWSTrust13Sync
@@ -2394,8 +2361,7 @@ namespace System.ServiceModel.Security
                     );
                 }
                 else if (
-                    StringComparer
-                        .OrdinalIgnoreCase
+                    StringComparer.OrdinalIgnoreCase
                         .Equals(
                             portType.Name,
                             WSTrustServiceContractConstants.Contracts.IWSTrustFeb2005Async
@@ -2470,8 +2436,7 @@ namespace System.ServiceModel.Security
                     );
                 }
                 else if (
-                    StringComparer
-                        .OrdinalIgnoreCase
+                    StringComparer.OrdinalIgnoreCase
                         .Equals(
                             portType.Name,
                             WSTrustServiceContractConstants.Contracts.IWSTrust13Async
@@ -2580,8 +2545,7 @@ namespace System.ServiceModel.Security
             }
 
             bool alreadyPresent = false;
-            XmlQualifiedName[] namespaces = context
-                .WsdlBinding
+            XmlQualifiedName[] namespaces = context.WsdlBinding
                 .ServiceDescription
                 .Namespaces
                 .ToArray();
@@ -2757,8 +2721,7 @@ namespace System.ServiceModel.Security
         {
             if (serviceDescription == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("serviceDescription");
             }
 
@@ -2779,15 +2742,13 @@ namespace System.ServiceModel.Security
 
             if (inputMessageElement == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("inputMessageElement");
             }
 
             if (outputMessageElement == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("outputMessageElement");
             }
 
@@ -2807,8 +2768,7 @@ namespace System.ServiceModel.Security
                     )
                     {
                         if (
-                            StringComparer
-                                .Ordinal
+                            StringComparer.Ordinal
                                 .Equals(message.Name, op.Messages.Input.Message.Name)
                         )
                         {
@@ -2827,8 +2787,7 @@ namespace System.ServiceModel.Security
                             inputMessage = message;
                         }
                         else if (
-                            StringComparer
-                                .Ordinal
+                            StringComparer.Ordinal
                                 .Equals(message.Name, op.Messages.Output.Message.Name)
                         )
                         {

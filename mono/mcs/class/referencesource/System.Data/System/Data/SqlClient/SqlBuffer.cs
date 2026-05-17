@@ -464,10 +464,11 @@ namespace System.Data.SqlClient
                 if (StorageType.DateTime2 == _type)
                 {
                     byte scale = _value._dateTime2Info.timeInfo.scale;
-                    return this.DateTime.ToString(
-                        __katmaiDateTime2FormatByScale[scale],
-                        DateTimeFormatInfo.InvariantInfo
-                    );
+                    return this.DateTime
+                        .ToString(
+                            __katmaiDateTime2FormatByScale[scale],
+                            DateTimeFormatInfo.InvariantInfo
+                        );
                 }
                 if (StorageType.DateTimeOffset == _type)
                 {

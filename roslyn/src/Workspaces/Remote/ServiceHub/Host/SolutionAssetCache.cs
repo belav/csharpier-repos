@@ -233,8 +233,7 @@ namespace Microsoft.CodeAnalysis.Remote
             if (_remoteWorkspace is null)
                 return;
 
-            var checksums = await _remoteWorkspace
-                .CurrentSolution
+            var checksums = await _remoteWorkspace.CurrentSolution
                 .State
                 .GetStateChecksumsAsync(cancellationToken)
                 .ConfigureAwait(false);

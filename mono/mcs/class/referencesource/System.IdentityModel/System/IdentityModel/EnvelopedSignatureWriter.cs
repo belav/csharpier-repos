@@ -63,15 +63,13 @@ namespace System.IdentityModel
 
             if (signingCredentials == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("signingCredentials");
             }
 
             if (string.IsNullOrEmpty(referenceId))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentException(SR.GetString(SR.ID0006), "referenceId")
                     );
@@ -79,8 +77,7 @@ namespace System.IdentityModel
 
             if (securityTokenSerializer == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("securityTokenSerializer");
             }
 
@@ -219,15 +216,13 @@ namespace System.IdentityModel
             base.Flush();
             if (_writerStream == null || _writerStream.Length == 0)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ID6029)));
             }
 
             if (_signatureFragment.Length != 0)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ID6030)));
             }
 

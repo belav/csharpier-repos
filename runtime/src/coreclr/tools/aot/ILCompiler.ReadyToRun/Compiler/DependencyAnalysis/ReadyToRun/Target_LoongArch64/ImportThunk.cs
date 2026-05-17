@@ -67,8 +67,7 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
 
             // Emit relocation for the Module* load above
             if (_thunkKind != Kind.Eager)
-                instructionEncoder
-                    .Builder
+                instructionEncoder.Builder
                     .EmitReloc(factory.ModuleImport, RelocType.IMAGE_REL_BASED_DIR64);
         }
     }

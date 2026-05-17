@@ -103,15 +103,12 @@ namespace System.ServiceModel
             te.ExactlyOnce = ExactlyOnce;
             te.MaxReceivedMessageSize = MaxReceivedMessageSize;
             te.MaxRetryCycles = MaxRetryCycles;
-            te.MsmqTransportSecurity.MsmqAuthenticationMode = Security
-                .Transport
+            te.MsmqTransportSecurity.MsmqAuthenticationMode = Security.Transport
                 .MsmqAuthenticationMode;
-            te.MsmqTransportSecurity.MsmqEncryptionAlgorithm = Security
-                .Transport
+            te.MsmqTransportSecurity.MsmqEncryptionAlgorithm = Security.Transport
                 .MsmqEncryptionAlgorithm;
             te.MsmqTransportSecurity.MsmqProtectionLevel = Security.Transport.MsmqProtectionLevel;
-            te.MsmqTransportSecurity.MsmqSecureHashAlgorithm = Security
-                .Transport
+            te.MsmqTransportSecurity.MsmqSecureHashAlgorithm = Security.Transport
                 .MsmqSecureHashAlgorithm;
             te.ReceiveErrorHandling = ReceiveErrorHandling;
             te.ReceiveRetryCount = ReceiveRetryCount;

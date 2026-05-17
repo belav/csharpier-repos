@@ -144,26 +144,27 @@ namespace System.ServiceModel.Security
                     {
                         if (requestedAttachedReference == null)
                         {
-                            this.StandardsManager.TryCreateKeyIdentifierClauseFromTokenXml(
-                                issuedTokenXml,
-                                SecurityTokenReferenceStyle.Internal,
-                                out requestedAttachedReference
-                            );
+                            this.StandardsManager
+                                .TryCreateKeyIdentifierClauseFromTokenXml(
+                                    issuedTokenXml,
+                                    SecurityTokenReferenceStyle.Internal,
+                                    out requestedAttachedReference
+                                );
                         }
                         if (requestedUnattachedReference == null)
                         {
-                            this.StandardsManager.TryCreateKeyIdentifierClauseFromTokenXml(
-                                issuedTokenXml,
-                                SecurityTokenReferenceStyle.External,
-                                out requestedUnattachedReference
-                            );
+                            this.StandardsManager
+                                .TryCreateKeyIdentifierClauseFromTokenXml(
+                                    issuedTokenXml,
+                                    SecurityTokenReferenceStyle.External,
+                                    out requestedUnattachedReference
+                                );
                         }
                     }
                 }
                 catch (XmlException)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new XmlException(
                                 SR.GetString(
@@ -313,8 +314,7 @@ namespace System.ServiceModel.Security
             )
             {
                 if (channelBehaviors == null)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgumentNull("channelBehaviors");
 
                 ChannelFactory<IWsTrustFeb2005SecurityTokenService> result =

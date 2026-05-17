@@ -33,8 +33,7 @@ namespace System.Security.Cryptography
 
             // Convert key length to bits.
             using (
-                SafeEvpCipherCtxHandle ctx = Interop
-                    .Crypto
+                SafeEvpCipherCtxHandle ctx = Interop.Crypto
                     .EvpCipherCreatePartial(GetCipher(_key.Length * 8))
             )
             {
@@ -49,8 +48,7 @@ namespace System.Security.Cryptography
                 }
 
                 Interop.Crypto.CipherSetNonceLength(ctx, nonce.Length);
-                Interop
-                    .Crypto
+                Interop.Crypto
                     .EvpCipherSetKeyAndIV(
                         ctx,
                         _key,
@@ -85,8 +83,7 @@ namespace System.Security.Cryptography
                     }
 
                     if (
-                        !Interop
-                            .Crypto
+                        !Interop.Crypto
                             .EvpCipherUpdate(
                                 ctx,
                                 ciphertextAndTag,
@@ -99,8 +96,7 @@ namespace System.Security.Cryptography
                     }
 
                     if (
-                        !Interop
-                            .Crypto
+                        !Interop.Crypto
                             .EvpAeadCipherFinalEx(
                                 ctx,
                                 ciphertextAndTag.Slice(ciphertextBytesWritten),
@@ -149,8 +145,7 @@ namespace System.Security.Cryptography
             CheckDisposed();
 
             using (
-                SafeEvpCipherCtxHandle ctx = Interop
-                    .Crypto
+                SafeEvpCipherCtxHandle ctx = Interop.Crypto
                     .EvpCipherCreatePartial(GetCipher(_key.Length * 8))
             )
             {
@@ -165,8 +160,7 @@ namespace System.Security.Cryptography
                     throw new CryptographicException();
                 }
 
-                Interop
-                    .Crypto
+                Interop.Crypto
                     .EvpCipherSetKeyAndIV(
                         ctx,
                         _key,
@@ -180,8 +174,7 @@ namespace System.Security.Cryptography
                 }
 
                 if (
-                    !Interop
-                        .Crypto
+                    !Interop.Crypto
                         .EvpCipherUpdate(ctx, plaintext, out int plaintextBytesWritten, ciphertext)
                 )
                 {
@@ -190,8 +183,7 @@ namespace System.Security.Cryptography
                 }
 
                 if (
-                    !Interop
-                        .Crypto
+                    !Interop.Crypto
                         .EvpCipherUpdate(
                             ctx,
                             plaintext.Slice(plaintextBytesWritten),
@@ -207,8 +199,7 @@ namespace System.Security.Cryptography
                 plaintextBytesWritten += bytesWritten;
 
                 if (
-                    !Interop
-                        .Crypto
+                    !Interop.Crypto
                         .EvpAeadCipherFinalEx(
                             ctx,
                             plaintext.Slice(plaintextBytesWritten),

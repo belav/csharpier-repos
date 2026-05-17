@@ -26,8 +26,7 @@ namespace Castle.DynamicProxy.Tests.BugsReported
         [Test]
         public void TestCase()
         {
-            generator
-                .ProxyBuilder
+            generator.ProxyBuilder
                 .CreateInterfaceProxyTypeWithTarget(
                     typeof(IPresentationHost),
                     Type.EmptyTypes,

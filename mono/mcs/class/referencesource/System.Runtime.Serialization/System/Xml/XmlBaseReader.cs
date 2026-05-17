@@ -543,8 +543,7 @@ namespace System.Xml
         XmlAttributeNode GetAttributeNode(int index)
         {
             if (!node.CanGetAttribute)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -555,8 +554,7 @@ namespace System.Xml
                         )
                     );
             if (index < 0)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -567,8 +565,7 @@ namespace System.Xml
                         )
                     );
             if (index >= attributeCount)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -584,8 +581,7 @@ namespace System.Xml
         XmlAttributeNode GetAttributeNode(string name)
         {
             if (name == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -637,8 +633,7 @@ namespace System.Xml
         XmlAttributeNode GetAttributeNode(string localName, string namespaceUri)
         {
             if (localName == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -672,8 +667,7 @@ namespace System.Xml
         )
         {
             if (localName == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -1139,8 +1133,7 @@ namespace System.Xml
         public override bool IsLocalName(string localName)
         {
             if (localName == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -1151,8 +1144,7 @@ namespace System.Xml
         public override bool IsLocalName(XmlDictionaryString localName)
         {
             if (localName == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -1163,8 +1155,7 @@ namespace System.Xml
         public override bool IsNamespaceUri(string namespaceUri)
         {
             if (namespaceUri == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -1175,8 +1166,7 @@ namespace System.Xml
         public override bool IsNamespaceUri(XmlDictionaryString namespaceUri)
         {
             if (namespaceUri == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -1239,15 +1229,13 @@ namespace System.Xml
         )
         {
             if (localName == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
                     .ThrowHelperArgumentNull("localName");
             if (namespaceUri == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -1260,15 +1248,13 @@ namespace System.Xml
         public override int IndexOfLocalName(string[] localNames, string namespaceUri)
         {
             if (localNames == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
                     .ThrowHelperArgumentNull("localNames");
             if (namespaceUri == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -1283,8 +1269,7 @@ namespace System.Xml
                     {
                         string value = localNames[i];
                         if (value == null)
-                            throw System
-                                .Runtime
+                            throw System.Runtime
                                 .Serialization
                                 .DiagnosticUtility
                                 .ExceptionUtility
@@ -1309,8 +1294,7 @@ namespace System.Xml
                     {
                         string value = localNames[i];
                         if (value == null)
-                            throw System
-                                .Runtime
+                            throw System.Runtime
                                 .Serialization
                                 .DiagnosticUtility
                                 .ExceptionUtility
@@ -1337,15 +1321,13 @@ namespace System.Xml
         )
         {
             if (localNames == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
                     .ThrowHelperArgumentNull("localNames");
             if (namespaceUri == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -1360,8 +1342,7 @@ namespace System.Xml
                     {
                         XmlDictionaryString value = localNames[i];
                         if (value == null)
-                            throw System
-                                .Runtime
+                            throw System.Runtime
                                 .Serialization
                                 .DiagnosticUtility
                                 .ExceptionUtility
@@ -1386,8 +1367,7 @@ namespace System.Xml
                     {
                         XmlDictionaryString value = localNames[i];
                         if (value == null)
-                            throw System
-                                .Runtime
+                            throw System.Runtime
                                 .Serialization
                                 .DiagnosticUtility
                                 .ExceptionUtility
@@ -1411,15 +1391,13 @@ namespace System.Xml
         public override int ReadValueChunk(char[] chars, int offset, int count)
         {
             if (chars == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("chars"));
             if (offset < 0)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -1430,8 +1408,7 @@ namespace System.Xml
                         )
                     );
             if (offset > chars.Length)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -1442,8 +1419,7 @@ namespace System.Xml
                         )
                     );
             if (count < 0)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -1454,8 +1430,7 @@ namespace System.Xml
                         )
                     );
             if (count > chars.Length - offset)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -1486,15 +1461,13 @@ namespace System.Xml
         public override int ReadValueAsBase64(byte[] buffer, int offset, int count)
         {
             if (buffer == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("buffer"));
             if (offset < 0)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -1505,8 +1478,7 @@ namespace System.Xml
                         )
                     );
             if (offset > buffer.Length)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -1517,8 +1489,7 @@ namespace System.Xml
                         )
                     );
             if (count < 0)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -1529,8 +1500,7 @@ namespace System.Xml
                         )
                     );
             if (count > buffer.Length - offset)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -1633,8 +1603,7 @@ namespace System.Xml
             {
                 int nodeDepth = node.NodeType == XmlNodeType.Element ? this.depth - 1 : this.depth;
                 if (nodeDepth == 0)
-                    throw System
-                        .Runtime
+                    throw System.Runtime
                         .Serialization
                         .DiagnosticUtility
                         .ExceptionUtility
@@ -1735,15 +1704,13 @@ namespace System.Xml
         public override int ReadContentAsBase64(byte[] buffer, int offset, int count)
         {
             if (buffer == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("buffer"));
             if (offset < 0)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -1754,8 +1721,7 @@ namespace System.Xml
                         )
                     );
             if (offset > buffer.Length)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -1766,8 +1732,7 @@ namespace System.Xml
                         )
                     );
             if (count < 0)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -1778,8 +1743,7 @@ namespace System.Xml
                         )
                     );
             if (count > buffer.Length - offset)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -1846,15 +1810,13 @@ namespace System.Xml
         public override int ReadContentAsBinHex(byte[] buffer, int offset, int count)
         {
             if (buffer == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("buffer"));
             if (offset < 0)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -1865,8 +1827,7 @@ namespace System.Xml
                         )
                     );
             if (offset > buffer.Length)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -1877,8 +1838,7 @@ namespace System.Xml
                         )
                     );
             if (count < 0)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -1889,8 +1849,7 @@ namespace System.Xml
                         )
                     );
             if (count > buffer.Length - offset)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -2021,8 +1980,7 @@ namespace System.Xml
                     }
                     // No spaces, so don't try again
                     if (i == charCount)
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new XmlException(exception.Message, exception.InnerException)
                             );
@@ -2233,8 +2191,7 @@ namespace System.Xml
 
         public override void ResolveEntity()
         {
-            throw System
-                .Runtime
+            throw System.Runtime
                 .Serialization
                 .DiagnosticUtility
                 .ExceptionUtility
@@ -2320,8 +2277,7 @@ namespace System.Xml
 
         public override Int16[] ReadInt16Array(string localName, string namespaceUri)
         {
-            return Int16ArrayHelperWithString
-                .Instance
+            return Int16ArrayHelperWithString.Instance
                 .ReadArray(this, localName, namespaceUri, quotas.MaxArrayLength);
         }
 
@@ -2330,15 +2286,13 @@ namespace System.Xml
             XmlDictionaryString namespaceUri
         )
         {
-            return Int16ArrayHelperWithDictionaryString
-                .Instance
+            return Int16ArrayHelperWithDictionaryString.Instance
                 .ReadArray(this, localName, namespaceUri, quotas.MaxArrayLength);
         }
 
         public override Int32[] ReadInt32Array(string localName, string namespaceUri)
         {
-            return Int32ArrayHelperWithString
-                .Instance
+            return Int32ArrayHelperWithString.Instance
                 .ReadArray(this, localName, namespaceUri, quotas.MaxArrayLength);
         }
 
@@ -2347,15 +2301,13 @@ namespace System.Xml
             XmlDictionaryString namespaceUri
         )
         {
-            return Int32ArrayHelperWithDictionaryString
-                .Instance
+            return Int32ArrayHelperWithDictionaryString.Instance
                 .ReadArray(this, localName, namespaceUri, quotas.MaxArrayLength);
         }
 
         public override Int64[] ReadInt64Array(string localName, string namespaceUri)
         {
-            return Int64ArrayHelperWithString
-                .Instance
+            return Int64ArrayHelperWithString.Instance
                 .ReadArray(this, localName, namespaceUri, quotas.MaxArrayLength);
         }
 
@@ -2364,15 +2316,13 @@ namespace System.Xml
             XmlDictionaryString namespaceUri
         )
         {
-            return Int64ArrayHelperWithDictionaryString
-                .Instance
+            return Int64ArrayHelperWithDictionaryString.Instance
                 .ReadArray(this, localName, namespaceUri, quotas.MaxArrayLength);
         }
 
         public override float[] ReadSingleArray(string localName, string namespaceUri)
         {
-            return SingleArrayHelperWithString
-                .Instance
+            return SingleArrayHelperWithString.Instance
                 .ReadArray(this, localName, namespaceUri, quotas.MaxArrayLength);
         }
 
@@ -2381,15 +2331,13 @@ namespace System.Xml
             XmlDictionaryString namespaceUri
         )
         {
-            return SingleArrayHelperWithDictionaryString
-                .Instance
+            return SingleArrayHelperWithDictionaryString.Instance
                 .ReadArray(this, localName, namespaceUri, quotas.MaxArrayLength);
         }
 
         public override double[] ReadDoubleArray(string localName, string namespaceUri)
         {
-            return DoubleArrayHelperWithString
-                .Instance
+            return DoubleArrayHelperWithString.Instance
                 .ReadArray(this, localName, namespaceUri, quotas.MaxArrayLength);
         }
 
@@ -2398,15 +2346,13 @@ namespace System.Xml
             XmlDictionaryString namespaceUri
         )
         {
-            return DoubleArrayHelperWithDictionaryString
-                .Instance
+            return DoubleArrayHelperWithDictionaryString.Instance
                 .ReadArray(this, localName, namespaceUri, quotas.MaxArrayLength);
         }
 
         public override decimal[] ReadDecimalArray(string localName, string namespaceUri)
         {
-            return DecimalArrayHelperWithString
-                .Instance
+            return DecimalArrayHelperWithString.Instance
                 .ReadArray(this, localName, namespaceUri, quotas.MaxArrayLength);
         }
 
@@ -2415,15 +2361,13 @@ namespace System.Xml
             XmlDictionaryString namespaceUri
         )
         {
-            return DecimalArrayHelperWithDictionaryString
-                .Instance
+            return DecimalArrayHelperWithDictionaryString.Instance
                 .ReadArray(this, localName, namespaceUri, quotas.MaxArrayLength);
         }
 
         public override DateTime[] ReadDateTimeArray(string localName, string namespaceUri)
         {
-            return DateTimeArrayHelperWithString
-                .Instance
+            return DateTimeArrayHelperWithString.Instance
                 .ReadArray(this, localName, namespaceUri, quotas.MaxArrayLength);
         }
 
@@ -2432,15 +2376,13 @@ namespace System.Xml
             XmlDictionaryString namespaceUri
         )
         {
-            return DateTimeArrayHelperWithDictionaryString
-                .Instance
+            return DateTimeArrayHelperWithDictionaryString.Instance
                 .ReadArray(this, localName, namespaceUri, quotas.MaxArrayLength);
         }
 
         public override Guid[] ReadGuidArray(string localName, string namespaceUri)
         {
-            return GuidArrayHelperWithString
-                .Instance
+            return GuidArrayHelperWithString.Instance
                 .ReadArray(this, localName, namespaceUri, quotas.MaxArrayLength);
         }
 
@@ -2449,15 +2391,13 @@ namespace System.Xml
             XmlDictionaryString namespaceUri
         )
         {
-            return GuidArrayHelperWithDictionaryString
-                .Instance
+            return GuidArrayHelperWithDictionaryString.Instance
                 .ReadArray(this, localName, namespaceUri, quotas.MaxArrayLength);
         }
 
         public override TimeSpan[] ReadTimeSpanArray(string localName, string namespaceUri)
         {
-            return TimeSpanArrayHelperWithString
-                .Instance
+            return TimeSpanArrayHelperWithString.Instance
                 .ReadArray(this, localName, namespaceUri, quotas.MaxArrayLength);
         }
 
@@ -2466,8 +2406,7 @@ namespace System.Xml
             XmlDictionaryString namespaceUri
         )
         {
-            return TimeSpanArrayHelperWithDictionaryString
-                .Instance
+            return TimeSpanArrayHelperWithDictionaryString.Instance
                 .ReadArray(this, localName, namespaceUri, quotas.MaxArrayLength);
         }
 
@@ -2502,10 +2441,8 @@ namespace System.Xml
             byte[] prefixBuffer = node.Prefix.GetString(out prefixOffset, out prefixLength);
             int localNameOffset,
                 localNameLength;
-            byte[] localNameBuffer = node.LocalName.GetString(
-                out localNameOffset,
-                out localNameLength
-            );
+            byte[] localNameBuffer = node.LocalName
+                .GetString(out localNameOffset, out localNameLength);
             writer.WriteStartElement(
                 prefixBuffer,
                 prefixOffset,
@@ -2523,13 +2460,11 @@ namespace System.Xml
             {
                 int prefixOffset,
                     prefixLength;
-                byte[] prefixBuffer = attributeNode
-                    .Prefix
+                byte[] prefixBuffer = attributeNode.Prefix
                     .GetString(out prefixOffset, out prefixLength);
                 int localNameOffset,
                     localNameLength;
-                byte[] localNameBuffer = attributeNode
-                    .LocalName
+                byte[] localNameBuffer = attributeNode.LocalName
                     .GetString(out localNameOffset, out localNameLength);
                 writer.WriteStartAttribute(
                     prefixBuffer,
@@ -2547,8 +2482,7 @@ namespace System.Xml
                 Fx.Assert(qnameType == QNameType.Xmlns, "");
                 int prefixOffset,
                     prefixLength;
-                byte[] prefixBuffer = attributeNode
-                    .Namespace
+                byte[] prefixBuffer = attributeNode.Namespace
                     .Prefix
                     .GetString(out prefixOffset, out prefixLength);
                 int nsOffset,
@@ -2572,10 +2506,8 @@ namespace System.Xml
             byte[] prefixBuffer = node.Prefix.GetString(out prefixOffset, out prefixLength);
             int localNameOffset,
                 localNameLength;
-            byte[] localNameBuffer = node.LocalName.GetString(
-                out localNameOffset,
-                out localNameLength
-            );
+            byte[] localNameBuffer = node.LocalName
+                .GetString(out localNameOffset, out localNameLength);
             writer.WriteEndElement(
                 prefixBuffer,
                 prefixOffset,
@@ -2614,8 +2546,7 @@ namespace System.Xml
                     SignEndElement(writer);
                     break;
                 default:
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new InvalidOperationException());
             }
         }
@@ -2645,8 +2576,7 @@ namespace System.Xml
         )
         {
             if (signing)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(SR.GetString(SR.XmlCanonicalizationStarted))
                     );
@@ -2662,8 +2592,7 @@ namespace System.Xml
         public override void EndCanonicalization()
         {
             if (!signing)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(SR.XmlCanonicalizationNotStarted)

@@ -4624,8 +4624,7 @@ public static partial class DataContractSerializerTests
         CompareBaseline(baseline, ms);
         ms.Position = 0;
         var dcrVariationsReturning = dcs2.ReadObject(ms);
-        SerializationTestTypes
-            .ComparisonHelper
+        SerializationTestTypes.ComparisonHelper
             .CompareRecursively(dcrVariationsGoing, dcrVariationsReturning);
     }
 
@@ -4651,8 +4650,7 @@ public static partial class DataContractSerializerTests
         ms.Position = 0;
         var xmlReader = XmlDictionaryReader.CreateTextReader(ms, XmlDictionaryReaderQuotas.Max);
         var dcrVariationsReturning = dcs.ReadObject(xmlReader, false, dcr2);
-        SerializationTestTypes
-            .ComparisonHelper
+        SerializationTestTypes.ComparisonHelper
             .CompareRecursively(dcrVariationsGoing, dcrVariationsReturning);
     }
 
@@ -4682,8 +4680,7 @@ public static partial class DataContractSerializerTests
         ms.Position = 0;
         var xmlReader = XmlDictionaryReader.CreateTextReader(ms, XmlDictionaryReaderQuotas.Max);
         var dcrVariationsReturning = dcs.ReadObject(xmlReader, false);
-        SerializationTestTypes
-            .ComparisonHelper
+        SerializationTestTypes.ComparisonHelper
             .CompareRecursively(dcrVariationsGoing, dcrVariationsReturning);
     }
 
@@ -4713,8 +4710,7 @@ public static partial class DataContractSerializerTests
         ms.Position = 0;
         var xmlReader = XmlDictionaryReader.CreateTextReader(ms, XmlDictionaryReaderQuotas.Max);
         var dcrVariationsReturning = dcs.ReadObject(xmlReader, false, dcr2);
-        SerializationTestTypes
-            .ComparisonHelper
+        SerializationTestTypes.ComparisonHelper
             .CompareRecursively(dcrVariationsGoing, dcrVariationsReturning);
     }
 
@@ -5721,8 +5717,7 @@ public static partial class DataContractSerializerTests
         );
 
         Assert.True(
-            valueSerPublicDatasetPublic
-                .Data
+            valueSerPublicDatasetPublic.Data
                 .GetType()
                 .Equals(resultSerPublicDatasetPublic.Data.GetType())
         );
@@ -5775,8 +5770,7 @@ public static partial class DataContractSerializerTests
         );
 
         Assert.True(
-            valueSerPublicDatasetPrivate
-                .Data
+            valueSerPublicDatasetPrivate.Data
                 .GetType()
                 .Equals(resultSerPublicDatasetPrivate.Data.GetType())
         );
@@ -7571,15 +7565,13 @@ public static partial class DataContractSerializerTests
         //netcorePayload
         var deserializedNetcoreObject = DeserializeString<T>(netcorePayload, settings: settings);
         Assert.NotNull(deserializedNetcoreObject);
-        SerializationTestTypes
-            .ComparisonHelper
+        SerializationTestTypes.ComparisonHelper
             .CompareRecursively(value, deserializedNetcoreObject);
 
         //desktopPayload
         var deserializedDesktopObject = DeserializeString<T>(desktopPayload, settings: settings);
         Assert.NotNull(deserializedDesktopObject);
-        SerializationTestTypes
-            .ComparisonHelper
+        SerializationTestTypes.ComparisonHelper
             .CompareRecursively(value, deserializedDesktopObject);
     }
 }

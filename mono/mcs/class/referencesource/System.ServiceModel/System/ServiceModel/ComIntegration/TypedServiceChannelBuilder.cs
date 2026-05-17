@@ -56,8 +56,7 @@ namespace System.ServiceModel.ComIntegration
             get
             {
                 if (serviceProxy != null)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new COMException(SR.GetString(SR.TooLate), HR.RPC_E_TOO_LATE)
                         );
@@ -76,8 +75,7 @@ namespace System.ServiceModel.ComIntegration
             get
             {
                 if (serviceProxy != null)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new COMException(SR.GetString(SR.TooLate), HR.RPC_E_TOO_LATE)
                         );
@@ -237,8 +235,7 @@ namespace System.ServiceModel.ComIntegration
                     if (Fx.IsFatal(e))
                         throw;
 
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new MonikerSyntaxException(
                                 SR.GetString(
@@ -284,8 +281,7 @@ namespace System.ServiceModel.ComIntegration
                     if (Fx.IsFatal(e))
                         throw;
 
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new MonikerSyntaxException(
                                 SR.GetString(
@@ -297,8 +293,7 @@ namespace System.ServiceModel.ComIntegration
                         );
                 }
                 if (binding == null)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new MonikerSyntaxException(
                                 SR.GetString(
@@ -311,15 +306,13 @@ namespace System.ServiceModel.ComIntegration
             }
 
             if (binding == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new MonikerSyntaxException(SR.GetString(SR.BindingNotSpecified))
                     );
 
             if (string.IsNullOrEmpty(address))
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new MonikerSyntaxException(SR.GetString(SR.AddressNotSpecified))
                     );
@@ -327,8 +320,7 @@ namespace System.ServiceModel.ComIntegration
             if (!string.IsNullOrEmpty(spnIdentity))
             {
                 if ((!string.IsNullOrEmpty(upnIdentity)) || (!string.IsNullOrEmpty(dnsIdentity)))
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new MonikerSyntaxException(
                                 SR.GetString(SR.MonikerIncorrectServerIdentity)
@@ -339,8 +331,7 @@ namespace System.ServiceModel.ComIntegration
             else if (!string.IsNullOrEmpty(upnIdentity))
             {
                 if ((!string.IsNullOrEmpty(spnIdentity)) || (!string.IsNullOrEmpty(dnsIdentity)))
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new MonikerSyntaxException(
                                 SR.GetString(SR.MonikerIncorrectServerIdentity)
@@ -351,8 +342,7 @@ namespace System.ServiceModel.ComIntegration
             else if (!string.IsNullOrEmpty(dnsIdentity))
             {
                 if ((!string.IsNullOrEmpty(spnIdentity)) || (!string.IsNullOrEmpty(upnIdentity)))
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new MonikerSyntaxException(
                                 SR.GetString(SR.MonikerIncorrectServerIdentity)
@@ -387,8 +377,7 @@ namespace System.ServiceModel.ComIntegration
                 TypeCacheManager.Provider.FindOrCreateType(riid, out contractType, true, false);
 
             if ((contractType.GUID != riid) && !(CheckDispatch(ref riid)))
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new InvalidCastException(SR.GetString(SR.NoInterface, riid)));
 
             Type proxiedType = EmitterCache.TypeEmitter.FindOrCreateType(contractType);

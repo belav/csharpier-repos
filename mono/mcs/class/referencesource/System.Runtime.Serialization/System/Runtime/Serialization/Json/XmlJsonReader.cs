@@ -749,24 +749,21 @@ namespace System.Runtime.Serialization.Json
             }
             catch (ArgumentException exception)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         XmlExceptionHelper.CreateConversionException(value, "decimal", exception)
                     );
             }
             catch (FormatException exception)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         XmlExceptionHelper.CreateConversionException(value, "decimal", exception)
                     );
             }
             catch (OverflowException exception)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         XmlExceptionHelper.CreateConversionException(value, "decimal", exception)
                     );
@@ -787,24 +784,21 @@ namespace System.Runtime.Serialization.Json
             }
             catch (ArgumentException exception)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         XmlExceptionHelper.CreateConversionException(value, "Int64", exception)
                     );
             }
             catch (FormatException exception)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         XmlExceptionHelper.CreateConversionException(value, "Int64", exception)
                     );
             }
             catch (OverflowException exception)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         XmlExceptionHelper.CreateConversionException(value, "Int64", exception)
                     );
@@ -817,19 +811,16 @@ namespace System.Runtime.Serialization.Json
             {
                 if (buffer == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new ArgumentNullException("buffer"));
                 }
                 if (offset < 0)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentOutOfRangeException(
                                 "offset",
-                                System
-                                    .Runtime
+                                System.Runtime
                                     .Serialization
                                     .SR
                                     .GetString(
@@ -840,13 +831,11 @@ namespace System.Runtime.Serialization.Json
                 }
                 if (offset > buffer.Length)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentOutOfRangeException(
                                 "offset",
-                                System
-                                    .Runtime
+                                System.Runtime
                                     .Serialization
                                     .SR
                                     .GetString(
@@ -858,13 +847,11 @@ namespace System.Runtime.Serialization.Json
                 }
                 if (count < 0)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentOutOfRangeException(
                                 "count",
-                                System
-                                    .Runtime
+                                System.Runtime
                                     .Serialization
                                     .SR
                                     .GetString(
@@ -875,18 +862,15 @@ namespace System.Runtime.Serialization.Json
                 }
                 if (count > buffer.Length - offset)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentOutOfRangeException(
                                 "count",
-                                System
-                                    .Runtime
+                                System.Runtime
                                     .Serialization
                                     .SR
                                     .GetString(
-                                        System
-                                            .Runtime
+                                        System.Runtime
                                             .Serialization
                                             .SR
                                             .SizeExceedsRemainingBufferSpace,
@@ -908,19 +892,16 @@ namespace System.Runtime.Serialization.Json
             {
                 if (chars == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new ArgumentNullException("chars"));
                 }
                 if (offset < 0)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentOutOfRangeException(
                                 "offset",
-                                System
-                                    .Runtime
+                                System.Runtime
                                     .Serialization
                                     .SR
                                     .GetString(
@@ -931,13 +912,11 @@ namespace System.Runtime.Serialization.Json
                 }
                 if (offset > chars.Length)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentOutOfRangeException(
                                 "offset",
-                                System
-                                    .Runtime
+                                System.Runtime
                                     .Serialization
                                     .SR
                                     .GetString(
@@ -949,13 +928,11 @@ namespace System.Runtime.Serialization.Json
                 }
                 if (count < 0)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentOutOfRangeException(
                                 "count",
-                                System
-                                    .Runtime
+                                System.Runtime
                                     .Serialization
                                     .SR
                                     .GetString(
@@ -966,18 +943,15 @@ namespace System.Runtime.Serialization.Json
                 }
                 if (count > chars.Length - offset)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentOutOfRangeException(
                                 "count",
-                                System
-                                    .Runtime
+                                System.Runtime
                                     .Serialization
                                     .SR
                                     .GetString(
-                                        System
-                                            .Runtime
+                                        System.Runtime
                                             .Serialization
                                             .SR
                                             .SizeExceedsRemainingBufferSpace,
@@ -1023,8 +997,7 @@ namespace System.Runtime.Serialization.Json
             }
             if (offset < 0)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentOutOfRangeException(
                             "offset",
@@ -1034,8 +1007,7 @@ namespace System.Runtime.Serialization.Json
             }
             if (offset > buffer.Length)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentOutOfRangeException(
                             "offset",
@@ -1045,8 +1017,7 @@ namespace System.Runtime.Serialization.Json
             }
             if (count < 0)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentOutOfRangeException(
                             "count",
@@ -1056,8 +1027,7 @@ namespace System.Runtime.Serialization.Json
             }
             if (count > buffer.Length - offset)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentOutOfRangeException(
                             "count",
@@ -1114,14 +1084,12 @@ namespace System.Runtime.Serialization.Json
         {
             if (array == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("array"));
             }
             if (offset < 0)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentOutOfRangeException(
                             "offset",
@@ -1131,8 +1099,7 @@ namespace System.Runtime.Serialization.Json
             }
             if (offset > array.Length)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentOutOfRangeException(
                             "offset",
@@ -1142,8 +1109,7 @@ namespace System.Runtime.Serialization.Json
             }
             if (count < 0)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentOutOfRangeException(
                             "count",
@@ -1153,8 +1119,7 @@ namespace System.Runtime.Serialization.Json
             }
             if (count > array.Length - offset)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentOutOfRangeException(
                             "count",
@@ -1166,8 +1131,7 @@ namespace System.Runtime.Serialization.Json
 
         protected override XmlSigningNodeWriter CreateSigningNodeWriter()
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(
                     new NotSupportedException(
                         SR.GetString(SR.JsonMethodNotSupported, "CreateSigningNodeWriter")
@@ -1254,8 +1218,7 @@ namespace System.Runtime.Serialization.Json
                 byte ch = buffer[offset];
                 if (ch < 0x20)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new FormatException(
                                 SR.GetString(SR.InvalidCharacterEncountered, (char)ch)
@@ -1299,8 +1262,7 @@ namespace System.Runtime.Serialization.Json
             }
             catch (OverflowException exception)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         XmlExceptionHelper.CreateConversionException(value, "char", exception)
                     );
@@ -1315,24 +1277,21 @@ namespace System.Runtime.Serialization.Json
             }
             catch (ArgumentException exception)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         XmlExceptionHelper.CreateConversionException(value, "Int32", exception)
                     );
             }
             catch (FormatException exception)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         XmlExceptionHelper.CreateConversionException(value, "Int32", exception)
                     );
             }
             catch (OverflowException exception)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         XmlExceptionHelper.CreateConversionException(value, "Int32", exception)
                     );
@@ -1444,8 +1403,7 @@ namespace System.Runtime.Serialization.Json
             } while (complexTextMode == JsonComplexTextMode.QuotedText);
 
             int actualOffset = BufferReader.Offset - 1; //  -1 to ignore " at end of local name
-            elementNode
-                .LocalName
+            elementNode.LocalName
                 .SetValue(elementNode.NameOffset, actualOffset - elementNode.NameOffset);
             elementNode.NameLength = actualOffset - elementNode.NameOffset;
             elementNode.Namespace.Uri.SetValue(elementNode.NameOffset, 0);
@@ -1618,8 +1576,7 @@ namespace System.Runtime.Serialization.Json
                             XmlExceptionHelper.ThrowXmlException(
                                 this,
                                 new XmlException(
-                                    System
-                                        .Runtime
+                                    System.Runtime
                                         .Serialization
                                         .SR
                                         .GetString(
@@ -1897,8 +1854,7 @@ namespace System.Runtime.Serialization.Json
                         }
                     } while (complexTextMode == JsonComplexTextMode.QuotedText);
 
-                    attribute
-                        .Value
+                    attribute.Value
                         .SetValue(ValueHandleType.UTF8, offset, BufferReader.Offset - 1 - offset);
 
                     SkipWhitespaceInBufferReader();
@@ -1945,8 +1901,7 @@ namespace System.Runtime.Serialization.Json
             attribute.LocalName.SetConstantValue(StringHandleConstStringType.Item);
             attribute.Namespace.Uri.SetValue(0, 0);
             attribute.Prefix.SetValue(PrefixHandleType.Empty);
-            attribute
-                .Value
+            attribute.Value
                 .SetValue(ValueHandleType.UTF8, elementNode.NameOffset, elementNode.NameLength);
 
             elementNode.NameLength = 0;

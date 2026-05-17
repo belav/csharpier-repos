@@ -79,8 +79,7 @@ namespace Mono.ILASM
             if (location != null)
                 location_str = " (" + location.line + ", " + location.column + ") : ";
 
-            Console
-                .Error
+            Console.Error
                 .WriteLine(
                     String.Format(
                         "{0}{1}Warning -- {2}",

@@ -305,12 +305,10 @@ namespace System.IO.Compression.Tests
                             if (checkTimes)
                             {
                                 const int zipTimestampResolution = 2; // Zip follows the FAT timestamp resolution of two seconds for file records
-                                DateTime lower = file.LastModifiedDate.AddSeconds(
-                                    -zipTimestampResolution
-                                );
-                                DateTime upper = file.LastModifiedDate.AddSeconds(
-                                    zipTimestampResolution
-                                );
+                                DateTime lower = file.LastModifiedDate
+                                    .AddSeconds(-zipTimestampResolution);
+                                DateTime upper = file.LastModifiedDate
+                                    .AddSeconds(zipTimestampResolution);
                                 Assert.InRange(entry.LastWriteTime.Ticks, lower.Ticks, upper.Ticks);
                             }
 
@@ -327,14 +325,16 @@ namespace System.IO.Compression.Tests
                                 bool isEmpty = !files.Any(f =>
                                     f.IsFile
                                     && (
-                                        f.FullName.StartsWith(
-                                            entryName,
-                                            StringComparison.OrdinalIgnoreCase
-                                        )
-                                        || f.FullName.StartsWith(
-                                            entryNameOtherSlash,
-                                            StringComparison.OrdinalIgnoreCase
-                                        )
+                                        f.FullName
+                                            .StartsWith(
+                                                entryName,
+                                                StringComparison.OrdinalIgnoreCase
+                                            )
+                                        || f.FullName
+                                            .StartsWith(
+                                                entryNameOtherSlash,
+                                                StringComparison.OrdinalIgnoreCase
+                                            )
                                     )
                                 );
                                 if (requireExplicit || isEmpty)

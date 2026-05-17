@@ -897,8 +897,7 @@ namespace System.DirectoryServices.AccountManagement
                     {
                         ContextOptions remoteOptions = DefaultContextOptions.ADDefaultContextOption;
 
-                        PrincipalContext remoteCtx = SDSCache
-                            .Domain
+                        PrincipalContext remoteCtx = SDSCache.Domain
                             .GetContext(
                                 foreignSid.sidIssuerName,
                                 _storeCtx.Credentials,
@@ -1061,8 +1060,7 @@ namespace System.DirectoryServices.AccountManagement
             Debug.Assert(foreignGroup.Context.QueryCtx is ADStoreCtx);
             Debug.Assert(foreignGroup.UnderlyingObject is DirectoryEntry);
             Debug.Assert(
-                ((DirectoryEntry)foreignGroup.UnderlyingObject)
-                    .Path
+                ((DirectoryEntry)foreignGroup.UnderlyingObject).Path
                     .StartsWith("LDAP:", StringComparison.Ordinal)
             );
 
@@ -1107,8 +1105,7 @@ namespace System.DirectoryServices.AccountManagement
             Debug.Assert(foreignGroup.Context.QueryCtx is ADStoreCtx);
             Debug.Assert(foreignGroup.UnderlyingObject is DirectoryEntry);
             Debug.Assert(
-                ((DirectoryEntry)foreignGroup.UnderlyingObject)
-                    .Path
+                ((DirectoryEntry)foreignGroup.UnderlyingObject).Path
                     .StartsWith("LDAP:", StringComparison.Ordinal)
             );
 

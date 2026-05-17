@@ -172,8 +172,7 @@ namespace System.Activities.XamlIntegration
             Activity result = xamlObject as Activity;
             if (result == null)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .Argument(
                         "reader",
                         SR.ActivityXamlServicesRequiresActivity(
@@ -390,8 +389,7 @@ namespace System.Activities.XamlIntegration
                     {
                         throw;
                     }
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(
                             new InvalidOperationException(
                                 SR.CompiledExpressionsCacheMetadataException(
@@ -412,8 +410,7 @@ namespace System.Activities.XamlIntegration
             }
             if (vistor.HasLanguageConflict)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new InvalidOperationException(
                             SR.DynamicActivityMultipleExpressionLanguages(
@@ -505,8 +502,7 @@ namespace System.Activities.XamlIntegration
             string beforeInitializeResource = FindResource(resources, beforeInitializeResourceName);
             if (beforeInitializeResource == null)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new InvalidOperationException(
                             SR.BeforeInitializeComponentXBTExtensionResourceNotFound
@@ -528,8 +524,7 @@ namespace System.Activities.XamlIntegration
             string fullXamlResourceName = FindResource(resources, xamlResourceName);
             if (fullXamlResourceName == null)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new InvalidOperationException(
                             SR.XamlBuildTaskResourceNotFound(xamlResourceName)
@@ -616,8 +611,7 @@ namespace System.Activities.XamlIntegration
                 Type schemaContextType = assembly.GetType(helperClassName);
                 if (schemaContextType == null)
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(
                             new InvalidOperationException(
                                 SR.SchemaContextFromBeforeInitializeComponentXBTExtensionNotFound(
@@ -631,8 +625,7 @@ namespace System.Activities.XamlIntegration
                 // This check is here so that the assembly manifest can't lure us into creating a type with a generic argument from a different assembly.
                 if (schemaContextType.IsGenericType || schemaContextType.IsGenericTypeDefinition)
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(
                             new InvalidOperationException(
                                 SR.SchemaContextFromBeforeInitializeComponentXBTExtensionCannotBeGeneric(

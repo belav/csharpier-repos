@@ -64,10 +64,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
             {
                 if (_lazyType is null)
                 {
-                    var type = this.RetargetingTranslator.Retarget(
-                        _underlyingProperty.TypeWithAnnotations,
-                        RetargetOptions.RetargetPrimitiveTypesByTypeCode
-                    );
+                    var type = this.RetargetingTranslator
+                        .Retarget(
+                            _underlyingProperty.TypeWithAnnotations,
+                            RetargetOptions.RetargetPrimitiveTypesByTypeCode
+                        );
                     if (
                         type.Type.TryAsDynamicIfNoPia(this.ContainingType, out TypeSymbol asDynamic)
                     )
@@ -191,10 +192,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
 
             for (int i = 0; i < impls.Length; i++)
             {
-                var retargeted = this.RetargetingTranslator.Retarget(
-                    impls[i],
-                    MemberSignatureComparer.RetargetedExplicitImplementationComparer
-                );
+                var retargeted = this.RetargetingTranslator
+                    .Retarget(
+                        impls[i],
+                        MemberSignatureComparer.RetargetedExplicitImplementationComparer
+                    );
                 if ((object)retargeted != null)
                 {
                     builder.Add(retargeted);
@@ -224,19 +226,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
 
         public override ImmutableArray<CSharpAttributeData> GetAttributes()
         {
-            return this.RetargetingTranslator.GetRetargetedAttributes(
-                _underlyingProperty.GetAttributes(),
-                ref _lazyCustomAttributes
-            );
+            return this.RetargetingTranslator
+                .GetRetargetedAttributes(
+                    _underlyingProperty.GetAttributes(),
+                    ref _lazyCustomAttributes
+                );
         }
 
         internal override IEnumerable<CSharpAttributeData> GetCustomAttributesToEmit(
             PEModuleBuilder moduleBuilder
         )
         {
-            return this.RetargetingTranslator.RetargetAttributes(
-                _underlyingProperty.GetCustomAttributesToEmit(moduleBuilder)
-            );
+            return this.RetargetingTranslator
+                .RetargetAttributes(_underlyingProperty.GetCustomAttributesToEmit(moduleBuilder));
         }
 
         internal override bool MustCallMethodsDirectly

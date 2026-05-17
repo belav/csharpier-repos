@@ -56,8 +56,7 @@ namespace Microsoft.CodeAnalysis.UnitTesting.ExternalAccess
                 return Empty;
             }
 
-            return callerMethods
-                .Value
+            return callerMethods.Value
                 .SelectAsArray(m =>
                     (
                         MethodFullyQualifiedName: m.FullName,

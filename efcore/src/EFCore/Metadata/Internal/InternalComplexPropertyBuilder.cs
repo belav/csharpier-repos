@@ -55,8 +55,7 @@ public class InternalComplexPropertyBuilder
             return null;
         }
 
-        var property = complexProperty
-            .DeclaringType
+        var property = complexProperty.DeclaringType
             .FindDeclaredComplexProperty(complexProperty.Name);
         if (property == null)
         {
@@ -69,8 +68,7 @@ public class InternalComplexPropertyBuilder
 
         List<RelationshipSnapshot>? detachedRelationships = null;
         foreach (
-            var relationshipToBeDetached in complexType
-                .ContainingEntityType
+            var relationshipToBeDetached in complexType.ContainingEntityType
                 .GetDeclaredForeignKeys()
                 .ToList()
         )
@@ -87,8 +85,7 @@ public class InternalComplexPropertyBuilder
                 false
             );
             if (
-                detachedRelationship
-                    .Relationship
+                detachedRelationship.Relationship
                     .Metadata
                     .GetConfigurationSource()
                     .Overrides(ConfigurationSource.DataAnnotation)
@@ -127,8 +124,7 @@ public class InternalComplexPropertyBuilder
                     true
                 );
                 if (
-                    detachedRelationship
-                        .Relationship
+                    detachedRelationship.Relationship
                         .Metadata
                         .GetConfigurationSource()
                         .Overrides(ConfigurationSource.DataAnnotation)
@@ -148,8 +144,7 @@ public class InternalComplexPropertyBuilder
 
             var detachedKey = InternalEntityTypeBuilder.DetachKey(keyToDetach);
             if (
-                detachedKey
-                    .Item1
+                detachedKey.Item1
                     .Metadata
                     .GetConfigurationSource()
                     .Overrides(ConfigurationSource.Explicit)
@@ -173,8 +168,7 @@ public class InternalComplexPropertyBuilder
 
             var detachedIndex = InternalEntityTypeBuilder.DetachIndex(indexToBeDetached);
             if (
-                detachedIndex
-                    .Metadata
+                detachedIndex.Metadata
                     .GetConfigurationSource()
                     .Overrides(ConfigurationSource.Explicit)
             )

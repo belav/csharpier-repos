@@ -46,8 +46,7 @@ public sealed class SqlServerConditionAttribute : Attribute, ITestCondition
                 TestEnvironment.DefaultConnection
             );
             isMet &=
-                defaultConnection
-                    .DataSource
+                defaultConnection.DataSource
                     .Contains("(localdb)", StringComparison.OrdinalIgnoreCase)
                 || defaultConnection.UserInstance;
         }

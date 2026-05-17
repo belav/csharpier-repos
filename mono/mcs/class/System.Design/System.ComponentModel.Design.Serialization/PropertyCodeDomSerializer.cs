@@ -159,8 +159,7 @@ namespace System.ComponentModel.Design.Serialization
                 as CodeDomSerializer;
             if (propRef.TargetObject != null && serializer != null)
             {
-                manager
-                    .Context
+                manager.Context
                     .Push(new ExpressionContext(propRef, propRef.GetType(), null, propertyValue));
                 object serialized = serializer.Serialize(manager, propertyValue);
                 manager.Context.Pop();

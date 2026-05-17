@@ -537,8 +537,7 @@ namespace System.Workflow.ComponentModel.Design
                         != typeof(ActivityBindTypeConverter)
                 )
                 {
-                    realTypeConverter = activityBindPropertyDescriptor
-                        .RealPropertyDescriptor
+                    realTypeConverter = activityBindPropertyDescriptor.RealPropertyDescriptor
                         .Converter;
                     realContext = new TypeDescriptorContext(
                         currentContext,

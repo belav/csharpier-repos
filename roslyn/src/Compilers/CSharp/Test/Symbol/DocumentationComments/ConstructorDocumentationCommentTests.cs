@@ -67,8 +67,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void TestConstructor()
         {
-            var constructorSymbol = _widgetClass
-                .InstanceConstructors
+            var constructorSymbol = _widgetClass.InstanceConstructors
                 .Single(c => !c.IsStatic && c.Parameters.Length == 0);
             Assert.Equal("M:Acme.Widget.#ctor", constructorSymbol.GetDocumentationCommentId());
             Assert.Equal(
@@ -83,8 +82,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void TestConstructorWithParameter()
         {
-            var parameterizedConstructorSymbol = _widgetClass
-                .InstanceConstructors
+            var parameterizedConstructorSymbol = _widgetClass.InstanceConstructors
                 .Single(c => !c.IsStatic && c.Parameters.Length == 1);
             Assert.Equal(
                 "M:Acme.Widget.#ctor(System.String)",

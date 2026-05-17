@@ -126,8 +126,7 @@ namespace Microsoft.CodeAnalysis.UseIsNullCheck
                 return;
             }
 
-            var properties = ImmutableDictionary<string, string?>
-                .Empty
+            var properties = ImmutableDictionary<string, string?>.Empty
                 .Add(UseIsNullConstants.Kind, UseIsNullConstants.ReferenceEqualsKey);
 
             var genericParameterSymbol = GetGenericParameterSymbol(

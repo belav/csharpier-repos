@@ -180,8 +180,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
                     {
                         //use a comparer that checks both return type and custom modifiers
                         Assert.False(
-                            MemberSignatureComparer
-                                .RuntimeImplicitImplementationComparer
+                            MemberSignatureComparer.RuntimeImplicitImplementationComparer
                                 .Equals(method1, method2)
                         );
                     }
@@ -214,8 +213,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             Assert.Equal(TypeKind.Array, propertyType.TypeKind);
 
             var arrayPropertyType = (ArrayTypeSymbol)propertyType;
-            var arrayPropertyTypeCustomModifiers = arrayPropertyType
-                .ElementTypeWithAnnotations
+            var arrayPropertyTypeCustomModifiers = arrayPropertyType.ElementTypeWithAnnotations
                 .CustomModifiers
                 .Single();
             Assert.Equal(

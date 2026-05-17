@@ -75,19 +75,20 @@ namespace System.ServiceModel.Security
             out SecurityToken tokenToDerive
         )
         {
-            this.derivedKeyEntry.ReadDerivedKeyTokenParameters(
-                reader,
-                tokenResolver,
-                out id,
-                out derivationAlgorithm,
-                out label,
-                out length,
-                out nonce,
-                out offset,
-                out generation,
-                out tokenToDeriveIdentifier,
-                out tokenToDerive
-            );
+            this.derivedKeyEntry
+                .ReadDerivedKeyTokenParameters(
+                    reader,
+                    tokenResolver,
+                    out id,
+                    out derivationAlgorithm,
+                    out label,
+                    out length,
+                    out nonce,
+                    out offset,
+                    out generation,
+                    out tokenToDeriveIdentifier,
+                    out tokenToDerive
+                );
         }
 
         public virtual SecurityToken CreateDerivedKeyToken(
@@ -102,17 +103,18 @@ namespace System.ServiceModel.Security
             SecurityToken tokenToDerive
         )
         {
-            return this.derivedKeyEntry.CreateDerivedKeyToken(
-                id,
-                derivationAlgorithm,
-                label,
-                length,
-                nonce,
-                offset,
-                generation,
-                tokenToDeriveIdentifier,
-                tokenToDerive
-            );
+            return this.derivedKeyEntry
+                .CreateDerivedKeyToken(
+                    id,
+                    derivationAlgorithm,
+                    label,
+                    length,
+                    nonce,
+                    offset,
+                    generation,
+                    tokenToDeriveIdentifier,
+                    tokenToDerive
+                );
         }
 
         public virtual string DerivationAlgorithm
@@ -189,8 +191,7 @@ namespace System.ServiceModel.Security
                         // DerivedKeys aren't referred to externally
                         return null;
                     default:
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new ArgumentOutOfRangeException("tokenReferenceStyle")
                             );
@@ -225,8 +226,7 @@ namespace System.ServiceModel.Security
             {
                 if (tokenResolver == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgumentNull("tokenResolver");
                 }
 
@@ -256,15 +256,13 @@ namespace System.ServiceModel.Security
                     )
                 )
                 {
-                    tokenToDeriveIdentifier = parent
-                        .WSSecurityTokenSerializer
+                    tokenToDeriveIdentifier = parent.WSSecurityTokenSerializer
                         .ReadKeyIdentifierClause(reader);
                     tokenResolver.TryResolveToken(tokenToDeriveIdentifier, out tokenToDerive);
                 }
                 else
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new XmlException(SR.GetString(SR.DerivedKeyTokenRequiresTokenReference))
                         );
@@ -284,8 +282,7 @@ namespace System.ServiceModel.Security
                     generation = reader.ReadContentAsInt();
                     reader.ReadEndElement();
                     if (generation < 0)
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new XmlException(
                                     SR.GetString(
@@ -308,8 +305,7 @@ namespace System.ServiceModel.Security
                     offset = reader.ReadContentAsInt();
                     reader.ReadEndElement();
                     if (offset < 0)
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new XmlException(
                                     SR.GetString(SR.DerivedKeyInvalidOffsetSpecified, offset)
@@ -355,8 +351,7 @@ namespace System.ServiceModel.Security
                 }
                 if (label != null && label.Length > this.maxKeyDerivationLabelLength)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperWarning(
                             new MessageSecurityException(
                                 SR.GetString(
@@ -378,8 +373,7 @@ namespace System.ServiceModel.Security
 
                 if (nonce != null && nonce.Length > this.maxKeyDerivationNonceLength)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperWarning(
                             new MessageSecurityException(
                                 SR.GetString(
@@ -497,8 +491,7 @@ namespace System.ServiceModel.Security
                 }
                 if (derivedKeyToken.KeyDerivationAlgorithm != parent.DerivationAlgorithm)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new MessageSecurityException(
                                 SR.GetString(
@@ -508,8 +501,7 @@ namespace System.ServiceModel.Security
                             )
                         );
                 }
-                parent
-                    .WSSecurityTokenSerializer
+                parent.WSSecurityTokenSerializer
                     .WriteKeyIdentifierClause(writer, derivedKeyToken.TokenToDeriveIdentifier);
 
                 // Don't support Properties element
@@ -671,8 +663,7 @@ namespace System.ServiceModel.Security
                         }
                         return new SecurityContextKeyIdentifierClause(contextId, generation);
                     default:
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new ArgumentOutOfRangeException("tokenReferenceStyle")
                             );
@@ -814,8 +805,7 @@ namespace System.ServiceModel.Security
 
                 if (contextId == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new MessageSecurityException(
                                 SR.GetString(SR.NoSecurityContextIdentifier)
@@ -836,8 +826,7 @@ namespace System.ServiceModel.Security
                 }
                 if (sct == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperWarning(
                             new SecurityContextTokenValidationException(
                                 SR.GetString(SR.SecurityContextNotRegistered, contextId, generation)
@@ -888,8 +877,7 @@ namespace System.ServiceModel.Security
                 {
                     if (sct.CookieBlob == null)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new MessageSecurityException(SR.GetString(SR.NoCookieInSct))
                             );

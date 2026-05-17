@@ -2722,16 +2722,14 @@ namespace MonoTests.System
 
             Assert.AreEqual(
                 0,
-                CultureInfo
-                    .CurrentCulture
+                CultureInfo.CurrentCulture
                     .CompareInfo
                     .IndexOf(a, b, 0, a.Length, CompareOptions.None),
                 "#7"
             );
             Assert.AreEqual(
                 -1,
-                CultureInfo
-                    .CurrentCulture
+                CultureInfo.CurrentCulture
                     .CompareInfo
                     .IndexOf(a, b, 0, a.Length, CompareOptions.Ordinal),
                 "#8"

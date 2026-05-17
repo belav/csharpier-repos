@@ -388,8 +388,7 @@ namespace System.Data.Linq
             {
                 List<MetaDataMember> membersToSync = new List<MetaDataMember>();
                 foreach (
-                    MetaDataMember metaMember in metaType
-                        .PersistentDataMembers
+                    MetaDataMember metaMember in metaType.PersistentDataMembers
                         .OrderBy(m => m.Ordinal)
                 )
                 {
@@ -434,8 +433,7 @@ namespace System.Data.Linq
             )
             {
                 System.Diagnostics.Debug.Assert(item != null);
-                System
-                    .Diagnostics
+                System.Diagnostics
                     .Debug
                     .Assert(
                         item.IsNew || item.IsPossiblyModified,
@@ -470,9 +468,8 @@ namespace System.Data.Linq
                 }
                 if (syncRollbackValues != null)
                 {
-                    this.SyncRollbackItems.Add(
-                        new KeyValuePair<TrackedObject, object[]>(item, syncRollbackValues)
-                    );
+                    this.SyncRollbackItems
+                        .Add(new KeyValuePair<TrackedObject, object[]>(item, syncRollbackValues));
                 }
             }
 
@@ -570,9 +567,8 @@ namespace System.Data.Linq
                                 || (check == UpdateCheck.WhenChanged && tracked.HasChangedValue(mm))
                             )
                             {
-                                object memberValue = mm.MemberAccessor.GetBoxedValue(
-                                    tracked.Original
-                                );
+                                object memberValue = mm.MemberAccessor
+                                    .GetBoxedValue(tracked.Original);
                                 Expression eq = Expression.Equal(
                                     this.GetMemberExpression(serverItem, mm.Member),
                                     Expression.Constant(memberValue, mm.Type)

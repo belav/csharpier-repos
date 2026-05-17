@@ -375,12 +375,10 @@ namespace System
                 else
                 {
                     // Workaround for missing MultiplyAddAdjacent on ARM
-                    Vector128<short> even = AdvSimd
-                        .Arm64
+                    Vector128<short> even = AdvSimd.Arm64
                         .TransposeEven(nibbles, Vector128<byte>.Zero)
                         .AsInt16();
-                    Vector128<short> odd = AdvSimd
-                        .Arm64
+                    Vector128<short> odd = AdvSimd.Arm64
                         .TransposeOdd(nibbles, Vector128<byte>.Zero)
                         .AsInt16();
                     even = AdvSimd.ShiftLeftLogical(even, 4).AsInt16();

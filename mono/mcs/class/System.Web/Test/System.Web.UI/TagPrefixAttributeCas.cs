@@ -56,9 +56,8 @@ namespace MonoCasTests.System.Web.UI
             AspNetHostingPermissionLevel level
         )
         {
-            ConstructorInfo ci = this.Type.GetConstructor(
-                new Type[2] { typeof(string), typeof(string) }
-            );
+            ConstructorInfo ci = this.Type
+                .GetConstructor(new Type[2] { typeof(string), typeof(string) });
             Assert.IsNotNull(ci, ".ctor(string,string)");
             return ci.Invoke(new object[2] { "namespace", "prefix" });
         }

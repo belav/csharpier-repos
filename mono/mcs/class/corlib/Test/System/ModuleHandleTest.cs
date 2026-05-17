@@ -140,8 +140,7 @@ namespace MonoTests.System
         [ExpectedException(typeof(ArgumentNullException))]
         public void ResolveMethodTokenInvalidHandle()
         {
-            ModuleHandle
-                .EmptyHandle
+            ModuleHandle.EmptyHandle
                 .ResolveMethodHandle(
                     typeof(ModuleHandleTest).GetMethod("ResolveMethodToken").MetadataToken
                 );

@@ -41,22 +41,19 @@ namespace System.ServiceModel.Web
         {
             if (string.IsNullOrEmpty(cacheProfileName))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(SR2.CacheProfileNameNullOrEmpty)
                     );
             }
 
             OutputCacheSettingsSection cacheSettings =
-                AspNetEnvironment
-                    .Current
+                AspNetEnvironment.Current
                     .UnsafeGetConfigurationSection("system.web/caching/outputCacheSettings")
                 as OutputCacheSettingsSection;
             if (cacheSettings == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR2.GetString(SR2.CacheProfileNotConfigured, cacheProfileName)
@@ -67,8 +64,7 @@ namespace System.ServiceModel.Web
             this.cacheProfile = cacheSettings.OutputCacheProfiles[cacheProfileName];
             if (this.cacheProfile == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR2.GetString(SR2.CacheProfileNotConfigured, cacheProfileName)
@@ -82,8 +78,7 @@ namespace System.ServiceModel.Web
                 // Duration must be set; Duration default value is -1
                 if (this.cacheProfile.Duration == -1)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR2.GetString(
@@ -96,8 +91,7 @@ namespace System.ServiceModel.Web
                 }
                 if (this.cacheProfile.VaryByParam == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR2.GetString(
@@ -118,8 +112,7 @@ namespace System.ServiceModel.Web
                 )
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new NotSupportedException(SR2.CommandNotificationSqlDependencyNotSupported)
                     );
@@ -238,15 +231,13 @@ namespace System.ServiceModel.Web
                         {
                             if (databaseName == null)
                             {
-                                throw DiagnosticUtility
-                                    .ExceptionUtility
+                                throw DiagnosticUtility.ExceptionUtility
                                     .ThrowHelperArgument(invalidSqlDependencyString);
                             }
                             subStringLength = currentIndex - startIndexForTableName;
                             if (subStringLength == 0)
                             {
-                                throw DiagnosticUtility
-                                    .ExceptionUtility
+                                throw DiagnosticUtility.ExceptionUtility
                                     .ThrowHelperArgument(invalidSqlDependencyString);
                             }
                             string tableName = sqlDependencyString.Substring(
@@ -268,15 +259,13 @@ namespace System.ServiceModel.Web
                         {
                             if (databaseName != null)
                             {
-                                throw DiagnosticUtility
-                                    .ExceptionUtility
+                                throw DiagnosticUtility.ExceptionUtility
                                     .ThrowHelperArgument(invalidSqlDependencyString);
                             }
                             subStringLength = currentIndex - startIndexForDatabaseName;
                             if (subStringLength == 0)
                             {
-                                throw DiagnosticUtility
-                                    .ExceptionUtility
+                                throw DiagnosticUtility.ExceptionUtility
                                     .ThrowHelperArgument(invalidSqlDependencyString);
                             }
                             databaseName = sqlDependencyString.Substring(
@@ -290,8 +279,7 @@ namespace System.ServiceModel.Web
             }
             catch (ArgumentException)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR2.GetString(
@@ -303,8 +291,7 @@ namespace System.ServiceModel.Web
             }
             if (dependencyList.Count == 0)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR2.GetString(
@@ -429,8 +416,7 @@ namespace System.ServiceModel.Web
                         cache.SetCacheability(HttpCacheability.ServerAndPrivate);
                         break;
                     default:
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new NotSupportedException(
                                     SR2.GetString(
@@ -497,8 +483,7 @@ namespace System.ServiceModel.Web
                             CacheDependency cacheDependency = this.CreateSingleCacheDependency(
                                 cacheProfile.SqlDependency
                             );
-                            HttpContext
-                                .Current
+                            HttpContext.Current
                                 .Response
                                 .AddCacheDependency(new CacheDependency[] { cacheDependency });
                         }

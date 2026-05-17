@@ -34,8 +34,7 @@ namespace System.Security.Cryptography.X509Certificates
             SafeSecIdentityHandle identityHandle;
 
             if (
-                Interop
-                    .AppleCrypto
+                Interop.AppleCrypto
                     .X509DemuxAndRetainHandle(handle, out certHandle, out identityHandle)
             )
             {
@@ -345,8 +344,7 @@ namespace System.Security.Cryptography.X509Certificates
 
             Debug.Assert(!_identityHandle.IsInvalid);
             SafeSecKeyRefHandle publicKey = Interop.AppleCrypto.X509GetPublicKey(_certHandle);
-            SafeSecKeyRefHandle privateKey = Interop
-                .AppleCrypto
+            SafeSecKeyRefHandle privateKey = Interop.AppleCrypto
                 .X509GetPrivateKeyFromIdentity(_identityHandle);
             Debug.Assert(!publicKey.IsInvalid);
 
@@ -360,8 +358,7 @@ namespace System.Security.Cryptography.X509Certificates
 
             Debug.Assert(!_identityHandle.IsInvalid);
             SafeSecKeyRefHandle publicKey = Interop.AppleCrypto.X509GetPublicKey(_certHandle);
-            SafeSecKeyRefHandle privateKey = Interop
-                .AppleCrypto
+            SafeSecKeyRefHandle privateKey = Interop.AppleCrypto
                 .X509GetPrivateKeyFromIdentity(_identityHandle);
             Debug.Assert(!publicKey.IsInvalid);
 
@@ -375,8 +372,7 @@ namespace System.Security.Cryptography.X509Certificates
 
             Debug.Assert(!_identityHandle.IsInvalid);
             SafeSecKeyRefHandle publicKey = Interop.AppleCrypto.X509GetPublicKey(_certHandle);
-            SafeSecKeyRefHandle privateKey = Interop
-                .AppleCrypto
+            SafeSecKeyRefHandle privateKey = Interop.AppleCrypto
                 .X509GetPrivateKeyFromIdentity(_identityHandle);
             Debug.Assert(!publicKey.IsInvalid);
 

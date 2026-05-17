@@ -189,8 +189,7 @@ namespace System.Activities
                 }
                 else
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(
                             new InvalidOperationException(
                                 SR.LocationTypeMismatch(
@@ -268,8 +267,7 @@ namespace System.Activities
             {
                 if (!TypeHelper.AreTypesCompatible(value, locationReference.Type))
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(
                             new InvalidOperationException(
                                 SR.CannotSetValueToLocation(
@@ -479,8 +477,7 @@ namespace System.Activities
         {
             if (this.isDisposed)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(new ObjectDisposedException(this.GetType().FullName, SR.AECDisposed));
             }
         }

@@ -48,8 +48,7 @@ namespace System.Web.Mvc.Test
             );
 
             // Act
-            string methodOverride = context
-                .RequestContext
+            string methodOverride = context.RequestContext
                 .HttpContext
                 .Request
                 .GetHttpMethodOverride();

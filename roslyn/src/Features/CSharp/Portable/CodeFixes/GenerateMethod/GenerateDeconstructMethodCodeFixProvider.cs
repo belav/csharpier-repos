@@ -121,8 +121,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.GenerateDeconstructMethod
             // Subpatterns are cast to ConstantPatternSyntax for use of GenerateNameForExpression and GetTypeInfo
             if (
                 deconstruction is PositionalPatternClauseSyntax positionalPatternClause
-                && positionalPatternClause
-                    .Subpatterns
+                && positionalPatternClause.Subpatterns
                     .Any(p => p.Pattern is not ConstantPatternSyntax)
             )
             {

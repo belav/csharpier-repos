@@ -327,22 +327,24 @@ ERROR : {string.Format(ErrorString.MapSourceRoots_PathMustEndWithSlashOrBackslas
             AssertEx.AssertEqualToleratingWhitespaceDifferences(
                 "ERROR : "
                     + string.Format(
-                        task.Log.FormatResourceString(
-                            "MapSourceRoots.NoSuchTopLevelSourceRoot",
-                            "SourceRoot.ContainingRoot",
-                            "SourceRoot",
-                            path2
-                        )
+                        task.Log
+                            .FormatResourceString(
+                                "MapSourceRoots.NoSuchTopLevelSourceRoot",
+                                "SourceRoot.ContainingRoot",
+                                "SourceRoot",
+                                path2
+                            )
                     )
                     + Environment.NewLine
                     + "ERROR : "
                     + string.Format(
-                        task.Log.FormatResourceString(
-                            "MapSourceRoots.NoSuchTopLevelSourceRoot",
-                            "SourceRoot.ContainingRoot",
-                            "SourceRoot",
-                            path1
-                        )
+                        task.Log
+                            .FormatResourceString(
+                                "MapSourceRoots.NoSuchTopLevelSourceRoot",
+                                "SourceRoot.ContainingRoot",
+                                "SourceRoot",
+                                path1
+                            )
                     )
                     + Environment.NewLine,
                 engine.Log
@@ -418,74 +420,80 @@ ERROR : {string.Format(ErrorString.MapSourceRoots_PathMustEndWithSlashOrBackslas
             AssertEx.AssertEqualToleratingWhitespaceDifferences(
                 "WARNING : "
                     + string.Format(
-                        task.Log.FormatResourceString(
-                            "MapSourceRoots.ContainsDuplicate",
-                            "SourceRoot",
-                            path1,
-                            "SourceControl",
-                            "git",
-                            "tfvc"
-                        )
+                        task.Log
+                            .FormatResourceString(
+                                "MapSourceRoots.ContainsDuplicate",
+                                "SourceRoot",
+                                path1,
+                                "SourceControl",
+                                "git",
+                                "tfvc"
+                            )
                     )
                     + Environment.NewLine
                     + "WARNING : "
                     + string.Format(
-                        task.Log.FormatResourceString(
-                            "MapSourceRoots.ContainsDuplicate",
-                            "SourceRoot",
-                            path1,
-                            "RevisionId",
-                            "RevId1",
-                            "RevId2"
-                        )
+                        task.Log
+                            .FormatResourceString(
+                                "MapSourceRoots.ContainsDuplicate",
+                                "SourceRoot",
+                                path1,
+                                "RevisionId",
+                                "RevId1",
+                                "RevId2"
+                            )
                     )
                     + Environment.NewLine
                     + "WARNING : "
                     + string.Format(
-                        task.Log.FormatResourceString(
-                            "MapSourceRoots.ContainsDuplicate",
-                            "SourceRoot",
-                            path1,
-                            "NestedRoot",
-                            "NR1A",
-                            "NR1B"
-                        )
+                        task.Log
+                            .FormatResourceString(
+                                "MapSourceRoots.ContainsDuplicate",
+                                "SourceRoot",
+                                path1,
+                                "NestedRoot",
+                                "NR1A",
+                                "NR1B"
+                            )
                     )
                     + Environment.NewLine
                     + "WARNING : "
                     + string.Format(
-                        task.Log.FormatResourceString(
-                            "MapSourceRoots.ContainsDuplicate",
-                            "SourceRoot",
-                            path1,
-                            "ContainingRoot",
-                            path3,
-                            "CR"
-                        )
+                        task.Log
+                            .FormatResourceString(
+                                "MapSourceRoots.ContainsDuplicate",
+                                "SourceRoot",
+                                path1,
+                                "ContainingRoot",
+                                path3,
+                                "CR"
+                            )
                     )
                     + Environment.NewLine
                     + "WARNING : "
                     + string.Format(
-                        task.Log.FormatResourceString(
-                            "MapSourceRoots.ContainsDuplicate",
-                            "SourceRoot",
-                            path1,
-                            "MappedPath",
-                            "MP1",
-                            "MP2"
-                        )
+                        task.Log
+                            .FormatResourceString(
+                                "MapSourceRoots.ContainsDuplicate",
+                                "SourceRoot",
+                                path1,
+                                "MappedPath",
+                                "MP1",
+                                "MP2"
+                            )
                     )
                     + Environment.NewLine
                     + "WARNING : "
                     + string.Format(
-                        task.Log.FormatResourceString(
-                            "MapSourceRoots.ContainsDuplicate",
-                            "SourceRoot",
-                            path1,
-                            "SourceLinkUrl",
-                            "URL1",
-                            "URL2"
-                        )
+                        task.Log
+                            .FormatResourceString(
+                                "MapSourceRoots.ContainsDuplicate",
+                                "SourceRoot",
+                                path1,
+                                "SourceLinkUrl",
+                                "URL1",
+                                "URL2"
+                            )
                     )
                     + Environment.NewLine,
                 engine.Log
@@ -534,12 +542,13 @@ ERROR : {string.Format(ErrorString.MapSourceRoots_PathMustEndWithSlashOrBackslas
             AssertEx.AssertEqualToleratingWhitespaceDifferences(
                 "ERROR : "
                     + string.Format(
-                        task.Log.FormatResourceString(
-                            "MapSourceRoots.NoSuchTopLevelSourceRoot",
-                            "SourceRoot.ContainingRoot",
-                            "SourceRoot",
-                            @"c:\MyProjects\MyProject\"
-                        )
+                        task.Log
+                            .FormatResourceString(
+                                "MapSourceRoots.NoSuchTopLevelSourceRoot",
+                                "SourceRoot.ContainingRoot",
+                                "SourceRoot",
+                                @"c:\MyProjects\MyProject\"
+                            )
                     )
                     + Environment.NewLine,
                 engine.Log
@@ -577,12 +586,13 @@ ERROR : {string.Format(ErrorString.MapSourceRoots_PathMustEndWithSlashOrBackslas
             AssertEx.AssertEqualToleratingWhitespaceDifferences(
                 "ERROR : "
                     + string.Format(
-                        task.Log.FormatResourceString(
-                            "MapSourceRoots.NoSuchTopLevelSourceRoot",
-                            "SourceRoot.ContainingRoot",
-                            "SourceRoot",
-                            @""
-                        )
+                        task.Log
+                            .FormatResourceString(
+                                "MapSourceRoots.NoSuchTopLevelSourceRoot",
+                                "SourceRoot.ContainingRoot",
+                                "SourceRoot",
+                                @""
+                            )
                     )
                     + Environment.NewLine,
                 engine.Log
@@ -625,11 +635,12 @@ ERROR : {string.Format(ErrorString.MapSourceRoots_PathMustEndWithSlashOrBackslas
                 AssertEx.AssertEqualToleratingWhitespaceDifferences(
                     "ERROR : "
                         + string.Format(
-                            task.Log.FormatResourceString(
-                                "MapSourceRoots.NoTopLevelSourceRoot",
-                                "SourceRoot",
-                                "DeterministicSourcePaths"
-                            )
+                            task.Log
+                                .FormatResourceString(
+                                    "MapSourceRoots.NoTopLevelSourceRoot",
+                                    "SourceRoot",
+                                    "DeterministicSourcePaths"
+                                )
                         )
                         + Environment.NewLine,
                     engine.Log

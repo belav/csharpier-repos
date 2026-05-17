@@ -260,17 +260,14 @@ namespace System.Runtime.Serialization.Json
                             if (newSize <= value)
                             {
                                 Fx.Assert("DataContract cache overflow");
-                                throw DiagnosticUtility
-                                    .ExceptionUtility
+                                throw DiagnosticUtility.ExceptionUtility
                                     .ThrowHelperError(
                                         new SerializationException(
-                                            System
-                                                .Runtime
+                                            System.Runtime
                                                 .Serialization
                                                 .SR
                                                 .GetString(
-                                                    System
-                                                        .Runtime
+                                                    System.Runtime
                                                         .Serialization
                                                         .SR
                                                         .DataContractCacheOverflow
@@ -291,8 +288,7 @@ namespace System.Runtime.Serialization.Json
                             {
                                 throw;
                             }
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperFatal(ex.Message, ex);
                         }
                     }
@@ -380,8 +376,7 @@ namespace System.Runtime.Serialization.Json
                         }
                         else
                         {
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperArgument(
                                     "traditionalDataContract",
                                     SR.GetString(
@@ -431,11 +426,9 @@ namespace System.Runtime.Serialization.Json
                                 )
                                 {
                                     DataContract itemDataContract = DataContract.GetDataContract(
-                                        Globals
-                                            .TypeOfKeyValuePair
+                                        Globals.TypeOfKeyValuePair
                                             .MakeGenericType(
-                                                collectionDataContract
-                                                    .ItemType
+                                                collectionDataContract.ItemType
                                                     .GetGenericArguments()
                                             )
                                     );

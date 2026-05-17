@@ -128,8 +128,7 @@ namespace System.Net.Http
             }
 
             // Look for parameter
-            return parentContentType
-                .Parameters
+            return parentContentType.Parameters
                 .FirstOrDefault(nvp =>
                     String.Equals(nvp.Name, parameterName, StringComparison.OrdinalIgnoreCase)
                 );

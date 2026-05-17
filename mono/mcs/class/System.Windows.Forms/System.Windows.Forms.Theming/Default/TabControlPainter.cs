@@ -431,20 +431,17 @@ namespace System.Windows.Forms.Theming.Default
                     bounds.Width += (flatButtonSpacing - 2);
                     res = bounds.Width;
                     if (tab.Alignment == TabAlignment.Top || tab.Alignment == TabAlignment.Bottom)
-                        ThemeEngine
-                            .Current
+                        ThemeEngine.Current
                             .CPDrawBorder3D(dc, bounds, Border3DStyle.Etched, Border3DSide.Right);
                     else
-                        ThemeEngine
-                            .Current
+                        ThemeEngine.Current
                             .CPDrawBorder3D(dc, bounds, Border3DStyle.Etched, Border3DSide.Top);
                     bounds.Width = width;
                 }
 
                 if (is_selected)
                 {
-                    ThemeEngine
-                        .Current
+                    ThemeEngine.Current
                         .CPDrawBorder3D(
                             dc,
                             bounds,
@@ -457,8 +454,7 @@ namespace System.Windows.Forms.Theming.Default
                 }
                 else if (tab.Appearance != TabAppearance.FlatButtons)
                 {
-                    ThemeEngine
-                        .Current
+                    ThemeEngine.Current
                         .CPDrawBorder3D(
                             dc,
                             bounds,
@@ -779,8 +775,7 @@ namespace System.Windows.Forms.Theming.Default
             {
                 Rectangle focus_rect = bounds;
                 focus_rect.Inflate(-2, -2);
-                ThemeEngine
-                    .Current
+                ThemeEngine.Current
                     .CPDrawFocusRectangle(dc, focus_rect, tab.BackColor, tab.ForeColor);
             }
 

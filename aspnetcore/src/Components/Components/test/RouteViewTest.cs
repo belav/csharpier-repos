@@ -56,8 +56,7 @@ public class RouteViewTest
         var routeData = new RouteData(typeof(ComponentWithLayout), routeParams);
 
         // Act
-        _renderer
-            .Dispatcher
+        _renderer.Dispatcher
             .InvokeAsync(() =>
                 _routeViewComponent.SetParametersAsync(
                     ParameterView.FromDictionary(
@@ -144,8 +143,7 @@ public class RouteViewTest
         var routeData = new RouteData(typeof(ComponentWithoutLayout), routeParams);
 
         // Act
-        _renderer
-            .Dispatcher
+        _renderer.Dispatcher
             .InvokeAsync(() =>
                 _routeViewComponent.SetParametersAsync(
                     ParameterView.FromDictionary(
@@ -186,8 +184,7 @@ public class RouteViewTest
         var routeData = new RouteData(typeof(ComponentWithoutLayout), routeParams);
 
         // Act
-        _renderer
-            .Dispatcher
+        _renderer.Dispatcher
             .InvokeAsync(() =>
                 _routeViewComponent.SetParametersAsync(
                     ParameterView.FromDictionary(
@@ -222,8 +219,7 @@ public class RouteViewTest
         var routeData = new RouteData(typeof(ComponentWithLayout), routeParams);
 
         // Act
-        _renderer
-            .Dispatcher
+        _renderer.Dispatcher
             .InvokeAsync(() =>
                 _routeViewComponent.SetParametersAsync(
                     ParameterView.FromDictionary(

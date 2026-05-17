@@ -106,8 +106,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.ReplaceMethodWithProper
                     }
                     else if (
                         getAccessor.Body != null
-                        && getAccessor
-                            .Body
+                        && getAccessor.Body
                             .TryConvertToArrowExpressionBody(
                                 propertyDeclaration.Kind(),
                                 languageVersion,
@@ -129,8 +128,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.ReplaceMethodWithProper
             {
                 if (
                     propertyDeclaration.ExpressionBody != null
-                    && propertyDeclaration
-                        .ExpressionBody
+                    && propertyDeclaration.ExpressionBody
                         .TryConvertToBlock(
                             propertyDeclaration.SemicolonToken,
                             createReturnStatementForExpression: true,
@@ -267,8 +265,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.ReplaceMethodWithProper
             )
             {
                 if (
-                    accessorDeclaration
-                        .Body
+                    accessorDeclaration.Body
                         .TryConvertToArrowExpressionBody(
                             accessorDeclaration.Kind(),
                             languageVersion,
@@ -292,8 +289,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.ReplaceMethodWithProper
             )
             {
                 if (
-                    accessorDeclaration
-                        .ExpressionBody
+                    accessorDeclaration.ExpressionBody
                         .TryConvertToBlock(
                             accessorDeclaration.SemicolonToken,
                             createReturnStatementForExpression: accessorDeclaration.Kind()
@@ -509,8 +505,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.ReplaceMethodWithProper
 
                     // Wrap the argument in parentheses (in order to not introduce any precedence problems).
                     // But also add a simplification annotation so we can remove the parens if possible.
-                    var argumentExpression = currentInvocation
-                        .ArgumentList
+                    var argumentExpression = currentInvocation.ArgumentList
                         .Arguments[0]
                         .Expression
                         .Parenthesize();

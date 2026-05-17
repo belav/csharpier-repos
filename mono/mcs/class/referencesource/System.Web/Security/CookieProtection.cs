@@ -29,8 +29,7 @@ namespace System.Web.Security
             if (AspNetCryptoServiceProvider.Instance.IsDefaultProvider)
             {
                 // If we're configured to go through the new crypto routines, do so.
-                ICryptoService cryptoService = AspNetCryptoServiceProvider
-                    .Instance
+                ICryptoService cryptoService = AspNetCryptoServiceProvider.Instance
                     .GetCryptoService(purpose);
                 return HttpServerUtility.UrlTokenEncode(cryptoService.Protect(buf));
             }
@@ -90,8 +89,7 @@ namespace System.Web.Security
             if (AspNetCryptoServiceProvider.Instance.IsDefaultProvider)
             {
                 // If we're configured to go through the new crypto routines, do so.
-                ICryptoService cryptoService = AspNetCryptoServiceProvider
-                    .Instance
+                ICryptoService cryptoService = AspNetCryptoServiceProvider.Instance
                     .GetCryptoService(purpose);
                 return cryptoService.Unprotect(buf);
             }

@@ -3432,8 +3432,7 @@ namespace System.Linq.Expressions
         public static System.Linq.Expressions.NewExpression New(
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.NonPublicConstructors
-                    | System
-                        .Diagnostics
+                    | System.Diagnostics
                         .CodeAnalysis
                         .DynamicallyAccessedMemberTypes
                         .PublicConstructors
@@ -3778,8 +3777,7 @@ namespace System.Linq.Expressions
             System.Linq.Expressions.Expression? expression,
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.NonPublicProperties
-                    | System
-                        .Diagnostics
+                    | System.Diagnostics
                         .CodeAnalysis
                         .DynamicallyAccessedMemberTypes
                         .PublicProperties

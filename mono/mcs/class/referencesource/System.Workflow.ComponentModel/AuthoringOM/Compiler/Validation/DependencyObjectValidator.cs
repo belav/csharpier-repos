@@ -60,9 +60,8 @@ namespace System.Workflow.ComponentModel.Compiler
 
             foreach (DependencyProperty prop in allProperties)
             {
-                object[] validationVisibilityAtrributes = prop.DefaultMetadata.GetAttributes(
-                    typeof(ValidationOptionAttribute)
-                );
+                object[] validationVisibilityAtrributes = prop.DefaultMetadata
+                    .GetAttributes(typeof(ValidationOptionAttribute));
                 ValidationOption validationVisibility =
                     (validationVisibilityAtrributes.Length > 0)
                         ? (
@@ -86,8 +85,7 @@ namespace System.Workflow.ComponentModel.Compiler
         {
             ValidationErrorCollection errors = new ValidationErrorCollection();
 
-            Attribute[] validationVisibilityAtrributes = dependencyProperty
-                .DefaultMetadata
+            Attribute[] validationVisibilityAtrributes = dependencyProperty.DefaultMetadata
                 .GetAttributes(typeof(ValidationOptionAttribute));
             ValidationOption validationVisibility =
                 (validationVisibilityAtrributes.Length > 0)
@@ -128,8 +126,7 @@ namespace System.Workflow.ComponentModel.Compiler
                         );
                     }
                     else if (
-                        !dependencyProperty
-                            .PropertyType
+                        !dependencyProperty.PropertyType
                             .IsAssignableFrom(
                                 dependencyProperty.DefaultMetadata.DefaultValue.GetType()
                             )
@@ -141,8 +138,7 @@ namespace System.Workflow.ComponentModel.Compiler
                                     SR.Error_PropertyDefaultTypeMismatch,
                                     dependencyProperty.Name,
                                     dependencyProperty.PropertyType.FullName,
-                                    dependencyProperty
-                                        .DefaultMetadata
+                                    dependencyProperty.DefaultMetadata
                                         .DefaultValue
                                         .GetType()
                                         .FullName
@@ -230,8 +226,7 @@ namespace System.Workflow.ComponentModel.Compiler
                         }
                         finally
                         {
-                            System
-                                .Diagnostics
+                            System.Diagnostics
                                 .Debug
                                 .Assert(
                                     manager.Context.Current == childContext,
@@ -282,8 +277,7 @@ namespace System.Workflow.ComponentModel.Compiler
             }
             finally
             {
-                System
-                    .Diagnostics
+                System.Diagnostics
                     .Debug
                     .Assert(
                         manager.Context.Current == propertyValidationContext,

@@ -1199,8 +1199,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     // Should be in a WithCrefTypeParametersBinder.
                     Debug.Assert(
                         typeArgumentSyntax.ContainsDiagnostics
-                            || !typeArgumentSyntax
-                                .SyntaxTree
+                            || !typeArgumentSyntax.SyntaxTree
                                 .ReportDocumentationCommentDiagnostics()
                             || (
                                 !unusedDiagnostics.HasAnyErrors()

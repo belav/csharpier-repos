@@ -68,8 +68,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.LinkedFiles
             var text = await workspace.CurrentSolution.GetDocument(documentId).GetTextAsync();
 
             var linkedDocumentId = workspace.Documents.Single(d => d.IsLinkFile).Id;
-            var linkedText = await workspace
-                .CurrentSolution
+            var linkedText = await workspace.CurrentSolution
                 .GetDocument(linkedDocumentId)
                 .GetTextAsync();
 
@@ -101,16 +100,14 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.LinkedFiles
             )
             {
                 var document = context.Document;
-                var linkedDocument = document
-                    .Project
+                var linkedDocument = document.Project
                     .Solution
                     .Projects
                     .Single(p => p != document.Project)
                     .Documents
                     .Single();
 
-                var newSolution = document
-                    .Project
+                var newSolution = document.Project
                     .Solution
                     .WithDocumentText(
                         document.Id,

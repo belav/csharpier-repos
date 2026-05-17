@@ -41,8 +41,7 @@ public class ShutdownTests : IISFunctionalTestBase
     {
         var deploymentParameters = Fixture.GetBaseDeploymentParameters(Fixture.InProcessTestSite);
         deploymentParameters.TransformArguments((a, _) => $"{a} HangOnStop");
-        deploymentParameters
-            .WebConfigActionList
+        deploymentParameters.WebConfigActionList
             .Add(WebConfigHelpers.AddOrModifyAspNetCoreSection("shutdownTimeLimit", "1"));
 
         var deploymentResult = await DeployAsync(deploymentParameters);
@@ -160,8 +159,7 @@ public class ShutdownTests : IISFunctionalTestBase
         var deploymentParameters = Fixture.GetBaseDeploymentParameters(
             hostingModel: HostingModel.InProcess
         );
-        deploymentParameters
-            .WebConfigActionList
+        deploymentParameters.WebConfigActionList
             .Add(WebConfigHelpers.AddOrModifyAspNetCoreSection("processPath", "nonexistent"));
 
         var deploymentResult = await DeployAsync(deploymentParameters);
@@ -183,8 +181,7 @@ public class ShutdownTests : IISFunctionalTestBase
         var deploymentParameters = Fixture.GetBaseDeploymentParameters(
             hostingModel: HostingModel.OutOfProcess
         );
-        deploymentParameters
-            .WebConfigActionList
+        deploymentParameters.WebConfigActionList
             .Add(WebConfigHelpers.AddOrModifyAspNetCoreSection("processPath", "nonexistent"));
 
         var deploymentResult = await DeployAsync(deploymentParameters);
@@ -449,8 +446,7 @@ public class ShutdownTests : IISFunctionalTestBase
 
         // Have to retry here to allow ANCM to receive notification and react to it
         // Verify that worker process gets restarted with new process id
-        await deploymentResult
-            .HttpClient
+        await deploymentResult.HttpClient
             .RetryRequestAsync(
                 "/ProcessId",
                 async r => await r.Content.ReadAsStringAsync() != processBefore
@@ -474,8 +470,7 @@ public class ShutdownTests : IISFunctionalTestBase
 
         // Have to retry here to allow ANCM to receive notification and react to it
         // Verify that worker process does not get restarted with new process id
-        await deploymentResult
-            .HttpClient
+        await deploymentResult.HttpClient
             .RetryRequestAsync(
                 "/ProcessId",
                 async r => await r.Content.ReadAsStringAsync() == processBefore
@@ -499,8 +494,7 @@ public class ShutdownTests : IISFunctionalTestBase
 
         // Have to retry here to allow ANCM to receive notification and react to it
         // Verify that worker process does not get restarted with new process id
-        await deploymentResult
-            .HttpClient
+        await deploymentResult.HttpClient
             .RetryRequestAsync(
                 "/ProcessId",
                 async r => await r.Content.ReadAsStringAsync() == processBefore
@@ -523,8 +517,7 @@ public class ShutdownTests : IISFunctionalTestBase
 
         // Have to retry here to allow ANCM to receive notification and react to it
         // Verify that worker process does not get restarted with new process id
-        await deploymentResult
-            .HttpClient
+        await deploymentResult.HttpClient
             .RetryRequestAsync(
                 "/ProcessId",
                 async r => await r.Content.ReadAsStringAsync() == processBefore
@@ -551,8 +544,7 @@ public class ShutdownTests : IISFunctionalTestBase
         // Have to retry here to allow ANCM to receive notification and react to it
         // Verify that inprocess application was created and started, checking the server
         // header to see that it is running inprocess
-        await deploymentResult
-            .HttpClient
+        await deploymentResult.HttpClient
             .RetryRequestAsync(
                 "/HelloWorld",
                 r => r.Headers.Server.ToString().StartsWith("Microsoft", StringComparison.Ordinal)
@@ -622,8 +614,7 @@ public class ShutdownTests : IISFunctionalTestBase
 
             var deploymentResult = await DeployAsync(deploymentParameters);
 
-            var response = await deploymentResult
-                .HttpClient
+            var response = await deploymentResult.HttpClient
                 .GetAsync("/Abort")
                 .TimeoutAfter(TimeoutExtensions.DefaultTimeoutValue);
 
@@ -652,8 +643,7 @@ public class ShutdownTests : IISFunctionalTestBase
             var deploymentParameters = Fixture.GetBaseDeploymentParameters(HostingModel.InProcess);
 
             var deploymentResult = await DeployAsync(deploymentParameters);
-            var response = await deploymentResult
-                .HttpClient
+            var response = await deploymentResult.HttpClient
                 .GetAsync("/Abort")
                 .TimeoutAfter(TimeoutExtensions.DefaultTimeoutValue);
 

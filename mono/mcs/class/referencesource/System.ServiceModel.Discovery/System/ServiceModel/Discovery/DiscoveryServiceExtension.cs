@@ -42,8 +42,7 @@ namespace System.ServiceModel.Discovery
             }
             if (this.owner != null)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(new InvalidOperationException(SR2.DiscoveryExtensionAlreadyAttached));
             }
 
@@ -58,8 +57,7 @@ namespace System.ServiceModel.Discovery
             }
             if (this.owner != null)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(new InvalidOperationException(SR2.DiscoveryExtensionCannotBeDetached));
             }
         }
@@ -70,8 +68,7 @@ namespace System.ServiceModel.Discovery
 
             if (discoveryService == null)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new InvalidOperationException(
                             SR.DiscoveryMethodImplementationReturnsNull(

@@ -204,8 +204,7 @@ namespace System.ServiceProcess
                     // figure out how big a buffer we need to get the info
                     int bytesNeeded = 0;
                     int numEnumerated = 0;
-                    bool result = Interop
-                        .Advapi32
+                    bool result = Interop.Advapi32
                         .EnumDependentServices(
                             serviceHandle,
                             Interop.Advapi32.ServiceState.SERVICE_STATE_ALL,
@@ -230,8 +229,7 @@ namespace System.ServiceProcess
                     try
                     {
                         // get all the info
-                        result = Interop
-                            .Advapi32
+                        result = Interop.Advapi32
                             .EnumDependentServices(
                                 serviceHandle,
                                 Interop.Advapi32.ServiceState.SERVICE_STATE_ALL,
@@ -340,8 +338,7 @@ namespace System.ServiceProcess
                 using var serviceHandle = GetServiceHandle(
                     Interop.Advapi32.ServiceOptions.SERVICE_QUERY_CONFIG
                 );
-                bool success = Interop
-                    .Advapi32
+                bool success = Interop.Advapi32
                     .QueryServiceConfig(serviceHandle, IntPtr.Zero, 0, out int bytesNeeded);
                 if (success)
                 {
@@ -357,8 +354,7 @@ namespace System.ServiceProcess
                 IntPtr bufPtr = Marshal.AllocHGlobal((IntPtr)bytesNeeded);
                 try
                 {
-                    success = Interop
-                        .Advapi32
+                    success = Interop.Advapi32
                         .QueryServiceConfig(serviceHandle, bufPtr, bytesNeeded, out bytesNeeded);
                     if (!success)
                         throw new Win32Exception();
@@ -443,8 +439,7 @@ namespace System.ServiceProcess
                 using var serviceHandle = GetServiceHandle(
                     Interop.Advapi32.ServiceOptions.SERVICE_QUERY_CONFIG
                 );
-                bool success = Interop
-                    .Advapi32
+                bool success = Interop.Advapi32
                     .QueryServiceConfig(serviceHandle, IntPtr.Zero, 0, out int bytesNeeded);
 
                 int lastError = Marshal.GetLastPInvokeError();
@@ -455,8 +450,7 @@ namespace System.ServiceProcess
                 IntPtr bufPtr = Marshal.AllocHGlobal((IntPtr)bytesNeeded);
                 try
                 {
-                    success = Interop
-                        .Advapi32
+                    success = Interop.Advapi32
                         .QueryServiceConfig(serviceHandle, bufPtr, bytesNeeded, out bytesNeeded);
                     if (!success)
                         throw new Win32Exception();
@@ -654,8 +648,7 @@ namespace System.ServiceProcess
                 fixed (char* c = builder)
                 {
                     if (
-                        Interop
-                            .Advapi32
+                        Interop.Advapi32
                             .GetServiceKeyName(SCMHandle, serviceDisplayName, c, ref bufLen)
                     )
                         break;
@@ -695,8 +688,7 @@ namespace System.ServiceProcess
                 fixed (char* c = builder)
                 {
                     if (
-                        Interop
-                            .Advapi32
+                        Interop.Advapi32
                             .GetServiceDisplayName(scmHandle, serviceName, c, ref bufLen)
                     )
                         break;
@@ -884,8 +876,7 @@ namespace System.ServiceProcess
                 machineName,
                 Interop.Advapi32.ServiceControllerOptions.SC_MANAGER_ENUMERATE_SERVICE
             );
-            Interop
-                .Advapi32
+            Interop.Advapi32
                 .EnumServicesStatusEx(
                     databaseHandle,
                     Interop.Advapi32.ServiceControllerOptions.SC_ENUM_PROCESS_INFO,
@@ -905,8 +896,7 @@ namespace System.ServiceProcess
                 //
                 // Get the set of services
                 //
-                Interop
-                    .Advapi32
+                Interop.Advapi32
                     .EnumServicesStatusEx(
                         databaseHandle,
                         Interop.Advapi32.ServiceControllerOptions.SC_ENUM_PROCESS_INFO,
@@ -954,8 +944,7 @@ namespace System.ServiceProcess
                 Interop.Advapi32.ServiceOptions.SERVICE_PAUSE_CONTINUE
             );
             Interop.Advapi32.SERVICE_STATUS status = default;
-            bool result = Interop
-                .Advapi32
+            bool result = Interop.Advapi32
                 .ControlService(
                     serviceHandle,
                     Interop.Advapi32.ControlOptions.CONTROL_PAUSE,
@@ -981,8 +970,7 @@ namespace System.ServiceProcess
                 Interop.Advapi32.ServiceOptions.SERVICE_PAUSE_CONTINUE
             );
             Interop.Advapi32.SERVICE_STATUS status = default;
-            bool result = Interop
-                .Advapi32
+            bool result = Interop.Advapi32
                 .ControlService(
                     serviceHandle,
                     Interop.Advapi32.ControlOptions.CONTROL_CONTINUE,
@@ -1071,8 +1059,7 @@ namespace System.ServiceProcess
             try
             {
                 argPtrsHandle = GCHandle.Alloc(argPtrs, GCHandleType.Pinned);
-                bool result = Interop
-                    .Advapi32
+                bool result = Interop.Advapi32
                     .StartService(serviceHandle, args.Length, argPtrsHandle.AddrOfPinnedObject());
                 if (!result)
                 {
@@ -1142,8 +1129,7 @@ namespace System.ServiceProcess
             }
 
             Interop.Advapi32.SERVICE_STATUS status = default;
-            bool result = Interop
-                .Advapi32
+            bool result = Interop.Advapi32
                 .ControlService(
                     serviceHandle,
                     Interop.Advapi32.ControlOptions.CONTROL_STOP,

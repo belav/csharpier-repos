@@ -92,8 +92,7 @@ namespace System.ServiceModel.Channels
                     if (DateTime.UtcNow > entry.ExpiryTime)
                     {
                         entry.MarkContextExpired();
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new MsmqException(SR.GetString(SR.MessageValidityExpired, lookupId))
                             );
@@ -106,23 +105,23 @@ namespace System.ServiceModel.Channels
                         {
                             List<MsmqReceiveContext> transMsgs;
                             if (
-                                !this.transMessages.TryGetValue(
-                                    Transaction
-                                        .Current
-                                        .TransactionInformation
-                                        .DistributedIdentifier,
-                                    out transMsgs
-                                )
+                                !this.transMessages
+                                    .TryGetValue(
+                                        Transaction.Current
+                                            .TransactionInformation
+                                            .DistributedIdentifier,
+                                        out transMsgs
+                                    )
                             )
                             {
                                 transMsgs = new List<MsmqReceiveContext>();
-                                this.transMessages.Add(
-                                    Transaction
-                                        .Current
-                                        .TransactionInformation
-                                        .DistributedIdentifier,
-                                    transMsgs
-                                );
+                                this.transMessages
+                                    .Add(
+                                        Transaction.Current
+                                            .TransactionInformation
+                                            .DistributedIdentifier,
+                                        transMsgs
+                                    );
                                 // only need to attach the tx complete handler once per transaction
                                 Transaction.Current.TransactionCompleted +=
                                     this.transactionCompletedHandler;
@@ -138,8 +137,7 @@ namespace System.ServiceModel.Channels
                 else
                 {
                     // it was cleaned up by the expiry timer
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new MsmqException(SR.GetString(SR.MessageValidityExpired, lookupId))
                         );
@@ -192,10 +190,11 @@ namespace System.ServiceModel.Channels
                 {
                     List<MsmqReceiveContext> toRemove;
                     if (
-                        this.transMessages.TryGetValue(
-                            e.Transaction.TransactionInformation.DistributedIdentifier,
-                            out toRemove
-                        )
+                        this.transMessages
+                            .TryGetValue(
+                                e.Transaction.TransactionInformation.DistributedIdentifier,
+                                out toRemove
+                            )
                     )
                     {
                         foreach (MsmqReceiveContext entry in toRemove)
@@ -205,9 +204,8 @@ namespace System.ServiceModel.Channels
                     }
                 }
                 // on abort the messages stay locked, we just remove the transaction info from our collection
-                this.transMessages.Remove(
-                    e.Transaction.TransactionInformation.DistributedIdentifier
-                );
+                this.transMessages
+                    .Remove(e.Transaction.TransactionInformation.DistributedIdentifier);
             }
         }
 

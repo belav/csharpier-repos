@@ -32,8 +32,7 @@ namespace System.ServiceModel.ComIntegration
                 {
                     if (context.WindowsIdentity == null)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(Error.RequiresWindowsSecurity());
                     }
 

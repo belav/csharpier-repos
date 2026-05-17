@@ -108,8 +108,7 @@ namespace Microsoft.CodeAnalysis.Editor.Extensibility.NavigationBar
             CancellationToken cancellationToken
         )
         {
-            var navigationService = workspace
-                .Services
+            var navigationService = workspace.Services
                 .GetRequiredService<IDocumentNavigationService>();
 
             if (
@@ -127,11 +126,9 @@ namespace Microsoft.CodeAnalysis.Editor.Extensibility.NavigationBar
             )
             {
                 // Ensure we're back on the UI thread before showing a failure message.
-                await ThreadingContext
-                    .JoinableTaskFactory
+                await ThreadingContext.JoinableTaskFactory
                     .SwitchToMainThreadAsync(cancellationToken);
-                var notificationService = workspace
-                    .Services
+                var notificationService = workspace.Services
                     .GetRequiredService<INotificationService>();
                 notificationService.SendNotification(
                     EditorFeaturesResources.The_definition_of_the_object_is_hidden,

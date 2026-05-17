@@ -44,8 +44,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 );
 
                 // gather expression-declared variables from invalid array dimensions. eg. using(int[x is var y] z = new int[0])
-                declarationSyntax
-                    .Type
+                declarationSyntax.Type
                     .VisitRankSpecifiers(
                         (rankSpecifier, args) =>
                         {
@@ -301,8 +300,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     if (hasAwait)
                     {
-                        awaitableType = originalBinder
-                            .Compilation
+                        awaitableType = originalBinder.Compilation
                             .GetWellKnownType(WellKnownType.System_Threading_Tasks_ValueTask);
                     }
 
@@ -327,8 +325,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                             WasCompilerGenerated = true,
                         };
 
-                    BindingDiagnosticBag patternDiagnostics = originalBinder
-                        .Compilation
+                    BindingDiagnosticBag patternDiagnostics = originalBinder.Compilation
                         .IsFeatureEnabled(MessageID.IDS_FeatureDisposalPattern)
                         ? diagnostics
                         : BindingDiagnosticBag.Discarded;
@@ -340,8 +337,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     );
                     if (disposeMethod is object)
                     {
-                        MessageID
-                            .IDS_FeatureDisposalPattern
+                        MessageID.IDS_FeatureDisposalPattern
                             .CheckFeatureAvailability(
                                 diagnostics,
                                 originalBinder.Compilation,
@@ -462,8 +458,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeSymbol getDisposableInterface(bool isAsync)
             {
                 return isAsync
-                    ? originalBinder
-                        .Compilation
+                    ? originalBinder.Compilation
                         .GetWellKnownType(WellKnownType.System_IAsyncDisposable)
                     : originalBinder.Compilation.GetSpecialType(SpecialType.System_IDisposable);
             }

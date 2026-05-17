@@ -1108,8 +1108,7 @@ namespace System.Web.UI.WebControls
                 {
                     writer.AddAttribute(
                         HtmlTextWriterAttribute.Href,
-                        _owner
-                            .Page
+                        _owner.Page
                             .ClientScript
                             .GetPostBackClientHyperlink(_owner, InternalValuePath, true, true)
                     );

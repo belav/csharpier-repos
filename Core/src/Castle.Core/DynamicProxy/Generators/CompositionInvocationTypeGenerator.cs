@@ -68,8 +68,7 @@ namespace Castle.DynamicProxy.Generators
             Reference targetField
         )
         {
-            invokeMethodOnTarget
-                .CodeBuilder
+            invokeMethodOnTarget.CodeBuilder
                 .AddStatement(
                     new MethodInvocationExpression(
                         SelfReference.Self,

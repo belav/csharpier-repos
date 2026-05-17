@@ -25,8 +25,7 @@ public class MulticastDelegateGetHashCode
     {
         bool retVal = true;
 
-        TestLibrary
-            .TestFramework
+        TestLibrary.TestFramework
             .BeginScenario(
                 "PosTest1: Hash code of two delegate with the same P/Invoke function from same type are equal"
             );
@@ -47,8 +46,7 @@ public class MulticastDelegateGetHashCode
                 != dd1.VoidParameterValueDelegate.GetHashCode()
             )
             {
-                TestLibrary
-                    .TestFramework
+                TestLibrary.TestFramework
                     .LogError(
                         "001",
                         "Hash code of two delegate with the same P/Invoke function from same type are not equal"
@@ -70,8 +68,7 @@ public class MulticastDelegateGetHashCode
     {
         bool retVal = true;
 
-        TestLibrary
-            .TestFramework
+        TestLibrary.TestFramework
             .BeginScenario(
                 "PosTest2: Hash code of two delegate with the same instance function from same type are equal"
             );
@@ -93,8 +90,7 @@ public class MulticastDelegateGetHashCode
                 != dd1.ValueParameterVoidDelegate.GetHashCode()
             )
             {
-                TestLibrary
-                    .TestFramework
+                TestLibrary.TestFramework
                     .LogError(
                         "003",
                         "Hash code of two delegate with the same instance function from same type are not equal"

@@ -31,8 +31,7 @@ namespace System.Runtime.InteropServices
             int wideCharLen
         )
         {
-            return System
-                .Text
+            return System.Text
                 .Encoding
                 .UTF8
                 .GetChars(multiByteStr, multiByteLen, wideCharStr, wideCharLen);
@@ -47,8 +46,7 @@ namespace System.Runtime.InteropServices
             bool throwOnUnmappableChar
         )
         {
-            return System
-                .Text
+            return System.Text
                 .Encoding
                 .UTF8
                 .GetBytes(wideCharStr, wideCharLen, multiByteStr, multiByteLen);
@@ -61,8 +59,7 @@ namespace System.Runtime.InteropServices
             int multiByteLen
         )
         {
-            return System
-                .Text
+            return System.Text
                 .Encoding
                 .UTF8
                 .GetBytes(wideCharStr, wideCharLen, multiByteStr, multiByteLen);

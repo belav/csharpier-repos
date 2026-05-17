@@ -114,8 +114,7 @@ internal partial class SyntacticClassificationTaggerProvider
         {
             taggerProvider._threadingContext.ThrowIfNotOnUIThread();
 
-            var tagComputer = subjectBuffer
-                .Properties
+            var tagComputer = subjectBuffer.Properties
                 .GetOrCreateSingletonProperty(
                     s_uniqueKey,
                     () =>
@@ -158,8 +157,7 @@ internal partial class SyntacticClassificationTaggerProvider
 
         private void OnWorkspaceRegistrationChanged(object? sender, EventArgs e)
         {
-            var token = _taggerProvider
-                ._listener
+            var token = _taggerProvider._listener
                 .BeginAsyncOperation(nameof(OnWorkspaceRegistrationChanged));
             var task = SwitchToMainThreadAndHookupWorkspaceAsync();
             task.CompletesAsyncOperation(token);
@@ -169,8 +167,7 @@ internal partial class SyntacticClassificationTaggerProvider
         {
             try
             {
-                await _taggerProvider
-                    ._threadingContext
+                await _taggerProvider._threadingContext
                     .JoinableTaskFactory
                     .SwitchToMainThreadAsync(_disposalCancellationSource.Token);
 
@@ -566,8 +563,7 @@ internal partial class SyntacticClassificationTaggerProvider
             var root =
                 lastProcessedDocumentOrRoot.TryGetFirst(out var tempRoot) ? tempRoot
                 : lastProcessedDocumentOrRoot.Second.SupportsSyntaxTree
-                    ? lastProcessedDocumentOrRoot
-                        .Second
+                    ? lastProcessedDocumentOrRoot.Second
                         .GetSyntaxRootSynchronously(cancellationToken)
                 : null;
 
@@ -642,8 +638,7 @@ internal partial class SyntacticClassificationTaggerProvider
                 {
                     // 2) Translate those classifications forward so that they correspond to the true
                     //    requested snapshot.
-                    var lastSnapshotSpan = lastClassifiedSpan
-                        .TextSpan
+                    var lastSnapshotSpan = lastClassifiedSpan.TextSpan
                         .ToSnapshotSpan(lastProcessedSnapshot);
                     var currentSnapshotSpan = lastSnapshotSpan.TranslateTo(
                         currentSnapshot,

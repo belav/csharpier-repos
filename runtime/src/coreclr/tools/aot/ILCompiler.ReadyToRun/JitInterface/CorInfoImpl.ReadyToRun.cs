@@ -58,8 +58,7 @@ namespace Internal.JitInterface
             Token = token;
             if (token.TokenType == CorTokenType.mdtMemberRef)
             {
-                var memberRef = token
-                    .MetadataReader
+                var memberRef = token.MetadataReader
                     .GetMemberReference((MemberReferenceHandle)token.Handle);
                 switch (memberRef.Parent.Kind)
                 {
@@ -170,16 +169,14 @@ namespace Internal.JitInterface
             // Strip off method spec details. The owning type is only associated with a MethodDef or a MemberRef
             if (moduleToken.TokenType == CorTokenType.mdtMethodSpec)
             {
-                var methodSpecification = moduleToken
-                    .MetadataReader
+                var methodSpecification = moduleToken.MetadataReader
                     .GetMethodSpecification((MethodSpecificationHandle)moduleToken.Handle);
                 moduleToken = new ModuleToken(moduleToken.Module, methodSpecification.Method);
             }
 
             if (moduleToken.TokenType == CorTokenType.mdtMethodDef)
             {
-                var methodDefinition = moduleToken
-                    .MetadataReader
+                var methodDefinition = moduleToken.MetadataReader
                     .GetMethodDefinition((MethodDefinitionHandle)moduleToken.Handle);
                 return HandleContext(
                     moduleToken.Module,
@@ -194,8 +191,7 @@ namespace Internal.JitInterface
 
             // At this point moduleToken must point at a MemberRef.
             Debug.Assert(moduleToken.TokenType == CorTokenType.mdtMemberRef);
-            var memberRef = moduleToken
-                .MetadataReader
+            var memberRef = moduleToken.MetadataReader
                 .GetMemberReference((MemberReferenceHandle)moduleToken.Handle);
             switch (memberRef.Parent.Kind)
             {
@@ -674,8 +670,7 @@ namespace Internal.JitInterface
                 if (metadataReader.StringComparer.Equals(namespaceHandle, "System.Runtime"))
                 {
                     if (
-                        metadataReader
-                            .StringComparer
+                        metadataReader.StringComparer
                             .Equals(nameHandle, "BypassReadyToRunAttribute")
                     )
                     {
@@ -683,14 +678,12 @@ namespace Internal.JitInterface
                     }
                 }
                 else if (
-                    metadataReader
-                        .StringComparer
+                    metadataReader.StringComparer
                         .Equals(namespaceHandle, "System.Runtime.CompilerServices")
                 )
                 {
                     if (
-                        metadataReader
-                            .StringComparer
+                        metadataReader.StringComparer
                             .Equals(nameHandle, "CompExactlyDependsOnAttribute")
                     )
                     {
@@ -816,8 +809,7 @@ namespace Internal.JitInterface
                     if (data.HashCode != functionOutputHashCode)
                     {
                         _compilation.DeterminismCheckFailed = true;
-                        _compilation
-                            .Logger
+                        _compilation.Logger
                             .LogMessage(
                                 $"ERROR: Determinism check compiling method '{MethodBeingCompiled}' failed. Use '{_compilation.GetReproInstructions(MethodBeingCompiled)}' on command line to reproduce the failure."
                             );
@@ -903,8 +895,7 @@ namespace Internal.JitInterface
                 if (ShouldSkipCompilation(_compilation.InstructionSetSupport, MethodBeingCompiled))
                 {
                     if (logger.IsVerbose)
-                        logger
-                            .Writer
+                        logger.Writer
                             .WriteLine(
                                 $"Info: Method `{MethodBeingCompiled}` was not compiled because it is skipped."
                             );
@@ -914,8 +905,7 @@ namespace Internal.JitInterface
                 if (MethodSignatureIsUnstable(MethodBeingCompiled.Signature, out var _))
                 {
                     if (logger.IsVerbose)
-                        logger
-                            .Writer
+                        logger.Writer
                             .WriteLine(
                                 $"Info: Method `{MethodBeingCompiled}` was not compiled because it has an non version resilient signature."
                             );
@@ -925,8 +915,7 @@ namespace Internal.JitInterface
                 if (methodIL == null)
                 {
                     if (logger.IsVerbose)
-                        logger
-                            .Writer
+                        logger.Writer
                             .WriteLine(
                                 $"Info: Method `{MethodBeingCompiled}` was not compiled because IL code could not be found for the method."
                             );
@@ -936,8 +925,7 @@ namespace Internal.JitInterface
                 if (FunctionJustThrows(methodIL))
                 {
                     if (logger.IsVerbose)
-                        logger
-                            .Writer
+                        logger.Writer
                             .WriteLine(
                                 $"Info: Method `{MethodBeingCompiled}` was not compiled because it always throws an exception"
                             );
@@ -952,8 +940,7 @@ namespace Internal.JitInterface
                 )
                 {
                     if (logger.IsVerbose)
-                        logger
-                            .Writer
+                        logger.Writer
                             .WriteLine(
                                 $"Info: Method `{MethodBeingCompiled}` was not compiled because it has a non referenceable catch clause"
                             );
@@ -969,19 +956,16 @@ namespace Internal.JitInterface
                             && ecmaMethod.Module == ecmaMethod.Context.SystemModule
                         )
                         || (
-                            !_compilation
-                                .NodeFactory
+                            !_compilation.NodeFactory
                                 .CompilationModuleGroup
                                 .VersionsWithMethodBody(MethodBeingCompiled)
-                            && _compilation
-                                .NodeFactory
+                            && _compilation.NodeFactory
                                 .CompilationModuleGroup
                                 .CrossModuleInlineable(MethodBeingCompiled)
                         )
                     )
                     {
-                        ISymbolNode ilBodyNode = _compilation
-                            .SymbolNodeFactory
+                        ISymbolNode ilBodyNode = _compilation.SymbolNodeFactory
                             .CheckILBodyFixupSignature(
                                 (EcmaMethod)MethodBeingCompiled.GetTypicalMethodDefinition()
                             );
@@ -1003,8 +987,7 @@ namespace Internal.JitInterface
                         // computed.
                         // NOTE: Technically, we could arrange to require only the set of tokens necessary to describe the type that owns this method
                         // as well as the parameters and return value to the method. The token for the actual method is not required.
-                        EntityHandle? handle = _compilation
-                            .NodeFactory
+                        EntityHandle? handle = _compilation.NodeFactory
                             .ManifestMetadataTable
                             ._mutableModule
                             .TryGetExistingEntityHandle(ecmaMethod);
@@ -1033,8 +1016,7 @@ namespace Internal.JitInterface
                     && logger.IsVerbose
                 )
                 {
-                    logger
-                        .Writer
+                    logger.Writer
                         .WriteLine(
                             $"Info: Method `{MethodBeingCompiled}` triggered recompilation to acquire stable tokens for cross module inline."
                         );
@@ -1069,8 +1051,7 @@ namespace Internal.JitInterface
                             return false;
 
                         pLookup = CreateConstLookupToSymbol(
-                            _compilation
-                                .SymbolNodeFactory
+                            _compilation.SymbolNodeFactory
                                 .CreateReadyToRunHelper(ReadyToRunHelperId.NewHelper, type)
                         );
                     }
@@ -1083,8 +1064,7 @@ namespace Internal.JitInterface
                             return false;
 
                         pLookup = CreateConstLookupToSymbol(
-                            _compilation
-                                .SymbolNodeFactory
+                            _compilation.SymbolNodeFactory
                                 .CreateReadyToRunHelper(ReadyToRunHelperId.NewArr1, type)
                         );
                     }
@@ -1100,8 +1080,7 @@ namespace Internal.JitInterface
                             type = type.Instantiation[0];
 
                         pLookup = CreateConstLookupToSymbol(
-                            _compilation
-                                .SymbolNodeFactory
+                            _compilation.SymbolNodeFactory
                                 .CreateReadyToRunHelper(ReadyToRunHelperId.IsInstanceOf, type)
                         );
                     }
@@ -1117,8 +1096,7 @@ namespace Internal.JitInterface
                             type = type.Instantiation[0];
 
                         pLookup = CreateConstLookupToSymbol(
-                            _compilation
-                                .SymbolNodeFactory
+                            _compilation.SymbolNodeFactory
                                 .CreateReadyToRunHelper(ReadyToRunHelperId.CastClass, type)
                         );
                     }
@@ -1152,19 +1130,16 @@ namespace Internal.JitInterface
                             constrainedType = (TypeDesc)GetRuntimeDeterminedObjectForToken(
                                 ref *(CORINFO_RESOLVED_TOKEN*)pGenericLookupKind.runtimeLookupArgs
                             );
-                            _compilation
-                                .NodeFactory
+                            _compilation.NodeFactory
                                 .DetectGenericCycles(MethodBeingCompiled, constrainedType);
                         }
                         object helperArg = GetRuntimeDeterminedObjectForToken(ref pResolvedToken);
                         if (helperArg is MethodDesc methodDesc)
                         {
                             var methodIL = HandleToObject(pResolvedToken.tokenScope);
-                            MethodDesc sharedMethod = methodIL
-                                .OwningMethod
+                            MethodDesc sharedMethod = methodIL.OwningMethod
                                 .GetSharedRuntimeFormMethodTarget();
-                            _compilation
-                                .NodeFactory
+                            _compilation.NodeFactory
                                 .DetectGenericCycles(MethodBeingCompiled, sharedMethod);
                             helperArg = new MethodWithToken(
                                 methodDesc,
@@ -1185,8 +1160,7 @@ namespace Internal.JitInterface
                         GenericContext methodContext = new GenericContext(
                             entityFromContext(pResolvedToken.tokenContext)
                         );
-                        ISymbolNode helper = _compilation
-                            .SymbolNodeFactory
+                        ISymbolNode helper = _compilation.SymbolNodeFactory
                             .GenericLookupHelper(
                                 pGenericLookupKind.runtimeLookupKind,
                                 helperId,
@@ -1662,8 +1636,7 @@ namespace Internal.JitInterface
             if (
                 methodDesc != null
                 && (
-                    _compilation
-                        .NodeFactory
+                    _compilation.NodeFactory
                         .CompilationModuleGroup
                         .VersionsWithMethodBody(methodDesc)
                     || (
@@ -1740,8 +1713,7 @@ namespace Internal.JitInterface
 
                     Debug.Assert(resultMethod is EcmaMethod);
                     Debug.Assert(
-                        _compilation
-                            .NodeFactory
+                        _compilation.NodeFactory
                             .CompilationModuleGroup
                             .VersionsWithType(((EcmaMethod)resultMethod).OwningType)
                     );
@@ -1757,8 +1729,7 @@ namespace Internal.JitInterface
 
                     Debug.Assert(resultField is EcmaField);
                     Debug.Assert(
-                        _compilation
-                            .NodeFactory
+                        _compilation.NodeFactory
                             .CompilationModuleGroup
                             .VersionsWithType(((EcmaField)resultField).OwningType)
                             || ((MetadataType)resultField.OwningType).IsNonVersionable()
@@ -1771,8 +1742,7 @@ namespace Internal.JitInterface
                     if (resultDef is EcmaType ecmaType)
                     {
                         Debug.Assert(
-                            _compilation
-                                .NodeFactory
+                            _compilation.NodeFactory
                                 .CompilationModuleGroup
                                 .VersionsWithType(ecmaType)
                         );
@@ -1812,8 +1782,7 @@ namespace Internal.JitInterface
             IEcmaModule metadataModule = (
                 (IEcmaMethodIL)methodIL.GetMethodILScopeDefinition()
             ).Module;
-            ISymbolNode stringObject = _compilation
-                .SymbolNodeFactory
+            ISymbolNode stringObject = _compilation.SymbolNodeFactory
                 .StringLiteral(new ModuleToken(metadataModule, metaTok));
             ppValue = (void*)ObjectToHandle(stringObject);
             return InfoAccessType.IAT_PPVALUE;
@@ -2129,8 +2098,7 @@ namespace Internal.JitInterface
                     fieldAccessor = CORINFO_FIELD_ACCESSOR.CORINFO_FIELD_STATIC_RELOCATABLE;
                     fieldOffset = 0;
                     pResult->fieldLookup = CreateConstLookupToSymbol(
-                        _compilation
-                            .SymbolNodeFactory
+                        _compilation.SymbolNodeFactory
                             .RvaFieldAddress(ComputeFieldWithToken(field, ref pResolvedToken))
                     );
 
@@ -2169,8 +2137,7 @@ namespace Internal.JitInterface
                     {
                         // ENCODE_CHECK_FIELD_OFFSET
                         AddPrecodeFixup(
-                            _compilation
-                                .SymbolNodeFactory
+                            _compilation.SymbolNodeFactory
                                 .CheckFieldOffset(ComputeFieldWithToken(field, ref pResolvedToken))
                         );
                     }
@@ -2223,8 +2190,7 @@ namespace Internal.JitInterface
                     }
 
                     if (
-                        !_compilation
-                            .NodeFactory
+                        !_compilation.NodeFactory
                             .CompilationModuleGroup
                             .VersionsWithType(field.OwningType)
                         && fieldAccessor
@@ -2236,8 +2202,7 @@ namespace Internal.JitInterface
                         // Static fields outside of the version bubble need to be accessed using the ENCODE_FIELD_ADDRESS
                         // helper in accordance with ZapInfo::getFieldInfo in CoreCLR.
                         pResult->fieldLookup = CreateConstLookupToSymbol(
-                            _compilation
-                                .SymbolNodeFactory
+                            _compilation.SymbolNodeFactory
                                 .FieldAddress(ComputeFieldWithToken(field, ref pResolvedToken))
                         );
 
@@ -2253,8 +2218,7 @@ namespace Internal.JitInterface
                         {
                             // ENCODE_CHECK_FIELD_OFFSET
                             AddPrecodeFixup(
-                                _compilation
-                                    .SymbolNodeFactory
+                                _compilation.SymbolNodeFactory
                                     .CheckFieldOffset(
                                         ComputeFieldWithToken(field, ref pResolvedToken)
                                     )
@@ -2262,8 +2226,7 @@ namespace Internal.JitInterface
                         }
 
                         pResult->fieldLookup = CreateConstLookupToSymbol(
-                            _compilation
-                                .SymbolNodeFactory
+                            _compilation.SymbolNodeFactory
                                 .CreateReadyToRunHelper(helperId, field.OwningType)
                         );
                     }
@@ -2374,12 +2337,10 @@ namespace Internal.JitInterface
             }
 
             if (
-                !_compilation
-                    .NodeFactory
+                !_compilation.NodeFactory
                     .CompilationModuleGroup
                     .VersionsWithMethodBody(callerMethod)
-                && !_compilation
-                    .NodeFactory
+                && !_compilation.NodeFactory
                     .CompilationModuleGroup
                     .CrossModuleInlineable(callerMethod)
             )
@@ -2432,8 +2393,7 @@ namespace Internal.JitInterface
 
                 if (constrainedType.IsEnum && originalMethod.Name == "GetHashCode")
                 {
-                    MethodDesc methodOnUnderlyingType = constrainedType
-                        .UnderlyingType
+                    MethodDesc methodOnUnderlyingType = constrainedType.UnderlyingType
                         .FindVirtualFunctionTargetMethodOnObjectType(originalMethod);
                     Debug.Assert(methodOnUnderlyingType != null);
 
@@ -2450,8 +2410,7 @@ namespace Internal.JitInterface
                         );
                     if (
                         directMethod != null
-                        && !_compilation
-                            .NodeFactory
+                        && !_compilation.NodeFactory
                             .CompilationModuleGroup
                             .VersionsWithMethodBody(directMethod)
                     )
@@ -2597,14 +2556,12 @@ namespace Internal.JitInterface
                 // if their assemblies are in the same bubble, or if the NonVersionableTypeAttribute is present on the type.
                 // CG2 checks a method cache that it builds with a bunch of new code.
                 else if (
-                    !_compilation
-                        .NodeFactory
+                    !_compilation.NodeFactory
                         .CompilationModuleGroup
                         .VersionsWithMethodBody(callerMethod)
                     ||
                     // check the Typical TargetMethod, not the Instantiation
-                    !_compilation
-                        .NodeFactory
+                    !_compilation.NodeFactory
                         .CompilationModuleGroup
                         .VersionsWithMethodBody(targetMethod.GetTypicalMethodDefinition())
                 )
@@ -2923,8 +2880,7 @@ namespace Internal.JitInterface
         {
             if (!type.IsPrimitive)
             {
-                ISymbolNode node = _compilation
-                    .SymbolNodeFactory
+                ISymbolNode node = _compilation.SymbolNodeFactory
                     .CreateReadyToRunHelper(ReadyToRunHelperId.TypeHandle, type);
                 AddPrecodeFixup(node);
             }
@@ -3064,8 +3020,7 @@ namespace Internal.JitInterface
                         }
 
                         pResult->codePointerOrStubLookup.constLookup = CreateConstLookupToSymbol(
-                            _compilation
-                                .SymbolNodeFactory
+                            _compilation.SymbolNodeFactory
                                 .InterfaceDispatchCell(
                                     ComputeMethodWithToken(
                                         targetMethod,
@@ -3124,8 +3079,7 @@ namespace Internal.JitInterface
                             // READYTORUN: FUTURE: Direct calls if possible
                             pResult->codePointerOrStubLookup.constLookup =
                                 CreateConstLookupToSymbol(
-                                    _compilation
-                                        .NodeFactory
+                                    _compilation.NodeFactory
                                         .MethodEntrypoint(
                                             ComputeMethodWithToken(
                                                 nonUnboxingMethod,
@@ -3163,8 +3117,7 @@ namespace Internal.JitInterface
                     if (!pResult->exactContextNeedsRuntimeLookup)
                     {
                         pResult->codePointerOrStubLookup.constLookup = CreateConstLookupToSymbol(
-                            _compilation
-                                .NodeFactory
+                            _compilation.NodeFactory
                                 .DynamicHelperCell(
                                     ComputeMethodWithToken(
                                         targetMethod,
@@ -3201,8 +3154,7 @@ namespace Internal.JitInterface
                     if (canonMethod.RequiresInstMethodDescArg())
                     {
                         pResult->instParamLookup = CreateConstLookupToSymbol(
-                            _compilation
-                                .SymbolNodeFactory
+                            _compilation.SymbolNodeFactory
                                 .CreateReadyToRunHelper(
                                     ReadyToRunHelperId.MethodDictionary,
                                     ComputeMethodWithToken(
@@ -3217,8 +3169,7 @@ namespace Internal.JitInterface
                     else
                     {
                         pResult->instParamLookup = CreateConstLookupToSymbol(
-                            _compilation
-                                .SymbolNodeFactory
+                            _compilation.SymbolNodeFactory
                                 .CreateReadyToRunHelper(
                                     ReadyToRunHelperId.TypeDictionary,
                                     exactType
@@ -3462,8 +3413,7 @@ namespace Internal.JitInterface
                 throw new RequiresRuntimeJitException(type.ToString());
 
             Import typeHandleImport = (Import)
-                _compilation
-                    .SymbolNodeFactory
+                _compilation.SymbolNodeFactory
                     .CreateReadyToRunHelper(ReadyToRunHelperId.TypeHandle, type);
             Debug.Assert(typeHandleImport.RepresentsIndirectionCell);
             ppIndirection = (void*)ObjectToHandle(typeHandleImport);
@@ -3496,8 +3446,7 @@ namespace Internal.JitInterface
                 switch (pResult.handleType)
                 {
                     case CorInfoGenericHandleType.CORINFO_HANDLETYPE_CLASS:
-                        symbolNode = _compilation
-                            .SymbolNodeFactory
+                        symbolNode = _compilation.SymbolNodeFactory
                             .CreateReadyToRunHelper(
                                 ReadyToRunHelperId.TypeHandle,
                                 HandleToObject(pResolvedToken.hClass)
@@ -3519,8 +3468,7 @@ namespace Internal.JitInterface
                                 unboxingStub = true;
                             }
 
-                            symbolNode = _compilation
-                                .SymbolNodeFactory
+                            symbolNode = _compilation.SymbolNodeFactory
                                 .CreateReadyToRunHelper(
                                     ReadyToRunHelperId.MethodHandle,
                                     ComputeMethodWithToken(
@@ -3534,8 +3482,7 @@ namespace Internal.JitInterface
                         break;
 
                     case CorInfoGenericHandleType.CORINFO_HANDLETYPE_FIELD:
-                        symbolNode = _compilation
-                            .SymbolNodeFactory
+                        symbolNode = _compilation.SymbolNodeFactory
                             .CreateReadyToRunHelper(
                                 ReadyToRunHelperId.FieldHandle,
                                 ComputeFieldWithToken(
@@ -3593,12 +3540,10 @@ namespace Internal.JitInterface
         )
         {
             if (
-                !_compilation
-                    .NodeFactory
+                !_compilation.NodeFactory
                     .CompilationModuleGroup
                     .VersionsWithMethodBody(callerMethod)
-                && !_compilation
-                    .NodeFactory
+                && !_compilation.NodeFactory
                     .CompilationModuleGroup
                     .CrossModuleInlineable(callerMethod)
             )
@@ -3635,8 +3580,7 @@ namespace Internal.JitInterface
                         );
 
                     AddPrecodeFixup(
-                        _compilation
-                            .SymbolNodeFactory
+                        _compilation.SymbolNodeFactory
                             .CheckFieldOffset(ComputeFieldWithToken(field, ref pResolvedToken))
                     );
                     // No-op other than generating the check field offset fixup
@@ -3650,8 +3594,7 @@ namespace Internal.JitInterface
                     pResult->fieldAccessor =
                         CORINFO_FIELD_ACCESSOR.CORINFO_FIELD_INSTANCE_WITH_BASE;
                     pResult->fieldLookup = CreateConstLookupToSymbol(
-                        _compilation
-                            .SymbolNodeFactory
+                        _compilation.SymbolNodeFactory
                             .FieldOffset(ComputeFieldWithToken(field, ref pResolvedToken))
                     );
                 }
@@ -3667,8 +3610,7 @@ namespace Internal.JitInterface
                     // ENCODE_CHECK_FIELD_OFFSET
                     if (_compilation.CompilationModuleGroup.VersionsWithType(field.OwningType)) // Only verify versions with types
                         AddPrecodeFixup(
-                            _compilation
-                                .SymbolNodeFactory
+                            _compilation.SymbolNodeFactory
                                 .CheckFieldOffset(ComputeFieldWithToken(field, ref pResolvedToken))
                         );
                 }
@@ -3685,8 +3627,7 @@ namespace Internal.JitInterface
                     // ENCODE_CHECK_FIELD_OFFSET
                     if (_compilation.CompilationModuleGroup.VersionsWithType(field.OwningType)) // Only verify versions with types
                         AddPrecodeFixup(
-                            _compilation
-                                .SymbolNodeFactory
+                            _compilation.SymbolNodeFactory
                                 .CheckFieldOffset(ComputeFieldWithToken(field, ref pResolvedToken))
                         );
                 }
@@ -3696,8 +3637,7 @@ namespace Internal.JitInterface
             {
                 // ENCODE_CHECK_FIELD_OFFSET
                 AddPrecodeFixup(
-                    _compilation
-                        .SymbolNodeFactory
+                    _compilation.SymbolNodeFactory
                         .CheckFieldOffset(ComputeFieldWithToken(field, ref pResolvedToken))
                 );
                 // No-op other than generating the check field offset fixup
@@ -3715,8 +3655,7 @@ namespace Internal.JitInterface
                     // ENCODE_CHECK_FIELD_OFFSET
                     if (_compilation.CompilationModuleGroup.VersionsWithType(field.OwningType)) // Only verify versions with types
                         AddPrecodeFixup(
-                            _compilation
-                                .SymbolNodeFactory
+                            _compilation.SymbolNodeFactory
                                 .CheckFieldOffset(ComputeFieldWithToken(field, ref pResolvedToken))
                         );
                 }
@@ -3759,8 +3698,7 @@ namespace Internal.JitInterface
         private int* getAddrOfCaptureThreadGlobal(ref void* ppIndirection)
         {
             ppIndirection = (void*)ObjectToHandle(
-                _compilation
-                    .NodeFactory
+                _compilation.NodeFactory
                     .GetReadyToRunHelperCell(ReadyToRunHelper.IndirectTrapThreads)
             );
             return null;
@@ -3947,8 +3885,7 @@ namespace Internal.JitInterface
                     {
                         // This is the case of a PInvoke method that requires marshallers, which we can't use in this compilation
                         Debug.Assert(
-                            !_compilation
-                                .NodeFactory
+                            !_compilation.NodeFactory
                                 .CompilationModuleGroup
                                 .GeneratesPInvoke(method)
                         );
@@ -4127,20 +4064,17 @@ namespace Internal.JitInterface
                 {
                     Debug.Assert(
                         _compilation.CompilationModuleGroup.CrossModuleInlineable(typicalMethod)
-                            || _compilation
-                                .CompilationModuleGroup
+                            || _compilation.CompilationModuleGroup
                                 .IsNonVersionableWithILTokensThatDoNotNeedTranslation(typicalMethod)
                     );
-                    bool needsTokenTranslation = !_compilation
-                        .CompilationModuleGroup
+                    bool needsTokenTranslation = !_compilation.CompilationModuleGroup
                         .IsNonVersionableWithILTokensThatDoNotNeedTranslation(typicalMethod);
 
                     if (needsTokenTranslation)
                     {
                         // This can happen if the method is marked as NonVersionable if there are tokens of interest
                         // or if we are working with a full cross module inline
-                        ISymbolNode ilBodyNode = _compilation
-                            .SymbolNodeFactory
+                        ISymbolNode ilBodyNode = _compilation.SymbolNodeFactory
                             .CheckILBodyFixupSignature(ecmaMethod);
                         AddPrecodeFixup(ilBodyNode);
                     }
@@ -4183,8 +4117,7 @@ namespace Internal.JitInterface
                 return;
 
             Debug.Assert(imp.GetType() == typeof(DelayLoadMethodImport));
-            IMethodNode newEntryPoint = _compilation
-                .NodeFactory
+            IMethodNode newEntryPoint = _compilation.NodeFactory
                 .MethodEntrypoint(
                     imp.MethodWithToken,
                     ((MethodFixupSignature)imp.ImportSignature.Target).IsInstantiatingStub,

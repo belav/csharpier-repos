@@ -83,8 +83,7 @@ public class IISDeployer : IISDeployerBase
             DeploymentParameters.PublishApplicationBeforeDeployment = true;
             // Move ASPNETCORE_DETAILEDERRORS to web config env variables
             if (
-                IISDeploymentParameters
-                    .EnvironmentVariables
+                IISDeploymentParameters.EnvironmentVariables
                     .ContainsKey(DetailedErrorsEnvironmentVariable)
             )
             {
@@ -92,8 +91,7 @@ public class IISDeployer : IISDeployerBase
                     DetailedErrorsEnvironmentVariable
                 ] = IISDeploymentParameters.EnvironmentVariables[DetailedErrorsEnvironmentVariable];
 
-                IISDeploymentParameters
-                    .EnvironmentVariables
+                IISDeploymentParameters.EnvironmentVariables
                     .Remove(DetailedErrorsEnvironmentVariable);
             }
             // Do not override settings set on parameters
@@ -192,8 +190,7 @@ public class IISDeployer : IISDeployerBase
             }
 
             if (
-                DeploymentParameters
-                    .EnvironmentVariables
+                DeploymentParameters.EnvironmentVariables
                     .TryGetValue("ASPNETCORE_MODULE_DEBUG_FILE", out debugFile)
             )
             {
@@ -460,8 +457,7 @@ public class IISDeployer : IISDeployerBase
                     {
                         if (
                             appPool.WorkerProcesses != null
-                            && appPool
-                                .WorkerProcesses
+                            && appPool.WorkerProcesses
                                 .Any(wp =>
                                     wp.State == WorkerProcessState.Running
                                     || wp.State == WorkerProcessState.Stopping

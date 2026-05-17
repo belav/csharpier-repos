@@ -2482,8 +2482,7 @@ namespace System.Threading.Tasks
 
                 // No need to lock around this, as other logic prevents the consumption of exceptions
                 // before they have been completely processed.
-                return m_contingentProperties
-                    .m_exceptionsHolder
+                return m_contingentProperties.m_exceptionsHolder
                     .CreateExceptionObject(false, canceledException);
             }
             else if (canceledException != null)
@@ -2853,8 +2852,8 @@ namespace System.Threading.Tasks
                         );
                         if (task.IsFaulted && !task.IsExceptionObservedByParent)
                         {
-                            TaskExceptionHolder exceptionHolder =
-                                task.m_contingentProperties.m_exceptionsHolder;
+                            TaskExceptionHolder exceptionHolder = task.m_contingentProperties
+                                .m_exceptionsHolder;
                             Contract.Assert(exceptionHolder != null);
 
                             // No locking necessary since child task is finished adding exceptions
@@ -6702,8 +6701,7 @@ namespace System.Threading.Tasks
                 return Task.FromCancellation(cancellationToken);
 
             // Kick off initial Task, which will call the user-supplied function and yield a Task.
-            Task<Task> task1 = Task<Task>
-                .Factory
+            Task<Task> task1 = Task<Task>.Factory
                 .StartNew(
                     function,
                     cancellationToken,
@@ -6767,8 +6765,7 @@ namespace System.Threading.Tasks
                 return Task.FromCancellation<TResult>(cancellationToken);
 
             // Kick off initial Task, which will call the user-supplied function and yield a Task.
-            Task<Task<TResult>> task1 = Task<Task<TResult>>
-                .Factory
+            Task<Task<TResult>> task1 = Task<Task<TResult>>.Factory
                 .StartNew(
                     function,
                     cancellationToken,

@@ -83,8 +83,7 @@ namespace System.ServiceModel.Channels
             if (context == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("context");
             if (credentialsManager == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("credentialsManager");
 
             TransportSecurityProtocolFactory protocolFactory =
@@ -110,8 +109,7 @@ namespace System.ServiceModel.Channels
             ISecurityCapabilities securityCapabilities = this.GetProperty<ISecurityCapabilities>(
                 context
             );
-            SecurityCredentialsManager credentialsManager = context
-                .BindingParameters
+            SecurityCredentialsManager credentialsManager = context.BindingParameters
                 .Find<SecurityCredentialsManager>();
             if (credentialsManager == null)
             {
@@ -141,8 +139,7 @@ namespace System.ServiceModel.Channels
             if (scParameters != null)
             {
                 if (scParameters.BootstrapSecurityBindingElement == null)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(
@@ -180,12 +177,12 @@ namespace System.ServiceModel.Channels
                     SecuritySessionClientSettings<TChannel> sessionClientSettings =
                         new SecuritySessionClientSettings<TChannel>();
                     sessionClientSettings.ChannelBuilder = channelBuilder;
-                    sessionClientSettings.KeyRenewalInterval =
-                        this.LocalClientSettings.SessionKeyRenewalInterval;
-                    sessionClientSettings.KeyRolloverInterval =
-                        this.LocalClientSettings.SessionKeyRolloverInterval;
-                    sessionClientSettings.TolerateTransportFailures =
-                        this.LocalClientSettings.ReconnectTransportOnFailure;
+                    sessionClientSettings.KeyRenewalInterval = this.LocalClientSettings
+                        .SessionKeyRenewalInterval;
+                    sessionClientSettings.KeyRolloverInterval = this.LocalClientSettings
+                        .SessionKeyRolloverInterval;
+                    sessionClientSettings.TolerateTransportFailures = this.LocalClientSettings
+                        .ReconnectTransportOnFailure;
                     sessionClientSettings.CanRenewSession = scParameters.CanRenewSession;
                     sessionClientSettings.IssuedSecurityTokenParameters = scParameters.Clone();
                     (
@@ -218,8 +215,7 @@ namespace System.ServiceModel.Channels
                         SecureConversationSecurityTokenParameters acceleratedTokenParameters =
                             (SecureConversationSecurityTokenParameters)scParameters.Clone();
                         acceleratedTokenParameters.IssuerBindingContext = issuerBindingContext;
-                        protocolFactory
-                            .SecurityBindingElement
+                        protocolFactory.SecurityBindingElement
                             .EndpointSupportingTokenParameters
                             .Endorsing
                             .Insert(0, acceleratedTokenParameters);
@@ -264,8 +260,7 @@ namespace System.ServiceModel.Channels
             SecurityChannelListener<TChannel> channelListener =
                 new SecurityChannelListener<TChannel>(this, context);
 
-            SecurityCredentialsManager credentialsManager = context
-                .BindingParameters
+            SecurityCredentialsManager credentialsManager = context.BindingParameters
                 .Find<SecurityCredentialsManager>();
             if (credentialsManager == null)
                 credentialsManager = ServiceCredentials.CreateDefaultCredentials();
@@ -290,8 +285,7 @@ namespace System.ServiceModel.Channels
             if (scParameters != null)
             {
                 if (scParameters.BootstrapSecurityBindingElement == null)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(
@@ -359,8 +353,7 @@ namespace System.ServiceModel.Channels
                         && !IsUnderlyingListenerDuplex<TChannel>(context)
                     )
                     {
-                        context
-                            .BindingParameters
+                        context.BindingParameters
                             .Add(
                                 new SecuritySessionServerSettings.SecuritySessionDemuxFailureHandler(
                                     sessionFactory.StandardsManager
@@ -386,8 +379,7 @@ namespace System.ServiceModel.Channels
                         SecureConversationSecurityTokenParameters acceleratedTokenParameters =
                             (SecureConversationSecurityTokenParameters)scParameters.Clone();
                         acceleratedTokenParameters.IssuerBindingContext = issuerBindingContext;
-                        protocolFactory
-                            .SecurityBindingElement
+                        protocolFactory.SecurityBindingElement
                             .EndpointSupportingTokenParameters
                             .Endorsing
                             .Insert(0, acceleratedTokenParameters);
@@ -426,8 +418,7 @@ namespace System.ServiceModel.Channels
             {
                 AddressingVersion addressing = MessageVersion.Default.Addressing;
 #pragma warning suppress 56506
-                MessageEncodingBindingElement encoding = context
-                    .Binding
+                MessageEncodingBindingElement encoding = context.Binding
                     .Elements
                     .Find<MessageEncodingBindingElement>();
                 if (encoding != null)
@@ -470,8 +461,7 @@ namespace System.ServiceModel.Channels
             {
                 if (!this.AllowInsecureTransport)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(

@@ -380,8 +380,7 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
                     if (falseWhere)
                     {
                         scopeExpression.Where.Clear();
-                        scopeExpression
-                            .Where
+                        scopeExpression.Where
                             .Add(
                                 Expression.Equal(
                                     Expression.Constant(true),
@@ -414,8 +413,7 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
                 var newOperands = new List<Expression>();
                 foreach (var operand in builderContext.CurrentSelect.Operands)
                     newOperands.Add(processor(operand, builderContext));
-                builderContext.CurrentSelect = builderContext
-                    .CurrentSelect
+                builderContext.CurrentSelect = builderContext.CurrentSelect
                     .ChangeOperands(newOperands);
             }
             else
@@ -623,8 +621,7 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
                     var parameterIndex = int.Parse(field);
                     while (parameters.Count <= parameterIndex)
                         parameters.Add(string.Empty);
-                    var literalParameterName = queryContext
-                        .DataContext
+                    var literalParameterName = queryContext.DataContext
                         .Vendor
                         .SqlProvider
                         .GetParameterName(string.Format("p{0}", parameterIndex));

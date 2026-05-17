@@ -1544,8 +1544,7 @@ namespace System.Windows.Forms
             else
             {
 #if DEBUG
-                Console
-                    .Error
+                Console.Error
                     .WriteLine(
                         "setting bottom to value greater then maximum ({0}, {1})",
                         nv,
@@ -1987,8 +1986,7 @@ namespace System.Windows.Forms
             if (draw_mode == TreeViewDrawMode.Normal || draw_mode == TreeViewDrawMode.OwnerDrawText)
             {
                 if ((show_root_lines || node.Parent != null) && show_plus_minus && child_count > 0)
-                    ThemeEngine
-                        .Current
+                    ThemeEngine.Current
                         .TreeViewDrawNodePlusMinus(
                             this,
                             node,

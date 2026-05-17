@@ -367,8 +367,7 @@ public class ControllerActionDescriptorProviderTests
                     ignoreCase: true
                 );
 
-                var lastHttpMethodMetadata = descriptor
-                    .EndpointMetadata
+                var lastHttpMethodMetadata = descriptor.EndpointMetadata
                     .OfType<IHttpMethodMetadata>()
                     .Last();
                 Assert.Equal(
@@ -1553,8 +1552,7 @@ public class ControllerActionDescriptorProviderTests
     {
         // Arrange
         var context = new ActionDescriptorProviderContext();
-        context
-            .Results
+        context.Results
             .Add(
                 new ActionDescriptor()
                 {
@@ -1565,8 +1563,7 @@ public class ControllerActionDescriptorProviderTests
                     },
                 }
             );
-        context
-            .Results
+        context.Results
             .Add(
                 new ActionDescriptor()
                 {
@@ -2220,8 +2217,7 @@ public class ControllerActionDescriptorProviderTests
     {
         public void Apply(ActionModel action)
         {
-            action
-                .Selectors
+            action.Selectors
                 .Add(
                     new SelectorModel()
                     {

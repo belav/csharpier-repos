@@ -104,8 +104,7 @@ namespace System.ServiceModel.Administration
             get
             {
                 string[] result = null;
-                ServiceMetadataExtension metadataExtension = service
-                    .Extensions
+                ServiceMetadataExtension metadataExtension = service.Extensions
                     .Find<ServiceMetadataExtension>();
                 if (null != metadataExtension)
                 {
@@ -134,8 +133,7 @@ namespace System.ServiceModel.Administration
                                     System.Xml.XmlElement metadata = (System.Xml.XmlElement)
                                         section.Metadata;
                                     using (
-                                        System.Xml.XmlWriter xmlWriter = System
-                                            .Xml
+                                        System.Xml.XmlWriter xmlWriter = System.Xml
                                             .XmlWriter
                                             .Create(sw)
                                     )

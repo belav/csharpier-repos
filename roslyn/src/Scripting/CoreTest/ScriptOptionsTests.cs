@@ -22,8 +22,7 @@ namespace Microsoft.CodeAnalysis.Scripting.Test
         [Fact]
         public void AddReferences()
         {
-            var options = ScriptOptions
-                .Default
+            var options = ScriptOptions.Default
                 .AddReferences(typeof(int).GetTypeInfo().Assembly)
                 .AddReferences(typeof(int).GetTypeInfo().Assembly)
                 .AddReferences(
@@ -42,8 +41,7 @@ namespace Microsoft.CodeAnalysis.Scripting.Test
                 .CreateFromImage(TestResources.MetadataTests.NetModule01.ModuleCS00)
                 .GetReference();
 
-            var options = ScriptOptions
-                .Default
+            var options = ScriptOptions.Default
                 .WithReferences(ImmutableArray<MetadataReference>.Empty);
             Assert.Throws<ArgumentNullException>(
                 "references",
@@ -106,8 +104,7 @@ namespace Microsoft.CodeAnalysis.Scripting.Test
         [Fact]
         public void WithReferences()
         {
-            var empty = ScriptOptions
-                .Default
+            var empty = ScriptOptions.Default
                 .WithReferences(ImmutableArray<MetadataReference>.Empty);
 
             var options = empty.WithReferences("System.Linq", "system.linq");
@@ -134,8 +131,7 @@ namespace Microsoft.CodeAnalysis.Scripting.Test
                 .CreateFromImage(TestResources.MetadataTests.NetModule01.ModuleCS00)
                 .GetReference();
 
-            var options = ScriptOptions
-                .Default
+            var options = ScriptOptions.Default
                 .WithReferences(ImmutableArray<MetadataReference>.Empty);
             Assert.Throws<ArgumentNullException>(
                 "references",
@@ -205,8 +201,7 @@ namespace Microsoft.CodeAnalysis.Scripting.Test
         public void AddNamespaces()
         {
             // we only check if the specified name is a valid CLR namespace name, it might not be a valid C#/VB namespace name:
-            var options = ScriptOptions
-                .Default
+            var options = ScriptOptions.Default
                 .AddImports("")
                 .AddImports("blah.")
                 .AddImports("b\0lah")

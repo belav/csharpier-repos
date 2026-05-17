@@ -36,8 +36,7 @@ namespace System.ServiceModel.Description
         )
         {
             if (!MessageDirectionHelper.IsDefined(direction))
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentOutOfRangeException("direction"));
 
             this.action = action;
@@ -112,8 +111,7 @@ namespace System.ServiceModel.Description
             set
             {
                 if (!ProtectionLevelHelper.IsDefined(value))
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new ArgumentOutOfRangeException("value"));
                 this.protectionLevel = value;
                 this.hasProtectionLevel = true;

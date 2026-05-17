@@ -182,8 +182,7 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             Assert.Equal(
                 2,
-                (await project.GetRequiredCompilationAsync(CancellationToken.None))
-                    .SyntaxTrees
+                (await project.GetRequiredCompilationAsync(CancellationToken.None)).SyntaxTrees
                     .Count()
             );
 
@@ -219,8 +218,7 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             Assert.Equal(
                 2,
-                (await project.GetRequiredCompilationAsync(CancellationToken.None))
-                    .SyntaxTrees
+                (await project.GetRequiredCompilationAsync(CancellationToken.None)).SyntaxTrees
                     .Count()
             );
 
@@ -247,8 +245,7 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             var compilation = await project.GetRequiredCompilationAsync(CancellationToken.None);
 
-            var generatorDriver = project
-                .Solution
+            var generatorDriver = project.Solution
                 .State
                 .GetTestAccessor()
                 .GetGeneratorDriver(project)!;
@@ -285,8 +282,7 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             // Change one of the additional documents, and rerun; we should only reprocess that one change, since this
             // is an incremental generator.
-            project = project
-                .AdditionalDocuments
+            project = project.AdditionalDocuments
                 .First()
                 .WithAdditionalDocumentText(SourceText.From("Changed text!"))
                 .Project;
@@ -388,8 +384,7 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 "// Hello, world!"
             );
 
-            project = project
-                .Solution
+            project = project.Solution
                 .WithDocumentText(documentId, SourceText.From("// Changed Source File"))
                 .Projects
                 .Single();
@@ -453,8 +448,7 @@ namespace Microsoft.CodeAnalysis.UnitTests
             if (assertAfterAdd)
                 await AssertCompilationContainsGeneratedFilesAsync(project, "// Hello, world!");
 
-            project = project
-                .Solution
+            project = project.Solution
                 .WithAdditionalDocumentText(
                     additionalDocumentId,
                     SourceText.From("Hello, everyone!")
@@ -465,8 +459,7 @@ namespace Microsoft.CodeAnalysis.UnitTests
             if (assertAfterFirstChange)
                 await AssertCompilationContainsGeneratedFilesAsync(project, "// Hello, everyone!");
 
-            project = project
-                .Solution
+            project = project.Solution
                 .WithAdditionalDocumentText(
                     additionalDocumentId,
                     SourceText.From("Good evening, everyone!")
@@ -522,8 +515,7 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             Assert.Equal(2, fullCompilation.SyntaxTrees.Count());
 
-            var partialProject = project
-                .Documents
+            var partialProject = project.Documents
                 .Single()
                 .WithFrozenPartialSemantics(CancellationToken.None)
                 .Project;
@@ -551,8 +543,7 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 await projectBeforeChange.GetSourceGeneratedDocumentsAsync()
             );
 
-            var projectAfterChange = projectBeforeChange
-                .Solution
+            var projectAfterChange = projectBeforeChange.Solution
                 .WithAdditionalDocumentText(
                     projectBeforeChange.AdditionalDocumentIds.Single(),
                     SourceText.From("Hello, world!!!!")
@@ -700,8 +691,7 @@ namespace Microsoft.CodeAnalysis.UnitTests
             await project.GetCompilationAsync();
 
             // Produce an in-progress snapshot
-            project = project
-                .Documents
+            project = project.Documents
                 .Single(d => d.Name == "RegularDocument.cs")
                 .WithFrozenPartialSemantics(CancellationToken.None)
                 .Project;
@@ -912,8 +902,7 @@ namespace Microsoft.CodeAnalysis.UnitTests
             Assert.NotSame(workspace.CurrentSolution, generatedDocument.Project.Solution);
 
             var generatedTree = await generatedDocument.GetSyntaxTreeAsync();
-            var compilation = await generatedDocument
-                .Project
+            var compilation = await generatedDocument.Project
                 .GetRequiredCompilationAsync(CancellationToken.None);
             Assert.Contains(generatedTree, compilation.SyntaxTrees);
         }
@@ -1000,8 +989,7 @@ namespace Microsoft.CodeAnalysis.UnitTests
             );
 
             var generatedTree = await generatedDocument.GetSyntaxTreeAsync();
-            var compilation = await generatedDocument
-                .Project
+            var compilation = await generatedDocument.Project
                 .GetRequiredCompilationAsync(CancellationToken.None);
             Assert.Contains(generatedTree, compilation.SyntaxTrees);
         }
@@ -1029,8 +1017,7 @@ namespace Microsoft.CodeAnalysis.UnitTests
             );
 
             var generatedDocument = Assert.Single(
-                await workspace
-                    .CurrentSolution
+                await workspace.CurrentSolution
                     .GetRequiredProject(projectIdWithGenerator)
                     .GetSourceGeneratedDocumentsAsync()
             );
@@ -1048,8 +1035,7 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             // Fetch the compilation from the other project, it should have a compilation reference that
             // contains the generated tree
-            var projectWithReference = generatedDocument
-                .Project
+            var projectWithReference = generatedDocument.Project
                 .Solution
                 .Projects
                 .Single(p => p.Id != projectIdWithGenerator);
@@ -1092,8 +1078,7 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             Assert.True(workspace.IsDocumentOpen(generatedDocument.Identity.DocumentId));
 
-            var document = await workspace
-                .CurrentSolution
+            var document = await workspace.CurrentSolution
                 .GetSourceGeneratedDocumentAsync(
                     generatedDocument.Identity.DocumentId,
                     CancellationToken.None
@@ -1185,16 +1170,14 @@ namespace Microsoft.CodeAnalysis.UnitTests
             Assert.True(generatorRan);
             generatorRan = false;
 
-            var document = project
-                .Documents
+            var document = project.Documents
                 .Single()
                 .WithFrozenPartialSemantics(CancellationToken.None);
 
             // And fork with new contents; we'll ensure the contents of this tree are different, but the generator will still not be ran
             document = document.WithText(SourceText.From("// Something else"));
 
-            var compilation = await document
-                .Project
+            var compilation = await document.Project
                 .GetRequiredCompilationAsync(CancellationToken.None);
             Assert.Equal(2, compilation.SyntaxTrees.Count());
             Assert.False(generatorRan);
@@ -1256,8 +1239,7 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 );
                 document = document.WithText(SourceText.From("// Something else"));
 
-                var compilation = await document
-                    .Project
+                var compilation = await document.Project
                     .GetRequiredCompilationAsync(CancellationToken.None);
                 Assert.Single(compilation.SyntaxTrees);
                 Assert.False(generatorRan);
@@ -1283,8 +1265,7 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 .Create(DocumentId.CreateNewId(project.Id), name: "Test.cs", isGenerated: true)
                 .WithDesignTimeOnly(true);
 
-            project = project
-                .Solution
+            project = project.Solution
                 .AddDocument(documentInfo)
                 .Projects
                 .Single()

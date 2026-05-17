@@ -127,8 +127,7 @@ namespace System.ServiceModel.Dispatcher
         {
             if (isRequestFormatter)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR2.GetString(SR2.FormatterCannotBeUsedForReplyMessages)
@@ -142,8 +141,7 @@ namespace System.ServiceModel.Dispatcher
         {
             if (!isRequestFormatter)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR2.GetString(SR2.FormatterCannotBeUsedForRequestMessages)
@@ -162,8 +160,7 @@ namespace System.ServiceModel.Dispatcher
         {
             if (isRequestFormatter)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR2.GetString(SR2.FormatterCannotBeUsedForReplyMessages)
@@ -187,8 +184,7 @@ namespace System.ServiceModel.Dispatcher
         {
             if (!isRequestFormatter)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR2.GetString(SR2.FormatterCannotBeUsedForRequestMessages)
@@ -347,8 +343,7 @@ namespace System.ServiceModel.Dispatcher
             UnwrappedTypesXmlSerializerManager xmlSerializerManager
         )
         {
-            DataContractSerializerOperationBehavior dcsob = operation
-                .Behaviors
+            DataContractSerializerOperationBehavior dcsob = operation.Behaviors
                 .Find<DataContractSerializerOperationBehavior>();
             if (dcsob != null)
             {
@@ -360,8 +355,7 @@ namespace System.ServiceModel.Dispatcher
                     dcsob
                 );
             }
-            XmlSerializerOperationBehavior xsob = operation
-                .Behaviors
+            XmlSerializerOperationBehavior xsob = operation.Behaviors
                 .Find<XmlSerializerOperationBehavior>();
             if (xsob != null)
             {
@@ -373,8 +367,7 @@ namespace System.ServiceModel.Dispatcher
                     xmlSerializerManager
                 );
             }
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(
                     new NotSupportedException(
                         SR2.GetString(
@@ -391,13 +384,11 @@ namespace System.ServiceModel.Dispatcher
             bool isRequestFormatter
         )
         {
-            DataContractSerializerOperationBehavior dcsob = operation
-                .Behaviors
+            DataContractSerializerOperationBehavior dcsob = operation.Behaviors
                 .Find<DataContractSerializerOperationBehavior>();
             if (dcsob == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR2.GetString(
@@ -426,8 +417,7 @@ namespace System.ServiceModel.Dispatcher
                 serializer = GetOutputSerializer(body.GetType());
                 if (serializer == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new NotSupportedException(
                                 SR2.GetString(
@@ -467,8 +457,7 @@ namespace System.ServiceModel.Dispatcher
                     }
                 }
             }
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(
                     new SerializationException(
                         SR2.GetString(
@@ -515,8 +504,7 @@ namespace System.ServiceModel.Dispatcher
                     && WebHttpBehavior.TrySetupJavascriptCallback(callbackParameterName) != null
                 )
                 {
-                    reply
-                        .Properties
+                    reply.Properties
                         .Add(
                             WebBodyFormatMessageProperty.Name,
                             WebBodyFormatMessageProperty.JsonProperty

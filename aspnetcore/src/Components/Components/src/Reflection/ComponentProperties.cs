@@ -424,8 +424,7 @@ internal static class ComponentProperties
 
                     // It must be able to hold a Dictionary<string, object> since that's what we create.
                     if (
-                        !propertyInfo
-                            .PropertyType
+                        !propertyInfo.PropertyType
                             .IsAssignableFrom(typeof(Dictionary<string, object>))
                     )
                     {

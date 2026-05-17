@@ -81,8 +81,7 @@ public class StatusCodePagesMiddleware
 
     private static bool HasSkipStatusCodePagesMetadata(Endpoint? endpoint)
     {
-        var skipStatusCodePageMetadata = endpoint
-            ?.Metadata
+        var skipStatusCodePageMetadata = endpoint?.Metadata
             .GetMetadata<ISkipStatusCodePagesMetadata>();
 
         return skipStatusCodePageMetadata is not null;

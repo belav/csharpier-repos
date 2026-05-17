@@ -29,15 +29,13 @@ namespace System.ServiceModel.Channels
         {
             if (anonymousUriPrefix == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("anonymousUriPrefix");
             }
 
             if (!anonymousUriPrefix.IsAbsoluteUri)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument("anonymousUriPrefix", SR.GetString(SR.UriMustBeAbsolute));
             }
 
@@ -47,16 +45,18 @@ namespace System.ServiceModel.Channels
             }
 
             if (
-                !this.anonymousUriPrefixes.IsRegistered(
-                    new BaseUriWithWildcard(anonymousUriPrefix, HostNameComparisonMode.Exact)
-                )
+                !this.anonymousUriPrefixes
+                    .IsRegistered(
+                        new BaseUriWithWildcard(anonymousUriPrefix, HostNameComparisonMode.Exact)
+                    )
             )
             {
-                this.anonymousUriPrefixes.RegisterUri(
-                    anonymousUriPrefix,
-                    HostNameComparisonMode.Exact,
-                    anonymousUriPrefix
-                );
+                this.anonymousUriPrefixes
+                    .RegisterUri(
+                        anonymousUriPrefix,
+                        HostNameComparisonMode.Exact,
+                        anonymousUriPrefix
+                    );
             }
         }
 
@@ -70,11 +70,8 @@ namespace System.ServiceModel.Channels
             }
 
             Uri returnValue;
-            return this.anonymousUriPrefixes.TryLookupUri(
-                to,
-                HostNameComparisonMode.Exact,
-                out returnValue
-            );
+            return this.anonymousUriPrefixes
+                .TryLookupUri(to, HostNameComparisonMode.Exact, out returnValue);
         }
     }
 }

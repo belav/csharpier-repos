@@ -335,8 +335,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             return new NavigableLocation(
                 async (options, cancellationToken) =>
                 {
-                    await _threadingContext
-                        .JoinableTaskFactory
+                    await _threadingContext.JoinableTaskFactory
                         .SwitchToMainThreadAsync(cancellationToken);
                     using (OpenNewDocumentStateScope(options))
                     {
@@ -376,8 +375,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                 if (generatedDocument == null)
                     return null;
 
-                return _sourceGeneratedFileManager
-                    .Value
+                return _sourceGeneratedFileManager.Value
                     .GetNavigationCallback(
                         generatedDocument,
                         await getTextSpanForMappingAsync(generatedDocument).ConfigureAwait(false)
@@ -498,8 +496,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             )
             {
                 // OpenDocument must be called on the UI thread.
-                await threadingContext
-                    .JoinableTaskFactory
+                await threadingContext.JoinableTaskFactory
                     .SwitchToMainThreadAsync(cancellationToken);
                 workspace.OpenDocument(documentId);
             }

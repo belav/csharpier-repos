@@ -212,8 +212,7 @@ namespace Microsoft.CodeAnalysis.CodeFixes.AddExplicitCast
                         syntaxFacts.IsDeclarationExpression(argumentExpression)
                         && semanticModel.GetTypeInfo(argumentExpression, cancellationToken).Type
                             is ITypeSymbol argumentType
-                        && semanticModel
-                            .Compilation
+                        && semanticModel.Compilation
                             .ClassifyCommonConversion(argumentType, parameterType)
                             .IsIdentity
                     )

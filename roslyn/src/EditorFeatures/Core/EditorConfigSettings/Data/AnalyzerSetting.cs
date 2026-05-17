@@ -35,8 +35,7 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Data
             IsEnabled = enabled;
             Severity = effectiveSeverity;
             Language = language;
-            IsNotConfigurable = descriptor
-                .CustomTags
+            IsNotConfigurable = descriptor.CustomTags
                 .Any(t => t == WellKnownDiagnosticTags.NotConfigurable);
             Location = location;
         }

@@ -322,8 +322,7 @@ namespace System.Web
                 );
 
                 HttpCacheValidateHandler handler = _validationCallbackInfo[i].handler;
-                string targetTypeName = System
-                    .Web
+                string targetTypeName = System.Web
                     .UI
                     .Util
                     .GetAssemblyQualifiedTypeName(handler.Method.ReflectedType);

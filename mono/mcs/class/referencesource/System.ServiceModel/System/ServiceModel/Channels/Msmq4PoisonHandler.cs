@@ -105,8 +105,7 @@ namespace System.ServiceModel.Channels
             {
                 if (!handler.disposed)
                 {
-                    handler
-                        .retryQueueForPeek
+                    handler.retryQueueForPeek
                         .BeginPeek(
                             handler.retryQueueMessage,
                             TimeSpan.MaxValue,
@@ -164,8 +163,7 @@ namespace System.ServiceModel.Channels
             lock (this)
             {
                 if (this.disposed)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new ObjectDisposedException(this.GetType().ToString()));
 
                 // Check if the message has already completed its max recycle count (MaxRetryCycles)
@@ -227,8 +225,7 @@ namespace System.ServiceModel.Channels
             lock (this)
             {
                 if (this.disposed)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new ObjectDisposedException(this.GetType().ToString()));
 
                 if (retryCycle >= this.ReceiveParameters.MaxRetryCycles)
@@ -276,11 +273,8 @@ namespace System.ServiceModel.Channels
             switch (this.ReceiveParameters.ReceiveErrorHandling)
             {
                 case ReceiveErrorHandling.Drop:
-                    this.receiver.DropOrRejectReceivedMessage(
-                        disposeFromQueue,
-                        messageProperty,
-                        false
-                    );
+                    this.receiver
+                        .DropOrRejectReceivedMessage(disposeFromQueue, messageProperty, false);
                     break;
 
                 case ReceiveErrorHandling.Fault:
@@ -292,11 +286,8 @@ namespace System.ServiceModel.Channels
                     break;
 
                 case ReceiveErrorHandling.Reject:
-                    this.receiver.DropOrRejectReceivedMessage(
-                        disposeFromQueue,
-                        messageProperty,
-                        true
-                    );
+                    this.receiver
+                        .DropOrRejectReceivedMessage(disposeFromQueue, messageProperty, true);
                     MsmqDiagnostics.PoisonMessageRejected(
                         messageProperty.MessageId,
                         this.receiver.InstanceId
@@ -392,22 +383,24 @@ namespace System.ServiceModel.Channels
                 {
                     try
                     {
-                        this.retryQueueForPeek.TryMoveMessage(
-                            this.retryQueueMessage.LookupId.Value,
-                            this.mainQueueForMove,
-                            MsmqTransactionMode.Single
-                        );
+                        this.retryQueueForPeek
+                            .TryMoveMessage(
+                                this.retryQueueMessage.LookupId.Value,
+                                this.mainQueueForMove,
+                                MsmqTransactionMode.Single
+                            );
                     }
                     catch (MsmqException ex)
                     {
                         MsmqDiagnostics.ExpectedException(ex);
                     }
-                    this.retryQueueForPeek.BeginPeek(
-                        this.retryQueueMessage,
-                        TimeSpan.MaxValue,
-                        onPeekCompleted,
-                        this
-                    );
+                    this.retryQueueForPeek
+                        .BeginPeek(
+                            this.retryQueueMessage,
+                            TimeSpan.MaxValue,
+                            onPeekCompleted,
+                            this
+                        );
                 }
             }
         }

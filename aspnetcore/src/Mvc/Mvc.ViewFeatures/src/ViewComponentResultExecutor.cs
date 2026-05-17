@@ -116,8 +116,7 @@ public partial class ViewComponentResultExecutor : IActionResultExecutor<ViewCom
         OnExecuting(viewContext);
 
         // IViewComponentHelper is stateful, we want to make sure to retrieve it every time we need it.
-        var viewComponentHelper = context
-            .HttpContext
+        var viewComponentHelper = context.HttpContext
             .RequestServices
             .GetRequiredService<IViewComponentHelper>();
         (viewComponentHelper as IViewContextAware)?.Contextualize(viewContext);
@@ -153,8 +152,7 @@ public partial class ViewComponentResultExecutor : IActionResultExecutor<ViewCom
 
     private static void OnExecuting(ViewContext viewContext)
     {
-        var viewDataValuesProvider = viewContext
-            .HttpContext
+        var viewDataValuesProvider = viewContext.HttpContext
             .Features
             .Get<IViewDataValuesProviderFeature>();
         viewDataValuesProvider?.ProvideViewDataValues(viewContext.ViewData);

@@ -163,8 +163,7 @@ namespace System.ServiceModel.Web
                     return null;
                 }
                 if (
-                    !operationContext
-                        .IncomingMessageProperties
+                    !operationContext.IncomingMessageProperties
                         .ContainsKey(HttpRequestMessageProperty.Name)
                 )
                 {
@@ -214,8 +213,7 @@ namespace System.ServiceModel.Web
                 )
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR2.GetString(SR2.ConditionalRetrieveGetAndHeadOnly, this.Method)
@@ -232,8 +230,7 @@ namespace System.ServiceModel.Web
                 if (ticksDifference < TimeSpan.TicksPerSecond)
                 {
                     WebOperationContext.Current.OutgoingResponse.LastModified = lastModified;
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new WebFaultException(HttpStatusCode.NotModified));
                 }
             }
@@ -313,8 +310,7 @@ namespace System.ServiceModel.Web
         {
             if (this.MessageProperty == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR2.GetString(
@@ -342,8 +338,7 @@ namespace System.ServiceModel.Web
                 )
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR2.GetString(SR2.ConditionalRetrieveGetAndHeadOnly, this.Method)
@@ -363,8 +358,7 @@ namespace System.ServiceModel.Web
                     {
                         // set response entityTag directly because it has already been validated
                         WebOperationContext.Current.OutgoingResponse.ETag = entityTag;
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(new WebFaultException(HttpStatusCode.NotModified));
                     }
                 }
@@ -392,8 +386,7 @@ namespace System.ServiceModel.Web
                 )
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR2.GetString(SR2.ConditionalUpdatePutPostAndDeleteOnly, this.Method)
@@ -412,8 +405,7 @@ namespace System.ServiceModel.Web
                     string.IsNullOrEmpty(headerOfInterest) || !IsWildCardCharacter(headerOfInterest)
                 )
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new WebFaultException(HttpStatusCode.PreconditionFailed));
                 }
             }
@@ -431,8 +423,7 @@ namespace System.ServiceModel.Web
                 {
                     // set response entityTag directly because it has already been validated
                     WebOperationContext.Current.OutgoingResponse.ETag = entityTag;
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new WebFaultException(HttpStatusCode.PreconditionFailed));
                 }
             }

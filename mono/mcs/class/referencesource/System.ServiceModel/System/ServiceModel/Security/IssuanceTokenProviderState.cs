@@ -63,8 +63,7 @@ namespace System.ServiceModel.Security
         {
             if (this.IsNegotiationCompleted)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(SR.GetString(SR.NegotiationIsCompleted))
                     );
@@ -77,8 +76,7 @@ namespace System.ServiceModel.Security
         {
             if (!this.IsNegotiationCompleted)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(SR.GetString(SR.NegotiationIsNotCompleted))
                     );

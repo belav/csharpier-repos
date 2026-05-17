@@ -57,8 +57,7 @@ public class Startup
                     "/auth",
                     context =>
                     {
-                        return context
-                            .Response
+                        return context.Response
                             .WriteAsync(
                                 $"Hello {context.User.Identity.Name} at {context.Request.Host}"
                             );
@@ -70,8 +69,7 @@ public class Startup
                 "{*url}",
                 context =>
                 {
-                    return context
-                        .Response
+                    return context.Response
                         .WriteAsync(
                             $"Hello {context.User.Identity.Name} at {context.Request.Host}. Try /auth"
                         );

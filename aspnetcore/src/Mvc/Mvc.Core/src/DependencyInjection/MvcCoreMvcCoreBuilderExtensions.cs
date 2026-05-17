@@ -81,8 +81,7 @@ public static class MvcCoreMvcCoreBuilderExtensions
 
         if (setupAction != null)
         {
-            builder
-                .Services
+            builder.Services
                 .Configure<MvcOptions>((options) => setupAction(options.FormatterMappings));
         }
 
@@ -156,8 +155,7 @@ public static class MvcCoreMvcCoreBuilderExtensions
             builder.Services.TryAddTransient(controller, controller);
         }
 
-        builder
-            .Services
+        builder.Services
             .Replace(
                 ServiceDescriptor.Transient<IControllerActivator, ServiceBasedControllerActivator>()
             );

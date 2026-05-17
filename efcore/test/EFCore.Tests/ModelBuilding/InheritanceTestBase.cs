@@ -221,8 +221,7 @@ public abstract partial class ModelBuilderTest
             Assert.Equal(nameof(Order.Customer), fk.DependentToPrincipal.Name);
             Assert.Null(fk.PrincipalToDependent);
             Assert.Same(principalEntityBuilder.Metadata, fk.PrincipalEntityType);
-            var derivedFk = derivedPrincipalEntityBuilder
-                .Metadata
+            var derivedFk = derivedPrincipalEntityBuilder.Metadata
                 .GetNavigations()
                 .Single()
                 .ForeignKey;
@@ -243,8 +242,7 @@ public abstract partial class ModelBuilderTest
             Assert.Null(fk.PrincipalToDependent);
             Assert.Same(principalEntityBuilder.Metadata, fk.PrincipalEntityType);
             derivedFk = derivedPrincipalEntityBuilder.Metadata.GetNavigations().Single().ForeignKey;
-            var anotherDerivedFk = derivedDependentEntityBuilder
-                .Metadata
+            var anotherDerivedFk = derivedDependentEntityBuilder.Metadata
                 .GetDeclaredNavigations()
                 .Single()
                 .ForeignKey;
@@ -296,8 +294,7 @@ public abstract partial class ModelBuilderTest
             Assert.Equal(nameof(Order.Customer), fk.DependentToPrincipal.Name);
             Assert.Null(fk.PrincipalToDependent);
             Assert.Same(principalEntityBuilder.Metadata, fk.PrincipalEntityType);
-            var derivedFk = derivedPrincipalEntityBuilder
-                .Metadata
+            var derivedFk = derivedPrincipalEntityBuilder.Metadata
                 .GetNavigations()
                 .Single()
                 .ForeignKey;
@@ -402,16 +399,14 @@ public abstract partial class ModelBuilderTest
 
             Assert.Empty(dependentEntityBuilder.Metadata.GetForeignKeys());
             Assert.Empty(dependentEntityBuilder.Metadata.GetNavigations());
-            var newFk = derivedDependentEntityBuilder
-                .Metadata
+            var newFk = derivedDependentEntityBuilder.Metadata
                 .GetDeclaredNavigations()
                 .Single()
                 .ForeignKey;
             Assert.Equal(nameof(Order.Customer), newFk.DependentToPrincipal.Name);
             Assert.Equal(nameof(SpecialCustomer.SpecialOrders), newFk.PrincipalToDependent.Name);
             Assert.Same(derivedPrincipalEntityBuilder.Metadata, newFk.PrincipalEntityType);
-            var otherDerivedFk = otherDerivedDependentEntityBuilder
-                .Metadata
+            var otherDerivedFk = otherDerivedDependentEntityBuilder.Metadata
                 .GetDeclaredNavigations()
                 .Single()
                 .ForeignKey;
@@ -442,8 +437,7 @@ public abstract partial class ModelBuilderTest
 
             Assert.Empty(dependentEntityBuilder.Metadata.GetForeignKeys());
             Assert.Empty(dependentEntityBuilder.Metadata.GetNavigations());
-            var newFk = derivedDependentEntityBuilder
-                .Metadata
+            var newFk = derivedDependentEntityBuilder.Metadata
                 .GetDeclaredNavigations()
                 .Single()
                 .ForeignKey;
@@ -473,16 +467,14 @@ public abstract partial class ModelBuilderTest
                 .WithOne(e => e.SpecialCustomer);
 
             Assert.Empty(principalEntityBuilder.Metadata.GetNavigations());
-            var newFk = derivedDependentEntityBuilder
-                .Metadata
+            var newFk = derivedDependentEntityBuilder.Metadata
                 .GetDeclaredNavigations()
                 .Single()
                 .ForeignKey;
             Assert.Equal(nameof(SpecialOrder.SpecialCustomer), newFk.DependentToPrincipal.Name);
             Assert.Equal(nameof(SpecialCustomer.Orders), newFk.PrincipalToDependent.Name);
             Assert.Same(derivedPrincipalEntityBuilder.Metadata, newFk.PrincipalEntityType);
-            var otherDerivedFk = otherDerivedPrincipalEntityBuilder
-                .Metadata
+            var otherDerivedFk = otherDerivedPrincipalEntityBuilder.Metadata
                 .GetDeclaredNavigations()
                 .Single()
                 .ForeignKey;
@@ -511,8 +503,7 @@ public abstract partial class ModelBuilderTest
                 .HasPrincipalKey<OrderCombination>(e => e.Id);
 
             Assert.Null(dependentEntityBuilder.Metadata.GetNavigations().Single().Inverse);
-            var newFk = derivedDependentEntityBuilder
-                .Metadata
+            var newFk = derivedDependentEntityBuilder.Metadata
                 .GetDeclaredNavigations()
                 .Single()
                 .ForeignKey;
@@ -545,8 +536,7 @@ public abstract partial class ModelBuilderTest
                 .HasForeignKey<SpecialOrder>(e => e.SpecialCustomerId);
 
             Assert.Null(dependentEntityBuilder.Metadata.GetNavigations().Single().Inverse);
-            var newFk = principalEntityBuilder
-                .Metadata
+            var newFk = principalEntityBuilder.Metadata
                 .GetDeclaredNavigations()
                 .Single()
                 .ForeignKey;
@@ -579,15 +569,13 @@ public abstract partial class ModelBuilderTest
 
             Assert.Empty(dependentEntityBuilder.Metadata.GetForeignKeys());
             Assert.Empty(dependentEntityBuilder.Metadata.GetNavigations());
-            var newFk = derivedDependentEntityBuilder
-                .Metadata
+            var newFk = derivedDependentEntityBuilder.Metadata
                 .GetDeclaredNavigations()
                 .Single()
                 .ForeignKey;
             Assert.Equal(nameof(Order.Customer), newFk.DependentToPrincipal.Name);
             Assert.Null(newFk.PrincipalToDependent);
-            var otherDerivedFk = otherDerivedDependentEntityBuilder
-                .Metadata
+            var otherDerivedFk = otherDerivedDependentEntityBuilder.Metadata
                 .GetDeclaredNavigations()
                 .Single()
                 .ForeignKey;
@@ -659,8 +647,7 @@ public abstract partial class ModelBuilderTest
                 derivedDependentEntityBuilder.Metadata.FindProperty("SpecialCustomerId")
             );
             Assert.Empty(principalEntityBuilder.Metadata.GetNavigations());
-            var newFk = derivedDependentEntityBuilder
-                .Metadata
+            var newFk = derivedDependentEntityBuilder.Metadata
                 .GetDeclaredNavigations()
                 .Single()
                 .ForeignKey;
@@ -745,8 +732,7 @@ public abstract partial class ModelBuilderTest
 
             modelBuilder.FinalizeModel();
 
-            var (Level, _, Message, _, _) = modelBuilder
-                .ModelLoggerFactory
+            var (Level, _, Message, _, _) = modelBuilder.ModelLoggerFactory
                 .Log
                 .Single(e => e.Id == CoreEventId.RedundantIndexRemoved);
             Assert.Equal(LogLevel.Debug, Level);
@@ -858,8 +844,7 @@ public abstract partial class ModelBuilderTest
             modelBuilder.Entity<OrderDetails>();
             modelBuilder.Entity<SpecialOrder>();
 
-            var fkProperty = modelBuilder
-                .Model
+            var fkProperty = modelBuilder.Model
                 .FindEntityType(typeof(OrderDetails))
                 .FindProperty(OrderDetails.OrderIdProperty);
             Assert.Equal(ValueGenerated.Never, fkProperty.ValueGenerated);
@@ -908,8 +893,7 @@ public abstract partial class ModelBuilderTest
             modelBuilder.Ignore<AnotherBookLabel>();
 
             Assert.Empty(
-                modelBuilder
-                    .Model
+                modelBuilder.Model
                     .FindEntityType(typeof(BookLabel).FullName)
                     .GetDirectlyDerivedTypes()
             );
@@ -982,8 +966,7 @@ public abstract partial class ModelBuilderTest
                 .WithOne(e => (SpecialBookLabel)e.BookLabel)
                 .HasForeignKey<ExtraSpecialBookLabel>();
 
-            var fk = bookLabelEntityBuilder
-                .Metadata
+            var fk = bookLabelEntityBuilder.Metadata
                 .FindNavigation(nameof(BookLabel.SpecialBookLabel))
                 .ForeignKey;
             Assert.Equal(

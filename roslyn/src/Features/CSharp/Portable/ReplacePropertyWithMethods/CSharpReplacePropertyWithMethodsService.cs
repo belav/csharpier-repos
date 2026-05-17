@@ -357,8 +357,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ReplacePropertyWithMethods
             )
             {
                 if (
-                    methodDeclaration
-                        .Body
+                    methodDeclaration.Body
                         .TryConvertToArrowExpressionBody(
                             methodDeclaration.Kind(),
                             languageVersion,
@@ -382,8 +381,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ReplacePropertyWithMethods
             )
             {
                 if (
-                    methodDeclaration
-                        .ExpressionBody
+                    methodDeclaration.ExpressionBody
                         .TryConvertToBlock(
                             methodDeclaration.SemicolonToken,
                             createReturnStatementForExpression,

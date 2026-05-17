@@ -1317,15 +1317,13 @@ public class FormWithParentBindingContextTest
 
         Browser.Exists(By.Id("not-ending")).Click();
         Browser.True(() =>
-            Browser
-                .Url
+            Browser.Url
                 .EndsWith("forms/endpoint-that-never-finishes-rendering", StringComparison.Ordinal)
         );
         Browser.Exists(By.Id("send")).Click();
         Browser.Exists(By.Id("pass"));
         Browser.True(() =>
-            Browser
-                .Url
+            Browser.Url
                 .EndsWith(
                     "forms/form-posted-while-enhanced-nav-in-progress",
                     StringComparison.Ordinal
@@ -1333,8 +1331,7 @@ public class FormWithParentBindingContextTest
         );
         Browser.Navigate().Back();
         Browser.True(() =>
-            Browser
-                .Url
+            Browser.Url
                 .EndsWith("forms/endpoint-that-never-finishes-rendering", StringComparison.Ordinal)
         );
     }
@@ -1686,9 +1683,10 @@ public class FormWithParentBindingContextTest
         Assert.Contains(
             logs,
             log =>
-                log.Message.Contains(
-                    "A form cannot be enhanced when its target is different from the default value \\\"_self\\\"."
-                )
+                log.Message
+                    .Contains(
+                        "A form cannot be enhanced when its target is different from the default value \\\"_self\\\"."
+                    )
         );
     }
 
@@ -1706,9 +1704,10 @@ public class FormWithParentBindingContextTest
         Assert.Contains(
             logs,
             log =>
-                log.Message.Contains(
-                    "A form cannot be enhanced when its target is different from the default value \\\"_self\\\"."
-                )
+                log.Message
+                    .Contains(
+                        "A form cannot be enhanced when its target is different from the default value \\\"_self\\\"."
+                    )
         );
     }
 

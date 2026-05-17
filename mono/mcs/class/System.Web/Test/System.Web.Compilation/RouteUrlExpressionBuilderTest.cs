@@ -48,11 +48,9 @@ namespace MonoTests.System.Web.Compilation
         {
             RouteTable.Routes.Clear();
             RouteTable.Routes.Add(new Route("{foo}-foo", new PageRouteHandler("~/default.aspx")));
-            RouteTable
-                .Routes
+            RouteTable.Routes
                 .Add("bar1", new Route("{bar}-foo", new PageRouteHandler("~/bar.aspx")));
-            RouteTable
-                .Routes
+            RouteTable.Routes
                 .Add("bar2", new Route("some-{bar}", new PageRouteHandler("~/some-bar.aspx")));
 
             var bldr = new RouteUrlExpressionBuilder();
@@ -134,8 +132,7 @@ namespace MonoTests.System.Web.Compilation
         {
             RouteTable.Routes.Clear();
             RouteTable.Routes.Add(new Route("{foo}-foo", new PageRouteHandler("~/default.aspx")));
-            RouteTable
-                .Routes
+            RouteTable.Routes
                 .Add("bar1", new Route("{bar}-foo", new PageRouteHandler("~/bar.aspx")));
 
             var ctl = new Control();

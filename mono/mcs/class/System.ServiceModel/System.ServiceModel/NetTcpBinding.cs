@@ -226,8 +226,7 @@ namespace System.ServiceModel
             switch (Security.Message.ClientCredentialType)
             {
                 case MessageCredentialType.Certificate:
-                    element
-                        .EndpointSupportingTokenParameters
+                    element.EndpointSupportingTokenParameters
                         .Endorsing
                         .Add(new X509SecurityTokenParameters());
                     goto default;
@@ -241,8 +240,7 @@ namespace System.ServiceModel
                     element.EndpointSupportingTokenParameters.Endorsing.Add(istp);
                     goto default;
                 case MessageCredentialType.UserName:
-                    element
-                        .EndpointSupportingTokenParameters
+                    element.EndpointSupportingTokenParameters
                         .SignedEncrypted
                         .Add(new UserNameSecurityTokenParameters());
                     goto default;

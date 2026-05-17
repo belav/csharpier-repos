@@ -123,8 +123,7 @@ public class QueryRootProcessor : ExpressionVisitor
                 );
 
             case ParameterExpression parameterExpression
-                when parameterExpression
-                    .Name
+                when parameterExpression.Name
                     ?.StartsWith(
                         QueryCompilationContext.QueryParameterPrefix,
                         StringComparison.Ordinal

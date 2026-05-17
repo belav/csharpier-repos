@@ -38,21 +38,18 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Completion
 
             SupportSnippets = _completionSetting?.CompletionItem?.SnippetSupport ?? false;
             SupportDefaultEditRange =
-                _completionSetting
-                    ?.CompletionListSetting
+                _completionSetting?.CompletionListSetting
                     ?.ItemDefaults
                     ?.Contains(EditRangePropertyName) == true;
             SupportsMarkdownDocumentation =
-                _completionSetting
-                    ?.CompletionItem
+                _completionSetting?.CompletionItem
                     ?.DocumentationFormat
                     ?.Contains(MarkupKind.Markdown) == true;
             SupportCompletionListData =
                 _completionSetting?.CompletionListSetting?.ItemDefaults?.Contains(DataPropertyName)
                 == true;
             SupportDefaultCommitCharacters =
-                _completionSetting
-                    ?.CompletionListSetting
+                _completionSetting?.CompletionListSetting
                     ?.ItemDefaults
                     ?.Contains(CommitCharactersPropertyName) == true;
             SupportedItemKinds =

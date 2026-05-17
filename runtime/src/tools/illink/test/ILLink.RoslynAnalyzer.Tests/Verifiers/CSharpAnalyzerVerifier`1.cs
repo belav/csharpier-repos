@@ -214,8 +214,7 @@ namespace ILLink.RoslynAnalyzer.Tests
                         $"Expected diagnostic message arguments to match"
                     );
                     verifier.SequenceEqual(
-                        expected
-                            .MessageArguments
+                        expected.MessageArguments
                             .Select(argument => argument?.ToString() ?? string.Empty),
                         GetArguments(actual)
                             .Select(argument => argument?.ToString() ?? string.Empty),
@@ -585,8 +584,7 @@ namespace ILLink.RoslynAnalyzer.Tests
                 .Select(result =>
                     (
                         location: result.Location.GetLineSpan(),
-                        additionalLocations: result
-                            .AdditionalLocations
+                        additionalLocations: result.AdditionalLocations
                             .Select(location => location.GetLineSpan())
                             .ToImmutableArray()
                     )
@@ -603,8 +601,7 @@ namespace ILLink.RoslynAnalyzer.Tests
             expectedResults = expectedResults.ToOrderedArray();
             var expectedArguments = expectedResults
                 .Select(expected =>
-                    expected
-                        .MessageArguments
+                    expected.MessageArguments
                         ?.Select(argument => argument?.ToString() ?? string.Empty)
                         .ToImmutableArray()
                     ?? ImmutableArray<string>.Empty
@@ -886,8 +883,7 @@ namespace ILLink.RoslynAnalyzer.Tests
                     }
 
                     if (
-                        diagnosticResult
-                            .Options
+                        diagnosticResult.Options
                             .HasFlag(DiagnosticOptions.IgnoreAdditionalLocations)
                     )
                     {

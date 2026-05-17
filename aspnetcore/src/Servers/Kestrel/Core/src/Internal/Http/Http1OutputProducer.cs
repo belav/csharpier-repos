@@ -196,8 +196,7 @@ internal class Http1OutputProducer : IHttpOutputProducer, IDisposable
             // If there is an empty write, we still need to update the current chunk
             producer._currentChunkMemoryUpdated = false;
 
-            return producer
-                ._flusher
+            return producer._flusher
                 .FlushAsync(
                     producer._minResponseDataRateFeature.MinDataRate,
                     bytesWritten,

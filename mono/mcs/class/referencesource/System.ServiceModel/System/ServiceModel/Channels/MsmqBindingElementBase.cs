@@ -91,8 +91,7 @@ namespace System.ServiceModel.Channels
             {
                 if (!DeadLetterQueueHelper.IsDefined(value))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new ArgumentOutOfRangeException("value"));
                 }
 
@@ -127,8 +126,7 @@ namespace System.ServiceModel.Channels
             {
                 if (value < 0)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentOutOfRangeException(
                                 "value",
@@ -150,8 +148,7 @@ namespace System.ServiceModel.Channels
             {
                 if (value < 0)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentOutOfRangeException(
                                 "value",
@@ -187,8 +184,7 @@ namespace System.ServiceModel.Channels
             {
                 if (!ReceiveErrorHandlingHelper.IsDefined(value))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new ArgumentOutOfRangeException("value"));
                 }
 
@@ -204,8 +200,7 @@ namespace System.ServiceModel.Channels
             {
                 if (value < TimeSpan.Zero)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentOutOfRangeException(
                                 "value",
@@ -217,8 +212,7 @@ namespace System.ServiceModel.Channels
 
                 if (TimeoutHelper.IsTooLarge(value))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentOutOfRangeException(
                                 "value",
@@ -240,8 +234,7 @@ namespace System.ServiceModel.Channels
             {
                 if (value < TimeSpan.Zero)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentOutOfRangeException(
                                 "value",
@@ -253,8 +246,7 @@ namespace System.ServiceModel.Channels
 
                 if (TimeoutHelper.IsTooLarge(value))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentOutOfRangeException(
                                 "value",
@@ -287,8 +279,7 @@ namespace System.ServiceModel.Channels
             {
                 if (value < TimeSpan.Zero)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentOutOfRangeException(
                                 "value",
@@ -300,8 +291,7 @@ namespace System.ServiceModel.Channels
 
                 if (TimeoutHelper.IsTooLarge(value))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentOutOfRangeException(
                                 "value",
@@ -448,8 +438,7 @@ namespace System.ServiceModel.Channels
                 ((IPolicyExportExtension)encodingBindingElement).ExportPolicy(exporter, context);
             }
 
-            WsdlExporter
-                .WSAddressingHelper
+            WsdlExporter.WSAddressingHelper
                 .AddWSAddressingAssertion(
                     exporter,
                     context,
@@ -542,8 +531,7 @@ namespace System.ServiceModel.Channels
             out bool createdNew
         )
         {
-            BindingElementCollection bindingElements = endpointContext
-                .Endpoint
+            BindingElementCollection bindingElements = endpointContext.Endpoint
                 .Binding
                 .CreateBindingElements();
             return FindMessageEncodingBindingElement(bindingElements, out createdNew);

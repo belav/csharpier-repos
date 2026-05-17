@@ -80,8 +80,7 @@ namespace System.Data.Services.Client
             {
                 if (null == this.asyncWait)
                 {
-                    System
-                        .Threading
+                    System.Threading
                         .Interlocked
                         .CompareExchange(
                             ref this.asyncWait,
@@ -171,8 +170,7 @@ namespace System.Data.Services.Client
 
             if (null != result.asyncWait)
             {
-                System
-                    .Threading
+                System.Threading
                     .Interlocked
                     .CompareExchange(ref result.asyncWaitDisposeLock, new object(), null);
                 lock (result.asyncWaitDisposeLock)
@@ -330,8 +328,7 @@ namespace System.Data.Services.Client
         {
             if (null != this.asyncWait)
             {
-                System
-                    .Threading
+                System.Threading
                     .Interlocked
                     .CompareExchange(ref this.asyncWaitDisposeLock, new object(), null);
                 lock (this.asyncWaitDisposeLock)

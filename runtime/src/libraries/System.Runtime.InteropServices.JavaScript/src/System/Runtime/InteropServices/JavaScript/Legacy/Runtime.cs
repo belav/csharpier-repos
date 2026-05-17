@@ -38,8 +38,7 @@ namespace System.Runtime.InteropServices.JavaScript
 #endif
             ArgumentNullException.ThrowIfNull(self);
             ObjectDisposedException.ThrowIf(self.IsDisposed, self);
-            Interop
-                .Runtime
+            Interop.Runtime
                 .InvokeJSWithArgsRef(
                     self.JSHandle,
                     method,
@@ -84,8 +83,7 @@ namespace System.Runtime.InteropServices.JavaScript
             ArgumentNullException.ThrowIfNull(self);
             ObjectDisposedException.ThrowIf(self.IsDisposed, self);
 
-            Interop
-                .Runtime
+            Interop.Runtime
                 .GetObjectPropertyRef(
                     self.JSHandle,
                     name,
@@ -124,8 +122,7 @@ namespace System.Runtime.InteropServices.JavaScript
             ArgumentNullException.ThrowIfNull(self);
             ObjectDisposedException.ThrowIf(self.IsDisposed, self);
 
-            Interop
-                .Runtime
+            Interop.Runtime
                 .SetObjectPropertyRef(
                     self.JSHandle,
                     name,

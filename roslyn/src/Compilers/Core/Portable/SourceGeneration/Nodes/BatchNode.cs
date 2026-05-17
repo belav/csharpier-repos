@@ -94,8 +94,7 @@ namespace Microsoft.CodeAnalysis
 
                     // If the entries aren't the same, we can't reuse.
                     if (
-                        !EqualityComparer<TInput>
-                            .Default
+                        !EqualityComparer<TInput>.Default
                             .Equals(entry.Item, previousItems[indexInPrevious])
                     )
                         return null;

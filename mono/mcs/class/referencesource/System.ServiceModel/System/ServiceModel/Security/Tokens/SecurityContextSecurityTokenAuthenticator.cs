@@ -37,8 +37,7 @@ namespace System.ServiceModel.Security.Tokens
 
         void ThrowExpiredContextFaultException(UniqueId contextId, SecurityContextSecurityToken sct)
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperWarning(
                     new SecurityContextTokenValidationException(
                         SR.GetString(

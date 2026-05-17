@@ -129,8 +129,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
                     owner.AddError(
                         ErrorCode.FunctionImportUnknownEntitySet,
                         EdmSchemaErrorSeverity.Error,
-                        System
-                            .Data
+                        System.Data
                             .Entity
                             .Strings
                             .FunctionImportUnknownEntitySet(unresolvedEntitySet, this.FQName)
@@ -301,8 +300,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
                     owner.AddError(
                         ErrorCode.FunctionImportReturnsEntitiesButDoesNotSpecifyEntitySet,
                         EdmSchemaErrorSeverity.Error,
-                        System
-                            .Data
+                        System.Data
                             .Entity
                             .Strings
                             .FunctionImportReturnEntitiesButDoesNotSpecifyEntitySet(this.FQName)
@@ -314,8 +312,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
                     owner.AddError(
                         ErrorCode.FunctionImportEntityTypeDoesNotMatchEntitySet,
                         EdmSchemaErrorSeverity.Error,
-                        System
-                            .Data
+                        System.Data
                             .Entity
                             .Strings
                             .FunctionImportEntityTypeDoesNotMatchEntitySet(
@@ -340,8 +337,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
                             EdmSchemaErrorSeverity.Error,
                             owner.LineNumber,
                             owner.LinePosition,
-                            System
-                                .Data
+                            System.Data
                                 .Entity
                                 .Strings
                                 .ComplexTypeAsReturnTypeAndDefinedEntitySet(
@@ -368,8 +364,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
                         owner.AddError(
                             ErrorCode.FunctionImportSpecifiesEntitySetButDoesNotReturnEntityType,
                             EdmSchemaErrorSeverity.Error,
-                            System
-                                .Data
+                            System.Data
                                 .Entity
                                 .Strings
                                 .FunctionImportSpecifiesEntitySetButNotEntityType(this.FQName)

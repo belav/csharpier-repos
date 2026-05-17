@@ -29,8 +29,7 @@ namespace System.CommandLine.Tests
 
             var result = new CliRootCommand { option }.Parse("-x none-of-those");
 
-            result
-                .Errors
+            result.Errors
                 .Select(e => e.Message)
                 .Should()
                 .HaveCount(1)
@@ -48,8 +47,7 @@ namespace System.CommandLine.Tests
 
             var result = new CliRootCommand { option }.Parse("-x something_else");
 
-            result
-                .Errors
+            result.Errors
                 .Where(e => e.SymbolResult != null)
                 .Should()
                 .Contain(e => ((OptionResult)e.SymbolResult).Option.Name == option.Name);
@@ -66,8 +64,7 @@ namespace System.CommandLine.Tests
 
             var error = parseResult.Errors.Single();
 
-            error
-                .Message
+            error.Message
                 .Should()
                 .Be(LocalizationResources.UnrecognizedArgument("c", new[] { "a", "b" }));
             error.SymbolResult.Should().BeOfType<OptionResult>();
@@ -85,8 +82,7 @@ namespace System.CommandLine.Tests
 
             var error = parseResult.Errors.Single();
 
-            error
-                .Message
+            error.Message
                 .Should()
                 .Be(LocalizationResources.UnrecognizedArgument("c", new[] { "a", "b" }));
             error.SymbolResult.Should().BeOfType<ArgumentResult>();
@@ -117,8 +113,7 @@ namespace System.CommandLine.Tests
 
             var result = command.Parse("set not-key1 value1");
 
-            result
-                .Errors
+            result.Errors
                 .Should()
                 .ContainSingle()
                 .Which
@@ -139,8 +134,7 @@ namespace System.CommandLine.Tests
 
             var result = command.Parse("set key2");
 
-            result
-                .Errors
+            result.Errors
                 .Should()
                 .ContainSingle()
                 .Which
@@ -166,8 +160,7 @@ namespace System.CommandLine.Tests
 
             var result = command.Parse("set key1 not-value1");
 
-            result
-                .Errors
+            result.Errors
                 .Should()
                 .ContainSingle()
                 .Which
@@ -225,8 +218,7 @@ namespace System.CommandLine.Tests
 
             var result = new CliRootCommand { option }.Parse("-x");
 
-            result
-                .Errors
+            result.Errors
                 .Should()
                 .HaveCount(1)
                 .And
@@ -243,8 +235,7 @@ namespace System.CommandLine.Tests
 
             var result = command.Parse("");
 
-            result
-                .Errors
+            result.Errors
                 .Should()
                 .HaveCount(1)
                 .And
@@ -265,8 +256,7 @@ namespace System.CommandLine.Tests
 
             var result = command.Parse("");
 
-            result
-                .Errors
+            result.Errors
                 .Should()
                 .HaveCount(1)
                 .And
@@ -325,8 +315,7 @@ namespace System.CommandLine.Tests
 
             _output.WriteLine(result.ToString());
 
-            result
-                .Errors
+            result.Errors
                 .Select(e => e.Message)
                 .Should()
                 .HaveCount(1)
@@ -343,17 +332,14 @@ namespace System.CommandLine.Tests
                 new CliOption<bool>("--two"),
             };
 
-            command
-                .Validators
+            command.Validators
                 .Add(commandResult =>
                 {
                     if (
-                        commandResult
-                            .Children
+                        commandResult.Children
                             .Any(sr =>
                                 ((OptionResult)sr).Option.Name == "--one"
-                                && commandResult
-                                    .Children
+                                && commandResult.Children
                                     .Any(sr => ((OptionResult)sr).Option.Name == "--two")
                             )
                     )
@@ -366,8 +352,7 @@ namespace System.CommandLine.Tests
 
             var result = command.Parse("the-command --one --two");
 
-            result
-                .Errors
+            result.Errors
                 .Select(e => e.Message)
                 .Should()
                 .HaveCount(1)
@@ -380,8 +365,7 @@ namespace System.CommandLine.Tests
         {
             var option = new CliOption<int>("-x");
 
-            option
-                .Validators
+            option.Validators
                 .Add(r =>
                 {
                     var value = r.GetValueOrDefault<int>();
@@ -393,8 +377,7 @@ namespace System.CommandLine.Tests
 
             var result = command.Parse("-x 123");
 
-            result
-                .Errors
+            result.Errors
                 .Should()
                 .HaveCount(1)
                 .And
@@ -410,8 +393,7 @@ namespace System.CommandLine.Tests
         {
             var argument = new CliArgument<int>("x");
 
-            argument
-                .Validators
+            argument.Validators
                 .Add(r =>
                 {
                     var value = r.GetValueOrDefault<int>();
@@ -423,8 +405,7 @@ namespace System.CommandLine.Tests
 
             var result = command.Parse("123");
 
-            result
-                .Errors
+            result.Errors
                 .Should()
                 .HaveCount(1)
                 .And
@@ -445,24 +426,21 @@ namespace System.CommandLine.Tests
             var argumentValidatorWasCalled = false;
 
             var option = new CliOption<string>("-o");
-            option
-                .Validators
+            option.Validators
                 .Add(_ =>
                 {
                     optionValidatorWasCalled = true;
                 });
 
             var argument = new CliArgument<string>("the-arg");
-            argument
-                .Validators
+            argument.Validators
                 .Add(_ =>
                 {
                     argumentValidatorWasCalled = true;
                 });
 
             var rootCommand = new CliRootCommand { option, argument };
-            rootCommand
-                .Validators
+            rootCommand.Validators
                 .Add(_ =>
                 {
                     commandValidatorWasCalled = true;
@@ -483,8 +461,7 @@ namespace System.CommandLine.Tests
         )
         {
             var option = new CliOption<FileInfo>("--file") { Recursive = true };
-            option
-                .Validators
+            option.Validators
                 .Add(r =>
                 {
                     r.AddError("Invoked validator");
@@ -496,8 +473,7 @@ namespace System.CommandLine.Tests
 
             var result = rootCommand.Parse(commandLine);
 
-            result
-                .Errors
+            result.Errors
                 .Should()
                 .HaveCount(1)
                 .And
@@ -559,8 +535,7 @@ namespace System.CommandLine.Tests
         {
             var argument = new CliArgument<int>("arg");
             var errorMessage = "The value of option '-x' must be between 1 and 100.";
-            argument
-                .Validators
+            argument.Validators
                 .Add(result =>
                 {
                     var value = result.GetValue(argument);
@@ -581,8 +556,7 @@ namespace System.CommandLine.Tests
         {
             var option = new CliOption<int>("-x");
             var errorMessage = "The value of option '-x' must be between 1 and 100.";
-            option
-                .Validators
+            option.Validators
                 .Add(result =>
                 {
                     var value = result.GetValue(option);
@@ -611,8 +585,7 @@ namespace System.CommandLine.Tests
 
                 var result = command.Parse($"the-command {invalidCharacter}");
 
-                result
-                    .Errors
+                result.Errors
                     .Should()
                     .HaveCount(1)
                     .And
@@ -633,8 +606,7 @@ namespace System.CommandLine.Tests
 
                 var result = command.Parse($"the-command -x {invalidCharacter}");
 
-                result
-                    .Errors
+                result.Errors
                     .Should()
                     .HaveCount(1)
                     .And
@@ -700,8 +672,7 @@ namespace System.CommandLine.Tests
 
                 var result = command.Parse($"the-command {invalidCharacter}");
 
-                result
-                    .Errors
+                result.Errors
                     .Should()
                     .HaveCount(1)
                     .And
@@ -724,8 +695,7 @@ namespace System.CommandLine.Tests
 
                 var result = command.Parse($"the-command -x {invalidCharacter}");
 
-                result
-                    .Errors
+                result.Errors
                     .Should()
                     .HaveCount(1)
                     .And
@@ -786,8 +756,7 @@ namespace System.CommandLine.Tests
                 var path = NonexistentPath();
                 var result = command.Parse($@"move ""{path}""");
 
-                result
-                    .Errors
+                result.Errors
                     .Should()
                     .HaveCount(1)
                     .And
@@ -808,8 +777,7 @@ namespace System.CommandLine.Tests
                 var path = NonexistentPath();
                 var result = command.Parse($@"move --to ""{path}""");
 
-                result
-                    .Errors
+                result.Errors
                     .Should()
                     .HaveCount(1)
                     .And
@@ -830,8 +798,7 @@ namespace System.CommandLine.Tests
                 var path = NonexistentPath();
                 var result = command.Parse($@"move ""{path}""");
 
-                result
-                    .Errors
+                result.Errors
                     .Should()
                     .HaveCount(1)
                     .And
@@ -852,8 +819,7 @@ namespace System.CommandLine.Tests
                 var path = NonexistentPath();
                 var result = command.Parse($@"move --to ""{path}""");
 
-                result
-                    .Errors
+                result.Errors
                     .Should()
                     .HaveCount(1)
                     .And
@@ -874,8 +840,7 @@ namespace System.CommandLine.Tests
                 var path = NonexistentPath();
                 var result = command.Parse($"move \"{path}\"");
 
-                result
-                    .Errors
+                result.Errors
                     .Should()
                     .HaveCount(1)
                     .And
@@ -896,8 +861,7 @@ namespace System.CommandLine.Tests
                 var path = NonexistentPath();
                 var result = command.Parse($@"move --to ""{path}""");
 
-                result
-                    .Errors
+                result.Errors
                     .Should()
                     .HaveCount(1)
                     .And
@@ -918,8 +882,7 @@ namespace System.CommandLine.Tests
                 var path = NonexistentPath();
                 var result = command.Parse($@"move ""{path}""");
 
-                result
-                    .Errors
+                result.Errors
                     .Should()
                     .HaveCount(1)
                     .And
@@ -940,8 +903,7 @@ namespace System.CommandLine.Tests
                 var path = NonexistentPath();
                 var result = command.Parse($@"move --to ""{path}""");
 
-                result
-                    .Errors
+                result.Errors
                     .Should()
                     .HaveCount(1)
                     .And
@@ -962,8 +924,7 @@ namespace System.CommandLine.Tests
                 var path = NonexistentPath();
                 var result = command.Parse($@"move ""{path}""");
 
-                result
-                    .Errors
+                result.Errors
                     .Should()
                     .HaveCount(1)
                     .And
@@ -984,8 +945,7 @@ namespace System.CommandLine.Tests
                 var path = NonexistentPath();
                 var result = command.Parse($@"move --to ""{path}""");
 
-                result
-                    .Errors
+                result.Errors
                     .Should()
                     .HaveCount(1)
                     .And
@@ -1010,8 +970,7 @@ namespace System.CommandLine.Tests
                 var path = NonexistentPath();
                 var result = command.Parse($@"move ""{path}""");
 
-                result
-                    .Errors
+                result.Errors
                     .Should()
                     .ContainSingle(e =>
                         ((ArgumentResult)e.SymbolResult).Argument.Name == "to"
@@ -1030,8 +989,7 @@ namespace System.CommandLine.Tests
                 var path = NonexistentPath();
                 var result = command.Parse($@"move --to ""{path}""");
 
-                result
-                    .Errors
+                result.Errors
                     .Should()
                     .ContainSingle(e =>
                         ((OptionResult)e.SymbolResult).Option.Name == "--to"
@@ -1050,8 +1008,7 @@ namespace System.CommandLine.Tests
                 var path = NonexistentPath();
                 var result = command.Parse($@"move ""{path}""");
 
-                result
-                    .Errors
+                result.Errors
                     .Should()
                     .HaveCount(1)
                     .And
@@ -1072,8 +1029,7 @@ namespace System.CommandLine.Tests
                 var path = NonexistentPath();
                 var result = command.Parse($@"move --to ""{path}""");
 
-                result
-                    .Errors
+                result.Errors
                     .Should()
                     .HaveCount(1)
                     .And
@@ -1165,8 +1121,7 @@ namespace System.CommandLine.Tests
 
             var result = outer.Parse("outer inner");
 
-            result
-                .Errors
+            result.Errors
                 .Should()
                 .ContainSingle(e =>
                     e.Message.Equals(LocalizationResources.RequiredCommandWasNotProvided())
@@ -1183,8 +1138,7 @@ namespace System.CommandLine.Tests
 
             var result = rootCommand.Parse("");
 
-            result
-                .Errors
+            result.Errors
                 .Should()
                 .ContainSingle(e =>
                     e.Message.Equals(LocalizationResources.RequiredCommandWasNotProvided())
@@ -1215,8 +1169,7 @@ namespace System.CommandLine.Tests
 
             var result = new CliRootCommand { option }.Parse("-x");
 
-            result
-                .Errors
+            result.Errors
                 .Select(e => e.Message)
                 .Should()
                 .Contain("Required argument missing for option: '-x'.");
@@ -1244,8 +1197,7 @@ namespace System.CommandLine.Tests
 
             var parseResult = newCommand.Parse("test --opt");
 
-            parseResult
-                .Errors
+            parseResult.Errors
                 .Should()
                 .ContainSingle()
                 .Which
@@ -1298,8 +1250,7 @@ namespace System.CommandLine.Tests
         internal void When_there_is_an_arity_error_then_further_errors_are_not_reported()
         {
             var option = new CliOption<string>("-o");
-            option
-                .Validators
+            option.Validators
                 .Add(result =>
                 {
                     result.AddError("OOPS");
@@ -1309,8 +1260,7 @@ namespace System.CommandLine.Tests
 
             var parseResult = command.Parse("comm -o");
 
-            parseResult
-                .Errors
+            parseResult.Errors
                 .Should()
                 .ContainSingle()
                 .Which

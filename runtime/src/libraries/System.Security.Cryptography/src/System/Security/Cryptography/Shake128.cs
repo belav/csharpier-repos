@@ -375,8 +375,7 @@ namespace System.Security.Cryptography
 
         private static void HashDataCore(ReadOnlySpan<byte> source, Span<byte> destination)
         {
-            HashProviderDispenser
-                .OneShotHashProvider
+            HashProviderDispenser.OneShotHashProvider
                 .HashDataXof(HashAlgorithmId, source, destination);
         }
 

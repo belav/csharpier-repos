@@ -147,8 +147,7 @@ namespace System.IdentityModel.Tokens
 
             if (!this.certificate.HasPrivateKey)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument("token", SR.GetString(SR.ID2057));
             }
         }
@@ -173,8 +172,7 @@ namespace System.IdentityModel.Tokens
             X509Certificate2 cert = certificates.FirstOrDefault();
             if (null == cert)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument("certificates", SR.GetString(SR.ID2100));
             }
             return cert;

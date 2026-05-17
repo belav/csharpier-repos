@@ -182,8 +182,7 @@ namespace System.IO.Ports
         {
             get
             {
-                int status = Interop
-                    .Termios
+                int status = Interop.Termios
                     .TermiosGetSignal(_handle, Interop.Termios.Signals.SignalDcd);
                 if (status < 0)
                 {
@@ -198,8 +197,7 @@ namespace System.IO.Ports
         {
             get
             {
-                int status = Interop
-                    .Termios
+                int status = Interop.Termios
                     .TermiosGetSignal(_handle, Interop.Termios.Signals.SignalCts);
                 if (status < 0)
                 {
@@ -214,8 +212,7 @@ namespace System.IO.Ports
         {
             get
             {
-                int status = Interop
-                    .Termios
+                int status = Interop.Termios
                     .TermiosGetSignal(_handle, Interop.Termios.Signals.SignalDsr);
                 if (status < 0)
                 {
@@ -230,8 +227,7 @@ namespace System.IO.Ports
         {
             get
             {
-                int status = Interop
-                    .Termios
+                int status = Interop.Termios
                     .TermiosGetSignal(_handle, Interop.Termios.Signals.SignalDtr);
                 if (status < 0)
                 {
@@ -243,8 +239,7 @@ namespace System.IO.Ports
             set
             {
                 if (
-                    Interop
-                        .Termios
+                    Interop.Termios
                         .TermiosGetSignal(_handle, Interop.Termios.Signals.SignalDtr, value ? 1 : 0)
                     != 0
                 )
@@ -256,8 +251,7 @@ namespace System.IO.Ports
 
         private bool RtsEnabledNative()
         {
-            int status = Interop
-                .Termios
+            int status = Interop.Termios
                 .TermiosGetSignal(_handle, Interop.Termios.Signals.SignalRts);
             if (status < 0)
             {
@@ -292,8 +286,7 @@ namespace System.IO.Ports
                     throw new InvalidOperationException(SR.CantSetRtsWithHandshaking);
 
                 if (
-                    Interop
-                        .Termios
+                    Interop.Termios
                         .TermiosGetSignal(_handle, Interop.Termios.Signals.SignalRts, value ? 1 : 0)
                     != 0
                 )
@@ -315,8 +308,7 @@ namespace System.IO.Ports
                 if (value != _handshake)
                 {
                     if (
-                        Interop
-                            .Termios
+                        Interop.Termios
                             .TermiosReset(_handle, _baudRate, _dataBits, _stopBits, _parity, value)
                         != 0
                     )
@@ -340,8 +332,7 @@ namespace System.IO.Ports
                 if (value != _dataBits)
                 {
                     if (
-                        Interop
-                            .Termios
+                        Interop.Termios
                             .TermiosReset(_handle, _baudRate, value, _stopBits, _parity, _handshake)
                         != 0
                     )
@@ -366,8 +357,7 @@ namespace System.IO.Ports
                 if (value != _parity)
                 {
                     if (
-                        Interop
-                            .Termios
+                        Interop.Termios
                             .TermiosReset(
                                 _handle,
                                 _baudRate,
@@ -397,8 +387,7 @@ namespace System.IO.Ports
                 if (value != _stopBits)
                 {
                     if (
-                        Interop
-                            .Termios
+                        Interop.Termios
                             .TermiosReset(_handle, _baudRate, _dataBits, value, _parity, _handshake)
                         != 0
                     )
@@ -759,8 +748,7 @@ namespace System.IO.Ports
                 _dataBits = dataBits;
 
                 if (
-                    Interop
-                        .Termios
+                    Interop.Termios
                         .TermiosReset(_handle, _baudRate, _dataBits, _stopBits, _parity, _handshake)
                     != 0
                 )
@@ -829,12 +817,13 @@ namespace System.IO.Ports
                 if (_ioLoop == null)
                 {
                     Debug.Assert(_handle != null);
-                    _ioLoop = Task.Factory.StartNew(
-                        IOLoop,
-                        CancellationToken.None,
-                        TaskCreationOptions.LongRunning,
-                        TaskScheduler.Default
-                    );
+                    _ioLoop = Task.Factory
+                        .StartNew(
+                            IOLoop,
+                            CancellationToken.None,
+                            TaskCreationOptions.LongRunning,
+                            TaskScheduler.Default
+                        );
                 }
             }
         }
@@ -899,8 +888,7 @@ namespace System.IO.Ports
                     s =>
                     {
                         var thisRef = (SerialStream)s;
-                        thisRef
-                            ._dataReceived
+                        thisRef._dataReceived
                             ?.Invoke(thisRef, new SerialDataReceivedEventArgs(SerialData.Chars));
                     },
                     this
@@ -916,8 +904,7 @@ namespace System.IO.Ports
                     s =>
                     {
                         var thisRef = (SerialStream)s;
-                        thisRef
-                            ._pinChanged
+                        thisRef._pinChanged
                             ?.Invoke(thisRef, new SerialPinChangedEventArgs(pinChanged));
                     },
                     this
@@ -933,8 +920,7 @@ namespace System.IO.Ports
                     s =>
                     {
                         var thisRef = (SerialStream)s;
-                        thisRef
-                            ._dataReceived
+                        thisRef._dataReceived
                             ?.Invoke(thisRef, new SerialDataReceivedEventArgs(SerialData.Eof));
                     },
                     this

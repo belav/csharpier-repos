@@ -98,8 +98,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.SplitComment
                 return false;
 
             using (
-                context
-                    .OperationContext
+                context.OperationContext
                     .AddScope(allowCancellation: true, EditorFeaturesResources.Split_comment)
             )
             {
@@ -182,8 +181,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.SplitComment
             if (syntaxKinds.SingleLineCommentTrivia != trivia.RawKind)
                 return null;
 
-            var splitCommentService = document
-                .LanguageServices
+            var splitCommentService = document.LanguageServices
                 .GetRequiredService<ISplitCommentService>();
 
             // if the user hits enter at `/$$/` we don't want to consider this a comment continuation.

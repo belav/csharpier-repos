@@ -85,8 +85,7 @@ namespace RabbitMQ.Client.Impl
             : base(connection, 0)
         {
             Command request;
-            connection
-                .Protocol
+            connection.Protocol
                 .CreateConnectionClose(
                     0,
                     "",

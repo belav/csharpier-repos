@@ -673,13 +673,14 @@ namespace MonoTests.System.Data
                         MappingType.Element
                     );
                     this.Columns.Add(this.columnDiscount);
-                    this.Constraints.Add(
-                        new UniqueConstraint(
-                            "Constraint1",
-                            new DataColumn[] { this.columnOrderID, this.columnProductID },
-                            true
-                        )
-                    );
+                    this.Constraints
+                        .Add(
+                            new UniqueConstraint(
+                                "Constraint1",
+                                new DataColumn[] { this.columnOrderID, this.columnProductID },
+                                true
+                            )
+                        );
                     this.columnOrderID.AllowDBNull = false;
                     this.columnProductID.AllowDBNull = false;
                     this.columnUnitPrice.AllowDBNull = false;
@@ -1192,13 +1193,14 @@ namespace MonoTests.System.Data
                         MappingType.Element
                     );
                     this.Columns.Add(this.columnShipCountry);
-                    this.Constraints.Add(
-                        new UniqueConstraint(
-                            "Constraint1",
-                            new DataColumn[] { this.columnOrderID },
-                            true
-                        )
-                    );
+                    this.Constraints
+                        .Add(
+                            new UniqueConstraint(
+                                "Constraint1",
+                                new DataColumn[] { this.columnOrderID },
+                                true
+                            )
+                        );
                     this.columnOrderID.AutoIncrement = true;
                     this.columnOrderID.AllowDBNull = false;
                     this.columnOrderID.ReadOnly = true;

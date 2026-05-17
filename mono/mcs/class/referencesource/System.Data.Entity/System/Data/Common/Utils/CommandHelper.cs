@@ -151,8 +151,7 @@ namespace System.Data.Common.Utils
                 {
                     // if the entity command also defines the parameter, propagate store parameter value
                     // to entity parameter
-                    int parameterOrdinal = entityCommand
-                        .Parameters
+                    int parameterOrdinal = entityCommand.Parameters
                         .IndexOf(storeParameter.ParameterName);
                     if (0 <= parameterOrdinal)
                     {
@@ -219,8 +218,7 @@ namespace System.Data.Common.Utils
             )
             {
                 throw EntityUtil.InvalidOperation(
-                    System
-                        .Data
+                    System.Data
                         .Entity
                         .Strings
                         .EntityClient_UnableToFindFunctionImportContainer(containerName)
@@ -240,8 +238,7 @@ namespace System.Data.Common.Utils
             if (null == functionImport)
             {
                 throw EntityUtil.InvalidOperation(
-                    System
-                        .Data
+                    System.Data
                         .Entity
                         .Strings
                         .EntityClient_UnableToFindFunctionImport(containerName, functionImportName)
@@ -250,8 +247,7 @@ namespace System.Data.Common.Utils
             if (functionImport.IsComposableAttribute)
             {
                 throw EntityUtil.InvalidOperation(
-                    System
-                        .Data
+                    System.Data
                         .Entity
                         .Strings
                         .EntityClient_FunctionImportMustBeNonComposable(

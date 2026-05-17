@@ -87,8 +87,7 @@ namespace System.ServiceModel.Dispatcher
             IContextChannel channel
         )
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(new NotImplementedException());
         }
 
@@ -98,15 +97,13 @@ namespace System.ServiceModel.Dispatcher
             IContextChannel channel
         )
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(new NotImplementedException());
         }
 
         public virtual bool IsIdle(InstanceContext instanceContext)
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(new NotImplementedException());
         }
 
@@ -115,8 +112,7 @@ namespace System.ServiceModel.Dispatcher
             InstanceContext instanceContext
         )
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(new NotImplementedException());
         }
 

@@ -59,8 +59,7 @@ namespace System
             {
                 case StringComparison.CurrentCulture:
                 case StringComparison.CurrentCultureIgnoreCase:
-                    return CultureInfo
-                            .CurrentCulture
+                    return CultureInfo.CurrentCulture
                             .CompareInfo
                             .Compare(
                                 span,
@@ -70,8 +69,7 @@ namespace System
 
                 case StringComparison.InvariantCulture:
                 case StringComparison.InvariantCultureIgnoreCase:
-                    return CompareInfo
-                            .Invariant
+                    return CompareInfo.Invariant
                             .Compare(
                                 span,
                                 other,
@@ -133,8 +131,7 @@ namespace System
             {
                 case StringComparison.CurrentCulture:
                 case StringComparison.CurrentCultureIgnoreCase:
-                    return CultureInfo
-                        .CurrentCulture
+                    return CultureInfo.CurrentCulture
                         .CompareInfo
                         .Compare(
                             span,
@@ -144,8 +141,7 @@ namespace System
 
                 case StringComparison.InvariantCulture:
                 case StringComparison.InvariantCultureIgnoreCase:
-                    return CompareInfo
-                        .Invariant
+                    return CompareInfo.Invariant
                         .Compare(
                             span,
                             other,
@@ -196,8 +192,7 @@ namespace System
             {
                 case StringComparison.CurrentCulture:
                 case StringComparison.CurrentCultureIgnoreCase:
-                    return CultureInfo
-                        .CurrentCulture
+                    return CultureInfo.CurrentCulture
                         .CompareInfo
                         .IndexOf(
                             span,
@@ -207,8 +202,7 @@ namespace System
 
                 case StringComparison.InvariantCulture:
                 case StringComparison.InvariantCultureIgnoreCase:
-                    return CompareInfo
-                        .Invariant
+                    return CompareInfo.Invariant
                         .IndexOf(
                             span,
                             value,
@@ -249,8 +243,7 @@ namespace System
             {
                 case StringComparison.CurrentCulture:
                 case StringComparison.CurrentCultureIgnoreCase:
-                    return CultureInfo
-                        .CurrentCulture
+                    return CultureInfo.CurrentCulture
                         .CompareInfo
                         .LastIndexOf(
                             span,
@@ -260,8 +253,7 @@ namespace System
 
                 case StringComparison.InvariantCulture:
                 case StringComparison.InvariantCultureIgnoreCase:
-                    return CompareInfo
-                        .Invariant
+                    return CompareInfo.Invariant
                         .LastIndexOf(
                             span,
                             value,
@@ -412,8 +404,7 @@ namespace System
             {
                 case StringComparison.CurrentCulture:
                 case StringComparison.CurrentCultureIgnoreCase:
-                    return CultureInfo
-                        .CurrentCulture
+                    return CultureInfo.CurrentCulture
                         .CompareInfo
                         .IsSuffix(
                             span,
@@ -423,8 +414,7 @@ namespace System
 
                 case StringComparison.InvariantCulture:
                 case StringComparison.InvariantCultureIgnoreCase:
-                    return CompareInfo
-                        .Invariant
+                    return CompareInfo.Invariant
                         .IsSuffix(
                             span,
                             value,
@@ -471,8 +461,7 @@ namespace System
             {
                 case StringComparison.CurrentCulture:
                 case StringComparison.CurrentCultureIgnoreCase:
-                    return CultureInfo
-                        .CurrentCulture
+                    return CultureInfo.CurrentCulture
                         .CompareInfo
                         .IsPrefix(
                             span,
@@ -482,8 +471,7 @@ namespace System
 
                 case StringComparison.InvariantCulture:
                 case StringComparison.InvariantCultureIgnoreCase:
-                    return CompareInfo
-                        .Invariant
+                    return CompareInfo.Invariant
                         .IsPrefix(
                             span,
                             value,

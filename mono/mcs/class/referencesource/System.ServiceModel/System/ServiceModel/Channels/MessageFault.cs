@@ -62,8 +62,7 @@ namespace System.ServiceModel.Channels
         )
         {
             if (serializer == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("serializer"));
             return CreateFault(code, reason, detail, serializer, actor, actor);
         }
@@ -78,20 +77,16 @@ namespace System.ServiceModel.Channels
         )
         {
             if (code == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("code"));
             if (reason == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("reason"));
             if (actor == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("actor"));
             if (node == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("node"));
             return new XmlObjectSerializerFault(code, reason, detail, serializer, actor, node);
         }
@@ -99,8 +94,7 @@ namespace System.ServiceModel.Channels
         public static MessageFault CreateFault(Message message, int maxBufferSize)
         {
             if (message == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("message"));
             XmlDictionaryReader reader = message.GetReaderAtBodyContents();
             using (reader)
@@ -136,8 +130,7 @@ namespace System.ServiceModel.Channels
                 }
                 catch (InvalidOperationException e)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new CommunicationException(
                                 SR.GetString(SR.SFxErrorDeserializingFault),
@@ -147,8 +140,7 @@ namespace System.ServiceModel.Channels
                 }
                 catch (FormatException e)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new CommunicationException(
                                 SR.GetString(SR.SFxErrorDeserializingFault),
@@ -158,8 +150,7 @@ namespace System.ServiceModel.Channels
                 }
                 catch (XmlException e)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new CommunicationException(
                                 SR.GetString(SR.SFxErrorDeserializingFault),
@@ -254,8 +245,7 @@ namespace System.ServiceModel.Channels
         public T GetDetail<T>(XmlObjectSerializer serializer)
         {
             if (serializer == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("serializer"));
             XmlDictionaryReader reader = GetReaderAtDetailContents();
             T value = (T)serializer.ReadObject(reader);
@@ -263,8 +253,7 @@ namespace System.ServiceModel.Channels
             {
                 reader.MoveToContent();
                 if (reader.NodeType != XmlNodeType.EndElement && !reader.EOF)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new FormatException(SR.GetString(SR.ExtraContentIsPresentInFaultDetail))
                         );
@@ -275,8 +264,7 @@ namespace System.ServiceModel.Channels
         public XmlDictionaryReader GetReaderAtDetailContents()
         {
             if (!HasDetail)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(SR.GetString(SR.FaultDoesNotHaveAnyDetail))
                     );
@@ -408,8 +396,7 @@ namespace System.ServiceModel.Channels
             }
             else
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(SR.EnvelopeVersionUnknown, version.ToString())
@@ -800,8 +787,7 @@ namespace System.ServiceModel.Channels
             List<FaultReasonText> translations = new List<FaultReasonText>();
             if (reader.IsEmptyElement)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new FormatException(SR.GetString(SR.AtLeastOneFaultReasonMustBeSpecified))
                     );

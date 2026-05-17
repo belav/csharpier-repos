@@ -163,8 +163,7 @@ namespace System.Data
         )
         {
             GC.SuppressFinalize(this);
-            DataCommonEventSource
-                .Log
+            DataCommonEventSource.Log
                 .Trace(
                     "<ds.DataColumn.DataColumn|API> {0}, columnName='{1}', expr='{2}', type={3}",
                     ObjectID,
@@ -245,8 +244,7 @@ namespace System.Data
             get { return _allowNull; }
             set
             {
-                long logScopeId = DataCommonEventSource
-                    .Log
+                long logScopeId = DataCommonEventSource.Log
                     .EnterScope("<ds.DataColumn.set_AllowDBNull|API> {0}, {1}", ObjectID, value);
                 try
                 {
@@ -280,8 +278,7 @@ namespace System.Data
             get { return ((null != _autoInc) && (_autoInc.Auto)); }
             set
             {
-                DataCommonEventSource
-                    .Log
+                DataCommonEventSource.Log
                     .Trace("<ds.DataColumn.set_AutoIncrement|API> {0}, {1}", ObjectID, value);
                 if (AutoIncrement != value)
                 {
@@ -349,8 +346,7 @@ namespace System.Data
             get { return ((null != _autoInc) ? _autoInc.Seed : 0L); }
             set
             {
-                DataCommonEventSource
-                    .Log
+                DataCommonEventSource.Log
                     .Trace("<ds.DataColumn.set_AutoIncrementSeed|API> {0}, {1}", ObjectID, value);
                 if (AutoIncrementSeed != value)
                 {
@@ -369,8 +365,7 @@ namespace System.Data
             get { return ((null != _autoInc) ? _autoInc.Step : 1L); }
             set
             {
-                DataCommonEventSource
-                    .Log
+                DataCommonEventSource.Log
                     .Trace("<ds.DataColumn.set_AutoIncrementStep|API> {0}, {1}", ObjectID, value);
                 if (AutoIncrementStep != value)
                 {
@@ -426,8 +421,7 @@ namespace System.Data
             get { return _columnName; }
             set
             {
-                long logScopeId = DataCommonEventSource
-                    .Log
+                long logScopeId = DataCommonEventSource.Log
                     .EnterScope("<ds.DataColumn.set_ColumnName|API> {0}, '{1}'", ObjectID, value);
                 try
                 {
@@ -452,8 +446,7 @@ namespace System.Data
                         RaisePropertyChanging(nameof(ColumnName));
                         _columnName = value;
                         _encodedColumnName = null;
-                        _table
-                            ?.Columns
+                        _table?.Columns
                             .OnColumnPropertyChanged(
                                 new CollectionChangeEventArgs(CollectionChangeAction.Refresh, this)
                             );
@@ -463,8 +456,7 @@ namespace System.Data
                         RaisePropertyChanging(nameof(ColumnName));
                         _columnName = value;
                         _encodedColumnName = null;
-                        _table
-                            ?.Columns
+                        _table?.Columns
                             .OnColumnPropertyChanged(
                                 new CollectionChangeEventArgs(CollectionChangeAction.Refresh, this)
                             );
@@ -507,8 +499,7 @@ namespace System.Data
             {
                 value ??= string.Empty;
 
-                DataCommonEventSource
-                    .Log
+                DataCommonEventSource.Log
                     .Trace("<ds.DataColumn.set_Prefix|API> {0}, '{1}'", ObjectID, value);
 
                 if (
@@ -790,8 +781,7 @@ namespace System.Data
             }
             set
             {
-                DataCommonEventSource
-                    .Log
+                DataCommonEventSource.Log
                     .Trace("<ds.DataColumn.set_DefaultValue|API> {0}", ObjectID);
                 if (_defaultValue == null || !DefaultValue.Equals(value))
                 {
@@ -853,8 +843,7 @@ namespace System.Data
             )]
             set
             {
-                long logScopeId = DataCommonEventSource
-                    .Log
+                long logScopeId = DataCommonEventSource.Log
                     .EnterScope("<ds.DataColumn.set_Expression|API> {0}, '{1}'", ObjectID, value);
 
                 value ??= string.Empty;
@@ -1066,8 +1055,7 @@ namespace System.Data
             get { return _maxLength; }
             set
             {
-                long logScopeId = DataCommonEventSource
-                    .Log
+                long logScopeId = DataCommonEventSource.Log
                     .EnterScope("<ds.DataColumn.set_MaxLength|API> {0}, {1}", ObjectID, value);
                 try
                 {
@@ -1123,8 +1111,7 @@ namespace System.Data
             }
             set
             {
-                DataCommonEventSource
-                    .Log
+                DataCommonEventSource.Log
                     .Trace("<ds.DataColumn.set_Namespace|API> {0}, '{1}'", ObjectID, value);
 
                 if (_columnUri != value)
@@ -1211,8 +1198,7 @@ namespace System.Data
             get { return _readOnly; }
             set
             {
-                DataCommonEventSource
-                    .Log
+                DataCommonEventSource.Log
                     .Trace("<ds.DataColumn.set_ReadOnly|API> {0}, {1}", ObjectID, value);
                 if (_readOnly != value)
                 {
@@ -1383,8 +1369,7 @@ namespace System.Data
             get { return _unique; }
             set
             {
-                long logScopeId = DataCommonEventSource
-                    .Log
+                long logScopeId = DataCommonEventSource.Log
                     .EnterScope("<ds.DataColumn.set_Unique|API> {0}, {1}", ObjectID, value);
                 try
                 {
@@ -1487,8 +1472,7 @@ namespace System.Data
             get { return _columnMapping; }
             set
             {
-                DataCommonEventSource
-                    .Log
+                DataCommonEventSource.Log
                     .Trace("<ds.DataColumn.set_ColumnMapping|API> {0}, {1}", ObjectID, value);
                 if (value != _columnMapping)
                 {

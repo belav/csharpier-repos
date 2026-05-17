@@ -101,8 +101,7 @@ namespace System.Security.Cryptography.Asn1.Pkcs12
                 sequenceReader.ThrowIfNotEmpty();
             }
 
-            System
-                .Security
+            System.Security
                 .Cryptography
                 .Asn1
                 .Pkcs7
@@ -115,8 +114,7 @@ namespace System.Security.Cryptography.Asn1.Pkcs12
             )
             {
                 System.Security.Cryptography.Asn1.Pkcs12.MacData tmpMacData;
-                System
-                    .Security
+                System.Security
                     .Cryptography
                     .Asn1
                     .Pkcs12

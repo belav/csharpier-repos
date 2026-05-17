@@ -362,8 +362,7 @@
             //  Try getting a property from ModelMetadata if we couldn't find an answer in ViewData
             else if (viewData.ModelMetadata != null)
             {
-                ModelMetadata propertyMetadata = viewData
-                    .ModelMetadata
+                ModelMetadata propertyMetadata = viewData.ModelMetadata
                     .Properties
                     .Where(p => p.PropertyName == expression)
                     .FirstOrDefault();
@@ -400,8 +399,7 @@
         {
             if (containerType != null && !String.IsNullOrEmpty(propertyName))
             {
-                return ModelMetadataProviders
-                    .Current
+                return ModelMetadataProviders.Current
                     .GetMetadataForProperty(modelAccessor, containerType, propertyName);
             }
             return ModelMetadataProviders.Current.GetMetadataForType(modelAccessor, modelType);

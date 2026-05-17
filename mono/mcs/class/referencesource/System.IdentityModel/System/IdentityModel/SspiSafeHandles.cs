@@ -234,8 +234,7 @@ namespace System.IdentityModel
                                 // use the unmanaged token if it's not null; otherwise use the managed buffer
                                 if (securityBuffer.unmanagedToken != null)
                                 {
-                                    inUnmanagedBuffer[index].token = securityBuffer
-                                        .unmanagedToken
+                                    inUnmanagedBuffer[index].token = securityBuffer.unmanagedToken
                                         .DangerousGetHandle();
                                 }
                                 else if (
@@ -311,8 +310,7 @@ namespace System.IdentityModel
                         outSecBuffer.type = outUnmanagedBuffer[0].type;
                         if (outSecBuffer.size > 0)
                         {
-                            outSecBuffer.token = DiagnosticUtility
-                                .Utility
+                            outSecBuffer.token = DiagnosticUtility.Utility
                                 .AllocateByteArray(outSecBuffer.size);
                             Marshal.Copy(
                                 outUnmanagedBuffer[0].token,
@@ -543,8 +541,7 @@ namespace System.IdentityModel
                                 // use the unmanaged token if it's not null; otherwise use the managed buffer
                                 if (securityBuffer.unmanagedToken != null)
                                 {
-                                    inUnmanagedBuffer[index].token = securityBuffer
-                                        .unmanagedToken
+                                    inUnmanagedBuffer[index].token = securityBuffer.unmanagedToken
                                         .DangerousGetHandle();
                                 }
                                 else if (
@@ -614,8 +611,7 @@ namespace System.IdentityModel
                         outSecBuffer.type = outUnmanagedBuffer[0].type;
                         if (outSecBuffer.size > 0)
                         {
-                            outSecBuffer.token = DiagnosticUtility
-                                .Utility
+                            outSecBuffer.token = DiagnosticUtility.Utility
                                 .AllocateByteArray(outSecBuffer.size);
                             Marshal.Copy(
                                 outUnmanagedBuffer[0].token,
@@ -886,8 +882,7 @@ namespace System.IdentityModel
             const uint SECQOP_WRAP_NO_ENCRYPT = 0x80000001;
             if (status == 0 && qop == SECQOP_WRAP_NO_ENCRYPT)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(SR.GetString(SR.SspiPayloadNotEncrypted))
                     );
@@ -1524,8 +1519,7 @@ namespace System.IdentityModel
         {
             if (cb < 0)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentOutOfRangeException(
                             "cb",

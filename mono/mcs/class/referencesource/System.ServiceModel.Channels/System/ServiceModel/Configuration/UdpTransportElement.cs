@@ -26,9 +26,8 @@ namespace System.ServiceModel.Configuration
                 this.MaxPendingMessagesTotalSize;
             udpTransportBindingElement.MaxReceivedMessageSize = this.MaxReceivedMessageSize;
             udpTransportBindingElement.MulticastInterfaceId = this.MulticastInterfaceId;
-            this.RetransmissionSettings.ApplyConfiguration(
-                udpTransportBindingElement.RetransmissionSettings
-            );
+            this.RetransmissionSettings
+                .ApplyConfiguration(udpTransportBindingElement.RetransmissionSettings);
             udpTransportBindingElement.SocketReceiveBufferSize = this.SocketReceiveBufferSize;
             udpTransportBindingElement.TimeToLive = this.TimeToLive;
         }
@@ -64,9 +63,8 @@ namespace System.ServiceModel.Configuration
                 udpTransportBindingElement.TimeToLive
             );
 
-            this.RetransmissionSettings.InitializeFrom(
-                udpTransportBindingElement.RetransmissionSettings
-            );
+            this.RetransmissionSettings
+                .InitializeFrom(udpTransportBindingElement.RetransmissionSettings);
         }
 
         [SuppressMessage(

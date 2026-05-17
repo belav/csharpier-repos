@@ -176,8 +176,7 @@ namespace System.Speech.Internal.SrgsCompiler
         {
             get
             {
-                return System
-                    .Speech
+                return System.Speech
                     .Recognition
                     .SrgsGrammar
                     .SrgsDocument
@@ -185,8 +184,7 @@ namespace System.Speech.Internal.SrgsCompiler
             }
             set
             {
-                _backend.GrammarOptions = System
-                    .Speech
+                _backend.GrammarOptions = System.Speech
                     .Recognition
                     .SrgsGrammar
                     .SrgsDocument

@@ -101,8 +101,7 @@ namespace Roslyn.Test.Utilities.CoreClr
         {
             var emitData = GetEmitData();
             emitData.RuntimeData.ExecuteRequested = true;
-            var (exitCode, output) = emitData
-                .LoadContext
+            var (exitCode, output) = emitData.LoadContext
                 .Execute(GetMainImage(), args, expectedOutput?.Length);
 
             if (expectedOutput != null)

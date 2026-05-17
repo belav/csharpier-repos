@@ -27,8 +27,7 @@ public static class WebAssemblyRazorComponentsBuilderExtensions
     {
         ArgumentNullException.ThrowIfNull(builder, nameof(builder));
 
-        builder
-            .Services
+        builder.Services
             .TryAddEnumerable(
                 ServiceDescriptor.Singleton<
                     RenderModeEndpointProvider,

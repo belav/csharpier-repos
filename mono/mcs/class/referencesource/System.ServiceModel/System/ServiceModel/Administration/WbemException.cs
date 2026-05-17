@@ -24,24 +24,19 @@ namespace System.ServiceModel.Administration
             switch (hr)
             {
                 case WbemNative.WbemStatus.WBEM_E_NOT_FOUND:
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new WbemInstanceNotFoundException());
                 case WbemNative.WbemStatus.WBEM_E_INVALID_PARAMETER:
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new WbemInvalidParameterException());
                 case WbemNative.WbemStatus.WBEM_E_NOT_SUPPORTED:
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new WbemNotSupportedException());
                 case WbemNative.WbemStatus.WBEM_E_INVALID_METHOD:
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new WbemInvalidMethodException());
                 default:
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new WbemException(hr));
             }
         }

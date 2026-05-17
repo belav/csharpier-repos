@@ -40,8 +40,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
         private void InitializeStyles()
         {
             var groupBoxStyle = new System.Windows.Style(typeof(GroupBox));
-            groupBoxStyle
-                .Setters
+            groupBoxStyle.Setters
                 .Add(
                     new Setter(
                         GroupBox.PaddingProperty,
@@ -53,11 +52,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
                         }
                     )
                 );
-            groupBoxStyle
-                .Setters
+            groupBoxStyle.Setters
                 .Add(new Setter(GroupBox.MarginProperty, new Thickness() { Bottom = 3 }));
-            groupBoxStyle
-                .Setters
+            groupBoxStyle.Setters
                 .Add(
                     new Setter(
                         GroupBox.ForegroundProperty,
@@ -67,11 +64,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             Resources.Add(typeof(GroupBox), groupBoxStyle);
 
             var checkBoxStyle = new System.Windows.Style(typeof(CheckBox));
-            checkBoxStyle
-                .Setters
+            checkBoxStyle.Setters
                 .Add(new Setter(CheckBox.MarginProperty, new Thickness() { Bottom = 7 }));
-            checkBoxStyle
-                .Setters
+            checkBoxStyle.Setters
                 .Add(
                     new Setter(
                         CheckBox.ForegroundProperty,
@@ -81,11 +76,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             Resources.Add(typeof(CheckBox), checkBoxStyle);
 
             var textBoxStyle = new System.Windows.Style(typeof(TextBox));
-            textBoxStyle
-                .Setters
+            textBoxStyle.Setters
                 .Add(new Setter(TextBox.MarginProperty, new Thickness() { Left = 7, Right = 7 }));
-            textBoxStyle
-                .Setters
+            textBoxStyle.Setters
                 .Add(
                     new Setter(
                         TextBox.ForegroundProperty,
@@ -95,11 +88,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             Resources.Add(typeof(TextBox), textBoxStyle);
 
             var radioButtonStyle = new System.Windows.Style(typeof(RadioButton));
-            radioButtonStyle
-                .Setters
+            radioButtonStyle.Setters
                 .Add(new Setter(RadioButton.MarginProperty, new Thickness() { Bottom = 7 }));
-            radioButtonStyle
-                .Setters
+            radioButtonStyle.Setters
                 .Add(
                     new Setter(
                         RadioButton.ForegroundProperty,
@@ -109,11 +100,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             Resources.Add(typeof(RadioButton), radioButtonStyle);
 
             var comboBoxStyle = new System.Windows.Style(typeof(ComboBox));
-            comboBoxStyle
-                .Setters
+            comboBoxStyle.Setters
                 .Add(new Setter(ComboBox.MarginProperty, new Thickness() { Bottom = 7 }));
-            comboBoxStyle
-                .Setters
+            comboBoxStyle.Setters
                 .Add(
                     new Setter(
                         ComboBox.ForegroundProperty,

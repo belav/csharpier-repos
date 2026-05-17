@@ -83,12 +83,10 @@ namespace Mono.Mozilla
                     {
                         short version = gluezilla_init(platform, out mozPlatform);
 
-                        monoMozDir = System
-                            .IO
+                        monoMozDir = System.IO
                             .Path
                             .Combine(
-                                System
-                                    .IO
+                                System.IO
                                     .Path
                                     .Combine(
                                         Environment.GetFolderPath(

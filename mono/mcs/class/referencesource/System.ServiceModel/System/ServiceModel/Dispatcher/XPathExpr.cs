@@ -158,8 +158,7 @@ namespace System.ServiceModel.Dispatcher
         {
             if (null == left || null == right)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new QueryCompileException(QueryCompileError.InvalidExpression)
                     );
@@ -272,8 +271,7 @@ namespace System.ServiceModel.Dispatcher
                     return XPathResultType.String;
 
                 default:
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new QueryCompileException(QueryCompileError.InvalidTypeConversion)
                         );
@@ -297,8 +295,7 @@ namespace System.ServiceModel.Dispatcher
                     return ValueDataType.String;
 
                 default:
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new QueryCompileException(QueryCompileError.InvalidTypeConversion)
                         );

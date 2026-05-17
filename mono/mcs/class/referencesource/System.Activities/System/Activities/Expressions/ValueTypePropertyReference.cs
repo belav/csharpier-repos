@@ -184,8 +184,7 @@ namespace System.Activities.Expressions
                         ) == false
                     )
                     {
-                        throw FxTrace
-                            .Exception
+                        throw FxTrace.Exception
                             .AsError(
                                 new InvalidOperationException(
                                     SR.WriteonlyPropertyCannotBeRead(

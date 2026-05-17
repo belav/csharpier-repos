@@ -86,8 +86,7 @@ public sealed class ValidationProblem
         ArgumentNullException.ThrowIfNull(method);
         ArgumentNullException.ThrowIfNull(builder);
 
-        builder
-            .Metadata
+        builder.Metadata
             .Add(
                 new ProducesResponseTypeMetadata(
                     StatusCodes.Status400BadRequest,

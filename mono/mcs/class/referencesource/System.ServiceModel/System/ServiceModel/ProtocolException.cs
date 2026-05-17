@@ -29,8 +29,7 @@ namespace System.ServiceModel
                 try
                 {
                     MessageFault fault = MessageFault.CreateFault(message, 64 * 1024);
-                    FaultReasonText reason = fault
-                        .Reason
+                    FaultReasonText reason = fault.Reason
                         .GetMatchingTranslation(CultureInfo.CurrentCulture);
                     string text = SR.GetString(SR.ReceiveShutdownReturnedFault, reason.Text);
                     return new ProtocolException(text);
@@ -61,8 +60,7 @@ namespace System.ServiceModel
                 try
                 {
                     MessageFault fault = MessageFault.CreateFault(message, 64 * 1024);
-                    FaultReasonText reason = fault
-                        .Reason
+                    FaultReasonText reason = fault.Reason
                         .GetMatchingTranslation(CultureInfo.CurrentCulture);
                     string text = SR.GetString(SR.OneWayOperationReturnedFault, reason.Text);
                     return new ProtocolException(text);

@@ -149,8 +149,7 @@ namespace System.Web.Http.WebHost.Routing
             else
             {
                 // if user passed us a custom IHttpRoute, then we should invoke their function instead of the base
-                HttpRequestMessage request = requestContext
-                    .HttpContext
+                HttpRequestMessage request = requestContext.HttpContext
                     .GetOrCreateHttpRequestMessage();
                 IHttpVirtualPathData virtualPathData = HttpRoute.GetVirtualPath(request, values);
 

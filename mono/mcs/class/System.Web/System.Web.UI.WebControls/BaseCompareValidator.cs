@@ -59,8 +59,7 @@ namespace System.Web.UI.WebControls
                     switch (Type)
                     {
                         case ValidationDataType.Date:
-                            DateTimeFormatInfo dateTimeFormat = CultureInfo
-                                .CurrentCulture
+                            DateTimeFormatInfo dateTimeFormat = CultureInfo.CurrentCulture
                                 .DateTimeFormat;
                             string pattern = dateTimeFormat.ShortDatePattern;
                             string dateorder = (

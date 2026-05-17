@@ -30,8 +30,7 @@ namespace System.ServiceModel.ComIntegration
 
         public object GetInstance(InstanceContext instanceContext)
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(
                     new InvalidOperationException(
                         SR.GetString(SR.ComPlusInstanceProviderRequiresMessage0)
@@ -77,8 +76,7 @@ namespace System.ServiceModel.ComIntegration
                         )
                             impersonateContext = callerIdentity.Impersonate();
                         else
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
                                     new COMException(
                                         SR.GetString(SR.BadImpersonationLevelForOutOfProcWas),
@@ -125,8 +123,7 @@ namespace System.ServiceModel.ComIntegration
                 if (message.Headers.From != null)
                     from = message.Headers.From.Uri;
 
-                DiagnosticUtility
-                    .EventLog
+                DiagnosticUtility.EventLog
                     .LogEvent(
                         TraceEventType.Error,
                         (ushort)System.Runtime.Diagnostics.EventLogCategory.ComPlus,

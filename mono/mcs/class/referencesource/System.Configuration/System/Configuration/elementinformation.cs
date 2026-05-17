@@ -114,8 +114,7 @@ namespace System.Configuration
         {
             get
             {
-                PropertySourceInfo psi = _thisElement
-                    .Values
+                PropertySourceInfo psi = _thisElement.Values
                     .GetSourceInfo(_thisElement.ElementTagName);
 
                 if (psi == null)
@@ -139,8 +138,7 @@ namespace System.Configuration
         {
             get
             {
-                PropertySourceInfo psi = _thisElement
-                    .Values
+                PropertySourceInfo psi = _thisElement.Values
                     .GetSourceInfo(_thisElement.ElementTagName);
                 if (psi == null)
                 {

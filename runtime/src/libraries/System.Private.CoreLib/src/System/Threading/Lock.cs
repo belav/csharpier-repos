@@ -451,8 +451,7 @@ namespace System.Threading
             return currentThreadId;
 
             Wait:
-            bool areContentionEventsEnabled = NativeRuntimeEventSource
-                .Log
+            bool areContentionEventsEnabled = NativeRuntimeEventSource.Log
                 .IsEnabled(
                     EventLevel.Informational,
                     NativeRuntimeEventSource.Keywords.ContentionKeyword

@@ -91,8 +91,7 @@ public class ComponentParameterUsageAnalyzer : DiagnosticAnalyzer
                             return;
                         }
 
-                        var assignmentContainingType = startBlockContext
-                            .OwningSymbol
+                        var assignmentContainingType = startBlockContext.OwningSymbol
                             ?.ContainingType;
                         if (assignmentContainingType == null)
                         {
@@ -100,8 +99,7 @@ public class ComponentParameterUsageAnalyzer : DiagnosticAnalyzer
                             return;
                         }
 
-                        var conversion = context
-                            .Compilation
+                        var conversion = context.Compilation
                             .ClassifyConversion(propertyContainingType, assignmentContainingType);
                         if (conversion.Exists && conversion.IsIdentity)
                         {

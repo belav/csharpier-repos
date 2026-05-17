@@ -144,8 +144,7 @@ namespace System.Data.Query.PlanCompiler
             SimplePropertyRef other = obj as SimplePropertyRef;
             return (
                 other != null
-                && InternalTrees
-                    .Command
+                && InternalTrees.Command
                     .EqualTypes(m_property.DeclaringType, other.m_property.DeclaringType)
                 && other.m_property.Name.Equals(this.m_property.Name)
             );

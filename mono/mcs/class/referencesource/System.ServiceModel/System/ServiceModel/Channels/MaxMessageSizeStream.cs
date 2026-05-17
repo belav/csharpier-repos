@@ -106,8 +106,7 @@ namespace System.ServiceModel.Channels
         {
             if (totalBytesRead >= maxMessageSize)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         CreateMaxReceivedMessageSizeExceededException(maxMessageSize)
                     );
@@ -135,8 +134,7 @@ namespace System.ServiceModel.Channels
         {
             if (bytesWritten + bytesToWrite > maxMessageSize)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(CreateMaxSentMessageSizeExceededException(maxMessageSize));
             }
 

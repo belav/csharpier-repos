@@ -90,8 +90,7 @@ namespace System.Data.SqlClient
         // BID members
         // -----------
 
-        private readonly int _objectID = System
-            .Threading
+        private readonly int _objectID = System.Threading
             .Interlocked
             .Increment(ref _objectTypeCount);
         private static int _objectTypeCount; // Bid counter
@@ -245,7 +244,8 @@ namespace System.Data.SqlClient
                                     "_commandHashToNotificationId has entries that were removed from _notificationIdToDependenciesHash. Remember to keep them in sync"
                                 );
                                 throw ADP.InternalError(
-                                    ADP.InternalErrorCode.SqlDependencyCommandHashIsNotAssociatedWithNotification
+                                    ADP.InternalErrorCode
+                                        .SqlDependencyCommandHashIsNotAssociatedWithNotification
                                 );
                             }
 
@@ -821,8 +821,7 @@ namespace System.Data.SqlClient
                     {
                         if (null != dependencies[i])
                         {
-                            SingletonInstance
-                                ._dependencyIdToDependencyHash
+                            SingletonInstance._dependencyIdToDependencyHash
                                 .Remove(dependencies[i].Id);
                         }
                     }

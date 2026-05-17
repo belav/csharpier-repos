@@ -176,8 +176,7 @@ namespace System.Security.Cryptography.Pkcs.Asn1
                 if (wroteValue)
                     throw new CryptographicException();
 
-                OtherCertificateFormat
-                    .Value
+                OtherCertificateFormat.Value
                     .Encode(writer, new Asn1Tag(TagClass.ContextSpecific, 3));
                 wroteValue = true;
             }
@@ -266,8 +265,7 @@ namespace System.Security.Cryptography.Pkcs.Asn1
             else if (tag.HasSameClassAndValue(new Asn1Tag(TagClass.ContextSpecific, 3)))
             {
                 System.Security.Cryptography.Pkcs.Asn1.OtherCertificateFormat tmpOtherCertificateFormat;
-                System
-                    .Security
+                System.Security
                     .Cryptography
                     .Pkcs
                     .Asn1

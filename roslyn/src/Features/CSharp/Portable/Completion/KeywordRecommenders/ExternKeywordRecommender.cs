@@ -70,8 +70,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
                     canBePartial: false,
                     cancellationToken: cancellationToken
                 )
-                || context
-                    .SyntaxTree
+                || context.SyntaxTree
                     .IsLocalFunctionDeclarationContext(
                         position,
                         s_validLocalFunctionModifiers,

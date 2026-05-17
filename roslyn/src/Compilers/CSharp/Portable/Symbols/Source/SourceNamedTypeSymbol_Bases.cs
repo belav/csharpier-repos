@@ -137,8 +137,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 && this.DeclaringCompilation.IsAttributeType(localBase)
             )
             {
-                MessageID
-                    .IDS_FeatureGenericAttributes
+                MessageID.IDS_FeatureGenericAttributes
                     .CheckFeatureAvailability(diagnostics, this.DeclaringCompilation, baseLocation);
             }
 

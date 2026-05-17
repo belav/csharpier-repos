@@ -126,8 +126,7 @@ namespace System.ServiceModel.Web
             get
             {
                 if (
-                    !operationContext
-                        .OutgoingMessageProperties
+                    !operationContext.OutgoingMessageProperties
                         .ContainsKey(WebResponseFormatPropertyName)
                 )
                 {
@@ -142,8 +141,7 @@ namespace System.ServiceModel.Web
                 {
                     if (!WebMessageFormatHelper.IsDefined(value.Value))
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(new ArgumentOutOfRangeException("value"));
                     }
                     else
@@ -170,8 +168,7 @@ namespace System.ServiceModel.Web
             get
             {
                 if (
-                    !operationContext
-                        .OutgoingMessageProperties
+                    !operationContext.OutgoingMessageProperties
                         .ContainsKey(AutomatedFormatSelectionContentTypePropertyName)
                 )
                 {
@@ -207,8 +204,7 @@ namespace System.ServiceModel.Web
                         if (endpoint.Id == endpointId)
                         {
                             WebMessageEncodingBindingElement encodingElement =
-                                endpoint
-                                    .Binding
+                                endpoint.Binding
                                     .CreateBindingElements()
                                     .Find<WebMessageEncodingBindingElement>()
                                 as WebMessageEncodingBindingElement;
@@ -228,13 +224,11 @@ namespace System.ServiceModel.Web
             get
             {
                 if (
-                    !operationContext
-                        .OutgoingMessageProperties
+                    !operationContext.OutgoingMessageProperties
                         .ContainsKey(HttpResponseMessageProperty.Name)
                 )
                 {
-                    operationContext
-                        .OutgoingMessageProperties
+                    operationContext.OutgoingMessageProperties
                         .Add(HttpResponseMessageProperty.Name, new HttpResponseMessageProperty());
                 }
                 return operationContext.OutgoingMessageProperties[HttpResponseMessageProperty.Name]
@@ -301,8 +295,7 @@ namespace System.ServiceModel.Web
                 && entityTag.EndsWith("\"", StringComparison.OrdinalIgnoreCase)
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR2.GetString(SR2.WeakEntityTagsNotSupported, entityTag)

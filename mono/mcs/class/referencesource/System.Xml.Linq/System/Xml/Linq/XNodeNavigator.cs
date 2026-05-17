@@ -782,8 +782,7 @@ namespace System.Xml.XPath
             XContainer c = source as XContainer;
             if (c == null)
                 throw new InvalidOperationException(
-                    System
-                        .Xml
+                    System.Xml
                         .Linq
                         .Res
                         .GetString(System.Xml.Linq.Res.InvalidOperation_BadNodeType, NodeType)
@@ -967,8 +966,7 @@ namespace System.Xml.XPath
         {
             if (XmlNamespaceDeclaration == null)
             {
-                System
-                    .Threading
+                System.Threading
                     .Interlocked
                     .CompareExchange(
                         ref XmlNamespaceDeclaration,
@@ -1010,8 +1008,7 @@ namespace System.Xml.XPath
             }
             if (!(result is T))
                 throw new InvalidOperationException(
-                    System
-                        .Xml
+                    System.Xml
                         .Linq
                         .Res
                         .GetString(
@@ -1029,8 +1026,7 @@ namespace System.Xml.XPath
                 object r = navigator.UnderlyingObject;
                 if (!(r is T))
                     throw new InvalidOperationException(
-                        System
-                            .Xml
+                        System.Xml
                             .Linq
                             .Res
                             .GetString(
@@ -1082,8 +1078,7 @@ namespace System.Xml.XPath
                 throw new ArgumentNullException("node");
             if (node is XDocumentType)
                 throw new ArgumentException(
-                    System
-                        .Xml
+                    System.Xml
                         .Linq
                         .Res
                         .GetString(
@@ -1096,8 +1091,7 @@ namespace System.Xml.XPath
             {
                 if (text.parent is XDocument)
                     throw new ArgumentException(
-                        System
-                            .Xml
+                        System.Xml
                             .Linq
                             .Res
                             .GetString(

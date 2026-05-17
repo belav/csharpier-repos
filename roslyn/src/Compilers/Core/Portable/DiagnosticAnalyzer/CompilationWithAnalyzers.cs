@@ -118,8 +118,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
             compilation = compilation
                 .WithOptions(
-                    compilation
-                        .Options
+                    compilation.Options
                         .WithReportSuppressedDiagnostics(
                             analysisOptions.ReportSuppressedDiagnostics
                         )
@@ -514,8 +513,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             {
                 // Always provide all the diagnostic suppressors to the driver.
                 // We also need to ensure we are not passing any duplicate suppressor instances.
-                var suppressorsInAnalysisScope = analysisScope
-                    .Analyzers
+                var suppressorsInAnalysisScope = analysisScope.Analyzers
                     .OfType<DiagnosticSuppressor>()
                     .ToImmutableHashSet();
                 analyzers = analyzers.AddRange(
@@ -1466,8 +1464,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
         private AnalysisScope? GetPendingAnalysisScope(AnalysisScope analysisScope)
         {
-            (SourceOrAdditionalFile file, bool syntax)? filterScope = analysisScope
-                .FilterFileOpt
+            (SourceOrAdditionalFile file, bool syntax)? filterScope = analysisScope.FilterFileOpt
                 .HasValue
                 ? (analysisScope.FilterFileOpt.Value, analysisScope.IsSyntacticSingleFileAnalysis)
                 : null;
@@ -1582,8 +1579,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
                 // We synthesize a span-based CompilationUnitCompletedEvent for improved performance for computing semantic diagnostics
                 // of compiler diagnostic analyzer. See https://github.com/dotnet/roslyn/issues/56843 for more details.
-                var needsSpanBasedCompilationUnitCompletedEvent = analysisScope
-                    .FilterSpanOpt
+                var needsSpanBasedCompilationUnitCompletedEvent = analysisScope.FilterSpanOpt
                     .HasValue;
 
                 var tree = analysisScope.FilterFileOpt!.Value.SourceTree!;
@@ -1616,8 +1612,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
                         case SymbolDeclaredCompilationEvent symbolDeclaredCompilationEvent:
                             if (
-                                !symbolDeclaredCompilationEvent
-                                    .SymbolInternal
+                                !symbolDeclaredCompilationEvent.SymbolInternal
                                     .IsDefinedInSourceTree(
                                         tree,
                                         definedWithinSpan: null,
@@ -1729,8 +1724,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             {
                 if (diagnostic != null)
                 {
-                    var effectiveDiagnostic = compilation
-                        .Options
+                    var effectiveDiagnostic = compilation.Options
                         .FilterDiagnostic(diagnostic, CancellationToken.None);
                     if (effectiveDiagnostic != null)
                     {

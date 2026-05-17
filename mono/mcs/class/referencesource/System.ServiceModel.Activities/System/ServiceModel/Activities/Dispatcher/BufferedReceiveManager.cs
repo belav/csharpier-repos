@@ -129,8 +129,7 @@ namespace System.ServiceModel.Activities.Dispatcher
                                             property.RequestContext.DelayClose(true);
                                             property.RegisterForReplay(operationContext);
                                             property.ReplayRequest();
-                                            property
-                                                .Notification
+                                            property.Notification
                                                 .NotifyInvokeReceived(
                                                     property.RequestContext.InnerRequestContext
                                                 );
@@ -156,11 +155,9 @@ namespace System.ServiceModel.Activities.Dispatcher
                                                             operationContext
                                                         );
                                                         property.ReplayRequest();
-                                                        property
-                                                            .Notification
+                                                        property.Notification
                                                             .NotifyInvokeReceived(
-                                                                property
-                                                                    .RequestContext
+                                                                property.RequestContext
                                                                     .InnerRequestContext
                                                             );
                                                         found = true;
@@ -174,18 +171,14 @@ namespace System.ServiceModel.Activities.Dispatcher
                                         {
                                             List<BufferedReceiveMessageProperty> properties;
                                             if (
-                                                !this.bufferedProperties.TryGetValue(
-                                                    instanceKey,
-                                                    out properties
-                                                )
+                                                !this.bufferedProperties
+                                                    .TryGetValue(instanceKey, out properties)
                                             )
                                             {
                                                 properties =
                                                     new List<BufferedReceiveMessageProperty>();
-                                                this.bufferedProperties.Add(
-                                                    instanceKey,
-                                                    properties
-                                                );
+                                                this.bufferedProperties
+                                                    .Add(instanceKey, properties);
                                             }
                                             property.RequestContext.DelayClose(true);
                                             property.RegisterForReplay(operationContext);
@@ -248,8 +241,7 @@ namespace System.ServiceModel.Activities.Dispatcher
                                     bookmarks.RemoveAt(i);
                                     channelKey = data.ChannelKey;
                                     property.ReplayRequest();
-                                    property
-                                        .Notification
+                                    property.Notification
                                         .NotifyInvokeReceived(
                                             property.RequestContext.InnerRequestContext
                                         );
@@ -397,8 +389,7 @@ namespace System.ServiceModel.Activities.Dispatcher
 
             if (Interlocked.CompareExchange(ref this.initialized, 1, 0) != 0)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(new InvalidOperationException(SR.BufferedReceiveBehaviorMultipleUse));
             }
 

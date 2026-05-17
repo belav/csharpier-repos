@@ -56,8 +56,7 @@ public static class HubConnectionBuilderExtensions
         TimeSpan[] reconnectDelays
     )
     {
-        hubConnectionBuilder
-            .Services
+        hubConnectionBuilder.Services
             .AddSingleton<IRetryPolicy>(new DefaultRetryPolicy(reconnectDelays));
         return hubConnectionBuilder;
     }
@@ -88,8 +87,7 @@ public static class HubConnectionBuilderExtensions
         TimeSpan timeout
     )
     {
-        hubConnectionBuilder
-            .Services
+        hubConnectionBuilder.Services
             .Configure<HubConnectionOptions>(o => o.ServerTimeout = timeout);
         return hubConnectionBuilder;
     }
@@ -105,8 +103,7 @@ public static class HubConnectionBuilderExtensions
         TimeSpan interval
     )
     {
-        hubConnectionBuilder
-            .Services
+        hubConnectionBuilder.Services
             .Configure<HubConnectionOptions>(o => o.KeepAliveInterval = interval);
         return hubConnectionBuilder;
     }

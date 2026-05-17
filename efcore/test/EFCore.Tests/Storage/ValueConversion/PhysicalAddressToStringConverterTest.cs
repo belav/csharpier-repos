@@ -42,8 +42,7 @@ public class PhysicalAddressToStringConverterTest
     )]
     public void Can_convert_bytes_to_physical_address(byte[] bytesPhysicalAddressInvalid)
     {
-        var converter = new PhysicalAddressToStringConverter()
-            .ConvertFromProviderExpression
+        var converter = new PhysicalAddressToStringConverter().ConvertFromProviderExpression
             .Compile();
         var physicalAddress = Encoding.UTF8.GetString(bytesPhysicalAddressInvalid);
 

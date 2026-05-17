@@ -68,8 +68,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                     SpeculativeBindingOption.BindAsExpression
                 );
                 if (
-                    Microsoft
-                        .CodeAnalysis
+                    Microsoft.CodeAnalysis
                         .Shared
                         .Extensions
                         .ISymbolExtensions

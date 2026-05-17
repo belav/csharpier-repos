@@ -33,8 +33,7 @@ public class Http2EndToEndTests : TestApplicationErrorLoggerLoggedTest
             {
                 connectionIdFromFeature = context.Features.Get<IConnectionIdFeature>().ConnectionId;
 
-                var logger = context
-                    .RequestServices
+                var logger = context.RequestServices
                     .GetRequiredService<ILogger<Http2EndToEndTests>>();
                 logger.LogInformation(expectedLogMessage);
 
@@ -138,8 +137,7 @@ public class Http2EndToEndTests : TestApplicationErrorLoggerLoggedTest
                     return;
                 }
 
-                _loggerProvider
-                    ._scopeProvider
+                _loggerProvider._scopeProvider
                     ?.ForEachScope(
                         (scopeObject, loggerPovider) =>
                         {

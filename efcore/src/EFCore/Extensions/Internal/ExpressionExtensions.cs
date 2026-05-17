@@ -110,8 +110,7 @@ public static class ExpressionExtensions
         {
             var memberInfos =
                 (List<TMemberInfo>)
-                    newExpression
-                        .Arguments
+                    newExpression.Arguments
                         .Select(a => memberMatcher(a, parameterExpression))
                         .Where(p => p != null)
                         .ToList()!;
@@ -271,8 +270,7 @@ public static class ExpressionExtensions
                 || nonNullableType.IsNumeric()
                 || nonNullableType.IsEnum
             )
-                ? Infrastructure
-                    .ExpressionExtensions
+                ? Infrastructure.ExpressionExtensions
                     .CreateEqualsExpression(
                         Expression.Call(
                             EF.MakePropertyMethod(typeof(object)),

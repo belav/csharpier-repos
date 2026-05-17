@@ -27,8 +27,7 @@ namespace System.IdentityModel
             if (!certificate.HasPrivateKey)
             {
 #pragma warning suppress 56526 // no validation necessary for value.Thumbprint
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentException(SR.GetString(SR.ID1001, certificate.Thumbprint))
                     );
@@ -49,8 +48,7 @@ namespace System.IdentityModel
             }
             catch (CryptographicException e)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentException(SR.GetString(SR.ID1039, certificate.Thumbprint), e)
                     );
@@ -59,8 +57,7 @@ namespace System.IdentityModel
             if (rsa == null)
             {
 #pragma warning suppress 56526 // no validation necessary for value.Thumbprint
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentException(SR.GetString(SR.ID1002, certificate.Thumbprint))
                     );
@@ -90,8 +87,7 @@ namespace System.IdentityModel
                 )
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(SR.ID1025, storeName, storeLocation, findType, findValue)
@@ -167,8 +163,7 @@ namespace System.IdentityModel
 
             if (issuerNameRegistry == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("issuerNameRegistry");
             }
 

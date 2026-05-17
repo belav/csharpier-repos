@@ -679,8 +679,7 @@ namespace System.Net.Mail
         private static void AuthenticateCallback(object state)
         {
             AuthenticateCallbackContext context = (AuthenticateCallbackContext)state;
-            context.result = context
-                .module
+            context.result = context.module
                 .Authenticate(
                     null,
                     context.credential,
@@ -803,8 +802,7 @@ namespace System.Net.Mail
                                 + "::Connect pooledStream has wrong creds "
                                 + ValidationHelper.HashString(pooledStream)
                         );
-                        ConnectAndHandshakeAsyncResult
-                            .connection
+                        ConnectAndHandshakeAsyncResult.connection
                             .connectionPool
                             .PutConnection(
                                 pooledStream,
@@ -813,8 +811,7 @@ namespace System.Net.Mail
                                 false
                             );
                         pooledStream = (SmtpPooledStream)
-                            ConnectAndHandshakeAsyncResult
-                                .connection
+                            ConnectAndHandshakeAsyncResult.connection
                                 .connectionPool
                                 .GetConnection(
                                     (object)ConnectAndHandshakeAsyncResult,
@@ -845,8 +842,7 @@ namespace System.Net.Mail
                         //if we were cancelled while getting the connection, we should close and return
                         if (ConnectAndHandshakeAsyncResult.connection.isClosed)
                         {
-                            ConnectAndHandshakeAsyncResult
-                                .connection
+                            ConnectAndHandshakeAsyncResult.connection
                                 .connectionPool
                                 .PutConnection(
                                     pooledStream,
@@ -904,8 +900,7 @@ namespace System.Net.Mail
                 }
 
                 SmtpPooledStream pooledStream = (SmtpPooledStream)
-                    connection
-                        .connectionPool
+                    connection.connectionPool
                         .GetConnection(
                             (object)this,
                             (synchronous ? null : m_ConnectionCreatedCallback),
@@ -933,8 +928,7 @@ namespace System.Net.Mail
                                     + "::Connect pooledStream has wrong creds "
                                     + ValidationHelper.HashString(pooledStream)
                             );
-                            connection
-                                .connectionPool
+                            connection.connectionPool
                                 .PutConnection(
                                     pooledStream,
                                     pooledStream.Owner,
@@ -942,8 +936,7 @@ namespace System.Net.Mail
                                     false
                                 );
                             pooledStream = (SmtpPooledStream)
-                                connection
-                                    .connectionPool
+                                connection.connectionPool
                                     .GetConnection(
                                         (object)this,
                                         (synchronous ? null : m_ConnectionCreatedCallback),
@@ -1038,8 +1031,7 @@ namespace System.Net.Mail
                     {
                         try
                         {
-                            LineInfo info = thisPtr
-                                .connection
+                            LineInfo info = thisPtr.connection
                                 .Reader
                                 .CurrentReader
                                 .EndReadLine(result);
@@ -1302,8 +1294,7 @@ namespace System.Net.Mail
                             continue;
                         }
 
-                        NetworkCredential credential = connection
-                            .credentials
+                        NetworkCredential credential = connection.credentials
                             .GetCredential(host, port, module.AuthenticationType);
                         if (credential == null)
                             continue;
@@ -1376,8 +1367,7 @@ namespace System.Net.Mail
                         }
                         else if ((int)info.StatusCode == 235)
                         {
-                            thisPtr
-                                .connection
+                            thisPtr.connection
                                 .authenticationModules[thisPtr.currentModule]
                                 .CloseContext(thisPtr.connection);
                             thisPtr.connection.isConnected = true;
@@ -1452,8 +1442,7 @@ namespace System.Net.Mail
                         LineInfo info = AuthCommand.EndSend(result);
                         if ((int)info.StatusCode == 235)
                         {
-                            thisPtr
-                                .connection
+                            thisPtr.connection
                                 .authenticationModules[thisPtr.currentModule]
                                 .CloseContext(thisPtr.connection);
                             thisPtr.connection.isConnected = true;

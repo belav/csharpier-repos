@@ -30,8 +30,7 @@ namespace System.ServiceModel.Configuration
                 )
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument("value", SR2.GetString(SR2.JsonEncodingNotSupported));
             }
         }

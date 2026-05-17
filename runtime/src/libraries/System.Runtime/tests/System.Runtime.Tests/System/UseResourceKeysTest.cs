@@ -36,8 +36,7 @@ namespace System.Runtime.Tests
         public void ReturnsResourceWhenFeatureSwitchIsDisabled()
         {
             RemoteInvokeOptions options = new RemoteInvokeOptions();
-            options
-                .RuntimeConfigurationOptions
+            options.RuntimeConfigurationOptions
                 .Add("System.Resources.UseSystemResourceKeys", false);
 
             RemoteExecutor

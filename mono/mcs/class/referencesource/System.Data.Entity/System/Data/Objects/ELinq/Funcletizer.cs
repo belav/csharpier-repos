@@ -249,8 +249,7 @@ namespace System.Data.Objects.ELinq
                     // support construction of primitive types
                     PrimitiveType primitiveType;
                     if (
-                        !ClrProviderManifest
-                            .Instance
+                        !ClrProviderManifest.Instance
                             .TryGetPrimitiveType(
                                 TypeSystem.GetNonNullableType(expression.Type),
                                 out primitiveType
@@ -332,8 +331,7 @@ namespace System.Data.Objects.ELinq
             EntityUtil.CheckArgumentNull(type, "type");
 
             if (
-                _rootContext
-                    .Perspective
+                _rootContext.Perspective
                     .TryGetTypeByName(
                         TypeSystem.GetNonNullableType(type).FullName,
                         false, // bIgnoreCase
@@ -608,8 +606,7 @@ namespace System.Data.Objects.ELinq
                 if (null != originalQuery)
                 {
                     // For inline queries, we need to check merge options as well (it's mutable)
-                    MergeOption? originalMergeOption = originalQuery
-                        .QueryState
+                    MergeOption? originalMergeOption = originalQuery.QueryState
                         .UserSpecifiedMergeOption;
                     if (null == getValue)
                     {

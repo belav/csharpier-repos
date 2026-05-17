@@ -594,8 +594,7 @@ public class LoadDebuggerTest
         if (pdb_base64 != null)
             pdb_bytes = Convert.FromBase64String(pdb_base64);
 
-        var loadedAssembly = System
-            .Runtime
+        var loadedAssembly = System.Runtime
             .Loader
             .AssemblyLoadContext
             .Default
@@ -693,8 +692,7 @@ public class TestHotReload
         dil_data2_bytes = Convert.FromBase64String(dil_data2);
         dpdb_data2_bytes = Convert.FromBase64String(dpdb_data2);
 
-        loadedAssembly = System
-            .Runtime
+        loadedAssembly = System.Runtime
             .Loader
             .AssemblyLoadContext
             .Default
@@ -753,16 +751,14 @@ public class TestHotReload
 
         if (version == 1)
         {
-            System
-                .Reflection
+            System.Reflection
                 .Metadata
                 .MetadataUpdater
                 .ApplyUpdate(assm, dmeta_data1_bytes, dil_data1_bytes, dpdb_data1_bytes);
         }
         else if (version == 2)
         {
-            System
-                .Reflection
+            System.Reflection
                 .Metadata
                 .MetadataUpdater
                 .ApplyUpdate(assm, dmeta_data2_bytes, dil_data2_bytes, dpdb_data2_bytes);
@@ -1084,8 +1080,7 @@ public class TestHotReloadUsingSDB
         byte[] asm_bytes = Convert.FromBase64String(asm_base64);
         byte[] pdb_bytes = Convert.FromBase64String(pdb_base64);
 
-        loadedAssembly = System
-            .Runtime
+        loadedAssembly = System.Runtime
             .Loader
             .AssemblyLoadContext
             .Default

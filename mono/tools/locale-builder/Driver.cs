@@ -1542,8 +1542,8 @@ namespace Mono.Tools.LocaleBuilder
             }
 
             // TODO: For now we capture only native name for default calendar
-            data.NativeCalendarNames[((int)data.CalendarType & 0xFF) - 1] =
-                data.DateTimeFormatEntry.NativeCalendarName;
+            data.NativeCalendarNames[((int)data.CalendarType & 0xFF) - 1] = data.DateTimeFormatEntry
+                .NativeCalendarName;
 
             var lcdid_value = int.Parse(data.LCID.Substring(2), NumberStyles.HexNumber);
             Patterns.FillValues(lcdid_value, data);

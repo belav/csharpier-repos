@@ -64,8 +64,7 @@ namespace System.IdentityModel.Tokens
                 outOfBandTokenResolver
             );
             if (assertion == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new SecurityTokenException(SR.GetString(SR.SAMLUnableToLoadAssertion))
                     );
@@ -147,8 +146,7 @@ namespace System.IdentityModel.Tokens
                 return doNotCacheCondition;
             }
             else
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new XmlException(
                             SR.GetString(SR.SAMLUnableToLoadUnknownElement, reader.LocalName)
@@ -235,8 +233,7 @@ namespace System.IdentityModel.Tokens
                 return authDecisionStatement;
             }
             else
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new XmlException(
                             SR.GetString(SR.SAMLUnableToLoadUnknownElement, reader.LocalName)
@@ -264,8 +261,7 @@ namespace System.IdentityModel.Tokens
         )
         {
             if (tokenSerializer == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull(
                         "tokenSerializer",
                         SR.GetString(SR.SamlSerializerRequiresExternalSerializers)
@@ -276,8 +272,7 @@ namespace System.IdentityModel.Tokens
                 return tokenSerializer.ReadKeyIdentifier(reader);
             }
 
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(
                     new InvalidOperationException(
                         SR.GetString(SR.SamlSerializerUnableToReadSecurityKeyIdentifier)
@@ -292,8 +287,7 @@ namespace System.IdentityModel.Tokens
         )
         {
             if (tokenSerializer == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull(
                         "tokenSerializer",
                         SR.GetString(SR.SamlSerializerRequiresExternalSerializers)
@@ -307,8 +301,7 @@ namespace System.IdentityModel.Tokens
             }
 
             if (!keyWritten)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(

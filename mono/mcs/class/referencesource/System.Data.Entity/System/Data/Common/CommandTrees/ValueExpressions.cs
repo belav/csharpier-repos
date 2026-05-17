@@ -904,8 +904,7 @@ namespace System.Data.Common.CommandTrees
             if (!object.ReferenceEquals(sourceEnd.DeclaringType, targetEnd.DeclaringType))
             {
                 throw EntityUtil.Argument(
-                    System
-                        .Data
+                    System.Data
                         .Entity
                         .Strings
                         .Cqt_RelatedEntityRef_TargetEndFromDifferentRelationship,

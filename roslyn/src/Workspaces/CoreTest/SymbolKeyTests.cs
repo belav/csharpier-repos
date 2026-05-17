@@ -128,12 +128,10 @@ public class C
     void N(nuint x);
 }
 ";
-            var netstandardReferences = await ReferenceAssemblies
-                .NetStandard
+            var netstandardReferences = await ReferenceAssemblies.NetStandard
                 .NetStandard20
                 .ResolveAsync(LanguageNames.CSharp, cancellationToken: default);
-            var netcoreReferences = await ReferenceAssemblies
-                .Net
+            var netcoreReferences = await ReferenceAssemblies.Net
                 .Net70
                 .ResolveAsync(LanguageNames.CSharp, cancellationToken: default);
 
@@ -486,8 +484,7 @@ public class C
 
             var b = (
                 (IMethodSymbol)
-                    compilation1
-                        .GlobalNamespace
+                    compilation1.GlobalNamespace
                         .GetTypeMembers("C")
                         .Single()
                         .GetMembers("M")
@@ -520,8 +517,7 @@ public class C
 
             var b = (
                 (IMethodSymbol)
-                    compilation1
-                        .GlobalNamespace
+                    compilation1.GlobalNamespace
                         .GetTypeMembers("C")
                         .Single()
                         .GetMembers("M")
@@ -1772,15 +1768,13 @@ public class C
             if (language == LanguageNames.CSharp)
             {
                 var tree = CSharp.SyntaxFactory.ParseSyntaxTree(source, path: path);
-                return CSharp
-                    .CSharpCompilation
+                return CSharp.CSharpCompilation
                     .Create("Test", syntaxTrees: new[] { tree }, references: references);
             }
             else if (language == LanguageNames.VisualBasic)
             {
                 var tree = VisualBasic.SyntaxFactory.ParseSyntaxTree(source, path: path);
-                return VisualBasic
-                    .VisualBasicCompilation
+                return VisualBasic.VisualBasicCompilation
                     .Create("Test", syntaxTrees: new[] { tree }, references: references);
             }
 

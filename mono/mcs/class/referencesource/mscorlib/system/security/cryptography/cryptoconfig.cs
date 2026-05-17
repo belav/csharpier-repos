@@ -960,15 +960,16 @@ namespace System.Security.Cryptography
             // Bind to matching ctor.
             Object state;
             RuntimeConstructorInfo rci =
-                Type.DefaultBinder.BindToMethod(
-                    Activator.ConstructorDefault,
-                    cons,
-                    ref args,
-                    null,
-                    null,
-                    null,
-                    out state
-                ) as RuntimeConstructorInfo;
+                Type.DefaultBinder
+                    .BindToMethod(
+                        Activator.ConstructorDefault,
+                        cons,
+                        ref args,
+                        null,
+                        null,
+                        null,
+                        out state
+                    ) as RuntimeConstructorInfo;
 
             // Check for ctor we don't like (non-existant, delegate or decorated
             // with declarative linktime demand).

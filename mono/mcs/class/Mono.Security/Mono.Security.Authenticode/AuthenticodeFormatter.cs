@@ -277,8 +277,7 @@ namespace Mono.Security.Authenticode
                 pkcs7.Certificates.Add(new X509Certificate(ts[1][0][3][i].GetBytes()));
 
             // add an unauthentified attribute to our signature
-            pkcs7
-                .SignerInfo
+            pkcs7.SignerInfo
                 .UnauthenticatedAttributes
                 .Add(Attribute(countersignature, ts[1][0][4][0]));
         }

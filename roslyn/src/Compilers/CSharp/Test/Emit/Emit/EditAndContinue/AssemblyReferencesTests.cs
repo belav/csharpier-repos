@@ -26,8 +26,7 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue.UnitTests
 {
     public class AssemblyReferencesTests : EditAndContinueTestBase
     {
-        private static readonly CSharpCompilationOptions s_signedDll = TestOptions
-            .ReleaseDll
+        private static readonly CSharpCompilationOptions s_signedDll = TestOptions.ReleaseDll
             .WithCryptoPublicKey(TestResources.TestKeys.PublicKey_ce65828c82a341f2);
 
         /// <summary>
@@ -578,8 +577,7 @@ class C
                 ImmutableArray.Create(SemanticEdit.Create(SemanticEditKind.Update, f0, f1))
             );
 
-            diff1
-                .EmitResult
+            diff1.EmitResult
                 .Diagnostics
                 .Verify(
                     // error CS7038: Failed to emit module 'C': Changing the version of an assembly reference is not allowed during debugging:
@@ -689,8 +687,7 @@ class C
                 ImmutableArray.Create(SemanticEdit.Create(SemanticEditKind.Update, f0, f1))
             );
 
-            diff1
-                .EmitResult
+            diff1.EmitResult
                 .Diagnostics
                 .Verify(
                     // error CS7038: Failed to emit module 'C': Changing the version of an assembly reference is not allowed during debugging:

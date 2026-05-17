@@ -250,8 +250,7 @@ public class OpenApiRouteHandlerBuilderExtensionTests
 
         WithLocalSummary(innerGroup.MapDelete("/inner-b", GetString));
 
-        var summaries = builder
-            .DataSources
+        var summaries = builder.DataSources
             .SelectMany(ds => ds.Endpoints)
             .ToDictionary(
                 e => ((RouteEndpoint)e).RoutePattern.RawText,

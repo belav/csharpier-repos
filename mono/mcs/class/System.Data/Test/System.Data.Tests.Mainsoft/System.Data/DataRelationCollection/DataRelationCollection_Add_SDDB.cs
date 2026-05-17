@@ -105,12 +105,13 @@ namespace tests.system_data_dll.System_Data
         private void DataRelationCollection_Add_SDDB1()
         {
             DataSet ds = getDataSet();
-            ds.Relations.Add(
-                "rel1",
-                ds.Tables[0].Columns["ParentId"],
-                ds.Tables[1].Columns["ParentId"],
-                true
-            );
+            ds.Relations
+                .Add(
+                    "rel1",
+                    ds.Tables[0].Columns["ParentId"],
+                    ds.Tables[1].Columns["ParentId"],
+                    true
+                );
 
             Compare(ds.Relations.Count, 1);
 
@@ -128,12 +129,13 @@ namespace tests.system_data_dll.System_Data
         private void DataRelationCollection_Add_SDDB2()
         {
             DataSet ds = getDataSet();
-            ds.Relations.Add(
-                "rel1",
-                ds.Tables[0].Columns["ParentId"],
-                ds.Tables[1].Columns["ParentId"],
-                false
-            );
+            ds.Relations
+                .Add(
+                    "rel1",
+                    ds.Tables[0].Columns["ParentId"],
+                    ds.Tables[1].Columns["ParentId"],
+                    false
+                );
 
             Compare(ds.Relations.Count, 1);
 

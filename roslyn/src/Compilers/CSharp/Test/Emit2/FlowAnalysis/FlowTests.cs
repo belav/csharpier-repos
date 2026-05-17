@@ -6792,8 +6792,7 @@ class C
                 .Select(d => model.GetDeclaredSymbol(d))
                 .Where(p => p.ContainingSymbol.Name == "Program")
                 .Single();
-            var parameter = property
-                .SetMethod
+            var parameter = property.SetMethod
                 .Parameters[0]
                 .GetSymbol<SourceComplexParameterSymbolBase>();
             var attributes = parameter.BindParameterAttributes();

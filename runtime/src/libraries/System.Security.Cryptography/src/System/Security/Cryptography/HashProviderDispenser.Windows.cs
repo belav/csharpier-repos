@@ -285,8 +285,7 @@ namespace System.Security.Cryptography
                 fixed (byte* pSrc = &MemoryMarshal.GetReference(source))
                 fixed (byte* pDest = &Helpers.GetNonNullPinnableReference(destination))
                 {
-                    NTSTATUS ntStatus = Interop
-                        .BCrypt
+                    NTSTATUS ntStatus = Interop.BCrypt
                         .BCryptHash(
                             (uint)algHandle,
                             pKey,
@@ -314,8 +313,7 @@ namespace System.Security.Cryptography
                 Span<byte> destination
             )
             {
-                NTSTATUS ntStatus = Interop
-                    .BCrypt
+                NTSTATUS ntStatus = Interop.BCrypt
                     .BCryptCreateHash(
                         algHandle,
                         out SafeBCryptHashHandle hHash,

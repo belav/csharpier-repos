@@ -347,8 +347,7 @@ namespace System.ComponentModel.Composition.Hosting
                 return this.PartsInternal;
             }
 
-            string genericContractName = definition
-                .Metadata
+            string genericContractName = definition.Metadata
                 .GetValue<string>(CompositionConstants.GenericContractMetadataName);
 
             List<ComposablePartDefinition> nonGenericMatches = this.GetCandidateParts(contractName);
@@ -440,9 +439,8 @@ namespace System.ComponentModel.Composition.Hosting
             const int displayCount = 2;
             StringBuilder builder = new StringBuilder();
             foreach (
-                ReflectionComposablePartDefinition definition in this.PartsInternal.Take(
-                    displayCount
-                )
+                ReflectionComposablePartDefinition definition in this.PartsInternal
+                    .Take(displayCount)
             )
             {
                 if (builder.Length > 0)

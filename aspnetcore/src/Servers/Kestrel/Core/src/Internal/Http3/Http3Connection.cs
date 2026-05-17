@@ -55,13 +55,11 @@ internal sealed class Http3Connection : IHttp3StreamLifetimeHandler, IRequestPro
         _multiplexedContext = (MultiplexedConnectionContext)context.ConnectionContext;
         _context = context;
         _streamLifetimeHandler = this;
-        MetricsContext = context
-            .ConnectionFeatures
+        MetricsContext = context.ConnectionFeatures
             .GetRequiredFeature<IConnectionMetricsContextFeature>()
             .MetricsContext;
 
-        _errorCodeFeature = context
-            .ConnectionFeatures
+        _errorCodeFeature = context.ConnectionFeatures
             .GetRequiredFeature<IProtocolErrorCodeFeature>();
 
         var httpLimits = context.ServiceContext.ServerOptions.Limits;
@@ -190,8 +188,7 @@ internal sealed class Http3Connection : IHttp3StreamLifetimeHandler, IRequestPro
             {
                 if (ex.InnerException is not null)
                 {
-                    session
-                        .Value
+                    session.Value
                         .Abort(
                             new ConnectionAbortedException(ex.Message, ex.InnerException),
                             errorCode
@@ -284,8 +281,7 @@ internal sealed class Http3Connection : IHttp3StreamLifetimeHandler, IRequestPro
         // 2. When a stream finished and is waiting for underlying transport to drain.
         //    Uses MinResponseDataRate.
         var serviceContext = _context.ServiceContext;
-        var requestHeadersTimeout = serviceContext
-            .ServerOptions
+        var requestHeadersTimeout = serviceContext.ServerOptions
             .Limits
             .RequestHeadersTimeout
             .ToTicks(serviceContext.TimeProvider);
@@ -346,8 +342,7 @@ internal sealed class Http3Connection : IHttp3StreamLifetimeHandler, IRequestPro
                 }
                 else if (stream.IsDraining)
                 {
-                    var minDataRate = _context
-                        .ServiceContext
+                    var minDataRate = _context.ServiceContext
                         .ServerOptions
                         .Limits
                         .MinResponseDataRate;
@@ -435,8 +430,7 @@ internal sealed class Http3Connection : IHttp3StreamLifetimeHandler, IRequestPro
                         continue;
                     }
 
-                    var streamDirectionFeature = streamContext
-                        .Features
+                    var streamDirectionFeature = streamContext.Features
                         .Get<IStreamDirectionFeature>();
                     var streamIdFeature = streamContext.Features.Get<IStreamIdFeature>();
 

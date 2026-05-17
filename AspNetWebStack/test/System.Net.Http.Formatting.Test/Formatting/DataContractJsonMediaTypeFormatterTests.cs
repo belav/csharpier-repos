@@ -58,8 +58,7 @@ namespace System.Net.Http.Formatting
         [Fact]
         public void Indent_RoundTrips()
         {
-            Assert
-                .Reflection
+            Assert.Reflection
                 .BooleanProperty(
                     new XmlMediaTypeFormatter(),
                     c => c.Indent,
@@ -70,8 +69,7 @@ namespace System.Net.Http.Formatting
         [Fact]
         public void MaxDepth_RoundTrips()
         {
-            Assert
-                .Reflection
+            Assert.Reflection
                 .IntegerProperty(
                     new DataContractJsonMediaTypeFormatter(),
                     c => c.MaxDepth,
@@ -140,8 +138,7 @@ namespace System.Net.Http.Formatting
             JsonMediaTypeFormatter xmlFormatter = new DataContractJsonMediaTypeFormatter();
             MemoryStream memoryStream = new MemoryStream();
             HttpContent content = new StringContent(String.Empty);
-            await Assert
-                .Task
+            await Assert.Task
                 .SucceedsAsync(
                     xmlFormatter.WriteToStreamAsync(
                         type,
@@ -358,8 +355,7 @@ namespace System.Net.Http.Formatting
                 new DataContractJsonMediaTypeFormatter();
             MemoryStream memoryStream = new MemoryStream();
             HttpContent content = new StringContent(String.Empty);
-            await Assert
-                .Task
+            await Assert.Task
                 .SucceedsAsync(
                     jsonFormatter.WriteToStreamAsync(
                         typeof(SampleType),
@@ -563,8 +559,7 @@ namespace System.Net.Http.Formatting
                 return false;
             }
 
-            return !Assert
-                .Http
+            return !Assert.Http
                 .IsKnownUnserializable(
                     type,
                     obj,

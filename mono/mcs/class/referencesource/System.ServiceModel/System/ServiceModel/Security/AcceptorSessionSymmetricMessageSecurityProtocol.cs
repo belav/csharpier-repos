@@ -39,8 +39,7 @@ namespace System.ServiceModel.Security
             if (factory.ActAsInitiator == true)
             {
                 Fx.Assert("This protocol can only be used at the recipient.");
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(SR.ProtocolMustBeRecipient, this.GetType().ToString())
@@ -327,8 +326,7 @@ namespace System.ServiceModel.Security
             );
             if (signingSct == null || signingSct.ContextId != sessionId)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperWarning(
                         new MessageSecurityException(
                             SR.GetString(SR.NoSessionTokenPresentInMessage)

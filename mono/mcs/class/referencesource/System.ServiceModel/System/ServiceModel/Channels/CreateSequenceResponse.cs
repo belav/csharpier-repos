@@ -93,8 +93,7 @@ namespace System.ServiceModel.Channels
                         string reason = SR.GetString(
                             SR.CSResponseWithInvalidIncompleteSequenceBehavior
                         );
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(new XmlException(reason));
                     }
 
@@ -160,12 +159,8 @@ namespace System.ServiceModel.Channels
             if (this.acceptAcksTo != null)
             {
                 writer.WriteStartElement(wsrmFeb2005Dictionary.Accept, wsrmNs);
-                this.acceptAcksTo.WriteTo(
-                    this.addressingVersion,
-                    writer,
-                    wsrmFeb2005Dictionary.AcksTo,
-                    wsrmNs
-                );
+                this.acceptAcksTo
+                    .WriteTo(this.addressingVersion, writer, wsrmFeb2005Dictionary.AcksTo, wsrmNs);
                 writer.WriteEndElement();
             }
 

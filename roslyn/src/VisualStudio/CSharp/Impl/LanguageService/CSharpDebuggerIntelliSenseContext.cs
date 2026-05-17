@@ -102,8 +102,7 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.LanguageService
             Document document
         )
         {
-            var previousTrackingSpan = ContextBuffer
-                .CurrentSnapshot
+            var previousTrackingSpan = ContextBuffer.CurrentSnapshot
                 .CreateTrackingSpan(
                     Span.FromBounds(0, contextPoint),
                     SpanTrackingMode.EdgeNegative
@@ -117,8 +116,7 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.LanguageService
                 contentType: this.ContentType
             );
 
-            return buffer
-                .CurrentSnapshot
+            return buffer.CurrentSnapshot
                 .CreateTrackingSpan(
                     0,
                     buffer.CurrentSnapshot.Length,

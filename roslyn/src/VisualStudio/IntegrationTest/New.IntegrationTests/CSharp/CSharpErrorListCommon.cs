@@ -24,8 +24,7 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
         [IdeFact(Skip = "https://github.com/dotnet/roslyn/issues/61367")]
         public virtual async Task ErrorList()
         {
-            await TestServices
-                .Editor
+            await TestServices.Editor
                 .SetTextAsync(
                     @"
 class C
@@ -48,8 +47,7 @@ class C
                 "(Compiler) Class1.cs(4, 12): error CS0246: The type or namespace name 'P' could not be found (are you missing a using directive or an assembly reference?)",
                 "(Compiler) Class1.cs(6, 24): error CS0117: 'Console' does not contain a definition for 'WriteLin'",
             };
-            await TestServices
-                .Workspace
+            await TestServices.Workspace
                 .WaitForAllAsyncOperationsAsync(
                     [
                         FeatureAttribute.Workspace,
@@ -60,16 +58,14 @@ class C
                     ],
                     HangMitigatingCancellationToken
                 );
-            var actualContents = await TestServices
-                .ErrorList
+            var actualContents = await TestServices.ErrorList
                 .GetErrorsAsync(HangMitigatingCancellationToken);
             AssertEx.EqualOrDiff(
                 string.Join(Environment.NewLine, expectedContents),
                 string.Join(Environment.NewLine, actualContents)
             );
 
-            var target = await TestServices
-                .ErrorList
+            var target = await TestServices.ErrorList
                 .NavigateToErrorListItemAsync(
                     0,
                     isPreview: false,
@@ -79,16 +75,15 @@ class C
             Assert.Equal(expectedContents[0], target);
             Assert.Equal(
                 25,
-                (await TestServices.Editor.GetCaretPositionAsync(HangMitigatingCancellationToken))
-                    .BufferPosition
+                (
+                    await TestServices.Editor.GetCaretPositionAsync(HangMitigatingCancellationToken)
+                ).BufferPosition
                     .Position
             );
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .BuildSolutionAndWaitAsync(HangMitigatingCancellationToken);
             await TestServices.ErrorList.ShowErrorListAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .Workspace
+            await TestServices.Workspace
                 .WaitForAllAsyncOperationsAsync(
                     [
                         FeatureAttribute.Workspace,
@@ -99,8 +94,7 @@ class C
                     ],
                     HangMitigatingCancellationToken
                 );
-            actualContents = await TestServices
-                .ErrorList
+            actualContents = await TestServices.ErrorList
                 .GetErrorsAsync(HangMitigatingCancellationToken);
             AssertEx.EqualOrDiff(
                 string.Join(Environment.NewLine, expectedContents),
@@ -111,8 +105,7 @@ class C
         [IdeFact(Skip = "https://github.com/dotnet/roslyn/issues/61367")]
         public virtual async Task ErrorLevelWarning()
         {
-            await TestServices
-                .Editor
+            await TestServices.Editor
                 .SetTextAsync(
                     @"
 class C
@@ -130,8 +123,7 @@ class C
             {
                 "(Compiler) Class1.cs(6, 13): warning CS0219: The variable 'unused' is assigned but its value is never used",
             };
-            await TestServices
-                .Workspace
+            await TestServices.Workspace
                 .WaitForAllAsyncOperationsAsync(
                     [
                         FeatureAttribute.Workspace,
@@ -142,8 +134,7 @@ class C
                     ],
                     HangMitigatingCancellationToken
                 );
-            var actualContents = await TestServices
-                .ErrorList
+            var actualContents = await TestServices.ErrorList
                 .GetErrorsAsync(HangMitigatingCancellationToken);
             AssertEx.EqualOrDiff(
                 string.Join(Environment.NewLine, expectedContents),
@@ -154,8 +145,7 @@ class C
         [IdeFact(Skip = "https://github.com/dotnet/roslyn/issues/61367")]
         public virtual async Task ErrorsDuringMethodBodyEditing()
         {
-            await TestServices
-                .Editor
+            await TestServices.Editor
                 .SetTextAsync(
                     @"
 class Program2
@@ -171,8 +161,7 @@ class Program2
                 );
             await TestServices.ErrorList.ShowErrorListAsync(HangMitigatingCancellationToken);
             var expectedContents = new string[] { };
-            await TestServices
-                .Workspace
+            await TestServices.Workspace
                 .WaitForAllAsyncOperationsAsync(
                     [
                         FeatureAttribute.Workspace,
@@ -183,8 +172,7 @@ class Program2
                     ],
                     HangMitigatingCancellationToken
                 );
-            var actualContents = await TestServices
-                .ErrorList
+            var actualContents = await TestServices.ErrorList
                 .GetErrorsAsync(HangMitigatingCancellationToken);
             AssertEx.EqualOrDiff(
                 string.Join(Environment.NewLine, expectedContents),
@@ -192,12 +180,10 @@ class Program2
             );
 
             await TestServices.Editor.ActivateAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .Editor
+            await TestServices.Editor
                 .PlaceCaretAsync("a = aa", charsOffset: -1, HangMitigatingCancellationToken);
             await TestServices.Input.SendAsync("a", HangMitigatingCancellationToken);
-            await TestServices
-                .Workspace
+            await TestServices.Workspace
                 .WaitForAllAsyncOperationsAsync(
                     [
                         FeatureAttribute.Workspace,
@@ -213,8 +199,7 @@ class Program2
             [
                 "(Compiler) Class1.cs(7, 13): error CS0128: A local variable or function named 'aa' is already defined in this scope",
             ];
-            await TestServices
-                .Workspace
+            await TestServices.Workspace
                 .WaitForAllAsyncOperationsAsync(
                     [
                         FeatureAttribute.Workspace,
@@ -225,8 +210,7 @@ class Program2
                     ],
                     HangMitigatingCancellationToken
                 );
-            actualContents = await TestServices
-                .ErrorList
+            actualContents = await TestServices.ErrorList
                 .GetErrorsAsync(HangMitigatingCancellationToken);
             AssertEx.EqualOrDiff(
                 string.Join(Environment.NewLine, expectedContents),
@@ -234,16 +218,13 @@ class Program2
             );
 
             await TestServices.Editor.ActivateAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .Editor
+            await TestServices.Editor
                 .PlaceCaretAsync("aa = aa", charsOffset: -1, HangMitigatingCancellationToken);
-            await TestServices
-                .Input
+            await TestServices.Input
                 .SendAsync(VirtualKeyCode.DELETE, HangMitigatingCancellationToken);
             await TestServices.ErrorList.ShowErrorListAsync(HangMitigatingCancellationToken);
             expectedContents = [];
-            await TestServices
-                .Workspace
+            await TestServices.Workspace
                 .WaitForAllAsyncOperationsAsync(
                     [
                         FeatureAttribute.Workspace,
@@ -254,8 +235,7 @@ class Program2
                     ],
                     HangMitigatingCancellationToken
                 );
-            actualContents = await TestServices
-                .ErrorList
+            actualContents = await TestServices.ErrorList
                 .GetErrorsAsync(HangMitigatingCancellationToken);
             AssertEx.EqualOrDiff(
                 string.Join(Environment.NewLine, expectedContents),
@@ -266,8 +246,7 @@ class Program2
         [IdeFact(Skip = "https://github.com/dotnet/roslyn/issues/63026")]
         public virtual async Task ErrorsAfterClosingFile()
         {
-            await TestServices
-                .Editor
+            await TestServices.Editor
                 .SetTextAsync(
                     @"
 class Program2
@@ -283,8 +262,7 @@ class Program2
                 );
             await TestServices.ErrorList.ShowErrorListAsync(HangMitigatingCancellationToken);
             var expectedContents = new string[] { };
-            await TestServices
-                .Workspace
+            await TestServices.Workspace
                 .WaitForAllAsyncOperationsAsync(
                     [
                         FeatureAttribute.Workspace,
@@ -295,8 +273,7 @@ class Program2
                     ],
                     HangMitigatingCancellationToken
                 );
-            var actualContents = await TestServices
-                .ErrorList
+            var actualContents = await TestServices.ErrorList
                 .GetErrorsAsync(HangMitigatingCancellationToken);
             AssertEx.EqualOrDiff(
                 string.Join<string>(Environment.NewLine, expectedContents),
@@ -304,8 +281,7 @@ class Program2
             );
 
             await TestServices.Editor.ActivateAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .Editor
+            await TestServices.Editor
                 .PlaceCaretAsync("a = aa", charsOffset: -1, HangMitigatingCancellationToken);
             await TestServices.Input.SendAsync("a", HangMitigatingCancellationToken);
             await TestServices.ErrorList.ShowErrorListAsync(HangMitigatingCancellationToken);
@@ -313,8 +289,7 @@ class Program2
             [
                 "(Compiler) Class1.cs(7, 13): error CS0128: A local variable or function named 'aa' is already defined in this scope",
             ];
-            await TestServices
-                .Workspace
+            await TestServices.Workspace
                 .WaitForAllAsyncOperationsAsync(
                     [
                         FeatureAttribute.Workspace,
@@ -325,8 +300,7 @@ class Program2
                     ],
                     HangMitigatingCancellationToken
                 );
-            actualContents = await TestServices
-                .ErrorList
+            actualContents = await TestServices.ErrorList
                 .GetErrorsAsync(HangMitigatingCancellationToken);
             AssertEx.EqualOrDiff(
                 string.Join<string>(Environment.NewLine, expectedContents),
@@ -340,20 +314,17 @@ class Program2
             // Assert the window title is Class1.cs, which also means the file has no unsaved changes
             Assert.Equal(
                 "Class1.cs",
-                await TestServices
-                    .Shell
+                await TestServices.Shell
                     .GetActiveWindowCaptionAsync(HangMitigatingCancellationToken)
             );
 
-            await TestServices
-                .Input
+            await TestServices.Input
                 .SendAsync(
                     (VirtualKeyCode.F4, VirtualKeyCode.CONTROL),
                     HangMitigatingCancellationToken
                 );
             await TestServices.ErrorList.ShowErrorListAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .Workspace
+            await TestServices.Workspace
                 .WaitForAllAsyncOperationsAsync(
                     [
                         FeatureAttribute.Workspace,
@@ -364,8 +335,7 @@ class Program2
                     ],
                     HangMitigatingCancellationToken
                 );
-            actualContents = await TestServices
-                .ErrorList
+            actualContents = await TestServices.ErrorList
                 .GetErrorsAsync(HangMitigatingCancellationToken);
             AssertEx.EqualOrDiff(
                 string.Join<string>(Environment.NewLine, expectedContents),

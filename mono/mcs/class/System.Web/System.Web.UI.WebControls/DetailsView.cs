@@ -1544,12 +1544,13 @@ namespace System.Web.UI.WebControls
             if (pagerTemplate != null)
                 pagerTemplate.InstantiateIn(cell);
             else
-                cell.Controls.Add(
-                    PagerSettings.CreatePagerControl(
-                        pagedDataSource.CurrentPageIndex,
-                        pagedDataSource.PageCount
-                    )
-                );
+                cell.Controls
+                    .Add(
+                        PagerSettings.CreatePagerControl(
+                            pagedDataSource.CurrentPageIndex,
+                            pagedDataSource.PageCount
+                        )
+                    );
 
             row.Cells.Add(cell);
         }
@@ -1647,12 +1648,8 @@ namespace System.Web.UI.WebControls
                     continue;
                 DataControlFieldCell c = row.Cells[row.Cells.Count - 1] as DataControlFieldCell;
                 if (c != null)
-                    c.ContainingField.ExtractValuesFromCell(
-                        fieldValues,
-                        c,
-                        row.RowState,
-                        includeReadOnlyFields
-                    );
+                    c.ContainingField
+                        .ExtractValuesFromCell(fieldValues, c, row.RowState, includeReadOnlyFields);
             }
             if (!includeKeys && DataKeyNames != null)
                 foreach (string key in DataKeyNames)

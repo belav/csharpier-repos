@@ -41,8 +41,7 @@ namespace System.ServiceModel.Activation
             ServiceHostingEnvironment.EnsureInitialized();
             if (!ServiceHostingEnvironment.AspNetCompatibilityEnabled)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new InvalidOperationException(
                             SR.Hosting_RouteServiceRequiresCompatibilityMode
@@ -58,8 +57,7 @@ namespace System.ServiceModel.Activation
                 routePrefix.Contains(LeftCurlyBracket) || routePrefix.Contains(RightCurlyBracket)
             )
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .Argument("routePrefix", SR.Hosting_CurlyBracketFoundInRoutePrefix("{", "}"));
             }
 

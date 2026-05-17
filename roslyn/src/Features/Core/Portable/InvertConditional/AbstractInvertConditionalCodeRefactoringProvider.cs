@@ -63,8 +63,7 @@ namespace Microsoft.CodeAnalysis.InvertConditional
 
             var editor = new SyntaxEditor(root, document.Project.Solution.Services);
 
-            editor
-                .Generator
+            editor.Generator
                 .SyntaxFacts
                 .GetPartsOfConditionalExpression(
                     conditional,
@@ -75,8 +74,7 @@ namespace Microsoft.CodeAnalysis.InvertConditional
 
             editor.ReplaceNode(
                 condition,
-                editor
-                    .Generator
+                editor.Generator
                     .Negate(
                         editor.Generator.SyntaxGeneratorInternal,
                         condition,

@@ -340,18 +340,20 @@ namespace Test.Sys.Drawing.GraphicsFixtures
         [Test]
         public void DrawImage1()
         {
-            t.Graphics.DrawImage(
-                bmp,
-                new Point[] { new Point(170, 10), new Point(250, 0), new Point(100, 100) },
-                src,
-                GraphicsUnit.Pixel
-            );
-            t.Graphics.DrawImage(
-                bmp,
-                new PointF[] { new PointF(70, 10), new PointF(150, 0), new PointF(10, 100) },
-                srcF,
-                GraphicsUnit.Pixel
-            );
+            t.Graphics
+                .DrawImage(
+                    bmp,
+                    new Point[] { new Point(170, 10), new Point(250, 0), new Point(100, 100) },
+                    src,
+                    GraphicsUnit.Pixel
+                );
+            t.Graphics
+                .DrawImage(
+                    bmp,
+                    new PointF[] { new PointF(70, 10), new PointF(150, 0), new PointF(10, 100) },
+                    srcF,
+                    GraphicsUnit.Pixel
+                );
             t.Show();
             Assert.That(t.Compare(), Is.True);
         }
@@ -387,12 +389,13 @@ namespace Test.Sys.Drawing.GraphicsFixtures
         public void DrawImage5()
         {
             t.Graphics.SetClip(new Rectangle(70, 0, 20, 200));
-            t.Graphics.DrawImage(
-                bmp,
-                new Point[] { new Point(50, 50), new Point(250, 30), new Point(100, 150) },
-                src,
-                GraphicsUnit.Pixel
-            );
+            t.Graphics
+                .DrawImage(
+                    bmp,
+                    new Point[] { new Point(50, 50), new Point(250, 30), new Point(100, 150) },
+                    src,
+                    GraphicsUnit.Pixel
+                );
             t.Show();
             Assert.That(t.Compare(), Is.True);
         }
@@ -402,12 +405,13 @@ namespace Test.Sys.Drawing.GraphicsFixtures
         {
             t.Graphics.ScaleTransform(2, 2);
             t.Graphics.SetClip(new Rectangle(70, 0, 20, 200));
-            t.Graphics.DrawImage(
-                bmp,
-                new Point[] { new Point(50, 50), new Point(250, 30), new Point(100, 150) },
-                src,
-                GraphicsUnit.Pixel
-            );
+            t.Graphics
+                .DrawImage(
+                    bmp,
+                    new Point[] { new Point(50, 50), new Point(250, 30), new Point(100, 150) },
+                    src,
+                    GraphicsUnit.Pixel
+                );
             t.Show();
             Assert.That(t.Compare(), Is.True);
         }
@@ -424,14 +428,21 @@ namespace Test.Sys.Drawing.GraphicsFixtures
         [Test]
         public void DrawImage8()
         {
-            t.Graphics.DrawImage(
-                bmp,
-                new Point[] { new Point(170, 10), new Point(250, 10), new Point(100, 100) }
-            );
-            t.Graphics.DrawImage(
-                bmp,
-                new PointF[] { new PointF(170, 100), new PointF(250, 100), new PointF(100, 190) }
-            );
+            t.Graphics
+                .DrawImage(
+                    bmp,
+                    new Point[] { new Point(170, 10), new Point(250, 10), new Point(100, 100) }
+                );
+            t.Graphics
+                .DrawImage(
+                    bmp,
+                    new PointF[]
+                    {
+                        new PointF(170, 100),
+                        new PointF(250, 100),
+                        new PointF(100, 190),
+                    }
+                );
             t.Show();
             Assert.That(t.Compare(), Is.True);
         }
@@ -527,11 +538,12 @@ namespace Test.Sys.Drawing.GraphicsFixtures
         [Test]
         public void DrawImageInContainer1()
         {
-            t.Graphics.BeginContainer(
-                new Rectangle(10, 10, 50, 50),
-                new Rectangle(70, 70, 100, 100),
-                GraphicsUnit.Pixel
-            );
+            t.Graphics
+                .BeginContainer(
+                    new Rectangle(10, 10, 50, 50),
+                    new Rectangle(70, 70, 100, 100),
+                    GraphicsUnit.Pixel
+                );
             t.Graphics.DrawImage(bmp, 0, 0);
             t.Show();
             Assert.That(t.Compare(), Is.True);
@@ -540,11 +552,12 @@ namespace Test.Sys.Drawing.GraphicsFixtures
         [Test]
         public void DrawImageInContainer2()
         {
-            t.Graphics.BeginContainer(
-                new Rectangle(10, 10, 50, 50),
-                new Rectangle(70, 70, 100, 100),
-                GraphicsUnit.Pixel
-            );
+            t.Graphics
+                .BeginContainer(
+                    new Rectangle(10, 10, 50, 50),
+                    new Rectangle(70, 70, 100, 100),
+                    GraphicsUnit.Pixel
+                );
             t.Graphics.DrawImage(bmp2, 0, 0);
             t.Show();
             Assert.That(t.Compare(), Is.True);
@@ -553,11 +566,12 @@ namespace Test.Sys.Drawing.GraphicsFixtures
         [Test]
         public void DrawImageInContainer3()
         {
-            t.Graphics.BeginContainer(
-                new Rectangle(10, 10, 50, 50),
-                new Rectangle(70, 70, 100, 100),
-                GraphicsUnit.Pixel
-            );
+            t.Graphics
+                .BeginContainer(
+                    new Rectangle(10, 10, 50, 50),
+                    new Rectangle(70, 70, 100, 100),
+                    GraphicsUnit.Pixel
+                );
             t.Graphics.SetClip(new Rectangle(0, 0, 15, 15));
             t.Graphics.ScaleTransform(0.5f, 0.5f);
             t.Graphics.DrawImage(bmp2, 0, 0);
@@ -576,11 +590,12 @@ namespace Test.Sys.Drawing.GraphicsFixtures
             };
 
             t.Graphics.SetClip(new Rectangle(70, 70, 70, 70));
-            GraphicsContainer c = t.Graphics.BeginContainer(
-                new Rectangle(20, 20, 10, 10),
-                new Rectangle(77, 77, 7, 7),
-                GraphicsUnit.Pixel
-            );
+            GraphicsContainer c = t.Graphics
+                .BeginContainer(
+                    new Rectangle(20, 20, 10, 10),
+                    new Rectangle(77, 77, 7, 7),
+                    GraphicsUnit.Pixel
+                );
             t.Graphics.DrawImage(bmp2, p, new Rectangle(100, 100, 100, 100), GraphicsUnit.Pixel);
             t.Graphics.EndContainer(c);
             t.Show();
@@ -787,11 +802,8 @@ namespace Test.Sys.Drawing.GraphicsFixtures
             RectangleF srcRect = new RectangleF(0.0F, 0.0F, 200.0F, 200.0F);
             RectangleF destRect = new RectangleF(100.0F, 100.0F, 150.0F, 150.0F);
             // Begin graphics container.
-            GraphicsContainer containerState = t.Graphics.BeginContainer(
-                destRect,
-                srcRect,
-                GraphicsUnit.Pixel
-            );
+            GraphicsContainer containerState = t.Graphics
+                .BeginContainer(destRect, srcRect, GraphicsUnit.Pixel);
             // Fill red rectangle in container.
             t.Graphics.FillRectangle(new SolidBrush(Color.Red), 0.0F, 0.0F, 200.0F, 200.0F);
             t.Show();
@@ -896,26 +908,28 @@ namespace Test.Sys.Drawing.GraphicsFixtures
             float startAngle = 370.0F;
             float sweepAngle = 70.0F;
             // Draw arc to screen.
-            t.Graphics.DrawArc(
-                blackPen,
-                (int)x,
-                (int)y,
-                (int)width,
-                (int)height,
-                (int)startAngle,
-                (int)sweepAngle
-            );
+            t.Graphics
+                .DrawArc(
+                    blackPen,
+                    (int)x,
+                    (int)y,
+                    (int)width,
+                    (int)height,
+                    (int)startAngle,
+                    (int)sweepAngle
+                );
             t.Show();
             Assert.That(t.PDCompare(), Is.True);
             SetUp();
             startAngle = 10.0F;
             sweepAngle = 120.0F;
-            t.Graphics.DrawArc(
-                blackPen,
-                new Rectangle((int)x, (int)y, (int)width, (int)height),
-                startAngle,
-                sweepAngle
-            );
+            t.Graphics
+                .DrawArc(
+                    blackPen,
+                    new Rectangle((int)x, (int)y, (int)width, (int)height),
+                    startAngle,
+                    sweepAngle
+                );
             t.Show();
             Assert.That(t.PDCompare(), Is.True);
             SetUp();
@@ -927,34 +941,22 @@ namespace Test.Sys.Drawing.GraphicsFixtures
             SetUp();
             startAngle = 10.0F;
             sweepAngle = 300.0F;
-            t.Graphics.DrawArc(
-                blackPen,
-                new RectangleF(x, y, width, height),
-                startAngle,
-                sweepAngle
-            );
+            t.Graphics
+                .DrawArc(blackPen, new RectangleF(x, y, width, height), startAngle, sweepAngle);
             t.Show();
             Assert.That(t.PDCompare(), Is.True);
             SetUp();
             startAngle = -179.9F;
             sweepAngle = -359.9F;
-            t.Graphics.DrawArc(
-                blackPen,
-                new RectangleF(x, y, width, height),
-                startAngle,
-                sweepAngle
-            );
+            t.Graphics
+                .DrawArc(blackPen, new RectangleF(x, y, width, height), startAngle, sweepAngle);
             t.Show();
             Assert.That(t.PDCompare(), Is.True);
             SetUp();
             startAngle = -10.0F;
             sweepAngle = -300.0F;
-            t.Graphics.DrawArc(
-                blackPen,
-                new RectangleF(x, y, width, height),
-                startAngle,
-                sweepAngle
-            );
+            t.Graphics
+                .DrawArc(blackPen, new RectangleF(x, y, width, height), startAngle, sweepAngle);
             t.Show();
             Assert.That(t.PDCompare(), Is.True);
         }
@@ -974,37 +976,40 @@ namespace Test.Sys.Drawing.GraphicsFixtures
             float endX = 500.0F;
             float endY = 100.0F;
             // Draw arc to screen.
-            t.Graphics.DrawBezier(
-                blackPen,
-                startX,
-                startY,
-                controlX1,
-                controlY1,
-                controlX2,
-                controlY2,
-                endX,
-                endY
-            );
+            t.Graphics
+                .DrawBezier(
+                    blackPen,
+                    startX,
+                    startY,
+                    controlX1,
+                    controlY1,
+                    controlX2,
+                    controlY2,
+                    endX,
+                    endY
+                );
             t.Show();
             Assert.That(t.PDCompare(), Is.True);
             SetUp();
-            t.Graphics.DrawBezier(
-                blackPen,
-                new PointF(startX, startY),
-                new PointF(controlX1, controlY1),
-                new PointF(controlX2, controlY2),
-                new PointF(endX, endY)
-            );
+            t.Graphics
+                .DrawBezier(
+                    blackPen,
+                    new PointF(startX, startY),
+                    new PointF(controlX1, controlY1),
+                    new PointF(controlX2, controlY2),
+                    new PointF(endX, endY)
+                );
             t.Show();
             Assert.That(t.PDCompare(), Is.True);
             SetUp();
-            t.Graphics.DrawBezier(
-                blackPen,
-                new Point((int)startX, (int)startY),
-                new Point((int)controlX1, (int)controlY1),
-                new Point((int)controlX2, (int)controlY2),
-                new Point((int)endX, (int)endY)
-            );
+            t.Graphics
+                .DrawBezier(
+                    blackPen,
+                    new Point((int)startX, (int)startY),
+                    new Point((int)controlX1, (int)controlY1),
+                    new Point((int)controlX2, (int)controlY2),
+                    new Point((int)endX, (int)endY)
+                );
             t.Show();
             Assert.That(t.PDCompare(), Is.True);
         }
@@ -1293,18 +1298,19 @@ namespace Test.Sys.Drawing.GraphicsFixtures
             imageAttr.SetGamma(4.0F);
             // Draw adjusted image to screen.
 
-            t.Graphics.DrawImage(
-                newImage,
-                destRect2,
-                x,
-                y,
-                width,
-                height,
-                units,
-                imageAttr,
-                imageCallback,
-                imageCallbackData
-            );
+            t.Graphics
+                .DrawImage(
+                    newImage,
+                    destRect2,
+                    x,
+                    y,
+                    width,
+                    height,
+                    units,
+                    imageAttr,
+                    imageCallback,
+                    imageCallbackData
+                );
 
             t.Show();
         }
@@ -1453,12 +1459,8 @@ namespace Test.Sys.Drawing.GraphicsFixtures
             Assert.That(t.PDCompare(), Is.True);
             SetUp();
 
-            t.Graphics.DrawPie(
-                blackPen,
-                new RectangleF(x, y, width, height),
-                startAngle,
-                sweepAngle
-            );
+            t.Graphics
+                .DrawPie(blackPen, new RectangleF(x, y, width, height), startAngle, sweepAngle);
             t.Show();
             Assert.That(t.PDCompare(), Is.True);
         }
@@ -1482,12 +1484,8 @@ namespace Test.Sys.Drawing.GraphicsFixtures
             Assert.That(t.PDCompare(), Is.True);
             SetUp();
 
-            t.Graphics.DrawPie(
-                blackPen,
-                new Rectangle(x, y, width, height),
-                startAngle,
-                sweepAngle
-            );
+            t.Graphics
+                .DrawPie(blackPen, new Rectangle(x, y, width, height), startAngle, sweepAngle);
             t.Show();
             Assert.That(t.PDCompare(), Is.True);
         }
@@ -1553,10 +1551,8 @@ namespace Test.Sys.Drawing.GraphicsFixtures
             Assert.That(t.PDCompare(), Is.True);
             SetUp();
 
-            t.Graphics.DrawRectangle(
-                blackPen,
-                new Rectangle((int)x, (int)y, (int)width, (int)height)
-            );
+            t.Graphics
+                .DrawRectangle(blackPen, new Rectangle((int)x, (int)y, (int)width, (int)height));
             t.Show();
             Assert.That(t.PDCompare(), Is.True);
         }
@@ -1800,12 +1796,8 @@ namespace Test.Sys.Drawing.GraphicsFixtures
             float startAngle = 0.0F;
             float sweepAngle = 45.0F;
             // Fill pie to screen.
-            t.Graphics.FillPie(
-                redBrush,
-                new Rectangle(x, y, width, height),
-                startAngle,
-                sweepAngle
-            );
+            t.Graphics
+                .FillPie(redBrush, new Rectangle(x, y, width, height), startAngle, sweepAngle);
             t.Show();
             Assert.That(t.PDCompare(), Is.True);
             SetUp();
@@ -1815,15 +1807,16 @@ namespace Test.Sys.Drawing.GraphicsFixtures
             Assert.That(t.PDCompare(), Is.True);
             SetUp();
 
-            t.Graphics.FillPie(
-                redBrush,
-                (float)x,
-                (float)y,
-                (float)width,
-                (float)height,
-                startAngle,
-                sweepAngle
-            );
+            t.Graphics
+                .FillPie(
+                    redBrush,
+                    (float)x,
+                    (float)y,
+                    (float)width,
+                    (float)height,
+                    startAngle,
+                    sweepAngle
+                );
             t.Show();
             Assert.That(t.PDCompare(), Is.True);
         }
@@ -2072,12 +2065,8 @@ namespace Test.Sys.Drawing.GraphicsFixtures
             t.Graphics.DrawString(measureString, stringFont, Brushes.Black, x, y, stringFormat);
             // Measure two ranges in string.
             Region[] stringRegions = new Region[2];
-            stringRegions = t.Graphics.MeasureCharacterRanges(
-                measureString,
-                stringFont,
-                layoutRect,
-                stringFormat
-            );
+            stringRegions = t.Graphics
+                .MeasureCharacterRanges(measureString, stringFont, layoutRect, stringFormat);
             // Draw rectangle for first measured range.
             RectangleF measureRect1 = stringRegions[0].GetBounds(t.Graphics);
             t.Graphics.DrawRectangle(new Pen(Color.Red, 1), Rectangle.Round(measureRect1));
@@ -2105,31 +2094,34 @@ namespace Test.Sys.Drawing.GraphicsFixtures
             int charactersFitted;
             int linesFilled;
             SizeF stringSize = new SizeF();
-            stringSize = t.Graphics.MeasureString(
-                measureString,
-                stringFont,
-                layoutSize,
-                newStringFormat,
-                out charactersFitted,
-                out linesFilled
-            );
+            stringSize = t.Graphics
+                .MeasureString(
+                    measureString,
+                    stringFont,
+                    layoutSize,
+                    newStringFormat,
+                    out charactersFitted,
+                    out linesFilled
+                );
             // Draw rectangle representing size of string.
-            t.Graphics.DrawRectangle(
-                new Pen(Color.Red, 1),
-                0.0F,
-                0.0F,
-                stringSize.Width,
-                stringSize.Height
-            );
+            t.Graphics
+                .DrawRectangle(
+                    new Pen(Color.Red, 1),
+                    0.0F,
+                    0.0F,
+                    stringSize.Width,
+                    stringSize.Height
+                );
             t.Show();
             // Draw string to screen.
-            t.Graphics.DrawString(
-                measureString,
-                stringFont,
-                Brushes.Black,
-                new PointF(0, 0),
-                newStringFormat
-            );
+            t.Graphics
+                .DrawString(
+                    measureString,
+                    stringFont,
+                    Brushes.Black,
+                    new PointF(0, 0),
+                    newStringFormat
+                );
             t.Show();
             // Draw output parameters to screen.
             string outString = "chars " + charactersFitted + ", lines " + linesFilled;
@@ -4101,19 +4093,21 @@ namespace Test.Sys.Drawing.GraphicsFixtures
         {
             t.Graphics.FillRectangle(Brushes.Blue, 0, 0, 100, 100);
 
-            GraphicsContainer c1 = t.Graphics.BeginContainer(
-                new Rectangle(100, 100, 100, 100),
-                new Rectangle(0, 0, 100, 100),
-                GraphicsUnit.Pixel
-            );
+            GraphicsContainer c1 = t.Graphics
+                .BeginContainer(
+                    new Rectangle(100, 100, 100, 100),
+                    new Rectangle(0, 0, 100, 100),
+                    GraphicsUnit.Pixel
+                );
 
             t.Graphics.FillRectangle(Brushes.Green, 0, 0, 100, 100);
 
-            GraphicsContainer c2 = t.Graphics.BeginContainer(
-                new Rectangle(100, 100, 100, 100),
-                new Rectangle(0, 0, 100, 100),
-                GraphicsUnit.Pixel
-            );
+            GraphicsContainer c2 = t.Graphics
+                .BeginContainer(
+                    new Rectangle(100, 100, 100, 100),
+                    new Rectangle(0, 0, 100, 100),
+                    GraphicsUnit.Pixel
+                );
 
             t.Graphics.FillRectangle(Brushes.Red, 0, 0, 100, 100);
 

@@ -74,8 +74,7 @@ namespace System.IdentityModel
 
             if (completedResult == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(
                         "result",
                         SR.GetString(SR.ID2004, typeof(TypedAsyncResult<T>), result.GetType())

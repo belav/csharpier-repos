@@ -82,8 +82,7 @@ namespace System.Threading.Tasks.Tests.CancelWait
                                 _taskCompleted = _taskTree.Task.Wait(_waitTimeout);
                                 break;
                             case WaitBy.TimeSpan:
-                                _taskCompleted = _taskTree
-                                    .Task
+                                _taskCompleted = _taskTree.Task
                                     .Wait(new TimeSpan(0, 0, 0, 0, _waitTimeout));
                                 break;
                         }
@@ -130,70 +129,71 @@ namespace System.Threading.Tasks.Tests.CancelWait
         /// </summary>
         private void CreateTask(TaskScheduler tm, TaskInfo treeNode)
         {
-            treeNode.Task = Task.Factory.StartNew(
-                delegate(object o)
-                {
-                    TaskInfo current = (TaskInfo)o;
+            treeNode.Task = Task.Factory
+                .StartNew(
+                    delegate(object o)
+                    {
+                        TaskInfo current = (TaskInfo)o;
 
-                    if (current.IsLeaf)
-                    {
-                        lock (_countdownEvent)
-                        {
-                            if (!_countdownEvent.IsSet)
-                                _countdownEvent.Signal();
-                        }
-                    }
-                    else
-                    {
-                        // create children tasks
-                        foreach (TaskInfo child in current.Children)
-                        {
-                            if (child.IsRespectParentCancellation)
-                            {
-                                //
-                                // if child to respect parent cancellation we need to wire a linked token
-                                //
-                                child.CancellationToken = CancellationTokenSource
-                                    .CreateLinkedTokenSource(
-                                        treeNode.CancellationToken,
-                                        child.CancellationToken
-                                    )
-                                    .Token;
-                            }
-                            CreateTask(tm, child);
-                        }
-                    }
-
-                    if (current.CancelChildren)
-                    {
-                        try
-                        {
-                            foreach (TaskInfo child in current.Children)
-                            {
-                                child.CancellationTokenSource.Cancel();
-                            }
-                        }
-                        finally
+                        if (current.IsLeaf)
                         {
                             lock (_countdownEvent)
                             {
-                                // stop the tree creation and let the main thread proceed
                                 if (!_countdownEvent.IsSet)
+                                    _countdownEvent.Signal();
+                            }
+                        }
+                        else
+                        {
+                            // create children tasks
+                            foreach (TaskInfo child in current.Children)
+                            {
+                                if (child.IsRespectParentCancellation)
                                 {
-                                    _countdownEvent.Signal(_countdownEvent.CurrentCount);
+                                    //
+                                    // if child to respect parent cancellation we need to wire a linked token
+                                    //
+                                    child.CancellationToken = CancellationTokenSource
+                                        .CreateLinkedTokenSource(
+                                            treeNode.CancellationToken,
+                                            child.CancellationToken
+                                        )
+                                        .Token;
+                                }
+                                CreateTask(tm, child);
+                            }
+                        }
+
+                        if (current.CancelChildren)
+                        {
+                            try
+                            {
+                                foreach (TaskInfo child in current.Children)
+                                {
+                                    child.CancellationTokenSource.Cancel();
+                                }
+                            }
+                            finally
+                            {
+                                lock (_countdownEvent)
+                                {
+                                    // stop the tree creation and let the main thread proceed
+                                    if (!_countdownEvent.IsSet)
+                                    {
+                                        _countdownEvent.Signal(_countdownEvent.CurrentCount);
+                                    }
                                 }
                             }
                         }
-                    }
 
-                    // run the workload
-                    current.RunWorkload();
-                },
-                treeNode,
-                treeNode.CancellationToken,
-                treeNode.Option,
-                tm
-            );
+                        // run the workload
+                        current.RunWorkload();
+                    },
+                    treeNode,
+                    treeNode.CancellationToken,
+                    treeNode.Option,
+                    tm
+                );
         }
 
         /// <summary>

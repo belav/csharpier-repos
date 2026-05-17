@@ -113,9 +113,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                         Contract.ThrowIfFalse(item.DocumentId != null);
 
                         if (
-                            !item.InvocationReasons.Contains(
-                                PredefinedInvocationReasons.HighPriority
-                            )
+                            !item.InvocationReasons
+                                .Contains(PredefinedInvocationReasons.HighPriority)
                         )
                         {
                             return;
@@ -236,8 +235,7 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
 
                         // Now any visible documents
                         foreach (
-                            var visibleDocumentId in Processor
-                                ._documentTracker
+                            var visibleDocumentId in Processor._documentTracker
                                 .GetVisibleDocuments()
                         )
                         {
@@ -468,8 +466,7 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                     {
                         if (
                             !isOpen
-                            || !workItem
-                                .InvocationReasons
+                            || !workItem.InvocationReasons
                                 .Contains(PredefinedInvocationReasons.DocumentOpened)
                         )
                         {
@@ -523,8 +520,7 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                     {
                         if (
                             isOpen
-                            || !workItem
-                                .InvocationReasons
+                            || !workItem.InvocationReasons
                                 .Contains(PredefinedInvocationReasons.DocumentClosed)
                         )
                         {
@@ -580,8 +576,7 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                             // No-reanalyze request or we already have a request to re-analyze every thing
                             if (
                                 workItem.MustRefresh
-                                || !workItem
-                                    .InvocationReasons
+                                || !workItem.InvocationReasons
                                     .Contains(PredefinedInvocationReasons.Reanalyze)
                             )
                             {
@@ -618,8 +613,7 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                             // Note: Semantic analysis is not supported for non-source documents.
                             if (
                                 document is Document sourceDocument
-                                && !workItem
-                                    .InvocationReasons
+                                && !workItem.InvocationReasons
                                     .Contains(PredefinedInvocationReasons.SemanticChanged)
                             )
                             {

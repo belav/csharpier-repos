@@ -82,8 +82,7 @@ public class ServerVariableTests
             false
         );
         var httpContext = CreateTestHttpContext();
-        httpContext
-            .Features
+        httpContext.Features
             .Set<IServerVariablesFeature>(
                 new TestServerVariablesFeature(
                     new Dictionary<string, string>
@@ -149,8 +148,7 @@ public class ServerVariableTests
             true
         );
         var httpContext = CreateTestHttpContext();
-        httpContext
-            .Features
+        httpContext.Features
             .Set<IServerVariablesFeature>(
                 new TestServerVariablesFeature(
                     new Dictionary<string, string>

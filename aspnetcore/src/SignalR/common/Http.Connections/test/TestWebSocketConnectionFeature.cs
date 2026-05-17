@@ -207,8 +207,7 @@ internal class TestWebSocketConnectionFeature : IHttpWebSocketFeature, IDisposab
                 if (length > 0)
                 {
                     // Remove the sent bytes from the remaining buffer
-                    _internalBuffer.Buffer = _internalBuffer
-                        .Buffer
+                    _internalBuffer.Buffer = _internalBuffer.Buffer
                         .AsMemory()
                         .Slice(length)
                         .ToArray();

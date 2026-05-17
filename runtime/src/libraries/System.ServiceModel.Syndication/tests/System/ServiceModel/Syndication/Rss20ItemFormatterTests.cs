@@ -166,17 +166,14 @@ namespace System.ServiceModel.Syndication.Tests
             {
                 var person = new SyndicationPerson();
                 person.AttributeExtensions.Add(new XmlQualifiedName(prefix + "_name1"), null);
-                person
-                    .AttributeExtensions
+                person.AttributeExtensions
                     .Add(new XmlQualifiedName(prefix + "_name2", prefix + "_namespace"), "");
-                person
-                    .AttributeExtensions
+                person.AttributeExtensions
                     .Add(
                         new XmlQualifiedName(prefix + "_name3", prefix + "_namespace"),
                         prefix + "_value"
                     );
-                person
-                    .AttributeExtensions
+                person.AttributeExtensions
                     .Add(new XmlQualifiedName(prefix + "_name4", "xmlns"), "");
 
                 person.ElementExtensions.Add(new ExtensionObject { Value = 10 });
@@ -198,37 +195,30 @@ namespace System.ServiceModel.Syndication.Tests
                 );
 
                 content.AttributeExtensions.Add(new XmlQualifiedName(prefix + "_name1"), null);
-                content
-                    .AttributeExtensions
+                content.AttributeExtensions
                     .Add(new XmlQualifiedName(prefix + "_name2", prefix + "_namespace"), "");
-                content
-                    .AttributeExtensions
+                content.AttributeExtensions
                     .Add(
                         new XmlQualifiedName(prefix + "_name3", prefix + "_namespace"),
                         prefix + "_value"
                     );
-                content
-                    .AttributeExtensions
+                content.AttributeExtensions
                     .Add(new XmlQualifiedName(prefix + "_name4", "xmlns"), "");
 
                 return content;
             }
 
             var fullSyndicationCategory = new SyndicationCategory();
-            fullSyndicationCategory
-                .AttributeExtensions
+            fullSyndicationCategory.AttributeExtensions
                 .Add(new XmlQualifiedName("category_name1"), null);
-            fullSyndicationCategory
-                .AttributeExtensions
+            fullSyndicationCategory.AttributeExtensions
                 .Add(new XmlQualifiedName("category_name2", "category_namespace"), "");
-            fullSyndicationCategory
-                .AttributeExtensions
+            fullSyndicationCategory.AttributeExtensions
                 .Add(
                     new XmlQualifiedName("category_name3", "category_namespace"),
                     "category_value"
                 );
-            fullSyndicationCategory
-                .AttributeExtensions
+            fullSyndicationCategory.AttributeExtensions
                 .Add(new XmlQualifiedName("category_name4", "xmlns"), "");
 
             fullSyndicationCategory.ElementExtensions.Add(new ExtensionObject { Value = 10 });
@@ -240,21 +230,17 @@ namespace System.ServiceModel.Syndication.Tests
             fullSyndicationCategory.Scheme = "category_scheme";
 
             var attributeSyndicationCategory = new SyndicationCategory();
-            attributeSyndicationCategory
-                .AttributeExtensions
+            attributeSyndicationCategory.AttributeExtensions
                 .Add(new XmlQualifiedName("term"), "term_value");
             attributeSyndicationCategory.Name = "name";
 
             var fullSyndicationLink = new SyndicationLink();
             fullSyndicationLink.AttributeExtensions.Add(new XmlQualifiedName("link_name1"), null);
-            fullSyndicationLink
-                .AttributeExtensions
+            fullSyndicationLink.AttributeExtensions
                 .Add(new XmlQualifiedName("link_name2", "link_namespace"), "");
-            fullSyndicationLink
-                .AttributeExtensions
+            fullSyndicationLink.AttributeExtensions
                 .Add(new XmlQualifiedName("link_name3", "link_namespace"), "link_value");
-            fullSyndicationLink
-                .AttributeExtensions
+            fullSyndicationLink.AttributeExtensions
                 .Add(new XmlQualifiedName("link_name4", "xmlns"), "");
 
             fullSyndicationLink.BaseUri = new Uri("http://link_url.com");
@@ -272,17 +258,13 @@ namespace System.ServiceModel.Syndication.Tests
             fullSyndicationLink.Uri = new Uri("http://link_uri.com");
 
             var fullEnclosureLink = new SyndicationLink();
-            fullEnclosureLink
-                .AttributeExtensions
+            fullEnclosureLink.AttributeExtensions
                 .Add(new XmlQualifiedName("enclosure_name1"), null);
-            fullEnclosureLink
-                .AttributeExtensions
+            fullEnclosureLink.AttributeExtensions
                 .Add(new XmlQualifiedName("enclosure_name2", "enclosure_namespace"), "");
-            fullEnclosureLink
-                .AttributeExtensions
+            fullEnclosureLink.AttributeExtensions
                 .Add(new XmlQualifiedName("enclosure_name3", "enclosure_namespace"), "item_value");
-            fullEnclosureLink
-                .AttributeExtensions
+            fullEnclosureLink.AttributeExtensions
                 .Add(new XmlQualifiedName("enclosure_name4", "xmlns"), "");
 
             fullEnclosureLink.BaseUri = new Uri("http://link_url.com");
@@ -300,20 +282,16 @@ namespace System.ServiceModel.Syndication.Tests
             fullEnclosureLink.Uri = new Uri("http://enclosure_uri.com");
 
             var fullAlternateLink = new SyndicationLink();
-            fullAlternateLink
-                .AttributeExtensions
+            fullAlternateLink.AttributeExtensions
                 .Add(new XmlQualifiedName("alternate_name1"), null);
-            fullAlternateLink
-                .AttributeExtensions
+            fullAlternateLink.AttributeExtensions
                 .Add(new XmlQualifiedName("alternate_name2", "alternate_namespace"), "");
-            fullAlternateLink
-                .AttributeExtensions
+            fullAlternateLink.AttributeExtensions
                 .Add(
                     new XmlQualifiedName("alternate_name3", "alternate_namespace"),
                     "alternate_value"
                 );
-            fullAlternateLink
-                .AttributeExtensions
+            fullAlternateLink.AttributeExtensions
                 .Add(new XmlQualifiedName("alternate_name4", "xmlns"), "");
 
             fullAlternateLink.BaseUri = new Uri("http://alternate_url.com");
@@ -334,20 +312,16 @@ namespace System.ServiceModel.Syndication.Tests
             {
                 Uri = new Uri("http://link_uri.com"),
             };
-            attributeSyndicationLink
-                .AttributeExtensions
+            attributeSyndicationLink.AttributeExtensions
                 .Add(new XmlQualifiedName("href"), "link_href");
 
             var fullSyndicationItem = new SyndicationItem();
             fullSyndicationItem.AttributeExtensions.Add(new XmlQualifiedName("item_name1"), null);
-            fullSyndicationItem
-                .AttributeExtensions
+            fullSyndicationItem.AttributeExtensions
                 .Add(new XmlQualifiedName("item_name2", "item_namespace"), "");
-            fullSyndicationItem
-                .AttributeExtensions
+            fullSyndicationItem.AttributeExtensions
                 .Add(new XmlQualifiedName("item_name3", "item_namespace"), "item_value");
-            fullSyndicationItem
-                .AttributeExtensions
+            fullSyndicationItem.AttributeExtensions
                 .Add(new XmlQualifiedName("item_name4", "xmlns"), "");
 
             fullSyndicationItem.Authors.Add(new SyndicationPerson());
@@ -504,14 +478,11 @@ namespace System.ServiceModel.Syndication.Tests
 
             var attributeEnclosureLink = new SyndicationLink();
             attributeEnclosureLink.AttributeExtensions.Add(new XmlQualifiedName("length"), "100");
-            attributeEnclosureLink
-                .AttributeExtensions
+            attributeEnclosureLink.AttributeExtensions
                 .Add(new XmlQualifiedName("type"), "custom_type");
-            attributeEnclosureLink
-                .AttributeExtensions
+            attributeEnclosureLink.AttributeExtensions
                 .Add(new XmlQualifiedName("url"), "http://custom_url.com");
-            attributeEnclosureLink
-                .AttributeExtensions
+            attributeEnclosureLink.AttributeExtensions
                 .Add(new XmlQualifiedName("enclosure_name4", "xmlns"), "");
 
             attributeEnclosureLink.Length = 10;
@@ -590,8 +561,7 @@ namespace System.ServiceModel.Syndication.Tests
             ;
 
             var selfLinkFeed = new SyndicationFeed();
-            selfLinkFeed
-                .Links
+            selfLinkFeed.Links
                 .Add(
                     new SyndicationLink()
                     {
@@ -617,8 +587,7 @@ namespace System.ServiceModel.Syndication.Tests
 
             var selfAttributeLinkFeed = new SyndicationFeed();
             selfAttributeLinkFeed.AttributeExtensions.Add(new XmlQualifiedName("url"), "url_value");
-            selfAttributeLinkFeed
-                .Links
+            selfAttributeLinkFeed.Links
                 .Add(
                     new SyndicationLink()
                     {

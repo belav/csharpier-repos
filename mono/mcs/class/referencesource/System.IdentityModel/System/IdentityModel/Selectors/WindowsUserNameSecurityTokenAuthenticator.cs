@@ -37,8 +37,7 @@ namespace System.IdentityModel.Selectors
                 if (strings.Length != 2 || string.IsNullOrEmpty(strings[0]))
                 {
                     // Only support one slash and domain cannot be empty (consistent with windowslogon).
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgument(SR.GetString(SR.IncorrectUserNameFormat));
                 }
 
@@ -64,8 +63,7 @@ namespace System.IdentityModel.Selectors
                 )
                 {
                     int error = Marshal.GetLastWin32Error();
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new SecurityTokenValidationException(
                                 SR.GetString(SR.FailLogonUser, userName),

@@ -187,8 +187,7 @@ namespace System.ServiceModel.Channels
             );
             if (errorCode != UnsafeNativeMethods.ERROR_SUCCESS)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new Win32Exception(errorCode, SR.GetString(SR.PackageFullNameInvalid, name))
                     );

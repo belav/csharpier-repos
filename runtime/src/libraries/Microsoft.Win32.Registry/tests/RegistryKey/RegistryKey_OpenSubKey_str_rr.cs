@@ -29,8 +29,7 @@ namespace Microsoft.Win32.RegistryTests
             TestRegistryKey.SetValue(name, 42);
             TestRegistryKey.CreateSubKey(name).Dispose();
             using (
-                var rk = Registry
-                    .CurrentUser
+                var rk = Registry.CurrentUser
                     .OpenSubKey(name: TestRegistryKeyName, rights: RegistryRights.ReadKey)
             )
             {

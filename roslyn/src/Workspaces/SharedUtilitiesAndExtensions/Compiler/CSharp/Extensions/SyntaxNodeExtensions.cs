@@ -726,8 +726,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             TextSpan span,
             CancellationToken cancellationToken
         ) =>
-            CSharpSyntaxFacts
-                .Instance
+            CSharpSyntaxFacts.Instance
                 .ContainsInterleavedDirective(span, syntaxNode, cancellationToken);
 
         public static bool ContainsInterleavedDirective(
@@ -910,8 +909,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             out ImmutableArray<SyntaxTrivia> strippedTrivia
         )
             where TSyntaxNode : SyntaxNode =>
-            CSharpFileBannerFacts
-                .Instance
+            CSharpFileBannerFacts.Instance
                 .GetNodeWithoutLeadingBlankLines(node, out strippedTrivia);
 
         public static ImmutableArray<SyntaxTrivia> GetLeadingBannerAndPreprocessorDirectives<TSyntaxNode>(
@@ -924,8 +922,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             this TSyntaxNode node
         )
             where TSyntaxNode : SyntaxNode =>
-            CSharpFileBannerFacts
-                .Instance
+            CSharpFileBannerFacts.Instance
                 .GetNodeWithoutLeadingBannerAndPreprocessorDirectives(node);
 
         public static TSyntaxNode GetNodeWithoutLeadingBannerAndPreprocessorDirectives<TSyntaxNode>(
@@ -933,8 +930,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             out ImmutableArray<SyntaxTrivia> strippedTrivia
         )
             where TSyntaxNode : SyntaxNode =>
-            CSharpFileBannerFacts
-                .Instance
+            CSharpFileBannerFacts.Instance
                 .GetNodeWithoutLeadingBannerAndPreprocessorDirectives(node, out strippedTrivia);
 
         public static bool IsVariableDeclaratorValue(this SyntaxNode node) =>

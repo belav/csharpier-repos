@@ -45,8 +45,7 @@ namespace System.IdentityModel
 
             if (0 == encoded.Length)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument("encoded", SR.GetString(SR.ID6045));
             }
 
@@ -65,8 +64,7 @@ namespace System.IdentityModel
             }
             catch (CryptographicException e)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ID1073), e));
             }
 
@@ -89,8 +87,7 @@ namespace System.IdentityModel
 
             if (0 == value.Length)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument("value", SR.GetString(SR.ID6044));
             }
 
@@ -106,8 +103,7 @@ namespace System.IdentityModel
             }
             catch (CryptographicException e)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ID1074), e));
             }
 

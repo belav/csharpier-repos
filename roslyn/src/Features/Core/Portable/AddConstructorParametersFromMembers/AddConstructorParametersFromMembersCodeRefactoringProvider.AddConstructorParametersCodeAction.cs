@@ -113,8 +113,7 @@ namespace Microsoft.CodeAnalysis.AddConstructorParametersFromMembers
             {
                 get
                 {
-                    var parameters = _constructorCandidate
-                        .Constructor
+                    var parameters = _constructorCandidate.Constructor
                         .Parameters
                         .Select(p => p.ToDisplayString(SimpleFormat));
                     var parameterString = string.Join(", ", parameters);

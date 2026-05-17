@@ -41,11 +41,12 @@ namespace System.Runtime
                     case OperationState.PendingCompletion:
                         if (this.state == OperationState.PendingCompletion)
                         {
-                            throw Fx.Exception.AsError(
-                                new InvalidOperationException(
-                                    InternalSR.AsyncEventArgsCompletionPending(GetType())
-                                )
-                            );
+                            throw Fx.Exception
+                                .AsError(
+                                    new InvalidOperationException(
+                                        InternalSR.AsyncEventArgsCompletionPending(GetType())
+                                    )
+                                );
                         }
 #if DEBUG
                         if (!Fx.FastDebug)
@@ -58,11 +59,12 @@ namespace System.Runtime
                     case OperationState.CompletedSynchronously:
                         if (this.state != OperationState.PendingCompletion)
                         {
-                            throw Fx.Exception.AsError(
-                                new InvalidOperationException(
-                                    InternalSR.AsyncEventArgsCompletedTwice(GetType())
-                                )
-                            );
+                            throw Fx.Exception
+                                .AsError(
+                                    new InvalidOperationException(
+                                        InternalSR.AsyncEventArgsCompletedTwice(GetType())
+                                    )
+                                );
                         }
 #if DEBUG
                         if (!Fx.FastDebug)

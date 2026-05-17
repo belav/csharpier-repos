@@ -25,14 +25,12 @@ namespace Microsoft.Interop
 
         public void Initialize(IncrementalGeneratorInitializationContext context)
         {
-            var unsafeCodeIsEnabled = context
-                .CompilationProvider
+            var unsafeCodeIsEnabled = context.CompilationProvider
                 .Select(
                     (comp, ct) => comp.Options is CSharpCompilationOptions { AllowUnsafe: true }
                 ); // Unsafe code enabled
             // Get all types with the [GeneratedComClassAttribute] attribute.
-            var attributedClassesOrDiagnostics = context
-                .SyntaxProvider
+            var attributedClassesOrDiagnostics = context.SyntaxProvider
                 .ForAttributeWithMetadataName(
                     TypeNames.GeneratedComClassAttribute,
                     static (node, ct) => node is ClassDeclarationSyntax,
@@ -84,8 +82,7 @@ namespace Microsoft.Interop
                                         generatedComInterfaceAttribute
                                     );
                                 if (
-                                    attributeData
-                                        .Options
+                                    attributeData.Options
                                         .HasFlag(ComInterfaceOptions.ManagedObjectWrapper)
                                 )
                                 {
@@ -260,8 +257,7 @@ namespace Microsoft.Interop
                     AssignmentStatement(
                         IdentifierName(detailsTempLocal),
                         MethodInvocation(
-                            TypeSyntaxes
-                                .StrategyBasedComWrappers
+                            TypeSyntaxes.StrategyBasedComWrappers
                                 .Dot(IdentifierName("DefaultIUnknownInterfaceDetailsStrategy")),
                             IdentifierName("GetIUnknownDerivedDetails"),
                             Argument(

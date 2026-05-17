@@ -109,8 +109,7 @@ namespace System.ServiceModel.Transactions
             }
             catch (XmlException e)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new TransactionException(SR.FailedToDeserializeIssuedToken, e)
                     );

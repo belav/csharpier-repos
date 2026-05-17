@@ -71,8 +71,7 @@ namespace System.ComponentModel.Tests
         public static void ConvertFrom_WithContext_Negative()
         {
             Assert.Throws<FormatException>(() =>
-                EnumConverterTests
-                    .s_someEnumConverter
+                EnumConverterTests.s_someEnumConverter
                     .ConvertFrom(TypeConverterTests.s_context, null, "<random string>")
             );
         }
@@ -88,8 +87,7 @@ namespace System.ComponentModel.Tests
                 EnumConverterTests.s_someEnumConverter
             );
 
-            object actual = EnumConverterTests
-                .s_someEnumConverter
+            object actual = EnumConverterTests.s_someEnumConverter
                 .ConvertTo(
                     TypeConverterTests.s_context,
                     CultureInfo.InvariantCulture,
@@ -99,8 +97,7 @@ namespace System.ComponentModel.Tests
             VerifyArraysEqual<SomeEnum>(new SomeEnum[1] { SomeEnum.Sub }, actual);
 
             var actualInstanceDescriptor = (InstanceDescriptor)
-                EnumConverterTests
-                    .s_someEnumConverter
+                EnumConverterTests.s_someEnumConverter
                     .ConvertTo(SomeEnum.Add, typeof(InstanceDescriptor));
             var expectedMemberInfo = typeof(SomeEnum).GetField(nameof(SomeEnum.Add));
             Assert.Equal(expectedMemberInfo, actualInstanceDescriptor.MemberInfo);
@@ -120,8 +117,7 @@ namespace System.ComponentModel.Tests
                 EnumConverterTests.s_someFlagsEnumConverter
             );
 
-            object actual = EnumConverterTests
-                .s_someFlagsEnumConverter
+            object actual = EnumConverterTests.s_someFlagsEnumConverter
                 .ConvertTo(
                     TypeConverterTests.s_context,
                     CultureInfo.InvariantCulture,
@@ -133,8 +129,7 @@ namespace System.ComponentModel.Tests
                 actual
             );
 
-            actual = EnumConverterTests
-                .s_someFlagsEnumConverter
+            actual = EnumConverterTests.s_someFlagsEnumConverter
                 .ConvertTo(
                     TypeConverterTests.s_context,
                     null,
@@ -147,8 +142,7 @@ namespace System.ComponentModel.Tests
             );
 
             var actualInstanceDescriptor = (InstanceDescriptor)
-                EnumConverterTests
-                    .s_someFlagsEnumConverter
+                EnumConverterTests.s_someFlagsEnumConverter
                     .ConvertTo(
                         SomeFlagsEnum.Option1 | SomeFlagsEnum.Option2,
                         typeof(InstanceDescriptor)
@@ -179,8 +173,7 @@ namespace System.ComponentModel.Tests
             AssertExtensions.Throws<ArgumentException>(
                 null,
                 () =>
-                    EnumConverterTests
-                        .s_someEnumConverter
+                    EnumConverterTests.s_someEnumConverter
                         .ConvertTo(TypeConverterTests.s_context, null, 3, typeof(string))
             );
             AssertExtensions.Throws<ArgumentException>(

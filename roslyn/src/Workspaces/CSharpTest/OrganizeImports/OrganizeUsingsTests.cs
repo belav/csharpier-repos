@@ -31,8 +31,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Workspaces.UnitTests.OrganizeImports
         )
         {
             using var workspace = new AdhocWorkspace();
-            var project = workspace
-                .CurrentSolution
+            var project = workspace.CurrentSolution
                 .AddProject("Project", "Project.dll", LanguageNames.CSharp);
             var document = project.AddDocument(
                 "Document",

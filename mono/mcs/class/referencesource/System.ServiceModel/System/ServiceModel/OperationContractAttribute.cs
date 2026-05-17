@@ -33,8 +33,7 @@ namespace System.ServiceModel
                 }
                 if (value == "")
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentOutOfRangeException(
                                 "value",
@@ -69,8 +68,7 @@ namespace System.ServiceModel
             set
             {
                 if (!ProtectionLevelHelper.IsDefined(value))
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new ArgumentOutOfRangeException("value"));
                 this.protectionLevel = value;
                 this.hasProtectionLevel = true;
@@ -132,8 +130,7 @@ namespace System.ServiceModel
             {
                 if (!this.IsOneWay || !this.IsInitiating || methodInfo.GetParameters().Length > 0)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(

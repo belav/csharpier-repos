@@ -448,15 +448,17 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
                         // +-3 line of the line where primary span is on
                         const int AdditionalLineCountPerSide = 3;
 
-                        var startLine = line.Snapshot.GetLineFromLineNumber(
-                            Math.Max(0, line.LineNumber - AdditionalLineCountPerSide)
-                        );
-                        var endLine = line.Snapshot.GetLineFromLineNumber(
-                            Math.Min(
-                                line.Snapshot.LineCount - 1,
-                                line.LineNumber + AdditionalLineCountPerSide
-                            )
-                        );
+                        var startLine = line.Snapshot
+                            .GetLineFromLineNumber(
+                                Math.Max(0, line.LineNumber - AdditionalLineCountPerSide)
+                            );
+                        var endLine = line.Snapshot
+                            .GetLineFromLineNumber(
+                                Math.Min(
+                                    line.Snapshot.LineCount - 1,
+                                    line.LineNumber + AdditionalLineCountPerSide
+                                )
+                            );
 
                         return new SnapshotSpan(
                             line.Snapshot,

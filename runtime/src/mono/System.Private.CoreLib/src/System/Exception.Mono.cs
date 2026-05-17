@@ -74,8 +74,7 @@ namespace System
             {
                 Exception self = this;
                 MonoStackFrame[]? frames = null;
-                Diagnostics
-                    .StackTrace
+                Diagnostics.StackTrace
                     .GetTrace(
                         ObjectHandleOnStack.Create(ref self),
                         ObjectHandleOnStack.Create(ref frames),

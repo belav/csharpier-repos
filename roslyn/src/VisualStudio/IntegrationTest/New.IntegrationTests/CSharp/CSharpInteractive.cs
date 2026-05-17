@@ -14,53 +14,45 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
         [IdeFact]
         public async Task BclMathCall()
         {
-            await TestServices
-                .InteractiveWindow
+            await TestServices.InteractiveWindow
                 .SubmitTextAsync("Math.Sin(1)", HangMitigatingCancellationToken);
-            await TestServices
-                .InteractiveWindow
+            await TestServices.InteractiveWindow
                 .WaitForLastReplOutputAsync("0.8414709848078965", HangMitigatingCancellationToken);
         }
 
         [IdeFact]
         public async Task BclConsoleCall()
         {
-            await TestServices
-                .InteractiveWindow
+            await TestServices.InteractiveWindow
                 .SubmitTextAsync(
                     @"Console.WriteLine(""Hello, World!"");",
                     HangMitigatingCancellationToken
                 );
-            await TestServices
-                .InteractiveWindow
+            await TestServices.InteractiveWindow
                 .WaitForLastReplOutputAsync("Hello, World!", HangMitigatingCancellationToken);
         }
 
         [IdeFact]
         public async Task ForStatement()
         {
-            await TestServices
-                .InteractiveWindow
+            await TestServices.InteractiveWindow
                 .SubmitTextAsync(
                     "for (int i = 0; i < 10; i++) Console.WriteLine(i * i);",
                     HangMitigatingCancellationToken
                 );
-            await TestServices
-                .InteractiveWindow
+            await TestServices.InteractiveWindow
                 .WaitForLastReplOutputContainsAsync($"{81}", HangMitigatingCancellationToken);
         }
 
         [IdeFact]
         public async Task ForEachStatement()
         {
-            await TestServices
-                .InteractiveWindow
+            await TestServices.InteractiveWindow
                 .SubmitTextAsync(
                     @"foreach (var f in System.IO.Directory.GetFiles(@""c:\windows"")) Console.WriteLine($""{f}"".ToLower());",
                     HangMitigatingCancellationToken
                 );
-            await TestServices
-                .InteractiveWindow
+            await TestServices.InteractiveWindow
                 .WaitForLastReplOutputContainsAsync(
                     @"c:\windows\win.ini",
                     HangMitigatingCancellationToken
@@ -70,8 +62,7 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
         [IdeFact]
         public async Task TopLevelMethod()
         {
-            await TestServices
-                .InteractiveWindow
+            await TestServices.InteractiveWindow
                 .SubmitTextAsync(
                     @"int Fac(int x)
 {
@@ -80,16 +71,14 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
 Fac(4)",
                     HangMitigatingCancellationToken
                 );
-            await TestServices
-                .InteractiveWindow
+            await TestServices.InteractiveWindow
                 .WaitForLastReplOutputAsync($"{24}", HangMitigatingCancellationToken);
         }
 
         [IdeFact]
         public async Task WpfInteractionAsync()
         {
-            await TestServices
-                .InteractiveWindow
+            await TestServices.InteractiveWindow
                 .SubmitTextAsync(
                     @"#r ""WindowsBase""
 #r ""PresentationCore""
@@ -98,8 +87,7 @@ Fac(4)",
                     HangMitigatingCancellationToken
                 );
 
-            await TestServices
-                .InteractiveWindow
+            await TestServices.InteractiveWindow
                 .SubmitTextAsync(
                     @"using System.Windows;
 using System.Windows.Controls;
@@ -108,8 +96,7 @@ using System.Windows.Media.Imaging;",
                     HangMitigatingCancellationToken
                 );
 
-            await TestServices
-                .InteractiveWindow
+            await TestServices.InteractiveWindow
                 .SubmitTextAsync(
                     @"var w = new Window();
 w.Title = ""Hello World"";
@@ -124,8 +111,7 @@ w.Visibility = Visibility.Visible;",
 
             var testValue = Guid.NewGuid();
 
-            await TestServices
-                .InteractiveWindow
+            await TestServices.InteractiveWindow
                 .SubmitTextAsync(
                     $@"var b = new Button();
 b.Content = ""{testValue}"";
@@ -143,39 +129,32 @@ w.Content = g;",
                 recursive: true
             );
 
-            await TestServices
-                .InteractiveWindow
+            await TestServices.InteractiveWindow
                 .WaitForLastReplOutputAsync("Hello, World!", HangMitigatingCancellationToken);
-            await TestServices
-                .InteractiveWindow
+            await TestServices.InteractiveWindow
                 .SubmitTextAsync("b = null; w.Close(); w = null;", HangMitigatingCancellationToken);
         }
 
         [IdeFact]
         public async Task TypingHelpDirectiveWorks()
         {
-            await TestServices
-                .InteractiveWindow
+            await TestServices.InteractiveWindow
                 .ShowWindowAsync(waitForPrompt: true, HangMitigatingCancellationToken);
 
             // Directly type #help, rather than sending it through VisualStudio.InteractiveWindow.SubmitText. We want to actually test
             // that completion doesn't interfere and there aren't problems with the content-type switching.
-            await TestServices
-                .Input
+            await TestServices.Input
                 .SendWithoutActivateAsync("#help", HangMitigatingCancellationToken);
 
             Assert.EndsWith(
                 "#help",
-                await TestServices
-                    .InteractiveWindow
+                await TestServices.InteractiveWindow
                     .GetReplTextAsync(HangMitigatingCancellationToken)
             );
 
-            await TestServices
-                .Input
+            await TestServices.Input
                 .SendWithoutActivateAsync("\n", HangMitigatingCancellationToken);
-            await TestServices
-                .InteractiveWindow
+            await TestServices.InteractiveWindow
                 .WaitForLastReplOutputContainsAsync(
                     "REPL commands",
                     HangMitigatingCancellationToken

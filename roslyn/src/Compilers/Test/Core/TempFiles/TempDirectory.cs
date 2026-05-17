@@ -75,8 +75,7 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
         /// </summary>
         public TempFile CopyFile(string originalPath, string name = null)
         {
-            string filePath = System
-                .IO
+            string filePath = System.IO
                 .Path
                 .Combine(_path, name ?? System.IO.Path.GetFileName(originalPath));
             File.Copy(originalPath, filePath);

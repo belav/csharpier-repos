@@ -75,8 +75,7 @@ namespace System.ServiceModel.Routing
             this.ChannelExtension = channel.Extensions.Find<RoutingChannelExtension>();
             if (this.ChannelExtension == null)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(new ConfigurationErrorsException(SR2.RoutingExtensionNotFound));
             }
 
@@ -191,11 +190,8 @@ namespace System.ServiceModel.Routing
                 {
                     this.perMessageChannels = new SessionChannels(this.ChannelExtension.ActivityID);
                 }
-                return this.perMessageChannels.GetOrCreateClient<TContract>(
-                    endpointTrait,
-                    this,
-                    impersonating
-                );
+                return this.perMessageChannels
+                    .GetOrCreateClient<TContract>(endpointTrait, this, impersonating);
             }
             else
             {
@@ -229,11 +225,8 @@ namespace System.ServiceModel.Routing
             if (this.perMessageChannels != null)
             {
                 //This is for impersonation, thus it's supposed to complete sync
-                IAsyncResult result = this.perMessageChannels.BeginClose(
-                    this.ChannelExtension.OperationTimeout,
-                    null,
-                    null
-                );
+                IAsyncResult result = this.perMessageChannels
+                    .BeginClose(this.ChannelExtension.OperationTimeout, null, null);
                 this.perMessageChannels.EndClose(result);
                 this.perMessageChannels = null;
             }

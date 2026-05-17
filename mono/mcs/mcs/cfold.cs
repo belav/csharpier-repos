@@ -423,14 +423,15 @@ namespace Mono.CSharp
 
                         if (lt == rt)
                         {
-                            ec.Report.Error(
-                                34,
-                                loc,
-                                "Operator `{0}' is ambiguous on operands of type `{1}' and `{2}'",
-                                "+",
-                                lt.GetSignatureForError(),
-                                rt.GetSignatureForError()
-                            );
+                            ec.Report
+                                .Error(
+                                    34,
+                                    loc,
+                                    "Operator `{0}' is ambiguous on operands of type `{1}' and `{2}'",
+                                    "+",
+                                    lt.GetSignatureForError(),
+                                    rt.GetSignatureForError()
+                                );
                             return null;
                         }
 

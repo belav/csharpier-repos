@@ -33,8 +33,7 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings
 
             protected override void OnStartSearch()
             {
-                _ = _threadingContext
-                    .JoinableTaskFactory
+                _ = _threadingContext.JoinableTaskFactory
                     .RunAsync(async () =>
                     {
                         await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync();
@@ -61,8 +60,7 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings
 
             protected override void OnStopSearch()
             {
-                _ = _threadingContext
-                    .JoinableTaskFactory
+                _ = _threadingContext.JoinableTaskFactory
                     .RunAsync(async () =>
                     {
                         await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync();

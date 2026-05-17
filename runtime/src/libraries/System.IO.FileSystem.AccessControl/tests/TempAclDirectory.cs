@@ -23,10 +23,11 @@ namespace System.IO
             [CallerLineNumber] int lineNumber = 0
         )
             : base(
-                IO.Path.Combine(
-                    IO.Path.GetTempPath(),
-                    PathGenerator.GenerateTestFileName(null, memberName, lineNumber)
-                )
+                IO.Path
+                    .Combine(
+                        IO.Path.GetTempPath(),
+                        PathGenerator.GenerateTestFileName(null, memberName, lineNumber)
+                    )
             ) { }
 
         /// <summary>

@@ -44,8 +44,7 @@ namespace System.Security.Cryptography.X509Certificates
                 else if (_storeName == StoreName.Disallowed)
                 {
                     using (
-                        SafeCFArrayHandle certs = Interop
-                            .AppleCrypto
+                        SafeCFArrayHandle certs = Interop.AppleCrypto
                             .StoreEnumerateDisallowed(_location)
                     )
                     {

@@ -31,8 +31,7 @@ namespace System.IdentityModel.Tokens
             )
                 return new LocalIdKeyIdentifierClause(this.Id, this.GetType()) as T;
 
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(
                     new NotSupportedException(
                         SR.GetString(

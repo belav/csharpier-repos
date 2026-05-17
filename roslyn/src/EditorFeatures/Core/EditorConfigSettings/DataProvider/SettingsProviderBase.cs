@@ -69,8 +69,7 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.DataProvider
                 return;
             }
 
-            var configFileDirectoryOptions = project
-                .State
+            var configFileDirectoryOptions = project.State
                 .GetAnalyzerOptionsForPath(givenFolder.FullName, CancellationToken.None);
             var projectDirectoryOptions = project.GetAnalyzerConfigOptions();
 
@@ -133,13 +132,11 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.DataProvider
 
             public override NamingStylePreferences GetNamingStylePreferences()
             {
-                var preferences = _fileDirectoryConfigData
-                    .ConfigOptions
+                var preferences = _fileDirectoryConfigData.ConfigOptions
                     .GetNamingStylePreferences();
                 if (preferences.IsEmpty && _projectDirectoryConfigData.HasValue)
                 {
-                    preferences = _projectDirectoryConfigData
-                        .Value
+                    preferences = _projectDirectoryConfigData.Value
                         .ConfigOptions
                         .GetNamingStylePreferences();
                 }
@@ -170,8 +167,7 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.DataProvider
                 if (
                     match.Success
                     && match.Groups["key"].Value is string isolatedKey
-                    && _projectDirectoryConfigData
-                        .Value
+                    && _projectDirectoryConfigData.Value
                         .TreeOptions
                         .TryGetValue(isolatedKey, out var severity)
                 )
@@ -204,11 +200,9 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.DataProvider
                     {
                         var diagnosticKey = "dotnet_diagnostic." + key + ".severity";
                         if (
-                            !_fileDirectoryConfigData
-                                .ConfigOptions
+                            !_fileDirectoryConfigData.ConfigOptions
                                 .TryGetValue(diagnosticKey, out _)
-                            && !_projectDirectoryConfigData
-                                .Value
+                            && !_projectDirectoryConfigData.Value
                                 .AnalyzerOptions
                                 .TryGetKey(diagnosticKey, out _)
                         )

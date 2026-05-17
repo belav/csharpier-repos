@@ -74,8 +74,7 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             )
             {
                 // OK, we have a property in a record.  See if we can find a primary constructor that has a parameter that synthesized this
-                var containingTypeSyntaxes = containingType
-                    .DeclaringSyntaxReferences
+                var containingTypeSyntaxes = containingType.DeclaringSyntaxReferences
                     .SelectAsArray(r => r.GetSyntax(cancellationToken));
                 foreach (var constructor in containingType.Constructors)
                 {
@@ -273,8 +272,7 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
 
             var syntaxFacts = state.SyntaxFacts;
 
-            var indexerReferenceExpressions = state
-                .Root
+            var indexerReferenceExpressions = state.Root
                 .DescendantNodes(descendIntoTrivia: true)
                 .Where(node =>
                     syntaxFacts.IsElementAccessExpression(node)
@@ -294,8 +292,7 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
                 if (!matched)
                     continue;
 
-                var location = state
-                    .SyntaxTree
+                var location = state.SyntaxTree
                     .GetLocation(new TextSpan(indexerReference.SpanStart, 0));
                 var symbolUsageInfo = GetSymbolUsageInfo(node, state, cancellationToken);
 
@@ -438,8 +435,7 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
         )
         {
             // For an ElementAccessExpression the indexer we are looking for is the argumentList component.
-            state
-                .SyntaxFacts
+            state.SyntaxFacts
                 .GetPartsOfElementAccessExpression(
                     node,
                     out var expression,

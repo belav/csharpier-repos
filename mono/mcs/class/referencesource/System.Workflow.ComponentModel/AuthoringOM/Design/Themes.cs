@@ -752,12 +752,10 @@ namespace System.Workflow.ComponentModel.Design
                     if (themeAttrib.Xml.Length > 0)
                     {
                         //First check if the theme initializer is obtained from resource as a manifest
-                        Stream stream = designerType
-                            .Assembly
+                        Stream stream = designerType.Assembly
                             .GetManifestResourceStream(designerType, themeAttrib.Xml);
                         if (stream == null)
-                            stream = designerType
-                                .Assembly
+                            stream = designerType.Assembly
                                 .GetManifestResourceStream(
                                     WorkflowTheme.ThemeResourceNS + themeAttrib.Xml
                                 );
@@ -781,8 +779,7 @@ namespace System.Workflow.ComponentModel.Design
                                     (
                                         (IDesignerSerializationManager)serializationManager
                                     ).AddSerializationProvider(themeSerializationProvider);
-                                    ((IDesignerSerializationManager)serializationManager)
-                                        .Context
+                                    ((IDesignerSerializationManager)serializationManager).Context
                                         .Push(this);
                                     WorkflowMarkupSerializer xomlSerializer =
                                         new WorkflowMarkupSerializer();
@@ -792,8 +789,7 @@ namespace System.Workflow.ComponentModel.Design
 
                                     if (
                                         designerTheme != null
-                                        && !themeAttrib
-                                            .DesignerThemeType
+                                        && !themeAttrib.DesignerThemeType
                                             .IsAssignableFrom(designerTheme.GetType())
                                     )
                                     {

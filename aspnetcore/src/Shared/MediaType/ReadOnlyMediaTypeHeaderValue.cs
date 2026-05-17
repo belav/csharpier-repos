@@ -410,10 +410,8 @@ internal readonly struct ReadOnlyMediaTypeHeaderValue
     private bool MatchesSubtypeWithoutSuffix(ReadOnlyMediaTypeHeaderValue set)
     {
         return set.MatchesAllSubTypesWithoutSuffix
-            || set.SubTypeWithoutSuffix.Equals(
-                SubTypeWithoutSuffix,
-                StringComparison.OrdinalIgnoreCase
-            );
+            || set.SubTypeWithoutSuffix
+                .Equals(SubTypeWithoutSuffix, StringComparison.OrdinalIgnoreCase);
     }
 
     private bool MatchesSubtypeSuffix(ReadOnlyMediaTypeHeaderValue set)

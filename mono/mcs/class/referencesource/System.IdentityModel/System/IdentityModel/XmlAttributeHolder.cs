@@ -100,8 +100,7 @@ namespace System.IdentityModel
             int byteCount = s.Length * sizeof(char);
             if (byteCount > maxSizeOfHeaders)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(SR.GetString(SR.XmlBufferQuotaExceeded))
                     );

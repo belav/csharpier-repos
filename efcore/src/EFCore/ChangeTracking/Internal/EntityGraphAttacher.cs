@@ -141,8 +141,7 @@ public class EntityGraphAttacher : IEntityGraphAttacher
         var (isGenerated, isSet) = internalEntityEntry.IsKeySet;
 
         if (
-            internalEntityEntry
-                .StateManager
+            internalEntityEntry.StateManager
                 .ResolveToExistingEntry(
                     internalEntityEntry,
                     node.InboundNavigation,
@@ -192,8 +191,7 @@ public class EntityGraphAttacher : IEntityGraphAttacher
         var (isGenerated, isSet) = internalEntityEntry.IsKeySet;
 
         if (
-            internalEntityEntry
-                .StateManager
+            internalEntityEntry.StateManager
                 .ResolveToExistingEntry(
                     internalEntityEntry,
                     node.InboundNavigation,

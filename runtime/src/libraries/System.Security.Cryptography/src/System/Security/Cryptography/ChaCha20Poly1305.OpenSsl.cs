@@ -21,8 +21,7 @@ namespace System.Security.Cryptography
             _ctxHandle = Interop.Crypto.EvpCipherCreatePartial(GetCipher(key.Length * 8));
 
             Interop.Crypto.CheckValidOpenSslHandle(_ctxHandle);
-            Interop
-                .Crypto
+            Interop.Crypto
                 .EvpCipherSetKeyAndIV(
                     _ctxHandle,
                     key,
@@ -39,8 +38,7 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> associatedData = default
         )
         {
-            Interop
-                .Crypto
+            Interop.Crypto
                 .EvpCipherSetKeyAndIV(
                     _ctxHandle,
                     Span<byte>.Empty,
@@ -51,8 +49,7 @@ namespace System.Security.Cryptography
             if (associatedData.Length != 0)
             {
                 if (
-                    !Interop
-                        .Crypto
+                    !Interop.Crypto
                         .EvpCipherUpdate(_ctxHandle, Span<byte>.Empty, out _, associatedData)
                 )
                 {
@@ -61,8 +58,7 @@ namespace System.Security.Cryptography
             }
 
             if (
-                !Interop
-                    .Crypto
+                !Interop.Crypto
                     .EvpCipherUpdate(
                         _ctxHandle,
                         ciphertext,
@@ -75,8 +71,7 @@ namespace System.Security.Cryptography
             }
 
             if (
-                !Interop
-                    .Crypto
+                !Interop.Crypto
                     .EvpCipherFinalEx(
                         _ctxHandle,
                         ciphertext.Slice(ciphertextBytesWritten),
@@ -108,8 +103,7 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> associatedData
         )
         {
-            Interop
-                .Crypto
+            Interop.Crypto
                 .EvpCipherSetKeyAndIV(
                     _ctxHandle,
                     ReadOnlySpan<byte>.Empty,
@@ -120,8 +114,7 @@ namespace System.Security.Cryptography
             if (associatedData.Length != 0)
             {
                 if (
-                    !Interop
-                        .Crypto
+                    !Interop.Crypto
                         .EvpCipherUpdate(_ctxHandle, Span<byte>.Empty, out _, associatedData)
                 )
                 {
@@ -130,8 +123,7 @@ namespace System.Security.Cryptography
             }
 
             if (
-                !Interop
-                    .Crypto
+                !Interop.Crypto
                     .EvpCipherUpdate(
                         _ctxHandle,
                         plaintext,
@@ -146,8 +138,7 @@ namespace System.Security.Cryptography
             Interop.Crypto.EvpCipherSetAeadTag(_ctxHandle, tag);
 
             if (
-                !Interop
-                    .Crypto
+                !Interop.Crypto
                     .EvpCipherFinalEx(
                         _ctxHandle,
                         plaintext.Slice(plaintextBytesWritten),

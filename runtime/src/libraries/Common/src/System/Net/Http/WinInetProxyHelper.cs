@@ -150,8 +150,7 @@ namespace System.Net.Http
             {
                 _autoDetectionFailed = false;
                 if (
-                    Interop
-                        .WinHttp
+                    Interop.WinHttp
                         .WinHttpGetProxyForUrl(
                             sessionHandle!,
                             destination,

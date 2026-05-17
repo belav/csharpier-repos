@@ -73,8 +73,7 @@ namespace System.ServiceModel.Security
             bool completeSelf = false;
             try
             {
-                bool innerReceiveCompleted = thisResult
-                    .innerChannel
+                bool innerReceiveCompleted = thisResult.innerChannel
                     .EndTryReceive(result, out thisResult.message);
                 if (!innerReceiveCompleted)
                 {

@@ -43,8 +43,7 @@ CREATE SEQUENCE db2.CustomFacetsSequence
             Enumerable.Empty<string>(),
             dbModel =>
             {
-                var defaultSequence = dbModel
-                    .Sequences
+                var defaultSequence = dbModel.Sequences
                     .First(ds => ds.Name == "DefaultFacetsSequence");
                 Assert.Equal("dbo", defaultSequence.Schema);
                 Assert.Equal("DefaultFacetsSequence", defaultSequence.Name);
@@ -55,8 +54,7 @@ CREATE SEQUENCE db2.CustomFacetsSequence
                 Assert.Null(defaultSequence.MinValue);
                 Assert.Null(defaultSequence.MaxValue);
 
-                var customSequence = dbModel
-                    .Sequences
+                var customSequence = dbModel.Sequences
                     .First(ds => ds.Name == "CustomFacetsSequence");
                 Assert.Equal("db2", customSequence.Schema);
                 Assert.Equal("CustomFacetsSequence", customSequence.Name);
@@ -170,8 +168,7 @@ DROP SEQUENCE [HighDecimalSequence];"
     [ConditionalFact]
     public void Sequence_using_type_alias()
     {
-        Fixture
-            .TestStore
+        Fixture.TestStore
             .ExecuteNonQuery(
                 @"
 CREATE TYPE [dbo].[TestTypeAlias] FROM int;"
@@ -1030,8 +1027,7 @@ END;",
     [ConditionalFact]
     public void Column_with_type_alias_assigns_underlying_store_type()
     {
-        Fixture
-            .TestStore
+        Fixture.TestStore
             .ExecuteNonQuery(
                 @"
 CREATE TYPE dbo.TestTypeAlias FROM nvarchar(max);
@@ -1665,8 +1661,7 @@ CREATE TABLE RowversionType (
 
                 Assert.Equal(
                     "rowversion",
-                    dbModel
-                        .Tables
+                    dbModel.Tables
                         .Single(t => t.Name == "RowversionType")
                         .Columns
                         .Single(c => c.Name == "rowversionColumn")
@@ -3065,8 +3060,7 @@ CREATE TABLE DependentTable (
             Enumerable.Empty<string>(),
             dbModel =>
             {
-                var foreignKeys = dbModel
-                    .Tables
+                var foreignKeys = dbModel.Tables
                     .Single(t => t.Name == "DependentTable")
                     .ForeignKeys;
 
@@ -3258,8 +3252,7 @@ CREATE TABLE Blank (
             {
                 Assert.Empty(dbModel.Tables);
 
-                var message = Fixture
-                    .OperationReporter
+                var message = Fixture.OperationReporter
                     .Messages
                     .Single(m => m.Level == LogLevel.Warning)
                     .Message;
@@ -3287,8 +3280,7 @@ CREATE TABLE Blank (
             {
                 Assert.Empty(dbModel.Tables);
 
-                var message = Fixture
-                    .OperationReporter
+                var message = Fixture.OperationReporter
                     .Messages
                     .Single(m => m.Level == LogLevel.Warning)
                     .Message;
@@ -3320,8 +3312,7 @@ CREATE TABLE DependentTable (
             Enumerable.Empty<string>(),
             dbModel =>
             {
-                var message = Fixture
-                    .OperationReporter
+                var message = Fixture.OperationReporter
                     .Messages
                     .Single(m => m.Level == LogLevel.Warning)
                     .Message;
@@ -3352,8 +3343,7 @@ CREATE TABLE PrincipalTable (
             Enumerable.Empty<string>(),
             dbModel =>
             {
-                var level = Fixture
-                    .OperationReporter
+                var level = Fixture.OperationReporter
                     .Messages
                     .Single(m =>
                         m.Message
@@ -3403,8 +3393,7 @@ CREATE TABLE DependentTable (
             Enumerable.Empty<string>(),
             dbModel =>
             {
-                var level = Fixture
-                    .OperationReporter
+                var level = Fixture.OperationReporter
                     .Messages
                     .Single(m =>
                         m.Message
@@ -3437,8 +3426,7 @@ Id int PRIMARY KEY,
             Enumerable.Empty<string>(),
             dbModel =>
             {
-                var message = Fixture
-                    .OperationReporter
+                var message = Fixture.OperationReporter
                     .Messages
                     .SingleOrDefault(m =>
                         m.Message
@@ -3488,8 +3476,7 @@ DROP TABLE TestViewDefinition;"
 
         try
         {
-            var databaseModelFactory = SqlServerTestHelpers
-                .Instance
+            var databaseModelFactory = SqlServerTestHelpers.Instance
                 .CreateDesignServiceProvider(reporter: Fixture.OperationReporter)
                 .CreateScope()
                 .ServiceProvider

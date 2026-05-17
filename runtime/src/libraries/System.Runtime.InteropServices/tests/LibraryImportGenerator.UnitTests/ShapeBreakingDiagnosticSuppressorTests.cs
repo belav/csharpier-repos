@@ -211,8 +211,7 @@ namespace LibraryImportGenerator.UnitTests
                 }
                 """,
                 Diagnostic(
-                        ShapeBreakingDiagnosticSuppressor
-                            .MarkMethodsAsStaticSuppression
+                        ShapeBreakingDiagnosticSuppressor.MarkMethodsAsStaticSuppression
                             .SuppressedDiagnosticId,
                         DiagnosticSeverity.Info
                     )
@@ -248,8 +247,7 @@ namespace LibraryImportGenerator.UnitTests
                 }
                 """,
                 Diagnostic(
-                        ShapeBreakingDiagnosticSuppressor
-                            .MarkMethodsAsStaticSuppression
+                        ShapeBreakingDiagnosticSuppressor.MarkMethodsAsStaticSuppression
                             .SuppressedDiagnosticId,
                         DiagnosticSeverity.Info
                     )

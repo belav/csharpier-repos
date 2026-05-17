@@ -482,8 +482,7 @@ namespace System.Management
 
         static WmiNetUtilsHelper()
         {
-            RegistryKey netFrameworkSubKey = Registry
-                .LocalMachine
+            RegistryKey netFrameworkSubKey = Registry.LocalMachine
                 .OpenSubKey(@"SOFTWARE\Microsoft\.NETFramework\");
             string netFrameworkInstallRoot = (string)
                 netFrameworkSubKey?.GetValue(
@@ -1393,8 +1392,7 @@ namespace System.Management
                 threadParam.Options = new ConnectionOptions();
             }
 
-            string nsPath = threadParam
-                .prvpath
+            string nsPath = threadParam.prvpath
                 .GetNamespacePath(
                     (int)tag_WBEM_GET_TEXT_FLAGS.WBEMPATH_GET_SERVER_AND_NAMESPACE_ONLY
                 );
@@ -1406,8 +1404,7 @@ namespace System.Management
                 // path here as we do NOT want to trigger an
                 // IdentifierChanged event as a result of this set
 
-                nsPath = threadParam
-                    .prvpath
+                nsPath = threadParam.prvpath
                     .SetNamespacePath(ManagementPath.DefaultPath.Path, out _);
             }
 

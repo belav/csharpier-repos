@@ -89,8 +89,7 @@ namespace AppHost.Bundle.Tests
                 return;
 
             Manifest manifest;
-            string singleFile = sharedTestState
-                .SelfContainedApp
+            string singleFile = sharedTestState.SelfContainedApp
                 .Bundle(bundleOptions, out manifest);
 
             // Run the bundled app (extract files to <path>)
@@ -112,8 +111,7 @@ namespace AppHost.Bundle.Tests
                 )
             )
             {
-                var extractedDir = sharedTestState
-                    .SelfContainedApp
+                var extractedDir = sharedTestState.SelfContainedApp
                     .GetExtractionDir(extractionRoot.Location, manifest);
                 var extractedFiles = BundleHelper.GetExtractedFiles(manifest, bundleOptions);
                 extractedDir.Should().OnlyHaveFiles(extractedFiles);
@@ -281,8 +279,7 @@ namespace AppHost.Bundle.Tests
                 .And
                 .HaveStdOutContaining("Hello World");
 
-            DirectoryInfo expectedExtractDir = sharedTestState
-                .SelfContainedApp
+            DirectoryInfo expectedExtractDir = sharedTestState.SelfContainedApp
                 .GetExtractionDir(Path.Combine(home, ".net"), bundledApp.Manifest);
             var extractedFiles = BundleHelper.GetExtractedFiles(
                 bundledApp.Manifest,

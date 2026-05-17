@@ -165,8 +165,7 @@ namespace System.Globalization
             int count;
 #if TARGET_MACCATALYST || TARGET_IOS || TARGET_TVOS
             if (GlobalizationMode.Hybrid)
-                count = Interop
-                    .Globalization
+                count = Interop.Globalization
                     .GetCalendarsNative(localeName, calendars, calendars.Length);
             else
                 count = Interop.Globalization.GetCalendars(localeName, calendars, calendars.Length);
@@ -206,8 +205,7 @@ namespace System.Globalization
                 {
                     fixed (char* bufferPtr = buffer)
                     {
-                        return Interop
-                            .Globalization
+                        return Interop.Globalization
                             .GetCalendarInfo(locale, id, type, bufferPtr, buffer.Length);
                     }
                 },
@@ -549,8 +547,7 @@ namespace System.Globalization
             ref IcuEnumCalendarsData callbackContext
         )
         {
-            return Interop
-                .Globalization
+            return Interop.Globalization
                 .EnumCalendarInfo(
                     &EnumCalendarInfoCallback,
                     localeName,

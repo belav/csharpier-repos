@@ -532,8 +532,7 @@ namespace System.ServiceModel.Activation
                 )
                 {
                     // Wrap the exception into HttpException
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(
                             new HttpException(
                                 (int)HttpStatusCode.NotFound,
@@ -567,8 +566,7 @@ namespace System.ServiceModel.Activation
 
                 SetStatusCode((int)HttpStatusCode.InternalServerError);
                 SetStatusDescription(
-                    HttpChannelUtilities
-                        .StatusDescriptionStrings
+                    HttpChannelUtilities.StatusDescriptionStrings
                         .HttpStatusServiceActivationException
                 );
                 CompleteOperation(null);
@@ -698,8 +696,7 @@ namespace System.ServiceModel.Activation
             {
                 if (hostedException.WebEventCode == WebEventCodes.RuntimeErrorPostTooLarge)
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(
                             HttpInput.CreateHttpProtocolException(
                                 SR.Hosting_MaxRequestLengthExceeded,
@@ -711,8 +708,7 @@ namespace System.ServiceModel.Activation
                 }
                 else
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(
                             new CommunicationException(hostedException.Message, hostedException)
                         );
@@ -863,14 +859,12 @@ namespace System.ServiceModel.Activation
                 if (!Fx.IsFatal(exception))
                 {
                     // Log the exception.
-                    DiagnosticUtility
-                        .EventLog
+                    DiagnosticUtility.EventLog
                         .LogEvent(
                             TraceEventType.Error,
                             (ushort)System.Runtime.Diagnostics.EventLogCategory.WebHost,
                             (uint)
-                                System
-                                    .Runtime
+                                System.Runtime
                                     .Diagnostics
                                     .EventLogEventId
                                     .WebHostFailedToProcessRequest,
@@ -1019,8 +1013,7 @@ namespace System.ServiceModel.Activation
                     activationException
                 );
             }
-            DiagnosticUtility
-                .UnsafeEventLog
+            DiagnosticUtility.UnsafeEventLog
                 .UnsafeLogEvent(
                     TraceEventType.Error,
                     (ushort)System.Runtime.Diagnostics.EventLogCategory.WebHost,

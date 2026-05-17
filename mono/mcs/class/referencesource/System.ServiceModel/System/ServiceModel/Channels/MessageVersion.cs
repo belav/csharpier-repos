@@ -68,8 +68,7 @@ namespace System.ServiceModel.Channels
 
             if (addressingVersion == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("addressingVersion");
             }
 
@@ -89,8 +88,7 @@ namespace System.ServiceModel.Channels
                 }
                 else
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgument(
                             "addressingVersion",
                             SR.GetString(SR.AddressingVersionNotSupported, addressingVersion)
@@ -113,8 +111,7 @@ namespace System.ServiceModel.Channels
                 }
                 else
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgument(
                             "addressingVersion",
                             SR.GetString(SR.AddressingVersionNotSupported, addressingVersion)
@@ -129,8 +126,7 @@ namespace System.ServiceModel.Channels
                 }
                 else
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgument(
                             "addressingVersion",
                             SR.GetString(SR.AddressingVersionNotSupported, addressingVersion)
@@ -139,8 +135,7 @@ namespace System.ServiceModel.Channels
             }
             else
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(
                         "envelopeVersion",
                         SR.GetString(SR.EnvelopeVersionNotSupported, envelopeVersion)
@@ -232,8 +227,7 @@ namespace System.ServiceModel.Channels
             if (addressing == null)
             {
                 Fx.Assert("Invalid (null) addressing value");
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             String.Format(

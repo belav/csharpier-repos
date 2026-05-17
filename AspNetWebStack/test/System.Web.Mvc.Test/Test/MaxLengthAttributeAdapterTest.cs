@@ -14,8 +14,7 @@ namespace System.Web.Mvc.Test
         public void ClientRulesWithMaxLengthAttribute()
         {
             // Arrange
-            var metadata = ModelMetadataProviders
-                .Current
+            var metadata = ModelMetadataProviders.Current
                 .GetMetadataForProperty(() => null, typeof(string), "Length");
             var context = new ControllerContext();
             var attribute = new MaxLengthAttribute(10);
@@ -42,8 +41,7 @@ namespace System.Web.Mvc.Test
             // Arrange
             string propertyName = "Length";
             string message = "{0} must be at most {1}";
-            var metadata = ModelMetadataProviders
-                .Current
+            var metadata = ModelMetadataProviders.Current
                 .GetMetadataForProperty(() => null, typeof(string[]), propertyName);
             var context = new ControllerContext();
             var attribute = new MaxLengthAttribute(5) { ErrorMessage = message };

@@ -221,8 +221,7 @@ namespace System.Web.Compilation
                 HandleProxyGenerationErrors(mapFile.LoadErrors);
 
                 // We always use C# for the generated proxy
-                CodeDomProvider provider = System
-                    .CodeDom
+                CodeDomProvider provider = System.CodeDom
                     .Compiler
                     .CodeDomProvider
                     .CreateProvider("c#");
@@ -691,8 +690,7 @@ namespace System.Web.Compilation
             }
             fileMap.VirtualDirectories.Add("/", mapping);
 
-            return System
-                .Web
+            return System.Web
                 .Configuration
                 .WebConfigurationManager
                 .OpenMappedWebConfiguration(
@@ -745,8 +743,7 @@ namespace System.Web.Compilation
                 foreach (System.Reflection.Assembly assembly in ReferencedAssemblies)
                 {
                     if (
-                        System
-                            .Reflection
+                        System.Reflection
                             .AssemblyName
                             .ReferenceMatchesDefinition(assemblyToLookFor, assembly.GetName())
                     )

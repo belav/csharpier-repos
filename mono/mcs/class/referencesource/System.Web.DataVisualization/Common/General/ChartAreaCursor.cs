@@ -945,8 +945,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
                     Series axisSeries = null;
                     if (_axis.axisType == AxisName.X || _axis.axisType == AxisName.X2)
                     {
-                        List<string> seriesArray = _axis
-                            .ChartArea
+                        List<string> seriesArray = _axis.ChartArea
                             .GetXAxesSeries(
                                 (_axis.axisType == AxisName.X)
                                     ? AxisType.Primary

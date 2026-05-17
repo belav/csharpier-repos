@@ -116,8 +116,7 @@ public class CosmosProjectionBindingExpressionVisitor : ExpressionVisitor
                     }
 
                     if (
-                        parameterExpression
-                            .Name
+                        parameterExpression.Name
                             ?.StartsWith(
                                 QueryCompilationContext.QueryParameterPrefix,
                                 StringComparison.Ordinal
@@ -688,8 +687,7 @@ public class CosmosProjectionBindingExpressionVisitor : ExpressionVisitor
 
                         lambda = Expression.Lambda(Visit(lambda.Body), lambda.Parameters);
                         return Expression.Call(
-                            EnumerableMethods
-                                .Select
+                            EnumerableMethods.Select
                                 .MakeGenericMethod(method.GetGenericArguments()),
                             shaper,
                             lambda

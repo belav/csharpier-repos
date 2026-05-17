@@ -82,11 +82,9 @@ namespace System.Web.Management
             wmiData.eventDetailCode = eventRaised.EventDetailCode;
             wmiData.eventTime = WmiFormatTime(eventRaised.EventTime);
             wmiData.eventMessage = eventRaised.Message;
-            wmiData.sequenceNumber = eventRaised
-                .EventSequence
+            wmiData.sequenceNumber = eventRaised.EventSequence
                 .ToString(CultureInfo.InstalledUICulture);
-            wmiData.occurrence = eventRaised
-                .EventOccurrence
+            wmiData.occurrence = eventRaised.EventOccurrence
                 .ToString(CultureInfo.InstalledUICulture);
             wmiData.eventId = eventRaised.EventID.ToString("N", CultureInfo.InstalledUICulture);
 
@@ -233,14 +231,11 @@ namespace System.Web.Management
 
                     wmiData.processStartTime = WmiFormatTime(procStats.ProcessStartTime);
                     wmiData.threadCount = procStats.ThreadCount;
-                    wmiData.workingSet = procStats
-                        .WorkingSet
+                    wmiData.workingSet = procStats.WorkingSet
                         .ToString(CultureInfo.InstalledUICulture);
-                    wmiData.peakWorkingSet = procStats
-                        .PeakWorkingSet
+                    wmiData.peakWorkingSet = procStats.PeakWorkingSet
                         .ToString(CultureInfo.InstalledUICulture);
-                    wmiData.managedHeapSize = procStats
-                        .ManagedHeapSize
+                    wmiData.managedHeapSize = procStats.ManagedHeapSize
                         .ToString(CultureInfo.InstalledUICulture);
                     wmiData.appdomainCount = procStats.AppDomainCount;
                     wmiData.requestsExecuting = procStats.RequestsExecuting;

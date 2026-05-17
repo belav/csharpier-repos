@@ -271,8 +271,7 @@ namespace T
         )
         {
             var info = await GetQuickinfo(workspace, document, position);
-            var description = info
-                ?.Sections
+            var description = info?.Sections
                 .FirstOrDefault(s => s.Kind == QuickInfoSectionKinds.Description);
             Assert.NotNull(description);
             Assert.Equal(expectedDescription, description.Text);
@@ -292,8 +291,7 @@ namespace T
             int position
         )
         {
-            var sharedGlobalCache = workspace
-                .ExportProvider
+            var sharedGlobalCache = workspace.ExportProvider
                 .GetExportedValue<DiagnosticAnalyzerInfoCache.SharedGlobalCache>();
             var provider = new CSharpDiagnosticAnalyzerQuickInfoProvider(sharedGlobalCache);
             var info = await provider.GetQuickInfoAsync(

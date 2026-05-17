@@ -28,8 +28,7 @@ public class ByteArrayColumns : IntegrationTest<ByteArrayColumns.DatabaseInitial
     {
         protected override void Seed(Context context)
         {
-            context
-                .Customers
+            context.Customers
                 .Add(
                     new Customer
                     {

@@ -268,8 +268,7 @@ namespace System.Web.UI.WebControls
                         SR.GetString(SR.AccessDataSource_DesignTimeRelativePathsNotSupported, ID)
                     );
                 }
-                filename = Context
-                    .Request
+                filename = Context.Request
                     .MapPath(filename, AppRelativeTemplateSourceDirectory, true);
             }
 

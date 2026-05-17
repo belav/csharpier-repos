@@ -161,8 +161,7 @@ namespace ILCompiler
             // Do not attempt to inline resource strings if we only want to use resource keys.
             // The optimizations are not compatible.
             bool shouldInlineResourceStrings =
-                !_hashtable
-                    ._switchValues
+                !_hashtable._switchValues
                     .TryGetValue("System.Resources.UseSystemResourceKeys", out bool useResourceKeys)
                 || !useResourceKeys;
 
@@ -1041,8 +1040,7 @@ namespace ILCompiler
                 )
                 {
                     int rid = token & 0xFFFFFF;
-                    int maxRealTokenRid = ecmaMethodIL
-                        .Module
+                    int maxRealTokenRid = ecmaMethodIL.Module
                         .MetadataReader
                         .GetHeapSize(HeapIndex.UserString);
                     if (rid >= maxRealTokenRid)
@@ -1137,11 +1135,9 @@ namespace ILCompiler
             {
                 Module = module;
 
-                PEMemoryBlock resourceDirectory = module
-                    .PEReader
+                PEMemoryBlock resourceDirectory = module.PEReader
                     .GetSectionData(
-                        module
-                            .PEReader
+                        module.PEReader
                             .PEHeaders
                             .CorHeader
                             .ResourcesDirectory
@@ -1150,8 +1146,7 @@ namespace ILCompiler
 
                 foreach (var resourceHandle in module.MetadataReader.ManifestResources)
                 {
-                    ManifestResource resource = module
-                        .MetadataReader
+                    ManifestResource resource = module.MetadataReader
                         .GetManifestResource(resourceHandle);
 
                     // Don't try to process linked resources or resources in other assemblies

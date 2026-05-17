@@ -36,36 +36,41 @@ namespace System.CodeDom.Compiler.Tests
         public void ClassWithInstanceFields()
         {
             var cd = new CodeTypeDeclaration("SomeClass") { IsClass = true };
-            cd.Members.Add(
-                new CodeMemberField(typeof(int), "_privateNumber")
-                {
-                    Attributes = MemberAttributes.Private,
-                }
-            );
-            cd.Members.Add(
-                new CodeMemberField(typeof(string), "_internalString")
-                {
-                    Attributes = MemberAttributes.Assembly,
-                }
-            );
-            cd.Members.Add(
-                new CodeMemberField(typeof(DateTime), "_protectedDateTime")
-                {
-                    Attributes = MemberAttributes.Family,
-                }
-            );
-            cd.Members.Add(
-                new CodeMemberField(typeof(TimeSpan), "PublicTimeSpan")
-                {
-                    Attributes = MemberAttributes.Public,
-                }
-            );
-            cd.Members.Add(
-                new CodeMemberField(typeof(Guid), "_protectedInternalGuid")
-                {
-                    Attributes = MemberAttributes.FamilyOrAssembly,
-                }
-            );
+            cd.Members
+                .Add(
+                    new CodeMemberField(typeof(int), "_privateNumber")
+                    {
+                        Attributes = MemberAttributes.Private,
+                    }
+                );
+            cd.Members
+                .Add(
+                    new CodeMemberField(typeof(string), "_internalString")
+                    {
+                        Attributes = MemberAttributes.Assembly,
+                    }
+                );
+            cd.Members
+                .Add(
+                    new CodeMemberField(typeof(DateTime), "_protectedDateTime")
+                    {
+                        Attributes = MemberAttributes.Family,
+                    }
+                );
+            cd.Members
+                .Add(
+                    new CodeMemberField(typeof(TimeSpan), "PublicTimeSpan")
+                    {
+                        Attributes = MemberAttributes.Public,
+                    }
+                );
+            cd.Members
+                .Add(
+                    new CodeMemberField(typeof(Guid), "_protectedInternalGuid")
+                    {
+                        Attributes = MemberAttributes.FamilyOrAssembly,
+                    }
+                );
 
             AssertEqual(
                 cd,
@@ -125,36 +130,41 @@ namespace System.CodeDom.Compiler.Tests
         public void ClassWithStaticFields()
         {
             var cd = new CodeTypeDeclaration("SomeClass") { IsClass = true };
-            cd.Members.Add(
-                new CodeMemberField(typeof(int), "s_privateNumber")
-                {
-                    Attributes = MemberAttributes.Private | MemberAttributes.Static,
-                }
-            );
-            cd.Members.Add(
-                new CodeMemberField(typeof(string), "s_internalString")
-                {
-                    Attributes = MemberAttributes.Assembly | MemberAttributes.Static,
-                }
-            );
-            cd.Members.Add(
-                new CodeMemberField(typeof(DateTime), "s_protectedDateTime")
-                {
-                    Attributes = MemberAttributes.Family | MemberAttributes.Static,
-                }
-            );
-            cd.Members.Add(
-                new CodeMemberField(typeof(TimeSpan), "PublicTimeSpan")
-                {
-                    Attributes = MemberAttributes.Public | MemberAttributes.Static,
-                }
-            );
-            cd.Members.Add(
-                new CodeMemberField(typeof(Guid), "s_protectedInternalGuid")
-                {
-                    Attributes = MemberAttributes.FamilyOrAssembly | MemberAttributes.Static,
-                }
-            );
+            cd.Members
+                .Add(
+                    new CodeMemberField(typeof(int), "s_privateNumber")
+                    {
+                        Attributes = MemberAttributes.Private | MemberAttributes.Static,
+                    }
+                );
+            cd.Members
+                .Add(
+                    new CodeMemberField(typeof(string), "s_internalString")
+                    {
+                        Attributes = MemberAttributes.Assembly | MemberAttributes.Static,
+                    }
+                );
+            cd.Members
+                .Add(
+                    new CodeMemberField(typeof(DateTime), "s_protectedDateTime")
+                    {
+                        Attributes = MemberAttributes.Family | MemberAttributes.Static,
+                    }
+                );
+            cd.Members
+                .Add(
+                    new CodeMemberField(typeof(TimeSpan), "PublicTimeSpan")
+                    {
+                        Attributes = MemberAttributes.Public | MemberAttributes.Static,
+                    }
+                );
+            cd.Members
+                .Add(
+                    new CodeMemberField(typeof(Guid), "s_protectedInternalGuid")
+                    {
+                        Attributes = MemberAttributes.FamilyOrAssembly | MemberAttributes.Static,
+                    }
+                );
 
             AssertEqual(
                 cd,
@@ -203,26 +213,29 @@ namespace System.CodeDom.Compiler.Tests
             cmm.Name = "UsePrivateField";
             cmm.Attributes = MemberAttributes.Public | MemberAttributes.Final;
             cmm.ReturnType = new CodeTypeReference(typeof(int));
-            cmm.Parameters.Add(
-                new CodeParameterDeclarationExpression(new CodeTypeReference(typeof(int)), "i")
-            );
-            cmm.Statements.Add(
-                new CodeAssignStatement(
-                    new CodeFieldReferenceExpression(
-                        new CodeThisReferenceExpression(),
-                        "PrivateField"
-                    ),
-                    new CodeVariableReferenceExpression("i")
-                )
-            );
-            cmm.Statements.Add(
-                new CodeMethodReturnStatement(
-                    new CodeFieldReferenceExpression(
-                        new CodeThisReferenceExpression(),
-                        "PrivateField"
+            cmm.Parameters
+                .Add(
+                    new CodeParameterDeclarationExpression(new CodeTypeReference(typeof(int)), "i")
+                );
+            cmm.Statements
+                .Add(
+                    new CodeAssignStatement(
+                        new CodeFieldReferenceExpression(
+                            new CodeThisReferenceExpression(),
+                            "PrivateField"
+                        ),
+                        new CodeVariableReferenceExpression("i")
                     )
-                )
-            );
+                );
+            cmm.Statements
+                .Add(
+                    new CodeMethodReturnStatement(
+                        new CodeFieldReferenceExpression(
+                            new CodeThisReferenceExpression(),
+                            "PrivateField"
+                        )
+                    )
+                );
             cd.Members.Add(cmm);
 
             AssertEqual(
@@ -249,16 +262,18 @@ namespace System.CodeDom.Compiler.Tests
             cmm.Name = "UseFields";
             cmm.Attributes = MemberAttributes.Public | MemberAttributes.Static;
             cmm.ReturnType = new CodeTypeReference(typeof(int));
-            cmm.Parameters.Add(
-                new CodeParameterDeclarationExpression(new CodeTypeReference(typeof(int)), "i")
-            );
-            cmm.Statements.Add(
-                new CodeVariableDeclarationStatement(
-                    new CodeTypeReference("ClassWithFields"),
-                    "number",
-                    new CodeObjectCreateExpression("ClassWithFields")
-                )
-            );
+            cmm.Parameters
+                .Add(
+                    new CodeParameterDeclarationExpression(new CodeTypeReference(typeof(int)), "i")
+                );
+            cmm.Statements
+                .Add(
+                    new CodeVariableDeclarationStatement(
+                        new CodeTypeReference("ClassWithFields"),
+                        "number",
+                        new CodeObjectCreateExpression("ClassWithFields")
+                    )
+                );
             var binaryOpExpression = new CodeBinaryOperatorExpression(
                 new CodeFieldReferenceExpression(
                     new CodeVariableReferenceExpression("number"),
@@ -271,18 +286,19 @@ namespace System.CodeDom.Compiler.Tests
                     new CodeVariableReferenceExpression("i")
                 )
             );
-            cmm.Statements.Add(
-                new CodeMethodReturnStatement(
-                    new CodeBinaryOperatorExpression(
-                        binaryOpExpression,
-                        CodeBinaryOperatorType.Add,
-                        new CodeFieldReferenceExpression(
-                            new CodeTypeReferenceExpression("ClassWithFields"),
-                            "StaticPublicField"
+            cmm.Statements
+                .Add(
+                    new CodeMethodReturnStatement(
+                        new CodeBinaryOperatorExpression(
+                            binaryOpExpression,
+                            CodeBinaryOperatorType.Add,
+                            new CodeFieldReferenceExpression(
+                                new CodeTypeReferenceExpression("ClassWithFields"),
+                                "StaticPublicField"
+                            )
                         )
                     )
-                )
-            );
+                );
             cd.Members.Add(cmm);
 
             AssertEqual(
@@ -309,13 +325,14 @@ namespace System.CodeDom.Compiler.Tests
             cmm.Parameters.Add(new CodeParameterDeclarationExpression(typeof(int), "i"));
             cmm.ReturnType = new CodeTypeReference(typeof(int));
             cmm.Attributes = MemberAttributes.Public | MemberAttributes.Static;
-            cmm.Statements.Add(
-                new CodeVariableDeclarationStatement(
-                    "ClassWVirtualMethod",
-                    "t",
-                    new CodeObjectCreateExpression("ClassWOverrideMethod")
-                )
-            );
+            cmm.Statements
+                .Add(
+                    new CodeVariableDeclarationStatement(
+                        "ClassWVirtualMethod",
+                        "t",
+                        new CodeObjectCreateExpression("ClassWOverrideMethod")
+                    )
+                );
             CodeMethodInvokeExpression methodinvoke = new CodeMethodInvokeExpression(
                 new CodeVariableReferenceExpression("t"),
                 "VirtualMethod"
@@ -339,15 +356,16 @@ namespace System.CodeDom.Compiler.Tests
             cmm.Parameters.Add(new CodeParameterDeclarationExpression(typeof(int), "b"));
             cmm.ReturnType = new CodeTypeReference(typeof(int));
             cmm.Attributes = MemberAttributes.Public | MemberAttributes.Final;
-            cmm.Statements.Add(
-                new CodeMethodReturnStatement(
-                    new CodeBinaryOperatorExpression(
-                        new CodeVariableReferenceExpression("a"),
-                        CodeBinaryOperatorType.Add,
-                        new CodeVariableReferenceExpression("b")
+            cmm.Statements
+                .Add(
+                    new CodeMethodReturnStatement(
+                        new CodeBinaryOperatorExpression(
+                            new CodeVariableReferenceExpression("a"),
+                            CodeBinaryOperatorType.Add,
+                            new CodeVariableReferenceExpression("b")
+                        )
                     )
-                )
-            );
+                );
             cd.Members.Add(cmm);
 
             // call method with no parameters, call a method with multiple parameters,
@@ -356,28 +374,30 @@ namespace System.CodeDom.Compiler.Tests
             cmm.Name = "CallParamsMethods";
             cmm.ReturnType = new CodeTypeReference(typeof(int));
             cmm.Attributes = MemberAttributes.Public | MemberAttributes.Static;
-            cmm.Statements.Add(
-                new CodeVariableDeclarationStatement(
-                    new CodeTypeReference("TEST"),
-                    "t",
-                    new CodeObjectCreateExpression("TEST")
-                )
-            );
+            cmm.Statements
+                .Add(
+                    new CodeVariableDeclarationStatement(
+                        new CodeTypeReference("TEST"),
+                        "t",
+                        new CodeObjectCreateExpression("TEST")
+                    )
+                );
             CodeVariableReferenceExpression cvre = new CodeVariableReferenceExpression(); //To increase code coverage
             cvre.VariableName = "t";
-            cmm.Statements.Add(
-                new CodeMethodReturnStatement(
-                    new CodeMethodInvokeExpression(
-                        cvre,
-                        "MultipleParamsMethod",
-                        new CodePrimitiveExpression(78),
+            cmm.Statements
+                .Add(
+                    new CodeMethodReturnStatement(
                         new CodeMethodInvokeExpression(
-                            new CodeVariableReferenceExpression("t"),
-                            "NoParamsMethod"
+                            cvre,
+                            "MultipleParamsMethod",
+                            new CodePrimitiveExpression(78),
+                            new CodeMethodInvokeExpression(
+                                new CodeVariableReferenceExpression("t"),
+                                "NoParamsMethod"
+                            )
                         )
                     )
-                )
-            );
+                );
             cd.Members.Add(cmm);
 
             // method to test the 'new' scenario by calling the 'new' method
@@ -386,13 +406,14 @@ namespace System.CodeDom.Compiler.Tests
             cmm.Parameters.Add(new CodeParameterDeclarationExpression(typeof(int), "i"));
             cmm.ReturnType = new CodeTypeReference(typeof(int));
             cmm.Attributes = MemberAttributes.Public | MemberAttributes.Static;
-            cmm.Statements.Add(
-                new CodeVariableDeclarationStatement(
-                    "ClassWVirtualMethod",
-                    "t",
-                    new CodeObjectCreateExpression("ClassWNewMethod")
-                )
-            );
+            cmm.Statements
+                .Add(
+                    new CodeVariableDeclarationStatement(
+                        "ClassWVirtualMethod",
+                        "t",
+                        new CodeObjectCreateExpression("ClassWNewMethod")
+                    )
+                );
             methodinvoke = new CodeMethodInvokeExpression(
                 new CodeVariableReferenceExpression("t"),
                 "VirtualMethod"
@@ -403,15 +424,16 @@ namespace System.CodeDom.Compiler.Tests
                 "VirtualMethod"
             );
             methodinvoke2.Parameters.Add(new CodeVariableReferenceExpression("i"));
-            cmm.Statements.Add(
-                new CodeMethodReturnStatement(
-                    new CodeBinaryOperatorExpression(
-                        methodinvoke2,
-                        CodeBinaryOperatorType.Subtract,
-                        methodinvoke
+            cmm.Statements
+                .Add(
+                    new CodeMethodReturnStatement(
+                        new CodeBinaryOperatorExpression(
+                            methodinvoke2,
+                            CodeBinaryOperatorType.Subtract,
+                            methodinvoke
+                        )
                     )
-                )
-            );
+                );
             cd.Members.Add(cmm);
 
             // first declare a class with a virtual method in it
@@ -423,9 +445,8 @@ namespace System.CodeDom.Compiler.Tests
             cmm.ReturnType = new CodeTypeReference(typeof(int));
             cmm.Parameters.Add(new CodeParameterDeclarationExpression(typeof(int), "a"));
             cmm.Attributes = MemberAttributes.Public;
-            cmm.Statements.Add(
-                new CodeMethodReturnStatement(new CodeVariableReferenceExpression("a"))
-            );
+            cmm.Statements
+                .Add(new CodeMethodReturnStatement(new CodeVariableReferenceExpression("a")));
             cd.Members.Add(cmm);
 
             // now declare a class that inherits from the previous class and has a 'new' method with the
@@ -438,15 +459,16 @@ namespace System.CodeDom.Compiler.Tests
             cmm.ReturnType = new CodeTypeReference(typeof(int));
             cmm.Parameters.Add(new CodeParameterDeclarationExpression(typeof(int), "a"));
             cmm.Attributes = MemberAttributes.Public | MemberAttributes.New;
-            cmm.Statements.Add(
-                new CodeMethodReturnStatement(
-                    new CodeBinaryOperatorExpression(
-                        new CodePrimitiveExpression(2),
-                        CodeBinaryOperatorType.Multiply,
-                        new CodeVariableReferenceExpression("a")
+            cmm.Statements
+                .Add(
+                    new CodeMethodReturnStatement(
+                        new CodeBinaryOperatorExpression(
+                            new CodePrimitiveExpression(2),
+                            CodeBinaryOperatorType.Multiply,
+                            new CodeVariableReferenceExpression("a")
+                        )
                     )
-                )
-            );
+                );
             cd.Members.Add(cmm);
 
             // now declare a class that inherits from the previous class and has a 'new' method with the
@@ -459,15 +481,16 @@ namespace System.CodeDom.Compiler.Tests
             cmm.ReturnType = new CodeTypeReference(typeof(int));
             cmm.Parameters.Add(new CodeParameterDeclarationExpression(typeof(int), "a"));
             cmm.Attributes = MemberAttributes.Public | MemberAttributes.Override;
-            cmm.Statements.Add(
-                new CodeMethodReturnStatement(
-                    new CodeBinaryOperatorExpression(
-                        new CodePrimitiveExpression(2),
-                        CodeBinaryOperatorType.Multiply,
-                        new CodeVariableReferenceExpression("a")
+            cmm.Statements
+                .Add(
+                    new CodeMethodReturnStatement(
+                        new CodeBinaryOperatorExpression(
+                            new CodePrimitiveExpression(2),
+                            CodeBinaryOperatorType.Multiply,
+                            new CodeVariableReferenceExpression("a")
+                        )
                     )
-                )
-            );
+                );
             cd.Members.Add(cmm);
 
             // new class which will include both functions
@@ -479,9 +502,8 @@ namespace System.CodeDom.Compiler.Tests
             cmm.ReturnType = new CodeTypeReference(typeof(int));
             cmm.Parameters.Add(new CodeParameterDeclarationExpression(typeof(int), "a"));
             cmm.Attributes = MemberAttributes.Public | MemberAttributes.Static;
-            cmm.Statements.Add(
-                new CodeMethodReturnStatement(new CodeVariableReferenceExpression("a"))
-            );
+            cmm.Statements
+                .Add(new CodeMethodReturnStatement(new CodeVariableReferenceExpression("a")));
             cd.Members.Add(cmm);
             cmm = new CodeMemberMethod();
             cmm.Name = "OverloadedMethod";
@@ -489,15 +511,16 @@ namespace System.CodeDom.Compiler.Tests
             cmm.Parameters.Add(new CodeParameterDeclarationExpression(typeof(int), "a"));
             cmm.Parameters.Add(new CodeParameterDeclarationExpression(typeof(int), "b"));
             cmm.Attributes = MemberAttributes.Public | MemberAttributes.Static;
-            cmm.Statements.Add(
-                new CodeMethodReturnStatement(
-                    new CodeBinaryOperatorExpression(
-                        new CodeVariableReferenceExpression("b"),
-                        CodeBinaryOperatorType.Add,
-                        new CodeVariableReferenceExpression("a")
+            cmm.Statements
+                .Add(
+                    new CodeMethodReturnStatement(
+                        new CodeBinaryOperatorExpression(
+                            new CodeVariableReferenceExpression("b"),
+                            CodeBinaryOperatorType.Add,
+                            new CodeVariableReferenceExpression("a")
+                        )
                     )
-                )
-            );
+                );
             cd.Members.Add(cmm);
 
             // declare a method that will call both OverloadedMethod functions
@@ -508,22 +531,23 @@ namespace System.CodeDom.Compiler.Tests
             cmm.Attributes = MemberAttributes.Public | MemberAttributes.Static;
             CodeMethodReferenceExpression methodref = new CodeMethodReferenceExpression();
             methodref.MethodName = "OverloadedMethod";
-            cmm.Statements.Add(
-                new CodeMethodReturnStatement(
-                    new CodeBinaryOperatorExpression(
-                        new CodeMethodInvokeExpression(
-                            methodref,
-                            new CodeVariableReferenceExpression("i"),
-                            new CodeVariableReferenceExpression("i")
-                        ),
-                        CodeBinaryOperatorType.Subtract,
-                        new CodeMethodInvokeExpression(
-                            methodref,
-                            new CodeVariableReferenceExpression("i")
+            cmm.Statements
+                .Add(
+                    new CodeMethodReturnStatement(
+                        new CodeBinaryOperatorExpression(
+                            new CodeMethodInvokeExpression(
+                                methodref,
+                                new CodeVariableReferenceExpression("i"),
+                                new CodeVariableReferenceExpression("i")
+                            ),
+                            CodeBinaryOperatorType.Subtract,
+                            new CodeMethodInvokeExpression(
+                                methodref,
+                                new CodeVariableReferenceExpression("i")
+                            )
                         )
                     )
-                )
-            );
+                );
             cd.Members.Add(cmm);
 
             AssertEqual(
@@ -585,22 +609,24 @@ namespace System.CodeDom.Compiler.Tests
             param = new CodeParameterDeclarationExpression(typeof(int), "j");
             param.Direction = FieldDirection.Out;
             cmm.Parameters.Add(param);
-            cmm.Statements.Add(
-                new CodeAssignStatement(
-                    new CodeArgumentReferenceExpression("i"),
-                    new CodeBinaryOperatorExpression(
+            cmm.Statements
+                .Add(
+                    new CodeAssignStatement(
                         new CodeArgumentReferenceExpression("i"),
-                        CodeBinaryOperatorType.Add,
-                        new CodePrimitiveExpression(4)
+                        new CodeBinaryOperatorExpression(
+                            new CodeArgumentReferenceExpression("i"),
+                            CodeBinaryOperatorType.Add,
+                            new CodePrimitiveExpression(4)
+                        )
                     )
-                )
-            );
-            cmm.Statements.Add(
-                new CodeAssignStatement(
-                    new CodeArgumentReferenceExpression("j"),
-                    new CodePrimitiveExpression(5)
-                )
-            );
+                );
+            cmm.Statements
+                .Add(
+                    new CodeAssignStatement(
+                        new CodeArgumentReferenceExpression("j"),
+                        new CodePrimitiveExpression(5)
+                    )
+                );
             cd.Members.Add(cmm);
 
             cmm = new CodeMemberMethod();
@@ -612,12 +638,13 @@ namespace System.CodeDom.Compiler.Tests
             );
             cmm.Parameters.Add(parames);
             cmm.ReturnType = new CodeTypeReference("System.int32");
-            cmm.Statements.Add(
-                new CodeAssignStatement(
-                    new CodeVariableReferenceExpression("a"),
-                    new CodePrimitiveExpression(10)
-                )
-            );
+            cmm.Statements
+                .Add(
+                    new CodeAssignStatement(
+                        new CodeVariableReferenceExpression("a"),
+                        new CodePrimitiveExpression(10)
+                    )
+                );
             cmm.Statements.Add(new CodeVariableDeclarationStatement(typeof(int), "b"));
             // invoke the method called "work"
             CodeMethodInvokeExpression methodinvoked = new CodeMethodInvokeExpression(
@@ -636,15 +663,16 @@ namespace System.CodeDom.Compiler.Tests
             );
             methodinvoked.Parameters.Add(parameter);
             cmm.Statements.Add(methodinvoked);
-            cmm.Statements.Add(
-                new CodeMethodReturnStatement(
-                    new CodeBinaryOperatorExpression(
-                        new CodeVariableReferenceExpression("a"),
-                        CodeBinaryOperatorType.Add,
-                        new CodeVariableReferenceExpression("b")
+            cmm.Statements
+                .Add(
+                    new CodeMethodReturnStatement(
+                        new CodeBinaryOperatorExpression(
+                            new CodeVariableReferenceExpression("a"),
+                            CodeBinaryOperatorType.Add,
+                            new CodeVariableReferenceExpression("b")
+                        )
                     )
-                )
-            );
+                );
             cd.Members.Add(cmm);
 
             AssertEqual(
@@ -669,33 +697,34 @@ namespace System.CodeDom.Compiler.Tests
         public void NamespaceWithMultipleClasses()
         {
             var ns = new CodeNamespace("SomeNamespace");
-            ns.Types.Add(
-                new CodeTypeDeclaration("PublicClass")
-                {
-                    IsClass = true,
-                    TypeAttributes = TypeAttributes.Public,
-                }
-            );
-            ns.Types.Add(
-                new CodeTypeDeclaration("PrivateClass")
-                {
-                    IsClass = true,
-                    TypeAttributes = TypeAttributes.NotPublic,
-                }
-            );
-            ns.Types.Add(
-                new CodeTypeDeclaration("SealedClass")
-                {
-                    IsClass = true,
-                    TypeAttributes = TypeAttributes.Sealed,
-                }
-            );
-            ns.Types.Add(
-                new CodeTypeDeclaration("PartialClass") { IsClass = true, IsPartial = true }
-            );
-            ns.Types.Add(
-                new CodeTypeDeclaration("PartialClass") { IsClass = true, IsPartial = true }
-            );
+            ns.Types
+                .Add(
+                    new CodeTypeDeclaration("PublicClass")
+                    {
+                        IsClass = true,
+                        TypeAttributes = TypeAttributes.Public,
+                    }
+                );
+            ns.Types
+                .Add(
+                    new CodeTypeDeclaration("PrivateClass")
+                    {
+                        IsClass = true,
+                        TypeAttributes = TypeAttributes.NotPublic,
+                    }
+                );
+            ns.Types
+                .Add(
+                    new CodeTypeDeclaration("SealedClass")
+                    {
+                        IsClass = true,
+                        TypeAttributes = TypeAttributes.Sealed,
+                    }
+                );
+            ns.Types
+                .Add(new CodeTypeDeclaration("PartialClass") { IsClass = true, IsPartial = true });
+            ns.Types
+                .Add(new CodeTypeDeclaration("PartialClass") { IsClass = true, IsPartial = true });
 
             AssertEqual(
                 ns,
@@ -746,14 +775,12 @@ namespace System.CodeDom.Compiler.Tests
         {
             var arrayMethod = new CodeMemberMethod();
             arrayMethod.Name = "ArrayMethod";
-            arrayMethod
-                .Parameters
+            arrayMethod.Parameters
                 .Add(new CodeParameterDeclarationExpression(typeof(int), "parameter"));
             arrayMethod.Attributes =
                 (arrayMethod.Attributes & ~MemberAttributes.AccessMask) | MemberAttributes.Public;
             arrayMethod.ReturnType = new CodeTypeReference(typeof(long));
-            arrayMethod
-                .Statements
+            arrayMethod.Statements
                 .Add(
                     new CodeVariableDeclarationStatement(
                         typeof(int),
@@ -761,11 +788,9 @@ namespace System.CodeDom.Compiler.Tests
                         new CodePrimitiveExpression(3)
                     )
                 );
-            arrayMethod
-                .Statements
+            arrayMethod.Statements
                 .Add(new CodeVariableDeclarationStatement(typeof(int[]), "array1"));
-            arrayMethod
-                .Statements
+            arrayMethod.Statements
                 .Add(
                     new CodeVariableDeclarationStatement(
                         new CodeTypeReference("System.Int32", 1),
@@ -773,8 +798,7 @@ namespace System.CodeDom.Compiler.Tests
                         new CodeArrayCreateExpression(typeof(int[]), new CodePrimitiveExpression(3))
                     )
                 );
-            arrayMethod
-                .Statements
+            arrayMethod.Statements
                 .Add(
                     new CodeVariableDeclarationStatement(
                         new CodeTypeReference("System.Int16", 1),
@@ -790,8 +814,7 @@ namespace System.CodeDom.Compiler.Tests
                         )
                     )
                 );
-            arrayMethod
-                .Statements
+            arrayMethod.Statements
                 .Add(
                     new CodeAssignStatement(
                         new CodeVariableReferenceExpression("array1"),
@@ -801,8 +824,7 @@ namespace System.CodeDom.Compiler.Tests
                         )
                     )
                 );
-            arrayMethod
-                .Statements
+            arrayMethod.Statements
                 .Add(
                     new CodeVariableDeclarationStatement(
                         typeof(long),
@@ -811,8 +833,7 @@ namespace System.CodeDom.Compiler.Tests
                     )
                 );
             arrayMethod.Statements.Add(new CodeVariableDeclarationStatement(typeof(int), "i"));
-            arrayMethod
-                .Statements
+            arrayMethod.Statements
                 .Add(
                     new CodeIterationStatement(
                         new CodeAssignStatement(
@@ -887,8 +908,7 @@ namespace System.CodeDom.Compiler.Tests
                         )
                     )
                 );
-            arrayMethod
-                .Statements
+            arrayMethod.Statements
                 .Add(
                     new CodeMethodReturnStatement(new CodeVariableReferenceExpression("retValue"))
                 );
@@ -924,8 +944,7 @@ namespace System.CodeDom.Compiler.Tests
                 (arrayMethod.Attributes & ~MemberAttributes.AccessMask) | MemberAttributes.Public;
             arrayMethod.ReturnType = new CodeTypeReference(typeof(int));
             arrayMethod.Parameters.Add(new CodeParameterDeclarationExpression(typeof(int), "i"));
-            arrayMethod
-                .Statements
+            arrayMethod.Statements
                 .Add(
                     new CodeVariableDeclarationStatement(
                         new CodeTypeReference(typeof(int[][])),
@@ -945,8 +964,7 @@ namespace System.CodeDom.Compiler.Tests
                         )
                     )
                 );
-            arrayMethod
-                .Statements
+            arrayMethod.Statements
                 .Add(
                     new CodeVariableDeclarationStatement(
                         new CodeTypeReference("System.Int32", 1),
@@ -954,8 +972,7 @@ namespace System.CodeDom.Compiler.Tests
                         new CodeArrayCreateExpression(typeof(int[]), new CodePrimitiveExpression(0))
                     )
                 );
-            arrayMethod
-                .Statements
+            arrayMethod.Statements
                 .Add(
                     new CodeVariableDeclarationStatement(
                         new CodeTypeReference("Class2", 1),
@@ -966,8 +983,7 @@ namespace System.CodeDom.Compiler.Tests
                         )
                     )
                 );
-            arrayMethod
-                .Statements
+            arrayMethod.Statements
                 .Add(
                     new CodeAssignStatement(
                         new CodeArrayIndexerExpression(
@@ -977,8 +993,7 @@ namespace System.CodeDom.Compiler.Tests
                         new CodeObjectCreateExpression(new CodeTypeReference("Class2"))
                     )
                 );
-            arrayMethod
-                .Statements
+            arrayMethod.Statements
                 .Add(
                     new CodeAssignStatement(
                         new CodeFieldReferenceExpression(
@@ -1001,8 +1016,7 @@ namespace System.CodeDom.Compiler.Tests
                         )
                     )
                 );
-            arrayMethod
-                .Statements
+            arrayMethod.Statements
                 .Add(
                     new CodeMethodReturnStatement(
                         new CodeFieldReferenceExpression(
@@ -1070,8 +1084,7 @@ namespace System.CodeDom.Compiler.Tests
 
                 var class1 = new CodeTypeDeclaration() { Name = "MyClass" };
                 class1.CustomAttributes.Add(new CodeAttributeDeclaration("System.Serializable"));
-                class1
-                    .CustomAttributes
+                class1.CustomAttributes
                     .Add(
                         new CodeAttributeDeclaration(
                             "System.Obsolete",
@@ -1087,14 +1100,12 @@ namespace System.CodeDom.Compiler.Tests
                     IsClass = true,
                     TypeAttributes = TypeAttributes.NestedPublic,
                 };
-                nestedClass
-                    .CustomAttributes
+                nestedClass.CustomAttributes
                     .Add(new CodeAttributeDeclaration("System.Serializable"));
                 class1.Members.Add(nestedClass);
 
                 var method1 = new CodeMemberMethod() { Name = "MyMethod" };
-                method1
-                    .CustomAttributes
+                method1.CustomAttributes
                     .Add(
                         new CodeAttributeDeclaration(
                             "System.Obsolete",
@@ -1103,8 +1114,7 @@ namespace System.CodeDom.Compiler.Tests
                             )
                         )
                     );
-                method1
-                    .CustomAttributes
+                method1.CustomAttributes
                     .Add(
                         new CodeAttributeDeclaration(
                             "System.ComponentModel.Editor",
@@ -1113,8 +1123,7 @@ namespace System.CodeDom.Compiler.Tests
                         )
                     );
                 var param1 = new CodeParameterDeclarationExpression(typeof(string), "blah");
-                param1
-                    .CustomAttributes
+                param1.CustomAttributes
                     .Add(
                         new CodeAttributeDeclaration(
                             "System.Xml.Serialization.XmlElementAttribute",
@@ -1135,8 +1144,7 @@ namespace System.CodeDom.Compiler.Tests
                     );
                 method1.Parameters.Add(param1);
                 var param2 = new CodeParameterDeclarationExpression(typeof(int[]), "arrayit");
-                param2
-                    .CustomAttributes
+                param2.CustomAttributes
                     .Add(
                         new CodeAttributeDeclaration(
                             "System.Xml.Serialization.XmlElementAttribute",
@@ -1161,8 +1169,7 @@ namespace System.CodeDom.Compiler.Tests
                 var function1 = new CodeMemberMethod();
                 function1.Name = "MyFunction";
                 function1.ReturnType = new CodeTypeReference(typeof(string));
-                function1
-                    .CustomAttributes
+                function1.CustomAttributes
                     .Add(
                         new CodeAttributeDeclaration(
                             "System.Obsolete",
@@ -1171,13 +1178,11 @@ namespace System.CodeDom.Compiler.Tests
                             )
                         )
                     );
-                function1
-                    .ReturnTypeCustomAttributes
+                function1.ReturnTypeCustomAttributes
                     .Add(
                         new CodeAttributeDeclaration("System.Xml.Serialization.XmlIgnoreAttribute")
                     );
-                function1
-                    .ReturnTypeCustomAttributes
+                function1.ReturnTypeCustomAttributes
                     .Add(
                         new CodeAttributeDeclaration(
                             "System.Xml.Serialization.XmlRootAttribute",
@@ -1191,15 +1196,13 @@ namespace System.CodeDom.Compiler.Tests
                             )
                         )
                     );
-                function1
-                    .Statements
+                function1.Statements
                     .Add(new CodeMethodReturnStatement(new CodePrimitiveExpression("Return")));
                 class1.Members.Add(function1);
 
                 CodeMemberMethod function2 = new CodeMemberMethod();
                 function2.Name = "GlobalKeywordFunction";
-                function2
-                    .CustomAttributes
+                function2.CustomAttributes
                     .Add(
                         new CodeAttributeDeclaration(
                             new CodeTypeReference(
@@ -1222,8 +1225,7 @@ namespace System.CodeDom.Compiler.Tests
                 CodeMemberField field1 = new CodeMemberField();
                 field1.Name = "myField";
                 field1.Type = new CodeTypeReference(typeof(string));
-                field1
-                    .CustomAttributes
+                field1.CustomAttributes
                     .Add(
                         new CodeAttributeDeclaration("System.Xml.Serialization.XmlElementAttribute")
                     );
@@ -1233,8 +1235,7 @@ namespace System.CodeDom.Compiler.Tests
                 CodeMemberProperty prop1 = new CodeMemberProperty();
                 prop1.Name = "MyProperty";
                 prop1.Type = new CodeTypeReference(typeof(string));
-                prop1
-                    .CustomAttributes
+                prop1.CustomAttributes
                     .Add(
                         new CodeAttributeDeclaration(
                             "System.Obsolete",
@@ -1243,8 +1244,7 @@ namespace System.CodeDom.Compiler.Tests
                             )
                         )
                     );
-                prop1
-                    .GetStatements
+                prop1.GetStatements
                     .Add(
                         new CodeMethodReturnStatement(
                             new CodeFieldReferenceExpression(
@@ -1256,8 +1256,7 @@ namespace System.CodeDom.Compiler.Tests
                 class1.Members.Add(prop1);
 
                 CodeConstructor const1 = new CodeConstructor();
-                const1
-                    .CustomAttributes
+                const1.CustomAttributes
                     .Add(
                         new CodeAttributeDeclaration(
                             "System.Obsolete",
@@ -1281,79 +1280,87 @@ namespace System.CodeDom.Compiler.Tests
 
                 CodeConstructor ctor = new CodeConstructor();
                 ctor.Attributes = MemberAttributes.Public;
-                ctor.Statements.Add(
-                    new CodeAssignStatement(
-                        new CodeFieldReferenceExpression(new CodeThisReferenceExpression(), "Size"),
-                        new CodeObjectCreateExpression(
-                            new CodeTypeReference("Size"),
-                            new CodePrimitiveExpression(600),
-                            new CodePrimitiveExpression(600)
+                ctor.Statements
+                    .Add(
+                        new CodeAssignStatement(
+                            new CodeFieldReferenceExpression(
+                                new CodeThisReferenceExpression(),
+                                "Size"
+                            ),
+                            new CodeObjectCreateExpression(
+                                new CodeTypeReference("Size"),
+                                new CodePrimitiveExpression(600),
+                                new CodePrimitiveExpression(600)
+                            )
                         )
-                    )
-                );
-                ctor.Statements.Add(
-                    new CodeAssignStatement(
-                        new CodeFieldReferenceExpression(
-                            new CodeTypeReferenceExpression("b"),
-                            "Text"
-                        ),
-                        new CodePrimitiveExpression("Test")
-                    )
-                );
-                ctor.Statements.Add(
-                    new CodeAssignStatement(
-                        new CodeFieldReferenceExpression(
-                            new CodeTypeReferenceExpression("b"),
-                            "TabIndex"
-                        ),
-                        new CodePrimitiveExpression(0)
-                    )
-                );
-                ctor.Statements.Add(
-                    new CodeAssignStatement(
-                        new CodeFieldReferenceExpression(
-                            new CodeTypeReferenceExpression("b"),
-                            "Location"
-                        ),
-                        new CodeObjectCreateExpression(
-                            new CodeTypeReference("Point"),
-                            new CodePrimitiveExpression(400),
-                            new CodePrimitiveExpression(525)
+                    );
+                ctor.Statements
+                    .Add(
+                        new CodeAssignStatement(
+                            new CodeFieldReferenceExpression(
+                                new CodeTypeReferenceExpression("b"),
+                                "Text"
+                            ),
+                            new CodePrimitiveExpression("Test")
                         )
-                    )
-                );
-                ctor.Statements.Add(
-                    new CodeAttachEventStatement(
-                        new CodeEventReferenceExpression(
-                            new CodeThisReferenceExpression(),
-                            "MyEvent"
-                        ),
-                        new CodeDelegateCreateExpression(
-                            new CodeTypeReference("EventHandler"),
-                            new CodeThisReferenceExpression(),
-                            "b_Click"
+                    );
+                ctor.Statements
+                    .Add(
+                        new CodeAssignStatement(
+                            new CodeFieldReferenceExpression(
+                                new CodeTypeReferenceExpression("b"),
+                                "TabIndex"
+                            ),
+                            new CodePrimitiveExpression(0)
                         )
-                    )
-                );
+                    );
+                ctor.Statements
+                    .Add(
+                        new CodeAssignStatement(
+                            new CodeFieldReferenceExpression(
+                                new CodeTypeReferenceExpression("b"),
+                                "Location"
+                            ),
+                            new CodeObjectCreateExpression(
+                                new CodeTypeReference("Point"),
+                                new CodePrimitiveExpression(400),
+                                new CodePrimitiveExpression(525)
+                            )
+                        )
+                    );
+                ctor.Statements
+                    .Add(
+                        new CodeAttachEventStatement(
+                            new CodeEventReferenceExpression(
+                                new CodeThisReferenceExpression(),
+                                "MyEvent"
+                            ),
+                            new CodeDelegateCreateExpression(
+                                new CodeTypeReference("EventHandler"),
+                                new CodeThisReferenceExpression(),
+                                "b_Click"
+                            )
+                        )
+                    );
                 class1.Members.Add(ctor);
 
                 CodeMemberEvent evt = new CodeMemberEvent();
                 evt.Name = "MyEvent";
                 evt.Type = new CodeTypeReference("System.EventHandler");
                 evt.Attributes = MemberAttributes.Public;
-                evt.CustomAttributes.Add(
-                    new CodeAttributeDeclaration(
-                        "System.CLSCompliantAttribute",
-                        new CodeAttributeArgument(new CodePrimitiveExpression(false))
-                    )
-                );
+                evt.CustomAttributes
+                    .Add(
+                        new CodeAttributeDeclaration(
+                            "System.CLSCompliantAttribute",
+                            new CodeAttributeArgument(new CodePrimitiveExpression(false))
+                        )
+                    );
                 class1.Members.Add(evt);
 
                 var cmm = new CodeMemberMethod();
                 cmm.Name = "b_Click";
-                cmm.Parameters.Add(
-                    new CodeParameterDeclarationExpression(typeof(object), "sender")
-                );
+                cmm.Parameters
+                    .Add(new CodeParameterDeclarationExpression(typeof(object), "sender"));
                 cmm.Parameters.Add(new CodeParameterDeclarationExpression(typeof(EventArgs), "e"));
                 class1.Members.Add(cmm);
 
@@ -1468,8 +1475,7 @@ namespace System.CodeDom.Compiler.Tests
                 "value"
             );
             castReturnValue.Parameters.Add(strParam);
-            castReturnValue
-                .Statements
+            castReturnValue.Statements
                 .Add(
                     new CodeMethodReturnStatement(
                         new CodeCastExpression(
@@ -1501,8 +1507,7 @@ namespace System.CodeDom.Compiler.Tests
             CodeParameterDeclarationExpression interfaceParam =
                 new CodeParameterDeclarationExpression(typeof(System.ICloneable), "value");
             castInterface.Parameters.Add(interfaceParam);
-            castInterface
-                .Statements
+            castInterface.Statements
                 .Add(
                     new CodeMethodReturnStatement(
                         new CodeCastExpression(
@@ -1523,8 +1528,7 @@ namespace System.CodeDom.Compiler.Tests
                 "value"
             );
             valueToReference.Parameters.Add(valueParam);
-            valueToReference
-                .Statements
+            valueToReference.Statements
                 .Add(
                     new CodeMethodReturnStatement(
                         new CodeCastExpression(
@@ -1567,8 +1571,7 @@ namespace System.CodeDom.Compiler.Tests
             retMethod.Attributes =
                 (retMethod.Attributes & ~MemberAttributes.AccessMask) | MemberAttributes.Public;
             retMethod.ReturnType = new CodeTypeReference(typeof(int));
-            retMethod
-                .Parameters
+            retMethod.Parameters
                 .Add(new CodeParameterDeclarationExpression(typeof(int), "intInput"));
 
             CodeBinaryOperatorExpression cboExpression = new CodeBinaryOperatorExpression(
@@ -1593,8 +1596,7 @@ namespace System.CodeDom.Compiler.Tests
             );
 
             retMethod.Statements.Add(variableDeclaration);
-            retMethod
-                .Statements
+            retMethod.Statements
                 .Add(
                     new CodeVariableDeclarationStatement(
                         typeof(int),
@@ -1606,8 +1608,7 @@ namespace System.CodeDom.Compiler.Tests
                         )
                     )
                 );
-            retMethod
-                .Statements
+            retMethod.Statements
                 .Add(
                     new CodeVariableDeclarationStatement(
                         typeof(int),
@@ -1623,8 +1624,7 @@ namespace System.CodeDom.Compiler.Tests
                         )
                     )
                 );
-            retMethod
-                .Statements
+            retMethod.Statements
                 .Add(
                     new CodeVariableDeclarationStatement(
                         typeof(int),
@@ -1632,8 +1632,7 @@ namespace System.CodeDom.Compiler.Tests
                         new CodePrimitiveExpression(0)
                     )
                 );
-            retMethod
-                .Statements
+            retMethod.Statements
                 .Add(
                     new CodeConditionStatement(
                         new CodeBinaryOperatorExpression(
@@ -1653,8 +1652,7 @@ namespace System.CodeDom.Compiler.Tests
                         new CodeStatement[] { CreateVariableIncrementExpression("x4", 2) }
                     )
                 );
-            retMethod
-                .Statements
+            retMethod.Statements
                 .Add(
                     new CodeConditionStatement(
                         new CodeBinaryOperatorExpression(
@@ -1674,8 +1672,7 @@ namespace System.CodeDom.Compiler.Tests
                         new CodeStatement[] { CreateVariableIncrementExpression("x4", 8) }
                     )
                 );
-            retMethod
-                .Statements
+            retMethod.Statements
                 .Add(
                     new CodeConditionStatement(
                         new CodeBinaryOperatorExpression(
@@ -1695,8 +1692,7 @@ namespace System.CodeDom.Compiler.Tests
                         new CodeStatement[] { CreateVariableIncrementExpression("x4", 32) }
                     )
                 );
-            retMethod
-                .Statements
+            retMethod.Statements
                 .Add(
                     new CodeMethodReturnStatement(
                         new CodeBinaryOperatorExpression(
@@ -1721,19 +1717,16 @@ namespace System.CodeDom.Compiler.Tests
             retMethod.Attributes =
                 (retMethod.Attributes & ~MemberAttributes.AccessMask) | MemberAttributes.Public;
             retMethod.ReturnType = new CodeTypeReference(typeof(int));
-            retMethod
-                .Parameters
+            retMethod.Parameters
                 .Add(new CodeParameterDeclarationExpression(typeof(int), "intInput"));
 
-            retMethod
-                .Statements
+            retMethod.Statements
                 .Add(
                     new CodeCommentStatement(
                         "To test CodeBinaryOperatorType.IdentiEquality operator"
                     )
                 );
-            retMethod
-                .Statements
+            retMethod.Statements
                 .Add(
                     new CodeConditionStatement(
                         new CodeBinaryOperatorExpression(
@@ -1813,15 +1806,16 @@ namespace System.CodeDom.Compiler.Tests
                 "\u1234 \u4567 \uABCD \r \n \t \\ \" \' \0 \u2028 \u2029 \u0084 \u0085 \U00010F00";
 
             var main = new CodeEntryPointMethod();
-            main.Statements.Add(
-                new CodeMethodInvokeExpression(
-                    new CodeMethodReferenceExpression(
-                        new CodeTypeReferenceExpression(typeof(Console)),
-                        "WriteLine"
-                    ),
-                    new CodeExpression[] { new CodePrimitiveExpression(chars) }
-                )
-            );
+            main.Statements
+                .Add(
+                    new CodeMethodInvokeExpression(
+                        new CodeMethodReferenceExpression(
+                            new CodeTypeReferenceExpression(typeof(Console)),
+                            "WriteLine"
+                        ),
+                        new CodeExpression[] { new CodePrimitiveExpression(chars) }
+                    )
+                );
 
             AssertEqual(
                 main,
@@ -1842,15 +1836,16 @@ namespace System.CodeDom.Compiler.Tests
                 "\u1234 \u4567 \uABCD \r \n \t \\ \" \' \0 \u2028 \u2029 \u0084 \u0085 \U00010F00";
 
             var main = new CodeEntryPointMethod();
-            main.Statements.Add(
-                new CodeMethodInvokeExpression(
-                    new CodeMethodReferenceExpression(
-                        new CodeTypeReferenceExpression(typeof(Console)),
-                        "WriteLine"
-                    ),
-                    new CodeExpression[] { new CodePrimitiveExpression(chars) }
-                )
-            );
+            main.Statements
+                .Add(
+                    new CodeMethodInvokeExpression(
+                        new CodeMethodReferenceExpression(
+                            new CodeTypeReferenceExpression(typeof(Console)),
+                            "WriteLine"
+                        ),
+                        new CodeExpression[] { new CodePrimitiveExpression(chars) }
+                    )
+                );
 
             AssertEqual(
                 main,
@@ -1868,18 +1863,19 @@ namespace System.CodeDom.Compiler.Tests
                 Type t in new[] { typeof(int), typeof(object), typeof(DateTime), typeof(string) }
             )
             {
-                main.Statements.Add(
-                    new CodeMethodInvokeExpression(
-                        new CodeMethodReferenceExpression(
-                            new CodeTypeReferenceExpression(typeof(Console)),
-                            "WriteLine"
-                        ),
-                        new CodeExpression[]
-                        {
-                            new CodeDefaultValueExpression(new CodeTypeReference(t)),
-                        }
-                    )
-                );
+                main.Statements
+                    .Add(
+                        new CodeMethodInvokeExpression(
+                            new CodeMethodReferenceExpression(
+                                new CodeTypeReferenceExpression(typeof(Console)),
+                                "WriteLine"
+                            ),
+                            new CodeExpression[]
+                            {
+                                new CodeDefaultValueExpression(new CodeTypeReference(t)),
+                            }
+                        )
+                    );
             }
 
             AssertEqual(
@@ -1913,70 +1909,75 @@ namespace System.CodeDom.Compiler.Tests
             cmm.Name = "Primitives";
             cmm.ReturnType = new CodeTypeReference(typeof(string));
             cmm.Attributes = MemberAttributes.Public | MemberAttributes.Static;
-            cmm.Statements.Add(
-                new CodeMethodReturnStatement(
-                    new CodeMethodInvokeExpression(
-                        new CodeTypeOfExpression(typeof(int)),
-                        "ToString"
+            cmm.Statements
+                .Add(
+                    new CodeMethodReturnStatement(
+                        new CodeMethodInvokeExpression(
+                            new CodeTypeOfExpression(typeof(int)),
+                            "ToString"
+                        )
                     )
-                )
-            );
+                );
             class1.Members.Add(cmm);
 
             cmm = new CodeMemberMethod();
             cmm.Name = "ArraysOfPrimitives";
             cmm.ReturnType = new CodeTypeReference(typeof(string));
             cmm.Attributes = MemberAttributes.Public | MemberAttributes.Static;
-            cmm.Statements.Add(
-                new CodeMethodReturnStatement(
-                    new CodeMethodInvokeExpression(
-                        new CodeTypeOfExpression(typeof(int[])),
-                        "ToString"
+            cmm.Statements
+                .Add(
+                    new CodeMethodReturnStatement(
+                        new CodeMethodInvokeExpression(
+                            new CodeTypeOfExpression(typeof(int[])),
+                            "ToString"
+                        )
                     )
-                )
-            );
+                );
             class1.Members.Add(cmm);
 
             cmm = new CodeMemberMethod();
             cmm.Name = "NonPrimitives";
             cmm.ReturnType = new CodeTypeReference(typeof(string));
             cmm.Attributes = MemberAttributes.Public | MemberAttributes.Static;
-            cmm.Statements.Add(
-                new CodeMethodReturnStatement(
-                    new CodeMethodInvokeExpression(
-                        new CodeTypeOfExpression(typeof(System.ICloneable)),
-                        "ToString"
+            cmm.Statements
+                .Add(
+                    new CodeMethodReturnStatement(
+                        new CodeMethodInvokeExpression(
+                            new CodeTypeOfExpression(typeof(System.ICloneable)),
+                            "ToString"
+                        )
                     )
-                )
-            );
+                );
             class1.Members.Add(cmm);
 
             cmm = new CodeMemberMethod();
             cmm.Name = "ArraysOfNonPrimitives";
             cmm.ReturnType = new CodeTypeReference(typeof(string));
             cmm.Attributes = MemberAttributes.Public | MemberAttributes.Static;
-            cmm.Statements.Add(
-                new CodeMethodReturnStatement(
-                    new CodeMethodInvokeExpression(
-                        new CodeTypeOfExpression(typeof(System.ICloneable[])),
-                        "ToString"
+            cmm.Statements
+                .Add(
+                    new CodeMethodReturnStatement(
+                        new CodeMethodInvokeExpression(
+                            new CodeTypeOfExpression(typeof(System.ICloneable[])),
+                            "ToString"
+                        )
                     )
-                )
-            );
+                );
             class1.Members.Add(cmm);
 
             cmm = new CodeMemberMethod();
             cmm.Name = "Enumerations";
             cmm.ReturnType = new CodeTypeReference(typeof(string));
             cmm.Attributes = MemberAttributes.Public | MemberAttributes.Static;
-            cmm.Statements.Add(
-                new CodeMethodReturnStatement(
-                    new CodeMethodInvokeExpression(
-                        new CodeTypeOfExpression("DecimalEnum"),
-                        "ToString"
+            cmm.Statements
+                .Add(
+                    new CodeMethodReturnStatement(
+                        new CodeMethodInvokeExpression(
+                            new CodeTypeOfExpression("DecimalEnum"),
+                            "ToString"
+                        )
                     )
-                )
-            );
+                );
             class1.Members.Add(cmm);
 
             var ce = new CodeTypeDeclaration("DecimalEnum") { IsEnum = true };
@@ -2040,8 +2041,7 @@ namespace System.CodeDom.Compiler.Tests
             cmm.Parameters.Add(param);
 
             CodeTryCatchFinallyStatement tcfstmt = new CodeTryCatchFinallyStatement();
-            tcfstmt
-                .FinallyStatements
+            tcfstmt.FinallyStatements
                 .Add(
                     new CodeAssignStatement(
                         new CodeVariableReferenceExpression("a"),
@@ -2053,9 +2053,8 @@ namespace System.CodeDom.Compiler.Tests
                     )
                 );
             cmm.Statements.Add(tcfstmt);
-            cmm.Statements.Add(
-                new CodeMethodReturnStatement(new CodeVariableReferenceExpression("a"))
-            );
+            cmm.Statements
+                .Add(new CodeMethodReturnStatement(new CodeVariableReferenceExpression("a")));
             cd.Members.Add(cmm);
 
             CodeBinaryOperatorExpression cboExpression = new CodeBinaryOperatorExpression(
@@ -2075,23 +2074,20 @@ namespace System.CodeDom.Compiler.Tests
             cmm.Attributes = MemberAttributes.Public | MemberAttributes.Static;
             param = new CodeParameterDeclarationExpression(typeof(int), "a");
             cmm.Parameters.Add(param);
-            cmm.Parameters.Add(
-                new CodeParameterDeclarationExpression(typeof(string), "exceptionMessage")
-            );
+            cmm.Parameters
+                .Add(new CodeParameterDeclarationExpression(typeof(string), "exceptionMessage"));
 
             tcfstmt = new CodeTryCatchFinallyStatement();
             CodeCatchClause catchClause = new CodeCatchClause("e");
             tcfstmt.TryStatements.Add(assignStatement);
-            catchClause
-                .Statements
+            catchClause.Statements
                 .Add(
                     new CodeAssignStatement(
                         new CodeVariableReferenceExpression("a"),
                         new CodePrimitiveExpression(3)
                     )
                 );
-            catchClause
-                .Statements
+            catchClause.Statements
                 .Add(
                     new CodeAssignStatement(
                         new CodeVariableReferenceExpression("exceptionMessage"),
@@ -2105,9 +2101,8 @@ namespace System.CodeDom.Compiler.Tests
             tcfstmt.FinallyStatements.Add(CreateVariableIncrementExpression("a", 1));
 
             cmm.Statements.Add(tcfstmt);
-            cmm.Statements.Add(
-                new CodeMethodReturnStatement(new CodeVariableReferenceExpression("a"))
-            );
+            cmm.Statements
+                .Add(new CodeMethodReturnStatement(new CodeVariableReferenceExpression("a")));
 
             cd.Members.Add(cmm);
 
@@ -2118,9 +2113,8 @@ namespace System.CodeDom.Compiler.Tests
             cmm.Attributes = MemberAttributes.Public | MemberAttributes.Static;
             param = new CodeParameterDeclarationExpression(typeof(int), "a");
             cmm.Parameters.Add(param);
-            cmm.Parameters.Add(
-                new CodeParameterDeclarationExpression(typeof(string), "exceptionMessage")
-            );
+            cmm.Parameters
+                .Add(new CodeParameterDeclarationExpression(typeof(string), "exceptionMessage"));
 
             tcfstmt = new CodeTryCatchFinallyStatement();
             catchClause = new CodeCatchClause(
@@ -2128,16 +2122,14 @@ namespace System.CodeDom.Compiler.Tests
                 new CodeTypeReference(typeof(ArgumentNullException))
             );
             tcfstmt.TryStatements.Add(assignStatement);
-            catchClause
-                .Statements
+            catchClause.Statements
                 .Add(
                     new CodeAssignStatement(
                         new CodeVariableReferenceExpression("a"),
                         new CodePrimitiveExpression(9)
                     )
                 );
-            catchClause
-                .Statements
+            catchClause.Statements
                 .Add(
                     new CodeAssignStatement(
                         new CodeVariableReferenceExpression("exceptionMessage"),
@@ -2151,8 +2143,7 @@ namespace System.CodeDom.Compiler.Tests
 
             // add a second catch clause
             catchClause = new CodeCatchClause("f", new CodeTypeReference(typeof(Exception)));
-            catchClause
-                .Statements
+            catchClause.Statements
                 .Add(
                     new CodeAssignStatement(
                         new CodeVariableReferenceExpression("exceptionMessage"),
@@ -2162,8 +2153,7 @@ namespace System.CodeDom.Compiler.Tests
                         )
                     )
                 );
-            catchClause
-                .Statements
+            catchClause.Statements
                 .Add(
                     new CodeAssignStatement(
                         new CodeVariableReferenceExpression("a"),
@@ -2173,9 +2163,8 @@ namespace System.CodeDom.Compiler.Tests
             tcfstmt.CatchClauses.Add(catchClause);
 
             cmm.Statements.Add(tcfstmt);
-            cmm.Statements.Add(
-                new CodeMethodReturnStatement(new CodeVariableReferenceExpression("a"))
-            );
+            cmm.Statements
+                .Add(new CodeMethodReturnStatement(new CodeVariableReferenceExpression("a")));
             cd.Members.Add(cmm);
 
             // catch throws exception
@@ -2190,14 +2179,12 @@ namespace System.CodeDom.Compiler.Tests
             catchClause = new CodeCatchClause("e");
             tcfstmt.TryStatements.Add(assignStatement);
             catchClause.Statements.Add(new CodeCommentStatement("Error handling"));
-            catchClause
-                .Statements
+            catchClause.Statements
                 .Add(new CodeThrowExceptionStatement(new CodeArgumentReferenceExpression("e")));
             tcfstmt.CatchClauses.Add(catchClause);
             cmm.Statements.Add(tcfstmt);
-            cmm.Statements.Add(
-                new CodeMethodReturnStatement(new CodeVariableReferenceExpression("a"))
-            );
+            cmm.Statements
+                .Add(new CodeMethodReturnStatement(new CodeVariableReferenceExpression("a")));
             cd.Members.Add(cmm);
 
             AssertEqual(
@@ -2307,8 +2294,7 @@ namespace System.CodeDom.Compiler.Tests
                 "varStructA"
             );
             nestedStructMethod.Statements.Add(varStructA);
-            nestedStructMethod
-                .Statements
+            nestedStructMethod.Statements
                 .Add(
                     new CodeAssignStatement(
                         /* Expression1 */new CodeFieldReferenceExpression(
@@ -2321,8 +2307,7 @@ namespace System.CodeDom.Compiler.Tests
                         /* Expression1 */new CodePrimitiveExpression(3)
                     )
                 );
-            nestedStructMethod
-                .Statements
+            nestedStructMethod.Statements
                 .Add(
                     new CodeMethodReturnStatement(
                         new CodeFieldReferenceExpression(
@@ -2346,8 +2331,7 @@ namespace System.CodeDom.Compiler.Tests
                 "varStructC"
             );
             nonPrimitiveStructMethod.Statements.Add(varStructC);
-            nonPrimitiveStructMethod
-                .Statements
+            nonPrimitiveStructMethod.Statements
                 .Add(
                     new CodeAssignStatement(
                         /* Expression1 */new CodeFieldReferenceExpression(
@@ -2364,8 +2348,7 @@ namespace System.CodeDom.Compiler.Tests
                         )
                     )
                 );
-            nonPrimitiveStructMethod
-                .Statements
+            nonPrimitiveStructMethod.Statements
                 .Add(
                     new CodeMethodReturnStatement(
                         new CodeFieldReferenceExpression(
@@ -2424,9 +2407,8 @@ namespace System.CodeDom.Compiler.Tests
                 var cu = new CodeCompileUnit();
                 CodeNamespace ns = new CodeNamespace("Namespace1");
 
-                cu.StartDirectives.Add(
-                    new CodeRegionDirective(CodeRegionMode.Start, "Compile Unit Region")
-                );
+                cu.StartDirectives
+                    .Add(new CodeRegionDirective(CodeRegionMode.Start, "Compile Unit Region"));
                 cu.EndDirectives.Add(new CodeRegionDirective(CodeRegionMode.End, string.Empty));
 
                 cu.Namespaces.Add(ns);
@@ -2434,9 +2416,8 @@ namespace System.CodeDom.Compiler.Tests
                 var cd = new CodeTypeDeclaration("Class1");
                 ns.Types.Add(cd);
 
-                cd.StartDirectives.Add(
-                    new CodeRegionDirective(CodeRegionMode.Start, "Outer Type Region")
-                );
+                cd.StartDirectives
+                    .Add(new CodeRegionDirective(CodeRegionMode.Start, "Outer Type Region"));
                 cd.EndDirectives.Add(new CodeRegionDirective(CodeRegionMode.End, string.Empty));
 
                 cd.Comments.Add(new CodeCommentStatement("Outer Type Comment"));
@@ -2444,8 +2425,7 @@ namespace System.CodeDom.Compiler.Tests
                 CodeMemberField field1 = new CodeMemberField(typeof(String), "field1");
                 CodeMemberField field2 = new CodeMemberField(typeof(String), "field2");
                 field1.Comments.Add(new CodeCommentStatement("Field 1 Comment"));
-                field2
-                    .StartDirectives
+                field2.StartDirectives
                     .Add(new CodeRegionDirective(CodeRegionMode.Start, "Field Region"));
                 field2.EndDirectives.Add(new CodeRegionDirective(CodeRegionMode.End, string.Empty));
 
@@ -2461,17 +2441,15 @@ namespace System.CodeDom.Compiler.Tests
                 evt2.Attributes =
                     (evt2.Attributes & ~MemberAttributes.AccessMask) | MemberAttributes.Public;
 
-                evt2.StartDirectives.Add(
-                    new CodeRegionDirective(CodeRegionMode.Start, "Event Region")
-                );
+                evt2.StartDirectives
+                    .Add(new CodeRegionDirective(CodeRegionMode.Start, "Event Region"));
                 evt2.EndDirectives.Add(new CodeRegionDirective(CodeRegionMode.End, string.Empty));
 
                 CodeMemberMethod method1 = new CodeMemberMethod();
                 method1.Name = "Method1";
                 method1.Attributes =
                     (method1.Attributes & ~MemberAttributes.AccessMask) | MemberAttributes.Public;
-                method1
-                    .Statements
+                method1.Statements
                     .Add(
                         new CodeDelegateInvokeExpression(
                             new CodeEventReferenceExpression(
@@ -2493,8 +2471,7 @@ namespace System.CodeDom.Compiler.Tests
                 method2.Name = "Method2";
                 method2.Attributes =
                     (method2.Attributes & ~MemberAttributes.AccessMask) | MemberAttributes.Public;
-                method2
-                    .Statements
+                method2.Statements
                     .Add(
                         new CodeDelegateInvokeExpression(
                             new CodeEventReferenceExpression(
@@ -2514,11 +2491,9 @@ namespace System.CodeDom.Compiler.Tests
                 method2.LinePragma = new CodeLinePragma("MethodLinePragma.txt", 500);
                 method2.Comments.Add(new CodeCommentStatement("Method 2 Comment"));
 
-                method2
-                    .StartDirectives
+                method2.StartDirectives
                     .Add(new CodeRegionDirective(CodeRegionMode.Start, "Method Region"));
-                method2
-                    .EndDirectives
+                method2.EndDirectives
                     .Add(new CodeRegionDirective(CodeRegionMode.End, string.Empty));
 
                 CodeMemberProperty property1 = new CodeMemberProperty();
@@ -2526,8 +2501,7 @@ namespace System.CodeDom.Compiler.Tests
                 property1.Type = new CodeTypeReference(typeof(string));
                 property1.Attributes =
                     (property1.Attributes & ~MemberAttributes.AccessMask) | MemberAttributes.Public;
-                property1
-                    .GetStatements
+                property1.GetStatements
                     .Add(
                         new CodeMethodReturnStatement(
                             new CodeFieldReferenceExpression(
@@ -2542,8 +2516,7 @@ namespace System.CodeDom.Compiler.Tests
                 property2.Type = new CodeTypeReference(typeof(string));
                 property2.Attributes =
                     (property2.Attributes & ~MemberAttributes.AccessMask) | MemberAttributes.Public;
-                property2
-                    .GetStatements
+                property2.GetStatements
                     .Add(
                         new CodeMethodReturnStatement(
                             new CodeFieldReferenceExpression(
@@ -2553,11 +2526,9 @@ namespace System.CodeDom.Compiler.Tests
                         )
                     );
 
-                property2
-                    .StartDirectives
+                property2.StartDirectives
                     .Add(new CodeRegionDirective(CodeRegionMode.Start, "Property Region"));
-                property2
-                    .EndDirectives
+                property2.EndDirectives
                     .Add(new CodeRegionDirective(CodeRegionMode.End, string.Empty));
 
                 CodeConstructor constructor1 = new CodeConstructor();
@@ -2568,44 +2539,36 @@ namespace System.CodeDom.Compiler.Tests
                     new CodeFieldReferenceExpression(new CodeThisReferenceExpression(), "field1"),
                     new CodePrimitiveExpression("value1")
                 );
-                conState1
-                    .StartDirectives
+                conState1.StartDirectives
                     .Add(new CodeRegionDirective(CodeRegionMode.Start, "Statements Region"));
                 constructor1.Statements.Add(conState1);
                 CodeStatement conState2 = new CodeAssignStatement(
                     new CodeFieldReferenceExpression(new CodeThisReferenceExpression(), "field2"),
                     new CodePrimitiveExpression("value2")
                 );
-                conState2
-                    .EndDirectives
+                conState2.EndDirectives
                     .Add(new CodeRegionDirective(CodeRegionMode.End, string.Empty));
                 constructor1.Statements.Add(conState2);
 
-                constructor1
-                    .StartDirectives
+                constructor1.StartDirectives
                     .Add(new CodeRegionDirective(CodeRegionMode.Start, "Constructor Region"));
-                constructor1
-                    .EndDirectives
+                constructor1.EndDirectives
                     .Add(new CodeRegionDirective(CodeRegionMode.End, string.Empty));
 
                 CodeConstructor constructor2 = new CodeConstructor();
                 constructor2.Attributes =
                     (constructor2.Attributes & ~MemberAttributes.AccessMask)
                     | MemberAttributes.Public;
-                constructor2
-                    .Parameters
+                constructor2.Parameters
                     .Add(new CodeParameterDeclarationExpression(typeof(string), "value1"));
-                constructor2
-                    .Parameters
+                constructor2.Parameters
                     .Add(new CodeParameterDeclarationExpression(typeof(string), "value2"));
 
                 CodeTypeConstructor typeConstructor2 = new CodeTypeConstructor();
 
-                typeConstructor2
-                    .StartDirectives
+                typeConstructor2.StartDirectives
                     .Add(new CodeRegionDirective(CodeRegionMode.Start, "Type Constructor Region"));
-                typeConstructor2
-                    .EndDirectives
+                typeConstructor2.EndDirectives
                     .Add(new CodeRegionDirective(CodeRegionMode.End, string.Empty));
 
                 CodeEntryPointMethod methodMain = new CodeEntryPointMethod();
@@ -2615,25 +2578,21 @@ namespace System.CodeDom.Compiler.Tests
                 nestedClass2.LinePragma = new CodeLinePragma("NestedTypeLinePragma.txt", 400);
                 nestedClass2.Comments.Add(new CodeCommentStatement("Nested Type Comment"));
 
-                nestedClass2
-                    .StartDirectives
+                nestedClass2.StartDirectives
                     .Add(new CodeRegionDirective(CodeRegionMode.Start, "Nested Type Region"));
-                nestedClass2
-                    .EndDirectives
+                nestedClass2.EndDirectives
                     .Add(new CodeRegionDirective(CodeRegionMode.End, string.Empty));
 
                 CodeTypeDelegate delegate1 = new CodeTypeDelegate();
                 delegate1.Name = "nestedDelegate1";
-                delegate1
-                    .Parameters
+                delegate1.Parameters
                     .Add(
                         new CodeParameterDeclarationExpression(
                             new CodeTypeReference("System.Object"),
                             "sender"
                         )
                     );
-                delegate1
-                    .Parameters
+                delegate1.Parameters
                     .Add(
                         new CodeParameterDeclarationExpression(
                             new CodeTypeReference("System.EventArgs"),
@@ -2643,16 +2602,14 @@ namespace System.CodeDom.Compiler.Tests
 
                 CodeTypeDelegate delegate2 = new CodeTypeDelegate();
                 delegate2.Name = "nestedDelegate2";
-                delegate2
-                    .Parameters
+                delegate2.Parameters
                     .Add(
                         new CodeParameterDeclarationExpression(
                             new CodeTypeReference("System.Object"),
                             "sender"
                         )
                     );
-                delegate2
-                    .Parameters
+                delegate2.Parameters
                     .Add(
                         new CodeParameterDeclarationExpression(
                             new CodeTypeReference("System.EventArgs"),
@@ -2660,11 +2617,9 @@ namespace System.CodeDom.Compiler.Tests
                         )
                     );
 
-                delegate2
-                    .StartDirectives
+                delegate2.StartDirectives
                     .Add(new CodeRegionDirective(CodeRegionMode.Start, "Delegate Region"));
-                delegate2
-                    .EndDirectives
+                delegate2.EndDirectives
                     .Add(new CodeRegionDirective(CodeRegionMode.End, string.Empty));
 
                 var snippet1 = new CodeSnippetTypeMember();
@@ -2674,8 +2629,7 @@ namespace System.CodeDom.Compiler.Tests
                 regionStart.RegionText = "Snippet Region";
                 regionStart.RegionMode = CodeRegionMode.Start;
                 snippet2.StartDirectives.Add(regionStart);
-                snippet2
-                    .EndDirectives
+                snippet2.EndDirectives
                     .Add(new CodeRegionDirective(CodeRegionMode.End, string.Empty));
 
                 cd.Members.Add(field1);
@@ -2851,8 +2805,7 @@ namespace System.CodeDom.Compiler.Tests
             prop1.Attributes = MemberAttributes.Public;
             prop1.HasGet = true;
             prop1.HasSet = true;
-            prop1
-                .GetStatements
+            prop1.GetStatements
                 .Add(
                     new CodeMethodReturnStatement(
                         new CodeBinaryOperatorExpression(
@@ -2862,8 +2815,7 @@ namespace System.CodeDom.Compiler.Tests
                         )
                     )
                 );
-            prop1
-                .SetStatements
+            prop1.SetStatements
                 .Add(
                     new CodeAssignStatement(
                         new CodeVariableReferenceExpression("int1"),
@@ -2879,16 +2831,14 @@ namespace System.CodeDom.Compiler.Tests
             overrideProp.Attributes = MemberAttributes.Public | MemberAttributes.Override;
             overrideProp.HasGet = true;
             overrideProp.HasSet = true;
-            overrideProp
-                .SetStatements
+            overrideProp.SetStatements
                 .Add(
                     new CodeAssignStatement(
                         new CodeVariableReferenceExpression("tempString"),
                         new CodeVariableReferenceExpression("value")
                     )
                 );
-            overrideProp
-                .GetStatements
+            overrideProp.GetStatements
                 .Add(new CodeMethodReturnStatement(new CodePrimitiveExpression("Hello World")));
 
             class1.Members.Add(overrideProp);
@@ -2908,8 +2858,7 @@ namespace System.CodeDom.Compiler.Tests
                 configuredProp.Attributes = attrs;
                 configuredProp.HasGet = true;
                 configuredProp.HasSet = true;
-                configuredProp
-                    .GetStatements
+                configuredProp.GetStatements
                     .Add(
                         new CodeMethodReturnStatement(
                             new CodeBinaryOperatorExpression(
@@ -2919,8 +2868,7 @@ namespace System.CodeDom.Compiler.Tests
                             )
                         )
                     );
-                configuredProp
-                    .SetStatements
+                configuredProp.SetStatements
                     .Add(
                         new CodeAssignStatement(
                             new CodeVariableReferenceExpression("int1"),
@@ -2936,8 +2884,7 @@ namespace System.CodeDom.Compiler.Tests
             staticProp.Type = new CodeTypeReference(typeof(int));
             staticProp.Attributes = MemberAttributes.Public | MemberAttributes.Static;
             staticProp.HasGet = true;
-            staticProp
-                .GetStatements
+            staticProp.GetStatements
                 .Add(new CodeMethodReturnStatement(new CodePrimitiveExpression(99)));
             class1.Members.Add(staticProp);
 
@@ -2952,8 +2899,7 @@ namespace System.CodeDom.Compiler.Tests
             );
             thisRef.Parameters.Add(param);
 
-            thisRef
-                .Statements
+            thisRef.Statements
                 .Add(
                     new CodeAssignStatement(
                         new CodePropertyReferenceExpression(
@@ -2963,8 +2909,7 @@ namespace System.CodeDom.Compiler.Tests
                         new CodeVariableReferenceExpression("value")
                     )
                 );
-            thisRef
-                .Statements
+            thisRef.Statements
                 .Add(
                     new CodeMethodReturnStatement(
                         new CodePropertyReferenceExpression(
@@ -2986,8 +2931,7 @@ namespace System.CodeDom.Compiler.Tests
             );
             setProp.Parameters.Add(intParam);
 
-            setProp
-                .Statements
+            setProp.Statements
                 .Add(
                     new CodeAssignStatement(
                         new CodePropertyReferenceExpression(
@@ -2997,8 +2941,7 @@ namespace System.CodeDom.Compiler.Tests
                         new CodeVariableReferenceExpression("value")
                     )
                 );
-            setProp
-                .Statements
+            setProp.Statements
                 .Add(new CodeMethodReturnStatement(new CodeVariableReferenceExpression("int1")));
             class1.Members.Add(setProp);
 
@@ -3142,11 +3085,9 @@ namespace System.CodeDom.Compiler.Tests
                 new CodeParameterDeclarationExpression();
             parameter2.Name = "array";
             parameter2.Type = new CodeTypeReference(typeof(object[]));
-            parameter2
-                .CustomAttributes
+            parameter2.CustomAttributes
                 .Add(new CodeAttributeDeclaration("System.ParamArrayAttribute"));
-            parameter2
-                .CustomAttributes
+            parameter2.CustomAttributes
                 .Add(
                     new CodeAttributeDeclaration("System.Runtime.InteropServices.OptionalAttribute")
                 );
@@ -3159,13 +3100,11 @@ namespace System.CodeDom.Compiler.Tests
             fooMethod1.Statements.Add(CreateStatement("str", 1));
             fooMethod1.Statements.Add(CreateStatement("str", 2));
 
-            fooMethod1
-                .Statements
+            fooMethod1.Statements
                 .Add(new CodeMethodReturnStatement(new CodeVariableReferenceExpression("str")));
 
             CodeEntryPointMethod methodMain = new CodeEntryPointMethod();
-            methodMain
-                .Statements
+            methodMain.Statements
                 .Add(
                     new CodeVariableDeclarationStatement(
                         new CodeTypeReference("Class1"),
@@ -3174,8 +3113,7 @@ namespace System.CodeDom.Compiler.Tests
                     )
                 );
 
-            methodMain
-                .Statements
+            methodMain.Statements
                 .Add(
                     new CodeExpressionStatement(
                         new CodeMethodInvokeExpression(
@@ -3224,18 +3162,23 @@ namespace System.CodeDom.Compiler.Tests
             ns.Comments.Add(new CodeCommentStatement("Some comment on a namespace"));
 
             var cd = new CodeTypeDeclaration("MyType");
-            cd.Comments.Add(
-                new CodeCommentStatement("<summary>Insightful comment</summary>", docComment: true)
-            );
+            cd.Comments
+                .Add(
+                    new CodeCommentStatement(
+                        "<summary>Insightful comment</summary>",
+                        docComment: true
+                    )
+                );
             ns.Types.Add(cd);
 
             var cmm = new CodeMemberMethod() { Name = "SomeMethod" };
-            cmm.Comments.Add(
-                new CodeCommentStatement(
-                    "<summary>Another insightful comment</summary>",
-                    docComment: true
-                )
-            );
+            cmm.Comments
+                .Add(
+                    new CodeCommentStatement(
+                        "<summary>Another insightful comment</summary>",
+                        docComment: true
+                    )
+                );
             cd.Members.Add(cmm);
 
             AssertEqual(
@@ -3266,11 +3209,12 @@ namespace System.CodeDom.Compiler.Tests
             cmm = new CodeMemberMethod();
             cmm.Name = "while";
             cmm.Attributes = MemberAttributes.Final | MemberAttributes.Public;
-            cmm.Statements.Add(
-                new CodeExpressionStatement(
-                    new CodeMethodInvokeExpression(new CodeThisReferenceExpression(), "for")
-                )
-            );
+            cmm.Statements
+                .Add(
+                    new CodeExpressionStatement(
+                        new CodeMethodInvokeExpression(new CodeThisReferenceExpression(), "for")
+                    )
+                );
             class1.Members.Add(cmm);
 
             class1 = new CodeTypeDeclaration();
@@ -3282,24 +3226,25 @@ namespace System.CodeDom.Compiler.Tests
             cmm.ReturnType = new CodeTypeReference(typeof(int));
             cmm.Parameters.Add(new CodeParameterDeclarationExpression(typeof(int), "i"));
             cmm.Attributes = MemberAttributes.Static | MemberAttributes.Public;
-            cmm.Statements.Add(
-                new CodeVariableDeclarationStatement(
-                    new CodeTypeReference("Class1"),
-                    "temp",
-                    new CodeObjectCreateExpression(new CodeTypeReference("Class1"))
-                )
-            );
-            cmm.Statements.Add(
-                new CodeExpressionStatement(
-                    new CodeMethodInvokeExpression(
-                        new CodeVariableReferenceExpression("temp"),
-                        "while"
+            cmm.Statements
+                .Add(
+                    new CodeVariableDeclarationStatement(
+                        new CodeTypeReference("Class1"),
+                        "temp",
+                        new CodeObjectCreateExpression(new CodeTypeReference("Class1"))
                     )
-                )
-            );
-            cmm.Statements.Add(
-                new CodeMethodReturnStatement(new CodeVariableReferenceExpression("i"))
-            );
+                );
+            cmm.Statements
+                .Add(
+                    new CodeExpressionStatement(
+                        new CodeMethodInvokeExpression(
+                            new CodeVariableReferenceExpression("temp"),
+                            "while"
+                        )
+                    )
+                );
+            cmm.Statements
+                .Add(new CodeMethodReturnStatement(new CodeVariableReferenceExpression("i")));
             class1.Members.Add(cmm);
 
             AssertEqual(
@@ -3336,67 +3281,67 @@ namespace System.CodeDom.Compiler.Tests
             var cmm = new CodeMemberMethod();
             cmm.Name = "TestBasicIterationStatement";
             cmm.Attributes = MemberAttributes.Public | MemberAttributes.Static;
-            cmm.Statements.Add(
-                new CodeVariableDeclarationStatement(new CodeTypeReference(typeof(int)), "i")
-            );
-            cmm.Statements.Add(
-                new CodeIterationStatement(
-                    new CodeAssignStatement(
-                        new CodeVariableReferenceExpression("i"),
-                        new CodePrimitiveExpression(1)
-                    ),
-                    new CodeBinaryOperatorExpression(
-                        new CodeVariableReferenceExpression("i"),
-                        CodeBinaryOperatorType.LessThan,
-                        new CodePrimitiveExpression(8)
-                    ),
-                    new CodeAssignStatement(
-                        new CodeVariableReferenceExpression("i"),
+            cmm.Statements
+                .Add(new CodeVariableDeclarationStatement(new CodeTypeReference(typeof(int)), "i"));
+            cmm.Statements
+                .Add(
+                    new CodeIterationStatement(
+                        new CodeAssignStatement(
+                            new CodeVariableReferenceExpression("i"),
+                            new CodePrimitiveExpression(1)
+                        ),
                         new CodeBinaryOperatorExpression(
                             new CodeVariableReferenceExpression("i"),
-                            CodeBinaryOperatorType.Multiply,
-                            new CodePrimitiveExpression(2)
+                            CodeBinaryOperatorType.LessThan,
+                            new CodePrimitiveExpression(8)
+                        ),
+                        new CodeAssignStatement(
+                            new CodeVariableReferenceExpression("i"),
+                            new CodeBinaryOperatorExpression(
+                                new CodeVariableReferenceExpression("i"),
+                                CodeBinaryOperatorType.Multiply,
+                                new CodePrimitiveExpression(2)
+                            )
                         )
                     )
-                )
-            );
+                );
             cmm.ReturnType = new CodeTypeReference(typeof(int));
-            cmm.Statements.Add(
-                new CodeMethodReturnStatement(new CodeVariableReferenceExpression("i"))
-            );
+            cmm.Statements
+                .Add(new CodeMethodReturnStatement(new CodeVariableReferenceExpression("i")));
             class1.Members.Add(cmm);
 
             cmm = new CodeMemberMethod();
             cmm.Name = "TestComplexIterationStatement";
             cmm.Attributes = MemberAttributes.Public | MemberAttributes.Static;
             cmm.ReturnType = new CodeTypeReference(typeof(int));
-            cmm.Statements.Add(
-                new CodeVariableDeclarationStatement(new CodeTypeReference(typeof(int)), "i")
-            );
-            cmm.Statements.Add(
-                new CodeVariableDeclarationStatement(
-                    new CodeTypeReference(typeof(int)),
-                    "a",
-                    new CodePrimitiveExpression(7)
-                )
-            );
-            cmm.Statements.Add(
-                new CodeVariableDeclarationStatement(new CodeTypeReference(typeof(int)), "b")
-            );
-            cmm.Statements.Add(
-                new CodeVariableDeclarationStatement(
-                    new CodeTypeReference(typeof(int)),
-                    "c",
-                    new CodePrimitiveExpression(9)
-                )
-            );
-            cmm.Statements.Add(
-                new CodeVariableDeclarationStatement(
-                    new CodeTypeReference(typeof(int)),
-                    "d",
-                    new CodePrimitiveExpression(2)
-                )
-            );
+            cmm.Statements
+                .Add(new CodeVariableDeclarationStatement(new CodeTypeReference(typeof(int)), "i"));
+            cmm.Statements
+                .Add(
+                    new CodeVariableDeclarationStatement(
+                        new CodeTypeReference(typeof(int)),
+                        "a",
+                        new CodePrimitiveExpression(7)
+                    )
+                );
+            cmm.Statements
+                .Add(new CodeVariableDeclarationStatement(new CodeTypeReference(typeof(int)), "b"));
+            cmm.Statements
+                .Add(
+                    new CodeVariableDeclarationStatement(
+                        new CodeTypeReference(typeof(int)),
+                        "c",
+                        new CodePrimitiveExpression(9)
+                    )
+                );
+            cmm.Statements
+                .Add(
+                    new CodeVariableDeclarationStatement(
+                        new CodeTypeReference(typeof(int)),
+                        "d",
+                        new CodePrimitiveExpression(2)
+                    )
+                );
             CodeIterationStatement iteration = new CodeIterationStatement();
             iteration.IncrementStatement = new CodeAssignStatement(
                 new CodeVariableReferenceExpression("i"),
@@ -3454,8 +3399,7 @@ namespace System.CodeDom.Compiler.Tests
                     new CodePrimitiveExpression(2)
                 )
             );
-            secondFor
-                .Statements
+            secondFor.Statements
                 .Add(
                     new CodeAssignStatement(
                         new CodeVariableReferenceExpression("d"),
@@ -3477,9 +3421,8 @@ namespace System.CodeDom.Compiler.Tests
 
             iteration.Statements.Add(firstIf);
             cmm.Statements.Add(iteration);
-            cmm.Statements.Add(
-                new CodeMethodReturnStatement(new CodeVariableReferenceExpression("d"))
-            );
+            cmm.Statements
+                .Add(new CodeMethodReturnStatement(new CodeVariableReferenceExpression("d")));
             class1.Members.Add(cmm);
 
             AssertEqual(
@@ -3548,14 +3491,12 @@ namespace System.CodeDom.Compiler.Tests
             indexerProperty.Name = "Item";
             indexerProperty.Attributes = MemberAttributes.Public | MemberAttributes.Final;
             indexerProperty.Type = new CodeTypeReference(typeof(int));
-            indexerProperty
-                .Parameters
+            indexerProperty.Parameters
                 .Add(
                     new CodeParameterDeclarationExpression(new CodeTypeReference(typeof(int)), "i")
                 );
             // uses array indexer
-            indexerProperty
-                .SetStatements
+            indexerProperty.SetStatements
                 .Add(
                     new CodeAssignStatement(
                         new CodeArrayIndexerExpression(
@@ -3568,8 +3509,7 @@ namespace System.CodeDom.Compiler.Tests
                         new CodeVariableReferenceExpression("value")
                     )
                 );
-            indexerProperty
-                .GetStatements
+            indexerProperty.GetStatements
                 .Add(
                     new CodeMethodReturnStatement(
                         new CodeArrayIndexerExpression(
@@ -3588,8 +3528,7 @@ namespace System.CodeDom.Compiler.Tests
             indexerProperty.Name = "Item";
             indexerProperty.Attributes = MemberAttributes.Public | MemberAttributes.Final;
             indexerProperty.Type = new CodeTypeReference(typeof(int));
-            indexerProperty
-                .SetStatements
+            indexerProperty.SetStatements
                 .Add(
                     new CodeAssignStatement(
                         new CodeArrayIndexerExpression(
@@ -3609,8 +3548,7 @@ namespace System.CodeDom.Compiler.Tests
                         new CodeVariableReferenceExpression("value")
                     )
                 );
-            indexerProperty
-                .GetStatements
+            indexerProperty.GetStatements
                 .Add(
                     new CodeMethodReturnStatement(
                         new CodeArrayIndexerExpression(
@@ -3626,13 +3564,11 @@ namespace System.CodeDom.Compiler.Tests
                         )
                     )
                 );
-            indexerProperty
-                .Parameters
+            indexerProperty.Parameters
                 .Add(
                     new CodeParameterDeclarationExpression(new CodeTypeReference(typeof(int)), "a")
                 );
-            indexerProperty
-                .Parameters
+            indexerProperty.Parameters
                 .Add(
                     new CodeParameterDeclarationExpression(new CodeTypeReference(typeof(int)), "b")
                 );
@@ -3647,47 +3583,32 @@ namespace System.CodeDom.Compiler.Tests
             var cmm = new CodeMemberMethod();
             cmm.Name = "TestMethod";
             cmm.ReturnType = new CodeTypeReference(typeof(int));
-            cmm.Parameters.Add(
-                new CodeParameterDeclarationExpression(new CodeTypeReference(typeof(int)), "i")
-            );
+            cmm.Parameters
+                .Add(
+                    new CodeParameterDeclarationExpression(new CodeTypeReference(typeof(int)), "i")
+                );
             cmm.Attributes = MemberAttributes.Final | MemberAttributes.Public;
-            cmm.Statements.Add(
-                new CodeVariableDeclarationStatement(
-                    new CodeTypeReference("TEST"),
-                    "temp",
-                    new CodeObjectCreateExpression("TEST")
-                )
-            );
-            cmm.Statements.Add(
-                new CodeAssignStatement(
-                    new CodeIndexerExpression(
-                        new CodeVariableReferenceExpression("temp"),
-                        new CodeExpression[] { new CodePrimitiveExpression(1) }
-                    ),
-                    new CodeVariableReferenceExpression("i")
-                )
-            );
-            cmm.Statements.Add(
-                new CodeAssignStatement(
-                    new CodeIndexerExpression(
-                        new CodeVariableReferenceExpression("temp"),
-                        new CodeExpression[]
-                        {
-                            new CodePrimitiveExpression(2),
-                            new CodePrimitiveExpression(4),
-                        }
-                    ),
-                    new CodePrimitiveExpression(83)
-                )
-            );
-            cmm.Statements.Add(
-                new CodeMethodReturnStatement(
-                    new CodeBinaryOperatorExpression(
+            cmm.Statements
+                .Add(
+                    new CodeVariableDeclarationStatement(
+                        new CodeTypeReference("TEST"),
+                        "temp",
+                        new CodeObjectCreateExpression("TEST")
+                    )
+                );
+            cmm.Statements
+                .Add(
+                    new CodeAssignStatement(
                         new CodeIndexerExpression(
                             new CodeVariableReferenceExpression("temp"),
                             new CodeExpression[] { new CodePrimitiveExpression(1) }
                         ),
-                        CodeBinaryOperatorType.Add,
+                        new CodeVariableReferenceExpression("i")
+                    )
+                );
+            cmm.Statements
+                .Add(
+                    new CodeAssignStatement(
                         new CodeIndexerExpression(
                             new CodeVariableReferenceExpression("temp"),
                             new CodeExpression[]
@@ -3695,10 +3616,30 @@ namespace System.CodeDom.Compiler.Tests
                                 new CodePrimitiveExpression(2),
                                 new CodePrimitiveExpression(4),
                             }
+                        ),
+                        new CodePrimitiveExpression(83)
+                    )
+                );
+            cmm.Statements
+                .Add(
+                    new CodeMethodReturnStatement(
+                        new CodeBinaryOperatorExpression(
+                            new CodeIndexerExpression(
+                                new CodeVariableReferenceExpression("temp"),
+                                new CodeExpression[] { new CodePrimitiveExpression(1) }
+                            ),
+                            CodeBinaryOperatorType.Add,
+                            new CodeIndexerExpression(
+                                new CodeVariableReferenceExpression("temp"),
+                                new CodeExpression[]
+                                {
+                                    new CodePrimitiveExpression(2),
+                                    new CodePrimitiveExpression(4),
+                                }
+                            )
                         )
                     )
-                )
-            );
+                );
 
             cd.Members.Add(cmm);
 
@@ -3770,12 +3711,13 @@ namespace System.CodeDom.Compiler.Tests
             );
             cmm.Statements.Add(condstmt);
             cmm.Statements.Add(new CodeMethodReturnStatement(new CodePrimitiveExpression(6)));
-            cmm.Statements.Add(
-                new CodeLabeledStatement(
-                    "comehere",
-                    new CodeMethodReturnStatement(new CodePrimitiveExpression(7))
-                )
-            );
+            cmm.Statements
+                .Add(
+                    new CodeLabeledStatement(
+                        "comehere",
+                        new CodeMethodReturnStatement(new CodePrimitiveExpression(7))
+                    )
+                );
             class1.Members.Add(cmm);
 
             // create second method to test gotos that jump ahead to a defined label without a statement attached to it
@@ -3824,9 +3766,8 @@ namespace System.CodeDom.Compiler.Tests
                 new CodeGotoStatement("label")
             );
             cmm.Statements.Add(condstmt);
-            cmm.Statements.Add(
-                new CodeMethodReturnStatement(new CodeVariableReferenceExpression("i"))
-            );
+            cmm.Statements
+                .Add(new CodeMethodReturnStatement(new CodeVariableReferenceExpression("i")));
             class1.Members.Add(cmm);
 
             AssertEqual(
@@ -3876,11 +3817,9 @@ namespace System.CodeDom.Compiler.Tests
             retMethod.Name = "ReturnMethod";
             retMethod.Attributes = MemberAttributes.Public | MemberAttributes.Static;
             retMethod.ReturnType = new CodeTypeReference(typeof(int));
-            retMethod
-                .Parameters
+            retMethod.Parameters
                 .Add(new CodeParameterDeclarationExpression(typeof(int), "intInput"));
-            retMethod
-                .Statements
+            retMethod.Statements
                 .Add(
                     new CodeConditionStatement(
                         new CodeBinaryOperatorExpression(
@@ -3900,8 +3839,7 @@ namespace System.CodeDom.Compiler.Tests
                         new CodeStatement[] { CreateVariableIncrementExpression("intInput", 1) }
                     )
                 );
-            retMethod
-                .Statements
+            retMethod.Statements
                 .Add(
                     new CodeConditionStatement(
                         new CodeBinaryOperatorExpression(
@@ -3919,8 +3857,7 @@ namespace System.CodeDom.Compiler.Tests
                         )
                     )
                 );
-            retMethod
-                .Statements
+            retMethod.Statements
                 .Add(
                     new CodeMethodReturnStatement(new CodeVariableReferenceExpression("intInput"))
                 );
@@ -3973,8 +3910,7 @@ namespace System.CodeDom.Compiler.Tests
                 "System.Nullable",
                 CodeTypeReferenceOptions.GlobalReference
             );
-            typeRef
-                .TypeArguments
+            typeRef.TypeArguments
                 .Add(new CodeTypeReference(typeof(int), CodeTypeReferenceOptions.GlobalReference));
             field2.Type = typeRef;
             field2.InitExpression = new CodePrimitiveExpression(0);
@@ -3987,8 +3923,7 @@ namespace System.CodeDom.Compiler.Tests
                 | MemberAttributes.Public
                 | MemberAttributes.Static;
             method1.ReturnType = new CodeTypeReference(typeof(int));
-            method1
-                .Statements
+            method1.Statements
                 .Add(new CodeMethodReturnStatement(new CodePrimitiveExpression(int.MaxValue)));
             cd.Members.Add(method1);
 
@@ -4012,8 +3947,7 @@ namespace System.CodeDom.Compiler.Tests
                 cmie
             );
             method2.Statements.Add(cas);
-            method2
-                .Statements
+            method2.Statements
                 .Add(new CodeMethodReturnStatement(new CodeVariableReferenceExpression("iReturn")));
             cd.Members.Add(method2);
 
@@ -4031,8 +3965,7 @@ namespace System.CodeDom.Compiler.Tests
             );
             cas = new CodeAssignStatement(new CodeVariableReferenceExpression("iReturn"), cmie);
             method3.Statements.Add(cas);
-            method3
-                .Statements
+            method3.Statements
                 .Add(new CodeMethodReturnStatement(new CodeVariableReferenceExpression("iReturn")));
             cd.Members.Add(method3);
 
@@ -4041,13 +3974,11 @@ namespace System.CodeDom.Compiler.Tests
             property.Type = new CodeTypeReference(typeof(int));
             property.Attributes =
                 (property.Attributes & ~MemberAttributes.AccessMask) | MemberAttributes.Public;
-            property
-                .GetStatements
+            property.GetStatements
                 .Add(
                     new CodeMethodReturnStatement(new CodeVariableReferenceExpression(fieldName1))
                 );
-            property
-                .SetStatements
+            property.SetStatements
                 .Add(
                     new CodeAssignStatement(
                         new CodeVariableReferenceExpression(fieldName1),
@@ -4061,13 +3992,11 @@ namespace System.CodeDom.Compiler.Tests
             property2.Type = typeRef;
             property2.Attributes =
                 (property.Attributes & ~MemberAttributes.AccessMask) | MemberAttributes.Public;
-            property2
-                .GetStatements
+            property2.GetStatements
                 .Add(
                     new CodeMethodReturnStatement(new CodeVariableReferenceExpression(fieldName2))
                 );
-            property2
-                .SetStatements
+            property2.SetStatements
                 .Add(
                     new CodeAssignStatement(
                         new CodeVariableReferenceExpression(fieldName2),
@@ -4150,41 +4079,42 @@ namespace System.CodeDom.Compiler.Tests
                 cmm.Attributes = MemberAttributes.Final | MemberAttributes.Public;
                 if (provider.Supports(GeneratorSupport.ArraysOfArrays))
                 {
-                    cmm.Statements.Add(
-                        new CodeVariableDeclarationStatement(
-                            new CodeTypeReference(typeof(int[][])),
-                            "arrayOfArrays",
-                            new CodeArrayCreateExpression(
-                                typeof(int[][]),
+                    cmm.Statements
+                        .Add(
+                            new CodeVariableDeclarationStatement(
+                                new CodeTypeReference(typeof(int[][])),
+                                "arrayOfArrays",
                                 new CodeArrayCreateExpression(
-                                    typeof(int[]),
-                                    new CodePrimitiveExpression(3),
-                                    new CodePrimitiveExpression(4)
-                                ),
-                                new CodeArrayCreateExpression(
-                                    typeof(int[]),
-                                    new CodeExpression[] { new CodePrimitiveExpression(1) }
+                                    typeof(int[][]),
+                                    new CodeArrayCreateExpression(
+                                        typeof(int[]),
+                                        new CodePrimitiveExpression(3),
+                                        new CodePrimitiveExpression(4)
+                                    ),
+                                    new CodeArrayCreateExpression(
+                                        typeof(int[]),
+                                        new CodeExpression[] { new CodePrimitiveExpression(1) }
+                                    )
                                 )
                             )
-                        )
-                    );
-                    cmm.Statements.Add(
-                        new CodeMethodReturnStatement(
-                            new CodeArrayIndexerExpression(
+                        );
+                    cmm.Statements
+                        .Add(
+                            new CodeMethodReturnStatement(
                                 new CodeArrayIndexerExpression(
-                                    new CodeVariableReferenceExpression("arrayOfArrays"),
-                                    new CodePrimitiveExpression(0)
-                                ),
-                                new CodePrimitiveExpression(1)
+                                    new CodeArrayIndexerExpression(
+                                        new CodeVariableReferenceExpression("arrayOfArrays"),
+                                        new CodePrimitiveExpression(0)
+                                    ),
+                                    new CodePrimitiveExpression(1)
+                                )
                             )
-                        )
-                    );
+                        );
                 }
                 else
                 {
-                    cmm.Statements.Add(
-                        new CodeMethodReturnStatement(new CodePrimitiveExpression(0))
-                    );
+                    cmm.Statements
+                        .Add(new CodeMethodReturnStatement(new CodePrimitiveExpression(0)));
                 }
                 cd.Members.Add(cmm);
 
@@ -4213,8 +4143,7 @@ namespace System.CodeDom.Compiler.Tests
                     class1.IsClass = true;
                     nspace.Types.Add(class1);
 
-                    class1
-                        .Members
+                    class1.Members
                         .Add(
                             new CodeMemberField(
                                 new CodeTypeReference(typeof(String)),
@@ -4225,23 +4154,25 @@ namespace System.CodeDom.Compiler.Tests
                     prop.Name = "accessStringField";
                     prop.Attributes = MemberAttributes.Public | MemberAttributes.Final;
                     prop.Type = new CodeTypeReference(typeof(String));
-                    prop.GetStatements.Add(
-                        new CodeMethodReturnStatement(
-                            new CodeFieldReferenceExpression(
-                                new CodeThisReferenceExpression(),
-                                "stringField"
+                    prop.GetStatements
+                        .Add(
+                            new CodeMethodReturnStatement(
+                                new CodeFieldReferenceExpression(
+                                    new CodeThisReferenceExpression(),
+                                    "stringField"
+                                )
                             )
-                        )
-                    );
-                    prop.SetStatements.Add(
-                        new CodeAssignStatement(
-                            new CodeFieldReferenceExpression(
-                                new CodeThisReferenceExpression(),
-                                "stringField"
-                            ),
-                            new CodePropertySetValueReferenceExpression()
-                        )
-                    );
+                        );
+                    prop.SetStatements
+                        .Add(
+                            new CodeAssignStatement(
+                                new CodeFieldReferenceExpression(
+                                    new CodeThisReferenceExpression(),
+                                    "stringField"
+                                ),
+                                new CodePropertySetValueReferenceExpression()
+                            )
+                        );
                     class1.Members.Add(prop);
 
                     CodeConstructor cctor = new CodeConstructor();
@@ -4256,15 +4187,16 @@ namespace System.CodeDom.Compiler.Tests
                     cc.Parameters.Add(new CodeParameterDeclarationExpression(typeof(string), "p1"));
                     cc.Parameters.Add(new CodeParameterDeclarationExpression(typeof(string), "p2"));
                     cc.Parameters.Add(new CodeParameterDeclarationExpression(typeof(string), "p3"));
-                    cc.Statements.Add(
-                        new CodeAssignStatement(
-                            new CodeFieldReferenceExpression(
-                                new CodeThisReferenceExpression(),
-                                "stringField"
-                            ),
-                            new CodeVariableReferenceExpression("p1")
-                        )
-                    );
+                    cc.Statements
+                        .Add(
+                            new CodeAssignStatement(
+                                new CodeFieldReferenceExpression(
+                                    new CodeThisReferenceExpression(),
+                                    "stringField"
+                                ),
+                                new CodeVariableReferenceExpression("p1")
+                            )
+                        );
                     class1.Members.Add(cc);
                     // verify chained constructors work
                     cmm = new CodeMemberMethod();
@@ -4272,21 +4204,23 @@ namespace System.CodeDom.Compiler.Tests
                     cmm.Attributes = MemberAttributes.Public | MemberAttributes.Static;
                     cmm.ReturnType = new CodeTypeReference(typeof(String));
                     // utilize constructor
-                    cmm.Statements.Add(
-                        new CodeVariableDeclarationStatement(
-                            "Test2",
-                            "t",
-                            new CodeObjectCreateExpression("Test2")
-                        )
-                    );
-                    cmm.Statements.Add(
-                        new CodeMethodReturnStatement(
-                            new CodeMethodReferenceExpression(
-                                new CodeVariableReferenceExpression("t"),
-                                "accessStringField"
+                    cmm.Statements
+                        .Add(
+                            new CodeVariableDeclarationStatement(
+                                "Test2",
+                                "t",
+                                new CodeObjectCreateExpression("Test2")
                             )
-                        )
-                    );
+                        );
+                    cmm.Statements
+                        .Add(
+                            new CodeMethodReturnStatement(
+                                new CodeMethodReferenceExpression(
+                                    new CodeVariableReferenceExpression("t"),
+                                    "accessStringField"
+                                )
+                            )
+                        );
                     cd.Members.Add(cmm);
                 }
 
@@ -4297,29 +4231,32 @@ namespace System.CodeDom.Compiler.Tests
                     cmm.Name = "ComplexExpressions";
                     cmm.ReturnType = new CodeTypeReference(typeof(int));
                     cmm.Attributes = MemberAttributes.Final | MemberAttributes.Public;
-                    cmm.Parameters.Add(
-                        new CodeParameterDeclarationExpression(
-                            new CodeTypeReference(typeof(int)),
-                            "i"
-                        )
-                    );
-                    cmm.Statements.Add(
-                        new CodeAssignStatement(
-                            new CodeVariableReferenceExpression("i"),
-                            new CodeBinaryOperatorExpression(
+                    cmm.Parameters
+                        .Add(
+                            new CodeParameterDeclarationExpression(
+                                new CodeTypeReference(typeof(int)),
+                                "i"
+                            )
+                        );
+                    cmm.Statements
+                        .Add(
+                            new CodeAssignStatement(
                                 new CodeVariableReferenceExpression("i"),
-                                CodeBinaryOperatorType.Multiply,
                                 new CodeBinaryOperatorExpression(
                                     new CodeVariableReferenceExpression("i"),
-                                    CodeBinaryOperatorType.Add,
-                                    new CodePrimitiveExpression(3)
+                                    CodeBinaryOperatorType.Multiply,
+                                    new CodeBinaryOperatorExpression(
+                                        new CodeVariableReferenceExpression("i"),
+                                        CodeBinaryOperatorType.Add,
+                                        new CodePrimitiveExpression(3)
+                                    )
                                 )
                             )
-                        )
-                    );
-                    cmm.Statements.Add(
-                        new CodeMethodReturnStatement(new CodeVariableReferenceExpression("i"))
-                    );
+                        );
+                    cmm.Statements
+                        .Add(
+                            new CodeMethodReturnStatement(new CodeVariableReferenceExpression("i"))
+                        );
                     cd.Members.Add(cmm);
                 }
 
@@ -4431,15 +4368,16 @@ namespace System.CodeDom.Compiler.Tests
 
                     cmm.ReturnType = new CodeTypeReference("System.int32");
 
-                    cmm.Statements.Add(
-                        new CodeMethodReturnStatement(
-                            new CodeBinaryOperatorExpression(
-                                new CodeVariableReferenceExpression("i"),
-                                CodeBinaryOperatorType.Add,
-                                new CodePrimitiveExpression(10)
+                    cmm.Statements
+                        .Add(
+                            new CodeMethodReturnStatement(
+                                new CodeBinaryOperatorExpression(
+                                    new CodeVariableReferenceExpression("i"),
+                                    CodeBinaryOperatorType.Add,
+                                    new CodePrimitiveExpression(10)
+                                )
                             )
-                        )
-                    );
+                        );
                     cd.Members.Add(cmm);
                 }
 
@@ -4450,13 +4388,14 @@ namespace System.CodeDom.Compiler.Tests
                     cmm.ReturnType = new CodeTypeReference(typeof(int));
                     cmm.Parameters.Add(new CodeParameterDeclarationExpression(typeof(int), "i"));
                     cmm.Attributes = MemberAttributes.Public | MemberAttributes.Static;
-                    cmm.Statements.Add(
-                        new CodeVariableDeclarationStatement(
-                            "TestSingleInterfaceImp",
-                            "t",
-                            new CodeObjectCreateExpression("TestSingleInterfaceImp")
-                        )
-                    );
+                    cmm.Statements
+                        .Add(
+                            new CodeVariableDeclarationStatement(
+                                "TestSingleInterfaceImp",
+                                "t",
+                                new CodeObjectCreateExpression("TestSingleInterfaceImp")
+                            )
+                        );
                     CodeMethodInvokeExpression methodinvoke = new CodeMethodInvokeExpression(
                         new CodeVariableReferenceExpression("t"),
                         "InterfaceMethod"
@@ -4484,9 +4423,8 @@ namespace System.CodeDom.Compiler.Tests
                         cmm.Name = "InterfaceMethod";
                         cmm.Attributes = MemberAttributes.Public;
                         cmm.ReturnType = new CodeTypeReference(typeof(int));
-                        cmm.Parameters.Add(
-                            new CodeParameterDeclarationExpression(typeof(int), "a")
-                        );
+                        cmm.Parameters
+                            .Add(new CodeParameterDeclarationExpression(typeof(int), "a"));
                         classDecl.Members.Add(cmm);
 
                         CodeTypeDeclaration class2 = new CodeTypeDeclaration(
@@ -4502,49 +4440,53 @@ namespace System.CodeDom.Compiler.Tests
                         cmm.ImplementationTypes.Add(new CodeTypeReference("InterfaceB"));
                         cmm.Name = "InterfaceMethod";
                         cmm.ReturnType = new CodeTypeReference(typeof(int));
-                        cmm.Parameters.Add(
-                            new CodeParameterDeclarationExpression(typeof(int), "a")
-                        );
+                        cmm.Parameters
+                            .Add(new CodeParameterDeclarationExpression(typeof(int), "a"));
                         cmm.Attributes = MemberAttributes.Public | MemberAttributes.Final;
-                        cmm.Statements.Add(
-                            new CodeMethodReturnStatement(new CodeVariableReferenceExpression("a"))
-                        );
+                        cmm.Statements
+                            .Add(
+                                new CodeMethodReturnStatement(
+                                    new CodeVariableReferenceExpression("a")
+                                )
+                            );
                         class2.Members.Add(cmm);
 
                         cmm = new CodeMemberMethod();
                         cmm.Name = "TestMultipleInterfaces";
                         cmm.ReturnType = new CodeTypeReference(typeof(int));
-                        cmm.Parameters.Add(
-                            new CodeParameterDeclarationExpression(typeof(int), "i")
-                        );
+                        cmm.Parameters
+                            .Add(new CodeParameterDeclarationExpression(typeof(int), "i"));
                         cmm.Attributes = MemberAttributes.Public | MemberAttributes.Static;
-                        cmm.Statements.Add(
-                            new CodeVariableDeclarationStatement(
-                                "TestMultipleInterfaceImp",
-                                "t",
-                                new CodeObjectCreateExpression("TestMultipleInterfaceImp")
-                            )
-                        );
-                        cmm.Statements.Add(
-                            new CodeVariableDeclarationStatement(
-                                "InterfaceA",
-                                "interfaceAobject",
-                                new CodeCastExpression(
+                        cmm.Statements
+                            .Add(
+                                new CodeVariableDeclarationStatement(
+                                    "TestMultipleInterfaceImp",
+                                    "t",
+                                    new CodeObjectCreateExpression("TestMultipleInterfaceImp")
+                                )
+                            );
+                        cmm.Statements
+                            .Add(
+                                new CodeVariableDeclarationStatement(
                                     "InterfaceA",
-                                    new CodeVariableReferenceExpression("t")
+                                    "interfaceAobject",
+                                    new CodeCastExpression(
+                                        "InterfaceA",
+                                        new CodeVariableReferenceExpression("t")
+                                    )
                                 )
-                            )
-                        );
-                        cmm.Statements.Add(
-                            new CodeVariableDeclarationStatement(
-                                "InterfaceB",
-                                "interfaceBobject",
-                                new CodeCastExpression(
+                            );
+                        cmm.Statements
+                            .Add(
+                                new CodeVariableDeclarationStatement(
                                     "InterfaceB",
-                                    new CodeVariableReferenceExpression("t")
+                                    "interfaceBobject",
+                                    new CodeCastExpression(
+                                        "InterfaceB",
+                                        new CodeVariableReferenceExpression("t")
+                                    )
                                 )
-                            )
-                        );
+                            );
                         methodinvoke = new CodeMethodInvokeExpression(
                             new CodeVariableReferenceExpression("interfaceAobject"),
                             "InterfaceMethod"
@@ -4555,15 +4497,16 @@ namespace System.CodeDom.Compiler.Tests
                             "InterfaceMethod"
                         );
                         methodinvoke2.Parameters.Add(new CodeVariableReferenceExpression("i"));
-                        cmm.Statements.Add(
-                            new CodeMethodReturnStatement(
-                                new CodeBinaryOperatorExpression(
-                                    methodinvoke,
-                                    CodeBinaryOperatorType.Subtract,
-                                    methodinvoke2
+                        cmm.Statements
+                            .Add(
+                                new CodeMethodReturnStatement(
+                                    new CodeBinaryOperatorExpression(
+                                        methodinvoke,
+                                        CodeBinaryOperatorType.Subtract,
+                                        methodinvoke2
+                                    )
                                 )
-                            )
-                        );
+                            );
                         cd.Members.Add(cmm);
                     }
 
@@ -4578,9 +4521,10 @@ namespace System.CodeDom.Compiler.Tests
                     cmm.ReturnType = new CodeTypeReference(typeof(int));
                     cmm.Parameters.Add(new CodeParameterDeclarationExpression(typeof(int), "a"));
                     cmm.Attributes = MemberAttributes.Public;
-                    cmm.Statements.Add(
-                        new CodeMethodReturnStatement(new CodeVariableReferenceExpression("a"))
-                    );
+                    cmm.Statements
+                        .Add(
+                            new CodeMethodReturnStatement(new CodeVariableReferenceExpression("a"))
+                        );
                     class1.Members.Add(cmm);
                 }
 
@@ -4612,8 +4556,7 @@ namespace System.CodeDom.Compiler.Tests
                     CodeVariableDeclarationStatement varStructA =
                         new CodeVariableDeclarationStatement("structA", "varStructA");
                     nestedStructMethod.Statements.Add(varStructA);
-                    nestedStructMethod
-                        .Statements
+                    nestedStructMethod.Statements
                         .Add(
                             new CodeAssignStatement(
                                 /* Expression1 */new CodeFieldReferenceExpression(
@@ -4626,8 +4569,7 @@ namespace System.CodeDom.Compiler.Tests
                                 /* Expression1 */new CodePrimitiveExpression(3)
                             )
                         );
-                    nestedStructMethod
-                        .Statements
+                    nestedStructMethod.Statements
                         .Add(
                             new CodeMethodReturnStatement(
                                 new CodeFieldReferenceExpression(
@@ -4665,15 +4607,15 @@ namespace System.CodeDom.Compiler.Tests
                         new CodeGotoStatement("comehere")
                     );
                     cmm.Statements.Add(condstmt);
-                    cmm.Statements.Add(
-                        new CodeMethodReturnStatement(new CodePrimitiveExpression(6))
-                    );
-                    cmm.Statements.Add(
-                        new CodeLabeledStatement(
-                            "comehere",
-                            new CodeMethodReturnStatement(new CodePrimitiveExpression(7))
-                        )
-                    );
+                    cmm.Statements
+                        .Add(new CodeMethodReturnStatement(new CodePrimitiveExpression(6)));
+                    cmm.Statements
+                        .Add(
+                            new CodeLabeledStatement(
+                                "comehere",
+                                new CodeMethodReturnStatement(new CodePrimitiveExpression(7))
+                            )
+                        );
                     cd.Members.Add(cmm);
                 }
                 if (provider.Supports(GeneratorSupport.NestedTypes))
@@ -4683,28 +4625,30 @@ namespace System.CodeDom.Compiler.Tests
                     cmm.Parameters.Add(new CodeParameterDeclarationExpression(typeof(int), "i"));
                     cmm.ReturnType = new CodeTypeReference(typeof(int));
                     cmm.Attributes = MemberAttributes.Public | MemberAttributes.Static;
-                    cmm.Statements.Add(
-                        new CodeVariableDeclarationStatement(
-                            new CodeTypeReference(
-                                "PublicNestedClassA+PublicNestedClassB2+PublicNestedClassC"
-                            ),
-                            "t",
-                            new CodeObjectCreateExpression(
+                    cmm.Statements
+                        .Add(
+                            new CodeVariableDeclarationStatement(
                                 new CodeTypeReference(
                                     "PublicNestedClassA+PublicNestedClassB2+PublicNestedClassC"
+                                ),
+                                "t",
+                                new CodeObjectCreateExpression(
+                                    new CodeTypeReference(
+                                        "PublicNestedClassA+PublicNestedClassB2+PublicNestedClassC"
+                                    )
                                 )
                             )
-                        )
-                    );
-                    cmm.Statements.Add(
-                        new CodeMethodReturnStatement(
-                            new CodeMethodInvokeExpression(
-                                new CodeVariableReferenceExpression("t"),
-                                "publicNestedClassesMethod",
-                                new CodeVariableReferenceExpression("i")
+                        );
+                    cmm.Statements
+                        .Add(
+                            new CodeMethodReturnStatement(
+                                new CodeMethodInvokeExpression(
+                                    new CodeVariableReferenceExpression("t"),
+                                    "publicNestedClassesMethod",
+                                    new CodeVariableReferenceExpression("i")
+                                )
                             )
-                        )
-                    );
+                        );
                     cd.Members.Add(cmm);
 
                     class1 = new CodeTypeDeclaration("PublicNestedClassA");
@@ -4731,9 +4675,10 @@ namespace System.CodeDom.Compiler.Tests
                     cmm.ReturnType = new CodeTypeReference(typeof(int));
                     cmm.Parameters.Add(new CodeParameterDeclarationExpression(typeof(int), "a"));
                     cmm.Attributes = MemberAttributes.Public | MemberAttributes.Final;
-                    cmm.Statements.Add(
-                        new CodeMethodReturnStatement(new CodeVariableReferenceExpression("a"))
-                    );
+                    cmm.Statements
+                        .Add(
+                            new CodeMethodReturnStatement(new CodeVariableReferenceExpression("a"))
+                        );
                     innerNestedClass.Members.Add(cmm);
                 }
                 // Parameter Attributes
@@ -4744,8 +4689,7 @@ namespace System.CodeDom.Compiler.Tests
                     method1.Attributes = MemberAttributes.Public | MemberAttributes.Final;
                     CodeParameterDeclarationExpression param1 =
                         new CodeParameterDeclarationExpression(typeof(string), "blah");
-                    param1
-                        .CustomAttributes
+                    param1.CustomAttributes
                         .Add(
                             new CodeAttributeDeclaration(
                                 "System.Xml.Serialization.XmlElementAttribute",
@@ -4774,9 +4718,8 @@ namespace System.CodeDom.Compiler.Tests
                     cmm.Name = "PublicStaticMethod";
                     cmm.ReturnType = new CodeTypeReference(typeof(int));
                     cmm.Attributes = MemberAttributes.Public | MemberAttributes.Static;
-                    cmm.Statements.Add(
-                        new CodeMethodReturnStatement(new CodePrimitiveExpression(16))
-                    );
+                    cmm.Statements
+                        .Add(new CodeMethodReturnStatement(new CodePrimitiveExpression(16)));
                     cd.Members.Add(cmm);
                 }
                 // reference parameters
@@ -4795,22 +4738,24 @@ namespace System.CodeDom.Compiler.Tests
                     param = new CodeParameterDeclarationExpression(typeof(int), "j");
                     param.Direction = FieldDirection.Out;
                     cmm.Parameters.Add(param);
-                    cmm.Statements.Add(
-                        new CodeAssignStatement(
-                            new CodeArgumentReferenceExpression("i"),
-                            new CodeBinaryOperatorExpression(
+                    cmm.Statements
+                        .Add(
+                            new CodeAssignStatement(
                                 new CodeArgumentReferenceExpression("i"),
-                                CodeBinaryOperatorType.Add,
-                                new CodePrimitiveExpression(4)
+                                new CodeBinaryOperatorExpression(
+                                    new CodeArgumentReferenceExpression("i"),
+                                    CodeBinaryOperatorType.Add,
+                                    new CodePrimitiveExpression(4)
+                                )
                             )
-                        )
-                    );
-                    cmm.Statements.Add(
-                        new CodeAssignStatement(
-                            new CodeArgumentReferenceExpression("j"),
-                            new CodePrimitiveExpression(5)
-                        )
-                    );
+                        );
+                    cmm.Statements
+                        .Add(
+                            new CodeAssignStatement(
+                                new CodeArgumentReferenceExpression("j"),
+                                new CodePrimitiveExpression(5)
+                            )
+                        );
                     cd.Members.Add(cmm);
 
                     cmm = new CodeMemberMethod();
@@ -4820,12 +4765,13 @@ namespace System.CodeDom.Compiler.Tests
                         new CodeParameterDeclarationExpression(typeof(int), "a");
                     cmm.Parameters.Add(parames);
                     cmm.ReturnType = new CodeTypeReference("System.int32");
-                    cmm.Statements.Add(
-                        new CodeAssignStatement(
-                            new CodeVariableReferenceExpression("a"),
-                            new CodePrimitiveExpression(10)
-                        )
-                    );
+                    cmm.Statements
+                        .Add(
+                            new CodeAssignStatement(
+                                new CodeVariableReferenceExpression("a"),
+                                new CodePrimitiveExpression(10)
+                            )
+                        );
                     cmm.Statements.Add(new CodeVariableDeclarationStatement(typeof(int), "b"));
                     // invoke the method called "work"
                     CodeMethodInvokeExpression methodinvoked = new CodeMethodInvokeExpression(
@@ -4847,15 +4793,16 @@ namespace System.CodeDom.Compiler.Tests
                     );
                     methodinvoked.Parameters.Add(parameter);
                     cmm.Statements.Add(methodinvoked);
-                    cmm.Statements.Add(
-                        new CodeMethodReturnStatement(
-                            new CodeBinaryOperatorExpression(
-                                new CodeVariableReferenceExpression("a"),
-                                CodeBinaryOperatorType.Add,
-                                new CodeVariableReferenceExpression("b")
+                    cmm.Statements
+                        .Add(
+                            new CodeMethodReturnStatement(
+                                new CodeBinaryOperatorExpression(
+                                    new CodeVariableReferenceExpression("a"),
+                                    CodeBinaryOperatorType.Add,
+                                    new CodeVariableReferenceExpression("b")
+                                )
                             )
-                        )
-                    );
+                        );
                     cd.Members.Add(cmm);
                 }
                 if (provider.Supports(GeneratorSupport.ReturnTypeAttributes))
@@ -4864,15 +4811,13 @@ namespace System.CodeDom.Compiler.Tests
                     function1.Name = "MyFunction";
                     function1.ReturnType = new CodeTypeReference(typeof(string));
                     function1.Attributes = MemberAttributes.Public | MemberAttributes.Final;
-                    function1
-                        .ReturnTypeCustomAttributes
+                    function1.ReturnTypeCustomAttributes
                         .Add(
                             new CodeAttributeDeclaration(
                                 "System.Xml.Serialization.XmlIgnoreAttribute"
                             )
                         );
-                    function1
-                        .ReturnTypeCustomAttributes
+                    function1.ReturnTypeCustomAttributes
                         .Add(
                             new CodeAttributeDeclaration(
                                 "System.Xml.Serialization.XmlRootAttribute",
@@ -4886,8 +4831,7 @@ namespace System.CodeDom.Compiler.Tests
                                 )
                             )
                         );
-                    function1
-                        .Statements
+                    function1.Statements
                         .Add(new CodeMethodReturnStatement(new CodePrimitiveExpression("Return")));
                     cd.Members.Add(function1);
                 }
@@ -4901,31 +4845,34 @@ namespace System.CodeDom.Compiler.Tests
                         new CodeParameterDeclarationExpression(typeof(int), "a");
                     cmm.Parameters.Add(param);
                     // utilize constructor
-                    cmm.Statements.Add(
-                        new CodeVariableDeclarationStatement(
-                            "Test4",
-                            "t",
-                            new CodeObjectCreateExpression("Test4")
-                        )
-                    );
-                    // set then get number
-                    cmm.Statements.Add(
-                        new CodeAssignStatement(
-                            new CodePropertyReferenceExpression(
-                                new CodeVariableReferenceExpression("t"),
-                                "i"
-                            ),
-                            new CodeVariableReferenceExpression("a")
-                        )
-                    );
-                    cmm.Statements.Add(
-                        new CodeMethodReturnStatement(
-                            new CodeMethodReferenceExpression(
-                                new CodeVariableReferenceExpression("t"),
-                                "i"
+                    cmm.Statements
+                        .Add(
+                            new CodeVariableDeclarationStatement(
+                                "Test4",
+                                "t",
+                                new CodeObjectCreateExpression("Test4")
                             )
-                        )
-                    );
+                        );
+                    // set then get number
+                    cmm.Statements
+                        .Add(
+                            new CodeAssignStatement(
+                                new CodePropertyReferenceExpression(
+                                    new CodeVariableReferenceExpression("t"),
+                                    "i"
+                                ),
+                                new CodeVariableReferenceExpression("a")
+                            )
+                        );
+                    cmm.Statements
+                        .Add(
+                            new CodeMethodReturnStatement(
+                                new CodeMethodReferenceExpression(
+                                    new CodeVariableReferenceExpression("t"),
+                                    "i"
+                                )
+                            )
+                        );
                     cd.Members.Add(cmm);
 
                     class1 = new CodeTypeDeclaration();
@@ -4933,22 +4880,25 @@ namespace System.CodeDom.Compiler.Tests
                     class1.IsClass = true;
                     nspace.Types.Add(class1);
 
-                    class1
-                        .Members
+                    class1.Members
                         .Add(new CodeMemberField(new CodeTypeReference(typeof(int)), "number"));
                     CodeMemberProperty prop = new CodeMemberProperty();
                     prop.Name = "i";
                     prop.Attributes = MemberAttributes.Public | MemberAttributes.Final;
                     prop.Type = new CodeTypeReference(typeof(int));
-                    prop.GetStatements.Add(
-                        new CodeMethodReturnStatement(new CodeVariableReferenceExpression("number"))
-                    );
-                    prop.SetStatements.Add(
-                        new CodeAssignStatement(
-                            new CodeVariableReferenceExpression("number"),
-                            new CodePropertySetValueReferenceExpression()
-                        )
-                    );
+                    prop.GetStatements
+                        .Add(
+                            new CodeMethodReturnStatement(
+                                new CodeVariableReferenceExpression("number")
+                            )
+                        );
+                    prop.SetStatements
+                        .Add(
+                            new CodeAssignStatement(
+                                new CodeVariableReferenceExpression("number"),
+                                new CodePropertySetValueReferenceExpression()
+                            )
+                        );
                     class1.Members.Add(prop);
                     CodeTypeConstructor ctc = new CodeTypeConstructor();
                     class1.Members.Add(ctc);
@@ -4964,8 +4914,7 @@ namespace System.CodeDom.Compiler.Tests
                     cmm.Parameters.Add(param);
 
                     CodeTryCatchFinallyStatement tcfstmt = new CodeTryCatchFinallyStatement();
-                    tcfstmt
-                        .FinallyStatements
+                    tcfstmt.FinallyStatements
                         .Add(
                             new CodeAssignStatement(
                                 new CodeVariableReferenceExpression("a"),
@@ -4977,9 +4926,10 @@ namespace System.CodeDom.Compiler.Tests
                             )
                         );
                     cmm.Statements.Add(tcfstmt);
-                    cmm.Statements.Add(
-                        new CodeMethodReturnStatement(new CodeVariableReferenceExpression("a"))
-                    );
+                    cmm.Statements
+                        .Add(
+                            new CodeMethodReturnStatement(new CodeVariableReferenceExpression("a"))
+                        );
                     cd.Members.Add(cmm);
                 }
                 if (provider.Supports(GeneratorSupport.DeclareEvents))
@@ -5007,63 +4957,68 @@ namespace System.CodeDom.Compiler.Tests
 
                     CodeConstructor ctor = new CodeConstructor();
                     ctor.Attributes = MemberAttributes.Public;
-                    ctor.Statements.Add(
-                        new CodeAssignStatement(
-                            new CodeFieldReferenceExpression(
-                                new CodeThisReferenceExpression(),
-                                "Size"
-                            ),
-                            new CodeObjectCreateExpression(
-                                new CodeTypeReference("Size"),
-                                new CodePrimitiveExpression(600),
-                                new CodePrimitiveExpression(600)
+                    ctor.Statements
+                        .Add(
+                            new CodeAssignStatement(
+                                new CodeFieldReferenceExpression(
+                                    new CodeThisReferenceExpression(),
+                                    "Size"
+                                ),
+                                new CodeObjectCreateExpression(
+                                    new CodeTypeReference("Size"),
+                                    new CodePrimitiveExpression(600),
+                                    new CodePrimitiveExpression(600)
+                                )
                             )
-                        )
-                    );
-                    ctor.Statements.Add(
-                        new CodeAssignStatement(
-                            new CodeFieldReferenceExpression(
-                                new CodeTypeReferenceExpression("b"),
-                                "Text"
-                            ),
-                            new CodePrimitiveExpression("Test")
-                        )
-                    );
-                    ctor.Statements.Add(
-                        new CodeAssignStatement(
-                            new CodeFieldReferenceExpression(
-                                new CodeTypeReferenceExpression("b"),
-                                "TabIndex"
-                            ),
-                            new CodePrimitiveExpression(0)
-                        )
-                    );
-                    ctor.Statements.Add(
-                        new CodeAssignStatement(
-                            new CodeFieldReferenceExpression(
-                                new CodeTypeReferenceExpression("b"),
-                                "Location"
-                            ),
-                            new CodeObjectCreateExpression(
-                                new CodeTypeReference("Point"),
-                                new CodePrimitiveExpression(400),
-                                new CodePrimitiveExpression(525)
+                        );
+                    ctor.Statements
+                        .Add(
+                            new CodeAssignStatement(
+                                new CodeFieldReferenceExpression(
+                                    new CodeTypeReferenceExpression("b"),
+                                    "Text"
+                                ),
+                                new CodePrimitiveExpression("Test")
                             )
-                        )
-                    );
-                    ctor.Statements.Add(
-                        new CodeAttachEventStatement(
-                            new CodeEventReferenceExpression(
-                                new CodeThisReferenceExpression(),
-                                "MyEvent"
-                            ),
-                            new CodeDelegateCreateExpression(
-                                new CodeTypeReference("EventHandler"),
-                                new CodeThisReferenceExpression(),
-                                "b_Click"
+                        );
+                    ctor.Statements
+                        .Add(
+                            new CodeAssignStatement(
+                                new CodeFieldReferenceExpression(
+                                    new CodeTypeReferenceExpression("b"),
+                                    "TabIndex"
+                                ),
+                                new CodePrimitiveExpression(0)
                             )
-                        )
-                    );
+                        );
+                    ctor.Statements
+                        .Add(
+                            new CodeAssignStatement(
+                                new CodeFieldReferenceExpression(
+                                    new CodeTypeReferenceExpression("b"),
+                                    "Location"
+                                ),
+                                new CodeObjectCreateExpression(
+                                    new CodeTypeReference("Point"),
+                                    new CodePrimitiveExpression(400),
+                                    new CodePrimitiveExpression(525)
+                                )
+                            )
+                        );
+                    ctor.Statements
+                        .Add(
+                            new CodeAttachEventStatement(
+                                new CodeEventReferenceExpression(
+                                    new CodeThisReferenceExpression(),
+                                    "MyEvent"
+                                ),
+                                new CodeDelegateCreateExpression(
+                                    new CodeTypeReference("EventHandler"),
+                                    new CodeThisReferenceExpression(),
+                                    "b_Click"
+                                )
+                            )
+                        );
                     class1.Members.Add(ctor);
 
                     CodeMemberEvent evt = new CodeMemberEvent();
@@ -5074,12 +5029,10 @@ namespace System.CodeDom.Compiler.Tests
 
                     cmm = new CodeMemberMethod();
                     cmm.Name = "b_Click";
-                    cmm.Parameters.Add(
-                        new CodeParameterDeclarationExpression(typeof(object), "sender")
-                    );
-                    cmm.Parameters.Add(
-                        new CodeParameterDeclarationExpression(typeof(EventArgs), "e")
-                    );
+                    cmm.Parameters
+                        .Add(new CodeParameterDeclarationExpression(typeof(object), "sender"));
+                    cmm.Parameters
+                        .Add(new CodeParameterDeclarationExpression(typeof(EventArgs), "e"));
                     class1.Members.Add(cmm);
                 }
 
@@ -5340,8 +5293,7 @@ namespace System.CodeDom.Compiler.Tests
 
             CodeTypeDeclaration class1 = new CodeTypeDeclaration();
             class1.Name = "MyDictionary";
-            class1
-                .BaseTypes
+            class1.BaseTypes
                 .Add(
                     new CodeTypeReference(
                         "Dictionary",
@@ -5355,8 +5307,7 @@ namespace System.CodeDom.Compiler.Tests
             CodeTypeParameter kType = new CodeTypeParameter("TKey");
             kType.HasConstructorConstraint = true;
             kType.Constraints.Add(new CodeTypeReference(typeof(IComparable)));
-            kType
-                .CustomAttributes
+            kType.CustomAttributes
                 .Add(
                     new CodeAttributeDeclaration(
                         "System.ComponentModel.DescriptionAttribute",
@@ -5370,8 +5321,7 @@ namespace System.CodeDom.Compiler.Tests
 
             CodeTypeParameter vType = new CodeTypeParameter("TValue");
             vType.Constraints.Add(new CodeTypeReference(typeof(IList<string>)));
-            vType
-                .CustomAttributes
+            vType.CustomAttributes
                 .Add(
                     new CodeAttributeDeclaration(
                         "System.ComponentModel.DescriptionAttribute",
@@ -5411,8 +5361,7 @@ namespace System.CodeDom.Compiler.Tests
                     ),
                 }
             );
-            methodMain
-                .Statements
+            methodMain.Statements
                 .Add(
                     new CodeVariableDeclarationStatement(
                         myClass,
@@ -5426,8 +5375,7 @@ namespace System.CodeDom.Compiler.Tests
             >[]).FullName;
 
             var dictionaryType = new CodeTypeReference(dictionaryTypeName);
-            methodMain
-                .Statements
+            methodMain.Statements
                 .Add(
                     new CodeVariableDeclarationStatement(
                         dictionaryType,

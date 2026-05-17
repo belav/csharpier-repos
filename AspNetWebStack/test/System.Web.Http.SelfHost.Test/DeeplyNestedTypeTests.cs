@@ -31,8 +31,7 @@ namespace System.Web.Http.SelfHost
 
             HttpSelfHostConfiguration config = new HttpSelfHostConfiguration(baseAddress);
             config.HostNameComparisonMode = HostNameComparisonMode.Exact;
-            config
-                .Routes
+            config.Routes
                 .MapHttpRoute(
                     "Default",
                     "{controller}/{action}",

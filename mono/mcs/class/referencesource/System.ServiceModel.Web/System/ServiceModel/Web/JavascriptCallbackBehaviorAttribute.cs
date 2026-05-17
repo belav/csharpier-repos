@@ -24,8 +24,7 @@ namespace System.ServiceModel.Web
             {
                 if (string.IsNullOrEmpty(value))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new ArgumentOutOfRangeException("value"));
                 }
                 else

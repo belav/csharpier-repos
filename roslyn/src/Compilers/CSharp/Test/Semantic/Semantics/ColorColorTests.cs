@@ -2074,8 +2074,7 @@ public class Example
 
                 var memberAccessExpression = context.Node as MemberAccessExpressionSyntax;
 
-                var actualSymbol = context
-                    .SemanticModel
+                var actualSymbol = context.SemanticModel
                     .GetSymbolInfo(memberAccessExpression.Expression);
 
                 Assert.Equal("Lifetime", actualSymbol.Symbol.ToTestDisplayString());

@@ -26,8 +26,7 @@ namespace MonoTests.System.Reflection.Emit
         public void ParameterBuilderSetConstant_Bug3912()
         {
             var aName = new AssemblyName("DynamicAssemblyExample");
-            var ab = AppDomain
-                .CurrentDomain
+            var ab = AppDomain.CurrentDomain
                 .DefineDynamicAssembly(aName, AssemblyBuilderAccess.Run);
 
             var mb = ab.DefineDynamicModule(aName.Name);
@@ -60,8 +59,7 @@ namespace MonoTests.System.Reflection.Emit
         {
             // SetConstant  for a Nullable<X> parameter for various X.
             var aName = new AssemblyName("TestSetConstantNullable");
-            var ab = AppDomain
-                .CurrentDomain
+            var ab = AppDomain.CurrentDomain
                 .DefineDynamicAssembly(aName, AssemblyBuilderAccess.Run);
 
             var mb = ab.DefineDynamicModule(aName.Name);

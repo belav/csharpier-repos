@@ -13,8 +13,7 @@ public class QueryableUsedViaExpression
 
     public static int CallQueryableCount(IQueryable source)
     {
-        return source
-            .Provider
+        return source.Provider
             .Execute<int>(
                 Expression.Call(
                     typeof(Queryable),

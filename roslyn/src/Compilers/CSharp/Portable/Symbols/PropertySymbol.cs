@@ -415,11 +415,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 HashSet<TypeSymbol> unificationCheckedTypes = null;
                 DiagnosticInfo diagnosticInfo = result.DiagnosticInfo;
                 if (
-                    this.TypeWithAnnotations.GetUnificationUseSiteDiagnosticRecursive(
-                        ref diagnosticInfo,
-                        this,
-                        ref unificationCheckedTypes
-                    )
+                    this.TypeWithAnnotations
+                        .GetUnificationUseSiteDiagnosticRecursive(
+                            ref diagnosticInfo,
+                            this,
+                            ref unificationCheckedTypes
+                        )
                     || GetUnificationUseSiteDiagnosticRecursive(
                         ref diagnosticInfo,
                         this.RefCustomModifiers,

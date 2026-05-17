@@ -498,9 +498,10 @@ public abstract partial class ModelBuilderTest
         public virtual void Conventions_can_be_replaced()
         {
             var modelBuilder = CreateModelBuilder(c =>
-                c.Conventions.Replace<DbSetFindingConvention>(s => new TestDbSetFindingConvention(
-                    s.GetService<ProviderConventionSetBuilderDependencies>()!
-                ))
+                c.Conventions
+                    .Replace<DbSetFindingConvention>(s => new TestDbSetFindingConvention(
+                        s.GetService<ProviderConventionSetBuilderDependencies>()!
+                    ))
             );
 
             var model = modelBuilder.FinalizeModel();
@@ -2262,8 +2263,7 @@ public abstract partial class ModelBuilderTest
 
             Assert.DoesNotContain(
                 nameof(IEntityBase.Target),
-                modelBuilder
-                    .Model
+                modelBuilder.Model
                     .FindEntityType(typeof(EntityBase))!
                     .GetProperties()
                     .Select(p => p.Name)
@@ -2273,8 +2273,7 @@ public abstract partial class ModelBuilderTest
 
             Assert.Contains(
                 nameof(IEntityBase.Target),
-                modelBuilder
-                    .Model
+                modelBuilder.Model
                     .FindEntityType(typeof(EntityBase))!
                     .GetProperties()
                     .Select(p => p.Name)

@@ -136,16 +136,17 @@ namespace System.ServiceModel.Description
             var cd = new ChannelDispatcher(listener, String.Empty);
 
             cd.MessageVersion = MessageVersion.None;
-            cd.Endpoints.Add(
-                new EndpointDispatcher(
-                    new EndpointAddress(uri),
-                    "InteropScriptService",
-                    String.Empty
-                )
-                {
-                    ContractFilter = new MatchAllMessageFilter(),
-                }
-            );
+            cd.Endpoints
+                .Add(
+                    new EndpointDispatcher(
+                        new EndpointAddress(uri),
+                        "InteropScriptService",
+                        String.Empty
+                    )
+                    {
+                        ContractFilter = new MatchAllMessageFilter(),
+                    }
+                );
 
             var dr = cd.Endpoints[0].DispatchRuntime;
             var dop = new DispatchOperation(dr, "Get", "*", "*");

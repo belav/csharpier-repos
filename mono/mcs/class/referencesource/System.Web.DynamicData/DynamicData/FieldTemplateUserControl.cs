@@ -625,8 +625,7 @@ namespace System.Web.DynamicData
         private void SetUpRegexValidator(RegularExpressionValidator validator, MetaColumn column)
         {
             // Nothing to do if no regex was specified
-            var regexAttribute = column
-                .Attributes
+            var regexAttribute = column.Attributes
                 .OfType<RegularExpressionAttribute>()
                 .FirstOrDefault();
             if (regexAttribute == null)

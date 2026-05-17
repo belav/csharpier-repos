@@ -1371,9 +1371,8 @@ namespace System.Data.Common
 
                                             batchCommands[commandCount].CommandIdentifier =
                                                 AddToBatch(dataCommand);
-                                            batchCommands[commandCount].ParameterCount = dataCommand
-                                                .Parameters
-                                                .Count;
+                                            batchCommands[commandCount].ParameterCount =
+                                                dataCommand.Parameters.Count;
                                             batchCommands[commandCount].Row = dataRow;
                                             batchCommands[commandCount].StatementType =
                                                 statementType;

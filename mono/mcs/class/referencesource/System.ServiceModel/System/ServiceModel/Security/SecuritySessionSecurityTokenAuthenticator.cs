@@ -119,8 +119,7 @@ namespace System.ServiceModel.Security
                 this.CommunicationObject.ThrowIfDisposedOrImmutable();
                 if (value <= TimeSpan.Zero)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentOutOfRangeException(
                                 "value",
@@ -131,8 +130,7 @@ namespace System.ServiceModel.Security
 
                 if (TimeoutHelper.IsTooLarge(value))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentOutOfRangeException(
                                 "value",
@@ -153,8 +151,7 @@ namespace System.ServiceModel.Security
                 this.CommunicationObject.ThrowIfDisposedOrImmutable();
                 if (value <= TimeSpan.Zero)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentOutOfRangeException(
                                 "value",
@@ -165,8 +162,7 @@ namespace System.ServiceModel.Security
 
                 if (TimeoutHelper.IsTooLarge(value))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentOutOfRangeException(
                                 "value",
@@ -187,8 +183,7 @@ namespace System.ServiceModel.Security
                 this.CommunicationObject.ThrowIfDisposedOrImmutable();
                 if (value < 0)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentOutOfRangeException(
                                 "value",
@@ -208,8 +203,7 @@ namespace System.ServiceModel.Security
                 this.CommunicationObject.ThrowIfDisposedOrImmutable();
                 if (value <= TimeSpan.Zero)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new ArgumentOutOfRangeException("value"));
                 }
                 this.negotiationTimeout = value;
@@ -239,14 +233,12 @@ namespace System.ServiceModel.Security
                 this.CommunicationObject.ThrowIfDisposedOrImmutable();
                 if (value == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new ArgumentNullException("value"));
                 }
                 if (!value.TrustDriver.IsSessionSupported)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentException(
                                 SR.GetString(SR.TrustDriverVersionDoesNotSupportSession),
@@ -256,8 +248,7 @@ namespace System.ServiceModel.Security
                 }
                 if (!value.SecureConversationDriver.IsSessionSupported)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentException(
                                 SR.GetString(
@@ -510,8 +501,7 @@ namespace System.ServiceModel.Security
                 }
                 else
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperWarning(
                             new SecurityNegotiationException(SR.IssueSessionTokenHandlerNotSet)
                         );
@@ -525,8 +515,7 @@ namespace System.ServiceModel.Security
                 }
                 else
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperWarning(
                             new SecurityNegotiationException(SR.RenewSessionTokenHandlerNotSet)
                         );
@@ -534,8 +523,7 @@ namespace System.ServiceModel.Security
             }
             else
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new NotSupportedException());
             }
         }
@@ -567,8 +555,7 @@ namespace System.ServiceModel.Security
         {
             if (this.BootstrapSecurityBindingElement == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(SR.BootstrapSecurityBindingElementNotSet, this.GetType())
@@ -577,8 +564,7 @@ namespace System.ServiceModel.Security
             }
             if (this.IssuerBindingContext == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(SR.IssuerBuildContextNotSet, this.GetType())
@@ -587,8 +573,7 @@ namespace System.ServiceModel.Security
             }
             if (this.IssuedSecurityTokenParameters == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(SR.IssuedSecurityTokenParametersNotSet, this.GetType())
@@ -597,8 +582,7 @@ namespace System.ServiceModel.Security
             }
             if (this.SecurityAlgorithmSuite == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(SR.SecurityAlgorithmSuiteNotSet, this.GetType())
@@ -607,8 +591,7 @@ namespace System.ServiceModel.Security
             }
             if (this.IssuedTokenCache == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(SR.IssuedTokenCacheNotSet, this.GetType())
@@ -805,8 +788,7 @@ namespace System.ServiceModel.Security
             byte[] issuerEntropy;
             int issuedKeySize;
             SecurityToken proofToken;
-            WSTrust
-                .Driver
+            WSTrust.Driver
                 .ProcessRstAndIssueKey(
                     rst,
                     null,
@@ -875,16 +857,10 @@ namespace System.ServiceModel.Security
             rstr = new RequestSecurityTokenResponse(this.standardsManager);
             rstr.Context = rst.Context;
             rstr.KeySize = issuedKeySize;
-            rstr.RequestedUnattachedReference =
-                this.IssuedSecurityTokenParameters.CreateKeyIdentifierClause(
-                    newToken,
-                    SecurityTokenReferenceStyle.External
-                );
-            rstr.RequestedAttachedReference =
-                this.IssuedSecurityTokenParameters.CreateKeyIdentifierClause(
-                    newToken,
-                    SecurityTokenReferenceStyle.Internal
-                );
+            rstr.RequestedUnattachedReference = this.IssuedSecurityTokenParameters
+                .CreateKeyIdentifierClause(newToken, SecurityTokenReferenceStyle.External);
+            rstr.RequestedAttachedReference = this.IssuedSecurityTokenParameters
+                .CreateKeyIdentifierClause(newToken, SecurityTokenReferenceStyle.Internal);
             rstr.TokenType = this.sctUri;
             rstr.RequestedSecurityToken = newToken;
             if (issuerEntropy != null)
@@ -1050,14 +1026,12 @@ namespace System.ServiceModel.Security
             {
                 return;
             }
-            ILogonTokenCacheManager logonManager = OperationContext
-                .Current
+            ILogonTokenCacheManager logonManager = OperationContext.Current
                 .EndpointDispatcher
                 .ChannelDispatcher
                 .Listener
                 .GetProperty<ILogonTokenCacheManager>();
-            Collection<ISecurityContextSecurityTokenCache> sctCaches = OperationContext
-                .Current
+            Collection<ISecurityContextSecurityTokenCache> sctCaches = OperationContext.Current
                 .EndpointDispatcher
                 .ChannelDispatcher
                 .Listener
@@ -1172,8 +1146,7 @@ namespace System.ServiceModel.Security
                     }
                     else
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new ProtocolException(
                                     SR.GetString(
@@ -1223,8 +1196,7 @@ namespace System.ServiceModel.Security
                     }
                     else
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new ProtocolException(
                                     SR.GetString(
@@ -1392,8 +1364,7 @@ namespace System.ServiceModel.Security
         {
             ChannelBuilder channelBuilder = new ChannelBuilder(this.IssuerBindingContext, true);
             channelBuilder.Binding.Elements.Insert(0, new ReplyAdapterBindingElement());
-            channelBuilder
-                .Binding
+            channelBuilder.Binding
                 .Elements
                 .Insert(0, new SecuritySessionAuthenticatorBindingElement(this));
 
@@ -1448,12 +1419,11 @@ namespace System.ServiceModel.Security
             {
                 securityCredentials = ServiceCredentials.CreateDefaultCredentials();
             }
-            this.bootstrapSecurityBindingElement.ReaderQuotas =
-                this.IssuerBindingContext.GetInnerProperty<XmlDictionaryReaderQuotas>();
+            this.bootstrapSecurityBindingElement.ReaderQuotas = this.IssuerBindingContext
+                .GetInnerProperty<XmlDictionaryReaderQuotas>();
             if (this.bootstrapSecurityBindingElement.ReaderQuotas == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(SR.EncodingBindingElementDoesNotHandleReaderQuotas)
@@ -1461,20 +1431,20 @@ namespace System.ServiceModel.Security
                     );
             }
 
-            TransportBindingElement transportBindingElement = context
-                .RemainingBindingElements
+            TransportBindingElement transportBindingElement = context.RemainingBindingElements
                 .Find<TransportBindingElement>();
             if (transportBindingElement != null)
                 this.bootstrapSecurityBindingElement.MaxReceivedMessageSize =
                     transportBindingElement.MaxReceivedMessageSize;
 
             SecurityProtocolFactory bootstrapSecurityProtocolFactory =
-                this.bootstrapSecurityBindingElement.CreateSecurityProtocolFactory<TChannel>(
-                    this.IssuerBindingContext.Clone(),
-                    securityCredentials,
-                    true,
-                    this.IssuerBindingContext.Clone()
-                );
+                this.bootstrapSecurityBindingElement
+                    .CreateSecurityProtocolFactory<TChannel>(
+                        this.IssuerBindingContext.Clone(),
+                        securityCredentials,
+                        true,
+                        this.IssuerBindingContext.Clone()
+                    );
             if (bootstrapSecurityProtocolFactory is MessageSecurityProtocolFactory)
             {
                 MessageSecurityProtocolFactory soapBindingFactory =
@@ -1485,49 +1455,39 @@ namespace System.ServiceModel.Security
                     soapBindingFactory.RequireIntegrity =
                         true;
 
-                soapBindingFactory
-                    .ProtectionRequirements
+                soapBindingFactory.ProtectionRequirements
                     .IncomingSignatureParts
                     .ChannelParts
                     .IsBodyIncluded = true;
-                soapBindingFactory
-                    .ProtectionRequirements
+                soapBindingFactory.ProtectionRequirements
                     .OutgoingSignatureParts
                     .ChannelParts
                     .IsBodyIncluded = true;
 
                 MessagePartSpecification bodyPart = new MessagePartSpecification(true);
-                soapBindingFactory
-                    .ProtectionRequirements
+                soapBindingFactory.ProtectionRequirements
                     .OutgoingSignatureParts
                     .AddParts(bodyPart, this.IssueResponseAction);
-                soapBindingFactory
-                    .ProtectionRequirements
+                soapBindingFactory.ProtectionRequirements
                     .OutgoingEncryptionParts
                     .AddParts(bodyPart, this.IssueResponseAction);
-                soapBindingFactory
-                    .ProtectionRequirements
+                soapBindingFactory.ProtectionRequirements
                     .OutgoingSignatureParts
                     .AddParts(bodyPart, this.RenewResponseAction);
-                soapBindingFactory
-                    .ProtectionRequirements
+                soapBindingFactory.ProtectionRequirements
                     .OutgoingEncryptionParts
                     .AddParts(bodyPart, this.RenewResponseAction);
 
-                soapBindingFactory
-                    .ProtectionRequirements
+                soapBindingFactory.ProtectionRequirements
                     .IncomingSignatureParts
                     .AddParts(bodyPart, this.IssueAction);
-                soapBindingFactory
-                    .ProtectionRequirements
+                soapBindingFactory.ProtectionRequirements
                     .IncomingEncryptionParts
                     .AddParts(bodyPart, this.IssueAction);
-                soapBindingFactory
-                    .ProtectionRequirements
+                soapBindingFactory.ProtectionRequirements
                     .IncomingSignatureParts
                     .AddParts(bodyPart, this.RenewAction);
-                soapBindingFactory
-                    .ProtectionRequirements
+                soapBindingFactory.ProtectionRequirements
                     .IncomingEncryptionParts
                     .AddParts(bodyPart, this.RenewAction);
             }
@@ -1536,11 +1496,10 @@ namespace System.ServiceModel.Security
                 new SupportingTokenParameters();
             SecurityContextSecurityTokenParameters sctParameters =
                 new SecurityContextSecurityTokenParameters();
-            sctParameters.RequireDerivedKeys =
-                this.IssuedSecurityTokenParameters.RequireDerivedKeys;
+            sctParameters.RequireDerivedKeys = this.IssuedSecurityTokenParameters
+                .RequireDerivedKeys;
             renewSupportingTokenParameters.Endorsing.Add(sctParameters);
-            bootstrapSecurityProtocolFactory
-                .SecurityBindingElement
+            bootstrapSecurityProtocolFactory.SecurityBindingElement
                 .OperationSupportingTokenParameters
                 .Add(this.RenewAction.Value, renewSupportingTokenParameters);
             bootstrapSecurityProtocolFactory.SecurityTokenManager =
@@ -1628,8 +1587,7 @@ namespace System.ServiceModel.Security
                 );
                 if (listener == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(SR.CannotCreateTwoWayListenerForNegotiation)
@@ -1644,10 +1602,10 @@ namespace System.ServiceModel.Security
                 channelDispatcher.MessageVersion = binding.MessageVersion;
                 channelDispatcher.ManualAddressing = true;
                 channelDispatcher.ServiceThrottle = new ServiceThrottle(this);
-                channelDispatcher.ServiceThrottle.MaxConcurrentCalls =
-                    this.authenticator.MaximumConcurrentNegotiations;
-                channelDispatcher.ServiceThrottle.MaxConcurrentSessions =
-                    this.authenticator.MaximumConcurrentNegotiations;
+                channelDispatcher.ServiceThrottle.MaxConcurrentCalls = this.authenticator
+                    .MaximumConcurrentNegotiations;
+                channelDispatcher.ServiceThrottle.MaxConcurrentSessions = this.authenticator
+                    .MaximumConcurrentNegotiations;
 
                 EndpointDispatcher endpointDispatcher = new EndpointDispatcher(
                     new EndpointAddress(this.listenUri),
@@ -1736,15 +1694,13 @@ namespace System.ServiceModel.Security
                     object state
                 )
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new NotImplementedException());
                 }
 
                 public object InvokeEnd(object instance, out object[] outputs, IAsyncResult result)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new NotImplementedException());
                 }
             }
@@ -1784,8 +1740,7 @@ namespace System.ServiceModel.Security
                 {
                     return (T)
                         (object)
-                            authenticator
-                                .BootstrapSecurityBindingElement
+                            authenticator.BootstrapSecurityBindingElement
                                 .GetProperty<ISecurityCapabilities>(context);
                 }
 
@@ -1816,8 +1771,7 @@ namespace System.ServiceModel.Security
             )
             {
                 if (tokenRequirement == null)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgumentNull("tokenRequirement");
 
                 if (tokenRequirement.TokenType == ServiceModelSecurityTokenTypes.SecurityContext)
@@ -1827,10 +1781,11 @@ namespace System.ServiceModel.Security
                 }
                 else
                 {
-                    return this.innerTokenManager.CreateSecurityTokenAuthenticator(
-                        tokenRequirement,
-                        out outOfBandTokenResolver
-                    );
+                    return this.innerTokenManager
+                        .CreateSecurityTokenAuthenticator(
+                            tokenRequirement,
+                            out outOfBandTokenResolver
+                        );
                 }
             }
 

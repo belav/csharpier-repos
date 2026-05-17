@@ -182,8 +182,7 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
                 {
                     upsertParameters.PKColumns.Add(column);
                     upsertParameters.PKParameters.Add(inputParameter);
-                    upsertParameters
-                        .PKValues
+                    upsertParameters.PKValues
                         .Add(sqlProvider.GetParameterName(inputParameter.Alias));
                 }
 
@@ -209,8 +208,7 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
 
                     upsertParameters.OutputColumns.Add(column);
                     upsertParameters.OutputParameters.Add(outputParameter);
-                    upsertParameters
-                        .OutputValues
+                    upsertParameters.OutputValues
                         .Add(sqlProvider.GetParameterName(outputParameter.Alias));
                     upsertParameters.OutputExpressions.Add(dataMember.Expression);
                 }
@@ -219,8 +217,7 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
                     if (type == ParameterType.InputPK)
                     {
                         upsertParameters.InputPKColumns.Add(column);
-                        upsertParameters
-                            .InputPKValues
+                        upsertParameters.InputPKValues
                             .Add(sqlProvider.GetParameterName(inputParameter.Alias));
                         upsertParameters.InputParameters.Add(inputParameter);
                     }
@@ -229,8 +226,7 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
                     else if (modifiedMembers == null || modifiedMembers.Contains(memberInfo))
                     {
                         upsertParameters.InputColumns.Add(column);
-                        upsertParameters
-                            .InputValues
+                        upsertParameters.InputValues
                             .Add(sqlProvider.GetParameterName(inputParameter.Alias));
                         upsertParameters.InputParameters.Add(inputParameter);
                     }
@@ -248,8 +244,7 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
                         );
                         upsertParameters.OutputColumns.Add(column);
                         upsertParameters.OutputParameters.Add(outputParameter);
-                        upsertParameters
-                            .OutputValues
+                        upsertParameters.OutputValues
                             .Add(sqlProvider.GetParameterName(outputParameter.Alias));
                         upsertParameters.OutputExpressions.Add(dataMember.Expression);
                     }

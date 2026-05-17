@@ -173,8 +173,7 @@ namespace System.ServiceModel.Channels
                 {
                     if (this.securityProtocol == null)
                     {
-                        this.securityProtocol = ((IPeerFactory)channelManager)
-                            .SecurityManager
+                        this.securityProtocol = ((IPeerFactory)channelManager).SecurityManager
                             .CreateSecurityProtocol<IOutputChannel>(
                                 this.to,
                                 timeoutHelper.RemainingTime()

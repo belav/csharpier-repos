@@ -58,8 +58,7 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
         )
         {
             var value = pointer.Dereference(inspectionContext);
-            var wasExceptionThrown = value
-                .EvalFlags
+            var wasExceptionThrown = value.EvalFlags
                 .Includes(DkmEvaluationResultFlags.ExceptionThrown);
 
             var expansion = wasExceptionThrown
@@ -73,8 +72,7 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                 );
             var parentFullName = parent.ChildFullNamePrefix;
             var fullName = parentFullName == null ? null : $"*{parentFullName}";
-            var editableValue = resultProvider
-                .Formatter2
+            var editableValue = resultProvider.Formatter2
                 .GetEditableValueString(value, inspectionContext, elementTypeAndInfo.Info);
 
             // NB: Full name is based on the real (i.e. not DebuggerDisplay) name.  This is a change from dev12,

@@ -300,8 +300,7 @@ namespace System.Numerics.Tests
             Assert.Equal(resultInt, BigInteger.ModPow(valueInt, exponentInt, modulusInt));
 
             // Once with reduced threshold
-            BigIntTools
-                .Utils
+            BigIntTools.Utils
                 .RunWithFakeThreshold(
                     "ReducerThreshold",
                     8,

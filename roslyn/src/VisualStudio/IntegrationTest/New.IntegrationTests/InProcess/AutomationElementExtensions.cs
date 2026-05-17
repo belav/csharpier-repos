@@ -44,8 +44,7 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
                 throw new ArgumentNullException(nameof(parent));
             }
 
-            var condition = Helper
-                .Automation
+            var condition = Helper.Automation
                 .CreatePropertyCondition(
                     AutomationElementIdentifiers.AutomationIdProperty.Id,
                     automationId
@@ -80,8 +79,7 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
                 throw new ArgumentNullException(nameof(parent));
             }
 
-            var condition = Helper
-                .Automation
+            var condition = Helper.Automation
                 .CreatePropertyCondition(AutomationElementIdentifiers.NameProperty.Id, name);
             var child = Helper.Retry(
                 _ => parent.FindFirst(TreeScope.TreeScope_Descendants, condition),
@@ -113,8 +111,7 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
                 throw new ArgumentNullException(nameof(parent));
             }
 
-            var condition = Helper
-                .Automation
+            var condition = Helper.Automation
                 .CreatePropertyCondition(
                     AutomationElementIdentifiers.ClassNameProperty.Id,
                     className
@@ -150,8 +147,7 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
                 throw new ArgumentNullException(nameof(parent));
             }
 
-            var condition = Helper
-                .Automation
+            var condition = Helper.Automation
                 .CreatePropertyCondition(
                     AutomationElementIdentifiers.ClassNameProperty.Id,
                     className
@@ -315,8 +311,7 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
             {
                 var next = item.FindFirst(
                     TreeScope.TreeScope_Descendants,
-                    Helper
-                        .Automation
+                    Helper.Automation
                         .CreatePropertyCondition(
                             AutomationElementIdentifiers.LocalizedControlTypeProperty.Id,
                             pathPart

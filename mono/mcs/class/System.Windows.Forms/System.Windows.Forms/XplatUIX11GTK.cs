@@ -1740,8 +1740,7 @@ namespace System.Windows.Forms
                                     buffer,
                                     buflen
                                 );
-                                sel_event.SelectionEvent.property = xevent
-                                    .SelectionRequestEvent
+                                sel_event.SelectionEvent.property = xevent.SelectionRequestEvent
                                     .property;
                                 Marshal.FreeHGlobal(buffer);
                             }

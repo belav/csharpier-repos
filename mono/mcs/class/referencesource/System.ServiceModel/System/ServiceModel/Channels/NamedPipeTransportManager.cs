@@ -116,8 +116,7 @@ namespace System.ServiceModel.Channels
 
         void Cleanup()
         {
-            NamedPipeChannelListener
-                .StaticTransportManagerTable
+            NamedPipeChannelListener.StaticTransportManagerTable
                 .UnregisterUri(this.ListenUri, this.HostNameComparisonMode);
         }
 

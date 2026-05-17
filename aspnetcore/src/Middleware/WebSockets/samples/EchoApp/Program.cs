@@ -22,8 +22,7 @@ public class Program
             {
                 if (context.WebSockets.IsWebSocketRequest)
                 {
-                    var webSocket = await context
-                        .WebSockets
+                    var webSocket = await context.WebSockets
                         .AcceptWebSocketAsync(
                             new WebSocketAcceptContext() { DangerousEnableCompression = true }
                         );

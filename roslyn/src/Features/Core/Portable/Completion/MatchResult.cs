@@ -65,9 +65,8 @@ namespace Microsoft.CodeAnalysis.Completion
 
                         // We'd rank match of FilterText over match of any of AdditionalFilterTexts if they has same pattern match score
                         if (ret == 0)
-                            ret = x.MatchedWithAdditionalFilterTexts.CompareTo(
-                                y.MatchedWithAdditionalFilterTexts
-                            );
+                            ret = x.MatchedWithAdditionalFilterTexts
+                                .CompareTo(y.MatchedWithAdditionalFilterTexts);
 
                         // We want to preserve the original order for items with same pattern match score.
                         return ret == 0

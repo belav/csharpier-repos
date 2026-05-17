@@ -44,13 +44,11 @@ namespace Microsoft.CSharp.RuntimeBinder
             {
                 var v = new List<DynamicMetaObject> { self };
                 var error = new DynamicMetaObject(
-                    System
-                        .Linq
+                    System.Linq
                         .Expressions
                         .Expression
                         .Throw(
-                            System
-                                .Linq
+                            System.Linq
                                 .Expressions
                                 .Expression
                                 .Constant(new DynamicBindingFailedException(), typeof(Exception)),

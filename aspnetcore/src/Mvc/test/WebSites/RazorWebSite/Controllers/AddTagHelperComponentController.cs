@@ -17,8 +17,7 @@ public class AddTagHelperComponentController : Controller
 
     public IActionResult AddComponent()
     {
-        _tagHelperComponentManager
-            .Components
+        _tagHelperComponentManager.Components
             .Add(
                 new TestBodyTagHelperComponent(
                     0,

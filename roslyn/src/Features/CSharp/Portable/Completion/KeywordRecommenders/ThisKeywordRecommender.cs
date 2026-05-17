@@ -65,8 +65,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
         private static bool IsThisParameterModifierContext(CSharpSyntaxContext context)
         {
             if (
-                context
-                    .SyntaxTree
+                context.SyntaxTree
                     .IsParameterModifierContext(
                         context.Position,
                         context.LeftToken,
@@ -102,11 +101,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             CancellationToken cancellationToken
         )
         {
-            var outerType = context
-                .SemanticModel
+            var outerType = context.SemanticModel
                 .GetEnclosingNamedType(context.Position, cancellationToken);
-            return context
-                .InferredTypes
+            return context.InferredTypes
                 .Any(static (t, outerType) => Equals(t, outerType), outerType);
         }
     }

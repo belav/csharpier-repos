@@ -55,8 +55,7 @@ namespace System.ServiceModel.Activities.Configuration
                 && !string.IsNullOrEmpty(this.ConnectionStringName)
             )
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new InstancePersistenceException(
                             SR.CannotSpecifyBothConnectionStringAndName
@@ -78,8 +77,7 @@ namespace System.ServiceModel.Activities.Configuration
                 {
                     if (useDefaultConnectionStringName)
                     {
-                        throw FxTrace
-                            .Exception
+                        throw FxTrace.Exception
                             .AsError(
                                 new InstancePersistenceException(
                                     SR.MustSpecifyConnectionStringOrName
@@ -87,8 +85,7 @@ namespace System.ServiceModel.Activities.Configuration
                             );
                     }
 
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .Argument(
                             connectionStringName,
                             SR.ConnectionStringNameWrong(this.ConnectionStringName)

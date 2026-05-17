@@ -316,8 +316,7 @@ namespace ILCompiler
             {
                 foreach (var resourceHandle in ecmaModule.MetadataReader.ManifestResources)
                 {
-                    ManifestResource resource = ecmaModule
-                        .MetadataReader
+                    ManifestResource resource = ecmaModule.MetadataReader
                         .GetManifestResource(resourceHandle);
 
                     // Don't try to process linked resources or resources in other assemblies
@@ -783,8 +782,7 @@ namespace ILCompiler
             {
                 if (
                     methodIL != null
-                    && Dataflow
-                        .ReflectionMethodBodyScanner
+                    && Dataflow.ReflectionMethodBodyScanner
                         .RequiresReflectionMethodBodyScannerForMethodBody(FlowAnnotations, method)
                 )
                 {
@@ -963,8 +961,7 @@ namespace ILCompiler
                 != 0;
             if (
                 scanReflection
-                && Dataflow
-                    .ReflectionMethodBodyScanner
+                && Dataflow.ReflectionMethodBodyScanner
                     .RequiresReflectionMethodBodyScannerForAccess(FlowAnnotations, writtenField)
             )
             {
@@ -993,8 +990,7 @@ namespace ILCompiler
                     TypeDesc fieldOwningTypeNormalized = fieldOwningType.NormalizeInstantiation();
                     if (fieldOwningType != fieldOwningTypeNormalized)
                     {
-                        fieldToReport = factory
-                            .TypeSystemContext
+                        fieldToReport = factory.TypeSystemContext
                             .GetFieldForInstantiatedType(
                                 writtenField.GetTypicalFieldDefinition(),
                                 (InstantiatedType)fieldOwningTypeNormalized
@@ -1028,8 +1024,7 @@ namespace ILCompiler
                 != 0;
             if (
                 scanReflection
-                && Dataflow
-                    .ReflectionMethodBodyScanner
+                && Dataflow.ReflectionMethodBodyScanner
                     .RequiresReflectionMethodBodyScannerForCallSite(FlowAnnotations, calledMethod)
             )
             {
@@ -1277,8 +1272,7 @@ namespace ILCompiler
 
             MethodIL methodILDefinition = methodIL.GetMethodILDefinition();
             if (
-                FlowAnnotations
-                    .CompilerGeneratedState
+                FlowAnnotations.CompilerGeneratedState
                     .TryGetUserMethodForCompilerGeneratedMember(
                         methodILDefinition.OwningMethod,
                         out var userMethod
@@ -1497,11 +1491,9 @@ namespace ILCompiler
                 EcmaModule xmlModule = globalAttributeRemoval
                     ? (EcmaModule)module.Context.SystemModule
                     : module;
-                PEMemoryBlock resourceDirectory = xmlModule
-                    .PEReader
+                PEMemoryBlock resourceDirectory = xmlModule.PEReader
                     .GetSectionData(
-                        xmlModule
-                            .PEReader
+                        xmlModule.PEReader
                             .PEHeaders
                             .CorHeader
                             .ResourcesDirectory
@@ -1510,8 +1502,7 @@ namespace ILCompiler
 
                 foreach (var resourceHandle in xmlModule.MetadataReader.ManifestResources)
                 {
-                    ManifestResource resource = xmlModule
-                        .MetadataReader
+                    ManifestResource resource = xmlModule.MetadataReader
                         .GetManifestResource(resourceHandle);
 
                     // Don't try to process linked resources or resources in other assemblies

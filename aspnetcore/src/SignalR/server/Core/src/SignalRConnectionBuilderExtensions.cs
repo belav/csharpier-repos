@@ -27,8 +27,7 @@ public static class SignalRConnectionBuilderExtensions
     )
         where THub : Hub
     {
-        var marker = connectionBuilder
-            .ApplicationServices
+        var marker = connectionBuilder.ApplicationServices
             .GetService(typeof(SignalRCoreMarkerService));
         if (marker == null)
         {

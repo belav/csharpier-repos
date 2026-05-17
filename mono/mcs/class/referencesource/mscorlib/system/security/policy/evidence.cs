@@ -1487,15 +1487,13 @@ namespace System.Security.Policy
                 EvidenceBase hostEvidence = null;
                 if (targetDomain != null)
                 {
-                    hostEvidence = AppDomain
-                        .CurrentDomain
+                    hostEvidence = AppDomain.CurrentDomain
                         .HostSecurityManager
                         .GenerateAppDomainEvidence(type);
                 }
                 else if (targetAssembly != null)
                 {
-                    hostEvidence = AppDomain
-                        .CurrentDomain
+                    hostEvidence = AppDomain.CurrentDomain
                         .HostSecurityManager
                         .GenerateAssemblyEvidence(type, targetAssembly);
                 }
@@ -1506,8 +1504,7 @@ namespace System.Security.Policy
                 {
                     if (!type.IsAssignableFrom(hostEvidence.GetType()))
                     {
-                        string hostType = AppDomain
-                            .CurrentDomain
+                        string hostType = AppDomain.CurrentDomain
                             .HostSecurityManager
                             .GetType()
                             .FullName;

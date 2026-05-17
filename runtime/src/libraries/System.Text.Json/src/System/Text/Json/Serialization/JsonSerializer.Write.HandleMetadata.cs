@@ -49,8 +49,7 @@ namespace System.Text.Json
             {
                 Debug.Assert(state.PolymorphicTypeResolver != null);
 
-                JsonEncodedText propertyName = state
-                    .PolymorphicTypeResolver
+                JsonEncodedText propertyName = state.PolymorphicTypeResolver
                     .CustomTypeDiscriminatorPropertyNameJsonEncoded
                     is JsonEncodedText customPropertyName
                     ? customPropertyName
@@ -102,8 +101,7 @@ namespace System.Text.Json
         {
             Debug.Assert(state.NewReferenceId == null);
 
-            string referenceId = state
-                .ReferenceResolver
+            string referenceId = state.ReferenceResolver
                 .GetReference(currentValue, out bool alreadyExists);
             Debug.Assert(referenceId != null);
 

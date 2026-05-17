@@ -3889,8 +3889,7 @@ namespace System.Text.RegularExpressions.Tests
                     bool ExpectedSuccess,
                     string ExpectedValue
                 )>
-            )[] otherTests = RegexHelpers
-                .AvailableEngines
+            )[] otherTests = RegexHelpers.AvailableEngines
                 .Where(e => e != RegexEngine.Interpreter)
                 .Select(e => (e, Match_MemberData_Cases(e).ToHashSet()))
                 .ToArray();
@@ -4395,8 +4394,7 @@ namespace System.Text.RegularExpressions.Tests
                 .Invoke(
                     async engineString =>
                     {
-                        AppDomain
-                            .CurrentDomain
+                        AppDomain.CurrentDomain
                             .SetData(
                                 RegexHelpers.DefaultMatchTimeout_ConfigKeyName,
                                 TimeSpan.FromMilliseconds(100)
@@ -4430,8 +4428,7 @@ namespace System.Text.RegularExpressions.Tests
             RemoteExecutor
                 .Invoke(() =>
                 {
-                    AppDomain
-                        .CurrentDomain
+                    AppDomain.CurrentDomain
                         .SetData(
                             RegexHelpers.DefaultMatchTimeout_ConfigKeyName,
                             TimeSpan.FromMilliseconds(100)
@@ -4469,8 +4466,7 @@ namespace System.Text.RegularExpressions.Tests
                             @"^([0-9a-zA-Z]([-.\w]*[0-9a-zA-Z])*@(([0-9a-zA-Z])+([-\w]*[0-9a-zA-Z])*\.)+[a-zA-Z]{2,9})$";
                         string input = new string('a', 50) + "@a.a";
 
-                        AppDomain
-                            .CurrentDomain
+                        AppDomain.CurrentDomain
                             .SetData(
                                 RegexHelpers.DefaultMatchTimeout_ConfigKeyName,
                                 TimeSpan.FromMilliseconds(100)
@@ -6804,31 +6800,32 @@ namespace System.Text.RegularExpressions.Tests
                     Enumerable
                         .Range(0, b.ParticipantCount)
                         .Select(_ =>
-                            Task.Factory.StartNew(
-                                () =>
-                                {
-                                    b.SignalAndWait();
-                                    for (int i = 0; i < IterationsPerTask; i++)
+                            Task.Factory
+                                .StartNew(
+                                    () =>
                                     {
-                                        Match m = r.Match(Input);
-                                        Assert.NotNull(m);
-                                        Assert.True(m.Success);
-                                        Assert.Equal("abcdefghijklmnx", m.Value);
+                                        b.SignalAndWait();
+                                        for (int i = 0; i < IterationsPerTask; i++)
+                                        {
+                                            Match m = r.Match(Input);
+                                            Assert.NotNull(m);
+                                            Assert.True(m.Success);
+                                            Assert.Equal("abcdefghijklmnx", m.Value);
 
-                                        m = m.NextMatch();
-                                        Assert.NotNull(m);
-                                        Assert.True(m.Success);
-                                        Assert.Equal("nmlkjihgfedcbax", m.Value);
+                                            m = m.NextMatch();
+                                            Assert.NotNull(m);
+                                            Assert.True(m.Success);
+                                            Assert.Equal("nmlkjihgfedcbax", m.Value);
 
-                                        m = m.NextMatch();
-                                        Assert.NotNull(m);
-                                        Assert.False(m.Success);
-                                    }
-                                },
-                                CancellationToken.None,
-                                TaskCreationOptions.LongRunning,
-                                TaskScheduler.Default
-                            )
+                                            m = m.NextMatch();
+                                            Assert.NotNull(m);
+                                            Assert.False(m.Success);
+                                        }
+                                    },
+                                    CancellationToken.None,
+                                    TaskCreationOptions.LongRunning,
+                                    TaskScheduler.Default
+                                )
                         )
                         .ToArray()
                 );

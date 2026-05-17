@@ -32,8 +32,7 @@ namespace System.ServiceModel.Transactions
             }
             catch (ArgumentException e)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new TransactionException(SR.GetString(SR.InvalidPropagationToken), e)
                     );

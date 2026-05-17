@@ -220,10 +220,11 @@ namespace MonoTests.System.Net.Http
                 return Task.FromResult(new HttpResponseMessage());
             };
 
-            var t = Task.Factory.StartNew(() =>
-            {
-                client.SendAsync(request).Wait(WaitTimeout);
-            });
+            var t = Task.Factory
+                .StartNew(() =>
+                {
+                    client.SendAsync(request).Wait(WaitTimeout);
+                });
 
             Assert.IsTrue(mre.WaitOne(500), "#1");
             mre.Reset();
@@ -636,8 +637,7 @@ namespace MonoTests.System.Net.Http
                 chandler.MaxAutomaticRedirections = 33;
                 chandler.MaxRequestContentBufferSize = 5555;
                 chandler.PreAuthenticate = true;
-                chandler
-                    .CookieContainer
+                chandler.CookieContainer
                     .Add(
                         new Uri($"http://localhost:{port}/Send_Complete_ClientHandlerSettings/"),
                         new Cookie("mycookie", "vv")

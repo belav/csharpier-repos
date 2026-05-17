@@ -165,8 +165,7 @@ public class ProxiesOptionsExtension : IDbContextOptionsExtension
             if (internalServiceProvider != null)
             {
                 using var scope = internalServiceProvider.CreateScope();
-                var conventionPlugins = scope
-                    .ServiceProvider
+                var conventionPlugins = scope.ServiceProvider
                     .GetService<IEnumerable<IConventionSetPlugin>>();
                 if (conventionPlugins?.Any(s => s is ProxiesConventionSetPlugin) == false)
                 {

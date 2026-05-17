@@ -28,8 +28,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 interfaceProperty.ContainingType,
                 aliasQualifierOpt: null
             );
-            Parameters = interfaceProperty
-                .Parameters
+            Parameters = interfaceProperty.Parameters
                 .SelectAsArray(
                     static (p, t) => SynthesizedParameterSymbol.DeriveParameter(t, p),
                     this

@@ -21,15 +21,13 @@ namespace System.Web.Http.Batch
             const string baseAddress = "http://localhost/api/";
             HttpConfiguration config = new HttpConfiguration();
             HttpServer server = new HttpServer(config);
-            config
-                .Routes
+            config.Routes
                 .MapHttpBatchRoute(
                     routeName: "Batch",
                     routeTemplate: "api/$batch",
                     batchHandler: new CustomHttpBatchHandler(server)
                 );
-            config
-                .Routes
+            config.Routes
                 .MapHttpRoute(
                     "Default",
                     "api/{controller}/{id}",
@@ -68,8 +66,7 @@ namespace System.Web.Http.Batch
                     )
                 )
                 {
-                    MultipartStreamProvider streamProvider = await batchResponse
-                        .Content
+                    MultipartStreamProvider streamProvider = await batchResponse.Content
                         .ReadAsMultipartAsync();
                     foreach (HttpContent content in streamProvider.Contents)
                     {

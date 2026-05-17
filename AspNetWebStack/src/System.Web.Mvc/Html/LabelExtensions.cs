@@ -325,12 +325,13 @@ namespace System.Web.Mvc.Html
             }
 
             TagBuilder tag = new TagBuilder("label");
-            tag.Attributes.Add(
-                "for",
-                TagBuilder.CreateSanitizedId(
-                    html.ViewContext.ViewData.TemplateInfo.GetFullHtmlFieldName(htmlFieldName)
-                )
-            );
+            tag.Attributes
+                .Add(
+                    "for",
+                    TagBuilder.CreateSanitizedId(
+                        html.ViewContext.ViewData.TemplateInfo.GetFullHtmlFieldName(htmlFieldName)
+                    )
+                );
             tag.SetInnerText(resolvedLabelText);
             tag.MergeAttributes(htmlAttributes, replaceExisting: true);
             return tag.ToMvcHtmlString(TagRenderMode.Normal);

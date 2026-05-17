@@ -124,8 +124,7 @@ namespace System.Activities
                 || (this.UnimportantBookmarks != null && this.UnimportantBookmarks.Count != 0)
             )
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new InvalidOperationException(SR.ExclusiveHandleRegisterBookmarkScopeFailed)
                     );
@@ -160,8 +159,7 @@ namespace System.Activities
                 || (this.UnimportantBookmarks != null && this.UnimportantBookmarks.Count != 0)
             )
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(new InvalidOperationException(SR.ExclusiveHandleReinitializeFailed));
             }
             this.bookmarkScopes.Clear();

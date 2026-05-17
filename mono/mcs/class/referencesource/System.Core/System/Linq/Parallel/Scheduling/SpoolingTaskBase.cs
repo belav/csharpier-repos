@@ -55,8 +55,7 @@ namespace System.Linq.Parallel
                     oce != null
                     && oce.CancellationToken
                         == m_groupState.CancellationState.MergedCancellationToken
-                    && m_groupState
-                        .CancellationState
+                    && m_groupState.CancellationState
                         .MergedCancellationToken
                         .IsCancellationRequested
                 )

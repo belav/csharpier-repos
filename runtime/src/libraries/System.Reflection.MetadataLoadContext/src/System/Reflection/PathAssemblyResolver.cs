@@ -75,8 +75,7 @@ namespace System.Reflection
                     Assembly assemblyFromPath = context.LoadFromAssemblyPath(path);
                     AssemblyName assemblyNameFromPath = assemblyFromPath.GetName();
                     if (
-                        assemblyName
-                            .Name
+                        assemblyName.Name
                             .Equals(assemblyNameFromPath.Name, StringComparison.OrdinalIgnoreCase)
                     )
                     {

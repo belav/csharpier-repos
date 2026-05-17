@@ -49,8 +49,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.AddAwait
                     case SyntaxKind.AnonymousMethodExpression:
                         return ((AnonymousFunctionExpressionSyntax)current).AsyncKeyword != default;
                     case SyntaxKind.MethodDeclaration:
-                        return ((MethodDeclarationSyntax)current)
-                            .Modifiers
+                        return ((MethodDeclarationSyntax)current).Modifiers
                             .Any(SyntaxKind.AsyncKeyword);
                 }
             }

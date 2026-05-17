@@ -287,8 +287,7 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             // First check if user has configured "generated_code = true | false" in .editorconfig
             if (analyzerOptions != null)
             {
-                var analyzerConfigOptions = analyzerOptions
-                    .AnalyzerConfigOptionsProvider
+                var analyzerConfigOptions = analyzerOptions.AnalyzerConfigOptionsProvider
                     .GetOptions(syntaxTree);
                 var isUserConfiguredGeneratedCode =
                     GeneratedCodeUtilities.GetIsGeneratedCodeFromOptions(analyzerConfigOptions);

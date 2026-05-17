@@ -507,8 +507,7 @@ namespace MonoTests.System.Reflection.Emit
 
         private static AssemblyBuilder GenerateAssembly()
         {
-            return AppDomain
-                .CurrentDomain
+            return AppDomain.CurrentDomain
                 .DefineDynamicAssembly(GetAssemblyName(), AssemblyBuilderAccess.RunAndSave);
         }
 

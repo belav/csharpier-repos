@@ -45,8 +45,7 @@ namespace System.ServiceModel.Channels
             {
                 if (value < 0)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentOutOfRangeException(
                                 "value",
@@ -83,8 +82,7 @@ namespace System.ServiceModel.Channels
 
             if (context.BindingElements != null)
             {
-                PrivacyNoticeBindingElement settings = context
-                    .BindingElements
+                PrivacyNoticeBindingElement settings = context.BindingElements
                     .Find<PrivacyNoticeBindingElement>();
 
                 if (settings != null)

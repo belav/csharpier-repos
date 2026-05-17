@@ -64,8 +64,7 @@ public class ApiConventionApplicationModelConvention : IActionModelConvention
     private static void DiscoverApiConvention(ActionModel action)
     {
         var controller = action.Controller;
-        var apiConventionAttributes = controller
-            .Attributes
+        var apiConventionAttributes = controller.Attributes
             .OfType<ApiConventionTypeAttribute>()
             .ToArray();
         if (apiConventionAttributes.Length == 0)
@@ -92,13 +91,11 @@ public class ApiConventionApplicationModelConvention : IActionModelConvention
     {
         var errorTypeAttribute =
             action.Attributes.OfType<ProducesErrorResponseTypeAttribute>().FirstOrDefault()
-            ?? action
-                .Controller
+            ?? action.Controller
                 .Attributes
                 .OfType<ProducesErrorResponseTypeAttribute>()
                 .FirstOrDefault()
-            ?? action
-                .Controller
+            ?? action.Controller
                 .ControllerType
                 .Assembly
                 .GetCustomAttribute<ProducesErrorResponseTypeAttribute>()

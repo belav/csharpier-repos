@@ -9,8 +9,7 @@ public class AppendOrderByPropertyExpressionMutator : ExpressionMutator
         : base(context) { }
 
     private bool HasValidPropertyToOrderBy(Expression expression) =>
-        expression
-            .Type
+        expression.Type
             .GetGenericArguments()[0]
             .GetProperties()
             .Where(p => !p.GetMethod.IsStatic)
@@ -32,8 +31,7 @@ public class AppendOrderByPropertyExpressionMutator : ExpressionMutator
 
         var isDescending = random.Next(3) == 0;
         var orderBy = isDescending
-            ? QueryableMethods
-                .OrderByDescending
+            ? QueryableMethods.OrderByDescending
                 .MakeGenericMethod(typeArgument, properties[i].PropertyType)
             : QueryableMethods.OrderBy.MakeGenericMethod(typeArgument, properties[i].PropertyType);
 
@@ -54,8 +52,7 @@ public class AppendOrderByPropertyExpressionMutator : ExpressionMutator
             );
 
             orderBy = isDescending
-                ? QueryableMethods
-                    .OrderByDescending
+                ? QueryableMethods.OrderByDescending
                     .MakeGenericMethod(typeArgument, nullablePropertyType)
                 : QueryableMethods.OrderBy.MakeGenericMethod(typeArgument, nullablePropertyType);
 

@@ -100,8 +100,7 @@ namespace System.ComponentModel.Composition
                 args
             );
             CustomAttributeBuilder[] attributes = { accessAttribute };
-            return AppDomain
-                .CurrentDomain
+            return AppDomain.CurrentDomain
                 .DefineDynamicAssembly(
                     ProxyAssemblyName,
                     AssemblyBuilderAccess.Run,
@@ -109,8 +108,7 @@ namespace System.ComponentModel.Composition
                     SecurityContextSource.CurrentAppDomain
                 );
 #else
-            return AppDomain
-                .CurrentDomain
+            return AppDomain.CurrentDomain
                 .DefineDynamicAssembly(ProxyAssemblyName, AssemblyBuilderAccess.Run);
 #endif //FEATURE_CAS_APTCA
         }

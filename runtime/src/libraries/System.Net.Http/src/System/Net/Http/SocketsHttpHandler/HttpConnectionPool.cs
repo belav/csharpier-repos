@@ -1248,8 +1248,7 @@ namespace System.Net.Http
         {
             if (
                 _altSvcEnabled
-                && response
-                    .Headers
+                && response.Headers
                     .TryGetValues(
                         KnownHeaders.AltSvc.Descriptor,
                         out IEnumerable<string>? altSvcHeaderValues
@@ -1368,8 +1367,7 @@ namespace System.Net.Http
                             {
                                 if (request.IsExtendedConnectRequest)
                                 {
-                                    await connection
-                                        .InitialSettingsReceived
+                                    await connection.InitialSettingsReceived
                                         .WaitWithCancellationAsync(cancellationToken)
                                         .ConfigureAwait(false);
                                     if (!connection.IsConnectEnabled)
@@ -1525,8 +1523,7 @@ namespace System.Net.Http
         private void CancelIfNecessary<T>(HttpConnectionWaiter<T>? waiter, bool requestCancelled)
             where T : HttpConnectionBase?
         {
-            int timeout = GlobalHttpSettings
-                .SocketsHttpHandler
+            int timeout = GlobalHttpSettings.SocketsHttpHandler
                 .PendingConnectionTimeoutOnRequestCompletion;
             if (
                 waiter?.ConnectionCancellationTokenSource is null
@@ -1583,8 +1580,7 @@ namespace System.Net.Http
                 int parseIdx = 0;
 
                 if (
-                    AltSvcHeaderParser
-                        .Parser
+                    AltSvcHeaderParser.Parser
                         .TryParseValue(
                             altSvcHeaderValue,
                             null,
@@ -1928,8 +1924,7 @@ namespace System.Net.Http
             if (
                 (Kind is HttpConnectionKind.ProxyTunnel or HttpConnectionKind.SslProxyTunnel)
                 && request.HasHeaders
-                && request
-                    .Headers
+                && request.Headers
                     .NonValidated
                     .TryGetValues(HttpKnownHeaderNames.UserAgent, out HeaderStringValues userAgent)
             )
@@ -2340,8 +2335,7 @@ namespace System.Net.Http
 
             if (_connectTunnelUserAgent is not null)
             {
-                tunnelRequest
-                    .Headers
+                tunnelRequest.Headers
                     .TryAddWithoutValidation(
                         KnownHeaders.UserAgent.Descriptor,
                         _connectTunnelUserAgent
@@ -2983,8 +2977,7 @@ namespace System.Net.Http
         public bool CleanCacheAndDisposeIfUnused()
         {
             TimeSpan pooledConnectionLifetime = _poolManager.Settings._pooledConnectionLifetime;
-            TimeSpan pooledConnectionIdleTimeout = _poolManager
-                .Settings
+            TimeSpan pooledConnectionIdleTimeout = _poolManager.Settings
                 ._pooledConnectionIdleTimeout;
             long nowTicks = Environment.TickCount64;
 
@@ -3038,13 +3031,14 @@ namespace System.Net.Http
             // Dispose them asynchronously to not to block the caller on closing the SslStream or NetworkStream.
             if (toDispose is not null)
             {
-                Task.Factory.StartNew(
-                    static s => ((List<HttpConnectionBase>)s!).ForEach(c => c.Dispose()),
-                    toDispose,
-                    CancellationToken.None,
-                    TaskCreationOptions.DenyChildAttach,
-                    TaskScheduler.Default
-                );
+                Task.Factory
+                    .StartNew(
+                        static s => ((List<HttpConnectionBase>)s!).ForEach(c => c.Dispose()),
+                        toDispose,
+                        CancellationToken.None,
+                        TaskCreationOptions.DenyChildAttach,
+                        TaskScheduler.Default
+                    );
             }
 
             // Pool is active.  Should not be removed.
@@ -3227,8 +3221,7 @@ namespace System.Net.Http
             );
 
         private void Trace(string? message, [CallerMemberName] string? memberName = null) =>
-            NetEventSource
-                .Log
+            NetEventSource.Log
                 .HandlerMessage(
                     GetHashCode(), // pool ID
                     0, // connection ID

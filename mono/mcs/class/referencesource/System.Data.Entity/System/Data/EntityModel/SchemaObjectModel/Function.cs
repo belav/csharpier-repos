@@ -448,8 +448,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
                             ErrorCode.InvalidNumberOfParametersForAggregateFunction,
                             EdmSchemaErrorSeverity.Error,
                             this,
-                            System
-                                .Data
+                            System.Data
                                 .Entity
                                 .Strings
                                 .InvalidNumberOfParametersForAggregateFunction(FQName)
@@ -465,8 +464,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
                             ErrorCode.InvalidParameterTypeForAggregateFunction,
                             EdmSchemaErrorSeverity.Error,
                             this,
-                            System
-                                .Data
+                            System.Data
                                 .Entity
                                 .Strings
                                 .InvalidParameterTypeForAggregateFunction(param.Name, FQName)
@@ -527,8 +525,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
                         ErrorCode.FunctionWithNonPrimitiveTypeNotSupported,
                         EdmSchemaErrorSeverity.Error,
                         this,
-                        System
-                            .Data
+                        System.Data
                             .Entity
                             .Strings
                             .FunctionWithNonPrimitiveTypeNotSupported(
@@ -810,8 +807,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
                             ErrorCode.InvalidValueForParameterTypeSemantics,
                             EdmSchemaErrorSeverity.Error,
                             reader,
-                            System
-                                .Data
+                            System.Data
                                 .Entity
                                 .Strings
                                 .InvalidValueForParameterTypeSemanticsAttribute(value)

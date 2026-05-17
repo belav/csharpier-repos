@@ -814,8 +814,7 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                             parent
                                 is VisualBasic.Syntax.ConditionalAccessExpressionSyntax conditional
                             && conditional.Expression == syntax
-                            && conditional
-                                .WhenNotNull
+                            && conditional.WhenNotNull
                                 .DescendantNodesAndSelf()
                                 .Any(n =>
                                     n.IsKind(VisualBasic.SyntaxKind.XmlElementAccessExpression)
@@ -1170,8 +1169,7 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                         );
                     }
                     else if (
-                        block
-                            .EnclosingRegion
+                        block.EnclosingRegion
                             .EnclosingRegion
                             ?.EnclosingRegion
                             .CaptureIds
@@ -1424,8 +1422,7 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                                     caseStmt == referenceSyntax
                                     || caseStmt.Cases.Contains(referenceSyntax as CaseClauseSyntax)
                                 )
-                                && caseStmt
-                                    .Cases
+                                && caseStmt.Cases
                                     .Contains(
                                         applyParenthesizedIfAnyVB(
                                             (VisualBasicSyntaxNode)binOp.RightOperand.Syntax
@@ -1584,8 +1581,9 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                                 case CSharp.SyntaxKind.ObjectCreationExpression:
                                 case CSharp.SyntaxKind.ImplicitObjectCreationExpression:
                                     if (
-                                        ((CSharp.Syntax.BaseObjectCreationExpressionSyntax)syntax)
-                                            .Initializer
+                                        (
+                                            (CSharp.Syntax.BaseObjectCreationExpressionSyntax)syntax
+                                        ).Initializer
                                             ?.Expressions
                                             .Any() == true
                                     )
@@ -1595,8 +1593,7 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                                     break;
                                 case CSharp.SyntaxKind.CollectionExpression:
                                     if (
-                                        ((CSharp.Syntax.CollectionExpressionSyntax)syntax)
-                                            .Elements
+                                        ((CSharp.Syntax.CollectionExpressionSyntax)syntax).Elements
                                             .Any()
                                     )
                                     {
@@ -1900,8 +1897,7 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                     if (block.BranchValue != null)
                     {
                         foreach (
-                            IFlowCaptureReferenceOperation reference in block
-                                .BranchValue
+                            IFlowCaptureReferenceOperation reference in block.BranchValue
                                 .DescendantsAndSelf()
                                 .OfType<IFlowCaptureReferenceOperation>()
                         )

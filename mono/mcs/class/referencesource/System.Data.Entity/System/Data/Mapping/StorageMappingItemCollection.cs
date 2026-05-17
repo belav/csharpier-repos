@@ -692,8 +692,7 @@ namespace System.Data.Mapping
 
             //(2) Ends participating in association are "interesting"
             interestingMembers.AddRange(
-                associationTypeMapping
-                    .MappingFragments
+                associationTypeMapping.MappingFragments
                     .SelectMany(m => m.AllProperties)
                     .OfType<StorageEndPropertyMapping>()
                     .Select(epm => epm.EndMember)
@@ -717,8 +716,7 @@ namespace System.Data.Mapping
             Debug.Assert(interestingMembers != null, "interestingMembers != null");
 
             foreach (
-                var propertyMapping in entityTypeMapping
-                    .MappingFragments
+                var propertyMapping in entityTypeMapping.MappingFragments
                     .SelectMany(mf => mf.AllProperties)
             )
             {
@@ -802,8 +800,7 @@ namespace System.Data.Mapping
             Debug.Assert(complexMapping != null, "complexMapping != null");
 
             foreach (
-                StoragePropertyMapping propertyMapping in complexMapping
-                    .TypeMappings
+                StoragePropertyMapping propertyMapping in complexMapping.TypeMappings
                     .SelectMany(m => m.AllProperties)
             )
             {
@@ -865,8 +862,7 @@ namespace System.Data.Mapping
                         .GetTypeAndParentTypesOf(entityType, this.m_edmCollection, true)
                         .SelectMany(e => ((EntityType)e).Properties)
                         .Where(p =>
-                            entitySet
-                                .ForeignKeyDependents
+                            entitySet.ForeignKeyDependents
                                 .SelectMany(fk => fk.Item2.ToProperties)
                                 .Contains(p)
                         )
@@ -899,8 +895,7 @@ namespace System.Data.Mapping
             {
                 // (5) Members included in Update ModificationFunction
                 interestingMembers.AddRange(
-                    functionMappings
-                        .UpdateFunctionMapping
+                    functionMappings.UpdateFunctionMapping
                         .ParameterBindings
                         .Select(p => p.MemberPath.Members.Last())
                 );
@@ -918,8 +913,7 @@ namespace System.Data.Mapping
                 );
 
                 foreach (
-                    var parameterBinding in functionMappings
-                        .UpdateFunctionMapping
+                    var parameterBinding in functionMappings.UpdateFunctionMapping
                         .ParameterBindings
                         .Where(p => !p.IsCurrent)
                 )
@@ -1185,13 +1179,14 @@ namespace System.Data.Mapping
             out GeneratedView generatedView
         )
         {
-            return this.m_viewDictionary.TryGetGeneratedViewOfType(
-                workspace,
-                entity,
-                type,
-                includeSubtypes,
-                out generatedView
-            );
+            return this.m_viewDictionary
+                .TryGetGeneratedViewOfType(
+                    workspace,
+                    entity,
+                    type,
+                    includeSubtypes,
+                    out generatedView
+                );
         }
 
         // Check for duplicate items (items with same name) in edm item collection and store item collection. Mapping is the only logical place to do this.

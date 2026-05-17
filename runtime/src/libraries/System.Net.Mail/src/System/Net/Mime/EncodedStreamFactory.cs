@@ -53,8 +53,7 @@ namespace System.Net.Mime
         //based on the encoding type and if base64 encoding should be forced
         //sample header: =?utf-8?B?
         private static byte[] CreateHeader(Encoding encoding, bool useBase64Encoding) =>
-            Encoding
-                .ASCII
+            Encoding.ASCII
                 .GetBytes("=?" + encoding.HeaderName + "?" + (useBase64Encoding ? "B?" : "Q?"));
 
         //The footer that marks the end of a quoted string of some sort

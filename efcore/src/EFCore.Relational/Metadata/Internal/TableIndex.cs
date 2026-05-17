@@ -86,8 +86,7 @@ public class TableIndex : Annotatable, ITableIndex
             ref _rowIndexValueFactory,
             this,
             static constraint =>
-                constraint
-                    .Table
+                constraint.Table
                     .Model
                     .Model
                     .GetRelationalDependencies()

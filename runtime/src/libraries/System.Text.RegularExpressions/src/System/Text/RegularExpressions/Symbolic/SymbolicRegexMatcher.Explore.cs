@@ -93,9 +93,8 @@ namespace System.Text.RegularExpressions.Symbolic
                                 ) args
                             ) =>
                             {
-                                MatchingState<TSet>? coreState = args.Matcher.GetState(
-                                    args.Matcher.GetCoreStateId(nfaId)
-                                );
+                                MatchingState<TSet>? coreState = args.Matcher
+                                    .GetState(args.Matcher.GetCoreStateId(nfaId));
                                 EnqueueIfUnseen(coreState, args.Seen, args.ToExplore);
                             }
                         );

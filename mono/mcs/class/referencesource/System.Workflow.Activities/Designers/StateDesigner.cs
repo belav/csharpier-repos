@@ -326,12 +326,12 @@ namespace System.Workflow.Activities
                 if (!this.HasActiveDesigner)
                 {
                     foreach (
-                        EventDrivenDesigner eventDrivenDesigner in this.DesignersParser.EventDrivenDesigners
+                        EventDrivenDesigner eventDrivenDesigner in this.DesignersParser
+                            .EventDrivenDesigners
                     )
                     {
-                        Layout selectedLayout = this.RootDesignerLayout.GetLayout(
-                            eventDrivenDesigner
-                        );
+                        Layout selectedLayout = this.RootDesignerLayout
+                            .GetLayout(eventDrivenDesigner);
                         if (selectedLayout != null)
                         {
                             if (eventDrivenDesigner.IsSelected)
@@ -350,12 +350,12 @@ namespace System.Workflow.Activities
                     }
 
                     foreach (
-                        StateInitializationDesigner stateInitializationDesigner in this.DesignersParser.StateInitializationDesigners
+                        StateInitializationDesigner stateInitializationDesigner in this.DesignersParser
+                            .StateInitializationDesigners
                     )
                     {
-                        Layout selectedLayout = this.RootDesignerLayout.GetLayout(
-                            stateInitializationDesigner
-                        );
+                        Layout selectedLayout = this.RootDesignerLayout
+                            .GetLayout(stateInitializationDesigner);
                         if (selectedLayout != null)
                         {
                             if (stateInitializationDesigner.IsSelected)
@@ -374,12 +374,12 @@ namespace System.Workflow.Activities
                     }
 
                     foreach (
-                        StateFinalizationDesigner stateFinalizationDesigner in this.DesignersParser.StateFinalizationDesigners
+                        StateFinalizationDesigner stateFinalizationDesigner in this.DesignersParser
+                            .StateFinalizationDesigners
                     )
                     {
-                        Layout selectedLayout = this.RootDesignerLayout.GetLayout(
-                            stateFinalizationDesigner
-                        );
+                        Layout selectedLayout = this.RootDesignerLayout
+                            .GetLayout(stateFinalizationDesigner);
                         if (selectedLayout != null)
                         {
                             if (stateFinalizationDesigner.IsSelected)
@@ -1202,12 +1202,10 @@ namespace System.Workflow.Activities
                 connector.SetStateName = setState.QualifiedName;
             }
             connector.TargetStateName = target.AssociatedDesigner.Activity.QualifiedName;
-            connector.SourceStateName = sourceDesignerLayoutConnectionPoint
-                .EventHandler
+            connector.SourceStateName = sourceDesignerLayoutConnectionPoint.EventHandler
                 .Parent
                 .QualifiedName;
-            connector.EventHandlerName = sourceDesignerLayoutConnectionPoint
-                .EventHandler
+            connector.EventHandlerName = sourceDesignerLayoutConnectionPoint.EventHandler
                 .QualifiedName;
         }
 
@@ -1266,8 +1264,7 @@ namespace System.Workflow.Activities
                 return;
 
             if (
-                !stateDesignerConnector
-                    .Target
+                !stateDesignerConnector.Target
                     .AssociatedDesigner
                     .Activity
                     .QualifiedName
@@ -1295,8 +1292,7 @@ namespace System.Workflow.Activities
             StateDesigner.DesignerLayoutConnectionPoint sourceConnectionPoint =
                 (StateDesigner.DesignerLayoutConnectionPoint)stateDesignerConnector.Source;
             if (
-                !sourceConnectionPoint
-                    .EventHandler
+                !sourceConnectionPoint.EventHandler
                     .QualifiedName
                     .Equals(stateDesignerConnector.EventHandlerName)
             )
@@ -1336,8 +1332,7 @@ namespace System.Workflow.Activities
                         );
 
                         stateDesignerConnector.EventHandlerName = source.EventHandler.QualifiedName;
-                        stateDesignerConnector.SourceStateName = source
-                            .EventHandler
+                        stateDesignerConnector.SourceStateName = source.EventHandler
                             .Parent
                             .QualifiedName;
 
@@ -1650,12 +1645,8 @@ namespace System.Workflow.Activities
 
                 RefreshRootDesignerLayout();
 
-                this.RootDesignerLayout.OnLayoutSize(
-                    graphics,
-                    designerTheme,
-                    ambientTheme,
-                    newSize
-                );
+                this.RootDesignerLayout
+                    .OnLayoutSize(graphics, designerTheme, ambientTheme, newSize);
                 _minimumSize = this.RootDesignerLayout.MinimumSize;
 
                 return this.RootDesignerLayout.Size;
@@ -1741,8 +1732,7 @@ namespace System.Workflow.Activities
                         if (
                             activityDesigner == null
                             || activityDesigner.ParentDesigner == null
-                            || !activityDesigner
-                                .ParentDesigner
+                            || !activityDesigner.ParentDesigner
                                 .CanMoveActivities(
                                     moveLocation,
                                     new List<Activity>(new Activity[] { activity }).AsReadOnly()
@@ -1855,16 +1845,13 @@ namespace System.Workflow.Activities
                             {
                                 StateDesignerConnector stateDesignerConnector =
                                     (StateDesignerConnector)this.AddConnector(source, target);
-                                stateDesignerConnector.SetStateName = transitionInfo
-                                    .SetState
+                                stateDesignerConnector.SetStateName = transitionInfo.SetState
                                     .QualifiedName;
-                                stateDesignerConnector.TargetStateName = transitionInfo
-                                    .SetState
+                                stateDesignerConnector.TargetStateName = transitionInfo.SetState
                                     .TargetStateName;
                                 if (transitionInfo.EventHandler != null)
-                                    stateDesignerConnector.EventHandlerName = transitionInfo
-                                        .EventHandler
-                                        .QualifiedName;
+                                    stateDesignerConnector.EventHandlerName =
+                                        transitionInfo.EventHandler.QualifiedName;
                             }
                             finally
                             {
@@ -1916,8 +1903,7 @@ namespace System.Workflow.Activities
             StateDesigner sourceStateDesigner = (StateDesigner)GetDesigner(eventHandler.Parent);
             DesignerLayout eventHandlerLayout;
             if (
-                !sourceStateDesigner
-                    .DesignerLayouts
+                !sourceStateDesigner.DesignerLayouts
                     .TryGetValue(eventHandler, out eventHandlerLayout)
             )
                 return null;
@@ -1990,7 +1976,8 @@ namespace System.Workflow.Activities
                 _designersParser = new ContainedDesignersParser(this.ContainedDesigners);
 
                 foreach (
-                    StateInitializationDesigner stateInitializationDesigner in this.DesignersParser.StateInitializationDesigners
+                    StateInitializationDesigner stateInitializationDesigner in this.DesignersParser
+                        .StateInitializationDesigners
                 )
                 {
                     DesignerLayout layout = new DesignerLayout(stateInitializationDesigner);
@@ -2000,7 +1987,8 @@ namespace System.Workflow.Activities
 
                 // we now add the EventDrivenDesigners
                 foreach (
-                    EventDrivenDesigner eventDrivenDesigner in this.DesignersParser.EventDrivenDesigners
+                    EventDrivenDesigner eventDrivenDesigner in this.DesignersParser
+                        .EventDrivenDesigners
                 )
                 {
                     DesignerLayout layout = new DesignerLayout(eventDrivenDesigner);
@@ -2009,7 +1997,8 @@ namespace System.Workflow.Activities
                 }
 
                 foreach (
-                    StateFinalizationDesigner stateFinalizationDesigner in this.DesignersParser.StateFinalizationDesigners
+                    StateFinalizationDesigner stateFinalizationDesigner in this.DesignersParser
+                        .StateFinalizationDesigners
                 )
                 {
                     DesignerLayout layout = new DesignerLayout(stateFinalizationDesigner);
@@ -2172,10 +2161,8 @@ namespace System.Workflow.Activities
                 if (ContainedDesigners.Count > designerCount && ContainedDesigners.Count > 0)
                     ContainedDesigners[ContainedDesigners.Count - 1].EnsureVisible();
 
-                this.SelectionService.SetSelectedComponents(
-                    new object[] { child },
-                    SelectionTypes.Primary
-                );
+                this.SelectionService
+                    .SetSelectedComponents(new object[] { child }, SelectionTypes.Primary);
             }
         }
 
@@ -3028,8 +3015,7 @@ namespace System.Workflow.Activities
             Bitmap image = null;
             if (path.Contains(Path.DirectorySeparatorChar.ToString()) && directory.Length > 0)
             {
-                string imageFilePath = System
-                    .Web
+                string imageFilePath = System.Web
                     .HttpUtility
                     .UrlDecode((new Uri(new Uri(directory), path).LocalPath));
                 if (File.Exists(imageFilePath))

@@ -19,8 +19,7 @@ namespace RunTests
         {
             Debug.Assert(IsAdministrator());
 
-            using var registryKey = Registry
-                .LocalMachine
+            using var registryKey = Registry.LocalMachine
                 .CreateSubKey(
                     @"SOFTWARE\Microsoft\Windows\Windows Error Reporting\LocalDumps",
                     writable: true
@@ -34,8 +33,7 @@ namespace RunTests
         {
             Debug.Assert(IsAdministrator());
 
-            using var registryKey = Registry
-                .LocalMachine
+            using var registryKey = Registry.LocalMachine
                 .CreateSubKey(
                     @"SOFTWARE\Microsoft\Windows\Windows Error Reporting\LocalDumps",
                     writable: true

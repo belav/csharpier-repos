@@ -102,16 +102,14 @@ namespace Mono.Linker.Tests.TestCasesRunner
                     // This makes life a little easier when writing these supporting files as it removes some constraints you would previously have
                     // had to follow such as ensuring a class exists that matches the file name and putting [NotATestCase] on that class
                     if (
-                        relativeParents
-                            .RecursiveParents
+                        relativeParents.RecursiveParents
                             .Any(p => p.Elements.Any() && p.FileName == "Dependencies")
                     )
                         continue;
 
                     // Magic: Anything in a directory named Individual is expected to be ran by it's own [Test] rather than as part of [TestCaseSource]
                     if (
-                        relativeParents
-                            .RecursiveParents
+                        relativeParents.RecursiveParents
                             .Any(p => p.Elements.Any() && p.FileName == "Individual")
                     )
                         continue;
@@ -164,8 +162,7 @@ namespace Mono.Linker.Tests.TestCasesRunner
             }
 
             // Verify the class as a static main method
-            MethodDefinition mainMethod = typeDefinition
-                .Methods
+            MethodDefinition mainMethod = typeDefinition.Methods
                 .FirstOrDefault(m =>
                     m.Name
                     == (

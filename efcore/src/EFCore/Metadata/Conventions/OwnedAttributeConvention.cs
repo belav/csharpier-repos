@@ -29,8 +29,7 @@ public class OwnedAttributeConvention
         IConventionContext<IConventionEntityTypeBuilder> context
     )
     {
-        entityTypeBuilder
-            .ModelBuilder
+        entityTypeBuilder.ModelBuilder
             .Owned(entityTypeBuilder.Metadata.ClrType, fromDataAnnotation: true);
         if (!entityTypeBuilder.Metadata.IsInModel)
         {

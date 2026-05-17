@@ -884,8 +884,7 @@ namespace System.Data
                                 constr.parentColumnNames[j]
                             ];
                         else
-                            parents[j] = table
-                                .DataSet
+                            parents[j] = table.DataSet
                                 .Tables[constr.parentTableName, constr.parentTableNamespace]
                                 .Columns[constr.parentColumnNames[j]];
                         childs[j] = table.Columns[constr.childColumnNames[j]];

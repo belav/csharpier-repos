@@ -575,8 +575,7 @@ namespace System.Net.Http.Functional.Tests
                                 Math.Min(bytesRemaining, maxChunkSize + 1)
                             );
                             await connection.WriteStringAsync($"{bytesToSend:X}{lineEnding}");
-                            await connection
-                                .Stream
+                            await connection.Stream
                                 .WriteAsync(new Memory<byte>(expectedData, bytesSent, bytesToSend));
                             await connection.WriteStringAsync(lineEnding);
                             bytesSent += bytesToSend;

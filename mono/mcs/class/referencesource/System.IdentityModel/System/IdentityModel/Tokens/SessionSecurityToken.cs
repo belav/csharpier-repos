@@ -324,15 +324,13 @@ namespace System.IdentityModel.Tokens
 
             if (validFromEffective >= validToEffective)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentOutOfRangeException("validFrom"));
             }
 
             if (validToEffective < DateTime.UtcNow)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentOutOfRangeException("validTo"));
             }
 
@@ -356,15 +354,13 @@ namespace System.IdentityModel.Tokens
                 || keyEffectiveTime.Value < validFromEffective
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentOutOfRangeException("keyEffectiveTime"));
             }
 
             if (keyExpirationTime.Value > validToEffective)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentOutOfRangeException("keyExpirationTime"));
             }
 
@@ -494,8 +490,7 @@ namespace System.IdentityModel.Tokens
                 }
                 else
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new SecurityTokenException(
                                 SR.GetString(
@@ -510,8 +505,7 @@ namespace System.IdentityModel.Tokens
                 string version = reader.ReadElementString();
                 if (version != SupportedVersion)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new SecurityTokenException(
                                 SR.GetString(SR.ID4232, version, SupportedVersion)
@@ -535,8 +529,7 @@ namespace System.IdentityModel.Tokens
                 }
                 else
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new SecurityTokenException(
                                 SR.GetString(SR.ID4232, version, SupportedVersion)
@@ -552,8 +545,7 @@ namespace System.IdentityModel.Tokens
 
                 if (string.IsNullOrEmpty(instanceIdentifier))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(SR.ID4239, dictionary.Id.Value)
@@ -563,8 +555,7 @@ namespace System.IdentityModel.Tokens
 
                 if (!reader.IsStartElement(dictionary.ContextId, dictionary.EmptyString))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new SecurityTokenException(
                                 SR.GetString(SR.ID4230, dictionary.ContextId.Value, reader.Name)
@@ -576,8 +567,7 @@ namespace System.IdentityModel.Tokens
 
                 if (!reader.IsStartElement(dictionary.Key, dictionary.EmptyString))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new SecurityTokenException(
                                 SR.GetString(SR.ID4230, dictionary.Key.Value, reader.Name)
@@ -595,8 +585,7 @@ namespace System.IdentityModel.Tokens
 
                 if (!reader.IsStartElement(dictionary.EffectiveTime, dictionary.EmptyString))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new SecurityTokenException(
                                 SR.GetString(SR.ID4230, dictionary.EffectiveTime.Value, reader.Name)
@@ -610,8 +599,7 @@ namespace System.IdentityModel.Tokens
 
                 if (!reader.IsStartElement(dictionary.ExpiryTime, dictionary.EmptyString))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new SecurityTokenException(
                                 SR.GetString(SR.ID4230, dictionary.ExpiryTime.Value, reader.Name)
@@ -625,8 +613,7 @@ namespace System.IdentityModel.Tokens
 
                 if (!reader.IsStartElement(dictionary.KeyEffectiveTime, dictionary.EmptyString))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new SecurityTokenException(
                                 SR.GetString(
@@ -644,8 +631,7 @@ namespace System.IdentityModel.Tokens
 
                 if (!reader.IsStartElement(dictionary.KeyExpiryTime, dictionary.EmptyString))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new SecurityTokenException(
                                 SR.GetString(SR.ID4230, dictionary.KeyExpiryTime.Value, reader.Name)
@@ -1031,8 +1017,7 @@ namespace System.IdentityModel.Tokens
         {
             if (dictionaryReader == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("dictionaryReader");
             }
 
@@ -1105,8 +1090,7 @@ namespace System.IdentityModel.Tokens
         {
             if (dictionaryReader == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("dictionaryReader");
             }
 
@@ -1150,8 +1134,7 @@ namespace System.IdentityModel.Tokens
         {
             if (dictionaryReader == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("dictionaryReader");
             }
 
@@ -1166,8 +1149,7 @@ namespace System.IdentityModel.Tokens
 
             if (!dictionaryReader.IsStartElement(dictionary.Identity, dictionary.EmptyString))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new SecurityTokenException(
                             SR.GetString(
@@ -1275,8 +1257,7 @@ namespace System.IdentityModel.Tokens
         {
             if (string.IsNullOrEmpty(windowsLogonName))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("windowsLogonName");
             }
             int delimiterPos = windowsLogonName.IndexOf('\\');
@@ -1292,8 +1273,7 @@ namespace System.IdentityModel.Tokens
                     return windowsLogonName;
                 }
 
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(SR.GetString(SR.ID4248, windowsLogonName))
                     );
@@ -1340,8 +1320,7 @@ namespace System.IdentityModel.Tokens
                         )
                         {
                             errorCode = Marshal.GetLastWin32Error();
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
                                     new InvalidOperationException(
                                         SR.GetString(SR.ID4248, windowsLogonName),
@@ -1352,8 +1331,7 @@ namespace System.IdentityModel.Tokens
                     }
                     else
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(
                                     SR.GetString(SR.ID4248, windowsLogonName),
@@ -1412,8 +1390,7 @@ namespace System.IdentityModel.Tokens
         {
             if (dictionaryReader == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("dictionaryReader");
             }
 
@@ -1476,8 +1453,7 @@ namespace System.IdentityModel.Tokens
         {
             if (dictionaryReader == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("dictionaryReader");
             }
 
@@ -1511,15 +1487,13 @@ namespace System.IdentityModel.Tokens
 
                 if (string.IsNullOrEmpty(name))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new SecurityTokenException(SR.GetString(SR.ID4249)));
                 }
 
                 if (string.IsNullOrEmpty(value))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new SecurityTokenException(SR.GetString(SR.ID4250)));
                 }
 
@@ -1547,8 +1521,7 @@ namespace System.IdentityModel.Tokens
         {
             if (dictionaryWriter == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("dictionaryWriter");
             }
 
@@ -1588,8 +1561,7 @@ namespace System.IdentityModel.Tokens
         {
             if (dictionaryWriter == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("dictionaryWriter");
             }
 
@@ -1629,8 +1601,7 @@ namespace System.IdentityModel.Tokens
         {
             if (dictionaryWriter == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("dictionaryWriter");
             }
 
@@ -1797,8 +1768,7 @@ namespace System.IdentityModel.Tokens
         {
             if (dictionaryWriter == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("dictionaryWriter");
             }
 
@@ -1893,8 +1863,7 @@ namespace System.IdentityModel.Tokens
         {
             if (dictionaryWriter == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("dictionaryWriter");
             }
 
@@ -2081,8 +2050,7 @@ namespace System.IdentityModel.Tokens
             }
             else
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new SecurityTokenException(SR.GetString(SR.ID4290, claim)));
             }
         }
@@ -2222,8 +2190,7 @@ namespace System.IdentityModel.Tokens
             }
             else
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new SecurityTokenException(
                             SR.GetString(SR.ID4289, reader.LocalName, reader.NamespaceURI)

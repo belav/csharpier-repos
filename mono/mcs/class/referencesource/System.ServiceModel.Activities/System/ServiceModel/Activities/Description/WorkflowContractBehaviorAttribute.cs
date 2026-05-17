@@ -33,8 +33,7 @@ namespace System.ServiceModel.Activities.Description
         {
             //Only when DurableServiceBehavior is present ensure this endpoint operates in wrapped mode.
             if (
-                dispatchRuntime
-                    .ChannelDispatcher
+                dispatchRuntime.ChannelDispatcher
                     .Host
                     .Description
                     .Behaviors

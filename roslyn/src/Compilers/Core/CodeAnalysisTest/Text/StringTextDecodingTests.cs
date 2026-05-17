@@ -75,8 +75,7 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 )
             )
             {
-                return EncodedStringText
-                    .TestAccessor
+                return EncodedStringText.TestAccessor
                     .Create(
                         stream,
                         new Lazy<Encoding>(getEncoding),
@@ -274,8 +273,7 @@ namespace Microsoft.CodeAnalysis.UnitTests
             {
                 Assert.Throws<DecoderFallbackException>(() =>
                 {
-                    EncodedStringText
-                        .TestAccessor
+                    EncodedStringText.TestAccessor
                         .Decode(
                             stream,
                             utf8,

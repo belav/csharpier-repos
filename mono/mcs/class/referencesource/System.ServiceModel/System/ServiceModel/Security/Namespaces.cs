@@ -8,14 +8,12 @@ namespace System.ServiceModel.Security
 
     static class Namespaces
     {
-        internal const string WSPolicy = System
-            .ServiceModel
+        internal const string WSPolicy = System.ServiceModel
             .Description
             .MetadataStrings
             .WSPolicy
             .NamespaceUri;
-        internal const string WSPolicyPrefix = System
-            .ServiceModel
+        internal const string WSPolicyPrefix = System.ServiceModel
             .Description
             .MetadataStrings
             .WSPolicy

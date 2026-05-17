@@ -85,25 +85,19 @@ namespace System.ServiceModel.Description
 
                 foreach (OperationDescription operationDescription in endpoint.Contract.Operations)
                 {
-                    this.operationBindingAssertions.Add(
-                        operationDescription,
-                        new PolicyAssertionCollection()
-                    );
+                    this.operationBindingAssertions
+                        .Add(operationDescription, new PolicyAssertionCollection());
 
                     foreach (MessageDescription messageDescription in operationDescription.Messages)
                     {
-                        this.messageBindingAssertions.Add(
-                            messageDescription,
-                            new PolicyAssertionCollection()
-                        );
+                        this.messageBindingAssertions
+                            .Add(messageDescription, new PolicyAssertionCollection());
                     }
 
                     foreach (FaultDescription faultDescription in operationDescription.Faults)
                     {
-                        this.faultBindingAssertions.Add(
-                            faultDescription,
-                            new PolicyAssertionCollection()
-                        );
+                        this.faultBindingAssertions
+                            .Add(faultDescription, new PolicyAssertionCollection());
                     }
                 }
 
@@ -330,8 +324,7 @@ namespace System.ServiceModel.Description
                     bool moveNext = inner.MoveNext();
                     if (++currentItem > maxItems)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(new MaxItemsEnumeratorExceededMaxItemsException());
                     }
                     return moveNext;
@@ -407,8 +400,7 @@ namespace System.ServiceModel.Description
                         if (!(digits[i].Value.MoveNext()))
                         {
                             Fx.Assert("each set must have at least one item in it");
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
                                     new InvalidOperationException(
                                         String.Format(

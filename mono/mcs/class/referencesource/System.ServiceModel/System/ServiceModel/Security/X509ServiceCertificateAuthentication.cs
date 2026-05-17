@@ -139,8 +139,7 @@ namespace System.ServiceModel.Security
             if (!TryGetCertificateValidator(out result))
             {
                 Fx.Assert(this.customCertificateValidator == null, "");
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(SR.MissingCustomCertificateValidator)
@@ -159,8 +158,7 @@ namespace System.ServiceModel.Security
         {
             if (this.isReadOnly)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
                     );

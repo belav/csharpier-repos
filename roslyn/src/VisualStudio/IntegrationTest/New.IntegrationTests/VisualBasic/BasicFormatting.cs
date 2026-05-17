@@ -36,8 +36,7 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.VisualBasic
             await SetUpEditorAsync(testCode, HangMitigatingCancellationToken);
 
             await TestServices.Editor.FormatDocumentAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .TextContainsAsync(
                     @"Module A
     Sub Main(args As String())
@@ -58,8 +57,7 @@ end module",
                 HangMitigatingCancellationToken
             );
             await TestServices.Editor.FormatDocumentAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .TextContainsAsync(
                     @"
 Module A
@@ -80,20 +78,17 @@ Module Program
 End Module",
                 HangMitigatingCancellationToken
             );
-            await TestServices
-                .Workspace
+            await TestServices.Workspace
                 .WaitForAsyncOperationsAsync(
                     FeatureAttribute.Workspace,
                     HangMitigatingCancellationToken
                 );
-            await TestServices
-                .Input
+            await TestServices.Input
                 .SendAsync(
                     ["(o", (VirtualKeyCode.RETURN, VirtualKeyCode.SHIFT), "'comment"],
                     HangMitigatingCancellationToken
                 );
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .TextContainsAsync(
                     @"
 Module Program

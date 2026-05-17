@@ -78,8 +78,7 @@ namespace System.ServiceModel.ComIntegration
                             if (monikerSupportLibrary.IsInvalid)
                             {
                                 monikerSupportLibrary.SetHandleAsInvalid();
-                                throw DiagnosticUtility
-                                    .ExceptionUtility
+                                throw DiagnosticUtility.ExceptionUtility
                                     .ThrowHelperError(Error.ServiceMonikerSupportLoadFailed(file));
                             }
                         }
@@ -110,8 +109,7 @@ namespace System.ServiceModel.ComIntegration
                             if (Fx.IsFatal(e))
                                 throw;
 
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
                                     new ComPlusProxyProviderException(
                                         SR.GetString(SR.FailedProxyProviderCreation),
@@ -139,8 +137,7 @@ namespace System.ServiceModel.ComIntegration
                 if (Fx.IsFatal(e))
                     throw;
 
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ComPlusProxyProviderException(
                             SR.GetString(SR.FailedProxyProviderCreation),
@@ -180,8 +177,7 @@ namespace System.ServiceModel.ComIntegration
             Marshal.ReleaseComObject(proxyProvider);
 
             if (hr != HR.S_OK)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new COMException(SR.GetString(SR.FailedProxyProviderCreation), hr)
                     );
@@ -203,8 +199,7 @@ namespace System.ServiceModel.ComIntegration
             Marshal.ReleaseComObject(proxyProvider);
 
             if (hr != HR.S_OK)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new COMException(SR.GetString(SR.FailedProxyProviderCreation), hr)
                     );

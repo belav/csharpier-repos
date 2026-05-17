@@ -377,8 +377,7 @@ namespace System.ServiceModel.Channels
             }
             catch (SocketException socketException)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         SocketConnectionListener.ConvertListenException(
                             socketException,
@@ -412,8 +411,7 @@ namespace System.ServiceModel.Channels
             {
                 if (this.Uri.HostNameType == UriHostNameType.IPv6)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgument(
                             "context",
                             SR.GetString(SR.TcpV6AddressInvalid, this.Uri)
@@ -421,8 +419,7 @@ namespace System.ServiceModel.Channels
                 }
                 else
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgument(
                             "context",
                             SR.GetString(SR.TcpV4AddressInvalid, this.Uri)
@@ -488,8 +485,7 @@ namespace System.ServiceModel.Channels
 
                 if (ipv4ListenSocket == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new AddressAlreadyInUseException(
                                 SR.GetString(SR.UniquePortNotAvailable)

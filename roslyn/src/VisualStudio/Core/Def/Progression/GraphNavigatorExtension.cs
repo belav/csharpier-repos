@@ -65,8 +65,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                     if (project == null)
                         return;
 
-                    var document = project
-                        .Documents
+                    var document = project.Documents
                         .FirstOrDefault(d =>
                             string.Equals(
                                 d.FilePath,
@@ -104,8 +103,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
             // Notify of navigation so third parties can intercept the navigation
             if (symbolId != null)
             {
-                var symbol = symbolId
-                    .Value
+                var symbol = symbolId.Value
                     .Resolve(
                         await project.GetCompilationAsync(cancellationToken).ConfigureAwait(false),
                         cancellationToken: cancellationToken
@@ -132,8 +130,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                 if (document != null)
                 {
                     var editorWorkspace = document.Project.Solution.Workspace;
-                    var navigationService = editorWorkspace
-                        .Services
+                    var navigationService = editorWorkspace.Services
                         .GetService<IDocumentNavigationService>();
 
                     // TODO: Get the platform to use and pass us an operation context, or create one ourselves.

@@ -137,8 +137,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
             var rightSideOfComparison = comparison is BinaryExpressionSyntax binaryExpression
                 ? (SyntaxNode)binaryExpression.Right
                 : ((IsPatternExpressionSyntax)comparison).Pattern;
-            var newIdentifier = declarator
-                .Identifier
+            var newIdentifier = declarator.Identifier
                 .WithoutTrivia()
                 .WithTrailingTrivia(rightSideOfComparison.GetTrailingTrivia());
 
@@ -196,11 +195,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
                     if (asExpressionTypeInfo.Type != null)
                     {
                         // Strip off the outer ? if present.  But the inner ? will still be there.
-                        var localType = local
-                            .Type
+                        var localType = local.Type
                             .WithNullableAnnotation(NullableAnnotation.NotAnnotated);
-                        var asType = asExpressionTypeInfo
-                            .Type
+                        var asType = asExpressionTypeInfo.Type
                             .WithNullableAnnotation(NullableAnnotation.NotAnnotated);
 
                         // If they're the same types, except for the inner ?, then use the local's type here.

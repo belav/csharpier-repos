@@ -64,8 +64,7 @@ namespace System.ServiceModel.Dispatcher
         {
             if (persistenceProvider == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("persistenceProvider");
             }
 
@@ -76,8 +75,7 @@ namespace System.ServiceModel.Dispatcher
 
             if (runtimeValidator == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("runtimeValidator");
             }
 
@@ -113,8 +111,7 @@ namespace System.ServiceModel.Dispatcher
 
             if (concurrencyMode != ConcurrencyMode.Single)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR2.GetString(SR2.AbortInstanceRequiresSingle)
@@ -124,8 +121,7 @@ namespace System.ServiceModel.Dispatcher
 
             if (this.saveStateInOperationTransaction)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR2.GetString(SR2.CannotAbortWithSaveStateInTransaction)
@@ -135,8 +131,7 @@ namespace System.ServiceModel.Dispatcher
 
             if (this.markedForCompletion)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR2.GetString(
@@ -267,11 +262,12 @@ namespace System.ServiceModel.Dispatcher
                             {
                                 if (this.lockingProvider != null)
                                 {
-                                    this.lockingProvider.Create(
-                                        this.Instance,
-                                        this.operationTimeout,
-                                        disposeInstance
-                                    );
+                                    this.lockingProvider
+                                        .Create(
+                                            this.Instance,
+                                            this.operationTimeout,
+                                            disposeInstance
+                                        );
                                 }
                                 else
                                 {
@@ -306,11 +302,12 @@ namespace System.ServiceModel.Dispatcher
                             {
                                 if (this.lockingProvider != null)
                                 {
-                                    this.lockingProvider.Update(
-                                        this.Instance,
-                                        this.operationTimeout,
-                                        disposeInstance
-                                    );
+                                    this.lockingProvider
+                                        .Update(
+                                            this.Instance,
+                                            this.operationTimeout,
+                                            disposeInstance
+                                        );
                                 }
                                 else
                                 {
@@ -358,8 +355,7 @@ namespace System.ServiceModel.Dispatcher
         {
             if (this.abortInstance)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR2.GetString(
@@ -380,8 +376,7 @@ namespace System.ServiceModel.Dispatcher
             {
                 if (this.markedForCompletion)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new InstanceNotFoundException(this.InstanceId));
                 }
 
@@ -398,10 +393,8 @@ namespace System.ServiceModel.Dispatcher
                         {
                             if (this.lockingProvider != null)
                             {
-                                this.instance = this.lockingProvider.Load(
-                                    this.operationTimeout,
-                                    true
-                                );
+                                this.instance = this.lockingProvider
+                                    .Load(this.operationTimeout, true);
                             }
                             else
                             {
@@ -685,8 +678,7 @@ namespace System.ServiceModel.Dispatcher
                 else
                 {
                     DurableErrorHandler.CleanUpInstanceContextAtOperationCompletion();
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new FaultException(new DurableDispatcherAddressingFault())
                         );
@@ -729,11 +721,12 @@ namespace System.ServiceModel.Dispatcher
                 OperationType operation = OperationType.None;
                 bool completeSelf = false;
                 bool disposeInstace;
-                operation = this.durableInstance.FinishOperationCommon(
-                    completeInstance,
-                    operationException,
-                    out disposeInstace
-                );
+                operation = this.durableInstance
+                    .FinishOperationCommon(
+                        completeInstance,
+                        operationException,
+                        out disposeInstace
+                    );
 
                 if (performPersistence)
                 {
@@ -1148,8 +1141,7 @@ namespace System.ServiceModel.Dispatcher
                 {
                     try
                     {
-                        startResult.durableInstance.instance = startResult
-                            .durableInstance
+                        startResult.durableInstance.instance = startResult.durableInstance
                             .provider
                             .EndLoad(result);
 
@@ -1205,8 +1197,7 @@ namespace System.ServiceModel.Dispatcher
                     && Transaction.Current != null
                 )
                 {
-                    this.durableInstance.clonedTransaction = Transaction
-                        .Current
+                    this.durableInstance.clonedTransaction = Transaction.Current
                         .DependentClone(DependentCloneOption.BlockCommitUntilComplete);
                 }
             }

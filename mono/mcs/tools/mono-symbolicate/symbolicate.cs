@@ -76,8 +76,7 @@ namespace Mono
             )
             {
                 Console.Error.WriteLine("Usage: symbolicate [options] <msym dir> <input file>");
-                Console
-                    .Error
+                Console.Error
                     .WriteLine("       symbolicate [options] store-symbols <msym dir> [<dir>]+");
                 Console.WriteLine();
                 Console.WriteLine("Available options:");
@@ -108,8 +107,7 @@ namespace Mono
                         && symbolManager.TryResolveLocation(sfData, out var location)
                     )
                     {
-                        var sign = sfData
-                            .Line
+                        var sign = sfData.Line
                             .Substring(0, sfData.Line.IndexOf(" in <", StringComparison.Ordinal));
                         line = $"{sign} in {location.File}:{location.Line}";
                     }

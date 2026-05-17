@@ -34,8 +34,7 @@ public class KestrelMetricsTests : TestApplicationErrorLoggerLoggedTest
         {
             return async connectionContext =>
             {
-                connectionContext
-                    .Features
+                connectionContext.Features
                     .Get<IConnectionMetricsTagsFeature>()
                     .Tags
                     .Add(new KeyValuePair<string, object>("custom", "value!"));
@@ -210,8 +209,7 @@ public class KestrelMetricsTests : TestApplicationErrorLoggerLoggedTest
             {
                 currentConnectionContext = connectionContext;
 
-                connectionContext
-                    .Features
+                connectionContext.Features
                     .Get<IConnectionMetricsTagsFeature>()
                     .Tags
                     .Add(new KeyValuePair<string, object>("custom", "value!"));

@@ -105,8 +105,7 @@ namespace System.Web.Razor.Generator
 
         protected virtual void Initialize(CodeGeneratorContext context)
         {
-            context
-                .Namespace
+            context.Namespace
                 .Imports
                 .AddRange(Host.NamespaceImports.Select(s => new CodeNamespaceImport(s)).ToArray());
 
@@ -116,8 +115,7 @@ namespace System.Web.Razor.Generator
             }
 
             // Dev10 Bug 937438: Generate explicit Parameter-less constructor on Razor generated class
-            context
-                .GeneratedClass
+            context.GeneratedClass
                 .Members
                 .Add(new CodeConstructor() { Attributes = MemberAttributes.Public });
         }

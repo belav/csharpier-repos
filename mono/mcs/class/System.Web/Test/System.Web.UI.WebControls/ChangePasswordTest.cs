@@ -644,16 +644,16 @@ namespace MonoTests.System.Web.UI.WebControls
             fr.Controls.Add(new BaseControl(GetDecoratedId(html, "ConfirmNewPassword"), "hehe"));
             string button = GetDecoratedId(html, "ChangePasswordPushButton");
             if (button.Length > 0)
-                fr.Controls.Add(
-                    new BaseControl(
-                        GetDecoratedId(html, "ChangePasswordPushButton"),
-                        "ChangePasswordPushButton"
-                    )
-                );
+                fr.Controls
+                    .Add(
+                        new BaseControl(
+                            GetDecoratedId(html, "ChangePasswordPushButton"),
+                            "ChangePasswordPushButton"
+                        )
+                    );
             else
-                fr.Controls.Add(
-                    new BaseControl("__EVENTTARGET", GetEventTarget(html, "ChangePassword"))
-                );
+                fr.Controls
+                    .Add(new BaseControl("__EVENTTARGET", GetEventTarget(html, "ChangePassword")));
 
             test.Request = fr;
             html = test.Run();
@@ -716,9 +716,8 @@ namespace MonoTests.System.Web.UI.WebControls
             fr.Controls["ChangePassword1$ChangePasswordContainerID$NewPassword"].Value = "1";
             fr.Controls["ChangePassword1$ChangePasswordContainerID$ConfirmNewPassword"].Value = "1";
             fr.Controls.Add("ChangePassword1$ChangePasswordContainerID$ChangePasswordPushButton");
-            fr.Controls[
-                "ChangePassword1$ChangePasswordContainerID$ChangePasswordPushButton"
-            ].Value = "Change+Password";
+            fr.Controls["ChangePassword1$ChangePasswordContainerID$ChangePasswordPushButton"]
+                .Value = "Change+Password";
             t.Request = fr;
             html = t.Run();
             if (t.UserData == null || t.UserData.ToString() != "ChangingPassword")
@@ -761,9 +760,8 @@ namespace MonoTests.System.Web.UI.WebControls
             fr.Controls["ChangePassword1$ChangePasswordContainerID$NewPassword"].Value = "1";
             fr.Controls["ChangePassword1$ChangePasswordContainerID$ConfirmNewPassword"].Value = "1";
             fr.Controls.Add("ChangePassword1$ChangePasswordContainerID$ChangePasswordPushButton");
-            fr.Controls[
-                "ChangePassword1$ChangePasswordContainerID$ChangePasswordPushButton"
-            ].Value = "Change+Password";
+            fr.Controls["ChangePassword1$ChangePasswordContainerID$ChangePasswordPushButton"]
+                .Value = "Change+Password";
             t.Request = fr;
             html = t.Run();
             if (t.UserData == null || t.UserData.ToString() != "ChangePasswordError")
@@ -804,9 +802,8 @@ namespace MonoTests.System.Web.UI.WebControls
             fr.Controls["ChangePassword1$ChangePasswordContainerID$ConfirmNewPassword"].Value =
                 "123456?";
             fr.Controls.Add("ChangePassword1$ChangePasswordContainerID$ChangePasswordPushButton");
-            fr.Controls[
-                "ChangePassword1$ChangePasswordContainerID$ChangePasswordPushButton"
-            ].Value = "Change+Password";
+            fr.Controls["ChangePassword1$ChangePasswordContainerID$ChangePasswordPushButton"]
+                .Value = "Change+Password";
             t.Request = fr;
             html = t.Run();
             if (t.UserData == null || t.UserData.ToString() != "ChangedPassword")
@@ -847,9 +844,8 @@ namespace MonoTests.System.Web.UI.WebControls
             fr.Controls["ChangePassword1$ChangePasswordContainerID$ConfirmNewPassword"].Value =
                 "123456?";
             fr.Controls.Add("ChangePassword1$ChangePasswordContainerID$ChangePasswordPushButton");
-            fr.Controls[
-                "ChangePassword1$ChangePasswordContainerID$ChangePasswordPushButton"
-            ].Value = "Change+Password";
+            fr.Controls["ChangePassword1$ChangePasswordContainerID$ChangePasswordPushButton"]
+                .Value = "Change+Password";
 
             t.Request = fr;
             html = t.Run();

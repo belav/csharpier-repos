@@ -250,8 +250,7 @@ public abstract class ExecutionStrategy : IExecutionStrategy
                     );
                 }
 
-                Dependencies
-                    .Logger
+                Dependencies.Logger
                     .ExecutionStrategyRetrying(ExceptionsEncountered, delay.Value, async: true);
 
                 OnRetry();
@@ -383,8 +382,7 @@ public abstract class ExecutionStrategy : IExecutionStrategy
                     );
                 }
 
-                Dependencies
-                    .Logger
+                Dependencies.Logger
                     .ExecutionStrategyRetrying(ExceptionsEncountered, delay.Value, async: true);
 
                 OnRetry();
@@ -412,8 +410,7 @@ public abstract class ExecutionStrategy : IExecutionStrategy
                     (
                         (IDatabaseFacadeDependenciesAccessor)
                             Dependencies.CurrentContext.Context.Database
-                    )
-                        .Dependencies
+                    ).Dependencies
                         .TransactionManager as ITransactionEnlistmentManager
                 )?.CurrentAmbientTransaction
                     is not null

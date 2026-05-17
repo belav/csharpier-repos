@@ -390,8 +390,7 @@ Assembly reference: 'N1, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'
         var compiler = CreateCSharpCompiler(new[] { "/nologo", "/reportivts:bad" });
 
         Assert.False(compiler.Arguments.ReportInternalsVisibleToAttributes);
-        compiler
-            .Arguments
+        compiler.Arguments
             .Errors
             .Verify(
                 Diagnostic(ErrorCode.ERR_BadSwitch)

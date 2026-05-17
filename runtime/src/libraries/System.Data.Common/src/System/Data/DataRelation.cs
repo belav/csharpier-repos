@@ -90,8 +90,7 @@ namespace System.Data
             bool createConstraints
         )
         {
-            DataCommonEventSource
-                .Log
+            DataCommonEventSource.Log
                 .Trace(
                     "<ds.DataRelation.DataRelation|API> {0}, relationName='{1}', parentColumn={2}, childColumn={3}, createConstraints={4}",
                     ObjectID,
@@ -423,8 +422,7 @@ namespace System.Data
             }
             set
             {
-                long logScopeId = DataCommonEventSource
-                    .Log
+                long logScopeId = DataCommonEventSource.Log
                     .EnterScope(
                         "<ds.DataRelation.set_RelationName|API> {0}, '{1}'",
                         ObjectID,
@@ -510,8 +508,7 @@ namespace System.Data
 
         internal void CheckNestedRelations()
         {
-            DataCommonEventSource
-                .Log
+            DataCommonEventSource.Log
                 .Trace("<ds.DataRelation.CheckNestedRelations|INFO> {0}", ObjectID);
 
             Debug.Assert(
@@ -581,8 +578,7 @@ namespace System.Data
             }
             set
             {
-                long logScopeId = DataCommonEventSource
-                    .Log
+                long logScopeId = DataCommonEventSource.Log
                     .EnterScope("<ds.DataRelation.set_Nested|API> {0}, {1}", ObjectID, value);
                 try
                 {
@@ -600,8 +596,7 @@ namespace System.Data
                                     ChildTable != null,
                                     "On a DataSet, but not on Table. Bad state"
                                 );
-                                ForeignKeyConstraint? constraint = ChildTable
-                                    .Constraints
+                                ForeignKeyConstraint? constraint = ChildTable.Constraints
                                     .FindForeignKeyConstraint(
                                         ChildKey.ColumnsReference,
                                         ParentKey.ColumnsReference
@@ -865,8 +860,7 @@ namespace System.Data
             bool createConstraints
         )
         {
-            long logScopeId = DataCommonEventSource
-                .Log
+            long logScopeId = DataCommonEventSource.Log
                 .EnterScope(
                     "<ds.DataRelation.Create|INFO> {0}, relationName='{1}', createConstraints={2}",
                     ObjectID,
@@ -907,8 +901,7 @@ namespace System.Data
 
         internal DataRelation Clone(DataSet destination)
         {
-            DataCommonEventSource
-                .Log
+            DataCommonEventSource.Log
                 .Trace(
                     "<ds.DataRelation.Clone|INFO> {0}, destination={1}",
                     ObjectID,
@@ -955,8 +948,7 @@ namespace System.Data
         {
             if (PropertyChanging != null)
             {
-                DataCommonEventSource
-                    .Log
+                DataCommonEventSource.Log
                     .Trace("<ds.DataRelation.OnPropertyChanging|INFO> {0}", ObjectID);
                 PropertyChanging(this, pcevent);
             }

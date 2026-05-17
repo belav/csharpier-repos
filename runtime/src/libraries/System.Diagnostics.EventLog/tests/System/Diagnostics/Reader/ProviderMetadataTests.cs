@@ -174,8 +174,7 @@ namespace System.Diagnostics.Tests
                                         )
                                         {
                                             Assert.True(
-                                                System
-                                                    .Enum
+                                                System.Enum
                                                     .IsDefined(
                                                         typeof(StandardEventLevel),
                                                         eventLevel.Value
@@ -219,8 +218,7 @@ namespace System.Diagnostics.Tests
                                         if (keyword.Name != null && keyword.Name.StartsWith(Prefix))
                                         {
                                             Assert.True(
-                                                System
-                                                    .Enum
+                                                System.Enum
                                                     .IsDefined(
                                                         typeof(StandardEventKeywords),
                                                         keyword.Value

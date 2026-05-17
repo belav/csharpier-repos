@@ -51,8 +51,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.BlockCommentEditing
                         if (line.End == position && line.IsEmptyOrWhitespace(0, line.Length - 2))
                         {
                             if (
-                                _editorOptionsService
-                                    .GlobalOptions
+                                _editorOptionsService.GlobalOptions
                                     .GetOption(
                                         BlockCommentEditingOptionsStorage.AutoInsertBlockCommentStartString,
                                         LanguageNames.CSharp
@@ -67,10 +66,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.BlockCommentEditing
                                 )
                             )
                             {
-                                args.SubjectBuffer.Replace(
-                                    new VisualStudio.Text.Span(position - 1, 1),
-                                    "/"
-                                );
+                                args.SubjectBuffer
+                                    .Replace(new VisualStudio.Text.Span(position - 1, 1), "/");
                                 return true;
                             }
                         }

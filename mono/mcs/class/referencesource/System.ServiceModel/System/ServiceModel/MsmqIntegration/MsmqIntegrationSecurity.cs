@@ -29,8 +29,7 @@ namespace System.ServiceModel.MsmqIntegration
             {
                 if (!MsmqIntegrationSecurityModeHelper.IsDefined(value))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new ArgumentOutOfRangeException("value"));
                 }
                 this.mode = value;

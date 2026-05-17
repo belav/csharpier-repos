@@ -34,8 +34,7 @@ namespace System.Security.Claims
         /// <param name="nodelist">Custom configuration elements</param>
         public virtual void LoadCustomConfiguration(XmlNodeList nodelist)
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(
                     new NotImplementedException(
                         SR.GetString(SR.ID0023, this.GetType().AssemblyQualifiedName)

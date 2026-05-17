@@ -57,8 +57,7 @@ internal static class UserSecretsCreator
         {
             // Find the first non-conditional PropertyGroup
             var propertyGroup =
-                projectDocument
-                    .Root
+                projectDocument.Root
                     .DescendantNodes()
                     .FirstOrDefault(node =>
                         node is XElement el

@@ -590,8 +590,7 @@ namespace SuperPMICollection
             }
             catch (Exception ex)
             {
-                Console
-                    .Error
+                Console.Error
                     .WriteLine("ERROR: unknown exception running collection: " + ex.Message);
                 result = 101;
             }
@@ -753,8 +752,7 @@ namespace SuperPMICollection
                             runProgramPath = Path.GetFullPath(args[i]);
                             if (!File.Exists(runProgramPath))
                             {
-                                Console
-                                    .Error
+                                Console.Error
                                     .WriteLine("Error: couldn't find program {0}", runProgramPath);
                                 return 101;
                             }
@@ -829,8 +827,7 @@ namespace SuperPMICollection
             }
             catch (Exception ex)
             {
-                Console
-                    .Error
+                Console.Error
                     .WriteLine("ERROR: unknown exception running collection: " + ex.Message);
                 result = 101;
             }

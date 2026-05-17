@@ -243,9 +243,8 @@ namespace MonoTests.System.Xml.Linq
         public void AddAfterSelfList()
         {
             XElement el = XElement.Parse("<root><foo/><bar/></root>");
-            el.FirstNode.AddAfterSelf(
-                new XText[] { new XText("t1"), new XText("t2"), new XText("t3") }
-            );
+            el.FirstNode
+                .AddAfterSelf(new XText[] { new XText("t1"), new XText("t2"), new XText("t3") });
             XText t = el.FirstNode.NextNode as XText;
             Assert.IsNotNull(t, "#1");
             Assert.AreEqual("t1", t.Value, "#2");
@@ -290,9 +289,10 @@ namespace MonoTests.System.Xml.Linq
         public void AddAfterSelfCollection()
         {
             var el = new XElement("root", new XElement("child"));
-            el.FirstNode.AddAfterSelf(
-                new List<XElement>(new XElement[] { new XElement("foo"), new XElement("bar") })
-            );
+            el.FirstNode
+                .AddAfterSelf(
+                    new List<XElement>(new XElement[] { new XElement("foo"), new XElement("bar") })
+                );
             Assert.AreEqual(
                 "<root><child /><foo /><bar /></root>",
                 el.ToString(SaveOptions.DisableFormatting),
@@ -332,9 +332,8 @@ namespace MonoTests.System.Xml.Linq
         public void AddBeforeSelfList()
         {
             XElement el = XElement.Parse("<root><foo/><bar/></root>");
-            el.FirstNode.AddBeforeSelf(
-                new XText[] { new XText("t1"), new XText("t2"), new XText("t3") }
-            );
+            el.FirstNode
+                .AddBeforeSelf(new XText[] { new XText("t1"), new XText("t2"), new XText("t3") });
             XText t = el.FirstNode as XText;
             Assert.IsNotNull(t, "#1");
             Assert.AreEqual("t1", t.Value, "#2");

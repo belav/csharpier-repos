@@ -43,8 +43,7 @@ internal sealed class MvcDataAnnotationsMvcOptionsSetup : IConfigureOptions<MvcO
     {
         ArgumentNullException.ThrowIfNull(options);
 
-        options
-            .ModelMetadataDetailsProviders
+        options.ModelMetadataDetailsProviders
             .Add(
                 new DataAnnotationsMetadataProvider(
                     options,
@@ -53,8 +52,7 @@ internal sealed class MvcDataAnnotationsMvcOptionsSetup : IConfigureOptions<MvcO
                 )
             );
 
-        options
-            .ModelValidatorProviders
+        options.ModelValidatorProviders
             .Add(
                 new DataAnnotationsModelValidatorProvider(
                     _validationAttributeAdapterProvider,

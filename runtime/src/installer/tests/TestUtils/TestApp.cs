@@ -153,8 +153,7 @@ namespace Microsoft.DotNet.CoreSetup.Test
                                     var fileVersion = FileVersionInfo
                                         .GetVersionInfo(file)
                                         .FileVersion;
-                                    var asmVersion = System
-                                        .Reflection
+                                    var asmVersion = System.Reflection
                                         .AssemblyName
                                         .GetAssemblyName(file)
                                         .Version!

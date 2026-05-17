@@ -615,15 +615,13 @@ namespace System.Threading
                 else
                 {
                     if (
-                        FrameworkEventSource
-                            .Log
+                        FrameworkEventSource.Log
                             .IsEnabled(
                                 EventLevel.Informational,
                                 FrameworkEventSource.Keywords.ThreadTransfer
                             )
                     )
-                        FrameworkEventSource
-                            .Log
+                        FrameworkEventSource.Log
                             .ThreadTransferSendObj(
                                 this,
                                 1,
@@ -792,8 +790,7 @@ namespace System.Threading
         internal void CallCallback(bool isThreadPool)
         {
             if (
-                FrameworkEventSource
-                    .Log
+                FrameworkEventSource.Log
                     .IsEnabled(
                         EventLevel.Informational,
                         FrameworkEventSource.Keywords.ThreadTransfer

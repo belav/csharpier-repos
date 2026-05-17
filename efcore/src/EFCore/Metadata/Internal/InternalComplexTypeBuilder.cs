@@ -47,8 +47,7 @@ public class InternalComplexTypeBuilder : InternalTypeBaseBuilder, IConventionCo
         && (
             propertyType == null
             || skipTypeCheck
-            || Metadata
-                .Model
+            || Metadata.Model
                 .Builder
                 .CanBeConfigured(propertyType, TypeConfigurationType.Property, configurationSource)
         )
@@ -130,8 +129,7 @@ public class InternalComplexTypeBuilder : InternalTypeBaseBuilder, IConventionCo
 
                 if (property.GetConfigurationSource() == ConfigurationSource.Explicit)
                 {
-                    ModelBuilder
-                        .Metadata
+                    ModelBuilder.Metadata
                         .ScopedModelDependencies
                         ?.Logger
                         .MappedPropertyIgnoredWarning(property);
@@ -153,8 +151,7 @@ public class InternalComplexTypeBuilder : InternalTypeBaseBuilder, IConventionCo
 
                     if (complexProperty.GetConfigurationSource() == ConfigurationSource.Explicit)
                     {
-                        ModelBuilder
-                            .Metadata
+                        ModelBuilder.Metadata
                             .ScopedModelDependencies
                             ?.Logger
                             .MappedComplexPropertyIgnoredWarning(complexProperty);
@@ -182,8 +179,7 @@ public class InternalComplexTypeBuilder : InternalTypeBaseBuilder, IConventionCo
                 var derivedProperty = derivedType.FindDeclaredProperty(name);
                 if (derivedProperty != null)
                 {
-                    derivedType
-                        .Builder
+                    derivedType.Builder
                         .RemoveProperty(
                             derivedProperty,
                             configurationSource,
@@ -252,8 +248,7 @@ public class InternalComplexTypeBuilder : InternalTypeBaseBuilder, IConventionCo
             }
 
             if (
-                !property
-                    .DeclaringType
+                !property.DeclaringType
                     .Builder
                     .CanRemoveProperty(property, configurationSource, canOverrideSameSource: true)
             )
@@ -321,8 +316,7 @@ public class InternalComplexTypeBuilder : InternalTypeBaseBuilder, IConventionCo
             // We use at least DataAnnotation as ConfigurationSource while removing to allow us
             // to remove metadata object which were defined in derived type
             // while corresponding annotations were present on properties in base type.
-            var configurationSourceForRemoval = ConfigurationSource
-                .DataAnnotation
+            var configurationSourceForRemoval = ConfigurationSource.DataAnnotation
                 .Max(configurationSource);
             if (baseComplexType != null)
             {

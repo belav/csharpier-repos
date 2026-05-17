@@ -254,19 +254,21 @@ namespace Mono.CSharp
                 && rc.CurrentAnonymousMethod == null
             )
             {
-                rc.Report.Error(
-                    8200,
-                    loc,
-                    "Out variable and pattern variable declarations are not allowed within constructor initializers, field initializers, or property initializers"
-                );
+                rc.Report
+                    .Error(
+                        8200,
+                        loc,
+                        "Out variable and pattern variable declarations are not allowed within constructor initializers, field initializers, or property initializers"
+                    );
             }
             else if (rc.HasSet(ResolveContext.Options.QueryClauseScope))
             {
-                rc.Report.Error(
-                    8201,
-                    loc,
-                    "Out variable and pattern variable declarations are not allowed within a query clause"
-                );
+                rc.Report
+                    .Error(
+                        8201,
+                        loc,
+                        "Out variable and pattern variable declarations are not allowed within a query clause"
+                    );
             }
         }
 
@@ -280,12 +282,13 @@ namespace Mono.CSharp
 
         public void Error_ExpressionMustBeConstant(ResolveContext rc, Location loc, string e_name)
         {
-            rc.Report.Error(
-                133,
-                loc,
-                "The expression being assigned to `{0}' must be a constant or default value",
-                e_name
-            );
+            rc.Report
+                .Error(
+                    133,
+                    loc,
+                    "The expression being assigned to `{0}' must be a constant or default value",
+                    e_name
+                );
         }
 
         public void Error_ConstantCanBeInitializedWithNullOnly(
@@ -295,13 +298,14 @@ namespace Mono.CSharp
             string name
         )
         {
-            rc.Report.Error(
-                134,
-                loc,
-                "A constant `{0}' of reference type `{1}' can only be initialized with null",
-                name,
-                type.GetSignatureForError()
-            );
+            rc.Report
+                .Error(
+                    134,
+                    loc,
+                    "A constant `{0}' of reference type `{1}' can only be initialized with null",
+                    name,
+                    type.GetSignatureForError()
+                );
         }
 
         protected virtual void Error_InvalidExpressionStatement(Report report, Location loc)
@@ -382,23 +386,25 @@ namespace Mono.CSharp
 
             if (expl_exists)
             {
-                ec.Report.Error(
-                    266,
-                    loc,
-                    "Cannot implicitly convert type `{0}' to `{1}'. An explicit conversion exists (are you missing a cast?)",
-                    from_type,
-                    to_type
-                );
+                ec.Report
+                    .Error(
+                        266,
+                        loc,
+                        "Cannot implicitly convert type `{0}' to `{1}'. An explicit conversion exists (are you missing a cast?)",
+                        from_type,
+                        to_type
+                    );
             }
             else
             {
-                ec.Report.Error(
-                    29,
-                    loc,
-                    "Cannot implicitly convert type `{0}' to `{1}'",
-                    from_type,
-                    to_type
-                );
+                ec.Report
+                    .Error(
+                        29,
+                        loc,
+                        "Cannot implicitly convert type `{0}' to `{1}'",
+                        from_type,
+                        to_type
+                    );
             }
         }
 
@@ -459,8 +465,7 @@ namespace Mono.CSharp
             Location loc
         )
         {
-            context
-                .Module
+            context.Module
                 .Compiler
                 .Report
                 .Error(
@@ -489,13 +494,14 @@ namespace Mono.CSharp
         )
         {
             ec.Report.SymbolRelatedToPreviousError(type);
-            ec.Report.Error(
-                117,
-                loc,
-                "`{0}' does not contain a definition for `{1}'",
-                type.GetSignatureForError(),
-                name
-            );
+            ec.Report
+                .Error(
+                    117,
+                    loc,
+                    "`{0}' does not contain a definition for `{1}'",
+                    type.GetSignatureForError(),
+                    name
+                );
         }
 
         public virtual void Error_ValueAssignment(ResolveContext rc, Expression rhs)
@@ -513,11 +519,12 @@ namespace Mono.CSharp
             }
             else
             {
-                rc.Report.Error(
-                    131,
-                    loc,
-                    "The left-hand side of an assignment must be a variable, a property or an indexer"
-                );
+                rc.Report
+                    .Error(
+                        131,
+                        loc,
+                        "The left-hand side of an assignment must be a variable, a property or an indexer"
+                    );
             }
         }
 
@@ -1017,12 +1024,13 @@ namespace Mono.CSharp
                         break;
                     default:
                         rc.Report.SymbolRelatedToPreviousError(type);
-                        rc.Report.Error(
-                            143,
-                            loc,
-                            "The class `{0}' has no constructors defined",
-                            type.GetSignatureForError()
-                        );
+                        rc.Report
+                            .Error(
+                                143,
+                                loc,
+                                "The class `{0}' has no constructors defined",
+                                type.GetSignatureForError()
+                            );
                         break;
                 }
 
@@ -1297,40 +1305,36 @@ namespace Mono.CSharp
             if (t == InternalType.ErrorType)
                 return;
 
-            rc.Report.Error(
-                23,
-                loc,
-                "The `{0}' operator cannot be applied to operand of type `{1}'",
-                oper,
-                t.GetSignatureForError()
-            );
+            rc.Report
+                .Error(
+                    23,
+                    loc,
+                    "The `{0}' operator cannot be applied to operand of type `{1}'",
+                    oper,
+                    t.GetSignatureForError()
+                );
         }
 
         protected void Error_PointerInsideExpressionTree(ResolveContext ec)
         {
-            ec.Report.Error(
-                1944,
-                loc,
-                "An expression tree cannot contain an unsafe pointer operation"
-            );
+            ec.Report
+                .Error(1944, loc, "An expression tree cannot contain an unsafe pointer operation");
         }
 
         protected void Error_NullShortCircuitInsideExpressionTree(ResolveContext rc)
         {
-            rc.Report.Error(
-                8072,
-                loc,
-                "An expression tree cannot contain a null propagating operator"
-            );
+            rc.Report
+                .Error(8072, loc, "An expression tree cannot contain a null propagating operator");
         }
 
         protected void Error_NullPropagatingLValue(ResolveContext rc)
         {
-            rc.Report.Error(
-                -1030,
-                loc,
-                "The left-hand side of an assignment cannot contain a null propagating operator"
-            );
+            rc.Report
+                .Error(
+                    -1030,
+                    loc,
+                    "The left-hand side of an assignment cannot contain a null propagating operator"
+                );
         }
 
         public virtual void FlowAnalysis(FlowAnalysisContext fc) { }
@@ -1489,13 +1493,14 @@ namespace Mono.CSharp
                 sb.Append(valid[count - 1]);
             }
 
-            ec.Report.Error(
-                119,
-                loc,
-                "Expression denotes a `{0}', where a `{1}' was expected",
-                ExprClassName,
-                sb.ToString()
-            );
+            ec.Report
+                .Error(
+                    119,
+                    loc,
+                    "Expression denotes a `{0}', where a `{1}' was expected",
+                    ExprClassName,
+                    sb.ToString()
+                );
         }
 
         public static void UnsafeError(ResolveContext ec, Location loc)
@@ -1768,12 +1773,13 @@ namespace Mono.CSharp
                 if (!awaiter_definition.IsValidPattern || !awaiter_definition.INotifyCompletion)
                     return;
 
-                bc.Report.Warning(
-                    4014,
-                    1,
-                    e.Location,
-                    "The statement is not awaited and execution of current method continues before the call is completed. Consider using `await' operator"
-                );
+                bc.Report
+                    .Warning(
+                        4014,
+                        1,
+                        e.Location,
+                        "The statement is not awaited and execution of current method continues before the call is completed. Consider using `await' operator"
+                    );
                 return;
             }
 
@@ -1781,12 +1787,13 @@ namespace Mono.CSharp
             if (inv != null && inv.MethodGroup != null && inv.MethodGroup.BestCandidate.IsAsync)
             {
                 // The warning won't be reported for imported methods to maintain warning compatiblity with csc
-                bc.Report.Warning(
-                    4014,
-                    1,
-                    e.Location,
-                    "The statement is not awaited and execution of current method continues before the call is completed. Consider using `await' operator or calling `Wait' method"
-                );
+                bc.Report
+                    .Warning(
+                        4014,
+                        1,
+                        e.Location,
+                        "The statement is not awaited and execution of current method continues before the call is completed. Consider using `await' operator or calling `Wait' method"
+                    );
                 return;
             }
         }
@@ -3673,8 +3680,7 @@ namespace Mono.CSharp
                 if (current_block != null && lookup_arity == 0)
                 {
                     if (
-                        current_block
-                            .ParametersBlock
+                        current_block.ParametersBlock
                             .TopBlock
                             .GetLocalName(Name, current_block.Original, ref variable)
                     )
@@ -3739,13 +3745,14 @@ namespace Mono.CSharp
                                 || me is PropertyExpr
                             )
                             {
-                                rc.Report.Error(
-                                    844,
-                                    loc,
-                                    "A local variable `{0}' cannot be used before it is declared. Consider renaming the local variable when it hides the member `{1}'",
-                                    Name,
-                                    me.GetSignatureForError()
-                                );
+                                rc.Report
+                                    .Error(
+                                        844,
+                                        loc,
+                                        "A local variable `{0}' cannot be used before it is declared. Consider renaming the local variable when it hides the member `{1}'",
+                                        Name,
+                                        me.GetSignatureForError()
+                                    );
                             }
                             else
                             {
@@ -3866,12 +3873,13 @@ namespace Mono.CSharp
                 {
                     if (variable_found)
                     {
-                        rc.Report.Error(
-                            841,
-                            loc,
-                            "A local variable `{0}' cannot be used before it is declared",
-                            Name
-                        );
+                        rc.Report
+                            .Error(
+                                841,
+                                loc,
+                                "A local variable `{0}' cannot be used before it is declared",
+                                Name
+                            );
                     }
                     else
                     {
@@ -4548,8 +4556,7 @@ namespace Mono.CSharp
 
             if (
                 (member.Modifiers & Modifiers.INTERNAL) != 0
-                && member
-                    .DeclaringType
+                && member.DeclaringType
                     .MemberDefinition
                     .IsInternalAsPublic(ct.MemberDefinition.DeclaringAssembly)
             )
@@ -4636,14 +4643,15 @@ namespace Mono.CSharp
         )
         {
             rc.Report.SymbolRelatedToPreviousError(member);
-            rc.Report.Error(
-                1540,
-                loc,
-                "Cannot access protected member `{0}' via a qualifier of type `{1}'. The qualifier must be of type `{2}' or derived from it",
-                member.GetSignatureForError(),
-                qualifier.GetSignatureForError(),
-                rc.CurrentType.GetSignatureForError()
-            );
+            rc.Report
+                .Error(
+                    1540,
+                    loc,
+                    "Cannot access protected member `{0}' via a qualifier of type `{1}'. The qualifier must be of type `{2}' or derived from it",
+                    member.GetSignatureForError(),
+                    qualifier.GetSignatureForError(),
+                    rc.CurrentType.GetSignatureForError()
+                );
         }
 
         public override void FlowAnalysis(FlowAnalysisContext fc)
@@ -4689,21 +4697,23 @@ namespace Mono.CSharp
 
                     if (fexpr.IsStatic)
                     {
-                        rc.Report.Error(
-                            1650,
-                            loc,
-                            "Fields of static readonly field `{0}' cannot be assigned to (except in a static constructor or a variable initializer)",
-                            fexpr.GetSignatureForError()
-                        );
+                        rc.Report
+                            .Error(
+                                1650,
+                                loc,
+                                "Fields of static readonly field `{0}' cannot be assigned to (except in a static constructor or a variable initializer)",
+                                fexpr.GetSignatureForError()
+                            );
                     }
                     else
                     {
-                        rc.Report.Error(
-                            1648,
-                            loc,
-                            "Members of readonly field `{0}' cannot be modified (except in a constructor or a variable initializer)",
-                            fexpr.GetSignatureForError()
-                        );
+                        rc.Report
+                            .Error(
+                                1648,
+                                loc,
+                                "Members of readonly field `{0}' cannot be modified (except in a constructor or a variable initializer)",
+                                fexpr.GetSignatureForError()
+                            );
                     }
 
                     return true;
@@ -4717,22 +4727,24 @@ namespace Mono.CSharp
                 {
                     if (rc.CurrentInitializerVariable != null)
                     {
-                        rc.Report.Error(
-                            1918,
-                            loc,
-                            "Members of value type `{0}' cannot be assigned using a property `{1}' object initializer",
-                            InstanceExpression.Type.GetSignatureForError(),
-                            InstanceExpression.GetSignatureForError()
-                        );
+                        rc.Report
+                            .Error(
+                                1918,
+                                loc,
+                                "Members of value type `{0}' cannot be assigned using a property `{1}' object initializer",
+                                InstanceExpression.Type.GetSignatureForError(),
+                                InstanceExpression.GetSignatureForError()
+                            );
                     }
                     else
                     {
-                        rc.Report.Error(
-                            1612,
-                            loc,
-                            "Cannot modify a value type return value of `{0}'. Consider storing the value in a temporary variable",
-                            InstanceExpression.GetSignatureForError()
-                        );
+                        rc.Report
+                            .Error(
+                                1612,
+                                loc,
+                                "Cannot modify a value type return value of `{0}'. Consider storing the value in a temporary variable",
+                                InstanceExpression.GetSignatureForError()
+                            );
                     }
 
                     return true;
@@ -4744,13 +4756,14 @@ namespace Mono.CSharp
                     if (!lvr.local_info.IsReadonly)
                         return true;
 
-                    rc.Report.Error(
-                        1654,
-                        loc,
-                        "Cannot assign to members of `{0}' because it is a `{1}'",
-                        InstanceExpression.GetSignatureForError(),
-                        lvr.local_info.GetReadOnlyContext()
-                    );
+                    rc.Report
+                        .Error(
+                            1654,
+                            loc,
+                            "Cannot assign to members of `{0}' because it is a `{1}'",
+                            InstanceExpression.GetSignatureForError(),
+                            lvr.local_info.GetReadOnlyContext()
+                        );
                 }
             }
 
@@ -4778,12 +4791,13 @@ namespace Mono.CSharp
                         var runtime_expr = InstanceExpression as RuntimeValueExpression;
                         if (runtime_expr == null || !runtime_expr.IsSuggestionOnly)
                         {
-                            rc.Report.Error(
-                                176,
-                                loc,
-                                "Static member `{0}' cannot be accessed with an instance reference, qualify it with a type name instead",
-                                GetSignatureForError()
-                            );
+                            rc.Report
+                                .Error(
+                                    176,
+                                    loc,
+                                    "Static member `{0}' cannot be accessed with an instance reference, qualify it with a type name instead",
+                                    GetSignatureForError()
+                                );
                         }
                     }
 
@@ -4799,12 +4813,13 @@ namespace Mono.CSharp
                 {
                     if (rc.HasSet(ResolveContext.Options.FieldInitializerScope))
                     {
-                        rc.Report.Error(
-                            236,
-                            loc,
-                            "A field initializer cannot reference the nonstatic field, method, or property `{0}'",
-                            GetSignatureForError()
-                        );
+                        rc.Report
+                            .Error(
+                                236,
+                                loc,
+                                "A field initializer cannot reference the nonstatic field, method, or property `{0}'",
+                                GetSignatureForError()
+                            );
                     }
                     else
                     {
@@ -4813,30 +4828,33 @@ namespace Mono.CSharp
                         {
                             if (rc.HasSet(ResolveContext.Options.BaseInitializer))
                             {
-                                rc.Report.Error(
-                                    9005,
-                                    loc,
-                                    "Constructor initializer cannot access primary constructor parameters"
-                                );
+                                rc.Report
+                                    .Error(
+                                        9005,
+                                        loc,
+                                        "Constructor initializer cannot access primary constructor parameters"
+                                    );
                             }
                             else
                             {
-                                rc.Report.Error(
-                                    9006,
-                                    loc,
-                                    "An object reference is required to access primary constructor parameter `{0}'",
-                                    fe.Name
-                                );
+                                rc.Report
+                                    .Error(
+                                        9006,
+                                        loc,
+                                        "An object reference is required to access primary constructor parameter `{0}'",
+                                        fe.Name
+                                    );
                             }
                         }
                         else
                         {
-                            rc.Report.Error(
-                                120,
-                                loc,
-                                "An object reference is required to access non-static member `{0}'",
-                                GetSignatureForError()
-                            );
+                            rc.Report
+                                .Error(
+                                    120,
+                                    loc,
+                                    "An object reference is required to access non-static member `{0}'",
+                                    GetSignatureForError()
+                                );
                         }
                     }
 
@@ -4846,13 +4864,14 @@ namespace Mono.CSharp
 
                 if (!TypeManager.IsFamilyAccessible(rc.CurrentType, DeclaringType))
                 {
-                    rc.Report.Error(
-                        38,
-                        loc,
-                        "Cannot access a nonstatic member of outer type `{0}' via nested type `{1}'",
-                        DeclaringType.GetSignatureForError(),
-                        rc.CurrentType.GetSignatureForError()
-                    );
+                    rc.Report
+                        .Error(
+                            38,
+                            loc,
+                            "Cannot access a nonstatic member of outer type `{0}' via nested type `{1}'",
+                            DeclaringType.GetSignatureForError(),
+                            rc.CurrentType.GetSignatureForError()
+                        );
                 }
 
                 InstanceExpression = new This(loc).Resolve(rc);
@@ -4868,13 +4887,14 @@ namespace Mono.CSharp
                 if (fe != null && fe.IsMarshalByRefAccess(rc))
                 {
                     rc.Report.SymbolRelatedToPreviousError(me.DeclaringType);
-                    rc.Report.Warning(
-                        1690,
-                        1,
-                        loc,
-                        "Cannot call methods, properties, or indexers on `{0}' because it is a value type member of a marshal-by-reference class",
-                        me.GetSignatureForError()
-                    );
+                    rc.Report
+                        .Warning(
+                            1690,
+                            1,
+                            loc,
+                            "Cannot call methods, properties, or indexers on `{0}' because it is a value type member of a marshal-by-reference class",
+                            me.GetSignatureForError()
+                        );
                 }
 
                 return true;
@@ -4887,11 +4907,12 @@ namespace Mono.CSharp
             {
                 if (InstanceExpression is UnboxCast)
                 {
-                    rc.Report.Error(
-                        445,
-                        InstanceExpression.Location,
-                        "Cannot modify the result of an unboxing conversion"
-                    );
+                    rc.Report
+                        .Error(
+                            445,
+                            InstanceExpression.Location,
+                            "Cannot modify the result of an unboxing conversion"
+                        );
                 }
             }
 
@@ -4912,13 +4933,14 @@ namespace Mono.CSharp
                 && TypeSpec.IsReferenceType(left.Type)
             )
             {
-                ec.Report.Warning(
-                    1720,
-                    1,
-                    left.Location,
-                    "Expression will always cause a `{0}'",
-                    "System.NullReferenceException"
-                );
+                ec.Report
+                    .Warning(
+                        1720,
+                        1,
+                        left.Location,
+                        "Expression will always cause a `{0}'",
+                        "System.NullReferenceException"
+                    );
             }
 
             InstanceExpression = left;
@@ -5020,8 +5042,7 @@ namespace Mono.CSharp
 
             int arity = type_arguments == null ? 0 : type_arguments.Count;
 
-            candidates = candidates
-                .Container
+            candidates = candidates.Container
                 .LookupExtensionMethod(candidates.Context, Name, arity, candidates.LookupIndex);
             if (candidates == null)
                 return null;
@@ -5044,11 +5065,12 @@ namespace Mono.CSharp
 
         public override void ResolveNameOf(ResolveContext rc, ATypeNameExpression expr)
         {
-            rc.Report.Error(
-                8093,
-                expr.Location,
-                "An argument to nameof operator cannot be extension method group"
-            );
+            rc.Report
+                .Error(
+                    8093,
+                    expr.Location,
+                    "An argument to nameof operator cannot be extension method group"
+                );
         }
 
         public override MethodGroupExpr LookupExtensionMethod(ResolveContext rc)
@@ -5124,26 +5146,28 @@ namespace Mono.CSharp
 
             if (index == 0)
             {
-                rc.Report.Error(
-                    1929,
-                    loc,
-                    "Type `{0}' does not contain a member `{1}' and the best extension method overload `{2}' requires an instance of type `{3}'",
-                    queried_type.GetSignatureForError(),
-                    Name,
-                    best.GetSignatureForError(),
-                    ((MethodSpec)best).Parameters.ExtensionMethodType.GetSignatureForError()
-                );
+                rc.Report
+                    .Error(
+                        1929,
+                        loc,
+                        "Type `{0}' does not contain a member `{1}' and the best extension method overload `{2}' requires an instance of type `{3}'",
+                        queried_type.GetSignatureForError(),
+                        Name,
+                        best.GetSignatureForError(),
+                        ((MethodSpec)best).Parameters.ExtensionMethodType.GetSignatureForError()
+                    );
             }
             else
             {
-                rc.Report.Error(
-                    1928,
-                    loc,
-                    "Type `{0}' does not contain a member `{1}' and the best extension method overload `{2}' has some invalid arguments",
-                    queried_type.GetSignatureForError(),
-                    Name,
-                    best.GetSignatureForError()
-                );
+                rc.Report
+                    .Error(
+                        1928,
+                        loc,
+                        "Type `{0}' does not contain a member `{1}' and the best extension method overload `{2}' has some invalid arguments",
+                        queried_type.GetSignatureForError(),
+                        Name,
+                        best.GetSignatureForError()
+                    );
             }
 
             return true;
@@ -5314,20 +5338,22 @@ namespace Mono.CSharp
         {
             if (best_candidate == null)
             {
-                ec.Report.Error(
-                    1953,
-                    loc,
-                    "An expression tree cannot contain an expression with method group"
-                );
+                ec.Report
+                    .Error(
+                        1953,
+                        loc,
+                        "An expression tree cannot contain an expression with method group"
+                    );
                 return null;
             }
 
             if (IsConditionallyExcluded)
-                ec.Report.Error(
-                    765,
-                    loc,
-                    "Partial methods with only a defining declaration or removed conditional methods cannot be used in an expression tree"
-                );
+                ec.Report
+                    .Error(
+                        765,
+                        loc,
+                        "Partial methods with only a defining declaration or removed conditional methods cannot be used in an expression tree"
+                    );
 
             if (ConditionalAccess)
                 Error_NullShortCircuitInsideExpressionTree(ec);
@@ -5407,13 +5433,14 @@ namespace Mono.CSharp
         {
             if (target != InternalType.ErrorType)
             {
-                ec.Report.Error(
-                    428,
-                    loc,
-                    "Cannot convert method group `{0}' to non-delegate type `{1}'. Consider using parentheses to invoke the method",
-                    Name,
-                    target.GetSignatureForError()
-                );
+                ec.Report
+                    .Error(
+                        428,
+                        loc,
+                        "Cannot convert method group `{0}' to non-delegate type `{1}'. Consider using parentheses to invoke the method",
+                        Name,
+                        target.GetSignatureForError()
+                    );
             }
         }
 
@@ -5543,13 +5570,14 @@ namespace Mono.CSharp
                             if (devirt == null)
                             {
                                 // CSC: Should be better error message
-                                ec.Report.Error(
-                                    29,
-                                    InstanceExpression.Location,
-                                    "Cannot implicitly convert type `{0}' to `{1}'",
-                                    InstanceExpression.Type.GetSignatureForError(),
-                                    best_candidate.DeclaringType.GetSignatureForError()
-                                );
+                                ec.Report
+                                    .Error(
+                                        29,
+                                        InstanceExpression.Location,
+                                        "Cannot implicitly convert type `{0}' to `{1}'",
+                                        InstanceExpression.Type.GetSignatureForError(),
+                                        best_candidate.DeclaringType.GetSignatureForError()
+                                    );
                             }
                             else
                             {
@@ -5644,11 +5672,12 @@ namespace Mono.CSharp
 
             if (expr.HasTypeArguments)
             {
-                rc.Report.Error(
-                    8084,
-                    expr.Location,
-                    "An argument to nameof operator cannot be method group with type arguments"
-                );
+                rc.Report
+                    .Error(
+                        8084,
+                        expr.Location,
+                        "An argument to nameof operator cannot be method group with type arguments"
+                    );
             }
         }
 
@@ -6493,13 +6522,14 @@ namespace Mono.CSharp
             Location loc
         )
         {
-            rc.Report.Error(
-                1729,
-                loc,
-                "The type `{0}' does not contain a constructor that takes `{1}' arguments",
-                type.GetSignatureForError(),
-                argCount.ToString()
-            );
+            rc.Report
+                .Error(
+                    1729,
+                    loc,
+                    "The type `{0}' does not contain a constructor that takes `{1}' arguments",
+                    type.GetSignatureForError(),
+                    argCount.ToString()
+                );
         }
 
         //
@@ -7329,8 +7359,7 @@ namespace Mono.CSharp
                             bool is_better;
                             if (
                                 best_candidate.DeclaringType.IsInterface
-                                && member
-                                    .DeclaringType
+                                && member.DeclaringType
                                     .ImplementsInterface(best_candidate.DeclaringType, false)
                             )
                             {
@@ -7351,8 +7380,7 @@ namespace Mono.CSharp
                                     foreach (var amb_cand in ambiguous_candidates)
                                     {
                                         if (
-                                            member
-                                                .DeclaringType
+                                            member.DeclaringType
                                                 .ImplementsInterface(
                                                     best_candidate.DeclaringType,
                                                     false
@@ -7475,14 +7503,15 @@ namespace Mono.CSharp
             {
                 if (args[0].IsExtensionType)
                 {
-                    rc.Report.Error(
-                        1973,
-                        loc,
-                        "Type `{0}' does not contain a member `{1}' and the best extension method overload `{2}' cannot be dynamically dispatched. Consider calling the method without the extension method syntax",
-                        args[0].Type.GetSignatureForError(),
-                        best_candidate.Name,
-                        best_candidate.GetSignatureForError()
-                    );
+                    rc.Report
+                        .Error(
+                            1973,
+                            loc,
+                            "Type `{0}' does not contain a member `{1}' and the best extension method overload `{2}' cannot be dynamically dispatched. Consider calling the method without the extension method syntax",
+                            args[0].Type.GetSignatureForError(),
+                            best_candidate.Name,
+                            best_candidate.GetSignatureForError()
+                        );
                 }
 
                 //
@@ -7555,13 +7584,14 @@ namespace Mono.CSharp
                         {
                             rc.Report.SymbolRelatedToPreviousError(best_candidate);
                             rc.Report.SymbolRelatedToPreviousError(ambiguous);
-                            rc.Report.Error(
-                                121,
-                                loc,
-                                "The call is ambiguous between the following methods or properties: `{0}' and `{1}'",
-                                best_candidate.GetSignatureForError(),
-                                ambiguous.GetSignatureForError()
-                            );
+                            rc.Report
+                                .Error(
+                                    121,
+                                    loc,
+                                    "The call is ambiguous between the following methods or properties: `{0}' and `{1}'",
+                                    best_candidate.GetSignatureForError(),
+                                    ambiguous.GetSignatureForError()
+                                );
                         }
 
                         return (T)best_candidate;
@@ -7573,14 +7603,15 @@ namespace Mono.CSharp
             {
                 rc.Report.SymbolRelatedToPreviousError(best_candidate);
                 rc.Report.SymbolRelatedToPreviousError(invocable_member);
-                rc.Report.Warning(
-                    467,
-                    2,
-                    loc,
-                    "Ambiguity between method `{0}' and invocable non-method `{1}'. Using method group",
-                    best_candidate.GetSignatureForError(),
-                    invocable_member.GetSignatureForError()
-                );
+                rc.Report
+                    .Warning(
+                        467,
+                        2,
+                        loc,
+                        "Ambiguity between method `{0}' and invocable non-method `{1}'. Using method group",
+                        best_candidate.GetSignatureForError(),
+                        invocable_member.GetSignatureForError()
+                    );
             }
 
             //
@@ -7648,39 +7679,43 @@ namespace Mono.CSharp
                     != 0
                 )
                 {
-                    ec.Report.Error(
-                        1954,
-                        loc,
-                        "The best overloaded collection initalizer method `{0}' cannot have `ref' or `out' modifier",
-                        TypeManager.CSharpSignature(method)
-                    );
+                    ec.Report
+                        .Error(
+                            1954,
+                            loc,
+                            "The best overloaded collection initalizer method `{0}' cannot have `ref' or `out' modifier",
+                            TypeManager.CSharpSignature(method)
+                        );
                     return;
                 }
-                ec.Report.Error(
-                    1950,
-                    loc,
-                    "The best overloaded collection initalizer method `{0}' has some invalid arguments",
-                    TypeManager.CSharpSignature(method)
-                );
+                ec.Report
+                    .Error(
+                        1950,
+                        loc,
+                        "The best overloaded collection initalizer method `{0}' has some invalid arguments",
+                        TypeManager.CSharpSignature(method)
+                    );
             }
             else if (IsDelegateInvoke)
             {
-                ec.Report.Error(
-                    1594,
-                    loc,
-                    "Delegate `{0}' has some invalid arguments",
-                    DelegateType.GetSignatureForError()
-                );
+                ec.Report
+                    .Error(
+                        1594,
+                        loc,
+                        "Delegate `{0}' has some invalid arguments",
+                        DelegateType.GetSignatureForError()
+                    );
             }
             else
             {
                 ec.Report.SymbolRelatedToPreviousError(method);
-                ec.Report.Error(
-                    1502,
-                    loc,
-                    "The best overloaded method match for `{0}' has some invalid arguments",
-                    method.GetSignatureForError()
-                );
+                ec.Report
+                    .Error(
+                        1502,
+                        loc,
+                        "The best overloaded method match for `{0}' has some invalid arguments",
+                        method.GetSignatureForError()
+                    );
             }
 
             Parameter.Modifier mod =
@@ -7695,21 +7730,23 @@ namespace Mono.CSharp
             )
             {
                 if ((mod & Parameter.Modifier.RefOutMask) == 0)
-                    ec.Report.Error(
-                        1615,
-                        a.Expr.Location,
-                        "Argument `#{0}' does not require `{1}' modifier. Consider removing `{1}' modifier",
-                        index,
-                        Parameter.GetModifierSignature(a.Modifier)
-                    );
+                    ec.Report
+                        .Error(
+                            1615,
+                            a.Expr.Location,
+                            "Argument `#{0}' does not require `{1}' modifier. Consider removing `{1}' modifier",
+                            index,
+                            Parameter.GetModifierSignature(a.Modifier)
+                        );
                 else
-                    ec.Report.Error(
-                        1620,
-                        a.Expr.Location,
-                        "Argument `#{0}' is missing `{1}' modifier",
-                        index,
-                        Parameter.GetModifierSignature(mod)
-                    );
+                    ec.Report
+                        .Error(
+                            1620,
+                            a.Expr.Location,
+                            "Argument `#{0}' is missing `{1}' modifier",
+                            index,
+                            Parameter.GetModifierSignature(mod)
+                        );
             }
             else
             {
@@ -7728,14 +7765,15 @@ namespace Mono.CSharp
                     p2 = Parameter.GetModifierSignature(a.Modifier) + " " + p2;
                 }
 
-                ec.Report.Error(
-                    1503,
-                    a.Expr.Location,
-                    "Argument `#{0}' cannot convert `{1}' expression to type `{2}'",
-                    index,
-                    p1,
-                    p2
-                );
+                ec.Report
+                    .Error(
+                        1503,
+                        a.Expr.Location,
+                        "Argument `#{0}' cannot convert `{1}' expression to type `{2}'",
+                        index,
+                        p1,
+                        p2
+                    );
             }
         }
 
@@ -7835,12 +7873,13 @@ namespace Mono.CSharp
 
                             if (constr_ok)
                             {
-                                rc.Report.Error(
-                                    411,
-                                    loc,
-                                    "The type arguments for method `{0}' cannot be inferred from the usage. Try specifying the type arguments explicitly",
-                                    ms.GetGenericMethodDefinition().GetSignatureForError()
-                                );
+                                rc.Report
+                                    .Error(
+                                        411,
+                                        loc,
+                                        "The type arguments for method `{0}' cannot be inferred from the usage. Try specifying the type arguments explicitly",
+                                        ms.GetGenericMethodDefinition().GetSignatureForError()
+                                    );
                             }
 
                             return;
@@ -7866,26 +7905,28 @@ namespace Mono.CSharp
             else if (IsDelegateInvoke)
             {
                 rc.Report.SymbolRelatedToPreviousError(DelegateType);
-                rc.Report.Error(
-                    1593,
-                    loc,
-                    "Delegate `{0}' does not take `{1}' arguments",
-                    DelegateType.GetSignatureForError(),
-                    arg_count.ToString()
-                );
+                rc.Report
+                    .Error(
+                        1593,
+                        loc,
+                        "Delegate `{0}' does not take `{1}' arguments",
+                        DelegateType.GetSignatureForError(),
+                        arg_count.ToString()
+                    );
             }
             else
             {
                 string name =
                     best_candidate.Kind == MemberKind.Indexer ? "this" : best_candidate.Name;
                 rc.Report.SymbolRelatedToPreviousError(best_candidate);
-                rc.Report.Error(
-                    1501,
-                    loc,
-                    "No overload for method `{0}' takes `{1}' arguments",
-                    name,
-                    arg_count.ToString()
-                );
+                rc.Report
+                    .Error(
+                        1501,
+                        loc,
+                        "No overload for method `{0}' takes `{1}' arguments",
+                        name,
+                        arg_count.ToString()
+                    );
             }
         }
 
@@ -7998,8 +8039,7 @@ namespace Mono.CSharp
                         //
                         // Set underlying variable type based on parameter type
                         //
-                        ((DeclarationExpression)a.Expr)
-                            .Variable
+                        ((DeclarationExpression)a.Expr).Variable
                             .Type = pt;
                         continue;
                     }
@@ -8032,24 +8072,26 @@ namespace Mono.CSharp
                         if (IsDelegateInvoke)
                         {
                             ec.Report.SymbolRelatedToPreviousError(DelegateType);
-                            ec.Report.Error(
-                                1746,
-                                na.Location,
-                                "The delegate `{0}' does not contain a parameter named `{1}'",
-                                DelegateType.GetSignatureForError(),
-                                na.Name
-                            );
+                            ec.Report
+                                .Error(
+                                    1746,
+                                    na.Location,
+                                    "The delegate `{0}' does not contain a parameter named `{1}'",
+                                    DelegateType.GetSignatureForError(),
+                                    na.Name
+                                );
                         }
                         else
                         {
                             ec.Report.SymbolRelatedToPreviousError(member);
-                            ec.Report.Error(
-                                1739,
-                                na.Location,
-                                "The best overloaded method match for `{0}' does not contain a parameter named `{1}'",
-                                TypeManager.CSharpSignature(member),
-                                na.Name
-                            );
+                            ec.Report
+                                .Error(
+                                    1739,
+                                    na.Location,
+                                    "The best overloaded method match for `{0}' does not contain a parameter named `{1}'",
+                                    TypeManager.CSharpSignature(member),
+                                    na.Name
+                                );
                         }
                     }
                     else if (args[name_index] != a && args[name_index] != null)
@@ -8061,21 +8103,23 @@ namespace Mono.CSharp
 
                         if (name_index > a_idx)
                         {
-                            ec.Report.Error(
-                                8323,
-                                na.Location,
-                                "Named argument `{0}' is used out of position but is followed by positional argument",
-                                na.Name
-                            );
+                            ec.Report
+                                .Error(
+                                    8323,
+                                    na.Location,
+                                    "Named argument `{0}' is used out of position but is followed by positional argument",
+                                    na.Name
+                                );
                         }
                         else
                         {
-                            ec.Report.Error(
-                                1744,
-                                na.Location,
-                                "Named argument `{0}' cannot be used for a parameter which has positional argument specified",
-                                na.Name
-                            );
+                            ec.Report
+                                .Error(
+                                    1744,
+                                    na.Location,
+                                    "Named argument `{0}' cannot be used for a parameter which has positional argument specified",
+                                    na.Name
+                                );
                         }
                     }
                 }
@@ -8520,22 +8564,24 @@ namespace Mono.CSharp
                     && (fe == null || !fe.IsFixed)
                 )
                 {
-                    ec.Report.Error(
-                        1666,
-                        loc,
-                        "You cannot use fixed size buffers contained in unfixed expressions. Try using the fixed statement"
-                    );
+                    ec.Report
+                        .Error(
+                            1666,
+                            loc,
+                            "You cannot use fixed size buffers contained in unfixed expressions. Try using the fixed statement"
+                        );
                 }
 
                 if (InstanceExpression.eclass != ExprClass.Variable)
                 {
                     ec.Report.SymbolRelatedToPreviousError(spec);
-                    ec.Report.Error(
-                        1708,
-                        loc,
-                        "`{0}': Fixed size buffers can only be accessed through locals or fields",
-                        TypeManager.GetFullNameSignature(spec)
-                    );
+                    ec.Report
+                        .Error(
+                            1708,
+                            loc,
+                            "`{0}': Fixed size buffers can only be accessed through locals or fields",
+                            TypeManager.GetFullNameSignature(spec)
+                        );
                 }
                 else if (var != null && var.IsHoisted)
                 {
@@ -8611,13 +8657,14 @@ namespace Mono.CSharp
                                         && !fc.IsDefinitelyAssigned(var_inst.VariableInfo)
                                     )
                                 )
-                                    fc.Report.Warning(
-                                        1060,
-                                        1,
-                                        fe.loc,
-                                        "Use of possibly unassigned field `{0}'",
-                                        fe.Name
-                                    );
+                                    fc.Report
+                                        .Warning(
+                                            1060,
+                                            1,
+                                            fe.loc,
+                                            "Use of possibly unassigned field `{0}'",
+                                            fe.Name
+                                        );
                             }
                         }
 
@@ -8649,21 +8696,23 @@ namespace Mono.CSharp
             {
                 if (IsStatic)
                 {
-                    rc.Report.Error(
-                        199,
-                        loc,
-                        "A static readonly field `{0}' cannot be passed ref or out (except in a static constructor)",
-                        GetSignatureForError()
-                    );
+                    rc.Report
+                        .Error(
+                            199,
+                            loc,
+                            "A static readonly field `{0}' cannot be passed ref or out (except in a static constructor)",
+                            GetSignatureForError()
+                        );
                 }
                 else
                 {
-                    rc.Report.Error(
-                        192,
-                        loc,
-                        "A readonly field `{0}' cannot be passed ref or out (except in a constructor)",
-                        GetSignatureForError()
-                    );
+                    rc.Report
+                        .Error(
+                            192,
+                            loc,
+                            "A readonly field `{0}' cannot be passed ref or out (except in a constructor)",
+                            GetSignatureForError()
+                        );
                 }
 
                 return ErrorExpression.Instance;
@@ -8679,42 +8728,46 @@ namespace Mono.CSharp
             {
                 if (IsStatic)
                 {
-                    rc.Report.Error(
-                        1651,
-                        loc,
-                        "Fields of static readonly field `{0}' cannot be passed ref or out (except in a static constructor)",
-                        GetSignatureForError()
-                    );
+                    rc.Report
+                        .Error(
+                            1651,
+                            loc,
+                            "Fields of static readonly field `{0}' cannot be passed ref or out (except in a static constructor)",
+                            GetSignatureForError()
+                        );
                 }
                 else
                 {
-                    rc.Report.Error(
-                        1649,
-                        loc,
-                        "Members of readonly field `{0}' cannot be passed ref or out (except in a constructor)",
-                        GetSignatureForError()
-                    );
+                    rc.Report
+                        .Error(
+                            1649,
+                            loc,
+                            "Members of readonly field `{0}' cannot be passed ref or out (except in a constructor)",
+                            GetSignatureForError()
+                        );
                 }
                 return ErrorExpression.Instance;
             }
 
             if (IsStatic)
             {
-                rc.Report.Error(
-                    198,
-                    loc,
-                    "A static readonly field `{0}' cannot be assigned to (except in a static constructor or a variable initializer)",
-                    GetSignatureForError()
-                );
+                rc.Report
+                    .Error(
+                        198,
+                        loc,
+                        "A static readonly field `{0}' cannot be assigned to (except in a static constructor or a variable initializer)",
+                        GetSignatureForError()
+                    );
             }
             else
             {
-                rc.Report.Error(
-                    191,
-                    loc,
-                    "A readonly field `{0}' cannot be assigned to (except in a constructor or a variable initializer)",
-                    GetSignatureForError()
-                );
+                rc.Report
+                    .Error(
+                        191,
+                        loc,
+                        "A readonly field `{0}' cannot be assigned to (except in a constructor or a variable initializer)",
+                        GetSignatureForError()
+                    );
             }
 
             return ErrorExpression.Instance;
@@ -8746,13 +8799,14 @@ namespace Mono.CSharp
                 && (spec.Modifiers & Modifiers.VOLATILE) != 0
             )
             {
-                ec.Report.Warning(
-                    420,
-                    1,
-                    loc,
-                    "`{0}': A volatile field references will not be treated as volatile",
-                    spec.GetSignatureForError()
-                );
+                ec.Report
+                    .Warning(
+                        420,
+                        1,
+                        loc,
+                        "`{0}': A volatile field references will not be treated as volatile",
+                        spec.GetSignatureForError()
+                    );
             }
 
             if (spec.IsReadOnly)
@@ -8786,13 +8840,14 @@ namespace Mono.CSharp
             if (right_side == EmptyExpression.OutAccess && IsMarshalByRefAccess(ec))
             {
                 ec.Report.SymbolRelatedToPreviousError(spec.DeclaringType);
-                ec.Report.Warning(
-                    197,
-                    1,
-                    loc,
-                    "Passing `{0}' as ref or out or taking its address may cause a runtime exception because it is a field of a marshal-by-reference class",
-                    GetSignatureForError()
-                );
+                ec.Report
+                    .Warning(
+                        197,
+                        1,
+                        loc,
+                        "Passing `{0}' as ref or out or taking its address may cause a runtime exception because it is a field of a marshal-by-reference class",
+                        GetSignatureForError()
+                    );
             }
 
             eclass = ExprClass.Variable;
@@ -9100,10 +9155,11 @@ namespace Mono.CSharp
 #if STATIC
             return base.MakeExpression(ctx);
 #else
-            return SLE.Expression.Field(
-                IsStatic ? null : InstanceExpression.MakeExpression(ctx),
-                spec.GetMetaInfo()
-            );
+            return SLE.Expression
+                .Field(
+                    IsStatic ? null : InstanceExpression.MakeExpression(ctx),
+                    spec.GetMetaInfo()
+                );
 #endif
         }
 
@@ -9240,10 +9296,8 @@ namespace Mono.CSharp
 #if STATIC
             return base.MakeExpression(ctx);
 #else
-            return SLE.Expression.Property(
-                InstanceExpression.MakeExpression(ctx),
-                (MethodInfo)Setter.GetMetaInfo()
-            );
+            return SLE.Expression
+                .Property(InstanceExpression.MakeExpression(ctx), (MethodInfo)Setter.GetMetaInfo());
 #endif
         }
 
@@ -9252,22 +9306,21 @@ namespace Mono.CSharp
 #if STATIC
             return base.MakeExpression(ctx);
 #else
-            return SLE.Expression.Property(
-                InstanceExpression.MakeExpression(ctx),
-                (MethodInfo)Getter.GetMetaInfo()
-            );
+            return SLE.Expression
+                .Property(InstanceExpression.MakeExpression(ctx), (MethodInfo)Getter.GetMetaInfo());
 #endif
         }
 
         void Error_PropertyNotValid(ResolveContext ec)
         {
             ec.Report.SymbolRelatedToPreviousError(best_candidate);
-            ec.Report.Error(
-                1546,
-                loc,
-                "Property or event `{0}' is not supported by the C# language",
-                GetSignatureForError()
-            );
+            ec.Report
+                .Error(
+                    1546,
+                    loc,
+                    "Property or event `{0}' is not supported by the C# language",
+                    GetSignatureForError()
+                );
         }
 
         bool IsSingleDimensionalArrayLength()
@@ -9419,12 +9472,13 @@ namespace Mono.CSharp
                         && !fc.IsStructFieldDefinitelyAssigned(vi, prop.BackingField.Name)
                     )
                     {
-                        fc.Report.Error(
-                            8079,
-                            loc,
-                            "Use of possibly unassigned auto-implemented property `{0}'",
-                            Name
-                        );
+                        fc.Report
+                            .Error(
+                                8079,
+                                loc,
+                                "Use of possibly unassigned auto-implemented property `{0}'",
+                                Name
+                            );
                         return;
                     }
 
@@ -9699,12 +9753,13 @@ namespace Mono.CSharp
                     && variable is Linq.RangeVariable
                 )
                 {
-                    rc.Report.Error(
-                        1939,
-                        loc,
-                        "A range variable `{0}' may not be passes as `ref' or `out' parameter",
-                        best_candidate.Name
-                    );
+                    rc.Report
+                        .Error(
+                            1939,
+                            loc,
+                            "A range variable `{0}' may not be passes as `ref' or `out' parameter",
+                            best_candidate.Name
+                        );
                 }
                 else
                 {
@@ -9738,12 +9793,13 @@ namespace Mono.CSharp
                     return ByRefDereference.Create(this).Resolve(rc);
                 }
 
-                rc.Report.Error(
-                    200,
-                    loc,
-                    "Property or indexer `{0}' cannot be assigned to (it is read-only)",
-                    GetSignatureForError()
-                );
+                rc.Report
+                    .Error(
+                        200,
+                        loc,
+                        "Property or indexer `{0}' cannot be assigned to (it is read-only)",
+                        GetSignatureForError()
+                    );
                 return null;
             }
 
@@ -9755,12 +9811,13 @@ namespace Mono.CSharp
                 if (best_candidate.HasDifferentAccessibility)
                 {
                     rc.Report.SymbolRelatedToPreviousError(best_candidate.Set);
-                    rc.Report.Error(
-                        272,
-                        loc,
-                        "The property or indexer `{0}' cannot be used in this context because the set accessor is inaccessible",
-                        GetSignatureForError()
-                    );
+                    rc.Report
+                        .Error(
+                            272,
+                            loc,
+                            "The property or indexer `{0}' cannot be used in this context because the set accessor is inaccessible",
+                            GetSignatureForError()
+                        );
                 }
                 else
                 {
@@ -9857,12 +9914,13 @@ namespace Mono.CSharp
                 if (InstanceExpression != EmptyExpression.Null)
                 {
                     rc.Report.SymbolRelatedToPreviousError(best_candidate);
-                    rc.Report.Error(
-                        154,
-                        loc,
-                        "The property or indexer `{0}' cannot be used in this context because it lacks the `get' accessor",
-                        best_candidate.GetSignatureForError()
-                    );
+                    rc.Report
+                        .Error(
+                            154,
+                            loc,
+                            "The property or indexer `{0}' cannot be used in this context because it lacks the `get' accessor",
+                            best_candidate.GetSignatureForError()
+                        );
                     return false;
                 }
             }
@@ -9874,12 +9932,13 @@ namespace Mono.CSharp
                 if (best_candidate.HasDifferentAccessibility)
                 {
                     rc.Report.SymbolRelatedToPreviousError(best_candidate.Get);
-                    rc.Report.Error(
-                        271,
-                        loc,
-                        "The property or indexer `{0}' cannot be used in this context because the get accessor is inaccessible",
-                        TypeManager.CSharpSignature(best_candidate)
-                    );
+                    rc.Report
+                        .Error(
+                            271,
+                            loc,
+                            "The property or indexer `{0}' cannot be used in this context because the get accessor is inaccessible",
+                            TypeManager.CSharpSignature(best_candidate)
+                        );
                 }
                 else
                 {
@@ -10080,22 +10139,24 @@ namespace Mono.CSharp
                 || TypeManager.IsNestedChildOf(ec.CurrentType, spec.DeclaringType.MemberDefinition)
             )
             {
-                ec.Report.Error(
-                    79,
-                    loc,
-                    "The event `{0}' can only appear on the left hand side of `+=' or `-=' operator",
-                    GetSignatureForError()
-                );
+                ec.Report
+                    .Error(
+                        79,
+                        loc,
+                        "The event `{0}' can only appear on the left hand side of `+=' or `-=' operator",
+                        GetSignatureForError()
+                    );
             }
             else
             {
-                ec.Report.Error(
-                    70,
-                    loc,
-                    "The event `{0}' can only appear on the left hand side of += or -= when used outside of the type `{1}'",
-                    GetSignatureForError(),
-                    spec.DeclaringType.GetSignatureForError()
-                );
+                ec.Report
+                    .Error(
+                        70,
+                        loc,
+                        "The event `{0}' can only appear on the left hand side of += or -= when used outside of the type `{1}'",
+                        GetSignatureForError(),
+                        spec.DeclaringType.GetSignatureForError()
+                    );
             }
         }
 
@@ -10286,12 +10347,13 @@ namespace Mono.CSharp
                 || (rhs is TupleLiteral && TupleLiteral.ContainsNoTypeElement(type))
             )
             {
-                ec.Report.Error(
-                    815,
-                    loc,
-                    "An implicitly typed local variable declaration cannot be initialized with `{0}'",
-                    type.GetSignatureForError()
-                );
+                ec.Report
+                    .Error(
+                        815,
+                        loc,
+                        "An implicitly typed local variable declaration cannot be initialized with `{0}'",
+                        type.GetSignatureForError()
+                    );
                 type = InternalType.ErrorType;
                 return false;
             }

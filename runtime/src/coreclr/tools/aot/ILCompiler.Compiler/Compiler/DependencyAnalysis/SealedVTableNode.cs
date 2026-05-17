@@ -180,8 +180,7 @@ namespace ILCompiler.DependencyAnalysis
                         continue;
 
                     if (!interfaceType.IsTypeDefinition)
-                        declMethod = factory
-                            .TypeSystemContext
+                        declMethod = factory.TypeSystemContext
                             .GetMethodForInstantiatedType(
                                 declMethod.GetTypicalMethodDefinition(),
                                 (InstantiatedType)definitionInterfaceType
@@ -213,8 +212,7 @@ namespace ILCompiler.DependencyAnalysis
 
                             MethodDesc targetMethod = implMethod;
                             if (!implType.IsTypeDefinition)
-                                targetMethod = factory
-                                    .TypeSystemContext
+                                targetMethod = factory.TypeSystemContext
                                     .GetMethodForInstantiatedType(
                                         implMethod.GetTypicalMethodDefinition(),
                                         (InstantiatedType)implType
@@ -336,8 +334,7 @@ namespace ILCompiler.DependencyAnalysis
                 {
                     // Canonical instance default interface methods need to go through a thunk that acquires the generic context from `this`.
                     // Static methods have their generic context passed explicitly.
-                    implMethod = factory
-                        .TypeSystemContext
+                    implMethod = factory.TypeSystemContext
                         .GetDefaultInterfaceMethodImplementationThunk(
                             implMethod,
                             implementingClass.ConvertToCanonForm(CanonicalFormKind.Specific),

@@ -847,10 +847,11 @@ namespace System.Web.UI.WebControls.WebParts
             }
             else
             {
-                page.Server.Transfer(
-                    path, /* preserveForm */
-                    false
-                );
+                page.Server
+                    .Transfer(
+                        path, /* preserveForm */
+                        false
+                    );
             }
         }
 

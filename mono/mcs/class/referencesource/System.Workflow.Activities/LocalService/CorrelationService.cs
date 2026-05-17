@@ -105,8 +105,7 @@ namespace System.Workflow.Activities
                 if (eventListener != null)
                 {
                     queue.RegisterForQueueItemAvailable(eventListener, activity.QualifiedName);
-                    WorkflowActivityTrace
-                        .Activity
+                    WorkflowActivityTrace.Activity
                         .TraceEvent(
                             TraceEventType.Information,
                             0,
@@ -311,8 +310,7 @@ namespace System.Workflow.Activities
                 // name, see if the current element in the initializerValues and followerValues enumerators have a matching name.
                 // If they do match, just fall thru because followerValue is already set to followerValues.Current.Value;
                 if (
-                    !initializerValues
-                        .Current
+                    !initializerValues.Current
                         .Name
                         .Equals(followerValues.Current.Name, StringComparison.OrdinalIgnoreCase)
                 )
@@ -325,8 +323,7 @@ namespace System.Workflow.Activities
                         // We don't need to be concerned with culture here because the names we are comparing
                         // are parameter names on methods in an interface.
                         if (
-                            initializerValues
-                                .Current
+                            initializerValues.Current
                                 .Name
                                 .Equals(
                                     followerEnumerator.Current.Name,
@@ -439,8 +436,7 @@ namespace System.Workflow.Activities
             WorkflowQueuingService queueSvcs = (WorkflowQueuingService)
                 context.GetService(typeof(WorkflowQueuingService));
             FollowerQueueCreator follower = new FollowerQueueCreator(followermethodName);
-            WorkflowActivityTrace
-                .Activity
+            WorkflowActivityTrace.Activity
                 .TraceEvent(
                     TraceEventType.Information,
                     0,

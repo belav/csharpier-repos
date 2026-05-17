@@ -32,8 +32,7 @@ namespace System.Security.Cryptography
                 dwFlags |= BCryptOpenAlgorithmProviderFlags.BCRYPT_ALG_HANDLE_HMAC_FLAG;
             }
 
-            _hAlgorithm = Interop
-                .BCrypt
+            _hAlgorithm = Interop.BCrypt
                 .BCryptAlgorithmCache
                 .GetCachedBCryptAlgorithmHandle(hashAlgId, dwFlags, out _hashSize);
 
@@ -41,8 +40,7 @@ namespace System.Security.Cryptography
             // So keep hHash trapped in this scope to prevent (mis-)use of it.
             {
                 SafeBCryptHashHandle hHash;
-                NTSTATUS ntStatus = Interop
-                    .BCrypt
+                NTSTATUS ntStatus = Interop.BCrypt
                     .BCryptCreateHash(
                         _hAlgorithm,
                         out hHash,
@@ -108,8 +106,7 @@ namespace System.Security.Cryptography
 
             using (SafeBCryptHashHandle tmpHash = Interop.BCrypt.BCryptDuplicateHash(_hHash))
             {
-                NTSTATUS ntStatus = Interop
-                    .BCrypt
+                NTSTATUS ntStatus = Interop.BCrypt
                     .BCryptFinishHash(tmpHash, destination, _hashSize, 0);
 
                 if (ntStatus != NTSTATUS.STATUS_SUCCESS)
@@ -149,8 +146,7 @@ namespace System.Security.Cryptography
                 : BCryptCreateHashFlags.None;
 
             SafeBCryptHashHandle hHash;
-            NTSTATUS ntStatus = Interop
-                .BCrypt
+            NTSTATUS ntStatus = Interop.BCrypt
                 .BCryptCreateHash(
                     _hAlgorithm,
                     out hHash,

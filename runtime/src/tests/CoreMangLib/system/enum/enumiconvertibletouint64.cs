@@ -39,8 +39,7 @@ public class EnumIConvertibleToUint64
             UInt64 u1 = i1.ToUInt64(null);
             if (u1 != 0)
             {
-                TestLibrary
-                    .TestFramework
+                TestLibrary.TestFramework
                     .LogError("001", "The result is not the value as expected");
                 retVal = false;
             }
@@ -66,8 +65,7 @@ public class EnumIConvertibleToUint64
             UInt64 l2 = (e2 as IConvertible).ToUInt64(null);
             if (l2 != 5)
             {
-                TestLibrary
-                    .TestFramework
+                TestLibrary.TestFramework
                     .LogError("003", "The result is not the value as expected");
                 retVal = false;
             }
@@ -85,8 +83,7 @@ public class EnumIConvertibleToUint64
     {
         bool retVal = true;
 
-        TestLibrary
-            .TestFramework
+        TestLibrary.TestFramework
             .BeginScenario("PosTest3: Convert an enum of Uint64.maxvalue to Uint64");
 
         try
@@ -96,8 +93,7 @@ public class EnumIConvertibleToUint64
             UInt64 u1 = i1.ToUInt64(null);
             if (u1 != UInt64.MaxValue)
             {
-                TestLibrary
-                    .TestFramework
+                TestLibrary.TestFramework
                     .LogError("005", "The result is not the value as expected");
                 retVal = false;
             }
@@ -115,8 +111,7 @@ public class EnumIConvertibleToUint64
     {
         bool retVal = true;
 
-        TestLibrary
-            .TestFramework
+        TestLibrary.TestFramework
             .BeginScenario("PosTest4: Convert an enum of negative zero to Uint64");
 
         try
@@ -126,8 +121,7 @@ public class EnumIConvertibleToUint64
             UInt64 u1 = i1.ToUInt64(null);
             if (u1 != 0)
             {
-                TestLibrary
-                    .TestFramework
+                TestLibrary.TestFramework
                     .LogError("007", "The result is not the value as expected");
                 retVal = false;
             }
@@ -147,8 +141,7 @@ public class EnumIConvertibleToUint64
     {
         bool retVal = true;
 
-        TestLibrary
-            .TestFramework
+        TestLibrary.TestFramework
             .BeginScenario("NegTest1: Convert an enum of negative value to Uint64");
 
         try
@@ -156,8 +149,7 @@ public class EnumIConvertibleToUint64
             e_test e1 = e_test.itemA;
             IConvertible i1 = e1 as IConvertible;
             UInt64 u1 = i1.ToUInt64(null);
-            TestLibrary
-                .TestFramework
+            TestLibrary.TestFramework
                 .LogError("101", "The OverflowException was not thrown as expected");
             retVal = false;
         }

@@ -29,8 +29,7 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
 
         public static bool IsReadOnlyOnSurfaceBuffer(this ITextView textView, SnapshotSpan span)
         {
-            var spansInView = textView
-                .BufferGraph
+            var spansInView = textView.BufferGraph
                 .MapUpToBuffer(span, SpanTrackingMode.EdgeInclusive, textView.TextBuffer);
             return spansInView.Any(spanInView => textView.TextBuffer.IsReadOnly(spanInView.Span));
         }
@@ -50,8 +49,7 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
         )
         {
             var caret = textView.Caret.Position;
-            var span = textView
-                .BufferGraph
+            var span = textView.BufferGraph
                 .MapUpOrDownToFirstMatch(new SnapshotSpan(caret.BufferPosition, 0), match);
             if (span.HasValue)
             {
@@ -73,8 +71,7 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
                 return textView.Caret.Position.VirtualBufferPosition;
             }
 
-            var mappedPoint = textView
-                .BufferGraph
+            var mappedPoint = textView.BufferGraph
                 .MapDownToBuffer(
                     textView.Caret.Position.VirtualBufferPosition.Position,
                     PointTrackingMode.Negative,
@@ -98,8 +95,7 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
             this ITextView textView,
             SnapshotPoint point
         ) =>
-            textView
-                .BufferGraph
+            textView.BufferGraph
                 .MapUpToSnapshot(
                     point,
                     PointTrackingMode.Positive,
@@ -111,8 +107,7 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
             this ITextView textView,
             SnapshotSpan span
         ) =>
-            textView
-                .BufferGraph
+            textView.BufferGraph
                 .MapUpToSnapshot(span, SpanTrackingMode.EdgeInclusive, textView.TextSnapshot);
 
         public static void SetSelection(
@@ -195,8 +190,7 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
                 );
             }
 
-            var newPosition = textView
-                .Caret
+            var newPosition = textView.Caret
                 .MoveTo(new VirtualSnapshotPoint(pointInView.Value, point.VirtualSpaces));
 
             // We use the caret's position in the view's current snapshot here in case something
@@ -393,8 +387,7 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
             ITextSnapshotLine line
         )
         {
-            var pointInView = textView
-                .BufferGraph
+            var pointInView = textView.BufferGraph
                 .MapUpToSnapshot(
                     line.Start,
                     PointTrackingMode.Positive,
@@ -427,8 +420,7 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
 
             // We have to map. We'll lose virtualness in this process because
             // mapping virtual points through projections is poorly defined.
-            var targetSpan = textView
-                .BufferGraph
+            var targetSpan = textView.BufferGraph
                 .MapUpToSnapshot(
                     virtualSnapshotSpan.SnapshotSpan,
                     SpanTrackingMode.EdgeExclusive,
@@ -481,8 +473,7 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
             // bufffer passed in.  From that, determine the start/end line for the buffer that is in
             // view.
             var visibleSpan = textView.TextViewLines.FormattedSpan;
-            var visibleSpansInBuffer = textView
-                .BufferGraph
+            var visibleSpansInBuffer = textView.BufferGraph
                 .MapDownToBuffer(visibleSpan, SpanTrackingMode.EdgeInclusive, subjectBuffer);
             if (visibleSpansInBuffer.Count == 0)
             {
@@ -520,8 +511,7 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
             // If any of the buffers in the projection graph are in the LSP editor context, then we consider this to be in an LSP context.
             // We cannot be in a partial context where some buffers are LSP and some are not.
             var anyBufferInLspContext = false;
-            _ = textView
-                .BufferGraph
+            _ = textView.BufferGraph
                 .GetTextBuffers(textBuffer =>
                 {
                     // Just set a flag if we found one to avoid creating a collection of all the buffers

@@ -43,8 +43,7 @@ namespace System.Activities.Statements
 
             if (exception == null)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new InvalidOperationException(
                             SR.MemberCannotBeNull(

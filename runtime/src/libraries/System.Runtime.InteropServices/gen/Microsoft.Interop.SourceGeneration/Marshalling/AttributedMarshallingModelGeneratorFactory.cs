@@ -24,8 +24,10 @@ namespace Microsoft.Interop
         private static readonly ImmutableDictionary<
             string,
             string
-        > AddDisableRuntimeMarshallingAttributeProperties = ImmutableDictionary<string, string>
-            .Empty
+        > AddDisableRuntimeMarshallingAttributeProperties = ImmutableDictionary<
+            string,
+            string
+        >.Empty
             .Add(
                 GeneratorDiagnosticProperties.AddDisableRuntimeMarshallingAttribute,
                 GeneratorDiagnosticProperties.AddDisableRuntimeMarshallingAttribute
@@ -532,8 +534,7 @@ namespace Microsoft.Interop
                 if (marshallerData.Shape.HasFlag(MarshallerShape.CallerAllocatedBuffer))
                 {
                     // Check if the buffer element type is actually the unmanaged element type
-                    TypeSyntax bufferElementTypeSyntax = marshallerData
-                        .BufferElementType
+                    TypeSyntax bufferElementTypeSyntax = marshallerData.BufferElementType
                         .Syntax
                         .IsEquivalentTo(marshalInfo.PlaceholderTypeParameter.Syntax)
                         ? unmanagedElementType
@@ -623,8 +624,7 @@ namespace Microsoft.Interop
                 if (marshallerData.Shape.HasFlag(MarshallerShape.CallerAllocatedBuffer))
                 {
                     // Check if the buffer element type is actually the unmanaged element type
-                    TypeSyntax bufferElementTypeSyntax = marshallerData
-                        .BufferElementType
+                    TypeSyntax bufferElementTypeSyntax = marshallerData.BufferElementType
                         .Syntax
                         .IsEquivalentTo(marshalInfo.PlaceholderTypeParameter.Syntax)
                         ? unmanagedElementType

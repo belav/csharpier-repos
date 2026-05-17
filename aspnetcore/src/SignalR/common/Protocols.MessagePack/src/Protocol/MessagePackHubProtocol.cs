@@ -71,8 +71,7 @@ public class MessagePackHubProtocol : IHubProtocol
         _worker.GetMessageBytes(message);
 
     internal static MessagePackSerializerOptions CreateDefaultMessagePackSerializerOptions() =>
-        MessagePackSerializerOptions
-            .Standard
+        MessagePackSerializerOptions.Standard
             .WithResolver(SignalRResolver.Instance)
             .WithSecurity(MessagePackSecurity.UntrustedData);
 

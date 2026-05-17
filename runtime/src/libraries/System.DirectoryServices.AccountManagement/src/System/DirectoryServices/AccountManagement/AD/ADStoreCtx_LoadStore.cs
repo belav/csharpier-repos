@@ -323,8 +323,7 @@ namespace System.DirectoryServices.AccountManagement
                         )
                     )
                     {
-                        constructedContext = SDSCache
-                            .Domain
+                        constructedContext = SDSCache.Domain
                             .GetContext(
                                 dnsDomainName,
                                 this.Credentials,

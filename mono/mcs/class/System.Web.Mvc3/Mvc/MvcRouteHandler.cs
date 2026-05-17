@@ -16,8 +16,7 @@
 
         protected virtual IHttpHandler GetHttpHandler(RequestContext requestContext)
         {
-            requestContext
-                .HttpContext
+            requestContext.HttpContext
                 .SetSessionStateBehavior(GetSessionStateBehavior(requestContext));
             return new MvcHandler(requestContext);
         }

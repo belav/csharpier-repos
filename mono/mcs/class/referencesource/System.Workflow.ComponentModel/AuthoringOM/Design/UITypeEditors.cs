@@ -111,14 +111,12 @@ namespace System.Workflow.ComponentModel.Design
                     value != null
                     && typeDescriptorContext.PropertyDescriptor.PropertyType != typeof(string)
                     && typeDescriptorContext.PropertyDescriptor.Converter != null
-                    && typeDescriptorContext
-                        .PropertyDescriptor
+                    && typeDescriptorContext.PropertyDescriptor
                         .Converter
                         .CanConvertTo(typeof(string))
                 )
                     oldTypeName =
-                        typeDescriptorContext
-                            .PropertyDescriptor
+                        typeDescriptorContext.PropertyDescriptor
                             .Converter
                             .ConvertTo(
                                 typeDescriptorContext,
@@ -145,13 +143,11 @@ namespace System.Workflow.ComponentModel.Design
                             returnVal = dlg.SelectedType.FullName;
                         else if (
                             typeDescriptorContext.PropertyDescriptor.Converter != null
-                            && typeDescriptorContext
-                                .PropertyDescriptor
+                            && typeDescriptorContext.PropertyDescriptor
                                 .Converter
                                 .CanConvertFrom(typeDescriptorContext, typeof(string))
                         )
-                            returnVal = typeDescriptorContext
-                                .PropertyDescriptor
+                            returnVal = typeDescriptorContext.PropertyDescriptor
                                 .Converter
                                 .ConvertFrom(
                                     typeDescriptorContext,

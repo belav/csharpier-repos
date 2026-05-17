@@ -117,8 +117,7 @@ namespace System.Net
                 bool authFailure = false;
                 try
                 {
-                    context.AuthenticationSchemes = context
-                        ._listener!
+                    context.AuthenticationSchemes = context._listener!
                         .SelectAuthenticationScheme(context);
                 }
                 catch (OutOfMemoryException oom)

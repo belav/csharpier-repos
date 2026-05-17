@@ -68,8 +68,7 @@ namespace Novell.Directory.Ldap.Extensions
             }
             catch (System.Exception e)
             {
-                System
-                    .Console
+                System.Console
                     .Error
                     .WriteLine("Could not register Extended Response -" + " Class not found");
             }

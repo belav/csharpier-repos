@@ -31,8 +31,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringIndentation
                     isMarkup: false
                 )
             );
-            var document = workspace
-                .CurrentSolution
+            var document = workspace.CurrentSolution
                 .GetRequiredDocument(workspace.Documents.First().Id);
             var root = await document.GetRequiredSyntaxRootAsync(default);
 

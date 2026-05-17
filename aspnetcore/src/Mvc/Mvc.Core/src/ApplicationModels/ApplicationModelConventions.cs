@@ -36,8 +36,7 @@ internal static class ApplicationModelConventions
         {
             // ToArray is needed here to prevent issues with modifying the attributes collection
             // while iterating it.
-            var controllerConventions = controller
-                .Attributes
+            var controllerConventions = controller.Attributes
                 .OfType<IControllerModelConvention>()
                 .ToArray();
 
@@ -51,8 +50,7 @@ internal static class ApplicationModelConventions
             {
                 // ToArray is needed here to prevent issues with modifying the attributes collection
                 // while iterating it.
-                var actionConventions = action
-                    .Attributes
+                var actionConventions = action.Attributes
                     .OfType<IActionModelConvention>()
                     .ToArray();
 
@@ -66,8 +64,7 @@ internal static class ApplicationModelConventions
                 {
                     // ToArray is needed here to prevent issues with modifying the attributes collection
                     // while iterating it.
-                    var parameterConventions = parameter
-                        .Attributes
+                    var parameterConventions = parameter.Attributes
                         .OfType<IParameterModelConvention>()
                         .ToArray();
 

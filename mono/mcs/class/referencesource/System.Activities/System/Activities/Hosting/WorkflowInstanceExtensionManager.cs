@@ -74,8 +74,7 @@ namespace System.Activities.Hosting
             {
                 if (this.SymbolResolver != null)
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .Argument("singletonExtension", SR.SymbolResolverAlreadyExists);
                 }
                 this.SymbolResolver = (SymbolResolver)singletonExtension;
@@ -126,12 +125,13 @@ namespace System.Activities.Hosting
                     new List<KeyValuePair<Type, WorkflowInstanceExtensionProvider>>();
             }
 
-            this.ExtensionProviders.Add(
-                new KeyValuePair<Type, WorkflowInstanceExtensionProvider>(
-                    typeof(T),
-                    new WorkflowInstanceExtensionProvider<T>(extensionCreationFunction)
-                )
-            );
+            this.ExtensionProviders
+                .Add(
+                    new KeyValuePair<Type, WorkflowInstanceExtensionProvider>(
+                        typeof(T),
+                        new WorkflowInstanceExtensionProvider<T>(extensionCreationFunction)
+                    )
+                );
         }
 
         internal List<object> GetAllSingletonExtensions()
@@ -259,7 +259,8 @@ namespace System.Activities.Hosting
                     if (HasSingletonIWorkflowInstanceExtensions)
                     {
                         foreach (
-                            IWorkflowInstanceExtension additionalExtensionProvider in this.SingletonExtensions.OfType<IWorkflowInstanceExtension>()
+                            IWorkflowInstanceExtension additionalExtensionProvider in this.SingletonExtensions
+                                .OfType<IWorkflowInstanceExtension>()
                         )
                         {
                             AddExtensionClosure(
@@ -313,8 +314,7 @@ namespace System.Activities.Hosting
         {
             if (this.isReadonly)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(new InvalidOperationException(SR.ExtensionsCannotBeModified));
             }
         }

@@ -66,8 +66,7 @@ namespace Microsoft.CodeAnalysis.UnitTests
             TelemetryEvent @event,
             string? keyToIgnoreValueInspection = null
         ) =>
-            @event
-                .Properties
+            @event.Properties
                 .Select(p =>
                     $"{p.Key}={(keyToIgnoreValueInspection == p.Key ? string.Empty : InspectPropertyValue(p.Value))}"
                 );

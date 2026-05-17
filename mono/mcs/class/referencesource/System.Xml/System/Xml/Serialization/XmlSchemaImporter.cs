@@ -662,8 +662,7 @@ namespace System.Xml.Serialization
                 }
                 //
 
-                mapping.TypeDesc = mapping
-                    .TypeDesc
+                mapping.TypeDesc = mapping.TypeDesc
                     .CreateMappedTypeDesc(
                         new MappedTypeDesc(
                             typeName,
@@ -1385,8 +1384,7 @@ namespace System.Xml.Serialization
                 choiceIdentifier.Name = member.ChoiceIdentifier.MemberName;
                 if (groupRepeats)
                 {
-                    choiceIdentifier.TypeDesc = member
-                        .ChoiceIdentifier
+                    choiceIdentifier.TypeDesc = member.ChoiceIdentifier
                         .Mapping
                         .TypeDesc
                         .CreateArrayTypeDesc();
@@ -2117,8 +2115,7 @@ namespace System.Xml.Serialization
                 if (itemAccessor.Any)
                     return null;
                 arrayMapping.Elements = new ElementAccessor[] { itemAccessor };
-                arrayMapping.TypeDesc = ((TypeMapping)itemAccessor.Mapping)
-                    .TypeDesc
+                arrayMapping.TypeDesc = ((TypeMapping)itemAccessor.Mapping).TypeDesc
                     .CreateArrayTypeDesc();
                 arrayMapping.TypeName =
                     (type.Name == null || type.Name.Length == 0)

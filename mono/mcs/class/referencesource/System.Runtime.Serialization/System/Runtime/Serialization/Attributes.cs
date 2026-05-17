@@ -141,8 +141,7 @@ namespace System.Runtime.Serialization
             Id = reader.ReadContentAsString();
             if (string.IsNullOrEmpty(Id))
             {
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -159,8 +158,7 @@ namespace System.Runtime.Serialization
             Ref = reader.ReadContentAsString();
             if (string.IsNullOrEmpty(Ref))
             {
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -181,8 +179,7 @@ namespace System.Runtime.Serialization
         {
             ArraySZSize = reader.ReadContentAsInt();
             if (ArraySZSize < 0)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility

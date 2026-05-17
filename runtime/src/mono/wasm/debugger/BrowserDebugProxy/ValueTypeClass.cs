@@ -94,8 +94,7 @@ namespace BrowserDebugProxy
             );
             foreach (var field in writableFields)
             {
-                lastWritableFieldValue = await sdbAgent
-                    .ValueCreator
+                lastWritableFieldValue = await sdbAgent.ValueCreator
                     .ReadAsVariableValue(
                         cmdReader,
                         field.Name,
@@ -114,8 +113,7 @@ namespace BrowserDebugProxy
                 for (int i = 1; i < inlineArraySize; i++)
                 {
                     //the valuetype has a single instance field in inline-arrays
-                    var inlineArrayItem = await sdbAgent
-                        .ValueCreator
+                    var inlineArrayItem = await sdbAgent.ValueCreator
                         .ReadAsVariableValue(
                             cmdReader,
                             $"{i}",
@@ -181,8 +179,7 @@ namespace BrowserDebugProxy
                     token
                 );
                 if (toString == null)
-                    sdbAgent
-                        .logger
+                    sdbAgent.logger
                         .LogDebug($"Error while evaluating ToString method on typeId = {TypeId}");
                 else
                     description = toString;

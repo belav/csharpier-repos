@@ -33,8 +33,7 @@ namespace System.ServiceModel
         {
             ValidateBaseAddress(item, "item");
             if (this.Contains(item.Scheme))
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(
                         "item",
                         SR.GetString(SR.BaseAddressDuplicateScheme, item.Scheme)
@@ -49,8 +48,7 @@ namespace System.ServiceModel
             if (this[index].Scheme != item.Scheme)
             {
                 if (this.Contains(item.Scheme))
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgument(
                             "item",
                             SR.GetString(SR.BaseAddressDuplicateScheme, item.Scheme)
@@ -68,15 +66,13 @@ namespace System.ServiceModel
 
             if (!uri.IsAbsoluteUri)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(argumentName, SR.GetString(SR.BaseAddressMustBeAbsolute));
             }
 
             if (!string.IsNullOrEmpty(uri.UserInfo))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(
                         argumentName,
                         SR.GetString(SR.BaseAddressCannotHaveUserInfo)
@@ -85,15 +81,13 @@ namespace System.ServiceModel
 
             if (!string.IsNullOrEmpty(uri.Query))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(argumentName, SR.GetString(SR.BaseAddressCannotHaveQuery));
             }
 
             if (!string.IsNullOrEmpty(uri.Fragment))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(
                         argumentName,
                         SR.GetString(SR.BaseAddressCannotHaveFragment)

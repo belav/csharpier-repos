@@ -33,8 +33,7 @@ namespace System.Activities.DurableInstancing
         {
             if (base.Store.WorkflowHostType == Guid.Empty)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new InstancePersistenceCommandException(
                             command.Name,
@@ -49,8 +48,7 @@ namespace System.Activities.DurableInstancing
         {
             double operationTimeout = this.TimeoutHelper.RemainingTime().TotalMilliseconds;
 
-            command
-                .Parameters
+            command.Parameters
                 .Add(
                     new SqlParameter
                     {
@@ -59,8 +57,7 @@ namespace System.Activities.DurableInstancing
                         Value = base.StoreLock.SurrogateLockOwnerId,
                     }
                 );
-            command
-                .Parameters
+            command.Parameters
                 .Add(
                     new SqlParameter
                     {
@@ -69,8 +66,7 @@ namespace System.Activities.DurableInstancing
                         Value = base.Store.WorkflowHostType,
                     }
                 );
-            command
-                .Parameters
+            command.Parameters
                 .Add(
                     new SqlParameter
                     {
@@ -79,8 +75,7 @@ namespace System.Activities.DurableInstancing
                         Value = LoadType.LoadByInstance,
                     }
                 );
-            command
-                .Parameters
+            command.Parameters
                 .Add(
                     new SqlParameter
                     {
@@ -89,8 +84,7 @@ namespace System.Activities.DurableInstancing
                         Value = base.InstancePersistenceContext.InstanceVersion,
                     }
                 );
-            command
-                .Parameters
+            command.Parameters
                 .Add(
                     new SqlParameter
                     {
@@ -99,8 +93,7 @@ namespace System.Activities.DurableInstancing
                         Value = base.InstancePersistenceContext.InstanceView.IsBoundToLock,
                     }
                 );
-            command
-                .Parameters
+            command.Parameters
                 .Add(
                     new SqlParameter
                     {
@@ -109,8 +102,7 @@ namespace System.Activities.DurableInstancing
                         Value = base.Store.InstanceEncodingOption,
                     }
                 );
-            command
-                .Parameters
+            command.Parameters
                 .Add(
                     new SqlParameter
                     {

@@ -168,8 +168,7 @@ namespace System.ServiceModel.Discovery.Configuration
         {
             foreach (ContractTypeNameElement contractTypeNameElement in this.ContractTypeNames)
             {
-                findCriteria
-                    .ContractTypeNames
+                findCriteria.ContractTypeNames
                     .Add(
                         new XmlQualifiedName(
                             contractTypeNameElement.Name,

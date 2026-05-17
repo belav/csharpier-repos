@@ -625,8 +625,7 @@ public class DictionaryModelBinderIntegrationTest
             request => request.QueryString = new QueryString(queryString),
             // Add JQueryQueryStringValueProviderFactory before default factories.
             options =>
-                options
-                    .ValueProviderFactories
+                options.ValueProviderFactories
                     .Insert(0, new JQueryQueryStringValueProviderFactory())
         );
 
@@ -719,8 +718,7 @@ public class DictionaryModelBinderIntegrationTest
             request => request.QueryString = new QueryString(queryString),
             // Add JQueryQueryStringValueProviderFactory before default factories.
             options =>
-                options
-                    .ValueProviderFactories
+                options.ValueProviderFactories
                     .Insert(0, new JQueryQueryStringValueProviderFactory())
         );
 
@@ -1103,8 +1101,7 @@ public class DictionaryModelBinderIntegrationTest
             request => request.QueryString = new QueryString(queryString),
             // Add JQueryQueryStringValueProviderFactory before default factories.
             options =>
-                options
-                    .ValueProviderFactories
+                options.ValueProviderFactories
                     .Insert(0, new JQueryQueryStringValueProviderFactory())
         );
 
@@ -1199,8 +1196,7 @@ public class DictionaryModelBinderIntegrationTest
             request => request.QueryString = new QueryString(queryString),
             // Add JQueryQueryStringValueProviderFactory before default factories.
             options =>
-                options
-                    .ValueProviderFactories
+                options.ValueProviderFactories
                     .Insert(0, new JQueryQueryStringValueProviderFactory())
         );
 

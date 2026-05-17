@@ -94,11 +94,9 @@ public class LoggingTests : IISFunctionalTestBase
     {
         var deploymentParameters = Fixture.GetBaseDeploymentParameters(variant);
 
-        deploymentParameters
-            .WebConfigActionList
+        deploymentParameters.WebConfigActionList
             .Add(WebConfigHelpers.AddOrModifyAspNetCoreSection("stdoutLogEnabled", "true"));
-        deploymentParameters
-            .WebConfigActionList
+        deploymentParameters.WebConfigActionList
             .Add(
                 WebConfigHelpers.AddOrModifyAspNetCoreSection(
                     "stdoutLogFile",
@@ -367,15 +365,12 @@ public class LoggingTests : IISFunctionalTestBase
 
         StopServer();
 
-        var aspnetcorev2Log = TestSink
-            .Writes
+        var aspnetcorev2Log = TestSink.Writes
             .First(w => w.Message.Contains("Description: IIS ASP.NET Core Module V2. Commit:"));
-        var aspnetcoreHandlerLog = TestSink
-            .Writes
+        var aspnetcoreHandlerLog = TestSink.Writes
             .First(w =>
-                w.Message.Contains(
-                    "Description: IIS ASP.NET Core Module V2 Request Handler. Commit:"
-                )
+                w.Message
+                    .Contains("Description: IIS ASP.NET Core Module V2 Request Handler. Commit:")
             );
 
         var processIdPattern = new Regex("Process Id: (\\d+)\\.", RegexOptions.Singleline);

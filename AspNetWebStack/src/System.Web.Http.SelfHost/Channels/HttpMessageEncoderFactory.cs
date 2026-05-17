@@ -100,8 +100,7 @@ namespace System.Web.Http.SelfHost.Channels
                 );
                 if (!String.IsNullOrEmpty(contentType))
                 {
-                    request
-                        .Content
+                    request.Content
                         .Headers
                         .TryAddWithoutValidation(ContentTypeHeaderName, contentType);
                 }
@@ -132,8 +131,7 @@ namespace System.Web.Http.SelfHost.Channels
                 request.Content = new StreamContent(stream);
                 if (!String.IsNullOrEmpty(contentType))
                 {
-                    request
-                        .Content
+                    request.Content
                         .Headers
                         .TryAddWithoutValidation(ContentTypeHeaderName, contentType);
                 }

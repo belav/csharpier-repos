@@ -26,8 +26,7 @@ namespace System.Web.Http.ModelBinding.Binders
         {
             ModelBindingHelper.ValidateBindingContext(bindingContext);
 
-            ValueProviderResult valueProviderResult = bindingContext
-                .ValueProvider
+            ValueProviderResult valueProviderResult = bindingContext.ValueProvider
                 .GetValue(bindingContext.ModelName);
             if (valueProviderResult == null)
             {
@@ -55,8 +54,7 @@ namespace System.Web.Http.ModelBinding.Binders
                     );
                     if (errorString != null)
                     {
-                        bindingContext
-                            .ModelState
+                        bindingContext.ModelState
                             .AddModelError(bindingContext.ModelName, errorString);
                     }
                 }

@@ -415,8 +415,7 @@ namespace System.Web.Services.Description
                 case @"server":
                     return System.Web.Services.Description.ServiceDescriptionImportStyle.@Server;
                 case @"serverInterface":
-                    return System
-                        .Web
+                    return System.Web
                         .Services
                         .Description
                         .ServiceDescriptionImportStyle
@@ -599,8 +598,7 @@ namespace System.Web.Services.Description
                     )
                     {
                         {
-                            o.@Verbose = System
-                                .Xml
+                            o.@Verbose = System.Xml
                                 .XmlConvert
                                 .ToBoolean(Reader.ReadElementString());
                         }

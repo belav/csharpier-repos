@@ -23,8 +23,7 @@ public class ControllerModelTest
         controller.Actions.Add(action);
         action.Controller = controller;
 
-        controller
-            .ControllerProperties
+        controller.ControllerProperties
             .Add(
                 new PropertyModel(
                     controller.ControllerType.AsType().GetProperty("TestProperty"),
@@ -83,8 +82,7 @@ public class ControllerModelTest
         controller.Filters.Add(new MyFilterAttribute());
         controller.RouteValues.Add("key", "value");
         controller.Properties.Add(new KeyValuePair<object, object>("test key", "test value"));
-        controller
-            .ControllerProperties
+        controller.ControllerProperties
             .Add(
                 new PropertyModel(
                     typeof(TestController).GetProperty("TestProperty"),

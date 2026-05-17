@@ -33,8 +33,7 @@ namespace System.ServiceModel.Description
                     && element.SchemaTypeName == existingElement.SchemaTypeName
                 )
                     return;
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(
@@ -92,8 +91,7 @@ namespace System.ServiceModel.Description
                 if (existingType == type)
                     return;
 
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(

@@ -210,8 +210,7 @@ namespace System.Net
             HttpWebRequest httpWebRequest = request as HttpWebRequest;
             if (httpWebRequest != null && httpWebRequest.CurrentAuthenticationState.Module != null)
             {
-                response = httpWebRequest
-                    .CurrentAuthenticationState
+                response = httpWebRequest.CurrentAuthenticationState
                     .Module
                     .Authenticate(challenge, request, credentials);
             }
@@ -324,8 +323,7 @@ namespace System.Net
                 // to DEBUG as well.
 
                 // If the authentication module does CBT, we require that it also caches channel bindings.
-                System
-                    .Diagnostics
+                System.Diagnostics
                     .Debug
                     .Assert(
                         !(binding == null && ModuleRequiresChannelBinding(authenticationModule))

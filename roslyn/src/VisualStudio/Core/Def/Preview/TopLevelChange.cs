@@ -100,8 +100,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Preview
                 {
                     foreach (var linkedDocumentId in oldDocument.GetLinkedDocumentIds())
                     {
-                        var oldLinkedDocument = oldDocument
-                            .Project
+                        var oldLinkedDocument = oldDocument.Project
                             .Solution
                             .GetDocument(linkedDocumentId);
 

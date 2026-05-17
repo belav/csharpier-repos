@@ -192,8 +192,7 @@ namespace System.Windows.Forms
             Rectangle text_rectangle;
             Rectangle image_rectangle;
 
-            ThemeEngine
-                .Current
+            ThemeEngine.Current
                 .CalculateButtonTextAndImageLayout(
                     pevent.Graphics,
                     this,
@@ -203,8 +202,7 @@ namespace System.Windows.Forms
 
             // Draw our button
             if (this.FlatStyle == FlatStyle.Standard)
-                ThemeEngine
-                    .Current
+                ThemeEngine.Current
                     .DrawButton(
                         pevent.Graphics,
                         this,
@@ -213,8 +211,7 @@ namespace System.Windows.Forms
                         pevent.ClipRectangle
                     );
             else if (this.FlatStyle == FlatStyle.Flat)
-                ThemeEngine
-                    .Current
+                ThemeEngine.Current
                     .DrawFlatButton(
                         pevent.Graphics,
                         this,
@@ -223,8 +220,7 @@ namespace System.Windows.Forms
                         pevent.ClipRectangle
                     );
             else if (this.FlatStyle == FlatStyle.Popup)
-                ThemeEngine
-                    .Current
+                ThemeEngine.Current
                     .DrawPopupButton(
                         pevent.Graphics,
                         this,

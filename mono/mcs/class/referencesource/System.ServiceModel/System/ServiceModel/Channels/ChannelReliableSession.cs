@@ -159,11 +159,12 @@ namespace System.ServiceModel.Channels
                     if (this.terminatingFault != null)
                     {
                         this.AddFinalRanges();
-                        this.faultHelper.SendFaultAsync(
-                            this.binder,
-                            this.replyFaultContext,
-                            this.terminatingFault
-                        );
+                        this.faultHelper
+                            .SendFaultAsync(
+                                this.binder,
+                                this.replyFaultContext,
+                                this.terminatingFault
+                            );
                         return;
                     }
                 }
@@ -340,11 +341,8 @@ namespace System.ServiceModel.Channels
                 )
                 {
                     this.AddFinalRanges();
-                    this.faultHelper.SendFaultAsync(
-                        this.binder,
-                        this.replyFaultContext,
-                        this.terminatingFault
-                    );
+                    this.faultHelper
+                        .SendFaultAsync(this.binder, this.replyFaultContext, this.terminatingFault);
                     return;
                 }
             }
@@ -753,8 +751,8 @@ namespace System.ServiceModel.Channels
             }
 
             MessageVersion messageVersion = this.Settings.MessageVersion;
-            ReliableMessagingVersion reliableMessagingVersion =
-                this.Settings.ReliableMessagingVersion;
+            ReliableMessagingVersion reliableMessagingVersion = this.Settings
+                .ReliableMessagingVersion;
             this.requestor.MessageVersion = messageVersion;
             this.requestor.Binder = this.binder;
             this.requestor.IsCreateSequence = true;
@@ -976,8 +974,7 @@ namespace System.ServiceModel.Channels
             {
                 if (response.IsFault)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             WsrmUtilities.CreateCSFaultException(
                                 this.Settings.MessageVersion,
@@ -999,8 +996,7 @@ namespace System.ServiceModel.Channels
                     );
 
                     if (info.ParsingException != null)
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new ProtocolException(
                                     SR.GetString(SR.UnparsableCSResponse),
@@ -1086,8 +1082,7 @@ namespace System.ServiceModel.Channels
                     }
 
                     if (exceptionReason != null)
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(new ProtocolException(exceptionReason));
                 }
             }

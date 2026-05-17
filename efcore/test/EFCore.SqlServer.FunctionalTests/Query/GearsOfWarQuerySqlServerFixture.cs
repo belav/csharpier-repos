@@ -28,8 +28,7 @@ public class GearsOfWarQuerySqlServerFixture : GearsOfWarQueryRelationalFixture
         base.Seed(context);
 
         // Set up full-text search and add some full-text binary data
-        context
-            .Database
+        context.Database
             .ExecuteSqlRaw(
                 @"
 UPDATE [Missions]

@@ -47,8 +47,7 @@ namespace System.Web.Query.Dynamic
                 predicate,
                 values
             );
-            return source
-                .Provider
+            return source.Provider
                 .CreateQuery(
                     Expression.Call(
                         typeof(Queryable),
@@ -76,8 +75,7 @@ namespace System.Web.Query.Dynamic
                 selector,
                 values
             );
-            return source
-                .Provider
+            return source.Provider
                 .CreateQuery(
                     Expression.Call(
                         typeof(Queryable),
@@ -136,8 +134,7 @@ namespace System.Web.Query.Dynamic
         {
             if (source == null)
                 throw new ArgumentNullException("source");
-            return source
-                .Provider
+            return source.Provider
                 .CreateQuery(
                     Expression.Call(
                         typeof(Queryable),
@@ -153,8 +150,7 @@ namespace System.Web.Query.Dynamic
         {
             if (source == null)
                 throw new ArgumentNullException("source");
-            return source
-                .Provider
+            return source.Provider
                 .CreateQuery(
                     Expression.Call(
                         typeof(Queryable),
@@ -191,8 +187,7 @@ namespace System.Web.Query.Dynamic
                 elementSelector,
                 values
             );
-            return source
-                .Provider
+            return source.Provider
                 .CreateQuery(
                     Expression.Call(
                         typeof(Queryable),
@@ -215,8 +210,7 @@ namespace System.Web.Query.Dynamic
             if (source == null)
                 throw new ArgumentNullException("source");
             return (bool)
-                source
-                    .Provider
+                source.Provider
                     .Execute(
                         Expression.Call(
                             typeof(Queryable),
@@ -232,8 +226,7 @@ namespace System.Web.Query.Dynamic
             if (source == null)
                 throw new ArgumentNullException("source");
             return (int)
-                source
-                    .Provider
+                source.Provider
                     .Execute(
                         Expression.Call(
                             typeof(Queryable),
@@ -457,8 +450,7 @@ namespace System.Web.Query.Dynamic
             );
             assemblyAttributes.Add(securityRulesAttribute);
             AssemblyName name = new AssemblyName("DynamicClasses");
-            AssemblyBuilder assembly = AppDomain
-                .CurrentDomain
+            AssemblyBuilder assembly = AppDomain.CurrentDomain
                 .DefineDynamicAssembly(name, AssemblyBuilderAccess.Run, assemblyAttributes);
 #if ENABLE_LINQ_PARTIAL_TRUST
             new ReflectionPermission(PermissionState.Unrestricted).Assert();
@@ -518,11 +510,12 @@ namespace System.Web.Query.Dynamic
 #endif
             try
             {
-                TypeBuilder tb = this.module.DefineType(
-                    typeName,
-                    TypeAttributes.Class | TypeAttributes.Public,
-                    typeof(DynamicClass)
-                );
+                TypeBuilder tb = this.module
+                    .DefineType(
+                        typeName,
+                        TypeAttributes.Class | TypeAttributes.Public,
+                        typeof(DynamicClass)
+                    );
                 FieldInfo[] fields = GenerateProperties(tb, properties);
                 GenerateEquals(tb, fields);
                 GenerateGetHashCode(tb, fields);

@@ -131,11 +131,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 if (
                     slotAllocatorOpt == null
                     || !slotAllocatorOpt.TryGetPreviousAwaiterSlotIndex(
-                        F.ModuleBuilderOpt.Translate(
-                            awaiterType,
-                            F.Syntax,
-                            F.Diagnostics.DiagnosticBag
-                        ),
+                        F.ModuleBuilderOpt
+                            .Translate(awaiterType, F.Syntax, F.Diagnostics.DiagnosticBag),
                         F.Diagnostics.DiagnosticBag,
                         out slotIndex
                     )
@@ -730,8 +727,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                         F.ExpressionStatement(
                             F.Call(
                                 F.Field(F.This(), _asyncMethodBuilderField),
-                                _asyncMethodBuilderMemberCollection
-                                    .AwaitOnCompleted
+                                _asyncMethodBuilderMemberCollection.AwaitOnCompleted
                                     .Construct(notifyCompletionTemp.Type, F.This().Type),
                                 F.Local(notifyCompletionTemp),
                                 F.This(thisTemp)
@@ -746,8 +742,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                         F.ExpressionStatement(
                             F.Call(
                                 F.Field(F.This(), _asyncMethodBuilderField),
-                                _asyncMethodBuilderMemberCollection
-                                    .AwaitUnsafeOnCompleted
+                                _asyncMethodBuilderMemberCollection.AwaitUnsafeOnCompleted
                                     .Construct(criticalNotifyCompletedTemp.Type, F.This().Type),
                                 F.Local(criticalNotifyCompletedTemp),
                                 F.This(thisTemp)
@@ -789,9 +784,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                 .Conversions
                 .ClassifyImplicitConversionFromType(
                     loweredAwaiterType,
-                    F.Compilation.GetWellKnownType(
-                        WellKnownType.System_Runtime_CompilerServices_ICriticalNotifyCompletion
-                    ),
+                    F.Compilation
+                        .GetWellKnownType(
+                            WellKnownType.System_Runtime_CompilerServices_ICriticalNotifyCompletion
+                        ),
                     ref discardedUseSiteInfo
                 )
                 .IsImplicit;

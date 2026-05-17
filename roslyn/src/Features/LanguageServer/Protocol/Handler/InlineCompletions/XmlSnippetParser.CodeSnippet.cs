@@ -67,8 +67,7 @@ internal partial class XmlSnippetParser
             var snippets = ReadSnippets(document);
             Contract.ThrowIfNull(snippets, $"Did not find any code snippets in {filePath}");
 
-            var matchingSnippet = snippets
-                .Value
+            var matchingSnippet = snippets.Value
                 .Single(s =>
                     string.Equals(s.Title, snippetTitle, StringComparison.OrdinalIgnoreCase)
                 );
@@ -82,8 +81,7 @@ internal partial class XmlSnippetParser
                 return null;
 
             if (
-                codeSnippetsElement
-                    .Name
+                codeSnippetsElement.Name
                     .LocalName
                     .Equals("CodeSnippets", StringComparison.OrdinalIgnoreCase)
             )
@@ -96,8 +94,7 @@ internal partial class XmlSnippetParser
                     .ToImmutableArray();
             }
             else if (
-                codeSnippetsElement
-                    .Name
+                codeSnippetsElement.Name
                     .LocalName
                     .Equals("CodeSnippet", StringComparison.OrdinalIgnoreCase)
             )

@@ -155,7 +155,8 @@ namespace System.ServiceModel.Security.Tokens
         {
             get
             {
-                return this.bootstrapSecurityBindingElement.GetIndividualProperty<ISecurityCapabilities>();
+                return this.bootstrapSecurityBindingElement
+                    .GetIndividualProperty<ISecurityCapabilities>();
             }
         }
 

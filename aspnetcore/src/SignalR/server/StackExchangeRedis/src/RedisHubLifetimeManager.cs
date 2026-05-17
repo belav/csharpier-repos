@@ -664,8 +664,7 @@ public class RedisHubLifetimeManager<THub> : HubLifetimeManager<THub>, IDisposab
                             {
                                 try
                                 {
-                                    connection
-                                        .Protocol
+                                    connection.Protocol
                                         .WriteMessage(completionMessage, memoryBufferWriter);
                                     message = RedisProtocol.WriteCompletionMessage(
                                         memoryBufferWriter,
@@ -691,8 +690,7 @@ public class RedisHubLifetimeManager<THub> : HubLifetimeManager<THub>, IDisposab
                 );
 
                 // TODO: this isn't great
-                tokenRegistration = connection
-                    .ConnectionAborted
+                tokenRegistration = connection.ConnectionAborted
                     .UnsafeRegister(
                         _ =>
                         {

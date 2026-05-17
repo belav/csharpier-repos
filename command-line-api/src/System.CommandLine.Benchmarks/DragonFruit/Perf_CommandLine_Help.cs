@@ -39,8 +39,7 @@ namespace System.CommandLine.Benchmarks.DragonFruit
 
         [Benchmark(Description = "--help")]
         public Task SearchForStartingPointWhenGivenEntryPointClass_Help() =>
-            System
-                .CommandLine
+            System.CommandLine
                 .DragonFruit
                 .CommandLine
                 .ExecuteAssemblyAsync(

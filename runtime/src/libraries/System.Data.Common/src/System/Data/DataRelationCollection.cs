@@ -29,8 +29,7 @@ namespace System.Data
         private CollectionChangeEventHandler? _onCollectionChangingDelegate;
 
         private static int s_objectTypeCount; // Bid counter
-        private readonly int _objectID = System
-            .Threading
+        private readonly int _objectID = System.Threading
             .Interlocked
             .Increment(ref s_objectTypeCount);
 
@@ -51,8 +50,7 @@ namespace System.Data
         /// </summary>
         public void Add(DataRelation relation)
         {
-            long logScopeId = DataCommonEventSource
-                .Log
+            long logScopeId = DataCommonEventSource.Log
                 .EnterScope(
                     "<ds.DataRelationCollection.Add|API> {0}, relation={1}",
                     ObjectID,
@@ -215,8 +213,7 @@ namespace System.Data
         /// </summary>
         protected virtual void AddCore(DataRelation relation)
         {
-            DataCommonEventSource
-                .Log
+            DataCommonEventSource.Log
                 .Trace(
                     "<ds.DataRelationCollection.AddCore|INFO> {0}, relation={1}",
                     ObjectID,
@@ -257,15 +254,13 @@ namespace System.Data
         {
             add
             {
-                DataCommonEventSource
-                    .Log
+                DataCommonEventSource.Log
                     .Trace("<ds.DataRelationCollection.add_CollectionChanged|API> {0}", ObjectID);
                 _onCollectionChangedDelegate += value;
             }
             remove
             {
-                DataCommonEventSource
-                    .Log
+                DataCommonEventSource.Log
                     .Trace(
                         "<ds.DataRelationCollection.remove_CollectionChanged|API> {0}",
                         ObjectID
@@ -278,15 +273,13 @@ namespace System.Data
         {
             add
             {
-                DataCommonEventSource
-                    .Log
+                DataCommonEventSource.Log
                     .Trace("<ds.DataRelationCollection.add_CollectionChanging|INFO> {0}", ObjectID);
                 _onCollectionChangingDelegate += value;
             }
             remove
             {
-                DataCommonEventSource
-                    .Log
+                DataCommonEventSource.Log
                     .Trace(
                         "<ds.DataRelationCollection.remove_CollectionChanging|INFO> {0}",
                         ObjectID
@@ -310,8 +303,7 @@ namespace System.Data
         /// </summary>
         public virtual void Clear()
         {
-            long logScopeId = DataCommonEventSource
-                .Log
+            long logScopeId = DataCommonEventSource.Log
                 .EnterScope("<ds.DataRelationCollection.Clear|API> {0}", ObjectID);
             try
             {
@@ -437,8 +429,7 @@ namespace System.Data
         {
             if (_onCollectionChangedDelegate != null)
             {
-                DataCommonEventSource
-                    .Log
+                DataCommonEventSource.Log
                     .Trace("<ds.DataRelationCollection.OnCollectionChanged|INFO> {0}", ObjectID);
                 _onCollectionChangedDelegate(this, ccevent);
             }
@@ -448,8 +439,7 @@ namespace System.Data
         {
             if (_onCollectionChangingDelegate != null)
             {
-                DataCommonEventSource
-                    .Log
+                DataCommonEventSource.Log
                     .Trace("<ds.DataRelationCollection.OnCollectionChanging|INFO> {0}", ObjectID);
                 _onCollectionChangingDelegate(this, ccevent);
             }
@@ -462,8 +452,7 @@ namespace System.Data
         /// </summary>
         internal void RegisterName(string name)
         {
-            DataCommonEventSource
-                .Log
+            DataCommonEventSource.Log
                 .Trace(
                     "<ds.DataRelationCollection.RegisterName|INFO> {0}, name='{1}'",
                     ObjectID,
@@ -500,8 +489,7 @@ namespace System.Data
         /// </summary>
         public void Remove(DataRelation relation)
         {
-            DataCommonEventSource
-                .Log
+            DataCommonEventSource.Log
                 .Trace(
                     "<ds.DataRelationCollection.Remove|API> {0}, relation={1}",
                     ObjectID,
@@ -567,8 +555,7 @@ namespace System.Data
         /// </summary>
         protected virtual void RemoveCore(DataRelation relation)
         {
-            DataCommonEventSource
-                .Log
+            DataCommonEventSource.Log
                 .Trace(
                     "<ds.DataRelationCollection.RemoveCore|INFO> {0}, relation={1}",
                     ObjectID,
@@ -599,8 +586,7 @@ namespace System.Data
         /// </summary>
         internal void UnregisterName(string name)
         {
-            DataCommonEventSource
-                .Log
+            DataCommonEventSource.Log
                 .Trace(
                     "<ds.DataRelationCollection.UnregisterName|INFO> {0}, name='{1}'",
                     ObjectID,
@@ -887,8 +873,7 @@ namespace System.Data
                     if (childKey.ColumnsEqual(((DataRelation)_relations[i]!).ChildKey))
                     {
                         if (
-                            relation
-                                .ParentKey
+                            relation.ParentKey
                                 .ColumnsEqual(((DataRelation)_relations[i]!).ParentKey)
                         )
                             throw ExceptionBuilder.RelationAlreadyExists();
@@ -906,8 +891,7 @@ namespace System.Data
                     relation.ChildTable.CacheNestedParent();
                 }
 
-                ForeignKeyConstraint? foreignKey = relation
-                    .ChildTable
+                ForeignKeyConstraint? foreignKey = relation.ChildTable
                     .Constraints
                     .FindForeignKeyConstraint(
                         relation.ParentColumnsReference,
@@ -917,8 +901,7 @@ namespace System.Data
                 {
                     if (foreignKey == null)
                     {
-                        relation
-                            .ChildTable
+                        relation.ChildTable
                             .Constraints
                             .Add(
                                 foreignKey = new ForeignKeyConstraint(
@@ -938,8 +921,7 @@ namespace System.Data
                         }
                     }
                 }
-                UniqueConstraint? key = relation
-                    .ParentTable
+                UniqueConstraint? key = relation.ParentTable
                     .Constraints
                     .FindKeyConstraint(relation.ParentColumnsReference);
                 relation.SetParentKeyConstraint(key);

@@ -55,8 +55,7 @@ public class CustomPolicyProviderTests
         var signIn = await SignIn(
             Client,
             "Dude",
-            DateTime
-                .Now
+            DateTime.Now
                 .Subtract(TimeSpan.FromDays(365 * 20))
                 .ToString(
                     DateTimeFormatInfo.InvariantInfo.ShortDatePattern,
@@ -81,8 +80,7 @@ public class CustomPolicyProviderTests
         var signIn = await SignIn(
             Client,
             "Dude",
-            DateTime
-                .Now
+            DateTime.Now
                 .Subtract(TimeSpan.FromDays(365 * 5))
                 .ToString(
                     DateTimeFormatInfo.InvariantInfo.ShortDatePattern,
@@ -106,8 +104,7 @@ public class CustomPolicyProviderTests
         var signIn = await SignIn(
             Client,
             "Dude",
-            DateTime
-                .Now
+            DateTime.Now
                 .Subtract(TimeSpan.FromDays(365 * 55))
                 .ToString(
                     DateTimeFormatInfo.InvariantInfo.ShortDatePattern,
@@ -132,8 +129,7 @@ public class CustomPolicyProviderTests
         var signIn = await SignIn(
             Client,
             "Dude",
-            DateTime
-                .Now
+            DateTime.Now
                 .Subtract(TimeSpan.FromDays(365 * 20))
                 .ToString(
                     DateTimeFormatInfo.InvariantInfo.ShortDatePattern,

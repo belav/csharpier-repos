@@ -51,8 +51,7 @@ namespace Microsoft.CodeAnalysis.Scripting
 
             return new ScriptMetadataResolver(
                 _resolver.WithRelativePathResolver(
-                    _resolver
-                        .PathResolver
+                    _resolver.PathResolver
                         .WithSearchPaths(ToImmutableArrayChecked(searchPaths, nameof(searchPaths)))
                 )
             );

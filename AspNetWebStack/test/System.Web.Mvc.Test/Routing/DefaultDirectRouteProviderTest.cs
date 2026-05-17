@@ -158,8 +158,7 @@ namespace System.Web.Routing
             );
             Route route = new Route(url: null, routeHandler: null);
             route.DataTokens = new RouteValueDictionary();
-            route
-                .DataTokens
+            route.DataTokens
                 .Add(RouteDataTokenKeys.Actions, new ActionDescriptor[] { actionDescriptor });
             route.RouteHandler = new Mock<IRouteHandler>(MockBehavior.Strict).Object;
             ActionDescriptor[] originalActions = route.GetTargetActionDescriptors();

@@ -81,8 +81,7 @@ namespace System.Web.Http
             ReflectedHttpActionDescriptor actionDescriptor = new ReflectedHttpActionDescriptor();
             Action action = new Action(() => { });
 
-            Assert
-                .Reflection
+            Assert.Reflection
                 .Property<ReflectedHttpActionDescriptor, MethodInfo>(
                     instance: actionDescriptor,
                     propertyGetter: ad => ad.MethodInfo,
@@ -98,8 +97,7 @@ namespace System.Web.Http
             ReflectedHttpActionDescriptor actionDescriptor = new ReflectedHttpActionDescriptor();
             HttpControllerDescriptor controllerDescriptor = new HttpControllerDescriptor();
 
-            Assert
-                .Reflection
+            Assert.Reflection
                 .Property<ReflectedHttpActionDescriptor, HttpControllerDescriptor>(
                     instance: actionDescriptor,
                     propertyGetter: ad => ad.ControllerDescriptor,
@@ -115,8 +113,7 @@ namespace System.Web.Http
             ReflectedHttpActionDescriptor actionDescriptor = new ReflectedHttpActionDescriptor();
             HttpConfiguration config = new HttpConfiguration();
 
-            Assert
-                .Reflection
+            Assert.Reflection
                 .Property<ReflectedHttpActionDescriptor, HttpConfiguration>(
                     instance: actionDescriptor,
                     propertyGetter: ad => ad.Configuration,

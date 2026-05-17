@@ -71,8 +71,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
         {
             Schema = new GraphSchema("Roslyn");
 
-            SymbolKind = Schema
-                .Properties
+            SymbolKind = Schema.Properties
                 .AddNewProperty(
                     id: "SymbolKind",
                     dataType: typeof(SymbolKind),
@@ -82,8 +81,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                         )
                 );
 
-            TypeKind = Schema
-                .Properties
+            TypeKind = Schema.Properties
                 .AddNewProperty(
                     id: "TypeKind",
                     dataType: typeof(TypeKind),
@@ -93,8 +91,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                         )
                 );
 
-            MethodKind = Schema
-                .Properties
+            MethodKind = Schema.Properties
                 .AddNewProperty(
                     id: "MethodKind",
                     dataType: typeof(MethodKind),
@@ -104,8 +101,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                         )
                 );
 
-            DeclaredAccessibility = Schema
-                .Properties
+            DeclaredAccessibility = Schema.Properties
                 .AddNewProperty(
                     id: "DeclaredAccessibility",
                     dataType: typeof(Accessibility),
@@ -115,8 +111,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                         )
                 );
 
-            SymbolModifiers = Schema
-                .Properties
+            SymbolModifiers = Schema.Properties
                 .AddNewProperty(
                     id: "SymbolModifiers",
                     dataType: typeof(DeclarationModifiers),
@@ -126,8 +121,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                         )
                 );
 
-            ExplicitInterfaceImplementations = Schema
-                .Properties
+            ExplicitInterfaceImplementations = Schema.Properties
                 .AddNewProperty(
                     id: "ExplicitInterfaceImplementations",
                     dataType: typeof(IList<SymbolKey>),
@@ -137,8 +131,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                         )
                 );
 
-            SymbolId = Schema
-                .Properties
+            SymbolId = Schema.Properties
                 .AddNewProperty(
                     id: "SymbolId",
                     dataType: typeof(SymbolKey?),
@@ -148,8 +141,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                         )
                 );
 
-            ContextProjectId = Schema
-                .Properties
+            ContextProjectId = Schema.Properties
                 .AddNewProperty(
                     id: "ContextProjectId",
                     dataType: typeof(ProjectId),
@@ -159,8 +151,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                         )
                 );
 
-            ContextDocumentId = Schema
-                .Properties
+            ContextDocumentId = Schema.Properties
                 .AddNewProperty(
                     id: "ContextDocumentId",
                     dataType: typeof(DocumentId),
@@ -170,8 +161,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                         )
                 );
 
-            Label = Schema
-                .Properties
+            Label = Schema.Properties
                 .AddNewProperty(
                     id: "Label",
                     dataType: typeof(string),
@@ -181,8 +171,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                         )
                 );
 
-            FormattedLabelWithoutContainingSymbol = Schema
-                .Properties
+            FormattedLabelWithoutContainingSymbol = Schema.Properties
                 .AddNewProperty(
                     id: "FormattedLabelWithoutContainingSymbol",
                     dataType: typeof(string),
@@ -192,8 +181,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                         )
                 );
 
-            FormattedLabelWithContainingSymbol = Schema
-                .Properties
+            FormattedLabelWithContainingSymbol = Schema.Properties
                 .AddNewProperty(
                     id: "FormattedLabelWithContainingSymbol",
                     dataType: typeof(string),
@@ -203,8 +191,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                         )
                 );
 
-            Description = Schema
-                .Properties
+            Description = Schema.Properties
                 .AddNewProperty(
                     id: "Description",
                     dataType: typeof(string),
@@ -214,8 +201,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                         )
                 );
 
-            DescriptionWithContainingSymbol = Schema
-                .Properties
+            DescriptionWithContainingSymbol = Schema.Properties
                 .AddNewProperty(
                     id: "DescriptionWithContainingSymbol",
                     dataType: typeof(string),

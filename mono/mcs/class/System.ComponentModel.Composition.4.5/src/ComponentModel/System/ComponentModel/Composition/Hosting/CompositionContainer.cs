@@ -584,8 +584,7 @@ namespace System.ComponentModel.Composition.Hosting
 
             object source;
             if (
-                !definition
-                    .Metadata
+                !definition.Metadata
                     .TryGetValue(CompositionConstants.ImportSourceMetadataName, out source)
             )
             {
@@ -600,20 +599,22 @@ namespace System.ComponentModel.Composition.Hosting
                     break;
                 case ImportSource.Local:
                     Assumes.NotNull(this._localExportProvider);
-                    this._localExportProvider.TryGetExports(
-                        definition.RemoveImportSource(),
-                        atomicComposition,
-                        out exports
-                    );
-                    break;
-                case ImportSource.NonLocal:
-                    if (this._ancestorExportProvider != null)
-                    {
-                        this._ancestorExportProvider.TryGetExports(
+                    this._localExportProvider
+                        .TryGetExports(
                             definition.RemoveImportSource(),
                             atomicComposition,
                             out exports
                         );
+                    break;
+                case ImportSource.NonLocal:
+                    if (this._ancestorExportProvider != null)
+                    {
+                        this._ancestorExportProvider
+                            .TryGetExports(
+                                definition.RemoveImportSource(),
+                                atomicComposition,
+                                out exports
+                            );
                     }
                     break;
             }

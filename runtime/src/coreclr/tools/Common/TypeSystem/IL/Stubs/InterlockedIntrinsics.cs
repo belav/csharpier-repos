@@ -31,8 +31,7 @@ namespace Internal.IL.Stubs
 #endif // READYTORUN
                 {
                     TypeDesc objectType = method.Context.GetWellKnownType(WellKnownType.Object);
-                    MethodDesc compareExchangeObject = method
-                        .OwningType
+                    MethodDesc compareExchangeObject = method.OwningType
                         .GetKnownMethod(
                             "CompareExchange",
                             new MethodSignature(

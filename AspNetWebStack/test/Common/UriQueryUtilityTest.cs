@@ -20,8 +20,7 @@ namespace System.Net.Http
         [Fact]
         public void TypeIsCorrect()
         {
-            Assert
-                .Type
+            Assert.Type
                 .HasProperties(
                     typeof(WebUtility),
                     TypeAssert.TypeProperties.IsStatic

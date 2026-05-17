@@ -306,12 +306,13 @@ namespace System.Runtime.CompilerServices.Tests
             var tasks = Enumerable
                 .Range(0, nTasks)
                 .Select(i =>
-                    Task.Factory.StartNew(
-                        () => AddAndUpdateRules(run),
-                        cancellationToken: default,
-                        creationOptions: default,
-                        scheduler: TaskScheduler.Default
-                    )
+                    Task.Factory
+                        .StartNew(
+                            () => AddAndUpdateRules(run),
+                            cancellationToken: default,
+                            creationOptions: default,
+                            scheduler: TaskScheduler.Default
+                        )
                 )
                 .ToArray();
             Task.WaitAll(tasks);

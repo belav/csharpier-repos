@@ -31,8 +31,7 @@ public class ClientValidatorCache
         if (
             metadata.MetadataKind == ModelMetadataKind.Property
             && metadata.ContainerMetadata?.BoundConstructor != null
-            && metadata
-                .ContainerMetadata
+            && metadata.ContainerMetadata
                 .BoundConstructorPropertyMapping
                 .TryGetValue(metadata, out var parameter)
         )

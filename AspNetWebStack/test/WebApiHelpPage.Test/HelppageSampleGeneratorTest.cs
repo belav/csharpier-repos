@@ -70,8 +70,7 @@ namespace WebApiHelpPageWebHost.UnitTest
         public void GetSampleRequests_FromSampleObjects_AndSettingActualRequestTypes()
         {
             HelpPageSampleGenerator sampleGenerator = new HelpPageSampleGenerator();
-            sampleGenerator
-                .ActualHttpMessageTypes
+            sampleGenerator.ActualHttpMessageTypes
                 .Add(
                     new HelpPageSampleKey(
                         SampleDirection.Request,
@@ -103,8 +102,7 @@ namespace WebApiHelpPageWebHost.UnitTest
         {
             HelpPageSampleGenerator sampleGenerator = new HelpPageSampleGenerator();
             var sample = new TextSample("test");
-            sampleGenerator
-                .ActionSamples
+            sampleGenerator.ActionSamples
                 .Add(
                     new HelpPageSampleKey(
                         new MediaTypeHeaderValue("application/json"),
@@ -134,8 +132,7 @@ namespace WebApiHelpPageWebHost.UnitTest
         {
             HelpPageSampleGenerator sampleGenerator = new HelpPageSampleGenerator();
             var sample = new TextSample("test");
-            sampleGenerator
-                .ActionSamples
+            sampleGenerator.ActionSamples
                 .Add(
                     new HelpPageSampleKey(
                         new MediaTypeHeaderValue("application/xml"),
@@ -168,8 +165,7 @@ namespace WebApiHelpPageWebHost.UnitTest
         {
             HelpPageSampleGenerator sampleGenerator = new HelpPageSampleGenerator();
             var sample = new TextSample("test");
-            sampleGenerator
-                .ActionSamples
+            sampleGenerator.ActionSamples
                 .Add(
                     new HelpPageSampleKey(
                         new MediaTypeHeaderValue("plain/text"),
@@ -238,8 +234,7 @@ namespace WebApiHelpPageWebHost.UnitTest
         public void GetSampleResponses_FromSampleObjects_AndSettingActualResponseTypes()
         {
             HelpPageSampleGenerator sampleGenerator = new HelpPageSampleGenerator();
-            sampleGenerator
-                .ActualHttpMessageTypes
+            sampleGenerator.ActualHttpMessageTypes
                 .Add(
                     new HelpPageSampleKey(
                         SampleDirection.Response,
@@ -271,8 +266,7 @@ namespace WebApiHelpPageWebHost.UnitTest
         {
             HelpPageSampleGenerator sampleGenerator = new HelpPageSampleGenerator();
             var sample = new TextSample("test");
-            sampleGenerator
-                .ActionSamples
+            sampleGenerator.ActionSamples
                 .Add(
                     new HelpPageSampleKey(
                         new MediaTypeHeaderValue("application/json"),
@@ -302,8 +296,7 @@ namespace WebApiHelpPageWebHost.UnitTest
         {
             HelpPageSampleGenerator sampleGenerator = new HelpPageSampleGenerator();
             var sample = new TextSample("test");
-            sampleGenerator
-                .ActionSamples
+            sampleGenerator.ActionSamples
                 .Add(
                     new HelpPageSampleKey(
                         new MediaTypeHeaderValue("application/xml"),
@@ -336,8 +329,7 @@ namespace WebApiHelpPageWebHost.UnitTest
         {
             HelpPageSampleGenerator sampleGenerator = new HelpPageSampleGenerator();
             var sample = new TextSample("test");
-            sampleGenerator
-                .ActionSamples
+            sampleGenerator.ActionSamples
                 .Add(
                     new HelpPageSampleKey(
                         new MediaTypeHeaderValue("plain/text"),

@@ -37,14 +37,12 @@ namespace System.Numerics.Tests
         public static void RunMultiply_TwoLargeBigIntegers_Threshold()
         {
             // Again, with lower threshold
-            BigIntTools
-                .Utils
+            BigIntTools.Utils
                 .RunWithFakeThreshold(
                     "SquareThreshold",
                     8,
                     () =>
-                        BigIntTools
-                            .Utils
+                        BigIntTools.Utils
                             .RunWithFakeThreshold(
                                 "MultiplyThreshold",
                                 8,
@@ -53,20 +51,17 @@ namespace System.Numerics.Tests
                 );
 
             // Again, with lower threshold
-            BigIntTools
-                .Utils
+            BigIntTools.Utils
                 .RunWithFakeThreshold(
                     "SquareThreshold",
                     8,
                     () =>
-                        BigIntTools
-                            .Utils
+                        BigIntTools.Utils
                             .RunWithFakeThreshold(
                                 "MultiplyThreshold",
                                 8,
                                 () =>
-                                    BigIntTools
-                                        .Utils
+                                    BigIntTools.Utils
                                         .RunWithFakeThreshold(
                                             "StackAllocThreshold",
                                             8,

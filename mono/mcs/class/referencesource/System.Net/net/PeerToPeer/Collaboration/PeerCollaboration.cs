@@ -47,8 +47,7 @@ namespace System.Net.PeerToPeer.Collaboration
 
                     if (errorCode != 0)
                     {
-                        Logging
-                            .P2PTraceSource
+                        Logging.P2PTraceSource
                             .TraceEvent(
                                 TraceEventType.Error,
                                 0,
@@ -62,8 +61,7 @@ namespace System.Net.PeerToPeer.Collaboration
                     PEER_PRESENCE_INFO ppi = (PEER_PRESENCE_INFO)
                         Marshal.PtrToStructure(ptrPeerPresenceInfo, typeof(PEER_PRESENCE_INFO));
 
-                    Logging
-                        .P2PTraceSource
+                    Logging.P2PTraceSource
                         .TraceEvent(
                             TraceEventType.Information,
                             0,
@@ -78,8 +76,7 @@ namespace System.Net.PeerToPeer.Collaboration
                 }
                 catch (Exception e)
                 {
-                    Logging
-                        .P2PTraceSource
+                    Logging.P2PTraceSource
                         .TraceEvent(
                             TraceEventType.Error,
                             0,
@@ -121,8 +118,7 @@ namespace System.Net.PeerToPeer.Collaboration
 
                 if (errorCode != 0)
                 {
-                    Logging
-                        .P2PTraceSource
+                    Logging.P2PTraceSource
                         .TraceEvent(
                             TraceEventType.Error,
                             0,
@@ -149,8 +145,7 @@ namespace System.Net.PeerToPeer.Collaboration
             {
                 string localEndPointName = null;
 
-                Logging
-                    .P2PTraceSource
+                Logging.P2PTraceSource
                     .TraceEvent(TraceEventType.Information, 0, "LocalEndPointName get called.");
                 //
                 // Call native to get users endpoint name
@@ -163,8 +158,7 @@ namespace System.Net.PeerToPeer.Collaboration
                     );
                     if (errorCode != 0)
                     {
-                        Logging
-                            .P2PTraceSource
+                        Logging.P2PTraceSource
                             .TraceEvent(
                                 TraceEventType.Error,
                                 0,
@@ -175,8 +169,7 @@ namespace System.Net.PeerToPeer.Collaboration
                 }
                 catch (Exception e)
                 {
-                    Logging
-                        .P2PTraceSource
+                    Logging.P2PTraceSource
                         .TraceEvent(
                             TraceEventType.Error,
                             0,
@@ -186,8 +179,7 @@ namespace System.Net.PeerToPeer.Collaboration
                     throw;
                 }
 
-                Logging
-                    .P2PTraceSource
+                Logging.P2PTraceSource
                     .TraceEvent(
                         TraceEventType.Information,
                         0,
@@ -207,8 +199,7 @@ namespace System.Net.PeerToPeer.Collaboration
                 //
                 // Call native to set users endpoint name
                 //
-                Logging
-                    .P2PTraceSource
+                Logging.P2PTraceSource
                     .TraceEvent(
                         TraceEventType.Information,
                         0,
@@ -220,8 +211,7 @@ namespace System.Net.PeerToPeer.Collaboration
 
                 if (errorCode != 0)
                 {
-                    Logging
-                        .P2PTraceSource
+                    Logging.P2PTraceSource
                         .TraceEvent(
                             TraceEventType.Error,
                             0,
@@ -234,8 +224,7 @@ namespace System.Net.PeerToPeer.Collaboration
                     );
                 }
 
-                Logging
-                    .P2PTraceSource
+                Logging.P2PTraceSource
                     .TraceEvent(TraceEventType.Information, 0, "Leaving LocalEndPointName set.");
             }
         }
@@ -255,8 +244,7 @@ namespace System.Net.PeerToPeer.Collaboration
                 int errorCode = UnsafeCollabNativeMethods.PeerCollabGetSigninOptions(ref peerScope);
 
                 if (errorCode != 0)
-                    Logging
-                        .P2PTraceSource
+                    Logging.P2PTraceSource
                         .TraceEvent(
                             TraceEventType.Error,
                             0,
@@ -325,8 +313,7 @@ namespace System.Net.PeerToPeer.Collaboration
             [System.Security.SecurityCritical]
             get
             {
-                Logging
-                    .P2PTraceSource
+                Logging.P2PTraceSource
                     .TraceEvent(
                         TraceEventType.Information,
                         0,
@@ -349,8 +336,7 @@ namespace System.Net.PeerToPeer.Collaboration
                 //
                 if (errorCode == UnsafeCollabReturnCodes.PEER_E_NOT_FOUND)
                 {
-                    Logging
-                        .P2PTraceSource
+                    Logging.P2PTraceSource
                         .TraceEvent(
                             TraceEventType.Information,
                             0,
@@ -361,8 +347,7 @@ namespace System.Net.PeerToPeer.Collaboration
 
                 if (errorCode != 0)
                 {
-                    Logging
-                        .P2PTraceSource
+                    Logging.P2PTraceSource
                         .TraceEvent(
                             TraceEventType.Error,
                             0,
@@ -425,8 +410,7 @@ namespace System.Net.PeerToPeer.Collaboration
                     peerAppLaunchInfo.PeerEndPoint =
                         CollaborationHelperFunctions.ConvertPEER_ENDPOINTToPeerEndPoint(pe);
 
-                    Logging
-                        .P2PTraceSource
+                    Logging.P2PTraceSource
                         .TraceEvent(
                             TraceEventType.Information,
                             0,
@@ -435,8 +419,7 @@ namespace System.Net.PeerToPeer.Collaboration
                 }
                 catch (Exception e)
                 {
-                    Logging
-                        .P2PTraceSource
+                    Logging.P2PTraceSource
                         .TraceEvent(
                             TraceEventType.Error,
                             0,
@@ -476,8 +459,7 @@ namespace System.Net.PeerToPeer.Collaboration
         [System.Security.SecurityCritical]
         public static void SignIn(PeerScope peerScope)
         {
-            Logging
-                .P2PTraceSource
+            Logging.P2PTraceSource
                 .TraceEvent(
                     TraceEventType.Information,
                     0,
@@ -499,8 +481,7 @@ namespace System.Net.PeerToPeer.Collaboration
 
             if (errorCode != 0)
             {
-                Logging
-                    .P2PTraceSource
+                Logging.P2PTraceSource
                     .TraceEvent(
                         TraceEventType.Error,
                         0,
@@ -515,8 +496,7 @@ namespace System.Net.PeerToPeer.Collaboration
                 );
             }
 
-            Logging
-                .P2PTraceSource
+            Logging.P2PTraceSource
                 .TraceEvent(TraceEventType.Information, 0, "Signed into {0}.", peerScope);
         }
 
@@ -528,8 +508,7 @@ namespace System.Net.PeerToPeer.Collaboration
         [System.Security.SecurityCritical]
         public static void SignOut(PeerScope peerScope)
         {
-            Logging
-                .P2PTraceSource
+            Logging.P2PTraceSource
                 .TraceEvent(
                     TraceEventType.Information,
                     0,
@@ -549,8 +528,7 @@ namespace System.Net.PeerToPeer.Collaboration
                 int errorCode = UnsafeCollabNativeMethods.PeerCollabSignout(peerScope);
                 if (errorCode != 0)
                 {
-                    Logging
-                        .P2PTraceSource
+                    Logging.P2PTraceSource
                         .TraceEvent(
                             TraceEventType.Error,
                             0,
@@ -565,8 +543,7 @@ namespace System.Net.PeerToPeer.Collaboration
                     );
                 }
             }
-            Logging
-                .P2PTraceSource
+            Logging.P2PTraceSource
                 .TraceEvent(TraceEventType.Information, 0, "Signed out of {0}.", peerScope);
         }
 
@@ -592,8 +569,7 @@ namespace System.Net.PeerToPeer.Collaboration
         [System.Security.SecurityCritical]
         public static PeerNearMeCollection GetPeersNearMe()
         {
-            Logging
-                .P2PTraceSource
+            Logging.P2PTraceSource
                 .TraceEvent(
                     TraceEventType.Information,
                     0,
@@ -619,8 +595,7 @@ namespace System.Net.PeerToPeer.Collaboration
 
                 if (errorCode != 0)
                 {
-                    Logging
-                        .P2PTraceSource
+                    Logging.P2PTraceSource
                         .TraceEvent(
                             TraceEventType.Error,
                             0,
@@ -639,8 +614,7 @@ namespace System.Net.PeerToPeer.Collaboration
                 );
                 if (errorCode != 0)
                 {
-                    Logging
-                        .P2PTraceSource
+                    Logging.P2PTraceSource
                         .TraceEvent(
                             TraceEventType.Error,
                             0,
@@ -655,8 +629,7 @@ namespace System.Net.PeerToPeer.Collaboration
 
                 if (pnmCount == 0)
                 {
-                    Logging
-                        .P2PTraceSource
+                    Logging.P2PTraceSource
                         .TraceEvent(
                             TraceEventType.Information,
                             0,
@@ -692,8 +665,7 @@ namespace System.Net.PeerToPeer.Collaboration
                         ;
 
                         PEER_ENDPOINT pe = pnm.endpoint;
-                        peerNearMe
-                            .PeerEndPoints
+                        peerNearMe.PeerEndPoints
                             .Add(
                                 CollaborationHelperFunctions.ConvertPEER_ENDPOINTToPeerEndPoint(pe)
                             );
@@ -708,8 +680,7 @@ namespace System.Net.PeerToPeer.Collaboration
                     handlePeerEnum.Dispose();
             }
 
-            Logging
-                .P2PTraceSource
+            Logging.P2PTraceSource
                 .TraceEvent(
                     TraceEventType.Information,
                     0,
@@ -779,8 +750,7 @@ namespace System.Net.PeerToPeer.Collaboration
 
             if (Logging.P2PTraceSource.Switch.ShouldTrace(TraceEventType.Information))
             {
-                Logging
-                    .P2PTraceSource
+                Logging.P2PTraceSource
                     .TraceEvent(
                         TraceEventType.Information,
                         0,
@@ -834,8 +804,7 @@ namespace System.Net.PeerToPeer.Collaboration
             }
             if (errorCode == UnsafeCollabReturnCodes.PEER_E_ALREADY_EXISTS)
             {
-                Logging
-                    .P2PTraceSource
+                Logging.P2PTraceSource
                     .TraceEvent(
                         TraceEventType.Error,
                         0,
@@ -848,8 +817,7 @@ namespace System.Net.PeerToPeer.Collaboration
             }
             else if (errorCode != 0)
             {
-                Logging
-                    .P2PTraceSource
+                Logging.P2PTraceSource
                     .TraceEvent(
                         TraceEventType.Error,
                         0,
@@ -864,8 +832,7 @@ namespace System.Net.PeerToPeer.Collaboration
                 );
             }
 
-            Logging
-                .P2PTraceSource
+            Logging.P2PTraceSource
                 .TraceEvent(TraceEventType.Error, 0, "RegisterApplication successful");
         }
 
@@ -910,8 +877,7 @@ namespace System.Net.PeerToPeer.Collaboration
 
             if (Logging.P2PTraceSource.Switch.ShouldTrace(TraceEventType.Information))
             {
-                Logging
-                    .P2PTraceSource
+                Logging.P2PTraceSource
                     .TraceEvent(
                         TraceEventType.Information,
                         0,
@@ -927,8 +893,7 @@ namespace System.Net.PeerToPeer.Collaboration
 
             if (errorCode != 0)
             {
-                Logging
-                    .P2PTraceSource
+                Logging.P2PTraceSource
                     .TraceEvent(
                         TraceEventType.Error,
                         0,
@@ -943,8 +908,7 @@ namespace System.Net.PeerToPeer.Collaboration
                 );
             }
 
-            Logging
-                .P2PTraceSource
+            Logging.P2PTraceSource
                 .TraceEvent(TraceEventType.Error, 0, "UnregisterApplication successful");
         }
 
@@ -1027,8 +991,7 @@ namespace System.Net.PeerToPeer.Collaboration
             PeerApplicationRegistrationType type
         )
         {
-            Logging
-                .P2PTraceSource
+            Logging.P2PTraceSource
                 .TraceEvent(
                     TraceEventType.Information,
                     0,
@@ -1065,8 +1028,7 @@ namespace System.Net.PeerToPeer.Collaboration
                 );
                 if (errorCode != 0)
                 {
-                    Logging
-                        .P2PTraceSource
+                    Logging.P2PTraceSource
                         .TraceEvent(
                             TraceEventType.Error,
                             0,
@@ -1087,8 +1049,7 @@ namespace System.Net.PeerToPeer.Collaboration
                 );
                 if (errorCode != 0)
                 {
-                    Logging
-                        .P2PTraceSource
+                    Logging.P2PTraceSource
                         .TraceEvent(
                             TraceEventType.Error,
                             0,
@@ -1105,8 +1066,7 @@ namespace System.Net.PeerToPeer.Collaboration
 
                 if (appCount == 0)
                 {
-                    Logging
-                        .P2PTraceSource
+                    Logging.P2PTraceSource
                         .TraceEvent(
                             TraceEventType.Error,
                             0,
@@ -1127,8 +1087,7 @@ namespace System.Net.PeerToPeer.Collaboration
                         );
                         if (errorCode != 0)
                         {
-                            Logging
-                                .P2PTraceSource
+                            Logging.P2PTraceSource
                                 .TraceEvent(
                                     TraceEventType.Error,
                                     0,
@@ -1188,8 +1147,7 @@ namespace System.Net.PeerToPeer.Collaboration
                 handlePeerEnum.Dispose();
             }
 
-            Logging
-                .P2PTraceSource
+            Logging.P2PTraceSource
                 .TraceEvent(
                     TraceEventType.Information,
                     0,
@@ -1215,8 +1173,7 @@ namespace System.Net.PeerToPeer.Collaboration
                         out safeAppRegInfo
                     );
                     if (errorCode != 0)
-                        Logging
-                            .P2PTraceSource
+                        Logging.P2PTraceSource
                             .TraceEvent(
                                 TraceEventType.Error,
                                 0,
@@ -1244,8 +1201,7 @@ namespace System.Net.PeerToPeer.Collaboration
                     safeAppRegInfo.Dispose();
                 }
             }
-            Logging
-                .P2PTraceSource
+            Logging.P2PTraceSource
                 .TraceEvent(
                     TraceEventType.Information,
                     0,
@@ -1280,8 +1236,7 @@ namespace System.Net.PeerToPeer.Collaboration
 
             if (Logging.P2PTraceSource.Switch.ShouldTrace(TraceEventType.Information))
             {
-                Logging
-                    .P2PTraceSource
+                Logging.P2PTraceSource
                     .TraceEvent(
                         TraceEventType.Information,
                         0,
@@ -1327,8 +1282,7 @@ namespace System.Net.PeerToPeer.Collaboration
 
             if (errorCode == UnsafeCollabReturnCodes.PEER_E_ALREADY_EXISTS)
             {
-                Logging
-                    .P2PTraceSource
+                Logging.P2PTraceSource
                     .TraceEvent(
                         TraceEventType.Error,
                         0,
@@ -1343,8 +1297,7 @@ namespace System.Net.PeerToPeer.Collaboration
             }
             else if (errorCode != 0)
             {
-                Logging
-                    .P2PTraceSource
+                Logging.P2PTraceSource
                     .TraceEvent(
                         TraceEventType.Error,
                         0,
@@ -1358,8 +1311,7 @@ namespace System.Net.PeerToPeer.Collaboration
                     )
                 );
             }
-            Logging
-                .P2PTraceSource
+            Logging.P2PTraceSource
                 .TraceEvent(TraceEventType.Information, 0, "Set Object successful.");
         }
 
@@ -1382,8 +1334,7 @@ namespace System.Net.PeerToPeer.Collaboration
 
             if (Logging.P2PTraceSource.Switch.ShouldTrace(TraceEventType.Information))
             {
-                Logging
-                    .P2PTraceSource
+                Logging.P2PTraceSource
                     .TraceEvent(
                         TraceEventType.Information,
                         0,
@@ -1397,8 +1348,7 @@ namespace System.Net.PeerToPeer.Collaboration
 
             if (errorCode != 0)
             {
-                Logging
-                    .P2PTraceSource
+                Logging.P2PTraceSource
                     .TraceEvent(
                         TraceEventType.Error,
                         0,
@@ -1413,8 +1363,7 @@ namespace System.Net.PeerToPeer.Collaboration
                 );
             }
 
-            Logging
-                .P2PTraceSource
+            Logging.P2PTraceSource
                 .TraceEvent(TraceEventType.Information, 0, "Delete Object successful.");
         }
 
@@ -1436,8 +1385,7 @@ namespace System.Net.PeerToPeer.Collaboration
         [System.Security.SecurityCritical]
         public static PeerObjectCollection GetLocalSetObjects()
         {
-            Logging
-                .P2PTraceSource
+            Logging.P2PTraceSource
                 .TraceEvent(TraceEventType.Information, 0, "Entering GetLocalSetObjects.");
 
             PeerCollaborationPermission.UnrestrictedPeerCollaborationPermission.Demand();
@@ -1462,8 +1410,7 @@ namespace System.Net.PeerToPeer.Collaboration
                 );
                 if (errorCode != 0)
                 {
-                    Logging
-                        .P2PTraceSource
+                    Logging.P2PTraceSource
                         .TraceEvent(
                             TraceEventType.Error,
                             0,
@@ -1482,8 +1429,7 @@ namespace System.Net.PeerToPeer.Collaboration
                 );
                 if (errorCode != 0)
                 {
-                    Logging
-                        .P2PTraceSource
+                    Logging.P2PTraceSource
                         .TraceEvent(
                             TraceEventType.Error,
                             0,
@@ -1498,8 +1444,7 @@ namespace System.Net.PeerToPeer.Collaboration
 
                 if (objectCount == 0)
                 {
-                    Logging
-                        .P2PTraceSource
+                    Logging.P2PTraceSource
                         .TraceEvent(TraceEventType.Error, 0, "No local PeerObjects found.");
                     return peerObjectColl;
                 }
@@ -1516,8 +1461,7 @@ namespace System.Net.PeerToPeer.Collaboration
                         );
                         if (errorCode != 0)
                         {
-                            Logging
-                                .P2PTraceSource
+                            Logging.P2PTraceSource
                                 .TraceEvent(
                                     TraceEventType.Error,
                                     0,
@@ -1571,8 +1515,7 @@ namespace System.Net.PeerToPeer.Collaboration
                 handlePeerEnum.Dispose();
             }
 
-            Logging
-                .P2PTraceSource
+            Logging.P2PTraceSource
                 .TraceEvent(
                     TraceEventType.Information,
                     0,
@@ -1641,8 +1584,7 @@ namespace System.Net.PeerToPeer.Collaboration
         [System.Security.SecurityCritical]
         private static void AddNameChanged(EventHandler<NameChangedEventArgs> callback)
         {
-            Logging
-                .P2PTraceSource
+            Logging.P2PTraceSource
                 .TraceEvent(TraceEventType.Information, 0, "Entering AddNameChanged().");
 
             //
@@ -1682,8 +1624,7 @@ namespace System.Net.PeerToPeer.Collaboration
                     );
                     if (errorCode != 0)
                     {
-                        Logging
-                            .P2PTraceSource
+                        Logging.P2PTraceSource
                             .TraceEvent(
                                 TraceEventType.Error,
                                 0,
@@ -1699,8 +1640,7 @@ namespace System.Net.PeerToPeer.Collaboration
                 s_nameChanged += callback;
             }
 
-            Logging
-                .P2PTraceSource
+            Logging.P2PTraceSource
                 .TraceEvent(TraceEventType.Information, 0, "AddNameChanged() successful.");
         }
 
@@ -1711,8 +1651,7 @@ namespace System.Net.PeerToPeer.Collaboration
         [System.Security.SecurityCritical]
         private static void RemoveNameChanged(EventHandler<NameChangedEventArgs> callback)
         {
-            Logging
-                .P2PTraceSource
+            Logging.P2PTraceSource
                 .TraceEvent(TraceEventType.Information, 0, "RemoveNameChanged() called.");
             lock (LockNameChangedEvent)
             {
@@ -1724,8 +1663,7 @@ namespace System.Net.PeerToPeer.Collaboration
                         ref s_safeNameChangedEvent,
                         ref s_nameChangedEvent
                     );
-                    Logging
-                        .P2PTraceSource
+                    Logging.P2PTraceSource
                         .TraceEvent(
                             TraceEventType.Information,
                             0,
@@ -1733,8 +1671,7 @@ namespace System.Net.PeerToPeer.Collaboration
                         );
                 }
             }
-            Logging
-                .P2PTraceSource
+            Logging.P2PTraceSource
                 .TraceEvent(TraceEventType.Information, 0, "RemoveNameChanged() successful.");
         }
 
@@ -1754,8 +1691,7 @@ namespace System.Net.PeerToPeer.Collaboration
             SafeCollabData eventData = null;
             int errorCode = 0;
 
-            Logging
-                .P2PTraceSource
+            Logging.P2PTraceSource
                 .TraceEvent(TraceEventType.Information, 0, "NameChangedCallback() called.");
 
             while (true)
@@ -1781,8 +1717,7 @@ namespace System.Net.PeerToPeer.Collaboration
                         break;
                     else if (errorCode != 0)
                     {
-                        Logging
-                            .P2PTraceSource
+                        Logging.P2PTraceSource
                             .TraceEvent(
                                 TraceEventType.Error,
                                 0,
@@ -1836,8 +1771,7 @@ namespace System.Net.PeerToPeer.Collaboration
                         );
                     else
                         handlerCopy(null, nameChangedArgs);
-                    Logging
-                        .P2PTraceSource
+                    Logging.P2PTraceSource
                         .TraceEvent(
                             TraceEventType.Information,
                             0,
@@ -1845,8 +1779,7 @@ namespace System.Net.PeerToPeer.Collaboration
                         );
                 }
             }
-            Logging
-                .P2PTraceSource
+            Logging.P2PTraceSource
                 .TraceEvent(TraceEventType.Information, 0, "Leaving NameChangedCallback().");
         }
 
@@ -1925,8 +1858,7 @@ namespace System.Net.PeerToPeer.Collaboration
         [System.Security.SecurityCritical]
         static void RemovePresenceChanged(EventHandler<PresenceChangedEventArgs> callback)
         {
-            Logging
-                .P2PTraceSource
+            Logging.P2PTraceSource
                 .TraceEvent(TraceEventType.Information, 0, "RemovePresenceChanged() called.");
             lock (LockPresenceChangedEvent)
             {
@@ -1938,8 +1870,7 @@ namespace System.Net.PeerToPeer.Collaboration
                         ref s_safePresenceChangedEvent,
                         ref s_presenceChangedEvent
                     );
-                    Logging
-                        .P2PTraceSource
+                    Logging.P2PTraceSource
                         .TraceEvent(
                             TraceEventType.Information,
                             0,
@@ -1947,8 +1878,7 @@ namespace System.Net.PeerToPeer.Collaboration
                         );
                 }
             }
-            Logging
-                .P2PTraceSource
+            Logging.P2PTraceSource
                 .TraceEvent(TraceEventType.Information, 0, "RemovePresenceChanged() successful.");
         }
 
@@ -1968,8 +1898,7 @@ namespace System.Net.PeerToPeer.Collaboration
             SafeCollabData eventData = null;
             int errorCode = 0;
 
-            Logging
-                .P2PTraceSource
+            Logging.P2PTraceSource
                 .TraceEvent(TraceEventType.Information, 0, "PresenceChangedCallback() called.");
 
             while (true)
@@ -1995,8 +1924,7 @@ namespace System.Net.PeerToPeer.Collaboration
                         break;
                     else if (errorCode != 0)
                     {
-                        Logging
-                            .P2PTraceSource
+                        Logging.P2PTraceSource
                             .TraceEvent(
                                 TraceEventType.Error,
                                 0,
@@ -2069,8 +1997,7 @@ namespace System.Net.PeerToPeer.Collaboration
                         );
                     else
                         handlerCopy(null, presenceChangedArgs);
-                    Logging
-                        .P2PTraceSource
+                    Logging.P2PTraceSource
                         .TraceEvent(
                             TraceEventType.Information,
                             0,
@@ -2078,8 +2005,7 @@ namespace System.Net.PeerToPeer.Collaboration
                         );
                 }
             }
-            Logging
-                .P2PTraceSource
+            Logging.P2PTraceSource
                 .TraceEvent(TraceEventType.Information, 0, "Leaving PresenceChangedCallback().");
         }
 
@@ -2159,8 +2085,7 @@ namespace System.Net.PeerToPeer.Collaboration
         [System.Security.SecurityCritical]
         static void RemoveObjectChangedEvent(EventHandler<ObjectChangedEventArgs> callback)
         {
-            Logging
-                .P2PTraceSource
+            Logging.P2PTraceSource
                 .TraceEvent(TraceEventType.Information, 0, "RemoveObjectChangedEvent() called.");
             lock (LockObjChangedEvent)
             {
@@ -2172,8 +2097,7 @@ namespace System.Net.PeerToPeer.Collaboration
                         ref s_safeObjChangedEvent,
                         ref s_objChangedEvent
                     );
-                    Logging
-                        .P2PTraceSource
+                    Logging.P2PTraceSource
                         .TraceEvent(
                             TraceEventType.Information,
                             0,
@@ -2181,8 +2105,7 @@ namespace System.Net.PeerToPeer.Collaboration
                         );
                 }
             }
-            Logging
-                .P2PTraceSource
+            Logging.P2PTraceSource
                 .TraceEvent(
                     TraceEventType.Information,
                     0,
@@ -2208,8 +2131,7 @@ namespace System.Net.PeerToPeer.Collaboration
             SafeCollabData eventData = null;
             int errorCode = 0;
 
-            Logging
-                .P2PTraceSource
+            Logging.P2PTraceSource
                 .TraceEvent(TraceEventType.Information, 0, "ObjectChangedCallback() called.");
 
             while (true)
@@ -2235,8 +2157,7 @@ namespace System.Net.PeerToPeer.Collaboration
                         break;
                     else if (errorCode != 0)
                     {
-                        Logging
-                            .P2PTraceSource
+                        Logging.P2PTraceSource
                             .TraceEvent(
                                 TraceEventType.Error,
                                 0,
@@ -2303,8 +2224,7 @@ namespace System.Net.PeerToPeer.Collaboration
                         );
                     else
                         handlerCopy(null, objChangedArgs);
-                    Logging
-                        .P2PTraceSource
+                    Logging.P2PTraceSource
                         .TraceEvent(
                             TraceEventType.Information,
                             0,
@@ -2312,8 +2232,7 @@ namespace System.Net.PeerToPeer.Collaboration
                         );
                 }
             }
-            Logging
-                .P2PTraceSource
+            Logging.P2PTraceSource
                 .TraceEvent(TraceEventType.Information, 0, "Leaving ObjectChangedCallback().");
         }
 
@@ -2393,8 +2312,7 @@ namespace System.Net.PeerToPeer.Collaboration
         [System.Security.SecurityCritical]
         static void RemoveApplicationChanged(EventHandler<ApplicationChangedEventArgs> callback)
         {
-            Logging
-                .P2PTraceSource
+            Logging.P2PTraceSource
                 .TraceEvent(TraceEventType.Information, 0, "RemoveApplicationChanged() called.");
             lock (LockAppChangedEvent)
             {
@@ -2406,8 +2324,7 @@ namespace System.Net.PeerToPeer.Collaboration
                         ref s_safeAppChangedEvent,
                         ref s_appChangedEvent
                     );
-                    Logging
-                        .P2PTraceSource
+                    Logging.P2PTraceSource
                         .TraceEvent(
                             TraceEventType.Information,
                             0,
@@ -2415,8 +2332,7 @@ namespace System.Net.PeerToPeer.Collaboration
                         );
                 }
             }
-            Logging
-                .P2PTraceSource
+            Logging.P2PTraceSource
                 .TraceEvent(
                     TraceEventType.Information,
                     0,
@@ -2441,8 +2357,7 @@ namespace System.Net.PeerToPeer.Collaboration
             SafeCollabData eventData = null;
             int errorCode = 0;
 
-            Logging
-                .P2PTraceSource
+            Logging.P2PTraceSource
                 .TraceEvent(TraceEventType.Information, 0, "ApplicationChangedCallback() called.");
 
             while (true)
@@ -2468,8 +2383,7 @@ namespace System.Net.PeerToPeer.Collaboration
                         break;
                     else if (errorCode != 0)
                     {
-                        Logging
-                            .P2PTraceSource
+                        Logging.P2PTraceSource
                             .TraceEvent(
                                 TraceEventType.Error,
                                 0,
@@ -2538,8 +2452,7 @@ namespace System.Net.PeerToPeer.Collaboration
                         );
                     else
                         handlerCopy(null, appChangedArgs);
-                    Logging
-                        .P2PTraceSource
+                    Logging.P2PTraceSource
                         .TraceEvent(
                             TraceEventType.Information,
                             0,
@@ -2547,8 +2460,7 @@ namespace System.Net.PeerToPeer.Collaboration
                         );
                 }
             }
-            Logging
-                .P2PTraceSource
+            Logging.P2PTraceSource
                 .TraceEvent(TraceEventType.Information, 0, "Leaving ApplicationChangedCallback().");
         }
     }

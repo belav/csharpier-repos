@@ -578,8 +578,7 @@ namespace System.Web.Http.Results
                     ExceptionResult result = CreateProductUnderTest(exception, controller);
 
                     IContentNegotiator expectedContentNegotiator = CreateDummyContentNegotiator();
-                    configuration
-                        .Services
+                    configuration.Services
                         .Replace(typeof(IContentNegotiator), expectedContentNegotiator);
 
                     // Act
@@ -726,8 +725,7 @@ namespace System.Web.Http.Results
 
                 IContentNegotiator ignore = result.ContentNegotiator;
 
-                configuration
-                    .Services
+                configuration.Services
                     .Replace(typeof(IContentNegotiator), CreateDummyContentNegotiator());
 
                 // Act

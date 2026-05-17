@@ -482,8 +482,7 @@ namespace Microsoft.CodeAnalysis.CSharp.InlineDeclaration
                 );
 
                 if (
-                    !SymbolEquivalenceComparer
-                        .Instance
+                    !SymbolEquivalenceComparer.Instance
                         .Equals(previousSymbol, updatedSymbolInfo.Symbol)
                 )
                 {

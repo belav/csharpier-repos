@@ -155,8 +155,7 @@ namespace Microsoft.CodeAnalysis.AddMissingImports
             }
 
             var solution = document.Project.Solution;
-            var textDiffingService = solution
-                .Services
+            var textDiffingService = solution.Services
                 .GetRequiredService<IDocumentTextDifferencingService>();
             var packageInstallerService = solution.Services.GetService<IPackageInstallerService>();
             var addImportService = document.GetRequiredLanguageService<IAddImportFeatureService>();

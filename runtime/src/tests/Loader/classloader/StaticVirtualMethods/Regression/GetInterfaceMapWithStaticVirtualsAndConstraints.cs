@@ -16,8 +16,7 @@ namespace GetInterfaceMapWithStaticVirtualsAndConstraints
                 s;
             InterfaceMapping imap;
             Console.WriteLine("Inner");
-            s = typeof(Program)
-                .Assembly
+            s = typeof(Program).Assembly
                 .GetType("GetInterfaceMapWithStaticVirtualsAndConstraints.Outer`1+Inner");
             s = s.MakeGenericType(typeof(int));
             i = s.GetInterface("IStatics");
@@ -49,8 +48,7 @@ namespace GetInterfaceMapWithStaticVirtualsAndConstraints
             }
 
             Console.WriteLine("Inner2");
-            s = typeof(Program)
-                .Assembly
+            s = typeof(Program).Assembly
                 .GetType("GetInterfaceMapWithStaticVirtualsAndConstraints.Outer`1+Inner2");
             s = s.MakeGenericType(typeof(int));
             i = s.GetInterface("IStatics");

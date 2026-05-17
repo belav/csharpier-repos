@@ -51,8 +51,7 @@ namespace System.Composition.Hosting.Core
             foreach (var result in _updateResults)
             {
                 var resultContract = result.Key;
-                var descriptors = result
-                    .Value
+                var descriptors = result.Value
                     .GetResults()
                     .Select(cb => cb.GetDescriptor())
                     .ToArray();

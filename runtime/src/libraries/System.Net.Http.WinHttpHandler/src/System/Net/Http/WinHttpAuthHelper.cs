@@ -90,8 +90,7 @@ namespace System.Net.Http
                     // We pass the schemes to ChooseAuthScheme which will pick the scheme
                     // based on most secure scheme to least secure scheme ordering.
                     if (
-                        !Interop
-                            .WinHttp
+                        !Interop.WinHttp
                             .WinHttpQueryAuthSchemes(
                                 state.RequestHandle,
                                 out supportedSchemes,
@@ -156,8 +155,7 @@ namespace System.Net.Http
                     // We pass the schemes to ChooseAuthScheme which will pick the scheme
                     // based on most secure scheme to least secure scheme ordering.
                     if (
-                        !Interop
-                            .WinHttp
+                        !Interop.WinHttp
                             .WinHttpQueryAuthSchemes(
                                 state.RequestHandle,
                                 out supportedSchemes,
@@ -347,8 +345,7 @@ namespace System.Net.Http
                 : Interop.WinHttp.WINHTTP_AUTOLOGON_SECURITY_LEVEL_HIGH;
 
             if (
-                !Interop
-                    .WinHttp
+                !Interop.WinHttp
                     .WinHttpSetOption(
                         requestHandle,
                         Interop.WinHttp.WINHTTP_OPTION_AUTOLOGON_POLICY,
@@ -431,8 +428,7 @@ namespace System.Net.Http
             }
 
             if (
-                !Interop
-                    .WinHttp
+                !Interop.WinHttp
                     .WinHttpSetCredentials(
                         requestHandle,
                         authTarget,

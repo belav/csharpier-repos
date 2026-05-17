@@ -123,8 +123,7 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
             Pkcs9LocalKeyId localKeyId = new Pkcs9LocalKeyId(new byte[] { 1 });
 
             using (
-                X509Certificate2 cert = Certificates
-                    .RSAKeyTransferCapi1
+                X509Certificate2 cert = Certificates.RSAKeyTransferCapi1
                     .TryGetCertificateWithPrivateKey(true)
             )
             using (RSA certKey = cert.GetRSAPrivateKey())
@@ -173,8 +172,7 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
             const string password = nameof(WriteOneCertWithKey_LikeWindows);
 
             using (
-                X509Certificate2 cert = Certificates
-                    .RSAKeyTransferCapi1
+                X509Certificate2 cert = Certificates.RSAKeyTransferCapi1
                     .TryGetCertificateWithPrivateKey(true)
             )
             {

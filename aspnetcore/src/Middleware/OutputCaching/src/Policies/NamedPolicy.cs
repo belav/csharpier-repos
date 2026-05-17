@@ -78,8 +78,7 @@ internal sealed class NamedPolicy : IOutputCachePolicy
         {
             lock (_synLock)
             {
-                _options ??= context
-                    .HttpContext
+                _options ??= context.HttpContext
                     .RequestServices
                     .GetRequiredService<IOptions<OutputCacheOptions>>();
             }

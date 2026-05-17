@@ -117,8 +117,7 @@ public static class IISDeploymentParameterExtensions
         params string[] path
     )
     {
-        parameters
-            .ServerConfigActionList
+        parameters.ServerConfigActionList
             .Add(
                 (config, _) =>
                 {
@@ -138,12 +137,10 @@ public static class IISDeploymentParameterExtensions
 
     public static void EnableLogging(this IISDeploymentParameters deploymentParameters, string path)
     {
-        deploymentParameters
-            .WebConfigActionList
+        deploymentParameters.WebConfigActionList
             .Add(WebConfigHelpers.AddOrModifyAspNetCoreSection("stdoutLogEnabled", "true"));
 
-        deploymentParameters
-            .WebConfigActionList
+        deploymentParameters.WebConfigActionList
             .Add(
                 WebConfigHelpers.AddOrModifyAspNetCoreSection(
                     "stdoutLogFile",
@@ -166,8 +163,7 @@ public static class IISDeploymentParameterExtensions
         deploymentParameters.EnableModule("FailedRequestsTracingModule", "%IIS_BIN%\\iisfreb.dll");
 
         // Set the TraceFailedRequestsSection to listend to ANCM events
-        deploymentParameters
-            .ServerConfigActionList
+        deploymentParameters.ServerConfigActionList
             .Add(
                 (element, _) =>
                 {
@@ -197,8 +193,7 @@ public static class IISDeploymentParameterExtensions
             );
 
         // Set the ANCM traceProviderDefinition to 65536
-        deploymentParameters
-            .ServerConfigActionList
+        deploymentParameters.ServerConfigActionList
             .Add(
                 (element, _) =>
                 {
@@ -228,8 +223,7 @@ public static class IISDeploymentParameterExtensions
             );
 
         // Set the freb directory to the published app directory.
-        deploymentParameters
-            .ServerConfigActionList
+        deploymentParameters.ServerConfigActionList
             .Add(
                 (element, contentRoot) =>
                 {
@@ -250,8 +244,7 @@ public static class IISDeploymentParameterExtensions
         Func<string, string, string> transformation
     )
     {
-        parameters
-            .WebConfigActionList
+        parameters.WebConfigActionList
             .Add(
                 (config, contentRoot) =>
                 {
@@ -272,8 +265,7 @@ public static class IISDeploymentParameterExtensions
         Func<string, string, string> transformation
     )
     {
-        parameters
-            .WebConfigActionList
+        parameters.WebConfigActionList
             .Add(
                 (config, contentRoot) =>
                 {
@@ -300,8 +292,7 @@ public static class IISDeploymentParameterExtensions
             modulePath = modulePath.Replace("%IIS_BIN%", "%windir%\\System32\\inetsrv");
         }
 
-        parameters
-            .ServerConfigActionList
+        parameters.ServerConfigActionList
             .Add(
                 (element, _) =>
                 {

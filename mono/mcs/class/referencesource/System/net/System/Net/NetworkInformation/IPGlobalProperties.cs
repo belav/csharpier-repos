@@ -94,8 +94,7 @@ namespace System.Net.NetworkInformation
         )]
         public virtual Task<UnicastIPAddressInformationCollection> GetUnicastAddressesAsync()
         {
-            return Task<UnicastIPAddressInformationCollection>
-                .Factory
+            return Task<UnicastIPAddressInformationCollection>.Factory
                 .FromAsync(BeginGetUnicastAddresses, EndGetUnicastAddresses, null);
         }
     }

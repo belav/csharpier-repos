@@ -22,8 +22,7 @@ namespace System.Activities
         {
             if (!IsDefined(options))
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new InvalidEnumArgumentException(
                             argumentName,

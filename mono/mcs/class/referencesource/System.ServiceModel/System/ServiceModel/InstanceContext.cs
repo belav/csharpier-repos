@@ -72,8 +72,7 @@ namespace System.ServiceModel
         {
             if (host == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("host"));
             }
 

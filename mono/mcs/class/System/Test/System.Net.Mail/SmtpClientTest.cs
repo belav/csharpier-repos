@@ -516,8 +516,7 @@ namespace MonoTests.System.Net.Mail
             // while the async completion is waiting for the main thread to process it.
             // So instead use a SynchronizationContext that uses the threadpool instead
             // of the main thread.
-            var existing_context = global::System
-                .ComponentModel
+            var existing_context = global::System.ComponentModel
                 .AsyncOperationManager
                 .SynchronizationContext;
             global::System.ComponentModel.AsyncOperationManager.SynchronizationContext =

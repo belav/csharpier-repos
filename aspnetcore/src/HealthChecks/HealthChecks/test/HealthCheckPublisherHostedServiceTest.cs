@@ -517,8 +517,7 @@ public class HealthCheckPublisherHostedServiceTest
         }
 
         // Assert - after stop
-        var entries = publisher
-            .Entries
+        var entries = publisher.Entries
             .SelectMany(e => e.report.Entries.Select(e2 => e2.Key))
             .OrderBy(k => k)
             .ToArray();

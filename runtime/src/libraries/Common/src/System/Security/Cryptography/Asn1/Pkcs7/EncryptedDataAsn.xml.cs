@@ -111,8 +111,7 @@ namespace System.Security.Cryptography.Asn1.Pkcs7
                 sequenceReader.ThrowIfNotEmpty();
             }
 
-            System
-                .Security
+            System.Security
                 .Cryptography
                 .Asn1
                 .Pkcs7
@@ -136,8 +135,7 @@ namespace System.Security.Cryptography.Asn1.Pkcs7
 
                     while (collectionReader.HasData)
                     {
-                        System
-                            .Security
+                        System.Security
                             .Cryptography
                             .Asn1
                             .AttributeAsn

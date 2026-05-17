@@ -55,13 +55,11 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             builder.RequireInitialAlignment(4);
             builder.AddSymbol(this);
 
-            DirectoryEntry resourcesDirectory = _module
-                .PEReader
+            DirectoryEntry resourcesDirectory = _module.PEReader
                 .PEHeaders
                 .CorHeader
                 .ResourcesDirectory;
-            PEMemoryBlock block = _module
-                .PEReader
+            PEMemoryBlock block = _module.PEReader
                 .GetSectionData(resourcesDirectory.RelativeVirtualAddress);
             builder.EmitBytes(block.GetReader().ReadBytes(resourcesDirectory.Size));
 

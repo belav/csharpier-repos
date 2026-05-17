@@ -700,8 +700,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                 {
                     value = _packedFlags.SetWellKnownAttribute(
                         flag,
-                        _moduleSymbol
-                            .Module
+                        _moduleSymbol.Module
                             .HasAttribute(_handle, AttributeDescription.IDispatchConstantAttribute)
                     );
                 }
@@ -721,8 +720,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                 {
                     value = _packedFlags.SetWellKnownAttribute(
                         flag,
-                        _moduleSymbol
-                            .Module
+                        _moduleSymbol.Module
                             .HasAttribute(_handle, AttributeDescription.IUnknownConstantAttribute)
                     );
                 }
@@ -742,8 +740,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                 {
                     value = _packedFlags.SetWellKnownAttribute(
                         flag,
-                        _moduleSymbol
-                            .Module
+                        _moduleSymbol.Module
                             .HasAttribute(_handle, AttributeDescription.CallerLineNumberAttribute)
                     );
                 }
@@ -763,8 +760,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                 {
                     value = _packedFlags.SetWellKnownAttribute(
                         flag,
-                        _moduleSymbol
-                            .Module
+                        _moduleSymbol.Module
                             .HasAttribute(_handle, AttributeDescription.CallerFilePathAttribute)
                     );
                 }
@@ -784,8 +780,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                 {
                     value = _packedFlags.SetWellKnownAttribute(
                         flag,
-                        _moduleSymbol
-                            .Module
+                        _moduleSymbol.Module
                             .HasAttribute(_handle, AttributeDescription.CallerMemberNameAttribute)
                     );
                 }
@@ -805,8 +800,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                     var discardedUseSiteInfo = CompoundUseSiteInfo<AssemblySymbol>.Discarded;
                     bool isCallerLineNumber =
                         HasCallerLineNumberAttribute
-                        && ContainingAssembly
-                            .TypeConversions
+                        && ContainingAssembly.TypeConversions
                             .HasCallerLineNumberConversion(this.Type, ref discardedUseSiteInfo);
 
                     value = _packedFlags.SetWellKnownAttribute(flag, isCallerLineNumber);
@@ -828,8 +822,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                     bool isCallerFilePath =
                         !HasCallerLineNumberAttribute
                         && HasCallerFilePathAttribute
-                        && ContainingAssembly
-                            .TypeConversions
+                        && ContainingAssembly.TypeConversions
                             .HasCallerInfoStringConversion(this.Type, ref discardedUseSiteInfo);
 
                     value = _packedFlags.SetWellKnownAttribute(flag, isCallerFilePath);
@@ -852,8 +845,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                         !HasCallerLineNumberAttribute
                         && !HasCallerFilePathAttribute
                         && HasCallerMemberNameAttribute
-                        && ContainingAssembly
-                            .TypeConversions
+                        && ContainingAssembly.TypeConversions
                             .HasCallerInfoStringConversion(this.Type, ref discardedUseSiteInfo);
 
                     value = _packedFlags.SetWellKnownAttribute(flag, isCallerMemberName);
@@ -871,8 +863,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                     return _lazyCallerArgumentExpressionParameterIndex;
                 }
 
-                var info = _moduleSymbol
-                    .Module
+                var info = _moduleSymbol.Module
                     .FindTargetAttribute(
                         _handle,
                         AttributeDescription.CallerArgumentExpressionAttribute
@@ -883,14 +874,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                     && !HasCallerLineNumberAttribute
                     && !HasCallerFilePathAttribute
                     && !HasCallerMemberNameAttribute
-                    && ContainingAssembly
-                        .TypeConversions
+                    && ContainingAssembly.TypeConversions
                         .HasCallerInfoStringConversion(this.Type, ref discardedUseSiteInfo);
 
                 if (isCallerArgumentExpression)
                 {
-                    _moduleSymbol
-                        .Module
+                    _moduleSymbol.Module
                         .TryExtractStringValueFromAttribute(info.Handle, out var parameterName);
                     var parameters = ContainingSymbol.GetParameters();
                     for (int i = 0; i < parameters.Length; i++)
@@ -1034,8 +1023,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
 
         private ImmutableArray<int> DecodeInterpolatedStringHandlerArgumentAttribute()
         {
-            var (paramNames, hasAttribute) = _moduleSymbol
-                .Module
+            var (paramNames, hasAttribute) = _moduleSymbol.Module
                 .GetInterpolatedStringHandlerArgumentAttributeValues(_handle);
 
             if (!hasAttribute)

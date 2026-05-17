@@ -160,8 +160,7 @@ namespace System.Diagnostics.PerformanceData
 
                     // ArgumentNullException - CounterName is NULL
                     // ArgumentException - CounterName already exists.
-                    uint Status = Interop
-                        .PerfCounter
+                    uint Status = Interop.PerfCounter
                         .PerfSetCounterRefValue(
                             _instance._counterSet._provider._hProvider,
                             _instance._nativeInst,

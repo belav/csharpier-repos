@@ -38,8 +38,7 @@ namespace System.ServiceModel.Channels
                 }
                 if (value != MessageVersion.None)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgument(
                             "value",
                             SR2.GetString(SR2.JsonOnlySupportsMessageVersionNone)

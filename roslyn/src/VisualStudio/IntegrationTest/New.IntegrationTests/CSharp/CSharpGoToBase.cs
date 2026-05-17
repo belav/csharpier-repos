@@ -22,18 +22,15 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
         [IdeFact]
         public async Task GoToBaseFromMetadataAsSource()
         {
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .AddFileAsync(
                     ProjectName,
                     "C.cs",
                     cancellationToken: HangMitigatingCancellationToken
                 );
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .OpenFileAsync(ProjectName, "C.cs", HangMitigatingCancellationToken);
-            await TestServices
-                .Editor
+            await TestServices.Editor
                 .SetTextAsync(
                     @"using System;
 
@@ -46,19 +43,16 @@ class C
 }",
                     HangMitigatingCancellationToken
                 );
-            await TestServices
-                .Editor
+            await TestServices.Editor
                 .PlaceCaretAsync("ToString", charsOffset: -1, HangMitigatingCancellationToken);
             await TestServices.Editor.GoToBaseAsync(HangMitigatingCancellationToken);
             Assert.Equal(
                 "Object [decompiled] [Read Only]",
-                await TestServices
-                    .Shell
+                await TestServices.Shell
                     .GetActiveWindowCaptionAsync(HangMitigatingCancellationToken)
             );
 
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .TextContainsAsync(
                     @"public virtual string ToString$$()",
                     assertCaretPosition: true

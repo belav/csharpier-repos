@@ -40,8 +40,7 @@ namespace Microsoft.CodeAnalysis.Rebuild.UnitTests
             );
             var compilationFactory = CompilationFactory.Create("test.exe", optionsReader);
 
-            var sources = original
-                .SyntaxTrees
+            var sources = original.SyntaxTrees
                 .Select(x => compilationFactory.CreateSyntaxTree(x.FilePath, x.GetText()))
                 .ToImmutableArray();
             var references = original.References.ToImmutableArray();

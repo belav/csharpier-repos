@@ -151,8 +151,7 @@ internal abstract partial class AbstractRecommendationService<
             {
                 // Get all members potentially matching the invocation expression.
                 // We filter them out based on ordinality later.
-                var candidateSymbols = _context
-                    .SemanticModel
+                var candidateSymbols = _context.SemanticModel
                     .GetMemberGroup(expressionOfInvocationExpression, _cancellationToken);
 
                 // parameter.Ordinal is the ordinal within (a,b,c) => b.
@@ -213,8 +212,7 @@ internal abstract partial class AbstractRecommendationService<
                 return parameterTypeSymbols;
             }
 
-            var invocationSymbols = _context
-                .SemanticModel
+            var invocationSymbols = _context.SemanticModel
                 .GetSymbolInfo(invocationExpression)
                 .GetAllSymbols();
             if (invocationSymbols.Length == 0)
@@ -273,8 +271,7 @@ internal abstract partial class AbstractRecommendationService<
             int lambdaParameterCount
         )
         {
-            var expressionSymbol = _context
-                .SemanticModel
+            var expressionSymbol = _context.SemanticModel
                 .Compilation
                 .GetTypeByMetadataName(typeof(Expression<>).FullName);
 
@@ -299,8 +296,7 @@ internal abstract partial class AbstractRecommendationService<
                     if (
                         expressionSymbol != null
                         && type is INamedTypeSymbol expressionSymbolNamedTypeCandidate
-                        && expressionSymbolNamedTypeCandidate
-                            .OriginalDefinition
+                        && expressionSymbolNamedTypeCandidate.OriginalDefinition
                             .Equals(expressionSymbol)
                     )
                     {
@@ -342,8 +338,7 @@ internal abstract partial class AbstractRecommendationService<
         {
             if (!string.IsNullOrEmpty(argumentName))
             {
-                parameterType = method
-                    .Parameters
+                parameterType = method.Parameters
                     .FirstOrDefault(p => _stringComparerForLanguage.Equals(p.Name, argumentName))
                     ?.Type;
                 return parameterType != null;
@@ -382,8 +377,7 @@ internal abstract partial class AbstractRecommendationService<
                 return ImmutableArray<ISymbol>.Empty;
 
             var semanticModel = _context.SemanticModel;
-            var containingNamespaceSymbol = semanticModel
-                .Compilation
+            var containingNamespaceSymbol = semanticModel.Compilation
                 .GetCompilationNamespace(
                     semanticModel.GetEnclosingNamespace(
                         declarationSyntax.SpanStart,
@@ -443,8 +437,7 @@ internal abstract partial class AbstractRecommendationService<
 
             void AddSpecialTypeSymbolAndItsAliases(string name, SpecialType specialType)
             {
-                var specialTypeSymbol = _context
-                    .SemanticModel
+                var specialTypeSymbol = _context.SemanticModel
                     .LookupNamespacesAndTypes(_context.Position, container, name)
                     .FirstOrDefault(s =>
                         s is INamedTypeSymbol namedType && namedType.SpecialType == specialType
@@ -452,13 +445,11 @@ internal abstract partial class AbstractRecommendationService<
 
                 builder.AddIfNotNull(specialTypeSymbol);
 
-                specialTypeSymbol ??= _context
-                    .SemanticModel
+                specialTypeSymbol ??= _context.SemanticModel
                     .Compilation
                     .GetSpecialType(specialType);
 
-                var aliases = _context
-                    .SemanticModel
+                var aliases = _context.SemanticModel
                     .LookupSymbols(_context.Position, container)
                     .OfType<IAliasSymbol>()
                     .Where(a => specialTypeSymbol.Equals(a.Target));
@@ -489,14 +480,12 @@ internal abstract partial class AbstractRecommendationService<
             // ...unless, again, it's also declared elsewhere.
             //
             return recommendationSymbol.IsNamespace()
-                && recommendationSymbol
-                    .Locations
+                && recommendationSymbol.Locations
                     .Any(
                         static (candidateLocation, declarationSyntax) =>
                             !(
                                 declarationSyntax.SyntaxTree == candidateLocation.SourceTree
-                                && declarationSyntax
-                                    .Span
+                                && declarationSyntax.Span
                                     .IntersectsWith(candidateLocation.SourceSpan)
                             ),
                         declarationSyntax
@@ -552,8 +541,7 @@ internal abstract partial class AbstractRecommendationService<
 
             var containerMembers = SuppressDefaultTupleElements(
                 container,
-                _context
-                    .SemanticModel
+                _context.SemanticModel
                     .LookupSymbols(position, container, includeReducedExtensionMethods: true)
             );
 
@@ -625,8 +613,7 @@ internal abstract partial class AbstractRecommendationService<
             {
                 // If the type we're dotting off of *is* the constraint type, then this is def a match and we can proceed.
                 if (
-                    SymbolEqualityComparer
-                        .Default
+                    SymbolEqualityComparer.Default
                         .Equals(originalContainerType, originalConstraintType)
                 )
                     return true;
@@ -645,8 +632,7 @@ internal abstract partial class AbstractRecommendationService<
                     foreach (var interfaceType in originalContainerType.AllInterfaces)
                     {
                         if (
-                            SymbolEqualityComparer
-                                .Default
+                            SymbolEqualityComparer.Default
                                 .Equals(interfaceType.OriginalDefinition, originalConstraintType)
                         )
                             return true;
@@ -663,8 +649,7 @@ internal abstract partial class AbstractRecommendationService<
                     )
                     {
                         if (
-                            SymbolEqualityComparer
-                                .Default
+                            SymbolEqualityComparer.Default
                                 .Equals(current.OriginalDefinition, originalConstraintType)
                         )
                             return true;

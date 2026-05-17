@@ -11,8 +11,7 @@ namespace Microsoft.EntityFrameworkCore;
 
 public abstract class SqlServerValueGenerationScenariosTestBase
 {
-    protected static readonly GeometryFactory GeometryFactory = NtsGeometryServices
-        .Instance
+    protected static readonly GeometryFactory GeometryFactory = NtsGeometryServices.Instance
         .CreateGeometryFactory(srid: 4326);
 
     protected abstract string DatabaseName { get; }
@@ -1219,8 +1218,7 @@ public abstract class SqlServerValueGenerationScenariosTestBase
             )
         )
         {
-            context
-                .Database
+            context.Database
                 .ExecuteSqlRaw(
                     @"CREATE FUNCTION
 [dbo].[GetFullName](@First NVARCHAR(MAX), @Second NVARCHAR(MAX))
@@ -1332,8 +1330,7 @@ RETURNS NVARCHAR(MAX) WITH SCHEMABINDING AS BEGIN RETURN @First + @Second END"
 
             context.Database.ExecuteSqlRaw("ALTER TABLE dbo.FullNameBlogs DROP COLUMN FullName;");
 
-            context
-                .Database
+            context.Database
                 .ExecuteSqlRaw(
                     @"CREATE FUNCTION [dbo].[GetFullName](@Id int)
 RETURNS nvarchar(max) WITH SCHEMABINDING AS
@@ -1344,8 +1341,7 @@ BEGIN
 END"
                 );
 
-            context
-                .Database
+            context.Database
                 .ExecuteSqlRaw(
                     "ALTER TABLE dbo.FullNameBlogs ADD FullName AS [dbo].[GetFullName]([Id]); "
                 );
@@ -1471,8 +1467,7 @@ END"
 
             context.Database.ExecuteSqlRaw("ALTER TABLE dbo.FullNameBlogs DROP COLUMN FullName;");
 
-            context
-                .Database
+            context.Database
                 .ExecuteSqlRaw(
                     @"CREATE FUNCTION [dbo].[GetFullName](@Id int)
 RETURNS nvarchar(max) WITH SCHEMABINDING AS
@@ -1483,8 +1478,7 @@ BEGIN
 END"
                 );
 
-            context
-                .Database
+            context.Database
                 .ExecuteSqlRaw(
                     "ALTER TABLE dbo.FullNameBlogs ADD FullName AS [dbo].[GetFullName]([Id]); "
                 );
@@ -1549,8 +1543,7 @@ END"
         {
             context.GetService<IRelationalDatabaseCreator>().CreateTables();
 
-            context
-                .Database
+            context.Database
                 .ExecuteSqlRaw(
                     @"CREATE OR ALTER TRIGGER [FullNameBlogs_Trigger]
 ON [FullNameBlogs]
@@ -1840,8 +1833,7 @@ END"
         // inner exception for details.
         // SqlException : Cannot insert explicit value for identity column in table
         // 'Blog' when IDENTITY_INSERT is set to OFF.
-        context
-            .Database
+        context.Database
             .CreateExecutionStrategy()
             .Execute(context, c => Assert.Throws<DbUpdateException>(() => c.SaveChanges()));
     }

@@ -85,8 +85,7 @@ namespace System.Net.Http
             IEnumerable<CookieHeaderValue> cookieHeaderValues = GetCookies(headers);
             CookieHeaderValue[] matches = cookieHeaderValues
                 .Where(header =>
-                    header
-                        .Cookies
+                    header.Cookies
                         .Any(state =>
                             String.Equals(state.Name, name, StringComparison.OrdinalIgnoreCase)
                         )

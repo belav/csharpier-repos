@@ -106,8 +106,7 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                                 IVariableDeclarationGroupOperation declaration =
                                     (IVariableDeclarationGroupOperation)operationContext.Operation;
                                 foreach (
-                                    IVariableDeclaratorOperation variable in declaration
-                                        .Declarations
+                                    IVariableDeclaratorOperation variable in declaration.Declarations
                                         .SelectMany(decl => decl.Declarators)
                                 )
                                 {

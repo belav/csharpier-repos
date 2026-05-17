@@ -218,8 +218,7 @@ namespace System.Web.Services.Description
 
             AppendMetadata(method.MimeReturn.Attributes, mainCodeMethod.ReturnTypeCustomAttributes);
 
-            mainCodeMethod
-                .Comments
+            mainCodeMethod.Comments
                 .Add(new CodeCommentStatement(Res.GetString(Res.CodeRemarks), true));
 
             for (int i = 0; i < parameters.Count; i++)
@@ -250,8 +249,7 @@ namespace System.Web.Services.Description
                 );
                 if (method.MimeReturn.ReaderType != null)
                 {
-                    mainCodeMethod
-                        .Statements
+                    mainCodeMethod.Statements
                         .Add(
                             new CodeMethodReturnStatement(
                                 new CodeCastExpression(method.MimeReturn.TypeName, invoke)
@@ -287,8 +285,7 @@ namespace System.Web.Services.Description
                         metadata,
                         CodeFlags.IsPublic
                     );
-                    beginCodeMethod
-                        .Comments
+                    beginCodeMethod.Comments
                         .Add(new CodeCommentStatement(Res.GetString(Res.CodeRemarks), true));
 
                     invokeParams = new CodeExpression[5];
@@ -314,8 +311,7 @@ namespace System.Web.Services.Description
                         metadata,
                         CodeFlags.IsPublic
                     );
-                    endCodeMethod
-                        .Comments
+                    endCodeMethod.Comments
                         .Add(new CodeCommentStatement(Res.GetString(Res.CodeRemarks), true));
 
                     CodeExpression expr = new CodeArgumentReferenceExpression("asyncResult");
@@ -326,8 +322,7 @@ namespace System.Web.Services.Description
                     );
                     if (method.MimeReturn.ReaderType != null)
                     {
-                        endCodeMethod
-                            .Statements
+                        endCodeMethod.Statements
                             .Add(
                                 new CodeMethodReturnStatement(
                                     new CodeCastExpression(method.MimeReturn.TypeName, invoke)
@@ -447,8 +442,7 @@ namespace System.Web.Services.Description
                                     delegateInfo.handlerArgs,
                                     new string[] { method.MimeReturn.TypeName },
                                     new string[] { "Result" },
-                                    ServiceImporter
-                                        .CodeGenerator
+                                    ServiceImporter.CodeGenerator
                                         .Supports(GeneratorSupport.PartialTypes)
                                 )
                             );

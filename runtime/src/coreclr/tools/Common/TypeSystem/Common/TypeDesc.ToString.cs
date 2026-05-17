@@ -7,8 +7,7 @@ namespace Internal.TypeSystem
     {
         public override string ToString()
         {
-            return DebugNameFormatter
-                .Instance
+            return DebugNameFormatter.Instance
                 .FormatName(this, DebugNameFormatter.FormatOptions.Default);
         }
     }

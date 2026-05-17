@@ -54,8 +54,7 @@ public class InterlockedCompareExchange1
         T comparand;
         T oldLocation;
 
-        TestLibrary
-            .TestFramework
+        TestLibrary.TestFramework
             .BeginScenario(
                 "PosTest1: T Interlocked.CompareExchange(T&,T,T) (T="
                     + typeof(T)
@@ -71,8 +70,7 @@ public class InterlockedCompareExchange1
                         TestLibrary.Generator.GetString(false, c_MIN_STRING_LEN, c_MAX_STRING_LEN);
                 location = (T)
                     (object)
-                        TestLibrary
-                            .Generator
+                        TestLibrary.Generator
                             .GetString(-55, false, c_MIN_STRING_LEN, c_MAX_STRING_LEN);
                 comparand = location;
 
@@ -82,8 +80,7 @@ public class InterlockedCompareExchange1
 
                 if (!location.Equals(value))
                 {
-                    TestLibrary
-                        .TestFramework
+                    TestLibrary.TestFramework
                         .LogError(
                             "001",
                             "Interlocked.CompareExchange() did not do the exchange correctly: Expected("
@@ -97,8 +94,7 @@ public class InterlockedCompareExchange1
 
                 if (!oldLocation.Equals(comparand))
                 {
-                    TestLibrary
-                        .TestFramework
+                    TestLibrary.TestFramework
                         .LogError(
                             "002",
                             "Interlocked.CompareExchange() did not return the expected value: Expected("
@@ -130,8 +126,7 @@ public class InterlockedCompareExchange1
         T comparand;
         T oldLocation;
 
-        TestLibrary
-            .TestFramework
+        TestLibrary.TestFramework
             .BeginScenario(
                 "PosTest2: T Interlocked.CompareExchange(T&,T,T) (T="
                     + typeof(T)
@@ -144,21 +139,18 @@ public class InterlockedCompareExchange1
             {
                 value = (T)
                     (object)
-                        TestLibrary
-                            .Generator
+                        TestLibrary.Generator
                             .GetString(-55, false, c_MIN_STRING_LEN, c_MAX_STRING_LEN);
                 location = (T)
                     (object)
-                        TestLibrary
-                            .Generator
+                        TestLibrary.Generator
                             .GetString(-55, false, c_MIN_STRING_LEN, c_MAX_STRING_LEN);
                 comparand = value;
                 while (comparand.Equals(location))
                 {
                     comparand = (T)
                         (object)
-                            TestLibrary
-                                .Generator
+                            TestLibrary.Generator
                                 .GetString(-55, false, c_MIN_STRING_LEN, c_MAX_STRING_LEN);
                 }
 
@@ -169,8 +161,7 @@ public class InterlockedCompareExchange1
 
                 if (location.Equals(value))
                 {
-                    TestLibrary
-                        .TestFramework
+                    TestLibrary.TestFramework
                         .LogError(
                             "004",
                             "Interlocked.CompareExchange() did not do the exchange correctly: Expected("
@@ -184,8 +175,7 @@ public class InterlockedCompareExchange1
 
                 if (oldLocation.Equals(comparand))
                 {
-                    TestLibrary
-                        .TestFramework
+                    TestLibrary.TestFramework
                         .LogError(
                             "005",
                             "Interlocked.CompareExchange() did not return the expected value: Expected("

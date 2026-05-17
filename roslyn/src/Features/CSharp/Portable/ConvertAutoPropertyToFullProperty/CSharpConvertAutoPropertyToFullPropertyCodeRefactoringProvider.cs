@@ -121,11 +121,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertAutoPropertyToFullProperty
             AccessorDeclarationSyntax setAccessor
         ) GetExistingAccessors(AccessorListSyntax accessorListSyntax) =>
             (
-                accessorListSyntax
-                    .Accessors
+                accessorListSyntax.Accessors
                     .FirstOrDefault(a => a.IsKind(SyntaxKind.GetAccessorDeclaration)),
-                accessorListSyntax
-                    .Accessors
+                accessorListSyntax.Accessors
                     .FirstOrDefault(a =>
                         a.Kind()
                             is SyntaxKind.SetAccessorDeclaration
@@ -150,8 +148,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertAutoPropertyToFullProperty
             }
 
             if (
-                !accessorDeclarationSyntax
-                    .Body
+                !accessorDeclarationSyntax.Body
                     .TryConvertToArrowExpressionBody(
                         accessorDeclarationSyntax.Kind(),
                         info.LanguageVersion,

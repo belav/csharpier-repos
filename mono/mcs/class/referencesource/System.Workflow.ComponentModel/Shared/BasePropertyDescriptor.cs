@@ -461,8 +461,7 @@ namespace System.Workflow.ComponentModel.Design
             )
             {
                 if (
-                    memberInfo
-                        .Name
+                    memberInfo.Name
                         .Equals(
                             name,
                             (

@@ -73,8 +73,7 @@ public class ModelSource : IModelSource
                         modelCreationDependencies.ModelDependencies
                     );
 
-                    model = modelCreationDependencies
-                        .ModelRuntimeInitializer
+                    model = modelCreationDependencies.ModelRuntimeInitializer
                         .Initialize(model, designTime, modelCreationDependencies.ValidationLogger);
 
                     model = cache.Set(

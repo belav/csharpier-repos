@@ -42,8 +42,7 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Navigation
         )
         {
             var service = workspace.Services.GetService<IDocumentNavigationService>();
-            return _threadingContext
-                .JoinableTaskFactory
+            return _threadingContext.JoinableTaskFactory
                 .Run(() =>
                     service.CanNavigateToSpanAsync(
                         workspace,
@@ -78,8 +77,7 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Navigation
         )
         {
             var service = workspace.Services.GetService<IDocumentNavigationService>();
-            return _threadingContext
-                .JoinableTaskFactory
+            return _threadingContext.JoinableTaskFactory
                 .Run(() =>
                     service.CanNavigateToLineAndOffsetAsync(
                         workspace,
@@ -115,8 +113,7 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Navigation
         )
         {
             var service = workspace.Services.GetService<IDocumentNavigationService>();
-            return _threadingContext
-                .JoinableTaskFactory
+            return _threadingContext.JoinableTaskFactory
                 .Run(() =>
                     service.CanNavigateToPositionAsync(
                         workspace,
@@ -144,8 +141,7 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Navigation
         )
         {
             var service = workspace.Services.GetService<IDocumentNavigationService>();
-            return _threadingContext
-                .JoinableTaskFactory
+            return _threadingContext.JoinableTaskFactory
                 .Run(() =>
                     service.TryNavigateToSpanAsync(
                         _threadingContext,
@@ -186,8 +182,7 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Navigation
         )
         {
             var service = workspace.Services.GetService<IDocumentNavigationService>();
-            return _threadingContext
-                .JoinableTaskFactory
+            return _threadingContext.JoinableTaskFactory
                 .Run(() =>
                     service.TryNavigateToPositionAsync(
                         _threadingContext,
@@ -229,8 +224,7 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Navigation
         )
         {
             var service = workspace.Services.GetService<IDocumentNavigationService>();
-            return _threadingContext
-                .JoinableTaskFactory
+            return _threadingContext.JoinableTaskFactory
                 .Run(() =>
                     service.TryNavigateToPositionAsync(
                         _threadingContext,

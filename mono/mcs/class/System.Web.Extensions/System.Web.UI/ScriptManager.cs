@@ -516,8 +516,7 @@ namespace System.Web.UI
                     CultureInfo culture = Thread.CurrentThread.CurrentCulture;
                     string script = String.Format(
                         "var __cultureInfo = '{0}';",
-                        JavaScriptSerializer
-                            .DefaultSerializer
+                        JavaScriptSerializer.DefaultSerializer
                             .Serialize(new CultureInfoSerializer(culture))
                     );
                     RegisterClientScriptBlock(
@@ -563,9 +562,10 @@ namespace System.Web.UI
 
 #if TARGET_DOTNET
                 // to cause webform client script being included
-                Page.ClientScript.GetPostBackEventReference(
-                    new PostBackOptions(this, null, null, false, false, false, true, true, null)
-                );
+                Page.ClientScript
+                    .GetPostBackEventReference(
+                        new PostBackOptions(this, null, null, false, false, false, true, true, null)
+                    );
 #else
                 Page.ClientScript.GetPostBackEventReference(this, null);
 #endif
@@ -654,8 +654,7 @@ namespace System.Web.UI
                         "Sys.Services._ProfileService.DefaultWebServicePath = '"
                             + ResolveClientUrl(
                                 "~"
-                                    + System
-                                        .Web
+                                    + System.Web
                                         .Script
                                         .Services
                                         .ProfileService
@@ -980,9 +979,8 @@ namespace System.Web.UI
             if (sm._arrayDeclarations == null)
                 sm._arrayDeclarations = new List<RegisteredArrayDeclaration>();
 
-            sm._arrayDeclarations.Add(
-                new RegisteredArrayDeclaration(control, arrayName, arrayValue)
-            );
+            sm._arrayDeclarations
+                .Add(new RegisteredArrayDeclaration(control, arrayName, arrayValue));
 
             if (!sm.IsInAsyncPostBack)
                 page.ClientScript.RegisterArrayDeclaration(arrayName, arrayValue);
@@ -1231,23 +1229,20 @@ namespace System.Web.UI
             if (sm._expandoAttributes == null)
                 sm._expandoAttributes = new List<RegisteredExpandoAttribute>();
 
-            sm._expandoAttributes.Add(
-                new RegisteredExpandoAttribute(
-                    control,
-                    controlId,
-                    attributeName,
-                    attributeValue,
-                    encode
-                )
-            );
+            sm._expandoAttributes
+                .Add(
+                    new RegisteredExpandoAttribute(
+                        control,
+                        controlId,
+                        attributeName,
+                        attributeValue,
+                        encode
+                    )
+                );
 
             if (!sm.IsInAsyncPostBack)
-                page.ClientScript.RegisterExpandoAttribute(
-                    controlId,
-                    attributeName,
-                    attributeValue,
-                    encode
-                );
+                page.ClientScript
+                    .RegisterExpandoAttribute(controlId, attributeName, attributeValue, encode);
         }
 
         public static void RegisterHiddenField(
@@ -1274,9 +1269,8 @@ namespace System.Web.UI
             if (sm._hiddenFields == null)
                 sm._hiddenFields = new List<RegisteredHiddenField>();
 
-            sm._hiddenFields.Add(
-                new RegisteredHiddenField(control, hiddenFieldName, hiddenFieldInitialValue)
-            );
+            sm._hiddenFields
+                .Add(new RegisteredHiddenField(control, hiddenFieldName, hiddenFieldInitialValue));
 
             if (!sm.IsInAsyncPostBack)
                 page.ClientScript.RegisterHiddenField(hiddenFieldName, hiddenFieldInitialValue);
@@ -1905,8 +1899,7 @@ namespace System.Web.UI
                         if (attr.Encode)
                         {
                             StringWriter sw = new StringWriter();
-                            Newtonsoft
-                                .Json
+                            Newtonsoft.Json
                                 .JavaScriptUtils
                                 .WriteEscapedJavaScriptString(attr.Value, sw);
                             value = sw.ToString();

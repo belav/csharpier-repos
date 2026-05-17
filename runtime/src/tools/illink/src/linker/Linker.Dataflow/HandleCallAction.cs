@@ -54,11 +54,8 @@ namespace ILLink.Shared.TrimAnalysis
         )
         {
             foreach (
-                var method in type.Type.GetMethodsOnTypeHierarchy(
-                    _context,
-                    m => m.Name == name,
-                    bindingFlags
-                )
+                var method in type.Type
+                    .GetMethodsOnTypeHierarchy(_context, m => m.Name == name, bindingFlags)
             )
                 yield return new SystemReflectionMethodBaseValue(new MethodProxy(method));
         }

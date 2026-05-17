@@ -3284,8 +3284,7 @@ namespace System.Text.RegularExpressions
                 );
                 assemblyAttributes.Add(securityRulesAttribute);
 #endif
-                _assembly = AppDomain
-                    .CurrentDomain
+                _assembly = AppDomain.CurrentDomain
                     .DefineDynamicAssembly(
                         an,
                         AssemblyBuilderAccess.RunAndSave,

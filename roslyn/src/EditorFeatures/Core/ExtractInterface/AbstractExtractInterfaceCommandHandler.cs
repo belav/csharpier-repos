@@ -47,8 +47,7 @@ namespace Microsoft.CodeAnalysis.ExtractInterface
         )
         {
             using (
-                context
-                    .OperationContext
+                context.OperationContext
                     .AddScope(allowCancellation: true, EditorFeaturesResources.Extract_Interface)
             )
             {
@@ -64,8 +63,7 @@ namespace Microsoft.CodeAnalysis.ExtractInterface
                     return false;
                 }
 
-                var document = subjectBuffer
-                    .CurrentSnapshot
+                var document = subjectBuffer.CurrentSnapshot
                     .GetFullyLoadedOpenDocumentInCurrentContextWithChanges(
                         context.OperationContext,
                         _threadingContext
@@ -82,8 +80,7 @@ namespace Microsoft.CodeAnalysis.ExtractInterface
 
                 var extractInterfaceService =
                     document.GetLanguageService<AbstractExtractInterfaceService>();
-                _threadingContext
-                    .JoinableTaskFactory
+                _threadingContext.JoinableTaskFactory
                     .Run(async () =>
                     {
                         // ConfigureAwait(true) here so we are back on the UI thread
@@ -96,8 +93,7 @@ namespace Microsoft.CodeAnalysis.ExtractInterface
                                 caretPoint.Value.Position,
                                 _globalOptions.CreateProvider(),
                                 (errorMessage, severity) =>
-                                    workspace
-                                        .Services
+                                    workspace.Services
                                         .GetService<INotificationService>()
                                         .SendNotification(errorMessage, severity: severity),
                                 CancellationToken.None
@@ -110,8 +106,7 @@ namespace Microsoft.CodeAnalysis.ExtractInterface
                         }
 
                         if (
-                            !document
-                                .Project
+                            !document.Project
                                 .Solution
                                 .Workspace
                                 .TryApplyChanges(result.UpdatedSolution)
@@ -121,8 +116,7 @@ namespace Microsoft.CodeAnalysis.ExtractInterface
                             return;
                         }
 
-                        var navigationService = workspace
-                            .Services
+                        var navigationService = workspace.Services
                             .GetService<IDocumentNavigationService>();
                         await navigationService
                             .TryNavigateToPositionAsync(

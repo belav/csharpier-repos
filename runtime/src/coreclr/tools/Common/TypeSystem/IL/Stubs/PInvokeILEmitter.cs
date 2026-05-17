@@ -211,8 +211,7 @@ namespace Internal.IL.Stubs
                 fnptrLoadStream.Emit(
                     ILOpcode.call,
                     emitter.NewToken(
-                        delegateMethod
-                            .Context
+                        delegateMethod.Context
                             .GetHelperType("InteropHelpers")
                             .GetKnownMethod(
                                 "GetCurrentCalleeOpenStaticDelegateFunctionPointer",
@@ -236,11 +235,9 @@ namespace Internal.IL.Stubs
                 //     InteropHelpers.GetCurrentCalleeDelegate<Delegate>
                 // which returns the delegate. Do a CallVirt on the invoke method.
                 //
-                MethodDesc instantiatedHelper = delegateMethod
-                    .Context
+                MethodDesc instantiatedHelper = delegateMethod.Context
                     .GetInstantiatedMethod(
-                        delegateMethod
-                            .Context
+                        delegateMethod.Context
                             .GetHelperType("InteropHelpers")
                             .GetKnownMethod("GetCurrentCalleeDelegate", null),
                         new Instantiation((delegateMethod.DelegateType))
@@ -251,8 +248,7 @@ namespace Internal.IL.Stubs
                 ILLocalVariable vDelegateStub = emitter.NewLocal(delegateMethod.DelegateType);
                 fnptrLoadStream.EmitStLoc(vDelegateStub);
                 marshallingCodeStream.EmitLdLoc(vDelegateStub);
-                MethodDesc invokeMethod = delegateMethod
-                    .DelegateType
+                MethodDesc invokeMethod = delegateMethod.DelegateType
                     .GetKnownMethod("Invoke", null);
                 callsiteSetupCodeStream.Emit(ILOpcode.callvirt, emitter.NewToken(invokeMethod));
             }
@@ -458,8 +454,7 @@ namespace Internal.IL.Stubs
 
             if (MarshalHelpers.ShouldCheckForPendingException(context.Target, _pInvokeMetadata))
             {
-                MetadataType lazyHelperType = context
-                    .SystemModule
+                MetadataType lazyHelperType = context.SystemModule
                     .GetKnownType("System.Runtime.InteropServices.ObjectiveC", "ObjectiveCMarshal");
                 callsiteSetupCodeStream.Emit(
                     ILOpcode.call,

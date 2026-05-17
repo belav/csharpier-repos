@@ -534,8 +534,7 @@ namespace System.Reflection.Metadata.Tests
 
             Assert.Equal("NSTests.WithNestedType", reader.GetString(handle));
             Assert.True(
-                reader
-                    .StringComparer
+                reader.StringComparer
                     .Equals(handle.WithWinRTPrefix(), "<WinRT>NSTests.WithNestedType")
             );
             Assert.True(reader.StringComparer.StartsWith(handle.WithWinRTPrefix(), "<WinRT>N"));
@@ -566,8 +565,7 @@ namespace System.Reflection.Metadata.Tests
                 reader.StringComparer.StartsWith(handle.WithWinRTPrefix(), "<WinRT>\uFFFDS")
             );
             Assert.True(
-                reader
-                    .StringComparer
+                reader.StringComparer
                     .Equals(handle.WithWinRTPrefix(), "<WinRT>\uFFFDSTests.WithNestedType")
             );
             ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1825,8 +1823,7 @@ namespace System.Reflection.Metadata.Tests
                 Assert.True(reader.StringComparer.Equals(subNamespace.Name, subNamespaceName));
                 Assert.True(reader.StringComparer.StartsWith(subNamespace.Name, subNamespaceName));
                 Assert.True(
-                    reader
-                        .StringComparer
+                    reader.StringComparer
                         .StartsWith(
                             subNamespace.Name,
                             subNamespaceName.Substring(0, subNamespaceName.Length - 1)
@@ -1941,8 +1938,7 @@ namespace System.Reflection.Metadata.Tests
                 Assert.NotNull(fullyQualifiedName);
                 Assert.Equal(fullyQualifiedName, expFullyQualifiedName);
                 Assert.False(reader.NamespaceCache.CacheIsRealized);
-                var comparisonResult = reader
-                    .StringComparer
+                var comparisonResult = reader.StringComparer
                     .Equals(namespaceHandle, fullyQualifiedName);
                 Assert.True(comparisonResult);
                 Assert.False(reader.NamespaceCache.CacheIsRealized);
@@ -4049,8 +4045,7 @@ namespace System.Reflection.Metadata.Tests
         {
             var reader = GetMetadataReader(Misc.Members);
             var typeC = reader.GetTypeDefinition(
-                reader
-                    .TypeDefinitions
+                reader.TypeDefinitions
                     .Where(t => reader.GetString(reader.GetTypeDefinition(t).Name) == "C")
                     .Single()
             );

@@ -67,8 +67,7 @@ namespace Microsoft.Interop
                         return NoMarshallingInfo.Instance;
                     }
 
-                    entryPointType = entryPointType
-                        .ConstructedFrom
+                    entryPointType = entryPointType.ConstructedFrom
                         .Construct(
                             arrayManagedType.ElementType,
                             entryPointType.TypeArguments.Last()

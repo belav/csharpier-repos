@@ -85,8 +85,7 @@ namespace Microsoft.CodeAnalysis.Test.Utilities.ChangeSignature
                 LanguageNames.VisualBasic => semanticModel
                     .GetSpeculativeTypeInfo(
                         0,
-                        VisualBasic
-                            .SyntaxFactory
+                        VisualBasic.SyntaxFactory
                             .ParseTypeName(_addedParameterFullyQualifiedTypeName!),
                         SpeculativeBindingOption.BindAsTypeOrNamespace
                     )

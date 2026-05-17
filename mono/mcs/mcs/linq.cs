@@ -76,13 +76,14 @@ namespace Mono.CSharp.Linq
                 string name
             )
             {
-                ec.Report.Error(
-                    1935,
-                    loc,
-                    "An implementation of `{0}' query expression pattern could not be found. "
-                        + "Are you missing `System.Linq' using directive or `System.Core.dll' assembly reference?",
-                    name
-                );
+                ec.Report
+                    .Error(
+                        1935,
+                        loc,
+                        "An implementation of `{0}' query expression pattern could not be found. "
+                            + "Are you missing `System.Linq' using directive or `System.Core.dll' assembly reference?",
+                        name
+                    );
             }
         }
 
@@ -106,11 +107,12 @@ namespace Mono.CSharp.Linq
 
             protected override Expression DoResolveDynamic(ResolveContext ec, Expression memberExpr)
             {
-                ec.Report.Error(
-                    1979,
-                    loc,
-                    "Query expressions with a source or join sequence of type `dynamic' are not allowed"
-                );
+                ec.Report
+                    .Error(
+                        1979,
+                        loc,
+                        "Query expressions with a source or join sequence of type `dynamic' are not allowed"
+                    );
                 return null;
             }
 
@@ -127,13 +129,14 @@ namespace Mono.CSharp.Linq
 
                 ec.Report.SymbolRelatedToPreviousError(best);
                 ec.Report.SymbolRelatedToPreviousError(ambiguous);
-                ec.Report.Error(
-                    1940,
-                    loc,
-                    "Ambiguous implementation of the query pattern `{0}' for source type `{1}'",
-                    best.Name,
-                    type.Type.GetSignatureForError()
-                );
+                ec.Report
+                    .Error(
+                        1940,
+                        loc,
+                        "Ambiguous implementation of the query pattern `{0}' for source type `{1}'",
+                        best.Name,
+                        type.Type.GetSignatureForError()
+                    );
                 return true;
             }
 
@@ -182,35 +185,38 @@ namespace Mono.CSharp.Linq
 
                     if (!Convert.ImplicitConversionExists(rc, a.Expr, source_type))
                     {
-                        rc.Report.Error(
-                            1936,
-                            loc,
-                            "An implementation of `{0}' query expression pattern for source type `{1}' could not be found",
-                            best.Name,
-                            a.Type.GetSignatureForError()
-                        );
+                        rc.Report
+                            .Error(
+                                1936,
+                                loc,
+                                "An implementation of `{0}' query expression pattern for source type `{1}' could not be found",
+                                best.Name,
+                                a.Type.GetSignatureForError()
+                            );
                         return true;
                     }
                 }
 
                 if (best.Name == "SelectMany")
                 {
-                    rc.Report.Error(
-                        1943,
-                        loc,
-                        "An expression type is incorrect in a subsequent `from' clause in a query expression with source type `{0}'",
-                        arguments[0].GetSignatureForError()
-                    );
+                    rc.Report
+                        .Error(
+                            1943,
+                            loc,
+                            "An expression type is incorrect in a subsequent `from' clause in a query expression with source type `{0}'",
+                            arguments[0].GetSignatureForError()
+                        );
                 }
                 else
                 {
-                    rc.Report.Error(
-                        1942,
-                        loc,
-                        "An expression type in `{0}' clause is incorrect. Type inference failed in the call to `{1}'",
-                        best.Name.ToLowerInvariant(),
-                        best.Name
-                    );
+                    rc.Report
+                        .Error(
+                            1942,
+                            loc,
+                            "An expression type in `{0}' clause is incorrect. Type inference failed in the call to `{1}'",
+                            best.Name.ToLowerInvariant(),
+                            best.Name
+                        );
                 }
 
                 return true;
@@ -328,13 +334,14 @@ namespace Mono.CSharp.Linq
 
             protected override void Error_InvalidInitializer(ResolveContext ec, string initializer)
             {
-                ec.Report.Error(
-                    1932,
-                    loc,
-                    "A range variable `{0}' cannot be initialized with `{1}'",
-                    Name,
-                    initializer
-                );
+                ec.Report
+                    .Error(
+                        1932,
+                        loc,
+                        "A range variable `{0}' cannot be initialized with `{1}'",
+                        Name,
+                        initializer
+                    );
             }
         }
 
@@ -986,8 +993,7 @@ namespace Mono.CSharp.Linq
             string reason
         )
         {
-            TopBlock
-                .Report
+            TopBlock.Report
                 .Error(
                     1931,
                     variable.Location,
@@ -998,8 +1004,7 @@ namespace Mono.CSharp.Linq
 
         public override void Error_AlreadyDeclared(string name, INamedBlockVariable variable)
         {
-            TopBlock
-                .Report
+            TopBlock.Report
                 .Error(
                     1930,
                     variable.Location,
@@ -1010,8 +1015,7 @@ namespace Mono.CSharp.Linq
 
         public override void Error_AlreadyDeclaredTypeParameter(string name, Location loc)
         {
-            TopBlock
-                .Report
+            TopBlock.Report
                 .Error(
                     1948,
                     loc,
@@ -1044,12 +1048,13 @@ namespace Mono.CSharp.Linq
 
         public override Expression DoResolveLValue(ResolveContext rc, Expression right_side)
         {
-            rc.Report.Error(
-                1947,
-                loc,
-                "A range variable `{0}' cannot be assigned to. Consider using `let' clause to store the value",
-                Name
-            );
+            rc.Report
+                .Error(
+                    1947,
+                    loc,
+                    "A range variable `{0}' cannot be assigned to. Consider using `let' clause to store the value",
+                    Name
+                );
 
             return null;
         }

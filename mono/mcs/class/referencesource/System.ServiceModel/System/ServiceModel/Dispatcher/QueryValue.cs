@@ -150,8 +150,7 @@ namespace System.ServiceModel.Dispatcher
             switch (this.type)
             {
                 default:
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperCritical(
                             new QueryProcessingException(QueryProcessingError.TypeMismatch)
                         );
@@ -160,8 +159,7 @@ namespace System.ServiceModel.Dispatcher
                     switch (val.type)
                     {
                         default:
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperCritical(
                                     new QueryProcessingException(QueryProcessingError.TypeMismatch)
                                 );
@@ -179,8 +177,7 @@ namespace System.ServiceModel.Dispatcher
                     switch (val.type)
                     {
                         default:
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperCritical(
                                     new QueryProcessingException(QueryProcessingError.TypeMismatch)
                                 );
@@ -198,8 +195,7 @@ namespace System.ServiceModel.Dispatcher
                     switch (val.type)
                     {
                         default:
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperCritical(
                                     new QueryProcessingException(QueryProcessingError.TypeMismatch)
                                 );
@@ -217,8 +213,7 @@ namespace System.ServiceModel.Dispatcher
                     switch (val.type)
                     {
                         default:
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperCritical(
                                     new QueryProcessingException(QueryProcessingError.TypeMismatch)
                                 );
@@ -239,8 +234,7 @@ namespace System.ServiceModel.Dispatcher
             switch (this.type)
             {
                 default:
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperCritical(
                             new QueryProcessingException(QueryProcessingError.TypeMismatch)
                         );
@@ -343,8 +337,7 @@ namespace System.ServiceModel.Dispatcher
             switch (this.type)
             {
                 default:
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new QueryProcessingException(QueryProcessingError.TypeMismatch),
                             TraceEventType.Critical
@@ -369,8 +362,7 @@ namespace System.ServiceModel.Dispatcher
         {
             if (ValueDataType.Boolean != this.type)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperCritical(
                         new QueryProcessingException(QueryProcessingError.TypeMismatch)
                     );
@@ -383,8 +375,7 @@ namespace System.ServiceModel.Dispatcher
         {
             if (ValueDataType.Double != this.type)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperCritical(
                         new QueryProcessingException(QueryProcessingError.TypeMismatch)
                     );
@@ -397,8 +388,7 @@ namespace System.ServiceModel.Dispatcher
         {
             if (ValueDataType.Sequence != this.type)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperCritical(
                         new QueryProcessingException(QueryProcessingError.TypeMismatch)
                     );
@@ -411,8 +401,7 @@ namespace System.ServiceModel.Dispatcher
         {
             if (ValueDataType.String != this.type)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperCritical(
                         new QueryProcessingException(QueryProcessingError.TypeMismatch)
                     );
@@ -475,8 +464,7 @@ namespace System.ServiceModel.Dispatcher
             switch (this.type)
             {
                 default:
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperCritical(
                             new QueryProcessingException(QueryProcessingError.TypeMismatch)
                         );
@@ -500,8 +488,7 @@ namespace System.ServiceModel.Dispatcher
             switch (this.type)
             {
                 default:
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperCritical(
                             new QueryProcessingException(QueryProcessingError.TypeMismatch)
                         );
@@ -525,8 +512,7 @@ namespace System.ServiceModel.Dispatcher
             switch (this.type)
             {
                 default:
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperCritical(
                             new QueryProcessingException(QueryProcessingError.TypeMismatch)
                         );

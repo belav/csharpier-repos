@@ -44,8 +44,7 @@ namespace System.ServiceModel.Description
             {
                 if (!UnknownExceptionActionHelper.IsDefined(value))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new ArgumentOutOfRangeException("value"));
                 }
 
@@ -70,8 +69,7 @@ namespace System.ServiceModel.Description
         {
             if (serviceDescription == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("serviceDescription");
             }
 
@@ -82,8 +80,7 @@ namespace System.ServiceModel.Description
 
             if (serviceDescription.Endpoints == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument("serviceDescription", SR2.GetString(SR2.NoEndpoints));
             }
 
@@ -96,8 +93,7 @@ namespace System.ServiceModel.Description
 
             if (providerBehavior == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR2.GetString(
@@ -111,8 +107,7 @@ namespace System.ServiceModel.Description
 
             if (providerBehavior.PersistenceProviderFactory == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR2.GetString(
@@ -160,8 +155,7 @@ namespace System.ServiceModel.Description
 
             if (serviceDescription.Behaviors != null)
             {
-                ServiceBehaviorAttribute serviceBehavior = serviceDescription
-                    .Behaviors
+                ServiceBehaviorAttribute serviceBehavior = serviceDescription.Behaviors
                     .Find<ServiceBehaviorAttribute>();
 
                 if (serviceBehavior != null)
@@ -169,8 +163,7 @@ namespace System.ServiceModel.Description
                     includeExceptionDetails |= serviceBehavior.IncludeExceptionDetailInFaults;
                 }
 
-                ServiceDebugBehavior serviceDebugBehavior = serviceDescription
-                    .Behaviors
+                ServiceDebugBehavior serviceDebugBehavior = serviceDescription.Behaviors
                     .Find<ServiceDebugBehavior>();
 
                 if (serviceDebugBehavior != null)
@@ -200,8 +193,7 @@ namespace System.ServiceModel.Description
                         {
                             continue;
                         }
-                        ServiceEndpoint serviceEndPoint = serviceDescription
-                            .Endpoints
+                        ServiceEndpoint serviceEndPoint = serviceDescription.Endpoints
                             .Find(
                                 new XmlQualifiedName(
                                     endpointDispatcher.ContractName,
@@ -238,8 +230,7 @@ namespace System.ServiceModel.Description
                                 endpointDispatcher.DispatchRuntime.InstanceContextProvider =
                                     singleCallInstanceContextProvider;
                             }
-                            endpointDispatcher
-                                .DispatchRuntime
+                            endpointDispatcher.DispatchRuntime
                                 .MessageInspectors
                                 .Add(
                                     new DurableMessageDispatchInspector(
@@ -288,8 +279,7 @@ namespace System.ServiceModel.Description
         {
             if (serviceDescription == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("serviceDescription");
             }
 
@@ -300,16 +290,14 @@ namespace System.ServiceModel.Description
 
             if (serviceDescription.Behaviors != null)
             {
-                ServiceBehaviorAttribute serviceBehavior = serviceDescription
-                    .Behaviors
+                ServiceBehaviorAttribute serviceBehavior = serviceDescription.Behaviors
                     .Find<ServiceBehaviorAttribute>();
 
                 if (serviceBehavior != null)
                 {
                     if (serviceBehavior.InstanceContextMode != InstanceContextMode.PerSession)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(
                                     SR2.GetString(
@@ -322,8 +310,7 @@ namespace System.ServiceModel.Description
 
                     if (serviceBehavior.ConcurrencyMode == ConcurrencyMode.Multiple)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(
                                     SR2.GetString(SR2.ConcurrencyMultipleNotSupported)
@@ -336,8 +323,7 @@ namespace System.ServiceModel.Description
                         && this.UnknownExceptionAction == UnknownExceptionAction.AbortInstance
                     )
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(
                                     SR2.GetString(SR2.ConcurrencyReentrantAndAbortNotSupported)
@@ -363,8 +349,7 @@ namespace System.ServiceModel.Description
 
                     foreach (OperationDescription operation in serviceEndpoint.Contract.Operations)
                     {
-                        DurableOperationAttribute durableBehavior = operation
-                            .Behaviors
+                        DurableOperationAttribute durableBehavior = operation.Behaviors
                             .Find<DurableOperationAttribute>();
 
                         if (durableBehavior == null)
@@ -376,8 +361,7 @@ namespace System.ServiceModel.Description
                         {
                             if (!durableBehavior.CanCreateInstanceForOperation(operation.IsOneWay))
                             {
-                                throw DiagnosticUtility
-                                    .ExceptionUtility
+                                throw DiagnosticUtility.ExceptionUtility
                                     .ThrowHelperError(
                                         new InvalidOperationException(
                                             SR2.GetString(
@@ -396,8 +380,7 @@ namespace System.ServiceModel.Description
                                 && durableBehavior.CanCreateInstanceForOperation(operation.IsOneWay)
                             )
                             {
-                                throw DiagnosticUtility
-                                    .ExceptionUtility
+                                throw DiagnosticUtility.ExceptionUtility
                                     .ThrowHelperError(
                                         new InvalidOperationException(
                                             SR2.GetString(
@@ -415,8 +398,7 @@ namespace System.ServiceModel.Description
                         {
                             bool hasTransaction = false;
 
-                            OperationBehaviorAttribute operationBehavior = operation
-                                .Behaviors
+                            OperationBehaviorAttribute operationBehavior = operation.Behaviors
                                 .Find<OperationBehaviorAttribute>();
 
                             if (operationBehavior != null)
@@ -427,8 +409,7 @@ namespace System.ServiceModel.Description
                                 }
                             }
 
-                            TransactionFlowAttribute transactionBehavior = operation
-                                .Behaviors
+                            TransactionFlowAttribute transactionBehavior = operation.Behaviors
                                 .Find<TransactionFlowAttribute>();
 
                             if (transactionBehavior != null)
@@ -444,8 +425,7 @@ namespace System.ServiceModel.Description
 
                             if (!hasTransaction)
                             {
-                                throw DiagnosticUtility
-                                    .ExceptionUtility
+                                throw DiagnosticUtility.ExceptionUtility
                                     .ThrowHelperError(
                                         new InvalidOperationException(
                                             SR2.GetString(
@@ -463,8 +443,7 @@ namespace System.ServiceModel.Description
 
             if (!foundSessionfulContract)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(SR2.GetString(SR2.SessionfulContractNotFound))
                     );

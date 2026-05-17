@@ -102,8 +102,7 @@ public class When_mapping_with_contextual_values_wrong_overload : AutoMapperSpec
         {
             var inner = ex.InnerException;
             inner.ShouldBeOfType<InvalidOperationException>();
-            inner
-                .Message
+            inner.Message
                 .ShouldBe(
                     "Context.Items are only available when using a Map overload that takes Action<IMappingOperationOptions>! Consider using Context.TryGetItems instead."
                 );

@@ -100,8 +100,7 @@ namespace Microsoft.CodeAnalysis.FileHeaders
             // If we weren't given a header lets get the one from editorconfig
             if (
                 fileHeaderTemplate is null
-                && !document
-                    .Project
+                && !document.Project
                     .AnalyzerOptions
                     .AnalyzerConfigOptionsProvider
                     .GetOptions(tree)

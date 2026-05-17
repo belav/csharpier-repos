@@ -45,8 +45,7 @@ public class DefaultHubLifetimeManagerTests : HubLifetimeManagerTestsBase<Hub>
             Assert.Single(message.Arguments);
             Assert.Equal("World", (string)message.Arguments[0]);
             var tcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
-            connection2
-                .ConnectionAborted
+            connection2.ConnectionAborted
                 .Register(
                     t =>
                     {
@@ -83,8 +82,7 @@ public class DefaultHubLifetimeManagerTests : HubLifetimeManagerTestsBase<Hub>
             cts.Cancel();
             await sendTask.DefaultTimeout();
             var tcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
-            connection2
-                .ConnectionAborted
+            connection2.ConnectionAborted
                 .Register(
                     t =>
                     {
@@ -119,8 +117,7 @@ public class DefaultHubLifetimeManagerTests : HubLifetimeManagerTestsBase<Hub>
             cts.Cancel();
             await sendTask.DefaultTimeout();
             var tcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
-            connection1
-                .ConnectionAborted
+            connection1.ConnectionAborted
                 .Register(
                     t =>
                     {
@@ -153,8 +150,7 @@ public class DefaultHubLifetimeManagerTests : HubLifetimeManagerTestsBase<Hub>
             cts.Cancel();
             await sendTask.DefaultTimeout();
             var tcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
-            connection1
-                .ConnectionAborted
+            connection1.ConnectionAborted
                 .Register(
                     t =>
                     {
@@ -183,8 +179,7 @@ public class DefaultHubLifetimeManagerTests : HubLifetimeManagerTestsBase<Hub>
             cts.Cancel();
             await sendTask.DefaultTimeout();
             var tcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
-            connection1
-                .ConnectionAborted
+            connection1.ConnectionAborted
                 .Register(
                     t =>
                     {
@@ -223,8 +218,7 @@ public class DefaultHubLifetimeManagerTests : HubLifetimeManagerTestsBase<Hub>
             cts.Cancel();
             await sendTask.DefaultTimeout();
             var tcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
-            connection2
-                .ConnectionAborted
+            connection2.ConnectionAborted
                 .Register(
                     t =>
                     {
@@ -260,8 +254,7 @@ public class DefaultHubLifetimeManagerTests : HubLifetimeManagerTestsBase<Hub>
             cts.Cancel();
             await sendTask.DefaultTimeout();
             var tcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
-            connection1
-                .ConnectionAborted
+            connection1.ConnectionAborted
                 .Register(
                     t =>
                     {
@@ -302,8 +295,7 @@ public class DefaultHubLifetimeManagerTests : HubLifetimeManagerTestsBase<Hub>
             Assert.Single(message.Arguments);
             Assert.Equal("World", (string)message.Arguments[0]);
             var tcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
-            connection2
-                .ConnectionAborted
+            connection2.ConnectionAborted
                 .Register(
                     t =>
                     {
@@ -350,8 +342,7 @@ public class DefaultHubLifetimeManagerTests : HubLifetimeManagerTestsBase<Hub>
             Assert.Single(message.Arguments);
             Assert.Equal("World", (string)message.Arguments[0]);
             var tcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
-            connection2
-                .ConnectionAborted
+            connection2.ConnectionAborted
                 .Register(
                     t =>
                     {

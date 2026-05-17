@@ -545,8 +545,7 @@ namespace System.Net.Mail
                     string response;
                     if (!RecipientCommand.EndSend(result, out response))
                     {
-                        thisPtr
-                            .failedRecipientExceptions
+                        thisPtr.failedRecipientExceptions
                             .Add(
                                 new SmtpFailedRecipientException(
                                     thisPtr.connection.Reader.StatusCode,

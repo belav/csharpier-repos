@@ -625,8 +625,7 @@ window.mvcClientValidationMetadata.push({""Fields"":[],""FormId"":""form_id"",""
             BeginFormHelper(
                 htmlHelper =>
                 {
-                    htmlHelper
-                        .RouteCollection
+                    htmlHelper.RouteCollection
                         .MapRoute("MyRouteName", "any/url", new { controller = "Charlie" });
                     return htmlHelper.BeginRouteForm("MyRouteName");
                 },

@@ -29,12 +29,10 @@ namespace System.ServiceModel.Dispatcher
         public object DeserializeReply(Message message, object[] parameters)
         {
             if (message == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("message"));
             if (parameters != null && parameters.Length > 0)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentException(SR.GetString(SR.SFxParametersMustBeEmpty))
                     );
@@ -45,8 +43,7 @@ namespace System.ServiceModel.Dispatcher
         public void DeserializeRequest(Message message, object[] parameters)
         {
             if (message == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("message"));
             if (parameters == null)
                 throw TraceUtility.ThrowHelperError(
@@ -54,8 +51,7 @@ namespace System.ServiceModel.Dispatcher
                     message
                 );
             if (parameters.Length != 1)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentException(SR.GetString(SR.SFxParameterMustBeArrayOfOneElement))
                     );
@@ -70,8 +66,7 @@ namespace System.ServiceModel.Dispatcher
 
         public MessageFault SerializeFault(Exception error)
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(
                     new InvalidOperationException(
                         SR.GetString(SR.SFxMessageOperationFormatterCannotSerializeFault)
@@ -86,14 +81,12 @@ namespace System.ServiceModel.Dispatcher
         )
         {
             if (!(result is Message))
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentException(SR.GetString(SR.SFxResultMustBeMessage))
                     );
             if (parameters != null && parameters.Length > 0)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentException(SR.GetString(SR.SFxParametersMustBeEmpty))
                     );
@@ -104,12 +97,10 @@ namespace System.ServiceModel.Dispatcher
         public Message SerializeRequest(MessageVersion messageVersion, object[] parameters)
         {
             if (parameters == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("parameters"));
             if (parameters.Length != 1 || !(parameters[0] is Message))
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentException(SR.GetString(SR.SFxParameterMustBeMessage))
                     );

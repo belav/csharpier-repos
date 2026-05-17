@@ -27,8 +27,7 @@ namespace System.Security.Cryptography
 #endif
             byte[] signature = new byte[estimatedSize];
             int numBytesNeeded;
-            ErrorCode errorCode = Interop
-                .NCrypt
+            ErrorCode errorCode = Interop.NCrypt
                 .NCryptSignHash(
                     keyHandle,
                     pPaddingInfo,
@@ -40,8 +39,7 @@ namespace System.Security.Cryptography
 
             if (errorCode == ErrorCode.STATUS_UNSUCCESSFUL)
             {
-                errorCode = Interop
-                    .NCrypt
+                errorCode = Interop.NCrypt
                     .NCryptSignHash(
                         keyHandle,
                         pPaddingInfo,
@@ -55,8 +53,7 @@ namespace System.Security.Cryptography
             if (errorCode.IsBufferTooSmall())
             {
                 signature = new byte[numBytesNeeded];
-                errorCode = Interop
-                    .NCrypt
+                errorCode = Interop.NCrypt
                     .NCryptSignHash(
                         keyHandle,
                         pPaddingInfo,
@@ -69,8 +66,7 @@ namespace System.Security.Cryptography
 
             if (errorCode == ErrorCode.STATUS_UNSUCCESSFUL)
             {
-                errorCode = Interop
-                    .NCrypt
+                errorCode = Interop.NCrypt
                     .NCryptSignHash(
                         keyHandle,
                         pPaddingInfo,
@@ -99,8 +95,7 @@ namespace System.Security.Cryptography
         {
             for (int i = 0; i <= StatusUnsuccessfulRetryCount; i++)
             {
-                ErrorCode error = Interop
-                    .NCrypt
+                ErrorCode error = Interop.NCrypt
                     .NCryptSignHash(
                         keyHandle,
                         pPaddingInfo,
@@ -141,8 +136,7 @@ namespace System.Security.Cryptography
             void* pPaddingInfo
         )
         {
-            ErrorCode errorCode = Interop
-                .NCrypt
+            ErrorCode errorCode = Interop.NCrypt
                 .NCryptVerifySignature(
                     keyHandle,
                     pPaddingInfo,
@@ -155,8 +149,7 @@ namespace System.Security.Cryptography
 
             if (errorCode == ErrorCode.STATUS_UNSUCCESSFUL)
             {
-                errorCode = Interop
-                    .NCrypt
+                errorCode = Interop.NCrypt
                     .NCryptVerifySignature(
                         keyHandle,
                         pPaddingInfo,

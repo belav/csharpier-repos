@@ -71,8 +71,7 @@ namespace System.ServiceModel.Channels
             //CacheDependency dep = new CacheDependency (null, cacheKeys);
             CacheDependency dep = new CacheDependency(filename);
 
-            HttpRuntime
-                .Cache
+            HttpRuntime.Cache
                 .Insert(
                     cacheTypePrefix + key,
                     type,

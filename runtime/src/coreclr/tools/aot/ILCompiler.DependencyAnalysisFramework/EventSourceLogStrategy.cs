@@ -137,8 +137,7 @@ namespace ILCompiler.DependencyAnalysisFramework
             {
                 if (reasonNode2 != null)
                 {
-                    GraphEventSource
-                        .Log
+                    GraphEventSource.Log
                         .ConditionalEdge(
                             GraphId,
                             (int)reasonNode.GetMark(),
@@ -149,8 +148,7 @@ namespace ILCompiler.DependencyAnalysisFramework
                 }
                 else
                 {
-                    GraphEventSource
-                        .Log
+                    GraphEventSource.Log
                         .Edge(GraphId, (int)reasonNode.GetMark(), nodeIndex, reason);
                 }
             }

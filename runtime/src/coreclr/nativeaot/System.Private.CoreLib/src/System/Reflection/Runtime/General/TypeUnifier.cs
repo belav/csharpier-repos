@@ -81,8 +81,7 @@ namespace System.Reflection.Runtime.General
                 && typeHandle.IsNull()
                 && !elementType.ContainsGenericParameters
             )
-                throw ReflectionCoreExecution
-                    .ExecutionEnvironment
+                throw ReflectionCoreExecution.ExecutionEnvironment
                     .CreateMissingMetadataException(arrayType.ToType());
 
             return arrayType;
@@ -136,8 +135,7 @@ namespace System.Reflection.Runtime.General
                         atLeastOneOpenType = true;
                 }
                 if (!atLeastOneOpenType)
-                    throw ReflectionCoreExecution
-                        .ExecutionEnvironment
+                    throw ReflectionCoreExecution.ExecutionEnvironment
                         .CreateMissingMetadataException(genericType.ToType());
             }
 
@@ -219,8 +217,7 @@ namespace System.Reflection.Runtime.TypeInfos
             if (!multiDim)
             {
                 if (
-                    !ReflectionCoreExecution
-                        .ExecutionEnvironment
+                    !ReflectionCoreExecution.ExecutionEnvironment
                         .TryGetArrayTypeForElementType(elementTypeHandle, out typeHandle)
                 )
                     return default(RuntimeTypeHandle);
@@ -228,8 +225,7 @@ namespace System.Reflection.Runtime.TypeInfos
             else
             {
                 if (
-                    !ReflectionCoreExecution
-                        .ExecutionEnvironment
+                    !ReflectionCoreExecution.ExecutionEnvironment
                         .TryGetMultiDimArrayTypeForElementType(
                             elementTypeHandle,
                             rank,
@@ -319,8 +315,7 @@ namespace System.Reflection.Runtime.TypeInfos
             RuntimeTypeHandle precomputedTypeHandle
         )
         {
-            RuntimeByRefTypeInfo type = ByRefTypeTable
-                .Table
+            RuntimeByRefTypeInfo type = ByRefTypeTable.Table
                 .GetOrAdd(new UnificationKey(elementType, precomputedTypeHandle));
             type.EstablishDebugName();
             return type;
@@ -334,8 +329,7 @@ namespace System.Reflection.Runtime.TypeInfos
 
             RuntimeTypeHandle typeHandle;
             if (
-                !ReflectionCoreExecution
-                    .ExecutionEnvironment
+                !ReflectionCoreExecution.ExecutionEnvironment
                     .TryGetByRefTypeForTargetType(elementTypeHandle, out typeHandle)
             )
                 return default(RuntimeTypeHandle);
@@ -378,8 +372,7 @@ namespace System.Reflection.Runtime.TypeInfos
             RuntimeTypeHandle precomputedTypeHandle
         )
         {
-            RuntimePointerTypeInfo type = PointerTypeTable
-                .Table
+            RuntimePointerTypeInfo type = PointerTypeTable.Table
                 .GetOrAdd(new UnificationKey(elementType, precomputedTypeHandle));
             type.EstablishDebugName();
             return type;
@@ -393,8 +386,7 @@ namespace System.Reflection.Runtime.TypeInfos
 
             RuntimeTypeHandle typeHandle;
             if (
-                !ReflectionCoreExecution
-                    .ExecutionEnvironment
+                !ReflectionCoreExecution.ExecutionEnvironment
                     .TryGetPointerTypeForTargetType(elementTypeHandle, out typeHandle)
             )
                 return default(RuntimeTypeHandle);
@@ -482,8 +474,7 @@ namespace System.Reflection.Runtime.TypeInfos
             }
 
             if (
-                ReflectionCoreExecution
-                    .ExecutionEnvironment
+                ReflectionCoreExecution.ExecutionEnvironment
                     .TryGetFunctionPointerTypeForComponents(
                         returnTypeHandle,
                         parameterTypeHandles,
@@ -523,9 +514,9 @@ namespace System.Reflection.Runtime.TypeInfos
         )
         {
             TryGetConstructedGenericTypeDelegate del =
-                s_tryGetConstructedGenericTypeWithConstraintCheck ??= ReflectionCoreExecution
-                    .ExecutionEnvironment
-                    .TryGetConstructedGenericTypeForComponents;
+                s_tryGetConstructedGenericTypeWithConstraintCheck ??=
+                    ReflectionCoreExecution.ExecutionEnvironment
+                        .TryGetConstructedGenericTypeForComponents;
             RuntimeTypeHandle precomputedTypeHandle = GetRuntimeTypeHandleIfAny(
                 genericTypeDefinition,
                 genericTypeArguments,
@@ -546,9 +537,9 @@ namespace System.Reflection.Runtime.TypeInfos
         )
         {
             TryGetConstructedGenericTypeDelegate del =
-                s_tryGetConstructedGenericTypeNoConstraintCheck ??= ReflectionCoreExecution
-                    .ExecutionEnvironment
-                    .TryGetConstructedGenericTypeForComponentsNoConstraintCheck;
+                s_tryGetConstructedGenericTypeNoConstraintCheck ??=
+                    ReflectionCoreExecution.ExecutionEnvironment
+                        .TryGetConstructedGenericTypeForComponentsNoConstraintCheck;
             RuntimeTypeHandle precomputedTypeHandle = GetRuntimeTypeHandleIfAny(
                 genericTypeDefinition,
                 genericTypeArguments,
@@ -572,8 +563,7 @@ namespace System.Reflection.Runtime.TypeInfos
                 genericTypeArguments,
                 precomputedTypeHandle
             );
-            RuntimeConstructedGenericTypeInfo typeInfo = ConstructedGenericTypeTable
-                .Table
+            RuntimeConstructedGenericTypeInfo typeInfo = ConstructedGenericTypeTable.Table
                 .GetOrAdd(key);
             typeInfo.EstablishDebugName();
             return typeInfo;

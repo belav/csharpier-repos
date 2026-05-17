@@ -188,8 +188,7 @@ public class MonthDays : idx
 
             compilation.VerifyDiagnostics();
 
-            var indexer = compilation
-                .GlobalNamespace
+            var indexer = compilation.GlobalNamespace
                 .GetMember<NamedTypeSymbol>("MonthDays")
                 .Indexers
                 .Single();

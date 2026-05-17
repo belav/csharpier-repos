@@ -11935,8 +11935,7 @@ class C
                 )
             );
 
-            diff1
-                .EmitResult
+            diff1.EmitResult
                 .Diagnostics
                 .Verify(
                     // (7,29): error CS7043: Cannot update 'C.F()'; attribute 'System.Runtime.CompilerServices.IteratorStateMachineAttribute' is missing.
@@ -12030,8 +12029,7 @@ class C
                 )
             );
 
-            diff1
-                .EmitResult
+            diff1.EmitResult
                 .Diagnostics
                 .Verify(
                     // (12,29): error CS7043: Cannot update 'C.F()'; attribute 'System.Runtime.CompilerServices.IteratorStateMachineAttribute' is missing.
@@ -12299,8 +12297,7 @@ class C
                 )
             );
 
-            diff1
-                .EmitResult
+            diff1.EmitResult
                 .Diagnostics
                 .Verify(
                     // (6,28): error CS7043: Cannot update 'C.F()'; attribute 'System.Runtime.CompilerServices.AsyncStateMachineAttribute' is missing.
@@ -12638,8 +12635,7 @@ class C
                 )
             );
 
-            diff1
-                .EmitResult
+            diff1.EmitResult
                 .Diagnostics
                 .Verify(
                     // (6,28): error CS7043: Cannot update 'C.F()'; attribute 'System.Runtime.CompilerServices.AsyncStateMachineAttribute' is missing.
@@ -12721,8 +12717,7 @@ class C
                 )
             );
 
-            diff1
-                .EmitResult
+            diff1.EmitResult
                 .Diagnostics
                 .Verify(
                     // (6,29): error CS7043: Cannot update 'C.F()'; attribute 'System.Runtime.CompilerServices.IteratorStateMachineAttribute' is missing.

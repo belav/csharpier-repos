@@ -435,8 +435,7 @@ namespace System.Net.Mail
             {
                 do
                 {
-                    IAsyncResult result = parent
-                        .bufferedStream
+                    IAsyncResult result = parent.bufferedStream
                         .BeginRead(
                             parent.byteBuffer,
                             0,

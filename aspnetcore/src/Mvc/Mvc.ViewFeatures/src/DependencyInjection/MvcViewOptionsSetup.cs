@@ -45,8 +45,7 @@ internal sealed class MvcViewOptionsSetup : IConfigureOptions<MvcViewOptions>
     {
         // Set up client validators
         options.ClientModelValidatorProviders.Add(new DefaultClientModelValidatorProvider());
-        options
-            .ClientModelValidatorProviders
+        options.ClientModelValidatorProviders
             .Add(
                 new DataAnnotationsClientModelValidatorProvider(
                     _validationAttributeAdapterProvider,

@@ -276,15 +276,13 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 (@"Directory.Build.targets", Resources.Directory_Build_targets),
                 (
                     @"Project.csproj",
-                    Resources
-                        .ProjectFiles
+                    Resources.ProjectFiles
                         .CSharp
                         .NetCoreMultiTFM_ExtensionWithConditionOnTFM_Project
                 ),
                 (
                     @"obj\Project.csproj.test.props",
-                    Resources
-                        .ProjectFiles
+                    Resources.ProjectFiles
                         .CSharp
                         .NetCoreMultiTFM_ExtensionWithConditionOnTFM_ProjectTestProps
                 )
@@ -329,8 +327,7 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 ),
                 (
                     @"csharplib\Class1.cs",
-                    Resources
-                        .SourceFiles
+                    Resources.SourceFiles
                         .CSharp
                         .NetCoreMultiTFM_ProjectReferenceToFSharp_CSharpLib_Class1
                 ),
@@ -340,8 +337,7 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 ),
                 (
                     @"fsharplib\Library.fs",
-                    Resources
-                        .SourceFiles
+                    Resources.SourceFiles
                         .FSharp
                         .NetCoreMultiTFM_ProjectReferenceToFSharp_FSharpLib_Library
                 )
@@ -547,8 +543,7 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 (@"Directory.Build.targets", Resources.Directory_Build_targets),
                 (
                     @"VBProject\VBProject.vbproj",
-                    Resources
-                        .ProjectFiles
+                    Resources.ProjectFiles
                         .VisualBasic
                         .VBNetCoreAppWithGlobalImportAndLibrary_VBProject
                 ),
@@ -562,8 +557,7 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 ),
                 (
                     @"Library\MyHelperClass.cs",
-                    Resources
-                        .SourceFiles
+                    Resources.SourceFiles
                         .CSharp
                         .VBNetCoreAppWithGlobalImportAndLibrary_MyHelperClass
                 )

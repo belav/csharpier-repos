@@ -165,14 +165,12 @@ namespace System.Data.Query.PlanCompiler
             }
 
             m_constraint = constraint;
-            md.EntitySet parent = System
-                .Data
+            md.EntitySet parent = System.Data
                 .Common
                 .Utils
                 .MetadataHelper
                 .GetEntitySetAtEnd(assocSet, fromEnd); // relationshipSet.GetRelationshipEndExtent(constraint.FromRole);
-            md.EntitySet child = System
-                .Data
+            md.EntitySet child = System.Data
                 .Common
                 .Utils
                 .MetadataHelper

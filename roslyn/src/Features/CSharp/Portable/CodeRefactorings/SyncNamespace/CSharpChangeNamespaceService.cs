@@ -459,8 +459,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeNamespace
                     return null;
 
                 if (
-                    namespaceDecl
-                        .Name
+                    namespaceDecl.Name
                         .GetDiagnostics()
                         .Any(diag => diag.DefaultSeverity == DiagnosticSeverity.Error)
                 )

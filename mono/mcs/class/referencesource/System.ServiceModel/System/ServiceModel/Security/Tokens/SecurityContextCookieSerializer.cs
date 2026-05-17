@@ -29,8 +29,7 @@ namespace System.ServiceModel.Security.Tokens
         {
             if (securityStateEncoder == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("securityStateEncoder");
             }
             this.securityStateEncoder = securityStateEncoder;
@@ -177,8 +176,7 @@ namespace System.ServiceModel.Security.Tokens
             reader.ReadEndElement();
             if (cookieVersion != SupportedPersistanceVersion)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new NotSupportedException(
                             SR.GetString(SR.SerializedTokenVersionUnsupported, cookieVersion)
@@ -416,8 +414,7 @@ namespace System.ServiceModel.Security.Tokens
 
         internal static void OnInvalidCookieFailure(string reason, Exception e)
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(
                     new MessageSecurityException(
                         SR.GetString(SR.InvalidSecurityContextCookie, reason),

@@ -190,8 +190,7 @@ public class CookieAuthenticationHandler : SignInAuthenticationHandler<CookieAut
                 return AuthenticateResults.MissingSessionId;
             }
             // Only store _sessionKey if it matches an existing session. Otherwise we'll create a new one.
-            ticket = await Options
-                .SessionStore
+            ticket = await Options.SessionStore
                 .RetrieveAsync(claim.Value, Context, Context.RequestAborted);
             if (ticket == null)
             {
@@ -207,8 +206,7 @@ public class CookieAuthenticationHandler : SignInAuthenticationHandler<CookieAut
         {
             if (Options.SessionStore != null)
             {
-                await Options
-                    .SessionStore
+                await Options.SessionStore
                     .RemoveAsync(_sessionKey!, Context, Context.RequestAborted);
 
                 // Clear out the session key if its expired, so renew doesn't try to use it
@@ -288,8 +286,7 @@ public class CookieAuthenticationHandler : SignInAuthenticationHandler<CookieAut
 
             if (Options.SessionStore != null && _sessionKey != null)
             {
-                await Options
-                    .SessionStore
+                await Options.SessionStore
                     .RenewAsync(_sessionKey, ticket, Context, Context.RequestAborted);
                 var principal = new ClaimsPrincipal(
                     new ClaimsIdentity(
@@ -316,8 +313,7 @@ public class CookieAuthenticationHandler : SignInAuthenticationHandler<CookieAut
                 cookieOptions.Expires = _refreshExpiresUtc.Value.ToUniversalTime();
             }
 
-            Options
-                .CookieManager
+            Options.CookieManager
                 .AppendResponseCookie(Context, Options.Cookie.Name!, cookieValue, cookieOptions);
 
             await ApplyHeaders(
@@ -389,14 +385,12 @@ public class CookieAuthenticationHandler : SignInAuthenticationHandler<CookieAut
             if (_sessionKey != null)
             {
                 // Renew the ticket in cases of multiple requests see: https://github.com/dotnet/aspnetcore/issues/22135
-                await Options
-                    .SessionStore
+                await Options.SessionStore
                     .RenewAsync(_sessionKey, ticket, Context, Context.RequestAborted);
             }
             else
             {
-                _sessionKey = await Options
-                    .SessionStore
+                _sessionKey = await Options.SessionStore
                     .StoreAsync(ticket, Context, Context.RequestAborted);
             }
 
@@ -419,8 +413,7 @@ public class CookieAuthenticationHandler : SignInAuthenticationHandler<CookieAut
 
         var cookieValue = Options.TicketDataFormat.Protect(ticket, GetTlsTokenBinding());
 
-        Options
-            .CookieManager
+        Options.CookieManager
             .AppendResponseCookie(
                 Context,
                 Options.Cookie.Name!,

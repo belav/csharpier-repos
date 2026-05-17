@@ -1139,8 +1139,7 @@ namespace System.Web.UI.WebControls
                         )
                     );
                 }
-                command
-                    .Parameters
+                command.Parameters
                     .Add(
                         _owner.CreateParameter(ParameterPrefix + sortParameterName, sortExpression)
                     );

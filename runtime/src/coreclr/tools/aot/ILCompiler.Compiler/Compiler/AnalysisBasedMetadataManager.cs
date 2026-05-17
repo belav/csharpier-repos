@@ -308,8 +308,7 @@ namespace ILCompiler
 
             public bool GeneratesMetadata(EcmaModule module, CustomAttributeHandle caHandle)
             {
-                return _parent
-                    ._reflectableAttributes
+                return _parent._reflectableAttributes
                     .Contains(new ReflectableCustomAttribute(module, caHandle));
             }
 

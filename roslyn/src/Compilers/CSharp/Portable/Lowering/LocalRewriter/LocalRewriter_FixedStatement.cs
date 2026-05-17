@@ -301,8 +301,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             initializerExpr = ((BoundAddressOfOperator)initializerExpr).Operand;
 
             // intervening parens may have been skipped by the binder; find the declarator
-            VariableDeclaratorSyntax? declarator = fixedInitializer
-                .Syntax
+            VariableDeclaratorSyntax? declarator = fixedInitializer.Syntax
                 .FirstAncestorOrSelf<VariableDeclaratorSyntax>();
             Debug.Assert(declarator != null);
 
@@ -378,8 +377,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             Debug.Assert(getPinnableMethod is { });
 
             // intervening parens may have been skipped by the binder; find the declarator
-            VariableDeclaratorSyntax? declarator = fixedInitializer
-                .Syntax
+            VariableDeclaratorSyntax? declarator = fixedInitializer.Syntax
                 .FirstAncestorOrSelf<VariableDeclaratorSyntax>();
             Debug.Assert(declarator != null);
 
@@ -534,8 +532,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             Debug.Assert(initializerType is { });
 
             // intervening parens may have been skipped by the binder; find the declarator
-            VariableDeclaratorSyntax? declarator = fixedInitializer
-                .Syntax
+            VariableDeclaratorSyntax? declarator = fixedInitializer.Syntax
                 .FirstAncestorOrSelf<VariableDeclaratorSyntax>();
             Debug.Assert(declarator != null);
 

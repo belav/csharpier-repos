@@ -39,8 +39,7 @@ namespace Microsoft.CodeAnalysis.ConvertToAsync
 
         public sealed override async Task RegisterCodeFixesAsync(CodeFixContext context)
         {
-            var root = await context
-                .Document
+            var root = await context.Document
                 .GetSyntaxRootAsync(context.CancellationToken)
                 .ConfigureAwait(false);
             if (!TryGetNode(root, context.Span, out var node))

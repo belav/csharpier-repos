@@ -138,8 +138,7 @@ public class SqliteSqlTranslatingExpressionVisitor : RelationalSqlTranslatingExp
         )
         {
             return Visit(unaryExpression.Operand) is SqlExpression sqlExpression
-                ? Dependencies
-                    .SqlExpressionFactory
+                ? Dependencies.SqlExpressionFactory
                     .Function(
                         "length",
                         new[] { sqlExpression },
@@ -163,8 +162,7 @@ public class SqliteSqlTranslatingExpressionVisitor : RelationalSqlTranslatingExp
             var operandType = GetProviderType(sqlUnary.Operand);
             if (operandType == typeof(decimal))
             {
-                return Dependencies
-                    .SqlExpressionFactory
+                return Dependencies.SqlExpressionFactory
                     .Function(
                         name: "ef_negate",
                         new[] { sqlUnary.Operand },
@@ -240,8 +238,7 @@ public class SqliteSqlTranslatingExpressionVisitor : RelationalSqlTranslatingExp
                 )
             )
             {
-                return Dependencies
-                    .SqlExpressionFactory
+                return Dependencies.SqlExpressionFactory
                     .Function(
                         function,
                         new[] { sqlBinary.Left, sqlBinary.Right },
@@ -397,8 +394,7 @@ public class SqliteSqlTranslatingExpressionVisitor : RelationalSqlTranslatingExp
                 }
 
                 case SqlParameterExpression patternParameter
-                    when patternParameter
-                        .Name
+                    when patternParameter.Name
                         .StartsWith(
                             QueryCompilationContext.QueryParameterPrefix,
                             StringComparison.Ordinal
@@ -605,8 +601,7 @@ public class SqliteSqlTranslatingExpressionVisitor : RelationalSqlTranslatingExp
         SqlExpression right
     )
     {
-        var actual = Dependencies
-            .SqlExpressionFactory
+        var actual = Dependencies.SqlExpressionFactory
             .Function(
                 name: "ef_compare",
                 new[] { left, right },
@@ -618,17 +613,13 @@ public class SqliteSqlTranslatingExpressionVisitor : RelationalSqlTranslatingExp
 
         return op switch
         {
-            ExpressionType.GreaterThan => Dependencies
-                .SqlExpressionFactory
+            ExpressionType.GreaterThan => Dependencies.SqlExpressionFactory
                 .GreaterThan(left: actual, right: oracle),
-            ExpressionType.GreaterThanOrEqual => Dependencies
-                .SqlExpressionFactory
+            ExpressionType.GreaterThanOrEqual => Dependencies.SqlExpressionFactory
                 .GreaterThanOrEqual(left: actual, right: oracle),
-            ExpressionType.LessThan => Dependencies
-                .SqlExpressionFactory
+            ExpressionType.LessThan => Dependencies.SqlExpressionFactory
                 .LessThan(left: actual, right: oracle),
-            ExpressionType.LessThanOrEqual => Dependencies
-                .SqlExpressionFactory
+            ExpressionType.LessThanOrEqual => Dependencies.SqlExpressionFactory
                 .LessThanOrEqual(left: actual, right: oracle),
             _ => visitedExpression,
         };
@@ -687,8 +678,7 @@ public class SqliteSqlTranslatingExpressionVisitor : RelationalSqlTranslatingExp
             SqlExpression left,
             SqlExpression right
         ) =>
-            Dependencies
-                .SqlExpressionFactory
+            Dependencies.SqlExpressionFactory
                 .Function(
                     name,
                     new[] { left, right },
@@ -699,8 +689,7 @@ public class SqliteSqlTranslatingExpressionVisitor : RelationalSqlTranslatingExp
 
         Expression DecimalSubtractExpressionFactoryMethod(SqlExpression left, SqlExpression right)
         {
-            var subtrahend = Dependencies
-                .SqlExpressionFactory
+            var subtrahend = Dependencies.SqlExpressionFactory
                 .Function(
                     "ef_negate",
                     new[] { right },

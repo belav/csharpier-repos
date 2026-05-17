@@ -276,14 +276,12 @@ namespace Samples
 
             if (msg.Length > 0)
             {
-                infoLabel.Text = System
-                    .String
+                infoLabel.Text = System.String
                     .Format("Click ({0},{1}) is inside: {2}", e.X, e.Y, msg);
             }
             else
             {
-                infoLabel.Text = System
-                    .String
+                infoLabel.Text = System.String
                     .Format("Click ({0},{1}) is outside any region", e.X, e.Y);
             }
 

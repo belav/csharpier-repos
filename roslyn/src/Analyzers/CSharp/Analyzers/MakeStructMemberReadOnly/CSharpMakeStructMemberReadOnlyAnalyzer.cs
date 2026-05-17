@@ -349,8 +349,7 @@ internal sealed class CSharpMakeStructMemberReadOnlyDiagnosticAnalyzer()
         // then can't make this `readonly`.
         if (
             !instanceOperation.IsImplicit
-            && CSharpSemanticFacts
-                .Instance
+            && CSharpSemanticFacts.Instance
                 .IsWrittenTo(semanticModel, instanceOperation.Syntax, cancellationToken)
         )
         {
@@ -381,8 +380,7 @@ internal sealed class CSharpMakeStructMemberReadOnlyDiagnosticAnalyzer()
             {
                 // If we're writing to a field off of 'this'.  Can't make this `readonly`.
                 if (
-                    CSharpSemanticFacts
-                        .Instance
+                    CSharpSemanticFacts.Instance
                         .IsWrittenTo(semanticModel, fieldReference.Syntax, cancellationToken)
                 )
                     return true;
@@ -398,8 +396,7 @@ internal sealed class CSharpMakeStructMemberReadOnlyDiagnosticAnalyzer()
             {
                 // If we're writing to a prop off of 'this'.  Can't make this `readonly`.
                 if (
-                    CSharpSemanticFacts
-                        .Instance
+                    CSharpSemanticFacts.Instance
                         .IsWrittenTo(semanticModel, propertyReference.Syntax, cancellationToken)
                 )
                     return true;

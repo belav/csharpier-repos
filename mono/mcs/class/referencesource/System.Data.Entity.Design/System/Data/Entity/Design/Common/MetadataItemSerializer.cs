@@ -320,8 +320,9 @@ namespace System.Data.Entity.Design.Common
                         _schemaVersion >= EntityFrameworkVersions.Version3 && !_isModel,
                         "_schemaVersion >= EntityFrameworkVersions.Version3 && !_isModel"
                     );
-                    var elementType = ((CollectionType)function.ReturnParameter.TypeUsage.EdmType)
-                        .TypeUsage
+                    var elementType = (
+                        (CollectionType)function.ReturnParameter.TypeUsage.EdmType
+                    ).TypeUsage
                         .EdmType;
                     Debug.Assert(
                         elementType.BuiltInTypeKind == BuiltInTypeKind.RowType,
@@ -575,8 +576,7 @@ namespace System.Data.Entity.Design.Common
             //
             if (
                 _isModel
-                && member
-                    .MetadataProperties
+                && member.MetadataProperties
                     .Contains(
                         DesignXmlConstants.EdmAnnotationNamespace
                             + ":"
@@ -877,8 +877,7 @@ namespace System.Data.Entity.Design.Common
             //
             if (
                 _isModel
-                && container
-                    .MetadataProperties
+                && container.MetadataProperties
                     .Contains(
                         DesignXmlConstants.EdmAnnotationNamespace
                             + ":"
@@ -917,8 +916,7 @@ namespace System.Data.Entity.Design.Common
             }
 
             foreach (
-                EdmFunction functionImport in container
-                    .FunctionImports
+                EdmFunction functionImport in container.FunctionImports
                     .Where(fi => fi.IsComposableAttribute)
             )
             {
@@ -964,8 +962,7 @@ namespace System.Data.Entity.Design.Common
 
             MetadataProperty property;
             if (
-                entitySet
-                    .MetadataProperties
+                entitySet.MetadataProperties
                     .TryGetValue(XmlConstants.DefiningQuery, false, out property)
                 && property.Value != null
             )
@@ -977,8 +974,7 @@ namespace System.Data.Entity.Design.Common
             else
             {
                 if (
-                    entitySet
-                        .MetadataProperties
+                    entitySet.MetadataProperties
                         .TryGetValue(XmlConstants.Schema, false, out property)
                     && property.Value != null
                 )
@@ -987,8 +983,7 @@ namespace System.Data.Entity.Design.Common
                 }
 
                 if (
-                    entitySet
-                        .MetadataProperties
+                    entitySet.MetadataProperties
                         .TryGetValue(XmlConstants.Table, false, out property)
                     && property.Value != null
                 )
@@ -1003,9 +998,8 @@ namespace System.Data.Entity.Design.Common
         private void WriteExtendedPropertyAttributes(MetadataItem item)
         {
             foreach (
-                MetadataProperty property in item.MetadataProperties.Where(p =>
-                    p.PropertyKind == PropertyKind.Extended
-                )
+                MetadataProperty property in item.MetadataProperties
+                    .Where(p => p.PropertyKind == PropertyKind.Extended)
             )
             {
                 string xmlNamespace,

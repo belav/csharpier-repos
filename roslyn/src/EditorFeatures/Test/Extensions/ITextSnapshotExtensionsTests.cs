@@ -187,8 +187,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Extensions
 
         private static string GetLeadingWhitespaceOfLineAtPosition(string code, int position)
         {
-            var exportProvider = EditorTestCompositions
-                .EditorFeatures
+            var exportProvider = EditorTestCompositions.EditorFeatures
                 .ExportProviderFactory
                 .CreateExportProvider();
             var snapshot = EditorFactory.CreateBuffer(exportProvider, code).CurrentSnapshot;
@@ -197,8 +196,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Extensions
 
         private static ITextSnapshot GetSampleCodeSnapshot()
         {
-            var exportProvider = EditorTestCompositions
-                .EditorFeatures
+            var exportProvider = EditorTestCompositions.EditorFeatures
                 .ExportProviderFactory
                 .CreateExportProvider();
 

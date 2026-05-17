@@ -861,8 +861,7 @@ namespace AutoMapper.UnitTests
                 {
                     var childModels = _childModels.Where(x => x.Parent.Id == source).ToList();
                     return (List<ChildDto>)
-                        resolutionContext
-                            .Mapper
+                        resolutionContext.Mapper
                             .Map(
                                 childModels,
                                 destination,

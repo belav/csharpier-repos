@@ -99,8 +99,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
 
         public SnapshotSpan GetCurrentSpanInSubjectBuffer(ITextSnapshot bufferSnapshot)
         {
-            return _disconnectedBufferGraph
-                .SubjectBufferSnapshot
+            return _disconnectedBufferGraph.SubjectBufferSnapshot
                 .CreateTrackingSpan(this.TextSpan.ToSpan(), SpanTrackingMode.EdgeInclusive)
                 .GetSpan(bufferSnapshot);
         }
@@ -110,8 +109,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
             var originalSpan = _disconnectedBufferGraph.GetSubjectBufferTextSpanInViewBuffer(
                 this.TextSpan
             );
-            var trackingSpan = _disconnectedBufferGraph
-                .ViewSnapshot
+            var trackingSpan = _disconnectedBufferGraph.ViewSnapshot
                 .CreateTrackingSpan(originalSpan.TextSpan.ToSpan(), SpanTrackingMode.EdgeInclusive);
             return trackingSpan.GetSpan(textSnapshot);
         }

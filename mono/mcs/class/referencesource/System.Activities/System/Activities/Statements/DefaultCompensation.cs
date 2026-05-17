@@ -87,10 +87,8 @@ namespace System.Activities.Statements
                     this.onChildCompensated = new CompletionCallback(InternalExecute);
                 }
 
-                this.toCompensateToken.Set(
-                    context,
-                    new CompensationToken(tokenData.ExecutionTracker.Get())
-                );
+                this.toCompensateToken
+                    .Set(context, new CompensationToken(tokenData.ExecutionTracker.Get()));
 
                 Fx.Assert(Body != null, "Body must be valid");
                 context.ScheduleActivity(Body, this.onChildCompensated);

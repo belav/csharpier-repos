@@ -523,20 +523,21 @@ namespace System.Threading.Tasks.Dataflow.Internal
                 if (exception != null)
                 {
                     // Get out from under currently held locks. Complete re-acquires the locks it needs.
-                    Task.Factory.StartNew(
-                        exc =>
-                            Complete(
-                                exception: (Exception)exc!,
-                                dropPendingMessages: true,
-                                storeExceptionEvenIfAlreadyCompleting: true,
-                                unwrapInnerExceptions: false,
-                                revertProcessingState: true
-                            ),
-                        exception,
-                        CancellationToken.None,
-                        Common.GetCreationOptionsForTask(),
-                        TaskScheduler.Default
-                    );
+                    Task.Factory
+                        .StartNew(
+                            exc =>
+                                Complete(
+                                    exception: (Exception)exc!,
+                                    dropPendingMessages: true,
+                                    storeExceptionEvenIfAlreadyCompleting: true,
+                                    unwrapInnerExceptions: false,
+                                    revertProcessingState: true
+                                ),
+                            exception,
+                            CancellationToken.None,
+                            Common.GetCreationOptionsForTask(),
+                            TaskScheduler.Default
+                        );
                 }
             }
         }
@@ -875,8 +876,7 @@ namespace System.Threading.Tasks.Dataflow.Internal
                 } // Must not call to source while holding lock
 
                 bool consumed;
-                TInput? consumedValue = element
-                    .Key
+                TInput? consumedValue = element.Key
                     .ConsumeMessage(element.Value, _owningTarget, out consumed);
                 if (consumed)
                 {
@@ -955,13 +955,14 @@ namespace System.Threading.Tasks.Dataflow.Internal
                 // Get out from under currently held locks.  This is to avoid
                 // invoking synchronous continuations off of _completionSource.Task
                 // while holding a lock.
-                Task.Factory.StartNew(
-                    static state => ((TargetCore<TInput>)state!).CompleteBlockOncePossible(),
-                    this,
-                    CancellationToken.None,
-                    Common.GetCreationOptionsForTask(),
-                    TaskScheduler.Default
-                );
+                Task.Factory
+                    .StartNew(
+                        static state => ((TargetCore<TInput>)state!).CompleteBlockOncePossible(),
+                        this,
+                        CancellationToken.None,
+                        Common.GetCreationOptionsForTask(),
+                        TaskScheduler.Default
+                    );
             }
         }
 

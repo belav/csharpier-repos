@@ -56,8 +56,7 @@ namespace System.ServiceModel.Channels
             {
                 if (this.properties == null)
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(
                             new InvalidOperationException(
                                 SR.GetString(

@@ -411,8 +411,7 @@ public class SqlServerMetadataExtensionsTest
             .Metadata;
 
         modelBuilder.Model.AddSequence("DaneelOlivaw");
-        modelBuilder
-            .Model
+        modelBuilder.Model
             .SetValueGenerationStrategy(SqlServerValueGenerationStrategy.SequenceHiLo);
         property.SetHiLoSequenceName("DaneelOlivaw");
 
@@ -449,8 +448,7 @@ public class SqlServerMetadataExtensionsTest
             .Metadata;
 
         modelBuilder.Model.AddSequence("DaneelOlivaw");
-        modelBuilder
-            .Model
+        modelBuilder.Model
             .SetValueGenerationStrategy(SqlServerValueGenerationStrategy.SequenceHiLo);
         modelBuilder.Model.SetHiLoSequenceName("DaneelOlivaw");
 
@@ -489,8 +487,7 @@ public class SqlServerMetadataExtensionsTest
             .Metadata;
 
         modelBuilder.Model.AddSequence("DaneelOlivaw", "R");
-        modelBuilder
-            .Model
+        modelBuilder.Model
             .SetValueGenerationStrategy(SqlServerValueGenerationStrategy.SequenceHiLo);
         property.SetHiLoSequenceName("DaneelOlivaw");
         property.SetHiLoSequenceSchema("R");
@@ -531,8 +528,7 @@ public class SqlServerMetadataExtensionsTest
             .Metadata;
 
         modelBuilder.Model.AddSequence("DaneelOlivaw", "R");
-        modelBuilder
-            .Model
+        modelBuilder.Model
             .SetValueGenerationStrategy(SqlServerValueGenerationStrategy.SequenceHiLo);
         modelBuilder.Model.SetHiLoSequenceName("DaneelOlivaw");
         modelBuilder.Model.SetHiLoSequenceSchema("R");

@@ -17,8 +17,7 @@ namespace System.Web.Http.ModelBinding.Binders
             // Arrange
             Mock<IModelBinder> mockIntBinder = new Mock<IModelBinder>();
             HttpActionContext context = ContextUtil.CreateActionContext();
-            context
-                .ControllerContext
+            context.ControllerContext
                 .Configuration
                 .Services
                 .Replace(

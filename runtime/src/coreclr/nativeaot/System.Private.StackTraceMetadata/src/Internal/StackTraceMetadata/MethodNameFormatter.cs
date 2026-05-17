@@ -146,8 +146,7 @@ namespace Internal.StackTraceMetadata
             }
 
             Method method = methodHandle.GetMethod(_metadataReader);
-            HandleCollection typeVector = method
-                .Signature
+            HandleCollection typeVector = method.Signature
                 .GetMethodSignature(_metadataReader)
                 .Parameters;
             ParameterHandleCollection.Enumerator parameters = method.Parameters.GetEnumerator();
@@ -619,8 +618,7 @@ namespace Internal.StackTraceMetadata
                             Debug.Assert(false);
                             return default(HandleCollection);
                         }
-                        return typeSpec
-                            .Signature
+                        return typeSpec.Signature
                             .ToTypeInstantiationSignatureHandle(metadataReader)
                             .GetTypeInstantiationSignature(metadataReader)
                             .GenericTypeArguments;

@@ -743,8 +743,7 @@ namespace System.ServiceModel.Syndication.Tests
                 }
                 else
                 {
-                    ((XmlDiffNavigator)_iter.Current)
-                        .CurrentNode
+                    ((XmlDiffNavigator)_iter.Current).CurrentNode
                         .ParentNode
                         .DeleteChild(((XmlDiffNavigator)_iter.Current).CurrentNode);
                 }

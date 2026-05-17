@@ -21,11 +21,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeLocalFunctionStatic
             TestParameters parameters
         ) => new MakeLocalFunctionStaticCodeRefactoringProvider();
 
-        private static readonly ParseOptions CSharp72ParseOptions = CSharpParseOptions
-            .Default
+        private static readonly ParseOptions CSharp72ParseOptions = CSharpParseOptions.Default
             .WithLanguageVersion(LanguageVersion.CSharp7_2);
-        private static readonly ParseOptions CSharp8ParseOptions = CSharpParseOptions
-            .Default
+        private static readonly ParseOptions CSharp8ParseOptions = CSharpParseOptions.Default
             .WithLanguageVersion(LanguageVersion.CSharp8);
 
         [Fact]

@@ -356,8 +356,7 @@ public class KeyTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>>
 
         Assert.Collection(
             actualRootNode.Children,
-            expectedRootNode
-                .Children
+            expectedRootNode.Children
                 .Select<Node, Action<Node>>(expectedChild =>
                     (
                         actualChild =>

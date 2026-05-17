@@ -135,8 +135,7 @@ namespace System.Windows.Forms
             Rectangle text_rectangle;
             Rectangle image_rectangle;
 
-            ThemeEngine
-                .Current
+            ThemeEngine.Current
                 .CalculateCheckBoxTextAndImageLayout(
                     this,
                     Point.Empty,
@@ -147,8 +146,7 @@ namespace System.Windows.Forms
 
             // Draw our button
             if (FlatStyle != FlatStyle.System)
-                ThemeEngine
-                    .Current
+                ThemeEngine.Current
                     .DrawCheckBox(
                         pe.Graphics,
                         this,

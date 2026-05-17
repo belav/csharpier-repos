@@ -23,8 +23,7 @@ namespace System.Xml
         public static XmlDictionaryReader CreateDictionaryReader(XmlReader reader)
         {
             if (reader == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -46,8 +45,7 @@ namespace System.Xml
         )
         {
             if (buffer == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -149,8 +147,7 @@ namespace System.Xml
         )
         {
             if (buffer == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -391,8 +388,7 @@ namespace System.Xml
         public virtual bool IsLocalName(XmlDictionaryString localName)
         {
             if (localName == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -404,8 +400,7 @@ namespace System.Xml
         public virtual bool IsNamespaceUri(string namespaceUri)
         {
             if (namespaceUri == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -416,8 +411,7 @@ namespace System.Xml
         public virtual bool IsNamespaceUri(XmlDictionaryString namespaceUri)
         {
             if (namespaceUri == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -483,16 +477,14 @@ namespace System.Xml
         public virtual int IndexOfLocalName(string[] localNames, string namespaceUri)
         {
             if (localNames == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
                     .ThrowHelperArgumentNull("localNames");
 
             if (namespaceUri == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -505,8 +497,7 @@ namespace System.Xml
                 {
                     string value = localNames[i];
                     if (value == null)
-                        throw System
-                            .Runtime
+                        throw System.Runtime
                             .Serialization
                             .DiagnosticUtility
                             .ExceptionUtility
@@ -529,16 +520,14 @@ namespace System.Xml
         )
         {
             if (localNames == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
                     .ThrowHelperArgumentNull("localNames");
 
             if (namespaceUri == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -551,8 +540,7 @@ namespace System.Xml
                 {
                     XmlDictionaryString value = localNames[i];
                     if (value == null)
-                        throw System
-                            .Runtime
+                        throw System.Runtime
                             .Serialization
                             .DiagnosticUtility
                             .ExceptionUtility
@@ -588,8 +576,7 @@ namespace System.Xml
 
         public virtual int ReadValueAsBase64(byte[] buffer, int offset, int count)
         {
-            throw System
-                .Runtime
+            throw System.Runtime
                 .Serialization
                 .DiagnosticUtility
                 .ExceptionUtility
@@ -716,8 +703,7 @@ namespace System.Xml
                 if (this.IsEmptyElement)
                     return string.Empty;
                 if (!Read())
-                    throw System
-                        .Runtime
+                    throw System.Runtime
                         .Serialization
                         .DiagnosticUtility
                         .ExceptionUtility
@@ -748,8 +734,7 @@ namespace System.Xml
                     sb.Append(value);
                 }
                 if (!Read())
-                    throw System
-                        .Runtime
+                    throw System.Runtime
                         .Serialization
                         .DiagnosticUtility
                         .ExceptionUtility
@@ -887,8 +872,7 @@ namespace System.Xml
         public virtual string ReadContentAsString(string[] strings, out int index)
         {
             if (strings == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -899,8 +883,7 @@ namespace System.Xml
             {
                 string value = strings[i];
                 if (value == null)
-                    throw System
-                        .Runtime
+                    throw System.Runtime
                         .Serialization
                         .DiagnosticUtility
                         .ExceptionUtility
@@ -919,8 +902,7 @@ namespace System.Xml
         public virtual string ReadContentAsString(XmlDictionaryString[] strings, out int index)
         {
             if (strings == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -931,8 +913,7 @@ namespace System.Xml
             {
                 XmlDictionaryString value = strings[i];
                 if (value == null)
-                    throw System
-                        .Runtime
+                    throw System.Runtime
                         .Serialization
                         .DiagnosticUtility
                         .ExceptionUtility
@@ -1140,8 +1121,7 @@ namespace System.Xml
                 }
                 catch (ArgumentException exception)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             XmlExceptionHelper.CreateConversionException(
                                 string.Empty,
@@ -1152,8 +1132,7 @@ namespace System.Xml
                 }
                 catch (FormatException exception)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             XmlExceptionHelper.CreateConversionException(
                                 string.Empty,
@@ -1187,8 +1166,7 @@ namespace System.Xml
                 }
                 catch (ArgumentException exception)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             XmlExceptionHelper.CreateConversionException(
                                 string.Empty,
@@ -1199,8 +1177,7 @@ namespace System.Xml
                 }
                 catch (FormatException exception)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             XmlExceptionHelper.CreateConversionException(
                                 string.Empty,
@@ -1239,8 +1216,7 @@ namespace System.Xml
                 }
                 catch (ArgumentException exception)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             XmlExceptionHelper.CreateConversionException(
                                 string.Empty,
@@ -1251,8 +1227,7 @@ namespace System.Xml
                 }
                 catch (FormatException exception)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             XmlExceptionHelper.CreateConversionException(
                                 string.Empty,
@@ -1263,8 +1238,7 @@ namespace System.Xml
                 }
                 catch (OverflowException exception)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             XmlExceptionHelper.CreateConversionException(
                                 string.Empty,
@@ -1373,15 +1347,13 @@ namespace System.Xml
         void CheckArray(Array array, int offset, int count)
         {
             if (array == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("array"));
             if (offset < 0)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -1392,8 +1364,7 @@ namespace System.Xml
                         )
                     );
             if (offset > array.Length)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -1404,8 +1375,7 @@ namespace System.Xml
                         )
                     );
             if (count < 0)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -1416,8 +1386,7 @@ namespace System.Xml
                         )
                     );
             if (count > array.Length - offset)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -1444,8 +1413,7 @@ namespace System.Xml
         // Boolean
         public virtual bool[] ReadBooleanArray(string localName, string namespaceUri)
         {
-            return BooleanArrayHelperWithString
-                .Instance
+            return BooleanArrayHelperWithString.Instance
                 .ReadArray(this, localName, namespaceUri, Quotas.MaxArrayLength);
         }
 
@@ -1454,8 +1422,7 @@ namespace System.Xml
             XmlDictionaryString namespaceUri
         )
         {
-            return BooleanArrayHelperWithDictionaryString
-                .Instance
+            return BooleanArrayHelperWithDictionaryString.Instance
                 .ReadArray(this, localName, namespaceUri, Quotas.MaxArrayLength);
         }
 
@@ -1497,8 +1464,7 @@ namespace System.Xml
         // Int16
         public virtual Int16[] ReadInt16Array(string localName, string namespaceUri)
         {
-            return Int16ArrayHelperWithString
-                .Instance
+            return Int16ArrayHelperWithString.Instance
                 .ReadArray(this, localName, namespaceUri, Quotas.MaxArrayLength);
         }
 
@@ -1507,8 +1473,7 @@ namespace System.Xml
             XmlDictionaryString namespaceUri
         )
         {
-            return Int16ArrayHelperWithDictionaryString
-                .Instance
+            return Int16ArrayHelperWithDictionaryString.Instance
                 .ReadArray(this, localName, namespaceUri, Quotas.MaxArrayLength);
         }
 
@@ -1557,8 +1522,7 @@ namespace System.Xml
         // Int32
         public virtual Int32[] ReadInt32Array(string localName, string namespaceUri)
         {
-            return Int32ArrayHelperWithString
-                .Instance
+            return Int32ArrayHelperWithString.Instance
                 .ReadArray(this, localName, namespaceUri, Quotas.MaxArrayLength);
         }
 
@@ -1567,8 +1531,7 @@ namespace System.Xml
             XmlDictionaryString namespaceUri
         )
         {
-            return Int32ArrayHelperWithDictionaryString
-                .Instance
+            return Int32ArrayHelperWithDictionaryString.Instance
                 .ReadArray(this, localName, namespaceUri, Quotas.MaxArrayLength);
         }
 
@@ -1610,8 +1573,7 @@ namespace System.Xml
         // Int64
         public virtual Int64[] ReadInt64Array(string localName, string namespaceUri)
         {
-            return Int64ArrayHelperWithString
-                .Instance
+            return Int64ArrayHelperWithString.Instance
                 .ReadArray(this, localName, namespaceUri, Quotas.MaxArrayLength);
         }
 
@@ -1620,8 +1582,7 @@ namespace System.Xml
             XmlDictionaryString namespaceUri
         )
         {
-            return Int64ArrayHelperWithDictionaryString
-                .Instance
+            return Int64ArrayHelperWithDictionaryString.Instance
                 .ReadArray(this, localName, namespaceUri, Quotas.MaxArrayLength);
         }
 
@@ -1663,8 +1624,7 @@ namespace System.Xml
         // Single
         public virtual float[] ReadSingleArray(string localName, string namespaceUri)
         {
-            return SingleArrayHelperWithString
-                .Instance
+            return SingleArrayHelperWithString.Instance
                 .ReadArray(this, localName, namespaceUri, Quotas.MaxArrayLength);
         }
 
@@ -1673,8 +1633,7 @@ namespace System.Xml
             XmlDictionaryString namespaceUri
         )
         {
-            return SingleArrayHelperWithDictionaryString
-                .Instance
+            return SingleArrayHelperWithDictionaryString.Instance
                 .ReadArray(this, localName, namespaceUri, Quotas.MaxArrayLength);
         }
 
@@ -1716,8 +1675,7 @@ namespace System.Xml
         // Double
         public virtual double[] ReadDoubleArray(string localName, string namespaceUri)
         {
-            return DoubleArrayHelperWithString
-                .Instance
+            return DoubleArrayHelperWithString.Instance
                 .ReadArray(this, localName, namespaceUri, Quotas.MaxArrayLength);
         }
 
@@ -1726,8 +1684,7 @@ namespace System.Xml
             XmlDictionaryString namespaceUri
         )
         {
-            return DoubleArrayHelperWithDictionaryString
-                .Instance
+            return DoubleArrayHelperWithDictionaryString.Instance
                 .ReadArray(this, localName, namespaceUri, Quotas.MaxArrayLength);
         }
 
@@ -1769,8 +1726,7 @@ namespace System.Xml
         // Decimal
         public virtual decimal[] ReadDecimalArray(string localName, string namespaceUri)
         {
-            return DecimalArrayHelperWithString
-                .Instance
+            return DecimalArrayHelperWithString.Instance
                 .ReadArray(this, localName, namespaceUri, Quotas.MaxArrayLength);
         }
 
@@ -1779,8 +1735,7 @@ namespace System.Xml
             XmlDictionaryString namespaceUri
         )
         {
-            return DecimalArrayHelperWithDictionaryString
-                .Instance
+            return DecimalArrayHelperWithDictionaryString.Instance
                 .ReadArray(this, localName, namespaceUri, Quotas.MaxArrayLength);
         }
 
@@ -1822,8 +1777,7 @@ namespace System.Xml
         // DateTime
         public virtual DateTime[] ReadDateTimeArray(string localName, string namespaceUri)
         {
-            return DateTimeArrayHelperWithString
-                .Instance
+            return DateTimeArrayHelperWithString.Instance
                 .ReadArray(this, localName, namespaceUri, Quotas.MaxArrayLength);
         }
 
@@ -1832,8 +1786,7 @@ namespace System.Xml
             XmlDictionaryString namespaceUri
         )
         {
-            return DateTimeArrayHelperWithDictionaryString
-                .Instance
+            return DateTimeArrayHelperWithDictionaryString.Instance
                 .ReadArray(this, localName, namespaceUri, Quotas.MaxArrayLength);
         }
 
@@ -1875,8 +1828,7 @@ namespace System.Xml
         // Guid
         public virtual Guid[] ReadGuidArray(string localName, string namespaceUri)
         {
-            return GuidArrayHelperWithString
-                .Instance
+            return GuidArrayHelperWithString.Instance
                 .ReadArray(this, localName, namespaceUri, Quotas.MaxArrayLength);
         }
 
@@ -1885,8 +1837,7 @@ namespace System.Xml
             XmlDictionaryString namespaceUri
         )
         {
-            return GuidArrayHelperWithDictionaryString
-                .Instance
+            return GuidArrayHelperWithDictionaryString.Instance
                 .ReadArray(this, localName, namespaceUri, Quotas.MaxArrayLength);
         }
 
@@ -1928,8 +1879,7 @@ namespace System.Xml
         // TimeSpan
         public virtual TimeSpan[] ReadTimeSpanArray(string localName, string namespaceUri)
         {
-            return TimeSpanArrayHelperWithString
-                .Instance
+            return TimeSpanArrayHelperWithString.Instance
                 .ReadArray(this, localName, namespaceUri, Quotas.MaxArrayLength);
         }
 
@@ -1938,8 +1888,7 @@ namespace System.Xml
             XmlDictionaryString namespaceUri
         )
         {
-            return TimeSpanArrayHelperWithDictionaryString
-                .Instance
+            return TimeSpanArrayHelperWithDictionaryString.Instance
                 .ReadArray(this, localName, namespaceUri, Quotas.MaxArrayLength);
         }
 

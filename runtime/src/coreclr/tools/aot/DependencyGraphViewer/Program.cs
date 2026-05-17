@@ -434,8 +434,7 @@ namespace DependencyLogViewer
             using (session)
             {
                 session.BufferSizeMB = 1024;
-                session
-                    .Source
+                session.Source
                     .Dynamic
                     .AddCallbackForProviderEvent(
                         "Microsoft-ILCompiler-DependencyGraph",
@@ -450,8 +449,7 @@ namespace DependencyLogViewer
                             events.Enqueue(ge);
                         }
                     );
-                session
-                    .Source
+                session.Source
                     .Dynamic
                     .AddCallbackForProviderEvent(
                         "Microsoft-ILCompiler-DependencyGraph",
@@ -467,8 +465,7 @@ namespace DependencyLogViewer
                             events.Enqueue(ge);
                         }
                     );
-                session
-                    .Source
+                session.Source
                     .Dynamic
                     .AddCallbackForProviderEvent(
                         "Microsoft-ILCompiler-DependencyGraph",
@@ -485,8 +482,7 @@ namespace DependencyLogViewer
                             events.Enqueue(ge);
                         }
                     );
-                session
-                    .Source
+                session.Source
                     .Dynamic
                     .AddCallbackForProviderEvent(
                         "Microsoft-ILCompiler-DependencyGraph",

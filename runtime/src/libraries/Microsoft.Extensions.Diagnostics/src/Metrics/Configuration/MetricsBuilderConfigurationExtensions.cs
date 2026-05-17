@@ -37,13 +37,11 @@ namespace Microsoft.Extensions.Diagnostics.Metrics
                 throw new ArgumentNullException(nameof(configuration));
             }
 
-            builder
-                .Services
+            builder.Services
                 .AddSingleton<IConfigureOptions<MetricsOptions>>(
                     new MetricsConfigureOptions(configuration)
                 );
-            builder
-                .Services
+            builder.Services
                 .AddSingleton<IOptionsChangeTokenSource<MetricsOptions>>(
                     new ConfigurationChangeTokenSource<MetricsOptions>(configuration)
                 );

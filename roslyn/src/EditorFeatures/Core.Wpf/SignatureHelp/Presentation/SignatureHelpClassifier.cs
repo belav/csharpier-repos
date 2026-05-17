@@ -33,8 +33,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
         public IList<ClassificationSpan> GetClassificationSpans(SnapshotSpan span)
         {
             if (
-                _subjectBuffer
-                    .Properties
+                _subjectBuffer.Properties
                     .TryGetProperty(
                         typeof(ISignatureHelpSession),
                         out ISignatureHelpSession session
@@ -44,8 +43,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
             {
                 var signature = (Signature)session.SelectedSignature;
                 if (
-                    !_subjectBuffer
-                        .Properties
+                    !_subjectBuffer.Properties
                         .TryGetProperty("UsePrettyPrintedContent", out bool usePrettyPrintedContent)
                 )
                 {

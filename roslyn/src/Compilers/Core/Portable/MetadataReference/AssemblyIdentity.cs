@@ -254,8 +254,7 @@ namespace Microsoft.CodeAnalysis
 
             return
                 cultureName == null
-                || AssemblyIdentityComparer
-                    .CultureComparer
+                || AssemblyIdentityComparer.CultureComparer
                     .Equals(cultureName, InvariantCultureDisplay)
                 ? string.Empty
                 : cultureName;

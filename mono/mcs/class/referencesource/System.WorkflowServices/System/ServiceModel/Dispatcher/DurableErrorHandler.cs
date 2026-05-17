@@ -20,8 +20,7 @@ namespace System.ServiceModel.Dispatcher
         {
             if (OperationContext.Current == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new InvalidOperationException(SR2.NoOperationContext));
             }
 

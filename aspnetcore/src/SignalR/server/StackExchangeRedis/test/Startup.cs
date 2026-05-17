@@ -22,8 +22,7 @@ public class Startup
             .AddMessagePackProtocol()
             .AddStackExchangeRedis(options =>
             {
-                options
-                    .Configuration
+                options.Configuration
                     .EndPoints
                     .Add(Environment.GetEnvironmentVariable("REDIS_CONNECTION"));
             });

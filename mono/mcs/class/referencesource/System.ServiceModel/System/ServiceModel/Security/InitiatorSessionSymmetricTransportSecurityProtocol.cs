@@ -32,8 +32,7 @@ namespace System.ServiceModel.Security
             if (factory.ActAsInitiator != true)
             {
                 Fx.Assert("This protocol can only be used at the initiator.");
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new NotSupportedException(
                             SR.GetString(
@@ -314,14 +313,15 @@ namespace System.ServiceModel.Security
 
             protected override bool OnGetSupportingTokensDone(TimeSpan timeout)
             {
-                this.binding.SetupDelayedSecurityExecution(
-                    actor,
-                    ref message,
-                    signingToken,
-                    sourceToken,
-                    tokenParameters,
-                    this.SupportingTokens
-                );
+                this.binding
+                    .SetupDelayedSecurityExecution(
+                        actor,
+                        ref message,
+                        signingToken,
+                        sourceToken,
+                        tokenParameters,
+                        this.SupportingTokens
+                    );
                 return true;
             }
 

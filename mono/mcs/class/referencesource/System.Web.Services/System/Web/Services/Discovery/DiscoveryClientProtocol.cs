@@ -337,8 +337,7 @@ namespace System.Web.Services.Discovery
                     if (dotIndex != -1)
                     {
                         switch (
-                            response
-                                .ResponseUri
+                            response.ResponseUri
                                 .AbsolutePath
                                 .Substring(dotIndex + 1)
                                 .ToLower(CultureInfo.InvariantCulture)
@@ -683,8 +682,7 @@ namespace System.Web.Services.Discovery
                     filenames,
                     Path.GetFullPath(Path.Combine(directory, filename))
                 );
-                results
-                    .Results
+                results.Results
                     .Add(
                         new DiscoveryClientResult(
                             reference == null ? null : reference.GetType(),

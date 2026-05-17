@@ -89,23 +89,20 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.Editor
                     {
                         var text = document.GetTextSynchronously(cancellationToken);
 
-                        var indentStyle = _provider
-                            ._globalOptions
+                        var indentStyle = _provider._globalOptions
                             .GetOption(
                                 IndentationOptionsStorage.SmartIndent,
                                 document.Project.Language
                             );
 
                         var fsharpOptions = new FSharpIndentationOptions(
-                            TabSize: _textView
-                                .Options
+                            TabSize: _textView.Options
                                 .GetOptionValue(DefaultOptions.TabSizeOptionId),
                             IndentStyle: (FormattingOptions.IndentStyle)indentStyle
                         );
 
 #pragma warning disable 0618 // Compat with existing EA api
-                        result = _provider
-                            ._service
+                        result = _provider._service
                             .GetDesiredIndentation(
                                 document.Project.LanguageServices,
                                 text,
@@ -119,8 +116,7 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.Editor
                     else
                     {
                         Contract.ThrowIfNull(_provider._legacyService);
-                        result = _provider
-                            ._legacyService
+                        result = _provider._legacyService
                             .GetDesiredIndentation(document, line.LineNumber, cancellationToken);
                     }
 

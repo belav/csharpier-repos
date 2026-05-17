@@ -340,8 +340,7 @@ internal sealed class ResettableValueTaskSource : IValueTaskSource
                 if (!_isCompleted)
                 {
                     GCHandle handle = GCHandle.Alloc(keepAlive);
-                    _finalTaskSource
-                        .Task
+                    _finalTaskSource.Task
                         .ContinueWith(
                             static (_, state) =>
                             {

@@ -44,8 +44,7 @@ namespace System.IdentityModel
                 // as the depth, we narrow our range of support so that we require
                 // that the enveloped signature be a direct child of the element
                 // being signed.
-                reader
-                    .XmlTokens
+                reader.XmlTokens
                     .SetElementExclusion(
                         XmlSignatureConstants.Elements.Signature,
                         XmlSignatureConstants.Namespace,
@@ -54,8 +53,7 @@ namespace System.IdentityModel
                 return reader;
             }
 
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(
                     new NotSupportedException(
                         SR.GetString(SR.UnsupportedInputTypeForTransform, input.GetType())
@@ -71,8 +69,7 @@ namespace System.IdentityModel
             DictionaryManager dictionaryManager
         )
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(
                     new NotSupportedException(SR.GetString(SR.UnsupportedLastTransform))
                 );
@@ -94,8 +91,7 @@ namespace System.IdentityModel
             );
             if (algorithm != this.Algorithm)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new CryptographicException(SR.GetString(SR.AlgorithmMismatchForTransform))
                     );

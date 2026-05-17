@@ -26,8 +26,7 @@
                 ModelMetadata result = base.ModelMetadata;
                 if (result == null)
                 {
-                    result = base.ModelMetadata = ModelMetadataProviders
-                        .Current
+                    result = base.ModelMetadata = ModelMetadataProviders.Current
                         .GetMetadataForType(null, typeof(TModel));
                 }
                 return result;

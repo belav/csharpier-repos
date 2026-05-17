@@ -91,8 +91,7 @@ namespace System.ServiceModel.Dispatcher
         internal int IncrementLimit(int incrementBy)
         {
             if (incrementBy < 0)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentOutOfRangeException(
                             "incrementBy",
@@ -162,8 +161,7 @@ namespace System.ServiceModel.Dispatcher
         internal void SetLimit(int messageLimit)
         {
             if (messageLimit < 0)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentOutOfRangeException(
                             "messageLimit",

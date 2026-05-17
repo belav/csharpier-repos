@@ -91,8 +91,7 @@ internal partial class CSharpUseCollectionExpressionForBuilderCodeFixProvider
                 newDocument,
                 fallbackOptions,
                 dummyObjectCreation,
-                analysisResult
-                    .Matches
+                analysisResult.Matches
                     .SelectAsArray(m => new CollectionExpressionMatch<StatementSyntax>(
                         m.Statement,
                         m.UseSpread
@@ -125,8 +124,7 @@ internal partial class CSharpUseCollectionExpressionForBuilderCodeFixProvider
                 analysisResult.DiagnosticLocation,
                 root.GetCurrentNode(analysisResult.LocalDeclarationStatement)!,
                 root.GetCurrentNode(analysisResult.CreationExpression)!,
-                analysisResult
-                    .Matches
+                analysisResult.Matches
                     .SelectAsArray(m => new Match<StatementSyntax>(
                         root.GetCurrentNode(m.Statement)!,
                         m.UseSpread

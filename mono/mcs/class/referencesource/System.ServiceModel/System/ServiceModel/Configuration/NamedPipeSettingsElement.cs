@@ -36,9 +36,8 @@ namespace System.ServiceModel.Configuration
                 throw FxTrace.Exception.ArgumentNull("settings");
             }
 
-            this.ApplicationContainerSettings.ApplyConfiguration(
-                settings.ApplicationContainerSettings
-            );
+            this.ApplicationContainerSettings
+                .ApplyConfiguration(settings.ApplicationContainerSettings);
         }
 
         internal void InitializeFrom(NamedPipeSettings settings)

@@ -93,8 +93,7 @@ namespace System.Activities.Expressions
 
             if (!this.isOperationFunctionStatic && operandValue == null)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new InvalidOperationException(
                             SR.MemberCannotBeNull("Operand", this.GetType().Name, this.DisplayName)

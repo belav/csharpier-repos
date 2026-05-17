@@ -180,20 +180,17 @@ public class CollectionNavigationBuilder : IInfrastructure<IConventionForeignKey
 
             if (SkipNavigation.Inverse != null)
             {
-                ((EntityType)SkipNavigation.Inverse.DeclaringEntityType)
-                    .Builder
+                ((EntityType)SkipNavigation.Inverse.DeclaringEntityType).Builder
                     .HasNoSkipNavigation(
                         (SkipNavigation)SkipNavigation.Inverse,
                         ConfigurationSource.Explicit
                     );
             }
 
-            declaringEntityType
-                .Builder
+            declaringEntityType.Builder
                 .HasNoSkipNavigation((SkipNavigation)SkipNavigation, ConfigurationSource.Explicit);
 
-            Builder = declaringEntityType
-                .Builder
+            Builder = declaringEntityType.Builder
                 .HasRelationship(
                     (EntityType)RelatedEntityType,
                     navigationName,
@@ -298,13 +295,11 @@ public class CollectionNavigationBuilder : IInfrastructure<IConventionForeignKey
 
         using (foreignKey.DeclaringEntityType.Model.DelayConventions())
         {
-            foreignKey
-                .DeclaringEntityType
+            foreignKey.DeclaringEntityType
                 .Builder
                 .HasNoRelationship(foreignKey, ConfigurationSource.Explicit);
             Builder = null;
-            return ((EntityType)DeclaringEntityType)
-                .Builder
+            return ((EntityType)DeclaringEntityType).Builder
                 .HasSkipNavigation(
                     navigationMember,
                     (EntityType)RelatedEntityType,
@@ -369,8 +364,7 @@ public class CollectionNavigationBuilder : IInfrastructure<IConventionForeignKey
 
                 if (conflictingNavigation != null)
                 {
-                    foreignKey!
-                        .DeclaringEntityType
+                    foreignKey!.DeclaringEntityType
                         .Builder
                         .HasNoRelationship(foreignKey, ConfigurationSource.Explicit);
                 }
@@ -387,8 +381,7 @@ public class CollectionNavigationBuilder : IInfrastructure<IConventionForeignKey
                 }
             }
 
-            return ((EntityType)RelatedEntityType)
-                .Builder
+            return ((EntityType)RelatedEntityType).Builder
                 .HasSkipNavigation(
                     navigationMember,
                     (EntityType)DeclaringEntityType,

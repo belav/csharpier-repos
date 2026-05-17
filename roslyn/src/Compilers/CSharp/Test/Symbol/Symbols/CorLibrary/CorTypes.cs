@@ -42,8 +42,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.CorLibrary
                 Assert.Equal("<Missing Core Assembly>", t.ContainingAssembly.Identity.Name);
             }
 
-            var p = noMsCorLibRef
-                .GlobalNamespace
+            var p = noMsCorLibRef.GlobalNamespace
                 .GetTypeMembers("I1")
                 .Single()
                 .GetMembers("M1")

@@ -57,8 +57,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     return ImmutableArray<SyntaxReference>.Empty;
 
                 Debug.Assert(_location.SourceTree != null);
-                SyntaxToken token = _location
-                    .SourceTree
+                SyntaxToken token = _location.SourceTree
                     .GetRoot()
                     .FindToken(_location.SourceSpan.Start);
                 Debug.Assert(token.Kind() == SyntaxKind.IdentifierToken);

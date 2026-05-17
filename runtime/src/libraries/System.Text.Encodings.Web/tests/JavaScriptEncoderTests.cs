@@ -407,8 +407,7 @@ namespace System.Text.Encodings.Web.Tests
 
             // Encode(Span, ...)
             Span<char> destination = new char[12];
-            OperationStatus status = System
-                .Text
+            OperationStatus status = System.Text
                 .Encodings
                 .Web
                 .JavaScriptEncoder
@@ -438,8 +437,7 @@ namespace System.Text.Encodings.Web.Tests
             destination[112] = 'x';
 
             // Pass in destination + 100 to check for underwrite.
-            OperationStatus status = System
-                .Text
+            OperationStatus status = System.Text
                 .Encodings
                 .Web
                 .JavaScriptEncoder
@@ -466,8 +464,7 @@ namespace System.Text.Encodings.Web.Tests
             "\U0001f4a9".AsSpan().CopyTo(destination);
 
             // Overlap behavior is undefined but documented that it is not valid. Here we don't expect any issues.
-            OperationStatus status = System
-                .Text
+            OperationStatus status = System.Text
                 .Encodings
                 .Web
                 .JavaScriptEncoder
@@ -489,8 +486,7 @@ namespace System.Text.Encodings.Web.Tests
         public void TestSurrogateBufferTooSmall()
         {
             Span<char> destination = new char[11];
-            OperationStatus status = System
-                .Text
+            OperationStatus status = System.Text
                 .Encodings
                 .Web
                 .JavaScriptEncoder
@@ -511,8 +507,7 @@ namespace System.Text.Encodings.Web.Tests
         [Fact]
         public void JavaScriptEncoder_NonEmptySource_EmptyDest_Throws()
         {
-            OperationStatus status = System
-                .Text
+            OperationStatus status = System.Text
                 .Encodings
                 .Web
                 .JavaScriptEncoder
@@ -531,8 +526,7 @@ namespace System.Text.Encodings.Web.Tests
         [Fact]
         public void JavaScriptEncoder_EmptySource_EmptyDest()
         {
-            OperationStatus status = System
-                .Text
+            OperationStatus status = System.Text
                 .Encodings
                 .Web
                 .JavaScriptEncoder
@@ -557,8 +551,7 @@ namespace System.Text.Encodings.Web.Tests
 
             // Encode(Span, ...)
             Span<char> destination = new char[12];
-            OperationStatus status = System
-                .Text
+            OperationStatus status = System.Text
                 .Encodings
                 .Web
                 .JavaScriptEncoder
@@ -577,8 +570,7 @@ namespace System.Text.Encodings.Web.Tests
             Assert.Equal("", new string(destination.Slice(0, charsWritten).ToArray()));
 
             destination = null; // null doesn't throw is no characters to encode
-            status = System
-                .Text
+            status = System.Text
                 .Encodings
                 .Web
                 .JavaScriptEncoder

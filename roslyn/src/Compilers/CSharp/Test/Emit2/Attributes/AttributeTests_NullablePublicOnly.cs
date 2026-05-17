@@ -187,8 +187,7 @@ public class B : A<object?>
 public class B : A<object>
 {
 }";
-            var options = TestOptions
-                .ReleaseDll
+            var options = TestOptions.ReleaseDll
                 .WithMetadataImportOptions(MetadataImportOptions.All);
             var parseOptions = TestOptions.Regular7;
 
@@ -355,8 +354,7 @@ public class A
             comp = CreateCompilation(
                 source1,
                 references: new[] { ref0 },
-                options: TestOptions
-                    .ReleaseDll
+                options: TestOptions.ReleaseDll
                     .WithMetadataImportOptions(MetadataImportOptions.All),
                 parseOptions: TestOptions.Regular8.WithNullablePublicOnly()
             );
@@ -539,8 +537,7 @@ public class Program
         L();
     }
 }";
-            var options = TestOptions
-                .ReleaseExe
+            var options = TestOptions.ReleaseExe
                 .WithMetadataImportOptions(MetadataImportOptions.All);
             var parseOptions = TestOptions.Regular8;
 
@@ -568,8 +565,7 @@ public class Program
         L();
     }
 }";
-            var options = TestOptions
-                .ReleaseExe
+            var options = TestOptions.ReleaseExe
                 .WithMetadataImportOptions(MetadataImportOptions.All);
             var parseOptions = TestOptions.Regular8;
             CSharpTestSource sources = new[]
@@ -740,8 +736,7 @@ public class Program
                 comp,
                 symbolValidator: module =>
                 {
-                    var attributeType = module
-                        .GlobalNamespace
+                    var attributeType = module.GlobalNamespace
                         .GetMember<NamedTypeSymbol>(
                             "System.Runtime.CompilerServices.NullablePublicOnlyAttribute"
                         );
@@ -765,8 +760,7 @@ public class Program
 }";
             var comp = CreateCompilation(
                 source,
-                parseOptions: TestOptions
-                    .Regular
+                parseOptions: TestOptions.Regular
                     .WithNullablePublicOnly()
                     .WithNoRefSafetyRulesAttribute()
             );

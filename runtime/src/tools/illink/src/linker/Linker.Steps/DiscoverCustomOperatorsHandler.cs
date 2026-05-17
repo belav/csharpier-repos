@@ -88,8 +88,7 @@ namespace Mono.Linker.Steps
 
         void MarkOperator(MethodDefinition method)
         {
-            Context
-                .Annotations
+            Context.Annotations
                 .Mark(
                     method,
                     new DependencyInfo(DependencyKind.PreservedOperator, method.DeclaringType),

@@ -526,8 +526,7 @@ namespace System.Xaml
                     continue;
                 }
             }
-            PrefixLookup
-                .Namespaces
+            PrefixLookup.Namespaces
                 .Sort((nd1, nd2) => String.CompareOrdinal(nd1.Prefix, nd2.Prefix));
             PrefixLookup.IsCollectingNamespaces = false;
             NameResolver.IsCollectingReferences = false;

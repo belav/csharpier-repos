@@ -58,10 +58,8 @@ namespace MonoTests.System.Data.Odbc
             Assert.AreEqual(0, param.Size, "#2");
             param = cmd.Parameters.Add("param1", (double)1.0);
             Assert.AreEqual(0, param.Size, "#3");
-            param = cmd.Parameters.Add(
-                "param1",
-                ASCIIEncoding.ASCII.GetBytes("this is considerably long test")
-            );
+            param = cmd.Parameters
+                .Add("param1", ASCIIEncoding.ASCII.GetBytes("this is considerably long test"));
             Assert.AreEqual(30, param.Size, "#4");
             param = cmd.Parameters.Add("param1", true);
             Assert.AreEqual(0, param.Size, "#5");

@@ -80,8 +80,7 @@ namespace System.ServiceModel.Security
                         }
                         else
                         {
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
                                     new MessageSecurityException(
                                         SR.GetString(
@@ -119,8 +118,7 @@ namespace System.ServiceModel.Security
                     {
                         if (primarySignatureFound)
                         {
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
                                     new MessageSecurityException(
                                         SR.GetString(

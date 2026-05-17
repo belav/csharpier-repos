@@ -298,8 +298,7 @@ namespace System.ServiceModel.Security
                 || (token != null && tokenParameters == null)
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentException(
                             SR.GetString(SR.TokenMustBeNullWhenTokenParametersAre)
@@ -318,8 +317,7 @@ namespace System.ServiceModel.Security
                 || (token != null && tokenParameters == null)
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentException(
                             SR.GetString(SR.TokenMustBeNullWhenTokenParametersAre)
@@ -454,8 +452,7 @@ namespace System.ServiceModel.Security
             SignatureConfirmations signatureConfirmations
         )
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(
                     new InvalidOperationException(
                         SR.GetString(SR.SignatureConfirmationNotSupported)
@@ -476,10 +473,11 @@ namespace System.ServiceModel.Security
             bool encryptionTokenSerialized =
                 sourceEncryptingKeyReferenceStyle == SecurityTokenReferenceStyle.Internal;
             SecurityKeyIdentifierClause sourceEncryptingKeyIdentifierClause =
-                this.encryptingTokenParameters.CreateKeyIdentifierClause(
-                    this.elementContainer.SourceEncryptionToken,
-                    sourceEncryptingKeyReferenceStyle
-                );
+                this.encryptingTokenParameters
+                    .CreateKeyIdentifierClause(
+                        this.elementContainer.SourceEncryptionToken,
+                        sourceEncryptingKeyReferenceStyle
+                    );
             if (sourceEncryptingKeyIdentifierClause == null)
             {
                 throw TraceUtility.ThrowHelperError(
@@ -501,11 +499,12 @@ namespace System.ServiceModel.Security
                 CryptoHelper.FillRandomBytes(key);
                 string keyWrapAlgorithm;
                 XmlDictionaryString keyWrapAlgorithmDictionaryString;
-                this.AlgorithmSuite.GetKeyWrapAlgorithm(
-                    elementContainer.SourceEncryptionToken,
-                    out keyWrapAlgorithm,
-                    out keyWrapAlgorithmDictionaryString
-                );
+                this.AlgorithmSuite
+                    .GetKeyWrapAlgorithm(
+                        elementContainer.SourceEncryptionToken,
+                        out keyWrapAlgorithm,
+                        out keyWrapAlgorithmDictionaryString
+                    );
                 WrappedKeySecurityToken wrappedKey = new WrappedKeySecurityToken(
                     GenerateId(),
                     key,
@@ -533,8 +532,8 @@ namespace System.ServiceModel.Security
             // determine if a token needs to be derived
             if (this.encryptingTokenParameters.RequireDerivedKeys)
             {
-                string derivationAlgorithm =
-                    this.AlgorithmSuite.GetEncryptionKeyDerivationAlgorithm(
+                string derivationAlgorithm = this.AlgorithmSuite
+                    .GetEncryptionKeyDerivationAlgorithm(
                         sourceToken,
                         this.StandardsManager.MessageSecurityVersion.SecureConversationVersion
                     );
@@ -546,10 +545,13 @@ namespace System.ServiceModel.Security
                     DerivedKeySecurityToken derivedEncryptingToken = new DerivedKeySecurityToken(
                         -1,
                         0,
-                        this.AlgorithmSuite.GetEncryptionKeyDerivationLength(
-                            sourceToken,
-                            this.StandardsManager.MessageSecurityVersion.SecureConversationVersion
-                        ),
+                        this.AlgorithmSuite
+                            .GetEncryptionKeyDerivationLength(
+                                sourceToken,
+                                this.StandardsManager
+                                    .MessageSecurityVersion
+                                    .SecureConversationVersion
+                            ),
                         null,
                         DerivedKeySecurityToken.DefaultNonceLength,
                         sourceToken,
@@ -566,8 +568,7 @@ namespace System.ServiceModel.Security
                 }
                 else
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new NotSupportedException(
                                 SR.GetString(SR.UnsupportedCryptoAlgorithm, derivationAlgorithm)
@@ -739,8 +740,7 @@ namespace System.ServiceModel.Security
                 case SecurityTokenInclusionMode.Never:
                     return false;
                 default:
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new NotSupportedException(
                                 SR.GetString(
@@ -844,8 +844,7 @@ namespace System.ServiceModel.Security
             {
                 if (elementContainer.ReferenceList != null)
                 {
-                    elementContainer
-                        .ReferenceList
+                    elementContainer.ReferenceList
                         .WriteTo(writer, ServiceModelDictionaryManager.Instance);
                 }
             }
@@ -949,8 +948,7 @@ namespace System.ServiceModel.Security
                 && elementContainer.PrimarySignature.Item != null
             )
             {
-                elementContainer
-                    .PrimarySignature
+                elementContainer.PrimarySignature
                     .Item
                     .WriteTo(writer, ServiceModelDictionaryManager.Instance);
             }
@@ -969,8 +967,7 @@ namespace System.ServiceModel.Security
             {
                 if (elementContainer.ReferenceList != null)
                 {
-                    elementContainer
-                        .ReferenceList
+                    elementContainer.ReferenceList
                         .WriteTo(writer, ServiceModelDictionaryManager.Instance);
                 }
             }
@@ -1053,10 +1050,11 @@ namespace System.ServiceModel.Security
                 this.signingTokenParameters
             );
             SecurityKeyIdentifierClause sourceSigningKeyIdentifierClause =
-                this.signingTokenParameters.CreateKeyIdentifierClause(
-                    this.elementContainer.SourceSigningToken,
-                    sourceSigningKeyReferenceStyle
-                );
+                this.signingTokenParameters
+                    .CreateKeyIdentifierClause(
+                        this.elementContainer.SourceSigningToken,
+                        sourceSigningKeyReferenceStyle
+                    );
             if (sourceSigningKeyIdentifierClause == null)
             {
                 throw TraceUtility.ThrowHelperError(
@@ -1076,10 +1074,11 @@ namespace System.ServiceModel.Security
                 && !this.signingTokenParameters.HasAsymmetricKey
             )
             {
-                string derivationAlgorithm = this.AlgorithmSuite.GetSignatureKeyDerivationAlgorithm(
-                    this.elementContainer.SourceSigningToken,
-                    this.StandardsManager.MessageSecurityVersion.SecureConversationVersion
-                );
+                string derivationAlgorithm = this.AlgorithmSuite
+                    .GetSignatureKeyDerivationAlgorithm(
+                        this.elementContainer.SourceSigningToken,
+                        this.StandardsManager.MessageSecurityVersion.SecureConversationVersion
+                    );
                 string expectedDerivationAlgorithm = SecurityUtils.GetKeyDerivationAlgorithm(
                     this.StandardsManager.MessageSecurityVersion.SecureConversationVersion
                 );
@@ -1088,10 +1087,13 @@ namespace System.ServiceModel.Security
                     DerivedKeySecurityToken derivedSigningToken = new DerivedKeySecurityToken(
                         -1,
                         0,
-                        this.AlgorithmSuite.GetSignatureKeyDerivationLength(
-                            this.elementContainer.SourceSigningToken,
-                            this.StandardsManager.MessageSecurityVersion.SecureConversationVersion
-                        ),
+                        this.AlgorithmSuite
+                            .GetSignatureKeyDerivationLength(
+                                this.elementContainer.SourceSigningToken,
+                                this.StandardsManager
+                                    .MessageSecurityVersion
+                                    .SecureConversationVersion
+                            ),
                         null,
                         DerivedKeySecurityToken.DefaultNonceLength,
                         this.elementContainer.SourceSigningToken,
@@ -1107,8 +1109,7 @@ namespace System.ServiceModel.Security
                 }
                 else
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new NotSupportedException(
                                 SR.GetString(SR.UnsupportedCryptoAlgorithm, derivationAlgorithm)
@@ -1329,12 +1330,13 @@ namespace System.ServiceModel.Security
                         DerivedKeySecurityToken dkt = new DerivedKeySecurityToken(
                             -1,
                             0,
-                            this.AlgorithmSuite.GetSignatureKeyDerivationLength(
-                                source,
-                                this.StandardsManager
-                                    .MessageSecurityVersion
-                                    .SecureConversationVersion
-                            ),
+                            this.AlgorithmSuite
+                                .GetSignatureKeyDerivationLength(
+                                    source,
+                                    this.StandardsManager
+                                        .MessageSecurityVersion
+                                        .SecureConversationVersion
+                                ),
                             null,
                             DerivedKeySecurityToken.DefaultNonceLength,
                             source,
@@ -1354,8 +1356,8 @@ namespace System.ServiceModel.Security
                     SignWithSupportingToken(signingToken, signingKeyClause);
                 }
             }
-            SecurityToken[] signedEndorsingSupportingTokens =
-                this.elementContainer.GetSignedEndorsingSupportingTokens();
+            SecurityToken[] signedEndorsingSupportingTokens = this.elementContainer
+                .GetSignedEndorsingSupportingTokens();
             if (signedEndorsingSupportingTokens != null)
             {
                 for (int i = 0; i < signedEndorsingSupportingTokens.Length; ++i)
@@ -1388,12 +1390,13 @@ namespace System.ServiceModel.Security
                         DerivedKeySecurityToken dkt = new DerivedKeySecurityToken(
                             -1,
                             0,
-                            this.AlgorithmSuite.GetSignatureKeyDerivationLength(
-                                source,
-                                this.StandardsManager
-                                    .MessageSecurityVersion
-                                    .SecureConversationVersion
-                            ),
+                            this.AlgorithmSuite
+                                .GetSignatureKeyDerivationLength(
+                                    source,
+                                    this.StandardsManager
+                                        .MessageSecurityVersion
+                                        .SecureConversationVersion
+                                ),
                             null,
                             DerivedKeySecurityToken.DefaultNonceLength,
                             source,

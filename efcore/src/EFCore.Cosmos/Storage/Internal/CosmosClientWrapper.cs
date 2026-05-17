@@ -113,8 +113,7 @@ public class CosmosClientWrapper : ICosmosClientWrapper
     )
     {
         var (throughput, wrapper) = parameters;
-        var response = await wrapper
-            .Client
+        var response = await wrapper.Client
             .CreateDatabaseIfNotExistsAsync(
                 wrapper._databaseId,
                 throughput,
@@ -152,8 +151,7 @@ public class CosmosClientWrapper : ICosmosClientWrapper
         CancellationToken cancellationToken = default
     )
     {
-        using var response = await wrapper
-            .Client
+        using var response = await wrapper.Client
             .GetDatabase(wrapper._databaseId)
             .DeleteStreamAsync(cancellationToken: cancellationToken)
             .ConfigureAwait(false);
@@ -204,8 +202,7 @@ public class CosmosClientWrapper : ICosmosClientWrapper
     )
     {
         var (parameters, wrapper) = parametersTuple;
-        using var response = await wrapper
-            .Client
+        using var response = await wrapper.Client
             .GetDatabase(wrapper._databaseId)
             .CreateContainerStreamAsync(
                 new Azure.Cosmos.ContainerProperties(parameters.Id, "/" + parameters.PartitionKey)
@@ -293,8 +290,7 @@ public class CosmosClientWrapper : ICosmosClientWrapper
 
         var entry = parameters.Entry;
         var wrapper = parameters.Wrapper;
-        var container = wrapper
-            .Client
+        var container = wrapper.Client
             .GetDatabase(wrapper._databaseId)
             .GetContainer(parameters.ContainerId);
         var itemRequestOptions = CreateItemRequestOptions(
@@ -312,8 +308,7 @@ public class CosmosClientWrapper : ICosmosClientWrapper
             )
             .ConfigureAwait(false);
 
-        wrapper
-            ._commandLogger
+        wrapper._commandLogger
             .ExecutedCreateItem(
                 response.Diagnostics.GetClientElapsedTime(),
                 response.Headers.RequestCharge,
@@ -404,8 +399,7 @@ public class CosmosClientWrapper : ICosmosClientWrapper
 
         var entry = parameters.Entry;
         var wrapper = parameters.Wrapper;
-        var container = wrapper
-            .Client
+        var container = wrapper.Client
             .GetDatabase(wrapper._databaseId)
             .GetContainer(parameters.ContainerId);
         var itemRequestOptions = CreateItemRequestOptions(
@@ -424,8 +418,7 @@ public class CosmosClientWrapper : ICosmosClientWrapper
             )
             .ConfigureAwait(false);
 
-        wrapper
-            ._commandLogger
+        wrapper._commandLogger
             .ExecutedReplaceItem(
                 response.Diagnostics.GetClientElapsedTime(),
                 response.Headers.RequestCharge,
@@ -491,8 +484,7 @@ public class CosmosClientWrapper : ICosmosClientWrapper
     {
         var entry = parameters.Entry;
         var wrapper = parameters.Wrapper;
-        var items = wrapper
-            .Client
+        var items = wrapper.Client
             .GetDatabase(wrapper._databaseId)
             .GetContainer(parameters.ContainerId);
 
@@ -511,8 +503,7 @@ public class CosmosClientWrapper : ICosmosClientWrapper
             )
             .ConfigureAwait(false);
 
-        wrapper
-            ._commandLogger
+        wrapper._commandLogger
             .ExecutedDeleteItem(
                 response.Diagnostics.GetClientElapsedTime(),
                 response.Headers.RequestCharge,
@@ -556,8 +547,7 @@ public class CosmosClientWrapper : ICosmosClientWrapper
             {
                 case EntityState.Modified:
                 {
-                    var jObjectProperty = entry
-                        .EntityType
+                    var jObjectProperty = entry.EntityType
                         .FindProperty(StoreKeyConvention.JObjectPropertyName);
                     enabledContentResponse =
                         (jObjectProperty?.ValueGenerated & ValueGenerated.OnUpdate)
@@ -566,8 +556,7 @@ public class CosmosClientWrapper : ICosmosClientWrapper
                 }
                 case EntityState.Added:
                 {
-                    var jObjectProperty = entry
-                        .EntityType
+                    var jObjectProperty = entry.EntityType
                         .FindProperty(StoreKeyConvention.JObjectPropertyName);
                     enabledContentResponse =
                         (jObjectProperty?.ValueGenerated & ValueGenerated.OnAdd)
@@ -797,8 +786,7 @@ public class CosmosClientWrapper : ICosmosClientWrapper
         var container = Client.GetDatabase(_databaseId).GetContainer(containerId);
         var queryDefinition = new QueryDefinition(query.Query);
 
-        queryDefinition = query
-            .Parameters
+        queryDefinition = query.Parameters
             .Aggregate(
                 queryDefinition,
                 (current, parameter) => current.WithParameter(parameter.Name, parameter.Value)
@@ -932,8 +920,7 @@ public class CosmosClientWrapper : ICosmosClientWrapper
 
                     _responseMessage = _query.ReadNextAsync().GetAwaiter().GetResult();
 
-                    _cosmosClientWrapper
-                        ._commandLogger
+                    _cosmosClientWrapper._commandLogger
                         .ExecutedReadNext(
                             _responseMessage.Diagnostics.GetClientElapsedTime(),
                             _responseMessage.Headers.RequestCharge,
@@ -1061,8 +1048,7 @@ public class CosmosClientWrapper : ICosmosClientWrapper
                         .ReadNextAsync(_cancellationToken)
                         .ConfigureAwait(false);
 
-                    _cosmosClientWrapper
-                        ._commandLogger
+                    _cosmosClientWrapper._commandLogger
                         .ExecutedReadNext(
                             _responseMessage.Diagnostics.GetClientElapsedTime(),
                             _responseMessage.Headers.RequestCharge,

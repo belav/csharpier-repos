@@ -180,8 +180,7 @@ namespace System
                 else if (startupHook.AssemblyName != null)
                 {
                     Debug.Assert(startupHook.AssemblyName != null);
-                    assembly = AssemblyLoadContext
-                        .Default
+                    assembly = AssemblyLoadContext.Default
                         .LoadFromAssemblyName(startupHook.AssemblyName);
                 }
                 else

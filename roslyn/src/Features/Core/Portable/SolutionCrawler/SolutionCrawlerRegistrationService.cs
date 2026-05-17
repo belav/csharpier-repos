@@ -348,8 +348,7 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
             {
                 lock (_solutionCrawlerRegistrationService._gate)
                 {
-                    return _solutionCrawlerRegistrationService
-                        ._documentWorkCoordinatorMap
+                    return _solutionCrawlerRegistrationService._documentWorkCoordinatorMap
                         .TryGetValue(workspace, out coordinator);
                 }
             }

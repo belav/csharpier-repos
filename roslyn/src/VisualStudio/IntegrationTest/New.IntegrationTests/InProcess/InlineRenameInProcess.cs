@@ -22,16 +22,14 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
     {
         public async Task InvokeAsync(CancellationToken cancellationToken)
         {
-            await TestServices
-                .Shell
+            await TestServices.Shell
                 .ExecuteCommandAsync(VSConstants.VSStd2KCmdID.RENAME, cancellationToken);
             await TestServices.Workspace.WaitForRenameAsync(cancellationToken);
         }
 
         public async Task ToggleIncludeCommentsAsync(CancellationToken cancellationToken)
         {
-            await TestServices
-                .Input
+            await TestServices.Input
                 .SendWithoutActivateAsync(
                     [(VirtualKeyCode.VK_C, VirtualKeyCode.MENU)],
                     cancellationToken
@@ -41,8 +39,7 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
 
         public async Task ToggleIncludeStringsAsync(CancellationToken cancellationToken)
         {
-            await TestServices
-                .Input
+            await TestServices.Input
                 .SendWithoutActivateAsync(
                     [(VirtualKeyCode.VK_S, VirtualKeyCode.MENU)],
                     cancellationToken
@@ -52,8 +49,7 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
 
         public async Task ToggleIncludeOverloadsAsync(CancellationToken cancellationToken)
         {
-            await TestServices
-                .Input
+            await TestServices.Input
                 .SendWithoutActivateAsync(
                     [(VirtualKeyCode.VK_O, VirtualKeyCode.MENU)],
                     cancellationToken
@@ -86,8 +82,7 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
                 JoinableTaskFactory,
                 cancellationToken
             );
-            var renameAdornmentLayer = testViewHost
-                .TextView
+            var renameAdornmentLayer = testViewHost.TextView
                 .GetAdornmentLayer(InlineRenameAdornmentProvider.AdornmentLayerName);
             var inlineRenameFlyout = (RenameFlyout)renameAdornmentLayer.Elements.Single().Adornment;
             var actualStringInTextBox = inlineRenameFlyout.IdentifierTextBox.Text;

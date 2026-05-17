@@ -17,8 +17,7 @@ public partial class ListView_DynamicControl_04 : TestsBasePage<EmployeesDataCon
         if (container == null)
             return;
 
-        List<BazDataTypeDefaultTypes> defaultDataTypes = container
-            .ContainedTypeInstance
+        List<BazDataTypeDefaultTypes> defaultDataTypes = container.ContainedTypeInstance
             .DefaultDataTypes;
         defaultDataTypes.Add(new BazDataTypeDefaultTypes(true));
     }

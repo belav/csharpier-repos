@@ -123,8 +123,7 @@ namespace System.ServiceModel.Security
             WindowsSspiNegotiation windowsNegotiation = (WindowsSspiNegotiation)sspiNegotiation;
             if (windowsNegotiation.IsValidContext == false)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperWarning(
                         new SecurityNegotiationException(SR.GetString(SR.InvalidSspiNegotiation))
                     );

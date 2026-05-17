@@ -844,9 +844,10 @@ namespace MonoTests.System.Windows.Forms
             l.TopIndex = 2;
             Assert.AreEqual(0, l.TopIndex, "A2");
 
-            l.Items.AddRange(
-                new string[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M" }
-            );
+            l.Items
+                .AddRange(
+                    new string[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M" }
+                );
             Assert.AreEqual(0, l.TopIndex, "A3");
 
             l.TopIndex = 2;

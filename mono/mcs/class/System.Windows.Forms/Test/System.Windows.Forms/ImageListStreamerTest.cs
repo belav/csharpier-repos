@@ -28,15 +28,13 @@ namespace MonoTests.System.Windows.Forms
             Assembly a = typeof(ImageListStreamerTest).Assembly;
 
             ImageList imgList = new ImageList();
-            imgList
-                .Images
+            imgList.Images
                 .Add(
                     Image.FromStream(
                         TestResourceHelper.GetStreamOfResource("Test/resources/32x32.ico")
                     )
                 );
-            imgList
-                .Images
+            imgList.Images
                 .Add(
                     Image.FromFile(TestResourceHelper.GetFullPathOfResource("Test/resources/M.gif"))
                 );

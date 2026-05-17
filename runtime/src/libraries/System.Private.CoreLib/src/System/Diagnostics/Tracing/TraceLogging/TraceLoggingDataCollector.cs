@@ -92,8 +92,7 @@ namespace System.Diagnostics.Tracing
         public static void AddArray(PropertyValue value, int elementSize)
         {
             Array? array = (Array?)value.ReferenceValue;
-            DataCollector
-                .ThreadInstance
+            DataCollector.ThreadInstance
                 .AddArray(array, array == null ? 0 : array.Length, elementSize);
         }
     }

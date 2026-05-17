@@ -188,8 +188,7 @@ namespace System.Web.Compilation
             }
 
             if (pageParser.Async)
-                mainClass
-                    .BaseTypes
+                mainClass.BaseTypes
                     .Add(new CodeTypeReference(typeof(System.Web.IHttpAsyncHandler)));
 
             mainClass.BaseTypes.Add(new CodeTypeReference(typeof(System.Web.IHttpHandler)));
@@ -202,8 +201,7 @@ namespace System.Web.Compilation
             method.Name = "GetTypeHashCode";
             method.Attributes = MemberAttributes.Public | MemberAttributes.Override;
             Random rnd = new Random(pageParser.InputFile.GetHashCode());
-            method
-                .Statements
+            method.Statements
                 .Add(new CodeMethodReturnStatement(new CodePrimitiveExpression(rnd.Next())));
             mainClass.Members.Add(method);
         }
@@ -312,26 +310,22 @@ namespace System.Web.Compilation
 
             string contentType = pageParser.ContentType;
             if (contentType != null)
-                method
-                    .Statements
+                method.Statements
                     .Add(AddLinePragma(CreatePropertyAssign("ContentType", contentType), location));
 
             string culture = pageParser.Culture;
             if (culture != null)
-                method
-                    .Statements
+                method.Statements
                     .Add(AddLinePragma(CreatePropertyAssign("Culture", culture), location));
 
             culture = pageParser.UICulture;
             if (culture != null)
-                method
-                    .Statements
+                method.Statements
                     .Add(AddLinePragma(CreatePropertyAssign("UICulture", culture), location));
 
             string errorPage = pageParser.ErrorPage;
             if (errorPage != null)
-                method
-                    .Statements
+                method.Statements
                     .Add(AddLinePragma(CreatePropertyAssign("ErrorPage", errorPage), location));
 
             if (pageParser.HaveTrace)
@@ -406,8 +400,7 @@ namespace System.Web.Compilation
 
             CodeArgumentReferenceExpression ctrlVar = new CodeArgumentReferenceExpression("__ctrl");
             if (pageParser.EnableViewStateMacSet)
-                method
-                    .Statements
+                method.Statements
                     .Add(
                         AddLinePragma(
                             CreatePropertyAssign(
@@ -439,8 +432,7 @@ namespace System.Web.Compilation
             );
 
             if (pageParser.StyleSheetTheme != null)
-                method
-                    .Statements
+                method.Statements
                     .Add(
                         AddLinePragma(
                             CreatePropertyAssign(
@@ -453,8 +445,7 @@ namespace System.Web.Compilation
                     );
 
             if (pageParser.Async != false)
-                method
-                    .Statements
+                method.Statements
                     .Add(
                         AddLinePragma(
                             CreatePropertyAssign(ctrlVar, "AsyncMode", pageParser.Async),
@@ -463,8 +454,7 @@ namespace System.Web.Compilation
                     );
 
             if (pageParser.AsyncTimeout != -1)
-                method
-                    .Statements
+                method.Statements
                     .Add(
                         AddLinePragma(
                             CreatePropertyAssign(
@@ -480,8 +470,7 @@ namespace System.Web.Compilation
                 thisRef,
                 "InitializeCulture"
             );
-            method
-                .Statements
+            method.Statements
                 .Add(AddLinePragma(new CodeExpressionStatement(expr), directiveLocation));
         }
 
@@ -509,8 +498,7 @@ namespace System.Web.Compilation
         {
             base.PrependStatementsToFrameworkInitialize(method);
             if (pageParser.StyleSheetTheme != null)
-                method
-                    .Statements
+                method.Statements
                     .Add(CreatePropertyAssign("StyleSheetTheme", pageParser.StyleSheetTheme));
         }
 
@@ -526,8 +514,7 @@ namespace System.Web.Compilation
                 CodeFieldReferenceExpression fileDependencies =
                     GetMainClassFieldReferenceExpression("__fileDependencies");
 
-                method
-                    .Statements
+                method.Statements
                     .Add(
                         new CodeMethodInvokeExpression(
                             thisRef,

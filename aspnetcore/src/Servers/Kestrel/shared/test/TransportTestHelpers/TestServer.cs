@@ -140,8 +140,7 @@ internal class TestServer : IAsyncDisposable, IStartup
                     )
                     .UseSetting(
                         WebHostDefaults.ShutdownTimeoutKey,
-                        TestConstants
-                            .DefaultTimeout
+                        TestConstants.DefaultTimeout
                             .TotalSeconds
                             .ToString(CultureInfo.InvariantCulture)
                     )

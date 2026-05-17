@@ -94,8 +94,7 @@ namespace System.ServiceModel.Activities.Presentation
                                             Message = new InArgument<string>(ctx =>
                                                 string.Format(
                                                     CultureInfo.CurrentCulture,
-                                                    System
-                                                        .Activities
+                                                    System.Activities
                                                         .Core
                                                         .Presentation
                                                         .SR

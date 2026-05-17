@@ -39,8 +39,7 @@ namespace Internal.IL.Stubs
                 {
                     TypeSystemContext context = _owningType.Context;
                     TypeDesc int32Type = context.GetWellKnownType(WellKnownType.Int32);
-                    TypeDesc eeTypePtrType = context
-                        .SystemModule
+                    TypeDesc eeTypePtrType = context.SystemModule
                         .GetKnownType("Internal.Runtime", "MethodTable")
                         .MakePointerType();
 
@@ -62,16 +61,14 @@ namespace Internal.IL.Stubs
 
             ILEmitter emitter = new ILEmitter();
 
-            TypeDesc methodTableType = Context
-                .SystemModule
+            TypeDesc methodTableType = Context.SystemModule
                 .GetKnownType("Internal.Runtime", "MethodTable");
             MethodDesc methodTableOfMethod = methodTableType.GetKnownMethod("Of", null);
 
             ILToken rawDataToken = owningType.IsValueType
                 ? default
                 : emitter.NewToken(
-                    Context
-                        .SystemModule
+                    Context.SystemModule
                         .GetKnownType("System.Runtime.CompilerServices", "RawData")
                         .GetKnownField("Data")
                 );

@@ -173,8 +173,7 @@ namespace System.Threading.Tasks
 
             try
             {
-                int hresult = Microsoft
-                    .Win32
+                int hresult = Microsoft.Win32
                     .UnsafeNativeMethods
                     .RoGetActivationFactory(ClassId, ref guid, out factory);
 
@@ -230,8 +229,7 @@ namespace System.Threading.Tasks
             try
             {
                 if ((f_LoggingOn & Loggers.ETW) != 0)
-                    TplEtwProvider
-                        .Log
+                    TplEtwProvider.Log
                         .TraceOperationBegin(taskId, operationName, (long)relatedContext);
                 if ((f_LoggingOn & Loggers.CausalityTracer) != 0)
                     s_TracerFactory.TraceOperationCreation(

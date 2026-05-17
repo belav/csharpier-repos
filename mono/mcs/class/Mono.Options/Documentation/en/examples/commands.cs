@@ -113,8 +113,7 @@ class RequiresArgsCommand : Command
         }
         catch (Exception e)
         {
-            Console
-                .Error
+            Console.Error
                 .WriteLine("commands: {0}", CommandDemo.Verbosity >= 1 ? e.ToString() : e.Message);
             return 1;
         }

@@ -491,9 +491,8 @@ public class CosmosModelValidator : ModelValidator
         {
             foreach (var key in entityType.GetDeclaredKeys())
             {
-                var mutableProperty = key.Properties.FirstOrDefault(p =>
-                    p.ValueGenerated.HasFlag(ValueGenerated.OnUpdate)
-                );
+                var mutableProperty = key.Properties
+                    .FirstOrDefault(p => p.ValueGenerated.HasFlag(ValueGenerated.OnUpdate));
                 if (mutableProperty != null && !mutableProperty.IsOrdinalKeyProperty())
                 {
                     throw new InvalidOperationException(

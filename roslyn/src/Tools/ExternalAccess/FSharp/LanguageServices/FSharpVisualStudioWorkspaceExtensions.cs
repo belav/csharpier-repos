@@ -18,8 +18,7 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.LanguageServices
             DateTime snapshotTimestamp
         )
         {
-            var metadataReferenceProvider = workspace
-                .Services
+            var metadataReferenceProvider = workspace.Services
                 .GetRequiredService<VisualStudioMetadataReferenceManager>();
             return metadataReferenceProvider.GetMetadata(fullPath, snapshotTimestamp);
         }
@@ -31,8 +30,7 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.LanguageServices
             [NotNullWhen(true)] out ProjectId? projectId
         )
         {
-            var projects = workspace
-                .CurrentSolution
+            var projects = workspace.CurrentSolution
                 .Projects
                 .Where(p =>
                     string.Equals(p.OutputFilePath, filePath, StringComparison.OrdinalIgnoreCase)
@@ -61,8 +59,7 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.LanguageServices
             // HACK: to keep F# working, we will ensure we return the ProjectId if there is a project that matches this path. Otherwise, we'll just return
             // a random ProjectId, which is sufficient for their needs. They'll simply observe there is no project with that ID, and then go and create a
             // new project. Then they call this function again, and fetch the real ID.
-            return workspace
-                    .CurrentSolution
+            return workspace.CurrentSolution
                     .Projects
                     .FirstOrDefault(p => p.FilePath == filePath)
                     ?.Id

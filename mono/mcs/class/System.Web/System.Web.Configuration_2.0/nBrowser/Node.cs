@@ -931,8 +931,7 @@ namespace System.Web.Configuration.nBrowser
             }
 
 #if trace
-            System
-                .Diagnostics
+            System.Diagnostics
                 .Trace
                 .WriteLine(
                     string.Format("{0}[{1}]", ("[" + this.Id + "]").PadRight(45), this.ParentId)
@@ -983,8 +982,7 @@ namespace System.Web.Configuration.nBrowser
                 if (Identification[i].IsMatchSuccessful(m) == false)
                 {
 #if trace
-                    System
-                        .Diagnostics
+                    System.Diagnostics
                         .Trace
                         .WriteLine(
                             string.Format(
@@ -999,8 +997,7 @@ namespace System.Web.Configuration.nBrowser
                 else
                 {
 #if trace
-                    System
-                        .Diagnostics
+                    System.Diagnostics
                         .Trace
                         .WriteLine(
                             string.Format(

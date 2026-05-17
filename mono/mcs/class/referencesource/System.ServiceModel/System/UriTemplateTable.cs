@@ -56,8 +56,7 @@ namespace System
         {
             if (baseAddress != null && !baseAddress.IsAbsoluteUri)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument("baseAddress", SR.GetString(SR.UTTMustBeAbsolute));
             }
 
@@ -91,8 +90,7 @@ namespace System
                 {
                     if (this.IsReadOnly)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(
                                     SR.GetString(SR.UTTCannotChangeBaseAddress)
@@ -103,8 +101,7 @@ namespace System
                     {
                         if (!value.IsAbsoluteUri)
                         {
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperArgument(
                                     "value",
                                     SR.GetString(SR.UTTBaseAddressMustBeAbsolute)
@@ -274,8 +271,7 @@ namespace System
             for (int i = 0; i < candidates.Count; i++)
             {
                 UriTemplateTableMatchCandidate candidate = candidates[i];
-                UriTemplateMatch match = candidate
-                    .Template
+                UriTemplateMatch match = candidate.Template
                     .CreateUriTemplateMatch(
                         this.originalUncanonicalizedBaseAddress,
                         uri,
@@ -300,8 +296,7 @@ namespace System
             {
                 return c[0];
             }
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(
                     new UriTemplateMatchException(SR.GetString(SR.UTTMultipleMatches))
                 );
@@ -563,8 +558,7 @@ namespace System
         {
             if (this.baseAddress == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(SR.GetString(SR.UTTBaseAddressNotSet))
                     );
@@ -572,8 +566,7 @@ namespace System
             this.numSegmentsInBaseAddress = this.baseAddress.Segments.Length;
             if (this.templates.Count == 0)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(SR.GetString(SR.UTTEmptyKeyValuePairs))
                     );
@@ -698,14 +691,12 @@ namespace System
             {
                 if (template == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgument(argName, SR.GetString(SR.UTTNullTemplateKey));
                 }
                 if (template.IgnoreTrailingSlash)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgument(
                             argName,
                             SR.GetString(SR.UTTInvalidTemplateKey, template)

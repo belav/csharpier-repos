@@ -43,8 +43,7 @@ namespace System.Data
         private int _rbTreeNodeId; // if row is not detached, Id used for computing index in rows collection
 
         private static int _objectTypeCount; // Bid counter
-        internal readonly int ObjectID = System
-            .Threading
+        internal readonly int ObjectID = System.Threading
             .Interlocked
             .Increment(ref _objectTypeCount);
 

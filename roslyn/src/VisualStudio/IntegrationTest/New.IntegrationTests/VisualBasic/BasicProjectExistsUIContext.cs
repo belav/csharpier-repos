@@ -18,8 +18,7 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.VisualBasic
         public override async Task InitializeAsync()
         {
             await base.InitializeAsync();
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .CreateSolutionAsync(
                     nameof(BasicProjectExistsUIContext),
                     HangMitigatingCancellationToken
@@ -29,21 +28,18 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.VisualBasic
         [IdeFact]
         public async Task ProjectContextChanges()
         {
-            var workspace = await TestServices
-                .Shell
+            var workspace = await TestServices.Shell
                 .GetComponentModelServiceAsync<VisualStudioWorkspace>(
                     HangMitigatingCancellationToken
                 );
-            var contextProvider = workspace
-                .Services
+            var contextProvider = workspace.Services
                 .GetLanguageServices(LanguageNames.VisualBasic)
                 .GetRequiredService<IProjectExistsUIContextProviderLanguageService>();
             var context = contextProvider.GetUIContext();
 
             Assert.False(context.IsActive);
 
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .AddProjectAsync(
                     "TestVisualBasicProject",
                     WellKnownProjectTemplates.ConsoleApplication,
@@ -54,8 +50,7 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.VisualBasic
             Assert.True(context.IsActive);
 
             await TestServices.SolutionExplorer.CloseSolutionAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .Workspace
+            await TestServices.Workspace
                 .WaitForAllAsyncOperationsAsync(
                     [FeatureAttribute.Workspace],
                     HangMitigatingCancellationToken

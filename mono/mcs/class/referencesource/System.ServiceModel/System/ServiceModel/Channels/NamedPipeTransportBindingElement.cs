@@ -95,8 +95,7 @@ namespace System.ServiceModel.Channels
 
             if (!this.CanBuildChannelFactory<TChannel>(context))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(
                         "TChannel",
                         SR.GetString(SR.ChannelTypeNotSupported, typeof(TChannel))
@@ -118,8 +117,7 @@ namespace System.ServiceModel.Channels
 
             if (!this.CanBuildChannelListener<TChannel>(context))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(
                         "TChannel",
                         SR.GetString(SR.ChannelTypeNotSupported, typeof(TChannel))
@@ -137,8 +135,7 @@ namespace System.ServiceModel.Channels
             }
             else
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(
                         "TChannel",
                         SR.GetString(SR.ChannelTypeNotSupported, typeof(TChannel))

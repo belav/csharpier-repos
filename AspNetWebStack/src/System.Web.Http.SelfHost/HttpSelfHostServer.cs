@@ -220,8 +220,7 @@ namespace System.Web.Http.SelfHost
             // Submit request up the stack
             try
             {
-                HttpResponseMessage response = await channelContext
-                    .Server
+                HttpResponseMessage response = await channelContext.Server
                     .SendAsync(request, channelContext.Server._cancellationTokenSource.Token);
 
                 if (response == null)
@@ -267,16 +266,14 @@ namespace System.Web.Http.SelfHost
             // behavior for all cases except when accessing the property directly by key.
 
             // Add the retrieve client certificate delegate to the property bag to enable lookup later on
-            request
-                .Properties
+            request.Properties
                 .Add(
                     HttpPropertyKeys.RetrieveClientCertificateDelegateKey,
                     _retrieveClientCertificate
                 );
 
             // Add information about whether the request is local or not
-            request
-                .Properties
+            request.Properties
                 .Add(
                     HttpPropertyKeys.IsLocalKey,
                     new Lazy<bool>(() => IsLocal(requestContext.RequestMessage))
@@ -288,8 +285,7 @@ namespace System.Web.Http.SelfHost
         {
             RemoteEndpointMessageProperty remoteEndpointProperty;
             if (
-                message
-                    .Properties
+                message.Properties
                     .TryGetValue(RemoteEndpointMessageProperty.Name, out remoteEndpointProperty)
             )
             {
@@ -338,8 +334,7 @@ namespace System.Web.Http.SelfHost
             {
                 X509CertificateClaimSet certClaimSet = null;
                 foreach (
-                    ClaimSet claimSet in property
-                        .ServiceSecurityContext
+                    ClaimSet claimSet in property.ServiceSecurityContext
                         .AuthorizationContext
                         .ClaimSets
                 )
@@ -393,8 +388,7 @@ namespace System.Web.Http.SelfHost
                 HttpBinding binding = new HttpBinding();
 
                 // Get it configured
-                BindingParameterCollection bindingParameters = server
-                    ._configuration
+                BindingParameterCollection bindingParameters = server._configuration
                     .ConfigureBinding(binding);
                 if (bindingParameters == null)
                 {
@@ -619,8 +613,7 @@ namespace System.Web.Http.SelfHost
 
             try
             {
-                IAsyncResult result = channelContext
-                    .Channel
+                IAsyncResult result = channelContext.Channel
                     .BeginOpen(_onOpenChannelComplete, channelContext);
                 if (result.CompletedSynchronously)
                 {
@@ -750,8 +743,7 @@ namespace System.Web.Http.SelfHost
 
             try
             {
-                return channelContext
-                    .Channel
+                return channelContext.Channel
                     .BeginTryReceiveRequest(_receiveTimeout, callback, channelContext);
             }
             catch (CommunicationObjectAbortedException)
@@ -841,8 +833,7 @@ namespace System.Web.Http.SelfHost
 
             try
             {
-                IAsyncResult result = replyContext
-                    .RequestContext
+                IAsyncResult result = replyContext.RequestContext
                     .BeginReply(replyContext.Reply, _onReplyComplete, replyContext);
                 if (result.CompletedSynchronously)
                 {
@@ -983,8 +974,7 @@ namespace System.Web.Http.SelfHost
             {
                 if (server._listener != null)
                 {
-                    IAsyncResult result = server
-                        ._listener
+                    IAsyncResult result = server._listener
                         .BeginClose(_onCloseListenerComplete, server);
                     if (result.CompletedSynchronously)
                     {
@@ -1058,8 +1048,7 @@ namespace System.Web.Http.SelfHost
 
             try
             {
-                IAsyncResult result = channelContext
-                    .Channel
+                IAsyncResult result = channelContext.Channel
                     .BeginClose(_onCloseChannelComplete, channelContext);
                 if (result.CompletedSynchronously)
                 {

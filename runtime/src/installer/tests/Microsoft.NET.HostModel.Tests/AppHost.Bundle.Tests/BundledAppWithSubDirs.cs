@@ -107,8 +107,7 @@ namespace AppHost.Bundle.Tests
             using (new TestArtifact(dotnetWithMockHostFxr))
             {
                 Directory.CreateDirectory(dotnetWithMockHostFxr);
-                string expectedErrorCode = Constants
-                    .ErrorCode
+                string expectedErrorCode = Constants.ErrorCode
                     .BundleExtractionFailure
                     .ToString("x");
 
@@ -186,8 +185,7 @@ namespace AppHost.Bundle.Tests
         [Theory]
         public void FrameworkDependent_Targeting50(BundleOptions options)
         {
-            var singleFile = sharedTestState
-                .FrameworkDependentApp
+            var singleFile = sharedTestState.FrameworkDependentApp
                 .Bundle(options, new Version(5, 0));
 
             // Run the bundled app

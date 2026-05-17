@@ -33,21 +33,18 @@ namespace ServerComparison.TestSites
                 var config = host.Services.GetRequiredService<IConfiguration>();
                 var lifetime = host.Services.GetRequiredService<IHostApplicationLifetime>();
 
-                lifetime
-                    .ApplicationStarted
+                lifetime.ApplicationStarted
                     .Register(() =>
                     {
                         Console.WriteLine("Started");
                     });
-                lifetime
-                    .ApplicationStopping
+                lifetime.ApplicationStopping
                     .Register(() =>
                     {
                         Console.WriteLine("Stopping firing");
                         Console.WriteLine("Stopping end");
                     });
-                lifetime
-                    .ApplicationStopped
+                lifetime.ApplicationStopped
                     .Register(() =>
                     {
                         Console.WriteLine("Stopped firing");

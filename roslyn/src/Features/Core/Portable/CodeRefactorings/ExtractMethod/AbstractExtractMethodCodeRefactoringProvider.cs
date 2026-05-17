@@ -48,8 +48,7 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.ExtractMethod
             if (solution.WorkspaceKind == WorkspaceKind.MiscellaneousFiles)
                 return;
 
-            var activeInlineRenameSession = solution
-                .Services
+            var activeInlineRenameSession = solution.Services
                 .GetService<ICodeRefactoringHelpersService>()
                 .ActiveInlineRenameSession;
             if (activeInlineRenameSession)

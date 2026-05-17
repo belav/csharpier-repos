@@ -216,11 +216,9 @@ namespace System.Workflow.ComponentModel.Serialization
                         out prefix
                     );
                     if (
-                        qualifiedPropertyName
-                            .Name
+                        qualifiedPropertyName.Name
                             .Equals(xmlQualifiedName.Name, StringComparison.Ordinal)
-                        && qualifiedPropertyName
-                            .Namespace
+                        && qualifiedPropertyName.Namespace
                             .Equals(xmlQualifiedName.Namespace, StringComparison.Ordinal)
                     )
                     {
@@ -251,11 +249,9 @@ namespace System.Workflow.ComponentModel.Serialization
                     out prefix
                 );
                 if (
-                    qualifiedPropertyName
-                        .Name
+                    qualifiedPropertyName.Name
                         .Equals(xmlQualifiedName.Name, StringComparison.Ordinal)
-                    && qualifiedPropertyName
-                        .Namespace
+                    && qualifiedPropertyName.Namespace
                         .Equals(xmlQualifiedName.Namespace, StringComparison.Ordinal)
                 )
                 {

@@ -67,8 +67,7 @@ namespace System.ServiceModel.Activation
         {
             Collection<HostedHttpTransportManager> tempDirectory =
                 new Collection<HostedHttpTransportManager>();
-            string[] bindings = HostedTransportConfigurationManager
-                .MetabaseSettings
+            string[] bindings = HostedTransportConfigurationManager.MetabaseSettings
                 .GetBindings(this.Scheme);
 
             foreach (string binding in bindings)

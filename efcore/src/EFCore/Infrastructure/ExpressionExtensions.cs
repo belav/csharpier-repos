@@ -93,8 +93,7 @@ public static class ExpressionExtensions
             Justification = "DynamicDependency ensures AssignBinaryExpression isn't trimmed"
         )]
         static Type GetAssignBinaryExpressionType() =>
-            typeof(Expression)
-                .Assembly
+            typeof(Expression).Assembly
                 .GetType("System.Linq.Expressions.AssignBinaryExpression", throwOnError: true)!;
     }
 

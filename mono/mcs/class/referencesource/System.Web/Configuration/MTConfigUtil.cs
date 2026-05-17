@@ -291,8 +291,7 @@ internal class MTConfigUtil
             {
                 physicalPath = HostingEnvironment.MapPath(currentVPath);
             }
-            fileMap
-                .VirtualDirectories
+            fileMap.VirtualDirectories
                 .Add(
                     vpathString,
                     new VirtualDirectoryMapping(physicalPath, IsAppRoot(currentVPath))

@@ -192,8 +192,7 @@ namespace System.Text.Json.SourceGeneration.Tests
             string json = collection.GetExpectedJson();
 
             Assert.True(
-                Serializer
-                    .DefaultOptions
+                Serializer.DefaultOptions
                     .TryGetTypeInfo(typeof(CollectionWithPrivateElementType), out _)
             );
 
@@ -214,8 +213,7 @@ namespace System.Text.Json.SourceGeneration.Tests
             string json = dictionary.GetExpectedJson();
 
             Assert.True(
-                Serializer
-                    .DefaultOptions
+                Serializer.DefaultOptions
                     .TryGetTypeInfo(typeof(DictionaryWithPrivateKeyAndValueType), out _)
             );
 

@@ -343,11 +343,9 @@ namespace Mono.Security.X509
             else
             {
                 byte[] uniqueWithSerial = new byte[ski.Identifier.Length + serial.Length];
-                System
-                    .Buffer
+                System.Buffer
                     .BlockCopy(ski.Identifier, 0, uniqueWithSerial, 0, ski.Identifier.Length);
-                System
-                    .Buffer
+                System.Buffer
                     .BlockCopy(serial, 0, uniqueWithSerial, ski.Identifier.Length, serial.Length);
                 return uniqueWithSerial;
             }

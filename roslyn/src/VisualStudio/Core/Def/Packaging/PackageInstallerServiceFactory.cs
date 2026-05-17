@@ -193,8 +193,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Packaging
             try
             {
                 if (_packageSourceProvider != null)
-                    return _packageSourceProvider
-                        .Value
+                    return _packageSourceProvider.Value
                         .GetSources(includeUnOfficial: true, includeDisabled: false)
                         .SelectAsArray(r => new PackageSource(r.Key, r.Value));
             }
@@ -377,8 +376,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Packaging
                             cancellationToken = default;
                             if (version == null)
                             {
-                                _packageInstaller
-                                    .Value
+                                _packageInstaller.Value
                                     .InstallLatestPackage(
                                         source,
                                         dteProject,
@@ -389,8 +387,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Packaging
                             }
                             else
                             {
-                                _packageInstaller
-                                    .Value
+                                _packageInstaller.Value
                                     .InstallPackage(
                                         source,
                                         dteProject,
@@ -519,8 +516,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Packaging
 
                             // Once we start the installation, we can't cancel anymore.
                             cancellationToken = default;
-                            _packageUninstaller
-                                .Value
+                            _packageUninstaller.Value
                                 .UninstallPackage(
                                     dteProject,
                                     packageName,

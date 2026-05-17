@@ -100,8 +100,7 @@ namespace System.ServiceModel.Dispatcher
         {
             if (binding is NetPeerTcpBinding && IsRequestReplyContract(contract))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(

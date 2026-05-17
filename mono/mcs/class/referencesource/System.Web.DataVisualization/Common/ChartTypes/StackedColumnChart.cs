@@ -867,8 +867,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                         // Call Back Paint event
                         if (!selection)
                         {
-                            common
-                                .Chart
+                            common.Chart
                                 .CallOnPrePaint(
                                     new ChartPaintEventArgs(
                                         ser,
@@ -1106,16 +1105,14 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                         // **************************************************
                         if (common.ProcessModeRegions && !shadow && !labels)
                         {
-                            common
-                                .HotRegionsList
+                            common.HotRegionsList
                                 .AddHotRegion(rectSize, point, ser.Name, pointIndx);
                         }
 
                         // Call Paint event
                         if (!selection)
                         {
-                            common
-                                .Chart
+                            common.Chart
                                 .CallOnPostPaint(
                                     new ChartPaintEventArgs(
                                         ser,
@@ -1362,11 +1359,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                                 )
                             );
                             // Force some SmartLabelStyle settings for column chart
-                            bool oldMarkerOverlapping = series
-                                .SmartLabelStyle
+                            bool oldMarkerOverlapping = series.SmartLabelStyle
                                 .IsMarkerOverlappingAllowed;
-                            LabelAlignmentStyles oldMovingDirection = series
-                                .SmartLabelStyle
+                            LabelAlignmentStyles oldMovingDirection = series.SmartLabelStyle
                                 .MovingDirection;
                             series.SmartLabelStyle.IsMarkerOverlappingAllowed = true;
 
@@ -1390,18 +1385,19 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                             }
 
                             // Adjust label position using SmartLabelStyle algorithm
-                            labelPosition = area.smartLabels.AdjustSmartLabelPosition(
-                                common,
-                                graph,
-                                area,
-                                series.SmartLabelStyle,
-                                labelPosition,
-                                sizeFont,
-                                format,
-                                labelPosition,
-                                new SizeF(0f, 0f),
-                                LabelAlignmentStyles.Center
-                            );
+                            labelPosition = area.smartLabels
+                                .AdjustSmartLabelPosition(
+                                    common,
+                                    graph,
+                                    area,
+                                    series.SmartLabelStyle,
+                                    labelPosition,
+                                    sizeFont,
+                                    format,
+                                    labelPosition,
+                                    new SizeF(0f, 0f),
+                                    LabelAlignmentStyles.Center
+                                );
 
                             // Restore forced values
                             series.SmartLabelStyle.IsMarkerOverlappingAllowed =
@@ -1948,8 +1944,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
 
                     if (common.ProcessModeRegions && !labels)
                     {
-                        common
-                            .HotRegionsList
+                        common.HotRegionsList
                             .AddHotRegion(
                                 rectPath,
                                 false,
@@ -2178,11 +2173,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                         );
 
                         // Force some SmartLabelStyle settings for column chart
-                        bool oldMarkerOverlapping = series
-                            .SmartLabelStyle
+                        bool oldMarkerOverlapping = series.SmartLabelStyle
                             .IsMarkerOverlappingAllowed;
-                        LabelAlignmentStyles oldMovingDirection = series
-                            .SmartLabelStyle
+                        LabelAlignmentStyles oldMovingDirection = series.SmartLabelStyle
                             .MovingDirection;
                         series.SmartLabelStyle.IsMarkerOverlappingAllowed = true;
 
@@ -2206,18 +2199,19 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                         }
 
                         // Adjust label position using SmartLabelStyle algorithm
-                        labelPosition = area.smartLabels.AdjustSmartLabelPosition(
-                            common,
-                            graph,
-                            area,
-                            series.SmartLabelStyle,
-                            labelPosition,
-                            sizeFont,
-                            format,
-                            labelPosition,
-                            new SizeF(0f, 0f),
-                            LabelAlignmentStyles.Center
-                        );
+                        labelPosition = area.smartLabels
+                            .AdjustSmartLabelPosition(
+                                common,
+                                graph,
+                                area,
+                                series.SmartLabelStyle,
+                                labelPosition,
+                                sizeFont,
+                                format,
+                                labelPosition,
+                                new SizeF(0f, 0f),
+                                LabelAlignmentStyles.Center
+                            );
 
                         // Restore forced values
                         series.SmartLabelStyle.IsMarkerOverlappingAllowed = oldMarkerOverlapping;

@@ -29,8 +29,7 @@ namespace System.ServiceModel
             {
                 if (!BasicHttpMessageCredentialTypeHelper.IsDefined(value))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new ArgumentOutOfRangeException("value"));
                 }
                 this.clientCredentialType = value;
@@ -73,8 +72,7 @@ namespace System.ServiceModel
                         break;
                     default:
                         Fx.Assert("Unsupported basic http message credential type");
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(new NotSupportedException());
                 }
             }
@@ -82,8 +80,7 @@ namespace System.ServiceModel
             {
                 if (this.clientCredentialType != BasicHttpMessageCredentialType.Certificate)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(SR.BasicHttpMessageSecurityRequiresCertificate)

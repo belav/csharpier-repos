@@ -209,8 +209,7 @@ class SomeClass
 }
 dynamic d = new SomeClass();
 d.Do();",
-                ScriptOptions
-                    .Default
+                ScriptOptions.Default
                     .WithReferences(MscorlibRef, SystemRef, SystemCoreRef, CSharpRef)
             );
         }
@@ -228,8 +227,7 @@ class SomeClass
 }
 dynamic d = new SomeClass();
 d.Do()",
-                ScriptOptions
-                    .Default
+                ScriptOptions.Default
                     .WithReferences(MscorlibRef, SystemRef, SystemCoreRef, CSharpRef)
             );
         }
@@ -250,11 +248,12 @@ d.Do()",
             catch (CompilationErrorException ex)
             {
                 exceptionThrown = true;
-                ex.Diagnostics.Verify(
-                    // (2,32): error CS1002: ; expected
-                    //  System.Console.WriteLine(true)
-                    Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(2, 32)
-                );
+                ex.Diagnostics
+                    .Verify(
+                        // (2,32): error CS1002: ; expected
+                        //  System.Console.WriteLine(true)
+                        Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(2, 32)
+                    );
             }
 
             Assert.True(exceptionThrown);
@@ -312,11 +311,12 @@ throw e;",
                 exceptionThrown = true;
                 // Verify that it produces a single ExpectedSemicolon error.
                 // No duplicates for the same error.
-                ex.Diagnostics.Verify(
-                    // (1,13): error CS1002: ; expected
-                    // if (e) a = b
-                    Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(1, 13)
-                );
+                ex.Diagnostics
+                    .Verify(
+                        // (1,13): error CS1002: ; expected
+                        // if (e) a = b
+                        Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(1, 13)
+                    );
             }
 
             Assert.True(exceptionThrown);
@@ -1001,8 +1001,7 @@ i",
             var code = "throw new System.Exception();";
             try
             {
-                var opts = ScriptOptions
-                    .Default
+                var opts = ScriptOptions.Default
                     .WithEmitDebugInformation(true)
                     .WithFilePath("debug.csx")
                     .WithFileEncoding(null);
@@ -1011,9 +1010,10 @@ i",
             catch (CompilationErrorException ex)
             {
                 //  CS8055: Cannot emit debug information for a source text without encoding.
-                ex.Diagnostics.Verify(
-                    Diagnostic(ErrorCode.ERR_EncodinglessSyntaxTree, code).WithLocation(1, 1)
-                );
+                ex.Diagnostics
+                    .Verify(
+                        Diagnostic(ErrorCode.ERR_EncodinglessSyntaxTree, code).WithLocation(1, 1)
+                    );
             }
         }
 
@@ -1024,8 +1024,7 @@ i",
         [WorkItem("https://github.com/dotnet/roslyn/issues/19027")]
         public Task Pdb_CreateFromString_CodeFromFile_WithEmitDebugInformation_WithFileEncoding_ResultInPdbEmitted()
         {
-            var opts = ScriptOptions
-                .Default
+            var opts = ScriptOptions.Default
                 .WithEmitDebugInformation(true)
                 .WithFilePath("debug.csx")
                 .WithFileEncoding(Encoding.UTF8);
@@ -1043,8 +1042,7 @@ i",
         )]
         public Task Pdb_CreateFromString_CodeFromFile_WithoutEmitDebugInformation_WithoutFileEncoding_ResultInPdbNotEmitted()
         {
-            var opts = ScriptOptions
-                .Default
+            var opts = ScriptOptions.Default
                 .WithEmitDebugInformation(false)
                 .WithFilePath(null)
                 .WithFileEncoding(null);
@@ -1059,8 +1057,7 @@ i",
         )]
         public Task Pdb_CreateFromString_CodeFromFile_WithoutEmitDebugInformation_WithFileEncoding_ResultInPdbNotEmitted()
         {
-            var opts = ScriptOptions
-                .Default
+            var opts = ScriptOptions.Default
                 .WithEmitDebugInformation(false)
                 .WithFilePath("debug.csx")
                 .WithFileEncoding(Encoding.UTF8);
@@ -1076,8 +1073,7 @@ i",
         [WorkItem("https://github.com/dotnet/roslyn/issues/19027")]
         public Task Pdb_CreateFromStream_CodeFromFile_WithEmitDebugInformation_ResultInPdbEmitted()
         {
-            var opts = ScriptOptions
-                .Default
+            var opts = ScriptOptions.Default
                 .WithEmitDebugInformation(true)
                 .WithFilePath("debug.csx");
             return VerifyStackTraceAsync(
@@ -1095,8 +1091,7 @@ i",
         [Fact]
         public Task Pdb_CreateFromStream_CodeFromFile_WithoutEmitDebugInformation_ResultInPdbNotEmitted()
         {
-            var opts = ScriptOptions
-                .Default
+            var opts = ScriptOptions.Default
                 .WithEmitDebugInformation(false)
                 .WithFilePath("debug.csx");
             return VerifyStackTraceAsync(() =>
@@ -1130,8 +1125,7 @@ i",
         [WorkItem("https://github.com/dotnet/roslyn/issues/19027")]
         public Task Pdb_CreateFromString_InlineCode_WithEmitDebugInformation_WithFileEncoding_ResultInPdbEmitted()
         {
-            var opts = ScriptOptions
-                .Default
+            var opts = ScriptOptions.Default
                 .WithEmitDebugInformation(true)
                 .WithFileEncoding(Encoding.UTF8);
             return VerifyStackTraceAsync(
@@ -1154,8 +1148,7 @@ i",
         [Fact]
         public Task Pdb_CreateFromString_InlineCode_WithoutEmitDebugInformation_WithFileEncoding_ResultInPdbNotEmitted()
         {
-            var opts = ScriptOptions
-                .Default
+            var opts = ScriptOptions.Default
                 .WithEmitDebugInformation(false)
                 .WithFileEncoding(Encoding.UTF8);
             return VerifyStackTraceAsync(() =>
@@ -1278,13 +1271,14 @@ return reply;
             {
                 exceptionThrown = true;
                 // Verify that it produces a single NameNotInContext error.
-                ex.Diagnostics.Verify(
-                    // (1,12): error CS0103: The name 'notExistentVariable' does not exist in the current context
-                    // var data = notExistentVariable switch { _ => null };
-                    Diagnostic(ErrorCode.ERR_NameNotInContext, "notExistentVariable")
-                        .WithArguments("notExistentVariable")
-                        .WithLocation(1, 12)
-                );
+                ex.Diagnostics
+                    .Verify(
+                        // (1,12): error CS0103: The name 'notExistentVariable' does not exist in the current context
+                        // var data = notExistentVariable switch { _ => null };
+                        Diagnostic(ErrorCode.ERR_NameNotInContext, "notExistentVariable")
+                            .WithArguments("notExistentVariable")
+                            .WithLocation(1, 12)
+                    );
             }
 
             Assert.True(exceptionThrown);
@@ -1306,18 +1300,19 @@ return reply;
             {
                 exceptionThrown = true;
                 // Verify that it produces a single NameNotInContext error.
-                ex.Diagnostics.Verify(
-                    // (1,28): error CS8781: Relational patterns may not be used for a value of type 'string'.
-                    // var data = "data" switch { < 5 => null };
-                    Diagnostic(ErrorCode.ERR_UnsupportedTypeForRelationalPattern, "< 5")
-                        .WithArguments("string")
-                        .WithLocation(1, 28),
-                    // (1,30): error CS0029: Cannot implicitly convert type 'int' to 'string'
-                    // var data = "data" switch { < 5 => null };
-                    Diagnostic(ErrorCode.ERR_NoImplicitConv, "5")
-                        .WithArguments("int", "string")
-                        .WithLocation(1, 30)
-                );
+                ex.Diagnostics
+                    .Verify(
+                        // (1,28): error CS8781: Relational patterns may not be used for a value of type 'string'.
+                        // var data = "data" switch { < 5 => null };
+                        Diagnostic(ErrorCode.ERR_UnsupportedTypeForRelationalPattern, "< 5")
+                            .WithArguments("string")
+                            .WithLocation(1, 28),
+                        // (1,30): error CS0029: Cannot implicitly convert type 'int' to 'string'
+                        // var data = "data" switch { < 5 => null };
+                        Diagnostic(ErrorCode.ERR_NoImplicitConv, "5")
+                            .WithArguments("int", "string")
+                            .WithLocation(1, 30)
+                    );
             }
 
             Assert.True(exceptionThrown);
@@ -1339,13 +1334,14 @@ return reply;
             {
                 exceptionThrown = true;
                 // Verify that it produces a single NameNotInContext error.
-                ex.Diagnostics.Verify(
-                    // (1,33): error CS0103: The name 'armError' does not exist in the current context
-                    // var data = "test" switch { _ => armError };
-                    Diagnostic(ErrorCode.ERR_NameNotInContext, "armError")
-                        .WithArguments("armError")
-                        .WithLocation(1, 33)
-                );
+                ex.Diagnostics
+                    .Verify(
+                        // (1,33): error CS0103: The name 'armError' does not exist in the current context
+                        // var data = "test" switch { _ => armError };
+                        Diagnostic(ErrorCode.ERR_NameNotInContext, "armError")
+                            .WithArguments("armError")
+                            .WithLocation(1, 33)
+                    );
             }
 
             Assert.True(exceptionThrown);

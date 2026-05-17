@@ -31,8 +31,7 @@ public class ATagHelper : TagHelper
     {
         if (Controller != null && Action != null)
         {
-            var methodParameters = output
-                .Attributes
+            var methodParameters = output.Attributes
                 .ToDictionary(attribute => attribute.Name, attribute => attribute.Value);
 
             // We remove all attributes from the resulting HTML element because they're supposed to
@@ -40,8 +39,7 @@ public class ATagHelper : TagHelper
             output.Attributes.Clear();
 
             var urlHelper = UrlHelperFactory.GetUrlHelper(ViewContext);
-            output
-                .Attributes
+            output.Attributes
                 .SetAttribute("href", urlHelper.Action(Action, Controller, methodParameters));
 
             output.PreContent.SetContent("My ");

@@ -4293,9 +4293,8 @@ public class C
 ";
             var comp = CreateCompilation(libSrc);
             Assert.True(
-                comp.GetSpecialType(
-                    SpecialType.System_TypedReference
-                ).IsManagedTypeNoUseSiteDiagnostics
+                comp.GetSpecialType(SpecialType.System_TypedReference)
+                    .IsManagedTypeNoUseSiteDiagnostics
             );
             comp.VerifyEmitDiagnostics(
                 // (4,19): error CS1599: The return type of a method, delegate, or function pointer cannot be 'TypedReference'
@@ -4321,9 +4320,8 @@ public class C
 ";
             var comp = CreateCompilation(libSrc);
             Assert.True(
-                comp.GetSpecialType(
-                    SpecialType.System_TypedReference
-                ).IsManagedTypeNoUseSiteDiagnostics
+                comp.GetSpecialType(SpecialType.System_TypedReference)
+                    .IsManagedTypeNoUseSiteDiagnostics
             );
             comp.VerifyEmitDiagnostics(
                 // (4,19): error CS1599: The return type of a method, delegate, or function pointer cannot be 'TypedReference'
@@ -4351,9 +4349,8 @@ public class C<T>
 ";
             var comp = CreateCompilation(libSrc);
             Assert.True(
-                comp.GetSpecialType(
-                    SpecialType.System_TypedReference
-                ).IsManagedTypeNoUseSiteDiagnostics
+                comp.GetSpecialType(SpecialType.System_TypedReference)
+                    .IsManagedTypeNoUseSiteDiagnostics
             );
             comp.VerifyEmitDiagnostics(
                 // (4,51): error CS0306: The type 'TypedReference' may not be used as a type argument
@@ -4408,9 +4405,8 @@ public class C<T> where T : System.TypedReference
 ";
             var comp = CreateCompilation(libSrc);
             Assert.True(
-                comp.GetSpecialType(
-                    SpecialType.System_TypedReference
-                ).IsManagedTypeNoUseSiteDiagnostics
+                comp.GetSpecialType(SpecialType.System_TypedReference)
+                    .IsManagedTypeNoUseSiteDiagnostics
             );
             comp.VerifyEmitDiagnostics(
                 // (2,29): error CS0701: 'TypedReference' is not a valid constraint. A type used as a constraint must be an interface, a non-sealed class or a type parameter.
@@ -6440,8 +6436,7 @@ struct S
             Assert.Null(methodGroupSummary.ConvertedType);
             Assert.Equal(ConversionKind.Identity, methodGroupSummary.ImplicitConversion.Kind);
             Assert.True(
-                methodGroupSummary
-                    .MethodGroup
+                methodGroupSummary.MethodGroup
                     .SetEquals(
                         ImmutableArray.Create<IMethodSymbol>(
                             structMethod1.GetPublicSymbol(),
@@ -6525,8 +6520,7 @@ struct S
             Assert.Null(methodGroupSummary.ConvertedType);
             Assert.Equal(ConversionKind.Identity, methodGroupSummary.ImplicitConversion.Kind);
             Assert.True(
-                methodGroupSummary
-                    .MethodGroup
+                methodGroupSummary.MethodGroup
                     .SetEquals(
                         structMethods.GetPublicSymbols(),
                         EqualityComparer<IMethodSymbol>.Default
@@ -7565,8 +7559,7 @@ unsafe class C
 
             compilation.VerifyDiagnostics();
 
-            var methodSymbol = compilation
-                .GlobalNamespace
+            var methodSymbol = compilation.GlobalNamespace
                 .GetMember<NamedTypeSymbol>("C")
                 .GetMember<MethodSymbol>("M");
             var pointerType = methodSymbol.Parameters[0].Type;
@@ -9197,8 +9190,7 @@ unsafe class C
             Assert.Equal(charPointerSymbol, summary0.Type.GetSymbol());
 
             var summary1 = initializerSummaries[1];
-            var arraySymbol = compilation
-                .GlobalNamespace
+            var arraySymbol = compilation.GlobalNamespace
                 .GetMember<TypeSymbol>("C")
                 .GetMember<FieldSymbol>("a");
             Assert.Equal(arraySymbol, summary1.Symbol.GetSymbol());
@@ -9282,8 +9274,7 @@ unsafe class C
             Assert.Equal(Conversion.PointerToVoid, summary0.ImplicitConversion);
 
             var summary1 = initializerSummaries[1];
-            var arraySymbol = compilation
-                .GlobalNamespace
+            var arraySymbol = compilation.GlobalNamespace
                 .GetMember<TypeSymbol>("C")
                 .GetMember<FieldSymbol>("a");
             Assert.Equal(arraySymbol, summary1.Symbol.GetSymbol());

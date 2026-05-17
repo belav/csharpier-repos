@@ -369,8 +369,7 @@ namespace Microsoft.Build.Tasks.Xaml
                     }
                     catch (FileNotFoundException e)
                     {
-                        throw FxTrace
-                            .Exception
+                        throw FxTrace.Exception
                             .AsError(
                                 new LoggableException(
                                     SR.ExceptionThrownInExtension(
@@ -387,8 +386,7 @@ namespace Microsoft.Build.Tasks.Xaml
                         {
                             throw;
                         }
-                        throw FxTrace
-                            .Exception
+                        throw FxTrace.Exception
                             .AsError(
                                 new LoggableException(
                                     SR.ExceptionThrownInExtension(

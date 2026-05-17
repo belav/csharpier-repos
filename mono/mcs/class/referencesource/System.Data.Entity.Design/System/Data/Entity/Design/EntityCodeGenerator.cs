@@ -430,8 +430,7 @@ namespace System.Data.Entity.Design
             double schemaVersion;
             DataSpace dataSpace;
             if (
-                System
-                    .Data
+                System.Data
                     .EntityModel
                     .SchemaObjectModel
                     .SchemaManager
@@ -569,8 +568,7 @@ namespace System.Data.Entity.Design
                     ModelBuilderErrorCode errorCode =
                         ModelBuilderErrorCode.PreprocessTemplateTransformationError;
                     errors.AddRange(
-                        codeGenerator
-                            .Errors
+                        codeGenerator.Errors
                             .OfType<CompilerError>()
                             .Select(c => ConvertToEdmSchemaError(c, errorCode))
                     );
@@ -857,8 +855,7 @@ namespace System.Data.Entity.Design
             compilerParams.GenerateInMemory = true;
             compilerParams.GenerateExecutable = false;
             // grab the assemblies by location so that we don't compile against one that we didn't reference
-            compilerParams
-                .ReferencedAssemblies
+            compilerParams.ReferencedAssemblies
                 .AddRange(
                     new string[]
                     {
@@ -900,8 +897,7 @@ namespace System.Data.Entity.Design
 
             if (results.Errors.HasErrors)
             {
-                string message = results
-                    .Errors
+                string message = results.Errors
                     .OfType<CompilerError>()
                     .Aggregate(
                         string.Empty,

@@ -1066,8 +1066,7 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                                     if (
                                         (
                                             cFPRegs + _x64UnixIdxFPReg
-                                            <= TransitionBlock
-                                                .X64UnixTransitionBlock
+                                            <= TransitionBlock.X64UnixTransitionBlock
                                                 .NUM_FLOAT_ARGUMENT_REGISTERS
                                         )
                                         && (cGenRegs + _x64UnixIdxGenReg)
@@ -1104,8 +1103,7 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                         {
                             if (
                                 cFPRegs + _x64UnixIdxFPReg
-                                <= TransitionBlock
-                                    .X64UnixTransitionBlock
+                                <= TransitionBlock.X64UnixTransitionBlock
                                     .NUM_FLOAT_ARGUMENT_REGISTERS
                             )
                             {

@@ -89,8 +89,7 @@ namespace System.Formats.Tar.Tests
 
                             // Creating device files needs elevation
                             Interop.CheckIo(
-                                Interop
-                                    .Sys
+                                Interop.Sys
                                     .CreateBlockDevice(
                                         blockDevicePath,
                                         (int)DefaultFileMode,
@@ -164,8 +163,7 @@ namespace System.Formats.Tar.Tests
 
                             // Creating device files needs elevation
                             Interop.CheckIo(
-                                Interop
-                                    .Sys
+                                Interop.Sys
                                     .CreateCharacterDevice(
                                         characterDevicePath,
                                         (int)DefaultFileMode,

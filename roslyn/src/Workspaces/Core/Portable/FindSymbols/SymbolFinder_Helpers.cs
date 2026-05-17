@@ -76,8 +76,7 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                     if (
                         (
                             namespace1Count > 1
-                            && await namespace1
-                                .ConstituentNamespaces
+                            && await namespace1.ConstituentNamespaces
                                 .AnyAsync(
                                     static (n, arg) =>
                                         NamespaceSymbolsMatchAsync(
@@ -92,8 +91,7 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                         )
                         || (
                             namespace2Count > 1
-                            && await namespace2
-                                .ConstituentNamespaces
+                            && await namespace2.ConstituentNamespaces
                                 .AnyAsync(
                                     static (n2, arg) =>
                                         NamespaceSymbolsMatchAsync(
@@ -160,8 +158,7 @@ namespace Microsoft.CodeAnalysis.FindSymbols
 
             // 1) Compare searchSymbol and symbolToMatch using SymbolEquivalenceComparer.IgnoreAssembliesInstance
             if (
-                !SymbolEquivalenceComparer
-                    .IgnoreAssembliesInstance
+                !SymbolEquivalenceComparer.IgnoreAssembliesInstance
                     .Equals(searchSymbol, symbolToMatch, equivalentTypesWithDifferingAssemblies)
             )
             {
@@ -210,8 +207,7 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             // Must contain equivalents named types residing in different assemblies.
             Contract.ThrowIfFalse(
                 equivalentTypesWithDifferingAssemblies.All(kvp =>
-                    !SymbolEquivalenceComparer
-                        .Instance
+                    !SymbolEquivalenceComparer.Instance
                         .Equals(kvp.Key.ContainingAssembly, kvp.Value.ContainingAssembly)
                 )
             );

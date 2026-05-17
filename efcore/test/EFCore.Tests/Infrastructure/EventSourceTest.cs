@@ -89,8 +89,7 @@ public class EventSourceTest
         {
             using var context = new SomeDbContext();
 
-            var query = context
-                .Foos
+            var query = context.Foos
                 .Where(e => e.Id == new Guid("6898CFFC-3DCC-45A6-A472-A23057462EE6"));
 
             _ = async ? await query.ToListAsync() : query.ToList();
@@ -265,9 +264,8 @@ public class EventSourceTest
     private static readonly MethodInfo _resetCacheInfo =
         typeof(EntityFrameworkEventSource).GetMethod("ResetCacheInfo", _bindingFlags);
 
-    private static readonly FieldInfo _compiledQueryCacheInfoHits = _compiledQueryCacheInfo
-        .FieldType
-        .GetField("Hits", _bindingFlags);
+    private static readonly FieldInfo _compiledQueryCacheInfoHits =
+        _compiledQueryCacheInfo.FieldType.GetField("Hits", _bindingFlags);
 
     private static int CompiledQueryCacheInfoHits =>
         (int)
@@ -275,9 +273,8 @@ public class EventSourceTest
                 _compiledQueryCacheInfo.GetValue(EntityFrameworkEventSource.Log)
             );
 
-    private static readonly FieldInfo _compiledQueryCacheInfoMisses = _compiledQueryCacheInfo
-        .FieldType
-        .GetField("Misses", _bindingFlags);
+    private static readonly FieldInfo _compiledQueryCacheInfoMisses =
+        _compiledQueryCacheInfo.FieldType.GetField("Misses", _bindingFlags);
 
     private static int CompiledQueryCacheInfoMisses =>
         (int)

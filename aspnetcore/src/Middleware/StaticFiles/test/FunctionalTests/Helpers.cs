@@ -12,8 +12,7 @@ public static class Helpers
 {
     public static string GetAddress(IHost server)
     {
-        return server
-            .Services
+        return server.Services
             .GetService<IServer>()
             .Features
             .Get<IServerAddressesFeature>()

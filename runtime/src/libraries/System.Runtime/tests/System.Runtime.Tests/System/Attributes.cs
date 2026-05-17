@@ -806,8 +806,7 @@ namespace System.Tests
         [Fact]
         public static void customAttributeCount()
         {
-            List<CustomAttributeData> customAttributes = typeof(GetCustomAttribute)
-                .Module
+            List<CustomAttributeData> customAttributes = typeof(GetCustomAttribute).Module
                 .CustomAttributes
                 .ToList();
             // [System.Security.UnverifiableCodeAttribute()]

@@ -666,8 +666,7 @@ namespace Microsoft.CodeAnalysis
                         break;
 
                     case "Size":
-                        size = namedArg
-                            .Value
+                        size = namedArg.Value
                             .DecodeValue<int>(Microsoft.CodeAnalysis.SpecialType.System_Int32);
                         if (size < 0)
                         {

@@ -710,21 +710,17 @@ namespace JIT.HardwareIntrinsics.X86._AvxVnni
 
             if (!succeeded)
             {
-                TestLibrary
-                    .TestFramework
+                TestLibrary.TestFramework
                     .LogInformation(
                         $"{nameof(AvxVnni)}.{nameof(AvxVnni.MultiplyWideningAndAdd)}<Int32>(Vector256<Int32>, Vector256<Int32>): {method} failed:"
                     );
-                TestLibrary
-                    .TestFramework
+                TestLibrary.TestFramework
                     .LogInformation($"  addend: ({string.Join(", ", addend)})");
                 TestLibrary.TestFramework.LogInformation($"  left: ({string.Join(", ", left)})");
                 TestLibrary.TestFramework.LogInformation($"  right: ({string.Join(", ", right)})");
-                TestLibrary
-                    .TestFramework
+                TestLibrary.TestFramework
                     .LogInformation($"  result: ({string.Join(", ", result)})");
-                TestLibrary
-                    .TestFramework
+                TestLibrary.TestFramework
                     .LogInformation($"  valid: ({string.Join(", ", outArray)})");
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 

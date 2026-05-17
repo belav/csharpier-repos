@@ -76,8 +76,7 @@ internal sealed class ParentInstallPackageCodeAction : CodeAction.CodeActionWith
         IPackageInstallerService? installerService
     )
     {
-        installerService ??= document
-            .Project
+        installerService ??= document.Project
             .Solution
             .Services
             .GetService<IPackageInstallerService>();

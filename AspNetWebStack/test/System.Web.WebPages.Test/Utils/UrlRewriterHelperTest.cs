@@ -25,8 +25,7 @@ namespace System.Web.WebPages.Test
             // Assert
             Assert.False(result);
             request.WorkerRequest.Verify();
-            request
-                .WorkerRequest
+            request.WorkerRequest
                 .Verify(
                     wr => wr.GetServerVariable(UrlRewriterHelper.UrlWasRewrittenServerVar),
                     Times.Never()
@@ -88,14 +87,12 @@ namespace System.Web.WebPages.Test
             bool result2 = helper.WasRequestRewritten(request2.Context.Object);
 
             // Assert
-            request1
-                .WorkerRequest
+            request1.WorkerRequest
                 .Verify(
                     c => c.GetServerVariable(UrlRewriterHelper.UrlRewriterEnabledServerVar),
                     Times.Once()
                 );
-            request2
-                .WorkerRequest
+            request2.WorkerRequest
                 .Verify(
                     c => c.GetServerVariable(UrlRewriterHelper.UrlRewriterEnabledServerVar),
                     Times.Never()
@@ -119,8 +116,7 @@ namespace System.Web.WebPages.Test
             bool result2 = helper.WasRequestRewritten(request1.Context.Object);
 
             // Assert
-            request1
-                .WorkerRequest
+            request1.WorkerRequest
                 .Verify(
                     c => c.GetServerVariable(UrlRewriterHelper.UrlWasRewrittenServerVar),
                     Times.Once()
@@ -144,8 +140,7 @@ namespace System.Web.WebPages.Test
             bool result2 = helper.WasRequestRewritten(request1.Context.Object);
 
             // Assert
-            request1
-                .WorkerRequest
+            request1.WorkerRequest
                 .Verify(
                     c => c.GetServerVariable(UrlRewriterHelper.UrlWasRewrittenServerVar),
                     Times.Once()

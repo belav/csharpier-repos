@@ -713,14 +713,12 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
         {
             // We probably only need to set 'IsDynamicCodeCompiled' since only that is checked,
             // but also set 'IsDynamicCodeSupported for correctness.
-            options
-                .RuntimeConfigurationOptions
+            options.RuntimeConfigurationOptions
                 .Add(
                     "System.Runtime.CompilerServices.RuntimeFeature.IsDynamicCodeSupported",
                     "false"
                 );
-            options
-                .RuntimeConfigurationOptions
+            options.RuntimeConfigurationOptions
                 .Add(
                     "System.Runtime.CompilerServices.RuntimeFeature.IsDynamicCodeCompiled",
                     "false"

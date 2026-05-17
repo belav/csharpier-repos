@@ -1796,8 +1796,7 @@ public abstract class NorthwindSelectQueryTestBase<TFixture> : QueryTestBase<TFi
     public virtual async Task Filtered_collection_projection_is_tracked(bool async)
     {
         using var context = CreateContext();
-        var query = context
-            .Customers
+        var query = context.Customers
             .Where(c => c.CustomerID.StartsWith("A"))
             .Select(c => new
             {
@@ -1817,8 +1816,7 @@ public abstract class NorthwindSelectQueryTestBase<TFixture> : QueryTestBase<TFi
     public virtual async Task Filtered_collection_projection_with_to_list_is_tracked(bool async)
     {
         using var context = CreateContext();
-        var query = context
-            .Customers
+        var query = context.Customers
             .Where(c => c.CustomerID.StartsWith("A"))
             .Select(c => new
             {
@@ -1843,11 +1841,12 @@ public abstract class NorthwindSelectQueryTestBase<TFixture> : QueryTestBase<TFi
             ss =>
                 ss.Set<Customer>()
                     .SelectMany(c =>
-                        c.Orders.Select(o => new
-                        {
-                            OrderProperty = o.CustomerID,
-                            CustomerProperty = c.CustomerID,
-                        })
+                        c.Orders
+                            .Select(o => new
+                            {
+                                OrderProperty = o.CustomerID,
+                                CustomerProperty = c.CustomerID,
+                            })
                     )
         );
 
@@ -1861,11 +1860,12 @@ public abstract class NorthwindSelectQueryTestBase<TFixture> : QueryTestBase<TFi
             ss =>
                 ss.Set<Customer>()
                     .SelectMany(c =>
-                        c.Orders.Select(o => new
-                        {
-                            OrderProperty = o.ShipName,
-                            CustomerProperty = c.ContactName,
-                        })
+                        c.Orders
+                            .Select(o => new
+                            {
+                                OrderProperty = o.ShipName,
+                                CustomerProperty = c.ContactName,
+                            })
                     )
         );
 

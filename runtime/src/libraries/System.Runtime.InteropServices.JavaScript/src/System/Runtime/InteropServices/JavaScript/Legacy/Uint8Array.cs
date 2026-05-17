@@ -74,8 +74,7 @@ namespace System.Runtime.InteropServices.JavaScript
             ReadOnlySpan<byte> bytes = MemoryMarshal.AsBytes(span);
             fixed (byte* ptr = bytes)
             {
-                Interop
-                    .Runtime
+                Interop.Runtime
                     .TypedArrayFromRef(
                         (int)ptr,
                         0,

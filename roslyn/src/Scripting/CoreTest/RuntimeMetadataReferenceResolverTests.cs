@@ -30,8 +30,7 @@ namespace Microsoft.CodeAnalysis.UnitTests.Interactive
                 var resolver = new RuntimeMetadataReferenceResolver(
                     new RelativePathResolver(ImmutableArray.Create(directory.Path), directory.Path),
                     packageResolver: new PackageResolver(
-                        ImmutableDictionary<string, ImmutableArray<string>>
-                            .Empty
+                        ImmutableDictionary<string, ImmutableArray<string>>.Empty
                             .Add(
                                 "nuget:N/1.0",
                                 ImmutableArray.Create(assembly1.Path, assembly2.Path)

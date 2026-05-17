@@ -63,8 +63,7 @@ namespace System.Web.Http
         {
             AuthorizeAttribute attribute = new AuthorizeAttribute();
 
-            Assert
-                .Reflection
+            Assert.Reflection
                 .StringProperty(attribute, a => a.Roles, expectedDefaultValue: String.Empty);
         }
 
@@ -73,8 +72,7 @@ namespace System.Web.Http
         {
             AuthorizeAttribute attribute = new AuthorizeAttribute();
 
-            Assert
-                .Reflection
+            Assert.Reflection
                 .StringProperty(attribute, a => a.Users, expectedDefaultValue: String.Empty);
         }
 

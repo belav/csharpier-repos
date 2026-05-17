@@ -36,12 +36,10 @@ public class ComponentTagHelperTest
         await tagHelper.ProcessAsync(context, output);
 
         // Assert
-        var prerenderer = viewContext
-            .HttpContext
+        var prerenderer = viewContext.HttpContext
             .RequestServices
             .GetRequiredService<IComponentPrerenderer>();
-        var content = await prerenderer
-            .Dispatcher
+        var content = await prerenderer.Dispatcher
             .InvokeAsync(() => HtmlContentUtilities.HtmlContentToString(output.Content));
         Assert.Equal("Hello from the component", content);
         Assert.Null(output.TagName);

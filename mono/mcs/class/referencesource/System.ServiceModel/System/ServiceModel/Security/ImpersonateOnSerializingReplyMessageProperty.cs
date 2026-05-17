@@ -125,8 +125,7 @@ namespace System.ServiceModel.Security
                     ImmutableDispatchRuntime runtime = dispatchRuntime.GetRuntime();
                     if (runtime != null && runtime.SecurityImpersonation != null)
                     {
-                        runtime
-                            .SecurityImpersonation
+                        runtime.SecurityImpersonation
                             .StartImpersonation(
                                 ref this.rpc,
                                 out impersonationContext,
@@ -165,8 +164,7 @@ namespace System.ServiceModel.Security
                     ImmutableDispatchRuntime runtime = dispatchRuntime.GetRuntime();
                     if (runtime != null && runtime.SecurityImpersonation != null)
                     {
-                        runtime
-                            .SecurityImpersonation
+                        runtime.SecurityImpersonation
                             .StopImpersonation(
                                 ref this.rpc,
                                 impersonationContext,

@@ -415,9 +415,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 {
                     if (
                         ignoreTypesDependentOnTypeParametersOpt == null
-                        || !type.Type.ContainsTypeParameters(
-                            ignoreTypesDependentOnTypeParametersOpt
-                        )
+                        || !type.Type
+                            .ContainsTypeParameters(ignoreTypesDependentOnTypeParametersOpt)
                     )
                     {
                         var substituted = substituteConstraintType(type);
@@ -446,8 +445,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 if (dynamicEraser == null)
                 {
                     dynamicEraser = new DynamicTypeEraser(
-                        owner
-                            .ContainingAssembly
+                        owner.ContainingAssembly
                             .CorLibrary
                             .GetSpecialType(SpecialType.System_Object)
                     );

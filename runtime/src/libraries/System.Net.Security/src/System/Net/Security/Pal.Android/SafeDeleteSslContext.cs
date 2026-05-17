@@ -184,8 +184,7 @@ namespace System.Net
                 ptrs[i + 1] = context.IntermediateCertificates[i].Handle;
             }
 
-            return Interop
-                .AndroidCrypto
+            return Interop.AndroidCrypto
                 .SSLStreamCreateWithCertificates(sslStreamProxy, keyBytes, algorithm, ptrs);
         }
 
@@ -253,8 +252,7 @@ namespace System.Net
                 !isServer && !string.IsNullOrEmpty(authOptions.TargetHost)
                     ? authOptions.TargetHost
                     : null;
-            Interop
-                .AndroidCrypto
+            Interop.AndroidCrypto
                 .SSLStreamInitialize(
                     handle,
                     isServer,
@@ -282,8 +280,7 @@ namespace System.Net
                 (int minIndex, int maxIndex) = protocolsToEnable.ValidateContiguous(
                     s_orderedSslProtocols
                 );
-                Interop
-                    .AndroidCrypto
+                Interop.AndroidCrypto
                     .SSLStreamSetEnabledProtocols(
                         handle,
                         s_orderedSslProtocols.AsSpan(minIndex, maxIndex - minIndex + 1)
@@ -297,8 +294,7 @@ namespace System.Net
             )
             {
                 // Set application protocols if the platform supports it. Otherwise, we will silently ignore the option.
-                Interop
-                    .AndroidCrypto
+                Interop.AndroidCrypto
                     .SSLStreamSetApplicationProtocols(handle, authOptions.ApplicationProtocols);
             }
 

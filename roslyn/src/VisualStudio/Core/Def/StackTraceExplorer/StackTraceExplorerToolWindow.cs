@@ -43,8 +43,7 @@ namespace Microsoft.VisualStudio.LanguageServices.StackTraceExplorer
             Caption = ServicesVSResources.Stack_Trace_Explorer;
             var dockPanel = new DockPanel { LastChildFill = true };
 
-            dockPanel
-                .CommandBindings
+            dockPanel.CommandBindings
                 .Add(
                     new CommandBinding(
                         ApplicationCommands.Paste,
@@ -122,8 +121,7 @@ namespace Microsoft.VisualStudio.LanguageServices.StackTraceExplorer
             // where the window shows on code that parses as a stack frame but may not be. The explorer
             // should still handle those cases if explicitly pasted in, but can lead to false positives
             // when automatically opening.
-            return firstNodeOrToken
-                .Token
+            return firstNodeOrToken.Token
                 .LeadingTrivia
                 .Any(static t => t.Kind == StackFrameKind.AtTrivia);
         }
@@ -136,8 +134,7 @@ namespace Microsoft.VisualStudio.LanguageServices.StackTraceExplorer
             }
 
             var workspace = roslynPackage.ComponentModel.GetService<VisualStudioWorkspace>();
-            var formatMapService = roslynPackage
-                .ComponentModel
+            var formatMapService = roslynPackage.ComponentModel
                 .GetService<IClassificationFormatMapService>();
             var formatMap = formatMapService.GetClassificationFormatMap(
                 StandardContentTypeNames.Text

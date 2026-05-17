@@ -49,8 +49,7 @@ namespace System.Net.Security
 
         internal static int EnumeratePackages(out int pkgnum, out SafeFreeContextBuffer pkgArray)
         {
-            int res = Interop
-                .SspiCli
+            int res = Interop.SspiCli
                 .EnumerateSecurityPackagesW(
                     out pkgnum,
                     out SafeFreeContextBuffer_SECURITY? pkgArray_SECURITY
@@ -90,8 +89,7 @@ namespace System.Net.Security
             {
                 bool ignore = false;
                 phContext.DangerousAddRef(ref ignore);
-                status = Interop
-                    .SspiCli
+                status = Interop.SspiCli
                     .QueryContextAttributesW(ref phContext._handle, contextAttribute, buffer);
             }
             finally
@@ -129,8 +127,7 @@ namespace System.Net.Security
             {
                 bool ignore = false;
                 phContext.DangerousAddRef(ref ignore);
-                return Interop
-                    .SspiCli
+                return Interop.SspiCli
                     .SetContextAttributesW(
                         ref phContext._handle,
                         contextAttribute,
@@ -222,8 +219,7 @@ namespace System.Net.Security
 
             outCredential = new SafeFreeCredential_SECURITY();
 
-            errorCode = Interop
-                .SspiCli
+            errorCode = Interop.SspiCli
                 .AcquireCredentialsHandleW(
                     null,
                     package,
@@ -258,8 +254,7 @@ namespace System.Net.Security
         )
         {
             outCredential = new SafeFreeCredential_SECURITY();
-            int errorCode = Interop
-                .SspiCli
+            int errorCode = Interop.SspiCli
                 .AcquireCredentialsHandleW(
                     null,
                     package,
@@ -291,8 +286,7 @@ namespace System.Net.Security
 
             outCredential = new SafeFreeCredential_SECURITY();
 
-            errorCode = Interop
-                .SspiCli
+            errorCode = Interop.SspiCli
                 .AcquireCredentialsHandleW(
                     null,
                     package,
@@ -330,8 +324,7 @@ namespace System.Net.Security
 
             outCredential = new SafeFreeCredential_SECURITY();
 
-            int errorCode = Interop
-                .SspiCli
+            int errorCode = Interop.SspiCli
                 .AcquireCredentialsHandleW(
                     null,
                     package,
@@ -710,8 +703,7 @@ namespace System.Net.Security
                 // synchronization. Rewrite the indicator now that the final "inContext" is known, update if necessary.
                 isContextAbsent = (inContextPtr == null);
 
-                errorCode = Interop
-                    .SspiCli
+                errorCode = Interop.SspiCli
                     .InitializeSecurityContextW(
                         ref credentialHandle,
                         inContextPtr,
@@ -1093,8 +1085,7 @@ namespace System.Net.Security
                 // synchronization. Rewrite the indicator now that the final "inContext" is known, update if necessary.
                 isContextAbsent = (inContextPtr == null);
 
-                errorCode = Interop
-                    .SspiCli
+                errorCode = Interop.SspiCli
                     .AcceptSecurityContext(
                         ref credentialHandle,
                         inContextPtr,
@@ -1192,8 +1183,7 @@ namespace System.Net.Security
                 try
                 {
                     refContext!.DangerousAddRef(ref gotRef);
-                    errorCode = Interop
-                        .SspiCli
+                    errorCode = Interop.SspiCli
                         .CompleteAuthToken(
                             contextHandle.IsZero ? null : &contextHandle,
                             ref inSecurityBufferDescriptor
@@ -1260,8 +1250,7 @@ namespace System.Net.Security
                 try
                 {
                     refContext!.DangerousAddRef(ref gotRef);
-                    errorCode = Interop
-                        .SspiCli
+                    errorCode = Interop.SspiCli
                         .ApplyControlToken(
                             contextHandle.IsZero ? null : &contextHandle,
                             ref inSecurityBufferDescriptor
@@ -1340,8 +1329,7 @@ namespace System.Net.Security
             try
             {
                 phContext.DangerousAddRef(ref refAdded);
-                status = Interop
-                    .SspiCli
+                status = Interop.SspiCli
                     .QueryContextAttributesW(ref phContext._handle, contextAttribute, buffer);
             }
             finally

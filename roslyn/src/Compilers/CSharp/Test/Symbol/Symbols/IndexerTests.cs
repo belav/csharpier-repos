@@ -85,8 +85,7 @@ struct S
                 source: source,
                 sourceSymbolValidator: validator,
                 symbolValidator: validator,
-                options: TestOptions
-                    .ReleaseDll
+                options: TestOptions.ReleaseDll
                     .WithMetadataImportOptions(MetadataImportOptions.Internal)
             );
         }
@@ -902,8 +901,7 @@ class Derived : Base
                     var baseClass = compilation.GlobalNamespace.GetMember<NamedTypeSymbol>("Base");
                     var baseIndexer = baseClass.Indexers.Single();
 
-                    var derivedClass = compilation
-                        .GlobalNamespace
+                    var derivedClass = compilation.GlobalNamespace
                         .GetMember<NamedTypeSymbol>("Derived");
                     var derivedIndexer = derivedClass.Indexers.Single();
 
@@ -1804,8 +1802,7 @@ class B
             var compilation = CreateCompilation(source);
             compilation.VerifyDiagnostics();
 
-            var indexer = compilation
-                .GlobalNamespace
+            var indexer = compilation.GlobalNamespace
                 .GetMember<NamedTypeSymbol>("B")
                 .Indexers
                 .Single();
@@ -1834,8 +1831,7 @@ interface I
             var compilation = CreateCompilation(source);
             compilation.VerifyDiagnostics();
 
-            var indexer = compilation
-                .GlobalNamespace
+            var indexer = compilation.GlobalNamespace
                 .GetMember<NamedTypeSymbol>("I")
                 .Indexers
                 .Single();
@@ -2595,8 +2591,7 @@ class Program
 ";
             var compilation = CreateCompilation(source).VerifyDiagnostics();
 
-            var indexer = compilation
-                .GlobalNamespace
+            var indexer = compilation.GlobalNamespace
                 .GetMember<NamedTypeSymbol>("Program")
                 .Indexers
                 .Single();
@@ -3559,8 +3554,7 @@ class C
                 targetFramework: TargetFramework.NetCoreApp
             );
 
-            var a = compilation
-                .GlobalNamespace
+            var a = compilation.GlobalNamespace
                 .GetTypeMember("A")
                 .InstanceConstructors
                 .Where(c => !c.IsDefaultValueTypeConstructor())

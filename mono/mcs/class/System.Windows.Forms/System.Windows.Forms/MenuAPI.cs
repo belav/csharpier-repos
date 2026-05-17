@@ -996,8 +996,7 @@ namespace System.Windows.Forms
 
         internal override void OnPaintInternal(PaintEventArgs args)
         {
-            ThemeEngine
-                .Current
+            ThemeEngine.Current
                 .DrawPopupMenu(args.Graphics, menu, args.ClipRectangle, ClientRectangle);
         }
 

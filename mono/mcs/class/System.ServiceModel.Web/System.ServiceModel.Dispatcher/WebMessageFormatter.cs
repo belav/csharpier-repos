@@ -742,8 +742,7 @@ namespace System.ServiceModel.Dispatcher
                 IncomingWebRequestContext iwc = null;
                 if (OperationContext.Current != null)
                 {
-                    OperationContext
-                        .Current
+                    OperationContext.Current
                         .Extensions
                         .Add(new WebOperationContext(OperationContext.Current));
                     iwc = WebOperationContext.Current.IncomingRequest;

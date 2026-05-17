@@ -100,8 +100,7 @@ public class TestAnalyzer : DiagnosticAnalyzer
             var analyzer = dir.CopyFile(typeof(DiagnosticAnalyzer).Assembly.Location);
             dir.CopyFile(typeof(RemoteAnalyzerFileReferenceTest).Assembly.Location);
 
-            var analyzerCompilation = CSharp
-                .CSharpCompilation
+            var analyzerCompilation = CSharp.CSharpCompilation
                 .Create(
                     "MyAnalyzer",
                     new SyntaxTree[] { CSharp.SyntaxFactory.ParseSyntaxTree(analyzerSource) },

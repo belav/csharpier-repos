@@ -183,8 +183,7 @@ namespace System.ServiceModel
 
             if (identity != null && ident2 != null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentException(
                             SR.GetString(SR.MultipleIdentities),
@@ -259,8 +258,7 @@ namespace System.ServiceModel
         )
         {
             if (!uri.IsAbsoluteUri)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument("uri", SR.GetString(SR.UriMustBeAbsolute));
 
             this.addressingVersion = version;
@@ -381,8 +379,7 @@ namespace System.ServiceModel
                 }
                 else
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ProtocolException(
                                 SR.GetString(
@@ -685,14 +682,12 @@ namespace System.ServiceModel
             }
             else if (reader.NodeType != XmlNodeType.Element)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument("reader", SR.GetString(SR.CannotDetectAddressingVersion));
             }
             else
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(
                         "reader",
                         SR.GetString(SR.AddressingVersionNotSupported, reader.NamespaceURI)
@@ -739,14 +734,12 @@ namespace System.ServiceModel
             }
             else if (reader.NodeType != XmlNodeType.Element)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument("reader", SR.GetString(SR.CannotDetectAddressingVersion));
             }
             else
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(
                         "reader",
                         SR.GetString(SR.AddressingVersionNotSupported, reader.NamespaceURI)
@@ -776,8 +769,7 @@ namespace System.ServiceModel
             if (reader == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("reader");
             if (addressingVersion == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("addressingVersion");
 
             XmlDictionaryReader dictReader = XmlDictionaryReader.CreateDictionaryReader(reader);
@@ -795,8 +787,7 @@ namespace System.ServiceModel
             if (reader == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("reader");
             if (addressingVersion == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("addressingVersion");
 
             reader.ReadFullStartElement();
@@ -815,8 +806,7 @@ namespace System.ServiceModel
             if (reader == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("reader");
             if (addressingVersion == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("addressingVersion");
 
             reader.ReadFullStartElement(localName, ns);
@@ -866,8 +856,7 @@ namespace System.ServiceModel
             }
             else
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(
                         "addressingVersion",
                         SR.GetString(SR.AddressingVersionNotSupported, addressingVersion)
@@ -922,8 +911,7 @@ namespace System.ServiceModel
                 )
                 {
                     if (identity != null)
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 CreateXmlException(
                                     reader,
@@ -938,8 +926,7 @@ namespace System.ServiceModel
                 }
                 else if (version != null && reader.NamespaceURI == version.Namespace)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             CreateXmlException(
                                 reader,
@@ -1006,8 +993,7 @@ namespace System.ServiceModel
                 )
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         CreateXmlException(
                             reader,
@@ -1137,14 +1123,12 @@ namespace System.ServiceModel
             // Metadata
             if (
                 reader.IsStartElement(
-                    System
-                        .ServiceModel
+                    System.ServiceModel
                         .Description
                         .MetadataStrings
                         .MetadataExchangeStrings
                         .Metadata,
-                    System
-                        .ServiceModel
+                    System.ServiceModel
                         .Description
                         .MetadataStrings
                         .MetadataExchangeStrings
@@ -1199,8 +1183,7 @@ namespace System.ServiceModel
             else
             {
                 if (!Uri.TryCreate(address, UriKind.Absolute, out uri))
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new XmlException(
                                 SR.GetString(
@@ -1236,8 +1219,7 @@ namespace System.ServiceModel
                     XD.Addressing10Dictionary.Namespace
                 )
             )
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         CreateXmlException(
                             reader,
@@ -1320,8 +1302,7 @@ namespace System.ServiceModel
             {
                 if (!Uri.TryCreate(address, UriKind.Absolute, out uri))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new XmlException(
                                 SR.GetString(
@@ -1378,8 +1359,7 @@ namespace System.ServiceModel
 
             if (addressingVersion == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("addressingVersion");
             }
 
@@ -1397,8 +1377,7 @@ namespace System.ServiceModel
             }
             else
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(
                         "addressingVersion",
                         SR.GetString(SR.AddressingVersionNotSupported, addressingVersion)
@@ -1424,8 +1403,7 @@ namespace System.ServiceModel
             }
             else if (isNone)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument("addressingVersion", SR.GetString(SR.SFxNone2004));
             }
             else
@@ -1486,8 +1464,7 @@ namespace System.ServiceModel
                 {
                     if (reader.NamespaceURI == AddressingVersion.WSAddressingAugust2004.Namespace)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 CreateXmlException(
                                     reader,
@@ -1563,8 +1540,7 @@ namespace System.ServiceModel
                 {
                     if (reader.NamespaceURI == AddressingVersion.WSAddressing10.Namespace)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 CreateXmlException(
                                     reader,
@@ -1613,8 +1589,7 @@ namespace System.ServiceModel
             }
             if (addressingVersion == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("addressingVersion");
             }
             if (localName == null)
@@ -1659,8 +1634,7 @@ namespace System.ServiceModel
             }
             if (addressingVersion == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("addressingVersion");
             }
             if (localName == null)

@@ -47,8 +47,7 @@ namespace Internal.TypeSystem
         /// </summary>
         public int ComputeGenericInstanceHashCode(int genericDefinitionHashCode)
         {
-            return Internal
-                .NativeFormat
+            return Internal.NativeFormat
                 .TypeHashingAlgorithms
                 .ComputeGenericInstanceHashCode(genericDefinitionHashCode, _genericParameters);
         }

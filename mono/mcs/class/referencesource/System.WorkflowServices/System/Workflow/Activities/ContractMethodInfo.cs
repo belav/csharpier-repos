@@ -34,8 +34,7 @@ namespace System.Workflow.Activities
             }
             if (string.IsNullOrEmpty(operationInfo.Name))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(
                         "operationInfo",
                         SR2.GetString(SR2.Error_OperationNameNotSpecified)
@@ -107,8 +106,7 @@ namespace System.Workflow.Activities
             get
             {
 #pragma warning suppress 56503
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new NotImplementedException(SR2.GetString(SR2.Error_RuntimeNotSupported))
                     );
@@ -149,8 +147,7 @@ namespace System.Workflow.Activities
 
         public override MethodInfo GetBaseDefinition()
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(new NotImplementedException());
         }
 
@@ -186,8 +183,7 @@ namespace System.Workflow.Activities
             CultureInfo culture
         )
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(
                     new NotImplementedException(SR2.GetString(SR2.Error_RuntimeNotSupported))
                 );

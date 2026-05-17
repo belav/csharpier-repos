@@ -728,9 +728,8 @@ namespace System.Reflection.Tests
         public static void TestComImportPseudoCustomAttribute()
         {
             Type t = typeof(ClassWithComImport).Project();
-            CustomAttributeData cad = t.CustomAttributes.Single(c =>
-                c.AttributeType == typeof(ComImportAttribute).Project()
-            );
+            CustomAttributeData cad = t.CustomAttributes
+                .Single(c => c.AttributeType == typeof(ComImportAttribute).Project());
             Assert.Equal(0, cad.ConstructorArguments.Count);
             Assert.Equal(0, cad.NamedArguments.Count);
         }
@@ -743,18 +742,16 @@ namespace System.Reflection.Tests
 
             {
                 FieldInfo f = t.GetField("X");
-                CustomAttributeData cad = f.CustomAttributes.Single(c =>
-                    c.AttributeType == typeof(FieldOffsetAttribute).Project()
-                );
+                CustomAttributeData cad = f.CustomAttributes
+                    .Single(c => c.AttributeType == typeof(FieldOffsetAttribute).Project());
                 FieldOffsetAttribute foa = cad.UnprojectAndInstantiate<FieldOffsetAttribute>();
                 Assert.Equal(42, foa.Value);
             }
 
             {
                 FieldInfo f = t.GetField("Y");
-                CustomAttributeData cad = f.CustomAttributes.Single(c =>
-                    c.AttributeType == typeof(FieldOffsetAttribute).Project()
-                );
+                CustomAttributeData cad = f.CustomAttributes
+                    .Single(c => c.AttributeType == typeof(FieldOffsetAttribute).Project());
                 FieldOffsetAttribute foa = cad.UnprojectAndInstantiate<FieldOffsetAttribute>();
                 Assert.Equal(65, foa.Value);
             }

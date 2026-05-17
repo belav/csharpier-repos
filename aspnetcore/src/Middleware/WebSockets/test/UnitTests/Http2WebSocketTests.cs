@@ -41,8 +41,7 @@ public class Http2WebSocketTests
         var result = await testServer.SendAsync(httpContext =>
         {
             httpContext.Request.Method = HttpMethods.Connect;
-            httpContext
-                .Features
+            httpContext.Features
                 .Set<IHttpExtendedConnectFeature>(
                     new ConnectFeature() { IsExtendedConnect = true, Protocol = "WebSocket" }
                 );

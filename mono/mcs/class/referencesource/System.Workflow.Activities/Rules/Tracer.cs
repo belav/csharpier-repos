@@ -44,22 +44,19 @@ namespace System.Workflow.Activities.Rules
 
         internal void StartRuleSet()
         {
-            WorkflowActivityTrace
-                .Rules
+            WorkflowActivityTrace.Rules
                 .TraceEvent(TraceEventType.Information, 0, traceRuleSetEvaluate, tracePrefix);
         }
 
         internal void StartRule(string ruleName)
         {
-            WorkflowActivityTrace
-                .Rules
+            WorkflowActivityTrace.Rules
                 .TraceEvent(TraceEventType.Verbose, 0, traceRuleEvaluate, tracePrefix, ruleName);
         }
 
         internal void RuleResult(string ruleName, bool result)
         {
-            WorkflowActivityTrace
-                .Rules
+            WorkflowActivityTrace.Rules
                 .TraceEvent(
                     TraceEventType.Information,
                     0,
@@ -72,8 +69,7 @@ namespace System.Workflow.Activities.Rules
 
         internal void StartActions(string ruleName, bool result)
         {
-            WorkflowActivityTrace
-                .Rules
+            WorkflowActivityTrace.Rules
                 .TraceEvent(
                     TraceEventType.Verbose,
                     0,
@@ -86,8 +82,7 @@ namespace System.Workflow.Activities.Rules
 
         internal void TraceUpdate(string ruleName, string otherName)
         {
-            WorkflowActivityTrace
-                .Rules
+            WorkflowActivityTrace.Rules
                 .TraceEvent(
                     TraceEventType.Verbose,
                     0,
@@ -121,8 +116,7 @@ namespace System.Workflow.Activities.Rules
         )
         {
             foreach (string symbol in symbols)
-                WorkflowActivityTrace
-                    .Rules
+                WorkflowActivityTrace.Rules
                     .TraceEvent(
                         TraceEventType.Verbose,
                         0,
@@ -160,8 +154,7 @@ namespace System.Workflow.Activities.Rules
         )
         {
             foreach (int r in triggeredRules)
-                WorkflowActivityTrace
-                    .Rules
+                WorkflowActivityTrace.Rules
                     .TraceEvent(
                         TraceEventType.Verbose,
                         0,

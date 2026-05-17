@@ -19,8 +19,7 @@ public class Test72162
             String strOut = dblTestValues[i].ToString("G4");
             if (!strOut.Equals(strExpectedValues[i]))
             {
-                TestLibrary
-                    .Logging
+                TestLibrary.Logging
                     .WriteLine(
                         "Error: Formatting number '"
                             + dblTestValues[i].ToString()

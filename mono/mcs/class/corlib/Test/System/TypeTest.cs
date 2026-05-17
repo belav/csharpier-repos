@@ -304,8 +304,7 @@ namespace MonoTests.System
             AssemblyName assemblyName = new AssemblyName();
             assemblyName.Name = ASSEMBLY_NAME;
 #if !MONOTOUCH && !FULL_AOT_RUNTIME
-            var assembly = AppDomain
-                .CurrentDomain
+            var assembly = AppDomain.CurrentDomain
                 .DefineDynamicAssembly(
                     assemblyName,
                     AssemblyBuilderAccess.RunAndSave,

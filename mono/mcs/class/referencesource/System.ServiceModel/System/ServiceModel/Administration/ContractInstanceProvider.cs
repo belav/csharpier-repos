@@ -375,8 +375,7 @@ namespace System.ServiceModel.Administration
                 ContractDescription contractDescription;
                 UpdateContracts();
                 if (
-                    ContractInstanceProvider
-                        .knownContracts
+                    ContractInstanceProvider.knownContracts
                         .TryGetValue(contractName, out contractDescription)
                 )
                 {

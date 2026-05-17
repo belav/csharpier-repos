@@ -14,8 +14,7 @@ namespace System.Net.Http.Formatting.Parsers
         [Fact]
         public void TypeIsCorrect()
         {
-            Assert
-                .Type
+            Assert.Type
                 .HasProperties<InternetMessageFormatHeaderParser>(
                     TypeAssert.TypeProperties.IsClass
                 );

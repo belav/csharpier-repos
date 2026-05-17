@@ -56,8 +56,7 @@ namespace System.Xml
             if (remaining - size <= 0)
             {
                 remaining = 0;
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new XmlException(SR.GetString(SR.MtomBufferQuotaExceeded, maxBuffer))
                     );
@@ -76,8 +75,7 @@ namespace System.Xml
             for (int i = 0; i < encodings.Length; i++)
             {
                 if (encodings[i] == null)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgumentNull(
                             String.Format(CultureInfo.InvariantCulture, "encodings[{0}]", i)
                         );
@@ -90,8 +88,7 @@ namespace System.Xml
         void CheckContentType(string contentType)
         {
             if (contentType != null && contentType.Length == 0)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentException(
                             SR.GetString(SR.MtomContentTypeInvalid),
@@ -169,8 +166,7 @@ namespace System.Xml
                 );
                 stream = messageReader.GetContentStream();
                 if (stream == null)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new XmlException(SR.GetString(SR.MtomMessageInvalidContent))
                         );
@@ -227,8 +223,7 @@ namespace System.Xml
         void ReadMessageMimeVersionHeader(MimeVersionHeader header)
         {
             if (header != null && header.Version != MimeVersionHeader.Default.Version)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new XmlException(
                             SR.GetString(
@@ -248,8 +243,7 @@ namespace System.Xml
         )
         {
             if (header == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new XmlException(SR.GetString(SR.MtomMessageContentTypeNotFound))
                     );
@@ -266,8 +260,7 @@ namespace System.Xml
                     StringComparison.OrdinalIgnoreCase
                 ) != 0
             )
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new XmlException(
                             SR.GetString(
@@ -283,8 +276,7 @@ namespace System.Xml
                 !header.Parameters.TryGetValue(MtomGlobals.TypeParam, out type)
                 || MtomGlobals.XopType != type
             )
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new XmlException(
                             SR.GetString(SR.MtomMessageNotApplicationXopXml, MtomGlobals.XopType)
@@ -292,8 +284,7 @@ namespace System.Xml
                     );
 
             if (!header.Parameters.TryGetValue(MtomGlobals.BoundaryParam, out boundary))
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new XmlException(
                             SR.GetString(
@@ -303,8 +294,7 @@ namespace System.Xml
                         )
                     );
             if (!MailBnfHelper.IsValidMimeBoundary(boundary))
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new XmlException(SR.GetString(SR.MtomBoundaryInvalid, boundary))
                     );
@@ -323,8 +313,7 @@ namespace System.Xml
         )
         {
             if (header == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new XmlException(SR.GetString(SR.MtomRootContentTypeNotFound))
                     );
@@ -341,8 +330,7 @@ namespace System.Xml
                     StringComparison.OrdinalIgnoreCase
                 ) != 0
             )
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new XmlException(
                             SR.GetString(
@@ -359,8 +347,7 @@ namespace System.Xml
                 || charset == null
                 || charset.Length == 0
             )
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new XmlException(
                             SR.GetString(
@@ -433,8 +420,7 @@ namespace System.Xml
                             expectedCharSetStr.Append(" | ");
                         expectedCharSetStr.Append(encodings[i].WebName);
                     }
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new XmlException(
                                 SR.GetString(
@@ -455,8 +441,7 @@ namespace System.Xml
                     || rootType == null
                     || rootType.Length == 0
                 )
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new XmlException(
                                 SR.GetString(
@@ -466,8 +451,7 @@ namespace System.Xml
                             )
                         );
                 if (rootType != expectedType)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new XmlException(
                                 SR.GetString(SR.MtomRootUnexpectedType, rootType, expectedType)
@@ -482,8 +466,7 @@ namespace System.Xml
         void CheckContentTransferEncodingOnRoot(ContentTransferEncodingHeader header)
         {
             if (header != null && header.ContentTransferEncoding == ContentTransferEncoding.Other)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new XmlException(
                             SR.GetString(
@@ -500,8 +483,7 @@ namespace System.Xml
         void CheckContentTransferEncodingOnBinaryPart(ContentTransferEncodingHeader header)
         {
             if (header == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new XmlException(
                             SR.GetString(
@@ -511,8 +493,7 @@ namespace System.Xml
                         )
                     );
             else if (header.ContentTransferEncoding != ContentTransferEncoding.Binary)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new XmlException(
                             SR.GetString(
@@ -531,8 +512,7 @@ namespace System.Xml
                 if (startUri.EndsWith(">", StringComparison.Ordinal))
                     return startUri;
                 else
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new XmlException(SR.GetString(SR.MtomInvalidStartUri, startUri))
                         );
@@ -564,8 +544,7 @@ namespace System.Xml
                         )
                             uri = xmlReader.Value;
                         else if (xmlReader.NamespaceURI == MtomGlobals.XopIncludeNamespace)
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
                                     new XmlException(
                                         SR.GetString(
@@ -577,8 +556,7 @@ namespace System.Xml
                                 );
                     }
                     if (uri == null)
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new XmlException(
                                     SR.GetString(
@@ -614,8 +592,7 @@ namespace System.Xml
                                 xmlReader.IsStartElement()
                                 && xmlReader.NamespaceURI == MtomGlobals.XopIncludeNamespace
                             )
-                                throw DiagnosticUtility
-                                    .ExceptionUtility
+                                throw DiagnosticUtility.ExceptionUtility
                                     .ThrowHelperError(
                                         new XmlException(
                                             SR.GetString(
@@ -661,8 +638,7 @@ namespace System.Xml
             MimePart part = null;
 
             if (uri == null || uri.Length == 0)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new XmlException(SR.GetString(SR.MtomInvalidEmptyURI)));
 
             string contentID = null;
@@ -676,15 +652,13 @@ namespace System.Xml
                 contentID = uri;
 
             if (contentID == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new XmlException(SR.GetString(SR.MtomInvalidCIDUri, uri)));
 
             if (mimeParts != null && mimeParts.TryGetValue(contentID, out part))
             {
                 if (part.ReferencedFromInfoset)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new XmlException(
                                 SR.GetString(SR.MtomMimePartReferencedMoreThanOnce, contentID)
@@ -702,8 +676,7 @@ namespace System.Xml
                     );
                     Stream contentStream = mimeReader.GetContentStream();
                     if (contentStream == null)
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new XmlException(
                                     SR.GetString(SR.MtomMessageInvalidContentInMimePart)
@@ -733,8 +706,7 @@ namespace System.Xml
                     mimeParts.Add(currentContentID, currentPart);
 
                     if (mimeParts.Count > maxMimeParts)
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new XmlException(
                                     SR.GetString(
@@ -752,8 +724,7 @@ namespace System.Xml
                 }
 
                 if (part == null)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new XmlException(SR.GetString(SR.MtomPartNotFound, uri)));
             }
 
@@ -766,8 +737,7 @@ namespace System.Xml
             MimePart part = null;
 
             if (!mimeReader.ReadNextPart())
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new XmlException(SR.GetString(SR.MtomRootPartNotFound)));
 
             MimeHeaders headers = mimeReader.ReadHeaders(
@@ -776,8 +746,7 @@ namespace System.Xml
             );
             Stream contentStream = mimeReader.GetContentStream();
             if (contentStream == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new XmlException(SR.GetString(SR.MtomMessageInvalidContentInMimePart))
                     );
@@ -1443,8 +1412,7 @@ namespace System.Xml
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("buffer");
 
                 if (offset < 0)
-                    throw System
-                        .Runtime
+                    throw System.Runtime
                         .Serialization
                         .DiagnosticUtility
                         .ExceptionUtility
@@ -1455,8 +1423,7 @@ namespace System.Xml
                             )
                         );
                 if (offset > buffer.Length)
-                    throw System
-                        .Runtime
+                    throw System.Runtime
                         .Serialization
                         .DiagnosticUtility
                         .ExceptionUtility
@@ -1467,8 +1434,7 @@ namespace System.Xml
                             )
                         );
                 if (count < 0)
-                    throw System
-                        .Runtime
+                    throw System.Runtime
                         .Serialization
                         .DiagnosticUtility
                         .ExceptionUtility
@@ -1479,8 +1445,7 @@ namespace System.Xml
                             )
                         );
                 if (count > buffer.Length - offset)
-                    throw System
-                        .Runtime
+                    throw System.Runtime
                         .Serialization
                         .DiagnosticUtility
                         .ExceptionUtility
@@ -1533,8 +1498,7 @@ namespace System.Xml
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("buffer");
 
                 if (offset < 0)
-                    throw System
-                        .Runtime
+                    throw System.Runtime
                         .Serialization
                         .DiagnosticUtility
                         .ExceptionUtility
@@ -1545,8 +1509,7 @@ namespace System.Xml
                             )
                         );
                 if (offset > buffer.Length)
-                    throw System
-                        .Runtime
+                    throw System.Runtime
                         .Serialization
                         .DiagnosticUtility
                         .ExceptionUtility
@@ -1557,8 +1520,7 @@ namespace System.Xml
                             )
                         );
                 if (count < 0)
-                    throw System
-                        .Runtime
+                    throw System.Runtime
                         .Serialization
                         .DiagnosticUtility
                         .ExceptionUtility
@@ -1569,8 +1531,7 @@ namespace System.Xml
                             )
                         );
                 if (count > buffer.Length - offset)
-                    throw System
-                        .Runtime
+                    throw System.Runtime
                         .Serialization
                         .DiagnosticUtility
                         .ExceptionUtility
@@ -1621,8 +1582,7 @@ namespace System.Xml
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("buffer");
 
                 if (offset < 0)
-                    throw System
-                        .Runtime
+                    throw System.Runtime
                         .Serialization
                         .DiagnosticUtility
                         .ExceptionUtility
@@ -1633,8 +1593,7 @@ namespace System.Xml
                             )
                         );
                 if (offset > buffer.Length)
-                    throw System
-                        .Runtime
+                    throw System.Runtime
                         .Serialization
                         .DiagnosticUtility
                         .ExceptionUtility
@@ -1645,8 +1604,7 @@ namespace System.Xml
                             )
                         );
                 if (count < 0)
-                    throw System
-                        .Runtime
+                    throw System.Runtime
                         .Serialization
                         .DiagnosticUtility
                         .ExceptionUtility
@@ -1657,8 +1615,7 @@ namespace System.Xml
                             )
                         );
                 if (count > buffer.Length - offset)
-                    throw System
-                        .Runtime
+                    throw System.Runtime
                         .Serialization
                         .DiagnosticUtility
                         .ExceptionUtility
@@ -1689,8 +1646,7 @@ namespace System.Xml
                         }
                         catch (FormatException e) // Wrap format exceptions from decoding document contents
                         {
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(new XmlException(e.Message, e));
                         }
                     }
@@ -1726,8 +1682,7 @@ namespace System.Xml
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("chars");
 
                 if (offset < 0)
-                    throw System
-                        .Runtime
+                    throw System.Runtime
                         .Serialization
                         .DiagnosticUtility
                         .ExceptionUtility
@@ -1738,8 +1693,7 @@ namespace System.Xml
                             )
                         );
                 if (offset > chars.Length)
-                    throw System
-                        .Runtime
+                    throw System.Runtime
                         .Serialization
                         .DiagnosticUtility
                         .ExceptionUtility
@@ -1750,8 +1704,7 @@ namespace System.Xml
                             )
                         );
                 if (count < 0)
-                    throw System
-                        .Runtime
+                    throw System.Runtime
                         .Serialization
                         .DiagnosticUtility
                         .ExceptionUtility
@@ -1762,8 +1715,7 @@ namespace System.Xml
                             )
                         );
                 if (count > chars.Length - offset)
-                    throw System
-                        .Runtime
+                    throw System.Runtime
                         .Serialization
                         .DiagnosticUtility
                         .ExceptionUtility
@@ -2204,8 +2156,7 @@ namespace System.Xml
         public Stream GetContentStream()
         {
             if (getContentStreamCalled)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(SR.MimeMessageGetContentStreamCalledAlready)
@@ -2328,8 +2279,7 @@ namespace System.Xml
                 }
             }
 
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(new FormatException(SR.GetString(SR.MimeReaderTruncated)));
         }
 
@@ -2520,11 +2470,8 @@ namespace System.Xml
                 )
                     this.matchBuffer = new byte[this.delimitter.Length - read];
 
-                int matched = this.stream.ReadBlock(
-                    this.matchBuffer,
-                    0,
-                    this.delimitter.Length - read
-                );
+                int matched = this.stream
+                    .ReadBlock(this.matchBuffer, 0, this.delimitter.Length - read);
 
                 if (MatchRemainder(read, matched))
                 {
@@ -2602,8 +2549,7 @@ namespace System.Xml
 #pragma warning suppress 56503 // Microsoft, required by the XmlReader
                 get
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new NotSupportedException(
                                 SR.GetString(SR.SeekNotSupportedOnStream, this.GetType().FullName)
@@ -2617,8 +2563,7 @@ namespace System.Xml
                 get
                 {
 #pragma warning suppress 56503 // Microsoft, required by the XmlReader
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new NotSupportedException(
                                 SR.GetString(SR.SeekNotSupportedOnStream, this.GetType().FullName)
@@ -2627,8 +2572,7 @@ namespace System.Xml
                 }
                 set
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new NotSupportedException(
                                 SR.GetString(SR.SeekNotSupportedOnStream, this.GetType().FullName)
@@ -2645,8 +2589,7 @@ namespace System.Xml
                 object state
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new NotSupportedException(
                             SR.GetString(SR.WriteNotSupportedOnStream, this.GetType().FullName)
@@ -2661,8 +2604,7 @@ namespace System.Xml
 
             public override void EndWrite(IAsyncResult asyncResult)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new NotSupportedException(
                             SR.GetString(SR.WriteNotSupportedOnStream, this.GetType().FullName)
@@ -2672,8 +2614,7 @@ namespace System.Xml
 
             public override void Flush()
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new NotSupportedException(
                             SR.GetString(SR.WriteNotSupportedOnStream, this.GetType().FullName)
@@ -2687,8 +2628,7 @@ namespace System.Xml
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("buffer");
 
                 if (offset < 0)
-                    throw System
-                        .Runtime
+                    throw System.Runtime
                         .Serialization
                         .DiagnosticUtility
                         .ExceptionUtility
@@ -2699,8 +2639,7 @@ namespace System.Xml
                             )
                         );
                 if (offset > buffer.Length)
-                    throw System
-                        .Runtime
+                    throw System.Runtime
                         .Serialization
                         .DiagnosticUtility
                         .ExceptionUtility
@@ -2711,8 +2650,7 @@ namespace System.Xml
                             )
                         );
                 if (count < 0)
-                    throw System
-                        .Runtime
+                    throw System.Runtime
                         .Serialization
                         .DiagnosticUtility
                         .ExceptionUtility
@@ -2723,8 +2661,7 @@ namespace System.Xml
                             )
                         );
                 if (count > buffer.Length - offset)
-                    throw System
-                        .Runtime
+                    throw System.Runtime
                         .Serialization
                         .DiagnosticUtility
                         .ExceptionUtility
@@ -2743,8 +2680,7 @@ namespace System.Xml
 
             public override long Seek(long offset, SeekOrigin origin)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new NotSupportedException(
                             SR.GetString(SR.SeekNotSupportedOnStream, this.GetType().FullName)
@@ -2754,8 +2690,7 @@ namespace System.Xml
 
             public override void SetLength(long value)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new NotSupportedException(
                             SR.GetString(SR.WriteNotSupportedOnStream, this.GetType().FullName)
@@ -2765,8 +2700,7 @@ namespace System.Xml
 
             public override void Write(byte[] buffer, int offset, int count)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new NotSupportedException(
                             SR.GetString(SR.WriteNotSupportedOnStream, this.GetType().FullName)
@@ -2873,8 +2807,7 @@ namespace System.Xml
 
             MimeHeader existingHeader;
             if (headers.TryGetValue(header.Name, out existingHeader))
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new FormatException(
                             SR.GetString(SR.MimeReaderHeaderAlreadyExists, header.Name)
@@ -2976,8 +2909,7 @@ namespace System.Xml
                 this.parameters = new Dictionary<string, string>();
                 this.mediaType = MailBnfHelper.ReadToken(Value, ref offset, null);
                 if (offset >= Value.Length || Value[offset++] != '/')
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new FormatException(SR.GetString(SR.MimeContentTypeHeaderInvalid))
                         );
@@ -2986,8 +2918,7 @@ namespace System.Xml
                 while (MailBnfHelper.SkipCFWS(Value, ref offset))
                 {
                     if (offset >= Value.Length || Value[offset++] != ';')
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new FormatException(SR.GetString(SR.MimeContentTypeHeaderInvalid))
                             );
@@ -3001,8 +2932,7 @@ namespace System.Xml
                         null
                     );
                     if (paramAttribute == null || offset >= Value.Length || Value[offset++] != '=')
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new FormatException(SR.GetString(SR.MimeContentTypeHeaderInvalid))
                             );
@@ -3031,8 +2961,7 @@ namespace System.Xml
                             }
                             else
                             {
-                                throw DiagnosticUtility
-                                    .ExceptionUtility
+                                throw DiagnosticUtility.ExceptionUtility
                                     .ThrowHelperError(
                                         new FormatException(
                                             SR.GetString(SR.MimeContentTypeHeaderInvalid)
@@ -3049,8 +2978,7 @@ namespace System.Xml
                                 || startInfoOffset >= startInfo.Length
                                 || startInfo[startInfoOffset++] != '='
                             )
-                                throw DiagnosticUtility
-                                    .ExceptionUtility
+                                throw DiagnosticUtility.ExceptionUtility
                                     .ThrowHelperError(
                                         new FormatException(
                                             SR.GetString(SR.MimeContentTypeHeaderInvalid)
@@ -3194,8 +3122,7 @@ namespace System.Xml
                 int offset = 0;
 
                 if (!MailBnfHelper.SkipCFWS(Value, ref offset))
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new FormatException(SR.GetString(SR.MimeVersionHeaderInvalid))
                         );
@@ -3210,8 +3137,7 @@ namespace System.Xml
                         || Value[offset++] != '.'
                     ) || !MailBnfHelper.SkipCFWS(Value, ref offset)
                 )
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new FormatException(SR.GetString(SR.MimeVersionHeaderInvalid))
                         );
@@ -3331,8 +3257,7 @@ namespace System.Xml
                                         {
                                             ptr++;
                                             if (ptr >= end || *ptr != '\n')
-                                                throw DiagnosticUtility
-                                                    .ExceptionUtility
+                                                throw DiagnosticUtility.ExceptionUtility
                                                     .ThrowHelperError(
                                                         new FormatException(
                                                             SR.GetString(
@@ -3343,8 +3268,7 @@ namespace System.Xml
                                             goto case ReadState.EOF;
                                         }
 
-                                        throw DiagnosticUtility
-                                            .ExceptionUtility
+                                        throw DiagnosticUtility.ExceptionUtility
                                             .ThrowHelperError(
                                                 new FormatException(
                                                     SR.GetString(
@@ -3389,8 +3313,7 @@ namespace System.Xml
                                 }
                                 else if (*ptr == (byte)'\n')
                                 {
-                                    throw DiagnosticUtility
-                                        .ExceptionUtility
+                                    throw DiagnosticUtility.ExceptionUtility
                                         .ThrowHelperError(
                                             new FormatException(
                                                 SR.GetString(SR.MimeReaderMalformedHeader)
@@ -3409,8 +3332,7 @@ namespace System.Xml
                             if (ptr < end)
                             {
                                 if (*ptr != (byte)'\n')
-                                    throw DiagnosticUtility
-                                        .ExceptionUtility
+                                    throw DiagnosticUtility.ExceptionUtility
                                         .ThrowHelperError(
                                             new FormatException(
                                                 SR.GetString(SR.MimeReaderMalformedHeader)
@@ -3450,8 +3372,7 @@ namespace System.Xml
             if (maxOffset == 0)
             {
                 if (readState != ReadState.ReadWS && readState != ReadState.ReadValue)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new FormatException(SR.GetString(SR.MimeReaderMalformedHeader))
                         );
@@ -3469,8 +3390,7 @@ namespace System.Xml
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("stream");
 
             if (readState != ReadState.EOF)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(SR.MimeReaderResetCalledBeforeEOF)
@@ -3552,8 +3472,7 @@ namespace System.Xml
             get
             {
 #pragma warning suppress 56503 // Microsoft, required by the Stream contract
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new NotSupportedException(
                             SR.GetString(SR.SeekNotSupportedOnStream, stream.GetType().FullName)
@@ -3567,8 +3486,7 @@ namespace System.Xml
             get
             {
 #pragma warning suppress 56503 // Microsoft, required by the Stream contract
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new NotSupportedException(
                             SR.GetString(SR.SeekNotSupportedOnStream, stream.GetType().FullName)
@@ -3577,8 +3495,7 @@ namespace System.Xml
             }
             set
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new NotSupportedException(
                             SR.GetString(SR.SeekNotSupportedOnStream, stream.GetType().FullName)
@@ -3596,8 +3513,7 @@ namespace System.Xml
         )
         {
             if (!CanRead)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new NotSupportedException(
                             SR.GetString(SR.ReadNotSupportedOnStream, stream.GetType().FullName)
@@ -3615,8 +3531,7 @@ namespace System.Xml
             object state
         )
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(
                     new NotSupportedException(
                         SR.GetString(SR.WriteNotSupportedOnStream, stream.GetType().FullName)
@@ -3632,8 +3547,7 @@ namespace System.Xml
         public override int EndRead(IAsyncResult asyncResult)
         {
             if (!CanRead)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new NotSupportedException(
                             SR.GetString(SR.ReadNotSupportedOnStream, stream.GetType().FullName)
@@ -3645,8 +3559,7 @@ namespace System.Xml
 
         public override void EndWrite(IAsyncResult asyncResult)
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(
                     new NotSupportedException(
                         SR.GetString(SR.WriteNotSupportedOnStream, stream.GetType().FullName)
@@ -3662,8 +3575,7 @@ namespace System.Xml
         public override int Read(byte[] buffer, int offset, int count)
         {
             if (!CanRead)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new NotSupportedException(
                             SR.GetString(SR.ReadNotSupportedOnStream, stream.GetType().FullName)
@@ -3674,8 +3586,7 @@ namespace System.Xml
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("buffer");
 
             if (offset < 0)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -3686,8 +3597,7 @@ namespace System.Xml
                         )
                     );
             if (offset > buffer.Length)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -3698,8 +3608,7 @@ namespace System.Xml
                         )
                     );
             if (count < 0)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -3710,8 +3619,7 @@ namespace System.Xml
                         )
                     );
             if (count > buffer.Length - offset)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -3805,8 +3713,7 @@ namespace System.Xml
 
         public override long Seek(long offset, SeekOrigin origin)
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(
                     new NotSupportedException(
                         SR.GetString(SR.SeekNotSupportedOnStream, stream.GetType().FullName)
@@ -3816,8 +3723,7 @@ namespace System.Xml
 
         public override void SetLength(long value)
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(
                     new NotSupportedException(
                         SR.GetString(SR.SeekNotSupportedOnStream, stream.GetType().FullName)
@@ -3827,8 +3733,7 @@ namespace System.Xml
 
         public override void Write(byte[] buffer, int offset, int count)
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(
                     new NotSupportedException(
                         SR.GetString(SR.WriteNotSupportedOnStream, stream.GetType().FullName)
@@ -3926,8 +3831,7 @@ namespace System.Xml
             for (; offset < data.Length; offset++)
             {
                 if (data[offset] > 127)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new FormatException(
                                 SR.GetString(
@@ -3970,8 +3874,7 @@ namespace System.Xml
                 }
                 else if (!(data[offset] < s_fqtext.Length && s_fqtext[data[offset]]))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new FormatException(
                                 SR.GetString(
@@ -3983,8 +3886,7 @@ namespace System.Xml
                         );
                 }
             }
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(new FormatException(SR.GetString(SR.MimeReaderMalformedHeader)));
         }
 
@@ -4018,8 +3920,7 @@ namespace System.Xml
             {
                 if (data[offset] > s_ttext.Length)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new FormatException(
                                 SR.GetString(

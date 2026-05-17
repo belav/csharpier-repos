@@ -101,8 +101,7 @@ namespace System.Data.Metadata.Edm
             Debug.Assert(clrType != null, "clrType != null");
             Debug.Assert(clrType.IsEnum, "enum type expected");
 
-            ClrProviderManifest
-                .Instance
+            ClrProviderManifest.Instance
                 .TryGetPrimitiveType(clrType.GetEnumUnderlyingType(), out _underlyingType);
 
             Debug.Assert(_underlyingType != null, "only primitive types expected here.");

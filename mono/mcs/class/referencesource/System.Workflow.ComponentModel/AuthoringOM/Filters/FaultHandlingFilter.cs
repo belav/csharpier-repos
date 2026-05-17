@@ -106,20 +106,17 @@ namespace System.Workflow.ComponentModel
                 if (
                     context.Activity.HasPrimaryClosed
                     && !(bool)
-                        context
-                            .Activity
+                        context.Activity
                             .GetValue(FaultAndCancellationHandlingFilter.FaultProcessedProperty)
                 )
                 {
-                    context
-                        .Activity
+                    context.Activity
                         .SetValue(FaultAndCancellationHandlingFilter.FaultProcessedProperty, true);
 
                     if (
                         context.Activity.WasExecuting
                         && context.Activity.ExecutionResult == ActivityExecutionResult.Faulted
-                        && context
-                            .Activity
+                        && context.Activity
                             .GetValue(ActivityExecutionContext.CurrentExceptionProperty) != null
                     )
                     {
@@ -233,8 +230,7 @@ namespace System.Workflow.ComponentModel
             }
             catch (Exception)
             {
-                context
-                    .Activity
+                context.Activity
                     .RemoveProperty(FaultAndCancellationHandlingFilter.FaultProcessedProperty);
                 throw;
             }

@@ -133,24 +133,20 @@ public class MigrationsScaffolder : IMigrationsScaffolder
             }
             else
             {
-                Dependencies
-                    .OperationReporter
+                Dependencies.OperationReporter
                     .WriteWarning(DesignStrings.ForeignMigrations(migrationNamespace));
             }
         }
 
         var modelSnapshot = Dependencies.MigrationsAssembly.ModelSnapshot;
-        var lastModel = Dependencies
-            .SnapshotModelProcessor
+        var lastModel = Dependencies.SnapshotModelProcessor
             .Process(modelSnapshot?.Model)
             ?.GetRelationalModel();
-        var upOperations = Dependencies
-            .MigrationsModelDiffer
+        var upOperations = Dependencies.MigrationsModelDiffer
             .GetDifferences(lastModel, Dependencies.Model.GetRelationalModel());
         var downOperations =
             upOperations.Count > 0
-                ? Dependencies
-                    .MigrationsModelDiffer
+                ? Dependencies.MigrationsModelDiffer
                     .GetDifferences(Dependencies.Model.GetRelationalModel(), lastModel)
                 : new List<MigrationOperation>();
         var migrationId = Dependencies.MigrationsIdGenerator.GenerateId(migrationName);
@@ -164,8 +160,7 @@ public class MigrationsScaffolder : IMigrationsScaffolder
             var lastModelSnapshotName = modelSnapshot.GetType().Name;
             if (lastModelSnapshotName != modelSnapshotName)
             {
-                Dependencies
-                    .OperationReporter
+                Dependencies.OperationReporter
                     .WriteVerbose(DesignStrings.ReusingSnapshotName(lastModelSnapshotName));
 
                 modelSnapshotName = lastModelSnapshotName;
@@ -267,8 +262,7 @@ public class MigrationsScaffolder : IMigrationsScaffolder
         var codeGenerator = Dependencies.MigrationsCodeGeneratorSelector.Select(language);
 
         IModel? model = null;
-        var migrations = Dependencies
-            .MigrationsAssembly
+        var migrations = Dependencies.MigrationsAssembly
             .Migrations
             .Select(m => Dependencies.MigrationsAssembly.CreateMigration(m.Value, _activeProvider))
             .ToList();
@@ -278,12 +272,10 @@ public class MigrationsScaffolder : IMigrationsScaffolder
             model = Dependencies.SnapshotModelProcessor.Process(migration.TargetModel);
 
             if (
-                !Dependencies
-                    .MigrationsModelDiffer
+                !Dependencies.MigrationsModelDiffer
                     .HasDifferences(
                         model.GetRelationalModel(),
-                        Dependencies
-                            .SnapshotModelProcessor
+                        Dependencies.SnapshotModelProcessor
                             .Process(modelSnapshot.Model)
                             .GetRelationalModel()
                     )
@@ -292,21 +284,17 @@ public class MigrationsScaffolder : IMigrationsScaffolder
                 var applied = false;
                 try
                 {
-                    applied = Dependencies
-                        .HistoryRepository
+                    applied = Dependencies.HistoryRepository
                         .GetAppliedMigrations()
                         .Any(e =>
-                            e.MigrationId.Equals(
-                                migration.GetId(),
-                                StringComparison.OrdinalIgnoreCase
-                            )
+                            e.MigrationId
+                                .Equals(migration.GetId(), StringComparison.OrdinalIgnoreCase)
                         );
                 }
                 catch (Exception ex) when (force)
                 {
                     Dependencies.OperationReporter.WriteVerbose(ex.ToString());
-                    Dependencies
-                        .OperationReporter
+                    Dependencies.OperationReporter
                         .WriteWarning(
                             DesignStrings.ForceRemoveMigration(migration.GetId(), ex.Message)
                         );
@@ -316,8 +304,7 @@ public class MigrationsScaffolder : IMigrationsScaffolder
                 {
                     if (force)
                     {
-                        Dependencies
-                            .Migrator
+                        Dependencies.Migrator
                             .Migrate(
                                 migrations.Count > 1
                                     ? migrations[^2].GetId()
@@ -336,16 +323,14 @@ public class MigrationsScaffolder : IMigrationsScaffolder
                 var migrationFile = TryGetProjectFile(projectDir, migrationFileName);
                 if (migrationFile != null)
                 {
-                    Dependencies
-                        .OperationReporter
+                    Dependencies.OperationReporter
                         .WriteInformation(DesignStrings.RemovingMigration(migration.GetId()));
                     File.Delete(migrationFile);
                     files.MigrationFile = migrationFile;
                 }
                 else
                 {
-                    Dependencies
-                        .OperationReporter
+                    Dependencies.OperationReporter
                         .WriteWarning(
                             DesignStrings.NoMigrationFile(
                                 migrationFileName,
@@ -367,8 +352,7 @@ public class MigrationsScaffolder : IMigrationsScaffolder
                 }
                 else
                 {
-                    Dependencies
-                        .OperationReporter
+                    Dependencies.OperationReporter
                         .WriteVerbose(DesignStrings.NoMigrationMetadataFile(migrationMetadataFile));
                 }
 
@@ -396,8 +380,7 @@ public class MigrationsScaffolder : IMigrationsScaffolder
             }
             else
             {
-                Dependencies
-                    .OperationReporter
+                Dependencies.OperationReporter
                     .WriteWarning(
                         DesignStrings.NoSnapshotFile(
                             modelSnapshotFileName,
@@ -474,8 +457,7 @@ public class MigrationsScaffolder : IMigrationsScaffolder
         File.WriteAllText(migrationFile, migration.MigrationCode, Encoding.UTF8);
         File.WriteAllText(migrationMetadataFile, migration.MetadataCode, Encoding.UTF8);
 
-        Dependencies
-            .OperationReporter
+        Dependencies.OperationReporter
             .WriteVerbose(DesignStrings.WritingSnapshot(modelSnapshotFile));
         Directory.CreateDirectory(modelSnapshotDirectory);
         File.WriteAllText(modelSnapshotFile, migration.SnapshotCode, Encoding.UTF8);
@@ -501,8 +483,7 @@ public class MigrationsScaffolder : IMigrationsScaffolder
             var lastNamespace = siblingType.Namespace ?? string.Empty;
             if (lastNamespace != defaultNamespace)
             {
-                Dependencies
-                    .OperationReporter
+                Dependencies.OperationReporter
                     .WriteVerbose(DesignStrings.ReusingNamespace(siblingType.ShortDisplayName()));
 
                 return lastNamespace;
@@ -535,8 +516,7 @@ public class MigrationsScaffolder : IMigrationsScaffolder
                 var lastDirectory = Path.GetDirectoryName(siblingPath)!;
                 if (!defaultDirectory.Equals(lastDirectory, StringComparison.OrdinalIgnoreCase))
                 {
-                    Dependencies
-                        .OperationReporter
+                    Dependencies.OperationReporter
                         .WriteVerbose(DesignStrings.ReusingNamespace(siblingFileName));
 
                     return lastDirectory;

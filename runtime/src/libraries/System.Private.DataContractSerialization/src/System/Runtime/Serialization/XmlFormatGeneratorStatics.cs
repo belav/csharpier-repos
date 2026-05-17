@@ -275,8 +275,7 @@ namespace System.Runtime.Serialization
             {
                 if (s_hashtableCtor == null)
                 {
-                    s_hashtableCtor = Globals
-                        .TypeOfHashtable
+                    s_hashtableCtor = Globals.TypeOfHashtable
                         .GetConstructor(Globals.ScanAllMembers, Type.EmptyTypes);
                     Debug.Assert(s_hashtableCtor != null);
                 }

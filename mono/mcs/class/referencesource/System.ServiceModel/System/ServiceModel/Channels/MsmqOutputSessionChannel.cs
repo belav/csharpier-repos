@@ -50,8 +50,7 @@ namespace System.ServiceModel.Channels
             }
 
             if (sessionGramSize > int.MaxValue)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(SR.MsmqSessionGramSizeMustBeInIntegerRange)
@@ -196,18 +195,18 @@ namespace System.ServiceModel.Channels
         void OnOpenCore(TimeSpan timeout)
         {
             if (null == Transaction.Current)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperCritical(
                         new InvalidOperationException(
                             SR.GetString(SR.MsmqTransactionCurrentRequired)
                         )
                     );
             this.associatedTx = Transaction.Current;
-            this.associatedTx.EnlistVolatile(
-                new TransactionEnlistment(this, this.associatedTx),
-                EnlistmentOptions.None
-            );
+            this.associatedTx
+                .EnlistVolatile(
+                    new TransactionEnlistment(this, this.associatedTx),
+                    EnlistmentOptions.None
+                );
             this.msmqQueue = new MsmqQueue(
                 this.Factory.AddressTranslator.UriToFormatName(this.RemoteAddress.Uri),
                 UnsafeNativeMethods.MQ_SEND_ACCESS
@@ -270,8 +269,7 @@ namespace System.ServiceModel.Channels
             if (this.associatedTx != Transaction.Current)
             {
                 this.Fault();
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperCritical(
                         new InvalidOperationException(SR.GetString(SR.MsmqSameTransactionExpected))
                     );
@@ -280,8 +278,7 @@ namespace System.ServiceModel.Channels
             if (TransactionStatus.Active != Transaction.Current.TransactionInformation.Status)
             {
                 this.Fault();
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperCritical(
                         new InvalidOperationException(SR.GetString(SR.MsmqTransactionNotActive))
                     );
@@ -336,12 +333,13 @@ namespace System.ServiceModel.Channels
         // Stick a message into a buffer
         ArraySegment<byte> EncodeMessage(Message message)
         {
-            ArraySegment<byte> messageData = this.encoder.WriteMessage(
-                message,
-                int.MaxValue,
-                this.Factory.BufferManager,
-                SessionEncoder.MaxMessageFrameSize
-            );
+            ArraySegment<byte> messageData = this.encoder
+                .WriteMessage(
+                    message,
+                    int.MaxValue,
+                    this.Factory.BufferManager,
+                    SessionEncoder.MaxMessageFrameSize
+                );
 
             return SessionEncoder.EncodeMessageFrame(messageData);
         }
@@ -378,8 +376,7 @@ namespace System.ServiceModel.Channels
                 if (this.channel.State != CommunicationState.Closed)
                 {
                     channel.Fault();
-                    Exception e = DiagnosticUtility
-                        .ExceptionUtility
+                    Exception e = DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(SR.MsmqSessionChannelsMustBeClosed)

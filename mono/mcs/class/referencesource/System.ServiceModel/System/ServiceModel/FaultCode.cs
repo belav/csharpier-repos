@@ -30,12 +30,10 @@ namespace System.ServiceModel
         public FaultCode(string name, string ns, FaultCode subCode)
         {
             if (name == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("name"));
             if (name.Length == 0)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentOutOfRangeException("name"));
 
             if (!string.IsNullOrEmpty(ns))
@@ -110,8 +108,7 @@ namespace System.ServiceModel
         public static FaultCode CreateReceiverFaultCode(FaultCode subCode)
         {
             if (subCode == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("subCode"));
             return new FaultCode("Receiver", subCode);
         }

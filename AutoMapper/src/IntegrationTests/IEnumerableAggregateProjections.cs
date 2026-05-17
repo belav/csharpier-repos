@@ -35,8 +35,7 @@ public class IEnumerableAggregateProjections
     {
         protected override void Seed(Context context)
         {
-            context
-                .Customers
+            context.Customers
                 .Add(
                     new Customer
                     {
@@ -69,8 +68,7 @@ public class IEnumerableAggregateProjections
         using (var context = new Context())
         {
             var result = ProjectTo<CustomerViewModel>(
-                    context
-                        .Customers
+                    context.Customers
                         .Select(customer => new CustomerItemCodes
                         {
                             ItemCodes = customer.Items.Select(item => item.Code),

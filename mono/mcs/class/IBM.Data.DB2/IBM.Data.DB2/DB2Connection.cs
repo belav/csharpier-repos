@@ -181,8 +181,7 @@ namespace IBM.Data.DB2
             this.Close();
 
             SetConnectionString(
-                connectionSettings
-                    .ConnectionString
+                connectionSettings.ConnectionString
                     .Replace(connectionSettings.DatabaseAlias, newDBName)
             );
 

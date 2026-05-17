@@ -29,8 +29,7 @@ namespace System.Web.Http.Tracing
             Contract.Assert(actionArguments != null);
             return String.Join(
                 ", ",
-                actionArguments
-                    .Keys
+                actionArguments.Keys
                     .Select<string, string>(
                         (k) =>
                             k + "=" + ValueToString(actionArguments[k], CultureInfo.CurrentCulture)

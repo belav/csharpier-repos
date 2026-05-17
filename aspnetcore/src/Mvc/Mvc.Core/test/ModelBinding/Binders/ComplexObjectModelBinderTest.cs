@@ -506,8 +506,7 @@ public class ComplexObjectModelBinderTest
         );
         var originalModel = bindingContext.Model;
 
-        var binders = bindingContext
-            .ModelMetadata
+        var binders = bindingContext.ModelMetadata
             .Properties
             .ToDictionary(
                 keySelector: item => item,
@@ -938,8 +937,7 @@ public class ComplexObjectModelBinderTest
             options =>
             {
                 var firstNameProperty = containerMetadata.Properties[nameof(model.FirstName)];
-                options
-                    .ModelBinderProviders
+                options.ModelBinderProviders
                     .Insert(
                         0,
                         new TestModelBinderProvider(
@@ -949,8 +947,7 @@ public class ComplexObjectModelBinderTest
                     );
 
                 var lastNameProperty = containerMetadata.Properties[nameof(model.LastName)];
-                options
-                    .ModelBinderProviders
+                options.ModelBinderProviders
                     .Insert(
                         0,
                         new TestModelBinderProvider(

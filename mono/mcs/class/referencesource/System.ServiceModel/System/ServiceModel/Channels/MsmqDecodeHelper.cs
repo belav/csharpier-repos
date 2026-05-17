@@ -152,8 +152,7 @@ namespace System.ServiceModel.Channels
                 }
 
                 if (
-                    !listener
-                        .MessageEncoderFactory
+                    !listener.MessageEncoderFactory
                         .Encoder
                         .IsContentTypeSupported(decoder.ContentType)
                 )
@@ -174,8 +173,7 @@ namespace System.ServiceModel.Channels
                 {
                     try
                     {
-                        message = listener
-                            .MessageEncoderFactory
+                        message = listener.MessageEncoderFactory
                             .Encoder
                             .ReadMessage(
                                 new ArraySegment<byte>(envelopeBuffer, 0, size),

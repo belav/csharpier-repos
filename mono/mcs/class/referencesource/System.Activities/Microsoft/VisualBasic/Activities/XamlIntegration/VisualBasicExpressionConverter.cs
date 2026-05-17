@@ -42,8 +42,7 @@ namespace Microsoft.VisualBasic.Activities.XamlIntegration
                 && xamlSchemaContextProvider.SchemaContext != null
             )
             {
-                xsCtxReferenceAssemblies = xamlSchemaContextProvider
-                    .SchemaContext
+                xsCtxReferenceAssemblies = xamlSchemaContextProvider.SchemaContext
                     .ReferenceAssemblies;
                 if (xsCtxReferenceAssemblies != null && xsCtxReferenceAssemblies.Count == 0)
                 {
@@ -169,8 +168,7 @@ namespace Microsoft.VisualBasic.Activities.XamlIntegration
                 if (match.Success)
                 {
                     mapping.ImportReferences = new HashSet<VisualBasicImportReference>();
-                    mapping
-                        .ImportReferences
+                    mapping.ImportReferences
                         .Add(
                             new VisualBasicImportReference
                             {
@@ -397,7 +395,8 @@ namespace Microsoft.VisualBasic.Activities.XamlIntegration
                 get
                 {
                     foreach (
-                        VisualBasicImportReference wrappedReference in this.wrappedMapping.ImportReferences
+                        VisualBasicImportReference wrappedReference in this.wrappedMapping
+                            .ImportReferences
                     )
                     {
                         yield return new ReadOnlyVisualBasicImportReference(wrappedReference);

@@ -34,8 +34,7 @@ public class Startup
 
         app.Run(context =>
         {
-            return context
-                .Response
+            return context.Response
                 .WriteAsync($"Rewritten Url: {context.Request.Path + context.Request.QueryString}");
         });
     }

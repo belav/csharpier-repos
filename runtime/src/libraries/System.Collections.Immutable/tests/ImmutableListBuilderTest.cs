@@ -85,8 +85,7 @@ namespace System.Collections.Immutable.Tests
         [Fact]
         public void EnumerateBuilderWhileMutating()
         {
-            ImmutableList<int>.Builder builder = ImmutableList<int>
-                .Empty
+            ImmutableList<int>.Builder builder = ImmutableList<int>.Empty
                 .AddRange(Enumerable.Range(1, 10))
                 .ToBuilder();
             Assert.Equal(Enumerable.Range(1, 10), builder);
@@ -458,10 +457,11 @@ namespace System.Collections.Immutable.Tests
             DebuggerAttributeInfo info = DebuggerAttributes.ValidateDebuggerTypeProxyProperties(
                 builder
             );
-            PropertyInfo itemProperty = info.Properties.Single(pr =>
-                pr.GetCustomAttribute<DebuggerBrowsableAttribute>().State
-                == DebuggerBrowsableState.RootHidden
-            );
+            PropertyInfo itemProperty = info.Properties
+                .Single(pr =>
+                    pr.GetCustomAttribute<DebuggerBrowsableAttribute>().State
+                    == DebuggerBrowsableState.RootHidden
+                );
             string[] items = itemProperty.GetValue(info.Instance) as string[];
             Assert.Equal(builder, items);
         }

@@ -49,8 +49,7 @@ namespace System.Data.Common.CommandTrees
                 DbExpressionValidator validator = new DbExpressionValidator(metadata, dataSpace);
                 validator.ValidateExpression(query, "query");
 
-                this._parameters = validator
-                    .Parameters
+                this._parameters = validator.Parameters
                     .Select(paramInfo => paramInfo.Value)
                     .ToList()
                     .AsReadOnly();
@@ -89,10 +88,8 @@ namespace System.Data.Common.CommandTrees
             {
                 this._parameters = ParameterRetriever.GetParameters(this);
             }
-            return this._parameters.Select(p => new KeyValuePair<string, TypeUsage>(
-                p.ParameterName,
-                p.ResultType
-            ));
+            return this._parameters
+                .Select(p => new KeyValuePair<string, TypeUsage>(p.ParameterName, p.ResultType));
         }
 
         internal override void DumpStructure(ExpressionDumper dumper)

@@ -175,8 +175,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
                 AddSynthesizedAttribute(
                     ref attributes,
-                    Manager
-                        .Compilation
+                    Manager.Compilation
                         .TrySynthesizeAttribute(
                             WellKnownMember.System_Diagnostics_DebuggerHiddenAttribute__ctor
                         )

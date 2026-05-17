@@ -313,8 +313,7 @@ namespace System.ServiceModel.Administration
                 }
                 catch (ArgumentException)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new WbemInvalidParameterException());
                 }
                 bFound = true;

@@ -87,8 +87,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UpgradeProject
             foreach (var diagnostic in diagnostics)
             {
                 if (
-                    diagnostic
-                        .Properties
+                    diagnostic.Properties
                         .TryGetValue(
                             DiagnosticPropertyConstants.RequiredLanguageVersion,
                             out var requiredVersion
@@ -116,8 +115,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UpgradeProject
                 );
                 var parseOptions = (CSharpParseOptions)project.ParseOptions!;
 
-                return project
-                    .Solution
+                return project.Solution
                     .WithProjectParseOptions(
                         project.Id,
                         parseOptions.WithLanguageVersion(parsedNewVersion)

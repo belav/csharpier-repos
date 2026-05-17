@@ -64,8 +64,7 @@ namespace System.ServiceModel.Security
             X509SecurityToken result = token as X509SecurityToken;
             if (result == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(
@@ -99,8 +98,7 @@ namespace System.ServiceModel.Security
                     return DXD.TrustDec2005Dictionary.TlsnegoValueTypeUri;
                 }
                 // Not supported
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new InvalidOperationException());
             }
         }
@@ -109,8 +107,7 @@ namespace System.ServiceModel.Security
         {
             if (this.serverTokenProvider == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(SR.GetString(SR.NoServerX509TokenProvider))
                     );
@@ -261,8 +258,7 @@ namespace System.ServiceModel.Security
             TlsSspiNegotiation tlsNegotiation = (TlsSspiNegotiation)sspiNegotiation;
             if (tlsNegotiation.IsValidContext == false)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperWarning(
                         new SecurityNegotiationException(SR.GetString(SR.InvalidSspiNegotiation))
                     );
@@ -277,8 +273,7 @@ namespace System.ServiceModel.Security
             if (clientCertificate == null)
             {
                 // isAnonymous is false. So, fail the negotiation
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperWarning(
                         new SecurityTokenValidationException(
                             SR.GetString(SR.ClientCertificateNotProvided)

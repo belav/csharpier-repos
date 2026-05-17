@@ -97,15 +97,13 @@ namespace System.Security.Cryptography.X509Certificates.Asn1
             int offset;
             ReadOnlySpan<byte> tmpSpan;
 
-            System
-                .Security
+            System.Security
                 .Cryptography
                 .X509Certificates
                 .Asn1
                 .CertificationRequestInfoAsn
                 .Decode(ref sequenceReader, rebind, out decoded.CertificationRequestInfo);
-            System
-                .Security
+            System.Security
                 .Cryptography
                 .Asn1
                 .AlgorithmIdentifierAsn

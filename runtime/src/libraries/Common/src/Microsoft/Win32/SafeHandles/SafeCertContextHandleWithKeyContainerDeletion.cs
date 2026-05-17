@@ -16,8 +16,7 @@ namespace Microsoft.Win32.SafeHandles
         protected sealed override bool ReleaseHandle()
         {
             using (
-                SafeCertContextHandle certContext = Interop
-                    .Crypt32
+                SafeCertContextHandle certContext = Interop.Crypt32
                     .CertDuplicateCertificateContext(handle)
             )
             {
@@ -33,8 +32,7 @@ namespace Microsoft.Win32.SafeHandles
                 return;
 
             int cb = 0;
-            bool containsPrivateKey = Interop
-                .Crypt32
+            bool containsPrivateKey = Interop.Crypt32
                 .CertGetCertificateContextProperty(
                     pCertContext,
                     Interop.Crypt32.CertContextPropId.CERT_KEY_PROV_INFO_PROP_ID,
@@ -46,8 +44,7 @@ namespace Microsoft.Win32.SafeHandles
 
             byte[] provInfoAsBytes = new byte[cb];
             if (
-                !Interop
-                    .Crypt32
+                !Interop.Crypt32
                     .CertGetCertificateContextProperty(
                         pCertContext,
                         Interop.Crypt32.CertContextPropId.CERT_KEY_PROV_INFO_PROP_ID,
@@ -102,8 +99,7 @@ namespace Microsoft.Win32.SafeHandles
                                 & Interop.Crypt32.CryptAcquireContextFlags.CRYPT_MACHINE_KEYSET
                             ) | Interop.Crypt32.CryptAcquireContextFlags.CRYPT_DELETEKEYSET;
                         IntPtr hProv;
-                        _ = Interop
-                            .Advapi32
+                        _ = Interop.Advapi32
                             .CryptAcquireContext(
                                 out hProv,
                                 pProvInfo->pwszContainerName,

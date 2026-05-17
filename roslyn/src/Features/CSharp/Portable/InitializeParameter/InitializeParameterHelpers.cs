@@ -218,8 +218,7 @@ namespace Microsoft.CodeAnalysis.CSharp.InitializeParameter
 
             if (propertyDeclaration.AccessorList != null)
             {
-                var accessors = propertyDeclaration
-                    .AccessorList
+                var accessors = propertyDeclaration.AccessorList
                     .Accessors
                     .Select(RemoveThrowNotImplemented);
                 return propertyDeclaration.WithAccessorList(

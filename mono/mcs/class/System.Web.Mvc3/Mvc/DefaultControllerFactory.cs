@@ -219,8 +219,7 @@
             Type match;
             if (
                 requestContext != null
-                && requestContext
-                    .RouteData
+                && requestContext.RouteData
                     .DataTokens
                     .TryGetValue("Namespaces", out routeNamespacesObj)
             )

@@ -365,8 +365,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             MethodSymbol destinationMethod
         )
         {
-            return sourceMethod
-                .Parameters
+            return sourceMethod.Parameters
                 .SelectAsArray(
                     static (oldParam, destinationMethod) =>
                         DeriveParameter(destinationMethod, oldParam),

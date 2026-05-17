@@ -58,8 +58,7 @@ namespace System.Threading
                     }
                 }
 
-                Counts countsBeforeUpdate = _separated
-                    ._counts
+                Counts countsBeforeUpdate = _separated._counts
                     .InterlockedCompareExchange(newCounts, counts);
                 if (countsBeforeUpdate == counts)
                 {
@@ -100,8 +99,7 @@ namespace System.Threading
                     newCounts.DecrementSignalCount();
                     newCounts.DecrementSpinnerCount();
 
-                    Counts countsBeforeUpdate = _separated
-                        ._counts
+                    Counts countsBeforeUpdate = _separated._counts
                         .InterlockedCompareExchange(newCounts, counts);
                     if (countsBeforeUpdate == counts)
                     {
@@ -127,8 +125,7 @@ namespace System.Threading
                     newCounts.IncrementWaiterCount();
                 }
 
-                Counts countsBeforeUpdate = _separated
-                    ._counts
+                Counts countsBeforeUpdate = _separated._counts
                     .InterlockedCompareExchange(newCounts, counts);
                 if (countsBeforeUpdate == counts)
                 {
@@ -175,8 +172,7 @@ namespace System.Threading
                         newCounts.DecrementCountOfWaitersSignaledToWake();
                     }
 
-                    Counts countsBeforeUpdate = _separated
-                        ._counts
+                    Counts countsBeforeUpdate = _separated._counts
                         .InterlockedCompareExchange(newCounts, counts);
                     if (countsBeforeUpdate == counts)
                     {

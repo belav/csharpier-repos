@@ -14,8 +14,7 @@ public class AutoLinkerTagHelper : TagHelper
         var childContent = await output.GetChildContentAsync();
 
         // Find Urls in the content and replace them with their anchor tag equivalent.
-        output
-            .Content
+        output.Content
             .AppendHtml(
                 Regex.Replace(
                     childContent.GetContent(),

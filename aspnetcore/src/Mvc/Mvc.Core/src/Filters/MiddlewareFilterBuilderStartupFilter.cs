@@ -15,8 +15,7 @@ internal sealed class MiddlewareFilterBuilderStartupFilter : IStartupFilter
 
         void MiddlewareFilterBuilder(IApplicationBuilder builder)
         {
-            var middlewarePipelineBuilder = builder
-                .ApplicationServices
+            var middlewarePipelineBuilder = builder.ApplicationServices
                 .GetRequiredService<MiddlewareFilterBuilder>();
             middlewarePipelineBuilder.ApplicationBuilder = builder.New();
 

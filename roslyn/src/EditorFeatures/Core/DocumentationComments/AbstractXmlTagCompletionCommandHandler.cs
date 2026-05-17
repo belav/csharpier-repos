@@ -78,8 +78,7 @@ namespace Microsoft.CodeAnalysis.DocumentationComments
                 return;
 
             using (
-                context
-                    .OperationContext
+                context.OperationContext
                     .AddScope(allowCancellation: true, EditorFeaturesResources.Completing_Tag)
             )
             {

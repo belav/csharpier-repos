@@ -97,8 +97,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Workspaces
             var buffer = CreateTextBuffer(reader);
 
             // use the given encoding as it is.
-            return buffer
-                .CurrentSnapshot
+            return buffer.CurrentSnapshot
                 .AsRoslynText(_textBufferCloneService, encoding, checksumAlgorithm);
         }
 
@@ -124,8 +123,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Workspaces
             );
 
             var buffer = CreateTextBuffer(reader);
-            return buffer
-                .CurrentSnapshot
+            return buffer.CurrentSnapshot
                 .AsRoslynText(
                     _textBufferCloneService,
                     reader.CurrentEncoding ?? Encoding.UTF8,

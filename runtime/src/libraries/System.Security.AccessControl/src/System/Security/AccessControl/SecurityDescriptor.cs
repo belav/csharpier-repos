@@ -642,8 +642,7 @@ namespace System.Security.AccessControl
             try
             {
                 if (
-                    !Interop
-                        .Advapi32
+                    !Interop.Advapi32
                         .ConvertStringSdToSd(
                             sddlForm,
                             GenericSecurityDescriptor.Revision,

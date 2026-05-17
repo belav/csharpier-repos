@@ -295,8 +295,7 @@ public abstract class ReaderModificationCommandBatch : ModificationCommandBatch
     protected virtual void AddParameters(IReadOnlyModificationCommand modificationCommand)
     {
         Check.DebugAssert(
-            !modificationCommand
-                .ColumnModifications
+            !modificationCommand.ColumnModifications
                 .Any(m => m.Column is IStoreStoredProcedureReturnValue)
                 || modificationCommand.ColumnModifications[0].Column
                     is IStoreStoredProcedureReturnValue,
@@ -305,8 +304,7 @@ public abstract class ReaderModificationCommandBatch : ModificationCommandBatch
 
         var modifications = modificationCommand.StoreStoredProcedure is null
             ? modificationCommand.ColumnModifications
-            : modificationCommand
-                .ColumnModifications
+            : modificationCommand.ColumnModifications
                 .Where(c =>
                     c.Column is IStoreStoredProcedureParameter or IStoreStoredProcedureReturnValue
                 );
@@ -393,8 +391,7 @@ public abstract class ReaderModificationCommandBatch : ModificationCommandBatch
 
         try
         {
-            using var dataReader = StoreCommand
-                .RelationalCommand
+            using var dataReader = StoreCommand.RelationalCommand
                 .ExecuteReader(
                     new RelationalCommandParameterObject(
                         connection,
@@ -439,8 +436,7 @@ public abstract class ReaderModificationCommandBatch : ModificationCommandBatch
 
         try
         {
-            var dataReader = await StoreCommand
-                .RelationalCommand
+            var dataReader = await StoreCommand.RelationalCommand
                 .ExecuteReaderAsync(
                     new RelationalCommandParameterObject(
                         connection,

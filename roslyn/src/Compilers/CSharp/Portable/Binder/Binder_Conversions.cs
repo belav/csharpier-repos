@@ -197,8 +197,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     // or that was explicitly written in code (so that GetSemanticInfo can find the syntax in the bound tree).
                     if (
                         !isCast
-                        && source
-                            .Type
+                        && source.Type
                             .Equals(
                                 destination,
                                 TypeCompareKind.IgnoreNullableModifiersForReferenceTypes
@@ -671,8 +670,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 );
 
                                 if (
-                                    !Compilation
-                                        .Assembly
+                                    !Compilation.Assembly
                                         .RuntimeSupportsStaticAbstractMembersInInterfaces
                                 )
                                 {
@@ -717,8 +715,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     diagnostics.ReportUseSite(source.Type!.TryGetInlineArrayElementField(), syntax);
 
                     if (
-                        destination
-                            .OriginalDefinition
+                        destination.OriginalDefinition
                             .Equals(
                                 Compilation.GetWellKnownType(WellKnownType.System_ReadOnlySpan_T),
                                 TypeCompareKind.AllIgnoreOptions
@@ -764,8 +761,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     else
                     {
                         Debug.Assert(
-                            destination
-                                .OriginalDefinition
+                            destination.OriginalDefinition
                                 .Equals(
                                     Compilation.GetWellKnownType(WellKnownType.System_Span_T),
                                     TypeCompareKind.AllIgnoreOptions
@@ -1082,8 +1078,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                         var parameterType = (NamedTypeSymbol)
                             collectionBuilderMethod.Parameters[0].Type;
                         Debug.Assert(
-                            parameterType
-                                .OriginalDefinition
+                            parameterType.OriginalDefinition
                                 .Equals(
                                     Compilation.GetWellKnownType(
                                         WellKnownType.System_ReadOnlySpan_T
@@ -1129,8 +1124,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 case CollectionExpressionTypeKind.ImplementsIEnumerableT:
                 case CollectionExpressionTypeKind.ImplementsIEnumerable:
                     if (
-                        targetType
-                            .OriginalDefinition
+                        targetType.OriginalDefinition
                             .Equals(
                                 Compilation.GetWellKnownType(
                                     WellKnownType.System_Collections_Immutable_ImmutableArray_T
@@ -1623,8 +1617,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     var allTypeParameters = TypeMap.TypeParametersAsTypeSymbolsWithAnnotations(
                         targetType.OriginalDefinition.GetAllTypeParameters()
                     );
-                    methodWithTargetTypeParameters = method
-                        .OriginalDefinition
+                    methodWithTargetTypeParameters = method.OriginalDefinition
                         .Construct(allTypeParameters);
                     method = method.Construct(allTypeArguments);
                 }
@@ -1900,8 +1893,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 diagnostics: diagnostics
             );
 
-            TypeSymbol conversionParameterType = conversion
-                .BestUserDefinedConversionAnalysis
+            TypeSymbol conversionParameterType = conversion.BestUserDefinedConversionAnalysis
                 .Operator
                 .GetParameterType(0);
             CompoundUseSiteInfo<AssemblySymbol> useSiteInfo = GetNewCompoundUseSiteInfo(
@@ -1937,8 +1929,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             BoundExpression userDefinedConversion;
 
-            TypeSymbol conversionReturnType = conversion
-                .BestUserDefinedConversionAnalysis
+            TypeSymbol conversionReturnType = conversion.BestUserDefinedConversionAnalysis
                 .Operator
                 .ReturnType;
             TypeSymbol conversionToType = conversion.BestUserDefinedConversionAnalysis.ToType;

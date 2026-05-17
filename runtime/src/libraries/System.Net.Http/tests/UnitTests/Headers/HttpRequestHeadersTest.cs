@@ -1667,11 +1667,9 @@ namespace System.Net.Http.Tests
         {
             Assert.Equal(0, headers.Warning.Count);
 
-            headers
-                .Warning
+            headers.Warning
                 .Add(new WarningHeaderValue(199, "microsoft.com", "\"Miscellaneous warning\""));
-            headers
-                .Warning
+            headers.Warning
                 .Add(new WarningHeaderValue(113, "example.com", "\"Heuristic expiration\""));
 
             Assert.Equal(2, headers.Warning.Count);

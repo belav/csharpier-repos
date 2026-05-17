@@ -96,8 +96,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             {
                 // This is a VB event that declares its own type.  i.e. "Public Event E(x As Object)"
                 // We also have to generate "public void delegate EEventHandler(object x)"
-                var compilation = await newDocument
-                    .Project
+                var compilation = await newDocument.Project
                     .GetRequiredCompilationAsync(cancellationToken)
                     .ConfigureAwait(false);
                 var newDestinationSymbol = destination
@@ -651,8 +650,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                 throw new ArgumentException("attributeToRemove");
             }
 
-            var attributeSyntaxToRemove = attributeToRemove
-                .ApplicationSyntaxReference
+            var attributeSyntaxToRemove = attributeToRemove.ApplicationSyntaxReference
                 .GetSyntax(cancellationToken);
             return RemoveAttribute(destination, attributeSyntaxToRemove, info, cancellationToken);
         }
@@ -881,8 +879,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                 // Insert the new global statement(s) at the end of any current global statements.
                 // This code relies on 'LastIndexOf' returning -1 when no matching element is found.
                 var insertionIndex =
-                    compilationUnit
-                        .Members
+                    compilationUnit.Members
                         .LastIndexOf(memberDeclaration =>
                             memberDeclaration.IsKind(SyntaxKind.GlobalStatement)
                         ) + 1;
@@ -979,8 +976,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
 
             // If the member has an expression body, convert to a block first.
             // TODO: property determine if the expr should become a return statement or not.
-            baseMethodDeclaration
-                .ExpressionBody
+            baseMethodDeclaration.ExpressionBody
                 ?.TryConvertToBlock(
                     baseMethodDeclaration.SemicolonToken,
                     createReturnStatementForExpression: false,
@@ -1013,8 +1009,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
 
             // If the member has an expression body, convert to a block first.
             // TODO: property determine if the expr should become a return statement or not.
-            localFunctionStatement
-                .ExpressionBody
+            localFunctionStatement.ExpressionBody
                 ?.TryConvertToBlock(
                     localFunctionStatement.SemicolonToken,
                     createReturnStatementForExpression: false,

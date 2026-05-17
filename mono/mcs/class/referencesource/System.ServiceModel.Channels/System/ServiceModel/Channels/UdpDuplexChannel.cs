@@ -115,8 +115,7 @@ namespace System.ServiceModel.Channels
         {
             if (timeout < TimeSpan.Zero)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new ArgumentOutOfRangeException("timeout", timeout, SR.TimeoutOutOfRange0)
                     );
@@ -135,8 +134,7 @@ namespace System.ServiceModel.Channels
         {
             if (timeout < TimeSpan.Zero)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new ArgumentOutOfRangeException("timeout", timeout, SR.TimeoutOutOfRange0)
                     );
@@ -155,8 +153,7 @@ namespace System.ServiceModel.Channels
         {
             if (timeout < TimeSpan.Zero)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new ArgumentOutOfRangeException("timeout", timeout, SR.TimeoutOutOfRange0)
                     );
@@ -170,8 +167,7 @@ namespace System.ServiceModel.Channels
         {
             if (timeout < TimeSpan.Zero)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new ArgumentOutOfRangeException("timeout", timeout, SR.TimeoutOutOfRange0)
                     );
@@ -190,8 +186,7 @@ namespace System.ServiceModel.Channels
         {
             if (timeout < TimeSpan.Zero)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new ArgumentOutOfRangeException("timeout", timeout, SR.TimeoutOutOfRange0)
                     );
@@ -209,8 +204,7 @@ namespace System.ServiceModel.Channels
         {
             if (timeout < TimeSpan.Zero)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new ArgumentOutOfRangeException("timeout", timeout, SR.TimeoutOutOfRange0)
                     );

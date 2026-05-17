@@ -121,8 +121,7 @@ namespace System.Data.Metadata.Edm
                 DataSpace.OSpace
             )
         {
-            System
-                .Diagnostics
+            System.Diagnostics
                 .Debug
                 .Assert(
                     !String.IsNullOrEmpty(cspaceNamespaceName)

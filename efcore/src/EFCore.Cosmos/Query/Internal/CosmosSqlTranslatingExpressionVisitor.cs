@@ -789,8 +789,7 @@ public class CosmosSqlTranslatingExpressionVisitor : ExpressionVisitor
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     protected override Expression VisitParameter(ParameterExpression parameterExpression) =>
-        parameterExpression
-            .Name
+        parameterExpression.Name
             ?.StartsWith(QueryCompilationContext.QueryParameterPrefix, StringComparison.Ordinal)
         == true
             ? new SqlParameterExpression(parameterExpression, null)
@@ -916,16 +915,14 @@ public class CosmosSqlTranslatingExpressionVisitor : ExpressionVisitor
 
         var result =
             member.MemberInfo != null
-                ? entityReferenceExpression
-                    .ParameterEntity
+                ? entityReferenceExpression.ParameterEntity
                     .BindMember(
                         member.MemberInfo,
                         entityReferenceExpression.Type,
                         clientEval: false,
                         out _
                     )
-                : entityReferenceExpression
-                    .ParameterEntity
+                : entityReferenceExpression.ParameterEntity
                     .BindMember(
                         member.Name,
                         entityReferenceExpression.Type,
@@ -1044,8 +1041,7 @@ public class CosmosSqlTranslatingExpressionVisitor : ExpressionVisitor
                 break;
 
             case SqlParameterExpression sqlParameterExpression
-                when sqlParameterExpression
-                    .Name
+                when sqlParameterExpression.Name
                     .StartsWith(
                         QueryCompilationContext.QueryParameterPrefix,
                         StringComparison.Ordinal
@@ -1215,8 +1211,7 @@ public class CosmosSqlTranslatingExpressionVisitor : ExpressionVisitor
                 );
 
             case SqlParameterExpression sqlParameterExpression
-                when sqlParameterExpression
-                    .Name
+                when sqlParameterExpression.Name
                     .StartsWith(
                         QueryCompilationContext.QueryParameterPrefix,
                         StringComparison.Ordinal
@@ -1240,8 +1235,7 @@ public class CosmosSqlTranslatingExpressionVisitor : ExpressionVisitor
                 return _queryCompilationContext.RegisterRuntimeParameter(newParameterName, lambda);
 
             case MemberInitExpression memberInitExpression
-                when memberInitExpression
-                    .Bindings
+                when memberInitExpression.Bindings
                     .SingleOrDefault(mb => mb.Member.Name == property.Name)
                     is MemberAssignment memberAssignment:
                 return memberAssignment.Expression;
@@ -1314,10 +1308,11 @@ public class CosmosSqlTranslatingExpressionVisitor : ExpressionVisitor
             NewExpression e => e.Arguments.All(CanEvaluate),
             NewArrayExpression e => e.Expressions.All(CanEvaluate),
             MemberInitExpression e => CanEvaluate(e.NewExpression)
-                && e.Bindings.All(mb =>
-                    mb is MemberAssignment memberAssignment
-                    && CanEvaluate(memberAssignment.Expression)
-                ),
+                && e.Bindings
+                    .All(mb =>
+                        mb is MemberAssignment memberAssignment
+                        && CanEvaluate(memberAssignment.Expression)
+                    ),
             _ => false,
         };
 

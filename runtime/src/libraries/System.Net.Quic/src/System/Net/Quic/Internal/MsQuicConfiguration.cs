@@ -112,8 +112,7 @@ internal static class MsQuicConfiguration
 
         certificate ??=
             authenticationOptions.ServerCertificate
-            ?? authenticationOptions
-                .ServerCertificateSelectionCallback
+            ?? authenticationOptions.ServerCertificateSelectionCallback
                 ?.Invoke(authenticationOptions, targetHost);
         if (certificate is null)
         {
@@ -233,8 +232,7 @@ internal static class MsQuicConfiguration
         using MsQuicBuffers msquicBuffers = new MsQuicBuffers();
         msquicBuffers.Initialize(alpnProtocols, alpnProtocol => alpnProtocol.Protocol);
         ThrowHelper.ThrowIfMsQuicError(
-            MsQuicApi
-                .Api
+            MsQuicApi.Api
                 .ConfigurationOpen(
                     MsQuicApi.Api.Registration,
                     msquicBuffers.Buffers,
@@ -308,8 +306,7 @@ internal static class MsQuicConfiguration
                         PrivateKeyPassword = (sbyte*)IntPtr.Zero,
                     };
                     config.CertificatePkcs12 = &pkcs12Certificate;
-                    status = MsQuicApi
-                        .Api
+                    status = MsQuicApi.Api
                         .ConfigurationLoadCredential(configurationHandle, &config);
                 }
             }

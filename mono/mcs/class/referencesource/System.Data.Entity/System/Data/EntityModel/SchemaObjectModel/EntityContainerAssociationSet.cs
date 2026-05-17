@@ -144,8 +144,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
                         end.AddError(
                             ErrorCode.InvalidName,
                             EdmSchemaErrorSeverity.Error,
-                            System
-                                .Data
+                            System.Data
                                 .Entity
                                 .Strings
                                 .InferRelationshipEndGivesAlreadyDefinedEnd(

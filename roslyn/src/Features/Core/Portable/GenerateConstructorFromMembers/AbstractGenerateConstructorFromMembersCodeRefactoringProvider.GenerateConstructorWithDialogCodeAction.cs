@@ -51,8 +51,7 @@ namespace Microsoft.CodeAnalysis.GenerateConstructorFromMembers
             {
                 var service =
                     _service._pickMembersService_forTesting
-                    ?? _document
-                        .Project
+                    ?? _document.Project
                         .Solution
                         .Services
                         .GetRequiredService<IPickMembersService>();
@@ -76,14 +75,12 @@ namespace Microsoft.CodeAnalysis.GenerateConstructorFromMembers
                     return SpecializedCollections.EmptyEnumerable<CodeActionOperation>();
                 }
 
-                var addNullChecksOption = result
-                    .Options
+                var addNullChecksOption = result.Options
                     .FirstOrDefault(o => o.Id == AddNullChecksId);
                 if (addNullChecksOption != null)
                 {
                     // ILegacyGlobalOptionsWorkspaceService is guaranteed to be not null here because we have checked it before the code action is provided.
-                    var globalOptions = _document
-                        .Project
+                    var globalOptions = _document.Project
                         .Solution
                         .Services
                         .GetRequiredService<ILegacyGlobalOptionsWorkspaceService>();

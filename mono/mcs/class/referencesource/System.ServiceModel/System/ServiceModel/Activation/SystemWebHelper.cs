@@ -99,8 +99,7 @@ namespace System.ServiceModel.Activation
                     // we need to (best effort) maintain the exception contract by rethrow inner exception.
                     if (exception.InnerException != null)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(exception.InnerException);
                     }
                     throw;
@@ -156,8 +155,7 @@ namespace System.ServiceModel.Activation
                     // we need to (best effort) maintain the exception contract by rethrow inner exception.
                     if (exception.InnerException != null)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(exception.InnerException);
                     }
                     throw;
@@ -191,8 +189,7 @@ namespace System.ServiceModel.Activation
                     // we need to (best effort) maintain the exception contract by rethrow inner exception.
                     if (exception.InnerException != null)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(exception.InnerException);
                     }
                     throw;
@@ -244,8 +241,7 @@ namespace System.ServiceModel.Activation
                     // we need to (best effort) maintain the exception contract by rethrow inner exception.
                     if (exception.InnerException != null)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(exception.InnerException);
                     }
                     throw;
@@ -302,8 +298,7 @@ namespace System.ServiceModel.Activation
                 // we need to (best effort) maintain the exception contract by rethrow inner exception.
                 if (exception.InnerException != null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(exception.InnerException);
                 }
                 throw;

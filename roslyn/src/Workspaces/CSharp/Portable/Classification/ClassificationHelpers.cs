@@ -177,8 +177,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Classification
                 case SyntaxKind.InterpolatedStringEndToken:
                 {
                     return token.Parent is InterpolatedStringExpressionSyntax interpolatedString
-                        && interpolatedString
-                            .StringStartToken
+                        && interpolatedString.StringStartToken
                             .IsKind(SyntaxKind.InterpolatedVerbatimStringStartToken);
                 }
 
@@ -191,8 +190,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Classification
 
                     return interpolatedStringText.Parent
                             is InterpolatedStringExpressionSyntax interpolatedString
-                        && interpolatedString
-                            .StringStartToken
+                        && interpolatedString.StringStartToken
                             .IsKind(SyntaxKind.InterpolatedVerbatimStringStartToken);
                 }
             }
@@ -286,8 +284,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Classification
                 var varDecl = variableDeclarator.Parent as VariableDeclarationSyntax;
                 return varDecl?.Parent switch
                 {
-                    FieldDeclarationSyntax fieldDeclaration => fieldDeclaration
-                        .Modifiers
+                    FieldDeclarationSyntax fieldDeclaration => fieldDeclaration.Modifiers
                         .Any(SyntaxKind.ConstKeyword)
                         ? ClassificationTypeNames.ConstantName
                         : ClassificationTypeNames.FieldName,
@@ -409,8 +406,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Classification
         }
 
         private static bool IsExtensionMethod(MethodDeclarationSyntax methodDeclaration) =>
-            methodDeclaration
-                .ParameterList
+            methodDeclaration.ParameterList
                 .Parameters
                 .FirstOrDefault()
                 ?.Modifiers

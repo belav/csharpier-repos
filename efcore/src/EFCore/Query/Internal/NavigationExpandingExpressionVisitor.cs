@@ -214,8 +214,7 @@ public partial class NavigationExpandingExpressionVisitor : ExpressionVisitor
                 );
 
                 result = Expression.Call(
-                    QueryableMethods
-                        .GroupByWithKeyElementSelector
+                    QueryableMethods.GroupByWithKeyElementSelector
                         .MakeGenericMethod(
                             newSource.Type.GetSequenceType(),
                             keySelectorLambda.ReturnType,
@@ -392,8 +391,7 @@ public partial class NavigationExpandingExpressionVisitor : ExpressionVisitor
             memberExpression.Expression != null
             && innerExpression != null
             && memberExpression.Member.Name == nameof(ICollection<int>.Count)
-            && memberExpression
-                .Expression
+            && memberExpression.Expression
                 .Type
                 .GetInterfaces()
                 .Append(memberExpression.Expression.Type)
@@ -415,8 +413,7 @@ public partial class NavigationExpandingExpressionVisitor : ExpressionVisitor
             {
                 return Visit(
                     Expression.Call(
-                        QueryableMethods
-                            .CountWithoutPredicate
+                        QueryableMethods.CountWithoutPredicate
                             .MakeGenericMethod(innerQueryable.Type.GetSequenceType()),
                         innerQueryable
                     )
@@ -932,8 +929,7 @@ public partial class NavigationExpandingExpressionVisitor : ExpressionVisitor
                 {
                     // This is groupingElement.AsQueryable so we preserve it
                     return Expression.Call(
-                        QueryableMethods
-                            .AsQueryable
+                        QueryableMethods.AsQueryable
                             .MakeGenericMethod(navigationTreeExpression.Type.GetSequenceType()),
                         navigationTreeExpression
                     );
@@ -1084,8 +1080,7 @@ public partial class NavigationExpandingExpressionVisitor : ExpressionVisitor
 
         if (
             newStructure is EntityReference entityReference
-            && entityReference
-                .EntityType
+            && entityReference.EntityType
                 .GetAllBaseTypes()
                 .Concat(entityReference.EntityType.GetDerivedTypesInclusive())
                 .FirstOrDefault(et => et.ClrType == castType)
@@ -1104,8 +1099,7 @@ public partial class NavigationExpandingExpressionVisitor : ExpressionVisitor
             newEntityReference.IncludePaths.Merge(entityReference.IncludePaths);
 
             // Prune includes for sibling types
-            var siblingNavigations = newEntityReference
-                .IncludePaths
+            var siblingNavigations = newEntityReference.IncludePaths
                 .Keys
                 .Where(n =>
                     !castEntityType.IsAssignableFrom(n.DeclaringEntityType)
@@ -1159,8 +1153,7 @@ public partial class NavigationExpandingExpressionVisitor : ExpressionVisitor
     {
         source.UpdateSource(
             Expression.Call(
-                QueryableMethods
-                    .DefaultIfEmptyWithoutArgument
+                QueryableMethods.DefaultIfEmptyWithoutArgument
                     .MakeGenericMethod(source.SourceElementType),
                 source.Source
             )
@@ -1306,8 +1299,7 @@ public partial class NavigationExpandingExpressionVisitor : ExpressionVisitor
                 GetParameterName("g")
             );
             var innerSource = Expression.Call(
-                QueryableMethods
-                    .GroupByWithKeySelector
+                QueryableMethods.GroupByWithKeySelector
                     .MakeGenericMethod(source.SourceElementType, keySelector.ReturnType),
                 source.Source,
                 Expression.Quote(keySelector)
@@ -1349,8 +1341,7 @@ public partial class NavigationExpandingExpressionVisitor : ExpressionVisitor
         );
 
         var result = Expression.Call(
-            QueryableMethods
-                .GroupByWithKeyResultSelector
+            QueryableMethods.GroupByWithKeyResultSelector
                 .MakeGenericMethod(
                     source.CurrentParameter.Type,
                     keySelector.ReturnType,
@@ -1430,8 +1421,7 @@ public partial class NavigationExpandingExpressionVisitor : ExpressionVisitor
 
                     if (includeTreeNodes.Count == 0)
                     {
-                        _queryCompilationContext
-                            .Logger
+                        _queryCompilationContext.Logger
                             .InvalidIncludePathError(navigationChain, navigationName);
                     }
                 }
@@ -1457,8 +1447,7 @@ public partial class NavigationExpandingExpressionVisitor : ExpressionVisitor
                 {
                     if (
                         lastIncludeTree.FilterExpression != null
-                        && !ExpressionEqualityComparer
-                            .Instance
+                        && !ExpressionEqualityComparer.Instance
                             .Equals(filterExpression, lastIncludeTree.FilterExpression)
                     )
                     {
@@ -1609,8 +1598,7 @@ public partial class NavigationExpandingExpressionVisitor : ExpressionVisitor
         );
 
         var source = Expression.Call(
-            QueryableMethods
-                .Join
+            QueryableMethods.Join
                 .MakeGenericMethod(
                     outerSource.SourceElementType,
                     innerSource.SourceElementType,
@@ -1683,8 +1671,7 @@ public partial class NavigationExpandingExpressionVisitor : ExpressionVisitor
         );
 
         var source = Expression.Call(
-            QueryableExtensions
-                .LeftJoinMethodInfo
+            QueryableExtensions.LeftJoinMethodInfo
                 .MakeGenericMethod(
                     outerSource.SourceElementType,
                     innerSource.SourceElementType,
@@ -1835,8 +1822,7 @@ public partial class NavigationExpandingExpressionVisitor : ExpressionVisitor
             );
 
             var newSource = Expression.Call(
-                QueryableMethods
-                    .SelectManyWithCollectionSelector
+                QueryableMethods.SelectManyWithCollectionSelector
                     .MakeGenericMethod(
                         source.SourceElementType,
                         collectionElementType,
@@ -1924,8 +1910,7 @@ public partial class NavigationExpandingExpressionVisitor : ExpressionVisitor
 
     private Expression ProcessUnknownMethod(MethodCallExpression methodCallExpression)
     {
-        var queryableElementType = methodCallExpression
-            .Type
+        var queryableElementType = methodCallExpression.Type
             .TryGetElementType(typeof(IQueryable<>));
         if (
             queryableElementType != null
@@ -1935,8 +1920,7 @@ public partial class NavigationExpandingExpressionVisitor : ExpressionVisitor
             && methodCallExpression.Method.GetGenericArguments().Length == 1
             && methodCallExpression.Method.GetGenericArguments()[0] == queryableElementType
             && methodCallExpression.Arguments.Count > 0
-            && methodCallExpression
-                .Arguments
+            && methodCallExpression.Arguments
                 .Skip(1)
                 .All(e => e.Type.TryGetElementType(typeof(IQueryable<>)) == null)
         )
@@ -1953,8 +1937,7 @@ public partial class NavigationExpandingExpressionVisitor : ExpressionVisitor
                 var queryable = Reduce(source);
 
                 var result = Expression.Call(
-                    methodCallExpression
-                        .Method
+                    methodCallExpression.Method
                         .GetGenericMethodDefinition()
                         .MakeGenericMethod(queryableElementType),
                     new[] { queryable }.Concat(
@@ -2063,8 +2046,7 @@ public partial class NavigationExpandingExpressionVisitor : ExpressionVisitor
         selector = Expression.Lambda(selectorBody, groupBySource.CurrentParameter);
 
         var newSource = Expression.Call(
-            QueryableMethods
-                .Select
+            QueryableMethods.Select
                 .MakeGenericMethod(groupBySource.SourceElementType, selector.ReturnType),
             groupBySource.Source,
             Expression.Quote(selector)
@@ -2136,8 +2118,7 @@ public partial class NavigationExpandingExpressionVisitor : ExpressionVisitor
                     } navigationTreeExpression
                 )
                 {
-                    var primaryKeyProperties = entityReference
-                        .EntityType
+                    var primaryKeyProperties = entityReference.EntityType
                         .FindPrimaryKey()
                         ?.Properties;
                     if (primaryKeyProperties != null)
@@ -2181,8 +2162,7 @@ public partial class NavigationExpandingExpressionVisitor : ExpressionVisitor
                         }
                 )
                 {
-                    var primaryKeyProperties = subqueryEntityReference
-                        .EntityType
+                    var primaryKeyProperties = subqueryEntityReference.EntityType
                         .FindPrimaryKey()
                         ?.Properties;
                     if (primaryKeyProperties != null)
@@ -2737,8 +2717,7 @@ public partial class NavigationExpandingExpressionVisitor : ExpressionVisitor
 
                 return new NavigationExpansionExpression(
                     Expression.Call(
-                        QueryableMethods
-                            .AsQueryable
+                        QueryableMethods.AsQueryable
                             .MakeGenericMethod(ownedNavigationReference.Type.GetSequenceType()),
                         ownedNavigationReference
                     ),
@@ -2756,8 +2735,7 @@ public partial class NavigationExpandingExpressionVisitor : ExpressionVisitor
 
                 return new NavigationExpansionExpression(
                     Expression.Call(
-                        QueryableMethods
-                            .AsQueryable
+                        QueryableMethods.AsQueryable
                             .MakeGenericMethod(primitiveCollectionReference.Type.GetSequenceType()),
                         primitiveCollectionReference
                     ),

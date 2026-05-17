@@ -46,8 +46,7 @@ namespace System.ServiceModel.MsmqIntegration
         public object Deserialize(MemoryStream stream, int bodyType)
         {
             if (stream == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("stream"));
 
             VarEnum variantType = (VarEnum)bodyType;
@@ -109,8 +108,7 @@ namespace System.ServiceModel.MsmqIntegration
                     count = stream.Read(bytes, 0, 1);
 
                     if (count != 1)
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new SerializationException(
                                     SR.GetString(SR.MsmqCannotDeserializeActiveXMessage)
@@ -124,8 +122,7 @@ namespace System.ServiceModel.MsmqIntegration
                     count = stream.Read(bytes, 0, 16);
 
                     if (count != 16)
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new SerializationException(
                                     SR.GetString(SR.MsmqCannotDeserializeActiveXMessage)
@@ -140,8 +137,7 @@ namespace System.ServiceModel.MsmqIntegration
                     count = stream.Read(bytes, 0, 8);
 
                     if (count != 8)
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new SerializationException(
                                     SR.GetString(SR.MsmqCannotDeserializeActiveXMessage)
@@ -156,8 +152,7 @@ namespace System.ServiceModel.MsmqIntegration
                     count = stream.Read(bytes, 0, 8);
 
                     if (count != 8)
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new SerializationException(
                                     SR.GetString(SR.MsmqCannotDeserializeActiveXMessage)
@@ -173,8 +168,7 @@ namespace System.ServiceModel.MsmqIntegration
                     count = stream.Read(bytes, 0, 1);
 
                     if (count != 1)
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new SerializationException(
                                     SR.GetString(SR.MsmqCannotDeserializeActiveXMessage)
@@ -188,8 +182,7 @@ namespace System.ServiceModel.MsmqIntegration
                     count = stream.Read(bytes, 0, 2);
 
                     if (count != 2)
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new SerializationException(
                                     SR.GetString(SR.MsmqCannotDeserializeActiveXMessage)
@@ -203,8 +196,7 @@ namespace System.ServiceModel.MsmqIntegration
                     count = stream.Read(bytes, 0, 2);
 
                     if (count != 2)
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new SerializationException(
                                     SR.GetString(SR.MsmqCannotDeserializeActiveXMessage)
@@ -218,8 +210,7 @@ namespace System.ServiceModel.MsmqIntegration
                     count = stream.Read(bytes, 0, 4);
 
                     if (count != 4)
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new SerializationException(
                                     SR.GetString(SR.MsmqCannotDeserializeActiveXMessage)
@@ -233,8 +224,7 @@ namespace System.ServiceModel.MsmqIntegration
                     count = stream.Read(bytes, 0, 4);
 
                     if (count != 4)
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new SerializationException(
                                     SR.GetString(SR.MsmqCannotDeserializeActiveXMessage)
@@ -248,8 +238,7 @@ namespace System.ServiceModel.MsmqIntegration
                     count = stream.Read(bytes, 0, 8);
 
                     if (count != 8)
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new SerializationException(
                                     SR.GetString(SR.MsmqCannotDeserializeActiveXMessage)
@@ -263,8 +252,7 @@ namespace System.ServiceModel.MsmqIntegration
                     count = stream.Read(bytes, 0, 8);
 
                     if (count != 8)
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new SerializationException(
                                     SR.GetString(SR.MsmqCannotDeserializeActiveXMessage)
@@ -278,8 +266,7 @@ namespace System.ServiceModel.MsmqIntegration
                     count = stream.Read(bytes, 0, 4);
 
                     if (count != 4)
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new SerializationException(
                                     SR.GetString(SR.MsmqCannotDeserializeActiveXMessage)
@@ -293,8 +280,7 @@ namespace System.ServiceModel.MsmqIntegration
                     count = stream.Read(bytes, 0, 8);
 
                     if (count != 8)
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new SerializationException(
                                     SR.GetString(SR.MsmqCannotDeserializeActiveXMessage)
@@ -307,8 +293,7 @@ namespace System.ServiceModel.MsmqIntegration
                     return null;
 
                 default:
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new SerializationException(
                                 SR.GetString(SR.MsmqInvalidTypeDeserialization)
@@ -320,8 +305,7 @@ namespace System.ServiceModel.MsmqIntegration
         public void Serialize(Stream stream, object obj, ref int bodyType)
         {
             if (stream == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("stream"));
 
             VarEnum variantType;
@@ -333,8 +317,7 @@ namespace System.ServiceModel.MsmqIntegration
                 try
                 {
                     byte[] buffer = TakeLockedBuffer<byte>(out lockHeld, size);
-                    System
-                        .Text
+                    System.Text
                         .Encoding
                         .Unicode
                         .GetBytes(((string)obj).ToCharArray(), 0, size / 2, buffer, 0);
@@ -463,8 +446,7 @@ namespace System.ServiceModel.MsmqIntegration
             }
             else
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(SR.GetString(SR.MsmqInvalidTypeSerialization))
                     );

@@ -328,8 +328,7 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.StackFrame
 
             var remainingTrivia = TryScanRemainingTrivia();
 
-            return numberToken
-                .Value
+            return numberToken.Value
                 .With(
                     leadingTrivia: lineTrivia.ToImmutableArray(),
                     trailingTrivia: remainingTrivia.ToImmutableArray()

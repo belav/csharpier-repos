@@ -83,8 +83,7 @@ namespace System.Net.Sockets.Tests
             ServerSocketState state = new ServerSocketState(client, _receiveBufferSize);
             try
             {
-                state
-                    .Socket
+                state.Socket
                     .BeginReceive(
                         state.TransferBuffer,
                         0,
@@ -131,8 +130,7 @@ namespace System.Net.Sockets.Tests
 
                 ServerSocketState sendState = new ServerSocketState(recvState, bytesReceived);
 
-                sendState
-                    .Socket
+                sendState.Socket
                     .BeginSend(
                         sendState.TransferBuffer,
                         0,
@@ -141,8 +139,7 @@ namespace System.Net.Sockets.Tests
                         OnSend,
                         sendState
                     );
-                recvState
-                    .Socket
+                recvState.Socket
                     .BeginReceive(
                         recvState.TransferBuffer,
                         0,

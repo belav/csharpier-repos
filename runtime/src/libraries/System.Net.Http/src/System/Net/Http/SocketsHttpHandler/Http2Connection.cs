@@ -488,11 +488,9 @@ namespace System.Net.Http
             {
                 if (initialFrame && NetEventSource.Log.IsEnabled())
                 {
-                    string response = Encoding
-                        .ASCII
+                    string response = Encoding.ASCII
                         .GetString(
-                            _incomingBuffer
-                                .ActiveSpan
+                            _incomingBuffer.ActiveSpan
                                 .Slice(0, Math.Min(20, _incomingBuffer.ActiveLength))
                         );
                     Trace($"HTTP/2 handshake failed. Server returned {response}");
@@ -861,8 +859,7 @@ namespace System.Net.Http
                 Trace($"{frameHeader}");
             Debug.Assert(frameHeader.Type == FrameType.AltSvc);
 
-            ReadOnlySpan<byte> span = _incomingBuffer
-                .ActiveSpan
+            ReadOnlySpan<byte> span = _incomingBuffer.ActiveSpan
                 .Slice(0, frameHeader.PayloadLength);
 
             if (BinaryPrimitives.TryReadUInt16BigEndian(span, out ushort originLength))
@@ -963,8 +960,7 @@ namespace System.Net.Http
                 }
 
                 // Parse settings and process the ones we care about.
-                ReadOnlySpan<byte> settings = _incomingBuffer
-                    .ActiveSpan
+                ReadOnlySpan<byte> settings = _incomingBuffer.ActiveSpan
                     .Slice(0, frameHeader.PayloadLength);
                 bool maxConcurrentStreamsReceived = false;
                 while (settings.Length > 0)
@@ -1133,8 +1129,7 @@ namespace System.Net.Http
             // the incoming buffer, so we need to take a copy of the data. Read
             // it as a big-endian integer here to avoid allocating an array.
             Debug.Assert(sizeof(long) == FrameHeader.PingLength);
-            ReadOnlySpan<byte> pingContent = _incomingBuffer
-                .ActiveSpan
+            ReadOnlySpan<byte> pingContent = _incomingBuffer.ActiveSpan
                 .Slice(0, FrameHeader.PingLength);
             long pingContentLong = BinaryPrimitives.ReadInt64BigEndian(pingContent);
 
@@ -1502,8 +1497,7 @@ namespace System.Net.Http
                 static (state, writeBuffer) =>
                 {
                     if (NetEventSource.Log.IsEnabled())
-                        state
-                            .thisRef
+                        state.thisRef
                             .Trace($"Started writing. {nameof(pingContent)}={state.pingContent}");
 
                     Debug.Assert(sizeof(long) == FrameHeader.PingLength);
@@ -1532,10 +1526,11 @@ namespace System.Net.Http
                 static (s, writeBuffer) =>
                 {
                     if (NetEventSource.Log.IsEnabled())
-                        s.thisRef.Trace(
-                            s.streamId,
-                            $"Started writing. {nameof(s.errorCode)}={s.errorCode}"
-                        );
+                        s.thisRef
+                            .Trace(
+                                s.streamId,
+                                $"Started writing. {nameof(s.errorCode)}={s.errorCode}"
+                            );
 
                     Span<byte> span = writeBuffer.Span;
                     FrameHeader.WriteTo(
@@ -1723,8 +1718,7 @@ namespace System.Net.Http
             if (NetEventSource.Log.IsEnabled())
                 Trace("");
 
-            HeaderEncodingSelector<HttpRequestMessage>? encodingSelector = _pool
-                .Settings
+            HeaderEncodingSelector<HttpRequestMessage>? encodingSelector = _pool.Settings
                 ._requestHeaderEncodingSelector;
 
             ref string[]? tmpHeaderValuesArray = ref t_headerValues;
@@ -1887,8 +1881,7 @@ namespace System.Net.Http
                 if (request.Headers.Protocol is string protocol)
                 {
                     WriteBytes(ProtocolLiteralHeaderBytes, ref headerBuffer);
-                    Encoding? protocolEncoding = _pool
-                        .Settings
+                    Encoding? protocolEncoding = _pool.Settings
                         ._requestHeaderEncodingSelector
                         ?.Invoke(":protocol", request);
                     WriteLiteralHeaderValue(protocol, protocolEncoding, ref headerBuffer);
@@ -1901,15 +1894,13 @@ namespace System.Net.Http
             // Determine cookies to send.
             if (_pool.Settings._useCookies)
             {
-                string cookiesFromContainer = _pool
-                    .Settings
+                string cookiesFromContainer = _pool.Settings
                     ._cookieContainer!
                     .GetCookieHeader(request.RequestUri);
                 if (cookiesFromContainer != string.Empty)
                 {
                     WriteBytes(KnownHeaders.Cookie.Http2EncodedName, ref headerBuffer);
-                    Encoding? cookieEncoding = _pool
-                        .Settings
+                    Encoding? cookieEncoding = _pool.Settings
                         ._requestHeaderEncodingSelector
                         ?.Invoke(KnownHeaders.Cookie.Name, request);
                     WriteLiteralHeaderValue(cookiesFromContainer, cookieEncoding, ref headerBuffer);
@@ -2041,10 +2032,11 @@ namespace System.Net.Http
                             s.thisRef.AddStream(s.http2Stream);
 
                             if (NetEventSource.Log.IsEnabled())
-                                s.thisRef.Trace(
-                                    s.http2Stream.StreamId,
-                                    $"Started writing. Total header bytes={s.headerBytes.Length}"
-                                );
+                                s.thisRef
+                                    .Trace(
+                                        s.http2Stream.StreamId,
+                                        $"Started writing. Total header bytes={s.headerBytes.Length}"
+                                    );
 
                             Span<byte> span = writeBuffer.Span;
 
@@ -2070,10 +2062,11 @@ namespace System.Net.Http
                             current.Span.CopyTo(span);
                             span = span.Slice(current.Length);
                             if (NetEventSource.Log.IsEnabled())
-                                s.thisRef.Trace(
-                                    s.http2Stream.StreamId,
-                                    $"Wrote HEADERS frame. Length={current.Length}, flags={flags}"
-                                );
+                                s.thisRef
+                                    .Trace(
+                                        s.http2Stream.StreamId,
+                                        $"Wrote HEADERS frame. Length={current.Length}, flags={flags}"
+                                    );
 
                             // Copy CONTINUATION frames, if any.
                             while (remaining.Length > 0)
@@ -2096,10 +2089,11 @@ namespace System.Net.Http
                                 current.Span.CopyTo(span);
                                 span = span.Slice(current.Length);
                                 if (NetEventSource.Log.IsEnabled())
-                                    s.thisRef.Trace(
-                                        s.http2Stream.StreamId,
-                                        $"Wrote CONTINUATION frame. Length={current.Length}, flags={flags}"
-                                    );
+                                    s.thisRef
+                                        .Trace(
+                                            s.http2Stream.StreamId,
+                                            $"Wrote CONTINUATION frame. Length={current.Length}, flags={flags}"
+                                        );
                             }
 
                             Debug.Assert(span.Length == 0);
@@ -2167,10 +2161,11 @@ namespace System.Net.Http
                             {
                                 // Invoked while holding the lock:
                                 if (NetEventSource.Log.IsEnabled())
-                                    s.thisRef.Trace(
-                                        s.streamId,
-                                        $"Started writing. {nameof(writeBuffer.Length)}={writeBuffer.Length}"
-                                    );
+                                    s.thisRef
+                                        .Trace(
+                                            s.streamId,
+                                            $"Started writing. {nameof(writeBuffer.Length)}={writeBuffer.Length}"
+                                        );
 
                                 FrameHeader.WriteTo(
                                     writeBuffer.Span,
@@ -2227,10 +2222,8 @@ namespace System.Net.Http
                 static (s, writeBuffer) =>
                 {
                     if (NetEventSource.Log.IsEnabled())
-                        s.thisRef.Trace(
-                            s.streamId,
-                            $"Started writing. {nameof(s.amount)}={s.amount}"
-                        );
+                        s.thisRef
+                            .Trace(s.streamId, $"Started writing. {nameof(s.amount)}={s.amount}");
 
                     Span<byte> span = writeBuffer.Span;
                     FrameHeader.WriteTo(
@@ -2677,8 +2670,7 @@ namespace System.Net.Http
             string message,
             [CallerMemberName] string? memberName = null
         ) =>
-            NetEventSource
-                .Log
+            NetEventSource.Log
                 .HandlerMessage(
                     _pool?.GetHashCode() ?? 0, // pool ID
                     GetHashCode(), // connection ID

@@ -189,8 +189,7 @@ namespace Microsoft.CodeAnalysis
             bool findInTrivia,
             bool getInnermostNodeForTie = false
         ) =>
-            context
-                .Tree
+            context.Tree
                 .FindNode(
                     context.FilterSpan,
                     findInTrivia,
@@ -206,8 +205,7 @@ namespace Microsoft.CodeAnalysis
             bool findInTrivia,
             bool getInnermostNodeForTie = false
         ) =>
-            context
-                .SemanticModel
+            context.SemanticModel
                 .SyntaxTree
                 .FindNode(
                     context.FilterSpan,
@@ -229,8 +227,7 @@ namespace Microsoft.CodeAnalysis
         {
             Contract.ThrowIfNull(context.FilterTree);
             Contract.ThrowIfFalse(context.FilterSpan.HasValue);
-            return context
-                .FilterTree
+            return context.FilterTree
                 .FindNode(
                     context.FilterSpan,
                     findInTrivia,
@@ -252,8 +249,7 @@ namespace Microsoft.CodeAnalysis
         {
             Contract.ThrowIfNull(context.FilterTree);
             Contract.ThrowIfFalse(context.FilterSpan.HasValue);
-            return context
-                .FilterTree
+            return context.FilterTree
                 .FindNode(
                     context.FilterSpan,
                     findInTrivia,
@@ -271,8 +267,7 @@ namespace Microsoft.CodeAnalysis
             bool findInTrivia,
             bool getInnermostNodeForTie = false
         ) =>
-            operationBlock
-                .Syntax
+            operationBlock.Syntax
                 .FindNode(context.FilterSpan, findInTrivia, getInnermostNodeForTie);
 
         /// <summary>
@@ -284,8 +279,7 @@ namespace Microsoft.CodeAnalysis
             bool findInTrivia,
             bool getInnermostNodeForTie = false
         ) =>
-            operationBlock
-                .Syntax
+            operationBlock.Syntax
                 .FindNode(context.FilterSpan, findInTrivia, getInnermostNodeForTie);
 
         /// <summary>
@@ -296,8 +290,7 @@ namespace Microsoft.CodeAnalysis
             bool findInTrivia,
             bool getInnermostNodeForTie = false
         ) =>
-            context
-                .Operation
+            context.Operation
                 .Syntax
                 .FindNode(context.FilterSpan, findInTrivia, getInnermostNodeForTie);
 

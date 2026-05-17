@@ -45,8 +45,7 @@ namespace System.ServiceModel.Activities.Description
                 new DurableInstanceContextProvider(serviceHostBase);
             DurableInstanceProvider instanceProvider = new DurableInstanceProvider(serviceHostBase);
 
-            ServiceDebugBehavior serviceDebugBehavior = serviceDescription
-                .Behaviors
+            ServiceDebugBehavior serviceDebugBehavior = serviceDescription.Behaviors
                 .Find<ServiceDebugBehavior>();
 
             bool includeExceptionDetailInFaults =
@@ -120,8 +119,7 @@ namespace System.ServiceModel.Activities.Description
                 {
                     //User defined Std Endpoint with WorkflowContractBehaviorAttribute.
                     return serviceEndpoint is WorkflowHostingEndpoint
-                        || serviceEndpoint
-                            .Contract
+                        || serviceEndpoint.Contract
                             .Behaviors
                             .Contains(typeof(WorkflowContractBehaviorAttribute));
                 }

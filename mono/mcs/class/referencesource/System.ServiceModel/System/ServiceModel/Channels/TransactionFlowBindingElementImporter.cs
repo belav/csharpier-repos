@@ -149,8 +149,7 @@ namespace System.ServiceModel.Channels
                 )
                     tfbe.TransactionProtocol = agreedTransactionProtocol;
                 else if (anOperationCaresAboutTransactionProtocol)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new NotSupportedException(
                                 SR.GetString(
@@ -224,8 +223,7 @@ namespace System.ServiceModel.Channels
             }
             catch (FormatException e)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new NotSupportedException(
                             SR.GetString(
@@ -262,8 +260,7 @@ namespace System.ServiceModel.Channels
 
         TransactionFlowBindingElement EnsureBindingElement(PolicyConversionContext context)
         {
-            TransactionFlowBindingElement settings = context
-                .BindingElements
+            TransactionFlowBindingElement settings = context.BindingElements
                 .Find<TransactionFlowBindingElement>();
             if (settings == null)
             {

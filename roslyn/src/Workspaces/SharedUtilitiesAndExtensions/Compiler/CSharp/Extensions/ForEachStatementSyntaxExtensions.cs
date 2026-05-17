@@ -18,15 +18,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             switch (forEachStatement.Kind())
             {
                 case SyntaxKind.ForEachStatement:
-                    return ((ForEachStatementSyntax)forEachStatement)
-                        .Type
+                    return ((ForEachStatementSyntax)forEachStatement).Type
                         .IsTypeInferred(semanticModel);
                 case SyntaxKind.ForEachVariableStatement:
                     return (
                             ((ForEachVariableStatementSyntax)forEachStatement).Variable
                             as DeclarationExpressionSyntax
-                        )
-                            ?.Type
+                        )?.Type
                             .IsTypeInferred(semanticModel) == true;
                 default:
                     return false;

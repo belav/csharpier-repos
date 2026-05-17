@@ -89,8 +89,7 @@ public static class RelationalEntityTypeExtensions
             && ownership != null
 #pragma warning disable EF1001 // Internal EF Core API usage.
             && entityType.Name
-                == ownership
-                    .PrincipalEntityType
+                == ownership.PrincipalEntityType
                     .GetOwnedName(name, ownership.PrincipalToDependent!.Name)
         )
 #pragma warning restore EF1001 // Internal EF Core API usage.

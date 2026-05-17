@@ -51,8 +51,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                     ? " @ "
                         + string.Join(
                             ", ",
-                            System
-                                .Linq
+                            System.Linq
                                 .Enumerable
                                 .Select(
                                     DeclaringSyntaxReferences,

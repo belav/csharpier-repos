@@ -26,8 +26,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Test.Utilities
             : base(builder) { }
 
         protected override SymbolDisplayFormat DisplayFormat =>
-            SymbolDisplayFormat
-                .TestFormatWithConstraints
+            SymbolDisplayFormat.TestFormatWithConstraints
                 .WithMemberOptions(
                     SymbolDisplayMemberOptions.IncludeParameters
                         | SymbolDisplayMemberOptions.IncludeType

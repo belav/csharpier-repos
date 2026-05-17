@@ -91,8 +91,7 @@ namespace System.ServiceModel.Activities.Presentation
         {
             public CorrelationDataValueEditor()
             {
-                this.InlineEditorTemplate = EditorCategoryTemplateDictionary
-                    .Instance
+                this.InlineEditorTemplate = EditorCategoryTemplateDictionary.Instance
                     .GetCategoryTemplate("CorrelationDataValueEditor_InlineTemplate");
             }
 

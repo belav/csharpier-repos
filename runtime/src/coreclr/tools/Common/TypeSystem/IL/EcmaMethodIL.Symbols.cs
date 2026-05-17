@@ -60,8 +60,7 @@ namespace Internal.IL
 
         public override IEnumerable<string> GetParameterNames()
         {
-            ParameterHandleCollection parameters = _method
-                .MetadataReader
+            ParameterHandleCollection parameters = _method.MetadataReader
                 .GetMethodDefinition(_method.Handle)
                 .GetParameters();
 

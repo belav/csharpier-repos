@@ -508,8 +508,7 @@ namespace Microsoft.Cci
             // no extern alias defined in scope at all -> error in compiler
             Debug.Assert(declaredExternAliases != null);
 
-            var allAliases = _metadataWriter
-                .Context
+            var allAliases = _metadataWriter.Context
                 .Module
                 .GetAssemblyReferenceAliases(_metadataWriter.Context);
             foreach (AssemblyReferenceAlias alias in allAliases)

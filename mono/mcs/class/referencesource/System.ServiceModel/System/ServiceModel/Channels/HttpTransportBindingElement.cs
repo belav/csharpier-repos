@@ -162,16 +162,14 @@ namespace System.ServiceModel.Channels
 
                 if (
                     value.PolicyEnforcement == PolicyEnforcement.Always
-                    && !System
-                        .Security
+                    && !System.Security
                         .Authentication
                         .ExtendedProtection
                         .ExtendedProtectionPolicy
                         .OSSupportsExtendedProtection
                 )
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new PlatformNotSupportedException(
                                 SR.GetString(SR.ExtendedProtectionNotSupported)
@@ -217,8 +215,7 @@ namespace System.ServiceModel.Channels
             {
                 if (value <= 0)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentOutOfRangeException(
                                 "value",
@@ -242,8 +239,7 @@ namespace System.ServiceModel.Channels
             {
                 if (value < 0)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentOutOfRangeException(
                                 "value",
@@ -255,8 +251,7 @@ namespace System.ServiceModel.Channels
 
                 if (value > HttpTransportDefaults.MaxPendingAcceptsUpperLimit)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentOutOfRangeException(
                                 "value",
@@ -304,8 +299,7 @@ namespace System.ServiceModel.Channels
             {
                 if (!value.IsSingleton())
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgument(
                             "value",
                             SR.GetString(SR.HttpProxyRequiresSingleAuthScheme, value)
@@ -345,8 +339,7 @@ namespace System.ServiceModel.Channels
             {
                 if (value < TimeSpan.Zero)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentOutOfRangeException(
                                 "value",
@@ -357,8 +350,7 @@ namespace System.ServiceModel.Channels
                 }
                 if (TimeoutHelper.IsTooLarge(value))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentOutOfRangeException(
                                 "value",
@@ -554,8 +546,7 @@ namespace System.ServiceModel.Channels
 
             if (this.MessageHandlerFactory != null)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new InvalidOperationException(
                             SR.GetString(
@@ -569,8 +560,7 @@ namespace System.ServiceModel.Channels
             if (!this.CanBuildChannelFactory<TChannel>(context))
             {
 #pragma warning suppress 56506 // Microsoft, context.Binding will never be null.
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(
                         "TChannel",
                         SR.GetString(
@@ -583,8 +573,7 @@ namespace System.ServiceModel.Channels
 
             if (this.authenticationScheme == AuthenticationSchemes.None)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(
                         "value",
                         SR.GetString(SR.HttpAuthSchemeCannotBeNone, this.authenticationScheme)
@@ -592,8 +581,7 @@ namespace System.ServiceModel.Channels
             }
             else if (!this.authenticationScheme.IsSingleton())
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(
                         "value",
                         SR.GetString(SR.HttpRequiresSingleAuthScheme, this.authenticationScheme)
@@ -671,8 +659,7 @@ namespace System.ServiceModel.Channels
 
             if (!this.CanBuildChannelListener<TChannel>(context))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(
 #pragma warning suppress 56506 // Microsoft, context.Binding will never be null.
                         "TChannel",
@@ -714,8 +701,7 @@ namespace System.ServiceModel.Channels
                     //can't inherit from host because none were configured.
                     //We are throwing a "NotSupportedException" to be consistent with the type of exception that was thrown in this scenario,
                     //before the multi-auth feature, in HostedAspNetEnvironment.ValidateHttpSettings.
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new NotSupportedException(
                                 SR.GetString(
@@ -745,8 +731,7 @@ namespace System.ServiceModel.Channels
 
                     //We are throwing a "NotSupportedException" to be consistent with the type of exception that was thrown in this scenario,
                     //before the multi-auth feature, in HostedAspNetEnvironment.ValidateHttpSettings.
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new NotSupportedException(
                                 SR.GetString(
@@ -787,8 +772,7 @@ namespace System.ServiceModel.Channels
                 ((IPolicyExportExtension)encodingBindingElement).ExportPolicy(exporter, context);
             }
 
-            WsdlExporter
-                .WSAddressingHelper
+            WsdlExporter.WSAddressingHelper
                 .AddWSAddressingAssertion(
                     exporter,
                     context,
@@ -934,8 +918,7 @@ namespace System.ServiceModel.Channels
 
                 if (foundAssertion)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new NotSupportedException(
                                 SR.GetString(
@@ -976,8 +959,7 @@ namespace System.ServiceModel.Channels
                         || result == TransferMode.Buffered
                     )
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new NotSupportedException(
                                     SR.GetString(
@@ -1116,9 +1098,8 @@ namespace System.ServiceModel.Channels
         [EditorBrowsable(EditorBrowsableState.Never)]
         public bool ShouldSerializeWebSocketSettings()
         {
-            return !this.WebSocketSettings.Equals(
-                HttpTransportDefaults.GetDefaultWebSocketTransportSettings()
-            );
+            return !this.WebSocketSettings
+                .Equals(HttpTransportDefaults.GetDefaultWebSocketTransportSettings());
         }
 
         MessageEncodingBindingElement FindMessageEncodingBindingElement(
@@ -1142,8 +1123,7 @@ namespace System.ServiceModel.Channels
             out bool createdNew
         )
         {
-            BindingElementCollection bindingElements = endpointContext
-                .Endpoint
+            BindingElementCollection bindingElements = endpointContext.Endpoint
                 .Binding
                 .CreateBindingElements();
             return FindMessageEncodingBindingElement(bindingElements, out createdNew);

@@ -952,8 +952,7 @@ namespace System.Workflow.Activities.Common
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
         internal static void UpdateTypeProviderAssembliesRegistry(string assemblyName)
         {
-            RegistryKey referenceKey = Registry
-                .CurrentUser
+            RegistryKey referenceKey = Registry.CurrentUser
                 .CreateSubKey(TypeProviderRegistryKeyPath);
             if (referenceKey != null)
             {

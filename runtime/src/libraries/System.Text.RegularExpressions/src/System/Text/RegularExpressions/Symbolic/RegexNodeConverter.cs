@@ -87,8 +87,7 @@ namespace System.Text.RegularExpressions.Symbolic
                         case RegexNodeKind.Notone:
                             result.AddLast(
                                 _builder.CreateSingleton(
-                                    _builder
-                                        ._solver
+                                    _builder._solver
                                         .Not(_builder._charSetSolver.CreateBDDFromChar(node.Ch))
                                 )
                             );

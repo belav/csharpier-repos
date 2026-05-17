@@ -201,8 +201,7 @@ namespace Microsoft.CodeAnalysis.Interactive
                 imports = initResult.Imports.ToImmutableArrayOrEmpty();
 
                 var metadataService = _workspace.Services.GetRequiredService<IMetadataService>();
-                references = initResult
-                    .MetadataReferencePaths
+                references = initResult.MetadataReferencePaths
                     .ToImmutableArrayOrEmpty()
                     .SelectAsArray(
                         (path, metadataService) =>
@@ -272,8 +271,7 @@ namespace Microsoft.CodeAnalysis.Interactive
                             initializationScriptImports,
                             initializationScriptReferences
                         );
-                        solution = initProject
-                            .Solution
+                        solution = initProject.Solution
                             .AddDocument(
                                 DocumentId.CreateNewId(
                                     initializationScriptProjectId,
@@ -296,8 +294,7 @@ namespace Microsoft.CodeAnalysis.Interactive
                         imports,
                         references
                     );
-                    solution = newSubmissionProject
-                        .Solution
+                    solution = newSubmissionProject.Solution
                         .AddDocument(
                             newSubmissionDocumentId,
                             newSubmissionProjectName,
@@ -339,8 +336,7 @@ namespace Microsoft.CodeAnalysis.Interactive
                     compilationOptions.MetadataReferenceResolver!;
                 if (
                     metadataResolver.PathResolver.BaseDirectory != _workingDirectory
-                    || !metadataResolver
-                        .PathResolver
+                    || !metadataResolver.PathResolver
                         .SearchPaths
                         .SequenceEqual(_referenceSearchPaths)
                 )

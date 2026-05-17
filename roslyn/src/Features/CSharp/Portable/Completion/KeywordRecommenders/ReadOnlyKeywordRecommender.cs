@@ -35,8 +35,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             return context.IsGlobalStatementContext
                 || IsRefReadOnlyContext(context)
                 || IsValidContextForType(context, cancellationToken)
-                || context
-                    .SyntaxTree
+                || context.SyntaxTree
                     .IsGlobalMemberDeclarationContext(
                         context.Position,
                         SyntaxKindSet.AllGlobalMemberModifiers,
@@ -78,8 +77,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             var type = context.ContainingTypeDeclaration;
             return type is not null
                 && type.Kind() is SyntaxKind.StructDeclaration or SyntaxKind.RecordStructDeclaration
-                && context
-                    .TargetToken
+                && context.TargetToken
                     .IsAnyAccessorDeclarationContext(context.Position, SyntaxKind.ReadOnlyKeyword);
         }
     }

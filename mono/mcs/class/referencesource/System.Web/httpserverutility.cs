@@ -404,8 +404,7 @@ namespace System.Web
 
                         if (_context.WorkerRequest is IIS7WorkerRequest)
                         {
-                            handler = _context
-                                .ApplicationInstance
+                            handler = _context.ApplicationInstance
                                 .MapIntegratedHttpHandler(
                                     _context,
                                     request.RequestType,
@@ -417,8 +416,7 @@ namespace System.Web
                         }
                         else
                         {
-                            handler = _context
-                                .ApplicationInstance
+                            handler = _context.ApplicationInstance
                                 .MapHttpHandler(
                                     _context,
                                     request.RequestType,
@@ -1037,8 +1035,7 @@ namespace System.Web
             {
                 if (errorFormatterGenerator != null)
                 {
-                    context
-                        .Response
+                    context.Response
                         .SetOverrideErrorFormatter(errorFormatterGenerator.GetErrorFormatter(e));
                 }
 
@@ -1618,8 +1615,7 @@ namespace System.Web
             if (str == null)
                 return null;
             byte[] bytes = e.GetBytes(str);
-            return HttpEncoder
-                .Current
+            return HttpEncoder.Current
                 .UrlEncode(
                     bytes,
                     0,
@@ -1643,8 +1639,7 @@ namespace System.Web
         /// </devdoc>
         public static byte[] UrlEncodeToBytes(byte[] bytes, int offset, int count)
         {
-            return HttpEncoder
-                .Current
+            return HttpEncoder.Current
                 .UrlEncode(
                     bytes,
                     offset,
@@ -1661,8 +1656,7 @@ namespace System.Web
         )]
         public static string UrlEncodeUnicode(string str)
         {
-            return HttpEncoder
-                .Current
+            return HttpEncoder.Current
                 .UrlEncodeUnicode(
                     str,
                     false /* ignoreAscii */

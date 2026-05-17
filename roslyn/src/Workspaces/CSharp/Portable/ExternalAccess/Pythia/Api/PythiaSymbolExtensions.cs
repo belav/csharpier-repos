@@ -26,8 +26,7 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Pythia.Api
             Compilation compilation
         )
             where T : ISymbol =>
-            Shared
-                .Extensions
+            Shared.Extensions
                 .ISymbolExtensions
                 .FilterToVisibleAndBrowsableSymbols(symbols, hideAdvancedMembers, compilation);
 
@@ -48,8 +47,7 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Pythia.Api
             SemanticModel semanticModel,
             int position
         ) =>
-            Shared
-                .Extensions
+            Shared.Extensions
                 .ISymbolExtensions
                 .IsAwaitableNonDynamic(symbol, semanticModel, position);
 

@@ -84,8 +84,7 @@ public class WebSocketClient
                 request.Headers.Add(HeaderNames.Connection, new string[] { "Upgrade" });
                 request.Headers.Add(HeaderNames.Upgrade, new string[] { "websocket" });
                 request.Headers.Add(HeaderNames.SecWebSocketVersion, new string[] { "13" });
-                request
-                    .Headers
+                request.Headers
                     .Add(HeaderNames.SecWebSocketKey, new string[] { CreateRequestKey() });
                 if (SubProtocols.Any())
                 {

@@ -58,8 +58,7 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                         new IntPtr(pRawData),
                         (uint)rawData.Length
                     );
-                    bool success = Interop
-                        .Crypt32
+                    bool success = Interop.Crypt32
                         .CryptQueryObject(
                             Interop.Crypt32.CertQueryObjectType.CERT_QUERY_OBJECT_BLOB,
                             &certBlob,

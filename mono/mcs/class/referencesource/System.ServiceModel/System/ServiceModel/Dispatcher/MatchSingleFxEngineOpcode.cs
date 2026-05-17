@@ -147,8 +147,7 @@ namespace System.ServiceModel.Dispatcher
             }
             else
             {
-                context
-                    .Processor
+                context.Processor
                     .ResultSet
                     .Add(
                         new KeyValuePair<MessageQuery, XPathResult>((MessageQuery)this.item, result)

@@ -283,8 +283,7 @@ namespace System.ServiceModel.Diagnostics
                         Dictionary<string, string> values = new Dictionary<string, string>(3);
                         values["AppDomain.FriendlyName"] = AppDomain.CurrentDomain.FriendlyName;
                         values["ProcessName"] = DiagnosticTraceBase.ProcessName;
-                        values["ProcessId"] = DiagnosticTraceBase
-                            .ProcessId
+                        values["ProcessId"] = DiagnosticTraceBase.ProcessId
                             .ToString(CultureInfo.CurrentCulture);
                         this.TraceEvent(
                             TraceEventType.Information,

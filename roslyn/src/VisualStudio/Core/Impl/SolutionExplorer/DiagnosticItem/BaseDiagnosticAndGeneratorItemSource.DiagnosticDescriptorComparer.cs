@@ -21,8 +21,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
                     return comparison;
                 }
 
-                comparison = StringComparer
-                    .CurrentCulture
+                comparison = StringComparer.CurrentCulture
                     .Compare(
                         x.Title.ToString(CultureInfo.CurrentUICulture),
                         y.Title.ToString(CultureInfo.CurrentUICulture)
@@ -32,8 +31,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
                     return comparison;
                 }
 
-                comparison = StringComparer
-                    .CurrentCulture
+                comparison = StringComparer.CurrentCulture
                     .Compare(
                         x.MessageFormat.ToString(CultureInfo.CurrentUICulture),
                         y.MessageFormat.ToString(CultureInfo.CurrentUICulture)

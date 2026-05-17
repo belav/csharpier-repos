@@ -40,8 +40,7 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
         public async Task GenerateMethodInClosedFile()
         {
             var project = ProjectName;
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .AddFileAsync(
                     project,
                     "Foo.cs",
@@ -70,15 +69,13 @@ public class Program
             );
 
             await TestServices.Editor.InvokeCodeActionListAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .CodeActionAsync(
                     "Generate method 'Bar'",
                     applyFix: true,
                     cancellationToken: HangMitigatingCancellationToken
                 );
-            await TestServices
-                .SolutionVerifier
+            await TestServices.SolutionVerifier
                 .FileContentsAsync(
                     project,
                     "Foo.cs",
@@ -112,8 +109,7 @@ class Program
                 HangMitigatingCancellationToken
             );
             await TestServices.Editor.InvokeCodeActionListAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .CodeActionAsync(
                     "using System;",
                     cancellationToken: HangMitigatingCancellationToken
@@ -144,16 +140,13 @@ class Program
             // Suspend file change notification during code action application, since spurious file change notifications
             // can cause silent failure to apply the code action if they occur within this block.
             await using (
-                var fileChangeRestorer = await TestServices
-                    .Shell
+                var fileChangeRestorer = await TestServices.Shell
                     .PauseFileChangesAsync(HangMitigatingCancellationToken)
             )
             {
-                await TestServices
-                    .Editor
+                await TestServices.Editor
                     .InvokeCodeActionListAsync(HangMitigatingCancellationToken);
-                await TestServices
-                    .EditorVerifier
+                await TestServices.EditorVerifier
                     .CodeActionAsync(
                         "using System;",
                         applyFix: true,
@@ -165,16 +158,13 @@ class Program
             // Suspend file change notification during code action application, since spurious file change notifications
             // can cause silent failure to apply the code action if they occur within this block.
             await using (
-                var fileChangeRestorer = await TestServices
-                    .Shell
+                var fileChangeRestorer = await TestServices.Shell
                     .PauseFileChangesAsync(HangMitigatingCancellationToken)
             )
             {
-                await TestServices
-                    .Editor
+                await TestServices.Editor
                     .InvokeCodeActionListWithoutWaitingAsync(HangMitigatingCancellationToken);
-                await TestServices
-                    .EditorVerifier
+                await TestServices.EditorVerifier
                     .CodeActionAsync(
                         "Simplify name 'System.ArgumentException'",
                         applyFix: true,
@@ -183,8 +173,7 @@ class Program
                     );
             }
 
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .TextContainsAsync(
                     @"
 using System;
@@ -234,8 +223,7 @@ class C
 
             await SetUpEditorAsync(markup, HangMitigatingCancellationToken);
             await TestServices.Editor.InvokeCodeActionListAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .CodeActionAsync(
                     "Simplify delegate invocation",
                     applyFix: true,
@@ -243,8 +231,7 @@ class C
                     blockUntilComplete: true,
                     cancellationToken: HangMitigatingCancellationToken
                 );
-            await TestServices
-                .Editor
+            await TestServices.Editor
                 .PlaceCaretAsync(
                     "temp2",
                     0,
@@ -254,8 +241,7 @@ class C
                     HangMitigatingCancellationToken
                 );
             await TestServices.Editor.InvokeCodeActionListAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .CodeActionAsync(
                     "Simplify delegate invocation",
                     applyFix: true,
@@ -263,11 +249,9 @@ class C
                     blockUntilComplete: true,
                     cancellationToken: HangMitigatingCancellationToken
                 );
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .TextContainsAsync("First?.", cancellationToken: HangMitigatingCancellationToken);
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .TextContainsAsync("Second?.", cancellationToken: HangMitigatingCancellationToken);
         }
 
@@ -315,8 +299,7 @@ class C
     public int Y2 => 5;
 }";
 
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .OpenFileAsync(ProjectName, "Class1.cs", HangMitigatingCancellationToken);
 
             /*
@@ -327,8 +310,7 @@ class C
 
             MarkupTestFile.GetSpans(markup, out _, out var _);
             await SetUpEditorAsync(markup, HangMitigatingCancellationToken);
-            await TestServices
-                .Workspace
+            await TestServices.Workspace
                 .WaitForAllAsyncOperationsAsync(
                     [
                         FeatureAttribute.Workspace,
@@ -338,8 +320,7 @@ class C
                     ],
                     HangMitigatingCancellationToken
                 );
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .CodeActionsNotShowingAsync(HangMitigatingCancellationToken);
 
             var editorConfig =
@@ -349,8 +330,7 @@ class C
 csharp_style_expression_bodied_properties = true:warning
 ";
 
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .AddFileAsync(
                     ProjectName,
                     ".editorconfig",
@@ -359,8 +339,7 @@ csharp_style_expression_bodied_properties = true:warning
                     HangMitigatingCancellationToken
                 );
 
-            await TestServices
-                .Workspace
+            await TestServices.Workspace
                 .WaitForAllAsyncOperationsAsync(
                     [
                         FeatureAttribute.Workspace,
@@ -371,8 +350,7 @@ csharp_style_expression_bodied_properties = true:warning
                     HangMitigatingCancellationToken
                 );
             await TestServices.Editor.InvokeCodeActionListAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .CodeActionAsync(
                     "Use expression body for property",
                     applyFix: true,
@@ -392,8 +370,7 @@ csharp_style_expression_bodied_properties = true:warning
              * outcome for the modified .editorconfig style.
              */
 
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .SetFileContentsAsync(
                     ProjectName,
                     ".editorconfig",
@@ -401,8 +378,7 @@ csharp_style_expression_bodied_properties = true:warning
                     HangMitigatingCancellationToken
                 );
 
-            await TestServices
-                .Workspace
+            await TestServices.Workspace
                 .WaitForAllAsyncOperationsAsync(
                     [
                         FeatureAttribute.Workspace,
@@ -413,8 +389,7 @@ csharp_style_expression_bodied_properties = true:warning
                     HangMitigatingCancellationToken
                 );
             await TestServices.Editor.InvokeCodeActionListAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .CodeActionAsync(
                     "Use block body for property",
                     applyFix: true,
@@ -513,8 +488,7 @@ class D
                 out int generatedSourcePosition
             );
 
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .AddFileAsync(
                     ProjectName,
                     "D.cs",
@@ -524,16 +498,14 @@ class D
                 );
 
             // Switch to the main document we'll be editing
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .OpenFileAsync(ProjectName, "Class1.cs", HangMitigatingCancellationToken);
 
             // Verify that applying a Fix All operation does not change generated files.
             // This is a regression test for correctness with respect to the design.
             await SetUpEditorAsync(markup, HangMitigatingCancellationToken);
             await TestServices.Editor.InvokeCodeActionListAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .CodeActionAsync(
                     "Remove unnecessary usings",
                     applyFix: true,
@@ -546,8 +518,7 @@ class D
                 await TestServices.Editor.GetTextAsync(HangMitigatingCancellationToken)
             );
 
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .OpenFileAsync(ProjectName, "D.cs", HangMitigatingCancellationToken);
             AssertEx.EqualOrDiff(
                 generatedSource,
@@ -558,12 +529,10 @@ class D
             // ⚠ This is a statement of the current behavior, and not a claim regarding correctness of the design.
             // The current behavior is observable; any change to this behavior should be part of an intentional design
             // change.
-            await TestServices
-                .Editor
+            await TestServices.Editor
                 .MoveCaretAsync(generatedSourcePosition, HangMitigatingCancellationToken);
             await TestServices.Editor.InvokeCodeActionListAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .CodeActionAsync(
                     "Remove unnecessary usings",
                     applyFix: true,
@@ -578,12 +547,10 @@ class D
 
             // Verify that the code action can still be applied manually from within the generated file.
             // This is a regression test for correctness with respect to the design.
-            await TestServices
-                .Editor
+            await TestServices.Editor
                 .MoveCaretAsync(generatedSourcePosition, HangMitigatingCancellationToken);
             await TestServices.Editor.InvokeCodeActionListAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .CodeActionAsync(
                     "Remove unnecessary usings",
                     applyFix: true,
@@ -631,8 +598,7 @@ class D
     public IntPtr X1 { get; set; }
 }";
 
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .AddFileAsync(
                     ProjectName,
                     "D.cs",
@@ -642,8 +608,7 @@ class D
                 );
 
             // Switch to the main document we'll be editing
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .OpenFileAsync(ProjectName, "Class1.cs", HangMitigatingCancellationToken);
 
             // Verify that applying a Fix All operation does not change generated file, but does change other files.
@@ -653,8 +618,7 @@ class D
             MarkupTestFile.GetPosition(markup, out var expectedText, out int _);
             await SetUpEditorAsync(markup, HangMitigatingCancellationToken);
             await TestServices.Editor.InvokeCodeActionListAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .CodeActionAsync(
                     "Remove unnecessary usings",
                     applyFix: true,
@@ -667,8 +631,7 @@ class D
                 await TestServices.Editor.GetTextAsync(HangMitigatingCancellationToken)
             );
 
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .OpenFileAsync(ProjectName, "D.cs", HangMitigatingCancellationToken);
             AssertEx.EqualOrDiff(
                 expectedSecondFile,
@@ -691,8 +654,7 @@ class Program
                 HangMitigatingCancellationToken
             );
             await TestServices.Editor.InvokeCodeActionListAsync(HangMitigatingCancellationToken);
-            var classifiedTokens = await TestServices
-                .Editor
+            var classifiedTokens = await TestServices.Editor
                 .GetLightBulbPreviewClassificationsAsync(
                     "Generate method 'Foo'",
                     HangMitigatingCancellationToken
@@ -722,14 +684,12 @@ public class P2 { }",
                 HangMitigatingCancellationToken
             );
 
-            await TestServices
-                .Input
+            await TestServices.Input
                 .SendAsync(
                     [VirtualKeyCode.BACK, VirtualKeyCode.BACK, "Stream"],
                     HangMitigatingCancellationToken
                 );
-            await TestServices
-                .Workspace
+            await TestServices.Workspace
                 .WaitForAllAsyncOperationsAsync(
                     [
                         FeatureAttribute.Workspace,
@@ -747,13 +707,11 @@ public class P2 { }",
             // Suspend file change notification during code action application, since spurious file change notifications
             // can cause silent failure to apply the code action if they occur within this block.
             await using (
-                var fileChangeRestorer = await TestServices
-                    .Shell
+                var fileChangeRestorer = await TestServices.Shell
                     .PauseFileChangesAsync(HangMitigatingCancellationToken)
             )
             {
-                await TestServices
-                    .Editor
+                await TestServices.Editor
                     .InvokeCodeActionListAsync(HangMitigatingCancellationToken);
                 var expectedItems = new[]
                 {
@@ -776,8 +734,7 @@ public class P2 { }",
                     "Error",
                 };
 
-                await TestServices
-                    .EditorVerifier
+                await TestServices.EditorVerifier
                     .CodeActionsAsync(
                         expectedItems,
                         applyFix: expectedItems[0],
@@ -786,8 +743,7 @@ public class P2 { }",
                     );
             }
 
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .TextContainsAsync(
                     "using System.IO;",
                     cancellationToken: HangMitigatingCancellationToken
@@ -816,14 +772,12 @@ namespace NS
 }",
                 HangMitigatingCancellationToken
             );
-            await TestServices
-                .Input
+            await TestServices.Input
                 .SendAsync(
                     [VirtualKeyCode.BACK, VirtualKeyCode.BACK, "Foober"],
                     HangMitigatingCancellationToken
                 );
-            await TestServices
-                .Workspace
+            await TestServices.Workspace
                 .WaitForAllAsyncOperationsAsync(
                     [
                         FeatureAttribute.Workspace,
@@ -858,8 +812,7 @@ namespace NS
                 "Error",
             };
 
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .CodeActionsAsync(
                     expectedItems,
                     applyFix: expectedItems[0],
@@ -886,8 +839,7 @@ class Program
 }",
                 HangMitigatingCancellationToken
             );
-            await TestServices
-                .Editor
+            await TestServices.Editor
                 .SelectTextInCurrentDocumentAsync("2", HangMitigatingCancellationToken);
 
             await TestServices.Editor.InvokeCodeActionListAsync(HangMitigatingCancellationToken);
@@ -912,16 +864,14 @@ class Program
                 "Error",
             };
 
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .CodeActionsAsync(
                     expectedItems,
                     applyFix: generateImplicitTitle,
                     ensureExpectedItemsAreOrdered: true,
                     cancellationToken: HangMitigatingCancellationToken
                 );
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .TextContainsAsync("implicit", cancellationToken: HangMitigatingCancellationToken);
         }
 
@@ -948,16 +898,14 @@ public class Program
                 "System.Runtime.InteropServices.GCHandle",
             };
 
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .CodeActionsAsync(
                     expectedItems,
                     applyFix: expectedItems[0],
                     ensureExpectedItemsAreOrdered: true,
                     cancellationToken: HangMitigatingCancellationToken
                 );
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .TextContainsAsync(
                     "using System.Runtime.InteropServices",
                     cancellationToken: HangMitigatingCancellationToken
@@ -987,16 +935,14 @@ public class Program
                 "System.Runtime.InteropServices.GCHandle",
             };
 
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .CodeActionsAsync(
                     expectedItems,
                     applyFix: expectedItems[0],
                     ensureExpectedItemsAreOrdered: true,
                     cancellationToken: HangMitigatingCancellationToken
                 );
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .TextContainsAsync(
                     "using System.Runtime.InteropServices",
                     cancellationToken: HangMitigatingCancellationToken
@@ -1070,8 +1016,7 @@ public class Program
                 "Error",
             };
 
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .CodeActionsAsync(
                     expectedItems,
                     ensureExpectedItemsAreOrdered: true,
@@ -1095,8 +1040,7 @@ class C
 }";
             await SetUpEditorAsync(markup, HangMitigatingCancellationToken);
 
-            await TestServices
-                .Workspace
+            await TestServices.Workspace
                 .WaitForAllAsyncOperationsAsync(
                     [
                         FeatureAttribute.Workspace,
@@ -1120,13 +1064,11 @@ class C
             // Suspend file change notification during code action application, since spurious file change notifications
             // can cause silent failure to apply the code action if they occur within this block.
             await using (
-                var fileChangeRestorer = await TestServices
-                    .Shell
+                var fileChangeRestorer = await TestServices.Shell
                     .PauseFileChangesAsync(HangMitigatingCancellationToken)
             )
             {
-                await TestServices
-                    .Editor
+                await TestServices.Editor
                     .InvokeCodeActionListAsync(HangMitigatingCancellationToken);
                 var expectedItems = new[]
                 {
@@ -1141,8 +1083,7 @@ class C
                     "Warning",
                     "Error",
                 };
-                await TestServices
-                    .EditorVerifier
+                await TestServices.EditorVerifier
                     .CodeActionsAsync(
                         expectedItems,
                         applyFix: "Error",
@@ -1151,8 +1092,7 @@ class C
                     );
             }
 
-            await TestServices
-                .Workspace
+            await TestServices.Workspace
                 .WaitForAllAsyncOperationsAsync(
                     [
                         FeatureAttribute.Workspace,
@@ -1206,8 +1146,7 @@ class C
 }";
             await SetUpEditorAsync(markup, HangMitigatingCancellationToken);
 
-            await TestServices
-                .Workspace
+            await TestServices.Workspace
                 .WaitForAllAsyncOperationsAsync(
                     [
                         FeatureAttribute.Workspace,
@@ -1226,16 +1165,14 @@ class C
             );
 
             // Add an .editorconfig file to the project to change severity to error.
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .AddFileAsync(
                     ProjectName,
                     ".editorconfig",
                     open: true,
                     cancellationToken: HangMitigatingCancellationToken
                 );
-            await TestServices
-                .Input
+            await TestServices.Input
                 .SendAsync(
                     @"
 [*.cs]
@@ -1244,8 +1181,7 @@ dotnet_diagnostic.CS0168.severity = ",
                 );
 
             // NOTE: Below wait is a critical step in repro-ing the original regression.
-            await TestServices
-                .Workspace
+            await TestServices.Workspace
                 .WaitForAllAsyncOperationsAsync(
                     [
                         FeatureAttribute.Workspace,
@@ -1258,8 +1194,7 @@ dotnet_diagnostic.CS0168.severity = ",
 
             await TestServices.Input.SendAsync("error", HangMitigatingCancellationToken);
 
-            await TestServices
-                .Workspace
+            await TestServices.Workspace
                 .WaitForAllAsyncOperationsAsync(
                     [
                         FeatureAttribute.Workspace,
@@ -1331,8 +1266,7 @@ class C2
         int $$y = 0;
     }
 }";
-            await TestServices
-                .Workspace
+            await TestServices.Workspace
                 .SetBackgroundAnalysisOptionsAsync(
                     analyzerScope,
                     compilerScope,
@@ -1341,8 +1275,7 @@ class C2
 
             await SetUpEditorAsync(markup2, HangMitigatingCancellationToken);
 
-            await TestServices
-                .Workspace
+            await TestServices.Workspace
                 .WaitForAllAsyncOperationsAsync(
                     [
                         FeatureAttribute.Workspace,
@@ -1353,8 +1286,7 @@ class C2
                     HangMitigatingCancellationToken
                 );
 
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .AddFileAsync(
                     ProjectName,
                     "Class2.cs",
@@ -1363,8 +1295,7 @@ class C2
                     cancellationToken: HangMitigatingCancellationToken
                 );
 
-            await TestServices
-                .Workspace
+            await TestServices.Workspace
                 .WaitForAllAsyncOperationsAsync(
                     [
                         FeatureAttribute.Workspace,
@@ -1384,16 +1315,14 @@ class C2
             );
 
             // Add an .editorconfig file to the project to change severities to error.
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .AddFileAsync(
                     ProjectName,
                     ".editorconfig",
                     open: true,
                     cancellationToken: HangMitigatingCancellationToken
                 );
-            await TestServices
-                .Editor
+            await TestServices.Editor
                 .SetTextAsync(
                     @"
 [*.cs]
@@ -1402,8 +1331,7 @@ dotnet_diagnostic.IDE0059.severity = error",
                     HangMitigatingCancellationToken
                 );
 
-            await TestServices
-                .Workspace
+            await TestServices.Workspace
                 .WaitForAllAsyncOperationsAsync(
                     [
                         FeatureAttribute.Workspace,
@@ -1423,8 +1351,7 @@ dotnet_diagnostic.IDE0059.severity = error",
             );
 
             // Edit editorconfig file to disable both compiler and analyzer diagnostics.
-            await TestServices
-                .Editor
+            await TestServices.Editor
                 .SetTextAsync(
                     @"
 [*.cs]
@@ -1433,8 +1360,7 @@ dotnet_diagnostic.IDE0059.severity = none",
                     HangMitigatingCancellationToken
                 );
 
-            await TestServices
-                .Workspace
+            await TestServices.Workspace
                 .WaitForAllAsyncOperationsAsync(
                     [
                         FeatureAttribute.Workspace,
@@ -1485,8 +1411,7 @@ dotnet_diagnostic.IDE0059.severity = none",
                 }
 
                 var expectedContents = expectedContentsBuilder.ToImmutable().Sort();
-                var actualContents = await testServices
-                    .ErrorList
+                var actualContents = await testServices.ErrorList
                     .GetErrorsAsync(
                         ErrorSource.Other,
                         Microsoft.VisualStudio.Shell.Interop.__VSERRORCATEGORY.EC_MESSAGE,
@@ -1565,14 +1490,12 @@ class OtherType
     }
 }";
 
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .OpenFileAsync(ProjectName, "Class1.cs", HangMitigatingCancellationToken);
 
             MarkupTestFile.GetSpans(markup, out _, out var _);
             await SetUpEditorAsync(markup, HangMitigatingCancellationToken);
-            await TestServices
-                .Workspace
+            await TestServices.Workspace
                 .WaitForAllAsyncOperationsAsync(
                     [
                         FeatureAttribute.Workspace,
@@ -1585,8 +1508,7 @@ class OtherType
 
             await TestServices.Editor.InvokeCodeActionListAsync(HangMitigatingCancellationToken);
 
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .CodeActionAsync(
                     "Add braces",
                     applyFix: true,
@@ -1744,22 +1666,19 @@ class OtherType2
     }
 }";
 
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .AddFileAsync(
                     ProjectName,
                     "Class2.cs",
                     markup2,
                     cancellationToken: HangMitigatingCancellationToken
                 );
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .OpenFileAsync(ProjectName, "Class1.cs", HangMitigatingCancellationToken);
 
             MarkupTestFile.GetSpans(markup1, out _, out var _);
             await SetUpEditorAsync(markup1, HangMitigatingCancellationToken);
-            await TestServices
-                .Workspace
+            await TestServices.Workspace
                 .WaitForAllAsyncOperationsAsync(
                     [
                         FeatureAttribute.Workspace,
@@ -1772,8 +1691,7 @@ class OtherType2
 
             await TestServices.Editor.InvokeCodeActionListAsync(HangMitigatingCancellationToken);
 
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .CodeActionAsync(
                     "Add braces",
                     applyFix: true,
@@ -1788,8 +1706,7 @@ class OtherType2
 
             AssertEx.EqualOrDiff(
                 expectedText2,
-                await TestServices
-                    .SolutionExplorer
+                await TestServices.SolutionExplorer
                     .GetFileContentsAsync(ProjectName, "Class2.cs", HangMitigatingCancellationToken)
             );
         }
@@ -1849,14 +1766,12 @@ class C2
     }
 }";
 
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .OpenFileAsync(ProjectName, "Class1.cs", HangMitigatingCancellationToken);
 
             MarkupTestFile.GetSpans(markup, out _, out var _);
             await SetUpEditorAsync(markup, HangMitigatingCancellationToken);
-            await TestServices
-                .Workspace
+            await TestServices.Workspace
                 .WaitForAllAsyncOperationsAsync(
                     [
                         FeatureAttribute.Workspace,
@@ -1869,8 +1784,7 @@ class C2
 
             await TestServices.Editor.InvokeCodeActionListAsync(HangMitigatingCancellationToken);
 
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .CodeActionAsync(
                     "Convert to raw string",
                     applyFix: true,
@@ -1996,22 +1910,19 @@ class C2
     }
 }";
 
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .AddFileAsync(
                     ProjectName,
                     "Class2.cs",
                     markup2,
                     cancellationToken: HangMitigatingCancellationToken
                 );
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .OpenFileAsync(ProjectName, "Class1.cs", HangMitigatingCancellationToken);
 
             MarkupTestFile.GetSpans(markup1, out _, out var _);
             await SetUpEditorAsync(markup1, HangMitigatingCancellationToken);
-            await TestServices
-                .Workspace
+            await TestServices.Workspace
                 .WaitForAllAsyncOperationsAsync(
                     [
                         FeatureAttribute.Workspace,
@@ -2024,8 +1935,7 @@ class C2
 
             await TestServices.Editor.InvokeCodeActionListAsync(HangMitigatingCancellationToken);
 
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .CodeActionAsync(
                     "Convert to raw string",
                     applyFix: true,
@@ -2040,8 +1950,7 @@ class C2
 
             AssertEx.EqualOrDiff(
                 expectedText2,
-                await TestServices
-                    .SolutionExplorer
+                await TestServices.SolutionExplorer
                     .GetFileContentsAsync(ProjectName, "Class2.cs", HangMitigatingCancellationToken)
             );
         }
@@ -2063,8 +1972,7 @@ public class Program
                 HangMitigatingCancellationToken
             );
 
-            await TestServices
-                .Workspace
+            await TestServices.Workspace
                 .WaitForAllAsyncOperationsAsync(
                     [
                         FeatureAttribute.Workspace,
@@ -2081,15 +1989,13 @@ public class Program
 
             // Suspend file change notification during code action application, since spurious file change notifications
             // can cause silent failure to apply the code action if they occur within this block.
-            await using var fileChangeRestorer = await TestServices
-                .Shell
+            await using var fileChangeRestorer = await TestServices.Shell
                 .PauseFileChangesAsync(HangMitigatingCancellationToken);
 
             await TestServices.Editor.InvokeCodeActionListAsync(HangMitigatingCancellationToken);
             var expectedItems = new[] { "Use expression body for method", "Extract base class..." };
 
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .CodeActionsAsync(
                     expectedItems,
                     ensureExpectedItemsAreOrdered: true,
@@ -2105,18 +2011,15 @@ public class Program
                 @"# Editorconfig File
 # Refactored";
 
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .OpenFileAsync(ProjectName, "Class1.cs", HangMitigatingCancellationToken);
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .AddAnalyzerReferenceAsync(
                     ProjectName,
                     typeof(NonSourceFileRefactoring).Assembly.Location,
                     HangMitigatingCancellationToken
                 );
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .AddFileAsync(
                     ProjectName,
                     ".editorconfig",
@@ -2127,8 +2030,7 @@ public class Program
 
             MarkupTestFile.GetSpans(markup, out _, out var _);
             await SetUpEditorAsync(markup, HangMitigatingCancellationToken);
-            await TestServices
-                .Workspace
+            await TestServices.Workspace
                 .WaitForAllAsyncOperationsAsync(
                     [
                         FeatureAttribute.Workspace,
@@ -2141,8 +2043,7 @@ public class Program
 
             await TestServices.Editor.InvokeCodeActionListAsync(HangMitigatingCancellationToken);
 
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .CodeActionAsync(
                     nameof(NonSourceFileRefactoring),
                     applyFix: true,
@@ -2186,8 +2087,7 @@ class C
                     "Unwrap and indent all parameters",
                 };
 
-                await TestServices
-                    .EditorVerifier
+                await TestServices.EditorVerifier
                     .CodeActionsAsync(
                         expectedItems,
                         ensureExpectedItemsAreOrdered: true,

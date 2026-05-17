@@ -308,8 +308,7 @@ public class Migrator : IMigrator
         else
         {
             var fromMigrationId = _migrationsAssembly.GetMigrationId(fromMigration);
-            appliedMigrations = _migrationsAssembly
-                .Migrations
+            appliedMigrations = _migrationsAssembly.Migrations
                 .Where(t =>
                     string.Compare(t.Key, fromMigrationId, StringComparison.OrdinalIgnoreCase) <= 0
                 )

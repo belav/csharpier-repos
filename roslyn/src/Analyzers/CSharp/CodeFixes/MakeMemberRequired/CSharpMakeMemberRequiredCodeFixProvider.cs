@@ -73,8 +73,7 @@ internal sealed class CSharpMakeMemberRequiredCodeFixProvider : SyntaxEditorBase
             .ConfigureAwait(false);
 
         if (
-            semanticModel
-                .Compilation
+            semanticModel.Compilation
                 .GetBestTypeByMetadataName(
                     "System.Runtime.CompilerServices.RequiredMemberAttribute"
                 )

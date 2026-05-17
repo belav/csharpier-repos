@@ -3171,8 +3171,7 @@ class Test
             var comp = CSharpCompilation.Create(
                 "Name",
                 references: new[] { reference },
-                options: TestOptions
-                    .ReleaseDll
+                options: TestOptions.ReleaseDll
                     .WithMetadataImportOptions(MetadataImportOptions.Internal)
             );
 
@@ -3181,10 +3180,11 @@ class Test
                     comp.GlobalNamespace
                         .GetMembers()
                         .Single(s =>
-                            s.Name.StartsWith(
-                                "<PrivateImplementationDetails>",
-                                StringComparison.Ordinal
-                            )
+                            s.Name
+                                .StartsWith(
+                                    "<PrivateImplementationDetails>",
+                                    StringComparison.Ordinal
+                                )
                         )
             );
             var member = pid.GetMembers(
@@ -10780,8 +10780,7 @@ public class Program
                 source,
                 expectedOutput: "",
                 symbolValidator: validator,
-                options: TestOptions
-                    .DebugDll
+                options: TestOptions.DebugDll
                     .WithOutputKind(OutputKind.ConsoleApplication)
                     .WithMetadataImportOptions(MetadataImportOptions.All)
             );

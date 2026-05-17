@@ -24,8 +24,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.ArgumentProv
         [Fact]
         public void TestArgumentProviderOrder()
         {
-            var exportProvider = EditorTestCompositions
-                .EditorFeaturesWpf
+            var exportProvider = EditorTestCompositions.EditorFeaturesWpf
                 .ExportProviderFactory
                 .CreateExportProvider();
             var argumentProviderExports = exportProvider.GetExports<
@@ -68,8 +67,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.ArgumentProv
         [Fact]
         public void TestArgumentProviderOrderMetadata()
         {
-            var exportProvider = EditorTestCompositions
-                .EditorFeatures
+            var exportProvider = EditorTestCompositions.EditorFeatures
                 .ExportProviderFactory
                 .CreateExportProvider();
             var argumentProviderExports = exportProvider.GetExports<
@@ -131,8 +129,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.ArgumentProv
         [Fact]
         public void TestArgumentProviderFirstNameMetadata()
         {
-            var exportProvider = EditorTestCompositions
-                .EditorFeatures
+            var exportProvider = EditorTestCompositions.EditorFeatures
                 .ExportProviderFactory
                 .CreateExportProvider();
             var argumentProviderExports = exportProvider.GetExports<
@@ -152,8 +149,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.ArgumentProv
         [Fact]
         public void TestArgumentProviderLastNameMetadata()
         {
-            var exportProvider = EditorTestCompositions
-                .EditorFeatures
+            var exportProvider = EditorTestCompositions.EditorFeatures
                 .ExportProviderFactory
                 .CreateExportProvider();
             var argumentProviderExports = exportProvider.GetExports<
@@ -173,8 +169,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.ArgumentProv
         [Fact]
         public void TestArgumentProviderNameMetadata()
         {
-            var exportProvider = EditorTestCompositions
-                .EditorFeatures
+            var exportProvider = EditorTestCompositions.EditorFeatures
                 .ExportProviderFactory
                 .CreateExportProvider();
             var argumentProviderExports = exportProvider.GetExports<

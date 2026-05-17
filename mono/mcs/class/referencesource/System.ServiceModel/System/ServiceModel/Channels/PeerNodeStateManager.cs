@@ -275,8 +275,7 @@ namespace System.ServiceModel.Channels
                                 // Time out has already happened complete will be taken care of in the
                                 // OperationBase class
                                 invokeOperation = false;
-                                throw DiagnosticUtility
-                                    .ExceptionUtility
+                                throw DiagnosticUtility.ExceptionUtility
                                     .ThrowHelperError(new TimeoutException());
                             }
                             else
@@ -372,8 +371,7 @@ namespace System.ServiceModel.Channels
                                 // Time out has already happened complete will be taken care of in the
                                 // OperationBase class
                                 invokeOperation = false;
-                                throw DiagnosticUtility
-                                    .ExceptionUtility
+                                throw DiagnosticUtility.ExceptionUtility
                                     .ThrowHelperError(new TimeoutException());
                             }
                             else
@@ -471,8 +469,7 @@ namespace System.ServiceModel.Channels
                     {
                         if (Fx.IsFatal(e))
                             throw;
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperCallback(SR.GetString(SR.AsyncCallbackException), e);
                     }
                 }
@@ -517,8 +514,7 @@ namespace System.ServiceModel.Channels
                     {
                         if (Fx.IsFatal(e))
                             throw;
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperCallback(SR.GetString(SR.MessagePropagationException), e);
                     }
                 }

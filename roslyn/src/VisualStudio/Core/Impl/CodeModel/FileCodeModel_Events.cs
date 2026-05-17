@@ -174,10 +174,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
 
             if (codeModelEvent.Node == null)
             {
-                element = this.CodeModelService.CreateUnknownRootNamespaceCodeElement(
-                    this.State,
-                    this
-                );
+                element = this.CodeModelService
+                    .CreateUnknownRootNamespaceCodeElement(this.State, this);
             }
             else if (this.CodeModelService.IsParameterNode(codeModelEvent.Node))
             {
@@ -198,11 +196,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             {
                 if (codeModelEvent.Type == CodeModelEventType.Remove)
                 {
-                    element = this.CodeModelService.CreateUnknownCodeElement(
-                        this.State,
-                        this,
-                        codeModelEvent.Node
-                    );
+                    element = this.CodeModelService
+                        .CreateUnknownCodeElement(this.State, this, codeModelEvent.Node);
                 }
                 else
                 {

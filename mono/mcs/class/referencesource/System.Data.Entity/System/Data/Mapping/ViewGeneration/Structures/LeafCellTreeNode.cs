@@ -304,8 +304,7 @@ namespace System.Data.Mapping.ViewGeneration.Structures
             // Collect the member paths for edm scalar properties that belong to the target entity key.
             // These will be used as part of WITH RELATIONSHIP.
             // Get the key properties from edm type since the query parser depends on the order of key members
-            IEnumerable<StorageScalarPropertyMapping> propertyMaps = foreignKeyEndMap
-                .Properties
+            IEnumerable<StorageScalarPropertyMapping> propertyMaps = foreignKeyEndMap.Properties
                 .Cast<StorageScalarPropertyMapping>();
             List<MemberPath> toEndEntityKeyMemberPaths = new List<MemberPath>();
             foreach (EdmProperty edmProperty in toEndEntityType.KeyMembers)
@@ -354,8 +353,7 @@ namespace System.Data.Mapping.ViewGeneration.Structures
             EntitySetBase thisExtent
         )
         {
-            StorageMappingFragment mapFragment = colocatedAssociationSetMap
-                .TypeMappings
+            StorageMappingFragment mapFragment = colocatedAssociationSetMap.TypeMappings
                 .First()
                 .MappingFragments
                 .First();
@@ -373,8 +371,7 @@ namespace System.Data.Mapping.ViewGeneration.Structures
                 )
                 {
                     //Return the map for the other end since that is the foreign key end
-                    IEnumerable<StorageEndPropertyMapping> otherEnds = mapFragment
-                        .Properties
+                    IEnumerable<StorageEndPropertyMapping> otherEnds = mapFragment.Properties
                         .OfType<StorageEndPropertyMapping>()
                         .Where(eMap => (!eMap.Equals(endMap)));
                     Debug.Assert(otherEnds.Count() == 1);

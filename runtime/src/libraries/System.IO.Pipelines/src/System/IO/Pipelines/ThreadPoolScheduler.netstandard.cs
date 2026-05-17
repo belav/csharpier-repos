@@ -10,8 +10,7 @@ namespace System.IO.Pipelines
     {
         public override void Schedule(Action<object> action, object state)
         {
-            System
-                .Threading
+            System.Threading
                 .ThreadPool
                 .QueueUserWorkItem(
                     s =>

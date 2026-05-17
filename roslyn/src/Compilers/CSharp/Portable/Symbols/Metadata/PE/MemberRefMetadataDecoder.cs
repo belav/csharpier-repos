@@ -321,8 +321,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             }
 
             // CONSIDER: Do we want to add special handling for error types?  Right now, we expect they'll just fail to match.
-            var substituted = candidateParam
-                .TypeWithAnnotations
+            var substituted = candidateParam.TypeWithAnnotations
                 .SubstituteType(candidateMethodTypeMap);
             if (
                 !TypeSymbol.Equals(

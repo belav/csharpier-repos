@@ -411,8 +411,7 @@ public class SimpleTypeModelBinderIntegrationTest
             .BindingDetails(binding =>
             {
                 // A real details provider could customize message based on BindingMetadataProviderContext.
-                binding
-                    .ModelBindingMessageProvider
+                binding.ModelBindingMessageProvider
                     .SetNonPropertyAttemptedValueIsInvalidAccessor(
                         (value) => $"Hmm, '{value}' is not a valid value."
                     );
@@ -522,8 +521,7 @@ public class SimpleTypeModelBinderIntegrationTest
             .BindingDetails(binding =>
             {
                 // A real details provider could customize message based on BindingMetadataProviderContext.
-                binding
-                    .ModelBindingMessageProvider
+                binding.ModelBindingMessageProvider
                     .SetValueMustNotBeNullAccessor(value => $"Hurts when '{value}' is provided.");
             });
 

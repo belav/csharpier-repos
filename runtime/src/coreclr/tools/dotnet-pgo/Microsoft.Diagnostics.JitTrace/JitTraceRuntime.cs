@@ -289,8 +289,7 @@ namespace Microsoft.Diagnostics.JitTrace
                         foundAtLeastOneEntry = true;
                         try
                         {
-                            System
-                                .Runtime
+                            System.Runtime
                                 .CompilerServices
                                 .RuntimeHelpers
                                 .PrepareMethod(memberHandle);

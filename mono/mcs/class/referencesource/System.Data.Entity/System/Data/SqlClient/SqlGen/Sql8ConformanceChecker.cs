@@ -211,8 +211,7 @@ namespace System.Data.SqlClient.SqlGen
         public override bool Visit(DbExpression expression)
         {
             throw EntityUtil.NotSupported(
-                System
-                    .Data
+                System.Data
                     .Entity
                     .Strings
                     .Cqt_General_UnsupportedExpression(expression.GetType().FullName)

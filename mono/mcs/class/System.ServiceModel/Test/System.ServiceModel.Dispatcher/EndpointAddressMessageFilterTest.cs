@@ -50,9 +50,8 @@ namespace MonoTests.System.ServiceModel.Dispatcher
         static Message CreateMessageWithTo(Uri to)
         {
             Message msg = Message.CreateMessage(MessageVersion.Default, "urn:myaction");
-            msg.Headers.Add(
-                MessageHeader.CreateHeader("To", "http://www.w3.org/2005/08/addressing", to)
-            );
+            msg.Headers
+                .Add(MessageHeader.CreateHeader("To", "http://www.w3.org/2005/08/addressing", to));
             return msg;
         }
 

@@ -63,8 +63,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.RemoveUnnecessaryNullableDirec
                     if (!root.ContainsDirective(SyntaxKind.NullableDirectiveTrivia))
                         return;
 
-                    var initialState = context
-                        .Tree
+                    var initialState = context.Tree
                         .IsGeneratedCode(
                             context.Options,
                             CSharpSyntaxFacts.Instance,

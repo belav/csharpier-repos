@@ -50,8 +50,7 @@ namespace System.Xml.XmlDocumentTests
             XmlDocument doc = CreateDocumentWithElement();
             XmlElement element = doc.DocumentElement;
             element.Attributes.Append(doc.CreateAttribute(attributeName, attributeUri));
-            XmlAttribute anotherAttr = element
-                .Attributes
+            XmlAttribute anotherAttr = element.Attributes
                 .Append(doc.CreateAttribute("anotherAttribute"));
 
             var newAttr = doc.CreateAttribute(attributeName, attributeUri);

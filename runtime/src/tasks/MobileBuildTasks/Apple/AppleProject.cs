@@ -81,8 +81,7 @@ namespace Microsoft.Apple.Build
                 );
                 string iosLibPath = Path.Combine(SdkRoot, "System", "iOSSupport", "usr", "lib");
 
-                buildOptions
-                    .CompilerArguments
+                buildOptions.CompilerArguments
                     .Add($"-target {targetAbi}-apple-ios{minOSVersion}-macabi");
                 buildOptions.CompilerArguments.Add($"-isysroot {SdkRoot}");
                 buildOptions.CompilerArguments.Add($"-iframework {frameworkPath}");

@@ -657,29 +657,30 @@ namespace MonoTests.System.Windows.Forms
                 mainMenuStrip1.Size = new Size(644, 24);
                 mainMenuStrip1.TabIndex = 3;
                 mainMenuStrip1.Text = "menuStrip1";
-                File.DropDownItems.AddRange(
-                    new ToolStripItem[]
-                    {
-                        openToolStripMenuItem,
-                        toolStripSeparator2,
-                        Dokument,
-                        WareHouse,
-                        Personnel,
-                        Payroll,
-                        FixedAssets,
-                        Supplies,
-                        GeneralLedger,
-                        Manufacturing,
-                        PointOfSale,
-                        CardTerminal,
-                        Rent,
-                        WayBill,
-                        CustomerRelationManagement,
-                        toolStripSeparator8,
-                        NewUserToolStripMenuItem,
-                        exitToolStripMenuItem,
-                    }
-                );
+                File.DropDownItems
+                    .AddRange(
+                        new ToolStripItem[]
+                        {
+                            openToolStripMenuItem,
+                            toolStripSeparator2,
+                            Dokument,
+                            WareHouse,
+                            Personnel,
+                            Payroll,
+                            FixedAssets,
+                            Supplies,
+                            GeneralLedger,
+                            Manufacturing,
+                            PointOfSale,
+                            CardTerminal,
+                            Rent,
+                            WayBill,
+                            CustomerRelationManagement,
+                            toolStripSeparator8,
+                            NewUserToolStripMenuItem,
+                            exitToolStripMenuItem,
+                        }
+                    );
                 File.MergeAction = MergeAction.Insert;
                 File.MergeIndex = 1;
                 File.Name = "File";
@@ -820,8 +821,7 @@ namespace MonoTests.System.Windows.Forms
                 menuStrip1.SuspendLayout();
                 SuspendLayout();
 
-                menuStrip1
-                    .Items
+                menuStrip1.Items
                     .AddRange(
                         new ToolStripItem[]
                         {
@@ -839,8 +839,7 @@ namespace MonoTests.System.Windows.Forms
                 menuStrip1.Text = "menuStrip1";
                 menuStrip1.Visible = false;
 
-                fileToolStripMenuItem
-                    .DropDownItems
+                fileToolStripMenuItem.DropDownItems
                     .AddRange(new ToolStripItem[] { toolStripSeparator, printToolStripMenuItem });
                 fileToolStripMenuItem.MergeAction = MergeAction.MatchOnly;
                 fileToolStripMenuItem.Name = "fileToolStripMenuItem";
@@ -856,8 +855,7 @@ namespace MonoTests.System.Windows.Forms
                 printToolStripMenuItem.ShortcutKeys = ((Keys)((Keys.Control | Keys.P)));
                 printToolStripMenuItem.Size = new Size(152, 22);
                 printToolStripMenuItem.Text = "&Print";
-                editToolStripMenuItem
-                    .DropDownItems
+                editToolStripMenuItem.DropDownItems
                     .AddRange(
                         new ToolStripItem[]
                         {
@@ -883,8 +881,7 @@ namespace MonoTests.System.Windows.Forms
                 selectAllToolStripMenuItem.Name = "selectAllToolStripMenuItem";
                 selectAllToolStripMenuItem.Size = new Size(160, 22);
                 selectAllToolStripMenuItem.Text = "selectAllToolStripMenuItem";
-                toolsToolStripMenuItem
-                    .DropDownItems
+                toolsToolStripMenuItem.DropDownItems
                     .AddRange(
                         new ToolStripItem[]
                         {
@@ -911,8 +908,7 @@ namespace MonoTests.System.Windows.Forms
                 filterToolStripMenuItem.ShortcutKeys = Keys.F11;
                 filterToolStripMenuItem.Size = new Size(160, 22);
                 filterToolStripMenuItem.Text = "Tingimus";
-                helpToolStripMenuItem
-                    .DropDownItems
+                helpToolStripMenuItem.DropDownItems
                     .AddRange(new ToolStripItem[] { searchToolStripMenuItem });
                 helpToolStripMenuItem.MergeAction = MergeAction.MatchOnly;
                 helpToolStripMenuItem.Name = "helpToolStripMenuItem";

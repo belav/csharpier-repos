@@ -25,8 +25,7 @@ namespace Microsoft.CodeAnalysis
             }
             else
             {
-                return System
-                    .Runtime
+                return System.Runtime
                     .InteropServices
                     .RuntimeInformation
                     .FrameworkDescription

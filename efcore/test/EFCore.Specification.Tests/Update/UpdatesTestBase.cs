@@ -148,8 +148,7 @@ public abstract class UpdatesTestBase<TFixture> : IClassFixture<TFixture>
         ExecuteWithStrategyInTransaction(
             context =>
             {
-                context
-                    .AFewBytes
+                context.AFewBytes
                     .AddRange(
                         new AFewBytes { Id = id1, Bytes = bytes },
                         new AFewBytes { Id = id2, Bytes = bytes }
@@ -217,8 +216,7 @@ public abstract class UpdatesTestBase<TFixture> : IClassFixture<TFixture>
     public virtual void Save_partial_update_on_missing_record_throws() =>
         ExecuteWithStrategyInTransaction(context =>
         {
-            var entry = context
-                .Products
+            var entry = context.Products
                 .Attach(
                     new Product
                     {
@@ -242,8 +240,7 @@ public abstract class UpdatesTestBase<TFixture> : IClassFixture<TFixture>
 
         ExecuteWithStrategyInTransaction(context =>
         {
-            var entry = context
-                .Products
+            var entry = context.Products
                 .Attach(
                     new Product
                     {
@@ -283,8 +280,7 @@ public abstract class UpdatesTestBase<TFixture> : IClassFixture<TFixture>
             },
             context =>
             {
-                var entry = context
-                    .ProductWithBytes
+                var entry = context.ProductWithBytes
                     .Attach(
                         new ProductWithBytes
                         {
@@ -323,8 +319,7 @@ public abstract class UpdatesTestBase<TFixture> : IClassFixture<TFixture>
             },
             context =>
             {
-                var entry = context
-                    .ProductWithBytes
+                var entry = context.ProductWithBytes
                     .Attach(
                         new ProductWithBytes
                         {
@@ -363,8 +358,7 @@ public abstract class UpdatesTestBase<TFixture> : IClassFixture<TFixture>
             },
             context =>
             {
-                var entry = context
-                    .ProductWithBytes
+                var entry = context.ProductWithBytes
                     .Attach(
                         new ProductWithBytes
                         {
@@ -403,8 +397,7 @@ public abstract class UpdatesTestBase<TFixture> : IClassFixture<TFixture>
             },
             context =>
             {
-                var entry = context
-                    .ProductWithBytes
+                var entry = context.ProductWithBytes
                     .Attach(
                         new ProductWithBytes
                         {
@@ -550,8 +543,7 @@ public abstract class UpdatesTestBase<TFixture> : IClassFixture<TFixture>
     public virtual void Remove_partial_on_missing_record_throws() =>
         ExecuteWithStrategyInTransaction(context =>
         {
-            context
-                .Products
+            context.Products
                 .Remove(new Product { Id = new Guid("3d1302c5-4cf8-4043-9758-de9398f6fe10") });
 
             Assert.Equal(
@@ -567,8 +559,7 @@ public abstract class UpdatesTestBase<TFixture> : IClassFixture<TFixture>
 
         ExecuteWithStrategyInTransaction(context =>
         {
-            context
-                .Products
+            context.Products
                 .Remove(
                     new Product
                     {
@@ -590,8 +581,7 @@ public abstract class UpdatesTestBase<TFixture> : IClassFixture<TFixture>
             context =>
             {
                 var category = context.Categories.AsNoTracking().Single();
-                var products = context
-                    .Products
+                var products = context.Products
                     .AsNoTracking()
                     .Where(p => p.DependentId == category.PrincipalId)
                     .ToList();
@@ -612,8 +602,7 @@ public abstract class UpdatesTestBase<TFixture> : IClassFixture<TFixture>
             context =>
             {
                 var category = context.Categories.Single();
-                var products = context
-                    .Products
+                var products = context.Products
                     .Where(p => p.DependentId == category.PrincipalId)
                     .ToList();
 

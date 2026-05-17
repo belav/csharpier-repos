@@ -251,13 +251,11 @@ namespace MonoTests.System.Windows.Forms
 
             B1 = new Button();
             ImageList ImageList1 = new ImageList();
-            ImageList1
-                .Images
+            ImageList1.Images
                 .Add(
                     Image.FromFile(TestResourceHelper.GetFullPathOfResource("Test/resources/M.gif"))
                 );
-            ImageList1
-                .Images
+            ImageList1.Images
                 .Add(
                     Image.FromFile(TestResourceHelper.GetFullPathOfResource("Test/resources/M.gif"))
                 );

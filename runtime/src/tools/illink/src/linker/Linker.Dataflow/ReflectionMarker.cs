@@ -81,8 +81,7 @@ namespace Mono.Linker.Dataflow
         )
         {
             if (
-                !_context
-                    .TypeNameResolver
+                !_context.TypeNameResolver
                     .TryResolveTypeName(
                         typeName,
                         diagnosticContext,
@@ -111,8 +110,7 @@ namespace Mono.Linker.Dataflow
         )
         {
             if (
-                !_context
-                    .TypeNameResolver
+                !_context.TypeNameResolver
                     .TryResolveTypeName(
                         assembly,
                         typeName,
@@ -154,8 +152,7 @@ namespace Mono.Linker.Dataflow
                 );
                 foreach (var typeResolutionRecord in typeResolutionRecords)
                 {
-                    _context
-                        .MarkingHelpers
+                    _context.MarkingHelpers
                         .MarkMatchingExportedType(
                             typeResolutionRecord.ResolvedType,
                             typeResolutionRecord.ReferringAssembly,

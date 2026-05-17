@@ -207,8 +207,7 @@ namespace Internal.Runtime.Augments
         // cannot be used early during startup.
         public static int GetLoadedModules(TypeManagerHandle[] resultArray)
         {
-            return Internal
-                .Runtime
+            return Internal.Runtime
                 .CompilerHelpers
                 .StartupCodeHelpers
                 .GetLoadedModules(resultArray);

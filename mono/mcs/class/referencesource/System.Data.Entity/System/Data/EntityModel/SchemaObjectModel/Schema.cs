@@ -250,8 +250,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
                             AddError(
                                 ErrorCode.UnexpectedXmlElement,
                                 EdmSchemaErrorSeverity.Error,
-                                System
-                                    .Data
+                                System.Data
                                     .Entity
                                     .Strings
                                     .UnexpectedRootElement(
@@ -308,18 +307,15 @@ namespace System.Data.EntityModel.SchemaObjectModel
             // remove flags
             // the ProcessInlineSchema, and ProcessSchemaLocation flags must be removed for the same
             // xsd schema to be used on multiple threads
-            readerSettings.ValidationFlags &= ~System
-                .Xml
+            readerSettings.ValidationFlags &= ~System.Xml
                 .Schema
                 .XmlSchemaValidationFlags
                 .ProcessIdentityConstraints;
-            readerSettings.ValidationFlags &= ~System
-                .Xml
+            readerSettings.ValidationFlags &= ~System.Xml
                 .Schema
                 .XmlSchemaValidationFlags
                 .ProcessSchemaLocation;
-            readerSettings.ValidationFlags &= ~System
-                .Xml
+            readerSettings.ValidationFlags &= ~System.Xml
                 .Schema
                 .XmlSchemaValidationFlags
                 .ProcessInlineSchema;
@@ -332,8 +328,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
             XmlReaderSettings readerSettings = CreateEdmStandardXmlReaderSettings();
 
             // add flags
-            readerSettings.ValidationFlags |= System
-                .Xml
+            readerSettings.ValidationFlags |= System.Xml
                 .Schema
                 .XmlSchemaValidationFlags
                 .ReportValidationWarnings;
@@ -985,8 +980,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
                         usingElement.AddError(
                             ErrorCode.NotInNamespace,
                             EdmSchemaErrorSeverity.Error,
-                            System
-                                .Data
+                            System.Data
                                 .Entity
                                 .Strings
                                 .NotInNamespaceAlias(
@@ -1001,8 +995,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
                         usingElement.AddError(
                             ErrorCode.NotInNamespace,
                             EdmSchemaErrorSeverity.Error,
-                            System
-                                .Data
+                            System.Data
                                 .Entity
                                 .Strings
                                 .NotInNamespaceNoAlias(unqualifiedTypeName, namespaceName)
@@ -1479,8 +1472,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
                 Debug.Assert(resourceName != null, "resourceName cannot be null");
 
                 Stream resourceStream = null;
-                System.Reflection.Assembly executingAssembly = System
-                    .Reflection
+                System.Reflection.Assembly executingAssembly = System.Reflection
                     .Assembly
                     .GetExecutingAssembly();
                 if (executingAssembly != null)

@@ -67,16 +67,14 @@ namespace System.IdentityModel.Tokens
         {
             if (this.isReadOnly)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
                     );
             }
             if (clause == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("clause"));
             }
             this.clauses.Add(clause);
@@ -91,8 +89,7 @@ namespace System.IdentityModel.Tokens
                     return this[i].CreateKey();
                 }
             }
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(
                     new InvalidOperationException(SR.GetString(SR.KeyIdentifierCannotCreateKey))
                 );
@@ -104,8 +101,7 @@ namespace System.IdentityModel.Tokens
             TClause clause;
             if (!TryFind<TClause>(out clause))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentException(
                             SR.GetString(SR.NoKeyIdentifierClauseFound, typeof(TClause)),

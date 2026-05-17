@@ -125,8 +125,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Preview
                 var leftText = oldText.GetSubText(leftSpan.ToTextSpan()).ToString();
                 var rightText = newText.GetSubText(rightSpan.ToTextSpan()).ToString();
 
-                var trackingSpan = _buffer
-                    .CurrentSnapshot
+                var trackingSpan = _buffer.CurrentSnapshot
                     .CreateTrackingSpan(leftSpan, SpanTrackingMode.EdgeInclusive);
 
                 var isDeletion = difference.DifferenceType == DifferenceType.Remove;
@@ -153,8 +152,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Preview
         private ChangeList GetEntireDocumentAsSpanChange(TextDocument document)
         {
             // Show the whole document.
-            var entireSpan = _buffer
-                .CurrentSnapshot
+            var entireSpan = _buffer.CurrentSnapshot
                 .CreateTrackingSpan(
                     0,
                     _buffer.CurrentSnapshot.Length,

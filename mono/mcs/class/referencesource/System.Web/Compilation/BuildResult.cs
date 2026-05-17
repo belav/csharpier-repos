@@ -1380,8 +1380,7 @@ namespace System.Web.Compilation
 
             foreach (string placeHolderID in _placeHolderList)
             {
-                masterPage
-                    .ContentPlaceHolders
+                masterPage.ContentPlaceHolders
                     .Add(placeHolderID.ToLower(CultureInfo.InvariantCulture));
             }
 

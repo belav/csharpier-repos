@@ -1823,8 +1823,7 @@ public class EmitterTests
             )
             .AddReferences(
                 MetadataReference.CreateFromFile(
-                    AppDomain
-                        .CurrentDomain
+                    AppDomain.CurrentDomain
                         .GetAssemblies()
                         .FirstOrDefault(a => a.GetName().Name == "System.Runtime")
                         .Location

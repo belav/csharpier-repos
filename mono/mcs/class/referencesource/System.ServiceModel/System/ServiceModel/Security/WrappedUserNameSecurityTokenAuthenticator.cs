@@ -34,8 +34,7 @@ namespace System.ServiceModel.Security
         {
             if (wrappedUserNameSecurityTokenHandler == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("wrappedUserNameSecurityTokenHandler");
             }
 
@@ -82,8 +81,7 @@ namespace System.ServiceModel.Security
             string password
         )
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(
                     new NotImplementedException(
                         SR.GetString(

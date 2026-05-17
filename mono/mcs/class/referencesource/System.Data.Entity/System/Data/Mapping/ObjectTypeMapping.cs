@@ -188,8 +188,7 @@ namespace System.Data.Mapping
                         if (memberMapping != null)
                         {
                             throw new MappingException(
-                                System
-                                    .Data
+                                System.Data
                                     .Entity
                                     .Strings
                                     .Mapping_Duplicate_PropertyMap_CaseInsensitive(propertyName)

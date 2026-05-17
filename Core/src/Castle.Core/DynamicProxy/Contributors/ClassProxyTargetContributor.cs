@@ -137,8 +137,7 @@ namespace Castle.DynamicProxy.Contributors
 
             // invocation on base class
 
-            callBackMethod
-                .CodeBuilder
+            callBackMethod.CodeBuilder
                 .AddStatement(
                     new ReturnStatement(
                         new MethodInvocationExpression(
@@ -213,8 +212,7 @@ namespace Castle.DynamicProxy.Contributors
                 null
             );
 
-            return scope
-                .TypeCache
+            return scope.TypeCache
                 .GetOrAddWithoutTakingLock(
                     key,
                     _ =>

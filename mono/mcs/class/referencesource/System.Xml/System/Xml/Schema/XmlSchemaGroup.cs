@@ -89,8 +89,7 @@ namespace System.Xml.Schema
 
         internal override XmlSchemaObject Clone()
         {
-            System
-                .Diagnostics
+            System.Diagnostics
                 .Debug
                 .Assert(
                     false,

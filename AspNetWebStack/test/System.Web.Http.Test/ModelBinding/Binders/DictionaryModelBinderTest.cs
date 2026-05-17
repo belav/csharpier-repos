@@ -31,8 +31,7 @@ namespace System.Web.Http.ModelBinding.Binders
                 },
             };
             HttpActionContext context = ContextUtil.CreateActionContext();
-            context
-                .ControllerContext
+            context.ControllerContext
                 .Configuration
                 .Services
                 .Replace(

@@ -486,10 +486,11 @@ namespace System.Diagnostics.Tests
         {
             ProcessStartInfo psi = new ProcessStartInfo() { UseShellExecute = false };
             psi.Environment.Add("DOTNET_SYSTEM_GLOBALIZATION_INVARIANT", "1");
-            psi.Environment.Add(
-                "DOTNET_SYSTEM_GLOBALIZATION_PREDEFINED_CULTURES_ONLY",
-                predefinedCultures ? "1" : "0"
-            );
+            psi.Environment
+                .Add(
+                    "DOTNET_SYSTEM_GLOBALIZATION_PREDEFINED_CULTURES_ONLY",
+                    predefinedCultures ? "1" : "0"
+                );
             RemoteExecutor
                 .Invoke(
                     () =>

@@ -52,8 +52,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                     Contract.ThrowIfFalse(
                         _firstStatementOrFieldToReplace.Parent
                             == _lastStatementOrFieldToReplace.Parent
-                            || CSharpSyntaxFacts
-                                .Instance
+                            || CSharpSyntaxFacts.Instance
                                 .AreStatementsInSameContainer(
                                     _firstStatementOrFieldToReplace,
                                     _lastStatementOrFieldToReplace

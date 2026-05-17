@@ -152,8 +152,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             foreach (var parameter in this.Parameters)
             {
-                parameter
-                    .Type
+                parameter.Type
                     .CheckAllConstraints(
                         compilation,
                         conversions,
@@ -335,8 +334,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         return (null, null);
                     }
 
-                    var (attributeData, boundAttribute) = arguments
-                        .Binder
+                    var (attributeData, boundAttribute) = arguments.Binder
                         .GetAttribute(
                             arguments.AttributeSyntax,
                             arguments.AttributeType,

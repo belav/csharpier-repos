@@ -41,8 +41,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.FixInterpolatedVerbatim
         )
         {
             var view = workspace.Documents.Single().GetTextView();
-            var commandHandler = workspace
-                .ExportProvider
+            var commandHandler = workspace.ExportProvider
                 .GetCommandHandler<FixInterpolatedVerbatimStringCommandHandler>(
                     nameof(FixInterpolatedVerbatimStringCommandHandler)
                 );

@@ -164,8 +164,7 @@ namespace System.Web.Http
                 throw Error.ArgumentNull("actionContext");
             }
 
-            actionContext.Response = actionContext
-                .ControllerContext
+            actionContext.Response = actionContext.ControllerContext
                 .Request
                 .CreateErrorResponse(HttpStatusCode.Unauthorized, SRResources.RequestNotAuthorized);
         }
@@ -174,12 +173,10 @@ namespace System.Web.Http
         {
             Contract.Assert(actionContext != null);
 
-            return actionContext
-                    .ActionDescriptor
+            return actionContext.ActionDescriptor
                     .GetCustomAttributes<AllowAnonymousAttribute>()
                     .Any()
-                || actionContext
-                    .ControllerContext
+                || actionContext.ControllerContext
                     .ControllerDescriptor
                     .GetCustomAttributes<AllowAnonymousAttribute>()
                     .Any();

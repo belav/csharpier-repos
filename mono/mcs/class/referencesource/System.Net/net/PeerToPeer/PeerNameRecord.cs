@@ -164,31 +164,25 @@ namespace System.Net.PeerToPeer
 
         internal void TracePeerNameRecord()
         {
-            Logging
-                .P2PTraceSource
+            Logging.P2PTraceSource
                 .TraceEvent(TraceEventType.Information, 0, "Contents of the PeerNameRecord");
-            Logging
-                .P2PTraceSource
+            Logging.P2PTraceSource
                 .TraceEvent(TraceEventType.Information, 0, "\tPeerName: {0}", PeerName);
-            Logging
-                .P2PTraceSource
+            Logging.P2PTraceSource
                 .TraceEvent(TraceEventType.Information, 0, "\tComment: {0}", Comment);
             if (EndPointCollection != null && EndPointCollection.Count != 0)
             {
-                Logging
-                    .P2PTraceSource
+                Logging.P2PTraceSource
                     .TraceEvent(TraceEventType.Information, 0, "\tThe EndPointList is ");
                 foreach (IPEndPoint ipe in EndPointCollection)
                 {
-                    Logging
-                        .P2PTraceSource
+                    Logging.P2PTraceSource
                         .TraceEvent(TraceEventType.Information, 0, "\t\tIPEndPoint is {0}", ipe);
                 }
             }
             else
             {
-                Logging
-                    .P2PTraceSource
+                Logging.P2PTraceSource
                     .TraceEvent(
                         TraceEventType.Information,
                         0,
@@ -210,8 +204,7 @@ namespace System.Net.PeerToPeer
                 }
                 else
                 {
-                    Logging
-                        .P2PTraceSource
+                    Logging.P2PTraceSource
                         .TraceEvent(
                             TraceEventType.Information,
                             0,

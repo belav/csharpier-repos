@@ -115,8 +115,7 @@ namespace System.Diagnostics
                 {
                     CurrentLimit = (ulong)newMax.Value.ToInt64(),
                 };
-                int result = Interop
-                    .Sys
+                int result = Interop.Sys
                     .SetRLimit(Interop.Sys.RlimitResources.RLIMIT_RSS, ref limits);
                 if (result != 0)
                 {

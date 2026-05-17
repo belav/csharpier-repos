@@ -25,8 +25,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             private static ImmutableDictionary<
                 LocalizableString,
                 Exception?
-            > s_localizableStringToException = ImmutableDictionary<LocalizableString, Exception?>
-                .Empty
+            > s_localizableStringToException = ImmutableDictionary<
+                LocalizableString,
+                Exception?
+            >.Empty
                 .WithComparers(Roslyn.Utilities.ReferenceEqualityComparer.Instance);
 
             private readonly DiagnosticAnalyzer _analyzer;

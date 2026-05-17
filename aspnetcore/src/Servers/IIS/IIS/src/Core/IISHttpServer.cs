@@ -198,8 +198,7 @@ internal sealed class IISHttpServer : IServer
         }
         catch (Exception ex)
         {
-            server
-                ?._logger
+            server?._logger
                 .LogError(
                     0,
                     ex,
@@ -229,8 +228,7 @@ internal sealed class IISHttpServer : IServer
         }
         catch (Exception ex)
         {
-            server
-                ?._logger
+            server?._logger
                 .LogError(
                     0,
                     ex,
@@ -258,8 +256,7 @@ internal sealed class IISHttpServer : IServer
         }
         catch (Exception ex)
         {
-            context
-                ?.Server
+            context?.Server
                 ._logger
                 .LogError(
                     0,
@@ -292,8 +289,7 @@ internal sealed class IISHttpServer : IServer
         }
         catch (Exception ex)
         {
-            context
-                ?.Server
+            context?.Server
                 ._logger
                 .LogError(
                     0,
@@ -325,8 +321,7 @@ internal sealed class IISHttpServer : IServer
         }
         catch (Exception ex)
         {
-            server
-                ?._logger
+            server?._logger
                 .LogError(
                     0,
                     ex,

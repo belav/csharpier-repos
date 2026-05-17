@@ -59,8 +59,7 @@ End Module";
                 FeatureAttribute.EncapsulateField,
                 HangMitigatingCancellationToken
             );
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .TextContainsAsync(
                     @"    Private _name As Integer? = 0
 
@@ -84,16 +83,13 @@ End Module";
             // Suspend file change notification during code action application, since spurious file change notifications
             // can cause silent failure to apply the code action if they occur within this block.
             await using (
-                var fileChangeRestorer = await TestServices
-                    .Shell
+                var fileChangeRestorer = await TestServices.Shell
                     .PauseFileChangesAsync(HangMitigatingCancellationToken)
             )
             {
-                await TestServices
-                    .Editor
+                await TestServices.Editor
                     .InvokeCodeActionListAsync(HangMitigatingCancellationToken);
-                await TestServices
-                    .EditorVerifier
+                await TestServices.EditorVerifier
                     .CodeActionAsync(
                         "Encapsulate field: 'name' (and use property)",
                         applyFix: true,
@@ -102,8 +98,7 @@ End Module";
                     );
             }
 
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .TextContainsAsync(
                     @"
 Module Module1
@@ -134,16 +129,13 @@ End Module",
             // Suspend file change notification during code action application, since spurious file change notifications
             // can cause silent failure to apply the code action if they occur within this block.
             await using (
-                var fileChangeRestorer = await TestServices
-                    .Shell
+                var fileChangeRestorer = await TestServices.Shell
                     .PauseFileChangesAsync(HangMitigatingCancellationToken)
             )
             {
-                await TestServices
-                    .Editor
+                await TestServices.Editor
                     .InvokeCodeActionListAsync(HangMitigatingCancellationToken);
-                await TestServices
-                    .EditorVerifier
+                await TestServices.EditorVerifier
                     .CodeActionAsync(
                         "Encapsulate field: 'name' (but still use field)",
                         applyFix: true,
@@ -152,8 +144,7 @@ End Module",
                     );
             }
 
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .TextContainsAsync(
                     @"
 Module Module1

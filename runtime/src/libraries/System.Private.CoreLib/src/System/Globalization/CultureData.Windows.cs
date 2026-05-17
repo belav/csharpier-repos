@@ -109,8 +109,7 @@ namespace System.Globalization
 
                 // Specific locale name is whatever ResolveLocaleName (win7+) returns.
                 // (Buffer has our name in it, and we can recycle that because windows resolves it before writing to the buffer)
-                result = Interop
-                    .Kernel32
+                result = Interop.Kernel32
                     .ResolveLocaleName(
                         realNameBuffer,
                         pBuffer,
@@ -193,8 +192,7 @@ namespace System.Globalization
                 int geoIsoIdLength;
                 fixed (char* pGeoIsoId = geoIso2Letters)
                 {
-                    geoIsoIdLength = Interop
-                        .Kernel32
+                    geoIsoIdLength = Interop.Kernel32
                         .GetGeoInfo(
                             geoId,
                             Interop.Kernel32.GEO_ISO2,
@@ -234,8 +232,7 @@ namespace System.Globalization
             }
 
             char* pBuffer = stackalloc char[Interop.Kernel32.LOCALE_NAME_MAX_LENGTH + 1]; // +1 for the null termination
-            int length = Interop
-                .Kernel32
+            int length = Interop.Kernel32
                 .LCIDToLocaleName(
                     culture,
                     pBuffer,

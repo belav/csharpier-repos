@@ -272,8 +272,7 @@ namespace System.Dynamic.Utils
                             // for example when running on CoreClr with PublishAot=true, this will allow IL to be emitted.
                             // If we are running on a runtime that really doesn't support dynamic code, like NativeAOT,
                             // CanEmitObjectArrayDelegate will be flipped to 'false', and this method won't be invoked.
-                            return ForceAllowDynamicCodeLightup
-                                .ForceAllowDynamicCodeDelegate
+                            return ForceAllowDynamicCodeLightup.ForceAllowDynamicCodeDelegate
                                 ?.Invoke();
                         }
 

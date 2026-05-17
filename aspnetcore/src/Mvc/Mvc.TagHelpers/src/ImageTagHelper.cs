@@ -127,8 +127,7 @@ public class ImageTagHelper : UrlResolutionTagHelper
             // not function properly.
             Src = output.Attributes[SrcAttributeName].Value as string;
 
-            output
-                .Attributes
+            output.Attributes
                 .SetAttribute(
                     SrcAttributeName,
                     FileVersionProvider.AddFileVersionToPath(
@@ -143,8 +142,7 @@ public class ImageTagHelper : UrlResolutionTagHelper
     {
         if (FileVersionProvider == null)
         {
-            FileVersionProvider = ViewContext
-                .HttpContext
+            FileVersionProvider = ViewContext.HttpContext
                 .RequestServices
                 .GetRequiredService<IFileVersionProvider>();
         }

@@ -631,8 +631,7 @@ namespace LibraryImportGenerator.UnitTests
                 "cs"
             );
             otherProjectOriginalState.Sources.Add(otherMarshallerTypeOriginalSource);
-            otherProjectOriginalState
-                .AdditionalReferences
+            otherProjectOriginalState.AdditionalReferences
                 .AddRange(test.TestState.AdditionalReferences);
 
             ProjectState otherProjectFixedState = new ProjectState(
@@ -642,8 +641,7 @@ namespace LibraryImportGenerator.UnitTests
                 "cs"
             );
             otherProjectFixedState.Sources.Add(otherMarshallerTypeFixedSource);
-            otherProjectFixedState
-                .AdditionalReferences
+            otherProjectFixedState.AdditionalReferences
                 .AddRange(test.TestState.AdditionalReferences);
 
             test.TestState.Sources.Add(entryPointTypeSource);

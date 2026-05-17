@@ -121,8 +121,7 @@ namespace System.Data
             IFilter? rowFilter
         )
         {
-            DataCommonEventSource
-                .Log
+            DataCommonEventSource.Log
                 .Trace(
                     "<ds.Index.Index|API> {0}, table={1}, recordStates={2}",
                     ObjectID,
@@ -214,8 +213,7 @@ namespace System.Data
 
         private bool AcceptRecord(int record, IFilter? filter)
         {
-            DataCommonEventSource
-                .Log
+            DataCommonEventSource.Log
                 .Trace("<ds.Index.AcceptRecord|API> {0}, record={1}", ObjectID, record);
             if (filter == null)
             {
@@ -448,8 +446,7 @@ namespace System.Data
 
         private void DeleteRecord(int recordIndex, bool fireEvent)
         {
-            DataCommonEventSource
-                .Log
+            DataCommonEventSource.Log
                 .Trace(
                     "<ds.Index.DeleteRecord|INFO> {0}, recordIndex={1}, fireEvent={2}",
                     ObjectID,
@@ -895,8 +892,7 @@ namespace System.Data
         // existing functionality, it calls the overload with fireEvent== true, so it still fires the event
         private int InsertRecord(int record, bool fireEvent)
         {
-            DataCommonEventSource
-                .Log
+            DataCommonEventSource.Log
                 .Trace(
                     "<ds.Index.InsertRecord|INFO> {0}, record={1}, fireEvent={2}",
                     ObjectID,
@@ -1014,8 +1010,7 @@ namespace System.Data
 
         public void RecordChanged(int record)
         {
-            DataCommonEventSource
-                .Log
+            DataCommonEventSource.Log
                 .Trace("<ds.Index.RecordChanged|API> {0}, record={1}", ObjectID, record);
             if (DoListChanged)
             {
@@ -1030,8 +1025,7 @@ namespace System.Data
         // new RecordChanged which takes oldIndex and newIndex and fires _onListChanged
         public void RecordChanged(int oldIndex, int newIndex)
         {
-            DataCommonEventSource
-                .Log
+            DataCommonEventSource.Log
                 .Trace(
                     "<ds.Index.RecordChanged|API> {0}, oldIndex={1}, newIndex={2}",
                     ObjectID,
@@ -1068,8 +1062,7 @@ namespace System.Data
             DataViewRowState newState
         )
         {
-            DataCommonEventSource
-                .Log
+            DataCommonEventSource.Log
                 .Trace(
                     "<ds.Index.RecordStateChanged|API> {0}, record={1}, oldState={2}, newState={3}",
                     ObjectID,
@@ -1091,8 +1084,7 @@ namespace System.Data
             DataViewRowState newNewState
         )
         {
-            DataCommonEventSource
-                .Log
+            DataCommonEventSource.Log
                 .Trace(
                     "<ds.Index.RecordStateChanged|API> {0}, oldRecord={1}, oldOldState={2}, oldNewState={3}, newRecord={4}, newOldState={5}, newNewState={6}",
                     ObjectID,

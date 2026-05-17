@@ -1261,7 +1261,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     try
                     {
                         foreach (
-                            var referencedModuleName in m.Module.GetReferencedManagedModulesOrThrow()
+                            var referencedModuleName in m.Module
+                                .GetReferencedManagedModulesOrThrow()
                         )
                         {
                             // Do not report error for this module twice
@@ -3331,8 +3332,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     switch (namedArg.Key)
                     {
                         case "WrapNonExceptionThrows":
-                            wrapNonExceptionThrows = namedArg
-                                .Value
+                            wrapNonExceptionThrows = namedArg.Value
                                 .DecodeValue<bool>(SpecialType.System_Boolean);
                             break;
                     }
@@ -3706,8 +3706,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         );
 
                         string fullEmittedName = MetadataHelpers.BuildQualifiedName(
-                            originalDefinition
-                                .ContainingSymbol
+                            originalDefinition.ContainingSymbol
                                 .ToDisplayString(SymbolDisplayFormat.QualifiedNameOnlyFormat),
                             originalDefinition.MetadataName
                         );

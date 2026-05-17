@@ -87,8 +87,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
 
             // make a callsite as if it is contained inside "Microsoft.CSharp.RuntimeBinder.RuntimeBinderException"
             MySite.mySite = CallSite<Action<CallSite, object>>.Create(
-                Microsoft
-                    .CSharp
+                Microsoft.CSharp
                     .RuntimeBinder
                     .Binder
                     .InvokeMember(
@@ -110,8 +109,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
 
             // make a callsite as if it is contained inside "System.Exception"
             MySite.mySite = CallSite<Action<CallSite, object>>.Create(
-                Microsoft
-                    .CSharp
+                Microsoft.CSharp
                     .RuntimeBinder
                     .Binder
                     .InvokeMember(

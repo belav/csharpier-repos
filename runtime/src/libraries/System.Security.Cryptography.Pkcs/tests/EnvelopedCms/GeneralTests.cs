@@ -287,8 +287,7 @@ KoZIhvcNAwcECJ01qtX2EKx6oIAEEM7op+R2U3GQbYwlEj5X+h0AAAAAAAAAAAAA
                 X509Certificate2 issuerSerialCert = Certificates.RSAKeyTransfer1.GetCertificate()
             )
             using (
-                X509Certificate2 explicitSkiCert = Certificates
-                    .RSAKeyTransfer_ExplicitSki
+                X509Certificate2 explicitSkiCert = Certificates.RSAKeyTransfer_ExplicitSki
                     .GetCertificate()
             )
             {
@@ -311,8 +310,7 @@ KoZIhvcNAwcECJ01qtX2EKx6oIAEEM7op+R2U3GQbYwlEj5X+h0AAAAAAAAAAAAA
             // test aims for.
 
             using (
-                X509Certificate2 privateCert = Certificates
-                    .RSAKeyTransfer_ExplicitSki
+                X509Certificate2 privateCert = Certificates.RSAKeyTransfer_ExplicitSki
                     .TryGetCertificateWithPrivateKey()
             )
             {
@@ -334,8 +332,7 @@ KoZIhvcNAwcECJ01qtX2EKx6oIAEEM7op+R2U3GQbYwlEj5X+h0AAAAAAAAAAAAA
             ContentInfo contentInfo = new ContentInfo(new byte[] { 1, 2, 3 });
             EnvelopedCms ecms = new EnvelopedCms(contentInfo);
             using (
-                X509Certificate2 explicitSkiCert = Certificates
-                    .RSAKeyTransfer_ExplicitSki
+                X509Certificate2 explicitSkiCert = Certificates.RSAKeyTransfer_ExplicitSki
                     .GetCertificate()
             )
             {
@@ -352,8 +349,7 @@ KoZIhvcNAwcECJ01qtX2EKx6oIAEEM7op+R2U3GQbYwlEj5X+h0AAAAAAAAAAAAA
             ecms.Decode(encodedMessage);
 
             using (
-                X509Certificate2 privateCert = Certificates
-                    .RSAKeyTransfer_ExplicitSki
+                X509Certificate2 privateCert = Certificates.RSAKeyTransfer_ExplicitSki
                     .TryGetCertificateWithPrivateKey()
             )
             {
@@ -453,8 +449,7 @@ KoZIhvcNAwcECJ01qtX2EKx6oIAEEM7op+R2U3GQbYwlEj5X+h0AAAAAAAAAAAAA
             ecms.Decode(encodedMessage);
 
             using (
-                X509Certificate2 privateCert = Certificates
-                    .RSAKeyTransfer1
+                X509Certificate2 privateCert = Certificates.RSAKeyTransfer1
                     .TryGetCertificateWithPrivateKey()
             )
             {

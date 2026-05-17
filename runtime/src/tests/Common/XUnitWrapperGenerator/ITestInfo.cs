@@ -38,8 +38,7 @@ public sealed class BasicTestMethod : ITestInfo
     {
         var args = arguments.IsDefaultOrEmpty ? "" : string.Join(", ", arguments);
 
-        ContainingType = method
-            .ContainingType
+        ContainingType = method.ContainingType
             .ToDisplayString(XUnitWrapperGenerator.FullyQualifiedWithoutGlobalNamespace);
         Method = method.Name;
         DisplayNameForFiltering = $"{ContainingType}.{Method}({args})";
@@ -96,8 +95,7 @@ public sealed class LegacyStandaloneEntryPointTestMethod : ITestInfo
 {
     public LegacyStandaloneEntryPointTestMethod(IMethodSymbol method, string externAlias)
     {
-        ContainingType = method
-            .ContainingType
+        ContainingType = method.ContainingType
             .ToDisplayString(XUnitWrapperGenerator.FullyQualifiedWithoutGlobalNamespace);
         Method = method.Name;
         TestNameExpression = $"\"{externAlias}::{ContainingType}.{Method}()\"";
@@ -296,8 +294,7 @@ public sealed class MemberDataTest : ITestInfo
         _innerTest = innerTest;
         _loopVarIdentifier = argumentLoopVarIdentifier;
 
-        string containingType = referencedMember
-            .ContainingType
+        string containingType = referencedMember.ContainingType
             .ToDisplayString(XUnitWrapperGenerator.FullyQualifiedWithoutGlobalNamespace);
         _memberInvocation = referencedMember switch
         {

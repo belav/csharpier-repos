@@ -115,8 +115,7 @@ namespace HtmlAgilityPack
                         break;
                 }
             }
-            System
-                .Diagnostics
+            System.Diagnostics
                 .Trace
                 .WriteLine(
                     "oid="

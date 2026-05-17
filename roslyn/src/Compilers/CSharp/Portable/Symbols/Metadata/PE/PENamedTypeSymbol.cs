@@ -231,8 +231,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
 
             if (mrEx != null)
             {
-                result
-                    ._lazyCachedUseSiteInfo
+                result._lazyCachedUseSiteInfo
                     .Initialize(
                         result.DeriveCompilerFeatureRequiredDiagnostic()
                             ?? new CSDiagnosticInfo(ErrorCode.ERR_BogusType, result)
@@ -252,8 +251,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
         {
             try
             {
-                genericParameterHandles = moduleSymbol
-                    .Module
+                genericParameterHandles = moduleSymbol.Module
                     .GetTypeDefGenericParamsOrThrow(handle);
                 arity = (ushort)genericParameterHandles.Count;
                 mrEx = null;
@@ -317,8 +315,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
 
             if (mrEx != null || metadataArity < containerMetadataArity)
             {
-                result
-                    ._lazyCachedUseSiteInfo
+                result._lazyCachedUseSiteInfo
                     .Initialize(
                         result.DeriveCompilerFeatureRequiredDiagnostic()
                             ?? new CSDiagnosticInfo(ErrorCode.ERR_BogusType, result)
@@ -503,8 +500,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
 
                 if (!uncommon.lazyHasInterpolatedStringHandlerAttribute.HasValue())
                 {
-                    uncommon.lazyHasInterpolatedStringHandlerAttribute = ContainingPEModule
-                        .Module
+                    uncommon.lazyHasInterpolatedStringHandlerAttribute = ContainingPEModule.Module
                         .HasInterpolatedStringHandlerAttribute(_handle)
                         .ToThreeState();
                 }
@@ -525,8 +521,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
 
                 if (!uncommon.lazyHasEmbeddedAttribute.HasValue())
                 {
-                    uncommon.lazyHasEmbeddedAttribute = ContainingPEModule
-                        .Module
+                    uncommon.lazyHasEmbeddedAttribute = ContainingPEModule.Module
                         .HasCodeAnalysisEmbeddedAttribute(_handle)
                         .ToThreeState();
                 }
@@ -678,8 +673,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             try
             {
                 var moduleSymbol = ContainingPEModule;
-                var interfaceImpls = moduleSymbol
-                    .Module
+                var interfaceImpls = moduleSymbol.Module
                     .GetInterfaceImplementationsOrThrow(_handle);
 
                 if (interfaceImpls.Count > 0)
@@ -689,8 +683,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
 
                     foreach (var interfaceImpl in interfaceImpls)
                     {
-                        EntityHandle interfaceHandle = moduleSymbol
-                            .Module
+                        EntityHandle interfaceHandle = moduleSymbol.Module
                             .MetadataReader
                             .GetInterfaceImplementation(interfaceImpl)
                             .Interface;
@@ -1031,8 +1024,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                     return uncommon.lazyHasRequiredMembers.Value();
                 }
 
-                var hasRequiredMemberAttribute = ContainingPEModule
-                    .Module
+                var hasRequiredMemberAttribute = ContainingPEModule.Module
                     .HasAttribute(_handle, AttributeDescription.RequiredMemberAttribute);
                 uncommon.lazyHasRequiredMembers = hasRequiredMemberAttribute.ToThreeState();
                 return hasRequiredMemberAttribute;
@@ -1346,8 +1338,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
 
             public int Compare(Symbol x, Symbol y)
             {
-                return HandleComparer
-                    .Default
+                return HandleComparer.Default
                     .Compare(((PENamedTypeSymbol)x).Handle, ((PENamedTypeSymbol)y).Handle);
             }
         }
@@ -2629,10 +2620,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                     )
                 )
                 {
-                    var type = this.ContainingPEModule.TryDecodeAttributeWithTypeArgument(
-                        this.Handle,
-                        AttributeDescription.CoClassAttribute
-                    );
+                    var type = this.ContainingPEModule
+                        .TryDecodeAttributeWithTypeArgument(
+                            this.Handle,
+                            AttributeDescription.CoClassAttribute
+                        );
                     var coClassType =
                         (
                             (object)type != null
@@ -2851,8 +2843,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             CollectionBuilderAttributeData? getCollectionBuilderAttributeData()
             {
                 if (
-                    ContainingPEModule
-                        .Module
+                    ContainingPEModule.Module
                         .HasCollectionBuilderAttribute(
                             _handle,
                             out string builderTypeName,
@@ -2872,10 +2863,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
 
         internal override bool HasAsyncMethodBuilderAttribute(out TypeSymbol? builderArgument)
         {
-            builderArgument = this.ContainingPEModule.TryDecodeAttributeWithTypeArgument(
-                this.Handle,
-                AttributeDescription.AsyncMethodBuilderAttribute
-            );
+            builderArgument = this.ContainingPEModule
+                .TryDecodeAttributeWithTypeArgument(
+                    this.Handle,
+                    AttributeDescription.AsyncMethodBuilderAttribute
+                );
             return builderArgument is not null;
         }
 

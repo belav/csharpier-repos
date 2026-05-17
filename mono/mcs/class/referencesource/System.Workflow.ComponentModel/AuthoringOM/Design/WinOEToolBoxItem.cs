@@ -168,15 +168,13 @@ namespace System.Workflow.ComponentModel.Design
             {
                 if (
                     (
-                        activityType
-                            .Assembly
+                        activityType.Assembly
                             .FullName
                             .Equals(
                                 AssemblyRef.ActivitiesAssemblyRef,
                                 StringComparison.OrdinalIgnoreCase
                             )
-                        || activityType
-                            .Assembly
+                        || activityType.Assembly
                             .FullName
                             .Equals(
                                 Assembly.GetExecutingAssembly().FullName,

@@ -59,8 +59,7 @@ internal sealed partial class RoslynSearchItemsSourceProvider
         )
         {
             // Convert roslyn pattern matches to the platform type.
-            var matches = result
-                .Matches
+            var matches = result.Matches
                 .SelectAsArray(static m => new PatternMatch(
                     ConvertKind(m.Kind),
                     punctuationStripped: false,

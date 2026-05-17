@@ -471,8 +471,7 @@ namespace System.Threading
 
                 if (NativeRuntimeEventSource.Log.IsEnabled())
                 {
-                    NativeRuntimeEventSource
-                        .Log
+                    NativeRuntimeEventSource.Log
                         .ThreadPoolWorkerThreadAdjustmentStats(
                             sampleDurationSeconds,
                             throughput,
@@ -563,8 +562,7 @@ namespace System.Threading
 
                 if (NativeRuntimeEventSource.Log.IsEnabled())
                 {
-                    NativeRuntimeEventSource
-                        .Log
+                    NativeRuntimeEventSource.Log
                         .ThreadPoolWorkerThreadAdjustmentAdjustment(
                             throughput,
                             (uint)newThreadCount,

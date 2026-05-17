@@ -35,8 +35,7 @@ namespace System.ServiceModel.Security
             if (factory.ActAsInitiator == true)
             {
                 Fx.Assert("This protocol can only be used at the recipient.");
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(SR.ProtocolMustBeRecipient, this.GetType().ToString())
@@ -158,8 +157,7 @@ namespace System.ServiceModel.Security
             );
             if (securityHeader.Timestamp == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperWarning(
                         new MessageSecurityException(
                             SR.GetString(SR.RequiredTimestampMissingInSecurityHeader)
@@ -183,8 +181,7 @@ namespace System.ServiceModel.Security
             }
             if (!didSessionSctEndorse)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperWarning(
                         new MessageSecurityException(
                             SR.GetString(SR.NoSessionTokenPresentInMessage)

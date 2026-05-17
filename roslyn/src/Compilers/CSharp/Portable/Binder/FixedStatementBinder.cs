@@ -32,8 +32,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 var locals = new ArrayBuilder<LocalSymbol>(_syntax.Declaration.Variables.Count);
 
-                _syntax
-                    .Declaration
+                _syntax.Declaration
                     .Type
                     .VisitRankSpecifiers(
                         (rankSpecifier, args) =>

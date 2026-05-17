@@ -111,8 +111,7 @@ namespace System.Web.Handlers
             }
             else
             {
-                string dir = context
-                    .Server
+                string dir = context.Server
                     .MapPath(UrlUtils.GetDirectory(context.Request.FilePath));
                 RenderMenu(manager, output, dir);
             }
@@ -145,8 +144,7 @@ namespace System.Web.Handlers
             Table table = TraceData.CreateTable();
 
             table.Rows.Add(TraceData.AltRow("Requests to the Application"));
-            table
-                .Rows
+            table.Rows
                 .Add(
                     TraceData.SubHeadRow(
                         "No",

@@ -292,8 +292,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SpellCheck
             var project = document.Project;
             var parseOptionsChecksum = project.State.GetParseOptionsChecksum();
 
-            var documentChecksumState = await document
-                .State
+            var documentChecksumState = await document.State
                 .GetStateChecksumsAsync(cancellationToken)
                 .ConfigureAwait(false);
             var textChecksum = documentChecksumState.Text;

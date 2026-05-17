@@ -52,8 +52,7 @@ namespace System.ServiceModel.Channels
 
             if (handlers.Length == 0)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .Argument("handlers", SR.GetString(SR.InputTypeListEmptyError));
             }
 
@@ -63,8 +62,7 @@ namespace System.ServiceModel.Channels
                 Type handler = handlers[cnt];
                 if (handler == null)
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .Argument(
                             string.Format(CultureInfo.InvariantCulture, "handlers[<<{0}>>]", cnt),
                             SR.GetString(
@@ -77,8 +75,7 @@ namespace System.ServiceModel.Channels
 
                 if (!delegatingHandlerType.IsAssignableFrom(handler) || handler.IsAbstract)
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .Argument(
                             string.Format(CultureInfo.InvariantCulture, "handlers[<<{0}>>]", cnt),
                             SR.GetString(
@@ -92,8 +89,7 @@ namespace System.ServiceModel.Channels
                 ConstructorInfo ctorInfo = handler.GetConstructor(Type.EmptyTypes);
                 if (ctorInfo == null)
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .Argument(
                             string.Format(CultureInfo.InvariantCulture, "handlers[<<{0}>>]", cnt),
                             SR.GetString(
@@ -165,8 +161,7 @@ namespace System.ServiceModel.Channels
             {
                 if (configElement.Handlers != null && configElement.Handlers.Count > 0)
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(
                             new ConfigurationErrorsException(
                                 SR.GetString(
@@ -184,8 +179,7 @@ namespace System.ServiceModel.Channels
                 );
                 if (factoryType == null)
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(
                             new ConfigurationErrorsException(
                                 SR.GetString(SR.CanNotLoadTypeGotFromConfig, configElement.Type)
@@ -198,8 +192,7 @@ namespace System.ServiceModel.Channels
                     || factoryType.IsAbstract
                 )
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ConfigurationErrorsException(
                                 SR.GetString(
@@ -229,8 +222,7 @@ namespace System.ServiceModel.Channels
                     );
                     if (handlerType == null)
                     {
-                        throw FxTrace
-                            .Exception
+                        throw FxTrace.Exception
                             .AsError(
                                 new ConfigurationErrorsException(
                                     SR.GetString(
@@ -250,8 +242,7 @@ namespace System.ServiceModel.Channels
                 }
                 catch (ArgumentException ex)
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(new ConfigurationErrorsException(ex.Message, ex));
                 }
             }
@@ -261,8 +252,7 @@ namespace System.ServiceModel.Channels
         {
             if (this.handlerFunc != null)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new InvalidOperationException(
                             SR.GetString(
@@ -328,8 +318,7 @@ namespace System.ServiceModel.Channels
                         {
                             if (handler == null)
                             {
-                                throw FxTrace
-                                    .Exception
+                                throw FxTrace.Exception
                                     .Argument(
                                         "handlers",
                                         SR.GetString(
@@ -367,8 +356,7 @@ namespace System.ServiceModel.Channels
                 {
                     if (handler.InnerHandler != null)
                     {
-                        throw FxTrace
-                            .Exception
+                        throw FxTrace.Exception
                             .Argument(
                                 "handlers",
                                 SR.GetString(

@@ -97,8 +97,7 @@ internal abstract class AbstractCleanCodeGenerationOptionsProvider
         (
             await GetCleanCodeGenerationOptionsAsync(languageServices, cancellationToken)
                 .ConfigureAwait(false)
-        )
-            .GenerationOptions
+        ).GenerationOptions
             .NamingStyle;
 }
 

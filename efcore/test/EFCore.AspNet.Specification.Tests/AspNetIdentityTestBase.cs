@@ -51,8 +51,7 @@ public abstract class AspNetIdentityTestBase<
     {
         using (var context = CreateContext())
         {
-            var entityTypeMappings = context
-                .Model
+            var entityTypeMappings = context.Model
                 .GetEntityTypes()
                 .Select(e => new EntityTypeMapping(e))
                 .ToList();

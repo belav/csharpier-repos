@@ -423,8 +423,8 @@ namespace System.ServiceModel.Dispatcher
             : base(desc)
         {
 #if !MOBILE
-            this.serializerBehavior =
-                desc.Behaviors.Find<DataContractSerializerOperationBehavior>();
+            this.serializerBehavior = desc.Behaviors
+                .Find<DataContractSerializerOperationBehavior>();
 #endif
             this.attr = attr;
         }
@@ -467,9 +467,8 @@ namespace System.ServiceModel.Dispatcher
             for (int i = 0; i < message.Headers.Count; i++)
             {
                 var r = message.Headers.GetReaderAtHeader(i);
-                var mh = md.Headers.FirstOrDefault(h =>
-                    h.Name == r.LocalName && h.Namespace == r.NamespaceURI
-                );
+                var mh = md.Headers
+                    .FirstOrDefault(h => h.Name == r.LocalName && h.Namespace == r.NamespaceURI);
                 if (mh != null)
                     dic[mh] = ReadHeaderObject(mh.Type, GetSerializer(mh), r);
             }

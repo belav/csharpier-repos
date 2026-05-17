@@ -30,8 +30,7 @@ namespace System.Net.NetworkInformation
 
         internal SystemIcmpV6Statistics()
         {
-            uint result = Interop
-                .IpHlpApi
+            uint result = Interop.IpHlpApi
                 .GetIcmpStatisticsEx(out _stats, AddressFamily.InterNetworkV6);
 
             if (result != Interop.IpHlpApi.ERROR_SUCCESS)

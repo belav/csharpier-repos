@@ -141,8 +141,7 @@ namespace System.Xml
 
         protected void ThrowClosed()
         {
-            throw System
-                .Runtime
+            throw System.Runtime
                 .Serialization
                 .DiagnosticUtility
                 .ExceptionUtility
@@ -180,16 +179,14 @@ namespace System.Xml
                 ThrowClosed();
 
             if (ns == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
                     .ThrowHelperArgumentNull("ns");
 
             if (writeState != WriteState.Element)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -223,16 +220,14 @@ namespace System.Xml
                 ThrowClosed();
 
             if (ns == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
                     .ThrowHelperArgumentNull("ns");
 
             if (writeState != WriteState.Element)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -269,16 +264,14 @@ namespace System.Xml
                 WriteEndAttribute();
 
             if (localName == null || (localName.Length == 0 && prefix != "xmlns"))
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("localName"));
 
             if (writeState != WriteState.Element)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -314,8 +307,7 @@ namespace System.Xml
             if (prefix == "xml")
             {
                 if (ns != null && ns != xmlNamespace)
-                    throw System
-                        .Runtime
+                    throw System.Runtime
                         .Serialization
                         .DiagnosticUtility
                         .ExceptionUtility
@@ -332,8 +324,7 @@ namespace System.Xml
             else if (prefix == "xmlns")
             {
                 if (ns != null && ns != xmlnsNamespace)
-                    throw System
-                        .Runtime
+                    throw System.Runtime
                         .Serialization
                         .DiagnosticUtility
                         .ExceptionUtility
@@ -365,8 +356,7 @@ namespace System.Xml
                     ns = nsMgr.LookupNamespace(prefix);
 
                     if (ns == null)
-                        throw System
-                            .Runtime
+                        throw System.Runtime
                             .Serialization
                             .DiagnosticUtility
                             .ExceptionUtility
@@ -382,8 +372,7 @@ namespace System.Xml
             {
                 // An empty namespace means no namespace; prefix must be empty
                 if (prefix.Length != 0)
-                    throw System
-                        .Runtime
+                    throw System.Runtime
                         .Serialization
                         .DiagnosticUtility
                         .ExceptionUtility
@@ -404,8 +393,7 @@ namespace System.Xml
                 {
                     // Watch for special values
                     if (ns.Length == xmlnsNamespace.Length && ns == xmlnsNamespace)
-                        throw System
-                            .Runtime
+                        throw System.Runtime
                             .Serialization
                             .DiagnosticUtility
                             .ExceptionUtility
@@ -415,8 +403,7 @@ namespace System.Xml
                                 )
                             );
                     if (ns.Length == xmlNamespace.Length && ns == xmlNamespace)
-                        throw System
-                            .Runtime
+                        throw System.Runtime
                             .Serialization
                             .DiagnosticUtility
                             .ExceptionUtility
@@ -473,8 +460,7 @@ namespace System.Xml
                 ThrowClosed();
 
             if (writeState != WriteState.Attribute)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -509,8 +495,7 @@ namespace System.Xml
                         }
                         else
                         {
-                            throw System
-                                .Runtime
+                            throw System.Runtime
                                 .Serialization
                                 .DiagnosticUtility
                                 .ExceptionUtility
@@ -554,8 +539,7 @@ namespace System.Xml
                 ThrowClosed();
 
             if (writeState == WriteState.Attribute)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -578,8 +562,7 @@ namespace System.Xml
                 || (text.Length > 0 && text[text.Length - 1] == '-')
             )
             {
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -603,8 +586,7 @@ namespace System.Xml
                 WriteEndAttribute();
 
             if (writeState != WriteState.Element && writeState != WriteState.Content)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -628,8 +610,7 @@ namespace System.Xml
                 ThrowClosed();
 
             if (writeState == WriteState.Attribute)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -657,8 +638,7 @@ namespace System.Xml
 
         public override void WriteDocType(string name, string pubid, string sysid, string subset)
         {
-            throw System
-                .Runtime
+            throw System.Runtime
                 .Serialization
                 .DiagnosticUtility
                 .ExceptionUtility
@@ -675,8 +655,7 @@ namespace System.Xml
                 ThrowClosed();
 
             if (this.documentState == DocumentState.Epilog)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -684,15 +663,13 @@ namespace System.Xml
                         new InvalidOperationException(SR.GetString(SR.XmlOnlyOneRoot))
                     );
             if (localName == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("localName"));
             if (localName.Length == 0)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -700,8 +677,7 @@ namespace System.Xml
                         new ArgumentException(SR.GetString(SR.InvalidLocalNameEmpty), "localName")
                     );
             if (writeState == WriteState.Attribute)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -726,8 +702,7 @@ namespace System.Xml
                 ns = nsMgr.LookupNamespace(prefix);
 
                 if (ns == null)
-                    throw System
-                        .Runtime
+                    throw System.Runtime
                         .Serialization
                         .DiagnosticUtility
                         .ExceptionUtility
@@ -783,8 +758,7 @@ namespace System.Xml
                 ThrowClosed();
 
             if (depth == 0)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -868,8 +842,7 @@ namespace System.Xml
         {
             FlushElement();
             if (depth == 0)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -902,8 +875,7 @@ namespace System.Xml
         void VerifyWhitespace(char ch)
         {
             if (!IsWhitespace(ch))
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -916,8 +888,7 @@ namespace System.Xml
         {
             for (int i = 0; i < s.Length; i++)
                 if (!IsWhitespace(s[i]))
-                    throw System
-                        .Runtime
+                    throw System.Runtime
                         .Serialization
                         .DiagnosticUtility
                         .ExceptionUtility
@@ -930,8 +901,7 @@ namespace System.Xml
         {
             for (int i = 0; i < count; i++)
                 if (!IsWhitespace(chars[offset + i]))
-                    throw System
-                        .Runtime
+                    throw System.Runtime
                         .Serialization
                         .DiagnosticUtility
                         .ExceptionUtility
@@ -965,8 +935,7 @@ namespace System.Xml
         public override string LookupPrefix(string ns)
         {
             if (ns == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -991,8 +960,7 @@ namespace System.Xml
             if (prefix == null)
             {
                 if (writeState != WriteState.Attribute)
-                    throw System
-                        .Runtime
+                    throw System.Runtime
                         .Serialization
                         .DiagnosticUtility
                         .ExceptionUtility
@@ -1013,15 +981,13 @@ namespace System.Xml
             if (IsClosed)
                 ThrowClosed();
             if (localName == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("localName"));
             if (localName.Length == 0)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -1047,15 +1013,13 @@ namespace System.Xml
             if (IsClosed)
                 ThrowClosed();
             if (localName == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("localName"));
             if (localName.Value.Length == 0)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -1084,8 +1048,7 @@ namespace System.Xml
                 ThrowClosed();
 
             if (writeState != WriteState.Start)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -1118,8 +1081,7 @@ namespace System.Xml
                 ThrowClosed();
 
             if (name != "xml")
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -1131,8 +1093,7 @@ namespace System.Xml
                     );
 
             if (writeState != WriteState.Start)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -1165,8 +1126,7 @@ namespace System.Xml
                 ThrowClosed();
 
             if (writeState == WriteState.Start || writeState == WriteState.Prolog)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -1187,8 +1147,7 @@ namespace System.Xml
 
         public override void WriteEntityRef(string name)
         {
-            throw System
-                .Runtime
+            throw System.Runtime
                 .Serialization
                 .DiagnosticUtility
                 .ExceptionUtility
@@ -1209,8 +1168,7 @@ namespace System.Xml
 
         public override void WriteNmToken(string name)
         {
-            throw System
-                .Runtime
+            throw System.Runtime
                 .Serialization
                 .DiagnosticUtility
                 .ExceptionUtility
@@ -1227,8 +1185,7 @@ namespace System.Xml
                 ThrowClosed();
 
             if (whitespace == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -1238,8 +1195,7 @@ namespace System.Xml
             {
                 char c = whitespace[i];
                 if (c != ' ' && c != '\t' && c != '\n' && c != '\r')
-                    throw System
-                        .Runtime
+                    throw System.Runtime
                         .Serialization
                         .DiagnosticUtility
                         .ExceptionUtility
@@ -1281,8 +1237,7 @@ namespace System.Xml
                 ThrowClosed();
 
             if (value == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -1310,8 +1265,7 @@ namespace System.Xml
                 ThrowClosed();
 
             if (chars == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -1319,8 +1273,7 @@ namespace System.Xml
 
             // Not checking upper bound because it will be caught by "count".  This is what XmlTextWriter does.
             if (offset < 0)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -1332,8 +1285,7 @@ namespace System.Xml
                     );
 
             if (count < 0)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -1344,8 +1296,7 @@ namespace System.Xml
                         )
                     );
             if (count > chars.Length - offset)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -1402,8 +1353,7 @@ namespace System.Xml
                 ThrowClosed();
 
             if (chars == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -1411,8 +1361,7 @@ namespace System.Xml
 
             // Not checking upper bound because it will be caught by "count".  This is what XmlTextWriter does.
             if (offset < 0)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -1424,8 +1373,7 @@ namespace System.Xml
                     );
 
             if (count < 0)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -1436,8 +1384,7 @@ namespace System.Xml
                         )
                     );
             if (count > chars.Length - offset)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -1470,8 +1417,7 @@ namespace System.Xml
                 ThrowClosed();
 
             if (ch >= 0xd800 && ch <= 0xdfff)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -1519,8 +1465,7 @@ namespace System.Xml
                 ThrowClosed();
 
             if (value == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -1549,8 +1494,7 @@ namespace System.Xml
                 ThrowClosed();
 
             if (value == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -1610,8 +1554,7 @@ namespace System.Xml
             }
             else if (value.GetType().IsArray)
             {
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -1780,8 +1723,7 @@ namespace System.Xml
                 ThrowClosed();
 
             if (value == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -1866,8 +1808,7 @@ namespace System.Xml
                             XmlConverter.Base64Encoding.GetString(trailBytes, 0, trailByteCount)
                         );
                         WriteAttributeText(
-                            XmlConverter
-                                .Base64Encoding
+                            XmlConverter.Base64Encoding
                                 .GetString(buffer, offset, actualByteCount - trailByteCount)
                         );
                     }
@@ -1992,13 +1933,11 @@ namespace System.Xml
                         if (writer.attributeValue != null)
                         {
                             writer.WriteAttributeText(
-                                XmlConverter
-                                    .Base64Encoding
+                                XmlConverter.Base64Encoding
                                     .GetString(writer.trailBytes, 0, writer.trailByteCount)
                             );
                             writer.WriteAttributeText(
-                                XmlConverter
-                                    .Base64Encoding
+                                XmlConverter.Base64Encoding
                                     .GetString(
                                         buffer,
                                         this.offset,
@@ -2110,8 +2049,7 @@ namespace System.Xml
             if (IsClosed)
                 ThrowClosed();
             if (Signing)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(SR.GetString(SR.XmlCanonicalizationStarted))
                     );
@@ -2128,8 +2066,7 @@ namespace System.Xml
             if (IsClosed)
                 ThrowClosed();
             if (!Signing)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(SR.XmlCanonicalizationNotStarted)
@@ -2149,28 +2086,24 @@ namespace System.Xml
         public void StartFragment(Stream stream, bool generateSelfContainedTextFragment)
         {
             if (!CanFragment)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new NotSupportedException());
             if (IsClosed)
                 ThrowClosed();
             if (stream == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("stream"));
             if (oldStream != null || oldWriter != null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
                     .ThrowHelperError(new InvalidOperationException());
             if (WriteState == WriteState.Attribute)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -2231,15 +2164,13 @@ namespace System.Xml
             if (IsClosed)
                 ThrowClosed();
             if (oldStream == null && oldWriter == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
                     .ThrowHelperError(new InvalidOperationException());
             if (WriteState == WriteState.Attribute)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -2278,21 +2209,18 @@ namespace System.Xml
         public void WriteFragment(byte[] buffer, int offset, int count)
         {
             if (!CanFragment)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new NotSupportedException());
             if (IsClosed)
                 ThrowClosed();
             if (buffer == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("buffer"));
             if (offset < 0)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -2303,8 +2231,7 @@ namespace System.Xml
                         )
                     );
             if (count < 0)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -2315,8 +2242,7 @@ namespace System.Xml
                         )
                     );
             if (count > buffer.Length - offset)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -2327,8 +2253,7 @@ namespace System.Xml
                         )
                     );
             if (WriteState == WriteState.Attribute)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -2342,8 +2267,7 @@ namespace System.Xml
                         )
                     );
             if (writer != nodeWriter)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new InvalidOperationException());
             FlushElement();
             FlushBase64();
@@ -2417,8 +2341,7 @@ namespace System.Xml
         {
             FlushBase64();
             if (this.documentState == DocumentState.Epilog)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -2426,8 +2349,7 @@ namespace System.Xml
                         new InvalidOperationException(SR.GetString(SR.XmlOnlyOneRoot))
                     );
             if (this.documentState == DocumentState.Document && count > 1 && depth == 0)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -2435,8 +2357,7 @@ namespace System.Xml
                         new InvalidOperationException(SR.GetString(SR.XmlOnlyOneRoot))
                     );
             if (writeState == WriteState.Attribute)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -2457,8 +2378,7 @@ namespace System.Xml
         void EnsureBufferBounds(byte[] buffer, int offset, int count)
         {
             if (buffer == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -2466,8 +2386,7 @@ namespace System.Xml
 
             // Not checking upper bound because it will be caught by "count".  This is what XmlTextWriter does.
             if (offset < 0)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -2479,8 +2398,7 @@ namespace System.Xml
                     );
 
             if (count < 0)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -2491,8 +2409,7 @@ namespace System.Xml
                         )
                     );
             if (count > buffer.Length - offset)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -2507,8 +2424,7 @@ namespace System.Xml
         string GeneratePrefix(string ns, XmlDictionaryString xNs)
         {
             if (writeState != WriteState.Element && writeState != WriteState.Attribute)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -2828,8 +2744,7 @@ namespace System.Xml
                             return;
                         if (prefix == "xmlns" && uri == xmlnsNamespace)
                             return;
-                        throw System
-                            .Runtime
+                        throw System.Runtime
                             .Serialization
                             .DiagnosticUtility
                             .ExceptionUtility
@@ -2848,8 +2763,7 @@ namespace System.Xml
                     {
                         if (nameSpace.Uri == uri)
                             return;
-                        throw System
-                            .Runtime
+                        throw System.Runtime
                             .Serialization
                             .DiagnosticUtility
                             .ExceptionUtility
@@ -2867,8 +2781,7 @@ namespace System.Xml
                     }
                 }
                 if (prefix.Length != 0 && uri.Length == 0)
-                    throw System
-                        .Runtime
+                    throw System.Runtime
                         .Serialization
                         .DiagnosticUtility
                         .ExceptionUtility
@@ -2879,8 +2792,7 @@ namespace System.Xml
                             )
                         );
                 if (uri.Length == xmlnsNamespace.Length && uri == xmlnsNamespace)
-                    throw System
-                        .Runtime
+                    throw System.Runtime
                         .Serialization
                         .DiagnosticUtility
                         .ExceptionUtility
@@ -2891,8 +2803,7 @@ namespace System.Xml
                         );
                 // The addressing namespace and the xmlNamespace are the same length, so add a quick check to try to disambiguate
                 if (uri.Length == xmlNamespace.Length && uri[18] == 'X' && uri == xmlNamespace)
-                    throw System
-                        .Runtime
+                    throw System.Runtime
                         .Serialization
                         .DiagnosticUtility
                         .ExceptionUtility
@@ -3276,24 +3187,24 @@ namespace System.Xml
                     {
                         if (this.writer.attributeValue != null)
                         {
-                            this.writer.WriteAttributeText(
-                                XmlConverter
-                                    .Base64Encoding
-                                    .GetString(
-                                        this.writer.trailBytes,
-                                        0,
-                                        this.writer.trailByteCount
-                                    )
-                            );
-                            this.writer.WriteAttributeText(
-                                XmlConverter
-                                    .Base64Encoding
-                                    .GetString(
-                                        this.buffer,
-                                        this.offset,
-                                        actualByteCount - this.writer.trailByteCount
-                                    )
-                            );
+                            this.writer
+                                .WriteAttributeText(
+                                    XmlConverter.Base64Encoding
+                                        .GetString(
+                                            this.writer.trailBytes,
+                                            0,
+                                            this.writer.trailByteCount
+                                        )
+                                );
+                            this.writer
+                                .WriteAttributeText(
+                                    XmlConverter.Base64Encoding
+                                        .GetString(
+                                            this.buffer,
+                                            this.offset,
+                                            actualByteCount - this.writer.trailByteCount
+                                        )
+                                );
                         }
 
                         // StartContent/WriteBase64Text/EndContent will be called from HandleWriteBase64 as appropriate

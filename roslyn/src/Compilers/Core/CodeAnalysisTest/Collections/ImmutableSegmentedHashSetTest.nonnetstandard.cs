@@ -32,8 +32,7 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         public void TryGetValueTest()
         {
             TryGetValueTestHelper(
-                ImmutableSegmentedHashSet<string>
-                    .Empty
+                ImmutableSegmentedHashSet<string>.Empty
                     .WithComparer(StringComparer.OrdinalIgnoreCase)
             );
         }

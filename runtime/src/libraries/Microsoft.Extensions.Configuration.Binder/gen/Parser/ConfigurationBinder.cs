@@ -43,8 +43,7 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
                 int paramCount = @params.Length;
 
                 if (
-                    !SymbolEqualityComparer
-                        .Default
+                    !SymbolEqualityComparer.Default
                         .Equals(_typeSymbols.IConfiguration, @params[0].Type)
                 )
                 {
@@ -64,8 +63,7 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
                         overload = MethodsToGen.ConfigBinder_Bind_key_instance;
                     }
                     else if (
-                        SymbolEqualityComparer
-                            .Default
+                        SymbolEqualityComparer.Default
                             .Equals(@params[2].Type, _typeSymbols.ActionOfBinderOptions)
                     )
                     {
@@ -128,8 +126,8 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
                         IFieldReferenceOperation f => f.Field.Type,
                         IPropertyReferenceOperation o => o.Type,
                         IMethodReferenceOperation m
-                            when m.Method.MethodKind == MethodKind.Constructor =>
-                            m.Method.ContainingType,
+                            when m.Method.MethodKind == MethodKind.Constructor => m.Method
+                            .ContainingType,
                         IMethodReferenceOperation m => m.Method.ReturnType,
                         IAnonymousFunctionOperation f => f.Symbol.ReturnType,
                         IParameterReferenceOperation p => p.Parameter.Type,
@@ -162,8 +160,7 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
                 int paramCount = @params.Length;
 
                 if (
-                    !SymbolEqualityComparer
-                        .Default
+                    !SymbolEqualityComparer.Default
                         .Equals(_typeSymbols.IConfiguration, @params[0].Type)
                 )
                 {
@@ -190,8 +187,7 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
                     }
                     else if (
                         paramCount is 2
-                        && SymbolEqualityComparer
-                            .Default
+                        && SymbolEqualityComparer.Default
                             .Equals(@params[1].Type, _typeSymbols.ActionOfBinderOptions)
                     )
                     {
@@ -216,8 +212,7 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
                     }
                     else if (
                         paramCount is 3
-                        && SymbolEqualityComparer
-                            .Default
+                        && SymbolEqualityComparer.Default
                             .Equals(@params[2].Type, _typeSymbols.ActionOfBinderOptions)
                     )
                     {
@@ -319,8 +314,7 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
             )
             {
                 MethodsToGen overload = typeParseInfo.BindingOverload;
-                IInvocationOperation invocationOperation = typeParseInfo
-                    .BinderInvocation!
+                IInvocationOperation invocationOperation = typeParseInfo.BinderInvocation!
                     .Operation;
                 Debug.Assert((MethodsToGen.ConfigBinder_Any & overload) is not 0);
 

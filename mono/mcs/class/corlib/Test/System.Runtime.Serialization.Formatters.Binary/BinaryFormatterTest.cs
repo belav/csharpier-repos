@@ -580,8 +580,7 @@ namespace MonoTests.System.Runtime.Serialization.Formatters.Binary
                 // Serialize mapping to this same assembly with 9.9.9.9 version
                 // and a different type name.
                 assemblyName = aname.ToString();
-                typeName = serializedType
-                    .FullName
+                typeName = serializedType.FullName
                     .Replace("SimpleSerializableObject", "SimpleSerializableObject2");
             }
         }
@@ -647,8 +646,7 @@ namespace MonoTests.System.Runtime.Serialization.Formatters.Binary
                 // Serialize mapping to this same assembly with 9.9.9.9 version
                 // and a different type name.
                 assemblyName = aname.ToString();
-                typeName = serializedType
-                    .FullName
+                typeName = serializedType.FullName
                     .Replace("SimpleISerializableObject", "SimpleISerializableObject2");
             }
 

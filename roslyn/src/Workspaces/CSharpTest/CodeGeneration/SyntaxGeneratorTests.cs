@@ -8136,8 +8136,7 @@ public class C
                 .AddSyntaxTrees(
                     SyntaxFactory.ParseSyntaxTree(
                         src,
-                        options: CSharpParseOptions
-                            .Default
+                        options: CSharpParseOptions.Default
                             .WithLanguageVersion(LanguageVersion.Preview)
                     )
                 );

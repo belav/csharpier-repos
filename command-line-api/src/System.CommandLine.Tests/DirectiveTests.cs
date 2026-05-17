@@ -218,8 +218,7 @@ namespace System.CommandLine.Tests
             ParseResult result = Parse(new CliOption<bool>("-y"), directive, $"{value} -y");
             result.GetResult(directive).Should().BeNull();
 
-            result
-                .UnmatchedTokens
+            result.UnmatchedTokens
                 .Should()
                 .BeEquivalentTo(firstUnmatchedToken, secondUnmatchedToken);
         }

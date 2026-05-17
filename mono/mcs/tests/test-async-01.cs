@@ -45,14 +45,15 @@ class Program
 
     static Task RunAsync()
     {
-        return Task.Factory.StartNew(() =>
-        {
-            master_mre.WaitOne();
-            Console.WriteLine("Hello async");
-            if (pos != 2)
-                throw new ApplicationException(pos.ToString());
+        return Task.Factory
+            .StartNew(() =>
+            {
+                master_mre.WaitOne();
+                Console.WriteLine("Hello async");
+                if (pos != 2)
+                    throw new ApplicationException(pos.ToString());
 
-            pos = 3;
-        });
+                pos = 3;
+            });
     }
 }

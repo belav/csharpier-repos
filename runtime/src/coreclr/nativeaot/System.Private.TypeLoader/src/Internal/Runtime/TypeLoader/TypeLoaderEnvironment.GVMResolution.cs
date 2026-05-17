@@ -37,8 +37,7 @@ namespace Internal.Runtime.TypeLoader
 
                 // Check if we have metadata.
                 if (TryGetMetadataForNamedType(rtth, out qTypeDefinition))
-                    return qTypeDefinition
-                        .NativeFormatHandle
+                    return qTypeDefinition.NativeFormatHandle
                         .GetFullName(qTypeDefinition.NativeFormatReader);
             }
             return "?";
@@ -303,8 +302,7 @@ namespace Internal.Runtime.TypeLoader
 
                         NativeLayoutInfoLoadContext nativeLayoutContext =
                             new NativeLayoutInfoLoadContext();
-                        nativeLayoutContext._module = ModuleList
-                            .Instance
+                        nativeLayoutContext._module = ModuleList.Instance
                             .GetModuleInfoByHandle(module.Handle);
                         nativeLayoutContext._typeSystemContext = context;
                         nativeLayoutContext._typeArgumentHandles = targetType.Instantiation;
@@ -442,8 +440,7 @@ namespace Internal.Runtime.TypeLoader
         )
         {
             // Get the open type definition of the containing type of the generic virtual method being resolved
-            RuntimeTypeHandle openCallingTypeHandle = slotMethod
-                .OwningType
+            RuntimeTypeHandle openCallingTypeHandle = slotMethod.OwningType
                 .GetTypeDefinition()
                 .RuntimeTypeHandle;
 

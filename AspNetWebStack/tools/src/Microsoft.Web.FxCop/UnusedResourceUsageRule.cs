@@ -119,8 +119,7 @@ namespace Microsoft.Web.FxCop
             var classNode = typeNode as ClassNode;
             return (
                 classNode != null
-                && classNode
-                    .Attributes
+                && classNode.Attributes
                     .Any(c =>
                         c.Type
                             .FullName

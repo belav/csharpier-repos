@@ -26,8 +26,7 @@ namespace System.ServiceModel.Configuration
         {
             if (!Enum.IsDefined(enumType, value))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidEnumArgumentException("value", (int)value, enumType)
                     );

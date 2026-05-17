@@ -435,8 +435,7 @@ namespace System
                     byte[] encodedBytes = new byte[maxNumberOfBytesEncoded];
                     fixed (byte* pEncodedBytes = encodedBytes)
                     {
-                        int encodedBytesCount = Encoding
-                            .UTF8
+                        int encodedBytesCount = Encoding.UTF8
                             .GetBytes(
                                 pInput + next,
                                 surrogatePair ? 2 : 1,

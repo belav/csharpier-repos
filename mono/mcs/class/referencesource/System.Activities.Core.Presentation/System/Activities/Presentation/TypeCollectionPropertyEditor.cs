@@ -27,8 +27,7 @@ namespace System.Activities.Presentation
 
         public TypeCollectionPropertyEditor()
         {
-            this.InlineEditorTemplate = EditorCategoryTemplateDictionary
-                .Instance
+            this.InlineEditorTemplate = EditorCategoryTemplateDictionary.Instance
                 .GetCategoryTemplate("TypeCollection_InlineTemplate");
         }
 

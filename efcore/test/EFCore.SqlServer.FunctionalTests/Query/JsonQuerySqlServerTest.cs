@@ -3111,8 +3111,7 @@ FROM (
             async,
             ss =>
                 ((DbSet<JsonEntityBasic>)ss.Set<JsonEntityBasic>()).FromSql(
-                    Fixture
-                        .TestStore
+                    Fixture.TestStore
                         .NormalizeDelimitersInInterpolatedString(
                             $"SELECT * FROM [JsonEntitiesBasic] AS j WHERE [j].[Id] = {parameter}"
                         )

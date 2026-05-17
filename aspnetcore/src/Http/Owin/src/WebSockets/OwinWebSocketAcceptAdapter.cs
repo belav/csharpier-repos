@@ -134,8 +134,7 @@ public class OwinWebSocketAcceptAdapter
                 {
                     adapter.UpstreamTask = next(environment);
                     adapter.UpstreamWentAsyncTcs.TrySetResult(0);
-                    adapter
-                        .UpstreamTask
+                    adapter.UpstreamTask
                         .ContinueWith(
                             adapter.EnsureCompleted,
                             CancellationToken.None,

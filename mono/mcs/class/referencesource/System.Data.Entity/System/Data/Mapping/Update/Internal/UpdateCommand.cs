@@ -182,8 +182,7 @@ namespace System.Data.Mapping.Update.Internal
                 )
                 {
                     foreach (
-                        int principal in translator
-                            .KeyManager
+                        int principal in translator.KeyManager
                             .GetDirectReferences(property.Identifier)
                     )
                     {

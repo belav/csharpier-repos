@@ -149,11 +149,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
                     $"Total"
                 );
 
-                using var token = SourceProvider
-                    .OperationListener
+                using var token = SourceProvider.OperationListener
                     .BeginAsyncOperation($"{nameof(SuggestedAction)}.{nameof(Invoke)}");
-                using var context = SourceProvider
-                    .UIThreadOperationExecutor
+                using var context = SourceProvider.UIThreadOperationExecutor
                     .BeginExecute(
                         EditorFeaturesResources.Execute_Suggested_Action,
                         CodeAction.Title,
@@ -183,8 +181,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
             using (new CaretPositionRestorer(SubjectBuffer, EditHandler.AssociatedViewService))
             {
                 // ConfigureAwait(true) so that CaretPositionRestorer.Dispose runs on the UI thread.
-                await Workspace
-                    .Services
+                await Workspace.Services
                     .GetService<IExtensionManager>()
                     .PerformActionAsync(
                         Provider,

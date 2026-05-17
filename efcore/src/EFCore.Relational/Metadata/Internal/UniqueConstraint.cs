@@ -77,8 +77,7 @@ public class UniqueConstraint : Annotatable, IPrimaryKeyConstraint
             this,
             static constraint =>
                 RuntimeFeature.IsDynamicCodeSupported
-                    ? constraint
-                        .Table
+                    ? constraint.Table
                         .Model
                         .Model
                         .GetRelationalDependencies()

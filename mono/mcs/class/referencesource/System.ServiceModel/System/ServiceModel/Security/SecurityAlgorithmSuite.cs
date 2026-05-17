@@ -329,8 +329,7 @@ namespace System.ServiceModel.Security
             if (SecurityUtils.IsSupportedAlgorithm(derivationAlgorithm, token))
             {
                 if (this.DefaultEncryptionKeyDerivationLength % 8 != 0)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentException(
                                 SR.GetString(
@@ -379,8 +378,7 @@ namespace System.ServiceModel.Security
             ReadOnlyCollection<SecurityKey> keys = token.SecurityKeys;
             if (keys == null || keys.Count == 0)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(SR.GetString(SR.SigningTokenHasNoKeys, token))
                     );
@@ -406,8 +404,7 @@ namespace System.ServiceModel.Security
                 }
             }
 
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(
                     new InvalidOperationException(
                         SR.GetString(
@@ -446,8 +443,7 @@ namespace System.ServiceModel.Security
             if (SecurityUtils.IsSupportedAlgorithm(derivationAlgorithm, token))
             {
                 if (this.DefaultSignatureKeyDerivationLength % 8 != 0)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentException(
                                 SR.GetString(
@@ -467,8 +463,7 @@ namespace System.ServiceModel.Security
         {
             if (!IsSymmetricSignatureAlgorithmSupported(algorithm))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new MessageSecurityException(
                             SR.GetString(
@@ -489,8 +484,7 @@ namespace System.ServiceModel.Security
             {
                 if (!IsAsymmetricKeyLengthSupported(asymmetricSecurityKey.KeySize))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new MessageSecurityException(
                                 SR.GetString(
@@ -508,8 +502,7 @@ namespace System.ServiceModel.Security
                 SymmetricSecurityKey symmetricSecurityKey = securityKey as SymmetricSecurityKey;
                 if (symmetricSecurityKey == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(SR.UnknownICryptoType, symmetricSecurityKey)
@@ -540,8 +533,7 @@ namespace System.ServiceModel.Security
                 // the sending side doesn't honor the algorithm suite. It used the DefaultSignatureKeyDerivationLength instead
                 if (dkt.SecurityKeys[0].KeySize < this.DefaultSignatureKeyDerivationLength)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new MessageSecurityException(
                                 SR.GetString(
@@ -561,8 +553,7 @@ namespace System.ServiceModel.Security
 
             if (!IsSymmetricKeyLengthSupported(keySize))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new MessageSecurityException(
                             SR.GetString(
@@ -596,8 +587,7 @@ namespace System.ServiceModel.Security
                 // the sending side doesn't honor the algorithm suite. It used the DefaultSignatureKeyDerivationLength instead
                 if (dkt.SecurityKeys[0].KeySize < this.DefaultEncryptionKeyDerivationLength)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new MessageSecurityException(
                                 SR.GetString(
@@ -617,8 +607,7 @@ namespace System.ServiceModel.Security
 
             if (!IsSymmetricKeyLengthSupported(keySize))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new MessageSecurityException(
                             SR.GetString(
@@ -648,8 +637,7 @@ namespace System.ServiceModel.Security
                 AsymmetricSecurityKey asymmetricKey = verificationKey as AsymmetricSecurityKey;
                 if (asymmetricKey == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(SR.UnknownICryptoType, verificationKey)
@@ -665,8 +653,7 @@ namespace System.ServiceModel.Security
         {
             if (!IsAsymmetricSignatureAlgorithmSupported(algorithm))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new MessageSecurityException(
                             SR.GetString(
@@ -686,8 +673,7 @@ namespace System.ServiceModel.Security
             {
                 if (!IsAsymmetricKeyWrapAlgorithmSupported(algorithm))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new MessageSecurityException(
                                 SR.GetString(
@@ -704,8 +690,7 @@ namespace System.ServiceModel.Security
             {
                 if (!IsSymmetricKeyWrapAlgorithmSupported(algorithm))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new MessageSecurityException(
                                 SR.GetString(
@@ -724,8 +709,7 @@ namespace System.ServiceModel.Security
         {
             if (!IsEncryptionAlgorithmSupported(algorithm))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new MessageSecurityException(
                             SR.GetString(
@@ -743,8 +727,7 @@ namespace System.ServiceModel.Security
         {
             if (!IsSignatureKeyDerivationAlgorithmSupported(algorithm))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new MessageSecurityException(
                             SR.GetString(
@@ -762,8 +745,7 @@ namespace System.ServiceModel.Security
         {
             if (!IsEncryptionKeyDerivationAlgorithmSupported(algorithm))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new MessageSecurityException(
                             SR.GetString(
@@ -781,8 +763,7 @@ namespace System.ServiceModel.Security
         {
             if (!IsDigestAlgorithmSupported(algorithm))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new MessageSecurityException(
                             SR.GetString(SR.SuiteDoesNotAcceptAlgorithm, algorithm, "Digest", this)

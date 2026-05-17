@@ -15,8 +15,7 @@ namespace System.Net.Http.WinHttpHandlerUnitTests
         public const string ExpectedResponseBody = "This is the response body.";
         public const string FakeServerEndpoint = "http://www.contoso.com/";
         public const string FakeSecureServerEndpoint = "https://www.contoso.com/";
-        public static readonly byte[] ExpectedResponseBodyBytes = Encoding
-            .UTF8
+        public static readonly byte[] ExpectedResponseBodyBytes = Encoding.UTF8
             .GetBytes(ExpectedResponseBody);
 
         private static MemoryStream requestBody = null;

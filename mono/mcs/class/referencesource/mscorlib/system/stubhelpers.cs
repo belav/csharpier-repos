@@ -616,8 +616,7 @@ namespace System.StubHelpers
                 throw new ArgumentNullException(); // We don't have enough information to get the argument name just yet - that support will be coming in M3
 
             IntPtr hstring;
-            int hrCreate = System
-                .Runtime
+            int hrCreate = System.Runtime
                 .InteropServices
                 .WindowsRuntime
                 .UnsafeNativeMethods
@@ -650,8 +649,7 @@ namespace System.StubHelpers
             fixed (char* pManaged = managed)
             {
                 IntPtr hstring;
-                int hrCreate = System
-                    .Runtime
+                int hrCreate = System.Runtime
                     .InteropServices
                     .WindowsRuntime
                     .UnsafeNativeMethods
@@ -686,8 +684,7 @@ namespace System.StubHelpers
 
             if (hstring != IntPtr.Zero)
             {
-                System
-                    .Runtime
+                System.Runtime
                     .InteropServices
                     .WindowsRuntime
                     .UnsafeNativeMethods
@@ -1796,8 +1793,7 @@ namespace System.StubHelpers
                 pNativeType->typeKind = TypeKind.Projection;
             }
 
-            int hrCreate = System
-                .Runtime
+            int hrCreate = System.Runtime
                 .InteropServices
                 .WindowsRuntime
                 .UnsafeNativeMethods
@@ -1855,8 +1851,7 @@ namespace System.StubHelpers
 
             if (pNativeType->typeName != null)
             {
-                System
-                    .Runtime
+                System.Runtime
                     .InteropServices
                     .WindowsRuntime
                     .UnsafeNativeMethods

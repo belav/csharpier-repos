@@ -1289,15 +1289,13 @@ namespace System.Xml
         )
         {
             if (buffer == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("buffer"));
             if (offset < 0)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -1308,8 +1306,7 @@ namespace System.Xml
                         )
                     );
             if (offset > buffer.Length)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -1320,8 +1317,7 @@ namespace System.Xml
                         )
                     );
             if (count < 0)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -1332,8 +1328,7 @@ namespace System.Xml
                         )
                     );
             if (count > buffer.Length - offset)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -1362,8 +1357,7 @@ namespace System.Xml
         )
         {
             if (stream == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -1665,8 +1659,7 @@ namespace System.Xml
                     attributeNode = AddXmlAttribute();
                     attributeNode.Prefix.SetValue(prefix);
                     attributeNode.LocalName.SetValue(localName);
-                    attributeNode
-                        .Value
+                    attributeNode.Value
                         .SetValue(
                             (escaped ? ValueHandleType.EscapedUTF8 : ValueHandleType.UTF8),
                             valueOffset,
@@ -1679,8 +1672,7 @@ namespace System.Xml
                     attributeNode = AddAttribute();
                     attributeNode.Prefix.SetValue(prefix);
                     attributeNode.LocalName.SetValue(localName);
-                    attributeNode
-                        .Value
+                    attributeNode.Value
                         .SetValue(
                             (escaped ? ValueHandleType.EscapedUTF8 : ValueHandleType.UTF8),
                             valueOffset,

@@ -164,8 +164,7 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
                         ? WrittenReferenceHighlightTag.TagId
                     : ReferenceHighlightTag.TagId;
 
-                var properties = Presenter
-                    .FormatMapService
+                var properties = Presenter.FormatMapService
                     .GetEditorFormatMap("text")
                     .GetProperties(propertyId);
 
@@ -173,8 +172,7 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
                 // Otherwise the text will be repeated since there are two classifications
                 // for the same span. Additive classifications should not change the foreground
                 // color, so the resulting classified text will retain the proper look.
-                var classifiedSpans = _excerptResult
-                    .ClassifiedSpans
+                var classifiedSpans = _excerptResult.ClassifiedSpans
                     .WhereAsArray(cs =>
                         !ClassificationTypeNames.AdditiveTypeNames.Contains(cs.ClassificationType)
                     );
@@ -215,8 +213,7 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
                     // solution is never supposed to be kept alive for long time, meaning there is bunch of conditional weaktable or weak reference
                     // keyed by solution/project/document or corresponding states. this will cause all those to be kept alive in memory as well.
                     // probably we need to dig in to see how expensvie it is to support this
-                    var controlService = _excerptResult
-                        .Document
+                    var controlService = _excerptResult.Document
                         .Project
                         .Solution
                         .Services
@@ -254,8 +251,7 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
             {
                 Presenter.AssertIsForeground();
 
-                var controlService = document
-                    .Project
+                var controlService = document.Project
                     .Solution
                     .Services
                     .GetRequiredService<IContentControlService>();
@@ -264,11 +260,9 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
                 var excerptService = document.Services.GetService<IDocumentExcerptService>();
                 if (excerptService != null)
                 {
-                    var classificationOptions = Presenter
-                        ._globalOptions
+                    var classificationOptions = Presenter._globalOptions
                         .GetClassificationOptions(document.Project.Language);
-                    var excerpt = Presenter
-                        .ThreadingContext
+                    var excerpt = Presenter.ThreadingContext
                         .JoinableTaskFactory
                         .Run(() =>
                             excerptService.TryExcerptAsync(
@@ -282,8 +276,7 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
                     if (excerpt != null)
                     {
                         // get tooltip from excerpt service
-                        var clonedBuffer = excerpt
-                            .Value
+                        var clonedBuffer = excerpt.Value
                             .Content
                             .CreateTextBufferWithRoslynContentType(
                                 document.Project.Solution.Workspace
@@ -336,8 +329,7 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
                     : PredefinedPreviewTaggerKeys.ReferenceHighlightingSpansKey;
 
                 textBuffer.Properties.RemoveProperty(key);
-                textBuffer
-                    .Properties
+                textBuffer.Properties
                     .AddProperty(
                         key,
                         new NormalizedSnapshotSpanCollection(
@@ -354,8 +346,7 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
                 const int AdditionalLineCountPerSide = 3;
 
                 var referenceSpan = sourceSpan;
-                var lineNumber = sourceText
-                    .Lines
+                var lineNumber = sourceText.Lines
                     .GetLineFromPosition(referenceSpan.Start)
                     .LineNumber;
                 var firstLineNumber = Math.Max(0, lineNumber - AdditionalLineCountPerSide);
@@ -375,8 +366,7 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
                 if (_excerptResult.Document is SourceGeneratedDocument)
                 {
                     var workspace = _excerptResult.Document.Project.Solution.Workspace;
-                    var documentNavigationService = workspace
-                        .Services
+                    var documentNavigationService = workspace.Services
                         .GetService<IDocumentNavigationService>();
 
                     return documentNavigationService != null;
@@ -397,8 +387,7 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
                 // on disk.
 
                 var workspace = _excerptResult.Document.Project.Solution.Workspace;
-                var documentNavigationService = workspace
-                    .Services
+                var documentNavigationService = workspace.Services
                     .GetRequiredService<IDocumentNavigationService>();
 
                 await documentNavigationService

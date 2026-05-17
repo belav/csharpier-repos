@@ -152,8 +152,7 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                         );
 
                         if (
-                            !ILCompiler
-                                .Reflection
+                            !ILCompiler.Reflection
                                 .ReadyToRun
                                 .ReadyToRunReader
                                 .IsReadyToRunImage(r2rCheckPEReader)
@@ -230,7 +229,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
             {
                 // Associate NativeToILMap with MethodLoad event found Memory Regions
                 foreach (
-                    MethodILToNativeMapTraceData e in p.EventsInProcess.ByEventType<MethodILToNativeMapTraceData>()
+                    MethodILToNativeMapTraceData e in p.EventsInProcess
+                        .ByEventType<MethodILToNativeMapTraceData>()
                 )
                 {
                     if (

@@ -342,8 +342,7 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage
         )
         {
             return (HelpPageSampleGenerator)
-                config
-                    .Properties
+                config.Properties
                     .GetOrAdd(typeof(HelpPageSampleGenerator), k => new HelpPageSampleGenerator());
         }
 
@@ -357,8 +356,7 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage
             HelpPageSampleGenerator sampleGenerator
         )
         {
-            config
-                .Properties
+            config.Properties
                 .AddOrUpdate(
                     typeof(HelpPageSampleGenerator),
                     k => sampleGenerator,
@@ -376,8 +374,7 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage
         )
         {
             return (ModelDescriptionGenerator)
-                config
-                    .Properties
+                config.Properties
                     .GetOrAdd(
                         typeof(ModelDescriptionGenerator),
                         k => InitializeModelDescriptionGenerator(config)
@@ -401,8 +398,7 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage
             string modelId = ApiModelPrefix + apiDescriptionId;
             if (!config.Properties.TryGetValue(modelId, out model))
             {
-                Collection<ApiDescription> apiDescriptions = config
-                    .Services
+                Collection<ApiDescription> apiDescriptions = config.Services
                     .GetApiExplorer()
                     .ApiDescriptions;
                 ApiDescription apiDescription = apiDescriptions.FirstOrDefault(api =>
@@ -502,16 +498,14 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage
 
                         if (!parameterDescriptor.IsOptional)
                         {
-                            uriParameter
-                                .Annotations
+                            uriParameter.Annotations
                                 .Add(new ParameterAnnotation() { Documentation = "Required" });
                         }
 
                         object defaultValue = parameterDescriptor.DefaultValue;
                         if (defaultValue != null)
                         {
-                            uriParameter
-                                .Annotations
+                            uriParameter.Annotations
                                 .Add(
                                     new ParameterAnnotation()
                                     {
@@ -643,8 +637,7 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage
             }
             catch (Exception e)
             {
-                apiModel
-                    .ErrorMessages
+                apiModel.ErrorMessages
                     .Add(
                         String.Format(
                             CultureInfo.CurrentCulture,
@@ -662,8 +655,7 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage
             out Type resourceType
         )
         {
-            parameterDescription = apiDescription
-                .ParameterDescriptions
+            parameterDescription = apiDescription.ParameterDescriptions
                 .FirstOrDefault(p =>
                     p.Source == ApiParameterSource.FromBody
                     || (

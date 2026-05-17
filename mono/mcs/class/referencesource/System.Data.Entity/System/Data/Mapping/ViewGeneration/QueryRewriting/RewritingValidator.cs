@@ -435,8 +435,7 @@ namespace System.Data.Mapping.ViewGeneration.Validation
 
             // We want the possible values for joinSlot.MemberPath which is a
             // C-side element -- so we use the queryDomainMap
-            IEnumerable<Constant> possibleValues = memberMaps
-                .QueryDomainMap
+            IEnumerable<Constant> possibleValues = memberMaps.QueryDomainMap
                 .GetDomain(joinSlot.MemberPath);
             // Note: the values in constaints can be null or not null as
             // well (i.e., just not scalarConstants)
@@ -483,8 +482,7 @@ namespace System.Data.Mapping.ViewGeneration.Validation
             }
             BoolExpression expression = wrapper.RightCellQuery.WhereClause;
 
-            IEnumerable<Constant> possibleValues = memberMaps
-                .QueryDomainMap
+            IEnumerable<Constant> possibleValues = memberMaps.QueryDomainMap
                 .GetDomain(projectedSlot.MemberPath);
             Set<Constant> allowedValues = new Set<Constant>(Constant.EqualityComparer);
             allowedValues.Add(Constant.Null);
@@ -759,14 +757,12 @@ namespace System.Data.Mapping.ViewGeneration.Validation
                                 thatQuery.ProjectedSlotAt(i) as MemberProjectedSlot;
                             if (thatSlot != null)
                             {
-                                MemberPath tableMember = m_viewgenContext
-                                    .MemberMaps
+                                MemberPath tableMember = m_viewgenContext.MemberMaps
                                     .ProjectedSlotMap[i];
                                 if (!tableMember.IsPartOfKey)
                                 {
                                     if (
-                                        !MemberPath
-                                            .EqualityComparer
+                                        !MemberPath.EqualityComparer
                                             .Equals(thisSlot.MemberPath, thatSlot.MemberPath)
                                     )
                                     {

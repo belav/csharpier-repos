@@ -37,8 +37,7 @@ namespace System.Activities.DurableInstancing
                 base.InstancePersistenceCommand
             );
 
-            sqlCommand
-                .Parameters
+            sqlCommand.Parameters
                 .Add(
                     new SqlParameter
                     {
@@ -47,8 +46,7 @@ namespace System.Activities.DurableInstancing
                         Value = unlockCommand.InstanceId,
                     }
                 );
-            sqlCommand
-                .Parameters
+            sqlCommand.Parameters
                 .Add(
                     new SqlParameter
                     {
@@ -57,8 +55,7 @@ namespace System.Activities.DurableInstancing
                         Value = unlockCommand.SurrogateOwnerId,
                     }
                 );
-            sqlCommand
-                .Parameters
+            sqlCommand.Parameters
                 .Add(
                     new SqlParameter
                     {

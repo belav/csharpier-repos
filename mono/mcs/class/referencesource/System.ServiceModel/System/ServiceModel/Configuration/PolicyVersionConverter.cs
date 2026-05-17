@@ -53,8 +53,7 @@ namespace System.ServiceModel.Configuration
                         retval = PolicyVersion.Default;
                         break;
                     default:
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new ArgumentOutOfRangeException(
                                     "value",
@@ -96,8 +95,7 @@ namespace System.ServiceModel.Configuration
                 }
                 else
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentOutOfRangeException(
                                 "value",

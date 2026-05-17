@@ -50,8 +50,7 @@ namespace Microsoft.CodeAnalysis.Host
                         break;
                 }
 
-                return MefHostServices
-                    .DefaultAssemblies
+                return MefHostServices.DefaultAssemblies
                     .Concat(MefHostServicesHelpers.LoadNearbyAssemblies(assemblyNames));
             }
 

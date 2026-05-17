@@ -260,8 +260,7 @@ namespace System.Workflow.Activities
 
                     if (currentParent != null)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperArgument(
                                 "value",
                                 SR2.GetString(
@@ -378,8 +377,7 @@ namespace System.Workflow.Activities
             }
             if (string.IsNullOrEmpty(contextName))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(
                         "contextName",
                         SR2.GetString(SR2.Error_ArgumentValueNullOrEmptyString)
@@ -393,8 +391,7 @@ namespace System.Workflow.Activities
             );
             if (receiveContext == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR2.GetString(SR2.Error_CannotFindReceiveContext, contextName)
@@ -415,8 +412,7 @@ namespace System.Workflow.Activities
             ReceiveContext receiveContext = ContextToken.GetRootReceiveContext(activity);
             if (receiveContext == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR2.GetString(
@@ -434,14 +430,12 @@ namespace System.Workflow.Activities
         {
             if (dependencyObject == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("dependencyObject");
             }
             if (!(dependencyObject is Activity))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(
                         "dependencyObject",
                         SR2.GetString(SR2.Error_UnexpectedArgumentType, typeof(Activity).FullName)
@@ -457,14 +451,12 @@ namespace System.Workflow.Activities
         {
             if (dependencyObject == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("dependencyObject");
             }
             if (!(dependencyObject is Activity))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(
                         "dependencyObject",
                         SR2.GetString(SR2.Error_UnexpectedArgumentType, typeof(Activity).FullName)
@@ -492,8 +484,7 @@ namespace System.Workflow.Activities
             ActivityExecutionContext executionContext = sender as ActivityExecutionContext;
             if (executionContext == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentException(
                             SR2.GetString(
@@ -509,8 +500,7 @@ namespace System.Workflow.Activities
                 executionContext.GetService<WorkflowQueuingService>();
             if (queuingService == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR2.GetString(
@@ -524,8 +514,7 @@ namespace System.Workflow.Activities
             WorkflowQueue workflowQueue = queuingService.GetWorkflowQueue(e.QueueName);
             if (workflowQueue == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR2.GetString(SR2.Error_QueueNotFound, e.QueueName)
@@ -539,8 +528,7 @@ namespace System.Workflow.Activities
                     workflowQueue.Peek() as WorkflowRequestContext;
                 if (requestContext == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR2.GetString(
@@ -574,8 +562,7 @@ namespace System.Workflow.Activities
 
                     if (this.RequestContext == null)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(
                                     SR2.GetString(
@@ -607,8 +594,7 @@ namespace System.Workflow.Activities
 
                     try
                     {
-                        System
-                            .Workflow
+                        System.Workflow
                             .Runtime
                             .WorkflowTrace
                             .Runtime
@@ -627,8 +613,7 @@ namespace System.Workflow.Activities
                     }
                     catch (CommunicationException cex)
                     {
-                        System
-                            .Workflow
+                        System.Workflow
                             .Runtime
                             .WorkflowTrace
                             .Runtime
@@ -643,8 +628,7 @@ namespace System.Workflow.Activities
                     }
                     catch (TimeoutException tex)
                     {
-                        System
-                            .Workflow
+                        System.Workflow
                             .Runtime
                             .WorkflowTrace
                             .Runtime
@@ -661,15 +645,13 @@ namespace System.Workflow.Activities
                     if (
                         requestContext.ContextProperties == null
                         || !(
-                            requestContext
-                                .ContextProperties
+                            requestContext.ContextProperties
                                 .Keys
                                 .Contains(WellKnownContextProperties.InstanceId)
                         )
                     )
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new FaultException(
                                     SR2.GetString(
@@ -695,8 +677,7 @@ namespace System.Workflow.Activities
 
             if (parentEventHandler == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("parentEventHandler");
             }
 
@@ -748,8 +729,7 @@ namespace System.Workflow.Activities
 
             if (parentEventHandler == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("parentEventHandler");
             }
 
@@ -757,8 +737,7 @@ namespace System.Workflow.Activities
                 parentContext.GetService<WorkflowQueuingService>();
             if (queuingService == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR2.GetString(
@@ -777,8 +756,7 @@ namespace System.Workflow.Activities
             );
             if (workflowQueue == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR2.GetString(SR2.Error_QueueNotFound, ((IEventActivity)this).QueueName)
@@ -820,8 +798,7 @@ namespace System.Workflow.Activities
             OperationInfoBase serviceOperationInfo = this.ServiceOperationInfo;
             if (serviceOperationInfo == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR2.GetString(SR2.Error_ServiceOperationInfoNotSpecified, this.Name)
@@ -862,8 +839,7 @@ namespace System.Workflow.Activities
                         context
                     );
 
-                    context
-                        .Contracts
+                    context.Contracts
                         .Add(contractDescription.ConfigurationName, contractDescription);
                     context.ReflectedContracts.Add(contractDescription.ContractType);
                 }
@@ -881,8 +857,7 @@ namespace System.Workflow.Activities
                     ContractDescription inheritedContractDescription =
                         inheritedContractDescriptions[j];
                     if (
-                        !context
-                            .ReflectedContracts
+                        !context.ReflectedContracts
                             .Contains(inheritedContractDescription.ContractType)
                     )
                     {
@@ -891,8 +866,7 @@ namespace System.Workflow.Activities
                             context
                         );
 
-                        context
-                            .Contracts
+                        context.Contracts
                             .Add(
                                 inheritedContractDescription.ConfigurationName,
                                 inheritedContractDescription
@@ -968,8 +942,7 @@ namespace System.Workflow.Activities
             WorkflowQueue workflowQueue = GetWorkflowQueue(provider);
             if (workflowQueue == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR2.GetString(SR2.Error_QueueNotFound, ((IEventActivity)this).QueueName)
@@ -1033,8 +1006,7 @@ namespace System.Workflow.Activities
             {
                 if (executionContext == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgumentNull("executionContext");
                 }
 
@@ -1042,8 +1014,7 @@ namespace System.Workflow.Activities
                     executionContext.GetService<WorkflowQueuingService>();
                 if (queuingService == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR2.GetString(
@@ -1057,8 +1028,7 @@ namespace System.Workflow.Activities
                 WorkflowQueue workflowQueue = GetWorkflowQueue(executionContext);
                 if (workflowQueue == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR2.GetString(
@@ -1095,8 +1065,7 @@ namespace System.Workflow.Activities
         {
             if (executionContext == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("executionContext");
             }
 
@@ -1104,8 +1073,7 @@ namespace System.Workflow.Activities
                 executionContext.GetService<WorkflowQueuingService>();
             if (queuingService == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR2.GetString(
@@ -1123,8 +1091,7 @@ namespace System.Workflow.Activities
             WorkflowQueue workflowQueue = GetWorkflowQueue(executionContext);
             if (workflowQueue == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR2.GetString(SR2.Error_QueueNotFound, ((IEventActivity)this).QueueName)
@@ -1149,8 +1116,7 @@ namespace System.Workflow.Activities
             }
             else if (workflowQueue.Count == 0)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR2.GetString(SR2.Error_RequestContextUnavailable, this.QualifiedName)
@@ -1163,8 +1129,7 @@ namespace System.Workflow.Activities
 
             if (requestContext == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR2.GetString(SR2.Error_RequestContextUnavailable, this.QualifiedName)
@@ -1198,8 +1163,7 @@ namespace System.Workflow.Activities
                 {
                     try
                     {
-                        System
-                            .Workflow
+                        System.Workflow
                             .Runtime
                             .WorkflowTrace
                             .Runtime
@@ -1218,8 +1182,7 @@ namespace System.Workflow.Activities
                     }
                     catch (CommunicationException cex)
                     {
-                        System
-                            .Workflow
+                        System.Workflow
                             .Runtime
                             .WorkflowTrace
                             .Runtime
@@ -1234,8 +1197,7 @@ namespace System.Workflow.Activities
                     }
                     catch (TimeoutException tex)
                     {
-                        System
-                            .Workflow
+                        System.Workflow
                             .Runtime
                             .WorkflowTrace
                             .Runtime
@@ -1252,15 +1214,13 @@ namespace System.Workflow.Activities
                     if (
                         requestContext.ContextProperties == null
                         || !(
-                            requestContext
-                                .ContextProperties
+                            requestContext.ContextProperties
                                 .Keys
                                 .Contains(WellKnownContextProperties.InstanceId)
                         )
                     )
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new FaultException(
                                     SR2.GetString(
@@ -1302,8 +1262,7 @@ namespace System.Workflow.Activities
             {
                 if (executionContext == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgumentNull("executionContext");
                 }
 
@@ -1314,8 +1273,7 @@ namespace System.Workflow.Activities
 
                 if (executionContext == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgumentNull("executionContext");
                 }
 
@@ -1323,8 +1281,7 @@ namespace System.Workflow.Activities
                     executionContext.GetService<WorkflowQueuingService>();
                 if (queuingService == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR2.GetString(
@@ -1338,8 +1295,7 @@ namespace System.Workflow.Activities
                 WorkflowQueue workflowQueue = GetWorkflowQueue(executionContext);
                 if (workflowQueue == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR2.GetString(
@@ -1366,8 +1322,7 @@ namespace System.Workflow.Activities
 
                 if (this.RequestContext != null)
                 {
-                    System
-                        .Workflow
+                    System.Workflow
                         .Runtime
                         .WorkflowTrace
                         .Runtime
@@ -1387,8 +1342,7 @@ namespace System.Workflow.Activities
                         }
                         catch
                         {
-                            System
-                                .Workflow
+                            System.Workflow
                                 .Runtime
                                 .WorkflowTrace
                                 .Runtime
@@ -1409,8 +1363,7 @@ namespace System.Workflow.Activities
                         }
                         catch
                         {
-                            System
-                                .Workflow
+                            System.Workflow
                                 .Runtime
                                 .WorkflowTrace
                                 .Runtime
@@ -1439,8 +1392,7 @@ namespace System.Workflow.Activities
 
             if (serviceOperationInfo == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR2.GetString(SR2.Error_ServiceOperationInfoNotSpecified, this.Name)
@@ -1490,8 +1442,7 @@ namespace System.Workflow.Activities
         {
             if (executionContext == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("executionContext");
             }
 
@@ -1500,8 +1451,7 @@ namespace System.Workflow.Activities
                 RestoreRequestContext();
                 if (this.RequestContext == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR2.GetString(
@@ -1517,8 +1467,7 @@ namespace System.Workflow.Activities
 
                 if (this.FaultMessage != null)
                 {
-                    System
-                        .Workflow
+                    System.Workflow
                         .Runtime
                         .WorkflowTrace
                         .Runtime
@@ -1536,8 +1485,7 @@ namespace System.Workflow.Activities
                     }
                     catch (CommunicationException cex)
                     {
-                        System
-                            .Workflow
+                        System.Workflow
                             .Runtime
                             .WorkflowTrace
                             .Runtime
@@ -1553,8 +1501,7 @@ namespace System.Workflow.Activities
                     }
                     catch (TimeoutException tex)
                     {
-                        System
-                            .Workflow
+                        System.Workflow
                             .Runtime
                             .WorkflowTrace
                             .Runtime
@@ -1573,8 +1520,7 @@ namespace System.Workflow.Activities
                 {
                     returnValue = this.OperationHelper.GetOutputs(this, out outputValues);
 
-                    System
-                        .Workflow
+                    System.Workflow
                         .Runtime
                         .WorkflowTrace
                         .Runtime
@@ -1592,8 +1538,7 @@ namespace System.Workflow.Activities
                     }
                     catch (CommunicationException cex)
                     {
-                        System
-                            .Workflow
+                        System.Workflow
                             .Runtime
                             .WorkflowTrace
                             .Runtime
@@ -1609,8 +1554,7 @@ namespace System.Workflow.Activities
                     }
                     catch (TimeoutException tex)
                     {
-                        System
-                            .Workflow
+                        System.Workflow
                             .Runtime
                             .WorkflowTrace
                             .Runtime
@@ -1627,8 +1571,7 @@ namespace System.Workflow.Activities
                 }
                 else
                 {
-                    System
-                        .Workflow
+                    System.Workflow
                         .Runtime
                         .WorkflowTrace
                         .Runtime
@@ -1658,15 +1601,13 @@ namespace System.Workflow.Activities
         {
             if (dependencyObject == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("dependencyObject");
             }
 
             if (!(dependencyObject is Activity))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(
                         "dependencyObject",
                         SR2.GetString(SR2.Error_UnexpectedArgumentType, typeof(Activity).FullName)
@@ -1721,13 +1662,11 @@ namespace System.Workflow.Activities
 
             if (executionContext == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("executionContext");
             }
 
-            System
-                .Workflow
+            System.Workflow
                 .Runtime
                 .WorkflowTrace
                 .Runtime
@@ -1753,8 +1692,7 @@ namespace System.Workflow.Activities
 
             if (this.ServiceOperationInfo == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR2.GetString(SR2.Error_ServiceOperationInfoNotSpecified, this.Name)
@@ -1767,8 +1705,7 @@ namespace System.Workflow.Activities
 
             if (queuingService == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR2.GetString(
@@ -1888,8 +1825,7 @@ namespace System.Workflow.Activities
                 OperationInfoBase serviceOperationInfo = activity.ServiceOperationInfo;
                 if (serviceOperationInfo == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR2.GetString(
@@ -1903,8 +1839,7 @@ namespace System.Workflow.Activities
                 MethodInfo methodInfo = serviceOperationInfo.GetMethodInfo(serviceProvider);
                 if (methodInfo == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR2.GetString(SR2.Error_MethodInfoNotAvailable, activity.Name)
@@ -2003,8 +1938,7 @@ namespace System.Workflow.Activities
                         && this.notNullableParameters.Keys.Contains(parameterInfo.Key)
                     )
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(
                                     SR2.GetString(
@@ -2024,8 +1958,7 @@ namespace System.Workflow.Activities
                 {
                     if (bindings["(ReturnValue)"].Value == null && !this.nullableReturnValue)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(
                                     SR2.GetString(
@@ -2068,8 +2001,7 @@ namespace System.Workflow.Activities
 
                     if (!bindings.Contains(parameterInfo.Value))
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(
                                     SR2.GetString(
@@ -2083,8 +2015,7 @@ namespace System.Workflow.Activities
                     }
                     if (index >= inputs.Count)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(
                                     SR2.GetString(
@@ -2112,8 +2043,7 @@ namespace System.Workflow.Activities
             {
                 if (receiveActivity == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgumentNull("receiveActivity");
                 }
 
@@ -2132,16 +2062,14 @@ namespace System.Workflow.Activities
 
                 if (queueEventArgs == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgumentNull("queueEventArgs");
                 }
 
                 WorkflowQueue workflowQueue = sender as WorkflowQueue;
                 if (workflowQueue == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentException(
                                 SR2.GetString(
@@ -2190,15 +2118,13 @@ namespace System.Workflow.Activities
             {
                 if (receiveActivity == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgumentNull("receiveActivity");
                 }
 
                 if (activityEventListener == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgumentNull("activityEventListener");
                 }
 
@@ -2218,16 +2144,14 @@ namespace System.Workflow.Activities
 
                 if (queueEventArgs == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgumentNull("queueEventArgs");
                 }
 
                 ActivityExecutionContext executionContext = sender as ActivityExecutionContext;
                 if (executionContext == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentException(
                                 SR2.GetString(
@@ -2243,8 +2167,7 @@ namespace System.Workflow.Activities
                     executionContext.GetService<WorkflowQueuingService>();
                 if (queuingService == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR2.GetString(
@@ -2260,8 +2183,7 @@ namespace System.Workflow.Activities
                 );
                 if (workflowQueue == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR2.GetString(SR2.Error_QueueNotFound, queueEventArgs.QueueName)
@@ -2285,8 +2207,7 @@ namespace System.Workflow.Activities
                     }
                     else
                     {
-                        System
-                            .Workflow
+                        System.Workflow
                             .Runtime
                             .WorkflowTrace
                             .Runtime
@@ -2308,8 +2229,7 @@ namespace System.Workflow.Activities
                         }
                         catch (CommunicationException cex)
                         {
-                            System
-                                .Workflow
+                            System.Workflow
                                 .Runtime
                                 .WorkflowTrace
                                 .Runtime
@@ -2324,8 +2244,7 @@ namespace System.Workflow.Activities
                         }
                         catch (TimeoutException tex)
                         {
-                            System
-                                .Workflow
+                            System.Workflow
                                 .Runtime
                                 .WorkflowTrace
                                 .Runtime
@@ -2342,15 +2261,13 @@ namespace System.Workflow.Activities
                         if (
                             requestContext.ContextProperties == null
                             || !(
-                                requestContext
-                                    .ContextProperties
+                                requestContext.ContextProperties
                                     .Keys
                                     .Contains(WellKnownContextProperties.InstanceId)
                             )
                         )
                         {
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
                                     new FaultException(
                                         SR2.GetString(
@@ -2384,22 +2301,19 @@ namespace System.Workflow.Activities
 
                 if (serviceProvider == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgumentNull("serviceProvider");
                 }
 
                 if (receiveActivity == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgumentNull("receiveActivity");
                 }
 
                 if (requestContext == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgumentNull("requestContext");
                 }
 

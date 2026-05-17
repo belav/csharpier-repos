@@ -156,8 +156,7 @@ namespace System.Collections.Immutable.Tests
                 Assert.Equal(i * 10, list[i - 1]);
             }
 
-            ImmutableList<int> bulkList = ImmutableList<int>
-                .Empty
+            ImmutableList<int> bulkList = ImmutableList<int>.Empty
                 .AddRange(Enumerable.Range(1, 10).Select(i => i * 10));
             Assert.Equal<int>(list.ToArray(), bulkList.ToArray());
         }
@@ -923,10 +922,11 @@ namespace System.Collections.Immutable.Tests
                 "_root"
             );
             DebuggerAttributes.ValidateDebuggerDisplayReferences(rootNode);
-            PropertyInfo itemProperty = info.Properties.Single(pr =>
-                pr.GetCustomAttribute<DebuggerBrowsableAttribute>().State
-                == DebuggerBrowsableState.RootHidden
-            );
+            PropertyInfo itemProperty = info.Properties
+                .Single(pr =>
+                    pr.GetCustomAttribute<DebuggerBrowsableAttribute>().State
+                    == DebuggerBrowsableState.RootHidden
+                );
             double[] items = itemProperty.GetValue(info.Instance) as double[];
             Assert.Equal(list, items);
         }

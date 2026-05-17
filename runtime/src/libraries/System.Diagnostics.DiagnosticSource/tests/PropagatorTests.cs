@@ -804,8 +804,7 @@ namespace System.Diagnostics.Tests
                     string traceState = "x-" + a.TraceStateString;
                     string baggageString = "x=y, " + GetFormattedBaggage(a.Baggage);
 
-                    DistributedContextPropagator
-                        .Current
+                    DistributedContextPropagator.Current
                         .Inject(
                             a,
                             null,
@@ -835,8 +834,7 @@ namespace System.Diagnostics.Tests
                             }
                         );
 
-                    DistributedContextPropagator
-                        .Current
+                    DistributedContextPropagator.Current
                         .ExtractTraceIdAndState(
                             null,
                             (
@@ -872,32 +870,32 @@ namespace System.Diagnostics.Tests
                     Assert.Equal(traceParent, traceId);
                     Assert.Equal(traceState, state);
 
-                    IEnumerable<KeyValuePair<string, string?>>? b = DistributedContextPropagator
-                        .Current
-                        .ExtractBaggage(
-                            null,
-                            (
-                                object carrier,
-                                string fieldName,
-                                out string? fieldValue,
-                                out IEnumerable<string>? fieldValues
-                            ) =>
-                            {
-                                Assert.Null(carrier);
-                                fieldValue = null;
-                                fieldValues = null;
-
-                                if (fieldName == CustomPropagator.XBaggage)
+                    IEnumerable<KeyValuePair<string, string?>>? b =
+                        DistributedContextPropagator.Current
+                            .ExtractBaggage(
+                                null,
+                                (
+                                    object carrier,
+                                    string fieldName,
+                                    out string? fieldValue,
+                                    out IEnumerable<string>? fieldValues
+                                ) =>
                                 {
-                                    fieldValue = baggageString;
-                                    return;
-                                }
+                                    Assert.Null(carrier);
+                                    fieldValue = null;
+                                    fieldValues = null;
 
-                                Assert.Fail(
-                                    $"Encountered wrong header name '{fieldName}' in custom propagator"
-                                );
-                            }
-                        );
+                                    if (fieldName == CustomPropagator.XBaggage)
+                                    {
+                                        fieldValue = baggageString;
+                                        return;
+                                    }
+
+                                    Assert.Fail(
+                                        $"Encountered wrong header name '{fieldName}' in custom propagator"
+                                    );
+                                }
+                            );
 
                     Assert.Equal(2, b.Count());
                     Assert.Equal(new KeyValuePair<string, string>("x", "y"), b.ElementAt(0));

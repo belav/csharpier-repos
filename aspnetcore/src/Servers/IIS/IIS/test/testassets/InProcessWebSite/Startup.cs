@@ -56,28 +56,28 @@ public partial class Startup
 
 #if FORWARDCOMPAT
     private async Task ContentRootPath(HttpContext ctx) =>
-        await ctx.Response.WriteAsync(
-            ctx.RequestServices
-                .GetService<Microsoft.AspNetCore.Hosting.IHostingEnvironment>()
-                .ContentRootPath
-        );
+        await ctx.Response
+            .WriteAsync(
+                ctx.RequestServices
+                    .GetService<Microsoft.AspNetCore.Hosting.IHostingEnvironment>()
+                    .ContentRootPath
+            );
 
     private async Task WebRootPath(HttpContext ctx) =>
-        await ctx.Response.WriteAsync(
-            ctx.RequestServices
-                .GetService<Microsoft.AspNetCore.Hosting.IHostingEnvironment>()
-                .WebRootPath
-        );
+        await ctx.Response
+            .WriteAsync(
+                ctx.RequestServices
+                    .GetService<Microsoft.AspNetCore.Hosting.IHostingEnvironment>()
+                    .WebRootPath
+            );
 #else
     private async Task ContentRootPath(HttpContext ctx) =>
-        await ctx.Response.WriteAsync(
-            ctx.RequestServices.GetService<IWebHostEnvironment>().ContentRootPath
-        );
+        await ctx.Response
+            .WriteAsync(ctx.RequestServices.GetService<IWebHostEnvironment>().ContentRootPath);
 
     private async Task WebRootPath(HttpContext ctx) =>
-        await ctx.Response.WriteAsync(
-            ctx.RequestServices.GetService<IWebHostEnvironment>().WebRootPath
-        );
+        await ctx.Response
+            .WriteAsync(ctx.RequestServices.GetService<IWebHostEnvironment>().WebRootPath);
 #endif
 
     private async Task CurrentDirectory(HttpContext ctx) =>
@@ -90,29 +90,28 @@ public partial class Startup
     {
         var config = ctx.RequestServices.GetService<IConfiguration>();
 
-        await ctx.Response.WriteAsync(
-            "IIS Version: " + config["IIS_VERSION"] + Environment.NewLine
-        );
-        await ctx.Response.WriteAsync(
-            "ApplicationId: " + config["IIS_APPLICATION_ID"] + Environment.NewLine
-        );
-        await ctx.Response.WriteAsync(
-            "Application Path: " + config["IIS_PHYSICAL_PATH"] + Environment.NewLine
-        );
-        await ctx.Response.WriteAsync(
-            "Application Virtual Path: "
-                + config["IIS_APPLICATION_VIRTUAL_PATH"]
-                + Environment.NewLine
-        );
-        await ctx.Response.WriteAsync(
-            "Application Config Path: " + config["IIS_APP_CONFIG_PATH"] + Environment.NewLine
-        );
-        await ctx.Response.WriteAsync(
-            "AppPool ID: " + config["IIS_APP_POOL_ID"] + Environment.NewLine
-        );
-        await ctx.Response.WriteAsync(
-            "AppPool Config File: " + config["IIS_APP_POOL_CONFIG_FILE"] + Environment.NewLine
-        );
+        await ctx.Response
+            .WriteAsync("IIS Version: " + config["IIS_VERSION"] + Environment.NewLine);
+        await ctx.Response
+            .WriteAsync("ApplicationId: " + config["IIS_APPLICATION_ID"] + Environment.NewLine);
+        await ctx.Response
+            .WriteAsync("Application Path: " + config["IIS_PHYSICAL_PATH"] + Environment.NewLine);
+        await ctx.Response
+            .WriteAsync(
+                "Application Virtual Path: "
+                    + config["IIS_APPLICATION_VIRTUAL_PATH"]
+                    + Environment.NewLine
+            );
+        await ctx.Response
+            .WriteAsync(
+                "Application Config Path: " + config["IIS_APP_CONFIG_PATH"] + Environment.NewLine
+            );
+        await ctx.Response
+            .WriteAsync("AppPool ID: " + config["IIS_APP_POOL_ID"] + Environment.NewLine);
+        await ctx.Response
+            .WriteAsync(
+                "AppPool Config File: " + config["IIS_APP_POOL_CONFIG_FILE"] + Environment.NewLine
+            );
         await ctx.Response.WriteAsync("Site ID: " + config["IIS_SITE_ID"] + Environment.NewLine);
         await ctx.Response.WriteAsync("Site Name: " + config["IIS_SITE_NAME"]);
     }
@@ -125,34 +124,37 @@ public partial class Startup
             .Features
             .Get<IIISEnvironmentFeature>();
 
-        await ctx.Response.WriteAsync(
-            "IIS Version: " + envFeature.IISVersion + Environment.NewLine
-        );
-        await ctx.Response.WriteAsync(
-            "ApplicationId: " + envFeature.ApplicationId + Environment.NewLine
-        );
-        await ctx.Response.WriteAsync(
-            "Application Path: " + envFeature.ApplicationPhysicalPath + Environment.NewLine
-        );
-        await ctx.Response.WriteAsync(
-            "Application Virtual Path: " + envFeature.ApplicationVirtualPath + Environment.NewLine
-        );
-        await ctx.Response.WriteAsync(
-            "Application Config Path: " + envFeature.AppConfigPath + Environment.NewLine
-        );
+        await ctx.Response
+            .WriteAsync("IIS Version: " + envFeature.IISVersion + Environment.NewLine);
+        await ctx.Response
+            .WriteAsync("ApplicationId: " + envFeature.ApplicationId + Environment.NewLine);
+        await ctx.Response
+            .WriteAsync(
+                "Application Path: " + envFeature.ApplicationPhysicalPath + Environment.NewLine
+            );
+        await ctx.Response
+            .WriteAsync(
+                "Application Virtual Path: "
+                    + envFeature.ApplicationVirtualPath
+                    + Environment.NewLine
+            );
+        await ctx.Response
+            .WriteAsync(
+                "Application Config Path: " + envFeature.AppConfigPath + Environment.NewLine
+            );
         await ctx.Response.WriteAsync("AppPool ID: " + envFeature.AppPoolId + Environment.NewLine);
-        await ctx.Response.WriteAsync(
-            "AppPool Config File: " + envFeature.AppPoolConfigFile + Environment.NewLine
-        );
+        await ctx.Response
+            .WriteAsync(
+                "AppPool Config File: " + envFeature.AppPoolConfigFile + Environment.NewLine
+            );
         await ctx.Response.WriteAsync("Site ID: " + envFeature.SiteId + Environment.NewLine);
         await ctx.Response.WriteAsync("Site Name: " + envFeature.SiteName);
     }
 #endif
 
     private async Task ASPNETCORE_IIS_PHYSICAL_PATH(HttpContext ctx) =>
-        await ctx.Response.WriteAsync(
-            Environment.GetEnvironmentVariable("ASPNETCORE_IIS_PHYSICAL_PATH")
-        );
+        await ctx.Response
+            .WriteAsync(Environment.GetEnvironmentVariable("ASPNETCORE_IIS_PHYSICAL_PATH"));
 
     private async Task ServerAddresses(HttpContext ctx)
     {
@@ -197,8 +199,7 @@ public partial class Startup
     public async Task GetClientCert(HttpContext context)
     {
         var clientCert = context.Connection.ClientCertificate;
-        await context
-            .Response
+        await context.Response
             .WriteAsync(
                 clientCert != null ? $"Enabled;{clientCert.GetCertHashString()}" : "Disabled"
             );
@@ -228,16 +229,14 @@ public partial class Startup
 
     public async Task WaitingRequestCount(HttpContext context)
     {
-        await context
-            .Response
+        await context.Response
             .WriteAsync(_waitingRequestCount.ToString(CultureInfo.InvariantCulture));
     }
 
     public Task CreateFile(HttpContext context)
     {
 #if FORWARDCOMPAT
-        var hostingEnv = context
-            .RequestServices
+        var hostingEnv = context.RequestServices
             .GetService<Microsoft.AspNetCore.Hosting.IHostingEnvironment>();
 #else
         var hostingEnv = context.RequestServices.GetService<IWebHostEnvironment>();
@@ -277,9 +276,8 @@ public partial class Startup
 
     private async Task GetEnvironmentVariable(HttpContext ctx)
     {
-        await ctx.Response.WriteAsync(
-            Environment.GetEnvironmentVariable(ctx.Request.Query["name"].ToString())
-        );
+        await ctx.Response
+            .WriteAsync(Environment.GetEnvironmentVariable(ctx.Request.Query["name"].ToString()));
     }
 
     private async Task ServerVariable(HttpContext ctx)
@@ -330,9 +328,8 @@ public partial class Startup
 
     private Task PathAndPathBase(HttpContext ctx)
     {
-        return ctx.Response.WriteAsync(
-            $"PathBase: {ctx.Request.PathBase.Value}; Path: {ctx.Request.Path.Value}"
-        );
+        return ctx.Response
+            .WriteAsync($"PathBase: {ctx.Request.PathBase.Value}; Path: {ctx.Request.Path.Value}");
     }
 
     private async Task FeatureCollectionSetRequestFeatures(HttpContext ctx)
@@ -565,9 +562,8 @@ public partial class Startup
 
             if (duplicateKeyException is null)
             {
-                return ctx.Response.WriteAsync(
-                    $"Failure: Repeated '{headerName}' Add did not throw"
-                );
+                return ctx.Response
+                    .WriteAsync($"Failure: Repeated '{headerName}' Add did not throw");
             }
         }
 
@@ -670,8 +666,8 @@ public partial class Startup
     {
         await ctx.Response.WriteAsync("test1");
 #if FORWARDCOMPAT
-        var lifetime =
-            ctx.RequestServices.GetService<Microsoft.AspNetCore.Hosting.IApplicationLifetime>();
+        var lifetime = ctx.RequestServices
+            .GetService<Microsoft.AspNetCore.Hosting.IApplicationLifetime>();
 #else
         var lifetime = ctx.RequestServices.GetService<IHostApplicationLifetime>();
 #endif
@@ -1140,22 +1136,27 @@ public partial class Startup
     }
 
     public Task HttpsHelloWorld(HttpContext ctx) =>
-        ctx.Response.WriteAsync(
-            "Scheme:" + ctx.Request.Scheme + "; Original:" + ctx.Request.Headers["x-original-proto"]
-        );
+        ctx.Response
+            .WriteAsync(
+                "Scheme:"
+                    + ctx.Request.Scheme
+                    + "; Original:"
+                    + ctx.Request.Headers["x-original-proto"]
+            );
 
     public Task Path(HttpContext ctx) => ctx.Response.WriteAsync(ctx.Request.Path.Value);
 
     public Task Query(HttpContext ctx) => ctx.Response.WriteAsync(ctx.Request.QueryString.Value);
 
     public Task BodyLimit(HttpContext ctx) =>
-        ctx.Response.WriteAsync(
-            ctx.Features
-                .Get<IHttpMaxRequestBodySizeFeature>()
-                ?.MaxRequestBodySize
-                ?.ToString(CultureInfo.InvariantCulture)
-                ?? "null"
-        );
+        ctx.Response
+            .WriteAsync(
+                ctx.Features
+                    .Get<IHttpMaxRequestBodySizeFeature>()
+                    ?.MaxRequestBodySize
+                    ?.ToString(CultureInfo.InvariantCulture)
+                    ?? "null"
+            );
 
     public Task Anonymous(HttpContext context) =>
         context.Response.WriteAsync("Anonymous?" + !context.User.Identity.IsAuthenticated);
@@ -1195,8 +1196,7 @@ public partial class Startup
     }
 
     public Task UpgradeFeatureDetection(HttpContext context) =>
-        context
-            .Response
+        context.Response
             .WriteAsync(
                 context.Features.Get<IHttpUpgradeFeature>() != null ? "Enabled" : "Disabled"
             );
@@ -1221,20 +1221,17 @@ public partial class Startup
 
     private async Task ProcessId(HttpContext context)
     {
-        await context
-            .Response
+        await context.Response
             .WriteAsync(Environment.ProcessId.ToString(CultureInfo.InvariantCulture));
     }
 
     public async Task ANCM_HTTPS_PORT(HttpContext context)
     {
-        var httpsPort = context
-            .RequestServices
+        var httpsPort = context.RequestServices
             .GetService<IConfiguration>()
             .GetValue<int?>("ANCM_HTTPS_PORT");
 
-        await context
-            .Response
+        await context.Response
             .WriteAsync(
                 httpsPort.HasValue
                     ? httpsPort.Value.ToString(CultureInfo.InvariantCulture)
@@ -1244,13 +1241,11 @@ public partial class Startup
 
     public async Task HTTPS_PORT(HttpContext context)
     {
-        var httpsPort = context
-            .RequestServices
+        var httpsPort = context.RequestServices
             .GetService<IConfiguration>()
             .GetValue<int?>("HTTPS_PORT");
 
-        await context
-            .Response
+        await context.Response
             .WriteAsync(
                 httpsPort.HasValue
                     ? httpsPort.Value.ToString(CultureInfo.InvariantCulture)
@@ -1393,8 +1388,7 @@ public partial class Startup
 
     public Task ResponseTrailers_MultipleValues_SentAsSeparateHeaders(HttpContext context)
     {
-        context
-            .Response
+        context.Response
             .AppendTrailer(
                 "trailername",
                 new StringValues(new[] { "TrailerValue0", "TrailerValue1" })
@@ -1414,8 +1408,7 @@ public partial class Startup
             new string('f', 1024 * 64 - 1),
         }; // Max header size
 
-        context
-            .Response
+        context.Response
             .AppendTrailer(
                 "ThisIsALongerHeaderNameThatStillWorksForReals",
                 new StringValues(values)
@@ -1657,8 +1650,7 @@ public partial class Startup
     public async Task OnCompletedHttpContext(HttpContext context)
     {
         // This shouldn't block the response or the server from shutting down.
-        context
-            .Response
+        context.Response
             .OnCompleted(async () =>
             {
                 var context = _httpContextAccessor.HttpContext;
@@ -1815,8 +1807,7 @@ public partial class Startup
 
     public Task OnCompletedThrows(HttpContext httpContext)
     {
-        httpContext
-            .Response
+        httpContext.Response
             .OnCompleted(() =>
             {
                 throw new Exception();

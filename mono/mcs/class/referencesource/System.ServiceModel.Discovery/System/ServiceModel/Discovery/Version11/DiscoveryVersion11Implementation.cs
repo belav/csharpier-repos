@@ -123,8 +123,7 @@ namespace System.ServiceModel.Discovery.Version11
             }
             else
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(new ArgumentException(SR.DiscoveryIncorrectMode(discoveryMode)));
             }
         }
@@ -161,8 +160,7 @@ namespace System.ServiceModel.Discovery.Version11
             }
             else
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new ArgumentException(
                             SR.DiscoveryIncorrectMode(discoveryEndpoint.DiscoveryMode)

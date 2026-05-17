@@ -834,8 +834,7 @@ namespace MonoTests.System.Security.Cryptography
                 0xaa,
                 0xaa,
             };
-            byte[] data = Encoding
-                .Default
+            byte[] data = Encoding.Default
                 .GetBytes("Test Using Larger Than Block-Size Key - Hash Key First");
             byte[] digest =
             {
@@ -1046,8 +1045,7 @@ namespace MonoTests.System.Security.Cryptography
                 0xaa,
                 0xaa,
             };
-            byte[] data = Encoding
-                .Default
+            byte[] data = Encoding.Default
                 .GetBytes(
                     "This is a test using a larger than block-size key and a larger than block-size data. The key needs to be hashed before being used by the HMAC algorithm."
                 );
@@ -1793,8 +1791,7 @@ namespace MonoTests.System.Security.Cryptography
                 0xaa,
                 0xaa,
             };
-            byte[] data = Encoding
-                .Default
+            byte[] data = Encoding.Default
                 .GetBytes("Test Using Larger Than Block-Size Key - Hash Key First");
             byte[] digest =
             {
@@ -2005,8 +2002,7 @@ namespace MonoTests.System.Security.Cryptography
                 0xaa,
                 0xaa,
             };
-            byte[] data = Encoding
-                .Default
+            byte[] data = Encoding.Default
                 .GetBytes(
                     "This is a test using a larger than block-size key and a larger than block-size data. The key needs to be hashed before being used by the HMAC algorithm."
                 );
@@ -2084,8 +2080,7 @@ namespace MonoTests.System.Security.Cryptography
         [Test]
         public void Bug6510a()
         {
-            byte[] key = Encoding
-                .UTF8
+            byte[] key = Encoding.UTF8
                 .GetBytes("CA61A777DC1041B2FDCC354820F7F83CE0530C0E019A29BF576F175D314A6D891B35F");
             byte[] data = Encoding.UTF8.GetBytes("123456789");
             byte[] digest =
@@ -2162,8 +2157,7 @@ namespace MonoTests.System.Security.Cryptography
         [Test]
         public void Bug6510b()
         {
-            byte[] key = Encoding
-                .UTF8
+            byte[] key = Encoding.UTF8
                 .GetBytes("CA61A777DC1041B2FDCC354820F7F83CE0530C0E019A29BF576F175D314A6D891");
             byte[] data = Encoding.UTF8.GetBytes("123456789");
             byte[] digest =

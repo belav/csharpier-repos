@@ -747,8 +747,7 @@ namespace Internal.Cryptography
 
                 if (
                     oaepParameters.PSourceFunc.Parameters != null
-                    && !oaepParameters
-                        .PSourceFunc
+                    && !oaepParameters.PSourceFunc
                         .Parameters
                         .Value
                         .Span

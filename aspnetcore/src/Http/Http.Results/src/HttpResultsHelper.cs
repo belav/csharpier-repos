@@ -50,8 +50,7 @@ internal static partial class HttpResultsHelper
         if (jsonTypeInfo.ShouldUseWith(runtimeType))
         {
             Log.WritingResultAsJson(logger, jsonTypeInfo.Type.Name);
-            return httpContext
-                .Response
+            return httpContext.Response
                 .WriteAsJsonAsync(value, jsonTypeInfo, contentType: contentType);
         }
 
@@ -62,8 +61,7 @@ internal static partial class HttpResultsHelper
         // and avoid source generators issues.
         // https://github.com/dotnet/aspnetcore/issues/43894
         // https://learn.microsoft.com/en-us/dotnet/standard/serialization/system-text-json-polymorphism
-        return httpContext
-            .Response
+        return httpContext.Response
             .WriteAsJsonAsync<object>(value, jsonSerializerOptions, contentType: contentType);
     }
 

@@ -99,8 +99,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
 
             internal void VerifyDeletedMembers(params string[] expected)
             {
-                var actual = _generationInfo
-                    .Baseline
+                var actual = _generationInfo.Baseline
                     .DeletedMembers
                     .Select(e =>
                         e.Key.ToString()
@@ -180,8 +179,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
 
             public void VerifySynthesizedMembers(params string[] expected)
             {
-                var actual = _generationInfo
-                    .Baseline
+                var actual = _generationInfo.Baseline
                     .SynthesizedMembers
                     .Select(e =>
                         e.Key.ToString()
@@ -203,8 +201,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
                 params string[] expectedSynthesizedTypesAndMemberCounts
             )
             {
-                var actual = _generationInfo
-                    .Baseline
+                var actual = _generationInfo.Baseline
                     .SynthesizedMembers
                     .Single(e => e.Key.ToString() == typeName)
                     .Value
@@ -243,8 +240,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
                 string qualifiedMemberName,
                 string expectedILWithSequencePoints
             ) =>
-                _generationInfo
-                    .CompilationVerifier!
+                _generationInfo.CompilationVerifier!
                     .VerifyMethodBody(qualifiedMemberName, expectedILWithSequencePoints);
 
             internal void VerifyPdb(IEnumerable<int> methodTokens, string expectedPdb) =>
@@ -255,8 +251,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
                 string expectedPdb,
                 PdbValidationOptions options = default
             ) =>
-                _generationInfo
-                    .CompilationVerifier!
+                _generationInfo.CompilationVerifier!
                     .VerifyPdb(qualifiedMemberName, expectedPdb, options: options);
 
             internal void VerifyIL(string expectedIL)

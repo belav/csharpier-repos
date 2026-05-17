@@ -33,8 +33,7 @@ public class NotMappedTypeAttributeConvention : TypeAttributeConventionBase<NotM
     )
     {
         if (
-            entityTypeBuilder
-                .ModelBuilder
+            entityTypeBuilder.ModelBuilder
                 .Ignore(entityTypeBuilder.Metadata.Name, fromDataAnnotation: true) != null
         )
         {

@@ -61,8 +61,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.CodeActions
 
             var results = await ExecuteRunCodeActionCommandAsync(testLspServer, commandArgument);
 
-            var documentForB = testLspServer
-                .TestWorkspace
+            var documentForB = testLspServer.TestWorkspace
                 .CurrentSolution
                 .Projects
                 .Single()

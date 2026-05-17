@@ -63,8 +63,7 @@ namespace System.Activities.DurableInstancing
 
             if (base.StoreLock.IsValid)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new InstancePersistenceCommandException(SR.MultipleLockOwnersNotSupported)
                     );
@@ -89,8 +88,7 @@ namespace System.Activities.DurableInstancing
             {
                 if (withIdentity)
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(
                             new InstancePersistenceCommandException(
                                 SR.IdentityNotSupportedWithActivation
@@ -99,8 +97,7 @@ namespace System.Activities.DurableInstancing
                 }
                 if (!PersistenceMetadataNamespace.ActivationTypes.WAS.Equals(instanceValue.Value))
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(
                             new InstancePersistenceCommandException(SR.NonWASActivationNotSupported)
                         );
@@ -251,10 +248,8 @@ namespace System.Activities.DurableInstancing
 
             if (exception == null)
             {
-                base.InstancePersistenceContext.BindInstanceOwner(
-                    this.lockOwnerId,
-                    this.lockOwnerId
-                );
+                base.InstancePersistenceContext
+                    .BindInstanceOwner(this.lockOwnerId, this.lockOwnerId);
                 long surrogateLockOwnerId = reader.GetInt64(1);
 
                 // Activatable takes precendence over Runnable.  (Activation owners cannot run instances.)
@@ -267,13 +262,14 @@ namespace System.Activities.DurableInstancing
                     base.InstancePersistenceContext.BindEvent(HasRunnableWorkflowEvent.Value);
                 }
 
-                base.StoreLock.MarkInstanceOwnerCreated(
-                    this.lockOwnerId,
-                    surrogateLockOwnerId,
-                    base.InstancePersistenceContext.InstanceHandle,
-                    this.fireRunnableInstancesEvent,
-                    this.fireActivatableInstancesEvent
-                );
+                base.StoreLock
+                    .MarkInstanceOwnerCreated(
+                        this.lockOwnerId,
+                        surrogateLockOwnerId,
+                        base.InstancePersistenceContext.InstanceHandle,
+                        this.fireRunnableInstancesEvent,
+                        this.fireActivatableInstancesEvent
+                    );
             }
 
             return exception;
@@ -288,8 +284,7 @@ namespace System.Activities.DurableInstancing
 
                 if (workflowHostType == null)
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(
                             new InstancePersistenceCommandException(
                                 SR.InvalidMetadataValue(
@@ -300,8 +295,7 @@ namespace System.Activities.DurableInstancing
                         );
                 }
 
-                byte[] workflowHostTypeBuffer = Encoding
-                    .Unicode
+                byte[] workflowHostTypeBuffer = Encoding.Unicode
                     .GetBytes(workflowHostType.ToString());
                 base.Store.WorkflowHostType = new Guid(
                     HashHelper.ComputeHash(workflowHostTypeBuffer)

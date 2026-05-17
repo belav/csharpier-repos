@@ -307,8 +307,7 @@ namespace Microsoft.Interop
                                     SyntaxKind.SimpleMemberAccessExpression,
                                     _marshallerType,
                                     IdentifierName(
-                                        ShapeMemberNames
-                                            .LinearCollection
+                                        ShapeMemberNames.LinearCollection
                                             .Stateless
                                             .AllocateContainerForUnmanagedElements
                                     )
@@ -658,8 +657,7 @@ namespace Microsoft.Interop
                             SyntaxKind.SimpleMemberAccessExpression,
                             _marshallerTypeSyntax,
                             IdentifierName(
-                                ShapeMemberNames
-                                    .LinearCollection
+                                ShapeMemberNames.LinearCollection
                                     .Stateless
                                     .AllocateContainerForManagedElementsFinally
                             )
@@ -713,8 +711,7 @@ namespace Microsoft.Interop
                                 SyntaxKind.SimpleMemberAccessExpression,
                                 _marshallerTypeSyntax,
                                 IdentifierName(
-                                    ShapeMemberNames
-                                        .LinearCollection
+                                    ShapeMemberNames.LinearCollection
                                         .Stateless
                                         .AllocateContainerForUnmanagedElements
                                 )
@@ -823,8 +820,7 @@ namespace Microsoft.Interop
                             SyntaxKind.SimpleMemberAccessExpression,
                             _marshallerTypeSyntax,
                             IdentifierName(
-                                ShapeMemberNames
-                                    .LinearCollection
+                                ShapeMemberNames.LinearCollection
                                     .Stateless
                                     .AllocateContainerForManagedElements
                             )

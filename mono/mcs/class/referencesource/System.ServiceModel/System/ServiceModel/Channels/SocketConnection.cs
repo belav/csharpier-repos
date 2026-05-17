@@ -161,8 +161,7 @@ namespace System.ServiceModel.Channels
                     {
                         // will never be a timeout error, so TimeSpan.Zero is ok
 #pragma warning suppress 56503 // Called from Receive path, SocketConnection cannot allow a SocketException to escape.
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelper(
                                 ConvertReceiveException(
                                     socketException,
@@ -186,8 +185,7 @@ namespace System.ServiceModel.Channels
                         else
                         {
 #pragma warning suppress 56503 // Called from Receive path, SocketConnection must convert ObjectDisposedException properly.
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelper(exceptionToThrow, ExceptionEventType);
                         }
                     }
@@ -441,8 +439,7 @@ namespace System.ServiceModel.Channels
 
                 if (bytesRead > 0)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelper(
                             new CommunicationException(
                                 SR.GetString(SR.SocketCloseReadReceivedData, socket.RemoteEndPoint)
@@ -453,8 +450,7 @@ namespace System.ServiceModel.Channels
             }
             catch (TimeoutException timeoutException)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelper(
                         new TimeoutException(
                             SR.GetString(
@@ -485,8 +481,7 @@ namespace System.ServiceModel.Channels
 
                     if (bytesRead > 0)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelper(
                                 new CommunicationException(
                                     SR.GetString(
@@ -500,8 +495,7 @@ namespace System.ServiceModel.Channels
                 }
                 catch (TimeoutException timeoutException)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelper(
                             new TimeoutException(
                                 SR.GetString(
@@ -578,8 +572,7 @@ namespace System.ServiceModel.Channels
 
                 if (bytesRead > 0)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelper(
                             new CommunicationException(
                                 SR.GetString(SR.SocketCloseReadReceivedData, socket.RemoteEndPoint)
@@ -590,8 +583,7 @@ namespace System.ServiceModel.Channels
             }
             catch (TimeoutException timeoutException)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelper(
                         new TimeoutException(
                             SR.GetString(
@@ -663,8 +655,7 @@ namespace System.ServiceModel.Channels
             }
             catch (SocketException socketException)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelper(
                         ConvertSendException(
                             socketException,
@@ -686,8 +677,7 @@ namespace System.ServiceModel.Channels
                 }
                 else
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelper(exceptionToThrow, ExceptionEventType);
                 }
             }
@@ -697,8 +687,7 @@ namespace System.ServiceModel.Channels
         {
             if (closeState == CloseState.Closing || closeState == CloseState.Closed)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelper(
                         ConvertObjectDisposedException(
                             new ObjectDisposedException(
@@ -716,8 +705,7 @@ namespace System.ServiceModel.Channels
         {
             if (closeState == CloseState.Closed)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelper(
                         ConvertObjectDisposedException(
                             new ObjectDisposedException(
@@ -1218,8 +1206,7 @@ namespace System.ServiceModel.Channels
             }
             catch (SocketException socketException)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelper(
                         ConvertSendException(
                             socketException,
@@ -1241,8 +1228,7 @@ namespace System.ServiceModel.Channels
                 }
                 else
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelper(exceptionToThrow, ExceptionEventType);
                 }
             }
@@ -1260,8 +1246,7 @@ namespace System.ServiceModel.Channels
             if (this.asyncWriteException != null)
             {
                 this.AbortWrite();
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelper(this.asyncWriteException, ExceptionEventType);
             }
 
@@ -1326,8 +1311,7 @@ namespace System.ServiceModel.Channels
                 return;
             }
 
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(new SocketException((int)this.asyncWriteEventArgs.SocketError));
         }
 
@@ -1403,8 +1387,7 @@ namespace System.ServiceModel.Channels
             }
             catch (SocketException socketException)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelper(
                         ConvertSendException(
                             socketException,
@@ -1426,8 +1409,7 @@ namespace System.ServiceModel.Channels
                 }
                 else
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelper(exceptionToThrow, ExceptionEventType);
                 }
             }
@@ -1491,8 +1473,7 @@ namespace System.ServiceModel.Channels
             }
             catch (SocketException socketException)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelper(
                         ConvertReceiveException(
                             socketException,
@@ -1514,8 +1495,7 @@ namespace System.ServiceModel.Channels
                 }
                 else
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelper(exceptionToThrow, ExceptionEventType);
                 }
             }
@@ -1629,8 +1609,7 @@ namespace System.ServiceModel.Channels
             }
             catch (SocketException socketException)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelper(
                         ConvertReceiveException(
                             socketException,
@@ -1652,8 +1631,7 @@ namespace System.ServiceModel.Channels
                 }
                 else
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelper(exceptionToThrow, ExceptionEventType);
                 }
             }
@@ -1785,8 +1763,7 @@ namespace System.ServiceModel.Channels
                 return;
             }
 
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(new SocketException((int)this.asyncReadEventArgs.SocketError));
         }
 
@@ -1807,8 +1784,7 @@ namespace System.ServiceModel.Channels
             if (this.asyncReadException != null)
             {
                 AbortRead();
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelper(this.asyncReadException, ExceptionEventType);
             }
 
@@ -1890,8 +1866,7 @@ namespace System.ServiceModel.Channels
                 // 0 == infinite for winsock timeouts, so we should preempt and throw
                 if (timeout <= TimeSpan.Zero)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelper(
                             new TimeoutException(SR.GetString(SR.TcpConnectionTimedOut, timeout)),
                             ExceptionEventType
@@ -1934,8 +1909,7 @@ namespace System.ServiceModel.Channels
                 // 0 == infinite for winsock timeouts, so we should preempt and throw
                 if (timeout <= TimeSpan.Zero)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelper(
                             new TimeoutException(SR.GetString(SR.TcpConnectionTimedOut, timeout)),
                             ExceptionEventType
@@ -2167,8 +2141,7 @@ namespace System.ServiceModel.Channels
             }
             catch (SocketException socketException)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new EndpointNotFoundException(
                             SR.GetString(SR.UnableToResolveHost, uri.Host),
@@ -2179,8 +2152,7 @@ namespace System.ServiceModel.Channels
 
             if (hostEntry.AddressList.Length == 0)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new EndpointNotFoundException(
                             SR.GetString(SR.UnableToResolveHost, uri.Host)
@@ -2214,8 +2186,7 @@ namespace System.ServiceModel.Channels
                 addressStringBuilder.Append(addresses[i].ToString());
             }
 
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(
                     new TimeoutException(
                         SR.GetString(
@@ -2261,8 +2232,7 @@ namespace System.ServiceModel.Channels
             {
                 if (timeoutHelper.RemainingTime() == TimeSpan.Zero)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             CreateTimeoutException(
                                 uri,
@@ -2306,8 +2276,7 @@ namespace System.ServiceModel.Channels
 
             if (socket == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new EndpointNotFoundException(
                             SR.GetString(SR.NoIPEndpointsFoundForHost, uri.Host)
@@ -2317,8 +2286,7 @@ namespace System.ServiceModel.Channels
 
             if (lastException != null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         SocketConnectionInitiator.ConvertConnectException(
                             lastException,
@@ -2471,8 +2439,7 @@ namespace System.ServiceModel.Channels
                 {
                     if (timeoutHelper.RemainingTime() == TimeSpan.Zero)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 CreateTimeoutException(
                                     uri,
@@ -2521,8 +2488,7 @@ namespace System.ServiceModel.Channels
 
                 if (socket == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new EndpointNotFoundException(
                                 SR.GetString(SR.NoIPEndpointsFoundForHost, uri.Host)
@@ -2534,8 +2500,7 @@ namespace System.ServiceModel.Channels
                     lastException != null,
                     "StartConnect: Can't get here without an exception."
                 );
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         SocketConnectionInitiator.ConvertConnectException(
                             lastException,
@@ -2689,8 +2654,7 @@ namespace System.ServiceModel.Channels
             {
                 if (isDisposed)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ObjectDisposedException(
                                 this.GetType().ToString(),
@@ -2701,8 +2665,7 @@ namespace System.ServiceModel.Channels
 
                 if (!isListening)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(SR.SocketListenerNotListening)
@@ -2782,11 +2745,8 @@ namespace System.ServiceModel.Channels
                             && settings.TeredoEnabled
                         )
                         {
-                            this.listenSocket.SetSocketOption(
-                                SocketOptionLevel.IPv6,
-                                (SocketOptionName)23,
-                                10
-                            );
+                            this.listenSocket
+                                .SetSocketOption(SocketOptionLevel.IPv6, (SocketOptionName)23, 10);
                         }
 
                         this.listenSocket.Bind(localEndpoint);
@@ -2808,8 +2768,7 @@ namespace System.ServiceModel.Channels
 
                         if (!retry)
                         {
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
                                     SocketConnectionListener.ConvertListenException(
                                         socketException,

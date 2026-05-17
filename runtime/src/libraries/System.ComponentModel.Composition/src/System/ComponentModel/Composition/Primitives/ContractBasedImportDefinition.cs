@@ -335,8 +335,7 @@ namespace System.ComponentModel.Composition.Primitives
         {
             if (!string.IsNullOrEmpty(RequiredTypeIdentity))
             {
-                string? exportTypeIdentity = definition
-                    .Metadata
+                string? exportTypeIdentity = definition.Metadata
                     .GetValue<string>(CompositionConstants.ExportTypeIdentityMetadataName);
 
                 if (!StringComparers.ContractName.Equals(RequiredTypeIdentity, exportTypeIdentity))
@@ -381,8 +380,7 @@ namespace System.ComponentModel.Composition.Primitives
                 return true;
             }
 
-            CreationPolicy exportPolicy = definition
-                .Metadata
+            CreationPolicy exportPolicy = definition.Metadata
                 .GetValue<CreationPolicy>(CompositionConstants.PartCreationPolicyMetadataName);
             return exportPolicy == CreationPolicy.Any || exportPolicy == RequiredCreationPolicy;
         }

@@ -42,8 +42,7 @@ public sealed class XUnitWrapperGenerator : IIncrementalGenerator
 {
     public void Initialize(IncrementalGeneratorInitializationContext context)
     {
-        var methodsInSource = context
-            .SyntaxProvider
+        var methodsInSource = context.SyntaxProvider
             .CreateSyntaxProvider(
                 static (node, ct) =>
                     node.IsKind(SyntaxKind.MethodDeclaration)
@@ -53,8 +52,7 @@ public sealed class XUnitWrapperGenerator : IIncrementalGenerator
                     (IMethodSymbol)context.SemanticModel.GetDeclaredSymbol(context.Node, ct)!
             );
 
-        var outOfProcessTests = context
-            .AdditionalTextsProvider
+        var outOfProcessTests = context.AdditionalTextsProvider
             .Combine(context.AnalyzerConfigOptionsProvider)
             .SelectMany(
                 (data, ct) =>
@@ -79,8 +77,7 @@ public sealed class XUnitWrapperGenerator : IIncrementalGenerator
                 }
             );
 
-        var aliasMap = context
-            .CompilationProvider
+        var aliasMap = context.CompilationProvider
             .Select(
                 (comp, ct) =>
                 {
@@ -103,8 +100,7 @@ public sealed class XUnitWrapperGenerator : IIncrementalGenerator
                 )
             );
 
-        var compData = context
-            .CompilationProvider
+        var compData = context.CompilationProvider
             .Select(
                 (comp, ct) =>
                     new CompData(
@@ -125,8 +121,7 @@ public sealed class XUnitWrapperGenerator : IIncrementalGenerator
                     )
             );
 
-        var pathsForReferences = context
-            .AdditionalTextsProvider
+        var pathsForReferences = context.AdditionalTextsProvider
             .Combine(context.AnalyzerConfigOptionsProvider)
             .Select(
                 (data, ct) =>
@@ -144,8 +139,7 @@ public sealed class XUnitWrapperGenerator : IIncrementalGenerator
                 )
             );
 
-        var testsInReferencedAssemblies = context
-            .MetadataReferencesProvider
+        var testsInReferencedAssemblies = context.MetadataReferencesProvider
             .Combine(context.CompilationProvider)
             .Combine(context.AnalyzerConfigOptionsProvider)
             .Combine(pathsForReferences)
@@ -1002,8 +996,7 @@ public sealed class XUnitWrapperGenerator : IIncrementalGenerator
                     else
                     {
                         switch (
-                            filterAttribute
-                                .AttributeConstructor
+                            filterAttribute.AttributeConstructor
                                 .Parameters[1]
                                 .Type
                                 .ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat)
@@ -1097,8 +1090,7 @@ public sealed class XUnitWrapperGenerator : IIncrementalGenerator
                         int argumentValue = (int)
                             filterAttribute.ConstructorArguments[argumentIndex].Value!;
                         switch (
-                            filterAttribute
-                                .AttributeConstructor!
+                            filterAttribute.AttributeConstructor!
                                 .Parameters[argumentIndex]
                                 .Type
                                 .ToDisplayString()
@@ -1296,8 +1288,7 @@ public sealed class XUnitWrapperGenerator : IIncrementalGenerator
                     // The display name for the test is an interpolated string that includes the arguments.
                     string displayNameOverride =
                         $@"$""{alias}::{method.ContainingType.ToDisplayString(FullyQualifiedWithoutGlobalNamespace)}.{method.Name}({{string.Join("","", {argumentVariableIdentifier})}})""";
-                    var argsAsCode = method
-                        .Parameters
+                    var argsAsCode = method.Parameters
                         .Select(
                             (p, i) =>
                                 $"({p.Type.ToDisplayString()}){argumentVariableIdentifier}[{i}]"
@@ -1419,7 +1410,6 @@ public sealed class XUnitWrapperGenerator : IIncrementalGenerator
     }
 
     public static readonly SymbolDisplayFormat FullyQualifiedWithoutGlobalNamespace =
-        SymbolDisplayFormat
-            .FullyQualifiedFormat
+        SymbolDisplayFormat.FullyQualifiedFormat
             .WithGlobalNamespaceStyle(SymbolDisplayGlobalNamespaceStyle.Omitted);
 }

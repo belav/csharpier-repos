@@ -243,8 +243,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
                         );
                     }
                     else if (
-                        !Schema
-                            .SchemaManager
+                        !Schema.SchemaManager
                             .TryResolveType(
                                 null,
                                 _unresolvedExtendedEntityContainerName,
@@ -255,8 +254,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
                         AddError(
                             ErrorCode.InvalidEntityContainerNameInExtends,
                             EdmSchemaErrorSeverity.Error,
-                            System
-                                .Data
+                            System.Data
                                 .Entity
                                 .Strings
                                 .InvalidEntityContainerNameInExtends(
@@ -398,8 +396,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
                 schemaElement.AddError(
                     ErrorCode.AlreadyDefined,
                     EdmSchemaErrorSeverity.Error,
-                    System
-                        .Data
+                    System.Data
                         .Entity
                         .Strings
                         .DuplicateMemberNameInExtendedEntityContainer(
@@ -441,8 +438,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
                         AddError(
                             ErrorCode.ConcurrencyRedefinedOnSubTypeOfEntitySetType,
                             EdmSchemaErrorSeverity.Error,
-                            System
-                                .Data
+                            System.Data
                                 .Entity
                                 .Strings
                                 .ConcurrencyRedefinedOnSubTypeOfEntitySetType(
@@ -481,8 +477,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
                             AddError(
                                 ErrorCode.SimilarRelationshipEnd,
                                 EdmSchemaErrorSeverity.Error,
-                                System
-                                    .Data
+                                System.Data
                                     .Entity
                                     .Strings
                                     .SimilarRelationshipEnd(
@@ -631,8 +626,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
                 entitySet.AddError(
                     ErrorCode.AlreadyDefined,
                     EdmSchemaErrorSeverity.Error,
-                    System
-                        .Data
+                    System.Data
                         .Entity
                         .Strings
                         .DuplicateEntitySetTable(entitySet.Name, schema, table)

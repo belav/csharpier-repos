@@ -42,8 +42,7 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
             {
                 Contract.ThrowIfTrue(textView.IsClosed);
 
-                var properties = textView
-                    .Properties
+                var properties = textView.Properties
                     .GetOrCreateSingletonProperty(() =>
                         new PerSubjectBufferProperty<TProperty, TTextView>(textView)
                     );
@@ -69,8 +68,7 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
             {
                 Contract.ThrowIfTrue(textView.IsClosed);
 
-                var properties = textView
-                    .Properties
+                var properties = textView.Properties
                     .GetOrCreateSingletonProperty(() =>
                         new PerSubjectBufferProperty<TProperty, TTextView>(textView)
                     );
@@ -86,8 +84,7 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
             {
                 Contract.ThrowIfTrue(textView.IsClosed);
 
-                var properties = textView
-                    .Properties
+                var properties = textView.Properties
                     .GetOrCreateSingletonProperty(() =>
                         new PerSubjectBufferProperty<TProperty, TTextView>(textView)
                     );
@@ -101,8 +98,7 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
             )
             {
                 if (
-                    textView
-                        .Properties
+                    textView.Properties
                         .TryGetProperty(
                             typeof(PerSubjectBufferProperty<TProperty, TTextView>),
                             out PerSubjectBufferProperty<TProperty, TTextView> properties
@@ -127,8 +123,7 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
                 _textView.BufferGraph.GraphBuffersChanged -= OnTextViewBufferGraphChanged;
 
                 _subjectBufferMap.Clear();
-                _textView
-                    .Properties
+                _textView.Properties
                     .RemoveProperty(typeof(PerSubjectBufferProperty<TProperty, TTextView>));
             }
 

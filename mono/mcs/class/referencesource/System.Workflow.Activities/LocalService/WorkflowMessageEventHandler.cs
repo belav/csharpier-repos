@@ -113,12 +113,8 @@ namespace System.Workflow.Activities
             {
                 object workItem;
                 IPendingWork workHandler;
-                object[] args = this.enqueueWrapper.PrepareEventArgsArray(
-                    sender,
-                    eventArgs,
-                    out workItem,
-                    out workHandler
-                );
+                object[] args = this.enqueueWrapper
+                    .PrepareEventArgsArray(sender, eventArgs, out workItem, out workHandler);
                 EventQueueName key = GetKey(args);
 
                 String securityIdentifier = null;
@@ -127,8 +123,7 @@ namespace System.Workflow.Activities
                     IIdentity identity = System.Threading.Thread.CurrentPrincipal.Identity;
                     WindowsIdentity windowsIdentity = identity as WindowsIdentity;
                     if (windowsIdentity != null && windowsIdentity.User != null)
-                        securityIdentifier = windowsIdentity
-                            .User
+                        securityIdentifier = windowsIdentity.User
                             .Translate(typeof(NTAccount))
                             .ToString();
                     else if (identity != null)
@@ -148,8 +143,7 @@ namespace System.Workflow.Activities
                     securityIdentifier
                 );
 
-                WorkflowActivityTrace
-                    .Activity
+                WorkflowActivityTrace.Activity
                     .TraceEvent(
                         TraceEventType.Information,
                         0,

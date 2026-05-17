@@ -48,8 +48,7 @@ public class HubConnectionStartBenchmark
         {
             var connection = new DefaultConnectionContext();
             // prevents keep alive time being activated
-            connection
-                .Features
+            connection.Features
                 .Set<IConnectionInherentKeepAliveFeature>(
                     new TestConnectionInherentKeepAliveFeature()
                 );

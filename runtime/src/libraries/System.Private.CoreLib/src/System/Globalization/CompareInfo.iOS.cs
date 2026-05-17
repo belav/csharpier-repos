@@ -35,8 +35,7 @@ namespace System.Globalization
             fixed (char* pString1 = &MemoryMarshal.GetReference(string1))
             fixed (char* pString2 = &MemoryMarshal.GetReference(string2))
             {
-                result = Interop
-                    .Globalization
+                result = Interop.Globalization
                     .CompareStringNative(
                         m_name,
                         m_name.Length,
@@ -65,8 +64,7 @@ namespace System.Globalization
         {
             AssertComparisonSupported(options);
 
-            Interop.Range result = Interop
-                .Globalization
+            Interop.Range result = Interop.Globalization
                 .IndexOfNative(
                     m_name,
                     m_name.Length,
@@ -98,8 +96,7 @@ namespace System.Globalization
         {
             AssertComparisonSupported(options);
 
-            int result = Interop
-                .Globalization
+            int result = Interop.Globalization
                 .StartsWithNative(
                     m_name,
                     m_name.Length,
@@ -124,8 +121,7 @@ namespace System.Globalization
         {
             AssertComparisonSupported(options);
 
-            int result = Interop
-                .Globalization
+            int result = Interop.Globalization
                 .EndsWithNative(
                     m_name,
                     m_name.Length,

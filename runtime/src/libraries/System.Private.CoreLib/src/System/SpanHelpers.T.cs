@@ -4286,8 +4286,7 @@ namespace System
                 for (nuint idx = 0; idx < length; ++idx)
                 {
                     T original = Unsafe.Add(ref src, idx);
-                    Unsafe.Add(ref dst, idx) = EqualityComparer<T>
-                        .Default
+                    Unsafe.Add(ref dst, idx) = EqualityComparer<T>.Default
                         .Equals(original, oldValue)
                         ? newValue
                         : original;

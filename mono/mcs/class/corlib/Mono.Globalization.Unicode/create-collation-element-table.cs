@@ -134,8 +134,7 @@ namespace Mono.Globalization.Unicode
                 int collElemIdx = CollationElementTableUtil.Indexer.ToIndex(cp);
                 if (collElemIdx < 0)
                 {
-                    Console
-                        .Error
+                    Console.Error
                         .WriteLine(
                             "WARNING: handle character {0:x} in collation element table.",
                             cp

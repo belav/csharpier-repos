@@ -154,8 +154,7 @@ public class ServerFactory<TStartup, TContext> : WebApplicationFactory<TStartup>
                     foreach (var part in partsToAdd)
                     {
                         if (
-                            !manager
-                                .ApplicationParts
+                            !manager.ApplicationParts
                                 .Any(p =>
                                     p.GetType() == part.GetType()
                                     && string.Equals(

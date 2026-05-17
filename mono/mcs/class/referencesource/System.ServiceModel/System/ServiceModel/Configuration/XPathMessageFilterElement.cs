@@ -48,8 +48,7 @@ namespace System.ServiceModel.Configuration
                     {
                         reader.MoveToAttribute(i);
                         if (
-                            reader
-                                .Name
+                            reader.Name
                                 .Equals(ConfigurationStrings.NodeQuota, StringComparison.Ordinal)
                         )
                         {
@@ -59,8 +58,7 @@ namespace System.ServiceModel.Configuration
                         {
                             if (reader.Name.Contains(":"))
                             {
-                                string[] attributeName = reader
-                                    .Name
+                                string[] attributeName = reader.Name
                                     .Split(
                                         new char[] { ':' },
                                         StringSplitOptions.RemoveEmptyEntries
@@ -86,8 +84,7 @@ namespace System.ServiceModel.Configuration
                 filterString = filterString.Trim();
                 if (String.IsNullOrEmpty(filterString))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(SR.ConfigXPathFilterMustNotBeEmpty)

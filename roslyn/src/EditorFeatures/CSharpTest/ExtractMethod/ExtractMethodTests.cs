@@ -11288,8 +11288,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractMethod
 
             var textView = workspace.Documents.Single().GetTextView();
 
-            var handler = workspace
-                .ExportProvider
+            var handler = workspace.ExportProvider
                 .GetCommandHandler<ExtractMethodCommandHandler>(
                     PredefinedCommandHandlerNames.ExtractMethod,
                     ContentTypeNames.CSharpContentType

@@ -68,8 +68,7 @@ namespace System.Xaml.Hosting
                 {
                     StringBuilder typeName = new StringBuilder();
                     AppendTypeName(rootXamlType, typeName);
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(new TypeLoadException(SR.CouldNotResolveType(typeName)));
                 }
                 return rootXamlType.UnderlyingType;

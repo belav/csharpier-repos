@@ -142,8 +142,7 @@ public class InProcessTestServer<TStartup> : InProcessTestServer
         _logger.LogInformation("Test Server started");
 
         // Get the URL from the server
-        _url = _host
-            .Services
+        _url = _host.Services
             .GetService<IServer>()
             .Features
             .Get<IServerAddressesFeature>()
@@ -151,8 +150,7 @@ public class InProcessTestServer<TStartup> : InProcessTestServer
             .Single();
 
         _lifetime = _host.Services.GetRequiredService<IHostApplicationLifetime>();
-        _lifetime
-            .ApplicationStopped
+        _lifetime.ApplicationStopped
             .Register(() =>
             {
                 _logger.LogInformation("Test server shut down");

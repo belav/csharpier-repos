@@ -628,8 +628,7 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                         methodSymbol.ReturnType,
                         newMethodSymbol.ReturnType
                     )
-                    && methodSymbol
-                        .Parameters
+                    && methodSymbol.Parameters
                         .Zip(newMethodSymbol.Parameters, (p1, p2) => (p1, p2))
                         .All(t => CompareAcrossSemanticModels(t.p1, t.p2));
             }
@@ -1068,10 +1067,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                 var local = (ILocalSymbol)
                     _semanticModel.GetRequiredDeclaredSymbol(forEachStatement, _cancellationToken);
                 var newLocal = (ILocalSymbol)
-                    this.SpeculativeSemanticModel.GetRequiredDeclaredSymbol(
-                        newForEachStatement,
-                        _cancellationToken
-                    );
+                    this.SpeculativeSemanticModel
+                        .GetRequiredDeclaredSymbol(newForEachStatement, _cancellationToken);
                 if (!SymbolsAreCompatible(local.Type, newLocal.Type))
                 {
                     return true;

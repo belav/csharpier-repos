@@ -266,8 +266,7 @@ namespace BundleTests.Helpers
         public static void AddEmptyContentToApp(TestProjectFixture fixture)
         {
             XDocument projectDoc = XDocument.Load(fixture.TestProject.ProjectFile);
-            projectDoc
-                .Root
+            projectDoc.Root
                 .Add(
                     new XElement(
                         "ItemGroup",

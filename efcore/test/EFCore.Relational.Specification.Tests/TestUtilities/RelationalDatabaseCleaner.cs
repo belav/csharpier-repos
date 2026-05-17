@@ -57,8 +57,7 @@ public abstract class RelationalDatabaseCleaner
             }
 
             foreach (
-                var foreignKey in databaseModel
-                    .Tables
+                var foreignKey in databaseModel.Tables
                     .SelectMany(t => t.ForeignKeys.Where(AcceptForeignKey))
             )
             {

@@ -31,8 +31,7 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
         public async Task VerifyDisabled()
         {
             var project = ProjectName;
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .AddFileAsync(
                     project,
                     "Example.cs",
@@ -57,8 +56,7 @@ class Program
                 HangMitigatingCancellationToken
             );
 
-            var globalOptions = await TestServices
-                .Shell
+            var globalOptions = await TestServices.Shell
                 .GetComponentModelServiceAsync<IGlobalOptionService>(
                     HangMitigatingCancellationToken
                 );
@@ -68,8 +66,7 @@ class Program
                 false
             );
 
-            await TestServices
-                .Editor
+            await TestServices.Editor
                 .PasteAsync(
                     @"Task DoThingAsync() => Task.CompletedTask;",
                     HangMitigatingCancellationToken
@@ -95,8 +92,7 @@ class Program
         public async Task VerifyAddImportsOnPaste()
         {
             var project = ProjectName;
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .AddFileAsync(
                     project,
                     "Example.cs",
@@ -123,12 +119,10 @@ class Program
                 HangMitigatingCancellationToken
             );
 
-            await using var telemetry = await TestServices
-                .Telemetry
+            await using var telemetry = await TestServices.Telemetry
                 .EnableTestTelemetryChannelAsync(HangMitigatingCancellationToken);
 
-            var globalOptions = await TestServices
-                .Shell
+            var globalOptions = await TestServices.Shell
                 .GetComponentModelServiceAsync<IGlobalOptionService>(
                     HangMitigatingCancellationToken
                 );
@@ -138,8 +132,7 @@ class Program
                 true
             );
 
-            await TestServices
-                .Editor
+            await TestServices.Editor
                 .PasteAsync(
                     @"Task DoThingAsync() => Task.CompletedTask;",
                     HangMitigatingCancellationToken
@@ -171,8 +164,7 @@ class Program
         public async Task VerifyIndentation()
         {
             var project = ProjectName;
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .AddFileAsync(
                     project,
                     "Example.cs",
@@ -200,8 +192,7 @@ namespace MyNs
                 HangMitigatingCancellationToken
             );
 
-            var globalOptions = await TestServices
-                .Shell
+            var globalOptions = await TestServices.Shell
                 .GetComponentModelServiceAsync<IGlobalOptionService>(
                     HangMitigatingCancellationToken
                 );
@@ -211,8 +202,7 @@ namespace MyNs
                 true
             );
 
-            await TestServices
-                .Editor
+            await TestServices.Editor
                 .PasteAsync(
                     @"Task DoThingAsync() => Task.CompletedTask;",
                     HangMitigatingCancellationToken

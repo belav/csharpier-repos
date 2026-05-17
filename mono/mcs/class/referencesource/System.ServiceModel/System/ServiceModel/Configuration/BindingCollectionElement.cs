@@ -56,8 +56,7 @@ namespace System.ServiceModel.Configuration
 
             if (null == collection)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ConfigurationErrorsException(
                             SR.GetString(
@@ -76,8 +75,7 @@ namespace System.ServiceModel.Configuration
 
                 // Optimize for assembly qualified names.
                 if (
-                    collectionElement
-                        .Type
+                    collectionElement.Type
                         .Equals(
                             extensionSectionType.AssemblyQualifiedName,
                             StringComparison.Ordinal
@@ -103,8 +101,7 @@ namespace System.ServiceModel.Configuration
 
             if (String.IsNullOrEmpty(configuredSectionName))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ConfigurationErrorsException(
                             SR.GetString(

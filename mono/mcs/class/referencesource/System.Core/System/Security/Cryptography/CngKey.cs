@@ -884,8 +884,7 @@ namespace System.Security.Cryptography
 
                 try
                 {
-                    NCryptNative.ErrorCode error = NCryptNative
-                        .UnsafeNativeMethods
+                    NCryptNative.ErrorCode error = NCryptNative.UnsafeNativeMethods
                         .NCryptOpenKey(kspHandle, out keyHandle, keyName, 0, options);
 
                     // CNG will return either NTE_NOT_FOUND or NTE_BAD_KEYSET for the case where the key does

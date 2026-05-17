@@ -276,36 +276,37 @@ namespace System.Activities.Core.Presentation
             ModelItem oldSelectedCase = this.SelectedCase;
             this.SelectedCase = newSelectedCase;
 
-            this.Dispatcher.BeginInvoke(
-                DispatcherPriority.Normal,
-                (Action)(
-                    () =>
-                    {
-                        if (oldSelectedCase != null)
+            this.Dispatcher
+                .BeginInvoke(
+                    DispatcherPriority.Normal,
+                    (Action)(
+                        () =>
                         {
-                            CaseDesigner oldSelectedCaseDesigner = (CaseDesigner)
-                                oldSelectedCase.View;
-                            if (oldSelectedCaseDesigner != null)
+                            if (oldSelectedCase != null)
                             {
-                                oldSelectedCaseDesigner.ExpandState = false;
-                                oldSelectedCaseDesigner.PinState = false;
+                                CaseDesigner oldSelectedCaseDesigner = (CaseDesigner)
+                                    oldSelectedCase.View;
+                                if (oldSelectedCaseDesigner != null)
+                                {
+                                    oldSelectedCaseDesigner.ExpandState = false;
+                                    oldSelectedCaseDesigner.PinState = false;
+                                }
                             }
-                        }
-                        if (newSelectedCase != null)
-                        {
-                            CollapseDefaultView();
+                            if (newSelectedCase != null)
+                            {
+                                CollapseDefaultView();
 
-                            CaseDesigner newSelectedCaseDesigner = (CaseDesigner)
-                                newSelectedCase.View;
-                            if (newSelectedCaseDesigner != null)
-                            {
-                                newSelectedCaseDesigner.ExpandState = true;
-                                newSelectedCaseDesigner.PinState = true;
+                                CaseDesigner newSelectedCaseDesigner = (CaseDesigner)
+                                    newSelectedCase.View;
+                                if (newSelectedCaseDesigner != null)
+                                {
+                                    newSelectedCaseDesigner.ExpandState = true;
+                                    newSelectedCaseDesigner.PinState = true;
+                                }
                             }
                         }
-                    }
-                )
-            );
+                    )
+                );
         }
 
         internal static void RegisterMetadata(AttributeTableBuilder builder)

@@ -75,8 +75,7 @@ public class InternalDbSet<
                     );
                 }
 
-                var findSameTypeName = _context
-                    .Model
+                var findSameTypeName = _context.Model
                     .FindSameTypeNameWithDifferentNamespace(typeof(TEntity));
                 //if the same name exists in your entity types we will show you the full namespace of the type
                 if (!string.IsNullOrEmpty(findSameTypeName))

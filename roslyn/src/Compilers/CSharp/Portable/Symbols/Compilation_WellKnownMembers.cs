@@ -170,15 +170,16 @@ namespace Microsoft.CodeAnalysis.CSharp
                     // well-known types introduced before CSharp7 allow lookup ambiguity and report a warning
                     DiagnosticBag? legacyWarnings =
                         (type <= WellKnownType.CSharp7Sentinel) ? warnings : null;
-                    result = this.Assembly.GetTypeByMetadataName(
-                        mdName,
-                        includeReferences: true,
-                        useCLSCompliantNameArityEncoding: true,
-                        isWellKnownType: true,
-                        conflicts: out conflicts,
-                        warnings: legacyWarnings,
-                        ignoreCorLibraryDuplicatedTypes: ignoreCorLibraryDuplicatedTypes
-                    );
+                    result = this.Assembly
+                        .GetTypeByMetadataName(
+                            mdName,
+                            includeReferences: true,
+                            useCLSCompliantNameArityEncoding: true,
+                            isWellKnownType: true,
+                            conflicts: out conflicts,
+                            warnings: legacyWarnings,
+                            ignoreCorLibraryDuplicatedTypes: ignoreCorLibraryDuplicatedTypes
+                        );
                     Debug.Assert(result?.IsErrorType() != true);
                 }
 
@@ -1367,8 +1368,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                         if (addCustomModifierFlags)
                         {
                             HandleCustomModifiers(
-                                ((ArrayTypeSymbol)type)
-                                    .ElementTypeWithAnnotations
+                                ((ArrayTypeSymbol)type).ElementTypeWithAnnotations
                                     .CustomModifiers
                                     .Length,
                                 transformFlagsBuilder
@@ -1382,8 +1382,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                         if (addCustomModifierFlags)
                         {
                             HandleCustomModifiers(
-                                ((PointerTypeSymbol)type)
-                                    .PointedAtTypeWithAnnotations
+                                ((PointerTypeSymbol)type).PointedAtTypeWithAnnotations
                                     .CustomModifiers
                                     .Length,
                                 transformFlagsBuilder
@@ -1480,10 +1479,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             );
                         }
 
-                        twa.Type.VisitType(
-                            visitor,
-                            (transformFlagsBuilder, addCustomModifierFlags)
-                        );
+                        twa.Type
+                            .VisitType(visitor, (transformFlagsBuilder, addCustomModifierFlags));
                     }
                 }
             }

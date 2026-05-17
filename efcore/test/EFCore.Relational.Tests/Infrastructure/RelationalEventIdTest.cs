@@ -47,8 +47,7 @@ public class RelationalEventIdTest : EventIdTestBase
             entityType,
             ConfigurationSource.Convention
         );
-        var contextServices = FakeRelationalTestHelpers
-            .Instance
+        var contextServices = FakeRelationalTestHelpers.Instance
             .CreateContextServices(model.FinalizeModel());
         var updateEntry = new InternalEntityEntry(
             contextServices.GetRequiredService<IStateManager>(),

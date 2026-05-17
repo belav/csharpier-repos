@@ -121,8 +121,7 @@ public class UriTests : AbstractLanguageServerProtocolTests
             mutatingLspWorkspace
         );
 
-        var workspaceDocument = testLspServer
-            .TestWorkspace
+        var workspaceDocument = testLspServer.TestWorkspace
             .CurrentSolution
             .Projects
             .Single()
@@ -158,8 +157,7 @@ public class UriTests : AbstractLanguageServerProtocolTests
             }
         );
 
-        var fileDocumentUri = testLspServer
-            .TestWorkspace
+        var fileDocumentUri = testLspServer.TestWorkspace
             .CurrentSolution
             .Projects
             .Single()

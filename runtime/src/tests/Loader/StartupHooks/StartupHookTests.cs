@@ -11,8 +11,7 @@ public unsafe class StartupHookTests
 {
     private const string StartupHookKey = "STARTUP_HOOKS";
 
-    private static Type s_startupHookProvider = typeof(object)
-        .Assembly
+    private static Type s_startupHookProvider = typeof(object).Assembly
         .GetType("System.StartupHookProvider", throwOnError: true);
 
     private static delegate* <string, void> ProcessStartupHooks = (delegate* <string, void>)

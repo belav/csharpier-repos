@@ -144,23 +144,20 @@ namespace System.Xml.Serialization
                     codeClass.CustomAttributes.Add(GeneratedCodeAttribute);
 
                     // Add [SerializableAttribute]
-                    codeClass
-                        .CustomAttributes
+                    codeClass.CustomAttributes
                         .Add(new CodeAttributeDeclaration(typeof(SerializableAttribute).FullName));
 
                     if (!codeClass.IsEnum)
                     {
                         // Add [DebuggerStepThrough]
-                        codeClass
-                            .CustomAttributes
+                        codeClass.CustomAttributes
                             .Add(
                                 new CodeAttributeDeclaration(
                                     typeof(DebuggerStepThroughAttribute).FullName
                                 )
                             );
                         // Add [DesignerCategory("code")]
-                        codeClass
-                            .CustomAttributes
+                        codeClass.CustomAttributes
                             .Add(
                                 new CodeAttributeDeclaration(
                                     typeof(DesignerCategoryAttribute).FullName,
@@ -300,14 +297,12 @@ namespace System.Xml.Serialization
             );
             if (elementName != null)
             {
-                attribute
-                    .Arguments
+                attribute.Arguments
                     .Add(new CodeAttributeArgument(new CodePrimitiveExpression(elementName)));
             }
             if (typeDesc != null && typeDesc.IsAmbiguousDataType)
             {
-                attribute
-                    .Arguments
+                attribute.Arguments
                     .Add(
                         new CodeAttributeArgument(
                             "DataType",
@@ -317,8 +312,7 @@ namespace System.Xml.Serialization
             }
             if (isNullable)
             {
-                attribute
-                    .Arguments
+                attribute.Arguments
                     .Add(
                         new CodeAttributeArgument("IsNullable", new CodePrimitiveExpression(true))
                     );

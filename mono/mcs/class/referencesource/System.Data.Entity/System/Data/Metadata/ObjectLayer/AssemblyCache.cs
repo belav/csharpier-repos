@@ -153,8 +153,7 @@ namespace System.Data.Metadata.Edm
             KnownAssemblyEntry entry;
             bool shouldLoadReferences = false;
             if (
-                loadingData
-                    .KnownAssemblies
+                loadingData.KnownAssemblies
                     .TryGetKnownAssembly(
                         assembly,
                         loadingData.ObjectItemAssemblyLoaderFactory,
@@ -180,8 +179,7 @@ namespace System.Data.Metadata.Edm
             {
                 if (
                     entry == null
-                        && loadingData
-                            .KnownAssemblies
+                        && loadingData.KnownAssemblies
                             .TryGetKnownAssembly(
                                 assembly,
                                 loadingData.ObjectItemAssemblyLoaderFactory,
@@ -223,8 +221,7 @@ namespace System.Data.Metadata.Edm
         {
             foreach (var entry in assemblies)
             {
-                edmItemCollection
-                    .ConventionalOcCache
+                edmItemCollection.ConventionalOcCache
                     .AddAssemblyToOcCacheFromAssemblyCache(
                         entry.Key,
                         new ImmutableAssemblyCacheEntry(entry.Value)

@@ -35,8 +35,7 @@ namespace System.Activities
         {
             if (!IsDefined(modifiers))
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new InvalidEnumArgumentException(
                             argumentName,

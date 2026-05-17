@@ -47,8 +47,7 @@ namespace System.DirectoryServices.AccountManagement
             IntPtr ppObjPtr = IntPtr.Zero;
             try
             {
-                int hr = Interop
-                    .Activeds
+                int hr = Interop.Activeds
                     .ADsOpenObject(path, userName, password, flags, ref iid, out ppObjPtr);
                 ppObject = Marshal.GetObjectForIUnknown(ppObjPtr);
                 return hr;

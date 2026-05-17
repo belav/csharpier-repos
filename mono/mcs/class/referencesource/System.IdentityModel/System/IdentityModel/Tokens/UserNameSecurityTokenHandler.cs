@@ -91,8 +91,7 @@ namespace System.IdentityModel.Tokens
 
             if (!CanReadToken(reader))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new XmlException(
                             SR.GetString(
@@ -141,13 +140,11 @@ namespace System.IdentityModel.Tokens
                     string type = reader.GetAttribute(WSSecurity10Constants.Attributes.Type, null);
                     if (
                         !string.IsNullOrEmpty(type)
-                        && !StringComparer
-                            .Ordinal
+                        && !StringComparer.Ordinal
                             .Equals(type, WSSecurity10Constants.UPTokenPasswordTextValue)
                     )
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new NotSupportedException(
                                     SR.GetString(
@@ -183,8 +180,7 @@ namespace System.IdentityModel.Tokens
                 }
                 else
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new XmlException(
                                 SR.GetString(
@@ -233,8 +229,7 @@ namespace System.IdentityModel.Tokens
 
             if (usernameSecurityToken == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(
                         "token",
                         SR.GetString(SR.ID0018, typeof(UserNameSecurityToken))

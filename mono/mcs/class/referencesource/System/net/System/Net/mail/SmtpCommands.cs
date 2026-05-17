@@ -219,8 +219,7 @@ namespace System.Net.Mail
             {
                 throw new SmtpException(SR.GetString(SR.SmtpAuthResponseInvalid));
             }
-            System
-                .Diagnostics
+            System.Diagnostics
                 .Debug
                 .Assert(
                     lines.Length == 1,

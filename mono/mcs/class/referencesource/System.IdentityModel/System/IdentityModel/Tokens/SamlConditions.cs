@@ -42,8 +42,7 @@ namespace System.IdentityModel.Tokens
                 foreach (SamlCondition condition in conditions)
                 {
                     if (condition == null)
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperArgument(
                                 SR.GetString(
                                     SR.SAMLEntityCannotBeNullOrEmpty,
@@ -67,8 +66,7 @@ namespace System.IdentityModel.Tokens
             set
             {
                 if (isReadOnly)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
                         );
@@ -83,8 +81,7 @@ namespace System.IdentityModel.Tokens
             set
             {
                 if (isReadOnly)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
                         );
@@ -121,13 +118,11 @@ namespace System.IdentityModel.Tokens
         )
         {
             if (reader == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("reader"));
 
             if (samlSerializer == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("samlSerializer"));
 
 #pragma warning suppress 56506 // samlSerializer.DictionaryManager is never null.
@@ -176,8 +171,7 @@ namespace System.IdentityModel.Tokens
                     outOfBandTokenResolver
                 );
                 if (condition == null)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new SecurityTokenException(SR.GetString(SR.SAMLUnableToLoadCondtion))
                         );
@@ -194,13 +188,11 @@ namespace System.IdentityModel.Tokens
         )
         {
             if (writer == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("writer"));
 
             if (samlSerializer == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("samlSerializer"));
 
 #pragma warning suppress 56506 // samlSerializer.DictionaryManager is never null.
@@ -216,10 +208,11 @@ namespace System.IdentityModel.Tokens
             {
                 writer.WriteStartAttribute(dictionary.NotBefore, null);
                 writer.WriteString(
-                    this.notBefore.ToString(
-                        SamlConstants.GeneratedDateTimeFormat,
-                        DateTimeFormatInfo.InvariantInfo
-                    )
+                    this.notBefore
+                        .ToString(
+                            SamlConstants.GeneratedDateTimeFormat,
+                            DateTimeFormatInfo.InvariantInfo
+                        )
                 );
                 writer.WriteEndAttribute();
             }
@@ -228,10 +221,11 @@ namespace System.IdentityModel.Tokens
             {
                 writer.WriteStartAttribute(dictionary.NotOnOrAfter, null);
                 writer.WriteString(
-                    this.notOnOrAfter.ToString(
-                        SamlConstants.GeneratedDateTimeFormat,
-                        DateTimeFormatInfo.InvariantInfo
-                    )
+                    this.notOnOrAfter
+                        .ToString(
+                            SamlConstants.GeneratedDateTimeFormat,
+                            DateTimeFormatInfo.InvariantInfo
+                        )
                 );
                 writer.WriteEndAttribute();
             }

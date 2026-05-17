@@ -294,8 +294,7 @@
             bool formatRequest;
             bool formatReply;
             foreach (
-                OperationDescription operation in WorkflowControlEndpoint
-                    .WorkflowControlServiceContract
+                OperationDescription operation in WorkflowControlEndpoint.WorkflowControlServiceContract
                     .Operations
             )
             {
@@ -325,8 +324,7 @@
                 };
                 endpointDispatcher.DispatchRuntime.Operations.Add(operationDispatcher);
 
-                OperationBehaviorAttribute operationAttribute = operation
-                    .Behaviors
+                OperationBehaviorAttribute operationAttribute = operation.Behaviors
                     .Find<OperationBehaviorAttribute>();
                 ((IOperationBehavior)operationAttribute).ApplyDispatchBehavior(
                     operation,
@@ -345,12 +343,10 @@
             );
 
             //Create the Channel Dispatcher
-            ServiceDebugBehavior serviceDebugBehavior = workflowServiceHost
-                .Description
+            ServiceDebugBehavior serviceDebugBehavior = workflowServiceHost.Description
                 .Behaviors
                 .Find<ServiceDebugBehavior>();
-            ServiceBehaviorAttribute serviceBehaviorAttribute = workflowServiceHost
-                .Description
+            ServiceBehaviorAttribute serviceBehaviorAttribute = workflowServiceHost.Description
                 .Behaviors
                 .Find<ServiceBehaviorAttribute>();
 
@@ -391,8 +387,7 @@
                 }
                 catch (IdentityNotMappedException)
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .Argument(windowsGroup, SR.WindowsGroupNotFound(windowsGroup));
                 }
             }

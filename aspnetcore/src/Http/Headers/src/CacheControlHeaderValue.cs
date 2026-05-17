@@ -585,8 +585,7 @@ public class CacheControlHeaderValue
         while (current < input.Length)
         {
             if (
-                !NameValueHeaderValue
-                    .MultipleValueParser
+                !NameValueHeaderValue.MultipleValueParser
                     .TryParseValue(input, ref current, out var nameValue)
             )
             {

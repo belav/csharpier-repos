@@ -81,8 +81,7 @@ namespace System.ServiceModel.Activation
 
             if (hResult != 0)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(new COMException(SR.Hosting_MetabaseAccessError, (int)hResult));
             }
 
@@ -153,8 +152,7 @@ namespace System.ServiceModel.Activation
             }
             else if (hResult != 0)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(new COMException(SR.Hosting_MetabaseAccessError, (int)hResult));
             }
 
@@ -175,8 +173,7 @@ namespace System.ServiceModel.Activation
                 case MSAdminBase.MULTISZ_METADATA:
                     return RecordToStringArray();
                 default:
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(
                             new NotSupportedException(
                                 SR.Hosting_MetabaseDataTypeUnsupported(
@@ -198,8 +195,7 @@ namespace System.ServiceModel.Activation
                 // Ensure that the data is an array of double-byte unicode chars.
                 if ((record.dwMDDataLen & 1) != 0)
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(
                             new DataMisalignedException(
                                 SR.Hosting_MetabaseDataStringsTerminate(
@@ -227,8 +223,7 @@ namespace System.ServiceModel.Activation
                         && Marshal.ReadInt16(record.pbMDData, endPos - 2) != 0
                     )
                     {
-                        throw FxTrace
-                            .Exception
+                        throw FxTrace.Exception
                             .AsError(
                                 new DataMisalignedException(
                                     SR.Hosting_MetabaseDataStringsTerminate(

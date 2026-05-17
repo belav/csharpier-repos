@@ -71,8 +71,7 @@ namespace System.Xml
                 try
                 {
 #if SILVERLIGHT
-                    return XmlUntypedStringConverter
-                        .Instance
+                    return XmlUntypedStringConverter.Instance
                         .FromString(
                             strContentValue,
                             returnType,
@@ -83,8 +82,7 @@ namespace System.Xml
                             )
                         );
 #else
-                    return XmlUntypedConverter
-                        .Untyped
+                    return XmlUntypedConverter.Untyped
                         .ChangeType(
                             strContentValue,
                             returnType,
@@ -166,14 +164,12 @@ namespace System.Xml
 #if SILVERLIGHT
             return (returnType == typeof(string))
                 ? string.Empty
-                : XmlUntypedStringConverter
-                    .Instance
+                : XmlUntypedStringConverter.Instance
                     .FromString(string.Empty, returnType, namespaceResolver);
 #else
             return (returnType == typeof(string))
                 ? string.Empty
-                : XmlUntypedConverter
-                    .Untyped
+                : XmlUntypedConverter.Untyped
                     .ChangeType(string.Empty, returnType, namespaceResolver);
 #endif
         }

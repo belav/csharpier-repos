@@ -276,14 +276,12 @@ namespace System.Web
                     ApplicationFileParser parser;
 
                     parser = new ApplicationFileParser();
-                    AssemblySet referencedAssemblies = System
-                        .Web
+                    AssemblySet referencedAssemblies = System.Web
                         .UI
                         .Util
                         .GetReferencedAssemblies(_theApplicationType.Assembly);
                     referencedAssemblies.Add(typeof(string).Assembly);
-                    VirtualPath virtualPath = HttpRuntime
-                        .AppDomainAppVirtualPathObject
+                    VirtualPath virtualPath = HttpRuntime.AppDomainAppVirtualPathObject
                         .SimpleCombine(applicationFileName);
                     parser.Parse(referencedAssemblies, virtualPath);
 
@@ -411,8 +409,7 @@ namespace System.Web
             {
                 foreach (string fileName in _fileDependencies)
                 {
-                    HttpRuntime
-                        .FileChangesMonitor
+                    HttpRuntime.FileChangesMonitor
                         .StartMonitoringFile(HostingEnvironment.MapPathInternal(fileName), handler);
                 }
             }
@@ -693,8 +690,7 @@ namespace System.Web
         {
             AspCompatSessionOnEndHelper helper = (AspCompatSessionOnEndHelper)eventSource;
 
-            helper
-                .Application
+            helper.Application
                 .ProcessSpecialRequest(
                     null,
                     _sessionOnEndMethod,

@@ -133,8 +133,7 @@ namespace System.Workflow.ComponentModel.Design
                 if (designer.DesignerActions.Count > 0)
                 {
                     Rectangle bounds = GetBounds(designer, false);
-                    Point location = designer
-                        .ParentView
+                    Point location = designer.ParentView
                         .LogicalPointToScreen(new Point(bounds.Left, bounds.Bottom));
                     DesignerHelpers.ShowDesignerVerbs(
                         designer,

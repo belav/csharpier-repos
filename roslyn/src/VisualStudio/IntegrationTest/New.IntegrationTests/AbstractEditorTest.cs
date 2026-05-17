@@ -44,11 +44,9 @@ namespace Roslyn.VisualStudio.IntegrationTests
             {
                 RoslynDebug.AssertNotNull(_projectTemplate);
 
-                await TestServices
-                    .SolutionExplorer
+                await TestServices.SolutionExplorer
                     .CreateSolutionAsync(_solutionName, HangMitigatingCancellationToken);
-                await TestServices
-                    .SolutionExplorer
+                await TestServices.SolutionExplorer
                     .AddProjectAsync(
                         ProjectName,
                         _projectTemplate,
@@ -56,8 +54,7 @@ namespace Roslyn.VisualStudio.IntegrationTests
                         LanguageName,
                         HangMitigatingCancellationToken
                     );
-                await TestServices
-                    .SolutionExplorer
+                await TestServices.SolutionExplorer
                     .RestoreNuGetPackagesAsync(ProjectName, HangMitigatingCancellationToken);
 
                 // Winforms and XAML do not open text files on creation
@@ -99,12 +96,10 @@ namespace Roslyn.VisualStudio.IntegrationTests
             await TestServices.Editor.DismissCompletionSessionsAsync(cancellationToken);
             await TestServices.Editor.DismissLightBulbSessionAsync(cancellationToken);
 
-            var originalValue = await TestServices
-                .Workspace
+            var originalValue = await TestServices.Workspace
                 .IsPrettyListingOnAsync(LanguageName, cancellationToken);
 
-            await TestServices
-                .Workspace
+            await TestServices.Workspace
                 .SetPrettyListingAsync(LanguageName, false, cancellationToken);
             try
             {
@@ -112,14 +107,12 @@ namespace Roslyn.VisualStudio.IntegrationTests
 
                 if (caretPosition.HasValue)
                 {
-                    await TestServices
-                        .Editor
+                    await TestServices.Editor
                         .MoveCaretAsync(caretPosition.Value, cancellationToken);
                 }
                 else
                 {
-                    await TestServices
-                        .Editor
+                    await TestServices.Editor
                         .SetMultiSelectionAsync(spans["selection"], cancellationToken);
                 }
 
@@ -127,8 +120,7 @@ namespace Roslyn.VisualStudio.IntegrationTests
             }
             finally
             {
-                await TestServices
-                    .Workspace
+                await TestServices.Workspace
                     .SetPrettyListingAsync(LanguageName, originalValue, cancellationToken);
             }
         }

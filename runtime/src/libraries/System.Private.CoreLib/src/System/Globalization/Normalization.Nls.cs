@@ -25,8 +25,7 @@ namespace System.Globalization
             Interop.BOOL result;
             fixed (char* pInput = strInput)
             {
-                result = Interop
-                    .Normaliz
+                result = Interop.Normaliz
                     .IsNormalizedString(normalizationForm, pInput, strInput.Length);
             }
 
@@ -99,8 +98,7 @@ namespace System.Globalization
                     fixed (char* pInput = strInput)
                     fixed (char* pDest = &MemoryMarshal.GetReference(buffer))
                     {
-                        realLength = Interop
-                            .Normaliz
+                        realLength = Interop.Normaliz
                             .NormalizeString(
                                 normalizationForm,
                                 pInput,

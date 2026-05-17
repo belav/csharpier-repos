@@ -128,13 +128,14 @@ namespace System.Threading.Tasks.Tests
 
         public IAsyncResult BeginInvoke(AsyncCallback cb, object state)
         {
-            Task task = Task.Factory.StartNew(
-                _ => _action(),
-                state,
-                CancellationToken.None,
-                TaskCreationOptions.None,
-                TaskScheduler.Default
-            );
+            Task task = Task.Factory
+                .StartNew(
+                    _ => _action(),
+                    state,
+                    CancellationToken.None,
+                    TaskCreationOptions.None,
+                    TaskScheduler.Default
+                );
             task.ContinueWith(_ => cb(task));
             return task;
         }
@@ -172,13 +173,14 @@ namespace System.Threading.Tasks.Tests
 
         public IAsyncResult BeginInvoke(T t, AsyncCallback cb, object state)
         {
-            Task task = Task.Factory.StartNew(
-                _ => _action(t),
-                state,
-                CancellationToken.None,
-                TaskCreationOptions.None,
-                TaskScheduler.Default
-            );
+            Task task = Task.Factory
+                .StartNew(
+                    _ => _action(t),
+                    state,
+                    CancellationToken.None,
+                    TaskCreationOptions.None,
+                    TaskScheduler.Default
+                );
             task.ContinueWith(_ => cb(task));
             return task;
         }
@@ -215,13 +217,14 @@ namespace System.Threading.Tasks.Tests
 
         public IAsyncResult BeginInvoke(T1 t1, T2 t2, AsyncCallback cb, object state)
         {
-            Task task = Task.Factory.StartNew(
-                _ => _action(t1, t2),
-                state,
-                CancellationToken.None,
-                TaskCreationOptions.None,
-                TaskScheduler.Default
-            );
+            Task task = Task.Factory
+                .StartNew(
+                    _ => _action(t1, t2),
+                    state,
+                    CancellationToken.None,
+                    TaskCreationOptions.None,
+                    TaskScheduler.Default
+                );
             task.ContinueWith(_ => cb(task));
             return task;
         }
@@ -259,13 +262,14 @@ namespace System.Threading.Tasks.Tests
 
         public IAsyncResult BeginInvoke(T1 t1, T2 t2, T3 t3, AsyncCallback cb, object state)
         {
-            Task task = Task.Factory.StartNew(
-                _ => _action(t1, t2, t3),
-                state,
-                CancellationToken.None,
-                TaskCreationOptions.None,
-                TaskScheduler.Default
-            );
+            Task task = Task.Factory
+                .StartNew(
+                    _ => _action(t1, t2, t3),
+                    state,
+                    CancellationToken.None,
+                    TaskCreationOptions.None,
+                    TaskScheduler.Default
+                );
             task.ContinueWith(_ => cb(task));
             return task;
         }
@@ -319,13 +323,14 @@ namespace System.Threading.Tasks.Tests
 
         public IAsyncResult BeginInvoke(AsyncCallback cb, object state)
         {
-            Task<ReadOnlyCollection<object>> task = Task.Factory.StartNew(
-                _ => _func(),
-                state,
-                CancellationToken.None,
-                TaskCreationOptions.None,
-                TaskScheduler.Default
-            );
+            Task<ReadOnlyCollection<object>> task = Task.Factory
+                .StartNew(
+                    _ => _func(),
+                    state,
+                    CancellationToken.None,
+                    TaskCreationOptions.None,
+                    TaskScheduler.Default
+                );
             task.ContinueWith(_ => cb(task));
             return task;
         }
@@ -361,13 +366,14 @@ namespace System.Threading.Tasks.Tests
 
         public IAsyncResult BeginInvoke(T t, AsyncCallback cb, object state)
         {
-            Task<ReadOnlyCollection<object>> task = Task.Factory.StartNew(
-                _ => _func(t),
-                state,
-                CancellationToken.None,
-                TaskCreationOptions.None,
-                TaskScheduler.Default
-            );
+            Task<ReadOnlyCollection<object>> task = Task.Factory
+                .StartNew(
+                    _ => _func(t),
+                    state,
+                    CancellationToken.None,
+                    TaskCreationOptions.None,
+                    TaskScheduler.Default
+                );
             task.ContinueWith(_ => cb(task));
             return task;
         }
@@ -404,13 +410,14 @@ namespace System.Threading.Tasks.Tests
 
         public IAsyncResult BeginInvoke(T1 t1, T2 t2, AsyncCallback cb, object state)
         {
-            Task<ReadOnlyCollection<object>> task = Task.Factory.StartNew(
-                _ => _func(t1, t2),
-                state,
-                CancellationToken.None,
-                TaskCreationOptions.None,
-                TaskScheduler.Default
-            );
+            Task<ReadOnlyCollection<object>> task = Task.Factory
+                .StartNew(
+                    _ => _func(t1, t2),
+                    state,
+                    CancellationToken.None,
+                    TaskCreationOptions.None,
+                    TaskScheduler.Default
+                );
             task.ContinueWith(_ => cb(task));
             return task;
         }
@@ -448,13 +455,14 @@ namespace System.Threading.Tasks.Tests
 
         public IAsyncResult BeginInvoke(T1 t1, T2 t2, T3 t3, AsyncCallback cb, object state)
         {
-            Task<ReadOnlyCollection<object>> task = Task.Factory.StartNew(
-                _ => _func(t1, t2, t3),
-                state,
-                CancellationToken.None,
-                TaskCreationOptions.None,
-                TaskScheduler.Default
-            );
+            Task<ReadOnlyCollection<object>> task = Task.Factory
+                .StartNew(
+                    _ => _func(t1, t2, t3),
+                    state,
+                    CancellationToken.None,
+                    TaskCreationOptions.None,
+                    TaskScheduler.Default
+                );
             task.ContinueWith(_ => cb(task));
             return task;
         }

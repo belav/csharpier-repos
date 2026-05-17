@@ -47,16 +47,14 @@ namespace System
             RuntimeTypeHandle[] genericArgs1,
                 genericArgs2;
 
-            RuntimeAugments
-                .TypeLoaderCallbacks
+            RuntimeAugments.TypeLoaderCallbacks
                 .GetRuntimeMethodHandleComponents(
                     this,
                     out declaringType1,
                     out nameAndSignature1,
                     out genericArgs1
                 );
-            RuntimeAugments
-                .TypeLoaderCallbacks
+            RuntimeAugments.TypeLoaderCallbacks
                 .GetRuntimeMethodHandleComponents(
                     handle,
                     out declaringType2,
@@ -101,8 +99,7 @@ namespace System
             RuntimeTypeHandle declaringType;
             MethodNameAndSignature nameAndSignature;
             RuntimeTypeHandle[] genericArgs;
-            RuntimeAugments
-                .TypeLoaderCallbacks
+            RuntimeAugments.TypeLoaderCallbacks
                 .GetRuntimeMethodHandleComponents(
                     this,
                     out declaringType,
@@ -142,12 +139,10 @@ namespace System
         public IntPtr GetFunctionPointer()
         {
             RuntimeTypeHandle declaringType;
-            RuntimeAugments
-                .TypeLoaderCallbacks
+            RuntimeAugments.TypeLoaderCallbacks
                 .GetRuntimeMethodHandleComponents(this, out declaringType, out _, out _);
 
-            return ReflectionAugments
-                .ReflectionCoreCallbacks
+            return ReflectionAugments.ReflectionCoreCallbacks
                 .GetFunctionPointer(this, declaringType);
         }
 

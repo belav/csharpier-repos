@@ -50,11 +50,9 @@ End Module";
         public async Task SimpleExtractMethod()
         {
             await TestServices.Editor.SetTextAsync(TestSource, HangMitigatingCancellationToken);
-            await TestServices
-                .Editor
+            await TestServices.Editor
                 .PlaceCaretAsync("Console", charsOffset: -1, HangMitigatingCancellationToken);
-            await TestServices
-                .Editor
+            await TestServices.Editor
                 .PlaceCaretAsync(
                     "Hello VB!",
                     charsOffset: 3,
@@ -63,14 +61,12 @@ End Module";
                     selectBlock: false,
                     HangMitigatingCancellationToken
                 );
-            await TestServices
-                .Shell
+            await TestServices.Shell
                 .ExecuteCommandAsync(
                     WellKnownCommands.Refactor.ExtractMethod,
                     HangMitigatingCancellationToken
                 );
-            await TestServices
-                .Workspace
+            await TestServices.Workspace
                 .WaitForAsyncOperationsAsync(
                     FeatureAttribute.ExtractMethod,
                     HangMitigatingCancellationToken
@@ -102,8 +98,7 @@ Module Program
 End Module";
 
             MarkupTestFile.GetSpans(expectedMarkup, out var expectedText, out var spans);
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .TextContainsAsync(
                     expectedText,
                     cancellationToken: HangMitigatingCancellationToken
@@ -113,11 +108,9 @@ End Module";
             ).SelectAsArray(tag => tag.Span.Span.ToTextSpan());
             AssertEx.SetEqual(spans, tags);
 
-            await TestServices
-                .Input
+            await TestServices.Input
                 .SendAsync(["SayHello", VirtualKeyCode.RETURN], HangMitigatingCancellationToken);
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .TextContainsAsync(
                     @"    Private Sub SayHello()
         Console.WriteLine(""Hello VB!"")
@@ -130,11 +123,9 @@ End Module";
         public async Task ExtractViaCodeAction()
         {
             await TestServices.Editor.SetTextAsync(TestSource, HangMitigatingCancellationToken);
-            await TestServices
-                .Editor
+            await TestServices.Editor
                 .PlaceCaretAsync("a = 5", charsOffset: -1, HangMitigatingCancellationToken);
-            await TestServices
-                .Editor
+            await TestServices.Editor
                 .PlaceCaretAsync(
                     "a * b",
                     charsOffset: 1,
@@ -143,8 +134,7 @@ End Module";
                     selectBlock: false,
                     HangMitigatingCancellationToken
                 );
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .CodeActionAsync(
                     "Extract method",
                     applyFix: true,

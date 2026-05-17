@@ -577,8 +577,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
             else if (language == LanguageNames.VisualBasic)
             {
                 return new VisualBasicParseOptions(
-                    preprocessorSymbols: preprocessorSymbolsAttribute
-                        .Value
+                    preprocessorSymbols: preprocessorSymbolsAttribute.Value
                         .Split(',')
                         .Select(v =>
                             KeyValuePairUtil.Create(
@@ -626,8 +625,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
             if (language == LanguageNames.CSharp)
             {
                 if (
-                    CodeAnalysis
-                        .CSharp
+                    CodeAnalysis.CSharp
                         .LanguageVersionFacts
                         .TryParse(languageVersionAttribute.Value, out var languageVersion)
                 )
@@ -639,8 +637,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
             {
                 var languageVersion = CodeAnalysis.VisualBasic.LanguageVersion.Default;
                 if (
-                    CodeAnalysis
-                        .VisualBasic
+                    CodeAnalysis.VisualBasic
                         .LanguageVersionFacts
                         .TryParse(languageVersionAttribute.Value, ref languageVersion)
                 )
@@ -1224,8 +1221,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
                 return null;
             }
 
-            var folderContainers = folderAttribute
-                .Value
+            var folderContainers = folderAttribute.Value
                 .Split(
                     new[] { PathUtilities.DirectorySeparatorChar },
                     StringSplitOptions.RemoveEmptyEntries
@@ -1334,16 +1330,14 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
 
             if (LanguageNames.CSharp == options.Language)
             {
-                return Microsoft
-                    .CodeAnalysis
+                return Microsoft.CodeAnalysis
                     .CSharp
                     .SyntaxFactory
                     .ParseSyntaxTree(sourceText, options);
             }
             else
             {
-                return Microsoft
-                    .CodeAnalysis
+                return Microsoft.CodeAnalysis
                     .VisualBasic
                     .SyntaxFactory
                     .ParseSyntaxTree(sourceText, options);

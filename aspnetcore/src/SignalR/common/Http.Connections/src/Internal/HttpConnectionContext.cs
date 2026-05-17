@@ -549,8 +549,7 @@ internal sealed partial class HttpConnectionContext
     {
         if (Status == HttpConnectionStatus.Active)
         {
-            HttpConnectionDispatcher
-                .Log
+            HttpConnectionDispatcher.Log
                 .ConnectionAlreadyActive(
                     dispatcherLogger,
                     ConnectionId,

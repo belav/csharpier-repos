@@ -101,8 +101,7 @@ public class WsFederationHandler
     {
         if (_configuration == null)
         {
-            _configuration = await Options
-                .ConfigurationManager
+            _configuration = await Options.ConfigurationManager
                 .GetConfigurationAsync(Context.RequestAborted);
         }
 
@@ -175,8 +174,7 @@ public class WsFederationHandler
             HttpMethods.IsPost(Request.Method)
             && !string.IsNullOrEmpty(Request.ContentType)
             // May have media/type; charset=utf-8, allow partial match.
-            && Request
-                .ContentType
+            && Request.ContentType
                 .StartsWith("application/x-www-form-urlencoded", StringComparison.OrdinalIgnoreCase)
             && Request.Body.CanRead
         )
@@ -223,8 +221,7 @@ public class WsFederationHandler
             else
             {
                 // Extract the user state from properties and reset.
-                properties
-                    .Items
+                properties.Items
                     .TryGetValue(WsFederationDefaults.UserstatePropertiesKey, out var userState);
                 wsFederationMessage.Wctx = userState;
             }
@@ -458,8 +455,7 @@ public class WsFederationHandler
             if (Options.ConfigurationManager != null)
             {
                 // GetConfigurationAsync has a time interval that must pass before new http request will be issued.
-                _configuration = await Options
-                    .ConfigurationManager
+                _configuration = await Options.ConfigurationManager
                     .GetConfigurationAsync(Context.RequestAborted);
 
                 var issuers = new[] { _configuration.Issuer };
@@ -471,8 +467,7 @@ public class WsFederationHandler
                 tokenValidationParameters.IssuerSigningKeys = (
                     tokenValidationParameters.IssuerSigningKeys == null
                         ? _configuration.SigningKeys
-                        : tokenValidationParameters
-                            .IssuerSigningKeys
+                        : tokenValidationParameters.IssuerSigningKeys
                             .Concat(_configuration.SigningKeys)
                 );
             }
@@ -509,8 +504,7 @@ public class WsFederationHandler
 
         if (_configuration == null)
         {
-            _configuration = await Options
-                .ConfigurationManager
+            _configuration = await Options.ConfigurationManager
                 .GetConfigurationAsync(Context.RequestAborted);
         }
 
@@ -564,8 +558,7 @@ public class WsFederationHandler
         // ToArray handles the StringValues.IsNullOrEmpty case. We assume non-empty Value does not contain null elements.
 #pragma warning disable CS8620 // Argument cannot be used for parameter due to differences in the nullability of reference types.
         var message = new WsFederationMessage(
-            Request
-                .Query
+            Request.Query
                 .Select(pair => new KeyValuePair<string, string[]>(pair.Key, pair.Value.ToArray()))
         );
 #pragma warning restore CS8620 // Argument cannot be used for parameter due to differences in the nullability of reference types.

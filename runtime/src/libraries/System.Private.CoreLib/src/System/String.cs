@@ -247,8 +247,7 @@ namespace System
                 return Empty;
 
 #if TARGET_WINDOWS
-            int numCharsRequired = Interop
-                .Kernel32
+            int numCharsRequired = Interop.Kernel32
                 .MultiByteToWideChar(
                     Interop.Kernel32.CP_ACP,
                     Interop.Kernel32.MB_PRECOMPOSED,
@@ -263,8 +262,7 @@ namespace System
             string newString = FastAllocateString(numCharsRequired);
             fixed (char* pFirstChar = &newString._firstChar)
             {
-                numCharsRequired = Interop
-                    .Kernel32
+                numCharsRequired = Interop.Kernel32
                     .MultiByteToWideChar(
                         Interop.Kernel32.CP_ACP,
                         Interop.Kernel32.MB_PRECOMPOSED,

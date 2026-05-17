@@ -40,8 +40,7 @@ public abstract class QueryCompilationTests
         _context = fixture.CreateContext(noQueryCacheServiceProvider);
         _simpleQuery = _context.Products.AsNoTracking();
 
-        _complexQuery = _context
-            .Products
+        _complexQuery = _context.Products
             .AsNoTracking()
             .Where(p => p.Retail < 1000)
             .OrderBy(p => p.Name)
@@ -57,8 +56,7 @@ public abstract class QueryCompilationTests
                 Surplus = p.ActualStockLevel - p.TargetStockLevel,
             });
 
-        _multipleJoinQuery = _context
-            .Customers
+        _multipleJoinQuery = _context.Customers
             .AsNoTracking()
             .Include(c => c.Orders)
                 .ThenInclude(o => o.OrderLines)

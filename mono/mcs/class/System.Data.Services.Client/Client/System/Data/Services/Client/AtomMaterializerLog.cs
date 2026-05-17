@@ -120,12 +120,8 @@ namespace System.Data.Services.Client
                 else
                 {
                     EntityStates state;
-                    this.context.TryGetEntity(
-                        entity.Key,
-                        entry.ETagText,
-                        this.mergeOption,
-                        out state
-                    );
+                    this.context
+                        .TryGetEntity(entity.Key, entry.ETagText, this.mergeOption, out state);
                 }
             }
 
@@ -135,9 +131,8 @@ namespace System.Data.Services.Client
                     entry.ResolvedObject != null,
                     "entry.ResolvedObject != null -- otherwise it wasn't found"
                 );
-                EntityDescriptor descriptor = this.context.GetEntityDescriptor(
-                    entry.ResolvedObject
-                );
+                EntityDescriptor descriptor = this.context
+                    .GetEntityDescriptor(entry.ResolvedObject);
                 this.ApplyMediaEntryInformation(entry, descriptor);
             }
 
@@ -160,12 +155,13 @@ namespace System.Data.Services.Client
                     }
                     else
                     {
-                        this.context.AttachLink(
-                            link.Source,
-                            link.SourceProperty,
-                            link.Target,
-                            this.mergeOption
-                        );
+                        this.context
+                            .AttachLink(
+                                link.Source,
+                                link.SourceProperty,
+                                link.Target,
+                                this.mergeOption
+                            );
                     }
                 }
                 else if (EntityStates.Modified == link.State)
@@ -197,12 +193,8 @@ namespace System.Data.Services.Client
                         }
                     }
 
-                    this.context.AttachLink(
-                        link.Source,
-                        link.SourceProperty,
-                        target,
-                        this.mergeOption
-                    );
+                    this.context
+                        .AttachLink(link.Source, link.SourceProperty, target, this.mergeOption);
                 }
                 else
                 {
@@ -245,13 +237,14 @@ namespace System.Data.Services.Client
 
             if (ShouldTrackWithContext(entry))
             {
-                this.context.AttachIdentity(
-                    entry.Identity,
-                    entry.QueryLink,
-                    entry.EditLink,
-                    entry.ResolvedObject,
-                    entry.ETagText
-                );
+                this.context
+                    .AttachIdentity(
+                        entry.Identity,
+                        entry.QueryLink,
+                        entry.EditLink,
+                        entry.ResolvedObject,
+                        entry.ETagText
+                    );
                 this.identityStack.Add(entry.Identity, entry);
                 this.insertRefreshObject = entry.ResolvedObject;
             }
@@ -270,12 +263,8 @@ namespace System.Data.Services.Client
             if (this.appendOnlyEntries.TryGetValue(entry.Identity, out existingEntry))
             {
                 EntityStates state;
-                this.context.TryGetEntity(
-                    entry.Identity,
-                    entry.ETagText,
-                    this.mergeOption,
-                    out state
-                );
+                this.context
+                    .TryGetEntity(entry.Identity, entry.ETagText, this.mergeOption, out state);
                 if (state == EntityStates.Unchanged)
                 {
                     return true;

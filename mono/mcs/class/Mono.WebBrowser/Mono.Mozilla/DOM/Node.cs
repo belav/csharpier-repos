@@ -202,8 +202,7 @@ namespace Mono.Mozilla.DOM
                 nsIDOMDocument doc;
                 this.node.getOwnerDocument(out doc);
                 if (!control.documents.ContainsKey(doc.GetHashCode()))
-                    control
-                        .documents
+                    control.documents
                         .Add(
                             doc.GetHashCode(),
                             new Document(control, doc as Mono.Mozilla.nsIDOMHTMLDocument)

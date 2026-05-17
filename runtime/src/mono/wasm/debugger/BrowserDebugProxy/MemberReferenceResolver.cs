@@ -225,8 +225,7 @@ namespace Microsoft.WebAssembly.Diagnostics
                     }
                     try
                     {
-                        var staticFieldValue = await context
-                            .SdbAgent
+                        var staticFieldValue = await context.SdbAgent
                             .GetFieldValue(typeId, field.Id, token);
                         var valueRet = await GetValueFromObject(staticFieldValue, token);
                         // we need the full name here
@@ -244,8 +243,7 @@ namespace Microsoft.WebAssembly.Diagnostics
                     return null;
                 }
 
-                var methodId = await context
-                    .SdbAgent
+                var methodId = await context.SdbAgent
                     .GetPropertyMethodIdByName(typeId, name, token);
                 if (methodId != -1)
                 {
@@ -253,8 +251,7 @@ namespace Microsoft.WebAssembly.Diagnostics
                     commandParamsObjWriter.Write(0); //param count
                     try
                     {
-                        var retMethod = await context
-                            .SdbAgent
+                        var retMethod = await context.SdbAgent
                             .InvokeMethod(
                                 commandParamsObjWriter.GetParameterBuffer(),
                                 methodId,
@@ -282,8 +279,7 @@ namespace Microsoft.WebAssembly.Diagnostics
                     if (type == null)
                         continue;
 
-                    int id = await context
-                        .SdbAgent
+                    int id = await context.SdbAgent
                         .GetTypeIdFromToken(
                             await asm.GetDebugId(context.SdbAgent, token),
                             type.Token,
@@ -401,8 +397,7 @@ namespace Microsoft.WebAssembly.Diagnostics
                     return null;
                 }
 
-                JToken objRet = valueOrError
-                    .Value
+                JToken objRet = valueOrError.Value
                     .FirstOrDefault(objPropAttr => objPropAttr["name"].Value<string>() == name);
                 if (objRet != null)
                     return await GetValueFromObject(objRet, token);
@@ -481,8 +476,7 @@ namespace Microsoft.WebAssembly.Diagnostics
                     if (part[^1] == '!' || part[^1] == '?')
                         part = part.Remove(part.Length - 1);
 
-                    JToken objRet = valueOrError
-                        .Value
+                    JToken objRet = valueOrError.Value
                         .FirstOrDefault(objPropAttr =>
                             objPropAttr["name"]?.Value<string>() == part
                         );
@@ -546,8 +540,7 @@ namespace Microsoft.WebAssembly.Diagnostics
                     case "valuetype": //can be an inlined array
                     {
                         if (
-                            !context
-                                .SdbAgent
+                            !context.SdbAgent
                                 .ValueCreator
                                 .TryGetValueTypeById(objectId.Value, out ValueTypeClass valueType)
                         )
@@ -578,8 +571,7 @@ namespace Microsoft.WebAssembly.Diagnostics
                         );
                     }
                     case "array":
-                        rootObject["value"] = await context
-                            .SdbAgent
+                        rootObject["value"] = await context.SdbAgent
                             .GetArrayValues(objectId.Value, token);
                         if (!isMultidimensional)
                         {
@@ -633,8 +625,7 @@ namespace Microsoft.WebAssembly.Diagnostics
                                 $"Unable to write index parameter to invoke the method in the runtime."
                             );
 
-                        List<int> typeIds = await context
-                            .SdbAgent
+                        List<int> typeIds = await context.SdbAgent
                             .GetTypeIdsForObject(objectId.Value, true, token);
                         JObject objResult = await InvokeGetItemOnJObject(
                             rootObject,
@@ -756,8 +747,7 @@ namespace Microsoft.WebAssembly.Diagnostics
             CancellationToken token
         )
         {
-            int[] methodIds = await context
-                .SdbAgent
+            int[] methodIds = await context.SdbAgent
                 .GetMethodIdsByName(typeId, "get_Item", BindingFlags.Default, token);
             if (methodIds == null || methodIds.Length == 0)
                 throw new InvalidOperationException(
@@ -768,8 +758,7 @@ namespace Microsoft.WebAssembly.Diagnostics
             // ToDo: optimize the loop by choosing the right method at once without trying out them all
             for (int i = 0; i < methodIds.Length; i++)
             {
-                MethodInfoWithDebugInformation methodInfo = await context
-                    .SdbAgent
+                MethodInfoWithDebugInformation methodInfo = await context.SdbAgent
                     .GetMethodInfo(methodIds[i], token);
                 ParameterInfo[] paramInfo = methodInfo.GetParametersInfo();
                 if (paramInfo.Length != elementIdxInfo.DimensionsCount)
@@ -783,8 +772,7 @@ namespace Microsoft.WebAssembly.Diagnostics
                         elementIdxInfo.Indexers,
                         paramInfo
                     );
-                    JObject getItemRetObj = await context
-                        .SdbAgent
+                    JObject getItemRetObj = await context.SdbAgent
                         .InvokeMethod(buffer, methodIds[i], token);
                     return (JObject)getItemRetObj["value"];
                 }
@@ -1033,8 +1021,7 @@ namespace Microsoft.WebAssembly.Diagnostics
                 if (objectId.IsValueType)
                 {
                     if (
-                        !context
-                            .SdbAgent
+                        !context.SdbAgent
                             .ValueCreator
                             .TryGetValueTypeById(objectId.Value, out ValueTypeClass valueType)
                     )
@@ -1043,12 +1030,10 @@ namespace Microsoft.WebAssembly.Diagnostics
                 }
                 else
                 {
-                    typeIds = await context
-                        .SdbAgent
+                    typeIds = await context.SdbAgent
                         .GetTypeIdsForObject(objectId.Value, true, token);
                 }
-                int[] methodIds = await context
-                    .SdbAgent
+                int[] methodIds = await context.SdbAgent
                     .GetMethodIdsByName(typeIds[0], methodName, BindingFlags.Default, token);
                 if (methodIds == null)
                 {
@@ -1195,8 +1180,7 @@ namespace Microsoft.WebAssembly.Diagnostics
                     }
                     try
                     {
-                        var retMethod = await context
-                            .SdbAgent
+                        var retMethod = await context.SdbAgent
                             .InvokeMethod(
                                 commandParamsObjWriter.GetParameterBuffer(),
                                 methodId,
@@ -1230,8 +1214,7 @@ namespace Microsoft.WebAssembly.Diagnostics
             {
                 if (linqTypeId == -1)
                 {
-                    linqTypeId = await context
-                        .SdbAgent
+                    linqTypeId = await context.SdbAgent
                         .GetTypeByName("System.Linq.Enumerable", token);
                     if (linqTypeId == 0)
                     {
@@ -1240,22 +1223,19 @@ namespace Microsoft.WebAssembly.Diagnostics
                     }
                 }
 
-                int[] newMethodIds = await context
-                    .SdbAgent
+                int[] newMethodIds = await context.SdbAgent
                     .GetMethodIdsByName(linqTypeId, methodName, BindingFlags.Default, token);
                 if (newMethodIds == null)
                     return 0;
 
                 foreach (int typeId in typeIds)
                 {
-                    List<int> genericTypeArgs = await context
-                        .SdbAgent
+                    List<int> genericTypeArgs = await context.SdbAgent
                         .GetTypeParamsOrArgsForGenericType(typeId, token);
                     if (genericTypeArgs.Count > 0)
                     {
                         isExtensionMethod = true;
-                        return await context
-                            .SdbAgent
+                        return await context.SdbAgent
                             .MakeGenericMethod(newMethodIds[0], genericTypeArgs, token);
                     }
                 }
@@ -1355,8 +1335,7 @@ namespace Microsoft.WebAssembly.Diagnostics
                 var value = er["value"];
                 var description = er["description"].Value<string>();
                 var className = er["className"].Value<string>();
-                duplicate = scopeCache
-                    .EvaluationResults
+                duplicate = scopeCache.EvaluationResults
                     .FirstOrDefault(pair =>
                         pair.Value["type"].Value<string>() == type
                         && pair.Value["subtype"].Value<string>() == subtype

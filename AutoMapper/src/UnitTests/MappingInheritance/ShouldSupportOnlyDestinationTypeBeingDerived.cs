@@ -64,9 +64,8 @@ public class AsShouldWorkOnlyWithDerivedTypes
             )
         ).ShouldThrowException<ArgumentOutOfRangeException>(ex =>
         {
-            ex.Message.ShouldStartWith(
-                $"{typeof(Source)} is not derived from {typeof(Destination)}."
-            );
+            ex.Message
+                .ShouldStartWith($"{typeof(Source)} is not derived from {typeof(Destination)}.");
         });
     }
 }

@@ -99,8 +99,7 @@ namespace System.ServiceModel.Description
             {
                 Message responseMessage = Message.CreateMessage(MessageVersion.None, string.Empty);
                 responseMessageProperty.StatusCode = HttpStatusCode.NotModified;
-                responseMessage
-                    .Properties
+                responseMessage.Properties
                     .Add(HttpResponseMessageProperty.Name, responseMessageProperty);
                 return responseMessage;
             }
@@ -112,11 +111,9 @@ namespace System.ServiceModel.Description
                 )
             );
             Message response = new WebScriptMetadataMessage(string.Empty, proxyContent);
-            responseMessageProperty
-                .Headers
+            responseMessageProperty.Headers
                 .Add(JsonGlobals.LastModifiedString, ServiceLastModifiedRfc1123String);
-            responseMessageProperty
-                .Headers
+            responseMessageProperty.Headers
                 .Add(JsonGlobals.ExpiresString, ServiceLastModifiedRfc1123String);
             if (AspNetEnvironment.Current.AspNetCompatibilityEnabled)
             {
@@ -124,8 +121,7 @@ namespace System.ServiceModel.Description
             }
             else
             {
-                responseMessageProperty
-                    .Headers
+                responseMessageProperty.Headers
                     .Add(JsonGlobals.CacheControlString, JsonGlobals.publicString);
             }
             response.Properties.Add(HttpResponseMessageProperty.Name, responseMessageProperty);

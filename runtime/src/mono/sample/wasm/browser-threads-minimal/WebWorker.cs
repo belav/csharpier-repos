@@ -40,8 +40,7 @@ namespace System.Runtime.InteropServices.JavaScript
         {
             if (runAsyncMethod == null)
             {
-                var webWorker = typeof(JSObject)
-                    .Assembly
+                var webWorker = typeof(JSObject).Assembly
                     .GetType("System.Runtime.InteropServices.JavaScript.WebWorker");
                 runAsyncMethod = webWorker.GetMethod(
                     "RunAsync",
@@ -78,8 +77,7 @@ namespace System.Runtime.InteropServices.JavaScript
         {
             if (runAsyncVoidMethod == null)
             {
-                var webWorker = typeof(JSObject)
-                    .Assembly
+                var webWorker = typeof(JSObject).Assembly
                     .GetType("System.Runtime.InteropServices.JavaScript.WebWorker");
                 runAsyncVoidMethod = webWorker.GetMethod(
                     "RunAsyncVoid",
@@ -113,8 +111,7 @@ namespace System.Runtime.InteropServices.JavaScript
         {
             if (runMethod == null)
             {
-                var webWorker = typeof(JSObject)
-                    .Assembly
+                var webWorker = typeof(JSObject).Assembly
                     .GetType("System.Runtime.InteropServices.JavaScript.WebWorker");
                 runMethod = webWorker.GetMethod("Run", BindingFlags.Public | BindingFlags.Static);
             }

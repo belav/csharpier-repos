@@ -131,14 +131,12 @@ namespace System.ServiceModel.Security
         )
         {
             if (securityVersion == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("securityVersion"));
 
             if (maximumKeyDerivationOffset < 0)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentOutOfRangeException(
                             "maximumKeyDerivationOffset",
@@ -148,8 +146,7 @@ namespace System.ServiceModel.Security
             }
             if (maximumKeyDerivationLabelLength < 0)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentOutOfRangeException(
                             "maximumKeyDerivationLabelLength",
@@ -159,8 +156,7 @@ namespace System.ServiceModel.Security
             }
             if (maximumKeyDerivationNonceLength <= 0)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentOutOfRangeException(
                             "maximumKeyDerivationNonceLength",
@@ -201,8 +197,7 @@ namespace System.ServiceModel.Security
             }
             else
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new NotSupportedException());
             }
 
@@ -216,8 +211,7 @@ namespace System.ServiceModel.Security
             }
             else
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentOutOfRangeException(
                             "securityVersion",
@@ -243,8 +237,7 @@ namespace System.ServiceModel.Security
             }
             else
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new NotSupportedException());
             }
 
@@ -369,16 +362,14 @@ namespace System.ServiceModel.Security
                         {
                             throw;
                         }
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new XmlException(SR.GetString(SR.ErrorDeserializingTokenXml), e)
                             );
                     }
                 }
             }
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(
                     new XmlException(
                         SR.GetString(
@@ -426,8 +417,7 @@ namespace System.ServiceModel.Security
                         {
                             throw;
                         }
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new XmlException(SR.GetString(SR.ErrorSerializingSecurityToken), e)
                             );
@@ -438,8 +428,7 @@ namespace System.ServiceModel.Security
             }
 
             if (!wroteToken)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(SR.StandardsManagerCannotWriteObject, token.GetType())
@@ -650,8 +639,7 @@ namespace System.ServiceModel.Security
                         {
                             throw;
                         }
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new XmlException(
                                     SR.GetString(
@@ -666,8 +654,7 @@ namespace System.ServiceModel.Security
 
             // PreSharp Bug: Parameter 'element' to this public method must be validated: A null-dereference can occur here.
 #pragma warning suppress 56506
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(
                     new XmlException(
                         SR.GetString(
@@ -739,8 +726,7 @@ namespace System.ServiceModel.Security
                 string id = issuedTokenXml.GetAttribute(idAttributeLocalName, idAttributeNamespace);
                 if (id == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new XmlException(
                                 SR.GetString(
@@ -805,8 +791,7 @@ namespace System.ServiceModel.Security
             public CollectionDictionary(List<XmlDictionaryString> dictionaryStrings)
             {
                 if (dictionaryStrings == null)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new ArgumentNullException("dictionaryStrings"));
 
                 this.dictionaryStrings = dictionaryStrings;
@@ -815,8 +800,7 @@ namespace System.ServiceModel.Security
             public bool TryLookup(string value, out XmlDictionaryString result)
             {
                 if (value == null)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new ArgumentNullException("value"));
 
                 for (int i = 0; i < this.dictionaryStrings.Count; ++i)
@@ -848,8 +832,7 @@ namespace System.ServiceModel.Security
             public bool TryLookup(XmlDictionaryString value, out XmlDictionaryString result)
             {
                 if (value == null)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new ArgumentNullException("value"));
 
                 for (int i = 0; i < this.dictionaryStrings.Count; ++i)

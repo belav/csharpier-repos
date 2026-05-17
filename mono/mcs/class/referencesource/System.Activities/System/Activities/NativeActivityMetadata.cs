@@ -402,8 +402,7 @@ namespace System.Activities
             }
             if (extensionType.IsValueType)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .Argument(
                         "extensionType",
                         SR.RequireExtensionOnlyAcceptsReferenceTypes(extensionType.FullName)

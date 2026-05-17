@@ -227,10 +227,11 @@ namespace System.ServiceModel.Discovery.Udp
             }
             msg.Properties.Add("Via", LocalAddress.Uri);
             msg.Properties.Add("Encoder", message_encoder);
-            msg.Properties.Add(
-                RemoteEndpointMessageProperty.Name,
-                new RemoteEndpointMessageProperty(ip.Address.ToString(), ip.Port)
-            );
+            msg.Properties
+                .Add(
+                    RemoteEndpointMessageProperty.Name,
+                    new RemoteEndpointMessageProperty(ip.Address.ToString(), ip.Port)
+                );
 
             Logger.LogMessage(
                 MessageLogSourceKind.TransportReceive,
@@ -332,8 +333,7 @@ namespace System.ServiceModel.Discovery.Udp
             // FIXME: apply UdpTransportSetting here.
             var settings = binding_element.TransportSettings;
             if (settings.MulticastInterfaceId != null)
-                client
-                    .Client
+                client.Client
                     .SetSocketOption(
                         SocketOptionLevel.Udp,
                         SocketOptionName.MulticastInterface,

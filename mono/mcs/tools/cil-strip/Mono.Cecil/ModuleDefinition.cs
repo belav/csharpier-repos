@@ -298,8 +298,7 @@ namespace Mono.Cecil
                 throw new ArgumentNullException("meth");
 
             if (meth is SR.ConstructorInfo)
-                return m_controller
-                    .Helper
+                return m_controller.Helper
                     .ImportConstructorInfo(meth as SR.ConstructorInfo, GetContext());
             else
                 return m_controller.Helper.ImportMethodInfo(meth as SR.MethodInfo, GetContext());
@@ -314,8 +313,7 @@ namespace Mono.Cecil
             ImportContext import_context = GetContext(context);
 
             if (meth is SR.ConstructorInfo)
-                return m_controller
-                    .Helper
+                return m_controller.Helper
                     .ImportConstructorInfo(meth as SR.ConstructorInfo, import_context);
             else
                 return m_controller.Helper.ImportMethodInfo(meth as SR.MethodInfo, import_context);
@@ -593,8 +591,7 @@ namespace Mono.Cecil
                 else
                     return new byte[0];
 
-            return m_controller
-                .Writer
+            return m_controller.Writer
                 .SignatureWriter
                 .CompressCustomAttribute(
                     ReflectionWriter.GetCustomAttributeSig(ca),

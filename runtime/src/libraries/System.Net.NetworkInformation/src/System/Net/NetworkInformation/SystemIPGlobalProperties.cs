@@ -151,8 +151,7 @@ namespace System.Net.NetworkInformation
             {
                 // Get the buffer size needed.
                 size = 0;
-                result = Interop
-                    .IpHlpApi
+                result = Interop.IpHlpApi
                     .GetExtendedTcpTable(
                         IntPtr.Zero,
                         &size,
@@ -168,8 +167,7 @@ namespace System.Net.NetworkInformation
                     IntPtr buffer = Marshal.AllocHGlobal((int)size);
                     try
                     {
-                        result = Interop
-                            .IpHlpApi
+                        result = Interop.IpHlpApi
                             .GetExtendedTcpTable(
                                 buffer,
                                 &size,
@@ -298,8 +296,7 @@ namespace System.Net.NetworkInformation
             {
                 // Get the buffer size needed.
                 size = 0;
-                result = Interop
-                    .IpHlpApi
+                result = Interop.IpHlpApi
                     .GetExtendedUdpTable(
                         IntPtr.Zero,
                         &size,
@@ -314,8 +311,7 @@ namespace System.Net.NetworkInformation
                     IntPtr buffer = Marshal.AllocHGlobal((int)size);
                     try
                     {
-                        result = Interop
-                            .IpHlpApi
+                        result = Interop.IpHlpApi
                             .GetExtendedUdpTable(
                                 buffer,
                                 &size,

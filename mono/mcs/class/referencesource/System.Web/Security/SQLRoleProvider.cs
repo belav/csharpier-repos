@@ -131,9 +131,14 @@ namespace System.Web.Security
                     SqlParameter p = new SqlParameter("@ReturnValue", SqlDbType.Int);
                     p.Direction = ParameterDirection.ReturnValue;
                     cmd.Parameters.Add(p);
-                    cmd.Parameters.Add(
-                        CreateInputParam("@ApplicationName", SqlDbType.NVarChar, ApplicationName)
-                    );
+                    cmd.Parameters
+                        .Add(
+                            CreateInputParam(
+                                "@ApplicationName",
+                                SqlDbType.NVarChar,
+                                ApplicationName
+                            )
+                        );
                     cmd.Parameters.Add(CreateInputParam("@UserName", SqlDbType.NVarChar, username));
                     cmd.Parameters.Add(CreateInputParam("@RoleName", SqlDbType.NVarChar, roleName));
                     cmd.ExecuteNonQuery();
@@ -199,9 +204,14 @@ namespace System.Web.Security
 
                     p.Direction = ParameterDirection.ReturnValue;
                     cmd.Parameters.Add(p);
-                    cmd.Parameters.Add(
-                        CreateInputParam("@ApplicationName", SqlDbType.NVarChar, ApplicationName)
-                    );
+                    cmd.Parameters
+                        .Add(
+                            CreateInputParam(
+                                "@ApplicationName",
+                                SqlDbType.NVarChar,
+                                ApplicationName
+                            )
+                        );
                     cmd.Parameters.Add(CreateInputParam("@UserName", SqlDbType.NVarChar, username));
                     try
                     {
@@ -277,9 +287,14 @@ namespace System.Web.Security
 
                     p.Direction = ParameterDirection.ReturnValue;
                     cmd.Parameters.Add(p);
-                    cmd.Parameters.Add(
-                        CreateInputParam("@ApplicationName", SqlDbType.NVarChar, ApplicationName)
-                    );
+                    cmd.Parameters
+                        .Add(
+                            CreateInputParam(
+                                "@ApplicationName",
+                                SqlDbType.NVarChar,
+                                ApplicationName
+                            )
+                        );
                     cmd.Parameters.Add(CreateInputParam("@RoleName", SqlDbType.NVarChar, roleName));
                     cmd.ExecuteNonQuery();
 
@@ -341,17 +356,23 @@ namespace System.Web.Security
                     SqlParameter p = new SqlParameter("@ReturnValue", SqlDbType.Int);
                     p.Direction = ParameterDirection.ReturnValue;
                     cmd.Parameters.Add(p);
-                    cmd.Parameters.Add(
-                        CreateInputParam("@ApplicationName", SqlDbType.NVarChar, ApplicationName)
-                    );
+                    cmd.Parameters
+                        .Add(
+                            CreateInputParam(
+                                "@ApplicationName",
+                                SqlDbType.NVarChar,
+                                ApplicationName
+                            )
+                        );
                     cmd.Parameters.Add(CreateInputParam("@RoleName", SqlDbType.NVarChar, roleName));
-                    cmd.Parameters.Add(
-                        CreateInputParam(
-                            "@DeleteOnlyIfRoleIsEmpty",
-                            SqlDbType.Bit,
-                            throwOnPopulatedRole ? 1 : 0
-                        )
-                    );
+                    cmd.Parameters
+                        .Add(
+                            CreateInputParam(
+                                "@DeleteOnlyIfRoleIsEmpty",
+                                SqlDbType.Bit,
+                                throwOnPopulatedRole ? 1 : 0
+                            )
+                        );
                     cmd.ExecuteNonQuery();
                     int returnValue = GetReturnValue(cmd);
 
@@ -405,9 +426,14 @@ namespace System.Web.Security
                     SqlParameter p = new SqlParameter("@ReturnValue", SqlDbType.Int);
                     p.Direction = ParameterDirection.ReturnValue;
                     cmd.Parameters.Add(p);
-                    cmd.Parameters.Add(
-                        CreateInputParam("@ApplicationName", SqlDbType.NVarChar, ApplicationName)
-                    );
+                    cmd.Parameters
+                        .Add(
+                            CreateInputParam(
+                                "@ApplicationName",
+                                SqlDbType.NVarChar,
+                                ApplicationName
+                            )
+                        );
                     cmd.Parameters.Add(CreateInputParam("@RoleName", SqlDbType.NVarChar, roleName));
                     cmd.ExecuteNonQuery();
                     int returnValue = GetReturnValue(cmd);
@@ -546,14 +572,12 @@ namespace System.Web.Security
 
             p.Direction = ParameterDirection.ReturnValue;
             cmd.Parameters.Add(p);
-            cmd.Parameters.Add(
-                CreateInputParam("@ApplicationName", SqlDbType.NVarChar, ApplicationName)
-            );
+            cmd.Parameters
+                .Add(CreateInputParam("@ApplicationName", SqlDbType.NVarChar, ApplicationName));
             cmd.Parameters.Add(CreateInputParam("@RoleNames", SqlDbType.NVarChar, roleNames));
             cmd.Parameters.Add(CreateInputParam("@UserNames", SqlDbType.NVarChar, usernames));
-            cmd.Parameters.Add(
-                CreateInputParam("@CurrentTimeUtc", SqlDbType.DateTime, DateTime.UtcNow)
-            );
+            cmd.Parameters
+                .Add(CreateInputParam("@CurrentTimeUtc", SqlDbType.DateTime, DateTime.UtcNow));
             try
             {
                 reader = cmd.ExecuteReader(CommandBehavior.SingleRow);
@@ -697,9 +721,8 @@ namespace System.Web.Security
 
             p.Direction = ParameterDirection.ReturnValue;
             cmd.Parameters.Add(p);
-            cmd.Parameters.Add(
-                CreateInputParam("@ApplicationName", SqlDbType.NVarChar, ApplicationName)
-            );
+            cmd.Parameters
+                .Add(CreateInputParam("@ApplicationName", SqlDbType.NVarChar, ApplicationName));
             cmd.Parameters.Add(CreateInputParam("@UserNames", SqlDbType.NVarChar, usernames));
             cmd.Parameters.Add(CreateInputParam("@RoleNames", SqlDbType.NVarChar, roleNames));
             try
@@ -763,9 +786,14 @@ namespace System.Web.Security
 
                     p.Direction = ParameterDirection.ReturnValue;
                     cmd.Parameters.Add(p);
-                    cmd.Parameters.Add(
-                        CreateInputParam("@ApplicationName", SqlDbType.NVarChar, ApplicationName)
-                    );
+                    cmd.Parameters
+                        .Add(
+                            CreateInputParam(
+                                "@ApplicationName",
+                                SqlDbType.NVarChar,
+                                ApplicationName
+                            )
+                        );
                     cmd.Parameters.Add(CreateInputParam("@RoleName", SqlDbType.NVarChar, roleName));
                     try
                     {
@@ -843,9 +871,14 @@ namespace System.Web.Security
 
                     p.Direction = ParameterDirection.ReturnValue;
                     cmd.Parameters.Add(p);
-                    cmd.Parameters.Add(
-                        CreateInputParam("@ApplicationName", SqlDbType.NVarChar, ApplicationName)
-                    );
+                    cmd.Parameters
+                        .Add(
+                            CreateInputParam(
+                                "@ApplicationName",
+                                SqlDbType.NVarChar,
+                                ApplicationName
+                            )
+                        );
                     try
                     {
                         reader = cmd.ExecuteReader(CommandBehavior.SequentialAccess);
@@ -918,13 +951,23 @@ namespace System.Web.Security
 
                     p.Direction = ParameterDirection.ReturnValue;
                     cmd.Parameters.Add(p);
-                    cmd.Parameters.Add(
-                        CreateInputParam("@ApplicationName", SqlDbType.NVarChar, ApplicationName)
-                    );
+                    cmd.Parameters
+                        .Add(
+                            CreateInputParam(
+                                "@ApplicationName",
+                                SqlDbType.NVarChar,
+                                ApplicationName
+                            )
+                        );
                     cmd.Parameters.Add(CreateInputParam("@RoleName", SqlDbType.NVarChar, roleName));
-                    cmd.Parameters.Add(
-                        CreateInputParam("@UserNameToMatch", SqlDbType.NVarChar, usernameToMatch)
-                    );
+                    cmd.Parameters
+                        .Add(
+                            CreateInputParam(
+                                "@UserNameToMatch",
+                                SqlDbType.NVarChar,
+                                usernameToMatch
+                            )
+                        );
                     try
                     {
                         reader = cmd.ExecuteReader(CommandBehavior.SequentialAccess);

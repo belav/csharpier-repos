@@ -45,8 +45,7 @@ namespace System.ServiceModel.Activities.Presentation
             );
 
             var categoryAttribute = new CategoryAttribute(
-                EditorCategoryTemplateDictionary
-                    .Instance
+                EditorCategoryTemplateDictionary.Instance
                     .GetCategoryTitle(CorrelationsCategoryLabelKey)
             );
 
@@ -59,8 +58,7 @@ namespace System.ServiceModel.Activities.Presentation
             );
 
             categoryAttribute = new CategoryAttribute(
-                EditorCategoryTemplateDictionary
-                    .Instance
+                EditorCategoryTemplateDictionary.Instance
                     .GetCategoryTitle(MiscellaneousCategoryLabelKey)
             );
 

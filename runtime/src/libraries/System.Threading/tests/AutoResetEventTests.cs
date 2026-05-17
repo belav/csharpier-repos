@@ -224,32 +224,34 @@ namespace System.Threading.Tests
             {
                 const int Iters = 10;
                 Task.WaitAll(
-                    Task.Factory.StartNew(
-                        () =>
-                        {
-                            for (int i = 0; i < Iters; i++)
+                    Task.Factory
+                        .StartNew(
+                            () =>
                             {
-                                are1.CheckedWait();
-                                are2.Set();
-                            }
-                        },
-                        CancellationToken.None,
-                        TaskCreationOptions.LongRunning,
-                        TaskScheduler.Default
-                    ),
-                    Task.Factory.StartNew(
-                        () =>
-                        {
-                            for (int i = 0; i < Iters; i++)
+                                for (int i = 0; i < Iters; i++)
+                                {
+                                    are1.CheckedWait();
+                                    are2.Set();
+                                }
+                            },
+                            CancellationToken.None,
+                            TaskCreationOptions.LongRunning,
+                            TaskScheduler.Default
+                        ),
+                    Task.Factory
+                        .StartNew(
+                            () =>
                             {
-                                are2.CheckedWait();
-                                are1.Set();
-                            }
-                        },
-                        CancellationToken.None,
-                        TaskCreationOptions.LongRunning,
-                        TaskScheduler.Default
-                    )
+                                for (int i = 0; i < Iters; i++)
+                                {
+                                    are2.CheckedWait();
+                                    are1.Set();
+                                }
+                            },
+                            CancellationToken.None,
+                            TaskCreationOptions.LongRunning,
+                            TaskScheduler.Default
+                        )
                 );
             }
         }

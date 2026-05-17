@@ -78,8 +78,7 @@ namespace System.ServiceModel.Activities.Configuration
                             new System.ServiceModel.Configuration.TimeSpanOrInfiniteConverter(),
                             new System.ServiceModel.Configuration.TimeSpanOrInfiniteValidator(
                                 System.TimeSpan.Parse("00:00:00", CultureInfo.InvariantCulture),
-                                System
-                                    .TimeSpan
+                                System.TimeSpan
                                     .Parse("24.20:31:23.6470000", CultureInfo.InvariantCulture)
                             ),
                             System.Configuration.ConfigurationPropertyOptions.None
@@ -93,8 +92,7 @@ namespace System.ServiceModel.Activities.Configuration
                             new System.ServiceModel.Configuration.TimeSpanOrInfiniteConverter(),
                             new System.ServiceModel.Configuration.TimeSpanOrInfiniteValidator(
                                 System.TimeSpan.Parse("00:00:00", CultureInfo.InvariantCulture),
-                                System
-                                    .TimeSpan
+                                System.TimeSpan
                                     .Parse("24.20:31:23.6470000", CultureInfo.InvariantCulture)
                             ),
                             System.Configuration.ConfigurationPropertyOptions.None

@@ -32,8 +32,7 @@ public class P {
     public static void Main() {}
 }";
             var parseOptions = TestOptions.RegularWithDocumentationComments;
-            var options = TestOptions
-                .ReleaseDll
+            var options = TestOptions.ReleaseDll
                 .WithXmlReferenceResolver(XmlFileResolver.Default)
                 .WithGeneralDiagnosticOption(ReportDiagnostic.Error);
 
@@ -15657,8 +15656,7 @@ class C
             using (var stream = new MemoryStream())
             {
                 var result = compilation.Emit(stream);
-                result
-                    .Diagnostics
+                result.Diagnostics
                     .Verify(
                         // warning CS8021: No value for RuntimeMetadataVersion found. No assembly containing System.Object was found nor was a value for RuntimeMetadataVersion specified through options.
                         Diagnostic(ErrorCode.WRN_NoRuntimeMetadataVersion).WithLocation(1, 1),
@@ -15698,8 +15696,7 @@ class C
             using (var stream = new MemoryStream())
             {
                 var result = compilation.Emit(stream);
-                result
-                    .Diagnostics
+                result.Diagnostics
                     .Verify(
                         // warning CS8021: No value for RuntimeMetadataVersion found. No assembly containing System.Object was found nor was a value for RuntimeMetadataVersion specified through options.
                         Diagnostic(ErrorCode.WRN_NoRuntimeMetadataVersion),
@@ -15742,8 +15739,7 @@ class C
             using (var stream = new MemoryStream())
             {
                 var result = compilation.Emit(stream);
-                result
-                    .Diagnostics
+                result.Diagnostics
                     .Verify(
                         // warning CS8021: No value for RuntimeMetadataVersion found. No assembly containing System.Object was found nor was a value for RuntimeMetadataVersion specified through options.
                         Diagnostic(ErrorCode.WRN_NoRuntimeMetadataVersion),
@@ -15924,8 +15920,7 @@ class c1
                 source,
                 expectedOutput: "",
                 symbolValidator: validator,
-                options: TestOptions
-                    .UnsafeDebugExe
+                options: TestOptions.UnsafeDebugExe
                     .WithMetadataImportOptions(MetadataImportOptions.All),
                 parseOptions: TestOptions.Regular9
             );

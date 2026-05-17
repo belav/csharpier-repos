@@ -88,8 +88,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options.Style.N
         {
             get
             {
-                return _style
-                    .NamingStyle
+                return _style.NamingStyle
                     .CreateName(
                         ImmutableArray.Create(
                             ServicesVSResources.example,

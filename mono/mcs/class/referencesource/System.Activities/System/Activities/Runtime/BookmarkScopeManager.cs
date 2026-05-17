@@ -147,8 +147,7 @@ namespace System.Activities.Runtime
 
             if (!this.bookmarkManagers.TryGetValue(lookupScope, out manager))
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(new InvalidOperationException(SR.RegisteredBookmarkScopeRequired));
             }
 
@@ -447,8 +446,7 @@ namespace System.Activities.Runtime
 
             if (this.uninitializedScopes == null || !this.uninitializedScopes.Contains(lookupScope))
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new InvalidOperationException(SR.BookmarkScopeNotRegisteredForInitialize)
                     );
@@ -461,8 +459,7 @@ namespace System.Activities.Runtime
 
             if (this.bookmarkManagers.ContainsKey(new BookmarkScope(id)))
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new InvalidOperationException(SR.BookmarkScopeWithIdAlreadyExists(id))
                     );
@@ -578,8 +575,7 @@ namespace System.Activities.Runtime
 
             if (this.bookmarkManagers == null || !this.bookmarkManagers.ContainsKey(scope))
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new InvalidOperationException(SR.BookmarkScopeNotRegisteredForUnregister)
                     );
@@ -587,8 +583,7 @@ namespace System.Activities.Runtime
 
             if (this.bookmarkManagers[scope].HasBookmarks)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(new InvalidOperationException(SR.BookmarkScopeHasBookmarks));
             }
 

@@ -91,8 +91,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UseSimpleUsingStatement
         {
             if (originalBlock.Statements.Count == currentBlock.Statements.Count)
             {
-                var statementToUpdateIndex = originalBlock
-                    .Statements
+                var statementToUpdateIndex = originalBlock.Statements
                     .IndexOf(s => topmostUsingStatements.Contains(s));
                 var statementToUpdate = currentBlock.Statements[statementToUpdateIndex];
 
@@ -101,8 +100,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UseSimpleUsingStatement
                     && usingStatement.Declaration != null
                 )
                 {
-                    var updatedStatements = currentBlock
-                        .Statements
+                    var updatedStatements = currentBlock.Statements
                         .ReplaceRange(statementToUpdate, Expand(usingStatement));
                     return currentBlock.WithStatements(updatedStatements);
                 }
@@ -151,8 +149,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UseSimpleUsingStatement
 
                     var openBraceLeadingTrivia = blockSyntax.OpenBraceToken.LeadingTrivia;
                     var openBraceTrailingTrivia = blockSyntax.OpenBraceToken.TrailingTrivia;
-                    var usingHasEndOfLineTrivia = usingStatement
-                        .CloseParenToken
+                    var usingHasEndOfLineTrivia = usingStatement.CloseParenToken
                         .TrailingTrivia
                         .Any(SyntaxKind.EndOfLineTrivia);
                     if (!usingHasEndOfLineTrivia)

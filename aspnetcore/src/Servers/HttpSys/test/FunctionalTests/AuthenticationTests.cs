@@ -255,8 +255,7 @@ public class AuthenticationTests : LoggedTest
                     Assert.NotNull(httpContext.User);
                     Assert.NotNull(httpContext.User.Identity);
                     Assert.True(httpContext.User.Identity.IsAuthenticated);
-                    httpContext
-                        .Response
+                    httpContext.Response
                         .OnCompleted(() =>
                         {
                             userName = httpContext.User.Identity.Name;

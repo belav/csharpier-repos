@@ -122,8 +122,7 @@ namespace System.Workflow.Runtime.Hosting
         #region WorkflowRuntimeService
         override protected internal void Start()
         {
-            WorkflowTrace
-                .Host
+            WorkflowTrace.Host
                 .TraceEvent(
                     TraceEventType.Information,
                     0,
@@ -144,8 +143,8 @@ namespace System.Workflow.Runtime.Hosting
             // check in the common section
             if ((!_ignoreCommonEnableRetries) && (null != base.Runtime))
             {
-                NameValueConfigurationCollection commonConfigurationParameters =
-                    base.Runtime.CommonParameters;
+                NameValueConfigurationCollection commonConfigurationParameters = base.Runtime
+                    .CommonParameters;
                 if (commonConfigurationParameters != null)
                 {
                     // Then scan for connection string in the common configuration parameters section
@@ -168,8 +167,7 @@ namespace System.Workflow.Runtime.Hosting
 
         protected override void OnStopped()
         {
-            WorkflowTrace
-                .Host
+            WorkflowTrace.Host
                 .TraceEvent(
                     TraceEventType.Information,
                     0,
@@ -183,8 +181,7 @@ namespace System.Workflow.Runtime.Hosting
             )
             {
                 kvp.Value.Dispose();
-                WorkflowTrace
-                    .Host
+                WorkflowTrace.Host
                     .TraceEvent(
                         TraceEventType.Information,
                         0,
@@ -239,8 +236,7 @@ namespace System.Workflow.Runtime.Hosting
                         //
                         // Can't retry as we don't own the tx
                         // Create a dependent transaction and don't restrict promotion.
-                        tx = Transaction
-                            .Current
+                        tx = Transaction.Current
                             .DependentClone(DependentCloneOption.BlockCommitUntilComplete);
                         connectionInfo = new SharedConnectionInfo(
                             this.dbResourceAllocator,
@@ -282,8 +278,7 @@ namespace System.Workflow.Runtime.Hosting
                 {
                     tx.Rollback();
 
-                    WorkflowTrace
-                        .Host
+                    WorkflowTrace.Host
                         .TraceEvent(
                             TraceEventType.Error,
                             0,
@@ -293,8 +288,7 @@ namespace System.Workflow.Runtime.Hosting
 
                     if (dbRetry.TryDoRetry(ref retryCounter))
                     {
-                        WorkflowTrace
-                            .Host
+                        WorkflowTrace.Host
                             .TraceEvent(
                                 TraceEventType.Information,
                                 0,
@@ -339,8 +333,7 @@ namespace System.Workflow.Runtime.Hosting
             lock (this.tableSyncObject)
             {
                 SharedConnectionInfo connectionInfo;
-                WorkflowTrace
-                    .Host
+                WorkflowTrace.Host
                     .TraceEvent(
                         TraceEventType.Information,
                         0,
@@ -353,8 +346,7 @@ namespace System.Workflow.Runtime.Hosting
                 }
                 else
                 {
-                    WorkflowTrace
-                        .Host
+                    WorkflowTrace.Host
                         .TraceEvent(
                             TraceEventType.Information,
                             0,
@@ -375,8 +367,7 @@ namespace System.Workflow.Runtime.Hosting
             lock (this.tableSyncObject)
             {
                 this.transactionConnectionTable.Add(transaction, connectionInfo);
-                WorkflowTrace
-                    .Host
+                WorkflowTrace.Host
                     .TraceEvent(
                         TraceEventType.Information,
                         0,

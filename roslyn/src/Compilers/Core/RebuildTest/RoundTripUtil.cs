@@ -108,8 +108,7 @@ namespace Microsoft.CodeAnalysis.Rebuild.UnitTests
 
             var compilationFactory = CompilationFactory.Create(assemblyFileName, optionsReader);
             var rebuild = compilationFactory.CreateCompilation(
-                original
-                    .SyntaxTrees
+                original.SyntaxTrees
                     .SelectAsArray(x =>
                         compilationFactory.CreateSyntaxTree(x.FilePath, x.GetText())
                     ),

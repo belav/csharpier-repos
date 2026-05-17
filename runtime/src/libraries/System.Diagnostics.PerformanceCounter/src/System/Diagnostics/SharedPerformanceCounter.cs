@@ -49,8 +49,7 @@ namespace System.Diagnostics
                         // different user (primary token) than the current user
                         // (impersonation token) that has less privilege/ACL rights.
                         using (
-                            SafeProcessHandle procHandle = Interop
-                                .Kernel32
+                            SafeProcessHandle procHandle = Interop.Kernel32
                                 .OpenProcess(
                                     Interop.Advapi32.ProcessOptions.PROCESS_QUERY_INFORMATION,
                                     false,
@@ -61,8 +60,7 @@ namespace System.Diagnostics
                             if (!procHandle.IsInvalid)
                             {
                                 long temp;
-                                Interop
-                                    .Kernel32
+                                Interop.Kernel32
                                     .GetProcessTimes(
                                         procHandle,
                                         out startTime,
@@ -727,8 +725,7 @@ namespace System.Diagnostics
                         RegistryKey categoryKey = null;
                         try
                         {
-                            categoryKey = Registry
-                                .LocalMachine
+                            categoryKey = Registry.LocalMachine
                                 .OpenSubKey(
                                     PerformanceCounterLib.ServicePath
                                         + "\\"
@@ -1653,8 +1650,7 @@ namespace System.Diagnostics
                         {
                             long processStartTime;
                             using (
-                                SafeProcessHandle procHandle = Interop
-                                    .Kernel32
+                                SafeProcessHandle procHandle = Interop.Kernel32
                                     .OpenProcess(
                                         Interop.Advapi32.ProcessOptions.PROCESS_QUERY_INFORMATION,
                                         false,
@@ -1682,8 +1678,7 @@ namespace System.Diagnostics
                                 {
                                     long temp;
                                     if (
-                                        Interop
-                                            .Kernel32
+                                        Interop.Kernel32
                                             .GetProcessTimes(
                                                 procHandle,
                                                 out processStartTime,
@@ -1706,8 +1701,7 @@ namespace System.Diagnostics
                             // Check to see if the process handle has been signaled by the kernel.  If this is the case then it's safe
                             // to reclaim the instance as the process is in the process of exiting.
                             using (
-                                SafeProcessHandle procHandle = Interop
-                                    .Kernel32
+                                SafeProcessHandle procHandle = Interop.Kernel32
                                     .OpenProcess(
                                         Interop.Advapi32.ProcessOptions.SYNCHRONIZE,
                                         false,
@@ -2124,8 +2118,7 @@ namespace System.Diagnostics
                     string sddlString = "D:(A;OICI;FRFWGRGW;;;AU)(A;OICI;FRFWGRGW;;;S-1-5-33)";
 
                     if (
-                        !Interop
-                            .Advapi32
+                        !Interop.Advapi32
                             .ConvertStringSecurityDescriptorToSecurityDescriptor(
                                 sddlString,
                                 Interop.Kernel32.PerformanceCounterOptions.SDDL_REVISION_1,
@@ -2158,8 +2151,7 @@ namespace System.Diagnostics
                     bool created = false;
                     while (!created && waitRetries > 0)
                     {
-                        _fileMappingHandle = Interop
-                            .Kernel32
+                        _fileMappingHandle = Interop.Kernel32
                             .CreateFileMapping(
                                 (IntPtr)(-1),
                                 ref securityAttributes,
@@ -2180,8 +2172,7 @@ namespace System.Diagnostics
                         {
                             // Invalidate the old safehandle before we get rid of it.  This prevents it from trying to finalize
                             _fileMappingHandle.SetHandleAsInvalid();
-                            _fileMappingHandle = Interop
-                                .Kernel32
+                            _fileMappingHandle = Interop.Kernel32
                                 .OpenFileMapping(
                                     Interop.Kernel32.FileMapOptions.FILE_MAP_WRITE,
                                     false,
@@ -2215,8 +2206,7 @@ namespace System.Diagnostics
                         throw new InvalidOperationException(SR.CantCreateFileMapping);
                     }
 
-                    _fileViewAddress = Interop
-                        .Kernel32
+                    _fileViewAddress = Interop.Kernel32
                         .MapViewOfFile(
                             _fileMappingHandle,
                             Interop.Kernel32.FileMapOptions.FILE_MAP_WRITE,
@@ -2230,8 +2220,7 @@ namespace System.Diagnostics
                     // figure out what size the share memory really is.
                     Interop.Kernel32.MEMORY_BASIC_INFORMATION meminfo = default;
                     if (
-                        Interop
-                            .Kernel32
+                        Interop.Kernel32
                             .VirtualQuery(
                                 _fileViewAddress,
                                 ref meminfo,

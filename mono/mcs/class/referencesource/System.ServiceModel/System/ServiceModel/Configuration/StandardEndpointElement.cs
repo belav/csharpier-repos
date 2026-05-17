@@ -46,8 +46,7 @@ namespace System.ServiceModel.Configuration
         {
             if (null == channelEndpointElement)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("channelEndpointElement");
             }
 
@@ -64,8 +63,7 @@ namespace System.ServiceModel.Configuration
         {
             if (null == serviceEndpointElement)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("serviceEndpointElement");
             }
 
@@ -90,15 +88,13 @@ namespace System.ServiceModel.Configuration
 
             if (null == channelEndpointElement)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("channelEndpointElement");
             }
 
             if (endpoint.GetType() != this.EndpointType)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(
                         SR.GetString(
                             SR.ConfigInvalidTypeForEndpoint,
@@ -130,15 +126,13 @@ namespace System.ServiceModel.Configuration
 
             if (null == serviceEndpointElement)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("serviceEndpointElement");
             }
 
             if (endpoint.GetType() != this.EndpointType)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(
                         SR.GetString(
                             SR.ConfigInvalidTypeForEndpoint,
@@ -168,8 +162,7 @@ namespace System.ServiceModel.Configuration
             }
             if (endpoint.GetType() != this.EndpointType)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(
                         SR.GetString(
                             SR.ConfigInvalidTypeForEndpoint,

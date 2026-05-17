@@ -133,8 +133,7 @@ namespace System.Runtime.Serialization
             get
             {
                 if (dictionaryEnumeratorCtor == null)
-                    dictionaryEnumeratorCtor = Globals
-                        .TypeOfDictionaryEnumerator
+                    dictionaryEnumeratorCtor = Globals.TypeOfDictionaryEnumerator
                         .GetConstructor(
                             Globals.ScanAllMembers,
                             null,
@@ -332,8 +331,7 @@ namespace System.Runtime.Serialization
             get
             {
                 if (hashtableCtor == null)
-                    hashtableCtor = Globals
-                        .TypeOfHashtable
+                    hashtableCtor = Globals.TypeOfHashtable
                         .GetConstructor(Globals.ScanAllMembers, null, Globals.EmptyTypeArray, null);
                 return hashtableCtor;
             }

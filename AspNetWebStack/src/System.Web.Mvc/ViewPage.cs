@@ -150,8 +150,7 @@ namespace System.Web.Mvc
                         try
                         {
                             _nextId = 0;
-                            viewContext
-                                .HttpContext
+                            viewContext.HttpContext
                                 .Server
                                 .Execute(
                                     HttpHandlerUtil.WrapForServerExecute(this),

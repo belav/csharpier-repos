@@ -182,8 +182,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
                         )
                     )
                     {
-                        errorMessage = System
-                            .Data
+                        errorMessage = System.Data
                             .Entity
                             .Strings
                             .DuplicateMemberName(member.Name, FQName, definingType.FQName);
@@ -229,8 +228,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
                 newMember.AddError(
                     ErrorCode.BadProperty,
                     EdmSchemaErrorSeverity.Error,
-                    System
-                        .Data
+                    System.Data
                         .Entity
                         .Strings
                         .InvalidMemberNameMatchesTypeName(newMember.Name, FQName)
@@ -358,8 +356,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
                 AddError(
                     ErrorCode.InvalidBaseType,
                     EdmSchemaErrorSeverity.Error,
-                    System
-                        .Data
+                    System.Data
                         .Entity
                         .Strings
                         .InvalidBaseTypeForStructuredType(UnresolvedBaseType, FQName)

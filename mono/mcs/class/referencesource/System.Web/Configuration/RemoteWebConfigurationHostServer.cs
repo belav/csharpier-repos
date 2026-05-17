@@ -284,8 +284,7 @@ namespace System.Web.Configuration
                         appSiteID,
                         currentVirtualPath.VirtualPathString
                     );
-                    currentFilePath = System
-                        .IO
+                    currentFilePath = System.IO
                         .Path
                         .Combine(currentFilePath, HttpConfigurationSystem.WebConfigFileName);
 

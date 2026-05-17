@@ -110,8 +110,7 @@ namespace System.Security.Cryptography.X509Certificates
 
         private void Decode(byte[] rawData)
         {
-            X509Pal
-                .Instance
+            X509Pal.Instance
                 .DecodeX509SubjectKeyIdentifierExtension(rawData, out _subjectKeyIdentifierBytes);
             _subjectKeyIdentifierString = _subjectKeyIdentifierBytes.ToHexStringUpper();
             _decoded = true;

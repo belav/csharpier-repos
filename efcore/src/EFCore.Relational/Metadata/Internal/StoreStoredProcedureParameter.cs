@@ -69,8 +69,7 @@ public class StoreStoredProcedureParameter
         PropertyMappings.Count != 0
             ? PropertyMappings[0].TypeMapping
             : (RelationalTypeMapping)
-                Table
-                    .Model
+                Table.Model
                     .Model
                     .GetModelDependencies()
                     .TypeMappingSource

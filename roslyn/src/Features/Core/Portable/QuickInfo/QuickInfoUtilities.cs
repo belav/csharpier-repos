@@ -89,8 +89,7 @@ namespace Microsoft.CodeAnalysis.QuickInfo
                 {
                     // We'll take the existing message and wrap it with a message saying this was returned from the task.
                     var defaultSymbol = "{0}";
-                    var symbolIndex = FeaturesResources
-                        .Awaited_task_returns_0
+                    var symbolIndex = FeaturesResources.Awaited_task_returns_0
                         .IndexOf(defaultSymbol);
 
                     var builder = ImmutableArray.CreateBuilder<TaggedText>();

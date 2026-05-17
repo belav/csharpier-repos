@@ -50,8 +50,7 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings
             IThreadingContext threadingContext
         )
         {
-            _settingsDataProviderFactory = workspace
-                .Services
+            _settingsDataProviderFactory = workspace.Services
                 .GetRequiredService<ISettingsAggregator>();
             _workspace = workspace;
             _controlProvider = controlProvider;
@@ -91,8 +90,7 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings
             pbstrEditorCaption = null;
 
             if (
-                !_workspace
-                    .CurrentSolution
+                !_workspace.CurrentSolution
                     .Projects
                     .Any(p => p.Language is LanguageNames.CSharp or LanguageNames.VisualBasic)
             )
@@ -103,13 +101,14 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings
             }
 
             if (
-                !_workspace
-                    .CurrentSolution
+                !_workspace.CurrentSolution
                     .Projects
                     .Any(p =>
-                        p.AnalyzerConfigDocuments.Any(editorconfig =>
-                            StringComparer.OrdinalIgnoreCase.Equals(editorconfig.FilePath, filePath)
-                        )
+                        p.AnalyzerConfigDocuments
+                            .Any(editorconfig =>
+                                StringComparer.OrdinalIgnoreCase
+                                    .Equals(editorconfig.FilePath, filePath)
+                            )
                     )
             )
             {

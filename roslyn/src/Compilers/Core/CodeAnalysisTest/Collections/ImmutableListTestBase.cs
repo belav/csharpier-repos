@@ -264,8 +264,7 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             Assert.Equal(-1, FindIndexImpl(ImmutableSegmentedList<int>.Empty, 0, 0, n => true));
 
             // Create a list with contents: 100,101,102,103,104,100,101,102,103,104
-            var list = ImmutableSegmentedList<int>
-                .Empty
+            var list = ImmutableSegmentedList<int>.Empty
                 .AddRange(Enumerable.Range(100, 5).Concat(Enumerable.Range(100, 5)));
             var bclList = list.ToList();
             Assert.Equal(-1, FindIndexImpl(list, n => n == 6));
@@ -320,8 +319,7 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             Assert.Equal(-1, FindLastIndexImpl(ImmutableSegmentedList<int>.Empty, 0, 0, n => true));
 
             // Create a list with contents: 100,101,102,103,104,100,101,102,103,104
-            var list = ImmutableSegmentedList<int>
-                .Empty
+            var list = ImmutableSegmentedList<int>.Empty
                 .AddRange(Enumerable.Range(100, 5).Concat(Enumerable.Range(100, 5)));
             var bclList = list.ToList();
             Assert.Equal(-1, FindLastIndexImpl(list, n => n == 6));
@@ -576,8 +574,7 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         [Fact]
         public void BinarySearchPartialSortedList()
         {
-            var reverseSorted = System
-                .Collections
+            var reverseSorted = System.Collections
                 .Immutable
                 .ImmutableArray
                 .CreateRange(Enumerable.Range(1, 150).Select(n => n * 2).Reverse());

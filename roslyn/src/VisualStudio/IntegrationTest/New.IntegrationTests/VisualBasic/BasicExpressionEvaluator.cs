@@ -21,14 +21,12 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.VisualBasic
         {
             await base.InitializeAsync();
 
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .CreateSolutionAsync(
                     nameof(BasicExpressionEvaluator),
                     HangMitigatingCancellationToken
                 );
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .AddProjectAsync(
                     "TestProj",
                     WellKnownProjectTemplates.ConsoleApplication,
@@ -36,8 +34,7 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.VisualBasic
                     HangMitigatingCancellationToken
                 );
 
-            await TestServices
-                .Editor
+            await TestServices.Editor
                 .SetTextAsync(
                     @"Imports System
 
@@ -81,8 +78,7 @@ End Module",
         [IdeFact]
         public async Task ValidateLocalsWindow()
         {
-            await TestServices
-                .Debugger
+            await TestServices.Debugger
                 .GoAsync(waitForBreakMode: true, HangMitigatingCancellationToken);
 
             Assert.Equal(
@@ -91,122 +87,102 @@ End Module",
             );
             Assert.Equal(
                 ("SByte", "64"),
-                await TestServices
-                    .LocalsWindow
+                await TestServices.LocalsWindow
                     .GetEntryAsync(["mySByte"], HangMitigatingCancellationToken)
             );
             Assert.Equal(
                 ("Short", "16384"),
-                await TestServices
-                    .LocalsWindow
+                await TestServices.LocalsWindow
                     .GetEntryAsync(["myShort"], HangMitigatingCancellationToken)
             );
             Assert.Equal(
                 ("Integer", "1073741824"),
-                await TestServices
-                    .LocalsWindow
+                await TestServices.LocalsWindow
                     .GetEntryAsync(["myInt"], HangMitigatingCancellationToken)
             );
             Assert.Equal(
                 ("Long", "4611686018427387904"),
-                await TestServices
-                    .LocalsWindow
+                await TestServices.LocalsWindow
                     .GetEntryAsync(["myLong"], HangMitigatingCancellationToken)
             );
             Assert.Equal(
                 ("Byte", "128"),
-                await TestServices
-                    .LocalsWindow
+                await TestServices.LocalsWindow
                     .GetEntryAsync(["myByte"], HangMitigatingCancellationToken)
             );
             Assert.Equal(
                 ("UShort", "32768"),
-                await TestServices
-                    .LocalsWindow
+                await TestServices.LocalsWindow
                     .GetEntryAsync(["myUShort"], HangMitigatingCancellationToken)
             );
             Assert.Equal(
                 ("UInteger", "2147483648"),
-                await TestServices
-                    .LocalsWindow
+                await TestServices.LocalsWindow
                     .GetEntryAsync(["myUInt"], HangMitigatingCancellationToken)
             );
             Assert.Equal(
                 ("ULong", "9223372036854775808"),
-                await TestServices
-                    .LocalsWindow
+                await TestServices.LocalsWindow
                     .GetEntryAsync(["myULong"], HangMitigatingCancellationToken)
             );
             Assert.Equal(
                 ("Single", "1.70141173E+38"),
-                await TestServices
-                    .LocalsWindow
+                await TestServices.LocalsWindow
                     .GetEntryAsync(["myFloat"], HangMitigatingCancellationToken)
             );
             Assert.Equal(
                 ("Double", "8.9884656743115785E+307"),
-                await TestServices
-                    .LocalsWindow
+                await TestServices.LocalsWindow
                     .GetEntryAsync(["myDouble"], HangMitigatingCancellationToken)
             );
             Assert.Equal(
                 ("Decimal", "39614081257132168796771975168"),
-                await TestServices
-                    .LocalsWindow
+                await TestServices.LocalsWindow
                     .GetEntryAsync(["myDecimal"], HangMitigatingCancellationToken)
             );
             Assert.Equal(
                 ("Char", "\"A\"c"),
-                await TestServices
-                    .LocalsWindow
+                await TestServices.LocalsWindow
                     .GetEntryAsync(["myChar"], HangMitigatingCancellationToken)
             );
             Assert.Equal(
                 ("Boolean", "True"),
-                await TestServices
-                    .LocalsWindow
+                await TestServices.LocalsWindow
                     .GetEntryAsync(["myBool"], HangMitigatingCancellationToken)
             );
             Assert.Equal(
                 ("Object", "Nothing"),
-                await TestServices
-                    .LocalsWindow
+                await TestServices.LocalsWindow
                     .GetEntryAsync(["myObject"], HangMitigatingCancellationToken)
             );
             Assert.Equal(
                 ("String", "\"\""),
-                await TestServices
-                    .LocalsWindow
+                await TestServices.LocalsWindow
                     .GetEntryAsync(["myString"], HangMitigatingCancellationToken)
             );
             Assert.Equal(
                 ("System.ValueType {Short}", "16384"),
-                await TestServices
-                    .LocalsWindow
+                await TestServices.LocalsWindow
                     .GetEntryAsync(["myValueType"], HangMitigatingCancellationToken)
             );
             Assert.Equal(
                 ("System.Enum", "Nothing"),
-                await TestServices
-                    .LocalsWindow
+                await TestServices.LocalsWindow
                     .GetEntryAsync(["myEnum"], HangMitigatingCancellationToken)
             );
             Assert.Equal(
                 ("System.Array", "Nothing"),
-                await TestServices
-                    .LocalsWindow
+                await TestServices.LocalsWindow
                     .GetEntryAsync(["myArray"], HangMitigatingCancellationToken)
             );
             Assert.Equal(
                 ("System.Delegate", "Nothing"),
-                await TestServices
-                    .LocalsWindow
+                await TestServices.LocalsWindow
                     .GetEntryAsync(["myDelegate"], HangMitigatingCancellationToken)
             );
             Assert.Equal(
                 ("System.MulticastDelegate", "Nothing"),
-                await TestServices
-                    .LocalsWindow
+                await TestServices.LocalsWindow
                     .GetEntryAsync(["myMulticastDelegate"], HangMitigatingCancellationToken)
             );
         }
@@ -214,35 +190,29 @@ End Module",
         [IdeFact]
         public async Task EvaluatePrimitiveValues()
         {
-            await TestServices
-                .Debugger
+            await TestServices.Debugger
                 .GoAsync(waitForBreakMode: true, HangMitigatingCancellationToken);
 
             // It is better to use the Immediate Window but DTE does not provide an access to it.
-            await TestServices
-                .Debugger
+            await TestServices.Debugger
                 .CheckExpressionAsync("myByte", "Byte", "128", HangMitigatingCancellationToken);
-            await TestServices
-                .Debugger
+            await TestServices.Debugger
                 .CheckExpressionAsync(
                     "myFloat",
                     "Single",
                     "1.70141173E+38",
                     HangMitigatingCancellationToken
                 );
-            await TestServices
-                .Debugger
+            await TestServices.Debugger
                 .CheckExpressionAsync("myChar", "Char", "\"A\"c", HangMitigatingCancellationToken);
-            await TestServices
-                .Debugger
+            await TestServices.Debugger
                 .CheckExpressionAsync(
                     "myObject",
                     "Object",
                     "Nothing",
                     HangMitigatingCancellationToken
                 );
-            await TestServices
-                .Debugger
+            await TestServices.Debugger
                 .CheckExpressionAsync(
                     "myString",
                     "String",
@@ -254,12 +224,10 @@ End Module",
         [IdeFact]
         public async Task EvaluateLambdaExpressions()
         {
-            await TestServices
-                .Debugger
+            await TestServices.Debugger
                 .GoAsync(waitForBreakMode: true, HangMitigatingCancellationToken);
             // It is better to use the Immediate Window but DTE does not provide an access to it.
-            await TestServices
-                .Debugger
+            await TestServices.Debugger
                 .CheckExpressionAsync(
                     "(Function(val As Integer)(val+val))(1)",
                     "Integer",
@@ -271,11 +239,9 @@ End Module",
         [IdeFact]
         public async Task EvaluateInvalidExpressions()
         {
-            await TestServices
-                .Debugger
+            await TestServices.Debugger
                 .GoAsync(waitForBreakMode: true, HangMitigatingCancellationToken);
-            await TestServices
-                .Debugger
+            await TestServices.Debugger
                 .CheckExpressionAsync(
                     "myNonsense",
                     "",
@@ -287,8 +253,7 @@ End Module",
         [IdeFact]
         public async Task StateMachineTypeParameters()
         {
-            await TestServices
-                .Editor
+            await TestServices.Editor
                 .SetTextAsync(
                     @"
 Imports System
@@ -312,25 +277,21 @@ End Module
 ",
                     HangMitigatingCancellationToken
                 );
-            await TestServices
-                .Debugger
+            await TestServices.Debugger
                 .GoAsync(waitForBreakMode: true, HangMitigatingCancellationToken);
             Assert.Equal(
                 ("", ""),
-                await TestServices
-                    .LocalsWindow
+                await TestServices.LocalsWindow
                     .GetEntryAsync(["Type variables"], HangMitigatingCancellationToken)
             );
             Assert.Equal(
                 ("String", "String"),
-                await TestServices
-                    .LocalsWindow
+                await TestServices.LocalsWindow
                     .GetEntryAsync(["Type variables", "T"], HangMitigatingCancellationToken)
             );
 
             // It is better to use the Immediate Window but DTE does not provide an access to it.
-            await TestServices
-                .Debugger
+            await TestServices.Debugger
                 .CheckExpressionAsync(
                     "GetType(T) = GetType(String)",
                     "Boolean",

@@ -232,10 +232,8 @@ namespace Mono.CodeContracts.Static.ControlFlow.Subroutines.Builders
             do
             {
                 if (this.builder.IsBlockStart(currentLabel))
-                    this.current_block = this.builder.RecordInformationForNewBlock(
-                        currentLabel,
-                        this.current_block
-                    );
+                    this.current_block = this.builder
+                        .RecordInformationForNewBlock(currentLabel, this.current_block);
                 if (
                     this.builder
                         .CodeProvider

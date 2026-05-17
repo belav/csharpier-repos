@@ -310,11 +310,13 @@ namespace System.Web.UI.WebControls.WebParts
                     {
                         WizardStep s = new WizardStep();
 
-                        s.Controls.Add(
-                            new LiteralControl(
-                                SR.GetString(SR.RowToParametersTransformer_ProviderFieldName) + " "
-                            )
-                        );
+                        s.Controls
+                            .Add(
+                                new LiteralControl(
+                                    SR.GetString(SR.RowToParametersTransformer_ProviderFieldName)
+                                        + " "
+                                )
+                            );
                         Label label = new Label();
 
                         // HtmlEncode the string, since it comes from the provider schema and it may contain
@@ -380,8 +382,7 @@ namespace System.Web.UI.WebControls.WebParts
                         }
                         else
                         {
-                            consumerFieldName
-                                .Items
+                            consumerFieldName.Items
                                 .Add(
                                     new ListItem(
                                         SR.GetString(SR.RowToParametersTransformer_NoConsumerSchema)
@@ -407,11 +408,12 @@ namespace System.Web.UI.WebControls.WebParts
                 else
                 {
                     WizardStep s = new WizardStep();
-                    s.Controls.Add(
-                        new LiteralControl(
-                            SR.GetString(SR.RowToParametersTransformer_NoProviderSchema)
-                        )
-                    );
+                    s.Controls
+                        .Add(
+                            new LiteralControl(
+                                SR.GetString(SR.RowToParametersTransformer_NoProviderSchema)
+                            )
+                        );
                     WizardSteps.Add(s);
                 }
 

@@ -231,8 +231,7 @@ namespace Microsoft.NET.HostModel.Tests
                 Directory.Move(app.Location, newAppDir.Location);
 
                 using var symlink = new SymLink(app.Location, newAppDir.Location);
-                TestContext
-                    .BuiltDotNet
+                TestContext.BuiltDotNet
                     .Exec(app.AppDll)
                     .CaptureStdErr()
                     .CaptureStdOut()

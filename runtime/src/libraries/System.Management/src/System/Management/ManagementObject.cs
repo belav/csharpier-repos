@@ -417,8 +417,7 @@ namespace System.Management
                     // If the scope has a path too, the namespace portion of
                     // scope.path takes precedence over what is specified in path
                     path = new ManagementPath(path.RelativePath);
-                    path.NamespacePath = scope
-                        .Path
+                    path.NamespacePath = scope.Path
                         .GetNamespacePath(
                             (int)tag_WBEM_GET_TEXT_FLAGS.WBEMPATH_GET_SERVER_AND_NAMESPACE_ONLY
                         );
@@ -1707,8 +1706,7 @@ namespace System.Management
                 WmiEventSink sink = watcher.GetNewPutSink(
                     scope,
                     o.Context,
-                    scope
-                        .Path
+                    scope.Path
                         .GetNamespacePath(
                             (int)tag_WBEM_GET_TEXT_FLAGS.WBEMPATH_GET_SERVER_AND_NAMESPACE_ONLY
                         ),

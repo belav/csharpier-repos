@@ -178,8 +178,7 @@ namespace Microsoft.CSharp
 
             if (results.Output.Count > 0)
             {
-                results
-                    .Output
+                results.Output
                     .Insert(
                         0,
                         mcs.StartInfo.FileName + " " + mcs.StartInfo.Arguments + Environment.NewLine

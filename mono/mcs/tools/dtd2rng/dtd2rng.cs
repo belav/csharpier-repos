@@ -23,8 +23,7 @@ namespace Mono.XmlTools
 
         static void Usage()
         {
-            Console
-                .Error
+            Console.Error
                 .WriteLine(
                     @"
 Usage dtd2rng [options] dtdfile [ns]

@@ -159,8 +159,7 @@ namespace System.Transactions
             try
             {
                 outcomeEnlistment = new OutcomeEnlistment();
-                oletxTm
-                    .DtcTransactionManager
+                oletxTm.DtcTransactionManager
                     .ProxyShimFactory
                     .Import(
                         cookie,
@@ -253,8 +252,7 @@ namespace System.Transactions
 
             try
             {
-                propagationToken = oletxTx
-                    .RealOletxTransaction
+                propagationToken = oletxTx.RealOletxTransaction
                     .TransactionShim
                     .GetPropagationToken();
             }
@@ -344,8 +342,7 @@ namespace System.Transactions
 
             try
             {
-                oletxTx
-                    .RealOletxTransaction
+                oletxTx.RealOletxTransaction
                     .TransactionShim
                     .GetITransactionNative(out ITransaction transactionNative);
 
@@ -458,8 +455,7 @@ namespace System.Transactions
                 try
                 {
                     outcomeEnlistment = new OutcomeEnlistment();
-                    oletxTm
-                        .DtcTransactionManager
+                    oletxTm.DtcTransactionManager
                         .ProxyShimFactory
                         .CreateTransactionShim(
                             transactionNative,
@@ -640,8 +636,7 @@ namespace System.Transactions
             try
             {
                 outcomeEnlistment = new OutcomeEnlistment();
-                oletxTm
-                    .DtcTransactionManager
+                oletxTm.DtcTransactionManager
                     .ProxyShimFactory
                     .ReceiveTransaction(
                         propagationToken,

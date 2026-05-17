@@ -136,8 +136,7 @@ internal sealed class InternalUsageAnalyzer
     {
         if (
             symbol == null
-            || SymbolEqualityComparer
-                .Default
+            || SymbolEqualityComparer.Default
                 .Equals(symbol.ContainingAssembly, context.Compilation.Assembly)
         )
         {
@@ -182,8 +181,7 @@ internal sealed class InternalUsageAnalyzer
     {
         if (
             symbol == null
-            || SymbolEqualityComparer
-                .Default
+            || SymbolEqualityComparer.Default
                 .Equals(symbol.ContainingAssembly, context.Compilation.Assembly)
         )
         {
@@ -196,8 +194,7 @@ internal sealed class InternalUsageAnalyzer
             context.ReportDiagnostic(
                 Diagnostic.Create(
                     _descriptor,
-                    symbolForDiagnostic
-                        .DeclaringSyntaxReferences
+                    symbolForDiagnostic.DeclaringSyntaxReferences
                         .FirstOrDefault()
                         ?.GetSyntax()
                         .GetLocation()
@@ -214,8 +211,7 @@ internal sealed class InternalUsageAnalyzer
             context.ReportDiagnostic(
                 Diagnostic.Create(
                     _descriptor,
-                    symbolForDiagnostic
-                        .DeclaringSyntaxReferences
+                    symbolForDiagnostic.DeclaringSyntaxReferences
                         .FirstOrDefault()
                         ?.GetSyntax()
                         .GetLocation()

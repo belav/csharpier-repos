@@ -275,8 +275,7 @@ namespace System.Net.Http
             lock (_state.Lock)
             {
                 if (
-                    !Interop
-                        .WinHttp
+                    !Interop.WinHttp
                         .WinHttpWriteData(
                             _requestHandle,
                             Marshal.UnsafeAddrOfPinnedArrayElement(buffer, offset),
@@ -285,8 +284,7 @@ namespace System.Net.Http
                         )
                 )
                 {
-                    _state
-                        .TcsInternalWriteDataToRequestStream
+                    _state.TcsInternalWriteDataToRequestStream
                         .TrySetException(
                             new IOException(
                                 SR.net_http_io_write,
@@ -311,8 +309,7 @@ namespace System.Net.Http
             {
                 if (!Interop.WinHttp.WinHttpWriteData(_requestHandle, IntPtr.Zero, 0, IntPtr.Zero))
                 {
-                    _state
-                        .TcsInternalWriteDataToRequestStream
+                    _state.TcsInternalWriteDataToRequestStream
                         .TrySetException(
                             new IOException(
                                 SR.net_http_io_write,

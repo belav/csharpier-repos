@@ -29,8 +29,7 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
         public async Task AlignOpenBraceWithMethodDeclaration()
         {
             await using (
-                var telemetry = await TestServices
-                    .Telemetry
+                var telemetry = await TestServices.Telemetry
                     .EnableTestTelemetryChannelAsync(HangMitigatingCancellationToken)
             )
             {
@@ -46,8 +45,7 @@ $$class C
                 );
 
                 await TestServices.Editor.FormatDocumentAsync(HangMitigatingCancellationToken);
-                await TestServices
-                    .EditorVerifier
+                await TestServices.EditorVerifier
                     .TextContainsAsync(
                         @"
 class C
@@ -82,11 +80,9 @@ public class C
                 HangMitigatingCancellationToken
             );
 
-            await TestServices
-                .Input
+            await TestServices.Input
                 .SendAsync([VirtualKeyCode.BACK, ';'], HangMitigatingCancellationToken);
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .TextContainsAsync(
                     @"
 public class C
@@ -114,15 +110,13 @@ public class C {
                 HangMitigatingCancellationToken
             );
 
-            await TestServices
-                .Editor
+            await TestServices.Editor
                 .SelectTextInCurrentDocumentAsync(
                     "public void M( ) {",
                     HangMitigatingCancellationToken
                 );
             await TestServices.Editor.FormatSelectionAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .TextContainsAsync(
                     @"
 public class C {
@@ -155,8 +149,7 @@ class Program
 }",
                 HangMitigatingCancellationToken
             );
-            await TestServices
-                .Editor
+            await TestServices.Editor
                 .PasteAsync(
                     @"        Action b = () =>
         {
@@ -165,8 +158,7 @@ class Program
                     HangMitigatingCancellationToken
                 );
 
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .TextContainsAsync(
                     @"
 using System;
@@ -189,11 +181,9 @@ class Program
                     cancellationToken: HangMitigatingCancellationToken
                 );
             // Undo should only undo the formatting
-            await TestServices
-                .Shell
+            await TestServices.Shell
                 .ExecuteCommandAsync(WellKnownCommands.Edit.Undo, HangMitigatingCancellationToken);
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .TextContainsAsync(
                     @"
 using System;
@@ -238,8 +228,7 @@ class Program
 }",
                 HangMitigatingCancellationToken
             );
-            await TestServices
-                .Editor
+            await TestServices.Editor
                 .PasteAsync(
                     @"        Action<int> b = n =>
         {
@@ -248,8 +237,7 @@ class Program
                     HangMitigatingCancellationToken
                 );
 
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .TextContainsAsync(
                     @"
 using System;
@@ -294,8 +282,7 @@ class Program
 }",
                 HangMitigatingCancellationToken
             );
-            await TestServices
-                .Editor
+            await TestServices.Editor
                 .PasteAsync(
                     @"        D d = delegate(int x)
 {
@@ -304,8 +291,7 @@ class Program
                     HangMitigatingCancellationToken
                 );
 
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .TextContainsAsync(
                     @"
 using System;
@@ -343,20 +329,17 @@ class Program
 }",
                 HangMitigatingCancellationToken
             );
-            await TestServices
-                .Workspace
+            await TestServices.Workspace
                 .WaitForAsyncOperationsAsync(
                     FeatureAttribute.Workspace,
                     HangMitigatingCancellationToken
                 );
-            await TestServices
-                .Input
+            await TestServices.Input
                 .SendAsync(
                     ["(ba", (VirtualKeyCode.RETURN, VirtualKeyCode.SHIFT), "// comment"],
                     HangMitigatingCancellationToken
                 );
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .TextContainsAsync(
                     @"
 class Program
@@ -401,8 +384,7 @@ class C
   }
 }";
 
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .OpenFileAsync(ProjectName, "Class1.cs", HangMitigatingCancellationToken);
 
             MarkupTestFile.GetSpans(markup, out var expectedTextFourSpaceIndent, out _);
@@ -413,8 +395,7 @@ class C
              * no .editorconfig is available.
              */
 
-            await TestServices
-                .Workspace
+            await TestServices.Workspace
                 .WaitForAllAsyncOperationsAsync(
                     [
                         FeatureAttribute.Workspace,
@@ -443,8 +424,7 @@ class C
 indent_size = 2
 ";
 
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .AddFileAsync(
                     ProjectName,
                     ".editorconfig",
@@ -453,8 +433,7 @@ indent_size = 2
                     HangMitigatingCancellationToken
                 );
 
-            await TestServices
-                .Workspace
+            await TestServices.Workspace
                 .WaitForAllAsyncOperationsAsync(
                     [
                         FeatureAttribute.Workspace,
@@ -476,8 +455,7 @@ indent_size = 2
              * and verifies that the next Format Document operation adheres to the updated formatting.
              */
 
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .SetFileContentsAsync(
                     ProjectName,
                     ".editorconfig",
@@ -485,8 +463,7 @@ indent_size = 2
                     HangMitigatingCancellationToken
                 );
 
-            await TestServices
-                .Workspace
+            await TestServices.Workspace
                 .WaitForAllAsyncOperationsAsync(
                     [
                         FeatureAttribute.Workspace,

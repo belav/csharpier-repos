@@ -34,8 +34,7 @@ public class ProjectEnumerableOfIntToList
     {
         protected override void Seed(Context context)
         {
-            context
-                .Customers
+            context.Customers
                 .Add(
                     new Customer
                     {

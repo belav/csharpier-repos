@@ -107,8 +107,7 @@ namespace System.ServiceModel.Web
 
         private static AuthenticationSchemes GetAuthenticationSchemes(Uri baseAddress)
         {
-            AuthenticationSchemes supportedSchemes = AspNetEnvironment
-                .Current
+            AuthenticationSchemes supportedSchemes = AspNetEnvironment.Current
                 .GetAuthenticationSchemes(baseAddress);
 
             if (AspNetEnvironment.Current.IsSimpleApplicationHost)
@@ -153,16 +152,14 @@ namespace System.ServiceModel.Web
 
                 if (this.implementedContracts.Count > 1)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(this.multipleContractsErrorMessage)
                         );
                 }
                 else if (this.implementedContracts.Count == 0)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(this.noContractErrorMessage)
                         );

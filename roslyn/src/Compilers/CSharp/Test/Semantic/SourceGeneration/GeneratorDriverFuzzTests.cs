@@ -723,8 +723,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Semantic.UnitTests.SourceGeneration
 
             void registerPipeline(IncrementalGeneratorInitializationContext context)
             {
-                var provider = context
-                    .AdditionalTextsProvider
+                var provider = context.AdditionalTextsProvider
                     .SelectMany(
                         (additionalText, _) =>
                             new (bool TransformAs, bool TransformCs)[] { (false, false) }.Select(

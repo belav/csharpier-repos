@@ -725,8 +725,7 @@ namespace System.Threading.Tasks.Tests
                     {
                         if (useObj)
                         {
-                            f1 = Task<int>
-                                .Factory
+                            f1 = Task<int>.Factory
                                 .StartNew(
                                     obj =>
                                     {
@@ -738,8 +737,7 @@ namespace System.Threading.Tasks.Tests
                         }
                         else
                         {
-                            f1 = Task<int>
-                                .Factory
+                            f1 = Task<int>.Factory
                                 .StartNew(() =>
                                 {
                                     sideEffect = true;
@@ -1012,14 +1010,12 @@ namespace System.Threading.Tasks.Tests
                     {
                         if (useObj)
                         {
-                            f1 = Task<int>
-                                .Factory
+                            f1 = Task<int>.Factory
                                 .StartNew(obj => 42, refObj, ct, tco, TaskScheduler.Default);
                         }
                         else
                         {
-                            f1 = Task<int>
-                                .Factory
+                            f1 = Task<int>.Factory
                                 .StartNew(() => 42, ct, tco, TaskScheduler.Default);
                         }
                     }
@@ -1169,8 +1165,7 @@ namespace System.Threading.Tasks.Tests
             });
             Assert.Throws<ArgumentNullException>(() =>
             {
-                Task<int>
-                    .Factory
+                Task<int>.Factory
                     .StartNew(
                         (Func<int>)null,
                         CancellationToken.None,
@@ -1184,8 +1179,7 @@ namespace System.Threading.Tasks.Tests
             });
             Assert.Throws<ArgumentNullException>(() =>
             {
-                Task<int>
-                    .Factory
+                Task<int>.Factory
                     .StartNew(
                         (obj) => 42,
                         new object(),
@@ -1207,20 +1201,21 @@ namespace System.Threading.Tasks.Tests
             TaskCompletionSource<int> promise2 = new TaskCompletionSource<int>(); // will be used for implicit wait testing
             TaskCompletionSource<int> promise3 = new TaskCompletionSource<int>(); // will be used for cancellation testing
 
-            Task t2 = Task.Factory.StartNew(
-                delegate
-                {
-                    unexpectedStateObserved |= (promise1.Task.IsCompleted == true);
+            Task t2 = Task.Factory
+                .StartNew(
+                    delegate
+                    {
+                        unexpectedStateObserved |= (promise1.Task.IsCompleted == true);
 
-                    promise1.SetResult(1234);
+                        promise1.SetResult(1234);
 
-                    unexpectedStateObserved |= (promise1.Task.IsCompleted == false);
+                        unexpectedStateObserved |= (promise1.Task.IsCompleted == false);
 
-                    promise2.SetResult(5678);
-                    promise3.SetCanceled();
-                },
-                TaskScheduler.Default
-            );
+                        promise2.SetResult(5678);
+                        promise3.SetCanceled();
+                    },
+                    TaskScheduler.Default
+                );
 
             promise1.Task.Wait();
 
@@ -1228,27 +1223,28 @@ namespace System.Threading.Tasks.Tests
             bool cancellationExceptionReceived = false;
             bool someotherExceptionReceived = false;
 
-            Task t3 = Task.Factory.StartNew(
-                delegate
-                {
-                    promiseValueObserved = promise2.Task.Result;
+            Task t3 = Task.Factory
+                .StartNew(
+                    delegate
+                    {
+                        promiseValueObserved = promise2.Task.Result;
 
-                    // the following should throw, because t2 will be calling Cancel on promise3 little after we block here
-                    try
-                    {
-                        int i = promise3.Task.Result;
-                    }
-                    catch (AggregateException)
-                    {
-                        cancellationExceptionReceived = true;
-                    }
-                    catch (Exception)
-                    {
-                        someotherExceptionReceived = true;
-                    }
-                },
-                TaskScheduler.Default
-            );
+                        // the following should throw, because t2 will be calling Cancel on promise3 little after we block here
+                        try
+                        {
+                            int i = promise3.Task.Result;
+                        }
+                        catch (AggregateException)
+                        {
+                            cancellationExceptionReceived = true;
+                        }
+                        catch (Exception)
+                        {
+                            someotherExceptionReceived = true;
+                        }
+                    },
+                    TaskScheduler.Default
+                );
 
             t3.Wait();
 
@@ -1551,20 +1547,22 @@ namespace System.Threading.Tasks.Tests
             ManualResetEvent mre = new ManualResetEvent(false);
             ManualResetEvent mre2 = new ManualResetEvent(false);
 
-            Task outer = Task.Factory.StartNew(
-                delegate
-                {
-                    Task inner = Task.Factory.StartNew(
-                        delegate
-                        {
-                            mre.WaitOne();
-                        },
-                        TaskCreationOptions.AttachedToParent
-                    );
-                    mre2.Set();
-                    throw new Exception("blah");
-                }
-            );
+            Task outer = Task.Factory
+                .StartNew(
+                    delegate
+                    {
+                        Task inner = Task.Factory
+                            .StartNew(
+                                delegate
+                                {
+                                    mre.WaitOne();
+                                },
+                                TaskCreationOptions.AttachedToParent
+                            );
+                        mre2.Set();
+                        throw new Exception("blah");
+                    }
+                );
 
             // wait until the outer task starts executing on a TPL thread and launches its child task
             mre2.WaitOne();
@@ -1589,12 +1587,13 @@ namespace System.Threading.Tasks.Tests
 
             Exception e = new Exception("foobomb");
 
-            t = Task.Factory.StartNew(
-                delegate
-                {
-                    throw e;
-                }
-            );
+            t = Task.Factory
+                .StartNew(
+                    delegate
+                    {
+                        throw e;
+                    }
+                );
             try
             {
                 t.Wait();
@@ -1734,15 +1733,16 @@ namespace System.Threading.Tasks.Tests
             // Create worker tasks
             for (int i = 0; i < finishMeFirst.Length; i++)
             {
-                tasks[fillerTasks + i] = Task.Factory.StartNew(
-                    delegate(object obj)
-                    {
-                        bool finishMe = (bool)obj;
-                        if (!finishMe)
-                            mres.WaitOne();
-                    },
-                    (object)finishMeFirst[i]
-                );
+                tasks[fillerTasks + i] = Task.Factory
+                    .StartNew(
+                        delegate(object obj)
+                        {
+                            bool finishMe = (bool)obj;
+                            if (!finishMe)
+                                mres.WaitOne();
+                        },
+                        (object)finishMeFirst[i]
+                    );
             }
 
             int staRetCode = 0;
@@ -1812,9 +1812,8 @@ namespace System.Threading.Tasks.Tests
             var tokenSrc = new CancellationTokenSource();
             var task1 = Task.Factory.StartNew(() => mre.WaitOne());
             var task2 = Task.Factory.StartNew(() => mre.WaitOne());
-            var waiterTask = Task.Factory.StartNew(() =>
-                Task.WaitAny(new Task[] { task1, task2 }, tokenSrc.Token)
-            );
+            var waiterTask = Task.Factory
+                .StartNew(() => Task.WaitAny(new Task[] { task1, task2 }, tokenSrc.Token));
             tokenSrc.Cancel();
             Assert.Throws<AggregateException>(() => waiterTask.Wait());
             mre.Set();
@@ -2192,11 +2191,8 @@ namespace System.Threading.Tasks.Tests
                     CancellationTokenSource taskCTS = new CancellationTokenSource();
 
                     //Both setting the cancellationtoken to the new task, and passing it in as the state object so that the delegate can acknowledge using it
-                    tasks[i] = Task.Factory.StartNew(
-                        taskAction1,
-                        (object)taskCTS.Token,
-                        taskCTS.Token
-                    );
+                    tasks[i] = Task.Factory
+                        .StartNew(taskAction1, (object)taskCTS.Token, taskCTS.Token);
                     if (bCancelAct1)
                         taskCTS.Cancel();
 
@@ -2272,14 +2268,15 @@ namespace System.Threading.Tasks.Tests
                 CancellationTokenSource taskCTS = new CancellationTokenSource();
 
                 //Both setting the cancellationtoken to the new task, and passing it in as the state object so that the delegate can acknowledge using it
-                tasks[i] = Task.Factory.StartNew(
-                    (obj) =>
-                    {
-                        mres.WaitOne();
-                    },
-                    (object)taskCTS.Token,
-                    taskCTS.Token
-                );
+                tasks[i] = Task.Factory
+                    .StartNew(
+                        (obj) =>
+                        {
+                            mres.WaitOne();
+                        },
+                        (object)taskCTS.Token,
+                        taskCTS.Token
+                    );
                 if (bWaitOnAct1)
                     tasks[i].Wait();
                 if (bCancelAct1)
@@ -2342,17 +2339,18 @@ namespace System.Threading.Tasks.Tests
             CountdownEvent cde = new CountdownEvent(ntasks); // to count the number of Tasks that successfully start
             for (int i = 0; i < ntasks; i++)
             {
-                tasks[i] = Task.Factory.StartNew(
-                    delegate
-                    {
-                        cde.Signal(); // indicate that task has begun execution
-                        Debug.WriteLine("Signalled");
-                        mre.WaitOne();
-                    },
-                    CancellationToken.None,
-                    TaskCreationOptions.LongRunning,
-                    tm
-                );
+                tasks[i] = Task.Factory
+                    .StartNew(
+                        delegate
+                        {
+                            cde.Signal(); // indicate that task has begun execution
+                            Debug.WriteLine("Signalled");
+                            mre.WaitOne();
+                        },
+                        CancellationToken.None,
+                        TaskCreationOptions.LongRunning,
+                        tm
+                    );
             }
             bool waitSucceeded = cde.Wait(5000);
             if (!waitSucceeded)
@@ -2494,12 +2492,13 @@ namespace System.Threading.Tasks.Tests
             }
 
             temp = 0;
-            t = Task.Factory.StartNew(
-                delegate
-                {
-                    temp = 1;
-                }
-            );
+            t = Task.Factory
+                .StartNew(
+                    delegate
+                    {
+                        temp = 1;
+                    }
+                );
             t.Wait();
             if (temp != 1)
             {
@@ -2511,13 +2510,14 @@ namespace System.Threading.Tasks.Tests
             }
 
             temp = 0;
-            t = Task.Factory.StartNew(
-                delegate
-                {
-                    temp = 1;
-                },
-                TaskCreationOptions.None
-            );
+            t = Task.Factory
+                .StartNew(
+                    delegate
+                    {
+                        temp = 1;
+                    },
+                    TaskCreationOptions.None
+                );
             t.Wait();
             if (temp != 1)
             {
@@ -2529,15 +2529,16 @@ namespace System.Threading.Tasks.Tests
             }
 
             temp = 0;
-            t = Task.Factory.StartNew(
-                delegate
-                {
-                    temp = 1;
-                },
-                CancellationToken.None,
-                TaskCreationOptions.None,
-                TaskScheduler.Current
-            );
+            t = Task.Factory
+                .StartNew(
+                    delegate
+                    {
+                        temp = 1;
+                    },
+                    CancellationToken.None,
+                    TaskCreationOptions.None,
+                    TaskScheduler.Current
+                );
             t.Wait();
             if (temp != 1)
             {
@@ -2549,13 +2550,14 @@ namespace System.Threading.Tasks.Tests
             }
 
             temp = 0;
-            t = Task.Factory.StartNew(
-                delegate(object i)
-                {
-                    temp = (int)i;
-                },
-                1
-            );
+            t = Task.Factory
+                .StartNew(
+                    delegate(object i)
+                    {
+                        temp = (int)i;
+                    },
+                    1
+                );
             t.Wait();
             if (temp != 1)
             {
@@ -2567,14 +2569,15 @@ namespace System.Threading.Tasks.Tests
             }
 
             temp = 0;
-            t = Task.Factory.StartNew(
-                delegate(object i)
-                {
-                    temp = (int)i;
-                },
-                1,
-                TaskCreationOptions.None
-            );
+            t = Task.Factory
+                .StartNew(
+                    delegate(object i)
+                    {
+                        temp = (int)i;
+                    },
+                    1,
+                    TaskCreationOptions.None
+                );
             t.Wait();
             if (temp != 1)
             {
@@ -2586,16 +2589,17 @@ namespace System.Threading.Tasks.Tests
             }
 
             temp = 0;
-            t = Task.Factory.StartNew(
-                delegate(object i)
-                {
-                    temp = (int)i;
-                },
-                1,
-                CancellationToken.None,
-                TaskCreationOptions.None,
-                TaskScheduler.Current
-            );
+            t = Task.Factory
+                .StartNew(
+                    delegate(object i)
+                    {
+                        temp = (int)i;
+                    },
+                    1,
+                    CancellationToken.None,
+                    TaskCreationOptions.None,
+                    TaskScheduler.Current
+                );
             t.Wait();
             if (temp != 1)
             {
@@ -2737,8 +2741,7 @@ namespace System.Threading.Tasks.Tests
             }
 
             temp = 0;
-            f = Task<int>
-                .Factory
+            f = Task<int>.Factory
                 .StartNew(
                     delegate()
                     {
@@ -2756,8 +2759,7 @@ namespace System.Threading.Tasks.Tests
             }
 
             temp = 0;
-            f = Task<int>
-                .Factory
+            f = Task<int>.Factory
                 .StartNew(
                     delegate()
                     {
@@ -2776,8 +2778,7 @@ namespace System.Threading.Tasks.Tests
             }
 
             temp = 0;
-            f = Task<int>
-                .Factory
+            f = Task<int>.Factory
                 .StartNew(
                     delegate()
                     {
@@ -2798,8 +2799,7 @@ namespace System.Threading.Tasks.Tests
             }
 
             temp = 0;
-            f = Task<int>
-                .Factory
+            f = Task<int>.Factory
                 .StartNew(
                     delegate(object i)
                     {
@@ -2818,8 +2818,7 @@ namespace System.Threading.Tasks.Tests
             }
 
             temp = 0;
-            f = Task<int>
-                .Factory
+            f = Task<int>.Factory
                 .StartNew(
                     delegate(object i)
                     {
@@ -2839,8 +2838,7 @@ namespace System.Threading.Tasks.Tests
             }
 
             temp = 0;
-            f = Task<int>
-                .Factory
+            f = Task<int>.Factory
                 .StartNew(
                     delegate(object i)
                     {
@@ -2862,12 +2860,13 @@ namespace System.Threading.Tasks.Tests
             }
 
             temp = 0;
-            f = Task.Factory.StartNew<int>(
-                delegate()
-                {
-                    return 1;
-                }
-            );
+            f = Task.Factory
+                .StartNew<int>(
+                    delegate()
+                    {
+                        return 1;
+                    }
+                );
             temp = f.Result;
             if (temp != 1)
             {
@@ -2879,13 +2878,14 @@ namespace System.Threading.Tasks.Tests
             }
 
             temp = 0;
-            f = Task.Factory.StartNew<int>(
-                delegate()
-                {
-                    return 1;
-                },
-                TaskCreationOptions.None
-            );
+            f = Task.Factory
+                .StartNew<int>(
+                    delegate()
+                    {
+                        return 1;
+                    },
+                    TaskCreationOptions.None
+                );
             temp = f.Result;
             if (temp != 1)
             {
@@ -2897,15 +2897,16 @@ namespace System.Threading.Tasks.Tests
             }
 
             temp = 0;
-            f = Task.Factory.StartNew<int>(
-                delegate()
-                {
-                    return 1;
-                },
-                CancellationToken.None,
-                TaskCreationOptions.None,
-                TaskScheduler.Current
-            );
+            f = Task.Factory
+                .StartNew<int>(
+                    delegate()
+                    {
+                        return 1;
+                    },
+                    CancellationToken.None,
+                    TaskCreationOptions.None,
+                    TaskScheduler.Current
+                );
             temp = f.Result;
             if (temp != 1)
             {
@@ -2918,13 +2919,14 @@ namespace System.Threading.Tasks.Tests
 
             temp = 0;
 
-            f = Task.Factory.StartNew<int>(
-                (object i) =>
-                {
-                    return (int)i;
-                },
-                1
-            );
+            f = Task.Factory
+                .StartNew<int>(
+                    (object i) =>
+                    {
+                        return (int)i;
+                    },
+                    1
+                );
             temp = f.Result;
             if (temp != 1)
             {
@@ -2936,14 +2938,15 @@ namespace System.Threading.Tasks.Tests
             }
 
             temp = 0;
-            f = Task.Factory.StartNew<int>(
-                (object i) =>
-                {
-                    return (int)i;
-                },
-                1,
-                TaskCreationOptions.None
-            );
+            f = Task.Factory
+                .StartNew<int>(
+                    (object i) =>
+                    {
+                        return (int)i;
+                    },
+                    1,
+                    TaskCreationOptions.None
+                );
             temp = f.Result;
             if (temp != 1)
             {
@@ -2993,16 +2996,17 @@ namespace System.Threading.Tasks.Tests
         {
             TaskCompletionSource<int> tr = new TaskCompletionSource<int>();
             int temp = 0;
-            Task<int> f = Task.Factory.StartNew<int>(
-                (object i) =>
-                {
-                    return (int)i;
-                },
-                1,
-                CancellationToken.None,
-                TaskCreationOptions.None,
-                TaskScheduler.Current
-            );
+            Task<int> f = Task.Factory
+                .StartNew<int>(
+                    (object i) =>
+                    {
+                        return (int)i;
+                    },
+                    1,
+                    CancellationToken.None,
+                    TaskCreationOptions.None,
+                    TaskScheduler.Current
+                );
             Task t;
             temp = f.Result;
             if (temp != 1)
@@ -3121,12 +3125,13 @@ namespace System.Threading.Tasks.Tests
             t = Task.Factory.StartNew(delegate { });
             try
             {
-                t = Task.Factory.StartNew(
-                    delegate { },
-                    CancellationToken.None,
-                    TaskCreationOptions.None,
-                    (TaskScheduler)null
-                );
+                t = Task.Factory
+                    .StartNew(
+                        delegate { },
+                        CancellationToken.None,
+                        TaskCreationOptions.None,
+                        (TaskScheduler)null
+                    );
                 Assert.Fail(
                     string.Format(
                         "RunRefactoringTests - Task.Factory.StartNew() with null taskScheduler:    > FAILED.  No exception thrown."
@@ -3303,13 +3308,14 @@ namespace System.Threading.Tasks.Tests
                 CancellationTokenSource ctsource = new CancellationTokenSource();
                 CancellationToken ctoken = ctsource.Token;
 
-                t = Task.Factory.StartNew(
-                    delegate
-                    {
-                        ctsource.Cancel();
-                    },
-                    ctoken
-                ); // cancel but don't acknowledge
+                t = Task.Factory
+                    .StartNew(
+                        delegate
+                        {
+                            ctsource.Cancel();
+                        },
+                        ctoken
+                    ); // cancel but don't acknowledge
                 try
                 {
                     t.Wait();
@@ -3342,13 +3348,14 @@ namespace System.Threading.Tasks.Tests
             // Test for TaskStatus.Running
             //
             ManualResetEvent mre2 = new ManualResetEvent(false);
-            t = Task.Factory.StartNew(
-                delegate
-                {
-                    mre2.Set();
-                    mre.WaitOne();
-                }
-            );
+            t = Task.Factory
+                .StartNew(
+                    delegate
+                    {
+                        mre2.Set();
+                        mre.WaitOne();
+                    }
+                );
             mre2.WaitOne();
             mre2.Reset();
             ts = t.Status;
@@ -3378,19 +3385,21 @@ namespace System.Threading.Tasks.Tests
             //
             mre.Reset();
             ManualResetEvent childCreatedMre = new ManualResetEvent(false);
-            t = Task.Factory.StartNew(
-                delegate
-                {
-                    Task child = Task.Factory.StartNew(
-                        delegate
-                        {
-                            mre.WaitOne();
-                        },
-                        TaskCreationOptions.AttachedToParent
-                    );
-                    childCreatedMre.Set();
-                }
-            );
+            t = Task.Factory
+                .StartNew(
+                    delegate
+                    {
+                        Task child = Task.Factory
+                            .StartNew(
+                                delegate
+                                {
+                                    mre.WaitOne();
+                                },
+                                TaskCreationOptions.AttachedToParent
+                            );
+                        childCreatedMre.Set();
+                    }
+                );
 
             // This makes sure that task started running on a TP thread and created the child task
             childCreatedMre.WaitOne();
@@ -3459,15 +3468,16 @@ namespace System.Threading.Tasks.Tests
             {
                 ManualResetEvent taskStartMRE = new ManualResetEvent(false);
                 CancellationTokenSource cts = new CancellationTokenSource();
-                t = Task.Factory.StartNew(
-                    delegate
-                    {
-                        taskStartMRE.Set();
-                        while (!cts.Token.IsCancellationRequested) { }
-                        throw new OperationCanceledException(cts.Token);
-                    },
-                    cts.Token
-                );
+                t = Task.Factory
+                    .StartNew(
+                        delegate
+                        {
+                            taskStartMRE.Set();
+                            while (!cts.Token.IsCancellationRequested) { }
+                            throw new OperationCanceledException(cts.Token);
+                        },
+                        cts.Token
+                    );
 
                 taskStartMRE.WaitOne(); //make sure the task starts running before we cancel it
                 cts.Cancel();
@@ -3506,14 +3516,15 @@ namespace System.Threading.Tasks.Tests
                 CancellationTokenSource ctsource = new CancellationTokenSource();
                 CancellationToken ctoken = ctsource.Token;
 
-                t = Task.Factory.StartNew(
-                    delegate
-                    {
-                        while (!ctoken.IsCancellationRequested) { }
-                        throw new OperationCanceledException(ctoken);
-                    },
-                    ctoken
-                );
+                t = Task.Factory
+                    .StartNew(
+                        delegate
+                        {
+                            while (!ctoken.IsCancellationRequested) { }
+                            throw new OperationCanceledException(ctoken);
+                        },
+                        ctoken
+                    );
                 ctsource.Cancel();
 
                 try
@@ -3541,23 +3552,25 @@ namespace System.Threading.Tasks.Tests
                 SpinWait sw = new SpinWait();
                 ManualResetEvent mreFaulted = new ManualResetEvent(false);
                 mreFaulted.Reset();
-                Task tCanceled = Task.Factory.StartNew(
-                    delegate
-                    {
-                        Task tInner = Task.Factory.StartNew(
-                            delegate
-                            {
-                                mreFaulted.WaitOne();
-                            },
-                            TaskCreationOptions.AttachedToParent
-                        );
-                        innerStarted = true;
+                Task tCanceled = Task.Factory
+                    .StartNew(
+                        delegate
+                        {
+                            Task tInner = Task.Factory
+                                .StartNew(
+                                    delegate
+                                    {
+                                        mreFaulted.WaitOne();
+                                    },
+                                    TaskCreationOptions.AttachedToParent
+                                );
+                            innerStarted = true;
 
-                        cts.Cancel();
-                        throw new OperationCanceledException(cts.Token);
-                    },
-                    cts.Token
-                );
+                            cts.Cancel();
+                            throw new OperationCanceledException(cts.Token);
+                        },
+                        cts.Token
+                    );
 
                 // and this makes sure the delegate quit and the first stage of t.Finish() executed
                 while (!innerStarted || tCanceled.Status == TaskStatus.Running)
@@ -3606,13 +3619,14 @@ namespace System.Threading.Tasks.Tests
                 {
                     CancellationTokenSource cts = new CancellationTokenSource();
                     CancellationToken ct = cts.Token;
-                    t = Task.Factory.StartNew(
-                        delegate
-                        {
-                            throw new Exception("Some Unhandled Exception");
-                        },
-                        ct
-                    );
+                    t = Task.Factory
+                        .StartNew(
+                            delegate
+                            {
+                                throw new Exception("Some Unhandled Exception");
+                            },
+                            ct
+                        );
                     t.Wait();
                     cts.Cancel(); // Should have NO EFFECT on status, since task already completed/faulted.
                 }
@@ -3643,20 +3657,22 @@ namespace System.Threading.Tasks.Tests
                 bool innerStarted = false;
 
                 SpinWait sw = new SpinWait();
-                Task tFaulted = Task.Factory.StartNew(
-                    delegate
-                    {
-                        Task tInner = Task.Factory.StartNew(
-                            delegate
-                            {
-                                mreFaulted.WaitOne();
-                            },
-                            TaskCreationOptions.AttachedToParent
-                        );
-                        innerStarted = true;
-                        throw new Exception("oh no!");
-                    }
-                );
+                Task tFaulted = Task.Factory
+                    .StartNew(
+                        delegate
+                        {
+                            Task tInner = Task.Factory
+                                .StartNew(
+                                    delegate
+                                    {
+                                        mreFaulted.WaitOne();
+                                    },
+                                    TaskCreationOptions.AttachedToParent
+                                );
+                            innerStarted = true;
+                            throw new Exception("oh no!");
+                        }
+                    );
 
                 // this makes sure the delegate quit and the first stage of t.Finish() executed
                 while (!innerStarted || tFaulted.Status == TaskStatus.Running)
@@ -3701,22 +3717,24 @@ namespace System.Threading.Tasks.Tests
                 CancellationTokenSource cts = new CancellationTokenSource();
                 CancellationToken ct = cts.Token;
 
-                t = Task.Factory.StartNew(
-                    delegate
-                    {
-                        Task exceptionalChild = Task.Factory.StartNew(
-                            delegate
-                            {
-                                throw new Exception("some exception");
-                            },
-                            TaskCreationOptions.AttachedToParent
-                        ); //this should push an exception in our list
+                t = Task.Factory
+                    .StartNew(
+                        delegate
+                        {
+                            Task exceptionalChild = Task.Factory
+                                .StartNew(
+                                    delegate
+                                    {
+                                        throw new Exception("some exception");
+                                    },
+                                    TaskCreationOptions.AttachedToParent
+                                ); //this should push an exception in our list
 
-                        cts.Cancel();
-                        throw new OperationCanceledException(ct);
-                    },
-                    ct
-                );
+                            cts.Cancel();
+                            throw new OperationCanceledException(ct);
+                        },
+                        ct
+                    );
 
                 try
                 {
@@ -3777,17 +3795,19 @@ namespace System.Threading.Tasks.Tests
             // wait on a task that has children
             int numChildren = 10;
             CountdownEvent cntEv = new CountdownEvent(numChildren);
-            t = Task.Factory.StartNew(() =>
-            {
-                for (int i = 0; i < numChildren; i++)
-                    Task.Factory.StartNew(
-                        () =>
-                        {
-                            cntEv.Signal();
-                        },
-                        TaskCreationOptions.AttachedToParent
-                    );
-            });
+            t = Task.Factory
+                .StartNew(() =>
+                {
+                    for (int i = 0; i < numChildren; i++)
+                        Task.Factory
+                            .StartNew(
+                                () =>
+                                {
+                                    cntEv.Signal();
+                                },
+                                TaskCreationOptions.AttachedToParent
+                            );
+                });
 
             t.Wait();
             if (!cntEv.IsSet)
@@ -3821,15 +3841,16 @@ namespace System.Threading.Tasks.Tests
             CancellationToken ct = cts.Token;
 
             ManualResetEvent taskStartedEvent = new ManualResetEvent(false);
-            Task t = Task.Factory.StartNew(
-                () =>
-                {
-                    taskStartedEvent.Set();
-                    while (!ct.IsCancellationRequested) { }
-                    throw new OperationCanceledException(ct); //acknowledge the request
-                },
-                ct
-            );
+            Task t = Task.Factory
+                .StartNew(
+                    () =>
+                    {
+                        taskStartedEvent.Set();
+                        while (!ct.IsCancellationRequested) { }
+                        throw new OperationCanceledException(ct); //acknowledge the request
+                    },
+                    ct
+                );
 
             taskStartedEvent.WaitOne(); // make sure the task starts running before we set the CTS
             cts.Cancel();
@@ -3861,10 +3882,11 @@ namespace System.Threading.Tasks.Tests
             }
 
             // wait on a task that throws
-            t = Task.Factory.StartNew(() =>
-            {
-                throw new Exception(exceptionMsg);
-            });
+            t = Task.Factory
+                .StartNew(() =>
+                {
+                    throw new Exception(exceptionMsg);
+                });
             try
             {
                 t.Wait();
@@ -3892,16 +3914,18 @@ namespace System.Threading.Tasks.Tests
 
             // wait on a task that has an exceptional child task
             Task childTask = null;
-            t = Task.Factory.StartNew(() =>
-            {
-                childTask = Task.Factory.StartNew(
-                    () =>
-                    {
-                        throw new Exception(exceptionMsg);
-                    },
-                    TaskCreationOptions.AttachedToParent
-                );
-            });
+            t = Task.Factory
+                .StartNew(() =>
+                {
+                    childTask = Task.Factory
+                        .StartNew(
+                            () =>
+                            {
+                                throw new Exception(exceptionMsg);
+                            },
+                            TaskCreationOptions.AttachedToParent
+                        );
+                });
 
             try
             {
@@ -3951,13 +3975,14 @@ namespace System.Threading.Tasks.Tests
         public static void RunTaskRecursiveWaitTest()
         {
             Task t2 = null;
-            Task t = Task.Factory.StartNew(
-                delegate
-                {
-                    t2 = Task.Factory.StartNew(delegate { });
-                    t2.Wait();
-                }
-            );
+            Task t = Task.Factory
+                .StartNew(
+                    delegate
+                    {
+                        t2 = Task.Factory.StartNew(delegate { });
+                        t2.Wait();
+                    }
+                );
             t.Wait();
 
             if (!t.IsCompleted)
@@ -4014,12 +4039,13 @@ namespace System.Threading.Tasks.Tests
         public static void RunTaskWaitTimeoutTest()
         {
             ManualResetEvent mre = new ManualResetEvent(false);
-            Task t = Task.Factory.StartNew(
-                delegate
-                {
-                    mre.WaitOne();
-                }
-            );
+            Task t = Task.Factory
+                .StartNew(
+                    delegate
+                    {
+                        mre.WaitOne();
+                    }
+                );
             t.Wait(100);
 
             if (t.IsCompleted)
@@ -4051,19 +4077,21 @@ namespace System.Threading.Tasks.Tests
             ManualResetEvent taskStartedMRE = new ManualResetEvent(false);
             ManualResetEvent mre = new ManualResetEvent(false);
             Task t2 = null;
-            Task t = Task.Factory.StartNew(
-                delegate
-                {
-                    taskStartedMRE.Set();
-                    t2 = Task.Factory.StartNew(
-                        delegate
-                        {
-                            mre.WaitOne();
-                        }
-                    );
-                    t2.Wait();
-                }
-            );
+            Task t = Task.Factory
+                .StartNew(
+                    delegate
+                    {
+                        taskStartedMRE.Set();
+                        t2 = Task.Factory
+                            .StartNew(
+                                delegate
+                                {
+                                    mre.WaitOne();
+                                }
+                            );
+                        t2.Wait();
+                    }
+                );
 
             taskStartedMRE.WaitOne(); //wait for the outer task to start executing
             t.Wait(100);
@@ -4248,10 +4276,11 @@ namespace System.Threading.Tasks.Tests
         {
             // Start a task, but make sure that it does not complete
             ManualResetEvent mre = new ManualResetEvent(false);
-            Task t1 = Task.Factory.StartNew(() =>
-            {
-                mre.WaitOne();
-            });
+            Task t1 = Task.Factory
+                .StartNew(() =>
+                {
+                    mre.WaitOne();
+                });
 
             // Make sure that waiting on an uncompleted Task's AsyncWaitHandle does not succeed
             WaitHandle wh = ((IAsyncResult)t1).AsyncWaitHandle;

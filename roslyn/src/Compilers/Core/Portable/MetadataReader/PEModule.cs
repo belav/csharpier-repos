@@ -3492,8 +3492,7 @@ namespace Microsoft.CodeAnalysis
                 {
                     // Check whether matching name
                     if (
-                        MetadataReader
-                            .StringComparer
+                        MetadataReader.StringComparer
                             .Equals(
                                 MetadataReader.GetAssemblyReference(assemblyRef).Name,
                                 assemblyName
@@ -3826,8 +3825,7 @@ namespace Microsoft.CodeAnalysis
                     StringHandle ctorName = memberRef.Name;
 
                     if (
-                        !metadataReader
-                            .StringComparer
+                        !metadataReader.StringComparer
                             .Equals(ctorName, WellKnownMemberNames.InstanceConstructorName)
                     )
                     {
@@ -3844,8 +3842,7 @@ namespace Microsoft.CodeAnalysis
                     );
 
                     if (
-                        !metadataReader
-                            .StringComparer
+                        !metadataReader.StringComparer
                             .Equals(methodDef.Name, WellKnownMemberNames.InstanceConstructorName)
                     )
                     {

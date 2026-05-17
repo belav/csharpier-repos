@@ -652,9 +652,10 @@ namespace Mono.Options
             {
                 throw new OptionException(
                     string.Format(
-                        c.OptionSet.MessageLocalizer(
-                            "Could not convert string `{0}' to type {1} for option `{2}'."
-                        ),
+                        c.OptionSet
+                            .MessageLocalizer(
+                                "Could not convert string `{0}' to type {1} for option `{2}'."
+                            ),
                         value,
                         targetType.Name,
                         c.OptionName
@@ -2194,8 +2195,7 @@ namespace Mono.Options
             if (command == this || extra[0] == "--help")
             {
                 CommandSet.Out.WriteLine(_($"Usage: {CommandSet.Suite} COMMAND [OPTIONS]"));
-                CommandSet
-                    .Out
+                CommandSet.Out
                     .WriteLine(
                         _($"Use `{CommandSet.Suite} help COMMAND` for help on a specific command.")
                     );
@@ -2223,18 +2223,14 @@ namespace Mono.Options
 
         internal void WriteUnknownCommand(string unknownCommand)
         {
-            CommandSet
-                .Error
+            CommandSet.Error
                 .WriteLine(
-                    CommandSet
-                        .Options
+                    CommandSet.Options
                         .MessageLocalizer($"{CommandSet.Suite}: Unknown command: {unknownCommand}")
                 );
-            CommandSet
-                .Error
+            CommandSet.Error
                 .WriteLine(
-                    CommandSet
-                        .Options
+                    CommandSet.Options
                         .MessageLocalizer(
                             $"{CommandSet.Suite}: Use `{CommandSet.Suite} help` for usage."
                         )

@@ -57,10 +57,11 @@ static int RunStructTest()
     catch (InvalidOperationException e)
     {
         if (
-            !e.Message.StartsWith(
-                "A ValueType TContainerBuilder isn't supported with AOT",
-                StringComparison.Ordinal
-            )
+            !e.Message
+                .StartsWith(
+                    "A ValueType TContainerBuilder isn't supported with AOT",
+                    StringComparison.Ordinal
+                )
         )
         {
             return -4;

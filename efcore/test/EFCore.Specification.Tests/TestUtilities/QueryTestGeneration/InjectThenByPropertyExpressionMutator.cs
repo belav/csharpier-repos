@@ -29,8 +29,7 @@ public class InjectThenByPropertyExpressionMutator : ExpressionMutator
 
         var isDescending = random.Next(3) == 0;
         var thenBy = isDescending
-            ? QueryableMethods
-                .ThenByDescending
+            ? QueryableMethods.ThenByDescending
                 .MakeGenericMethod(typeArgument, property.PropertyType)
             : QueryableMethods.ThenBy.MakeGenericMethod(typeArgument, property.PropertyType);
 
@@ -48,8 +47,7 @@ public class InjectThenByPropertyExpressionMutator : ExpressionMutator
             var nullablePropertyType = typeof(Nullable<>).MakeGenericType(property.PropertyType);
 
             thenBy = isDescending
-                ? QueryableMethods
-                    .ThenByDescending
+                ? QueryableMethods.ThenByDescending
                     .MakeGenericMethod(typeArgument, nullablePropertyType)
                 : QueryableMethods.ThenBy.MakeGenericMethod(typeArgument, nullablePropertyType);
 
@@ -75,8 +73,7 @@ public class InjectThenByPropertyExpressionMutator : ExpressionMutator
     private class ExpressionFinder : ExpressionVisitor
     {
         private List<PropertyInfo> GetValidPropertiesForOrderBy(Expression expression) =>
-            expression
-                .Type
+            expression.Type
                 .GetGenericArguments()[0]
                 .GetProperties()
                 .Where(p => !p.GetMethod.IsStatic)

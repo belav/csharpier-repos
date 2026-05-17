@@ -78,8 +78,7 @@ namespace Castle.DynamicProxy.Generators
         {
             bool notFoundInTypeCache = false;
 
-            var proxyType = Scope
-                .TypeCache
+            var proxyType = Scope.TypeCache
                 .GetOrAdd(
                     GetCacheKey(),
                     cacheKey =>
@@ -92,8 +91,7 @@ namespace Castle.DynamicProxy.Generators
 
                         EnsureOptionsOverrideEqualsAndGetHashCode();
 
-                        var name = Scope
-                            .NamingScope
+                        var name = Scope.NamingScope
                             .GetUniqueName("Castle.Proxies." + targetType.Name + "Proxy");
                         return GenerateType(name, Scope.NamingScope.SafeSubScope());
                     }
@@ -294,8 +292,7 @@ namespace Castle.DynamicProxy.Generators
                 var offset = 1 + fields.Length;
                 for (int i = 0, n = baseConstructorParams.Length; i < n; ++i)
                 {
-                    var parameterBuilder = constructor
-                        .ConstructorBuilder
+                    var parameterBuilder = constructor.ConstructorBuilder
                         .DefineParameter(
                             offset + i,
                             baseConstructorParams[i].Attributes,
@@ -324,14 +321,12 @@ namespace Castle.DynamicProxy.Generators
                 var slice = new ArgumentReference[baseConstructorParams.Length];
                 Array.Copy(args, fields.Length, slice, 0, baseConstructorParams.Length);
 
-                constructor
-                    .CodeBuilder
+                constructor.CodeBuilder
                     .AddStatement(new ConstructorInvocationStatement(baseConstructor, slice));
             }
             else
             {
-                constructor
-                    .CodeBuilder
+                constructor.CodeBuilder
                     .AddStatement(new ConstructorInvocationStatement(emitter.BaseType));
             }
 
@@ -399,16 +394,14 @@ namespace Castle.DynamicProxy.Generators
 
             // initialize fields with an empty interceptor
 
-            constructor
-                .CodeBuilder
+            constructor.CodeBuilder
                 .AddStatement(
                     new AssignStatement(
                         interceptorField,
                         new NewArrayExpression(1, typeof(IInterceptor))
                     )
                 );
-            constructor
-                .CodeBuilder
+            constructor.CodeBuilder
                 .AddStatement(
                     new AssignArrayStatement(
                         interceptorField,
@@ -419,8 +412,7 @@ namespace Castle.DynamicProxy.Generators
 
             // Invoke base constructor
 
-            constructor
-                .CodeBuilder
+            constructor.CodeBuilder
                 .AddStatement(new ConstructorInvocationStatement(defaultConstructor));
 
             constructor.CodeBuilder.AddStatement(new ReturnStatement());
@@ -446,8 +438,7 @@ namespace Castle.DynamicProxy.Generators
             }
             else if (ProxyGenerationOptions.MixinData.ContainsMixin(typeof(IProxyTargetAccessor)))
             {
-                var mixinType = ProxyGenerationOptions
-                    .MixinData
+                var mixinType = ProxyGenerationOptions.MixinData
                     .GetMixinInstance(typeof(IProxyTargetAccessor))
                     .GetType();
                 message = string.Format(

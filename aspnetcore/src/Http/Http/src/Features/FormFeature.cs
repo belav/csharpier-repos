@@ -347,8 +347,7 @@ public class FormFeature : IFormFeature
     {
         // Content-Type: application/x-www-form-urlencoded; charset=utf-8
         return contentType != null
-            && contentType
-                .MediaType
+            && contentType.MediaType
                 .Equals("application/x-www-form-urlencoded", StringComparison.OrdinalIgnoreCase);
     }
 
@@ -358,15 +357,13 @@ public class FormFeature : IFormFeature
     {
         // Content-Type: multipart/form-data; boundary=----WebKitFormBoundarymx2fSWqWSd0OxQqq
         return contentType != null
-            && contentType
-                .MediaType
+            && contentType.MediaType
                 .Equals("multipart/form-data", StringComparison.OrdinalIgnoreCase);
     }
 
     private bool ResolveHasInvalidAntiforgeryValidationFeature()
     {
-        var hasInvokedMiddleware = _request
-            .HttpContext
+        var hasInvokedMiddleware = _request.HttpContext
             .Items
             .ContainsKey("__AntiforgeryMiddlewareWithEndpointInvoked");
         var hasInvalidToken =

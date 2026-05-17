@@ -105,8 +105,7 @@ namespace System.ServiceModel.Security
 
         internal int FindIndexOfSecurityHeader(Message message, string[] actors)
         {
-            return message
-                .Headers
+            return message.Headers
                 .FindHeader(this.HeaderName.Value, this.HeaderNamespace.Value, actors);
         }
 
@@ -119,8 +118,7 @@ namespace System.ServiceModel.Security
             XmlDictionaryReader reader
         )
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(
                     new InvalidOperationException(
                         SR.GetString(SR.SignatureConfirmationNotSupported)
@@ -138,13 +136,11 @@ namespace System.ServiceModel.Security
             MessageDirection direction
         )
         {
-            int headerIndex = message
-                .Headers
+            int headerIndex = message.Headers
                 .FindHeader(this.HeaderName.Value, this.HeaderNamespace.Value, actor);
             if (headerIndex < 0 && String.IsNullOrEmpty(actor))
             {
-                headerIndex = message
-                    .Headers
+                headerIndex = message.Headers
                     .FindHeader(
                         this.HeaderName.Value,
                         this.HeaderNamespace.Value,
@@ -175,8 +171,7 @@ namespace System.ServiceModel.Security
             byte[] signatureConfirmation
         )
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(
                     new InvalidOperationException(
                         SR.GetString(SR.SignatureConfirmationNotSupported)

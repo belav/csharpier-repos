@@ -875,8 +875,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             )
             {
                 var constructor = (MethodSymbol)
-                    method
-                        .DeclaringCompilation
+                    method.DeclaringCompilation
                         .GetWellKnownTypeMember(
                             WellKnownMember.System_NotSupportedException__ctor
                         )!;
@@ -898,8 +897,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             Debug.Assert(symbol is { });
             Debug.Assert(
-                _field
-                    .Type
+                _field.Type
                     .OriginalDefinition
                     .Equals(symbol.ContainingType, TypeCompareKind.AllIgnoreOptions)
             );

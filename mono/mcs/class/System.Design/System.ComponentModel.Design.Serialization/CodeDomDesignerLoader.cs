@@ -50,10 +50,11 @@ namespace System.ComponentModel.Design.Serialization
             base.Initialize();
             base.LoaderHost.AddService(typeof(IDesignerSerializationService), this);
             base.LoaderHost.AddService(typeof(INameCreationService), this);
-            base.LoaderHost.AddService(
-                typeof(ComponentSerializationService),
-                new CodeDomComponentSerializationService(base.LoaderHost)
-            );
+            base.LoaderHost
+                .AddService(
+                    typeof(ComponentSerializationService),
+                    new CodeDomComponentSerializationService(base.LoaderHost)
+                );
             if (
                 this.TypeResolutionService != null
                 && LoaderHost.GetService(typeof(ITypeResolutionService)) == null

@@ -255,9 +255,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     LanguageVersion availableVersion = (
                         (CSharpParseOptions)location.SourceTree.Options
                     ).LanguageVersion;
-                    LanguageVersion requiredVersion = MessageID
-                        .IDS_FeatureStaticAbstractMembersInInterfaces
-                        .RequiredVersion();
+                    LanguageVersion requiredVersion =
+                        MessageID.IDS_FeatureStaticAbstractMembersInInterfaces.RequiredVersion();
 
                     if (availableVersion < requiredVersion)
                     {
@@ -950,11 +949,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             Debug.Assert(containingType.IsDefinition);
             return type is TypeParameterSymbol p
                 && (object)p.ContainingSymbol == containingType
-                && p.ConstraintTypesNoUseSiteDiagnostics.Any(
-                    (typeArgument, containingType) =>
-                        typeArgument.Type.Equals(containingType, ComparisonForUserDefinedOperators),
-                    containingType
-                );
+                && p.ConstraintTypesNoUseSiteDiagnostics
+                    .Any(
+                        (typeArgument, containingType) =>
+                            typeArgument.Type
+                                .Equals(containingType, ComparisonForUserDefinedOperators),
+                        containingType
+                    );
         }
 
         private bool IsSelfConstrainedTypeParameter(TypeSymbol type)

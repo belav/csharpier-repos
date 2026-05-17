@@ -46,8 +46,7 @@ namespace System.IdentityModel.Tokens
 
             if (!actionNamespace.IsAbsoluteUri)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument("actionNamespace", SR.GetString(SR.ID0013));
             }
 
@@ -72,8 +71,7 @@ namespace System.IdentityModel.Tokens
 
                 if (!value.IsAbsoluteUri)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgument("value", SR.GetString(SR.ID0013));
                 }
 

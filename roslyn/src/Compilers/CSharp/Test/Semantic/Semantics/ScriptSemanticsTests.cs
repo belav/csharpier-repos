@@ -1383,8 +1383,7 @@ goto Label;"
         public void Errors_01()
         {
             var code = "System.Console.WriteLine(1);";
-            var compilationUnit = CSharp
-                .SyntaxFactory
+            var compilationUnit = CSharp.SyntaxFactory
                 .ParseCompilationUnit(
                     code,
                     options: new CSharp.CSharpParseOptions(kind: SourceCodeKind.Script)
@@ -1530,8 +1529,7 @@ goto Label;"
         [WorkItem(44418, "https://github.com/dotnet/roslyn/issues/44418")]
         public void Errors_02()
         {
-            var compilationUnit = CSharp
-                .SyntaxFactory
+            var compilationUnit = CSharp.SyntaxFactory
                 .ParseCompilationUnit(
                     "\nSystem.Console.WriteLine(1);",
                     options: new CSharp.CSharpParseOptions(kind: SourceCodeKind.Script)
@@ -1585,8 +1583,7 @@ goto Label;"
         public void Errors_03()
         {
             var code = "System.Console.WriteLine(out var x, x);";
-            var compilationUnit = CSharp
-                .SyntaxFactory
+            var compilationUnit = CSharp.SyntaxFactory
                 .ParseCompilationUnit(
                     code,
                     options: new CSharp.CSharpParseOptions(kind: SourceCodeKind.Script)

@@ -64,8 +64,7 @@ namespace System.Net.Security
                     ReadOnlySpan<byte> protocol = protocols.Slice(1, length);
                     if (protocol.SequenceCompareTo<byte>(applicationProtcol.Protocol.Span) == 0)
                     {
-                        int osStatus = Interop
-                            .AppleCrypto
+                        int osStatus = Interop.AppleCrypto
                             .SslCtxSetAlpnProtocol(context.SslContext, applicationProtcol);
                         if (osStatus == 0)
                         {
@@ -175,8 +174,7 @@ namespace System.Net.Security
                     MemoryHandle memHandle = input.Pin();
                     try
                     {
-                        PAL_TlsIo status = Interop
-                            .AppleCrypto
+                        PAL_TlsIo status = Interop.AppleCrypto
                             .SslWrite(
                                 sslHandle,
                                 (byte*)memHandle.Pointer,
@@ -252,8 +250,7 @@ namespace System.Net.Security
                 {
                     fixed (byte* ptr = buffer)
                     {
-                        PAL_TlsIo status = Interop
-                            .AppleCrypto
+                        PAL_TlsIo status = Interop.AppleCrypto
                             .SslRead(sslHandle, ptr, buffer.Length, out int written);
                         if (status < 0)
                         {

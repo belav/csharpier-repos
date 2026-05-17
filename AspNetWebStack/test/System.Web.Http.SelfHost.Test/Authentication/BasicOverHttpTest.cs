@@ -58,8 +58,7 @@ namespace System.Web.Http
                 // Arrange
                 HttpSelfHostConfiguration config = new HttpSelfHostConfiguration(port.BaseUri);
                 config.HostNameComparisonMode = HostNameComparisonMode.Exact;
-                config
-                    .Routes
+                config.Routes
                     .MapHttpRoute(
                         "Default",
                         "{controller}" + routeSuffix,

@@ -25,8 +25,7 @@ public class InjectJoinWithSelfExpressionMutator : ExpressionMutator
         var expr = _expressionFinder.FoundExpressions[i];
         var elementType = expr.Type.GetGenericArguments()[0];
 
-        var join = QueryableMethods
-            .Join
+        var join = QueryableMethods.Join
             .MakeGenericMethod(elementType, elementType, elementType, elementType);
 
         var outerKeySelectorPrm = Expression.Parameter(elementType, "oks");

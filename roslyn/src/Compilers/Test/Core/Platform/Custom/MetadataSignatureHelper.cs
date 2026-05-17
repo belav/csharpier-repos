@@ -48,20 +48,17 @@ namespace Roslyn.Test.Utilities
             {
                 var typeInfo = type.GetTypeInfo();
                 if (
-                    typeInfo
-                        .GenericParameterAttributes
+                    typeInfo.GenericParameterAttributes
                         .HasFlag(GenericParameterAttributes.ReferenceTypeConstraint)
                 )
                     sb.Append("class ");
                 if (
-                    typeInfo
-                        .GenericParameterAttributes
+                    typeInfo.GenericParameterAttributes
                         .HasFlag(GenericParameterAttributes.NotNullableValueTypeConstraint)
                 )
                     sb.Append("valuetype ");
                 if (
-                    typeInfo
-                        .GenericParameterAttributes
+                    typeInfo.GenericParameterAttributes
                         .HasFlag(GenericParameterAttributes.DefaultConstructorConstraint)
                 )
                     sb.Append(".ctor ");

@@ -56,8 +56,7 @@ namespace System.ServiceModel.Channels
             }
             else
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentException(SR.GetString(SR.SFxBadTransactionProtocols))
                     );
@@ -181,10 +180,8 @@ namespace System.ServiceModel.Channels
         {
             this.ReadIssuedTokens(message, direction);
 
-            TransactionFlowOption txFlowOption = this.factory.GetTransaction(
-                direction,
-                message.Headers.Action
-            );
+            TransactionFlowOption txFlowOption = this.factory
+                .GetTransaction(direction, message.Headers.Action);
             if (TransactionFlowOptionHelper.AllowedOrRequired(txFlowOption))
             {
                 this.ReadTransactionFromMessage(message, txFlowOption);
@@ -193,10 +190,8 @@ namespace System.ServiceModel.Channels
 
         public void WriteTransactionDataToMessage(Message message, MessageDirection direction)
         {
-            TransactionFlowOption txFlowOption = this.factory.GetTransaction(
-                direction,
-                message.Headers.Action
-            );
+            TransactionFlowOption txFlowOption = this.factory
+                .GetTransaction(direction, message.Headers.Action);
             if (TransactionFlowOptionHelper.AllowedOrRequired(txFlowOption))
             {
                 this.WriteTransactionToMessage(message, txFlowOption);
@@ -221,15 +216,13 @@ namespace System.ServiceModel.Channels
                 }
                 catch (TransactionException e)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new ProtocolException(e.Message, e));
                 }
             }
             else if (txFlowOption == TransactionFlowOption.Mandatory)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ProtocolException(SR.GetString(SR.SFxTransactionFlowRequired))
                     );

@@ -1447,8 +1447,7 @@ public abstract class TypeBase
             yield return complexProperty;
 
             foreach (
-                var nestedComplexProperty in complexProperty
-                    .ComplexType
+                var nestedComplexProperty in complexProperty.ComplexType
                     .GetFlattenedComplexProperties()
             )
             {

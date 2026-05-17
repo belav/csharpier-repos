@@ -142,8 +142,7 @@ namespace System
                     {
 #if TARGET_MACCATALYST || TARGET_IOS || TARGET_TVOS
                         if (GlobalizationMode.Hybrid)
-                            return Interop
-                                .Globalization
+                            return Interop.Globalization
                                 .GetTimeZoneDisplayNameNative(
                                     locale,
                                     locale.Length,
@@ -154,8 +153,7 @@ namespace System
                                     buffer.Length
                                 );
 #endif
-                        return Interop
-                            .Globalization
+                        return Interop.Globalization
                             .GetTimeZoneDisplayName(locale, id, type, bufferPtr, buffer.Length);
                     }
                 },
@@ -175,8 +173,7 @@ namespace System
                         {
 #if TARGET_MACCATALYST || TARGET_IOS || TARGET_TVOS
                             if (GlobalizationMode.Hybrid)
-                                return Interop
-                                    .Globalization
+                                return Interop.Globalization
                                     .GetTimeZoneDisplayNameNative(
                                         locale,
                                         locale.Length,
@@ -187,8 +184,7 @@ namespace System
                                         buffer.Length
                                     );
 #endif
-                            return Interop
-                                .Globalization
+                            return Interop.Globalization
                                 .GetTimeZoneDisplayName(locale, id, type, bufferPtr, buffer.Length);
                         }
                     },
@@ -330,8 +326,7 @@ namespace System
             // See if we should include the exemplar city name.
             string exemplarCityName = GetExemplarCityName(timeZoneId, uiCulture.Name);
             if (
-                uiCulture
-                    .CompareInfo
+                uiCulture.CompareInfo
                     .IndexOf(
                         genericName,
                         exemplarCityName,

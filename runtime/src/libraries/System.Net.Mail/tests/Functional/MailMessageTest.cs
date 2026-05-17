@@ -27,8 +27,7 @@ namespace System.Net.Mail.Tests
             messageWithSubjectAndBody = new MailMessage("from@example.com", "to@example.com");
             messageWithSubjectAndBody.Subject = "the subject";
             messageWithSubjectAndBody.Body = "hello";
-            messageWithSubjectAndBody
-                .AlternateViews
+            messageWithSubjectAndBody.AlternateViews
                 .Add(
                     AlternateView.CreateAlternateViewFromString(
                         "<html><body>hello</body></html>",
@@ -243,8 +242,7 @@ blah blah
                 message.Attachments.Add(new Attachment(tempFile.Path));
 
                 string attachment = DecodeSentMailMessage(message).Attachment;
-                string decodedAttachment = Encoding
-                    .UTF8
+                string decodedAttachment = Encoding.UTF8
                     .GetString(Convert.FromBase64String(attachment));
 
                 // Make sure last byte is not encoded twice.

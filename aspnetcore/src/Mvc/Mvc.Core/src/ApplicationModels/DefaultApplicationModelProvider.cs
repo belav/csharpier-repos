@@ -160,8 +160,7 @@ internal class DefaultApplicationModelProvider : IApplicationModelProvider
 
         AddRange(controllerModel.Selectors, CreateSelectors(attributes));
 
-        controllerModel.ControllerName = typeInfo
-            .Name
+        controllerModel.ControllerName = typeInfo.Name
             .EndsWith("Controller", StringComparison.OrdinalIgnoreCase)
             ? typeInfo.Name.Substring(0, typeInfo.Name.Length - "Controller".Length)
             : typeInfo.Name;
@@ -170,8 +169,7 @@ internal class DefaultApplicationModelProvider : IApplicationModelProvider
 
         foreach (var routeValueProvider in attributes.OfType<IRouteValueProvider>())
         {
-            controllerModel
-                .RouteValues
+            controllerModel.RouteValues
                 .Add(routeValueProvider.RouteKey, routeValueProvider.RouteValue);
         }
 

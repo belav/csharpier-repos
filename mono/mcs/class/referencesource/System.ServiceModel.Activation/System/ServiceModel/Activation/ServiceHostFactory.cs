@@ -40,8 +40,7 @@ namespace System.ServiceModel.Activation
         {
             if (!AspNetEnvironment.Enabled)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new InvalidOperationException(
                             SR.Hosting_ProcessNotExecutingUnderHostedContext(
@@ -53,8 +52,7 @@ namespace System.ServiceModel.Activation
 
             if (string.IsNullOrEmpty(constructorString))
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .Argument("constructorString", SR.Hosting_ServiceTypeNotProvided);
             }
 
@@ -111,8 +109,7 @@ namespace System.ServiceModel.Activation
 
             if (type == null)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new InvalidOperationException(
                             SR.Hosting_ServiceTypeNotResolved(constructorString)

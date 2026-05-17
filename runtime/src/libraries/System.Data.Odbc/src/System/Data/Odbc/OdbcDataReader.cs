@@ -47,8 +47,7 @@ namespace System.Data.Odbc
         private long _sequentialBytesRead;
 
         private static int s_objectTypeCount; // Bid counter
-        internal readonly int ObjectID = System
-            .Threading
+        internal readonly int ObjectID = System.Threading
             .Interlocked
             .Increment(ref s_objectTypeCount);
 

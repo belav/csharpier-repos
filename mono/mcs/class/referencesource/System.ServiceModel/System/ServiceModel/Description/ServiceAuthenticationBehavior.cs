@@ -94,8 +94,7 @@ namespace System.ServiceModel.Description
                     parameters.Find<ServiceAuthenticationManager>();
                 if (otherAuthenticationManager != null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(
@@ -121,8 +120,7 @@ namespace System.ServiceModel.Description
                         != authenticationSchemes
                     )
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(
                                     SR.GetString(
@@ -148,12 +146,10 @@ namespace System.ServiceModel.Description
         )
         {
             if (description == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("description"));
             if (serviceHostBase == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("serviceHostBase"));
 
             if (this.serviceAuthenticationManager == null)
@@ -197,8 +193,7 @@ namespace System.ServiceModel.Description
                                         this.serviceAuthenticationManager,
                                         new string[]
                                         {
-                                            standardsManager
-                                                .SecureConversationDriver
+                                            standardsManager.SecureConversationDriver
                                                 .CloseAction
                                                 .Value,
                                         }
@@ -224,8 +219,7 @@ namespace System.ServiceModel.Description
         {
             if (this.isReadOnly)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
                     );
@@ -287,8 +281,7 @@ namespace System.ServiceModel.Description
                 .Find<SecurityBindingElement>();
             if (securityBindingElement == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument("binding", SR.GetString(SR.NoSecurityBindingElementFound));
             }
 

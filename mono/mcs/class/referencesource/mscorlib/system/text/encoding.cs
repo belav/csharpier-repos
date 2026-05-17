@@ -1503,15 +1503,13 @@ namespace System.Text
         public virtual unsafe int GetChars(ReadOnlySpan<byte> bytes, Span<char> chars)
         {
             fixed (
-                byte* bytesPtr = &System
-                    .Runtime
+                byte* bytesPtr = &System.Runtime
                     .InteropServices
                     .MemoryMarshal
                     .GetNonNullPinnableReference(bytes)
             )
             fixed (
-                char* charsPtr = &System
-                    .Runtime
+                char* charsPtr = &System.Runtime
                     .InteropServices
                     .MemoryMarshal
                     .GetNonNullPinnableReference(chars)
@@ -1524,8 +1522,7 @@ namespace System.Text
         public unsafe string GetString(ReadOnlySpan<byte> bytes)
         {
             fixed (
-                byte* bytesPtr = &System
-                    .Runtime
+                byte* bytesPtr = &System.Runtime
                     .InteropServices
                     .MemoryMarshal
                     .GetNonNullPinnableReference(bytes)

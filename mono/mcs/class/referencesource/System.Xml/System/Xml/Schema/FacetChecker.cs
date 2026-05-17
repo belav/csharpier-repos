@@ -244,8 +244,7 @@ namespace System.Xml.Schema
                 {
                     derivedRestriction.Enumeration = new ArrayList();
                 }
-                derivedRestriction
-                    .Enumeration
+                derivedRestriction.Enumeration
                     .Add(
                         ParseFacetValue(
                             datatype,
@@ -558,8 +557,7 @@ namespace System.Xml.Schema
                             regStr.Insert(0, "(");
                             regStr.Append(")");
                         }
-                        derivedRestriction
-                            .Patterns
+                        derivedRestriction.Patterns
                             .Add(new Regex(Preprocess(regStr.ToString()), RegexOptions.None));
                     }
                     catch (Exception e)

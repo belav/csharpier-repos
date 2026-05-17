@@ -191,8 +191,7 @@ namespace BinderTracingTests
             {
                 lock (eventsLock)
                 {
-                    var events = bindOperations
-                        .Values
+                    var events = bindOperations.Values
                         .Where(e =>
                             e.Completed
                             && Helpers.AssemblyNamesMatch(e.AssemblyName, assemblyName)
@@ -400,9 +399,8 @@ namespace BinderTracingTests
 
         private bool IsLoadToTrack(string name)
         {
-            return this.loadsToTrack.Any(n =>
-                n.Equals(name, StringComparison.InvariantCultureIgnoreCase)
-            );
+            return this.loadsToTrack
+                .Any(n => n.Equals(name, StringComparison.InvariantCultureIgnoreCase));
         }
 
         private string GetMissingAssemblyBindStartMessage(

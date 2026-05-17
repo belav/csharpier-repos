@@ -153,8 +153,7 @@ namespace Microsoft.CodeAnalysis
         /// The list of all other projects within the same solution that this project references.
         /// </summary>
         public IEnumerable<ProjectReference> ProjectReferences =>
-            _projectState
-                .ProjectReferences
+            _projectState.ProjectReferences
                 .Where(pr => this.Solution.ContainsProject(pr.ProjectId));
 
         /// <summary>
@@ -338,14 +337,12 @@ namespace Microsoft.CodeAnalysis
             IEnumerable<SourceGeneratedDocument>
         > GetSourceGeneratedDocumentsAsync(CancellationToken cancellationToken = default)
         {
-            var generatedDocumentStates = await _solution
-                .State
+            var generatedDocumentStates = await _solution.State
                 .GetSourceGeneratedDocumentStatesAsync(this.State, cancellationToken)
                 .ConfigureAwait(false);
 
             // return an iterator to avoid eagerly allocating all the document instances
-            return generatedDocumentStates
-                .States
+            return generatedDocumentStates.States
                 .Values
                 .Select(state =>
                     ImmutableHashMapExtensions.GetOrAdd(
@@ -392,8 +389,7 @@ namespace Microsoft.CodeAnalysis
                 return sourceGeneratedDocument;
 
             // We'll have to run generators if we haven't already and now try to find it.
-            var generatedDocumentStates = await _solution
-                .State
+            var generatedDocumentStates = await _solution.State
                 .GetSourceGeneratedDocumentStatesAsync(State, cancellationToken)
                 .ConfigureAwait(false);
             var generatedDocumentState = generatedDocumentStates.GetState(documentId);
@@ -440,8 +436,7 @@ namespace Microsoft.CodeAnalysis
 
             // Trickier case now: it's possible we generated this, but we don't actually have the SourceGeneratedDocument for it, so let's go
             // try to fetch the state.
-            var documentState = _solution
-                .State
+            var documentState = _solution.State
                 .TryGetSourceGeneratedDocumentStateForAlreadyGeneratedId(documentId);
             if (documentState == null)
                 return null;
@@ -458,8 +453,7 @@ namespace Microsoft.CodeAnalysis
             CancellationToken cancellationToken
         )
         {
-            return _solution
-                .State
+            return _solution.State
                 .GetSourceGeneratorDiagnosticsAsync(this.State, cancellationToken);
         }
 
@@ -600,8 +594,7 @@ namespace Microsoft.CodeAnalysis
             Project,
             AnalyzerConfigDocument?
         > s_tryCreateAnalyzerConfigDocumentFunction = (documentId, project) =>
-            project
-                ._projectState
+            project._projectState
                 .AnalyzerConfigDocumentStates
                 .TryGetState(documentId, out var state)
                 ? new AnalyzerConfigDocument(project, state)

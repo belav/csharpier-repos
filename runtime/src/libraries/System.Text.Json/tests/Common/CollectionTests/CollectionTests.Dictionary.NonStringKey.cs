@@ -765,23 +765,19 @@ namespace System.Text.Json.Serialization.Tests
             // Via converter directly
             var writer = new Utf8JsonWriter(Stream.Null);
             Assert.Throws<ArgumentNullException>(() =>
-                JsonMetadataServices
-                    .ObjectConverter
+                JsonMetadataServices.ObjectConverter
                     .WriteAsPropertyName(writer, null, JsonSerializerOptions.Default)
             );
             Assert.Throws<ArgumentNullException>(() =>
-                JsonMetadataServices
-                    .StringConverter
+                JsonMetadataServices.StringConverter
                     .WriteAsPropertyName(writer, null, JsonSerializerOptions.Default)
             );
             Assert.Throws<ArgumentNullException>(() =>
-                JsonMetadataServices
-                    .UriConverter
+                JsonMetadataServices.UriConverter
                     .WriteAsPropertyName(writer, null, JsonSerializerOptions.Default)
             );
             Assert.Throws<ArgumentNullException>(() =>
-                JsonMetadataServices
-                    .VersionConverter
+                JsonMetadataServices.VersionConverter
                     .WriteAsPropertyName(writer, null, JsonSerializerOptions.Default)
             );
         }

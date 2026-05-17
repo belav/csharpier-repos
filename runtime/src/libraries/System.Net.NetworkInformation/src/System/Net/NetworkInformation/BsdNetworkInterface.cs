@@ -148,8 +148,7 @@ namespace System.Net.NetworkInformation
                 // Because these callbacks are executed in a reverse-PInvoke, we do not want any exceptions
                 // to propagate out, because they will not be catchable. Instead, we track all the exceptions
                 // that are thrown in these callbacks, and aggregate them at the end.
-                int result = Interop
-                    .Sys
+                int result = Interop.Sys
                     .EnumerateInterfaceAddresses(
                         &context,
                         &ProcessIpv4Address,

@@ -228,8 +228,7 @@ namespace System.Data.Common
             if (Helper.IsPrimitiveType(fromType.EdmType))
             {
                 PrimitiveType fromPrimitiveType = (PrimitiveType)fromType.EdmType;
-                IList<PrimitiveType> promotableTypes = EdmProviderManifest
-                    .Instance
+                IList<PrimitiveType> promotableTypes = EdmProviderManifest.Instance
                     .GetPromotionTypes(fromPrimitiveType);
                 int index = promotableTypes.IndexOf(fromPrimitiveType);
                 if (-1 != index && index + 1 < promotableTypes.Count)
@@ -949,8 +948,7 @@ namespace System.Data.Common
         )
         {
             TypeUsage typeusage;
-            PrimitiveType primitiveType = EdmProviderManifest
-                .Instance
+            PrimitiveType primitiveType = EdmProviderManifest.Instance
                 .GetPrimitiveType(primitiveTypeKind);
             switch (primitiveTypeKind)
             {

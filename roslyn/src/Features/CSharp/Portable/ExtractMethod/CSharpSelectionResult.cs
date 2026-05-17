@@ -39,14 +39,12 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
             var firstTokenAnnotation = new SyntaxAnnotation();
             var lastTokenAnnotation = new SyntaxAnnotation();
 
-            var root = await document
-                .Document
+            var root = await document.Document
                 .GetSyntaxRootAsync(cancellationToken)
                 .ConfigureAwait(false);
             var newDocument = await SemanticDocument
                 .CreateAsync(
-                    document
-                        .Document
+                    document.Document
                         .WithSyntaxRoot(
                             AddAnnotations(
                                 root,
@@ -207,8 +205,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
             Contract.ThrowIfNull(statement);
             var firstStatementUnderContainer = GetFirstStatementUnderContainer();
             Contract.ThrowIfFalse(
-                CSharpSyntaxFacts
-                    .Instance
+                CSharpSyntaxFacts.Instance
                     .AreStatementsInSameContainer(statement, firstStatementUnderContainer)
             );
 

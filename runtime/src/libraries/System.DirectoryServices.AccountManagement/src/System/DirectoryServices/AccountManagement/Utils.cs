@@ -344,8 +344,7 @@ namespace System.DirectoryServices.AccountManagement
 
                     // Does the user SID have the same domain as the machine SID?
                     bool sameDomain = false;
-                    bool success = Interop
-                        .Advapi32
+                    bool success = Interop.Advapi32
                         .EqualDomainSid(pCopyOfUserSid, pMachineDomainSid, ref sameDomain);
 
                     // Since both pCopyOfUserSid and pMachineDomainSid should always be account SIDs
@@ -384,8 +383,7 @@ namespace System.DirectoryServices.AccountManagement
 
                 // Get the current thread's token
                 if (
-                    !Interop
-                        .Advapi32
+                    !Interop.Advapi32
                         .OpenThreadToken(
                             Interop.Kernel32.GetCurrentThread(),
                             TokenAccessLevels.Query,
@@ -401,8 +399,7 @@ namespace System.DirectoryServices.AccountManagement
 
                         // Current thread doesn't have a token, try the process
                         if (
-                            !Interop
-                                .Advapi32
+                            !Interop.Advapi32
                                 .OpenProcessToken(
                                     Interop.Kernel32.GetCurrentProcess(),
                                     (int)TokenAccessLevels.Query,
@@ -442,8 +439,7 @@ namespace System.DirectoryServices.AccountManagement
 
                 // Retrieve the user info from the current thread's token
                 // First, determine how big a buffer we need.
-                bool success = Interop
-                    .Advapi32
+                bool success = Interop.Advapi32
                     .GetTokenInformation(
                         tokenHandle.DangerousGetHandle(),
                         (uint)Interop.Advapi32.TOKEN_INFORMATION_CLASS.TokenUser,
@@ -472,8 +468,7 @@ namespace System.DirectoryServices.AccountManagement
                 pBuffer = Marshal.AllocHGlobal((int)neededBufferSize);
 
                 // Load the user info into the buffer
-                success = Interop
-                    .Advapi32
+                success = Interop.Advapi32
                     .GetTokenInformation(
                         tokenHandle.DangerousGetHandle(),
                         (uint)Interop.Advapi32.TOKEN_INFORMATION_CLASS.TokenUser,
@@ -544,8 +539,7 @@ namespace System.DirectoryServices.AccountManagement
             {
                 Interop.OBJECT_ATTRIBUTES oa = default;
 
-                uint err = Interop
-                    .Advapi32
+                uint err = Interop.Advapi32
                     .LsaOpenPolicy(
                         SystemName: null,
                         ref oa,
@@ -570,8 +564,7 @@ namespace System.DirectoryServices.AccountManagement
                 }
 
                 Debug.Assert(!policyHandle.IsInvalid);
-                err = Interop
-                    .Advapi32
+                err = Interop.Advapi32
                     .LsaQueryInformationPolicy(
                         policyHandle.DangerousGetHandle(),
                         5, // PolicyAccountDomainInformation
@@ -638,8 +631,7 @@ namespace System.DirectoryServices.AccountManagement
         internal static string GetNT4UserName()
         {
             using (
-                WindowsIdentity currentIdentity = System
-                    .Security
+                WindowsIdentity currentIdentity = System.Security
                     .Principal
                     .WindowsIdentity
                     .GetCurrent()
@@ -675,8 +667,7 @@ namespace System.DirectoryServices.AccountManagement
 
             try
             {
-                int err = Interop
-                    .Logoncli
+                int err = Interop.Logoncli
                     .DsGetDcName(
                         computerName,
                         domainName,
@@ -746,8 +737,7 @@ namespace System.DirectoryServices.AccountManagement
                         )
                 );
 
-                int f = Interop
-                    .Advapi32
+                int f = Interop.Advapi32
                     .LookupAccountSid(
                         serverName,
                         sid,
@@ -777,8 +767,7 @@ namespace System.DirectoryServices.AccountManagement
                 fixed (char* sbName = new char[nameLength])
                 fixed (char* sbDomainName = new char[domainNameLength])
                 {
-                    f = Interop
-                        .Advapi32
+                    f = Interop.Advapi32
                         .LookupAccountSid(
                             serverName,
                             sid,
@@ -939,8 +928,7 @@ namespace System.DirectoryServices.AccountManagement
                 "BeginImpersonation: trying to impersonate " + userName
             );
 
-            int result = Interop
-                .Advapi32
+            int result = Interop.Advapi32
                 .LogonUser(
                     userName,
                     domainName,
@@ -1001,12 +989,10 @@ namespace System.DirectoryServices.AccountManagement
 
             try
             {
-                err = Interop
-                    .Dsrole
+                err = Interop.Dsrole
                     .DsRoleGetPrimaryDomainInformation(
                         computerName,
-                        Interop
-                            .Dsrole
+                        Interop.Dsrole
                             .DSROLE_PRIMARY_DOMAIN_INFO_LEVEL
                             .DsRolePrimaryDomainInfoBasic,
                         out dsRoleInfoPtr
@@ -1035,8 +1021,7 @@ namespace System.DirectoryServices.AccountManagement
                     dsRolePrimaryDomainInfo.MachineRole
                         == UnsafeNativeMethods.DSROLE_MACHINE_ROLE.DsRole_RoleBackupDomainController
                     || dsRolePrimaryDomainInfo.MachineRole
-                        == UnsafeNativeMethods
-                            .DSROLE_MACHINE_ROLE
+                        == UnsafeNativeMethods.DSROLE_MACHINE_ROLE
                             .DsRole_RolePrimaryDomainController
                 );
             }

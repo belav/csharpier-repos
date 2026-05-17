@@ -84,8 +84,7 @@ namespace System.Net.PeerToPeer.Collaboration
             //
             if ((m_endPoint != null) && (m_endPoint.AddressFamily != AddressFamily.InterNetworkV6))
             {
-                Logging
-                    .P2PTraceSource
+                Logging.P2PTraceSource
                     .TraceEvent(
                         TraceEventType.Error,
                         0,
@@ -136,8 +135,7 @@ namespace System.Net.PeerToPeer.Collaboration
                     && (m_endPoint.AddressFamily != AddressFamily.InterNetworkV6)
                 )
                 {
-                    Logging
-                        .P2PTraceSource
+                    Logging.P2PTraceSource
                         .TraceEvent(
                             TraceEventType.Error,
                             0,
@@ -236,8 +234,7 @@ namespace System.Net.PeerToPeer.Collaboration
         [System.Security.SecurityCritical]
         private void AddNameChanged(EventHandler<NameChangedEventArgs> callback)
         {
-            Logging
-                .P2PTraceSource
+            Logging.P2PTraceSource
                 .TraceEvent(TraceEventType.Information, 0, "Entering AddNameChanged().");
 
             //
@@ -277,8 +274,7 @@ namespace System.Net.PeerToPeer.Collaboration
                     );
                     if (errorCode != 0)
                     {
-                        Logging
-                            .P2PTraceSource
+                        Logging.P2PTraceSource
                             .TraceEvent(
                                 TraceEventType.Error,
                                 0,
@@ -294,8 +290,7 @@ namespace System.Net.PeerToPeer.Collaboration
                 m_nameChanged += callback;
             }
 
-            Logging
-                .P2PTraceSource
+            Logging.P2PTraceSource
                 .TraceEvent(TraceEventType.Information, 0, "AddNameChanged() successful.");
         }
 
@@ -306,8 +301,7 @@ namespace System.Net.PeerToPeer.Collaboration
         [System.Security.SecurityCritical]
         private void RemoveNameChanged(EventHandler<NameChangedEventArgs> callback)
         {
-            Logging
-                .P2PTraceSource
+            Logging.P2PTraceSource
                 .TraceEvent(TraceEventType.Information, 0, "RemoveNameChanged() called.");
             lock (LockNameChangedEvent)
             {
@@ -319,8 +313,7 @@ namespace System.Net.PeerToPeer.Collaboration
                         ref m_safeNameChangedEvent,
                         ref m_nameChangedEvent
                     );
-                    Logging
-                        .P2PTraceSource
+                    Logging.P2PTraceSource
                         .TraceEvent(
                             TraceEventType.Information,
                             0,
@@ -328,8 +321,7 @@ namespace System.Net.PeerToPeer.Collaboration
                         );
                 }
             }
-            Logging
-                .P2PTraceSource
+            Logging.P2PTraceSource
                 .TraceEvent(TraceEventType.Information, 0, "RemoveNameChanged() successful.");
         }
 
@@ -351,8 +343,7 @@ namespace System.Net.PeerToPeer.Collaboration
             SafeCollabData eventData = null;
             int errorCode = 0;
 
-            Logging
-                .P2PTraceSource
+            Logging.P2PTraceSource
                 .TraceEvent(TraceEventType.Information, 0, "NameChangedCallback() called.");
 
             if (m_Disposed)
@@ -381,8 +372,7 @@ namespace System.Net.PeerToPeer.Collaboration
                         break;
                     else if (errorCode != 0)
                     {
-                        Logging
-                            .P2PTraceSource
+                        Logging.P2PTraceSource
                             .TraceEvent(
                                 TraceEventType.Error,
                                 0,
@@ -455,8 +445,7 @@ namespace System.Net.PeerToPeer.Collaboration
                     Name = nameChangedArgs.PeerEndPoint.Name;
                 }
             }
-            Logging
-                .P2PTraceSource
+            Logging.P2PTraceSource
                 .TraceEvent(TraceEventType.Information, 0, "Leaving NameChangedCallback().");
         }
 
@@ -473,8 +462,7 @@ namespace System.Net.PeerToPeer.Collaboration
                     );
                 else
                     handlerCopy(this, nameChangedArgs);
-                Logging
-                    .P2PTraceSource
+                Logging.P2PTraceSource
                     .TraceEvent(
                         TraceEventType.Information,
                         0,
@@ -563,8 +551,7 @@ namespace System.Net.PeerToPeer.Collaboration
                     ref m_safeNameChangedEvent,
                     ref m_nameChangedEvent
                 );
-                Logging
-                    .P2PTraceSource
+                Logging.P2PTraceSource
                     .TraceEvent(
                         TraceEventType.Information,
                         0,
@@ -605,19 +592,16 @@ namespace System.Net.PeerToPeer.Collaboration
 
         internal void TracePeerEndPoint()
         {
-            Logging
-                .P2PTraceSource
+            Logging.P2PTraceSource
                 .TraceEvent(TraceEventType.Information, 0, "Contents of the PeerEndPoint");
-            Logging
-                .P2PTraceSource
+            Logging.P2PTraceSource
                 .TraceEvent(
                     TraceEventType.Information,
                     0,
                     "\tEndPoint: {0}",
                     (EndPoint != null ? EndPoint.ToString() : null)
                 );
-            Logging
-                .P2PTraceSource
+            Logging.P2PTraceSource
                 .TraceEvent(TraceEventType.Information, 0, "\tDescription: {0}", Name);
         }
     }

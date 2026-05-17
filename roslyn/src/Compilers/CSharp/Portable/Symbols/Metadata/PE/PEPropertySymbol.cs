@@ -179,8 +179,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
 
             if (propEx != null || isBad)
             {
-                result
-                    ._lazyCachedUseSiteInfo
+                result._lazyCachedUseSiteInfo
                     .Initialize(new CSDiagnosticInfo(ErrorCode.ERR_BindToBogus, result));
             }
 
@@ -375,9 +374,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                 return propertyParams.Any(p =>
                     (
                         !p.RefCustomModifiers.IsDefaultOrEmpty
-                        && p.RefCustomModifiers.Any(static m =>
-                            !m.IsOptional && !m.Modifier.IsWellKnownTypeInAttribute()
-                        )
+                        && p.RefCustomModifiers
+                            .Any(static m =>
+                                !m.IsOptional && !m.Modifier.IsWellKnownTypeInAttribute()
+                            )
                     ) || p.CustomModifiers.AnyRequired()
                 );
             }
@@ -530,9 +530,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
 
                             if (
                                 !crossedAssemblyBoundaryWithoutInternalsVisibleTo
-                                && !curr.ContainingAssembly.HasInternalAccessTo(
-                                    next.ContainingAssembly
-                                )
+                                && !curr.ContainingAssembly
+                                    .HasInternalAccessTo(next.ContainingAssembly)
                             )
                             {
                                 crossedAssemblyBoundaryWithoutInternalsVisibleTo = true;
@@ -638,8 +637,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                 if (!_flags.TryGetHasRequiredMemberAttribute(out bool hasRequiredMemberAttribute))
                 {
                     var containingPEModuleSymbol = (PEModuleSymbol)this.ContainingModule;
-                    hasRequiredMemberAttribute = containingPEModuleSymbol
-                        .Module
+                    hasRequiredMemberAttribute = containingPEModuleSymbol.Module
                         .HasAttribute(_handle, AttributeDescription.RequiredMemberAttribute);
                     _flags.SetHasRequiredMemberAttribute(hasRequiredMemberAttribute);
                 }
@@ -655,8 +653,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                 if (!_flags.TryGetHasUnscopedRefAttribute(out bool hasUnscopedRefAttribute))
                 {
                     var containingPEModuleSymbol = (PEModuleSymbol)this.ContainingModule;
-                    hasUnscopedRefAttribute = containingPEModuleSymbol
-                        .Module
+                    hasUnscopedRefAttribute = containingPEModuleSymbol.Module
                         .HasUnscopedRefAttribute(_handle);
                     _flags.SetHasUnscopedRefAttribute(hasUnscopedRefAttribute);
                 }
@@ -752,8 +749,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
         {
             get
             {
-                return _containingType
-                    .ContainingPEModule
+                return _containingType.ContainingPEModule
                     .MetadataLocation
                     .Cast<MetadataLocation, Location>();
             }

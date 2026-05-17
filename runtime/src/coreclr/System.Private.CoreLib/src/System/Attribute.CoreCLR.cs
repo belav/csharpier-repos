@@ -117,8 +117,7 @@ namespace System
                 {
                     // There is a public overload of Type.GetProperty that takes both a BingingFlags enum and a return type.
                     // However, we cannot use that because it doesn't accept null for "types".
-                    return rtPropAccessor
-                        .DeclaringType!
+                    return rtPropAccessor.DeclaringType!
                         .GetProperty(
                             property.Name,
                             BindingFlags.Public

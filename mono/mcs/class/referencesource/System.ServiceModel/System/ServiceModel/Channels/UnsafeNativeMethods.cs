@@ -1300,8 +1300,7 @@ namespace System.ServiceModel.Channels
             IntPtr hModule = GetModuleHandle(moduleName);
             if (hModule == IntPtr.Zero)
             {
-                System
-                    .Diagnostics
+                System.Diagnostics
                     .Debug
                     .Assert(hModule != IntPtr.Zero, "GetModuleHandle failed.  Dll isn't loaded?");
                 return false;

@@ -113,8 +113,7 @@ namespace System.Security.Cryptography.Asn1.Pkcs7
             ReadOnlySpan<byte> tmpSpan;
 
             decoded.ContentType = sequenceReader.ReadObjectIdentifier();
-            System
-                .Security
+            System.Security
                 .Cryptography
                 .Asn1
                 .AlgorithmIdentifierAsn

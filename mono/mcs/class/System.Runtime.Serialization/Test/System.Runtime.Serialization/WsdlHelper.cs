@@ -68,8 +68,7 @@ namespace MonoTests.System.Runtime.Serialization
             var doc = (WebServices.Description.ServiceDescription)dr.ReadDocument(stream);
 
             var metadata = new MetadataSet();
-            metadata
-                .MetadataSections
+            metadata.MetadataSections
                 .Add(new MetadataSection(MetadataSection.ServiceDescriptionDialect, "", doc));
             return metadata;
         }

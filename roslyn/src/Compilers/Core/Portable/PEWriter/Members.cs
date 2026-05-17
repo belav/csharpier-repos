@@ -999,8 +999,7 @@ namespace Microsoft.Cci
             if (method?.IsStatic == true)
             {
                 foreach (
-                    var methodImplementation in method
-                        .ContainingTypeDefinition
+                    var methodImplementation in method.ContainingTypeDefinition
                         .GetExplicitImplementationOverrides(context)
                 )
                 {

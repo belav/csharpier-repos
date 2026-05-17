@@ -100,8 +100,7 @@ namespace System.ServiceModel.Security.Tokens
         )
         {
             if (length != 16 && length != 24 && length != 32)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentException(SR.GetString(SR.Psha1KeyLengthInvalid, length * 8))
                     );
@@ -241,8 +240,7 @@ namespace System.ServiceModel.Security.Tokens
                 if (this.securityKeys == null)
                 {
 #pragma warning suppress 56503
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(SR.GetString(SR.DerivedKeyNotInitialized))
                         );
@@ -280,8 +278,7 @@ namespace System.ServiceModel.Security.Tokens
             using (XmlTextWriter xmlWriter = new XmlTextWriter(writer))
             {
                 xmlWriter.Formatting = Formatting.Indented;
-                SecurityStandardsManager
-                    .DefaultInstance
+                SecurityStandardsManager.DefaultInstance
                     .SecurityTokenSerializer
                     .WriteKeyIdentifierClause(
                         XmlDictionaryWriter.CreateDictionaryWriter(xmlWriter),
@@ -340,14 +337,12 @@ namespace System.ServiceModel.Security.Tokens
             }
             if (tokenToDeriveIdentifier == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("tokentoDeriveIdentifier");
             }
             if (!SecurityUtils.IsSupportedAlgorithm(derivationAlgorithm, tokenToDerive))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentException(SR.GetString(SR.DerivedKeyCannotDeriveFromSecret))
                     );
@@ -358,20 +353,17 @@ namespace System.ServiceModel.Security.Tokens
             }
             if (length == -1)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentOutOfRangeException("length"));
             }
             if (offset == -1 && generation == -1)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(SR.GetString(SR.DerivedKeyPosAndGenNotSpecified));
             }
             if (offset >= 0 && generation >= 0)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(SR.GetString(SR.DerivedKeyPosAndGenBothSpecified));
             }
 
@@ -399,8 +391,7 @@ namespace System.ServiceModel.Security.Tokens
             }
             if (this.length > maxKeyLength)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(
                         SR.GetString(SR.DerivedKeyLengthTooLong, this.length, maxKeyLength)
                     );
@@ -416,8 +407,7 @@ namespace System.ServiceModel.Security.Tokens
             );
             if ((this.key == null) || (this.key.Length == 0))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(SR.GetString(SR.DerivedKeyCannotDeriveFromSecret));
             }
             List<SecurityKey> temp = new List<SecurityKey>(1);
@@ -442,8 +432,7 @@ namespace System.ServiceModel.Security.Tokens
             {
                 if (offset > maxOffset)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperWarning(
                             new MessageSecurityException(
                                 SR.GetString(SR.DerivedKeyTokenOffsetTooHigh, offset, maxOffset)
@@ -459,8 +448,7 @@ namespace System.ServiceModel.Security.Tokens
                     || effectiveOffset > maxOffset
                 )
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperWarning(
                             new MessageSecurityException(
                                 SR.GetString(

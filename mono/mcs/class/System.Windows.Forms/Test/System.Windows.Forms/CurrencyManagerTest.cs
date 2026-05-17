@@ -569,8 +569,7 @@ namespace MonoTests.System.Windows.Forms.DataBinding
 
             dataset.Tables.Add(sports);
             dataset.Tables.Add(athletes);
-            dataset
-                .Relations
+            dataset.Relations
                 .Add("AthletesSports", sports.Columns["SportID"], athletes.Columns["Sport"]);
 
             BindingContext bc = new BindingContext();
@@ -1133,14 +1132,11 @@ namespace MonoTests.System.Windows.Forms.DataBinding
             dataset.Tables.Add(dt1);
             dataset.Tables.Add(dt2);
             dataset.Tables.Add(dt3);
-            dataset
-                .Relations
+            dataset.Relations
                 .Add("Customer_Orders", dt1.Columns["CustomerID"], dt2.Columns["CustomerID"]);
-            dataset
-                .Relations
+            dataset.Relations
                 .Add("Customer_Addresses", dt1.Columns["CustomerID"], dt3.Columns["CustomerID"]);
-            dataset
-                .Relations
+            dataset.Relations
                 .Add("Address_Orders", dt3.Columns["AddressID"], dt2.Columns["AddressID"]);
 
             return dataset;

@@ -430,8 +430,7 @@ namespace System.Windows.Forms.Theming.Default
             );
 
             // draw sunken effect
-            ThemeEngine
-                .Current
+            ThemeEngine.Current
                 .CPDrawBorder3D(
                     g,
                     checkbox_rectangle,
@@ -476,8 +475,7 @@ namespace System.Windows.Forms.Theming.Default
             g.FillRectangle(ResPool.GetSolidBrush(backColor), fill_rectangle);
 
             // draw sunken effect
-            ThemeEngine
-                .Current
+            ThemeEngine.Current
                 .CPDrawBorder3D(
                     g,
                     checkbox_rectangle,

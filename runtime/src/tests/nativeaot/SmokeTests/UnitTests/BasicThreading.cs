@@ -185,28 +185,29 @@ class ThreadStaticsTestWithTasks
         Task[] tasks = new Task[TotalTaskCount];
         for (int i = 0; i < tasks.Length; ++i)
         {
-            tasks[i] = Task.Factory.StartNew(
-                (param) =>
-                {
-                    int index = (int)param;
-                    int intTestValue = index * 10;
-                    string stringTestValue = "ThreadStaticsTestWithTasks" + index;
-
-                    // Try to run the on every other task
-                    if ((index % 2) == 0)
+            tasks[i] = Task.Factory
+                .StartNew(
+                    (param) =>
                     {
-                        lock (lockObject)
+                        int index = (int)param;
+                        int intTestValue = index * 10;
+                        string stringTestValue = "ThreadStaticsTestWithTasks" + index;
+
+                        // Try to run the on every other task
+                        if ((index % 2) == 0)
+                        {
+                            lock (lockObject)
+                            {
+                                SimpleReadWriteThreadStaticTest.Run(intTestValue, stringTestValue);
+                            }
+                        }
+                        else
                         {
                             SimpleReadWriteThreadStaticTest.Run(intTestValue, stringTestValue);
                         }
-                    }
-                    else
-                    {
-                        SimpleReadWriteThreadStaticTest.Run(intTestValue, stringTestValue);
-                    }
-                },
-                i
-            );
+                    },
+                    i
+                );
         }
         for (int i = 0; i < tasks.Length; ++i)
         {
@@ -398,19 +399,21 @@ class ThreadTest
                 mres.Wait();
             });
             s_startedThreads.Add(t);
-            spawned[i] = Task.Factory.StartNew(() =>
-            {
-                t.Start();
-            });
-            Task.Factory.StartNew(() =>
-            {
-                Expect(true, "Always true");
-                for (int i = 0; i < 10000; i++)
+            spawned[i] = Task.Factory
+                .StartNew(() =>
                 {
-                    t.IsBackground = i % 2 == 0;
-                }
-                mres.Set();
-            });
+                    t.Start();
+                });
+            Task.Factory
+                .StartNew(() =>
+                {
+                    Expect(true, "Always true");
+                    for (int i = 0; i < 10000; i++)
+                    {
+                        t.IsBackground = i % 2 == 0;
+                    }
+                    mres.Set();
+                });
         }
         Task.WaitAll(spawned);
         ExpectPassed(nameof(TestConcurrentIsBackgroundProperty), spawnedCount);

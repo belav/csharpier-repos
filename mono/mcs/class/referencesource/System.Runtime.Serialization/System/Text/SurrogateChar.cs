@@ -22,8 +22,7 @@ namespace System.Text
         public SurrogateChar(int ch)
         {
             if (ch < MinValue || ch > MaxValue)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -46,8 +45,7 @@ namespace System.Text
         public SurrogateChar(char lowChar, char highChar)
         {
             if (lowChar < surLowMin || lowChar > surLowMax)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -62,8 +60,7 @@ namespace System.Text
                     );
 
             if (highChar < surHighMin || highChar > surHighMax)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility

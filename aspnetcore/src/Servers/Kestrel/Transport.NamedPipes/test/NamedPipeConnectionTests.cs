@@ -46,8 +46,7 @@ public class NamedPipeConnectionTests : TestApplicationErrorLoggerLoggedTest
         await clientStream.WriteAsync(TestData).DefaultTimeout();
 
         var serverConnection = await connectionListener.AcceptAsync().DefaultTimeout();
-        var readResult = await serverConnection
-            .Transport
+        var readResult = await serverConnection.Transport
             .Input
             .ReadAtLeastAsync(TestData.Length)
             .DefaultTimeout();
@@ -79,8 +78,7 @@ public class NamedPipeConnectionTests : TestApplicationErrorLoggerLoggedTest
         await clientStream.WriteAsync(TestData).DefaultTimeout();
 
         var serverConnection = await connectionListener.AcceptAsync().DefaultTimeout();
-        var readResult = await serverConnection
-            .Transport
+        var readResult = await serverConnection.Transport
             .Input
             .ReadAtLeastAsync(TestData.Length)
             .DefaultTimeout();
@@ -113,8 +111,7 @@ public class NamedPipeConnectionTests : TestApplicationErrorLoggerLoggedTest
         await clientStream.WriteAsync(TestData).DefaultTimeout();
 
         var serverConnection = await connectionListener.AcceptAsync().DefaultTimeout();
-        var readResult = await serverConnection
-            .Transport
+        var readResult = await serverConnection.Transport
             .Input
             .ReadAtLeastAsync(TestData.Length)
             .DefaultTimeout();
@@ -123,8 +120,7 @@ public class NamedPipeConnectionTests : TestApplicationErrorLoggerLoggedTest
         serverConnection.Abort(new ConnectionAbortedException("Test reason"));
 
         // Write after abort is ignored.
-        await serverConnection
-            .Transport
+        await serverConnection.Transport
             .Output
             .WriteAsync(Encoding.UTF8.GetBytes(new string('c', 1024 * 1024 * 10)));
 

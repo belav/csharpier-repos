@@ -155,8 +155,7 @@ namespace System.Web.WebPages.Razor
 
         public override Type GetGeneratedType(CompilerResults results)
         {
-            return results
-                .CompiledAssembly
+            return results.CompiledAssembly
                 .GetType(
                     String.Format(
                         CultureInfo.CurrentCulture,

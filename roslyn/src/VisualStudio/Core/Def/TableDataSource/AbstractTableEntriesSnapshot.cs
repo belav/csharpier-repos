@@ -220,8 +220,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                 if (solution.GetProject(item.ProjectId) is { } project)
                 {
                     // We couldn't find a document ID when the item was created, so it may be a source generator output.
-                    var documents = ThreadingContext
-                        .JoinableTaskFactory
+                    var documents = ThreadingContext.JoinableTaskFactory
                         .Run(() =>
                             project.GetSourceGeneratedDocumentsAsync(cancellationToken).AsTask()
                         );

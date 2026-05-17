@@ -206,8 +206,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
             var isMetadataAsSource = false;
             var collapseAllImplementations = false;
 
-            var openDocument = wpfTextView
-                .TextBuffer
+            var openDocument = wpfTextView.TextBuffer
                 .AsTextContainer()
                 .GetRelatedDocuments()
                 .FirstOrDefault();
@@ -223,8 +222,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
                     openDocument.Project.Language,
                     isMetadataAsSource: masWorkspace is not null
                 );
-                collapseAllImplementations = masWorkspace
-                    .FileService
+                collapseAllImplementations = masWorkspace.FileService
                     .ShouldCollapseOnOpen(openDocument.FilePath, options);
             }
 

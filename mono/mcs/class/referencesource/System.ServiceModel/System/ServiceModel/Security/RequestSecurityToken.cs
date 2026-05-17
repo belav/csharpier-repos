@@ -125,8 +125,7 @@ namespace System.ServiceModel.Security
         {
             if (standardsManager == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("standardsManager"));
             }
             this.standardsManager = standardsManager;
@@ -154,8 +153,7 @@ namespace System.ServiceModel.Security
         {
             if (standardsManager == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("standardsManager"));
             }
             this.standardsManager = standardsManager;
@@ -199,8 +197,7 @@ namespace System.ServiceModel.Security
             set
             {
                 if (this.IsReadOnly)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
                         );
@@ -214,8 +211,7 @@ namespace System.ServiceModel.Security
             set
             {
                 if (this.IsReadOnly)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
                         );
@@ -229,14 +225,12 @@ namespace System.ServiceModel.Security
             set
             {
                 if (this.IsReadOnly)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
                         );
                 if (value < 0)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentOutOfRangeException(
                                 "value",
@@ -260,8 +254,7 @@ namespace System.ServiceModel.Security
             {
                 if (this.IsReadOnly)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
                         );
@@ -278,8 +271,7 @@ namespace System.ServiceModel.Security
                 {
                     // PreSharp Bug: Property get methods should not throw exceptions.
 #pragma warning suppress 56503
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(
@@ -294,8 +286,7 @@ namespace System.ServiceModel.Security
             set
             {
                 if (this.IsReadOnly)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
                         );
@@ -306,8 +297,7 @@ namespace System.ServiceModel.Security
                     foreach (XmlElement property in value)
                     {
                         if (property == null)
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
                                     new ArgumentNullException(
                                         String.Format(
@@ -335,8 +325,7 @@ namespace System.ServiceModel.Security
             set
             {
                 if (this.IsReadOnly)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
                         );
@@ -352,8 +341,7 @@ namespace System.ServiceModel.Security
             set
             {
                 if (this.IsReadOnly)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
                         );
@@ -367,8 +355,7 @@ namespace System.ServiceModel.Security
             set
             {
                 if (this.IsReadOnly)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
                         );
@@ -384,8 +371,7 @@ namespace System.ServiceModel.Security
                 {
                     // PreSharp Bug: Property get methods should not throw exceptions.
 #pragma warning suppress 56503
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(
@@ -405,15 +391,13 @@ namespace System.ServiceModel.Security
             set
             {
                 if (this.IsReadOnly)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
                         );
                 if (value == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new ArgumentNullException("value"));
                 }
                 this.standardsManager = value;
@@ -433,8 +417,7 @@ namespace System.ServiceModel.Security
                 {
                     // PreSharp Bug: Property get methods should not throw exceptions.
 #pragma warning suppress 56503
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(SR.ItemNotAvailableInDeserializedRST, "AppliesTo")
@@ -453,8 +436,7 @@ namespace System.ServiceModel.Security
                 {
                     // PreSharp Bug: Property get methods should not throw exceptions.
 #pragma warning suppress 56503
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(
@@ -476,8 +458,7 @@ namespace System.ServiceModel.Security
                 {
                     // PreSharp Bug: Property get methods should not throw exceptions.
 #pragma warning suppress 56503
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(SR.ItemNotAvailableInDeserializedRST, "AppliesToType")
@@ -498,8 +479,7 @@ namespace System.ServiceModel.Security
             if (negotiation == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("negotiation");
             if (this.IsReadOnly)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
                     );
@@ -537,8 +517,7 @@ namespace System.ServiceModel.Security
         public void SetRequestorEntropy(byte[] entropy)
         {
             if (this.IsReadOnly)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
                     );
@@ -548,8 +527,7 @@ namespace System.ServiceModel.Security
         internal void SetRequestorEntropy(WrappedKeySecurityToken entropyToken)
         {
             if (this.IsReadOnly)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
                     );
@@ -559,8 +537,7 @@ namespace System.ServiceModel.Security
         public void SetAppliesTo<T>(T appliesTo, DataContractSerializer serializer)
         {
             if (this.IsReadOnly)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
                     );
@@ -576,8 +553,7 @@ namespace System.ServiceModel.Security
         public void GetAppliesToQName(out string localName, out string namespaceUri)
         {
             if (!this.isReceiver)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(SR.ItemAvailableInDeserializedRSTOnly, "MatchesAppliesTo")

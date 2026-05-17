@@ -100,8 +100,7 @@ namespace System.Workflow.Activities
                     if (eventActivitySubscription != null)
                     {
                         if (
-                            eventActivitySubscription
-                                .EventDrivenName
+                            eventActivitySubscription.EventDrivenName
                                 .Equals(eventDriven.QualifiedName)
                         )
                         {
@@ -418,12 +417,13 @@ namespace System.Workflow.Activities
 
         private void RemoveFromQueue(Guid subscriptionId)
         {
-            this.EventQueue.RemoveAll(
-                delegate(StateMachineSubscription subscription)
-                {
-                    return subscription.SubscriptionId.Equals(subscriptionId);
-                }
-            );
+            this.EventQueue
+                .RemoveAll(
+                    delegate(StateMachineSubscription subscription)
+                    {
+                        return subscription.SubscriptionId.Equals(subscriptionId);
+                    }
+                );
         }
 
         internal void ProcessQueue(ActivityExecutionContext context)

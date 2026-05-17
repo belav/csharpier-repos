@@ -85,8 +85,7 @@ namespace Internal.Runtime.TypeLoader
             IntPtr methodDictionary;
 
             if (
-                TypeLoaderEnvironment
-                    .Instance
+                TypeLoaderEnvironment.Instance
                     .TryLookupGenericMethodDictionary(
                         new MethodDescBasedGenericMethodLookup(method),
                         out methodDictionary
@@ -356,8 +355,7 @@ namespace Internal.Runtime.TypeLoader
             {
                 // Strip unboxing stub, note the first parameter which is false
                 nonTemplateMethod = (InstantiatedMethod)
-                    method
-                        .Context
+                    method.Context
                         .ResolveGenericMethodInstantiation(
                             false,
                             (DefType)method.OwningType,
@@ -454,8 +452,7 @@ namespace Internal.Runtime.TypeLoader
             bool isTemplateUniversalCanon = false;
             if (state.TemplateType != null)
             {
-                isTemplateUniversalCanon = state
-                    .TemplateType
+                isTemplateUniversalCanon = state.TemplateType
                     .IsCanonicalSubtype(CanonicalFormKind.Universal);
             }
 
@@ -704,8 +701,7 @@ namespace Internal.Runtime.TypeLoader
             RuntimeTypeHandle rtt = EETypeCreator.CreateEEType(type, state);
 
             if (state.ThreadDataSize != 0)
-                TypeLoaderEnvironment
-                    .Instance
+                TypeLoaderEnvironment.Instance
                     .RegisterDynamicThreadStaticsInfo(
                         state.HalfBakedRuntimeTypeHandle,
                         state.ThreadStaticOffset,
@@ -809,8 +805,7 @@ namespace Internal.Runtime.TypeLoader
             {
                 for (int i = 0; i < interfaces.Length; i++)
                 {
-                    state
-                        .HalfBakedRuntimeTypeHandle
+                    state.HalfBakedRuntimeTypeHandle
                         .SetInterface(i, GetRuntimeTypeHandle(interfaces[i]));
                 }
             }
@@ -828,8 +823,7 @@ namespace Internal.Runtime.TypeLoader
                 int dictionarySlot = EETypeCreator.GetDictionarySlotInVTable(type);
                 if (dictionarySlot >= 0)
                 {
-                    state
-                        .HalfBakedRuntimeTypeHandle
+                    state.HalfBakedRuntimeTypeHandle
                         .SetDictionary(dictionarySlot, state.HalfBakedDictionary);
                 }
                 else
@@ -911,8 +905,7 @@ namespace Internal.Runtime.TypeLoader
                 int dictionarySlot = EETypeCreator.GetDictionarySlotInVTable(baseType);
                 Debug.Assert(dictionarySlot >= 0);
 
-                derivedTypeState
-                    .HalfBakedRuntimeTypeHandle
+                derivedTypeState.HalfBakedRuntimeTypeHandle
                     .SetDictionary(dictionarySlot, dictionaryEntry);
                 TypeLoaderLogger.WriteLine(
                     "Setting basetype "
@@ -926,8 +919,7 @@ namespace Internal.Runtime.TypeLoader
         private void FinishBaseTypeAndDictionaries(TypeDesc type, TypeBuilderState state)
         {
             DefType baseType = GetBaseTypeThatIsCorrectForMDArrays(type);
-            state
-                .HalfBakedRuntimeTypeHandle
+            state.HalfBakedRuntimeTypeHandle
                 .SetBaseType(
                     baseType == null ? default(RuntimeTypeHandle) : GetRuntimeTypeHandle(baseType)
                 );
@@ -957,16 +949,14 @@ namespace Internal.Runtime.TypeLoader
                     if (type.IsTypeDefinition)
                         return;
 
-                    state
-                        .HalfBakedRuntimeTypeHandle
+                    state.HalfBakedRuntimeTypeHandle
                         .SetGenericDefinition(
                             GetRuntimeTypeHandle(typeAsDefType.GetTypeDefinition())
                         );
                     Instantiation instantiation = typeAsDefType.Instantiation;
                     for (int argIndex = 0; argIndex < instantiation.Length; argIndex++)
                     {
-                        state
-                            .HalfBakedRuntimeTypeHandle
+                        state.HalfBakedRuntimeTypeHandle
                             .SetGenericArgument(
                                 argIndex,
                                 GetRuntimeTypeHandle(instantiation[argIndex])
@@ -1003,8 +993,7 @@ namespace Internal.Runtime.TypeLoader
                 }
                 else if (type is PointerType)
                 {
-                    state
-                        .HalfBakedRuntimeTypeHandle
+                    state.HalfBakedRuntimeTypeHandle
                         .SetRelatedParameterType(
                             GetRuntimeTypeHandle(((PointerType)type).ParameterType)
                         );
@@ -1013,8 +1002,7 @@ namespace Internal.Runtime.TypeLoader
                 }
                 else if (type is ByRefType)
                 {
-                    state
-                        .HalfBakedRuntimeTypeHandle
+                    state.HalfBakedRuntimeTypeHandle
                         .SetRelatedParameterType(
                             GetRuntimeTypeHandle(((ByRefType)type).ParameterType)
                         );
@@ -1026,8 +1014,7 @@ namespace Internal.Runtime.TypeLoader
                             state.HalfBakedRuntimeTypeHandle.ToEETypePtr()->ParameterizedTypeShape
                                 == ParameterizedTypeShapeConstants.Pointer
                         );
-                        state
-                            .HalfBakedRuntimeTypeHandle
+                        state.HalfBakedRuntimeTypeHandle
                             .SetParameterizedTypeShape(ParameterizedTypeShapeConstants.ByRef);
                         Debug.Assert(
                             state.HalfBakedRuntimeTypeHandle.ToEETypePtr()->ElementType
@@ -1043,8 +1030,7 @@ namespace Internal.Runtime.TypeLoader
                 MethodSignature sig = ((FunctionPointerType)type).Signature;
                 unsafe
                 {
-                    MethodTable* halfBakedMethodTable = state
-                        .HalfBakedRuntimeTypeHandle
+                    MethodTable* halfBakedMethodTable = state.HalfBakedRuntimeTypeHandle
                         .ToEETypePtr();
                     halfBakedMethodTable->FunctionPointerReturnType = GetRuntimeTypeHandle(
                             sig.ReturnType
@@ -1200,14 +1186,11 @@ namespace Internal.Runtime.TypeLoader
                 }
             }
 
-            TypeSystemContext
-                .PointerTypesCache
+            TypeSystemContext.PointerTypesCache
                 .Reserve(TypeSystemContext.PointerTypesCache.Count + newPointerTypesCount);
-            TypeSystemContext
-                .ByRefTypesCache
+            TypeSystemContext.ByRefTypesCache
                 .Reserve(TypeSystemContext.ByRefTypesCache.Count + newByRefTypesCount);
-            TypeSystemContext
-                .FunctionPointerTypesCache
+            TypeSystemContext.FunctionPointerTypesCache
                 .Reserve(
                     TypeSystemContext.FunctionPointerTypesCache.Count + newFunctionPointerTypesCount
                 );
@@ -1242,8 +1225,7 @@ namespace Internal.Runtime.TypeLoader
                     )
                     {
                         Debug.Assert(!typeAsFunctionPointerType.RuntimeTypeHandle.IsNull());
-                        TypeSystemContext
-                            .FunctionPointerTypesCache
+                        TypeSystemContext.FunctionPointerTypesCache
                             .AddOrGetExisting(typeAsFunctionPointerType.RuntimeTypeHandle);
                     }
                     continue;
@@ -1268,8 +1250,7 @@ namespace Internal.Runtime.TypeLoader
                             typeAsParameterizedType.RuntimeTypeHandle.ToEETypePtr()->IsByRef
                         );
                     }
-                    TypeSystemContext
-                        .ByRefTypesCache
+                    TypeSystemContext.ByRefTypesCache
                         .AddOrGetExisting(typeAsParameterizedType.RuntimeTypeHandle);
                 }
                 else
@@ -1281,8 +1262,7 @@ namespace Internal.Runtime.TypeLoader
                             typeAsParameterizedType.RuntimeTypeHandle.ToEETypePtr()->IsPointer
                         );
                     }
-                    TypeSystemContext
-                        .PointerTypesCache
+                    TypeSystemContext.PointerTypesCache
                         .AddOrGetExisting(typeAsParameterizedType.RuntimeTypeHandle);
                 }
             }
@@ -1365,8 +1345,7 @@ namespace Internal.Runtime.TypeLoader
 
             GenericContextKind contextKind = (GenericContextKind)parser.GetUnsigned();
 
-            NativeFormatModuleInfo moduleInfo = ModuleList
-                .Instance
+            NativeFormatModuleInfo moduleInfo = ModuleList.Instance
                 .GetModuleInfoByHandle(typeManager);
 
             NativeLayoutInfoLoadContext nlilContext = new NativeLayoutInfoLoadContext();
@@ -1437,8 +1416,7 @@ namespace Internal.Runtime.TypeLoader
                 // There is a cache in place so that this function doesn't get called much, but we still need a registration store,
                 // so we don't leak allocated contexts
                 if (
-                    TypeLoaderEnvironment
-                        .Instance
+                    TypeLoaderEnvironment.Instance
                         .TryLookupConstructedLazyDictionaryForContext(
                             context,
                             signature,
@@ -1461,8 +1439,7 @@ namespace Internal.Runtime.TypeLoader
 
                 ucgDict.Finish(this);
 
-                TypeLoaderEnvironment
-                    .Instance
+                TypeLoaderEnvironment.Instance
                     .RegisterConstructedLazyDictionaryForContext(
                         context,
                         signature,
@@ -1570,8 +1547,7 @@ namespace Internal.Runtime.TypeLoader
         )
         {
             if (
-                !TypeSystemContext
-                    .PointerTypesCache
+                !TypeSystemContext.PointerTypesCache
                     .TryGetValue(pointeeTypeHandle, out pointerTypeHandle)
             )
             {
@@ -1603,8 +1579,7 @@ namespace Internal.Runtime.TypeLoader
         )
         {
             if (
-                !TypeSystemContext
-                    .ByRefTypesCache
+                !TypeSystemContext.ByRefTypesCache
                     .TryGetValue(pointeeTypeHandle, out byRefTypeHandle)
             )
             {

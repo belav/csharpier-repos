@@ -183,14 +183,12 @@ namespace System.Net.Http.Formatting.Parsers
                     if (_bodyPartHeaderStatus != ParserState.Done)
                     {
                         int headerConsumed = part.Offset;
-                        _bodyPartHeaderStatus = _currentBodyPart
-                            .HeaderParser
+                        _bodyPartHeaderStatus = _currentBodyPart.HeaderParser
                             .ParseBuffer(part.Array, part.Count + part.Offset, ref headerConsumed);
                         if (_bodyPartHeaderStatus == ParserState.Done)
                         {
                             // Add the remainder as body part content
-                            _currentBodyPart
-                                .Segments
+                            _currentBodyPart.Segments
                                 .Add(
                                     new ArraySegment<byte>(
                                         part.Array,

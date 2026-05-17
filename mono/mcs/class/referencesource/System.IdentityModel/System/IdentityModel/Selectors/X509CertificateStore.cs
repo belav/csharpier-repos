@@ -57,8 +57,7 @@ namespace System.IdentityModel.Selectors
                     this.storeName = "TrustedPublisher";
                     break;
                 default:
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidEnumArgumentException(
                                 "storeName",
@@ -73,8 +72,7 @@ namespace System.IdentityModel.Selectors
                 && storeLocation != StoreLocation.LocalMachine
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentOutOfRangeException(
                             "storeLocation",
@@ -119,8 +117,7 @@ namespace System.IdentityModel.Selectors
             if (certStoreHandle == null || certStoreHandle.IsInvalid)
             {
                 int error = Marshal.GetLastWin32Error();
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new CryptographicException(error));
             }
             this.certStoreHandle = certStoreHandle;
@@ -155,8 +152,7 @@ namespace System.IdentityModel.Selectors
                     case X509FindType.FindBySubjectName:
                         strFindValue = findValue as string;
                         if (strFindValue == null)
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
                                     new ArgumentException(
                                         SR.GetString(
@@ -178,8 +174,7 @@ namespace System.IdentityModel.Selectors
                         {
                             strFindValue = findValue as string;
                             if (strFindValue == null)
-                                throw DiagnosticUtility
-                                    .ExceptionUtility
+                                throw DiagnosticUtility.ExceptionUtility
                                     .ThrowHelperError(
                                         new ArgumentException(
                                             SR.GetString(
@@ -206,8 +201,7 @@ namespace System.IdentityModel.Selectors
 
                     case X509FindType.FindBySubjectDistinguishedName:
                         if (!(findValue is string))
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
                                     new ArgumentException(
                                         SR.GetString(
@@ -225,8 +219,7 @@ namespace System.IdentityModel.Selectors
                     case X509FindType.FindByIssuerName:
                         strFindValue = findValue as string;
                         if (strFindValue == null)
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
                                     new ArgumentException(
                                         SR.GetString(
@@ -244,8 +237,7 @@ namespace System.IdentityModel.Selectors
 
                     case X509FindType.FindByIssuerDistinguishedName:
                         if (!(findValue is string))
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
                                     new ArgumentException(
                                         SR.GetString(
@@ -266,8 +258,7 @@ namespace System.IdentityModel.Selectors
                         {
                             strFindValue = findValue as string;
                             if (strFindValue == null)
-                                throw DiagnosticUtility
-                                    .ExceptionUtility
+                                throw DiagnosticUtility.ExceptionUtility
                                     .ThrowHelperError(
                                         new ArgumentException(
                                             SR.GetString(
@@ -301,8 +292,7 @@ namespace System.IdentityModel.Selectors
                         {
                             strFindValue = findValue as string;
                             if (strFindValue == null)
-                                throw DiagnosticUtility
-                                    .ExceptionUtility
+                                throw DiagnosticUtility.ExceptionUtility
                                     .ThrowHelperError(
                                         new ArgumentException(
                                             SR.GetString(

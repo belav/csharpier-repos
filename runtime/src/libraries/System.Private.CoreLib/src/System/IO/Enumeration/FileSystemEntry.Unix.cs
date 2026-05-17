@@ -54,14 +54,12 @@ namespace System.IO.Enumeration
             }
             else if (isSymlink)
             {
-                entry._isDirectory = entry
-                    ._status
+                entry._isDirectory = entry._status
                     .IsDirectory(entry.FullPath, continueOnError: true);
             }
             else if (isUnknown)
             {
-                entry._isDirectory = entry
-                    ._status
+                entry._isDirectory = entry._status
                     .IsDirectory(entry.FullPath, continueOnError: true);
                 if (entry._status.IsSymbolicLink(entry.FullPath, continueOnError: true))
                 {

@@ -243,8 +243,7 @@ namespace System.IO
 
         private static unsafe delegate* unmanaged<int, char*, uint> GetGetTempPathWFunc()
         {
-            IntPtr kernel32 = Interop
-                .Kernel32
+            IntPtr kernel32 = Interop.Kernel32
                 .LoadLibraryEx(
                     Interop.Libraries.Kernel32,
                     0,

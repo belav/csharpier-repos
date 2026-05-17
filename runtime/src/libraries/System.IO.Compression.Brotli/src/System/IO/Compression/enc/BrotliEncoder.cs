@@ -24,8 +24,7 @@ namespace System.IO.Compression
         public BrotliEncoder(int quality, int window)
         {
             _disposed = false;
-            _state = Interop
-                .Brotli
+            _state = Interop.Brotli
                 .BrotliEncoderCreateInstance(IntPtr.Zero, IntPtr.Zero, IntPtr.Zero);
             if (_state.IsInvalid)
                 throw new IOException(SR.BrotliEncoder_Create);
@@ -41,8 +40,7 @@ namespace System.IO.Compression
         internal void InitializeEncoder()
         {
             EnsureNotDisposed();
-            _state = Interop
-                .Brotli
+            _state = Interop.Brotli
                 .BrotliEncoderCreateInstance(IntPtr.Zero, IntPtr.Zero, IntPtr.Zero);
             if (_state.IsInvalid)
                 throw new IOException(SR.BrotliEncoder_Create);
@@ -86,8 +84,7 @@ namespace System.IO.Compression
                 );
             }
             if (
-                Interop
-                    .Brotli
+                Interop.Brotli
                     .BrotliEncoderSetParameter(
                         _state,
                         BrotliEncoderParameter.Quality,
@@ -122,8 +119,7 @@ namespace System.IO.Compression
                 );
             }
             if (
-                Interop
-                    .Brotli
+                Interop.Brotli
                     .BrotliEncoderSetParameter(_state, BrotliEncoderParameter.LGWin, (uint)window)
                 == Interop.BOOL.FALSE
             )
@@ -236,8 +232,7 @@ namespace System.IO.Compression
                     fixed (byte* outBytes = &MemoryMarshal.GetReference(destination))
                     {
                         if (
-                            Interop
-                                .Brotli
+                            Interop.Brotli
                                 .BrotliEncoderCompressStream(
                                     _state,
                                     operation,
@@ -338,8 +333,7 @@ namespace System.IO.Compression
                 {
                     nuint availableOutput = (nuint)destination.Length;
                     bool success =
-                        Interop
-                            .Brotli
+                        Interop.Brotli
                             .BrotliEncoderCompress(
                                 quality,
                                 window, /*BrotliEncoderMode*/

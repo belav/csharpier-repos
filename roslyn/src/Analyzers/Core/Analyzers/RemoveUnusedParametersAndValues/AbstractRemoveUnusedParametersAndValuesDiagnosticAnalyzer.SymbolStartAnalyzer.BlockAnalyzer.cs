@@ -116,8 +116,7 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                         // All operation blocks for a symbol belong to the same tree.
                         var firstBlock = context.OperationBlocks[0];
                         if (
-                            !symbolStartAnalyzer
-                                ._compilationAnalyzer
+                            !symbolStartAnalyzer._compilationAnalyzer
                                 .TryGetOptions(
                                     firstBlock.Syntax.SyntaxTree,
                                     context.Options,
@@ -156,13 +155,11 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                             Contract.ThrowIfNull(
                                 symbolStartAnalyzer._symbolStartAnalysisContext.FilterTree
                             );
-                            var root = firstBlock
-                                .Syntax
+                            var root = firstBlock.Syntax
                                 .SyntaxTree
                                 .GetRoot(context.CancellationToken);
                             var spanStart = firstBlock.Syntax.SpanStart;
-                            var memberDecl = symbolStartAnalyzer
-                                ._compilationAnalyzer
+                            var memberDecl = symbolStartAnalyzer._compilationAnalyzer
                                 .SyntaxFacts
                                 .GetContainingMemberDeclaration(
                                     root,
@@ -181,8 +178,7 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                         foreach (var operationBlock in context.OperationBlocks)
                         {
                             if (
-                                operationBlock
-                                    .Syntax
+                                operationBlock.Syntax
                                     .GetDiagnostics()
                                     .ToImmutableArrayOrEmpty()
                                     .HasAnyErrors()
@@ -198,12 +194,10 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                         foreach (var operationBlock in context.OperationBlocks)
                         {
                             if (
-                                operationBlock
-                                    .Syntax
+                                operationBlock.Syntax
                                     .DescendantNodes(descendIntoTrivia: true)
                                     .Any(
-                                        symbolStartAnalyzer
-                                            ._compilationAnalyzer
+                                        symbolStartAnalyzer._compilationAnalyzer
                                             .IsIfConditionalDirective
                                     )
                             )
@@ -266,11 +260,9 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                     //     an invocation by prefixing the invocation with keyword "Call".
                     //     Similarly, we do not want to flag an expression of a C# expression body.
                     if (
-                        _symbolStartAnalyzer
-                            ._compilationAnalyzer
+                        _symbolStartAnalyzer._compilationAnalyzer
                             .IsCallStatement(expressionStatement)
-                        || _symbolStartAnalyzer
-                            ._compilationAnalyzer
+                        || _symbolStartAnalyzer._compilationAnalyzer
                             .IsExpressionOfExpressionBody(expressionStatement)
                     )
                     {
@@ -547,8 +539,7 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                         owningSymbol is IMethodSymbol method
                         && (
                             method.ReturnType.IsDelegateType()
-                            || method
-                                .Parameters
+                            || method.Parameters
                                 .Any(static p => p.IsRefOrOut() && p.Type.IsDelegateType())
                         )
                     )
@@ -702,8 +693,7 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                                     && unusedParameter.ContainingSymbol.IsLocalFunction()
                                 )
                                 {
-                                    var hasReference = symbolUsageResult
-                                        .SymbolsRead
+                                    var hasReference = symbolUsageResult.SymbolsRead
                                         .Contains(unusedParameter);
 
                                     bool shouldReport;
@@ -757,8 +747,7 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                             {
                                 var diagnostic = DiagnosticHelper.Create(
                                     s_valueAssignedIsUnusedRule,
-                                    _symbolStartAnalyzer
-                                        ._compilationAnalyzer
+                                    _symbolStartAnalyzer._compilationAnalyzer
                                         .GetDefinitionLocationToFade(unreadWriteOperation),
                                     _options.UnusedValueAssignmentSeverity,
                                     additionalLocations: null,
@@ -839,8 +828,7 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                     )
                     {
                         if (
-                            _symbolStartAnalyzer
-                                ._compilationAnalyzer
+                            _symbolStartAnalyzer._compilationAnalyzer
                                 .ShouldBailOutFromRemovableAssignmentAnalysis(
                                     unusedSymbolWriteOperation
                                 )

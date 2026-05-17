@@ -21,8 +21,7 @@ namespace Microsoft.CodeAnalysis.Tools.Tests.Utilities
         {
             if (Interlocked.Exchange(ref s_registered, 1) == 0)
             {
-                var msBuildInstance = Build
-                    .Locator
+                var msBuildInstance = Build.Locator
                     .MSBuildLocator
                     .QueryVisualStudioInstances()
                     .First();

@@ -12,8 +12,7 @@ public class OverrideDestinationMappingsTest
     {
         protected override void Seed(Context context)
         {
-            context
-                .Entity
+            context.Entity
                 .AddRange(
                     new[]
                     {

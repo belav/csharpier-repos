@@ -21,8 +21,7 @@ namespace System.Security.Cryptography
             _ctxHandle = Interop.Crypto.EvpCipherCreatePartial(GetCipher(key.Length * 8));
 
             Interop.Crypto.CheckValidOpenSslHandle(_ctxHandle);
-            Interop
-                .Crypto
+            Interop.Crypto
                 .EvpCipherSetKeyAndIV(
                     _ctxHandle,
                     key,
@@ -45,8 +44,7 @@ namespace System.Security.Cryptography
                 throw new CryptographicException();
             }
 
-            Interop
-                .Crypto
+            Interop.Crypto
                 .EvpCipherSetKeyAndIV(
                     _ctxHandle,
                     Span<byte>.Empty,
@@ -77,8 +75,7 @@ namespace System.Security.Cryptography
                 }
 
                 if (
-                    !Interop
-                        .Crypto
+                    !Interop.Crypto
                         .EvpCipherUpdate(
                             _ctxHandle,
                             ciphertextAndTag,
@@ -91,8 +88,7 @@ namespace System.Security.Cryptography
                 }
 
                 if (
-                    !Interop
-                        .Crypto
+                    !Interop.Crypto
                         .EvpAeadCipherFinalEx(
                             _ctxHandle,
                             ciphertextAndTag.Slice(ciphertextBytesWritten),
@@ -142,8 +138,7 @@ namespace System.Security.Cryptography
                 throw new CryptographicException();
             }
 
-            Interop
-                .Crypto
+            Interop.Crypto
                 .EvpCipherSetKeyAndIV(
                     _ctxHandle,
                     ReadOnlySpan<byte>.Empty,
@@ -157,8 +152,7 @@ namespace System.Security.Cryptography
             }
 
             if (
-                !Interop
-                    .Crypto
+                !Interop.Crypto
                     .EvpCipherUpdate(
                         _ctxHandle,
                         plaintext,
@@ -172,8 +166,7 @@ namespace System.Security.Cryptography
             }
 
             if (
-                !Interop
-                    .Crypto
+                !Interop.Crypto
                     .EvpCipherUpdate(
                         _ctxHandle,
                         plaintext.Slice(plaintextBytesWritten),
@@ -189,8 +182,7 @@ namespace System.Security.Cryptography
             plaintextBytesWritten += bytesWritten;
 
             if (
-                !Interop
-                    .Crypto
+                !Interop.Crypto
                     .EvpAeadCipherFinalEx(
                         _ctxHandle,
                         plaintext.Slice(plaintextBytesWritten),

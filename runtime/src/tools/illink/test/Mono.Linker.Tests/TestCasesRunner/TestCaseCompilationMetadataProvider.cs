@@ -34,8 +34,7 @@ namespace Mono.Linker.Tests.TestCasesRunner
 
         public virtual bool IsIgnored(out string reason)
         {
-            var ignoreAttribute = _testCaseTypeDefinition
-                .CustomAttributes
+            var ignoreAttribute = _testCaseTypeDefinition.CustomAttributes
                 .FirstOrDefault(attr => attr.AttributeType.Name == nameof(IgnoreTestCaseAttribute));
             if (ignoreAttribute != null && IsIgnoredByTrimmer(ignoreAttribute))
             {
@@ -52,8 +51,7 @@ namespace Mono.Linker.Tests.TestCasesRunner
                 }
             }
 
-            var requirementsAttribute = _testCaseTypeDefinition
-                .CustomAttributes
+            var requirementsAttribute = _testCaseTypeDefinition.CustomAttributes
                 .FirstOrDefault(attr =>
                     attr.AttributeType.Name == nameof(TestCaseRequirementsAttribute)
                 );
@@ -113,8 +111,7 @@ namespace Mono.Linker.Tests.TestCasesRunner
                 yield return "SUPPORTS_DEFAULT_INTERFACE_METHODS";
 
             foreach (
-                var attr in _testCaseTypeDefinition
-                    .CustomAttributes
+                var attr in _testCaseTypeDefinition.CustomAttributes
                     .Where(attr => attr.AttributeType.Name == nameof(DefineAttribute))
             )
                 yield return (string)attr.ConstructorArguments.First().Value;
@@ -122,8 +119,7 @@ namespace Mono.Linker.Tests.TestCasesRunner
 
         public virtual string GetAssemblyName()
         {
-            var asLibraryAttribute = _testCaseTypeDefinition
-                .CustomAttributes
+            var asLibraryAttribute = _testCaseTypeDefinition.CustomAttributes
                 .FirstOrDefault(attr =>
                     attr.AttributeType.Name == nameof(SetupCompileAsLibraryAttribute)
                 );
@@ -139,16 +135,14 @@ namespace Mono.Linker.Tests.TestCasesRunner
 
         public virtual IEnumerable<string> GetSetupCompilerArguments()
         {
-            return _testCaseTypeDefinition
-                .CustomAttributes
+            return _testCaseTypeDefinition.CustomAttributes
                 .Where(attr => attr.AttributeType.Name == nameof(SetupCompileArgumentAttribute))
                 .Select(attr => (string)attr.ConstructorArguments.First().Value);
         }
 
         public virtual IEnumerable<SourceAndDestinationPair> AdditionalFilesToSandbox()
         {
-            return _testCaseTypeDefinition
-                .CustomAttributes
+            return _testCaseTypeDefinition.CustomAttributes
                 .Where(attr => attr.AttributeType.Name == nameof(SandboxDependencyAttribute))
                 .Select(GetSourceAndRelativeDestinationValue);
         }
@@ -267,8 +261,7 @@ namespace Mono.Linker.Tests.TestCasesRunner
 
         public virtual IEnumerable<string> GetReferenceDependencies()
         {
-            return _testCaseTypeDefinition
-                .CustomAttributes
+            return _testCaseTypeDefinition.CustomAttributes
                 .Where(attr => attr.AttributeType.Name == nameof(ReferenceDependencyAttribute))
                 .Select(attr => (string)attr.ConstructorArguments[0].Value);
         }
@@ -276,8 +269,7 @@ namespace Mono.Linker.Tests.TestCasesRunner
         public virtual IEnumerable<string> GetReferenceValues()
         {
             foreach (
-                var referenceAttr in _testCaseTypeDefinition
-                    .CustomAttributes
+                var referenceAttr in _testCaseTypeDefinition.CustomAttributes
                     .Where(attr => attr.AttributeType.Name == nameof(ReferenceAttribute))
             )
                 yield return (string)referenceAttr.ConstructorArguments.First().Value;
@@ -285,24 +277,21 @@ namespace Mono.Linker.Tests.TestCasesRunner
 
         public virtual IEnumerable<SourceAndDestinationPair> GetResources()
         {
-            return _testCaseTypeDefinition
-                .CustomAttributes
+            return _testCaseTypeDefinition.CustomAttributes
                 .Where(attr => attr.AttributeType.Name == nameof(SetupCompileResourceAttribute))
                 .Select(GetSourceAndRelativeDestinationValue);
         }
 
         public virtual IEnumerable<SetupCompileInfo> GetSetupCompileAssembliesBefore()
         {
-            return _testCaseTypeDefinition
-                .CustomAttributes
+            return _testCaseTypeDefinition.CustomAttributes
                 .Where(attr => attr.AttributeType.Name == nameof(SetupCompileBeforeAttribute))
                 .Select(CreateSetupCompileAssemblyInfo);
         }
 
         public virtual IEnumerable<SetupCompileInfo> GetSetupCompileAssembliesAfter()
         {
-            return _testCaseTypeDefinition
-                .CustomAttributes
+            return _testCaseTypeDefinition.CustomAttributes
                 .Where(attr => attr.AttributeType.Name == nameof(SetupCompileAfterAttribute))
                 .Select(CreateSetupCompileAssemblyInfo);
         }

@@ -26,12 +26,10 @@ namespace System.ServiceModel.Dispatcher
         public AsyncMethodInvoker(MethodInfo beginMethod, MethodInfo endMethod)
         {
             if (beginMethod == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("beginMethod"));
             if (endMethod == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("endMethod"));
 
             this.beginMethod = beginMethod;
@@ -60,8 +58,7 @@ namespace System.ServiceModel.Dispatcher
 
         public object Invoke(object instance, object[] inputs, out object[] outputs)
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(new NotImplementedException());
         }
 
@@ -106,16 +103,14 @@ namespace System.ServiceModel.Dispatcher
         )
         {
             if (instance == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(SR.GetString(SR.SFxNoServiceObject))
                     );
             if (inputs == null)
             {
                 if (this.InputParameterCount > 0)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(
@@ -126,8 +121,7 @@ namespace System.ServiceModel.Dispatcher
                         );
             }
             else if (inputs.Length != this.InputParameterCount)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(
@@ -192,8 +186,7 @@ namespace System.ServiceModel.Dispatcher
             catch (System.Security.SecurityException e)
             {
                 DiagnosticUtility.TraceHandledException(e, TraceEventType.Warning);
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(AuthorizationBehavior.CreateAccessDeniedFaultException());
             }
             catch (Exception e)
@@ -269,8 +262,7 @@ namespace System.ServiceModel.Dispatcher
             object returnVal;
 
             if (instance == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(SR.GetString(SR.SFxNoServiceObject))
                     );
@@ -293,8 +285,7 @@ namespace System.ServiceModel.Dispatcher
             catch (SecurityException e)
             {
                 DiagnosticUtility.TraceHandledException(e, TraceEventType.Warning);
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(AuthorizationBehavior.CreateAccessDeniedFaultException());
             }
             catch (FaultException)

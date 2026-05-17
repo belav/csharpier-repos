@@ -34,8 +34,7 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateEnumMember
                 CancellationToken cancellationToken
             )
             {
-                var languageServices = _document
-                    .Project
+                var languageServices = _document.Project
                     .Solution
                     .Services
                     .GetLanguageServices(_state.TypeToGenerateIn.Language);

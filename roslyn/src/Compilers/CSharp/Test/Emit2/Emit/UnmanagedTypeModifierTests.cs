@@ -658,8 +658,7 @@ public class Child : Parent
 }",
                 symbolValidator: module =>
                 {
-                    var parentTypeParameter = module
-                        .ContainingAssembly
+                    var parentTypeParameter = module.ContainingAssembly
                         .GetTypeByMetadataName("Parent")
                         .GetMethod("M")
                         .TypeParameters
@@ -673,8 +672,7 @@ public class Child : Parent
                         module.ContainingAssembly.Name
                     );
 
-                    var childTypeParameter = module
-                        .ContainingAssembly
+                    var childTypeParameter = module.ContainingAssembly
                         .GetTypeByMetadataName("Child")
                         .GetMethod("M")
                         .TypeParameters
@@ -718,8 +716,7 @@ public class Parent
 }",
                 symbolValidator: module =>
                 {
-                    var typeParameter = module
-                        .ContainingAssembly
+                    var typeParameter = module.ContainingAssembly
                         .GetTypeByMetadataName("Parent")
                         .GetMethod("M")
                         .TypeParameters
@@ -744,8 +741,7 @@ public class Child : Parent
                 references: new[] { parent.Compilation.EmitToImageReference() },
                 symbolValidator: module =>
                 {
-                    var typeParameter = module
-                        .ContainingAssembly
+                    var typeParameter = module.ContainingAssembly
                         .GetTypeByMetadataName("Child")
                         .GetMethod("M")
                         .TypeParameters
@@ -797,8 +793,7 @@ public class Child : Parent
 }",
                 symbolValidator: module =>
                 {
-                    var parentTypeParameter = module
-                        .ContainingAssembly
+                    var parentTypeParameter = module.ContainingAssembly
                         .GetTypeByMetadataName("Parent")
                         .GetMethod("M")
                         .TypeParameters
@@ -812,8 +807,7 @@ public class Child : Parent
                         module.ContainingAssembly.Name
                     );
 
-                    var childTypeParameter = module
-                        .ContainingAssembly
+                    var childTypeParameter = module.ContainingAssembly
                         .GetTypeByMetadataName("Child")
                         .GetMethod("M")
                         .TypeParameters
@@ -854,8 +848,7 @@ public abstract class Parent
 }",
                 symbolValidator: module =>
                 {
-                    var typeParameter = module
-                        .ContainingAssembly
+                    var typeParameter = module.ContainingAssembly
                         .GetTypeByMetadataName("Parent")
                         .GetMethod("M")
                         .TypeParameters
@@ -880,8 +873,7 @@ public class Child : Parent
                 references: new[] { parent.Compilation.EmitToImageReference() },
                 symbolValidator: module =>
                 {
-                    var typeParameter = module
-                        .ContainingAssembly
+                    var typeParameter = module.ContainingAssembly
                         .GetTypeByMetadataName("Child")
                         .GetMethod("M")
                         .TypeParameters
@@ -930,8 +922,7 @@ public class Child : Parent
 }",
                 symbolValidator: module =>
                 {
-                    var parentTypeParameter = module
-                        .ContainingAssembly
+                    var parentTypeParameter = module.ContainingAssembly
                         .GetTypeByMetadataName("Parent")
                         .GetMethod("M")
                         .TypeParameters
@@ -945,8 +936,7 @@ public class Child : Parent
                         module.ContainingAssembly.Name
                     );
 
-                    var childTypeParameter = module
-                        .ContainingAssembly
+                    var childTypeParameter = module.ContainingAssembly
                         .GetTypeByMetadataName("Child")
                         .GetMethod("M")
                         .TypeParameters
@@ -987,8 +977,7 @@ public interface Parent
 }",
                 symbolValidator: module =>
                 {
-                    var typeParameter = module
-                        .ContainingAssembly
+                    var typeParameter = module.ContainingAssembly
                         .GetTypeByMetadataName("Parent")
                         .GetMethod("M")
                         .TypeParameters
@@ -1013,8 +1002,7 @@ public class Child : Parent
                 references: new[] { parent.Compilation.EmitToImageReference() },
                 symbolValidator: module =>
                 {
-                    var typeParameter = module
-                        .ContainingAssembly
+                    var typeParameter = module.ContainingAssembly
                         .GetTypeByMetadataName("Child")
                         .GetMethod("M")
                         .TypeParameters
@@ -1063,8 +1051,7 @@ public class Child : Parent
 }",
                 symbolValidator: module =>
                 {
-                    var parentTypeParameter = module
-                        .ContainingAssembly
+                    var parentTypeParameter = module.ContainingAssembly
                         .GetTypeByMetadataName("Parent")
                         .GetMethod("M")
                         .TypeParameters
@@ -1078,8 +1065,7 @@ public class Child : Parent
                         module.ContainingAssembly.Name
                     );
 
-                    var childTypeParameter = module
-                        .ContainingAssembly
+                    var childTypeParameter = module.ContainingAssembly
                         .GetTypeByMetadataName("Child")
                         .GetMethod("M")
                         .TypeParameters
@@ -1120,8 +1106,7 @@ public interface Parent
 }",
                 symbolValidator: module =>
                 {
-                    var typeParameter = module
-                        .ContainingAssembly
+                    var typeParameter = module.ContainingAssembly
                         .GetTypeByMetadataName("Parent")
                         .GetMethod("M")
                         .TypeParameters
@@ -1146,8 +1131,7 @@ public class Child : Parent
                 references: new[] { parent.Compilation.EmitToImageReference() },
                 symbolValidator: module =>
                 {
-                    var typeParameter = module
-                        .ContainingAssembly
+                    var typeParameter = module.ContainingAssembly
                         .GetTypeByMetadataName("Child")
                         .GetMethod("M")
                         .TypeParameters
@@ -1196,8 +1180,7 @@ public class Child : Parent
 }",
                 symbolValidator: module =>
                 {
-                    var parentTypeParameter = module
-                        .ContainingAssembly
+                    var parentTypeParameter = module.ContainingAssembly
                         .GetTypeByMetadataName("Parent")
                         .GetMethod("M")
                         .TypeParameters
@@ -1211,8 +1194,7 @@ public class Child : Parent
                         module.ContainingAssembly.Name
                     );
 
-                    var childTypeParameter = module
-                        .ContainingAssembly
+                    var childTypeParameter = module.ContainingAssembly
                         .GetTypeByMetadataName("Child")
                         .GetMethod("Parent.M")
                         .TypeParameters
@@ -1254,8 +1236,7 @@ public interface Parent
 }",
                 symbolValidator: module =>
                 {
-                    var typeParameter = module
-                        .ContainingAssembly
+                    var typeParameter = module.ContainingAssembly
                         .GetTypeByMetadataName("Parent")
                         .GetMethod("M")
                         .TypeParameters
@@ -1280,8 +1261,7 @@ public class Child : Parent
                 references: new[] { parent.Compilation.EmitToImageReference() },
                 symbolValidator: module =>
                 {
-                    var typeParameter = module
-                        .ContainingAssembly
+                    var typeParameter = module.ContainingAssembly
                         .GetTypeByMetadataName("Child")
                         .GetMethod("Parent.M")
                         .TypeParameters
@@ -1342,13 +1322,11 @@ public class Program
     }
 }",
                 expectedOutput: "5",
-                options: TestOptions
-                    .ReleaseExe
+                options: TestOptions.ReleaseExe
                     .WithMetadataImportOptions(MetadataImportOptions.All),
                 symbolValidator: module =>
                 {
-                    var delegateTypeParameter = module
-                        .ContainingAssembly
+                    var delegateTypeParameter = module.ContainingAssembly
                         .GetTypeByMetadataName("D`1")
                         .TypeParameters
                         .Single();
@@ -1361,8 +1339,7 @@ public class Program
                         module.ContainingAssembly.Name
                     );
 
-                    var lambdaTypeParameter = module
-                        .ContainingAssembly
+                    var lambdaTypeParameter = module.ContainingAssembly
                         .GetTypeByMetadataName("Program")
                         .GetTypeMember("<>c__DisplayClass0_0")
                         .TypeParameters
@@ -1394,8 +1371,7 @@ public class TestRef
 }",
                 symbolValidator: module =>
                 {
-                    var typeParameter = module
-                        .ContainingAssembly
+                    var typeParameter = module.ContainingAssembly
                         .GetTypeByMetadataName("D`1")
                         .TypeParameters
                         .Single();
@@ -1427,13 +1403,11 @@ public class Program
 }",
                 expectedOutput: "5",
                 references: new[] { reference.Compilation.EmitToImageReference() },
-                options: TestOptions
-                    .ReleaseExe
+                options: TestOptions.ReleaseExe
                     .WithMetadataImportOptions(MetadataImportOptions.All),
                 symbolValidator: module =>
                 {
-                    var typeParameter = module
-                        .ContainingAssembly
+                    var typeParameter = module.ContainingAssembly
                         .GetTypeByMetadataName("Program")
                         .GetTypeMember("<>c__DisplayClass0_0")
                         .TypeParameters

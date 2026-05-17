@@ -14,8 +14,7 @@ namespace System.ServiceModel.Channels
         {
             if (size <= 0)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentOutOfRangeException(
                             "size",
@@ -40,8 +39,7 @@ namespace System.ServiceModel.Channels
             {
                 if (!isValueDecoded)
 #pragma warning suppress 56503 // Microsoft, not a publicly accessible API
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(SR.GetString(SR.FramingValueNotAvailable))
                         );
@@ -66,8 +64,7 @@ namespace System.ServiceModel.Channels
             DecoderHelper.ValidateSize(size);
             if (isValueDecoded)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(SR.GetString(SR.FramingValueNotAvailable))
                     );
@@ -80,8 +77,7 @@ namespace System.ServiceModel.Channels
                 bytesConsumed++;
                 if (index == LastIndex && (next & 0xF8) != 0)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidDataException(SR.GetString(SR.FramingSizeTooLarge))
                         );
@@ -128,8 +124,7 @@ namespace System.ServiceModel.Channels
             {
                 if (currentState != State.Done)
 #pragma warning suppress 56503 // Microsoft, not a publicly accessible API
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(SR.GetString(SR.FramingValueNotAvailable))
                         );
@@ -152,8 +147,7 @@ namespace System.ServiceModel.Channels
                         if (encodedSize > sizeQuota)
                         {
                             Exception quotaExceeded = OnSizeQuotaExceeded(encodedSize);
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(quotaExceeded);
                         }
                         if (encodedBytes == null || encodedBytes.Length < encodedSize)
@@ -199,8 +193,7 @@ namespace System.ServiceModel.Channels
                     }
                     break;
                 default:
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidDataException(SR.GetString(SR.InvalidDecoderStateMachine))
                         );
@@ -265,8 +258,7 @@ namespace System.ServiceModel.Channels
             }
             catch (UriFormatException exception)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidDataException(
                             SR.GetString(SR.FramingViaNotUri, value),
@@ -282,8 +274,7 @@ namespace System.ServiceModel.Channels
             {
                 if (!IsValueDecoded)
 #pragma warning suppress 56503 // Microsoft, not a publicly accessible API
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(SR.GetString(SR.FramingValueNotAvailable))
                         );
@@ -477,8 +468,7 @@ namespace System.ServiceModel.Channels
         {
             if (foundType != expectedType)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(CreateInvalidRecordTypeException(expectedType, foundType));
             }
         }
@@ -501,8 +491,7 @@ namespace System.ServiceModel.Channels
                 {
                     exceptionString = SR.GetString(SR.PreambleAckIncorrect);
                 }
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ProtocolException(exceptionString, inner));
             }
         }
@@ -616,8 +605,7 @@ namespace System.ServiceModel.Channels
                         bytesConsumed = 1;
                         break;
                     default:
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 CreateException(
                                     new InvalidDataException(
@@ -658,8 +646,7 @@ namespace System.ServiceModel.Channels
             {
                 if (currentState != State.Done)
 #pragma warning suppress 56503 // Microsoft, not a publicly accessible API
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(SR.GetString(SR.FramingValueNotAvailable))
                         );
@@ -673,8 +660,7 @@ namespace System.ServiceModel.Channels
             {
                 if (currentState != State.Done)
 #pragma warning suppress 56503 // Microsoft, not a publicly accessible API
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(SR.GetString(SR.FramingValueNotAvailable))
                         );
@@ -688,8 +674,7 @@ namespace System.ServiceModel.Channels
             {
                 if (currentState != State.Done)
 #pragma warning suppress 56503 // Microsoft, not a publicly accessible API
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(SR.GetString(SR.FramingValueNotAvailable))
                         );
@@ -750,8 +735,7 @@ namespace System.ServiceModel.Channels
             {
                 if (currentState < State.PreUpgradeStart)
 #pragma warning suppress 56503 // Microsoft, not a publicly accessible API
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(SR.GetString(SR.FramingValueNotAvailable))
                         );
@@ -765,8 +749,7 @@ namespace System.ServiceModel.Channels
             {
                 if (currentState < State.ReadingContentTypeRecord)
 #pragma warning suppress 56503 // Microsoft, not a publicly accessible API
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(SR.GetString(SR.FramingValueNotAvailable))
                         );
@@ -786,8 +769,7 @@ namespace System.ServiceModel.Channels
             {
                 if (currentState != State.UpgradeRequest)
 #pragma warning suppress 56503 // Microsoft, not a publicly accessible API
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(SR.GetString(SR.FramingValueNotAvailable))
                         );
@@ -801,8 +783,7 @@ namespace System.ServiceModel.Channels
             {
                 if (currentState < State.EnvelopeStart)
 #pragma warning suppress 56503 // Microsoft, not a publicly accessible API
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(SR.GetString(SR.FramingValueNotAvailable))
                         );
@@ -952,16 +933,14 @@ namespace System.ServiceModel.Channels
                         currentState = State.ReadingEndRecord;
                         break;
                     case State.End:
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 CreateException(
                                     new InvalidDataException(SR.GetString(SR.FramingAtEnd))
                                 )
                             );
                     default:
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 CreateException(
                                     new InvalidDataException(
@@ -1039,8 +1018,7 @@ namespace System.ServiceModel.Channels
                 if (currentState < State.ChunkStart)
                 {
 #pragma warning suppress 56503 // Microsoft, not a publicly accessible API
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(SR.GetString(SR.FramingValueNotAvailable))
                         );
@@ -1103,8 +1081,7 @@ namespace System.ServiceModel.Channels
                         currentState = State.End;
                         break;
                     case State.End:
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 CreateException(
                                     new InvalidDataException(SR.GetString(SR.FramingAtEnd))
@@ -1112,8 +1089,7 @@ namespace System.ServiceModel.Channels
                             );
 
                     default:
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 CreateException(
                                     new InvalidDataException(
@@ -1188,8 +1164,7 @@ namespace System.ServiceModel.Channels
             {
                 if (currentState < State.ReadingContentTypeRecord)
 #pragma warning suppress 56503 // Microsoft, not a publicly accessible API
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(SR.GetString(SR.FramingValueNotAvailable))
                         );
@@ -1203,8 +1178,7 @@ namespace System.ServiceModel.Channels
             {
                 if (currentState < State.PreUpgradeStart)
 #pragma warning suppress 56503 // Microsoft, not a publicly accessible API
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(SR.GetString(SR.FramingValueNotAvailable))
                         );
@@ -1218,8 +1192,7 @@ namespace System.ServiceModel.Channels
             {
                 if (currentState != State.UpgradeRequest)
 #pragma warning suppress 56503 // Microsoft, not a publicly accessible API
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(SR.GetString(SR.FramingValueNotAvailable))
                         );
@@ -1330,16 +1303,14 @@ namespace System.ServiceModel.Channels
                         currentState = State.EnvelopeStart;
                         break;
                     case State.EnvelopeStart:
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 CreateException(
                                     new InvalidDataException(SR.GetString(SR.FramingAtEnd))
                                 )
                             );
                     default:
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 CreateException(
                                     new InvalidDataException(
@@ -1456,16 +1427,14 @@ namespace System.ServiceModel.Channels
                         }
                         break;
                     case State.Start:
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 CreateException(
                                     new InvalidDataException(SR.GetString(SR.FramingAtEnd))
                                 )
                             );
                     default:
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 CreateException(
                                     new InvalidDataException(
@@ -1506,8 +1475,7 @@ namespace System.ServiceModel.Channels
             {
                 if (currentState < State.ReadingContentTypeRecord)
 #pragma warning suppress 56503 // Microsoft, not a publicly accessible API
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(SR.GetString(SR.FramingValueNotAvailable))
                         );
@@ -1521,8 +1489,7 @@ namespace System.ServiceModel.Channels
             {
                 if (currentState < State.Start)
 #pragma warning suppress 56503 // Microsoft, not a publicly accessible API
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(SR.GetString(SR.FramingValueNotAvailable))
                         );
@@ -1610,8 +1577,7 @@ namespace System.ServiceModel.Channels
             {
                 if (CurrentState < ClientFramingDecoderState.EnvelopeStart)
 #pragma warning suppress 56503 // Microsoft, not a publicly accessible API
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(SR.GetString(SR.FramingValueNotAvailable))
                         );
@@ -1625,8 +1591,7 @@ namespace System.ServiceModel.Channels
             {
                 if (CurrentState < ClientFramingDecoderState.Fault)
 #pragma warning suppress 56503 // Microsoft, not a publicly accessible API
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(SR.GetString(SR.FramingValueNotAvailable))
                         );
@@ -1740,16 +1705,14 @@ namespace System.ServiceModel.Channels
                         base.CurrentState = ClientFramingDecoderState.End;
                         break;
                     case ClientFramingDecoderState.End:
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 CreateException(
                                     new InvalidDataException(SR.GetString(SR.FramingAtEnd))
                                 )
                             );
                     default:
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 CreateException(
                                     new InvalidDataException(
@@ -1785,8 +1748,7 @@ namespace System.ServiceModel.Channels
             {
                 if (CurrentState < ClientFramingDecoderState.Fault)
 #pragma warning suppress 56503 // Microsoft, not a publicly accessible API
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(SR.GetString(SR.FramingValueNotAvailable))
                         );
@@ -1860,8 +1822,7 @@ namespace System.ServiceModel.Channels
                         break;
 
                     case ClientFramingDecoderState.EnvelopeStart:
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 CreateException(
                                     new InvalidDataException(SR.GetString(SR.FramingAtEnd))
@@ -1883,16 +1844,14 @@ namespace System.ServiceModel.Channels
                         }
                         break;
                     case ClientFramingDecoderState.Fault:
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 CreateException(
                                     new InvalidDataException(SR.GetString(SR.FramingAtEnd))
                                 )
                             );
                     default:
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 CreateException(
                                     new InvalidDataException(

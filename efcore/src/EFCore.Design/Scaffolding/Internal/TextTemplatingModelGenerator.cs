@@ -207,8 +207,7 @@ public class TextTemplatingModelGenerator : TemplatedModelGenerator
                     }
 
                     var entityTypeFileName = entityType.Name + entityTypeExtension;
-                    resultingFiles
-                        .AdditionalFiles
+                    resultingFiles.AdditionalFiles
                         .Add(
                             new ScaffoldedFile { Path = entityTypeFileName, Code = generatedCode }
                         );
@@ -238,10 +237,8 @@ public class TextTemplatingModelGenerator : TemplatedModelGenerator
                     host.Initialize();
                     host.Session.Add("EntityType", entityType);
                     host.Session.Add("Options", options);
-                    host.Session.Add(
-                        "NamespaceHint",
-                        options.ContextNamespace ?? options.ModelNamespace
-                    );
+                    host.Session
+                        .Add("NamespaceHint", options.ContextNamespace ?? options.ModelNamespace);
                     host.Session.Add("ProjectDefaultNamespace", options.RootNamespace);
 
                     if (compiledConfigurationTemplate is null)
@@ -264,8 +261,7 @@ public class TextTemplatingModelGenerator : TemplatedModelGenerator
 
                     var configurationFileName =
                         entityType.Name + "Configuration" + configurationExtension;
-                    resultingFiles
-                        .AdditionalFiles
+                    resultingFiles.AdditionalFiles
                         .Add(
                             new ScaffoldedFile
                             {

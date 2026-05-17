@@ -30,8 +30,7 @@ namespace Microsoft.WebAssembly.Diagnostics
     {
         internal static Script<object> script = CSharpScript.Create(
             "",
-            ScriptOptions
-                .Default
+            ScriptOptions.Default
                 .WithReferences(
                     typeof(object).Assembly,
                     typeof(Enumerable).Assembly,

@@ -36,8 +36,7 @@ namespace System.ServiceModel.Security
         {
             if (securityContextTokenId == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("securityContextTokenId"));
             }
 
@@ -96,12 +95,13 @@ namespace System.ServiceModel.Security
                 try
                 {
                     if (
-                        !this.standardsManager.TryGetSecurityContextIds(
-                            message,
-                            message.Version.Envelope.UltimateDestinationActorValues,
-                            this.isStrictMode,
-                            contextIds
-                        )
+                        !this.standardsManager
+                            .TryGetSecurityContextIds(
+                                message,
+                                message.Version.Envelope.UltimateDestinationActorValues,
+                                this.isStrictMode,
+                                contextIds
+                            )
                     )
                     {
                         return false;
@@ -168,14 +168,12 @@ namespace System.ServiceModel.Security
             {
                 if (standardsManager == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgumentNull("standardsManager");
                 }
                 if (excludedActions == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgumentNull("excludedActions");
                 }
                 this.standardsManager = standardsManager;
@@ -278,8 +276,7 @@ namespace System.ServiceModel.Security
                             filter.GetType()
                         )
                     );
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new NotSupportedException(
                                 SR.GetString(SR.UnknownFilterType, filter.GetType())
@@ -289,8 +286,7 @@ namespace System.ServiceModel.Security
                 if (sessionFilter.standardsManager != this.standardsManager)
                 {
                     Fx.Assert("Standards manager of filter does not match that of filter table");
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new NotSupportedException(SR.GetString(SR.StandardsManagerDoesNotMatch))
                         );
@@ -300,8 +296,7 @@ namespace System.ServiceModel.Security
                     Fx.Assert(
                         "Session filter's isStrictMode differs from filter table's isStrictMode"
                     );
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new NotSupportedException(SR.GetString(SR.FilterStrictModeDifferent))
                         );
@@ -314,8 +309,7 @@ namespace System.ServiceModel.Security
                             sessionFilter.SecurityContextTokenId
                         )
                     );
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(
@@ -326,10 +320,11 @@ namespace System.ServiceModel.Security
                         );
                 }
                 this.filterMappings.Add(filter, data);
-                this.contextMappings.Add(
-                    sessionFilter.SecurityContextTokenId,
-                    new KeyValuePair<MessageFilter, FilterData>(filter, data)
-                );
+                this.contextMappings
+                    .Add(
+                        sessionFilter.SecurityContextTokenId,
+                        new KeyValuePair<MessageFilter, FilterData>(filter, data)
+                    );
             }
 
             public bool ContainsKey(MessageFilter filter)
@@ -363,12 +358,13 @@ namespace System.ServiceModel.Security
                 if (!message.Properties.TryGetValue(SessionContextIdsProperty, out propertyValue))
                 {
                     contextIds = new List<UniqueId>(1);
-                    return this.standardsManager.TryGetSecurityContextIds(
-                        message,
-                        message.Version.Envelope.UltimateDestinationActorValues,
-                        isStrictMode,
-                        contextIds
-                    );
+                    return this.standardsManager
+                        .TryGetSecurityContextIds(
+                            message,
+                            message.Version.Envelope.UltimateDestinationActorValues,
+                            isStrictMode,
+                            contextIds
+                        );
                 }
                 else
                 {

@@ -529,8 +529,7 @@ namespace System.Web.UI.WebControls
 
             if (firstButtonIndex != 0)
             {
-                container
-                    .Controls
+                container.Controls
                     .Add(
                         CreateNextPrevButton(
                             PreviousPageText,
@@ -562,8 +561,7 @@ namespace System.Web.UI.WebControls
                 }
                 else
                 {
-                    container
-                        .Controls
+                    container.Controls
                         .Add(
                             CreateNumericButton(
                                 (i + firstButtonIndex + 1).ToString(CultureInfo.InvariantCulture),
@@ -578,8 +576,7 @@ namespace System.Web.UI.WebControls
             if (lastRecordIndex < _totalRowCount - 1)
             {
                 AddNonBreakingSpace(container);
-                container
-                    .Controls
+                container.Controls
                     .Add(
                         CreateNextPrevButton(
                             NextPageText,
@@ -603,8 +600,7 @@ namespace System.Web.UI.WebControls
 
             if (firstButtonIndex != 0)
             {
-                container
-                    .Controls
+                container.Controls
                     .Add(
                         CreateNextPrevLink(
                             PreviousPageText,
@@ -643,8 +639,7 @@ namespace System.Web.UI.WebControls
             if (lastRecordIndex < _totalRowCount - 1)
             {
                 AddNonBreakingSpace(container);
-                container
-                    .Controls
+                container.Controls
                     .Add(
                         CreateNextPrevLink(
                             NextPageText,

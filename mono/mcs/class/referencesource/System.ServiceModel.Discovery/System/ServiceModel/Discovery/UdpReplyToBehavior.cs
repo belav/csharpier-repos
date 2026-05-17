@@ -74,8 +74,7 @@ namespace System.ServiceModel.Discovery
             endpointDispatcher.DispatchRuntime.MessageInspectors.Add(this);
             if (endpointDispatcher.DispatchRuntime.CallbackClientRuntime != null)
             {
-                endpointDispatcher
-                    .DispatchRuntime
+                endpointDispatcher.DispatchRuntime
                     .CallbackClientRuntime
                     .MessageInspectors
                     .Add(this);
@@ -96,8 +95,7 @@ namespace System.ServiceModel.Discovery
             UdpAddressingState addressingState = null;
 
             if (
-                OperationContext
-                    .Current
+                OperationContext.Current
                     .IncomingMessageProperties
                     .TryGetValue(RemoteEndpointMessageProperty.Name, out messageProperty)
             )
@@ -160,8 +158,7 @@ namespace System.ServiceModel.Discovery
         {
             object messageProperty;
             if (
-                OperationContext
-                    .Current
+                OperationContext.Current
                     .OutgoingMessageProperties
                     .TryGetValue(DiscoveryMessageProperty.Name, out messageProperty)
             )

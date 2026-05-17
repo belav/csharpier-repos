@@ -245,8 +245,7 @@ public sealed partial class InternalEntityEntry : IUpdateEntry
 
         if (
             (adding || oldState is EntityState.Detached)
-            && await StateManager
-                .ValueGenerationManager
+            && await StateManager.ValueGenerationManager
                 .GenerateAsync(this, includePrimaryKey: adding, cancellationToken)
                 .ConfigureAwait(false)
             && fallbackState.HasValue
@@ -303,8 +302,7 @@ public sealed partial class InternalEntityEntry : IUpdateEntry
 
         if (adding || (oldState == EntityState.Detached && keyUnknown))
         {
-            var principalEntry = await StateManager
-                .ValueGenerationManager
+            var principalEntry = await StateManager.ValueGenerationManager
                 .PropagateAsync(this, cancellationToken)
                 .ConfigureAwait(false);
 
@@ -575,8 +573,7 @@ public sealed partial class InternalEntityEntry : IUpdateEntry
             {
                 var service =
                     this[serviceProperty]
-                    ?? serviceProperty
-                        .ParameterBinding
+                    ?? serviceProperty.ParameterBinding
                         .ServiceDelegate(
                             new MaterializationContext(ValueBuffer.Empty, Context),
                             EntityType,
@@ -602,8 +599,7 @@ public sealed partial class InternalEntityEntry : IUpdateEntry
             {
                 foreach (var serviceProperty in dependentServices)
                 {
-                    this[serviceProperty] = serviceProperty
-                        .ParameterBinding
+                    this[serviceProperty] = serviceProperty.ParameterBinding
                         .ServiceDelegate(
                             new MaterializationContext(ValueBuffer.Empty, Context),
                             EntityType,
@@ -641,8 +637,7 @@ public sealed partial class InternalEntityEntry : IUpdateEntry
 
         _stateData.EntityState = EntityState.Unchanged;
 
-        StateManager
-            .InternalEntityEntryNotifier
+        StateManager.InternalEntityEntryNotifier
             .StateChanged(this, EntityState.Detached, fromQuery: true);
 
         StateManager.OnTracked(this, fromQuery: true);
@@ -1672,8 +1667,7 @@ public sealed partial class InternalEntityEntry : IUpdateEntry
                     SetIsLoaded(navigation, value != null);
                 }
 
-                StateManager
-                    .InternalEntityEntryNotifier
+                StateManager.InternalEntityEntryNotifier
                     .PropertyChanged(this, propertyBase, setModified);
             }
         }
@@ -1979,8 +1973,7 @@ public sealed partial class InternalEntityEntry : IUpdateEntry
 
             if (StateManager.SensitiveLoggingEnabled)
             {
-                StateManager
-                    .UpdateLogger
+                StateManager.UpdateLogger
                     .CascadeDeleteOrphanSensitive(
                         this,
                         cascadeFk.PrincipalEntityType,
@@ -1989,8 +1982,7 @@ public sealed partial class InternalEntityEntry : IUpdateEntry
             }
             else
             {
-                StateManager
-                    .UpdateLogger
+                StateManager.UpdateLogger
                     .CascadeDeleteOrphan(this, cascadeFk.PrincipalEntityType, cascadeState);
             }
 
@@ -2209,8 +2201,7 @@ public sealed partial class InternalEntityEntry : IUpdateEntry
                 && GetCurrentValue(navigation) != null
             )
             {
-                StateManager
-                    .Dependencies
+                StateManager.Dependencies
                     .InternalEntityEntrySubscriber
                     .UnsubscribeCollectionChanged(this, navigation);
             }
@@ -2227,8 +2218,7 @@ public sealed partial class InternalEntityEntry : IUpdateEntry
     {
         foreach (var propertyBase in GetNotificationProperties(EntityType, eventArgs.PropertyName))
         {
-            StateManager
-                .InternalEntityEntryNotifier
+            StateManager.InternalEntityEntryNotifier
                 .PropertyChanged(this, propertyBase, setModified: true);
 
             if (
@@ -2236,8 +2226,7 @@ public sealed partial class InternalEntityEntry : IUpdateEntry
                 && GetCurrentValue(navigation) != null
             )
             {
-                StateManager
-                    .Dependencies
+                StateManager.Dependencies
                     .InternalEntityEntrySubscriber
                     .SubscribeCollectionChanged(this, navigation);
             }
@@ -2306,8 +2295,7 @@ public sealed partial class InternalEntityEntry : IUpdateEntry
             switch (eventArgs.Action)
             {
                 case NotifyCollectionChangedAction.Add:
-                    StateManager
-                        .InternalEntityEntryNotifier
+                    StateManager.InternalEntityEntryNotifier
                         .NavigationCollectionChanged(
                             this,
                             navigation,
@@ -2316,8 +2304,7 @@ public sealed partial class InternalEntityEntry : IUpdateEntry
                         );
                     break;
                 case NotifyCollectionChangedAction.Remove:
-                    StateManager
-                        .InternalEntityEntryNotifier
+                    StateManager.InternalEntityEntryNotifier
                         .NavigationCollectionChanged(
                             this,
                             navigation,
@@ -2326,8 +2313,7 @@ public sealed partial class InternalEntityEntry : IUpdateEntry
                         );
                     break;
                 case NotifyCollectionChangedAction.Replace:
-                    StateManager
-                        .InternalEntityEntryNotifier
+                    StateManager.InternalEntityEntryNotifier
                         .NavigationCollectionChanged(
                             this,
                             navigation,

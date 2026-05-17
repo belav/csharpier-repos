@@ -73,14 +73,12 @@ namespace System.ServiceModel.Syndication
         {
             if (dataContractExtension == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("dataContractExtension");
             }
             if (outerName == string.Empty)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(SR.GetString(SR.OuterNameOfElementExtensionEmpty));
             }
             if (dataContractSerializer == null)
@@ -104,8 +102,7 @@ namespace System.ServiceModel.Syndication
         {
             if (xmlSerializerExtension == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("xmlSerializerExtension");
             }
             if (serializer == null)
@@ -239,9 +236,8 @@ namespace System.ServiceModel.Syndication
             {
                 this.buffer = new XmlBuffer(int.MaxValue);
                 using (
-                    XmlDictionaryWriter writer = this.buffer.OpenSection(
-                        XmlDictionaryReaderQuotas.Max
-                    )
+                    XmlDictionaryWriter writer = this.buffer
+                        .OpenSection(XmlDictionaryReaderQuotas.Max)
                 )
                 {
                     writer.WriteStartElement(Rss20Constants.ExtensionWrapperTag);
@@ -260,10 +256,8 @@ namespace System.ServiceModel.Syndication
                 this.extensionDataWriter != null,
                 "outer name is null only for datacontract and xmlserializer cases"
             );
-            this.extensionDataWriter.ComputeOuterNameAndNs(
-                out this.outerName,
-                out this.outerNamespace
-            );
+            this.extensionDataWriter
+                .ComputeOuterNameAndNs(out this.outerName, out this.outerNamespace);
         }
 
         // this class holds the extension data and the associated serializer (either DataContractSerializer or XmlSerializer but not both)

@@ -52,8 +52,7 @@ internal class ProjectInitializationHandler : IDisposable
             LanguageServerHost.Instance,
             "We don't have an LSP channel yet to send this request through."
         );
-        var languageServerManager = LanguageServerHost
-            .Instance
+        var languageServerManager = LanguageServerHost.Instance
             .GetRequiredLspService<IClientLanguageServerManager>();
         await languageServerManager.SendNotificationAsync(
             ProjectInitializationCompleteName,
@@ -86,8 +85,7 @@ internal class ProjectInitializationHandler : IDisposable
             );
         if (rental.Proxy is not null)
         {
-            _subscription = await rental
-                .Proxy
+            _subscription = await rental.Proxy
                 .SubscribeInitializationCompletionAsync(
                     _projectInitializationCompleteObserver,
                     cancellationToken
@@ -101,9 +99,8 @@ internal class ProjectInitializationHandler : IDisposable
     private void AvailabilityChanged(object? sender, BrokeredServicesChangedEventArgs e)
     {
         if (
-            e.ImpactedServices.Contains(
-                Descriptors.RemoteProjectInitializationStatusService.Moniker
-            )
+            e.ImpactedServices
+                .Contains(Descriptors.RemoteProjectInitializationStatusService.Moniker)
         )
             _serviceAvailable.SetResult();
     }

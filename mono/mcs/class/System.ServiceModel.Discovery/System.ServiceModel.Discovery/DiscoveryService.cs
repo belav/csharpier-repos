@@ -260,8 +260,7 @@ namespace System.ServiceModel.Discovery
         void IDiscoveryTargetContract11.EndFind(IAsyncResult result)
         {
             OnEndFind(result);
-            var cb = OperationContext
-                .Current
+            var cb = OperationContext.Current
                 .GetCallbackChannel<IDiscoveryTargetCallbackContract11>();
             cb.ReplyFind(CreateFindResponse11());
         }
@@ -314,8 +313,7 @@ namespace System.ServiceModel.Discovery
         void IDiscoveryTargetContractApril2005.EndFind(IAsyncResult result)
         {
             OnEndFind(result);
-            var cb = OperationContext
-                .Current
+            var cb = OperationContext.Current
                 .GetCallbackChannel<IDiscoveryTargetCallbackContractApril2005>();
             cb.ReplyFind(CreateFindResponseApril2005());
         }
@@ -368,8 +366,7 @@ namespace System.ServiceModel.Discovery
         void IDiscoveryTargetContractCD1.EndFind(IAsyncResult result)
         {
             OnEndFind(result);
-            var cb = OperationContext
-                .Current
+            var cb = OperationContext.Current
                 .GetCallbackChannel<IDiscoveryTargetCallbackContractCD1>();
             cb.ReplyFind(CreateFindResponseCD1());
         }
@@ -454,10 +451,11 @@ namespace System.ServiceModel.Discovery
                 as RemoteEndpointMessageProperty;
             if (rmp != null)
                 // FIXME: use appropriate port. Client does not listen at the sending port.
-                oc.OutgoingMessageProperties.Add(
-                    RemoteEndpointMessageProperty.Name,
-                    new RemoteEndpointMessageProperty(rmp.Address, rmp.Port)
-                );
+                oc.OutgoingMessageProperties
+                    .Add(
+                        RemoteEndpointMessageProperty.Name,
+                        new RemoteEndpointMessageProperty(rmp.Address, rmp.Port)
+                    );
         }
 
         protected override IAsyncResult OnBeginResolve(

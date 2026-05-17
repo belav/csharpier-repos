@@ -63,8 +63,7 @@ namespace System.Net.Http.Functional.Tests
                                 .ConfigureAwait(false);
 
                             using (
-                                Stream clientStream = await (await responseTask)
-                                    .Content
+                                Stream clientStream = await (await responseTask).Content
                                     .ReadAsStreamAsync(TestAsync)
                             )
                             {

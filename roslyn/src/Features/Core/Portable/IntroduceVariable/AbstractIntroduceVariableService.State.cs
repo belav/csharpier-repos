@@ -80,8 +80,7 @@ namespace Microsoft.CodeAnalysis.IntroduceVariable
             {
                 cancellationToken.ThrowIfCancellationRequested();
 
-                Expression = await document
-                    .Document
+                Expression = await document.Document
                     .TryGetRelevantNodeAsync<TExpressionSyntax>(textSpan, cancellationToken)
                     .ConfigureAwait(false);
                 if (
@@ -95,14 +94,12 @@ namespace Microsoft.CodeAnalysis.IntroduceVariable
                     return false;
 
                 // Too noisy to offer introduce-local on `this/me`.
-                var syntaxFacts = document
-                    .Document
+                var syntaxFacts = document.Document
                     .GetRequiredLanguageService<ISyntaxFactsService>();
                 if (syntaxFacts.IsThisExpression(Expression))
                     return false;
 
-                var expressionType = Document
-                    .SemanticModel
+                var expressionType = Document.SemanticModel
                     .GetTypeInfo(Expression, cancellationToken)
                     .Type;
                 if (expressionType is IErrorTypeSymbol)
@@ -111,8 +108,7 @@ namespace Microsoft.CodeAnalysis.IntroduceVariable
                 // Inside an attribute we can only extract out constant values (so no arrays or 'System.Type's).
                 if (
                     this.IsInAttributeContext()
-                    && !Document
-                        .SemanticModel
+                    && !Document.SemanticModel
                         .GetConstantValue(Expression, cancellationToken)
                         .HasValue
                 )
@@ -233,8 +229,7 @@ namespace Microsoft.CodeAnalysis.IntroduceVariable
                     TExpressionSyntax expression
                 )
                 {
-                    var syntaxFacts = document
-                        .Document
+                    var syntaxFacts = document.Document
                         .GetRequiredLanguageService<ISyntaxFactsService>();
 
                     var current = expression;
@@ -273,8 +268,7 @@ namespace Microsoft.CodeAnalysis.IntroduceVariable
                         { HasValue: true, Value: var value }
                     )
                     {
-                        var syntaxKindsService = document
-                            .Document
+                        var syntaxKindsService = document.Document
                             .GetRequiredLanguageService<ISyntaxKindsService>();
                         if (
                             syntaxKindsService.InterpolatedStringExpression == expression.RawKind
@@ -283,8 +277,7 @@ namespace Microsoft.CodeAnalysis.IntroduceVariable
                         {
                             // Interpolated strings can have constant values, but if it's being converted to a FormattableString
                             // or IFormattable then we cannot treat it as one
-                            var typeInfo = document
-                                .SemanticModel
+                            var typeInfo = document.SemanticModel
                                 .GetTypeInfo(expression, cancellationToken);
                             return typeInfo.ConvertedType?.IsFormattableStringOrIFormattable()
                                 != true;
@@ -303,8 +296,7 @@ namespace Microsoft.CodeAnalysis.IntroduceVariable
 
             public SemanticMap GetSemanticMap(CancellationToken cancellationToken)
             {
-                _semanticMap ??= Document
-                    .SemanticModel
+                _semanticMap ??= Document.SemanticModel
                     .GetSemanticMap(Expression, cancellationToken);
                 return _semanticMap;
             }

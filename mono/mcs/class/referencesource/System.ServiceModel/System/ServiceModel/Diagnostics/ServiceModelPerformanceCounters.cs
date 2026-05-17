@@ -61,10 +61,8 @@ namespace System.ServiceModel.Diagnostics
                         && !this.actionToOperation.Keys.Contains(opDescription.Messages[0].Action)
                     )
                     {
-                        this.actionToOperation.Add(
-                            opDescription.Messages[0].Action,
-                            opDescription.Name
-                        );
+                        this.actionToOperation
+                            .Add(opDescription.Messages[0].Action, opDescription.Name);
                     }
                     OperationPerformanceCountersBase c;
                     if (!this.operationPerfCounters.TryGetValue(opDescription.Name, out c))

@@ -241,8 +241,7 @@ namespace System.Workflow.Activities.Rules
             else
             {
                 string resourceName = workflowType.Name + ".rules";
-                Stream stream = workflowType
-                    .Module
+                Stream stream = workflowType.Module
                     .Assembly
                     .GetManifestResourceStream(workflowType, resourceName);
 

@@ -30,8 +30,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Preview
             where T : ITag
         {
             if (
-                textView
-                    .Properties
+                textView.Properties
                     .TryGetProperty(
                         typeof(PreviewUpdater.PreviewTagger),
                         out PreviewUpdater.PreviewTagger tagger

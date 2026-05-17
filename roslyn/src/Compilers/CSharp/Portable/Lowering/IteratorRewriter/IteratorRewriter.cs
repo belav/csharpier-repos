@@ -101,8 +101,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 isEnumerable,
                 elementType
             );
-            compilationState
-                .ModuleBuilderOpt
+            compilationState.ModuleBuilderOpt
                 .CompilationState
                 .SetStateMachineType(method, stateMachineType);
             var rewriter = new IteratorRewriter(
@@ -269,8 +268,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 SpecialMember.System_Collections_IEnumerator__Reset
             );
             var IEnumerator_get_Current = F.SpecialProperty(
-                SpecialMember.System_Collections_IEnumerator__Current
-            ).GetMethod;
+                    SpecialMember.System_Collections_IEnumerator__Current
+                )
+                .GetMethod;
 
             var IEnumeratorOfElementType = F.SpecialType(
                     SpecialType.System_Collections_Generic_IEnumerator_T

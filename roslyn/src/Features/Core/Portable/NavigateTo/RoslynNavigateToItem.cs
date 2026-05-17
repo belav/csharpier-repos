@@ -191,8 +191,7 @@ namespace Microsoft.CodeAnalysis.NavigateTo
                             var additionalProject = solution.GetRequiredProject(
                                 additionalProjectId
                             );
-                            var (projectName, projectFlavor) = additionalProject
-                                .State
+                            var (projectName, projectFlavor) = additionalProject.State
                                 .NameAndFlavor;
                             if (projectName == firstProjectName)
                                 flavors.Add(projectFlavor!);

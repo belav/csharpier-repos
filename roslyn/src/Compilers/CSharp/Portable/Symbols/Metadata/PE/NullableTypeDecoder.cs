@@ -37,8 +37,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             byte defaultTransformFlag;
             ImmutableArray<byte> nullableTransformFlags;
             if (
-                !containingModule
-                    .Module
+                !containingModule.Module
                     .HasNullableAttribute(
                         targetSymbolToken,
                         out defaultTransformFlag,

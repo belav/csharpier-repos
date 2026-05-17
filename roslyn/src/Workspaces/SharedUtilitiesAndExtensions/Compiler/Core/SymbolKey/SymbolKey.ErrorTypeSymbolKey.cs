@@ -112,8 +112,7 @@ namespace Microsoft.CodeAnalysis
                     var container in containingSymbolResolution.OfType<INamespaceOrTypeSymbol>()
                 )
                 {
-                    var originalType = reader
-                        .Compilation
+                    var originalType = reader.Compilation
                         .CreateErrorTypeSymbol(container, name, arity);
                     var errorType =
                         typeArgumentsArray != null
@@ -155,8 +154,7 @@ namespace Microsoft.CodeAnalysis
 
                     // have to walk the namespaces in reverse because that's how we encoded them.
                     for (var i = namespaceNames.Count - 1; i >= 0; i--)
-                        currentNamespace = reader
-                            .Compilation
+                        currentNamespace = reader.Compilation
                             .CreateErrorNamespaceSymbol(currentNamespace, namespaceNames[i]);
 
                     failureReason = null;

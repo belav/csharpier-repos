@@ -2053,8 +2053,8 @@ namespace System.Diagnostics
                 long baseValue = 0;
                 if (this.BaseCounterDefinitionSample != null)
                 {
-                    CategorySample baseCategorySample =
-                        this.BaseCounterDefinitionSample.categorySample;
+                    CategorySample baseCategorySample = this.BaseCounterDefinitionSample
+                        .categorySample;
                     int baseIndex = (int)baseCategorySample.InstanceNameTable[keys[index]];
                     baseValue = this.BaseCounterDefinitionSample.instanceValues[baseIndex];
                 }

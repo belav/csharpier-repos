@@ -111,8 +111,7 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.DocumentOutline
                 SortOption sortOption
             ) =>
                 (ImmutableArray<DocumentSymbolDataViewModel>)
-                    DocumentSymbolDataViewModelSorter
-                        .Instance
+                    DocumentSymbolDataViewModelSorter.Instance
                         .Convert(
                             [items, sortOption],
                             typeof(ImmutableArray<DocumentSymbolDataViewModel>),

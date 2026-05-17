@@ -43,24 +43,20 @@ public class ConstructorBindingConvention : IModelFinalizingConvention
         {
             if (
                 !entityType.ClrType.IsAbstract
-                && ConfigurationSource
-                    .Convention
+                && ConfigurationSource.Convention
                     .Overrides(entityType.GetConstructorBindingConfigurationSource())
             )
             {
-                Dependencies
-                    .ConstructorBindingFactory
+                Dependencies.ConstructorBindingFactory
                     .GetBindings(
                         (IMutableEntityType)entityType,
                         out var constructorBinding,
                         out var serviceOnlyBinding
                     );
 
-                entityType
-                    .Builder
+                entityType.Builder
                     .HasConstructorBinding(constructorBinding, ConfigurationSource.Convention);
-                entityType
-                    .Builder
+                entityType.Builder
                     .HasServiceOnlyConstructorBinding(
                         serviceOnlyBinding,
                         ConfigurationSource.Convention
@@ -78,19 +74,15 @@ public class ConstructorBindingConvention : IModelFinalizingConvention
     {
         if (
             !complexType.ClrType.IsAbstract
-            && ConfigurationSource
-                .Convention
+            && ConfigurationSource.Convention
                 .Overrides(complexType.GetConstructorBindingConfigurationSource())
         )
         {
-            Dependencies
-                .ConstructorBindingFactory
+            Dependencies.ConstructorBindingFactory
                 .GetBindings(complexType, out var constructorBinding, out var serviceOnlyBinding);
-            complexType
-                .Builder
+            complexType.Builder
                 .HasConstructorBinding(constructorBinding, ConfigurationSource.Convention);
-            complexType
-                .Builder
+            complexType.Builder
                 .HasServiceOnlyConstructorBinding(
                     serviceOnlyBinding,
                     ConfigurationSource.Convention

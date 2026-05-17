@@ -36,8 +36,7 @@ namespace System.ServiceModel.Configuration
             DelegatingHandlerElement delegatingHandlerElement = element as DelegatingHandlerElement;
             if (delegatingHandlerElement == null)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .Argument(
                         "element",
                         SR.GetString(

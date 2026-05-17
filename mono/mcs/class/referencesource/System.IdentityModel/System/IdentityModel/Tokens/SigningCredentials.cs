@@ -29,21 +29,18 @@ namespace System.IdentityModel.Tokens
         {
             if (signingKey == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("signingKey"));
             }
 
             if (signatureAlgorithm == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("signatureAlgorithm"));
             }
             if (digestAlgorithm == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("digestAlgorithm"));
             }
             this.signingKey = signingKey;

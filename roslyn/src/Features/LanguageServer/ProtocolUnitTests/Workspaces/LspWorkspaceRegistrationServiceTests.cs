@@ -29,8 +29,7 @@ public class LspWorkspaceRegistrationServiceTests : AbstractLanguageServerProtoc
         )
         {
             registrationService = (TestWorkspaceRegistrationService)
-                testLspServer
-                    .TestWorkspace
+                testLspServer.TestWorkspace
                     .ExportProvider
                     .GetExportedValue<LspWorkspaceRegistrationService>();
         }

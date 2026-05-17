@@ -47,14 +47,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion
         public void FindCompletionProvider()
         {
             using var workspace = new TestWorkspace(
-                composition: FeaturesTestCompositions
-                    .Features
+                composition: FeaturesTestCompositions.Features
                     .AddParts(typeof(ThirdPartyCompletionProvider))
             );
             var text = SourceText.From("class C { }");
 
-            var document = workspace
-                .CurrentSolution
+            var document = workspace.CurrentSolution
                 .AddProject("TestProject", "Assembly", LanguageNames.CSharp)
                 .AddDocument("TestDocument.cs", text);
 
@@ -118,22 +116,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion
         public async Task PassThroughOptions1()
         {
             using var workspace = new TestWorkspace(
-                composition: FeaturesTestCompositions
-                    .Features
+                composition: FeaturesTestCompositions.Features
                     .AddParts(typeof(ThirdPartyCompletionProvider))
             );
 
             var text = SourceText.From("class C { }");
 
-            var document = workspace
-                .CurrentSolution
+            var document = workspace.CurrentSolution
                 .AddProject("TestProject", "Assembly", LanguageNames.CSharp)
                 .AddDocument("TestDocument.cs", text);
 
             var service = CompletionService.GetService(document);
             var options = new TestOptionSet(
-                ImmutableDictionary<OptionKey, object>
-                    .Empty
+                ImmutableDictionary<OptionKey, object>.Empty
                     .Add(new OptionKey(ThirdPartyOption.Instance, LanguageNames.CSharp), 1)
             );
             service.ShouldTriggerCompletion(text, 1, CompletionTrigger.Invoke, options: options);
@@ -155,8 +150,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion
         public async Task PassThroughOptions2()
         {
             using var workspace = new TestWorkspace(
-                composition: EditorTestCompositions
-                    .EditorFeatures
+                composition: EditorTestCompositions.EditorFeatures
                     .AddParts(typeof(ThirdPartyCompletionProvider))
             );
 
@@ -167,11 +161,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion
 
             Assert.True(
                 workspace.TryApplyChanges(
-                    workspace
-                        .CurrentSolution
+                    workspace.CurrentSolution
                         .WithOptions(
-                            workspace
-                                .CurrentSolution
+                            workspace.CurrentSolution
                                 .Options
                                 .WithChangedOption(
                                     new OptionKey(ThirdPartyOption.Instance, LanguageNames.CSharp),

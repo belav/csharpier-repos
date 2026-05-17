@@ -74,8 +74,7 @@ namespace System.Data.Services.Client
         {
             get
             {
-                System
-                    .Diagnostics
+                System.Diagnostics
                     .Debug
                     .Assert(
                         (EntityStates.Added == this.state)

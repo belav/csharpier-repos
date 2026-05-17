@@ -217,8 +217,7 @@ internal sealed partial class CSharpUseCollectionExpressionForArrayDiagnosticAna
                     expression.SpanStart,
                     expression is ArrayCreationExpressionSyntax arrayCreationExpression
                         ? arrayCreationExpression.Type.Span.End
-                        : ((ImplicitArrayCreationExpressionSyntax)expression)
-                            .CloseBracketToken
+                        : ((ImplicitArrayCreationExpressionSyntax)expression).CloseBracketToken
                             .Span
                             .End
                 )

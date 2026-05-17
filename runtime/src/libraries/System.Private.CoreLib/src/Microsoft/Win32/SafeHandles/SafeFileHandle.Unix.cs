@@ -649,8 +649,7 @@ namespace Microsoft.Win32.SafeHandles
             }
 
             if (
-                !Interop
-                    .Sys
+                !Interop.Sys
                     .TryGetFileSystemType(
                         this,
                         out Interop.Sys.UnixFileSystemTypes unixFileSystemType

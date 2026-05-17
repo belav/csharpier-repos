@@ -132,8 +132,7 @@ namespace System.Runtime.Serialization
         {
             this.context = context;
             if (maxItemsInObjectGraph < 0)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentOutOfRangeException(
                             "maxItemsInObjectGraph",
@@ -225,8 +224,7 @@ namespace System.Runtime.Serialization
             set
             {
                 if (value != FormatterAssemblyStyle.Full && value != FormatterAssemblyStyle.Simple)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentException(SR.GetString(SR.InvalidAssemblyFormat, value))
                         );
@@ -331,8 +329,7 @@ namespace System.Runtime.Serialization
         )
         {
             if (MaxItemsInObjectGraph == 0)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         XmlObjectSerializer.CreateSerializationException(
                             SR.GetString(SR.ExceededMaxItemsQuota, MaxItemsInObjectGraph)
@@ -341,8 +338,7 @@ namespace System.Runtime.Serialization
 
             if (IsRootXmlAny(rootName, contract))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         XmlObjectSerializer.CreateSerializationException(
                             SR.GetString(
@@ -416,8 +412,7 @@ namespace System.Runtime.Serialization
                         && !IsAssemblyNameForwardingSafe(clrType.Assembly.FullName, clrAssemblyName)
                     )
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 XmlObjectSerializer.CreateSerializationException(
                                     SR.GetString(
@@ -583,8 +578,7 @@ namespace System.Runtime.Serialization
         )
         {
             if (MaxItemsInObjectGraph == 0)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         XmlObjectSerializer.CreateSerializationException(
                             SR.GetString(SR.ExceededMaxItemsQuota, MaxItemsInObjectGraph)
@@ -594,8 +588,7 @@ namespace System.Runtime.Serialization
             // verifyObjectName has no effect in SharedType mode
             if (!IsStartElement(xmlReader))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         XmlObjectSerializer.CreateSerializationExceptionWithReaderDetails(
                             SR.GetString(SR.ExpectingElementAtDeserialize, XmlNodeType.Element),

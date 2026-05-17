@@ -105,20 +105,21 @@ namespace System.Web.UI.WebControls
             if (cellType == DataControlCellType.Header)
             {
                 if (HeaderText.Length > 0 && sortingEnabled && SortExpression.Length > 0)
-                    cell.Controls.Add(
-                        (Control)
-                            DataControlButton.CreateButton(
-                                String.IsNullOrEmpty(HeaderImageUrl)
-                                    ? ButtonType.Link
-                                    : ButtonType.Image,
-                                control,
-                                HeaderText,
-                                HeaderImageUrl,
-                                DataControlCommands.SortCommandName,
-                                SortExpression,
-                                true
-                            )
-                    );
+                    cell.Controls
+                        .Add(
+                            (Control)
+                                DataControlButton.CreateButton(
+                                    String.IsNullOrEmpty(HeaderImageUrl)
+                                        ? ButtonType.Link
+                                        : ButtonType.Image,
+                                    control,
+                                    HeaderText,
+                                    HeaderImageUrl,
+                                    DataControlCommands.SortCommandName,
+                                    SortExpression,
+                                    true
+                                )
+                        );
                 else if (HeaderImageUrl.Length > 0)
                 {
                     Image image = new Image();

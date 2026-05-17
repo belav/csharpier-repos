@@ -207,8 +207,7 @@ namespace Newtonsoft.Json
                         {
                             if (
                                 schema.Properties != null
-                                && schema
-                                    .Properties
+                                && schema.Properties
                                     .TryGetValue(
                                         _currentScope.CurrentPropertyName,
                                         out JsonSchemaModel propertySchema
@@ -718,8 +717,7 @@ namespace Newtonsoft.Json
                         if (isInUniqueArray)
                         {
                             if (
-                                schemaScope
-                                    .UniqueArrayItems
+                                schemaScope.UniqueArrayItems
                                     .Contains(finishedItem, JToken.EqualityComparer)
                             )
                             {
@@ -741,8 +739,7 @@ namespace Newtonsoft.Json
                                 if (schema.Enum != null)
                                 {
                                     if (
-                                        !schema
-                                            .Enum
+                                        !schema.Enum
                                             .ContainsValue(finishedItem, JToken.EqualityComparer)
                                     )
                                     {

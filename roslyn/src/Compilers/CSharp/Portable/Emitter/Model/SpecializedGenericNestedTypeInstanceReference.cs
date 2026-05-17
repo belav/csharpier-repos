@@ -29,8 +29,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
             Debug.Assert(underlyingNamedType.IsDefinition);
             // Definition doesn't have custom modifiers on type arguments
             Debug.Assert(
-                !underlyingNamedType
-                    .TypeArgumentsWithAnnotationsNoUseSiteDiagnostics
+                !underlyingNamedType.TypeArgumentsWithAnnotationsNoUseSiteDiagnostics
                     .Any(static a => a.CustomModifiers.Any())
             );
         }

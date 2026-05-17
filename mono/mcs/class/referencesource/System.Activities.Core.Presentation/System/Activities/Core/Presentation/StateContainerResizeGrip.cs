@@ -110,9 +110,10 @@ namespace System.Activities.Core.Presentation
                 this.CaptureMouse();
                 if (this.scope != null)
                 {
-                    this.ParentStateContainerEditor.StoreShapeSizeWithUndoRecursively(
-                        this.ParentStateContainerEditor.ModelItem
-                    );
+                    this.ParentStateContainerEditor
+                        .StoreShapeSizeWithUndoRecursively(
+                            this.ParentStateContainerEditor.ModelItem
+                        );
                 }
                 // Select the designer when it is being resized
                 WorkflowViewElement designer =

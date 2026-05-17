@@ -44,8 +44,7 @@
         {
             protected override void Seed(TestContext testContext)
             {
-                testContext
-                    .Bases
+                testContext.Bases
                     .Add(
                         new Base()
                         {
@@ -80,8 +79,7 @@
 
                 using (var context = new TestContext())
                 {
-                    var baseDTO = context
-                        .Bases
+                    var baseDTO = context.Bases
                         .Select(b => new BaseDTO
                         {
                             Base1 = b.Base1,

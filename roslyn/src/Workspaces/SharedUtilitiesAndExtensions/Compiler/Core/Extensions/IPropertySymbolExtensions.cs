@@ -9,8 +9,7 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
     internal static partial class IPropertySymbolExtensions
     {
         public static IFieldSymbol? GetBackingFieldIfAny(this IPropertySymbol property) =>
-            property
-                .ContainingType
+            property.ContainingType
                 .GetMembers()
                 .OfType<IFieldSymbol>()
                 .FirstOrDefault(f => property.Equals(f.AssociatedSymbol));

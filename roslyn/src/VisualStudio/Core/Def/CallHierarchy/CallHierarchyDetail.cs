@@ -51,8 +51,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CallHierarchy
             var lineSpan = location.GetLineSpan();
             var start = location.SourceTree.GetText().Lines[lineSpan.StartLinePosition.Line].Start;
             var end = location.SourceTree.GetText().Lines[lineSpan.EndLinePosition.Line].End;
-            return location
-                .SourceTree
+            return location.SourceTree
                 .GetText()
                 .GetSubText(TextSpan.FromBounds(start, end))
                 .ToString();
@@ -75,8 +74,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CallHierarchy
 
         private async Task NavigateToAsync()
         {
-            using var context = _provider
-                .ThreadOperationExecutor
+            using var context = _provider.ThreadOperationExecutor
                 .BeginExecute(
                     ServicesVSResources.Call_Hierarchy,
                     ServicesVSResources.Navigating,

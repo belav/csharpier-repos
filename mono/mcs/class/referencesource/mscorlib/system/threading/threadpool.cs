@@ -656,8 +656,7 @@ namespace System.Threading
         {
             queueTail = queueHead = new QueueSegment();
 #if !MONO
-            loggingEnabled = FrameworkEventSource
-                .Log
+            loggingEnabled = FrameworkEventSource.Log
                 .IsEnabled(
                     EventLevel.Verbose,
                     FrameworkEventSource.Keywords.ThreadPool
@@ -735,8 +734,7 @@ namespace System.Threading
 
 #if !MONO
             if (loggingEnabled)
-                System
-                    .Diagnostics
+                System.Diagnostics
                     .Tracing
                     .FrameworkEventSource
                     .Log
@@ -861,8 +859,7 @@ namespace System.Threading
 
 #if !MONO
             // Has the desire for logging changed since the last time we entered?
-            workQueue.loggingEnabled = FrameworkEventSource
-                .Log
+            workQueue.loggingEnabled = FrameworkEventSource.Log
                 .IsEnabled(
                     EventLevel.Verbose,
                     FrameworkEventSource.Keywords.ThreadPool
@@ -928,8 +925,7 @@ namespace System.Threading
                     {
 #if !MONO
                         if (workQueue.loggingEnabled)
-                            System
-                                .Diagnostics
+                            System.Diagnostics
                                 .Tracing
                                 .FrameworkEventSource
                                 .Log

@@ -2602,13 +2602,11 @@ namespace System.Xml.Serialization
 
                         string a = choiceArrayName;
                         string c = "c" + a;
-                        bool choiceUseReflection = mapping
-                            .ChoiceIdentifier
+                        bool choiceUseReflection = mapping.ChoiceIdentifier
                             .Mapping
                             .TypeDesc
                             .UseReflection;
-                        string choiceTypeFullName = mapping
-                            .ChoiceIdentifier
+                        string choiceTypeFullName = mapping.ChoiceIdentifier
                             .Mapping
                             .TypeDesc
                             .CSharpName;
@@ -2625,14 +2623,12 @@ namespace System.Xml.Serialization
                             + ", "
                             + c
                             + ", "
-                            + outerClass
-                                .RaCodeGen
+                            + outerClass.RaCodeGen
                                 .GetStringForTypeof(choiceTypeFullName, choiceUseReflection)
                             + ");";
                         this.choiceArraySource =
                             init
-                            + outerClass
-                                .RaCodeGen
+                            + outerClass.RaCodeGen
                                 .GetStringForArrayMember(
                                     a,
                                     c + "++",
@@ -5386,14 +5382,12 @@ namespace System.Xml.Serialization
                             a = member.ChoiceArrayName;
                             c = "c" + a;
 
-                            bool choiceUseReflection = member
-                                .Mapping
+                            bool choiceUseReflection = member.Mapping
                                 .ChoiceIdentifier
                                 .Mapping
                                 .TypeDesc
                                 .UseReflection;
-                            string choiceTypeName = member
-                                .Mapping
+                            string choiceTypeName = member.Mapping
                                 .ChoiceIdentifier
                                 .Mapping
                                 .TypeDesc

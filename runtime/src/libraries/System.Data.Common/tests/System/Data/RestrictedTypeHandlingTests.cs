@@ -225,8 +225,7 @@ namespace System.Data.Tests
 
             try
             {
-                AppDomain
-                    .CurrentDomain
+                AppDomain.CurrentDomain
                     .SetData(
                         AppDomainDataSetDefaultAllowedTypesKey,
                         new Type[] { typeof(MyCustomClass) }
@@ -285,8 +284,7 @@ namespace System.Data.Tests
 
             try
             {
-                AppDomain
-                    .CurrentDomain
+                AppDomain.CurrentDomain
                     .SetData(
                         AppDomainDataSetDefaultAllowedTypesKey,
                         new Type[] { typeof(MyCustomNullable1) }
@@ -333,8 +331,7 @@ namespace System.Data.Tests
 
             DataTable table = new DataTable("MyTable");
             table.Columns.Add("ColumnA", typeof(object));
-            table
-                .Columns
+            table.Columns
                 .Add("ColumnB", typeof(object), "CONVERT(ColumnA, 'System.Text.StringBuilder')");
 
             string asXml = WriteXmlWithSchema(table.WriteXml);

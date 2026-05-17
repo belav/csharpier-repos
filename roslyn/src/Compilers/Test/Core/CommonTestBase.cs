@@ -494,8 +494,7 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
 
             if (parseOptions == null)
             {
-                parseOptions = CSharp
-                    .CSharpParseOptions
+                parseOptions = CSharp.CSharpParseOptions
                     .Default
                     .WithLanguageVersion(CSharp.LanguageVersion.Default)
                     .WithDocumentationMode(DocumentationMode.None);
@@ -525,15 +524,13 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
 
             AddReferencedCompilations(referencedCompilations, references);
 
-            var tree = CSharp
-                .SyntaxFactory
+            var tree = CSharp.SyntaxFactory
                 .ParseSyntaxTree(
                     SourceText.From(code, encoding: null, SourceHashAlgorithms.Default),
                     options: parseOptions
                 );
 
-            var compilation = CSharp
-                .CSharpCompilation
+            var compilation = CSharp.CSharpCompilation
                 .Create(assemblyName, new[] { tree }, references, compilationOptions);
 
             if (assemblyIdentity != null)
@@ -652,8 +649,7 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             var trees = new SyntaxTree[files.Length];
             for (int i = 0; i < files.Length; i++)
             {
-                trees[i] = VisualBasic
-                    .VisualBasicSyntaxTree
+                trees[i] = VisualBasic.VisualBasicSyntaxTree
                     .ParseText(
                         SourceText.From(files[i], encoding, SourceHashAlgorithms.Default),
                         options: parseOptions,
@@ -661,8 +657,7 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                     );
             }
 
-            return VisualBasic
-                .VisualBasicCompilation
+            return VisualBasic.VisualBasicCompilation
                 .Create(assemblyName, trees, references, compilationOptions);
         }
 
@@ -718,10 +713,13 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                 targetRuntimeVersion: "v4.0.30319",
                 machine: 0,
                 baseAddress: Cci.ModulePropertiesForSerialization.DefaultExeBaseAddress32Bit,
-                sizeOfHeapReserve: Cci.ModulePropertiesForSerialization.DefaultSizeOfHeapReserve32Bit,
+                sizeOfHeapReserve: Cci.ModulePropertiesForSerialization
+                    .DefaultSizeOfHeapReserve32Bit,
                 sizeOfHeapCommit: Cci.ModulePropertiesForSerialization.DefaultSizeOfHeapCommit32Bit,
-                sizeOfStackReserve: Cci.ModulePropertiesForSerialization.DefaultSizeOfStackReserve32Bit,
-                sizeOfStackCommit: Cci.ModulePropertiesForSerialization.DefaultSizeOfStackCommit32Bit,
+                sizeOfStackReserve: Cci.ModulePropertiesForSerialization
+                    .DefaultSizeOfStackReserve32Bit,
+                sizeOfStackCommit: Cci.ModulePropertiesForSerialization
+                    .DefaultSizeOfStackCommit32Bit,
                 dllCharacteristics: Compilation.GetDllCharacteristics(
                     enableHighEntropyVA: true,
                     configureToExecuteInAppContainer: false

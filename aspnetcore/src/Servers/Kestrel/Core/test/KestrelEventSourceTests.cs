@@ -14,8 +14,7 @@ public class KestrelEventSourceTests
     [Fact]
     public void ExistsWithCorrectId()
     {
-        var esType = typeof(KestrelServer)
-            .Assembly
+        var esType = typeof(KestrelServer).Assembly
             .GetType(
                 "Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure.KestrelEventSource",
                 throwOnError: true,

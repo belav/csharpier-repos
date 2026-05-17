@@ -110,8 +110,7 @@ namespace System.ServiceModel.Channels
             {
                 if (!ContextExchangeMechanismHelper.IsDefined(value))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new ArgumentOutOfRangeException("value"));
                 }
                 this.contextExchangeMechanism = value;
@@ -133,8 +132,7 @@ namespace System.ServiceModel.Channels
             {
                 if (!ProtectionLevelHelper.IsDefined(value))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new ArgumentOutOfRangeException("value"));
                 }
                 this.protectionLevel = value;
@@ -151,8 +149,7 @@ namespace System.ServiceModel.Channels
             }
             if (!this.CanBuildChannelFactory<TChannel>(context))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(
@@ -184,8 +181,7 @@ namespace System.ServiceModel.Channels
             }
             if (!this.CanBuildChannelListener<TChannel>(context))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(
@@ -398,8 +394,7 @@ namespace System.ServiceModel.Channels
                 {
                     if (endpoint.Binding.GetProperty<IContextBindingElement>(bpc) == null)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(
                                     SR.GetString(
@@ -424,8 +419,7 @@ namespace System.ServiceModel.Channels
                 && !"https".Equals(context.Binding.Scheme, StringComparison.OrdinalIgnoreCase)
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(
@@ -454,8 +448,7 @@ namespace System.ServiceModel.Channels
                         bindingElement as HttpTransportBindingElement;
                     if (http != null && http.AllowCookies)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(
                                     SR.GetString(

@@ -134,8 +134,7 @@ namespace System.Data.Objects.Internal
             Debug.Assert(index != _lastPlanIndex || (null == plans[index]), "index wrapped around");
 
             // create a new plan
-            ObjectTypeMapping mapping = System
-                .Data
+            ObjectTypeMapping mapping = System.Data
                 .Common
                 .Internal
                 .Materialization

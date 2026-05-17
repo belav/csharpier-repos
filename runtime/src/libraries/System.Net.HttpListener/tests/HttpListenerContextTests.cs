@@ -122,8 +122,7 @@ namespace System.Net.Tests
         [ConditionalFact(nameof(IsNotWindows7))]
         public async Task AcceptWebSocketAsync_AuthorizationInHeaders_ThrowsNotImplementedException()
         {
-            Socket
-                .Options
+            Socket.Options
                 .SetRequestHeader(
                     "Authorization",
                     "Basic " + Convert.ToBase64String("user:password"u8)

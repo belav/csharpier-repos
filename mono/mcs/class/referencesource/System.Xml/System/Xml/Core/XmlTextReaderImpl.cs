@@ -743,8 +743,7 @@ namespace System.Xml
             {
                 //this will be hit when user create a XmlReader by setting Async, but the first call is Read() instead of ReadAsync(),
                 //then we still should create an async stream here. And wait for the method finish.
-                System.Threading.Tasks.Task<object> t = laterInitParam
-                    .inputUriResolver
+                System.Threading.Tasks.Task<object> t = laterInitParam.inputUriResolver
                     .GetEntityAsync(laterInitParam.inputbaseUri, string.Empty, typeof(Stream));
                 t.Wait();
                 stream = (Stream)t.Result;
@@ -753,8 +752,7 @@ namespace System.Xml
 #endif
             {
                 stream = (Stream)
-                    laterInitParam
-                        .inputUriResolver
+                    laterInitParam.inputUriResolver
                         .GetEntity(laterInitParam.inputbaseUri, string.Empty, typeof(Stream));
             }
 
@@ -3799,11 +3797,8 @@ namespace System.Xml
                     // read new bytes
                     if (ps.bytePos == ps.bytesUsed && ps.bytes.Length - ps.bytesUsed > 0)
                     {
-                        int read = ps.stream.Read(
-                            ps.bytes,
-                            ps.bytesUsed,
-                            ps.bytes.Length - ps.bytesUsed
-                        );
+                        int read = ps.stream
+                            .Read(ps.bytes, ps.bytesUsed, ps.bytes.Length - ps.bytesUsed);
                         if (read == 0)
                         {
                             ps.isStreamEof = true;
@@ -3825,11 +3820,8 @@ namespace System.Xml
             else if (ps.textReader != null)
             {
                 // read chars
-                charsRead = ps.textReader.Read(
-                    ps.chars,
-                    ps.charsUsed,
-                    ps.chars.Length - ps.charsUsed - 1
-                );
+                charsRead = ps.textReader
+                    .Read(ps.chars, ps.charsUsed, ps.chars.Length - ps.charsUsed - 1);
                 ps.charsUsed += charsRead;
             }
             else
@@ -3866,18 +3858,19 @@ namespace System.Xml
             try
             {
                 // decode chars
-                ps.decoder.Convert(
-                    ps.bytes,
-                    ps.bytePos,
-                    bytesCount,
-                    ps.chars,
-                    ps.charsUsed,
-                    maxCharsCount,
-                    false,
-                    out bytesCount,
-                    out charsCount,
-                    out completed
-                );
+                ps.decoder
+                    .Convert(
+                        ps.bytes,
+                        ps.bytePos,
+                        bytesCount,
+                        ps.chars,
+                        ps.charsUsed,
+                        maxCharsCount,
+                        false,
+                        out bytesCount,
+                        out charsCount,
+                        out completed
+                    );
             }
             catch (ArgumentException)
             {
@@ -3902,18 +3895,19 @@ namespace System.Xml
                     int chDec;
                     int bDec;
                     bool completed;
-                    ps.decoder.Convert(
-                        ps.bytes,
-                        ps.bytePos + bytesDecoded,
-                        1,
-                        ps.chars,
-                        ps.charsUsed + charsDecoded,
-                        1,
-                        false,
-                        out bDec,
-                        out chDec,
-                        out completed
-                    );
+                    ps.decoder
+                        .Convert(
+                            ps.bytes,
+                            ps.bytePos + bytesDecoded,
+                            1,
+                            ps.chars,
+                            ps.charsUsed + charsDecoded,
+                            1,
+                            false,
+                            out bDec,
+                            out chDec,
+                            out completed
+                        );
                     charsDecoded += chDec;
                     bytesDecoded += bDec;
                 }

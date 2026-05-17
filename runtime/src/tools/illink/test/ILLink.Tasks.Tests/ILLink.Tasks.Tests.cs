@@ -267,8 +267,7 @@ namespace ILLink.Tasks.Tests
                         out CodeOptimizations codeOptimizations
                     )
                 );
-                var actualValue = driver
-                    .Context
+                var actualValue = driver.Context
                     .Optimizations
                     .IsEnabled(codeOptimizations, assemblyName: null);
                 Assert.Equal(enabled, actualValue);
@@ -348,8 +347,7 @@ namespace ILLink.Tasks.Tests
                         if (String.IsNullOrEmpty(optimizationValue))
                             continue;
                         var enabled = Boolean.Parse(optimizationValue);
-                        var actualValue = driver
-                            .Context
+                        var actualValue = driver.Context
                             .Optimizations
                             .IsEnabled(codeOptimizations, assemblyName: assemblyName);
                         Assert.Equal(enabled, actualValue);
@@ -939,8 +937,7 @@ namespace ILLink.Tasks.Tests
                         String.IsNullOrEmpty(beforeStepName) || String.IsNullOrEmpty(afterStepName)
                     );
 
-                    var actualStepNames = driver
-                        .Context
+                    var actualStepNames = driver.Context
                         .Pipeline
                         .GetSteps()
                         .Select(s => s.GetType().Name);
@@ -1072,8 +1069,7 @@ namespace ILLink.Tasks.Tests
             var task = new MockTask() { CustomSteps = customSteps };
             using (var driver = task.CreateDriver())
             {
-                var actualSteps = driver
-                    .Context
+                var actualSteps = driver.Context
                     .Pipeline
                     .GetSteps()
                     .Select(s => s.GetType().Name)
@@ -1093,8 +1089,7 @@ namespace ILLink.Tasks.Tests
                     new List<string> { "MockCustomStep5", "MockCustomStep6" },
                     actualSteps.TakeLast(2).ToList()
                 );
-                var actualMarkHandlers = driver
-                    .Context
+                var actualMarkHandlers = driver.Context
                     .Pipeline
                     .MarkHandlers
                     .Select(h => h.GetType().Name)

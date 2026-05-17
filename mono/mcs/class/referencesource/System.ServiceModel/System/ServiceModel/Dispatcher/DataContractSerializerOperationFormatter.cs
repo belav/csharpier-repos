@@ -138,8 +138,7 @@ namespace System.ServiceModel.Dispatcher
                 if (knownTypes == null)
                     knownTypes = new List<Type>();
                 if (type == null)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(SR.SFxKnownTypeNull, description.Name)
@@ -201,8 +200,7 @@ namespace System.ServiceModel.Dispatcher
                 else
                 {
                     ValidateDataContractType(headerDescription.Type);
-                    messageInfo
-                        .HeaderDescriptionTable
+                    messageInfo.HeaderDescriptionTable
                         .Add(
                             headerDescription.Name,
                             headerDescription.Namespace,
@@ -364,12 +362,10 @@ namespace System.ServiceModel.Dispatcher
         )
         {
             if (writer == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("writer"));
             if (parameters == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("parameters"));
 
             MessageInfo messageInfo;
@@ -418,8 +414,7 @@ namespace System.ServiceModel.Dispatcher
             }
             catch (SerializationException sx)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new CommunicationException(
                             SR.GetString(
@@ -453,8 +448,7 @@ namespace System.ServiceModel.Dispatcher
             for (int i = 0; i < headers.Count; i++)
             {
                 MessageHeaderInfo header = headers[i];
-                MessageHeaderDescription headerDescription = messageInfo
-                    .HeaderDescriptionTable
+                MessageHeaderDescription headerDescription = messageInfo.HeaderDescriptionTable
                     .Get(header.Name, header.Namespace);
                 if (headerDescription != null)
                 {
@@ -590,12 +584,10 @@ namespace System.ServiceModel.Dispatcher
         )
         {
             if (reader == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("reader"));
             if (parameters == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("parameters"));
 
             MessageInfo messageInfo;
@@ -607,8 +599,7 @@ namespace System.ServiceModel.Dispatcher
             if (messageInfo.WrapperName != null)
             {
                 if (!reader.IsStartElement(messageInfo.WrapperName, messageInfo.WrapperNamespace))
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new SerializationException(
                                 SR.GetString(
@@ -697,8 +688,7 @@ namespace System.ServiceModel.Dispatcher
             }
             catch (System.InvalidOperationException e)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(
@@ -712,8 +702,7 @@ namespace System.ServiceModel.Dispatcher
             }
             catch (System.Runtime.Serialization.InvalidDataContractException e)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidDataContractException(
                             SR.GetString(
@@ -727,8 +716,7 @@ namespace System.ServiceModel.Dispatcher
             }
             catch (System.FormatException e)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         OperationFormatter.CreateDeserializationFailedFault(
                             SR.GetString(
@@ -743,8 +731,7 @@ namespace System.ServiceModel.Dispatcher
             }
             catch (System.Runtime.Serialization.SerializationException e)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         OperationFormatter.CreateDeserializationFailedFault(
                             SR.GetString(
@@ -908,10 +895,11 @@ namespace System.ServiceModel.Dispatcher
 
             public object ReadObject(XmlDictionaryReader reader, XmlObjectSerializer serializer)
             {
-                object val = this.serializer.ReadObject(
-                    reader,
-                    false /* verifyObjectName */
-                );
+                object val = this.serializer
+                    .ReadObject(
+                        reader,
+                        false /* verifyObjectName */
+                    );
                 if (this.isQueryable && val != null)
                 {
                     return Queryable.AsQueryable((IEnumerable)val);

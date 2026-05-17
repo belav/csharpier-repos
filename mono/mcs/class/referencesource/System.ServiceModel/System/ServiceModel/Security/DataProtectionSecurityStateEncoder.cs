@@ -85,8 +85,7 @@ namespace System.ServiceModel.Security
             }
             catch (CryptographicException exception)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new CryptographicException(
                             SR.GetString(SR.SecurityStateEncoderDecodingFailure),
@@ -110,8 +109,7 @@ namespace System.ServiceModel.Security
             }
             catch (CryptographicException exception)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new CryptographicException(
                             SR.GetString(SR.SecurityStateEncoderEncodingFailure),

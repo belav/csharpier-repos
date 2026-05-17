@@ -75,8 +75,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             if (
                 overridden is object
-                && !overridden
-                    .ContainingType
+                && !overridden.ContainingType
                     .Equals(
                         ContainingType.BaseTypeNoUseSiteDiagnostics,
                         TypeCompareKind.AllIgnoreOptions

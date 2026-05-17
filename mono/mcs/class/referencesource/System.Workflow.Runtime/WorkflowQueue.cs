@@ -40,8 +40,7 @@ namespace System.Workflow.Runtime
                             qService.CallingActivity
                         );
                     qState.AsynchronousListeners.Add(subscriber);
-                    WorkflowTrace
-                        .Runtime
+                    WorkflowTrace.Runtime
                         .TraceEvent(
                             TraceEventType.Information,
                             0,
@@ -73,8 +72,7 @@ namespace System.Workflow.Runtime
                         .Remove(subscriber);
                     if (!removed)
                     {
-                        WorkflowTrace
-                            .Runtime
+                        WorkflowTrace.Runtime
                             .TraceEvent(
                                 TraceEventType.Information,
                                 0,
@@ -115,8 +113,7 @@ namespace System.Workflow.Runtime
                     subscriber.SubscribedActivityQualifiedName = subscriberQualifiedName;
                 }
                 qState.AsynchronousListeners.Add(subscriber);
-                WorkflowTrace
-                    .Runtime
+                WorkflowTrace.Runtime
                     .TraceEvent(
                         TraceEventType.Information,
                         0,
@@ -154,8 +151,7 @@ namespace System.Workflow.Runtime
                     .Remove(subscriber);
                 if (!removed)
                 {
-                    WorkflowTrace
-                        .Runtime
+                    WorkflowTrace.Runtime
                         .TraceEvent(
                             TraceEventType.Information,
                             0,

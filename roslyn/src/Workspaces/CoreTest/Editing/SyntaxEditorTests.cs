@@ -61,8 +61,7 @@ public class C
             var fieldX = editor.Generator.GetMembers(cls)[0];
             editor.ReplaceNode(
                 fieldX,
-                editor
-                    .Generator
+                editor.Generator
                     .FieldDeclaration(
                         "Y",
                         editor.Generator.TypeExpression(SpecialType.System_String),
@@ -125,8 +124,7 @@ public class C
             var fieldX = editor.Generator.GetMembers(cls)[0];
             editor.InsertAfter(
                 fieldX,
-                editor
-                    .Generator
+                editor.Generator
                     .FieldDeclaration(
                         "Y",
                         editor.Generator.TypeExpression(SpecialType.System_String),
@@ -163,8 +161,7 @@ public class C
             var fieldX = editor.Generator.GetMembers(cls)[0];
             editor.InsertBefore(
                 fieldX,
-                editor
-                    .Generator
+                editor.Generator
                     .FieldDeclaration(
                         "Y",
                         editor.Generator.TypeExpression(SpecialType.System_String),
@@ -223,8 +220,7 @@ public class C
             var fieldX = editor.Generator.GetMembers(cls)[0];
             editor.InsertAfter(
                 fieldX,
-                editor
-                    .Generator
+                editor.Generator
                     .FieldDeclaration(
                         "Y",
                         editor.Generator.TypeExpression(SpecialType.System_String),
@@ -233,8 +229,7 @@ public class C
             );
             editor.InsertBefore(
                 fieldX,
-                editor
-                    .Generator
+                editor.Generator
                     .FieldDeclaration(
                         "Z",
                         editor.Generator.TypeExpression(SpecialType.System_Object),

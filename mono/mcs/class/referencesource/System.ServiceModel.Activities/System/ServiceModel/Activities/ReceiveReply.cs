@@ -170,10 +170,11 @@ namespace System.ServiceModel.Activities
                             );
                 }
 
-                this.InternalContent.ConfigureInternalReceiveReply(
-                    this.internalReceive,
-                    out this.responseFormatter
-                );
+                this.InternalContent
+                    .ConfigureInternalReceiveReply(
+                        this.internalReceive,
+                        out this.responseFormatter
+                    );
 
                 if (
                     this.InternalContent is ReceiveMessageContent

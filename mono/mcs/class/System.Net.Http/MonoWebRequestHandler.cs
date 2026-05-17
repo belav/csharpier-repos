@@ -339,8 +339,7 @@ namespace System.Net.Http
 
         bool GetConnectionKeepAlive(HttpRequestHeaders headers)
         {
-            return headers
-                .Connection
+            return headers.Connection
                 .Any(l => string.Equals(l, "Keep-Alive", StringComparison.OrdinalIgnoreCase));
         }
 

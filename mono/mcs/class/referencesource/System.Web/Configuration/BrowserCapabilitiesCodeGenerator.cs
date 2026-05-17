@@ -1020,8 +1020,7 @@ namespace System.Web.Configuration
             factoryType.Attributes = MemberAttributes.Private;
             factoryType.IsClass = true;
             factoryType.Name = TypeName;
-            factoryType
-                .BaseTypes
+            factoryType.BaseTypes
                 .Add(
                     new CodeTypeReference("System.Web.Configuration.BrowserCapabilitiesFactoryBase")
                 );
@@ -1525,9 +1524,8 @@ namespace System.Web.Configuration
 
             if (generateTracker)
             {
-                expr.Parameters.Add(
-                    new CodeVariableReferenceExpression(IgnoreApplicationBrowserVariableName)
-                );
+                expr.Parameters
+                    .Add(new CodeVariableReferenceExpression(IgnoreApplicationBrowserVariableName));
             }
             expr.Parameters.Add(new CodeVariableReferenceExpression(_headersRefName));
             expr.Parameters.Add(new CodeVariableReferenceExpression(browserCapsVariable));
@@ -1584,17 +1582,17 @@ namespace System.Web.Configuration
             regexWorkerGenerated = true;
 
             //GEN: RegexWorker regexWorker;
-            cmm.Statements.Add(
-                new CodeVariableDeclarationStatement("RegexWorker", _regexWorkerRefName)
-            );
+            cmm.Statements
+                .Add(new CodeVariableDeclarationStatement("RegexWorker", _regexWorkerRefName));
 
             //GEN: regexWorker = new RegexWorker(browserCaps);
-            cmm.Statements.Add(
-                new CodeAssignStatement(
-                    _regexWorkerRefExpr,
-                    new CodeObjectCreateExpression("RegexWorker", _browserCapsRefExpr)
-                )
-            );
+            cmm.Statements
+                .Add(
+                    new CodeAssignStatement(
+                        _regexWorkerRefExpr,
+                        new CodeObjectCreateExpression("RegexWorker", _browserCapsRefExpr)
+                    )
+                );
         }
 
         private void ReturnIfHeaderValueEmpty(
@@ -1616,8 +1614,7 @@ namespace System.Web.Configuration
             );
 
             emptyCheckStmt.Condition = emptyCheckExpr;
-            emptyCheckStmt
-                .TrueStatements
+            emptyCheckStmt.TrueStatements
                 .Add(new CodeMethodReturnStatement(new CodePrimitiveExpression(false)));
             cmm.Statements.Add(emptyCheckStmt);
         }
@@ -1631,9 +1628,8 @@ namespace System.Web.Configuration
         )
         {
             //GEN: IDictionary dictionary;
-            cmm.Statements.Add(
-                new CodeVariableDeclarationStatement(typeof(IDictionary), _dictionaryRefName)
-            );
+            cmm.Statements
+                .Add(new CodeVariableDeclarationStatement(typeof(IDictionary), _dictionaryRefName));
 
             //GEN: dictionary = browserCaps.Capabilities;
             CodeAssignStatement assign = new CodeAssignStatement(
@@ -1753,8 +1749,7 @@ namespace System.Web.Configuration
                             new CodePrimitiveExpression(false)
                         );
                     }
-                    istatement
-                        .TrueStatements
+                    istatement.TrueStatements
                         .Add(new CodeMethodReturnStatement(new CodePrimitiveExpression(false)));
                     cmm.Statements.Add(istatement);
                 }
@@ -1841,8 +1836,7 @@ namespace System.Web.Configuration
                             new CodePrimitiveExpression(false)
                         );
                     }
-                    istatement
-                        .TrueStatements
+                    istatement.TrueStatements
                         .Add(new CodeMethodReturnStatement(new CodePrimitiveExpression(false)));
                     cmm.Statements.Add(istatement);
                 }
@@ -1902,21 +1896,22 @@ namespace System.Web.Configuration
                     if (((CheckPair)bd.CaptureHeaderChecks[i]).Header.Equals("User-Agent"))
                     {
                         _headers.Add(String.Empty);
-                        cmie.Parameters.Add(
-                            new CodeCastExpression(
-                                typeof(string),
-                                new CodeIndexerExpression(
-                                    new CodeVariableReferenceExpression(browserCapsVariable),
-                                    new CodeExpression[]
-                                    {
-                                        new CodePropertyReferenceExpression(
-                                            new CodeTypeReferenceExpression(typeof(String)),
-                                            "Empty"
-                                        ),
-                                    }
+                        cmie.Parameters
+                            .Add(
+                                new CodeCastExpression(
+                                    typeof(string),
+                                    new CodeIndexerExpression(
+                                        new CodeVariableReferenceExpression(browserCapsVariable),
+                                        new CodeExpression[]
+                                        {
+                                            new CodePropertyReferenceExpression(
+                                                new CodeTypeReferenceExpression(typeof(String)),
+                                                "Empty"
+                                            ),
+                                        }
+                                    )
                                 )
-                            )
-                        );
+                            );
                     }
                     else
                     {
@@ -1924,15 +1919,16 @@ namespace System.Web.Configuration
                         _headers.Add(header);
 
                         //GEN: regexWorker.ProcessRegex((string)headers["xxx"], "xxxRegexString");
-                        cmie.Parameters.Add(
-                            new CodeCastExpression(
-                                typeof(string),
-                                new CodeIndexerExpression(
-                                    _headersRefExpr,
-                                    new CodeExpression[] { new CodePrimitiveExpression(header) }
+                        cmie.Parameters
+                            .Add(
+                                new CodeCastExpression(
+                                    typeof(string),
+                                    new CodeIndexerExpression(
+                                        _headersRefExpr,
+                                        new CodeExpression[] { new CodePrimitiveExpression(header) }
+                                    )
                                 )
-                            )
-                        );
+                            );
                     }
 
                     cmie.Parameters.Add(new CodePrimitiveExpression(matchedString));
@@ -1957,20 +1953,21 @@ namespace System.Web.Configuration
                         _regexWorkerRefExpr,
                         _processRegexMethod
                     );
-                    cmie.Parameters.Add(
-                        new CodeCastExpression(
-                            typeof(string),
-                            new CodeIndexerExpression(
-                                _dictionaryRefExpr,
-                                new CodeExpression[]
-                                {
-                                    new CodePrimitiveExpression(
-                                        ((CheckPair)bd.CaptureCapabilityChecks[i]).Header
-                                    ),
-                                }
+                    cmie.Parameters
+                        .Add(
+                            new CodeCastExpression(
+                                typeof(string),
+                                new CodeIndexerExpression(
+                                    _dictionaryRefExpr,
+                                    new CodeExpression[]
+                                    {
+                                        new CodePrimitiveExpression(
+                                            ((CheckPair)bd.CaptureCapabilityChecks[i]).Header
+                                        ),
+                                    }
+                                )
                             )
-                        )
-                    );
+                        );
 
                     cmie.Parameters.Add(new CodePrimitiveExpression(matchedString));
                     cmm.Statements.Add(cmie);

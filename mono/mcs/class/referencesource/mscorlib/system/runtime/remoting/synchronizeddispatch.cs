@@ -130,8 +130,9 @@ namespace System.Runtime.Remoting.Contexts
 
         internal bool IsKnownLCID(IMessage reqMsg)
         {
-            String msgLCID = ((LogicalCallContext)reqMsg.Properties[Message.CallContextKey])
-                .RemotingData
+            String msgLCID = (
+                (LogicalCallContext)reqMsg.Properties[Message.CallContextKey]
+            ).RemotingData
                 .LogicalCallID;
             return (msgLCID.Equals(_syncLcid) || _asyncLcidList.Contains(msgLCID));
         }
@@ -808,8 +809,7 @@ namespace System.Runtime.Remoting.Contexts
             // i.e. a Synchronization domain should be locked etc ...
             Contract.Assert(IsSignaled(), "IsSignaled()");
 
-            Thread
-                .CurrentThread
+            Thread.CurrentThread
                 .InternalCrossContextCallback(_ctx, _xctxDel, new Object[] { this });
         }
 
@@ -1046,11 +1046,11 @@ namespace System.Runtime.Remoting.Contexts
                 {
                     // Remove the async lcid we had added to the call out list.
                     //DBGConsole.WriteLine(Thread.CurrentThread.GetHashCode()+"] NR: InterceptionSink::SyncPM Removing async call-out lcid: " + ((LogicalCallContext)reqMsg.Properties[Message.CallContextKey]).RemotingData.LogicalCallID);
-                    _property
-                        .AsyncCallOutLCIDList
+                    _property.AsyncCallOutLCIDList
                         .Remove(
-                            ((LogicalCallContext)reqMsg.Properties[Message.CallContextKey])
-                                .RemotingData
+                            (
+                                (LogicalCallContext)reqMsg.Properties[Message.CallContextKey]
+                            ).RemotingData
                                 .LogicalCallID
                         );
                 }

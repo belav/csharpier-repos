@@ -155,8 +155,7 @@ namespace System.Text.Json.SourceGeneration
                         cancellationToken.ThrowIfCancellationRequested();
 
                         IMethodSymbol? attributeSymbol =
-                            context
-                                .SemanticModel
+                            context.SemanticModel
                                 .GetSymbolInfo(attributeSyntax, cancellationToken)
                                 .Symbol as IMethodSymbol;
                         if (attributeSymbol == null)

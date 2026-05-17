@@ -51,8 +51,7 @@ public class Program
                                             // https://tools.ietf.org/html/rfc7540#appendix-A
                                             // Allows filtering TLS handshakes on a per connection basis
 
-                                            var tlsFeature = context
-                                                .Features
+                                            var tlsFeature = context.Features
                                                 .Get<ITlsHandshakeFeature>();
 
                                             if (

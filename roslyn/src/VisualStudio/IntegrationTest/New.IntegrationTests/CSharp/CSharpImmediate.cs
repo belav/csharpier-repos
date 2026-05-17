@@ -23,11 +23,9 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
         {
             await base.InitializeAsync();
 
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .CreateSolutionAsync(nameof(CSharpImmediate), HangMitigatingCancellationToken);
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .AddProjectAsync(
                     "TestProj",
                     WellKnownProjectTemplates.ConsoleApplication,
@@ -39,8 +37,7 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
         [IdeFact]
         public async Task DumpLocalVariableValue()
         {
-            await TestServices
-                .Editor
+            await TestServices.Editor
                 .SetTextAsync(
                     @"
 class Program
@@ -55,31 +52,25 @@ class Program
                     HangMitigatingCancellationToken
                 );
 
-            await TestServices
-                .Workspace
+            await TestServices.Workspace
                 .WaitForAsyncOperationsAsync(
                     FeatureAttribute.Workspace,
                     HangMitigatingCancellationToken
                 );
-            await TestServices
-                .Debugger
+            await TestServices.Debugger
                 .SetBreakpointAsync("Program.cs", "}", HangMitigatingCancellationToken);
-            await TestServices
-                .Debugger
+            await TestServices.Debugger
                 .GoAsync(waitForBreakMode: true, HangMitigatingCancellationToken);
             await TestServices.ImmediateWindow.ShowAsync(HangMitigatingCancellationToken);
             await TestServices.ImmediateWindow.ClearAllAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .Input
+            await TestServices.Input
                 .SendWithoutActivateAsync("?n", HangMitigatingCancellationToken);
-            await TestServices
-                .Workspace
+            await TestServices.Workspace
                 .WaitForAsyncOperationsAsync(
                     FeatureAttribute.CompletionSet,
                     HangMitigatingCancellationToken
                 );
-            await TestServices
-                .Input
+            await TestServices.Input
                 .SendWithoutActivateAsync(
                     ["1", VirtualKeyCode.TAB, VirtualKeyCode.RETURN],
                     HangMitigatingCancellationToken

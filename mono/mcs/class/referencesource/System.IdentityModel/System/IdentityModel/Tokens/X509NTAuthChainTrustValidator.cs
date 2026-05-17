@@ -60,8 +60,7 @@ namespace System.IdentityModel.Tokens
 
             if (!chain.Build(certificate))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new SecurityTokenValidationException(
                             SR.GetString(

@@ -179,8 +179,7 @@ namespace System.Security.Cryptography.X509Certificates
             if (storeLocation == StoreLocation.CurrentUser)
             {
                 if (
-                    X509Store
-                        .DisallowedStoreName
+                    X509Store.DisallowedStoreName
                         .Equals(storeName, StringComparison.OrdinalIgnoreCase)
                 )
                 {
@@ -212,8 +211,7 @@ namespace System.Security.Cryptography.X509Certificates
             }
 
             if (
-                X509Store
-                    .IntermediateCAStoreName
+                X509Store.IntermediateCAStoreName
                     .Equals(storeName, StringComparison.OrdinalIgnoreCase)
             )
             {

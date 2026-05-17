@@ -94,8 +94,7 @@ namespace System.ServiceModel.Configuration
                         retval = SecurityAlgorithmSuite.TripleDesSha256Rsa15;
                         break;
                     default:
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new ArgumentOutOfRangeException(
                                     "value",
@@ -159,8 +158,7 @@ namespace System.ServiceModel.Configuration
                 else if (securityAlgorithm == SecurityAlgorithmSuite.TripleDesSha256Rsa15)
                     retval = ConfigurationStrings.TripleDesSha256Rsa15;
                 else
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentOutOfRangeException(
                                 "value",

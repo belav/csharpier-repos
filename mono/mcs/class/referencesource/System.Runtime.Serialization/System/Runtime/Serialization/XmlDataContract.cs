@@ -222,8 +222,7 @@ namespace System.Runtime.Serialization
                 : base(type)
             {
                 if (type.IsDefined(Globals.TypeOfDataContractAttribute, false))
-                    throw System
-                        .Runtime
+                    throw System.Runtime
                         .Serialization
                         .DiagnosticUtility
                         .ExceptionUtility
@@ -236,8 +235,7 @@ namespace System.Runtime.Serialization
                             )
                         );
                 if (type.IsDefined(Globals.TypeOfCollectionDataContractAttribute, false))
-                    throw System
-                        .Runtime
+                    throw System.Runtime
                         .Serialization
                         .DiagnosticUtility
                         .ExceptionUtility
@@ -294,8 +292,7 @@ namespace System.Runtime.Serialization
                     }
                     else
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidDataContractException(
                                     SR.GetString(
@@ -393,8 +390,7 @@ namespace System.Runtime.Serialization
                 null
             );
             if (ctor == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -487,8 +483,7 @@ namespace System.Runtime.Serialization
             {
                 if (securityException != null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new SecurityException(
                                 SR.GetString(
@@ -506,8 +501,7 @@ namespace System.Runtime.Serialization
             {
                 if (securityException != null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new SecurityException(
                                 SR.GetString(

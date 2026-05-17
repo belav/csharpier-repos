@@ -52,14 +52,12 @@ namespace Microsoft.Interop.Analyzers
             context.RegisterCompilationStartAction(context =>
             {
                 // Nothing to do if the LibraryImportAttribute is not in the compilation
-                INamedTypeSymbol? libraryImportAttrType = context
-                    .Compilation
+                INamedTypeSymbol? libraryImportAttrType = context.Compilation
                     .GetBestTypeByMetadataName(TypeNames.LibraryImportAttribute);
                 if (libraryImportAttrType == null)
                     return;
 
-                TargetFrameworkSettings targetFramework = context
-                    .Options
+                TargetFrameworkSettings targetFramework = context.Options
                     .AnalyzerConfigOptionsProvider
                     .GlobalOptions
                     .GetTargetFrameworkSettings();
@@ -114,8 +112,7 @@ namespace Microsoft.Interop.Analyzers
             foreach (AttributeData attr in method.GetAttributes())
             {
                 if (
-                    SymbolEqualityComparer
-                        .Default
+                    SymbolEqualityComparer.Default
                         .Equals(attr.AttributeClass, libraryImportAttrType)
                 )
                 {
@@ -230,8 +227,7 @@ namespace Microsoft.Interop.Analyzers
                 return dllImportData.BestFitMapping.Value;
             }
 
-            AttributeData? bestFitMappingContainingType = method
-                .ContainingType
+            AttributeData? bestFitMappingContainingType = method.ContainingType
                 .GetAttributes()
                 .FirstOrDefault(attr =>
                     attr.AttributeClass.ToDisplayString()
@@ -242,8 +238,7 @@ namespace Microsoft.Interop.Analyzers
                 return bestFitMappingContainingType.ConstructorArguments[0].Value is true;
             }
 
-            AttributeData? bestFitMappingContainingAssembly = method
-                .ContainingAssembly
+            AttributeData? bestFitMappingContainingAssembly = method.ContainingAssembly
                 .GetAttributes()
                 .FirstOrDefault(attr =>
                     attr.AttributeClass.ToDisplayString()

@@ -85,8 +85,7 @@ namespace System.Security.Cryptography
         {
             CheckInvalidKey(key);
 
-            ECParameters parameters = Interop
-                .Crypto
+            ECParameters parameters = Interop.Crypto
                 .GetECKeyParameters(key, includePrivateParameters);
 
             bool hasPrivateKey = (parameters.D != null);
@@ -110,8 +109,7 @@ namespace System.Security.Cryptography
         {
             CheckInvalidKey(key);
 
-            ECParameters parameters = Interop
-                .Crypto
+            ECParameters parameters = Interop.Crypto
                 .GetECCurveParameters(key, includePrivateParameters);
 
             bool hasPrivateKey = (parameters.D != null);
@@ -132,8 +130,7 @@ namespace System.Security.Cryptography
                 ? parameters.Curve.Oid.Value
                 : parameters.Curve.Oid.FriendlyName!;
 
-            SafeEcKeyHandle key = Interop
-                .Crypto
+            SafeEcKeyHandle key = Interop.Crypto
                 .EcKeyCreateByKeyParameters(
                     oid,
                     parameters.Q.X,
@@ -150,8 +147,7 @@ namespace System.Security.Cryptography
         private static SafeEcKeyHandle ImportPrimeCurveParameters(ECParameters parameters)
         {
             Debug.Assert(parameters.Curve.IsPrime);
-            SafeEcKeyHandle key = Interop
-                .Crypto
+            SafeEcKeyHandle key = Interop.Crypto
                 .EcKeyCreateByExplicitParameters(
                     parameters.Curve.CurveType,
                     parameters.Q.X,
@@ -184,8 +180,7 @@ namespace System.Security.Cryptography
         private static SafeEcKeyHandle ImportCharacteristic2CurveParameters(ECParameters parameters)
         {
             Debug.Assert(parameters.Curve.IsCharacteristic2);
-            SafeEcKeyHandle key = Interop
-                .Crypto
+            SafeEcKeyHandle key = Interop.Crypto
                 .EcKeyCreateByExplicitParameters(
                     parameters.Curve.CurveType,
                     parameters.Q.X,

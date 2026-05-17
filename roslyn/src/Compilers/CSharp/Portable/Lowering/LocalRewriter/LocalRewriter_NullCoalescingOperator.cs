@@ -43,8 +43,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             Debug.Assert(rewrittenResultType is { });
             Debug.Assert(rewrittenRight.Type is { });
             Debug.Assert(
-                rewrittenRight
-                    .Type
+                rewrittenRight.Type
                     .Equals(
                         rewrittenResultType,
                         TypeCompareKind.IgnoreDynamicAndTupleNames
@@ -206,8 +205,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             if (
                 rewrittenLeft.Type.IsNullableType()
-                && rewrittenRight
-                    .Type
+                && rewrittenRight.Type
                     .Equals(
                         rewrittenLeft.Type.GetNullableUnderlyingType(),
                         TypeCompareKind.AllIgnoreOptions
@@ -286,8 +284,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             );
             Debug.Assert(
                 convertedLeft.HasErrors
-                    || convertedLeft
-                        .Type!
+                    || convertedLeft.Type!
                         .Equals(
                             rewrittenResultType,
                             TypeCompareKind.IgnoreDynamicAndTupleNames
@@ -308,8 +305,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             Debug.Assert(conditionalExpression.ConstantValueOpt == null); // we shouldn't have hit this else case otherwise
             Debug.Assert(
-                conditionalExpression
-                    .Type!
+                conditionalExpression.Type!
                     .Equals(
                         rewrittenResultType,
                         TypeCompareKind.IgnoreDynamicAndTupleNames

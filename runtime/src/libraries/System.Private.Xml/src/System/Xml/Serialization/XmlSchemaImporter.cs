@@ -1181,8 +1181,7 @@ namespace System.Xml.Serialization
                 choiceIdentifier.Name = member.ChoiceIdentifier.MemberName;
                 if (groupRepeats)
                 {
-                    choiceIdentifier.TypeDesc = member
-                        .ChoiceIdentifier
+                    choiceIdentifier.TypeDesc = member.ChoiceIdentifier
                         .Mapping
                         .TypeDesc!
                         .CreateArrayTypeDesc();
@@ -1893,8 +1892,7 @@ namespace System.Xml.Serialization
                 if (itemAccessor.Any)
                     return null;
                 arrayMapping.Elements = new ElementAccessor[] { itemAccessor };
-                arrayMapping.TypeDesc = ((TypeMapping)itemAccessor.Mapping!)
-                    .TypeDesc!
+                arrayMapping.TypeDesc = ((TypeMapping)itemAccessor.Mapping!).TypeDesc!
                     .CreateArrayTypeDesc();
                 arrayMapping.TypeName = string.IsNullOrEmpty(type.Name)
                     ? $"ArrayOf{CodeIdentifier.MakePascal(itemAccessor.Mapping.TypeDesc.Name)}"

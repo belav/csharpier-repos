@@ -257,14 +257,12 @@ namespace System.Data.Metadata.Edm
                         {
                             EdmItemCollection edmCollection = (EdmItemCollection)collection;
                             if (
-                                !MetadataWorkspace
-                                    .SupportedEdmVersions
+                                !MetadataWorkspace.SupportedEdmVersions
                                     .Contains(edmCollection.EdmVersion)
                             )
                             {
                                 throw EntityUtil.InvalidOperation(
-                                    System
-                                        .Data
+                                    System.Data
                                         .Entity
                                         .Strings
                                         .EdmVersionNotSupportedByRuntime(

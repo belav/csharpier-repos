@@ -96,8 +96,7 @@ namespace System.Linq.Parallel
             int chunkSize = _autoBuffered ? PRODUCER_BUFFER_AUTO_SIZE : 1;
             Pair<TKey, TOutput>[] chunk = new Pair<TKey, TOutput>[chunkSize];
             var partition = _partition;
-            CancellationToken cancelToken = _taskGroupState
-                .CancellationState
+            CancellationToken cancelToken = _taskGroupState.CancellationState
                 .MergedCancellationToken;
 
             int lastChunkSize;

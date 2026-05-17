@@ -185,8 +185,7 @@ namespace System.Net.WebSockets
                     }
                     else
                     {
-                        bytesRead = await m_ReadTaskCompletionSource
-                            .Task
+                        bytesRead = await m_ReadTaskCompletionSource.Task
                             .SuppressContextFlow<int>();
                     }
                 }
@@ -288,8 +287,7 @@ namespace System.Net.WebSockets
                 m_InputStream.InternalHttpContext.EnsureBoundHandle();
                 uint flags = 0;
                 uint bytesReturned = 0;
-                statusCode = UnsafeNclNativeMethods
-                    .HttpApi
+                statusCode = UnsafeNclNativeMethods.HttpApi
                     .HttpReceiveRequestEntityBody2(
                         m_InputStream.InternalHttpContext.RequestQueueHandle,
                         m_InputStream.InternalHttpContext.RequestId,
@@ -574,8 +572,7 @@ namespace System.Net.WebSockets
                 Logging.Enter(Logging.WebSockets, this, Methods.WriteAsyncFast, string.Empty);
             }
 
-            UnsafeNclNativeMethods.HttpApi.HTTP_FLAGS flags = UnsafeNclNativeMethods
-                .HttpApi
+            UnsafeNclNativeMethods.HttpApi.HTTP_FLAGS flags = UnsafeNclNativeMethods.HttpApi
                 .HTTP_FLAGS
                 .NONE;
 
@@ -594,30 +591,26 @@ namespace System.Net.WebSockets
 
                 if (eventArgs.ShouldCloseOutput)
                 {
-                    flags |= UnsafeNclNativeMethods
-                        .HttpApi
+                    flags |= UnsafeNclNativeMethods.HttpApi
                         .HTTP_FLAGS
                         .HTTP_SEND_RESPONSE_FLAG_DISCONNECT;
                 }
                 else
                 {
-                    flags |= UnsafeNclNativeMethods
-                        .HttpApi
+                    flags |= UnsafeNclNativeMethods.HttpApi
                         .HTTP_FLAGS
                         .HTTP_SEND_RESPONSE_FLAG_MORE_DATA;
                     // When using HTTP_SEND_RESPONSE_FLAG_BUFFER_DATA HTTP.SYS will copy the payload to
                     // kernel memory (Non-Paged Pool). Http.Sys will buffer up to
                     // Math.Min(16 MB, current TCP window size)
-                    flags |= UnsafeNclNativeMethods
-                        .HttpApi
+                    flags |= UnsafeNclNativeMethods.HttpApi
                         .HTTP_FLAGS
                         .HTTP_SEND_RESPONSE_FLAG_BUFFER_DATA;
                 }
 
                 m_OutputStream.InternalHttpContext.EnsureBoundHandle();
                 uint bytesSent;
-                statusCode = UnsafeNclNativeMethods
-                    .HttpApi
+                statusCode = UnsafeNclNativeMethods.HttpApi
                     .HttpSendResponseEntityBody2(
                         m_OutputStream.InternalHttpContext.RequestQueueHandle,
                         m_OutputStream.InternalHttpContext.RequestId,
@@ -1278,13 +1271,11 @@ namespace System.Net.WebSockets
                     m_DataChunks = new UnsafeNclNativeMethods.HttpApi.HTTP_DATA_CHUNK[2];
                     m_DataChunksGCHandle = GCHandle.Alloc(m_DataChunks, GCHandleType.Pinned);
                     m_DataChunks[0] = new UnsafeNclNativeMethods.HttpApi.HTTP_DATA_CHUNK();
-                    m_DataChunks[0].DataChunkType = UnsafeNclNativeMethods
-                        .HttpApi
+                    m_DataChunks[0].DataChunkType = UnsafeNclNativeMethods.HttpApi
                         .HTTP_DATA_CHUNK_TYPE
                         .HttpDataChunkFromMemory;
                     m_DataChunks[1] = new UnsafeNclNativeMethods.HttpApi.HTTP_DATA_CHUNK();
-                    m_DataChunks[1].DataChunkType = UnsafeNclNativeMethods
-                        .HttpApi
+                    m_DataChunks[1].DataChunkType = UnsafeNclNativeMethods.HttpApi
                         .HTTP_DATA_CHUNK_TYPE
                         .HttpDataChunkFromMemory;
                 }
@@ -1353,8 +1344,7 @@ namespace System.Net.WebSockets
                 else
                 {
                     m_DataChunks[index].pBuffer = (byte*)
-                        m_WebSocket
-                            .InternalBuffer
+                        m_WebSocket.InternalBuffer
                             .ConvertPinnedSendPayloadToNative(buffer, offset, count);
                 }
 

@@ -31,8 +31,7 @@ namespace System.Activities.XamlIntegration
             FuncFactory factory = GetFactory(value as Delegate);
             if (factory == null)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(new InvalidOperationException(SR.SavingFuncToXamlNotSupported));
             }
             XamlReader result = factory.Nodes.GetReader();

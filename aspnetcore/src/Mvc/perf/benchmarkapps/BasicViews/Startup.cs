@@ -151,8 +151,7 @@ namespace BasicViews
             )
             {
                 using (
-                    var dbContext = serviceScope
-                        .ServiceProvider
+                    var dbContext = serviceScope.ServiceProvider
                         .GetRequiredService<BasicViewsContext>()
                 )
                 {
@@ -179,8 +178,7 @@ namespace BasicViews
             )
             {
                 using (
-                    var dbContext = serviceScope
-                        .ServiceProvider
+                    var dbContext = serviceScope.ServiceProvider
                         .GetRequiredService<BasicViewsContext>()
                 )
                 {
@@ -206,8 +204,7 @@ namespace BasicViews
             )
             {
                 using (
-                    var dbContext = serviceScope
-                        .ServiceProvider
+                    var dbContext = serviceScope.ServiceProvider
                         .GetRequiredService<BasicViewsContext>()
                 )
                 {

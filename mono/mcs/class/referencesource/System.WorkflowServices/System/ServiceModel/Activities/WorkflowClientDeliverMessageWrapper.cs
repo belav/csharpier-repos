@@ -71,8 +71,7 @@ namespace System.ServiceModel.Activities
                     )
                 )
                 {
-                    IContextManager contextManager = desClient
-                        .InnerChannel
+                    IContextManager contextManager = desClient.InnerChannel
                         .GetProperty<IContextManager>();
                     Fx.Assert(contextManager != null, "IContextManager must not be null.");
                     if (contextManager != null)

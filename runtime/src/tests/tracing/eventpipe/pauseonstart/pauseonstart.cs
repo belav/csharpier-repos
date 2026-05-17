@@ -91,8 +91,7 @@ namespace Tracing.Tests.PauseOnStartValidation
                         config,
                         out var sessionId
                     );
-                    Logger
-                        .logger
+                    Logger.logger
                         .Log(
                             $"Started EventPipeSession over standard connection with session id: 0x{sessionId:x}"
                         );
@@ -176,8 +175,7 @@ namespace Tracing.Tests.PauseOnStartValidation
                         config,
                         out var sessionId1
                     );
-                    Logger
-                        .logger
+                    Logger.logger
                         .Log(
                             $"Started EventPipeSession over standard connection with session id: 0x{sessionId1:x}"
                         );
@@ -189,8 +187,7 @@ namespace Tracing.Tests.PauseOnStartValidation
                         config,
                         out var sessionId2
                     );
-                    Logger
-                        .logger
+                    Logger.logger
                         .Log(
                             $"Started EventPipeSession over standard connection with session id: 0x{sessionId2:x}"
                         );
@@ -202,8 +199,7 @@ namespace Tracing.Tests.PauseOnStartValidation
                         config,
                         out var sessionId3
                     );
-                    Logger
-                        .logger
+                    Logger.logger
                         .Log(
                             $"Started EventPipeSession over standard connection with session id: 0x{sessionId3:x}"
                         );
@@ -334,8 +330,7 @@ namespace Tracing.Tests.PauseOnStartValidation
                         config,
                         out var sessionId1
                     );
-                    Logger
-                        .logger
+                    Logger.logger
                         .Log(
                             $"Started EventPipeSession over standard connection with session id: 0x{sessionId1:x}"
                         );
@@ -347,8 +342,7 @@ namespace Tracing.Tests.PauseOnStartValidation
                         config,
                         out var sessionId2
                     );
-                    Logger
-                        .logger
+                    Logger.logger
                         .Log(
                             $"Started EventPipeSession over standard connection with session id: 0x{sessionId2:x}"
                         );
@@ -360,8 +354,7 @@ namespace Tracing.Tests.PauseOnStartValidation
                         config,
                         out var sessionId3
                     );
-                    Logger
-                        .logger
+                    Logger.logger
                         .Log(
                             $"Started EventPipeSession over standard connection with session id: 0x{sessionId3:x}"
                         );

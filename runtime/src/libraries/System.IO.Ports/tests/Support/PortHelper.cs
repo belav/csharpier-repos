@@ -44,8 +44,7 @@ namespace Legacy.Support
         {
             // See https://msdn.microsoft.com/en-us/library/windows/hardware/ff546502.aspx for more information.
             using (
-                RegistryKey serialKey = Registry
-                    .LocalMachine
+                RegistryKey serialKey = Registry.LocalMachine
                     .OpenSubKey(@"HARDWARE\DEVICEMAP\SERIALCOMM")
             )
             {

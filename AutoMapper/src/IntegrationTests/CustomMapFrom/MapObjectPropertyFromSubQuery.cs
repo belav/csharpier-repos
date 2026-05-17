@@ -154,8 +154,7 @@ public class MemberWithSubQueryProjections
     {
         protected override void Seed(Context context)
         {
-            context
-                .Customers
+            context.Customers
                 .Add(
                     new Customer
                     {
@@ -243,8 +242,7 @@ public class MemberWithSubQueryProjectionsNoMap
     {
         protected override void Seed(Context context)
         {
-            context
-                .Customers
+            context.Customers
                 .Add(
                     new Customer
                     {
@@ -302,8 +300,7 @@ public class MapObjectPropertyFromSubQueryTypeNameMax
                     d => d.Price,
                     o =>
                         o.MapFrom(source =>
-                            source
-                                .Articles
+                            source.Articles
                                 .Where(x =>
                                     x.IsDefault && x.NationId == 1 && source.ECommercePublished
                                 )
@@ -405,8 +402,7 @@ public class MapObjectPropertyFromSubQueryTypeNameMax
     {
         protected override void Seed(ClientContext context)
         {
-            context
-                .Products
+            context.Products
                 .Add(
                     new Product
                     {
@@ -443,8 +439,7 @@ public class MapObjectPropertyFromSubQueryExplicitExpansion
                     o =>
                     {
                         o.MapFrom(source =>
-                            source
-                                .Articles
+                            source.Articles
                                 .Where(x =>
                                     x.IsDefault && x.NationId == 1 && source.ECommercePublished
                                 )
@@ -521,8 +516,7 @@ public class MapObjectPropertyFromSubQueryExplicitExpansion
     {
         protected override void Seed(ClientContext context)
         {
-            context
-                .Products
+            context.Products
                 .Add(
                     new Product
                     {
@@ -559,8 +553,7 @@ public class MapObjectPropertyFromSubQuery
                     d => d.Price,
                     o =>
                         o.MapFrom(source =>
-                            source
-                                .Articles
+                            source.Articles
                                 .Where(x =>
                                     x.IsDefault && x.NationId == 1 && source.ECommercePublished
                                 )
@@ -640,8 +633,7 @@ public class MapObjectPropertyFromSubQuery
     {
         protected override void Seed(ClientContext context)
         {
-            context
-                .Products
+            context.Products
                 .Add(
                     new Product
                     {
@@ -678,8 +670,7 @@ public class MapObjectPropertyFromSubQueryWithInnerObject
                     d => d.Price,
                     o =>
                         o.MapFrom(source =>
-                            source
-                                .Articles
+                            source.Articles
                                 .Where(x =>
                                     x.IsDefault && x.NationId == 1 && source.ECommercePublished
                                 )
@@ -761,8 +752,7 @@ public class MapObjectPropertyFromSubQueryWithInnerObject
     {
         protected override void Seed(ClientContext context)
         {
-            var product1 = context
-                .Products
+            var product1 = context.Products
                 .Add(
                     new Product
                     {
@@ -778,8 +768,7 @@ public class MapObjectPropertyFromSubQueryWithInnerObject
                         },
                     }
                 );
-            var product2 = context
-                .Products
+            var product2 = context.Products
                 .Add(
                     new Product
                     {
@@ -795,8 +784,7 @@ public class MapObjectPropertyFromSubQueryWithInnerObject
                         },
                     }
                 );
-            context
-                .ProductArticles
+            context.ProductArticles
                 .Add(
                     new ProductArticle { Product = product1.Entity, OtherProduct = product2.Entity }
                 );
@@ -822,8 +810,7 @@ public class MapObjectPropertyFromSubQueryWithCollection
                     d => d.Price,
                     o =>
                         o.MapFrom(source =>
-                            source
-                                .Articles
+                            source.Articles
                                 .Where(x =>
                                     x.IsDefault && x.NationId == 1 && source.ECommercePublished
                                 )
@@ -911,8 +898,7 @@ public class MapObjectPropertyFromSubQueryWithCollection
     {
         protected override void Seed(ClientContext context)
         {
-            var product = context
-                .Products
+            var product = context.Products
                 .Add(
                     new Product
                     {
@@ -953,8 +939,7 @@ public class MapObjectPropertyFromSubQueryWithCollectionSameName
                     d => d.Articles,
                     o =>
                         o.MapFrom(source =>
-                            source
-                                .Articles
+                            source.Articles
                                 .Where(x =>
                                     x.IsDefault && x.NationId == 1 && source.ECommercePublished
                                 )
@@ -1058,8 +1043,7 @@ public class MapObjectPropertyFromSubQueryWithCollectionSameName
     {
         protected override void Seed(ClientContext context)
         {
-            var product = context
-                .Products
+            var product = context.Products
                 .Add(
                     new Product
                     {
@@ -1285,8 +1269,7 @@ public class MapObjectPropertyFromSubQueryCustomSource
     {
         protected override void Seed(ClientContext context)
         {
-            context
-                .ProductReviews
+            context.ProductReviews
                 .Add(
                     new ProductReview
                     {
@@ -1296,8 +1279,7 @@ public class MapObjectPropertyFromSubQueryCustomSource
                         },
                     }
                 );
-            context
-                .ProductReviews
+            context.ProductReviews
                 .Add(
                     new ProductReview
                     {
@@ -1393,8 +1375,7 @@ public class MemberWithSubQueryIdentity
     {
         protected override void Seed(ClientContext context)
         {
-            context
-                .AEntities
+            context.AEntities
                 .Add(
                     new AEntity
                     {

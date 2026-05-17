@@ -72,8 +72,7 @@ namespace System.Xml.XmlConfiguration
             {
 #if CONFIGURATION_DEP
                 XmlReaderSection section =
-                    System
-                        .Configuration
+                    System.Configuration
                         .ConfigurationManager
                         .GetSection(XmlConfigurationString.XmlReaderSectionPath)
                     as XmlReaderSection;
@@ -135,8 +134,7 @@ namespace System.Xml.XmlConfiguration
             {
 #if CONFIGURATION_DEP
                 XmlReaderSection section =
-                    System
-                        .Configuration
+                    System.Configuration
                         .ConfigurationManager
                         .GetSection(XmlConfigurationString.XmlReaderSectionPath)
                     as XmlReaderSection;
@@ -182,8 +180,7 @@ namespace System.Xml.XmlConfiguration
             {
 #if CONFIGURATION_DEP
                 XsltConfigSection section =
-                    System
-                        .Configuration
+                    System.Configuration
                         .ConfigurationManager
                         .GetSection(XmlConfigurationString.XsltSectionPath) as XsltConfigSection;
                 return (section != null) ? section._ProhibitDefaultResolver : false;
@@ -229,8 +226,7 @@ namespace System.Xml.XmlConfiguration
             {
 #if CONFIGURATION_DEP
                 XsltConfigSection section =
-                    System
-                        .Configuration
+                    System.Configuration
                         .ConfigurationManager
                         .GetSection(XmlConfigurationString.XsltSectionPath) as XsltConfigSection;
                 return (section != null) ? section._LimitXPathComplexity : true;
@@ -275,8 +271,7 @@ namespace System.Xml.XmlConfiguration
             {
 #if CONFIGURATION_DEP
                 XsltConfigSection section =
-                    System
-                        .Configuration
+                    System.Configuration
                         .ConfigurationManager
                         .GetSection(XmlConfigurationString.XsltSectionPath) as XsltConfigSection;
                 return (section != null)

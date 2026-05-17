@@ -392,8 +392,7 @@ namespace System.Web.UI.DataVisualization.Charting
             for (int module = 0; module < Common.FormulaRegistry.Count; module++)
             {
                 moduleName = Common.FormulaRegistry.GetModuleName(module);
-                Common
-                    .FormulaRegistry
+                Common.FormulaRegistry
                     .GetFormulaModule(moduleName)
                     .Formula(
                         formulaName,

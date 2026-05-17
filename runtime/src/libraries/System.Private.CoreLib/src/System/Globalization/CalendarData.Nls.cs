@@ -33,8 +33,7 @@ namespace System.Globalization
             out int data
         )
         {
-            return Interop
-                    .Kernel32
+            return Interop.Kernel32
                     .GetCalendarInfoEx(
                         localeName,
                         (uint)calendar,
@@ -58,8 +57,7 @@ namespace System.Globalization
             // The maximum size for values returned from GetCalendarInfoEx is 80 characters.
             char* buffer = stackalloc char[BUFFER_LENGTH];
 
-            int ret = Interop
-                .Kernel32
+            int ret = Interop.Kernel32
                 .GetCalendarInfoEx(
                     localeName,
                     (uint)calendar,

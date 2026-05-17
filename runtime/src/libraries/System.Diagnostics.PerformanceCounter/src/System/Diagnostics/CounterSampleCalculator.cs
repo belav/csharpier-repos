@@ -82,8 +82,7 @@ namespace System.Diagnostics
                     )
                     && (
                         newCounterType
-                        != Interop
-                            .Kernel32
+                        != Interop.Kernel32
                             .PerformanceCounterOptions
                             .PERF_COUNTER_LARGE_RAWCOUNT_HEX
                     )
@@ -114,8 +113,7 @@ namespace System.Diagnostics
             Interop.Kernel32.PerformanceCounterOptions.PDH_FMT_COUNTERVALUE pdhFormattedValue =
                 default;
             long timeBase = newSample.SystemFrequency;
-            int result = Interop
-                .Pdh
+            int result = Interop.Pdh
                 .PdhFormatFromRawValue(
                     (uint)newCounterType,
                     Interop.Kernel32.PerformanceCounterOptions.PDH_FMT_DOUBLE
@@ -198,8 +196,7 @@ namespace System.Diagnostics
                         newCounterType
                             == Interop.Kernel32.PerformanceCounterOptions.PERF_COUNTER_MULTI_TIMER
                         || newCounterType
-                            == Interop
-                                .Kernel32
+                            == Interop.Kernel32
                                 .PerformanceCounterOptions
                                 .PERF_COUNTER_MULTI_TIMER_INV
                     )

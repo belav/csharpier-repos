@@ -77,15 +77,13 @@ namespace System.Web.Mvc.Html.Test
                     html.ViewData
                 );
                 ViewContext callbackViewContext = null;
-                engine
-                    .Engine
+                engine.Engine
                     .Setup(e =>
                         e.FindPartialView(html.ViewContext, "DisplayTemplates/String", true)
                     )
                     .Returns(new ViewEngineResult(engine.View.Object, engine.Engine.Object))
                     .Verifiable();
-                engine
-                    .View
+                engine.View
                     .Setup(v => v.Render(It.IsAny<ViewContext>(), It.IsAny<TextWriter>()))
                     .Callback<ViewContext, TextWriter>(
                         (vc, tw) =>
@@ -137,13 +135,11 @@ namespace System.Web.Mvc.Html.Test
                     html.ViewData
                 );
                 ViewContext callbackViewContext = null;
-                engine
-                    .Engine
+                engine.Engine
                     .Setup(e => e.FindPartialView(html.ViewContext, "EditorTemplates/String", true))
                     .Returns(new ViewEngineResult(engine.View.Object, engine.Engine.Object))
                     .Verifiable();
-                engine
-                    .View
+                engine.View
                     .Setup(v => v.Render(It.IsAny<ViewContext>(), It.IsAny<TextWriter>()))
                     .Callback<ViewContext, TextWriter>(
                         (vc, tw) =>
@@ -194,8 +190,7 @@ namespace System.Web.Mvc.Html.Test
                     "MyProperty",
                     html.ViewData
                 );
-                engine
-                    .Engine
+                engine.Engine
                     .Setup(e =>
                         e.FindPartialView(
                             html.ViewContext,
@@ -241,8 +236,7 @@ namespace System.Web.Mvc.Html.Test
                     "MyProperty",
                     html.ViewData
                 );
-                engine
-                    .Engine
+                engine.Engine
                     .Setup(e =>
                         e.FindPartialView(
                             html.ViewContext,
@@ -311,8 +305,7 @@ namespace System.Web.Mvc.Html.Test
 
                 // Assert
                 engine.Engine.Verify();
-                engine
-                    .Engine
+                engine.Engine
                     .Verify(
                         e =>
                             e.FindPartialView(
@@ -536,8 +529,7 @@ namespace System.Web.Mvc.Html.Test
         public void GetViewNamesFullOrderingOfComplexType()
         {
             // Arrange
-            ModelMetadata metadata = ModelMetadataProviders
-                .Current
+            ModelMetadata metadata = ModelMetadataProviders.Current
                 .GetMetadataForType(null, typeof(HttpWebRequest));
 
             // Act
@@ -559,8 +551,7 @@ namespace System.Web.Mvc.Html.Test
         public void GetViewNamesFullOrderingOfInterface()
         {
             // Arrange
-            ModelMetadata metadata = ModelMetadataProviders
-                .Current
+            ModelMetadata metadata = ModelMetadataProviders.Current
                 .GetMetadataForType(null, typeof(IDisposable));
 
             // Act
@@ -580,8 +571,7 @@ namespace System.Web.Mvc.Html.Test
         public void GetViewNamesFullOrderingOfComplexTypeThatImplementsIEnumerable()
         {
             // Arrange
-            ModelMetadata metadata = ModelMetadataProviders
-                .Current
+            ModelMetadata metadata = ModelMetadataProviders.Current
                 .GetMetadataForType(null, typeof(List<int>));
 
             // Act
@@ -602,8 +592,7 @@ namespace System.Web.Mvc.Html.Test
         public void GetViewNamesFullOrderingOfInterfaceThatRequiresIEnumerable()
         {
             // Arrange
-            ModelMetadata metadata = ModelMetadataProviders
-                .Current
+            ModelMetadata metadata = ModelMetadataProviders.Current
                 .GetMetadataForType(null, typeof(IList<int>));
 
             // Act
@@ -624,8 +613,7 @@ namespace System.Web.Mvc.Html.Test
         public void GetViewNamesFullOrderingOfString()
         {
             // Arrange
-            ModelMetadata metadata = ModelMetadataProviders
-                .Current
+            ModelMetadata metadata = ModelMetadataProviders.Current
                 .GetMetadataForType(null, typeof(String));
 
             // Act
@@ -644,8 +632,7 @@ namespace System.Web.Mvc.Html.Test
         public void GetViewNamesFullOrderingOfEnumStruct()
         {
             // Arrange
-            ModelMetadata metadata = ModelMetadataProviders
-                .Current
+            ModelMetadata metadata = ModelMetadataProviders.Current
                 .GetMetadataForType(null, typeof(StringSplitOptions));
 
             // Act
@@ -666,8 +653,7 @@ namespace System.Web.Mvc.Html.Test
         public void GetViewNamesFullOrderingOfEnumType()
         {
             // Arrange
-            ModelMetadata metadata = ModelMetadataProviders
-                .Current
+            ModelMetadata metadata = ModelMetadataProviders.Current
                 .GetMetadataForType(null, typeof(Enum));
 
             // Act
@@ -687,8 +673,7 @@ namespace System.Web.Mvc.Html.Test
         public void GetViewNamesFullOrderingOfDateTimeOffset()
         {
             // Arrange
-            ModelMetadata metadata = ModelMetadataProviders
-                .Current
+            ModelMetadata metadata = ModelMetadataProviders.Current
                 .GetMetadataForType(null, typeof(DateTimeOffset));
 
             // Act
@@ -709,8 +694,7 @@ namespace System.Web.Mvc.Html.Test
         public void GetViewNamesNullUIHintNotIncludedInList()
         {
             // Arrange
-            ModelMetadata metadata = ModelMetadataProviders
-                .Current
+            ModelMetadata metadata = ModelMetadataProviders.Current
                 .GetMetadataForType(null, typeof(Object));
 
             // Act
@@ -726,8 +710,7 @@ namespace System.Web.Mvc.Html.Test
         public void GetViewNamesNullDataTypeNotIncludedInList()
         {
             // Arrange
-            ModelMetadata metadata = ModelMetadataProviders
-                .Current
+            ModelMetadata metadata = ModelMetadataProviders.Current
                 .GetMetadataForType(null, typeof(Object));
 
             // Act
@@ -743,8 +726,7 @@ namespace System.Web.Mvc.Html.Test
         public void GetViewNamesConvertsNullableOfTIntoT()
         {
             // Arrange
-            ModelMetadata metadata = ModelMetadataProviders
-                .Current
+            ModelMetadata metadata = ModelMetadataProviders.Current
                 .GetMetadataForType(null, typeof(Nullable<int>));
 
             // Act

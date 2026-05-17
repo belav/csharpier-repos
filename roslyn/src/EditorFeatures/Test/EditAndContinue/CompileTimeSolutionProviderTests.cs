@@ -50,8 +50,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
             var additionalDocumentId = DocumentId.CreateNewId(projectId);
             var designTimeDocumentId = DocumentId.CreateNewId(projectId);
 
-            var designTimeSolution = workspace
-                .CurrentSolution
+            var designTimeSolution = workspace.CurrentSolution
                 .AddProject(
                     ProjectInfo.Create(
                         projectId,
@@ -138,18 +137,17 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
             {
                 // We'll replicate a simple example of how the razor generator handles disabling here so the test
                 // functions similar to the real world
-                var isDisabled = context
-                    .AnalyzerConfigOptionsProvider
+                var isDisabled = context.AnalyzerConfigOptionsProvider
                     .Select(
                         (o, ct) =>
-                            o.GlobalOptions.TryGetValue(
-                                "build_property.SuppressRazorSourceGenerator",
-                                out var value
-                            ) && bool.Parse(value)
+                            o.GlobalOptions
+                                .TryGetValue(
+                                    "build_property.SuppressRazorSourceGenerator",
+                                    out var value
+                                ) && bool.Parse(value)
                     );
 
-                var sources = context
-                    .AdditionalTextsProvider
+                var sources = context.AdditionalTextsProvider
                     .Combine(isDisabled)
                     .Select(
                         (pair, ct) =>

@@ -2298,8 +2298,7 @@ namespace System
         )
         {
             RuntimePropertyInfo property;
-            RuntimePropertyInfo[] candidates = reflectedType
-                .Cache
+            RuntimePropertyInfo[] candidates = reflectedType.Cache
                 .GetPropertyList(MemberListType.All, null);
 
             for (int i = 0; i < candidates.Length; i++)
@@ -3566,8 +3565,7 @@ namespace System
             }
 
             if ((bindingAttr & BindingFlags.ExactBinding) != 0)
-                return System
-                    .DefaultBinder
+                return System.DefaultBinder
                     .ExactPropertyBinding(candidates.AsSpan(), returnType, types);
 
             binder ??= DefaultBinder;
@@ -3889,8 +3887,7 @@ namespace System
             MemberInfo method
         )
         {
-            RuntimeMethodInfo[] cache = runtimeType
-                .Cache
+            RuntimeMethodInfo[] cache = runtimeType.Cache
                 .GetMethodList(MemberListType.CaseSensitive, method.Name);
 
             for (int i = 0; i < cache.Length; i++)
@@ -3910,8 +3907,7 @@ namespace System
             MemberInfo constructor
         )
         {
-            RuntimeConstructorInfo[] cache = runtimeType
-                .Cache
+            RuntimeConstructorInfo[] cache = runtimeType.Cache
                 .GetConstructorList(MemberListType.CaseSensitive, constructor.Name);
 
             for (int i = 0; i < cache.Length; i++)
@@ -3931,8 +3927,7 @@ namespace System
             MemberInfo property
         )
         {
-            RuntimePropertyInfo[] cache = runtimeType
-                .Cache
+            RuntimePropertyInfo[] cache = runtimeType.Cache
                 .GetPropertyList(MemberListType.CaseSensitive, property.Name);
 
             for (int i = 0; i < cache.Length; i++)
@@ -3952,8 +3947,7 @@ namespace System
             MemberInfo field
         )
         {
-            RuntimeFieldInfo[] cache = runtimeType
-                .Cache
+            RuntimeFieldInfo[] cache = runtimeType.Cache
                 .GetFieldList(MemberListType.CaseSensitive, field.Name);
 
             for (int i = 0; i < cache.Length; i++)
@@ -3973,8 +3967,7 @@ namespace System
             MemberInfo eventInfo
         )
         {
-            RuntimeEventInfo[] cache = runtimeType
-                .Cache
+            RuntimeEventInfo[] cache = runtimeType.Cache
                 .GetEventList(MemberListType.CaseSensitive, eventInfo.Name);
 
             for (int i = 0; i < cache.Length; i++)
@@ -3994,8 +3987,7 @@ namespace System
             MemberInfo nestedType
         )
         {
-            RuntimeType[] cache = runtimeType
-                .Cache
+            RuntimeType[] cache = runtimeType.Cache
                 .GetNestedTypeList(MemberListType.CaseSensitive, nestedType.Name);
 
             for (int i = 0; i < cache.Length; i++)
@@ -4234,8 +4226,7 @@ namespace System
             bool isDelegate =
                 !th.IsTypeDesc
                 && th.AsMethodTable()->ParentMethodTable
-                    == Runtime
-                        .CompilerServices
+                    == Runtime.CompilerServices
                         .TypeHandle
                         .TypeHandleOf<MulticastDelegate>()
                         .AsMethodTable();
@@ -4385,8 +4376,7 @@ namespace System
                 if (foundSigType)
                     return new SignatureConstructedGenericType(this, instantiation);
 
-                return Reflection
-                    .Emit
+                return Reflection.Emit
                     .TypeBuilderInstantiation
                     .MakeGenericType(this, (Type[])(instantiation.Clone()));
             }

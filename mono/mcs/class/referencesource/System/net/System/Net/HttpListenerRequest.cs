@@ -120,8 +120,7 @@ namespace System.Net
                     asyncResult.Reset(numBytes + pClientCertInfo->CertEncodedSize);
 
                     uint bytesReceived = 0;
-                    errorCode = UnsafeNclNativeMethods
-                        .HttpApi
+                    errorCode = UnsafeNclNativeMethods.HttpApi
                         .HttpReceiveClientCertificate(
                             httpListenerRequest.HttpListenerContext.RequestQueueHandle,
                             httpListenerRequest.m_ConnectionId,
@@ -358,8 +357,7 @@ namespace System.Net
                 );
             }
 
-            UnsafeNclNativeMethods.HttpApi.HTTP_COOKED_URL cookedUrl = memoryBlob
-                .RequestBlob
+            UnsafeNclNativeMethods.HttpApi.HTTP_COOKED_URL cookedUrl = memoryBlob.RequestBlob
                 ->CookedUrl;
             if (cookedUrl.pHost != null && cookedUrl.HostLength > 0)
             {
@@ -548,8 +546,7 @@ namespace System.Net
                 if (m_BoundaryType == BoundaryType.None)
                 {
                     if (
-                        HttpWebRequest
-                            .ChunkedHeader
+                        HttpWebRequest.ChunkedHeader
                             .Equals(
                                 GetKnownHeader(HttpRequestHeader.TransferEncoding),
                                 StringComparison.OrdinalIgnoreCase
@@ -605,8 +602,7 @@ namespace System.Net
             {
                 if (m_WebHeaders == null)
                 {
-                    m_WebHeaders = UnsafeNclNativeMethods
-                        .HttpApi
+                    m_WebHeaders = UnsafeNclNativeMethods.HttpApi
                         .GetHeaders(RequestBuffer, OriginalBlobAddress);
                 }
                 GlobalLog.Print(
@@ -626,8 +622,7 @@ namespace System.Net
             {
                 if (m_HttpMethod == null)
                 {
-                    m_HttpMethod = UnsafeNclNativeMethods
-                        .HttpApi
+                    m_HttpMethod = UnsafeNclNativeMethods.HttpApi
                         .GetVerb(RequestBuffer, OriginalBlobAddress);
                 }
                 GlobalLog.Print(
@@ -945,8 +940,7 @@ namespace System.Net
         [HostProtection(ExternalThreading = true)]
         public Task<X509Certificate2> GetClientCertificateAsync()
         {
-            return Task<X509Certificate2>
-                .Factory
+            return Task<X509Certificate2>.Factory
                 .FromAsync(BeginGetClientCertificate, EndGetClientCertificate, null);
         }
 
@@ -1090,8 +1084,7 @@ namespace System.Net
             {
                 if (m_RemoteEndPoint == null)
                 {
-                    m_RemoteEndPoint = UnsafeNclNativeMethods
-                        .HttpApi
+                    m_RemoteEndPoint = UnsafeNclNativeMethods.HttpApi
                         .GetRemoteEndPoint(RequestBuffer, OriginalBlobAddress);
                 }
                 GlobalLog.Print(
@@ -1111,8 +1104,7 @@ namespace System.Net
             {
                 if (m_LocalEndPoint == null)
                 {
-                    m_LocalEndPoint = UnsafeNclNativeMethods
-                        .HttpApi
+                    m_LocalEndPoint = UnsafeNclNativeMethods.HttpApi
                         .GetLocalEndPoint(RequestBuffer, OriginalBlobAddress);
                 }
                 GlobalLog.Print(
@@ -1193,8 +1185,7 @@ namespace System.Net
                         );
                         uint bytesReceived = 0;
 
-                        uint statusCode = UnsafeNclNativeMethods
-                            .HttpApi
+                        uint statusCode = UnsafeNclNativeMethods.HttpApi
                             .HttpReceiveClientCertificate(
                                 HttpListenerContext.RequestQueueHandle,
                                 m_ConnectionId,
@@ -1313,8 +1304,7 @@ namespace System.Net
                         );
                         uint bytesReceived = 0;
 
-                        uint statusCode = UnsafeNclNativeMethods
-                            .HttpApi
+                        uint statusCode = UnsafeNclNativeMethods.HttpApi
                             .HttpReceiveClientCertificate(
                                 HttpListenerContext.RequestQueueHandle,
                                 m_ConnectionId,
@@ -1461,8 +1451,7 @@ namespace System.Net
 
         private string GetKnownHeader(HttpRequestHeader header)
         {
-            return UnsafeNclNativeMethods
-                .HttpApi
+            return UnsafeNclNativeMethods.HttpApi
                 .GetKnownHeader(RequestBuffer, OriginalBlobAddress, (int)header);
         }
 
@@ -1519,8 +1508,7 @@ namespace System.Net
 
             m_TokenBindings = new List<TokenBinding>();
             UnsafeNclNativeMethods.HttpApi.HTTP_REQUEST_TOKEN_BINDING_INFO* pTokenBindingInfo =
-                UnsafeNclNativeMethods
-                    .HttpApi
+                UnsafeNclNativeMethods.HttpApi
                     .GetTlsTokenBindingRequestInfo(RequestBuffer, OriginalBlobAddress);
             UnsafeNclNativeMethods.HttpApi.HTTP_REQUEST_TOKEN_BINDING_INFO_V1* pTokenBindingInfo_V1 =
                 null;
@@ -1529,8 +1517,7 @@ namespace System.Net
             // Only try to collect the old binding information if there is no V2 binding information available
             if (pTokenBindingInfo == null)
             {
-                pTokenBindingInfo_V1 = UnsafeNclNativeMethods
-                    .HttpApi
+                pTokenBindingInfo_V1 = UnsafeNclNativeMethods.HttpApi
                     .GetTlsTokenBindingRequestInfo_V1(RequestBuffer, OriginalBlobAddress);
                 useV1TokenBinding = true;
             }
@@ -1554,8 +1541,7 @@ namespace System.Net
                 if (useV1TokenBinding && pTokenBindingInfo_V1 != null)
                 {
                     // Old V1 Token Binding protocol is still being used, so we need to verify the binding message using the old API
-                    m_TokenBindingVerifyMessageStatus = UnsafeNclNativeMethods
-                        .HttpApi
+                    m_TokenBindingVerifyMessageStatus = UnsafeNclNativeMethods.HttpApi
                         .TokenBindingVerifyMessage_V1(
                             pTokenBindingInfo_V1->TokenBinding + fixup,
                             pTokenBindingInfo_V1->TokenBindingSize,
@@ -1568,8 +1554,7 @@ namespace System.Net
                 else
                 {
                     // Use the V2 token binding behavior
-                    m_TokenBindingVerifyMessageStatus = UnsafeNclNativeMethods
-                        .HttpApi
+                    m_TokenBindingVerifyMessageStatus = UnsafeNclNativeMethods.HttpApi
                         .TokenBindingVerifyMessage(
                             pTokenBindingInfo->TokenBinding + fixup,
                             pTokenBindingInfo->TokenBindingSize,
@@ -1629,8 +1614,7 @@ namespace System.Net
 
                     if (
                         pThisResultData->bindingType
-                        == UnsafeNclNativeMethods
-                            .HttpApi
+                        == UnsafeNclNativeMethods.HttpApi
                             .TOKENBINDING_TYPE
                             .TOKENBINDING_TYPE_PROVIDED
                     )
@@ -1639,8 +1623,7 @@ namespace System.Net
                     }
                     else if (
                         pThisResultData->bindingType
-                        == UnsafeNclNativeMethods
-                            .HttpApi
+                        == UnsafeNclNativeMethods.HttpApi
                             .TOKENBINDING_TYPE
                             .TOKENBINDING_TYPE_REFERRED
                     )
@@ -1685,8 +1668,7 @@ namespace System.Net
 
                     if (
                         pThisResultData->identifierData->bindingType
-                        == UnsafeNclNativeMethods
-                            .HttpApi
+                        == UnsafeNclNativeMethods.HttpApi
                             .TOKENBINDING_TYPE
                             .TOKENBINDING_TYPE_PROVIDED
                     )
@@ -1695,8 +1677,7 @@ namespace System.Net
                     }
                     else if (
                         pThisResultData->identifierData->bindingType
-                        == UnsafeNclNativeMethods
-                            .HttpApi
+                        == UnsafeNclNativeMethods.HttpApi
                             .TOKENBINDING_TYPE
                             .TOKENBINDING_TYPE_REFERRED
                     )
@@ -1735,8 +1716,7 @@ namespace System.Net
 
                 while (i < l)
                 {
-                    i = CultureInfo
-                        .InvariantCulture
+                    i = CultureInfo.InvariantCulture
                         .CompareInfo
                         .IndexOf(headerValue, attrName, i, CompareOptions.IgnoreCase);
                     if (i < 0)

@@ -2469,9 +2469,8 @@ public static class CoreLoggerExtensions
         return d.GenerateMessage(
             string.Join(
                 ", ",
-                p.FirstPropertyCollection.Select(n =>
-                    n.Item2.ShortDisplayName() + "." + n.Item1!.Name
-                )
+                p.FirstPropertyCollection
+                    .Select(n => n.Item2.ShortDisplayName() + "." + n.Item1!.Name)
             ),
             p.SecondPropertyCollection.First().Item1?.Name
         );

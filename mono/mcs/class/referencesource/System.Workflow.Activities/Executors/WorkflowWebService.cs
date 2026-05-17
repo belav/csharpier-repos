@@ -251,8 +251,7 @@ namespace System.Workflow.Activities
                 }
                 catch (WorkflowOwnershipException)
                 {
-                    WorkflowActivityTrace
-                        .Activity
+                    WorkflowActivityTrace.Activity
                         .TraceEvent(
                             TraceEventType.Warning,
                             0,

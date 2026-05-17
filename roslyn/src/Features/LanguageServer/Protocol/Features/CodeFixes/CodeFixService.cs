@@ -179,8 +179,7 @@ namespace Microsoft.CodeAnalysis.CodeFixes
                     .ConfigureAwait(false);
             }
 
-            var buildOnlyDiagnosticsService = document
-                .Project
+            var buildOnlyDiagnosticsService = document.Project
                 .Solution
                 .Services
                 .GetRequiredService<IBuildOnlyDiagnosticsService>();
@@ -310,8 +309,7 @@ namespace Microsoft.CodeAnalysis.CodeFixes
                     .ConfigureAwait(false);
             }
 
-            var buildOnlyDiagnosticsService = document
-                .Project
+            var buildOnlyDiagnosticsService = document.Project
                 .Solution
                 .Services
                 .GetRequiredService<IBuildOnlyDiagnosticsService>();
@@ -556,8 +554,7 @@ namespace Microsoft.CodeAnalysis.CodeFixes
                 return document;
             }
 
-            var fixAllService = document
-                .Project
+            var fixAllService = document.Project
                 .Solution
                 .Services
                 .GetRequiredService<IFixAllGetFixesService>();
@@ -769,8 +766,7 @@ namespace Microsoft.CodeAnalysis.CodeFixes
             if (TryGetWorkspaceFixersPriorityMap(document, out var fixersForLanguage))
                 allFixers = allFixers.Sort(new FixerComparer(allFixers, fixersForLanguage.Value));
 
-            var extensionManager = document
-                .Project
+            var extensionManager = document.Project
                 .Solution
                 .Services
                 .GetService<IExtensionManager>();
@@ -1142,8 +1138,7 @@ namespace Microsoft.CodeAnalysis.CodeFixes
                 return null;
             }
 
-            var extensionManager = textDocument
-                .Project
+            var extensionManager = textDocument.Project
                 .Solution
                 .Services
                 .GetRequiredService<IExtensionManager>();
@@ -1234,8 +1229,7 @@ namespace Microsoft.CodeAnalysis.CodeFixes
             }
 
             // Explicitly looks for an AbstractSuppressionCodeFixProvider
-            var fixer = lazyConfigurationProviders
-                .Value
+            var fixer = lazyConfigurationProviders.Value
                 .OfType<AbstractSuppressionCodeFixProvider>()
                 .FirstOrDefault();
             if (fixer == null)
@@ -1484,8 +1478,7 @@ namespace Microsoft.CodeAnalysis.CodeFixes
             ImmutableArray<CodeFixProvider>
         > ComputeProjectFixers(TextDocument document)
         {
-            var extensionManager = document
-                .Project
+            var extensionManager = document.Project
                 .Solution
                 .Services
                 .GetService<IExtensionManager>();

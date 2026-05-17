@@ -247,10 +247,8 @@ namespace System.Runtime
                 {
                     if (buffer.Length != bufferPool.BufferSize)
                     {
-                        throw Fx.Exception.Argument(
-                            "buffer",
-                            InternalSR.BufferIsNotRightSizeForBufferManager
-                        );
+                        throw Fx.Exception
+                            .Argument("buffer", InternalSR.BufferIsNotRightSizeForBufferManager);
                     }
 
                     if (bufferPool.Return(buffer))

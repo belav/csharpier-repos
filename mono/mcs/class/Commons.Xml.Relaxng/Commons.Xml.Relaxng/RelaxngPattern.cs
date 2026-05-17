@@ -1351,8 +1351,7 @@ namespace Commons.Xml.Relaxng
                     this,
                     "To compile 'include' element, XmlResolver is required."
                 );
-            Uri uri = grammar
-                .Resolver
+            Uri uri = grammar.Resolver
                 .ResolveUri(BaseUri != String.Empty ? new Uri(BaseUri) : null, Href);
             RelaxngPattern p = ReadExternalResource(grammar, uri, ns);
 

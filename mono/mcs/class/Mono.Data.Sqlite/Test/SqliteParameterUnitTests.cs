@@ -74,8 +74,7 @@ namespace MonoTests.Mono.Data.Sqlite
             textP.Value = builder.ToString();
             floatP.Value = Convert.ToInt64(random.Next(999));
             integerP.Value = random.Next(999);
-            blobP.Value = global::System
-                .Text
+            blobP.Value = global::System.Text
                 .Encoding
                 .UTF8
                 .GetBytes("\u05D0\u05D1\u05D2" + builder.ToString());
@@ -97,8 +96,7 @@ namespace MonoTests.Mono.Data.Sqlite
 
                     object compareValue;
                     if (blobP.Value is byte[])
-                        compareValue = global::System
-                            .Text
+                        compareValue = global::System.Text
                             .Encoding
                             .UTF8
                             .GetString((byte[])blobP.Value);

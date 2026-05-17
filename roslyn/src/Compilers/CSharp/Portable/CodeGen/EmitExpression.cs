@@ -89,8 +89,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
             {
                 _diagnostics.Add(
                     ErrorCode.ERR_InsufficientStack,
-                    BoundTreeVisitor
-                        .CancelledByStackGuardException
+                    BoundTreeVisitor.CancelledByStackGuardException
                         .GetTooLongOrComplexExpressionErrorLocation(expression)
                 );
                 throw new EmitCancelledException();
@@ -473,8 +472,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
                 (
                     expression.ForceCopyOfNullableValueType
                     && notConstrained
-                    && ((TypeParameterSymbol)receiverType)
-                        .EffectiveInterfacesNoUseSiteDiagnostics
+                    && ((TypeParameterSymbol)receiverType).EffectiveInterfacesNoUseSiteDiagnostics
                         .IsEmpty
                 )
                 || // This could be a nullable value type, which must be copied in order to not mutate the original value
@@ -2466,8 +2464,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
                     return ((BoundCall)receiver).Method.RefKind != RefKind.None;
 
                 case BoundKind.FunctionPointerInvocation:
-                    return ((BoundFunctionPointerInvocation)receiver)
-                            .FunctionPointer
+                    return ((BoundFunctionPointerInvocation)receiver).FunctionPointer
                             .Signature
                             .RefKind != RefKind.None;
 
@@ -2528,8 +2525,9 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
             {
                 // Constructor pops all the arguments, fixed and variadic.
                 int fixedArgCount = objCreation.Arguments.Length - 1;
-                int varArgCount = ((BoundArgListOperator)objCreation.Arguments[fixedArgCount])
-                    .Arguments
+                int varArgCount = (
+                    (BoundArgListOperator)objCreation.Arguments[fixedArgCount]
+                ).Arguments
                     .Length;
                 stack -= fixedArgCount;
                 stack -= varArgCount;
@@ -2988,8 +2986,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
 
                     // ctor can possibly see its own assignments indirectly if there are ref parameters or __arglist
                     if (
-                        System
-                            .Linq
+                        System.Linq
                             .ImmutableArrayExtensions
                             .All(ctor.Parameters, p => p.RefKind == RefKind.None)
                         && !ctor.IsVararg
@@ -3558,8 +3555,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
 
                 case BoundKind.FunctionPointerInvocation:
                     Debug.Assert(
-                        ((BoundFunctionPointerInvocation)expression)
-                            .FunctionPointer
+                        ((BoundFunctionPointerInvocation)expression).FunctionPointer
                             .Signature
                             .RefKind != RefKind.None
                     );
@@ -4490,9 +4486,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
                 || (
                     to.IsInterfaceType()
                     && from.IsInterfaceType()
-                    && !from.InterfacesAndTheirBaseInterfacesNoUseSiteDiagnostics.ContainsKey(
-                        (NamedTypeSymbol)to
-                    )
+                    && !from.InterfacesAndTheirBaseInterfacesNoUseSiteDiagnostics
+                        .ContainsKey((NamedTypeSymbol)to)
                 );
         }
 

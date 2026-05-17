@@ -87,20 +87,20 @@ namespace System.Linq.Expressions
             try
             {
                 // Using default scheduler rather than picking up the current scheduler.
-                Task<R> task = Task.Factory.StartNew(
-                    action!,
-                    state,
-                    CancellationToken.None,
-                    TaskCreationOptions.DenyChildAttach,
-                    TaskScheduler.Default
-                );
+                Task<R> task = Task.Factory
+                    .StartNew(
+                        action!,
+                        state,
+                        CancellationToken.None,
+                        TaskCreationOptions.DenyChildAttach,
+                        TaskScheduler.Default
+                    );
 
                 // Avoid AsyncWaitHandle lazy allocation of ManualResetEvent in the rare case we finish quickly.
                 if (!task.IsCompleted)
                 {
                     // Task.Wait has the potential of inlining the task's execution on the current thread; avoid this.
-                    ((IAsyncResult)task)
-                        .AsyncWaitHandle
+                    ((IAsyncResult)task).AsyncWaitHandle
                         .WaitOne();
                 }
 

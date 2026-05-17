@@ -46,8 +46,7 @@ namespace System.ServiceModel.Discovery.Configuration
                 )
             )
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new ConfigurationErrorsException(
                             SR2.DiscoveryConfigAddressSpecifiedForUdpDiscoveryEndpoint(
@@ -70,8 +69,7 @@ namespace System.ServiceModel.Discovery.Configuration
                 )
             )
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new ConfigurationErrorsException(
                             SR2.DiscoveryConfigAddressSpecifiedForUdpDiscoveryEndpoint(
@@ -84,8 +82,7 @@ namespace System.ServiceModel.Discovery.Configuration
 
             if (serviceEndpointElement.ListenUri != null)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new ConfigurationErrorsException(
                             SR2.DiscoveryConfigListenUriSpecifiedForUdpDiscoveryEndpoint(
@@ -127,8 +124,7 @@ namespace System.ServiceModel.Discovery.Configuration
                         {
                             if (wildcard)
                             {
-                                throw FxTrace
-                                    .Exception
+                                throw FxTrace.Exception
                                     .AsError(
                                         new InvalidOperationException(
                                             SR2.DiscoveryConfigMultipleEndpointsMatchWildcard(
@@ -140,8 +136,7 @@ namespace System.ServiceModel.Discovery.Configuration
                             }
                             else
                             {
-                                throw FxTrace
-                                    .Exception
+                                throw FxTrace.Exception
                                     .AsError(
                                         new InvalidOperationException(
                                             SR2.DiscoveryConfigMultipleEndpointsMatch(
@@ -165,8 +160,7 @@ namespace System.ServiceModel.Discovery.Configuration
             {
                 if (wildcard)
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(
                             new InvalidOperationException(
                                 SR2.DiscoveryConfigNoEndpointsMatchWildcard(
@@ -178,8 +172,7 @@ namespace System.ServiceModel.Discovery.Configuration
                 }
                 else
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(
                             new InvalidOperationException(
                                 SR2.DiscoveryConfigNoEndpointsMatch(

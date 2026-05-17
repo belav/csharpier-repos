@@ -121,8 +121,7 @@ namespace System.Workflow.Runtime.Hosting
 
         protected internal override void Schedule(WaitCallback callback, Guid workflowInstanceId)
         {
-            WorkflowTrace
-                .Host
+            WorkflowTrace.Host
                 .TraceEvent(
                     TraceEventType.Information,
                     0,
@@ -152,8 +151,7 @@ namespace System.Workflow.Runtime.Hosting
             Guid timerId
         )
         {
-            WorkflowTrace
-                .Host
+            WorkflowTrace.Host
                 .TraceEvent(
                     TraceEventType.Information,
                     0,
@@ -192,8 +190,7 @@ namespace System.Workflow.Runtime.Hosting
 
         protected internal override void Cancel(Guid timerId)
         {
-            WorkflowTrace
-                .Host
+            WorkflowTrace.Host
                 .TraceEvent(
                     TraceEventType.Information,
                     0,
@@ -303,8 +300,7 @@ namespace System.Workflow.Runtime.Hosting
                         {
                             if (ci.IsExpired)
                             {
-                                WorkflowTrace
-                                    .Host
+                                WorkflowTrace.Host
                                     .TraceEvent(
                                         TraceEventType.Information,
                                         0,
@@ -328,8 +324,7 @@ namespace System.Workflow.Runtime.Hosting
             catch (WorkflowOwnershipException) { }
             catch (ThreadAbortException e)
             {
-                WorkflowTrace
-                    .Host
+                WorkflowTrace.Host
                     .TraceEvent(
                         TraceEventType.Error,
                         0,
@@ -342,8 +337,7 @@ namespace System.Workflow.Runtime.Hosting
             }
             catch (Exception e)
             {
-                WorkflowTrace
-                    .Host
+                WorkflowTrace.Host
                     .TraceEvent(
                         TraceEventType.Error,
                         0,
@@ -437,8 +431,7 @@ namespace System.Workflow.Runtime.Hosting
             {
                 try
                 {
-                    WorkflowTrace
-                        .Host
+                    WorkflowTrace.Host
                         .TraceEvent(TraceEventType.Information, 0, "Running workflow {0}", state);
                     Callback(state);
                 }

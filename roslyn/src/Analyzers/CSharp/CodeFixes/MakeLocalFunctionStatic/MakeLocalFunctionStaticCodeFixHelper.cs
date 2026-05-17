@@ -126,8 +126,7 @@ namespace Microsoft.CodeAnalysis.CSharp.MakeLocalFunctionStatic
                     (node, generator) =>
                     {
                         var currentInvocation = (InvocationExpressionSyntax)node;
-                        var seenNamedArgument = currentInvocation
-                            .ArgumentList
+                        var seenNamedArgument = currentInvocation.ArgumentList
                             .Arguments
                             .Any(a => a.NameColon != null);
                         var seenDefaultArgumentValue =
@@ -148,8 +147,7 @@ namespace Microsoft.CodeAnalysis.CSharp.MakeLocalFunctionStatic
                                     )
                             );
 
-                        var newArgumentsList = currentInvocation
-                            .ArgumentList
+                        var newArgumentsList = currentInvocation.ArgumentList
                             .Arguments
                             .AddRange(newArguments);
                         if (thisParameter != null)
@@ -158,8 +156,7 @@ namespace Microsoft.CodeAnalysis.CSharp.MakeLocalFunctionStatic
                                 (ArgumentSyntax)generator.Argument(generator.ThisExpression())
                             );
 
-                        var newArgList = currentInvocation
-                            .ArgumentList
+                        var newArgList = currentInvocation.ArgumentList
                             .WithArguments(newArgumentsList);
                         return currentInvocation.WithArgumentList(newArgList);
                     }
@@ -268,12 +265,13 @@ namespace Microsoft.CodeAnalysis.CSharp.MakeLocalFunctionStatic
                 (node, generator) =>
                 {
                     var localFunctionWithNewParameters = (LocalFunctionStatementSyntax)
-                        info.Service.AddParameters(
-                            node,
-                            parameterAndCapturedSymbols.SelectAsArray(p => p.symbol),
-                            info,
-                            cancellationToken
-                        );
+                        info.Service
+                            .AddParameters(
+                                node,
+                                parameterAndCapturedSymbols.SelectAsArray(p => p.symbol),
+                                info,
+                                cancellationToken
+                            );
 
                     // Add @this parameter as the first parameter to the local function.
                     if (thisParameter != null)

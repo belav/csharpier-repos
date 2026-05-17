@@ -83,16 +83,14 @@ public static class OpenIdConnectExtensions
         Action<OpenIdConnectOptions> configureOptions
     )
     {
-        builder
-            .Services
+        builder.Services
             .TryAddEnumerable(
                 ServiceDescriptor.Singleton<
                     IConfigureOptions<OpenIdConnectOptions>,
                     OpenIdConnectConfigureOptions
                 >()
             );
-        builder
-            .Services
+        builder.Services
             .TryAddEnumerable(
                 ServiceDescriptor.Singleton<
                     IPostConfigureOptions<OpenIdConnectOptions>,

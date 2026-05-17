@@ -222,8 +222,7 @@ namespace System.Threading.Tasks
             if (ParallelEtwProvider.Log.IsEnabled())
             {
                 forkJoinContextID = Interlocked.Increment(ref s_forkJoinContextID);
-                ParallelEtwProvider
-                    .Log
+                ParallelEtwProvider.Log
                     .ParallelInvokeBegin(
                         TaskScheduler.Current.Id,
                         Task.CurrentId ?? 0,
@@ -312,8 +311,7 @@ namespace System.Threading.Tasks
                                     }
 
                                     // Check for cancellation.  If it is encountered, then exit the delegate.
-                                    parallelOptions
-                                        .CancellationToken
+                                    parallelOptions.CancellationToken
                                         .ThrowIfCancellationRequested();
 
                                     // You're still in the game.  Grab your next action index.
@@ -378,12 +376,13 @@ namespace System.Threading.Tasks
                     // Invoke all actions as tasks.  Queue N-1 of them, and run 1 synchronously.
                     for (int i = 1; i < tasks.Length; i++)
                     {
-                        tasks[i] = Task.Factory.StartNew(
-                            actionsCopy[i],
-                            parallelOptions.CancellationToken,
-                            TaskCreationOptions.None,
-                            parallelOptions.EffectiveTaskScheduler
-                        );
+                        tasks[i] = Task.Factory
+                            .StartNew(
+                                actionsCopy[i],
+                                parallelOptions.CancellationToken,
+                                TaskCreationOptions.None,
+                                parallelOptions.EffectiveTaskScheduler
+                            );
                     }
                     tasks[0] = new Task(
                         actionsCopy[0],
@@ -417,8 +416,7 @@ namespace System.Threading.Tasks
                 // ETW event for Parallel Invoke End
                 if (ParallelEtwProvider.Log.IsEnabled())
                 {
-                    ParallelEtwProvider
-                        .Log
+                    ParallelEtwProvider.Log
                         .ParallelInvokeEnd(
                             TaskScheduler.Current.Id,
                             Task.CurrentId ?? 0,
@@ -1157,8 +1155,7 @@ namespace System.Threading.Tasks
             CancellationTokenRegistration ctr =
                 (!parallelOptions.CancellationToken.CanBeCanceled)
                     ? default(CancellationTokenRegistration)
-                    : parallelOptions
-                        .CancellationToken
+                    : parallelOptions.CancellationToken
                         .UnsafeRegister(
                             (o) =>
                             {
@@ -1177,8 +1174,7 @@ namespace System.Threading.Tasks
             if (ParallelEtwProvider.Log.IsEnabled())
             {
                 forkJoinContextID = Interlocked.Increment(ref s_forkJoinContextID);
-                ParallelEtwProvider
-                    .Log
+                ParallelEtwProvider.Log
                     .ParallelLoopBegin(
                         TaskScheduler.Current.Id,
                         Task.CurrentId ?? 0,
@@ -1228,8 +1224,7 @@ namespace System.Threading.Tasks
                             // ETW event for ParallelFor Worker Fork
                             if (ParallelEtwProvider.Log.IsEnabled())
                             {
-                                ParallelEtwProvider
-                                    .Log
+                                ParallelEtwProvider.Log
                                     .ParallelFork(
                                         TaskScheduler.Current.Id,
                                         Task.CurrentId ?? 0,
@@ -1361,8 +1356,7 @@ namespace System.Threading.Tasks
                                 // ETW event for ParallelFor Worker Join
                                 if (ParallelEtwProvider.Log.IsEnabled())
                                 {
-                                    ParallelEtwProvider
-                                        .Log
+                                    ParallelEtwProvider.Log
                                         .ParallelJoin(
                                             TaskScheduler.Current.Id,
                                             Task.CurrentId ?? 0,
@@ -1420,8 +1414,7 @@ namespace System.Threading.Tasks
                     else
                         nTotalIterations = TInt.CreateTruncating(-1); //ParallelLoopStateStopped! We can't determine this if we were stopped..
 
-                    ParallelEtwProvider
-                        .Log
+                    ParallelEtwProvider.Log
                         .ParallelLoopEnd(
                             TaskScheduler.Current.Id,
                             Task.CurrentId ?? 0,
@@ -3191,8 +3184,7 @@ namespace System.Threading.Tasks
             if (ParallelEtwProvider.Log.IsEnabled())
             {
                 forkJoinContextID = Interlocked.Increment(ref s_forkJoinContextID);
-                ParallelEtwProvider
-                    .Log
+                ParallelEtwProvider.Log
                     .ParallelLoopBegin(
                         TaskScheduler.Current.Id,
                         Task.CurrentId ?? 0,
@@ -3218,8 +3210,7 @@ namespace System.Threading.Tasks
             CancellationTokenRegistration ctr =
                 (!parallelOptions.CancellationToken.CanBeCanceled)
                     ? default(CancellationTokenRegistration)
-                    : parallelOptions
-                        .CancellationToken
+                    : parallelOptions.CancellationToken
                         .UnsafeRegister(
                             (o) =>
                             {
@@ -3275,8 +3266,7 @@ namespace System.Threading.Tasks
                             // ETW event for ParallelForEach Worker Fork
                             if (ParallelEtwProvider.Log.IsEnabled())
                             {
-                                ParallelEtwProvider
-                                    .Log
+                                ParallelEtwProvider.Log
                                     .ParallelFork(
                                         TaskScheduler.Current.Id,
                                         Task.CurrentId ?? 0,
@@ -3456,8 +3446,7 @@ namespace System.Threading.Tasks
                                 // ETW event for ParallelFor Worker Join
                                 if (ParallelEtwProvider.Log.IsEnabled())
                                 {
-                                    ParallelEtwProvider
-                                        .Log
+                                    ParallelEtwProvider.Log
                                         .ParallelJoin(
                                             TaskScheduler.Current.Id,
                                             Task.CurrentId ?? 0,
@@ -3516,8 +3505,7 @@ namespace System.Threading.Tasks
                 // ETW event for Parallel For End
                 if (ParallelEtwProvider.Log.IsEnabled())
                 {
-                    ParallelEtwProvider
-                        .Log
+                    ParallelEtwProvider.Log
                         .ParallelLoopEnd(
                             TaskScheduler.Current.Id,
                             Task.CurrentId ?? 0,

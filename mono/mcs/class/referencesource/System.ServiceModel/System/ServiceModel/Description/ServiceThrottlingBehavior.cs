@@ -31,8 +31,7 @@ namespace System.ServiceModel.Description
             set
             {
                 if (value <= 0)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(SR.SFxThrottleLimitMustBeGreaterThanZero0)
@@ -49,8 +48,7 @@ namespace System.ServiceModel.Description
             set
             {
                 if (value <= 0)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(SR.SFxThrottleLimitMustBeGreaterThanZero0)
@@ -86,8 +84,7 @@ namespace System.ServiceModel.Description
             set
             {
                 if (value <= 0)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(SR.SFxThrottleLimitMustBeGreaterThanZero0)
@@ -117,8 +114,7 @@ namespace System.ServiceModel.Description
         )
         {
             if (serviceHostBase == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("serviceHostBase"));
 
             ServiceThrottle serviceThrottle = serviceHostBase.ServiceThrottle;

@@ -132,8 +132,7 @@ namespace Microsoft.Scripting
         private static Type CreateCustomType(int size)
         {
             var attrs = TypeAttributes.NotPublic | TypeAttributes.SequentialLayout;
-            TypeBuilder type = UnsafeMethods
-                .DynamicModule
+            TypeBuilder type = UnsafeMethods.DynamicModule
                 .DefineType("VariantArray" + size, attrs, typeof(ValueType));
             var T = type.DefineGenericParameters(new string[] { "T" })[0];
             for (int i = 0; i < size; i++)

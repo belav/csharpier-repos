@@ -33,20 +33,19 @@ namespace System.ServiceModel.Dispatcher
         public void Authenticate(ref MessageRpc rpc)
         {
             SecurityMessageProperty security = SecurityMessageProperty.GetOrCreate(rpc.Request);
-            ReadOnlyCollection<IAuthorizationPolicy> authPolicy = security
-                .ServiceSecurityContext
+            ReadOnlyCollection<IAuthorizationPolicy> authPolicy = security.ServiceSecurityContext
                 .AuthorizationPolicies;
             try
             {
-                authPolicy = this.serviceAuthenticationManager.Authenticate(
-                    security.ServiceSecurityContext.AuthorizationPolicies,
-                    rpc.Channel.ListenUri,
-                    ref rpc.Request
-                );
+                authPolicy = this.serviceAuthenticationManager
+                    .Authenticate(
+                        security.ServiceSecurityContext.AuthorizationPolicies,
+                        rpc.Channel.ListenUri,
+                        ref rpc.Request
+                    );
                 if (authPolicy == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(SR.AuthenticationManagerShouldNotReturnNull)
@@ -73,8 +72,7 @@ namespace System.ServiceModel.Dispatcher
                     try
                     {
                         string primaryIdentity;
-                        AuthorizationContext authContext = security
-                            .ServiceSecurityContext
+                        AuthorizationContext authContext = security.ServiceSecurityContext
                             .AuthorizationContext;
                         if (authContext != null)
                         {
@@ -110,8 +108,7 @@ namespace System.ServiceModel.Dispatcher
                     }
                 }
 
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(CreateFailedAuthenticationFaultException());
             }
 
@@ -121,8 +118,7 @@ namespace System.ServiceModel.Dispatcher
             if (AuditLevel.Success == (this.messageAuthenticationAuditLevel & AuditLevel.Success))
             {
                 string primaryIdentity;
-                AuthorizationContext authContext = security
-                    .ServiceSecurityContext
+                AuthorizationContext authContext = security.ServiceSecurityContext
                     .AuthorizationContext;
                 if (authContext != null)
                 {

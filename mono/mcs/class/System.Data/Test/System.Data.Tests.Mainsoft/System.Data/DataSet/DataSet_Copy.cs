@@ -76,9 +76,10 @@ namespace tests.system_data_dll.System_Data
                 dsTarget = null;
             ds.Tables.Add(GHTUtils.DataProvider.CreateParentDataTable());
             ds.Tables.Add(GHTUtils.DataProvider.CreateChildDataTable());
-            ds.Relations.Add(
-                new DataRelation("myRelation", ds.Tables[0].Columns[0], ds.Tables[1].Columns[0])
-            );
+            ds.Relations
+                .Add(
+                    new DataRelation("myRelation", ds.Tables[0].Columns[0], ds.Tables[1].Columns[0])
+                );
             ds.Tables[0].Rows.Add(new object[] { 9, "", "" });
             ds.Tables[1].Columns[2].ReadOnly = true;
             ds.Tables[0].PrimaryKey = new DataColumn[]

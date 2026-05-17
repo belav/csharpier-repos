@@ -204,12 +204,10 @@ namespace System.ServiceModel.Channels
         )
         {
             if (version == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("version"));
             if (serializer == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("serializer"));
             return new BodyWriterMessage(
                 version,
@@ -240,12 +238,10 @@ namespace System.ServiceModel.Channels
         public static Message CreateMessage(MessageVersion version, string action, BodyWriter body)
         {
             if (version == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("version"));
             if (body == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("body"));
             return new BodyWriterMessage(version, action, body);
         }
@@ -257,12 +253,10 @@ namespace System.ServiceModel.Channels
         )
         {
             if (version == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("version"));
             if (body == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("body"));
             return new BodyWriterMessage(version, actionHeader, body);
         }
@@ -270,8 +264,7 @@ namespace System.ServiceModel.Channels
         public static Message CreateMessage(MessageVersion version, string action)
         {
             if (version == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("version"));
             return new BodyWriterMessage(version, action, EmptyBodyWriter.Value);
         }
@@ -279,8 +272,7 @@ namespace System.ServiceModel.Channels
         internal static Message CreateMessage(MessageVersion version, ActionHeader actionHeader)
         {
             if (version == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("version"));
             return new BodyWriterMessage(version, actionHeader, EmptyBodyWriter.Value);
         }
@@ -305,12 +297,10 @@ namespace System.ServiceModel.Channels
         )
         {
             if (envelopeReader == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("envelopeReader"));
             if (version == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("version"));
             Message message = new StreamedMessage(envelopeReader, maxSizeOfHeaders, version);
             return message;
@@ -324,16 +314,13 @@ namespace System.ServiceModel.Channels
         )
         {
             if (version == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("version"));
             if (faultCode == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("faultCode"));
             if (reason == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("reason"));
 
             return CreateMessage(version, MessageFault.CreateFault(faultCode, reason), action);
@@ -348,16 +335,13 @@ namespace System.ServiceModel.Channels
         )
         {
             if (version == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("version"));
             if (faultCode == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("faultCode"));
             if (reason == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("reason"));
 
             return CreateMessage(
@@ -374,12 +358,10 @@ namespace System.ServiceModel.Channels
         )
         {
             if (fault == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("fault"));
             if (version == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("version"));
             return new BodyWriterMessage(
                 version,
@@ -418,8 +400,7 @@ namespace System.ServiceModel.Channels
         public T GetBody<T>(XmlObjectSerializer serializer)
         {
             if (serializer == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("serializer"));
             return this.GetBodyCore<T>(GetReaderAtBodyContents(), serializer);
         }
@@ -1199,8 +1180,7 @@ namespace System.ServiceModel.Channels
         {
             this.reader = reader;
             if (reader.MoveToContent() != XmlNodeType.Element)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentException(
                             SR.GetString(SR.InvalidReaderPositionOnCreateMessage),
@@ -1229,8 +1209,7 @@ namespace System.ServiceModel.Channels
                 while (!reader.EOF && type != XmlNodeType.EndElement)
                 {
                     if (type != XmlNodeType.Element)
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new ArgumentException(
                                     SR.GetString(SR.InvalidReaderPositionOnCreateMessage),
@@ -1493,11 +1472,12 @@ namespace System.ServiceModel.Channels
             {
                 if (result == null)
                 {
-                    result = this.message.OnBeginWriteBodyContents(
-                        this.writer,
-                        PrepareAsyncCompletion(HandleWriteBodyContents),
-                        this
-                    );
+                    result = this.message
+                        .OnBeginWriteBodyContents(
+                            this.writer,
+                            PrepareAsyncCompletion(HandleWriteBodyContents),
+                            this
+                        );
                     if (!result.CompletedSynchronously)
                     {
                         return false;
@@ -1552,8 +1532,7 @@ namespace System.ServiceModel.Channels
                         bodyReader.ReadState == ReadState.Error
                         || bodyReader.ReadState == ReadState.Closed
                     )
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(
                                     SR.GetString(
@@ -1602,14 +1581,12 @@ namespace System.ServiceModel.Channels
             )
                 envelopeVersion = EnvelopeVersion.Soap11;
             else
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new CommunicationException(SR.GetString(SR.MessageVersionUnknown))
                     );
             if (reader.IsEmptyElement)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new CommunicationException(SR.GetString(SR.MessageBodyMissing))
                     );
@@ -1620,8 +1597,7 @@ namespace System.ServiceModel.Channels
         protected static void VerifyStartBody(XmlDictionaryReader reader, EnvelopeVersion version)
         {
             if (!reader.IsStartElement(XD.MessageDictionary.Body, version.DictionaryNamespace))
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new CommunicationException(SR.GetString(SR.MessageBodyMissing))
                     );
@@ -2330,8 +2306,7 @@ namespace System.ServiceModel.Channels
             {
                 string message = SR.GetString(SR.XmlBufferQuotaExceeded);
                 Exception inner = new QuotaExceededException(message);
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new CommunicationException(message, inner));
             }
             maxSizeOfHeaders -= byteCount;

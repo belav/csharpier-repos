@@ -114,8 +114,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                         //   class [|C<T>(int X, int Y)|] : B;
                         Debug.Assert(typeDecl.ParameterList != null);
                         Debug.Assert(
-                            typeDecl
-                                .BaseList
+                            typeDecl.BaseList
                                 ?.Types
                                 .Any(t =>
                                     t is PrimaryConstructorBaseTypeSyntax { ArgumentList: not null }
@@ -596,8 +595,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             return AddSequencePoint(
                 original.Syntax.Kind() == SyntaxKind.VariableDeclarator
                     ? (VariableDeclaratorSyntax)original.Syntax
-                    : ((LocalDeclarationStatementSyntax)original.Syntax)
-                        .Declaration
+                    : ((LocalDeclarationStatementSyntax)original.Syntax).Declaration
                         .Variables
                         .First(),
                 base.InstrumentUserDefinedLocalInitialization(original, rewritten)

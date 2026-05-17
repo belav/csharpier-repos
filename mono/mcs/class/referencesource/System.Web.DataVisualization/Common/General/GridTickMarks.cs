@@ -201,10 +201,11 @@ namespace System.Web.UI.DataVisualization.Charting
             Series axisSeries = null;
             if (Axis.axisType == AxisName.X || Axis.axisType == AxisName.X2)
             {
-                List<string> seriesArray = Axis.ChartArea.GetXAxesSeries(
-                    (Axis.axisType == AxisName.X) ? AxisType.Primary : AxisType.Secondary,
-                    Axis.SubAxisName
-                );
+                List<string> seriesArray = Axis.ChartArea
+                    .GetXAxesSeries(
+                        (Axis.axisType == AxisName.X) ? AxisType.Primary : AxisType.Secondary,
+                        Axis.SubAxisName
+                    );
                 if (seriesArray.Count > 0)
                 {
                     axisSeries = Axis.Common.DataManager.Series[seriesArray[0]];
@@ -1383,8 +1384,7 @@ namespace System.Web.UI.DataVisualization.Charting
             Series axisSeries = null;
             if (_axis.axisType == AxisName.X || _axis.axisType == AxisName.X2)
             {
-                List<string> seriesArray = _axis
-                    .ChartArea
+                List<string> seriesArray = _axis.ChartArea
                     .GetXAxesSeries(
                         (_axis.axisType == AxisName.X) ? AxisType.Primary : AxisType.Secondary,
                         _axis.SubAxisName
@@ -1715,8 +1715,7 @@ namespace System.Web.UI.DataVisualization.Charting
                             path.AddLine(second.X + 1, second.Y, first.X + 1, first.Y);
                             path.CloseAllFigures();
                         }
-                        common
-                            .HotRegionsList
+                        common.HotRegionsList
                             .AddHotRegion(path, true, ChartElementType.Gridlines, this);
                     }
                 }
@@ -1847,8 +1846,7 @@ namespace System.Web.UI.DataVisualization.Charting
                                         path.AddLine(second.X + 1, second.Y, first.X + 1, first.Y);
                                         path.CloseAllFigures();
                                     }
-                                    common
-                                        .HotRegionsList
+                                    common.HotRegionsList
                                         .AddHotRegion(path, true, ChartElementType.Gridlines, this);
                                 }
                             }

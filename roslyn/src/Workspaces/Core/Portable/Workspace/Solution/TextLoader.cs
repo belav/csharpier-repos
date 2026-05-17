@@ -70,8 +70,7 @@ namespace Microsoft.CodeAnalysis
                                 DocumentId,
                                 CancellationToken,
                                 Task<TextAndVersion>
-                            >(LoadTextAndVersionAsync)
-                                .Method
+                            >(LoadTextAndVersionAsync).Method
                                 .DeclaringType != typeof(TextLoader)
                         )
                     )

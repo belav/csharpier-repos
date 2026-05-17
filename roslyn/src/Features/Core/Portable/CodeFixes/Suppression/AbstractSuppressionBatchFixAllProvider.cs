@@ -363,8 +363,7 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                     fixAllState.Document!,
                     fixAllState.Project
                 );
-                return CodeAction
-                    .SolutionChangeAction
+                return CodeAction.SolutionChangeAction
                     .Create(title, _ => Task.FromResult(newSolution), title);
             }
 

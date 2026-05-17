@@ -200,8 +200,7 @@ namespace System.Workflow.Runtime
 
         internal static bool IsInServiceThread(Guid instanceId)
         {
-            System
-                .Diagnostics
+            System.Diagnostics
                 .Debug
                 .Assert(instanceId != Guid.Empty, "IsInServiceThread expects valid guid.");
             if (WorkflowInstanceId == instanceId)

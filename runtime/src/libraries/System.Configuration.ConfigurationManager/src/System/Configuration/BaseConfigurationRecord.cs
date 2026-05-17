@@ -469,8 +469,7 @@ namespace System.Configuration
                                             List<SectionInput>
                                         >(1);
 
-                                        string configKey = locationSectionRecord
-                                            .SectionXmlInfo
+                                        string configKey = locationSectionRecord.SectionXmlInfo
                                             .ConfigKey;
 
                                         if (
@@ -758,8 +757,7 @@ namespace System.Configuration
                             if (fileStreamInfo != null)
                             {
                                 streamInfos.Remove(ConfigStreamInfo.StreamName);
-                                ConfigStreamInfo
-                                    .StreamInfos
+                                ConfigStreamInfo.StreamInfos
                                     .Add(ConfigStreamInfo.StreamName, fileStreamInfo);
                             }
                         }
@@ -1679,8 +1677,7 @@ namespace System.Configuration
                             if (xmlUtil.Reader.Name == LocationTag)
                             {
                                 bool locationValid = false;
-                                string locationSubPathAttribute = xmlUtil
-                                    .Reader
+                                string locationSubPathAttribute = xmlUtil.Reader
                                     .GetAttribute(LocationPathAttribute);
 
                                 try
@@ -1817,8 +1814,7 @@ namespace System.Configuration
                         );
 
                     // Check for protectionProvider
-                    string protectionProviderAttribute = xmlUtil
-                        .Reader
+                    string protectionProviderAttribute = xmlUtil.Reader
                         .GetAttribute(ProtectionProviderAttribute);
                     if (protectionProviderAttribute != null)
                     {
@@ -2281,8 +2277,7 @@ namespace System.Configuration
                             if (factoryRecord != null)
                             {
                                 // Error: duplicate <sectionGroup> declaration
-                                xmlUtil
-                                    .SchemaErrors
+                                xmlUtil.SchemaErrors
                                     .AddError(
                                         new ConfigurationErrorsException(
                                             SR.Format(
@@ -2317,8 +2312,7 @@ namespace System.Configuration
                                         )
                                     )
                                     {
-                                        xmlUtil
-                                            .SchemaErrors
+                                        xmlUtil.SchemaErrors
                                             .AddError(
                                                 new ConfigurationErrorsException(
                                                     SR.Format(
@@ -2503,8 +2497,7 @@ namespace System.Configuration
                             if (factoryRecord != null)
                             {
                                 // Error: duplicate section declaration
-                                xmlUtil
-                                    .SchemaErrors
+                                xmlUtil.SchemaErrors
                                     .AddError(
                                         new ConfigurationErrorsException(
                                             SR.Format(
@@ -2531,8 +2524,7 @@ namespace System.Configuration
                                     if (parentFactoryRecord.IsGroup)
                                     {
                                         // Already a <sectionGroup> with this name
-                                        xmlUtil
-                                            .SchemaErrors
+                                        xmlUtil.SchemaErrors
                                             .AddError(
                                                 new ConfigurationErrorsException(
                                                     SR.Format(
@@ -2558,8 +2550,7 @@ namespace System.Configuration
                                     )
                                     {
                                         // Already a <section> with the same name
-                                        xmlUtil
-                                            .SchemaErrors
+                                        xmlUtil.SchemaErrors
                                             .AddError(
                                                 new ConfigurationErrorsException(
                                                     SR.Format(
@@ -2938,8 +2929,7 @@ namespace System.Configuration
                 {
                     case ConfigSectionsTag: // <configSections>
                         // Either a duplicate or not the first tag under <configuration>
-                        xmlUtil
-                            .SchemaErrors
+                        xmlUtil.SchemaErrors
                             .AddError(
                                 new ConfigurationErrorsException(
                                     SR.Format(
@@ -2956,8 +2946,7 @@ namespace System.Configuration
                         if ((parentConfigKey.Length > 0) || inLocation)
                         {
                             // The section isn't at the top level
-                            xmlUtil
-                                .SchemaErrors
+                            xmlUtil.SchemaErrors
                                 .AddError(
                                     new ConfigurationErrorsException(
                                         SR.Config_location_location_not_allowed,
@@ -2994,8 +2983,7 @@ namespace System.Configuration
                     // version N+1 config files that may introduce new sections.
                     if (!ClassFlags[ClassIgnoreLocalErrors])
                     {
-                        xmlUtil
-                            .SchemaErrors
+                        xmlUtil.SchemaErrors
                             .AddError(
                                 new ConfigurationErrorsException(
                                     SR.Format(
@@ -3086,8 +3074,7 @@ namespace System.Configuration
                         // We have a valid factoryRecord for a section
                         if (inLocation && (factoryRecord.AllowLocation == false))
                         {
-                            xmlUtil
-                                .SchemaErrors
+                            xmlUtil.SchemaErrors
                                 .AddError(
                                     new ConfigurationErrorsException(
                                         SR.Config_section_cannot_be_used_in_location,
@@ -3106,8 +3093,7 @@ namespace System.Configuration
                             {
                                 if (!factoryRecord.IsIgnorable())
                                 {
-                                    xmlUtil
-                                        .SchemaErrors
+                                    xmlUtil.SchemaErrors
                                         .AddError(
                                             new ConfigurationErrorsException(
                                                 SR.Config_sections_must_be_unique,
@@ -3134,8 +3120,7 @@ namespace System.Configuration
 
                         if (sectionLockMode == OverrideMode.Deny)
                         {
-                            xmlUtil
-                                .SchemaErrors
+                            xmlUtil.SchemaErrors
                                 .AddError(
                                     new ConfigurationErrorsException(
                                         SR.Config_section_locked,
@@ -3150,8 +3135,7 @@ namespace System.Configuration
                         {
                             // First do all the attributes reading without advancing the reader.
 
-                            string configSourceAttribute = xmlUtil
-                                .Reader
+                            string configSourceAttribute = xmlUtil.Reader
                                 .GetAttribute(ConfigSourceAttribute);
                             if (configSourceAttribute != null)
                             {
@@ -3170,8 +3154,7 @@ namespace System.Configuration
                                 if (xmlUtil.Reader.AttributeCount != 1)
                                 {
                                     // Error: elements with configSource should not have other attributes
-                                    xmlUtil
-                                        .SchemaErrors
+                                    xmlUtil.SchemaErrors
                                         .AddError(
                                             new ConfigurationErrorsException(
                                                 SR.Config_source_syntax_error,
@@ -3182,8 +3165,7 @@ namespace System.Configuration
                                 }
                             }
 
-                            string protectionProviderAttribute = xmlUtil
-                                .Reader
+                            string protectionProviderAttribute = xmlUtil.Reader
                                 .GetAttribute(ProtectionProviderAttribute);
                             if (protectionProviderAttribute != null)
                             {
@@ -3202,8 +3184,7 @@ namespace System.Configuration
                                 if (xmlUtil.Reader.AttributeCount != 1)
                                 {
                                     // Error: elements with protectionProvider should not have other attributes
-                                    xmlUtil
-                                        .SchemaErrors
+                                    xmlUtil.SchemaErrors
                                         .AddError(
                                             new ConfigurationErrorsException(
                                                 SR.Protection_provider_syntax_error,
@@ -3231,8 +3212,7 @@ namespace System.Configuration
                                             continue;
 
                                         // Error: elements with configSource should not subelements other than comments
-                                        xmlUtil
-                                            .SchemaErrors
+                                        xmlUtil.SchemaErrors
                                             .AddError(
                                                 new ConfigurationErrorsException(
                                                     SR.Config_source_syntax_error,
@@ -3314,8 +3294,7 @@ namespace System.Configuration
                     }
 
                     // Get the list of errors before advancing the reader
-                    List<ConfigurationException> localErrors = xmlUtil
-                        .SchemaErrors
+                    List<ConfigurationException> localErrors = xmlUtil.SchemaErrors
                         .RetrieveAndResetLocalErrors(isFileInput);
 
                     // advance the reader to the next element
@@ -3417,8 +3396,7 @@ namespace System.Configuration
                         // Check that allowOverride and OverrideMode werent specified at the same time
                         if (overrideModeInit)
                         {
-                            xmlUtil
-                                .SchemaErrors
+                            xmlUtil.SchemaErrors
                                 .AddError(
                                     new ConfigurationErrorsException(
                                         SR.Invalid_override_mode_declaration,
@@ -3445,8 +3423,7 @@ namespace System.Configuration
                     case LocationOverrideModeAttribute:
                         if (overrideModeInit)
                         {
-                            xmlUtil
-                                .SchemaErrors
+                            xmlUtil.SchemaErrors
                                 .AddError(
                                     new ConfigurationErrorsException(
                                         SR.Invalid_override_mode_declaration,
@@ -3729,22 +3706,19 @@ namespace System.Configuration
                                     // locationConfigPath or any sub-path of the locationConfigPath.
                                     if (parent._locationSections != null)
                                     {
-                                        string targetConfigPath = locationSectionRecord
-                                            .SectionXmlInfo
-                                            .TargetConfigPath;
+                                        string targetConfigPath =
+                                            locationSectionRecord.SectionXmlInfo.TargetConfigPath;
 
                                         foreach (
                                             LocationSectionRecord parentLocationSectionRecord in parent._locationSections
                                         )
                                         {
                                             string parentTargetConfigPath =
-                                                parentLocationSectionRecord
-                                                    .SectionXmlInfo
+                                                parentLocationSectionRecord.SectionXmlInfo
                                                     .TargetConfigPath;
 
                                             if (
-                                                parentLocationSectionRecord
-                                                    .SectionXmlInfo
+                                                parentLocationSectionRecord.SectionXmlInfo
                                                     .OverrideModeSetting
                                                     .IsLocked
                                                 && (
@@ -4429,8 +4403,7 @@ namespace System.Configuration
                     if (configRecord.ConfigStreamInfo.HasStreamInfos)
                     {
                         foreach (
-                            StreamInfo streamInfo in configRecord
-                                .ConfigStreamInfo
+                            StreamInfo streamInfo in configRecord.ConfigStreamInfo
                                 .StreamInfos
                                 .Values
                         )

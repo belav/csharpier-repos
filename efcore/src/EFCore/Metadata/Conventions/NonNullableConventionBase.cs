@@ -54,8 +54,7 @@ public abstract class NonNullableConventionBase : IModelFinalizingConvention
 
         var annotation =
             modelBuilder.Metadata.FindAnnotation(StateAnnotationName)
-            ?? modelBuilder
-                .Metadata
+            ?? modelBuilder.Metadata
                 .AddAnnotation(StateAnnotationName, new NullabilityInfoContext());
 
         var nullabilityInfoContext = (NullabilityInfoContext)annotation.Value!;

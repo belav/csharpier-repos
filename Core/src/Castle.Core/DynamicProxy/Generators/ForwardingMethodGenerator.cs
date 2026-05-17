@@ -43,8 +43,7 @@ namespace Castle.DynamicProxy.Generators
                 MethodToOverride.GetParameters()
             );
 
-            emitter
-                .CodeBuilder
+            emitter.CodeBuilder
                 .AddStatement(
                     new ReturnStatement(
                         new MethodInvocationExpression(targetReference, MethodToOverride, arguments)

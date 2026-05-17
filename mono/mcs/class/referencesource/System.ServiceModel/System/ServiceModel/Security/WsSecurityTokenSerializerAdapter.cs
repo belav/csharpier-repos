@@ -131,8 +131,7 @@ namespace System.ServiceModel.Security
         {
             if (securityTokenHandlerCollection == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("securityTokenHandlerCollection");
             }
 
@@ -251,8 +250,7 @@ namespace System.ServiceModel.Security
                                 != _scVersion.Namespace.Value
                             )
                             {
-                                throw DiagnosticUtility
-                                    .ExceptionUtility
+                                throw DiagnosticUtility.ExceptionUtility
                                     .ThrowHelperInvalidOperation(
                                         SR.GetString(
                                             SR.ID4053,
@@ -414,8 +412,7 @@ namespace System.ServiceModel.Security
             }
             else
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperXml(reader, SR.GetString(SR.ID4192));
             }
         }
@@ -458,8 +455,7 @@ namespace System.ServiceModel.Security
         {
             if (keyIdentifierClause == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("keyIdentifierClause");
             }
 
@@ -536,8 +532,7 @@ namespace System.ServiceModel.Security
 
             if (keyIdentifierClause == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("keyIdentifierClause");
             }
 

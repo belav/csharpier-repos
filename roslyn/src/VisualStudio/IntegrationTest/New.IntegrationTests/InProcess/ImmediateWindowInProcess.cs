@@ -17,16 +17,14 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.InProcess
     {
         public async Task ShowAsync(CancellationToken cancellationToken)
         {
-            await TestServices
-                .Shell
+            await TestServices.Shell
                 .ExecuteCommandAsync(WellKnownCommands.Debug.Immediate, cancellationToken);
         }
 
         public async Task ClearAllAsync(CancellationToken cancellationToken)
         {
             await ShowAsync(cancellationToken);
-            await TestServices
-                .Shell
+            await TestServices.Shell
                 .ExecuteCommandAsync(WellKnownCommands.Edit.ClearAll, cancellationToken);
         }
 

@@ -39,33 +39,28 @@ namespace System.Net.NetworkInformation
 
             _multicastAddresses =
                 SystemMulticastIPAddressInformation.ToMulticastIpAddressInformationCollection(
-                    Interop
-                        .IpHlpApi
+                    Interop.IpHlpApi
                         .IpAdapterAddress
                         .MarshalIpAddressInformationCollection(
                             ipAdapterAddresses.firstMulticastAddress
                         )
                 );
-            _dnsAddresses = Interop
-                .IpHlpApi
+            _dnsAddresses = Interop.IpHlpApi
                 .IpAdapterAddress
                 .MarshalIpAddressCollection(ipAdapterAddresses.firstDnsServerAddress);
-            _anycastAddresses = Interop
-                .IpHlpApi
+            _anycastAddresses = Interop.IpHlpApi
                 .IpAdapterAddress
                 .MarshalIpAddressInformationCollection(ipAdapterAddresses.firstAnycastAddress);
             _unicastAddresses =
                 SystemUnicastIPAddressInformation.MarshalUnicastIpAddressInformationCollection(
                     ipAdapterAddresses.firstUnicastAddress
                 );
-            _winsServersAddresses = Interop
-                .IpHlpApi
+            _winsServersAddresses = Interop.IpHlpApi
                 .IpAdapterAddress
                 .MarshalIpAddressCollection(ipAdapterAddresses.firstWinsServerAddress);
             _gatewayAddresses =
                 SystemGatewayIPAddressInformation.ToGatewayIpAddressInformationCollection(
-                    Interop
-                        .IpHlpApi
+                    Interop.IpHlpApi
                         .IpAdapterAddress
                         .MarshalIpAddressCollection(ipAdapterAddresses.firstGatewayAddress)
                 );

@@ -25,8 +25,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Interactive
         internal static string GetFilePath(ITextBuffer textBuffer)
         {
             if (
-                textBuffer
-                    .Properties
+                textBuffer.Properties
                     .TryGetProperty<ITextDocument>(typeof(ITextDocument), out var textDocument)
             )
             {

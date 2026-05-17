@@ -17,8 +17,7 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Pythia.Api
             IDocumentationCommentFormattingService formatter,
             CancellationToken cancellationToken
         ) =>
-            Shared
-                .Extensions
+            Shared.Extensions
                 .ISymbolExtensions2
                 .GetDocumentationParts(
                     symbol,

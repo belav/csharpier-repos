@@ -18,15 +18,13 @@ namespace System.Reflection
                 {
                     _signature = _typeSignature._signature,
                     _offset =
-                        _typeSignature
-                            ._signature
+                        _typeSignature._signature
                             ?.GetTypeParameterOffset(_typeSignature._offset, index) ?? 0,
                 }
             );
 
         internal SignatureCallingConvention GetCallingConventionFromFunctionPointer() =>
-            _typeSignature
-                ._signature
+            _typeSignature._signature
                 ?.GetCallingConventionFromFunctionPointerAtOffset(_typeSignature._offset)
             ?? default;
 
@@ -46,8 +44,7 @@ namespace System.Reflection
 
         private Type[] GetCustomModifiers(bool required) =>
             (_typeSignature._signature != null)
-                ? _typeSignature
-                    ._signature
+                ? _typeSignature._signature
                     .GetCustomModifiersAtOffset(_typeSignature._offset, required)
                 : EmptyTypes;
     }

@@ -128,8 +128,7 @@ namespace System.Security.Cryptography.X509Certificates
                 ArgumentOutOfRangeException.ThrowIfNegative(pathLengthConstraint);
             }
 
-            return X509Pal
-                .Instance
+            return X509Pal.Instance
                 .EncodeX509BasicConstraints2Extension(
                     certificateAuthority,
                     hasPathLengthConstraint,
@@ -140,8 +139,7 @@ namespace System.Security.Cryptography.X509Certificates
         private void DecodeExtension()
         {
             if (Oid!.Value == Oids.BasicConstraints)
-                X509Pal
-                    .Instance
+                X509Pal.Instance
                     .DecodeX509BasicConstraintsExtension(
                         RawData,
                         out _certificateAuthority,
@@ -149,8 +147,7 @@ namespace System.Security.Cryptography.X509Certificates
                         out _pathLenConstraint
                     );
             else
-                X509Pal
-                    .Instance
+                X509Pal.Instance
                     .DecodeX509BasicConstraints2Extension(
                         RawData,
                         out _certificateAuthority,

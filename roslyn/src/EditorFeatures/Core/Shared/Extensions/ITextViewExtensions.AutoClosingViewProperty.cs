@@ -27,8 +27,7 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
             {
                 Contract.ThrowIfTrue(textView.IsClosed);
 
-                var properties = textView
-                    .Properties
+                var properties = textView.Properties
                     .GetOrCreateSingletonProperty(() =>
                         new AutoClosingViewProperty<TProperty, TTextView>(textView)
                     );
@@ -53,8 +52,7 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
             {
                 Contract.ThrowIfTrue(textView.IsClosed);
 
-                var properties = textView
-                    .Properties
+                var properties = textView.Properties
                     .GetOrCreateSingletonProperty(() =>
                         new AutoClosingViewProperty<TProperty, TTextView>(textView)
                     );
@@ -65,8 +63,7 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
             {
                 Contract.ThrowIfTrue(textView.IsClosed);
 
-                var properties = textView
-                    .Properties
+                var properties = textView.Properties
                     .GetOrCreateSingletonProperty(() =>
                         new AutoClosingViewProperty<TProperty, TTextView>(textView)
                     );
@@ -76,8 +73,7 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
             public static void RemoveValue(TTextView textView, object key)
             {
                 if (
-                    textView
-                        .Properties
+                    textView.Properties
                         .TryGetProperty(
                             typeof(AutoClosingViewProperty<TProperty, TTextView>),
                             out AutoClosingViewProperty<TProperty, TTextView> properties
@@ -97,8 +93,7 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
             private void OnTextViewClosed(object? sender, EventArgs e)
             {
                 _textView.Closed -= OnTextViewClosed;
-                _textView
-                    .Properties
+                _textView.Properties
                     .RemoveProperty(typeof(AutoClosingViewProperty<TProperty, TTextView>));
             }
 

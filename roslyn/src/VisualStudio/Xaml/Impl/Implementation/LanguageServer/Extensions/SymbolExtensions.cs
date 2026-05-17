@@ -34,8 +34,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.Implementation.LanguageSe
             }
 
             var codeProject = document.GetCodeProject();
-            var formatter = codeProject
-                .Services
+            var formatter = codeProject.Services
                 .GetService<IDocumentationCommentFormattingService>();
             if (formatter == null)
             {

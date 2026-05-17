@@ -65,8 +65,7 @@ namespace System.Workflow.Activities
         {
             if (string.IsNullOrEmpty(name))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(
                         "name",
                         SR2.GetString(SR2.Error_ArgumentValueNullOrEmptyString)
@@ -166,8 +165,7 @@ namespace System.Workflow.Activities
             }
             if (string.IsNullOrEmpty(contextName))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(
                         "contextToken",
                         SR2.GetString(SR2.Error_ArgumentValueNullOrEmptyString)
@@ -179,8 +177,7 @@ namespace System.Workflow.Activities
 
             if (contextActivity == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR2.GetString(SR2.Error_ContextOwnerActivityMissing)
@@ -217,8 +214,7 @@ namespace System.Workflow.Activities
 
             if (owner == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR2.GetString(SR2.Error_ContextOwnerActivityMissing)
@@ -255,8 +251,7 @@ namespace System.Workflow.Activities
             Activity contextActivity = activity.ContextActivity;
             if (contextActivity == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR2.GetString(SR2.Error_ContextOwnerActivityMissing)
@@ -267,8 +262,7 @@ namespace System.Workflow.Activities
             Activity owner = contextActivity.RootActivity;
             if (owner == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR2.GetString(SR2.Error_ContextOwnerActivityMissing)
@@ -353,8 +347,7 @@ namespace System.Workflow.Activities
             }
             if (string.IsNullOrEmpty(contextName))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(
                         "contextName",
                         SR2.GetString(SR2.Error_ArgumentValueNullOrEmptyString)
@@ -366,8 +359,7 @@ namespace System.Workflow.Activities
 
             if (contextActivity == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR2.GetString(SR2.Error_ContextOwnerActivityMissing)
@@ -404,8 +396,7 @@ namespace System.Workflow.Activities
 
             if (owner == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR2.GetString(SR2.Error_ContextOwnerActivityMissing)
@@ -441,8 +432,7 @@ namespace System.Workflow.Activities
             Activity contextActivity = activity.ContextActivity;
             if (contextActivity == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR2.GetString(SR2.Error_ContextOwnerActivityMissing)
@@ -453,8 +443,7 @@ namespace System.Workflow.Activities
             Activity owner = contextActivity.RootActivity;
             if (owner == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR2.GetString(SR2.Error_ContextOwnerActivityMissing)

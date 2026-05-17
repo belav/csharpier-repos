@@ -38,8 +38,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             //                 ElementType = int
 
             if (
-                Format
-                    .CompilerInternalOptions
+                Format.CompilerInternalOptions
                     .IncludesOption(SymbolDisplayCompilerInternalOptions.ReverseArrayRankSpecifiers)
             )
             {
@@ -91,8 +90,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 case CodeAnalysis.NullableAnnotation.Annotated:
                     if (
-                        Format
-                            .MiscellaneousOptions
+                        Format.MiscellaneousOptions
                             .IncludesOption(
                                 SymbolDisplayMiscellaneousOptions.IncludeNullableReferenceTypeModifier
                             )
@@ -106,14 +104,12 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 case CodeAnalysis.NullableAnnotation.NotAnnotated:
                     if (
-                        Format
-                            .MiscellaneousOptions
+                        Format.MiscellaneousOptions
                             .IncludesOption(
                                 SymbolDisplayMiscellaneousOptions.IncludeNotNullableReferenceTypeModifier
                             )
                         && !type.IsValueType
-                        && (type as Symbols.PublicModel.TypeSymbol)
-                            ?.UnderlyingTypeSymbol
+                        && (type as Symbols.PublicModel.TypeSymbol)?.UnderlyingTypeSymbol
                             .IsTypeParameterDisallowingAnnotationInCSharp8() != true
                     )
                     {
@@ -127,8 +123,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         private void AddArrayRank(IArrayTypeSymbol symbol)
         {
-            bool insertStars = Format
-                .MiscellaneousOptions
+            bool insertStars = Format.MiscellaneousOptions
                 .IncludesOption(
                     SymbolDisplayMiscellaneousOptions.UseAsterisksInMultiDimensionalArrays
                 );
@@ -259,13 +254,11 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             if (
-                Format
-                    .MiscellaneousOptions
+                Format.MiscellaneousOptions
                     .IncludesOption(SymbolDisplayMiscellaneousOptions.UseSpecialTypes)
                 || (
                     symbol.IsNativeIntegerType
-                    && !Format
-                        .CompilerInternalOptions
+                    && !Format.CompilerInternalOptions
                         .IncludesOption(
                             SymbolDisplayCompilerInternalOptions.UseNativeIntegerUnderlyingType
                         )
@@ -280,8 +273,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             if (
-                !Format
-                    .MiscellaneousOptions
+                !Format.MiscellaneousOptions
                     .IncludesOption(SymbolDisplayMiscellaneousOptions.ExpandNullable)
             )
             {
@@ -376,8 +368,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     symbol.ContainingType.Accept(this.NotFirstVisitor);
 
                     if (
-                        Format
-                            .CompilerInternalOptions
+                        Format.CompilerInternalOptions
                             .HasFlag(SymbolDisplayCompilerInternalOptions.UsePlusForNestedTypes)
                     )
                     {
@@ -398,8 +389,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             Debug.Assert(symbol.IsTupleType);
 
             if (
-                Format
-                    .MiscellaneousOptions
+                Format.MiscellaneousOptions
                     .IncludesOption(SymbolDisplayMiscellaneousOptions.ExpandValueTuple)
             )
             {
@@ -470,8 +460,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             symbolName ??= symbol.Name;
 
             if (
-                Format
-                    .MiscellaneousOptions
+                Format.MiscellaneousOptions
                     .IncludesOption(SymbolDisplayMiscellaneousOptions.UseErrorTypeSymbolName)
                 && partKind == SymbolDisplayPartKind.ErrorTypeName
                 && string.IsNullOrEmpty(symbolName)
@@ -486,8 +475,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             if (
-                Format
-                    .CompilerInternalOptions
+                Format.CompilerInternalOptions
                     .IncludesOption(SymbolDisplayCompilerInternalOptions.UseArityForGenericTypes)
             )
             {
@@ -506,8 +494,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
             else if (
                 symbol.Arity > 0
-                && Format
-                    .GenericsOptions
+                && Format.GenericsOptions
                     .IncludesOption(SymbolDisplayGenericsOptions.IncludeTypeParameters)
             )
             {
@@ -543,8 +530,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             // Only the compiler can set the internal option and the compiler doesn't use other implementations of INamedTypeSymbol.
             if (
                 underlyingTypeSymbol?.OriginalDefinition is MissingMetadataTypeSymbol
-                && Format
-                    .CompilerInternalOptions
+                && Format.CompilerInternalOptions
                     .IncludesOption(SymbolDisplayCompilerInternalOptions.FlagMissingMetadataTypes)
             )
             {
@@ -567,8 +553,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 if ((object?)underlyingTypeSymbol != null)
                 {
-                    return underlyingTypeSymbol
-                        .TypeArgumentsWithAnnotationsNoUseSiteDiagnostics
+                    return underlyingTypeSymbol.TypeArgumentsWithAnnotationsNoUseSiteDiagnostics
                         .SelectAsArray(a => a.CustomModifiers);
                 }
             }
@@ -727,8 +712,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             if (
                 symbol.TypeKind == TypeKind.Error
-                && Format
-                    .CompilerInternalOptions
+                && Format.CompilerInternalOptions
                     .IncludesOption(SymbolDisplayCompilerInternalOptions.FlagMissingMetadataTypes)
             )
             {
@@ -971,8 +955,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             if (
                 typeArguments.Length > 0
-                && Format
-                    .GenericsOptions
+                && Format.GenericsOptions
                     .IncludesOption(SymbolDisplayGenericsOptions.IncludeTypeParameters)
             )
             {
@@ -1034,8 +1017,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             if (
                 this.IsFirstSymbolVisited
-                && Format
-                    .GenericsOptions
+                && Format.GenericsOptions
                     .IncludesOption(SymbolDisplayGenericsOptions.IncludeTypeConstraints)
             )
             {
@@ -1068,8 +1050,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 {
                                     case CodeAnalysis.NullableAnnotation.Annotated:
                                         if (
-                                            Format
-                                                .MiscellaneousOptions
+                                            Format.MiscellaneousOptions
                                                 .IncludesOption(
                                                     SymbolDisplayMiscellaneousOptions.IncludeNullableReferenceTypeModifier
                                                 )
@@ -1081,8 +1062,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                                     case CodeAnalysis.NullableAnnotation.NotAnnotated:
                                         if (
-                                            Format
-                                                .MiscellaneousOptions
+                                            Format.MiscellaneousOptions
                                                 .IncludesOption(
                                                     SymbolDisplayMiscellaneousOptions.IncludeNotNullableReferenceTypeModifier
                                                 )

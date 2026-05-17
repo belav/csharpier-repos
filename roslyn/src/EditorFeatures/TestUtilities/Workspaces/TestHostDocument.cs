@@ -257,15 +257,13 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
                 _textView = factory.CreateTextView(this.GetTextBuffer(), roles);
                 if (this.CursorPosition.HasValue)
                 {
-                    _textView
-                        .Caret
+                    _textView.Caret
                         .MoveTo(new SnapshotPoint(_textView.TextSnapshot, CursorPosition.Value));
                 }
                 else if (this.SelectedSpans.IsSingle())
                 {
                     var span = this.SelectedSpans.Single();
-                    _textView
-                        .Selection
+                    _textView.Selection
                         .Select(
                             new SnapshotSpan(
                                 _textView.TextSnapshot,
@@ -306,8 +304,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
             {
                 // Open (or reopen) any files that were closed in this call. We do this for all linked copies at once.
                 foreach (
-                    var linkedId in workspace
-                        .CurrentSolution
+                    var linkedId in workspace.CurrentSolution
                         .GetDocumentIdsWithFilePath(FilePath)
                         .Concat(this.Id)
                 )
@@ -320,11 +317,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
                         if (testDocument.IsSourceGenerated)
                         {
                             var threadingContext = workspace.GetService<IThreadingContext>();
-                            var document = threadingContext
-                                .JoinableTaskFactory
+                            var document = threadingContext.JoinableTaskFactory
                                 .Run(() =>
-                                    workspace
-                                        .CurrentSolution
+                                    workspace.CurrentSolution
                                         .GetSourceGeneratedDocumentAsync(
                                             testDocument.Id,
                                             CancellationToken.None

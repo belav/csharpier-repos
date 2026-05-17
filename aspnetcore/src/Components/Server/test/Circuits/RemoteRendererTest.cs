@@ -251,8 +251,7 @@ public class RemoteRendererTest
             );
 
         // This produces the initial batch (id = 2)
-        await renderer
-            .Dispatcher
+        await renderer.Dispatcher
             .InvokeAsync(() =>
                 renderer.RenderComponentAsync<AutoParameterTestComponent>(
                     ParameterView.FromDictionary(
@@ -336,8 +335,7 @@ public class RemoteRendererTest
             );
 
         // This produces the initial batch (id = 2)
-        await renderer
-            .Dispatcher
+        await renderer.Dispatcher
             .InvokeAsync(() =>
                 renderer.RenderComponentAsync<AutoParameterTestComponent>(
                     ParameterView.FromDictionary(
@@ -421,8 +419,7 @@ public class RemoteRendererTest
         var trigger = new Trigger();
 
         // This produces the initial batch (id = 2)
-        await renderer
-            .Dispatcher
+        await renderer.Dispatcher
             .InvokeAsync(() =>
                 renderer.RenderComponentAsync<AutoParameterTestComponent>(
                     ParameterView.FromDictionary(
@@ -500,8 +497,7 @@ public class RemoteRendererTest
         var trigger = new Trigger();
 
         // This produces the initial batch (id = 2)
-        await renderer
-            .Dispatcher
+        await renderer.Dispatcher
             .InvokeAsync(() =>
                 renderer.RenderComponentAsync<AutoParameterTestComponent>(
                     ParameterView.FromDictionary(
@@ -680,8 +676,7 @@ public class RemoteRendererTest
 
         // Act
         var key = await AddWebRootComponentAsync(renderer, 0, "mykey");
-        await renderer
-            .Dispatcher
+        await renderer.Dispatcher
             .InvokeAsync(() =>
             {
                 var webRootComponentManager = renderer.GetOrCreateWebRootComponentManager();
@@ -707,8 +702,7 @@ public class RemoteRendererTest
 
         // Act
         var key = await AddWebRootComponentAsync(renderer, 0);
-        await renderer
-            .Dispatcher
+        await renderer.Dispatcher
             .InvokeAsync(() =>
             {
                 var webRootComponentManager = renderer.GetOrCreateWebRootComponentManager();
@@ -733,8 +727,7 @@ public class RemoteRendererTest
 
         // Act
         var key = await AddWebRootComponentAsync(renderer, 0);
-        await renderer
-            .Dispatcher
+        await renderer.Dispatcher
             .InvokeAsync(() =>
             {
                 var webRootComponentManager = renderer.GetOrCreateWebRootComponentManager();
@@ -778,8 +771,7 @@ public class RemoteRendererTest
 
         // Act
         var key = await AddWebRootComponentAsync(renderer, 0);
-        await renderer
-            .Dispatcher
+        await renderer.Dispatcher
             .InvokeAsync(() =>
             {
                 var webRootComponentManager = renderer.GetOrCreateWebRootComponentManager();
@@ -830,8 +822,7 @@ public class RemoteRendererTest
         int ssrComponentId,
         string componentKey = null
     ) =>
-        renderer
-            .Dispatcher
+        renderer.Dispatcher
             .InvokeAsync(async () =>
             {
                 var webRootComponentManager = renderer.GetOrCreateWebRootComponentManager();
@@ -954,8 +945,7 @@ public class RemoteRendererTest
 
         public void TriggerRender()
         {
-            var task = _renderHandle
-                .Dispatcher
+            var task = _renderHandle.Dispatcher
                 .InvokeAsync(() => _renderHandle.Render(_renderFragment));
             Assert.True(task.IsCompletedSuccessfully);
         }

@@ -83,8 +83,7 @@ namespace System.Diagnostics
                     true
                 );
 
-                bool succeeded = Interop
-                    .Kernel32
+                bool succeeded = Interop.Kernel32
                     .EnumProcessModulesEx(
                         processHandle,
                         null,
@@ -106,8 +105,7 @@ namespace System.Diagnostics
                 if (!succeeded)
                 {
                     if (
-                        !Interop
-                            .Kernel32
+                        !Interop.Kernel32
                             .IsWow64Process(
                                 Interop.Kernel32.GetCurrentProcess(),
                                 out bool sourceProcessIsWow64
@@ -118,8 +116,7 @@ namespace System.Diagnostics
                     }
 
                     if (
-                        !Interop
-                            .Kernel32
+                        !Interop.Kernel32
                             .IsWow64Process(processHandle, out bool targetProcessIsWow64)
                     )
                     {
@@ -195,8 +192,7 @@ namespace System.Diagnostics
                         IntPtr moduleHandle = moduleHandles[i];
                         Interop.Kernel32.NtModuleInfo ntModuleInfo;
                         if (
-                            !Interop
-                                .Kernel32
+                            !Interop.Kernel32
                                 .GetModuleInformation(processHandle, moduleHandle, out ntModuleInfo)
                         )
                         {
@@ -207,8 +203,7 @@ namespace System.Diagnostics
                         int length = 0;
                         while (
                             (
-                                length = Interop
-                                    .Kernel32
+                                length = Interop.Kernel32
                                     .GetModuleBaseName(
                                         processHandle,
                                         moduleHandle,
@@ -233,8 +228,7 @@ namespace System.Diagnostics
 
                         while (
                             (
-                                length = Interop
-                                    .Kernel32
+                                length = Interop.Kernel32
                                     .GetModuleFileNameEx(
                                         processHandle,
                                         moduleHandle,
@@ -303,8 +297,7 @@ namespace System.Diagnostics
             while (true)
             {
                 if (
-                    Interop
-                        .Kernel32
+                    Interop.Kernel32
                         .EnumProcessModulesEx(processHandle, modules, size, out needed, filterFlag)
                 )
                 {
@@ -367,8 +360,7 @@ namespace System.Diagnostics
                 try
                 {
                     uint actualSize = 0;
-                    uint status = Interop
-                        .NtDll
+                    uint status = Interop.NtDll
                         .NtQuerySystemInformation(
                             Interop.NtDll.SystemProcessInformation,
                             bufferPtr,

@@ -730,8 +730,7 @@ namespace System.Net.Http
                             responseContentTelemetryStarted = true;
                         }
 
-                        await response
-                            .Content
+                        await response.Content
                             .LoadIntoBufferAsync(_maxResponseContentBufferSize, cts.Token)
                             .ConfigureAwait(false);
                     }

@@ -63,8 +63,8 @@ namespace System.ServiceModel.Security
 
         internal abstract class BinaryTokenEntry : TokenEntry
         {
-            internal static readonly XmlDictionaryString ElementName =
-                XD.SecurityJan2004Dictionary.BinarySecurityToken;
+            internal static readonly XmlDictionaryString ElementName = XD.SecurityJan2004Dictionary
+                .BinarySecurityToken;
             internal static readonly XmlDictionaryString EncodingTypeAttribute =
                 XD.SecurityJan2004Dictionary.EncodingType;
             internal const string EncodingTypeAttributeString = SecurityJan2004Strings.EncodingType;
@@ -94,8 +94,7 @@ namespace System.ServiceModel.Security
             )
             {
                 if (valueTypeUris == null)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgumentNull("valueTypeUris");
 
                 this.tokenSerializer = tokenSerializer;
@@ -170,8 +169,7 @@ namespace System.ServiceModel.Security
                         }
                         else
                         {
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
                                     new MessageSecurityException(
                                         SR.GetString(SR.UnknownEncodingInBinarySecurityToken)
@@ -181,8 +179,7 @@ namespace System.ServiceModel.Security
 
                         return CreateKeyIdentifierClauseFromBinaryCore(binaryData);
                     default:
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new ArgumentOutOfRangeException("tokenReferenceStyle")
                             );
@@ -218,8 +215,7 @@ namespace System.ServiceModel.Security
                 }
                 else
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new MessageSecurityException(
                                 SR.GetString(SR.UnknownEncodingInBinarySecurityToken)
@@ -321,8 +317,7 @@ namespace System.ServiceModel.Security
                 SecurityTokenReferenceStyle tokenReferenceStyle
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new NotSupportedException());
             }
 
@@ -331,8 +326,7 @@ namespace System.ServiceModel.Security
                 SecurityTokenResolver tokenResolver
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new NotSupportedException());
             }
 
@@ -472,8 +466,7 @@ namespace System.ServiceModel.Security
                         string assertionId = issuedTokenXml.GetAttribute(samlAssertionId);
                         return new SamlAssertionKeyIdentifierClause(assertionId);
                     default:
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new ArgumentOutOfRangeException("tokenReferenceStyle")
                             );
@@ -485,11 +478,8 @@ namespace System.ServiceModel.Security
                 SecurityTokenResolver tokenResolver
             )
             {
-                SamlSecurityToken samlToken = this.samlSerializer.ReadToken(
-                    reader,
-                    this.tokenSerializer,
-                    tokenResolver
-                );
+                SamlSecurityToken samlToken = this.samlSerializer
+                    .ReadToken(reader, this.tokenSerializer, tokenResolver);
                 return samlToken;
             }
 
@@ -569,8 +559,7 @@ namespace System.ServiceModel.Security
                         // UP tokens aren't referred to externally
                         return null;
                     default:
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new ArgumentOutOfRangeException("tokenReferenceStyle")
                             );
@@ -659,8 +648,7 @@ namespace System.ServiceModel.Security
                     && type != SecurityJan2004Strings.UPTokenPasswordTextValue
                 )
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new NotSupportedException(
                                 SR.GetString(SR.UnsupportedPasswordType, type)
@@ -799,8 +787,7 @@ namespace System.ServiceModel.Security
                             null
                         );
                     case SecurityTokenReferenceStyle.External:
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new XmlException(
                                     SR.GetString(
@@ -810,8 +797,7 @@ namespace System.ServiceModel.Security
                                 )
                             );
                     default:
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new ArgumentOutOfRangeException("tokenReferenceStyle")
                             );
@@ -857,8 +843,7 @@ namespace System.ServiceModel.Security
                     // ensure that the encryption algorithm is compatible
                     if (encryptionMethod != unwrappingSspiContext.KeyEncryptionAlgorithm)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new MessageSecurityException(
                                     SR.GetString(SR.BadKeyEncryptionAlgorithm, encryptionMethod)
@@ -878,14 +863,12 @@ namespace System.ServiceModel.Security
                 {
                     if (tokenResolver == null)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(new ArgumentNullException("tokenResolver"));
                     }
                     if (unwrappingTokenIdentifier == null || unwrappingTokenIdentifier.Count == 0)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new MessageSecurityException(
                                     SR.GetString(SR.MissingKeyInfoInEncryptedKey)
@@ -903,8 +886,7 @@ namespace System.ServiceModel.Security
                         {
                             if (!resolver.CheckExternalWrapperMatch(unwrappingTokenIdentifier))
                             {
-                                throw DiagnosticUtility
-                                    .ExceptionUtility
+                                throw DiagnosticUtility.ExceptionUtility
                                     .ThrowHelperError(
                                         new MessageSecurityException(
                                             SR.GetString(
@@ -917,8 +899,7 @@ namespace System.ServiceModel.Security
                         }
                         else
                         {
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
                                     new MessageSecurityException(
                                         SR.GetString(
@@ -941,8 +922,7 @@ namespace System.ServiceModel.Security
                             if (exception is MessageSecurityException)
                                 throw;
 
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
                                     new MessageSecurityException(
                                         SR.GetString(
@@ -979,8 +959,7 @@ namespace System.ServiceModel.Security
                 WrappedKeySecurityToken wrappedKeyToken = token as WrappedKeySecurityToken;
                 wrappedKeyToken.EnsureEncryptedKeySetUp();
                 wrappedKeyToken.EncryptedKey.SecurityTokenSerializer = this.tokenSerializer;
-                wrappedKeyToken
-                    .EncryptedKey
+                wrappedKeyToken.EncryptedKey
                     .WriteTo(writer, ServiceModelDictionaryManager.Instance);
             }
         }
@@ -1001,8 +980,7 @@ namespace System.ServiceModel.Security
                 byte[] rawData
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new XmlException(
                             SR.GetString(SR.CantInferReferenceForToken, ValueTypeAbsoluteUri)
@@ -1019,8 +997,7 @@ namespace System.ServiceModel.Security
                 X509Certificate2 certificate;
                 if (!SecurityUtils.TryCreateX509CertificateFromRawData(rawData, out certificate))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new MessageSecurityException(SR.GetString(SR.InvalidX509RawData))
                         );

@@ -60,8 +60,7 @@ namespace System.ServiceModel.Security.Tokens
             SecurityTokenRequirement requirement
         )
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(new NotImplementedException());
         }
     }

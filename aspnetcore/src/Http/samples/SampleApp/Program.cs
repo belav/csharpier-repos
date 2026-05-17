@@ -40,8 +40,7 @@ public class Program
 
         var response = context.Response;
         response.ContentType = "application/json";
-        response
-            .Cookies
+        response.Cookies
             .Append(
                 "Cookie1",
                 "value1",

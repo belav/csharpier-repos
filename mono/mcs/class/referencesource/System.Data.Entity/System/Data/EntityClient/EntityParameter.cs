@@ -210,8 +210,7 @@ namespace System.Data.EntityClient
                 if (value != null && !Helper.IsScalarType(value))
                 {
                     throw EntityUtil.InvalidOperation(
-                        System
-                            .Data
+                        System.Data
                             .Entity
                             .Strings
                             .EntityClient_EntityParameterEdmTypeNotScalar(value.FullName)
@@ -417,8 +416,7 @@ namespace System.Data.EntityClient
             if (!this.IsTypeConsistent)
             {
                 throw EntityUtil.InvalidOperation(
-                    System
-                        .Data
+                    System.Data
                         .Entity
                         .Strings
                         .EntityClient_EntityParameterInconsistentEdmType(
@@ -439,21 +437,18 @@ namespace System.Data.EntityClient
                 if (
                     this.DbType == DbType.Object
                     && this.Value != null
-                    && ClrProviderManifest
-                        .Instance
+                    && ClrProviderManifest.Instance
                         .TryGetPrimitiveType(this.Value.GetType(), out primitiveParameterType)
                     && Helper.IsSpatialType(primitiveParameterType)
                 )
                 {
-                    typeUsage = EdmProviderManifest
-                        .Instance
+                    typeUsage = EdmProviderManifest.Instance
                         .GetCanonicalModelTypeUsage(primitiveParameterType.PrimitiveTypeKind);
                 }
                 else
                 {
                     throw EntityUtil.InvalidOperation(
-                        System
-                            .Data
+                        System.Data
                             .Entity
                             .Strings
                             .EntityClient_UnsupportedDbType(this.DbType.ToString(), ParameterName)

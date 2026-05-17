@@ -58,14 +58,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options.Style
                     NotificationPreferences = new List<NotificationOptionViewModel>(_notifications),
                 };
 
-                viewModel.SelectedSpecification = viewModel
-                    .Specifications
+                viewModel.SelectedSpecification = viewModel.Specifications
                     .Single(s => s.ID == namingRule.SymbolSpecificationID);
-                viewModel.SelectedStyle = viewModel
-                    .NamingStyles
+                viewModel.SelectedStyle = viewModel.NamingStyles
                     .Single(s => s.ID == namingRule.NamingStyleID);
-                viewModel.SelectedNotificationPreference = viewModel
-                    .NotificationPreferences
+                viewModel.SelectedNotificationPreference = viewModel.NotificationPreferences
                     .Single(n => n.Notification.Severity == namingRule.EnforcementLevel);
 
                 viewModels.Add(viewModel);
@@ -111,8 +108,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options.Style
 
         internal void UpdateSpecificationList(ManageSymbolSpecificationsDialogViewModel viewModel)
         {
-            var symbolSpecifications = viewModel
-                .Items
+            var symbolSpecifications = viewModel.Items
                 .Cast<SymbolSpecificationViewModel>()
                 .Select(n => new SymbolSpecification(
                     n.ID,
@@ -157,9 +153,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options.Style
 
                 if (selectedSpecification != null)
                 {
-                    rule.SelectedSpecification = rule.Specifications.Single(s =>
-                        s.ID == selectedSpecification.ID
-                    );
+                    rule.SelectedSpecification = rule.Specifications
+                        .Single(s => s.ID == selectedSpecification.ID);
                 }
             }
         }
@@ -191,8 +186,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options.Style
 
         internal void UpdateStyleList(ManageNamingStylesDialogViewModel viewModel)
         {
-            var namingStyles = viewModel
-                .Items
+            var namingStyles = viewModel.Items
                 .Cast<NamingStyleViewModel>()
                 .Select(n => new MutableNamingStyle(
                     new NamingStyle(
@@ -201,9 +195,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options.Style
                         prefix: n.RequiredPrefix,
                         suffix: n.RequiredSuffix,
                         wordSeparator: n.WordSeparator,
-                        capitalizationScheme: n.CapitalizationSchemes[
-                            n.CapitalizationSchemeIndex
-                        ].Capitalization
+                        capitalizationScheme: n.CapitalizationSchemes[n.CapitalizationSchemeIndex]
+                            .Capitalization
                     )
                 ));
 

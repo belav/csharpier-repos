@@ -26,15 +26,13 @@ namespace System.Reflection.Tests
                 SampleCustomAttribute attr = nt.GetCustomAttribute<SampleCustomAttribute>(
                     inherit: false
                 );
-                CustomAttributeData cad = nt.CustomAttributes.Single(c =>
-                    c.AttributeType == typeof(SampleCustomAttribute)
-                );
+                CustomAttributeData cad = nt.CustomAttributes
+                    .Single(c => c.AttributeType == typeof(SampleCustomAttribute));
                 object value = attr.Argument; // Capture the actual value passed to the SampleCustomAttribute constructor.
                 Type parameterType = cad.Constructor.GetParameters()[0].ParameterType; // Capture the formal parameter type of the constructor.
 
                 Type ntProjected = nt.Project();
-                CustomAttributeData cadProjected = ntProjected
-                    .CustomAttributes
+                CustomAttributeData cadProjected = ntProjected.CustomAttributes
                     .Single(c => c.AttributeType == typeof(SampleCustomAttribute).Project());
                 Assert.Equal(typeof(SampleCustomAttribute).Project(), cadProjected.AttributeType);
                 Assert.Equal(1, cadProjected.ConstructorArguments.Count);

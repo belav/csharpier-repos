@@ -72,9 +72,8 @@ namespace MonoTests.System.ServiceModel.Description
             ContractDescription cd = ContractDescription.GetContract(typeof(IFoo2));
             OperationDescription od = cd.Operations[0];
             Assert.IsNull(od.Messages.Find("Echo"), "#1");
-            MessageDescription md = od.Messages.Find(
-                "http://MonoTests.System.ServiceModel.Description/IFoo2/Echo"
-            );
+            MessageDescription md = od.Messages
+                .Find("http://MonoTests.System.ServiceModel.Description/IFoo2/Echo");
             Assert.IsNotNull(md, "#2");
 
             Assert.AreEqual(

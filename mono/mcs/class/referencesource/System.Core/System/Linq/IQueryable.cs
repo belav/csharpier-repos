@@ -132,8 +132,7 @@ namespace System.Linq
                 throw Error.ArgumentNull("source");
             if (predicate == null)
                 throw Error.ArgumentNull("predicate");
-            return source
-                .Provider
+            return source.Provider
                 .CreateQuery<TSource>(
                     Expression.Call(
                         null,
@@ -152,8 +151,7 @@ namespace System.Linq
                 throw Error.ArgumentNull("source");
             if (predicate == null)
                 throw Error.ArgumentNull("predicate");
-            return source
-                .Provider
+            return source.Provider
                 .CreateQuery<TSource>(
                     Expression.Call(
                         null,
@@ -167,8 +165,7 @@ namespace System.Linq
         {
             if (source == null)
                 throw Error.ArgumentNull("source");
-            return source
-                .Provider
+            return source.Provider
                 .CreateQuery<TResult>(
                     Expression.Call(
                         null,
@@ -182,8 +179,7 @@ namespace System.Linq
         {
             if (source == null)
                 throw Error.ArgumentNull("source");
-            return source
-                .Provider
+            return source.Provider
                 .CreateQuery<TResult>(
                     Expression.Call(
                         null,
@@ -202,8 +198,7 @@ namespace System.Linq
                 throw Error.ArgumentNull("source");
             if (selector == null)
                 throw Error.ArgumentNull("selector");
-            return source
-                .Provider
+            return source.Provider
                 .CreateQuery<TResult>(
                     Expression.Call(
                         null,
@@ -222,8 +217,7 @@ namespace System.Linq
                 throw Error.ArgumentNull("source");
             if (selector == null)
                 throw Error.ArgumentNull("selector");
-            return source
-                .Provider
+            return source.Provider
                 .CreateQuery<TResult>(
                     Expression.Call(
                         null,
@@ -242,8 +236,7 @@ namespace System.Linq
                 throw Error.ArgumentNull("source");
             if (selector == null)
                 throw Error.ArgumentNull("selector");
-            return source
-                .Provider
+            return source.Provider
                 .CreateQuery<TResult>(
                     Expression.Call(
                         null,
@@ -262,8 +255,7 @@ namespace System.Linq
                 throw Error.ArgumentNull("source");
             if (selector == null)
                 throw Error.ArgumentNull("selector");
-            return source
-                .Provider
+            return source.Provider
                 .CreateQuery<TResult>(
                     Expression.Call(
                         null,
@@ -285,8 +277,7 @@ namespace System.Linq
                 throw Error.ArgumentNull("collectionSelector");
             if (resultSelector == null)
                 throw Error.ArgumentNull("resultSelector");
-            return source
-                .Provider
+            return source.Provider
                 .CreateQuery<TResult>(
                     Expression.Call(
                         null,
@@ -318,8 +309,7 @@ namespace System.Linq
                 throw Error.ArgumentNull("collectionSelector");
             if (resultSelector == null)
                 throw Error.ArgumentNull("resultSelector");
-            return source
-                .Provider
+            return source.Provider
                 .CreateQuery<TResult>(
                     Expression.Call(
                         null,
@@ -365,8 +355,7 @@ namespace System.Linq
                 throw Error.ArgumentNull("innerKeySelector");
             if (resultSelector == null)
                 throw Error.ArgumentNull("resultSelector");
-            return outer
-                .Provider
+            return outer.Provider
                 .CreateQuery<TResult>(
                     Expression.Call(
                         null,
@@ -409,8 +398,7 @@ namespace System.Linq
                 throw Error.ArgumentNull("innerKeySelector");
             if (resultSelector == null)
                 throw Error.ArgumentNull("resultSelector");
-            return outer
-                .Provider
+            return outer.Provider
                 .CreateQuery<TResult>(
                     Expression.Call(
                         null,
@@ -454,8 +442,7 @@ namespace System.Linq
                 throw Error.ArgumentNull("innerKeySelector");
             if (resultSelector == null)
                 throw Error.ArgumentNull("resultSelector");
-            return outer
-                .Provider
+            return outer.Provider
                 .CreateQuery<TResult>(
                     Expression.Call(
                         null,
@@ -498,8 +485,7 @@ namespace System.Linq
                 throw Error.ArgumentNull("innerKeySelector");
             if (resultSelector == null)
                 throw Error.ArgumentNull("resultSelector");
-            return outer
-                .Provider
+            return outer.Provider
                 .CreateQuery<TResult>(
                     Expression.Call(
                         null,
@@ -535,8 +521,7 @@ namespace System.Linq
             if (keySelector == null)
                 throw Error.ArgumentNull("keySelector");
             return (IOrderedQueryable<TSource>)
-                source
-                    .Provider
+                source.Provider
                     .CreateQuery<TSource>(
                         Expression.Call(
                             null,
@@ -557,8 +542,7 @@ namespace System.Linq
             if (keySelector == null)
                 throw Error.ArgumentNull("keySelector");
             return (IOrderedQueryable<TSource>)
-                source
-                    .Provider
+                source.Provider
                     .CreateQuery<TSource>(
                         Expression.Call(
                             null,
@@ -583,8 +567,7 @@ namespace System.Linq
             if (keySelector == null)
                 throw Error.ArgumentNull("keySelector");
             return (IOrderedQueryable<TSource>)
-                source
-                    .Provider
+                source.Provider
                     .CreateQuery<TSource>(
                         Expression.Call(
                             null,
@@ -605,8 +588,7 @@ namespace System.Linq
             if (keySelector == null)
                 throw Error.ArgumentNull("keySelector");
             return (IOrderedQueryable<TSource>)
-                source
-                    .Provider
+                source.Provider
                     .CreateQuery<TSource>(
                         Expression.Call(
                             null,
@@ -636,8 +618,7 @@ namespace System.Linq
             if (keySelector == null)
                 throw Error.ArgumentNull("keySelector");
             return (IOrderedQueryable<TSource>)
-                source
-                    .Provider
+                source.Provider
                     .CreateQuery<TSource>(
                         Expression.Call(
                             null,
@@ -658,8 +639,7 @@ namespace System.Linq
             if (keySelector == null)
                 throw Error.ArgumentNull("keySelector");
             return (IOrderedQueryable<TSource>)
-                source
-                    .Provider
+                source.Provider
                     .CreateQuery<TSource>(
                         Expression.Call(
                             null,
@@ -684,8 +664,7 @@ namespace System.Linq
             if (keySelector == null)
                 throw Error.ArgumentNull("keySelector");
             return (IOrderedQueryable<TSource>)
-                source
-                    .Provider
+                source.Provider
                     .CreateQuery<TSource>(
                         Expression.Call(
                             null,
@@ -706,8 +685,7 @@ namespace System.Linq
             if (keySelector == null)
                 throw Error.ArgumentNull("keySelector");
             return (IOrderedQueryable<TSource>)
-                source
-                    .Provider
+                source.Provider
                     .CreateQuery<TSource>(
                         Expression.Call(
                             null,
@@ -731,8 +709,7 @@ namespace System.Linq
         {
             if (source == null)
                 throw Error.ArgumentNull("source");
-            return source
-                .Provider
+            return source.Provider
                 .CreateQuery<TSource>(
                     Expression.Call(
                         null,
@@ -751,8 +728,7 @@ namespace System.Linq
                 throw Error.ArgumentNull("source");
             if (predicate == null)
                 throw Error.ArgumentNull("predicate");
-            return source
-                .Provider
+            return source.Provider
                 .CreateQuery<TSource>(
                     Expression.Call(
                         null,
@@ -771,8 +747,7 @@ namespace System.Linq
                 throw Error.ArgumentNull("source");
             if (predicate == null)
                 throw Error.ArgumentNull("predicate");
-            return source
-                .Provider
+            return source.Provider
                 .CreateQuery<TSource>(
                     Expression.Call(
                         null,
@@ -786,8 +761,7 @@ namespace System.Linq
         {
             if (source == null)
                 throw Error.ArgumentNull("source");
-            return source
-                .Provider
+            return source.Provider
                 .CreateQuery<TSource>(
                     Expression.Call(
                         null,
@@ -806,8 +780,7 @@ namespace System.Linq
                 throw Error.ArgumentNull("source");
             if (predicate == null)
                 throw Error.ArgumentNull("predicate");
-            return source
-                .Provider
+            return source.Provider
                 .CreateQuery<TSource>(
                     Expression.Call(
                         null,
@@ -826,8 +799,7 @@ namespace System.Linq
                 throw Error.ArgumentNull("source");
             if (predicate == null)
                 throw Error.ArgumentNull("predicate");
-            return source
-                .Provider
+            return source.Provider
                 .CreateQuery<TSource>(
                     Expression.Call(
                         null,
@@ -846,8 +818,7 @@ namespace System.Linq
                 throw Error.ArgumentNull("source");
             if (keySelector == null)
                 throw Error.ArgumentNull("keySelector");
-            return source
-                .Provider
+            return source.Provider
                 .CreateQuery<IGrouping<TKey, TSource>>(
                     Expression.Call(
                         null,
@@ -869,8 +840,7 @@ namespace System.Linq
                 throw Error.ArgumentNull("keySelector");
             if (elementSelector == null)
                 throw Error.ArgumentNull("elementSelector");
-            return source
-                .Provider
+            return source.Provider
                 .CreateQuery<IGrouping<TKey, TElement>>(
                     Expression.Call(
                         null,
@@ -895,8 +865,7 @@ namespace System.Linq
                 throw Error.ArgumentNull("source");
             if (keySelector == null)
                 throw Error.ArgumentNull("keySelector");
-            return source
-                .Provider
+            return source.Provider
                 .CreateQuery<IGrouping<TKey, TSource>>(
                     Expression.Call(
                         null,
@@ -924,8 +893,7 @@ namespace System.Linq
                 throw Error.ArgumentNull("keySelector");
             if (elementSelector == null)
                 throw Error.ArgumentNull("elementSelector");
-            return source
-                .Provider
+            return source.Provider
                 .CreateQuery<IGrouping<TKey, TElement>>(
                     Expression.Call(
                         null,
@@ -962,8 +930,7 @@ namespace System.Linq
                 throw Error.ArgumentNull("elementSelector");
             if (resultSelector == null)
                 throw Error.ArgumentNull("resultSelector");
-            return source
-                .Provider
+            return source.Provider
                 .CreateQuery<TResult>(
                     Expression.Call(
                         null,
@@ -997,8 +964,7 @@ namespace System.Linq
                 throw Error.ArgumentNull("keySelector");
             if (resultSelector == null)
                 throw Error.ArgumentNull("resultSelector");
-            return source
-                .Provider
+            return source.Provider
                 .CreateQuery<TResult>(
                     Expression.Call(
                         null,
@@ -1026,8 +992,7 @@ namespace System.Linq
                 throw Error.ArgumentNull("keySelector");
             if (resultSelector == null)
                 throw Error.ArgumentNull("resultSelector");
-            return source
-                .Provider
+            return source.Provider
                 .CreateQuery<TResult>(
                     Expression.Call(
                         null,
@@ -1065,8 +1030,7 @@ namespace System.Linq
                 throw Error.ArgumentNull("elementSelector");
             if (resultSelector == null)
                 throw Error.ArgumentNull("resultSelector");
-            return source
-                .Provider
+            return source.Provider
                 .CreateQuery<TResult>(
                     Expression.Call(
                         null,
@@ -1094,8 +1058,7 @@ namespace System.Linq
         {
             if (source == null)
                 throw Error.ArgumentNull("source");
-            return source
-                .Provider
+            return source.Provider
                 .CreateQuery<TSource>(
                     Expression.Call(
                         null,
@@ -1112,8 +1075,7 @@ namespace System.Linq
         {
             if (source == null)
                 throw Error.ArgumentNull("source");
-            return source
-                .Provider
+            return source.Provider
                 .CreateQuery<TSource>(
                     Expression.Call(
                         null,
@@ -1136,8 +1098,7 @@ namespace System.Linq
                 throw Error.ArgumentNull("source1");
             if (source2 == null)
                 throw Error.ArgumentNull("source2");
-            return source1
-                .Provider
+            return source1.Provider
                 .CreateQuery<TSource>(
                     Expression.Call(
                         null,
@@ -1159,8 +1120,7 @@ namespace System.Linq
                 throw Error.ArgumentNull("source2");
             if (resultSelector == null)
                 throw Error.ArgumentNull("resultSelector");
-            return source1
-                .Provider
+            return source1.Provider
                 .CreateQuery<TResult>(
                     Expression.Call(
                         null,
@@ -1184,8 +1144,7 @@ namespace System.Linq
                 throw Error.ArgumentNull("source1");
             if (source2 == null)
                 throw Error.ArgumentNull("source2");
-            return source1
-                .Provider
+            return source1.Provider
                 .CreateQuery<TSource>(
                     Expression.Call(
                         null,
@@ -1205,8 +1164,7 @@ namespace System.Linq
                 throw Error.ArgumentNull("source1");
             if (source2 == null)
                 throw Error.ArgumentNull("source2");
-            return source1
-                .Provider
+            return source1.Provider
                 .CreateQuery<TSource>(
                     Expression.Call(
                         null,
@@ -1230,8 +1188,7 @@ namespace System.Linq
                 throw Error.ArgumentNull("source1");
             if (source2 == null)
                 throw Error.ArgumentNull("source2");
-            return source1
-                .Provider
+            return source1.Provider
                 .CreateQuery<TSource>(
                     Expression.Call(
                         null,
@@ -1251,8 +1208,7 @@ namespace System.Linq
                 throw Error.ArgumentNull("source1");
             if (source2 == null)
                 throw Error.ArgumentNull("source2");
-            return source1
-                .Provider
+            return source1.Provider
                 .CreateQuery<TSource>(
                     Expression.Call(
                         null,
@@ -1276,8 +1232,7 @@ namespace System.Linq
                 throw Error.ArgumentNull("source1");
             if (source2 == null)
                 throw Error.ArgumentNull("source2");
-            return source1
-                .Provider
+            return source1.Provider
                 .CreateQuery<TSource>(
                     Expression.Call(
                         null,
@@ -1297,8 +1252,7 @@ namespace System.Linq
                 throw Error.ArgumentNull("source1");
             if (source2 == null)
                 throw Error.ArgumentNull("source2");
-            return source1
-                .Provider
+            return source1.Provider
                 .CreateQuery<TSource>(
                     Expression.Call(
                         null,
@@ -1317,8 +1271,7 @@ namespace System.Linq
         {
             if (source == null)
                 throw Error.ArgumentNull("source");
-            return source
-                .Provider
+            return source.Provider
                 .Execute<TSource>(
                     Expression.Call(
                         null,
@@ -1337,8 +1290,7 @@ namespace System.Linq
                 throw Error.ArgumentNull("source");
             if (predicate == null)
                 throw Error.ArgumentNull("predicate");
-            return source
-                .Provider
+            return source.Provider
                 .Execute<TSource>(
                     Expression.Call(
                         null,
@@ -1352,8 +1304,7 @@ namespace System.Linq
         {
             if (source == null)
                 throw Error.ArgumentNull("source");
-            return source
-                .Provider
+            return source.Provider
                 .Execute<TSource>(
                     Expression.Call(
                         null,
@@ -1372,8 +1323,7 @@ namespace System.Linq
                 throw Error.ArgumentNull("source");
             if (predicate == null)
                 throw Error.ArgumentNull("predicate");
-            return source
-                .Provider
+            return source.Provider
                 .Execute<TSource>(
                     Expression.Call(
                         null,
@@ -1387,8 +1337,7 @@ namespace System.Linq
         {
             if (source == null)
                 throw Error.ArgumentNull("source");
-            return source
-                .Provider
+            return source.Provider
                 .Execute<TSource>(
                     Expression.Call(
                         null,
@@ -1407,8 +1356,7 @@ namespace System.Linq
                 throw Error.ArgumentNull("source");
             if (predicate == null)
                 throw Error.ArgumentNull("predicate");
-            return source
-                .Provider
+            return source.Provider
                 .Execute<TSource>(
                     Expression.Call(
                         null,
@@ -1422,8 +1370,7 @@ namespace System.Linq
         {
             if (source == null)
                 throw Error.ArgumentNull("source");
-            return source
-                .Provider
+            return source.Provider
                 .Execute<TSource>(
                     Expression.Call(
                         null,
@@ -1442,8 +1389,7 @@ namespace System.Linq
                 throw Error.ArgumentNull("source");
             if (predicate == null)
                 throw Error.ArgumentNull("predicate");
-            return source
-                .Provider
+            return source.Provider
                 .Execute<TSource>(
                     Expression.Call(
                         null,
@@ -1457,8 +1403,7 @@ namespace System.Linq
         {
             if (source == null)
                 throw Error.ArgumentNull("source");
-            return source
-                .Provider
+            return source.Provider
                 .Execute<TSource>(
                     Expression.Call(
                         null,
@@ -1477,8 +1422,7 @@ namespace System.Linq
                 throw Error.ArgumentNull("source");
             if (predicate == null)
                 throw Error.ArgumentNull("predicate");
-            return source
-                .Provider
+            return source.Provider
                 .Execute<TSource>(
                     Expression.Call(
                         null,
@@ -1492,8 +1436,7 @@ namespace System.Linq
         {
             if (source == null)
                 throw Error.ArgumentNull("source");
-            return source
-                .Provider
+            return source.Provider
                 .Execute<TSource>(
                     Expression.Call(
                         null,
@@ -1512,8 +1455,7 @@ namespace System.Linq
                 throw Error.ArgumentNull("source");
             if (predicate == null)
                 throw Error.ArgumentNull("predicate");
-            return source
-                .Provider
+            return source.Provider
                 .Execute<TSource>(
                     Expression.Call(
                         null,
@@ -1529,8 +1471,7 @@ namespace System.Linq
                 throw Error.ArgumentNull("source");
             if (index < 0)
                 throw Error.ArgumentOutOfRange("index");
-            return source
-                .Provider
+            return source.Provider
                 .Execute<TSource>(
                     Expression.Call(
                         null,
@@ -1547,8 +1488,7 @@ namespace System.Linq
         {
             if (source == null)
                 throw Error.ArgumentNull("source");
-            return source
-                .Provider
+            return source.Provider
                 .Execute<TSource>(
                     Expression.Call(
                         null,
@@ -1562,8 +1502,7 @@ namespace System.Linq
         {
             if (source == null)
                 throw Error.ArgumentNull("source");
-            return source
-                .Provider
+            return source.Provider
                 .CreateQuery<TSource>(
                     Expression.Call(
                         null,
@@ -1580,8 +1519,7 @@ namespace System.Linq
         {
             if (source == null)
                 throw Error.ArgumentNull("source");
-            return source
-                .Provider
+            return source.Provider
                 .CreateQuery<TSource>(
                     Expression.Call(
                         null,
@@ -1599,8 +1537,7 @@ namespace System.Linq
         {
             if (source == null)
                 throw Error.ArgumentNull("source");
-            return source
-                .Provider
+            return source.Provider
                 .Execute<bool>(
                     Expression.Call(
                         null,
@@ -1622,8 +1559,7 @@ namespace System.Linq
         {
             if (source == null)
                 throw Error.ArgumentNull("source");
-            return source
-                .Provider
+            return source.Provider
                 .Execute<bool>(
                     Expression.Call(
                         null,
@@ -1642,8 +1578,7 @@ namespace System.Linq
         {
             if (source == null)
                 throw Error.ArgumentNull("source");
-            return source
-                .Provider
+            return source.Provider
                 .CreateQuery<TSource>(
                     Expression.Call(
                         null,
@@ -1662,8 +1597,7 @@ namespace System.Linq
                 throw Error.ArgumentNull("source1");
             if (source2 == null)
                 throw Error.ArgumentNull("source2");
-            return source1
-                .Provider
+            return source1.Provider
                 .Execute<bool>(
                     Expression.Call(
                         null,
@@ -1683,8 +1617,7 @@ namespace System.Linq
                 throw Error.ArgumentNull("source1");
             if (source2 == null)
                 throw Error.ArgumentNull("source2");
-            return source1
-                .Provider
+            return source1.Provider
                 .Execute<bool>(
                     Expression.Call(
                         null,
@@ -1703,8 +1636,7 @@ namespace System.Linq
         {
             if (source == null)
                 throw Error.ArgumentNull("source");
-            return source
-                .Provider
+            return source.Provider
                 .Execute<bool>(
                     Expression.Call(
                         null,
@@ -1723,8 +1655,7 @@ namespace System.Linq
                 throw Error.ArgumentNull("source");
             if (predicate == null)
                 throw Error.ArgumentNull("predicate");
-            return source
-                .Provider
+            return source.Provider
                 .Execute<bool>(
                     Expression.Call(
                         null,
@@ -1743,8 +1674,7 @@ namespace System.Linq
                 throw Error.ArgumentNull("source");
             if (predicate == null)
                 throw Error.ArgumentNull("predicate");
-            return source
-                .Provider
+            return source.Provider
                 .Execute<bool>(
                     Expression.Call(
                         null,
@@ -1758,8 +1688,7 @@ namespace System.Linq
         {
             if (source == null)
                 throw Error.ArgumentNull("source");
-            return source
-                .Provider
+            return source.Provider
                 .Execute<int>(
                     Expression.Call(
                         null,
@@ -1778,8 +1707,7 @@ namespace System.Linq
                 throw Error.ArgumentNull("source");
             if (predicate == null)
                 throw Error.ArgumentNull("predicate");
-            return source
-                .Provider
+            return source.Provider
                 .Execute<int>(
                     Expression.Call(
                         null,
@@ -1793,8 +1721,7 @@ namespace System.Linq
         {
             if (source == null)
                 throw Error.ArgumentNull("source");
-            return source
-                .Provider
+            return source.Provider
                 .Execute<long>(
                     Expression.Call(
                         null,
@@ -1813,8 +1740,7 @@ namespace System.Linq
                 throw Error.ArgumentNull("source");
             if (predicate == null)
                 throw Error.ArgumentNull("predicate");
-            return source
-                .Provider
+            return source.Provider
                 .Execute<long>(
                     Expression.Call(
                         null,
@@ -1828,8 +1754,7 @@ namespace System.Linq
         {
             if (source == null)
                 throw Error.ArgumentNull("source");
-            return source
-                .Provider
+            return source.Provider
                 .Execute<TSource>(
                     Expression.Call(
                         null,
@@ -1848,8 +1773,7 @@ namespace System.Linq
                 throw Error.ArgumentNull("source");
             if (selector == null)
                 throw Error.ArgumentNull("selector");
-            return source
-                .Provider
+            return source.Provider
                 .Execute<TResult>(
                     Expression.Call(
                         null,
@@ -1863,8 +1787,7 @@ namespace System.Linq
         {
             if (source == null)
                 throw Error.ArgumentNull("source");
-            return source
-                .Provider
+            return source.Provider
                 .Execute<TSource>(
                     Expression.Call(
                         null,
@@ -1883,8 +1806,7 @@ namespace System.Linq
                 throw Error.ArgumentNull("source");
             if (selector == null)
                 throw Error.ArgumentNull("selector");
-            return source
-                .Provider
+            return source.Provider
                 .Execute<TResult>(
                     Expression.Call(
                         null,
@@ -1898,8 +1820,7 @@ namespace System.Linq
         {
             if (source == null)
                 throw Error.ArgumentNull("source");
-            return source
-                .Provider
+            return source.Provider
                 .Execute<int>(
                     Expression.Call(
                         null,
@@ -1913,8 +1834,7 @@ namespace System.Linq
         {
             if (source == null)
                 throw Error.ArgumentNull("source");
-            return source
-                .Provider
+            return source.Provider
                 .Execute<int?>(
                     Expression.Call(
                         null,
@@ -1928,8 +1848,7 @@ namespace System.Linq
         {
             if (source == null)
                 throw Error.ArgumentNull("source");
-            return source
-                .Provider
+            return source.Provider
                 .Execute<long>(
                     Expression.Call(
                         null,
@@ -1943,8 +1862,7 @@ namespace System.Linq
         {
             if (source == null)
                 throw Error.ArgumentNull("source");
-            return source
-                .Provider
+            return source.Provider
                 .Execute<long?>(
                     Expression.Call(
                         null,
@@ -1958,8 +1876,7 @@ namespace System.Linq
         {
             if (source == null)
                 throw Error.ArgumentNull("source");
-            return source
-                .Provider
+            return source.Provider
                 .Execute<float>(
                     Expression.Call(
                         null,
@@ -1973,8 +1890,7 @@ namespace System.Linq
         {
             if (source == null)
                 throw Error.ArgumentNull("source");
-            return source
-                .Provider
+            return source.Provider
                 .Execute<float?>(
                     Expression.Call(
                         null,
@@ -1988,8 +1904,7 @@ namespace System.Linq
         {
             if (source == null)
                 throw Error.ArgumentNull("source");
-            return source
-                .Provider
+            return source.Provider
                 .Execute<double>(
                     Expression.Call(
                         null,
@@ -2003,8 +1918,7 @@ namespace System.Linq
         {
             if (source == null)
                 throw Error.ArgumentNull("source");
-            return source
-                .Provider
+            return source.Provider
                 .Execute<double?>(
                     Expression.Call(
                         null,
@@ -2018,8 +1932,7 @@ namespace System.Linq
         {
             if (source == null)
                 throw Error.ArgumentNull("source");
-            return source
-                .Provider
+            return source.Provider
                 .Execute<decimal>(
                     Expression.Call(
                         null,
@@ -2033,8 +1946,7 @@ namespace System.Linq
         {
             if (source == null)
                 throw Error.ArgumentNull("source");
-            return source
-                .Provider
+            return source.Provider
                 .Execute<decimal?>(
                     Expression.Call(
                         null,
@@ -2053,8 +1965,7 @@ namespace System.Linq
                 throw Error.ArgumentNull("source");
             if (selector == null)
                 throw Error.ArgumentNull("selector");
-            return source
-                .Provider
+            return source.Provider
                 .Execute<int>(
                     Expression.Call(
                         null,
@@ -2073,8 +1984,7 @@ namespace System.Linq
                 throw Error.ArgumentNull("source");
             if (selector == null)
                 throw Error.ArgumentNull("selector");
-            return source
-                .Provider
+            return source.Provider
                 .Execute<int?>(
                     Expression.Call(
                         null,
@@ -2093,8 +2003,7 @@ namespace System.Linq
                 throw Error.ArgumentNull("source");
             if (selector == null)
                 throw Error.ArgumentNull("selector");
-            return source
-                .Provider
+            return source.Provider
                 .Execute<long>(
                     Expression.Call(
                         null,
@@ -2113,8 +2022,7 @@ namespace System.Linq
                 throw Error.ArgumentNull("source");
             if (selector == null)
                 throw Error.ArgumentNull("selector");
-            return source
-                .Provider
+            return source.Provider
                 .Execute<long?>(
                     Expression.Call(
                         null,
@@ -2133,8 +2041,7 @@ namespace System.Linq
                 throw Error.ArgumentNull("source");
             if (selector == null)
                 throw Error.ArgumentNull("selector");
-            return source
-                .Provider
+            return source.Provider
                 .Execute<float>(
                     Expression.Call(
                         null,
@@ -2153,8 +2060,7 @@ namespace System.Linq
                 throw Error.ArgumentNull("source");
             if (selector == null)
                 throw Error.ArgumentNull("selector");
-            return source
-                .Provider
+            return source.Provider
                 .Execute<float?>(
                     Expression.Call(
                         null,
@@ -2173,8 +2079,7 @@ namespace System.Linq
                 throw Error.ArgumentNull("source");
             if (selector == null)
                 throw Error.ArgumentNull("selector");
-            return source
-                .Provider
+            return source.Provider
                 .Execute<double>(
                     Expression.Call(
                         null,
@@ -2193,8 +2098,7 @@ namespace System.Linq
                 throw Error.ArgumentNull("source");
             if (selector == null)
                 throw Error.ArgumentNull("selector");
-            return source
-                .Provider
+            return source.Provider
                 .Execute<double?>(
                     Expression.Call(
                         null,
@@ -2213,8 +2117,7 @@ namespace System.Linq
                 throw Error.ArgumentNull("source");
             if (selector == null)
                 throw Error.ArgumentNull("selector");
-            return source
-                .Provider
+            return source.Provider
                 .Execute<decimal>(
                     Expression.Call(
                         null,
@@ -2233,8 +2136,7 @@ namespace System.Linq
                 throw Error.ArgumentNull("source");
             if (selector == null)
                 throw Error.ArgumentNull("selector");
-            return source
-                .Provider
+            return source.Provider
                 .Execute<decimal?>(
                     Expression.Call(
                         null,
@@ -2248,8 +2150,7 @@ namespace System.Linq
         {
             if (source == null)
                 throw Error.ArgumentNull("source");
-            return source
-                .Provider
+            return source.Provider
                 .Execute<double>(
                     Expression.Call(
                         null,
@@ -2263,8 +2164,7 @@ namespace System.Linq
         {
             if (source == null)
                 throw Error.ArgumentNull("source");
-            return source
-                .Provider
+            return source.Provider
                 .Execute<double?>(
                     Expression.Call(
                         null,
@@ -2278,8 +2178,7 @@ namespace System.Linq
         {
             if (source == null)
                 throw Error.ArgumentNull("source");
-            return source
-                .Provider
+            return source.Provider
                 .Execute<double>(
                     Expression.Call(
                         null,
@@ -2293,8 +2192,7 @@ namespace System.Linq
         {
             if (source == null)
                 throw Error.ArgumentNull("source");
-            return source
-                .Provider
+            return source.Provider
                 .Execute<double?>(
                     Expression.Call(
                         null,
@@ -2308,8 +2206,7 @@ namespace System.Linq
         {
             if (source == null)
                 throw Error.ArgumentNull("source");
-            return source
-                .Provider
+            return source.Provider
                 .Execute<float>(
                     Expression.Call(
                         null,
@@ -2323,8 +2220,7 @@ namespace System.Linq
         {
             if (source == null)
                 throw Error.ArgumentNull("source");
-            return source
-                .Provider
+            return source.Provider
                 .Execute<float?>(
                     Expression.Call(
                         null,
@@ -2338,8 +2234,7 @@ namespace System.Linq
         {
             if (source == null)
                 throw Error.ArgumentNull("source");
-            return source
-                .Provider
+            return source.Provider
                 .Execute<double>(
                     Expression.Call(
                         null,
@@ -2353,8 +2248,7 @@ namespace System.Linq
         {
             if (source == null)
                 throw Error.ArgumentNull("source");
-            return source
-                .Provider
+            return source.Provider
                 .Execute<double?>(
                     Expression.Call(
                         null,
@@ -2368,8 +2262,7 @@ namespace System.Linq
         {
             if (source == null)
                 throw Error.ArgumentNull("source");
-            return source
-                .Provider
+            return source.Provider
                 .Execute<decimal>(
                     Expression.Call(
                         null,
@@ -2383,8 +2276,7 @@ namespace System.Linq
         {
             if (source == null)
                 throw Error.ArgumentNull("source");
-            return source
-                .Provider
+            return source.Provider
                 .Execute<decimal?>(
                     Expression.Call(
                         null,
@@ -2403,8 +2295,7 @@ namespace System.Linq
                 throw Error.ArgumentNull("source");
             if (selector == null)
                 throw Error.ArgumentNull("selector");
-            return source
-                .Provider
+            return source.Provider
                 .Execute<double>(
                     Expression.Call(
                         null,
@@ -2423,8 +2314,7 @@ namespace System.Linq
                 throw Error.ArgumentNull("source");
             if (selector == null)
                 throw Error.ArgumentNull("selector");
-            return source
-                .Provider
+            return source.Provider
                 .Execute<double?>(
                     Expression.Call(
                         null,
@@ -2443,8 +2333,7 @@ namespace System.Linq
                 throw Error.ArgumentNull("source");
             if (selector == null)
                 throw Error.ArgumentNull("selector");
-            return source
-                .Provider
+            return source.Provider
                 .Execute<float>(
                     Expression.Call(
                         null,
@@ -2463,8 +2352,7 @@ namespace System.Linq
                 throw Error.ArgumentNull("source");
             if (selector == null)
                 throw Error.ArgumentNull("selector");
-            return source
-                .Provider
+            return source.Provider
                 .Execute<float?>(
                     Expression.Call(
                         null,
@@ -2483,8 +2371,7 @@ namespace System.Linq
                 throw Error.ArgumentNull("source");
             if (selector == null)
                 throw Error.ArgumentNull("selector");
-            return source
-                .Provider
+            return source.Provider
                 .Execute<double>(
                     Expression.Call(
                         null,
@@ -2503,8 +2390,7 @@ namespace System.Linq
                 throw Error.ArgumentNull("source");
             if (selector == null)
                 throw Error.ArgumentNull("selector");
-            return source
-                .Provider
+            return source.Provider
                 .Execute<double?>(
                     Expression.Call(
                         null,
@@ -2523,8 +2409,7 @@ namespace System.Linq
                 throw Error.ArgumentNull("source");
             if (selector == null)
                 throw Error.ArgumentNull("selector");
-            return source
-                .Provider
+            return source.Provider
                 .Execute<double>(
                     Expression.Call(
                         null,
@@ -2543,8 +2428,7 @@ namespace System.Linq
                 throw Error.ArgumentNull("source");
             if (selector == null)
                 throw Error.ArgumentNull("selector");
-            return source
-                .Provider
+            return source.Provider
                 .Execute<double?>(
                     Expression.Call(
                         null,
@@ -2563,8 +2447,7 @@ namespace System.Linq
                 throw Error.ArgumentNull("source");
             if (selector == null)
                 throw Error.ArgumentNull("selector");
-            return source
-                .Provider
+            return source.Provider
                 .Execute<decimal>(
                     Expression.Call(
                         null,
@@ -2583,8 +2466,7 @@ namespace System.Linq
                 throw Error.ArgumentNull("source");
             if (selector == null)
                 throw Error.ArgumentNull("selector");
-            return source
-                .Provider
+            return source.Provider
                 .Execute<decimal?>(
                     Expression.Call(
                         null,
@@ -2603,8 +2485,7 @@ namespace System.Linq
                 throw Error.ArgumentNull("source");
             if (func == null)
                 throw Error.ArgumentNull("func");
-            return source
-                .Provider
+            return source.Provider
                 .Execute<TSource>(
                     Expression.Call(
                         null,
@@ -2624,8 +2505,7 @@ namespace System.Linq
                 throw Error.ArgumentNull("source");
             if (func == null)
                 throw Error.ArgumentNull("func");
-            return source
-                .Provider
+            return source.Provider
                 .Execute<TAccumulate>(
                     Expression.Call(
                         null,
@@ -2653,8 +2533,7 @@ namespace System.Linq
                 throw Error.ArgumentNull("func");
             if (selector == null)
                 throw Error.ArgumentNull("selector");
-            return source
-                .Provider
+            return source.Provider
                 .Execute<TResult>(
                     Expression.Call(
                         null,

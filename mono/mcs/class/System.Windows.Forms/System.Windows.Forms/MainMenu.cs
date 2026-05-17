@@ -136,8 +136,7 @@ namespace System.Windows.Forms
                     IntPtr.Zero
                 );
                 PaintEventArgs pevent = XplatUI.PaintEventStart(ref m, Wnd.window.Handle, false);
-                pevent
-                    .Graphics
+                pevent.Graphics
                     .SetClip(new Rectangle(rect.X + pt.X, rect.Y + pt.Y, rect.Width, rect.Height));
                 Draw(pevent, Rect);
                 XplatUI.PaintEventEnd(ref m, Wnd.window.Handle, false, pevent);

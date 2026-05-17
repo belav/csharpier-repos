@@ -16,8 +16,7 @@ public class AvoidHtmlPartialAnalyzer : ViewFeatureAnalyzerBase
 
     protected override void InitializeWorker(ViewFeaturesAnalyzerContext analyzerContext)
     {
-        analyzerContext
-            .Context
+        analyzerContext.Context
             .RegisterOperationAction(
                 context =>
                 {

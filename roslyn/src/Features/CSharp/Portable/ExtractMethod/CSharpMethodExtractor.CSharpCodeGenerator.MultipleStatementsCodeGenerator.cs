@@ -34,10 +34,10 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                 protected override ImmutableArray<StatementSyntax> GetInitialStatementsForMethodDefinitions()
                 {
                     var firstSeen = false;
-                    var firstStatementUnderContainer =
-                        this.SelectionResult.GetFirstStatementUnderContainer();
-                    var lastStatementUnderContainer =
-                        this.SelectionResult.GetLastStatementUnderContainer();
+                    var firstStatementUnderContainer = this.SelectionResult
+                        .GetFirstStatementUnderContainer();
+                    var lastStatementUnderContainer = this.SelectionResult
+                        .GetLastStatementUnderContainer();
 
                     using var _ = ArrayBuilder<StatementSyntax>.GetInstance(out var list);
                     foreach (
@@ -83,8 +83,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                         SwitchSectionSyntax switchSectionNode => switchSectionNode.Statements,
                         GlobalStatementSyntax globalStatement => (
                             (CompilationUnitSyntax)globalStatement.Parent
-                        )
-                            .Members
+                        ).Members
                             .OfType<GlobalStatementSyntax>()
                             .Select(globalStatement => globalStatement.Statement),
                         _ => throw ExceptionUtilities.UnexpectedValue(node),

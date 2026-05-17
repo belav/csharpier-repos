@@ -62,8 +62,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             {
                 if (_codeModelCache == null)
                 {
-                    var workspaceProject = _visualStudioWorkspace
-                        .CurrentSolution
+                    var workspaceProject = _visualStudioWorkspace.CurrentSolution
                         .GetProject(_projectId);
 
                     if (workspaceProject != null)

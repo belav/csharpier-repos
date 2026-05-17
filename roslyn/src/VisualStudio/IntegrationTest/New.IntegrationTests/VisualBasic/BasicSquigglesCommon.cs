@@ -22,8 +22,7 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.VisualBasic
         [IdeFact]
         public virtual async Task VerifySyntaxErrorSquiggles()
         {
-            await TestServices
-                .Editor
+            await TestServices.Editor
                 .SetTextAsync(
                     @"Class A
       Shared Sub S()
@@ -33,8 +32,7 @@ End Class",
                     HangMitigatingCancellationToken
                 );
 
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .ErrorTagsAsync(
                     new[]
                     {
@@ -53,8 +51,7 @@ End Class",
         [IdeFact(Skip = "https://github.com/dotnet/roslyn/issues/61367")]
         public virtual async Task VerifySemanticErrorSquiggles()
         {
-            await TestServices
-                .Editor
+            await TestServices.Editor
                 .SetTextAsync(
                     @"Class A
       Shared Sub S(b as Bar)
@@ -64,8 +61,7 @@ End Class",
                     HangMitigatingCancellationToken
                 );
 
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .ErrorTagsAsync(
                     new[]
                     {

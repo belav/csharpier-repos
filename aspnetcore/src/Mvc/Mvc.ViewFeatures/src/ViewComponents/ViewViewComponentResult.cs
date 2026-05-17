@@ -115,8 +115,7 @@ public class ViewViewComponentResult : IViewComponentResult
         {
             if (_diagnosticListener == null)
             {
-                _diagnosticListener = viewContext
-                    .HttpContext
+                _diagnosticListener = viewContext.HttpContext
                     .RequestServices
                     .GetRequiredService<DiagnosticListener>();
             }
@@ -137,8 +136,7 @@ public class ViewViewComponentResult : IViewComponentResult
 
     private static IViewEngine ResolveViewEngine(ViewComponentContext context)
     {
-        return context
-            .ViewContext
+        return context.ViewContext
             .HttpContext
             .RequestServices
             .GetRequiredService<ICompositeViewEngine>();

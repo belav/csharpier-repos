@@ -107,8 +107,7 @@ namespace ILCompiler
             switch (_targetKind)
             {
                 case TargetKind.ExactCallableAddress:
-                    return factory
-                        .GenericLookup
+                    return factory.GenericLookup
                         .MethodEntry(TargetMethod, TargetMethodIsUnboxingThunk);
 
                 case TargetKind.InterfaceDispatch:
@@ -118,8 +117,7 @@ namespace ILCompiler
                     return factory.GenericLookup.MethodHandle(TargetMethod);
 
                 case TargetKind.ConstrainedMethod:
-                    return factory
-                        .GenericLookup
+                    return factory.GenericLookup
                         .ConstrainedMethodUse(
                             _targetMethod,
                             _constrainedType,

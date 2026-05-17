@@ -105,8 +105,7 @@ namespace System.Web.Http.ExceptionHandling
             using (HttpConfiguration configuration = CreateConfiguration())
             using (HttpRequestMessage expectedRequest = CreateRequest())
             {
-                configuration
-                    .Services
+                configuration.Services
                     .Replace(typeof(IContentNegotiator), expectedContentNegotiator);
                 configuration.Formatters.Clear();
                 MediaTypeFormatter expectedFormatter = CreateDummyFormatter();

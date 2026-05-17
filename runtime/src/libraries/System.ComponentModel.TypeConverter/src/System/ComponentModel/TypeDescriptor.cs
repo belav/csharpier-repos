@@ -3128,8 +3128,7 @@ namespace System.ComponentModel
             {
                 MemberDescriptor? leftMember = left as MemberDescriptor;
                 MemberDescriptor? rightMember = right as MemberDescriptor;
-                return CultureInfo
-                    .InvariantCulture
+                return CultureInfo.InvariantCulture
                     .CompareInfo
                     .Compare(leftMember?.Name, rightMember?.Name);
             }

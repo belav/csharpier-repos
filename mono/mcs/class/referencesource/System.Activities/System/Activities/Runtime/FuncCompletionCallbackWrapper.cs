@@ -68,8 +68,7 @@ namespace System.Activities.Runtime
 
             if (completedInstance.Activity.HandlerOf != null)
             {
-                DelegateOutArgument resultArgument = completedInstance
-                    .Activity
+                DelegateOutArgument resultArgument = completedInstance.Activity
                     .HandlerOf
                     .GetResultArgument();
                 if (resultArgument != null)

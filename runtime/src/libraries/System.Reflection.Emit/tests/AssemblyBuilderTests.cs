@@ -882,8 +882,7 @@ namespace System.Reflection.Emit.Tests
                     DefineDynamicAssembly_AssemblyBuilderLocationIsEmpty_InternalAssemblyBuilderLocationIsEmpty
                 )
             );
-            Assembly internalAssemblyBuilder = AppDomain
-                .CurrentDomain
+            Assembly internalAssemblyBuilder = AppDomain.CurrentDomain
                 .GetAssemblies()
                 .FirstOrDefault(a => a.FullName == assembly.FullName);
 
@@ -896,8 +895,7 @@ namespace System.Reflection.Emit.Tests
         public static void ThrowsWhenDynamicCodeNotSupported()
         {
             RemoteInvokeOptions options = new RemoteInvokeOptions();
-            options
-                .RuntimeConfigurationOptions
+            options.RuntimeConfigurationOptions
                 .Add(
                     "System.Runtime.CompilerServices.RuntimeFeature.IsDynamicCodeSupported",
                     false.ToString()

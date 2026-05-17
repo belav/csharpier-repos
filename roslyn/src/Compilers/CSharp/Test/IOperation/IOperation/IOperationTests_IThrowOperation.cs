@@ -2353,8 +2353,7 @@ class C
 
             var compilation = CreateCompilation(
                 source,
-                parseOptions: TestOptions
-                    .Regular
+                parseOptions: TestOptions.Regular
                     .WithLanguageVersion(
                         MessageID.IDS_FeatureTargetTypedConditional.RequiredVersion()
                     )

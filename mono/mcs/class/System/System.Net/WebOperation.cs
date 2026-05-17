@@ -214,11 +214,12 @@ namespace System.Net
                 Connection = connection;
             }
 
-            cts.Token.Register(() =>
-            {
-                Request.FinishedReading = true;
-                SetDisposed(ref disposedInfo);
-            });
+            cts.Token
+                .Register(() =>
+                {
+                    Request.FinishedReading = true;
+                    SetDisposed(ref disposedInfo);
+                });
         }
 
         public void SetPriorityRequest(WebOperation operation)

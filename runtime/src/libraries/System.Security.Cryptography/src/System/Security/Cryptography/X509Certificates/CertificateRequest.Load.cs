@@ -342,9 +342,8 @@ namespace System.Security.Cryptography.X509Certificates
 
                                     foreach (ReadOnlyMemory<byte> val in attr.AttrValues)
                                     {
-                                        req.OtherRequestAttributes.Add(
-                                            new AsnEncodedData(attr.AttrType, val.Span)
-                                        );
+                                        req.OtherRequestAttributes
+                                            .Add(new AsnEncodedData(attr.AttrType, val.Span));
                                     }
                                 }
                             }

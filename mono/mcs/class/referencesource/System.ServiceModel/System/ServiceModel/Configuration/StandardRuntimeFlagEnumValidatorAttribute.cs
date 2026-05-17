@@ -45,8 +45,7 @@ namespace System.ServiceModel.Configuration
             bool hasFlags = value.GetCustomAttributes(typeof(FlagsAttribute), true).Length > 0;
             if (!value.IsEnum || !hasFlags)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument("EnumType", SR.GetString(SR.FlagEnumTypeExpected, value));
             }
 
@@ -66,8 +65,7 @@ namespace System.ServiceModel.Configuration
                             )
                         )
                         {
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperArgument(
                                     "EnumType",
                                     SR.GetString(SR.InvalidFlagEnumType)

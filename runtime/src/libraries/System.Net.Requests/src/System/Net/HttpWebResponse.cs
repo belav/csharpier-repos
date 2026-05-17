@@ -111,8 +111,7 @@ namespace System.Net
                 // .NET Framework behavior.
                 if (
                     _httpResponseMessage.Content != null
-                    && _httpResponseMessage
-                        .Content
+                    && _httpResponseMessage.Content
                         .Headers
                         .TryGetValues("Content-Type", out IEnumerable<string>? values)
                 )

@@ -587,8 +587,7 @@ namespace Microsoft.CodeAnalysis.Completion
                 var result = StringComparer.OrdinalIgnoreCase.Compare(SortText, other.SortText);
                 if (result == 0)
                 {
-                    result = StringComparer
-                        .OrdinalIgnoreCase
+                    result = StringComparer.OrdinalIgnoreCase
                         .Compare(GetEntireDisplayText(), other.GetEntireDisplayText());
                 }
 

@@ -230,8 +230,7 @@ namespace System.ServiceModel.Channels
                 if (
                     (cred.ClientCertificate != null) && (cred.ClientCertificate.Certificate != null)
                 )
-                    ((HttpWebRequest)web_request)
-                        .ClientCertificates
+                    ((HttpWebRequest)web_request).ClientCertificates
                         .Add(cred.ClientCertificate.Certificate);
             }
 #endif

@@ -191,8 +191,7 @@ namespace System.Workflow.Activities
                 webservicereceive.QualifiedName
             );
 
-            MethodInfo mInfo = webservicereceive
-                .InterfaceType
+            MethodInfo mInfo = webservicereceive.InterfaceType
                 .GetMethod(webservicereceive.MethodName);
             if (!queueService.Exists(queueId))
             {
@@ -616,8 +615,7 @@ namespace System.Workflow.Activities
 
                                             object paramValue = null;
                                             if (
-                                                webServiceResponse
-                                                    .ParameterBindings
+                                                webServiceResponse.ParameterBindings
                                                     .Contains(paramName)
                                             )
                                             {
@@ -668,8 +666,7 @@ namespace System.Workflow.Activities
                                                 validationErrors.Add(validationError);
                                             }
                                             else if (
-                                                !webServiceResponse
-                                                    .ParameterBindings
+                                                !webServiceResponse.ParameterBindings
                                                     .Contains(paramName)
                                                 || paramValue == null
                                             )
@@ -717,8 +714,7 @@ namespace System.Workflow.Activities
                                                         ),
                                                         new BindValidationContext(
                                                             paramInfo.ParameterType.IsByRef
-                                                                ? paramInfo
-                                                                    .ParameterType
+                                                                ? paramInfo.ParameterType
                                                                     .GetElementType()
                                                                 : paramInfo.ParameterType,
                                                             access

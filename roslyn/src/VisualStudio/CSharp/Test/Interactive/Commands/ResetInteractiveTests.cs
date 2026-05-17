@@ -54,12 +54,10 @@ namespace ResetInteractiveTestsDocument
                 composition: EditorTestCompositions.InteractiveWindow
             );
 
-            var project = workspace
-                .CurrentSolution
+            var project = workspace.CurrentSolution
                 .Projects
                 .FirstOrDefault(p => p.AssemblyName == "ResetInteractiveTestsAssembly");
-            var document = project
-                .Documents
+            var document = project.Documents
                 .FirstOrDefault(d => d.FilePath == "ResetInteractiveTestsDocument");
             var replReferenceCommands = GetProjectReferences(workspace, project)
                 .Select(r => CreateReplReferenceCommand(r));
@@ -117,8 +115,7 @@ namespace ResetInteractiveTestsDocument
 
             var uiThreadOperationExecutor = workspace.GetService<IUIThreadOperationExecutor>();
             var editorOptionsService = workspace.GetService<EditorOptionsService>();
-            var editorOptions = editorOptionsService
-                .Factory
+            var editorOptions = editorOptionsService.Factory
                 .GetOptions(testHost.Window.CurrentLanguageBuffer);
             var newLineCharacter = editorOptions.GetNewLineCharacter();
 
@@ -194,8 +191,7 @@ namespace ResetInteractiveTestsDocument
         )
         {
             var metadataReferences = project.MetadataReferences.Select(r => r.Display);
-            var projectReferences = project
-                .ProjectReferences
+            var projectReferences = project.ProjectReferences
                 .SelectMany(p =>
                     GetProjectReferences(
                         workspace,

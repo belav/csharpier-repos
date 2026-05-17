@@ -1066,8 +1066,7 @@ namespace System.Data.OleDb
                                 try
                                 {
                                     propSet.DangerousAddRef(ref mustRelease);
-                                    hr = iopenRowset
-                                        .Value
+                                    hr = iopenRowset.Value
                                         .OpenRowset(
                                             IntPtr.Zero,
                                             tableID,
@@ -1088,8 +1087,7 @@ namespace System.Data.OleDb
 
                                 if (OleDbHResult.DB_E_ERRORSOCCURRED == hr)
                                 {
-                                    hr = iopenRowset
-                                        .Value
+                                    hr = iopenRowset.Value
                                         .OpenRowset(
                                             IntPtr.Zero,
                                             tableID,
@@ -1103,8 +1101,7 @@ namespace System.Data.OleDb
                             }
                             else
                             {
-                                hr = iopenRowset
-                                    .Value
+                                hr = iopenRowset.Value
                                     .OpenRowset(
                                         IntPtr.Zero,
                                         tableID,

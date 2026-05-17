@@ -33,13 +33,11 @@ public sealed class GlobalOptionsTest : AbstractIntegrationTest
     public async Task ValidateAllOptions()
     {
         var globalOptions = (GlobalOptionService)
-            await TestServices
-                .Shell
+            await TestServices.Shell
                 .GetComponentModelServiceAsync<IGlobalOptionService>(
                     HangMitigatingCancellationToken
                 );
-        var provider = await TestServices
-            .Shell
+        var provider = await TestServices.Shell
             .GetComponentModelServiceAsync<VisualStudioOptionPersisterProvider>(
                 HangMitigatingCancellationToken
             );

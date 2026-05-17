@@ -163,15 +163,13 @@ public partial class RouteHandlerAnalyzer : DiagnosticAnalyzer
                     var foundMethodReferenceBody = false;
                     if (!methodReference.Method.DeclaringSyntaxReferences.IsEmpty)
                     {
-                        var syntaxReference = methodReference
-                            .Method
+                        var syntaxReference = methodReference.Method
                             .DeclaringSyntaxReferences
                             .Single();
                         var syntaxNode = syntaxReference.GetSyntax(context.CancellationToken);
                         var methodOperation =
                             syntaxNode.SyntaxTree == invocation.SemanticModel!.SyntaxTree
-                                ? invocation
-                                    .SemanticModel
+                                ? invocation.SemanticModel
                                     .GetOperation(syntaxNode, context.CancellationToken)
                                 : null;
                         if (
@@ -255,8 +253,7 @@ public partial class RouteHandlerAnalyzer : DiagnosticAnalyzer
     )
     {
         return targetMethod.Name.StartsWith("Map", StringComparison.Ordinal)
-            && SymbolEqualityComparer
-                .Default
+            && SymbolEqualityComparer.Default
                 .Equals(
                     wellKnownTypes.Get(
                         WellKnownType.Microsoft_AspNetCore_Builder_EndpointRouteBuilderExtensions
@@ -274,16 +271,14 @@ public partial class RouteHandlerAnalyzer : DiagnosticAnalyzer
         {
             var parmeterType = targetMethod.Parameters[DelegateParameterOrdinal].Type;
             if (
-                SymbolEqualityComparer
-                    .Default
+                SymbolEqualityComparer.Default
                     .Equals(wellKnownTypes.Get(WellKnownType.System_Delegate), parmeterType)
             )
             {
                 return true;
             }
             if (
-                SymbolEqualityComparer
-                    .Default
+                SymbolEqualityComparer.Default
                     .Equals(
                         wellKnownTypes.Get(WellKnownType.Microsoft_AspNetCore_Http_RequestDelegate),
                         parmeterType
@@ -309,8 +304,7 @@ public partial class RouteHandlerAnalyzer : DiagnosticAnalyzer
         {
             IOperation? builder = null;
 
-            var builderArgument = operation
-                .Arguments
+            var builderArgument = operation.Arguments
                 .SingleOrDefault(a => a.Parameter?.Ordinal == 0);
             if (builderArgument != null)
             {

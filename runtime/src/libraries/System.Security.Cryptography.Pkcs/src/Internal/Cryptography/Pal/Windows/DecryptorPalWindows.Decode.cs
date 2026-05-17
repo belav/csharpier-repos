@@ -26,8 +26,7 @@ namespace Internal.Cryptography.Pal.Windows
             SafeCryptMsgHandle? hCryptMsg = null;
             try
             {
-                hCryptMsg = Interop
-                    .Crypt32
+                hCryptMsg = Interop.Crypt32
                     .CryptMsgOpenToDecode(
                         MsgEncodingType.All,
                         0,
@@ -40,8 +39,7 @@ namespace Internal.Cryptography.Pal.Windows
                     throw Marshal.GetLastPInvokeError().ToCryptographicException();
 
                 if (
-                    !Interop
-                        .Crypt32
+                    !Interop.Crypt32
                         .CryptMsgUpdate(
                             hCryptMsg,
                             ref MemoryMarshal.GetReference(encodedMessage),
@@ -75,11 +73,11 @@ namespace Internal.Cryptography.Pal.Windows
                         contentEncryptionAlgorithm = (
                             *pCryptAlgorithmIdentifier
                         ).ToAlgorithmIdentifier();
-                        contentEncryptionAlgorithmAsn.Algorithm = contentEncryptionAlgorithm
-                            .Oid
+                        contentEncryptionAlgorithmAsn.Algorithm = contentEncryptionAlgorithm.Oid
                             .Value!;
-                        contentEncryptionAlgorithmAsn.Parameters = (*pCryptAlgorithmIdentifier)
-                            .Parameters
+                        contentEncryptionAlgorithmAsn.Parameters = (
+                            *pCryptAlgorithmIdentifier
+                        ).Parameters
                             .ToByteArray();
                     }
                 }

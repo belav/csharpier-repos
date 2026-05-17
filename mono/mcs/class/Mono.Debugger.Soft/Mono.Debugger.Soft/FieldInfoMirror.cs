@@ -259,12 +259,8 @@ namespace Mono.Debugger.Soft
             // FIXME: Handle inherit
             if (cattrs == null)
             {
-                CattrInfo[] info = vm.conn.Type_GetFieldCustomAttributes(
-                    DeclaringType.Id,
-                    id,
-                    0,
-                    false
-                );
+                CattrInfo[] info = vm.conn
+                    .Type_GetFieldCustomAttributes(DeclaringType.Id, id, 0, false);
                 cattrs = CustomAttributeDataMirror.Create(vm, info);
             }
             var res = new List<CustomAttributeDataMirror>();

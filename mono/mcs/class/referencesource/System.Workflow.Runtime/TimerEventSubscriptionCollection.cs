@@ -41,8 +41,7 @@ namespace System.Workflow.Runtime
         {
             this.executor = executor;
             this.instanceId = instanceId;
-            WorkflowTrace
-                .Host
+            WorkflowTrace.Host
                 .TraceEvent(
                     TraceEventType.Information,
                     0,
@@ -56,8 +55,7 @@ namespace System.Workflow.Runtime
         {
             lock (locker)
             {
-                WorkflowTrace
-                    .Host
+                WorkflowTrace.Host
                     .TraceEvent(
                         TraceEventType.Information,
                         0,
@@ -94,8 +92,7 @@ namespace System.Workflow.Runtime
             {
                 TimerEventSubscription retval = queue.Dequeue();
                 if (retval != null)
-                    WorkflowTrace
-                        .Host
+                    WorkflowTrace.Host
                         .TraceEvent(
                             TraceEventType.Information,
                             0,
@@ -112,8 +109,7 @@ namespace System.Workflow.Runtime
         {
             lock (locker)
             {
-                WorkflowTrace
-                    .Host
+                WorkflowTrace.Host
                     .TraceEvent(
                         TraceEventType.Information,
                         0,
@@ -136,8 +132,7 @@ namespace System.Workflow.Runtime
                     this.executor.GetService(typeof(ITimerService)) as ITimerService;
                 if (e.NewFirstElement != null && executor != null)
                 {
-                    WorkflowTrace
-                        .Host
+                    WorkflowTrace.Host
                         .TraceEvent(
                             TraceEventType.Information,
                             0,
@@ -155,8 +150,7 @@ namespace System.Workflow.Runtime
                 }
                 if (e.OldFirstElement != null)
                 {
-                    WorkflowTrace
-                        .Host
+                    WorkflowTrace.Host
                         .TraceEvent(
                             TraceEventType.Information,
                             0,
@@ -174,8 +168,7 @@ namespace System.Workflow.Runtime
         {
             lock (locker)
             {
-                WorkflowTrace
-                    .Host
+                WorkflowTrace.Host
                     .TraceEvent(
                         TraceEventType.Information,
                         0,
@@ -197,8 +190,7 @@ namespace System.Workflow.Runtime
         {
             lock (locker)
             {
-                WorkflowTrace
-                    .Host
+                WorkflowTrace.Host
                     .TraceEvent(
                         TraceEventType.Information,
                         0,

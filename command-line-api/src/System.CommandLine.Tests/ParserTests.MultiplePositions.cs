@@ -117,8 +117,7 @@ namespace System.CommandLine.Tests
                 var result = outer.Parse(commandLine);
 
                 result.Errors.Should().BeEmpty();
-                result
-                    .CommandResult
+                result.CommandResult
                     .Parent
                     .Should()
                     .BeOfType<CommandResult>()
@@ -142,8 +141,7 @@ namespace System.CommandLine.Tests
 
                 option.Parents.Select(p => p.Name).Should().BeEquivalentTo("add", "add");
 
-                option
-                    .Parents
+                option.Parents
                     .SelectMany(p => p.Parents)
                     .Select(p => p.Name)
                     .Should()

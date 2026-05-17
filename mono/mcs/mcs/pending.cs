@@ -317,8 +317,7 @@ namespace Mono.CSharp
                             continue;
 
                         if (
-                            !TypeSpecComparer
-                                .Override
+                            !TypeSpecComparer.Override
                                 .IsSame(
                                     compared_method.Parameters.Types,
                                     tested_method.Parameters.Types
@@ -362,8 +361,7 @@ namespace Mono.CSharp
 
                         pending.Report.SymbolRelatedToPreviousError(compared_method);
                         pending.Report.SymbolRelatedToPreviousError(tested_method);
-                        pending
-                            .Report
+                        pending.Report
                             .Error(
                                 767,
                                 container.Location,
@@ -587,8 +585,7 @@ namespace Mono.CSharp
 
             var param = iface_method.Parameters;
 
-            MethodBuilder proxy = container
-                .TypeBuilder
+            MethodBuilder proxy = container.TypeBuilder
                 .DefineMethod(
                     proxy_name,
                     MethodAttributes.Private
@@ -604,8 +601,7 @@ namespace Mono.CSharp
 
             if (iface_method.IsGeneric)
             {
-                var gnames = iface_method
-                    .GenericDefinition
+                var gnames = iface_method.GenericDefinition
                     .TypeParameters
                     .Select(l => l.Name)
                     .ToArray();
@@ -636,8 +632,7 @@ namespace Mono.CSharp
             ec.Emit(OpCodes.Call, base_method);
             ec.Emit(OpCodes.Ret);
 
-            container
-                .TypeBuilder
+            container.TypeBuilder
                 .DefineMethodOverride(proxy, (MethodInfo)iface_method.GetMetaInfo());
         }
 
@@ -780,8 +775,7 @@ namespace Mono.CSharp
                                     break;
 
                                 if (
-                                    !TypeSpecComparer
-                                        .Override
+                                    !TypeSpecComparer.Override
                                         .IsEqual(mi.ReturnType, ((MethodSpec)candidate).ReturnType)
                                 )
                                     break;

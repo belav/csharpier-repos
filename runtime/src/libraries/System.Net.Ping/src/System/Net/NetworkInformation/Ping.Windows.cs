@@ -203,8 +203,7 @@ namespace System.Net.NetworkInformation
             if (!_ipv6)
             {
                 return (int)
-                    Interop
-                        .IpHlpApi
+                    Interop.IpHlpApi
                         .IcmpSendEcho2(
                             _handlePingV4!,
                             GetWaitHandle(isAsync),
@@ -229,8 +228,7 @@ namespace System.Net.NetworkInformation
             sourceAddr.Clear();
 
             return (int)
-                Interop
-                    .IpHlpApi
+                Interop.IpHlpApi
                     .Icmp6SendEcho2(
                         _handlePingV6!,
                         GetWaitHandle(isAsync),

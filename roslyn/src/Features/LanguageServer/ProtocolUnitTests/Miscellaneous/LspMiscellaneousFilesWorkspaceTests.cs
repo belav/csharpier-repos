@@ -74,8 +74,7 @@ public class LspMiscellaneousFilesWorkspaceTests : AbstractLanguageServerProtoco
         );
 
         var miscWorkspace = testLspServer.GetRequiredLspService<LspMiscellaneousFilesWorkspace>();
-        testLspServer
-            .TestWorkspace
+        testLspServer.TestWorkspace
             .GetService<LspWorkspaceRegistrationService>()
             .Register(miscWorkspace);
 

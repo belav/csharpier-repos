@@ -613,8 +613,7 @@ namespace MonoTests.System.Reflection
             AssemblyName assemblyName = new AssemblyName();
             assemblyName.Name = "AssemblyLocation";
 
-            AssemblyBuilder ab = AppDomain
-                .CurrentDomain
+            AssemblyBuilder ab = AppDomain.CurrentDomain
                 .DefineDynamicAssembly(assemblyName, AssemblyBuilderAccess.Save, TempFolder);
             ab.Save(Path.GetFileName(assemblyFileName));
 
@@ -636,8 +635,7 @@ namespace MonoTests.System.Reflection
             AssemblyName assemblyName = new AssemblyName();
             assemblyName.Name = "AssemblyLocation1";
 
-            AssemblyBuilder ab = AppDomain
-                .CurrentDomain
+            AssemblyBuilder ab = AppDomain.CurrentDomain
                 .DefineDynamicAssembly(assemblyName, AssemblyBuilderAccess.Save, TempFolder);
 
             ModuleBuilder moduleBuilder = ab.DefineDynamicModule(
@@ -725,8 +723,7 @@ namespace MonoTests.System.Reflection
             AssemblyName assemblyName = new AssemblyName();
             assemblyName.Name = "bug78465";
 
-            AssemblyBuilder ab = AppDomain
-                .CurrentDomain
+            AssemblyBuilder ab = AppDomain.CurrentDomain
                 .DefineDynamicAssembly(
                     assemblyName,
                     AssemblyBuilderAccess.Save,
@@ -771,8 +768,7 @@ namespace MonoTests.System.Reflection
             AssemblyName assemblyName = new AssemblyName();
             assemblyName.Name = "bug78468a";
 
-            AssemblyBuilder ab = AppDomain
-                .CurrentDomain
+            AssemblyBuilder ab = AppDomain.CurrentDomain
                 .DefineDynamicAssembly(assemblyName, AssemblyBuilderAccess.Save, TempFolder);
             ab.AddResourceFile("read", "readme.txt");
             ab.Save(Path.GetFileName(assemblyFileNameA));
@@ -1092,8 +1088,7 @@ namespace MonoTests.System.Reflection
         {
             public void GenerateAssembly(AssemblyName aname, string path)
             {
-                AssemblyBuilder ab = AppDomain
-                    .CurrentDomain
+                AssemblyBuilder ab = AppDomain.CurrentDomain
                     .DefineDynamicAssembly(
                         aname,
                         AssemblyBuilderAccess.Save,
@@ -1169,8 +1164,7 @@ namespace MonoTests.System.Reflection
                 AssemblyName assemblyName = new AssemblyName();
                 assemblyName.Name = "bug78464";
 
-                AssemblyBuilder ab = AppDomain
-                    .CurrentDomain
+                AssemblyBuilder ab = AppDomain.CurrentDomain
                     .DefineDynamicAssembly(
                         assemblyName,
                         AssemblyBuilderAccess.Save,
@@ -1221,8 +1215,7 @@ namespace MonoTests.System.Reflection
                 AssemblyName assemblyName = new AssemblyName();
                 assemblyName.Name = "bug78468b";
 
-                AssemblyBuilder ab = AppDomain
-                    .CurrentDomain
+                AssemblyBuilder ab = AppDomain.CurrentDomain
                     .DefineDynamicAssembly(
                         assemblyName,
                         AssemblyBuilderAccess.Save,
@@ -1258,8 +1251,7 @@ namespace MonoTests.System.Reflection
 
             AssemblyName an = new AssemblyName();
             an.Name = "bug79872";
-            AssemblyBuilder ab = AppDomain
-                .CurrentDomain
+            AssemblyBuilder ab = AppDomain.CurrentDomain
                 .DefineDynamicAssembly(an, AssemblyBuilderAccess.Save, outdir);
             string dllname = "bug79872.dll";
             ModuleBuilder mb1 = ab.DefineDynamicModule("bug79872", dllname);

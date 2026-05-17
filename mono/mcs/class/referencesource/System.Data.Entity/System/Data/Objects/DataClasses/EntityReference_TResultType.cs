@@ -388,8 +388,7 @@ namespace System.Data.Objects.DataClasses
                     }
 
                     // We know the target end of this relationship is 1..1 or 0..1 since it is a reference, so if the source end is also not Many, we have a 1-to-1
-                    RelatedEnd relatedEnd = wrappedTarget
-                        .RelationshipManager
+                    RelatedEnd relatedEnd = wrappedTarget.RelationshipManager
                         .GetRelatedEndInternal(RelationshipName, RelationshipNavigation.From);
                     if (
                         FromEndProperty.RelationshipMultiplicity != RelationshipMultiplicity.Many
@@ -460,8 +459,7 @@ namespace System.Data.Objects.DataClasses
                 // while the graph was being added, if the DetachedEntityKey matched its key. In that case,
                 // we only want to clear _cachedValue and delete the relationship entry, but not remove the entity
                 // itself from the context.
-                TransactionManager transManager = ObjectContext
-                    .ObjectStateManager
+                TransactionManager transManager = ObjectContext.ObjectStateManager
                     .TransactionManager;
                 bool doFullRemove = transManager.PopulatedEntityReferences.Contains(this);
                 bool doRelatedEndRemove = transManager.AlignedEntityReferences.Contains(this);
@@ -603,8 +601,7 @@ namespace System.Data.Objects.DataClasses
                 // we need to search relationships on the Owner entity to see if this is true, and if so remove the relationship entry
                 if (WrappedOwner.Entity != null && WrappedOwner.Context != null && !UsingNoTracking)
                 {
-                    EntityEntry ownerEntry = WrappedOwner
-                        .Context
+                    EntityEntry ownerEntry = WrappedOwner.Context
                         .ObjectStateManager
                         .GetEntityEntry(WrappedOwner.Entity);
                     ownerEntry.DeleteRelationshipsThatReferenceKeys(
@@ -734,10 +731,8 @@ namespace System.Data.Objects.DataClasses
             // For POCO entities - clear the CLR reference
             if (this.TargetAccessor.HasProperty)
             {
-                this.WrappedOwner.RemoveNavigationPropertyValue(
-                    this,
-                    (TEntity)wrappedEntity.Entity
-                );
+                this.WrappedOwner
+                    .RemoveNavigationPropertyValue(this, (TEntity)wrappedEntity.Entity);
             }
 
             return true;
@@ -773,8 +768,7 @@ namespace System.Data.Objects.DataClasses
                         }
                         visited.Add(_wrappedCachedValue);
 
-                        _wrappedCachedValue
-                            .RelationshipManager
+                        _wrappedCachedValue.RelationshipManager
                             .RetrieveReferentialConstraintProperties(
                                 out retrievedProperties,
                                 visited,

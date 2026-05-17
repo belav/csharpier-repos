@@ -264,12 +264,10 @@ namespace System.CommandLine.Tests
         public void Option_T_default_value_is_validated()
         {
             var option = new CliOption<int>("-x") { DefaultValueFactory = (_) => 123 };
-            option
-                .Validators
+            option.Validators
                 .Add(symbol =>
                     symbol.AddError(
-                        symbol
-                            .Tokens
+                        symbol.Tokens
                             .Select(t => t.Value)
                             .Where(v => v == "123")
                             .Select(_ => "ERR")
@@ -314,8 +312,7 @@ namespace System.CommandLine.Tests
 
             var result = new CliRootCommand { option }.Parse("--color Fuschia");
 
-            result
-                .Errors
+            result.Errors
                 .Select(e => e.Message)
                 .Should()
                 .BeEquivalentTo(

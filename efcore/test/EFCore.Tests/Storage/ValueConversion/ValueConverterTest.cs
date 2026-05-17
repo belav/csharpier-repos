@@ -292,8 +292,9 @@ public class ValueConverterTest
     [ConditionalFact]
     public void Can_convert_compose_to_strings()
     {
-        var converter = ((ValueConverter<Beatles, string>)_enumToNumber.ComposeWith(_intToString))
-            .ConvertToProviderExpression
+        var converter = (
+            (ValueConverter<Beatles, string>)_enumToNumber.ComposeWith(_intToString)
+        ).ConvertToProviderExpression
             .Compile();
 
         Assert.Equal("7", converter(Beatles.John));
@@ -321,8 +322,9 @@ public class ValueConverterTest
     [ConditionalFact]
     public void Can_convert_compose_to_enums()
     {
-        var converter = ((ValueConverter<Beatles, string>)_enumToNumber.ComposeWith(_intToString))
-            .ConvertFromProviderExpression
+        var converter = (
+            (ValueConverter<Beatles, string>)_enumToNumber.ComposeWith(_intToString)
+        ).ConvertFromProviderExpression
             .Compile();
 
         Assert.Equal(Beatles.John, converter("7"));

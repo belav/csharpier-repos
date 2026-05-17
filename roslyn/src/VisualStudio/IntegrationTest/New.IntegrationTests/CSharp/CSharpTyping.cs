@@ -61,8 +61,7 @@ public partial class Test
     }
 }";
 
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .AddFileAsync(
                     ProjectName,
                     "PartialType2.cs",
@@ -70,8 +69,7 @@ public partial class Test
                     open: false,
                     HangMitigatingCancellationToken
                 );
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .AddFileAsync(
                     ProjectName,
                     "PartialType3.cs",
@@ -82,23 +80,19 @@ public partial class Test
 
             // Typing intermixed with explicit Wait operations to ensure that
             // we trigger multiple open file analyses along with cancellations.
-            await TestServices
-                .Input
+            await TestServices.Input
                 .SendAsync(VirtualKeyCode.RETURN, HangMitigatingCancellationToken);
             await Task.Delay(TimeSpan.FromSeconds(1));
             await TestServices.Input.SendAsync("f = 1;", HangMitigatingCancellationToken);
             await Task.Delay(TimeSpan.FromSeconds(1));
-            await TestServices
-                .Input
+            await TestServices.Input
                 .SendAsync(VirtualKeyCode.BACK, HangMitigatingCancellationToken);
-            await TestServices
-                .Input
+            await TestServices.Input
                 .SendAsync(VirtualKeyCode.BACK, HangMitigatingCancellationToken);
             await Task.Delay(TimeSpan.FromSeconds(1));
             await TestServices.Input.SendAsync("2;", HangMitigatingCancellationToken);
 
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .TextContainsAsync(
                     @"
 public partial class Test

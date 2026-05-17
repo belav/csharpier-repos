@@ -161,8 +161,7 @@ namespace System.ServiceModel.Dispatcher
 
             if (durableInstance == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR2.GetString(
@@ -236,8 +235,7 @@ namespace System.ServiceModel.Dispatcher
                 if (ContextMessageProperty.TryGet(message, out contextProperties))
                 {
                     if (
-                        contextProperties
-                            .Context
+                        contextProperties.Context
                             .TryGetValue(WellKnownContextProperties.InstanceId, out instanceId)
                     )
                     {
@@ -485,8 +483,7 @@ namespace System.ServiceModel.Dispatcher
                     {
                         if (value == null)
                         {
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperArgumentNull("value");
                         }
                         this.context = value;

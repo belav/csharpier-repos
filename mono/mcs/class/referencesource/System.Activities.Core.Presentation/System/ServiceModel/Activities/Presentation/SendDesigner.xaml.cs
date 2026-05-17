@@ -60,13 +60,11 @@ namespace System.ServiceModel.Activities.Presentation
             );
 
             var categoryAttribute = new CategoryAttribute(
-                EditorCategoryTemplateDictionary
-                    .Instance
+                EditorCategoryTemplateDictionary.Instance
                     .GetCategoryTitle(CorrelationsCategoryLabelKey)
             );
             var descriptionAttribute = new DescriptionAttribute(
-                StringResourceDictionary
-                    .Instance
+                StringResourceDictionary.Instance
                     .GetString("messagingCorrelatesWithHint", "Correlation handle")
             );
             builder.AddCustomAttributes(
@@ -93,8 +91,7 @@ namespace System.ServiceModel.Activities.Presentation
                 new TypeConverterAttribute(typeof(ExpandableObjectConverter))
             );
             descriptionAttribute = new DescriptionAttribute(
-                StringResourceDictionary
-                    .Instance
+                StringResourceDictionary.Instance
                     .GetString("messagingEndpointAddressHint", "<Address>")
             );
             builder.AddCustomAttributes(
@@ -110,8 +107,7 @@ namespace System.ServiceModel.Activities.Presentation
             );
 
             categoryAttribute = new CategoryAttribute(
-                EditorCategoryTemplateDictionary
-                    .Instance
+                EditorCategoryTemplateDictionary.Instance
                     .GetCategoryTitle(MiscellaneousCategoryLabelKey)
             );
             builder.AddCustomAttributes(
@@ -248,9 +244,8 @@ namespace System.ServiceModel.Activities.Presentation
             ModelItem flowStepContainer;
 
             using (
-                ModelEditingScope scope = this.ModelItem.BeginEdit(
-                    (string)this.FindResource("createReceiveReplyDescription")
-                )
+                ModelEditingScope scope = this.ModelItem
+                    .BeginEdit((string)this.FindResource("createReceiveReplyDescription"))
             )
             {
                 //special case handling for Sequence
@@ -285,8 +280,7 @@ namespace System.ServiceModel.Activities.Presentation
                     ErrorReporting.ShowAlertMessage(
                         string.Format(
                             CultureInfo.CurrentUICulture,
-                            System
-                                .Activities
+                            System.Activities
                                 .Core
                                 .Presentation
                                 .SR
@@ -326,15 +320,15 @@ namespace System.ServiceModel.Activities.Presentation
                     if (null != variableScope)
                     {
                         ModelItemCollection correlations = send.Properties[
-                            "CorrelationInitializers"
-                        ].Collection;
+                                "CorrelationInitializers"
+                            ]
+                            .Collection;
                         bool hasRequestReplyHandle = false;
                         foreach (ModelItem item in correlations)
                         {
                             if (
-                                item.ItemType.IsAssignableFrom(
-                                    typeof(RequestReplyCorrelationInitializer)
-                                )
+                                item.ItemType
+                                    .IsAssignableFrom(typeof(RequestReplyCorrelationInitializer))
                             )
                             {
                                 hasRequestReplyHandle = true;

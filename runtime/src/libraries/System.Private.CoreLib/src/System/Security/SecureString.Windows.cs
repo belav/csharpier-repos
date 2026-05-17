@@ -25,8 +25,7 @@ namespace System.Security
             if (
                 _decryptedLength != 0
                 && !_encrypted
-                && !Interop
-                    .Crypt32
+                && !Interop.Crypt32
                     .CryptProtectMemory(
                         _buffer,
                         (uint)_buffer.ByteLength,
@@ -48,8 +47,7 @@ namespace System.Security
             if (
                 _decryptedLength != 0
                 && _encrypted
-                && !Interop
-                    .Crypt32
+                && !Interop.Crypt32
                     .CryptUnprotectMemory(
                         _buffer,
                         (uint)_buffer.ByteLength,

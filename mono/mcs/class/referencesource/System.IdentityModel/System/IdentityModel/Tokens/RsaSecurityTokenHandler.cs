@@ -92,8 +92,7 @@ namespace System.IdentityModel.Tokens
                 )
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new XmlException(
                             SR.GetString(
@@ -116,8 +115,7 @@ namespace System.IdentityModel.Tokens
                 )
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new XmlException(
                             SR.GetString(
@@ -169,8 +167,7 @@ namespace System.IdentityModel.Tokens
             RsaSecurityToken rsaToken = (RsaSecurityToken)token;
             if (rsaToken == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(
                         "token",
                         SR.GetString(SR.ID0018, typeof(RsaSecurityToken))
@@ -256,8 +253,7 @@ namespace System.IdentityModel.Tokens
 
             if (rsaToken == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(
                         "token",
                         SR.GetString(SR.ID0018, typeof(RsaSecurityToken))

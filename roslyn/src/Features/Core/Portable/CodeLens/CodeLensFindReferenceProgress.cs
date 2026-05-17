@@ -80,8 +80,7 @@ namespace Microsoft.CodeAnalysis.CodeLens
                 where
                     !(
                         _queriedNode.Span == candidateSyntaxNode.Span
-                        && _queriedNode
-                            .SyntaxTree
+                        && _queriedNode.SyntaxTree
                             .FilePath
                             .Equals(
                                 candidateSyntaxNode.SyntaxTree.FilePath,
@@ -102,8 +101,7 @@ namespace Microsoft.CodeAnalysis.CodeLens
             // Add remote locations for all the syntax references except the queried syntax node.
             // To query for the partial locations, filter definition locations that occur in source whose span is part of
             // span of any syntax node from Definition.DeclaringSyntaxReferences except for the queried syntax node.
-            var locations = symbol
-                .Locations
+            var locations = symbol.Locations
                 .Intersect(_queriedSymbol.Locations, LocationComparer.Instance)
                 .Any()
                 ? GetPartialLocations(symbol, _aggregateCancellationTokenSource.Token)

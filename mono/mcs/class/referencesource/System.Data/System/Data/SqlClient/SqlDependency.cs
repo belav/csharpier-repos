@@ -292,8 +292,9 @@ namespace System.Data.SqlClient
         private static SqlDependencyProcessDispatcher _processDispatcher = null;
 
         // The following two strings are used for AppDomain.CreateInstance.
-        private static readonly string _assemblyName = (typeof(SqlDependencyProcessDispatcher))
-            .Assembly
+        private static readonly string _assemblyName = (
+            typeof(SqlDependencyProcessDispatcher)
+        ).Assembly
             .FullName;
         private static readonly string _typeName = (
             typeof(SqlDependencyProcessDispatcher)
@@ -305,8 +306,7 @@ namespace System.Data.SqlClient
 
         internal const Bid.ApiGroup NotificationsTracePoints = (Bid.ApiGroup)0x2000;
 
-        private readonly int _objectID = System
-            .Threading
+        private readonly int _objectID = System.Threading
             .Interlocked
             .Increment(ref _objectTypeCount);
         private static int _objectTypeCount; // Bid counter
@@ -613,7 +613,8 @@ namespace System.Data.SqlClient
                                 "<sc.SqlDependency.ObtainProcessDispatcher|DEP|ERR> ERROR - ObjectHandle.Unwrap returned null!\n"
                             );
                             throw ADP.InternalError(
-                                ADP.InternalErrorCode.SqlDependencyObtainProcessDispatcherFailureObjectHandle
+                                ADP.InternalErrorCode
+                                    .SqlDependencyObtainProcessDispatcherFailureObjectHandle
                             );
                         }
                     }
@@ -623,7 +624,8 @@ namespace System.Data.SqlClient
                             "<sc.SqlDependency.ObtainProcessDispatcher|DEP|ERR> ERROR - AppDomain.CreateInstance returned null!\n"
                         );
                         throw ADP.InternalError(
-                            ADP.InternalErrorCode.SqlDependencyProcessDispatcherFailureCreateInstance
+                            ADP.InternalErrorCode
+                                .SqlDependencyProcessDispatcherFailureCreateInstance
                         );
                     }
                 }
@@ -1428,8 +1430,7 @@ namespace System.Data.SqlClient
                     command
                 ); // calculate the string representation of command
 
-                string idString = SqlDependencyPerAppDomainDispatcher
-                    .SingletonInstance
+                string idString = SqlDependencyPerAppDomainDispatcher.SingletonInstance
                     .AddCommandEntry(commandHash, this); // Add to map.
                 Bid.NotificationsTrace(
                     "<sc.SqlDependency.ComputeHashAndAddToDispatcher|DEP> computed id string: '%ls'.\n",

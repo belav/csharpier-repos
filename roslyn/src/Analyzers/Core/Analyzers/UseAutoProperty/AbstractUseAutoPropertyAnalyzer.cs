@@ -207,14 +207,12 @@ internal abstract class AbstractUseAutoPropertyAnalyzer<
                     // Don't bother running on this type unless at least one of its parts has the 'prefer auto props' option
                     // on, and the diagnostic is not suppressed.
                     if (
-                        !namedType
-                            .DeclaringSyntaxReferences
+                        !namedType.DeclaringSyntaxReferences
                             .Select(d => d.SyntaxTree)
                             .Distinct()
                             .Any(tree =>
                             {
-                                var preferAutoProps = context
-                                    .Options
+                                var preferAutoProps = context.Options
                                     .GetAnalyzerOptions(tree)
                                     .PreferAutoProperties;
                                 return preferAutoProps.Value

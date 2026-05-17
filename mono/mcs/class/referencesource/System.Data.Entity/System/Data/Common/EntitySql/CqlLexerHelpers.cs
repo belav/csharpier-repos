@@ -611,8 +611,7 @@ namespace System.Data.Common.EntitySql
                     {
                         throw EntityUtil.EntitySqlError(
                             _query,
-                            System
-                                .Data
+                            System.Data
                                 .Entity
                                 .Strings
                                 .InvalidLiteralFormat("datetime", literalValue),
@@ -638,8 +637,7 @@ namespace System.Data.Common.EntitySql
                     {
                         throw EntityUtil.EntitySqlError(
                             _query,
-                            System
-                                .Data
+                            System.Data
                                 .Entity
                                 .Strings
                                 .InvalidLiteralFormat("datetimeoffset", literalValue),

@@ -173,8 +173,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
 
             s_expanderMask = BitVector32.CreateMask(previousMask);
 
-            var addImageId = Shared
-                .Extensions
+            var addImageId = Shared.Extensions
                 .GlyphExtensions
                 .GetImageCatalogImageId(KnownImageIds.ExpandScope);
             Expander = new CompletionExpander(

@@ -318,8 +318,7 @@ public static class Program
 
             CreateCompilation(
                     code,
-                    parseOptions: CSharpParseOptions
-                        .Default
+                    parseOptions: CSharpParseOptions.Default
                         .WithLanguageVersion(LanguageVersion.CSharp7_1)
                 )
                 .VerifyDiagnostics(
@@ -366,8 +365,7 @@ public static class Program
 
             CreateCompilation(
                     code,
-                    parseOptions: CSharpParseOptions
-                        .Default
+                    parseOptions: CSharpParseOptions.Default
                         .WithLanguageVersion(LanguageVersion.CSharp7_1)
                 )
                 .VerifyDiagnostics(

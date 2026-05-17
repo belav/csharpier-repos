@@ -36330,8 +36330,7 @@ WYpnKQqsKIzlSqv9wwXs7B1iA7ZdvHk3TAnSnLP1o2H7ME05UnZPKCvraONdezon
                 0x0D,
                 0x0A,
             };
-            string tsa = Encoding
-                .Default
+            string tsa = Encoding.Default
                 .GetString(ToStringArray)
                 .Replace("\r\n", Environment.NewLine);
             //Assert.AreEqual (tsa, x509.ToString (true), "ToString(true)");

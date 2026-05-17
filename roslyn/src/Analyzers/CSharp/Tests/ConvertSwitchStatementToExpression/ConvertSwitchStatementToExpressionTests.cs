@@ -895,8 +895,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertSwitchStatementT
                 """;
 
             var analyzer = new ConvertSwitchStatementToExpressionDiagnosticAnalyzer();
-            var descriptor = analyzer
-                .SupportedDiagnostics
+            var descriptor = analyzer.SupportedDiagnostics
                 .First(descriptor =>
                     descriptor.Id == IDEDiagnosticIds.ConvertSwitchStatementToExpressionDiagnosticId
                 );

@@ -584,13 +584,14 @@ namespace System.Workflow.ComponentModel.Compiler
                             workflowErrorLogger.LogMessage(error.ToString() + "\n");
                         }
                         else
-                            this.Log.LogWarning(
-                                error.ErrorText,
-                                error.ErrorNumber,
-                                error.FileName,
-                                error.Line,
-                                error.Column
-                            );
+                            this.Log
+                                .LogWarning(
+                                    error.ErrorText,
+                                    error.ErrorNumber,
+                                    error.FileName,
+                                    error.Line,
+                                    error.Column
+                                );
                     }
                     else
                     {
@@ -602,13 +603,14 @@ namespace System.Workflow.ComponentModel.Compiler
                             workflowErrorLogger.LogMessage(error.ToString() + "\n");
                         }
                         else
-                            this.Log.LogError(
-                                error.ErrorText,
-                                error.ErrorNumber,
-                                error.FileName,
-                                error.Line,
-                                error.Column
-                            );
+                            this.Log
+                                .LogError(
+                                    error.ErrorText,
+                                    error.ErrorNumber,
+                                    error.FileName,
+                                    error.Line,
+                                    error.Column
+                                );
                     }
                 }
 
@@ -641,11 +643,12 @@ namespace System.Workflow.ComponentModel.Compiler
 
                         this.outputFiles[0] = new TaskItem(tempFile);
                         this.temporaryFiles.Add(tempFile);
-                        this.Log.LogMessageFromResources(
-                            MessageImportance.Normal,
-                            "TempCodeFile",
-                            tempFile
-                        );
+                        this.Log
+                            .LogMessageFromResources(
+                                MessageImportance.Normal,
+                                "TempCodeFile",
+                                tempFile
+                            );
                     }
                 }
             }
@@ -661,12 +664,13 @@ namespace System.Workflow.ComponentModel.Compiler
 #if DEBUG
             DumpOutputParameters();
 #endif
-            this.Log.LogMessageFromResources(
-                MessageImportance.Normal,
-                "XomlValidationCompleted",
-                errorCount,
-                warningCount
-            );
+            this.Log
+                .LogMessageFromResources(
+                    MessageImportance.Normal,
+                    "XomlValidationCompleted",
+                    errorCount,
+                    warningCount
+                );
             return (errorCount == 0);
         }
 
@@ -928,8 +932,7 @@ namespace System.Workflow.ComponentModel.Compiler
             {
                 try
                 {
-                    RegistryKey winoeKey = Registry
-                        .LocalMachine
+                    RegistryKey winoeKey = Registry.LocalMachine
                         .OpenSubKey(Helpers.ProductRootRegKey);
                     if (winoeKey != null)
                     {

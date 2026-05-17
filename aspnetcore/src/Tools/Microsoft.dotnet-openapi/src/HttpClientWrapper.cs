@@ -57,8 +57,7 @@ public class HttpResponseMessageWrapper : IHttpResponseMessageWrapper
     public ContentDispositionHeaderValue ContentDisposition()
     {
         if (
-            _response
-                .Headers
+            _response.Headers
                 .TryGetValues(BaseCommand.ContentDispositionHeaderName, out var disposition)
         )
         {

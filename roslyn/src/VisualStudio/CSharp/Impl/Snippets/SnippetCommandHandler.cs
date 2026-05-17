@@ -38,8 +38,7 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Snippets
     [Name("CSharp Snippets")]
     [Order(After = PredefinedCompletionNames.CompletionCommandHandler)]
     [Order(
-        After = Microsoft
-            .CodeAnalysis
+        After = Microsoft.CodeAnalysis
             .Editor
             .PredefinedCommandHandlerNames
             .SignatureHelpAfterCompletion
@@ -158,8 +157,7 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Snippets
         )
         {
             if (
-                !textView
-                    .Properties
+                !textView.Properties
                     .TryGetProperty(
                         typeof(AbstractSnippetExpansionClient),
                         out AbstractSnippetExpansionClient expansionClient
@@ -178,8 +176,7 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Snippets
                     EditorOptionsService
                 );
 
-                textView
-                    .Properties
+                textView.Properties
                     .AddProperty(typeof(AbstractSnippetExpansionClient), expansionClient);
             }
 

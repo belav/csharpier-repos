@@ -18,8 +18,7 @@ namespace System.Runtime.Serialization.Configuration
         {
             if (String.IsNullOrEmpty(typeName))
             {
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -65,8 +64,7 @@ namespace System.Runtime.Serialization.Configuration
             }
             if (!PartialTrustHelpers.IsInFullTrust())
             {
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility

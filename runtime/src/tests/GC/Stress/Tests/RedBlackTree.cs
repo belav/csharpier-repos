@@ -87,8 +87,7 @@ public class Tree
             return 0;
 
         if (expectBalanced && notRed && curr.color == Color.Red)
-            TestLibrary
-                .TestFramework
+            TestLibrary.TestFramework
                 .LogError("", "Rule 5: Red node, with red child, or red right child");
         if (curr.parent != parent)
             TestLibrary.TestFramework.LogError("", "Parent pointer has become corrupt.");

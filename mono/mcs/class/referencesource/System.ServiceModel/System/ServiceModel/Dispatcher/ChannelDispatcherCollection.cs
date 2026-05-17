@@ -41,8 +41,7 @@ namespace System.ServiceModel.Dispatcher
             if (this.service != null)
             {
                 if (this.service.State == CommunicationState.Closed)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ObjectDisposedException(this.service.GetType().ToString())
                         );
@@ -66,8 +65,7 @@ namespace System.ServiceModel.Dispatcher
             if (this.service != null)
             {
                 if (this.service.State == CommunicationState.Closed)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ObjectDisposedException(this.service.GetType().ToString())
                         );

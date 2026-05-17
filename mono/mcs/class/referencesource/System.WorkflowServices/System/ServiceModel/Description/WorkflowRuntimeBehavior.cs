@@ -55,8 +55,7 @@ namespace System.ServiceModel.Description
             {
                 if (value < TimeSpan.Zero)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new ArgumentOutOfRangeException("value"));
                 }
                 this.cachedInstanceExpiration = value;
@@ -116,8 +115,7 @@ namespace System.ServiceModel.Description
             }
             if (serviceHostBase.Extensions == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("serviceHostBase.Extensions");
             }
 
@@ -152,8 +150,7 @@ namespace System.ServiceModel.Description
         {
             if (workflowRuntime.IsStarted)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR2.GetString(SR2.WorkflowRuntimeStartedBeforeHostOpen)
@@ -168,8 +165,7 @@ namespace System.ServiceModel.Description
             {
                 if (workflowSchedulerService != null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR2.GetString(SR2.WrongSchedulerServiceRegistered)

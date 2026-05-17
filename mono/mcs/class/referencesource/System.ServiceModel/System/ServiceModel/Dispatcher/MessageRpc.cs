@@ -751,8 +751,7 @@ namespace System.ServiceModel.Dispatcher
                 this.Host.IncrementBusyCount();
                 if (AspNetEnvironment.Current.TraceIncrementBusyCountIsEnabled())
                 {
-                    AspNetEnvironment
-                        .Current
+                    AspNetEnvironment.Current
                         .TraceIncrementBusyCount(
                             SR.GetString(SR.ServiceBusyCountTrace, this.Operation.Action)
                         );
@@ -767,8 +766,7 @@ namespace System.ServiceModel.Dispatcher
                 this.Host.DecrementBusyCount();
                 if (AspNetEnvironment.Current.TraceDecrementBusyCountIsEnabled())
                 {
-                    AspNetEnvironment
-                        .Current
+                    AspNetEnvironment.Current
                         .TraceDecrementBusyCount(
                             SR.GetString(SR.ServiceBusyCountTrace, this.Operation.Action)
                         );

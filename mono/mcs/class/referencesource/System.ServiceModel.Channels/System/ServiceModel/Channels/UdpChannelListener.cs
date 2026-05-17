@@ -68,8 +68,7 @@ namespace System.ServiceModel.Channels
                     < this.udpTransportBindingElement.MaxReceivedMessageSize
             )
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .ArgumentOutOfRange(
                         "SocketReceiveBufferSize",
                         this.udpTransportBindingElement.SocketReceiveBufferSize,
@@ -368,10 +367,11 @@ namespace System.ServiceModel.Channels
                     if (this.channelInstance != null)
                     {
                         if (
-                            this.channelInstance.TransferReceiveManagerOwnership(
-                                this.socketReceiveManager,
-                                this.duplicateDetector
-                            )
+                            this.channelInstance
+                                .TransferReceiveManagerOwnership(
+                                    this.socketReceiveManager,
+                                    this.duplicateDetector
+                                )
                         )
                         {
                             //don't clean these objects up, they now belong to the channel instance
@@ -569,11 +569,8 @@ namespace System.ServiceModel.Channels
                 }
                 else
                 {
-                    this.channelQueue.EnqueueAndDispatch(
-                        UdpUtility.WrapAsyncException(ex),
-                        null,
-                        false
-                    );
+                    this.channelQueue
+                        .EnqueueAndDispatch(UdpUtility.WrapAsyncException(ex), null, false);
                 }
             }
         }
@@ -582,8 +579,7 @@ namespace System.ServiceModel.Channels
         {
             if (listenUriBaseAddress.IsDefaultPort || listenUriBaseAddress.Port == 0)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .ArgumentOutOfRange(
                         "context.ListenUriBaseAddress",
                         listenUriBaseAddress,
@@ -674,7 +670,8 @@ namespace System.ServiceModel.Channels
                                             UdpUtility.CreateListenSocket(
                                                 address,
                                                 ref port,
-                                                this.udpTransportBindingElement.SocketReceiveBufferSize,
+                                                this.udpTransportBindingElement
+                                                    .SocketReceiveBufferSize,
                                                 this.udpTransportBindingElement.TimeToLive,
                                                 v6Properties.Index,
                                                 allowMulticastLoopback,
@@ -696,7 +693,8 @@ namespace System.ServiceModel.Channels
                                             UdpUtility.CreateListenSocket(
                                                 address,
                                                 ref port,
-                                                this.udpTransportBindingElement.SocketReceiveBufferSize,
+                                                this.udpTransportBindingElement
+                                                    .SocketReceiveBufferSize,
                                                 this.udpTransportBindingElement.TimeToLive,
                                                 v4Properties.Index,
                                                 allowMulticastLoopback,
@@ -711,8 +709,7 @@ namespace System.ServiceModel.Channels
 
                     if (listenSockets.Count == 0)
                     {
-                        throw FxTrace
-                            .Exception
+                        throw FxTrace.Exception
                             .AsError(
                                 new ArgumentException(
                                     SR.UdpFailedToFindMulticastAdapter(this.listenUri)
@@ -723,14 +720,15 @@ namespace System.ServiceModel.Channels
                 else
                 {
                     //unicast - only sends on the default adapter...
-                    this.listenSockets.Add(
-                        UdpUtility.CreateUnicastListenSocket(
-                            address,
-                            ref port,
-                            this.udpTransportBindingElement.SocketReceiveBufferSize,
-                            this.udpTransportBindingElement.TimeToLive
-                        )
-                    );
+                    this.listenSockets
+                        .Add(
+                            UdpUtility.CreateUnicastListenSocket(
+                                address,
+                                ref port,
+                                this.udpTransportBindingElement.SocketReceiveBufferSize,
+                                this.udpTransportBindingElement.TimeToLive
+                            )
+                        );
                 }
             }
             else
@@ -759,7 +757,30 @@ namespace System.ServiceModel.Channels
                     }
                     else
                     {
-                        this.listenSockets.Add(
+                        this.listenSockets
+                            .Add(
+                                UdpUtility.CreateUnicastListenSocket(
+                                    v4Address,
+                                    ref port,
+                                    this.udpTransportBindingElement.SocketReceiveBufferSize,
+                                    this.udpTransportBindingElement.TimeToLive
+                                )
+                            );
+                        this.listenSockets
+                            .Add(
+                                UdpUtility.CreateUnicastListenSocket(
+                                    v6Address,
+                                    ref port,
+                                    this.udpTransportBindingElement.SocketReceiveBufferSize,
+                                    this.udpTransportBindingElement.TimeToLive
+                                )
+                            );
+                    }
+                }
+                else if (ipV4)
+                {
+                    this.listenSockets
+                        .Add(
                             UdpUtility.CreateUnicastListenSocket(
                                 v4Address,
                                 ref port,
@@ -767,7 +788,11 @@ namespace System.ServiceModel.Channels
                                 this.udpTransportBindingElement.TimeToLive
                             )
                         );
-                        this.listenSockets.Add(
+                }
+                else if (ipV6)
+                {
+                    this.listenSockets
+                        .Add(
                             UdpUtility.CreateUnicastListenSocket(
                                 v6Address,
                                 ref port,
@@ -775,29 +800,6 @@ namespace System.ServiceModel.Channels
                                 this.udpTransportBindingElement.TimeToLive
                             )
                         );
-                    }
-                }
-                else if (ipV4)
-                {
-                    this.listenSockets.Add(
-                        UdpUtility.CreateUnicastListenSocket(
-                            v4Address,
-                            ref port,
-                            this.udpTransportBindingElement.SocketReceiveBufferSize,
-                            this.udpTransportBindingElement.TimeToLive
-                        )
-                    );
-                }
-                else if (ipV6)
-                {
-                    this.listenSockets.Add(
-                        UdpUtility.CreateUnicastListenSocket(
-                            v6Address,
-                            ref port,
-                            this.udpTransportBindingElement.SocketReceiveBufferSize,
-                            this.udpTransportBindingElement.TimeToLive
-                        )
-                    );
                 }
             }
 
@@ -853,8 +855,7 @@ namespace System.ServiceModel.Channels
 
                 if (!listenUriBase.IsAbsoluteUri)
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .Argument(
                             "context.ListenUriBaseAddress",
                             SR.RelativeUriNotAllowed(listenUriBase)
@@ -863,8 +864,7 @@ namespace System.ServiceModel.Channels
 
                 if (context.ListenUriMode == ListenUriMode.Unique && !listenUriBase.IsDefaultPort)
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .Argument(
                             "context.ListenUriBaseAddress",
                             SR.DefaultPortRequiredForListenUriModeUnique(listenUriBase)
@@ -876,8 +876,7 @@ namespace System.ServiceModel.Channels
                     == false
                 )
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .Argument(
                             "context.ListenUriBaseAddress",
                             SR.UriSchemeNotSupported(listenUriBase.Scheme)
@@ -886,8 +885,7 @@ namespace System.ServiceModel.Channels
 
                 if (!UdpUtility.IsSupportedHostNameType(listenUriBase.HostNameType))
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .Argument(
                             "context.ListenUriBaseAddress",
                             SR.UnsupportedUriHostNameType(

@@ -69,8 +69,7 @@ public class StartupResponses
                 {
                     context.Response.Headers.Connection = "close";
                     context.Response.Headers.TransferEncoding = "chunked";
-                    return context
-                        .Response
+                    return context.Response
                         .WriteAsync("1A\r\nManually Chunked and Close\r\n0\r\n\r\n");
                 });
             }

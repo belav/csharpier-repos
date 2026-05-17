@@ -238,8 +238,9 @@ namespace System.Workflow.Runtime
                         {
                             try
                             {
-                                e.Handle.WaitOne( /* maybe should have a timeout here?*/
-                                );
+                                e.Handle
+                                    .WaitOne( /* maybe should have a timeout here?*/
+                                    );
                             }
                             catch (ObjectDisposedException)
                             {

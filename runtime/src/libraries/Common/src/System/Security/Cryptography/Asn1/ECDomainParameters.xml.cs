@@ -117,8 +117,7 @@ namespace System.Security.Cryptography.Asn1
             if (tag.HasSameClassAndValue(Asn1Tag.Sequence))
             {
                 System.Security.Cryptography.Asn1.SpecifiedECDomain tmpSpecified;
-                System
-                    .Security
+                System.Security
                     .Cryptography
                     .Asn1
                     .SpecifiedECDomain

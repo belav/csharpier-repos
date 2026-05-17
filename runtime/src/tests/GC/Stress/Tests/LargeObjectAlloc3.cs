@@ -63,8 +63,7 @@ namespace LargeObjectTest
                     try
                     {
                         largeobj = new LargeObject(size);
-                        TestLibrary
-                            .Logging
+                        TestLibrary.Logging
                             .WriteLine("Allocated LargeObject: {0} bytes", size * 4 * 1024 * 50);
                     }
                     catch (Exception e)

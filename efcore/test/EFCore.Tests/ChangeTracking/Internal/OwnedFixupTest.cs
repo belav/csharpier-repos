@@ -615,8 +615,7 @@ public class OwnedFixupTest
         }
         else if (useTrackGraph == true)
         {
-            context
-                .ChangeTracker
+            context.ChangeTracker
                 .TrackGraph(
                     principal,
                     e =>
@@ -789,8 +788,7 @@ public class OwnedFixupTest
         }
         else if (useTrackGraph == true)
         {
-            context
-                .ChangeTracker
+            context.ChangeTracker
                 .TrackGraph(
                     principal,
                     e =>
@@ -958,8 +956,7 @@ public class OwnedFixupTest
         }
         else if (useTrackGraph == true)
         {
-            context
-                .ChangeTracker
+            context.ChangeTracker
                 .TrackGraph(
                     principal,
                     e =>
@@ -5844,8 +5841,7 @@ public class OwnedFixupTest
     {
         EntityState GetEntryState<TEntity>(EquatableEntitiesContext context, string role = null)
             where TEntity : class =>
-            context
-                .ChangeTracker
+            context.ChangeTracker
                 .Entries<TEntity>()
                 .Single(e => role == null || e.Property("Value").CurrentValue.Equals(role))
                 .State;

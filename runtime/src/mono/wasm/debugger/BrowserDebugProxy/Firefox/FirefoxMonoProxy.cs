@@ -458,8 +458,7 @@ internal sealed class FirefoxMonoProxy : MonoProxy
                     }
                 );
 
-                var bp = context
-                    .BreakpointRequests
+                var bp = context.BreakpointRequests
                     .Where(request => request.Value.CompareRequest(req))
                     .FirstOrDefault();
 
@@ -516,8 +515,7 @@ internal sealed class FirefoxMonoProxy : MonoProxy
                     {
                         foreach (var bp in req.Locations)
                         {
-                            var breakpoint_removed = await context
-                                .SdbAgent
+                            var breakpoint_removed = await context.SdbAgent
                                 .RemoveBreakpoint(bp.RemoteId, token);
                             if (breakpoint_removed)
                             {
@@ -1038,8 +1036,7 @@ internal sealed class FirefoxMonoProxy : MonoProxy
         commandParamsWriter.Write(thread_id);
         commandParamsWriter.Write(0);
         commandParamsWriter.Write(1);
-        var retDebuggerCmdReader = await context
-            .SdbAgent
+        var retDebuggerCmdReader = await context.SdbAgent
             .SendDebuggerAgentCommand(CmdThread.GetFrameInfo, commandParamsWriter, token);
         var frame_count = retDebuggerCmdReader.ReadInt32();
         if (frame_count > 0)
@@ -1112,8 +1109,7 @@ internal sealed class FirefoxMonoProxy : MonoProxy
         commandParamsWriter.Write(context.ThreadId);
         commandParamsWriter.Write(0);
         commandParamsWriter.Write(-1);
-        var retDebuggerCmdReader = await context
-            .SdbAgent
+        var retDebuggerCmdReader = await context.SdbAgent
             .SendDebuggerAgentCommand(CmdThread.GetFrameInfo, commandParamsWriter, token);
         var frame_count = retDebuggerCmdReader.ReadInt32();
         for (int j = 0; j < frame_count; j++)
@@ -1122,8 +1118,7 @@ internal sealed class FirefoxMonoProxy : MonoProxy
             var methodId = retDebuggerCmdReader.ReadInt32();
             var il_pos = retDebuggerCmdReader.ReadInt32();
             retDebuggerCmdReader.ReadByte();
-            MethodInfoWithDebugInformation method = await context
-                .SdbAgent
+            MethodInfoWithDebugInformation method = await context.SdbAgent
                 .GetMethodInfo(methodId, token);
             if (method is null)
                 continue;

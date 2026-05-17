@@ -302,8 +302,7 @@ namespace Microsoft.CodeAnalysis.CodeCleanup
                 return document;
             }
 
-            var fixAllService = document
-                .Project
+            var fixAllService = document.Project
                 .Solution
                 .Services
                 .GetRequiredService<IFixAllGetFixesService>();
@@ -413,8 +412,7 @@ namespace Microsoft.CodeAnalysis.CodeCleanup
                 Document updatedDocument
             )
             {
-                var solutionChanges = updatedDocument
-                    .Project
+                var solutionChanges = updatedDocument.Project
                     .Solution
                     .GetChanges(currentDocument.Project.Solution);
                 return solutionChanges.GetAddedProjects().Any()

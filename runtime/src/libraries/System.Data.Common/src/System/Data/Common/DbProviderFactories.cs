@@ -119,8 +119,7 @@ namespace System.Data.Common
             {
                 Locale = CultureInfo.InvariantCulture,
             };
-            toReturn
-                .Columns
+            toReturn.Columns
                 .AddRange(
                     new[]
                     {
@@ -135,8 +134,8 @@ namespace System.Data.Common
             {
                 DataRow newRow = toReturn.NewRow();
                 newRow[InvariantNameColumnName] = kvp.Key;
-                newRow[AssemblyQualifiedNameColumnName] =
-                    kvp.Value.FactoryTypeAssemblyQualifiedName;
+                newRow[AssemblyQualifiedNameColumnName] = kvp.Value
+                    .FactoryTypeAssemblyQualifiedName;
                 newRow[NameColumnName] = string.Empty;
                 newRow[DescriptionColumnName] = string.Empty;
                 toReturn.AddRow(newRow);

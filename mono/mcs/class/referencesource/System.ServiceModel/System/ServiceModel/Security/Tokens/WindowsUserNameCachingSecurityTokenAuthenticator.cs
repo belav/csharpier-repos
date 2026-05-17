@@ -117,8 +117,7 @@ namespace System.ServiceModel.Security.Tokens
             this.userName = userName;
             this.passwordHash = ComputeHMACSHA256Hash(password, salt);
             this.salt = salt;
-            this.authorizationPolicies = System
-                .IdentityModel
+            this.authorizationPolicies = System.IdentityModel
                 .SecurityUtils
                 .CloneAuthorizationPoliciesIfNecessary(authorizationPolicies);
         }
@@ -136,16 +135,14 @@ namespace System.ServiceModel.Security.Tokens
 
         public ReadOnlyCollection<IAuthorizationPolicy> GetAuthorizationPolicies()
         {
-            return System
-                .IdentityModel
+            return System.IdentityModel
                 .SecurityUtils
                 .CloneAuthorizationPoliciesIfNecessary(this.authorizationPolicies);
         }
 
         public void Dispose()
         {
-            System
-                .IdentityModel
+            System.IdentityModel
                 .SecurityUtils
                 .DisposeAuthorizationPoliciesIfNecessary(this.authorizationPolicies);
         }

@@ -32,8 +32,7 @@ namespace System.Security.Claims
                 string upn = x509Certificate.GetNameInfo(X509NameType.UpnName, false);
                 if (string.IsNullOrEmpty(upn))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new SecurityTokenValidationException(
                                 SR.GetString(SR.ID4067, X509Util.GetCertificateId(x509Certificate))
@@ -64,8 +63,7 @@ namespace System.Security.Claims
                     // Complain if we already found a UPN claim
                     if (upn != null)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(new SecurityTokenException(SR.GetString(SR.ID1053)));
                     }
                     upn = claim.Value;
@@ -74,8 +72,7 @@ namespace System.Security.Claims
 
             if (string.IsNullOrEmpty(upn))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new SecurityTokenException(SR.GetString(SR.ID1054)));
             }
             return upn;

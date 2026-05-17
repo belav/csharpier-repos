@@ -446,8 +446,7 @@ namespace System.Runtime.Serialization
                 }
                 // enforce that enum value was completely parsed
                 if (longValue != 0)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             XmlObjectSerializer.CreateSerializationException(
                                 SR.GetString(
@@ -462,8 +461,7 @@ namespace System.Runtime.Serialization
                     writer.WriteString(ChildElementNames[zeroIndex].Value);
             }
             else
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         XmlObjectSerializer.CreateSerializationException(
                             SR.GetString(
@@ -512,8 +510,7 @@ namespace System.Runtime.Serialization
             else
             {
                 if (stringValue.Length == 0)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             XmlObjectSerializer.CreateSerializationException(
                                 SR.GetString(
@@ -544,8 +541,7 @@ namespace System.Runtime.Serialization
                     return Values[i];
                 }
             }
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(
                     XmlObjectSerializer.CreateSerializationException(
                         SR.GetString(

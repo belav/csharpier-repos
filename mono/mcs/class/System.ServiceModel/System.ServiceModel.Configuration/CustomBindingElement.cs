@@ -197,8 +197,7 @@ namespace System.ServiceModel.Configuration
         )
         {
             //ExtensionElementCollection extensions = ((ExtensionsSection) EvaluationContext.GetSection ("system.serviceModel/extensions")).BindingElementExtensions;
-            ExtensionElementCollection extensions = ConfigUtil
-                .ExtensionsSection
+            ExtensionElementCollection extensions = ConfigUtil.ExtensionsSection
                 .BindingElementExtensions;
 
             ExtensionElement extension = extensions[elementName];

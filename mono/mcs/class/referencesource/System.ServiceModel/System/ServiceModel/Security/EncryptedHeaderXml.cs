@@ -16,10 +16,10 @@ namespace System.ServiceModel.Security
 
     sealed class EncryptedHeaderXml
     {
-        internal static readonly XmlDictionaryString ElementName =
-            XD.SecurityXXX2005Dictionary.EncryptedHeader;
-        internal static readonly XmlDictionaryString NamespaceUri =
-            XD.SecurityXXX2005Dictionary.Namespace;
+        internal static readonly XmlDictionaryString ElementName = XD.SecurityXXX2005Dictionary
+            .EncryptedHeader;
+        internal static readonly XmlDictionaryString NamespaceUri = XD.SecurityXXX2005Dictionary
+            .Namespace;
         const string Prefix = SecurityXXX2005Strings.Prefix;
 
         string id;

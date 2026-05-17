@@ -234,8 +234,7 @@ namespace System.ServiceModel.PeerResolvers
             {
                 if (value < TimeSpan.Zero)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentOutOfRangeException(
                                 "value",
@@ -247,8 +246,7 @@ namespace System.ServiceModel.PeerResolvers
 
                 if (TimeoutHelper.IsTooLarge(value))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentOutOfRangeException(
                                 "value",
@@ -273,8 +271,7 @@ namespace System.ServiceModel.PeerResolvers
             {
                 if (value < TimeSpan.Zero)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentOutOfRangeException(
                                 "value",
@@ -286,8 +283,7 @@ namespace System.ServiceModel.PeerResolvers
 
                 if (TimeoutHelper.IsTooLarge(value))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentOutOfRangeException(
                                 "value",
@@ -402,8 +398,7 @@ namespace System.ServiceModel.PeerResolvers
         {
             if (registerInfo == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument("registerInfo", SR.GetString(SR.PeerNullRegistrationInfo));
             }
 
@@ -411,8 +406,7 @@ namespace System.ServiceModel.PeerResolvers
 
             if (!registerInfo.HasBody() || String.IsNullOrEmpty(registerInfo.MeshId))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(
                         "registerInfo",
                         SR.GetString(SR.PeerInvalidMessageBody, registerInfo)
@@ -425,8 +419,7 @@ namespace System.ServiceModel.PeerResolvers
         {
             if (updateInfo == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument("updateInfo", SR.GetString(SR.PeerNullRegistrationInfo));
             }
 
@@ -438,8 +431,7 @@ namespace System.ServiceModel.PeerResolvers
                 || updateInfo.NodeAddress == null
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(
                         "updateInfo",
                         SR.GetString(SR.PeerInvalidMessageBody, updateInfo)
@@ -497,8 +489,7 @@ namespace System.ServiceModel.PeerResolvers
         {
             if (resolveInfo == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument("resolveInfo", SR.GetString(SR.PeerNullResolveInfo));
             }
 
@@ -506,8 +497,7 @@ namespace System.ServiceModel.PeerResolvers
 
             if (!resolveInfo.HasBody())
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(
                         "resolveInfo",
                         SR.GetString(SR.PeerInvalidMessageBody, resolveInfo)
@@ -568,8 +558,7 @@ namespace System.ServiceModel.PeerResolvers
         {
             if (unregisterInfo == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(
                         "unregisterinfo",
                         SR.GetString(SR.PeerNullRegistrationInfo)
@@ -584,8 +573,7 @@ namespace System.ServiceModel.PeerResolvers
                 || unregisterInfo.RegistrationId == Guid.Empty
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(
                         "unregisterInfo",
                         SR.GetString(SR.PeerInvalidMessageBody, unregisterInfo)
@@ -601,12 +589,10 @@ namespace System.ServiceModel.PeerResolvers
             {
                 LiteLock.Acquire(out ll, meshEntry.Gate, true);
                 if (
-                    !meshEntry
-                        .EntryTable
+                    !meshEntry.EntryTable
                         .TryGetValue(unregisterInfo.RegistrationId, out registration)
                 )
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgument(
                             "unregisterInfo",
                             SR.GetString(SR.PeerInvalidMessageBody, unregisterInfo)
@@ -626,8 +612,7 @@ namespace System.ServiceModel.PeerResolvers
         {
             if (refreshInfo == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument("refreshInfo", SR.GetString(SR.PeerNullRefreshInfo));
             }
 
@@ -639,8 +624,7 @@ namespace System.ServiceModel.PeerResolvers
                 || refreshInfo.RegistrationId == Guid.Empty
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(
                         "refreshInfo",
                         SR.GetString(SR.PeerInvalidMessageBody, refreshInfo)
@@ -686,15 +670,13 @@ namespace System.ServiceModel.PeerResolvers
         {
             ThrowIfOpened("Open");
             if (this.refreshInterval <= TimeSpan.Zero)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(
                         "RefreshInterval",
                         SR.GetString(SR.RefreshIntervalMustBeGreaterThanZero, this.refreshInterval)
                     );
             if (this.CleanupInterval <= TimeSpan.Zero)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(
                         "CleanupInterval",
                         SR.GetString(SR.CleanupIntervalMustBeGreaterThanZero, this.cleanupInterval)

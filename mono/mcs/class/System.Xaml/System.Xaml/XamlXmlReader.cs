@@ -587,8 +587,7 @@ namespace System.Xaml
 
         static XamlDirective FindStandardDirective(string name, AllowedMemberLocations loc)
         {
-            return XamlLanguage
-                .AllDirectives
+            return XamlLanguage.AllDirectives
                 .FirstOrDefault(dd => (dd.AllowedLocation & loc) != 0 && dd.Name == name);
         }
 

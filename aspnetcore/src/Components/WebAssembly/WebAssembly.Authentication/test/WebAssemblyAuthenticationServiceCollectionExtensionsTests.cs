@@ -41,9 +41,10 @@ public class WebAssemblyAuthenticationServiceCollectionExtensionsTests
         builder.Services.AddApiAuthorization();
         var host = builder.Build();
 
-        var options = host.Services.GetRequiredService<
-            IOptionsSnapshot<RemoteAuthenticationOptions<ApiAuthorizationProviderOptions>>
-        >();
+        var options = host.Services
+            .GetRequiredService<
+                IOptionsSnapshot<RemoteAuthenticationOptions<ApiAuthorizationProviderOptions>>
+            >();
 
         var paths = options.Value.AuthenticationPaths;
 
@@ -79,8 +80,7 @@ public class WebAssemblyAuthenticationServiceCollectionExtensionsTests
     {
         var builder = new WebAssemblyHostBuilder(new TestInternalJSImportMethods(), JsonOptions);
         var calls = 0;
-        builder
-            .Services
+        builder.Services
             .AddApiAuthorization(options =>
             {
                 calls++;
@@ -88,9 +88,10 @@ public class WebAssemblyAuthenticationServiceCollectionExtensionsTests
 
         var host = builder.Build();
 
-        var options = host.Services.GetRequiredService<
-            IOptionsSnapshot<RemoteAuthenticationOptions<ApiAuthorizationProviderOptions>>
-        >();
+        var options = host.Services
+            .GetRequiredService<
+                IOptionsSnapshot<RemoteAuthenticationOptions<ApiAuthorizationProviderOptions>>
+            >();
 
         var user = options.Value.UserOptions;
         Assert.Equal(
@@ -118,9 +119,10 @@ public class WebAssemblyAuthenticationServiceCollectionExtensionsTests
 
         var host = builder.Build();
 
-        var options = host.Services.GetRequiredService<
-            IOptionsSnapshot<RemoteAuthenticationOptions<ApiAuthorizationProviderOptions>>
-        >();
+        var options = host.Services
+            .GetRequiredService<
+                IOptionsSnapshot<RemoteAuthenticationOptions<ApiAuthorizationProviderOptions>>
+            >();
 
         var user = options.Value.UserOptions;
         // Make sure that the defaults are applied on this overload
@@ -131,9 +133,8 @@ public class WebAssemblyAuthenticationServiceCollectionExtensionsTests
             options.Value.ProviderOptions.ConfigurationEndpoint
         );
 
-        var authenticationService = host.Services.GetService<
-            IRemoteAuthenticationService<TestAuthenticationState>
-        >();
+        var authenticationService = host.Services
+            .GetService<IRemoteAuthenticationService<TestAuthenticationState>>();
         Assert.NotNull(authenticationService);
         Assert.IsType<
             RemoteAuthenticationService<
@@ -154,9 +155,10 @@ public class WebAssemblyAuthenticationServiceCollectionExtensionsTests
 
         var host = builder.Build();
 
-        var options = host.Services.GetRequiredService<
-            IOptionsSnapshot<RemoteAuthenticationOptions<ApiAuthorizationProviderOptions>>
-        >();
+        var options = host.Services
+            .GetRequiredService<
+                IOptionsSnapshot<RemoteAuthenticationOptions<ApiAuthorizationProviderOptions>>
+            >();
 
         var user = options.Value.UserOptions;
         // Make sure that the defaults are applied on this overload
@@ -167,9 +169,8 @@ public class WebAssemblyAuthenticationServiceCollectionExtensionsTests
             options.Value.ProviderOptions.ConfigurationEndpoint
         );
 
-        var authenticationService = host.Services.GetService<
-            IRemoteAuthenticationService<TestAuthenticationState>
-        >();
+        var authenticationService = host.Services
+            .GetService<IRemoteAuthenticationService<TestAuthenticationState>>();
         Assert.NotNull(authenticationService);
         Assert.IsType<
             RemoteAuthenticationService<
@@ -185,15 +186,15 @@ public class WebAssemblyAuthenticationServiceCollectionExtensionsTests
     {
         var builder = new WebAssemblyHostBuilder(new TestInternalJSImportMethods(), JsonOptions);
         var calls = 0;
-        builder
-            .Services
+        builder.Services
             .AddApiAuthorization<TestAuthenticationState, TestAccount>(options => calls++);
 
         var host = builder.Build();
 
-        var options = host.Services.GetRequiredService<
-            IOptionsSnapshot<RemoteAuthenticationOptions<ApiAuthorizationProviderOptions>>
-        >();
+        var options = host.Services
+            .GetRequiredService<
+                IOptionsSnapshot<RemoteAuthenticationOptions<ApiAuthorizationProviderOptions>>
+            >();
 
         var user = options.Value.UserOptions;
         // Make sure that the defaults are applied on this overload
@@ -204,9 +205,8 @@ public class WebAssemblyAuthenticationServiceCollectionExtensionsTests
             options.Value.ProviderOptions.ConfigurationEndpoint
         );
 
-        var authenticationService = host.Services.GetService<
-            IRemoteAuthenticationService<TestAuthenticationState>
-        >();
+        var authenticationService = host.Services
+            .GetService<IRemoteAuthenticationService<TestAuthenticationState>>();
         Assert.NotNull(authenticationService);
         Assert.IsType<
             RemoteAuthenticationService<
@@ -227,9 +227,10 @@ public class WebAssemblyAuthenticationServiceCollectionExtensionsTests
 
         var host = builder.Build();
 
-        var options = host.Services.GetRequiredService<
-            IOptionsSnapshot<RemoteAuthenticationOptions<ApiAuthorizationProviderOptions>>
-        >();
+        var options = host.Services
+            .GetRequiredService<
+                IOptionsSnapshot<RemoteAuthenticationOptions<ApiAuthorizationProviderOptions>>
+            >();
 
         var user = options.Value.UserOptions;
         // Make sure that the defaults are applied on this overload
@@ -240,9 +241,8 @@ public class WebAssemblyAuthenticationServiceCollectionExtensionsTests
             options.Value.ProviderOptions.ConfigurationEndpoint
         );
 
-        var authenticationService = host.Services.GetService<
-            IRemoteAuthenticationService<TestAuthenticationState>
-        >();
+        var authenticationService = host.Services
+            .GetService<IRemoteAuthenticationService<TestAuthenticationState>>();
         Assert.NotNull(authenticationService);
         Assert.IsType<
             RemoteAuthenticationService<
@@ -257,8 +257,7 @@ public class WebAssemblyAuthenticationServiceCollectionExtensionsTests
     public void ApiAuthorizationOptions_DefaultsCanBeOverriden()
     {
         var builder = new WebAssemblyHostBuilder(new TestInternalJSImportMethods(), JsonOptions);
-        builder
-            .Services
+        builder.Services
             .AddApiAuthorization(options =>
             {
                 options.AuthenticationPaths.LogInPath = "a";
@@ -281,9 +280,10 @@ public class WebAssemblyAuthenticationServiceCollectionExtensionsTests
 
         var host = builder.Build();
 
-        var options = host.Services.GetRequiredService<
-            IOptionsSnapshot<RemoteAuthenticationOptions<ApiAuthorizationProviderOptions>>
-        >();
+        var options = host.Services
+            .GetRequiredService<
+                IOptionsSnapshot<RemoteAuthenticationOptions<ApiAuthorizationProviderOptions>>
+            >();
 
         var paths = options.Value.AuthenticationPaths;
 
@@ -312,15 +312,15 @@ public class WebAssemblyAuthenticationServiceCollectionExtensionsTests
     public void OidcOptions_ConfigurationDefaultsGetApplied()
     {
         var builder = new WebAssemblyHostBuilder(new TestInternalJSImportMethods(), JsonOptions);
-        builder
-            .Services
+        builder.Services
             .Replace(ServiceDescriptor.Singleton<NavigationManager, TestNavigationManager>());
         builder.Services.AddOidcAuthentication(options => { });
         var host = builder.Build();
 
-        var options = host.Services.GetRequiredService<
-            IOptionsSnapshot<RemoteAuthenticationOptions<OidcProviderOptions>>
-        >();
+        var options = host.Services
+            .GetRequiredService<
+                IOptionsSnapshot<RemoteAuthenticationOptions<OidcProviderOptions>>
+            >();
 
         var paths = options.Value.AuthenticationPaths;
 
@@ -361,8 +361,7 @@ public class WebAssemblyAuthenticationServiceCollectionExtensionsTests
     public void OidcOptions_DefaultsCanBeOverriden()
     {
         var builder = new WebAssemblyHostBuilder(new TestInternalJSImportMethods(), JsonOptions);
-        builder
-            .Services
+        builder.Services
             .AddOidcAuthentication(options =>
             {
                 options.AuthenticationPaths.LogInPath = "a";
@@ -391,9 +390,10 @@ public class WebAssemblyAuthenticationServiceCollectionExtensionsTests
 
         var host = builder.Build();
 
-        var options = host.Services.GetRequiredService<
-            IOptionsSnapshot<RemoteAuthenticationOptions<OidcProviderOptions>>
-        >();
+        var options = host.Services
+            .GetRequiredService<
+                IOptionsSnapshot<RemoteAuthenticationOptions<OidcProviderOptions>>
+            >();
 
         var paths = options.Value.AuthenticationPaths;
 
@@ -434,17 +434,17 @@ public class WebAssemblyAuthenticationServiceCollectionExtensionsTests
         var calls = 0;
 
         builder.Services.AddOidcAuthentication(options => calls++);
-        builder
-            .Services
+        builder.Services
             .Replace(
                 ServiceDescriptor.Singleton(typeof(NavigationManager), new TestNavigationManager())
             );
 
         var host = builder.Build();
 
-        var options = host.Services.GetRequiredService<
-            IOptionsSnapshot<RemoteAuthenticationOptions<OidcProviderOptions>>
-        >();
+        var options = host.Services
+            .GetRequiredService<
+                IOptionsSnapshot<RemoteAuthenticationOptions<OidcProviderOptions>>
+            >();
         Assert.Equal("name", options.Value.UserOptions.NameClaim);
 
         Assert.Equal(1, calls);
@@ -456,30 +456,28 @@ public class WebAssemblyAuthenticationServiceCollectionExtensionsTests
         var builder = new WebAssemblyHostBuilder(new TestInternalJSImportMethods(), JsonOptions);
         var calls = 0;
 
-        builder
-            .Services
+        builder.Services
             .AddOidcAuthentication<TestAuthenticationState>(options =>
                 options.ProviderOptions.Authority = (++calls).ToString(CultureInfo.InvariantCulture)
             );
-        builder
-            .Services
+        builder.Services
             .Replace(
                 ServiceDescriptor.Singleton(typeof(NavigationManager), new TestNavigationManager())
             );
 
         var host = builder.Build();
 
-        var options = host.Services.GetRequiredService<
-            IOptionsSnapshot<RemoteAuthenticationOptions<OidcProviderOptions>>
-        >();
+        var options = host.Services
+            .GetRequiredService<
+                IOptionsSnapshot<RemoteAuthenticationOptions<OidcProviderOptions>>
+            >();
         // Make sure options are applied
         Assert.Equal("name", options.Value.UserOptions.NameClaim);
 
         Assert.Equal("1", options.Value.ProviderOptions.Authority);
 
-        var authenticationService = host.Services.GetService<
-            IRemoteAuthenticationService<TestAuthenticationState>
-        >();
+        var authenticationService = host.Services
+            .GetService<IRemoteAuthenticationService<TestAuthenticationState>>();
         Assert.NotNull(authenticationService);
         Assert.IsType<
             RemoteAuthenticationService<
@@ -496,30 +494,28 @@ public class WebAssemblyAuthenticationServiceCollectionExtensionsTests
         var builder = new WebAssemblyHostBuilder(new TestInternalJSImportMethods(), JsonOptions);
         var calls = 0;
 
-        builder
-            .Services
+        builder.Services
             .AddOidcAuthentication<TestAuthenticationState, TestAccount>(options =>
                 options.ProviderOptions.Authority = (++calls).ToString(CultureInfo.InvariantCulture)
             );
-        builder
-            .Services
+        builder.Services
             .Replace(
                 ServiceDescriptor.Singleton(typeof(NavigationManager), new TestNavigationManager())
             );
 
         var host = builder.Build();
 
-        var options = host.Services.GetRequiredService<
-            IOptionsSnapshot<RemoteAuthenticationOptions<OidcProviderOptions>>
-        >();
+        var options = host.Services
+            .GetRequiredService<
+                IOptionsSnapshot<RemoteAuthenticationOptions<OidcProviderOptions>>
+            >();
         // Make sure options are applied
         Assert.Equal("name", options.Value.UserOptions.NameClaim);
 
         Assert.Equal("1", options.Value.ProviderOptions.Authority);
 
-        var authenticationService = host.Services.GetService<
-            IRemoteAuthenticationService<TestAuthenticationState>
-        >();
+        var authenticationService = host.Services
+            .GetService<IRemoteAuthenticationService<TestAuthenticationState>>();
         Assert.NotNull(authenticationService);
         Assert.IsType<
             RemoteAuthenticationService<TestAuthenticationState, TestAccount, OidcProviderOptions>
@@ -533,11 +529,9 @@ public class WebAssemblyAuthenticationServiceCollectionExtensionsTests
 
         var calls = 0;
 
-        builder
-            .Services
+        builder.Services
             .AddOidcAuthentication<TestAuthenticationState, TestAccount>(options => { });
-        builder
-            .Services
+        builder.Services
             .Replace(
                 ServiceDescriptor.Scoped(
                     typeof(NavigationManager),
@@ -554,13 +548,13 @@ public class WebAssemblyAuthenticationServiceCollectionExtensionsTests
         using var scope = host.Services.CreateScope();
 
         // from the root scope.
-        var rootOptions = host.Services.GetRequiredService<
-            IOptionsSnapshot<RemoteAuthenticationOptions<OidcProviderOptions>>
-        >();
+        var rootOptions = host.Services
+            .GetRequiredService<
+                IOptionsSnapshot<RemoteAuthenticationOptions<OidcProviderOptions>>
+            >();
 
         // from the created scope
-        var scopedOptions = scope
-            .ServiceProvider
+        var scopedOptions = scope.ServiceProvider
             .GetRequiredService<
                 IOptionsSnapshot<RemoteAuthenticationOptions<OidcProviderOptions>>
             >();

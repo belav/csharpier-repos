@@ -77,8 +77,7 @@ namespace System.ComponentModel.Composition.Hosting
                             ._scopeManager
                             .CreateChildContainer(filteredScopeDefinition);
 
-                        var export = childContainer
-                            .CatalogExportProvider
+                        var export = childContainer.CatalogExportProvider
                             .CreateExport(
                                 this._scopeFactoryExport.UnderlyingPartDefinition,
                                 this._scopeFactoryExport.UnderlyingExportDefinition,

@@ -95,8 +95,7 @@ namespace System.Net.Http
             byte[] message = MimeMultipartParserTests.CreateBuffer(boundary, entities.ToArray());
             HttpContent result = new ByteArrayContent(message);
             var contentType = new MediaTypeHeaderValue("multipart/form-data");
-            contentType
-                .Parameters
+            contentType.Parameters
                 .Add(new NameValueHeaderValue("boundary", String.Format("\"{0}\"", boundary)));
             result.Headers.ContentType = contentType;
             return result;
@@ -111,8 +110,7 @@ namespace System.Net.Http
                 Assert.NotNull(content.Headers);
                 Assert.Equal(4, content.Headers.Count());
 
-                IEnumerable<string> parsedValues = content
-                    .Headers
+                IEnumerable<string> parsedValues = content.Headers
                     .GetValues(String.Format("N{0}", cnt));
                 string parsedValue = Assert.Single(parsedValues);
                 Assert.Equal(String.Format("V{0}", cnt), parsedValue);

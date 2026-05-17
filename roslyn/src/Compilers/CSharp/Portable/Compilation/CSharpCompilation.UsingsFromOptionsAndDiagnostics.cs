@@ -77,8 +77,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                             new NamespaceOrTypeAndUsingDirective(
                                 imported,
                                 null,
-                                dependencies: directiveDiagnostics
-                                    .DependenciesBag
+                                dependencies: directiveDiagnostics.DependenciesBag
                                     .ToImmutableArray()
                             )
                         );

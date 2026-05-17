@@ -95,8 +95,7 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         [Fact]
         public void EnumerateBuilderWhileMutating()
         {
-            var builder = ImmutableSegmentedDictionary<int, string?>
-                .Empty
+            var builder = ImmutableSegmentedDictionary<int, string?>.Empty
                 .AddRange(
                     Enumerable.Range(1, 10).Select(n => new KeyValuePair<int, string?>(n, null))
                 )
@@ -289,10 +288,11 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             DebuggerAttributeInfo info = DebuggerAttributes.ValidateDebuggerTypeProxyProperties(
                 builder
             );
-            PropertyInfo itemProperty = info.Properties.Single(pr =>
-                pr.GetCustomAttribute<DebuggerBrowsableAttribute>()!.State
-                == DebuggerBrowsableState.RootHidden
-            );
+            PropertyInfo itemProperty = info.Properties
+                .Single(pr =>
+                    pr.GetCustomAttribute<DebuggerBrowsableAttribute>()!.State
+                    == DebuggerBrowsableState.RootHidden
+                );
             KeyValuePair<int, string>[]? items =
                 itemProperty.GetValue(info.Instance) as KeyValuePair<int, string>[];
             Assert.Equal(builder, items);

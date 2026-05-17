@@ -14,8 +14,7 @@ namespace System.Web.Http.Cors.Test.Controllers
             HttpControllerDescriptor controllerDescriptor
         )
         {
-            controllerSettings
-                .Services
+            controllerSettings.Services
                 .Replace(typeof(IHttpActionSelector), new ExternalActionSelector());
         }
 

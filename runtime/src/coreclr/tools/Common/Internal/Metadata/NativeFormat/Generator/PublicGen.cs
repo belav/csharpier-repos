@@ -67,8 +67,7 @@ class PublicGen : CsWriter
                 baseTypeName: "byte",
                 members: new MemberDef[] { new MemberDef(name: "Null", value: "0x0") }
                     .Concat(
-                        SchemaDef
-                            .HandleSchema
+                        SchemaDef.HandleSchema
                             .Select(
                                 (name, index) =>
                                     new MemberDef(name: name, value: $"0x{index + 1:x}")

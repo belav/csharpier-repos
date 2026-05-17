@@ -460,15 +460,15 @@ namespace Microsoft.Extensions.Http.Logging
 
             Assert.Equal(
                 DefaultLoggerEventsPerRequest,
-                sink.Writes.Count(w =>
-                    w.LoggerName.StartsWith("System.Net.Http.HttpClient.Production")
-                )
+                sink.Writes
+                    .Count(w => w.LoggerName.StartsWith("System.Net.Http.HttpClient.Production"))
             );
             Assert.Equal(
                 0,
-                sink.Writes.Count(w =>
-                    w.LoggerName.StartsWith("System.Net.Http.HttpClient.TestLoggerProvider")
-                )
+                sink.Writes
+                    .Count(w =>
+                        w.LoggerName.StartsWith("System.Net.Http.HttpClient.TestLoggerProvider")
+                    )
             );
         }
 

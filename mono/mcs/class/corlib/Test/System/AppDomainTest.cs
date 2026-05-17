@@ -285,8 +285,7 @@ namespace MonoTests.System
 
             try
             {
-                AppDomain
-                    .CurrentDomain
+                AppDomain.CurrentDomain
                     .DefineDynamicAssembly(
                         name,
                         AssemblyBuilderAccess.Run | (AssemblyBuilderAccess)666
@@ -350,8 +349,7 @@ namespace MonoTests.System
         {
             try
             {
-                AppDomain
-                    .CurrentDomain
+                AppDomain.CurrentDomain
                     .DefineDynamicAssembly((AssemblyName)null, AssemblyBuilderAccess.Run);
                 Assert.Fail("#A1");
             }
@@ -405,8 +403,7 @@ namespace MonoTests.System
 
             try
             {
-                AppDomain
-                    .CurrentDomain
+                AppDomain.CurrentDomain
                     .DefineDynamicAssembly(
                         name,
                         AssemblyBuilderAccess.Run | (AssemblyBuilderAccess)666,
@@ -448,8 +445,7 @@ namespace MonoTests.System
                 name.Name = invalid_name;
                 try
                 {
-                    AppDomain
-                        .CurrentDomain
+                    AppDomain.CurrentDomain
                         .DefineDynamicAssembly(
                             name,
                             AssemblyBuilderAccess.Run,
@@ -477,8 +473,7 @@ namespace MonoTests.System
         {
             try
             {
-                AppDomain
-                    .CurrentDomain
+                AppDomain.CurrentDomain
                     .DefineDynamicAssembly(
                         (AssemblyName)null,
                         AssemblyBuilderAccess.Run,
@@ -499,8 +494,7 @@ namespace MonoTests.System
 
             try
             {
-                AppDomain
-                    .CurrentDomain
+                AppDomain.CurrentDomain
                     .DefineDynamicAssembly(
                         name,
                         AssemblyBuilderAccess.Run,
@@ -521,8 +515,7 @@ namespace MonoTests.System
 
             try
             {
-                AppDomain
-                    .CurrentDomain
+                AppDomain.CurrentDomain
                     .DefineDynamicAssembly(
                         name,
                         AssemblyBuilderAccess.Run,
@@ -548,8 +541,7 @@ namespace MonoTests.System
 
             try
             {
-                AppDomain
-                    .CurrentDomain
+                AppDomain.CurrentDomain
                     .DefineDynamicAssembly(
                         name,
                         AssemblyBuilderAccess.Run | (AssemblyBuilderAccess)666,
@@ -591,8 +583,7 @@ namespace MonoTests.System
                 name.Name = invalid_name;
                 try
                 {
-                    AppDomain
-                        .CurrentDomain
+                    AppDomain.CurrentDomain
                         .DefineDynamicAssembly(name, AssemblyBuilderAccess.Run, Path.GetTempPath());
                     Assert.Fail("#1:" + invalid_name);
                 }
@@ -616,8 +607,7 @@ namespace MonoTests.System
         {
             try
             {
-                AppDomain
-                    .CurrentDomain
+                AppDomain.CurrentDomain
                     .DefineDynamicAssembly(
                         (AssemblyName)null,
                         AssemblyBuilderAccess.Run,
@@ -638,8 +628,7 @@ namespace MonoTests.System
 
             try
             {
-                AppDomain
-                    .CurrentDomain
+                AppDomain.CurrentDomain
                     .DefineDynamicAssembly(name, AssemblyBuilderAccess.Run, Path.GetTempPath());
                 Assert.Fail("#B1");
             }
@@ -656,8 +645,7 @@ namespace MonoTests.System
 
             try
             {
-                AppDomain
-                    .CurrentDomain
+                AppDomain.CurrentDomain
                     .DefineDynamicAssembly(name, AssemblyBuilderAccess.Run, Path.GetTempPath());
                 Assert.Fail("#C1");
             }
@@ -679,8 +667,7 @@ namespace MonoTests.System
 
             try
             {
-                AppDomain
-                    .CurrentDomain
+                AppDomain.CurrentDomain
                     .DefineDynamicAssembly(
                         name,
                         AssemblyBuilderAccess.Run | (AssemblyBuilderAccess)666,
@@ -723,8 +710,7 @@ namespace MonoTests.System
                 name.Name = invalid_name;
                 try
                 {
-                    AppDomain
-                        .CurrentDomain
+                    AppDomain.CurrentDomain
                         .DefineDynamicAssembly(
                             name,
                             AssemblyBuilderAccess.Run,
@@ -753,8 +739,7 @@ namespace MonoTests.System
         {
             try
             {
-                AppDomain
-                    .CurrentDomain
+                AppDomain.CurrentDomain
                     .DefineDynamicAssembly(
                         (AssemblyName)null,
                         AssemblyBuilderAccess.Run,
@@ -776,8 +761,7 @@ namespace MonoTests.System
 
             try
             {
-                AppDomain
-                    .CurrentDomain
+                AppDomain.CurrentDomain
                     .DefineDynamicAssembly(
                         name,
                         AssemblyBuilderAccess.Run,
@@ -799,8 +783,7 @@ namespace MonoTests.System
 
             try
             {
-                AppDomain
-                    .CurrentDomain
+                AppDomain.CurrentDomain
                     .DefineDynamicAssembly(
                         name,
                         AssemblyBuilderAccess.Run,
@@ -827,8 +810,7 @@ namespace MonoTests.System
 
             try
             {
-                AppDomain
-                    .CurrentDomain
+                AppDomain.CurrentDomain
                     .DefineDynamicAssembly(
                         name,
                         AssemblyBuilderAccess.Run | (AssemblyBuilderAccess)666,
@@ -872,8 +854,7 @@ namespace MonoTests.System
                 name.Name = invalid_name;
                 try
                 {
-                    AppDomain
-                        .CurrentDomain
+                    AppDomain.CurrentDomain
                         .DefineDynamicAssembly(
                             name,
                             AssemblyBuilderAccess.Run,
@@ -903,8 +884,7 @@ namespace MonoTests.System
         {
             try
             {
-                AppDomain
-                    .CurrentDomain
+                AppDomain.CurrentDomain
                     .DefineDynamicAssembly(
                         (AssemblyName)null,
                         AssemblyBuilderAccess.Run,
@@ -927,8 +907,7 @@ namespace MonoTests.System
 
             try
             {
-                AppDomain
-                    .CurrentDomain
+                AppDomain.CurrentDomain
                     .DefineDynamicAssembly(
                         name,
                         AssemblyBuilderAccess.Run,
@@ -951,8 +930,7 @@ namespace MonoTests.System
 
             try
             {
-                AppDomain
-                    .CurrentDomain
+                AppDomain.CurrentDomain
                     .DefineDynamicAssembly(
                         name,
                         AssemblyBuilderAccess.Run,
@@ -980,8 +958,7 @@ namespace MonoTests.System
 
             try
             {
-                AppDomain
-                    .CurrentDomain
+                AppDomain.CurrentDomain
                     .DefineDynamicAssembly(
                         name,
                         AssemblyBuilderAccess.Run | (AssemblyBuilderAccess)666,
@@ -1026,8 +1003,7 @@ namespace MonoTests.System
                 name.Name = invalid_name;
                 try
                 {
-                    AppDomain
-                        .CurrentDomain
+                    AppDomain.CurrentDomain
                         .DefineDynamicAssembly(
                             name,
                             AssemblyBuilderAccess.Run,
@@ -1058,8 +1034,7 @@ namespace MonoTests.System
         {
             try
             {
-                AppDomain
-                    .CurrentDomain
+                AppDomain.CurrentDomain
                     .DefineDynamicAssembly(
                         (AssemblyName)null,
                         AssemblyBuilderAccess.Run,
@@ -1083,8 +1058,7 @@ namespace MonoTests.System
 
             try
             {
-                AppDomain
-                    .CurrentDomain
+                AppDomain.CurrentDomain
                     .DefineDynamicAssembly(
                         name,
                         AssemblyBuilderAccess.Run,
@@ -1108,8 +1082,7 @@ namespace MonoTests.System
 
             try
             {
-                AppDomain
-                    .CurrentDomain
+                AppDomain.CurrentDomain
                     .DefineDynamicAssembly(
                         name,
                         AssemblyBuilderAccess.Run,
@@ -1138,8 +1111,7 @@ namespace MonoTests.System
 
             try
             {
-                AppDomain
-                    .CurrentDomain
+                AppDomain.CurrentDomain
                     .DefineDynamicAssembly(
                         name,
                         AssemblyBuilderAccess.Run | (AssemblyBuilderAccess)666,
@@ -1184,8 +1156,7 @@ namespace MonoTests.System
                 name.Name = invalid_name;
                 try
                 {
-                    AppDomain
-                        .CurrentDomain
+                    AppDomain.CurrentDomain
                         .DefineDynamicAssembly(
                             name,
                             AssemblyBuilderAccess.Run,
@@ -1216,8 +1187,7 @@ namespace MonoTests.System
         {
             try
             {
-                AppDomain
-                    .CurrentDomain
+                AppDomain.CurrentDomain
                     .DefineDynamicAssembly(
                         (AssemblyName)null,
                         AssemblyBuilderAccess.Run,
@@ -1241,8 +1211,7 @@ namespace MonoTests.System
 
             try
             {
-                AppDomain
-                    .CurrentDomain
+                AppDomain.CurrentDomain
                     .DefineDynamicAssembly(
                         name,
                         AssemblyBuilderAccess.Run,
@@ -1266,8 +1235,7 @@ namespace MonoTests.System
 
             try
             {
-                AppDomain
-                    .CurrentDomain
+                AppDomain.CurrentDomain
                     .DefineDynamicAssembly(
                         name,
                         AssemblyBuilderAccess.Run,
@@ -1296,8 +1264,7 @@ namespace MonoTests.System
 
             try
             {
-                AppDomain
-                    .CurrentDomain
+                AppDomain.CurrentDomain
                     .DefineDynamicAssembly(
                         name,
                         AssemblyBuilderAccess.Run | (AssemblyBuilderAccess)666,
@@ -1343,8 +1310,7 @@ namespace MonoTests.System
                 name.Name = invalid_name;
                 try
                 {
-                    AppDomain
-                        .CurrentDomain
+                    AppDomain.CurrentDomain
                         .DefineDynamicAssembly(
                             name,
                             AssemblyBuilderAccess.Run,
@@ -1376,8 +1342,7 @@ namespace MonoTests.System
         {
             try
             {
-                AppDomain
-                    .CurrentDomain
+                AppDomain.CurrentDomain
                     .DefineDynamicAssembly(
                         (AssemblyName)null,
                         AssemblyBuilderAccess.Run,
@@ -1402,8 +1367,7 @@ namespace MonoTests.System
 
             try
             {
-                AppDomain
-                    .CurrentDomain
+                AppDomain.CurrentDomain
                     .DefineDynamicAssembly(
                         name,
                         AssemblyBuilderAccess.Run,
@@ -1428,8 +1392,7 @@ namespace MonoTests.System
 
             try
             {
-                AppDomain
-                    .CurrentDomain
+                AppDomain.CurrentDomain
                     .DefineDynamicAssembly(
                         name,
                         AssemblyBuilderAccess.Run,
@@ -1459,8 +1422,7 @@ namespace MonoTests.System
 
             try
             {
-                AppDomain
-                    .CurrentDomain
+                AppDomain.CurrentDomain
                     .DefineDynamicAssembly(
                         name,
                         AssemblyBuilderAccess.Run | (AssemblyBuilderAccess)666,
@@ -1507,8 +1469,7 @@ namespace MonoTests.System
                 name.Name = invalid_name;
                 try
                 {
-                    AppDomain
-                        .CurrentDomain
+                    AppDomain.CurrentDomain
                         .DefineDynamicAssembly(
                             name,
                             AssemblyBuilderAccess.Run,
@@ -1541,8 +1502,7 @@ namespace MonoTests.System
         {
             try
             {
-                AppDomain
-                    .CurrentDomain
+                AppDomain.CurrentDomain
                     .DefineDynamicAssembly(
                         (AssemblyName)null,
                         AssemblyBuilderAccess.Run,
@@ -1568,8 +1528,7 @@ namespace MonoTests.System
 
             try
             {
-                AppDomain
-                    .CurrentDomain
+                AppDomain.CurrentDomain
                     .DefineDynamicAssembly(
                         name,
                         AssemblyBuilderAccess.Run,
@@ -1595,8 +1554,7 @@ namespace MonoTests.System
 
             try
             {
-                AppDomain
-                    .CurrentDomain
+                AppDomain.CurrentDomain
                     .DefineDynamicAssembly(
                         name,
                         AssemblyBuilderAccess.Run,
@@ -1627,8 +1585,7 @@ namespace MonoTests.System
 
             try
             {
-                AppDomain
-                    .CurrentDomain
+                AppDomain.CurrentDomain
                     .DefineDynamicAssembly(
                         name,
                         AssemblyBuilderAccess.Run | (AssemblyBuilderAccess)666,
@@ -1676,8 +1633,7 @@ namespace MonoTests.System
                 name.Name = invalid_name;
                 try
                 {
-                    AppDomain
-                        .CurrentDomain
+                    AppDomain.CurrentDomain
                         .DefineDynamicAssembly(
                             name,
                             AssemblyBuilderAccess.Run,
@@ -1711,8 +1667,7 @@ namespace MonoTests.System
         {
             try
             {
-                AppDomain
-                    .CurrentDomain
+                AppDomain.CurrentDomain
                     .DefineDynamicAssembly(
                         (AssemblyName)null,
                         AssemblyBuilderAccess.Run,
@@ -1739,8 +1694,7 @@ namespace MonoTests.System
 
             try
             {
-                AppDomain
-                    .CurrentDomain
+                AppDomain.CurrentDomain
                     .DefineDynamicAssembly(
                         name,
                         AssemblyBuilderAccess.Run,
@@ -1767,8 +1721,7 @@ namespace MonoTests.System
 
             try
             {
-                AppDomain
-                    .CurrentDomain
+                AppDomain.CurrentDomain
                     .DefineDynamicAssembly(
                         name,
                         AssemblyBuilderAccess.Run,
@@ -1839,8 +1792,7 @@ namespace MonoTests.System
                 )
             );
 
-            ab = AppDomain
-                .CurrentDomain
+            ab = AppDomain.CurrentDomain
                 .DefineDynamicAssembly(name, AssemblyBuilderAccess.Save, cattrs);
 
             ab.SetCustomAttribute(
@@ -1955,8 +1907,7 @@ namespace MonoTests.System
                 )
             );
 
-            ab = AppDomain
-                .CurrentDomain
+            ab = AppDomain.CurrentDomain
                 .DefineDynamicAssembly(name, AssemblyBuilderAccess.Save, cattrs);
 
             ab.SetCustomAttribute(
@@ -2040,8 +1991,7 @@ namespace MonoTests.System
 
             try
             {
-                AppDomain
-                    .CurrentDomain
+                AppDomain.CurrentDomain
                     .DefineDynamicAssembly(
                         name,
                         AssemblyBuilderAccess.Run | (AssemblyBuilderAccess)666,
@@ -2083,8 +2033,7 @@ namespace MonoTests.System
                 name.Name = invalid_name;
                 try
                 {
-                    AppDomain
-                        .CurrentDomain
+                    AppDomain.CurrentDomain
                         .DefineDynamicAssembly(
                             name,
                             AssemblyBuilderAccess.Run,
@@ -2112,8 +2061,7 @@ namespace MonoTests.System
         {
             try
             {
-                AppDomain
-                    .CurrentDomain
+                AppDomain.CurrentDomain
                     .DefineDynamicAssembly(
                         (AssemblyName)null,
                         AssemblyBuilderAccess.Run,
@@ -2134,8 +2082,7 @@ namespace MonoTests.System
 
             try
             {
-                AppDomain
-                    .CurrentDomain
+                AppDomain.CurrentDomain
                     .DefineDynamicAssembly(
                         name,
                         AssemblyBuilderAccess.Run,
@@ -2156,8 +2103,7 @@ namespace MonoTests.System
 
             try
             {
-                AppDomain
-                    .CurrentDomain
+                AppDomain.CurrentDomain
                     .DefineDynamicAssembly(
                         name,
                         AssemblyBuilderAccess.Run,
@@ -2216,8 +2162,7 @@ namespace MonoTests.System
         {
             try
             {
-                AppDomain
-                    .CurrentDomain
+                AppDomain.CurrentDomain
                     .ExecuteAssemblyByName("mscorlib", (Evidence)null, new string[0]);
                 Assert.Fail("#1");
             }
@@ -2492,8 +2437,7 @@ namespace MonoTests.System
 
             try
             {
-                AppDomain
-                    .CurrentDomain
+                AppDomain.CurrentDomain
                     .ExecuteAssembly(assembly.Location, (Evidence)null, new string[0]);
                 Assert.Fail("#1");
             }
@@ -2515,8 +2459,7 @@ namespace MonoTests.System
 
             try
             {
-                AppDomain
-                    .CurrentDomain
+                AppDomain.CurrentDomain
                     .ExecuteAssembly(
                         assembly.Location,
                         (Evidence)null,
@@ -3899,8 +3842,7 @@ namespace MonoTests.System
         {
             public void GenerateAssembly(AssemblyName aname, string path)
             {
-                AssemblyBuilder ab = AppDomain
-                    .CurrentDomain
+                AssemblyBuilder ab = AppDomain.CurrentDomain
                     .DefineDynamicAssembly(
                         aname,
                         AssemblyBuilderAccess.Save,

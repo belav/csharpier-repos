@@ -226,8 +226,7 @@ namespace System.Net
 
             try
             {
-                return m_Worker
-                    .SecureStream
+                return m_Worker.SecureStream
                     .BeginRead(buffer, offset, size, asyncCallback, asyncState);
             }
             catch
@@ -395,8 +394,7 @@ namespace System.Net
 
             try
             {
-                return m_Worker
-                    .SecureStream
+                return m_Worker.SecureStream
                     .BeginWrite(buffer, offset, size, asyncCallback, asyncState);
             }
             catch
@@ -870,12 +868,10 @@ namespace System.Net
             if (bufferResult.IsWrite)
             {
                 if (bufferResult.Buffers != null)
-                    result = m_Worker
-                        .SecureStream
+                    result = m_Worker.SecureStream
                         .BeginWrite(bufferResult.Buffers, _CompleteIOCallback, bufferResult);
                 else
-                    result = m_Worker
-                        .SecureStream
+                    result = m_Worker.SecureStream
                         .BeginWrite(
                             bufferResult.Buffer,
                             bufferResult.Offset,
@@ -886,8 +882,7 @@ namespace System.Net
             }
             else
             {
-                result = m_Worker
-                    .SecureStream
+                result = m_Worker.SecureStream
                     .BeginRead(
                         bufferResult.Buffer,
                         bufferResult.Offset,
@@ -942,8 +937,7 @@ namespace System.Net
             if (bufferResult.IsWrite)
                 ((TlsStream)bufferResult.AsyncObject).m_Worker.SecureStream.EndWrite(result);
             else
-                readBytes = ((TlsStream)bufferResult.AsyncObject)
-                    .m_Worker
+                readBytes = ((TlsStream)bufferResult.AsyncObject).m_Worker
                     .SecureStream
                     .EndRead(result);
 

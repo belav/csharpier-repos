@@ -22,11 +22,9 @@ namespace System.ServiceModel.ComIntegration
             string[] parameters = webhostParams.Split(',');
             if (parameters.Length != 2)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
-                        System
-                            .ServiceModel
+                        System.ServiceModel
                             .ComIntegration
                             .Error
                             .ListenerInitFailed(
@@ -40,11 +38,9 @@ namespace System.ServiceModel.ComIntegration
 
             if (!DiagnosticUtility.Utility.TryCreateGuid(parameters[0], out clsid))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
-                        System
-                            .ServiceModel
+                        System.ServiceModel
                             .ComIntegration
                             .Error
                             .ListenerInitFailed(
@@ -55,11 +51,9 @@ namespace System.ServiceModel.ComIntegration
 
             if (!DiagnosticUtility.Utility.TryCreateGuid(parameters[1], out appId))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
-                        System
-                            .ServiceModel
+                        System.ServiceModel
                             .ComIntegration
                             .Error
                             .ListenerInitFailed(
@@ -80,11 +74,9 @@ namespace System.ServiceModel.ComIntegration
             application = CatalogUtil.FindApplication(appId);
             if (application == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
-                        System
-                            .ServiceModel
+                        System.ServiceModel
                             .ComIntegration
                             .Error
                             .ListenerInitFailed(
@@ -112,11 +104,9 @@ namespace System.ServiceModel.ComIntegration
 
             if (classObject == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
-                        System
-                            .ServiceModel
+                        System.ServiceModel
                             .ComIntegration
                             .Error
                             .ListenerInitFailed(
@@ -167,11 +157,9 @@ namespace System.ServiceModel.ComIntegration
             }
             if (service == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
-                        System
-                            .ServiceModel
+                        System.ServiceModel
                             .ComIntegration
                             .Error
                             .ListenerInitFailed(

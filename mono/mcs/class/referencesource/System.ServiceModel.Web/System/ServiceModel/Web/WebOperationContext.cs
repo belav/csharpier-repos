@@ -35,8 +35,7 @@ namespace System.ServiceModel.Web
         {
             if (operationContext == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("operationContext");
             }
             this.operationContext = operationContext;
@@ -56,8 +55,7 @@ namespace System.ServiceModel.Web
                 {
                     return null;
                 }
-                WebOperationContext existing = OperationContext
-                    .Current
+                WebOperationContext existing = OperationContext.Current
                     .Extensions
                     .Find<WebOperationContext>();
                 if (existing != null)
@@ -115,8 +113,7 @@ namespace System.ServiceModel.Web
                 instance,
                 serializer
             );
-            message
-                .Properties
+            message.Properties
                 .Add(WebBodyFormatMessageProperty.Name, WebBodyFormatMessageProperty.JsonProperty);
             AddContentType(
                 WebOperationContext.DefaultJsonMediaType,
@@ -147,8 +144,7 @@ namespace System.ServiceModel.Web
                 instance,
                 serializer
             );
-            message
-                .Properties
+            message.Properties
                 .Add(WebBodyFormatMessageProperty.Name, WebBodyFormatMessageProperty.XmlProperty);
             AddContentType(
                 WebOperationContext.DefaultXmlMediaType,
@@ -168,8 +164,7 @@ namespace System.ServiceModel.Web
                 (string)null,
                 new XmlSerializerBodyWriter(instance, serializer)
             );
-            message
-                .Properties
+            message.Properties
                 .Add(WebBodyFormatMessageProperty.Name, WebBodyFormatMessageProperty.XmlProperty);
             AddContentType(
                 WebOperationContext.DefaultXmlMediaType,
@@ -202,8 +197,7 @@ namespace System.ServiceModel.Web
                     document.CreateReader()
                 );
             }
-            message
-                .Properties
+            message.Properties
                 .Add(WebBodyFormatMessageProperty.Name, WebBodyFormatMessageProperty.XmlProperty);
             AddContentType(
                 WebOperationContext.DefaultXmlMediaType,
@@ -228,8 +222,7 @@ namespace System.ServiceModel.Web
                 (string)null,
                 element.CreateReader()
             );
-            message
-                .Properties
+            message.Properties
                 .Add(WebBodyFormatMessageProperty.Name, WebBodyFormatMessageProperty.XmlProperty);
             AddContentType(
                 WebOperationContext.DefaultXmlMediaType,
@@ -249,8 +242,7 @@ namespace System.ServiceModel.Web
                 (string)null,
                 item.GetAtom10Formatter()
             );
-            message
-                .Properties
+            message.Properties
                 .Add(WebBodyFormatMessageProperty.Name, WebBodyFormatMessageProperty.XmlProperty);
             AddContentType(
                 WebOperationContext.DefaultAtomMediaType,
@@ -270,8 +262,7 @@ namespace System.ServiceModel.Web
                 (string)null,
                 feed.GetAtom10Formatter()
             );
-            message
-                .Properties
+            message.Properties
                 .Add(WebBodyFormatMessageProperty.Name, WebBodyFormatMessageProperty.XmlProperty);
             AddContentType(
                 WebOperationContext.DefaultAtomMediaType,
@@ -291,8 +282,7 @@ namespace System.ServiceModel.Web
                 (string)null,
                 document.GetFormatter()
             );
-            message
-                .Properties
+            message.Properties
                 .Add(WebBodyFormatMessageProperty.Name, WebBodyFormatMessageProperty.XmlProperty);
             AddContentType(
                 WebOperationContext.DefaultAtomMediaType,
@@ -345,8 +335,7 @@ namespace System.ServiceModel.Web
                     }
                 )
             );
-            message
-                .Properties
+            message.Properties
                 .Add(WebBodyFormatMessageProperty.Name, WebBodyFormatMessageProperty.RawProperty);
             AddContentType(contentType, null);
             return message;
@@ -392,8 +381,7 @@ namespace System.ServiceModel.Web
                     }
                 )
             );
-            message
-                .Properties
+            message.Properties
                 .Add(WebBodyFormatMessageProperty.Name, WebBodyFormatMessageProperty.RawProperty);
             AddContentType(contentType, null);
             return message;
@@ -410,8 +398,7 @@ namespace System.ServiceModel.Web
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("contentType");
             }
             Message message = ByteStreamMessage.CreateMessage(stream);
-            message
-                .Properties
+            message.Properties
                 .Add(WebBodyFormatMessageProperty.Name, WebBodyFormatMessageProperty.RawProperty);
             AddContentType(contentType, null);
             return message;
@@ -433,8 +420,7 @@ namespace System.ServiceModel.Web
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("contentType");
             }
             Message message = new HttpStreamMessage(bodyWriter);
-            message
-                .Properties
+            message.Properties
                 .Add(WebBodyFormatMessageProperty.Name, WebBodyFormatMessageProperty.RawProperty);
             AddContentType(contentType, null);
             return message;
@@ -453,8 +439,7 @@ namespace System.ServiceModel.Web
             Message message = new HttpStreamMessage(
                 StreamBodyWriter.CreateStreamBodyWriter(streamWriter)
             );
-            message
-                .Properties
+            message.Properties
                 .Add(WebBodyFormatMessageProperty.Name, WebBodyFormatMessageProperty.RawProperty);
             AddContentType(contentType, null);
             return message;
@@ -472,8 +457,7 @@ namespace System.ServiceModel.Web
                 as WebHttpDispatchOperationSelector;
             if (selector == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperWarning(
                         new InvalidOperationException(
                             SR2.GetString(

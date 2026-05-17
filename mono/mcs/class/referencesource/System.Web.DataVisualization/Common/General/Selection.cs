@@ -541,8 +541,7 @@ namespace System.Web.UI.DataVisualization.Charting
                     )
                     {
                         int prevMapAreaCount = _common.ChartPicture.MapAreas.Count;
-                        _common
-                            .ChartPicture
+                        _common.ChartPicture
                             .MapAreas
                             .InsertPath(
                                 0,
@@ -639,8 +638,7 @@ namespace System.Web.UI.DataVisualization.Charting
                     {
                         int prevMapAreaCount = _common.ChartPicture.MapAreas.Count;
 
-                        _common
-                            .ChartPicture
+                        _common.ChartPicture
                             .MapAreas
                             .InsertPath(
                                 insertIndex,
@@ -1103,8 +1101,7 @@ namespace System.Web.UI.DataVisualization.Charting
                         || postBackValue.Length > 0
                     )
                     {
-                        _common
-                            .ChartPicture
+                        _common.ChartPicture
                             .MapAreas
                             .InsertPath(
                                 0,

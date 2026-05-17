@@ -73,8 +73,7 @@ public class LoggingSqlServerTest
     protected override string ProviderName => "Microsoft.EntityFrameworkCore.SqlServer";
 
     protected override string ProviderVersion =>
-        typeof(SqlServerOptionsExtension)
-            .Assembly
+        typeof(SqlServerOptionsExtension).Assembly
             .GetCustomAttribute<AssemblyInformationalVersionAttribute>()
             ?.InformationalVersion;
 }

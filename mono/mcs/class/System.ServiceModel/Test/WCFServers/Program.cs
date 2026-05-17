@@ -84,10 +84,8 @@ namespace WCFServers
             var types =
                 from type in assem.GetTypes()
                 where
-                    type.GetCustomAttributes(
-                        typeof(NUnit.Framework.TestFixtureAttribute),
-                        true
-                    ).Length > 0
+                    type.GetCustomAttributes(typeof(NUnit.Framework.TestFixtureAttribute), true)
+                        .Length > 0
                 select type;
             foreach (Type type in types)
             {

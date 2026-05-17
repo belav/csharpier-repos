@@ -377,10 +377,8 @@ namespace System.ServiceModel.Activities
             if (!metadata.HasViolations)
             {
                 this.internalReceive = CreateInternalReceive();
-                this.InternalContent.ConfigureInternalReceive(
-                    this.internalReceive,
-                    out this.requestFormatter
-                );
+                this.InternalContent
+                    .ConfigureInternalReceive(this.internalReceive, out this.requestFormatter);
             }
             else
             {
@@ -511,8 +509,7 @@ namespace System.ServiceModel.Activities
         {
             if (operation == null)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .ArgumentNull("operation", "OperationDescription should not be null");
             }
 
@@ -571,8 +568,7 @@ namespace System.ServiceModel.Activities
                             }
                             // Indicating it is a untyped message contract
                             if (
-                                !messagePart
-                                    .Type
+                                !messagePart.Type
                                     .IsAssignableFrom(typeof(System.ServiceModel.Channels.Message))
                             )
                             {
@@ -639,16 +635,14 @@ namespace System.ServiceModel.Activities
                 if (
                     (
                         message.Body.ReturnValue != null
-                        && message
-                            .Body
+                        && message.Body
                             .ReturnValue
                             .Type
                             .IsDefined(typeof(MessageContractAttribute), false)
                     )
                     || (
                         message.Body.ReturnValue != null
-                        && message
-                            .Body
+                        && message.Body
                             .ReturnValue
                             .Type
                             .IsAssignableFrom(typeof(System.ServiceModel.Channels.Message))

@@ -254,8 +254,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             {
                 if (ContainingType is { IsRecord: true } or { IsRecordStruct: true })
                 {
-                    MessageID
-                        .IDS_FeaturePrimaryConstructors
+                    MessageID.IDS_FeaturePrimaryConstructors
                         .CheckFeatureAvailability(
                             diagnostics,
                             attributeDeclarationSyntax,

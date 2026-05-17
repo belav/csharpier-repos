@@ -24,8 +24,7 @@ namespace Internal.Runtime.TypeLoader
         )
         {
             // PERF: computing NameAndSignature and the instantiation (that we discard) was useless
-            return TypeLoaderEnvironment
-                .Instance
+            return TypeLoaderEnvironment.Instance
                 .TryGetGenericMethodComponents(dictionary, out owningType, out _, out _);
         }
 
@@ -40,8 +39,7 @@ namespace Internal.Runtime.TypeLoader
             out RuntimeTypeHandle runtimeTypeHandle
         )
         {
-            return TypeLoaderEnvironment
-                .Instance
+            return TypeLoaderEnvironment.Instance
                 .TryGetConstructedGenericTypeForComponents(
                     genericTypeDefinitionHandle,
                     genericTypeArgumentHandles,
@@ -55,8 +53,7 @@ namespace Internal.Runtime.TypeLoader
         )
         {
             // We can use InstanceOrNull because we can't have a reference to a dynamic type without creating type loader first
-            return TypeLoaderEnvironment
-                .InstanceOrNull
+            return TypeLoaderEnvironment.InstanceOrNull
                 .GetThreadStaticGCDescForDynamicType(typeManagerHandle, (uint)index);
         }
 
@@ -66,8 +63,7 @@ namespace Internal.Runtime.TypeLoader
             out IntPtr auxResult
         )
         {
-            return TypeLoaderEnvironment
-                .Instance
+            return TypeLoaderEnvironment.Instance
                 .GenericLookupFromContextAndSignature(context, signature, out auxResult);
         }
 
@@ -78,8 +74,7 @@ namespace Internal.Runtime.TypeLoader
             out RuntimeTypeHandle[] genericMethodArgs
         )
         {
-            return TypeLoaderEnvironment
-                .Instance
+            return TypeLoaderEnvironment.Instance
                 .TryGetRuntimeMethodHandleComponents(
                     runtimeMethodHandle,
                     out declaringTypeHandle,
@@ -95,8 +90,7 @@ namespace Internal.Runtime.TypeLoader
             RuntimeTypeHandle[] genericMethodArgs
         )
         {
-            return TypeLoaderEnvironment
-                .Instance
+            return TypeLoaderEnvironment.Instance
                 .GetRuntimeMethodHandleForComponents(
                     declaringTypeHandle,
                     methodName,
@@ -115,8 +109,7 @@ namespace Internal.Runtime.TypeLoader
 
         public override IntPtr TryGetDefaultConstructorForType(RuntimeTypeHandle runtimeTypeHandle)
         {
-            return TypeLoaderEnvironment
-                .Instance
+            return TypeLoaderEnvironment.Instance
                 .TryGetDefaultConstructorForType(runtimeTypeHandle);
         }
 
@@ -125,8 +118,7 @@ namespace Internal.Runtime.TypeLoader
             RuntimeMethodHandle declMethod
         )
         {
-            return TypeLoaderEnvironment
-                .Instance
+            return TypeLoaderEnvironment.Instance
                 .ResolveGenericVirtualMethodTarget(targetTypeHandle, declMethod);
         }
 
@@ -136,8 +128,7 @@ namespace Internal.Runtime.TypeLoader
             out string fieldName
         )
         {
-            return TypeLoaderEnvironment
-                .Instance
+            return TypeLoaderEnvironment.Instance
                 .TryGetRuntimeFieldHandleComponents(
                     runtimeFieldHandle,
                     out declaringTypeHandle,
@@ -150,8 +141,7 @@ namespace Internal.Runtime.TypeLoader
             string fieldName
         )
         {
-            return TypeLoaderEnvironment
-                .Instance
+            return TypeLoaderEnvironment.Instance
                 .GetRuntimeFieldHandleForComponents(declaringTypeHandle, fieldName);
         }
 
@@ -171,8 +161,7 @@ namespace Internal.Runtime.TypeLoader
             out RuntimeTypeHandle pointerTypeHandle
         )
         {
-            return TypeLoaderEnvironment
-                .Instance
+            return TypeLoaderEnvironment.Instance
                 .TryGetPointerTypeForTargetType(pointeeTypeHandle, out pointerTypeHandle);
         }
 
@@ -183,8 +172,7 @@ namespace Internal.Runtime.TypeLoader
             out RuntimeTypeHandle arrayTypeHandle
         )
         {
-            return TypeLoaderEnvironment
-                .Instance
+            return TypeLoaderEnvironment.Instance
                 .TryGetArrayTypeForElementType(
                     elementTypeHandle,
                     isMdArray,
@@ -693,8 +681,7 @@ namespace Internal.Runtime.TypeLoader
             using (_typeLoaderLock.EnterScope())
             {
                 if (
-                    TypeSystemContext
-                        .PointerTypesCache
+                    TypeSystemContext.PointerTypesCache
                         .TryGetValue(pointeeTypeHandle, out pointerTypeHandle)
                 )
                     return true;
@@ -709,8 +696,7 @@ namespace Internal.Runtime.TypeLoader
         )
         {
             if (
-                TypeSystemContext
-                    .PointerTypesCache
+                TypeSystemContext.PointerTypesCache
                     .TryGetValue(pointeeTypeHandle, out pointerTypeHandle)
             )
                 return true;
@@ -741,8 +727,7 @@ namespace Internal.Runtime.TypeLoader
             using (_typeLoaderLock.EnterScope())
             {
                 if (
-                    TypeSystemContext
-                        .ByRefTypesCache
+                    TypeSystemContext.ByRefTypesCache
                         .TryGetValue(pointeeTypeHandle, out byRefTypeHandle)
                 )
                     return true;
@@ -757,8 +742,7 @@ namespace Internal.Runtime.TypeLoader
         )
         {
             if (
-                TypeSystemContext
-                    .ByRefTypesCache
+                TypeSystemContext.ByRefTypesCache
                     .TryGetValue(pointeeTypeHandle, out pointerTypeHandle)
             )
                 return true;

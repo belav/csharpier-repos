@@ -108,8 +108,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             if (declaration.ExpressionBody == null)
             {
                 if (
-                    declaration
-                        .Body
+                    declaration.Body
                         ?.TryConvertToArrowExpressionBody(
                             declaration.Kind(),
                             info.LanguageVersion,

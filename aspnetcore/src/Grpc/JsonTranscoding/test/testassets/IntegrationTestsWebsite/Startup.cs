@@ -37,8 +37,7 @@ public class Startup
 
         app.UseEndpoints(endpoints =>
         {
-            endpoints
-                .DataSources
+            endpoints.DataSources
                 .Add(endpoints.ServiceProvider.GetRequiredService<DynamicEndpointDataSource>());
         });
     }

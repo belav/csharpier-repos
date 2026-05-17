@@ -53,8 +53,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UseCollectionInitializer
                     var trivia = statement.GetLeadingTrivia();
                     var leadingTrivia = i == 0 ? trivia.WithoutLeadingBlankLines() : trivia;
 
-                    var trailingTrivia = statement
-                        .SemicolonToken
+                    var trailingTrivia = statement.SemicolonToken
                         .TrailingTrivia
                         .Contains(static t => t.IsSingleOrMultiLineComment())
                         ? statement.SemicolonToken.TrailingTrivia

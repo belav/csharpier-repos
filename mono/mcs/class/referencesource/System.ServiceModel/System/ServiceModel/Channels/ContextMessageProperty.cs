@@ -63,8 +63,7 @@ namespace System.ServiceModel.Channels
             out ContextMessageProperty context
         )
         {
-            return ContextProtocol
-                .HttpCookieToolbox
+            return ContextProtocol.HttpCookieToolbox
                 .TryCreateFromHttpCookieHeader(httpCookieHeader, out context);
         }
 

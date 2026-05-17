@@ -35,8 +35,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.MetadataAsSource
 
             var csharpFormattedComment = string.Join(
                 "\r\n",
-                AbstractMetadataAsSourceService
-                    .DocCommentFormatter
+                AbstractMetadataAsSourceService.DocCommentFormatter
                     .Format(_csharpService, docComment)
             );
             var vbFormattedComment = string.Join(

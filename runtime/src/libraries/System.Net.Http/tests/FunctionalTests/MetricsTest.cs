@@ -539,8 +539,7 @@ namespace System.Net.Http.Functional.Tests
                 }
             });
 
-            using IDisposable subscription = DiagnosticListener
-                .AllListeners
+            using IDisposable subscription = DiagnosticListener.AllListeners
                 .Subscribe(diagnosticListenerObserver);
 
             await LoopbackServerFactory.CreateClientAndServerAsync(
@@ -1518,32 +1517,32 @@ namespace System.Net.Http.Functional.Tests
                 .Invoke(static async Task () =>
                 {
                     using HttpMetricsTest_DefaultMeter test = new(null);
-                    await test.LoopbackServerFactory.CreateClientAndServerAsync(
-                        async uri =>
-                        {
-                            using HttpClient client = test.CreateHttpClient();
-                            using InstrumentRecorder<long> recorder = new InstrumentRecorder<long>(
-                                InstrumentNames.ActiveRequests
-                            );
-                            using HttpRequestMessage request = new(HttpMethod.Get, uri)
+                    await test.LoopbackServerFactory
+                        .CreateClientAndServerAsync(
+                            async uri =>
                             {
-                                Version = test.UseVersion,
-                            };
+                                using HttpClient client = test.CreateHttpClient();
+                                using InstrumentRecorder<long> recorder =
+                                    new InstrumentRecorder<long>(InstrumentNames.ActiveRequests);
+                                using HttpRequestMessage request = new(HttpMethod.Get, uri)
+                                {
+                                    Version = test.UseVersion,
+                                };
 
-                            HttpResponseMessage response = await client.SendAsync(request);
-                            response.Dispose(); // Make sure disposal doesn't interfere with recording by enforcing early disposal.
+                                HttpResponseMessage response = await client.SendAsync(request);
+                                response.Dispose(); // Make sure disposal doesn't interfere with recording by enforcing early disposal.
 
-                            Assert.Collection(
-                                recorder.GetMeasurements(),
-                                m => VerifyActiveRequests(m, 1, uri),
-                                m => VerifyActiveRequests(m, -1, uri)
-                            );
-                        },
-                        async server =>
-                        {
-                            await server.AcceptConnectionSendResponseAndCloseAsync();
-                        }
-                    );
+                                Assert.Collection(
+                                    recorder.GetMeasurements(),
+                                    m => VerifyActiveRequests(m, 1, uri),
+                                    m => VerifyActiveRequests(m, -1, uri)
+                                );
+                            },
+                            async server =>
+                            {
+                                await server.AcceptConnectionSendResponseAndCloseAsync();
+                            }
+                        );
                 })
                 .Dispose();
         }
@@ -1562,142 +1561,146 @@ namespace System.Net.Http.Functional.Tests
                     );
 
                     using HttpMetricsTest_DefaultMeter test = new(null);
-                    await test.LoopbackServerFactory.CreateClientAndServerAsync(
-                        async uri =>
-                        {
-                            using MultiInstrumentRecorder recorder = new();
-
-                            using (HttpClient client = test.CreateHttpClient())
+                    await test.LoopbackServerFactory
+                        .CreateClientAndServerAsync(
+                            async uri =>
                             {
-                                using HttpRequestMessage request = new(HttpMethod.Get, uri)
+                                using MultiInstrumentRecorder recorder = new();
+
+                                using (HttpClient client = test.CreateHttpClient())
                                 {
-                                    Version = test.UseVersion,
-                                };
-                                Task<HttpResponseMessage> sendAsyncTask = client.SendAsync(request);
-                                clientWaitingTcs.SetResult();
-                                using HttpResponseMessage response = await sendAsyncTask;
+                                    using HttpRequestMessage request = new(HttpMethod.Get, uri)
+                                    {
+                                        Version = test.UseVersion,
+                                    };
+                                    Task<HttpResponseMessage> sendAsyncTask = client.SendAsync(
+                                        request
+                                    );
+                                    clientWaitingTcs.SetResult();
+                                    using HttpResponseMessage response = await sendAsyncTask;
 
-                                await WaitForEnvironmentTicksToAdvance();
-                            }
+                                    await WaitForEnvironmentTicksToAdvance();
+                                }
 
-                            Version version = HttpVersion.Version11;
-                            Assert.Collection(
-                                recorder.GetMeasurements(),
-                                m =>
-                                    VerifyActiveRequests(
-                                        m.InstrumentName,
-                                        (long)m.Value,
-                                        m.Tags,
-                                        1,
-                                        uri
-                                    ),
-                                m =>
-                                    VerifyOpenConnections(
-                                        m.InstrumentName,
-                                        m.Value,
-                                        m.Tags,
-                                        1,
-                                        uri,
-                                        version,
-                                        "idle"
-                                    ),
-                                m =>
-                                    VerifyTimeInQueue(
-                                        m.InstrumentName,
-                                        m.Value,
-                                        m.Tags,
-                                        uri,
-                                        version
-                                    ),
-                                m =>
-                                    VerifyOpenConnections(
-                                        m.InstrumentName,
-                                        m.Value,
-                                        m.Tags,
-                                        -1,
-                                        uri,
-                                        version,
-                                        "idle"
-                                    ),
-                                m =>
-                                    VerifyOpenConnections(
-                                        m.InstrumentName,
-                                        m.Value,
-                                        m.Tags,
-                                        1,
-                                        uri,
-                                        version,
-                                        "active"
-                                    ),
-                                m =>
-                                    VerifyOpenConnections(
-                                        m.InstrumentName,
-                                        m.Value,
-                                        m.Tags,
-                                        -1,
-                                        uri,
-                                        version,
-                                        "active"
-                                    ),
-                                m =>
-                                    VerifyOpenConnections(
-                                        m.InstrumentName,
-                                        m.Value,
-                                        m.Tags,
-                                        1,
-                                        uri,
-                                        version,
-                                        "idle"
-                                    ),
-                                m =>
-                                    VerifyActiveRequests(
-                                        m.InstrumentName,
-                                        (long)m.Value,
-                                        m.Tags,
-                                        -1,
-                                        uri
-                                    ),
-                                m =>
-                                    VerifyRequestDuration(
-                                        m.InstrumentName,
-                                        (double)m.Value,
-                                        m.Tags,
-                                        uri,
-                                        version,
-                                        200
-                                    ),
-                                m =>
-                                    VerifyConnectionDuration(
-                                        m.InstrumentName,
-                                        m.Value,
-                                        m.Tags,
-                                        uri,
-                                        version
-                                    ),
-                                m =>
-                                    VerifyOpenConnections(
-                                        m.InstrumentName,
-                                        m.Value,
-                                        m.Tags,
-                                        -1,
-                                        uri,
-                                        version,
-                                        "idle"
-                                    )
-                            );
-                        },
-                        async server =>
-                        {
-                            await clientWaitingTcs.Task.WaitAsync(TestHelper.PassingTestTimeout);
-
-                            await server.AcceptConnectionAsync(async connection =>
+                                Version version = HttpVersion.Version11;
+                                Assert.Collection(
+                                    recorder.GetMeasurements(),
+                                    m =>
+                                        VerifyActiveRequests(
+                                            m.InstrumentName,
+                                            (long)m.Value,
+                                            m.Tags,
+                                            1,
+                                            uri
+                                        ),
+                                    m =>
+                                        VerifyOpenConnections(
+                                            m.InstrumentName,
+                                            m.Value,
+                                            m.Tags,
+                                            1,
+                                            uri,
+                                            version,
+                                            "idle"
+                                        ),
+                                    m =>
+                                        VerifyTimeInQueue(
+                                            m.InstrumentName,
+                                            m.Value,
+                                            m.Tags,
+                                            uri,
+                                            version
+                                        ),
+                                    m =>
+                                        VerifyOpenConnections(
+                                            m.InstrumentName,
+                                            m.Value,
+                                            m.Tags,
+                                            -1,
+                                            uri,
+                                            version,
+                                            "idle"
+                                        ),
+                                    m =>
+                                        VerifyOpenConnections(
+                                            m.InstrumentName,
+                                            m.Value,
+                                            m.Tags,
+                                            1,
+                                            uri,
+                                            version,
+                                            "active"
+                                        ),
+                                    m =>
+                                        VerifyOpenConnections(
+                                            m.InstrumentName,
+                                            m.Value,
+                                            m.Tags,
+                                            -1,
+                                            uri,
+                                            version,
+                                            "active"
+                                        ),
+                                    m =>
+                                        VerifyOpenConnections(
+                                            m.InstrumentName,
+                                            m.Value,
+                                            m.Tags,
+                                            1,
+                                            uri,
+                                            version,
+                                            "idle"
+                                        ),
+                                    m =>
+                                        VerifyActiveRequests(
+                                            m.InstrumentName,
+                                            (long)m.Value,
+                                            m.Tags,
+                                            -1,
+                                            uri
+                                        ),
+                                    m =>
+                                        VerifyRequestDuration(
+                                            m.InstrumentName,
+                                            (double)m.Value,
+                                            m.Tags,
+                                            uri,
+                                            version,
+                                            200
+                                        ),
+                                    m =>
+                                        VerifyConnectionDuration(
+                                            m.InstrumentName,
+                                            m.Value,
+                                            m.Tags,
+                                            uri,
+                                            version
+                                        ),
+                                    m =>
+                                        VerifyOpenConnections(
+                                            m.InstrumentName,
+                                            m.Value,
+                                            m.Tags,
+                                            -1,
+                                            uri,
+                                            version,
+                                            "idle"
+                                        )
+                                );
+                            },
+                            async server =>
                             {
-                                await connection.ReadRequestDataAsync();
-                                await connection.SendResponseAsync(isFinal: false);
-                                await connection.WaitForCloseAsync(CancellationToken.None);
-                            });
-                        }
-                    );
+                                await clientWaitingTcs.Task
+                                    .WaitAsync(TestHelper.PassingTestTimeout);
+
+                                await server.AcceptConnectionAsync(async connection =>
+                                {
+                                    await connection.ReadRequestDataAsync();
+                                    await connection.SendResponseAsync(isFinal: false);
+                                    await connection.WaitForCloseAsync(CancellationToken.None);
+                                });
+                            }
+                        );
                 })
                 .Dispose();
         }
@@ -1709,34 +1712,37 @@ namespace System.Net.Http.Functional.Tests
                 .Invoke(static async Task () =>
                 {
                     using HttpMetricsTest_DefaultMeter test = new(null);
-                    await test.LoopbackServerFactory.CreateClientAndServerAsync(
-                        async uri =>
-                        {
-                            using HttpClient client = test.CreateHttpClient();
-                            using InstrumentRecorder<double> recorder =
-                                new InstrumentRecorder<double>(InstrumentNames.RequestDuration);
-                            using HttpRequestMessage request = new(HttpMethod.Get, uri)
+                    await test.LoopbackServerFactory
+                        .CreateClientAndServerAsync(
+                            async uri =>
                             {
-                                Version = test.UseVersion,
-                            };
+                                using HttpClient client = test.CreateHttpClient();
+                                using InstrumentRecorder<double> recorder =
+                                    new InstrumentRecorder<double>(InstrumentNames.RequestDuration);
+                                using HttpRequestMessage request = new(HttpMethod.Get, uri)
+                                {
+                                    Version = test.UseVersion,
+                                };
 
-                            using HttpResponseMessage response = await client.SendAsync(request);
-                            Measurement<double> m = Assert.Single(recorder.GetMeasurements());
-                            VerifyRequestDuration(
-                                m,
-                                uri,
-                                HttpVersion.Version11,
-                                (int)HttpStatusCode.OK,
-                                "GET"
-                            );
-                        },
-                        async server =>
-                        {
-                            await server.AcceptConnectionSendResponseAndCloseAsync(
-                                HttpStatusCode.OK
-                            );
-                        }
-                    );
+                                using HttpResponseMessage response = await client.SendAsync(
+                                    request
+                                );
+                                Measurement<double> m = Assert.Single(recorder.GetMeasurements());
+                                VerifyRequestDuration(
+                                    m,
+                                    uri,
+                                    HttpVersion.Version11,
+                                    (int)HttpStatusCode.OK,
+                                    "GET"
+                                );
+                            },
+                            async server =>
+                            {
+                                await server.AcceptConnectionSendResponseAndCloseAsync(
+                                    HttpStatusCode.OK
+                                );
+                            }
+                        );
                 })
                 .Dispose();
         }
@@ -1785,8 +1791,7 @@ namespace System.Net.Http.Functional.Tests
         [Fact]
         public void HttpClientHandler_SetMeterFactoryAfterStart_ThrowsInvalidOperationException()
         {
-            Http11LoopbackServerFactory
-                .Singleton
+            Http11LoopbackServerFactory.Singleton
                 .CreateClientAndServerAsync(
                     async uri =>
                     {
@@ -1805,8 +1810,7 @@ namespace System.Net.Http.Functional.Tests
         [ConditionalFact(typeof(SocketsHttpHandler), nameof(SocketsHttpHandler.IsSupported))]
         public void SocketsHttpHandler_SetMeterFactoryAfterStart_ThrowsInvalidOperationException()
         {
-            Http11LoopbackServerFactory
-                .Singleton
+            Http11LoopbackServerFactory.Singleton
                 .CreateClientAndServerAsync(
                     async uri =>
                     {

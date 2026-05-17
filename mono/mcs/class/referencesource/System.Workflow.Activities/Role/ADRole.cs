@@ -270,8 +270,7 @@ namespace System.Workflow.Activities
                 }
                 else
                 {
-                    WorkflowActivityTrace
-                        .Activity
+                    WorkflowActivityTrace.Activity
                         .TraceEvent(
                             TraceEventType.Information,
                             0,

@@ -537,8 +537,7 @@ namespace System.Reflection.Metadata
 
             private MethodDefinitionHandle GetCurrentMethodIndirect()
             {
-                return _reader
-                    .MethodPtrTable
+                return _reader.MethodPtrTable
                     .GetMethodFor(_currentRowId & (int)TokenTypeIds.RIDMask);
             }
 
@@ -781,8 +780,7 @@ namespace System.Reflection.Metadata
 
             private PropertyDefinitionHandle GetCurrentPropertyIndirect()
             {
-                return _reader
-                    .PropertyPtrTable
+                return _reader.PropertyPtrTable
                     .GetPropertyFor(_currentRowId & (int)TokenTypeIds.RIDMask);
             }
 
@@ -957,8 +955,7 @@ namespace System.Reflection.Metadata
             }
             else
             {
-                reader
-                    .MethodImplTable
+                reader.MethodImplTable
                     .GetMethodImplRange(containingType, out _firstRowId, out _lastRowId);
             }
         }
@@ -1172,8 +1169,7 @@ namespace System.Reflection.Metadata
             Debug.Assert(!implementingType.IsNil);
             _reader = reader;
 
-            reader
-                .InterfaceImplTable
+            reader.InterfaceImplTable
                 .GetInterfaceImplRange(implementingType, out _firstRowId, out _lastRowId);
         }
 

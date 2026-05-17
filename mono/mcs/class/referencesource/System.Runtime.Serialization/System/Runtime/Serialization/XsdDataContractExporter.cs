@@ -109,8 +109,7 @@ namespace System.Runtime.Serialization
         public void Export(ICollection<Assembly> assemblies)
         {
             if (assemblies == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -125,8 +124,7 @@ namespace System.Runtime.Serialization
                 foreach (Assembly assembly in assemblies)
                 {
                     if (assembly == null)
-                        throw System
-                            .Runtime
+                        throw System.Runtime
                             .Serialization
                             .DiagnosticUtility
                             .ExceptionUtility
@@ -159,8 +157,7 @@ namespace System.Runtime.Serialization
         public void Export(ICollection<Type> types)
         {
             if (types == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -175,8 +172,7 @@ namespace System.Runtime.Serialization
                 foreach (Type type in types)
                 {
                     if (type == null)
-                        throw System
-                            .Runtime
+                        throw System.Runtime
                             .Serialization
                             .DiagnosticUtility
                             .ExceptionUtility
@@ -206,8 +202,7 @@ namespace System.Runtime.Serialization
         public void Export(Type type)
         {
             if (type == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -238,8 +233,7 @@ namespace System.Runtime.Serialization
         public XmlQualifiedName GetSchemaTypeName(Type type)
         {
             if (type == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -256,8 +250,7 @@ namespace System.Runtime.Serialization
         public XmlSchemaType GetSchemaType(Type type)
         {
             if (type == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -274,8 +267,7 @@ namespace System.Runtime.Serialization
         public XmlQualifiedName GetRootElementName(Type type)
         {
             if (type == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -335,8 +327,7 @@ namespace System.Runtime.Serialization
                     {
                         Type type = knownTypes[i];
                         if (type == null)
-                            throw System
-                                .Runtime
+                            throw System.Runtime
                                 .Serialization
                                 .DiagnosticUtility
                                 .ExceptionUtility
@@ -354,8 +345,7 @@ namespace System.Runtime.Serialization
         public bool CanExport(ICollection<Assembly> assemblies)
         {
             if (assemblies == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -368,8 +358,7 @@ namespace System.Runtime.Serialization
                 foreach (Assembly assembly in assemblies)
                 {
                     if (assembly == null)
-                        throw System
-                            .Runtime
+                        throw System.Runtime
                             .Serialization
                             .DiagnosticUtility
                             .ExceptionUtility
@@ -406,8 +395,7 @@ namespace System.Runtime.Serialization
         public bool CanExport(ICollection<Type> types)
         {
             if (types == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -420,8 +408,7 @@ namespace System.Runtime.Serialization
                 foreach (Type type in types)
                 {
                     if (type == null)
-                        throw System
-                            .Runtime
+                        throw System.Runtime
                             .Serialization
                             .DiagnosticUtility
                             .ExceptionUtility
@@ -455,8 +442,7 @@ namespace System.Runtime.Serialization
         public bool CanExport(Type type)
         {
             if (type == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -492,8 +478,7 @@ namespace System.Runtime.Serialization
         public IList<string> GenerateCode(IList<Assembly> assemblies)
         {
             if (assemblies == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -508,8 +493,7 @@ namespace System.Runtime.Serialization
                 {
                     Assembly assembly = assemblies[i];
                     if (assembly == null)
-                        throw System
-                            .Runtime
+                        throw System.Runtime
                             .Serialization
                             .DiagnosticUtility
                             .ExceptionUtility

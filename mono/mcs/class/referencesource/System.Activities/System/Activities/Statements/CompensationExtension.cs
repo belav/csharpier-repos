@@ -121,8 +121,7 @@ namespace System.Activities.Statements
             }
             else
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new InvalidOperationException(
                             SR.BookmarkNotRegistered(compensationBookmark)

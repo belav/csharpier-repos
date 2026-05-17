@@ -409,8 +409,7 @@ namespace Mono.ILASM
                 {
                     if (!outer.IsDefined)
                         outer.Define(code_gen);
-                    classdef = outer
-                        .PeapiType
+                    classdef = outer.PeapiType
                         .AddNestedClass(attr, name_space, name, parent.PeapiClass);
                 }
                 else
@@ -418,8 +417,7 @@ namespace Mono.ILASM
                     if (is_value_class || is_enum_class)
                     {
                         // Should probably confirm that the parent is System.ValueType
-                        classdef = code_gen
-                            .PEFile
+                        classdef = code_gen.PEFile
                             .AddValueClass(
                                 attr,
                                 name_space,
@@ -429,8 +427,7 @@ namespace Mono.ILASM
                     }
                     else
                     {
-                        classdef = code_gen
-                            .PEFile
+                        classdef = code_gen.PEFile
                             .AddClass(attr, name_space, name, parent.PeapiClass);
                     }
                 }
@@ -447,8 +444,7 @@ namespace Mono.ILASM
                 {
                     if (is_value_class || is_enum_class)
                     {
-                        classdef = code_gen
-                            .PEFile
+                        classdef = code_gen.PEFile
                             .AddValueClass(
                                 attr,
                                 name_space,

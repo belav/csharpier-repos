@@ -478,19 +478,16 @@ public class ProcedurallyGeneratedQueryExecutor
         catch (Exception exception)
         {
             if (
-                exception
-                    .Message
+                exception.Message
                     .Contains("A constant expression was encountered in the ORDER BY list")
                 || exception.Message.Contains("has already been associated with an expression.")
-                || exception
-                    .Message
+                || exception.Message
                     .Contains("Object reference not set to an instance of an object.")
             ) { }
             else if (exception.Message == @"Invalid column name 'Key'.") // 12564
             { }
             else if (
-                exception
-                    .Message
+                exception.Message
                     .StartsWith(
                         @"Error generated for warning 'Microsoft.EntityFrameworkCore.Query.IncludeIgnoredWarning",
                         StringComparison.Ordinal

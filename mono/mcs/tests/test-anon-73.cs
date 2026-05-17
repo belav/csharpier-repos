@@ -22,8 +22,7 @@ class T
 
     static void Test_1()
     {
-        System
-            .Threading
+        System.Threading
             .ThreadPool
             .QueueUserWorkItem(
                 delegate(object o)

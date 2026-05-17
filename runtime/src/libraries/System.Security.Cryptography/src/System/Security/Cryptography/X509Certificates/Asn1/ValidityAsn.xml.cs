@@ -83,15 +83,13 @@ namespace System.Security.Cryptography.X509Certificates.Asn1
             decoded = default;
             AsnValueReader sequenceReader = reader.ReadSequence(expectedTag);
 
-            System
-                .Security
+            System.Security
                 .Cryptography
                 .X509Certificates
                 .Asn1
                 .TimeAsn
                 .Decode(ref sequenceReader, out decoded.NotBefore);
-            System
-                .Security
+            System.Security
                 .Cryptography
                 .X509Certificates
                 .Asn1

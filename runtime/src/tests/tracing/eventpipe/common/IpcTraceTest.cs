@@ -261,16 +261,14 @@ namespace Tracing.Tests.Common
                                 }
                                 else
                                 {
-                                    Logger
-                                        .logger
+                                    Logger.logger
                                         .Log($"Saw new provider '{eventData.ProviderName}'");
                                     _actualEventCounts[eventData.ProviderName] = 1;
                                 }
                             }
                             catch (Exception e)
                             {
-                                Logger
-                                    .logger
+                                Logger.logger
                                     .Log("Exception in Dynamic.All callback " + e.ToString());
                             }
                         };
@@ -290,8 +288,7 @@ namespace Tracing.Tests.Common
                         }
                         catch (Exception)
                         {
-                            Logger
-                                .logger
+                            Logger.logger
                                 .Log(
                                     $"Exception thrown while reading; dumping culprit stream to disk..."
                                 );
@@ -395,8 +392,7 @@ namespace Tracing.Tests.Common
                             fileInfo = new FileInfo(filename),
                         })
                         .GroupBy(fileInfos => fileInfos.pid, fileInfos => fileInfos.fileInfo);
-                    List<int> currentPids = System
-                        .Diagnostics
+                    List<int> currentPids = System.Diagnostics
                         .Process
                         .GetProcesses()
                         .Select(pid => pid.Id)
@@ -412,8 +408,7 @@ namespace Tracing.Tests.Common
                     {
                         foreach (FileInfo fi in ipc)
                         {
-                            Logger
-                                .logger
+                            Logger.logger
                                 .Log($"Attempting to delete the zombied pipe: {fi.FullName}");
                             fi.Delete();
                             Logger.logger.Log($"Deleted");
@@ -428,8 +423,7 @@ namespace Tracing.Tests.Common
                                 .SkipLast(1);
                             foreach (FileInfo fi in duplicates)
                             {
-                                Logger
-                                    .logger
+                                Logger.logger
                                     .Log($"Attempting to delete the zombied pipe: {fi.FullName}");
                                 fi.Delete();
                             }

@@ -178,8 +178,7 @@ namespace System.Diagnostics.Tracing
             {
                 try
                 {
-                    status = UnsafeNativeMethods
-                        .ManifestEtw
+                    status = UnsafeNativeMethods.ManifestEtw
                         .EventSetInformation(m_regHandle, eventInfoClass, data, dataSize);
                 }
                 catch (TypeLoadException)
@@ -350,13 +349,11 @@ namespace System.Diagnostics.Tracing
                                 int valueEnd = FindNull(data, valueIdx);
                                 if (valueEnd < data.Length)
                                 {
-                                    string key = System
-                                        .Text
+                                    string key = System.Text
                                         .Encoding
                                         .UTF8
                                         .GetString(data, keyIndex, keyEnd - keyIndex);
-                                    string value = System
-                                        .Text
+                                    string value = System.Text
                                         .Encoding
                                         .UTF8
                                         .GetString(data, valueIdx, valueEnd - valueIdx);
@@ -546,11 +543,9 @@ namespace System.Diagnostics.Tracing
 
                 fixed (Guid* provider = &m_providerId)
                 {
-                    hr = UnsafeNativeMethods
-                        .ManifestEtw
+                    hr = UnsafeNativeMethods.ManifestEtw
                         .EnumerateTraceGuidsEx(
-                            UnsafeNativeMethods
-                                .ManifestEtw
+                            UnsafeNativeMethods.ManifestEtw
                                 .TRACE_QUERY_INFO_CLASS
                                 .TraceGuidQueryInfo,
                             provider,
@@ -1180,8 +1175,7 @@ namespace System.Diagnostics.Tracing
                                 userDataPtr[refObjPosition[7]].Ptr = (ulong)v7;
                             }
 
-                            status = UnsafeNativeMethods
-                                .ManifestEtw
+                            status = UnsafeNativeMethods.ManifestEtw
                                 .EventWriteTransferWrapper(
                                     m_regHandle,
                                     ref eventDescriptor,
@@ -1215,8 +1209,7 @@ namespace System.Diagnostics.Tracing
                             }
                         }
 
-                        status = UnsafeNativeMethods
-                            .ManifestEtw
+                        status = UnsafeNativeMethods.ManifestEtw
                             .EventWriteTransferWrapper(
                                 m_regHandle,
                                 ref eventDescriptor,
@@ -1286,8 +1279,7 @@ namespace System.Diagnostics.Tracing
                 );
             }
 
-            int status = UnsafeNativeMethods
-                .ManifestEtw
+            int status = UnsafeNativeMethods.ManifestEtw
                 .EventWriteTransferWrapper(
                     m_regHandle,
                     ref eventDescriptor,
@@ -1320,8 +1312,7 @@ namespace System.Diagnostics.Tracing
         {
             int status;
 
-            status = UnsafeNativeMethods
-                .ManifestEtw
+            status = UnsafeNativeMethods.ManifestEtw
                 .EventWriteTransferWrapper(
                     m_regHandle,
                     ref eventDescriptor,
@@ -1349,8 +1340,7 @@ namespace System.Diagnostics.Tracing
         {
             m_providerId = providerId;
             m_etwCallback = enableCallback;
-            return UnsafeNativeMethods
-                .ManifestEtw
+            return UnsafeNativeMethods.ManifestEtw
                 .EventRegister(ref providerId, enableCallback, null, ref m_regHandle);
         }
 

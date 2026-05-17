@@ -208,8 +208,7 @@ namespace System.Reflection.Runtime.TypeInfos
                 bool simpleNameMatches = ignoreCase
                     ? (
                         0
-                        == CultureInfo
-                            .InvariantCulture
+                        == CultureInfo.InvariantCulture
                             .CompareInfo
                             .Compare(simpleName, ifcSimpleName, CompareOptions.IgnoreCase)
                     ) // @todo: This could be expressed simpler but the necessary parts of String api not yet ported.

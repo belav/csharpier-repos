@@ -273,8 +273,7 @@ namespace Mono.ApiTools
 
             string windir = Environment.GetFolderPath(Environment.SpecialFolder.Windows);
             string pf = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles);
-            state
-                .TypeHelper
+            state.TypeHelper
                 .Resolver
                 .AddSearchDirectory(
                     Path.Combine(windir, @"assembly\GAC\MSDATASRC\7.0.3300.0__b03f5f7f11d50a3a")
@@ -289,8 +288,7 @@ namespace Mono.ApiTools
 
                     if (arg.Contains("v3.0"))
                     {
-                        state
-                            .TypeHelper
+                        state.TypeHelper
                             .Resolver
                             .AddSearchDirectory(
                                 Path.Combine(windir, @"Microsoft.NET\Framework\v2.0.50727")
@@ -298,14 +296,12 @@ namespace Mono.ApiTools
                     }
                     else if (arg.Contains("v3.5"))
                     {
-                        state
-                            .TypeHelper
+                        state.TypeHelper
                             .Resolver
                             .AddSearchDirectory(
                                 Path.Combine(windir, @"Microsoft.NET\Framework\v2.0.50727")
                             );
-                        state
-                            .TypeHelper
+                        state.TypeHelper
                             .Resolver
                             .AddSearchDirectory(
                                 Path.Combine(
@@ -318,8 +314,7 @@ namespace Mono.ApiTools
                     {
                         if (arg.Contains("Silverlight"))
                         {
-                            state
-                                .TypeHelper
+                            state.TypeHelper
                                 .Resolver
                                 .AddSearchDirectory(
                                     Path.Combine(pf, @"Microsoft Silverlight\4.0.51204.0")
@@ -327,14 +322,12 @@ namespace Mono.ApiTools
                         }
                         else
                         {
-                            state
-                                .TypeHelper
+                            state.TypeHelper
                                 .Resolver
                                 .AddSearchDirectory(
                                     Path.Combine(windir, @"Microsoft.NET\Framework\v4.0.30319")
                                 );
-                            state
-                                .TypeHelper
+                            state.TypeHelper
                                 .Resolver
                                 .AddSearchDirectory(
                                     Path.Combine(windir, @"Microsoft.NET\Framework\v4.0.30319\WPF")
@@ -454,8 +447,7 @@ namespace Mono.ApiTools
             if (File.Exists(assembly))
                 return state.TypeHelper.Resolver.ResolveFile(assembly);
 
-            return state
-                .TypeHelper
+            return state.TypeHelper
                 .Resolver
                 .Resolve(AssemblyNameReference.Parse(assembly), new ReaderParameters());
         }
@@ -805,8 +797,7 @@ namespace Mono.ApiTools
 
             AttributeData.OutputAttributes(writer, state, type);
 
-            var ifaces = state
-                .TypeHelper
+            var ifaces = state.TypeHelper
                 .GetInterfaces(type)
                 .Where((iface) => state.TypeHelper.IsPublic(iface))
                 . // we're only interested in public interfaces
@@ -1098,10 +1089,8 @@ namespace Mono.ApiTools
                             l.DeclaringType != method.DeclaringType
                             && l.Name == method.Name
                             && l.Parameters.Count == method.Parameters.Count
-                            && l.Parameters.SequenceEqual(
-                                method.Parameters,
-                                new ParameterComparer()
-                            )
+                            && l.Parameters
+                                .SequenceEqual(method.Parameters, new ParameterComparer())
                         )
                     )
                         continue;
@@ -1450,8 +1439,7 @@ namespace Mono.ApiTools
 
             ParameterData parms = new ParameterData(writer, mbase.Parameters, state)
             {
-                HasExtensionParameter = mbase
-                    .CustomAttributes
+                HasExtensionParameter = mbase.CustomAttributes
                     .Any(l =>
                         l.AttributeType.FullName
                         == "System.Runtime.CompilerServices.ExtensionAttribute"
@@ -1518,8 +1506,7 @@ namespace Mono.ApiTools
                 AddAttribute("name", parameter.Name);
                 AddAttribute(
                     "position",
-                    parameter
-                        .Method
+                    parameter.Method
                         .Parameters
                         .IndexOf(parameter)
                         .ToString(CultureInfo.InvariantCulture)
@@ -1593,8 +1580,7 @@ namespace Mono.ApiTools
                 if (ass != null && !state.FollowForwarders)
                     TypeForwardedToData.OutputForwarders(writer, ass, state);
 
-                var attributes = provider
-                    .CustomAttributes
+                var attributes = provider.CustomAttributes
                     .Where((att) => !SkipAttribute(att))
                     .OrderBy((a) => a.Constructor.DeclaringType.FullName, StringComparer.Ordinal);
 
@@ -1975,8 +1961,7 @@ namespace Mono.ApiTools
             if (!state.TypeHelper.IsPublic(attribute))
                 return true;
 
-            return attribute
-                .Constructor
+            return attribute.Constructor
                 .DeclaringType
                 .Name
                 .EndsWith("TODOAttribute", StringComparison.Ordinal);

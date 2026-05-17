@@ -24,8 +24,7 @@ namespace Roslyn.VisualStudio.NewIntegrationTests
         {
             // Read the .err file that contains errors; this isn't a great way to do it but we have no
             // better option at this point.
-            var shell = await TestServices
-                .Shell
+            var shell = await TestServices.Shell
                 .GetRequiredGlobalServiceAsync<SVsSettingsManager, IVsSettingsManager>(
                     HangMitigatingCancellationToken
                 );

@@ -555,8 +555,7 @@ namespace Microsoft.CodeAnalysis.Tools.Tests
         [MSBuildFact]
         public async Task FilesFormattedInCodeStyleSolutionFilter_WhenFixingCodeStyleWarnings()
         {
-            var restoreExitCode = await Utilities
-                .DotNetHelper
+            var restoreExitCode = await Utilities.DotNetHelper
                 .PerformRestoreAsync(s_codeStyleSolutionFilterFilePath, _output);
             Assert.Equal(0, restoreExitCode);
 
@@ -650,8 +649,7 @@ namespace Microsoft.CodeAnalysis.Tools.Tests
             {
                 var solutionFilePath = Path.Combine(solutionPath, s_generatorSolutionFileName);
 
-                var buildExitCode = await Utilities
-                    .DotNetHelper
+                var buildExitCode = await Utilities.DotNetHelper
                     .PerformBuildAsync(solutionFilePath, _output);
                 Assert.Equal(0, buildExitCode);
 
@@ -704,8 +702,7 @@ Greeter.Greeter() -> void";
             {
                 var solutionFilePath = Path.Combine(solutionPath, s_generatorSolutionFileName);
 
-                var buildExitCode = await Utilities
-                    .DotNetHelper
+                var buildExitCode = await Utilities.DotNetHelper
                     .PerformBuildAsync(solutionFilePath, _output);
                 Assert.Equal(0, buildExitCode);
 

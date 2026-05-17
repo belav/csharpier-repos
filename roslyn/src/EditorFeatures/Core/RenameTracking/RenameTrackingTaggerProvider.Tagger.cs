@@ -43,8 +43,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
                     TagsChanged(
                         this,
                         new SnapshotSpanEventArgs(
-                            _stateMachine
-                                .TrackingSession
+                            _stateMachine.TrackingSession
                                 .TrackingSpan
                                 .GetSpan(_stateMachine.Buffer.CurrentSnapshot)
                         )
@@ -67,8 +66,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
                 where T : ITag
             {
                 if (
-                    !_stateMachine
-                        .GlobalOptions
+                    !_stateMachine.GlobalOptions
                         .GetOption(RenameTrackingOptionsStorage.RenameTracking)
                 )
                 {

@@ -1047,8 +1047,7 @@ public partial class C
         Assert.False(outer1.FilePathChecksumOpt.SequenceEqual(outer2.FilePathChecksumOpt));
         Assert.True(outer1.FilePathChecksumOpt.SequenceEqual(outer3.FilePathChecksumOpt));
 
-        var emitOptions = EmitOptions
-            .Default
+        var emitOptions = EmitOptions.Default
             .WithDebugInformationFormat(DebugInformationFormat.Embedded);
         var bytes1 = comp1.EmitToArray(emitOptions);
         var bytes2 = comp2.EmitToArray(emitOptions);
@@ -4560,8 +4559,7 @@ public partial class C
 
         var compilation = CreateCompilation(
             source,
-            parseOptions: TestOptions
-                .RegularPreview
+            parseOptions: TestOptions.RegularPreview
                 .WithDocumentationMode(DocumentationMode.Diagnose)
         );
         compilation.VerifyDiagnostics();
@@ -4592,8 +4590,7 @@ public partial class C
 
         var compilation = CreateCompilation(
             new[] { (source, "file1.cs"), (main, "file2.cs") },
-            parseOptions: TestOptions
-                .RegularPreview
+            parseOptions: TestOptions.RegularPreview
                 .WithDocumentationMode(DocumentationMode.Diagnose)
         );
         compilation.VerifyDiagnostics(
@@ -4878,11 +4875,9 @@ public partial class C
         var typeInfo = model.GetTypeInfo(voidTypeSyntax);
         Assert.Equal(
             "System.Void@<tree 0>",
-            typeInfo
-                .Type!
+            typeInfo.Type!
                 .ToDisplayString(
-                    SymbolDisplayFormat
-                        .TestFormat
+                    SymbolDisplayFormat.TestFormat
                         .WithCompilerInternalOptions(
                             SymbolDisplayCompilerInternalOptions.IncludeContainingFileForFileTypes
                         )

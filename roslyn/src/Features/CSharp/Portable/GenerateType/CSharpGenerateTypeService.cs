@@ -224,8 +224,7 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateType
                 && nameOrMemberAccessExpression.Parent.IsParentKind(SyntaxKind.BaseList)
                 && ((BaseTypeSyntax)nameOrMemberAccessExpression.Parent).Type
                     == nameOrMemberAccessExpression
-                && nameOrMemberAccessExpression
-                    .Parent
+                && nameOrMemberAccessExpression.Parent
                     .Parent
                     .IsParentKind(SyntaxKind.EnumDeclaration)
             )
@@ -543,8 +542,7 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateType
                     && variableDeclaration.Variables.Count != 0
                 )
                 {
-                    var firstVarDeclWithInitializer = variableDeclaration
-                        .Variables
+                    var firstVarDeclWithInitializer = variableDeclaration.Variables
                         .FirstOrDefault(var =>
                             var.Initializer != null && var.Initializer.Value != null
                         );
@@ -1029,8 +1027,7 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateType
 
                 // Check if the usings is already present
                 if (
-                    compilationRoot
-                        .Usings
+                    compilationRoot.Usings
                         .Where(n => n != null && n.Alias == null)
                         .Select(n => n.Name.ToString())
                         .Any(n => n.Equals(includeUsingsOrImports))

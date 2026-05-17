@@ -87,8 +87,7 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
                         .Save();
                 }
 
-                CommandResult result = SharedState
-                    .DotNetWithNetCoreApp
+                CommandResult result = SharedState.DotNetWithNetCoreApp
                     .Exec(
                         Constants.AdditionalDeps.CommandLineArgument,
                         additionalDepsDirectory,
@@ -139,8 +138,7 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
                 File.Delete(Path.Combine(app.Location, $"{additionalLibName}.dll"));
             }
 
-            CommandResult result = SharedState
-                .DotNetWithNetCoreApp
+            CommandResult result = SharedState.DotNetWithNetCoreApp
                 .Exec(Constants.AdditionalDeps.CommandLineArgument, additionalDepsFile, app.AppDll)
                 .EnableTracingAndCaptureOutputs()
                 .Execute(expectedToFail: !dependencyExists);
@@ -178,8 +176,7 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
             {
                 File.WriteAllText(invalidDepsFile, "{");
 
-                SharedState
-                    .DotNetWithNetCoreApp
+                SharedState.DotNetWithNetCoreApp
                     .Exec(
                         Constants.AdditionalDeps.CommandLineArgument,
                         invalidDepsFile,

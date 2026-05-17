@@ -187,8 +187,7 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
 
             // In order to actually use the CAPI version of the key, perphemeral loading must be specified.
             using (
-                X509Certificate2 cert = Certificates
-                    .RSAKeyTransferCapi1
+                X509Certificate2 cert = Certificates.RSAKeyTransferCapi1
                     .CloneAsPerphemeralLoader()
                     .TryGetCertificateWithPrivateKey()
             )
@@ -210,8 +209,7 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
             EnvelopedCms ecms = new EnvelopedCms();
             ecms.Decode(encodedMessage);
             using (
-                X509Certificate2 cert = Certificates
-                    .RSAKeyTransfer1
+                X509Certificate2 cert = Certificates.RSAKeyTransfer1
                     .TryGetCertificateWithPrivateKey()
             )
             {
@@ -441,8 +439,7 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
             // This is the private key that "we don't have." We want to force it to load anyway, though, to trigger
             // the "fail the test due to bad machine config" exception if someone left this cert in the MY store check.
             using (
-                X509Certificate2 ignore = Certificates
-                    .RSAKeyTransfer1
+                X509Certificate2 ignore = Certificates.RSAKeyTransfer1
                     .TryGetCertificateWithPrivateKey()
             ) { }
 
@@ -475,8 +472,7 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
             // This is the private key that "we don't have." We want to force it to load anyway, though, to trigger
             // the "fail the test due to bad machine config" exception if someone left this cert in the MY store check.
             using (
-                X509Certificate2 ignore = Certificates
-                    .RSAKeyTransfer1
+                X509Certificate2 ignore = Certificates.RSAKeyTransfer1
                     .TryGetCertificateWithPrivateKey()
             ) { }
 

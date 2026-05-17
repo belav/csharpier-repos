@@ -271,11 +271,9 @@ internal sealed class LspFileChangeWatcher : IFileChangeWatcher
                 ],
             };
 
-            var asyncToken = _changeWatcher
-                ._asynchronousOperationListener
+            var asyncToken = _changeWatcher._asynchronousOperationListener
                 .BeginAsyncOperation(nameof(LspFileWatchRegistration));
-            _registrationTask = changeWatcher
-                ._clientLanguageServerManager
+            _registrationTask = changeWatcher._clientLanguageServerManager
                 .SendRequestAsync(
                     "client/registerCapability",
                     registrationParams,
@@ -293,8 +291,7 @@ internal sealed class LspFileChangeWatcher : IFileChangeWatcher
             // means it never actually made it to the client, and fault would mean it never was actually created.
             _cancellationTokenSource.Cancel();
 
-            var asyncToken = _changeWatcher
-                ._asynchronousOperationListener
+            var asyncToken = _changeWatcher._asynchronousOperationListener
                 .BeginAsyncOperation(nameof(LspFileWatchRegistration) + "." + nameof(Dispose));
 
             _registrationTask
@@ -315,8 +312,7 @@ internal sealed class LspFileChangeWatcher : IFileChangeWatcher
 
                         try
                         {
-                            await _changeWatcher
-                                ._clientLanguageServerManager
+                            await _changeWatcher._clientLanguageServerManager
                                 .SendRequestAsync(
                                     "client/unregisterCapability",
                                     unregistrationParams,

@@ -145,8 +145,7 @@ namespace System.Security.Cryptography.Asn1.Pkcs12
 
                     while (collectionReader.HasData)
                     {
-                        System
-                            .Security
+                        System.Security
                             .Cryptography
                             .Asn1
                             .AttributeAsn

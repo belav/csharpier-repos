@@ -196,13 +196,13 @@ namespace System.ServiceModel.Activities.Presentation
                             if (string.IsNullOrEmpty(operationName) || null == serviceContractName)
                             {
                                 ModelItem requestDisplayName;
-                                this.Activity.TryGetPropertyValue(
-                                    out requestDisplayName,
-                                    "Request",
-                                    "DisplayName"
-                                );
-                                throw FxTrace
-                                    .Exception
+                                this.Activity
+                                    .TryGetPropertyValue(
+                                        out requestDisplayName,
+                                        "Request",
+                                        "DisplayName"
+                                    );
+                                throw FxTrace.Exception
                                     .AsError(
                                         new InvalidOperationException(
                                             string.Format(
@@ -223,8 +223,7 @@ namespace System.ServiceModel.Activities.Presentation
 
                             if (string.IsNullOrEmpty(operationName) || null == serviceContractName)
                             {
-                                throw FxTrace
-                                    .Exception
+                                throw FxTrace.Exception
                                     .AsError(
                                         new InvalidOperationException(
                                             string.Format(

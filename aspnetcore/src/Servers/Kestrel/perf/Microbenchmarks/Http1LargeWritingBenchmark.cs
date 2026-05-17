@@ -56,13 +56,11 @@ public class Http1LargeWritingBenchmark
         for (int i = 0; i < 9; i++)
         {
             // Ignore the first nine tasks.
-            _ = _http1Connection
-                .ResponseBody
+            _ = _http1Connection.ResponseBody
                 .WriteAsync(_writeData, i * segmentSize, segmentSize, default);
         }
 
-        return _http1Connection
-            .ResponseBody
+        return _http1Connection.ResponseBody
             .WriteAsync(_writeData, 9 * segmentSize, segmentSize, default);
     }
 

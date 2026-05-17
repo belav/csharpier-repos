@@ -88,8 +88,7 @@ namespace System.Net.Security
         {
             try
             {
-                resultSize = Interop
-                    .OpenSsl
+                resultSize = Interop.OpenSsl
                     .Encrypt(
                         (SafeSslHandle)securityContext,
                         input.Span,
@@ -118,8 +117,7 @@ namespace System.Net.Security
 
             try
             {
-                int resultSize = Interop
-                    .OpenSsl
+                int resultSize = Interop.OpenSsl
                     .Decrypt(
                         (SafeSslHandle)securityContext,
                         buffer,
@@ -184,8 +182,7 @@ namespace System.Net.Security
             }
             else
             {
-                bindingHandle = Interop
-                    .OpenSsl
+                bindingHandle = Interop.OpenSsl
                     .QueryChannelBinding((SafeSslHandle)securityContext, attribute);
             }
 
@@ -199,8 +196,7 @@ namespace System.Net.Security
             out byte[]? outputBuffer
         )
         {
-            SecurityStatusPal status = Interop
-                .OpenSsl
+            SecurityStatusPal status = Interop.OpenSsl
                 .SslRenegotiate((SafeSslHandle)context, out _);
 
             outputBuffer = Array.Empty<byte>();
@@ -239,8 +235,7 @@ namespace System.Net.Security
             SslAuthenticationOptions sslAuthenticationOptions
         )
         {
-            Interop
-                .OpenSsl
+            Interop.OpenSsl
                 .UpdateClientCertificate((SafeSslHandle)context!, sslAuthenticationOptions);
 
             return true;
@@ -263,8 +258,7 @@ namespace System.Net.Security
                     context = Interop.OpenSsl.AllocateSslHandle(sslAuthenticationOptions);
                 }
 
-                SecurityStatusPalErrorCode errorCode = Interop
-                    .OpenSsl
+                SecurityStatusPalErrorCode errorCode = Interop.OpenSsl
                     .DoSslHandshake(
                         (SafeSslHandle)context,
                         inputBuffer,
@@ -283,8 +277,7 @@ namespace System.Net.Security
                 // That seems to be flaw in OpenSSL state machine and we have workaround to peek it and try it again.
                 if (outputSize == 0 && Interop.Ssl.IsSslRenegotiatePending((SafeSslHandle)context))
                 {
-                    errorCode = Interop
-                        .OpenSsl
+                    errorCode = Interop.OpenSsl
                         .DoSslHandshake(
                             (SafeSslHandle)context,
                             ReadOnlySpan<byte>.Empty,

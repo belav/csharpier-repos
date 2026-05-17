@@ -398,8 +398,7 @@ namespace System.Linq.Parallel.Tests
             _ = count;
 
             AssertThrows.Wrapped<DeliberateTestException>(() =>
-                labeled
-                    .Item
+                labeled.Item
                     .ToLookup(
                         (Func<int, int>)(
                             x =>
@@ -410,8 +409,7 @@ namespace System.Linq.Parallel.Tests
                     )
             );
             AssertThrows.Wrapped<DeliberateTestException>(() =>
-                labeled
-                    .Item
+                labeled.Item
                     .ToLookup(
                         (Func<int, int>)(
                             x =>
@@ -423,8 +421,7 @@ namespace System.Linq.Parallel.Tests
                     )
             );
             AssertThrows.Wrapped<DeliberateTestException>(() =>
-                labeled
-                    .Item
+                labeled.Item
                     .ToLookup(
                         x => x,
                         (Func<int, int>)(
@@ -437,8 +434,7 @@ namespace System.Linq.Parallel.Tests
             );
 
             AssertThrows.Wrapped<DeliberateTestException>(() =>
-                labeled
-                    .Item
+                labeled.Item
                     .ToLookup(
                         (Func<int, int>)(
                             x =>
@@ -450,8 +446,7 @@ namespace System.Linq.Parallel.Tests
                     )
             );
             AssertThrows.Wrapped<DeliberateTestException>(() =>
-                labeled
-                    .Item
+                labeled.Item
                     .ToLookup(
                         (Func<int, int>)(
                             x =>
@@ -464,8 +459,7 @@ namespace System.Linq.Parallel.Tests
                     )
             );
             AssertThrows.Wrapped<DeliberateTestException>(() =>
-                labeled
-                    .Item
+                labeled.Item
                     .ToLookup(
                         x => x,
                         (Func<int, int>)(

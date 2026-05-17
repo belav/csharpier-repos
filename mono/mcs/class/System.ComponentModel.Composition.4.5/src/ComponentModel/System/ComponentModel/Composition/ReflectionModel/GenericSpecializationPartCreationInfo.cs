@@ -423,8 +423,7 @@ namespace System.ComponentModel.Composition.ReflectionModel
 
             string contractName = this.Translate(
                 reflectionExport.ContractName,
-                reflectionExport
-                    .Metadata
+                reflectionExport.Metadata
                     .GetValue<int[]>(CompositionConstants.GenericExportParametersOrderMetadataName)
             );
 
@@ -481,8 +480,7 @@ namespace System.ComponentModel.Composition.ReflectionModel
             ContractBasedImportDefinition originalImport
         )
         {
-            int[] importParametersOrder = originalImport
-                .Metadata
+            int[] importParametersOrder = originalImport.Metadata
                 .GetValue<int[]>(CompositionConstants.GenericImportParametersOrderMetadataName);
             if (importParametersOrder != null)
             {
@@ -519,15 +517,13 @@ namespace System.ComponentModel.Composition.ReflectionModel
                 StringComparers.MetadataKeyNames
             );
 
-            string exportTypeIdentity = originalExport
-                .Metadata
+            string exportTypeIdentity = originalExport.Metadata
                 .GetValue<string>(CompositionConstants.ExportTypeIdentityMetadataName);
             if (!string.IsNullOrEmpty(exportTypeIdentity))
             {
                 metadata[CompositionConstants.ExportTypeIdentityMetadataName] = this.Translate(
                     exportTypeIdentity,
-                    originalExport
-                        .Metadata
+                    originalExport.Metadata
                         .GetValue<int[]>(
                             CompositionConstants.GenericExportParametersOrderMetadataName
                         )

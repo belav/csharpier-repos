@@ -65,8 +65,7 @@ namespace System.ServiceModel.Channels
             }
             else
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         ReplyChannel.CreateReceiveRequestTimedOutException(channel, timeout)
                     );
@@ -133,8 +132,7 @@ namespace System.ServiceModel.Channels
             {
                 if (!this.channel.EndTryReceiveRequest(result, out this.requestContext))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             ReplyChannel.CreateReceiveRequestTimedOutException(
                                 this.channel,
@@ -206,8 +204,7 @@ namespace System.ServiceModel.Channels
         public RequestContext ReceiveRequest(TimeSpan timeout)
         {
             if (timeout < TimeSpan.Zero)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentOutOfRangeException(
                             "timeout",
@@ -233,8 +230,7 @@ namespace System.ServiceModel.Channels
         {
             if (timeout < TimeSpan.Zero)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentOutOfRangeException(
                             "timeout",
@@ -256,8 +252,7 @@ namespace System.ServiceModel.Channels
         public bool TryReceiveRequest(TimeSpan timeout, out RequestContext context)
         {
             if (timeout < TimeSpan.Zero)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentOutOfRangeException(
                             "timeout",
@@ -277,8 +272,7 @@ namespace System.ServiceModel.Channels
         )
         {
             if (timeout < TimeSpan.Zero)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentOutOfRangeException(
                             "timeout",
@@ -299,8 +293,7 @@ namespace System.ServiceModel.Channels
         public bool WaitForRequest(TimeSpan timeout)
         {
             if (timeout < TimeSpan.Zero)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentOutOfRangeException(
                             "timeout",
@@ -320,8 +313,7 @@ namespace System.ServiceModel.Channels
         )
         {
             if (timeout < TimeSpan.Zero)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentOutOfRangeException(
                             "timeout",

@@ -107,8 +107,7 @@ namespace System.ServiceModel.Discovery
                 ThrowIfOpen();
                 if (value < 0)
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .ArgumentOutOfRange(
                             "value",
                             value,
@@ -228,8 +227,7 @@ namespace System.ServiceModel.Discovery
             endpointDiscoveryMetadata.Address = endpoint.Address;
             endpointDiscoveryMetadata.ListenUris.Add(listenUri);
 
-            EndpointDiscoveryBehavior endpointDiscoveryBehavior = endpoint
-                .Behaviors
+            EndpointDiscoveryBehavior endpointDiscoveryBehavior = endpoint.Behaviors
                 .Find<EndpointDiscoveryBehavior>();
             if (endpointDiscoveryBehavior != null)
             {
@@ -304,8 +302,7 @@ namespace System.ServiceModel.Discovery
                     continue;
                 }
 
-                endpointDiscoveryMetadata
-                    .Scopes
+                endpointDiscoveryMetadata.Scopes
                     .Add(
                         FindCriteria.GetContractTypeNameScope(
                             new XmlQualifiedName(
@@ -594,8 +591,7 @@ namespace System.ServiceModel.Discovery
         {
             if (this.isOpen)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(new InvalidOperationException(SR2.DiscoveryMetadataAlreadyOpen));
             }
         }
@@ -613,8 +609,7 @@ namespace System.ServiceModel.Discovery
             {
                 if (this.isOpen)
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(
                             new InvalidOperationException(
                                 SR2.DiscoverySdmCollectionIsOpen(typeof(T).Name)
@@ -662,8 +657,7 @@ namespace System.ServiceModel.Discovery
             {
                 if ((item != null) && (item.Name == string.Empty))
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(new ArgumentException(SR2.DiscoveryArgumentEmptyContractTypeName));
                 }
                 base.InsertItem(index, item);
@@ -673,8 +667,7 @@ namespace System.ServiceModel.Discovery
             {
                 if ((item != null) && (item.Name == string.Empty))
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(new ArgumentException(SR2.DiscoveryArgumentEmptyContractTypeName));
                 }
                 base.SetItem(index, item);
@@ -690,8 +683,7 @@ namespace System.ServiceModel.Discovery
             {
                 if (item != null && !item.IsAbsoluteUri)
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(new ArgumentException(SR2.DiscoveryArgumentInvalidScopeUri(item)));
                 }
                 base.InsertItem(index, item);
@@ -701,8 +693,7 @@ namespace System.ServiceModel.Discovery
             {
                 if (item != null && !item.IsAbsoluteUri)
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(new ArgumentException(SR2.DiscoveryArgumentInvalidScopeUri(item)));
                 }
                 base.SetItem(index, item);

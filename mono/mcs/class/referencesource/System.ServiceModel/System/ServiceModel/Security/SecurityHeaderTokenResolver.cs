@@ -65,8 +65,7 @@ namespace System.ServiceModel.Security
                 && (tokenParameters == null)
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(
                         SR.GetString(SR.ResolvingExternalTokensRequireSecurityTokenParameters)
                     );
@@ -100,11 +99,12 @@ namespace System.ServiceModel.Security
             for (int i = 0; i < keyIdentifier.Count; i++)
             {
                 if (
-                    this.expectedWrapperTokenParameters.MatchesKeyIdentifierClause(
-                        this.expectedWrapper,
-                        keyIdentifier[i],
-                        SecurityTokenReferenceStyle.External
-                    )
+                    this.expectedWrapperTokenParameters
+                        .MatchesKeyIdentifierClause(
+                            this.expectedWrapper,
+                            keyIdentifier[i],
+                            SecurityTokenReferenceStyle.External
+                        )
                 )
                 {
                     return true;
@@ -145,8 +145,7 @@ namespace System.ServiceModel.Security
         {
             if (keyIdentifierClause == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("keyIdentifierClause"));
             }
 
@@ -193,8 +192,7 @@ namespace System.ServiceModel.Security
         {
             if (keyIdentifierClause == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("keyIdentifierClause");
             }
 
@@ -286,8 +284,7 @@ namespace System.ServiceModel.Security
                 {
                     // The resolved token contains no Symmetric Security key and thus we cannot create
                     // a derived key off of it.
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new MessageSecurityException(
                                 SR.GetString(
@@ -304,8 +301,7 @@ namespace System.ServiceModel.Security
                         ? DerivedKeySecurityToken.DefaultDerivedKeyLength
                         : keyIdentifierClause.DerivationLength;
                 if (derivationLength > this.securityHeader.MaxDerivedKeyLength)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new MessageSecurityException(
                                 SR.GetString(
@@ -327,8 +323,7 @@ namespace System.ServiceModel.Security
                             (derivedKeyToken.Length == derivationLength)
                             && (CryptoHelper.IsEqual(derivedKeyToken.Nonce, derivationNonce))
                             && (
-                                derivedKeyToken
-                                    .TokenToDerive
+                                derivedKeyToken.TokenToDerive
                                     .MatchesKeyIdentifierClause(keyIdentifierClause)
                             )
                         )
@@ -445,8 +440,7 @@ namespace System.ServiceModel.Security
         {
             if (keyIdentifierClause == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("keyIdentifierClause");
             }
             key = this.ResolveSecurityKeyCore(keyIdentifierClause, createIntrinsicKeys);

@@ -1042,8 +1042,7 @@ namespace System.Speech.Recognition
             // This must be before the SAPI load to avoid some conflict with SAPI server when getting at the
             // the stream
             if (
-                System
-                    .Speech
+                System.Speech
                     .Internal
                     .SrgsCompiler
                     .CfgGrammar

@@ -92,8 +92,7 @@ namespace System.Security.Cryptography
             unsafe
             {
                 byte[] curveNameBytes = new byte[(curveName.Length + 1) * sizeof(char)]; // +1 to add trailing null
-                System
-                    .Text
+                System.Text
                     .Encoding
                     .Unicode
                     .GetBytes(curveName, 0, curveName.Length, curveNameBytes, 0);

@@ -238,8 +238,7 @@ public class ViewComponentTests
     {
         // Arrange
         var httpContext = new DefaultHttpContext();
-        httpContext
-            .Features
+        httpContext.Features
             .Set<ISessionFeature>(new SessionFeature() { Session = new TestSession() });
         var viewContext = new ViewContext();
         viewContext.TempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>());

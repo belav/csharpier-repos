@@ -140,8 +140,7 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                 emitDebugInformation
             );
 
-            var errors = _compiler
-                .Arguments
+            var errors = _compiler.Arguments
                 .Errors
                 .Concat(diagnosticsInfos.Select(Diagnostic.Create));
             if (_compiler.ReportDiagnostics(errors, _console.Error, errorLogger, compilation: null))
@@ -444,8 +443,7 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                 .RemoveImportsAndReferences()
                 .WithMetadataResolver(
                     currentMetadataResolver.WithRelativePathResolver(
-                        currentMetadataResolver
-                            .PathResolver
+                        currentMetadataResolver.PathResolver
                             .WithBaseDirectory(newWorkingDirectory)
                             .WithSearchPaths(newReferenceSearchPaths)
                     )
@@ -525,8 +523,7 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                 {
                     int notShown = diagnostics.Length - MaxDisplayCount;
                     _console.SetForegroundColor(ConsoleColor.DarkRed);
-                    _console
-                        .Error
+                    _console.Error
                         .WriteLine(string.Format(ScriptingResources.PlusAdditionalError, notShown));
                 }
             }

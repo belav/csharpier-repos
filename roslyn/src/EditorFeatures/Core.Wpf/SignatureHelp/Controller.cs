@@ -178,8 +178,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
                 var document = snapshot.GetOpenDocumentInCurrentContextWithChanges();
                 if (document != null)
                 {
-                    _providers = document
-                        .Project
+                    _providers = document.Project
                         .Solution
                         .Services
                         .SelectMatchingExtensionValues(

@@ -210,8 +210,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 CancellationToken cancellationToken
             )
             {
-                var loadDiagnostic = await document
-                    .State
+                var loadDiagnostic = await document.State
                     .GetLoadDiagnosticAsync(cancellationToken)
                     .ConfigureAwait(false);
                 if (loadDiagnostic != null)

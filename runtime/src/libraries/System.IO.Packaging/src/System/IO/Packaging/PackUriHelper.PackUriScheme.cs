@@ -225,8 +225,7 @@ namespace System.IO.Packaging
                 //Iff the PackageUri match do we compare the part uris.
                 if (compareResult == 0)
                 {
-                    compareResult = System
-                        .IO
+                    compareResult = System.IO
                         .Packaging
                         .PackUriHelper
                         .ComparePartUri(firstPartUri, secondPartUri);

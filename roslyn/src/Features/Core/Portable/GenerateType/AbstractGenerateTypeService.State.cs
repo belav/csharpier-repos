@@ -108,8 +108,7 @@ namespace Microsoft.CodeAnalysis.GenerateType
                 }
 
                 SimpleName = (TSimpleNameSyntax)node;
-                var syntaxFacts = semanticDocument
-                    .Document
+                var syntaxFacts = semanticDocument.Document
                     .GetRequiredLanguageService<ISyntaxFactsService>();
                 syntaxFacts.GetNameAndArityOfSimpleName(SimpleName, out var name, out _);
 
@@ -160,8 +159,7 @@ namespace Microsoft.CodeAnalysis.GenerateType
                     return false;
                 }
 
-                var semanticFacts = semanticDocument
-                    .Document
+                var semanticFacts = semanticDocument.Document
                     .GetRequiredLanguageService<ISemanticFactsService>();
                 if (
                     !semanticFacts.IsTypeContext(
@@ -278,8 +276,7 @@ namespace Microsoft.CodeAnalysis.GenerateType
                 // then we don't really want to infer a base type for 'Goo'.
 
                 // However, there are a few other cases were we can infer a base type.
-                var syntaxFacts = document
-                    .Document
+                var syntaxFacts = document.Document
                     .GetRequiredLanguageService<ISyntaxFactsService>();
                 if (service.IsInCatchDeclaration(NameOrMemberAccessExpression))
                 {
@@ -294,8 +291,7 @@ namespace Microsoft.CodeAnalysis.GenerateType
                     var expr = ObjectCreationExpressionOpt ?? NameOrMemberAccessExpression;
                     if (expr != null)
                     {
-                        var typeInference = document
-                            .Document
+                        var typeInference = document.Document
                             .GetRequiredLanguageService<ITypeInferenceService>();
                         var baseTypes = typeInference.InferTypes(
                             document.SemanticModel,
@@ -414,12 +410,10 @@ namespace Microsoft.CodeAnalysis.GenerateType
                             return;
                         }
 
-                        var sourceTreeToBeGeneratedIn = symbol
-                            .Locations
+                        var sourceTreeToBeGeneratedIn = symbol.Locations
                             .First(loc => loc.IsInSource)
                             .SourceTree;
-                        var documentToBeGeneratedIn = document
-                            .Project
+                        var documentToBeGeneratedIn = document.Project
                             .Solution
                             .GetDocument(sourceTreeToBeGeneratedIn);
 
@@ -480,8 +474,7 @@ namespace Microsoft.CodeAnalysis.GenerateType
                     //
                     // TODO(cyrusn): We need to make this logic work if the type is in the
                     // base/interface list of a type.
-                    var format = SymbolDisplayFormat
-                        .FullyQualifiedFormat
+                    var format = SymbolDisplayFormat.FullyQualifiedFormat
                         .WithGlobalNamespaceStyle(SymbolDisplayGlobalNamespaceStyle.Omitted);
                     TypeToGenerateInOpt = service.DetermineTypeToGenerateIn(
                         semanticModel,
@@ -490,8 +483,7 @@ namespace Microsoft.CodeAnalysis.GenerateType
                     );
                     if (TypeToGenerateInOpt != null)
                     {
-                        NamespaceToGenerateInOpt = TypeToGenerateInOpt
-                            .ContainingNamespace
+                        NamespaceToGenerateInOpt = TypeToGenerateInOpt.ContainingNamespace
                             .ToDisplayString(format);
                     }
                     else

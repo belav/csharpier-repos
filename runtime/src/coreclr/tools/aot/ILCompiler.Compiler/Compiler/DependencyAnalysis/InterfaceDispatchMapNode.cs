@@ -126,8 +126,7 @@ namespace ILCompiler.DependencyAnalysis
                         continue;
 
                     if (interfaceOnDefinitionType != null)
-                        declMethod = factory
-                            .TypeSystemContext
+                        declMethod = factory.TypeSystemContext
                             .GetMethodForInstantiatedType(
                                 declMethod.GetTypicalMethodDefinition(),
                                 interfaceOnDefinitionType
@@ -227,8 +226,7 @@ namespace ILCompiler.DependencyAnalysis
                         continue;
 
                     if (!interfaceType.IsTypeDefinition)
-                        declMethod = factory
-                            .TypeSystemContext
+                        declMethod = factory.TypeSystemContext
                             .GetMethodForInstantiatedType(
                                 declMethod.GetTypicalMethodDefinition(),
                                 (InstantiatedType)definitionInterfaceType
@@ -252,8 +250,7 @@ namespace ILCompiler.DependencyAnalysis
 
                         MethodDesc targetMethod = implMethod;
                         if (!implType.IsTypeDefinition)
-                            targetMethod = factory
-                                .TypeSystemContext
+                            targetMethod = factory.TypeSystemContext
                                 .GetMethodForInstantiatedType(
                                     implMethod.GetTypicalMethodDefinition(),
                                     (InstantiatedType)implType

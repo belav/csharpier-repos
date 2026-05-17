@@ -46,8 +46,7 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
                             }
                             catch (Exception ex)
                             {
-                                DependencyInjectionEventSource
-                                    .Log
+                                DependencyInjectionEventSource.Log
                                     .ServiceRealizationFailed(ex, _serviceProvider.GetHashCode());
 
                                 Debug.Fail(

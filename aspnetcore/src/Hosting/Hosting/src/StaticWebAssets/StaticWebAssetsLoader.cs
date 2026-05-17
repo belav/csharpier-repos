@@ -38,8 +38,7 @@ public class StaticWebAssetsLoader
 
     internal static void UseStaticWebAssetsCore(IWebHostEnvironment environment, Stream manifest)
     {
-        var staticWebAssetManifest = ManifestStaticWebAssetFileProvider
-            .StaticWebAssetManifest
+        var staticWebAssetManifest = ManifestStaticWebAssetFileProvider.StaticWebAssetManifest
             .Parse(manifest);
         var provider = new ManifestStaticWebAssetFileProvider(
             staticWebAssetManifest,

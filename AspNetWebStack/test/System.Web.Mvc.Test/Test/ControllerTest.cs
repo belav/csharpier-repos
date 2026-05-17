@@ -1461,8 +1461,7 @@ namespace System.Web.Mvc.Test
 
             // Act
             mockController.Object.TempData.Add("Key", "Value");
-            mockController
-                .Object
+            mockController.Object
                 .TempData
                 .Save(
                     mockController.Object.ControllerContext,
@@ -1482,8 +1481,7 @@ namespace System.Web.Mvc.Test
                 new RouteData(),
                 mockDestinationController.Object
             );
-            mockDestinationController
-                .Object
+            mockDestinationController.Object
                 .TempData
                 .Load(
                     mockDestinationController.Object.ControllerContext,
@@ -1496,8 +1494,7 @@ namespace System.Web.Mvc.Test
             // Act
             mockDestinationController.Object.TempData["NewKey"] = "NewValue";
             Assert.True(mockDestinationController.Object.TempData.ContainsKey("NewKey"));
-            mockDestinationController
-                .Object
+            mockDestinationController.Object
                 .TempData
                 .Save(
                     mockDestinationController.Object.ControllerContext,
@@ -1516,8 +1513,7 @@ namespace System.Web.Mvc.Test
                 new RouteData(),
                 mockSecondDestinationController.Object
             );
-            mockSecondDestinationController
-                .Object
+            mockSecondDestinationController.Object
                 .TempData
                 .Load(
                     mockSecondDestinationController.Object.ControllerContext,
@@ -1545,8 +1541,7 @@ namespace System.Web.Mvc.Test
 
             // Act
             mockController.Object.TempData.Add("Key", "Value");
-            mockController
-                .Object
+            mockController.Object
                 .TempData
                 .Save(
                     mockController.Object.ControllerContext,
@@ -1566,8 +1561,7 @@ namespace System.Web.Mvc.Test
                 new RouteData(),
                 mockDestinationController.Object
             );
-            mockDestinationController
-                .Object
+            mockDestinationController.Object
                 .TempData
                 .Load(
                     mockDestinationController.Object.ControllerContext,
@@ -1579,8 +1573,7 @@ namespace System.Web.Mvc.Test
 
             // Act
             object value = mockDestinationController.Object.TempData["Key"];
-            mockDestinationController
-                .Object
+            mockDestinationController.Object
                 .TempData
                 .Save(
                     mockDestinationController.Object.ControllerContext,
@@ -1599,8 +1592,7 @@ namespace System.Web.Mvc.Test
                 new RouteData(),
                 mockSecondDestinationController.Object
             );
-            mockSecondDestinationController
-                .Object
+            mockSecondDestinationController.Object
                 .TempData
                 .Load(
                     mockSecondDestinationController.Object.ControllerContext,

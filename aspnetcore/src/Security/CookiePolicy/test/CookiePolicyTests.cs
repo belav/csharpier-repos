@@ -38,20 +38,16 @@ public class CookiePolicyTests
     {
         context.Response.Cookies.Append("A", "A");
         context.Response.Cookies.Append("B", "B", new CookieOptions());
-        context
-            .Response
+        context.Response
             .Cookies
             .Append("C", "C", new CookieOptions { SameSite = Http.SameSiteMode.None });
-        context
-            .Response
+        context.Response
             .Cookies
             .Append("D", "D", new CookieOptions { SameSite = Http.SameSiteMode.Lax });
-        context
-            .Response
+        context.Response
             .Cookies
             .Append("E", "E", new CookieOptions { SameSite = Http.SameSiteMode.Strict });
-        context
-            .Response
+        context.Response
             .Cookies
             .Append("F", "F", new CookieOptions { SameSite = (Http.SameSiteMode)(-1) });
         return Task.FromResult(0);
@@ -280,20 +276,17 @@ public class CookiePolicyTests
                         app.Run(context =>
                         {
                             context.Response.Cookies.Append("A", "A");
-                            context
-                                .Response
+                            context.Response
                                 .Cookies
                                 .Append("B", "B", new CookieOptions { Secure = false });
-                            context
-                                .Response
+                            context.Response
                                 .Cookies
                                 .Append(
                                     "C",
                                     "C",
                                     new CookieOptions() { SameSite = Http.SameSiteMode.Strict }
                                 );
-                            context
-                                .Response
+                            context.Response
                                 .Cookies
                                 .Append("D", "D", new CookieOptions { Secure = true });
                             return Task.FromResult(0);
@@ -331,13 +324,11 @@ public class CookiePolicyTests
                         app.Run(context =>
                         {
                             context.Response.Cookies.Delete("A");
-                            context
-                                .Response
+                            context.Response
                                 .Cookies
                                 .Delete("B", new CookieOptions { Secure = false });
                             context.Response.Cookies.Delete("C", new CookieOptions());
-                            context
-                                .Response
+                            context.Response
                                 .Cookies
                                 .Delete("D", new CookieOptions { Secure = true });
                             return Task.FromResult(0);
@@ -373,8 +364,7 @@ public class CookiePolicyTests
                         app.Use(next =>
                             context =>
                             {
-                                context
-                                    .Features
+                                context.Features
                                     .Set<IResponseCookiesFeature>(new TestCookieFeature());
                                 return next(context);
                             }

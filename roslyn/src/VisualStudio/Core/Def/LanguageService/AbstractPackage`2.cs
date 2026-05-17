@@ -69,8 +69,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
 
             await shell.LoadPackageAsync(Guids.RoslynPackageId);
 
-            var miscellaneousFilesWorkspace =
-                this.ComponentModel.GetService<MiscellaneousFilesWorkspace>();
+            var miscellaneousFilesWorkspace = this.ComponentModel
+                .GetService<MiscellaneousFilesWorkspace>();
             RegisterMiscellaneousFilesWorkspaceInformation(miscellaneousFilesWorkspace);
 
             if (!IVsShellExtensions.IsInCommandLineMode(JoinableTaskFactory))

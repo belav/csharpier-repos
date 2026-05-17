@@ -113,8 +113,7 @@ public class CreatedOfTResultTests
         PopulateMetadata<Created<Todo>>(((Delegate)MyApi).GetMethodInfo(), builder);
 
         // Assert
-        var producesResponseTypeMetadata = builder
-            .Metadata
+        var producesResponseTypeMetadata = builder.Metadata
             .OfType<ProducesResponseTypeMetadata>()
             .Last();
         Assert.Equal(StatusCodes.Status201Created, producesResponseTypeMetadata.StatusCode);

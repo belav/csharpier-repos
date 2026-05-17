@@ -34,8 +34,7 @@ namespace System.Net.Http.Formatting
         [Fact]
         public void TypeIsCorrect()
         {
-            Assert
-                .Type
+            Assert.Type
                 .HasProperties(
                     typeof(FormUrlEncodedMediaTypeFormatter),
                     TypeAssert.TypeProperties.IsPublicVisibleClass
@@ -50,8 +49,7 @@ namespace System.Net.Http.Formatting
 
             foreach (MediaTypeHeaderValue mediaType1 in formatter1.SupportedMediaTypes)
             {
-                MediaTypeHeaderValue mediaType2 = formatter2
-                    .SupportedMediaTypes
+                MediaTypeHeaderValue mediaType2 = formatter2.SupportedMediaTypes
                     .Single(m => m.Equals(mediaType1));
                 Assert.NotSame(mediaType1, mediaType2);
             }
@@ -92,8 +90,7 @@ namespace System.Net.Http.Formatting
         [Fact]
         public void ReadBufferSize_RoundTrips()
         {
-            Assert
-                .Reflection
+            Assert.Reflection
                 .IntegerProperty(
                     new FormUrlEncodedMediaTypeFormatter(),
                     c => c.ReadBufferSize,
@@ -109,8 +106,7 @@ namespace System.Net.Http.Formatting
         [Fact]
         public void MaxDepthReturnsCorrectValue()
         {
-            Assert
-                .Reflection
+            Assert.Reflection
                 .IntegerProperty(
                     new FormUrlEncodedMediaTypeFormatter(),
                     f => f.MaxDepth,

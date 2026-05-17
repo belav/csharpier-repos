@@ -97,8 +97,7 @@ internal abstract class WebHostBuilderBase : IWebHostBuilder, ISupportsUseDefaul
                 Configuration = context.Configuration,
                 HostingEnvironment = new HostingEnvironment(),
             };
-            webHostBuilderContext
-                .HostingEnvironment
+            webHostBuilderContext.HostingEnvironment
                 .Initialize(
                     context.HostingEnvironment.ContentRootPath,
                     options,

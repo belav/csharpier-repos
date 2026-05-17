@@ -58,8 +58,7 @@ namespace System.Workflow.ComponentModel.Compiler
                         try
                         {
                             if (
-                                MultiTargetingInfo
-                                    .MultiTargetingUtilities
+                                MultiTargetingInfo.MultiTargetingUtilities
                                     .IsFrameworkReferenceAssembly(filePath)
                             )
                             {

@@ -42,8 +42,7 @@ public class MapMiddleware
         ArgumentNullException.ThrowIfNull(context);
 
         if (
-            context
-                .Request
+            context.Request
                 .Path
                 .StartsWithSegments(_options.PathMatch, out var matchedPath, out var remainingPath)
         )

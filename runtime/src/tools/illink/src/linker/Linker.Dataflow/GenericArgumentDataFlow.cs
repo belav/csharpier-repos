@@ -32,8 +32,7 @@ namespace Mono.Linker.Dataflow
             TypeReference genericArgument
         )
         {
-            var genericParameterValue = _context
-                .Annotations
+            var genericParameterValue = _context.Annotations
                 .FlowAnnotations
                 .GetGenericParameterValue(genericParameter);
             Debug.Assert(
@@ -41,15 +40,13 @@ namespace Mono.Linker.Dataflow
                     != DynamicallyAccessedMemberTypes.None
             );
 
-            MultiValue genericArgumentValue = _context
-                .Annotations
+            MultiValue genericArgumentValue = _context.Annotations
                 .FlowAnnotations
                 .GetTypeValueFromGenericArgument(genericArgument);
 
             var diagnosticContext = new DiagnosticContext(
                 _origin,
-                !_context
-                    .Annotations
+                !_context.Annotations
                     .ShouldSuppressAnalysisWarningsForRequiresUnreferencedCode(
                         _origin.Provider,
                         out _

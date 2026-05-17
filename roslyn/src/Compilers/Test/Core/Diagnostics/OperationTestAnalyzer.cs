@@ -92,8 +92,7 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
                 (operationContext) =>
                 {
                     if (
-                        operationContext
-                            .Operation
+                        operationContext.Operation
                             .HasErrors(
                                 operationContext.Compilation,
                                 operationContext.CancellationToken
@@ -1147,8 +1146,7 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
                     }
 
                     foreach (
-                        var decl in declarationStatement
-                            .Declarations
+                        var decl in declarationStatement.Declarations
                             .SelectMany(multiDecl => multiDecl.Declarators)
                     )
                     {

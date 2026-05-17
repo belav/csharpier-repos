@@ -134,8 +134,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
 
             return async cancellationToken =>
             {
-                await _threadingContext
-                    .JoinableTaskFactory
+                await _threadingContext.JoinableTaskFactory
                     .SwitchToMainThreadAsync(cancellationToken);
                 var openDocumentService = _serviceProvider.GetService<
                     SVsUIShellOpenDocument,
@@ -218,8 +217,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                     );
                     _openFiles.Add(moniker, openFile);
 
-                    _threadingContext
-                        .JoinableTaskFactory
+                    _threadingContext.JoinableTaskFactory
                         .Run(() => openFile.RefreshFileAsync(CancellationToken.None).AsTask());
 
                     // Update the RDT flags to ensure the file can't be saved or appears in any MRUs as it's a temporary generated file name.
@@ -323,8 +321,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                 _textBuffer = textBuffer;
                 _workspace = workspace;
                 _documentIdentity = documentIdentity;
-                _workspaceConfigurationService = _workspace
-                    .Services
+                _workspaceConfigurationService = _workspace.Services
                     .GetService<IWorkspaceConfigurationService>();
 
                 // We'll create a read-only region for the file, but it'll be a dynamic region we can temporarily suspend
@@ -389,8 +386,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             {
                 SourceGeneratedDocument? generatedDocument = null;
                 SourceText? generatedSource = null;
-                var project = _workspace
-                    .CurrentSolution
+                var project = _workspace.CurrentSolution
                     .GetProject(_documentIdentity.DocumentId.ProjectId);
 
                 // Locals correspond to the equivalently-named fields; we'll assign these and then assign to the fields while on the
@@ -426,8 +422,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                     {
                         // The file isn't there anymore; do we still have the generator at all?
                         if (
-                            project
-                                .AnalyzerReferences
+                            project.AnalyzerReferences
                                 .Any(a => a.FullPath == _documentIdentity.Generator.AssemblyPath)
                         )
                         {
@@ -448,8 +443,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                     }
                 }
 
-                await ThreadingContext
-                    .JoinableTaskFactory
+                await ThreadingContext.JoinableTaskFactory
                     .SwitchToMainThreadAsync(cancellationToken);
 
                 _windowFrameMessageToShow = windowFrameMessageToShow;
@@ -467,8 +461,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
 
                         // Ensure the encoding matches; this is necessary for debugger checksums to match what is in the PDB.
                         if (
-                            _fileManager
-                                ._textDocumentFactoryService
+                            _fileManager._textDocumentFactoryService
                                 .TryGetTextDocument(_textBuffer, out var textDocument)
                         )
                         {
@@ -501,8 +494,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                         // If the file isn't already open, open it now. We may transition between opening and closing
                         // if the file is repeatedly appearing and disappearing.
                         var connectToWorkspace =
-                            _workspaceConfigurationService
-                                ?.Options
+                            _workspaceConfigurationService?.Options
                                 .EnableOpeningSourceGeneratedFiles != false;
 
                         if (
@@ -542,8 +534,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                 {
                     // We'll start this work asynchronously to figure out if we need to change; if the file is closed the cancellationToken
                     // is triggered and this will no-op.
-                    var asyncToken = _fileManager
-                        ._listener
+                    var asyncToken = _fileManager._listener
                         .BeginAsyncOperation(
                             nameof(OpenSourceGeneratedFile) + "." + nameof(OnWorkspaceChanged)
                         );
@@ -657,8 +648,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             )
             {
                 var sourceText = _textBuffer.CurrentSnapshot.AsText();
-                return _fileManager
-                    ._visualStudioDocumentNavigationService
+                return _fileManager._visualStudioDocumentNavigationService
                     .NavigateToTextBufferAsync(
                         _textBuffer,
                         sourceText.GetVsTextSpanForSpan(sourceSpan),

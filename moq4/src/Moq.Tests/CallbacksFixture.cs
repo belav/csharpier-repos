@@ -309,16 +309,8 @@ namespace Moq.Tests
                     }
                 );
 
-            mock.Object.Submit(
-                "blah1",
-                "blah2",
-                "blah3",
-                "blah4",
-                "blah5",
-                "blah6",
-                "blah7",
-                "blah8"
-            );
+            mock.Object
+                .Submit("blah1", "blah2", "blah3", "blah4", "blah5", "blah6", "blah7", "blah8");
             Assert.Equal("blah1", callbackArg1);
             Assert.Equal("blah2", callbackArg2);
             Assert.Equal("blah3", callbackArg3);
@@ -595,16 +587,8 @@ namespace Moq.Tests
                 )
                 .Returns("foo");
 
-            mock.Object.Execute(
-                "blah1",
-                "blah2",
-                "blah3",
-                "blah4",
-                "blah5",
-                "blah6",
-                "blah7",
-                "blah8"
-            );
+            mock.Object
+                .Execute("blah1", "blah2", "blah3", "blah4", "blah5", "blah6", "blah7", "blah8");
             Assert.Equal("blah1", callbackArg1);
             Assert.Equal("blah2", callbackArg2);
             Assert.Equal("blah3", callbackArg3);

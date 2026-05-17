@@ -303,16 +303,14 @@ namespace Mono.CSharp
             }
             else if (!Parent.IsCompilerGenerated && member_type.HasDynamicElement)
             {
-                Module
-                    .PredefinedAttributes
+                Module.PredefinedAttributes
                     .Dynamic
                     .EmitAttribute(FieldBuilder, member_type, Location);
             }
 
             if (member_type.HasNamedTupleElement)
             {
-                Module
-                    .PredefinedAttributes
+                Module.PredefinedAttributes
                     .TupleElementNames
                     .EmitAttribute(FieldBuilder, member_type, Location);
             }
@@ -320,8 +318,7 @@ namespace Mono.CSharp
             if ((ModFlags & Modifiers.COMPILER_GENERATED) != 0 && !Parent.IsCompilerGenerated)
                 Module.PredefinedAttributes.CompilerGenerated.EmitAttribute(FieldBuilder);
             if ((ModFlags & Modifiers.DEBUGGER_HIDDEN) != 0)
-                Module
-                    .PredefinedAttributes
+                Module.PredefinedAttributes
                     .DebuggerBrowsable
                     .EmitAttribute(FieldBuilder, System.Diagnostics.DebuggerBrowsableState.Never);
 
@@ -564,8 +561,7 @@ namespace Mono.CSharp
                 TypeDefinition.FilterNestedName(Name),
                 GlobalCounter++
             );
-            fixed_buffer_type = Parent
-                .TypeBuilder
+            fixed_buffer_type = Parent.TypeBuilder
                 .DefineNestedType(
                     name,
                     TypeAttributes.NestedPublic
@@ -580,8 +576,7 @@ namespace Mono.CSharp
                 FieldAttributes.Public
             );
 
-            FieldBuilder = Parent
-                .TypeBuilder
+            FieldBuilder = Parent.TypeBuilder
                 .DefineField(Name, fixed_buffer_type, ModifiersExtensions.FieldAttr(ModFlags));
 
             var element_spec = new FieldSpec(null, this, MemberType, ffield, ModFlags);
@@ -870,8 +865,7 @@ namespace Mono.CSharp
                     required_modifier = new MetaType[] { mod.GetMetaInfo() };
             }
 
-            FieldBuilder = Parent
-                .TypeBuilder
+            FieldBuilder = Parent.TypeBuilder
                 .DefineField(
                     Name,
                     member_type.GetMetaInfo(),

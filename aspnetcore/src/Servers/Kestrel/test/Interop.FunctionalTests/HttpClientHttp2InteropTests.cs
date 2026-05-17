@@ -76,8 +76,7 @@ public class HttpClientHttp2InteropTests : LoggedTest
                 .Configure(app =>
                     app.Run(async context =>
                     {
-                        await context
-                            .Request
+                        await context.Request
                             .BodyReader
                             .CopyToAsync(context.Response.BodyWriter)
                             .DefaultTimeout();
@@ -183,8 +182,7 @@ public class HttpClientHttp2InteropTests : LoggedTest
                             allRequestsReceived.SetResult();
                         }
                         await allRequestsReceived.Task;
-                        await context
-                            .Request
+                        await context.Request
                             .BodyReader
                             .CopyToAsync(context.Response.BodyWriter)
                             .DefaultTimeout();
@@ -321,8 +319,7 @@ public class HttpClientHttp2InteropTests : LoggedTest
 
                             var sequence = readResult.Buffer.Slice(0, "Hello World".Length);
                             Assert.True(sequence.IsSingleSegment);
-                            await context
-                                .Response
+                            await context.Response
                                 .BodyWriter
                                 .WriteAsync(sequence.First)
                                 .DefaultTimeout();
@@ -391,8 +388,7 @@ public class HttpClientHttp2InteropTests : LoggedTest
 
                         var sequence = readResult.Buffer.Slice(0, "Hello World".Length);
                         Assert.True(sequence.IsSingleSegment);
-                        await context
-                            .Response
+                        await context.Response
                             .BodyWriter
                             .WriteAsync(sequence.First)
                             .DefaultTimeout();
@@ -1251,22 +1247,18 @@ public class HttpClientHttp2InteropTests : LoggedTest
         response.EnsureSuccessStatusCode();
 
         Assert.Single(
-            TestSink
-                .Writes
+            TestSink.Writes
                 .Where(context =>
-                    context
-                        .Message
+                    context.Message
                         .Contains(
                             "received HEADERS frame for stream ID 1 with length 16384 and flags END_STREAM"
                         )
                 )
         );
         Assert.Single(
-            TestSink
-                .Writes
+            TestSink.Writes
                 .Where(context =>
-                    context
-                        .Message
+                    context.Message
                         .Contains(
                             "received CONTINUATION frame for stream ID 1 with length 4390 and flags END_HEADERS"
                         )
@@ -1323,11 +1315,9 @@ public class HttpClientHttp2InteropTests : LoggedTest
         }
 
         Assert.Single(
-            TestSink
-                .Writes
+            TestSink.Writes
                 .Where(context =>
-                    context
-                        .Message
+                    context.Message
                         .Contains(
                             "sending HEADERS frame for stream ID 1 with length 15610 and flags END_STREAM"
                         )
@@ -1335,11 +1325,9 @@ public class HttpClientHttp2InteropTests : LoggedTest
         );
         Assert.Equal(
             2,
-            TestSink
-                .Writes
+            TestSink.Writes
                 .Where(context =>
-                    context
-                        .Message
+                    context.Message
                         .Contains(
                             "sending CONTINUATION frame for stream ID 1 with length 15585 and flags NONE"
                         )
@@ -1347,11 +1335,9 @@ public class HttpClientHttp2InteropTests : LoggedTest
                 .Count()
         );
         Assert.Single(
-            TestSink
-                .Writes
+            TestSink.Writes
                 .Where(context =>
-                    context
-                        .Message
+                    context.Message
                         .Contains(
                             "sending CONTINUATION frame for stream ID 1 with length 14546 and flags END_HEADERS"
                         )
@@ -1423,11 +1409,9 @@ public class HttpClientHttp2InteropTests : LoggedTest
         response.EnsureSuccessStatusCode();
 
         Assert.Single(
-            TestSink
-                .Writes
+            TestSink.Writes
                 .Where(context =>
-                    context
-                        .Message
+                    context.Message
                         .Contains(
                             "received HEADERS frame for stream ID 1 with length 14540 and flags END_STREAM, END_HEADERS"
                         )
@@ -1796,8 +1780,7 @@ public class HttpClientHttp2InteropTests : LoggedTest
                         var read = 0;
                         do
                         {
-                            read = await context
-                                .Request
+                            read = await context.Request
                                 .Body
                                 .ReadAsync(buffer, 0, buffer.Length)
                                 .DefaultTimeout();

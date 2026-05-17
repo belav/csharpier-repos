@@ -78,8 +78,7 @@ namespace System.ServiceModel.Channels
             {
                 if (value < TimeSpan.Zero && value != Timeout.InfiniteTimeSpan)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentOutOfRangeException(
                                 "value",
@@ -91,8 +90,7 @@ namespace System.ServiceModel.Channels
 
                 if (TimeoutHelper.IsTooLarge(value))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentOutOfRangeException(
                                 "value",
@@ -116,8 +114,7 @@ namespace System.ServiceModel.Channels
                 {
                     if (value == string.Empty)
                     {
-                        throw FxTrace
-                            .Exception
+                        throw FxTrace.Exception
                             .Argument(
                                 "value",
                                 SR.GetString(SR.WebSocketInvalidProtocolEmptySubprotocolString)
@@ -126,8 +123,7 @@ namespace System.ServiceModel.Channels
 
                     if (value.Split(WebSocketHelper.ProtocolSeparators).Length > 1)
                     {
-                        throw FxTrace
-                            .Exception
+                        throw FxTrace.Exception
                             .Argument(
                                 "value",
                                 SR.GetString(
@@ -140,8 +136,7 @@ namespace System.ServiceModel.Channels
                     string invalidChar;
                     if (WebSocketHelper.IsSubProtocolInvalid(value, out invalidChar))
                     {
-                        throw FxTrace
-                            .Exception
+                        throw FxTrace.Exception
                             .Argument(
                                 "value",
                                 SR.GetString(
@@ -172,8 +167,7 @@ namespace System.ServiceModel.Channels
             {
                 if (value < 0)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentOutOfRangeException(
                                 "value",

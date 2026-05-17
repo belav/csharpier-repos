@@ -79,8 +79,7 @@ namespace System.ServiceModel.Activation
             if (!success)
             {
                 System.ServiceModel.Diagnostics.Utility.CloseInvalidOutSafeHandle(processToken);
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new Win32Exception(error));
             }
 
@@ -105,8 +104,7 @@ namespace System.ServiceModel.Activation
                 int error = Marshal.GetLastWin32Error();
                 if (error != ListenerUnsafeNativeMethods.ERROR_INSUFFICIENT_BUFFER)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new Win32Exception(error));
                 }
             }
@@ -132,8 +130,7 @@ namespace System.ServiceModel.Activation
             )
             {
                 int error = Marshal.GetLastWin32Error();
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new Win32Exception(error));
             }
         }
@@ -262,8 +259,7 @@ namespace System.ServiceModel.Activation
                     if (!success)
                     {
                         int error = Marshal.GetLastWin32Error();
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(new Win32Exception(error));
                     }
 
@@ -311,8 +307,7 @@ namespace System.ServiceModel.Activation
                         int error = Marshal.GetLastWin32Error();
                         if (!success || error != UnsafeNativeMethods.ERROR_SUCCESS)
                         {
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(new Win32Exception(error));
                         }
                     }
@@ -351,8 +346,7 @@ namespace System.ServiceModel.Activation
                 int errorCode = Marshal.GetLastWin32Error();
                 if (errorCode != ListenerUnsafeNativeMethods.ERROR_INSUFFICIENT_BUFFER)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new Win32Exception(errorCode));
                 }
             }
@@ -460,8 +454,7 @@ namespace System.ServiceModel.Activation
                 error = Marshal.GetLastWin32Error();
                 if (error != ListenerUnsafeNativeMethods.ERROR_INSUFFICIENT_BUFFER)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new Win32Exception(error));
                 }
             }
@@ -481,8 +474,7 @@ namespace System.ServiceModel.Activation
             )
             {
                 error = Marshal.GetLastWin32Error();
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new Win32Exception(error));
             }
 
@@ -620,8 +612,7 @@ namespace System.ServiceModel.Activation
                         int errorCode = Marshal.GetLastWin32Error();
                         if (errorCode != ListenerUnsafeNativeMethods.ERROR_INSUFFICIENT_BUFFER)
                         {
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(new Win32Exception(errorCode));
                         }
                     }
@@ -636,8 +627,7 @@ namespace System.ServiceModel.Activation
                     );
                     if (!success)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(new Win32Exception());
                     }
                     fixed (byte* pServiceStatusProcess = serviceStatusProcess)

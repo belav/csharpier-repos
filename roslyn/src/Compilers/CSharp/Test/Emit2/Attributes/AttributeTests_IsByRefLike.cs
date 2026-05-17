@@ -39,8 +39,7 @@ class Test
 
             void validate(ModuleSymbol module)
             {
-                var type = module
-                    .ContainingAssembly
+                var type = module.ContainingAssembly
                     .GetTypeByMetadataName("Test")
                     .GetTypeMember("S1");
                 AssertReferencedIsByRefLike(
@@ -122,8 +121,7 @@ class Test
                 verify: Verification.Passes,
                 symbolValidator: module =>
                 {
-                    var type = module
-                        .ContainingAssembly
+                    var type = module.ContainingAssembly
                         .GetTypeByMetadataName("Test")
                         .GetTypeMember("S1");
                     AssertReferencedIsByRefLike(
@@ -200,8 +198,7 @@ class Test<T>
                 verify: Verification.Passes,
                 symbolValidator: module =>
                 {
-                    var type = module
-                        .ContainingAssembly
+                    var type = module.ContainingAssembly
                         .GetTypeByMetadataName("Test`1")
                         .GetTypeMember("S1");
                     AssertReferencedIsByRefLike(
@@ -249,8 +246,7 @@ class Test
                 references: new[] { referenceA },
                 symbolValidator: module =>
                 {
-                    var type = module
-                        .ContainingAssembly
+                    var type = module.ContainingAssembly
                         .GetTypeByMetadataName("Test")
                         .GetTypeMember("S1");
 
@@ -649,8 +645,7 @@ public class Test
                 options: TestOptions.ReleaseModule,
                 symbolValidator: module =>
                 {
-                    var type = module
-                        .ContainingAssembly
+                    var type = module.ContainingAssembly
                         .GetTypeByMetadataName("Test")
                         .GetTypeMember("S1");
 
@@ -740,8 +735,7 @@ class Test
                 symbolValidator: module =>
                 {
                     Assert.Null(
-                        module
-                            .ContainingAssembly
+                        module.ContainingAssembly
                             .GetTypeByMetadataName(
                                 AttributeDescription.CodeAnalysisEmbeddedAttribute.FullName
                             )
@@ -965,8 +959,7 @@ class Test
 
             void validate(ModuleSymbol module)
             {
-                var type = module
-                    .ContainingAssembly
+                var type = module.ContainingAssembly
                     .GetTypeByMetadataName("Test")
                     .GetTypeMember("S1");
                 Assert.True(type.IsRefLikeType);
@@ -1038,8 +1031,7 @@ namespace System
                 verify: Verification.Passes,
                 symbolValidator: module =>
                 {
-                    var type = module
-                        .ContainingAssembly
+                    var type = module.ContainingAssembly
                         .GetTypeByMetadataName("Test")
                         .GetTypeMember("S1");
                     AssertReferencedIsByRefLike(type, hasObsolete: false);
@@ -1093,8 +1085,7 @@ class Test
                 verify: Verification.Passes,
                 symbolValidator: module =>
                 {
-                    var type = module
-                        .ContainingAssembly
+                    var type = module.ContainingAssembly
                         .GetTypeByMetadataName("Test")
                         .GetTypeMember("S1");
                     Assert.True(type.IsRefLikeType);
@@ -1164,8 +1155,7 @@ class Test
                 verify: Verification.Passes,
                 symbolValidator: module =>
                 {
-                    var type = module
-                        .ContainingAssembly
+                    var type = module.ContainingAssembly
                         .GetTypeByMetadataName("Test")
                         .GetTypeMember("S1");
                     Assert.True(type.IsRefLikeType);
@@ -1445,8 +1435,7 @@ namespace System
                 verify: Verification.FailsPEVerify,
                 symbolValidator: module =>
                 {
-                    var type = module
-                        .ContainingAssembly
+                    var type = module.ContainingAssembly
                         .GetTypeByMetadataName("System.TypedReference");
                     AssertReferencedIsByRefLike(
                         type,
@@ -1461,8 +1450,7 @@ namespace System
                         hasCompilerFeatureRequired: includeCompilerFeatureRequired
                     );
 
-                    type = module
-                        .ContainingAssembly
+                    type = module.ContainingAssembly
                         .GetTypeByMetadataName("System.RuntimeArgumentHandle");
                     AssertReferencedIsByRefLike(
                         type,
@@ -1471,8 +1459,7 @@ namespace System
                     );
 
                     // control case. Not a special type.
-                    type = module
-                        .ContainingAssembly
+                    type = module.ContainingAssembly
                         .GetTypeByMetadataName("System.NotTypedReference");
                     AssertReferencedIsByRefLike(
                         type,
@@ -1504,8 +1491,7 @@ namespace System
                 verify: Verification.Passes,
                 symbolValidator: module =>
                 {
-                    var type = module
-                        .ContainingAssembly
+                    var type = module.ContainingAssembly
                         .GetTypeByMetadataName("System.TypedReference");
 
                     AssertReferencedIsByRefLike(
@@ -1530,8 +1516,7 @@ namespace System
 
             var peModule = (PEModuleSymbol)peType.ContainingModule;
             var decoder = new MetadataDecoder(peModule);
-            var obsoleteAttribute = peModule
-                .Module
+            var obsoleteAttribute = peModule.Module
                 .TryGetDeprecatedOrExperimentalOrObsoleteAttribute(
                     peType.Handle,
                     decoder,
@@ -1563,8 +1548,7 @@ namespace System
             MetadataDecoder decoder
         )
         {
-            var compilerFeatureRequiredToken = peModule
-                .Module
+            var compilerFeatureRequiredToken = peModule.Module
                 .GetFirstUnsupportedCompilerFeatureFromToken(
                     peType.Handle,
                     decoder,
@@ -1572,8 +1556,7 @@ namespace System
                 );
             Assert.Null(compilerFeatureRequiredToken);
 
-            compilerFeatureRequiredToken = peModule
-                .Module
+            compilerFeatureRequiredToken = peModule.Module
                 .GetFirstUnsupportedCompilerFeatureFromToken(
                     peType.Handle,
                     decoder,

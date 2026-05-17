@@ -57,8 +57,7 @@ namespace System.ServiceModel
                         break;
 
                     default:
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(new ArgumentOutOfRangeException("value"));
                 }
 
@@ -85,8 +84,7 @@ namespace System.ServiceModel
             {
                 if (!ConcurrencyModeHelper.IsDefined(value))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new ArgumentOutOfRangeException("value"));
                 }
 
@@ -101,8 +99,7 @@ namespace System.ServiceModel
             {
                 if (value == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new ArgumentNullException("value"));
                 }
 
@@ -113,8 +110,7 @@ namespace System.ServiceModel
                     if (timeout < TimeSpan.Zero)
                     {
                         string message = SR.GetString(SR.SFxTimeoutOutOfRange0);
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new ArgumentOutOfRangeException("value", value, message)
                             );
@@ -126,8 +122,7 @@ namespace System.ServiceModel
                 }
                 catch (FormatException e)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentException(
                                 SR.GetString(SR.SFxTimeoutInvalidStringFormat),
@@ -138,8 +133,7 @@ namespace System.ServiceModel
                 }
                 catch (OverflowException)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new ArgumentOutOfRangeException("value"));
                 }
             }
@@ -179,8 +173,7 @@ namespace System.ServiceModel
         {
             if (channelDispatcher == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("channelDispatcher");
             }
 
@@ -201,8 +194,7 @@ namespace System.ServiceModel
         {
             if (!serviceEndpoint.Contract.IsDuplex())
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(
@@ -242,8 +234,7 @@ namespace System.ServiceModel
             EndpointDispatcher endpointDispatcher
         )
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(
                     new InvalidOperationException(
                         SR.GetString(

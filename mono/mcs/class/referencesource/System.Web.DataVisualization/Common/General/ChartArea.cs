@@ -1180,24 +1180,26 @@ namespace System.Web.UI.DataVisualization.Charting
             if (!this.originalAreaPosition.IsEmpty)
             {
                 this.lastAreaPosition = this.Position.ToRectangleF();
-                this.Position.SetPositionNoAuto(
-                    this.originalAreaPosition.X,
-                    this.originalAreaPosition.Y,
-                    this.originalAreaPosition.Width,
-                    this.originalAreaPosition.Height
-                );
+                this.Position
+                    .SetPositionNoAuto(
+                        this.originalAreaPosition.X,
+                        this.originalAreaPosition.Y,
+                        this.originalAreaPosition.Width,
+                        this.originalAreaPosition.Height
+                    );
                 this.originalAreaPosition = RectangleF.Empty;
             }
 
             // Save non automatic area inner plot position
             if (!this.originalInnerPlotPosition.IsEmpty)
             {
-                this.InnerPlotPosition.SetPositionNoAuto(
-                    this.originalInnerPlotPosition.X,
-                    this.originalInnerPlotPosition.Y,
-                    this.originalInnerPlotPosition.Width,
-                    this.originalInnerPlotPosition.Height
-                );
+                this.InnerPlotPosition
+                    .SetPositionNoAuto(
+                        this.originalInnerPlotPosition.X,
+                        this.originalInnerPlotPosition.Y,
+                        this.originalInnerPlotPosition.Width,
+                        this.originalInnerPlotPosition.Height
+                    );
                 this.originalInnerPlotPosition = RectangleF.Empty;
             }
         }
@@ -2138,16 +2140,14 @@ namespace System.Web.UI.DataVisualization.Charting
             // Add hot region for plotting area.
             if (Common.ProcessModeRegions)
             {
-                Common
-                    .HotRegionsList
+                Common.HotRegionsList
                     .AddHotRegion(backgroundPosition, this, ChartElementType.PlottingArea, true);
             }
             // Draw background
             PaintAreaBack(graph, backgroundPositionWithScrollBars, false);
 
             // Call BackPaint event
-            Common
-                .Chart
+            Common.Chart
                 .CallOnPrePaint(new ChartPaintEventArgs(this, graph, Common, PlotAreaPosition));
 
             // Draw chart types without axes - Pie.
@@ -2159,8 +2159,7 @@ namespace System.Web.UI.DataVisualization.Charting
                 // NOTE: Fixes issues #4672 and #4692
                 for (int chartTypeIndex = 0; chartTypeIndex < ChartTypes.Count; chartTypeIndex++)
                 {
-                    IChartType chartType = Common
-                        .ChartTypeRegistry
+                    IChartType chartType = Common.ChartTypeRegistry
                         .GetChartType((string)ChartTypes[chartTypeIndex]);
                     if (!chartType.RequireAxes)
                     {
@@ -2170,8 +2169,7 @@ namespace System.Web.UI.DataVisualization.Charting
                 }
 
                 // Call Paint event
-                Common
-                    .Chart
+                Common.Chart
                     .CallOnPostPaint(
                         new ChartPaintEventArgs(this, graph, Common, PlotAreaPosition)
                     );
@@ -2332,8 +2330,7 @@ namespace System.Web.UI.DataVisualization.Charting
                 foreach (ChartTypeAndSeriesInfo chartTypeInfo in typeAndSeries)
                 {
                     this.IterationCounter = 0;
-                    IChartType type = Common
-                        .ChartTypeRegistry
+                    IChartType type = Common.ChartTypeRegistry
                         .GetChartType(chartTypeInfo.ChartType);
 
                     // If 'chartTypeInfo.Series' set to NULL all series of that chart type are drawn at once
@@ -2381,8 +2378,7 @@ namespace System.Web.UI.DataVisualization.Charting
             }
 
             // Call Paint event
-            Common
-                .Chart
+            Common.Chart
                 .CallOnPostPaint(new ChartPaintEventArgs(this, graph, Common, PlotAreaPosition));
 
             // Draw axis scale break lines
@@ -2548,8 +2544,7 @@ namespace System.Web.UI.DataVisualization.Charting
                         // Copy chart area plotting rectangle from the chart's dubble buffer image into area dubble buffer image
                         if (chart.paintBufferBitmap != null)
                         {
-                            areaBufferBitmap = chart
-                                .paintBufferBitmap
+                            areaBufferBitmap = chart.paintBufferBitmap
                                 .Clone(absAreaPlotPosition, chart.paintBufferBitmap.PixelFormat);
                         }
 
@@ -2560,16 +2555,14 @@ namespace System.Web.UI.DataVisualization.Charting
                             && chart.paintBufferBitmap.Size.Height >= chartPosition.Size.Height
                         )
                         {
-                            chartPicture.nonTopLevelChartBuffer = chart
-                                .paintBufferBitmap
+                            chartPicture.nonTopLevelChartBuffer = chart.paintBufferBitmap
                                 .Clone(chartPosition, chart.paintBufferBitmap.PixelFormat);
                         }
                     }
                     else if (cursorOnly && chartPicture.nonTopLevelChartBuffer != null)
                     {
                         // Restore previous background
-                        chart
-                            .paintBufferBitmapGraphics
+                        chart.paintBufferBitmapGraphics
                             .DrawImageUnscaled(chartPicture.nonTopLevelChartBuffer, chartPosition);
                     }
                 }
@@ -2658,8 +2651,7 @@ namespace System.Web.UI.DataVisualization.Charting
             if (this.AxisX.LabelStyle.Enabled && this.AxisX.IsLabelAutoFit)
             {
                 // Set max auto fit font
-                this.AxisX.autoLabelFont = Common
-                    .ChartPicture
+                this.AxisX.autoLabelFont = Common.ChartPicture
                     .FontCache
                     .GetFont(
                         this.AxisX.LabelStyle.Font.FontFamily,
@@ -2680,14 +2672,15 @@ namespace System.Web.UI.DataVisualization.Charting
                 labelsSizeEstimate += spacing;
 
                 // Calculate auto-fit font
-                this.AxisX.GetCircularAxisLabelsAutoFitFont(
-                    chartGraph,
-                    axisList,
-                    labelsStyle,
-                    plotAreaRectAbs,
-                    areaRectAbs,
-                    labelsSizeEstimate
-                );
+                this.AxisX
+                    .GetCircularAxisLabelsAutoFitFont(
+                        chartGraph,
+                        axisList,
+                        labelsStyle,
+                        plotAreaRectAbs,
+                        areaRectAbs,
+                        labelsSizeEstimate
+                    );
             }
 
             //*****************************************************************

@@ -55,8 +55,7 @@
             {
                 if (_valueProvider == null)
                 {
-                    _valueProvider = ValueProviderFactories
-                        .Factories
+                    _valueProvider = ValueProviderFactories.Factories
                         .GetValueProvider(ControllerContext);
                 }
                 return _valueProvider;

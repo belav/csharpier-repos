@@ -7144,8 +7144,7 @@ class Test
             AssertEx.NotNull(field);
 
             var typeParameters = new List<TypeParameterSymbol>();
-            field
-                .Type
+            field.Type
                 .VisitType(
                     static (typeSymbol, typeParameters, _) =>
                     {
@@ -7223,8 +7222,7 @@ class Test
     {
         return module =>
         {
-            var containingType = module
-                .GlobalNamespace
+            var containingType = module.GlobalNamespace
                 .GetMember<NamedTypeSymbol>(containingTypeName);
             AssertEx.NotNull(containingType);
 

@@ -52,8 +52,7 @@ namespace System.ServiceModel.Channels
             set
             {
                 if (value <= 0)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentOutOfRangeException(
                                 "value",
@@ -89,8 +88,7 @@ namespace System.ServiceModel.Channels
 
             if (typeof(TChannel) != typeof(IOutputChannel))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(
                         "TChannel",
                         SR.GetString(SR.ChannelTypeNotSupported, typeof(TChannel))
@@ -118,8 +116,7 @@ namespace System.ServiceModel.Channels
                     (object)new RequestOneWayChannelFactory(this, context);
             }
 
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(
 #pragma warning suppress 56506 // context.Binding will never be null.
                     new InvalidOperationException(
@@ -139,8 +136,7 @@ namespace System.ServiceModel.Channels
 
             if (typeof(TChannel) != typeof(IInputChannel))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(
                         "TChannel",
                         SR.GetString(SR.ChannelTypeNotSupported, typeof(TChannel))
@@ -168,8 +164,7 @@ namespace System.ServiceModel.Channels
                     (object)new ReplyOneWayChannelListener(this, context);
             }
 
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(
 #pragma warning suppress 56506 // context.Binding will never be null.
                     new InvalidOperationException(

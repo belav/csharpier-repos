@@ -37,8 +37,7 @@ namespace Roslyn.Test.Utilities
             var sourceText = file.GetText(cancellationToken);
             Contract.ThrowIfNull(sourceText, "Failed to fetch the text of an additional file.");
 
-            var changes = sourceText
-                .Lines
+            var changes = sourceText.Lines
                 .SelectAsArray(l => new TextChange(new TextSpan(l.Start, length: 0), "// "));
             var generatedText = sourceText.WithChanges(changes);
 

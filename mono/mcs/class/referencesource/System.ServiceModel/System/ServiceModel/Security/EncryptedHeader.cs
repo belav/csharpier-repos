@@ -30,8 +30,7 @@ namespace System.ServiceModel.Security
         {
             if (!headerXml.HasId || headerXml.Id == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new MessageSecurityException(SR.GetString(SR.EncryptedHeaderXmlMustHaveId))
                     );
@@ -89,8 +88,7 @@ namespace System.ServiceModel.Security
         {
             if (!IsMessageVersionSupported(messageVersion))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentException(
                             SR.GetString(

@@ -20,8 +20,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
             {
                 var leftEntities = new[]
                 {
-                    context
-                        .UnidirectionalEntityCompositeKeys
+                    context.UnidirectionalEntityCompositeKeys
                         .CreateInstance(
                             (e, p) =>
                             {
@@ -30,8 +29,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
                                 e.Key3 = new DateTime(7711, 1, 1);
                             }
                         ),
-                    context
-                        .UnidirectionalEntityCompositeKeys
+                    context.UnidirectionalEntityCompositeKeys
                         .CreateInstance(
                             (e, p) =>
                             {
@@ -40,8 +38,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
                                 e.Key3 = new DateTime(7712, 1, 1);
                             }
                         ),
-                    context
-                        .UnidirectionalEntityCompositeKeys
+                    context.UnidirectionalEntityCompositeKeys
                         .CreateInstance(
                             (e, p) =>
                             {
@@ -121,15 +118,13 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
                 var results = async ? await queryable.ToListAsync() : queryable.ToList();
                 Assert.Equal(3, results.Count);
 
-                var leftEntities = context
-                    .ChangeTracker
+                var leftEntities = context.ChangeTracker
                     .Entries<UnidirectionalEntityCompositeKey>()
                     .Select(e => e.Entity)
                     .OrderBy(e => e.Key2)
                     .ToList();
 
-                var rightEntities = context
-                    .ChangeTracker
+                var rightEntities = context.ChangeTracker
                     .Entries<UnidirectionalEntityLeaf>()
                     .Select(e => e.Entity)
                     .OrderBy(e => e.Name)
@@ -160,8 +155,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
             Assert.Single(rightEntities[1].CompositeKeySkipFull);
             Assert.Single(rightEntities[2].CompositeKeySkipFull);
 
-            var joinEntities = context
-                .ChangeTracker
+            var joinEntities = context.ChangeTracker
                 .Entries<UnidirectionalJoinCompositeKeyToLeaf>()
                 .Select(e => e.Entity)
                 .ToList();
@@ -198,8 +192,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
                 rightEntities[0]
                     .CompositeKeySkipFull
                     .Add(
-                        context
-                            .UnidirectionalEntityCompositeKeys
+                        context.UnidirectionalEntityCompositeKeys
                             .CreateInstance(
                                 (e, p) =>
                                 {
@@ -213,8 +206,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
                 rightEntities[0]
                     .CompositeKeySkipFull
                     .Add(
-                        context
-                            .UnidirectionalEntityCompositeKeys
+                        context.UnidirectionalEntityCompositeKeys
                             .CreateInstance(
                                 (e, p) =>
                                 {
@@ -228,8 +220,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
                 rightEntities[0]
                     .CompositeKeySkipFull
                     .Add(
-                        context
-                            .UnidirectionalEntityCompositeKeys
+                        context.UnidirectionalEntityCompositeKeys
                             .CreateInstance(
                                 (e, p) =>
                                 {
@@ -251,8 +242,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
                 rightEntities[2]
                     .CompositeKeySkipFull
                     .Add(
-                        context
-                            .UnidirectionalEntityCompositeKeys
+                        context.UnidirectionalEntityCompositeKeys
                             .CreateInstance(
                                 (e, p) =>
                                 {
@@ -323,8 +313,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
             Assert.DoesNotContain(rightEntities[2].CompositeKeySkipFull, e => e.Key2 == "8_1");
             Assert.Contains(rightEntities[2].CompositeKeySkipFull, e => e.Key2 == "7714");
 
-            var joinEntries = context
-                .ChangeTracker
+            var joinEntries = context.ChangeTracker
                 .Entries<UnidirectionalJoinCompositeKeyToLeaf>()
                 .ToList();
             foreach (var joinEntry in joinEntries)
@@ -340,14 +329,12 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
                 Assert.Contains(joinEntity, joinEntity.Leaf.JoinCompositeKeyFull);
             }
 
-            var allLeft = context
-                .ChangeTracker
+            var allLeft = context.ChangeTracker
                 .Entries<UnidirectionalEntityCompositeKey>()
                 .Select(e => e.Entity)
                 .OrderBy(e => e.Key2)
                 .ToList();
-            var allRight = context
-                .ChangeTracker
+            var allRight = context.ChangeTracker
                 .Entries<UnidirectionalEntityLeaf>()
                 .Select(e => e.Entity)
                 .OrderBy(e => e.Name)
@@ -369,8 +356,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
                 }
             }
 
-            var deleted = context
-                .ChangeTracker
+            var deleted = context.ChangeTracker
                 .Entries<UnidirectionalJoinCompositeKeyToLeaf>()
                 .Count(e => e.State == EntityState.Deleted);
             Assert.Equal(joinCount, count + deleted);
@@ -402,8 +388,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
                 // Make sure other related entities are loaded for delete fixup
                 context.Set<UnidirectionalJoinThreeToCompositeKeyFull>().Load();
 
-                var toRemoveOne = context
-                    .UnidirectionalEntityCompositeKeys
+                var toRemoveOne = context.UnidirectionalEntityCompositeKeys
                     .Single(e => e.Name == "Composite 6");
                 key1 = toRemoveOne.Key1;
                 key2 = toRemoveOne.Key2;
@@ -419,8 +404,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
                     .Count(e => e == toRemoveThree);
 
                 foreach (
-                    var joinEntity in context
-                        .ChangeTracker
+                    var joinEntity in context.ChangeTracker
                         .Entries<UnidirectionalJoinCompositeKeyToLeaf>()
                         .Select(e => e.Entity)
                         .ToList()
@@ -598,8 +582,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
         static void ValidateJoinNavigations(DbContext context)
         {
             foreach (
-                var joinEntity in context
-                    .ChangeTracker
+                var joinEntity in context.ChangeTracker
                     .Entries<UnidirectionalJoinCompositeKeyToLeaf>()
                     .Select(e => e.Entity)
                     .ToList()
@@ -630,8 +613,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
             {
                 var leftEntities = new[]
                 {
-                    context
-                        .UnidirectionalEntityCompositeKeys
+                    context.UnidirectionalEntityCompositeKeys
                         .CreateInstance(
                             (e, p) =>
                             {
@@ -640,8 +622,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
                                 e.Key3 = new DateTime(7711, 1, 1);
                             }
                         ),
-                    context
-                        .UnidirectionalEntityCompositeKeys
+                    context.UnidirectionalEntityCompositeKeys
                         .CreateInstance(
                             (e, p) =>
                             {
@@ -650,8 +631,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
                                 e.Key3 = new DateTime(7712, 1, 1);
                             }
                         ),
-                    context
-                        .UnidirectionalEntityCompositeKeys
+                    context.UnidirectionalEntityCompositeKeys
                         .CreateInstance(
                             (e, p) =>
                             {
@@ -741,15 +721,13 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
                 var results = async ? await queryable.ToListAsync() : queryable.ToList();
                 Assert.Equal(3, results.Count);
 
-                var leftEntities = context
-                    .ChangeTracker
+                var leftEntities = context.ChangeTracker
                     .Entries<UnidirectionalEntityCompositeKey>()
                     .Select(e => e.Entity)
                     .OrderBy(e => e.Key2)
                     .ToList();
 
-                var rightEntities = context
-                    .ChangeTracker
+                var rightEntities = context.ChangeTracker
                     .Entries<UnidirectionalEntityThree>()
                     .Select(e => e.Entity)
                     .OrderBy(e => e.Name)
@@ -806,8 +784,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
                     .Cast<object>()
             );
 
-            var joinEntities = context
-                .ChangeTracker
+            var joinEntities = context.ChangeTracker
                 .Entries<UnidirectionalJoinThreeToCompositeKeyFull>()
                 .Select(e => e.Entity)
                 .ToList();
@@ -894,8 +871,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
 
                 var composites = new[]
                 {
-                    context
-                        .UnidirectionalEntityCompositeKeys
+                    context.UnidirectionalEntityCompositeKeys
                         .CreateInstance(
                             (e, p) =>
                             {
@@ -904,8 +880,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
                                 e.Key3 = new DateTime(7711, 1, 1);
                             }
                         ),
-                    context
-                        .UnidirectionalEntityCompositeKeys
+                    context.UnidirectionalEntityCompositeKeys
                         .CreateInstance(
                             (e, p) =>
                             {
@@ -914,8 +889,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
                                 e.Key3 = new DateTime(7712, 1, 1);
                             }
                         ),
-                    context
-                        .UnidirectionalEntityCompositeKeys
+                    context.UnidirectionalEntityCompositeKeys
                         .CreateInstance(
                             (e, p) =>
                             {
@@ -924,8 +898,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
                                 e.Key3 = new DateTime(7713, 1, 1);
                             }
                         ),
-                    context
-                        .UnidirectionalEntityCompositeKeys
+                    context.UnidirectionalEntityCompositeKeys
                         .CreateInstance(
                             (e, p) =>
                             {
@@ -1081,8 +1054,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
             Assert.DoesNotContain(rightNav2, e => e.Key2 == "6_1");
             Assert.Contains(rightNav2, e => e.Key2 == "Z7714");
 
-            var joinEntries = context
-                .ChangeTracker
+            var joinEntries = context.ChangeTracker
                 .Entries<UnidirectionalJoinThreeToCompositeKeyFull>()
                 .ToList();
             foreach (var joinEntry in joinEntries)
@@ -1098,14 +1070,12 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
                 Assert.Contains(joinEntity, joinEntity.Three.JoinCompositeKeyFull);
             }
 
-            var allLeft = context
-                .ChangeTracker
+            var allLeft = context.ChangeTracker
                 .Entries<UnidirectionalEntityCompositeKey>()
                 .Select(e => e.Entity)
                 .OrderBy(e => e.Key2)
                 .ToList();
-            var allRight = context
-                .ChangeTracker
+            var allRight = context.ChangeTracker
                 .Entries<UnidirectionalEntityThree>()
                 .Select(e => e.Entity)
                 .OrderBy(e => e.Name)
@@ -1140,8 +1110,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
                 }
             }
 
-            var deleted = context
-                .ChangeTracker
+            var deleted = context.ChangeTracker
                 .Entries<UnidirectionalJoinThreeToCompositeKeyFull>()
                 .Count(e => e.State == EntityState.Deleted);
             Assert.Equal(joinCount, (count / 2) + deleted);
@@ -1170,20 +1139,17 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
                 // Make sure other related entities are loaded for delete fixup
                 context.Set<UnidirectionalJoinThreeToCompositeKeyFull>().Load();
 
-                var toRemoveOne = context
-                    .UnidirectionalEntityCompositeKeys
+                var toRemoveOne = context.UnidirectionalEntityCompositeKeys
                     .Single(e => e.Name == "Composite 6");
 
-                var toRemoveThree = context
-                    .UnidirectionalEntityThrees
+                var toRemoveThree = context.UnidirectionalEntityThrees
                     .Single(e => e.Name == "EntityThree 17");
                 threeId = toRemoveThree.Id;
                 var refCountThrees = ones.SelectMany(e => e.ThreeSkipFull)
                     .Count(e => e == toRemoveThree);
 
                 foreach (
-                    var joinEntity in context
-                        .ChangeTracker
+                    var joinEntity in context.ChangeTracker
                         .Entries<UnidirectionalJoinThreeToCompositeKeyFull>()
                         .Select(e => e.Entity)
                         .ToList()
@@ -1347,8 +1313,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
         static void ValidateJoinNavigations(DbContext context)
         {
             foreach (
-                var joinEntity in context
-                    .ChangeTracker
+                var joinEntity in context.ChangeTracker
                     .Entries<UnidirectionalJoinThreeToCompositeKeyFull>()
                     .Select(e => e.Entity)
                     .ToList()
@@ -1378,26 +1343,20 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
             {
                 var leftEntities = new[]
                 {
-                    context
-                        .UnidirectionalEntityTwos
+                    context.UnidirectionalEntityTwos
                         .CreateInstance((e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7711),
-                    context
-                        .UnidirectionalEntityTwos
+                    context.UnidirectionalEntityTwos
                         .CreateInstance((e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7712),
-                    context
-                        .UnidirectionalEntityTwos
+                    context.UnidirectionalEntityTwos
                         .CreateInstance((e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7713),
                 };
                 var rightEntities = new[]
                 {
-                    context
-                        .UnidirectionalEntityTwos
+                    context.UnidirectionalEntityTwos
                         .CreateInstance((e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7721),
-                    context
-                        .UnidirectionalEntityTwos
+                    context.UnidirectionalEntityTwos
                         .CreateInstance((e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7722),
-                    context
-                        .UnidirectionalEntityTwos
+                    context.UnidirectionalEntityTwos
                         .CreateInstance((e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7723),
                 };
 
@@ -1458,16 +1417,14 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
                 var results = async ? await queryable.ToListAsync() : queryable.ToList();
                 Assert.Equal(6, results.Count);
 
-                var leftEntities = context
-                    .ChangeTracker
+                var leftEntities = context.ChangeTracker
                     .Entries<UnidirectionalEntityTwo>()
                     .Select(e => e.Entity)
                     .Where(e => leftKeys.Contains(e.Id))
                     .OrderBy(e => e.Name)
                     .ToList();
 
-                var rightEntities = context
-                    .ChangeTracker
+                var rightEntities = context.ChangeTracker
                     .Entries<UnidirectionalEntityTwo>()
                     .Select(e => e.Entity)
                     .Where(e => rightKeys.Contains(e.Id))
@@ -1539,8 +1496,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
 
                 var twos = new[]
                 {
-                    context
-                        .UnidirectionalEntityTwos
+                    context.UnidirectionalEntityTwos
                         .CreateInstance(
                             (e, p) =>
                             {
@@ -1548,8 +1504,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
                                 e.Name = "Z7721";
                             }
                         ),
-                    context
-                        .UnidirectionalEntityTwos
+                    context.UnidirectionalEntityTwos
                         .CreateInstance(
                             (e, p) =>
                             {
@@ -1557,8 +1512,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
                                 e.Name = "Z7722";
                             }
                         ),
-                    context
-                        .UnidirectionalEntityTwos
+                    context.UnidirectionalEntityTwos
                         .CreateInstance(
                             (e, p) =>
                             {
@@ -1566,8 +1520,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
                                 e.Name = "Z7723";
                             }
                         ),
-                    context
-                        .UnidirectionalEntityTwos
+                    context.UnidirectionalEntityTwos
                         .CreateInstance(
                             (e, p) =>
                             {
@@ -1575,8 +1528,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
                                 e.Name = "Z7724";
                             }
                         ),
-                    context
-                        .UnidirectionalEntityTwos
+                    context.UnidirectionalEntityTwos
                         .CreateInstance(
                             (e, p) =>
                             {
@@ -1584,8 +1536,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
                                 e.Name = "Z7711";
                             }
                         ),
-                    context
-                        .UnidirectionalEntityTwos
+                    context.UnidirectionalEntityTwos
                         .CreateInstance(
                             (e, p) =>
                             {
@@ -1593,8 +1544,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
                                 e.Name = "Z7712";
                             }
                         ),
-                    context
-                        .UnidirectionalEntityTwos
+                    context.UnidirectionalEntityTwos
                         .CreateInstance(
                             (e, p) =>
                             {
@@ -1602,8 +1552,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
                                 e.Name = "Z7713";
                             }
                         ),
-                    context
-                        .UnidirectionalEntityTwos
+                    context.UnidirectionalEntityTwos
                         .CreateInstance(
                             (e, p) =>
                             {
@@ -1750,14 +1699,12 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
             Assert.DoesNotContain(nav5, e => e.Name == "EntityTwo 12");
             Assert.Contains(nav5, e => context.Entry(e).Property(e => e.Id).CurrentValue == ids[7]);
 
-            var allLeft = context
-                .ChangeTracker
+            var allLeft = context.ChangeTracker
                 .Entries<UnidirectionalEntityTwo>()
                 .Select(e => e.Entity)
                 .OrderBy(e => e.Name)
                 .ToList();
-            var allRight = context
-                .ChangeTracker
+            var allRight = context.ChangeTracker
                 .Entries<UnidirectionalEntityTwo>()
                 .Select(e => e.Entity)
                 .OrderBy(e => e.Name)
@@ -1789,8 +1736,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
                 }
             }
 
-            var deleted = context
-                .ChangeTracker
+            var deleted = context.ChangeTracker
                 .Entries<Dictionary<string, object>>()
                 .Count(e => e.State == EntityState.Deleted);
             Assert.Equal(joinCount, (joins / 2) + deleted);
@@ -1809,14 +1755,11 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
             {
                 var leftEntities = new[]
                 {
-                    context
-                        .UnidirectionalEntityOnes
+                    context.UnidirectionalEntityOnes
                         .CreateInstance((e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7711),
-                    context
-                        .UnidirectionalEntityOnes
+                    context.UnidirectionalEntityOnes
                         .CreateInstance((e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7712),
-                    context
-                        .UnidirectionalEntityOnes
+                    context.UnidirectionalEntityOnes
                         .CreateInstance((e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7713),
                 };
                 var rightEntities = new[]
@@ -1881,14 +1824,12 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
                 var results = async ? await queryable.ToListAsync() : queryable.ToList();
                 Assert.Equal(3, results.Count);
 
-                var leftEntities = context
-                    .ChangeTracker
+                var leftEntities = context.ChangeTracker
                     .Entries<UnidirectionalEntityOne>()
                     .Select(e => e.Entity)
                     .OrderBy(e => e.Name)
                     .ToList();
-                var rightEntities = context
-                    .ChangeTracker
+                var rightEntities = context.ChangeTracker
                     .Entries<UnidirectionalEntityBranch>()
                     .Select(e => e.Entity)
                     .OrderBy(e => e.Name)
@@ -2007,8 +1948,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
                             .CurrentValue!;
 
                 rightNav0.Add(
-                    context
-                        .UnidirectionalEntityOnes
+                    context.UnidirectionalEntityOnes
                         .CreateInstance(
                             (e, p) =>
                             {
@@ -2018,8 +1958,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
                         )
                 );
                 rightNav0.Add(
-                    context
-                        .UnidirectionalEntityOnes
+                    context.UnidirectionalEntityOnes
                         .CreateInstance(
                             (e, p) =>
                             {
@@ -2029,8 +1968,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
                         )
                 );
                 rightNav0.Add(
-                    context
-                        .UnidirectionalEntityOnes
+                    context.UnidirectionalEntityOnes
                         .CreateInstance(
                             (e, p) =>
                             {
@@ -2076,8 +2014,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
                             .CurrentValue!;
                 rightNav2.Remove(rightNav2.Single(e => e.Name == "EntityOne 8"));
                 rightNav2.Add(
-                    context
-                        .UnidirectionalEntityOnes
+                    context.UnidirectionalEntityOnes
                         .CreateInstance(
                             (e, p) =>
                             {
@@ -2163,14 +2100,12 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
             Assert.DoesNotContain(leftEntities[4].BranchSkip, e => e.Name == "Branch 5");
             Assert.Contains(leftEntities[2].BranchSkip, e => e.Name == "Z7724");
 
-            var allLeft = context
-                .ChangeTracker
+            var allLeft = context.ChangeTracker
                 .Entries<UnidirectionalEntityOne>()
                 .Select(e => e.Entity)
                 .OrderBy(e => e.Name)
                 .ToList();
-            var allRight = context
-                .ChangeTracker
+            var allRight = context.ChangeTracker
                 .Entries<UnidirectionalEntityBranch>()
                 .Select(e => e.Entity)
                 .OrderBy(e => e.Name)
@@ -2202,8 +2137,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
                 }
             }
 
-            var deleted = context
-                .ChangeTracker
+            var deleted = context.ChangeTracker
                 .Entries<UnidirectionalJoinOneToBranch>()
                 .Count(e => e.State == EntityState.Deleted);
             Assert.Equal(joinCount, (count / 2) + deleted);
@@ -2223,26 +2157,20 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
             {
                 var leftEntities = new[]
                 {
-                    context
-                        .UnidirectionalEntityOnes
+                    context.UnidirectionalEntityOnes
                         .CreateInstance((e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7711),
-                    context
-                        .UnidirectionalEntityOnes
+                    context.UnidirectionalEntityOnes
                         .CreateInstance((e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7712),
-                    context
-                        .UnidirectionalEntityOnes
+                    context.UnidirectionalEntityOnes
                         .CreateInstance((e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7713),
                 };
                 var rightEntities = new[]
                 {
-                    context
-                        .UnidirectionalEntityOnes
+                    context.UnidirectionalEntityOnes
                         .CreateInstance((e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7721),
-                    context
-                        .UnidirectionalEntityOnes
+                    context.UnidirectionalEntityOnes
                         .CreateInstance((e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7722),
-                    context
-                        .UnidirectionalEntityOnes
+                    context.UnidirectionalEntityOnes
                         .CreateInstance((e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7723),
                 };
 
@@ -2301,16 +2229,14 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
                 var results = async ? await queryable.ToListAsync() : queryable.ToList();
                 Assert.Equal(6, results.Count);
 
-                var leftEntities = context
-                    .ChangeTracker
+                var leftEntities = context.ChangeTracker
                     .Entries<UnidirectionalEntityOne>()
                     .Select(e => e.Entity)
                     .Where(e => leftKeys.Contains(e.Id))
                     .OrderBy(e => e.Name)
                     .ToList();
 
-                var rightEntities = context
-                    .ChangeTracker
+                var rightEntities = context.ChangeTracker
                     .Entries<UnidirectionalEntityOne>()
                     .Select(e => e.Entity)
                     .Where(e => rightKeys.Contains(e.Id))
@@ -2360,8 +2286,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
                     .CurrentValue!
             );
 
-            var joinEntities = context
-                .ChangeTracker
+            var joinEntities = context.ChangeTracker
                 .Entries<UnidirectionalJoinOneSelfPayload>()
                 .Select(e => e.Entity)
                 .ToList();
@@ -2409,8 +2334,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
 
                 var ones = new[]
                 {
-                    context
-                        .UnidirectionalEntityOnes
+                    context.UnidirectionalEntityOnes
                         .CreateInstance(
                             (e, p) =>
                             {
@@ -2418,8 +2342,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
                                 e.Name = "Z7721";
                             }
                         ),
-                    context
-                        .UnidirectionalEntityOnes
+                    context.UnidirectionalEntityOnes
                         .CreateInstance(
                             (e, p) =>
                             {
@@ -2427,8 +2350,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
                                 e.Name = "Z7722";
                             }
                         ),
-                    context
-                        .UnidirectionalEntityOnes
+                    context.UnidirectionalEntityOnes
                         .CreateInstance(
                             (e, p) =>
                             {
@@ -2436,8 +2358,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
                                 e.Name = "Z7723";
                             }
                         ),
-                    context
-                        .UnidirectionalEntityOnes
+                    context.UnidirectionalEntityOnes
                         .CreateInstance(
                             (e, p) =>
                             {
@@ -2445,8 +2366,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
                                 e.Name = "Z7724";
                             }
                         ),
-                    context
-                        .UnidirectionalEntityOnes
+                    context.UnidirectionalEntityOnes
                         .CreateInstance(
                             (e, p) =>
                             {
@@ -2454,8 +2374,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
                                 e.Name = "Z7711";
                             }
                         ),
-                    context
-                        .UnidirectionalEntityOnes
+                    context.UnidirectionalEntityOnes
                         .CreateInstance(
                             (e, p) =>
                             {
@@ -2463,8 +2382,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
                                 e.Name = "Z7712";
                             }
                         ),
-                    context
-                        .UnidirectionalEntityOnes
+                    context.UnidirectionalEntityOnes
                         .CreateInstance(
                             (e, p) =>
                             {
@@ -2472,8 +2390,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
                                 e.Name = "Z7713";
                             }
                         ),
-                    context
-                        .UnidirectionalEntityOnes
+                    context.UnidirectionalEntityOnes
                         .CreateInstance(
                             (e, p) =>
                             {
@@ -2538,8 +2455,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
                         keys[5],
                         context
                             .Entry(
-                                context
-                                    .UnidirectionalEntityOnes
+                                context.UnidirectionalEntityOnes
                                     .Local
                                     .Single(e => e.Name == "EntityOne 1")
                             )
@@ -2552,8 +2468,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
                     .Find<UnidirectionalJoinOneSelfPayload>(
                         context
                             .Entry(
-                                context
-                                    .UnidirectionalEntityOnes
+                                context.UnidirectionalEntityOnes
                                     .Local
                                     .Single(e => e.Name == "EntityOne 20")
                             )
@@ -2561,8 +2476,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
                             .CurrentValue,
                         context
                             .Entry(
-                                context
-                                    .UnidirectionalEntityOnes
+                                context.UnidirectionalEntityOnes
                                     .Local
                                     .Single(e => e.Name == "EntityOne 16")
                             )
@@ -2671,8 +2585,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
                 e => context.Entry(e).Property(e => e.Id).CurrentValue == keys[7]
             );
 
-            var joinEntries = context
-                .ChangeTracker
+            var joinEntries = context.ChangeTracker
                 .Entries<UnidirectionalJoinOneSelfPayload>()
                 .ToList();
             foreach (var joinEntry in joinEntries)
@@ -2702,14 +2615,12 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
                 }
             }
 
-            var allLeft = context
-                .ChangeTracker
+            var allLeft = context.ChangeTracker
                 .Entries<UnidirectionalEntityOne>()
                 .Select(e => e.Entity)
                 .OrderBy(e => e.Name)
                 .ToList();
-            var allRight = context
-                .ChangeTracker
+            var allRight = context.ChangeTracker
                 .Entries<UnidirectionalEntityOne>()
                 .Select(e => e.Entity)
                 .OrderBy(e => e.Name)
@@ -2742,8 +2653,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
                 }
             }
 
-            var deleted = context
-                .ChangeTracker
+            var deleted = context.ChangeTracker
                 .Entries<UnidirectionalJoinOneSelfPayload>()
                 .Count(e => e.State == EntityState.Deleted);
             Assert.Equal(joinCount, (joins / 2) + deleted);
@@ -2762,26 +2672,20 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
             {
                 var leftEntities = new[]
                 {
-                    context
-                        .UnidirectionalEntityOnes
+                    context.UnidirectionalEntityOnes
                         .CreateInstance((e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7711),
-                    context
-                        .UnidirectionalEntityOnes
+                    context.UnidirectionalEntityOnes
                         .CreateInstance((e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7712),
-                    context
-                        .UnidirectionalEntityOnes
+                    context.UnidirectionalEntityOnes
                         .CreateInstance((e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7713),
                 };
                 var rightEntities = new[]
                 {
-                    context
-                        .UnidirectionalEntityThrees
+                    context.UnidirectionalEntityThrees
                         .CreateInstance((e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7721),
-                    context
-                        .UnidirectionalEntityThrees
+                    context.UnidirectionalEntityThrees
                         .CreateInstance((e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7722),
-                    context
-                        .UnidirectionalEntityThrees
+                    context.UnidirectionalEntityThrees
                         .CreateInstance((e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7723),
                 };
 
@@ -2841,14 +2745,12 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
                 var results = async ? await queryable.ToListAsync() : queryable.ToList();
                 Assert.Equal(3, results.Count);
 
-                var leftEntities = context
-                    .ChangeTracker
+                var leftEntities = context.ChangeTracker
                     .Entries<UnidirectionalEntityOne>()
                     .Select(e => e.Entity)
                     .OrderBy(e => e.Name)
                     .ToList();
-                var rightEntities = context
-                    .ChangeTracker
+                var rightEntities = context.ChangeTracker
                     .Entries<UnidirectionalEntityThree>()
                     .Select(e => e.Entity)
                     .OrderBy(e => e.Name)
@@ -2904,8 +2806,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
             if (postSave && SupportsDatabaseDefaults)
             {
                 foreach (
-                    var joinEntity in context
-                        .ChangeTracker
+                    var joinEntity in context.ChangeTracker
                         .Entries<Dictionary<string, object>>()
                         .Select(e => e.Entity)
                         .ToList()
@@ -2937,8 +2838,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
                 leftEntities[0]
                     .ThreeSkipPayloadFullShared
                     .Add(
-                        context
-                            .UnidirectionalEntityThrees
+                        context.UnidirectionalEntityThrees
                             .CreateInstance(
                                 (e, p) =>
                                 {
@@ -2950,8 +2850,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
                 leftEntities[0]
                     .ThreeSkipPayloadFullShared
                     .Add(
-                        context
-                            .UnidirectionalEntityThrees
+                        context.UnidirectionalEntityThrees
                             .CreateInstance(
                                 (e, p) =>
                                 {
@@ -2963,8 +2862,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
                 leftEntities[0]
                     .ThreeSkipPayloadFullShared
                     .Add(
-                        context
-                            .UnidirectionalEntityThrees
+                        context.UnidirectionalEntityThrees
                             .CreateInstance(
                                 (e, p) =>
                                 {
@@ -2982,8 +2880,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
                             .CurrentValue!;
 
                 rightNav0.Add(
-                    context
-                        .UnidirectionalEntityOnes
+                    context.UnidirectionalEntityOnes
                         .CreateInstance(
                             (e, p) =>
                             {
@@ -2993,8 +2890,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
                         )
                 );
                 rightNav0.Add(
-                    context
-                        .UnidirectionalEntityOnes
+                    context.UnidirectionalEntityOnes
                         .CreateInstance(
                             (e, p) =>
                             {
@@ -3004,8 +2900,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
                         )
                 );
                 rightNav0.Add(
-                    context
-                        .UnidirectionalEntityOnes
+                    context.UnidirectionalEntityOnes
                         .CreateInstance(
                             (e, p) =>
                             {
@@ -3040,8 +2935,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
                 leftEntities[3]
                     .ThreeSkipPayloadFullShared
                     .Add(
-                        context
-                            .UnidirectionalEntityThrees
+                        context.UnidirectionalEntityThrees
                             .CreateInstance(
                                 (e, p) =>
                                 {
@@ -3059,8 +2953,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
                             .CurrentValue!;
                 rightNav2.Remove(rightNav2.Single(e => e.Name == "EntityOne 12"));
                 rightNav2.Add(
-                    context
-                        .UnidirectionalEntityOnes
+                    context.UnidirectionalEntityOnes
                         .CreateInstance(
                             (e, p) =>
                             {
@@ -3219,14 +3112,12 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
                 }
             }
 
-            var allLeft = context
-                .ChangeTracker
+            var allLeft = context.ChangeTracker
                 .Entries<UnidirectionalEntityOne>()
                 .Select(e => e.Entity)
                 .OrderBy(e => e.Name)
                 .ToList();
-            var allRight = context
-                .ChangeTracker
+            var allRight = context.ChangeTracker
                 .Entries<UnidirectionalEntityThree>()
                 .Select(e => e.Entity)
                 .OrderBy(e => e.Name)
@@ -3259,8 +3150,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
                 }
             }
 
-            var deleted = context
-                .ChangeTracker
+            var deleted = context.ChangeTracker
                 .Entries<Dictionary<string, object>>()
                 .Count(e => e.State == EntityState.Deleted);
             Assert.Equal(joinCount, (count / 2) + deleted);
@@ -3279,26 +3169,20 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
             {
                 var leftEntities = new[]
                 {
-                    context
-                        .UnidirectionalEntityOnes
+                    context.UnidirectionalEntityOnes
                         .CreateInstance((e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7711),
-                    context
-                        .UnidirectionalEntityOnes
+                    context.UnidirectionalEntityOnes
                         .CreateInstance((e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7712),
-                    context
-                        .UnidirectionalEntityOnes
+                    context.UnidirectionalEntityOnes
                         .CreateInstance((e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7713),
                 };
                 var rightEntities = new[]
                 {
-                    context
-                        .UnidirectionalEntityTwos
+                    context.UnidirectionalEntityTwos
                         .CreateInstance((e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7721),
-                    context
-                        .UnidirectionalEntityTwos
+                    context.UnidirectionalEntityTwos
                         .CreateInstance((e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7722),
-                    context
-                        .UnidirectionalEntityTwos
+                    context.UnidirectionalEntityTwos
                         .CreateInstance((e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7723),
                 };
 
@@ -3351,14 +3235,12 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
                 var results = async ? await queryable.ToListAsync() : queryable.ToList();
                 Assert.Equal(3, results.Count);
 
-                var leftEntities = context
-                    .ChangeTracker
+                var leftEntities = context.ChangeTracker
                     .Entries<UnidirectionalEntityOne>()
                     .Select(e => e.Entity)
                     .OrderBy(e => e.Name)
                     .ToList();
-                var rightEntities = context
-                    .ChangeTracker
+                var rightEntities = context.ChangeTracker
                     .Entries<UnidirectionalEntityTwo>()
                     .Select(e => e.Entity)
                     .OrderBy(e => e.Name)
@@ -3431,8 +3313,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
 
                 var twos = new[]
                 {
-                    context
-                        .UnidirectionalEntityTwos
+                    context.UnidirectionalEntityTwos
                         .CreateInstance(
                             (e, p) =>
                             {
@@ -3440,8 +3321,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
                                 e.Name = "Z7721";
                             }
                         ),
-                    context
-                        .UnidirectionalEntityTwos
+                    context.UnidirectionalEntityTwos
                         .CreateInstance(
                             (e, p) =>
                             {
@@ -3449,8 +3329,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
                                 e.Name = "Z7722";
                             }
                         ),
-                    context
-                        .UnidirectionalEntityTwos
+                    context.UnidirectionalEntityTwos
                         .CreateInstance(
                             (e, p) =>
                             {
@@ -3458,8 +3337,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
                                 e.Name = "Z7723";
                             }
                         ),
-                    context
-                        .UnidirectionalEntityTwos
+                    context.UnidirectionalEntityTwos
                         .CreateInstance(
                             (e, p) =>
                             {
@@ -3471,8 +3349,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
 
                 var ones = new[]
                 {
-                    context
-                        .UnidirectionalEntityOnes
+                    context.UnidirectionalEntityOnes
                         .CreateInstance(
                             (e, p) =>
                             {
@@ -3480,8 +3357,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
                                 e.Name = "Z7711";
                             }
                         ),
-                    context
-                        .UnidirectionalEntityOnes
+                    context.UnidirectionalEntityOnes
                         .CreateInstance(
                             (e, p) =>
                             {
@@ -3489,8 +3365,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
                                 e.Name = "Z7712";
                             }
                         ),
-                    context
-                        .UnidirectionalEntityOnes
+                    context.UnidirectionalEntityOnes
                         .CreateInstance(
                             (e, p) =>
                             {
@@ -3498,8 +3373,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
                                 e.Name = "Z7713";
                             }
                         ),
-                    context
-                        .UnidirectionalEntityOnes
+                    context.UnidirectionalEntityOnes
                         .CreateInstance(
                             (e, p) =>
                             {
@@ -3632,14 +3506,12 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
             Assert.DoesNotContain(oneSkipNav2, e => e.Name == "EntityOne 9");
             Assert.Contains(oneSkipNav2, e => e.Name == "Z7714");
 
-            var allLeft = context
-                .ChangeTracker
+            var allLeft = context.ChangeTracker
                 .Entries<UnidirectionalEntityOne>()
                 .Select(e => e.Entity)
                 .OrderBy(e => e.Name)
                 .ToList();
-            var allRight = context
-                .ChangeTracker
+            var allRight = context.ChangeTracker
                 .Entries<UnidirectionalEntityTwo>()
                 .Select(e => e.Entity)
                 .OrderBy(e => e.Name)
@@ -3672,8 +3544,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
                 }
             }
 
-            var deleted = context
-                .ChangeTracker
+            var deleted = context.ChangeTracker
                 .Entries<Dictionary<string, object>>()
                 .Count(e => e.State == EntityState.Deleted);
             Assert.Equal(joinCount, (count / 2) + deleted);
@@ -3702,26 +3573,20 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
             {
                 var leftEntities = new[]
                 {
-                    context
-                        .UnidirectionalEntityOnes
+                    context.UnidirectionalEntityOnes
                         .CreateInstance((e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7711),
-                    context
-                        .UnidirectionalEntityOnes
+                    context.UnidirectionalEntityOnes
                         .CreateInstance((e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7712),
-                    context
-                        .UnidirectionalEntityOnes
+                    context.UnidirectionalEntityOnes
                         .CreateInstance((e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7713),
                 };
                 var rightEntities = new[]
                 {
-                    context
-                        .UnidirectionalEntityTwos
+                    context.UnidirectionalEntityTwos
                         .CreateInstance((e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7721),
-                    context
-                        .UnidirectionalEntityTwos
+                    context.UnidirectionalEntityTwos
                         .CreateInstance((e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7722),
-                    context
-                        .UnidirectionalEntityTwos
+                    context.UnidirectionalEntityTwos
                         .CreateInstance((e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7723),
                 };
 
@@ -3809,8 +3674,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
                 {
                     foreach (var leftEntity in leftEntities)
                     {
-                        context
-                            .ChangeTracker
+                        context.ChangeTracker
                             .TrackGraph(leftEntity, n => n.Entry.State = EntityState.Added);
                     }
                 }
@@ -3866,14 +3730,12 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
                 var results = async ? await queryable.ToListAsync() : queryable.ToList();
                 Assert.Equal(3, results.Count);
 
-                var leftEntities = context
-                    .ChangeTracker
+                var leftEntities = context.ChangeTracker
                     .Entries<UnidirectionalEntityOne>()
                     .Select(e => e.Entity)
                     .OrderBy(e => e.Name)
                     .ToList();
-                var rightEntities = context
-                    .ChangeTracker
+                var rightEntities = context.ChangeTracker
                     .Entries<UnidirectionalEntityTwo>()
                     .Select(e => e.Entity)
                     .OrderBy(e => e.Name)
@@ -3920,8 +3782,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
                 context.Entry(rightEntities[2]).Collection("UnidirectionalEntityOne1").CurrentValue!
             );
 
-            var extra = context
-                .ChangeTracker
+            var extra = context.ChangeTracker
                 .Entries<UnidirectionalJoinOneToTwoExtra>()
                 .Select(e => e.Entity)
                 .Single();
@@ -3960,26 +3821,20 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
             {
                 var leftEntities = new[]
                 {
-                    context
-                        .UnidirectionalEntityOnes
+                    context.UnidirectionalEntityOnes
                         .CreateInstance((e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7711),
-                    context
-                        .UnidirectionalEntityOnes
+                    context.UnidirectionalEntityOnes
                         .CreateInstance((e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7712),
-                    context
-                        .UnidirectionalEntityOnes
+                    context.UnidirectionalEntityOnes
                         .CreateInstance((e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7713),
                 };
                 var rightEntities = new[]
                 {
-                    context
-                        .UnidirectionalEntityTwos
+                    context.UnidirectionalEntityTwos
                         .CreateInstance((e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7721),
-                    context
-                        .UnidirectionalEntityTwos
+                    context.UnidirectionalEntityTwos
                         .CreateInstance((e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7722),
-                    context
-                        .UnidirectionalEntityTwos
+                    context.UnidirectionalEntityTwos
                         .CreateInstance((e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7723),
                 };
 
@@ -4001,8 +3856,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
                 {
                     foreach (var leftEntity in leftEntities)
                     {
-                        context
-                            .ChangeTracker
+                        context.ChangeTracker
                             .TrackGraph(leftEntity, n => n.Entry.State = EntityState.Added);
                     }
                 }
@@ -4060,14 +3914,12 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
                 var results = async ? await queryable.ToListAsync() : queryable.ToList();
                 Assert.Equal(3, results.Count);
 
-                var leftEntities = context
-                    .ChangeTracker
+                var leftEntities = context.ChangeTracker
                     .Entries<UnidirectionalEntityOne>()
                     .Select(e => e.Entity)
                     .OrderBy(e => e.Name)
                     .ToList();
-                var rightEntities = context
-                    .ChangeTracker
+                var rightEntities = context.ChangeTracker
                     .Entries<UnidirectionalEntityTwo>()
                     .Select(e => e.Entity)
                     .OrderBy(e => e.Name)
@@ -4117,8 +3969,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
                         .CurrentValue!
             );
 
-            var joinEntities = context
-                .ChangeTracker
+            var joinEntities = context.ChangeTracker
                 .Entries<UnidirectionalJoinOneToTwo>()
                 .Select(e => e.Entity)
                 .ToList();
@@ -4205,8 +4056,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
             {
                 var leftEntities = new[]
                 {
-                    context
-                        .UnidirectionalEntityTwos
+                    context.UnidirectionalEntityTwos
                         .CreateInstance(
                             (e, p) =>
                             {
@@ -4214,8 +4064,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
                                 e.Name = "Z7711";
                             }
                         ),
-                    context
-                        .UnidirectionalEntityTwos
+                    context.UnidirectionalEntityTwos
                         .CreateInstance(
                             (e, p) =>
                             {
@@ -4223,8 +4072,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
                                 e.Name = "Z7712";
                             }
                         ),
-                    context
-                        .UnidirectionalEntityTwos
+                    context.UnidirectionalEntityTwos
                         .CreateInstance(
                             (e, p) =>
                             {
@@ -4235,8 +4083,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
                 };
                 var rightEntities = new[]
                 {
-                    context
-                        .UnidirectionalEntityThrees
+                    context.UnidirectionalEntityThrees
                         .CreateInstance(
                             (e, p) =>
                             {
@@ -4244,8 +4091,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
                                 e.Name = "Z7721";
                             }
                         ),
-                    context
-                        .UnidirectionalEntityThrees
+                    context.UnidirectionalEntityThrees
                         .CreateInstance(
                             (e, p) =>
                             {
@@ -4253,8 +4099,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
                                 e.Name = "Z7722";
                             }
                         ),
-                    context
-                        .UnidirectionalEntityThrees
+                    context.UnidirectionalEntityThrees
                         .CreateInstance(
                             (e, p) =>
                             {
@@ -4346,14 +4191,12 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
                 var results = async ? await queryable.ToListAsync() : queryable.ToList();
                 Assert.Equal(3, results.Count);
 
-                var leftEntities = context
-                    .ChangeTracker
+                var leftEntities = context.ChangeTracker
                     .Entries<UnidirectionalEntityTwo>()
                     .Select(e => e.Entity)
                     .OrderBy(e => e.Name)
                     .ToList();
-                var rightEntities = context
-                    .ChangeTracker
+                var rightEntities = context.ChangeTracker
                     .Entries<UnidirectionalEntityThree>()
                     .Select(e => e.Entity)
                     .OrderBy(e => e.Name)
@@ -4400,8 +4243,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
             Assert.Single(rightEntities[2].TwoSkipFull);
 
             foreach (
-                var joinEntity in context
-                    .ChangeTracker
+                var joinEntity in context.ChangeTracker
                     .Entries<UnidirectionalJoinTwoToThree>()
                     .Select(e => e.Entity)
                     .ToList()

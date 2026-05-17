@@ -121,12 +121,10 @@ namespace Microsoft.VisualStudio.Extensibility.Testing
         )
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
-            var globalOptions = await TestServices
-                .Shell
+            var globalOptions = await TestServices.Shell
                 .GetComponentModelServiceAsync<IGlobalOptionService>(cancellationToken);
             globalOptions.SetGlobalOption(
-                Microsoft
-                    .CodeAnalysis
+                Microsoft.CodeAnalysis
                     .CSharp
                     .CodeStyle
                     .CSharpCodeStyleOptions
@@ -162,8 +160,7 @@ namespace Microsoft.VisualStudio.Extensibility.Testing
         )
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
-            var globalOptions = await TestServices
-                .Shell
+            var globalOptions = await TestServices.Shell
                 .GetComponentModelServiceAsync<IGlobalOptionService>(cancellationToken);
 
             globalOptions.SetGlobalOption(
@@ -249,8 +246,7 @@ namespace Microsoft.VisualStudio.Extensibility.Testing
 
             if (featureNames.Contains(FeatureAttribute.NavigateTo))
             {
-                var statusService = workspace
-                    .Services
+                var statusService = workspace.Services
                     .GetRequiredService<IWorkspaceStatusService>();
                 Contract.ThrowIfFalse(await statusService.IsFullyLoadedAsync(cancellationToken));
 
@@ -346,8 +342,7 @@ namespace Microsoft.VisualStudio.Extensibility.Testing
             {
                 if (saveTask is not null)
                 {
-                    _ = _threadingContext
-                        .JoinableTaskFactory
+                    _ = _threadingContext.JoinableTaskFactory
                         .RunAsync(async () =>
                         {
                             // Track asynchronous save operations via Roslyn's Workspace events

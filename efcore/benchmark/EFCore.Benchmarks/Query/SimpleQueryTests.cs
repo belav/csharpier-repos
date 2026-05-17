@@ -104,8 +104,7 @@ public abstract class SimpleQueryTests
     [Benchmark]
     public virtual async Task SkipTake()
     {
-        var query = _context
-            .Products
+        var query = _context.Products
             .ApplyTracking(Tracking)
             .OrderBy(p => p.ProductId)
             .Skip(500)
@@ -125,8 +124,7 @@ public abstract class SimpleQueryTests
     // [Benchmark]
     public virtual async Task GroupBy()
     {
-        var query = _context
-            .Products
+        var query = _context.Products
             .GroupBy(p => p.ActualStockLevel)
             .Select(g => new { ActualStockLevel = g.Key, Products = g });
 
@@ -158,8 +156,7 @@ public abstract class SimpleQueryTests
     [Benchmark]
     public virtual async Task Projection()
     {
-        var query = _context
-            .Products
+        var query = _context.Products
             .Select(p => new
             {
                 p.ProductId,
@@ -184,8 +181,7 @@ public abstract class SimpleQueryTests
     [Benchmark]
     public virtual async Task ProjectionAcrossNavigation()
     {
-        var query = _context
-            .Orders
+        var query = _context.Orders
             .Select(o => new
             {
                 CustomerTitle = o.Customer.Title,

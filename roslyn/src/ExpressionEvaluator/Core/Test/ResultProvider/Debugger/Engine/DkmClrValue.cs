@@ -166,8 +166,7 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation.ClrCompilation
                 throw new ArgumentNullException(nameof(inspectionContext));
             }
 
-            return inspectionContext
-                .InspectionSession
+            return inspectionContext.InspectionSession
                 .InvokeFormatter(
                     this,
                     MethodId.GetValueString,
@@ -182,8 +181,7 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation.ClrCompilation
                 throw new ArgumentNullException(nameof(inspectionContext));
             }
 
-            return inspectionContext
-                .InspectionSession
+            return inspectionContext.InspectionSession
                 .InvokeFormatter(
                     this,
                     MethodId.HasUnderlyingString,
@@ -198,8 +196,7 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation.ClrCompilation
                 throw new ArgumentNullException(nameof(inspectionContext));
             }
 
-            return inspectionContext
-                .InspectionSession
+            return inspectionContext.InspectionSession
                 .InvokeFormatter(
                     this,
                     MethodId.GetUnderlyingString,
@@ -218,8 +215,7 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation.ClrCompilation
             DkmCompletionRoutine<DkmEvaluationAsyncResult> CompletionRoutine
         )
         {
-            InspectionContext
-                .InspectionSession
+            InspectionContext.InspectionSession
                 .InvokeResultProvider(
                     this,
                     MethodId.GetResult,

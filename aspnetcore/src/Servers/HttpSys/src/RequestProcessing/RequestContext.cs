@@ -51,8 +51,7 @@ internal partial class RequestContext : NativeRequestContext, IThreadPoolWorkIte
                 }
                 else
                 {
-                    var connectionDisconnectToken = Server
-                        .DisconnectListener
+                    var connectionDisconnectToken = Server.DisconnectListener
                         .GetTokenForConnection(Request.UConnectionId);
 
                     if (connectionDisconnectToken.CanBeCanceled)

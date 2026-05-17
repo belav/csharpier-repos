@@ -1488,8 +1488,7 @@ public class ResponseCompressionMiddlewareTest
                             }
 
                             addResponseAction?.Invoke(context.Response);
-                            return context
-                                .Response
+                            return context.Response
                                 .WriteAsync(new string('a', uncompressedBodyLength));
                         });
                     });
@@ -1504,12 +1503,10 @@ public class ResponseCompressionMiddlewareTest
         var request = new HttpRequestMessage(new HttpMethod(httpMethod), "");
         for (var i = 0; i < requestAcceptEncodings?.Length; i++)
         {
-            request
-                .Headers
+            request.Headers
                 .AcceptEncoding
                 .Add(
-                    System
-                        .Net
+                    System.Net
                         .Http
                         .Headers
                         .StringWithQualityHeaderValue

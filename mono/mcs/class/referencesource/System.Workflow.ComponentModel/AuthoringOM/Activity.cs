@@ -1772,9 +1772,8 @@ namespace System.Workflow.ComponentModel
                     contextActivity.GetValue(Activity.ActivityExecutionContextInfoProperty);
                 if (executionContextInfo.ParentContextId == -1)
                     return null;
-                return this.WorkflowCoreRuntime.GetContextActivityForId(
-                    executionContextInfo.ParentContextId
-                );
+                return this.WorkflowCoreRuntime
+                    .GetContextActivityForId(executionContextInfo.ParentContextId);
             }
         }
         internal Activity RootContextActivity
@@ -1889,8 +1888,7 @@ namespace System.Workflow.ComponentModel
 
         internal void SetStatus(ActivityExecutionStatus newStatus, bool transacted)
         {
-            System
-                .Workflow
+            System.Workflow
                 .Runtime
                 .WorkflowTrace
                 .Runtime
@@ -2041,8 +2039,7 @@ namespace System.Workflow.ComponentModel
                 ActivityExecutionContext currentContext = new ActivityExecutionContext(this);
 
                 foreach (
-                    ActivityExecutionContext childContext in currentContext
-                        .ExecutionContextManager
+                    ActivityExecutionContext childContext in currentContext.ExecutionContextManager
                         .ExecutionContexts
                 )
                 {
@@ -2125,8 +2122,7 @@ namespace System.Workflow.ComponentModel
                                 "Inner exception: {0}",
                                 new object[] { exception }
                             );
-                        System
-                            .Workflow
+                        System.Workflow
                             .Runtime
                             .WorkflowTrace
                             .Runtime
@@ -2135,11 +2131,8 @@ namespace System.Workflow.ComponentModel
                     }
                     else if (exception != null && this.parent != null)
                     {
-                        this.WorkflowCoreRuntime.RaiseException(
-                            exception,
-                            this.Parent,
-                            string.Empty
-                        );
+                        this.WorkflowCoreRuntime
+                            .RaiseException(exception, this.Parent, string.Empty);
                         this.RemoveProperty(ActivityExecutionContext.CurrentExceptionProperty);
                     }
                     else if (this.parent == null || this.PersistOnClose)
@@ -2150,11 +2143,8 @@ namespace System.Workflow.ComponentModel
                         // throw exception to outer
                         if (exception != null)
                         {
-                            this.WorkflowCoreRuntime.RaiseException(
-                                exception,
-                                this.Parent,
-                                string.Empty
-                            );
+                            this.WorkflowCoreRuntime
+                                .RaiseException(exception, this.Parent, string.Empty);
                             this.RemoveProperty(ActivityExecutionContext.CurrentExceptionProperty);
                         }
                     }
@@ -2306,15 +2296,14 @@ namespace System.Workflow.ComponentModel
                             != null
                     )
                     {
-                        ActivityExecutionContext resurrectedContext = executionContext
-                            .ExecutionContextManager
-                            .DiscardPersistedExecutionContext(contextInfo);
+                        ActivityExecutionContext resurrectedContext =
+                            executionContext.ExecutionContextManager
+                                .DiscardPersistedExecutionContext(contextInfo);
                         UninitializeCompletedContext(
                             resurrectedContext.Activity,
                             resurrectedContext
                         );
-                        executionContext
-                            .ExecutionContextManager
+                        executionContext.ExecutionContextManager
                             .CompleteExecutionContext(resurrectedContext);
                     }
                 }

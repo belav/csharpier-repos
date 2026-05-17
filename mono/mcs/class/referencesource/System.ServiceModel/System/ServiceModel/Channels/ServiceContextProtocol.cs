@@ -35,8 +35,7 @@ namespace System.ServiceModel.Channels
             }
 
             // deserialize the callback context header, if present
-            int headerIndex = message
-                .Headers
+            int headerIndex = message.Headers
                 .FindHeader(
                     CallbackContextMessageHeader.CallbackContextHeaderName,
                     CallbackContextMessageHeader.CallbackContextHeaderNamespace
@@ -91,8 +90,7 @@ namespace System.ServiceModel.Channels
             CallbackContextMessageProperty dummy;
             if (CallbackContextMessageProperty.TryGet(message, out dummy))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperWarning(
                         new InvalidOperationException(
                             SR.GetString(

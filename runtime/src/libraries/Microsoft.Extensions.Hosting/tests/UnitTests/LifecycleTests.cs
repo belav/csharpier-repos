@@ -112,22 +112,19 @@ namespace Microsoft.Extensions.Hosting.Tests
             {
                 IHostApplicationLifetime lifetime = provider.GetService<IHostApplicationLifetime>();
 
-                lifetime
-                    .ApplicationStarted
+                lifetime.ApplicationStarted
                     .Register(() =>
                     {
                         _applicationStartedOrder = ++_callCount;
                     });
 
-                lifetime
-                    .ApplicationStopping
+                lifetime.ApplicationStopping
                     .Register(() =>
                     {
                         _applicationStoppingOrder = ++_callCount;
                     });
 
-                lifetime
-                    .ApplicationStopped
+                lifetime.ApplicationStopped
                     .Register(() =>
                     {
                         _applicationStoppedOrder = ++_callCount;

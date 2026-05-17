@@ -63,8 +63,8 @@ namespace System.IdentityModel.Tokens
                 SecurityKeyIdentifier keyIdentifier = new SecurityKeyIdentifier();
                 while (reader.IsStartElement())
                 {
-                    SecurityKeyIdentifierClause clause =
-                        this.securityTokenSerializer.ReadKeyIdentifierClause(reader);
+                    SecurityKeyIdentifierClause clause = this.securityTokenSerializer
+                        .ReadKeyIdentifierClause(reader);
                     if (clause == null)
                     {
                         reader.Skip();
@@ -76,8 +76,7 @@ namespace System.IdentityModel.Tokens
                 }
                 if (keyIdentifier.Count == 0)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new XmlException(SR.GetString(SR.ErrorDeserializingKeyIdentifierClause))
                         );
@@ -112,8 +111,7 @@ namespace System.IdentityModel.Tokens
                 writer.WriteEndElement(); // KeyInfo
                 if (!clauseWritten)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new SecurityMessageSerializationException(
                                 SR.GetString(SR.NoKeyInfoClausesToWrite)
@@ -297,8 +295,7 @@ namespace System.IdentityModel.Tokens
                             )
                         )
                         {
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
                                     new SecurityMessageSerializationException(
                                         SR.GetString(SR.InvalidX509RawData)

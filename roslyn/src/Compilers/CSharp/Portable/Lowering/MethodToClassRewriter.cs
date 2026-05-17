@@ -960,9 +960,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
                 AddSynthesizedAttribute(
                     ref attributes,
-                    this.DeclaringCompilation.TrySynthesizeAttribute(
-                        WellKnownMember.System_Diagnostics_DebuggerHiddenAttribute__ctor
-                    )
+                    this.DeclaringCompilation
+                        .TrySynthesizeAttribute(
+                            WellKnownMember.System_Diagnostics_DebuggerHiddenAttribute__ctor
+                        )
                 );
             }
         }

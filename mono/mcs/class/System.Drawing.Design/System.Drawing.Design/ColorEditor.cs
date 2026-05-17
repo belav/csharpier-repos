@@ -210,13 +210,8 @@ namespace System.Drawing.Design
                 using (System.Drawing.SolidBrush brush = new SolidBrush(color))
                     e.Graphics.FillRectangle(brush, 2, e.Bounds.Top + 2, 21, 9);
                 e.Graphics.DrawRectangle(SystemPens.WindowText, 2, e.Bounds.Top + 2, 21, 9);
-                e.Graphics.DrawString(
-                    color.Name,
-                    this.Font,
-                    SystemBrushes.WindowText,
-                    26,
-                    e.Bounds.Top
-                );
+                e.Graphics
+                    .DrawString(color.Name, this.Font, SystemBrushes.WindowText, 26, e.Bounds.Top);
                 if ((e.State & DrawItemState.Selected) != 0)
                     e.DrawFocusRectangle();
                 base.OnDrawItem(e);

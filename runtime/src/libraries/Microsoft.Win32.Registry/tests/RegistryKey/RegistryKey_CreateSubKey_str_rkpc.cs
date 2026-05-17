@@ -165,8 +165,7 @@ namespace Microsoft.Win32.RegistryTests
             const string name = "FooBar";
             TestRegistryKey.SetValue(name, 42);
             using (
-                var rk = Registry
-                    .CurrentUser
+                var rk = Registry.CurrentUser
                     .CreateSubKey(
                         TestRegistryKeyName,
                         writable: false,
@@ -182,8 +181,7 @@ namespace Microsoft.Win32.RegistryTests
             }
 
             using (
-                var rk = Registry
-                    .CurrentUser
+                var rk = Registry.CurrentUser
                     .CreateSubKey(
                         TestRegistryKeyName,
                         RegistryKeyPermissionCheck.ReadSubTree,

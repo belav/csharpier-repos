@@ -71,13 +71,8 @@ namespace MonoTests.System.Windows.Forms.DataBinding
             c.DataBindings.Add(new Binding("Name", item, "Text"));
             Binding b2 = c.DataBindings.Add("Text", item, "Text");
             Binding b3 = c.DataBindings.Add("Width", item, "Value");
-            Binding b4 = c.DataBindings.Add(
-                "Height",
-                item,
-                "Value",
-                true,
-                DataSourceUpdateMode.Never
-            );
+            Binding b4 = c.DataBindings
+                .Add("Height", item, "Value", true, DataSourceUpdateMode.Never);
             Binding b1 = c.DataBindings[0];
 
             Assert.AreEqual(b1.DataSourceUpdateMode, DataSourceUpdateMode.OnValidation, "#B1");

@@ -47,8 +47,7 @@ namespace System.Data.OleDb.Tests
                     !PlatformDetection.Is32BitProcess
                     && providerNames.Contains(ExpectedProviderName);
                 if (
-                    !CultureInfo
-                        .CurrentCulture
+                    !CultureInfo.CurrentCulture
                         .Name
                         .Equals("en-US", StringComparison.OrdinalIgnoreCase)
                 )

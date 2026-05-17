@@ -41,8 +41,7 @@ namespace Internal.Cryptography.Pal.Windows
         public sealed override Oid GetEncodedMessageType(ReadOnlySpan<byte> encodedMessage)
         {
             using (
-                SafeCryptMsgHandle hCryptMsg = Interop
-                    .Crypt32
+                SafeCryptMsgHandle hCryptMsg = Interop.Crypt32
                     .CryptMsgOpenToDecode(
                         MsgEncodingType.All,
                         0,
@@ -57,8 +56,7 @@ namespace Internal.Cryptography.Pal.Windows
                     throw Marshal.GetLastPInvokeError().ToCryptographicException();
 
                 if (
-                    !Interop
-                        .Crypt32
+                    !Interop.Crypt32
                         .CryptMsgUpdate(
                             hCryptMsg,
                             ref MemoryMarshal.GetReference(encodedMessage),
@@ -71,8 +69,7 @@ namespace Internal.Cryptography.Pal.Windows
                 int msgTypeAsInt;
                 int cbSize = sizeof(int);
                 if (
-                    !Interop
-                        .Crypt32
+                    !Interop.Crypt32
                         .CryptMsgGetParam(
                             hCryptMsg,
                             CryptMsgParamType.CMSG_TYPE_PARAM,
@@ -220,8 +217,7 @@ namespace Internal.Cryptography.Pal.Windows
                     {
                         CngKeyHandleOpenOptions options = CngKeyHandleOpenOptions.None;
                         byte clrIsEphemeral = 0;
-                        Interop.NCrypt.ErrorCode errorCode = Interop
-                            .NCrypt
+                        Interop.NCrypt.ErrorCode errorCode = Interop.NCrypt
                             .NCryptGetByteProperty(
                                 keyHandle,
                                 "CLR IsEphemeral",
@@ -313,8 +309,7 @@ namespace Internal.Cryptography.Pal.Windows
                 int cbSize = IntPtr.Size;
 
                 if (
-                    Interop
-                        .Crypt32
+                    Interop.Crypt32
                         .CertGetCertificateContextProperty(
                             hCertContext,
                             CertContextPropId.CERT_NCRYPT_KEY_HANDLE_PROP_ID,
@@ -329,8 +324,7 @@ namespace Internal.Cryptography.Pal.Windows
                 }
 
                 if (
-                    !Interop
-                        .Crypt32
+                    !Interop.Crypt32
                         .CryptAcquireCertificatePrivateKey(
                             hCertContext,
                             flags,

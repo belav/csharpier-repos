@@ -51,8 +51,7 @@ namespace System.ServiceModel.Security
             // The Encrypted Headers MustUnderstand, Relay and Actor attributes should match the
             // Security Headers value.
             if (headerXml.MustUnderstand != this.MustUnderstand)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new MessageSecurityException(
                             SR.GetString(
@@ -65,8 +64,7 @@ namespace System.ServiceModel.Security
                     );
 
             if (headerXml.Relay != this.Relay)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new MessageSecurityException(
                             SR.GetString(
@@ -79,8 +77,7 @@ namespace System.ServiceModel.Security
                     );
 
             if (headerXml.Actor != this.Actor)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new MessageSecurityException(
                             SR.GetString(

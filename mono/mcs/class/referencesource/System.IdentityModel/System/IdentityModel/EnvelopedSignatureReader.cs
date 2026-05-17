@@ -79,8 +79,7 @@ namespace System.IdentityModel
             }
             if (securityTokenSerializer == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("securityTokenSerializer");
             }
 
@@ -105,8 +104,7 @@ namespace System.IdentityModel
             {
                 if (_requireSignature)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new CryptographicException(SR.GetString(SR.ID3089)));
                 }
             }
@@ -114,8 +112,7 @@ namespace System.IdentityModel
             {
                 ResolveSigningCredentials();
                 _signedXml.StartSignatureVerification(_signingCredentials.SigningKey);
-                _wrappedReader
-                    .XmlTokens
+                _wrappedReader.XmlTokens
                     .SetElementExclusion(
                         XD.XmlSignatureDictionary.Signature.Value,
                         XD.XmlSignatureDictionary.Namespace.Value
@@ -196,8 +193,7 @@ namespace System.IdentityModel
 
             if (_signedXml.Signature.SignedInfo.ReferenceCount != 1)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new CryptographicException(SR.GetString(SR.ID3057)));
             }
         }
@@ -210,8 +206,7 @@ namespace System.IdentityModel
                 || _signedXml.Signature.KeyIdentifier.Count == 0
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ID3276)));
             }
 
@@ -234,8 +229,7 @@ namespace System.IdentityModel
                     //
                     EncryptedKeyIdentifierClause encryptedKeyClause;
                     if (
-                        _signedXml
-                            .Signature
+                        _signedXml.Signature
                             .KeyIdentifier
                             .TryFind<EncryptedKeyIdentifierClause>(out encryptedKeyClause)
                     )
@@ -245,8 +239,7 @@ namespace System.IdentityModel
                         // very good information except the cipher data in this case. We have worked around that
                         // by using the token serializer to serialize the key identifier clause again.
                         //
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new SignatureVerificationFailedException(
                                     SR.GetString(
@@ -261,8 +254,7 @@ namespace System.IdentityModel
                     }
                     else
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new SignatureVerificationFailedException(
                                     SR.GetString(

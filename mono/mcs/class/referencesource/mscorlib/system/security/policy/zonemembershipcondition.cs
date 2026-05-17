@@ -169,8 +169,7 @@ namespace System.Security.Policy
                 ParseZone();
 
             SecurityElement root = new SecurityElement("IMembershipCondition");
-            System
-                .Security
+            System.Security
                 .Util
                 .XMLUtil
                 .AddClassAttribute(

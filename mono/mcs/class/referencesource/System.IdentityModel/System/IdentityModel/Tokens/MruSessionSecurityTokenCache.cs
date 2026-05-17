@@ -89,8 +89,7 @@ namespace System.IdentityModel.Tokens
         {
             if (sizeAfterPurge < 0)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentException(SR.GetString(SR.ID0008), "sizeAfterPurge")
                     );
@@ -98,8 +97,7 @@ namespace System.IdentityModel.Tokens
 
             if (sizeAfterPurge >= maximumSize)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentException(SR.GetString(SR.ID0009), "sizeAfterPurge")
                     );
@@ -283,8 +281,7 @@ namespace System.IdentityModel.Tokens
         /// <param name="endpointId">The endpoint id for the entry to be removed.</param>
         public override void RemoveAll(string endpointId)
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(new NotImplementedException(SR.GetString(SR.ID4294)));
         }
 

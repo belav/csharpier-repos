@@ -43,8 +43,7 @@ namespace System.ServiceModel.ComIntegration
                     throw;
 
                 return new ReturnMessage(
-                    DiagnosticUtility
-                        .ExceptionUtility
+                    DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new COMException(
                                 e.GetBaseException().Message,
@@ -69,8 +68,7 @@ namespace System.ServiceModel.ComIntegration
                     return msgReturned;
                 else
                     return new ReturnMessage(
-                        DiagnosticUtility
-                            .ExceptionUtility
+                        DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new COMException(
                                     returnMsg.Exception.GetBaseException().Message,
@@ -85,8 +83,7 @@ namespace System.ServiceModel.ComIntegration
             else
             {
                 return new ReturnMessage(
-                    DiagnosticUtility
-                        .ExceptionUtility
+                    DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new COMException(
                                 SR.GetString(SR.OperationNotFound, typeMethod.Name),

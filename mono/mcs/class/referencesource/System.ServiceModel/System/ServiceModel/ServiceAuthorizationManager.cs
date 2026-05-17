@@ -31,8 +31,7 @@ namespace System.ServiceModel
         {
             if (operationContext == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("operationContext");
             }
 
@@ -73,9 +72,8 @@ namespace System.ServiceModel
                 return externalPolicies ?? EmptyReadOnlyCollection<IAuthorizationPolicy>.Instance;
             }
 
-            ReadOnlyCollection<IAuthorizationPolicy> authorizationPolicies = security
-                .ServiceSecurityContext
-                .AuthorizationPolicies;
+            ReadOnlyCollection<IAuthorizationPolicy> authorizationPolicies =
+                security.ServiceSecurityContext.AuthorizationPolicies;
             if (externalPolicies == null || externalPolicies.Count <= 0)
             {
                 return authorizationPolicies;

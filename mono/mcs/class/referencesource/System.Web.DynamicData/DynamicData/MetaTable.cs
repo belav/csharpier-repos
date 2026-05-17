@@ -1138,8 +1138,7 @@ namespace System.Web.DynamicData
                 throw new ArgumentNullException("entityType");
             }
 
-            return System
-                .Web
+            return System.Web
                 .DynamicData
                 .MetaModel
                 .MetaModelManager

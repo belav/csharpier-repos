@@ -136,8 +136,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 // iterator will only return propsyms (or methsyms, or whatever)
                 symbmask_t mask = (symbmask_t)(1 << (int)_pGroup.SymKind);
 
-                CMemberLookupResults.CMethodIterator iterator = _pGroup
-                    .MemberLookupResults
+                CMemberLookupResults.CMethodIterator iterator = _pGroup.MemberLookupResults
                     .GetMethodIterator(
                         GetTypeQualifier(_pGroup),
                         _pExprBinder.ContextForMemberLookup,
@@ -279,8 +278,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                         // In case we never get an accessible method, this will allow us to give
                         // a better error...
                         Debug.Assert(!_results.InaccessibleResult);
-                        _results
-                            .InaccessibleResult
+                        _results.InaccessibleResult
                             .Set(_pCurrentSym, _pCurrentType, _pCurrentTypeArgs);
                     }
                     else if (misnamed)
@@ -1119,8 +1117,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                                 // If we already have best method for instance methods don't overwrite with extensions
                                 if (!_results.BestResult)
                                 {
-                                    _results
-                                        .BestResult
+                                    _results.BestResult
                                         .Set(_pCurrentSym, _pCurrentType, _pCurrentTypeArgs);
                                 }
                             }
@@ -1142,8 +1139,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                                     // If we already have best method for instance methods don't overwrite with extensions
                                     if (!_results.BestResult)
                                     {
-                                        _results
-                                            .BestResult
+                                        _results.BestResult
                                             .Set(_pCurrentSym, _pCurrentType, _pCurrentTypeArgs);
                                     }
                                 }
@@ -1387,8 +1383,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                     if (!_results.UninferableResult)
                     {
                         //copy the extension method for which instance argument type inference failed
-                        _results
-                            .UninferableResult
+                        _results.UninferableResult
                             .Set(
                                 _mpwiCantInferInstArg.Sym as MethodSymbol,
                                 _mpwiCantInferInstArg.GetType(),

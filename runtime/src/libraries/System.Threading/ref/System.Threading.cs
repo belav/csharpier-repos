@@ -836,8 +836,7 @@ namespace System.Threading
     {
         public static T EnsureInitialized<
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
-                System
-                    .Diagnostics
+                System.Diagnostics
                     .CodeAnalysis
                     .DynamicallyAccessedMemberTypes
                     .PublicParameterlessConstructor
@@ -851,8 +850,7 @@ namespace System.Threading
 
         public static T EnsureInitialized<
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
-                System
-                    .Diagnostics
+                System.Diagnostics
                     .CodeAnalysis
                     .DynamicallyAccessedMemberTypes
                     .PublicParameterlessConstructor

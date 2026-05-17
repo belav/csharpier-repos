@@ -1152,9 +1152,8 @@ static class Program
                     bool expectedAnalysis = expectedAnalyzedKeys.Contains(
                         methodDeclaration.Identifier.Text
                     );
-                    bool actualAnalysis = tree.IsNullableAnalysisEnabled(
-                        methodDeclaration.Span
-                    ).Value;
+                    bool actualAnalysis = tree.IsNullableAnalysisEnabled(methodDeclaration.Span)
+                        .Value;
                     Assert.Equal(expectedAnalysis, actualAnalysis);
                 }
             }
@@ -1477,8 +1476,7 @@ partial class Program
 #nullable restore
     object F4 = null;
 }";
-            var options = TestOptions
-                .ReleaseDll
+            var options = TestOptions.ReleaseDll
                 .WithNullableContextOptions(NullableContextOptions.Disable);
 
             verify(new[] { source1, source2 }, options, new string[0]);
@@ -3108,8 +3106,7 @@ string";
             bool requiredAnalysis = false
         )
         {
-            return ((NullableWalker.NullableAnalysisData)compilationData)
-                .Data
+            return ((NullableWalker.NullableAnalysisData)compilationData).Data
                 .Where(pair => !requiredAnalysis || pair.Value.RequiredAnalysis)
                 .Select(pair => GetNullableDataKeyAsString(pair.Key))
                 .OrderBy(key => key)
@@ -3122,8 +3119,7 @@ string";
         )
         {
             toString ??= GetNullableDataKeyAsString;
-            return ((NullableWalker.NullableAnalysisData)compilationData)
-                .Data
+            return ((NullableWalker.NullableAnalysisData)compilationData).Data
                 .Where(pair =>
                     pair.Value.RequiredAnalysis
                     && pair.Key is MethodSymbol method

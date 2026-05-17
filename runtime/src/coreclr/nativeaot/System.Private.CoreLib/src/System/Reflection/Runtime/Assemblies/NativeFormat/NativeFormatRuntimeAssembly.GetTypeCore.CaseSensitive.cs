@@ -53,8 +53,7 @@ namespace System.Reflection.Runtime.Assemblies.NativeFormat
                     TypeForwarder typeForwarder = typeForwarderHandle.GetTypeForwarder(reader);
                     if (typeForwarder.Name.StringEquals(name, reader))
                     {
-                        RuntimeAssemblyName redirectedAssemblyName = typeForwarder
-                            .Scope
+                        RuntimeAssemblyName redirectedAssemblyName = typeForwarder.Scope
                             .ToRuntimeAssemblyName(reader);
                         RuntimeAssemblyInfo redirectedAssembly =
                             RuntimeAssemblyInfo.GetRuntimeAssemblyIfExists(redirectedAssemblyName);

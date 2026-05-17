@@ -52,8 +52,7 @@ namespace System.ServiceModel.Channels
                 if (IsDisposed)
                 {
 #pragma warning suppress 56503
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(CreateDisposedException());
                 }
                 return headers;
@@ -77,8 +76,7 @@ namespace System.ServiceModel.Channels
                 if (IsDisposed)
                 {
 #pragma warning suppress 56503
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(CreateDisposedException());
                 }
                 return properties;
@@ -92,8 +90,7 @@ namespace System.ServiceModel.Channels
                 if (IsDisposed)
                 {
 #pragma warning suppress 56503
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(CreateDisposedException());
                 }
                 return MessageVersion.None;
@@ -233,8 +230,7 @@ namespace System.ServiceModel.Channels
                 {
                     if (closed)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(CreateDisposedException());
                     }
                     return new HttpStreamMessage(this.headers, this.properties, this.bodyWriter);

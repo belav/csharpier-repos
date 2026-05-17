@@ -2071,8 +2071,7 @@ public class ControllerActionInvokerTest : CommonResourceInvokerTest
 
         foreach (var kvp in arguments)
         {
-            actionDescriptor
-                .Parameters
+            actionDescriptor.Parameters
                 .Add(
                     new ControllerParameterDescriptor()
                     {

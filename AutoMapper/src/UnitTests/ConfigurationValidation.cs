@@ -881,8 +881,7 @@ public class When_configuring_a_resolver : AutoMapperSpecBase
             ResolutionContext context
         )
         {
-            return source
-                .Details
+            return source.Details
                 .Select(d => new KeyValuePair<string, string>(d.ToString(), d.ToString()))
                 .ToList();
         }

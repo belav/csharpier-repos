@@ -38,8 +38,7 @@ public class CompiledModelSqliteTest : CompiledModelRelationalTestBase
             eb.Property<Point>("Point")
                 .HasColumnType("geometry")
                 .HasDefaultValue(
-                    NtsGeometryServices
-                        .Instance
+                    NtsGeometryServices.Instance
                         .CreateGeometryFactory(srid: 0)
                         .CreatePoint(new CoordinateZM(0, 0, 0, 0))
                 )
@@ -125,8 +124,7 @@ public class CompiledModelSqliteTest : CompiledModelRelationalTestBase
     {
         base.AddReferences(build);
         build.References.Add(BuildReference.ByName("Microsoft.EntityFrameworkCore.Sqlite"));
-        build
-            .References
+        build.References
             .Add(BuildReference.ByName("Microsoft.EntityFrameworkCore.Sqlite.NetTopologySuite"));
         build.References.Add(BuildReference.ByName("NetTopologySuite"));
         return build;

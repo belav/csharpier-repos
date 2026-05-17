@@ -77,8 +77,7 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings
             }
 
             var solution = _workspace.CurrentSolution;
-            var analyzerConfigDocument = solution
-                .Projects
+            var analyzerConfigDocument = solution.Projects
                 .Select(p => p.TryGetExistingAnalyzerConfigDocumentAtPath(_filepath))
                 .FirstOrDefault();
             if (analyzerConfigDocument is null)
@@ -86,8 +85,7 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings
                 return;
             }
 
-            _threadingContext
-                .JoinableTaskFactory
+            _threadingContext.JoinableTaskFactory
                 .Run(async () =>
                 {
                     var originalText = await analyzerConfigDocument

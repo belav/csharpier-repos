@@ -66,8 +66,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternCombinators
                 );
 
                 if (
-                    operation
-                        .SemanticModel
+                    operation.SemanticModel
                         .TryGetSpeculativeSemanticModel(
                             typeSyntax.SpanStart,
                             dummyStatement,

@@ -110,8 +110,7 @@ namespace System.Web.Razor.Editor
                 {
                     return true;
                 }
-                EditResult result = changeOwner
-                    .EditHandler
+                EditResult result = changeOwner.EditHandler
                     .ApplyChange(changeOwner, change, force: true);
                 changeOwner.ReplaceWith(result.EditedSpan);
             }
@@ -423,8 +422,7 @@ namespace System.Web.Razor.Editor
                                             RazorResources.Trace_ParseComplete,
                                             fileNameOnly,
                                             elapsedMs.HasValue
-                                                ? elapsedMs
-                                                    .Value
+                                                ? elapsedMs.Value
                                                     .ToString(CultureInfo.InvariantCulture)
                                                 : "?"
                                         );
@@ -459,8 +457,7 @@ namespace System.Web.Razor.Editor
                                                 RazorResources.Trace_TreesCompared,
                                                 fileNameOnly,
                                                 elapsedMs.HasValue
-                                                    ? elapsedMs
-                                                        .Value
+                                                    ? elapsedMs.Value
                                                         .ToString(CultureInfo.InvariantCulture)
                                                     : "?",
                                                 treeStructureChanged
@@ -490,8 +487,7 @@ namespace System.Web.Razor.Editor
                                         {
                                             // Rewind the buffer and sanity check the line mappings
                                             finalChange.NewBuffer.Position = 0;
-                                            int lineCount = finalChange
-                                                .NewBuffer
+                                            int lineCount = finalChange.NewBuffer
                                                 .ReadToEnd()
                                                 .Split(
                                                     new string[]

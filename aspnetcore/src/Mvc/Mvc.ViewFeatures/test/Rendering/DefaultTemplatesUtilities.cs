@@ -266,8 +266,7 @@ public class DefaultTemplatesUtilities
         var localizationOptions = new MvcDataAnnotationsLocalizationOptions();
         var localizationOptionsAccesor = Options.Create(localizationOptions);
 
-        options
-            .ClientModelValidatorProviders
+        options.ClientModelValidatorProviders
             .Add(
                 new DataAnnotationsClientModelValidatorProvider(
                     new ValidationAttributeAdapterProvider(),

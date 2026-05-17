@@ -166,8 +166,7 @@ namespace System.Runtime.Serialization
         public void IncrementItemCount(int count)
         {
             if (count > maxItemsInObjectGraph - itemCount)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         XmlObjectSerializer.CreateSerializationException(
                             SR.GetString(SR.ExceededMaxItemsQuota, maxItemsInObjectGraph)
@@ -269,8 +268,7 @@ namespace System.Runtime.Serialization
         )
         {
             if (!isMemberTypeSerializable)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -323,8 +321,7 @@ namespace System.Runtime.Serialization
             {
                 Type knownType = knownTypeList[i];
                 if (knownType == null)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentException(SR.GetString(SR.NullKnownType, "knownTypes"))
                         );

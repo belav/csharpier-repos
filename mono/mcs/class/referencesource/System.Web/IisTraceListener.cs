@@ -153,8 +153,7 @@ namespace System.Web
                 {
                     datastring = data.ToString();
                 }
-                context
-                    .WorkerRequest
+                context.WorkerRequest
                     .RaiseTraceEvent(
                         Convert(eventType),
                         AppendTraceOptions(eventCache, datastring)
@@ -193,8 +192,7 @@ namespace System.Web
             }
             if (context != null)
             {
-                context
-                    .WorkerRequest
+                context.WorkerRequest
                     .RaiseTraceEvent(
                         Convert(eventType),
                         AppendTraceOptions(eventCache, sb.ToString())
@@ -220,8 +218,7 @@ namespace System.Web
             if (context == null)
                 return;
 
-            context
-                .WorkerRequest
+            context.WorkerRequest
                 .RaiseTraceEvent(Convert(severity), AppendTraceOptions(eventCache, message));
         }
 

@@ -62,8 +62,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UseUtf8StringLiteral
                 .GetRequiredSemanticModelAsync(cancellationToken)
                 .ConfigureAwait(false);
 
-            var readOnlySpanType = semanticModel
-                .Compilation
+            var readOnlySpanType = semanticModel.Compilation
                 .GetBestTypeByMetadataName(typeof(ReadOnlySpan<>).FullName!);
             // The analyzer wouldn't raise a diagnostic if this were null
             Contract.ThrowIfNull(readOnlySpanType);
@@ -72,8 +71,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UseUtf8StringLiteral
             {
                 cancellationToken.ThrowIfCancellationRequested();
 
-                var node = diagnostic
-                    .Location
+                var node = diagnostic.Location
                     .FindNode(getInnermostNodeForTie: true, cancellationToken);
                 var arrayOp = GetArrayCreationOperation(
                     semanticModel,

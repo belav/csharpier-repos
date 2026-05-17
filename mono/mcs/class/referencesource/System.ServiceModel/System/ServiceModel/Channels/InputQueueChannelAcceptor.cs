@@ -75,11 +75,8 @@ namespace System.ServiceModel.Channels
             bool canDispatchOnThisThread
         )
         {
-            this.channelQueue.EnqueueAndDispatch(
-                channel,
-                dequeuedCallback,
-                canDispatchOnThisThread
-            );
+            this.channelQueue
+                .EnqueueAndDispatch(channel, dequeuedCallback, canDispatchOnThisThread);
         }
 
         public virtual void EnqueueAndDispatch(
@@ -88,11 +85,8 @@ namespace System.ServiceModel.Channels
             bool canDispatchOnThisThread
         )
         {
-            this.channelQueue.EnqueueAndDispatch(
-                exception,
-                dequeuedCallback,
-                canDispatchOnThisThread
-            );
+            this.channelQueue
+                .EnqueueAndDispatch(exception, dequeuedCallback, canDispatchOnThisThread);
         }
 
         public void FaultQueue()

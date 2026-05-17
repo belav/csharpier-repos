@@ -750,8 +750,7 @@ namespace System
             if (target == EnvironmentVariableTarget.Machine)
             {
                 using (
-                    RegistryKey environmentKey = Registry
-                        .LocalMachine
+                    RegistryKey environmentKey = Registry.LocalMachine
                         .OpenSubKey(
                             @"System\CurrentControlSet\Control\Session Manager\Environment",
                             false
@@ -774,8 +773,7 @@ namespace System
             else if (target == EnvironmentVariableTarget.User)
             {
                 using (
-                    RegistryKey environmentKey = Registry
-                        .CurrentUser
+                    RegistryKey environmentKey = Registry.CurrentUser
                         .OpenSubKey("Environment", false)
                 )
                 {
@@ -985,8 +983,7 @@ namespace System
             if (target == EnvironmentVariableTarget.Machine)
             {
                 using (
-                    RegistryKey environmentKey = Registry
-                        .LocalMachine
+                    RegistryKey environmentKey = Registry.LocalMachine
                         .OpenSubKey(
                             @"System\CurrentControlSet\Control\Session Manager\Environment",
                             false
@@ -999,8 +996,7 @@ namespace System
             else if (target == EnvironmentVariableTarget.User)
             {
                 using (
-                    RegistryKey environmentKey = Registry
-                        .CurrentUser
+                    RegistryKey environmentKey = Registry.CurrentUser
                         .OpenSubKey("Environment", false)
                 )
                 {
@@ -1151,8 +1147,7 @@ namespace System
             if (target == EnvironmentVariableTarget.Machine)
             {
                 using (
-                    RegistryKey environmentKey = Registry
-                        .LocalMachine
+                    RegistryKey environmentKey = Registry.LocalMachine
                         .OpenSubKey(
                             @"System\CurrentControlSet\Control\Session Manager\Environment",
                             true
@@ -1183,8 +1178,7 @@ namespace System
                     );
                 }
                 using (
-                    RegistryKey environmentKey = Registry
-                        .CurrentUser
+                    RegistryKey environmentKey = Registry.CurrentUser
                         .OpenSubKey("Environment", true)
                 )
                 {

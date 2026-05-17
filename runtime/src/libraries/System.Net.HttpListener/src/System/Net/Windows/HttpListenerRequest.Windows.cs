@@ -326,8 +326,7 @@ namespace System.Net
         {
             get
             {
-                _remoteEndPoint ??= Interop
-                    .HttpApi
+                _remoteEndPoint ??= Interop.HttpApi
                     .GetRemoteEndPoint(RequestBuffer, OriginalBlobAddress);
                 if (NetEventSource.Log.IsEnabled())
                     NetEventSource.Info(this, "_remoteEndPoint" + _remoteEndPoint);
@@ -339,8 +338,7 @@ namespace System.Net
         {
             get
             {
-                _localEndPoint ??= Interop
-                    .HttpApi
+                _localEndPoint ??= Interop.HttpApi
                     .GetLocalEndPoint(RequestBuffer, OriginalBlobAddress);
                 if (NetEventSource.Log.IsEnabled())
                     NetEventSource.Info(this, $"_localEndPoint={_localEndPoint}");
@@ -420,8 +418,7 @@ namespace System.Net
                             );
                         uint bytesReceived = 0;
 
-                        uint statusCode = Interop
-                            .HttpApi
+                        uint statusCode = Interop.HttpApi
                             .HttpReceiveClientCertificate(
                                 HttpListenerContext.RequestQueueHandle,
                                 _connectionId,
@@ -544,8 +541,7 @@ namespace System.Net
                             );
                         uint bytesReceived = 0;
 
-                        uint statusCode = Interop
-                            .HttpApi
+                        uint statusCode = Interop.HttpApi
                             .HttpReceiveClientCertificate(
                                 HttpListenerContext.RequestQueueHandle,
                                 _connectionId,

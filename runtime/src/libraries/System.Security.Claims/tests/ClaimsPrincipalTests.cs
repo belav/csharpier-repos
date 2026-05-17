@@ -290,8 +290,7 @@ namespace System.Security.Claims
             RemoteExecutor
                 .Invoke(() =>
                 {
-                    AppDomain
-                        .CurrentDomain
+                    AppDomain.CurrentDomain
                         .SetPrincipalPolicy(PrincipalPolicy.UnauthenticatedPrincipal);
                     Thread.CurrentPrincipal = null;
                     Assert.IsType<GenericPrincipal>(ClaimsPrincipal.Current);

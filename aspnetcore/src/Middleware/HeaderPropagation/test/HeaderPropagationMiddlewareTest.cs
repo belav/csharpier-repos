@@ -119,8 +119,7 @@ public class HeaderPropagationMiddlewareTest
         string receivedName = null;
         StringValues receivedValue = default;
         HttpContext receivedContext = null;
-        Configuration
-            .Headers
+        Configuration.Headers
             .Add(
                 "in",
                 context =>

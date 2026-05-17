@@ -50,8 +50,7 @@ public class Startup
                     int visits = 0;
                     visits = context.Session.GetInt32("visits") ?? 0;
                     context.Session.SetInt32("visits", ++visits);
-                    await context
-                        .Response
+                    await context.Response
                         .WriteAsync(
                             "Counting: You have visited our page this many times: " + visits
                         );
@@ -68,15 +67,13 @@ public class Startup
             {
                 await context.Response.WriteAsync("Your session has not been established.<br>");
                 await context.Response.WriteAsync(DateTime.Now + "<br>");
-                await context
-                    .Response
+                await context.Response
                     .WriteAsync("<a href=\"/session\">Establish session</a>.<br>");
             }
             else
             {
                 context.Session.SetInt32("visits", ++visits);
-                await context
-                    .Response
+                await context.Response
                     .WriteAsync(
                         "Your session was located, you've visited the site this many times: "
                             + visits

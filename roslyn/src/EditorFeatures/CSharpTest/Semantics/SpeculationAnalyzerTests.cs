@@ -639,8 +639,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Semantics
                 CompilationName,
                 new[] { tree },
                 References,
-                TestOptions
-                    .ReleaseDll
+                TestOptions.ReleaseDll
                     .WithSpecificDiagnosticOptions(
                         new[] { KeyValuePairUtil.Create("CS0219", ReportDiagnostic.Suppress) }
                     )

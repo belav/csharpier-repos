@@ -213,8 +213,7 @@ public class CollectionEntry : NavigationEntry
                 {
                     foreach (var relatedEntity in navigationValue)
                     {
-                        var relatedEntry = InternalEntry
-                            .StateManager
+                        var relatedEntry = InternalEntry.StateManager
                             .TryGetEntry(relatedEntity, Metadata.TargetEntityType);
                         if (relatedEntry != null)
                         {

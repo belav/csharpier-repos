@@ -1366,8 +1366,7 @@ namespace System.DirectoryServices.ActiveDirectory
                 int*,
                 IntPtr*,
                 int>)
-                global::Interop
-                    .Kernel32
+                global::Interop.Kernel32
                     .GetProcAddress(DirectoryContext.ADHandle, "DsGetDomainControllerInfoW");
             if (dsGetDomainControllerInfo == null)
             {
@@ -1485,8 +1484,7 @@ namespace System.DirectoryServices.ActiveDirectory
                             int,
                             IntPtr,
                             void>)
-                            global::Interop
-                                .Kernel32
+                            global::Interop.Kernel32
                                 .GetProcAddress(
                                     DirectoryContext.ADHandle,
                                     "DsFreeDomainControllerInfoW"
@@ -1634,8 +1632,7 @@ namespace System.DirectoryServices.ActiveDirectory
                     {
                         // call DsFreeNameResult
                         var dsFreeNameResult = (delegate* unmanaged<IntPtr, void>)
-                            global::Interop
-                                .Kernel32
+                            global::Interop.Kernel32
                                 .GetProcAddress(DirectoryContext.ADHandle, "DsFreeNameResultW");
                         if (dsFreeNameResult == null)
                         {

@@ -56,14 +56,12 @@ namespace System.ServiceModel.ComIntegration
             }
             catch (Exception e)
             {
-                DiagnosticUtility
-                    .EventLog
+                DiagnosticUtility.EventLog
                     .LogEvent(
                         TraceEventType.Error,
                         (ushort)System.Runtime.Diagnostics.EventLogCategory.ComPlus,
                         (uint)
-                            System
-                                .Runtime
+                            System.Runtime
                                 .Diagnostics
                                 .EventLogEventId
                                 .ComPlusServiceHostStartingServiceError,
@@ -92,14 +90,12 @@ namespace System.ServiceModel.ComIntegration
             {
                 if (System.ServiceModel.DiagnosticUtility.ShouldTraceError)
                 {
-                    DiagnosticUtility
-                        .EventLog
+                    DiagnosticUtility.EventLog
                         .LogEvent(
                             TraceEventType.Error,
                             (ushort)System.Runtime.Diagnostics.EventLogCategory.ComPlus,
                             (uint)
-                                System
-                                    .Runtime
+                                System.Runtime
                                     .Diagnostics
                                     .EventLogEventId
                                     .ComPlusServiceHostStartingServiceError,
@@ -149,8 +145,7 @@ namespace System.ServiceModel.ComIntegration
             IServiceSysTxnConfig sysTxnconfing = serviceConfig as IServiceSysTxnConfig;
             if (sysTxnconfing == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(System.ServiceModel.ComIntegration.Error.QFENotPresent());
             }
         }

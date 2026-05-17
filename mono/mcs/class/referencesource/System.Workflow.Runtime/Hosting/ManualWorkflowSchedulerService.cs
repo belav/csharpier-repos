@@ -81,8 +81,7 @@ namespace System.Workflow.Runtime.Hosting
             {
                 timerCallback = new TimerCallback(OnTimerCallback);
                 pendingScheduleRequests.FirstElementChanged += OnFirstElementChanged;
-                WorkflowTrace
-                    .Host
+                WorkflowTrace.Host
                     .TraceEvent(
                         TraceEventType.Information,
                         0,
@@ -122,8 +121,7 @@ namespace System.Workflow.Runtime.Hosting
                 {
                     timerCallback = new TimerCallback(OnTimerCallback);
                     pendingScheduleRequests.FirstElementChanged += OnFirstElementChanged;
-                    WorkflowTrace
-                        .Host
+                    WorkflowTrace.Host
                         .TraceEvent(
                             TraceEventType.Information,
                             0,
@@ -148,8 +146,7 @@ namespace System.Workflow.Runtime.Hosting
 
             lock (locker)
             {
-                WorkflowTrace
-                    .Host
+                WorkflowTrace.Host
                     .TraceEvent(
                         TraceEventType.Information,
                         0,
@@ -199,8 +196,7 @@ namespace System.Workflow.Runtime.Hosting
 
             lock (locker)
             {
-                WorkflowTrace
-                    .Host
+                WorkflowTrace.Host
                     .TraceEvent(
                         TraceEventType.Information,
                         0,
@@ -230,8 +226,7 @@ namespace System.Workflow.Runtime.Hosting
 
             lock (locker)
             {
-                WorkflowTrace
-                    .Host
+                WorkflowTrace.Host
                     .TraceEvent(
                         TraceEventType.Information,
                         0,
@@ -258,8 +253,7 @@ namespace System.Workflow.Runtime.Hosting
             {
                 if (cs != null)
                 {
-                    WorkflowTrace
-                        .Host
+                    WorkflowTrace.Host
                         .TraceEvent(
                             TraceEventType.Information,
                             0,
@@ -322,8 +316,7 @@ namespace System.Workflow.Runtime.Hosting
             {
                 if (cs != null)
                 {
-                    WorkflowTrace
-                        .Host
+                    WorkflowTrace.Host
                         .TraceEvent(
                             TraceEventType.Information,
                             0,
@@ -350,8 +343,7 @@ namespace System.Workflow.Runtime.Hosting
                 retval =
                     scheduleRequests.ContainsKey(workflowInstanceId)
                     || HasExpiredTimer(workflowInstanceId, out timerId);
-                WorkflowTrace
-                    .Host
+                WorkflowTrace.Host
                     .TraceEvent(
                         TraceEventType.Information,
                         0,
@@ -373,8 +365,7 @@ namespace System.Workflow.Runtime.Hosting
                     )
                 );
 
-            WorkflowTrace
-                .Host
+            WorkflowTrace.Host
                 .TraceEvent(
                     TraceEventType.Information,
                     0,
@@ -460,8 +451,7 @@ namespace System.Workflow.Runtime.Hosting
                         {
                             if (ci.IsExpired)
                             {
-                                WorkflowTrace
-                                    .Host
+                                WorkflowTrace.Host
                                     .TraceEvent(
                                         TraceEventType.Information,
                                         0,
@@ -486,8 +476,7 @@ namespace System.Workflow.Runtime.Hosting
             }
             catch (ThreadAbortException e)
             {
-                WorkflowTrace
-                    .Host
+                WorkflowTrace.Host
                     .TraceEvent(
                         TraceEventType.Error,
                         0,
@@ -500,8 +489,7 @@ namespace System.Workflow.Runtime.Hosting
             }
             catch (Exception e)
             {
-                WorkflowTrace
-                    .Host
+                WorkflowTrace.Host
                     .TraceEvent(
                         TraceEventType.Error,
                         0,

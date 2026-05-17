@@ -1107,8 +1107,7 @@ namespace System.Text.RegularExpressions.Symbolic
                 if (endState.IsNullableFor(GetCharKind<TInputReader>(input, iEnd)))
                 {
                     // Apply effects for finishing at the stored end state
-                    endState
-                        .Node
+                    endState.Node
                         .ApplyEffects(
                             (effect, args) => args.Registers.ApplyEffect(effect, args.Pos),
                             CharKind.Context(

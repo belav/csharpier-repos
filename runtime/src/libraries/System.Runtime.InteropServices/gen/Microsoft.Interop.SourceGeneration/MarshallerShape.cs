@@ -323,8 +323,7 @@ namespace Microsoft.Interop
                     {
                         if (
                             currentType.TypeParameters[i].HasUnmanagedTypeConstraint
-                            && SymbolEqualityComparer
-                                .Default
+                            && SymbolEqualityComparer.Default
                                 .Equals(currentType.TypeArguments[i], typeArgument)
                         )
                         {
@@ -420,8 +419,7 @@ namespace Microsoft.Interop
             {
                 // static TNative AllocateContainerForUnmanagedElements(TCollection managed, out int numElements)
                 return type.GetMembers(
-                        ShapeMemberNames
-                            .LinearCollection
+                        ShapeMemberNames.LinearCollection
                             .Stateless
                             .AllocateContainerForUnmanagedElements
                     )
@@ -442,8 +440,7 @@ namespace Microsoft.Interop
             {
                 // static TNative AllocateContainerForUnmanagedElements(TCollection managed, Span<TOther> buffer, out int numElements)
                 IEnumerable<IMethodSymbol> methods = type.GetMembers(
-                        ShapeMemberNames
-                            .LinearCollection
+                        ShapeMemberNames.LinearCollection
                             .Stateless
                             .AllocateContainerForUnmanagedElements
                     )
@@ -486,8 +483,7 @@ namespace Microsoft.Interop
                                 ReturnType: INamedTypeSymbol returnType
                             }
                         && managedType.IsConstructedFromEqualTypes(m.Parameters[0].Type)
-                        && SymbolEqualityComparer
-                            .Default
+                        && SymbolEqualityComparer.Default
                             .Equals(readOnlySpanOfT, returnType.ConstructedFrom)
                     );
             }
@@ -511,8 +507,7 @@ namespace Microsoft.Interop
                                 ReturnType: INamedTypeSymbol returnType
                             }
                         && m.Parameters[1].Type.SpecialType == SpecialType.System_Int32
-                        && SymbolEqualityComparer
-                            .Default
+                        && SymbolEqualityComparer.Default
                             .Equals(spanOfT, returnType.ConstructedFrom)
                     );
             }
@@ -524,8 +519,7 @@ namespace Microsoft.Interop
             {
                 // static TCollection AllocateContainerForManagedElements(TNative unmanaged, int length);
                 return type.GetMembers(
-                        ShapeMemberNames
-                            .LinearCollection
+                        ShapeMemberNames.LinearCollection
                             .Stateless
                             .AllocateContainerForManagedElements
                     )
@@ -544,8 +538,7 @@ namespace Microsoft.Interop
             {
                 // static TCollection AllocateContainerForManagedElementsFinally(TNative unmanaged, int length);
                 return type.GetMembers(
-                        ShapeMemberNames
-                            .LinearCollection
+                        ShapeMemberNames.LinearCollection
                             .Stateless
                             .AllocateContainerForManagedElementsFinally
                     )
@@ -577,8 +570,7 @@ namespace Microsoft.Interop
                                 ReturnType: INamedTypeSymbol returnType
                             }
                         && managedType.IsConstructedFromEqualTypes(m.Parameters[0].Type)
-                        && SymbolEqualityComparer
-                            .Default
+                        && SymbolEqualityComparer.Default
                             .Equals(spanOfT, returnType.ConstructedFrom)
                     );
             }
@@ -602,8 +594,7 @@ namespace Microsoft.Interop
                                 ReturnType: INamedTypeSymbol returnType
                             }
                         && m.Parameters[1].Type.SpecialType == SpecialType.System_Int32
-                        && SymbolEqualityComparer
-                            .Default
+                        && SymbolEqualityComparer.Default
                             .Equals(readOnlySpanOfT, returnType.ConstructedFrom)
                     );
             }
@@ -945,8 +936,7 @@ namespace Microsoft.Interop
             }
 
             if (
-                SymbolEqualityComparer
-                    .Default
+                SymbolEqualityComparer.Default
                     .Equals(candidates[0].Parameters[0].Type, unmanagedType)
             )
             {
@@ -1023,8 +1013,7 @@ namespace Microsoft.Interop
                                 ReturnsVoid: false,
                                 ReturnType: INamedTypeSymbol returnType
                             }
-                        && SymbolEqualityComparer
-                            .Default
+                        && SymbolEqualityComparer.Default
                             .Equals(readOnlySpanOfT, returnType.ConstructedFrom)
                     );
             }
@@ -1047,8 +1036,7 @@ namespace Microsoft.Interop
                                 ReturnsVoid: false,
                                 ReturnType: INamedTypeSymbol returnType
                             }
-                        && SymbolEqualityComparer
-                            .Default
+                        && SymbolEqualityComparer.Default
                             .Equals(spanOfT, returnType.ConstructedFrom)
                     );
             }
@@ -1072,8 +1060,7 @@ namespace Microsoft.Interop
                                 ReturnType: INamedTypeSymbol returnType
                             }
                         && m.Parameters[0].Type.SpecialType == SpecialType.System_Int32
-                        && SymbolEqualityComparer
-                            .Default
+                        && SymbolEqualityComparer.Default
                             .Equals(spanOfT, returnType.ConstructedFrom)
                     );
             }
@@ -1097,8 +1084,7 @@ namespace Microsoft.Interop
                                 ReturnType: INamedTypeSymbol returnType
                             }
                         && m.Parameters[0].Type.SpecialType == SpecialType.System_Int32
-                        && SymbolEqualityComparer
-                            .Default
+                        && SymbolEqualityComparer.Default
                             .Equals(readOnlySpanOfT, returnType.ConstructedFrom)
                     );
             }

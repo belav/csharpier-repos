@@ -144,8 +144,7 @@ namespace MonoTests.System.Data.OleDb
                 {
 #if DAAB
 
-                    rdr = Microsoft
-                        .ApplicationBlocks
+                    rdr = Microsoft.ApplicationBlocks
                         .Data
                         .PostgresOleDbHelper
                         .OLEDB4ODBCExecuteReader(cmd, true);

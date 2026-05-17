@@ -593,8 +593,7 @@ namespace System.Data.EntityClient
                             // so reprepare is not possible. To create a new command with different parameters
                             // requires creating a new entity command definition and calling it's CreateCommand method.
                             throw EntityUtil.InvalidOperation(
-                                System
-                                    .Data
+                                System.Data
                                     .Entity
                                     .Strings
                                     .EntityClient_CannotReprepareCommandDefinitionBasedCommand
@@ -787,8 +786,7 @@ namespace System.Data.EntityClient
             // Always check the CQT metadata against the connection metadata (internally, CQT already
             // validates metadata consistency)
             if (
-                !_preparedCommandTree
-                    .MetadataWorkspace
+                !_preparedCommandTree.MetadataWorkspace
                     .IsMetadataWorkspaceCSCompatible(this.Connection.GetMetadataWorkspace())
             )
             {
@@ -796,8 +794,7 @@ namespace System.Data.EntityClient
                     System.Data.Entity.Strings.EntityClient_CommandTreeMetadataIncompatible
                 );
             }
-            EntityCommandDefinition result = EntityProviderServices
-                .Instance
+            EntityCommandDefinition result = EntityProviderServices.Instance
                 .CreateCommandDefinition(
                     this._connection.StoreProviderFactory,
                     this._preparedCommandTree
@@ -839,8 +836,7 @@ namespace System.Data.EntityClient
                 || (this._connection.State == ConnectionState.Broken)
             )
             {
-                string message = System
-                    .Data
+                string message = System.Data
                     .Entity
                     .Strings
                     .EntityClient_ExecutingOnClosedConnection(
@@ -897,8 +893,7 @@ namespace System.Data.EntityClient
                 )
                 {
                     throw EntityUtil.InvalidOperation(
-                        System
-                            .Data
+                        System.Data
                             .Entity
                             .Strings
                             .EntityClient_InvalidParameterDirection(parameter.ParameterName)
@@ -930,8 +925,7 @@ namespace System.Data.EntityClient
                 catch (ArgumentException e)
                 {
                     throw EntityUtil.InvalidOperation(
-                        System
-                            .Data
+                        System.Data
                             .Entity
                             .Strings
                             .EntityClient_DuplicateParameterNames(parameter.ParameterName),

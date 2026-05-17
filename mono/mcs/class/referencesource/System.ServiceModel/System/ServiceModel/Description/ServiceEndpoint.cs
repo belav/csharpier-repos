@@ -151,8 +151,7 @@ namespace System.ServiceModel.Description
             {
                 if (value != null && !value.IsAbsoluteUri)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgument("value", SR.GetString(SR.UriMustBeAbsolute));
                 }
                 this.listenUri = value;
@@ -166,8 +165,7 @@ namespace System.ServiceModel.Description
             {
                 if (!ListenUriModeHelper.IsDefined(value))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new ArgumentOutOfRangeException("value"));
                 }
                 this.listenUriMode = value;
@@ -194,8 +192,7 @@ namespace System.ServiceModel.Description
         {
             if (Binding == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(SR.AChannelServiceEndpointSBindingIsNull0)
@@ -204,8 +201,7 @@ namespace System.ServiceModel.Description
             }
             if (Contract == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(SR.AChannelServiceEndpointSContractIsNull0)

@@ -116,8 +116,7 @@ namespace System.ServiceModel.PeerResolvers
 
                 if (nodeAddress.IPAddresses.Count == 0)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentException(
                                 SR.GetString(SR.MustRegisterMoreThanZeroAddresses)
@@ -150,8 +149,7 @@ namespace System.ServiceModel.PeerResolvers
 
                 if (addresslist.Count == 0)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new CommunicationException(SR.GetString(SR.AmbiguousConnectivitySpec))
                         );

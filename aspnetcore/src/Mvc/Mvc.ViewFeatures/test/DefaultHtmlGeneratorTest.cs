@@ -976,8 +976,7 @@ public class DefaultHtmlGeneratorTest
 
         var viewContext = GetViewContext<Model>(model, metadataProvider);
         viewContext.ViewData[nameof(Model.Collection)] = new[] { "ignored ViewData value" };
-        viewContext
-            .ModelState
+        viewContext.ModelState
             .SetModelValue(nameof(Model.Collection), rawValue, attemptedValue: null);
 
         var modelExplorer = metadataProvider.GetModelExplorerForType(
@@ -1011,8 +1010,7 @@ public class DefaultHtmlGeneratorTest
 
         var viewContext = GetViewContext<Model>(model, metadataProvider);
         viewContext.ViewData[nameof(Model.Collection)] = rawValue;
-        viewContext
-            .ModelState
+        viewContext.ModelState
             .SetModelValue(nameof(Model.Collection), rawValue, attemptedValue: null);
 
         // Act
@@ -1041,8 +1039,7 @@ public class DefaultHtmlGeneratorTest
         model.Collection.AddRange(rawValue);
 
         var viewContext = GetViewContext<Model>(model, metadataProvider);
-        viewContext
-            .ModelState
+        viewContext.ModelState
             .SetModelValue(nameof(Model.Collection), rawValue, attemptedValue: null);
 
         // Act
@@ -1151,8 +1148,7 @@ public class DefaultHtmlGeneratorTest
         var metadataProvider = TestModelMetadataProvider.CreateDefaultProvider();
         var htmlGenerator = GetGenerator(metadataProvider);
         var viewContext = GetViewContext<Model>(model: null, metadataProvider: metadataProvider);
-        viewContext
-            .ModelState
+        viewContext.ModelState
             .SetModelValue(
                 propertyName,
                 new string[] { rawValue.ToString() },

@@ -21,8 +21,7 @@ public class StartupForLinkGenerator
             .AddNewtonsoftJson()
             .AddRazorPagesOptions(options =>
             {
-                options
-                    .Conventions
+                options.Conventions
                     .AddFolderRouteModelConvention(
                         "/PageRouteTransformer",
                         model =>

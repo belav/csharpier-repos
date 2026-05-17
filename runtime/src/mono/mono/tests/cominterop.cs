@@ -840,8 +840,7 @@ public class Tests
                     return 207;
                 if (mt.Status != 0)
                 {
-                    Console
-                        .Error
+                    Console.Error
                         .WriteLine(
                             "after mono_test_cominterop_ccw_itest_foreign_thread Status = {0}",
                             mt.Status

@@ -284,8 +284,7 @@ namespace System.Data.Query.PlanCompiler
             ColumnMapTranslatorTranslationDelegate translationDelegate
         )
         {
-            ColumnMap newEntitySetColumnMap = entityIdentity
-                .EntitySetColumnMap
+            ColumnMap newEntitySetColumnMap = entityIdentity.EntitySetColumnMap
                 .Accept(this, translationDelegate);
             VisitList(entityIdentity.Keys, translationDelegate);
 
@@ -419,8 +418,7 @@ namespace System.Data.Query.PlanCompiler
             ColumnMapTranslatorTranslationDelegate translationDelegate
         )
         {
-            ColumnMap newTypeDiscriminator = columnMap
-                .TypeDiscriminator
+            ColumnMap newTypeDiscriminator = columnMap.TypeDiscriminator
                 .Accept(this, translationDelegate);
 
             // NOTE: we're using Copy-On-Write logic to avoid allocation if we don't
@@ -470,8 +468,7 @@ namespace System.Data.Query.PlanCompiler
         {
             // At this time, we shouldn't ever see this type here; it's for SPROCS which don't use
             // the plan compiler.
-            System
-                .Data
+            System.Data
                 .Query
                 .PlanCompiler
                 .PlanCompiler

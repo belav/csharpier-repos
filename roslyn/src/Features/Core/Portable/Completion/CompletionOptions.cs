@@ -75,8 +75,7 @@ namespace Microsoft.CodeAnalysis.Completion
         {
             // Will be removed once semantic snippets will be added to razor.
             var solution = document.Project.Solution;
-            var documentSupportsFeatureService = solution
-                .Services
+            var documentSupportsFeatureService = solution.Services
                 .GetRequiredService<IDocumentSupportsFeatureService>();
             if (!documentSupportsFeatureService.SupportsSemanticSnippets(document))
             {

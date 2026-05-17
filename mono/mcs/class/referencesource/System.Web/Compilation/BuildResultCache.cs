@@ -203,8 +203,7 @@ namespace System.Web.Compilation
 
             if (virtualDependencies != null)
             {
-                cacheDependency = result
-                    .VirtualPath
+                cacheDependency = result.VirtualPath
                     .GetCacheDependency(virtualDependencies, utcStart);
 
                 // If we got a cache dependency, remember that in the BuildResult
@@ -243,8 +242,7 @@ namespace System.Web.Compilation
                         "Adding marker cache entry " + compiledResult.ResultAssembly
                     );
                     // VSWhidbey 500049 - add as NotRemovable to prevent the assembly from being prematurely deleted
-                    HttpRuntime
-                        .Cache
+                    HttpRuntime.Cache
                         .InternalCache
                         .Insert(assemblyKey, compiledResult.ResultAssembly, null);
                 }
@@ -300,8 +298,7 @@ namespace System.Web.Compilation
                 onRemoveCallback = _onRemoveCallback;
             }
 
-            HttpRuntime
-                .Cache
+            HttpRuntime.Cache
                 .InternalCache
                 .Insert(
                     key,

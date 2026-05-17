@@ -41,8 +41,7 @@ namespace System.ServiceModel.Activities
                     as CorrelationHandle;
                 if (correlationHandle == null)
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(
                             new InvalidOperationException(
                                 SR2.NullCorrelationHandleInInitializeCorrelation(this.DisplayName)
@@ -71,8 +70,7 @@ namespace System.ServiceModel.Activities
             }
             else
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new InvalidOperationException(
                             SR2.InitializeCorrelationRequiresWorkflowServiceHost(this.DisplayName)

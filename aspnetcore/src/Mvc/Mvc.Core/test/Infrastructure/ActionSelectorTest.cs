@@ -94,8 +94,7 @@ public class ActionSelectorTest
         var routeContext = CreateRouteContext("GET");
         routeContext.RouteData.Values.Add("controller", "Home");
         routeContext.RouteData.Values.Add("action", "Index");
-        routeContext
-            .RouteData
+        routeContext.RouteData
             .Values
             .Add("date", new DateTimeOffset(2018, 10, 31, 7, 37, 38, TimeSpan.FromHours(-7)));
 
@@ -1073,9 +1072,8 @@ public class ActionSelectorTest
                 a.RouteValues.Any(kvp => kvp.Key == "area" && comparer.Equals(kvp.Value, area))
             )
             .Where(a =>
-                a.RouteValues.Any(kvp =>
-                    kvp.Key == "controller" && comparer.Equals(kvp.Value, controller)
-                )
+                a.RouteValues
+                    .Any(kvp => kvp.Key == "controller" && comparer.Equals(kvp.Value, controller))
             )
             .Where(a =>
                 a.RouteValues.Any(kvp => kvp.Key == "action" && comparer.Equals(kvp.Value, action))

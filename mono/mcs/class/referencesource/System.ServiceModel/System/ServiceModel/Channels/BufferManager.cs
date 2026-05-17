@@ -18,8 +18,7 @@ namespace System.ServiceModel.Channels
         {
             if (maxBufferPoolSize < 0)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentOutOfRangeException(
                             "maxBufferPoolSize",
@@ -31,8 +30,7 @@ namespace System.ServiceModel.Channels
 
             if (maxBufferSize < 0)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentOutOfRangeException(
                             "maxBufferSize",
@@ -77,8 +75,7 @@ namespace System.ServiceModel.Channels
             {
                 if (bufferSize < 0)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentOutOfRangeException(
                                 "bufferSize",

@@ -428,8 +428,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             foreach (string seriesName in typeSeries)
             {
                 if (
-                    common
-                        .DataManager
+                    common.DataManager
                         .Series[seriesName]
                         .IsCustomPropertySet(CustomPropertyName.DrawSideBySide)
                 )
@@ -573,8 +572,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                 // Call Back Paint event
                 if (!selection)
                 {
-                    common
-                        .Chart
+                    common.Chart
                         .CallOnPrePaint(
                             new ChartPaintEventArgs(ser, graph, common, area.PlotAreaPosition)
                         );
@@ -791,8 +789,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
 
                             if (common.ProcessModeRegions)
                             {
-                                common
-                                    .HotRegionsList
+                                common.HotRegionsList
                                     .AddHotRegion(rectSize, point, ser.Name, pointIndex);
                             }
                         }
@@ -879,8 +876,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                 // Call Paint event
                 if (!selection)
                 {
-                    common
-                        .Chart
+                    common.Chart
                         .CallOnPostPaint(
                             new ChartPaintEventArgs(ser, graph, common, area.PlotAreaPosition)
                         );
@@ -958,8 +954,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                         markerSize.Height = point.MarkerSize;
                     }
                     else
-                        common
-                            .ImageLoader
+                        common.ImageLoader
                             .GetAdjustedImageSize(
                                 point.MarkerImage,
                                 graph.Graphics,
@@ -1356,8 +1351,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             // Insert circle area
             if (pointMarkerStyle == MarkerStyle.Circle)
             {
-                common
-                    .HotRegionsList
+                common.HotRegionsList
                     .AddHotRegion(
                         insertIndex,
                         graph,
@@ -1373,8 +1367,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             else
             {
                 // Insert area
-                common
-                    .HotRegionsList
+                common.HotRegionsList
                     .AddHotRegion(
                         new RectangleF(
                             markerPosition.X - relativeMarkerSize.Width / 2f,
@@ -1604,8 +1597,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                 foreach (string seriesName in typeSeries)
                 {
                     if (
-                        common
-                            .DataManager
+                        common.DataManager
                             .Series[seriesName]
                             .IsCustomPropertySet(CustomPropertyName.DrawSideBySide)
                     )
@@ -1910,8 +1902,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                 //************************************************************
                 if (common.ProcessModeRegions)
                 {
-                    common
-                        .HotRegionsList
+                    common.HotRegionsList
                         .AddHotRegion(rectPath, false, graph, point, ser.Name, pointEx.index - 1);
                 }
                 if (rectPath != null)
@@ -2093,8 +2084,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                         markerSize.Height = point.MarkerSize;
                     }
                     else
-                        common
-                            .ImageLoader
+                        common.ImageLoader
                             .GetAdjustedImageSize(
                                 point.MarkerImage,
                                 graph.Graphics,
@@ -2228,8 +2218,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                                 markerSize.Height = point.MarkerSize;
                             }
                             else
-                                common
-                                    .ImageLoader
+                                common.ImageLoader
                                     .GetAdjustedImageSize(
                                         point.MarkerImage,
                                         graph.Graphics,

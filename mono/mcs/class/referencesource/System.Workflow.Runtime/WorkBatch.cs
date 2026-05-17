@@ -61,8 +61,7 @@ namespace System.Workflow.Runtime
 
             lock (this.mutex)
             {
-                System
-                    .Diagnostics
+                System.Diagnostics
                     .Debug
                     .Assert(
                         this._state == WorkBatchState.Usable,
@@ -133,9 +132,10 @@ namespace System.Workflow.Runtime
                 lock (batch.mutex)
                 {
                     foreach (
-                        KeyValuePair<IPendingWork, SortedList<long, object>> item in batch
-                            ._pendingWorkCollection
-                            .WorkItems
+                        KeyValuePair<
+                            IPendingWork,
+                            SortedList<long, object>
+                        > item in batch._pendingWorkCollection.WorkItems
                     )
                     {
                         //_pendingWorkCollection.AddRange(item.Key, item.Value);
@@ -253,8 +253,7 @@ namespace System.Workflow.Runtime
                     )
                 );
                 workItems.Add(orderId, workItem);
-                WorkflowTrace
-                    .Runtime
+                WorkflowTrace.Runtime
                     .TraceEvent(
                         TraceEventType.Information,
                         0,
@@ -295,8 +294,7 @@ namespace System.Workflow.Runtime
                         }
                         else
                         {
-                            WorkflowTrace
-                                .Runtime
+                            WorkflowTrace.Runtime
                                 .TraceEvent(
                                     TraceEventType.Warning,
                                     0,

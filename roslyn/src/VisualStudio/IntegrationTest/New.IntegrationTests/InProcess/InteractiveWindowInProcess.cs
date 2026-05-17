@@ -176,13 +176,11 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.InProcess
         public async Task ClearReplTextAsync(CancellationToken cancellationToken)
         {
             // Dismiss the pop-up (if any)
-            await TestServices
-                .Shell
+            await TestServices.Shell
                 .ExecuteCommandAsync(WellKnownCommands.Edit.SelectionCancel, cancellationToken);
 
             // Clear the line
-            await TestServices
-                .Shell
+            await TestServices.Shell
                 .ExecuteCommandAsync(WellKnownCommands.Edit.SelectionCancel, cancellationToken);
         }
 
@@ -321,8 +319,7 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.InProcess
             );
 
         public async Task ClearScreenAsync(CancellationToken cancellationToken) =>
-            await TestServices
-                .Shell
+            await TestServices.Shell
                 .ExecuteCommandAsync(
                     WellKnownCommands.InteractiveConsole.ClearScreen,
                     cancellationToken

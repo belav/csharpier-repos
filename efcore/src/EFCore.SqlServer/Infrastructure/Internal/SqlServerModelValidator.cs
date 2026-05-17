@@ -82,8 +82,7 @@ public class SqlServerModelValidator : RelationalModelValidator
                 (
                     (
                         columnTypeConfigurationSource == null
-                        && ConfigurationSource
-                            .Convention
+                        && ConfigurationSource.Convention
                             .Overrides(property.GetTypeMappingConfigurationSource())
                     )
                     || (
@@ -92,11 +91,9 @@ public class SqlServerModelValidator : RelationalModelValidator
                     )
                 )
                 && (
-                    ConfigurationSource
-                        .Convention
+                    ConfigurationSource.Convention
                         .Overrides(property.GetPrecisionConfigurationSource())
-                    || ConfigurationSource
-                        .Convention
+                    || ConfigurationSource.Convention
                         .Overrides(property.GetScaleConfigurationSource())
                 )
             )
@@ -159,11 +156,12 @@ public class SqlServerModelValidator : RelationalModelValidator
         )
         {
             foreach (
-                var storeGeneratedProperty in key.Properties.Where(p =>
-                    (p.ValueGenerated & ValueGenerated.OnAdd) != 0
-                    && p.GetValueGenerationStrategy()
-                        == SqlServerValueGenerationStrategy.IdentityColumn
-                )
+                var storeGeneratedProperty in key.Properties
+                    .Where(p =>
+                        (p.ValueGenerated & ValueGenerated.OnAdd) != 0
+                        && p.GetValueGenerationStrategy()
+                            == SqlServerValueGenerationStrategy.IdentityColumn
+                    )
             )
             {
                 logger.TpcStoreGeneratedIdentityWarning(storeGeneratedProperty);
@@ -550,8 +548,7 @@ public class SqlServerModelValidator : RelationalModelValidator
         if (identityColumns.Count > 1)
         {
             var sb = new StringBuilder().AppendJoin(
-                identityColumns
-                    .Values
+                identityColumns.Values
                     .Select(p => "'" + p.DeclaringType.DisplayName() + "." + p.Name + "'")
             );
             throw new InvalidOperationException(

@@ -196,10 +196,8 @@ namespace System.Activities.Statements
             }
             else
             {
-                this.currentCompensationToken.Set(
-                    context,
-                    new CompensationToken(compensationToken)
-                );
+                this.currentCompensationToken
+                    .Set(context, new CompensationToken(compensationToken));
                 if (compensationToken.ExecutionTracker.Count > 0)
                 {
                     context.ScheduleActivity(
@@ -242,10 +240,8 @@ namespace System.Activities.Statements
                     "CompensationParticipant should be in Confirming State"
                 );
 
-                this.currentCompensationToken.Set(
-                    context,
-                    new CompensationToken(compensationToken)
-                );
+                this.currentCompensationToken
+                    .Set(context, new CompensationToken(compensationToken));
                 if (compensationToken.ExecutionTracker.Count > 0)
                 {
                     context.ScheduleActivity(
@@ -333,10 +329,8 @@ namespace System.Activities.Statements
             }
             else
             {
-                this.currentCompensationToken.Set(
-                    context,
-                    new CompensationToken(compensationToken)
-                );
+                this.currentCompensationToken
+                    .Set(context, new CompensationToken(compensationToken));
                 if (compensationToken.ExecutionTracker.Count > 0)
                 {
                     context.ScheduleActivity(
@@ -379,10 +373,8 @@ namespace System.Activities.Statements
                     "CompensationParticipant should be in Compensating State"
                 );
 
-                this.currentCompensationToken.Set(
-                    context,
-                    new CompensationToken(compensationToken)
-                );
+                this.currentCompensationToken
+                    .Set(context, new CompensationToken(compensationToken));
                 if (compensationToken.ExecutionTracker.Count > 0)
                 {
                     context.ScheduleActivity(
@@ -483,10 +475,8 @@ namespace System.Activities.Statements
                     "CompensationParticipant should be in Canceling State"
                 );
 
-                this.currentCompensationToken.Set(
-                    context,
-                    new CompensationToken(compensationToken)
-                );
+                this.currentCompensationToken
+                    .Set(context, new CompensationToken(compensationToken));
                 if (compensationToken.ExecutionTracker.Count > 0)
                 {
                     context.ScheduleActivity(

@@ -308,8 +308,7 @@
             IDictionary<string, object> htmlAttributes
         )
         {
-            string fullName = htmlHelper
-                .ViewContext
+            string fullName = htmlHelper.ViewContext
                 .ViewData
                 .TemplateInfo
                 .GetFullHtmlFieldName(name);

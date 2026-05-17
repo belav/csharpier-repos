@@ -19,8 +19,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.EditorConfigSettings.Data
     public class CodeStyleSettingsTest
     {
         private static IGlobalOptionService GetGlobalOptions(Workspace workspace) =>
-            workspace
-                .Services
+            workspace.Services
                 .SolutionServices
                 .ExportProvider
                 .GetExportedValue<IGlobalOptionService>();

@@ -20,8 +20,7 @@ namespace System.IdentityModel.Tokens
         {
             if (null == item || !item.IsAbsoluteUri)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument("item", SR.GetString(SR.ID0013));
             }
 
@@ -32,8 +31,7 @@ namespace System.IdentityModel.Tokens
         {
             if (null == item || !item.IsAbsoluteUri)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument("item", SR.GetString(SR.ID0013));
             }
 

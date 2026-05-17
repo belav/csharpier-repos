@@ -58,9 +58,8 @@ namespace System.ServiceModel.Configuration
             )
             {
 #pragma warning suppress 56506 // Microsoft, base.ApplyConfiguration() validates the argument
-                this.ChannelPoolSettings.ApplyConfiguration(
-                    oneWayBindingElement.ChannelPoolSettings
-                );
+                this.ChannelPoolSettings
+                    .ApplyConfiguration(oneWayBindingElement.ChannelPoolSettings);
             }
             oneWayBindingElement.MaxAcceptedChannels = this.MaxAcceptedChannels;
             oneWayBindingElement.PacketRoutable = this.PacketRoutable;

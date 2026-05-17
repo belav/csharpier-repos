@@ -72,8 +72,7 @@ namespace System.Data.Metadata.Edm
             // Inside the OcCache on EdmItemCollection -> cachedassembly
             // If none of above, setup the LoaderFactory based on the current assembly and EdmItemCollection
             if (
-                sessionData
-                    .KnownAssemblies
+                sessionData.KnownAssemblies
                     .Contains(
                         assembly,
                         sessionData.ObjectItemAssemblyLoaderFactory,
@@ -102,8 +101,7 @@ namespace System.Data.Metadata.Edm
                 {
                     // we were loading in convention mode, and ran into an assembly that can't be loaded by convention
                     // we know this because all cached assemblies are attribute based at the moment.
-                    sessionData
-                        .EdmItemErrors
+                    sessionData.EdmItemErrors
                         .Add(
                             new EdmItemError(
                                 Strings.Validator_OSpace_Convention_AttributeAssemblyReferenced(
@@ -117,8 +115,7 @@ namespace System.Data.Metadata.Edm
             }
             else if (
                 sessionData.EdmItemCollection != null
-                && sessionData
-                    .EdmItemCollection
+                && sessionData.EdmItemCollection
                     .ConventionalOcCache
                     .TryGetConventionalOcCacheFromAssemblyCache(assembly, out cacheEntry)
             )
@@ -194,8 +191,7 @@ namespace System.Data.Metadata.Edm
         protected virtual void AddToKnownAssemblies()
         {
             Debug.Assert(
-                !_sessionData
-                    .KnownAssemblies
+                !_sessionData.KnownAssemblies
                     .Contains(
                         _assembly,
                         SessionData.ObjectItemAssemblyLoaderFactory,
@@ -203,8 +199,7 @@ namespace System.Data.Metadata.Edm
                     ),
                 "This assembly must not be present in the list of known assemblies"
             );
-            _sessionData
-                .KnownAssemblies
+            _sessionData.KnownAssemblies
                 .Add(
                     _assembly,
                     new KnownAssemblyEntry(CacheEntry, SessionData.EdmItemCollection != null)
@@ -228,8 +223,7 @@ namespace System.Data.Metadata.Edm
 
         protected bool TryGetPrimitiveType(Type type, out PrimitiveType primitiveType)
         {
-            return ClrProviderManifest
-                .Instance
+            return ClrProviderManifest.Instance
                 .TryGetPrimitiveType(Nullable.GetUnderlyingType(type) ?? type, out primitiveType);
         }
 

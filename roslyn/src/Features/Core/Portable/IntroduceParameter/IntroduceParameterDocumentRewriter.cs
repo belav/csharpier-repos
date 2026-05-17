@@ -302,8 +302,7 @@ namespace Microsoft.CodeAnalysis.IntroduceParameter
                     .ConfigureAwait(false);
                 // Creating a new method name by concatenating the parameter name that has been upper-cased.
                 var newMethodIdentifier = "Get" + parameterName.ToPascalCase();
-                var validParameters = _methodSymbol
-                    .Parameters
+                var validParameters = _methodSymbol.Parameters
                     .Intersect(expressionParameterMap.Values)
                     .ToImmutableArray();
 
@@ -666,12 +665,13 @@ namespace Microsoft.CodeAnalysis.IntroduceParameter
                         containingType: _methodSymbol.ContainingType
                     );
 
-                var newMethodDeclaration = info.Service.CreateMethodDeclaration(
-                    newMethod,
-                    CodeGenerationDestination.Unspecified,
-                    info,
-                    cancellationToken
-                );
+                var newMethodDeclaration = info.Service
+                    .CreateMethodDeclaration(
+                        newMethod,
+                        CodeGenerationDestination.Unspecified,
+                        info,
+                        cancellationToken
+                    );
                 Contract.ThrowIfNull(newMethodDeclaration);
                 return newMethodDeclaration;
             }
@@ -834,8 +834,7 @@ namespace Microsoft.CodeAnalysis.IntroduceParameter
                         var argumentExpression = _syntaxFacts.GetExpressionOfArgument(
                             updatedInvocationArgument
                         );
-                        var parenthesizedArgumentExpression = editor
-                            .Generator
+                        var parenthesizedArgumentExpression = editor.Generator
                             .AddParentheses(argumentExpression, includeElasticTrivia: false);
                         editor.ReplaceNode(variable, parenthesizedArgumentExpression);
                     }
@@ -844,8 +843,7 @@ namespace Microsoft.CodeAnalysis.IntroduceParameter
                         var generatedExpression = _service.GenerateExpressionFromOptionalParameter(
                             mappedParameter
                         );
-                        var parenthesizedGeneratedExpression = editor
-                            .Generator
+                        var parenthesizedGeneratedExpression = editor.Generator
                             .AddParentheses(generatedExpression, includeElasticTrivia: false);
                         editor.ReplaceNode(variable, parenthesizedGeneratedExpression);
                     }
@@ -911,8 +909,7 @@ namespace Microsoft.CodeAnalysis.IntroduceParameter
             ) =>
                 !parameter.HasExplicitDefaultValue
                 && !parameter.IsParams
-                && !parameter
-                    .Type
+                && !parameter.Type
                     .Equals(
                         compilation.GetTypeByMetadataName(typeof(CancellationToken)?.FullName!)
                     );

@@ -77,8 +77,7 @@ namespace Microsoft.CodeAnalysis.Remote
                     // if needed again later.
                     solution = solution.WithoutFrozenSourceGeneratedDocuments();
 
-                    var oldSolutionChecksums = await solution
-                        .State
+                    var oldSolutionChecksums = await solution.State
                         .GetStateChecksumsAsync(cancellationToken)
                         .ConfigureAwait(false);
                     var newSolutionChecksums = await _assetProvider
@@ -301,8 +300,7 @@ namespace Microsoft.CodeAnalysis.Remote
 
                 async Task PopulateNewProjectMapAsync(SolutionCreator @this)
                 {
-                    var projectStateChecksums = await @this
-                        ._assetProvider
+                    var projectStateChecksums = await @this._assetProvider
                         .GetAssetsAsync<ProjectStateChecksums>(
                             assetHint: AssetHint.None,
                             news.Object,
@@ -357,8 +355,7 @@ namespace Microsoft.CodeAnalysis.Remote
                 )
                 {
                     project = project.WithCompilationOptions(
-                        project
-                            .State
+                        project.State
                             .ProjectInfo
                             .Attributes
                             .FixUpCompilationOptions(
@@ -531,8 +528,7 @@ namespace Microsoft.CodeAnalysis.Remote
 
                 if (project.State.ProjectInfo.Attributes.Name != newProjectAttributes.Name)
                 {
-                    project = project
-                        .Solution
+                    project = project.Solution
                         .WithProjectName(projectId, newProjectAttributes.Name)
                         .GetProject(projectId)!;
                 }
@@ -542,16 +538,14 @@ namespace Microsoft.CodeAnalysis.Remote
                     != newProjectAttributes.AssemblyName
                 )
                 {
-                    project = project
-                        .Solution
+                    project = project.Solution
                         .WithProjectAssemblyName(projectId, newProjectAttributes.AssemblyName)
                         .GetProject(projectId)!;
                 }
 
                 if (project.State.ProjectInfo.Attributes.FilePath != newProjectAttributes.FilePath)
                 {
-                    project = project
-                        .Solution
+                    project = project.Solution
                         .WithProjectFilePath(projectId, newProjectAttributes.FilePath)
                         .GetProject(projectId)!;
                 }
@@ -561,8 +555,7 @@ namespace Microsoft.CodeAnalysis.Remote
                     != newProjectAttributes.OutputFilePath
                 )
                 {
-                    project = project
-                        .Solution
+                    project = project.Solution
                         .WithProjectOutputFilePath(projectId, newProjectAttributes.OutputFilePath)
                         .GetProject(projectId)!;
                 }
@@ -572,8 +565,7 @@ namespace Microsoft.CodeAnalysis.Remote
                     != newProjectAttributes.OutputRefFilePath
                 )
                 {
-                    project = project
-                        .Solution
+                    project = project.Solution
                         .WithProjectOutputRefFilePath(
                             projectId,
                             newProjectAttributes.OutputRefFilePath
@@ -586,8 +578,7 @@ namespace Microsoft.CodeAnalysis.Remote
                     != newProjectAttributes.CompilationOutputInfo
                 )
                 {
-                    project = project
-                        .Solution
+                    project = project.Solution
                         .WithProjectCompilationOutputInfo(
                             project.Id,
                             newProjectAttributes.CompilationOutputInfo
@@ -600,8 +591,7 @@ namespace Microsoft.CodeAnalysis.Remote
                     != newProjectAttributes.DefaultNamespace
                 )
                 {
-                    project = project
-                        .Solution
+                    project = project.Solution
                         .WithProjectDefaultNamespace(
                             projectId,
                             newProjectAttributes.DefaultNamespace
@@ -614,8 +604,7 @@ namespace Microsoft.CodeAnalysis.Remote
                     != newProjectAttributes.HasAllInformation
                 )
                 {
-                    project = project
-                        .Solution
+                    project = project.Solution
                         .WithHasAllInformation(projectId, newProjectAttributes.HasAllInformation)
                         .GetProject(projectId)!;
                 }
@@ -625,8 +614,7 @@ namespace Microsoft.CodeAnalysis.Remote
                     != newProjectAttributes.RunAnalyzers
                 )
                 {
-                    project = project
-                        .Solution
+                    project = project.Solution
                         .WithRunAnalyzers(projectId, newProjectAttributes.RunAnalyzers)
                         .GetProject(projectId)!;
                 }
@@ -636,8 +624,7 @@ namespace Microsoft.CodeAnalysis.Remote
                     != newProjectAttributes.ChecksumAlgorithm
                 )
                 {
-                    project = project
-                        .Solution
+                    project = project.Solution
                         .WithProjectChecksumAlgorithm(
                             projectId,
                             newProjectAttributes.ChecksumAlgorithm
@@ -777,8 +764,7 @@ namespace Microsoft.CodeAnalysis.Remote
 
                 async Task PopulateNewDocumentMapAsync(SolutionCreator @this)
                 {
-                    var documentStateChecksums = await @this
-                        ._assetProvider
+                    var documentStateChecksums = await @this._assetProvider
                         .GetAssetsAsync<DocumentStateChecksums>(
                             assetHint: project.Id,
                             news.Object,
@@ -825,18 +811,15 @@ namespace Microsoft.CodeAnalysis.Remote
 
                     document = document.Kind switch
                     {
-                        TextDocumentKind.Document => document
-                            .Project
+                        TextDocumentKind.Document => document.Project
                             .Solution
                             .WithDocumentText(document.Id, sourceText)
                             .GetDocument(document.Id)!,
-                        TextDocumentKind.AnalyzerConfigDocument => document
-                            .Project
+                        TextDocumentKind.AnalyzerConfigDocument => document.Project
                             .Solution
                             .WithAnalyzerConfigDocumentText(document.Id, sourceText)
                             .GetAnalyzerConfigDocument(document.Id)!,
-                        TextDocumentKind.AdditionalDocument => document
-                            .Project
+                        TextDocumentKind.AdditionalDocument => document.Project
                             .Solution
                             .WithAdditionalDocumentText(document.Id, sourceText)
                             .GetAdditionalDocument(document.Id)!,
@@ -878,8 +861,7 @@ namespace Microsoft.CodeAnalysis.Remote
                 {
                     // additional document can't change folder once created
                     Contract.ThrowIfFalse(document is Document);
-                    document = document
-                        .Project
+                    document = document.Project
                         .Solution
                         .WithDocumentFolders(document.Id, newDocumentInfo.Folders)
                         .GetDocument(document.Id)!;
@@ -889,8 +871,7 @@ namespace Microsoft.CodeAnalysis.Remote
                 {
                     // additional document can't change sourcecode kind once created
                     Contract.ThrowIfFalse(document is Document);
-                    document = document
-                        .Project
+                    document = document.Project
                         .Solution
                         .WithDocumentSourceCodeKind(document.Id, newDocumentInfo.SourceCodeKind)
                         .GetDocument(document.Id)!;
@@ -906,8 +887,7 @@ namespace Microsoft.CodeAnalysis.Remote
                 CancellationToken cancellationToken
             )
             {
-                var currentSolutionChecksum = await incrementalSolutionBuilt
-                    .State
+                var currentSolutionChecksum = await incrementalSolutionBuilt.State
                     .GetChecksumAsync(CancellationToken.None)
                     .ConfigureAwait(false);
                 if (checksumFromRequest == currentSolutionChecksum)

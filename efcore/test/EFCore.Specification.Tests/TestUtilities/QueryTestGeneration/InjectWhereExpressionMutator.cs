@@ -88,8 +88,7 @@ public class InjectWhereExpressionMutator : ExpressionMutator
             var collectionNavigation = random.Choose(collectionNavigations);
             if (collectionNavigation != null)
             {
-                var any = EnumerableMethods
-                    .AnyWithoutPredicate
+                var any = EnumerableMethods.AnyWithoutPredicate
                     .MakeGenericMethod(collectionNavigation.ForeignKey.DeclaringEntityType.ClrType);
 
                 // collection.Any()

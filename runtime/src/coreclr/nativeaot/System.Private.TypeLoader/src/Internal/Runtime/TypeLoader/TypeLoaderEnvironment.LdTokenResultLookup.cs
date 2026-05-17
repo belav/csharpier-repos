@@ -500,8 +500,7 @@ namespace Internal.Runtime.TypeLoader
             {
                 ModuleInfo moduleInfo = methodData->MethodSignature.GetModuleInfo();
                 var metadataReader = ((NativeFormatModuleInfo)moduleInfo).MetadataReader;
-                var methodHandle = methodData
-                    ->MethodSignature
+                var methodHandle = methodData->MethodSignature
                     .Token
                     .AsHandle()
                     .ToMethodHandle(metadataReader);

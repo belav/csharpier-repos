@@ -30,14 +30,12 @@ namespace Microsoft.Extensions.DependencyInjection
             Action<SocketsHttpHandler, IServiceProvider> configure
         )
         {
-            builder
-                .Services
+            builder.Services
                 .Configure<HttpClientFactoryOptions>(
                     builder.Name,
                     options =>
                     {
-                        options
-                            .HttpMessageHandlerBuilderActions
+                        options.HttpMessageHandlerBuilderActions
                             .Add(b =>
                             {
                                 if (b.PrimaryHandler is not SocketsHttpHandler socketsHttpHandler)
@@ -124,8 +122,7 @@ namespace Microsoft.Extensions.DependencyInjection
 
             if (config.EnableMultipleHttp2Connections is not null)
             {
-                handler.EnableMultipleHttp2Connections = config
-                    .EnableMultipleHttp2Connections
+                handler.EnableMultipleHttp2Connections = config.EnableMultipleHttp2Connections
                     .Value;
             }
 

@@ -198,8 +198,7 @@ namespace ILCompiler
 
                 // assert the result of the iterative and recursive versions of the algorithm are EXACTLY the same
                 Debug.Assert(
-                    tarjansResultsIterative
-                        .Result
+                    tarjansResultsIterative.Result
                         .SelectMany(x => x)
                         .SequenceEqual(tarjansResultsRecursive.Result.SelectMany(x => x))
                 );
@@ -257,8 +256,7 @@ namespace ILCompiler
                     }
                 }
 
-                IEnumerable<Vertex> verticesInAFlaggedCycleTarjanStyle = _vertexMap
-                    .Values
+                IEnumerable<Vertex> verticesInAFlaggedCycleTarjanStyle = _vertexMap.Values
                     .Where(v => v.ProvedToBeInvolvedInAFlaggedCycle);
 
 #if RECURSIVE_CYCLE_DETECTION

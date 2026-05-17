@@ -67,8 +67,7 @@ namespace Microsoft.Interop
             diagnosticsBag.ReportGeneratorDiagnostics(bindingDiagnostics);
 
             if (
-                _marshallers
-                    .ManagedReturnMarshaller
+                _marshallers.ManagedReturnMarshaller
                     .Generator
                     .UsesNativeIdentifier(_marshallers.ManagedReturnMarshaller.TypeInfo, _context)
             )

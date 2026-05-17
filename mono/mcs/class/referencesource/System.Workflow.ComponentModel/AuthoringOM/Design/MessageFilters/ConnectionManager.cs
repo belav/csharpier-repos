@@ -317,16 +317,17 @@
                         : ConnectionManager.GetConnectorContainer(
                             this.connectorEditor.EditedConnector.Source.AssociatedDesigner
                         );
-                this.connectorEditor.OnPaint(
-                    new ActivityDesignerPaintEventArgs(
-                        e.Graphics,
-                        designer.Bounds,
-                        viewPort,
-                        designer.DesignerTheme
-                    ),
-                    false,
-                    false
-                );
+                this.connectorEditor
+                    .OnPaint(
+                        new ActivityDesignerPaintEventArgs(
+                            e.Graphics,
+                            designer.Bounds,
+                            viewPort,
+                            designer.DesignerTheme
+                        ),
+                        false,
+                        false
+                    );
             }
 
             return false;
@@ -488,10 +489,11 @@
                         editPoint = SnappedConnectionPoint.Location;
                 }
 
-                this.connectorEditor.OnEndEditing(
-                    (editPoint != null) ? editPoint.Value : Point.Empty,
-                    (editPoint != null)
-                );
+                this.connectorEditor
+                    .OnEndEditing(
+                        (editPoint != null) ? editPoint.Value : Point.Empty,
+                        (editPoint != null)
+                    );
             }
 
             this.initialDragPoint = null;
@@ -698,8 +700,7 @@
                 if (snappedConnectionPoint != null)
                 {
                     foreach (
-                        ConnectionPoint connectionPoint in snappedConnectionPoint
-                            .AssociatedDesigner
+                        ConnectionPoint connectionPoint in snappedConnectionPoint.AssociatedDesigner
                             .GetConnectionPoints(DesignerEdges.All)
                     )
                     {

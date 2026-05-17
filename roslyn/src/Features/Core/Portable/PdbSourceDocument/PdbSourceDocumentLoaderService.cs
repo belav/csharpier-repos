@@ -196,8 +196,7 @@ namespace Microsoft.CodeAnalysis.PdbSourceDocument
             var relativePath = Path.GetFileName(sourceDocument.FilePath);
 
             var delay = Task.Delay(timeout, cancellationToken);
-            var sourceFileTask = _sourceLinkService
-                .Value
+            var sourceFileTask = _sourceLinkService.Value
                 .GetSourceFilePathAsync(
                     sourceDocument.SourceLinkUrl,
                     relativePath,

@@ -45,30 +45,23 @@ namespace System.Windows.Forms
         public static readonly DataGridTableStyle DefaultTableStyle = new DataGridTableStyle(true);
 
         #region	Local Variables
-        private static readonly Color def_alternating_backcolor = ThemeEngine
-            .Current
+        private static readonly Color def_alternating_backcolor = ThemeEngine.Current
             .DataGridAlternatingBackColor;
         private static readonly Color def_backcolor = ThemeEngine.Current.DataGridBackColor;
         private static readonly Color def_forecolor = SystemColors.WindowText;
-        private static readonly Color def_gridline_color = ThemeEngine
-            .Current
+        private static readonly Color def_gridline_color = ThemeEngine.Current
             .DataGridGridLineColor;
-        private static readonly Color def_header_backcolor = ThemeEngine
-            .Current
+        private static readonly Color def_header_backcolor = ThemeEngine.Current
             .DataGridHeaderBackColor;
         private static readonly Font def_header_font = ThemeEngine.Current.DefaultFont;
-        private static readonly Color def_header_forecolor = ThemeEngine
-            .Current
+        private static readonly Color def_header_forecolor = ThemeEngine.Current
             .DataGridHeaderForeColor;
         private static readonly Color def_link_color = ThemeEngine.Current.DataGridLinkColor;
-        private static readonly Color def_link_hovercolor = ThemeEngine
-            .Current
+        private static readonly Color def_link_hovercolor = ThemeEngine.Current
             .DataGridLinkHoverColor;
-        private static readonly Color def_selection_backcolor = ThemeEngine
-            .Current
+        private static readonly Color def_selection_backcolor = ThemeEngine.Current
             .DataGridSelectionBackColor;
-        private static readonly Color def_selection_forecolor = ThemeEngine
-            .Current
+        private static readonly Color def_selection_forecolor = ThemeEngine.Current
             .DataGridSelectionForeColor;
         private static readonly int def_preferredrow_height =
             ThemeEngine.Current.DefaultFont.Height + 3;

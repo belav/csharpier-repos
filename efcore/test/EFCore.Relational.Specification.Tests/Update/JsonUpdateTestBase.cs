@@ -78,15 +78,13 @@ public abstract class JsonUpdateTestBase<TFixture> : IClassFixture<TFixture>
                 Assert.Equal(42.42m, newEntity.OwnedReferenceRoot.OwnedReferenceBranch.Fraction);
                 Assert.Equal(
                     "ss3",
-                    newEntity
-                        .OwnedReferenceRoot
+                    newEntity.OwnedReferenceRoot
                         .OwnedReferenceBranch
                         .OwnedReferenceLeaf
                         .SomethingSomething
                 );
 
-                var collectionLeaf = newEntity
-                    .OwnedReferenceRoot
+                var collectionLeaf = newEntity.OwnedReferenceRoot
                     .OwnedReferenceBranch
                     .OwnedCollectionLeaf;
                 Assert.Equal(2, collectionLeaf.Count);
@@ -155,8 +153,7 @@ public abstract class JsonUpdateTestBase<TFixture> : IClassFixture<TFixture>
                 Assert.Equal(42.42m, newEntity.OwnedReferenceRoot.OwnedReferenceBranch.Fraction);
                 Assert.Null(newEntity.OwnedReferenceRoot.OwnedReferenceBranch.OwnedReferenceLeaf);
 
-                var collectionLeaf = newEntity
-                    .OwnedReferenceRoot
+                var collectionLeaf = newEntity.OwnedReferenceRoot
                     .OwnedReferenceBranch
                     .OwnedCollectionLeaf;
                 Assert.Equal(2, collectionLeaf.Count);
@@ -255,8 +252,7 @@ public abstract class JsonUpdateTestBase<TFixture> : IClassFixture<TFixture>
             async context =>
             {
                 var updatedEntity = await context.JsonEntitiesBasic.SingleAsync();
-                var updatedReference = updatedEntity
-                    .OwnedReferenceRoot
+                var updatedReference = updatedEntity.OwnedReferenceRoot
                     .OwnedCollectionBranch[0]
                     .OwnedReferenceLeaf;
                 Assert.Equal("ss3", updatedReference.SomethingSomething);
@@ -430,8 +426,7 @@ public abstract class JsonUpdateTestBase<TFixture> : IClassFixture<TFixture>
             async context =>
             {
                 var updatedEntity = await context.JsonEntitiesBasic.SingleAsync();
-                var updatedCollection = updatedEntity
-                    .OwnedReferenceRoot
+                var updatedCollection = updatedEntity.OwnedReferenceRoot
                     .OwnedReferenceBranch
                     .OwnedCollectionLeaf;
                 Assert.Equal(3, updatedCollection.Count);
@@ -621,8 +616,7 @@ public abstract class JsonUpdateTestBase<TFixture> : IClassFixture<TFixture>
             UseTransaction,
             async context =>
             {
-                var query = await context
-                    .JsonEntitiesInheritance
+                var query = await context.JsonEntitiesInheritance
                     .OfType<JsonEntityInheritanceDerived>()
                     .ToListAsync();
                 var entity = query.Single();
@@ -646,8 +640,7 @@ public abstract class JsonUpdateTestBase<TFixture> : IClassFixture<TFixture>
             },
             async context =>
             {
-                var result = await context
-                    .JsonEntitiesInheritance
+                var result = await context.JsonEntitiesInheritance
                     .OfType<JsonEntityInheritanceDerived>()
                     .SingleAsync();
                 var updatedCollection = result.CollectionOnDerived;
@@ -738,8 +731,7 @@ public abstract class JsonUpdateTestBase<TFixture> : IClassFixture<TFixture>
                 var query = await context.JsonEntitiesBasic.ToListAsync();
                 var entity = query.Single();
                 entity.OwnedReferenceRoot.OwnedCollectionBranch[0].Fraction = 4321.3m;
-                entity
-                    .OwnedReferenceRoot
+                entity.OwnedReferenceRoot
                     .OwnedCollectionBranch
                     .Add(
                         new JsonOwnedBranch
@@ -770,8 +762,7 @@ public abstract class JsonUpdateTestBase<TFixture> : IClassFixture<TFixture>
                 Assert.Equal(45.32m, result.OwnedReferenceRoot.OwnedCollectionBranch[2].Fraction);
                 Assert.Equal(
                     "cc",
-                    result
-                        .OwnedReferenceRoot
+                    result.OwnedReferenceRoot
                         .OwnedCollectionBranch[2]
                         .OwnedReferenceLeaf
                         .SomethingSomething
@@ -788,13 +779,11 @@ public abstract class JsonUpdateTestBase<TFixture> : IClassFixture<TFixture>
             {
                 var query = await context.JsonEntitiesBasic.ToListAsync();
                 var entity = query.Single();
-                entity
-                    .OwnedReferenceRoot
+                entity.OwnedReferenceRoot
                     .OwnedCollectionBranch[0]
                     .OwnedCollectionLeaf[0]
                     .SomethingSomething = "edit1";
-                entity
-                    .OwnedReferenceRoot
+                entity.OwnedReferenceRoot
                     .OwnedCollectionBranch[0]
                     .OwnedCollectionLeaf[1]
                     .SomethingSomething = "edit2";
@@ -807,16 +796,14 @@ public abstract class JsonUpdateTestBase<TFixture> : IClassFixture<TFixture>
                 var result = await context.Set<JsonEntityBasic>().SingleAsync();
                 Assert.Equal(
                     "edit1",
-                    result
-                        .OwnedReferenceRoot
+                    result.OwnedReferenceRoot
                         .OwnedCollectionBranch[0]
                         .OwnedCollectionLeaf[0]
                         .SomethingSomething
                 );
                 Assert.Equal(
                     "edit2",
-                    result
-                        .OwnedReferenceRoot
+                    result.OwnedReferenceRoot
                         .OwnedCollectionBranch[0]
                         .OwnedCollectionLeaf[1]
                         .SomethingSomething
@@ -856,13 +843,11 @@ public abstract class JsonUpdateTestBase<TFixture> : IClassFixture<TFixture>
             {
                 var query = await context.JsonEntitiesBasic.ToListAsync();
                 var entity = query.Single();
-                entity
-                    .OwnedReferenceRoot
+                entity.OwnedReferenceRoot
                     .OwnedCollectionBranch[1]
                     .OwnedCollectionLeaf[0]
                     .SomethingSomething = "edit1";
-                entity
-                    .OwnedReferenceRoot
+                entity.OwnedReferenceRoot
                     .OwnedCollectionBranch[1]
                     .OwnedReferenceLeaf
                     .SomethingSomething = "edit2";
@@ -875,16 +860,14 @@ public abstract class JsonUpdateTestBase<TFixture> : IClassFixture<TFixture>
                 var result = await context.Set<JsonEntityBasic>().SingleAsync();
                 Assert.Equal(
                     "edit1",
-                    result
-                        .OwnedReferenceRoot
+                    result.OwnedReferenceRoot
                         .OwnedCollectionBranch[1]
                         .OwnedCollectionLeaf[0]
                         .SomethingSomething
                 );
                 Assert.Equal(
                     "edit2",
-                    result
-                        .OwnedReferenceRoot
+                    result.OwnedReferenceRoot
                         .OwnedCollectionBranch[1]
                         .OwnedReferenceLeaf
                         .SomethingSomething
@@ -1701,8 +1684,7 @@ public abstract class JsonUpdateTestBase<TFixture> : IClassFixture<TFixture>
                 Assert.Equal(523.532M, result.OwnedReferenceRoot.OwnedReferenceBranch.Fraction);
                 Assert.Equal(
                     "edit",
-                    result
-                        .OwnedReferenceRoot
+                    result.OwnedReferenceRoot
                         .OwnedReferenceBranch
                         .OwnedReferenceLeaf
                         .SomethingSomething
@@ -1740,8 +1722,7 @@ public abstract class JsonUpdateTestBase<TFixture> : IClassFixture<TFixture>
                 Assert.Equal(523.532M, result.OwnedReferenceRoot.OwnedReferenceBranch.Fraction);
                 Assert.Equal(
                     "edit",
-                    result
-                        .OwnedReferenceRoot
+                    result.OwnedReferenceRoot
                         .OwnedReferenceBranch
                         .OwnedCollectionLeaf[0]
                         .SomethingSomething
@@ -1759,8 +1740,7 @@ public abstract class JsonUpdateTestBase<TFixture> : IClassFixture<TFixture>
                 var query = await context.JsonEntitiesBasic.ToListAsync();
                 var entity = query.Single();
                 entity.OwnedReferenceRoot.OwnedReferenceBranch.Fraction = 523.532M;
-                entity
-                    .OwnedReferenceRoot
+                entity.OwnedReferenceRoot
                     .OwnedReferenceBranch
                     .OwnedReferenceLeaf
                     .SomethingSomething = "edit";
@@ -1774,8 +1754,7 @@ public abstract class JsonUpdateTestBase<TFixture> : IClassFixture<TFixture>
                 Assert.Equal(523.532M, result.OwnedReferenceRoot.OwnedReferenceBranch.Fraction);
                 Assert.Equal(
                     "edit",
-                    result
-                        .OwnedReferenceRoot
+                    result.OwnedReferenceRoot
                         .OwnedReferenceBranch
                         .OwnedReferenceLeaf
                         .SomethingSomething
@@ -3617,8 +3596,7 @@ public abstract class JsonUpdateTestBase<TFixture> : IClassFixture<TFixture>
                 }
                 await context.SaveChangesAsync();
 
-                var saved = context
-                    .Database
+                var saved = context.Database
                     .SqlQueryRaw<string>(
                         "select OwnedCollectionRoot from JsonEntitiesBasic where Id = 2"
                     )
@@ -3688,8 +3666,7 @@ public abstract class JsonUpdateTestBase<TFixture> : IClassFixture<TFixture>
                     else
                     {
                         Assert.Empty(newEntity.OwnedReferenceRoot.OwnedCollectionBranch!);
-                        newEntity
-                            .OwnedReferenceRoot
+                        newEntity.OwnedReferenceRoot
                             .OwnedCollectionBranch
                             .Add(new JsonOwnedBranch());
                     }

@@ -19,8 +19,7 @@ namespace System.Web.Http.Dispatcher
         protected override void ApplyConfiguration(HttpConfiguration configuration)
         {
             // Add default route
-            configuration
-                .Routes
+            configuration.Routes
                 .MapHttpRoute(
                     name: "DefaultApi",
                     routeTemplate: "api/{controller}/{id}",
@@ -30,8 +29,7 @@ namespace System.Web.Http.Dispatcher
             // Set our own assembly resolver where we add the assemblies we need
             CustomControllerTypeResolver customHttpControllerTypeResolver =
                 new CustomControllerTypeResolver();
-            configuration
-                .Services
+            configuration.Services
                 .Replace(typeof(IHttpControllerTypeResolver), customHttpControllerTypeResolver);
         }
 

@@ -271,8 +271,7 @@ namespace Newtonsoft.Json.Tests.TestObjects
             global::System.IO.MemoryStream stream = new global::System.IO.MemoryStream();
             WriteXmlSchema(new global::System.Xml.XmlTextWriter(stream, null));
             stream.Position = 0;
-            return global::System
-                .Xml
+            return global::System.Xml
                 .Schema
                 .XmlSchema
                 .Read(new global::System.Xml.XmlTextReader(stream), null);

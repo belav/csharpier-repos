@@ -143,8 +143,7 @@ public class LargeFuncletFrame
                     catch (Exception) { }
                     finally
                     {
-                        s_s1_s1_d1_f2_24.s1_s1_d1_f1_4.uint_2 |= s_s1_s1_d1_f2_24
-                            .s1_s1_d1_f1_3
+                        s_s1_s1_d1_f2_24.s1_s1_d1_f1_4.uint_2 |= s_s1_s1_d1_f2_24.s1_s1_d1_f1_3
                             .uint_2 /= LeafMethod12() + 7;
                     }
                     break;

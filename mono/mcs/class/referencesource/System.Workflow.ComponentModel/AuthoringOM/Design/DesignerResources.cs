@@ -256,8 +256,7 @@ namespace System.Workflow.ComponentModel.Design
         internal static string GetString(CultureInfo culture, string resID, params object[] args)
         {
             string str = DR.resourceManager.GetString(resID, culture);
-            System
-                .Diagnostics
+            System.Diagnostics
                 .Debug
                 .Assert(
                     str != null,

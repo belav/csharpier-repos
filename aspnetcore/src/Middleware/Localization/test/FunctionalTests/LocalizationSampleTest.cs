@@ -30,8 +30,7 @@ public class LocalizationSampleTest
         var client = testHost.CreateClient();
         var request = new HttpRequestMessage(HttpMethod.Get, "My/Resources");
         var cookieValue = $"c={locale}|uic={locale}";
-        request
-            .Headers
+        request.Headers
             .Add("Cookie", $"{CookieRequestCultureProvider.DefaultCookieName}={cookieValue}");
 
         // Act

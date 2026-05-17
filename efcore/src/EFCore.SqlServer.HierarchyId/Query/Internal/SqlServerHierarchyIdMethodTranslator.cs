@@ -114,8 +114,7 @@ public class SqlServerHierarchyIdMethodTranslator : IMethodCallTranslator
             }
 
             var typeMapping =
-                Microsoft
-                    .EntityFrameworkCore
+                Microsoft.EntityFrameworkCore
                     .Query
                     .ExpressionExtensions
                     .InferTypeMapping(candidates.ToArray())

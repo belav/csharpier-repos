@@ -76,8 +76,7 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
                 CancellationToken cancellationToken
             )
             {
-                var syntaxFactory = _document
-                    .Project
+                var syntaxFactory = _document.Project
                     .Solution
                     .Services
                     .GetLanguageServices(_state.TypeToGenerateIn.Language)
@@ -85,8 +84,7 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
 
                 if (_generateProperty)
                 {
-                    var property = await _state
-                        .SignatureInfo
+                    var property = await _state.SignatureInfo
                         .GeneratePropertyAsync(
                             syntaxFactory,
                             _isAbstract,
@@ -116,8 +114,7 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
                 }
                 else
                 {
-                    var method = await _state
-                        .SignatureInfo
+                    var method = await _state.SignatureInfo
                         .GenerateMethodAsync(syntaxFactory, _isAbstract, cancellationToken)
                         .ConfigureAwait(false);
 

@@ -34,8 +34,7 @@ namespace System.ServiceModel.Security
         {
             if (wrappedRsaSecurityTokenHandler == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("wrappedRsaSecurityTokenHandler");
             }
 

@@ -49,8 +49,7 @@ public class ResponseDrainingTests : TestApplicationErrorLoggerLoggedTest
                 );
 
 #pragma warning disable 0618 // TODO: Repalce OnWriterCompleted
-                transportConnection
-                    .Output
+                transportConnection.Output
                     .OnWriterCompleted(
                         (ex, state) =>
                         {

@@ -134,12 +134,13 @@ namespace MonoTests.System.Data
             ds.Tables.Add(DataProvider.CreateParentDataTable());
             ds.Tables.Add(DataProvider.CreateChildDataTable());
 
-            ds.Relations.Add(
-                "rel",
-                ds.Tables[0].Columns["ParentId"],
-                ds.Tables[1].Columns["ParentId"],
-                false
-            );
+            ds.Relations
+                .Add(
+                    "rel",
+                    ds.Tables[0].Columns["ParentId"],
+                    ds.Tables[1].Columns["ParentId"],
+                    false
+                );
 
             Assert.AreEqual(false, ds.Tables.CanRemove(ds.Tables[0]), "DTC11");
             Assert.AreEqual(false, ds.Tables.CanRemove(ds.Tables[1]), "DTC12");

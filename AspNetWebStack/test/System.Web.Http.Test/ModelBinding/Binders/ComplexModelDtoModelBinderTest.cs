@@ -27,8 +27,7 @@ namespace System.Web.Http.ModelBinding.Binders
             Mock<IModelBinder> mockIntBinder = new Mock<IModelBinder>();
             Mock<IModelBinder> mockDateTimeBinder = new Mock<IModelBinder>();
             HttpActionContext context = ContextUtil.CreateActionContext();
-            context
-                .ControllerContext
+            context.ControllerContext
                 .Configuration
                 .Services
                 .ReplaceRange(
@@ -120,9 +119,10 @@ namespace System.Web.Http.ModelBinding.Binders
             Assert.Equal("theModel.IntProperty", intDtoResult.ValidationNode.ModelStateKey);
 
             // Bind failed, so DateTime won't even be in the DTO dictionary
-            bool containsMissingKey = dto.Results.ContainsKey(
-                dto.PropertyMetadata.Where(m => m.ModelType == typeof(DateTime)).First()
-            );
+            bool containsMissingKey = dto.Results
+                .ContainsKey(
+                    dto.PropertyMetadata.Where(m => m.ModelType == typeof(DateTime)).First()
+                );
             Assert.False(containsMissingKey);
         }
 

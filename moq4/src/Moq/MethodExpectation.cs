@@ -447,8 +447,7 @@ namespace Moq
                         for (int j = 0, nj = e1.Expressions.Count; j < nj; ++j)
                         {
                             if (
-                                !ExpressionComparer
-                                    .Default
+                                !ExpressionComparer.Default
                                     .Equals(e1.Expressions[j], e2.Expressions[j])
                             )
                             {
@@ -461,8 +460,7 @@ namespace Moq
                 }
 
                 if (
-                    !ExpressionComparer
-                        .Default
+                    !ExpressionComparer.Default
                         .Equals(
                             this.partiallyEvaluatedArguments[i],
                             other.partiallyEvaluatedArguments[i]

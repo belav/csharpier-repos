@@ -215,13 +215,14 @@ namespace System.IO
         public Task FlushAsync() => FlushAsync(CancellationToken.None);
 
         public virtual Task FlushAsync(CancellationToken cancellationToken) =>
-            Task.Factory.StartNew(
-                static state => ((Stream)state!).Flush(),
-                this,
-                cancellationToken,
-                TaskCreationOptions.DenyChildAttach,
-                TaskScheduler.Default
-            );
+            Task.Factory
+                .StartNew(
+                    static state => ((Stream)state!).Flush(),
+                    this,
+                    cancellationToken,
+                    TaskCreationOptions.DenyChildAttach,
+                    TaskScheduler.Default
+                );
 
         [Obsolete(
             "CreateWaitHandle has been deprecated. Use the ManualResetEvent(false) constructor instead."
@@ -299,8 +300,7 @@ namespace System.IO
                     try
                     {
                         // Do the Read and return the number of bytes read
-                        return thisTask
-                            ._stream
+                        return thisTask._stream
                             .Read(thisTask._buffer!, thisTask._offset, thisTask._count);
                     }
                     finally
@@ -689,8 +689,7 @@ namespace System.IO
                     try
                     {
                         // Do the Write
-                        thisTask
-                            ._stream
+                        thisTask._stream
                             .Write(thisTask._buffer!, thisTask._offset, thisTask._count);
                         return 0; // not used, but signature requires a value be returned
                     }

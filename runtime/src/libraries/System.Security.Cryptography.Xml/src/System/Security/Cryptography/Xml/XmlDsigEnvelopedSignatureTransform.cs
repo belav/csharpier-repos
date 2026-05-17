@@ -198,8 +198,7 @@ namespace System.Security.Cryptography.Xml
                     return _containingDocument;
 
                 // Remove the signature node with all its children nodes
-                signatureList[_signaturePosition - 1]!
-                    .ParentNode!
+                signatureList[_signaturePosition - 1]!.ParentNode!
                     .RemoveChild(signatureList[_signaturePosition - 1]!);
                 return _containingDocument;
             }

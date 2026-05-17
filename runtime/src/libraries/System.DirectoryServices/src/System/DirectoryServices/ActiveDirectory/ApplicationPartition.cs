@@ -1001,8 +1001,7 @@ namespace System.DirectoryServices.ActiveDirectory
                     if (value == null)
                     {
                         if (
-                            _crossRefEntry
-                                .Properties
+                            _crossRefEntry.Properties
                                 .Contains(PropertyManager.MsDSSDReferenceDomain)
                         )
                         {
@@ -1168,8 +1167,7 @@ namespace System.DirectoryServices.ActiveDirectory
                         authType
                     );
                     parent = tempEntry.Parent;
-                    _domainDNSEntry = parent
-                        .Children
+                    _domainDNSEntry = parent.Children
                         .Add(Utils.GetRdnFromDN(distinguishedName), PropertyManager.DomainDNS);
                     // set the instance type to 5
                     _domainDNSEntry.Properties[PropertyManager.InstanceType].Value =
@@ -1218,8 +1216,7 @@ namespace System.DirectoryServices.ActiveDirectory
                             authType
                         );
                         parent = tempEntry.Parent;
-                        _domainDNSEntry = parent
-                            .Children
+                        _domainDNSEntry = parent.Children
                             .Add(Utils.GetRdnFromDN(distinguishedName), objectClass);
 
                         // set the instance type to 5

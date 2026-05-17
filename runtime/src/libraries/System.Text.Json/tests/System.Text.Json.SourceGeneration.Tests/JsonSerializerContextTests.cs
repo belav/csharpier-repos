@@ -108,14 +108,12 @@ namespace System.Text.Json.SourceGeneration.Tests
                 ContextGenericContainer<int>.NestedGenericInGenericContainerContext<int>.Default
             );
             AssertGenericContext(
-                ContextGenericContainer<int>
-                    .NestedGenericContainer<int>
+                ContextGenericContainer<int>.NestedGenericContainer<int>
                     .NestedInNestedGenericContainerContext
                     .Default
             );
             AssertGenericContext(
-                ContextGenericContainer<int>
-                    .NestedGenericContainer<int>
+                ContextGenericContainer<int>.NestedGenericContainer<int>
                     .NestedGenericInNestedGenericContainerContext<int>
                     .Default
             );
@@ -742,8 +740,7 @@ namespace System.Text.Json.SourceGeneration.Tests
                         "test"
                     );
                     property.Get = (o) =>
-                        System
-                            .Runtime
+                        System.Runtime
                             .CompilerServices
                             .Unsafe
                             .Unbox<TestPoco>(o)
@@ -914,8 +911,7 @@ namespace System.Text.Json.SourceGeneration.Tests
             };
             string json = JsonSerializer.Serialize(
                 value,
-                SingleClassWithCustomConverterFactoryPropertyContext
-                    .Default
+                SingleClassWithCustomConverterFactoryPropertyContext.Default
                     .ClassWithCustomConverterFactoryProperty
             );
             Assert.Equal(@"{""MyEnum"":""MinZero""}", json);
@@ -1000,16 +996,14 @@ namespace System.Text.Json.SourceGeneration.Tests
 
             Assert.Equal(
                 1,
-                ContextForClassesFromAnotherAssembly
-                    .Default
+                ContextForClassesFromAnotherAssembly.Default
                     .ClassFromOtherAssemblyWithNonPublicMembers
                     .Properties
                     .Count
             );
             Assert.Equal(
                 "PublicValue",
-                ContextForClassesFromAnotherAssembly
-                    .Default
+                ContextForClassesFromAnotherAssembly.Default
                     .ClassFromOtherAssemblyWithNonPublicMembers
                     .Properties[0]
                     .Name
@@ -1018,16 +1012,14 @@ namespace System.Text.Json.SourceGeneration.Tests
             var value = new ClassFromOtherAssemblyWithNonPublicMembers();
             string json = JsonSerializer.Serialize(
                 value,
-                ContextForClassesFromAnotherAssembly
-                    .Default
+                ContextForClassesFromAnotherAssembly.Default
                     .ClassFromOtherAssemblyWithNonPublicMembers
             );
             Assert.Equal("""{"PublicValue":1}""", json);
 
             JsonSerializer.Deserialize(
                 json,
-                ContextForClassesFromAnotherAssembly
-                    .Default
+                ContextForClassesFromAnotherAssembly.Default
                     .ClassFromOtherAssemblyWithNonPublicMembers
             );
         }

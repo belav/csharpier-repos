@@ -2272,8 +2272,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (lookupResult.IsMultiViable)
             {
                 if (
-                    lookupResult
-                        .Symbols
+                    lookupResult.Symbols
                         .Any(t =>
                             t.Kind == SymbolKind.NamedType
                             || t.Kind == SymbolKind.Namespace
@@ -2635,8 +2634,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     pattern.NarrowedType,
                     nullability: default,
                     convertedNullability: default,
-                    Compilation
-                        .Conversions
+                    Compilation.Conversions
                         .ClassifyBuiltInConversion(
                             pattern.InputType,
                             pattern.NarrowedType,
@@ -2699,8 +2697,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                             )
                             {
                                 type = local.LocalSymbol.Type;
-                                nullability = local
-                                    .LocalSymbol
+                                nullability = local.LocalSymbol
                                     .TypeWithAnnotations
                                     .NullableAnnotation
                                     .ToNullabilityInfo(type);
@@ -2902,8 +2899,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                         // There is a sequence of conversions; we use ClassifyConversionFromExpression to report the most pertinent.
                         var binder = this.GetEnclosingBinder(boundExpr.Syntax.Span.Start);
                         var discardedUseSiteInfo = CompoundUseSiteInfo<AssemblySymbol>.Discarded;
-                        conversion = binder
-                            .Conversions
+                        conversion = binder.Conversions
                             .ClassifyConversionFromExpression(
                                 boundExpr,
                                 convertedType,
@@ -3767,8 +3763,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     var discardedUseSiteInfo = CompoundUseSiteInfo<AssemblySymbol>.Discarded;
 
-                    return binder
-                        .Conversions
+                    return binder.Conversions
                         .ClassifyConversionFromExpression(
                             bnode,
                             cdestination,
@@ -3833,8 +3828,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     var discardedUseSiteInfo = CompoundUseSiteInfo<AssemblySymbol>.Discarded;
 
-                    return binder
-                        .Conversions
+                    return binder.Conversions
                         .ClassifyConversionFromExpression(
                             bnode,
                             destination,
@@ -4488,8 +4482,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     // If we're seeing a node of this kind, then we failed to resolve the member access
                     // as either a type or a property/field/event/local/parameter.  In such cases,
                     // the second interpretation applies so just visit the node for that.
-                    BoundExpression valueExpression = ((BoundTypeOrValueExpression)boundNode)
-                        .Data
+                    BoundExpression valueExpression = ((BoundTypeOrValueExpression)boundNode).Data
                         .ValueExpression;
                     return GetSemanticSymbols(
                         valueExpression,
@@ -4614,8 +4607,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                         } parentOperator
                         && boundNode.ExpressionSymbol is Symbol accessSymbol
                         && boundNode != parentOperator.Argument
-                        && parentOperator
-                            .Event
+                        && parentOperator.Event
                             .Equals(accessSymbol, TypeCompareKind.AllNullableIgnoreOptions):
                     // When we're looking at the left-hand side of an event assignment, we synthesize a BoundEventAccess node. This node does not have
                     // nullability information, however, so if we're in that case then we need to grab the event symbol from the parent event assignment
@@ -4822,8 +4814,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     if ((object)boundObjectCreation.Constructor != null)
                     {
                         Debug.Assert(
-                            boundObjectCreation
-                                .ConstructorsGroup
+                            boundObjectCreation.ConstructorsGroup
                                 .Contains(boundObjectCreation.Constructor)
                         );
                         symbols = OneOrMany.Create<Symbol>(boundObjectCreation.Constructor);
@@ -4838,8 +4829,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                         );
                     }
 
-                    memberGroup = boundObjectCreation
-                        .ConstructorsGroup
+                    memberGroup = boundObjectCreation.ConstructorsGroup
                         .Cast<MethodSymbol, Symbol>();
                     break;
 
@@ -5143,8 +5133,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 )
                 {
                     // Comparison of a nullable type with null, return corresponding operator for Object.
-                    var objectType = binaryOperator
-                        .Type
+                    var objectType = binaryOperator.Type
                         .ContainingAssembly
                         .GetSpecialType(SpecialType.System_Object);
 
@@ -5674,9 +5663,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             }
                             else
                             {
-                                resultKind = call.ResultKind.WorseResultKind(
-                                    LookupResultKind.OverloadResolutionFailure
-                                );
+                                resultKind = call.ResultKind
+                                    .WorseResultKind(LookupResultKind.OverloadResolutionFailure);
                                 symbols = StaticCast<Symbol>.From(
                                     CreateReducedExtensionMethodsFromOriginalsIfNecessary(
                                         call,
@@ -5742,8 +5730,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                         ImmutableArray<Symbol> myMethodGroup = methodGroup;
 
                         symbols = OneOrMany.Create(
-                            ((BoundBadExpression)boundNodeForSyntacticParent)
-                                .Symbols
+                            ((BoundBadExpression)boundNodeForSyntacticParent).Symbols
                                 .WhereAsArray(
                                     (sym, myMethodGroup) => myMethodGroup.Contains(sym),
                                     myMethodGroup
@@ -5850,8 +5837,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                             }
                             else
                             {
-                                resultKind = indexer
-                                    .ResultKind
+                                resultKind = indexer.ResultKind
                                     .WorseResultKind(LookupResultKind.OverloadResolutionFailure);
                                 symbols = StaticCast<Symbol>.From(
                                     OneOrMany.Create(indexer.OriginalIndexersOpt)
@@ -5865,8 +5851,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                         ImmutableArray<Symbol> myPropertyGroup = propertyGroup;
 
                         symbols = OneOrMany.Create(
-                            ((BoundBadExpression)boundNodeForSyntacticParent)
-                                .Symbols
+                            ((BoundBadExpression)boundNodeForSyntacticParent).Symbols
                                 .WhereAsArray(
                                     (sym, myPropertyGroup) => myPropertyGroup.Contains(sym),
                                     myPropertyGroup
@@ -6378,10 +6363,11 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             if (node.Ancestors().Any(n => SyntaxFacts.IsPreprocessorDirective(n.Kind())))
             {
-                bool isDefined = this.SyntaxTree.IsPreprocessorSymbolDefined(
-                    node.Identifier.ValueText,
-                    node.Identifier.SpanStart
-                );
+                bool isDefined = this.SyntaxTree
+                    .IsPreprocessorSymbolDefined(
+                        node.Identifier.ValueText,
+                        node.Identifier.SpanStart
+                    );
                 return new PreprocessingSymbolInfo(
                     new Symbols.PublicModel.PreprocessingSymbol(node.Identifier.ValueText),
                     isDefined
@@ -6746,8 +6732,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return (
                     GetSymbolInfo(tupleTypeSyntax, cancellationToken).Symbol.GetSymbol()
                     as NamedTypeSymbol
-                )
-                    ?.TupleElements
+                )?.TupleElements
                     .ElementAtOrDefault(tupleTypeSyntax.Elements.IndexOf(declarationSyntax))
                     .GetPublicSymbol();
             }
@@ -7073,12 +7058,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                 // node corresponding to this set of imports and chain it to that.
                 builder.Add(
                     new SimpleImportScope(
-                        imports
-                            .UsingAliases
+                        imports.UsingAliases
                             .SelectAsArray(static kvp => kvp.Value.Alias.GetPublicSymbol()),
                         imports.ExternAliases.SelectAsArray(static e => e.Alias.GetPublicSymbol()),
-                        imports
-                            .Usings
+                        imports.Usings
                             .SelectAsArray(static n => new ImportedNamespaceOrType(
                                 n.NamespaceOrType.GetPublicSymbol(),
                                 n.UsingDirectiveReference

@@ -19,8 +19,7 @@ namespace System.Runtime.Serialization
         public static XmlNode[] ReadNodes(XmlReader xmlReader)
         {
             if (xmlReader == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -35,8 +34,7 @@ namespace System.Runtime.Serialization
                     {
                         XmlNode node = doc.ReadNode(xmlReader);
                         if (node == null)
-                            throw System
-                                .Runtime
+                            throw System.Runtime
                                 .Serialization
                                 .DiagnosticUtility
                                 .ExceptionUtility
@@ -58,8 +56,7 @@ namespace System.Runtime.Serialization
                 {
                     XmlNode node = doc.ReadNode(xmlReader);
                     if (node == null)
-                        throw System
-                            .Runtime
+                        throw System.Runtime
                             .Serialization
                             .DiagnosticUtility
                             .ExceptionUtility
@@ -87,8 +84,7 @@ namespace System.Runtime.Serialization
         public static void WriteNodes(XmlWriter xmlWriter, XmlNode[] nodes)
         {
             if (xmlWriter == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -104,15 +100,13 @@ namespace System.Runtime.Serialization
         public static void AddDefaultSchema(XmlSchemaSet schemas, XmlQualifiedName typeQName)
         {
             if (schemas == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
                     .ThrowHelperArgumentNull("schemas");
             if (typeQName == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility

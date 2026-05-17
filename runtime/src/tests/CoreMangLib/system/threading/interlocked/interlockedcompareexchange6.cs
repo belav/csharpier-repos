@@ -48,8 +48,7 @@ public class InterlockedCompareExchange6
         Int32 comparand;
         Int32 oldLocation;
 
-        TestLibrary
-            .TestFramework
+        TestLibrary.TestFramework
             .BeginScenario(
                 "PosTest1: Int32 Interlocked.CompareExchange(Int32&,Int32,Int32) where comparand is equal"
             );
@@ -66,8 +65,7 @@ public class InterlockedCompareExchange6
 
                 if (!location.Equals(value))
                 {
-                    TestLibrary
-                        .TestFramework
+                    TestLibrary.TestFramework
                         .LogError(
                             "001",
                             "Interlocked.CompareExchange() did not do the exchange correctly: Expected("
@@ -81,8 +79,7 @@ public class InterlockedCompareExchange6
 
                 if (!oldLocation.Equals(comparand))
                 {
-                    TestLibrary
-                        .TestFramework
+                    TestLibrary.TestFramework
                         .LogError(
                             "002",
                             "Interlocked.CompareExchange() did not return the expected value: Expected("
@@ -112,8 +109,7 @@ public class InterlockedCompareExchange6
         Int32 comparand;
         Int32 oldLocation;
 
-        TestLibrary
-            .TestFramework
+        TestLibrary.TestFramework
             .BeginScenario(
                 "PosTest2: Int32 Interlocked.CompareExchange(Int32&,Int32,Int32) where comparand are not equal"
             );
@@ -134,8 +130,7 @@ public class InterlockedCompareExchange6
 
                 if (location.Equals(value))
                 {
-                    TestLibrary
-                        .TestFramework
+                    TestLibrary.TestFramework
                         .LogError(
                             "004",
                             "Interlocked.CompareExchange() did not do the exchange correctly: Expected("
@@ -149,8 +144,7 @@ public class InterlockedCompareExchange6
 
                 if (oldLocation.Equals(comparand))
                 {
-                    TestLibrary
-                        .TestFramework
+                    TestLibrary.TestFramework
                         .LogError(
                             "005",
                             "Interlocked.CompareExchange() did not return the expected value: Expected("

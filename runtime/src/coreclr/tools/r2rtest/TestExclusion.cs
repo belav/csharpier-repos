@@ -164,8 +164,7 @@ namespace R2RTest
                     string issuesProjectPath = issuesProject.FullName;
                     XDocument issuesXml = XDocument.Load(issuesProjectPath);
                     foreach (
-                        XElement itemGroupElement in issuesXml
-                            .Root
+                        XElement itemGroupElement in issuesXml.Root
                             .Elements(s_xmlNamespace + "ItemGroup")
                     )
                     {

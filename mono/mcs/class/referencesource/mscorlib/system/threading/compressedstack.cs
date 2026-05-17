@@ -369,8 +369,7 @@ namespace System.Threading
         internal static IntPtr SetAppDomainStack(CompressedStack cs)
         {
             //Update the AD Stack on the thread and return the previous AD Stack
-            return Thread
-                .CurrentThread
+            return Thread.CurrentThread
                 .SetAppDomainStack((cs == null ? null : cs.CompressedStackHandle));
         }
 

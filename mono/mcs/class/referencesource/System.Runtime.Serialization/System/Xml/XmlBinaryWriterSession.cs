@@ -28,8 +28,7 @@ namespace System.Xml
         {
             IntArray keys;
             if (value == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -42,8 +41,7 @@ namespace System.Xml
                 if (key != -1)
                 {
                     // If the key is already set, then something is wrong
-                    throw System
-                        .Runtime
+                    throw System.Runtime
                         .Serialization
                         .DiagnosticUtility
                         .ExceptionUtility

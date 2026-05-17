@@ -196,8 +196,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
                     ? ServicesVSResources.Paused_0_tasks_in_queue
                     : ServicesVSResources.Evaluating_0_tasks_in_queue;
 
-            _taskHandler
-                .Progress
+            _taskHandler.Progress
                 .Report(
                     new TaskProgressData
                     {

@@ -1513,15 +1513,13 @@ namespace System.Tests
                     if (classType.AnyTarget)
                     {
                         // The class implements it, either implicitly or explicitly (if IncludePrefix is specified)
-                        MTarget = classType
-                            .Type
+                        MTarget = classType.Type
                             .GetMethod(
                                 (classType.IncludePrefix ? interfaceType.MethodNamePrefixTyped : "")
                                     + "M",
                                 bindingFlags
                             );
-                        GTarget = classType
-                            .Type
+                        GTarget = classType.Type
                             .GetMethod(
                                 (classType.IncludePrefix ? interfaceType.MethodNamePrefixTyped : "")
                                     + "G",
@@ -1538,11 +1536,9 @@ namespace System.Tests
                             continue;
 
                         // It's implemented implicitly by the level 2 interface
-                        MTarget = interfaceType
-                            .Level2InterfaceType
+                        MTarget = interfaceType.Level2InterfaceType
                             .GetMethod(interfaceType.MethodNamePrefix + "M", bindingFlags);
-                        GTarget = interfaceType
-                            .Level2InterfaceType
+                        GTarget = interfaceType.Level2InterfaceType
                             .GetMethod(interfaceType.MethodNamePrefix + "G", bindingFlags);
                     }
 
@@ -1591,11 +1587,9 @@ namespace System.Tests
                     )
                     {
                         // There should be no implementation for these methods - null
-                        MethodInfo MInterface = interfaceType
-                            .Type
+                        MethodInfo MInterface = interfaceType.Type
                             .GetMethod(interfaceType.MethodNamePrefix + "M", bindingFlags);
-                        MethodInfo GInterface = interfaceType
-                            .Type
+                        MethodInfo GInterface = interfaceType.Type
                             .GetMethod(interfaceType.MethodNamePrefix + "G", bindingFlags);
 
                         // Return our test cases

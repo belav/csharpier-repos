@@ -86,8 +86,7 @@ namespace System.Data
         private bool _checkMultipleNested = true;
 
         private static int _objectTypeCount; // Bid counter
-        private readonly int _objectID = System
-            .Threading
+        private readonly int _objectID = System.Threading
             .Interlocked
             .Increment(ref _objectTypeCount);
 
@@ -398,20 +397,17 @@ namespace System.Data
             object[] parentKeyValues = parentRow.GetKeyValues(ParentKey);
             if (childRow.tempRecord != -1)
             {
-                ChildTable
-                    .recordManager
+                ChildTable.recordManager
                     .SetKeyValues(childRow.tempRecord, ChildKey, parentKeyValues);
             }
             if (childRow.newRecord != -1)
             {
-                ChildTable
-                    .recordManager
+                ChildTable.recordManager
                     .SetKeyValues(childRow.newRecord, ChildKey, parentKeyValues);
             }
             if (childRow.oldRecord != -1)
             {
-                ChildTable
-                    .recordManager
+                ChildTable.recordManager
                     .SetKeyValues(childRow.oldRecord, ChildKey, parentKeyValues);
             }
         }
@@ -669,8 +665,7 @@ namespace System.Data
                                     ChildTable != null,
                                     "On a DataSet, but not on Table. Bad state"
                                 );
-                                ForeignKeyConstraint constraint = ChildTable
-                                    .Constraints
+                                ForeignKeyConstraint constraint = ChildTable.Constraints
                                     .FindForeignKeyConstraint(
                                         ChildKey.ColumnsReference,
                                         ParentKey.ColumnsReference

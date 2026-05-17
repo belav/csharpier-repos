@@ -231,8 +231,7 @@ public class RuntimeModelConvention : IModelFinalizedConvention
             {
                 var runtimeNavigation = Create(navigation, runtimeEntityType);
 
-                var inverse = runtimeNavigation
-                    .TargetEntityType
+                var inverse = runtimeNavigation.TargetEntityType
                     .FindSkipNavigation(navigation.Inverse.Name);
                 if (inverse != null)
                 {
@@ -367,8 +366,7 @@ public class RuntimeModelConvention : IModelFinalizedConvention
         RuntimeEntityType entityType
     ) =>
         parameterBinding.With(
-            parameterBinding
-                .ConsumedProperties
+            parameterBinding.ConsumedProperties
                 .Select(property =>
                     (
                         entityType.FindProperty(property.Name)
@@ -385,8 +383,7 @@ public class RuntimeModelConvention : IModelFinalizedConvention
         RuntimeEntityType entityType
     ) =>
         instantiationBinding?.With(
-            instantiationBinding
-                .ParameterBindings
+            instantiationBinding.ParameterBindings
                 .Select(binding => Create(binding, entityType))
                 .ToList()
         );
@@ -853,8 +850,7 @@ public class RuntimeModelConvention : IModelFinalizedConvention
 
     private RuntimeForeignKey Create(IForeignKey foreignKey, RuntimeEntityType runtimeEntityType)
     {
-        var principalEntityType = runtimeEntityType
-            .Model
+        var principalEntityType = runtimeEntityType.Model
             .FindEntityType(foreignKey.PrincipalEntityType.Name)!;
         return runtimeEntityType.AddForeignKey(
             runtimeEntityType.FindProperties(foreignKey.Properties.Select(p => p.Name))!,
@@ -978,8 +974,7 @@ public class RuntimeModelConvention : IModelFinalizedConvention
             runtimeEntityType.Model.FindEntityType(navigation.TargetEntityType.Name)!,
             GetForeignKey(
                 navigation.ForeignKey,
-                runtimeEntityType
-                    .Model
+                runtimeEntityType.Model
                     .FindEntityType(navigation.ForeignKey.DeclaringEntityType.Name)!
             ),
             navigation.IsCollection,

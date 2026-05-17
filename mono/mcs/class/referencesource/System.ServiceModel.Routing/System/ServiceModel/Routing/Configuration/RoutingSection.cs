@@ -69,16 +69,14 @@ namespace System.ServiceModel.Routing.Configuration
                 ConfigurationManager.GetSection("system.serviceModel/routing");
             if (routingSection == null)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(new InvalidOperationException(SR2.RoutingSectionNotFound));
             }
 
             FilterTableEntryCollection routingTableElement = routingSection.FilterTables[name];
             if (routingTableElement == null)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(new InvalidOperationException(SR2.RoutingTableNotFound(name)));
             }
             XmlNamespaceManager xmlNamespaces = new XPathMessageContext();
@@ -95,8 +93,7 @@ namespace System.ServiceModel.Routing.Configuration
                 FilterElement filterElement = filterElements[entry.FilterName];
                 if (filterElement == null)
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(
                             new InvalidOperationException(
                                 SR2.FilterElementNotFound(entry.FilterName)
@@ -112,8 +109,7 @@ namespace System.ServiceModel.Routing.Configuration
                         routingSection.BackupLists[entry.BackupList];
                     if (alternateEndpointListElement == null)
                     {
-                        throw FxTrace
-                            .Exception
+                        throw FxTrace.Exception
                             .AsError(
                                 new InvalidOperationException(
                                     SR2.BackupListNotFound(entry.BackupList)

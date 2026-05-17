@@ -71,8 +71,7 @@ namespace System.IdentityModel.Tokens
             KerberosReceiverSecurityToken kerbToken = token as KerberosReceiverSecurityToken;
             if (kerbToken == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgument(
                         "token",
                         SR.GetString(SR.ID0018, typeof(KerberosReceiverSecurityToken))

@@ -431,8 +431,7 @@ namespace ICSharpCode.SharpZipLib.Tar
             }
 
             // UNDONE When File lets us get the userName, use it!
-            hdr.modTime = System
-                .IO
+            hdr.modTime = System.IO
                 .File
                 .GetLastWriteTimeUtc(file.Replace('/', Path.DirectorySeparatorChar)); // -jr- Unix times are in UTC
             hdr.checkSum = 0;

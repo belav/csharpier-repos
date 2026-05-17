@@ -1166,8 +1166,7 @@ namespace System.Net.Sockets
         )]
         public Task<int> SendAsync(byte[] datagram, int bytes, string hostname, int port)
         {
-            return Task<int>
-                .Factory
+            return Task<int>.Factory
                 .FromAsync(
                     (callback, state) =>
                         BeginSend(datagram, bytes, hostname, port, callback, state),
@@ -1179,8 +1178,7 @@ namespace System.Net.Sockets
         [HostProtection(ExternalThreading = true)]
         public Task<UdpReceiveResult> ReceiveAsync()
         {
-            return Task<UdpReceiveResult>
-                .Factory
+            return Task<UdpReceiveResult>.Factory
                 .FromAsync(
                     (callback, state) => BeginReceive(callback, state),
                     (ar) =>

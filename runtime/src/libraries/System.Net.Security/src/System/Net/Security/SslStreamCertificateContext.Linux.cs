@@ -217,13 +217,11 @@ namespace System.Net.Security
             }
 
             using (
-                SafeOcspRequestHandle ocspRequest = Interop
-                    .Crypto
+                SafeOcspRequestHandle ocspRequest = Interop.Crypto
                     .X509BuildOcspRequest(subject, issuer)
             )
             {
-                byte[] rentedBytes = ArrayPool<byte>
-                    .Shared
+                byte[] rentedBytes = ArrayPool<byte>.Shared
                     .Rent(Interop.Crypto.GetOcspRequestDerSize(ocspRequest));
                 int encodingSize = Interop.Crypto.EncodeOcspRequest(ocspRequest, rentedBytes);
                 ArraySegment<byte> encoded = new ArraySegment<byte>(rentedBytes, 0, encodingSize);
@@ -234,8 +232,7 @@ namespace System.Net.Security
                 for (int i = 0; i < _ocspUrls.Count; i++)
                 {
                     string url = MakeUrl(_ocspUrls[i], rentedChars);
-                    ret = await System
-                        .Net
+                    ret = await System.Net
                         .Http
                         .X509ResourceClient
                         .DownloadAssetAsync(url, TimeSpan.MaxValue)
@@ -244,8 +241,7 @@ namespace System.Net.Security
                     if (ret is not null)
                     {
                         if (
-                            !Interop
-                                .Crypto
+                            !Interop.Crypto
                                 .X509DecodeOcspToExpiration(
                                     ret,
                                     ocspRequest,

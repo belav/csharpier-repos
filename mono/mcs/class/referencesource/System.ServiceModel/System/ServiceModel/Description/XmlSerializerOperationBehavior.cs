@@ -122,16 +122,14 @@ namespace System.ServiceModel.Description
                     bool isInherited = operation.DeclaringContract != contract;
                     if (!isInherited)
                     {
-                        operation
-                            .Behaviors
+                        operation.Behaviors
                             .Add(
                                 new XmlSerializerOperationBehavior(
                                     operationReflector,
                                     builtInOperationBehavior
                                 )
                             );
-                        operation
-                            .Behaviors
+                        operation.Behaviors
                             .Add(
                                 new XmlSerializerOperationGenerator(
                                     new XmlSerializerImportOptions()
@@ -496,8 +494,7 @@ namespace System.ServiceModel.Description
                         foreach (Type knownType in Operation.KnownTypes)
                         {
                             if (knownType == null)
-                                throw DiagnosticUtility
-                                    .ExceptionUtility
+                                throw DiagnosticUtility.ExceptionUtility
                                     .ThrowHelperError(
                                         new InvalidOperationException(
                                             SR.GetString(SR.SFxKnownTypeNull, Operation.Name)
@@ -512,8 +509,7 @@ namespace System.ServiceModel.Description
                             && this.Operation.IsValidateRpcWrapperName
                             && this.request.BodyMapping.XsdElementName != this.Operation.Name
                         )
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
                                     new InvalidOperationException(
                                         SR.GetString(
@@ -537,8 +533,7 @@ namespace System.ServiceModel.Description
                                 && this.Operation.IsValidateRpcWrapperName
                                 && this.reply.BodyMapping.XsdElementName != responseName.EncodedName
                             )
-                                throw DiagnosticUtility
-                                    .ExceptionUtility
+                                throw DiagnosticUtility.ExceptionUtility
                                     .ThrowHelperError(
                                         new InvalidOperationException(
                                             SR.GetString(
@@ -579,8 +574,7 @@ namespace System.ServiceModel.Description
                             out elementName
                         );
 
-                        SerializerStub serializerStub = parent
-                            .generation
+                        SerializerStub serializerStub = parent.generation
                             .AddSerializer(xmlMembersMapping);
                         faultInfos.Add(
                             new XmlSerializerFaultContractInfo(
@@ -607,8 +601,7 @@ namespace System.ServiceModel.Description
                     info.SetHeaders(parent.generation.AddSerializer(headersMapping));
                     MessagePartDescriptionCollection rpcEncodedTypedMessgeBodyParts;
                     info.SetBody(
-                        parent
-                            .generation
+                        parent.generation
                             .AddSerializer(
                                 LoadBodyMapping(message, key, out rpcEncodedTypedMessgeBodyParts)
                             ),
@@ -650,8 +643,7 @@ namespace System.ServiceModel.Description
                             if (headerName != header.Name)
                             {
                                 if (message.MessageType != null)
-                                    throw DiagnosticUtility
-                                        .ExceptionUtility
+                                    throw DiagnosticUtility.ExceptionUtility
                                         .ThrowHelperError(
                                             new InvalidOperationException(
                                                 SR.GetString(
@@ -664,8 +656,7 @@ namespace System.ServiceModel.Description
                                             )
                                         );
                                 else
-                                    throw DiagnosticUtility
-                                        .ExceptionUtility
+                                    throw DiagnosticUtility.ExceptionUtility
                                         .ThrowHelperError(
                                             new InvalidOperationException(
                                                 SR.GetString(
@@ -682,8 +673,7 @@ namespace System.ServiceModel.Description
                             if (headerNs != header.Namespace)
                             {
                                 if (message.MessageType != null)
-                                    throw DiagnosticUtility
-                                        .ExceptionUtility
+                                    throw DiagnosticUtility.ExceptionUtility
                                         .ThrowHelperError(
                                             new InvalidOperationException(
                                                 SR.GetString(
@@ -696,8 +686,7 @@ namespace System.ServiceModel.Description
                                             )
                                         );
                                 else
-                                    throw DiagnosticUtility
-                                        .ExceptionUtility
+                                    throw DiagnosticUtility.ExceptionUtility
                                         .ThrowHelperError(
                                             new InvalidOperationException(
                                                 SR.GetString(
@@ -786,8 +775,7 @@ namespace System.ServiceModel.Description
                 private MessagePartDescription GetWrapperPart(MessageDescription message)
                 {
                     if (message.Body.Parts.Count != 1)
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(
                                     SR.GetString(
@@ -803,8 +791,7 @@ namespace System.ServiceModel.Description
                         bodyObjectType.BaseType != null
                         && bodyObjectType.BaseType != typeof(object)
                     )
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(
                                     SR.GetString(
@@ -814,8 +801,7 @@ namespace System.ServiceModel.Description
                                 )
                             );
                     if (typeof(IEnumerable).IsAssignableFrom(bodyObjectType))
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(
                                     SR.GetString(
@@ -826,8 +812,7 @@ namespace System.ServiceModel.Description
                                 )
                             );
                     if (typeof(IXmlSerializable).IsAssignableFrom(bodyObjectType))
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(
                                     SR.GetString(
@@ -887,8 +872,7 @@ namespace System.ServiceModel.Description
                     if (headerCount == 0)
                         return null;
                     if (IsEncoded)
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(
                                     SR.GetString(
@@ -992,8 +976,7 @@ namespace System.ServiceModel.Description
                         faultElementName = new XmlName(mapping.ElementName, this.IsEncoded);
                         faultNamespace = mapping.Namespace;
                         if (faultElementName == null)
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
                                     new InvalidOperationException(
                                         SR.GetString(
@@ -1108,21 +1091,11 @@ namespace System.ServiceModel.Description
                     }
 
                     if (isEncoded)
-                        mapping = this.SoapImporter.ImportMembersMapping(
-                            mappingName,
-                            ns,
-                            members,
-                            hasWrapperElement,
-                            rpc
-                        );
+                        mapping = this.SoapImporter
+                            .ImportMembersMapping(mappingName, ns, members, hasWrapperElement, rpc);
                     else
-                        mapping = this.XmlImporter.ImportMembersMapping(
-                            mappingName,
-                            ns,
-                            members,
-                            hasWrapperElement,
-                            rpc
-                        );
+                        mapping = this.XmlImporter
+                            .ImportMembersMapping(mappingName, ns, members, hasWrapperElement, rpc);
 
                     mapping.SetKey(mappingKey);
                     XmlMappings.Add(mappingKey, mapping);
@@ -1271,14 +1244,12 @@ namespace System.ServiceModel.Description
                 {
                     if (faultContractInfo == null)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperArgumentNull("faultContractInfo");
                     }
                     if (faultContractElementName == null)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperArgumentNull("faultContractElementName");
                     }
                     this.faultContractInfo = faultContractInfo;
@@ -1429,8 +1400,7 @@ namespace System.ServiceModel.Description
         )
         {
             if (isEncoded && isMultiple)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(
@@ -1469,8 +1439,7 @@ namespace System.ServiceModel.Description
                     else if (member.SoapAttributes.SoapType != null)
                         invalidAttributeType = typeof(SoapTypeAttribute);
                     if (invalidAttributeType != null)
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(
                                     SR.GetString(
@@ -1508,8 +1477,7 @@ namespace System.ServiceModel.Description
                     else if (member.XmlAttributes.XmlEnum != null)
                         invalidAttributeType = typeof(XmlEnumAttribute);
                     if (invalidAttributeType != null)
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(
                                     SR.GetString(
@@ -1522,8 +1490,7 @@ namespace System.ServiceModel.Description
                                 )
                             );
                     if (member.XmlAttributes.XmlArray != null && isMultiple)
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(
                                     SR.GetString(

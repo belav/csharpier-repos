@@ -121,8 +121,7 @@ public class FormatFilterTests
             new IFilterMetadata[] { }
         );
 
-        mockObjects
-            .MvcOptions
+        mockObjects.MvcOptions
             .FormatterMappings
             .SetMediaTypeMappingForFormat(format, MediaTypeHeaderValue.Parse(contentType));
 
@@ -215,8 +214,7 @@ public class FormatFilterTests
             new IFilterMetadata[] { produces }
         );
 
-        mockObjects
-            .MvcOptions
+        mockObjects.MvcOptions
             .FormatterMappings
             .SetMediaTypeMappingForFormat("xml", MediaTypeHeaderValue.Parse("application/xml"));
 
@@ -239,8 +237,7 @@ public class FormatFilterTests
             new IFilterMetadata[] { produces }
         );
 
-        mockObjects
-            .MvcOptions
+        mockObjects.MvcOptions
             .FormatterMappings
             .SetMediaTypeMappingForFormat(
                 "xml",
@@ -275,8 +272,7 @@ public class FormatFilterTests
             new IFilterMetadata[] { produces }
         );
 
-        mockObjects
-            .MvcOptions
+        mockObjects.MvcOptions
             .FormatterMappings
             .SetMediaTypeMappingForFormat("xml", MediaTypeHeaderValue.Parse("application/xml"));
 
@@ -515,13 +511,11 @@ public class FormatFilterTests
             // Set up default output formatters.
             MvcOptions.OutputFormatters.Add(new HttpNoContentOutputFormatter());
             MvcOptions.OutputFormatters.Add(new StringOutputFormatter());
-            MvcOptions
-                .OutputFormatters
+            MvcOptions.OutputFormatters
                 .Add(SystemTextJsonOutputFormatter.CreateFormatter(new JsonOptions()));
 
             // Set up default mapping for json extensions to content type
-            MvcOptions
-                .FormatterMappings
+            MvcOptions.FormatterMappings
                 .SetMediaTypeMappingForFormat(
                     "json",
                     MediaTypeHeaderValue.Parse("application/json")

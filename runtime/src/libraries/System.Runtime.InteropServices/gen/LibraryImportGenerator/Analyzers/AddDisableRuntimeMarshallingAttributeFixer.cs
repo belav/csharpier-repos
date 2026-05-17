@@ -54,8 +54,7 @@ namespace Microsoft.Interop.Analyzers
 
             static bool IsRequiresDiableRuntimeMarshallingDiagnostic(Diagnostic diagnostic)
             {
-                return diagnostic
-                    .Properties
+                return diagnostic.Properties
                     .ContainsKey(
                         GeneratorDiagnosticProperties.AddDisableRuntimeMarshallingAttribute
                     );
@@ -85,15 +84,12 @@ namespace Microsoft.Interop.Analyzers
 
             editor.ReplaceNode(
                 syntaxRoot,
-                editor
-                    .Generator
+                editor.Generator
                     .AddAttributes(
                         syntaxRoot,
-                        editor
-                            .Generator
+                        editor.Generator
                             .Attribute(
-                                editor
-                                    .Generator
+                                editor.Generator
                                     .DottedName(
                                         TypeNames.System_Runtime_CompilerServices_DisableRuntimeMarshallingAttribute
                                     )

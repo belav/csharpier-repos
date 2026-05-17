@@ -104,8 +104,7 @@ public class WrappingLoggerFactory : ILoggerFactory
         private string GetConnectionId()
         {
             string connectionId = null;
-            _provider
-                .ScopeProvider
+            _provider.ScopeProvider
                 ?.ForEachScope<object>(
                     (scope, s) =>
                     {

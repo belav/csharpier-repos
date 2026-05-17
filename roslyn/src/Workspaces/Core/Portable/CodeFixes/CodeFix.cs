@@ -69,8 +69,7 @@ namespace Microsoft.CodeAnalysis.CodeFixes
             }
             else if (diagnostic.Location.Kind == LocationKind.ExternalFile)
             {
-                var document = Project
-                    .Documents
+                var document = Project.Documents
                     .FirstOrDefault(d => d.FilePath == diagnostic.Location.GetLineSpan().Path);
                 if (document != null)
                 {

@@ -380,8 +380,7 @@ namespace System.Data.Objects
                     else
                     {
                         objectContext.EnsureMetadata();
-                        ospaceTypeUsage = objectContext
-                            .Perspective
+                        ospaceTypeUsage = objectContext.Perspective
                             .MetadataWorkspace
                             .GetOSpaceTypeUsage(typeUsage);
                     }

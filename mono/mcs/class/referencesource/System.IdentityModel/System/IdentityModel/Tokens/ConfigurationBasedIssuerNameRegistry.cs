@@ -50,8 +50,7 @@ namespace System.IdentityModel.Tokens
         {
             if (customConfiguration == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("customConfiguration");
             }
             //
@@ -69,8 +68,7 @@ namespace System.IdentityModel.Tokens
             XmlElement customConfigElement = configNodes[0];
 
             if (
-                !StringComparer
-                    .Ordinal
+                !StringComparer.Ordinal
                     .Equals(customConfigElement.LocalName, ConfigurationStrings.TrustedIssuers)
             )
             {
@@ -89,16 +87,13 @@ namespace System.IdentityModel.Tokens
                 if (childElement != null)
                 {
                     if (
-                        StringComparer
-                            .Ordinal
+                        StringComparer.Ordinal
                             .Equals(childElement.LocalName, ConfigurationStrings.Add)
                     )
                     {
-                        var thumbprintAttribute = childElement
-                            .Attributes
+                        var thumbprintAttribute = childElement.Attributes
                             .GetNamedItem(ConfigurationStrings.Thumbprint);
-                        var nameAttribute = childElement
-                            .Attributes
+                        var nameAttribute = childElement.Attributes
                             .GetNamedItem(ConfigurationStrings.Name);
 
                         if (childElement.Attributes.Count > 2 || thumbprintAttribute == null)
@@ -132,15 +127,13 @@ namespace System.IdentityModel.Tokens
                         _configuredTrustedIssuers.Add(thumbprint, issuerName);
                     }
                     else if (
-                        StringComparer
-                            .Ordinal
+                        StringComparer.Ordinal
                             .Equals(childElement.LocalName, ConfigurationStrings.Remove)
                     )
                     {
                         if (
                             childElement.Attributes.Count != 1
-                            || !StringComparer
-                                .Ordinal
+                            || !StringComparer.Ordinal
                                 .Equals(
                                     childElement.Attributes[0].LocalName,
                                     ConfigurationStrings.Thumbprint
@@ -161,16 +154,14 @@ namespace System.IdentityModel.Tokens
                             );
                         }
 
-                        string thumbprint = childElement
-                            .Attributes
+                        string thumbprint = childElement.Attributes
                             .GetNamedItem(ConfigurationStrings.Thumbprint)
                             .Value;
                         thumbprint = thumbprint.Replace(" ", "");
                         _configuredTrustedIssuers.Remove(thumbprint);
                     }
                     else if (
-                        StringComparer
-                            .Ordinal
+                        StringComparer.Ordinal
                             .Equals(childElement.LocalName, ConfigurationStrings.Clear)
                     )
                     {

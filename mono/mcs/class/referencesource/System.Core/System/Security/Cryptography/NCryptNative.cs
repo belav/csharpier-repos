@@ -1135,8 +1135,7 @@ namespace System.Security.Cryptography
                 {
                     // Attempt to load ncrypt.dll to see if the NCrypt CNG APIs are available on the machine
                     using (
-                        SafeLibraryHandle ncrypt = Microsoft
-                            .Win32
+                        SafeLibraryHandle ncrypt = Microsoft.Win32
                             .UnsafeNativeMethods
                             .LoadLibraryEx("ncrypt", IntPtr.Zero, 0)
                     )
@@ -1762,8 +1761,7 @@ namespace System.Security.Cryptography
 
             if (errorCode == ErrorCode.Success)
             {
-                System
-                    .Diagnostics
+                System.Diagnostics
                     .Debug
                     .Assert(cbResult == sizeof(int), "Expected cbResult=4, got " + cbResult);
             }

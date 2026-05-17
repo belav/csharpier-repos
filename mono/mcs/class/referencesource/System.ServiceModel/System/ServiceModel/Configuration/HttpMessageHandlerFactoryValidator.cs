@@ -24,8 +24,7 @@ namespace System.ServiceModel.Configuration
                 && configElement.Handlers.Count > 0
             )
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new ConfigurationErrorsException(
                             SR.GetString(

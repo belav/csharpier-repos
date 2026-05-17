@@ -238,8 +238,8 @@ namespace System.Workflow.ComponentModel.Compiler
             if (this.parameters == null)
             {
                 // Get the parameters
-                CodeParameterDeclarationExpressionCollection parameters =
-                    this.methodInfo.Parameters;
+                CodeParameterDeclarationExpressionCollection parameters = this.methodInfo
+                    .Parameters;
                 ParameterInfo[] paramArray = new ParameterInfo[parameters.Count];
 
                 for (int index = 0; index < parameters.Count; index++)

@@ -173,8 +173,7 @@ class MakeBundle
                     }
                     if (custom_mode)
                     {
-                        Console
-                            .Error
+                        Console.Error
                             .WriteLine(
                                 "--library can only be used with --simple/--runtime/--cross mode"
                             );
@@ -1027,8 +1026,7 @@ typedef struct {
                     if (String.IsNullOrEmpty(mono_api_struct_file))
                     {
                         tc.WriteLine("#define USE_DEFAULT_MONO_API_STRUCT");
-                        template_stream = typeof(MakeBundle)
-                            .Assembly
+                        template_stream = typeof(MakeBundle).Assembly
                             .GetManifestResourceStream("bundle-mono-api.inc");
                     }
                     else
@@ -1236,8 +1234,7 @@ typedef struct {
 
                     // This must go before any attempt to access `mono_api`
                     using (
-                        template_stream = System
-                            .Reflection
+                        template_stream = System.Reflection
                             .Assembly
                             .GetAssembly(typeof(MakeBundle))
                             .GetManifestResourceStream("template_common.inc")
@@ -1323,16 +1320,14 @@ typedef struct {
 
                     if (compress)
                     {
-                        template_stream = System
-                            .Reflection
+                        template_stream = System.Reflection
                             .Assembly
                             .GetAssembly(typeof(MakeBundle))
                             .GetManifestResourceStream("template_z.c");
                     }
                     else
                     {
-                        template_stream = System
-                            .Reflection
+                        template_stream = System.Reflection
                             .Assembly
                             .GetAssembly(typeof(MakeBundle))
                             .GetManifestResourceStream("template.c");
@@ -1346,8 +1341,7 @@ typedef struct {
 
                     if (!nomain && custom_main == null)
                     {
-                        Stream template_main_stream = System
-                            .Reflection
+                        Stream template_main_stream = System.Reflection
                             .Assembly
                             .GetAssembly(typeof(MakeBundle))
                             .GetManifestResourceStream("template_main.c");
@@ -1587,8 +1581,7 @@ typedef struct {
 
         if (error != null)
         {
-            Console
-                .Error
+            Console.Error
                 .WriteLine(
                     "Failure to load i18n assemblies, the following directories were searched for the assemblies:"
                 );
@@ -2188,8 +2181,7 @@ typedef struct {
             Version versionA;
             Version versionB;
 
-            var versionAMatch = System
-                .Text
+            var versionAMatch = System.Text
                 .RegularExpressions
                 .Regex
                 .Match(stringA, @"\d+(\.\d +) + ");
@@ -2285,13 +2277,11 @@ typedef struct {
             if (Environment.Is64BitProcess)
             {
                 key =
-                    Microsoft
-                        .Win32
+                    Microsoft.Win32
                         .Registry
                         .LocalMachine
                         .OpenSubKey(@"SOFTWARE\Wow6432Node" + subKey)
-                    ?? Microsoft
-                        .Win32
+                    ?? Microsoft.Win32
                         .Registry
                         .CurrentUser
                         .OpenSubKey(@"SOFTWARE\Wow6432Node" + subKey);
@@ -2332,16 +2322,14 @@ typedef struct {
                 {
                     foreach (var keyName in subKey.GetSubKeyNames())
                     {
-                        var keyNameIsVersion = System
-                            .Text
+                        var keyNameIsVersion = System.Text
                             .RegularExpressions
                             .Regex
                             .Match(keyName, @"\d+(\.\d+)+");
                         if (keyNameIsVersion.Success)
                         {
                             var installFolder = (string)
-                                Microsoft
-                                    .Win32
+                                Microsoft.Win32
                                     .Registry
                                     .GetValue(
                                         subKey.ToString() + @"\" + keyName,
@@ -2363,8 +2351,7 @@ typedef struct {
                 {
                     foreach (var valueName in subKey.GetValueNames())
                     {
-                        var valueNameIsKitsRoot = System
-                            .Text
+                        var valueNameIsKitsRoot = System.Text
                             .RegularExpressions
                             .Regex
                             .Match(valueName, @"KitsRoot\d*");
@@ -2374,8 +2361,7 @@ typedef struct {
                                 Microsoft.Win32.Registry.GetValue(subKey.ToString(), valueName, "");
                             if (!rootFolders.ContainsKey(installFolder))
                             {
-                                var valueNameIsVersion = System
-                                    .Text
+                                var valueNameIsVersion = System.Text
                                     .RegularExpressions
                                     .Regex
                                     .Match(valueName, @"\d+(\.*\d+)+");
@@ -2426,8 +2412,7 @@ typedef struct {
                                 "ucrt",
                                 "stdlib.h"
                             );
-                            var hasSubVersion = System
-                                .Text
+                            var hasSubVersion = System.Text
                                 .RegularExpressions
                                 .Regex
                                 .Match(version.Name, @"\d+(\.\d+)+");
@@ -2565,8 +2550,7 @@ typedef struct {
 
                 // Check that env doesn't already include needed values.
                 // If executed from a VS developer command prompt, SDK version set in env.
-                var winSDKVersion = System
-                    .Text
+                var winSDKVersion = System.Text
                     .RegularExpressions
                     .Regex
                     .Match(GetEnv("WindowsSdkVersion", ""), @"\d+(\.\d+)+");
@@ -2775,8 +2759,7 @@ typedef struct {
                                 var vcInstallationFolder = Path.Combine(vsInstalltionFolder, "VC");
 
                                 if (Directory.Exists(vcInstallationFolder))
-                                    vsSDK
-                                        .AdditionalSDKs
+                                    vsSDK.AdditionalSDKs
                                         .Add(
                                             new InstalledSDKInfo(
                                                 "VisualStudioVC",
@@ -2905,8 +2888,7 @@ typedef struct {
                     foreach (var currentInstalledSDK in installedVisualStudioSDKs)
                     {
                         // Find installed SDK based on requested info.
-                        visualStudioVCSDK = currentInstalledSDK
-                            .AdditionalSDKs
+                        visualStudioVCSDK = currentInstalledSDK.AdditionalSDKs
                             .Find(x => x.InstallationFolder == vcInstallDir);
                         if (visualStudioVCSDK != null)
                             break;
@@ -2919,8 +2901,7 @@ typedef struct {
             {
                 var visualStudioSDK = GetInstalledVisualStudioSDK();
                 if (visualStudioSDK != null)
-                    visualStudioVCSDK = visualStudioSDK
-                        .AdditionalSDKs
+                    visualStudioVCSDK = visualStudioSDK.AdditionalSDKs
                         .Find(x => x.Name == "VisualStudioVC");
             }
 
@@ -3283,8 +3264,7 @@ typedef struct {
         if (monoInstallDir.Length == 0)
         {
             using (
-                var baseKey = Microsoft
-                    .Win32
+                var baseKey = Microsoft.Win32
                     .RegistryKey
                     .OpenBaseKey(
                         Microsoft.Win32.RegistryHive.LocalMachine,

@@ -15,10 +15,10 @@ namespace System.ServiceModel.Security
     {
         internal static readonly XmlDictionaryString CarriedKeyElementName =
             XD.XmlEncryptionDictionary.CarriedKeyName;
-        internal static readonly XmlDictionaryString ElementName =
-            XD.XmlEncryptionDictionary.EncryptedKey;
-        internal static readonly XmlDictionaryString RecipientAttribute =
-            XD.XmlEncryptionDictionary.Recipient;
+        internal static readonly XmlDictionaryString ElementName = XD.XmlEncryptionDictionary
+            .EncryptedKey;
+        internal static readonly XmlDictionaryString RecipientAttribute = XD.XmlEncryptionDictionary
+            .Recipient;
 
         string carriedKeyName;
         string recipient;
@@ -57,8 +57,7 @@ namespace System.ServiceModel.Security
         {
             if (this.State == EncryptionState.New)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(SR.GetString(SR.BadEncryptionState))
                     );
@@ -70,8 +69,7 @@ namespace System.ServiceModel.Security
         {
             if (this.State != EncryptionState.New)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(SR.GetString(SR.BadEncryptionState))
                     );

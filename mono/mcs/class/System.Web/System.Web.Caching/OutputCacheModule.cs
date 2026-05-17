@@ -308,8 +308,7 @@ namespace System.Web.Caching
                     }
 
                     provider.Set(key, c, utcExpiry);
-                    HttpRuntime
-                        .InternalCache
+                    HttpRuntime.InternalCache
                         .Insert(
                             key,
                             c,

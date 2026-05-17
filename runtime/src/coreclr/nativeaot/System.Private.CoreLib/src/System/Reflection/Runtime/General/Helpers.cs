@@ -171,8 +171,7 @@ namespace System.Reflection.Runtime.General
             {
                 // No Invoke method found. Since delegate types are compiler constructed, the most likely cause is missing metadata rather than
                 // a missing Invoke method.
-                throw ReflectionCoreExecution
-                    .ExecutionEnvironment
+                throw ReflectionCoreExecution.ExecutionEnvironment
                     .CreateMissingMetadataException(delegateType.ToType());
             }
             return (RuntimeMethodInfo)invokeMethod;

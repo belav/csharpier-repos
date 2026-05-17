@@ -21,8 +21,7 @@ namespace System.Security.Cryptography
             // as parsed structures we will need to decrypt it for the user.
             const string ExportPassword = "DotnetExportPassphrase";
 
-            byte[] keyBlob = Interop
-                .AppleCrypto
+            byte[] keyBlob = Interop.AppleCrypto
                 .SecKeyExport(
                     includePrivateParameters ? keys.PrivateKey : keys.PublicKey,
                     exportPrivate: includePrivateParameters,
@@ -62,8 +61,7 @@ namespace System.Security.Cryptography
             using (SafeSecKeyRefHandle secPrivateKey = ImportLegacyPrivateKey(ref ecParameters))
             {
                 const string ExportPassword = "DotnetExportPassphrase";
-                byte[] keyBlob = Interop
-                    .AppleCrypto
+                byte[] keyBlob = Interop.AppleCrypto
                     .SecKeyExport(secPrivateKey, exportPrivate: true, password: ExportPassword);
                 EccKeyFormatHelper.ReadEncryptedPkcs8(
                     keyBlob,

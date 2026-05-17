@@ -297,8 +297,7 @@ namespace DbMetal.Generator
             _class.BaseTypes.Add(GetContextBaseType(database.BaseType));
 
             var onCreated = CreatePartialMethod("OnCreated");
-            onCreated
-                .StartDirectives
+            onCreated.StartDirectives
                 .Add(
                     new CodeRegionDirective(
                         CodeRegionMode.Start,
@@ -320,8 +319,7 @@ namespace DbMetal.Generator
                     Name = table.Member,
                     Type = new CodeTypeReference("Table", tableType),
                 };
-                property
-                    .GetStatements
+                property.GetStatements
                     .Add(
                         new CodeMethodReturnStatement(
                             new CodeMethodInvokeExpression(
@@ -369,11 +367,9 @@ namespace DbMetal.Generator
                     new CodeParameterDeclarationExpression(typeof(string), "connectionString"),
                 },
             };
-            constructor
-                .BaseConstructorArgs
+            constructor.BaseConstructorArgs
                 .Add(new CodeArgumentReferenceExpression("connectionString"));
-            constructor
-                .Statements
+            constructor.Statements
                 .Add(
                     new CodeExpressionStatement(
                         new CodeMethodInvokeExpression(thisReference, "OnCreated")
@@ -392,8 +388,7 @@ namespace DbMetal.Generator
                 },
             };
             constructor.BaseConstructorArgs.Add(new CodeArgumentReferenceExpression("connection"));
-            constructor
-                .Statements
+            constructor.Statements
                 .Add(
                     new CodeExpressionStatement(
                         new CodeMethodInvokeExpression(thisReference, "OnCreated")
@@ -413,11 +408,9 @@ namespace DbMetal.Generator
                 },
             };
             constructor.BaseConstructorArgs.Add(new CodeArgumentReferenceExpression("connection"));
-            constructor
-                .BaseConstructorArgs
+            constructor.BaseConstructorArgs
                 .Add(new CodeArgumentReferenceExpression("mappingSource"));
-            constructor
-                .Statements
+            constructor.Statements
                 .Add(
                     new CodeExpressionStatement(
                         new CodeMethodInvokeExpression(thisReference, "OnCreated")
@@ -436,11 +429,9 @@ namespace DbMetal.Generator
                 },
             };
             constructor.BaseConstructorArgs.Add(new CodeArgumentReferenceExpression("connection"));
-            constructor
-                .BaseConstructorArgs
+            constructor.BaseConstructorArgs
                 .Add(new CodeArgumentReferenceExpression("mappingSource"));
-            constructor
-                .Statements
+            constructor.Statements
                 .Add(
                     new CodeExpressionStatement(
                         new CodeMethodInvokeExpression(thisReference, "OnCreated")
@@ -470,8 +461,7 @@ namespace DbMetal.Generator
                 },
             };
             constructor.BaseConstructorArgs.Add(new CodeArgumentReferenceExpression("connection"));
-            constructor
-                .Statements
+            constructor.Statements
                 .Add(
                     new CodeExpressionStatement(
                         new CodeMethodInvokeExpression(thisReference, "OnCreated")
@@ -562,11 +552,9 @@ namespace DbMetal.Generator
                 },
             };
             constructor.BaseConstructorArgs.Add(new CodeArgumentReferenceExpression("connection"));
-            constructor
-                .BaseConstructorArgs
+            constructor.BaseConstructorArgs
                 .Add(new CodeObjectCreateExpression(Context.SchemaLoader.Vendor.GetType()));
-            constructor
-                .Statements
+            constructor.Statements
                 .Add(
                     new CodeExpressionStatement(
                         new CodeMethodInvokeExpression(thisReference, "OnCreated")
@@ -586,8 +574,7 @@ namespace DbMetal.Generator
             };
             constructor.BaseConstructorArgs.Add(new CodeArgumentReferenceExpression("connection"));
             constructor.BaseConstructorArgs.Add(new CodeArgumentReferenceExpression("sqlDialect"));
-            constructor
-                .Statements
+            constructor.Statements
                 .Add(
                     new CodeExpressionStatement(
                         new CodeMethodInvokeExpression(thisReference, "OnCreated")
@@ -607,12 +594,10 @@ namespace DbMetal.Generator
                 },
             };
             constructor.BaseConstructorArgs.Add(new CodeArgumentReferenceExpression("connection"));
-            constructor
-                .BaseConstructorArgs
+            constructor.BaseConstructorArgs
                 .Add(new CodeArgumentReferenceExpression("mappingSource"));
             constructor.BaseConstructorArgs.Add(new CodeArgumentReferenceExpression("sqlDialect"));
-            constructor
-                .Statements
+            constructor.Statements
                 .Add(
                     new CodeExpressionStatement(
                         new CodeMethodInvokeExpression(thisReference, "OnCreated")
@@ -653,14 +638,12 @@ namespace DbMetal.Generator
                 },
             };
             if (method.Parameters != null)
-                method
-                    .Parameters
+                method.Parameters
                     .AddRange(
                         function.Parameters.Select(x => GetFunctionParameterType(x)).ToArray()
                     );
             if (function.Return != null && !string.IsNullOrEmpty(function.Return.DbType))
-                method
-                    .ReturnTypeCustomAttributes
+                method.ReturnTypeCustomAttributes
                     .Add(
                         new CodeAttributeDeclaration(
                             "Parameter",
@@ -678,8 +661,7 @@ namespace DbMetal.Generator
                 var p = function.Parameters[i];
                 if (!p.DirectionOut)
                     continue;
-                method
-                    .Statements
+                method.Statements
                     .Add(
                         new CodeAssignStatement(
                             new CodeVariableReferenceExpression(p.Name),
@@ -703,12 +685,10 @@ namespace DbMetal.Generator
             };
             if (method.Parameters != null)
                 executeMethodCallArgs.AddRange(
-                    function
-                        .Parameters
+                    function.Parameters
                         .Select(p => (CodeExpression)new CodeVariableReferenceExpression(p.Name))
                 );
-            method
-                .Statements
+            method.Statements
                 .Add(
                     new CodeVariableDeclarationStatement(
                         new CodeTypeReference("IExecuteResult"),
@@ -724,8 +704,7 @@ namespace DbMetal.Generator
                 var p = function.Parameters[i];
                 if (!p.DirectionOut)
                     continue;
-                method
-                    .Statements
+                method.Statements
                     .Add(
                         new CodeAssignStatement(
                             new CodeVariableReferenceExpression(p.Name),
@@ -745,8 +724,7 @@ namespace DbMetal.Generator
 
             if (methodRetType != null)
             {
-                method
-                    .Statements
+                method.Statements
                     .Add(
                         new CodeMethodReturnStatement(
                             new CodeCastExpression(
@@ -870,8 +848,7 @@ namespace DbMetal.Generator
             {
                 // if the association has a storage, we use it. Otherwise, we use the property name
                 var entitySetMember = GetStorageFieldName(child);
-                constructor
-                    .Statements
+                constructor.Statements
                     .Add(
                         new CodeAssignStatement(
                             new CodeVariableReferenceExpression(entitySetMember),
@@ -900,8 +877,7 @@ namespace DbMetal.Generator
                         )
                     );
             }
-            constructor
-                .Statements
+            constructor.Statements
                 .Add(
                     new CodeExpressionStatement(
                         new CodeMethodInvokeExpression(thisReference, "OnCreated")
@@ -994,8 +970,7 @@ namespace DbMetal.Generator
                             new CodePrimitiveExpression(column.Expression)
                         )
                     );
-                property
-                    .CustomAttributes
+                property.CustomAttributes
                     .Add(new CodeAttributeDeclaration("Column", args.ToArray()));
                 property.CustomAttributes.Add(new CodeAttributeDeclaration("DebuggerNonUserCode"));
 
@@ -1071,8 +1046,7 @@ namespace DbMetal.Generator
                             new CodeVariableReferenceExpression(field.Name),
                             new CodePropertySetValueReferenceExpression()
                         );
-                property
-                    .SetStatements
+                property.SetStatements
                     .Add(new CodeConditionStatement(condition, whenUpdating.ToArray()));
                 _class.Members.Add(property);
             }
@@ -1195,8 +1169,7 @@ namespace DbMetal.Generator
         {
             var partialMethods = new[] { CreatePartialMethod("OnCreated") }
                 .Concat(
-                    table
-                        .Type
+                    table.Type
                         .Columns
                         .Select(c =>
                             new[] { CreateChangedMethodDecl(c), CreateChangingMethodDecl(c) }
@@ -1327,8 +1300,7 @@ namespace DbMetal.Generator
                 Attributes = MemberAttributes.Family,
                 Name = "SendPropertyChanging",
             };
-            method
-                .Statements
+            method.Statements
                 .Add(
                     new CodeVariableDeclarationStatement(typeof(PropertyChangingEventHandler), "h")
                     {
@@ -1338,8 +1310,7 @@ namespace DbMetal.Generator
                         ),
                     }
                 );
-            method
-                .Statements
+            method.Statements
                 .Add(
                     new CodeConditionStatement(
                         ValueIsNotNull(new CodeVariableReferenceExpression("h")),
@@ -1379,8 +1350,7 @@ namespace DbMetal.Generator
                     new CodeParameterDeclarationExpression(typeof(System.String), "propertyName"),
                 },
             };
-            method
-                .Statements
+            method.Statements
                 .Add(
                     new CodeVariableDeclarationStatement(typeof(PropertyChangedEventHandler), "h")
                     {
@@ -1390,8 +1360,7 @@ namespace DbMetal.Generator
                         ),
                     }
                 );
-            method
-                .Statements
+            method.Statements
                 .Add(
                     new CodeConditionStatement(
                         ValueIsNotNull(new CodeVariableReferenceExpression("h")),
@@ -1424,8 +1393,7 @@ namespace DbMetal.Generator
                 );
                 return;
             }
-            entity
-                .BaseTypes
+            entity.BaseTypes
                 .Add(
                     new CodeTypeReference(typeof(IEquatable<>))
                     {
@@ -1440,8 +1408,7 @@ namespace DbMetal.Generator
                 ReturnType = new CodeTypeReference(typeof(int)),
             };
             entity.Members.Add(method);
-            method
-                .Statements
+            method.Statements
                 .Add(
                     new CodeVariableDeclarationStatement(
                         typeof(int),
@@ -1487,8 +1454,7 @@ namespace DbMetal.Generator
                 }
                 method.Statements.Add(update);
             }
-            method
-                .Statements
+            method.Statements
                 .Add(new CodeMethodReturnStatement(new CodeVariableReferenceExpression("hc")));
 
             method = new CodeMemberMethod()
@@ -1505,16 +1471,14 @@ namespace DbMetal.Generator
                 },
             };
             entity.Members.Add(method);
-            method
-                .Statements
+            method.Statements
                 .Add(
                     new CodeConditionStatement(
                         ValueIsNull(new CodeVariableReferenceExpression("value")),
                         new CodeMethodReturnStatement(new CodePrimitiveExpression(false))
                     )
                 );
-            method
-                .Statements
+            method.Statements
                 .Add(
                     new CodeConditionStatement(
                         ValuesAreNotEqual_Ref(
@@ -1531,8 +1495,7 @@ namespace DbMetal.Generator
                         new CodeMethodReturnStatement(new CodePrimitiveExpression(false))
                     )
                 );
-            method
-                .Statements
+            method.Statements
                 .Add(
                     new CodeVariableDeclarationStatement(
                         new CodeTypeReference(entity.Name),
@@ -1543,8 +1506,7 @@ namespace DbMetal.Generator
                         )
                     )
                 );
-            method
-                .Statements
+            method.Statements
                 .Add(
                     new CodeMethodReturnStatement(
                         new CodeMethodInvokeExpression(
@@ -1572,8 +1534,7 @@ namespace DbMetal.Generator
                 },
             };
             entity.Members.Add(method);
-            method
-                .Statements
+            method.Statements
                 .Add(
                     new CodeConditionStatement(
                         ValueIsNull(new CodeVariableReferenceExpression("value")),
@@ -1676,15 +1637,13 @@ namespace DbMetal.Generator
                         },
                     };
                     childMembers.Add(property);
-                    property
-                        .GetStatements
+                    property.GetStatements
                         .Add(
                             new CodeMethodReturnStatement(
                                 new CodeFieldReferenceExpression(thisReference, storage)
                             )
                         );
-                    property
-                        .SetStatements
+                    property.SetStatements
                         .Add(
                             new CodeAssignStatement(
                                 new CodeFieldReferenceExpression(thisReference, storage),
@@ -1862,8 +1821,7 @@ namespace DbMetal.Generator
                 handlers.Add(attach);
                 if (havePrimaryKeys)
                     attach.Statements.Add(sendPropertyChanging);
-                attach
-                    .Statements
+                attach.Statements
                     .Add(
                         new CodeAssignStatement(
                             new CodePropertyReferenceExpression(
@@ -1882,8 +1840,7 @@ namespace DbMetal.Generator
                 handlers.Add(detach);
                 if (havePrimaryKeys)
                     detach.Statements.Add(sendPropertyChanging);
-                detach
-                    .Statements
+                detach.Statements
                     .Add(
                         new CodeAssignStatement(
                             new CodePropertyReferenceExpression(
@@ -1920,8 +1877,7 @@ namespace DbMetal.Generator
                     (from p in parents where p.Member == parent.Member select p).Count() > 1;
                 // WriteClassParent(writer, parent, hasDuplicates, schema, context);
                 // the following is apparently useless
-                DbLinq.Schema.Dbml.Table targetTable = schema
-                    .Tables
+                DbLinq.Schema.Dbml.Table targetTable = schema.Tables
                     .FirstOrDefault(t => t.Type.Name == parent.Type);
                 if (targetTable == null)
                 {
@@ -1939,8 +1895,7 @@ namespace DbMetal.Generator
                 }
 
                 var parentType = new CodeTypeReference(targetTable.Type.Name);
-                entity
-                    .Members
+                entity.Members
                     .Add(
                         new CodeMemberField(
                             new CodeTypeReference("EntityRef", parentType),
@@ -1990,8 +1945,7 @@ namespace DbMetal.Generator
                     },
                 };
                 parentMembers.Add(property);
-                property
-                    .GetStatements
+                property.GetStatements
                     .Add(
                         new CodeMethodReturnStatement(
                             new CodePropertyReferenceExpression(
@@ -2028,8 +1982,7 @@ namespace DbMetal.Generator
                     select table.Type.Columns.Single(c => c.Member == ck)
                 ).ToArray();
                 var parentKeys = parent.OtherKeys.ToArray();
-                property
-                    .SetStatements
+                property.SetStatements
                     .Add(
                         new CodeConditionStatement(
                             // 1.1
@@ -2115,8 +2068,7 @@ namespace DbMetal.Generator
                                     .Range(0, parentKeys.Length)
                                     .Select(i =>
                                     {
-                                        var column = parentTable
-                                            .Type
+                                        var column = parentTable.Type
                                             .Columns
                                             .Single(c => c.Member == childKeys[i]);
                                         return (CodeStatement)

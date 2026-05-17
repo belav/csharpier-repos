@@ -55,8 +55,7 @@ namespace System.ServiceModel
             );
             MessageFault fault = MessageFault.CreateFault(code, reason);
             string faultAction = messageVersion.Addressing.DefaultFaultAction;
-            Message message = System
-                .ServiceModel
+            Message message = System.ServiceModel
                 .Channels
                 .Message
                 .CreateMessage(messageVersion, fault, faultAction);

@@ -283,8 +283,7 @@ namespace System.ServiceModel.Description
                 if (t == typeof(global::System.ServiceModel.Description.MetadataSet)) { }
                 else
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(CreateUnknownTypeException(o));
                 }
             }
@@ -359,8 +358,7 @@ namespace System.ServiceModel.Description
                 if (t == typeof(global::System.ServiceModel.Description.MetadataSection)) { }
                 else
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(CreateUnknownTypeException(o));
                 }
             }
@@ -438,8 +436,7 @@ namespace System.ServiceModel.Description
                     }
                     else
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(CreateInvalidAnyTypeException(elem));
                     }
                 }
@@ -447,8 +444,7 @@ namespace System.ServiceModel.Description
                 {
                     if (o.@Metadata != null)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(CreateUnknownTypeException(o.@Metadata));
                     }
                 }
@@ -476,8 +472,7 @@ namespace System.ServiceModel.Description
                 if (t == typeof(global::System.ServiceModel.Description.MetadataLocation)) { }
                 else
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(CreateUnknownTypeException(o));
                 }
             }
@@ -523,8 +518,7 @@ namespace System.ServiceModel.Description
                 }
                 else
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(CreateUnknownNodeException());
                 }
             }
@@ -559,8 +553,7 @@ namespace System.ServiceModel.Description
                     )
                 ) { }
                 else
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             CreateUnknownTypeException((System.Xml.XmlQualifiedName)xsiType)
                         );
@@ -658,8 +651,7 @@ namespace System.ServiceModel.Description
                     )
                 ) { }
                 else
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             CreateUnknownTypeException((System.Xml.XmlQualifiedName)xsiType)
                         );
@@ -754,8 +746,7 @@ namespace System.ServiceModel.Description
                     )
                     {
                         {
-                            o.@Metadata = System
-                                .Web
+                            o.@Metadata = System.Web
                                 .Services
                                 .Description
                                 .ServiceDescription
@@ -774,8 +765,7 @@ namespace System.ServiceModel.Description
                         o.@Metadata =
                             (global::System.ServiceModel.Description.MetadataReference)ReadSerializable(
                                 (System.Xml.Serialization.IXmlSerializable)
-                                    System
-                                        .Activator
+                                    System.Activator
                                         .CreateInstance(
                                             typeof(global::System.ServiceModel.Description.MetadataReference),
                                             System.Reflection.BindingFlags.Instance
@@ -840,8 +830,7 @@ namespace System.ServiceModel.Description
                     )
                 ) { }
                 else
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             CreateUnknownTypeException((System.Xml.XmlQualifiedName)xsiType)
                         );
@@ -1061,15 +1050,13 @@ namespace System.ServiceModel.Description
             id139_XmlSchemaInclude = Reader.NameTable.Add(@"XmlSchemaInclude");
             id78_namespace = Reader.NameTable.Add(@"namespace");
             id18_attributeFormDefault = Reader.NameTable.Add(@"attributeFormDefault");
-            id100_XmlSchemaFractionDigitsFacet = Reader
-                .NameTable
+            id100_XmlSchemaFractionDigitsFacet = Reader.NameTable
                 .Add(@"XmlSchemaFractionDigitsFacet");
             id32_attributeGroup = Reader.NameTable.Add(@"attributeGroup");
             id64_XmlSchemaDocumentation = Reader.NameTable.Add(@"XmlSchemaDocumentation");
             id93_maxLength = Reader.NameTable.Add(@"maxLength");
             id49_type = Reader.NameTable.Add(@"type");
-            id86_XmlSchemaSimpleTypeRestriction = Reader
-                .NameTable
+            id86_XmlSchemaSimpleTypeRestriction = Reader.NameTable
                 .Add(@"XmlSchemaSimpleTypeRestriction");
             id96_length = Reader.NameTable.Add(@"length");
             id104_XmlSchemaLengthFacet = Reader.NameTable.Add(@"XmlSchemaLengthFacet");

@@ -165,8 +165,7 @@ namespace System.Xaml
         {
             return obj == null
                 ? XamlLanguage.Null
-                : owner
-                    .Type
+                : owner.Type
                     .SchemaContext
                     .GetXamlType(new InstanceContext(obj).GetRawValue().GetType());
         }

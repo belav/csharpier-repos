@@ -26,8 +26,7 @@ public abstract class SqlQueryTestBase<TFixture> : QueryTestBase<TFixture>
     public virtual async Task Bad_data_error_handling_invalid_cast_key(bool async)
     {
         using var context = CreateContext();
-        var query = context
-            .Database
+        var query = context.Database
             .SqlQueryRaw<UnmappedProduct>(
                 NormalizeDelimitersInRawString(
                     @"SELECT [ProductName] AS [ProductID], [ProductID] AS [ProductName], [SupplierID], [UnitPrice], [UnitsInStock], [Discontinued]
@@ -55,8 +54,7 @@ public abstract class SqlQueryTestBase<TFixture> : QueryTestBase<TFixture>
     public virtual async Task Bad_data_error_handling_invalid_cast(bool async)
     {
         using var context = CreateContext();
-        var query = context
-            .Database
+        var query = context.Database
             .SqlQueryRaw<UnmappedProduct>(
                 NormalizeDelimitersInRawString(
                     @"SELECT [ProductID], [ProductName] AS [UnitPrice], [ProductName], [SupplierID], [UnitsInStock], [Discontinued]
@@ -84,8 +82,7 @@ public abstract class SqlQueryTestBase<TFixture> : QueryTestBase<TFixture>
     public virtual async Task Bad_data_error_handling_invalid_cast_projection(bool async)
     {
         using var context = CreateContext();
-        var query = context
-            .Database
+        var query = context.Database
             .SqlQueryRaw<UnmappedProduct>(
                 NormalizeDelimitersInRawString(
                     @"SELECT [ProductID], [ProductName] AS [UnitPrice], [ProductName], [UnitsInStock], [Discontinued]
@@ -109,8 +106,7 @@ public abstract class SqlQueryTestBase<TFixture> : QueryTestBase<TFixture>
     public virtual async Task Bad_data_error_handling_invalid_cast_no_tracking(bool async)
     {
         using var context = CreateContext();
-        var query = context
-            .Database
+        var query = context.Database
             .SqlQueryRaw<UnmappedProduct>(
                 NormalizeDelimitersInRawString(
                     @"SELECT [ProductName] AS [ProductID], [ProductID] AS [ProductName], [SupplierID], [UnitPrice], [UnitsInStock], [Discontinued]
@@ -139,8 +135,7 @@ public abstract class SqlQueryTestBase<TFixture> : QueryTestBase<TFixture>
     public virtual async Task Bad_data_error_handling_null(bool async)
     {
         using var context = CreateContext();
-        var query = context
-            .Database
+        var query = context.Database
             .SqlQueryRaw<UnmappedProduct>(
                 NormalizeDelimitersInRawString(
                     @"SELECT [ProductID], [ProductName], [SupplierID], [UnitPrice], [UnitsInStock], NULL AS [Discontinued]
@@ -167,8 +162,7 @@ public abstract class SqlQueryTestBase<TFixture> : QueryTestBase<TFixture>
     public virtual async Task Bad_data_error_handling_null_projection(bool async)
     {
         using var context = CreateContext();
-        var query = context
-            .Database
+        var query = context.Database
             .SqlQueryRaw<UnmappedProduct>(
                 NormalizeDelimitersInRawString(
                     @"SELECT [ProductID], [ProductName], [SupplierID], [UnitPrice], [UnitsInStock], NULL AS [Discontinued]
@@ -192,8 +186,7 @@ public abstract class SqlQueryTestBase<TFixture> : QueryTestBase<TFixture>
     public virtual async Task Bad_data_error_handling_null_no_tracking(bool async)
     {
         using var context = CreateContext();
-        var query = context
-            .Database
+        var query = context.Database
             .SqlQueryRaw<UnmappedProduct>(
                 NormalizeDelimitersInRawString(
                     @"SELECT [ProductID], [ProductName], [SupplierID], [UnitPrice], [UnitsInStock], NULL AS [Discontinued]
@@ -302,8 +295,7 @@ public abstract class SqlQueryTestBase<TFixture> : QueryTestBase<TFixture>
     )
     {
         using var context = CreateContext();
-        var query = context
-            .Database
+        var query = context.Database
             .SqlQueryRaw<UnmappedCustomer>(
                 NormalizeDelimitersInRawString(
                     "SELECT [PostalCode], [Phone], [Fax], [CustomerID], [Country], [ContactTitle], [ContactName], [CompanyName], [City], [Address] FROM [Customers]"
@@ -379,8 +371,7 @@ public abstract class SqlQueryTestBase<TFixture> : QueryTestBase<TFixture>
         {
             var query = EF.CompileAsyncQuery(
                 (NorthwindContext context) =>
-                    context
-                        .Database
+                    context.Database
                         .SqlQueryRaw<UnmappedCustomer>(
                             NormalizeDelimitersInRawString("SELECT * FROM [Customers]")
                         )
@@ -398,8 +389,7 @@ public abstract class SqlQueryTestBase<TFixture> : QueryTestBase<TFixture>
         {
             var query = EF.CompileQuery(
                 (NorthwindContext context) =>
-                    context
-                        .Database
+                    context.Database
                         .SqlQueryRaw<UnmappedCustomer>(
                             NormalizeDelimitersInRawString("SELECT * FROM [Customers]")
                         )
@@ -423,8 +413,7 @@ public abstract class SqlQueryTestBase<TFixture> : QueryTestBase<TFixture>
         {
             var query = EF.CompileAsyncQuery(
                 (NorthwindContext context) =>
-                    context
-                        .Database
+                    context.Database
                         .SqlQueryRaw<UnmappedCustomer>(
                             NormalizeDelimitersInRawString(
                                 "SELECT * FROM [Customers] WHERE [CustomerID] = {0}"
@@ -445,8 +434,7 @@ public abstract class SqlQueryTestBase<TFixture> : QueryTestBase<TFixture>
         {
             var query = EF.CompileQuery(
                 (NorthwindContext context) =>
-                    context
-                        .Database
+                    context.Database
                         .SqlQueryRaw<UnmappedCustomer>(
                             NormalizeDelimitersInRawString(
                                 "SELECT * FROM [Customers] WHERE [CustomerID] = {0}"
@@ -473,8 +461,7 @@ public abstract class SqlQueryTestBase<TFixture> : QueryTestBase<TFixture>
         {
             var query = EF.CompileAsyncQuery(
                 (NorthwindContext context) =>
-                    context
-                        .Database
+                    context.Database
                         .SqlQueryRaw<UnmappedCustomer>(
                             NormalizeDelimitersInRawString(
                                 "SELECT * FROM [Customers] WHERE [CustomerID] = @customer"
@@ -495,8 +482,7 @@ public abstract class SqlQueryTestBase<TFixture> : QueryTestBase<TFixture>
         {
             var query = EF.CompileQuery(
                 (NorthwindContext context) =>
-                    context
-                        .Database
+                    context.Database
                         .SqlQueryRaw<UnmappedCustomer>(
                             NormalizeDelimitersInRawString(
                                 "SELECT * FROM [Customers] WHERE [CustomerID] = @customer"
@@ -525,8 +511,7 @@ public abstract class SqlQueryTestBase<TFixture> : QueryTestBase<TFixture>
         {
             var query = EF.CompileAsyncQuery(
                 (NorthwindContext context) =>
-                    context
-                        .Database
+                    context.Database
                         .SqlQueryRaw<UnmappedCustomer>(
                             NormalizeDelimitersInRawString(
                                 "SELECT * FROM [Customers] WHERE [CustomerID] = {0}"
@@ -547,8 +532,7 @@ public abstract class SqlQueryTestBase<TFixture> : QueryTestBase<TFixture>
         {
             var query = EF.CompileQuery(
                 (NorthwindContext context) =>
-                    context
-                        .Database
+                    context.Database
                         .SqlQueryRaw<UnmappedCustomer>(
                             NormalizeDelimitersInRawString(
                                 "SELECT * FROM [Customers] WHERE [CustomerID] = {0}"
@@ -575,14 +559,12 @@ public abstract class SqlQueryTestBase<TFixture> : QueryTestBase<TFixture>
         return AssertQuery(
             async,
             ss =>
-                from c in context
-                    .Database
+                from c in context.Database
                     .SqlQueryRaw<UnmappedCustomer>(
                         NormalizeDelimitersInRawString("SELECT * FROM [Customers]")
                     )
                 where
-                    context
-                        .Database
+                    context.Database
                         .SqlQueryRaw<UnmappedOrder>(
                             NormalizeDelimitersInRawString("SELECT * FROM [Orders]")
                         )
@@ -607,13 +589,11 @@ public abstract class SqlQueryTestBase<TFixture> : QueryTestBase<TFixture>
         return AssertQuery(
             async,
             _ =>
-                from c in context
-                    .Database
+                from c in context.Database
                     .SqlQueryRaw<UnmappedCustomer>(
                         NormalizeDelimitersInRawString("SELECT * FROM [Customers]")
                     )
-                from o in context
-                    .Database
+                from o in context.Database
                     .SqlQueryRaw<UnmappedOrder>(
                         NormalizeDelimitersInRawString("SELECT * FROM [Orders]")
                     )
@@ -644,13 +624,11 @@ public abstract class SqlQueryTestBase<TFixture> : QueryTestBase<TFixture>
         return AssertQuery(
             async,
             _ =>
-                from c in context
-                    .Database
+                from c in context.Database
                     .SqlQueryRaw<UnmappedCustomer>(
                         NormalizeDelimitersInRawString("SELECT * FROM [Customers]")
                     )
-                from o in context
-                    .Database
+                from o in context.Database
                     .SqlQueryRaw<UnmappedOrder>(
                         NormalizeDelimitersInRawString(
                             "SELECT * FROM [Orders] WHERE [OrderDate] BETWEEN {0} AND {1}"
@@ -689,16 +667,14 @@ public abstract class SqlQueryTestBase<TFixture> : QueryTestBase<TFixture>
         await AssertQuery(
             async,
             _ =>
-                from c in context
-                    .Database
+                from c in context.Database
                     .SqlQueryRaw<UnmappedCustomer>(
                         NormalizeDelimitersInRawString(
                             "SELECT * FROM [Customers] WHERE [City] = {0}"
                         ),
                         city
                     )
-                from o in context
-                    .Database
+                from o in context.Database
                     .SqlQueryRaw<UnmappedOrder>(
                         NormalizeDelimitersInRawString(
                             "SELECT * FROM [Orders] WHERE [OrderDate] BETWEEN {0} AND {1}"
@@ -729,16 +705,14 @@ public abstract class SqlQueryTestBase<TFixture> : QueryTestBase<TFixture>
         await AssertQuery(
             async,
             _ =>
-                from c in context
-                    .Database
+                from c in context.Database
                     .SqlQueryRaw<UnmappedCustomer>(
                         NormalizeDelimitersInRawString(
                             "SELECT * FROM [Customers] WHERE [City] = {0}"
                         ),
                         city
                     )
-                from o in context
-                    .Database
+                from o in context.Database
                     .SqlQueryRaw<UnmappedOrder>(
                         NormalizeDelimitersInRawString(
                             "SELECT * FROM [Orders] WHERE [OrderDate] BETWEEN {0} AND {1}"
@@ -927,16 +901,14 @@ FROM [Customers]"
         await AssertQuery(
             async,
             _ =>
-                from c in context
-                    .Database
+                from c in context.Database
                     .SqlQueryRaw<UnmappedCustomer>(
                         NormalizeDelimitersInRawString(
                             "SELECT * FROM [Customers] WHERE [City] = {0}"
                         ),
                         city
                     )
-                from o in context
-                    .Database
+                from o in context.Database
                     .SqlQuery<UnmappedOrder>(
                         NormalizeDelimitersInInterpolatedString(
                             $"SELECT * FROM [Orders] WHERE [OrderDate] BETWEEN {startDate} AND {endDate}"
@@ -965,16 +937,14 @@ FROM [Customers]"
         await AssertQuery(
             async,
             _ =>
-                from c in context
-                    .Database
+                from c in context.Database
                     .SqlQueryRaw<UnmappedCustomer>(
                         NormalizeDelimitersInRawString(
                             "SELECT * FROM [Customers] WHERE [City] = {0}"
                         ),
                         city
                     )
-                from o in context
-                    .Database
+                from o in context.Database
                     .SqlQuery<UnmappedOrder>(
                         NormalizeDelimitersInInterpolatedString(
                             $"SELECT * FROM [Orders] WHERE [OrderDate] BETWEEN {startDate} AND {endDate}"
@@ -1033,8 +1003,7 @@ FROM [Customers]"
         var contactTitle = "Sales Representative";
 
         using var context = CreateContext();
-        var query = context
-            .Database
+        var query = context.Database
             .SqlQueryRaw<UnmappedCustomer>(
                 NormalizeDelimitersInRawString("SELECT * FROM [Customers] WHERE [City] = {0}"),
                 city
@@ -1206,8 +1175,7 @@ AND (([UnitsInStock] + [UnitsOnOrder]) < [ReorderLevel])"
     public virtual async Task SqlQueryRaw_annotations_do_not_affect_successive_calls(bool async)
     {
         using var context = CreateContext();
-        var query = context
-            .Database
+        var query = context.Database
             .SqlQueryRaw<UnmappedCustomer>(
                 NormalizeDelimitersInRawString(
                     "SELECT * FROM [Customers] WHERE [ContactName] LIKE '%z%'"
@@ -1218,8 +1186,7 @@ AND (([UnitsInStock] + [UnitsOnOrder]) < [ReorderLevel])"
 
         Assert.Equal(14, actual.Length);
 
-        query = context
-            .Database
+        query = context.Database
             .SqlQueryRaw<UnmappedCustomer>(
                 NormalizeDelimitersInRawString("SELECT * FROM [Customers]")
             );
@@ -1384,8 +1351,7 @@ AND (([UnitsInStock] + [UnitsOnOrder]) < [ReorderLevel])"
         using var context = CreateContext();
         var parameter = CreateDbParameter("@id", "ALFKI");
 
-        var query = context
-            .Database
+        var query = context.Database
             .SqlQueryRaw<UnmappedCustomer>(
                 NormalizeDelimitersInRawString(
                     "SELECT * FROM [Customers] WHERE [CustomerID] = @id"
@@ -1464,8 +1430,7 @@ AND (([UnitsInStock] + [UnitsOnOrder]) < [ReorderLevel])"
         var min = 10300;
         var max = 10400;
 
-        var query1 = context
-            .Database
+        var query1 = context.Database
             .SqlQuery<UnmappedOrder>(
                 NormalizeDelimitersInInterpolatedString(
                     $"SELECT * FROM [Orders] WHERE [OrderID] >= {min}"
@@ -1475,21 +1440,18 @@ AND (([UnitsInStock] + [UnitsOnOrder]) < [ReorderLevel])"
 
         var actual1 = async ? await query1.ToArrayAsync() : query1.ToArray();
 
-        var query2 = context
-            .Database
+        var query2 = context.Database
             .SqlQueryRaw<UnmappedOrder>(NormalizeDelimitersInRawString("SELECT * FROM [Orders]"))
             .Where(o => o.OrderID <= max && query1.Contains(o.OrderID))
             .Select(o => o.OrderID);
 
         var actual2 = async ? await query2.ToArrayAsync() : query2.ToArray();
 
-        var query3 = context
-            .Database
+        var query3 = context.Database
             .SqlQueryRaw<UnmappedOrder>(NormalizeDelimitersInRawString("SELECT * FROM [Orders]"))
             .Where(o =>
                 o.OrderID <= max
-                && context
-                    .Database
+                && context.Database
                     .SqlQuery<UnmappedOrder>(
                         NormalizeDelimitersInInterpolatedString(
                             $"SELECT * FROM [Orders] WHERE [OrderID] >= {min}"
@@ -1538,16 +1500,14 @@ AND (([UnitsInStock] + [UnitsOnOrder]) < [ReorderLevel])"
         return AssertQuery(
             async,
             _ =>
-                context
-                    .Database
+                context.Database
                     .SqlQueryRaw<UnmappedCustomer>(
                         NormalizeDelimitersInRawString(
                             "SELECT * FROM [Customers] WHERE [City] = 'London'"
                         )
                     )
                     .Concat(
-                        context
-                            .Database
+                        context.Database
                             .SqlQueryRaw<UnmappedCustomer>(
                                 NormalizeDelimitersInRawString(
                                     "SELECT * FROM [Customers] WHERE [City] = 'Berlin'"
@@ -1619,14 +1579,12 @@ AND (([UnitsInStock] + [UnitsOnOrder]) < [ReorderLevel])"
         return AssertQuery(
             async,
             _ =>
-                context
-                    .Database
+                context.Database
                     .SqlQueryRaw<UnmappedOrder>(
                         NormalizeDelimitersInRawString("SELECT * FROM [Orders]")
                     )
                     .Where(o =>
-                        context
-                            .Database
+                        context.Database
                             .SqlQueryRaw<UnmappedCustomer>(
                                 NormalizeDelimitersInRawString(
                                     @"SELECT * FROM [Customers] WHERE [City] = @city"
@@ -1661,14 +1619,12 @@ AND (([UnitsInStock] + [UnitsOnOrder]) < [ReorderLevel])"
         return AssertQuery(
             async,
             _ =>
-                context
-                    .Database
+                context.Database
                     .SqlQueryRaw<UnmappedOrder>(
                         NormalizeDelimitersInRawString("SELECT * FROM [Orders]")
                     )
                     .Where(o =>
-                        context
-                            .Database
+                        context.Database
                             .SqlQueryRaw<UnmappedCustomer>(
                                 NormalizeDelimitersInRawString(
                                     @"SELECT * FROM [Customers] WHERE [City] = {0}"
@@ -1703,14 +1659,12 @@ AND (([UnitsInStock] + [UnitsOnOrder]) < [ReorderLevel])"
         return AssertQuery(
             async,
             _ =>
-                context
-                    .Database
+                context.Database
                     .SqlQueryRaw<UnmappedOrder>(
                         NormalizeDelimitersInRawString("SELECT * FROM [Orders]")
                     )
                     .Where(o =>
-                        context
-                            .Database
+                        context.Database
                             .SqlQueryRaw<UnmappedCustomer>(
                                 NormalizeDelimitersInRawString(
                                     @"SELECT * FROM [Customers] WHERE [City] = {0}"
@@ -1747,14 +1701,12 @@ AND (([UnitsInStock] + [UnitsOnOrder]) < [ReorderLevel])"
         await AssertQuery(
             async,
             _ =>
-                context
-                    .Database
+                context.Database
                     .SqlQueryRaw<UnmappedOrder>(
                         NormalizeDelimitersInRawString("SELECT * FROM [Orders]")
                     )
                     .Where(o =>
-                        context
-                            .Database
+                        context.Database
                             .SqlQueryRaw<UnmappedCustomer>(
                                 NormalizeDelimitersInRawString(
                                     @"SELECT * FROM [Customers] WHERE [City] = {0} AND [ContactTitle] = @title"
@@ -1783,14 +1735,12 @@ AND (([UnitsInStock] + [UnitsOnOrder]) < [ReorderLevel])"
         await AssertQuery(
             async,
             _ =>
-                context
-                    .Database
+                context.Database
                     .SqlQueryRaw<UnmappedOrder>(
                         NormalizeDelimitersInRawString("SELECT * FROM [Orders]")
                     )
                     .Where(o =>
-                        context
-                            .Database
+                        context.Database
                             .SqlQueryRaw<UnmappedCustomer>(
                                 NormalizeDelimitersInRawString(
                                     @"SELECT * FROM [Customers] WHERE [City] = @city AND [ContactTitle] = {1}"
@@ -1853,8 +1803,7 @@ SELECT * FROM [Customers2]
     {
         using var context = CreateContext();
         var city = "Seattle";
-        var qqlQuery = context
-            .Database
+        var qqlQuery = context.Database
             .SqlQueryRaw<UnmappedCustomer>(
                 NormalizeDelimitersInRawString(@"SELECT * FROM [Customers] WHERE [City] = {0}"),
                 CreateDbParameter("city", city)
@@ -1876,8 +1825,7 @@ SELECT * FROM [Customers2]
             CoreStrings.NavigationNotAddedAdHoc("Post", "Blog", "Blog"),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    context
-                        .Database
+                    context.Database
                         .SqlQueryRaw<Post>(NormalizeDelimitersInRawString(@"SELECT * FROM [Posts]"))
                 )
                 .Message
@@ -1893,8 +1841,7 @@ SELECT * FROM [Customers2]
             CoreStrings.NavigationNotAddedAdHoc("Blog", "Posts", "List<Post>"),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    context
-                        .Database
+                    context.Database
                         .SqlQueryRaw<Blog>(NormalizeDelimitersInRawString(@"SELECT * FROM [Blogs]"))
                 )
                 .Message
@@ -1910,8 +1857,7 @@ SELECT * FROM [Customers2]
             CoreStrings.PropertyNotAddedAdHoc("Person", "Contact", "ContactInfo"),
             Assert
                 .Throws<InvalidOperationException>(() =>
-                    context
-                        .Database
+                    context.Database
                         .SqlQueryRaw<Person>(
                             NormalizeDelimitersInRawString(@"SELECT * FROM [People]")
                         )

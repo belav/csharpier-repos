@@ -15,14 +15,11 @@ namespace System.Net.Security
 {
     internal static class SslStreamPal
     {
-        private static readonly byte[] s_http1 = Interop
-            .Sec_Application_Protocols
+        private static readonly byte[] s_http1 = Interop.Sec_Application_Protocols
             .ToByteArray(new List<SslApplicationProtocol> { SslApplicationProtocol.Http11 });
-        private static readonly byte[] s_http2 = Interop
-            .Sec_Application_Protocols
+        private static readonly byte[] s_http2 = Interop.Sec_Application_Protocols
             .ToByteArray(new List<SslApplicationProtocol> { SslApplicationProtocol.Http2 });
-        private static readonly byte[] s_http12 = Interop
-            .Sec_Application_Protocols
+        private static readonly byte[] s_http12 = Interop.Sec_Application_Protocols
             .ToByteArray(
                 new List<SslApplicationProtocol>
                 {
@@ -30,8 +27,7 @@ namespace System.Net.Security
                     SslApplicationProtocol.Http2,
                 }
             );
-        private static readonly byte[] s_http21 = Interop
-            .Sec_Application_Protocols
+        private static readonly byte[] s_http21 = Interop.Sec_Application_Protocols
             .ToByteArray(
                 new List<SslApplicationProtocol>
                 {
@@ -371,8 +367,7 @@ namespace System.Net.Security
                 )
             {
                 Debug.Assert(certificateContext.TargetCertificate.HasPrivateKey);
-                using SafeCertContextHandle safeCertContextHandle = Interop
-                    .Crypt32
+                using SafeCertContextHandle safeCertContextHandle = Interop.Crypt32
                     .CertDuplicateCertificateContext(certificateContext.TargetCertificate.Handle);
                 // on Windows we do not support ephemeral keys.
                 throw new AuthenticationException(
@@ -394,8 +389,7 @@ namespace System.Net.Security
             fixed (char* ptr = store.Name)
             {
                 clientCertPolicy.pwszSslCtlStoreName = ptr;
-                Interop.SECURITY_STATUS errorCode = Interop
-                    .SspiCli
+                Interop.SECURITY_STATUS errorCode = Interop.SspiCli
                     .SetCredentialsAttributesW(
                         cred._handle,
                         (long)Interop.SspiCli.ContextAttribute.SECPKG_ATTR_CLIENT_CERT_POLICY,
@@ -658,8 +652,7 @@ namespace System.Net.Security
                 emptySecBuffer->cbBuffer = 0;
                 emptySecBuffer->pvBuffer = IntPtr.Zero;
 
-                int errorCode = GlobalSSPI
-                    .SSPISecureChannel
+                int errorCode = GlobalSSPI.SSPISecureChannel
                     .EncryptMessage(securityContext, ref sdcInOut, 0);
 
                 if (errorCode != 0)
@@ -722,8 +715,7 @@ namespace System.Net.Security
                     pBuffers = unmanagedBuffer,
                 };
                 Interop.SECURITY_STATUS errorCode = (Interop.SECURITY_STATUS)
-                    GlobalSSPI
-                        .SSPISecureChannel
+                    GlobalSSPI.SSPISecureChannel
                         .DecryptMessage(securityContext!, ref sdcInOut, out _);
 
                 // Decrypt may repopulate the sec buffers, likely with header + data + trailer + empty.

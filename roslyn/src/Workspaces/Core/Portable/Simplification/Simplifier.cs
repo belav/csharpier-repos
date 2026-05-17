@@ -436,8 +436,7 @@ namespace Microsoft.CodeAnalysis.Simplification
         )
         {
             optionSet ??= await document.GetOptionsAsync(cancellationToken).ConfigureAwait(false);
-            var simplificationService = document
-                .Project
+            var simplificationService = document.Project
                 .Solution
                 .Services
                 .GetRequiredLanguageService<ISimplificationService>(document.Project.Language);

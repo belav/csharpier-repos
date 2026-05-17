@@ -134,8 +134,7 @@ namespace System.Security.Cryptography.Pkcs.Asn1
             )
             {
                 System.Security.Cryptography.Pkcs.Asn1.OriginatorInfoAsn tmpOriginatorInfo;
-                System
-                    .Security
+                System.Security
                     .Cryptography
                     .Pkcs
                     .Asn1
@@ -157,8 +156,7 @@ namespace System.Security.Cryptography.Pkcs.Asn1
 
                 while (collectionReader.HasData)
                 {
-                    System
-                        .Security
+                    System.Security
                         .Cryptography
                         .Pkcs
                         .Asn1
@@ -170,8 +168,7 @@ namespace System.Security.Cryptography.Pkcs.Asn1
                 decoded.RecipientInfos = tmpList.ToArray();
             }
 
-            System
-                .Security
+            System.Security
                 .Cryptography
                 .Asn1
                 .Pkcs7
@@ -195,8 +192,7 @@ namespace System.Security.Cryptography.Pkcs.Asn1
 
                     while (collectionReader.HasData)
                     {
-                        System
-                            .Security
+                        System.Security
                             .Cryptography
                             .Asn1
                             .AttributeAsn

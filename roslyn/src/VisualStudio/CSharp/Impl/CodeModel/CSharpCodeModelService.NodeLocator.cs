@@ -480,28 +480,25 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                             switch (node.Kind())
                             {
                                 case SyntaxKind.MethodDeclaration:
-                                    startPosition = ((MethodDeclarationSyntax)node)
-                                        .Identifier
+                                    startPosition = ((MethodDeclarationSyntax)node).Identifier
                                         .SpanStart;
                                     break;
                                 case SyntaxKind.ConstructorDeclaration:
-                                    startPosition = ((ConstructorDeclarationSyntax)node)
-                                        .Identifier
+                                    startPosition = ((ConstructorDeclarationSyntax)node).Identifier
                                         .SpanStart;
                                     break;
                                 case SyntaxKind.DestructorDeclaration:
-                                    startPosition = ((DestructorDeclarationSyntax)node)
-                                        .Identifier
+                                    startPosition = ((DestructorDeclarationSyntax)node).Identifier
                                         .SpanStart;
                                     break;
                                 case SyntaxKind.ConversionOperatorDeclaration:
-                                    startPosition = ((ConversionOperatorDeclarationSyntax)node)
-                                        .ImplicitOrExplicitKeyword
+                                    startPosition = (
+                                        (ConversionOperatorDeclarationSyntax)node
+                                    ).ImplicitOrExplicitKeyword
                                         .SpanStart;
                                     break;
                                 case SyntaxKind.OperatorDeclaration:
-                                    startPosition = ((OperatorDeclarationSyntax)node)
-                                        .OperatorToken
+                                    startPosition = ((OperatorDeclarationSyntax)node).OperatorToken
                                         .SpanStart;
                                     break;
                                 default:
@@ -1154,32 +1151,29 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                             switch (node.Kind())
                             {
                                 case SyntaxKind.MethodDeclaration:
-                                    endPosition = ((MethodDeclarationSyntax)node)
-                                        .Identifier
+                                    endPosition = ((MethodDeclarationSyntax)node).Identifier
                                         .Span
                                         .End;
                                     break;
                                 case SyntaxKind.ConstructorDeclaration:
-                                    endPosition = ((ConstructorDeclarationSyntax)node)
-                                        .Identifier
+                                    endPosition = ((ConstructorDeclarationSyntax)node).Identifier
                                         .Span
                                         .End;
                                     break;
                                 case SyntaxKind.DestructorDeclaration:
-                                    endPosition = ((DestructorDeclarationSyntax)node)
-                                        .Identifier
+                                    endPosition = ((DestructorDeclarationSyntax)node).Identifier
                                         .Span
                                         .End;
                                     break;
                                 case SyntaxKind.ConversionOperatorDeclaration:
-                                    endPosition = ((ConversionOperatorDeclarationSyntax)node)
-                                        .ImplicitOrExplicitKeyword
+                                    endPosition = (
+                                        (ConversionOperatorDeclarationSyntax)node
+                                    ).ImplicitOrExplicitKeyword
                                         .Span
                                         .End;
                                     break;
                                 case SyntaxKind.OperatorDeclaration:
-                                    endPosition = ((OperatorDeclarationSyntax)node)
-                                        .OperatorToken
+                                    endPosition = ((OperatorDeclarationSyntax)node).OperatorToken
                                         .Span
                                         .End;
                                     break;

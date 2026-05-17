@@ -25,8 +25,7 @@ namespace System.ServiceModel.Description
         {
             if (endpointDispatcher == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("endpointDispatcher");
             }
 

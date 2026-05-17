@@ -171,8 +171,7 @@ namespace System.Workflow.Activities.Rules.Design
             );
             projectedValue.Append(currentValue.Substring(selectionStart + selectionLength));
 
-            System
-                .Diagnostics
+            System.Diagnostics
                 .Trace
                 .WriteLine(
                     string.Format(

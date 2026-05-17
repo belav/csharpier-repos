@@ -960,8 +960,7 @@ namespace System.Web.Http.Routing
                 // Handle a single literal segment
                 PathLiteralSubsegment literalSubsegment = pathSubsegment as PathLiteralSubsegment;
                 Contract.Assert(literalSubsegment != null, "Invalid path segment type");
-                return literalSubsegment
-                    .Literal
+                return literalSubsegment.Literal
                     .Equals(requestPathSegment, StringComparison.OrdinalIgnoreCase);
             }
             else

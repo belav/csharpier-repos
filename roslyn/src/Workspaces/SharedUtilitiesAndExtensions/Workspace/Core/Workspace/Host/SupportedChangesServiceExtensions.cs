@@ -14,8 +14,7 @@ namespace Microsoft.CodeAnalysis
             ParseOptions oldOptions,
             ParseOptions newOptions
         ) =>
-            project
-                .Solution
+            project.Solution
                 .Services
                 .GetRequiredService<ISupportedChangesService>()
                 .CanApplyParseOptionChange(oldOptions, newOptions, project);

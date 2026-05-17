@@ -45,8 +45,7 @@ internal sealed class NewtonsoftJsonMvcOptionsSetup : IConfigureOptions<MvcOptio
     public void Configure(MvcOptions options)
     {
         options.OutputFormatters.RemoveType<SystemTextJsonOutputFormatter>();
-        options
-            .OutputFormatters
+        options.OutputFormatters
             .Add(
                 new NewtonsoftJsonOutputFormatter(
                     _jsonOptions.SerializerSettings,
@@ -61,8 +60,7 @@ internal sealed class NewtonsoftJsonMvcOptionsSetup : IConfigureOptions<MvcOptio
         // JsonInputFormatter would consume "application/json-patch+json" requests
         // before JsonPatchInputFormatter gets to see them.
         var jsonInputPatchLogger = _loggerFactory.CreateLogger<NewtonsoftJsonPatchInputFormatter>();
-        options
-            .InputFormatters
+        options.InputFormatters
             .Add(
                 new NewtonsoftJsonPatchInputFormatter(
                     jsonInputPatchLogger,
@@ -75,8 +73,7 @@ internal sealed class NewtonsoftJsonMvcOptionsSetup : IConfigureOptions<MvcOptio
             );
 
         var jsonInputLogger = _loggerFactory.CreateLogger<NewtonsoftJsonInputFormatter>();
-        options
-            .InputFormatters
+        options.InputFormatters
             .Add(
                 new NewtonsoftJsonInputFormatter(
                     jsonInputLogger,
@@ -88,15 +85,12 @@ internal sealed class NewtonsoftJsonMvcOptionsSetup : IConfigureOptions<MvcOptio
                 )
             );
 
-        options
-            .FormatterMappings
+        options.FormatterMappings
             .SetMediaTypeMappingForFormat("json", MediaTypeHeaderValues.ApplicationJson);
 
-        options
-            .ModelMetadataDetailsProviders
+        options.ModelMetadataDetailsProviders
             .Add(new SuppressChildValidationMetadataProvider(typeof(IJsonPatchDocument)));
-        options
-            .ModelMetadataDetailsProviders
+        options.ModelMetadataDetailsProviders
             .Add(new SuppressChildValidationMetadataProvider(typeof(JToken)));
     }
 }

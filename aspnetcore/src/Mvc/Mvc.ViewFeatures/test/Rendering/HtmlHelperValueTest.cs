@@ -160,8 +160,7 @@ public class HtmlHelperValueTest
         viewData["StringProperty"] = "ViewDataValue";
         viewData.TemplateInfo.HtmlFieldPrefix = "FieldPrefix";
 
-        viewData
-            .ModelState
+        viewData.ModelState
             .SetModelValue(
                 "FieldPrefix.StringProperty",
                 "StringPropertyRawValue",
@@ -220,8 +219,7 @@ public class HtmlHelperValueTest
         var viewData = helper.ViewData;
         viewData["StringProperty"] = "ViewDataValue <\"\">";
 
-        viewData
-            .ModelState
+        viewData.ModelState
             .SetModelValue(
                 "ObjectProperty",
                 "ObjectPropertyRawValue <\"\">",

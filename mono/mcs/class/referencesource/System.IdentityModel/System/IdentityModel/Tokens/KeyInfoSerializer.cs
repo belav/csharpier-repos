@@ -67,9 +67,8 @@ namespace System.IdentityModel.Tokens
 
             this.serializerEntries.Add(new XmlDsigSep2000(this));
             this.serializerEntries.Add(new XmlEncApr2001(this));
-            this.serializerEntries.Add(
-                new System.IdentityModel.Security.WSTrust(this, trustDictionary)
-            );
+            this.serializerEntries
+                .Add(new System.IdentityModel.Security.WSTrust(this, trustDictionary));
             if (additionalEntries != null)
             {
                 foreach (SerializerEntries entries in additionalEntries(this))
@@ -144,8 +143,7 @@ namespace System.IdentityModel.Tokens
         )
         {
             XmlDictionaryReader localReader = XmlDictionaryReader.CreateDictionaryReader(reader);
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(
                     new XmlException(
                         SR.GetString(
@@ -165,8 +163,7 @@ namespace System.IdentityModel.Tokens
 
         protected override void WriteTokenCore(XmlWriter writer, SecurityToken token)
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(
                     new InvalidOperationException(
                         SR.GetString(SR.StandardsManagerCannotWriteObject, token.GetType())
@@ -196,8 +193,8 @@ namespace System.IdentityModel.Tokens
             SecurityKeyIdentifier keyIdentifier = new SecurityKeyIdentifier();
             while (localReader.IsStartElement())
             {
-                SecurityKeyIdentifierClause clause =
-                    this.InnerSecurityTokenSerializer.ReadKeyIdentifierClause(localReader);
+                SecurityKeyIdentifierClause clause = this.InnerSecurityTokenSerializer
+                    .ReadKeyIdentifierClause(localReader);
                 if (clause == null)
                 {
                     localReader.Skip();
@@ -209,8 +206,7 @@ namespace System.IdentityModel.Tokens
             }
             if (keyIdentifier.Count == 0)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new XmlException(SR.GetString(SR.ErrorDeserializingKeyIdentifierClause))
                     );
@@ -258,8 +254,7 @@ namespace System.IdentityModel.Tokens
                             throw;
                         }
 
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new XmlException(SR.GetString(SR.ErrorSerializingKeyIdentifier), e)
                             );
@@ -270,8 +265,7 @@ namespace System.IdentityModel.Tokens
             }
 
             if (!wroteKeyIdentifier)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(
@@ -322,8 +316,7 @@ namespace System.IdentityModel.Tokens
                         {
                             throw;
                         }
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new XmlException(
                                     SR.GetString(SR.ErrorDeserializingKeyIdentifierClause),
@@ -333,8 +326,7 @@ namespace System.IdentityModel.Tokens
                     }
                 }
             }
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(
                     new XmlException(
                         SR.GetString(
@@ -393,8 +385,7 @@ namespace System.IdentityModel.Tokens
                             throw;
                         }
 
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new XmlException(
                                     SR.GetString(SR.ErrorSerializingKeyIdentifierClause),
@@ -408,8 +399,7 @@ namespace System.IdentityModel.Tokens
             }
 
             if (!wroteKeyIdentifierClause)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(

@@ -70,8 +70,7 @@ namespace System.ServiceModel.Activation
             Type type = Type.GetType(MetabaseSettingsIis7FactoryTypeName, false);
             if (type == null)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new InvalidOperationException(
                             SR.Hosting_MetabaseSettingsIis7TypeNotFound(
@@ -115,8 +114,7 @@ namespace System.ServiceModel.Activation
 
             if (!(instance is MetabaseSettingsIis))
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new InvalidOperationException(
                             SR.Hosting_BadMetabaseSettingsIis7Type(type.AssemblyQualifiedName)
@@ -226,8 +224,7 @@ namespace System.ServiceModel.Activation
                                 }
                                 if (AspNetPartialTrustHelpers.NeedPartialTrustInvoke)
                                 {
-                                    throw FxTrace
-                                        .Exception
+                                    throw FxTrace.Exception
                                         .AsError(
                                             new InvalidOperationException(
                                                 SR.PartialTrustNonHttpActivation(
@@ -272,8 +269,7 @@ namespace System.ServiceModel.Activation
                 }
                 else
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(
                             new InvalidOperationException(
                                 SR.Hosting_ProtocolNoConfiguration(protocol)
@@ -332,8 +328,7 @@ namespace System.ServiceModel.Activation
             EnsureInitialized();
             if (!configurations.ContainsKey(scheme))
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new InvalidOperationException(SR.Hosting_NotSupportedProtocol(scheme))
                     );

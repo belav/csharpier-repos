@@ -1070,8 +1070,7 @@ public interface I
                     ITypeParameterSymbol typeParameterSymbol = (
                         (INamedTypeSymbol)
                             ((INamedTypeSymbol)method.ReturnType).GetMembers("B").Single()
-                    )
-                        .TypeParameters
+                    ).TypeParameters
                         .Single();
                     var result = typeParameterSymbol.ConstraintTypes.Single().NullableAnnotation;
                     Assert.Equal(
@@ -1157,14 +1156,12 @@ public interface IB<T, U, V>
                         .ToArray(),
                 method =>
                 {
-                    var result = ((INamedTypeSymbol)method.ReturnType)
-                        .TypeArguments
+                    var result = ((INamedTypeSymbol)method.ReturnType).TypeArguments
                         .Single()
                         .NullableAnnotation;
                     Assert.Equal(
                         result,
-                        ((INamedTypeSymbol)method.ReturnType)
-                            .TypeArgumentNullableAnnotations
+                        ((INamedTypeSymbol)method.ReturnType).TypeArgumentNullableAnnotations
                             .Single()
                     );
                     Assert.Equal(
@@ -1520,12 +1517,10 @@ class C
                     {
                         if (syntaxContext.Node.ToString() != "o")
                             return;
-                        var info = syntaxContext
-                            .SemanticModel
+                        var info = syntaxContext.SemanticModel
                             .GetTypeInfoAndVerifyIOperation(syntaxContext.Node);
                         Assert.True(
-                            syntaxContext
-                                .SemanticModel
+                            syntaxContext.SemanticModel
                                 .TryGetSpeculativeSemanticModel(
                                     syntaxContext.Node.SpanStart,
                                     newSource,
@@ -1534,8 +1529,7 @@ class C
                         );
                         var specInfo = specModel.GetTypeInfoAndVerifyIOperation(oReference);
                         syntaxContext.ReportDiagnostic(
-                            CodeAnalysis
-                                .Diagnostic
+                            CodeAnalysis.Diagnostic
                                 .Create(
                                     s_descriptor1,
                                     syntaxContext.Node.GetLocation(),
@@ -1560,8 +1554,7 @@ class C
                             declaredSymbol.NullableAnnotation
                         );
                         context.ReportDiagnostic(
-                            CodeAnalysis
-                                .Diagnostic
+                            CodeAnalysis.Diagnostic
                                 .Create(
                                     s_descriptor2,
                                     declarator.GetLocation(),
@@ -2540,8 +2533,7 @@ class C
                 );
                 Assert.Equal(
                     expectedAnnotation,
-                    ((INamedTypeSymbol)methodSymbol.ReturnType)
-                        .TypeArgumentNullableAnnotations
+                    ((INamedTypeSymbol)methodSymbol.ReturnType).TypeArgumentNullableAnnotations
                         .Single()
                 );
                 Assert.Equal(
@@ -6738,8 +6730,7 @@ M();"
         {
             var comp = CreateCompilation(
                 code,
-                options: TestOptions
-                    .ReleaseExe
+                options: TestOptions.ReleaseExe
                     .WithNullableContextOptions(NullableContextOptions.Enable)
             );
 

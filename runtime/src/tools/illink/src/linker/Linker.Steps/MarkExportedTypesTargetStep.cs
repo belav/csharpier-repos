@@ -27,8 +27,7 @@ namespace Mono.Linker.Steps
                 return;
 
             if (
-                !context
-                    .Annotations
+                !context.Annotations
                     .TryGetPreservedMembers(exportedType, out TypePreserveMembers members)
             )
                 return;
@@ -46,8 +45,7 @@ namespace Mono.Linker.Steps
                 return;
             }
 
-            context
-                .Annotations
+            context.Annotations
                 .Mark(
                     type,
                     new DependencyInfo(DependencyKind.ExportedType, exportedType),

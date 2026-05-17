@@ -338,8 +338,7 @@ namespace ILCompiler
         protected void InheritOpenModules(CompilerTypeSystemContext oldTypeSystemContext)
         {
             foreach (
-                ModuleData oldModuleData in ModuleHashtable
-                    .Enumerator
+                ModuleData oldModuleData in ModuleHashtable.Enumerator
                     .Get(oldTypeSystemContext._moduleHashtable)
             )
             {

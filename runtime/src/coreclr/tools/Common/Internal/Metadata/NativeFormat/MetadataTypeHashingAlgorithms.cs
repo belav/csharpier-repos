@@ -131,8 +131,7 @@ namespace Internal.Metadata.NativeFormat
 
             if (isNested)
             {
-                int enclosingTypeHashCode = typeRef
-                    .ParentNamespaceOrType
+                int enclosingTypeHashCode = typeRef.ParentNamespaceOrType
                     .ToTypeReferenceHandle(reader)
                     .ComputeHashCode(reader);
                 return TypeHashingAlgorithms.ComputeNestedTypeHashCode(

@@ -387,8 +387,7 @@ namespace Microsoft.CodeAnalysis.FindUsages
             // the DefinitionItem.
             if (symbol.Kind != SymbolKind.Namespace)
             {
-                var assemblyName = symbol
-                    .ContainingAssembly
+                var assemblyName = symbol.ContainingAssembly
                     ?.ToDisplayString(SymbolDisplayFormat.MinimallyQualifiedFormat);
                 if (!string.IsNullOrWhiteSpace(assemblyName))
                 {

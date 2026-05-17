@@ -95,8 +95,7 @@ namespace System.Web.Http
             // create a new validator cache if the validator providers have changed
             if (
                 settings.IsServiceCollectionInitialized
-                && !settings
-                    .Services
+                && !settings.Services
                     .GetModelValidatorProviders()
                     .SequenceEqual(configuration.Services.GetModelValidatorProviders())
             )
@@ -271,11 +270,9 @@ namespace System.Web.Http
         private static void DefaultInitializer(HttpConfiguration configuration)
         {
             // Register the default IRequiredMemberSelector for formatters that haven't been assigned one
-            ModelMetadataProvider metadataProvider = configuration
-                .Services
+            ModelMetadataProvider metadataProvider = configuration.Services
                 .GetModelMetadataProvider();
-            IEnumerable<ModelValidatorProvider> validatorProviders = configuration
-                .Services
+            IEnumerable<ModelValidatorProvider> validatorProviders = configuration.Services
                 .GetModelValidatorProviders();
             IRequiredMemberSelector defaultRequiredMemberSelector =
                 new ModelValidationRequiredMemberSelector(metadataProvider, validatorProviders);

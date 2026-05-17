@@ -126,8 +126,7 @@ namespace Microsoft.Extensions.Caching.Memory
 
             var entryOptions = new MemoryCacheEntryOptions { Size = long.MaxValue };
             var sem = new SemaphoreSlim(0, 1);
-            entryOptions
-                .PostEvictionCallbacks
+            entryOptions.PostEvictionCallbacks
                 .Add(
                     new PostEvictionCallbackRegistration
                     {
@@ -170,8 +169,7 @@ namespace Microsoft.Extensions.Caching.Memory
 
             var entryOptions = new MemoryCacheEntryOptions { Size = 6 };
             var sem = new SemaphoreSlim(0, 1);
-            entryOptions
-                .PostEvictionCallbacks
+            entryOptions.PostEvictionCallbacks
                 .Add(
                     new PostEvictionCallbackRegistration
                     {
@@ -263,8 +261,7 @@ namespace Microsoft.Extensions.Caching.Memory
 
             var entryOptions = new MemoryCacheEntryOptions { Size = 6 };
             var sem = new SemaphoreSlim(0, 1);
-            entryOptions
-                .PostEvictionCallbacks
+            entryOptions.PostEvictionCallbacks
                 .Add(
                     new PostEvictionCallbackRegistration
                     {
@@ -336,8 +333,7 @@ namespace Microsoft.Extensions.Caching.Memory
             var changeToken = new TestExpirationToken();
             var sem = new SemaphoreSlim(0, 1);
             entryOptions.ExpirationTokens.Add(changeToken);
-            entryOptions
-                .PostEvictionCallbacks
+            entryOptions.PostEvictionCallbacks
                 .Add(
                     new PostEvictionCallbackRegistration
                     {
@@ -419,8 +415,7 @@ namespace Microsoft.Extensions.Caching.Memory
             for (var i = 0; i < numEntries; i++)
             {
                 var entryOptions = new MemoryCacheEntryOptions { Size = i };
-                entryOptions
-                    .PostEvictionCallbacks
+                entryOptions.PostEvictionCallbacks
                     .Add(
                         new PostEvictionCallbackRegistration
                         {

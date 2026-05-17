@@ -91,15 +91,17 @@ namespace System.Web.Security
                 if (e.User != null)
                     e.Context.User = e.User;
                 else if (e.Identity == AnonymousIdentity)
-                    e.Context.SetPrincipalNoDemand(
-                        AnonymousPrincipal,
-                        false /*needToSetNativePrincipal*/
-                    );
+                    e.Context
+                        .SetPrincipalNoDemand(
+                            AnonymousPrincipal,
+                            false /*needToSetNativePrincipal*/
+                        );
                 else
-                    e.Context.SetPrincipalNoDemand(
-                        new WindowsPrincipal(e.Identity),
-                        false /*needToSetNativePrincipal*/
-                    );
+                    e.Context
+                        .SetPrincipalNoDemand(
+                            new WindowsPrincipal(e.Identity),
+                            false /*needToSetNativePrincipal*/
+                        );
             }
         }
 

@@ -69,8 +69,7 @@ namespace System.Net.WebSockets
 #pragma warning disable CA1810 // explicit static cctor
         static WebSocketProtocolComponent()
         {
-            s_webSocketDllHandle = Interop
-                .Kernel32
+            s_webSocketDllHandle = Interop.Kernel32
                 .LoadLibraryEx(Interop.Libraries.WebSocket, IntPtr.Zero, 0);
 
             if (s_webSocketDllHandle == IntPtr.Zero)
@@ -137,8 +136,7 @@ namespace System.Net.WebSockets
             SafeWebSocketHandle? webSocketHandle = null;
             try
             {
-                int errorCode = Interop
-                    .WebSocket
+                int errorCode = Interop.WebSocket
                     .WebSocketCreateClientHandle(null!, 0, out webSocketHandle);
                 ThrowOnError(errorCode);
 
@@ -147,8 +145,7 @@ namespace System.Net.WebSockets
                     HttpWebSocket.ThrowPlatformNotSupportedException_WSPC();
                 }
 
-                errorCode = Interop
-                    .WebSocket
+                errorCode = Interop.WebSocket
                     .WebSocketBeginClientHandshake(
                         webSocketHandle!,
                         IntPtr.Zero,
@@ -211,8 +208,7 @@ namespace System.Net.WebSockets
             SafeWebSocketHandle? webSocketHandle = null;
             try
             {
-                int errorCode = Interop
-                    .WebSocket
+                int errorCode = Interop.WebSocket
                     .WebSocketCreateServerHandle(
                         properties!,
                         (uint)propertyCount,
@@ -233,8 +229,7 @@ namespace System.Net.WebSockets
                 // just fake an HTTP handshake for the WSPC calling
                 // WebSocketBeginServerHandshake and WebSocketEndServerHandshake
                 // with statically defined dummy headers.
-                errorCode = Interop
-                    .WebSocket
+                errorCode = Interop.WebSocket
                     .WebSocketBeginServerHandshake(
                         webSocketHandle,
                         IntPtr.Zero,
@@ -295,8 +290,7 @@ namespace System.Net.WebSockets
             int errorCode;
             try
             {
-                errorCode = Interop
-                    .WebSocket
+                errorCode = Interop.WebSocket
                     .WebSocketSend_Raw(
                         webSocket.SessionHandle,
                         bufferType,
@@ -328,8 +322,7 @@ namespace System.Net.WebSockets
             int errorCode;
             try
             {
-                errorCode = Interop
-                    .WebSocket
+                errorCode = Interop.WebSocket
                     .WebSocketSendWithoutBody_Raw(
                         webSocket.SessionHandle,
                         bufferType,
@@ -358,8 +351,7 @@ namespace System.Net.WebSockets
             int errorCode;
             try
             {
-                errorCode = Interop
-                    .WebSocket
+                errorCode = Interop.WebSocket
                     .WebSocketReceive(webSocket.SessionHandle, IntPtr.Zero, IntPtr.Zero);
             }
             catch (ObjectDisposedException innerException)
@@ -402,8 +394,7 @@ namespace System.Net.WebSockets
             int errorCode;
             try
             {
-                errorCode = Interop
-                    .WebSocket
+                errorCode = Interop.WebSocket
                     .WebSocketGetAction(
                         webSocket.SessionHandle,
                         actionQueue,
@@ -451,8 +442,7 @@ namespace System.Net.WebSockets
 
             try
             {
-                Interop
-                    .WebSocket
+                Interop.WebSocket
                     .WebSocketCompleteAction(
                         webSocket.SessionHandle,
                         actionContext,
@@ -476,8 +466,7 @@ namespace System.Net.WebSockets
             {
                 Interop.WebSocket.Buffer[] dataBuffers = new Interop.WebSocket.Buffer[1];
                 uint dataBufferCount = 1;
-                int errorCode = Interop
-                    .WebSocket
+                int errorCode = Interop.WebSocket
                     .WebSocketGetAction(
                         webSocketHandle,
                         actionQueue,

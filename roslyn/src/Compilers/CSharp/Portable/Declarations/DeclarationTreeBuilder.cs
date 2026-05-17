@@ -215,8 +215,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     var bag = DiagnosticBag.GetInstance();
                     bag.Add(
                         ErrorCode.ERR_SimpleProgramIsEmpty,
-                        ((EmptyStatementSyntax)firstGlobalStatement.Statement)
-                            .SemicolonToken
+                        ((EmptyStatementSyntax)firstGlobalStatement.Statement).SemicolonToken
                             .GetLocation()
                     );
                     diagnostics = bag.ToReadOnlyAndFree();
@@ -237,9 +236,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (hasGlobalMembers)
             {
                 //The implicit class is not static and has no extensions
-                SingleTypeDeclaration.TypeDeclarationFlags declFlags = SingleTypeDeclaration
-                    .TypeDeclarationFlags
-                    .None;
+                SingleTypeDeclaration.TypeDeclarationFlags declFlags =
+                    SingleTypeDeclaration.TypeDeclarationFlags.None;
                 var memberNames = GetNonTypeMemberNames(
                     node,
                     internalMembers,
@@ -317,8 +315,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                             : SingleTypeDeclaration.TypeDeclarationFlags.None
                     )
                     | SingleTypeDeclaration.TypeDeclarationFlags.IsSimpleProgram,
-                syntaxReference: firstGlobalStatement
-                    .SyntaxTree
+                syntaxReference: firstGlobalStatement.SyntaxTree
                     .GetReference(firstGlobalStatement.Parent),
                 nameLocation: nameLocation,
                 memberNames: s_emptyMemberNames,
@@ -361,9 +358,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             //Script class is not static and contains no extensions.
-            SingleTypeDeclaration.TypeDeclarationFlags declFlags = SingleTypeDeclaration
-                .TypeDeclarationFlags
-                .None;
+            SingleTypeDeclaration.TypeDeclarationFlags declFlags =
+                SingleTypeDeclaration.TypeDeclarationFlags.None;
             var membernames = GetNonTypeMemberNames(
                 compilationUnit,
                 ((Syntax.InternalSyntax.CompilationUnitSyntax)(compilationUnit.Green)).Members,
@@ -614,8 +610,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             foreach (var usingDirective in usings)
             {
                 if (usingDirective.StaticKeyword != default)
-                    MessageID
-                        .IDS_FeatureUsingStatic
+                    MessageID.IDS_FeatureUsingStatic
                         .CheckFeatureAvailability(
                             diagnostics,
                             usingDirective,
@@ -623,8 +618,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                         );
 
                 if (usingDirective.GlobalKeyword != default)
-                    MessageID
-                        .IDS_FeatureGlobalUsing
+                    MessageID.IDS_FeatureGlobalUsing
                         .CheckFeatureAvailability(
                             diagnostics,
                             usingDirective,
@@ -639,8 +633,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         )
         {
             foreach (var externAlias in externs)
-                MessageID
-                    .IDS_FeatureExternAlias
+                MessageID.IDS_FeatureExternAlias
                     .CheckFeatureAvailability(
                         diagnostics,
                         externAlias,
@@ -692,8 +685,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             if (node is FileScopedNamespaceDeclarationSyntax)
             {
-                MessageID
-                    .IDS_FeatureFileScopedNamespace
+                MessageID.IDS_FeatureFileScopedNamespace
                     .CheckFeatureAvailability(
                         diagnostics,
                         node,
@@ -922,8 +914,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                         == AttributeLocation.Method
                     )
                     {
-                        declFlags |= SingleTypeDeclaration
-                            .TypeDeclarationFlags
+                        declFlags |= SingleTypeDeclaration.TypeDeclarationFlags
                             .AnyMemberHasAttributes;
                         break;
                     }
@@ -945,8 +936,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 if (record.ClassOrStructKeyword.Kind() != SyntaxKind.None)
                 {
-                    MessageID
-                        .IDS_FeatureRecordStructs
+                    MessageID.IDS_FeatureRecordStructs
                         .CheckFeatureAvailability(
                             diagnostics,
                             record,
@@ -972,8 +962,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     }
                     else
                     {
-                        MessageID
-                            .IDS_FeaturePrimaryConstructors
+                        MessageID.IDS_FeaturePrimaryConstructors
                             .CheckFeatureAvailability(diagnostics, node.ParameterList);
                     }
                 }
@@ -983,8 +972,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     && node.SemicolonToken != default
                 )
                 {
-                    MessageID
-                        .IDS_FeaturePrimaryConstructors
+                    MessageID.IDS_FeaturePrimaryConstructors
                         .CheckFeatureAvailability(
                             diagnostics,
                             node,
@@ -993,18 +981,15 @@ namespace Microsoft.CodeAnalysis.CSharp
                 }
             }
 
-            var modifiers = node.Modifiers.ToDeclarationModifiers(
-                isForTypeDeclaration: true,
-                diagnostics: diagnostics
-            );
+            var modifiers = node.Modifiers
+                .ToDeclarationModifiers(isForTypeDeclaration: true, diagnostics: diagnostics);
             var quickAttributes = GetQuickAttributes(node.AttributeLists);
 
             foreach (var modifier in node.Modifiers)
             {
                 if (modifier.IsKind(SyntaxKind.StaticKeyword) && kind == DeclarationKind.Class)
                 {
-                    MessageID
-                        .IDS_FeatureStaticClasses
+                    MessageID.IDS_FeatureStaticClasses
                         .CheckFeatureAvailability(diagnostics, node, modifier.GetLocation());
                 }
                 else if (
@@ -1012,8 +997,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     && kind is DeclarationKind.Struct or DeclarationKind.RecordStruct
                 )
                 {
-                    MessageID
-                        .IDS_FeatureReadOnlyStructs
+                    MessageID.IDS_FeatureReadOnlyStructs
                         .CheckFeatureAvailability(diagnostics, node, modifier.GetLocation());
                 }
                 else if (
@@ -1021,8 +1005,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     && kind is DeclarationKind.Struct or DeclarationKind.RecordStruct
                 )
                 {
-                    MessageID
-                        .IDS_FeatureRefStructs
+                    MessageID.IDS_FeatureRefStructs
                         .CheckFeatureAvailability(diagnostics, node, modifier.GetLocation());
                 }
             }
@@ -1075,10 +1058,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             declFlags |= SingleTypeDeclaration.TypeDeclarationFlags.HasAnyNontypeMembers;
 
-            var modifiers = node.Modifiers.ToDeclarationModifiers(
-                isForTypeDeclaration: true,
-                diagnostics: diagnostics
-            );
+            var modifiers = node.Modifiers
+                .ToDeclarationModifiers(isForTypeDeclaration: true, diagnostics: diagnostics);
             var quickAttributes = DeclarationTreeBuilder.GetQuickAttributes(node.AttributeLists);
 
             return new SingleTypeDeclaration(
@@ -1114,10 +1095,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             var memberNames = GetEnumMemberNames(node, ref declFlags);
 
             var diagnostics = DiagnosticBag.GetInstance();
-            var modifiers = node.Modifiers.ToDeclarationModifiers(
-                isForTypeDeclaration: true,
-                diagnostics: diagnostics
-            );
+            var modifiers = node.Modifiers
+                .ToDeclarationModifiers(isForTypeDeclaration: true, diagnostics: diagnostics);
             var quickAttributes = DeclarationTreeBuilder.GetQuickAttributes(node.AttributeLists);
 
             if (
@@ -1126,8 +1105,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 && node.SemicolonToken != default
             )
             {
-                MessageID
-                    .IDS_FeaturePrimaryConstructors
+                MessageID.IDS_FeaturePrimaryConstructors
                     .CheckFeatureAvailability(diagnostics, node, node.SemicolonToken.GetLocation());
             }
 
@@ -1248,8 +1226,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             if (anyMethodHadExtensionSyntax)
             {
-                declFlags |= SingleTypeDeclaration
-                    .TypeDeclarationFlags
+                declFlags |= SingleTypeDeclaration.TypeDeclarationFlags
                     .AnyMemberHasExtensionMethodSyntax;
             }
 
@@ -1457,8 +1434,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 case SyntaxKind.FieldDeclaration:
                     CodeAnalysis.Syntax.InternalSyntax.SeparatedSyntaxList<Syntax.InternalSyntax.VariableDeclaratorSyntax> fieldDeclarators =
-                        ((Syntax.InternalSyntax.FieldDeclarationSyntax)member)
-                            .Declaration
+                        ((Syntax.InternalSyntax.FieldDeclarationSyntax)member).Declaration
                             .Variables;
                     int numFieldDeclarators = fieldDeclarators.Count;
                     for (int i = 0; i < numFieldDeclarators; i++)
@@ -1469,8 +1445,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 case SyntaxKind.EventFieldDeclaration:
                     CoreInternalSyntax.SeparatedSyntaxList<Syntax.InternalSyntax.VariableDeclaratorSyntax> eventDeclarators =
-                        ((Syntax.InternalSyntax.EventFieldDeclarationSyntax)member)
-                            .Declaration
+                        ((Syntax.InternalSyntax.EventFieldDeclarationSyntax)member).Declaration
                             .Variables;
                     int numEventDeclarators = eventDeclarators.Count;
                     for (int i = 0; i < numEventDeclarators; i++)
@@ -1511,8 +1486,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 case SyntaxKind.ConstructorDeclaration:
                     set.Add(
-                        ((Syntax.InternalSyntax.ConstructorDeclarationSyntax)member)
-                            .Modifiers
+                        ((Syntax.InternalSyntax.ConstructorDeclarationSyntax)member).Modifiers
                             .Any((int)SyntaxKind.StaticKeyword)
                             ? WellKnownMemberNames.StaticConstructorName
                             : WellKnownMemberNames.InstanceConstructorName

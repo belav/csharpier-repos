@@ -186,9 +186,8 @@ namespace System.Runtime
                     }
 
                     // Complete and Dispose are not expected to throw.  If they do it can mess up the AsyncResult state machine.
-                    throw Fx.Exception.AsError(
-                        new InvalidOperationException(SRCore.AsyncTransactionException)
-                    );
+                    throw Fx.Exception
+                        .AsError(new InvalidOperationException(SRCore.AsyncTransactionException));
                 }
 
                 // This will release the callback to run, or tell us that we need to defer the callback to Check/SyncContinue.

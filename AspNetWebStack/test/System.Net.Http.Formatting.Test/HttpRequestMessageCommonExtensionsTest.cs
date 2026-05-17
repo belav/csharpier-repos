@@ -10,8 +10,7 @@ namespace System.Net.Http
         [Fact]
         public void IsCorrectType()
         {
-            Assert
-                .Type
+            Assert.Type
                 .HasProperties(
                     typeof(HttpRequestMessageExtensions),
                     TypeAssert.TypeProperties.IsStatic

@@ -15,8 +15,7 @@ namespace System.Data.Odbc
 
             //Set the expected driver manager version
             //
-            Interop
-                .Odbc
+            Interop.Odbc
                 .SQLSetEnvAttr(
                     this,
                     ODBC32.SQL_ATTR.ODBC_VERSION,
@@ -30,8 +29,7 @@ namespace System.Data.Odbc
             //handle are pooled.  So we have to keep it alive and not create a new environment
             //for   every connection.
             //
-            retcode = Interop
-                .Odbc
+            retcode = Interop.Odbc
                 .SQLSetEnvAttr(
                     this,
                     ODBC32.SQL_ATTR.CONNECTION_POOLING,

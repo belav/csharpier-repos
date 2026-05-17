@@ -233,8 +233,7 @@ public partial class DictionaryModelBinder<TKey, TValue>
         }
 
         bindingContext.Result = ModelBindingResult.Success(model);
-        bindingContext
-            .ValidationState
+        bindingContext.ValidationState
             .Add(
                 model,
                 new ValidationStateEntry()

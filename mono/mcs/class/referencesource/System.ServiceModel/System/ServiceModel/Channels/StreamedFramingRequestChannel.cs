@@ -387,11 +387,9 @@ namespace System.ServiceModel.Channels
                     }
                     else
                     {
-                        this.channelBindingProvider = channel
-                            .upgrade
+                        this.channelBindingProvider = channel.upgrade
                             .GetProperty<IStreamUpgradeChannelBindingProvider>();
-                        this.upgradeInitiator = channel
-                            .upgrade
+                        this.upgradeInitiator = channel.upgrade
                             .CreateUpgradeInitiator(channel.RemoteAddress, channel.Via);
                         if (onUpgrade == null)
                         {
@@ -429,11 +427,8 @@ namespace System.ServiceModel.Channels
                         && this.channelBindingProvider.IsChannelBindingSupportEnabled
                     )
                     {
-                        this.channel.channelBindingToken =
-                            this.channelBindingProvider.GetChannelBinding(
-                                this.upgradeInitiator,
-                                ChannelBindingKind.Endpoint
-                            );
+                        this.channel.channelBindingToken = this.channelBindingProvider
+                            .GetChannelBinding(this.upgradeInitiator, ChannelBindingKind.Endpoint);
                     }
 
                     this.remoteSecurity = StreamSecurityUpgradeInitiator.GetRemoteSecurity(
@@ -775,8 +770,7 @@ namespace System.ServiceModel.Channels
                 }
                 catch (TimeoutException exception)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new TimeoutException(
                                 SR.GetString(SR.TimeoutOnRequest, timeout),
@@ -881,8 +875,7 @@ namespace System.ServiceModel.Channels
                     }
                     catch (TimeoutException exception)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new TimeoutException(
                                     SR.GetString(SR.TimeoutOnRequest, timeout),
@@ -942,8 +935,7 @@ namespace System.ServiceModel.Channels
                 }
                 catch (TimeoutException exception)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new TimeoutException(
                                 SR.GetString(

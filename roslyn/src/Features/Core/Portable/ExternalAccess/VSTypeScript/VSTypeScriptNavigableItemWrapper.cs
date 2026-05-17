@@ -13,9 +13,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript
         : INavigableItem
     {
         private readonly IVSTypeScriptNavigableItem _navigableItem = navigableItem;
-        private readonly INavigableItem.NavigableDocument _navigableDocument = INavigableItem
-            .NavigableDocument
-            .FromDocument(navigableItem.Document);
+        private readonly INavigableItem.NavigableDocument _navigableDocument =
+            INavigableItem.NavigableDocument.FromDocument(navigableItem.Document);
 
         public Glyph Glyph => _navigableItem.Glyph;
 
@@ -34,8 +33,7 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript
         public ImmutableArray<INavigableItem> ChildItems =>
             _navigableItem.ChildItems.IsDefault
                 ? default
-                : _navigableItem
-                    .ChildItems
+                : _navigableItem.ChildItems
                     .SelectAsArray(i => (INavigableItem)new VSTypeScriptNavigableItemWrapper(i));
     }
 }

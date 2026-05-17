@@ -197,8 +197,9 @@ namespace System.Text.Json.Serialization.Tests
             {
                 // Get type of "Obj" property.
                 elementType = type.GetProperties(
-                    BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic
-                )[0].PropertyType;
+                        BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic
+                    )[0]
+                    .PropertyType;
             }
             else if (type.IsArray)
             {

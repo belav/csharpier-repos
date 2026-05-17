@@ -475,15 +475,13 @@ namespace System
                 }
                 if (current.finalCompoundSegment != null)
                 {
-                    IList<IList<UriTemplatePathPartiallyEquivalentSet>> pesLists = current
-                        .finalCompoundSegment
-                        .Values;
+                    IList<IList<UriTemplatePathPartiallyEquivalentSet>> pesLists =
+                        current.finalCompoundSegment.Values;
                     for (int i = 0; i < pesLists.Count; i++)
                     {
                         if (!allowDuplicateEquivalentUriTemplates && (pesLists[i].Count > 1))
                         {
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
                                     new InvalidOperationException(
                                         SR.GetString(
@@ -533,8 +531,7 @@ namespace System
                 }
                 if (current.nextCompoundSegment != null)
                 {
-                    IList<IList<UriTemplateTrieLocation>> locations = current
-                        .nextCompoundSegment
+                    IList<IList<UriTemplateTrieLocation>> locations = current.nextCompoundSegment
                         .Values;
                     for (int i = 0; i < locations.Count; i++)
                     {
@@ -544,8 +541,7 @@ namespace System
                             // a potential multiple match here; for now we are throwing.
                             UriTemplate firstTemplate = FindAnyUriTemplate(locations[i][0].node);
                             UriTemplate secondTemplate = FindAnyUriTemplate(locations[i][1].node);
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(
                                     new InvalidOperationException(
                                         SR.GetString(
@@ -685,8 +681,8 @@ namespace System
                 }
                 if (node.finalCompoundSegment != null)
                 {
-                    UriTemplatePathPartiallyEquivalentSet pes =
-                        node.finalCompoundSegment.GetAnyValue();
+                    UriTemplatePathPartiallyEquivalentSet pes = node.finalCompoundSegment
+                        .GetAnyValue();
                     Fx.Assert(pes.Items.Count > 0, "Otherwise, why creating the collection?");
                     return pes.Items[0].Key;
                 }
@@ -815,13 +811,14 @@ namespace System
                     this,
                     UriTemplateTrieIntraNodeLocation.AfterLiteral
                 );
-                this.nextLiteralSegment.Add(
-                    lps,
-                    new UriTemplateTrieLocation(
-                        newNode,
-                        UriTemplateTrieIntraNodeLocation.BeforeLiteral
-                    )
-                );
+                this.nextLiteralSegment
+                    .Add(
+                        lps,
+                        new UriTemplateTrieLocation(
+                            newNode,
+                            UriTemplateTrieIntraNodeLocation.BeforeLiteral
+                        )
+                    );
                 return newNode;
             }
         }

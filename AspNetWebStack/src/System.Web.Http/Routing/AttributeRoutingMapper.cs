@@ -114,8 +114,7 @@ namespace System.Web.Http.Routing
             Contract.Assert(configuration != null);
             Contract.Assert(directRouteProvider != null);
 
-            IHttpControllerSelector controllerSelector = configuration
-                .Services
+            IHttpControllerSelector controllerSelector = configuration.Services
                 .GetHttpControllerSelector();
             IDictionary<string, HttpControllerDescriptor> controllerMap =
                 controllerSelector.GetControllerMapping();
@@ -123,8 +122,7 @@ namespace System.Web.Http.Routing
             {
                 foreach (HttpControllerDescriptor controllerDescriptor in controllerMap.Values)
                 {
-                    IHttpActionSelector actionSelector = controllerDescriptor
-                        .Configuration
+                    IHttpActionSelector actionSelector = controllerDescriptor.Configuration
                         .Services
                         .GetActionSelector();
 
@@ -166,13 +164,11 @@ namespace System.Web.Http.Routing
 
                         // We need to mark each action as only reachable by direct routes so that traditional routes
                         // don't accidentally hit them.
-                        HttpControllerDescriptor routeControllerDescriptor = entry
-                            .Route
+                        HttpControllerDescriptor routeControllerDescriptor = entry.Route
                             .GetTargetControllerDescriptor();
                         if (routeControllerDescriptor == null)
                         {
-                            HttpActionDescriptor[] actionDescriptors = entry
-                                .Route
+                            HttpActionDescriptor[] actionDescriptors = entry.Route
                                 .GetTargetActionDescriptors();
                             foreach (var actionDescriptor in actionDescriptors)
                             {

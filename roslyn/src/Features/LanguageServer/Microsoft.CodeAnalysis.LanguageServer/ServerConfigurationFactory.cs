@@ -39,8 +39,7 @@ internal class ServerConfigurationFactory
         // Update any other global options based on the configuration the server was started with.
 
         // Check if the devkit extension is included to see if devkit is enabled.
-        var isDevkitEnabled = serverConfiguration
-            .ExtensionAssemblyPaths
+        var isDevkitEnabled = serverConfiguration.ExtensionAssemblyPaths
             .Any(path =>
                 Path.GetFileName(path) == "Microsoft.VisualStudio.LanguageServices.DevKit.dll"
             );

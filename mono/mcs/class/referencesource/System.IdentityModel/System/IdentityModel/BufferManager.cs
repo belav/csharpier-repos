@@ -17,8 +17,7 @@ namespace System.IdentityModel
         {
             if (maxBufferPoolSize < 0)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentOutOfRangeException(
                             "maxBufferPoolSize",
@@ -30,8 +29,7 @@ namespace System.IdentityModel
 
             if (maxBufferSize < 0)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentOutOfRangeException(
                             "maxBufferSize",
@@ -76,8 +74,7 @@ namespace System.IdentityModel
             {
                 if (bufferSize < 0)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentOutOfRangeException(
                                 "bufferSize",

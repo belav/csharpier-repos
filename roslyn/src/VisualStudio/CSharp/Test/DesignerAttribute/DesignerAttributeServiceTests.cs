@@ -91,8 +91,7 @@ class Test { }",
             var documentId = hostDocument.Id;
             var document = workspace.CurrentSolution.GetRequiredDocument(documentId);
 
-            var compilation = await document
-                .Project
+            var compilation = await document.Project
                 .GetRequiredCompilationAsync(CancellationToken.None);
             var actual =
                 await DesignerAttributeDiscoveryService.ComputeDesignerAttributeCategoryAsync(

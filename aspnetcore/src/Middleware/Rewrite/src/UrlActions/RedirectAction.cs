@@ -61,8 +61,7 @@ internal sealed class RedirectAction : UrlAction
         var split = pattern.IndexOf('?');
         if (split >= 0 && QueryStringAppend)
         {
-            var query = context
-                .HttpContext
+            var query = context.HttpContext
                 .Request
                 .QueryString
                 .Add(QueryString.FromUriComponent(pattern.Substring(split)));

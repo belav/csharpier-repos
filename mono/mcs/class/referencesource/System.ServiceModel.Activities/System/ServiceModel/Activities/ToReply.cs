@@ -145,8 +145,7 @@ namespace System.ServiceModel.Activities
                 {
                     if (!this.TryGetMessageVersion(correlatesWith.InstanceKey, out version))
                     {
-                        throw FxTrace
-                            .Exception
+                        throw FxTrace.Exception
                             .AsError(
                                 new InvalidOperationException(SR2.MessageVersionInformationNotFound)
                             );
@@ -157,8 +156,7 @@ namespace System.ServiceModel.Activities
                     //Register the ResponseContext so that InternalSendMessage can access it.
                     if (!correlatesWith.TryRegisterResponseContext(context, responseContext))
                     {
-                        throw FxTrace
-                            .Exception
+                        throw FxTrace.Exception
                             .AsError(new InvalidOperationException(SR2.ResponseContextIsNotNull));
                     }
 
@@ -167,8 +165,7 @@ namespace System.ServiceModel.Activities
                 }
                 else
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(
                             new InvalidOperationException(
                                 SR2.CorrelationResponseContextShouldNotBeNull
@@ -178,8 +175,7 @@ namespace System.ServiceModel.Activities
             }
             else
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new InvalidOperationException(SR2.CorrelationResponseContextShouldNotBeNull)
                     );
@@ -251,14 +247,12 @@ namespace System.ServiceModel.Activities
 
                 if (messageFault == null)
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(new InvalidOperationException(SR2.CannotCreateMessageFault));
                 }
                 else
                 {
-                    Message outMessage = System
-                        .ServiceModel
+                    Message outMessage = System.ServiceModel
                         .Channels
                         .Message
                         .CreateMessage(version, messageFault, action);
@@ -301,8 +295,7 @@ namespace System.ServiceModel.Activities
             {
                 InstanceValue messageVersionValue;
                 if (
-                    instanceKey
-                        .Metadata
+                    instanceKey.Metadata
                         .TryGetValue(
                             WorkflowServiceNamespace.MessageVersionForReplies,
                             out messageVersionValue
@@ -321,16 +314,14 @@ namespace System.ServiceModel.Activities
         {
             if (this.Formatter == null && this.FaultFormatter == null)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new ValidationException(SR2.OperationFormatterAndFaultFormatterNotSet)
                     );
             }
             if (this.Formatter != null && this.FaultFormatter != null)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new ValidationException(
                             SR2.OperationFormatterAndFaultFormatterIncorrectlySet

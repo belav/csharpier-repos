@@ -88,8 +88,7 @@ namespace System.Web.DataAccess
             bool appLevel
         )
         {
-            System
-                .Web
+            System.Web
                 .Util
                 .Debug
                 .Assert(
@@ -148,8 +147,7 @@ namespace System.Web.DataAccess
                     appPath = Environment.CurrentDirectory;
 
                 dataDir = Path.Combine(appPath, HttpRuntime.DataDirectoryName);
-                AppDomain
-                    .CurrentDomain
+                AppDomain.CurrentDomain
                     .SetData(
                         s_strDataDir,
                         dataDir,

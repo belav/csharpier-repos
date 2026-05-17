@@ -31,8 +31,7 @@ namespace Microsoft.CodeAnalysis
         {
             // TODO (tomat): the method may throw all sorts of exceptions.
             workspace ??= new AdhocWorkspace();
-            var languageServices = workspace
-                .Services
+            var languageServices = workspace.Services
                 .SolutionServices
                 .GetLanguageServices(language);
             if (languageServices == null)
@@ -49,8 +48,7 @@ namespace Microsoft.CodeAnalysis
                 sdkDirectory: RuntimeEnvironment.GetRuntimeDirectory()
             );
 
-            var metadataService = languageServices
-                .SolutionServices
+            var metadataService = languageServices.SolutionServices
                 .GetRequiredService<IMetadataService>();
 
             // we only support file paths in /r command line arguments
@@ -63,8 +61,7 @@ namespace Microsoft.CodeAnalysis
                 relativePathResolver
             );
 
-            var analyzerLoader = languageServices
-                .SolutionServices
+            var analyzerLoader = languageServices.SolutionServices
                 .GetRequiredService<IAnalyzerService>()
                 .GetLoader();
             var xmlFileResolver = new XmlFileResolver(commandLineArguments.BaseDirectory);
@@ -189,8 +186,7 @@ namespace Microsoft.CodeAnalysis
                     ),
                     checksumAlgorithm: commandLineArguments.ChecksumAlgorithm
                 ),
-                compilationOptions: commandLineArguments
-                    .CompilationOptions
+                compilationOptions: commandLineArguments.CompilationOptions
                     .WithXmlReferenceResolver(xmlFileResolver)
                     .WithAssemblyIdentityComparer(assemblyIdentityComparer)
                     .WithStrongNameProvider(strongNameProvider)
@@ -208,8 +204,7 @@ namespace Microsoft.CodeAnalysis
                 analyzerReferences: boundAnalyzerReferences,
                 additionalDocuments: CreateDocuments(commandLineArguments.AdditionalFiles),
                 analyzerConfigDocuments: CreateDocuments(
-                    commandLineArguments
-                        .AnalyzerConfigPaths
+                    commandLineArguments.AnalyzerConfigPaths
                         .SelectAsArray(p => new CommandLineSourceFile(p, isScript: false))
                 ),
                 hostObjectType: null

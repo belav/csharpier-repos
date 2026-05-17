@@ -149,8 +149,7 @@ public class RuntimePerformanceBenchmarkBase
         var services = new ServiceCollection();
         var listener = new DiagnosticListener(GetType().Assembly.FullName);
         var partManager = new ApplicationPartManager();
-        partManager
-            .ApplicationParts
+        partManager.ApplicationParts
             .Add(
                 CompiledRazorAssemblyApplicationPartFactory
                     .GetDefaultApplicationParts(viewsAssembly)

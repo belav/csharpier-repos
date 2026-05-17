@@ -36,8 +36,7 @@ End Class",
             );
 
             await TestServices.Editor.InvokeCodeActionListAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .CodeActionAsync(
                     "Generate Equals(object)...",
                     applyFix: true,
@@ -46,8 +45,7 @@ End Class",
                 );
             await TestServices.PickMembersDialog.VerifyOpenAsync(HangMitigatingCancellationToken);
             await TestServices.PickMembersDialog.ClickCancelAsync(HangMitigatingCancellationToken);
-            var actualText = await TestServices
-                .Editor
+            var actualText = await TestServices.Editor
                 .GetTextAsync(HangMitigatingCancellationToken);
             var expectedText =
                 @"
@@ -79,8 +77,7 @@ End Class",
             );
 
             await TestServices.Editor.InvokeCodeActionListAsync(HangMitigatingCancellationToken);
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .CodeActionAsync(
                     "Generate Equals(object)...",
                     applyFix: true,
@@ -89,8 +86,7 @@ End Class",
                 );
             await TestServices.PickMembersDialog.VerifyOpenAsync(HangMitigatingCancellationToken);
             await TestServices.PickMembersDialog.ClickOKAsync(HangMitigatingCancellationToken);
-            var actualText = await TestServices
-                .Editor
+            var actualText = await TestServices.Editor
                 .GetTextAsync(HangMitigatingCancellationToken);
             var expectedText =
                 @"

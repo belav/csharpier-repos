@@ -30,8 +30,7 @@ namespace Microsoft.CodeAnalysis.CSharp.IntroduceVariable
 
             var oldType =
                 oldTypeDeclaration != null
-                    ? document
-                        .SemanticModel
+                    ? document.SemanticModel
                         .GetDeclaredSymbol(oldTypeDeclaration, cancellationToken)
                     : document.SemanticModel.Compilation.ScriptClass;
             var newNameToken = GenerateUniqueFieldName(

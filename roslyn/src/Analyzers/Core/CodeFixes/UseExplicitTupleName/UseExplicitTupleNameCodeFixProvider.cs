@@ -56,8 +56,7 @@ namespace Microsoft.CodeAnalysis.UseExplicitTupleName
 
             foreach (var diagnostic in diagnostics)
             {
-                var oldNameNode = diagnostic
-                    .Location
+                var oldNameNode = diagnostic.Location
                     .FindNode(getInnermostNodeForTie: true, cancellationToken: cancellationToken);
 
                 var preferredName = diagnostic.Properties[

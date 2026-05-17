@@ -309,8 +309,7 @@ namespace System.Web.Http.SelfHost
         [Fact]
         public void HttpSelfHostConfiguration_MaxConcurrentRequests_RoundTrips()
         {
-            Assert
-                .Reflection
+            Assert.Reflection
                 .IntegerProperty(
                     new HttpSelfHostConfiguration("http://localhost"),
                     c => c.MaxConcurrentRequests,
@@ -326,8 +325,7 @@ namespace System.Web.Http.SelfHost
         [Fact]
         public void HttpSelfHostConfiguration_MaxBufferSize_RoundTrips()
         {
-            Assert
-                .Reflection
+            Assert.Reflection
                 .IntegerProperty(
                     new HttpSelfHostConfiguration("http://localhost"),
                     c => c.MaxBufferSize,
@@ -400,8 +398,7 @@ namespace System.Web.Http.SelfHost
         [Fact]
         public void HttpSelfHostConfiguration_MaxReceivedMessageSize_RoundTrips()
         {
-            Assert
-                .Reflection
+            Assert.Reflection
                 .IntegerProperty(
                     new HttpSelfHostConfiguration("http://localhost"),
                     c => c.MaxReceivedMessageSize,
@@ -419,8 +416,7 @@ namespace System.Web.Http.SelfHost
         {
             HttpSelfHostConfiguration config = new HttpSelfHostConfiguration("http://localhost");
 
-            Assert
-                .Reflection
+            Assert.Reflection
                 .EnumPropertyWithoutIllegalValueCheck<
                     HttpSelfHostConfiguration,
                     HttpClientCredentialType
@@ -448,8 +444,7 @@ namespace System.Web.Http.SelfHost
             UserNamePasswordValidator userNamePasswordValidator =
                 new Mock<UserNamePasswordValidator>().Object;
 
-            Assert
-                .Reflection
+            Assert.Reflection
                 .Property(
                     new HttpSelfHostConfiguration("http://localhost"),
                     c => c.UserNamePasswordValidator,
@@ -466,8 +461,7 @@ namespace System.Web.Http.SelfHost
             X509CertificateValidator x509CertificateValidator =
                 new Mock<X509CertificateValidator>().Object;
 
-            Assert
-                .Reflection
+            Assert.Reflection
                 .Property(
                     new HttpSelfHostConfiguration("http://localhost"),
                     c => c.X509CertificateValidator,
@@ -480,8 +474,7 @@ namespace System.Web.Http.SelfHost
         [Fact]
         public void HttpSelfHostConfiguration_TransferMode_RoundTrips()
         {
-            Assert
-                .Reflection
+            Assert.Reflection
                 .EnumProperty(
                     new HttpSelfHostConfiguration("http://localhost"),
                     c => c.TransferMode,
@@ -494,8 +487,7 @@ namespace System.Web.Http.SelfHost
         [Fact]
         public void HttpSelfHostConfiguration_HostNameComparisonMode_RoundTrips()
         {
-            Assert
-                .Reflection
+            Assert.Reflection
                 .EnumProperty(
                     new HttpSelfHostConfiguration("http://localhost"),
                     c => c.HostNameComparisonMode,

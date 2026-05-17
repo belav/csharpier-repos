@@ -410,12 +410,13 @@ namespace System.ServiceModel.Dispatcher
                     this.RequestStarting(message, duplexRequest);
                 }
 
-                IAsyncResult result = this.channel.BeginSend(
-                    message,
-                    timeout,
-                    Fx.ThunkCallback(new AsyncCallback(this.SendCallback)),
-                    duplexRequest
-                );
+                IAsyncResult result = this.channel
+                    .BeginSend(
+                        message,
+                        timeout,
+                        Fx.ThunkCallback(new AsyncCallback(this.SendCallback)),
+                        duplexRequest
+                    );
 
                 if (result.CompletedSynchronously)
                     duplexRequest.FinishedSend(result, true);
@@ -446,8 +447,7 @@ namespace System.ServiceModel.Dispatcher
             AsyncDuplexRequest duplexRequest = result as AsyncDuplexRequest;
 
             if (duplexRequest == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentException(SR.GetString(SR.InvalidAsyncResult)));
 
             return duplexRequest.End();
@@ -680,10 +680,11 @@ namespace System.ServiceModel.Dispatcher
             Message reply
         )
         {
-            this.IdentityVerifier.EnsureIncomingIdentity(
-                address,
-                property.ServiceSecurityContext.AuthorizationContext
-            );
+            this.IdentityVerifier
+                .EnsureIncomingIdentity(
+                    address,
+                    property.ServiceSecurityContext.AuthorizationContext
+                );
         }
 
         void ThrowIfInvalidReplyIdentity(Message reply)
@@ -783,8 +784,7 @@ namespace System.ServiceModel.Dispatcher
                             onSend = Fx.ThunkCallback(new AsyncCallback(OnSend));
                         }
                         this.context = context;
-                        IAsyncResult result = context
-                            .channel
+                        IAsyncResult result = context.channel
                             .BeginSend(message, timeout, onSend, this);
                         if (!result.CompletedSynchronously)
                         {
@@ -872,8 +872,7 @@ namespace System.ServiceModel.Dispatcher
                 {
                     if (!TimeoutHelper.WaitOne(this.wait, timeout))
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(this.parent.GetReceiveTimeoutException(timeout));
                     }
                 }
@@ -1283,11 +1282,8 @@ namespace System.ServiceModel.Dispatcher
                 Exception exceptionFromBeginReceive = null;
                 try
                 {
-                    result = this.innerChannel.BeginReceive(
-                        TimeSpan.MaxValue,
-                        receiveAsyncCallback,
-                        this
-                    );
+                    result = this.innerChannel
+                        .BeginReceive(TimeSpan.MaxValue, receiveAsyncCallback, this);
                 }
                 catch (Exception e)
                 {
@@ -1301,11 +1297,12 @@ namespace System.ServiceModel.Dispatcher
 
                 if (exceptionFromBeginReceive != null)
                 {
-                    this.pendingMessages.EnqueueAndDispatch(
-                        exceptionFromBeginReceive,
-                        messageDequeuedCallback,
-                        false
-                    );
+                    this.pendingMessages
+                        .EnqueueAndDispatch(
+                            exceptionFromBeginReceive,
+                            messageDequeuedCallback,
+                            false
+                        );
                 }
                 else if (result.CompletedSynchronously)
                 {
@@ -1361,11 +1358,8 @@ namespace System.ServiceModel.Dispatcher
 
                 if (receiveException != null)
                 {
-                    this.pendingMessages.EnqueueAndDispatch(
-                        receiveException,
-                        this.messageDequeuedCallback,
-                        true
-                    );
+                    this.pendingMessages
+                        .EnqueueAndDispatch(receiveException, this.messageDequeuedCallback, true);
                 }
                 else
                 {
@@ -1377,11 +1371,8 @@ namespace System.ServiceModel.Dispatcher
                     }
                     else
                     {
-                        this.pendingMessages.EnqueueAndDispatch(
-                            message,
-                            this.messageDequeuedCallback,
-                            true
-                        );
+                        this.pendingMessages
+                            .EnqueueAndDispatch(message, this.messageDequeuedCallback, true);
                     }
                 }
             }

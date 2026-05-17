@@ -51,8 +51,7 @@ namespace DefaultNamespace
         internal static void printoutCoveredMethods()
         {
             Console.Error.WriteLine("");
-            Console
-                .Error
+            Console.Error
                 .WriteLine("Method_Count==12 (" + s_strMethodsCovered.Length + "==confirm) !!");
             Console.Error.WriteLine("");
 
@@ -66,8 +65,7 @@ namespace DefaultNamespace
 
         public virtual Boolean runTest()
         {
-            Console
-                .Error
+            Console.Error
                 .WriteLine(
                     s_strTFPath
                         + " "
@@ -101,8 +99,7 @@ namespace DefaultNamespace
                         {
                             inCountErrors++;
                             strLoc = "Err_rint3Ar," + i;
-                            Console
-                                .Error
+                            Console.Error
                                 .WriteLine(
                                     strLoc
                                         + " Expected = '"
@@ -117,8 +114,7 @@ namespace DefaultNamespace
                     {
                         inCountErrors++;
                         strLoc = "Err_xint3Ar," + i;
-                        Console
-                            .Error
+                        Console.Error
                             .WriteLine(strLoc + " Exception Thrown: " + e.GetType().FullName);
                     }
                 }
@@ -138,8 +134,7 @@ namespace DefaultNamespace
                     {
                         inCountErrors++;
                         strLoc = "Err_xint3B1";
-                        Console
-                            .Error
+                        Console.Error
                             .WriteLine(
                                 strLoc + "More specific Exception thrown : " + e.GetType().FullName
                             );
@@ -149,8 +144,7 @@ namespace DefaultNamespace
                 {
                     inCountErrors++;
                     strLoc = "Err_xint3C1";
-                    Console
-                        .Error
+                    Console.Error
                         .WriteLine(strLoc + " Wrong Exception Thrown: " + e.GetType().FullName);
                 }
                 inCountTestcases++;
@@ -169,8 +163,7 @@ namespace DefaultNamespace
                     {
                         inCountErrors++;
                         strLoc = "Err_xint3B2";
-                        Console
-                            .Error
+                        Console.Error
                             .WriteLine(
                                 strLoc + "More specific Exception thrown : " + e.GetType().FullName
                             );
@@ -180,8 +173,7 @@ namespace DefaultNamespace
                 {
                     inCountErrors++;
                     strLoc = "Err_xint3C2";
-                    Console
-                        .Error
+                    Console.Error
                         .WriteLine(strLoc + " Wrong Exception Thrown: " + e.GetType().FullName);
                 }
             }
@@ -215,8 +207,7 @@ namespace DefaultNamespace
                         {
                             inCountErrors++;
                             strLoc = "Err_rint6Ar," + i;
-                            Console
-                                .Error
+                            Console.Error
                                 .WriteLine(
                                     strLoc
                                         + " Expected = '"
@@ -231,8 +222,7 @@ namespace DefaultNamespace
                     {
                         inCountErrors++;
                         strLoc = "Err_xint6Ar," + i;
-                        Console
-                            .Error
+                        Console.Error
                             .WriteLine(strLoc + " Exception Thrown: " + e.GetType().FullName);
                     }
                 }
@@ -252,8 +242,7 @@ namespace DefaultNamespace
                     {
                         inCountErrors++;
                         strLoc = "Err_xInt6B1";
-                        Console
-                            .Error
+                        Console.Error
                             .WriteLine(
                                 strLoc + "More specific Exception thrown : " + e.GetType().FullName
                             );
@@ -263,8 +252,7 @@ namespace DefaultNamespace
                 {
                     inCountErrors++;
                     strLoc = "Err_xInt6C1";
-                    Console
-                        .Error
+                    Console.Error
                         .WriteLine(strLoc + " Wrong Exception Thrown: " + e.GetType().FullName);
                 }
                 inCountTestcases++;
@@ -283,8 +271,7 @@ namespace DefaultNamespace
                     {
                         inCountErrors++;
                         strLoc = "Err_xInt6B2";
-                        Console
-                            .Error
+                        Console.Error
                             .WriteLine(
                                 strLoc + "More specific Exception thrown : " + e.GetType().FullName
                             );
@@ -294,8 +281,7 @@ namespace DefaultNamespace
                 {
                     inCountErrors++;
                     strLoc = "Err_xInt6C2";
-                    Console
-                        .Error
+                    Console.Error
                         .WriteLine(strLoc + " Wrong Exception Thrown: " + e.GetType().FullName);
                 }
             }
@@ -325,8 +311,7 @@ namespace DefaultNamespace
                         {
                             inCountErrors++;
                             strLoc = "Err_rint1Ar," + i;
-                            Console
-                                .Error
+                            Console.Error
                                 .WriteLine(
                                     strLoc
                                         + " Expected = '"
@@ -341,8 +326,7 @@ namespace DefaultNamespace
                     {
                         inCountErrors++;
                         strLoc = "Err_xint1Ar," + i;
-                        Console
-                            .Error
+                        Console.Error
                             .WriteLine(strLoc + " Exception Thrown: " + e.GetType().FullName);
                     }
                 }
@@ -362,8 +346,7 @@ namespace DefaultNamespace
                     {
                         inCountErrors++;
                         strLoc = "Err_xint1B1";
-                        Console
-                            .Error
+                        Console.Error
                             .WriteLine(
                                 strLoc + "More specific Exception thrown : " + e.GetType().FullName
                             );
@@ -373,8 +356,7 @@ namespace DefaultNamespace
                 {
                     inCountErrors++;
                     strLoc = "Err_xint1C1";
-                    Console
-                        .Error
+                    Console.Error
                         .WriteLine(strLoc + " Wrong Exception Thrown: " + e.GetType().FullName);
                 }
                 inCountTestcases++;
@@ -393,8 +375,7 @@ namespace DefaultNamespace
                     {
                         inCountErrors++;
                         strLoc = "Err_xint1B2";
-                        Console
-                            .Error
+                        Console.Error
                             .WriteLine(
                                 strLoc + "More specific Exception thrown : " + e.GetType().FullName
                             );
@@ -404,8 +385,7 @@ namespace DefaultNamespace
                 {
                     inCountErrors++;
                     strLoc = "Err_xint1C2";
-                    Console
-                        .Error
+                    Console.Error
                         .WriteLine(strLoc + " Wrong Exception Thrown: " + e.GetType().FullName);
                 }
             }
@@ -441,8 +421,7 @@ namespace DefaultNamespace
                         {
                             inCountErrors++;
                             strLoc = "Err_rdeciAr," + i;
-                            Console
-                                .Error
+                            Console.Error
                                 .WriteLine(
                                     strLoc
                                         + " Expected = '"
@@ -457,8 +436,7 @@ namespace DefaultNamespace
                     {
                         inCountErrors++;
                         strLoc = "Err_xdeciAr," + i;
-                        Console
-                            .Error
+                        Console.Error
                             .WriteLine(strLoc + " Exception Thrown: " + e.GetType().FullName);
                     }
                 }
@@ -478,8 +456,7 @@ namespace DefaultNamespace
                     {
                         inCountErrors++;
                         strLoc = "Err_xdeciB1";
-                        Console
-                            .Error
+                        Console.Error
                             .WriteLine(
                                 strLoc + "More specific Exception thrown : " + e.GetType().FullName
                             );
@@ -489,8 +466,7 @@ namespace DefaultNamespace
                 {
                     inCountErrors++;
                     strLoc = "Err_xdeciC1";
-                    Console
-                        .Error
+                    Console.Error
                         .WriteLine(strLoc + " Wrong Exception Thrown: " + e.GetType().FullName);
                 }
                 inCountTestcases++;
@@ -509,8 +485,7 @@ namespace DefaultNamespace
                     {
                         inCountErrors++;
                         strLoc = "Err_xdeciB2";
-                        Console
-                            .Error
+                        Console.Error
                             .WriteLine(
                                 strLoc + "More specific Exception thrown : " + e.GetType().FullName
                             );
@@ -520,8 +495,7 @@ namespace DefaultNamespace
                 {
                     inCountErrors++;
                     strLoc = "Err_xdeciC2";
-                    Console
-                        .Error
+                    Console.Error
                         .WriteLine(strLoc + " Wrong Exception Thrown: " + e.GetType().FullName);
                 }
             }
@@ -551,8 +525,7 @@ namespace DefaultNamespace
                         {
                             inCountErrors++;
                             strLoc = "Err_rstriAr," + i;
-                            Console
-                                .Error
+                            Console.Error
                                 .WriteLine(
                                     strLoc
                                         + " Expected = '"
@@ -567,8 +540,7 @@ namespace DefaultNamespace
                     {
                         inCountErrors++;
                         strLoc = "Err_xstriAr," + i;
-                        Console
-                            .Error
+                        Console.Error
                             .WriteLine(strLoc + " Exception Thrown: " + e.GetType().FullName);
                     }
                 }
@@ -587,8 +559,7 @@ namespace DefaultNamespace
                     {
                         inCountErrors++;
                         strLoc = "Err_xstriB1";
-                        Console
-                            .Error
+                        Console.Error
                             .WriteLine(
                                 strLoc + " More specific Exception thrown : " + e.GetType().FullName
                             );
@@ -598,8 +569,7 @@ namespace DefaultNamespace
                 {
                     inCountErrors++;
                     strLoc = "Err_xstriC1";
-                    Console
-                        .Error
+                    Console.Error
                         .WriteLine(strLoc + " Wrong Exception Thrown: " + e.GetType().FullName);
                 }
                 inCountTestcases++;
@@ -618,8 +588,7 @@ namespace DefaultNamespace
                     {
                         inCountErrors++;
                         strLoc = "Err_xstriB2";
-                        Console
-                            .Error
+                        Console.Error
                             .WriteLine(
                                 strLoc + " More specific Exception thrown : " + e.GetType().FullName
                             );
@@ -629,8 +598,7 @@ namespace DefaultNamespace
                 {
                     inCountErrors++;
                     strLoc = "Err_xstriC2";
-                    Console
-                        .Error
+                    Console.Error
                         .WriteLine(strLoc + " Wrong Exception Thrown: " + e.GetType().FullName);
                 }
                 inCountTestcases++;
@@ -649,8 +617,7 @@ namespace DefaultNamespace
                     {
                         inCountErrors++;
                         strLoc = "Err_xstriB4";
-                        Console
-                            .Error
+                        Console.Error
                             .WriteLine(
                                 strLoc + " More specific Exception thrown : " + e.GetType().FullName
                             );
@@ -660,8 +627,7 @@ namespace DefaultNamespace
                 {
                     inCountErrors++;
                     strLoc = "Err_xstriC4";
-                    Console
-                        .Error
+                    Console.Error
                         .WriteLine(strLoc + " Wrong Exception Thrown: " + e.GetType().FullName);
                 }
                 inCountTestcases++;
@@ -680,8 +646,7 @@ namespace DefaultNamespace
                     {
                         inCountErrors++;
                         strLoc = "Err_xstriB3";
-                        Console
-                            .Error
+                        Console.Error
                             .WriteLine(
                                 strLoc + " More specific Exception thrown : " + e.GetType().FullName
                             );
@@ -691,8 +656,7 @@ namespace DefaultNamespace
                 {
                     inCountErrors++;
                     strLoc = "Err_xstriC3";
-                    Console
-                        .Error
+                    Console.Error
                         .WriteLine(strLoc + " Wrong Exception Thrown: " + e.GetType().FullName);
                 }
             }
@@ -724,8 +688,7 @@ namespace DefaultNamespace
                         {
                             inCountErrors++;
                             strLoc = "Err_rstri2Ar," + i;
-                            Console
-                                .Error
+                            Console.Error
                                 .WriteLine(
                                     strLoc
                                         + " Expected = '"
@@ -740,8 +703,7 @@ namespace DefaultNamespace
                     {
                         inCountErrors++;
                         strLoc = "Err_xstri2Ar," + i;
-                        Console
-                            .Error
+                        Console.Error
                             .WriteLine(strLoc + " Exception Thrown: " + e.GetType().FullName);
                     }
                 }
@@ -764,8 +726,7 @@ namespace DefaultNamespace
                     {
                         inCountErrors++;
                         strLoc = "Err_xstri2B5";
-                        Console
-                            .Error
+                        Console.Error
                             .WriteLine(
                                 strLoc + " More specific Exception thrown : " + e.GetType().FullName
                             );
@@ -775,8 +736,7 @@ namespace DefaultNamespace
                 {
                     inCountErrors++;
                     strLoc = "Err_xstri2C5";
-                    Console
-                        .Error
+                    Console.Error
                         .WriteLine(strLoc + " Wrong Exception Thrown: " + e.GetType().FullName);
                 }
                 inCountTestcases++;
@@ -797,8 +757,7 @@ namespace DefaultNamespace
                 {
                     inCountErrors++;
                     strLoc = "Err_xstri2C1";
-                    Console
-                        .Error
+                    Console.Error
                         .WriteLine(strLoc + " Wrong Exception Thrown: " + e.GetType().FullName);
                 }
                 inCountTestcases++;
@@ -817,8 +776,7 @@ namespace DefaultNamespace
                     {
                         inCountErrors++;
                         strLoc = "Err_xstri2B2";
-                        Console
-                            .Error
+                        Console.Error
                             .WriteLine(
                                 strLoc + " More specific Exception thrown : " + e.GetType().FullName
                             );
@@ -828,8 +786,7 @@ namespace DefaultNamespace
                 {
                     inCountErrors++;
                     strLoc = "Err_xstri2C2";
-                    Console
-                        .Error
+                    Console.Error
                         .WriteLine(strLoc + " Wrong Exception Thrown: " + e.GetType().FullName);
                 }
                 inCountTestcases++;
@@ -848,8 +805,7 @@ namespace DefaultNamespace
                     {
                         inCountErrors++;
                         strLoc = "Err_xstri2B5";
-                        Console
-                            .Error
+                        Console.Error
                             .WriteLine(
                                 strLoc + " More specific Exception thrown : " + e.GetType().FullName
                             );
@@ -859,8 +815,7 @@ namespace DefaultNamespace
                 {
                     inCountErrors++;
                     strLoc = "Err_xstri2C5";
-                    Console
-                        .Error
+                    Console.Error
                         .WriteLine(strLoc + " Wrong Exception Thrown: " + e.GetType().FullName);
                 }
                 inCountTestcases++;
@@ -879,8 +834,7 @@ namespace DefaultNamespace
                     {
                         inCountErrors++;
                         strLoc = "Err_xstri2B6";
-                        Console
-                            .Error
+                        Console.Error
                             .WriteLine(
                                 strLoc + " More specific Exception thrown : " + e.GetType().FullName
                             );
@@ -890,8 +844,7 @@ namespace DefaultNamespace
                 {
                     inCountErrors++;
                     strLoc = "Err_xstri2C6";
-                    Console
-                        .Error
+                    Console.Error
                         .WriteLine(strLoc + " Wrong Exception Thrown: " + e.GetType().FullName);
                 }
                 inCountTestcases++;
@@ -910,8 +863,7 @@ namespace DefaultNamespace
                     {
                         inCountErrors++;
                         strLoc = "Err_xstri2B7";
-                        Console
-                            .Error
+                        Console.Error
                             .WriteLine(
                                 strLoc + " More specific Exception thrown : " + e.GetType().FullName
                             );
@@ -921,8 +873,7 @@ namespace DefaultNamespace
                 {
                     inCountErrors++;
                     strLoc = "Err_xstri2C7";
-                    Console
-                        .Error
+                    Console.Error
                         .WriteLine(strLoc + " Wrong Exception Thrown: " + e.GetType().FullName);
                 }
                 inCountTestcases++;
@@ -941,8 +892,7 @@ namespace DefaultNamespace
                     {
                         inCountErrors++;
                         strLoc = "Err_xstri2B8";
-                        Console
-                            .Error
+                        Console.Error
                             .WriteLine(
                                 strLoc + " More specific Exception thrown : " + e.GetType().FullName
                             );
@@ -952,8 +902,7 @@ namespace DefaultNamespace
                 {
                     inCountErrors++;
                     strLoc = "Err_xstri2C8";
-                    Console
-                        .Error
+                    Console.Error
                         .WriteLine(strLoc + " Wrong Exception Thrown: " + e.GetType().FullName);
                 }
                 inCountTestcases++;
@@ -972,8 +921,7 @@ namespace DefaultNamespace
                     {
                         inCountErrors++;
                         strLoc = "Err_xstri2B8";
-                        Console
-                            .Error
+                        Console.Error
                             .WriteLine(
                                 strLoc + " More specific Exception thrown : " + e.GetType().FullName
                             );
@@ -983,8 +931,7 @@ namespace DefaultNamespace
                 {
                     inCountErrors++;
                     strLoc = "Err_xstri2C8";
-                    Console
-                        .Error
+                    Console.Error
                         .WriteLine(strLoc + " Wrong Exception Thrown: " + e.GetType().FullName);
                 }
                 inCountTestcases++;
@@ -1003,8 +950,7 @@ namespace DefaultNamespace
                     {
                         inCountErrors++;
                         strLoc = "Err_xstri2B0";
-                        Console
-                            .Error
+                        Console.Error
                             .WriteLine(
                                 strLoc + " More specific Exception thrown : " + e.GetType().FullName
                             );
@@ -1014,8 +960,7 @@ namespace DefaultNamespace
                 {
                     inCountErrors++;
                     strLoc = "Err_xstri2C0";
-                    Console
-                        .Error
+                    Console.Error
                         .WriteLine(strLoc + " Wrong Exception Thrown: " + e.GetType().FullName);
                 }
                 inCountTestcases++;
@@ -1034,8 +979,7 @@ namespace DefaultNamespace
                     {
                         inCountErrors++;
                         strLoc = "Err_xstri2B9";
-                        Console
-                            .Error
+                        Console.Error
                             .WriteLine(
                                 strLoc + " More specific Exception thrown : " + e.GetType().FullName
                             );
@@ -1045,8 +989,7 @@ namespace DefaultNamespace
                 {
                     inCountErrors++;
                     strLoc = "Err_xstri2C9";
-                    Console
-                        .Error
+                    Console.Error
                         .WriteLine(strLoc + " Wrong Exception Thrown: " + e.GetType().FullName);
                 }
                 inCountTestcases++;
@@ -1065,8 +1008,7 @@ namespace DefaultNamespace
                     {
                         inCountErrors++;
                         strLoc = "Err_xstri2B4";
-                        Console
-                            .Error
+                        Console.Error
                             .WriteLine(
                                 strLoc + " More specific Exception thrown : " + e.GetType().FullName
                             );
@@ -1076,8 +1018,7 @@ namespace DefaultNamespace
                 {
                     inCountErrors++;
                     strLoc = "Err_xstri2C4";
-                    Console
-                        .Error
+                    Console.Error
                         .WriteLine(strLoc + " Wrong Exception Thrown: " + e.GetType().FullName);
                 }
                 inCountTestcases++;
@@ -1096,8 +1037,7 @@ namespace DefaultNamespace
                     {
                         inCountErrors++;
                         strLoc = "Err_xstri2B3";
-                        Console
-                            .Error
+                        Console.Error
                             .WriteLine(
                                 strLoc + " More specific Exception thrown : " + e.GetType().FullName
                             );
@@ -1107,8 +1047,7 @@ namespace DefaultNamespace
                 {
                     inCountErrors++;
                     strLoc = "Err_xstri2C3";
-                    Console
-                        .Error
+                    Console.Error
                         .WriteLine(strLoc + " Wrong Exception Thrown: " + e.GetType().FullName);
                 }
             }

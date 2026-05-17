@@ -42,8 +42,7 @@ namespace System.ServiceModel.Channels
         {
             if (context == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("context"));
             }
 
@@ -52,8 +51,7 @@ namespace System.ServiceModel.Channels
                 && !context.Binding.Scheme.Equals("https", StringComparison.OrdinalIgnoreCase)
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(

@@ -307,8 +307,7 @@ namespace System.ServiceModel.Security
         public byte[] Decrypt(byte[] encryptedContent)
         {
             if (encryptedContent == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("encryptedContent");
             ThrowIfDisposed();
 
@@ -328,8 +327,7 @@ namespace System.ServiceModel.Security
             );
             if (errorCode != 0)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new Win32Exception(errorCode));
             }
 
@@ -357,8 +355,7 @@ namespace System.ServiceModel.Security
             ThrowIfDisposed();
             SecurityBuffer[] securityBuffer = new SecurityBuffer[3];
 
-            byte[] tokenBuffer = DiagnosticUtility
-                .Utility
+            byte[] tokenBuffer = DiagnosticUtility.Utility
                 .AllocateByteArray(SecuritySizes.SecurityTrailer);
             securityBuffer[0] = new SecurityBuffer(
                 tokenBuffer,
@@ -374,8 +371,7 @@ namespace System.ServiceModel.Security
                 dataBuffer.Length,
                 BufferType.Data
             );
-            byte[] paddingBuffer = DiagnosticUtility
-                .Utility
+            byte[] paddingBuffer = DiagnosticUtility.Utility
                 .AllocateByteArray(SecuritySizes.BlockSize);
             securityBuffer[2] = new SecurityBuffer(
                 paddingBuffer,
@@ -387,8 +383,7 @@ namespace System.ServiceModel.Security
             int errorCode = SspiWrapper.EncryptMessage(this.securityContext, securityBuffer, 0);
             if (errorCode != 0)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new Win32Exception(errorCode));
             }
 
@@ -401,8 +396,7 @@ namespace System.ServiceModel.Security
                 else if (securityBuffer[i].type == BufferType.Padding)
                     paddingLen = securityBuffer[i].size;
             }
-            byte[] encryptedData = DiagnosticUtility
-                .Utility
+            byte[] encryptedData = DiagnosticUtility.Utility
                 .AllocateByteArray(checked(tokenLen + dataBuffer.Length + paddingLen));
 
             Buffer.BlockCopy(tokenBuffer, 0, encryptedData, 0, tokenLen);
@@ -470,8 +464,7 @@ namespace System.ServiceModel.Security
                     && policyHelper.ProtectionScenario != ProtectionScenario.TrustedProxy
                 )
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new SecurityTokenException(
                                 SR.GetString(SR.SecurityChannelBindingMissing)
@@ -575,11 +568,8 @@ namespace System.ServiceModel.Security
 
             if (DiagnosticUtility.ShouldTraceInformation)
             {
-                IMD.SecurityTraceRecordHelper.TraceChannelBindingInformation(
-                    policyHelper,
-                    this.isServer,
-                    channelbinding
-                );
+                IMD.SecurityTraceRecordHelper
+                    .TraceChannelBindingInformation(policyHelper, this.isServer, channelbinding);
             }
 
             if ((statusCode & unchecked((int)0x80000000)) != 0)
@@ -595,8 +585,7 @@ namespace System.ServiceModel.Security
                     // If we have prompted enough number of times (DefaultMaxPromptAttempts) with wrong credentials, then we do not prompt again and throw.
                     if (MaxPromptAttempts >= DefaultMaxPromptAttempts)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new Win32Exception(
                                     statusCode,
@@ -658,8 +647,7 @@ namespace System.ServiceModel.Security
 
                         CloseContext();
                         this.isCompleted = true;
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new Win32Exception(
                                     (int)errorCode,
@@ -679,8 +667,7 @@ namespace System.ServiceModel.Security
                     )
                 )
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new Win32Exception(
                                 statusCode,
@@ -693,8 +680,7 @@ namespace System.ServiceModel.Security
                 }
                 else
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new Win32Exception(statusCode, SR.GetString(SR.InvalidSspiNegotiation))
                         );
@@ -746,11 +732,12 @@ namespace System.ServiceModel.Security
                             securityContext,
                             out serviceBindingNameSentByClient
                         );
-                        IMD.SecurityTraceRecordHelper.TraceServiceNameBindingOnServer(
-                            serviceBindingNameSentByClient,
-                            this.servicePrincipalName,
-                            policyHelper.ServiceNameCollection
-                        );
+                        IMD.SecurityTraceRecordHelper
+                            .TraceServiceNameBindingOnServer(
+                                serviceBindingNameSentByClient,
+                                this.servicePrincipalName,
+                                policyHelper.ServiceNameCollection
+                            );
                     }
 
                     policyHelper.CheckServiceBinding(
@@ -772,8 +759,7 @@ namespace System.ServiceModel.Security
             ThrowIfDisposed();
             if (!IsValidContext)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new Win32Exception((int)SecurityStatus.InvalidHandle));
             }
 
@@ -820,8 +806,7 @@ namespace System.ServiceModel.Security
         {
             if (!IsValidContext)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new Win32Exception((int)SecurityStatus.InvalidHandle));
             }
 
@@ -831,8 +816,7 @@ namespace System.ServiceModel.Security
             if (status != SecurityStatus.OK)
             {
                 Utility.CloseInvalidOutSafeHandle(token);
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new Win32Exception((int)status));
             }
             return token;
@@ -840,8 +824,7 @@ namespace System.ServiceModel.Security
 
         void OnBadData()
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(new MessageSecurityException(SR.GetString(SR.BadData)));
         }
 
@@ -851,8 +834,7 @@ namespace System.ServiceModel.Security
             {
                 if (this.disposed)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new ObjectDisposedException(null));
                 }
             }

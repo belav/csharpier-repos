@@ -24,8 +24,7 @@ namespace System.ServiceModel
         {
             if (!BasicHttpsSecurityModeHelper.IsDefined(mode))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentOutOfRangeException("mode"));
             }
             HttpTransportSecurity httpTransportSecurity =
@@ -54,8 +53,7 @@ namespace System.ServiceModel
             {
                 if (!BasicHttpsSecurityModeHelper.IsDefined(value))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new ArgumentOutOfRangeException("value"));
                 }
 

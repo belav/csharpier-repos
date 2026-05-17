@@ -90,8 +90,7 @@ namespace Mono.Linker
         )
         {
             if (
-                PrimaryAttributeInfo
-                    .CustomAttributesOrigins
+                PrimaryAttributeInfo.CustomAttributesOrigins
                     .TryGetValue(customAttribute, out origin)
             )
                 return true;

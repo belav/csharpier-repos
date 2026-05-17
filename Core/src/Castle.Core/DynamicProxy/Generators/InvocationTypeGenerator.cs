@@ -152,11 +152,9 @@ namespace Castle.DynamicProxy.Generators
                 var paramType = invocation.GetClosedParameterType(param.ParameterType);
                 if (paramType.IsByRef)
                 {
-                    var localReference = invokeMethodOnTarget
-                        .CodeBuilder
+                    var localReference = invokeMethodOnTarget.CodeBuilder
                         .DeclareLocal(paramType.GetElementType());
-                    invokeMethodOnTarget
-                        .CodeBuilder
+                    invokeMethodOnTarget.CodeBuilder
                         .AddStatement(
                             new AssignStatement(
                                 localReference,
@@ -205,8 +203,7 @@ namespace Castle.DynamicProxy.Generators
             {
                 var returnType = invocation.GetClosedParameterType(callbackMethod.ReturnType);
                 returnValue = invokeMethodOnTarget.CodeBuilder.DeclareLocal(returnType);
-                invokeMethodOnTarget
-                    .CodeBuilder
+                invokeMethodOnTarget.CodeBuilder
                     .AddStatement(
                         new AssignStatement(returnValue, methodOnTargetInvocationExpression)
                     );
@@ -247,8 +244,7 @@ namespace Castle.DynamicProxy.Generators
             {
                 var index = byRefArgument.Key;
                 var localReference = byRefArgument.Value;
-                invokeMethodOnTarget
-                    .CodeBuilder
+                invokeMethodOnTarget.CodeBuilder
                     .AddStatement(
                         new MethodInvocationExpression(
                             SelfReference.Self,
@@ -271,8 +267,7 @@ namespace Castle.DynamicProxy.Generators
             var baseCtorArguments = GetBaseCtorArguments(targetType, out baseConstructor);
 
             var constructor = CreateConstructor(invocation, baseCtorArguments);
-            constructor
-                .CodeBuilder
+            constructor.CodeBuilder
                 .AddStatement(
                     new ConstructorInvocationStatement(baseConstructor, baseCtorArguments)
                 );
@@ -373,8 +368,7 @@ namespace Castle.DynamicProxy.Generators
                 typeof(void),
                 new[] { typeof(object) }
             );
-            changeInvocationTarget
-                .CodeBuilder
+            changeInvocationTarget.CodeBuilder
                 .AddStatement(
                     new AssignStatement(
                         targetField,
@@ -393,11 +387,9 @@ namespace Castle.DynamicProxy.Generators
             );
 
             var proxyObject = new FieldReference(InvocationMethods.ProxyObject);
-            var localProxy = changeProxyTarget
-                .CodeBuilder
+            var localProxy = changeProxyTarget.CodeBuilder
                 .DeclareLocal(typeof(IProxyTargetAccessor));
-            changeProxyTarget
-                .CodeBuilder
+            changeProxyTarget.CodeBuilder
                 .AddStatement(
                     new AssignStatement(
                         localProxy,
@@ -409,8 +401,7 @@ namespace Castle.DynamicProxy.Generators
                 nameof(IProxyTargetAccessor.DynProxySetTarget)
             );
 
-            changeProxyTarget
-                .CodeBuilder
+            changeProxyTarget.CodeBuilder
                 .AddStatement(
                     new MethodInvocationExpression(
                         localProxy,

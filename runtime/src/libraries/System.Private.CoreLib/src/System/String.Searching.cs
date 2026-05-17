@@ -53,15 +53,13 @@ namespace System
             {
                 case StringComparison.CurrentCulture:
                 case StringComparison.CurrentCultureIgnoreCase:
-                    return CultureInfo
-                        .CurrentCulture
+                    return CultureInfo.CurrentCulture
                         .CompareInfo
                         .IndexOf(this, value, GetCaseCompareOfComparisonCulture(comparisonType));
 
                 case StringComparison.InvariantCulture:
                 case StringComparison.InvariantCultureIgnoreCase:
-                    return CompareInfo
-                        .Invariant
+                    return CompareInfo.Invariant
                         .IndexOf(this, value, GetCaseCompareOfComparisonCulture(comparisonType));
 
                 case StringComparison.Ordinal:
@@ -291,8 +289,7 @@ namespace System
             {
                 case StringComparison.CurrentCulture:
                 case StringComparison.CurrentCultureIgnoreCase:
-                    return CultureInfo
-                        .CurrentCulture
+                    return CultureInfo.CurrentCulture
                         .CompareInfo
                         .IndexOf(
                             this,
@@ -304,8 +301,7 @@ namespace System
 
                 case StringComparison.InvariantCulture:
                 case StringComparison.InvariantCultureIgnoreCase:
-                    return CompareInfo
-                        .Invariant
+                    return CompareInfo.Invariant
                         .IndexOf(
                             this,
                             value,
@@ -483,8 +479,7 @@ namespace System
             {
                 case StringComparison.CurrentCulture:
                 case StringComparison.CurrentCultureIgnoreCase:
-                    return CultureInfo
-                        .CurrentCulture
+                    return CultureInfo.CurrentCulture
                         .CompareInfo
                         .LastIndexOf(
                             this,
@@ -496,8 +491,7 @@ namespace System
 
                 case StringComparison.InvariantCulture:
                 case StringComparison.InvariantCultureIgnoreCase:
-                    return CompareInfo
-                        .Invariant
+                    return CompareInfo.Invariant
                         .LastIndexOf(
                             this,
                             value,
@@ -508,8 +502,7 @@ namespace System
 
                 case StringComparison.Ordinal:
                 case StringComparison.OrdinalIgnoreCase:
-                    return CompareInfo
-                        .Invariant
+                    return CompareInfo.Invariant
                         .LastIndexOf(
                             this,
                             value,

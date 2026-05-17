@@ -38,8 +38,7 @@ public class ConvertUsingWithNullables
     {
         protected override void Seed(TestContext context)
         {
-            context
-                .MyTable
+            context.MyTable
                 .AddRange(
                     new[]
                     {

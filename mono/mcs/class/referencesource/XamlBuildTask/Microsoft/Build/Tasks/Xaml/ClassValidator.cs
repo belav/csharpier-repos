@@ -79,15 +79,16 @@ namespace Microsoft.Build.Tasks.Xaml
                 this.eventArgs = new List<LogData>();
             }
 
-            this.eventArgs.Add(
-                new LogData()
-                {
-                    FileName = this.xamlFileName,
-                    LineNumber = e.LineNumber,
-                    LinePosition = e.LinePosition,
-                    Message = e.Message,
-                }
-            );
+            this.eventArgs
+                .Add(
+                    new LogData()
+                    {
+                        FileName = this.xamlFileName,
+                        LineNumber = e.LineNumber,
+                        LinePosition = e.LinePosition,
+                        Message = e.Message,
+                    }
+                );
         }
     }
 }

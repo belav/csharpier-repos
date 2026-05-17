@@ -32,10 +32,11 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.RazorCompiler.UnitTests
 
             var generator = new PipelineCallbackGenerator(ctx =>
             {
-                var syntaxProvider = ctx.SyntaxProvider.CreateSyntaxProvider(
-                    (n, _) => n.IsKind(SyntaxKind.ClassDeclaration),
-                    (c, _) => c.Node
-                );
+                var syntaxProvider = ctx.SyntaxProvider
+                    .CreateSyntaxProvider(
+                        (n, _) => n.IsKind(SyntaxKind.ClassDeclaration),
+                        (c, _) => c.Node
+                    );
 
                 ctx.RegisterHostOutput(
                     syntaxProvider,

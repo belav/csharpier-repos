@@ -29,8 +29,7 @@ namespace System.Data.Common
             if (hr == OleDbHResult.S_OK)
             {
                 ppIErrorInfo = (UnsafeNativeMethods.IErrorInfo)
-                    OleDbComWrappers
-                        .Instance
+                    OleDbComWrappers.Instance
                         .GetOrCreateObjectForComInstance(
                             pErrorInfo,
                             CreateObjectFlags.UniqueInstance

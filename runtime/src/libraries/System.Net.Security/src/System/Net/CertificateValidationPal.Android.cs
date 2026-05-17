@@ -61,8 +61,7 @@ namespace System.Net
             {
                 // Constructing a new X509Certificate2 adds a global reference to the pointer, so we dispose this handle
                 using (
-                    SafeX509Handle handle = Interop
-                        .AndroidCrypto
+                    SafeX509Handle handle = Interop.AndroidCrypto
                         .SSLStreamGetPeerCertificate(sslContext)
                 )
                 {
@@ -90,8 +89,7 @@ namespace System.Net
                         // Constructing a new X509Certificate2 adds a global reference to the pointer, so we dispose this handle
                         using (var handle = new SafeX509Handle(ptr))
                         {
-                            chain
-                                .ChainPolicy
+                            chain.ChainPolicy
                                 .ExtraStore
                                 .Add(new X509Certificate2(handle.DangerousGetHandle()));
                         }

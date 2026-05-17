@@ -1771,9 +1771,8 @@ namespace System.Data.Services.Client
                 ParameterExpression collectorSourceParameter = resultSelector.Parameters[0];
                 ParameterExpression introducedRangeParameter = resultSelector.Parameters[1];
                 MemberInfo[] memberProperties = new MemberInfo[ne.Members.Count];
-                PropertyInfo[] properties = ne.Type.GetProperties(
-                    BindingFlags.Public | BindingFlags.Instance
-                );
+                PropertyInfo[] properties = ne.Type
+                    .GetProperties(BindingFlags.Public | BindingFlags.Instance);
                 Dictionary<string, Expression> sourceAccessors = new Dictionary<string, Expression>(
                     constructorParams.Length - 1,
                     StringComparer.Ordinal

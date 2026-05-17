@@ -349,8 +349,7 @@ namespace System.ServiceModel.Channels
             // to be a little bit smarter when people just to access the content of the ByteStreamMessage.
             if (this.position == ReaderPosition.EndElement || this.position == ReaderPosition.EOF)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new InvalidOperationException(
                             SR.ByteStreamReaderNotInByteStream(

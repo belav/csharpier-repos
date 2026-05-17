@@ -221,8 +221,7 @@ public class ReadUtf8
 
         [MethodImpl(MethodImplOptions.NoInlining)]
         static bool TryGetBytes_64(Span<byte> buffer, out int bytesWritten) =>
-            Encoding
-                .UTF8
+            Encoding.UTF8
                 .TryGetBytes(
                     "0000111122223333000011112222333300001111222233330000111122223333",
                     buffer,
@@ -231,8 +230,7 @@ public class ReadUtf8
 
         [MethodImpl(MethodImplOptions.NoInlining)]
         static bool TryGetBytes_128(Span<byte> buffer, out int bytesWritten) =>
-            Encoding
-                .UTF8
+            Encoding.UTF8
                 .TryGetBytes(
                     "00001111222233330000111122223333000011112222333300001111222233330000111122223333000011112222333300001111222233330000111122223333",
                     buffer,

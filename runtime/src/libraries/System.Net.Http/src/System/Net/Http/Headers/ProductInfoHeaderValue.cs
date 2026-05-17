@@ -80,8 +80,7 @@ namespace System.Net.Http.Headers
         public static ProductInfoHeaderValue Parse(string input)
         {
             int index = 0;
-            object result = ProductInfoHeaderParser
-                .SingleValueParser
+            object result = ProductInfoHeaderParser.SingleValueParser
                 .ParseValue(input, null, ref index);
             if (index < input.Length)
             {
@@ -107,8 +106,7 @@ namespace System.Net.Http.Headers
             parsedValue = null;
 
             if (
-                ProductInfoHeaderParser
-                    .SingleValueParser
+                ProductInfoHeaderParser.SingleValueParser
                     .TryParseValue(input, null, ref index, out object? output)
             )
             {

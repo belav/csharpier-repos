@@ -32,8 +32,7 @@ namespace System.ServiceModel.Activation
 
             if (string.IsNullOrEmpty(constructorString))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR2.GetString(
@@ -45,8 +44,7 @@ namespace System.ServiceModel.Activation
 
             if (!HostingEnvironment.IsHosted)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR2.GetString(SR2.ProcessNotExecutingUnderHostedContext)
@@ -81,8 +79,7 @@ namespace System.ServiceModel.Activation
 
                         if (HostingEnvironment.VirtualPathProvider.FileExists(xomlVirtualPath))
                         {
-                            workflowDefinitionStream = HostingEnvironment
-                                .VirtualPathProvider
+                            workflowDefinitionStream = HostingEnvironment.VirtualPathProvider
                                 .GetFile(xomlVirtualPath)
                                 .Open();
                             string ruleFilePath = Path.ChangeExtension(
@@ -92,8 +89,7 @@ namespace System.ServiceModel.Activation
 
                             if (HostingEnvironment.VirtualPathProvider.FileExists(ruleFilePath))
                             {
-                                ruleDefinitionStream = HostingEnvironment
-                                    .VirtualPathProvider
+                                ruleDefinitionStream = HostingEnvironment.VirtualPathProvider
                                     .GetFile(ruleFilePath)
                                     .Open();
                                 workflowDefinitionContext = new StreamedWorkflowDefinitionContext(
@@ -140,8 +136,7 @@ namespace System.ServiceModel.Activation
 
             if (workflowDefinitionContext == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR2.GetString(
@@ -177,8 +172,7 @@ namespace System.ServiceModel.Activation
             }
             if (baseAddresses.Length == 0)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(SR2.GetString(SR2.BaseAddressesNotProvided))
                     );
@@ -222,8 +216,7 @@ namespace System.ServiceModel.Activation
 
                 if (string.IsNullOrEmpty(compiledString))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR2.GetString(
@@ -236,8 +229,7 @@ namespace System.ServiceModel.Activation
                 string[] components = compiledString.Split('|');
                 if (components.Length < 3)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR2.GetString(

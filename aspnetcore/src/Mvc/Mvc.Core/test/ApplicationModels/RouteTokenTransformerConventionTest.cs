@@ -16,8 +16,7 @@ public class RouteTokenTransformerConventionTest
         var convention = new RouteTokenTransformerConvention(transformer);
 
         var model = new ActionModel(GetMethodInfo(), Array.Empty<object>());
-        model
-            .Selectors
+        model.Selectors
             .Add(new SelectorModel() { AttributeRouteModel = new AttributeRouteModel() });
 
         // Act
@@ -35,8 +34,7 @@ public class RouteTokenTransformerConventionTest
         var convention = new CustomRouteTokenTransformerConvention(transformer);
 
         var model = new ActionModel(GetMethodInfo(), Array.Empty<object>());
-        model
-            .Selectors
+        model.Selectors
             .Add(new SelectorModel() { AttributeRouteModel = new AttributeRouteModel() });
 
         // Act

@@ -70,8 +70,7 @@ namespace System.Net.Sockets
             Debug.Assert(acceptHandle == null, $"Unexpected acceptHandle: {acceptHandle}");
 
             IntPtr acceptedFd;
-            SocketError socketError = handle
-                .AsyncContext
+            SocketError socketError = handle.AsyncContext
                 .AcceptAsync(
                     _acceptBuffer!,
                     out int socketAddressLen,
@@ -106,8 +105,7 @@ namespace System.Net.Sockets
 
         internal unsafe SocketError DoOperationConnect(SafeSocketHandle handle)
         {
-            SocketError socketError = handle
-                .AsyncContext
+            SocketError socketError = handle.AsyncContext
                 .ConnectAsync(_socketAddress!.Buffer, ConnectCompletionCallback);
             if (socketError != SocketError.IOPending)
             {
@@ -169,8 +167,7 @@ namespace System.Net.Sockets
                 bool noReceivedFlags = _currentSocket!.ProtocolType == ProtocolType.Tcp;
                 if (noReceivedFlags)
                 {
-                    errorCode = handle
-                        .AsyncContext
+                    errorCode = handle.AsyncContext
                         .ReceiveAsync(
                             _buffer.Slice(_offset, _count),
                             _socketFlags,
@@ -182,8 +179,7 @@ namespace System.Net.Sockets
                 }
                 else
                 {
-                    errorCode = handle
-                        .AsyncContext
+                    errorCode = handle.AsyncContext
                         .ReceiveAsync(
                             _buffer.Slice(_offset, _count),
                             _socketFlags,
@@ -196,8 +192,7 @@ namespace System.Net.Sockets
             }
             else
             {
-                errorCode = handle
-                    .AsyncContext
+                errorCode = handle.AsyncContext
                     .ReceiveAsync(
                         _bufferListInternal!,
                         _socketFlags,
@@ -230,8 +225,7 @@ namespace System.Net.Sockets
             int socketAddressLen;
             if (_bufferList == null)
             {
-                errorCode = handle
-                    .AsyncContext
+                errorCode = handle.AsyncContext
                     .ReceiveFromAsync(
                         _buffer.Slice(_offset, _count),
                         _socketFlags,
@@ -245,8 +239,7 @@ namespace System.Net.Sockets
             }
             else
             {
-                errorCode = handle
-                    .AsyncContext
+                errorCode = handle.AsyncContext
                     .ReceiveFromAsync(
                         _bufferListInternal!,
                         _socketFlags,
@@ -322,8 +315,7 @@ namespace System.Net.Sockets
             int bytesReceived;
             SocketFlags receivedFlags;
             IPPacketInformation ipPacketInformation;
-            SocketError socketError = handle
-                .AsyncContext
+            SocketError socketError = handle.AsyncContext
                 .ReceiveMessageFromAsync(
                     _buffer.Slice(_offset, _count),
                     _bufferListInternal,
@@ -364,8 +356,7 @@ namespace System.Net.Sockets
             SocketError errorCode;
             if (_bufferList == null)
             {
-                errorCode = handle
-                    .AsyncContext
+                errorCode = handle.AsyncContext
                     .SendAsync(
                         _buffer,
                         _offset,
@@ -378,8 +369,7 @@ namespace System.Net.Sockets
             }
             else
             {
-                errorCode = handle
-                    .AsyncContext
+                errorCode = handle.AsyncContext
                     .SendAsync(
                         _bufferListInternal!,
                         _socketFlags,
@@ -486,8 +476,7 @@ namespace System.Net.Sockets
             SocketError errorCode;
             if (_bufferList == null)
             {
-                errorCode = handle
-                    .AsyncContext
+                errorCode = handle.AsyncContext
                     .SendToAsync(
                         _buffer,
                         _offset,
@@ -501,8 +490,7 @@ namespace System.Net.Sockets
             }
             else
             {
-                errorCode = handle
-                    .AsyncContext
+                errorCode = handle.AsyncContext
                     .SendToAsync(
                         _bufferListInternal!,
                         _socketFlags,

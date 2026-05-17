@@ -1885,8 +1885,7 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
             IEnumerable<SyntaxToken>? oldTokens,
             IEnumerable<SyntaxToken>? newTokens
         ) =>
-            LcsTokens
-                .Instance
+            LcsTokens.Instance
                 .ComputeDistance(
                     CreateArrayForDistanceCalculation(oldTokens),
                     CreateArrayForDistanceCalculation(newTokens)
@@ -1902,8 +1901,7 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
             IEnumerable<SyntaxNode>? oldNodes,
             IEnumerable<SyntaxNode>? newNodes
         ) =>
-            LcsNodes
-                .Instance
+            LcsNodes.Instance
                 .ComputeDistance(
                     CreateArrayForDistanceCalculation(oldNodes),
                     CreateArrayForDistanceCalculation(newNodes)
@@ -1916,8 +1914,7 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
             IEnumerable<SyntaxNode>? oldNodes,
             IEnumerable<SyntaxNode>? newNodes
         ) =>
-            LcsNodes
-                .Instance
+            LcsNodes.Instance
                 .GetEdits(oldNodes.AsImmutableOrEmpty(), newNodes.AsImmutableOrEmpty());
 
         /// <summary>
@@ -1935,8 +1932,7 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
             IEnumerable<SyntaxToken>? oldTokens,
             IEnumerable<SyntaxToken>? newTokens
         ) =>
-            LcsTokens
-                .Instance
+            LcsTokens.Instance
                 .GetEdits(oldTokens.AsImmutableOrEmpty(), newTokens.AsImmutableOrEmpty());
 
         /// <summary>

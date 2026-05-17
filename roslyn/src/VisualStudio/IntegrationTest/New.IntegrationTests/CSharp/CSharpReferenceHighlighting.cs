@@ -92,23 +92,19 @@ class C
     }
 }";
             await TestServices.Editor.SetTextAsync(text, HangMitigatingCancellationToken);
-            await TestServices
-                .Editor
+            await TestServices.Editor
                 .PlaceCaretAsync("x", charsOffset: 0, HangMitigatingCancellationToken);
-            await TestServices
-                .Workspace
+            await TestServices.Workspace
                 .WaitForAsyncOperationsAsync(
                     FeatureAttribute.ReferenceHighlighting,
                     HangMitigatingCancellationToken
                 );
-            await TestServices
-                .Shell
+            await TestServices.Shell
                 .ExecuteCommandAsync(
                     WellKnownCommands.Edit.NextHighlightedReference,
                     HangMitigatingCancellationToken
                 );
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .CurrentLineTextAsync(
                     "        x$$ = 3;",
                     assertCaretPosition: true,
@@ -132,44 +128,37 @@ class C
     }
 }";
             await TestServices.Editor.SetTextAsync(text, HangMitigatingCancellationToken);
-            await TestServices
-                .Editor
+            await TestServices.Editor
                 .PlaceCaretAsync("x", charsOffset: 0, HangMitigatingCancellationToken);
 
-            await TestServices
-                .Workspace
+            await TestServices.Workspace
                 .WaitForAsyncOperationsAsync(
                     FeatureAttribute.ReferenceHighlighting,
                     HangMitigatingCancellationToken
                 );
-            await TestServices
-                .Shell
+            await TestServices.Shell
                 .ExecuteCommandAsync(
                     WellKnownCommands.Edit.NextHighlightedReference,
                     HangMitigatingCancellationToken
                 );
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .CurrentLineTextAsync(
                     "        x$$++;",
                     assertCaretPosition: true,
                     HangMitigatingCancellationToken
                 );
 
-            await TestServices
-                .Workspace
+            await TestServices.Workspace
                 .WaitForAsyncOperationsAsync(
                     FeatureAttribute.ReferenceHighlighting,
                     HangMitigatingCancellationToken
                 );
-            await TestServices
-                .Shell
+            await TestServices.Shell
                 .ExecuteCommandAsync(
                     WellKnownCommands.Edit.NextHighlightedReference,
                     HangMitigatingCancellationToken
                 );
-            await TestServices
-                .EditorVerifier
+            await TestServices.EditorVerifier
                 .CurrentLineTextAsync(
                     "        x$$ = 3;",
                     assertCaretPosition: true,
@@ -184,8 +173,7 @@ class C
         )
         {
             await TestServices.Editor.PlaceCaretAsync(marker, charsOffset: -1, cancellationToken);
-            await TestServices
-                .Workspace
+            await TestServices.Workspace
                 .WaitForAllAsyncOperationsAsync(
                     [
                         FeatureAttribute.Workspace,
@@ -238,8 +226,7 @@ class C
         private async Task VerifyNoneAsync(string marker, CancellationToken cancellationToken)
         {
             await TestServices.Editor.PlaceCaretAsync(marker, charsOffset: -1, cancellationToken);
-            await TestServices
-                .Workspace
+            await TestServices.Workspace
                 .WaitForAllAsyncOperationsAsync(
                     [
                         FeatureAttribute.Workspace,

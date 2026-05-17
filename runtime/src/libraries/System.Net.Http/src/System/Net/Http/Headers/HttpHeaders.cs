@@ -913,8 +913,7 @@ namespace System.Net.Http.Headers
             int index = 0;
 
             if (
-                descriptor
-                    .Parser
+                descriptor.Parser
                     .TryParseValue(
                         value,
                         info.ParsedAndInvalidValues,
@@ -952,8 +951,7 @@ namespace System.Net.Http.Headers
                 while (index < value.Length)
                 {
                     if (
-                        descriptor
-                            .Parser
+                        descriptor.Parser
                             .TryParseValue(
                                 value,
                                 info.ParsedAndInvalidValues,
@@ -1124,8 +1122,7 @@ namespace System.Net.Http.Headers
             }
 
             int index = 0;
-            object parsedValue = descriptor
-                .Parser
+            object parsedValue = descriptor.Parser
                 .ParseValue(value, info.ParsedAndInvalidValues, ref index);
 
             // The raw string only represented one value (which was successfully parsed). Add the value and return.
@@ -1156,8 +1153,7 @@ namespace System.Net.Http.Headers
 
             while (index < value.Length)
             {
-                parsedValue = descriptor
-                    .Parser
+                parsedValue = descriptor.Parser
                     .ParseValue(value, info.ParsedAndInvalidValues, ref index);
                 if (parsedValue != null)
                 {

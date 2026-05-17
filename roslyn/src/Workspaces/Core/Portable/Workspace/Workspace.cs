@@ -299,13 +299,14 @@ namespace Microsoft.CodeAnalysis
                             oldSolution,
                             newSolution
                         );
-                        data.@this.RaiseWorkspaceChangedEventAsync(
-                            changeKind,
-                            oldSolution,
-                            newSolution,
-                            projectId,
-                            documentId
-                        );
+                        data.@this
+                            .RaiseWorkspaceChangedEventAsync(
+                                changeKind,
+                                oldSolution,
+                                newSolution,
+                                projectId,
+                                documentId
+                            );
                     },
                     cancellationToken
                 )
@@ -787,12 +788,13 @@ namespace Microsoft.CodeAnalysis
                     CheckProjectIsInSolution(oldSolution, projectId);
 
                     return this.AdjustReloadedProject(
-                        oldSolution.GetRequiredProject(projectId),
-                        oldSolution
-                            .RemoveProject(projectId)
-                            .AddProject(reloadedProjectInfo)
-                            .GetRequiredProject(projectId)
-                    ).Solution;
+                            oldSolution.GetRequiredProject(projectId),
+                            oldSolution
+                                .RemoveProject(projectId)
+                                .AddProject(reloadedProjectInfo)
+                                .GetRequiredProject(projectId)
+                        )
+                        .Solution;
                 },
                 WorkspaceChangeKind.ProjectReloaded,
                 projectId
@@ -1122,12 +1124,13 @@ namespace Microsoft.CodeAnalysis
                     foreach (
                         var projectId in data.documentInfos.Select(i => i.Id.ProjectId).Distinct()
                     )
-                        data.@this.RaiseWorkspaceChangedEventAsync(
-                            WorkspaceChangeKind.ProjectChanged,
-                            oldSolution,
-                            newSolution,
-                            projectId
-                        );
+                        data.@this
+                            .RaiseWorkspaceChangedEventAsync(
+                                WorkspaceChangeKind.ProjectChanged,
+                                oldSolution,
+                                newSolution,
+                                projectId
+                            );
                 }
             );
         }
@@ -1457,8 +1460,7 @@ namespace Microsoft.CodeAnalysis
                             // Have the linked documents point *into* the same instance data that the initial document
                             // points at.  This way things like tree data can be shared across docs.
 
-                            var options = oldSolution
-                                .Services
+                            var options = oldSolution.Services
                                 .GetRequiredService<IWorkspaceConfigurationService>()
                                 .Options;
 
@@ -1493,12 +1495,13 @@ namespace Microsoft.CodeAnalysis
 
                     foreach (var updatedDocumentInfo in data.updatedDocumentIds)
                     {
-                        data.@this.RaiseWorkspaceChangedEventAsync(
-                            data.changeKind,
-                            oldSolution,
-                            newSolution,
-                            documentId: updatedDocumentInfo
-                        );
+                        data.@this
+                            .RaiseWorkspaceChangedEventAsync(
+                                data.changeKind,
+                                oldSolution,
+                                newSolution,
+                                documentId: updatedDocumentInfo
+                            );
                     }
                 }
             );
@@ -1808,8 +1811,7 @@ namespace Microsoft.CodeAnalysis
                 }
 
                 if (
-                    !CurrentSolution
-                        .AnalyzerReferences
+                    !CurrentSolution.AnalyzerReferences
                         .SequenceEqual(newSolution.AnalyzerReferences)
                 )
                 {
@@ -1908,8 +1910,7 @@ namespace Microsoft.CodeAnalysis
                 // if an .editorconfig was added, removed, or modified. We'll compute the options without that change, and if there's
                 // still changes then we need to verify we can apply those. The .editorconfig changes will also be represented as
                 // document edits, which the host is expected to actually apply directly.
-                var newOptionsWithoutSyntaxTreeOptionsChange = projectChanges
-                    .NewProject
+                var newOptionsWithoutSyntaxTreeOptionsChange = projectChanges.NewProject
                     .CompilationOptions
                     .WithSyntaxTreeOptionsProvider(
                         projectChanges.OldProject.CompilationOptions.SyntaxTreeOptionsProvider
@@ -1979,8 +1980,7 @@ namespace Microsoft.CodeAnalysis
                 && projectChanges
                     .GetChangedDocuments()
                     .Any(id =>
-                        projectChanges
-                            .NewProject
+                        projectChanges.NewProject
                             .GetDocument(id)!
                             .HasInfoChanged(projectChanges.OldProject.GetDocument(id)!)
                     )
@@ -2191,8 +2191,7 @@ namespace Microsoft.CodeAnalysis
             // if an .editorconfig was added, removed, or modified. We'll compute the options without that change, and if there's
             // still changes then we need to verify we can apply those. The .editorconfig changes will also be represented as
             // document edits, which the host is expected to actually apply directly.
-            var newOptionsWithoutSyntaxTreeOptionsChange = projectChanges
-                .NewProject
+            var newOptionsWithoutSyntaxTreeOptionsChange = projectChanges.NewProject
                 .CompilationOptions
                 ?.WithSyntaxTreeOptionsProvider(
                     projectChanges.OldProject.CompilationOptions!.SyntaxTreeOptionsProvider
@@ -2400,8 +2399,7 @@ namespace Microsoft.CodeAnalysis
                 project.MetadataReferences,
                 project.AnalyzerReferences,
                 additionalDocuments: project.AdditionalDocuments.Select(CreateDocumentInfoWithText),
-                analyzerConfigDocuments: project
-                    .AnalyzerConfigDocuments
+                analyzerConfigDocuments: project.AnalyzerConfigDocuments
                     .Select(CreateDocumentInfoWithText),
                 hostObjectType: project.State.HostObjectType
             );

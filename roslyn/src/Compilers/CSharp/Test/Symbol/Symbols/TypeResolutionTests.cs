@@ -90,8 +90,7 @@ namespace System
             NamedTypeSymbol c3TestClass = c3.GetTypeByMetadataName("System.TestClass");
             Assert.NotSame(c2TestClass, c3TestClass);
             Assert.True(
-                c3TestClass
-                    .ContainingAssembly
+                c3TestClass.ContainingAssembly
                     .RepresentsTheSameAssemblyButHasUnresolvedReferencesByComparisonTo(
                         c2TestClass.ContainingAssembly
                     )
@@ -156,16 +155,14 @@ namespace System
                 arraySym.ToDisplayString()
             );
 
-            var ptrSym = c.Assembly.GetTypeByReflectionType(
-                typeof(char).MakePointerType().MakePointerType()
-            );
+            var ptrSym = c.Assembly
+                .GetTypeByReflectionType(typeof(char).MakePointerType().MakePointerType());
             Assert.NotNull(ptrSym);
             Assert.Equal("char**", ptrSym.ToDisplayString());
 
             string testType1 = typeof(C<,>).DeclaringType.FullName;
-            var nestedSym1 = c.Assembly.GetTypeByReflectionType(
-                typeof(C<int, bool>.D.E<double, float>.F<byte>)
-            );
+            var nestedSym1 = c.Assembly
+                .GetTypeByReflectionType(typeof(C<int, bool>.D.E<double, float>.F<byte>));
             Assert.Equal(
                 testType1 + ".C<int, bool>.D.E<double, float>.F<byte>",
                 nestedSym1.ToDisplayString()
@@ -177,14 +174,12 @@ namespace System
             //Assert.Equal(testType2 + ".C<int, bool>.D.E<double, float>.F<byte>", nestedSym2.ToDisplayString());
 
             // Process is defined in System, which isn't referenced:
-            var err = c.Assembly.GetTypeByReflectionType(
-                typeof(C<Process, bool>.D.E<double, float>.F<byte>)
-            );
+            var err = c.Assembly
+                .GetTypeByReflectionType(typeof(C<Process, bool>.D.E<double, float>.F<byte>));
             Assert.Null(err);
 
-            err = c.Assembly.GetTypeByReflectionType(
-                typeof(C<int, bool>.D.E<double, Process>.F<byte>)
-            );
+            err = c.Assembly
+                .GetTypeByReflectionType(typeof(C<int, bool>.D.E<double, Process>.F<byte>));
             Assert.Null(err);
 
             err = c.Assembly.GetTypeByReflectionType(typeof(Process[]));

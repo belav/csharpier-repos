@@ -113,8 +113,7 @@ public class OptionTagHelper : TagHelper
                         childContent = await output.GetChildContentAsync();
                     }
 
-                    selected = currentValues
-                        .ValuesAndEncodedValues
+                    selected = currentValues.ValuesAndEncodedValues
                         .Contains(childContent.GetContent());
                 }
 

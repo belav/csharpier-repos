@@ -380,8 +380,7 @@ namespace System.Windows.Forms
                 line_width_top_left = 2;
             }
 
-            ThemeEngine
-                .Current
+            ThemeEngine.Current
                 .CPDrawBorder(
                     graphics,
                     bounds,
@@ -417,8 +416,7 @@ namespace System.Windows.Forms
             ButtonBorderStyle bottomStyle
         )
         {
-            ThemeEngine
-                .Current
+            ThemeEngine.Current
                 .CPDrawBorder(
                     graphics,
                     bounds,
@@ -643,8 +641,7 @@ namespace System.Windows.Forms
 
         public static void DrawMenuGlyph(Graphics graphics, Rectangle rectangle, MenuGlyph glyph)
         {
-            ThemeEngine
-                .Current
+            ThemeEngine.Current
                 .CPDrawMenuGlyph(
                     graphics,
                     rectangle,
@@ -768,8 +765,7 @@ namespace System.Windows.Forms
             ButtonState state
         )
         {
-            ThemeEngine
-                .Current
+            ThemeEngine.Current
                 .CPDrawScrollButton(graphics, new Rectangle(x, y, width, height), button, state);
         }
 
@@ -830,8 +826,7 @@ namespace System.Windows.Forms
             StringFormat format
         )
         {
-            ThemeEngine
-                .Current
+            ThemeEngine.Current
                 .CPDrawStringDisabled(graphics, s, font, color, layoutRectangle, format);
         }
 

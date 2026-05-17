@@ -183,8 +183,7 @@ namespace System.Data
         private SerializationFormat _remotingFormat = SerializationFormat.Xml;
 
         private static int _objectTypeCount; // Bid counter
-        private readonly int _objectID = System
-            .Threading
+        private readonly int _objectID = System.Threading
             .Interlocked
             .Increment(ref _objectTypeCount);
 
@@ -2371,8 +2370,7 @@ namespace System.Data
                                 // do this extra check only if the namespace is really going to change
                                 // inheritance-wise.
                                 if (
-                                    dataSet
-                                        .Tables
+                                    dataSet.Tables
                                         .Contains(this.TableName, realNamespace, true, true)
                                 )
                                     throw ExceptionBuilder.DuplicateTableName2(
@@ -2425,17 +2423,16 @@ namespace System.Data
                 {
                     if (realNamespace != null)
                     {
-                        rel.ChildTable.CheckNamespaceValidityForNestedParentRelations(
-                            realNamespace,
-                            this
-                        );
+                        rel.ChildTable
+                            .CheckNamespaceValidityForNestedParentRelations(realNamespace, this);
                     }
                     else
                     {
-                        rel.ChildTable.CheckNamespaceValidityForNestedParentRelations(
-                            GetInheritedNamespace(new List<DataTable>()),
-                            this
-                        );
+                        rel.ChildTable
+                            .CheckNamespaceValidityForNestedParentRelations(
+                                GetInheritedNamespace(new List<DataTable>()),
+                                this
+                            );
                     }
                 }
             }
@@ -3027,8 +3024,7 @@ namespace System.Data
                     if (foreign.Table == foreign.RelatedTable)
                     {
                         ForeignKeyConstraint clonedConstraint = foreign.Clone(clone);
-                        Constraint oldConstraint = clone
-                            .Constraints
+                        Constraint oldConstraint = clone.Constraints
                             .FindConstraint(clonedConstraint);
                         if (oldConstraint != null)
                         {
@@ -4750,12 +4746,8 @@ namespace System.Data
                     if (dc.dependentColumns != null)
                     {
                         //BugBug - passing in null for cachedRows.  This means expression columns as keys does not work when key changes.
-                        dc.Table.EvaluateDependentExpressions(
-                            dc.dependentColumns,
-                            dr,
-                            version,
-                            null
-                        );
+                        dc.Table
+                            .EvaluateDependentExpressions(dc.dependentColumns, dr, version, null);
                     }
                 }
             }
@@ -6898,8 +6890,7 @@ namespace System.Data
 
                         if (
                             reader.LocalName == Keywords.XSD_SCHEMA
-                            && reader
-                                .NamespaceURI
+                            && reader.NamespaceURI
                                 .StartsWith(Keywords.XSD_NS_START, StringComparison.Ordinal)
                         )
                         {
@@ -6987,8 +6978,7 @@ namespace System.Data
 
                             if (
                                 reader.LocalName == Keywords.XSD_SCHEMA
-                                && reader
-                                    .NamespaceURI
+                                && reader.NamespaceURI
                                     .StartsWith(Keywords.XSD_NS_START, StringComparison.Ordinal)
                             )
                             {
@@ -7203,8 +7193,7 @@ namespace System.Data
 
                         if (
                             reader.LocalName == Keywords.XSD_SCHEMA
-                            && reader
-                                .NamespaceURI
+                            && reader.NamespaceURI
                                 .StartsWith(Keywords.XSD_NS_START, StringComparison.Ordinal)
                         )
                         {
@@ -7325,8 +7314,7 @@ namespace System.Data
 
                         if (
                             reader.LocalName == Keywords.XSD_SCHEMA
-                            && reader
-                                .NamespaceURI
+                            && reader.NamespaceURI
                                 .StartsWith(Keywords.XSD_NS_START, StringComparison.Ordinal)
                         )
                         {
@@ -7768,8 +7756,7 @@ namespace System.Data
                                         ForeignKeyConstraint newFKC = (ForeignKeyConstraint)
                                             fkc.Clone(destinationTable.DataSet);
                                         if (
-                                            !destinationTable
-                                                .Constraints
+                                            !destinationTable.Constraints
                                                 .Contains(newFKC.ConstraintName)
                                         )
                                             destinationTable.Constraints.Add(newFKC); // we know that the dest table is already in the table
@@ -8328,8 +8315,7 @@ namespace System.Data
                             && relatedRow.oldRecord != relatedRow.newRecord
                         )
                         {
-                            relatedRow
-                                .Table
+                            relatedRow.Table
                                 .EvaluateDependentExpressions(
                                     relatedRow.Table.dependentColumns,
                                     relatedRow,
@@ -8339,8 +8325,7 @@ namespace System.Data
                         }
                         if (relatedRow.newRecord != -1)
                         {
-                            relatedRow
-                                .Table
+                            relatedRow.Table
                                 .EvaluateDependentExpressions(
                                     relatedRow.Table.dependentColumns,
                                     relatedRow,
@@ -8350,8 +8335,7 @@ namespace System.Data
                         }
                         if (relatedRow.tempRecord != -1)
                         {
-                            relatedRow
-                                .Table
+                            relatedRow.Table
                                 .EvaluateDependentExpressions(
                                     relatedRow.Table.dependentColumns,
                                     relatedRow,
@@ -8399,20 +8383,17 @@ namespace System.Data
 
                     if (row.oldRecord != -1 && row.oldRecord != row.newRecord)
                     {
-                        column[row.oldRecord] = column
-                            .DataExpression
+                        column[row.oldRecord] = column.DataExpression
                             .Evaluate(row, DataRowVersion.Original);
                     }
                     if (row.newRecord != -1)
                     {
-                        column[row.newRecord] = column
-                            .DataExpression
+                        column[row.newRecord] = column.DataExpression
                             .Evaluate(row, DataRowVersion.Current);
                     }
                     if (row.tempRecord != -1)
                     {
-                        column[row.tempRecord] = column
-                            .DataExpression
+                        column[row.tempRecord] = column.DataExpression
                             .Evaluate(row, DataRowVersion.Proposed);
                     }
                 }

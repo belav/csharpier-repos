@@ -17,8 +17,7 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
         )
         {
             var position = new SnapshotPoint(lineToBeIndented.Snapshot, result.BasePosition);
-            var pointInSurfaceSnapshot = textView
-                .BufferGraph
+            var pointInSurfaceSnapshot = textView.BufferGraph
                 .MapUpToSnapshot(
                     position,
                     PointTrackingMode.Positive,
@@ -32,8 +31,7 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
                     .GetColumnOfFirstNonWhitespaceCharacterOrEndOfLine(textView.Options);
             }
 
-            var lineInSurfaceSnapshot = pointInSurfaceSnapshot
-                .Value
+            var lineInSurfaceSnapshot = pointInSurfaceSnapshot.Value
                 .Snapshot
                 .GetLineFromPosition(pointInSurfaceSnapshot.Value.Position);
             var offsetInLine =

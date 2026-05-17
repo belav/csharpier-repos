@@ -59,8 +59,7 @@ namespace System.IdentityModel
             public ManagedPsha1(byte[] secret, byte[] label, byte[] seed)
             {
                 this.secret = secret;
-                this.seed = DiagnosticUtility
-                    .Utility
+                this.seed = DiagnosticUtility.Utility
                     .AllocateByteArray(checked(label.Length + seed.Length));
                 label.CopyTo(this.seed, 0);
                 seed.CopyTo(this.seed, label.Length);
@@ -71,8 +70,7 @@ namespace System.IdentityModel
                 this.position = 0;
                 this.hmac = CryptoHelper.NewHmacSha1KeyedHashAlgorithm(secret);
 
-                this.buffer = DiagnosticUtility
-                    .Utility
+                this.buffer = DiagnosticUtility.Utility
                     .AllocateByteArray(checked(this.hmac.HashSize / 8 + this.seed.Length));
             }
 
@@ -80,8 +78,7 @@ namespace System.IdentityModel
             {
                 if (derivedKeySize < 0)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentOutOfRangeException(
                                 "derivedKeySize",
@@ -91,8 +88,7 @@ namespace System.IdentityModel
                 }
                 if (this.position > position)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentOutOfRangeException(
                                 "position",

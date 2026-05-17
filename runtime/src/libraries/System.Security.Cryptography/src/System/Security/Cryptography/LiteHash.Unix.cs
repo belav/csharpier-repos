@@ -130,8 +130,7 @@ namespace System.Security.Cryptography
 
             uint length = (uint)destination.Length;
             Check(
-                Interop
-                    .Crypto
+                Interop.Crypto
                     .EvpDigestFinalEx(_ctx, ref MemoryMarshal.GetReference(destination), ref length)
             );
 
@@ -148,8 +147,7 @@ namespace System.Security.Cryptography
         {
             uint length = (uint)destination.Length;
             Check(
-                Interop
-                    .Crypto
+                Interop.Crypto
                     .EvpDigestCurrent(_ctx, ref MemoryMarshal.GetReference(destination), ref length)
             );
             Debug.Assert(length == _hashSizeInBytes);
@@ -193,8 +191,7 @@ namespace System.Security.Cryptography
                 throw new CryptographicException();
             }
 
-            _ctx = Interop
-                .Crypto
+            _ctx = Interop.Crypto
                 .HmacCreate(ref MemoryMarshal.GetReference(key), key.Length, algorithm);
             Interop.Crypto.CheckValidOpenSslHandle(_ctx);
         }
@@ -215,8 +212,7 @@ namespace System.Security.Cryptography
 
             int length = destination.Length;
             Check(
-                Interop
-                    .Crypto
+                Interop.Crypto
                     .HmacCurrent(_ctx, ref MemoryMarshal.GetReference(destination), ref length)
             );
             Debug.Assert(length == _hashSizeInBytes);
@@ -229,8 +225,7 @@ namespace System.Security.Cryptography
 
             int length = destination.Length;
             Check(
-                Interop
-                    .Crypto
+                Interop.Crypto
                     .HmacFinal(_ctx, ref MemoryMarshal.GetReference(destination), ref length)
             );
             Debug.Assert(length == _hashSizeInBytes);

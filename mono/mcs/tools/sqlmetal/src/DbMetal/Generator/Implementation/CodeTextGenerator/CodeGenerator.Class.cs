@@ -113,8 +113,7 @@ namespace DbMetal.Generator.Implementation.CodeTextGenerator
             GenerationContext context
         )
         {
-            List<DbLinq.Schema.Dbml.Column> primaryKeys = table
-                .Type
+            List<DbLinq.Schema.Dbml.Column> primaryKeys = table.Type
                 .Columns
                 .Where(c => c.IsPrimaryKey)
                 .ToList();
@@ -598,8 +597,7 @@ namespace DbMetal.Generator.Implementation.CodeTextGenerator
         )
         {
             // the following is apparently useless
-            DbLinq.Schema.Dbml.Table targetTable = schema
-                .Tables
+            DbLinq.Schema.Dbml.Table targetTable = schema.Tables
                 .FirstOrDefault(t => t.Type.Name == child.Type);
             if (targetTable == null)
             {
@@ -706,8 +704,7 @@ namespace DbMetal.Generator.Implementation.CodeTextGenerator
         )
         {
             // the following is apparently useless
-            DbLinq.Schema.Dbml.Table targetTable = schema
-                .Tables
+            DbLinq.Schema.Dbml.Table targetTable = schema.Tables
                 .FirstOrDefault(t => t.Type.Name == parent.Type);
             if (targetTable == null)
             {
@@ -906,8 +903,7 @@ namespace DbMetal.Generator.Implementation.CodeTextGenerator
                         // 6.1.
                         for (int keyIndex = 0; keyIndex < parentKeys.Length; keyIndex++)
                         {
-                            var column = table
-                                .Type
+                            var column = table.Type
                                 .Columns
                                 .Single(c => c.Member == childKeys[keyIndex]);
                             var columnType = System.Type.GetType(column.Type);

@@ -121,8 +121,7 @@ namespace Mono.Linker
                     }
                     catch (Exception e) when (e is IOException or ObjectDisposedException)
                     {
-                        Console
-                            .Error
+                        Console.Error
                             .WriteLine("Cannot read response file due to '{0}'", e.Message);
                         return false;
                     }

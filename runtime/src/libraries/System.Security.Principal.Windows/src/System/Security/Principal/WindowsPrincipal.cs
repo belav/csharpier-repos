@@ -157,8 +157,7 @@ namespace System.Security.Principal
                 if (_identity.ImpersonationLevel == TokenImpersonationLevel.None)
                 {
                     if (
-                        !Interop
-                            .Advapi32
+                        !Interop.Advapi32
                             .DuplicateTokenEx(
                                 _identity.AccessToken,
                                 (uint)TokenAccessLevels.Query,
@@ -177,8 +176,7 @@ namespace System.Security.Principal
 
                 // CheckTokenMembership will check if the SID is both present and enabled in the access token.
                 if (
-                    !Interop
-                        .Advapi32
+                    !Interop.Advapi32
                         .CheckTokenMembership(
                             (
                                 _identity.ImpersonationLevel != TokenImpersonationLevel.None

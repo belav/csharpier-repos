@@ -33,8 +33,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UserDiagnos
     public class DiagnosticAnalyzerDriverTests
     {
         private static readonly TestComposition s_compositionWithMockDiagnosticUpdateSourceRegistrationService =
-            EditorTestCompositions
-                .EditorFeatures
+            EditorTestCompositions.EditorFeatures
                 .AddExcludedPartTypes(typeof(IDiagnosticUpdateSourceRegistrationService))
                 .AddParts(typeof(MockDiagnosticUpdateSourceRegistrationService));
 
@@ -66,8 +65,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UserDiagnos
             var analyzerReference = new AnalyzerImageReference(
                 ImmutableArray.Create<DiagnosticAnalyzer>(analyzer)
             );
-            var newSolution = workspace
-                .CurrentSolution
+            var newSolution = workspace.CurrentSolution
                 .WithAnalyzerReferences(new[] { analyzerReference })
                 .Projects
                 .Single()
@@ -118,13 +116,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UserDiagnos
                     ImmutableArray.Create<DiagnosticAnalyzer>(ideEngineAnalyzer)
                 );
                 ideEngineWorkspace.TryApplyChanges(
-                    ideEngineWorkspace
-                        .CurrentSolution
+                    ideEngineWorkspace.CurrentSolution
                         .WithAnalyzerReferences(new[] { analyzerReference })
                 );
 
-                var ideEngineDocument = ideEngineWorkspace
-                    .CurrentSolution
+                var ideEngineDocument = ideEngineWorkspace.CurrentSolution
                     .Projects
                     .Single()
                     .Documents
@@ -137,8 +133,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UserDiagnos
                 foreach (var method in methodNames)
                 {
                     Assert.False(
-                        ideEngineAnalyzer
-                            .CallLog
+                        ideEngineAnalyzer.CallLog
                             .Any(e =>
                                 e.CallerName == method
                                 && e.MethodKind == MethodKind.DelegateInvoke
@@ -146,8 +141,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UserDiagnos
                             )
                     );
                     Assert.False(
-                        ideEngineAnalyzer
-                            .CallLog
+                        ideEngineAnalyzer.CallLog
                             .Any(e =>
                                 e.CallerName == method
                                 && e.MethodKind == MethodKind.DelegateInvoke
@@ -155,15 +149,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UserDiagnos
                             )
                     );
                     Assert.True(
-                        ideEngineAnalyzer
-                            .CallLog
+                        ideEngineAnalyzer.CallLog
                             .Any(e =>
                                 e.CallerName == method && e.SymbolKind == SymbolKind.NamedType
                             )
                     );
                     Assert.False(
-                        ideEngineAnalyzer
-                            .CallLog
+                        ideEngineAnalyzer.CallLog
                             .Any(e => e.CallerName == method && e.SymbolKind == SymbolKind.Property)
                     );
                 }
@@ -175,8 +167,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UserDiagnos
                 composition: s_compositionWithMockDiagnosticUpdateSourceRegistrationService
             );
             var compilerEngineCompilation = (CSharpCompilation)
-                compilerEngineWorkspace
-                    .CurrentSolution
+                compilerEngineWorkspace.CurrentSolution
                     .Projects
                     .Single()
                     .GetRequiredCompilationAsync(CancellationToken.None)
@@ -185,8 +176,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UserDiagnos
             foreach (var method in methodNames)
             {
                 Assert.False(
-                    compilerEngineAnalyzer
-                        .CallLog
+                    compilerEngineAnalyzer.CallLog
                         .Any(e =>
                             e.CallerName == method
                             && e.MethodKind == MethodKind.DelegateInvoke
@@ -194,8 +184,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UserDiagnos
                         )
                 );
                 Assert.False(
-                    compilerEngineAnalyzer
-                        .CallLog
+                    compilerEngineAnalyzer.CallLog
                         .Any(e =>
                             e.CallerName == method
                             && e.MethodKind == MethodKind.DelegateInvoke
@@ -203,13 +192,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UserDiagnos
                         )
                 );
                 Assert.True(
-                    compilerEngineAnalyzer
-                        .CallLog
+                    compilerEngineAnalyzer.CallLog
                         .Any(e => e.CallerName == method && e.SymbolKind == SymbolKind.NamedType)
                 );
                 Assert.False(
-                    compilerEngineAnalyzer
-                        .CallLog
+                    compilerEngineAnalyzer.CallLog
                         .Any(e => e.CallerName == method && e.SymbolKind == SymbolKind.Property)
                 );
             }
@@ -233,8 +220,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UserDiagnos
                         ImmutableArray.Create(analyzer)
                     );
                     workspace.TryApplyChanges(
-                        workspace
-                            .CurrentSolution
+                        workspace.CurrentSolution
                             .WithAnalyzerReferences(new[] { analyzerReference })
                     );
 
@@ -299,8 +285,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UserDiagnos
             );
 
             workspace.TryApplyChanges(
-                workspace
-                    .CurrentSolution
+                workspace.CurrentSolution
                     .WithAnalyzerReferences(new[] { analyzerReference })
                     .AddAdditionalDocument(additionalDocId, "add.config", additionalText.GetText()!)
             );
@@ -432,13 +417,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UserDiagnos
                     ImmutableArray.Create<DiagnosticAnalyzer>(analyzer)
                 );
                 ideEngineWorkspace.TryApplyChanges(
-                    ideEngineWorkspace
-                        .CurrentSolution
+                    ideEngineWorkspace.CurrentSolution
                         .WithAnalyzerReferences(new[] { analyzerReference })
                 );
 
-                var ideEngineDocument = ideEngineWorkspace
-                    .CurrentSolution
+                var ideEngineDocument = ideEngineWorkspace.CurrentSolution
                     .Projects
                     .Single()
                     .Documents
@@ -473,8 +456,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UserDiagnos
             )
             {
                 var compilerEngineCompilation = (CSharpCompilation)
-                    compilerEngineWorkspace
-                        .CurrentSolution
+                    compilerEngineWorkspace.CurrentSolution
                         .Projects
                         .Single()
                         .GetRequiredCompilationAsync(CancellationToken.None)
@@ -549,8 +531,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UserDiagnos
             var analyzer = new InvalidSpanAnalyzer();
             using var compilerEngineWorkspace = TestWorkspace.CreateCSharp(source);
             var compilerEngineCompilation = (CSharpCompilation)(
-                await compilerEngineWorkspace
-                    .CurrentSolution
+                await compilerEngineWorkspace.CurrentSolution
                     .Projects
                     .Single()
                     .GetRequiredCompilationAsync(CancellationToken.None)
@@ -1113,8 +1094,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UserDiagnos
 
             Assert.True(
                 workspace.TryApplyChanges(
-                    workspace
-                        .CurrentSolution
+                    workspace.CurrentSolution
                         .WithAnalyzerReferences(
                             new[]
                             {
@@ -1312,8 +1292,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UserDiagnos
                     if (this.mapping.TryGetValue(diagnostic.Id, out var descriptor))
                     {
                         context.ReportSuppression(
-                            Microsoft
-                                .CodeAnalysis
+                            Microsoft.CodeAnalysis
                                 .Diagnostics
                                 .Suppression
                                 .Create(descriptor, diagnostic)

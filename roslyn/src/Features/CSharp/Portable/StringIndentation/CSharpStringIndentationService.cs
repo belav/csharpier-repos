@@ -65,8 +65,7 @@ namespace Microsoft.CodeAnalysis.CSharp.StringIndentation
 
                 if (
                     node is InterpolatedStringExpressionSyntax interpolatedString
-                    && interpolatedString
-                        .StringStartToken
+                    && interpolatedString.StringStartToken
                         .IsKind(SyntaxKind.InterpolatedMultiLineRawStringStartToken)
                 )
                 {

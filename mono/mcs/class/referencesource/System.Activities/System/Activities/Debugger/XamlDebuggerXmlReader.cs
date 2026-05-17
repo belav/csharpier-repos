@@ -581,8 +581,8 @@ namespace System.Activities.Debugger
                                 {
                                     // For Value Node with known line info, we want to route the value setting process through this Reader.
                                     // Therefore we need to go back to the member node and replace the XamlMemberInvoker.
-                                    XamlNode startMemberNodeForValue =
-                                        this.bufferedXamlNodes.Peek();
+                                    XamlNode startMemberNodeForValue = this.bufferedXamlNodes
+                                        .Peek();
                                     XamlMember xamlMemberForValue = startMemberNodeForValue.Member;
                                     XamlMemberInvoker newXamlMemberInvoker =
                                         new ValueNodeXamlMemberInvoker(
@@ -598,19 +598,16 @@ namespace System.Activities.Debugger
                                 }
                                 else if (isInContent && isInitializationValue)
                                 {
-                                    XamlNode currentStartObject =
-                                        this.objectDeclarationRecords.Peek();
+                                    XamlNode currentStartObject = this.objectDeclarationRecords
+                                        .Peek();
 
                                     if (
-                                        !this.initializationValueRanges.ContainsKey(
-                                            currentStartObject
-                                        )
+                                        !this.initializationValueRanges
+                                            .ContainsKey(currentStartObject)
                                     )
                                     {
-                                        this.initializationValueRanges.Add(
-                                            currentStartObject,
-                                            valueRange
-                                        );
+                                        this.initializationValueRanges
+                                            .Add(currentStartObject, valueRange);
                                     }
                                     else
                                     {
@@ -798,10 +795,11 @@ namespace System.Activities.Debugger
                             valueRange.End.LinePosition.Value + 1
                         )
                     );
-                    this.SourceLocationCollector.AddValueRange(
-                        new DocumentRange(myStartBracket, myRealEndBracket),
-                        realValueRange
-                    );
+                    this.SourceLocationCollector
+                        .AddValueRange(
+                            new DocumentRange(myStartBracket, myRealEndBracket),
+                            realValueRange
+                        );
                 }
             }
 
@@ -835,15 +833,12 @@ namespace System.Activities.Debugger
 
         private void InjectLineInfoMemberToBuffer(XamlMember member, int value)
         {
-            this.bufferedXamlNodes.Enqueue(
-                new XamlNode { NodeType = XamlNodeType.StartMember, Member = member }
-            );
-            this.bufferedXamlNodes.Enqueue(
-                new XamlNode { NodeType = XamlNodeType.Value, Value = value }
-            );
-            this.bufferedXamlNodes.Enqueue(
-                new XamlNode { NodeType = XamlNodeType.EndMember, Member = member }
-            );
+            this.bufferedXamlNodes
+                .Enqueue(new XamlNode { NodeType = XamlNodeType.StartMember, Member = member });
+            this.bufferedXamlNodes
+                .Enqueue(new XamlNode { NodeType = XamlNodeType.Value, Value = value });
+            this.bufferedXamlNodes
+                .Enqueue(new XamlNode { NodeType = XamlNodeType.EndMember, Member = member });
         }
 
         private XamlMember CreateAttachableMember(
@@ -946,17 +941,18 @@ namespace System.Activities.Debugger
 
                 // XamlDebuggerXmlReader has no idea what the filename is (it only knew a stream of data)
                 // So we set FileName = null.
-                this.parent.NotifySourceLocationFound(
-                    instance,
-                    new SourceLocation( /* FileName = */
-                        null,
-                        startLine,
-                        startColumn,
-                        endLine,
-                        endColumn
-                    ),
-                    isValueNode: false
-                );
+                this.parent
+                    .NotifySourceLocationFound(
+                        instance,
+                        new SourceLocation( /* FileName = */
+                            null,
+                            startLine,
+                            startColumn,
+                            endLine,
+                            endColumn
+                        ),
+                        isValueNode: false
+                    );
                 this.currentObject = null;
             }
 
@@ -983,28 +979,30 @@ namespace System.Activities.Debugger
 
                 DocumentRange valueRange;
                 if (
-                    this.objRgnToInitValueRgnMapping.TryGetValue(
-                        new DocumentRange(
-                            this.startLine,
-                            this.startColumn,
-                            this.endLine,
-                            this.endColumn
-                        ),
-                        out valueRange
-                    )
+                    this.objRgnToInitValueRgnMapping
+                        .TryGetValue(
+                            new DocumentRange(
+                                this.startLine,
+                                this.startColumn,
+                                this.endLine,
+                                this.endColumn
+                            ),
+                            out valueRange
+                        )
                 )
                 {
-                    this.parent.NotifySourceLocationFound(
-                        instance,
-                        new SourceLocation( /* FileName = */
-                            null,
-                            valueRange.Start.LineNumber.Value,
-                            valueRange.Start.LinePosition.Value,
-                            valueRange.End.LineNumber.Value,
-                            valueRange.End.LinePosition.Value
-                        ),
-                        isValueNode: true
-                    );
+                    this.parent
+                        .NotifySourceLocationFound(
+                            instance,
+                            new SourceLocation( /* FileName = */
+                                null,
+                                valueRange.Start.LineNumber.Value,
+                                valueRange.Start.LinePosition.Value,
+                                valueRange.End.LineNumber.Value,
+                                valueRange.End.LinePosition.Value
+                            ),
+                            isValueNode: true
+                        );
                 }
             }
         }

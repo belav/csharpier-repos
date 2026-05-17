@@ -112,8 +112,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
                     if (
                         _equalityContract.IsStatic
-                        || !_equalityContract
-                            .Type
+                        || !_equalityContract.Type
                             .Equals(
                                 DeclaringCompilation.GetWellKnownType(WellKnownType.System_Type),
                                 TypeCompareKind.AllIgnoreOptions
@@ -160,8 +159,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
                     if (
                         baseEquals is null
-                        || !baseEquals
-                            .ContainingType
+                        || !baseEquals.ContainingType
                             .Equals(
                                 ContainingType.BaseTypeNoUseSiteDiagnostics,
                                 TypeCompareKind.AllIgnoreOptions

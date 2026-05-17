@@ -181,8 +181,7 @@ namespace System.DirectoryServices.ActiveDirectory
                             (dsNameResultItem.name.Length - 1) == dsNameResultItem.name.IndexOf('/')
                         )
                         {
-                            dnsName = dsNameResultItem
-                                .name
+                            dnsName = dsNameResultItem.name
                                 .Substring(0, dsNameResultItem.name.Length - 1);
                         }
                         else
@@ -204,8 +203,7 @@ namespace System.DirectoryServices.ActiveDirectory
                     {
                         // call DsFreeNameResultW
                         var dsFreeNameResultW = (delegate* unmanaged<IntPtr, void>)
-                            global::Interop
-                                .Kernel32
+                            global::Interop.Kernel32
                                 .GetProcAddress(DirectoryContext.ADHandle, "DsFreeNameResultW");
                         if (dsFreeNameResultW == null)
                         {
@@ -300,8 +298,7 @@ namespace System.DirectoryServices.ActiveDirectory
                     {
                         // call DsFreeNameResultW
                         var dsFreeNameResultW = (delegate* unmanaged<IntPtr, void>)
-                            global::Interop
-                                .Kernel32
+                            global::Interop.Kernel32
                                 .GetProcAddress(DirectoryContext.ADHandle, "DsFreeNameResultW");
                         if (dsFreeNameResultW == null)
                         {
@@ -1269,8 +1266,7 @@ namespace System.DirectoryServices.ActiveDirectory
 
             Utils.GetDomainAndUsername(context, out userName, out domainName);
 
-            int result = global::Interop
-                .Advapi32
+            int result = global::Interop.Advapi32
                 .LogonUser(
                     userName!,
                     domainName,
@@ -1424,8 +1420,7 @@ namespace System.DirectoryServices.ActiveDirectory
             SafeLsaPolicyHandle handle;
             global::Interop.OBJECT_ATTRIBUTES objectAttribute = default;
 
-            uint result = global::Interop
-                .Advapi32
+            uint result = global::Interop.Advapi32
                 .LsaOpenPolicy(
                     serverName,
                     ref objectAttribute,
@@ -2121,13 +2116,11 @@ namespace System.DirectoryServices.ActiveDirectory
                                                     Utils.Compare(
                                                         property,
                                                         0,
-                                                        PropertyManager
-                                                            .MsDSHasInstantiatedNCs
+                                                        PropertyManager.MsDSHasInstantiatedNCs
                                                             .Length,
                                                         PropertyManager.MsDSHasInstantiatedNCs,
                                                         0,
-                                                        PropertyManager
-                                                            .MsDSHasInstantiatedNCs
+                                                        PropertyManager.MsDSHasInstantiatedNCs
                                                             .Length
                                                     ) == 0
                                                 )
@@ -2823,8 +2816,7 @@ namespace System.DirectoryServices.ActiveDirectory
 
                     // Does the user SID have the same domain as the machine SID?
                     bool sameDomain = false;
-                    bool success = global::Interop
-                        .Advapi32
+                    bool success = global::Interop.Advapi32
                         .EqualDomainSid(pCopyOfUserSid, pMachineDomainSid, ref sameDomain);
 
                     // Since both pCopyOfUserSid and pMachineDomainSid should always be account SIDs
@@ -2863,8 +2855,7 @@ namespace System.DirectoryServices.ActiveDirectory
 
                 // Get the current thread's token
                 if (
-                    !global::Interop
-                        .Advapi32
+                    !global::Interop.Advapi32
                         .OpenThreadToken(
                             global::Interop.Kernel32.GetCurrentThread(),
                             TokenAccessLevels.Query, // TOKEN_QUERY
@@ -2880,8 +2871,7 @@ namespace System.DirectoryServices.ActiveDirectory
 
                         // Current thread doesn't have a token, try the process
                         if (
-                            !global::Interop
-                                .Advapi32
+                            !global::Interop.Advapi32
                                 .OpenProcessToken(
                                     global::Interop.Kernel32.GetCurrentProcess(),
                                     (int)TokenAccessLevels.Query,
@@ -2907,8 +2897,7 @@ namespace System.DirectoryServices.ActiveDirectory
 
                 // Retrieve the user info from the current thread's token
                 // First, determine how big a buffer we need.
-                bool success = global::Interop
-                    .Advapi32
+                bool success = global::Interop.Advapi32
                     .GetTokenInformation(
                         tokenHandle.DangerousGetHandle(),
                         (uint)global::Interop.Advapi32.TOKEN_INFORMATION_CLASS.TokenUser,
@@ -2930,8 +2919,7 @@ namespace System.DirectoryServices.ActiveDirectory
                 pBuffer = Marshal.AllocHGlobal((int)neededBufferSize);
 
                 // Load the user info into the buffer
-                success = global::Interop
-                    .Advapi32
+                success = global::Interop.Advapi32
                     .GetTokenInformation(
                         tokenHandle.DangerousGetHandle(),
                         (uint)global::Interop.Advapi32.TOKEN_INFORMATION_CLASS.TokenUser,
@@ -2986,8 +2974,7 @@ namespace System.DirectoryServices.ActiveDirectory
             try
             {
                 global::Interop.OBJECT_ATTRIBUTES oa = default;
-                uint err = global::Interop
-                    .Advapi32
+                uint err = global::Interop.Advapi32
                     .LsaOpenPolicy(
                         SystemName: null,
                         ref oa,
@@ -3006,8 +2993,7 @@ namespace System.DirectoryServices.ActiveDirectory
                 }
 
                 Debug.Assert(!policyHandle.IsInvalid);
-                err = global::Interop
-                    .Advapi32
+                err = global::Interop.Advapi32
                     .LsaQueryInformationPolicy(
                         policyHandle.DangerousGetHandle(),
                         5, // PolicyAccountDomainInformation
@@ -3033,8 +3019,7 @@ namespace System.DirectoryServices.ActiveDirectory
                 // Now we make a copy of the SID to return
                 int sidLength = global::Interop.Advapi32.GetLengthSid(info.DomainSid);
                 IntPtr pCopyOfSid = Marshal.AllocHGlobal(sidLength);
-                bool success = global::Interop
-                    .Advapi32
+                bool success = global::Interop.Advapi32
                     .CopySid(sidLength, pCopyOfSid, info.DomainSid);
                 if (!success)
                 {

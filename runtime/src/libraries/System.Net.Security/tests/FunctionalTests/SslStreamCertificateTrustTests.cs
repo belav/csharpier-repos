@@ -64,13 +64,11 @@ namespace System.Net.Security.Tests
             using (client)
             using (server)
             using (
-                X509Certificate2 serverCertificate = Configuration
-                    .Certificates
+                X509Certificate2 serverCertificate = Configuration.Certificates
                     .GetServerCertificate()
             )
             using (
-                X509Certificate2 clientCertificate = Configuration
-                    .Certificates
+                X509Certificate2 clientCertificate = Configuration.Certificates
                     .GetClientCertificate()
             )
             {

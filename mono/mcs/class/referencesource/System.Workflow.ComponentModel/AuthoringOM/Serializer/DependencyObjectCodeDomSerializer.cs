@@ -94,21 +94,23 @@ namespace System.Workflow.ComponentModel.Serialization
                                 if (
                                     (
                                         dp.IsEvent
-                                        && dp.OwnerType.GetField(
-                                            dp.Name + "Event",
-                                            BindingFlags.Static
-                                                | BindingFlags.Public
-                                                | BindingFlags.DeclaredOnly
-                                        ) != null
+                                        && dp.OwnerType
+                                            .GetField(
+                                                dp.Name + "Event",
+                                                BindingFlags.Static
+                                                    | BindingFlags.Public
+                                                    | BindingFlags.DeclaredOnly
+                                            ) != null
                                     )
                                     || (
                                         !dp.IsEvent
-                                        && dp.OwnerType.GetField(
-                                            dp.Name + "Property",
-                                            BindingFlags.Static
-                                                | BindingFlags.Public
-                                                | BindingFlags.DeclaredOnly
-                                        ) != null
+                                        && dp.OwnerType
+                                            .GetField(
+                                                dp.Name + "Property",
+                                                BindingFlags.Static
+                                                    | BindingFlags.Public
+                                                    | BindingFlags.DeclaredOnly
+                                            ) != null
                                     )
                                 )
                                     dependencyProperties.Add(dp);
@@ -137,8 +139,7 @@ namespace System.Workflow.ComponentModel.Serialization
                                 )
                             )
                             {
-                                object[] attributes = dependencyProperty
-                                    .DefaultMetadata
+                                object[] attributes = dependencyProperty.DefaultMetadata
                                     .GetAttributes(
                                         typeof(DesignerSerializationVisibilityAttribute)
                                     );
@@ -158,8 +159,7 @@ namespace System.Workflow.ComponentModel.Serialization
                                 string dependencyPropertyName =
                                     dependencyProperty.Name
                                     + ((dependencyProperty.IsEvent) ? "Event" : "Property");
-                                FieldInfo fieldInfo = dependencyProperty
-                                    .OwnerType
+                                FieldInfo fieldInfo = dependencyProperty.OwnerType
                                     .GetField(
                                         dependencyPropertyName,
                                         BindingFlags.NonPublic
@@ -291,8 +291,7 @@ namespace System.Workflow.ComponentModel.Serialization
                                     if (propertiesSerialized.Contains(dependencyProperty))
                                         continue;
 
-                                    object[] attributes = dependencyProperty
-                                        .DefaultMetadata
+                                    object[] attributes = dependencyProperty.DefaultMetadata
                                         .GetAttributes(
                                             typeof(DesignerSerializationVisibilityAttribute)
                                         );

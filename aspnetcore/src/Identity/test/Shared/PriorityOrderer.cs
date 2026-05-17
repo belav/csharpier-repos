@@ -53,8 +53,7 @@ public class PriorityOrderer : ITestCaseOrderer
             var priority = 0;
 
             foreach (
-                IAttributeInfo attr in testCase
-                    .TestMethod
+                IAttributeInfo attr in testCase.TestMethod
                     .Method
                     .GetCustomAttributes((typeof(TestPriorityAttribute)).AssemblyQualifiedName)
             )
@@ -69,8 +68,7 @@ public class PriorityOrderer : ITestCaseOrderer
         {
             list.Sort(
                 (x, y) =>
-                    StringComparer
-                        .OrdinalIgnoreCase
+                    StringComparer.OrdinalIgnoreCase
                         .Compare(x.TestMethod.Method.Name, y.TestMethod.Method.Name)
             );
             foreach (XunitTestCase testCase in list)

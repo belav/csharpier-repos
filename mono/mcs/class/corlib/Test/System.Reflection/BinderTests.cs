@@ -1467,15 +1467,16 @@ namespace MonoTests.System.Reflection
                 Assert.IsNotNull(match);
                 Assert.IsNotNull(args);
 
-                return Type.DefaultBinder.BindToMethod(
-                    bindingAttr,
-                    match,
-                    ref args,
-                    modifiers,
-                    culture,
-                    names,
-                    out state
-                );
+                return Type.DefaultBinder
+                    .BindToMethod(
+                        bindingAttr,
+                        match,
+                        ref args,
+                        modifiers,
+                        culture,
+                        names,
+                        out state
+                    );
             }
 
             public override object ChangeType(object value, Type type, CultureInfo culture)
@@ -1516,13 +1517,8 @@ namespace MonoTests.System.Reflection
             {
                 Assert.IsNotNull(match);
 
-                return Type.DefaultBinder.SelectProperty(
-                    bindingAttr,
-                    match,
-                    returnType,
-                    indexes,
-                    modifiers
-                );
+                return Type.DefaultBinder
+                    .SelectProperty(bindingAttr, match, returnType, indexes, modifiers);
             }
         }
 
@@ -1667,8 +1663,7 @@ namespace MonoTests.System.Reflection
         {
             var m = typeof(BinderTest).GetMethod("Bug325306_");
             BindingFlags flags = BindingFlags.Instance | BindingFlags.Public;
-            AssertingBinder
-                .Instance
+            AssertingBinder.Instance
                 .SelectMethod(flags, new MethodBase[] { m, m }, new Type[] { typeof(int) }, null);
         }
 
@@ -1680,8 +1675,7 @@ namespace MonoTests.System.Reflection
             var m1 = typeof(BinderTest).GetMethod("Bug325306_");
             BindingFlags flags = BindingFlags.Instance | BindingFlags.Public;
 
-            AssertingBinder
-                .Instance
+            AssertingBinder.Instance
                 .SelectMethod(flags, new MethodBase[] { m0, m1 }, new Type[] { typeof(int) }, null);
         }
 
@@ -1724,12 +1718,13 @@ namespace MonoTests.System.Reflection
         {
             var method = new MethodInfoWrapper(GetType().GetMethod("CustomMethodType_Helper"));
 
-            var res = Type.DefaultBinder.SelectMethod(
-                BindingFlags.Static | BindingFlags.Public,
-                new[] { method },
-                Type.EmptyTypes,
-                new ParameterModifier[0]
-            );
+            var res = Type.DefaultBinder
+                .SelectMethod(
+                    BindingFlags.Static | BindingFlags.Public,
+                    new[] { method },
+                    Type.EmptyTypes,
+                    new ParameterModifier[0]
+                );
             Assert.AreSame(method, res);
         }
     }

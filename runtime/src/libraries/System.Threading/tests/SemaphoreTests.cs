@@ -321,27 +321,29 @@ namespace System.Threading.Tests
             {
                 const int NumItems = 5;
                 Task.WaitAll(
-                    Task.Factory.StartNew(
-                        () =>
-                        {
-                            for (int i = 0; i < NumItems; i++)
-                                Assert.True(s.WaitOne(FailedWaitTimeout));
-                            Assert.False(s.WaitOne(0));
-                        },
-                        CancellationToken.None,
-                        TaskCreationOptions.LongRunning,
-                        TaskScheduler.Default
-                    ),
-                    Task.Factory.StartNew(
-                        () =>
-                        {
-                            for (int i = 0; i < NumItems; i++)
-                                s.Release();
-                        },
-                        CancellationToken.None,
-                        TaskCreationOptions.LongRunning,
-                        TaskScheduler.Default
-                    )
+                    Task.Factory
+                        .StartNew(
+                            () =>
+                            {
+                                for (int i = 0; i < NumItems; i++)
+                                    Assert.True(s.WaitOne(FailedWaitTimeout));
+                                Assert.False(s.WaitOne(0));
+                            },
+                            CancellationToken.None,
+                            TaskCreationOptions.LongRunning,
+                            TaskScheduler.Default
+                        ),
+                    Task.Factory
+                        .StartNew(
+                            () =>
+                            {
+                                for (int i = 0; i < NumItems; i++)
+                                    s.Release();
+                            },
+                            CancellationToken.None,
+                            TaskCreationOptions.LongRunning,
+                            TaskScheduler.Default
+                        )
                 );
             }
         }
@@ -354,35 +356,37 @@ namespace System.Threading.Tests
             const int NumItems = 5;
             var b = new Barrier(2);
             Task.WaitAll(
-                Task.Factory.StartNew(
-                    () =>
-                    {
-                        using (var s = new Semaphore(0, int.MaxValue, name))
+                Task.Factory
+                    .StartNew(
+                        () =>
                         {
-                            Assert.True(b.SignalAndWait(FailedWaitTimeout));
-                            for (int i = 0; i < NumItems; i++)
-                                Assert.True(s.WaitOne(FailedWaitTimeout));
-                            Assert.False(s.WaitOne(0));
-                        }
-                    },
-                    CancellationToken.None,
-                    TaskCreationOptions.LongRunning,
-                    TaskScheduler.Default
-                ),
-                Task.Factory.StartNew(
-                    () =>
-                    {
-                        using (var s = new Semaphore(0, int.MaxValue, name))
+                            using (var s = new Semaphore(0, int.MaxValue, name))
+                            {
+                                Assert.True(b.SignalAndWait(FailedWaitTimeout));
+                                for (int i = 0; i < NumItems; i++)
+                                    Assert.True(s.WaitOne(FailedWaitTimeout));
+                                Assert.False(s.WaitOne(0));
+                            }
+                        },
+                        CancellationToken.None,
+                        TaskCreationOptions.LongRunning,
+                        TaskScheduler.Default
+                    ),
+                Task.Factory
+                    .StartNew(
+                        () =>
                         {
-                            Assert.True(b.SignalAndWait(FailedWaitTimeout));
-                            for (int i = 0; i < NumItems; i++)
-                                s.Release();
-                        }
-                    },
-                    CancellationToken.None,
-                    TaskCreationOptions.LongRunning,
-                    TaskScheduler.Default
-                )
+                            using (var s = new Semaphore(0, int.MaxValue, name))
+                            {
+                                Assert.True(b.SignalAndWait(FailedWaitTimeout));
+                                for (int i = 0; i < NumItems; i++)
+                                    s.Release();
+                            }
+                        },
+                        CancellationToken.None,
+                        TaskCreationOptions.LongRunning,
+                        TaskScheduler.Default
+                    )
             );
         }
 

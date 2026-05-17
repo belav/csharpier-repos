@@ -351,8 +351,7 @@ namespace System
             // we'll avoid checking path lengths- we'll still fail at MAX_PATH later if we're !useAppBase when we call Path's
             // NormalizePath.
             if (!useAppBase)
-                path = System
-                    .Security
+                path = System.Security
                     .Util
                     .URLString
                     .PreProcessForExtendedPathRemoval(
@@ -623,8 +622,7 @@ namespace System
                 {
 #if !FEATURE_CORECLR
                     if (
-                        StringComparer
-                            .OrdinalIgnoreCase
+                        StringComparer.OrdinalIgnoreCase
                             .Equals("NetFx40_Legacy20SortingBehavior", str)
                     )
                     {
@@ -636,8 +634,7 @@ namespace System
                     }
 
                     if (
-                        StringComparer
-                            .OrdinalIgnoreCase
+                        StringComparer.OrdinalIgnoreCase
                             .Equals("NetFx45_Legacy40SortingBehavior", str)
                     )
                     {
@@ -651,8 +648,7 @@ namespace System
 
 #if FEATURE_RANDOMIZED_STRING_HASHING
                     if (
-                        StringComparer
-                            .OrdinalIgnoreCase
+                        StringComparer.OrdinalIgnoreCase
                             .Equals("UseRandomizedStringHashAlgorithm", str)
                     )
                     {

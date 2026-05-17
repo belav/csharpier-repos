@@ -75,8 +75,7 @@ internal class SimplifyMethodHandler
         var configOptions = await originalDocument
             .GetAnalyzerConfigOptionsAsync(cancellationToken)
             .ConfigureAwait(false);
-        var simplificationService = originalDocument
-            .Project
+        var simplificationService = originalDocument.Project
             .Services
             .GetRequiredService<ISimplificationService>();
         var options = simplificationService.GetSimplifierOptions(

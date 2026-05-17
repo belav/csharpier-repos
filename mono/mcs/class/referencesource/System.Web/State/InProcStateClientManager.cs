@@ -21,8 +21,7 @@ namespace System.Web.SessionState
 
     internal sealed class InProcSessionStateStore : SessionStateStoreProviderBase
     {
-        internal static readonly int CACHEKEYPREFIXLENGTH = CacheInternal
-            .PrefixInProcSessionState
+        internal static readonly int CACHEKEYPREFIXLENGTH = CacheInternal.PrefixInProcSessionState
             .Length;
         internal static readonly int NewLockCookie = 1;
 
@@ -480,8 +479,7 @@ namespace System.Web.SessionState
             finally
             {
                 // protected from ThreadAbortEx
-                object existingEntry = HttpRuntime
-                    .Cache
+                object existingEntry = HttpRuntime.Cache
                     .InternalCache
                     .Add(
                         key,

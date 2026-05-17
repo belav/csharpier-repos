@@ -53,8 +53,7 @@ internal sealed class ApiResponseTypeProvider
             defaultErrorType = ((ProducesErrorResponseTypeAttribute)result!).Type;
         }
 
-        var producesResponseMetadata = action
-            .EndpointMetadata
+        var producesResponseMetadata = action.EndpointMetadata
             .OfType<IProducesResponseTypeMetadata>()
             .ToList();
         var apiResponseTypes = GetApiResponseTypes(
@@ -79,8 +78,7 @@ internal sealed class ApiResponseTypeProvider
         // while searching for a filter that implements IApiResponseMetadataProvider.
         //
         // The workaround for that is to implement the metadata interface on the IFilterFactory.
-        return action
-            .FilterDescriptors
+        return action.FilterDescriptors
             .Select(fd => fd.Filter)
             .OfType<IApiResponseMetadataProvider>()
             .ToList();
@@ -94,8 +92,7 @@ internal sealed class ApiResponseTypeProvider
     )
     {
         var contentTypes = new MediaTypeCollection();
-        var responseTypeMetadataProviders = _mvcOptions
-            .OutputFormatters
+        var responseTypeMetadataProviders = _mvcOptions.OutputFormatters
             .OfType<IApiResponseTypeMetadataProvider>();
 
         var responseTypes = ReadResponseMetadata(
@@ -371,8 +368,7 @@ internal sealed class ApiResponseTypeProvider
 
                     foreach (var formatterSupportedContentType in formatterSupportedContentTypes)
                     {
-                        apiResponse
-                            .ApiResponseFormats
+                        apiResponse.ApiResponseFormats
                             .Add(
                                 new ApiResponseFormat
                                 {
@@ -387,8 +383,7 @@ internal sealed class ApiResponseTypeProvider
             if (!isSupportedContentType && contentType != null)
             {
                 // No output formatter was found that supports this content type. Add the user specified content type as-is to the result.
-                apiResponse
-                    .ApiResponseFormats
+                apiResponse.ApiResponseFormats
                     .Add(new ApiResponseFormat { MediaType = contentType });
             }
         }

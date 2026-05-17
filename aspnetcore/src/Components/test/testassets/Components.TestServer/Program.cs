@@ -101,8 +101,7 @@ public class Program
 
     private static (IHost host, string basePath) CreateDevServerHost(string[] args)
     {
-        var contentRoot = typeof(Program)
-            .Assembly
+        var contentRoot = typeof(Program).Assembly
             .GetCustomAttributes<AssemblyMetadataAttribute>()
             .Single(a => a.Key == "Microsoft.AspNetCore.InternalTesting.BasicTestApp.ContentRoot")
             .Value;

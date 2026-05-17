@@ -70,8 +70,7 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
                 throw;
             }
 #else
-            return constructorCallSite
-                .ConstructorInfo
+            return constructorCallSite.ConstructorInfo
                 .Invoke(
                     BindingFlags.DoNotWrapExceptions,
                     binder: null,

@@ -148,8 +148,7 @@ namespace System.Security.Cryptography.X509Certificates
 
                     if (OpenSslX509ChainEventSource.Log.IsEnabled())
                     {
-                        OpenSslX509ChainEventSource
-                            .Log
+                        OpenSslX509ChainEventSource.Log
                             .FindChainViaAiaFinished(status, tmp?.Count ?? 0);
                     }
 
@@ -180,13 +179,11 @@ namespace System.Security.Cryptography.X509Certificates
                     if (
                         status != Interop.Crypto.X509VerifyStatusCode.X509_V_OK
                         && status
-                            != Interop
-                                .Crypto
+                            != Interop.Crypto
                                 .X509VerifyStatusCodeUniversal
                                 .X509_V_ERR_CERT_NOT_YET_VALID
                         && status
-                            != Interop
-                                .Crypto
+                            != Interop.Crypto
                                 .X509VerifyStatusCodeUniversal
                                 .X509_V_ERR_CERT_HAS_EXPIRED
                     )

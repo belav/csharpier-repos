@@ -116,8 +116,7 @@ namespace System.Net
                 string user = null;
                 string password = null;
                 int pos = -1;
-                string authString = System
-                    .Text
+                string authString = System.Text
                     .Encoding
                     .Default
                     .GetString(Convert.FromBase64String(authData));

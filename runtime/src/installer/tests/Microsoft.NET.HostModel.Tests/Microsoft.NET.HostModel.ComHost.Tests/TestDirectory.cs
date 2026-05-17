@@ -19,8 +19,7 @@ namespace Microsoft.NET.HostModel.ComHost.Tests
 
         public static TestDirectory Create([CallerMemberName] string callingMethod = "")
         {
-            string path = System
-                .IO
+            string path = System.IO
                 .Path
                 .Combine(
                     System.IO.Path.GetTempPath(),

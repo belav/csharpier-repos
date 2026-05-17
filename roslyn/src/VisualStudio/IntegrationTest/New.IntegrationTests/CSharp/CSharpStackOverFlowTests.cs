@@ -26,15 +26,13 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
         {
             var sampleCode = await GetSampleCodeAsync();
             var project = ProjectName;
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .AddFileAsync(
                     project,
                     "Test.cs",
                     cancellationToken: HangMitigatingCancellationToken
                 );
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .OpenFileAsync(project, "Test.cs", HangMitigatingCancellationToken);
             await SetUpEditorAsync(sampleCode, HangMitigatingCancellationToken);
 
@@ -48,27 +46,23 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
         {
             var sampleCode = await GetSampleCodeAsync();
             var project = ProjectName;
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .AddFileAsync(
                     project,
                     "Test.cs",
                     cancellationToken: HangMitigatingCancellationToken
                 );
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .OpenFileAsync(project, "Test.cs", HangMitigatingCancellationToken);
             await SetUpEditorAsync(sampleCode, HangMitigatingCancellationToken);
 
             // Call FAR to create syntax index. The goal is to verify we don't hit StackOverFlow during the creation.
-            await TestServices
-                .Input
+            await TestServices.Input
                 .SendAsync(
                     (VirtualKeyCode.F12, VirtualKeyCode.SHIFT),
                     HangMitigatingCancellationToken
                 );
-            var contents = await TestServices
-                .FindReferencesWindow
+            var contents = await TestServices.FindReferencesWindow
                 .GetContentsAsync(HangMitigatingCancellationToken);
             Assert.Equal(18, contents.Length);
 

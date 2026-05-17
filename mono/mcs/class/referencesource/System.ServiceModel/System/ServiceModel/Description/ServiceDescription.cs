@@ -113,8 +113,7 @@ namespace System.ServiceModel.Description
         {
             Type type = serviceDescription.ServiceType;
 
-            System
-                .ServiceModel
+            System.ServiceModel
                 .Description
                 .TypeLoader
                 .ApplyServiceInheritance<IServiceBehavior, KeyedByTypeCollection<IServiceBehavior>>(
@@ -152,8 +151,7 @@ namespace System.ServiceModel.Description
             );
             if (constructor == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(SR.GetString(SR.SFxNoDefaultConstructor))
                     );
@@ -193,8 +191,7 @@ namespace System.ServiceModel.Description
                         methodAccessException,
                         TraceEventType.Warning
                     );
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new SecurityException(
                                 SR.GetString(
@@ -233,8 +230,7 @@ namespace System.ServiceModel.Description
                 ServiceEndpoint endpoint = this.Endpoints[i];
                 if (endpoint == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(SR.AChannelServiceEndpointIsNull0)
@@ -285,8 +281,7 @@ namespace System.ServiceModel.Description
         {
             if (serviceImplementation == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("serviceImplementation");
             }
 

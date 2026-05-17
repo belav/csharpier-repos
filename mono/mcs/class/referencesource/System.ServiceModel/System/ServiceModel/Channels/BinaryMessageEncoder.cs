@@ -555,8 +555,7 @@ namespace System.ServiceModel.Channels
                         {
                             TD.MaxSentMessageSizeExceeded(excMsg);
                         }
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(new QuotaExceededException(excMsg));
                     }
 
@@ -590,8 +589,7 @@ namespace System.ServiceModel.Channels
                         string newString = newStrings[i].Value;
                         int utf8ValueSize = Encoding.UTF8.GetByteCount(newString);
                         offset += IntEncoder.Encode(utf8ValueSize, buffer, offset);
-                        offset += Encoding
-                            .UTF8
+                        offset += Encoding.UTF8
                             .GetBytes(newString, 0, newString.Length, buffer, offset);
                     }
 
@@ -609,8 +607,7 @@ namespace System.ServiceModel.Channels
             {
                 if (isReaderSessionInvalid)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidDataException(SR.GetString(SR.BinaryEncoderSessionInvalid))
                         );
@@ -629,8 +626,7 @@ namespace System.ServiceModel.Channels
                     dictionarySize = decoder.Value;
                     if (dictionarySize > messageData.Count)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidDataException(
                                     SR.GetString(SR.BinaryEncoderSessionMalformed)
@@ -641,8 +637,7 @@ namespace System.ServiceModel.Channels
                     newSize = messageData.Count - headerSize - dictionarySize;
                     if (newSize < 0)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidDataException(
                                     SR.GetString(SR.BinaryEncoderSessionMalformed)
@@ -662,8 +657,7 @@ namespace System.ServiceModel.Channels
                                 TD.MaxSessionSizeReached(message);
                             }
                             Exception inner = new QuotaExceededException(message);
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(new CommunicationException(message, inner));
                         }
                         else
@@ -683,8 +677,7 @@ namespace System.ServiceModel.Channels
                             size -= bytesDecoded;
                             if (utf8ValueSize > size)
                             {
-                                throw DiagnosticUtility
-                                    .ExceptionUtility
+                                throw DiagnosticUtility.ExceptionUtility
                                     .ThrowHelperError(
                                         new InvalidDataException(
                                             SR.GetString(SR.BinaryEncoderSessionMalformed)
@@ -719,8 +712,7 @@ namespace System.ServiceModel.Channels
             {
                 if (bufferManager == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgumentNull("bufferManager");
                 }
 
@@ -872,15 +864,13 @@ namespace System.ServiceModel.Channels
 
                 if (bufferManager == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgumentNull("bufferManager");
                 }
 
                 if (maxMessageSize < 0)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentOutOfRangeException(
                                 "maxMessageSize",
@@ -914,8 +904,7 @@ namespace System.ServiceModel.Channels
 
                 if (messageOffset < 0)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentOutOfRangeException(
                                 "messageOffset",
@@ -932,8 +921,7 @@ namespace System.ServiceModel.Channels
                     {
                         TD.MaxSentMessageSizeExceeded(excMsg);
                     }
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new QuotaExceededException(excMsg));
                 }
 
@@ -968,13 +956,12 @@ namespace System.ServiceModel.Channels
                         if (this.writerSession.HasNewStrings)
                         {
                             foreach (
-                                XmlDictionaryString xmlDictionaryString in this.writerSession.GetNewStrings()
+                                XmlDictionaryString xmlDictionaryString in this.writerSession
+                                    .GetNewStrings()
                             )
                             {
-                                this.readerSessionForLogging.Add(
-                                    this.writeIdCounter++,
-                                    xmlDictionaryString.Value
-                                );
+                                this.readerSessionForLogging
+                                    .Add(this.writeIdCounter++, xmlDictionaryString.Value);
                             }
                         }
                     }
@@ -1037,14 +1024,12 @@ namespace System.ServiceModel.Channels
             {
                 if (message == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new ArgumentNullException("message"));
                 }
                 if (stream == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new ArgumentNullException("stream"));
                 }
 
@@ -1159,8 +1144,7 @@ namespace System.ServiceModel.Channels
                 string supportedCompressionTypes
             )
             {
-                message
-                    .Properties
+                message.Properties
                     .Add(SupportedCompressionTypesMessageProperty, supportedCompressionTypes);
             }
 
@@ -1189,8 +1173,7 @@ namespace System.ServiceModel.Channels
                     {
                         if (!ContentTypeEqualsOrStartsWith(contentType, this.ContentType))
                         {
-                            throw FxTrace
-                                .Exception
+                            throw FxTrace.Exception
                                 .AsError(
                                     new ProtocolException(
                                         SR.GetString(
@@ -1230,8 +1213,7 @@ namespace System.ServiceModel.Channels
                         }
                         else
                         {
-                            throw FxTrace
-                                .Exception
+                            throw FxTrace.Exception
                                 .AsError(
                                     new ProtocolException(
                                         SR.GetString(
@@ -1255,8 +1237,7 @@ namespace System.ServiceModel.Channels
                 {
                     string acceptEncoding;
                     if (
-                        message
-                            .Properties
+                        message.Properties
                             .TryGetValue<string>(
                                 SupportedCompressionTypesMessageProperty,
                                 out acceptEncoding
@@ -1430,8 +1411,7 @@ namespace System.ServiceModel.Channels
         {
             if (key < 0 || key >= 0x4000)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentOutOfRangeException(
                             "key",
@@ -1460,8 +1440,7 @@ namespace System.ServiceModel.Channels
         {
             if (value < 0 || value > 0xFF)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentOutOfRangeException(
                             "value",
@@ -1493,8 +1472,7 @@ namespace System.ServiceModel.Channels
         {
             if (prefix < 'a' && prefix > 'z')
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentOutOfRangeException(
                             "prefix",
@@ -1549,8 +1527,7 @@ namespace System.ServiceModel.Channels
                         + ((buffer[offset + 2] & 0x7f) << 14)
                         + (buffer[offset + 3] << 21);
                 default:
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentOutOfRangeException(
                                 "size",
@@ -2125,8 +2102,7 @@ namespace System.ServiceModel.Channels
 #pragma warning suppress 56503 // Microsoft, Invalid State after dispose
 
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(CreateMessageDisposedException());
                     }
                     return headers;
@@ -2141,8 +2117,7 @@ namespace System.ServiceModel.Channels
 #pragma warning suppress 56503 // Microsoft, Invalid State after dispose
 
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(CreateMessageDisposedException());
                     }
                     return properties;
@@ -2166,8 +2141,7 @@ namespace System.ServiceModel.Channels
                     if (IsDisposed)
                     {
 #pragma warning suppress 56503 // Microsoft, Invalid State after dispose
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(CreateMessageDisposedException());
                     }
                     return headers.MessageVersion;
@@ -2348,8 +2322,7 @@ namespace System.ServiceModel.Channels
                     {
                         if (this.closed)
                         {
-                            throw DiagnosticUtility
-                                .ExceptionUtility
+                            throw DiagnosticUtility.ExceptionUtility
                                 .ThrowHelperError(CreateBufferDisposedException());
                         }
 
@@ -2388,8 +2361,7 @@ namespace System.ServiceModel.Channels
                 {
                     if (this.closed)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(CreateBufferDisposedException());
                     }
 

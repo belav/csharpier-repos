@@ -547,8 +547,7 @@ namespace System.Web.Http.WebHost.Routing
                 new HostedHttpRouteCollection(new RouteCollection())
             );
             config.Routes.IgnoreRoute("Bar", "api/{*pathInfo}");
-            config
-                .Routes
+            config.Routes
                 .IgnoreRoute(
                     "Constraints",
                     "constraint/values/{id}",

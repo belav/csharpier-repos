@@ -79,8 +79,7 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                 ExtensionMethodImportCompletionCacheEntry,
                 object
             > GetCacheService(Project project) =>
-                project
-                    .Solution
+                project.Solution
                     .Services
                     .GetRequiredService<
                         IImportCompletionCacheService<
@@ -336,8 +335,7 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                 }
 
                 var filter = CreateAggregatedFilter(symbolInfo);
-                var internalsVisible = _originatingSemanticModel
-                    .Compilation
+                var internalsVisible = _originatingSemanticModel.Compilation
                     .Assembly
                     .IsSameAssemblyOrHasFriendAccessTo(assembly);
 

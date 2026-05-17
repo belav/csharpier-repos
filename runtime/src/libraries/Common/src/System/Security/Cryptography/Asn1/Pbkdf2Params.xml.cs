@@ -27,8 +27,7 @@ namespace System.Security.Cryptography.Asn1
             AsnValueReader reader;
 
             reader = new AsnValueReader(DefaultPrf, AsnEncodingRules.DER);
-            System
-                .Security
+            System.Security
                 .Cryptography
                 .Asn1
                 .AlgorithmIdentifierAsn
@@ -130,8 +129,7 @@ namespace System.Security.Cryptography.Asn1
             AsnValueReader sequenceReader = reader.ReadSequence(expectedTag);
             AsnValueReader defaultReader;
 
-            System
-                .Security
+            System.Security
                 .Cryptography
                 .Asn1
                 .Pbkdf2SaltChoice
@@ -162,8 +160,7 @@ namespace System.Security.Cryptography.Asn1
                 && sequenceReader.PeekTag().HasSameClassAndValue(Asn1Tag.Sequence)
             )
             {
-                System
-                    .Security
+                System.Security
                     .Cryptography
                     .Asn1
                     .AlgorithmIdentifierAsn
@@ -172,8 +169,7 @@ namespace System.Security.Cryptography.Asn1
             else
             {
                 defaultReader = new AsnValueReader(DefaultPrf, AsnEncodingRules.DER);
-                System
-                    .Security
+                System.Security
                     .Cryptography
                     .Asn1
                     .AlgorithmIdentifierAsn

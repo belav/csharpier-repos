@@ -111,9 +111,8 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             )
             {
                 TableCell tc = new TableCell();
-                tc.Controls.Add(
-                    new LiteralControl((string)DataBinder.Eval(e.Item.DataItem, "Name"))
-                );
+                tc.Controls
+                    .Add(new LiteralControl((string)DataBinder.Eval(e.Item.DataItem, "Name")));
                 e.Item.Controls.Add(tc);
             }
             if (e.Item.ItemType == ListItemType.Header)

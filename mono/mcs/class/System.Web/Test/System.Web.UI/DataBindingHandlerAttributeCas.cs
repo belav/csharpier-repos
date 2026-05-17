@@ -63,9 +63,8 @@ namespace MonoCasTests.System.Web.UI
         {
             DataBindingHandlerAttribute a = new DataBindingHandlerAttribute(GetType());
             Assert.IsTrue(
-                a.HandlerTypeName.StartsWith(
-                    "MonoCasTests.System.Web.UI.DataBindingHandlerAttributeCas"
-                ),
+                a.HandlerTypeName
+                    .StartsWith("MonoCasTests.System.Web.UI.DataBindingHandlerAttributeCas"),
                 "HandlerTypeName"
             );
         }

@@ -41,8 +41,7 @@ namespace System.IdentityModel.Selectors
                 certificates = store.Find(findType, findValue, false);
                 if (certificates.Count < 1)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new SecurityTokenException(
                                 SR.GetString(
@@ -57,8 +56,7 @@ namespace System.IdentityModel.Selectors
                 }
                 if (certificates.Count > 1)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new SecurityTokenException(
                                 SR.GetString(

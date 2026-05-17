@@ -138,8 +138,7 @@ namespace System.Web.Mvc.Html.Test
         {
             // Arrange
             HtmlHelper helper = MvcHelper.GetHtmlHelper(GetCheckBoxViewData());
-            helper
-                .ViewData
+            helper.ViewData
                 .ModelState
                 .SetModelValue("foo", HtmlHelperTest.GetValueProviderResult("false", "false"));
 
@@ -547,8 +546,7 @@ namespace System.Web.Mvc.Html.Test
         {
             // Arrange
             HtmlHelper<FooBarBazModel> helper = MvcHelper.GetHtmlHelper(GetCheckBoxViewData());
-            helper
-                .ViewContext
+            helper.ViewContext
                 .ViewData
                 .ModelState
                 .SetModelValue("foo", HtmlHelperTest.GetValueProviderResult("false", "false"));
@@ -2241,8 +2239,7 @@ namespace System.Web.Mvc.Html.Test
         {
             // Arrange
             HtmlHelper helper = MvcHelper.GetHtmlHelper(GetRadioButtonViewData());
-            helper
-                .ViewData
+            helper.ViewData
                 .ModelState
                 .SetModelValue(
                     "foo",
@@ -2748,8 +2745,7 @@ namespace System.Web.Mvc.Html.Test
         {
             // Arrange
             HtmlHelper<FooBarModel> helper = MvcHelper.GetHtmlHelper(GetRadioButtonViewData());
-            helper
-                .ViewData
+            helper.ViewData
                 .ModelState
                 .SetModelValue(
                     "foo",

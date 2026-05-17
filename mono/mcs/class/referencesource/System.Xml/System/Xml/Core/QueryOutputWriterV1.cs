@@ -151,12 +151,13 @@ namespace System.Xml
                 WriteState ws = this.wrapped.WriteState;
                 if (ws == WriteState.Start || ws == WriteState.Prolog)
                 {
-                    this.wrapped.WriteDocType(
-                        prefix.Length != 0 ? prefix + ":" + localName : localName,
-                        this.publicId,
-                        this.systemId,
-                        null
-                    );
+                    this.wrapped
+                        .WriteDocType(
+                            prefix.Length != 0 ? prefix + ":" + localName : localName,
+                            this.publicId,
+                            this.systemId,
+                            null
+                        );
                 }
                 this.outputDocType = false;
             }

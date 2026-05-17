@@ -74,8 +74,7 @@ public class KeyAttributeConvention
                 switch (entityType.GetIsKeylessConfigurationSource())
                 {
                     case ConfigurationSource.DataAnnotation:
-                        Dependencies
-                            .Logger
+                        Dependencies.Logger
                             .ConflictingKeylessAndKeyAttributesWarning(propertyBuilder.Metadata);
                         return;
 
@@ -135,13 +134,13 @@ public class KeyAttributeConvention
             )
             {
                 properties.AddRange(
-                    currentKey
-                        .Properties
+                    currentKey.Properties
                         .Where(p =>
-                            !p.Name.Equals(
-                                propertyBuilder.Metadata.Name,
-                                StringComparison.OrdinalIgnoreCase
-                            )
+                            !p.Name
+                                .Equals(
+                                    propertyBuilder.Metadata.Name,
+                                    StringComparison.OrdinalIgnoreCase
+                                )
                         )
                         .Select(p => p.Name)
                 );
@@ -270,8 +269,7 @@ public class KeyAttributeConvention
         bool shouldThrow
     )
     {
-        var primaryKeyAttribute = entityType
-            .ClrType
+        var primaryKeyAttribute = entityType.ClrType
             .GetCustomAttributes<PrimaryKeyAttribute>(inherit: true)
             .FirstOrDefault();
         if (primaryKeyAttribute == null)
@@ -289,8 +287,7 @@ public class KeyAttributeConvention
         IConventionKeyBuilder? keyBuilder;
         if (
             !shouldThrow
-            && !entityType
-                .Builder
+            && !entityType.Builder
                 .CanSetPrimaryKey(primaryKeyAttribute.PropertyNames, fromDataAnnotation: true)
         )
         {
@@ -299,8 +296,7 @@ public class KeyAttributeConvention
 
         try
         {
-            keyBuilder = entityType
-                .Builder
+            keyBuilder = entityType.Builder
                 .PrimaryKey(primaryKeyAttribute.PropertyNames, fromDataAnnotation: true);
         }
         catch (InvalidOperationException exception)

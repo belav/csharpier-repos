@@ -2074,14 +2074,15 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
 
         if (firstLevel2)
         {
-            root.FirstLaw.Add(
-                new FirstLaw
-                {
-                    FirstLawId = 12,
-                    FirstLawName = "firstLaw2",
-                    BayazId = 1,
-                }
-            );
+            root.FirstLaw
+                .Add(
+                    new FirstLaw
+                    {
+                        FirstLawId = 12,
+                        FirstLawName = "firstLaw2",
+                        BayazId = 1,
+                    }
+                );
         }
 
         return root;
@@ -2108,8 +2109,7 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
 
         if (secondLevel2)
         {
-            firstLevel
-                .SecondLaw
+            firstLevel.SecondLaw
                 .Add(
                     new SecondLaw
                     {
@@ -2134,8 +2134,7 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
 
         if (thirdLevel1)
         {
-            secondLevel
-                .ThirdLaw
+            secondLevel.ThirdLaw
                 .Add(
                     new ThirdLaw
                     {
@@ -2148,8 +2147,7 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
 
         if (thirdLevel2)
         {
-            secondLevel
-                .ThirdLaw
+            secondLevel.ThirdLaw
                 .Add(
                     new ThirdLaw
                     {

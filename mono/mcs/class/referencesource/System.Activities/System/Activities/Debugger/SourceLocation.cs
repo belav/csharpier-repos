@@ -63,8 +63,7 @@ namespace System.Activities.Debugger
         {
             if (startLine <= 0)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .Argument(
                         "startLine",
                         SR.InvalidSourceLocationLineNumber("startLine", startLine)
@@ -73,8 +72,7 @@ namespace System.Activities.Debugger
 
             if (startColumn <= 0)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .Argument(
                         "startColumn",
                         SR.InvalidSourceLocationColumn("startColumn", startColumn)
@@ -83,22 +81,19 @@ namespace System.Activities.Debugger
 
             if (endLine <= 0)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .Argument("endLine", SR.InvalidSourceLocationLineNumber("endLine", endLine));
             }
 
             if (endColumn <= 0)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .Argument("endColumn", SR.InvalidSourceLocationColumn("endColumn", endColumn));
             }
 
             if (startLine > endLine)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .ArgumentOutOfRange(
                         "endLine",
                         endLine,
@@ -108,8 +103,7 @@ namespace System.Activities.Debugger
 
             if ((startLine == endLine) && (startColumn > endColumn))
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .ArgumentOutOfRange(
                         "endColumn",
                         endColumn,

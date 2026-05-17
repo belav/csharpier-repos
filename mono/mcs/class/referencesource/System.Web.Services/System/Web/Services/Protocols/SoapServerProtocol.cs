@@ -81,8 +81,7 @@ namespace System.Web.Services.Protocols
             WebMethodReflector.IncludeTypes(methodInfos, xmlImporter);
             SoapReflectedMethod[] soapMethods = new SoapReflectedMethod[methodInfos.Length];
 
-            SoapExtensionTypeElementCollection extensionTypes = WebServicesSection
-                .Current
+            SoapExtensionTypeElementCollection extensionTypes = WebServicesSection.Current
                 .SoapExtensionTypes;
             ArrayList highPri = new ArrayList();
             ArrayList lowPri = new ArrayList();
@@ -956,8 +955,7 @@ namespace System.Web.Services.Protocols
                 else
                 {
                     values = (object[])
-                        serverMethod
-                            .parameterSerializer
+                        serverMethod.parameterSerializer
                             .Deserialize(reader, isEncodedSoap ? helper.EncodingNs : null);
                 }
                 if (Tracing.On)
@@ -1090,8 +1088,7 @@ namespace System.Web.Services.Protocols
                         isEncoded ? helper.EncodingNs : null
                     )
                 );
-            serverMethod
-                .returnSerializer
+            serverMethod.returnSerializer
                 .Serialize(writer, returnValues, null, isEncoded ? helper.EncodingNs : null);
             if (Tracing.On)
                 Tracing.Exit(Tracing.TraceId(Res.TraceWriteResponse), caller);
@@ -1446,8 +1443,7 @@ namespace System.Web.Services.Protocols
             }
             else if (SoapException.IsClientFaultCode(soapException.Code))
             {
-                System
-                    .Web
+                System.Web
                     .Services
                     .Protocols
                     .ServerProtocol
@@ -1463,8 +1459,7 @@ namespace System.Web.Services.Protocols
             }
             else
             {
-                System
-                    .Web
+                System.Web
                     .Services
                     .Protocols
                     .ServerProtocol

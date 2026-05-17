@@ -389,8 +389,7 @@ namespace DrawingTestHelper
             string message
         )
         {
-            float error = System
-                .Math
+            float error = System.Math
                 .Abs((expected - actual) / (expected + actual + float.Epsilon));
             Assert.That(error < tolerance, Is.True, message);
         }

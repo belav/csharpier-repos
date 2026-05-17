@@ -59,8 +59,7 @@ End Class";
         )
         {
             await TestServices.Editor.PlaceCaretAsync(marker, charsOffset: -1, cancellationToken);
-            await TestServices
-                .Workspace
+            await TestServices.Workspace
                 .WaitForAllAsyncOperationsAsync(
                     [
                         FeatureAttribute.Workspace,
@@ -102,8 +101,7 @@ End Class";
         private async Task VerifyNoneAsync(string marker, CancellationToken cancellationToken)
         {
             await TestServices.Editor.PlaceCaretAsync(marker, charsOffset: -1, cancellationToken);
-            await TestServices
-                .Workspace
+            await TestServices.Workspace
                 .WaitForAllAsyncOperationsAsync(
                     [
                         FeatureAttribute.Workspace,

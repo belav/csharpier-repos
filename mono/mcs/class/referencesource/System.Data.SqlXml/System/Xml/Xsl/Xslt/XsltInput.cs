@@ -512,8 +512,7 @@ namespace System.Xml.Xsl.Xslt
                             FillupCharacterEntityRecord(ref records[curTextNode]);
                             if (
                                 textIsWhite
-                                && !XmlCharType
-                                    .Instance
+                                && !XmlCharType.Instance
                                     .IsOnlyWhitespace(records[curTextNode].value)
                             )
                             {
@@ -1280,8 +1279,7 @@ namespace System.Xml.Xsl.Xslt
                 for (col = 0; col < list.Length; col++)
                 {
                     if (
-                        System
-                            .Xml
+                        System.Xml
                             .Xsl
                             .Runtime
                             .XmlCollation

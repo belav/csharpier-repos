@@ -36,8 +36,7 @@ public static class ServerRazorComponentsBuilderExtensions
         ArgumentNullException.ThrowIfNull(builder, nameof(builder));
 
         builder.Services.AddServerSideBlazor(configure);
-        builder
-            .Services
+        builder.Services
             .TryAddEnumerable(
                 ServiceDescriptor.Singleton<RenderModeEndpointProvider, CircuitEndpointProvider>()
             );

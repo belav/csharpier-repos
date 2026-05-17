@@ -1078,8 +1078,7 @@ namespace System.Web.UI.DataVisualization.Charting
                         }
                         else
                         {
-                            seriesTable
-                                .Columns
+                            seriesTable.Columns
                                 .Add(
                                     "Y"
                                         + (yIndex + 1).ToString(

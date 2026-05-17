@@ -171,8 +171,7 @@ namespace System.Workflow.Activities.Design
         {
             if (serviceOperation == null)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("serviceOperation");
             }
             String key = serviceOperation.ContractName;
@@ -408,9 +407,8 @@ namespace System.Workflow.Activities.Design
         private void SelectServiceOperation(OperationInfoBase operationInfo)
         {
             Fx.Assert(operationInfo != null, "operationInfo cannot be null");
-            ServiceContractListItem serviceContract = this.serviceContracts.Find(
-                operationInfo.GetContractFullName(null)
-            );
+            ServiceContractListItem serviceContract = this.serviceContracts
+                .Find(operationInfo.GetContractFullName(null));
             // Dont select operation if the contract cannot be found in the serviceContracts list
             if (serviceContract == null)
             {
@@ -449,8 +447,7 @@ namespace System.Workflow.Activities.Design
                 DesignerHelpers.ShowMessage(
                     this.serviceProvider,
                     errorString,
-                    System
-                        .Workflow
+                    System.Workflow
                         .ComponentModel
                         .Design
                         .DR
@@ -491,8 +488,7 @@ namespace System.Workflow.Activities.Design
                 DesignerHelpers.ShowMessage(
                     this.serviceProvider,
                     errorString,
-                    System
-                        .Workflow
+                    System.Workflow
                         .ComponentModel
                         .Design
                         .DR
@@ -516,8 +512,7 @@ namespace System.Workflow.Activities.Design
                 DesignerHelpers.ShowMessage(
                     this.serviceProvider,
                     errorString,
-                    System
-                        .Workflow
+                    System.Workflow
                         .ComponentModel
                         .Design
                         .DR
@@ -559,8 +554,7 @@ namespace System.Workflow.Activities.Design
                 DesignerHelpers.ShowMessage(
                     this.serviceProvider,
                     errorString,
-                    System
-                        .Workflow
+                    System.Workflow
                         .ComponentModel
                         .Design
                         .DR

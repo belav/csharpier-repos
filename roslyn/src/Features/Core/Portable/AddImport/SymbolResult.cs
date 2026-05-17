@@ -49,8 +49,7 @@ namespace Microsoft.CodeAnalysis.AddImport
             public bool DesiredNameDiffersFromSourceNameOnlyByCase()
             {
                 Debug.Assert(DesiredNameDiffersFromSourceName());
-                return StringComparer
-                    .OrdinalIgnoreCase
+                return StringComparer.OrdinalIgnoreCase
                     .Equals(NameNode.GetFirstToken().ValueText, DesiredName);
             }
 

@@ -56,8 +56,7 @@ namespace System.ServiceModel.Description
             );
 
             foreach (
-                IPolicyExportExtension exporter in endpoint
-                    .Binding
+                IPolicyExportExtension exporter in endpoint.Binding
                     .CreateBindingElements()
                     .FindAll<IPolicyExportExtension>()
             )
@@ -70,8 +69,7 @@ namespace System.ServiceModel.Description
                 {
                     if (Fx.IsFatal(e))
                         throw;
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(CreateExtensionException(exporter, e));
                 }
 

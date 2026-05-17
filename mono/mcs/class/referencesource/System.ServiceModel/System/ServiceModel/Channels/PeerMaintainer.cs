@@ -116,8 +116,7 @@ namespace System.ServiceModel.Channels
             {
                 if (Fx.IsFatal(e))
                     throw;
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperCallback(SR.GetString(SR.ResolverException), e);
             }
             if (referrals != null && canShareReferrals)
@@ -553,8 +552,7 @@ namespace System.ServiceModel.Channels
             {
                 if (Fx.IsFatal(e))
                     throw;
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperCallback(SR.GetString(SR.ResolverException), e);
             }
 
@@ -675,8 +673,7 @@ namespace System.ServiceModel.Channels
                 ReadOnlyCollection<PeerNodeAddress> addresses;
                 try
                 {
-                    addresses = config
-                        .Resolver
+                    addresses = config.Resolver
                         .Resolve(
                             config.MeshId,
                             config.MaxResolveAddresses,
@@ -702,8 +699,7 @@ namespace System.ServiceModel.Channels
                         );
                     }
 
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new CommunicationException(SR.GetString(SR.ResolverException), e)
                         );

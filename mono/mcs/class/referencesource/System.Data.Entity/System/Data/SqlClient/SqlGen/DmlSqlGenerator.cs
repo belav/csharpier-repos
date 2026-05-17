@@ -182,8 +182,7 @@ namespace System.Data.SqlClient.SqlGen
                     commandText.Append(GenerateMemberTSql(column)).Append(" ").Append(columnType);
                     Facet collationFacet;
                     if (
-                        column
-                            .TypeUsage
+                        column.TypeUsage
                             .Facets
                             .TryGetValue(
                                 DbProviderManifest.CollationFacetName,
@@ -320,8 +319,7 @@ namespace System.Data.SqlClient.SqlGen
                 // Only SQL Server 2005+ support an output clause for inserts
                 bool firstKeyFound = false;
                 foreach (
-                    EdmMember keyMember in ((DbScanExpression)tree.Target.Expression)
-                        .Target
+                    EdmMember keyMember in ((DbScanExpression)tree.Target.Expression).Target
                         .ElementType
                         .KeyMembers
                 )
@@ -485,8 +483,7 @@ namespace System.Data.SqlClient.SqlGen
                         {
                             // there can be only one server generated key
                             throw EntityUtil.NotSupported(
-                                System
-                                    .Data
+                                System.Data
                                     .Entity
                                     .Strings
                                     .Update_NotSupportedServerGenKey(table.Name)
@@ -496,8 +493,7 @@ namespace System.Data.SqlClient.SqlGen
                         if (!IsValidScopeIdentityColumnType(keyMember.TypeUsage))
                         {
                             throw EntityUtil.InvalidOperation(
-                                System
-                                    .Data
+                                System.Data
                                     .Entity
                                     .Strings
                                     .Update_NotSupportedIdentityType(
@@ -544,8 +540,7 @@ namespace System.Data.SqlClient.SqlGen
             {
                 Facet scaleFacet;
                 return (
-                    typeUsage
-                        .Facets
+                    typeUsage.Facets
                         .TryGetValue(DbProviderManifest.ScaleFacetName, false, out scaleFacet)
                     && Convert.ToInt32(scaleFacet.Value, CultureInfo.InvariantCulture) == 0
                 );
@@ -723,8 +718,7 @@ namespace System.Data.SqlClient.SqlGen
                         missingCudElement = StorageMslConstructs.UpdateFunctionElement;
                     }
                     throw EntityUtil.Update(
-                        System
-                            .Data
+                        System.Data
                             .Entity
                             .Strings
                             .Update_SqlEntitySetWithoutDmlFunctions(

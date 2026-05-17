@@ -47,8 +47,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
             if (node is QualifiedCrefSyntax crefSyntax)
             {
                 if (
-                    !QualifiedCrefSimplifier
-                        .Instance
+                    !QualifiedCrefSimplifier.Instance
                         .TrySimplify(
                             crefSyntax,
                             semanticModel,
@@ -68,8 +67,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
             {
                 var expressionSyntax = (ExpressionSyntax)node;
                 if (
-                    !ExpressionSimplifier
-                        .Instance
+                    !ExpressionSimplifier.Instance
                         .TrySimplify(
                             expressionSyntax,
                             semanticModel,

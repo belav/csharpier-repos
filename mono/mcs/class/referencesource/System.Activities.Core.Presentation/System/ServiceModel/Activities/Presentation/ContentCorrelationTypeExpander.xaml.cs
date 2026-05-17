@@ -272,8 +272,7 @@ namespace System.ServiceModel.Activities.Presentation
         )
         {
             var control = (ContentCorrelationTypeExpander)sender;
-            control
-                .Dispatcher
+            control.Dispatcher
                 .BeginInvoke(
                     new Action(() =>
                     {

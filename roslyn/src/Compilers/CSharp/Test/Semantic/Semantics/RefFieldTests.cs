@@ -742,8 +742,7 @@ readonly ref struct B
             // Read from metadata directly to inspect the embedded type.
             var decoder = new MetadataDecoder(module);
             var reader = module.Module.MetadataReader;
-            var fieldHandle = reader
-                .FieldDefinitions
+            var fieldHandle = reader.FieldDefinitions
                 .Single(handle => reader.GetString(reader.GetFieldDefinition(handle).Name) == "F");
             var fieldInfo = decoder.DecodeFieldSignature(fieldHandle);
             Assert.True(fieldInfo.IsByRef);
@@ -2593,8 +2592,7 @@ class Program
 
             var decoder = new MetadataDecoder(module);
             var reader = module.Module.MetadataReader;
-            var fieldReferences = reader
-                .MemberReferences
+            var fieldReferences = reader.MemberReferences
                 .Where(handle =>
                     reader.GetString(reader.GetMemberReference(handle).Name) is "F1" or "F2" or "F3"
                 )
@@ -2851,8 +2849,7 @@ public ref struct R2<T, U>
     public override string ToString() => (F1, F2).ToString();
 }";
             var compA = CreateCompilation(sourceA, targetFramework: TargetFramework.Net70);
-            var emitOptions = Microsoft
-                .CodeAnalysis
+            var emitOptions = Microsoft.CodeAnalysis
                 .Emit
                 .EmitOptions
                 .Default
@@ -11953,9 +11950,8 @@ class C
             );
 
             Assert.True(
-                comp.GetTypeByMetadataName(
-                    "StructWithIndirectRefField"
-                ).IsManagedTypeNoUseSiteDiagnostics
+                comp.GetTypeByMetadataName("StructWithIndirectRefField")
+                    .IsManagedTypeNoUseSiteDiagnostics
             );
         }
 
@@ -11997,9 +11993,8 @@ public ref struct StructWithRefField
             );
 
             Assert.True(
-                comp.GetTypeByMetadataName(
-                    "StructWithIndirectRefField"
-                ).IsManagedTypeNoUseSiteDiagnostics
+                comp.GetTypeByMetadataName("StructWithIndirectRefField")
+                    .IsManagedTypeNoUseSiteDiagnostics
             );
         }
 
@@ -14580,10 +14575,10 @@ public class A
             );
         }
 
-        private static readonly SymbolDisplayFormat displayFormatWithScoped = SymbolDisplayFormat
-            .TestFormat
-            .AddParameterOptions(SymbolDisplayParameterOptions.IncludeModifiers)
-            .AddLocalOptions(SymbolDisplayLocalOptions.IncludeModifiers);
+        private static readonly SymbolDisplayFormat displayFormatWithScoped =
+            SymbolDisplayFormat.TestFormat
+                .AddParameterOptions(SymbolDisplayParameterOptions.IncludeModifiers)
+                .AddLocalOptions(SymbolDisplayLocalOptions.IncludeModifiers);
 
         private static void VerifyParameterSymbol(
             ParameterSymbol parameter,
@@ -16454,8 +16449,7 @@ class Program
 
             comp = CreateCompilation(
                 source,
-                parseOptions: TestOptions
-                    .RegularDefault
+                parseOptions: TestOptions.RegularDefault
                     .WithFeature("run-nullable-analysis", "never")
             );
             verifyModel(comp);
@@ -16546,8 +16540,7 @@ class Program
 
             comp = CreateCompilation(
                 source,
-                parseOptions: TestOptions
-                    .RegularDefault
+                parseOptions: TestOptions.RegularDefault
                     .WithFeature("run-nullable-analysis", "never")
             );
             verifyModel(comp);
@@ -16649,8 +16642,7 @@ ref struct RR
 
             comp = CreateCompilation(
                 source,
-                parseOptions: TestOptions
-                    .RegularDefault
+                parseOptions: TestOptions.RegularDefault
                     .WithFeature("run-nullable-analysis", "never")
             );
             verifyModel(comp);
@@ -16746,8 +16738,7 @@ class Program
 
             comp = CreateCompilation(
                 source,
-                parseOptions: TestOptions
-                    .RegularDefault
+                parseOptions: TestOptions.RegularDefault
                     .WithFeature("run-nullable-analysis", "never")
             );
             verifyModel(comp);
@@ -18458,8 +18449,7 @@ class Enumerator2<T>
 
             comp = CreateCompilation(
                 source,
-                parseOptions: TestOptions
-                    .RegularDefault
+                parseOptions: TestOptions.RegularDefault
                     .WithFeature("run-nullable-analysis", "never")
             );
             verifyModel(comp);
@@ -21871,8 +21861,7 @@ class Program
                 .ToArray();
             var delegateInvokeMethods = decls
                 .Select(d =>
-                    ((ILocalSymbol)model.GetDeclaredSymbol(d))
-                        .Type
+                    ((ILocalSymbol)model.GetDeclaredSymbol(d)).Type
                         .GetSymbol<NamedTypeSymbol>()
                         .DelegateInvokeMethod
                 )
@@ -32716,8 +32705,7 @@ public class A
                 parseOptions: TestOptions.Regular10
             );
             var ref0 = comp.EmitToImageReference(
-                Microsoft
-                    .CodeAnalysis
+                Microsoft.CodeAnalysis
                     .Emit
                     .EmitOptions
                     .Default
@@ -32901,8 +32889,7 @@ public class A
                 parseOptions: TestOptions.Regular10
             );
             var ref0 = comp.EmitToImageReference(
-                Microsoft
-                    .CodeAnalysis
+                Microsoft.CodeAnalysis
                     .Emit
                     .EmitOptions
                     .Default
@@ -33801,8 +33788,7 @@ ref struct R<T>
 
             comp = CreateCompilation(
                 source,
-                parseOptions: TestOptions
-                    .RegularDefault
+                parseOptions: TestOptions.RegularDefault
                     .WithFeature("run-nullable-analysis", "never")
             );
             verifyModel(comp);
@@ -33887,8 +33873,7 @@ ref struct R<T>
 
             comp = CreateCompilation(
                 source,
-                parseOptions: TestOptions
-                    .RegularDefault
+                parseOptions: TestOptions.RegularDefault
                     .WithFeature("run-nullable-analysis", "never")
             );
             verifyModel(comp);
@@ -35496,8 +35481,7 @@ class C
                 OperationTreeVerifier.GetOperationTree(comp, fieldInitializerOperation)
             );
 
-            var controlFlowGraph = Microsoft
-                .CodeAnalysis
+            var controlFlowGraph = Microsoft.CodeAnalysis
                 .FlowAnalysis
                 .ControlFlowGraph
                 .Create(fieldInitializerOperation);
@@ -35562,8 +35546,7 @@ Block[B2] - Exit
                 OperationTreeVerifier.GetOperationTree(comp, constructorOperation)
             );
 
-            controlFlowGraph = Microsoft
-                .CodeAnalysis
+            controlFlowGraph = Microsoft.CodeAnalysis
                 .FlowAnalysis
                 .ControlFlowGraph
                 .Create(constructorOperation);
@@ -37225,8 +37208,7 @@ Block[B2] - Exit
                     public RS() => ri = 0;
                 }
                 """,
-                options: TestOptions
-                    .DebugExe
+                options: TestOptions.DebugExe
                     .WithSpecificDiagnosticOptions(ReportStructInitializationWarnings),
                 verify: Verification.Skipped,
                 targetFramework: TargetFramework.NetCoreApp,
@@ -37289,8 +37271,7 @@ Block[B2] - Exit
                     }
                 }
                 """,
-                options: TestOptions
-                    .DebugExe
+                options: TestOptions.DebugExe
                     .WithSpecificDiagnosticOptions(ReportStructInitializationWarnings),
                 verify: Verification.Skipped,
                 targetFramework: TargetFramework.NetCoreApp,
@@ -37374,8 +37355,7 @@ Block[B2] - Exit
                     }
                 }
                 """,
-                options: TestOptions
-                    .DebugExe
+                options: TestOptions.DebugExe
                     .WithSpecificDiagnosticOptions(ReportStructInitializationWarnings),
                 verify: Verification.Skipped,
                 targetFramework: TargetFramework.NetCoreApp,
@@ -37449,8 +37429,7 @@ Block[B2] - Exit
                     }
                 }
                 """,
-                options: TestOptions
-                    .DebugExe
+                options: TestOptions.DebugExe
                     .WithSpecificDiagnosticOptions(ReportStructInitializationWarnings),
                 verify: Verification.Skipped,
                 targetFramework: TargetFramework.NetCoreApp,

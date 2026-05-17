@@ -31,8 +31,7 @@ namespace System.ServiceModel.Channels
         {
             if (buffer.Array == null)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .ArgumentNull(
                         "buffer.Array",
                         SR.ArgumentPropertyShouldNotBeNullError("buffer.Array")
@@ -404,8 +403,7 @@ namespace System.ServiceModel.Channels
                     reader.Close();
                     return (T)(object)buffer;
                 }
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new NotSupportedException(
                             SR.ByteStreamMessageGetTypeNotSupported(typeT.FullName)
@@ -476,11 +474,12 @@ namespace System.ServiceModel.Channels
                     this.message = message;
                     this.writer = writer;
 
-                    IAsyncResult result = this.message.OnBeginWriteBodyContents(
-                        this.writer,
-                        PrepareAsyncCompletion(HandleWriteBodyContents),
-                        this
-                    );
+                    IAsyncResult result = this.message
+                        .OnBeginWriteBodyContents(
+                            this.writer,
+                            PrepareAsyncCompletion(HandleWriteBodyContents),
+                            this
+                        );
                     bool completeSelf = SyncContinue(result);
 
                     if (completeSelf)
@@ -658,10 +657,11 @@ namespace System.ServiceModel.Channels
                     {
                         this.writer = writer;
 
-                        this.writer.WriteStartElement(
-                            ByteStreamMessageUtility.StreamElementName,
-                            string.Empty
-                        );
+                        this.writer
+                            .WriteStartElement(
+                                ByteStreamMessageUtility.StreamElementName,
+                                string.Empty
+                            );
                         IAsyncResult result = this.writer
                             .WriteValueAsync(new ByteStreamStreamProvider(stream))
                             .AsAsyncResult(PrepareAsyncCompletion(HandleWriteBodyContents), this);

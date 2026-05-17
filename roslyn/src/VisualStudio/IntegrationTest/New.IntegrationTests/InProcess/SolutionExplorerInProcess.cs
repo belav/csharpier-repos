@@ -149,8 +149,7 @@ namespace Microsoft.VisualStudio.Extensibility.Testing
             var convertedValue = value ? 1 : 0;
             var project = await GetProjectAsync(projectName, cancellationToken);
             project.Properties.Item("OptionInfer").Value = convertedValue;
-            await TestServices
-                .Workspace
+            await TestServices.Workspace
                 .WaitForAllAsyncOperationsAsync([FeatureAttribute.Workspace], cancellationToken);
         }
 
@@ -297,8 +296,7 @@ namespace Microsoft.VisualStudio.Extensibility.Testing
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
             var project = await GetProjectAsync(projectName, cancellationToken);
-            var references = ((VSProject)project.Object)
-                .References
+            var references = ((VSProject)project.Object).References
                 .Cast<Reference>()
                 .Where(x => x.SourceProject == null)
                 .Select(x => x.Name + "," + x.Version + "," + x.PublicKeyToken)
@@ -314,8 +312,7 @@ namespace Microsoft.VisualStudio.Extensibility.Testing
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
             var project = await GetProjectAsync(projectName, cancellationToken);
-            var references = ((VSProject)project.Object)
-                .References
+            var references = ((VSProject)project.Object).References
                 .Cast<Reference>()
                 .Where(x => x.SourceProject != null)
                 .Select(x => x.Name)
@@ -443,8 +440,7 @@ namespace Microsoft.VisualStudio.Extensibility.Testing
             {
                 var textDocument = (EnvDTE.TextDocument)
                     document.Object(nameof(EnvDTE.TextDocument));
-                var currentTextInDocument = textDocument
-                    .StartPoint
+                var currentTextInDocument = textDocument.StartPoint
                     .CreateEditPoint()
                     .GetText(textDocument.EndPoint);
                 var fullPath = document.FullName;
@@ -557,18 +553,15 @@ namespace Microsoft.VisualStudio.Extensibility.Testing
 
         public async Task SaveAllAsync(CancellationToken cancellationToken)
         {
-            await TestServices
-                .Shell
+            await TestServices.Shell
                 .ExecuteCommandAsync(VSConstants.VSStd97CmdID.SaveSolution, cancellationToken);
 
             // Wait for async save operations to complete before proceeding
-            await TestServices
-                .Workspace
+            await TestServices.Workspace
                 .WaitForAllAsyncOperationsAsync([FeatureAttribute.Workspace], cancellationToken);
 
             // Verify documents are truly saved after a Save Solution operation
-            await TestServices
-                .SolutionExplorerVerifier
+            await TestServices.SolutionExplorerVerifier
                 .AllDocumentsAreSavedAsync(cancellationToken);
         }
 
@@ -1027,8 +1020,7 @@ namespace Microsoft.VisualStudio.Extensibility.Testing
             solutionEvents.OnUpdateSolutionDone += HandleUpdateSolutionDone;
             try
             {
-                await TestServices
-                    .Shell
+                await TestServices.Shell
                     .ExecuteCommandAsync(VSConstants.VSStd97CmdID.BuildSln, cancellationToken);
 
                 await buildCompleteTaskCompletionSource.Task;
@@ -1109,8 +1101,7 @@ namespace Microsoft.VisualStudio.Extensibility.Testing
             var solution = dte.Solution;
             Assumes.Present(solution);
 
-            var project = solution
-                .Projects
+            var project = solution.Projects
                 .Cast<EnvDTE.Project>()
                 .First(x => x.Name == projectName);
             var projectPath = Path.GetDirectoryName(project.FullName);
@@ -1209,8 +1200,7 @@ namespace Microsoft.VisualStudio.Extensibility.Testing
 
             var dte = await GetRequiredGlobalServiceAsync<SDTE, EnvDTE.DTE>(cancellationToken);
             var solution = (EnvDTE80.Solution2)dte.Solution;
-            return solution
-                .Projects
+            return solution.Projects
                 .OfType<EnvDTE.Project>()
                 .First(project =>
                 {

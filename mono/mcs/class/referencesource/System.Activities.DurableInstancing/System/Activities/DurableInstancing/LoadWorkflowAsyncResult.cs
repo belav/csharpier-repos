@@ -222,10 +222,8 @@ namespace System.Activities.DurableInstancing
                 }
                 if (!base.InstancePersistenceContext.InstanceView.IsBoundToInstanceOwner)
                 {
-                    base.InstancePersistenceContext.BindInstanceOwner(
-                        base.StoreLock.LockOwnerId,
-                        base.StoreLock.LockOwnerId
-                    );
+                    base.InstancePersistenceContext
+                        .BindInstanceOwner(base.StoreLock.LockOwnerId, base.StoreLock.LockOwnerId);
                 }
                 if (!base.InstancePersistenceContext.InstanceView.IsBoundToLock)
                 {
@@ -271,13 +269,13 @@ namespace System.Activities.DurableInstancing
                         !this.associatedInstanceKeys.ContainsKey(loadByKeycommand.LookupInstanceKey)
                     )
                     {
-                        base.InstancePersistenceContext.AssociatedInstanceKey(
-                            loadByKeycommand.LookupInstanceKey
-                        );
-                        this.associatedInstanceKeys.Add(
-                            loadByKeycommand.LookupInstanceKey,
-                            new Dictionary<XName, InstanceValue>()
-                        );
+                        base.InstancePersistenceContext
+                            .AssociatedInstanceKey(loadByKeycommand.LookupInstanceKey);
+                        this.associatedInstanceKeys
+                            .Add(
+                                loadByKeycommand.LookupInstanceKey,
+                                new Dictionary<XName, InstanceValue>()
+                            );
                     }
                 }
 
@@ -296,23 +294,25 @@ namespace System.Activities.DurableInstancing
                         {
                             foreach (KeyValuePair<XName, InstanceValue> property in keyEntry.Value)
                             {
-                                base.InstancePersistenceContext.WroteInstanceKeyMetadataValue(
-                                    keyEntry.Key,
-                                    property.Key,
-                                    property.Value
-                                );
+                                base.InstancePersistenceContext
+                                    .WroteInstanceKeyMetadataValue(
+                                        keyEntry.Key,
+                                        property.Key,
+                                        property.Value
+                                    );
                             }
                         }
                     }
                 }
 
-                base.InstancePersistenceContext.LoadedInstance(
-                    isInitialized ? InstanceState.Initialized : InstanceState.Uninitialized,
-                    this.instanceData,
-                    this.instanceMetadata,
-                    this.associatedInstanceKeys,
-                    this.completedInstanceKeys
-                );
+                base.InstancePersistenceContext
+                    .LoadedInstance(
+                        isInitialized ? InstanceState.Initialized : InstanceState.Uninitialized,
+                        this.instanceData,
+                        this.instanceMetadata,
+                        this.associatedInstanceKeys,
+                        this.completedInstanceKeys
+                    );
             }
             else if (exception is InstanceLockLostException)
             {

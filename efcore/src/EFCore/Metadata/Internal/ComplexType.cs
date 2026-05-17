@@ -52,8 +52,7 @@ public class ComplexType
         }
 
         if (
-            EntityType
-                .DynamicProxyGenAssemblyName
+            EntityType.DynamicProxyGenAssemblyName
                 .Equals(type.Assembly.GetName().Name, StringComparison.Ordinal)
         )
         {
@@ -331,8 +330,7 @@ public class ComplexType
         IConventionAnnotation? annotation,
         IConventionAnnotation? oldAnnotation
     ) =>
-        Model
-            .ConventionDispatcher
+        Model.ConventionDispatcher
             .OnComplexTypeAnnotationChanged(Builder, name, annotation, oldAnnotation);
 
     /// <summary>

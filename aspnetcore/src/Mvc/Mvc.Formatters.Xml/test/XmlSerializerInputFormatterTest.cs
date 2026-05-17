@@ -601,8 +601,7 @@ public class XmlSerializerInputFormatterTest
         var expectedMessage =
             "The expected encoding 'utf-8' does not match the actual encoding 'utf-16LE'.";
 
-        var inpStart = Encoding
-            .Unicode
+        var inpStart = Encoding.Unicode
             .GetBytes("<?xml version=\"1.0\" encoding=\"UTF-16\"?>" + "<DummyClass><SampleInt>");
         byte[] inp = { 192, 193 };
         var inpEnd = Encoding.Unicode.GetBytes("</SampleInt></DummyClass>");
@@ -629,8 +628,7 @@ public class XmlSerializerInputFormatterTest
         var expectedMessage =
             "The expected encoding 'utf-16LE' does not match the actual encoding 'utf-8'.";
 
-        var inputBytes = Encoding
-            .UTF8
+        var inputBytes = Encoding.UTF8
             .GetBytes(
                 "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
                     + "<DummyClass><SampleInt>1000</SampleInt></DummyClass>"
@@ -665,8 +663,7 @@ public class XmlSerializerInputFormatterTest
         // Arrange
         var sampleString = "Test";
         var sampleStringBytes = Encoding.UTF8.GetBytes(sampleString);
-        var inputStart = Encoding
-            .UTF8
+        var inputStart = Encoding.UTF8
             .GetBytes(
                 "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
                     + Environment.NewLine

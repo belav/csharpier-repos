@@ -151,35 +151,27 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
 
             using (var scope1 = provider.CreateScope())
             {
-                var serviceWithProvider = scope1
-                    .ServiceProvider
+                var serviceWithProvider = scope1.ServiceProvider
                     .GetRequiredService<ClassWithServiceProvider>();
-                fakeServiceFromScope1 = serviceWithProvider
-                    .ServiceProvider
+                fakeServiceFromScope1 = serviceWithProvider.ServiceProvider
                     .GetRequiredService<IFakeService>();
 
-                serviceWithProvider = scope1
-                    .ServiceProvider
+                serviceWithProvider = scope1.ServiceProvider
                     .GetRequiredService<ClassWithServiceProvider>();
-                otherFakeServiceFromScope1 = serviceWithProvider
-                    .ServiceProvider
+                otherFakeServiceFromScope1 = serviceWithProvider.ServiceProvider
                     .GetRequiredService<IFakeService>();
             }
 
             using (var scope2 = provider.CreateScope())
             {
-                var serviceWithProvider = scope2
-                    .ServiceProvider
+                var serviceWithProvider = scope2.ServiceProvider
                     .GetRequiredService<ClassWithServiceProvider>();
-                fakeServiceFromScope2 = serviceWithProvider
-                    .ServiceProvider
+                fakeServiceFromScope2 = serviceWithProvider.ServiceProvider
                     .GetRequiredService<IFakeService>();
 
-                serviceWithProvider = scope2
-                    .ServiceProvider
+                serviceWithProvider = scope2.ServiceProvider
                     .GetRequiredService<ClassWithServiceProvider>();
-                otherFakeServiceFromScope2 = serviceWithProvider
-                    .ServiceProvider
+                otherFakeServiceFromScope2 = serviceWithProvider.ServiceProvider
                     .GetRequiredService<IFakeService>();
             }
 
@@ -473,11 +465,9 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
             using (var outerScope = provider.CreateScope())
             using (var innerScope = outerScope.ServiceProvider.CreateScope())
             {
-                var outerScopedService = outerScope
-                    .ServiceProvider
+                var outerScopedService = outerScope.ServiceProvider
                     .GetService<IFakeScopedService>();
-                var innerScopedService = innerScope
-                    .ServiceProvider
+                var innerScopedService = innerScope.ServiceProvider
                     .GetService<IFakeScopedService>();
 
                 // Assert
@@ -668,11 +658,9 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
             using (var outerScope = provider.CreateScope())
             using (var innerScope = outerScope.ServiceProvider.CreateScope())
             {
-                var outerScopedService = outerScope
-                    .ServiceProvider
+                var outerScopedService = outerScope.ServiceProvider
                     .GetService<IFakeScopedService>();
-                var innerScopedService = innerScope
-                    .ServiceProvider
+                var innerScopedService = innerScope.ServiceProvider
                     .GetService<IFakeScopedService>();
 
                 // Assert

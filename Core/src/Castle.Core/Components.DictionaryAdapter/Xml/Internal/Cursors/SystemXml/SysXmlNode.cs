@@ -163,8 +163,7 @@ namespace Castle.Components.DictionaryAdapter.Xml
             if (attribute == null)
             {
                 var prefix = Namespaces.GetAttributePrefix(this, name.NamespaceUri);
-                attribute = element
-                    .OwnerDocument
+                attribute = element.OwnerDocument
                     .CreateAttribute(prefix, name.LocalName, name.NamespaceUri);
                 element.SetAttributeNode(attribute);
             }

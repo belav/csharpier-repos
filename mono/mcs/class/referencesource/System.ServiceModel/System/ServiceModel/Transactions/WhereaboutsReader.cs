@@ -58,8 +58,7 @@ namespace System.ServiceModel.Transactions
             Guid signature = SerializationUtils.ReadGuid(mem);
             if (signature != GuidWhereaboutsInfo)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new SerializationException(SR.GetString(SR.WhereaboutsSignatureMissing))
                     );
@@ -71,8 +70,7 @@ namespace System.ServiceModel.Transactions
             // Make sure that cTmToTmProtocols is at least plausible
             if (cTmToTmProtocols * STmToTmProtocolSize > mem.Length - mem.Position)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new SerializationException(
                             SR.GetString(SR.WhereaboutsImplausibleProtocolCount)
@@ -89,8 +87,7 @@ namespace System.ServiceModel.Transactions
             // Require a host name
             if (string.IsNullOrEmpty(this.hostName))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new SerializationException(SR.GetString(SR.WhereaboutsNoHostName))
                     );
@@ -148,8 +145,7 @@ namespace System.ServiceModel.Transactions
             // Reject host names of disproportionate size
             if (cbTmProtocolData > (MaxComputerName + 1) * 2)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new SerializationException(
                             SR.GetString(SR.WhereaboutsImplausibleHostNameByteCount)
@@ -171,8 +167,7 @@ namespace System.ServiceModel.Transactions
 
             if (cbString == 0)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new SerializationException(SR.GetString(SR.WhereaboutsInvalidHostName))
                     );
@@ -184,8 +179,7 @@ namespace System.ServiceModel.Transactions
             }
             catch (ArgumentException e)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new SerializationException(SR.GetString(SR.WhereaboutsInvalidHostName), e)
                     );

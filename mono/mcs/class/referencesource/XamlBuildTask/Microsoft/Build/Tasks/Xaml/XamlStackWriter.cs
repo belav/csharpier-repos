@@ -167,8 +167,7 @@ namespace Microsoft.Build.Tasks.Xaml
         {
             if (property == null)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(new InvalidOperationException(SR.UnexpectedXamlValueNull("property")));
             }
             SetTopFrame(property);
@@ -179,8 +178,7 @@ namespace Microsoft.Build.Tasks.Xaml
         {
             if (type == null)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(new InvalidOperationException(SR.UnexpectedXamlValueNull("type")));
             }
             SetTopFrame();

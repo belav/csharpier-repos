@@ -44,8 +44,7 @@ namespace System.CommandLine.Generator
             }
 
             if (
-                invokeMethodSymbol
-                    .ReceiverType
+                invokeMethodSymbol.ReceiverType
                     ?.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat)
                 != _nameOfExtensionMethodAnchorType
             )
@@ -76,8 +75,7 @@ namespace System.CommandLine.Generator
             {
                 if (namedDelegateType.DelegateInvokeMethod?.ReturnsVoid == false)
                 {
-                    delegateParameters = namedDelegateType
-                        .TypeArguments
+                    delegateParameters = namedDelegateType.TypeArguments
                         .Take(namedDelegateType.TypeArguments.Length - 1)
                         .Cast<ISymbol>()
                         .ToArray();
@@ -88,8 +86,7 @@ namespace System.CommandLine.Generator
                 }
             }
 
-            var symbols = invocationExpression
-                .ArgumentList
+            var symbols = invocationExpression.ArgumentList
                 .Arguments
                 .Skip(1)
                 .Select(x => context.SemanticModel.GetSymbolInfo(x.Expression).Symbol)

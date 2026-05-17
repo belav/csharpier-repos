@@ -178,8 +178,7 @@ public abstract class OptimisticConcurrencyTestBase<TFixture, TRowVersion> : ICl
                 {
                     Assert.Equal(
                         LogLevel.Debug,
-                        Fixture
-                            .ListLoggerFactory
+                        Fixture.ListLoggerFactory
                             .Log
                             .Single(l => l.Id == CoreEventId.OptimisticConcurrencyException)
                             .Level
@@ -230,8 +229,7 @@ public abstract class OptimisticConcurrencyTestBase<TFixture, TRowVersion> : ICl
                 {
                     Assert.Equal(
                         LogLevel.Debug,
-                        Fixture
-                            .ListLoggerFactory
+                        Fixture.ListLoggerFactory
                             .Log
                             .Single(l => l.Id == CoreEventId.OptimisticConcurrencyException)
                             .Level
@@ -258,9 +256,8 @@ public abstract class OptimisticConcurrencyTestBase<TFixture, TRowVersion> : ICl
                     .Single(s => s.Name == "Cosworth")
                     .Name,
             c =>
-                c.Engines.Single(e => e.Name == "056").EngineSupplier = c.EngineSuppliers.Single(
-                    s => s.Name == "Renault"
-                ),
+                c.Engines.Single(e => e.Name == "056").EngineSupplier = c.EngineSuppliers
+                    .Single(s => s.Name == "Renault"),
             (c, ex) =>
             {
                 var entry = ex.Entries.Single(e => e.Metadata.ClrType == typeof(Engine));
@@ -279,9 +276,8 @@ public abstract class OptimisticConcurrencyTestBase<TFixture, TRowVersion> : ICl
     public virtual Task Change_in_independent_association_results_in_independent_association_exception() =>
         ConcurrencyTestAsync(
             c =>
-                c.Teams.Single(t => t.Id == Team.Ferrari).Engine = c.Engines.Single(s =>
-                    s.Name == "FO 108X"
-                ),
+                c.Teams.Single(t => t.Id == Team.Ferrari).Engine = c.Engines
+                    .Single(s => s.Name == "FO 108X"),
             (c, ex) =>
             {
                 var entry = ex.Entries.Single();
@@ -295,9 +291,8 @@ public abstract class OptimisticConcurrencyTestBase<TFixture, TRowVersion> : ICl
         ConcurrencyTestAsync(
             c => c.Teams.Single(t => t.Id == Team.Ferrari).FastestLaps = 0,
             c =>
-                c.Teams.Single(t => t.Constructor == "Ferrari").Engine = c.Engines.Single(s =>
-                    s.Name == "FO 108X"
-                ),
+                c.Teams.Single(t => t.Constructor == "Ferrari").Engine = c.Engines
+                    .Single(s => s.Name == "FO 108X"),
             (c, ex) =>
             {
                 var entry = ex.Entries.Single();
@@ -386,8 +381,7 @@ public abstract class OptimisticConcurrencyTestBase<TFixture, TRowVersion> : ICl
                 async context =>
                 {
                     using var transaction = BeginTransaction(context.Database);
-                    context
-                        .Teams
+                    context.Teams
                         .Add(
                             new Team
                             {
@@ -399,8 +393,7 @@ public abstract class OptimisticConcurrencyTestBase<TFixture, TRowVersion> : ICl
 
                     using var innerContext = CreateF1Context();
                     UseTransaction(innerContext.Database, transaction);
-                    innerContext
-                        .Teams
+                    innerContext.Teams
                         .Add(
                             new Team
                             {
@@ -515,8 +508,7 @@ public abstract class OptimisticConcurrencyTestBase<TFixture, TRowVersion> : ICl
                 {
                     using (BeginTransaction(context.Database))
                     {
-                        var entry = context
-                            .Drivers
+                        var entry = context.Drivers
                             .Add(new Driver { Name = "Larry David", TeamId = Team.Ferrari });
 
                         if (async)
@@ -573,8 +565,7 @@ public abstract class OptimisticConcurrencyTestBase<TFixture, TRowVersion> : ICl
                 {
                     using (BeginTransaction(context.Database))
                     {
-                        var entry = context
-                            .Drivers
+                        var entry = context.Drivers
                             .Add(
                                 new Driver
                                 {
@@ -851,8 +842,7 @@ public abstract class OptimisticConcurrencyTestBase<TFixture, TRowVersion> : ICl
                     {
                         Assert.Equal(
                             LogLevel.Debug,
-                            Fixture
-                                .ListLoggerFactory
+                            Fixture.ListLoggerFactory
                                 .Log
                                 .Single(l => l.Id == CoreEventId.OptimisticConcurrencyException)
                                 .Level

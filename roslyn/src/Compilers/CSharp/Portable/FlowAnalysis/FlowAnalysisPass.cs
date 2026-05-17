@@ -126,8 +126,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                         method.GetNonNullSyntaxNode(),
                         submissionResultType
                     );
-                    var newStatements = block
-                        .Statements
+                    var newStatements = block.Statements
                         .Add(
                             new BoundReturnStatement(
                                 trailingExpression.Syntax,

@@ -3144,8 +3144,7 @@ namespace System.Diagnostics.Tests
                 }
             );
 
-            IEnumerable<Process> childProcesses = rootResult
-                .Message
+            IEnumerable<Process> childProcesses = rootResult.Message
                 .Split(';')
                 .Select(x => int.Parse(x))
                 .Select(pid => Process.GetProcessById(pid));

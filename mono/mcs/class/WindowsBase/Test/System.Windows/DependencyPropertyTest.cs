@@ -129,8 +129,7 @@ namespace MonoTests.System.Windows
                 typeof(ObjectPoker),
                 new PropertyMetadata(double.NaN)
             );
-            ro_key
-                .DependencyProperty
+            ro_key.DependencyProperty
                 .OverrideMetadata(typeof(SubclassPoker), new PropertyMetadataPoker());
         }
 

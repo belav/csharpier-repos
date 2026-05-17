@@ -114,8 +114,7 @@ namespace System.Workflow.ComponentModel.Serialization
                             )
                             {
                                 using (
-                                    XmlWriter xmlWriter = Design
-                                        .Helpers
+                                    XmlWriter xmlWriter = Design.Helpers
                                         .CreateXmlWriter(changeActionsStringWriter)
                                 )
                                 {
@@ -176,8 +175,7 @@ namespace System.Workflow.ComponentModel.Serialization
                     if (activity.Parent.ContextActivity != null)
                         activeContextActivities =
                             (IList<Activity>)
-                                activity
-                                    .Parent
+                                activity.Parent
                                     .ContextActivity
                                     .GetValue(Activity.ActiveExecutionContextsProperty);
 
@@ -316,8 +314,7 @@ namespace System.Workflow.ComponentModel.Serialization
 
                 if (this.cachedActivity == null)
                 {
-                    this.cachedDefinitionActivity = Activity
-                        .DefinitionActivity
+                    this.cachedDefinitionActivity = Activity.DefinitionActivity
                         .TraverseDottedPathFromRoot(this.id);
                     this.cachedActivity = (Activity)
                         FormatterServices.GetUninitializedObject(

@@ -45,8 +45,7 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                         return true;
                     }
                 );
-            bindingContext
-                .ModelBinderProviders
+            bindingContext.ModelBinderProviders
                 .RegisterBinderForType(
                     typeof(KeyValuePair<int, string>),
                     mockKvpBinder.Object,

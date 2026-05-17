@@ -398,15 +398,13 @@ namespace System.IO
 
             if (
                 FrameworkEventSource.IsInitialized
-                && FrameworkEventSource
-                    .Log
+                && FrameworkEventSource.Log
                     .IsEnabled(
                         EventLevel.Informational,
                         FrameworkEventSource.Keywords.ThreadTransfer
                     )
             )
-                FrameworkEventSource
-                    .Log
+                FrameworkEventSource.Log
                     .ThreadTransferReceive((long)(asyncResult.OverLapped), 2, string.Empty);
 
             // Handle reading from & writing to closed pipes.  While I'm not sure
@@ -537,8 +535,7 @@ namespace System.IO
 #if FEATURE_LEGACYNETCF
             if (CompatibilitySwitches.IsAppEarlierThanWindowsPhone8)
             {
-                System.Reflection.Assembly callingAssembly = System
-                    .Reflection
+                System.Reflection.Assembly callingAssembly = System.Reflection
                     .Assembly
                     .GetCallingAssembly();
                 if (callingAssembly != null && !callingAssembly.IsProfileAssembly)
@@ -578,8 +575,7 @@ namespace System.IO
 #if FEATURE_LEGACYNETCF
             if (CompatibilitySwitches.IsAppEarlierThanWindowsPhone8)
             {
-                System.Reflection.Assembly callingAssembly = System
-                    .Reflection
+                System.Reflection.Assembly callingAssembly = System.Reflection
                     .Assembly
                     .GetCallingAssembly();
                 if (callingAssembly != null && !callingAssembly.IsProfileAssembly)
@@ -619,8 +615,7 @@ namespace System.IO
 #if FEATURE_LEGACYNETCF
             if (CompatibilitySwitches.IsAppEarlierThanWindowsPhone8)
             {
-                System.Reflection.Assembly callingAssembly = System
-                    .Reflection
+                System.Reflection.Assembly callingAssembly = System.Reflection
                     .Assembly
                     .GetCallingAssembly();
                 if (callingAssembly != null && !callingAssembly.IsProfileAssembly)
@@ -2866,15 +2861,13 @@ namespace System.IO
 
             if (
                 FrameworkEventSource.IsInitialized
-                && FrameworkEventSource
-                    .Log
+                && FrameworkEventSource.Log
                     .IsEnabled(
                         EventLevel.Informational,
                         FrameworkEventSource.Keywords.ThreadTransfer
                     )
             )
-                FrameworkEventSource
-                    .Log
+                FrameworkEventSource.Log
                     .ThreadTransferSend((long)(asyncResult.OverLapped), 2, string.Empty, false);
 
             // queue an async ReadFile operation and pass in a packed overlapped
@@ -3192,15 +3185,13 @@ namespace System.IO
 
             if (
                 FrameworkEventSource.IsInitialized
-                && FrameworkEventSource
-                    .Log
+                && FrameworkEventSource.Log
                     .IsEnabled(
                         EventLevel.Informational,
                         FrameworkEventSource.Keywords.ThreadTransfer
                     )
             )
-                FrameworkEventSource
-                    .Log
+                FrameworkEventSource.Log
                     .ThreadTransferSend((long)(asyncResult.OverLapped), 2, string.Empty, false);
 
             int hr = 0;
@@ -3854,13 +3845,14 @@ namespace System.IO
             }
 
             if (CanWrite)
-                return Task.Factory.StartNew(
-                    state => ((FileStream)state).FlushOSBuffer(),
-                    this,
-                    cancellationToken,
-                    TaskCreationOptions.DenyChildAttach,
-                    TaskScheduler.Default
-                );
+                return Task.Factory
+                    .StartNew(
+                        state => ((FileStream)state).FlushOSBuffer(),
+                        this,
+                        cancellationToken,
+                        TaskCreationOptions.DenyChildAttach,
+                        TaskScheduler.Default
+                    );
             else
                 return Task.CompletedTask;
         }

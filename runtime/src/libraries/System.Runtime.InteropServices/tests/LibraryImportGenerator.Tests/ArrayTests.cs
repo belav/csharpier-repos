@@ -345,8 +345,7 @@ namespace LibraryImportGenerator.IntegrationTests
                     pointerArray[i] = &arrayPointer[i];
                 }
 
-                int*[] res = NativeExportsNE
-                    .Arrays
+                int*[] res = NativeExportsNE.Arrays
                     .ReturnDuplicate(pointerArray, pointerArray.Length);
                 Assert.Equal(pointerArray.Length, res.Length);
                 for (int i = 0; i < pointerArray.Length; i++)
@@ -644,8 +643,7 @@ namespace LibraryImportGenerator.IntegrationTests
             int[] numRowsArray = new int[numColumns];
             numRowsArray.AsSpan().Fill(numRows);
 
-            int[][] transposed = NativeExportsNE
-                .Arrays
+            int[][] transposed = NativeExportsNE.Arrays
                 .TransposeMatrix(matrix, numRowsArray, numColumns);
 
             for (int i = 0; i < numRows; i++)

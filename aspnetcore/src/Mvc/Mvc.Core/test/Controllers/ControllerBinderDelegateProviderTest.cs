@@ -30,8 +30,7 @@ public class ControllerBinderDelegateProviderTest
     {
         // Arrange
         var actionDescriptor = GetActionDescriptor();
-        actionDescriptor
-            .Parameters
+        actionDescriptor.Parameters
             .Add(
                 new ControllerParameterDescriptor
                 {
@@ -83,8 +82,7 @@ public class ControllerBinderDelegateProviderTest
     {
         // Arrange
         var actionDescriptor = GetActionDescriptor();
-        actionDescriptor
-            .BoundProperties
+        actionDescriptor.BoundProperties
             .Add(
                 new ParameterDescriptor
                 {
@@ -135,8 +133,7 @@ public class ControllerBinderDelegateProviderTest
     {
         // Arrange
         var actionDescriptor = GetActionDescriptor();
-        actionDescriptor
-            .Parameters
+        actionDescriptor.Parameters
             .Add(
                 new ParameterDescriptor
                 {
@@ -179,8 +176,7 @@ public class ControllerBinderDelegateProviderTest
     {
         // Arrange
         var actionDescriptor = GetActionDescriptor();
-        actionDescriptor
-            .Parameters
+        actionDescriptor.Parameters
             .Add(
                 new ParameterDescriptor
                 {
@@ -223,8 +219,7 @@ public class ControllerBinderDelegateProviderTest
     {
         // Arrange
         var actionDescriptor = GetActionDescriptor();
-        actionDescriptor
-            .Parameters
+        actionDescriptor.Parameters
             .Add(
                 new ParameterDescriptor
                 {
@@ -278,8 +273,7 @@ public class ControllerBinderDelegateProviderTest
     {
         // Arrange
         var actionDescriptor = GetActionDescriptor();
-        actionDescriptor
-            .Parameters
+        actionDescriptor.Parameters
             .Add(
                 new ControllerParameterDescriptor
                 {
@@ -336,8 +330,7 @@ public class ControllerBinderDelegateProviderTest
     {
         // Arrange
         var actionDescriptor = GetActionDescriptor();
-        actionDescriptor
-            .Parameters
+        actionDescriptor.Parameters
             .Add(
                 new ControllerParameterDescriptor { Name = "foo", ParameterType = typeof(Person) }
             );
@@ -387,8 +380,7 @@ public class ControllerBinderDelegateProviderTest
     {
         // Arrange
         var actionDescriptor = GetActionDescriptor();
-        actionDescriptor
-            .Parameters
+        actionDescriptor.Parameters
             .Add(
                 new ControllerParameterDescriptor
                 {
@@ -443,8 +435,7 @@ public class ControllerBinderDelegateProviderTest
     {
         // Arrange
         var actionDescriptor = GetActionDescriptor();
-        actionDescriptor
-            .Parameters
+        actionDescriptor.Parameters
             .Add(
                 new ParameterDescriptor
                 {
@@ -493,8 +484,7 @@ public class ControllerBinderDelegateProviderTest
     {
         // Arrange
         var actionDescriptor = GetActionDescriptor();
-        actionDescriptor
-            .BoundProperties
+        actionDescriptor.BoundProperties
             .Add(
                 new ParameterDescriptor
                 {
@@ -550,8 +540,7 @@ public class ControllerBinderDelegateProviderTest
     {
         // Arrange
         var actionDescriptor = GetActionDescriptor();
-        actionDescriptor
-            .BoundProperties
+        actionDescriptor.BoundProperties
             .Add(
                 new ParameterDescriptor
                 {
@@ -604,8 +593,7 @@ public class ControllerBinderDelegateProviderTest
     {
         // Arrange
         var actionDescriptor = GetActionDescriptor();
-        actionDescriptor
-            .BoundProperties
+        actionDescriptor.BoundProperties
             .Add(
                 new ParameterDescriptor
                 {
@@ -658,8 +646,7 @@ public class ControllerBinderDelegateProviderTest
     {
         // Arrange
         var actionDescriptor = GetActionDescriptor();
-        actionDescriptor
-            .BoundProperties
+        actionDescriptor.BoundProperties
             .Add(
                 new ParameterDescriptor
                 {
@@ -699,8 +686,7 @@ public class ControllerBinderDelegateProviderTest
     {
         // Arrange
         var actionDescriptor = GetActionDescriptor();
-        actionDescriptor
-            .BoundProperties
+        actionDescriptor.BoundProperties
             .Add(
                 new ParameterDescriptor
                 {
@@ -741,8 +727,7 @@ public class ControllerBinderDelegateProviderTest
     {
         // Arrange
         var actionDescriptor = GetActionDescriptor();
-        actionDescriptor
-            .BoundProperties
+        actionDescriptor.BoundProperties
             .Add(
                 new ParameterDescriptor
                 {
@@ -784,8 +769,7 @@ public class ControllerBinderDelegateProviderTest
     {
         // Arrange
         var actionDescriptor = GetActionDescriptor();
-        actionDescriptor
-            .BoundProperties
+        actionDescriptor.BoundProperties
             .Add(
                 new ParameterDescriptor
                 {
@@ -828,8 +812,7 @@ public class ControllerBinderDelegateProviderTest
         // Arrange
         var actionDescriptor = GetActionDescriptor();
 
-        actionDescriptor
-            .Parameters
+        actionDescriptor.Parameters
             .Add(
                 new ParameterDescriptor
                 {
@@ -847,8 +830,7 @@ public class ControllerBinderDelegateProviderTest
                 }
             );
 
-        actionDescriptor
-            .BoundProperties
+        actionDescriptor.BoundProperties
             .Add(
                 new ParameterDescriptor
                 {
@@ -902,8 +884,7 @@ public class ControllerBinderDelegateProviderTest
         // Arrange
         var actionDescriptor = GetActionDescriptor();
 
-        actionDescriptor
-            .Parameters
+        actionDescriptor.Parameters
             .Add(
                 new ParameterDescriptor
                 {
@@ -921,8 +902,7 @@ public class ControllerBinderDelegateProviderTest
                 }
             );
 
-        actionDescriptor
-            .BoundProperties
+        actionDescriptor.BoundProperties
             .Add(
                 new ParameterDescriptor
                 {
@@ -1022,8 +1002,7 @@ public class ControllerBinderDelegateProviderTest
     {
         // Arrange
         var actionDescriptor = GetActionDescriptor();
-        actionDescriptor
-            .BoundProperties
+        actionDescriptor.BoundProperties
             .Add(
                 new ParameterDescriptor
                 {
@@ -1091,8 +1070,7 @@ public class ControllerBinderDelegateProviderTest
         var actionDescriptor = GetActionDescriptor();
         foreach (var keyValuePair in boundPropertyTypes)
         {
-            actionDescriptor
-                .BoundProperties
+            actionDescriptor.BoundProperties
                 .Add(
                     new ParameterDescriptor
                     {

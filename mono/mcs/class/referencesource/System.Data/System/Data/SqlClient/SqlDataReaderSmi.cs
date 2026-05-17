@@ -936,8 +936,7 @@ namespace System.Data.SqlClient
                     }
                     else
                     {
-                        schemaRow[UdtAssemblyQualifiedName] = colMetaData
-                            .Type
+                        schemaRow[UdtAssemblyQualifiedName] = colMetaData.Type
                             .AssemblyQualifiedName;
                         schemaRow[DataType] = colMetaData.Type;
                         schemaRow[ProviderSpecificDataType] = colMetaData.Type;

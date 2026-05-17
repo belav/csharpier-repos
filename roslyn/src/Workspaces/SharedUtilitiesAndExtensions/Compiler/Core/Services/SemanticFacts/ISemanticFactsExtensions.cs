@@ -44,8 +44,7 @@ namespace Microsoft.CodeAnalysis.LanguageService
             if (innerTypeInfo.Type is IDynamicTypeSymbol)
                 return false;
 
-            semanticFacts
-                .SyntaxFacts
+            semanticFacts.SyntaxFacts
                 .GetPartsOfBinaryExpression(
                     parentBinary,
                     out var parentBinaryLeft,

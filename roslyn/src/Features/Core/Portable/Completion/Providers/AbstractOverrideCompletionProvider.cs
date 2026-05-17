@@ -72,8 +72,7 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             {
                 newOverriddenMember = CodeGenerationSymbolFactory.CreateMethodSymbol(
                     methodSymbol,
-                    returnType: methodSymbol
-                        .ReturnType
+                    returnType: methodSymbol.ReturnType
                         .WithNullableAnnotation(NullableAnnotation.NotAnnotated)
                 );
             }

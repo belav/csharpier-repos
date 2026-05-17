@@ -24,8 +24,7 @@ namespace System.ServiceModel
         public ReliableSession(ReliableSessionBindingElement reliableSessionBindingElement)
         {
             if (reliableSessionBindingElement == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperArgumentNull("reliableSessionBindingElement");
             this.element = reliableSessionBindingElement;
         }
@@ -43,8 +42,7 @@ namespace System.ServiceModel
             set
             {
                 if (value <= TimeSpan.Zero)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentOutOfRangeException(
                                 "value",

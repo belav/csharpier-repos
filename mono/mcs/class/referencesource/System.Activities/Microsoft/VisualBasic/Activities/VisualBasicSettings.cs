@@ -100,8 +100,7 @@ namespace Microsoft.VisualBasic.Activities
             T service = (T)context.GetService(typeof(T));
             if (service == null)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(new InvalidOperationException(SR.InvalidTypeConverterUsage));
             }
 

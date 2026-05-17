@@ -459,7 +459,6 @@ public class SqliteTypeMappingSourceTest : RelationalTypeMappingSourceTestBase
     protected override ModelBuilder CreateModelBuilder(
         Action<ModelConfigurationBuilder> configureConventions = null
     ) =>
-        SqliteTestHelpers
-            .Instance
+        SqliteTestHelpers.Instance
             .CreateConventionBuilder(configureConventions: configureConventions);
 }

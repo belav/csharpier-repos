@@ -1293,12 +1293,10 @@ namespace System
 
 #if FEATURE_LEGACYNETCF
             if (CompatibilitySwitches.IsAppEarlierThanWindowsPhone8)
-                return MangoArraySortHelper<T>
-                    .Default
+                return MangoArraySortHelper<T>.Default
                     .BinarySearch(array, index, length, value, comparer);
             else
-                return ArraySortHelper<T>
-                    .Default
+                return ArraySortHelper<T>.Default
                     .BinarySearch(array, index, length, value, comparer);
 #else
             return ArraySortHelper<T>.Default.BinarySearch(array, index, length, value, comparer);
@@ -2402,12 +2400,10 @@ namespace System
 
 #if FEATURE_LEGACYNETCF
                 if (CompatibilitySwitches.IsAppEarlierThanWindowsPhone8)
-                    MangoArraySortHelper<TKey>
-                        .Default
+                    MangoArraySortHelper<TKey>.Default
                         .Sort<TValue>(keys, items, index, length, comparer);
                 else
-                    ArraySortHelper<TKey, TValue>
-                        .Default
+                    ArraySortHelper<TKey, TValue>.Default
                         .Sort(keys, items, index, length, comparer);
 #else
                 ArraySortHelper<TKey, TValue>.Default.Sort(keys, items, index, length, comparer);

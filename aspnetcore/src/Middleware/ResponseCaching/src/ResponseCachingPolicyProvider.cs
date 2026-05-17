@@ -164,8 +164,7 @@ internal sealed class ResponseCachingPolicyProvider : IResponseCachingPolicyProv
                 && context.ResponseTime!.Value >= context.ResponseExpires
             )
             {
-                context
-                    .Logger
+                context.Logger
                     .ExpirationExpiresExceeded(
                         context.ResponseTime.Value,
                         context.ResponseExpires.Value
@@ -180,8 +179,7 @@ internal sealed class ResponseCachingPolicyProvider : IResponseCachingPolicyProv
             // Validate shared max age
             if (age >= context.ResponseSharedMaxAge)
             {
-                context
-                    .Logger
+                context.Logger
                     .ExpirationSharedMaxAgeExceeded(age, context.ResponseSharedMaxAge.Value);
                 return false;
             }
@@ -198,8 +196,7 @@ internal sealed class ResponseCachingPolicyProvider : IResponseCachingPolicyProv
                     // Validate expiration
                     if (context.ResponseTime.Value >= context.ResponseExpires)
                     {
-                        context
-                            .Logger
+                        context.Logger
                             .ExpirationExpiresExceeded(
                                 context.ResponseTime.Value,
                                 context.ResponseExpires.Value
@@ -304,8 +301,7 @@ internal sealed class ResponseCachingPolicyProvider : IResponseCachingPolicyProv
                 // Request allows stale values with age limit
                 if (requestMaxStale.HasValue && age - lowestMaxAge < requestMaxStale)
                 {
-                    context
-                        .Logger
+                    context.Logger
                         .ExpirationMaxStaleSatisfied(
                             age,
                             lowestMaxAge.Value,

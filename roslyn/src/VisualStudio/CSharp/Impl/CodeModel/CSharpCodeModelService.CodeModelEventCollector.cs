@@ -136,8 +136,7 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                     var newArgument = newArguments[i];
 
                     if (
-                        !StringComparer
-                            .Ordinal
+                        !StringComparer.Ordinal
                             .Equals(
                                 CodeModelService.GetName(oldArgument),
                                 CodeModelService.GetName(newArgument)
@@ -178,8 +177,7 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
 
                 if (oldExpression is LiteralExpressionSyntax)
                 {
-                    return StringComparer
-                        .Ordinal
+                    return StringComparer.Ordinal
                         .Equals(oldExpression.ToString(), newExpression.ToString());
                 }
 
@@ -266,8 +264,7 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                 var same = true;
 
                 if (
-                    !StringComparer
-                        .Ordinal
+                    !StringComparer.Ordinal
                         .Equals(
                             CodeModelService.GetName(oldParameter),
                             CodeModelService.GetName(newParameter)
@@ -375,8 +372,7 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                 var same = true;
 
                 if (
-                    !StringComparer
-                        .Ordinal
+                    !StringComparer.Ordinal
                         .Equals(
                             CodeModelService.GetName(oldEnumMember),
                             CodeModelService.GetName(newEnumMember)
@@ -416,8 +412,7 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                 var same = true;
 
                 if (
-                    !StringComparer
-                        .Ordinal
+                    !StringComparer.Ordinal
                         .Equals(
                             CodeModelService.GetName(oldProperty),
                             CodeModelService.GetName(newProperty)
@@ -492,8 +487,7 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                 Debug.Assert(oldVariableDeclarator != null && newVariableDeclarator != null);
 
                 if (
-                    !StringComparer
-                        .Ordinal
+                    !StringComparer.Ordinal
                         .Equals(
                             CodeModelService.GetName(oldVariableDeclarator),
                             CodeModelService.GetName(newVariableDeclarator)
@@ -577,8 +571,7 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                 Debug.Assert(oldMethod != null && newMethod != null);
 
                 if (
-                    !StringComparer
-                        .Ordinal
+                    !StringComparer.Ordinal
                         .Equals(
                             CodeModelService.GetName(oldMethod),
                             CodeModelService.GetName(newMethod)
@@ -732,8 +725,7 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                     // If the type name is different, it might mean that the whole type has been removed and a new one added.
                     // In that case, we shouldn't do any other checks and instead return immediately.
                     if (
-                        !StringComparer
-                            .Ordinal
+                        !StringComparer.Ordinal
                             .Equals(oldType.Identifier.ToString(), newType.Identifier.ToString())
                     )
                     {
@@ -812,8 +804,7 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                     // If the delegate name is different, it might mean that the whole delegate has been removed and a new one added.
                     // In that case, we shouldn't do any other checks and instead return immediately.
                     if (
-                        !StringComparer
-                            .Ordinal
+                        !StringComparer.Ordinal
                             .Equals(
                                 oldDelegate.Identifier.ToString(),
                                 newDelegate.Identifier.ToString()
@@ -986,8 +977,7 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                         var oldIdentifierName = (IdentifierNameSyntax)oldName;
                         var newIdentifierName = (IdentifierNameSyntax)newName;
 
-                        return StringComparer
-                            .Ordinal
+                        return StringComparer.Ordinal
                             .Equals(
                                 oldIdentifierName.Identifier.ToString(),
                                 newIdentifierName.Identifier.ToString()
@@ -1005,8 +995,7 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                         var newGenericName = (GenericNameSyntax)newName;
 
                         if (
-                            !StringComparer
-                                .Ordinal
+                            !StringComparer.Ordinal
                                 .Equals(
                                     oldGenericName.Identifier.ToString(),
                                     newGenericName.Identifier.ToString()

@@ -80,8 +80,7 @@ namespace System.Runtime.Serialization
                     null
                 );
                 if (schema == null)
-                    throw System
-                        .Runtime
+                    throw System.Runtime
                         .Serialization
                         .DiagnosticUtility
                         .ExceptionUtility
@@ -239,8 +238,7 @@ namespace System.Runtime.Serialization
                 element.SchemaTypeName = dataContract.StableName;
 
                 if (element.SchemaTypeName.Namespace.Equals(Globals.SerializationNamespace))
-                    schema
-                        .Namespaces
+                    schema.Namespaces
                         .Add(Globals.SerPrefixForSchema, Globals.SerializationNamespace);
 
                 SchemaHelper.AddSchemaImport(dataContract.StableName.Namespace, schema);
@@ -401,8 +399,7 @@ namespace System.Runtime.Serialization
                     XmlAttribute typeNestedLevelsAttribute = XmlDoc.CreateAttribute(
                         Globals.GenericParameterNestedLevelAttribute
                     );
-                    typeNestedLevelsAttribute.Value = genericArgumentCounts
-                        .Count
+                    typeNestedLevelsAttribute.Value = genericArgumentCounts.Count
                         .ToString(CultureInfo.InvariantCulture);
                     typeElement.Attributes.Append(typeNestedLevelsAttribute);
                 }
@@ -698,8 +695,7 @@ namespace System.Runtime.Serialization
                     && typeQName.Namespace != XmlSchema.Namespace
                 )
                 {
-                    throw System
-                        .Runtime
+                    throw System.Runtime
                         .Serialization
                         .DiagnosticUtility
                         .ExceptionUtility
@@ -809,8 +805,7 @@ namespace System.Runtime.Serialization
             schemas.XmlResolver = null;
             InvokeSchemaProviderMethod(type, schemas, out stableName, out xsdType, out hasRoot);
             if (stableName.Name == null || stableName.Name.Length == 0)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -854,8 +849,7 @@ namespace System.Runtime.Serialization
             if (methodName == null || methodName.Length == 0)
             {
                 if (!provider.IsAny)
-                    throw System
-                        .Runtime
+                    throw System.Runtime
                         .Serialization
                         .DiagnosticUtility
                         .ExceptionUtility
@@ -879,8 +873,7 @@ namespace System.Runtime.Serialization
                     null
                 );
                 if (getMethod == null)
-                    throw System
-                        .Runtime
+                    throw System.Runtime
                         .Serialization
                         .DiagnosticUtility
                         .ExceptionUtility
@@ -898,8 +891,7 @@ namespace System.Runtime.Serialization
                     !(Globals.TypeOfXmlQualifiedName.IsAssignableFrom(getMethod.ReturnType))
                     && !(Globals.TypeOfXmlSchemaType.IsAssignableFrom(getMethod.ReturnType))
                 )
-                    throw System
-                        .Runtime
+                    throw System.Runtime
                         .Serialization
                         .DiagnosticUtility
                         .ExceptionUtility
@@ -921,8 +913,7 @@ namespace System.Runtime.Serialization
                 if (provider.IsAny)
                 {
                     if (typeInfo != null)
-                        throw System
-                            .Runtime
+                        throw System.Runtime
                             .Serialization
                             .DiagnosticUtility
                             .ExceptionUtility
@@ -981,8 +972,7 @@ namespace System.Runtime.Serialization
                                     break;
                             }
                             if (typeNs == null)
-                                throw System
-                                    .Runtime
+                                throw System.Runtime
                                     .Serialization
                                     .DiagnosticUtility
                                     .ExceptionUtility
@@ -1020,8 +1010,7 @@ namespace System.Runtime.Serialization
             else
             {
                 if (schema.Id == null || schema.Id.Length == 0)
-                    throw System
-                        .Runtime
+                    throw System.Runtime
                         .Serialization
                         .DiagnosticUtility
                         .ExceptionUtility

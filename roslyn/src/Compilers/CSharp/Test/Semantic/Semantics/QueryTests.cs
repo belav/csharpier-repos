@@ -1582,8 +1582,7 @@ class Query
                 .Where(t => t.Identifier.ValueText == "Query")
                 .Single();
             dynamic methodM = (MethodDeclarationSyntax)classC.Members[0];
-            QueryExpressionSyntax q = methodM
-                .Body
+            QueryExpressionSyntax q = methodM.Body
                 .Statements[3]
                 .Declaration
                 .Variables[0]
@@ -1816,8 +1815,7 @@ class Query
                 .Where(t => t.Identifier.ValueText == "Query")
                 .Single();
             dynamic methodM = (MethodDeclarationSyntax)classC.Members[0];
-            QueryExpressionSyntax q = methodM
-                .Body
+            QueryExpressionSyntax q = methodM.Body
                 .Statements[3]
                 .Declaration
                 .Variables[0]
@@ -1896,8 +1894,7 @@ class Query
                 .Where(t => t.Identifier.ValueText == "Query")
                 .Single();
             dynamic methodM = (MethodDeclarationSyntax)classC.Members[0];
-            QueryExpressionSyntax q = methodM
-                .Body
+            QueryExpressionSyntax q = methodM.Body
                 .Statements[2]
                 .Declaration
                 .Variables[0]
@@ -1946,8 +1943,7 @@ class Query
                 .Where(t => t.Identifier.ValueText == "Query")
                 .Single();
             dynamic methodM = (MethodDeclarationSyntax)classC.Members[0];
-            QueryExpressionSyntax q = methodM
-                .Body
+            QueryExpressionSyntax q = methodM.Body
                 .Statements[1]
                 .Declaration
                 .Variables[0]
@@ -3983,8 +3979,7 @@ public class Test
             );
 
             var queryExpression = (QueryExpressionSyntax)
-                ((LocalDeclarationStatementSyntax)queryStatement)
-                    .Declaration
+                ((LocalDeclarationStatementSyntax)queryStatement).Declaration
                     .Variables[0]
                     .Initializer
                     .Value;
@@ -4040,8 +4035,7 @@ public class Test2
             Assert.True(success);
 
             var queryExpression = (QueryExpressionSyntax)
-                ((LocalDeclarationStatementSyntax)queryStatement)
-                    .Declaration
+                ((LocalDeclarationStatementSyntax)queryStatement).Declaration
                     .Variables[0]
                     .Initializer
                     .Value;

@@ -176,36 +176,28 @@ namespace ILLink.CodeFix
 
         private static readonly string[] AttributeOnReturn =
         {
-            DiagnosticId
-                .DynamicallyAccessedMembersMismatchMethodReturnTypeTargetsParameter
+            DiagnosticId.DynamicallyAccessedMembersMismatchMethodReturnTypeTargetsParameter
                 .AsString(),
-            DiagnosticId
-                .DynamicallyAccessedMembersMismatchMethodReturnTypeTargetsMethodReturnType
+            DiagnosticId.DynamicallyAccessedMembersMismatchMethodReturnTypeTargetsMethodReturnType
                 .AsString(),
             DiagnosticId.DynamicallyAccessedMembersMismatchMethodReturnTypeTargetsField.AsString(),
-            DiagnosticId
-                .DynamicallyAccessedMembersMismatchMethodReturnTypeTargetsThisParameter
+            DiagnosticId.DynamicallyAccessedMembersMismatchMethodReturnTypeTargetsThisParameter
                 .AsString(),
-            DiagnosticId
-                .DynamicallyAccessedMembersMismatchOnMethodReturnValueBetweenOverrides
+            DiagnosticId.DynamicallyAccessedMembersMismatchOnMethodReturnValueBetweenOverrides
                 .AsString(),
         };
 
         private static readonly string[] AttributeOnGeneric =
         {
             DiagnosticId.DynamicallyAccessedMembersMismatchTypeArgumentTargetsParameter.AsString(),
-            DiagnosticId
-                .DynamicallyAccessedMembersMismatchTypeArgumentTargetsMethodReturnType
+            DiagnosticId.DynamicallyAccessedMembersMismatchTypeArgumentTargetsMethodReturnType
                 .AsString(),
             DiagnosticId.DynamicallyAccessedMembersMismatchTypeArgumentTargetsField.AsString(),
-            DiagnosticId
-                .DynamicallyAccessedMembersMismatchTypeArgumentTargetsThisParameter
+            DiagnosticId.DynamicallyAccessedMembersMismatchTypeArgumentTargetsThisParameter
                 .AsString(),
-            DiagnosticId
-                .DynamicallyAccessedMembersMismatchTypeArgumentTargetsGenericParameter
+            DiagnosticId.DynamicallyAccessedMembersMismatchTypeArgumentTargetsGenericParameter
                 .AsString(),
-            DiagnosticId
-                .DynamicallyAccessedMembersMismatchOnGenericParameterBetweenOverrides
+            DiagnosticId.DynamicallyAccessedMembersMismatchOnGenericParameterBetweenOverrides
                 .AsString(),
         };
 

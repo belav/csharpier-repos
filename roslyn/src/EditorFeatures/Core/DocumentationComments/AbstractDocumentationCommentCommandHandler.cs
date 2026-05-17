@@ -140,8 +140,7 @@ namespace Microsoft.CodeAnalysis.DocumentationComments
                 return false;
             }
 
-            var document = subjectBuffer
-                .CurrentSnapshot
+            var document = subjectBuffer.CurrentSnapshot
                 .GetOpenDocumentInCurrentContextWithChanges();
             if (document == null)
             {
@@ -157,8 +156,7 @@ namespace Microsoft.CodeAnalysis.DocumentationComments
             );
 
             // Apply snippet in reverse order so that the first applied snippet doesn't affect span of next snippets.
-            var snapshots = textView
-                .Selection
+            var snapshots = textView.Selection
                 .GetSnapshotSpansOnBuffer(subjectBuffer)
                 .OrderByDescending(s => s.Span.Start);
             var returnValue = false;
@@ -338,8 +336,7 @@ namespace Microsoft.CodeAnalysis.DocumentationComments
         public bool ExecuteCommand(InsertCommentCommandArgs args, CommandExecutionContext context)
         {
             using (
-                context
-                    .OperationContext
+                context.OperationContext
                     .AddScope(
                         allowCancellation: true,
                         EditorFeaturesResources.Inserting_documentation_comment
@@ -392,8 +389,7 @@ namespace Microsoft.CodeAnalysis.DocumentationComments
             // Allow nextHandler() to run and then insert exterior trivia if necessary.
             nextHandler();
 
-            var document = subjectBuffer
-                .CurrentSnapshot
+            var document = subjectBuffer.CurrentSnapshot
                 .GetOpenDocumentInCurrentContextWithChanges();
             if (document == null)
             {
@@ -445,8 +441,7 @@ namespace Microsoft.CodeAnalysis.DocumentationComments
                 return;
             }
 
-            var document = subjectBuffer
-                .CurrentSnapshot
+            var document = subjectBuffer.CurrentSnapshot
                 .GetOpenDocumentInCurrentContextWithChanges();
             if (document == null)
             {
@@ -480,8 +475,7 @@ namespace Microsoft.CodeAnalysis.DocumentationComments
                 return;
             }
 
-            var document = subjectBuffer
-                .CurrentSnapshot
+            var document = subjectBuffer.CurrentSnapshot
                 .GetOpenDocumentInCurrentContextWithChanges();
             if (document == null)
             {
@@ -531,8 +525,7 @@ namespace Microsoft.CodeAnalysis.DocumentationComments
             CancellationToken cancellationToken
         )
         {
-            var document = subjectBuffer
-                .CurrentSnapshot
+            var document = subjectBuffer.CurrentSnapshot
                 .GetOpenDocumentInCurrentContextWithChanges();
             if (document == null)
             {

@@ -56,9 +56,8 @@ namespace MonoCasTests.System.Web.UI.WebControls
             AspNetHostingPermissionLevel level
         )
         {
-            ConstructorInfo ci = this.Type.GetConstructor(
-                new Type[2] { typeof(DateTime), typeof(DateTime) }
-            );
+            ConstructorInfo ci = this.Type
+                .GetConstructor(new Type[2] { typeof(DateTime), typeof(DateTime) });
             Assert.IsNotNull(ci, ".ctor(DateTime,DateTime)");
             return ci.Invoke(new object[2] { DateTime.MinValue, DateTime.MaxValue });
         }

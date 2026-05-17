@@ -104,16 +104,14 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                     method.ContainingType,
                     method.Name,
                     m =>
-                        method
-                            .TypeParameters
+                        method.TypeParameters
                             .SelectAsArray(t =>
                                 (TypeParameterSymbol)
                                     new SimpleTypeParameterSymbol(m, t.Ordinal, t.Name)
                             ),
                     m => m.TypeParameters[0], // return type is <>T&
                     m =>
-                        method
-                            .Parameters
+                        method.Parameters
                             .SelectAsArray(p =>
                                 SynthesizedParameterSymbol.Create(
                                     m,

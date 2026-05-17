@@ -116,8 +116,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             var compilation = CreateEmptyCompilation(
                 text,
                 new[] { MscorlibRef },
-                options: TestOptions
-                    .ReleaseDll
+                options: TestOptions.ReleaseDll
                     .WithMetadataImportOptions(MetadataImportOptions.Internal)
             );
 
@@ -226,8 +225,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             var compilation = CreateEmptyCompilation(
                 text,
                 new[] { MscorlibRef },
-                options: TestOptions
-                    .ReleaseDll
+                options: TestOptions.ReleaseDll
                     .WithMetadataImportOptions(MetadataImportOptions.Internal)
             );
 
@@ -307,8 +305,7 @@ namespace System.Diagnostics.Eventing
                     TestMetadata.Net40.SystemCore,
                     compilation1.EmitToImageReference(),
                 },
-                options: TestOptions
-                    .ReleaseDll
+                options: TestOptions.ReleaseDll
                     .WithMetadataImportOptions(MetadataImportOptions.Internal)
             );
 

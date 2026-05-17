@@ -46,8 +46,7 @@ namespace Internal.TypeSystem.Ecma
             ppInterface =
                 hr == 0
                     ? (ClrMetaHostWrapperCache.ClrMetaHostRcw)
-                        ClrMetaHostWrapperCache
-                            .Instance
+                        ClrMetaHostWrapperCache.Instance
                             .GetOrCreateObjectForComInstance(ptr, CreateObjectFlags.UniqueInstance)
                     : null;
             return hr;
@@ -130,8 +129,7 @@ namespace Internal.TypeSystem.Ecma
                     ppRuntime =
                         hr == 0
                             ? (CLRRuntimeInfoWrapperCache.ClrRuntimeInfoRcw)
-                                CLRRuntimeInfoWrapperCache
-                                    .Instance
+                                CLRRuntimeInfoWrapperCache.Instance
                                     .GetOrCreateObjectForComInstance(
                                         runtimeInfoPtr,
                                         CreateObjectFlags.UniqueInstance
@@ -234,8 +232,7 @@ namespace Internal.TypeSystem.Ecma
                     ppUnk =
                         hr == 0
                             ? (MetaDataDispenserWrapperCache.MetaDataDispenserRcw)
-                                MetaDataDispenserWrapperCache
-                                    .Instance
+                                MetaDataDispenserWrapperCache.Instance
                                     .GetOrCreateObjectForComInstance(
                                         outPtr,
                                         CreateObjectFlags.UniqueInstance
@@ -429,8 +426,7 @@ namespace Internal.TypeSystem.Ecma
                     reader =
                         hr == 0
                             ? (SymUnmanagedReaderWrapperCache.SymUnmanagedReaderRcw)
-                                SymUnmanagedReaderWrapperCache
-                                    .Instance
+                                SymUnmanagedReaderWrapperCache.Instance
                                     .GetOrCreateObjectForComInstance(
                                         readerPtr,
                                         CreateObjectFlags.UniqueInstance
@@ -615,8 +611,7 @@ namespace Internal.TypeSystem.Ecma
                                 {
                                     variables[i] =
                                         (SymUnmanagedVariableWrapperCache.SymUnmanagedVariableRcw)
-                                            SymUnmanagedVariableWrapperCache
-                                                .Instance
+                                            SymUnmanagedVariableWrapperCache.Instance
                                                 .GetOrCreateObjectForComInstance(
                                                     intermediate[i],
                                                     CreateObjectFlags.UniqueInstance
@@ -788,8 +783,7 @@ namespace Internal.TypeSystem.Ecma
                     method =
                         hr == 0
                             ? (SymUnmanagedMethodWrapperCache.SymUnmanagedMethodRcw)
-                                SymUnmanagedMethodWrapperCache
-                                    .Instance
+                                SymUnmanagedMethodWrapperCache.Instance
                                     .GetOrCreateObjectForComInstance(
                                         methodPtr,
                                         CreateObjectFlags.UniqueInstance
@@ -906,8 +900,7 @@ namespace Internal.TypeSystem.Ecma
                                 {
                                     locals[i] =
                                         (SymUnmanagedVariableWrapperCache.SymUnmanagedVariableRcw)
-                                            SymUnmanagedVariableWrapperCache
-                                                .Instance
+                                            SymUnmanagedVariableWrapperCache.Instance
                                                 .GetOrCreateObjectForComInstance(
                                                     intermediate[i],
                                                     CreateObjectFlags.UniqueInstance
@@ -951,8 +944,7 @@ namespace Internal.TypeSystem.Ecma
                                 {
                                     namespaces[i] =
                                         (SymUnmanagedNamespaceWrapperCache.SymUnmanagedNamespaceRcw)
-                                            SymUnmanagedNamespaceWrapperCache
-                                                .Instance
+                                            SymUnmanagedNamespaceWrapperCache.Instance
                                                 .GetOrCreateObjectForComInstance(
                                                     intermediate[i],
                                                     CreateObjectFlags.UniqueInstance
@@ -1202,8 +1194,7 @@ namespace Internal.TypeSystem.Ecma
                     scope =
                         hr == 0
                             ? (SymUnmanagedScopeWrapperCache.SymUnmanagedScopeRcw)
-                                SymUnmanagedScopeWrapperCache
-                                    .Instance
+                                SymUnmanagedScopeWrapperCache.Instance
                                     .GetOrCreateObjectForComInstance(
                                         scopePtr,
                                         CreateObjectFlags.UniqueInstance
@@ -1222,8 +1213,7 @@ namespace Internal.TypeSystem.Ecma
                     scope =
                         hr == 0
                             ? (SymUnmanagedScopeWrapperCache.SymUnmanagedScopeRcw)
-                                SymUnmanagedScopeWrapperCache
-                                    .Instance
+                                SymUnmanagedScopeWrapperCache.Instance
                                     .GetOrCreateObjectForComInstance(
                                         scopePtr,
                                         CreateObjectFlags.UniqueInstance
@@ -1328,8 +1318,7 @@ namespace Internal.TypeSystem.Ecma
                                 {
                                     parameters[i] =
                                         (SymUnmanagedVariableWrapperCache.SymUnmanagedVariableRcw)
-                                            SymUnmanagedVariableWrapperCache
-                                                .Instance
+                                            SymUnmanagedVariableWrapperCache.Instance
                                                 .GetOrCreateObjectForComInstance(
                                                     intermediate[i],
                                                     CreateObjectFlags.UniqueInstance
@@ -1350,8 +1339,7 @@ namespace Internal.TypeSystem.Ecma
                     @namespace =
                         hr == 0
                             ? (SymUnmanagedNamespaceWrapperCache.SymUnmanagedNamespaceRcw)
-                                SymUnmanagedNamespaceWrapperCache
-                                    .Instance
+                                SymUnmanagedNamespaceWrapperCache.Instance
                                     .GetOrCreateObjectForComInstance(
                                         namespacePtr,
                                         CreateObjectFlags.UniqueInstance
@@ -1460,8 +1448,7 @@ namespace Internal.TypeSystem.Ecma
                                 {
                                     documents[i] =
                                         (SymUnmanagedDocumentWrapperCache.SymUnmanagedDocumentRcw)
-                                            SymUnmanagedDocumentWrapperCache
-                                                .Instance
+                                            SymUnmanagedDocumentWrapperCache.Instance
                                                 .GetOrCreateObjectForComInstance(
                                                     intermediate[i],
                                                     CreateObjectFlags.UniqueInstance
@@ -1540,8 +1527,7 @@ namespace Internal.TypeSystem.Ecma
                     method =
                         hr == 0
                             ? (SymUnmanagedMethodWrapperCache.SymUnmanagedMethodRcw)
-                                SymUnmanagedMethodWrapperCache
-                                    .Instance
+                                SymUnmanagedMethodWrapperCache.Instance
                                     .GetOrCreateObjectForComInstance(
                                         methodPtr,
                                         CreateObjectFlags.UniqueInstance
@@ -1602,8 +1588,7 @@ namespace Internal.TypeSystem.Ecma
             ppv =
                 hr == 0
                     ? (CoCreateWrapperCache.SymUnmanagedBinderRcw)
-                        CoCreateWrapperCache
-                            .Instance
+                        CoCreateWrapperCache.Instance
                             .GetOrCreateObjectForComInstance(
                                 ppvPtr,
                                 CreateObjectFlags.UniqueInstance

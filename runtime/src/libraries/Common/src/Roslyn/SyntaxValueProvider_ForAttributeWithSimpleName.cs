@@ -101,12 +101,10 @@ internal static partial class SyntaxValueProviderExtensions
         // using SyntaxTrees is purely syntax and will not update the incremental node for a tree when another tree is
         // changed. CreateSyntaxProvider will have to rerun all incremental nodes since it passes along the
         // SemanticModel, and that model is updated whenever any tree changes (since it is tied to the compilation).
-        var syntaxTreesProvider = context
-            .CompilationProvider
+        var syntaxTreesProvider = context.CompilationProvider
             .SelectMany(
                 (compilation, cancellationToken) =>
-                    compilation
-                        .SyntaxTrees
+                    compilation.SyntaxTrees
                         .Select(tree => GetTreeInfo(tree, syntaxHelper, cancellationToken))
                         .Where(info => info.ContainsGlobalAliases || info.ContainsAttributeList)
             )
@@ -196,8 +194,7 @@ internal static partial class SyntaxValueProviderExtensions
             Debug.Assert(compilationUnit is ICompilationUnitSyntax);
             var globalAliases = new Aliases(Span<(string aliasName, string symbolName)>.Empty);
 
-            CSharpSyntaxHelper
-                .Instance
+            CSharpSyntaxHelper.Instance
                 .AddAliases(compilationUnit, ref globalAliases, global: true);
 
             return GlobalAliases.Create(globalAliases.AsSpan().ToImmutableArray());

@@ -709,15 +709,13 @@ namespace System.Workflow.ComponentModel.Compiler
             }
             catch (Exception e)
             {
-                results
-                    .Errors
+                results.Errors
                     .Add(
                         new WorkflowCompilerError(
                             String.Empty,
                             -1,
                             -1,
-                            ErrorNumbers
-                                .Error_UnknownCompilerException
+                            ErrorNumbers.Error_UnknownCompilerException
                                 .ToString(CultureInfo.InvariantCulture),
                             SR.GetString(SR.Error_CompilationFailed, e.Message)
                         )
@@ -861,8 +859,7 @@ namespace System.Workflow.ComponentModel.Compiler
             clonedParams.GenerateInMemory = true;
 
             if (string.IsNullOrEmpty(parameters.OutputAssembly))
-                localAssemblyPath = clonedParams.OutputAssembly = clonedParams
-                    .TempFiles
+                localAssemblyPath = clonedParams.OutputAssembly = clonedParams.TempFiles
                     .AddExtension("dll");
             else
             {
@@ -903,8 +900,7 @@ namespace System.Workflow.ComponentModel.Compiler
                 // We need to add the pdb file to the clonedParameters.TempFiles collection so that
                 // it gets deleted, even in the case where we didn't end up creating the tempAssemblyDirectory above.
                 string pdbFilename = Path.GetFileNameWithoutExtension(localAssemblyPath) + ".pdb";
-                clonedParams
-                    .TempFiles
+                clonedParams.TempFiles
                     .AddFile(Path.GetDirectoryName(localAssemblyPath) + "\\" + pdbFilename, true);
             }
 
@@ -1049,8 +1045,7 @@ namespace System.Workflow.ComponentModel.Compiler
                             {
                                 if (error is WorkflowMarkupSerializationException)
                                 {
-                                    results
-                                        .Errors
+                                    results.Errors
                                         .Add(
                                             new WorkflowCompilerError(
                                                 fileName,
@@ -1060,15 +1055,13 @@ namespace System.Workflow.ComponentModel.Compiler
                                 }
                                 else
                                 {
-                                    results
-                                        .Errors
+                                    results.Errors
                                         .Add(
                                             new WorkflowCompilerError(
                                                 fileName,
                                                 -1,
                                                 -1,
-                                                ErrorNumbers
-                                                    .Error_SerializationError
+                                                ErrorNumbers.Error_SerializationError
                                                     .ToString(CultureInfo.InvariantCulture),
                                                 error.ToString()
                                             )
@@ -1080,22 +1073,19 @@ namespace System.Workflow.ComponentModel.Compiler
                 }
                 catch (WorkflowMarkupSerializationException xomlSerializationException)
                 {
-                    results
-                        .Errors
+                    results.Errors
                         .Add(new WorkflowCompilerError(fileName, xomlSerializationException));
                     continue;
                 }
                 catch (Exception e)
                 {
-                    results
-                        .Errors
+                    results.Errors
                         .Add(
                             new WorkflowCompilerError(
                                 fileName,
                                 -1,
                                 -1,
-                                ErrorNumbers
-                                    .Error_SerializationError
+                                ErrorNumbers.Error_SerializationError
                                     .ToString(CultureInfo.InvariantCulture),
                                 SR.GetString(SR.Error_CompilationFailed, e.Message)
                             )
@@ -1105,15 +1095,13 @@ namespace System.Workflow.ComponentModel.Compiler
 
                 if (rootActivity == null)
                 {
-                    results
-                        .Errors
+                    results.Errors
                         .Add(
                             new WorkflowCompilerError(
                                 fileName,
                                 1,
                                 1,
-                                ErrorNumbers
-                                    .Error_SerializationError
+                                ErrorNumbers.Error_SerializationError
                                     .ToString(CultureInfo.InvariantCulture),
                                 SR.GetString(SR.Error_RootActivityTypeInvalid)
                             )
@@ -1128,15 +1116,13 @@ namespace System.Workflow.ComponentModel.Compiler
                 );
                 if (!createNewClass)
                 {
-                    results
-                        .Errors
+                    results.Errors
                         .Add(
                             new WorkflowCompilerError(
                                 fileName,
                                 1,
                                 1,
-                                ErrorNumbers
-                                    .Error_SerializationError
+                                ErrorNumbers.Error_SerializationError
                                     .ToString(CultureInfo.InvariantCulture),
                                 SR.GetString(SR.Error_CannotCompile_No_XClass)
                             )
@@ -1155,8 +1141,7 @@ namespace System.Workflow.ComponentModel.Compiler
                         ErrorNumbers.Error_CodeWithinNotAllowed
                     );
                     error.UserData[typeof(Activity)] = rootActivity;
-                    results
-                        .Errors
+                    results.Errors
                         .Add(XomlCompilerHelper.CreateXomlCompilerError(error, parameters));
                 }
 
@@ -1164,15 +1149,13 @@ namespace System.Workflow.ComponentModel.Compiler
 
                 errors = ValidateIdentifiers(context.ServiceProvider, rootActivity);
                 foreach (ValidationError error in errors)
-                    results
-                        .Errors
+                    results.Errors
                         .Add(XomlCompilerHelper.CreateXomlCompilerError(error, parameters));
 
                 if (results.Errors.HasErrors)
                     continue;
 
-                codeCompileUnit
-                    .Namespaces
+                codeCompileUnit.Namespaces
                     .AddRange(
                         WorkflowMarkupSerializationHelpers.GenerateCodeFromXomlDocument(
                             rootActivity,

@@ -4015,8 +4015,7 @@ static class C
                     );
                     Assert.Equal(
                         SpecialType.System_Int32,
-                        ((MethodSymbol)testData.GetMethodData(typeName + ".<>m0").Method)
-                            .ReturnType
+                        ((MethodSymbol)testData.GetMethodData(typeName + ".<>m0").Method).ReturnType
                             .SpecialType
                     );
                     locals.Free();
@@ -5850,8 +5849,7 @@ class C
     {
     }
 }";
-            var references = TargetFrameworkUtil
-                .Mscorlib461ExtendedReferences
+            var references = TargetFrameworkUtil.Mscorlib461ExtendedReferences
                 .Concat(
                     new[]
                     {

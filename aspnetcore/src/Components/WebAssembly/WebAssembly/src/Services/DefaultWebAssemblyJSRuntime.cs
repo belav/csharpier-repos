@@ -31,8 +31,7 @@ internal sealed partial class DefaultWebAssemblyJSRuntime : WebAssemblyJSRuntime
     private DefaultWebAssemblyJSRuntime()
     {
         ElementReferenceContext = new WebElementReferenceContext(this);
-        JsonSerializerOptions
-            .Converters
+        JsonSerializerOptions.Converters
             .Add(new ElementReferenceJsonConverter(ElementReferenceContext));
     }
 
@@ -158,8 +157,7 @@ internal sealed partial class DefaultWebAssemblyJSRuntime : WebAssemblyJSRuntime
             }
 
             var componentType =
-                Instance
-                    ._rootComponentCache
+                Instance._rootComponentCache
                     .GetRootComponent(
                         operation.Marker!.Value.Assembly!,
                         operation.Marker.Value.TypeName!

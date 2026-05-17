@@ -65,13 +65,14 @@ namespace Microsoft.CodeAnalysis.Editor
                 }
             }
 
-            this.SubjectBuffersConnected?.Invoke(
-                this,
-                new SubjectBuffersConnectedEventArgs(
-                    textView,
-                    subjectBuffers.ToReadOnlyCollection()
-                )
-            );
+            this.SubjectBuffersConnected
+                ?.Invoke(
+                    this,
+                    new SubjectBuffersConnectedEventArgs(
+                        textView,
+                        subjectBuffers.ToReadOnlyCollection()
+                    )
+                );
         }
 
         void ITextViewConnectionListener.SubjectBuffersDisconnected(
@@ -97,13 +98,14 @@ namespace Microsoft.CodeAnalysis.Editor
                 }
             }
 
-            this.SubjectBuffersDisconnected?.Invoke(
-                this,
-                new SubjectBuffersConnectedEventArgs(
-                    textView,
-                    subjectBuffers.ToReadOnlyCollection()
-                )
-            );
+            this.SubjectBuffersDisconnected
+                ?.Invoke(
+                    this,
+                    new SubjectBuffersConnectedEventArgs(
+                        textView,
+                        subjectBuffers.ToReadOnlyCollection()
+                    )
+                );
         }
 
         private static bool IsSupportedContentType(IContentType contentType)
@@ -167,9 +169,8 @@ namespace Microsoft.CodeAnalysis.Editor
             lock (s_gate)
             {
                 foreach (
-                    var buffer in view.BufferGraph.GetTextBuffers(b =>
-                        IsSupportedContentType(b.ContentType)
-                    )
+                    var buffer in view.BufferGraph
+                        .GetTextBuffers(b => IsSupportedContentType(b.ContentType))
                 )
                 {
                     if (s_map.TryGetValue(buffer, out var set))

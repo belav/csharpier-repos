@@ -25,16 +25,14 @@ public static class GrpcJsonTranscodingServiceExtensions
     {
         ArgumentNullException.ThrowIfNull(builder);
 
-        builder
-            .Services
+        builder.Services
             .TryAddEnumerable(
                 ServiceDescriptor.Singleton(
                     typeof(IServiceMethodProvider<>),
                     typeof(JsonTranscodingServiceMethodProvider<>)
                 )
             );
-        builder
-            .Services
+        builder.Services
             .TryAddEnumerable(
                 ServiceDescriptor.Singleton<
                     IConfigureOptions<GrpcJsonTranscodingOptions>,

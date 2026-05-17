@@ -54,8 +54,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     case SyntaxKind.ExpressionStatement:
                         if (expression != null)
                         {
-                            MessageID
-                                .IDS_FeatureMixedDeclarationsAndExpressionsInDeconstruction
+                            MessageID.IDS_FeatureMixedDeclarationsAndExpressionsInDeconstruction
                                 .CheckFeatureAvailability(diagnostics, Compilation, node.Location);
                         }
                         break;
@@ -64,8 +63,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                         {
                             if (expression != null)
                             {
-                                MessageID
-                                    .IDS_FeatureMixedDeclarationsAndExpressionsInDeconstruction
+                                MessageID.IDS_FeatureMixedDeclarationsAndExpressionsInDeconstruction
                                     .CheckFeatureAvailability(
                                         diagnostics,
                                         Compilation,
@@ -352,9 +350,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (type.IsTupleType)
             {
                 // tuple literal such as `(1, 2)`, `(null, null)`, `(x.P, y.M())`
-                tupleOrDeconstructedTypes = type.TupleElementTypesWithAnnotations.SelectAsArray(
-                    TypeMap.AsTypeSymbol
-                );
+                tupleOrDeconstructedTypes = type.TupleElementTypesWithAnnotations
+                    .SelectAsArray(TypeMap.AsTypeSymbol);
                 SetInferredTypes(variables, tupleOrDeconstructedTypes, diagnostics);
 
                 if (variables.Count != tupleOrDeconstructedTypes.Length)
@@ -471,12 +468,13 @@ namespace Microsoft.CodeAnalysis.CSharp
                     CompoundUseSiteInfo<AssemblySymbol> useSiteInfo = GetNewCompoundUseSiteInfo(
                         diagnostics
                     );
-                    nestedConversion = this.Conversions.ClassifyConversionFromType(
-                        tupleOrDeconstructedTypes[i],
-                        single.Type,
-                        isChecked: CheckOverflowAtRuntime,
-                        ref useSiteInfo
-                    );
+                    nestedConversion = this.Conversions
+                        .ClassifyConversionFromType(
+                            tupleOrDeconstructedTypes[i],
+                            single.Type,
+                            isChecked: CheckOverflowAtRuntime,
+                            ref useSiteInfo
+                        );
                     diagnostics.Add(single.Syntax, useSiteInfo);
 
                     if (!nestedConversion.IsImplicit)
@@ -1118,8 +1116,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                             // check for use of `var (x, y, z)`.  Only need to report this in a non-argument
                             // position. If it's an argument, then we have `(int x, var (y, z))` and we will have
                             // already reported the parent tuple, so no need to report on the inner designation.
-                            MessageID
-                                .IDS_FeatureTuples
+                            MessageID.IDS_FeatureTuples
                                 .CheckFeatureAvailability(diagnostics, component.Designation);
                         }
                     }
@@ -1339,8 +1336,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 // Check for variable declaration errors.
                 // Use the binder that owns the scope for the local because this (the current) binder
                 // might own nested scope.
-                var hasErrors = localSymbol
-                    .ScopeBinder
+                var hasErrors = localSymbol.ScopeBinder
                     .ValidateDeclarationNameConflictsInScope(localSymbol, diagnostics);
 
                 if (declTypeWithAnnotations.HasType)

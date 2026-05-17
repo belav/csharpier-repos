@@ -394,8 +394,7 @@ namespace System.Web.UI
                     ClientUrlResolver = sm,
                 };
                 string resourceUrl = script.GetUrlInternal(sm, sm.Zip);
-                control
-                    .Page
+                control.Page
                     .ClientScript
                     .RegisterClientScriptInclude(type, resourceName, resourceUrl, true);
                 RegisteredScript entry = new RegisteredScript(
@@ -472,8 +471,7 @@ namespace System.Web.UI
                     // DevDiv Bugs 128123: Register directly with ClientScriptManager so that a RegisteredScript
                     // entry is not created. Otherwise, calls to RegisterDispose would result in viewable
                     // RegisteredScript entries through GetRegisteredStartupScripts().
-                    _scriptManager
-                        .IPage
+                    _scriptManager.IPage
                         .ClientScript
                         .RegisterStartupScript(
                             typeof(ScriptRegistrationManager),
@@ -505,8 +503,7 @@ namespace System.Web.UI
                 );
             }
 
-            control
-                .Page
+            control.Page
                 .ClientScript
                 .RegisterExpandoAttribute(controlId, attributeName, attributeValue, encode);
 

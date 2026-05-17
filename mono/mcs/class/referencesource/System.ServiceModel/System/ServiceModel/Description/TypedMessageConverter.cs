@@ -61,8 +61,7 @@ namespace System.ServiceModel.Description
         )
         {
             if (messageContract == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("messageContract"));
 
             if (defaultNamespace == null)
@@ -81,13 +80,11 @@ namespace System.ServiceModel.Description
         )
         {
             if (messageContract == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("messageContract"));
 
             if (!messageContract.IsDefined(typeof(MessageContractAttribute), false))
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentException(
                             SR.GetString(SR.SFxMessageContractAttributeRequired, messageContract),
@@ -168,8 +165,7 @@ namespace System.ServiceModel.Description
         public override Message ToMessage(Object typedMessage, MessageVersion version)
         {
             if (typedMessage == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("typedMessage"));
 
             return formatter.SerializeRequest(version, new object[] { typedMessage });
@@ -183,8 +179,7 @@ namespace System.ServiceModel.Description
                 && message.Headers.Action != null
                 && message.Headers.Action != this.Action
             )
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(SR.SFxActionMismatch, this.Action, message.Headers.Action)

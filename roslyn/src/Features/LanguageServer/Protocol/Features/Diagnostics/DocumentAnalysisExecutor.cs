@@ -59,8 +59,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             _logPerformanceInfo = logPerformanceInfo;
             _onAnalysisException = onAnalysisException;
 
-            var compilationBasedAnalyzers = compilationWithAnalyzers
-                ?.Analyzers
+            var compilationBasedAnalyzers = compilationWithAnalyzers?.Analyzers
                 .ToImmutableHashSet();
             _compilationBasedAnalyzersInAnalysisScope =
                 compilationBasedAnalyzers != null
@@ -100,8 +99,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 "We only support syntactic analysis for non-source documents"
             );
 
-            var loadDiagnostic = await textDocument
-                .State
+            var loadDiagnostic = await textDocument.State
                 .GetLoadDiagnosticAsync(cancellationToken)
                 .ConfigureAwait(false);
 
@@ -178,8 +176,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             var isCompilerAnalyzer = analyzer.IsCompilerAnalyzer();
             if (kind != AnalysisKind.Syntax && isCompilerAnalyzer)
             {
-                var isEnabled = await textDocument
-                    .Project
+                var isEnabled = await textDocument.Project
                     .HasSuccessfullyLoadedAsync(cancellationToken)
                     .ConfigureAwait(false);
 
@@ -238,9 +235,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 // caller should be asking about diagnostics in an actual document, and not where they were remapped to.
                 diagnostics = diagnostics.WhereAsArray(d =>
                     d.DocumentId is null
-                    || span.Value.IntersectsWith(
-                        d.DataLocation.UnmappedFileSpan.GetClampedTextSpan(sourceText)
-                    )
+                    || span.Value
+                        .IntersectsWith(
+                            d.DataLocation.UnmappedFileSpan.GetClampedTextSpan(sourceText)
+                        )
                 );
             }
 
@@ -579,8 +577,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             }
 
             // Check if IWorkspaceVenusSpanMappingService is present for remapping.
-            var diagnosticSpanMappingService = textDocument
-                .Project
+            var diagnosticSpanMappingService = textDocument.Project
                 .Solution
                 .Services
                 .GetService<IWorkspaceVenusSpanMappingService>();

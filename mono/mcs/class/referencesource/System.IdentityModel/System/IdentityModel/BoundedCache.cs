@@ -135,8 +135,7 @@ namespace System.IdentityModel
 
             if (_items.Count >= _capacity)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new LimitExceededException(SR.GetString(SR.ID0021, _capacity))
                     );

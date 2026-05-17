@@ -688,10 +688,11 @@ namespace System.Net.Sockets.Tests
                 Assert.Equal(
                     (int)resultLevel,
                     (int)
-                        c.Client.GetSocketOption(
-                            SocketOptionLevel.IP,
-                            SocketOptionName.IPProtectionLevel
-                        )
+                        c.Client
+                            .GetSocketOption(
+                                SocketOptionLevel.IP,
+                                SocketOptionName.IPProtectionLevel
+                            )
                 );
             }
         }

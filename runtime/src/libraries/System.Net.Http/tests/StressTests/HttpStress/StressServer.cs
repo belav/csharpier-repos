@@ -60,8 +60,7 @@ namespace HttpStress
                 host = host.UseHttpSys(hso =>
                 {
                     hso.UrlPrefixes.Add(ServerUri);
-                    hso.Authentication.Schemes = Microsoft
-                        .AspNetCore
+                    hso.Authentication.Schemes = Microsoft.AspNetCore
                         .Server
                         .HttpSys
                         .AuthenticationSchemes
@@ -127,19 +126,16 @@ namespace HttpStress
                                     HashAlgorithmName.SHA256,
                                     RSASignaturePadding.Pkcs1
                                 );
-                                certReq
-                                    .CertificateExtensions
+                                certReq.CertificateExtensions
                                     .Add(new X509BasicConstraintsExtension(false, false, 0, false));
-                                certReq
-                                    .CertificateExtensions
+                                certReq.CertificateExtensions
                                     .Add(
                                         new X509EnhancedKeyUsageExtension(
                                             new OidCollection { new Oid("1.3.6.1.5.5.7.3.1") },
                                             false
                                         )
                                     );
-                                certReq
-                                    .CertificateExtensions
+                                certReq.CertificateExtensions
                                     .Add(
                                         new X509KeyUsageExtension(
                                             X509KeyUsageFlags.DigitalSignature,
@@ -271,8 +267,7 @@ namespace HttpStress
                 "/headers",
                 async context =>
                 {
-                    (string name, StringValues values)[] headersToEcho = context
-                        .Request
+                    (string name, StringValues values)[] headersToEcho = context.Request
                         .Headers
                         .Where(h => h.Key.StartsWith("header-"))
                         // kestrel does not seem to be splitting comma separated header values, handle here

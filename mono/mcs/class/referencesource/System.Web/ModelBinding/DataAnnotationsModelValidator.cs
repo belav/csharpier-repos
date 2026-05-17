@@ -46,8 +46,7 @@
         {
             if (StringLocalizerProviders.DataAnnotationStringLocalizerProvider != null)
             {
-                return StringLocalizerProviders
-                    .DataAnnotationStringLocalizerProvider
+                return StringLocalizerProviders.DataAnnotationStringLocalizerProvider
                     .GetLocalizedString(Thread.CurrentThread.CurrentUICulture, name, arguments);
             }
             else

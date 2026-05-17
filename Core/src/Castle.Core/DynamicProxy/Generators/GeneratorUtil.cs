@@ -44,8 +44,7 @@ namespace Castle.DynamicProxy.Generators
                         arguments = StoreInvocationArgumentsInLocal(emitter, invocation);
                     }
 
-                    emitter
-                        .CodeBuilder
+                    emitter.CodeBuilder
                         .AddStatement(AssignArgument(dereferencedArguments, i, arguments));
                 }
             }

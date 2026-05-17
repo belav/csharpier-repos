@@ -49,8 +49,7 @@ namespace System.Runtime.Serialization
                 null
             );
             if (ctor == null)
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility

@@ -31,8 +31,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
     [Shared]
     internal partial class EnumAndCompletionListTagCompletionProvider : LSPCompletionProvider
     {
-        private static readonly CompletionItemRules s_enumTypeRules = CompletionItemRules
-            .Default
+        private static readonly CompletionItemRules s_enumTypeRules = CompletionItemRules.Default
             .WithCommitCharacterRules(
                 ImmutableArray.Create(
                     CharacterSetModificationRule.Create(CharacterSetModificationKind.Replace, '.')
@@ -441,8 +440,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             )
                 return null;
 
-            var documentation = CodeAnalysis
-                .Shared
+            var documentation = CodeAnalysis.Shared
                 .Utilities
                 .DocumentationComment
                 .FromXmlFragment(xmlText);

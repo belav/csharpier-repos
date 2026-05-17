@@ -81,8 +81,7 @@ namespace System.Net.Sockets
 
             unsafe
             {
-                errorCode = Interop
-                    .Winsock
+                errorCode = Interop.Winsock
                     .WSAIoctl(
                         socketHandle,
                         Interop.Winsock.IoctlSocketConstants.SIOGETEXTENSIONFUNCTIONPOINTER,

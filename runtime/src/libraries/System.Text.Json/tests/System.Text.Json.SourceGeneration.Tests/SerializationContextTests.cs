@@ -475,8 +475,7 @@ namespace System.Text.Json.SourceGeneration.Tests
         [Fact]
         public void TypeWithoutMetadataOrFastPathHandler_SerializationThrowsInvalidOperationException()
         {
-            JsonTypeInfo<ClassWithCustomConverterProperty> typeInfo = SerializationContext
-                .Default
+            JsonTypeInfo<ClassWithCustomConverterProperty> typeInfo = SerializationContext.Default
                 .ClassWithCustomConverterProperty;
             Assert.Null(typeInfo.SerializeHandler);
             Assert.Empty(typeInfo.Properties);
@@ -996,14 +995,12 @@ namespace System.Text.Json.SourceGeneration.Tests
                 SerializationWithPerTypeAttributeContext.Default.RepeatedLocation.SerializeHandler
             );
             Assert.NotNull(
-                SerializationWithPerTypeAttributeContext
-                    .Default
+                SerializationWithPerTypeAttributeContext.Default
                     .ActiveOrUpcomingEvent
                     .SerializeHandler
             );
             Assert.NotNull(
-                SerializationWithPerTypeAttributeContext
-                    .Default
+                SerializationWithPerTypeAttributeContext.Default
                     .CampaignSummaryViewModel
                     .SerializeHandler
             );
@@ -1011,14 +1008,12 @@ namespace System.Text.Json.SourceGeneration.Tests
                 SerializationWithPerTypeAttributeContext.Default.IndexViewModel.SerializeHandler
             );
             Assert.NotNull(
-                SerializationWithPerTypeAttributeContext
-                    .Default
+                SerializationWithPerTypeAttributeContext.Default
                     .WeatherForecastWithPOCOs
                     .SerializeHandler
             );
             Assert.NotNull(
-                SerializationWithPerTypeAttributeContext
-                    .Default
+                SerializationWithPerTypeAttributeContext.Default
                     .WeatherForecastWithPOCOs
                     .SerializeHandler
             );
@@ -1035,8 +1030,7 @@ namespace System.Text.Json.SourceGeneration.Tests
                 SerializationWithPerTypeAttributeContext.Default.MyIntermediateType.SerializeHandler
             );
             Assert.NotNull(
-                SerializationWithPerTypeAttributeContext
-                    .Default
+                SerializationWithPerTypeAttributeContext.Default
                     .HighLowTempsImmutable
                     .SerializeHandler
             );
@@ -1047,8 +1041,7 @@ namespace System.Text.Json.SourceGeneration.Tests
                 SerializationWithPerTypeAttributeContext.Default.MyNestedClass.SerializeHandler
             );
             Assert.NotNull(
-                SerializationWithPerTypeAttributeContext
-                    .Default
+                SerializationWithPerTypeAttributeContext.Default
                     .MyNestedNestedClass
                     .SerializeHandler
             );
@@ -1059,15 +1052,13 @@ namespace System.Text.Json.SourceGeneration.Tests
                 SerializationWithPerTypeAttributeContext.Default.ByteArray.SerializeHandler
             );
             Assert.Null(
-                SerializationWithPerTypeAttributeContext
-                    .Default
+                SerializationWithPerTypeAttributeContext.Default
                     .SourceGenSampleEnum
                     .SerializeHandler
             );
             Assert.Null(SerializationWithPerTypeAttributeContext.Default.String.SerializeHandler);
             Assert.NotNull(
-                SerializationWithPerTypeAttributeContext
-                    .Default
+                SerializationWithPerTypeAttributeContext.Default
                     .ValueTupleStringInt32Boolean
                     .SerializeHandler
             );
@@ -1078,74 +1069,62 @@ namespace System.Text.Json.SourceGeneration.Tests
                 SerializationWithPerTypeAttributeContext.Default.JsonElement.SerializeHandler
             );
             Assert.NotNull(
-                SerializationWithPerTypeAttributeContext
-                    .Default
+                SerializationWithPerTypeAttributeContext.Default
                     .ClassWithEnumAndNullable
                     .SerializeHandler
             );
             Assert.Null(
-                SerializationWithPerTypeAttributeContext
-                    .Default
+                SerializationWithPerTypeAttributeContext.Default
                     .ClassWithCustomConverter
                     .SerializeHandler
             );
             Assert.Null(
-                SerializationWithPerTypeAttributeContext
-                    .Default
+                SerializationWithPerTypeAttributeContext.Default
                     .StructWithCustomConverter
                     .SerializeHandler
             );
             Assert.Null(
-                SerializationWithPerTypeAttributeContext
-                    .Default
+                SerializationWithPerTypeAttributeContext.Default
                     .ClassWithCustomConverterFactory
                     .SerializeHandler
             );
             Assert.Null(
-                SerializationWithPerTypeAttributeContext
-                    .Default
+                SerializationWithPerTypeAttributeContext.Default
                     .StructWithCustomConverterFactory
                     .SerializeHandler
             );
             Assert.Null(
-                SerializationWithPerTypeAttributeContext
-                    .Default
+                SerializationWithPerTypeAttributeContext.Default
                     .ClassWithCustomConverterProperty
                     .SerializeHandler
             );
             Assert.Null(
-                SerializationWithPerTypeAttributeContext
-                    .Default
+                SerializationWithPerTypeAttributeContext.Default
                     .StructWithCustomConverterProperty
                     .SerializeHandler
             );
             Assert.Null(
-                SerializationWithPerTypeAttributeContext
-                    .Default
+                SerializationWithPerTypeAttributeContext.Default
                     .ClassWithCustomConverterFactoryProperty
                     .SerializeHandler
             );
             Assert.Null(
-                SerializationWithPerTypeAttributeContext
-                    .Default
+                SerializationWithPerTypeAttributeContext.Default
                     .StructWithCustomConverterFactoryProperty
                     .SerializeHandler
             );
             Assert.Throws<InvalidOperationException>(() =>
-                SerializationWithPerTypeAttributeContext
-                    .Default
+                SerializationWithPerTypeAttributeContext.Default
                     .ClassWithBadCustomConverter
                     .SerializeHandler
             );
             Assert.Throws<InvalidOperationException>(() =>
-                SerializationWithPerTypeAttributeContext
-                    .Default
+                SerializationWithPerTypeAttributeContext.Default
                     .StructWithBadCustomConverter
                     .SerializeHandler
             );
             Assert.Null(
-                SerializationWithPerTypeAttributeContext
-                    .Default
+                SerializationWithPerTypeAttributeContext.Default
                     .NullablePersonStruct
                     .SerializeHandler
             );
@@ -1153,14 +1132,12 @@ namespace System.Text.Json.SourceGeneration.Tests
                 SerializationWithPerTypeAttributeContext.Default.PersonStruct.SerializeHandler
             );
             Assert.NotNull(
-                SerializationWithPerTypeAttributeContext
-                    .Default
+                SerializationWithPerTypeAttributeContext.Default
                     .TypeWithValidationAttributes
                     .SerializeHandler
             );
             Assert.NotNull(
-                SerializationWithPerTypeAttributeContext
-                    .Default
+                SerializationWithPerTypeAttributeContext.Default
                     .TypeWithDerivedAttribute
                     .SerializeHandler
             );

@@ -218,8 +218,7 @@ namespace ILCompiler.DependencyAnalysis
 
                     // Make a new list in case we need to abort.
                     var caDependencies =
-                        factory
-                            .MetadataManager
+                        factory.MetadataManager
                             .GetDependenciesForCustomAttribute(
                                 factory,
                                 constructor,
@@ -394,8 +393,7 @@ namespace ILCompiler.DependencyAnalysis
                         // Method on a generic attribute
                         if (attributeType != attributeTypeDefinition)
                         {
-                            setterMethod = factory
-                                .TypeSystemContext
+                            setterMethod = factory.TypeSystemContext
                                 .GetMethodForInstantiatedType(
                                     setterMethod,
                                     (InstantiatedType)attributeType

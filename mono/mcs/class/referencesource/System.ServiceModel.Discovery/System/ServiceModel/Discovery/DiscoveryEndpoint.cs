@@ -45,11 +45,12 @@ namespace System.ServiceModel.Discovery
                 discoveryVersion
             );
 
-            base.Behaviors.Add(
-                new DiscoveryOperationContextExtensionInitializer(
-                    this.discoveryOperationContextExtension
-                )
-            );
+            base.Behaviors
+                .Add(
+                    new DiscoveryOperationContextExtensionInitializer(
+                        this.discoveryOperationContextExtension
+                    )
+                );
             base.Behaviors.Add(new DiscoveryEndpointValidator());
 
             base.Address = endpointAddress;

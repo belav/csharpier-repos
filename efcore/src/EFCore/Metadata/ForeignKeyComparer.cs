@@ -44,16 +44,14 @@ public sealed class ForeignKeyComparer
             return result;
         }
 
-        result = PropertyListComparer
-            .Instance
+        result = PropertyListComparer.Instance
             .Compare(x?.PrincipalKey.Properties, y?.PrincipalKey.Properties);
         if (result != 0)
         {
             return result;
         }
 
-        result = TypeBaseNameComparer
-            .Instance
+        result = TypeBaseNameComparer.Instance
             .Compare(x?.PrincipalEntityType, y?.PrincipalEntityType);
         return result != 0
             ? result

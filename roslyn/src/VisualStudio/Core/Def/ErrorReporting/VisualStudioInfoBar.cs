@@ -48,14 +48,12 @@ namespace Microsoft.CodeAnalysis.ErrorReporting
         public void ShowInfoBar(string message, params InfoBarUI[] items)
         {
             // We can be called from any thread since errors can occur anywhere, however we can only construct and InfoBar from the UI thread.
-            _threadingContext
-                .JoinableTaskFactory
+            _threadingContext.JoinableTaskFactory
                 .RunAsync(async () =>
                 {
                     using var _ = _listener.BeginAsyncOperation(nameof(ShowInfoBar));
 
-                    await _threadingContext
-                        .JoinableTaskFactory
+                    await _threadingContext.JoinableTaskFactory
                         .SwitchToMainThreadAsync(_threadingContext.DisposalToken);
 
                     // If we're already shown this same message to the user, then do not bother showing it

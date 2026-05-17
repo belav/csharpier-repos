@@ -690,8 +690,7 @@ namespace System.Net
                                         ListenForRegistryHelper(
                                             ref regKeyLM,
                                             ref registryChangeEventLM,
-                                            UnsafeNclNativeMethods
-                                                .RegistryHelper
+                                            UnsafeNclNativeMethods.RegistryHelper
                                                 .HKEY_LOCAL_MACHINE,
                                             RegBlobWebProxyDataBuilder.ProxyKey
                                         );
@@ -733,8 +732,7 @@ namespace System.Net
                                         ListenForRegistryHelper(
                                             ref regKeyPolicy,
                                             ref registryChangeEventPolicy,
-                                            UnsafeNclNativeMethods
-                                                .RegistryHelper
+                                            UnsafeNclNativeMethods.RegistryHelper
                                                 .HKEY_LOCAL_MACHINE,
                                             RegBlobWebProxyDataBuilder.PolicyKey
                                         );

@@ -240,8 +240,7 @@ namespace Mono.CodeContracts.Static.ControlFlow.Subroutines
 
             BlockWithLabels<Label> onlyOne = null;
             foreach (
-                BlockWithLabels<Label> successor in point
-                    .Block
+                BlockWithLabels<Label> successor in point.Block
                     .Subroutine
                     .SuccessorBlocks(point.Block)
             )
@@ -349,8 +348,7 @@ namespace Mono.CodeContracts.Static.ControlFlow.Subroutines
 
             return APC.ForEnd(
                 sub.Exit,
-                point
-                    .SubroutineContext
+                point.SubroutineContext
                     .Cons(new Edge<CFGBlock, EdgeTag>(head.From, head.To, first.Key))
             );
         }
@@ -581,8 +579,7 @@ namespace Mono.CodeContracts.Static.ControlFlow.Subroutines
                 Subroutine nextSubroutine = first.Value;
                 yield return APC.ForEnd(
                     nextSubroutine.Exit,
-                    point
-                        .SubroutineContext
+                    point.SubroutineContext
                         .Cons(new Edge<CFGBlock, EdgeTag>(edge.From, edge.To, first.Key))
                 );
             }
@@ -629,12 +626,8 @@ namespace Mono.CodeContracts.Static.ControlFlow.Subroutines
         )
         {
             if (from.Subroutine != this)
-                return from.Subroutine.EdgeSubroutinesOuterToInner(
-                    from,
-                    succ,
-                    out isExceptionHandlerEdge,
-                    context
-                );
+                return from.Subroutine
+                    .EdgeSubroutinesOuterToInner(from, succ, out isExceptionHandlerEdge, context);
 
             isExceptionHandlerEdge = IsCatchFilterHeader(succ);
             return GetOrdinaryEdgeSubroutines(from, succ, context);
@@ -684,8 +677,7 @@ namespace Mono.CodeContracts.Static.ControlFlow.Subroutines
                                     bool isVirtual2;
                                     if (
                                         context.Head.Tag.Is(EdgeTag.AfterMask)
-                                        && context
-                                            .Head
+                                        && context.Head
                                             .From
                                             .IsMethodCallBlock(
                                                 out calledMethod2,
@@ -706,8 +698,7 @@ namespace Mono.CodeContracts.Static.ControlFlow.Subroutines
                                     }
                                     else if (
                                         context.Head.Tag.Is(EdgeTag.BeforeMask)
-                                        && context
-                                            .Head
+                                        && context.Head
                                             .To
                                             .IsMethodCallBlock(
                                                 out calledMethod2,

@@ -1211,8 +1211,7 @@ class Program
 }";
             var rel = CompileAndVerify(
                 source,
-                options: TestOptions
-                    .ReleaseDll
+                options: TestOptions.ReleaseDll
                     .WithMetadataImportOptions(MetadataImportOptions.All),
                 symbolValidator: module =>
                 {
@@ -1280,8 +1279,7 @@ struct Test
 }";
             CompileAndVerify(
                 source,
-                options: TestOptions
-                    .ReleaseDll
+                options: TestOptions.ReleaseDll
                     .WithMetadataImportOptions(MetadataImportOptions.All),
                 symbolValidator: module =>
                 {
@@ -1346,8 +1344,7 @@ struct Test
 }";
             CompileAndVerify(
                 source,
-                options: TestOptions
-                    .ReleaseDll
+                options: TestOptions.ReleaseDll
                     .WithMetadataImportOptions(MetadataImportOptions.All),
                 symbolValidator: module =>
                 {

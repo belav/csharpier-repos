@@ -1591,8 +1591,7 @@ public class D : C<long>
 
             CreateCompilation(
                     source,
-                    options: TestOptions
-                        .ReleaseDll
+                    options: TestOptions.ReleaseDll
                         .WithNullableContextOptions(nullableContextOptions)
                 )
                 .VerifyDiagnostics(

@@ -367,8 +367,7 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
 
         internal static TypeDefinition GetTypeDef(this MetadataReader reader, string typeName)
         {
-            return reader
-                .TypeDefinitions
+            return reader.TypeDefinitions
                 .Select(reader.GetTypeDefinition)
                 .First(t => reader.StringComparer.Equals(t.Name, typeName));
         }
@@ -506,8 +505,7 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
                     builder.AppendLine();
                 }
 
-                ILVisualizer
-                    .Default
+                ILVisualizer.Default
                     .DumpMethod(
                         builder,
                         methodBody.MaxStack,
@@ -715,8 +713,7 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
             {
                 builder.Sort(
                     (x, y) =>
-                        AssemblyIdentityComparer
-                            .SimpleNameComparer
+                        AssemblyIdentityComparer.SimpleNameComparer
                             .Compare(x.Item1.GetDisplayName(), y.Item1.GetDisplayName())
                 );
             }
@@ -729,8 +726,7 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
         )
             where TAssemblyContext : struct
         {
-            var actualIds = metadataContext
-                .AssemblyContexts
+            var actualIds = metadataContext.AssemblyContexts
                 .Keys
                 .Select(key => key.ModuleVersionId.ToString())
                 .ToArray();
@@ -749,11 +745,9 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
             using (var peReader = new PEReader(peImage))
             {
                 var metadataReader = peReader.GetMetadataReader();
-                var methodHandle = metadataReader
-                    .MethodDefinitions
+                var methodHandle = metadataReader.MethodDefinitions
                     .Single(h =>
-                        metadataReader
-                            .StringComparer
+                        metadataReader.StringComparer
                             .Equals(metadataReader.GetMethodDefinition(h).Name, methodName)
                     );
                 var methodToken = metadataReader.GetToken(methodHandle);
@@ -1010,8 +1004,7 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
         )
         {
             var diagnostics = DiagnosticBag.GetInstance();
-            var emitOptions = EmitOptions
-                .Default
+            var emitOptions = EmitOptions.Default
                 .WithRuntimeMetadataVersion("0.0.0.0")
                 .WithDebugInformationFormat(DebugInformationFormat.PortablePdb);
             var moduleBuilder = comp.CheckOptionsAndCreateModuleBuilder(

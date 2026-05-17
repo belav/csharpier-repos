@@ -78,8 +78,7 @@ public class ComplexPropertyEntry<TEntity, TComplexProperty> : ComplexPropertyEn
 
         return new PropertyEntry<TEntity, TProperty>(
             InternalEntry,
-            Metadata
-                .ComplexType
+            Metadata.ComplexType
                 .GetProperty(propertyExpression.GetMemberAccess().GetSimpleMemberName())
         );
     }
@@ -106,8 +105,7 @@ public class ComplexPropertyEntry<TEntity, TComplexProperty> : ComplexPropertyEn
 
         return new ComplexPropertyEntry<TEntity, TNestedComplexProperty>(
             InternalEntry,
-            Metadata
-                .ComplexType
+            Metadata.ComplexType
                 .GetComplexProperty(propertyExpression.GetMemberAccess().GetSimpleMemberName())
         );
     }

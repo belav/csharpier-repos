@@ -13,8 +13,7 @@ public static class TestMethodExtensions
     {
         var testClass = testMethod.TestClass.Class;
         var assembly = testMethod.TestClass.TestCollection.TestAssembly.Assembly;
-        var conditionAttributes = testMethod
-            .Method
+        var conditionAttributes = testMethod.Method
             .GetCustomAttributes(typeof(ITestCondition))
             .Concat(testClass.GetCustomAttributes(typeof(ITestCondition)))
             .Concat(assembly.GetCustomAttributes(typeof(ITestCondition)))

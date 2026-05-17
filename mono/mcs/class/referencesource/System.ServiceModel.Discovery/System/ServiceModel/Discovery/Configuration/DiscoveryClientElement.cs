@@ -137,8 +137,7 @@ namespace System.ServiceModel.Discovery.Configuration
 
         protected internal override void InitializeFrom(BindingElement bindingElement)
         {
-            throw FxTrace
-                .Exception
+            throw FxTrace.Exception
                 .AsError(new NotSupportedException(SR2.DiscoveryConfigInitializeFromNotSupported));
         }
     }

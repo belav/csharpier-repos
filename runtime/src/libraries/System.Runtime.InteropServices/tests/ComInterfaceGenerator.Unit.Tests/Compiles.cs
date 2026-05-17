@@ -28,8 +28,7 @@ namespace ComInterfaceGenerator.Unit.Tests
                 GeneratorKind.VTableIndexStubGenerator => new VirtualMethodIndexAttributeProvider(),
                 GeneratorKind.ComInterfaceGeneratorManagedObjectWrapper =>
                     new GeneratedComInterfaceAttributeProvider(
-                        System
-                            .Runtime
+                        System.Runtime
                             .InteropServices
                             .Marshalling
                             .ComInterfaceOptions
@@ -37,8 +36,7 @@ namespace ComInterfaceGenerator.Unit.Tests
                     ),
                 GeneratorKind.ComInterfaceGeneratorComObjectWrapper =>
                     new GeneratedComInterfaceAttributeProvider(
-                        System
-                            .Runtime
+                        System.Runtime
                             .InteropServices
                             .Marshalling
                             .ComInterfaceOptions
@@ -156,8 +154,7 @@ namespace ComInterfaceGenerator.Unit.Tests
             yield return new[]
             {
                 ID(),
-                customStructMarshallingCodeSnippetsBidirectional
-                    .Stateless
+                customStructMarshallingCodeSnippetsBidirectional.Stateless
                     .MarshalUsingParametersAndModifiers,
             };
             yield return new[]
@@ -168,8 +165,7 @@ namespace ComInterfaceGenerator.Unit.Tests
             yield return new[]
             {
                 ID(),
-                customStructMarshallingCodeSnippetsBidirectional
-                    .Stateless
+                customStructMarshallingCodeSnippetsBidirectional.Stateless
                     .OptionalStackallocParametersAndModifiers,
             };
             yield return new[]
@@ -180,22 +176,19 @@ namespace ComInterfaceGenerator.Unit.Tests
             yield return new[]
             {
                 ID(),
-                customStructMarshallingCodeSnippetsBidirectional
-                    .Stateful
+                customStructMarshallingCodeSnippetsBidirectional.Stateful
                     .ParametersAndModifiersWithFree,
             };
             yield return new[]
             {
                 ID(),
-                customStructMarshallingCodeSnippetsBidirectional
-                    .Stateful
+                customStructMarshallingCodeSnippetsBidirectional.Stateful
                     .ParametersAndModifiersWithOnInvoked,
             };
             yield return new[]
             {
                 ID(),
-                customStructMarshallingCodeSnippetsBidirectional
-                    .Stateful
+                customStructMarshallingCodeSnippetsBidirectional.Stateful
                     .MarshalUsingParametersAndModifiers,
             };
             yield return new[]
@@ -206,8 +199,7 @@ namespace ComInterfaceGenerator.Unit.Tests
             yield return new[]
             {
                 ID(),
-                customStructMarshallingCodeSnippetsBidirectional
-                    .Stateful
+                customStructMarshallingCodeSnippetsBidirectional.Stateful
                     .OptionalStackallocParametersAndModifiers,
             };
 
@@ -245,43 +237,37 @@ namespace ComInterfaceGenerator.Unit.Tests
             yield return new[]
             {
                 ID(),
-                customStructMarshallingCodeSnippetsManagedToUnmanaged
-                    .Stateless
+                customStructMarshallingCodeSnippetsManagedToUnmanaged.Stateless
                     .ParametersAndModifiers,
             };
             yield return new[]
             {
                 ID(),
-                customStructMarshallingCodeSnippetsManagedToUnmanaged
-                    .Stateless
+                customStructMarshallingCodeSnippetsManagedToUnmanaged.Stateless
                     .MarshalUsingParametersAndModifiers,
             };
             yield return new[]
             {
                 ID(),
-                customStructMarshallingCodeSnippetsManagedToUnmanaged
-                    .Stateless
+                customStructMarshallingCodeSnippetsManagedToUnmanaged.Stateless
                     .NativeToManagedOnlyOutParameter,
             };
             yield return new[]
             {
                 ID(),
-                customStructMarshallingCodeSnippetsManagedToUnmanaged
-                    .Stateless
+                customStructMarshallingCodeSnippetsManagedToUnmanaged.Stateless
                     .NativeToManagedFinallyOnlyOutParameter,
             };
             yield return new[]
             {
                 ID(),
-                customStructMarshallingCodeSnippetsManagedToUnmanaged
-                    .Stateless
+                customStructMarshallingCodeSnippetsManagedToUnmanaged.Stateless
                     .NativeToManagedOnlyReturnValue,
             };
             yield return new[]
             {
                 ID(),
-                customStructMarshallingCodeSnippetsManagedToUnmanaged
-                    .Stateless
+                customStructMarshallingCodeSnippetsManagedToUnmanaged.Stateless
                     .NativeToManagedFinallyOnlyReturnValue,
             };
             yield return new[]
@@ -292,15 +278,13 @@ namespace ComInterfaceGenerator.Unit.Tests
             yield return new[]
             {
                 ID(),
-                customStructMarshallingCodeSnippetsManagedToUnmanaged
-                    .Stateless
+                customStructMarshallingCodeSnippetsManagedToUnmanaged.Stateless
                     .PinByValueInParameter,
             };
             yield return new[]
             {
                 ID(),
-                customStructMarshallingCodeSnippetsManagedToUnmanaged
-                    .Stateless
+                customStructMarshallingCodeSnippetsManagedToUnmanaged.Stateless
                     .StackallocByValueInParameter,
             };
             yield return new[]
@@ -311,85 +295,73 @@ namespace ComInterfaceGenerator.Unit.Tests
             yield return new[]
             {
                 ID(),
-                customStructMarshallingCodeSnippetsManagedToUnmanaged
-                    .Stateless
+                customStructMarshallingCodeSnippetsManagedToUnmanaged.Stateless
                     .StackallocParametersAndModifiersNoRef,
             };
             yield return new[]
             {
                 ID(),
-                customStructMarshallingCodeSnippetsManagedToUnmanaged
-                    .Stateless
+                customStructMarshallingCodeSnippetsManagedToUnmanaged.Stateless
                     .OptionalStackallocParametersAndModifiers,
             };
             yield return new[]
             {
                 ID(),
-                customStructMarshallingCodeSnippetsManagedToUnmanaged
-                    .Stateless
+                customStructMarshallingCodeSnippetsManagedToUnmanaged.Stateless
                     .DefaultModeByValueInParameter,
             };
             yield return new[]
             {
                 ID(),
-                customStructMarshallingCodeSnippetsManagedToUnmanaged
-                    .Stateless
+                customStructMarshallingCodeSnippetsManagedToUnmanaged.Stateless
                     .DefaultModeReturnValue,
             };
             yield return new[]
             {
                 ID(),
-                customStructMarshallingCodeSnippetsManagedToUnmanaged
-                    .Stateful
+                customStructMarshallingCodeSnippetsManagedToUnmanaged.Stateful
                     .ParametersAndModifiers,
             };
             yield return new[]
             {
                 ID(),
-                customStructMarshallingCodeSnippetsManagedToUnmanaged
-                    .Stateful
+                customStructMarshallingCodeSnippetsManagedToUnmanaged.Stateful
                     .ParametersAndModifiersWithFree,
             };
             yield return new[]
             {
                 ID(),
-                customStructMarshallingCodeSnippetsManagedToUnmanaged
-                    .Stateful
+                customStructMarshallingCodeSnippetsManagedToUnmanaged.Stateful
                     .ParametersAndModifiersWithOnInvoked,
             };
             yield return new[]
             {
                 ID(),
-                customStructMarshallingCodeSnippetsManagedToUnmanaged
-                    .Stateful
+                customStructMarshallingCodeSnippetsManagedToUnmanaged.Stateful
                     .MarshalUsingParametersAndModifiers,
             };
             yield return new[]
             {
                 ID(),
-                customStructMarshallingCodeSnippetsManagedToUnmanaged
-                    .Stateful
+                customStructMarshallingCodeSnippetsManagedToUnmanaged.Stateful
                     .NativeToManagedOnlyOutParameter,
             };
             yield return new[]
             {
                 ID(),
-                customStructMarshallingCodeSnippetsManagedToUnmanaged
-                    .Stateful
+                customStructMarshallingCodeSnippetsManagedToUnmanaged.Stateful
                     .NativeToManagedFinallyOnlyOutParameter,
             };
             yield return new[]
             {
                 ID(),
-                customStructMarshallingCodeSnippetsManagedToUnmanaged
-                    .Stateful
+                customStructMarshallingCodeSnippetsManagedToUnmanaged.Stateful
                     .NativeToManagedOnlyReturnValue,
             };
             yield return new[]
             {
                 ID(),
-                customStructMarshallingCodeSnippetsManagedToUnmanaged
-                    .Stateful
+                customStructMarshallingCodeSnippetsManagedToUnmanaged.Stateful
                     .NativeToManagedFinallyOnlyReturnValue,
             };
             yield return new[]
@@ -400,22 +372,19 @@ namespace ComInterfaceGenerator.Unit.Tests
             yield return new[]
             {
                 ID(),
-                customStructMarshallingCodeSnippetsManagedToUnmanaged
-                    .Stateful
+                customStructMarshallingCodeSnippetsManagedToUnmanaged.Stateful
                     .StackallocByValueInParameter,
             };
             yield return new[]
             {
                 ID(),
-                customStructMarshallingCodeSnippetsManagedToUnmanaged
-                    .Stateful
+                customStructMarshallingCodeSnippetsManagedToUnmanaged.Stateful
                     .PinByValueInParameter,
             };
             yield return new[]
             {
                 ID(),
-                customStructMarshallingCodeSnippetsManagedToUnmanaged
-                    .Stateful
+                customStructMarshallingCodeSnippetsManagedToUnmanaged.Stateful
                     .MarshallerPinByValueInParameter,
             };
             yield return new[]
@@ -426,29 +395,25 @@ namespace ComInterfaceGenerator.Unit.Tests
             yield return new[]
             {
                 ID(),
-                customStructMarshallingCodeSnippetsManagedToUnmanaged
-                    .Stateful
+                customStructMarshallingCodeSnippetsManagedToUnmanaged.Stateful
                     .StackallocParametersAndModifiersNoRef,
             };
             yield return new[]
             {
                 ID(),
-                customStructMarshallingCodeSnippetsManagedToUnmanaged
-                    .Stateful
+                customStructMarshallingCodeSnippetsManagedToUnmanaged.Stateful
                     .OptionalStackallocParametersAndModifiers,
             };
             yield return new[]
             {
                 ID(),
-                customStructMarshallingCodeSnippetsManagedToUnmanaged
-                    .Stateful
+                customStructMarshallingCodeSnippetsManagedToUnmanaged.Stateful
                     .DefaultModeByValueInParameter,
             };
             yield return new[]
             {
                 ID(),
-                customStructMarshallingCodeSnippetsManagedToUnmanaged
-                    .Stateful
+                customStructMarshallingCodeSnippetsManagedToUnmanaged.Stateful
                     .DefaultModeReturnValue,
             };
         }
@@ -463,29 +428,25 @@ namespace ComInterfaceGenerator.Unit.Tests
             yield return new[]
             {
                 ID(),
-                customStructMarshallingCodeSnippetsUnmanagedToManaged
-                    .Stateless
+                customStructMarshallingCodeSnippetsUnmanagedToManaged.Stateless
                     .ParametersAndModifiers,
             };
             yield return new[]
             {
                 ID(),
-                customStructMarshallingCodeSnippetsUnmanagedToManaged
-                    .Stateless
+                customStructMarshallingCodeSnippetsUnmanagedToManaged.Stateless
                     .MarshalUsingParametersAndModifiers,
             };
             yield return new[]
             {
                 ID(),
-                customStructMarshallingCodeSnippetsUnmanagedToManaged
-                    .Stateless
+                customStructMarshallingCodeSnippetsUnmanagedToManaged.Stateless
                     .NativeToManagedOnlyInParameter,
             };
             yield return new[]
             {
                 ID(),
-                customStructMarshallingCodeSnippetsUnmanagedToManaged
-                    .Stateless
+                customStructMarshallingCodeSnippetsUnmanagedToManaged.Stateless
                     .NativeToManagedFinallyOnlyInParameter,
             };
             yield return new[]
@@ -501,50 +462,43 @@ namespace ComInterfaceGenerator.Unit.Tests
             yield return new[]
             {
                 ID(),
-                customStructMarshallingCodeSnippetsUnmanagedToManaged
-                    .Stateless
+                customStructMarshallingCodeSnippetsUnmanagedToManaged.Stateless
                     .OptionalStackallocParametersAndModifiers,
             };
             yield return new[]
             {
                 ID(),
-                customStructMarshallingCodeSnippetsUnmanagedToManaged
-                    .Stateful
+                customStructMarshallingCodeSnippetsUnmanagedToManaged.Stateful
                     .ParametersAndModifiers,
             };
             yield return new[]
             {
                 ID(),
-                customStructMarshallingCodeSnippetsUnmanagedToManaged
-                    .Stateful
+                customStructMarshallingCodeSnippetsUnmanagedToManaged.Stateful
                     .ParametersAndModifiersWithFree,
             };
             yield return new[]
             {
                 ID(),
-                customStructMarshallingCodeSnippetsUnmanagedToManaged
-                    .Stateful
+                customStructMarshallingCodeSnippetsUnmanagedToManaged.Stateful
                     .ParametersAndModifiersWithOnInvoked,
             };
             yield return new[]
             {
                 ID(),
-                customStructMarshallingCodeSnippetsUnmanagedToManaged
-                    .Stateful
+                customStructMarshallingCodeSnippetsUnmanagedToManaged.Stateful
                     .MarshalUsingParametersAndModifiers,
             };
             yield return new[]
             {
                 ID(),
-                customStructMarshallingCodeSnippetsUnmanagedToManaged
-                    .Stateful
+                customStructMarshallingCodeSnippetsUnmanagedToManaged.Stateful
                     .NativeToManagedOnlyInParameter,
             };
             yield return new[]
             {
                 ID(),
-                customStructMarshallingCodeSnippetsUnmanagedToManaged
-                    .Stateful
+                customStructMarshallingCodeSnippetsUnmanagedToManaged.Stateful
                     .NativeToManagedFinallyOnlyInParameter,
             };
             yield return new[]
@@ -560,8 +514,7 @@ namespace ComInterfaceGenerator.Unit.Tests
             yield return new[]
             {
                 ID(),
-                customStructMarshallingCodeSnippetsUnmanagedToManaged
-                    .Stateful
+                customStructMarshallingCodeSnippetsUnmanagedToManaged.Stateful
                     .OptionalStackallocParametersAndModifiers,
             };
         }
@@ -636,386 +589,331 @@ namespace ComInterfaceGenerator.Unit.Tests
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsBidirectional
-                    .Stateless
+                customCollectionMarshallingCodeSnippetsBidirectional.Stateless
                     .DefaultMarshallerParametersAndModifiers<byte>(),
             };
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsBidirectional
-                    .Stateless
+                customCollectionMarshallingCodeSnippetsBidirectional.Stateless
                     .DefaultMarshallerParametersAndModifiers<sbyte>(),
             };
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsBidirectional
-                    .Stateless
+                customCollectionMarshallingCodeSnippetsBidirectional.Stateless
                     .DefaultMarshallerParametersAndModifiers<short>(),
             };
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsBidirectional
-                    .Stateless
+                customCollectionMarshallingCodeSnippetsBidirectional.Stateless
                     .DefaultMarshallerParametersAndModifiers<ushort>(),
             };
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsBidirectional
-                    .Stateless
+                customCollectionMarshallingCodeSnippetsBidirectional.Stateless
                     .DefaultMarshallerParametersAndModifiers<int>(),
             };
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsBidirectional
-                    .Stateless
+                customCollectionMarshallingCodeSnippetsBidirectional.Stateless
                     .DefaultMarshallerParametersAndModifiers<uint>(),
             };
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsBidirectional
-                    .Stateless
+                customCollectionMarshallingCodeSnippetsBidirectional.Stateless
                     .DefaultMarshallerParametersAndModifiers<long>(),
             };
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsBidirectional
-                    .Stateless
+                customCollectionMarshallingCodeSnippetsBidirectional.Stateless
                     .DefaultMarshallerParametersAndModifiers<ulong>(),
             };
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsBidirectional
-                    .Stateless
+                customCollectionMarshallingCodeSnippetsBidirectional.Stateless
                     .DefaultMarshallerParametersAndModifiers<float>(),
             };
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsBidirectional
-                    .Stateless
+                customCollectionMarshallingCodeSnippetsBidirectional.Stateless
                     .DefaultMarshallerParametersAndModifiers<double>(),
             };
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsBidirectional
-                    .Stateless
+                customCollectionMarshallingCodeSnippetsBidirectional.Stateless
                     .DefaultMarshallerParametersAndModifiers<IntPtr>(),
             };
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsBidirectional
-                    .Stateless
+                customCollectionMarshallingCodeSnippetsBidirectional.Stateless
                     .DefaultMarshallerParametersAndModifiers<UIntPtr>(),
             };
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsBidirectional
-                    .Stateless
+                customCollectionMarshallingCodeSnippetsBidirectional.Stateless
                     .CustomMarshallerParametersAndModifiers<byte>(),
             };
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsBidirectional
-                    .Stateless
+                customCollectionMarshallingCodeSnippetsBidirectional.Stateless
                     .CustomMarshallerParametersAndModifiers<sbyte>(),
             };
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsBidirectional
-                    .Stateless
+                customCollectionMarshallingCodeSnippetsBidirectional.Stateless
                     .CustomMarshallerParametersAndModifiers<short>(),
             };
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsBidirectional
-                    .Stateless
+                customCollectionMarshallingCodeSnippetsBidirectional.Stateless
                     .CustomMarshallerParametersAndModifiers<ushort>(),
             };
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsBidirectional
-                    .Stateless
+                customCollectionMarshallingCodeSnippetsBidirectional.Stateless
                     .CustomMarshallerParametersAndModifiers<int>(),
             };
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsBidirectional
-                    .Stateless
+                customCollectionMarshallingCodeSnippetsBidirectional.Stateless
                     .CustomMarshallerParametersAndModifiers<uint>(),
             };
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsBidirectional
-                    .Stateless
+                customCollectionMarshallingCodeSnippetsBidirectional.Stateless
                     .CustomMarshallerParametersAndModifiers<long>(),
             };
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsBidirectional
-                    .Stateless
+                customCollectionMarshallingCodeSnippetsBidirectional.Stateless
                     .CustomMarshallerParametersAndModifiers<ulong>(),
             };
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsBidirectional
-                    .Stateless
+                customCollectionMarshallingCodeSnippetsBidirectional.Stateless
                     .CustomMarshallerParametersAndModifiers<float>(),
             };
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsBidirectional
-                    .Stateless
+                customCollectionMarshallingCodeSnippetsBidirectional.Stateless
                     .CustomMarshallerParametersAndModifiers<double>(),
             };
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsBidirectional
-                    .Stateless
+                customCollectionMarshallingCodeSnippetsBidirectional.Stateless
                     .CustomMarshallerParametersAndModifiers<IntPtr>(),
             };
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsBidirectional
-                    .Stateless
+                customCollectionMarshallingCodeSnippetsBidirectional.Stateless
                     .CustomMarshallerParametersAndModifiers<UIntPtr>(),
             };
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsBidirectional
-                    .Stateless
+                customCollectionMarshallingCodeSnippetsBidirectional.Stateless
                     .CustomMarshallerReturnValueLength<int>(),
             };
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsBidirectional
-                    .Stateless
+                customCollectionMarshallingCodeSnippetsBidirectional.Stateless
                     .NestedMarshallerParametersAndModifiers<int>(),
             };
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsBidirectional
-                    .Stateless
+                customCollectionMarshallingCodeSnippetsBidirectional.Stateless
                     .NonBlittableElementParametersAndModifiers,
             };
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsBidirectional
-                    .Stateless
+                customCollectionMarshallingCodeSnippetsBidirectional.Stateless
                     .CustomElementMarshalling,
             };
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsBidirectional
-                    .Stateful
+                customCollectionMarshallingCodeSnippetsBidirectional.Stateful
                     .DefaultMarshallerParametersAndModifiers<byte>(),
             };
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsBidirectional
-                    .Stateful
+                customCollectionMarshallingCodeSnippetsBidirectional.Stateful
                     .DefaultMarshallerParametersAndModifiers<sbyte>(),
             };
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsBidirectional
-                    .Stateful
+                customCollectionMarshallingCodeSnippetsBidirectional.Stateful
                     .DefaultMarshallerParametersAndModifiers<short>(),
             };
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsBidirectional
-                    .Stateful
+                customCollectionMarshallingCodeSnippetsBidirectional.Stateful
                     .DefaultMarshallerParametersAndModifiers<ushort>(),
             };
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsBidirectional
-                    .Stateful
+                customCollectionMarshallingCodeSnippetsBidirectional.Stateful
                     .DefaultMarshallerParametersAndModifiers<int>(),
             };
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsBidirectional
-                    .Stateful
+                customCollectionMarshallingCodeSnippetsBidirectional.Stateful
                     .DefaultMarshallerParametersAndModifiers<uint>(),
             };
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsBidirectional
-                    .Stateful
+                customCollectionMarshallingCodeSnippetsBidirectional.Stateful
                     .DefaultMarshallerParametersAndModifiers<long>(),
             };
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsBidirectional
-                    .Stateful
+                customCollectionMarshallingCodeSnippetsBidirectional.Stateful
                     .DefaultMarshallerParametersAndModifiers<ulong>(),
             };
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsBidirectional
-                    .Stateful
+                customCollectionMarshallingCodeSnippetsBidirectional.Stateful
                     .DefaultMarshallerParametersAndModifiers<float>(),
             };
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsBidirectional
-                    .Stateful
+                customCollectionMarshallingCodeSnippetsBidirectional.Stateful
                     .DefaultMarshallerParametersAndModifiers<double>(),
             };
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsBidirectional
-                    .Stateful
+                customCollectionMarshallingCodeSnippetsBidirectional.Stateful
                     .DefaultMarshallerParametersAndModifiers<IntPtr>(),
             };
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsBidirectional
-                    .Stateful
+                customCollectionMarshallingCodeSnippetsBidirectional.Stateful
                     .DefaultMarshallerParametersAndModifiers<UIntPtr>(),
             };
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsBidirectional
-                    .Stateful
+                customCollectionMarshallingCodeSnippetsBidirectional.Stateful
                     .CustomMarshallerParametersAndModifiers<byte>(),
             };
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsBidirectional
-                    .Stateful
+                customCollectionMarshallingCodeSnippetsBidirectional.Stateful
                     .CustomMarshallerParametersAndModifiers<sbyte>(),
             };
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsBidirectional
-                    .Stateful
+                customCollectionMarshallingCodeSnippetsBidirectional.Stateful
                     .CustomMarshallerParametersAndModifiers<short>(),
             };
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsBidirectional
-                    .Stateful
+                customCollectionMarshallingCodeSnippetsBidirectional.Stateful
                     .CustomMarshallerParametersAndModifiers<ushort>(),
             };
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsBidirectional
-                    .Stateful
+                customCollectionMarshallingCodeSnippetsBidirectional.Stateful
                     .CustomMarshallerParametersAndModifiers<int>(),
             };
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsBidirectional
-                    .Stateful
+                customCollectionMarshallingCodeSnippetsBidirectional.Stateful
                     .CustomMarshallerParametersAndModifiers<uint>(),
             };
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsBidirectional
-                    .Stateful
+                customCollectionMarshallingCodeSnippetsBidirectional.Stateful
                     .CustomMarshallerParametersAndModifiers<long>(),
             };
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsBidirectional
-                    .Stateful
+                customCollectionMarshallingCodeSnippetsBidirectional.Stateful
                     .CustomMarshallerParametersAndModifiers<ulong>(),
             };
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsBidirectional
-                    .Stateful
+                customCollectionMarshallingCodeSnippetsBidirectional.Stateful
                     .CustomMarshallerParametersAndModifiers<float>(),
             };
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsBidirectional
-                    .Stateful
+                customCollectionMarshallingCodeSnippetsBidirectional.Stateful
                     .CustomMarshallerParametersAndModifiers<double>(),
             };
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsBidirectional
-                    .Stateful
+                customCollectionMarshallingCodeSnippetsBidirectional.Stateful
                     .CustomMarshallerParametersAndModifiers<IntPtr>(),
             };
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsBidirectional
-                    .Stateful
+                customCollectionMarshallingCodeSnippetsBidirectional.Stateful
                     .CustomMarshallerParametersAndModifiers<UIntPtr>(),
             };
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsBidirectional
-                    .Stateful
+                customCollectionMarshallingCodeSnippetsBidirectional.Stateful
                     .CustomMarshallerReturnValueLength<int>(),
             };
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsBidirectional
-                    .Stateful
+                customCollectionMarshallingCodeSnippetsBidirectional.Stateful
                     .NonBlittableElementParametersAndModifiers,
             };
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsBidirectional
-                    .Stateful
+                customCollectionMarshallingCodeSnippetsBidirectional.Stateful
                     .CustomElementMarshalling,
             };
         }
@@ -1034,22 +932,19 @@ namespace ComInterfaceGenerator.Unit.Tests
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsManagedToUnmanaged
-                    .Stateless
+                customCollectionMarshallingCodeSnippetsManagedToUnmanaged.Stateless
                     .ByValue<sbyte>(),
             };
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsManagedToUnmanaged
-                    .Stateless
+                customCollectionMarshallingCodeSnippetsManagedToUnmanaged.Stateless
                     .ByValue<short>(),
             };
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsManagedToUnmanaged
-                    .Stateless
+                customCollectionMarshallingCodeSnippetsManagedToUnmanaged.Stateless
                     .ByValue<ushort>(),
             };
             yield return new[]
@@ -1070,120 +965,103 @@ namespace ComInterfaceGenerator.Unit.Tests
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsManagedToUnmanaged
-                    .Stateless
+                customCollectionMarshallingCodeSnippetsManagedToUnmanaged.Stateless
                     .ByValue<ulong>(),
             };
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsManagedToUnmanaged
-                    .Stateless
+                customCollectionMarshallingCodeSnippetsManagedToUnmanaged.Stateless
                     .ByValue<float>(),
             };
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsManagedToUnmanaged
-                    .Stateless
+                customCollectionMarshallingCodeSnippetsManagedToUnmanaged.Stateless
                     .ByValue<double>(),
             };
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsManagedToUnmanaged
-                    .Stateless
+                customCollectionMarshallingCodeSnippetsManagedToUnmanaged.Stateless
                     .ByValue<IntPtr>(),
             };
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsManagedToUnmanaged
-                    .Stateless
+                customCollectionMarshallingCodeSnippetsManagedToUnmanaged.Stateless
                     .ByValue<UIntPtr>(),
             };
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsManagedToUnmanaged
-                    .Stateless
+                customCollectionMarshallingCodeSnippetsManagedToUnmanaged.Stateless
                     .ByValueWithPinning<byte>(),
             };
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsManagedToUnmanaged
-                    .Stateless
+                customCollectionMarshallingCodeSnippetsManagedToUnmanaged.Stateless
                     .ByValueWithPinning<sbyte>(),
             };
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsManagedToUnmanaged
-                    .Stateless
+                customCollectionMarshallingCodeSnippetsManagedToUnmanaged.Stateless
                     .ByValueWithPinning<short>(),
             };
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsManagedToUnmanaged
-                    .Stateless
+                customCollectionMarshallingCodeSnippetsManagedToUnmanaged.Stateless
                     .ByValueWithPinning<ushort>(),
             };
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsManagedToUnmanaged
-                    .Stateless
+                customCollectionMarshallingCodeSnippetsManagedToUnmanaged.Stateless
                     .ByValueWithPinning<int>(),
             };
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsManagedToUnmanaged
-                    .Stateless
+                customCollectionMarshallingCodeSnippetsManagedToUnmanaged.Stateless
                     .ByValueWithPinning<uint>(),
             };
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsManagedToUnmanaged
-                    .Stateless
+                customCollectionMarshallingCodeSnippetsManagedToUnmanaged.Stateless
                     .ByValueWithPinning<long>(),
             };
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsManagedToUnmanaged
-                    .Stateless
+                customCollectionMarshallingCodeSnippetsManagedToUnmanaged.Stateless
                     .ByValueWithPinning<ulong>(),
             };
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsManagedToUnmanaged
-                    .Stateless
+                customCollectionMarshallingCodeSnippetsManagedToUnmanaged.Stateless
                     .ByValueWithPinning<float>(),
             };
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsManagedToUnmanaged
-                    .Stateless
+                customCollectionMarshallingCodeSnippetsManagedToUnmanaged.Stateless
                     .ByValueWithPinning<double>(),
             };
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsManagedToUnmanaged
-                    .Stateless
+                customCollectionMarshallingCodeSnippetsManagedToUnmanaged.Stateless
                     .ByValueWithPinning<IntPtr>(),
             };
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsManagedToUnmanaged
-                    .Stateless
+                customCollectionMarshallingCodeSnippetsManagedToUnmanaged.Stateless
                     .ByValueWithPinning<UIntPtr>(),
             };
             yield return new[]
@@ -1204,8 +1082,7 @@ namespace ComInterfaceGenerator.Unit.Tests
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsManagedToUnmanaged
-                    .Stateful
+                customCollectionMarshallingCodeSnippetsManagedToUnmanaged.Stateful
                     .ByValue<ushort>(),
             };
             yield return new[]
@@ -1236,344 +1113,295 @@ namespace ComInterfaceGenerator.Unit.Tests
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsManagedToUnmanaged
-                    .Stateful
+                customCollectionMarshallingCodeSnippetsManagedToUnmanaged.Stateful
                     .ByValue<double>(),
             };
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsManagedToUnmanaged
-                    .Stateful
+                customCollectionMarshallingCodeSnippetsManagedToUnmanaged.Stateful
                     .ByValue<IntPtr>(),
             };
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsManagedToUnmanaged
-                    .Stateful
+                customCollectionMarshallingCodeSnippetsManagedToUnmanaged.Stateful
                     .ByValue<UIntPtr>(),
             };
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsManagedToUnmanaged
-                    .Stateful
+                customCollectionMarshallingCodeSnippetsManagedToUnmanaged.Stateful
                     .ByValueCallerAllocatedBuffer<byte>(),
             };
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsManagedToUnmanaged
-                    .Stateful
+                customCollectionMarshallingCodeSnippetsManagedToUnmanaged.Stateful
                     .ByValueCallerAllocatedBuffer<sbyte>(),
             };
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsManagedToUnmanaged
-                    .Stateful
+                customCollectionMarshallingCodeSnippetsManagedToUnmanaged.Stateful
                     .ByValueCallerAllocatedBuffer<short>(),
             };
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsManagedToUnmanaged
-                    .Stateful
+                customCollectionMarshallingCodeSnippetsManagedToUnmanaged.Stateful
                     .ByValueCallerAllocatedBuffer<ushort>(),
             };
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsManagedToUnmanaged
-                    .Stateful
+                customCollectionMarshallingCodeSnippetsManagedToUnmanaged.Stateful
                     .ByValueCallerAllocatedBuffer<int>(),
             };
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsManagedToUnmanaged
-                    .Stateful
+                customCollectionMarshallingCodeSnippetsManagedToUnmanaged.Stateful
                     .ByValueCallerAllocatedBuffer<uint>(),
             };
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsManagedToUnmanaged
-                    .Stateful
+                customCollectionMarshallingCodeSnippetsManagedToUnmanaged.Stateful
                     .ByValueCallerAllocatedBuffer<long>(),
             };
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsManagedToUnmanaged
-                    .Stateful
+                customCollectionMarshallingCodeSnippetsManagedToUnmanaged.Stateful
                     .ByValueCallerAllocatedBuffer<ulong>(),
             };
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsManagedToUnmanaged
-                    .Stateful
+                customCollectionMarshallingCodeSnippetsManagedToUnmanaged.Stateful
                     .ByValueCallerAllocatedBuffer<float>(),
             };
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsManagedToUnmanaged
-                    .Stateful
+                customCollectionMarshallingCodeSnippetsManagedToUnmanaged.Stateful
                     .ByValueCallerAllocatedBuffer<double>(),
             };
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsManagedToUnmanaged
-                    .Stateful
+                customCollectionMarshallingCodeSnippetsManagedToUnmanaged.Stateful
                     .ByValueCallerAllocatedBuffer<IntPtr>(),
             };
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsManagedToUnmanaged
-                    .Stateful
+                customCollectionMarshallingCodeSnippetsManagedToUnmanaged.Stateful
                     .ByValueCallerAllocatedBuffer<UIntPtr>(),
             };
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsManagedToUnmanaged
-                    .Stateful
+                customCollectionMarshallingCodeSnippetsManagedToUnmanaged.Stateful
                     .ByValueWithPinning<byte>(),
             };
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsManagedToUnmanaged
-                    .Stateful
+                customCollectionMarshallingCodeSnippetsManagedToUnmanaged.Stateful
                     .ByValueWithPinning<sbyte>(),
             };
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsManagedToUnmanaged
-                    .Stateful
+                customCollectionMarshallingCodeSnippetsManagedToUnmanaged.Stateful
                     .ByValueWithPinning<short>(),
             };
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsManagedToUnmanaged
-                    .Stateful
+                customCollectionMarshallingCodeSnippetsManagedToUnmanaged.Stateful
                     .ByValueWithPinning<ushort>(),
             };
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsManagedToUnmanaged
-                    .Stateful
+                customCollectionMarshallingCodeSnippetsManagedToUnmanaged.Stateful
                     .ByValueWithPinning<int>(),
             };
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsManagedToUnmanaged
-                    .Stateful
+                customCollectionMarshallingCodeSnippetsManagedToUnmanaged.Stateful
                     .ByValueWithPinning<uint>(),
             };
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsManagedToUnmanaged
-                    .Stateful
+                customCollectionMarshallingCodeSnippetsManagedToUnmanaged.Stateful
                     .ByValueWithPinning<long>(),
             };
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsManagedToUnmanaged
-                    .Stateful
+                customCollectionMarshallingCodeSnippetsManagedToUnmanaged.Stateful
                     .ByValueWithPinning<ulong>(),
             };
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsManagedToUnmanaged
-                    .Stateful
+                customCollectionMarshallingCodeSnippetsManagedToUnmanaged.Stateful
                     .ByValueWithPinning<float>(),
             };
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsManagedToUnmanaged
-                    .Stateful
+                customCollectionMarshallingCodeSnippetsManagedToUnmanaged.Stateful
                     .ByValueWithPinning<double>(),
             };
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsManagedToUnmanaged
-                    .Stateful
+                customCollectionMarshallingCodeSnippetsManagedToUnmanaged.Stateful
                     .ByValueWithPinning<IntPtr>(),
             };
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsManagedToUnmanaged
-                    .Stateful
+                customCollectionMarshallingCodeSnippetsManagedToUnmanaged.Stateful
                     .ByValueWithPinning<UIntPtr>(),
             };
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsManagedToUnmanaged
-                    .Stateful
+                customCollectionMarshallingCodeSnippetsManagedToUnmanaged.Stateful
                     .ByValueWithStaticPinning<byte>(),
             };
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsManagedToUnmanaged
-                    .Stateful
+                customCollectionMarshallingCodeSnippetsManagedToUnmanaged.Stateful
                     .ByValueWithStaticPinning<sbyte>(),
             };
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsManagedToUnmanaged
-                    .Stateful
+                customCollectionMarshallingCodeSnippetsManagedToUnmanaged.Stateful
                     .ByValueWithStaticPinning<short>(),
             };
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsManagedToUnmanaged
-                    .Stateful
+                customCollectionMarshallingCodeSnippetsManagedToUnmanaged.Stateful
                     .ByValueWithStaticPinning<ushort>(),
             };
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsManagedToUnmanaged
-                    .Stateful
+                customCollectionMarshallingCodeSnippetsManagedToUnmanaged.Stateful
                     .ByValueWithStaticPinning<int>(),
             };
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsManagedToUnmanaged
-                    .Stateful
+                customCollectionMarshallingCodeSnippetsManagedToUnmanaged.Stateful
                     .ByValueWithStaticPinning<uint>(),
             };
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsManagedToUnmanaged
-                    .Stateful
+                customCollectionMarshallingCodeSnippetsManagedToUnmanaged.Stateful
                     .ByValueWithStaticPinning<long>(),
             };
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsManagedToUnmanaged
-                    .Stateful
+                customCollectionMarshallingCodeSnippetsManagedToUnmanaged.Stateful
                     .ByValueWithStaticPinning<ulong>(),
             };
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsManagedToUnmanaged
-                    .Stateful
+                customCollectionMarshallingCodeSnippetsManagedToUnmanaged.Stateful
                     .ByValueWithStaticPinning<float>(),
             };
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsManagedToUnmanaged
-                    .Stateful
+                customCollectionMarshallingCodeSnippetsManagedToUnmanaged.Stateful
                     .ByValueWithStaticPinning<double>(),
             };
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsManagedToUnmanaged
-                    .Stateful
+                customCollectionMarshallingCodeSnippetsManagedToUnmanaged.Stateful
                     .ByValueWithStaticPinning<IntPtr>(),
             };
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsManagedToUnmanaged
-                    .Stateful
+                customCollectionMarshallingCodeSnippetsManagedToUnmanaged.Stateful
                     .ByValueWithStaticPinning<UIntPtr>(),
             };
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsManagedToUnmanaged
-                    .Stateless
+                customCollectionMarshallingCodeSnippetsManagedToUnmanaged.Stateless
                     .NativeToManagedOnlyOutParameter<int>(),
             };
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsManagedToUnmanaged
-                    .Stateless
+                customCollectionMarshallingCodeSnippetsManagedToUnmanaged.Stateless
                     .NativeToManagedOnlyReturnValue<int>(),
             };
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsManagedToUnmanaged
-                    .Stateless
+                customCollectionMarshallingCodeSnippetsManagedToUnmanaged.Stateless
                     .NonBlittableElementByValue,
             };
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsManagedToUnmanaged
-                    .Stateless
+                customCollectionMarshallingCodeSnippetsManagedToUnmanaged.Stateless
                     .NonBlittableElementNativeToManagedOnlyOutParameter,
             };
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsManagedToUnmanaged
-                    .Stateless
+                customCollectionMarshallingCodeSnippetsManagedToUnmanaged.Stateless
                     .NonBlittableElementNativeToManagedOnlyReturnValue,
             };
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsManagedToUnmanaged
-                    .Stateful
+                customCollectionMarshallingCodeSnippetsManagedToUnmanaged.Stateful
                     .NativeToManagedOnlyOutParameter<int>(),
             };
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsManagedToUnmanaged
-                    .Stateful
+                customCollectionMarshallingCodeSnippetsManagedToUnmanaged.Stateful
                     .NativeToManagedOnlyReturnValue<int>(),
             };
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsManagedToUnmanaged
-                    .Stateful
+                customCollectionMarshallingCodeSnippetsManagedToUnmanaged.Stateful
                     .NonBlittableElementByValue,
             };
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsManagedToUnmanaged
-                    .Stateful
+                customCollectionMarshallingCodeSnippetsManagedToUnmanaged.Stateful
                     .NonBlittableElementNativeToManagedOnlyOutParameter,
             };
             yield return new[]
             {
                 ID(),
-                customCollectionMarshallingCodeSnippetsManagedToUnmanaged
-                    .Stateful
+                customCollectionMarshallingCodeSnippetsManagedToUnmanaged.Stateful
                     .NonBlittableElementNativeToManagedOnlyReturnValue,
             };
         }

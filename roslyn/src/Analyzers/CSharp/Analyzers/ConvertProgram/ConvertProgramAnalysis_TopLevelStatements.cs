@@ -155,8 +155,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.ConvertProgram
 
                 // if not private, can't convert as something may be referencing it.
                 if (
-                    member
-                        .Modifiers
+                    member.Modifiers
                         .Any(m =>
                             m.Kind()
                                 is SyntaxKind.PublicKeyword

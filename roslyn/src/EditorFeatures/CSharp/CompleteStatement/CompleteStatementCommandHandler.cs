@@ -418,8 +418,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.CompleteStatement
             {
                 case SyntaxKind.DoStatement:
                     //  Move caret after the do statement's closing paren.
-                    targetPosition = caret
-                        .Snapshot
+                    targetPosition = caret.Snapshot
                         .GetPoint(((DoStatementSyntax)statementNode).CloseParenToken.Span.End);
                     return true;
                 case SyntaxKind.ForStatement:

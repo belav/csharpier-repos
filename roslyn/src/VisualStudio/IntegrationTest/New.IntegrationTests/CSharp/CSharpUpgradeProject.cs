@@ -19,8 +19,7 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
     {
         private async Task InvokeFixAsync(string version, CancellationToken cancellationToken)
         {
-            await TestServices
-                .Editor
+            await TestServices.Editor
                 .SetTextAsync(
                     @$"
 #error version:{version}
@@ -29,21 +28,18 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
                 );
             await TestServices.Editor.ActivateAsync(cancellationToken);
 
-            await TestServices
-                .Editor
+            await TestServices.Editor
                 .PlaceCaretAsync($"version:{version}", charsOffset: 0, cancellationToken);
 
             // Suspend file change notification during code action application, since spurious file change notifications
             // can cause silent failure to apply the code action if they occur within this block.
             await using (
-                var fileChangeRestorer = await TestServices
-                    .Shell
+                var fileChangeRestorer = await TestServices.Shell
                     .PauseFileChangesAsync(HangMitigatingCancellationToken)
             )
             {
                 await TestServices.Editor.InvokeCodeActionListAsync(cancellationToken);
-                await TestServices
-                    .EditorVerifier
+                await TestServices.EditorVerifier
                     .CodeActionAsync(
                         $"Upgrade this project to C# language version '{version}'",
                         applyFix: true,
@@ -57,19 +53,16 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
         {
             var project = ProjectName;
 
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .CreateSolutionAsync(SolutionName, HangMitigatingCancellationToken);
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .AddProjectAsync(
                     project,
                     WellKnownProjectTemplates.CSharpNetStandardClassLibrary,
                     LanguageNames.CSharp,
                     HangMitigatingCancellationToken
                 );
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .RestoreNuGetPackagesAsync(project, HangMitigatingCancellationToken);
 
             await InvokeFixAsync(version: "preview", HangMitigatingCancellationToken);
@@ -85,11 +78,9 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
         {
             var project = ProjectName;
 
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .CreateSolutionAsync(SolutionName, HangMitigatingCancellationToken);
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .AddCustomProjectAsync(
                     project,
                     ".csproj",
@@ -128,8 +119,7 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
 </Project>",
                     HangMitigatingCancellationToken
                 );
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .AddFileAsync(
                     project,
                     "C.cs",
@@ -151,11 +141,9 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
         {
             var project = ProjectName;
 
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .CreateSolutionAsync(SolutionName, HangMitigatingCancellationToken);
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .AddCustomProjectAsync(
                     project,
                     ".csproj",
@@ -198,8 +186,7 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
                     HangMitigatingCancellationToken
                 );
 
-            await TestServices
-                .SolutionExplorer
+            await TestServices.SolutionExplorer
                 .AddFileAsync(
                     project,
                     "C.cs",

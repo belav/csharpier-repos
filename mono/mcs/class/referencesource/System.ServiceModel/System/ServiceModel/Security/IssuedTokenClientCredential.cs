@@ -48,10 +48,8 @@ namespace System.ServiceModel.Security
                     new Dictionary<Uri, KeyedByTypeCollection<IEndpointBehavior>>();
                 foreach (Uri uri in other.issuerChannelBehaviors.Keys)
                 {
-                    this.issuerChannelBehaviors.Add(
-                        uri,
-                        GetBehaviorCollection(other.issuerChannelBehaviors[uri])
-                    );
+                    this.issuerChannelBehaviors
+                        .Add(uri, GetBehaviorCollection(other.issuerChannelBehaviors[uri]));
                 }
             }
             this.isReadOnly = other.isReadOnly;
@@ -137,8 +135,7 @@ namespace System.ServiceModel.Security
             {
                 if (value < TimeSpan.Zero)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentOutOfRangeException(
                                 "value",
@@ -150,8 +147,7 @@ namespace System.ServiceModel.Security
 
                 if (TimeoutHelper.IsTooLarge(value))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentOutOfRangeException(
                                 "value",
@@ -188,8 +184,7 @@ namespace System.ServiceModel.Security
         {
             if (this.isReadOnly)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
                     );

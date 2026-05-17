@@ -54,8 +54,7 @@ namespace System.ServiceModel.Channels
         {
             if (maxAccepts <= 0)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ArgumentOutOfRangeException(
                             "maxAccepts",

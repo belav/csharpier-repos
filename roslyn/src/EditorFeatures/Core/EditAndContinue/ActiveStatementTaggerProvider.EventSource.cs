@@ -14,8 +14,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         {
             protected override void ConnectToWorkspace(Workspace workspace)
             {
-                var trackingService = workspace
-                    .Services
+                var trackingService = workspace.Services
                     .GetService<IActiveStatementTrackingService>();
                 if (trackingService != null)
                 {
@@ -26,8 +25,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
 
             protected override void DisconnectFromWorkspace(Workspace workspace)
             {
-                var trackingService = workspace
-                    .Services
+                var trackingService = workspace.Services
                     .GetService<IActiveStatementTrackingService>();
                 if (trackingService != null)
                 {

@@ -13,8 +13,7 @@ internal static class ActionAttributeRouteModel
     {
         // Loop through all attribute routes defined on the controller.
         // These perform a cross-product with all of the action-level attribute routes.
-        var controllerSelectors = actionModel
-            .Controller
+        var controllerSelectors = actionModel.Controller
             .Selectors
             .Where(sm => sm.AttributeRouteModel != null)
             .ToList();
@@ -157,8 +156,7 @@ internal static class ActionAttributeRouteModel
         SelectorModel? controllerSelector
     )> GetAttributeRoutes(ActionModel actionModel)
     {
-        var controllerAttributeRoutes = actionModel
-            .Controller
+        var controllerAttributeRoutes = actionModel.Controller
             .Selectors
             .Where(sm => sm.AttributeRouteModel != null)
             .Select(sm => sm.AttributeRouteModel)

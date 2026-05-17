@@ -67,8 +67,7 @@ public class JQueryFormatModelBindingIntegrationTest
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
         {
             request.Body = new MemoryStream(
-                Encoding
-                    .UTF8
+                Encoding.UTF8
                     .GetBytes(
                         "Name=James&Address[0][City]=Redmond&Address[0][State][ShortName]=WA&Address[0][State][LongName]=Washington"
                     )

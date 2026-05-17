@@ -145,8 +145,7 @@ public class SqlServerTriggersTest : IClassFixture<SqlServerTriggersTest.SqlServ
         {
             context.Database.EnsureCreatedResiliently();
 
-            context
-                .Database
+            context.Database
                 .ExecuteSqlRaw(
                     @"
 CREATE TRIGGER TRG_InsertProduct
@@ -162,8 +161,7 @@ BEGIN
 END"
                 );
 
-            context
-                .Database
+            context.Database
                 .ExecuteSqlRaw(
                     @"
 CREATE TRIGGER TRG_UpdateProduct
@@ -183,8 +181,7 @@ BEGIN
 END"
                 );
 
-            context
-                .Database
+            context.Database
                 .ExecuteSqlRaw(
                     @"
 CREATE TRIGGER TRG_DeleteProduct

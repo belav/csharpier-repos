@@ -78,8 +78,7 @@ public class Program
         {
             BenchmarkResultTask = new TaskCompletionSource<BenchmarkResult>();
             using var runCancellationToken = new CancellationTokenSource(timeForEachRun);
-            using var registration = runCancellationToken
-                .Token
+            using var registration = runCancellationToken.Token
                 .Register(() =>
                 {
                     string exceptionMessage = $"Timed out after {timeForEachRun}.";
@@ -128,8 +127,7 @@ public class Program
 
         if (benchmarkResult.DownloadSize != null)
         {
-            output
-                .Metadata
+            output.Metadata
                 .Add(
                     new BenchmarkMetadata
                     {
@@ -141,8 +139,7 @@ public class Program
                     }
                 );
 
-            output
-                .Measurements
+            output.Measurements
                 .Add(
                     new BenchmarkMeasurement
                     {
@@ -155,8 +152,7 @@ public class Program
 
         if (benchmarkResult.WasmMemory != null)
         {
-            output
-                .Metadata
+            output.Metadata
                 .Add(
                     new BenchmarkMetadata
                     {
@@ -168,8 +164,7 @@ public class Program
                     }
                 );
 
-            output
-                .Measurements
+            output.Measurements
                 .Add(
                     new BenchmarkMeasurement
                     {
@@ -179,8 +174,7 @@ public class Program
                     }
                 );
 
-            output
-                .Metadata
+            output.Metadata
                 .Add(
                     new BenchmarkMetadata
                     {
@@ -191,8 +185,7 @@ public class Program
                     }
                 );
 
-            output
-                .Measurements
+            output.Measurements
                 .Add(
                     new BenchmarkMeasurement
                     {
@@ -202,8 +195,7 @@ public class Program
                     }
                 );
 
-            output
-                .Metadata
+            output.Metadata
                 .Add(
                     new BenchmarkMetadata
                     {
@@ -214,8 +206,7 @@ public class Program
                     }
                 );
 
-            output
-                .Measurements
+            output.Measurements
                 .Add(
                     new BenchmarkMeasurement
                     {
@@ -227,8 +218,7 @@ public class Program
         }
 
         // Information about the build that this was produced from
-        output
-            .Metadata
+        output.Metadata
             .Add(
                 new BenchmarkMetadata
                 {
@@ -238,15 +228,13 @@ public class Program
                 }
             );
 
-        output
-            .Measurements
+        output.Measurements
             .Add(
                 new BenchmarkMeasurement
                 {
                     Timestamp = DateTime.UtcNow,
                     Name = "blazorwasm/commit",
-                    Value = typeof(Program)
-                        .Assembly
+                    Value = typeof(Program).Assembly
                         .GetCustomAttributes<AssemblyMetadataAttribute>()
                         .FirstOrDefault(f => f.Key == "CommitHash")
                         ?.Value,
@@ -256,8 +244,7 @@ public class Program
         foreach (var result in benchmarkResult.ScenarioResults)
         {
             var scenarioName = result.Descriptor.Name;
-            output
-                .Metadata
+            output.Metadata
                 .Add(
                     new BenchmarkMetadata
                     {
@@ -269,8 +256,7 @@ public class Program
                     }
                 );
 
-            output
-                .Measurements
+            output.Measurements
                 .Add(
                     new BenchmarkMeasurement
                     {
@@ -288,8 +274,7 @@ public class Program
 
         if (isStressRun)
         {
-            output
-                .Measurements
+            output.Measurements
                 .Add(
                     new BenchmarkMeasurement { Timestamp = DateTime.UtcNow, Name = "$$Delimiter$$" }
                 );
@@ -328,8 +313,7 @@ public class Program
 #if DEBUG
             "--contentroot",
             Path.GetFullPath(
-                typeof(Program)
-                    .Assembly
+                typeof(Program).Assembly
                     .GetCustomAttributes<AssemblyMetadataAttribute>()
                     .First(f => f.Key == "TestAppLocatiion")
                     .Value
@@ -386,8 +370,7 @@ public class Program
 
     static string GetListeningUrl(IHost testApp)
     {
-        return testApp
-            .Services
+        return testApp.Services
             .GetRequiredService<IServer>()
             .Features
             .Get<IServerAddressesFeature>()

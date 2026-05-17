@@ -173,8 +173,7 @@ namespace System.Text.Json.SourceGeneration.Tests
                 MetadataWithPerTypeAttributeContext.Default.ActiveOrUpcomingEvent.SerializeHandler
             );
             Assert.Null(
-                MetadataWithPerTypeAttributeContext
-                    .Default
+                MetadataWithPerTypeAttributeContext.Default
                     .CampaignSummaryViewModel
                     .SerializeHandler
             );
@@ -182,8 +181,7 @@ namespace System.Text.Json.SourceGeneration.Tests
                 MetadataWithPerTypeAttributeContext.Default.IndexViewModel.SerializeHandler
             );
             Assert.Null(
-                MetadataWithPerTypeAttributeContext
-                    .Default
+                MetadataWithPerTypeAttributeContext.Default
                     .WeatherForecastWithPOCOs
                     .SerializeHandler
             );
@@ -211,82 +209,69 @@ namespace System.Text.Json.SourceGeneration.Tests
             );
             Assert.Null(MetadataWithPerTypeAttributeContext.Default.String.SerializeHandler);
             Assert.Null(
-                MetadataWithPerTypeAttributeContext
-                    .Default
+                MetadataWithPerTypeAttributeContext.Default
                     .ValueTupleStringInt32Boolean
                     .SerializeHandler
             );
             Assert.Null(MetadataWithPerTypeAttributeContext.Default.JsonDocument.SerializeHandler);
             Assert.Null(MetadataWithPerTypeAttributeContext.Default.JsonElement.SerializeHandler);
             Assert.Null(
-                MetadataWithPerTypeAttributeContext
-                    .Default
+                MetadataWithPerTypeAttributeContext.Default
                     .ClassWithEnumAndNullable
                     .SerializeHandler
             );
             Assert.Null(
-                MetadataWithPerTypeAttributeContext
-                    .Default
+                MetadataWithPerTypeAttributeContext.Default
                     .ClassWithNullableProperties
                     .SerializeHandler
             );
             Assert.Null(
-                MetadataWithPerTypeAttributeContext
-                    .Default
+                MetadataWithPerTypeAttributeContext.Default
                     .ClassWithCustomConverter
                     .SerializeHandler
             );
             Assert.Null(
-                MetadataWithPerTypeAttributeContext
-                    .Default
+                MetadataWithPerTypeAttributeContext.Default
                     .StructWithCustomConverter
                     .SerializeHandler
             );
             Assert.Null(
-                MetadataWithPerTypeAttributeContext
-                    .Default
+                MetadataWithPerTypeAttributeContext.Default
                     .ClassWithCustomConverterFactory
                     .SerializeHandler
             );
             Assert.Null(
-                MetadataWithPerTypeAttributeContext
-                    .Default
+                MetadataWithPerTypeAttributeContext.Default
                     .StructWithCustomConverterFactory
                     .SerializeHandler
             );
             Assert.Null(
-                MetadataWithPerTypeAttributeContext
-                    .Default
+                MetadataWithPerTypeAttributeContext.Default
                     .ClassWithCustomConverterProperty
                     .SerializeHandler
             );
             Assert.Null(
-                MetadataWithPerTypeAttributeContext
-                    .Default
+                MetadataWithPerTypeAttributeContext.Default
                     .StructWithCustomConverterProperty
                     .SerializeHandler
             );
             Assert.Null(
-                MetadataWithPerTypeAttributeContext
-                    .Default
+                MetadataWithPerTypeAttributeContext.Default
                     .ClassWithCustomConverterFactoryProperty
                     .SerializeHandler
             );
             Assert.Null(
-                MetadataWithPerTypeAttributeContext
-                    .Default
+                MetadataWithPerTypeAttributeContext.Default
                     .StructWithCustomConverterFactoryProperty
                     .SerializeHandler
             );
             Assert.Throws<InvalidOperationException>(() =>
-                MetadataWithPerTypeAttributeContext
-                    .Default
+                MetadataWithPerTypeAttributeContext.Default
                     .ClassWithBadCustomConverter
                     .SerializeHandler
             );
             Assert.Throws<InvalidOperationException>(() =>
-                MetadataWithPerTypeAttributeContext
-                    .Default
+                MetadataWithPerTypeAttributeContext.Default
                     .StructWithBadCustomConverter
                     .SerializeHandler
             );
@@ -295,14 +280,12 @@ namespace System.Text.Json.SourceGeneration.Tests
             );
             Assert.Null(MetadataWithPerTypeAttributeContext.Default.PersonStruct.SerializeHandler);
             Assert.Null(
-                MetadataWithPerTypeAttributeContext
-                    .Default
+                MetadataWithPerTypeAttributeContext.Default
                     .TypeWithValidationAttributes
                     .SerializeHandler
             );
             Assert.Null(
-                MetadataWithPerTypeAttributeContext
-                    .Default
+                MetadataWithPerTypeAttributeContext.Default
                     .TypeWithDerivedAttribute
                     .SerializeHandler
             );

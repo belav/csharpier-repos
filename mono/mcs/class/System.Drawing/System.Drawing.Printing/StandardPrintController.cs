@@ -47,8 +47,7 @@ namespace System.Drawing.Printing
 
         public override void OnStartPrint(PrintDocument document, PrintEventArgs e)
         {
-            IntPtr dc = SysPrn
-                .GlobalService
+            IntPtr dc = SysPrn.GlobalService
                 .CreateGraphicsContext(document.PrinterSettings, document.DefaultPageSettings);
             e.GraphicsContext = new GraphicsPrinter(null, dc);
             SysPrn.GlobalService.StartDoc(e.GraphicsContext, document.DocumentName, string.Empty);

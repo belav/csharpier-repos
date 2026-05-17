@@ -120,8 +120,7 @@ namespace System.ServiceModel.Channels
             {
                 if (writeEncoding == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgumentNull("writeEncoding");
                 }
 
@@ -206,8 +205,7 @@ namespace System.ServiceModel.Channels
             {
                 if (bufferManager == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new ArgumentNullException("bufferManager"));
                 }
 
@@ -258,8 +256,7 @@ namespace System.ServiceModel.Channels
             {
                 if (stream == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new ArgumentNullException("stream"));
                 }
 
@@ -305,8 +302,7 @@ namespace System.ServiceModel.Channels
             {
                 if (message == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new ArgumentNullException("message"));
                 }
                 if (bufferManager == null)
@@ -352,8 +348,7 @@ namespace System.ServiceModel.Channels
 
                 JavascriptCallbackResponseMessageProperty javascriptResponseMessageProperty;
                 if (
-                    message
-                        .Properties
+                    message.Properties
                         .TryGetValue<JavascriptCallbackResponseMessageProperty>(
                             JavascriptCallbackResponseMessageProperty.Name,
                             out javascriptResponseMessageProperty
@@ -418,8 +413,7 @@ namespace System.ServiceModel.Channels
             {
                 if (message == null)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new ArgumentNullException("message"));
                 }
                 if (stream == null)
@@ -442,8 +436,7 @@ namespace System.ServiceModel.Channels
                 XmlDictionaryWriter xmlWriter = TakeStreamedWriter(stream);
                 JavascriptCallbackResponseMessageProperty javascriptResponseMessageProperty;
                 if (
-                    message
-                        .Properties
+                    message.Properties
                         .TryGetValue<JavascriptCallbackResponseMessageProperty>(
                             JavascriptCallbackResponseMessageProperty.Name,
                             out javascriptResponseMessageProperty
@@ -459,13 +452,14 @@ namespace System.ServiceModel.Channels
                             message
                         );
                     }
-                    byte[] buffer = this.writeEncoding.GetBytes(
-                        String.Format(
-                            CultureInfo.InvariantCulture,
-                            "{0}(",
-                            javascriptResponseMessageProperty.CallbackFunctionName
-                        )
-                    );
+                    byte[] buffer = this.writeEncoding
+                        .GetBytes(
+                            String.Format(
+                                CultureInfo.InvariantCulture,
+                                "{0}(",
+                                javascriptResponseMessageProperty.CallbackFunctionName
+                            )
+                        );
                     stream.Write(buffer, 0, buffer.Length);
                 }
                 xmlWriter.WriteStartDocument();
@@ -483,13 +477,14 @@ namespace System.ServiceModel.Channels
                         && (int)javascriptResponseMessageProperty.StatusCode != 200
                     )
                     {
-                        byte[] buffer = this.writeEncoding.GetBytes(
-                            String.Format(
-                                CultureInfo.InvariantCulture,
-                                ",{0}",
-                                (int)javascriptResponseMessageProperty.StatusCode
-                            )
-                        );
+                        byte[] buffer = this.writeEncoding
+                            .GetBytes(
+                                String.Format(
+                                    CultureInfo.InvariantCulture,
+                                    ",{0}",
+                                    (int)javascriptResponseMessageProperty.StatusCode
+                                )
+                            );
                         stream.Write(buffer, 0, buffer.Length);
                     }
                     stream.Write(

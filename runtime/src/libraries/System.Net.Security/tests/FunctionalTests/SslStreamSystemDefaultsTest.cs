@@ -111,13 +111,11 @@ namespace System.Net.Security.Tests
         )
         {
             using (
-                X509Certificate2 serverCertificate = Configuration
-                    .Certificates
+                X509Certificate2 serverCertificate = Configuration.Certificates
                     .GetServerCertificate()
             )
             using (
-                X509Certificate2 clientCertificate = Configuration
-                    .Certificates
+                X509Certificate2 clientCertificate = Configuration.Certificates
                     .GetClientCertificate()
             )
             {
@@ -183,13 +181,11 @@ namespace System.Net.Security.Tests
         )
         {
             using (
-                X509Certificate2 serverCertificate = Configuration
-                    .Certificates
+                X509Certificate2 serverCertificate = Configuration.Certificates
                     .GetServerCertificate()
             )
             using (
-                X509Certificate2 clientCertificate = Configuration
-                    .Certificates
+                X509Certificate2 clientCertificate = Configuration.Certificates
                     .GetClientCertificate()
             )
             {
@@ -336,27 +332,28 @@ namespace System.Net.Security.Tests
             bool checkCertificateRevocation,
             SslProtocols? protocols
         ) =>
-            Task.Factory.FromAsync(
-                (callback, state) =>
-                    protocols.HasValue
-                        ? _clientStream.BeginAuthenticateAsClient(
-                            targetHost,
-                            clientCertificates,
-                            protocols.Value,
-                            checkCertificateRevocation,
-                            callback,
-                            state
-                        )
-                        : _clientStream.BeginAuthenticateAsClient(
-                            targetHost,
-                            clientCertificates,
-                            checkCertificateRevocation,
-                            callback,
-                            state
-                        ),
-                _clientStream.EndAuthenticateAsClient,
-                state: null
-            );
+            Task.Factory
+                .FromAsync(
+                    (callback, state) =>
+                        protocols.HasValue
+                            ? _clientStream.BeginAuthenticateAsClient(
+                                targetHost,
+                                clientCertificates,
+                                protocols.Value,
+                                checkCertificateRevocation,
+                                callback,
+                                state
+                            )
+                            : _clientStream.BeginAuthenticateAsClient(
+                                targetHost,
+                                clientCertificates,
+                                checkCertificateRevocation,
+                                callback,
+                                state
+                            ),
+                    _clientStream.EndAuthenticateAsClient,
+                    state: null
+                );
 
         protected override Task AuthenticateServerAsync(
             X509Certificate serverCertificate,
@@ -364,27 +361,28 @@ namespace System.Net.Security.Tests
             bool checkCertificateRevocation,
             SslProtocols? protocols
         ) =>
-            Task.Factory.FromAsync(
-                (callback, state) =>
-                    protocols.HasValue
-                        ? _serverStream.BeginAuthenticateAsServer(
-                            serverCertificate,
-                            clientCertificateRequired,
-                            protocols.Value,
-                            checkCertificateRevocation,
-                            callback,
-                            state
-                        )
-                        : _serverStream.BeginAuthenticateAsServer(
-                            serverCertificate,
-                            clientCertificateRequired,
-                            checkCertificateRevocation,
-                            callback,
-                            state
-                        ),
-                _serverStream.EndAuthenticateAsServer,
-                state: null
-            );
+            Task.Factory
+                .FromAsync(
+                    (callback, state) =>
+                        protocols.HasValue
+                            ? _serverStream.BeginAuthenticateAsServer(
+                                serverCertificate,
+                                clientCertificateRequired,
+                                protocols.Value,
+                                checkCertificateRevocation,
+                                callback,
+                                state
+                            )
+                            : _serverStream.BeginAuthenticateAsServer(
+                                serverCertificate,
+                                clientCertificateRequired,
+                                checkCertificateRevocation,
+                                callback,
+                                state
+                            ),
+                    _serverStream.EndAuthenticateAsServer,
+                    state: null
+                );
     }
 
     public sealed class AsyncSslStreamSystemDefaultTest : SslStreamSystemDefaultTest

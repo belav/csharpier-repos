@@ -11,8 +11,7 @@ public class Program
         builder.RootComponents.Add<App>("#app");
         builder.RootComponents.Add<HeadOutlet>("head::after");
 
-        builder
-            .Services
+        builder.Services
             .AddScoped(sp => new HttpClient
             {
                 BaseAddress = new Uri(builder.HostEnvironment.BaseAddress),
@@ -21,8 +20,7 @@ public class Program
 
 #endif
 #if (IndividualLocalAuth)
-        builder
-            .Services
+        builder.Services
             .AddOidcAuthentication(options =>
             {
 #if(MissingAuthority)
@@ -33,16 +31,14 @@ public class Program
             });
 #endif
 #if (IndividualB2CAuth)
-        builder
-            .Services
+        builder.Services
             .AddMsalAuthentication(options =>
             {
                 builder.Configuration.Bind("AzureAdB2C", options.ProviderOptions.Authentication);
             });
 #endif
 #if(OrganizationalAuth)
-        builder
-            .Services
+        builder.Services
             .AddMsalAuthentication(options =>
             {
                 builder.Configuration.Bind("AzureAd", options.ProviderOptions.Authentication);

@@ -331,8 +331,7 @@ namespace System.Runtime.Serialization
 
             if (!isReadOnlyCollection && IsArrayLikeCollection(collectionContract))
             {
-                MethodInfo trimArraySizeMethod = XmlFormatGeneratorStatics
-                    .TrimArraySizeMethod
+                MethodInfo trimArraySizeMethod = XmlFormatGeneratorStatics.TrimArraySizeMethod
                     .MakeGenericMethod(itemType);
                 resultCollection = trimArraySizeMethod.Invoke(
                     null,
@@ -825,8 +824,7 @@ namespace System.Runtime.Serialization
                 && collectionContract.UnderlyingType.IsInterface
             )
             {
-                Type type = Globals
-                    .TypeOfDictionaryGeneric
+                Type type = Globals.TypeOfDictionaryGeneric
                     .MakeGenericType(collectionContract.ItemType.GetGenericArguments());
                 ConstructorInfo ci = type.GetConstructor(
                     BindingFlags.Instance | BindingFlags.Public,
@@ -931,8 +929,7 @@ namespace System.Runtime.Serialization
                         object? key = objectToKeyValuePairGetKey(collectionItem!);
                         object? value = objectToKeyValuePairGetValue(collectionItem!);
 
-                        collectionContract
-                            .AddMethod!
+                        collectionContract.AddMethod!
                             .Invoke(resultCollection, new object?[] { key, value });
                         return resultCollection;
                     };

@@ -594,8 +594,7 @@ namespace MonoCasTests.System.Security.Cryptography.X509Certificates
             WriteFile(certfile, cert);
             WriteFile(
                 signedfile,
-                MonoTests
-                    .System
+                MonoTests.System
                     .Security
                     .Cryptography
                     .X509Certificates

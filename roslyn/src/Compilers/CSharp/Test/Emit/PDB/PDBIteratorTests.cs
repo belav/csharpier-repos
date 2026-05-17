@@ -992,8 +992,7 @@ class C
             );
             CompileAndVerify(
                 source,
-                options: TestOptions
-                    .ReleaseDll
+                options: TestOptions.ReleaseDll
                     .WithMetadataImportOptions(MetadataImportOptions.All),
                 symbolValidator: module =>
                 {
@@ -1212,8 +1211,7 @@ class C
 
             var v = CompileAndVerify(
                 source,
-                options: TestOptions
-                    .ReleaseDll
+                options: TestOptions.ReleaseDll
                     .WithMetadataImportOptions(MetadataImportOptions.All),
                 symbolValidator: module =>
                 {
@@ -1611,8 +1609,7 @@ class C
             var v = CompileAndVerify(
                 source,
                 new[] { CSharpRef },
-                options: TestOptions
-                    .ReleaseDll
+                options: TestOptions.ReleaseDll
                     .WithMetadataImportOptions(MetadataImportOptions.All),
                 symbolValidator: module =>
                 {
@@ -1813,8 +1810,7 @@ public class C
             var result = compilation.Emit(
                 peStream,
                 pdbStream,
-                options: EmitOptions
-                    .Default
+                options: EmitOptions.Default
                     .WithDebugInformationFormat(DebugInformationFormat.PortablePdb)
             );
 

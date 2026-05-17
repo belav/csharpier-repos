@@ -107,9 +107,12 @@ namespace System.Runtime
         {
             if (this.isCompleted)
             {
-                throw Fx.Exception.AsError(
-                    new InvalidOperationException(InternalSR.AsyncResultCompletedTwice(GetType()))
-                );
+                throw Fx.Exception
+                    .AsError(
+                        new InvalidOperationException(
+                            InternalSR.AsyncResultCompletedTwice(GetType())
+                        )
+                    );
             }
 
 #if DEBUG
@@ -183,9 +186,8 @@ namespace System.Runtime
                         throw;
                     }
 
-                    throw Fx.Exception.AsError(
-                        new CallbackException(InternalSR.AsyncCallbackThrewException, e)
-                    );
+                    throw Fx.Exception
+                        .AsError(new CallbackException(InternalSR.AsyncCallbackThrewException, e));
                 }
 #pragma warning restore 1634
             }
@@ -201,9 +203,8 @@ namespace System.Runtime
         {
             if (result == null)
             {
-                throw Fx.Exception.AsError(
-                    new InvalidOperationException(InternalSR.InvalidNullAsyncResult)
-                );
+                throw Fx.Exception
+                    .AsError(new InvalidOperationException(InternalSR.InvalidNullAsyncResult));
             }
             if (result.CompletedSynchronously)
             {
@@ -304,9 +305,8 @@ namespace System.Runtime
         {
             if (result == null)
             {
-                throw Fx.Exception.AsError(
-                    new InvalidOperationException(InternalSR.InvalidNullAsyncResult)
-                );
+                throw Fx.Exception
+                    .AsError(new InvalidOperationException(InternalSR.InvalidNullAsyncResult));
             }
 
             callback = null;
@@ -341,11 +341,12 @@ namespace System.Runtime
 
         protected static void ThrowInvalidAsyncResult(IAsyncResult result)
         {
-            throw Fx.Exception.AsError(
-                new InvalidOperationException(
-                    InternalSR.InvalidAsyncResultImplementation(result.GetType())
-                )
-            );
+            throw Fx.Exception
+                .AsError(
+                    new InvalidOperationException(
+                        InternalSR.InvalidAsyncResultImplementation(result.GetType())
+                    )
+                );
         }
 
         protected static void ThrowInvalidAsyncResult(string debugText)
@@ -378,9 +379,8 @@ namespace System.Runtime
 
             if (asyncResult.endCalled)
             {
-                throw Fx.Exception.AsError(
-                    new InvalidOperationException(InternalSR.AsyncResultAlreadyEnded)
-                );
+                throw Fx.Exception
+                    .AsError(new InvalidOperationException(InternalSR.AsyncResultAlreadyEnded));
             }
 
 #if DEBUG

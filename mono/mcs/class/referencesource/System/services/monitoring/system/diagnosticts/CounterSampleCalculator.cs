@@ -285,8 +285,7 @@ namespace System.Diagnostics
 
             new FileIOPermission(PermissionState.Unrestricted).Assert();
 
-            string installPath = System
-                .Runtime
+            string installPath = System.Runtime
                 .InteropServices
                 .RuntimeEnvironment
                 .GetRuntimeDirectory();

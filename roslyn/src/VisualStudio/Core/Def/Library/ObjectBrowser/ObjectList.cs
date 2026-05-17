@@ -529,17 +529,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
                         )
                     ) != 0;
 
-                var projectAndAssemblySet = this.LibraryManager.GetAssemblySet(
-                    project,
-                    lookInReferences,
-                    CancellationToken.None
-                );
-                return this.LibraryManager.GetSearchList(
-                    listKind,
-                    flags,
-                    pobSrch,
-                    projectAndAssemblySet
-                );
+                var projectAndAssemblySet = this.LibraryManager
+                    .GetAssemblySet(project, lookInReferences, CancellationToken.None);
+                return this.LibraryManager
+                    .GetSearchList(listKind, flags, pobSrch, projectAndAssemblySet);
             }
 
             var compilation = listItem.GetCompilation(this.LibraryManager.Workspace);
@@ -654,10 +647,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
 
             if (listItem is SymbolListItem symbolListItem)
             {
-                return this.LibraryManager.GetNavInfo(
-                    symbolListItem,
-                    useExpandedHierarchy: IsClassView()
-                );
+                return this.LibraryManager
+                    .GetNavInfo(symbolListItem, useExpandedHierarchy: IsClassView());
             }
 
             return null;
@@ -791,8 +782,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
                             var symbol = symbolListItem.ResolveSymbol(compilation);
                             if (symbol != null)
                             {
-                                var helpContextService = project
-                                    .Services
+                                var helpContextService = project.Services
                                     .GetService<IHelpContextService>();
 
                                 pvar = helpContextService.FormatSymbol(symbol);
@@ -852,8 +842,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
         {
             try
             {
-                var operationExecutor = LibraryManager
-                    .ComponentModel
+                var operationExecutor = LibraryManager.ComponentModel
                     .GetService<IUIThreadOperationExecutor>();
 
                 using var context = operationExecutor.BeginExecute(

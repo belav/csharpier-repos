@@ -80,9 +80,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer.Handler
             }
 
             var text = await document.GetValueTextAsync(cancellationToken).ConfigureAwait(false);
-            var offset = text.Lines.GetPosition(
-                ProtocolConversions.PositionToLinePosition(request.Position)
-            );
+            var offset = text.Lines
+                .GetPosition(ProtocolConversions.PositionToLinePosition(request.Position));
 
             var result = await renameService
                 .GetTypeRenameAsync(document, offset, cancellationToken)
@@ -96,8 +95,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer.Handler
 
             return new LinkedEditingRanges
             {
-                Ranges = result
-                    .Ranges
+                Ranges = result.Ranges
                     .Select(s => ProtocolConversions.TextSpanToRange(s, text))
                     .ToArray(),
                 WordPattern = result.WordPattern,

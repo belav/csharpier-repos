@@ -105,8 +105,7 @@ namespace System.ServiceModel.Configuration
                 Type CTMType = Type.GetType(this.WebContentTypeMapperType, true);
                 if (!typeof(WebContentTypeMapper).IsAssignableFrom(CTMType))
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ConfigurationErrorsException(
                                 SR2.GetString(
@@ -126,8 +125,7 @@ namespace System.ServiceModel.Configuration
                 }
                 catch (MissingMethodException innerException)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ConfigurationErrorsException(
                                 SR2.GetString(

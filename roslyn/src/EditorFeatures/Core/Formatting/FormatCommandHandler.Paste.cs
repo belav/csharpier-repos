@@ -31,8 +31,7 @@ namespace Microsoft.CodeAnalysis.Formatting
             CommandExecutionContext context
         )
         {
-            using var _ = context
-                .OperationContext
+            using var _ = context.OperationContext
                 .AddScope(allowCancellation: true, EditorFeaturesResources.Formatting_pasted_text);
             var caretPosition = args.TextView.GetCaretPoint(args.SubjectBuffer);
 
@@ -74,8 +73,7 @@ namespace Microsoft.CodeAnalysis.Formatting
                 return;
             }
 
-            var document = subjectBuffer
-                .CurrentSnapshot
+            var document = subjectBuffer.CurrentSnapshot
                 .GetOpenDocumentInCurrentContextWithChanges();
             if (document == null)
                 return;
@@ -102,8 +100,7 @@ namespace Microsoft.CodeAnalysis.Formatting
             if (formattingService == null || !formattingService.SupportsFormatOnPaste)
                 return;
 
-            var trackingSpan = caretPosition
-                .Value
+            var trackingSpan = caretPosition.Value
                 .Snapshot
                 .CreateTrackingSpan(
                     caretPosition.Value.Position,

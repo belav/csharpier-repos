@@ -102,8 +102,7 @@ namespace System.ServiceModel.WasHosting
                     "BaseAppDomainProtocolHandler.StartListenerChannel() failed in OnStart():\r\n"
                         + exception
                 );
-                DiagnosticUtility
-                    .EventLog
+                DiagnosticUtility.EventLog
                     .LogEvent(
                         TraceEventType.Error,
                         (ushort)System.Runtime.Diagnostics.EventLogCategory.WebHost,

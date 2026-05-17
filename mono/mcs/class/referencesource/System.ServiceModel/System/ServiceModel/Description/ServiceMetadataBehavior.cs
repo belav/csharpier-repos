@@ -49,8 +49,7 @@ namespace System.ServiceModel.Description
             {
                 if (value != null && value.IsAbsoluteUri && value.Scheme != Uri.UriSchemeHttp)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgument(
                             SR.GetString(
                                 SR.SFxServiceMetadataBehaviorUrlMustBeHttpOrRelative,
@@ -79,8 +78,7 @@ namespace System.ServiceModel.Description
             {
                 if (value != null && value.IsAbsoluteUri && value.Scheme != Uri.UriSchemeHttps)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgument(
                             SR.GetString(
                                 SR.SFxServiceMetadataBehaviorUrlMustBeHttpOrRelative,
@@ -105,8 +103,7 @@ namespace System.ServiceModel.Description
                 {
                     if (!value.Scheme.Equals(Uri.UriSchemeHttp, StringComparison.OrdinalIgnoreCase))
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperArgument(
                                 SR.GetString(
                                     SR.SFxBindingSchemeDoesNotMatch,
@@ -121,13 +118,11 @@ namespace System.ServiceModel.Description
                         customBinding.Elements.Find<TextMessageEncodingBindingElement>();
                     if (
                         textMessageEncodingBindingElement != null
-                        && !textMessageEncodingBindingElement
-                            .MessageVersion
+                        && !textMessageEncodingBindingElement.MessageVersion
                             .IsMatch(MessageVersion.None)
                     )
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperArgument(
                                 SR.GetString(
                                     SR.SFxIncorrectMessageVersion,
@@ -136,8 +131,7 @@ namespace System.ServiceModel.Description
                                 )
                             );
                     }
-                    HttpTransportBindingElement httpTransportBindingElement = customBinding
-                        .Elements
+                    HttpTransportBindingElement httpTransportBindingElement = customBinding.Elements
                         .Find<HttpTransportBindingElement>();
                     if (httpTransportBindingElement != null)
                     {
@@ -159,8 +153,7 @@ namespace System.ServiceModel.Description
                         !value.Scheme.Equals(Uri.UriSchemeHttps, StringComparison.OrdinalIgnoreCase)
                     )
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperArgument(
                                 SR.GetString(
                                     SR.SFxBindingSchemeDoesNotMatch,
@@ -175,13 +168,11 @@ namespace System.ServiceModel.Description
                         customBinding.Elements.Find<TextMessageEncodingBindingElement>();
                     if (
                         textMessageEncodingBindingElement != null
-                        && !textMessageEncodingBindingElement
-                            .MessageVersion
+                        && !textMessageEncodingBindingElement.MessageVersion
                             .IsMatch(MessageVersion.None)
                     )
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperArgument(
                                 SR.GetString(
                                     SR.SFxIncorrectMessageVersion,
@@ -190,9 +181,8 @@ namespace System.ServiceModel.Description
                                 )
                             );
                     }
-                    HttpsTransportBindingElement httpsTransportBindingElement = customBinding
-                        .Elements
-                        .Find<HttpsTransportBindingElement>();
+                    HttpsTransportBindingElement httpsTransportBindingElement =
+                        customBinding.Elements.Find<HttpsTransportBindingElement>();
                     if (httpsTransportBindingElement != null)
                     {
                         httpsTransportBindingElement.Method = "GET";
@@ -214,8 +204,7 @@ namespace System.ServiceModel.Description
                     && !(value.Scheme == Uri.UriSchemeHttp || value.Scheme == Uri.UriSchemeHttps)
                 )
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgument(
                             "ExternalMetadataLocation",
                             SR.GetString(
@@ -319,8 +308,7 @@ namespace System.ServiceModel.Description
             {
                 if (this.httpGetEnabled)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(SR.SFxServiceMetadataBehaviorNoHttpBaseAddress)
@@ -330,8 +318,7 @@ namespace System.ServiceModel.Description
 
                 if (this.httpsGetEnabled)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(SR.SFxServiceMetadataBehaviorNoHttpsBaseAddress)
@@ -398,9 +385,8 @@ namespace System.ServiceModel.Description
             mex.HttpGetBinding = this.httpGetBinding;
             mex.HttpsGetBinding = this.httpsGetBinding;
 
-            UseRequestHeadersForMetadataAddressBehavior dynamicUpdateBehavior = description
-                .Behaviors
-                .Find<UseRequestHeadersForMetadataAddressBehavior>();
+            UseRequestHeadersForMetadataAddressBehavior dynamicUpdateBehavior =
+                description.Behaviors.Find<UseRequestHeadersForMetadataAddressBehavior>();
             if (dynamicUpdateBehavior != null)
             {
                 mex.UpdateAddressDynamically = true;
@@ -451,8 +437,7 @@ namespace System.ServiceModel.Description
                 {
                     if (channelDispatcher.Endpoints.Count != 1)
                     {
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new InvalidOperationException(
                                     SR.GetString(
@@ -620,8 +605,7 @@ namespace System.ServiceModel.Description
         {
             if (!resolver.BehaviorContracts.ContainsKey(MexContractName))
             {
-                resolver
-                    .BehaviorContracts
+                resolver.BehaviorContracts
                     .Add(MexContractName, ServiceMetadataBehavior.MexContract);
             }
         }
@@ -694,8 +678,7 @@ namespace System.ServiceModel.Description
                             new Collection<ServiceEndpoint>();
                         foreach (ServiceEndpoint endpoint in this.description.Endpoints)
                         {
-                            ServiceMetadataContractBehavior contractBehavior = endpoint
-                                .Contract
+                            ServiceMetadataContractBehavior contractBehavior = endpoint.Contract
                                 .Behaviors
                                 .Find<ServiceMetadataContractBehavior>();
 

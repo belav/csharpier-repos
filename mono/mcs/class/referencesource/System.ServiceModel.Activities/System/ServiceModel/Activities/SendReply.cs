@@ -137,10 +137,8 @@ namespace System.ServiceModel.Activities
             if (!metadata.HasViolations)
             {
                 this.internalSend = CreateInternalSend();
-                this.InternalContent.ConfigureInternalSendReply(
-                    this.internalSend,
-                    out this.responseFormatter
-                );
+                this.InternalContent
+                    .ConfigureInternalSendReply(this.internalSend, out this.responseFormatter);
 
                 InArgument<CorrelationHandle> requestReplyHandleFromReceive =
                     GetReplyHandleFromReceive();
@@ -286,8 +284,7 @@ namespace System.ServiceModel.Activities
         {
             if (operation == null)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .ArgumentNull("operation", "OperationDescription cannot be null");
             }
 
@@ -324,8 +321,7 @@ namespace System.ServiceModel.Activities
                     )
                     {
                         if (
-                            !message
-                                .Body
+                            !message.Body
                                 .ReturnValue
                                 .Type
                                 .IsAssignableFrom(typeof(System.ServiceModel.Channels.Message))
@@ -353,8 +349,7 @@ namespace System.ServiceModel.Activities
                                     break;
                                 }
                                 if (
-                                    !messagePart
-                                        .Type
+                                    !messagePart.Type
                                         .IsAssignableFrom(
                                             typeof(System.ServiceModel.Channels.Message)
                                         )
@@ -383,8 +378,7 @@ namespace System.ServiceModel.Activities
                                 message.Body.ReturnValue.Type,
                                 ArgumentDirection.In
                             );
-                            content
-                                .Parameters
+                            content.Parameters
                                 .Add(message.Body.ReturnValue.Name, (InArgument)returnArgument);
                         }
 

@@ -87,22 +87,19 @@ namespace System.Activities.XamlIntegration
 
             if (settings.Activity == null)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .Argument("settings", SR.TextExpressionCompilerActivityRequired);
             }
 
             if (settings.ActivityName == null)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .Argument("settings", SR.TextExpressionCompilerActivityNameRequired);
             }
 
             if (settings.Language == null)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .Argument("settings", SR.TextExpressionCompilerLanguageRequired);
             }
 
@@ -259,8 +256,7 @@ namespace System.Activities.XamlIntegration
                         throw;
                     }
 
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(
                             new InvalidOperationException(
                                 SR.CompiledExpressionsCacheMetadataException(
@@ -312,8 +308,7 @@ namespace System.Activities.XamlIntegration
                 // Note that unlike the above where the exception from CacheMetadata is always going to be from the user's code
                 // an exception here is more likely to be from our code and unexpected.  However it could be from user code in some cases.
                 // Output a message that attempts to normalize this and presents enough info to the user to determine if they can take action.
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new InvalidOperationException(
                             SR.CompiledExpressionsActivityException(
@@ -582,8 +577,7 @@ namespace System.Activities.XamlIntegration
 
             // Generate a set accessor that looks something like this:
             // this.SetVariableValue(contextId, locationIndexId, value)
-            accessorProperty
-                .SetStatements
+            accessorProperty.SetStatements
                 .Add(
                     new CodeMethodInvokeExpression(
                         new CodeMethodReferenceExpression(
@@ -612,8 +606,7 @@ namespace System.Activities.XamlIntegration
             // OK to share the getter statement from above
             accessorPropertyForReadOnly.GetStatements.Add(getterStatement);
 
-            contextDescriptor
-                .CodeTypeDeclarationForReadOnly
+            contextDescriptor.CodeTypeDeclarationForReadOnly
                 .Members
                 .Add(accessorPropertyForReadOnly);
         }
@@ -664,8 +657,7 @@ namespace System.Activities.XamlIntegration
             // OK to share the exception from above
             accessorPropertyForReadOnly.GetStatements.Add(exception);
 
-            contextDescriptor
-                .CodeTypeDeclarationForReadOnly
+            contextDescriptor.CodeTypeDeclarationForReadOnly
                 .Members
                 .Add(accessorPropertyForReadOnly);
         }
@@ -682,9 +674,8 @@ namespace System.Activities.XamlIntegration
             {
                 if (this.settings.LogSourceGenerationMessage != null)
                 {
-                    this.settings.LogSourceGenerationMessage(
-                        SR.CompiledExpressionsIgnoringUnnamedVariable
-                    );
+                    this.settings
+                        .LogSourceGenerationMessage(SR.CompiledExpressionsIgnoringUnnamedVariable);
                 }
                 return false;
             }
@@ -693,9 +684,10 @@ namespace System.Activities.XamlIntegration
             {
                 if (this.settings.LogSourceGenerationMessage != null)
                 {
-                    this.settings.LogSourceGenerationMessage(
-                        SR.CompiledExpressionsIgnoringInvalidIdentifierVariable(name)
-                    );
+                    this.settings
+                        .LogSourceGenerationMessage(
+                            SR.CompiledExpressionsIgnoringInvalidIdentifierVariable(name)
+                        );
                 }
                 return false;
             }
@@ -753,8 +745,8 @@ namespace System.Activities.XamlIntegration
         void OnITextExpressionFound(Activity activity, ExpressionCompilerActivityVisitor visitor)
         {
             CompiledDataContextDescriptor contextDescriptor = null;
-            CompiledDataContextDescriptor currentContextDescriptor =
-                this.compiledDataContexts.Peek();
+            CompiledDataContextDescriptor currentContextDescriptor = this.compiledDataContexts
+                .Peek();
 
             if (this.InVariableScopeArgument)
             {
@@ -836,15 +828,13 @@ namespace System.Activities.XamlIntegration
             languageProperty.Attributes = MemberAttributes.Final | MemberAttributes.Public;
             languageProperty.Name = "GetLanguage";
             languageProperty.ReturnType = new CodeTypeReference(typeof(string));
-            languageProperty
-                .Statements
+            languageProperty.Statements
                 .Add(
                     new CodeMethodReturnStatement(
                         new CodePrimitiveExpression(this.settings.Language)
                     )
                 );
-            languageProperty
-                .ImplementationTypes
+            languageProperty.ImplementationTypes
                 .Add(new CodeTypeReference(typeof(ICompiledExpressionRoot)));
             languageProperty.CustomAttributes.Add(GeneratedCodeAttribute);
             languageProperty.CustomAttributes.Add(BrowsableCodeAttribute);
@@ -882,8 +872,7 @@ namespace System.Activities.XamlIntegration
             CodeConstructor constructor = new CodeConstructor();
             constructor.Attributes = MemberAttributes.Public;
 
-            constructor
-                .Parameters
+            constructor.Parameters
                 .Add(
                     new CodeParameterDeclarationExpression(
                         new CodeTypeReference(typeof(Activity)),
@@ -909,8 +898,7 @@ namespace System.Activities.XamlIntegration
 
             constructor.Statements.Add(nullArgumentCondition);
 
-            constructor
-                .Statements
+            constructor.Statements
                 .Add(
                     new CodeAssignStatement(
                         new CodeFieldReferenceExpression(
@@ -949,14 +937,12 @@ namespace System.Activities.XamlIntegration
             getLocationsMethod.CustomAttributes.Add(GeneratedCodeAttribute);
             getLocationsMethod.CustomAttributes.Add(BrowsableCodeAttribute);
             getLocationsMethod.CustomAttributes.Add(EditorBrowsableCodeAttribute);
-            getLocationsMethod
-                .ImplementationTypes
+            getLocationsMethod.ImplementationTypes
                 .Add(new CodeTypeReference(typeof(ICompiledExpressionRoot)));
 
             getLocationsMethod.ReturnType = new CodeTypeReference(typeof(IList<string>));
 
-            getLocationsMethod
-                .Parameters
+            getLocationsMethod.Parameters
                 .Add(
                     new CodeParameterDeclarationExpression(
                         new CodeTypeReference(typeof(int)),
@@ -978,8 +964,7 @@ namespace System.Activities.XamlIntegration
 
         void GenerateEmptyRequiredLocationsBody(CodeMemberMethod getLocationsMethod)
         {
-            getLocationsMethod
-                .Statements
+            getLocationsMethod.Statements
                 .Add(new CodeMethodReturnStatement(new CodePrimitiveExpression(null)));
         }
 
@@ -1020,8 +1005,7 @@ namespace System.Activities.XamlIntegration
                 getLocationsMethod.Statements.Add(idCondition);
             }
 
-            getLocationsMethod
-                .Statements
+            getLocationsMethod.Statements
                 .Add(
                     new CodeMethodReturnStatement(
                         new CodeVariableReferenceExpression("returnLocations")
@@ -1062,24 +1046,21 @@ namespace System.Activities.XamlIntegration
             getExpressionTreeForExpressionMethod.ReturnType = new CodeTypeReference(
                 typeof(Expression)
             );
-            getExpressionTreeForExpressionMethod
-                .Parameters
+            getExpressionTreeForExpressionMethod.Parameters
                 .Add(
                     new CodeParameterDeclarationExpression(
                         new CodeTypeReference(typeof(int)),
                         "expressionId"
                     )
                 );
-            getExpressionTreeForExpressionMethod
-                .Parameters
+            getExpressionTreeForExpressionMethod.Parameters
                 .Add(
                     new CodeParameterDeclarationExpression(
                         new CodeTypeReference(typeof(IList<LocationReference>)),
                         "locationReferences"
                     )
                 );
-            getExpressionTreeForExpressionMethod
-                .ImplementationTypes
+            getExpressionTreeForExpressionMethod.ImplementationTypes
                 .Add(new CodeTypeReference(typeof(ICompiledExpressionRoot)));
 
             // Mark this type as tool generated code
@@ -1091,8 +1072,7 @@ namespace System.Activities.XamlIntegration
 
             // Mark it as EditorBrowsable(EditorBrowsableState.Never)
             // Note that this does not prevent intellisense within a single project, just at the metadata level
-            getExpressionTreeForExpressionMethod
-                .CustomAttributes
+            getExpressionTreeForExpressionMethod.CustomAttributes
                 .Add(EditorBrowsableCodeAttribute);
 
             foreach (CompiledExpressionDescriptor descriptor in expressionDescriptors)
@@ -1125,8 +1105,7 @@ namespace System.Activities.XamlIntegration
                 getExpressionTreeForExpressionMethod.Statements.Add(idCondition);
             }
 
-            getExpressionTreeForExpressionMethod
-                .Statements
+            getExpressionTreeForExpressionMethod.Statements
                 .Add(new CodeMethodReturnStatement(new CodePrimitiveExpression(null)));
 
             classDeclaration.Members.Add(getExpressionTreeForExpressionMethod);
@@ -1140,14 +1119,12 @@ namespace System.Activities.XamlIntegration
             invokeExpressionMethod.CustomAttributes.Add(GeneratedCodeAttribute);
             invokeExpressionMethod.CustomAttributes.Add(BrowsableCodeAttribute);
             invokeExpressionMethod.CustomAttributes.Add(EditorBrowsableCodeAttribute);
-            invokeExpressionMethod
-                .ImplementationTypes
+            invokeExpressionMethod.ImplementationTypes
                 .Add(new CodeTypeReference(typeof(ICompiledExpressionRoot)));
 
             invokeExpressionMethod.ReturnType = new CodeTypeReference(typeof(object));
 
-            invokeExpressionMethod
-                .Parameters
+            invokeExpressionMethod.Parameters
                 .Add(
                     new CodeParameterDeclarationExpression(
                         new CodeTypeReference(typeof(int)),
@@ -1157,16 +1134,14 @@ namespace System.Activities.XamlIntegration
 
             if (withLocationReferences)
             {
-                invokeExpressionMethod
-                    .Parameters
+                invokeExpressionMethod.Parameters
                     .Add(
                         new CodeParameterDeclarationExpression(
                             new CodeTypeReference(typeof(IList<LocationReference>)),
                             "locations"
                         )
                     );
-                invokeExpressionMethod
-                    .Parameters
+                invokeExpressionMethod.Parameters
                     .Add(
                         new CodeParameterDeclarationExpression(
                             new CodeTypeReference(typeof(ActivityContext)),
@@ -1176,8 +1151,7 @@ namespace System.Activities.XamlIntegration
             }
             else
             {
-                invokeExpressionMethod
-                    .Parameters
+                invokeExpressionMethod.Parameters
                     .Add(
                         new CodeParameterDeclarationExpression(
                             new CodeTypeReference(typeof(IList<Location>)),
@@ -1199,8 +1173,7 @@ namespace System.Activities.XamlIntegration
                     // We only generate the helper method on the root data context/context 0
                     // No need to have it on all contexts.  This is just a slight of hand
                     // so that we don't need to make GetDataContextActivities public on CompiledDataContext.
-                    invokeExpressionMethod
-                        .Statements
+                    invokeExpressionMethod.Statements
                         .Add(GenerateDataContextActivitiesCheck(this.expressionDescriptors[0]));
                 }
             }
@@ -1264,8 +1237,7 @@ namespace System.Activities.XamlIntegration
                 invokeExpressionMethod.Statements.Add(idCondition);
             }
 
-            invokeExpressionMethod
-                .Statements
+            invokeExpressionMethod.Statements
                 .Add(new CodeMethodReturnStatement(new CodePrimitiveExpression(null)));
 
             classDeclaration.Members.Add(invokeExpressionMethod);
@@ -1651,28 +1623,24 @@ namespace System.Activities.XamlIntegration
             isValidMethod.CustomAttributes.Add(GeneratedCodeAttribute);
             isValidMethod.CustomAttributes.Add(BrowsableCodeAttribute);
             isValidMethod.CustomAttributes.Add(EditorBrowsableCodeAttribute);
-            isValidMethod
-                .ImplementationTypes
+            isValidMethod.ImplementationTypes
                 .Add(new CodeTypeReference(typeof(ICompiledExpressionRoot)));
 
-            isValidMethod
-                .Parameters
+            isValidMethod.Parameters
                 .Add(
                     new CodeParameterDeclarationExpression(
                         new CodeTypeReference(typeof(string)),
                         "expressionText"
                     )
                 );
-            isValidMethod
-                .Parameters
+            isValidMethod.Parameters
                 .Add(
                     new CodeParameterDeclarationExpression(
                         new CodeTypeReference(typeof(bool)),
                         "isReference"
                     )
                 );
-            isValidMethod
-                .Parameters
+            isValidMethod.Parameters
                 .Add(
                     new CodeParameterDeclarationExpression(
                         new CodeTypeReference(typeof(IList<LocationReference>)),
@@ -1754,15 +1722,13 @@ namespace System.Activities.XamlIntegration
                 );
 
                 matchCondition.TrueStatements.Add(assignId);
-                matchCondition
-                    .TrueStatements
+                matchCondition.TrueStatements
                     .Add(new CodeMethodReturnStatement(new CodePrimitiveExpression(true)));
 
                 isValidMethod.Statements.Add(matchCondition);
             }
 
-            isValidMethod
-                .Statements
+            isValidMethod.Statements
                 .Add(
                     new CodeAssignStatement(
                         new CodeVariableReferenceExpression("expressionId"),
@@ -1770,8 +1736,7 @@ namespace System.Activities.XamlIntegration
                     )
                 );
 
-            isValidMethod
-                .Statements
+            isValidMethod.Statements
                 .Add(new CodeMethodReturnStatement(new CodePrimitiveExpression(false)));
 
             classDeclaration.Members.Add(isValidMethod);
@@ -1913,8 +1878,7 @@ namespace System.Activities.XamlIntegration
                 CodeMemberMethod expressionSetValueTypeAccessorMethod = GenerateSetMethodWrapper(
                     expressionSetMethod
                 );
-                dataContextDescriptor
-                    .CodeTypeDeclaration
+                dataContextDescriptor.CodeTypeDeclaration
                     .Members
                     .Add(expressionSetValueTypeAccessorMethod);
 
@@ -1932,8 +1896,7 @@ namespace System.Activities.XamlIntegration
 
                 CodeMemberMethod expressionSetValueTypeAccessorMethod =
                     GenerateStatementMethodWrapper(statementMethod);
-                dataContextDescriptor
-                    .CodeTypeDeclaration
+                dataContextDescriptor.CodeTypeDeclaration
                     .Members
                     .Add(expressionSetValueTypeAccessorMethod);
 
@@ -1967,8 +1930,7 @@ namespace System.Activities.XamlIntegration
             if (isStatement)
             {
                 // Can't generate expression tree for a statement
-                expressionMethod
-                    .Statements
+                expressionMethod.Statements
                     .Add(new CodeMethodReturnStatement(new CodePrimitiveExpression(null)));
                 dataContextDescriptor.CodeTypeDeclaration.Members.Add(expressionMethod);
                 return;
@@ -2011,8 +1973,7 @@ namespace System.Activities.XamlIntegration
             }
             else
             {
-                expressionMethod
-                    .Statements
+                expressionMethod.Statements
                     .Add(new CodeMethodReturnStatement(new CodePrimitiveExpression(null)));
             }
 
@@ -2041,8 +2002,7 @@ namespace System.Activities.XamlIntegration
                 nextExpressionId
             );
             expressionMethod.ReturnType = new CodeTypeReference(resultType);
-            expressionMethod
-                .CustomAttributes
+            expressionMethod.CustomAttributes
                 .Add(
                     new CodeAttributeDeclaration(
                         new CodeTypeReference(typeof(DebuggerHiddenAttribute))
@@ -2067,8 +2027,7 @@ namespace System.Activities.XamlIntegration
             wrapperMethod.Name = valueTypeAccessorString + expressionMethod.Name;
             wrapperMethod.ReturnType = expressionMethod.ReturnType;
 
-            wrapperMethod
-                .Statements
+            wrapperMethod.Statements
                 .Add(
                     new CodeMethodInvokeExpression(
                         new CodeMethodReferenceExpression(
@@ -2078,8 +2037,7 @@ namespace System.Activities.XamlIntegration
                     )
                 );
 
-            wrapperMethod
-                .Statements
+            wrapperMethod.Statements
                 .Add(
                     new CodeMethodReturnStatement(
                         new CodeMethodInvokeExpression(
@@ -2122,8 +2080,7 @@ namespace System.Activities.XamlIntegration
                 expressionSetString,
                 nextExpressionId
             );
-            expressionMethod
-                .CustomAttributes
+            expressionMethod.CustomAttributes
                 .Add(
                     new CodeAttributeDeclaration(
                         new CodeTypeReference(typeof(DebuggerHiddenAttribute))
@@ -2158,8 +2115,7 @@ namespace System.Activities.XamlIntegration
                 );
             wrapperMethod.Parameters.Add(exprValueParam);
 
-            wrapperMethod
-                .Statements
+            wrapperMethod.Statements
                 .Add(
                     new CodeMethodInvokeExpression(
                         new CodeMethodReferenceExpression(
@@ -2176,14 +2132,12 @@ namespace System.Activities.XamlIntegration
                 )
             );
 
-            setExpression
-                .Parameters
+            setExpression.Parameters
                 .Add(new CodeVariableReferenceExpression(expressionMethod.Parameters[0].Name));
 
             wrapperMethod.Statements.Add(setExpression);
 
-            wrapperMethod
-                .Statements
+            wrapperMethod.Statements
                 .Add(
                     new CodeMethodInvokeExpression(
                         new CodeMethodReferenceExpression(
@@ -2209,8 +2163,7 @@ namespace System.Activities.XamlIntegration
                 expressionStatementString,
                 nextExpressionId
             );
-            expressionMethod
-                .CustomAttributes
+            expressionMethod.CustomAttributes
                 .Add(
                     new CodeAttributeDeclaration(
                         new CodeTypeReference(typeof(DebuggerHiddenAttribute))
@@ -2232,8 +2185,7 @@ namespace System.Activities.XamlIntegration
             wrapperMethod.Attributes = MemberAttributes.Public | MemberAttributes.Final;
             wrapperMethod.Name = valueTypeAccessorString + expressionMethod.Name;
 
-            wrapperMethod
-                .Statements
+            wrapperMethod.Statements
                 .Add(
                     new CodeMethodInvokeExpression(
                         new CodeMethodReferenceExpression(
@@ -2252,8 +2204,7 @@ namespace System.Activities.XamlIntegration
 
             wrapperMethod.Statements.Add(setExpression);
 
-            wrapperMethod
-                .Statements
+            wrapperMethod.Statements
                 .Add(
                     new CodeMethodInvokeExpression(
                         new CodeMethodReferenceExpression(
@@ -2302,8 +2253,7 @@ namespace System.Activities.XamlIntegration
                 fetchMethod.Statements.Add(new CodeAssignStatement(fieldReference, getValue));
             }
 
-            fetchMethod
-                .Statements
+            fetchMethod.Statements
                 .Add(
                     new CodeMethodInvokeExpression(
                         new CodeMethodReferenceExpression(
@@ -2348,8 +2298,7 @@ namespace System.Activities.XamlIntegration
                 pushMethod.Statements.Add(setValue);
             }
 
-            pushMethod
-                .Statements
+            pushMethod.Statements
                 .Add(
                     new CodeMethodInvokeExpression(
                         new CodeMethodReferenceExpression(
@@ -2458,8 +2407,7 @@ namespace System.Activities.XamlIntegration
 
             dataContextActivitiesHelper.ReturnType = new CodeTypeReference(typeof(object));
 
-            dataContextActivitiesHelper
-                .Parameters
+            dataContextActivitiesHelper.Parameters
                 .Add(
                     new CodeParameterDeclarationExpression(
                         new CodeTypeReference(typeof(Activity)),
@@ -2467,8 +2415,7 @@ namespace System.Activities.XamlIntegration
                     )
                 );
 
-            dataContextActivitiesHelper
-                .Parameters
+            dataContextActivitiesHelper.Parameters
                 .Add(
                     new CodeParameterDeclarationExpression(
                         new CodeTypeReference(typeof(bool)),
@@ -2476,8 +2423,7 @@ namespace System.Activities.XamlIntegration
                     )
                 );
 
-            dataContextActivitiesHelper
-                .Statements
+            dataContextActivitiesHelper.Statements
                 .Add(
                     new CodeMethodReturnStatement(
                         new CodeMethodInvokeExpression(
@@ -2498,8 +2444,7 @@ namespace System.Activities.XamlIntegration
         {
             CodeMemberMethod setLocationsOffsetMethod = new CodeMemberMethod();
             setLocationsOffsetMethod.Name = "SetLocationsOffset";
-            setLocationsOffsetMethod
-                .Parameters
+            setLocationsOffsetMethod.Parameters
                 .Add(
                     new CodeParameterDeclarationExpression(
                         new CodeTypeReference(typeof(int)),
@@ -2544,38 +2489,32 @@ namespace System.Activities.XamlIntegration
                 cacheHelper.Attributes |= MemberAttributes.New;
             }
 
-            cacheHelper
-                .Parameters
+            cacheHelper.Parameters
                 .Add(
                     new CodeParameterDeclarationExpression(
                         typeof(object),
                         dataContextActivitiesFieldName
                     )
                 );
-            cacheHelper
-                .Parameters
+            cacheHelper.Parameters
                 .Add(
                     new CodeParameterDeclarationExpression(
                         typeof(ActivityContext),
                         "activityContext"
                     )
                 );
-            cacheHelper
-                .Parameters
+            cacheHelper.Parameters
                 .Add(new CodeParameterDeclarationExpression(typeof(Activity), "compiledRoot"));
-            cacheHelper
-                .Parameters
+            cacheHelper.Parameters
                 .Add(new CodeParameterDeclarationExpression(typeof(bool), forImplementationName));
-            cacheHelper
-                .Parameters
+            cacheHelper.Parameters
                 .Add(
                     new CodeParameterDeclarationExpression(typeof(int), "compiledDataContextCount")
                 );
 
             cacheHelper.ReturnType = new CodeTypeReference(typeof(CompiledDataContext[]));
 
-            cacheHelper
-                .Statements
+            cacheHelper.Statements
                 .Add(
                     new CodeMethodReturnStatement(
                         new CodeMethodInvokeExpression(
@@ -2617,8 +2556,7 @@ namespace System.Activities.XamlIntegration
                 new CodeParameterDeclarationExpression(typeof(ActivityContext), "activityContext");
             constructor.Parameters.Add(constructorActivityContextParam);
 
-            constructor
-                .BaseConstructorArgs
+            constructor.BaseConstructorArgs
                 .Add(new CodeArgumentReferenceExpression("activityContext"));
 
             CodeParameterDeclarationExpression computelocationsOffsetParam =
@@ -2680,8 +2618,7 @@ namespace System.Activities.XamlIntegration
                 );
             constructor.Parameters.Add(constructorLocationsParam);
 
-            constructor
-                .BaseConstructorArgs
+            constructor.BaseConstructorArgs
                 .Add(new CodeArgumentReferenceExpression("locationReferences"));
 
             return constructor;
@@ -2727,8 +2664,7 @@ namespace System.Activities.XamlIntegration
                 {
                     seenXamlIntegration = true;
                 }
-                codeNamespace
-                    .Imports
+                codeNamespace.Imports
                     .Add(
                         new CodeNamespaceImport(nsReference)
                         {
@@ -2739,8 +2675,7 @@ namespace System.Activities.XamlIntegration
 
             if (!seenXamlIntegration)
             {
-                codeNamespace
-                    .Imports
+                codeNamespace.Imports
                     .Add(
                         new CodeNamespaceImport(xamlIntegrationNamespace)
                         {
@@ -2918,8 +2853,7 @@ namespace System.Activities.XamlIntegration
 
             validateMethod.ReturnType = new CodeTypeReference(typeof(bool));
 
-            validateMethod
-                .Parameters
+            validateMethod.Parameters
                 .Add(
                     new CodeParameterDeclarationExpression(
                         new CodeTypeReference(typeof(IList<LocationReference>)),
@@ -2927,8 +2861,7 @@ namespace System.Activities.XamlIntegration
                     )
                 );
 
-            validateMethod
-                .Parameters
+            validateMethod.Parameters
                 .Add(
                     new CodeParameterDeclarationExpression(
                         new CodeTypeReference(typeof(bool)),
@@ -2936,8 +2869,7 @@ namespace System.Activities.XamlIntegration
                     )
                 );
 
-            validateMethod
-                .Parameters
+            validateMethod.Parameters
                 .Add(
                     new CodeParameterDeclarationExpression(
                         new CodeTypeReference(typeof(int)),
@@ -3036,8 +2968,7 @@ namespace System.Activities.XamlIntegration
             }
             else
             {
-                validateMethod
-                    .Statements
+                validateMethod.Statements
                     .Add(new CodeMethodReturnStatement(new CodePrimitiveExpression(true)));
             }
 
@@ -3145,8 +3076,7 @@ namespace System.Activities.XamlIntegration
 
             if (compilerResults.Errors == null || !compilerResults.Errors.HasErrors)
             {
-                results.ResultType = compilerResults
-                    .CompiledAssembly
+                results.ResultType = compilerResults.CompiledAssembly
                     .GetType(this.activityFullName);
             }
 

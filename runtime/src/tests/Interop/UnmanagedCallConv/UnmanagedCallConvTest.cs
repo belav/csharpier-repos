@@ -78,8 +78,7 @@ public unsafe class Program
         {
             Console.WriteLine($" -- stdcall: UnmanagedCallConv(cdecl)");
             Assert.Throws<EntryPointNotFoundException>(() =>
-                PInvokesCS
-                    .DefaultDllImport
+                PInvokesCS.DefaultDllImport
                     .Stdcall
                     .NotBlittable_Double_CdeclUnmanagedCallConv(a, null)
             );
@@ -149,8 +148,7 @@ public unsafe class Program
         {
             Console.WriteLine($" -- stdcall: UnmanagedCallConv(cdecl)");
             Assert.Throws<EntryPointNotFoundException>(() =>
-                PInvokesCS
-                    .WinapiDllImport
+                PInvokesCS.WinapiDllImport
                     .Stdcall
                     .NotBlittable_Double_CdeclUnmanagedCallConv(a, null)
             );
@@ -220,8 +218,7 @@ public unsafe class Program
         {
             Console.WriteLine($" -- stdcall: UnmanagedCallConv(cdecl)");
             Assert.Throws<EntryPointNotFoundException>(() =>
-                PInvokesIL
-                    .UnsetPInvokeImpl
+                PInvokesIL.UnsetPInvokeImpl
                     .Stdcall
                     .NotBlittable_Double_CdeclUnmanagedCallConv(a, null)
             );
@@ -237,8 +234,7 @@ public unsafe class Program
         {
             Console.WriteLine($" -- default: SuppressGCTransition, UnmanagedCallConv()");
             int b;
-            int ret = PInvokesCS
-                .SuppressGCTransition
+            int ret = PInvokesCS.SuppressGCTransition
                 .Default
                 .Blittable_Double_DefaultUnmanagedCallConv_SuppressGCAttr(a, &b);
             Assert.Equal(expected, b);
@@ -247,8 +243,7 @@ public unsafe class Program
         {
             Console.WriteLine($" -- default: UnmanagedCallConv(suppressgctransition)");
             int b;
-            int ret = PInvokesCS
-                .SuppressGCTransition
+            int ret = PInvokesCS.SuppressGCTransition
                 .Default
                 .Blittable_Double_DefaultUnmanagedCallConv_SuppressGC(a, &b);
             Assert.Equal(expected, b);
@@ -257,8 +252,7 @@ public unsafe class Program
         {
             Console.WriteLine($" -- cdecl: SuppressGCTransition, UnmanagedCallConv(cdecl)");
             int b;
-            int ret = PInvokesCS
-                .SuppressGCTransition
+            int ret = PInvokesCS.SuppressGCTransition
                 .Cdecl
                 .Blittable_Double_CdeclUnmanagedCallConv_SuppressGCAttr(a, &b);
             Assert.Equal(expected, b);
@@ -267,8 +261,7 @@ public unsafe class Program
         {
             Console.WriteLine($" -- cdecl: UnmanagedCallConv(cdecl, suppressgctransition)");
             int b;
-            int ret = PInvokesCS
-                .SuppressGCTransition
+            int ret = PInvokesCS.SuppressGCTransition
                 .Cdecl
                 .Blittable_Double_CdeclUnmanagedCallConv_SuppressGC(a, &b);
             Assert.Equal(expected, b);
@@ -277,8 +270,7 @@ public unsafe class Program
         {
             Console.WriteLine($" -- stdcall: SuppressGCTransition, UnmanagedCallConv(stdcall)");
             int b;
-            int ret = PInvokesCS
-                .SuppressGCTransition
+            int ret = PInvokesCS.SuppressGCTransition
                 .Stdcall
                 .Blittable_Double_StdcallUnmanagedCallConv_SuppressGCAttr(a, &b);
             Assert.Equal(expected, b);
@@ -287,8 +279,7 @@ public unsafe class Program
         {
             Console.WriteLine($" -- stdcall: UnmanagedCallConv(stdcall, suppressgctransition)");
             int b;
-            int ret = PInvokesCS
-                .SuppressGCTransition
+            int ret = PInvokesCS.SuppressGCTransition
                 .Stdcall
                 .Blittable_Double_StdcallUnmanagedCallConv_SuppressGC(a, &b);
             Assert.Equal(expected, b);
@@ -305,8 +296,7 @@ public unsafe class Program
         {
             Console.WriteLine($" -- default: SuppressGCTransition, UnmanagedCallConv()");
             int b;
-            bool ret = PInvokesCS
-                .SuppressGCTransition
+            bool ret = PInvokesCS.SuppressGCTransition
                 .Default
                 .NotBlittable_Double_DefaultUnmanagedCallConv_SuppressGCAttr(a, &b);
             Assert.Equal(expected, b);
@@ -315,8 +305,7 @@ public unsafe class Program
         {
             Console.WriteLine($" -- default: UnmanagedCallConv(suppressgctransition)");
             int b;
-            bool ret = PInvokesCS
-                .SuppressGCTransition
+            bool ret = PInvokesCS.SuppressGCTransition
                 .Default
                 .NotBlittable_Double_DefaultUnmanagedCallConv_SuppressGC(a, &b);
             Assert.Equal(expected, b);
@@ -325,8 +314,7 @@ public unsafe class Program
         {
             Console.WriteLine($" -- cdecl: SuppressGCTransition, UnmanagedCallConv(cdecl)");
             int b;
-            bool ret = PInvokesCS
-                .SuppressGCTransition
+            bool ret = PInvokesCS.SuppressGCTransition
                 .Cdecl
                 .NotBlittable_Double_CdeclUnmanagedCallConv_SuppressGCAttr(a, &b);
             Assert.Equal(expected, b);
@@ -335,8 +323,7 @@ public unsafe class Program
         {
             Console.WriteLine($" -- cdecl: UnmanagedCallConv(cdecl, suppressgctransition)");
             int b;
-            bool ret = PInvokesCS
-                .SuppressGCTransition
+            bool ret = PInvokesCS.SuppressGCTransition
                 .Cdecl
                 .NotBlittable_Double_CdeclUnmanagedCallConv_SuppressGC(a, &b);
             Assert.Equal(expected, b);
@@ -345,8 +332,7 @@ public unsafe class Program
         {
             Console.WriteLine($" -- stdcall: SuppressGCTransition, UnmanagedCallConv(stdcall)");
             int b;
-            bool ret = PInvokesCS
-                .SuppressGCTransition
+            bool ret = PInvokesCS.SuppressGCTransition
                 .Stdcall
                 .NotBlittable_Double_StdcallUnmanagedCallConv_SuppressGCAttr(a, &b);
             Assert.Equal(expected, b);
@@ -355,8 +341,7 @@ public unsafe class Program
         {
             Console.WriteLine($" -- stdcall: UnmanagedCallConv(stdcall, suppressgctransition)");
             int b;
-            bool ret = PInvokesCS
-                .SuppressGCTransition
+            bool ret = PInvokesCS.SuppressGCTransition
                 .Stdcall
                 .NotBlittable_Double_StdcallUnmanagedCallConv_SuppressGC(a, &b);
             Assert.Equal(expected, b);
@@ -382,8 +367,7 @@ public unsafe class Program
             // Should not suppress GC transition
             Console.WriteLine($" -- cdecl: UnmanagedCallConv(suppressgctransition)");
             int b;
-            int ret = PInvokesCS
-                .MatchingDllImport
+            int ret = PInvokesCS.MatchingDllImport
                 .Cdecl
                 .Blittable_Double_SuppressGCUnmanagedCallConv(a, &b);
             Assert.Equal(expected, b);
@@ -400,8 +384,7 @@ public unsafe class Program
             // Should not suppress GC transition
             Console.WriteLine($" -- stdcall: UnmanagedCallConv(suppressgctransition)");
             int b;
-            int ret = PInvokesCS
-                .MatchingDllImport
+            int ret = PInvokesCS.MatchingDllImport
                 .Stdcall
                 .Blittable_Double_SuppressGCUnmanagedCallConv(a, &b);
             Assert.Equal(expected, b);
@@ -427,8 +410,7 @@ public unsafe class Program
             // Should not suppress GC transition
             Console.WriteLine($" -- cdecl: UnmanagedCallConv(suppressgctransition)");
             int b;
-            bool ret = PInvokesCS
-                .MatchingDllImport
+            bool ret = PInvokesCS.MatchingDllImport
                 .Cdecl
                 .NotBlittable_Double_SuppressGCUnmanagedCallConv(a, &b);
             Assert.Equal(expected, b);
@@ -445,8 +427,7 @@ public unsafe class Program
             // Should not suppress GC transition
             Console.WriteLine($" -- stdcall: UnmanagedCallConv(suppressgctransition)");
             int b;
-            bool ret = PInvokesCS
-                .MatchingDllImport
+            bool ret = PInvokesCS.MatchingDllImport
                 .Stdcall
                 .NotBlittable_Double_SuppressGCUnmanagedCallConv(a, &b);
             Assert.Equal(expected, b);

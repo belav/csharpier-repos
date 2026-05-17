@@ -257,8 +257,7 @@ namespace System.ServiceModel.Channels
                 )
             )
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(SR.ListenerFactoryNotRegistered, channelListener.Uri)

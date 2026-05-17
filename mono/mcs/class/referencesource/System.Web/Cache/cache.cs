@@ -444,8 +444,7 @@ namespace System.Web.Caching
                         && (cacheDependency == null || !cacheDependency.HasChanged)
                     )
                     {
-                        HttpRuntime
-                            .Cache
+                        HttpRuntime.Cache
                             .Insert(
                                 entry.Key,
                                 expensiveObject,
@@ -602,8 +601,7 @@ namespace System.Web.Caching
                 dependencies = deps;
             }
             // Insert sentinel entry for the updatable cache entry
-            HttpRuntime
-                .Cache
+            HttpRuntime.Cache
                 .InternalCache
                 .Insert(
                     CacheInternal.PrefixValidationSentinel + key,

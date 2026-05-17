@@ -668,8 +668,7 @@ public static class CosmosEntityTypeBuilderExtensions
         bool fromDataAnnotation = false
     )
     {
-        var existingAnnotation = entityTypeBuilder
-            .Metadata
+        var existingAnnotation = entityTypeBuilder.Metadata
             .FindAnnotation(CosmosAnnotationNames.Throughput);
         if (existingAnnotation == null)
         {

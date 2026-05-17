@@ -1950,10 +1950,11 @@ namespace System.Net.Cache
                                 Logging.RequestCache,
                                 SR.GetString(SR.net_log_cache_sxx_resp_can_be_replaced)
                             );
-                        ctx.CacheHeaders.Add(
-                            HttpKnownHeaderNames.Warning,
-                            HttpRequestCacheValidator.Warning_111
-                        );
+                        ctx.CacheHeaders
+                            .Add(
+                                HttpKnownHeaderNames.Warning,
+                                HttpRequestCacheValidator.Warning_111
+                            );
                         return CacheValidationStatus.ReturnCachedResponse;
                     }
                 }
@@ -2586,8 +2587,8 @@ namespace System.Net.Cache
                             : ctx.CacheEntityLength.ToString(NumberFormatInfo.InvariantInfo)
                     );
                 ctx.CacheHeaders[HttpKnownHeaderNames.ContentRange] = ranges;
-                ctx.CacheHeaders[HttpKnownHeaderNames.ContentLength] =
-                    ctx.CacheStreamLength.ToString(NumberFormatInfo.InvariantInfo);
+                ctx.CacheHeaders[HttpKnownHeaderNames.ContentLength] = ctx.CacheStreamLength
+                    .ToString(NumberFormatInfo.InvariantInfo);
                 ctx.CacheEntry.IsPartialEntry = true;
             }
 
@@ -2609,8 +2610,8 @@ namespace System.Net.Cache
                 }
                 else
                 {
-                    ctx.CacheHeaders[HttpKnownHeaderNames.ContentLength] =
-                        ctx.CacheEntityLength.ToString(NumberFormatInfo.InvariantInfo);
+                    ctx.CacheHeaders[HttpKnownHeaderNames.ContentLength] = ctx.CacheEntityLength
+                        .ToString(NumberFormatInfo.InvariantInfo);
                 }
                 ctx.CacheEntry.IsPartialEntry = false;
             }

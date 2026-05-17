@@ -301,13 +301,11 @@ namespace System.Web.Compilation
 
                     // $controlType _ctrl = new $controlType ($parameters);
                     //
-                    method
-                        .Statements
+                    method.Statements
                         .Add(CreateControlVariable(type, builder, method, ctrlTypeRef));
                 }
                 else
-                    method
-                        .Parameters
+                    method.Parameters
                         .Add(new CodeParameterDeclarationExpression(typeString, "__ctrl"));
             }
             else
@@ -321,8 +319,7 @@ namespace System.Web.Compilation
 
                 // $controlType _ctrl = new $controlType ($parameters);
                 //
-                method
-                    .Statements
+                method.Statements
                     .Add(
                         AddLinePragma(
                             CreateControlVariable(type, builder, method, ctrlTypeRef),
@@ -346,8 +343,7 @@ namespace System.Web.Compilation
                     mref.TargetObject = builderID;
                     mref.MethodName = "InitializeAsUserControl";
                     CodeMethodInvokeExpression initAsControl = new CodeMethodInvokeExpression(mref);
-                    initAsControl
-                        .Parameters
+                    initAsControl.Parameters
                         .Add(new CodePropertyReferenceExpression(thisRef, "Page"));
                     method.Statements.Add(initAsControl);
                 }
@@ -405,8 +401,7 @@ namespace System.Web.Compilation
                     if (typeof(Page).IsAssignableFrom(parser.BaseType))
                         applyStyleSheetSkin.Parameters.Add(thisRef);
                     else
-                        applyStyleSheetSkin
-                            .Parameters
+                        applyStyleSheetSkin.Parameters
                             .Add(new CodePropertyReferenceExpression(thisRef, "Page"));
                     method.Statements.Add(applyStyleSheetSkin);
                 }
@@ -1141,12 +1136,13 @@ namespace System.Web.Compilation
 
             ret.Method = new CodeMethodReferenceExpression(typeRef, methodName);
             ret.Parameters.Add(expr);
-            ret.Parameters.Add(
-                new CodePropertyReferenceExpression(
-                    new CodeTypeReferenceExpression(typeof(System.Globalization.CultureInfo)),
-                    "CurrentCulture"
-                )
-            );
+            ret.Parameters
+                .Add(
+                    new CodePropertyReferenceExpression(
+                        new CodeTypeReferenceExpression(typeof(System.Globalization.CultureInfo)),
+                        "CurrentCulture"
+                    )
+                );
 
             return ret;
         }
@@ -1687,8 +1683,7 @@ namespace System.Web.Compilation
 
             CodeObjectCreateExpression newTable = new CodeObjectCreateExpression();
             newTable.CreateType = new CodeTypeReference(typeof(OrderedDictionary));
-            method
-                .Statements
+            method.Statements
                 .Add(
                     new CodeVariableDeclarationStatement(
                         typeof(OrderedDictionary),
@@ -2180,8 +2175,7 @@ namespace System.Web.Compilation
             CodeFieldReferenceExpression stringResource = GetMainClassFieldReferenceExpression(
                 "__stringResource"
             );
-            method
-                .Statements
+            method.Statements
                 .Add(
                     new CodeMethodInvokeExpression(
                         thisRef,
@@ -2299,32 +2293,35 @@ namespace System.Web.Compilation
             var fldRef = new CodeFieldReferenceExpression(thisRef, backingField);
             ret.Expression = fldRef;
             prop.GetStatements.Add(ret);
-            prop.SetStatements.Add(
-                new CodeAssignStatement(fldRef, new CodePropertySetValueReferenceExpression())
-            );
+            prop.SetStatements
+                .Add(
+                    new CodeAssignStatement(fldRef, new CodePropertySetValueReferenceExpression())
+                );
 
-            prop.CustomAttributes.Add(
-                new CodeAttributeDeclaration(
-                    "TemplateContainer",
-                    new CodeAttributeArgument[]
-                    {
-                        new CodeAttributeArgument(
-                            new CodeTypeOfExpression(new CodeTypeReference(typeof(MasterPage)))
-                        ),
-                    }
-                )
-            );
+            prop.CustomAttributes
+                .Add(
+                    new CodeAttributeDeclaration(
+                        "TemplateContainer",
+                        new CodeAttributeArgument[]
+                        {
+                            new CodeAttributeArgument(
+                                new CodeTypeOfExpression(new CodeTypeReference(typeof(MasterPage)))
+                            ),
+                        }
+                    )
+                );
 
             var enumValueRef = new CodeFieldReferenceExpression(
                 new CodeTypeReferenceExpression(typeof(TemplateInstance)),
                 "Single"
             );
-            prop.CustomAttributes.Add(
-                new CodeAttributeDeclaration(
-                    "TemplateInstanceAttribute",
-                    new CodeAttributeArgument[] { new CodeAttributeArgument(enumValueRef) }
-                )
-            );
+            prop.CustomAttributes
+                .Add(
+                    new CodeAttributeDeclaration(
+                        "TemplateInstanceAttribute",
+                        new CodeAttributeArgument[] { new CodeAttributeArgument(enumValueRef) }
+                    )
+                );
 
             mainClass.Members.Add(prop);
         }
@@ -2342,9 +2339,10 @@ namespace System.Web.Compilation
             fldRef = new CodeFieldReferenceExpression(mainClassExpr, "__autoHandlers");
             ret.Expression = fldRef;
             prop.GetStatements.Add(ret);
-            prop.SetStatements.Add(
-                new CodeAssignStatement(fldRef, new CodePropertySetValueReferenceExpression())
-            );
+            prop.SetStatements
+                .Add(
+                    new CodeAssignStatement(fldRef, new CodePropertySetValueReferenceExpression())
+                );
 
             CodeAttributeDeclaration attr = new CodeAttributeDeclaration("System.Obsolete");
             prop.CustomAttributes.Add(attr);
@@ -2363,9 +2361,8 @@ namespace System.Web.Compilation
             prop.Type = new CodeTypeReference(typeof(bool));
             prop.Name = "SupportAutoEvents";
             prop.Attributes = MemberAttributes.Family | MemberAttributes.Override;
-            prop.GetStatements.Add(
-                new CodeMethodReturnStatement(new CodePrimitiveExpression(false))
-            );
+            prop.GetStatements
+                .Add(new CodeMethodReturnStatement(new CodePrimitiveExpression(false)));
             mainClass.Members.Add(prop);
         }
 

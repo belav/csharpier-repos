@@ -47,8 +47,7 @@ public class HotReloadServiceTests
         Assert.Equal("/server", endpoint.RoutePattern.RawText);
 
         // Act - 2
-        endpointDataSource
-            .Builder
+        endpointDataSource.Builder
             .Pages
             .AddFromLibraryInfo(
                 "TestAssembly2",

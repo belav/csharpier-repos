@@ -2550,8 +2550,7 @@ namespace System.Data
                     fields = foreign.RelatedColumnsReference;
 
                     UniqueConstraint _constraint = (UniqueConstraint)
-                        foreign
-                            .RelatedTable
+                        foreign.RelatedTable
                             .Constraints
                             .FindConstraint(new UniqueConstraint("TEMP", fields));
 

@@ -171,8 +171,7 @@ namespace System.Net.Http.Formatting.Parsers
 
                         if (++bytesConsumed == effectiveMax)
                         {
-                            string token = Encoding
-                                .UTF8
+                            string token = Encoding.UTF8
                                 .GetString(buffer, segmentStart, bytesConsumed - segmentStart);
                             currentToken.Append(token);
                             goto quit;
@@ -181,8 +180,7 @@ namespace System.Net.Http.Formatting.Parsers
 
                     if (bytesConsumed > segmentStart)
                     {
-                        string token = Encoding
-                            .UTF8
+                        string token = Encoding.UTF8
                             .GetString(buffer, segmentStart, bytesConsumed - segmentStart);
                         currentToken.Append(token);
                     }
@@ -223,8 +221,7 @@ namespace System.Net.Http.Formatting.Parsers
 
                         if (++bytesConsumed == effectiveMax)
                         {
-                            string major = Encoding
-                                .UTF8
+                            string major = Encoding.UTF8
                                 .GetString(buffer, segmentStart, bytesConsumed - segmentStart);
                             currentToken.Append(major);
                             goto quit;
@@ -233,8 +230,7 @@ namespace System.Net.Http.Formatting.Parsers
 
                     if (bytesConsumed > segmentStart)
                     {
-                        string major = Encoding
-                            .UTF8
+                        string major = Encoding.UTF8
                             .GetString(buffer, segmentStart, bytesConsumed - segmentStart);
                         currentToken.Append(major);
                     }
@@ -261,8 +257,7 @@ namespace System.Net.Http.Formatting.Parsers
 
                         if (++bytesConsumed == effectiveMax)
                         {
-                            string minor = Encoding
-                                .UTF8
+                            string minor = Encoding.UTF8
                                 .GetString(buffer, segmentStart, bytesConsumed - segmentStart);
                             currentToken.Append(minor);
                             goto quit;
@@ -271,8 +266,7 @@ namespace System.Net.Http.Formatting.Parsers
 
                     if (bytesConsumed > segmentStart)
                     {
-                        string minor = Encoding
-                            .UTF8
+                        string minor = Encoding.UTF8
                             .GetString(buffer, segmentStart, bytesConsumed - segmentStart);
                         currentToken.Append(minor);
                     }
@@ -302,8 +296,7 @@ namespace System.Net.Http.Formatting.Parsers
 
                         if (++bytesConsumed == effectiveMax)
                         {
-                            string method = Encoding
-                                .UTF8
+                            string method = Encoding.UTF8
                                 .GetString(buffer, segmentStart, bytesConsumed - segmentStart);
                             currentToken.Append(method);
                             goto quit;
@@ -312,8 +305,7 @@ namespace System.Net.Http.Formatting.Parsers
 
                     if (bytesConsumed > segmentStart)
                     {
-                        string method = Encoding
-                            .UTF8
+                        string method = Encoding.UTF8
                             .GetString(buffer, segmentStart, bytesConsumed - segmentStart);
                         currentToken.Append(method);
                     }
@@ -359,8 +351,7 @@ namespace System.Net.Http.Formatting.Parsers
 
                         if (++bytesConsumed == effectiveMax)
                         {
-                            string addr = Encoding
-                                .UTF8
+                            string addr = Encoding.UTF8
                                 .GetString(buffer, segmentStart, bytesConsumed - segmentStart);
                             currentToken.Append(addr);
                             goto quit;
@@ -369,8 +360,7 @@ namespace System.Net.Http.Formatting.Parsers
 
                     if (bytesConsumed > segmentStart)
                     {
-                        string addr = Encoding
-                            .UTF8
+                        string addr = Encoding.UTF8
                             .GetString(buffer, segmentStart, bytesConsumed - segmentStart);
                         currentToken.Append(addr);
                     }

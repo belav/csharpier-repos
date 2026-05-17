@@ -215,8 +215,7 @@ class C
         var v = {text};
     }}
 }}",
-                    parseOptions: CSharpParseOptions
-                        .Default
+                    parseOptions: CSharpParseOptions.Default
                         .WithLanguageVersion(LanguageVersion.CSharp7_3)
                 )
                 .VerifyDiagnostics(
@@ -254,8 +253,7 @@ class C
         var v = {text};
     }}
 }}",
-                    parseOptions: CSharpParseOptions
-                        .Default
+                    parseOptions: CSharpParseOptions.Default
                         .WithLanguageVersion(LanguageVersion.CSharp8)
                 )
                 .VerifyDiagnostics();
@@ -286,8 +284,7 @@ class C
         var v = {text};
     }}
 }}",
-                    parseOptions: CSharpParseOptions
-                        .Default
+                    parseOptions: CSharpParseOptions.Default
                         .WithLanguageVersion(LanguageVersion.CSharp7_3)
                 )
                 .VerifyDiagnostics(
@@ -344,8 +341,7 @@ class C
         var v = {text};
     }}
 }}",
-                    parseOptions: CSharpParseOptions
-                        .Default
+                    parseOptions: CSharpParseOptions.Default
                         .WithLanguageVersion(LanguageVersion.CSharp8)
                 )
                 .VerifyDiagnostics();

@@ -172,8 +172,7 @@ namespace Microsoft.CodeAnalysis.ColorSchemes
 
         private bool IsSupportedTheme(Guid themeId)
         {
-            return _colorSchemes
-                .Values
+            return _colorSchemes.Values
                 .Any(scheme =>
                     scheme.Themes.Any(static (theme, themeId) => theme.Guid == themeId, themeId)
                 );

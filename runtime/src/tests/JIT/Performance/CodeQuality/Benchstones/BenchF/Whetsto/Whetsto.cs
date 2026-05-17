@@ -156,8 +156,7 @@ namespace Benchstone.BenchF
             {
                 x =
                     s_t
-                    * System
-                        .Math
+                    * System.Math
                         .Atan(
                             s_t2
                                 * System.Math.Sin(x)
@@ -166,8 +165,7 @@ namespace Benchstone.BenchF
                         );
                 y =
                     s_t
-                    * System
-                        .Math
+                    * System.Math
                         .Atan(
                             s_t2
                                 * System.Math.Sin(y)

@@ -57,8 +57,7 @@ namespace System.ServiceModel
         {
             if (!BasicHttpsSecurityModeHelper.IsDefined(mode))
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentOutOfRangeException("mode"));
             }
 

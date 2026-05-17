@@ -4317,9 +4317,8 @@ public static class RelationalLoggerExtensions
         var p = (UpdateEntryEventData)payload;
         return d.GenerateMessage(
             p.EntityEntry.EntityType.DisplayName(),
-            p.EntityEntry.BuildCurrentValuesString(
-                p.EntityEntry.EntityType.FindPrimaryKey()!.Properties
-            )
+            p.EntityEntry
+                .BuildCurrentValuesString(p.EntityEntry.EntityType.FindPrimaryKey()!.Properties)
         );
     }
 

@@ -28,8 +28,7 @@ namespace System.ServiceModel.Discovery
         {
             if (instanceId < 0 || instanceId > UInt32.MaxValue)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .ArgumentOutOfRange(
                         "instanceId",
                         instanceId,

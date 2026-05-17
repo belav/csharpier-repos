@@ -118,8 +118,7 @@ public class ComponentParameterAnalyzer : DiagnosticAnalyzer
                                 captureUnmatchedValuesParameters.Add(property);
 
                                 // Check the type, we need to be able to assign a Dictionary<string, object>
-                                var conversion = context
-                                    .Compilation
+                                var conversion = context.Compilation
                                     .ClassifyConversion(
                                         symbols.ParameterCaptureUnmatchedValuesRuntimeType,
                                         property.Type
@@ -133,13 +132,11 @@ public class ComponentParameterAnalyzer : DiagnosticAnalyzer
                                             property.ToDisplayString(
                                                 SymbolDisplayFormat.CSharpErrorMessageFormat
                                             ),
-                                            property
-                                                .Type
+                                            property.Type
                                                 .ToDisplayString(
                                                     SymbolDisplayFormat.CSharpErrorMessageFormat
                                                 ),
-                                            symbols
-                                                .ParameterCaptureUnmatchedValuesRuntimeType
+                                            symbols.ParameterCaptureUnmatchedValuesRuntimeType
                                                 .ToDisplayString(
                                                     SymbolDisplayFormat.CSharpErrorMessageFormat
                                                 )

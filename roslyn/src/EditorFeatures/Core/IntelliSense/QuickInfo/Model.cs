@@ -32,10 +32,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.QuickInfo
             ITextSnapshot textSnapshot
         )
         {
-            var trackingSpan = this.TextVersion.CreateTrackingSpan(
-                originalSpan.ToSpan(),
-                SpanTrackingMode.EdgeInclusive
-            );
+            var trackingSpan = this.TextVersion
+                .CreateTrackingSpan(originalSpan.ToSpan(), SpanTrackingMode.EdgeInclusive);
             return trackingSpan.GetSpan(textSnapshot);
         }
     }

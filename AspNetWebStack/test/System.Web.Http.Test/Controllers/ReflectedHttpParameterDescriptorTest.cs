@@ -61,8 +61,7 @@ namespace System.Web.Http
         public void ParameterInfo_Property()
         {
             ParameterInfo referenceParameter = new Mock<ParameterInfo>().Object;
-            Assert
-                .Reflection
+            Assert.Reflection
                 .Property(
                     new ReflectedHttpParameterDescriptor(),
                     d => d.ParameterInfo,

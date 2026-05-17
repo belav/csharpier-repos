@@ -23,8 +23,7 @@ namespace System.Collections.Generic
         public SynchronizedReadOnlyCollection(object syncRoot)
         {
             if (syncRoot == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("syncRoot"));
 
             this.items = new List<T>();
@@ -34,12 +33,10 @@ namespace System.Collections.Generic
         public SynchronizedReadOnlyCollection(object syncRoot, IEnumerable<T> list)
         {
             if (syncRoot == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("syncRoot"));
             if (list == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("list"));
 
             this.items = new List<T>(list);
@@ -49,12 +46,10 @@ namespace System.Collections.Generic
         public SynchronizedReadOnlyCollection(object syncRoot, params T[] list)
         {
             if (syncRoot == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("syncRoot"));
             if (list == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("list"));
 
             this.items = new List<T>(list.Length);
@@ -67,12 +62,10 @@ namespace System.Collections.Generic
         internal SynchronizedReadOnlyCollection(object syncRoot, List<T> list, bool makeCopy)
         {
             if (syncRoot == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("syncRoot"));
             if (list == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(new ArgumentNullException("list"));
 
             if (makeCopy)
@@ -144,8 +137,7 @@ namespace System.Collections.Generic
 
         void ThrowReadOnly()
         {
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(
                     new NotSupportedException(SR.GetString(SR.SFxCollectionReadOnly))
                 );
@@ -202,8 +194,7 @@ namespace System.Collections.Generic
         {
             ICollection asCollection = this.items as ICollection;
             if (asCollection == null)
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new NotSupportedException(SR.GetString(SR.SFxCopyToRequiresICollection))
                     );
@@ -291,8 +282,7 @@ namespace System.Collections.Generic
                 type.ToString(),
                 typeof(T).ToString()
             );
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(new ArgumentException(message));
         }
 

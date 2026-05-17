@@ -5241,8 +5241,7 @@ partial class A
                         encoding: Encoding.UTF8
                     ),
                 },
-                options: TestOptions
-                    .ReleaseExe
+                options: TestOptions.ReleaseExe
                     .WithSourceReferenceResolver(SourceFileResolver.Default)
             );
 
@@ -5328,8 +5327,7 @@ partial class A { static void Main5() { Log(); } }
                     ),
                 },
                 new[] { SystemRef },
-                TestOptions
-                    .ReleaseExe
+                TestOptions.ReleaseExe
                     .WithSourceReferenceResolver(
                         new SourceFileResolver(
                             ImmutableArray<string>.Empty,

@@ -66,19 +66,20 @@ internal class LanguageServerWorkspace : Workspace, ILspWorkspace
         // https://github.com/dotnet/roslyn/issues/67510 tracks cleaning up ProjectSystemProjectFactory so that it
         // shares the same sync/lock/application code with the core workspace code.  Once that happens, we won't need
         // to do special coordination here.
-        return this.ProjectSystemProjectFactory.ApplyChangeToWorkspaceAsync(
-            _ =>
-            {
-                this.OnDocumentTextChanged(
-                    documentId,
-                    sourceText,
-                    PreservationMode.PreserveIdentity,
-                    requireDocumentPresent: false
-                );
-                return ValueTask.CompletedTask;
-            },
-            cancellationToken
-        );
+        return this.ProjectSystemProjectFactory
+            .ApplyChangeToWorkspaceAsync(
+                _ =>
+                {
+                    this.OnDocumentTextChanged(
+                        documentId,
+                        sourceText,
+                        PreservationMode.PreserveIdentity,
+                        requireDocumentPresent: false
+                    );
+                    return ValueTask.CompletedTask;
+                },
+                cancellationToken
+            );
     }
 
     internal override ValueTask TryOnDocumentOpenedAsync(
@@ -88,19 +89,20 @@ internal class LanguageServerWorkspace : Workspace, ILspWorkspace
         CancellationToken cancellationToken
     )
     {
-        return this.ProjectSystemProjectFactory.ApplyChangeToWorkspaceAsync(
-            _ =>
-            {
-                this.OnDocumentOpened(
-                    documentId,
-                    textContainer,
-                    isCurrentContext,
-                    requireDocumentPresentAndClosed: false
-                );
-                return ValueTask.CompletedTask;
-            },
-            cancellationToken
-        );
+        return this.ProjectSystemProjectFactory
+            .ApplyChangeToWorkspaceAsync(
+                _ =>
+                {
+                    this.OnDocumentOpened(
+                        documentId,
+                        textContainer,
+                        isCurrentContext,
+                        requireDocumentPresentAndClosed: false
+                    );
+                    return ValueTask.CompletedTask;
+                },
+                cancellationToken
+            );
     }
 
     internal override ValueTask TryOnDocumentClosedAsync(
@@ -108,37 +110,39 @@ internal class LanguageServerWorkspace : Workspace, ILspWorkspace
         CancellationToken cancellationToken
     )
     {
-        return this.ProjectSystemProjectFactory.ApplyChangeToWorkspaceAsync(
-            async w =>
-            {
-                // TODO(cyrusn): This only works for normal documents currently.  We'll have to rethink how things work
-                // in the world if we ever support additionalfiles/editorconfig in our language server.
-                var document = w.CurrentSolution.GetDocument(documentId);
-
-                if (document is { FilePath: { } filePath })
+        return this.ProjectSystemProjectFactory
+            .ApplyChangeToWorkspaceAsync(
+                async w =>
                 {
-                    TextLoader loader;
-                    if (document.DocumentState.Attributes.DesignTimeOnly)
-                    {
-                        // Dynamic files don't exist on disk so if we were to use the FileTextLoader we'd effectively be emptying out the document.
-                        // We also assume they're not user editable, and hence can't have "unsaved" changes that are expected to go away on close.
-                        // Instead we just maintain their current state as per the LSP view of the world.
-                        var documentText = await document.GetTextAsync(cancellationToken);
-                        loader = new SourceTextLoader(documentText, filePath);
-                    }
-                    else
-                    {
-                        loader = this.ProjectSystemProjectFactory.CreateFileTextLoader(filePath);
-                    }
+                    // TODO(cyrusn): This only works for normal documents currently.  We'll have to rethink how things work
+                    // in the world if we ever support additionalfiles/editorconfig in our language server.
+                    var document = w.CurrentSolution.GetDocument(documentId);
 
-                    this.OnDocumentClosedEx(
-                        documentId,
-                        loader,
-                        requireDocumentPresentAndOpen: false
-                    );
-                }
-            },
-            cancellationToken
-        );
+                    if (document is { FilePath: { } filePath })
+                    {
+                        TextLoader loader;
+                        if (document.DocumentState.Attributes.DesignTimeOnly)
+                        {
+                            // Dynamic files don't exist on disk so if we were to use the FileTextLoader we'd effectively be emptying out the document.
+                            // We also assume they're not user editable, and hence can't have "unsaved" changes that are expected to go away on close.
+                            // Instead we just maintain their current state as per the LSP view of the world.
+                            var documentText = await document.GetTextAsync(cancellationToken);
+                            loader = new SourceTextLoader(documentText, filePath);
+                        }
+                        else
+                        {
+                            loader = this.ProjectSystemProjectFactory
+                                .CreateFileTextLoader(filePath);
+                        }
+
+                        this.OnDocumentClosedEx(
+                            documentId,
+                            loader,
+                            requireDocumentPresentAndOpen: false
+                        );
+                    }
+                },
+                cancellationToken
+            );
     }
 }

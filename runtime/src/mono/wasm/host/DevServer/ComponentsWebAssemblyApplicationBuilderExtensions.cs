@@ -38,8 +38,7 @@ internal static class ComponentsWebAssemblyApplicationBuilderExtensions
     {
         ArgumentNullException.ThrowIfNull(builder);
 
-        var webHostEnvironment = builder
-            .ApplicationServices
+        var webHostEnvironment = builder.ApplicationServices
             .GetRequiredService<IWebHostEnvironment>();
 
         var options = CreateStaticFilesOptions(webHostEnvironment.WebRootFileProvider);
@@ -55,8 +54,7 @@ internal static class ComponentsWebAssemblyApplicationBuilderExtensions
                 subBuilder.Use(
                     async (context, next) =>
                     {
-                        context
-                            .Response
+                        context.Response
                             .Headers
                             .Append("DotNet-Environment", webHostEnvironment.EnvironmentName);
 
@@ -65,8 +63,7 @@ internal static class ComponentsWebAssemblyApplicationBuilderExtensions
                         // Always add the header if the environment variable is set, regardless of the kind of environment.
                         if (s_dotnetModifiableAssemblies != null)
                         {
-                            context
-                                .Response
+                            context.Response
                                 .Headers
                                 .Append(
                                     "DOTNET-MODIFIABLE-ASSEMBLIES",
@@ -78,8 +75,7 @@ internal static class ComponentsWebAssemblyApplicationBuilderExtensions
                         // Translate the _ASPNETCORE_BROWSER_TOOLS environment configured by the browser tools agent in to a HTTP response header.
                         if (s_aspnetcoreBrowserTools != null)
                         {
-                            context
-                                .Response
+                            context.Response
                                 .Headers
                                 .Append("ASPNETCORE-BROWSER-TOOLS", s_aspnetcoreBrowserTools);
                         }

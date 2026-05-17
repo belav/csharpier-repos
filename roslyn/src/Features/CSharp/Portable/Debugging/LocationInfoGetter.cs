@@ -54,8 +54,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Debugging
                     or SyntaxKind.EventFieldDeclaration
             )
             {
-                var variableDeclarators = ((BaseFieldDeclarationSyntax)memberDeclaration)
-                    .Declaration
+                var variableDeclarators = (
+                    (BaseFieldDeclarationSyntax)memberDeclaration
+                ).Declaration
                     .Variables;
 
                 foreach (var declarator in variableDeclarators)

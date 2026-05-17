@@ -43,8 +43,7 @@ namespace System.Diagnostics
                                 StringComparison.OrdinalIgnoreCase
                             )
                         )
-                        && Interop
-                            .procfs
+                        && Interop.procfs
                             .TryReadStatusFile(pid, out Interop.procfs.ParsedStatus parsedStatus)
                     )
                     {

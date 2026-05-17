@@ -257,8 +257,7 @@ namespace MonoTests.Mono.Security.Cryptography
                 0xf0,
                 0xe4,
             };
-            byte[] input = Encoding
-                .Default
+            byte[] input = Encoding.Default
                 .GetBytes("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789");
 
             string testName = className + " 6";
@@ -294,8 +293,7 @@ namespace MonoTests.Mono.Security.Cryptography
                 0x05,
                 0x36,
             };
-            byte[] input = Encoding
-                .Default
+            byte[] input = Encoding.Default
                 .GetBytes(
                     "12345678901234567890123456789012345678901234567890123456789012345678901234567890"
                 );

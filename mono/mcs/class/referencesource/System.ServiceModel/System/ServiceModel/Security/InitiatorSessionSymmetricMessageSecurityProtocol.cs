@@ -38,8 +38,7 @@ namespace System.ServiceModel.Security
             if (factory.ActAsInitiator != true)
             {
                 Fx.Assert("This protocol can only be used at the initiator.");
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new NotSupportedException(
                             SR.GetString(
@@ -434,8 +433,7 @@ namespace System.ServiceModel.Security
             }
             if (!isSessionToken)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperWarning(
                         new MessageSecurityException(
                             SR.GetString(SR.NoSessionTokenPresentInMessage)

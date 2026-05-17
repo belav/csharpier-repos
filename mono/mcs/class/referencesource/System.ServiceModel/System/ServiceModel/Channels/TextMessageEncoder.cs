@@ -96,8 +96,7 @@ namespace System.ServiceModel.Channels
             }
             else
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(SR.EnvelopeVersionNotSupported, version.Envelope)
@@ -263,8 +262,7 @@ namespace System.ServiceModel.Channels
             }
             catch (FormatException e)
             {
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new ProtocolException(SR.GetString(SR.EncoderBadContentType), e)
                     );
@@ -273,8 +271,7 @@ namespace System.ServiceModel.Channels
             if (TryGetEncodingFromCharSet(charSet, out enc))
                 return enc;
 
-            throw DiagnosticUtility
-                .ExceptionUtility
+            throw DiagnosticUtility.ExceptionUtility
                 .ThrowHelperError(
                     new ProtocolException(SR.GetString(SR.EncoderUnrecognizedCharSet, charSet))
                 );
@@ -330,8 +327,7 @@ namespace System.ServiceModel.Channels
                 if (version == null)
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("version");
                 if (writeEncoding == null)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgumentNull("writeEncoding");
 
                 TextEncoderDefaults.ValidateEncoding(writeEncoding);
@@ -372,8 +368,7 @@ namespace System.ServiceModel.Channels
                 }
                 else
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(SR.EnvelopeVersionNotSupported, version.Envelope)
@@ -477,8 +472,7 @@ namespace System.ServiceModel.Channels
             )
             {
                 if (bufferManager == null)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new ArgumentNullException("bufferManager"));
 
                 if (TD.TextMessageDecodingStartIsEnabled())
@@ -523,8 +517,7 @@ namespace System.ServiceModel.Channels
             )
             {
                 if (stream == null)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new ArgumentNullException("stream"));
 
                 if (TD.TextMessageDecodingStartIsEnabled())
@@ -559,8 +552,7 @@ namespace System.ServiceModel.Channels
             )
             {
                 if (message == null)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new ArgumentNullException("message"));
                 if (bufferManager == null)
                     throw TraceUtility.ThrowHelperError(
@@ -637,8 +629,7 @@ namespace System.ServiceModel.Channels
             public override void WriteMessage(Message message, Stream stream)
             {
                 if (message == null)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new ArgumentNullException("message"));
                 if (stream == null)
                     throw TraceUtility.ThrowHelperError(
@@ -688,8 +679,7 @@ namespace System.ServiceModel.Channels
             )
             {
                 if (message == null)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new ArgumentNullException("message"));
                 if (stream == null)
                     throw TraceUtility.ThrowHelperError(

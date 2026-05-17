@@ -29,8 +29,7 @@ namespace System.Data.SqlTypes
 
         // For BID tracing output
         private static int _objectTypeCount; // Bid counter
-        internal readonly int ObjectID = System
-            .Threading
+        internal readonly int ObjectID = System.Threading
             .Interlocked
             .Increment(ref _objectTypeCount);
 
@@ -1166,8 +1165,7 @@ namespace System.Data.SqlTypes
                 byte[] asciiName = ascii.GetBytes(EA_NAME_STRING);
 
                 // calculate offset at which to write the name/value pair
-                System
-                    .Diagnostics
+                System.Diagnostics
                     .Debug
                     .Assert(
                         Marshal
@@ -1191,8 +1189,7 @@ namespace System.Data.SqlTypes
                 Marshal.WriteByte(ptr, cbOffset, 0);
                 cbOffset++;
 
-                System
-                    .Diagnostics
+                System.Diagnostics
                     .Debug
                     .Assert(
                         cbOffset < m_cbBuffer

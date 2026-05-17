@@ -776,8 +776,7 @@ public abstract class BuiltInDataTypesTestBase<TFixture> : IClassFixture<TFixtur
     {
         var entityEntry = set.Add(new TEntity { Id = 11 });
 
-        entityEntry
-            .CurrentValues
+        entityEntry.CurrentValues
             .SetValues(
                 new BuiltInDataTypes
                 {
@@ -1450,8 +1449,7 @@ public abstract class BuiltInDataTypesTestBase<TFixture> : IClassFixture<TFixtur
     {
         var entityEntry = set.Add(new TEntity { Id = 11 });
 
-        entityEntry
-            .CurrentValues
+        entityEntry.CurrentValues
             .SetValues(
                 new BuiltInNullableDataTypes
                 {

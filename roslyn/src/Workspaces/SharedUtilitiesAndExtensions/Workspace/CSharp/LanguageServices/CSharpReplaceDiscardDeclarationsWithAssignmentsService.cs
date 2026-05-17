@@ -55,8 +55,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ReplaceDiscardDeclarationsWithAssignment
                 {
                     case LocalDeclarationStatementSyntax localDeclarationStatement:
                         if (
-                            localDeclarationStatement
-                                .Declaration
+                            localDeclarationStatement.Declaration
                                 .Variables
                                 .Any(IsDiscardDeclaration)
                         )
@@ -130,8 +129,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ReplaceDiscardDeclarationsWithAssignment
                                 kind: SyntaxKind.IsExpression,
                                 left: isPatternExpression.Expression,
                                 operatorToken: isPatternExpression.IsKeyword,
-                                right: declarationPattern
-                                    .Type
+                                right: declarationPattern.Type
                                     .WithTrailingTrivia(declarationPattern.GetTrailingTrivia())
                             );
                             editor.ReplaceNode(isPatternExpression, replacementNode);
@@ -228,8 +226,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ReplaceDiscardDeclarationsWithAssignment
 
                 // Move the leading trivia from original local declaration statement
                 // to the first statement of the replacement statement list.
-                var leadingTrivia = _localDeclarationStatement
-                    .Declaration
+                var leadingTrivia = _localDeclarationStatement.Declaration
                     .Type
                     .GetLeadingTrivia()
                     .Concat(_localDeclarationStatement.Declaration.Type.GetTrailingTrivia());

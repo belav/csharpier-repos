@@ -25,8 +25,7 @@ namespace System.ServiceModel.Activities.Description
             {
                 if (value <= 0)
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .ArgumentOutOfRange(
                             "value",
                             value,
@@ -63,8 +62,7 @@ namespace System.ServiceModel.Activities.Description
 
                                 // Enable BufferedReceive processing for each operation
                                 foreach (
-                                    DispatchOperation dispatchOperation in endpointDispatcher
-                                        .DispatchRuntime
+                                    DispatchOperation dispatchOperation in endpointDispatcher.DispatchRuntime
                                         .Operations
                                 )
                                 {
@@ -75,8 +73,7 @@ namespace System.ServiceModel.Activities.Description
                     }
                 }
 
-                serviceHostBase
-                    .Extensions
+                serviceHostBase.Extensions
                     .Add(new BufferedReceiveManager(this.MaxPendingMessagesPerChannel));
             }
         }
@@ -90,13 +87,11 @@ namespace System.ServiceModel.Activities.Description
                 {
                     foreach (OperationDescription operation in serviceEndpoint.Contract.Operations)
                     {
-                        ReceiveContextEnabledAttribute receiveContextEnabled = operation
-                            .Behaviors
+                        ReceiveContextEnabledAttribute receiveContextEnabled = operation.Behaviors
                             .Find<ReceiveContextEnabledAttribute>();
                         if (receiveContextEnabled == null || !receiveContextEnabled.ManualControl)
                         {
-                            throw FxTrace
-                                .Exception
+                            throw FxTrace.Exception
                                 .AsError(
                                     new InvalidOperationException(
                                         SR.BufferedReceiveRequiresReceiveContext(operation.Name)

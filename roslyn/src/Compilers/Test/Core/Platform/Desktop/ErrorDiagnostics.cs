@@ -101,9 +101,8 @@ namespace Roslyn.Test.Utilities
                 {
                     case WellKnownDll.PlatformVsEditor:
                         {
-                            var type = pair.Item1.GetType(
-                                "Microsoft.VisualStudio.Text.Implementation.BaseSnapshot"
-                            );
+                            var type = pair.Item1
+                                .GetType("Microsoft.VisualStudio.Text.Implementation.BaseSnapshot");
                             var ct = type.GetProperty("ContentType");
                             var version = ct == null ? DllVersion.Beta2 : DllVersion.RC;
                             yield return Tuple.Create(pair.Item1, pair.Item2, version);
@@ -112,9 +111,8 @@ namespace Roslyn.Test.Utilities
                         break;
                     case WellKnownDll.TextData:
                         {
-                            var type = pair.Item1.GetType(
-                                "Microsoft.VisualStudio.Text.ITextSnapshot"
-                            );
+                            var type = pair.Item1
+                                .GetType("Microsoft.VisualStudio.Text.ITextSnapshot");
                             var ct = type.GetProperty("ContentType");
                             var version = ct == null ? DllVersion.Beta2 : DllVersion.RC;
                             yield return Tuple.Create(pair.Item1, pair.Item2, version);

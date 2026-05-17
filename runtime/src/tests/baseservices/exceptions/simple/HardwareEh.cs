@@ -344,8 +344,7 @@ public class HardwareEh
         long misAlignedField = 0;
         MyStruct m;
 
-        TestLibrary
-            .TestFramework
+        TestLibrary.TestFramework
             .BeginScenario(
                 "PosTest"
                     + id
@@ -379,8 +378,7 @@ public class HardwareEh
 
             if (c_VALUE != misAlignedField)
             {
-                TestLibrary
-                    .TestFramework
+                TestLibrary.TestFramework
                     .LogError(
                         "001",
                         "Incorrect value: Expected(" + c_VALUE + ") Actual(" + misAlignedField + ")"
@@ -393,8 +391,7 @@ public class HardwareEh
             // expected on IA64
             if (IsIA64())
             {
-                TestLibrary
-                    .TestFramework
+                TestLibrary.TestFramework
                     .LogInformation("Catch DataMisalignedException as expected");
             }
             else

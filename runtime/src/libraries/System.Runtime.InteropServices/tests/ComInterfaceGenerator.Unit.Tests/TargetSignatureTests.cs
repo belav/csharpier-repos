@@ -473,8 +473,7 @@ namespace ComInterfaceGenerator.Unit.Tests
 
             private IMethodSymbol FindFunctionPointerInvocationSignature(Compilation compilation)
             {
-                INamedTypeSymbol? userDefinedInterface = compilation
-                    .Assembly
+                INamedTypeSymbol? userDefinedInterface = compilation.Assembly
                     .GetTypeByMetadataName(_interfaceName);
                 Assert.NotNull(userDefinedInterface);
 
@@ -549,8 +548,7 @@ namespace ComInterfaceGenerator.Unit.Tests
                 AttributeData iUnknownDerivedAttribute = Assert.Single(
                     userDefinedInterface.GetAttributes(),
                     attr =>
-                        SymbolEqualityComparer
-                            .Default
+                        SymbolEqualityComparer.Default
                             .Equals(
                                 attr.AttributeClass?.OriginalDefinition,
                                 iUnknownDerivedAttributeType

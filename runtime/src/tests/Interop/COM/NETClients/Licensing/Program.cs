@@ -88,8 +88,7 @@ namespace NetClient
                     typeof(LicenseTestingClass),
                     LicenseUsageMode.Designtime
                 );
-                LicenseManager
-                    .CurrentContext
+                LicenseManager.CurrentContext
                     .SetSavedLicenseKey(typeof(LicenseTestingClass), licKey);
 
                 var licenseTesting = (LicenseTesting)new LicenseTestingClass();
@@ -100,8 +99,7 @@ namespace NetClient
                 // Verify the value retrieved from the IClassFactory2::RequestLicKey was what was set
                 Assert.Equal(
                     DefaultLicKey,
-                    LicenseManager
-                        .CurrentContext
+                    LicenseManager.CurrentContext
                         .GetSavedLicenseKey(typeof(LicenseTestingClass), resourceAssembly: null)
                 );
             }
@@ -123,8 +121,7 @@ namespace NetClient
                     typeof(LicenseTestingClass),
                     LicenseUsageMode.Runtime
                 );
-                LicenseManager
-                    .CurrentContext
+                LicenseManager.CurrentContext
                     .SetSavedLicenseKey(typeof(LicenseTestingClass), licKey);
 
                 var licenseTesting = (LicenseTesting)new LicenseTestingClass();

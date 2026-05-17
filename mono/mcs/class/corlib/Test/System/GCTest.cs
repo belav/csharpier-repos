@@ -120,15 +120,16 @@ namespace MonoTests.System
                     Run_ReRegisterForFinalizeTest();
                 }
             );
-            var t = Task.Factory.StartNew(() =>
-            {
-                do
+            var t = Task.Factory
+                .StartNew(() =>
                 {
-                    GC.Collect();
-                    GC.WaitForPendingFinalizers();
-                    Task.Yield();
-                } while (MyFinalizeObject.finalized != 2);
-            });
+                    do
+                    {
+                        GC.Collect();
+                        GC.WaitForPendingFinalizers();
+                        Task.Yield();
+                    } while (MyFinalizeObject.finalized != 2);
+                });
 
             Assert.IsTrue(t.Wait(5000));
         }

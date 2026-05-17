@@ -49,8 +49,7 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
 
             int[] offsets = new int[_methodNode.FrameInfos.Length + coldCodeUnwindInfoCount];
             if (
-                !factory
-                    .RuntimeFunctionsGCInfo
+                !factory.RuntimeFunctionsGCInfo
                     .Deduplicator
                     .TryGetValue(this, out var deduplicatedResult)
             )
@@ -288,8 +287,7 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 return;
             }
 
-            bool isFound = factory
-                .RuntimeFunctionsGCInfo
+            bool isFound = factory.RuntimeFunctionsGCInfo
                 .Deduplicator
                 .TryGetValue(this, out var found);
 

@@ -29,8 +29,7 @@ namespace System.Runtime.Serialization.Configuration
                 );
             if (section == null)
             {
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility

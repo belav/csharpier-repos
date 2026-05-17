@@ -45,8 +45,7 @@ namespace MonoTests.System.IdentityModel.Tokens
     {
         static X509Certificate2 cert;
         static byte[] raw;
-        static byte[] wssc_label = Encoding
-            .UTF8
+        static byte[] wssc_label = Encoding.UTF8
             .GetBytes("WS-SecureConversationWS-SecureConversation");
 
         static InMemorySymmetricSecurityKeyTest()

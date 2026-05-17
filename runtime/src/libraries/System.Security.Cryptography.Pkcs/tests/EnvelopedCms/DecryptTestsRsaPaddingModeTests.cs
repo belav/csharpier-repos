@@ -42,8 +42,7 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
             ecms.Decode(encodedMessage);
 
             using (
-                X509Certificate2 privateCert = Certificates
-                    .RSA2048Sha256KeyTransfer1
+                X509Certificate2 privateCert = Certificates.RSA2048Sha256KeyTransfer1
                     .TryGetCertificateWithPrivateKey()
             )
             {
@@ -69,8 +68,7 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
                 X509Certificate2 issuerSerialCert = Certificates.RSAKeyTransfer1.GetCertificate()
             )
             using (
-                X509Certificate2 explicitSkiCert = Certificates
-                    .RSAKeyTransfer_ExplicitSki
+                X509Certificate2 explicitSkiCert = Certificates.RSAKeyTransfer_ExplicitSki
                     .GetCertificate()
             )
             {
@@ -98,8 +96,7 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
             ecms.Decode(encodedMessage);
 
             using (
-                X509Certificate2 privateIssuerSerialCert = Certificates
-                    .RSAKeyTransfer1
+                X509Certificate2 privateIssuerSerialCert = Certificates.RSAKeyTransfer1
                     .TryGetCertificateWithPrivateKey()
             )
             {
@@ -110,8 +107,7 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
             }
 
             using (
-                X509Certificate2 privateExplicitSkiCert = Certificates
-                    .RSAKeyTransfer_ExplicitSki
+                X509Certificate2 privateExplicitSkiCert = Certificates.RSAKeyTransfer_ExplicitSki
                     .TryGetCertificateWithPrivateKey()
             )
             {

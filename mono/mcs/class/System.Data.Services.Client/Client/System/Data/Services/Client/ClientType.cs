@@ -198,8 +198,7 @@ namespace System.Data.Services.Client
                             {
                                 int shadow = this.IndexOfProperty(property.PropertyName);
                                 if (
-                                    !property
-                                        .DeclaringType
+                                    !property.DeclaringType
                                         .IsAssignableFrom(this.properties[shadow].DeclaringType)
                                 )
                                 {
@@ -693,14 +692,15 @@ namespace System.Data.Services.Client
             );
 
             Delegate dlgPropValReader = Expression.Lambda(propValReaderExpr, rsrcParam).Compile();
-            this.EpmSourceTree.Add(
-                new EntityPropertyMappingInfo
-                {
-                    Attribute = epmAttr,
-                    PropValReader = dlgPropValReader,
-                    DefiningType = definingType,
-                }
-            );
+            this.EpmSourceTree
+                .Add(
+                    new EntityPropertyMappingInfo
+                    {
+                        Attribute = epmAttr,
+                        PropValReader = dlgPropValReader,
+                        DefiningType = definingType,
+                    }
+                );
         }
 
         private Expression BuildPropertyReader(
@@ -767,11 +767,8 @@ namespace System.Data.Services.Client
 
         private int IndexOfProperty(string propertyName)
         {
-            return this.properties.IndexOf(
-                propertyName,
-                ClientProperty.GetPropertyName,
-                String.Equals
-            );
+            return this.properties
+                .IndexOf(propertyName, ClientProperty.GetPropertyName, String.Equals);
         }
 
         private void WireUpMimeTypeProperties()
@@ -805,10 +802,8 @@ namespace System.Data.Services.Client
 
         private void CheckMediaLinkEntry()
         {
-            object[] attributes = this.ElementType.GetCustomAttributes(
-                typeof(MediaEntryAttribute),
-                true
-            );
+            object[] attributes = this.ElementType
+                .GetCustomAttributes(typeof(MediaEntryAttribute), true);
             if (attributes != null && attributes.Length > 0)
             {
                 Debug.Assert(

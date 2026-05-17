@@ -177,8 +177,7 @@ class C
             var c = CreateCompilation(Parse(source, "goo.cs"), options: TestOptions.DebugDll);
 
             var peBlob = c.EmitToArray(
-                EmitOptions
-                    .Default
+                EmitOptions.Default
                     .WithDebugInformationFormat(DebugInformationFormat.Embedded)
                     .WithPdbFilePath(@"a/b/c/d.pdb")
                     .WithPdbChecksumAlgorithm(HashAlgorithmName.SHA512)
@@ -216,8 +215,7 @@ class C
                     var mdReader = embeddedMetadataProvider.GetMetadataReader();
                     AssertEx.Equal(
                         new[] { "goo.cs" },
-                        mdReader
-                            .Documents
+                        mdReader.Documents
                             .Select(doc => mdReader.GetString(mdReader.GetDocument(doc).Name))
                     );
 
@@ -260,8 +258,7 @@ class C
             );
 
             var peBlob = c.EmitToArray(
-                EmitOptions
-                    .Default
+                EmitOptions.Default
                     .WithDebugInformationFormat(DebugInformationFormat.Embedded)
                     .WithPdbChecksumAlgorithm(HashAlgorithmName.SHA384)
                     .WithPdbFilePath(@"a/b/c/d.pdb")
@@ -301,8 +298,7 @@ class C
                     var mdReader = embeddedMetadataProvider.GetMetadataReader();
                     AssertEx.Equal(
                         new[] { "goo.cs" },
-                        mdReader
-                            .Documents
+                        mdReader.Documents
                             .Select(doc => mdReader.GetString(mdReader.GetDocument(doc).Name))
                     );
 
@@ -345,8 +341,7 @@ class C
     }
 }
 ";
-            var sourceLinkBlob = Encoding
-                .UTF8
+            var sourceLinkBlob = Encoding.UTF8
                 .GetBytes(
                     @"
 {
@@ -402,8 +397,7 @@ class C
     }
 }
 ";
-            var sourceLinkBlob = Encoding
-                .UTF8
+            var sourceLinkBlob = Encoding.UTF8
                 .GetBytes(
                     @"
 {
@@ -480,13 +474,11 @@ class C
             var result = c.Emit(
                 new MemoryStream(),
                 new MemoryStream(),
-                options: EmitOptions
-                    .Default
+                options: EmitOptions.Default
                     .WithDebugInformationFormat(DebugInformationFormat.PortablePdb),
                 sourceLinkStream: sourceLinkStream
             );
-            result
-                .Diagnostics
+            result.Diagnostics
                 .Verify(
                     // error CS0041: Unexpected error writing debug information -- 'Error!'
                     Diagnostic(ErrorCode.FTL_DebugEmitFailure)

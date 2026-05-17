@@ -39,8 +39,7 @@ namespace System.Collections.Immutable.Tests
             ImmutableSortedDictionary<int, string>.Builder builder = ImmutableSortedDictionary<
                 int,
                 string
-            >
-                .Empty
+            >.Empty
                 .ToBuilder();
             builder.Add(3, "3");
             builder.Add(5, "5");
@@ -61,8 +60,10 @@ namespace System.Collections.Immutable.Tests
         [Fact]
         public void BuilderFromMap()
         {
-            ImmutableSortedDictionary<int, string> set = ImmutableSortedDictionary<int, string>
-                .Empty
+            ImmutableSortedDictionary<int, string> set = ImmutableSortedDictionary<
+                int,
+                string
+            >.Empty
                 .Add(1, "1");
             ImmutableSortedDictionary<int, string>.Builder builder = set.ToBuilder();
             Assert.True(builder.ContainsKey(1));
@@ -91,8 +92,7 @@ namespace System.Collections.Immutable.Tests
             ImmutableSortedDictionary<int, string>.Builder mutable = ImmutableSortedDictionary<
                 int,
                 string
-            >
-                .Empty
+            >.Empty
                 .ToBuilder();
             ImmutableSortedDictionary<int, string> immutable1 = mutable.ToImmutable();
             Assert.Same(immutable1, mutable.ToImmutable()); //, "The Immutable property getter is creating new objects without any differences.");
@@ -142,8 +142,7 @@ namespace System.Collections.Immutable.Tests
             ImmutableSortedDictionary<int, string>.Builder builder = ImmutableSortedDictionary<
                 int,
                 string
-            >
-                .Empty
+            >.Empty
                 .AddRange(
                     Enumerable.Range(1, 10).Select(n => new KeyValuePair<int, string>(n, null))
                 )
@@ -181,8 +180,7 @@ namespace System.Collections.Immutable.Tests
             ImmutableSortedDictionary<int, string> collection = ImmutableSortedDictionary<
                 int,
                 string
-            >
-                .Empty
+            >.Empty
                 .Add(1, null);
             ImmutableSortedDictionary<int, string>.Builder builder = collection.ToBuilder();
             Assert.Same(collection, builder.ToImmutable()); // no changes at all.
@@ -337,10 +335,11 @@ namespace System.Collections.Immutable.Tests
             DebuggerAttributeInfo info = DebuggerAttributes.ValidateDebuggerTypeProxyProperties(
                 builder
             );
-            PropertyInfo itemProperty = info.Properties.Single(pr =>
-                pr.GetCustomAttribute<DebuggerBrowsableAttribute>().State
-                == DebuggerBrowsableState.RootHidden
-            );
+            PropertyInfo itemProperty = info.Properties
+                .Single(pr =>
+                    pr.GetCustomAttribute<DebuggerBrowsableAttribute>().State
+                    == DebuggerBrowsableState.RootHidden
+                );
             KeyValuePair<int, string>[] items =
                 itemProperty.GetValue(info.Instance) as KeyValuePair<int, string>[];
             Assert.Equal(builder, items);

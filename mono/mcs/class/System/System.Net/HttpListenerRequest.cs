@@ -551,8 +551,7 @@ namespace System.Net
                 if (input_stream == null)
                 {
                     if (is_chunked || content_length > 0)
-                        input_stream = context
-                            .Connection
+                        input_stream = context.Connection
                             .GetRequestStream(is_chunked, content_length);
                     else
                         input_stream = Stream.Null;
@@ -715,8 +714,7 @@ namespace System.Net
 
         public Task<X509Certificate2> GetClientCertificateAsync()
         {
-            return Task<X509Certificate2>
-                .Factory
+            return Task<X509Certificate2>.Factory
                 .FromAsync(BeginGetClientCertificate, EndGetClientCertificate, null);
         }
     }

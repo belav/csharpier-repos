@@ -565,8 +565,7 @@ namespace System.Data.SqlClient
                 certificateStore.Open(OpenFlags.ReadOnly | OpenFlags.OpenExistingOnly);
 
                 // Search for the specified certificate
-                X509Certificate2Collection matchingCertificates = certificateStore
-                    .Certificates
+                X509Certificate2Collection matchingCertificates = certificateStore.Certificates
                     .Find(X509FindType.FindByThumbprint, thumbprint, false);
 
                 // Throw an exception if a cert with the specified thumbprint is not found
@@ -714,8 +713,9 @@ namespace System.Data.SqlClient
 
             CspParameters privateKeyParams = new CspParameters();
             privateKeyParams = new CspParameters();
-            privateKeyParams.KeyContainerName = ((RSACryptoServiceProvider)certificate.PrivateKey)
-                .CspKeyContainerInfo
+            privateKeyParams.KeyContainerName = (
+                (RSACryptoServiceProvider)certificate.PrivateKey
+            ).CspKeyContainerInfo
                 .KeyContainerName;
             privateKeyParams.ProviderType =
                 rsaAesProviderType /*PROV_RSA_AES*/
@@ -727,8 +727,7 @@ namespace System.Data.SqlClient
             // For LocalMachine store, use UseMachineKeyStore
             // CspKeyContainerInfo.MachineKeyStore already contains the appropriate information so just use it.
             if (
-                ((RSACryptoServiceProvider)certificate.PrivateKey)
-                    .CspKeyContainerInfo
+                ((RSACryptoServiceProvider)certificate.PrivateKey).CspKeyContainerInfo
                     .MachineKeyStore
             )
             {

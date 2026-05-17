@@ -45,8 +45,7 @@ namespace Castle.DynamicProxy.Contributors
                 typeof(object)
             );
 
-            dynProxyGetTarget
-                .CodeBuilder
+            dynProxyGetTarget.CodeBuilder
                 .AddStatement(
                     new ReturnStatement(
                         new ConvertExpression(typeof(object), targetType, targetReference)
@@ -62,8 +61,7 @@ namespace Castle.DynamicProxy.Contributors
             // we can only change the target of the interface proxy
             if (targetReference is FieldReference targetField)
             {
-                dynProxySetTarget
-                    .CodeBuilder
+                dynProxySetTarget.CodeBuilder
                     .AddStatement(
                         new AssignStatement(
                             targetField,
@@ -76,8 +74,7 @@ namespace Castle.DynamicProxy.Contributors
             }
             else
             {
-                dynProxySetTarget
-                    .CodeBuilder
+                dynProxySetTarget.CodeBuilder
                     .AddStatement(
                         new ThrowStatement(
                             typeof(InvalidOperationException),

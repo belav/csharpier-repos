@@ -92,8 +92,7 @@ namespace Microsoft.Extensions.Hosting.WindowsServices
         public Task WaitForStartAsync(CancellationToken cancellationToken)
         {
             cancellationToken.Register(() => _delayStart.TrySetCanceled());
-            ApplicationLifetime
-                .ApplicationStarted
+            ApplicationLifetime.ApplicationStarted
                 .Register(() =>
                 {
                     Logger.LogInformation(
@@ -102,8 +101,7 @@ namespace Microsoft.Extensions.Hosting.WindowsServices
                         Environment.ContentRootPath
                     );
                 });
-            ApplicationLifetime
-                .ApplicationStopping
+            ApplicationLifetime.ApplicationStopping
                 .Register(() =>
                 {
                     Logger.LogInformation("Application is shutting down...");

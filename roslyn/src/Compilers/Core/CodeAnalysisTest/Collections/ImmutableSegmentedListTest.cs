@@ -167,8 +167,7 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                 Assert.Equal(i * 10, list[i - 1]);
             }
 
-            var bulkList = ImmutableSegmentedList<int>
-                .Empty
+            var bulkList = ImmutableSegmentedList<int>.Empty
                 .AddRange(Enumerable.Range(1, 10).Select(i => i * 10));
             Assert.Equal<int>(list.ToArray(), bulkList.ToArray());
         }
@@ -545,8 +544,7 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                 Assert.Equal(expectedList.IndexOf(newElement), list.IndexOf(newElement));
                 Assert.Equal(
                     expectedList.IndexOf(newElement),
-                    System
-                        .Collections
+                    System.Collections
                         .Immutable
                         .ImmutableList
                         .IndexOf(
@@ -566,8 +564,7 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                     );
                     Assert.Equal(
                         expectedList.IndexOf(existingElement),
-                        System
-                            .Collections
+                        System.Collections
                             .Immutable
                             .ImmutableList
                             .IndexOf(
@@ -650,24 +647,21 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             Assert.Equal<int>(new[] { 3, 5, 9 }, list.Replace(8, 9));
             Assert.Equal<int>(
                 new[] { 4, 5, 8 },
-                System
-                    .Collections
+                System.Collections
                     .Immutable
                     .ImmutableList
                     .Replace((System.Collections.Immutable.IImmutableList<int>)list, 3, 4)
             );
             Assert.Equal<int>(
                 new[] { 3, 6, 8 },
-                System
-                    .Collections
+                System.Collections
                     .Immutable
                     .ImmutableList
                     .Replace((System.Collections.Immutable.IImmutableList<int>)list, 5, 6)
             );
             Assert.Equal<int>(
                 new[] { 3, 5, 9 },
-                System
-                    .Collections
+                System.Collections
                     .Immutable
                     .ImmutableList
                     .Replace((System.Collections.Immutable.IImmutableList<int>)list, 8, 9)
@@ -679,21 +673,18 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             Assert.Equal<int>(new[] { 4, 4, 5 }, list.Replace(3, 4).Replace(3, 4));
             Assert.Equal<int>(
                 new[] { 4, 3, 5 },
-                System
-                    .Collections
+                System.Collections
                     .Immutable
                     .ImmutableList
                     .Replace((System.Collections.Immutable.IImmutableList<int>)list, 3, 4)
             );
             Assert.Equal<int>(
                 new[] { 4, 4, 5 },
-                System
-                    .Collections
+                System.Collections
                     .Immutable
                     .ImmutableList
                     .Replace(
-                        System
-                            .Collections
+                        System.Collections
                             .Immutable
                             .ImmutableList
                             .Replace((System.Collections.Immutable.IImmutableList<int>)list, 3, 4),
@@ -717,8 +708,7 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
 
             // Finally, try one last time using the interface implementation.
             System.Collections.Immutable.IImmutableList<Person> iface = list;
-            var updatedIface = System
-                .Collections
+            var updatedIface = System.Collections
                 .Immutable
                 .ImmutableList
                 .Replace(iface, list[0], newAge);
@@ -743,8 +733,7 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                 ImmutableSegmentedList<int>.Empty.Equals(ImmutableSegmentedList<int>.Empty)
             );
             Assert.False(
-                ImmutableSegmentedList<int>
-                    .Empty
+                ImmutableSegmentedList<int>.Empty
                     .Add(3)
                     .Equals(ImmutableSegmentedList<int>.Empty.Add(3))
             );
@@ -832,8 +821,7 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             Assert.Equal(new[] { 2 }, removed13);
             Assert.Equal(
                 new[] { 2 },
-                System
-                    .Collections
+                System.Collections
                     .Immutable
                     .ImmutableList
                     .RemoveRange(
@@ -857,8 +845,7 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             Assert.Throws<ArgumentNullException>(
                 "items",
                 () =>
-                    System
-                        .Collections
+                    System.Collections
                         .Immutable
                         .ImmutableList
                         .RemoveRange(
@@ -869,8 +856,7 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             );
             Assert.Equal(
                 new[] { 1, 3 },
-                System
-                    .Collections
+                System.Collections
                     .Immutable
                     .ImmutableList
                     .RemoveRange(
@@ -1002,10 +988,11 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                 "_root"
             )!;
             DebuggerAttributes.ValidateDebuggerDisplayReferences(rootNode);
-            PropertyInfo itemProperty = info.Properties.Single(pr =>
-                pr.GetCustomAttribute<DebuggerBrowsableAttribute>()!.State
-                == DebuggerBrowsableState.RootHidden
-            );
+            PropertyInfo itemProperty = info.Properties
+                .Single(pr =>
+                    pr.GetCustomAttribute<DebuggerBrowsableAttribute>()!.State
+                    == DebuggerBrowsableState.RootHidden
+                );
             double[]? items = itemProperty.GetValue(info.Instance) as double[];
             Assert.Equal(list, items);
         }

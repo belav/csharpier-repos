@@ -67,8 +67,7 @@ public class ModelSourceTest
     [ConditionalFact]
     public void Adds_all_entities_based_on_all_distinct_entity_types_found()
     {
-        var context = InMemoryTestHelpers
-            .Instance
+        var context = InMemoryTestHelpers.Instance
             .CreateContext(new ServiceCollection().AddSingleton<IDbSetFinder, FakeSetFinder>());
 
         Assert.Equal(
@@ -271,8 +270,7 @@ public class ModelSourceTest
         var testModelDependencies = serviceProvider.GetRequiredService<ModelCreationDependencies>();
 
         var model = modelSource.GetModel(context, testModelDependencies, designTime: false);
-        var packageVersion = typeof(Context1)
-            .Assembly
+        var packageVersion = typeof(Context1).Assembly
             .GetCustomAttributes<AssemblyMetadataAttribute>()
             .Single(m => m.Key == "PackageVersion")
             .Value;

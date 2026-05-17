@@ -10,8 +10,7 @@ namespace System.IO.Ports
     {
         private static SafeFileHandle OpenPort(uint portNumber)
         {
-            return Interop
-                .Kernel32
+            return Interop.Kernel32
                 .CreateFile(
                     @"\\?\COM" + portNumber.ToString(CultureInfo.InvariantCulture),
                     Interop.Kernel32.GenericOperations.GENERIC_READ

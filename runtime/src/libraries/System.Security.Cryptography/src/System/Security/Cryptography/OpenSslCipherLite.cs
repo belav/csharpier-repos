@@ -34,8 +34,7 @@ namespace System.Security.Cryptography
 
             BlockSizeInBytes = blockSizeInBytes;
             PaddingSizeInBytes = paddingSizeInBytes;
-            _ctx = Interop
-                .Crypto
+            _ctx = Interop.Crypto
                 .EvpCipherCreate(
                     algorithm,
                     ref MemoryMarshal.GetReference(key),

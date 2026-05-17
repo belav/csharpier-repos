@@ -43,8 +43,7 @@ namespace System.ServiceModel.Configuration
 #pragma warning suppress 56506 //Microsoft; base.CopyFrom() checks for 'from' being null
             if (
                 PropertyValueOrigin.Default
-                != source
-                    .ElementInformation
+                != source.ElementInformation
                     .Properties[ConfigurationStrings.SecureConversationBootstrap]
                     .ValueOrigin
             )
@@ -57,8 +56,7 @@ namespace System.ServiceModel.Configuration
             if (this.AuthenticationMode == AuthenticationMode.SecureConversation)
             {
                 if (this.SecureConversationBootstrap == null)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(SR.SecureConversationNeedsBootstrapSecurity)
@@ -68,8 +66,7 @@ namespace System.ServiceModel.Configuration
                     this.SecureConversationBootstrap.AuthenticationMode
                     == AuthenticationMode.SecureConversation
                 )
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new InvalidOperationException(
                                 SR.GetString(
@@ -114,10 +111,8 @@ namespace System.ServiceModel.Configuration
             this.CanRenewSecurityContextToken = sc.CanRenewSession; // can't use default value optimization here because ApplyConfiguration relies on the runtime default instead, which is the opposite of the config default
             if (sc.BootstrapSecurityBindingElement != null)
             {
-                this.SecureConversationBootstrap.InitializeFrom(
-                    sc.BootstrapSecurityBindingElement,
-                    initializeNestedBindings
-                );
+                this.SecureConversationBootstrap
+                    .InitializeFrom(sc.BootstrapSecurityBindingElement, initializeNestedBindings);
             }
         }
 

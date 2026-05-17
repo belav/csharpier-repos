@@ -158,12 +158,10 @@ namespace Microsoft.CodeAnalysis.CodeActions
 
                 foreach (var documentId in changedDocuments)
                 {
-                    var originalDocument = changedProject
-                        .OldProject
+                    var originalDocument = changedProject.OldProject
                         .Solution
                         .GetRequiredTextDocument(documentId);
-                    var changedDocument = changedProject
-                        .NewProject
+                    var changedDocument = changedProject.NewProject
                         .Solution
                         .GetRequiredTextDocument(documentId);
 

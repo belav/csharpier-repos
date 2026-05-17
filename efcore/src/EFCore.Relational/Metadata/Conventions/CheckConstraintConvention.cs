@@ -159,8 +159,7 @@ public class CheckConstraintConvention
             {
                 foreach (var checkConstraintToBeRemoved in checkConstraintsToBeRemoved)
                 {
-                    checkConstraintToBeRemoved
-                        .EntityType
+                    checkConstraintToBeRemoved.EntityType
                         .RemoveCheckConstraint(checkConstraintToBeRemoved.ModelName);
                 }
             }
@@ -174,8 +173,7 @@ public class CheckConstraintConvention
                     ];
                     CheckConstraint.MergeInto(checkConstraintToBeDetached, baseCheckConstraint);
 
-                    checkConstraintToBeDetached
-                        .EntityType
+                    checkConstraintToBeDetached.EntityType
                         .RemoveCheckConstraint(checkConstraintToBeDetached.ModelName);
                 }
             }

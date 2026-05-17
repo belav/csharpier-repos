@@ -291,8 +291,7 @@ namespace System.Workflow.ComponentModel.Design
                 "genericParametersPropertyGrid"
             );
             this.genericParametersPropertyGrid.Name = "genericParametersPropertyGrid";
-            this.genericParametersPropertyGrid.PropertySort = System
-                .Windows
+            this.genericParametersPropertyGrid.PropertySort = System.Windows
                 .Forms
                 .PropertySort
                 .Categorized;
@@ -505,10 +504,13 @@ namespace System.Workflow.ComponentModel.Design
             {
                 if (
                     this.typeFilterProvider != null
-                    && !this.typeFilterProvider.CanFilterType(
-                        extendedUIService != null ? extendedUIService.GetRuntimeType(type) : type,
-                        false
-                    )
+                    && !this.typeFilterProvider
+                        .CanFilterType(
+                            extendedUIService != null
+                                ? extendedUIService.GetRuntimeType(type)
+                                : type,
+                            false
+                        )
                 )
                     continue;
 
@@ -585,8 +587,7 @@ namespace System.Workflow.ComponentModel.Design
                 this.ClientRectangle.Width,
                 1
             );
-            paintArgs
-                .Graphics
+            paintArgs.Graphics
                 .DrawLine(
                     SystemPens.ControlDark,
                     lineRectangle.Left,
@@ -594,8 +595,7 @@ namespace System.Workflow.ComponentModel.Design
                     lineRectangle.Right,
                     lineRectangle.Bottom
                 );
-            paintArgs
-                .Graphics
+            paintArgs.Graphics
                 .DrawLine(
                     SystemPens.ControlLightLight,
                     lineRectangle.Left,
@@ -618,8 +618,7 @@ namespace System.Workflow.ComponentModel.Design
                 this.ClientRectangle.Width,
                 1
             );
-            paintArgs
-                .Graphics
+            paintArgs.Graphics
                 .DrawLine(
                     SystemPens.ControlDark,
                     lineRectangle.Left,
@@ -627,8 +626,7 @@ namespace System.Workflow.ComponentModel.Design
                     lineRectangle.Right,
                     lineRectangle.Bottom
                 );
-            paintArgs
-                .Graphics
+            paintArgs.Graphics
                 .DrawLine(
                     SystemPens.ControlLightLight,
                     lineRectangle.Left,
@@ -638,8 +636,7 @@ namespace System.Workflow.ComponentModel.Design
                 );
 
             //Draw help text border
-            paintArgs
-                .Graphics
+            paintArgs.Graphics
                 .DrawLine(
                     SystemPens.WindowFrame,
                     this.helpTextHolder.Left - 1,
@@ -647,8 +644,7 @@ namespace System.Workflow.ComponentModel.Design
                     this.helpTextHolder.Left - 1,
                     this.helpTextHolder.Bottom
                 );
-            paintArgs
-                .Graphics
+            paintArgs.Graphics
                 .DrawLine(
                     SystemPens.WindowFrame,
                     this.helpTextHolder.Left - 1,
@@ -656,8 +652,7 @@ namespace System.Workflow.ComponentModel.Design
                     this.helpTextHolder.Right,
                     this.helpTextHolder.Bottom
                 );
-            paintArgs
-                .Graphics
+            paintArgs.Graphics
                 .DrawLine(
                     SystemPens.WindowFrame,
                     this.helpTextHolder.Right,
@@ -665,8 +660,7 @@ namespace System.Workflow.ComponentModel.Design
                     this.helpTextHolder.Right,
                     this.helpTextHolder.Top - 1
                 );
-            paintArgs
-                .Graphics
+            paintArgs.Graphics
                 .DrawLine(
                     SystemPens.WindowFrame,
                     this.helpTextHolder.Right,
@@ -919,11 +913,12 @@ namespace System.Workflow.ComponentModel.Design
                         this.serviceProvider.GetService(typeof(ITypeProviderCreator))
                         as ITypeProviderCreator;
                     if (typeProviderCreator != null)
-                        this.localTypeProvider.AddAssembly(
-                            typeProviderCreator.GetTransientAssembly(
-                                AssemblyName.GetAssemblyName(fileDialog.FileName)
-                            )
-                        );
+                        this.localTypeProvider
+                            .AddAssembly(
+                                typeProviderCreator.GetTransientAssembly(
+                                    AssemblyName.GetAssemblyName(fileDialog.FileName)
+                                )
+                            );
                     else
                         this.localTypeProvider.AddAssemblyReference(fileDialog.FileName);
 
@@ -1103,12 +1098,13 @@ namespace System.Workflow.ComponentModel.Design
                         )
                         && (
                             this.typeFilterProvider == null
-                            || this.typeFilterProvider.CanFilterType(
-                                extendedUIService != null
-                                    ? extendedUIService.GetRuntimeType(type)
-                                    : type,
-                                false
-                            )
+                            || this.typeFilterProvider
+                                .CanFilterType(
+                                    extendedUIService != null
+                                        ? extendedUIService.GetRuntimeType(type)
+                                        : type,
+                                    false
+                                )
                         )
                     )
                     {
@@ -1634,8 +1630,7 @@ namespace System.Workflow.ComponentModel.Design
                 if (
                     (type.IsByRef)
                     || (
-                        !System
-                            .Workflow
+                        !System.Workflow
                             .ComponentModel
                             .Compiler
                             .TypeProvider

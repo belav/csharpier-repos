@@ -2624,8 +2624,7 @@ namespace System.Tests
                         int expected = b1.CompareTo(bigDecimals[j]);
                         int actual = d1.CompareTo(d2);
                         if (expected != actual)
-                            throw Xunit
-                                .Sdk
+                            throw Xunit.Sdk
                                 .EqualException
                                 .ForMismatchedValues(expected, actual, d1 + " CMP " + d2);
                     }
@@ -2655,8 +2654,7 @@ namespace System.Tests
                             try
                             {
                                 decimal actual = d1 + d2;
-                                throw Xunit
-                                    .Sdk
+                                throw Xunit.Sdk
                                     .EqualException
                                     .ForMismatchedValues(
                                         typeof(OverflowException),
@@ -2675,8 +2673,7 @@ namespace System.Tests
                                         != (byte)(*(uint*)&actual >> BigDecimal.ScaleShift)
                                     || expected.CompareTo(new BigDecimal(actual)) != 0
                                 )
-                                    throw Xunit
-                                        .Sdk
+                                    throw Xunit.Sdk
                                         .EqualException
                                         .ForMismatchedValues(expected, actual, d1 + " + " + d2);
                             }
@@ -2707,8 +2704,7 @@ namespace System.Tests
                             try
                             {
                                 decimal actual = d1 * d2;
-                                throw Xunit
-                                    .Sdk
+                                throw Xunit.Sdk
                                     .EqualException
                                     .ForMismatchedValues(
                                         typeof(OverflowException),
@@ -2727,8 +2723,7 @@ namespace System.Tests
                                         != (byte)(*(uint*)&actual >> BigDecimal.ScaleShift)
                                     || expected.CompareTo(new BigDecimal(actual)) != 0
                                 )
-                                    throw Xunit
-                                        .Sdk
+                                    throw Xunit.Sdk
                                         .EqualException
                                         .ForMismatchedValues(expected, actual, d1 + " * " + d2);
                             }
@@ -2761,8 +2756,7 @@ namespace System.Tests
                             try
                             {
                                 decimal actual = d1 / d2;
-                                throw Xunit
-                                    .Sdk
+                                throw Xunit.Sdk
                                     .EqualException
                                     .ForMismatchedValues(
                                         typeof(OverflowException),
@@ -2781,8 +2775,7 @@ namespace System.Tests
                                         != (byte)(*(uint*)&actual >> BigDecimal.ScaleShift)
                                     || expected.CompareTo(new BigDecimal(actual)) != 0
                                 )
-                                    throw Xunit
-                                        .Sdk
+                                    throw Xunit.Sdk
                                         .EqualException
                                         .ForMismatchedValues(expected, actual, d1 + " / " + d2);
                             }
@@ -2817,16 +2810,14 @@ namespace System.Tests
                                         != (byte)(*(uint*)&actual >> BigDecimal.ScaleShift)
                                     || expected.CompareTo(new BigDecimal(actual)) != 0
                                 )
-                                    throw Xunit
-                                        .Sdk
+                                    throw Xunit.Sdk
                                         .EqualException
                                         .ForMismatchedValues(expected, actual, d1 + " % " + d2);
                             }
                         }
                         catch (OverflowException actual)
                         {
-                            throw Xunit
-                                .Sdk
+                            throw Xunit.Sdk
                                 .EqualException
                                 .ForMismatchedValues(expected, actual, d1 + " % " + d2);
                         }
@@ -2850,8 +2841,7 @@ namespace System.Tests
                         expected.Scale != (byte)(*(uint*)&actual >> BigDecimal.ScaleShift)
                         || expected.CompareTo(new BigDecimal(actual)) != 0
                     )
-                        throw Xunit
-                            .Sdk
+                        throw Xunit.Sdk
                             .EqualException
                             .ForMismatchedValues(expected, actual, d1 + " Floor");
                 }
@@ -2873,8 +2863,7 @@ namespace System.Tests
                         expected.Scale != (byte)(*(uint*)&actual >> BigDecimal.ScaleShift)
                         || expected.CompareTo(new BigDecimal(actual)) != 0
                     )
-                        throw Xunit
-                            .Sdk
+                        throw Xunit.Sdk
                             .EqualException
                             .ForMismatchedValues(expected, actual, d1 + " Ceiling");
                 }
@@ -2896,8 +2885,7 @@ namespace System.Tests
                         expected.Scale != (byte)(*(uint*)&actual >> BigDecimal.ScaleShift)
                         || expected.CompareTo(new BigDecimal(actual)) != 0
                     )
-                        throw Xunit
-                            .Sdk
+                        throw Xunit.Sdk
                             .EqualException
                             .ForMismatchedValues(expected, actual, d1 + " Truncate");
                 }
@@ -2917,8 +2905,7 @@ namespace System.Tests
                     try
                     {
                         int actual = decimal.ToInt32(d1);
-                        throw Xunit
-                            .Sdk
+                        throw Xunit.Sdk
                             .EqualException
                             .ForMismatchedValues(
                                 typeof(OverflowException),
@@ -2932,8 +2919,7 @@ namespace System.Tests
                 {
                     int actual = decimal.ToInt32(d1);
                     if (expected != actual)
-                        throw Xunit
-                            .Sdk
+                        throw Xunit.Sdk
                             .EqualException
                             .ForMismatchedValues(expected, actual, d1 + " ToInt32");
                 }
@@ -2953,8 +2939,7 @@ namespace System.Tests
                     try
                     {
                         long actual = decimal.ToOACurrency(d1);
-                        throw Xunit
-                            .Sdk
+                        throw Xunit.Sdk
                             .EqualException
                             .ForMismatchedValues(
                                 typeof(OverflowException),
@@ -2968,8 +2953,7 @@ namespace System.Tests
                 {
                     long actual = decimal.ToOACurrency(d1);
                     if (expected != actual)
-                        throw Xunit
-                            .Sdk
+                        throw Xunit.Sdk
                             .EqualException
                             .ForMismatchedValues(expected, actual, d1 + " ToOACurrency");
                 }
@@ -2994,8 +2978,7 @@ namespace System.Tests
                             expected.Scale != (byte)(*(uint*)&actual >> BigDecimal.ScaleShift)
                             || expected.CompareTo(new BigDecimal(actual)) != 0
                         )
-                            throw Xunit
-                                .Sdk
+                            throw Xunit.Sdk
                                 .EqualException
                                 .ForMismatchedValues(expected, actual, d1 + " Round(" + j + ")");
                     }
@@ -3021,8 +3004,7 @@ namespace System.Tests
                             expected.Scale != (byte)(*(uint*)&actual >> BigDecimal.ScaleShift)
                             || expected.CompareTo(new BigDecimal(actual)) != 0
                         )
-                            throw Xunit
-                                .Sdk
+                            throw Xunit.Sdk
                                 .EqualException
                                 .ForMismatchedValues(
                                     expected,

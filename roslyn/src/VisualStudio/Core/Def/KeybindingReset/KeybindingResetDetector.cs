@@ -364,8 +364,7 @@ namespace Microsoft.VisualStudio.LanguageServices.KeybindingReset
                 cmds[0].cmdID = cmdId;
                 cmds[0].cmdf = 0;
 
-                await ThreadingContext
-                    .JoinableTaskFactory
+                await ThreadingContext.JoinableTaskFactory
                     .SwitchToMainThreadAsync(cancellationToken);
 
                 var hr = _oleCommandTarget.QueryStatus(
@@ -392,8 +391,7 @@ namespace Microsoft.VisualStudio.LanguageServices.KeybindingReset
                     return;
                 }
 
-                await ThreadingContext
-                    .JoinableTaskFactory
+                await ThreadingContext.JoinableTaskFactory
                     .SwitchToMainThreadAsync(cancellationToken);
 
                 _oleCommandTarget = _serviceProvider.GetServiceOnMainThread<

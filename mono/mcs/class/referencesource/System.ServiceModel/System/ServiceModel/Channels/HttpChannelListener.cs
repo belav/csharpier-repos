@@ -75,8 +75,7 @@ namespace System.ServiceModel.Channels
             {
                 if (bindingElement.MaxReceivedMessageSize > int.MaxValue)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             new ArgumentOutOfRangeException(
                                 "bindingElement.MaxReceivedMessageSize",
@@ -87,8 +86,7 @@ namespace System.ServiceModel.Channels
 
                 if (bindingElement.MaxBufferSize != bindingElement.MaxReceivedMessageSize)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgument(
                             "bindingElement",
                             SR.GetString(SR.MaxBufferSizeMustMatchMaxReceivedMessageSize)
@@ -99,8 +97,7 @@ namespace System.ServiceModel.Channels
             {
                 if (bindingElement.MaxBufferSize > bindingElement.MaxReceivedMessageSize)
                 {
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperArgument(
                             "bindingElement",
                             SR.GetString(SR.MaxBufferSizeMustNotExceedMaxReceivedMessageSize)
@@ -110,8 +107,7 @@ namespace System.ServiceModel.Channels
 
             if (
                 bindingElement.AuthenticationScheme.IsSet(AuthenticationSchemes.Basic)
-                && bindingElement
-                    .AuthenticationScheme
+                && bindingElement.AuthenticationScheme
                     .IsNotSet(
                         AuthenticationSchemes.Digest
                             | AuthenticationSchemes.Ntlm
@@ -122,8 +118,7 @@ namespace System.ServiceModel.Channels
             )
             {
                 //Basic auth + PolicyEnforcement.Always doesn't make sense because basic auth can't support CBT.
-                throw DiagnosticUtility
-                    .ExceptionUtility
+                throw DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new NotSupportedException(
                             SR.GetString(SR.ExtendedProtectionPolicyBasicAuthNotSupported)
@@ -173,8 +168,7 @@ namespace System.ServiceModel.Channels
                 && this.MessageVersion != MessageVersion.None
             )
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new NotSupportedException(
                             SR.GetString(
@@ -232,8 +226,7 @@ namespace System.ServiceModel.Channels
         internal override void ApplyHostedContext(string virtualPath, bool isMetadataListener)
         {
             base.ApplyHostedContext(virtualPath, isMetadataListener);
-            AspNetEnvironment
-                .Current
+            AspNetEnvironment.Current
                 .ValidateHttpSettings(
                     virtualPath,
                     isMetadataListener,
@@ -455,8 +448,7 @@ namespace System.ServiceModel.Channels
                 if (this.AuthenticationScheme == AuthenticationSchemes.Basic)
                 {
                     // when Basic authentiction is enabled - but Digest and Windows are disabled use the UsernameAuthenticationSetting
-                    this.extractGroupsForWindowsAccounts = serviceCredentials
-                        .UserNameAuthentication
+                    this.extractGroupsForWindowsAccounts = serviceCredentials.UserNameAuthentication
                         .IncludeWindowsGroups;
                 }
                 else
@@ -468,27 +460,23 @@ namespace System.ServiceModel.Channels
                     )
                     {
                         // Ensure there are no inconsistencies when Basic and (Digest and/or Ntlm and/or Negotiate) are both enabled
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 new NotSupportedException(
                                     SR.GetString(
                                         SR.SecurityTokenProviderIncludeWindowsGroupsInconsistent,
                                         (AuthenticationSchemes)authenticationScheme
                                             - AuthenticationSchemes.Basic,
-                                        serviceCredentials
-                                            .UserNameAuthentication
+                                        serviceCredentials.UserNameAuthentication
                                             .IncludeWindowsGroups,
-                                        serviceCredentials
-                                            .WindowsAuthentication
+                                        serviceCredentials.WindowsAuthentication
                                             .IncludeWindowsGroups
                                     )
                                 )
                             );
                     }
 
-                    this.extractGroupsForWindowsAccounts = serviceCredentials
-                        .WindowsAuthentication
+                    this.extractGroupsForWindowsAccounts = serviceCredentials.WindowsAuthentication
                         .IncludeWindowsGroups;
                 }
 
@@ -740,11 +728,8 @@ namespace System.ServiceModel.Channels
         )
         {
             if (
-                this.TransportManagerTable.TryLookupUri(
-                    this.Uri,
-                    hostNameComparisonMode,
-                    out registration
-                )
+                this.TransportManagerTable
+                    .TryLookupUri(this.Uri, hostNameComparisonMode, out registration)
             )
             {
                 HttpTransportManager httpTransportManager = registration as HttpTransportManager;
@@ -859,8 +844,7 @@ namespace System.ServiceModel.Channels
                         this.AuthenticationScheme,
                         HttpStatusCode.Unauthorized
                     );
-                    Exception exception = DiagnosticUtility
-                        .ExceptionUtility
+                    Exception exception = DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(new MessageSecurityException(message));
                     WriteAuditEvent(AuditLevel.Failure, String.Empty, exception);
                 }
@@ -889,8 +873,7 @@ namespace System.ServiceModel.Channels
                 && !authenticationContext.IISSupportsExtendedProtection
             )
             {
-                Exception exception = DiagnosticUtility
-                    .ExceptionUtility
+                Exception exception = DiagnosticUtility.ExceptionUtility
                     .ThrowHelperError(
                         new PlatformNotSupportedException(
                             SR.GetString(SR.ExtendedProtectionNotSupported)
@@ -1133,8 +1116,7 @@ namespace System.ServiceModel.Channels
                     // When IIS hosted, WebSockets can be used if the pipeline mode is integrated
                     if (!env.UsingIntegratedPipeline)
                     {
-                        throw FxTrace
-                            .Exception
+                        throw FxTrace.Exception
                             .AsError(
                                 new NotSupportedException(
                                     SR.GetString(SR.WebSocketsNotSupportedInClassicPipeline)
@@ -1144,8 +1126,7 @@ namespace System.ServiceModel.Channels
                 }
                 else if (!WebSocketHelper.OSSupportsWebSockets())
                 {
-                    throw FxTrace
-                        .Exception
+                    throw FxTrace.Exception
                         .AsError(
                             new PlatformNotSupportedException(
                                 SR.GetString(SR.WebSocketsServerSideNotSupported)
@@ -1522,8 +1503,7 @@ namespace System.ServiceModel.Channels
 
             if (innerPipeline == null)
             {
-                throw FxTrace
-                    .Exception
+                throw FxTrace.Exception
                     .AsError(
                         new InvalidOperationException(
                             SR.GetString(
@@ -1559,8 +1539,7 @@ namespace System.ServiceModel.Channels
                     protocolException.Data.Remove(HttpChannelUtilities.HttpStatusCodeExceptionKey);
                 }
                 if (
-                    protocolException
-                        .Data
+                    protocolException.Data
                         .Contains(HttpChannelUtilities.HttpStatusDescriptionExceptionKey)
                 )
                 {
@@ -1568,8 +1547,7 @@ namespace System.ServiceModel.Channels
                         protocolException.Data[
                             HttpChannelUtilities.HttpStatusDescriptionExceptionKey
                         ];
-                    protocolException
-                        .Data
+                    protocolException.Data
                         .Remove(HttpChannelUtilities.HttpStatusDescriptionExceptionKey);
                 }
                 context.SendResponseAndClose(statusCode, statusDescription);
@@ -1709,19 +1687,21 @@ namespace System.ServiceModel.Channels
 
                     if (listener.UseWebSocketTransport && !context.IsWebSocketRequest)
                     {
-                        this.context.SendResponseAndClose(
-                            HttpStatusCode.BadRequest,
-                            SR.GetString(SR.WebSocketEndpointOnlySupportWebSocketError)
-                        );
+                        this.context
+                            .SendResponseAndClose(
+                                HttpStatusCode.BadRequest,
+                                SR.GetString(SR.WebSocketEndpointOnlySupportWebSocketError)
+                            );
                         return AsyncCompletionResult.Completed;
                     }
 
                     if (!listener.UseWebSocketTransport && context.IsWebSocketRequest)
                     {
-                        this.context.SendResponseAndClose(
-                            HttpStatusCode.BadRequest,
-                            SR.GetString(SR.WebSocketEndpointDoesNotSupportWebSocketError)
-                        );
+                        this.context
+                            .SendResponseAndClose(
+                                HttpStatusCode.BadRequest,
+                                SR.GetString(SR.WebSocketEndpointDoesNotSupportWebSocketError)
+                            );
                         return AsyncCompletionResult.Completed;
                     }
 
@@ -1964,8 +1944,7 @@ namespace System.ServiceModel.Channels
                                 );
                             }
 
-                            FxTrace
-                                .Exception
+                            FxTrace.Exception
                                 .AsError(
                                     new TimeoutException(
                                         SR.GetString(SR.HttpPipelineOperationCanceledError)
@@ -1979,8 +1958,7 @@ namespace System.ServiceModel.Channels
                             httpResponse = task.Result;
                             if (httpResponse == null)
                             {
-                                FxTrace
-                                    .Exception
+                                FxTrace.Exception
                                     .AsError(
                                         new NotSupportedException(
                                             SR.GetString(

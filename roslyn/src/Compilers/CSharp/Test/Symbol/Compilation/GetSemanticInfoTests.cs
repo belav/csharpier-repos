@@ -1040,8 +1040,7 @@ class C {
             else
             {
                 Assert.NotNull(info.Type);
-                var act2 = semanticModel
-                    .Compilation
+                var act2 = semanticModel.Compilation
                     .ClassifyConversion(info.Type, info.ConvertedType);
                 Assert.Equal(ept2, act2.Kind);
                 ValidateConversion(act2, ept2);
@@ -1957,8 +1956,7 @@ class C
 
             Assert.Null(bindInfo.Symbol);
             Assert.True(
-                bindInfo
-                    .CandidateSymbols
+                bindInfo.CandidateSymbols
                     .SetEquals(candidateIndexers, EqualityComparer<ISymbol>.Default)
             );
             Assert.Equal(CandidateReason.OverloadResolutionFailure, bindInfo.CandidateReason);
@@ -4541,8 +4539,7 @@ class C
                 SpeculativeBindingOption.BindAsExpression
             );
             Assert.Equal(
-                compilation
-                    .GlobalNamespace
+                compilation.GlobalNamespace
                     .GetMember<INamedTypeSymbol>("C")
                     .GetMember<IMethodSymbol>("M"),
                 info.CandidateSymbols.Single()
@@ -4613,8 +4610,7 @@ class C
 
             var info = model.GetSymbolInfo(syntax);
             Assert.Equal(
-                compilation
-                    .GlobalNamespace
+                compilation.GlobalNamespace
                     .GetMember<INamedTypeSymbol>("C")
                     .GetMember<IMethodSymbol>("M"),
                 info.CandidateSymbols.Single()
@@ -4696,8 +4692,7 @@ class C
                 SpeculativeBindingOption.BindAsExpression
             );
             Assert.Equal(
-                compilation
-                    .GlobalNamespace
+                compilation.GlobalNamespace
                     .GetMember<INamedTypeSymbol>("IA")
                     .GetMember<IPropertySymbol>("P"),
                 info.Symbol

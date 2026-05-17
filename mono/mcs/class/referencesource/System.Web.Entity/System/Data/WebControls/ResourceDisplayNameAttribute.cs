@@ -30,8 +30,7 @@ namespace System.Web.UI.WebControls
                 if (!_resourceLoaded)
                 {
                     _resourceLoaded = true;
-                    DisplayNameValue = System
-                        .Web
+                    DisplayNameValue = System.Web
                         .UI
                         .WebControlsRes
                         .GetString(_displayNameResourceName);

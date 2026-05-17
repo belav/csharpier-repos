@@ -94,8 +94,7 @@ namespace System.Runtime.Serialization
             {
                 if (this.IsGetOnlyCollection && dataContract is SurrogateDataContract)
                 {
-                    throw System
-                        .Runtime
+                    throw System.Runtime
                         .Serialization
                         .DiagnosticUtility
                         .ExceptionUtility
@@ -132,8 +131,7 @@ namespace System.Runtime.Serialization
             {
                 if (this.IsGetOnlyCollection && dataContract is SurrogateDataContract)
                 {
-                    throw System
-                        .Runtime
+                    throw System.Runtime
                         .Serialization
                         .DiagnosticUtility
                         .ExceptionUtility
@@ -280,16 +278,14 @@ namespace System.Runtime.Serialization
                 if (dataContract == null)
                 {
                     if (assembly == null)
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 XmlObjectSerializer.CreateSerializationException(
                                     SR.GetString(SR.AssemblyNotFound, assemblyName)
                                 )
                             );
                     if (type == null)
-                        throw DiagnosticUtility
-                            .ExceptionUtility
+                        throw DiagnosticUtility.ExceptionUtility
                             .ThrowHelperError(
                                 XmlObjectSerializer.CreateSerializationException(
                                     SR.GetString(SR.ClrTypeNotFound, assembly.FullName, typeName)
@@ -306,8 +302,7 @@ namespace System.Runtime.Serialization
             else
             {
                 if (assemblyName != null)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             XmlObjectSerializer.CreateSerializationException(
                                 XmlObjectSerializer.TryAddLineInfo(
@@ -324,8 +319,7 @@ namespace System.Runtime.Serialization
                             )
                         );
                 else if (typeName != null)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             XmlObjectSerializer.CreateSerializationException(
                                 XmlObjectSerializer.TryAddLineInfo(
@@ -342,8 +336,7 @@ namespace System.Runtime.Serialization
                             )
                         );
                 else if (declaredType == null)
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             XmlObjectSerializer.CreateSerializationException(
                                 XmlObjectSerializer.TryAddLineInfo(
@@ -390,8 +383,7 @@ namespace System.Runtime.Serialization
                 );
             if (this.IsGetOnlyCollection && dataContract.UnderlyingType != declaredType)
             {
-                throw System
-                    .Runtime
+                throw System.Runtime
                     .Serialization
                     .DiagnosticUtility
                     .ExceptionUtility
@@ -603,8 +595,7 @@ namespace System.Runtime.Serialization
                         memberType
                     );
                     if (!DataContract.IsTypeSerializable(memberType))
-                        throw System
-                            .Runtime
+                        throw System.Runtime
                             .Serialization
                             .DiagnosticUtility
                             .ExceptionUtility
@@ -635,8 +626,7 @@ namespace System.Runtime.Serialization
                 );
                 if (this.IsGetOnlyCollection && surrogateType != type)
                 {
-                    throw System
-                        .Runtime
+                    throw System.Runtime
                         .Serialization
                         .DiagnosticUtility
                         .ExceptionUtility
@@ -730,8 +720,7 @@ namespace System.Runtime.Serialization
                             return;
                         }
                     }
-                    throw DiagnosticUtility
-                        .ExceptionUtility
+                    throw DiagnosticUtility.ExceptionUtility
                         .ThrowHelperError(
                             XmlObjectSerializer.CreateSerializationException(
                                 SR.GetString(

@@ -248,8 +248,7 @@ namespace Novell.Directory.Ldap.Utilclass
                                             if (nameList.Count > 0)
                                             {
                                                 names = new System.String[nameList.Count];
-                                                SupportClass
-                                                    .ArrayListSupport
+                                                SupportClass.ArrayListSupport
                                                     .ToArray(nameList, names);
                                             }
                                         }
